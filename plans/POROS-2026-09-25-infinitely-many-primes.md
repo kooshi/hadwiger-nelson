@@ -273,3 +273,172 @@ a field where `ι(F²) > max_v r_v` is proved, i.e. the fractional chromatic num
 3. **The "11 or 31" GAP (S1V)** does not touch T-C(A): its count needs only that every factor is below 1/4.
 4. **A stale price nearby** (S1 §2.3 item 3; the DuczVarga point, Stage 2). It does not weaken T-C(A). It does change what the
    single-class route costs (Stage 4, R4).
+
+## Stage 4 — SAVED: Kooshi's example invariant, the card, the recommendation, the ledgers
+
+### 4.1 Kooshi's question: the example invariant this finding is the shadow of
+
+**(a) The example invariant.** Call it **EI-2: every translation-invariant four-colouring has a factor that is itself a proper
+four-colouring and is continuous in probability at finitely many places.**
+- **Every four-colouring we can prove exists carries it, trivially:**
+  - residue pullbacks and `[Fischer1994]`'s ℤ/4 colouring (spectrum in `T`);
+  - ℚ(√11)'s character colouring C9 (spectrum in `T + A`);
+  - row 92's windows (spectrum in `E_S`);
+  - F2's noisy colourings, whose finite-place colouring survives as a factor.
+- **The shadow relation is exact.** By Lemma SI (F3), EI-2 holds for a colouring iff the part of its spectrum that no finite set of places
+  reads is not anticorrelated at unit distance. So T-C(A)⁺'s counterexample invariant is precisely EI-2's failure.
+- **What it would give.** EI-2 plus T-C(A) gives `χ(ℚ(√47)²) = 5`. EI-2 plus T-C⁺ gives Q-μ over the type-(B) fields.
+- **A caution that applies to every example invariant.** Restricted to ℚ(√47), where no example exists, EI-2 is equivalent to the goal
+  itself. Its value, like the three-colour slope's, lies in proving it **as a general statement where four-colourings exist**: ℚ(√11),
+  `K`, the type-(B) fields, ℚ(√23). Only then is it applied at ℚ(√47).
+
+**The other candidate, EI-1 — the four-colour slope.** *Every four-colourable finitely generated unit-distance lattice has `Θ₄ ≠ ∅`.* This
+is S1V's GAP. With row 96 (`Θ₄(R) = ∅`) and S1V-6's compactness, it too gives five at ℚ(√47). Restricted to ℚ(√47)'s chain it is again
+equivalent to the goal, so it is useful only as a general theorem, the four-colour analogue of G71.
+- It is false in the abstract class: `Cay(ℤ, ±{1,3,4,5})` (S1V-7).
+- It is untested on unit-distance lattices.
+- My exact check rules out the cheapest falsifier: `Γ₇`, the only four-colourable target of ℚ(√23), has 8 band-4 characters (Stage 2).
+- The live falsifier sites are the inert dyadic towers `U_Q`, `Q ∈ {4, 8, 16, 32}`. They are four-colourable, and `U₄` has no band-4
+  character at level one: the five units sum to 0, but five 1's do not sum to 0 mod 2. The other site is the loose lattices over ℚ(√3,√5).
+
+**(b) Does T-A's or T-C's structural form already name it?** Half.
+- §IQ item 3 names the **carrier**, the spectral type, but not the **property**: the sign of the infinite-type part at unit distance,
+  equivalently a finite-place proper factor.
+- F5 shows the carrier is one order too low. At the level of spectral measures, the property is exactly as hard as Furstenberg-type
+  zero-entropy rigidity.
+- So the structural form names an invariant that cannot finish the job alone.
+
+**(c) Is looking for it a better next question than T-C′?** **Yes.**
+- T-C′ as posed asks to classify the infinite-type spectral measures and to decide entropy. By F5, at type (A) that is the zero-entropy
+  Furstenberg problem: a wall, not a week.
+- EI-2 is a colouring statement. It can use more than pair correlations, as T-C already does through `m₁ < 1/4`. Its falsifier lives in
+  fields where colourings are plentiful, so it can be tested.
+- Confidence **high** that it is the better target. Confidence **medium-low** (about 0.4) that EI-2 is true over slack fields.
+- One fact would change the ranking: a proof that the colouring constraint forces positive entropy on the infinite-type part. That would
+  hand T-C′ to Einsiedler–Lindenstrauss-type theorems and make it the cheaper route.
+
+### 4.2 The card
+
+```markdown
+question: which-remainder-next
+  evidence: this record F5 (SP holds iff every U-invariant measure off E is Haar); F2 (noise on γ∘ρ₇ over ℚ(√11) puts spectrum off every E_S); F3 (T-C(A)⁺); `plans/FS86-R88-V-verification.md` §2.1 C0
+  expected: T-C′ is a classification with a tractable positive-entropy half and a small zero-entropy residue
+  ask: does every translation-invariant four-colouring, over every real field where one exists, have a proper factor colouring continuous at finitely many places?
+  if yes: with T-C(A) it gives χ(ℚ(√47)²) = 5, and with T-C⁺ it gives Q-μ over the type-(B) fields; the proof must use more than the spectral measure
+  if no: the witness over ℚ(√11) or another slack field is the counterexample template; the ℚ(√47) wanted poster's first exhibit
+  answered by: derivation
+  cost: one derivation milestone, solver-free; its falsifier search waits for 2026-10-01
+  hunch: true over fields with one tight place, open over slack ones
+  falsifier: a translation-invariant four-colouring over ℚ(√11) whose part off every T + A + Fin_S is negatively correlated at some unit vector
+  rank: 1
+```
+
+### 4.3 Recommendations (ranked, with the default)
+
+| rank | recommendation | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| R1 | Carry the finding into row 88's close **at its sharpened scope**. **(i)** The counterexample invariant is "the infinite-type part is anticorrelated at unit distance" (T-C(A)⁺), never "mass off every `T + A + Fin_S`" (F2: noise does that). **(ii)** J28D §5.1's rotation-averaging objection is type-(B)-only; at type (A) the headline is literal and uses T-C(A) only at `S = ∅` (F4). **(iii)** T-C′ at type (A), colouring-free, is exactly zero-entropy Furstenberg-type rigidity (F5); aim no week at it | record T-C(A) as J28D wrote it | the literal form reads deeper than it is (F2); the sharpened form is the content | medium: sketches, one mind |
+| R2 | A small derivation job, **J36-D**, with a blind check, for SI, A⁺, B⁺, R-U and the SP equivalence (statement verbatim in 4.4) | fold it into J41, row 88's close-math | these are new theorems and need a second derivation; a close job is the wrong owner | medium-high that they are true; would change on a defect in SI's factor step |
+| R3 | Re-aim the stub line from T-C′ to **EI-2** as a structural question over fields where four-colourings exist, falsifier named (card) | keep T-C′ as the named remainder | F5 makes T-C′ a Furstenberg wall; EI-2 is testable | high on the ranking; about 0.4 on EI-2's truth |
+| R4 | Correction owed to `plans/FS84-S1-derivation.md` §2.3 item 3 and FS-84's P-int: `[DuczVarga2026]` already refuted `α₁(ℝ²) = 1/4`. So the single-class route at ℚ(√47) is "a Dúcz–Varga-type finite `H` inside ℚ(√47)²", a post-ban target of unknown cost, not "as hard as a published open conjecture". G60's cap there is `min(4.36, 121/28 ≈ 4.32, …) > 4`, so nothing caps it | leave S1's price | the price rests on a conjecture that is already dead | high on the fact (`BIBLIOGRAPHY.md` l.182); medium on the consequence |
+| R5 | EI-1 (the four-colour slope): keep it as a general question on FS-76's line, not as a ℚ(√47) target; its falsifier (the dyadic `U_Q` towers, `Q = 4…32`) is an exact check | aim it at ℚ(√47) | there it is the goal restated | medium |
+
+**If Kooshi does nothing:**
+- the close records T-C and T-C(A) at J28D's scope, and T-C′ stays the named remainder;
+- this record's sharpenings stay here, uncited;
+- S1's price stays stale;
+- the three wanted-poster sessions (J37–J39) read F2–F5 here.
+
+### 4.4 J36-D, verbatim, ready for a brief
+
+"Let `F` be a real number field, `R = ℤ[U_F]`, and let `σ_μ` be the trace spectral measure of the tetrahedral embedding of a
+translation-invariant random proper four-colouring `μ` of `Cay(R, U_F)`. For a finite set `S` of split places let `E_S = T + A + Fin_S`,
+and let `E = ⋃_S E_S`. Prove or refute:
+**(SI)** `∫_{R̂∖E_S} Re χ(u) dσ_μ(χ) ≤ 0` for every `u ∈ U_F`, with equality for every `u` if and only if the `E_S`-factor of `μ` carries
+a translation-equivariant proper four-colouring `c′` with `c(x) ∈ supp P(c(x) = · | E_S-factor)` almost surely;
+**(A⁺)** over ℚ(√47), given T-C(A): for every `μ` and every finite `S`, some `u` gives strict inequality;
+**(B⁺)** over a type-(B) field, given T-C: if equality holds for every `u`, then `μ` is carried by Pull;
+**(R-U)** every `U_F`-invariant finite measure on `R̂` gives `E_S ∖ (T + A)` measure 0;
+**(SP)** a `U_F`-invariant finite positive measure `τ` on `R̂` with `τ(E) = 0` and `∫ Re χ(1) dτ < 0` exists if and only if some
+`U_F`-invariant finite measure on `R̂` with `τ(E) = 0` is not a multiple of Haar measure.
+Control: F2's noisy colourings over ℚ(√11) must satisfy (SI) with equality."
+
+### 4.5 Evidence inventory, re-read; the hunch ledger (Stage 1 scored)
+
+- Stage 1's E1–E5, my own expectation — read against: Stages 2–3 — surprised: yes, on E4 (iv) and E5 (below)
+
+hunch: the-product-rule-is-the-mechanism (E2)
+  claim: T-C(A) is a finite product of local ratio bounds, joined by weak approximation and a Zhang-type count
+  basis: prior
+  falsifier: a proof of T-C(A) that uses no product count
+  registered: 2026-09-25
+  status: confirmed (by: `plans/FS86-R88-D-derivation.md` §3.2 C4–C5 and `plans/FS86-R88-V-verification.md` §2.1 C4–C5)
+
+hunch: the-headline-overstates-the-scope (E1)
+  claim: "must read infinitely many primes at once" is stronger than "carried by no single T + A + Fin_S"
+  basis: read
+  falsifier: T-C(A) proved for measures carried by the union over all finite S
+  registered: 2026-09-25
+  status: confirmed (by: `plans/FS86-rigidity` §M.1 item 5 and J28D §5.1 R1), at translation-invariant scope; at type (A) after rotation-averaging the headline becomes literal (F4)
+
+hunch: the-phenomenon-is-four-colour-specific (E3a)
+  claim: no ratio count can refuse k ≥ 5 colours whose statistics are archimedean
+  basis: prior
+  falsifier: a real place with measurable independence ratio below 1/5
+  registered: 2026-09-25
+  status: confirmed (by: derivation F7, Croft's m₁ ≥ 0.2293)
+
+hunch: dead-weight
+  claim: characters reading infinitely many split places carry no unit-distance correlation in any U-invariant spectral measure
+  basis: analogy
+  falsifier: a U-invariant measure off E with non-zero mean at 1
+  registered: 2026-09-25
+  status: killed (by: derivation F5 — any non-Haar invariant measure off E yields one, by a push-forward by an element of R and a convolution with an archimedean circle)
+
+hunch: the-remainder-is-furstenberg (E3b)
+  claim: at type (A), T-C′'s colouring-free form is zero-entropy measure rigidity for U acting on R̂ modulo E
+  basis: derived
+  falsifier: a defect in F5's push-forward or convolution step
+  registered: 2026-09-25
+  status: confirmed (by: derivation sketch F5, one mind; J36-D would make it two)
+
+hunch: the-two-point-hypothesis-blocks-higher-order-inputs (E4 iv)
+  claim: a spectral-measure hypothesis cannot license Ambrus et al.'s certificate
+  basis: prior
+  falsifier: an extension of the process from the spectral hypothesis
+  registered: 2026-09-25
+  status: killed (by: J28D C1–C2 and J28V C2 — continuity in probability extends the whole process)
+
+hunch: the-example-invariant-is-tight-locality (E5)
+  claim: the example invariant is G76's locality at a tight place
+  basis: prior
+  falsifier: four-colourings not local at one place, over a field where colourings exist
+  registered: 2026-09-25
+  status: killed (by: F2 and C9 over ℚ(√11), which has no tight place; the general form is EI-2, a finite-place factor)
+
+hunch: EI-2
+  claim: every translation-invariant four-colouring, over every real field, has a proper factor colouring continuous at finitely many places
+  basis: prior
+  falsifier: a translation-invariant four-colouring over ℚ(√11) whose part off every T + A + Fin_S is anticorrelated at some unit vector
+  registered: 2026-09-25
+  status: open
+
+hunch: EI-1
+  claim: every four-colourable finitely generated unit-distance lattice has a band-4 character
+  basis: analogy
+  falsifier: an inert dyadic tower U_Q (Q = 4 … 32) with no band-4 character at any level, or a four-colourable lattice with Θ₄ = ∅
+  registered: 2026-09-25
+  status: open (Γ₇ has 8 band-4 characters: `data/crunch-2026-09-25/j36/band7.out`)
+
+## Theorems this phase proved
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J36-SI | for a stationary proper four-colouring, the part of `σ` off `E_S` has `∫ Re χ(u) ≤ 0` on `U`; equality everywhere iff the `E_S`-factor carries a proper colouring | [hand, one mind, sketch] | §F3 |
+| J36-A⁺ | over ℚ(√47), given T-C(A), that part is strictly anticorrelated at some unit vector | [hand, one mind, sketch] | §F3 |
+| J36-B⁺ | over type (B), given T-C, equality everywhere forces Pull (gap-freeness of `P₄`) | [hand, one mind, sketch] | §F3 |
+| J36-RU | every `U`-invariant finite measure on `R̂` gives `E_S ∖ (T + A)` measure 0 | [hand, one mind, sketch] | §F4 |
+| J36-SP | SP has a negative mean off `E` iff a non-Haar `U`-invariant measure off `E` exists | [hand, one mind, sketch] | §F5 |
+| J36-noise | ℚ(√11)'s plane has translation-invariant four-colourings whose spectrum is carried by no `T + A + Fin_S` | [hand, one mind] | §F2 |
+| J36-count | a ratio count cannot refuse `k ≥ 5` for finite-place colourings (`m₁(ℝ²) ≥ 0.2293 > 1/5`); at seven the class is non-empty for every field | [derived] | §F7 |
+| J36-Γ₇ | `Γ₇` has 0 band-3, 8 band-4 and 8 band-5 characters at level one | [tools exact; plant fires] | Stage 2 |
