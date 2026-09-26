@@ -52,7 +52,7 @@ hunch: fs98-not-four-hours
   status: open
 ```
 
-## Stage 1 — the quotation check and the evidence inventory — SAVED
+## Stage 1 — the quotation check and the reading — SAVED
 
 ### 1.1 The brief's statements against their sources (standing rule 5)
 
@@ -74,15 +74,15 @@ Owner slips to log (two, both from the brief's age, neither the owner's error at
 
 - `plans/STUB-measure-rigidity-three-fields.md` §3, the gap — read against: MR is a ×p×q measure-rigidity statement, zero-entropy half open — surprised: no. The stub carries J36 F5's reading verbatim: "The zero-entropy half is open, as for ×2×3", and the positive-entropy half "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)". One mind, and the EL half never read.
 - FS-100 §4, X-KS — read against: Kronecker selection priced near even — surprised: no; "medium-low (0.4) that it is true as stated", with a named control over ℚ(√11).
-- FS-100 §6.3 stage 3 — read against: the four MR papers held — surprised: yes, mildly. "Rudolph 1990, A. Johnson 1992, Host 1995, Einsiedler–Lindenstrauss; none held". The one lemma three fields wait on has never had its nearest literature opened (G50's shape).
+- FS-100 §6.3 stage 3 — read against: the four MR papers held — surprised: yes (mildly). "Rudolph 1990, A. Johnson 1992, Host 1995, Einsiedler–Lindenstrauss; none held". The one lemma three fields wait on has never had its nearest literature opened (G50's shape).
 - `plans/CRUNCH-2026-09-25-queue.md` §8.2 — read against: blind-verified derivations under-priced — surprised: no; "21 met, 7 missed … Every miss is in one direction … The planner under-priced derivation work that had a blind verifier behind it."
 - queue §8.4 — read against: FS-100 is the only in-ban work handed on — surprised: no; "In-ban work left … FS-100 stages 0, 3, 4, 5 and 6; J43".
-- handoff §7 update ~03:30 — read against: cap two binding — surprised: **yes** (1.1). Also "The planners J51/J52 should launch after J05 lands (they read `CLAUDE.md`)" — J05 is compressing `CLAUDE.md` now.
-- J43's facts (`data/viz/local-global-map/facts.json`, 829 theorems; counted by tag and grade, seconds) — read against: the exposed fields thin in the kernel — surprised: **yes, twice.** (a) Kernel-grade theorems tagged with the field: ℚ(√47) 2 of 18, ℚ(√167) 2 of 29, ℚ(√59) 0 of 24, ℚ(√83) 0 of 18, ℚ(√131) 0 of 17 — and of the two at ℚ(√47) and ℚ(√167), one is row 73, whose kernel theorem is `four_le_chromaticNumber_planeOver_eleven` (ℚ(√11)), the other row 75 (a tower fact). **No field-level lower bound at either exposed field is in the kernel.** (b) ℚ(√143), ℚ(√311), ℚ(√335), which `CLAUDE.md` § The mission names as exposed predictions of "exactly five", are tagged by **zero** theorems; FS-100 §5 item 5 says whether they sit in T-C(A)'s class is "not checked here". Also thin: `k = 6` 20 theorems, `k = 7` 13; places 47 (2), 31 (3), 27 (9), 43 (9).
-- FS-75 stub, shape — read against: the three-colour criterion's ⟹ direction needs heavy analysis — surprised: **yes.** Only the relation form is used downstream ("if θ ∈ Θ₃ then x_j ∈ [1/3, 2/3] and r·x ∈ ℤ for every relation r … the certificate uses that direction alone"), and T41's 36 vectors refuse by "a 1,050-leaf certificate (5.7 KB …) and a half-page hand proof (four inequality cases)". My own sketch of the ⟹ direction in relation form (hypothetical, to be priced by the planner): the height lift has steps in `{1, 2}`; a step depends only on the image in `Λ`, so the winding `w(r) = H(x + r) − H(x)` is independent of `x`; box averages of the steps lie in `[1, 2]^m`, satisfy `Σ r_j L_N(e_j) = w(r) + O(|r|²/N)`, and Bolzano–Weierstrass in `[1, 2]^m` gives `x = L/3` exactly. No descent to `Λ`, no function-space compactness.
+- handoff §7 update ~03:30 — read against: cap two binding — surprised: yes (1.1). Also "The planners J51/J52 should launch after J05 lands (they read `CLAUDE.md`)" — J05 is compressing `CLAUDE.md` now.
+- J43's facts (`data/viz/local-global-map/facts.json`, 829 theorems; counted by tag and grade, seconds) — read against: the exposed fields thin in the kernel — surprised: yes (twice). (a) Kernel-grade theorems tagged with the field: ℚ(√47) 2 of 18, ℚ(√167) 2 of 29, ℚ(√59) 0 of 24, ℚ(√83) 0 of 18, ℚ(√131) 0 of 17 — and of the two at ℚ(√47) and ℚ(√167), one is row 73, whose kernel theorem is `four_le_chromaticNumber_planeOver_eleven` (ℚ(√11)), the other row 75 (a tower fact). **No field-level lower bound at either exposed field is in the kernel.** (b) ℚ(√143), ℚ(√311), ℚ(√335), which `CLAUDE.md` § The mission names as exposed predictions of "exactly five", are tagged by **zero** theorems; FS-100 §5 item 5 says whether they sit in T-C(A)'s class is "not checked here". Also thin: `k = 6` 20 theorems, `k = 7` 13; places 47 (2), 31 (3), 27 (9), 43 (9).
+- FS-75 stub, shape — read against: the three-colour criterion's ⟹ direction needs heavy analysis — surprised: yes. Only the relation form is used downstream ("if θ ∈ Θ₃ then x_j ∈ [1/3, 2/3] and r·x ∈ ℤ for every relation r … the certificate uses that direction alone"), and T41's 36 vectors refuse by "a 1,050-leaf certificate (5.7 KB …) and a half-page hand proof (four inequality cases)". My own sketch of the ⟹ direction in relation form (hypothetical, to be priced by the planner): the height lift has steps in `{1, 2}`; a step depends only on the image in `Λ`, so the winding `w(r) = H(x + r) − H(x)` is independent of `x`; box averages of the steps lie in `[1, 2]^m`, satisfy `Σ r_j L_N(e_j) = w(r) + O(|r|²/N)`, and Bolzano–Weierstrass in `[1, 2]^m` gives `x = L/3` exactly. No descent to `Λ`, no function-space compactness.
 - FS-87 stub line 3 — read against: kernel price unknown — surprised: no; "447 lines with its controls, in 17 minutes against a 4–6 hour price".
-- The two earlier advisor records (`plans/POROS-2026-09-25-fs86-next.md`, `plans/POROS-2026-09-24-next-direction.md`) — read against: their shape — **unread beyond their size** (budget; this record's shape follows the brief's items 1–4 instead). Standing finding, not a claim.
-- The J43 page itself — **unread** (no browser; its facts file was read instead).
+- The two earlier advisor records (`plans/POROS-2026-09-25-fs86-next.md`, `plans/POROS-2026-09-24-next-direction.md`) — read against: their shape — surprised: unread (seen only by size) (budget; this record's shape follows the brief's items 1–4 instead). Standing finding, not a claim.
+- The J43 page itself — read against: its three questions — surprised: unread (no browser; its facts file was read instead)
 
 ### 1.3 Would have searched here
 
@@ -160,7 +160,6 @@ the compressed file.
 
 ### 3.2 Two cards, written into the planners' briefs
 
-```markdown
 question: is-mr-attackable
   evidence: `plans/STUB-measure-rigidity-three-fields.md` §3: "The zero-entropy half is open, as for ×2×3"; positive entropy "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)"; §6.3: "Rudolph 1990, A. Johnson 1992, Host 1995, Einsiedler–Lindenstrauss; none held"
   expected: a one-mind reading that has never met its papers is right about the literature about half the time
@@ -168,7 +167,7 @@ question: is-mr-attackable
   if both yes: MR reduces to a published theorem plus one derived lemma; stage 5 becomes the milestone's main derivation, and five at ℚ(√47) is within reach in-ban
   if the first yes, the second no: MR is exactly its zero-entropy half; FS-100's MR route is a reading room while ×2×3 stands, and the post-ban plan leads with P1's finite `H`
   if the first no: the literature does not cover this action (infinite rank, or the solenoid's form); name the hypothesis that fails, which is the next stub
-  answered by: the J51 planner's §PA
+  answered by: record — the literature, read by J51, the FS-100 planner, in its §PA
   cost: about 45 minutes of reading inside the planner's time box
   hunch: first yes, second no
   falsifier: a derivation that the proper-colouring constraint forces positive entropy of the spectral measure's `U`-action off `E`
@@ -180,10 +179,9 @@ question: what-does-leaf-1-cost
   ask: after the obligation pass, what do the relation-form criterion's first two leaves cost in the kernel?
   if under about three hours in total: FS-75's minimal instance runs, with ℚ(√47) next
   if over: FS-87's targets 2–3 run in the kernel slot instead, and leaf 1's price is FS-75's finding
-  answered by: the J52 planner's obligation pass
+  answered by: derivation — the obligation pass of J52, the FS-75 planner
   cost: the pass itself, about 20 minutes
   rank: 2
-```
 
 ### 3.3 The expectation scored, and the hunches
 
@@ -201,7 +199,6 @@ question: what-does-leaf-1-cost
   - FS-100's shape: stage 3 folded into the reframe;
   - the check at ℚ(√143), ℚ(√311), ℚ(√335) added.
 
-```markdown
 hunch: mr-is-open-measure-rigidity
   claim: MR(F) as FS-100 states it is at least as hard as a known open measure-rigidity problem (Furstenberg ×2×3 type), unless the stub's hypotheses supply the entropy or rank that the known theorems need
   basis: prior
@@ -211,19 +208,52 @@ hunch: mr-is-open-measure-rigidity
 
 hunch: fs98-not-four-hours
   claim: FS-98's T-B1 will not land in four hours
-  basis: read (`CLAUDE.md` § Paths forward row 8)
+  basis: read
+    address: `CLAUDE.md` § Paths forward row 8
   falsifier: the stub names a new input since row 111 that closes the step
   registered: 2026-09-26
   status: open (the FS-98 stub was not read; not scored)
 
 hunch: leaf-one-is-elementary
   claim: FS-75's leaf 1 in relation form needs only a height on ℕ^m built along monotone paths, a winding constant in `x`, box averages and Bolzano–Weierstrass in `[1, 2]^m`, with no descent to `Λ` and no function-space compactness
-  basis: derived (my sketch, §1.2; one mind, unchecked)
+  basis: derived
+    address: my sketch, §1.2; one mind, unchecked
   falsifier: the J52 planner's obligation pass finds a step the sketch skips (the square-consistency induction on ℕ^m, or the O(|r|²/N) boundary bound) that costs more than the rest together
   registered: 2026-09-26
   status: open
-```
 
 ### Would have searched here
 
 - None.
+
+## Stage 4 — the two planner briefs — SAVED
+
+- **J51**, FS-100 in-ban: `data/crunch-2026-09-25/briefs/J51-FS100-three-field-lemma-planner.md`. It carries the stub's title, MR and
+  Kronecker selection verbatim, card `is-mr-attackable`, the swap to stage 6, and the ℚ(√143), ℚ(√311), ℚ(√335) class check. It writes J51D
+  (derivation) and J51V (blind verifier, fixed claim list), to run in parallel. Plan `plans/FS100-three-field-lemma.md`.
+- **J52**, FS-75's minimal instance in the kernel: `data/crunch-2026-09-25/briefs/J52-FS75-kernel-167-planner.md`. It carries the stub's line
+  3 and shape item 4 verbatim, the leaf-1 sketch labelled as a one-mind hypothesis, card `what-does-leaf-1-cost`, and the swap to FS-87's
+  targets 2–3 (stub line 3 verbatim). It writes J52K (kernel implementer). Plan `plans/FS75-kernel-167.md`.
+- Both follow J28's pattern: J03 is the template, with overriding blocks. Each has four stages, time-boxed to about 45 minutes; the
+  no-subagents rule with its reason; the ban and the §X log; "every outcome counts" with Kooshi's words; commits by explicit path, push,
+  never force-push; a budget of 250k, hand back by 350k; and the standing-rule-9 report.
+- **Quotation check of the briefs** (done at writing, against the stubs on disk):
+  - MR (stub line 48), Kronecker selection (stub §3), X-KS and X-MR (stub §4), the stage-5 question (stub §6.3), the equidistribution
+    sentence (stub §3), T-C(A) (stub §2.1 row P7), FS-75 line 3 and shape items 1, 2 and 4, FS-87 line 3 — all match. Where a quotation is
+    truncated, it is truncated at a clause boundary.
+  - Every path the J52 brief cites exists.
+- **Launch order** (handoff §7): after J05's compression commits, so both planners read the compressed `CLAUDE.md`. Both briefs say to check
+  `git log -3 -- CLAUDE.md`.
+
+### Would have searched here
+
+- None.
+
+## Theorems this phase proved
+
+- None. This is an advisor record. The one mathematical sketch (§1.2, FS-75's leaf 1 in relation form) is registered as the hunch
+  `leaf-one-is-elementary`, basis derived, one mind, unchecked.
+
+**Gate:** `python3 ~/source/poros/.claude/skills/poros/scripts/poros_gate.py all` on this record: PASS, with 0 failures and 5 warnings.
+- Three warnings are "registered in the future": the machine's date is 2026-09-25, and the project's is 2026-09-26.
+- Two are the unread items, kept as standing findings.
