@@ -6,7 +6,20 @@ files `data/fs100/x27v/`. Blind to X27D until stage 3 is committed (fences as th
 
 ## Theorems this phase proved
 
-*(Filled at stage 3; grades as `CLAUDE.md` § Notation.)*
+*(Grades as `CLAUDE.md` § Notation. Every entry one mind, blind to X27D. "Given MR" = row 120 at its grade, with X22D-QR = X22V-F2.)*
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| X27V-EQ | given MR, at a type-(B) field, TR-ROT ⟺ `M′ = ∅` ⟺ Q-μ; unconditionally Q-μ ⟹ TR-ROT (TR-ROT is C-1 itself, not a smaller step) | [hand, one mind] | §2.1 |
+| X27V-TA | given MR, every translation-invariant random four-colouring has `σ_μ((T + A) ∖ D) = 0` (compact `U`-invariant sets keep their mass under averaging) | [hand, one mind] | §2.2 |
+| X27V-FS | given MR, every translation-invariant random four-colouring has `σ_μ(E ∖ (T + A)) = 0`, so `σ_μ(E ∖ D) = 0` (averaging schemes expanding at one split place; weak approximation for the conic `x² + y² = 1`) | [hand, one mind; WA textbook] | §2.2 |
+| X27V-R1 | given MR, a translation-invariant random four-colouring with spectrum carried by `E = ⋃_S E_S` is a.s. a pullback: T-C′'s case (R1), FS-97's first half, closed given MR | [hand, one mind; corollary] | §2.2 |
+| X27V-R2 | given MR, Q-μ ⟺ TR-ROT ⟺ no translation-invariant `μ` charges `R̂ ∖ E` (T-C′'s (R2)); a counterexample's spectrum is `D`-part plus an `E`-null part that collapses onto `D` under every rotation scheme | [hand, one mind; corollary] | §2.2 |
+| X27V-F1 | the flip as posed is met trivially by `d(μ, P_Pull)` (translation invariance is vacuous on `M_T`); no information | [hand; trivial] | §2.4 (a) |
+| X27V-F2 | given MR, every concave, upper semicontinuous, `U`-invariant `Φ` on `M_T` vanishing on `P_Pull` is `≤ 0` everywhere; so the flip in the kind an averaging proof uses exists iff Q-μ; unconditionally any such `Φ` positive on `M′` proves TR-ROT | [hand; a few lines] | §2.4 (b) |
+| X27V-F3 | `Φ₀(μ) = σ_μ(R̂ ∖ D) = (4/3)·M_{y∈4R} P_μ(c(0) ≠ c(y))` is affine, translation- and rotation-invariant, zero exactly on `P_Pull`, positive on `M′`, lower semicontinuous only; given MR it is continuous iff Q-μ, and equals the `E`-null spectral mass | [hand, one mind] | §2.4 (c) |
+| X27V-F4 | given MR, no quantity reading the spectral measure only through `E ∖ D` separates `M′` from `P_Pull` (that restriction vanishes identically) | [hand, one mind; from X27V-TA/FS] | §2.4 (d) |
+| X27V-PM | for abstract actions, collapse of a measure along every averaging scheme does not follow from non-collapse of each of its points (thick bad sets at point-dependent places, in `{0,1}^ℤ`) | [hand; a standard shape] | §3.2 |
 
 ## Stage 1 — SAVED (quotation check; C0 per claim, sealed before any written derivation)
 
@@ -46,7 +59,7 @@ files `data/fs100/x27v/`. Blind to X27D until stage 3 is committed (fences as th
 
 *Correction to §1.3's timestamp:* C0 was sealed at 11:55 UTC (the commit's time), not 06:58.
 
-## Stage 2 — SAVED (blind derivations, 11:56–12:15 UTC)
+## Stage 2 — SAVED (blind derivations, 11:56–12:05 UTC)
 
 **Setting** (R88 notation; X22V §2 names): `F` of type (B); `R = ℤ[U]`, `U = T(F)` the norm-one group of `L = F(i)` (every norm-one element of
 `L` is a unit vector); `X₄` the proper four-colourings of `Cay(R, U)`, compact; Pull finite, closed, `R ⋊ U`-invariant (R88-TA (i)); `M_T`
@@ -171,3 +184,49 @@ that restriction is 0 for every `μ ∈ M_T`. Whatever separates must read the `
   along split-place regions) to test collapse against its translations. Not done; the shape of a FALSE is stated instead (§2.3).
 - COL-E(pm): I would have tested points-to-measures on the ×2×3 circle numerically (empirical measures of random Følner schemes on a
   measure built from thick bad sets). Not done; named as a step.
+
+## Stage 3 — SAVED (the write-up; committed before any fenced file is opened)
+
+### 3.1 Verdicts, per claim
+
+| claim | verdict | what holds | where it stops |
+|---|---|---|---|
+| **TR-ROT** | **GAP at COL-E** | given MR it is Q-μ itself (X27V-EQ), so it is not a smaller step than C-1; given MR every counterexample's spectral measure has no mass on `E ∖ D` (X27V-TA, X27V-FS), so T-C′'s (R1) is closed (X27V-R1) and Q-μ ⟺ no spectrum of type (R2) (X27V-R2) | **COL-E:** "no non-zero `E`-null part `τ_μ = σ_μ|_{R̂∖E}` of the spectral measure of a translation-invariant random four-colouring has its `U`-averages converge onto `D` along every averaging scheme." Closed-set rigidity handles single characters; the points-to-measures step (COL-E(pm)) fails for abstract actions (X27V-PM), so it needs the algebra of `R̂` |
+| **TR-ROT-flip** | **as posed: TRUE, vacuously** (X27V-F1); **in the kind an averaging proof uses: equivalent to Q-μ given MR** (X27V-F2) | the canonical quantity is named: `Φ₀(μ) = σ_μ(R̂ ∖ D)`, with every asked property except continuity, which (given MR) is Q-μ (X27V-F3); a no-go for quantities reading only `E ∖ D` (X27V-F4) | the flip does not shrink the target: G79's move lands on the same step, COL-E, from the other side (the discontinuity of `Φ₀` is the collapse of `E`-null mass onto `D`) |
+
+**Shape of a FALSE for TR-ROT** (given MR): a translation-invariant random four-colouring, not a pullback, with spectral measure
+`σ_μ|_D + τ`, `τ` `E`-null of mass `1 − σ_μ(D) > 0` and no mass on `E ∖ D`, whose rotated windows look like pullbacks Banach-almost always.
+It would answer row 88 "no".
+
+### 3.2 X27V-PM, the points-to-measures remark (why the pointwise route stops)
+
+In `{0,1}^ℤ` with the shift, let `bad_s = ⋃_k [N_k + s_k, N_k + s_k + L_k)` with `s_k` uniform on `[0, M_k)` independently, `L_k → ∞`,
+`L_k/M_k → 0`, blocks disjoint. Each point `1_{bad_s}` has a thick bad set (its orbit closure holds the all-ones point, so some Følner
+sequence carries it to `δ_1`), yet `P_s(u ∈ bad_s) ≤ L_k/M_k → 0` as `u → ∞`, and every asymptotically invariant scheme puts vanishing
+weight on finite sets, so the law of `1_{bad_s}` collapses onto `δ_0` along every scheme. So "no single character collapses" (which
+closed-set rigidity and Bergelson–Moragues Prop. 2.7 would give for `χ ∉ T + A`, given an orbit-closure measure off `D`) does not yield
+COL-E; an argument must use the group structure of `R̂` or the colouring. [hand; a standard shape; not a statement about `R̂`]
+
+### 3.3 C0 scored
+
+| claim | C0 (stage 1) | outcome | comment |
+|---|---|---|---|
+| TR-ROT | GAP 0.95, "given MR TR-ROT ⟺ Q-μ" | GAP; the equivalence proved (X27V-EQ) | as expected; not expected: the `E ∖ D` part dies given MR (X27V-TA/FS), which moves the step from Q-μ to COL-E |
+| flip, as posed | 0.9 that a distance function qualifies | TRUE, vacuously | as expected |
+| flip, averaging kind | name one 0.03; no-go of a stated kind 0.4 | equivalent to Q-μ given MR (X27V-F2); `Φ₀` named with continuity missing (X27V-F3); no-go for `E ∖ D`-readers (X27V-F4) | the no-go landed, but only for a kind that given MR is empty of information; the useful no-go (pair-correlation functionals) was not reached |
+
+### 3.4 Proposed edits (the front-page lane decides; I edit none of these files)
+
+- **`plans/R88-derivation.md` §G, T-C′:** after (R1): "*Given MR (row 120): closed* — every translation-invariant `μ` has `σ_μ(E ∖ D) = 0`
+  (X27V-TA, X27V-FS), so a spectrum carried by `E` is `D`'s and `μ` is Pull (X27V-R1). Q-μ is then exactly (R2) (X27V-R2)."
+- **`LEDGER.md`, row 111's or a new row's text** (front-page lane's call): "Given MR, TR-ROT is Q-μ (X27V-EQ), and every translation-invariant
+  random four-colouring of a type-(B) plane has no spectral mass on `E ∖ D` (X27V-TA/FS), so T-C′'s (R1) is closed and Q-μ ⟺ COL-E.
+  [hand, one mind; X27D beside]."
+- **`LEDGER.md` § B:** one line each for X27V-EQ, TA, FS, R1, R2, F2, F3 (F1, F4, PM as remarks).
+- **FS-100's stub** (FS-97's absorbed half): (R1) given MR closed; the target is COL-E, a statement about one measure on `R̂`.
+- **`CLAUDE.md` G79:** its "first test" line could record that the flip, run on TR-ROT, named `Φ₀` and landed on the same step (COL-E) as the
+  counterexample side — a data point for the killing test ("flips that keep producing nothing"); I did not find the flip easier here.
+
+### 3.5 Would have searched here (stage 3)
+
+- None.
