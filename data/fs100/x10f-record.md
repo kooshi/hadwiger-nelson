@@ -135,3 +135,20 @@ pointers none; 80 grokkings). `--dupes`: **7** runs, 492 bytes (the launch basel
 (FS-84; FS-81 priced it)" — stale since row 121, not drafted; the owner's call whether to rewrite it.
 
 **Would have searched here (stage 5):** none.
+
+## Stage 6 — SAVED (`plans/FRONTIER-STUBS.md`: X09C's 4.4 rows, following the re-aimed stub files)
+
+Applied by script (the scratchpad's `fs.py`, every replacement asserted unique), each row following its stub file's current text
+(`plans/STUB-measure-rigidity-three-fields.md`'s stage-5 status block; `plans/STUB-infinite-place-spectra.md`'s banner): the open-milestones
+paragraph (FS-84 answered and re-aimed — launch note 4, the owner's ruling, Kooshi may close it instead; FS-100 stage 5 CLOSED, Paid
+(theorem), [hand], prior-art gate pending X24R); a ranked-stubs note for this close (no rank moved; the QTCA candidate not minted, held); rank 1
+FS-59 (≥ 5 at K0's grade; six waits on T-J39-5; its bearing "proven 4 (in the kernel, row 119)"); rank 3 FS-100 (stage 5's result and what is
+left); rank 4 FS-84 (answered; S2 onward re-aimed); rank 8 FS-98 ("row 88 ⟺ T-B1 (MR held, row 120)"); rank 12 FS-64 (moot at ℚ(√47)); rank 13
+FS-97 (answered, per its banner); the closed list gains FS-100 stage 5 above the in-ban round. FS-100's rank stays 3 (the draft's "below FS-59"
+holds already). **Gate:** `bib_audit.py` exit 0.
+
+**Left:** the FS-84 banner on `plans/STUB-five-colours-47.md` — X09C 4.4 says "the front page writes it" but gives no text, and the file is
+outside my brief's touch list; `CLOSED-QUESTIONS.md` entries (§1.7, §3) for Moorhouse's question and Soifer 55.1 — held for Kooshi by X09C, in
+no lane's touch list; under launch note 2 they would read "prior-art gate pending, X24R".
+
+**Would have searched here (stage 6):** none.
