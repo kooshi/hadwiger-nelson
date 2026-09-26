@@ -55,3 +55,55 @@
    2011 | Efthymiou, Charilaos, Galanis, Andreas, Hayes, Thomas P. | Improved Strong Spatial Mixing for Colorings on Trees | arXiv (Cornell University) | https://doi.org/10.4230/lipics.approx-random.2019.48
    2020 | Ron Peled, Yinon Spinka | Three lectures on random proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.2001.11566
    2018 | Ron Peled, Yinon Spinka | Rigidity of proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.1808.03597
+[19:54] ZB 'ab:"Hoffman" & ab:"compact group" & ab:"independence"': 0 hits
+[19:54] ZB 'ab:"spectral bounds" & ab:"independence ratio" & ab:"operator"': 0 hits
+[19:54] ZB 'ab:"Hoffman bound" & ab:"measurable"': 0 hits
+[19:54] ZB 'ab:"invariant random" & ab:"proper coloring"': 0 hits
+[19:54] ZB 'ab:"translation-invariant" & ab:"random coloring"': 3 hits
+   1991 | Burton, R. M., Keane, M. | Topological and metric properties of infinite clusters in stationary two- dimensional site percolation | 0757.60102 | summary
+   2026 | Gang Yang, Yaping Mao | Complete Resolution of the Butler-Costello-Graham Conjecture on Monochromatic Constellations | arXiv:2604.02115 | summary
+   2022 | Král', Daniel, Lamaison, Ander, Pach, Péter Pál | Common systems of two equations over the binary field | 1570.05087 | summary
+[19:54] ZB 'ab:"measurable chromatic number" & ab:"p-adic"': 0 hits
+[19:54] ZB 'ab:"factor of iid" & ab:"proper coloring"': 0 hits
+[19:54] ZB 'ab:"Hoffman" & ab:"equality" & ab:"coloring" & ab:"eigenspace"': 0 hits
+[19:54] ZB 'Hoffman & "independence ratio" & operator': 1 hits
+   2014 | Bachoc, Christine, DeCorte, Evan, de Oliveira Filho, Fernando Mário | Spectral bounds for the independence ratio and the chromatic number of an operator | 1302.05047 | summary
+[19:54] ZB 'Hoffman & bound & measurable & "chromatic number"': 1 hits
+   2019 | DeCorte, Evan, Golubev, Konstantin | Lower bounds for the measurable chromatic number of the hyperbolic plane | 1417.05063 | summary
+[19:54] ZB '"measurable chromatic number" & "p-adic"': 0 hits
+[19:54] ZB 'ti:"spectral bounds for the independence ratio"': 1 hits
+   2014 | Bachoc, Christine, DeCorte, Evan, de Oliveira Filho, Fernando Mário | Spectral bounds for the independence ratio and the chromatic number of an operator | 1302.05047 | summary
+[19:54] ZB 'ti:"invariant" & ti:"colorings" & ti:"Cayley"': 0 hits
+[19:54] ZB 'ti:"random colorings" & ti:"invariant"': 0 hits
+[19:56] ZB 'au:"Bardestani, Mohammad"': 14 hits
+   2019 | Bardestani, Mohammad, Mallahi-Karai, Keivan, Salmasian, Hadi | Kirillov's orbit method and polynomiality of the faithful dimension of $p$-groups | 1475.20075 | summary
+   2015 | Bardestani, Mohammad, Mallahi-Karai, Keivan | On the Erdős-Ko-Rado property for finite groups | 1326.05160 | summary
+   2016 | Bardestani, Mohammad, Mallahi-Karai, Keivan, Salmasian, Hadi | Minimal dimension of faithful representations for \(p\)-groups | 1370.20011 | review
+   2018 | Bardestani, Mohammad, Salmasian, Hadi | On equality of ranks of local components of automorphic representations | 1406.22017 | summary
+   2017 | Bardestani, Mohammad, Mallahi-Karai, Keivan | On a generalization of the Hadwiger-Nelson problem | 1360.05050 | summary
+[19:56] ZB 'ti:"generalization of the Hadwiger-Nelson problem"': 1 hits
+   2017 | Bardestani, Mohammad, Mallahi-Karai, Keivan | On a generalization of the Hadwiger-Nelson problem | 1360.05050 | summary
+[19:56] ZB 'ti:"invariant" & ti:"colorings"': 4 hits
+   2018 | Smith, Derek A., Traldi, Lorenzo, Watkins, William | A note on Dehn colorings and invariant factors | 1404.57020 | summary
+   2025 | Madhumitha, S., Naduvath, S. | Dominator colorings of \(n\)-inordinate invariant intersection graphs | 1572.05089 | review
+   2011 | Timár, Ádám | Invariant colorings of random planar maps | 1223.05086 | summary
+   2025 | Madhumitha, S., Naduvath, Sudev | Domination-related colorings of \(n\)-inordinate invariant intersection graphs | None | summary
+[19:56] ZB '"stationary" & "proper colorings" & "spectral"': 0 hits
+[19:56] ZB '"strict vector coloring" & "Cayley"': 0 hits
+[19:56] ZB 'ab:"Kronecker factor" & ab:"stationary process" & ab:"extension"': 0 hits
+[19:56] ZB 'ab:"continuous in probability" & ab:"stationary" & ab:"locally compact abelian"': 0 hits
+[19:56] OA 'translation-invariant random proper colorings abelian group spectral measure periodic': 54 hits
+   2023 | Jan Grebík, Rachel Greenfeld, Václav Rozhoň | Measurable Tilings by Abelian Group Actions | International Mathematics Research Notic | https://doi.org/10.1093/imrn/rnad048
+   2024 | Siegfried Beckus, Tobias Hartnick, Felix Pogorzelski | Linear repetitivity beyond abelian groups | Ergodic Theory and Dynamical Systems | https://doi.org/10.1017/etds.2024.120
+   2015 | Mikhail A. Ershov, Gili Golan, Mark Sapir | The Tarski numbers of groups | Advances in Mathematics | https://doi.org/10.1016/j.aim.2015.07.010
+   2015 | Carsten Lange, Shiping Liu, Norbert Peyerimhoff | Frustration index and Cheeger inequalities for discrete and continuous magnetic Laplacians | Calculus of Variations and Partial Diffe | https://doi.org/10.1007/s00526-015-0935-x
+   2004 | Andrew M. Childs, Edward Farhi | Quantum information processing in continuous time | DSpace@MIT (Massachusetts Institute of T | https://openalex.org/W1493399357
+   2013 | Fabian Schwarzenberger | The Integrated Density of States for Operators on Groups | Qucosa (Saxon State and University Libra | https://openalex.org/W2121028359
+[19:56] OA 'measurable colorings Cayley graph compact abelian group Hoffman equality eigenspace': 0 hits
+[19:56] OA 'invariant measures on the space of proper colorings of a Cayley graph classification': 141 hits
+   2006 | Shlomo Hoory, Nathan Linial, Avi Wigderson | Expander graphs and their applications | Bulletin of the American Mathematical So | https://doi.org/10.1090/s0273-0979-06-01126-8
+   2015 | László Babai | Graph Isomorphism in Quasipolynomial Time | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.1512.03547
+   1970 | Branko Grünbaum | Polytopes, graphs, and complexes | Bulletin of the American Mathematical So | https://doi.org/10.1090/s0002-9904-1970-12601-5
+   2020 | Ágnes Backhausz, Balázs Szegedy | Action convergence of operators and graphs | Canadian Journal of Mathematics | https://doi.org/10.4153/s0008414x2000070x
+   2014 | Mladen Bestvina, Kenneth Bromberg, Koji Fujiwara | Constructing group actions on quasi-trees and applications to mapping class groups | Publications mathématiques de l IHÉS | https://doi.org/10.1007/s10240-014-0067-4
+   2020 | Ron Peled, Yinon Spinka | Three lectures on random proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.2001.11566

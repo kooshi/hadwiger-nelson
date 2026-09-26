@@ -101,3 +101,86 @@ statement (Kari–Szabados; `[HervaKari2023]`); B2-1's no-finite-defect as **fro
   agrees).
 - **B2-1 in the literature's word** (carried here from result 4 because it is the frozen notion): "every pullback is **frozen**"
   (`[AlonEtAl2021]`'s definition verbatim fits); their Prop. 2.2 does not apply (infinite degree). Not found as a statement.
+
+## Stage 3 — SAVED (result 2: T-C, and J28V-6 / C14.2 (c), which T-C's split places rest on)
+
+**The object in its disciplines' words.** (Harmonic analysis / spectral theory of stationary processes) a translation-invariant random
+proper four-colouring of `Cay(R, U)`, embedded tetrahedrally, is a stationary `ℝ³`-valued process on the countable group `R` whose
+spectral measure `σ` has `σ̂ = −1/3` on `U` — a *translation-invariant strict vector 4-colouring* in Karger–Motwani–Sudan's term; "carried
+by `T + A + Fin_S`" is "continuous in probability for the `S`-adic topology", so the process lives on the locally compact completion `G_S`
+(Bochner; a Doob measurable modification). (Measurable combinatorics) T-C is then a statement about **measurable proper colourings of a
+Cayley graph on an LCA group, `a.e.` proper**, decided by the **Hoffman bound for measurable independent sets** (Bachoc–DeCorte–Oliveira–
+Vallentin) on a product with one Hoffman-tight compact factor, with **Hoffman equality ⟹ the colour classes lie in the least eigenspace**
+(Blokhuis–Brouwer–Haemers's finite fact, G54) and a measurable, stationary form of **Zhang's product count** (`[Zhang2012]` Thm 1.8).
+
+**Queries** (2026-09-25; `queries.log`):
+
+| db | query | hits | relevant |
+|---|---|---|---|
+| ZB | `ab:"Hoffman" & ab:"compact group" & ab:"independence"` | 0 | — |
+| ZB | `ab:"spectral bounds" & ab:"independence ratio" & ab:"operator"` | 0 | (the `ab:` field misses it; see next) |
+| ZB | `Hoffman & "independence ratio" & operator` (all fields) | 1 | **Bachoc–DeCorte–Oliveira 2014** (Zbl 1302.05047) |
+| ZB | `ab:"Hoffman bound" & ab:"measurable"` | 0 | — |
+| ZB | `Hoffman & bound & measurable & "chromatic number"` | 1 | DeCorte–Golubev 2019 (hyperbolic plane; off-target) |
+| ZB | `ti:"spectral bounds for the independence ratio"` | 1 | BDOV 2014 |
+| ZB | `ab:"invariant random" & ab:"proper coloring"` | 0 | — |
+| ZB | `ab:"translation-invariant" & ab:"random coloring"` | 3 | none on target (Burton–Keane 1991 percolation) |
+| ZB | `ab:"measurable chromatic number" & ab:"p-adic"`; `"measurable chromatic number" & "p-adic"` | 0; 0 | (BMK is indexed without a summary: "contents unavailable due to conflicting licenses") |
+| ZB | `ab:"factor of iid" & ab:"proper coloring"` | 0 | — |
+| ZB | `ab:"Hoffman" & ab:"equality" & ab:"coloring" & ab:"eigenspace"` | 0 | — |
+| ZB | `ti:"invariant" & ti:"colorings" & ti:"Cayley"`; `ti:"random colorings" & ti:"invariant"` | 0; 0 | — |
+| ZB | `ti:"invariant" & ti:"colorings"` | 4 | Timár 2011 (random planar maps; off-target) |
+| ZB | `"stationary" & "proper colorings" & "spectral"`; `"strict vector coloring" & "Cayley"` | 0; 0 | — |
+| ZB | `ab:"Kronecker factor" & ab:"stationary process" & ab:"extension"`; `ab:"continuous in probability" & ab:"stationary" & ab:"locally compact abelian"` | 0; 0 | — |
+| ZB | `au:"Bardestani, Mohammad"` (the poser of the `p`-adic question: complete listing, 14 entries) | 14 | **BMK 2017** (Zbl 1360.05050, Israel J. Math. 217, 313–335) is the one on the subject, with BMK 2018 (structured Cayley graphs) |
+| OA | `translation-invariant random proper colorings abelian group spectral measure periodic` | 54 | Grebík–Greenfeld–Rozhoň 2023 (measurable tilings; periodicity of measurable tilings — a neighbour, not the object) |
+| OA | `measurable colorings Cayley graph compact abelian group Hoffman equality eigenspace` | 0 | — |
+| OA | `invariant measures on the space of proper colorings of a Cayley graph classification` | 141 | Peled–Spinka 2020 lecture notes (`[PeledSpinka2023]`'s programme; ℤ^d) |
+
+**zbMATH caveat (a finding about the instrument, G21):** `ab:` searches the review/summary text, and for records whose text is withheld
+("zbMATH Open Web Interface contents unavailable due to conflicting licenses" — BMK 2017, Chen–Dai 2017, `[PeledSpinka2023]`) it can
+never hit. So a zero on an `ab:` query measures the *reviewed* literature only; all-field and `ti:`/`au:` queries were added for that reason.
+
+**Papers opened, and what was read.**
+- **Bachoc–DeCorte–Oliveira–Vallentin 2014**, *Spectral bounds for the independence ratio and the chromatic number of an operator*
+  (held since at least FS-56 as `library/pdf/arXiv-1301.1054-…`; **`BIBLIOGRAPHY.md` row `[BachocEtAl2014]` says "not held" — wrong,
+  correction owed**). Read: §2 to Thm 2.3 (Def. 2.1, Thm 2.2 with proof, Thm 2.3's statement). **Def. 2.1:** "A measurable set `I ⊆ V` is
+  called an independent set of `A` if `(Af, f) = 0` for each `f ∈ L²(V)` which vanishes almost everywhere outside of `I`" — for a positive
+  convolution operator `A = ν *` this is exactly J28D's **edge-null** (`⟨1_I, ν * 1_I⟩ = 0`). **Thm 2.2** is Hoffman's ratio bound for such
+  sets on a probability space (with an `ε`-slack for non-constant `A1_V`); Thm 2.3 the chromatic form.
+- **Bardestani–Mallahi-Karai 2017** (`[BardestaniMallahiKarai2017]`, held). Newly read here: §3.2 in full through Lemma 3.11 (the isotropic
+  `p`-adic case) and the reference list's [12], [13]. **Thm 3.7:** the `T`-chopped hyperbola graph `Cay(ℚ_p², S_T)`,
+  `S_T = {(x, y) : xy = 1, p^{−T} ≤ ‖x‖ ≤ p^T}`, has `χ_Bor ≥ 1 + (2T + 1)/4`, via the log-uniform symmetric measure `μ_T` on `S_T` and
+  **Lemma 3.8:** `μ̂_T ≥ −4/L`, `L = (4T + 2)(1 − 1/p)`; the inputs are **Lemma 3.9–3.10** (the integral of `ψ(as)` over a ball and over a
+  valuation shell: `1 − 1/p`, `−1/p`, `0` — the "one-negative" values) and **Lemma 3.11** (the non-stationary vanishing of the incomplete
+  Bessel integral unless the valuation is even and `r = m/2`), which they take from **Sally–Taibleson 1966, Lemma 8(i)** (and Sally 1998
+  Lemma 10.10). No parity restriction on `p` appears in §3.2 (the only "`p > 2`" in the paper is §1's remark on quantifying the
+  anisotropic case), and Thm 1.1 is stated for every local field of characteristic zero.
+
+**Verdict — C14.2 (c) and J28V-6: partly in print.** C14.2 (c)'s computation (`plans/FS86-C-Coxeter.md` "Lemma C14.2 (c) Split `v`: `H(F_v)`
+has ratio `0` with error `η(n) ≤ 3/(2n + 4)`", by the average `ν_n` over `k ∈ [−n, n]` of the Haar measures on `(π^kε, π^{−k}ε^{−1})`
+and Hoffman's bound) **is Bardestani–Mallahi-Karai 2017 §3.2** (Thm 3.7, Lemmas 3.8–3.11) in window form: the same measure (their `μ_T`,
+log-uniform over the shells `p^{−T} ≤ ‖s‖ ≤ p^T`), the same case split, the same order of bound (`−4/L` against C14.2 (c)'s
+`−(1 + 2/(q − 1))/(2n + 1)`), with the vanishing step from Sally–Taibleson 1966. BMK state it over `ℚ_p` (all `p`, dyadic included) for the
+Borel chromatic number; C14.2 (c)'s form over an arbitrary split `F_v` with residue size `q`, as a windowed independence ratio, is the
+project's transcription. **J28V-6** ("C14.2 (c) holds at `q = 2` (the split-place integrals are `1, −1, 0, 0, …`)"): the one-variable
+integrals are BMK Lemma 3.10 (and textbook: the Ramanujan-sum values of `∫_{O^×} ψ(bε)dε`, e.g. Tate's thesis's local computation); the
+`q = 2` case of the whole computation is in BMK for `ℚ₂`; **the instance `F_v = ℚ₂(i)` (uniformiser `1 + i`, `q = 2`) that T-C(A) needs is a
+transcription not literally printed.** *Undecided at one step:* whether Sally–Taibleson's Lemma 8(i) itself excludes residue characteristic 2
+— not fetched (list for Kooshi). J28V's and J21-D1-2's re-derivations at `q = 2` make that step independent of the citation. **Correction
+owed:** FS-86's C14.2 (c) (Coxeter's record) cites BMK Thm 1.1 for the Borel chromatic number of the split plane but not §3.2 for its
+computation; `BIBLIOGRAPHY.md` already says (FS-58, 2026-09-17) that BMK's Lemma 3.8 is "the published local form of FS-58 D6", so this is a
+held source not carried to the lemma that uses it (G49's pattern).
+
+**Verdict — T-C: partly in print, in its inputs; the theorem not found by these searches.**
+- *In print, by input:* the measurable Hoffman bound on edge-null sets (NH-Y′, C14.2 (c)) is BDOV 2014 Thm 2.2; the split places' ratio 0
+  is BMK 2017 §3.2 (above); the archimedean ratio `m₁ ≤ 0.2470` is `[AmbrusEtAl2023]` Thm 1 (already cited by J28D); the product count
+  (C14.3, and C5 in stationary form) is `[Zhang2012]` Thm 1.8's counting (already cited: C14.3 names it); Hoffman equality forcing the least
+  eigenspace is Blokhuis–Brouwer–Haemers's in finite form (G54), and C6 is its measurable form on a compact group — the equality case of BDOV
+  Thm 2.2's proof (`‖g‖² = β − β²` with `g` in the `m(A)`-eigenspace), not stated as a theorem there; C1–C2 (spectral measure on a subgroup of
+  continuous characters ⟺ continuity in probability; the stationary extension to `G_S`) are Bochner and Doob, as J28D names them.
+- *Not found by these searches:* any classification of translation-invariant random (or measurable) proper colourings of a unit-distance
+  graph over a number field, or of any infinite-degree abelian Cayley graph, by spectral type; any statement that such a colouring with
+  spectrum in a locally compact dual is a pullback from a finite residue colouring. The nearest printed classifications of invariant
+  measures on a proper-colouring shift are Peled–Spinka's (`[PeledSpinka2023]`: ℤ^d, bounded degree, measures of maximal entropy / Gibbs
+  states, "long-range order" — a different notion, already recorded in `BIBLIOGRAPHY.md`).
