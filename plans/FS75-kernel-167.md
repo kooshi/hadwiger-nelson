@@ -713,3 +713,144 @@ FS75 ids, each "has no `LEDGER.md` § B row" and nothing else (no missing field)
 `[Chandgotia2017]` (`BIBLIOGRAPHY.md` line 721); no row is proposed, and the derivation file cites the key.
 
 **Would have searched here (stage 3):** none.
+
+### Stage 4 — SAVED (the re-reads, the predictions, the price, the verdict, the tallies)
+
+#### 4a. §G re-read — which of J52's sixteen grokking bears paid
+
+| §G.1 bear | its extraction | what happened | paid? | Do or body (J52's §G.4) |
+|---|---|---|---|---|
+| G7 | name `v` the type-M rotation `n = 42` in leaf 3's doc | `Instances/SqrtOneSixSeven.lean` lines 7–8 do | paid | Do |
+| G18 | three separately checked leaves composed; no finite graph | the headline composes `nonempty_winding`, `Cert.isEmpty_winding` and the consumer | paid | body |
+| G21 | the checker derives every constraint; plants fire for their own reason | six plants in `tools/j52_intcert.py`, three on `tinyK4`, two on the real certificate with a faithful partner; two of J52's plants first failed this very rule (inventory 22, 23) and were repaired | paid, by the rule catching its author | body |
+| G30 | an inhabitant for the structure hypothesis; statements over any `AddCommGroup`; (6) delete each hypothesis once | `properAlong_one_two`, `nonempty_winding_one_two`; J52K went past (6): both deleted hypotheses shown **necessary** (FS75-N1, N2) | paid | body |
+| G38 | say in leaf 1's doc that the kernel's criterion is the passage from additive to all three-colourings | not in `ThreeColour.lean`'s module doc (lines 10–33), which says what the winding is and what it does not use | **not landed** (a docstring line; harmless) | body |
+| G46 | name the object classically: a homomorphism to `K₃`, a height, a winding cocycle | named so in the docs; but the second discipline — integer tensions (Minty 1962, Tutte) and the Heuberger matrix — surfaced only at this close's gate | half paid | body |
+| G49 | a kernel milestone's gate is Mathlib and core; attribution recorded | §PA's table and attribution; the question-form search (is the winding form in print?) declined at the opening, run here (stage 2) | paid, the question half at the close | Do |
+| G50 | read Mathlib's statements, not memory | the one recalled name (`List.sum_flatMap`) was caught at §PA and replaced by a local `wsum_flatMap` | paid | Do |
+| G55 | row 103's statement shape; no chain route at 167 | shape identical to `…_eleven` and `…_two_three` (owner, inventory 28) | paid | body |
+| G57 | triangle-free, so the `Θ` route is the only three-colour route | framed the alternatives (§S.4); nothing attempted a chain | paid | body |
+| G61 | the 3-adic barrier and T41's minimality as free negative controls | **not run**, and on reflection mis-aimed: a certificate with one ± pair dropped fails first at its relation check — a wrong-reason red — and the meaningful control (the smaller lattice is 3-colourable) cannot be a plant | **not paid; the extraction was wrong** | Do |
+| G62 | state `{1, v, z}·U_R` in the module doc (re-derivable witness) | `SqrtOneSixSeven.lean` and `…/Cert.lean` do | paid | Do |
+| G67 | the first Do-line count at a kernel milestone | done at §G.4 (7 Do, 9 body); scored in this table's last column | paid | body |
+| G71 | the target is the criterion's ⟹ plus one tree | exactly what landed | paid | Do |
+| G74 | the family theorem (row 82) declined as the next target | the stub's re-aim (stage 5) | paid | Do |
+| G79 | the winding is the *example* invariant; the tree its wanted poster | **decisive**: read with G71 against the certificate's semantics it gave 1.3 — the kernel needs the winding, not `θ` — which removed leaf 1's analytic half (P-elem) | paid, and it carried the milestone | body |
+
+**Count.** Fourteen of sixteen paid in whole or part: six of seven from a *Do* line (G61 the miss), eight of nine from a body (G38 the
+miss, G46 half). G67's killing test asks whether the *Do* lines dominate: here the decisive bearing (G79 with G71) came through a body line
+and a *Do* line together, and the one wrong extraction came from a *Do* line — **one more data point against the form doing the work alone**,
+at a kernel milestone. **G79's first test** (does a result come from an example invariant?): **yes** — the winding every three-colouring
+carries, not the certificate's emptiness, is what the kernel proves and what made the port elementary.
+
+**Should have borne and was not used.** § The gate's vacuity rule (J52's M43): the plan wrote that the new structure hypothesis would ship
+an inhabitant, and did not ask whether the scanner's site law would *see* a `Winding`-typed binder; it does not (sites stayed 279; inventory
+42). A check reporting nothing where it cannot look is § Make the gate fail's first rule. J52K caught it and supplied the inhabitant by hand;
+the scanner's blind spot stays (a tool defect for `scripts/`, not this job's to touch).
+
+**Forward propagation.** No grokking is minted at this close. The winding form bears on FS-75's next target (the family theorem: its first
+input), on FS-60 (every V2-format certificate is one line through `four_le_chromaticNumber_of_cert`) and on FS-46 (three colours over
+`√3`-fields in the kernel: the same `ThreeColour` vocabulary) — stage 5's stub re-aims carry the first two; FS-46's stub is not this job's to
+touch and is listed for the front-page job.
+
+#### 4b. §PA sweep — what the milestone learned about what its object is
+
+The winding functional is **the circulation of an integer tension** — the classical lift of a proper colouring to a tension with values in
+`[1, k−1]` (Minty; Tutte's flow–tension duality) — made translation-invariant on an abelian Cayley graph by the square argument; and the
+relation lattice is the **Heuberger matrix**'s lattice of the Krebs line. Both recognitions arrived at the close's gate (stage 2), not at
+§PA, whose kernel-form gate was Mathlib and core. Neither is a grokking; both are vocabulary for FS-75's next milestone's gate (the family
+theorem) and for FS-20 (§E's translation table), noted in the FS-75 stub's re-aim.
+
+#### 4c. The predictions, scored once
+
+| id | prediction | p | outcome | source |
+|---|---|---|---|---|
+| P-elem | leaf 1 closes with no analysis (no Følner sets, compactness, Bolzano–Weierstrass, Farkas lemma, descent or torsion-freeness) | 0.90 | **met** | J52K §5.5; register § I.1 |
+| P-tree | the nested-`Tree` soundness by mutual structural recursion, no `Tree.rec` fallback | 0.80 | **met** (`termination_by structural`) | J52K Stage 3 |
+| P-price | the headline sorry-free, gate green, within 2.5 h of wall clock | 0.70 | **met** (about 45 min) | J52K §5.5 |
+| P-check | `cert_check` in the real module reproduces 19.4 CPU s ±25 %, under 8 GB | 0.85 | **met** (12.22 + 7.12 = 19.34 s; 5.49 GiB) | J52K Stage 4 |
+| P-47fmt | ℚ(√47)'s tree is not V2's format | 0.60 | **met** (a `θ`-space tree) | J52K §5.4 |
+| P-60 | the 60-vector certificate checks in one module inside a 60 GB slot | 0.40 | **not run** — unscorable; held for the owner (inventory 45) | J52K §5.5 |
+| J52K C0 | P-elem 0.93, P-tree 0.70, P-price 0.65 | — | all met | J52K §1.2 |
+| J50's hunch `leaf-one-is-elementary` | leaf 1 needs "only a height on ℕ^m built along monotone paths, a winding constant in `x`, box averages and Bolzano–Weierstrass in `[1, 2]^m`, with no descent to `Λ` and no function-space compactness" | — | **confirmed, and over-provisioned**: the falsifier (a skipped step costing more than the rest) did not fire; the kernel needed neither the box averages nor Bolzano–Weierstrass | plan §1.3; J52K §5.5 |
+
+**Reading.** Five of five scorable predictions met; all three effort predictions were pessimistic, as at M2 (`plans/M2-kernel-lane.md`
+§R-close 3d). Both world predictions (P-check, P-47fmt) were met; P-check was measured before registration on the skeleton, so it tested
+the move to a real module, not the cost.
+
+#### 4d. The price, against the actual (and what this instance adds)
+
+| product | priced | actual | ratio |
+|---|---|---|---|
+| the milestone, plan rates (J52 §S.0) | ≈ 4.5 h (1e 25, 1f 30, 1g 45, corollary 10, leaf 2 90, leaf 3 40, leaf 4 5, gate 30 min) | 45 min to a green gate (23:46 → 00:30; the report 00:33) | 6× |
+| the re-price from the first two open children (J52K §1.3) | 1.5–2 h | 45 min | 2–2.7× |
+| leaf 2, "the one real risk" | 90 min | about 15 min, second elaboration | 6× |
+| J52K's size in the brief | "about 2–2.5 hours and 300k harness tokens" | 47 min; own count ≈ 195k (harness not reported) | time 3×; tokens within |
+| J52, the planner | 250k harness, hand back by 350k | 437k (inventory 30) | **1.25× over its hand-back line** |
+
+**What it adds to § What compute actually helps.** The rule says "re-price a kernel phase from its first two leaves"; here **the re-price
+from the first two leaves still ran 2–3× high**. And the saving's mechanism differs from M2's: not an input already in Mathlib, but the
+obligation pass cutting the statement's analytic half (1.3: the winding, not `θ`) — the statement from which the proof derives. The token
+overrun sat with the planner, not the kernel job. Drafted as one sentence in stage 5 (the brief: "draft it only if it adds").
+
+#### 4e. The conjecture sweep (WORKFLOW 9: "conjecture", "not claimed", "surfaced" in the plan and the K record)
+
+| item | source | decision |
+|---|---|---|
+| the real point `x ∈ [1/3, 2/3]^m` with `r·x ∈ ℤ` from a winding, by finite LP duality ("stated in this vocabulary … a separate lemma") | plan §1.3, §M domain | **a line in FS-75's re-aim** — the next target's second input; not proved anywhere |
+| the finite-box route (the stub's "option to price") | stub § Shape item 1; plan §S.4 | **closed**: unnecessary, the winding needs no limit (recorded in the re-aim) |
+| the family theorem (row 82) in the kernel | plan §S.4; inventory 46 | **FS-75's next target** (the re-aim); a milestone of its own, Kooshi's choice |
+| the two other V2-format certificates (`Ld65c8ee8`, the 60-vector control) | K record §5.4; inventory 45 | **a line in FS-60's re-aim**, after `tools/j52_intcert.py` takes `(d, D)` |
+| ℚ(√47)'s `θ`-space tree | K record §5.4 | **a line in FS-75's re-aim**: a second checker (Coxeter's `certcheck.py` format) |
+| the vacuity scanner's blindness to `Winding` binders | K record §5.3 | **held for the owner** (a `scripts/` fix, outside every crunch job's lane) |
+
+#### 4f. The verdict, in four parts
+
+- **The choice: FS-75's minimal instance closes Paid (kernel).** `χ(ℚ(√167)²) ≥ 4` is in the kernel on the standard three axioms, with no
+  native purchase and no finite graph — the first field-level lower bound at an exposed field of the conjecture in the kernel — together
+  with three reusable pieces: the winding form of the criterion's ⟹ direction for any abelian group, a sound checker for V2's
+  relation-branching certificates, and a one-line consumer for any `(d, D)` and any real field holding `√d`. The gate is green (the
+  owner's re-run, inventory 31) and the headline was read aloud against the informal claim twice.
+- **The alternative weighed: Paid (partial).** The stub named the 60-vector tree as a scaling control and FS-60's certificates as the
+  next consumers, and ℚ(√47) was offered as a second instance; none ran. *Why Paid wins:* the plan scoped the milestone to the minimal
+  instance before any job ran (§S.5 "if time allows"; P-60 out of J52K's scope), and ℚ(√47)'s tree was format-checked and found out of
+  scope exactly as registered (P-47fmt).
+- **What it is, in novelty:** no new mathematics — the bound is FS-73's (row 79), the criterion T22's, the lift T42's (V2). Ours: the
+  kernel forms, and the winding form as the semantics a relation-branching certificate consumes, which the close's gate did not find stated
+  (its ingredients classical: Minty's tensions, `[Chandgotia2017]`'s heights, `[CGHO2025coh]`'s cocycles). **All novel knowledge is a
+  success** (Kooshi): the kernel's word on the conjecture's widest gap's lower end is the product.
+- **Confidence: high.** What would change it: a defect in a statement read aloud (read by J52K and by the owner), or a vacuous theorem
+  behind the vacuity scanner's blind spot — `Winding` has a proved inhabitant (`nonempty_winding_one_two`), so the one structure the
+  scanner cannot see is inhabited.
+
+#### 4g. The honesty tally
+
+| # | who | what | caught by | cost |
+|---|---|---|---|---|
+| 1 | J52 | §G counts hand-tallied wrong (21 / 9 / 50), recounted mechanically (inventory 21) | J52 itself, stage 3 | none |
+| 2 | J52 | a plant that could not fire (tripling one multiplier left the leaf refuting) (22) | J52's tool, when planted | none; replaced by a zeroed leaf |
+| 3 | J52 | a plant refused for the wrong reason (a relation failed before the unit check) (23) | J52's tool | none; units checked first |
+| 4 | J52 | a recalled Mathlib name, `List.sum_flatMap`, not held (8) | §PA's grep | none |
+| 5 | J52 | the §G.4 extraction for G61 (a dropped-pair control) was mis-aimed (4a) | this close | none; never run |
+| 6 | J52 → owner's brief | "18 `sorry` sites" counts declarations; there are 19 tokens (43) | J52K stage 1 | none |
+| 7 | J52 | 437k harness against a 350k hand-back line (30) | owner's job log | tokens |
+| 8 | J52K | the first `hs` deletion broke for the wrong reason ("Unknown identifier"); re-run with a right-reason variant | J52K itself, §5.1 | none — the right practice |
+| 9 | tools | `tools/j52_intcert.py` hard-wired to `(167, 420)` (41); `scripts/vacuity.sh` blind to `Winding` binders (42) | J52K | open; held |
+| 10 | J54 | stage 2 proposed a bibliography row for a paper already keyed (`[Chandgotia2017]`) | this close, stage 3 | none |
+
+**Owner rulings** (inventory 27–29): no swap to FS-87; the headline keeps `…_sqrt167`; ℚ(√47) only after the gate, format first — each
+held up by the outcome. No owner error was found.
+
+#### 4h. The ban measurement
+
+| job | "would have searched here" lines | declined moves |
+|---|---|---|
+| J52 (plan) | none, at every stage and §X | re-running V2's finder for a smaller 60-vector certificate (the existing tree is the control, P-60) |
+| J52K (kernel) | none, at every stage | running the two other V2-format certificates (checking, not searching; out of scope) |
+| J54 (close) | none | — |
+
+**The milestone ran wholly inside the ban**: every computation checked, scaled exactly or kernel-checked an existing certificate; nothing
+was searched and no certificate was produced. It is the cleanest instance of the ban's intent this crunch holds — a checker's word moved to
+the kernel's with no finite witness sought.
+
+**Would have searched here (stage 4):** none.
