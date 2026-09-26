@@ -1961,3 +1961,16 @@ drafted, 4.7); item 31 — **done** (G48 line, 4.2); item 32 — **done** (4.4, 
 Kooshi), 47 **done** (FS100-CE1 in `plans/FS100-derivation.md` §3 records the withdrawal; X02V's record is frozen history).
 
 **Would have searched here (stage 4):** none.
+
+### Stage 5 — SAVED (the in-flight jobs named; the inventory ticked)
+
+**In flight at this stage** (each a follow-on fold; none changes a claim above unless it reports a defect): **X26B** (blind CLS and the
+complex-place step, stop 07:50) — grades CLS and FS100-CX a third time; **X27D, X27V** (TR-ROT and its G79 flip, stop 07:50) — every
+front-page line says "TR-ROT under attack (X27)", not a verdict; **X28D** (to 07:50; Kooshi's pointer to FS54-T2, `[Moorhouse2010]` §7.1:
+every odd-degree real number field is two-colourable) — how much of the complex-place case the odd-degree reduction removes (CP-1: a field with a
+complex place and `L ≥ 5` has even degree `≥ 4`; CP-2: it contains a totally real subfield with `L ≥ 5`, so monotonicity gives five; CP-3: odd-degree
+extensions preserve `L`). **The grade of the complex-place step (1c) stands either way**; if CP-2 lands, class (iv) of 1.5 loses its dependence on
+FS100-CX and on MR's complex-place case wherever it applies. **X11K2 landed** (the every-real headline stated through Mathlib's number-field API,
+its composition proved over named inputs; `χ(ℚ(√47)²) ≤ 5` sorry-free), and X11K3 was gating it: both are in FS-101's stub.
+
+**Inventory:** `plans/FS100-x2x3-wave3-close-inventory.md` items 1–47 ticked (stage 4.8's mapping); none left open.
