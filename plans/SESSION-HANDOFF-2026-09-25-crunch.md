@@ -195,3 +195,11 @@ alternatives: move G56's named fields and G31's arena counts into ledger rows, o
 why not: the first moves numbers out of grokkings that reason with them, the second is the scars the file exists to keep; 16,174 bytes of
 headroom is two milestone closes; confidence high. Header's stale "with a compression pass to follow" rewritten (68c5bc9c, audit-gated).
 **Running (2):** J51, J52.
+
+**Update ~04:30 — J51 done (FS-100's plan, `plans/FS100-three-field-lemma.md`); J51D + J51V launched.** The measure-rigidity literature:
+Einsiedler–Lindenstrauss's positive-entropy theorem is in print, but its irreducibility hypothesis fails here, so MR is its zero-entropy half
+plus one owed lemma (PE-lim) — a reading room while ×2×3 stands. The derivation stays on Kronecker selection, whose missing input the planner
+recast as a closed-set statement (KS-sat). Side result: ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√167) all lie in T-C(A)'s class (exactly
+d ≡ 47, 143, 167 mod 168, one mind). Owner rulings, each in the close inventory `plans/FS100-close-inventory.md` (opened a21fdf02): the
+modeling passes run at J51D's stage 1; KS-2 stays in the blind list (KS-3 states KS-sat anyway); J51's row-head reading of LEDGER § A
+accepted as a declared slip. **Running (3):** J52 (kernel planner), J51D, J51V.
