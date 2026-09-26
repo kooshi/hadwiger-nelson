@@ -218,15 +218,65 @@ theorem minRise_le_wind (r : Fin m → ℤ) (a : A) : minRise r ≤ wind s c a (
   push_cast at h1 h2
   linarith
 
+-- 1g: the winding on the relation lattice
+/-- **Balanced pairs with the same difference have the same winding.** -/
+theorem wind_eq_of_sub_eq {c} (hc : ProperAlong s c) {u v u' v' : Fin m → ℕ}
+    (huv : wsum s (word u) = wsum s (word v)) (huv' : wsum s (word u') = wsum s (word v'))
+    (h : u + v' = u' + v) (a : A) : wind s c a u v = wind s c a u' v' := by
+  rw [← wind_add_diag s hc huv a v', ← wind_add_diag s hc huv' a v, h, add_comm v v']
+
+theorem wsum_word_add (u v : Fin m → ℕ) : wsum s (word (u + v)) = wsum s (word u) + wsum s (word v) := by
+  simp only [wsum_word, Pi.add_apply, add_smul, Finset.sum_add_distrib]
+
+/-- A relation's positive and negative parts are a balanced pair. -/
+theorem wsum_word_posPart {r : Fin m → ℤ} (hr : relMap s r = 0) :
+    wsum s (word (posPart r)) = wsum s (word (negPart r)) := by
+  rw [wsum_word, wsum_word, ← sub_eq_zero, ← Finset.sum_sub_distrib]
+  calc ∑ j, (posPart r j • s j - negPart r j • s j) = ∑ j, r j • s j :=
+        Finset.sum_congr rfl fun j _ => by
+          rw [← natCast_zsmul, ← natCast_zsmul, ← sub_smul, posPart, negPart, Int.toNat_sub_toNat_neg]
+    _ = 0 := hr
+
 end Lift
 
 /-- **Leaf 1 — the three-colour criterion's ⟹ direction, winding form.** A colouring proper along `s` carries a
 winding. No torsion-freeness, no generation hypothesis, no averaging, no compactness. -/
-theorem nonempty_winding (s : Fin m → A) {c : A → ZMod 3} (hc : ProperAlong s c) : Nonempty (Winding s) := sorry
+theorem nonempty_winding (s : Fin m → A) {c : A → ZMod 3} (hc : ProperAlong s c) : Nonempty (Winding s) := by
+  set w : (Fin m → ℤ) → ℤ := fun r => wind s c 0 (posPart r) (negPart r) with hw
+  have hdvd : ∀ r, relMap s r = 0 → 3 * (w r / 3) = w r := fun r hr =>
+    Int.mul_ediv_cancel' ((ZMod.intCast_zmod_eq_zero_iff_dvd _ 3).mp (wind_cast s hc (wsum_word_posPart s hr) 0))
+  have hadd : ∀ r r', relMap s r = 0 → relMap s r' = 0 → w (r + r') = w r + w r' := by
+    intro r r' hr hr'
+    rw [hw]; dsimp only
+    rw [← wind_add s hc (wsum_word_posPart s hr) (wsum_word_posPart s hr') 0]
+    refine wind_eq_of_sub_eq s hc (wsum_word_posPart s (by rw [map_add, hr, hr', add_zero]))
+      (by rw [wsum_word_add, wsum_word_add, wsum_word_posPart s hr, wsum_word_posPart s hr']) ?_ 0
+    funext j; simp only [Pi.add_apply, posPart, negPart]; omega
+  refine ⟨{ toHom := { toFun := fun r => w r / 3, map_zero' := ?_, map_add' := ?_ }, minRise_le := ?_ }⟩
+  · have h0 := hadd 0 0 (map_zero _) (map_zero _)
+    simp only [add_zero] at h0
+    change w 0 / 3 = 0
+    omega
+  · intro r r'
+    have h := hadd r r' r.2 r'.2
+    have h1 := hdvd r r.2; have h2 := hdvd r' r'.2
+    have h3 := hdvd (r + r' : (relMap s).ker) (r + r').2
+    change w ((r : Fin m → ℤ) + r') / 3 = w r / 3 + w r' / 3
+    push_cast at h3
+    omega
+  · intro r
+    change minRise (r : Fin m → ℤ) ≤ 3 * (w r / 3)
+    rw [hdvd r r.2]
+    exact minRise_le_wind s c r 0
 
 /-- The `addCayley` form: a proper 3-colouring of `addCayley (Set.range s)` carries a winding. -/
 theorem nonempty_winding_of_colorable (s : Fin m → A) (hs : ∀ j, s j ≠ 0)
-    (h : (addCayley (Set.range s)).Colorable 3) : Nonempty (Winding s) := sorry
+    (h : (addCayley (Set.range s)).Colorable 3) : Nonempty (Winding s) := by
+  obtain ⟨C⟩ := h
+  refine nonempty_winding s (c := fun a => (C a : ZMod 3)) fun a j => ?_
+  have hadj : (addCayley (Set.range s)).Adj a (a + s j) :=
+    (addCayley_adj' _ _ _).mpr ⟨fun h => hs j (by simpa using h), s j, ⟨j, rfl⟩, Or.inl rfl⟩
+  exact fun h => C.valid hadj h.symm
 
 /-- **The inhabitant** (G30(5)): `x ↦ x mod 3` is proper along `(1, 2)` on `ℤ` — the criterion's hypothesis is not
 empty, and neither is its conclusion. -/

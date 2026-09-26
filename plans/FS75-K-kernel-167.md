@@ -47,3 +47,33 @@ induction on `l`. `count_word` is the `count j (word v) = v j` of §S.3, by `Lis
 ### Would have searched here (stage 1)
 
 - None.
+
+## Stage 2 — SAVED
+
+**`Proofs/HadwigerNelson/ThreeColour.lean`, sorry-free: leaf 1 in the kernel.** §1–§2 of the skeleton, statements verbatim, plus seven
+helpers. 1g closed on the first elaboration by §M's route: `wind_eq_of_sub_eq` (balanced pairs with `u + v' = u' + v` have one winding, by
+`wind_add_diag` twice), `wsum_word_add`, and `wsum_word_posPart` (a relation's positive and negative parts are balanced, through
+`Int.toNat_sub_toNat_neg` and `natCast_zsmul`); then `W r := wind 0 r⁺ r⁻ / 3` with `3 * (w r / 3) = w r` from `wind_cast` and
+`ZMod.intCast_zmod_eq_zero_iff_dvd`, `map_zero'` and `map_add'` by `omega` over the additivity equation, the bound from `minRise_le_wind`.
+`nonempty_winding_of_colorable` reads the colouring `Fin 3`-valued as `ZMod 3` and gets adjacency `a ~ a + s j` from `addCayley_adj'`,
+where `hs j` supplies `a ≠ a + s j`.
+
+- **Imports**: Mathlib only (`SimpleGraph.Cayley`, `SimpleGraph.Coloring.Vertex`, `ZMod.Basic`, `BigOperators.Fin`, and the `Linarith`,
+  `FinCases`, `Ring`, `NormNum` tactics). The plan's "`LocalGlobal`" import (§S.1) is not needed.
+- **Spec examples**, one per definition, on the inhabitant `x ↦ x mod 3` along `(1, 2)` with the relation `(2, −1)`, each by `decide`:
+  `relMap` (two), `minRise` (two), `posPart`/`negPart`, `word`, `wsum`, `step`, `height` (`= 4` along `[0, 0, 1]`), `wind` (`= 0`), and
+  `Nonempty (Winding ![1, 2])` through the theorem.
+- **The build**: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`, exit 0, "178 of 178 batches, 2 module(s)
+  rebuilt, 0 module(s) with warnings, 3m26s" (`build/gate/build/20260926T045134Z-737547.log`). Added to `Proofs.lean`.
+- **Decision — docstrings in the checker modules.** The brief's kernel line says "Prose in any module a certificate imports is written as
+  `--` comments"; `ThreeColour` (and `ThetaCert`) will be ancestors of the literal module. *Choice:* keep `/-- … -/` docstrings in
+  `ThreeColour` and `ThetaCert` (DEBRUIJN: every public declaration) and hold the literal module to `--` comments only. *Alternative:*
+  `--` comments everywhere upstream, so a docstring edit never rebuilds the literal. *Why:* the rule protects multi-hour certificates; this
+  literal re-checks in about 20 s, so a docstring edit upstream costs 20 s, while `--` comments would strip the API of its documentation;
+  the house's `CayleyCertificate` makes the same choice. *Confidence: high*; it would change if a 30,344-leaf certificate (P-60) came to
+  sit below these modules.
+- **Price**: leaf 1's packaging, about 5 minutes of wall clock, first elaboration; §S.0 had 45 + 10 minutes.
+
+### Would have searched here (stage 2)
+
+- None.

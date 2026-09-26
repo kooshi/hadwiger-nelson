@@ -146,6 +146,7 @@ import Proofs.HadwigerNelson.Instances.ZMod121Four
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 import Proofs.HadwigerNelson.Instances.SixthColour
 import Proofs.HadwigerNelson.Kempe
+import Proofs.HadwigerNelson.ThreeColour
 
 /-!
 # Proofs
