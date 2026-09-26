@@ -178,3 +178,35 @@ lists are fixed at 05:45. Pushes sent at about 05:48, ranked:
 
 ### Would have searched here (stage 3)
 - None.
+
+## Stage 4 — PE-2's snag and fix; EF_F checked further; owner report — SAVED
+
+**PE-2 snag** [reading, one mind]: `M` is only a `ℤ[Γ]`-module, so `U` does not act on `M̂`, and the planner's "components permuted
+by `U`" cannot be said there. **Fix:**
+1. Take the `Γ`-ergodic decomposition of `µ` on `R̂` itself. Each component pushes to a `Γ`-ergodic measure on every `M̂`.
+2. If a component has positive entropy for `u`, then Thm 1.2 on a cofinal family of `M` makes it `m`.
+3. Otherwise the component has zero entropy for all of `Γ`.
+4. `U` commutes with `Γ`, so the split `µ = a·m + ν` is `U`-invariant, and `U`-ergodicity forces `a ∈ {0, 1}`.
+5. **Ergodic PE-2 follows:** `µ = m` or `h_µ(u) = 0` for every `u`. Ergodic PE-2 plus EF_F gives ergodic MR, and ergodic
+   decomposition then gives MR, since `E` is a `U`-invariant Borel set.
+
+**EF_F further checks:**
+- Lemma 3.1 transfers by local injectivity: the correction `r` has `|r|_π|r|_π̄ ≥ 1/(4η²)` unless `r = 0`.
+- The last step divides by `|ℓ_k|_w`, which is fine because `|ℓ_k|_π|ℓ_k|_π̄ ≥ cM_k⁻²`, so the error is `≤ CM_k^{4−K}`.
+- The pigeonhole needs `β < α/K`.
+- A finite `U`-invariant measure on a Fin_S leaf lies in `T + A`, which matches R-U, a held result with two derivations.
+
+hunch: ef-transfers-modulo-archimedean — **about 75 %** (a complete sketch now exists in my head; one mind, fluent, discounted).
+hunch: pe2-lands — **ergodic form about 70 %**.
+hunch: both-verified-in-crunch
+  claim: X01V and X02V both verify EF_F and ergodic PE-2 before 06:55
+  basis: derived (the sketches) and measured (the last crunch's verifier times, about 45–60 minutes)
+  falsifier: either verifier returns FALSE or GAP, or neither has reported by 06:55
+  registered: 2026-09-26
+  status: open — about 45 %
+
+**Owner report sent (about 05:47).** Recommendation on staying on: yes, but off-slot. I hand back at about 06:05 so the verifiers
+get the slots; resume me by SendMessage at about 06:40 to read X01D's and X02D's drafts against my sketch (about 30k tokens).
+
+### Would have searched here (stage 4)
+- None.
