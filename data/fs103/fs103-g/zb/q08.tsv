@@ -1,0 +1,3 @@
+# query: ab:"invariant random" & (ab:coloring | ab:colouring)
+# total reported: 1; fetched: 1
+1492.37048	2021	j	summary	Invariant Schreier decorations of unimodular random networks	Ann. Henri Lebesgue 4, 1705-1726 (2021).

@@ -1,0 +1,5 @@
+# query: ab:"translation invariant" & ab:coloring & ab:distance
+# total reported: 3; fetched: 3
+1154.68014	2008	b	editorial	Algorithms and computation. 19th international symposium, ISAAC 2008, Gold Coast, Australia, December 15--17, 2008. Proceedings	Lecture Notes in Computer Science 5369. Berlin: Springer (ISBN 978-3-540-92181-3/pbk). xix, 945~p. (2008).
+1507.05037	2022	j	review	A generalization of Szlam's lemma	Geombinatorics 32, No. 2, 75-81 (2022).
+1559.05063	2025	j	summary	A red-plus-4 Szlam-Li coloring of the plane which forbids red translates of a 2-point set	Geombinatorics 34, No. 3, 120-123 (2025).

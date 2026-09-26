@@ -1,0 +1,4 @@
+# query: ab:"stationary random set" & (ab:distance | ab:coloring)
+# total reported: 2; fetched: 2
+0606.60019	1986	j	review	The variance of a Poisson process of domains	J. Appl. Probab. 23, 307-321 (1986).
+0929.62061	1999	j	review	First contact distributions for spatial patterns: Regularity and estimation	Adv. Appl. Probab. 31, No. 1, 15-33 (1999).

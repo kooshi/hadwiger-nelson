@@ -1,0 +1,4 @@
+# query: ab:"Borel chromatic number" & (ab:Euclidean | ab:"unit distance" | ab:plane)
+# total reported: 2; fetched: 2
+1191.03035	2008	j	summary	Basis theorems for non-potentially closed sets and graphs of uncountable Borel chromatic number	J. Math. Log. 8, No. 2, 121-162 (2008).
+1360.05050	2017	j	summary	On a generalization of the Hadwiger-Nelson problem	Isr. J. Math. 217, 313-335 (2017).
