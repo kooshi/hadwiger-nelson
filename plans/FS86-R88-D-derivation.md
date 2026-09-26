@@ -17,6 +17,8 @@ Data `data/fs86r88/j28d/`; tools `tools/crunch_j28d_*.py`. Grades are `CLAUDE.md
 - **TC-count** — the stationary Zhang count: one tight compact factor `× X` with `r_X < 1/4` forces a.e. fibre to be a proper colouring of the tight factor. [hand] §3.2 C5
 - **TC(A)** — over ℚ(√47) (and every real field whose stable places all have all-levels ratio `< 1/4`) no invariant measure on `X₄` has spectral measure on any `T + A + Fin_S`. [hand, one mind] §3.3
 - **TC-tab** — the factor table: `B = {11}` (ℚ(√59)), `{19}` (ℚ(√83), ℚ(√131)), `{11, 19}` (ℚ(√47)); every other stable place below 72 satisfies H*. [tools, float with controls and a plant] §3.2
+- **B2-1, B2-2, B2-3** — propagation (`D` infinite); `d*(z + kU) = 0` for every `k`; sparse defect ⟹ transient. [hand] §Stage 4
+- **T-B1, T-B2** — GAP, steps named. §Stage 4
 - **T-A2** — a FALSE for T-B1 or T-B2 exhibits a non-pullback, so `F(R) = 0`. [hand] §Stage 2
 
 ## Stage 1 — SAVED (quotation check, C0, the log)
@@ -242,3 +244,63 @@ every real field with no stable place of all-levels ratio `≥ 1/4`.
   regularisation lemma, no computation.
 - The factor table is a complete enumeration over a set a derivation fixed (every character of `Γ_p` for the listed `p`) — the ban's edge,
   logged as such.
+
+## Stage 4 — SAVED (T-B1, T-B2; written tersely — the budget was spent, see the report)
+
+**T-B1: GAP.** A FALSE is a non-pullback (T-A2), i.e. row 88 "no"; none is offered. Two routes, each stopped at a named step:
+- *Re-centring (§S.2's route).* Exhaust `R` by norm balls of `𝔸 = (L⊗ℝ) × ∏′_{split} L_v` (finite in `R`, which is discrete there); re-centre
+  non-pullbacks `c_n → p` at a nearest defect `z_n`. If the norm of `z_n` is archimedean-dominated, the re-centred agreement set tends to an
+  archimedean half-space and Theorem H closes the case. **Named step:** if it is split-dominated, the re-centred region is
+  `{w : |w + z_n|_v < |z_n|_v}`, an ultrametric sphere around `−z_n`, whose liminf is empty — no half-space, and no ultrametric analogue of H
+  is available from a finite set.
+- *Pinned bootstrap.* `z` is forced once three neighbours in the pinned set show the three colours `≠ p(z)` (gap-freeness). Plausibly this
+  fills a lattice `R_N` from a finite seed; **named step:** passing from `R_N` to `R_{N′}` needs unit vectors in prescribed cosets of `R_N`
+  with no poles outside `N′`, and `T(O_S)` is discrete in `∏_{v∈S} T(F_v) × (S¹)²` — the obstruction of `plans/FS86-C-deBruijn.md` §7.5.
+
+**T-B2: GAP at B2-growth**, with three proved partials [hand]:
+- **B2-1 (propagation).** `z ∈ D`, `c(z) = j` ⟹ `z + U_j(z) ⊆ D`, `U_j(z) = {u : γ(z̄ + ū) = j}`, a union of `|S₄|/3` residue classes of `U`; so
+  `D` is infinite (no finite defect).
+- **B2-2 (bounded chains are thin).** `kU` lies in the archimedean ball of radius `k`, while every Følner set of `R` has archimedean extent
+  `→ ∞`; so `d*(z + kU) = 0` for every `k`. A proof must use unboundedly long, colour-dependent chains.
+- **B2-3.** `d*(D) = 0` makes `c` transient (T-A1): T-B2 is Q-tr's single-pullback case, invisible to every invariant measure, so no
+  measure argument (T-C's included) can reach it.
+
+### Would-have-searched-here log (stage 4)
+- Would have run the pinned bootstrap on a lattice `R_N` over ℚ(√59) by computer. Instead: named its number-theoretic obstruction.
+
+## Stage 5 — SAVED (T-C′, lemma statements for J28V, C0 scored)
+
+### 5.1 T-C′ — the remainder, named (no truth claim)
+Beyond T-C, Q-μ needs every translation-invariant `μ` whose spectral measure is **(R1)** carried by `⋃_S (T + A + Fin_S)` but by no single
+one (the completion over all split places is their full product, Polish but not locally compact: no Haar measure for C3–C5's Fubini), or
+**(R2)** charges characters outside every `T + A + Fin_S` (reading infinitely many split places — HD1's infinite type). **Entropy:** the
+colouring constraint is `σ̂|_U = −1/3`, a linear condition on Fourier coefficients along `U`; I see no mechanism by which it forces positive
+entropy for the `U`-action on `R̂`, so Rudolph–Johnson, Host and Einsiedler–Lindenstrauss (positive entropy) do not visibly apply, and the
+zero-entropy case is Furstenberg's measure question's analogue. Further, the spectral measure of a merely translation-invariant `μ` is not
+`U`-invariant; those theorems see only `U`-averages, which can carry mass onto Pull (§M.1) — so even a full classification of `U`-invariant
+measures would leave Q-μ open without T-B1-type isolation.
+
+### 5.2 Lemma statements for J28V
+- L-A: T-A (i)–(vi) as stated, with `τ` ranging over automorphisms of `F(i)` commuting with complex conjugation.
+- L-A1: `T-B1 ⟹ Q-tr ⟹ T-B2`.  L-A2: a FALSE for T-B1 or T-B2 exhibits a four-colouring outside Pull.
+- L-CL: for a countable abelian group acting on a compact space, a point `c` and a clopen `C`, `d*{t : t·c ∈ C} = max μ(C)` over invariant `μ` on `O(c)‾`.
+- L-C1: `σ` is carried by `T + A + Fin_S` iff `P(c(0) ≠ c(y)) → 0` as `y → 0` in `G_S = (L⊗ℝ) × ∏_{stable} O_{L_v} × ∏_{v∈S} L_v`.
+- L-C2: then `c` has a `G_S`-stationary, jointly measurable extension `c̃` with `c̃ = c` on `R` a.s.
+- L-C3: `P(c̃(x) = c̃(x + w)) = 0` for every `x ∈ G_S` and `w ∈ T_S`, the closure of `U` in `G_S`.
+- L-C4: if every stable `v ≠ 𝔓` in `H` has `λ/d > −1/3` for every non-trivial character at every level, `O_𝔓 × ∏_H O_{L_v}` is Hoffman-tight at four colours with least eigenspace the `𝔓`-minimisers.
+- L-C4b: in a doubling LCA Cayley graph with a full-support connection measure, an edge-null measurable set is a.e. equal to an independent set.
+- L-C5: (the count) a stationary a.e.-proper four-colouring of `X × Y′`, `Y′` compact tight at `1/4`, `X` of window ratio `< 1/4`, has a.e. fibre `c(x, ·)` an a.e.-proper colouring of `Y′`.
+- L-C6: an a.e.-proper measurable four-colouring of `Y′` is a.e. `γ ∘ ρ₄ ∘ π_𝔓` for a proper colouring `γ` of `P₄`.
+- L-C(A): over ℚ(√47) no stationary a.e.-proper four-colouring of `G_S` exists, for any finite set `S` of split places.
+- L-tab: `B = {11}` for ℚ(√59), `{19}` for ℚ(√83) and ℚ(√131), `{11, 19}` for ℚ(√47); 23 and 31 satisfy H* (margins `1.6·10⁻³`, `4.9·10⁻⁶`).
+- L-B2-2: `d*(z + kU) = 0` for every `z ∈ R` and `k ≥ 1`.
+
+### 5.3 C0 scored; the plan's §P
+C0: T-A TRUE (0.90) — met; T-C TRUE (0.55) — met at one mind; T-C(A) TRUE (0.50) — met at one mind; T-B1 GAP (0.94), T-B2 GAP (0.89) — met.
+§P: P-TA won; P-TC (0.40) won pending J28V; P-TCA won pending J28V; P-TB1, P-TB2: GAP; P-decide: neither; **P-real won**; P-controls won;
+P-G75″ not met; P-log won (four lines).
+
+### Proposed edits (front-page lane; not made here)
+- `plans/FS86-row88-rigidity.md` §S.2: the T-C route note should name the stationary count in place of J21-MX + C14 (§3.1 here).
+- G76's reading "the obstruction is the real place": true only outside every `T + A + Fin_S` (P-real).
+- FS-84's stub: a falsifier at ℚ(√47) has spectral measure outside every `T + A + Fin_S` (T-C(A)).
