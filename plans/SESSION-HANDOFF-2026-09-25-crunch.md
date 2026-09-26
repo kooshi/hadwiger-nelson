@@ -237,3 +237,14 @@ repo-wide on exactly those 15 ids until the front-page job applies their § B li
 J53b:** KS-1 refuted as stated, the E-form the corrected open statement; stage 6 does not take FS-100's next derivation slot — the re-aimed
 stage 4 (the E-form at ℚ(√47)) leads, stage 6 the fallback; J53's finding that EL2021 and Z. Wang 2012 had been held since J23p is a G50
 instance. **Running (2):** J52K, J53b.
+
+**Update ~01:00 — FS-100's close complete (J53b); FS-75's kernel theorem landed (J52K); J54 (FS-75's close) running.**
+- **J52K:** `χ(ℚ(√167)²) ≥ 4` is in the kernel with no finite graph, standard three axioms (`four_le_chromaticNumber_planeOver_sqrt167`,
+  `Proofs/HadwigerNelson/Instances/SqrtOneSixSeven.lean`), with a reusable three-colour criterion in winding form and a certificate consumer.
+  About 45 minutes against 4.5 hours planned. **Owner gate re-run:** build OK, axioms OK (1193 clean, 11 axiom-free, 5 purchases), vacuity
+  OK, architecture PASS, zero `sorry`; the headline read against the claim. Held for Kooshi (defaults hold): the consumer on the other two
+  V2-format certificates (default: nothing runs — neither is new mathematics); FS-75's next target, the family theorem (row 82), is a
+  milestone of its own and his choice.
+- **J53b:** FS-100's close complete (inventory 68/68). Deferred to Kooshi's: tagging ℚ(√143), ℚ(√311), ℚ(√335) with row 117 on
+  the Local–Global Map (his first look at the map comes first).
+- **Next:** J55, one front-page job for both closes (brief `data/crunch-2026-09-25/briefs/J55-front-page-FS100.md`), after J54.
