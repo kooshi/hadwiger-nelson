@@ -164,7 +164,7 @@ there is a non-torsion `u ∈ U` with `H(u) = 1` while `h_m(u) = Σ_{v∈S∪∞
 |---|---|
 | none: the route was derived; the only computation is the exact multiplier count at fixed checkpoints (a complete enumeration of a finite set whose extent the derivation fixed) | — |
 
-## Stage 3 — SAVED (the write-up; 11:30 UTC)
+## Stage 3 — SAVED (the write-up; 11:14 UTC)
 
 ### 3.1 Verdicts, per claim
 
