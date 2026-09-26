@@ -126,7 +126,7 @@ exit 0, AUDIT PASSED.
 ## Stage 5 — SAVED (`CLAUDE.md`: X29C's 4.2 lines; two reviewed ALLOW lines)
 
 Applied by script (the scratchpad's `claude5.py`; matching whitespace-insensitive across the file's line wraps, every match asserted unique).
-**Bytes: 291,645 → 295,586** (no budget during the crunch; nothing compressed). Applied: the Last-updated line (wave 3 leads; the waves-1–2
+**Bytes: 291,645 → 295,503** (corrected at stage 6 from a mis-typed 295,586; `wc -c` after the T-J39-5 fix) (no budget during the crunch; nothing compressed). Applied: the Last-updated line (wave 3 leads; the waves-1–2
 sentence's "[hand], prior-art gate pending (X24R)" → "[hand]; prior-art gate negative (X24R)"); § The mission (2) (three replacements); items 10,
 18, 22, 24 (TR-ROT "under attack at the close: X27"), 29; the prior-art position's "Not ours" (`[LacaWarren2018]`; Croft's `m₁(ℝ²) ≥ 0.2293`
 with `[Croft1967]`, its row written at stage 4); Open milestones (wave 3 after FS-100 stage 5); the ranked table — FS-59 (rank 1), FS-100 (rank 3),
@@ -154,3 +154,27 @@ held elsewhere); X24R's gate description in rows 121 and 123 (both X29C drafts);
 drafts applied as written; none compressed (the brief: compress nothing).
 
 **Would have searched here (stage 5):** none.
+
+## Stage 6 — SAVED (`plans/FRONTIER-STUBS.md`; the four files of launch note 2)
+
+Applied by scripts (the scratchpad's `fs6.py`, `stubs6.py`; every replacement asserted unique).
+- **`plans/FRONTIER-STUBS.md`** (X29C 4.6, following the stub files): Open milestones — "FS-100 stage 5, wave 3 — CLOSED" (rows 123–125, FS-101
+  minted, Paid (theorem), [hand]; prior-art gate negative; TR-ROT under attack at the close, X27) ahead of stage 5's sentence, whose "[hand],
+  prior-art gate pending (X24R)" becomes "[hand]; prior-art gate negative (X24R)"; a ranked-stubs note for this close (FS-101 at rank 3′, no
+  other rank moved); rank 1 FS-59 (≥ 5 by two routes, row 123; six contains `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`, row 125, "which makes J39's T-J39-5
+  exact" — as in `CLAUDE.md`); rank 3 FS-100 (the wave-3 sentence and the drafted "Left", TR-ROT "under attack at the close: X27"; its status
+  cell gains "wave 3 closed"); **rank 3′ FS-101 new** (the draft's text; cost "priced in the stub", status "minted 2026-09-26", solver "none (a
+  kernel port)", read from the stub file's header); rank 8 FS-98 (TR-ROT beside T-B1); rank 16 FS-48; rank 20 FS-72; the closed list gains
+  the wave-3 line above stage 5's, whose prior-art clause is updated the same way. FS-84 (rank 4): unchanged, as drafted.
+- **`plans/STUB-five-colours-47.md`**: X29C 4.7's banner, verbatim, under the title ("re-aimed, not closed": its last sentences say so).
+- **`plans/STUB-ultrametric-continuation.md`**: one paragraph after the J25 re-aim, TR-ROT beside T-B1 (4.6's text), "TR-ROT under attack; their
+  verdict is a follow-on fold".
+- **`plans/R88-derivation.md`** R88-TCA's grade clause only: after "over the class: J28D one mind" — "; a second derivation over totally real
+  fields by X25B (blind to the proofs), and with a complex place the step by restriction to the compact real form (FS100-CX, row 123)".
+- **`plans/CRUNCH-2026-09-26-x2x3-queue.md` §7**, list X21's B-3: "row 71 (five refused at 43 at level one)" → "row 69 (corrected at the close;
+  the list first read "row 71") (five refused at 43 at level one)" — the claim list was registered before any derivation, so the correction is
+  marked, not silent.
+
+**Gates:** `fs71_ledger_b_check.py --strict` exit 0, PASS; `bib_audit.py` exit 0; `claude_md_fact_audit.py --base 7eb4398c` exit 0, AUDIT PASSED.
+
+**Would have searched here (stage 6):** none.

@@ -10,6 +10,8 @@ T-J38-2 (given MR(F), row 88 ⟺ T-B1; blind-checked TRUE by J48, BC-6). J38's s
 demoted: T-B1 ⟹ Q-tr ⟹ T-B2. MR and DP are homed in FS-100, which absorbed FS-97. The determinacy ladder's two proved rungs: R88-B2-1
 (co-finite) and row 91's H (half-space).
 
+**TR-ROT beside T-B1 (FS-100 stage 5, wave 3, 2026-09-26; `LEDGER.md` row 124):** 'no translation-invariant non-pullback colouring measure has every `U`-Følner average converge onto the pullbacks' (X22V §3.3) — T-B1 ⟹ TR-ROT; X27D/X27V attacked it at the close (TR-ROT under attack; their verdict is a follow-on fold).
+
 ## The mission, in plain language
 
 Row 88 asks whether every four-colouring of the plane over ℚ(√59) (and ℚ(√83), ℚ(√131)) is a "pullback" read off the field's tight 2-adic place.
