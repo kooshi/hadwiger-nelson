@@ -329,12 +329,15 @@ P0–P8 (`plans/FS100-X05V-verification.md` §2.1); J48-N4cor (quoted in list X2
 
 | id | model | kind | M | decides | inputs | output | deps | h | k | stop rule | spawns | pri | status |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| X21D | Opus | derivation | FS-100 s5 (w3) | list X21: ℚ(√167) ≥ 5, the family's five, six at ℚ(√167) as a CP question | rows 111, 117; the stub's §2; waves 1–2 records by statement | `plans/FS100-X21D-derivation.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
-| X21V | Opus | blind verifier | FS-100 s5 (w3) | list X21, blind (A-3 = K0's blind second mind) | same, fenced from X21D | `plans/FS100-X21V-verification.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X21D | Opus | derivation | FS-100 s5 (w3) | list X21: ℚ(√167) ≥ 5, the family's five, six at ℚ(√167) as a CP question | rows 111, 117; the stub's §2; waves 1–2 records by statement | `plans/FS100-X21D-derivation.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | run (06:22) |
+| X21V | Opus | blind verifier | FS-100 s5 (w3) | list X21, blind (A-3 = K0's blind second mind) | same, fenced from X21D | `plans/FS100-X21V-verification.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | run (06:22) |
 | X24R | Opus | reader | FS-100 s5 (w3) | the prior-art gate for MR and for the value `χ(ℚ(√47)²) = 5`; EL2021 §2; Sataev 1975; Huang 2017 | `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md` §1.7, §3 | `plans/FS100-X24R-prior-art.md` | — | 0.75 | 200 | 07:30 | none | P1 | ready |
 | X22D | Opus | derivation | FS-100 s5 (w3) | list X22: the type-(B) fields given MR (Q-μ; row 88 as transience alone; C-4 capped at 20 minutes), and SEL-k | T-J38-2/3, rows 88, 111, 112 | `plans/FS100-X22D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
-| X22V | Opus | blind verifier | FS-100 s5 (w3) | list X22, blind | same, fenced | `plans/FS100-X22V-verification.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X22V | Opus | blind verifier | FS-100 s5 (w3) | list X22, blind | same, fenced | `plans/FS100-X22V-verification.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P2 | ready |
 | X23D | Opus | derivation | FS-100 s5 (w3) | list X23: SP-Cor and the class for every real number field; ℚ(√3,√5) | SP-Cor, A⁺, X05V's P0–P8, row 117, J48-N4cor | `plans/FS100-X23D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
 | X23V | Opus | blind verifier | FS-100 s5 (w3) | list X23, blind | same, fenced | `plans/FS100-X23V-verification.md` | a free slot | 0.75 | 250 | 07:30 | none | P1 | ready |
 | X29C | Opus | close-math | FS-100 s5 (w3) | wave 3's close: derivation entries, §R-close (wave 3), drafts | wave-3 reports | `plans/FS100-three-field-lemma.md` | 07:30 | 0.3 | 150 | 07:50 | none | P2 | wait |
 | X30F | Opus | front-page | FS-100 s5 (w3) | applies X29C's drafts | X29C | the four front files | X29C | 0.25 | 150 | 08:05 | none | P2 | wait |
+
+**Launch order when slots bind (06:25, with the advisor's ranking):** X24R, X23D, X23V, X22D, then X22V. X23 carries the largest gain: SP-Cor
+and the class for every field would give `χ(F²) ≥ min(L(F), 5)`. X22's real content is C-1; its C-4 is expected to be a GAP.

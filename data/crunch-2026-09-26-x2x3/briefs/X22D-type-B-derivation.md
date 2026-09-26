@@ -48,3 +48,11 @@ Copy §7's first paragraph and **list X22** (C-0 to C-4, SEL-k, with the quoted 
   "X22D idle; report sent to the owner by SendMessage".
 
 Thank you.
+
+## Addendum (06:24, the advisor's sketch for C-1; one mind — write it out or refute it; X22V does not have it)
+
+Poros, relayed verbatim: "Every finite U-invariant measure on E sits on T + A (R-U, X03D-Z, X12B-Z). So given MR, σ = a·m + (a part on T + A).
+By FL-K, the set-valued E-factor colouring is proper. Hoffman-tightness at the dyadic place (χ_f = 4 exactly, balanced) forces those sets to
+be singletons almost surely. That gives a = 0, so the colouring is measurable over the E-factor, and row 112's stationary count makes it a
+pullback. The step to watch: passing from 'the E-factor colouring is a pullback' to 'the colouring itself is a pullback' requires a = 0, and
+that is exactly where tightness enters."

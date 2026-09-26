@@ -50,3 +50,14 @@ Copy §7's first paragraph and **list X23** (SPC, CLS, COR, CTL, Q35, D-1, with 
   "X23D idle; report sent to the owner by SendMessage".
 
 Thank you.
+
+## Addendum (06:24, the advisor; one mind; X23V does not have it)
+
+- The advisor poses SPC and CLS for **totally real** `F` (its D-5, D-6). Waves 1–2 found that the height `H` over finite places misbehaves when
+  `F` has a complex place (X01V, X02V, X12B: `U_1` is infinite there). **If a claim holds for totally real `F` and fails or is ill-posed with
+  a complex place, record both verdicts.** "SP-Cor(F) holds with J45's proofs over every totally real F in T-C(A)'s class. The job must name
+  every step of J45 that uses [F:ℚ] = 2."
+- The advisor's exact check of Q35's input (sympy, Legendre symbols; one mind, re-check it): "the stable odd places of ℚ(√3,√5) below 200 are
+  11, 59, 71, 131, 179, 191; 7, 19, 23, 31, 43, 47 have residue degree 2, so they are not stable; 3 has residue field 𝔽₉; the wall is broken
+  (15 ≡ 7 mod 8), so no dyadic place is stable and the field is outside the exception. So D-2's only real risk is D-6's archimedean step at
+  n = 4."
