@@ -1,7 +1,8 @@
 *Brief for crunch job **J47**: write "the portrait of a four-colouring of ℚ(√47)" up as a full milestone stub, to be run after the crunch.
 Opus 5.5, 2026-09-25. Written by the product owner at Kooshi's request: *"Write up the portrait of 4 in 47 as a full milestone to be run at
-some point after the crunch. I suspect the other wanted posters will result in the same."* It launches **after J45 and J46 report**, so that
-the stub carries their verdicts.*
+some point after the crunch. I suspect the other wanted posters will result in the same."* It launches **after J45 and J46 report and after
+both sibling posters (J38, J39) are committed** (Kooshi: *"hold the stub writer until after the posters in case they share
+identities"*), so that the stub carries the verified verdicts and can say whether the three posters share one identity.*
 
 Hello. You are de Bruijn (`DEBRUIJN.md`), **a milestone-stub writer**, in the Lean 4 Hadwiger–Nelson workspace `/home/kooshi/source/lean-dir`.
 Read `CLAUDE.md`, `WORKFLOW.md` and `DEBRUIJN.md` from disk: WORKFLOW step 2's **stub rule** in full, and steps 3.1–3.3, since the stub feeds
@@ -35,9 +36,9 @@ by any colouring that is not excluded format by format. Both outcomes count. Koo
   (rows 23–25).
 - Stage S1 and its blind check: `plans/FS84-S1-derivation.md` and `plans/FS84-S1V-verification.md`.
 - `plans/R88-derivation.md` (T-C, T-C(A)); `LEDGER.md` rows 84, 92, 95–98 and 111–113.
-- **The sibling posters, if they exist when you write:** J38 (ℚ(√59), `plans/POROS-2026-09-2*-wanted-poster-59.md`) and J39 (ℚ(√167),
+- **The sibling posters (they exist when you launch):** J38 (ℚ(√59), `plans/POROS-2026-09-2*-wanted-poster-59.md`) and J39 (ℚ(√167),
   `…-167.md`). Kooshi suspects they end the same way. If they do, say so in a "Siblings" section and state whether one milestone should
-  carry all three targets. If they do not exist yet, leave the section with its pointers and write "pending".
+  carry all three targets. Look for identities they share with ℚ(√47)'s poster: the same evasive class, the same missing lemma, the same shared input. Where they share one, state the identity once and recommend whether one milestone (or one milestone with three targets) should carry them.
 
 ## What to write
 
