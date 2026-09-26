@@ -1,0 +1,11 @@
+field      stable places (p<=100)                                  bad    in-class  L
+Q(sqrt47  ) [(11, 'split'), (19, 'split'), (23, 'split'), (31, 'split'), ( []     True      5  [control]
+Q(sqrt143 ) [(11, 'ramified'), (31, 'split'), (43, 'split'), (47, 'split') []     True      5  [target]
+Q(sqrt311 ) [(11, 'split'), (19, 'split'), (23, 'split'), (31, 'split'), ( []     True      5  [target]
+Q(sqrt335 ) [(11, 'split'), (23, 'split'), (31, 'split'), (47, 'split'), ( []     True      5  [target]
+Q(sqrt167 ) [(23, 'split'), (43, 'split'), (59, 'split'), (67, 'split'), ( []     True      >=6  [side]
+Q(sqrt59  ) [(11, 'split'), (23, 'split'), (31, 'split'), (43, 'split'), ( []     True      5  [control]
+  CONTROL FAILED at d=59: expected False
+Q(sqrt11  ) [(7, 'split'), (11, 'ramified'), (19, 'split'), (43, 'split'), [(7, 'split')] False     4  [control]
+congruence form d = 47,143,167 (mod 168) <=> in class: mismatches over squarefree d<=5000: 86 first [59, 83, 131, 227, 251]
+PLANT FIRED
