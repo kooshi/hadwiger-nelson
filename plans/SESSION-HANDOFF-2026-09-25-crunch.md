@@ -148,7 +148,9 @@ arithmetic; m₁ ≤ 0.246989 is [cert + hand]) done; T-J39-4 re-graded onto the
 **Kooshi, ~03:00:** *"I'm going to compact, then we have time and space for probably 2 more full milestones. Start a Poros agent to decide
 what those should be."*
 
-**Running (2):**
+**Update ~03:15:** J43 DONE — *The Local–Global Map*, private artifact https://claude.ai/artifact/EpJZ2qMLnqEJtuKEXNEKHu (`visualizations/local-global-map/`; 1593 facts re-read, 0 failed; no visual review yet — Kooshi's first look is the first render check; its three questions: why ℚ(√47) is the cheapest test and what a counterexample must be; where the real place matters and why it stops at five; where knowledge is thin). Owner ruling on its grade-fold: the hand part governs "hand + tools exact". Correction owed: eight LEDGER table lines with an unescaped `|` in a code span (rows 75, 76, 78, 80, 85, 86; § B FS66-L1, M3-J22-T8). **Only J50 is running.**
+
+**Running (2) at ~03:00:**
 - **J43** — the bookend visualization (brief `data/crunch-2026-09-25/briefs/J43-unified-map-visualization.md`); reports an artifact URL +
   three example questions. On its report: verify commits, relay the URL and questions to Kooshi.
 - **J50** — Poros, the next two full milestones (brief `data/crunch-2026-09-25/briefs/J50-poros-next-two-milestones.md`; record
