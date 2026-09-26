@@ -244,3 +244,48 @@ triangle-free; with 3.2 (ii) and `ρ = m₁`, for every `ε` some such graph has
 ### 3.6 Would-have-searched-here log (stage 3)
 
 - None. (The place list is a complete exact enumeration below a bound a derivation fixed, and Weil above it — not a search.)
+
+## Stage 4 — SAVED (the fence opened: `plans/FS103-F-fractional-shadow.md` read, §§ theorems, 2.1–2.6, 3.0–3.6)
+
+**Agreement.** Every one of the six claims has the same verdict from both minds (FS103-F; this job, blind until `f457e527`): FRAC, TJ, ROUND, DV,
+TF, 47 TRUE, DV/TF/47 given MR at the named field. The claims file's definitions and statements match F §2.3 and F's table verbatim (the owner's
+"grade note trimmed" is disclosed; the rows FS103-F-SI, -EXT, -PL were not copied — a selection, not a paraphrase).
+
+**Divergences of route** (none changes a verdict):
+
+| step | FS103-F | this job | note |
+|---|---|---|---|
+| the count on `G_∅` | X25B-L1 (profinite reduction) + X25B-PZ (stationary Zhang) + X25B-T | C14.1–C14.3 (FS-86, two derivations) on a finite head, the tail by measurable Hoffman | same content; two held derivations of Zhang's count |
+| `T_∅` = full product | X25B-W | rationality of the norm-one torus of `F(i)/F` ⟹ weak approximation | independent |
+| complex places | ratio `≤ m₁` (FS100-CX) | ratio 0 (X26B-L3) | either is `≤ ρ`; totally real instances untouched |
+| `α₁ = α_inv` | via `ρ ≤ α₁ ≤ α_inv ≤ ρ` (needs MR) | unconditional both ways (B-AMEN) | see divergence of truth (1) |
+| TJ's `ϑ` | a random threshold, uniform on `[λ*/(1+λ*), δ)` | the fixed `λ*/(1+λ*)` | consistent; the claims file drops the definition |
+| the place list | Legendre symbols, one route; tail by the next prime | PARI `idealprimedec` over `F` and `L` against the criterion, two routes; ramified place's inertness checked | same list (103 first; max `0.16330`) |
+| `m₁` and the object | reverse Fatou on a Doob version, then `[AmbrusEtAl2023]` Thm 1 on its density points | window form (C14.2 (a)), density points | same |
+
+**Divergences of truth** (slips in the F record; no claim affected):
+1. **F §3.4 item 2: "The reverse (`α₁(F²) ≥ α_inv`) is false in general and never used." False.** For every real field, an invariant random
+   independent set of density `δ` meets any finite `G ⊂ F²` in `δ|G|` points on average (copies on each coset of `R`; edges stay inside cosets),
+   so `α(G) ≥ δ|G|` and `α₁(F²) ≥ α_inv(F²)`, unconditionally (B-AMEN). FRAC's own equality `α₁ = α_inv` contains it. What is false in general is
+   `α₁(ℝ²) ≥ α_inv(F²)` (at K: `1/4 > α₁(ℝ²)`, by `[DuczVarga2026]`); the sentence probably meant that. **Correction owed** (one line).
+2. **F §3.2, DV proof step 4:** "translates of a periodic measurable 1-avoiding set of density `m` form a fractional colouring of weight `1/m`".
+   MRVZ's `χ_f(ℝ²)` takes finitely many (equivalently countably many) independent sets covering **every** point; a continuum of translates of a
+   merely measurable set is not such a colouring, and a finite family need not cover every point uniformly. **A small GAP, closed** by B-CHIF
+   (open regularisation `A_r`, then an inner union of squares and a finite grid of translates), so `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` holds as needed and the
+   claim stands. **Correction owed:** cite the regularisation in step 4.
+3. The claims file's FS103-F-TJ uses `ϑ` without defining it (F §2.4 defines it inside the proof). **Correction owed** to the statement.
+
+**What F has that I lack:** the ℚ(√2351) instance; the §3.3 table of published readings contradicted given MR (I found the MRVZ equality question
+independently, 3.2 (vi), not the `[AmbrusEtAl2023]` §4 Remark); the G24/G60/G80 proposals; a prior-art gate (five queries, negative). **What I have
+that F lacks:** B-AMEN unconditional; B-CHIF (closes item 2); the two-route place list with the ramified place's `L/F`-inertness checked by
+PARI; the exact level-one Hoffman ratios at 11, 19, 23, 43, 47 (23's `0.249077` is itself below 31's, so ℚ(√47)'s bound needs no certificate at
+23); the arithmetic-free control run to the step where it stops (D4).
+
+**Grade proposal for the close.** FRAC, DV, TF, 47: [hand], **two minds** (FS103-F; FS103-B blind to F's proofs and route until `f457e527`),
+over held lemmas (J45-N1/N2, J45-RU, J45-SP-oi, C14.1–C14.3 / X25B-PZ, R88-TC-ext's argument), conditional on MR at the named field (row 120's
+grade, EL2021 Thm 1.2 by statement). **The whole weight is MR's**: nothing in either derivation adds evidence for MR, and FS103-F §3.5's
+killing test (any proof of `α₁(ℝ²) > m₁(ℝ²)` refutes MR at ℚ(√635087)) is right — it is the unconditional clause read backwards.
+
+### Would-have-searched-here log (stage 4)
+
+- None.
