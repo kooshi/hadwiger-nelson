@@ -1,0 +1,369 @@
+c87e2dd0	2026-09-26	282481	283274	1	132	E2: stage 3 (restore G21's two sub-rules)
+aeef4e58	2026-09-26	281823	282481	1	95	E1: stage 4 and report
+f24b4f4e	2026-09-26	282106	281823	56	5	E1: stage 3c
+dcf26687	2026-09-26	291174	282106	1331	43	E1: stage 3b
+28caf446	2026-09-26	299491	291174	1328	18	E1: stage 3a
+6a7c62cf	2026-09-26	299462	299491	6	3	CLAUDE.md: the fallback write-up is FS-102
+cfff4c58	2026-09-26	298945	299462	4	79	C3b: stage 4
+56bf4443	2026-09-26	298719	298945	0	39	C3a: stage 4b
+14124f94	2026-09-26	297506	298719	57	282	C3a: stage 3
+90235955	2026-09-26	296855	297506	85	189	C3a: stage 2
+aac652b4	2026-09-26	296094	296855	33	187	C3a: stage 1
+c4ae72a5	2026-09-26	295503	296094	53	142	X31C: stage 3
+484a4e2c	2026-09-26	291645	295503	103	716	X30F: stage 5
+6e6e6081	2026-09-26	287240	291645	128	781	X10F: stage 5
+3418e6d0	2026-09-26	287087	287240	0	21	CLAUDE.md header: temporary budget
+a6ff3684	2026-09-26	283904	287087	33	513	J55: stage 3
+68c5bc9c	2026-09-25	283826	283904	5	18	CLAUDE.md header: the budget's compression pass has run (J05: 283,826 bytes, no loss)
+17a8602e	2026-09-25	284055	283826	56	18	J05: stage 2 batch 7
+b6d96724	2026-09-25	286556	284055	400	18	J05: stage 2 batch 6
+13b33932	2026-09-25	287833	286556	271	76	J05: stage 2 batch 5
+c62359f9	2026-09-25	288586	287833	160	23	J05: stage 2 batch 4
+2ed5750f	2026-09-25	290478	288586	383	52	J05: stage 2 batch 3
+7b99ec62	2026-09-25	291789	290478	245	76	J05: stage 2 batch 2
+179c6c5b	2026-09-25	296413	291789	819	69	J05: stage 2 batch 1
+25bff6a0	2026-09-25	296569	296413	39	12	CLAUDE.md size budget back to 300,000 at the crunch's end (Kooshi)
+eefcc02a	2026-09-25	295923	296569	57	167	J25: stage 3
+0a763a70	2026-09-25	295280	295923	8	111	J47: stage 3
+6460c11e	2026-09-25	294994	295280	1	49	CLAUDE.md size budget: 325,000 until the 2026-09-25 crunch ends (Kooshi)
+15f5f37e	2026-09-25	286449	294994	81	1361	J44: stage 3
+0f4cf93a	2026-09-25	275608	286449	402	2083	J24: stage 3 — CLAUDE.md
+543b51d5	2026-09-25	275129	275608	3	61	J24a: stage 2 (open-milestone state and crunch pointers in CLAUDE.md and FRONTIER-STUBS.md)
+1263d964	2026-09-25	274995	275129	1	23	CLAUDE.md: size budget raised from 275,000 to 300,000 bytes (Kooshi, 2026-09-25, with the file at 274,995)
+ac62a660	2026-09-25	274898	274995	14	29	FS-89 close (item 53): CLAUDE.md's FS-67 row no longer calls the equal-ratio case wholly open
+c4c54e0f	2026-09-25	274896	274898	1	1	FS-89 close: PA-T4/T5's input regraded from the unread [Zhu2011] to [Zhang2012] (every residue target is vertex-transitive; the owner's check of [Zhu2
+2ac6a338	2026-09-25	274989	274896	62	43	FS-89 close §3/§7: CLAUDE.md — G55's four-colour obstruction named at the descent, not the product (the Tardif reading §5.2; its Do and killing test u
+c290bfac	2026-09-25	274960	274989	8	14	FS-89 close §6: the Berend reading's verdicts applied (rows 95 and 97's prior art, CLAUDE.md item 25 and the prior-art position, the derivation file's
+3dcb8de8	2026-09-25	274970	274960	445	488	FS-89 close §4: CLAUDE.md current state — Frontier (item 25, item 24 and the target paragraph re-aimed, prior-art position, FS-89 closed, paths forwar
+052707ac	2026-09-25	274975	274970	24	16	FS-89 chosen (Kooshi, 2026-09-25), re-posed by the next-step advisor as a closed-set question over ℚ(i): CLAUDE.md's next-milestone sentence (byte-neu
+aa977ec6	2026-09-25	274956	274975	4	7	FS-86 close §6: stubs — FS-89 (the missing theorem) and FS-90 (two hours of sanctioned search) minted, FRONTIER-STUBS re-ranked, FS-86 closed; FS86-CL
+de8bb61c	2026-09-25	274607	274956	1021	997	FS-86 close §4: CLAUDE.md current state — Frontier, paths forward, grokkings (G76 minted), compressed to budget
+46f42ca1	2026-09-24	274460	274607	2	14	FS-86 chosen (Kooshi, 2026-09-25): four-colour rigidity over ℚ(√59) and ℚ(√83). CLAUDE.md's next-milestone sentence, FRONTIER-STUBS's open-milestones 
+df202277	2026-09-24	273416	274460	967	1151	FS-85 close (6/n), CLAUDE.md: the Frontier (last updated; item 3 and the theory paragraph — a slack plane can force by pulling back from a tight quoti
+202bc890	2026-09-24	272541	273416	39	167	FS-85 minted (Kooshi's choice on the algebra-week advisor's rank 1): can four-colour rigidity exist without triangles? — step 1 absorbs FS-74 (why de 
+9ac6a758	2026-09-24	262342	272541	498	2223	FS-81 close, CLAUDE.md: the Frontier (last updated; the target paragraph's exposed predictions — four at every d ≡ 11 mod 12 met, ℚ(√47) priced not la
+912f9a67	2026-09-24	260743	262342	9	274	The resource rule (Kooshi, 2026-09-24): threads are not rationed, RAM is — scripts/slot.py enforces a ~100 GB global maximum by a shared reservation l
+c65c78da	2026-09-24	259984	260743	54	180	FS-81 opening fixes (close inventory items 2–6): the conjecture's exposed predictions restated — exactly five at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), ℚ(
+2e8e3bc2	2026-09-24	258962	259984	17	163	FS-81 minted at rank 1 (Kooshi's choice on a fresh Poros's advice): four colours over real quadratic fields — T4 by the exact Θ₃ procedure on the cens
+d96af41d	2026-09-24	258355	258962	11	123	FS-79 close, P3b entered from its record: row 81 (the survivors still stand after a calibrated exact Θ₄ finder and quotients to N = 15 — calibrated nu
+18ce5980	2026-09-24	247561	258355	154	1818	FS-79 close, CLAUDE.md: the Frontier (last updated; items 20 scoped, 21–22 new; the prior-art position; rows 1–81; Paths forward re-ranked — FS-79 clo
+af9d9a3a	2026-09-23	243978	247561	11	572	G72 minted (method): pose a question that cannot be answered without an invariant every solution carries (Kooshi's wording); WORKFLOW 3.3 the invarian
+fffcf47f	2026-09-23	243978	243978	1	1	FS-73 close: the strengthening stated as proved (the lattice statement implies the ring's 8-periodicity, coset by coset) and the equal counts as sugge
+47752ea9	2026-09-23	243879	243978	21	26	FS-73 close, section 9: the fact audit and the size check -- --base de5af0f8 PASSES, --base a640efec fails only on the gate-report sentence (1004 -> 1
+ad0a46a0	2026-09-23	242388	243879	233	425	FS-73 close, stubs (inventory section 8): FS-76 four colours -- inheritance, certificates, decidability (one question); FS-77 KR6; FS-78 the five-colo
+5b9a1575	2026-09-23	241228	242388	5	188	FS-73 close, prior art (inventory section 7): row 78's headline count is Hubai's (Polymath16, 9 May 2018: the Moser ring has 9,120 four-colourings, 38
+d394f099	2026-09-23	240730	241228	0	85	FS-73 close, process (inventory section 6): plans/PROTOCOL-competitor-and-advisor.md -- working files and the advisor's record in scratch until hand-b
+e0ce27a5	2026-09-23	240161	240730	0	100	FS-73 close, the sweeps and the plan fixes (inventory sections 3 and 5): plans/FS73-rigidity-dichotomy.md §R-close -- the §G re-read (paid: G68, G21, 
+de5af0f8	2026-09-23	240166	240161	11	9	FS-73 close: four retold runs rephrased (fact audit --dupes back to 15 runs); --base a640efec fails only on the intended count updates (the gate count
+ebe1c597	2026-09-23	240166	240166	5	5	FS-73 close, section 4: gate counts (axioms 1034 clean; vacuity declarations 6795, refutations 278, sites 275, generic 253) in CLAUDE.md § The gate / 
+7c459f86	2026-09-23	233250	240166	19	1128	FS-73 close, section 3 and R9: G71 minted (three colours are linear, four are not); G21, G51, G54, G55, G60, G61, G66, G68, G69, G70 corrected or exte
+2cda3170	2026-09-23	230099	233250	13	499	FS-73 close, sections 1-2: LEDGER.md rows 78 (de Grey's lattice: F = P = 8Lambda at four colours, the census, the table, rank 6, the Kempe kernel laye
+776b05dd	2026-09-23	229944	230099	11	41	Staffing: up to three concurrent agents (de Bruijn, Coxeter, Poros), all Opus 5.5 (Kooshi, 2026-09-23)
+b17acb72	2026-09-22	229825	229944	1	20	Restore the ~500k-token replace-don't-reuse rule for every model (Kooshi, 2026-09-22)
+d1f2aee7	2026-09-22	229564	229825	2	44	Model guidance: Opus 5.5 for every role until further notice (Kooshi, 2026-09-22)
+69300515	2026-09-22	229325	229564	0	31	G51 and the FS-73 stub point at plans/PROTOCOL-competitor-and-advisor.md
+30c243f5	2026-09-22	226265	229325	21	473	G70 minted (Kooshi, 2026-09-22): sqrt3-clean is residue — Coxeter's theorem that a four-colouring of the Moser lattice with no monochromatic sqrt3-pai
+a640efec	2026-09-22	223865	226265	57	448	FS-71 CLOSED (2026-09-22): the theorem audit — 254 theorems every milestone M17–FS-66 proved outside the kernel, found in 5.6 MB of plans and records 
+29bc38d3	2026-09-22	223787	223865	9	17	FS-71 batch 6b accepted (FS-54, FS-56: 18 theorems, 0 gaps): the odd-degree two-colouring attributed to Moorhouse 2010 §7.1 in G56 and row 70 (a blind
+3fade945	2026-09-22	223698	223787	2	15	FS-71 batch 6a accepted (FS-50, FS-53: 10 theorems, 1 prior art, 0 gaps): G58's citation corrected — the yearless key [GarciaMarcoKnauer] pointed at C
+a32fc65d	2026-09-22	223659	223698	2	4	FS-71 batch 5b accepted (FS-38: 7 theorems indexed in place, D2-A's prior art split recorded): FS38-L1 re-derived by the owner and closes; G54 re-grad
+012bb48e	2026-09-22	223496	223659	2	29	FS-71 batch 4c accepted (M63 phase H2: 11 theorems, 1 prior art — the shell count is Baake–Grimm 2003's, 0 gaps): M63H2-T4 (wall-breaking iff n even) 
+76786c48	2026-09-22	223388	223496	2	15	FS-71 batch 4b accepted (M63 phases C–G: 18 theorems, 0 prior art, 0 gaps): M63G-T4, the sigma-criterion, re-derived by the owner and closes; G52 re-g
+26d6b837	2026-09-22	223263	223388	6	25	FS-71 batch 1 accepted (M17–M36: 5 theorems filed, 0 prior art, 0 gaps): M18-T1 re-derived by the owner — mu(Q(sqrt3,sqrt5,sqrt7,sqrt11)(i)) = <zeta_1
+d22617fc	2026-09-22	222609	223263	73	166	FS-71 opened: the theorem audit's subplan (plans/FS71-theorem-audit.md) — §G walks every grokking and every ledger row as the seed inventory of theore
+b5b31724	2026-09-22	220843	222609	58	330	[Fischer1994] read first-hand and verified: chi(Q(sqrt3,sqrt11)^2) = 4 is his (December 1994), the publication trigger has not fired
+5c527b13	2026-09-22	218441	220843	76	475	FS-70 CLOSED (2026-09-22): five colours over Q(sqrt3,sqrt5) not landed — a typed null, instrument, on one lattice. LEDGER.md row 76: every lattice bui
+cd304114	2026-09-22	217672	218441	20	153	FS-70 close, part 1: G65 and G69 carry phase 1f's quantifiers (the core ceiling is shell-indexed; density over the rank-8 lattice starts at 10^7 point
+6b5d12c4	2026-09-22	213937	217672	1	626	G69 minted: rigidity is arithmetic, decided on the quotient — periodic colourings are residue colourings prime by prime (de Grey's 54 vectors are exac
+9f2ccd64	2026-09-22	211073	213937	6	453	Theorems are tracked (Kooshi, 2026-09-22): plans/FS70-derivation.md — the milestone's nine hand/derived/tools theorems T1–T9 with grade, proof address
+b1fc5bbc	2026-09-22	272208	211073	8852	41	The novel-results ledger extracted to LEDGER.md (Kooshi, 2026-09-22): what is looked up by address lives in a file, what is reasoned from stays in con
+1f43ba40	2026-09-22	272577	272208	87	11	CLAUDE.md: G56's two retellings of row 69 (the five refusals with their certificate values; the three planes' search nulls) replaced by pointers — one
+e21b91fc	2026-09-22	272008	272577	18	120	G67 refined from the re-form pass's own report: one marker (Do / Killing test) so the form can be scanned for; the Do opens with its trigger, never a 
+a6b5027b	2026-09-22	269765	272008	15	413	G67 pass, batch 7 (G59–G67, G51; G65 already in form): the fractional wall as the aim at a window member; the χ_f cap read first; supply of unit vecto
+a1284595	2026-09-22	267486	269765	16	425	G67 pass, batch 6 (G52–G58; G53 and G55 already largely in form): the live radius sums before any base and the off-diagonal share; L on the base befor
+d44715e5	2026-09-22	265666	267486	44	343	G67 pass, batch 5 (G41–G50; G46 and G49 already in form): the additive family first and read one-sidedly; the gauge measured with and without cheats; 
+363cf040	2026-09-22	262261	265666	1	579	G67 pass, batch 4 (G31–G40): construct, never extract; the {1, d} dial before any pair sweep; counterexample-guided growth; in-field kills are interme
+387caabe	2026-09-22	260393	262261	3	314	G67 pass, batch 3 (G22–G29; G21 and G30 already in form): no six among polygonal colourings, no colour from refining, integrality not a low bound, pri
+f896752e	2026-09-22	257687	260393	8	459	G67 pass, batch 2 (G11–G20): the Moser-free route, cross-edge density on the conic, the k-set question when a pair sweep reads zero, a matching predic
+3009a9b7	2026-09-22	254338	257687	0	574	G67 pass, batch 1 (G1–G10): each entry ends with what it makes you do and what would kill it — the field wall as a free null before any solver, rings 
+9e62bed0	2026-09-22	252325	254338	4	364	G67 -- a grokking is grokked by its form, and the reframe is re-grokking: the entries that fired on FS-70 were laws and dials with an imperative and a
+b7a6c34d	2026-09-22	252309	252325	6	9	WORKFLOW 2.0 (Kooshi, 2026-09-22): the reframing philosophy stated at the head -- three tiers of knowledge (results, understanding, method), the theor
+92d08390	2026-09-22	252223	252309	5	19	WORKFLOW step 3 is the reframe: the knowledge audit (3g) then the prior-art gate (3a), whose query the audit's recognition supplies, then the subplan 
+6ff8560a	2026-09-22	251559	252223	0	109	WORKFLOW step 3g, the grokking audit (Kooshi, 2026-09-22): every subplan opens by walking every grokking, ledger-row mechanism and method rule against
+94a88669	2026-09-21	251121	251559	5	76	FS-70 plan ACCEPTED by the owner: the additive screen re-derived independently (1,296 / 432 on the 2-unit lattice, exactly the planner's; stable at 48
+ecdfe615	2026-09-21	250189	251121	8	145	FS-70 minted and chosen as the next milestone (Kooshi, 2026-09-21): five colours over Q(sqrt3,sqrt5) -- the conjecture's last meetable prediction, and
+c072e562	2026-09-21	249994	250189	30	59	CLAUDE.md budget raised to 275,000 bytes (Kooshi, 2026-09-21); the one-home-per-fact rule stated once, in the header; the audit tool distinguishes the
+3bfdc209	2026-09-21	239632	249994	153	1716	FS-66 CLOSED: the residue ceiling does not drop up the tower at 7, 11, 19 or 23 -- ledger row 75, grokking G66, the Frontier re-ranked; the certificat
+b441fb56	2026-09-21	239565	239632	8	24	CLAUDE.md: the compression ACCEPTED (242,682 -> 239,565, no fact lost), and three sentences its author flagged as stale made current
+10802f79	2026-09-21	239367	239565	3	41	CLAUDE.md compression: the legend's 'sealed' corrected, G57's attribution restored; audit tool gains --dupes, a dangling-pointer check and its plant; 
+d87fa955	2026-09-21	239348	239367	52	65	CLAUDE.md compression C: grade tags hoisted to the legend; the one-home-per-fact rule stated in the Frontier's intro; the audit tool prints a token pr
+f74ade25	2026-09-21	240423	239348	163	66	CLAUDE.md compression B: the K and Gamma_q macros applied by script (45 sites); rung D, row 57's Fischer block and 'Open milestones' point at their ho
+d6901249	2026-09-21	241254	240423	236	117	CLAUDE.md compression W: the window cluster (rows 68-71, G56-G59) -- one home per fact, rows point at grokkings and back (241,254 -> 240,423)
+f7f1433e	2026-09-21	242682	241254	599	329	CLAUDE.md compression A: a Notation legend; 'Where the problem stands' re-pointed at its homes (242,682 -> 241,254); audit tool refined
+d0df4f82	2026-09-21	246496	242682	768	109	CLAUDE.md: trim ahead of FS-66's close (246,496 -> 242,682 bytes), and two stale claims made current
+abd71e50	2026-09-20	246495	246496	3	3	FS-66: phase 1b ACCEPTED -- chi(UD(Z/121,2)) = 5 is in the kernel; CLAUDE.md gate counts reconciled (1004 clean; 6723 declarations, 270 refutations sk
+881c91e3	2026-09-20	244033	246495	5	344	CLAUDE.md: the inventory of installed tools on the desktop (Kooshi installed time, bc, julia, scip, cryptominisat, kissat on 2026-09-21)
+9b152e7d	2026-09-20	243856	244033	10	25	FS-66 OPENED: does the residue ceiling drop up the tower? -- recorded as the open milestone in both state files
+c47faa57	2026-09-20	233905	243856	192	1899	FS-61 CLOSED: the census of real quadratic fields -- fourteen of forty planes certified to need four colours
+0af9e54a	2026-09-20	232901	233905	0	156	FS-66 minted: does the residue ceiling drop up the tower? The second level of a residue plane, at one colour fewer
+548c1f45	2026-09-19	229831	232901	47	567	Prior art found at FS-61's gate: Theorem B's VALUE appears to be Fischer 1994; G63 is Fischer 1990 Thm 6; the publication trigger is suspended
+6b5c63c6	2026-09-19	228241	229831	0	279	Standing rule: delegation is one level deep -- no child agent spawns children of its own (Kooshi, 2026-09-19)
+4936e9f7	2026-09-19	225847	228241	179	572	Correct G64: "no field is six-chromatic" implies chi(R^2) in {5,7} and is NOT implied by it; re-rank; open FS-61
+ca031298	2026-09-19	225370	225847	4	83	FS-65: propagate the close -- both routes at q = 19 are now characterised
+5d22afad	2026-09-19	225027	225370	1	68	FS-65: the break comparison at q = 19 — both EXACT normalisations lose to no break at all
+cf0bae81	2026-09-19	224974	225027	5	18	FS-65: sharpen the SAT frontier at q = 19 — the wall is between 110 and 105, not 120
+734eb62e	2026-09-19	224194	224974	15	147	FS-65: the centroid normalisation, a resumable line split, and the measurement that inverts the fix
+c91695f0	2026-09-18	223306	224194	0	134	FS-65: a stub for an exact independence solver these graphs actually need; artifact updated with the q=19 readings
+6aa7be43	2026-09-18	223114	223306	1	34	Price D5 honestly: the uniform bound is the harder object, not the cheaper one (G59, FS-62 §2a(4))
+b2beeeff	2026-09-18	220316	223114	23	506	Why the wall at six exists: one bounded quantity plus two small cases (G59, G64, FS-62 §2a)
+acb74cfa	2026-09-18	217080	220316	2	521	The 2-adic wall is a ramification set (G35), and Theorem A reaches dimension four (row 57)
+a566bdfd	2026-09-17	215009	217080	9	374	Close the audit gaps on the reframe, and record the target: seven (Kooshi)
+02929f7a	2026-09-17	199785	215009	11	2463	Reframe the target: six may be the value nothing attains (G64, FS-62); the Moire/coincidence frame (G62); transcendence is free (G63)
+cf647b23	2026-09-17	199827	199785	60	42	Bring the field and plane maps current with FS-56 and FS-58, every change cited to its committed record
+3779cb50	2026-09-17	196031	199827	272	825	FS-58 close: the plane over Q(sqrt11) needs four colours (kernel), chi >= 4 certified for five more real quadratic fields, the 3-adic barrier (kernel)
+bcf69288	2026-09-17	195715	196031	0	42	FS-58 prelude: Q(sqrt167)'s shortest odd cycle is a run of three closed by two 7-24-25 diamonds, a non-forcing Moser relative; unit-distance graphs ov
+ece3905e	2026-09-17	191252	195715	167	822	FS-56 close: five refused at 23 (row 71, G60); chi_f(Q(sqrt3,sqrt11)^2) = 4 closes Cranston-Rabern's first question; chi(Q(sqrt167)^2) >= 4 not landed
+267b42f0	2026-09-16	187151	191252	202	898	FS-54 closed: row 70 and G59; FS-56 Q(sqrt167) next, FS-57 the fractional wall minted
+e3c15054	2026-09-16	186692	187151	0	79	FS-54: what the conjecture implies if the wall holds — a finite rule up to five, {2,3,4,5,7} under the bold form, and chi(Q(sqrt167)^2) >= 6 predicted
+4493ea54	2026-09-16	185974	186692	3	124	[Fischer1990b] read in full: prior art for prime inversion and the quadratic unit-vector ring; no colouring result
+03b042db	2026-09-16	185757	185974	3	40	FS-54: the responses' literature checked against the papers; bibliography and the wall document's product section current
+097eb9c8	2026-09-16	183211	185757	77	477	FS-54: the wall document's two responses checked and folded in; five refused at 27 recorded everywhere
+9700fd2c	2026-09-16	182807	183211	124	146	FS-54 handoff: every finding and running job recorded; the ladder's stage records; CLAUDE.md's FS-54 lines current
+1ceb4382	2026-09-16	182547	182807	1	50	The wall at six: a cold-read request for the governing theorem; U_64, a 2-adic window member
+3fb7b69f	2026-09-16	181526	182547	65	250	FS-54: correct the 2-adic test; odd-degree fields are 2-colourable, so 27 needs a sextic
+568cfaf4	2026-09-16	181100	181526	0	77	FS-54: the quadratic L>=6 fields carry the evidence that their deciding planes (43, 47) are implausible
+85113d7b	2026-09-16	179384	181100	58	366	FS-54: record the smallest field for every window member; demote G57's converse
+148f4a08	2026-09-16	175308	179384	62	707	FS-53 closes: the window at five members, two of them one hit from settled
+a8d3bd9f	2026-09-16	173994	175308	0	223	CLAUDE.md: two more kill-verification instances, in the protected paragraph
+b2b56881	2026-09-16	172335	173994	6	287	FS-53: name the field each window plane would buy, and settle the prime-power question
+4913ebb2	2026-09-16	171540	172335	21	160	G58: the killing test was attempted, returned nothing, and the reason is a design error
+310202a5	2026-09-16	170797	171540	24	121	G58: the prior-art gate run, and its negative recorded
+7684e90b	2026-09-16	168439	170797	0	391	G58: the antipodal conjecture, and the control that relocates FS-53's open question
+3473eb9f	2026-09-15	168441	168439	1	1	CLAUDE.md: repair a dangling 'Every' left by the G57 cross-link
+489ffb8d	2026-09-15	168314	168441	0	22	G56: cross-link to G57, the clique structure behind the exclusion
+cdadb638	2026-09-15	166123	168314	0	379	G57: the window is triangle-free where it is roomy, and no candidate field holds a spindle
+b5293789	2026-09-15	164198	166123	0	312	CLAUDE.md: a standing rule — break the symmetry before any (UN)SAT search (Kooshi, 2026-09-15)
+e5d59e7d	2026-09-15	162982	164198	0	209	CLAUDE.md: three instances from FS-53 phase B — a self-kill, a grep anchor, and a recipe number that was wrong
+175156fb	2026-09-15	162109	162982	20	178	G56 and item 11 rewritten in place: the window for six falls from eight members to five
+230a0547	2026-09-15	162118	162109	15	13	FS-50: alpha(UD(F_83,2)) <= 1046, reproduced at six independent cuts — the final bound
+0cc947e2	2026-09-15	162074	162118	5	13	FS-53 §S13.3, brought forward: the FS-50 solves stopped and the last certificate banked — alpha(UD(F_83,2)) <= 1051
+aafce296	2026-09-15	160828	162074	0	204	CLAUDE.md: two measured corrections to the cost model and the waiter rule, from FS-53 K1
+90bdbeb6	2026-09-15	160828	160828	2	2	FS-53 K2: the equality schema moves to its bound, and FS-53's last sorry goes
+dfd1d7e8	2026-09-15	159462	160828	0	233	CLAUDE.md: two new instances of the kill and pipeline rules, from FS-53 A0.3
+923e82e0	2026-09-15	159337	159462	3	17	FS-53 §S13: Kooshi's rulings (all four cards as recommended: prime-power certificates with the checker's recorded change, WO-19/WO-20, phase B in the 
+bc6e7c69	2026-09-15	157732	159337	75	378	G56 and item 11 rewritten in place: the window has eight members (q = 27, with the exclusion line 11 ≡ −1 mod 3), the ceilings and the nulls recorded,
+d1cf5626	2026-09-15	157567	157732	5	33	FS-50: the colouring side at 83 tried and open — seven and eight colours not found by the Rust tabu search (300 s × 12 threads each; 4.17 % and 2.95 %
+1c4641c4	2026-09-15	157511	157567	7	17	FS-50: a third certificate at 83, α ≤ 1076 (the polish loop's first output: a fresh +500 continuation of the 40,500-iterate rounding its own dual; CER
+1bc92603	2026-09-15	152257	157511	141	993	FS-50 closed (WORKFLOW step 9): ledger row 68 — six colours refused at 83 by exact certificate, three trust levels; G56 the window for six {23,31,43,4
+635eeab6	2026-09-15	151374	152257	11	160	FS-50: six colours refused at 83 — α(UD(F_83,2)) ≤ 1082 by two independent exact certificates (Pardiso and GPU arms of the backend control, each CERTI
+5b781572	2026-09-15	150063	151374	2	214	The killable-run rule restored to its d5fa3bc wording, tagged PROTECTED, with its second instance (FS-50, 2026-09-15: four sequential SDP solves at 83
+1b9d4b71	2026-09-15	149954	150063	2	22	Session handoff 2026-09-15 03:45 (FS-50 in flight: four checkpointed solves at 83, the first exact bound at 83 being rounded from a live iterate; the 
+6852a2ae	2026-09-15	149519	149954	220	283	CLAUDE.md: the checkpointing rule restored to its full reasoning from git (c5e55f1^, d311dbe) after the 2026-09-14 trims compressed it, its 2026-09-15
+71fbd8ae	2026-09-14	149519	149519	2	2	FS-50 phase D′: the first exact, stranger-checkable bound below the ratio bound for a finite Euclidean plane — α(UD(𝔽₁₁,2)) ≤ 29 by a rational dual of
+2f53a4ca	2026-09-14	148998	149519	93	184	FS-50 minted as the next milestone: the independence number at the threshold — is α(UD(F_83,2)) ≥ 1,149? — the first digit's certificate at 83 and 23;
+ce22f675	2026-09-14	149899	148998	364	241	Kernel-check everything GPT Astra proved, explore the ℚ(√2,√3) result, stub the advisor's two directions: FS-47, FS-48, FS-49 minted, FS-46 rescoped t
+fc2775f2	2026-09-13	149695	149899	893	936	Fold in GPT Astra's response to the conjecture write-up: the chain theorem, the prime inversion of the unit-vector ring, the conjecture's two-, three-
+34464cba	2026-09-13	149388	149695	2071	2044	FS-38 close: CLAUDE.md rows 66–67 and G54, the frontier re-ranked, FS-6 and FS-16 closed by theorem, three stubs minted
+02d1fef5	2026-09-13	149397	149388	1	1	FS-38 opened: the residue tower subplan (§PA, §S) and its skeleton — a fan gap at level one frees every pair above it
+00923679	2026-09-13	152371	149397	673	193	The wall-breaking pass (Poros, 2026-09-13): FS-38 the residue tower minted at rank 1, FS-39 the bridge to the plane, one consistent ranking
+4833a2f3	2026-09-13	148881	152371	51	602	Review of the backlog branch (2026-09-13): the record corrected in place, the gate green on the tip
+ea7d1df2	2026-09-12	146433	148881	2	394	G31 extended: no unit-distance object here holds anything, built or found
+331fe973	2026-09-12	145771	146433	0	101	Reduction closed out; the engine runs the right way for growth
+1f3565c7	2026-09-12	144942	145771	0	145	A successful walk is the expensive walk
+e253b904	2026-09-12	143486	144942	17	268	Phase H3's direction closes with its object: the shape-free construction has no target
+19d80ec2	2026-09-12	142280	143486	0	194	Two rules: a stepped-over caveat, and the generator parameter count
+ca58c16d	2026-09-12	137419	142280	30	769	Close phase H3 in the Frontier: ledger row 65, paths forward re-pointed
+c9fee3f0	2026-09-12	136659	137419	55	185	Correct the rule I installed from a self-diagnosis that was itself wrong
+61b54118	2026-09-12	135571	136659	0	187	A hypothesis is not checked by being mentioned
+bd5ee785	2026-09-12	134688	135571	0	139	A mutation harness must verify its own restore
+f9a268a2	2026-09-12	133464	134688	0	201	Install the one-thing-may-differ rule after its fourth instance this milestone
+613c4d1d	2026-09-12	130808	133464	25	454	Two overclaims out: the spindle reading and the rotation are both prior art
+3b813df1	2026-09-12	129459	130808	19	228	Restore the deleted instances and quantifiers the compression widened
+724d4411	2026-09-12	126089	129459	53	586	Compression audit: de Grey's field IS 6-open, and four qualifiers restored
+1e0750c1	2026-09-12	125924	126089	81	105	Close phase H2: re-rank the frontier, stub phase H3, banner the superseded brief
+7561f348	2026-09-12	125461	125924	35	107	Correct my LRAT claim: it is the pipeline's input, not a format the kernel consumes
+ef16c1e9	2026-09-12	124995	125461	5	79	All twenty refutations regenerated as LRAT: the core is now kernel-checkable
+1afd552a	2026-09-12	124712	124995	5	49	Correct the proof claim: generated, not checked -- and find the route that fixes it
+0a7b935f	2026-09-12	122034	124712	3	426	Frontier: ledger row 64, a five-chromatic graph in a 6-open field
+f2ebe1bd	2026-09-12	120519	122034	0	238	Write the certificate for the reviewer EARLY -- it tells you what is load-bearing
+e803cf95	2026-09-12	119390	120519	60	243	Strike two figures I committed an hour ago, and install the mechanism that caught them
+c0e834a2	2026-09-12	118304	119390	2	185	The desktop is 16 cores, not 32 -- and the contention penalty is measured at zero
+5056a7ad	2026-09-12	116723	118304	0	254	The advisor's closing ledger, and the cost-window rule it extracted
+0f0fa977	2026-09-12	114898	116723	0	290	G53, the counting compulsion: the phase's first objective that is not free
+8e27d92c	2026-09-12	113876	114898	0	174	The rotation family is the spindle construction, and it is a ladder
+fc12b1b0	2026-09-12	112561	113876	0	219	Sharpen G52, which the previous commit's message claimed and its diff did not carry
+67a49c04	2026-09-12	112118	112561	1	75	The rotation family is prior art: it is PartsOdd2022's m1=m2, r=1 slice
+95a92211	2026-09-12	109918	112118	2	371	Withdraw "nothing on either base is 6-open" -- it was a property of span 4
+e8a22d86	2026-09-12	109711	109918	1	37	Two corrections before phase H2 opens: an arena called a base, and a ban too wide
+5802168f	2026-09-12	108957	109711	41	169	Correction: a one-sided filter is not an inverted monotonicity
+90bcb564	2026-09-12	107639	108957	0	215	A positive control only covers shapes the generator can represent; and check which way more material runs
+dfd8941b	2026-09-12	106637	107639	11	175	An instance found by prior context is not evidence that a rule reproduces
+ba0fb938	2026-09-12	105420	106637	0	200	Archiving a checker can break it in the way it was built to detect; and these rules are scars
+cbd9131c	2026-09-12	103692	105420	0	283	G52: breaking the wall is necessary and visibly not sufficient, and the equal-radius family is the mechanism
+e29c872d	2026-09-12	102783	103692	21	174	Record the mechanism, not the outcome: bound a plant on both sides
+44b871ef	2026-09-12	101617	102783	0	205	A check must read the value the code ships, and its failure formatting is part of the check
+78e0fc28	2026-09-12	100724	101617	0	147	Read the construction's data layout, not only the plan's vocabulary for it
+dad07009	2026-09-12	99687	100724	0	176	Measured and derived halves fail in opposite directions: my refusal rule covered only one
+e7b9551e	2026-09-12	99006	99687	0	122	A control going red is not evidence until a wrong-reason red can be named
+804b3ba0	2026-09-12	98184	99006	0	138	A number in a ruling travels with what it measures: my anchor cost was wrong by 30x
+02bae851	2026-09-12	97085	98184	0	185	P-Y1 falsified by its author's specification, and the reachability rule gains its second half
+d5fa3bc8	2026-09-12	95411	97085	0	298	Standing rule: a run that blocks something is presumed killable
+ac5a6a79	2026-09-12	93906	95411	0	258	A sharp instrument loses coverage a broad one had; and pre-decide your response to your own gate
+7ce1d281	2026-09-11	93520	93906	2	66	G43 contradicted ledger row 52: de Grey's field is 5-sealed, not 6-open
+265c69bc	2026-09-11	92363	93520	0	189	A control whose failure mode is unreachable has not been tested by passing
+12541575	2026-09-11	91788	92363	0	97	Five flattering defects in one night is selection, not coincidence
+46dcb4c0	2026-09-11	91019	91788	0	129	In an elimination survey the defects are not random: they all flatter the result
+105bee09	2026-09-11	90718	91019	5	48	The six surviving angles are two rotations: count rotations up to the base's symmetry, never angles
+51f486b5	2026-09-11	90218	90718	10	100	The 412 rotation classes never counted rotations, and the 'five unused radius families' lead was false
+7ed44b22	2026-09-11	88777	90218	0	244	A checkpoint under the scratch tree is one cleanup from unrecoverable; and nine instruments' shared defect
+00f9d1ad	2026-09-11	88543	88777	8	51	CLAUDE.md's size budget is 150,000 characters, on the file itself
+8bd3ba06	2026-09-11	87780	88543	0	112	Python 3.14 defaults to forkserver, so a parent's module-level global is empty in the worker
+b9667701	2026-09-11	85364	87780	19	349	FS-36 close: ledger row 63, the frontier re-ranked, and the gates' counts made current
+3dfa643c	2026-09-11	84388	85364	2	154	Gates keep what they compute, print a full digest, and a no-op build takes 2 seconds
+382f93d2	2026-09-11	84226	84388	18	33	Kernel: the distance law at a rational squared distance answers Polymath16's 5/3 question
+49b926d3	2026-09-10	84156	84226	3	11	ARCHITECTURE.md: a module map from the real import graph, and a checker that fails closed
+f8a0be61	2026-09-10	83841	84156	18	66	Answered-questions ledger made current; descent-era registries retired; overclaims corrected
+c5e55f12	2026-09-10	564620	83841	76001	1670	CLAUDE.md: current state only — 564,620 → 83,841 characters
+fd658af2	2026-09-10	560648	564620	0	654	M64: FS-35 re-aimed on a hard push-back, and the MUS/backbone literature named
+c9e80730	2026-09-10	560648	560648	1	1	M64: correct a stale control count in my own writeup
+65a60e66	2026-09-10	549682	560648	0	1706	M64 CLOSED: the Frontier, ledger row 62, and FS-35 minted at rank 2c
+ae19229f	2026-09-10	545290	549682	0	711	FS-33 minted: reproduce Parts's algorithm end to end, and the record's own specification as data
+cb258505	2026-09-10	540708	545290	0	734	FS-31 closed in the record: Frontier, frontier set, and an FS-29 identifier collision
+f47e1f39	2026-09-09	534447	540708	13	999	FS-27 section 1 CLOSED: the 122-point carrier is 4-colourable, by Theorem B's own field.
+124eee46	2026-09-09	524317	534447	99	1673	FS-28 CLOSED: the coverage extension found nothing, and the gate had four defects of its own.
+99c1c111	2026-09-09	523538	524317	41	171	Search hazards: the engine AND the file selection, both measured
+b0b748ad	2026-09-09	522364	523538	0	180	Audit after the silent row deletion: one real loss, and the tool that hid it
+6e22da73	2026-09-09	519209	522364	0	491	FS-28 stubbed: the vacuity instrument's coverage -- and a row I silently deleted, restored
+da37a953	2026-09-09	518294	519209	22	153	Vacuity gate: parametric carriers are their own state, and the baseline drops 238 -> 15
+187230af	2026-09-09	517395	518294	29	168	Vacuity gate: deliberate emptiness is its own state, declared at the declaration
+8fb9a1ae	2026-09-09	516169	517395	0	186	The vacuity gate: G30's fifth failure mode, run by the machine instead of by memory
+c1f6d12f	2026-09-09	516104	516169	5	5	Post-merge audit: two path/name precision fixes
+22b0ec7b	2026-09-09	509198	516104	3	1119	Consolidation closed: the Frontier entry, the fifth paths-forward amendment, and FS-27
+c31fff51	2026-09-09	478216	509198	18	4618	Record: the six consolidation packages' CLAUDE.md amendments applied.
+4358299e	2026-09-09	477700	478216	3	85	FS-26: the M34 correction had reached the ledger and not the prose.
+8dd72a89	2026-09-09	476041	477700	2	242	FS-26 phase A1: the known-empty family is closed at two, and row 31's own correction was one step too strong.
+e5b77c33	2026-09-09	474871	476041	0	191	FS-26 phase B3 DECIDED: build/ citations are local artifacts, and the audit that cleared them was measuring its own working directory.
+8c3267fe	2026-09-09	474852	474871	11	11	FS-26 phase B1: the pipe-escaping pass, and one table row that was dropping two cells.
+d093033c	2026-09-09	473443	474852	3	211	Durability pass before compaction: survey leftovers, two grokking gates, and the parallel plan
+ef7a56f7	2026-09-09	467886	473443	0	859	Consolidation: three stubs at ranks 2-4, and G30's sixth failure mode
+28bc4ace	2026-09-09	464321	467886	28	530	Record audit: five errors in the grokkings, four in the bookkeeping, all corrected in place
+48553c44	2026-09-09	463506	464321	0	133	G8: our seam rotation and the Polymath16 wiki's generator reconciled exactly
+86cb3768	2026-09-09	461403	463506	2	332	Close the recording gaps: acquisitions, two ledger rows, three grokkings, FS-6, and the cross-session memory
+a78d539f	2026-09-09	459910	461403	1	241	FS-20's novelty check completed: all eighteen Polymath16 threads searched
+04cd7476	2026-09-09	455548	459910	5	711	The seventh lineage is a wiki: the Polymath16 algebraic formulation page
+20d56021	2026-09-09	439909	455548	3	2453	FS-23 phase A: five papers read, a seventh lineage found, two ledger rows corrected
+24a708b3	2026-09-09	438559	439909	0	206	FS-23 minted and ranked: the knowledge web and the vocabulary — and the session handoff
+643814d3	2026-09-09	436558	438559	19	324	The FS-20 prior-art repair: the check that enforced the gate had the gate's own bug
+8089c62f	2026-09-09	427427	436558	0	1388	The 2-adic law of four-colour compulsions, kernel-checked — and the vacuity it found
+09c06e52	2026-09-09	425882	427427	1	250	The mascot obstruction generalized: host-generic, and the threshold sharp in both directions
+0be6e3b7	2026-09-09	417865	425882	1	1212	The mascot challenge, closed as an impossibility — and kernel-checked
+651389ca	2026-09-08	412444	417865	5	866	[Madore2015] found — the closest prior art to the whole field arc — and FS-20 re-scoped as a unification paper.
+a2250d39	2026-09-08	410768	412444	2	266	FS-20 minted — the Theorem B paper, on Kooshi firing the write-up trigger; and the Krebs record pinned from Crossref.
+aeab8c19	2026-09-08	383581	410768	0	4320	FS-18 CLOSED — the library read. Five more corrections to the record, one conditional discharged, and Theorem B turns out to answer three independentl
+85be4b77	2026-09-08	365039	383581	7	2865	Kooshi overrides the backlog plan and grants documentation authority: the whole record updated, and FS-18 (read the library) minted at rank 1 for afte
+b54942aa	2026-09-07	364844	365039	2	36	M61 CLOSE (2026-09-08): the half-turn-equivariant 5-colouring at 23 REFUSED (external cadical, 1,110 s, the sound encoding) — with the other classes, 
+2b7b5737	2026-09-07	354120	364844	2	1613	M61 close, part 1 (the half-turn instance at 23 and three records still in flight): CLAUDE.md § Frontier — the M61 paragraph, ledger row 56, the paths
+9fabc4d4	2026-09-07	354123	354120	3	3	M61 opened (FS-15, the local–global tightness conjecture; Kooshi: 'You are go for M61'): the stub renamed to plans/M61-local-global-tightness.md with 
+c6b05a7c	2026-09-07	344485	354123	4	1400	M60 CLOSED — the five-colour residue obstruction (FS-14), one day: the transfer theorem (compulsions map forward; a Cayley graph coloured by one aperi
+90f15dfe	2026-09-07	344486	344485	1	1	M60 OPENED (FS-14, the five-colour residue obstruction at 11) — subplan §S0–§S7 and the kernel skeleton: D1 derived (the transfer is Forces.comap/Sepa
+7d44a707	2026-09-07	340575	344486	0	596	After the M59 close (Kooshi's direction): G46 — the rule the two finite-plane milestones taught (name the object in the classical theory it belongs to
+ff11578a	2026-09-07	340285	340575	16	67	M59 CLOSED — complete: the 5-critical core of the triangle-free plane at 19 (138 vertices, 619 edges, 1-minimal with all 138 necessity witnesses, 8.3 
+48c1b0f3	2026-09-06	339805	340285	4	81	M59: the second obstruction instance — the 5-critical core of UD(F_11,2) (63 vertices, 1-minimal, the solver's) is not a shadow: rigid, 98 of 123 stre
+1126cf08	2026-09-06	329571	339805	4	1597	M59 CLOSED (part 1 — the last measurements amend §R as they land): §R3–§R7 written (the measurements table, predictions scored — P4 met in all three p
+683f0f50	2026-09-06	329557	329571	1	4	M59 OPENED — the finite-plane lift (FS-11): the stub renamed to plans/M59-finite-plane-lift.md and the subplan §S0–§S7 written with D2 derived first —
+e2eb61db	2026-09-06	327682	329557	0	325	Kooshi's redirection at the M58 close, recorded: derivations over objects — a 6-chromatic object is a stepping stone to the algebraic reasoning, which
+87d8b8d4	2026-09-06	317930	327682	2	1572	M58 CLOSED — the field sieve: Frontier updated (the M58 paragraph; ledger row 53; § Paths forward re-ranked — FS-7 closed, FS-11 the finite-plane lift
+40d0be28	2026-09-06	317931	317930	1	1	M58 opened (Kooshi: go) — the field sieve, subplanned (WORKFLOW step 3). Phase 0 derived before any instrument: D6 — the spectrum of UD(F_p,2) is λ(c)
+d6974f2a	2026-09-06	316642	317931	1	213	Pre-compaction pass: the √35 staleness removed from the field-sieve stub (§1, P5) and T32 (K(√35) is sealed at four by Theorem B); the paths-forward p
+05257dc9	2026-09-06	312559	316642	1	664	CLAUDE.md: G30 strengthened with Kooshi's discipline-hop ladder (each wall a theorem in the next room; the rule it adds); G25 amended (triangle-free 4
+c344daa3	2026-09-06	306824	312559	3	912	The finite-plane pivot: the frontier set re-ranked around it and every item stubbed for a context-free session — FS-7 the field sieve (plans/STUB-fiel
+1527937d	2026-09-06	306402	306824	19	89	M57 §R5 addendum complete: the de Grey dial's last rows — the whole 24,065-point gen-1 closure (123,134 edges, 358 distinct directions, rank 32, 269 u
+fa5c823e	2026-09-06	296997	306402	18	1512	M57 CLOSED — additive rigidity. Kernel: AdditiveRigid.lean (the reduction theorem: all 5-colourings additive along an address map + a 5Λ-pair at dista
+b6b36dec	2026-09-06	296998	296997	1	1	M57 opened (Kooshi: go): the FS-1 stub renamed plans/M57-additive-rigidity.md (the frontier row marked opened as M57), the subplan §S1–§S5/§S7 — D1 th
+25201136	2026-09-06	296357	296998	0	87	The frontier set (Kooshi, 2026-09-06): plans/FRONTIER-STUBS.md — every next milestone as a full stub, ranked with its bearing on χ ≥ 6; three stubs wr
+8f578fcf	2026-09-06	288012	296357	36	1377	M56 CLOSED — the arithmetic of tightness. Kernel: Additive.lean (an additive colouring is a colouring; not_forces/not_separated of a hom; the divisibi
+376f1d7a	2026-09-06	287405	288012	0	88	M56 stubbed (Kooshi's direction, 2026-09-06): the arithmetic of tightness with the field as input — Fischer's additive colourings restricted to a chun
+a8f279be	2026-09-06	277477	287405	1	1573	M55 CLOSED — absorption. Kernel: Absorb.lean (21 declarations, zero sorry, standard three axioms; 578 clean in the audit): Extends and the extension p
+76a1babf	2026-09-05	276977	277477	0	82	BIBLIOGRAPHY.md (Kooshi's standing rule, 2026-09-06): every work cited, reproduced, depended on or corrected, with its role, local copy and honest rea
+18298152	2026-09-05	264781	276977	3	1863	M54 CLOSED — the five-colour dial. Kernel: CriticalSet.lean (the critical-set localization theorem: a forced-equal pair at χ colours confines the crit
+16f58364	2026-09-05	262866	264781	1	305	T21 (Theorem A′, the 3-adic wall, χ_res, the first cheat data) and G38 (three walls; the arithmetic goes blind above four; the 6-field is named by the
+7248f369	2026-09-05	262074	262866	0	123	T20: the fabric's own forced distance, spindled — the it-4 unit part (pure K-fabric) forces 163 pairs at 8/3 equal at four colours; the spindle about 
+24c75756	2026-09-05	257175	262074	15	744	The field-wall theorem, sharpened and measured: the residue obstruction (T17) — the residue colouring plus a fifth colour on an independent exact tran
+5d895b85	2026-09-05	248106	257175	21	1499	Grokkings: the field-wall theorem's pass over the working theory — the one-paragraph theory amended (the wall is 2-adic, not metric); G1 → theorem; G3
+319a96a4	2026-09-05	240335	248106	2	1197	M53 HALTED at phase D (Kooshi, 2026-09-05): the field-wall conjecture is a theorem (~/field-wall-conjecture.md §5 — χ over ℚ(√3,√11) = 4 by the residu
+de4c34da	2026-09-04	231297	240335	2	1384	M52 CLOSED: Frontier paragraph, ledger row 46, G34 (the field is the selection) + G32/G33/G21 notes, the close note in Paths forward; ROADMAP's next s
+b4b39aef	2026-09-03	231141	231297	0	23	RISKS.md: the standing risk register (R1 the field wall, R2 the tail's cost, R3 the evidence standard, R4 the desktop, R5 the unnamed wall / formalize
+f5e423c6	2026-09-02	230138	231141	3	151	M52 minted: the copy-lock objects — anatomy, the cull by enumeration, the shrink, and the choice (subplan). M51 DEFERRED at its iteration-4 commit; th
+93f3d2eb	2026-09-02	232570	230138	392	6	Scrub the low-level fault vocabulary from the prose: the desktop's hardware fault is repaired and the record does not need its forensics.
+c53f1b44	2026-08-31	232295	232570	0	42	ROADMAP.md: the two-track board (iterations × tangents, interleaving, next seven days); STANDING-QUESTIONS Q6/Q7 (Kooshi's crystal and ring findings),
+2633b9ae	2026-08-30	231365	232295	0	142	Desktop return (2026-08-31): the hardware fault provisionally repaired with the standing p
+16683266	2026-08-27	230518	231365	0	135	G21, fourth instance: a speedup is a positive count over a population — the '~250×' (solver-free tiers) lost its scope in summaries and the shrink's b
+b7c2fa75	2026-08-26	229186	230518	0	216	INC-6: the residue's three deaths were a hardware fault, caught twice by a decorrelated probe (descent-engine INC-1); the stand
+20113097	2026-08-26	228234	229186	0	162	Incident 5 recorded (§R-INC5: worker segfault hung the uncheckpointed 19-h shrink; cover state safe) + THE STANDING CHECKPOINT RULE (Kooshi, 2026-08-2
+308285bd	2026-08-25	228014	228234	3	34	Core-probe recount (the §R-INC4 riding item): 2,402 lines = 1,755 distinct classes (26.9% incident-4 duplicates; the total matching the recorded count
+8acf66dd	2026-08-25	227838	228014	2	29	INCIDENT 4: resumed-cube blocking over all columns (not the blk projection) manufactured duplicate classes — it-2 list 45,365 lines = 24,810 distinct 
+c99a31c6	2026-08-24	225832	227838	3	302	M51/M52 stubs + STANDING-QUESTIONS: the durable save of M50's theory (Kooshi's direction) — M51 = the descent engine with the speed mandate and measur
+fbeebfa7	2026-08-24	217366	225832	109	1301	M50 CLOSED: Frontier — narrative, ledger row 45, G33 (the batch law and the compounding lattice), re-ranked paths (M51 = iteration 3+ recommended, nom
+355d8ec8	2026-08-19	216634	217366	1	103	Frontier ranking: M50 (the batch descent) minted as item 1 with its stub; §R7 subsumed.
+151b6474	2026-08-18	197673	216634	3	2864	M49 CLOSED: the two-distance dial — kernel ends (spindle theorem, one defect suffices), the seed re-derived and priced, μ_H sandwich 29 ≤ μ ≤ 252, k=4
+40f748ee	2026-08-15	185789	197673	118	1898	M48 CLOSED: the arity floor of de Grey's witness is 4 or 5, and existing witnesses have nothing left to extract.
+31e21320	2026-08-14	182964	185789	118	586	M48 stub rewritten SELF-CONTAINED ahead of a compaction -- and its own central claim corrected by fact-checking it before writing.
+e4e4cc77	2026-08-13	173129	182964	57	1554	M45: the arity floor is kernel-checked, and the campaign refuted a minted grokking ON THE STAGE THAT PRODUCED IT.
+13abdf77	2026-08-13	171324	173129	419	641	M44 CLOSED: the epsilon-dial. The limit lemma is kernel-checked, and the cell family closes in its second direction.
+513981ef	2026-08-13	159781	171324	101	1912	Re-reading pass: the cell family is a dial, not a door — four new milestone stubs, two grokkings, the ranking rewritten.
+c3b7cab9	2026-08-12	149515	159781	51	1712	M43 Frontier close: narrative, ledger row 40, G24 extended with the CONDITIONAL explanation (Voronov's proven Exoo conjecture forces >= 7 on the whole
+29a74951	2026-08-12	144180	149515	40	867	M42 CLOSED — the gap atlas is kernel mathematics. Item 4 lands the crown: chi(23-core) = 7 exactly at omega = 4 on the standard three axioms — the pro
+026686f7	2026-08-12	141065	144180	85	569	M41 CLOSED, same day it was subplanned (laptop, all cores): Frontier narrative + ledger row 38. The harvest: G26 the autopsy dictionary + THE REDUCTIO
+851e76db	2026-08-12	137251	141065	0	563	G26 + G27 minted (mid-M41, durable save at Kooshi's direction): G26 the autopsy dictionary — pigeonhole x kill 5-for-5 in the finite lab, Act One alwa
+fcf3215b	2026-08-12	135244	137251	24	323	The shapes pass: plans/SHAPES-OF-SIX.md — the standing shape-space for a 6-forcer, from a domain-modeling pass over both directions, seeded by the pro
+59acfe6c	2026-08-12	127751	135244	108	1292	M40 Frontier close: narrative, ledger row 37, G23 corrected upward (the pessimum below the classical scale is TWELVE), G24 minted — the gap law: below
+52fb6b82	2026-08-12	127635	127751	1	24	M39: p = 1/6 determined too — a radius-8 ball (225 vertices) refuses six there, and the 24x24 torus achieves seven, so chi(G(1/6)) = 7 EXACTLY at a sc
+00d4cc6a	2026-08-12	127319	127635	2	59	M39 ball census: the spectrum settled outright, with no periodicity assumption. Radius-4 and radius-5 balls give >= 7 in the classical window, >= 9 in
+e482a947	2026-08-12	126754	127319	6	96	M39 extended: the oscillation is now kernel-checked at THREE windows, not inferred from a census. Coset.seven_le_card_fine proves >= 7 colours for 3/8
+99073af6	2026-08-12	126284	126754	11	95	M39 control completed: the fine-scale reading was WRONG, not merely unsupported. The torus-size control returns p = 1/4 unknown at cap, p = 1/3 a genu
+ebe40c65	2026-08-12	122238	126284	1	661	M39 Frontier close: narrative, ledger row 36, G23 minted (the good scales are isolated and refining is not a route down — the requirement across scale
+b40cce94	2026-08-12	119104	122238	1	489	M38 Frontier close: narrative, ledger row 35, and G22 SHARPENED — the blacked-out region is not 'lattice colourings' but 'cell-constant colourings at 
+f50f93c6	2026-08-11	112769	119104	2	1020	M37 Frontier close: narrative, ledger row 34, G22 minted (where a six-colouring cannot live — the lattice family is closed, and the bound is number-th
+e0147afd	2026-08-11	104078	112769	105	1486	M36 CLOSED: chi(R^2) <= 7 kernel-checked — the classical interval 5 <= chi(R^2) <= 7 now holds at BOTH ends on axioms exactly [propext, Classical.choi
+2ba00316	2026-08-11	103891	104078	49	83	M36 stub: the hexagonal certificate (chi(R^2) <= 7 kernel-checked, closing the classical interval [5,7] both ends). The stub carries the close-day der
+3c6fd451	2026-08-11	97097	103891	94	1130	M35 CLOSED: §R scorecard complete (P1-P4, P6, P7, P9, P11 confirmed — the sweep 52 clean/4 empty/0 unknown after the §0i retry read clean in 26s; P5 m
+b63b1476	2026-08-11	95869	97097	100	296	M35 decided (Kooshi, 2026-08-11): the two-sided 6-programme — the k=5 transfer stub gains phase 2 (periodic avoidance certificates: compactness throug
+a8e1a6b9	2026-08-11	88952	95869	89	1104	M34 CLOSED: §R scorecard complete (P1-P5,P8,P9 confirmed — P4 stronger, P5 sharper at five classes; P6 missed monolithically and landed through §0i's 
+b35e5a03	2026-08-11	88437	88952	1	75	M33 annex: the NINE-vertex √3-pair pigeonhole core (two √3-triangles + unit circumcentres + hub + one rim–rim edge — hand-proved in two cases, decide-
+6c776d6f	2026-08-10	88024	88437	0	51	Write-up trigger gains its artifact shape (Kooshi, 2026-08-10): the zeta-23 comparator pattern — trusted ChallengeDeps/Challenge surface over untruste
+d5e93578	2026-08-10	82281	88024	196	1125	M33 Frontier/Grokkings close (first pass): the M33 narrative paragraph, ledger row 30, paths re-ranked (M34 = Act One as kernel theorem + the union qu
+4800f5e5	2026-08-10	79907	82281	154	510	M33 re-aimed at the MECHANISM HUNT (Kooshi, 2026-08-10: 'confidently point to the reason why 5 colorings are forced'). The golden question — what ambi
+93aefe9c	2026-08-10	72669	79907	111	1138	M32 CLOSED: the designed-forcer probe fired its FLAT clause exactly as registered (the stacking law confirmed at every census point — width without de
+e6dbffe1	2026-08-10	70147	72669	0	376	G13 minted (the centre transition / fan ladder): 510's centre verified FANNED at 4 by one symmetric SAT ask (UNSAT 10.1s, controls green); peripheral 
+b127926c	2026-08-10	66832	70147	109	627	M31 CLOSED: Frontier paragraph, ledger row 27 (the quadrature law + closure measurements), paths forward rewritten toward M32 with the forced-pair des
+3f96676b	2026-08-10	64643	66832	2	333	M31 §R: P1-P10 verdicts at face value (law holds at 26 censuses; chi=4 everywhere below the witness; enrichment does not shrink the forcing; 510-centr
+2e6a589e	2026-08-10	64261	64643	9	69	The publication trigger sharpened (Kooshi, 2026-08-10): the bar is exactly two events — maybe our own certified 5-chromatic object if interesting enou
+0d413f1a	2026-08-10	62096	64261	15	320	Grokkings amended on the literature check: G3/G4 scope-corrected (Haugland arXiv:2608.04542, heptagon fabric — the seam vocabulary is the hexagonal in
+c15d72d4	2026-08-09	54886	62096	1	1087	CLAUDE.md SS Grokkings: the working theory of the 5th colour — G1-G10 with epistemic status tags (kernel/measured/reading) and falsifiers, the one-par
+24b28b2a	2026-08-09	54566	54886	1	53	M30 final verdicts: E4 refuted both halves (hexagram B=1 chunk census > 10^4 up to rot6 x palette, ZERO forced pairs, settled exactly); the redundant 
+05ba45b1	2026-08-09	50056	54566	45	697	M30 close prep: Frontier updated (ledger 25 field-wall lemma, 26 the anatomy; paths forward rewritten to M31-next with the measured handoff), M31 stub
+fcbee063	2026-08-09	49662	50056	258	291	The field jump: roadmap demoted and rewritten. M27-M29 (tiled plane, recursion, uncountable pair) demoted with reasons in their stubs — the seam field
+8d65bfad	2026-08-09	46174	49662	37	545	M26 CLOSED: chi(hexagram) = 4 unconditionally, on axioms exactly [propext, Classical.choice, Quot.sound]. The six pivots of the 1/sqrt(3)-hexagon abou
+07fff388	2026-08-09	44008	46174	50	358	M25 CLOSED: the four-ladder object is exactly 4-chromatic, unconditionally, on axioms exactly [propext, Classical.choice, Quot.sound].
+4392d725	2026-08-09	41306	44008	185	567	M24 CLOSED: chi(matched ladder pair) = 4 unconditionally, on axioms exactly [propext, Classical.choice, Quot.sound].
+44a0b5ff	2026-08-08	37097	41306	71	673	M23 close: triangle+metapivot layer certified (39 theorems, standard axioms); registered stats reported at face value — seam-alignment DEMOTED (0/4 fr
+65963b35	2026-08-08	36866	37097	4	37	Mined from opus-larp (Opus 5's parallel M21/M22): inter_eq_pair collapse adopted, field-growth triage superseded
+0b26a714	2026-08-08	33410	36866	119	624	M22 closed: general gluing classification certified, first certified near-relation, kill mechanism seam-aligned
+2d9aa518	2026-08-08	30736	33410	93	512	M21 landed: the pair-gluing classification — every circle-pair intersection of the d=1 pivot pair is {a point, its mirror} under one involutive isomet
+c5ce7b99	2026-08-05	27890	30736	48	469	M20 landed: the 120° compulsion, the one-pivot cap (χ = 4 exactly), the strip automaton — and the Frontier moves to coupled systems
+fc8c9371	2026-08-04	23021	27890	18	737	M20 stubbed (the extension problem), and the Frontier becomes part of the workflow
+b78619ed	2026-08-02	20584	23021	34	427	M18 stubbed: the 120° class — and the mission is restated as a hunt for new maths
+bbfc03bd	2026-08-01	19512	20584	18	202	Subplan M11, and the colour-symmetry field it specified is not needed
+b7122987	2026-07-31	19170	19512	0	60	M08: one squared length per distinct difference, and a subtraction per edge
+51b48aa6	2026-07-31	18654	19170	0	85	The certificates are replayed by a second kernel, for the first time
+52254a9e	2026-07-31	16918	18654	28	307	M07: chi(R^2) >= 5 from 510 and 553 vertices, at 1/25 the cost
+2aa9b1f3	2026-07-30	15678	16918	0	205	CLAUDE.md: measure peak RSS before choosing a build batch width
+fa747b5b	2026-07-29	13533	15678	0	340	Subplan M05, and correct the two spike numbers it disproved
+21a59667	2026-07-29	12011	13533	3	235	Record what this session's checks corrected, including two of my own claims
+3a79b901	2026-07-29	8743	12011	0	535	Set the standard of evidence above rung B, and name whose work this is
+a6e81c26	2026-07-28	5933	8743	3	475	Carry M04's durable lessons into CLAUDE.md and WORKFLOW.md
+9894320c	2026-07-27	5721	5933	6	34	Subplan M03: the SAT bridge, with the LRAT trust question settled
+9dc02bc6	2026-07-27	5691	5721	1	2	Implement M02: exact geometry, spindle certified by kernel decide, gate green
+745e2ff8	2026-07-23	2144	5691	35	563	Target the Hadwiger-Nelson problem: architecture and roadmap
+6a72cf13	2026-07-22	1378	2144	39	131	Scaffold the proofs package (Mathlib) and fix the Arch clang build env
+bf2c74af	2026-07-22	0	1378	0	208	Set up de Bruijn Lean workspace: skills, core standard, workflow, toolchain
