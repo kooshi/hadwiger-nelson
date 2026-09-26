@@ -18,6 +18,7 @@ One mind. A blind verifier, X27V, works on the same claims; no contact.*
 | X27D-E | **given MR, over a type-(B) field every translation-invariant random four-colouring has `σ_μ|_E = σ_μ|_{T₄}`**; corollary: Theorem C's conclusion for spectra carried by all of `E` | [hand, one mind] | §2.5 |
 | X27D-ATT | given MR, a counterexample to Q-μ has an `E`-null, Haar-singular, `T₄`-attracted spectral remainder, an `I`-periodic conditional colour law, and a defect profile on `R ∩ 𝔓⁴` that is subadditive, not zero, and Banach-negligible on every rotation circle | [hand, one mind] | §2.6, §3.1 |
 | X27D-FL | given MR, every concave (in particular affine), `U`-invariant, upper-semicontinuous `Q ≥ 0` on `M_T` vanishing on the Pull-measures vanishes on all of `M_T`; so such a `Q` witnesses the flip iff `M′ = ∅`, and without MR its existence proves TR-ROT | [hand] | §3.2 |
+| X27D-SIERP | the combinatorial route to NA₀ (subadditivity + Banach density 1 on every rotation circle ⟹ `G + G = I`) is false: a countable Sierpiński decomposition gives, for each `z ≠ 0`, a set co-finite on every circle with `z ∉ G + G` | [hand] | Stage 4 |
 | X27D-FLit | TR-ROT-flip as worded is TRUE with a trivial witness (an affine, weak-* continuous window-defect series), which is not rotation-invariant and proves nothing | [hand] | §3.2 |
 
 ## Stage 1 — SAVED (quotation check; C0 per claim, sealed before any derivation)
@@ -292,3 +293,27 @@ last three spectral rows).
 ### 3.6 Would have searched here (Stage 3)
 
 - None. Every statement in 3.1–3.2 is a derivation; no candidate functional was evaluated on constructed colourings.
+
+## Stage 4 — SAVED (extra time before the stop: one route to NA₀ tried, and closed by a no-go)
+
+**The route.** By (S4) (and, for any `T₄`-attracted `ρ`, the same computation with `ψ := 1 − Re ρ̂/ρ(R̂)` on `I`): `√ψ` is subadditive
+(`√(2ψ(z)) = ‖ξ_z − ξ_0‖` in the GNS space of the positive-definite `ρ̂`), `ψ ≢ 0` unless `ρ` is carried by `T₄` (impossible for `E`-null `ρ`,
+`T₄ ⊂ E`), and for every `ε` the good set `G_ε := {z ∈ I : ψ(z) < ε}` meets every rotation circle `C = U·y` (`y ∈ I ∖ {0}`; `C ≅ U`, the
+stabiliser being trivial) in a set of Banach density 1. Subadditivity gives `G_ε + G_ε ⊆ G_{4ε}`, so **if `G + G = I` for every set `G` that
+is co-negligible on every circle, then `ψ ≡ 0` and NA₀ holds** (with no MR and no `E`-nullity).
+
+> **X27D-SIERP (the route is closed at two summands) [hand].** For every `z ∈ I ∖ {0}` there is `A ⊂ I` meeting every circle in a finite set
+> such that `G := I ∖ A` satisfies `z ∉ G + G`. *Proof.* Enumerate the countably many circles `C₁, C₂, …` (norms in `F`). For each pair
+> `{r, z − r}` put into `A` the member whose circle has the larger index (either, on a tie). Then `A ∩ C_i ⊆ ⋃_{i′ ≤ i} C_i ∩ (z − C_{i′})`, and two
+> circles with different centres (`0` and `z ≠ 0`) meet in at most two points: `|A ∩ C_i| ≤ 2i`. Every pair meets `A`, so no `r` has `r, z − r ∈ G`. ∎
+
+So circle-density plus subadditivity cannot prove NA₀ through two-fold sums: a countable Sierpiński decomposition defeats it. What survives:
+**(i)** three or more summands — `r₁ + r₂ + r₃ = z` on three circles is a curve, not a finite set, so the greedy decomposition does not apply
+(open; the correspondence `r₁ ↦ r₂` is algebraic and need not preserve Banach density in `U`); **(ii)** positive-definiteness of `ρ̂` beyond the
+subadditivity of `√ψ`, which X27D-SIERP does not see; **(iii)** the arithmetic of `U ↷ R̂` (NA₀'s home, §2.6). Any proof of TR-ROT must use one
+of these. *Theorems this stage proved:* X27D-SIERP (added to the table).
+
+### Would have searched here (Stage 4)
+
+- I would have tried to build a three-summand Sierpiński decomposition by computer on a finite set of circles. Not done (a finite-witness
+  search); stated as open.
