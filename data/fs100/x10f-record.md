@@ -62,3 +62,27 @@ No grade, verdict or statement changed. **Gate:** `fs71_ledger_b_check.py --stri
 (FS100-Q47 now among them, its header parsing), which stage 3's § B lines fix. `bib_audit.py` unchanged by this stage (the two keys stay in the file).
 
 **Would have searched here (stage 2):** none.
+
+## Stage 3 — SAVED (`LEDGER.md`: rows 120–122, row 118 corrected, 16 § B lines)
+
+Applied from X09C's §R-close (stage 5) 4.1 by script (the scratchpad's `ledger.py`, every replacement asserted unique; the drafted lines read
+from the plan file, never retyped). Departures from "apply exactly", each mechanical and named:
+- **Row 120 and § B FS100-EFG**: the code span `` `h_m(u) = Σ_v log⁺|u|_v` `` holds two unescaped `|`, which split a table cell (the defect
+  J55 corrected in eight lines); escaped as `\|`. Every inserted line was checked to have exactly 5 (row) or 7 (§ B) unescaped pipes.
+- **Launch note 2 (novelty pending)**: row 120's *Prior art* gains "prior-art gate on MR pending, X24R"; row 121's "— owed before any novelty or
+  publication claim" gains "; prior-art gate pending, X24R". Neither row claims a result as new; both now name the gate that decides it.
+- **§ B address column**: the drafts' bare ids ("FS100-EFZ") written in the table's convention, "`plans/FS100-derivation.md` FS100-EFZ" (the
+  draft's own header names that file as the address).
+- **Row 118**: the drafted replacement ends at "an owed lemma PE-lim"; the original's parenthetical "(from finitely generated `Γ` to `U`)",
+  which glosses PE-lim, is kept beside PE-lim inside the new dash clause rather than left trailing after "Einsiedler–Fish". The scope sentence
+  ("never applies on `R̂` itself; on the pieces `M̂` it applies exactly under admissibility (row 120)") and "**Not claimed:** PE-lim; MR" → deleted
+  applied as drafted.
+- § B lines appended after FS-75's (row order: 119, then 120–122).
+
+**Gates:** `fs71_ledger_b_check.py --strict` **exit 0, PASS** (752 § B rows). `claude_md_fact_audit.py --base 447741b5` exit 0, AUDIT PASSED
+(LOST 0 in every class).
+
+**Left (no draft):** a line for `LEDGER.md` § The claim list — X09C drafted none; under launch note 2 any such line would read "prior-art gate
+pending, X24R".
+
+**Would have searched here (stage 3):** none.
