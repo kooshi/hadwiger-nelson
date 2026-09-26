@@ -336,6 +336,65 @@ revisit a cache implementation next time we hit the cap at a point where we're t
     in your record; the front-page job writes them.
 ```
 
+## 6. Templates — the briefs to copy
+
+*A brief is a file under `data/crunch-<date>/briefs/<id>-<slug>.md`; a launch is one line, "Your brief is on disk: read `<path>` in full
+first." Copy the best instance below and change only its slots. Paths are relative to `data/`; "run 1" is `crunch-2026-09-25/briefs/`,
+"run 2" is `crunch-2026-09-26-x2x3/briefs/`, "consolidation" is `consolidation-2026-09-26/briefs/`.*
+
+### 6.1 What every brief carries
+
+1. **A header line:** the job id, its kind, the model, the date, who wrote it, which brief it copies, when to launch it, and any hard stop
+   ("Launch only after X30F has handed back"; "Hard stop: 11:50 UTC").
+2. **"Hello. You are <de Bruijn | Coxeter | Poros>, <role>"**, with `CLAUDE.md`, `WORKFLOW.md` and `DEBRUIJN.md` read from disk, and
+   **"`STANDING-RULES.md` is part of this brief; read it in full."**
+3. **The resume paragraph:** "If your record already exists, you are resuming: check the last SAVED stage against `git log -- <record>`."
+4. **Kooshi's words, verbatim**, where they are why the job exists.
+5. **The statements, verbatim, each with its source address** — the fixed claim list, with its notation's address. Never a paraphrase
+   (§7 rule 7).
+6. **For a blind job, the fences:** every path by name — the derivation's record, data, tools, brief and report, the close inventory, the
+   index, the advisor's record, the queue sections that carry routes, the bodies of the fenced jobs' commits — and "if a search prints fenced
+   text, stop reading it and log the touch" (§7 rules 10–11).
+7. **What may be used as given, by statement**, with each input's grade.
+8. **Stages, each with a size.** Stage 1 is the quotation check and a C0 table (a probability per claim) before any derivation. A verifier
+   runs its controls first and says what a wrong-reason pass would look like (G21); its fallback phase reads the derivation's lemma
+   statements, never its proofs, and only after its own verdicts are committed.
+9. **"Every outcome counts … do not lean toward TRUE"**, and where the brief can, the step where a failure is most likely.
+10. **The ban and the "would have searched here" log**, while the ban holds.
+11. **The no-children line with its reason**, in words: "No subagents, forks or workflows — delegation is one level deep (`CLAUDE.md` §
+    Delegation): staffing is Kooshi's budget decision, and the owner can only review work it knows about. If the work outgrows your context,
+    stop at a saved stage and say what is left."
+12. **Record, data and tools paths:** the record with "Theorems this phase proved"; `data/<m>/<job>/`; `tools/<job>_*.py` with plants.
+13. **The touch list:** what the job may edit; the four front files only for the front-page lane.
+14. **Commits** by explicit path, subjects "<id>: stage n", push after each commit (on a ref-lock race `sleep 4` and retry), never amend,
+    never force-push, the harness's attribution lines.
+15. **Budget in the harness's count, a hand-back line and a stop rule** in tokens and in clock time.
+16. **The report** (standing rule 9) to `reports/<id>.md` and by SendMessage to "main"; the final turn text "<id> idle; report sent to the
+    owner by SendMessage".
+
+### 6.2 The instances
+
+| role | best instance | why this one; what to change |
+|---|---|---|
+| **Planner** (long run) | run 1 `PLN-crunch-planner-brief.md` | Kooshi's words; calibration ("FS-89 was planned across five days and closed in about six hours"); what to produce, items 1–5; "the reframe … propose how to run it well", never skip. **Fix one line:** it says "don't push"; Kooshi's rule is push after each commit, never force-push |
+| **Planner** (short run) | run 2 `PLN-x2x3-planner.md` | the clock, "commit the table, the claim lists and the first two or three briefs first, send them the moment they are committed", reuse by reference, write only the deltas; the questions the records leave, as a starting list |
+| **Advisor** | run 1 `ADV-crunch-advisor-brief.md`; run 2 `ADV-x2x3-poros.md` | expectation first, before any draft; frame items plainly and early; the first jobs with confidence; run 2 adds "say whether you should stay on after the plan lands, and what that would cost". Fix run 1's "Don't push" as above |
+| **Clerk** (recurring) | run 2 `J00-clerk.md` | reads only unfolded reports, the table and `READY.md`; never a record, never an id; the kernel and front-page rules for `READY.md`; the launch line names the jobs started since the last fold. Budget about 40k; thoroughness over economy |
+| **Clerk** (one edit) | run 2 `K0-clerk-budget-line.md` | an exact replace string, the gate, commit only on PASS, restore on FAIL |
+| **Reframe** | run 1 `J03-M1-reframe.md` (kernel form `J04-M2-kernel-reframe.md`) | WORKFLOW 3–6 in one job; it writes the milestone's derivation, verifier and kernel briefs, the verifier's claim list first; `J04` holds the five kernel lines every kernel brief carries verbatim |
+| **Derivation** | run 2 `X01D-einsiedler-fish-derivation.md`; run 1 `J51D-FS100-kronecker-derivation.md` | the claim list verbatim; the reading to do first; the step where failure is most likely |
+| **Blind verifier** | run 1 `J51V-FS100-kronecker-verifier.md` | the fence list, the fixed list, verified inputs by statement, controls first, the lemma-statement fallback after stage 3, a stop rule |
+| **Blind second derivation** | run 2 `X12B-ef-plus-blind-derivation.md` | fenced for the whole job; one claim; "the hard point to face squarely"; a hard stop by the clock |
+| **Reader** | run 2 `X24R-prior-art-gate.md` (the gate); run 1 `J26-ambrus2023-audit.md` (an audit, priced before any long run); run 1 `J03a-SWm-blind-reading.md` (a blind reading); run 2 `X13R-ed2-z-reading-check.md` (one step checked) | verdict vocabulary "not in X; the method is X's", never "new"; bibliography rows proposed, never written; grep by arXiv id and Zbl number first |
+| **Advisor on a named question, mid-run** | run 1 `J36-poros-infinitely-many-primes.md`, `J37-39-poros-wanted-posters.md`, `J50-poros-next-two-milestones.md` | one question from Kooshi, verbatim; its record; what it may propose as jobs |
+| **Kernel** | run 1 `J14-M2-chain-kernel.md`; run 2 `X11K-lean-47-dependencies.md` (a conditional launch, drafted in the owner's scratch) | J04's five lines (the build line under `scripts/slot.py`, the slot refusal, the gate, `--` comments in imported modules, "you are the only kernel job"); price the first two leaves before anything else |
+| **Bookkeeper** | run 1 `J30-wiring-audit.md`; consolidation `C1-rescue-and-wiring.md` | nothing lost first (scratch is RAM; skip the owner's `owner-*` directories, which hold ids), then the index, then the reverse index with address-only blocks; results never written where a blind job reads |
+| **Close-math** | run 1 `J23a-M1-close-math.md` (a long close; `J53-FS100-close-math.md` a short one); run 2 `X09C-close-math.md` | outputs of run 1's queue §4.5: the derivation file, §R-close (§G re-read, §PA sweep, §IQ and G72's count, predictions scored once, the verdict in four parts, the ban log), **drafts** of every front-file edit; X09C adds "audit the landing" and "fold the late blind jobs when they report" |
+| **Front page** | run 1 `J55-front-page-FS100.md` (the gates), `J24-front-page.md`; run 2 `X10F-front-page.md` | apply drafts exactly; a missing draft is listed as left, never improvised; score the queue's expectations once; banner the queue CLOSED; never touch a `[PROTECTED …]` paragraph, a status tag, a *Do* line or a killing test; the fact audit `--base`, `--dupes`, fs71 `--strict`, bib and architecture, exit statuses read directly; commit nothing whose gate fails on its own edits. **Carry the mechanical-fix ruling in the brief** (§7 rule 14): *"You may fix close-math's derivation entries mechanically so that `tools/fs71_ledger_b_check.py --strict` passes: field labels where the content exists, addresses where it is absent. No new mathematics, no grade change, no statement reworded."* |
+| **Follow-on fold** | run 2 `X31C-tr-rot-fold.md` | the owner's rulings stated in the brief; close-math outputs and front-page gates in one job; "launch only after <front page> has handed back". Quote the verdicts from the reports; its own brief's paraphrase of NA₀ is the slip to avoid |
+| **Consolidation** | consolidation `C1-…`, `C2-citations.md`, `C3a-claims-front-page.md`, `C3b-claims-stubs.md`, `D1-claude-md-restructure-proposal.md`, `E1-extract-incidentals.md`, `E2-intrinsics-check.md`, `F1-history-audit.md`, and its `STANDING-RULES.md` | §4's table gives the order; each brief carries Kooshi's consolidation words verbatim and names the other jobs' files it must not touch |
+| **Standing rules** | §5 | — |
+
 ## 7. Rules the runs taught — each with its incident
 
 *One line each. "Owner" is the coordinating session. Addresses: the owner's job logs (off-repo, ids) are
@@ -503,3 +562,9 @@ Run 1 and run 2 each with clock, slots, jobs, what landed at what grade, expecta
 (pointing to §7's rules); §8.3 reads them together with the confounds. Grades are quoted from `LEDGER.md` rows 120, 121, 123 and 127 and
 from each queue's §8.3/§5; none is raised. Run 1 kept no retraction tally; that is said. Harness count at this save: about 420k by the
 counter. Would have searched here: nothing.
+
+### Stage 4 — SAVED (§6 the templates)
+
+§6.1 lists the sixteen things every brief carries; §6.2 points to the best instance of each role's brief by path, with what to change,
+including the front-page brief's mechanical-fix ruling in words. Two template defects are named where they sit (run 1's planner and advisor
+briefs say "don't push"). Harness count at this save: about 435k by the counter. Would have searched here: nothing.
