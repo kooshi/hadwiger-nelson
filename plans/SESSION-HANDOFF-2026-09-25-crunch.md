@@ -64,7 +64,7 @@
 - **Rescued scratch:** `data/rescued-2026-09-25/` (manifest `SWEEP.tsv`); large files, renders and paper texts in `~/source/lean-dir-rescue/`; the owner's scratch (holds agent ids, never in the repo) in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`.
 - **Close inventories:** `plans/FS91-close-inventory.md` (M1), `plans/M2-close-inventory.md`, `plans/M3-close-inventory.md`.
 
-## 5. State at 19:15 (for a resume after compaction) — READ THIS FIRST
+## 5. State at 19:15 (superseded by §6)
 
 **Crunch launched 15:26** (Kooshi: "You are clear to launch."). Agent ids: owner scratch `…/scratchpad/owner-crunch/live-agents.md`
 (last line is current; a snapshot is copied to `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`). Never quote ids to Kooshi.
@@ -109,3 +109,31 @@ print; clerk briefs ask for thoroughness (Kooshi).
 **Open with Kooshi (defaults hold if silent):** papers by browser — Muchnik 2005, Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser
 2001, Barajas–Serra 2009, Shimura 1964, Špacapan 2011 (EJC 32(8), doi 10.1016/j.ejc.2011.07.002), Eggleton–Erdős–Skilton 1990 (Graphs Combin.
 6), Johnson 2000/2006 (`plans/FS91-PA-close.md` §C.2); telling Ambrus et al. of their checker's two gaps (default: no).
+
+## 6. State at ~01:30, 2026-09-26 — READ THIS FIRST (supersedes §5)
+
+**Cap: 2 concurrent agents until Kooshi says otherwise** (cut 4–5 → 4 at ~20:30, → 2 at ~22:15; the 5-hour usage window). Ids in the
+owner scratch `owner-crunch/live-agents.md` (copy in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/owner-crunch/`). `CLAUDE.md` budget
+is **325,000 until the crunch ends** (then Kooshi re-decides; 300,000 default).
+
+**Closed since §5:** M1–M3 on the front page (J24); **row 88** (J41: `plans/R88-derivation.md`, 19 theorems; T-C, T-C(A) two blind
+derivations; row 88 undecided, T-B1/T-B2 GAP) and **FS-67** (J42: 20 theorems; no from k ≥ 4 by composition of print) — both on the front
+page (J44; rows 111–115; G79 = Kooshi's counterexample-invariant/example-invariant grokking). **Open:** FS-84 (S1, S1V done; post-ban next).
+
+**Tonight's thread (Kooshi's interest):** T-C(A) ("a four-colouring of ℚ(√47)'s plane reads infinitely many primes") → Poros J36 (literal
+form cheap; sharp form SI) → J45/J46 verified SI (two minds, no divergence; SI ⟸ GAP) → three wanted posters J37–J39 (all GAP; they share
+every step but the last: the lemma **MR(F)** + T-J39-3) → **FS-100** minted at rank 3, `plans/STUB-measure-rigidity-three-fields.md`
+(J47), one milestone around MR, ℚ(√47) lead.
+
+**Running:** J48 — FS-100 stage 1 blind check (BC-1..8; record `plans/FS100-BC-verification.md`); J49 — KT-1, Ambrus H4 in ball arithmetic
+(`build/venv-flint`; record `plans/FS100-KT1-ambrus-ball.md`).
+
+**Next, in order (cap 2):** J25 — the crunch's close/scoring (queue §4.4; brief to write at launch; also fix queue row "FS100-BC" = J48);
+**J43 — the bookend visualization** (brief `data/crunch-2026-09-25/briefs/J43-unified-map-visualization.md`, Kooshi's words verbatim; runs
+after J25). Kronecker selection = FS-100 stage 4, after the crunch (Kooshi "yes to all 3" read as the owner's leans).
+
+**Inventories:** FS-84 (open) rows to 53; post-close `plans/CRUNCH-2026-09-25-post-close-inventory.md` to 42. Clerk last folded through J47
+(run 8, 3b4cba1d); J48, J49 unfolded.
+
+**Open with Kooshi:** papers by browser (Zaks 1989; Johnson 2000 Geombinatorics 9(3); Sally–Taibleson 1966; Bergelson 1985; DSW 1985;
+El-Zahar–Sauer 1985; Sauer 2001; Zhu 1998; Tardif 2006; Johnson–Rodger 2005; and §2's list); post-ban Y1/Y2 (FS-90, FS-64).
