@@ -1780,6 +1780,34 @@ graph; **no native evaluation.** -/
 #print axioms HadwigerNelson.four_le_chromaticNumber_planeOver_sqrt167
 #print axioms HadwigerNelson.four_le_chromaticNumber_planeOver_of_sqrt167_mem
 
+/-! ## FS-100 (jobs X11K, X11K2, X11K3) — `χ(ℚ(√47)²) ≤ 5` unconditional, and the sorry-free part of SP-Cor's chain
+
+`Instances/SqrtFortySeven.lean`: Theorem A at 11 by an elementary descent. `SpectralChain.lean`: node M and node L0 over
+the interface, measurability on `R̂`, and the local bound `L(F)` with Mathlib's number-field API. No native evaluation. -/
+
+#print axioms HadwigerNelson.SqrtFortySeven.coords_unique
+#print axioms HadwigerNelson.SqrtFortySeven.norm_eq_zero
+#print axioms HadwigerNelson.SqrtFortySeven.f47_le_q47
+#print axioms HadwigerNelson.SqrtFortySeven.div_mem_z11
+#print axioms HadwigerNelson.SqrtFortySeven.forty_seven_eq
+#print axioms HadwigerNelson.SqrtFortySeven.sq_add_sq_eq_zero_mod11
+#print axioms HadwigerNelson.SqrtFortySeven.zmod_key
+#print axioms HadwigerNelson.SqrtFortySeven.eleven_dvd
+#print axioms HadwigerNelson.SqrtFortySeven.int_descent
+#print axioms HadwigerNelson.SqrtFortySeven.rat_descent
+#print axioms HadwigerNelson.SqrtFortySeven.unit_mem_A
+#print axioms HadwigerNelson.SqrtFortySeven.exists_residue11
+#print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five
+#print axioms HadwigerNelson.SpectralChain.unitVectors_subset_unitRing
+#print axioms HadwigerNelson.SpectralChain.Interface.mr_of_pe2_efPlus
+#print axioms HadwigerNelson.SpectralChain.x4_nonempty_of_colorable
+#print axioms HadwigerNelson.SpectralChain.measurable_eval
+#print axioms HadwigerNelson.SpectralChain.measurable_rot
+#print axioms HadwigerNelson.SpectralChain.mem_fieldI
+#print axioms HadwigerNelson.SpectralChain.fieldI_conj
+#print axioms HadwigerNelson.SpectralChain.toFieldI_surjective
+#print axioms HadwigerNelson.SpectralChain.StablePrime.le_comap
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

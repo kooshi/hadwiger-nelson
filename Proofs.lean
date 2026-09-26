@@ -150,6 +150,8 @@ import Proofs.HadwigerNelson.ThreeColour
 import Proofs.HadwigerNelson.ThetaCert
 import Proofs.HadwigerNelson.ThetaPlane
 import Proofs.HadwigerNelson.Instances.SqrtOneSixSeven
+import Proofs.HadwigerNelson.SpectralChain
+import Proofs.HadwigerNelson.Instances.SqrtFortySeven
 
 /-!
 # Proofs
