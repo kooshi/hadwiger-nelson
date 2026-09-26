@@ -122,3 +122,27 @@ Applied by `data/crunch-2026-09-25/j25/apply_stage4.py` (plant fired first, exit
   (stages 2–3); their other items — J48's plant slip, J49's prediction scores — stay in their records. The inventory is the owner's pen: I add
   no rows.
 - **The index** (`plans/CRUNCH-2026-09-25-INDEX.md`): a second addendum, addresses only — J36, J37, J38, J39, J45, J46, J47, J48, J49 and FS-100.
+
+## Stage 5 — SAVED (the crunch's close: the queue's banner, §2, §8; brief Part B)
+
+Applied by `data/crunch-2026-09-25/j25/apply_queue.py` from the draft `data/crunch-2026-09-25/j25/section8.md` (plant fired first, exit 1;
+a re-run refuses, exit 1). No `wait`, `ready`, `run` or `HALTED` status is left in §2.
+- **Banner:** "CLOSED 2026-09-26 by front-page job J25".
+- **§2 final statuses:** J00 DONE (last fold through J47); J05 not run (the ceiling rose); J01 and J28V annotated from their reports; the
+  generic J23 row DONE through its instances; J25 DONE; J29-S4 post-ban; J43 READY, the bookend after J25; FS100-BC "DONE — run as J48"; new
+  rows J48 and J49, DONE.
+- **§8.1** the jobs, from the 60 reports: status and harness total ("not reported" where a report gave "?" or only its own count, the own
+  count in brackets); 33 reported harness figures summing to 9,616k.
+- **§8.2 §5 scored once:** 28 lines scored, 21 met, 7 missed (E2b, E3, E4, E5, E8c, E10b, E10c), E9 unscored (no instrument); Brier 0.170;
+  every miss is an event that happened below even odds — the planner under-priced blind-verified derivation. "A good crunch": all four met.
+- **§8.3** closed M1, M2, M3, row 88, FS-67; open FS-84; minted FS-92 to FS-100 (FS-97 absorbed).
+- **§8.4** the hand-over: FS-84's S2–S4, FS-90 (Y1), FS-64 (Y2), FS-100's P1 = J37's R4 (EI-F; one stage, two names), FS-67's PB-2, FS-45's D3
+  (§2's "Not queued" names it post-ban too); in-ban left: FS-100 stages 0, 3, 4 (after the crunch), 5, 6, and J43.
+- **§8.5** Kooshi's rulings (ten lines, the last the open ones), the owner's slips (seven, each with the job that found it), and the owner
+  rulings the front page applied.
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| score §5 by "met when it happened at p ≥ 0.5, or did not at p < 0.5", with the Brier score beside it | a Brier score alone | the brief asks "met or missed" per line; the Brier score keeps the probabilities' information the binary loses | high |
+| list FS-45's D3 among the post-ban stages | only the six the brief names | §2's own "Not queued" list names D3 as post-ban; leaving it out would drop a thread the queue already holds | medium — one line to remove if the owner's list was meant to be complete |
+| harness totals only from the reports' first lines, own counts in brackets | read the task notifications | the brief says "read from the reports"; the owner holds the notifications | high |
