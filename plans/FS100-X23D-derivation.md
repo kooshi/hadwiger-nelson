@@ -175,3 +175,93 @@ ramified, and each of these has a level-one target of `χ ≤ 4` (3, 4, `≤ 4`,
 - Would have searched for a large independent set in `Γ₂₇` or a four-colouring of it. Instead: its exact spectrum (728 integer eigenvalues, a
   complete computation whose extent CLS-2 fixed: the one usable non-prime `q` below 33.97); logged at the ban's edge as a complete exact
   enumeration of a set the derivation fixed.
+
+## Stage 3 — SAVED (SPC, then COR)
+
+**Verdicts. SPC: TRUE for every totally real `F` outside row 100's exception** [hand; one mind; resting on J28D's class-form route to R88-TCA
+(one mind outside ℚ(√47)) and C14.2–C14.4]. **The archimedean step at `n` real places is C14.3's induction and costs nothing beyond one
+place**: the count uses the independence density `m₁(ℝ²) ≤ 0.2470`, which is second-order, and a product of factors has the larger of their
+densities; first moments (`Λ = 0.4028`, Hoffman's `0.2871` at a real place) are never used. **With a complex place: TRUE given one new step,
+SPC-cx** (restriction to the real form at each complex place) [hand, one mind, new; nothing else changes]. **No step of J45's proofs uses
+`[F:ℚ] = 2`**; degree 2 enters only through R88-TCA's inputs, walked in 3.2. **COR: TRUE as a statement given MR and row 99, not as worded**:
+SPC and CLS give `χ(F²) ≥ 5` exactly where `L(F) ≥ 5`; for `L(F) ≤ 4`, `χ(F²) ≥ L(F)` is row 99's (the conjecture's proved range), which
+COR's wording omits; and COR needs MR, which it names only through SPC.
+
+### 3.1 J45's steps, one by one: which use `[F:ℚ] = 2` (the advisor's D-6 demand)
+
+| J45 step | what it uses | degree 2? |
+|---|---|---|
+| N1 (a) | J28V-7's finite index (`[LevitzMott1972]`, every real number field); `rank R ≤ 2[F:ℚ]` | no |
+| N1 (b) | weak approximation for `𝕋`; treats real places, complex places of `F` and split places explicitly | no |
+| N1 (c), N2 | Steinhaus–Weil, open mapping, Bochner, Lusin–Souslin | no |
+| SI-1 – SI-4 | Hilbert-space identities on `L²(μ)`; J45: "All statements hold for every real number field `F` and every finite `S`" | no |
+| A⁺ | SI-4, N2, and R88-TCA (spectral form) at the given `S` | no — only through R88-TCA |
+| R-U | the class number `h` of `L`, `(z) = 𝔓^h`, `u = z/z̄` at a split place | no |
+| SP-only-if, SP-if | Fourier uniqueness; `r₀R ⊇ MR`; one real place of `F` for the `J₀`-negative circle (exists: `F ⊆ ℝ`) | no |
+| SP-Cor (X05V P0–P8) | amenability of `R ⋊ U`; Bochner; N1; R-U; MR; A⁺ at `S = ∅` | no — only through A⁺ |
+
+So the whole degree dependence sits in R88-TCA@∅'s proof (J28D §3.2–§3.3).
+
+### 3.2 R88-TCA@∅ from the class form, for every real number field outside the exception
+
+**Theorem SPC-TCA [hand; one mind].** Let `F ⊆ ℝ` be a number field outside row 100's exception whose stable places all have `r_v < 1/4`.
+Then no translation-invariant Borel probability on `X₄(F)` has spectral measure carried by `T + A`.
+*Proof* (J28D's C1–C8 with no tight factor, each step's field dependence named):
+1. **C1 (continuity).** `G := (L ⊗ ℝ) × ∏_{v stable} O_{L_v}`. `R` is dense (strong approximation, Lemma R (a); or J45 N1 (b) with
+   `R̂_prof = ∏_{stable} O_{L_v}`, which is `R = O′`, Lemma C′ — **row 100's exception enters here and only here**). Characters of `G`
+   restricted to `R` are `T + A` (torsion characters stable-continuous: Lemma C (d), row 100's scope). So the hypothesis is
+   `P(c(0) ≠ c(y)) → 0` as `y → 0` in `G`. *Degree:* none. *Complex places:* `L ⊗ ℝ` has a factor `L_w ≅ ℂ × ℂ` at each complex place `w` of
+   `F`; density is N1 (b)'s, which treats them.
+2. **C2 (extension)** to a `G`-stationary process `c̃`, continuous in probability, jointly measurable (Doob–Cohn). *Degree:* none.
+3. **C3 (a.e.-proper).** `T := ∏_v 𝕋(F_v)` over the archimedean and stable places is the closure of `U` in `G` (weak approximation on
+   every finite set of places, and the product topology). `P(c̃(x) = c̃(x + t)) = 0` for **every** `x ∈ G`, `t ∈ T`. *Degree:* none; J28D
+   writes "over the real, stable and `S` places" — **the one place its text assumes no complex place**: at a complex `w`,
+   `𝕋(F_w) = {(t, t⁻¹) : t ∈ ℂ^×}`, a hyperbola (step 3′).
+4. **3′ SPC-cx (restriction to the real form) [hand, new, one mind].** For each complex `w` put `Δ_w = {(a, ā)} ⊂ ℂ × ℂ = L_w` (the two
+   embeddings of `L` above `w` differ by `i ↦ −i`, so `u ↦ (τ(u), τ(u)⁻¹)`). `𝕋(F_w) ∩ Δ_w = {(t, t̄) : |t| = 1}`, and `(a, ā) ↦ a` makes
+   `Cay(Δ_w, 𝕋(F_w) ∩ Δ_w) ≅ UD(ℝ²)`. Let `G″ = ∏_{real v} L_v × ∏_{complex w} Δ_w × ∏_{stable} O_{L_v}`, a closed subgroup of `G`, and
+   `T″ = T ∩ G″ = ∏_{real} S¹ × ∏_{complex} (circle) × ∏_{stable} 𝕋(F_v)`. The restriction of `c̃` to `G″` is `G″`-stationary, continuous in
+   probability (so it has a jointly measurable version), and `P(c̃(x) = c̃(x + t)) = 0` for every `x ∈ G″`, `t ∈ T″` — the "every" of step 3,
+   restricted. So it is a stationary, `Haar × ν″`-a.e.-proper four-colouring of `Cay(G″, T″)`, in which every archimedean place, real or
+   complex, is a `UD(ℝ²)` factor. (Only an upper bound on independence is wanted, so passing to fewer edges is the safe direction: a
+   colouring proper for `T` is proper for `T″ ⊆ T`.)
+5. **C4 (split) [hand].** `Y′` := the stable H*-places (every non-trivial character at every level has normalised eigenvalue `> −1/3`);
+   `B` := the other stable places. By CLS-2, under the class hypothesis `B` is exactly the stable places with `q ∈ {11, 19}` — finitely many
+   (27 is H*: `−0.2857`; 23: `−0.3317`; 31: `1/3 − 1.6·10⁻⁴·…` (R88-TC-tab); `q ≥ 37` and dyadic `Q ≥ 64` by Weil; primitive characters by
+   Lemma P). *Degree:* J28D's factor table lists `B = {11, 19}` for ℚ(√47); for general `F`, `B ⊆ {v : q_v ∈ {11, 19}}` by CLS-2's complete
+   list of usable `q` — **the table is the degree-2 step, replaced by CLS-2**. `Y′` is compact and Hoffman: `ν̂′(ξ) = ∏_v ν̂_v(ξ_v) ≥ −Λ_Y`
+   with `Λ_Y = max_{v∈Y′} Λ_v < 1/3` (a maximum: `Λ_v ≤ 2√q/(q + 1) → 0`, finitely many places per `q`), so `α(Y′) ≤ Λ_Y/(1 + Λ_Y) < 1/4`.
+6. **C14.2 (a), (b) and C14.3 — the archimedean step at `n` places [hand].** `X := ∏_{archimedean} UD(ℝ²) × ∏_{v∈B} Cay(O_{L_v}, T_v)`
+   (`r₁ + r₂` archimedean factors after step 3′). Each `UD(ℝ²)` factor has ratio `m₁ ≤ 0.2470` (C14.2 (a); `[AmbrusEtAl2023]` Thm 1, its
+   certificate re-checked by J26 and J49); each `B`-factor ratio `r_v < 1/4` (C14.2 (b); FS-66 via Lemma P (ii)). C14.3 ("If `X₁` has ratio
+   `r₁` … and `X₂` ratio `r₂ ≤ r₁`, then `X₁ × X₂` has ratio `r₁`"), by induction on the number of factors — which C14.4 already states for
+   "`s` archimedean factors" and J28D used at `s = 2` — gives `r_X = max(m₁, max_B r_v) < 1/4`, **independent of `n`**. *Why the advisor's
+   risk does not bite:* first moments (X03D's `Λ(F) = 0.4028`, the least value of `J₀`) bound the least eigenvalue at a real place, i.e.
+   Hoffman's `0.2871 > 1/4`, and would fail at `n = 1` already; the count never uses them. J28D §3.4's mutation audit is this exact point:
+   "replacing `m₁` by Hoffman's 0.2871 at the real place flips the count's sign". A product of `n` real places is no worse than one because
+   C14.3's max is a max, not a product of complements.
+7. **C5 (the count), TC-reg [hand].** `G″ = X × Y′`, `X` doubling (finitely many factors), `Y′` compact: the stationary Zhang count gives
+   `1 = Σ_j P(c(0) = j) ≤ 4 max(α(Y′), r_X) < 1`. No such probability exists. ∎
+
+**Theorem SPC [hand; one mind].** For every real number field `F` outside row 100's exception in T-C(A)'s class (`r_v < 1/4` at every stable
+place): A⁺ at `S = ∅` holds with J45's proof (SI-4, N2, SPC-TCA), SP-Cor holds with J45's proof (X05V's P0–P8, every step field-general,
+3.1), and so, given MR(F), `χ(F²) ≥ 5`. For totally real `F` step 3′ is void; with complex places it rests on SPC-cx.
+*Scope of MR at complex places.* SPC's conclusion "given MR" is only as good as MR at that field: the brief's addendum records that waves 1–2
+(X01V, X02V, X12B) found the height over finite places ill-behaved when `F` has a complex place. **Both verdicts:** totally real — SPC TRUE,
+and COR with MR at its §7 grade; with a complex place — SPC TRUE (given SPC-cx), COR only as good as MR there, which I do not re-derive.
+
+**A⁺ at finite `S ≠ ∅`** (not asked; recorded because row 117 mentions it): the same proof with the split places of `S` as `X`-factors of
+ratio 0 (C14.2 (c)), including a split dyadic place via C14.2 (c) at `q = 2` (row 110, three derivations). Not needed for SP-Cor.
+
+### 3.3 COR
+
+**COR, corrected [hand].** For every real number field `F` outside row 100's exception, given MR(F) (and, with a complex place, MR's own scope
+there): `χ(F²) ≥ min(L(F), 5)`; hence `χ(F²) = L(F)` whenever `L(F) ≤ 5` (upper bound: row 52, `χ(F²) ≤ χ(target)` at a usable place).
+*Proof.* `L(F) ≥ 5`: CLS (⟸) puts `F` in the class; SPC gives `χ(F²) ≥ 5`. `L(F) ≤ 4`: row 99 ("`χ(F²) = L(F)` for every real number field
+with **L ≤ 4**", [hand, three derivations]), with no MR. ∎ **As worded ("SPC and CLS together give …") COR is short one input, row 99**, and
+does not name MR; with both named it is TRUE. This is the local–global conjecture's main clause through `L = 5`, conditional on MR, for
+every real number field outside row 100's exception.
+
+### Would-have-searched-here log (stage 3)
+
+- None: every step is a walk of held derivations; no instance was sought.
