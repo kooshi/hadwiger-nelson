@@ -135,3 +135,133 @@ Grades are `CLAUDE.md` § Notation's. The blind verifiers read `data/fs103/claim
 | G80 | **bears; falsifiable here** | MR at degree 16 has never been exercised: EF_F⁺'s pigeonhole needs the unit vectors' polynomial growth by height (at degree `n`, `U_ℚ` alone gives `c·M^{1/n}`), and PE-2 applies EL2021 Thm 1.2 only under admissibility. Killing test of G80's reading: a gap at either step at `F_dG`. → C-MR16. |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: §G part 2 (every row's mechanism, the method rules) and the extraction
+
+### §G part 2a — `LEDGER.md` rows 1–127 (§ A read in full from disk; § B consulted by grep for FS100-*, M3-J21-*, T-J39-*, BC-*)
+
+| row | verdict | reason / instruction |
+|---|---|---|
+| 1–7 | silent (each) | two-circle, seam, coverage, fan, class, 120°, greedy: finite-graph compulsion machinery |
+| 8 | silent | de Grey's balanced 5-colouring: a finite object |
+| 9–13 | silent (each) | 120° compulsion, one-pivot cap, strip automaton, extension profile, negative knowledge |
+| 14–25 | silent (each) | gluing classifications, seam closures (4-chromatic in K), field-wall identity |
+| 26 | silent | de Grey anatomy; its field is G43's, not this row's |
+| 27–30 | silent (each) | quadrature, kill engine, stacking, mechanism hunt |
+| 31 | silent | Act One carriers |
+| 32 | silent | hex-shell six-programme |
+| 33 | **bears** | `5 ≤ χ(ℝ²) ≤ 7` in the kernel, the upper end by a periodic seven-colouring: the frame F1 sits in; its random translation is I-CP7 |
+| 34–40 | silent (each) | cell family |
+| 41 | silent | limit lemma (bounded families) |
+| 42 | silent | arity floor |
+| 43 | **bears** (consequence) | homogeneity and the six-target: given F1, a pair of five-colour virtual edges at √3 and 2 is one more route to `χ_CP(ℝ²) ≥ 6`; no phase |
+| 44 | silent | spindle theorem (finite) |
+| 45 | silent | batch descent, spare colour |
+| 46–51 | silent (each) | copies, M53, critical sets, absorption, additive yardstick, additive rigidity |
+| 52 | **bears** | the finite-plane bound, and "de Grey's first usable prime is 131": the upper half at `F_dG` is useless (`χ(Γ₁₃₁)` large), the lower half is the question → C-dG-PL cites it |
+| 53 | **bears** | the sieve's map: `F_dG` first usable 131, 479; `K(√7)` 83; K(√5) sealed at 5 → controls CTL-K7, CTL-K5; `data/fplane/map.md` is the standing map V2 may compare against *after* its own PARI list |
+| 54 | silent | lifts |
+| 55 | silent | residue obstruction (subsumed) |
+| 56 | silent | local–global tightness (finite quotients) |
+| 57 | **bears** | Theorem A's valuation form and **row 57's gap** (a number field's conjugation-fixed prime supplies the valuation subring): every "stable place" statement at `F_dG` is hand-level there → K lists it as a named hypothesis |
+| 58 | silent | Moser recipe threshold |
+| 59 | silent | 2-adic law over K |
+| 60 | silent | plane freedom at finite primes |
+| 61 | silent | statements at their proofs' level |
+| 62 | silent | overcompression |
+| 63 | **bears** (lightly) | the multiquadratic 2-adic splitting; `F_dG`'s decomposition; the rank-4 fields Kooshi's remark counts (§1.2) |
+| 64 | **bears** | the ρ₆₃ arena is five-chromatic in 6-open `K(√7)`: a finite five in the control field CTL-K7 (not used as input) |
+| 65 | silent | arena shapes |
+| 66 | silent | fan gap over sealed fields; "Not claimed: anything over a 6-open field" — F1's fields are 6-open, so row 66 says nothing there |
+| 67 | **bears** | the tight/slack classifier; tightness at 2 is why the dyadic place matters — at `F_dG` it is split, so absent |
+| 68 | **bears** | six refused at 83 by certificate ⟹ Hoffman did not refuse six ⟹ `λ*(83) ≥ 1/5` → CTL-K7's stopping step |
+| 69 | **bears** | the window: the non-6-thick odd places are among `q < 101`, the window members and their neighbours → C-S |
+| 70 | **bears** | the wall at six made finite; `U₆₄`'s floor 6 → C-S's dyadic clause |
+| 71 | **bears** (lightly) | fractional blow-up caps at 4.36 → E5 |
+| 72–74 | silent (each) | 3-adic barrier, quadratic four-colour witnesses, census |
+| 75 | **bears** | full-depth thickness: the fibre-share inequality's `|λ| ≤ 2p^{k−1}` for new levels; `χ_Bor(ℚ_p²)` → C-dG-THK "every level" |
+| 76–77 | silent (each) | five over ℚ(√3,√5) by forcers; the theorem audit |
+| 78 | **bears** (K) | `forces_iff_exists_finite` (de Bruijn–Erdős by `Finset.rado_selection`) is the kernel's compactness tool for `χ(ℝ²) ≤ χ_CP(ℝ²)` → K |
+| 79–87 | silent (each) | three-colour criterion, four-colour no-gos, ℚ(√167) survivors, row 82's layers, census, calibration, de Grey's lattice, abstract rigidity, second moments |
+| 88–91 | silent (each) | type-(B) rigidity frame, K's classification, the rigid local plane, the construction no-gos |
+| 92 | **bears** | measurable windows at every real place rest on `m₁(ℝ²) ≤ 0.2470` — the four-colour real-place fact behind the `k = 4` controls (CTL-dG4, CTL-167-4) |
+| 93–94 | silent (each) | dyadic towers; ℚ(√11)'s explicit colouring (but C9 is a CP-branch-(A) control at four colours, J48-C11: noted for CTL-11 if the verifiers want a live branch (A)) |
+| 95–98 | **bears** | band rigidity: `T + A` is where a band character's spectrum lives, the object R-U and step 4 of T-J39-3 read → input I-RU names R-U by statement |
+| 99 | silent | `L ≤ 4` |
+| 100 | **bears** | Lemma C′: `R_F = O′` off a ramified stable dyadic place — MR's scope; the exception fields have `L = 2` → C-dG-PL and C-635-PL must state "outside row 100's exception", with its reason |
+| 101 | **bears** (lightly) | `χ_char(F_dG²) = 22` given CLG → §IQ note (G77) |
+| 102 | silent | one prime fails |
+| 103 | **bears** (K) | the chain theorem in the kernel; the 8/3 route is an MR-free five at `F_dG`-type fields → CTL-dG4 has two MR-free fives (de Grey's graph; the chain given G4) |
+| 104 | silent | transcendence |
+| 105 | **bears** (K) | prime inversion in valuation form is in the kernel; the number-field reading is row 57's gap → K |
+| 106 | silent | stripe lemma |
+| 107 | **bears** | the bridge conditional on `RealAlgebraicDescent`; F1 would supersede its use for the value by attaining `χ(ℝ²)` at a named field, given MR → C-CPUP notes F1 needs no Tarski; FS-39's stub re-aim |
+| 108 | silent | rank one |
+| 109 | **bears** | **J21-MX, the mixing selection** — the engine of the load-bearing step; its CP form is J48-MXcp → input I-MX by statement (Borel/measurable form), and C-LB6 asks for its CP form over infinitely many places blind |
+| 110 | **bears** | thick places, the reduction RED, "two real places merge", and "**with a real place and only thick finite places the question is exactly `χ_B(ℝ²) ≤ 5`**" — the Borel-window form of F1 at five, over finite `S`; its GAP-1 (measurable → everywhere proper) is item 3's question → C-FMT; Phase 3 |
+| 111 | **bears** (lightly) | Q-μ/transience split: the invariant-measure half is where CP colourings come from (Følner averaging) |
+| 112 | **bears** | Theorem C: "the hypothesis is exactly continuity in probability … so the colouring extends to a stationary, almost-everywhere proper random colouring of `Cay(G_S, T_S)`" — a held analogue of T-J39-3's step 5, and a format warning (a.e.-proper vs proper a.s. at each fixed edge) → C-FMT |
+| 113 | silent | ℚ(√47) at four colours (moot) |
+| 114–115 | **bears** (lightly) | mixing pins a product colouring (Hoffman/mixing selection in finite products) — the finite shadow of the thick deletion |
+| 116 | silent | Kronecker selection |
+| 117 | **bears** (method) | the precedent for counting minds: a non-blind re-derivation is listed apart → Phase 1 grading |
+| 118 | **bears** | no finitely generated `Γ ⊂ U` acts irreducibly on `R̂`; EL2021 applies on the pieces under admissibility → C-MR16 |
+| 119 | silent | ℚ(√167) at four, kernel |
+| 120 | **bears** | MR: F1's first hypothesis; its grade and its scope (`R_F = O′`) → I-MR by statement, C-MR16 at degree 16 |
+| 121 | **bears** (lightly) | the triangle-free five at ℚ(√47) via de Bruijn–Erdős: the template for C-CONS-3 |
+| 122 | **bears** (lightly) | the flip's constant `Λ ≥ 0.402759 > 1/3` at every real place — why no one-sided spectral route replaces MR at five or six |
+| 123 | **bears** | CLS/SPC: every stable place's ratio profile; "`χ(ℚ(√167)²) ≥ 5` by two routes (the class; every stable place 4-thick)" — **the `N_k = ∅` shape with infinitely many thick places, already exercised at `k = 4`** (J48-N4, N4cor; T-J39-4) → control CTL-167-4 |
+| 124 | **bears** | SEL-k, every real number field, every `k`, given MR: a second route to T-J39-3's steps 1–5 (X22D: "SEL-5 re-derives T-J39-3's 'given MR' iff by a different route"), the thick deletion still J39's → I-SEL by statement; the load-bearing step is step 6 |
+| 125 | **bears** | B-1, B-2 (`χ(F²) ≤ χ_CP(ℝ²)` for countable `F`), Lemma X21V-M (merge), the density no-go → I-CPUP, I-MERGE by statement |
+| 126 | silent | TR-ROT |
+| 127 | **bears** (K) | FS-101's first slot: `SpectralChain`'s named hypotheses → K extends it with T-J39-3 and thickness as named hypotheses |
+
+### §G part 2b — the method rules (`CLAUDE.md` § Grokkings [method], § Building, § The gate, § The standard of evidence)
+
+| rule | verdict | reason / instruction |
+|---|---|---|
+| G21, G30, G46, G49, G50, G51, G67, G72, G79 | bears | above |
+| § Building: build only through `scripts/build.sh`; `lake env lean` is not the gate; the batch is the plan | **bears** (K only) | Phase 4 builds only through `scripts/slot.py … ./scripts/build.sh` |
+| § Building: halt on any unexplained crash | bears | every brief |
+| § Building: RAM is the discriminator, `scripts/slot.py` | silent | no job above 2 GiB or 2 min is planned (PARI and the spectrum are seconds) |
+| § Building: checkpoint every long phase [PROTECTED] | **bears** | every phase names its checkpoint: the record's SAVED stages (§6) |
+| § Building: a blocking run is presumed killable [PROTECTED] | silent | no long runs |
+| § Building: kill by pid, verify by effect; pipes kill producers; never edit a running script | silent | no background jobs planned |
+| § Building: generated modules and invalidation | bears (K) | the kernel slot edits no module a certificate imports |
+| kernel cost model | silent | no kernel computation planned |
+| § Searching: `ugrep` alternation, `^` inside patterns; a failed `exact?` is not an absence | bears (lightly) | the fence greps in the briefs use `grep -F`; K greps Mathlib by shape |
+| the gate: vacuity; every structure-hypothesis ships an inhabitant | **bears** (K) | K's hypotheses are propositions (named), never structures over empty domains; the CP-colouring structure needs an inhabitant (the random hexagonal seven-colouring) |
+| make the gate fail: plant faults; state the uninformative outcome and confirm it reachable | **bears** | every claim's wrong-reason TRUE and control field is this rule; each verifier's exact check (spectrum, place list) carries a plant that fires for its own reason |
+| a number in a ruling carries what it measures; exactly one thing differs | **bears** | thickness numbers are `sup|ν̂|` of the standard piece at every level, never `λ_min/d` at level one: C-dG-THK states which |
+| both outcomes reachable, evidence for mis-specification predates the result | **bears** | expectations §6.3 |
+| measured vs derived half fail in opposite directions | silent | nothing measured |
+| a caveat stepped over | **bears** | "F1 gives `χ = χ_CP`, never `χ = χ_m`": the caveat to re-read against every summary sentence |
+| count free parameters; enumerate the parameter first; a positive control proves only its generator's shapes | **bears** (lightly) | the place list is enumerated over all primes below a bound, not over a candidate list; the control fields cover both outcomes (goes through / stops) |
+| a true explanation stops the search | **bears** | a verifier who finds one reason a step holds (Weil) checks every gate (ramified places, dyadic places, every level) |
+| standard of evidence: write for the reviewer early; order steps by marginal evidential value | **bears** | V1 derives the load-bearing step first, the instances after; V2 lists places first (a cheap falsifier), then S |
+| What compute helps: re-price a kernel leaf from its first two leaves | bears (K) | Phase 4's budget is provisional until two leaves close |
+
+### §G part 3 — the extraction: each *bears* as an instruction to a phase
+
+| # | instruction | phase | from |
+|---|---|---|---|
+| X1 | F1's scope is **totally real** `F`, outside row 100's exception, with `N₆(F) = ∅`; "a real field" is a correction owed | claims; report | Q4, G1, row 100 |
+| X2 | the **load-bearing step** is T-J39-3's step 6 (the thick deletion over infinitely many places, random form) at `k = 6` with `N₆ = ∅`; steps 1–5 have a third route (SEL-k, row 124) and its merge is Lemma M | claims C-LB6; Phase 1 | rows 109, 124, 125 |
+| X3 | the same shape (`N_k = ∅`, infinitely many thick places) **has been exercised at `k = 4`** (ℚ(√167), J48-N4cor, row 123's second route) and its conclusion is independently known at `F_dG` (de Grey's graph) — so the verifiers' derivations must specialise to `k = 4` and agree there | controls CTL-167-4, CTL-dG4 | G55, rows 92, 123 |
+| X4 | controls where the chain must **stop**: `K(√7)` at `k = 6` (83 not 6-thick), `K(√5)` at `k = 5` (11 usable), ℚ(√167) at `k = 5` (23, 43) | claims; V2 | G7, G43, rows 53, 68 |
+| X5 | thickness is `sup|ν̂|` at every level (both signs), not Hoffman's sign and not the independence ratio | wrong-reason lines | G54, G66, G76 |
+| X6 | the CP format and its neighbours (a.e.-proper, Borel everywhere-proper, null-vertex N′) must be told apart in every claim; item 3 (`χ_CP` vs `χ_m`, `χ_B`) states nothing as held | C-FMT; Phase 3 | rows 110, 112; G22 |
+| X7 | MR at degree 16: admissibility and EF_F⁺'s growth at `F_dG`; what rests on EL2021's unread proof | C-MR16 | G80, rows 118, 120 |
+| X8 | the place list is PARI-exact with residue degrees, ramified primes of `F/ℚ` included, and a plant; the spectrum at the first usable place exact, beside Weil | C-dG-PL, C-131 | G43, G44 |
+| X9 | `χ(ℝ²) ≤ χ_CP(ℝ²)` uses de Bruijn–Erdős and countable restriction, not Tarski; K uses row 78's compactness | C-CPUP; K | G63, rows 78, 107 |
+| X10 | S's exact form given MR is written by V2, with the non-6-thick places named (window, `U_Q`) | C-S | G56, G59, G64, rows 69, 70 |
+| X11 | the prior-art gate names the object in five disciplines, pulls author listings, fetches Falconer | §PA.0 | G46, G49, G50, G22 |
+| X12 | no measurement is planned that could be read as support; expectations register both outcomes | §6 | G21, G30 |
+
+**What §G changed in the stub's plan** (WORKFLOW 3.1 item 3): (1) F1's scope narrowed to totally real fields (X1); (2) the load-bearing step
+named precisely as step 6, with steps 1–5 already held by a second route (X2); (3) the stub's "no instance has exercised it" corrected: the
+shape was exercised at `k = 4`, which becomes a mandatory specialisation check (X3); (4) three stopping controls added (X4) and a positive
+control at `k = 4` with an independently known answer (X3); (5) Kooshi's "only 4-quadratic field" corrected, and two further collapse fields
+named (§1.2); (6) the format distinctions made a claim of their own (X6).
+
+## Stage 2 — SAVED
