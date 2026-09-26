@@ -59,6 +59,11 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # J47, the milestone-stub writer (2026-09-25): FS-100 ranked in at 3, every paths-forward rank from 3 on moved down one.
+    "37–41": "the paths-forward table's group rank, renumbered 38–42 when FS-100 was ranked in at 3 (J47)",
+    "42–44": "the same re-rank: now 43–45",
+    "54–55": "the same re-rank: now 55–56",
+    "56–58": "the same re-rank: now 57–59",
     # J44, the front page of row 88's and FS-67's closes (2026-09-25): ranges extended, the stub table re-ranked, FS-67's row
     # replaced by its close's draft (R.8c), G76's grade widened by row 88's close's draft (J41 pair 4).
     "1–110": "the ledger's row range, extended to 1–115 at row 88's and FS-67's closes (2026-09-25)",

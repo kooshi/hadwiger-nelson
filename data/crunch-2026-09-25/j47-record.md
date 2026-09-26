@@ -76,3 +76,18 @@ on "MR is field-by-field" or on a FALSE at T-J39-3's steps 5–6.
 
 - Would have checked whether ℚ(√143), ℚ(√311), ℚ(√335) sit in T-C(A)'s class (a sweep of their stable places' ratios). Instead: §5 item 5
   says "not checked here".
+
+## Stage 3 — SAVED: the cross-references, the two ranked tables, the audits
+
+- **Cross-reference lines** (one each, inserted under the title): `plans/STUB-five-colours-47.md` (FS-84: FS-100 is the derivation route; no
+  FS-84 stage moves; R4 is FS-100's P1 and supersedes P-int's price); `plans/STUB-four-colours-167.md` (FS-59: T-J39-4's "MR ⟹ ≥ 5", T-J39-5 (i),
+  the re-aim listed in FS-100 §2.5); `plans/STUB-windows-five-nonmixing.md` (FS-96: J39's R3 listed in FS-100 §2.5, not applied).
+- **`plans/FRONTIER-STUBS.md`:** FS-100's row at rank 3; ranks 3–58 → 4–59; a one-line banner above the re-rank paragraphs; the current-state
+  rank mentions updated (FS-84 "rank 4" in the open-milestones paragraph; FS-67 "rank 11" there and in the closed list). The banners of earlier
+  re-ranks are left as written.
+- **`CLAUDE.md` § Paths forward:** FS-100's row at rank 3 (567 bytes), every rank and group from 3 on down one (the last group 57–59, matching
+  the stubs file's 59 rows), and one clause in the table's preamble. File 295,923 bytes (ceiling 325,000 during the crunch).
+- **Audits, exit status read directly:** `tools/claude_md_fact_audit.py --base 8a78875e` first **FAILED** on four lost group-rank tokens
+  (`37–41`, `42–44`, `54–55`, `56–58`); **deviation from my touch list:** I added four `ALLOW` entries to `tools/claude_md_fact_audit.py`, in a
+  commented J47 block, the mechanism every re-rank used (J44's block above it); re-run: **exit 0, "AUDIT PASSED (0 failure(s))"**. `--dupes`:
+  identical to the launch version's listing (diffed). `tools/bib_audit.py`: exit 0, "every cited work resolves to a row or a recorded alias".

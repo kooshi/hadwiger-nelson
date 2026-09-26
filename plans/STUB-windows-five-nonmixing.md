@@ -1,5 +1,7 @@
 # STUB — FS-96: windows at five colours over ℚ(√167) at the non-mixing places, and the null-set step (FS-64 at five, after M3)
 
+**Cross-reference (2026-09-25, J47):** J39's re-aim of this stub (its R3: "for existence the places are `{∞, 23, 43}`, modulo SP"; GAP-2 is PL(23, 43)) is listed in `plans/STUB-measure-rigidity-three-fields.md` §2.5 (FS-100) for the next front-page pass; not applied here.
+
 *Minted 2026-09-25 at M3's close (crunch job J23c, from `plans/M3-close-inventory.md` rows 23 and 61, and the prior-art debt of row 22).
 Numbered FS-96 by the front-page job (J24). Read first: `plans/M3-derivation.md` §5–§6, `plans/M3-S1D-windows-five.md` §3,
 `plans/M3-S1V-windows-five.md` §2.1 and §3.4. Solver column: **none until 2026-10-01** for the derivations; the `κ` questions below are

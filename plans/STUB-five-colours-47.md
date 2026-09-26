@@ -1,5 +1,7 @@
 # FS-84 — ℚ(√47): five colours, the conjecture's cheapest exposed prediction (stub; FS-59's sibling)
 
+**FS-100, the derivation route to this question (2026-09-25, crunch job J47; `plans/STUB-measure-rigidity-three-fields.md` §9):** the wanted poster of a four-colouring of ℚ(√47)'s plane (J37) and its siblings reduce to one colouring-free lemma, MR(F); given T-C(A) at `S = ∅`, MR gives `χ(ℚ(√47)²) ≥ 5` (J45 SP-Cor). FS-84 stays open with its post-ban search stages S4, S2, S3. **No FS-84 stage moves to FS-100.** J37's R4 — a triangle-free Dúcz–Varga-type finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` — is FS-100's post-ban stage P1 and supersedes P-int's price (`plans/FS84-close-inventory.md` row 23).
+
 **At row 88's close (2026-09-25; `LEDGER.md` row 113, `plans/R88-derivation.md` R88-TCA).** No translation-invariant random four-colouring of ℚ(√47)'s plane has its spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places, the dyadic one included [hand, two derivations blind to each other; the class form one mind]; so a four-colouring falsifying the five-clause carries an invariant measure on its orbit closure whose spectrum is carried by no such class — it reads infinitely many split places in aggregate (FS-97 holds that remainder). `χ(ℚ(√47)²) = 5` is not claimed and this stub's question is untouched. Provisional bearings add: G76's colouring-level split (row 111).
 
 

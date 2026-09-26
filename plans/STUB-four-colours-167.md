@@ -1,5 +1,7 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+**Cross-reference (2026-09-25, J47):** J39 found "MR(ℚ(√167)) ⟹ `χ(ℚ(√167)²) ≥ 5`" (T-J39-4, one mind), so this stub's question waits on the lemma FS-100 carries (`plans/STUB-measure-rigidity-three-fields.md`); the conjecture's "≥ 6" needs `χ_CP(ℝ²) ≥ 6` (T-J39-5 (i)). J39's re-aim of this stub's bearing (its R4) is listed there, §2.5, for the next front-page pass.
+
 **Re-aimed at FS-91's close.** Given CLG_7, `χ_char(ℚ(√167)²) = 8` (row 101; unconditionally `6 ≤ χ_char ≤ 8`): no character colouring with five, six or seven colours exists, so any colouring of this plane with fewer than eight colours — and any falsifier of the prediction "≥ 6" — is one no character gives. The known bracket is `4 ≤ χ(ℚ(√167)²) ≤ 7`.
 
 **At M3's close (2026-09-25):** FS-64's window format at five is reduced to nine places (row 110); a window falsifier of '≥ 6' must read a place above 43 or one of 2, 3, 5, 7, 23, 29, 61 with a real place.
