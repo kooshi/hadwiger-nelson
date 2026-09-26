@@ -203,3 +203,13 @@ new sentence were reworded.
 **Gates (exit statuses read directly):** `claude_md_fact_audit.py --base b559e820` PASS (0 failures; "8-for-8" and "0-for-10" live in
 GI §G30's pre-cut text); `--dupes` 10 (baseline 10); `fs71_ledger_b_check.py --strict` PASS; `bib_audit.py` exit 0; `check_architecture.py`
 PASS; `CLAUDE.md` 291,894 bytes.
+
+## Stage 4 — SAVED (the three *Do* drafts, not applied)
+
+`data/consolidation-2026-09-26/G2-do-lines.md`: one draft per entry (G21, G30, G46), each opening with its trigger, built from quoted body
+phrases, with a one-line reason, one alternative wording and where it would go. Checked against `CLAUDE.md` by appending the three drafts
+to a scratch copy and running `--dupes --new`: one added repeated run (G46's killing test = its existing falsifier, which the draft
+proposes to replace); four clauses that repeated ten body words were reworded before that check. Nothing in `CLAUDE.md` changed at this
+stage — Kooshi approves first.
+
+**Would have searched here:** nothing; no search was wanted.
