@@ -507,7 +507,134 @@ fragment; logged.
 DD1, DD2R, DD2N), every one with its statement (verbatim from §4.3/§5.1 where it is a claim), grade and verification status, proof address,
 *Rests on it*, *Prior art* (pending J40) and *Kernel*. Merges, explicit: J27D `#7` (GRR2017 Thm 4.9, external) is DC-1's input; J27D `#9` ((M), (P)) is
 M3-J21-MX's engine and selection, filed under DC-2; the two GAPs and DD-1's Zhang question are its §5, not entries. **Independence:** 14 entries are
-two derivations (13 blind; L1 and DA-2′ with J27V's fence-log exposure to PA-T6's one sentence), 5 are one mind (FS67-GL, DC2S, C5, T, and DD2N's
+two derivations (12 fully blind; L1 and DA-2′ with J27V's fence-log exposure to PA-T6's one sentence; DC-3 a tools table re-computed at three rows), 5 are one mind (FS67-GL, DC2S, C5, T, and DD2N's
 abelian-Cayley half). `python3 tools/fs71_ledger_b_check.py --strict`: all 19 parse with all five fields; the only FS67 failures are "no
 `LEDGER.md` § B row", expected until the front-page job applies the § B lines drafted below (the checker's other failures on this date are the
 row-88 close's `R88-*` entries, not this close's).
+
+### Stage 2 — SAVED (the re-reads, the predictions, the verdict, the tallies, the ban)
+
+#### R.1 §G re-read: which extractions paid, which entry should have borne
+
+| entry (§G.1–§G.3) | extraction | outcome |
+|---|---|---|
+| G46, G49, G50 (recognition in the discipline's words; read what the search found) | §PA before any derivation | **paid, decisively**: the hierarchy `A(n) ⟹ B(n) ⟹ H(n)` (Duffus–Sands–Woodrow via `[Tardif2008]` §4.2) killed the stub's jackpot at `k ≥ 4` in the plan, before J27D ran; GRRSV and Pak–Vilenchik supplied DC-1, DD-1 and DC-2's threshold |
+| row 86, G70 (`K_k × Y` uniquely colourable) | DA's construction | **paid**: `G = K_k × X` is DA-3/DA-4's witness family |
+| G13, G68, row 66 (a gap frees; `FanGap`) | DA-1′ | **paid** (FS67-DA1) |
+| G54 (tight ⟹ balanced, gap-free) | DB-2, DD | **paid** (Lemma T, FS67-T; DB-2) |
+| G44 (exact spectra) | DC-3 | **paid** (FS67-DC3; three rows matched by J27V) |
+| row 88 (Zhang (i) at a strict ratio) | "DC must say what it adds" | **paid**: DC-1 needs no vertex-transitivity of `H`; DC-2 no condition on `G` beyond gap-freedom |
+| G24, G73 (the gap regime is integrality; expect non-local obstructions at four) | DD combinatorial only | **confirmed**: FS67-DD2N puts any tight counterexample in `H`'s gap regime; DD-2's missing ingredient is a Hedetniemi pair |
+| G71 (`K₃`'s universal cover; heights) | DB's route | **paid in part**: Lemma W is the height read two steps at a time and colours the zero class; the non-zero class is the GAP |
+| G30 mode 5 (inhabitants; implied hypotheses) | §M domain pass | **paid**: DC-2's hypotheses on `H` are consequences of `λ* < 1/(k−1)`; DA-1′'s connectivity deleted; DC-2's "connected" deleted |
+| G51 (one derivation plus a blind verifier) | §S staffing | **paid**: every claim twice, no divergence, two additions (sharpness; `C₅`) |
+| G61 (3), falsifiable → P-B | DB | GAP; the 11 half of G61 (3)'s measured fact is now a theorem (FS67-DB2 with FS67-DC2, DC-3), the 7 half is not reached |
+| G21 and "make the gate fail; confirm the uninformative outcome is reachable" (§G.3) | plants in every `tools/crunch_j27d_*` check | **half paid — the miss of this milestone**: the rule was extracted for DA's route (P-A must be able to fail) but not for the tools' own plants; **two plants could not fire** (J27D's tightness plants on `UD(𝔽₉, 2)`; J27V's first DC-3 plant, the circle `x² + y² = 2`, an isomorphic graph). Both were caught (by hand cross-check; by the plant passing). FS-89's close had already recorded "plants that could not fire" under G21. A new 3.1 instance: an extraction to a *route* is not an extraction to the *instruments* the phase writes |
+| G75/row 85 (R3a's pointwise tetrahedron splitting), row 89 (equal ratio decided by tightness) | DD candidate routes | **named, not run**: neither DD-2 nor DD-1's Zhang question tried them (J27D: "not attempted within budget"); they stay the routes at hand for §5.3 of the derivation file |
+| rows 67, 93 (tight families at four; tightness per level) | DD instance list | row 93's caution **paid** in DB-2's conditional clause; row 67's family unused |
+
+**Forward propagation** (drafts for the front-page lane; the stubs' provisional-bearings lines are not edited here): FS-67's results bear on
+**FS-96** and **FS-64** (a mixing factor's colouring pulls back when the other factor is gap-free, FS67-DC2 — the integral twin of M3-J21-MX), on
+**FS-92** (locality of a colouring of a product of local targets: FS67-DC1/DC2 are pullback theorems of that shape; DA-4 is the no-go
+that locality can fail between gap-free factors at `k ≥ 4`), on **FS-42** (a 5-tight quotient is 5-gap-free by Lemma T, so its products
+with mixing factors pull back), on **FS-51** (Lemma T as the ratio bound's equality lemma) and on **FS-76** (DA-4: non-local four-colourings
+of products exist between gap-free factors).
+
+#### R.2 §IQ re-read and G72's count
+
+The structural form (§4.1 item 2: "for which `G` does FS67(G, k) hold, and what is the obstruction when it fails?") was answered **as a
+criterion, by derivation**: FS67(G, k) ⟺ every proper `k`-colouring of `G` gap-free ∧ `χ(E_k(G)) ≤ k` (FS67-DA1 with FS67-DA2; the ⟸ half
+re-derives PA-T6). The invariant §IQ named — the fibre map `Φ : H → K_k^G` — did the work in all three regimes: *for a no*, a Hedetniemi pair
+hidden in `E_k(G)` (FS67-DA3), realised at every `k ≥ 4` from print (FS67-DA4); *in the strict spectral regime*, the fibre-measure vector
+(FS67-DC2, by extending M3-J21-MX's selection with a gap-freedom bootstrap) and the Gram matrix `M ⊗ J` (FS67-DC1, DD-1, read off GRRSV); *for
+a yes at three colours*, the selection was **not found** — Lemma W (a winding every map carries) splits `E_3(G)` and colours the zero class,
+and the non-zero class is the GAP. Kooshi's post-close observation (crunch post-close inventory row 25: look for the "example invariant", not
+the counterexample's) reads FS-67 exactly: the counterexample invariant (a Hedetniemi pair in `E_k(G)`) was realised from print; the example
+invariant at three colours (a colouring of `E_3(G)`'s non-zero-winding part) is the missing step. **§IQ's open instances:** `S₁ = UD(𝔽₉, 2)` and
+the tight 3-adic levels are decided against every `H` with `χv(H) > 3` or `λ* < 1/2` (J27D's DB-2 consumer sentence; `Γ_p`, `p ≥ 11`), open
+against `Γ₇`-type `H`; `U₃₂`, `U₄`, the 2-adic levels, FS-61 A.7's colourings and R3a were not treated by the records; Zhang's exception is §5.3's
+GAP. **G72 count, tenth:** through the structural question — the criterion and the obstruction it names; the spectral pullback by extending a
+known tool; the three-colour selection not found: **ten of ten** (drafted for G72 in R.8).
+
+#### R.3 §PA sweep: what the milestone learned about what its object IS
+
+1. **FS-67 contains Hedetniemi.** FS67(G, k) for non-`k`-colourable `G` is `χ(K_k^G) ≤ k`, i.e. `H(k)` for `G`; the gap-free form is
+   Duffus–Sands–Woodrow's `B(k)` with "uniquely colourable" widened to "gap-free". → the drafted G54 line and the stub.
+2. **"`B(n)` and `A(n)` are false for every `n ≥ 4`" is a composition of print, not ours** (owner's ruling on J40's held item, 2026-09-25):
+   Duffus–Sands–Woodrow 1985's `B(n) ⟹ H(n)` (as `[Tardif2008]` §4.2 and `[GodsilEtAl2020]` §1.3 report it: "(An ) ⇒ (Bn ) ⇒ (Cn+1 ) for all
+   n") with `[Tardif2023]` Thm 1 (`H(n)` false for `n ≥ 4`). J40 found it stated as a sentence nowhere (`plans/FS67-PA-close.md` Stage 2); that
+   measures J40's queries. **It does not go into `CLOSED-QUESTIONS.md`.** FS67-DA4 is the explicit construction (`K_k × X`) of that composition;
+   whether DSW's own proof uses `K_n × X` is undecided until DSW is read (J40).
+3. **The vocabulary** (J40 Stage 2): a gap-free colouring is a **fall colouring** (idomatic partition), a **frozen colouring** (an isolated vertex
+   of the recolouring graph `R_k(G)`), and Csernák's **tight colouring**; a `k`-gap-free graph is Csernák's "tight graph". **Csernák's "tight"
+   clashes with G54's "Hoffman-tight"**: every drafted line below says "gap-free (fall)" or "Hoffman-tight", never "tight" unqualified. L1 reads
+   "frozen in `R_k(G)` ⟺ isolated in `K_k^G`".
+4. **"Pulled back from `G`" in vector language is "the Gram matrix is `M ⊗ J`"** (J27 §PA 3.3): GRRSV's vector theorems give FS-67's integral
+   statements by one step (the simplex colouring), which GRRSV do not state (J40 Stage 3).
+5. **A class J27D does not name** (J40 Stage 2): FS67(G, k) holds for every graph in which every vertex lies in a `k`-clique — the
+   Burr–Erdős–Lovász class; filed as FS67-CL (stage 5).
+
+#### R.4 The predictions, scored once
+
+| id | prior | outcome | note |
+|---|---|---|---|
+| P-A (`k ≥ 4` counterexample, `K_k × X`) | 0.90 TRUE | **TRUE** | FS67-DA4 |
+| P-A′ (FS-67 for `K_k × X` ⟺ no Hedetniemi partner) | 0.70 | **TRUE** | FS67-DA3 |
+| P-B (three colours, gap-free) | 0.55 T / 0.15 F / 0.30 GAP | **GAP** | the modal lean (TRUE) missed |
+| P-C (spectral pullback at some `τ_k`) | 0.90 | **TRUE** | |
+| P-C′ (at `1/(k−1)`) | 0.45 | **TRUE**, and sharp | under-predicted |
+| P-D (tight at `k ≥ 4`) | 0.60 GAP | **GAP** | |
+| P-E (equal ratio, IS-imprimitive) | 0.60 GAP | **GAP** | §5.3 |
+| P-F (FS-61's one-sided sketch, tight `G`, `k = 3`) | 0.30 | **TRUE where `G` and `H` are 1-walk-regular** (FS67-DC1 with its `χv` link, as J27D states it); **undecided as stated** for other `G`, `H` | neither record addresses the general case |
+| P-G (no bound on `χ(ℝ²)` or a field plane moves) | 0.97 | **TRUE** | |
+| P-H (DC-1) | 0.85 | **TRUE** (conditional on GRRSV) | |
+| P-I (DC-2 at some / at the threshold) | 0.90 / 0.45 | **TRUE / TRUE** | |
+| P-J (DD-1) | 0.40 T / 0.15 F / 0.45 GAP | **TRUE** (conditional) | the modal lean (GAP) missed |
+| P-K (DD-2 GAP) | 0.60 | **GAP** | |
+| P-L (a J27V divergence) | 0.50 | **FALSE** | no divergence; two additions |
+| P-M (DB-1 needs non-bipartite only) | 0.55 | **not reached** | unscored |
+
+**J27D's C0** (informed; registered after informal reasoning had begun): all eleven landed on their modal outcome. **J27V's C0** (P(TRUE)):
+eight TRUE claims at 0.80–0.97 landed; V-DB-1 at 0.50 → GAP, V-DD-1 at 0.50 → TRUE, V-DD-2 at 0.35 → GAP. **Reading:** the planner
+under-predicted the spectral side (P-C′ 0.45, P-J 0.40, both TRUE) and over-predicted three colours (P-B leaned TRUE, GAP) — the one lean
+toward "yes" that standing rule 4 warns of was the one that missed.
+
+#### R.5 The verdict, in four parts
+
+- **The choice:** FS-67 is ruled **Paid (theorem and no-go)** and closed as a milestone; the stub stays open, re-aimed at three colours (DB-1),
+  a Hoffman-tight counterexample (DD-2) and Zhang's exception.
+- **The alternative weighed:** "Partial — not landed", because neither of the stub's two clauses fired as written (its jackpot and its
+  informative failure are both about Hoffman-tight `G` at three colours, which stays GAP).
+- **Why this one won:** the stub's own question was answered at every `k ≥ 4` for its gap-free form (negatively, a composition of print made
+  explicit, FS67-DA4), and at every `k` in the mixing regime (positively, sharp, FS67-DC2), each by two blind derivations; a clean negative is
+  a result (Kooshi: "All novel knowledge is a success"). The not-landed parts are stated as GAPs at named steps, reached independently twice.
+- **Confidence:** high on DA-1′–DA-4, DC-2 and its sharpness (two blind routes, exact checks, planted faults that fire); medium on DC-1 and
+  DD-1 (conditional on GRRSV's semidefinite results, read, not re-derived). What would lower it: DSW 1985, once read, stating the `K_n × X`
+  construction (DA-3 then re-derives print); a printed DC-2 for arbitrary gap-free `G` (J40 searched 40 zbMATH queries and two databases and
+  found only `G = K_k`). **Bearing on χ ≥ 6: none.**
+
+#### R.6 The honesty tally
+
+| who | item | kind | source |
+|---|---|---|---|
+| owner (standing rules) | "never push" in `STANDING-RULES.md` item 6 against briefs that said push; corrected 19:55 | owner error, corrected | J27's report; `STANDING-RULES.md` item 6 |
+| J27 | `LEDGER.md` walked by row heads plus the grokkings' mechanisms, not in full (budget) | honest deviation, logged | plan header |
+| J27 | the index-shift check leaned on a web summary whose source page was not opened | honest flag; J27D then read `[Tardif2023]` and GRRSV directly | §PA 3.1 |
+| J27 | J27V's brief quoted DD-1 and DD-2 with a terminal period the plan lacks, and left out DD-1's Zhang ask | correction owed (cosmetic; the ask unverified) | J27V §4.1 |
+| J27 | §4.2's PB row names `S₁`, `U₄`, `U₃₂` for an exact finder on `E_k(G)`, which has `k^{|V(G)|}` vertices (`3^81`, `4^16`, `4^1024`): only `U₄` is even conceivable, so PB as written is not a finite computation in practice | correction owed (a count) | §4.2 |
+| J27D | C0 priors registered after informal reasoning on DA and DC-2 had begun | honest deviation, logged | J27D §1.2 |
+| J27D | tightness-check plants (drop a circle point; add `±(1, 1)`) could not fire | tool defect; cross-checked by hand | J27D §Stage 4 |
+| J27V | first DC-3 plant (`x² + y² = 2`) could not fire — every circle is a similarity image of the unit circle | slip, caught when the plant passed | J27V §4.3 |
+| J27V | read the stub's one-sentence PA-T6 sketch before its blind phase (allowed) | exposure, logged | J27V fence log |
+| J40 | the brief's "Sauer 1992" is Sauer–Zhu 1992 (JGT 16, 423–436) | correction owed (owner's brief) | J40 Stage 5 |
+| J42 | stage 1: the quotation check's first run missed a fragment wrapped across a line (the check's defect); two entry headers failed the § B parser (a `]` inside the grade) and one field was wrapped, all fixed before commit; the independence count read "13 blind", corrected to 12 fully blind in place | slips (own), fixed | this section, Stage 1 |
+
+#### R.7 The ban's measurement
+
+**Would-have-searched lines: 13** — J27's plan 4 (§5.2), J27D 6 (its log), J27V 3 (§1.3), J40 0 ("Empty"), J42 0. **At the ban's edge: 1** —
+J27D's complete exact evaluation of `K_3^{C₅}`'s 243 maps (a set the derivation fixed), logged by J27D. In the ban's "in" column: exact spectra
+at 50–60 digits (DC-3, twice), `UD(𝔽₉, 2)`'s exact spectrum and colouring checks, sympy identities and exact rational iteration (DC-2).
+**Post-ban stages:** **PB-1** (J27D: an exact 3-colouring finder on `E_3(G)`'s non-zero-winding part for `G = C₅`, `C₇`, `K₃ × C₅`) — **retired at
+`C₅`** by J27V's hand structure (FS67-C5); left at `C₇` (2,187 maps) and `K₃ × C₅` (`3^15` maps), with the generator image stated (G21), and a
+refusal there FALSE for DB-1's first clause only. **PB-2** (J27D: spectra of `[Tardif2023]`'s `Ω_w(K_m)` and `[Tardif2022frac]`'s factors once held)
+— its first step is not a search and needs no ban exemption: decide by hand, from `[Tardif2023]` §2 (held), whether `Ω_w(K_m)` is regular.
