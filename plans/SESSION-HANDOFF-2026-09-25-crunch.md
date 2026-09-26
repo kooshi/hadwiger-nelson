@@ -80,6 +80,7 @@
 - **J31** — FS-84's stage S1 derivation, run early by owner ruling, solver-free, under the ban (`…/briefs/J29-S1-FS84-derivation.md`;
   record `plans/FS84-S1-derivation.md`). Its blind verifier next: `…/briefs/J29-S1V-FS84-blind-verifier.md` (solver-free; run it after J31;
   add `plans/CRUNCH-2026-09-25-INDEX.md` to its fence).
+- **J33** (Sonnet) — format fixes in `plans/FS91-derivation.md` and `plans/M3-derivation.md` so `fs71 --strict` passes, M2's *Kernel:* fields, FS86 C14/CL1 grade (`…/briefs/J33-derivation-format-fixes.md`). J24 was told: apply the five *Do*/killing-test edits as drafted (owner ruling), add all § B lines, run strict at its stage 5.
 - **J32** — fixes `scripts/gate_report.py` (it printed "match" for `CLAUDE.md` § The gate while reading only the baseline).
 
 **Next, in order:** J24's report → clerk run 6 (fold every report not in `data/crunch-2026-09-25/reports/FOLDED.txt`: J13, J17K2, J23a
