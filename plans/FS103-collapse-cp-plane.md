@@ -390,3 +390,73 @@ The advisor's probabilities (its message): at ℚ(√635087), given MR — survi
 a gap 0.15.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: the plan (WORKFLOW 4)
+
+*Solver column: none. Every phase is derivation, reading, PARI of seconds, or the kernel. Staffing is the owner's: at most three agents at
+once (the advisor stays through Phase 2). Every phase's checkpoint is its record's SAVED stages (standing rule 2), committed and pushed; the
+resume command is "re-launch the job with the same brief; it reads `git log -- <record>` and continues at the first stage not SAVED". A kill
+redoes at most the current stage.*
+
+### 6.1 Phases
+
+| phase | who | what | budget; stop rule | record (checkpoint) |
+|---|---|---|---|---|
+| 0 | this job; FS103-G; FS103-A | §G, §PA.0, §IQ, the claim list; the gate; the advisor's attack | done here; the gate's own brief | this file; `plans/FS103-G-prior-art.md`; `plans/POROS-2026-09-26-fs103-collapse.md` |
+| 1a | **V1** (blind) | C-LB6 (both `k`), C-THKDEL, C-EXTk, C-APX, C-MERGE-n, C-CPUP, C-635-F1, C-635-TF, C-dG-F1's assembly; controls CTL-167-4, CTL-dG4, CTL-K-4, CTL-ABS, CTL-Q2; C-FMT (a)–(c) | 250k harness; stop at 230k, finish the current claim, save, report | `plans/FS103-V1-verification.md`; `data/fs103/fs103-v1/`; `tools/fs103_v1_*.py` |
+| 1b | **V2** (blind; in parallel with V1, or after the gate frees a slot) | **C-LB6 at `k = 6` blind** (the second derivation), C-635-PL, C-635-THK, C-dG-PL, C-131, C-dG-THK, C-MR16, C-S, C-F1-GEN's scope; controls CTL-K7-6, CTL-K5-5, CTL-167-5; C-FMT (d)–(f) | 250k; the same stop rule | `plans/FS103-V2-verification.md`; `data/fs103/fs103-v2/`; `tools/fs103_v2_*.py` |
+| 2 | the advisor, on the owner's relay | compare the two stage-3 records: agreements, divergences, each typed real gap or statement mismatch (≤ 12 lines) | the advisor's remaining budget | its record |
+| 2′ | a third mind, only if C-LB6 diverges | the named step only, blind to both | 150k | `plans/FS103-V3-step.md` |
+| 3 | one derivation job + one blind check, after Phase 1, **only if the owner wants item 3 now** (else it folds into FS-104) | where `χ_CP(ℝ²)` sits against `χ_m⁰`, `χ_m`, `χ_B`: C-FMT's verdicts, the gate's reading of `[Falconer1981]` and Shelah–Soifer, and the advisor's weak-* sketch. **Nothing there is stated as held** until two minds agree | 200k each | `plans/FS103-M-derivation.md` |
+| 4 | a kernel job (FS-101 slot), **only once V1 and V2 agree on C-LB6, C-THKDEL and one instance's place claims** | the collapse over named hypotheses (6.2) | provisional 1 day; re-priced from its first two leaves (§ What compute helps) | `plans/FS103-K-kernel.md`; builds only through `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` |
+| 5 | the owner | the close, worked from `plans/FS103-close-inventory.md` | — | the plan's §R-close |
+
+**Order inside each verifier** (standard of evidence: the cheapest decisive step first): V1 derives C-LB6 at `k = 6` and C-THKDEL before
+anything else, then specialises to `k = 4` (CTL-167-4, CTL-dG4 must agree with the known answers; CTL-K-4 must stop), then the rest. V2 lists
+the stable places first (a PARI falsifier in seconds), then derives C-LB6 blind, then C-MR16, then C-S.
+
+**Grading rule** (the owner's): C-LB6 is held only if V1 and V2 derive it blind to each other and to J39's and J48's proofs; a checking reading
+of an existing proof is not a second mind (row 117). Any other claim is held at the count of minds its verdicts carry.
+
+### 6.2 The kernel slot, as a statement (Phase 4; elaborated only when Phase 4 opens)
+
+Over named `Prop` hypotheses, never over structures with a possibly empty domain (§ The gate): (i) `MRHyp F`; (ii) `CollapseStep F k` — C-LB6's
+conclusion as a proposition ("`F²` `k`-colourable → `UD(ℝ²)` CP-`k`-colourable"), the [hand] step, named; (iii) `CPColourable ℝ² k → ℝ²`
+`k`-colourable, **proved** in the kernel if Mathlib's measure theory reaches it (countably many fixed edges, each null; I-CPUP's argument) with
+row 78's `forces_iff_exists_finite`-style compactness for `χ(ℝ²)`, else named; (iv) `χ_CP ≤ 7` named or proved by the hexagonal colouring.
+Conclusion: `χ(ℝ²) = χ(F²)` and both equal the least `k` with `CPColourable ℝ² k`, at `F = ℚ(√635087)` first. No `RealAlgebraicDescent`
+(G63). The vacuity gate needs an inhabitant of the CP structure: the randomly translated seven-colouring.
+
+### 6.3 Registered expectations (G21: both outcomes reachable; how each is read)
+
+| # | expectation | P (mine) | reading of each outcome |
+|---|---|---|---|
+| E1 | C-LB6 at `k = 6`: both verifiers TRUE, blind | 0.70 | TRUE/TRUE → [hand, two blind] and F1 at ℚ(√635087) given MR. GAP at a named step 0.22 (joint measurability / the selection's format 0.08; C-APX 0.04; C-EXTk at `k` colours 0.04; other 0.06) → Phase 2′ on that step; F1 stays a candidate. FALSE 0.03 → F1 dead as stated, the counterexample names the step. MISSTATED with the result intact 0.05. |
+| E2 | the place lists confirm the stub and G43 (no stable place below 103 at ℚ(√635087), below 131 at `F_dG`) | 0.95 | a stable place below either bound (0.05) → `N₆` recomputed; the instance may change |
+| E3 | C-131's exact `max|λ|/132 < 1/5` | 0.99 | ≥ 1/5 would contradict Weil: a tool defect first |
+| E4 | C-MR16 TRUE at one mind | 0.75 | GAP (0.25; the advisor 0.15) → `F_dG`'s F1 waits on FS-105; ℚ(√635087)'s does not |
+| E5 | no bound on `χ_CP(ℝ²)` outside `[5, 7]` from this milestone | 0.97 | a bound would be FS-104's result arriving early |
+| E6 | C-FMT: (a) TRUE 0.85; (c) TRUE 0.45 / GAP 0.50; (d) GAP 0.90 | — | (c) TRUE → F1 reads `χ(ℝ²) = χ_m⁰(ℝ²)` given MR (the problem it collapses to); (d) TRUE → `= χ_m`, Falconer's number |
+| E7 | C-S (b)–(d): MISSTATED in some part (the "finite family" or the scope over all subfields) | 0.60 | the exact form replaces R1's text in FS-62's stub |
+| E8 | C-F1-GEN: the stub's text MISSTATED (scope); the totally real scope TRUE given inputs | 0.85; 0.70 | the correction goes to `CLAUDE.md`'s rank-1 row and the stub at the close |
+| E9 | the gate: F1 or `χ = χ_m` in print 0.05; `χ = χ_m` stated open in print (Soifer; Shelah–Soifer) 0.80 | — | in print → attribution; stated open → the write-up Kooshi named |
+| E10 | every control behaves as the claim list states | 0.85 | a control that misbehaves (0.15) is read first as a mis-stated control (G21: which half produced it), then as a finding |
+
+*Killing tests carried from the stub:* a step of T-J39-3's forward direction that fails with `N_k(F) = ∅` over infinitely many thick places
+at `k = 6`; a stable place of `F_dG` with `λ* ≥ 1/5`; the claim in print. *Added:* a verifier's derivation that also runs on CTL-ABS.
+
+### 6.4 Proposed edits (for the close; I edit none of these files)
+
+1. The stub and `CLAUDE.md`'s rank-1 row: "at a real field" → "at a totally real field outside row 100's exception with `N₆ = ∅`" (Q4).
+2. The stub's "no instance has exercised it": the shape (`N_k = ∅`, infinitely many thick places) was exercised at `k = 4` over ℚ(√167)
+   (row 123's second route; J48-N4cor); `k = 6` is new only in its threshold.
+3. The stub's and the rank-1 row's "`χ_CP ≤ χ_m`": no derivation on record; it is C-FMT (e), open unless Phase 3 or F1 supplies it.
+4. `CLAUDE.md` § The mission is silent on Kooshi's "only 4-quadratic field": the record's other rank-4 fields and the second collapse field
+   `K(√5,√7,√247)` (§1.2), if the owner wants them recorded.
+
+### 6.5 Would-have-searched-here log
+
+- None. No step of this plan would have used a finite-witness search; the stable-place lists and the spectrum at 131 are PARI and exact
+  arithmetic of seconds, left to the verifiers as checks of derived claims.
+
+## Stage 6 — SAVED
