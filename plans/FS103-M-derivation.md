@@ -6,11 +6,25 @@ Grades are `CLAUDE.md` § Notation's; every count of minds says whose.*
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, grade, address)*
+- **M1** — C-FMT (c): `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`; general form for Rajchman edge measures on `ℝⁿ`. [hand, one mind; A-E5's route] — §2.2.
+- **M1′** — `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)` (`[BachocEtAl2014]`'s operator chromatic number). [hand; with C-FMT (b) at two blind] — §2.2–2.3.
+- **M1″** — C-CPM with no MR: `χ_CP(ℝ²) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)`. [hand, derived] — §2.2.
+- **M1.1, M1.2** — continuity in probability is free for invariant measures on fractional colourings; properness survives weak-* limits when
+  `σ̂ → 0`, not otherwise (C3). [hand; tools exact for the controls] — §2.2.
+- **NR** — the product-topology Følner route fails: a proper Borel 7-colouring with a discontinuous limit. [hand, sketch; two minds with V2] — §2.4.
+- **A-E3′** — `χ_m⁰(Cay(ℝ, {±1, ±√2})) = 3`. [hand, one mind] — §2.1.
+- **D1–D5** — the null-set step reduced to a finite list-colouring problem on Falconer's `E` (lists ≥ 2); slack suffices and gives Borel;
+  slack costs a colour (`χ^{sl} ≥ 6`, `[CurrieEggleton2016]`). [hand, one mind; D5 + external, read] — §3.1.
+- **Q4** — given MR: `χ(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)`. [hand; weakest link M1] — §3.3.
+- **Exact checks** — `tools/fs103_m_controls.py` (C1–C4, each with a plant that fires for its own reason), output `data/fs103/fs103-m/controls.out`.
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none. Reading only.
+- Stage 2: none. The controls are exact identities (C1–C4), not searches; the naive-route counterexample is constructed, not found.
+- Stage 3: would have searched tight 5- and 6-colourings for a non-list-colourable boundary configuration (question 2); instead characterised it
+  (D1–D5) and stated it as the obstruction. Two zbMATH queries (the forbidden-interval literature) located `[CurrieEggleton2016]` Thm 1, already
+  held.
 
 ## Stage 1 — SAVED (Falconer first-hand; the quotation check)
 
@@ -221,3 +235,122 @@ routes is exactly which topology the limit is taken in.**
 - **NR** (the naive route fails): a proper Borel 7-colouring whose product-topology Følner limit is not continuous in probability. [hand, sketch;
   two minds with V2] — §2.4.
 - **A-E3′**: `χ_m⁰(Cay(ℝ, {±1, ±√2})) = 3` (so `χ = 2 < χ_m⁰ = χ_CP = 3` there). [hand, one mind] — §2.1.
+
+## Stage 3 — SAVED (questions 2–4)
+
+### 3.1 Question 2 — C-FMT (d), `χ_m⁰(ℝ²) = χ_m(ℝ²)`: **GAP**, reduced to a finite list-colouring problem on Falconer's null set, with one sufficient condition proved and shown to cost a colour
+
+Fix a measurable `f : ℝ² → [k]` proper at `Leb ⊗ σ`-a.e. edge; classes `S_j = f⁻¹(j)`; `S̃_j` their points of density 1 (Borel, `[Falconer1981]`
+Lemma 2 (ii)); **`E = ℝ² ∖ ⋃_j S̃_j`, Falconer's null set** ("the aggregate of the metrical boundaries", p. 186). For `x ∈ ℝ²` let `d̄_j(x) =
+limsup_{r→0} |S_j ∩ B(x, r)|/|B(x, r)|` and **`P(x) = {j : d̄_j(x) > 0}`**.
+
+- **D1 (V1's density-point lemma, strengthened to one-sided).** If `y ∈ S̃_j` and `d̄_j(x) = θ > 0`, then `|x − y| ≠ 1`. *Proof.* Take `r`
+  small with `|S_j ∩ B(y, r)| ≥ (1 − η)πr²` and (along the limsup) `|S_j ∩ B(x, r/2)| ≥ (θ/2)π r²/4`. For `x′ ∈ B(x, r/2)` every `w ∈ S¹` within
+  angle `r/2` of `v = y − x` has `x′ + w ∈ B(y, r)`, so `W = {(x′, w) : x′ ∈ S_j ∩ B(x, r/2), x′ + w ∈ B(y, r)}` has `Leb ⊗ σ`-measure `≥ θr³/16`.
+  The part with `x′ + w ∉ S_j` has measure `≤ ηπr² · σ(A)`, `A` the arc of `w` within angle `2r` of `v`, so `≤ Cηr³`. For `η < θ/(16C)` a
+  positive-measure set of monochromatic unit pairs remains — contradicting a.e.-properness. ∎ (V1's case: `θ = 1`.) [hand, one mind]
+- **D2 (every boundary point sees two colours).** For `x ∈ E`, `|P(x)| ≥ 2`. *Proof.* `Σ_j |S_j ∩ B(x,r)| = |B(x,r)|`, so `P(x) ≠ ∅`; if
+  `P(x) = {j}`, every other class has density 0 at `x`, so `S_j` has density 1 and `x ∈ S̃_j`. ∎ This is Falconer's "we may regard x₁ as
+  'belonging to two or more of the Sⱼ'" (p. 186), read from the colouring side. [hand, one mind]
+- **D3 (the reduction; both directions).** `χ_m(ℝ²) ≤ k` **iff** there are an a.e.-proper measurable `k`-colouring `f` and a null set `D ⊇ E_f`
+  such that the unit-distance graph on `D` has a proper colouring `c` with `c(x) ∈ L_D(x) := {j : C(x, 1) ∩ (S̃_j ∖ D) = ∅}`. *Proof.* ⟸: colour
+  `S̃_j ∖ D` by `j` (proper there by D1 with `θ = 1`), `D` by `c`; edges into `D` are proper by the lists; the colouring is Lebesgue measurable
+  because `D` is null and Lebesgue measure is complete. ⟹: given a proper measurable `g`, take `f = g` and `D = E ∪ {x ∈ ⋃ S̃_j : g(x) ≠` the
+  `j` with `x ∈ S̃_j}` (null), `c = g|_D`. ∎ By D1, `L_{E}(x) ⊇ P(x)` for `x ∈ E`, so **every list has at least two colours** (D2). **No
+  measurability is needed on `D`: for `χ_m`, question 2 is pure combinatorics** (choice allowed), and by de Bruijn–Erdős for list colourings
+  (finite lists; Rado's selection) it is a question about **finite** unit-distance configurations inside `D`. [hand, one mind]
+- **D4 (slack suffices, and gives Borel).** Say `f` has *slack* if for some `ε > 0`, `(Leb ⊗ Leb){(x, y) : f(x) = f(y), 1 − ε < |x − y| < 1 + ε}
+  = 0`. Let `supp S_j = {x : |S_j ∩ B(x, r)| > 0 ∀ r > 0}` (closed; the supports cover `ℝ²`, the set of `j` with `|S_j ∩ B(x,r)| > 0` being
+  non-empty and decreasing as `r ↓ 0`). **Then `c(x) = min{j : x ∈ supp S_j}` is proper at every pair at distance in `(1 − ε, 1 + ε)`, and its
+  classes are differences of closed sets (Borel).** *Proof.* If `c(x) = c(y) = j` and `|x − y| ∈ (1 − ε, 1 + ε)`, pick `r, r′` with `r + r′ < ε −
+  ||x − y| − 1|`; `(S_j ∩ B(x, r)) × (S_j ∩ B(y, r′))` has positive measure in `ℝ⁴` and consists of monochromatic pairs at distances in `(1 − ε,
+  1 + ε)`. ∎ [hand, one mind] So **`χ_m⁰ ≤ χ_m ≤ χ_B ≤ χ^{sl}`**, `χ^{sl}(ℝ²)` the least `k` with a measurable `k`-colouring having slack.
+- **D5 (slack costs a colour).** `χ^{sl}(ℝ²) ≥ 6`. *Proof.* D4 turns a slack `k`-colouring into a proper colouring of the graph joining points at
+  distance in `[1, 1 + ε′]` for small `ε′`; `[CurrieEggleton2016]` Theorem 1, verbatim: "Fix ǫ, 0 < ǫ < 3√2/4 − 1. Let H be the graph whose
+  vertices are the points of R², with an edge between every pair of points whose distance lies in the interval [1, 1 + ǫ]. Then 6 ≤ χ(G) ≤ 7"
+  (read first-hand for this: statement and the proof's first page; held `library/pdf/arXiv-1509.03667.pdf`). ∎ [hand + external (read);
+  `≤ 7` by the hexagonal colouring, which has slack (C1)] **Consequence: if `χ_m⁰(ℝ²) = 5`, no a.e.-proper measurable 5-colouring has slack, and
+  question 2 must be settled at a tight colouring** — route (i) of §2.3 and the slack route to question 2 are the same route, and it is closed
+  below six by a theorem.
+
+**The named obstruction (question 2).** A finite unit-distance configuration `x₁, …, x_m` inside the metrical boundary `E` (or a null `D ⊇ E`)
+of an a.e.-proper measurable `k`-colouring, whose lists `L(xᵢ) ⊇ P(xᵢ)` — each of size at least two — admit no proper choice. Adjacent boundary
+points can share a colour of positive density: `S_j = {x₁ < 0}` near `x = 0` and `S_j = {x₁ > 1}` near `y = e₁` have no unit pair and put `j`
+in `P(x) ∩ P(y)` — the "facing-away" pair, which slack forbids and tightness allows. So the rule "`c(x) = min P(x)`" fails in general, and
+question 2 is a genuine list-colouring question. *Would have searched here:* a search over tight 5- or 6-colourings for a non-list-colourable
+boundary configuration; instead, the configuration was characterised (D1–D5) and left as the stated obstruction. *A hunch, not claimed:* two
+adjacent points of `E` cannot have `P(x) = P(y) = {a, b}` (a blow-up argument makes the colouring locally a function of `(· − x)·v`, and the
+unit-pair constraint then forces it constant); killing test: an a.e.-proper colouring with such a pair. Even if true it does not close D3
+(lists of size two on non-cycles can fail).
+
+### 3.2 Question 3 — C-FMT (e), `χ_B(ℝ²)`
+
+`χ(ℝ²) ≤ χ_CP(ℝ²) = χ_m⁰(ℝ²) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²) ≤ χ^{sl}(ℝ²) ≤ 7`, with `χ_m⁰ ≥ 5` (the edge-null density bound, I-CP57) and `χ^{sl} ≥ 6`
+(D5); the first inequality is FS-103's F1 direction (given MR it is an equality), the second M1′, the last two D4 and C1. **`χ_B` against `χ_m`:
+GAP**, at the same step as question 2 with a Borel choice required: every a.e.-proper colouring agrees a.e. with one whose classes and `E` are
+Borel (the `S̃_j`), so `χ_B = χ_m⁰` iff some such `E` (or a Borel null `D ⊇ E`) has a **Borel** list colouring from the lists of D3. Here a
+genuinely Borel obstruction is available in principle and absent for `χ_m`: a circle of radius `r` with `2 sin⁻¹(1/2r)` an irrational multiple
+of `π` (Falconer's Lemma 4 circle) carrying 2-element lists is a Borel copy of the irrational-rotation graph, which has a ZFC 2-colouring and no
+Borel one. Whether a boundary `E` can carry such a circle with equal 2-lists is exactly the hunch above.
+
+### 3.3 Question 4 — the statement the collapse makes, at the grade reached
+
+**Statement (given MR).** With MR (`LEDGER.md` row 120, [hand]), FS-103's load-bearing step at ℚ(√635087) (C-635-F1, [hand, two blind: V1, V2])
+and M1′ (this record, [hand, one mind]):
+
+**`χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)`,** equivalently:
+**`χ(ℝ²) ≤ k` iff the plane has a Lebesgue-measurable `k`-colouring in which almost every unit pair (for `Leb ⊗ σ` on `ℝ² × S¹`) is
+bichromatic.** Grade: [hand]; weakest link M1, one mind. (The `F_dG` instance is the same statement given MR(`F_dG`), C-MR16 unwalked.)
+
+**The known problem it lands on, precisely.** `χ_m⁰(ℝ²)` is `[BachocEtAl2014]`'s chromatic number of the operator `A_σ` (§2.4 with (9), `ν =`
+arc length on `N = S¹`; §2.3 (iii) above) — **defined in print, its value never posed as an open problem there or anywhere the gate found**
+(`plans/FS103-G-prior-art.md` §2.2: "Not found in print, as a question or as either inequality"). The posed problem next to it is the measurable
+chromatic number `χ_m(ℝ²)` itself: `[Falconer1981]` p. 185 ("a lower bound of 5 for the chromatic number of R² in the case of a measurable
+colouring, though this is still rather far from the known upper bound of 7"), `[KechrisMarks2020]` Example 5.1 ("the exact values of χ(U),
+χµ(U), χB(U) are unknown"). **Given MR, Hadwiger–Nelson is the measurable chromatic number of the plane modulo null sets; it is Falconer's
+measurable chromatic number exactly when question 2 closes.**
+
+**What it answers, at this grade.**
+- The plane is **not ambiguous modulo null sets**, given MR: in `[Payne2009]`'s words ("a graph has ambiguous chromatic number when χ ≠ χm"),
+  `χ = χ_m⁰` for the plane. The full non-ambiguity `χ(ℝ²) = χ_m(ℝ²)` needs question 2.
+- **Every lower bound that tolerates null sets of pairs becomes a lower bound for `χ(ℝ²)`**, given MR: the density bound (`m₁(ℝ²) ≤ 0.2470 <
+  1/4`, edge-null form) gives `χ(ℝ²) ≥ 5` by a route with no witness graph; BDOV's Theorem 2.3 at `A_σ` gives only `≥ 1 + 1/0.40276`, i.e. 4.
+  Falconer's own argument transfers only if it survives for a.e.-proper classes (his 1981 proof exhibits single pairs; §1.2).
+- **Six becomes an analytic statement**, given MR: `χ(ℝ²) ≥ 6` iff every measurable 5-colouring of the plane has a positive-measure set of
+  monochromatic unit pairs. And, by D5, **if `χ(ℝ²) = 5` then no a.e.-proper measurable 5-colouring has slack** — the five colours, if they
+  exist, are tight.
+
+**What it does not answer.**
+- **Falconer's `χ_m`** (and Payne's full ambiguity question for the plane): needs question 2 (§3.1, GAP).
+- **Shelah–Soifer's axiom question and `[Soifer2024]` Open AC Problem 62.14 at `n = 2`.** The statement is a ZFC theorem (given MR) comparing
+  ZFC's `χ(ℝ²)` with ZFC's `χ_m⁰`; the axiom question compares ZFC's `χ(ℝ²)` with the value in ZF + DC + LM, where every colouring is measurable
+  and `χ = χ_m`. *Reading, with its killing test:* if the whole chain — MR, the load-bearing step from `χ(F²)` to a CP colouring, and M1 — is
+  provable in ZF + DC (every object in it is countable or a measure; no step I have read uses more than DC), and question 2 closes in ZF + DC,
+  then in ZF + DC + LM `χ(ℝ²) = χ_m(ℝ²) = χ_m⁰(ℝ²) = χ(ℚ(√635087)²)`, the ZFC value — **the plane's chromatic number would be absolute between
+  the two theories**, answering 62.14 at `n = 2` and the Shelah–Soifer closing question ("…precisely because the answer depends upon the system
+  of axioms we choose for set theory?") in the negative for the plane. Killing test: a step of the chain that needs more than DC. Not claimed.
+- **MR is [hand]** (row 120), and so is everything that rests on it here.
+
+### 3.4 Theorems this stage proved
+
+- **D1** one-sided density lemma (positive upper density at one end, density 1 at the other ⟹ not at distance 1). [hand, one mind] — §3.1.
+- **D2** every point of Falconer's null set `E` has at least two colours of positive upper density. [hand, one mind] — §3.1.
+- **D3** `χ_m ≤ k` iff some a.e.-proper `k`-colouring's boundary (a null `D ⊇ E`) is list-colourable from `L_D ⊇ P`, lists of size ≥ 2; finite
+  by compactness; no measurability needed. [hand, one mind] — §3.1.
+- **D4** a slack colouring becomes proper on the annulus, with locally closed classes: `χ_B ≤ χ^{sl}`. [hand, one mind] — §3.1.
+- **D5** `χ^{sl}(ℝ²) ≥ 6`; so if `χ_m⁰ = 5`, a.e.-proper 5-colourings have no slack. [hand + external `[CurrieEggleton2016]` Thm 1, read] — §3.1.
+- **Q4** given MR: `χ(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)`; `χ(ℝ²) ≥ 6` iff every measurable 5-colouring has positive-measure monochromatic unit pairs.
+  [hand; M1 one mind, F1 two blind, MR row 120] — §3.3.
+
+### 3.5 Proposals for the close (I edit none of these files)
+
+- **`LEDGER.md`** (with FS-103's row): C-FMT (c) and C-CPM from GAP to **TRUE** by M1 [hand, one mind]; the collapse then reads `χ(ℝ²) =
+  χ_m⁰(ℝ²) = χ(A_σ)` given MR. § B lines for M1, M1′, M1″, D1–D5, Q4.
+- **`CLAUDE.md`** § Frontier (Where the problem stands / the target): "given MR, HN is the measurable chromatic number of the plane modulo null
+  sets" — at [hand], one mind on M1, with the null-set step (question 2) named as what separates it from Falconer's `χ_m`.
+- **`BIBLIOGRAPHY.md`:** `[Falconer1981]` held, read in full first-hand (§1.2); `[BachocEtAl2014]` add "§3.1 (9) and the respects-`G` paragraph
+  read (2026-09-26, FS103-M); `χ(A_σ) = χ_m⁰(ℝ²)`"; `[CurrieEggleton2016]` Thm 1 re-read for D5; debt: Croft 1982 (Quart. J. Math. 33, 71–83,
+  the source of Falconer's Lemmas 1 and 3), unheld.
+- **Stubs:** (1) question 2, "colour the metrical boundary" — D3's finite list problem at tight colourings, with the hunch's killing test first;
+  (2) the ZF + DC audit of the chain (§3.3), which with (1) would answer Soifer's 62.14 at `n = 2`; (3) a blind check of M1 before anything
+  rests on "the known problem".
