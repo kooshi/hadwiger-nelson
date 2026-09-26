@@ -337,7 +337,7 @@ theorem table, §1.2's (G2) statement, §5.1–§5.4), the Poros record §4.4, a
 
 | claim | J46 (blind) | J45 | truth | route | wording | independent? |
 |---|---|---|---|---|---|---|
-| SI inequality | TRUE, J46-2 | TRUE, SI-1/SI-3 | none | same shape: `P_S = E[·\|𝒜_S]`, Gram identity; J45 phrases the overlap as the collision probability of the relatively independent self-joining (the same number) | J45's "`h = E[g\|𝒜_S]`" in SI-1 names the projection, not the remainder — harmless there, since SI-1 is stated as an identity for the remainder's integral | yes: both blind, same natural route |
+| SI inequality | TRUE, J46-2 | TRUE, SI-1/SI-3 | none | same shape: `P_S = E[·\|𝒜_S]`, Gram identity; J45 phrases the overlap as the collision probability of the relatively independent self-joining (the same number) | none (SI-1's `h = E[g\|𝒜_S]` is the projection, and its identity splits `σ̂(u) = −1/3` into the `E_S` part and the rest: correct as stated) | yes: both blind, same natural route |
 | notation lemmas | J46-1: `G′_S` with `R̂_pro`; component uniqueness from (D) (R88-TC-ext's strong-approximation density) | N1/N2: the same `G′_S`; density of `R` in `G′_S` proved without strong approximation or Lemma R | none | **route differs** at density: mine cites (D); J45's needs neither (§5.2 item 4). J45's is the stronger form; my J46-7 and J46-8's remark inherit its independence of Lemma R through N1 | — | yes |
 | SI "clause" | vacuous (R5) | automatic (SI-2) | none | same one line | — | yes |
 | SI "⟹" | TRUE, J46-3 (min-support selection; list-assignment form) | TRUE, SI-4 (every selection) | none | same | — | yes |
@@ -387,3 +387,13 @@ wording: the control's description (the brief's, not J45's); SP's signed reading
 | J46-11 | SI-5 re-derived: over a (G2) field, SI "⟸" for every `μ` ⟺ equality at `S` for every `μ` (with SI-J re-derived) | hand; from J45's statement | §3.3 |
 | J46-12 | C9's colouring of `Γ₇`: proper; 14 gapped vertices (`2x+3y ∈ {0,5}`), all missing 3, 28 directed adjacent pairs sharing it; `Z̄` independent | tools exact, plant fires | `tools/crunch_j46_g2.py` |
 | J46-13 | SP-Cor re-derived: given T-C(A) at `S = ∅`, `E`-null `U`-invariant measure rigidity on `R̂` would give `χ(ℚ(√47)²) ≥ 5` | hand; from J45's statement | §3.3 |
+
+## Stage 4 — SAVED (the report)
+
+Report: `data/crunch-2026-09-25/reports/J46.md` (the fixed form), sent to the owner by SendMessage. Budget: about 245k by the harness's count
+at hand-back. Nothing is left open in this job; the one open mathematical item is SI "⟸" (GAP in both records; over ℚ(√11) equivalent to
+"every four-colouring of the plane has equality at `S`").
+
+**Proposed edits for the front-page lane (not made here):** (1) the claim list's SI: replace the vacuous support clause by the list form
+(J46-3) or by "the `E_S`-conditional supports are disjoint along every edge"; (2) SP: say "positive" (or `|τ|(E) = 0`) on the right side;
+(3) the brief's control line: name `Z̄ = {θ = 0}` — all gapped points is not a colouring for C9 (§3.1).
