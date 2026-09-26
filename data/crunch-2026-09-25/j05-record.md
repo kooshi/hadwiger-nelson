@@ -69,3 +69,16 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: `claude_md_fact_audit.py --base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **13**, exit 0;
   `bib_audit.py` exit 0 ("every cited work resolves"). `LEDGER.md` untouched. ALLOW lines added: none.
 - Bytes: 296,413 → **291,789** (−4,624).
+
+## Stage 2, batch 2 — SAVED (C3 + part of C6: the close log, open milestones, one retold run)
+
+- The Last-updated line keeps each close's date, verdict, rows and §R-close address, and points to the Frontier item that states its
+  results (items 24–28, § What the kernel holds) instead of retelling them; the per-close lists of grokkings edited (history) are gone
+  (git holds them). The open-milestones paragraph keeps FS-84 (open), Next, M63/M62, and for each recent close only the addresses the
+  Last-updated line lacks (derivation files, stub banners, the crunch index), with a pointer for the rest.
+- G35's gate sentence retold row 57's gap in the words `LEDGER.md` row 57 uses (a `--dupes` run); it now names the gap and points.
+  The *Do* line after it is untouched.
+- First trial lost `111–115` (split into two ranges); restored as the close's row range.
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **12** (was 13), exit 0; `bib_audit.py` exit 0.
+  ALLOW lines added: none.
+- Bytes: 291,789 → **290,478** (−1,311; total −5,935).
