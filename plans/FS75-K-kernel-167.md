@@ -115,3 +115,56 @@ named corollary `tinyK4_isEmpty_winding`; one spec example per definition. Two e
 ### Would have searched here (stage 3)
 
 - None.
+
+## Stage 4 — SAVED
+
+**The headline is in the kernel.** `four_le_chromaticNumber_planeOver_sqrt167` (statement verbatim from the skeleton) builds sorry-free:
+
+- `Proofs/HadwigerNelson/Instances/SqrtOneSixSeven/Cert.lean` — the literal `Sqrt167.cert`, emitted by `python3 tools/j52_intcert.py
+  --emit-lean … data/fs73/verify-v2/L21cc6506-sub-1vz-empty.json.gz` (source sha256 `d67ffaea…6e78`, recorded in the module), renamed
+  `cert` in namespace `HadwigerNelson.Sqrt167`; provenance in `--` comments.
+- `Proofs/HadwigerNelson/ThetaPlane.lean` — §4: `iota` (additive by `Complex.ext`, `simp`, `ring`), `iota_re`, `iota_im`, `iota_mem`
+  (subfield closure), `unitOk`, `norm_iota` (`Chain.norm_eq_one_of_sq`, `field_simp`, then `linear_combination h1' + 2√d·h2' +
+  (v₁² + v₃²)·(√d·√d = d)`), `properAlong_of_colorable` (the colouring read at `iota`; the unit test from `hu` by `List.getD_eq_getElem`),
+  and the consumer `four_le_chromaticNumber_of_cert`, verbatim.
+- `Proofs/HadwigerNelson/Instances/SqrtOneSixSeven.lean` — §5: `Sqrt167.cert_units` and `Sqrt167.cert_check` by `decide +kernel`, the
+  headline, and one corollary, `four_le_chromaticNumber_planeOver_of_sqrt167_mem` (every real field holding `√167`), which is the
+  consumer applied once more.
+- **The build**: exit 0, "179 of 179 batches, 4 module(s) rebuilt, 0 module(s) with warnings, 3m47s"
+  (`build/gate/build/20260926T050935Z-796951.log`); the instance module "rebuilt … (11s)". ThetaPlane elaborated at the second attempt
+  (a missing `Mathlib.Data.List.GetD` import); the instance module at the first.
+
+**The cost, measured** (desktop; `scripts/slot.py --mem 12 --cpus 2 -- /usr/bin/time … lake env lean <file>`; CPU seconds
+= user + sys; three runs each):
+
+| module | runs (user + sys) | min | peak RSS |
+|---|---|---|---|
+| `Instances/SqrtOneSixSeven.lean` (`cert_units`, `cert_check`, headline) | 11.48 + 0.75, 11.46 + 0.76, 11.45 + 0.78 | **12.22 s** | 5.49 GiB (5,753,076 KB) |
+| `Instances/SqrtOneSixSeven/Cert.lean` (the literal) | 6.64 + 0.49, 6.66 + 0.46, 6.65 + 0.48 | **7.12 s** | 2.09 GiB (2,194,352 KB) |
+
+Together 19.34 s against §S.0's 19.4 s for the skeleton's single file (same checker, same literal, now split in two). **P-check scored:
+met** (within ±25 %, under 8 GB).
+
+**The planted faults on the real certificate, watched red** (`tools/j52k_plant.py`, under `scripts/slot.py --mem 12 --cpus 2`): three
+copies of the committed literal, each followed by `example : cert.check = true := by decide +kernel`, elaborated with `lake env lean`:
+- `faithful` (no change): **elaborates**, exit 0 — the partner that must pass;
+- `relation` (relation 0's entry 7 changed from 1 to 2): **refused**, exit 1, "Tactic `decide` proved that the proposition … is false";
+- `leaf` (the first leaf's multiplier `(0, 1)` set to `(0, 0)`, so `3P < minRise Q` reads `0 < 0`): **refused**, exit 1, same message.
+
+Each plant's anchor text is asserted to occur exactly once before it is changed (a plant that cannot fire aborts the run), the committed
+literal's sha256 is compared before and after (unchanged, `1265f2d3…`), and the generated copies were deleted after the run. The plants
+never touched `Proofs/`; "removed" is therefore the restore check.
+
+**Decisions this stage** (each: the choice · the alternative · why · confidence):
+- *§4 in its own module `ThetaPlane.lean`*, not inside `Instances/SqrtOneSixSeven.lean` as the brief's stage 4 placed it · the brief's
+  placement · the consumer `four_le_chromaticNumber_of_cert` is generic in `(d, D, F)`, and the next instances (ℚ(√47) if in format, the
+  60-vector control, FS-60's quadratic witnesses) should not import ℚ(√167)'s 81 KB literal to reach it · high.
+- *One docstring in the literal module* (on `cert`), the rest `--` comments · `--` comments only, with `set_option linter.missingDocs
+  false in` · the linter must stay silent without being switched off, a docstring edit there rebuilds one 12 s module, and the house's
+  literal modules (`Instances/SqrtEleven/Edges.lean`) carry docstrings · high.
+- *The extra corollary for every field holding `√167`* · the headline alone · it is the consumer applied once, costs one line, and is
+  the form `SqrtEleven` also exports (`four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem`) · high.
+
+### Would have searched here (stage 4)
+
+- None. The certificate was transformed exactly (integer scaling per leaf) and checked; no new certificate was produced.

@@ -148,6 +148,8 @@ import Proofs.HadwigerNelson.Instances.SixthColour
 import Proofs.HadwigerNelson.Kempe
 import Proofs.HadwigerNelson.ThreeColour
 import Proofs.HadwigerNelson.ThetaCert
+import Proofs.HadwigerNelson.ThetaPlane
+import Proofs.HadwigerNelson.Instances.SqrtOneSixSeven
 
 /-!
 # Proofs
