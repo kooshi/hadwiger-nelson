@@ -11,3 +11,9 @@ X10F.md
 X11K.md
 X21D.md
 X21V.md
+X22D.md
+X22V.md
+X23D.md
+X23V.md
+X24R.md
+X25B.md
