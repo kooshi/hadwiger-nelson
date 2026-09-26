@@ -22,7 +22,7 @@ filed** where a later record corrected a statement: J10-T8's GAP in J07's (g3); 
 
 **Who found what.** **J03** (the planner): J03-1 to J03-4, one mind, handed on to be re-derived. **J01** (blind verifier of FS-89's PA-B2
 and PA-B3): J01-1 to J01-8. **J03a** (blind second reader of J01's all-band step): J03a-1 to J03a-9. **J02** (three colours, from an
-advisor's sketch): J02-L1 to L4, T1 to T3, C1, C2, A2.1′. **J09** (blind derivation beside J02; J02's statements opened at its stage 4):
+advisor's sketch): J02-L1 to L4, T1 to T3, C1, C2, A21p (id respelled from `A2.1′`, J33). **J09** (blind derivation beside J02; J02's statements opened at its stage 4):
 J1, J2, J3, J-K, J4, J4-C, J4-A, J2′, J-L4b, J4-T6. **J07** (the class theorem): J07-1 to J07-15. **J10/J10b** (blind verifier of J07;
 phase 1 blind, phase 2 from J07's 25 statements): J10-L1 to L8, J10-T1 to T9. **J08** (six at the exposed fields): J08-1 to J08-11, J08-R.
 **J11** (blind verifier of J08; phase 2 from J08's statements): J11-T1 to T13 and the `Γ₁₁` remark. **J12** (one prime): J12-A1 to C3p.
@@ -108,19 +108,20 @@ p. 3 calls the solenoid form of `[Wang2012]` Thm 1.10 unwritten. The classical a
 *Kernel:* declined for now (Berend's Thm I.2 is not in Mathlib); a stub candidate if a write-up needs it.
 
 **FS91-J01-8 — VB1 at every band, `|S| ≥ 2`, reads `k` only through its call to SW-m; VB3, VB4, D2-L1 and S0A's G1 use the band only as the same band on both sides. (= J03a-2.) [hand (+ tools exact for JC's radius, J03a); two blind readings: J01 §3.6.1 steps 3–4 (at `k = 6`), J03a §3.1 (every `k ≥ 2`); J03a's divergence rows 7–8: agreement]**
-*Proof:* J01 §3.6.1; J03a §3.1, §3.5. *Correction applied:* J03a's §3.2/§3.5 counted "`0 ∉ B_k`" as a second `k`-reading line;
+*Proof:* J01 §3.6.1; J03a §3.1, §3.5. *Proof verdict:* closes, twice (two blind readings; J03a's divergence rows 7–8: agreement).
+*Correction applied:* J03a's §3.2/§3.5 counted "`0 ∉ B_k`" as a second `k`-reading line;
 `R̂_S` is never minimal, so it needs no `k` (J03a divergence row 5; inventory item 63). *Rests on it:* FS91-J01-7. *Prior art:* FS89's
 VB1–VB4. *Kernel:* declined.
 
 **FS91-J03a-5 — `Θ_2(R) ⊆ T_2` for every `R = ℤ[U]`. [hand, one line; one mind (J03a)]**
-*Proof:* J03a §3.2. *Rests on it:* the `k = 2` end of FS91-J01-7's statement. *Prior art:* elementary. *Kernel:* declined (no consumer).
+*Proof:* J03a §3.2. *Proof verdict:* closes (one mind, one line). *Rests on it:* the `k = 2` end of FS91-J01-7's statement. *Prior art:* elementary. *Kernel:* declined (no consumer).
 
 **FS91-J03a-6 — VB3 at every band, and the order transfer `ord(τ) = ord(τ|_{ℤ[i]})` for torsion characters of `Q`, so `Θ_k(Q) ∩ T` is finite with orders dividing `N_k`. [hand; one mind (J03a); J01 reached the bound "finite at `R₆₅`, hence bounded" by VB4 instead (divergence row 9: "an alternative … no conflict")]**
-*Proof:* J03a §3.3. *Rests on it:* nothing further (FS91-J01-7 reads VB4's `T_N + A` directly). *Prior art:* pending the close gate.
+*Proof:* J03a §3.3. *Proof verdict:* closes (one mind; J01's alternative bound "no conflict", divergence row 9). *Rests on it:* nothing further (FS91-J01-7 reads VB4's `T_N + A` directly). *Prior art:* pending the close gate.
 *Kernel:* declined.
 
 **FS91-J03a-9 — With `A` read as one embedding's `λ_e`, the field clause is false: over ℚ(√3), `τ + Re(ē σ₂(·))` (`τ` the additive three-colouring, `0 < |e| ≤ 1/12`) is in `Θ₄` and not torsion plus `λ_f`. [hand; one mind (J03a); its consequence for FS89-CL2's wording agreed by J07 (J07-14) and J10 (§3.1 item 25)]**
-*Proof:* J03a §3.4. *Rests on it:* the corrected notation above; the correction owed to `plans/FS89-derivation.md`'s notation paragraph
+*Proof:* J03a §3.4. *Proof verdict:* closes (a counterexample, one mind). *Rests on it:* the corrected notation above; the correction owed to `plans/FS89-derivation.md`'s notation paragraph
 and FS89-CL2 (inventory items 61, 69, 78). *Prior art:* none needed (a counterexample). *Kernel:* declined.
 
 ## §2. The unit-vector ring of a real number field, with no Galois hypothesis (J07, J09, J10, J02)
@@ -141,9 +142,10 @@ and 2). *Prior art:* FS86-B1-LR (with the Galois hypothesis); G55's prime invers
 fields); the general form **not found** by the close gate (J23p result 4; Shimura 1964 undecided). *Kernel:* stub (FS-47).
 
 **FS91-J02-L2 — "`A_p = R/pR` is a finite `𝔽_p`-algebra with `dim A_p ≤ n`, and `c` induces a ring involution on it"; every maximal ideal `𝔪 ∋ p` of `R` equals `R ∩ 𝔓` for a stable prime `𝔓 | p` of `L`, and `c(𝔪) = 𝔪`; full residue fields `𝔽_{q²}` with `𝒩(k_𝔪) = μ_{q+1}` at unramified stable primes, `𝒩(k_𝔪) = {1}` at ramified ones; every `p`. (= J09's J2′: `ℤ[U_F]/p ≅ Ā_p/pĀ_p`, `Ā_p` the closure in `∏_{S_p} O_𝔓`, of dimension `Σ_{S_p}[L_𝔓 : ℚ_p] ≤ [L : ℚ]`.) [hand (GPT Astra's Lemma 1.1 and §3.1–3.2, extended from `p = 3` to every prime); two derivations: J02 §2.3 and J09 §4.2 (from the statement; J09 stage 4 row L2: "TRUE; … the general case derived now")]**
-*Proof:* `plans/FS91-S0F-three-colours.md` §2.3; `plans/FS91-S0FV-three-colours-blind.md` §4.2. *Proof verdict:* closes, twice. *Rests on
-it:* FS91-J02-L3, J02-T1. *Prior art:* GPT Astra (`reference/ChatGPT-local-global-tightness-conjecture/`), Lemma 1.1 at `p = 3`. *Kernel:*
+*Proof:* `plans/FS91-S0F-three-colours.md` §2.3; `plans/FS91-S0FV-three-colours-blind.md` §4.2. *Proof verdict:* closes, twice. *Rests on it:*
+FS91-J02-L3, J02-T1. *Prior art:* GPT Astra (`reference/ChatGPT-local-global-tightness-conjecture/`), Lemma 1.1 at `p = 3`. *Kernel:*
 stub (FS-47; FS-75's re-aimed chain, inventory item 11).
+
 
 **FS91-J10-L1 — "for every real number field `F`: `R_F` = ℤ-span of `U_F`; `ℚR_F = L`; `R_F ⊆ O′`; `O_L[U_F] = O′`; `cO′ ⊆ R_F` for some integer `c ≥ 1`." [hand; J10 blind, one mind; items (b), (c) = J07's U1, U2, verified by J10 (§3.1 items 1–2)]**
 Item (e) is the step of FS86's Lemma R that survives CL2 (J10's inventory proposal, item 88). *Proof:* J10 §2.2. *Proof verdict:* closes.
@@ -176,7 +178,7 @@ J09 §2.5, §4.2, `tools/crunch_j09_lemma_k.py`. *Proof verdict:* closes. *Rests
 as FS91-J08-R's (no character of `𝔽₇₂₉` misses `μ₂₈`). *Prior art:* Weil's bound. *Kernel:* declined (rests on Weil above 243).
 
 **FS91-J09-J1 — The typing, read on `τ₂`, `τ₃`: `τ₃(u) = 0 ⟺ τ₂(u) = 1/2`; `α = τ₂ = 0` on O-type layers. [derived from FS81-T3, T4; one mind (J09)]**
-*Proof:* J09 §2.1. *Rests on it:* FS91-J09-J4; J09's route B to S3. *Prior art:* FS81-T3/T4. *Kernel:* declined.
+*Proof:* J09 §2.1. *Proof verdict:* closes (one mind; a derivation from FS81-T3/T4). *Rests on it:* FS91-J09-J4; J09's route B to S3. *Prior art:* FS81-T3/T4. *Kernel:* declined.
 
 **FS91-J09-J-K — Lemma K1 is FALSE at `q = 27` exactly for `N(a) = 1` (`Tr_{𝔽₇₂₉/𝔽₉}(μ₂₈) ∩ μ₄ = ∅`); true at 243; false at 3 exactly for `N(a) = −1`; the count `(4/9)[(q+1) − K(n) + 2K(−n)]`. [tools exact, two representations; one mind (J09)]**
 It kills J09's own C0 route (rotation invariance plus a character count) at exactly its named risk (inventory items 14, 16). *Proof:* J09
@@ -205,7 +207,8 @@ concurs by routing S1 through it).
 **FS91-J09v-8 — No point of `Θ₃(R_F)` has mixed parity/order-3 types, at any real number field (with or without (H)): the image of `U` in `R/2R × R/3R` is the product of the two images ((W)), so the allowed pairs `(τ₂, τ₃) ∈ {(½, 0), (0, ±⅓)}` force `τ₂ ≡ ½` on `U` or `τ₂ ≡ 0` on `U`. [hand; one mind (J09v); under (H) it is J4's by-product (J4.8)]**
 It refutes J02 §2.6 Remark 2 ("**Mixed types are real, and harmless.** Nothing above shows that all unit vectors of a point share one type")
 as an existence claim; the remark is a remark, not a filed theorem, and J02's own T1 steps 2–3 give the refutation once the Teichmüller set
-is replaced by the full image (J09v stage 4 row 3; J09's table item 2 had called it scope). *Proof:* J09v §4.2 item 3. *Rests on it:* the
+is replaced by the full image (J09v stage 4 row 3; J09's table item 2 had called it scope). *Proof:* J09v §4.2 item 3. *Proof verdict:*
+closes (one mind; a refutation of J02 §2.6 Remark 2's existence reading). *Rests on it:* the
 correction owed to J02 §2.6 Remark 2 (a record, not a front-page file). *Prior art:* none needed. *Kernel:* declined (no consumer).
 
 **FS91-J02-T2 — S1: "`χ(F²) ≤ 3 ⟺ Θ₃ ≠ ∅ ⟺ Θ₃ ∩ T₆ ≠ ∅ ⟺` (the two prime types) `⟺ L(F) ≤ 3`, every real number field." (= J09's J4-C: "S1 for every real number field; `χ(F²) = 3 ⟺` non-bipartite and a prime above 3 of residue field `𝔽₃`"; = J09v-4, its blind second derivation.) [hand (composition); three derivations — J02 and J09, compared (J09 stage 5: "Are the two S1/S2 statements the same statement? Yes"), and J09v-4, blind, both directions through the residue bound (RB), no target's chromatic number used (J09v §3.1: TRUE "given T2 and J4"); owner ruling (item 68): verified]**
@@ -234,8 +237,8 @@ inertia above, so acts trivially on `k(𝔔′) ⊇ k(𝔔)`, so `𝔔` is neith
 item 113):* J02 §2.10 withheld the algebraic case because a stable ramified dyadic prime restricts to one "ramified or inert"; it restricts to
 a **ramified** one. **Definition owed:** `data/fs91/j07/lemma-statements.md` defines `L(F)` by finite targets only; any statement of S1 beyond
 number fields must carry the extended definition (J09v §4.3). *Proof:* J09 §2.6, stage 5; J09v §3.2, §4.1, `data/fs91/j09v/check.txt` part E.
-*Proof verdict:* closes twice for algebraic and purely transcendental `F`, under the corrected reading. *Rests on it:* nothing yet. *Prior
-art:* `[Fischer1990]` Thm 6 (G63); `[Madore2015]` Prop. 3.2 and `[Moorhouse2010]` §8.2 for the residue bound in valuation-ring form (J09v's
+*Proof verdict:* closes twice for algebraic and purely transcendental `F`, under the corrected reading. *Rests on it:* nothing yet. *Prior art:*
+`[Fischer1990]` Thm 6 (G63); `[Madore2015]` Prop. 3.2 and `[Moorhouse2010]` §8.2 for the residue bound in valuation-ring form (J09v's
 (RB)). *Kernel:* declined.
 
 **FS91-J02-T3 — S2: "`χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field." [hand (composition); two independent derivations (J02 §3.1; J09 §3.2); owner ruling (item 68): verified]**
@@ -260,8 +263,9 @@ checker for the field's prime data).
 (quadratic fields at `N ≢ 2 (mod 3)`) to every real number field (J02 §4.1); gives Fischer's Thm 1(iii) the local form Astra's Thm 2.1
 gave it. *Kernel:* stub (FS-75).
 
-**FS91-J02-A2.1′ — A second derivation of GPT Astra's Thm 2.1 ⟹ (two colours) via L3. [hand; J02 §3.1; the index reads one mind; J09's §4.2 reaches the same implication by its own route as C2's second half ("Astra's Thm 2.1 re-derived", J09 divergence row 7) — filed as the two records state it]**
-*Proof:* J02 §3.1; J09 §4.2. *Rests on it:* FS91-J02-T3's `L = 2` case (with G55). *Prior art:* GPT Astra's Thm 2.1 (G55). *Kernel:* declined.
+**FS91-J02-A21p — A second derivation of GPT Astra's Thm 2.1 ⟹ (two colours) via L3. (id respelled from `J02-A2.1′`; J33, ASCII-only for the checker's id regex, no `.` or `′`.) [hand; J02 §3.1; the index reads one mind; J09's §4.2 reaches the same implication by its own route as C2's second half ("Astra's Thm 2.1 re-derived", J09 divergence row 7) — filed as the two records state it]**
+*Proof:* J02 §3.1; J09 §4.2. *Proof verdict:* closes (the index reads one mind; J09's §4.2 reaches the same implication by its own route,
+"Astra's Thm 2.1 re-derived", J09 divergence row 7). *Rests on it:* FS91-J02-T3's `L = 2` case (with G55). *Prior art:* GPT Astra's Thm 2.1 (G55). *Kernel:* declined.
 
 **FS91-J09-J4-T6 — FS81-T6's open item settled: the additive 3-colourings of `ℚ(√d)`, `d ≡ 3, 7 (mod 12)`, are Fischer's up to symmetry. [hand, one mind (J09), from J2, J4]**
 *Proof:* J09 §2.5. *Proof verdict:* closes on one reading. *Rests on it:* the correction to `plans/FS81-derivation.md` T6's open item
@@ -306,11 +310,12 @@ relative found at the opening gate is Kang–Maharaj 2010 (one-place colourings 
 (rests on `H_k`, hence on `[Berend1984]`); its local half is FS-47's.
 
 **FS91-J11-T12 — Monotonicity: `Θ_k(R_F) ⊆ Θ_{k+1}(R_F)`; hence `χ_char(F²) = m` follows from the pullback and CLG_{m−1} alone, `m` the minimum over targets, whenever every stable place has `p > (m − 1)/2`. [hand, elementary (`B_k ⊆ B_{k+1}`); J11 stage 3 (one mind in its record's table); J08-8 uses the same step ("`Θ_k` grows with `k`")]**
-*Proof:* J11 stage 3. *Proof verdict:* closes. *Rests on it:* the correction of SIX-e's hypothesis to CLG_16, CLG_21 (FS91-J08-8). *Prior
-art:* elementary. *Kernel:* declined.
+*Proof:* J11 stage 3. *Proof verdict:* closes. *Rests on it:* the correction of SIX-e's hypothesis to CLG_16, CLG_21 (FS91-J08-8). *Prior art:*
+elementary. *Kernel:* declined.
 
-**FS91-J07-8 — Lemma LB and LB′, the level bound: "At a stable `𝔓` over odd `p`, `e = e(𝔭|p)`: a band-`β` character of `T_{𝔓,m}` of exact level `L ≥ 2` has `2β·p^a ≤ 1`, `a = ⌊(⌊L/2⌋ − 1)/e⌋ + 1`"; "moreover `2β·p^E ≤ p^{E−a} − 1` with `E = ⌈L/e⌉`. So at `e = 1` level 2 needs `k ≥ 2p²/(p−1)` and level 3 needs `k ≥ 2p³/(p²−1)`; at `e ≥ 2` level 2 never occurs." (= J10-T7.) [hand + tools exact (J07 check A: all characters of `ℤ[i]/3⁴`, `ℤ[i]/7³`); two derivations (J07 §3.2, §4.2; J10 §3.2 from the statement, by trace duality — divergence row 7)]**
-J10's scope data: LB′ is sharp at (`e = 1`, level 2) and (`e = 2`, level 3) on `f = 1` towers, **not** at (1, 3) or (2, 5), where the true
+**FS91-J07-8 — Lemma LB and LB′, the level bound: "At a stable `𝔓` over odd `p`, `e = e(𝔭|p)`: a band-`β` character of `T_{𝔓,m}` of exact level `L ≥ 2` has `2β·p^a ≤ 1`, `a = ⌊(⌊L/2⌋ − 1)/e⌋ + 1`"; "moreover `2β·p^E ≤ p^{E−a} − 1` with `E = ⌈L/e⌉`. So at `e = 1` level 2 needs `k ≥ 2p²/(p−1)` and level 3 needs `k ≥ 2p³/(p²−1)`; at `e ≥ 2` level 2 never occurs." (= J10-T7.) [hand + tools exact; two derivations (J07 §3.2, §4.2; J10 §3.2 from the statement, by trace duality — divergence row 7)]**
+J07's check A: all characters of `ℤ[i]/3⁴` and `ℤ[i]/7³` (moved out of the grade bracket, J33: format fix for the checker's `]`-in-grade parse
+failure; content unchanged). J10's scope data: LB′ is sharp at (`e = 1`, level 2) and (`e = 2`, level 3) on `f = 1` towers, **not** at (1, 3) or (2, 5), where the true
 best margin is `1/27`. LB′ came from reading the check (J07 §5.1 (v)). *Proof:* J07 §3.2, §4.2; J10 §3.2, tool (E). *Proof verdict:*
 closes. *Rests on it:* FS91-J07-9, J07-11. *Prior art:* pending the close gate. *Kernel:* declined.
 
@@ -321,11 +326,11 @@ the three fields has `p` far above `k/2`). *Prior art:* the band form of row 75'
 declined.
 
 **FS91-J07-10 — Lemma AV: "A band-`β` character of a finite Cayley graph `Cay(G, S)` forces `α(Cay(G, S)) ≥ β|G|`." [hand; two derivations (J07 §3.3; J10 item 12 from the statement, by J10-L7's averaging: `I_t = λ^{−1}[t, t + β)` is independent, mean size `β|G|`)]**
-*Proof:* J07 §3.3. *Rests on it:* FS91-J07-11 (with Hoffman floors); C-167 above 67. *Prior art:* the fractional wall's form for characters
+*Proof:* J07 §3.3. *Proof verdict:* closes, twice (two derivations: J07 §3.3; J10 item 12 from the statement, by J10-L7's averaging). *Rests on it:* FS91-J07-11 (with Hoffman floors); C-167 above 67. *Prior art:* the fractional wall's form for characters
 (G59; a band character is a circular colouring). *Kernel:* declined.
 
 **FS91-J10-L7 — "a band 4-character of a Cayley graph with `α ≤ |G|/4` takes the value `±1/4`." [hand; one mind (J10)]**
-*Proof:* J10 §2.2. *Rests on it:* FS91-J07-12's second derivation (J10-T4). *Prior art:* pending the close gate. *Kernel:* declined.
+*Proof:* J10 §2.2. *Proof verdict:* closes (one mind). *Rests on it:* FS91-J07-12's second derivation (J10-T4). *Prior art:* pending the close gate. *Kernel:* declined.
 
 **FS91-J10-L8 — "in every inert residue tower (odd stable place, or inert stable dyadic place; `F_𝔭` possibly ramified over `ℚ_p`) a character new at level `j` has `|λ| ≤ c·Q^{j−1}` (`c` = 2 odd, 1 dyadic), so `λ_min` scales exactly by `Q^{j−1}` and every Hoffman floor survives every level." [hand + tools exact at four towers; one mind (J10)]**
 It extends G54's all-levels ratio (stated for Galois rings; `[MMST1998]` for odd prime `Q`) to every inert tower, and closes the input
@@ -358,7 +363,9 @@ the wording correction (FS91-J03a-9). *Prior art:* none needed. *Kernel:* declin
 
 **FS91-J07-15 — Controls reproduced: "CLG returns: the ramified dyadic place at level 1 for `θ₂`; one dyadic place of K at level 3 for `[Fischer1994]` (existing checker `data/fs86/b1/fischer_vk_control.gp`); the stable place above 7 of ℚ(√11) at level 1 for C9; an `𝔽₃` or ramified dyadic place for every `θ ∈ Θ₃` (J02-T1's generalisation); `κ_loc(𝔓′) ≤ κ_loc(𝔓′ ∩ L)` for `F ⊆ F′`." [hand + tools (an existing checker); verified by J10 from the statement (item 24); the Fischer control is one checker, "not an independent confirmation" (J10 divergence row 16)]**
 The last clause is the planner's predicted "next lemma" (§M.1), met. J10's wording note: `θ₂` "at level 1" means one exists there; the
-route's extension may return a higher level (divergence row 17, harmless). *Proof:* J07 §4.3. *Rests on it:* the plan's CLG-f. *Prior art:*
+route's extension may return a higher level (divergence row 17, harmless). *Proof:* J07 §4.3. *Proof verdict:* closes, with one caveat: the
+Fischer control is one checker only, "not an independent confirmation" (J10 divergence row 16); the `θ₂`-level wording note is "harmless"
+(divergence row 17). *Rests on it:* the plan's CLG-f. *Prior art:*
 `[Fischer1994]`; row 94's C9. *Kernel:* declined.
 
 ## §5. Six at the exposed fields: the character chromatic numbers of the targets and of three planes (J08; J11 blind)
@@ -372,7 +379,7 @@ Kloosterman/Weil control of `Γ_q`'s spectrum (G44); runs of quadratic residues 
 *Kernel:* declined (a finite `decide` per `q` would port it if a consumer appears).
 
 **FS91-J11-T2 — every band character has `N(a)` a non-square; `χ_char(Γ_q) = ⌈q/max_c d(c)⌉`. [hand; J11 §W1 (one mind in its table); J08's stage-3 definitions give the same formula (`κ = max_c m(c)/q`, band `k` at `c` iff `k·m(c) ≥ q`)]**
-*Proof:* J11 §W1; J08 stage 3. *Rests on it:* FS91-J08-2, J08-5. *Prior art:* the `κ` form of FS91-J07-7 at one target. *Kernel:* declined.
+*Proof:* J11 §W1; J08 stage 3. *Proof verdict:* closes, twice (J11 §W1, one mind in its table; J08's stage-3 definitions give the same formula). *Rests on it:* FS91-J08-2, J08-5. *Prior art:* the `κ` form of FS91-J07-7 at one target. *Kernel:* declined.
 
 **FS91-J08-2 — `χ_char(Γ₂₃) = 8`, `κ = 3/23`; band 8 exactly at `c ∈ {11, 20, 21}`; no band 6 or 7. FS91-J08-3 — `χ_char(Γ₄₃) = 9`, `κ = 5/43`; band 9 exactly at `c = 33`; no band 6, 7, 8. (= J03-3 at 23, the planner's hand check, fenced; = J11-T4, "23 in full, 43 at `c = 33`" by hand as well.) [tools exact (two halves: the law and the circle); three computations at 23 (J03 by hand; J08; J11 by tool and by hand), two at 43 (J08; J11) — J11-T13: identical, value by value]**
 A complete exact enumeration of `c ∈ 𝔽_q^×` (22 and 42 values), the set fixed by FS91-J08-1 — the ban's edge, logged. **Read aloud (J08
@@ -397,8 +404,8 @@ J11's table (to 199): 3: 3 · 7: 4 · 11: **6** · 19: 5 · 23: 8 · 31: 8 · 43
 *Proof verdict:* closes. *Rests on it:* "the window is closed to characters": no usable prime plane of the window {23, 31, 43, 47} carries a
 band six-character, and 27 carries none at all (FS91-J08-R). *Prior art:* none. *Kernel:* declined.
 
-**FS91-J11-W3 — `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`: at 11 no optimal colouring is a character colouring. [tools exact; three computations agree — J11 stage 2 §W3 (in its report and §W3, not in a theorems table); J10-T9 ("none [of band 5] at 11 either"); J08 stage 3's table ("11: **6** … (`χ(Γ₁₁) = 5`, kernel, by a non-line colouring)")]**
-*Proof:* the three tools named. *Rests on it:* the observation that character colourings are strictly weaker than colourings on a usable
+**FS91-J11-W3 — `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`: at 11 no optimal colouring is a character colouring. [tools exact; three computations agree — J11 stage 2 §W3 (in its report and §W3, not in a theorems table); J10-T9 ("none (of band 5) at 11 either"); J08 stage 3's table ("11: **6** … (`χ(Γ₁₁) = 5`, kernel, by a non-line colouring)")]**
+*Proof:* the three tools named. *Proof verdict:* closes, three times (J11 stage 2 §W3; J10-T9; J08 stage 3's table — all three agree). *Rests on it:* the observation that character colourings are strictly weaker than colourings on a usable
 plane already at 11 (and at 43 against line colourings, FS91-J08-3). *Prior art:* `χ(Γ₁₁) = 5` is `[Moorhouse2010]`/`[Manturov2012]`/
 `[Madore2015]`'s, kernel here (row 53). *Kernel:* declined (a candidate: 121 characters × 12 circle points, `decide`-sized, if wanted).
 
@@ -415,7 +422,7 @@ level-one inputs (item 20) and CLG-g's (g1)/(g3) floors. *Prior art:* none. *Ker
 **FS91-J11-T9 — The stable places of ℚ(√167), `K(√7)`, `K(√5,√7)`; none dyadic. [tools exact + PARI to 300; one computation (J11), compared with J08's target lists in J11-T13 ("no stable place of mine below `4(m − 2)²` is missing from J08's")]**
 All three fields break the 2-adic wall (odd square class 7 or 167 ≡ 7 mod 8), so none has a stable dyadic place; for the multiquadratic
 fields every odd ramified prime has residue field `⊇ 𝔽_{p²}` (J08 stage 5). *Proof:* `data/fs91/j11/targets.json`; J08
-`tools/crunch_j08_threshold.py` §(4). *Rests on it:* FS91-J08-8. *Prior art:* none (a computation). *Kernel:* declined.
+`tools/crunch_j08_threshold.py` §(4). *Proof verdict:* closes (one computation, J11; agrees with J08's target lists in J11-T13). *Rests on it:* FS91-J08-8. *Prior art:* none (a computation). *Kernel:* declined.
 
 **FS91-J08-8 — The three fields: `χ_char` = 8 (ℚ(√167)), 17 (`K(√7)` = ℚ(√3,√7,√11)), 22 (de Grey's field `K(√5,√7)` = ℚ(√3,√5,√7,√11)) given CLG_7, CLG_16, CLG_21; `Θ₈`, `Θ₁₇`, `Θ₂₂ ≠ ∅` unconditionally. (= J11-T10: "given CLG_7, `χ_char(ℚ(√167)²) = 8`; unconditionally `6 ≤ χ_char(ℚ(√167)²) ≤ 8`"; = J11-T11 as corrected in J11's stage 3: "given CLG_{m−1}, `χ_char(K(√7)²) = 17` and `χ_char(K(√5,√7)²) = 22`".) [hand + tools exact; two derivations (J08 stage 5; J11 §W4 and stage 3, closing its stage-2 gap by FS91-J11-T12); the lower halves given CLG, which is now blind-verified (FS91-J07-7)]**
 Minima: ℚ(√167) at 23 (`c ∈ {11, 20, 21}`; other targets 43: 9, 59: 10, 67: 14, …, the ramified 167: 24); `K(√7)` at 83 (`c = 43`,
@@ -433,7 +440,7 @@ declined.
 
 **FS91-J08-9 — `Θ₆(Q)` reduces to a sumset over places `{2, 3, 7, 11, 19}`, levels `8, 27, q`. [hand (N₀'s dyadic step and weak approximation cited, FS89-S0A-3); one mind (J08); outside J11's fixed list]**
 J08-9's anti-band case replaced a wrong first idea, caught by the tool before recording (inventory item 115). *Proof:* J08 stage 6.
-*Rests on it:* FS91-J08-10, J08-11. *Prior art:* FS89-S0A-3's structure. *Kernel:* declined.
+*Proof verdict:* closes on one reading (one mind, J08 only; outside J11's fixed list, so not independently re-derived). *Rests on it:* FS91-J08-10, J08-11. *Prior art:* FS89-S0A-3's structure. *Kernel:* declined.
 
 **FS91-J08-10 — The complete band-1/6 list for `Q`: 18 types, 173 torsion characters; `Θ₆(Q) = ⋃ {τ + α : |α| ≤ r_max(τ)}` over the list, and `Θ₆(Q) ⊆ T_{105,336} + A(Q)`, `105,336 = 8·9·7·11·19`. FS91-J08-11 — the band-1/5 list: 10 types, 77 characters, `N₅ = 35,112 = 8·3·7·11·19`. [hand (J08-9) + tools exact; one mind + tools (J08); not in J11's list]**
 New at band 1/6: a 3-adic level-two type (parity + order 9); the order-3 leaf of radius 1/6. Controls: band 1/4 reproduces Lemma N₀ exactly
@@ -446,7 +453,8 @@ with exact checks. *Rests on it:* FS91-J01-7's "does not give" (the explicit lis
 is answered at `k = 6`. *Prior art:* none. *Kernel:* declined.
 
 **FS91-J11-T13 — J08's `κ`, `χ_char`, `m(c)`, band lists, targets and minima agree with J11's at 146 values, 0 divergences. [tools exact (a comparison; the planted divergence `χ_char(Γ₃₁) = 9` is caught and nothing else); J11 stage 4]**
-*Proof:* `tools/crunch_j11_compare.py` → `data/fs91/j11/compare-j08.json`. *Rests on it:* the "two derivations" status of every §5 entry
+*Proof:* `tools/crunch_j11_compare.py` → `data/fs91/j11/compare-j08.json`. *Proof verdict:* closes (a comparison; one planted divergence
+caught, nothing else). *Rests on it:* the "two derivations" status of every §5 entry
 above. *Prior art:* none (a comparison). *Kernel:* declined.
 
 ## §6. One prime is not enough, three ways (J12; J13 the blind check)
@@ -463,39 +471,60 @@ so memberships, orders and inequalities are frame-independent (J13 stage 3's fra
 (inventory item 122) are unsearched. The close gate's verdict on §6 (J23p result 6): **not found as stated**; `[Manners2015]` §5.5
 asserts the one-prime failure without proof in §1–§5; Bosio–Vivaldi 2000 and Vivaldi 2006 undecided. `R₅ = R_{{5}}`, `S₊ = ℤ[i][1/π̄_p]`, `S₋ = ℤ[i][1/π_p]`, `ω = (−4−3i)/5`, `Q₀ = [−1/4, 1/4]²`, `C₉` the nine centres.*
 
-**FS91-J12-A1, J12-A2, J12-A3 — the half-rings and the `p`-free margins:** "`S₊ ∩ S₋ = ℤ[i]`, `S₊ + S₋ = R_{{p}}`, `U_p ⊆ S₊ ∪ S₋`"; "characters of `S₊`, `S₋` agreeing on `ℤ[i]` glue uniquely to `R_{{p}}`"; "at every `p ≡ 1 (4)`: `θ₂ = 1/2` and `τ_{(1+i)/3} ∈ {1/3, 2/3}` on `U_p` (margins 1/4, 1/12, `p`-free)". **[hand (A3: tools exact at 5, 13, 17, 29); two derivations — J12 stage 2; J13 phase 1 blind (§2.2: the same two half-rings and margins) and phase 2 from the statements (A1 "UFD", A2 "pushout `R = (S₊ ⊕ S₋)/ℤ[i]`", A3 "units are `1, i` mod `(1+i)²`; `U mod 3 ⊆ {±1, ±i}`": TRUE each)]**
-A1 is the only place one prime is used in ONE-a: with two primes `w₅w₁₃` lies in no half-ring (J12's remark). *Proof:* J12 stage 2.
-*Rests on it:* FS91-J12-ONEa, J12-HL, the `p`-generalisations MSp and C3p. *Kernel:* declined.
+**FS91-J12-A1 — the half-rings and the `p`-free margins (= J12-A2, J12-A3; id list split from a grouped header, J33 — the checker's id regex takes only one id per header):** "`S₊ ∩ S₋ = ℤ[i]`, `S₊ + S₋ = R_{{p}}`, `U_p ⊆ S₊ ∪ S₋`"; "characters of `S₊`, `S₋` agreeing on `ℤ[i]` glue uniquely to `R_{{p}}`"; "at every `p ≡ 1 (4)`: `θ₂ = 1/2` and `τ_{(1+i)/3} ∈ {1/3, 2/3}` on `U_p` (margins 1/4, 1/12, `p`-free)". [hand (A3: tools exact at 5, 13, 17, 29); two derivations — J12 stage 2; J13 phase 1 blind (§2.2: the same two half-rings and margins) and phase 2 from the statements: A1, A2, A3 each TRUE]**
+J13's phase-2 statements verbatim, moved out of the grade bracket (J33: format fix for the checker's `]`-in-grade parse failure — `ℤ[i]`
+breaks the grade delimiter; content unchanged): A1 "UFD", A2 "pushout `R = (S₊ ⊕ S₋)/ℤ[i]`", A3 "units are `1, i` mod `(1+i)²`; `U mod 3 ⊆
+{±1, ±i}`". A1 is the only place one prime is used in ONE-a: with two primes `w₅w₁₃` lies in no half-ring (J12's remark). *Proof:* J12 stage 2.
+*Proof verdict:* closes, twice (J13 phase 1 blind, §2.2: "the same two half-rings and margins"; phase 2 from the statements: A1, A2, A3 each
+TRUE). *Rests on it:* FS91-J12-ONEa, J12-HL, the `p`-generalisations MSp and C3p. *Prior art:* not stated in the record (`plans/FS91-S1D-one-prime.md`,
+J12 stage 2; `plans/FS91-S1V-one-prime.md`, J13 phase 1/2) — this entry names none of its own, and §6's blanket note applies: pending the
+close gate; the piecewise-rotation and S-adic literatures (inventory item 122) are unsearched; the close gate's verdict on §6 (J23p result 6):
+not found as stated; `[Manners2015]` §5.5 asserts the one-prime failure without proof in §1–§5; Bosio–Vivaldi 2000 and Vivaldi 2006 undecided.
+*Kernel:* declined.
 
 **FS91-J12-ONEa — ONE-a (U3): "`Θ₄(R_{{p}}) ⊄ T + A` for every prime `p ≡ 1 (mod 4)`, by the heteroclinic `τ` on `S₊`, `θ₂ + λ_{C−P}` on `S₋`"; with FS91-J12-HL, the heteroclinic lemma: "two band torsion leaves whose discs meet on layer 0 give a band character outside `T + A`". (= J13-T2, X1.) [hand; tools exact (J12: 4 primes, `|m| ≤ 40`, three plants; J13: 8 primes, `|m| ≤ 30`, three lens points, two plants); **two derivations, the same route** — J12 stage 2 and J13 phase 1 blind (§2.2), which glues any `e` in the lens `|e − q| ≤ 1/12`, `|e − P| ≤ 1/4` and uses no step rule ("agree, same route", J13 stage 4); HL TRUE from its statement (J13 stage 3)]**
-FS89's U3 was proved at `p = 5` only (S0B-T3/T4); this is every split prime. *Proof:* J12 stage 2, `tools/crunch_j12_onea.py`. *Rests on
-it:* the correction owed to FS89-derivation §10's U3 row ("open → proved at every `p`", inventory item 121); the plan's P-U3 (0.75) met.
+FS89's U3 was proved at `p = 5` only (S0B-T3/T4); this is every split prime. *Proof:* J12 stage 2, `tools/crunch_j12_onea.py`. *Proof verdict:*
+closes, twice (the same route; J13 phase 1 blind, "agree, same route", J13 stage 4; HL TRUE from its statement). *Rests on it:*
+the correction owed to FS89-derivation §10's U3 row ("open → proved at every `p`", inventory item 121); the plan's P-U3 (0.75) met.
 *Prior art:* pending the close gate; J23p relays `[Manners2015]` §5.5's unproved assertion that "the appropriate results are false for"
 `{θ₅^r}` (inventory item 130). *Kernel:* declined.
 
-**FS91-J12-B1, J12-B2, J12-B3, J12-B4 — the nine-rotation model:** "`Θ₄(U₅)` ≅ bi-infinite orbits in `Q₀` of the rotation `ω = (−4−3i)/5` about one of nine centres per step"; "`θ ∈ T + A` iff its centre sequence is periodic"; "displaced orbits: same centres from `q₀ + δ` give `q_m + ω^mδ`, admissible when `|δ| ≤` margin"; "a minimal set meeting `T + A` is a finite union of leaf circles or a finite torsion orbit". (B1 = J13-T1 at 5, J13's time-homogeneous `u`-model, derived blind at every `l ≡ 1 (mod 4)`; B2 = J13-T3, the digit criterion "`θ ∈ Θ₄ ∩ (T + A)` ⟺ periodic digits", blind; J13-C9: "the admissible centres at `p = 5` are exactly `C₉`" [tools exact, E1, an independent test — polygon meeting, not kicks].) **[hand (B1: tools exact, alphabet and heteroclinic); two derivations — J12 stage 3 §3.1; J13 (B1, B2 blind in phase 1; B3 "same centres by linearity", B4 "the orbit closure of `τ + λ_d` is `⋃_σ {σ + λ_{d′} : |d′| = |d|}` … and it is minimal" TRUE from their statements); E1's plant (the 53° rotation `(3+4i)/5`) admits 29 centres, not `C₉`]**
+**FS91-J12-B1 — the nine-rotation model (= J12-B2, J12-B3, J12-B4; id list split from a grouped header, J33):** "`Θ₄(U₅)` ≅ bi-infinite orbits in `Q₀` of the rotation `ω = (−4−3i)/5` about one of nine centres per step"; "`θ ∈ T + A` iff its centre sequence is periodic"; "displaced orbits: same centres from `q₀ + δ` give `q_m + ω^mδ`, admissible when `|δ| ≤` margin"; "a minimal set meeting `T + A` is a finite union of leaf circles or a finite torsion orbit". (B1 = J13-T1 at 5, J13's time-homogeneous `u`-model, derived blind at every `l ≡ 1 (mod 4)`; B2 = J13-T3, the digit criterion "`θ ∈ Θ₄ ∩ (T + A)` ⟺ periodic digits", blind; J13-C9: "the admissible centres at `p = 5` are exactly `C₉`" [tools exact, E1, an independent test — polygon meeting, not kicks].) [hand (B1: tools exact, alphabet and heteroclinic); two derivations — J12 stage 3 §3.1; J13 (B1, B2 blind in phase 1; B3 "same centres by linearity", B4 "the orbit closure of `τ + λ_d` is `⋃_σ {σ + λ_{d′} : |d′| = |d|}` … and it is minimal" TRUE from their statements); E1's plant (the 53° rotation `(3+4i)/5`) admits 29 centres, not `C₉`]**
 Parity is the centre 0; the four `X₃` leaves are the four diagonal centres; the four edge centres lie outside `Q₀`. *Proof:* J12 §3.1,
-`tools/crunch_j12_oneb.py`. *Rests on it:* FS91-J12-B5, J12-MS. *Prior art:* pending the close gate — piecewise and discretized rotations
+`tools/crunch_j12_oneb.py`. *Proof verdict:* closes, twice (B1, B2 blind in J13's phase 1; B3, B4 and J13-C9 TRUE from the statements in
+phase 2; the plant E1 admits 29 centres, not `C₉`, at the wrong rotation, confirming the check discriminates). *Rests on it:* FS91-J12-B5,
+J12-MS. *Prior art:* pending the close gate — piecewise and discretized rotations
 with rational cosine (Adler–Kitchens–Tresser, Goetz, Buzzi, Bosio–Vivaldi, Akiyama–Pethő) are unsearched (inventory item 122). *Kernel:*
 declined.
 
 **FS91-J12-B5 — "`MS₄({5})` fails iff some band character is uniformly recurrent with a non-periodic centre sequence (§M.2 corrected)." [hand; two derivations — J12 §3.2; J13 from the statement ("points of a minimal set are uniformly recurrent (compact space; Gottschalk); … then B2": TRUE)]**
 It replaces the plan's §M.2 ONE-b reduction, whose clause 1 is TRUE, clause 2 a GAP (no classification by parity and `X₃`), clause 3
 incomplete, and whose obligation ("switches at bounded gaps") is answered yes by periodic `T + A` orbits and so does not decide ONE-b
-(inventory item 119). *Proof:* J12 §3.2. *Rests on it:* FS91-J12-MS. *Kernel:* declined.
+(inventory item 119). *Proof:* J12 §3.2. *Proof verdict:* closes, twice (J13 from the statement: "TRUE"). *Rests on it:* FS91-J12-MS. *Prior art:*
+not stated in the record (`plans/FS91-S1D-one-prime.md`, J12 §3.2; `plans/FS91-S1V-one-prime.md`, J13's statement pass); §6's blanket note
+applies (pending the close gate; not found as stated, J23p result 6). *Kernel:* declined.
 
 **FS91-J12-B6 — "two blocks freely concatenable over a compact set are powers of one word; distinct band torsion characters never share a layer-0 point." (Second half = J13-T4, "no bubbles": "Two band orbits that agree at times `s < t` agree on `[s, t]` … Hence two distinct periodic band orbits never meet", derived blind.) [hand; two derivations — J12 §3.3; J13 (T4 blind in phase 1; the first half from the statement by Lyndon–Schützenberger)]**
 J13 records why it matters: it fixes the shape any construction must have — a two-word "common centre" construction cannot work, so the
-hierarchy is forced (J13 stage 3, assembly). *Proof:* J12 §3.3; J13 §2.3. *Rests on it:* FS91-J12-CL's uniqueness of leaves. *Kernel:* declined.
+hierarchy is forced (J13 stage 3, assembly). *Proof:* J12 §3.3; J13 §2.3. *Proof verdict:* closes, twice (J13: T4 blind in phase 1; the
+first half from the statement by Lyndon–Schützenberger). *Rests on it:* FS91-J12-CL's uniqueness of leaves. *Prior art:*
+not stated in the record (`plans/FS91-S1D-one-prime.md`, J12 §3.3; `plans/FS91-S1V-one-prime.md`, J13 §2.3); §6's blanket note applies
+(pending the close gate; not found as stated, J23p result 6). *Kernel:* declined.
 
-**FS91-J12-CL, J12-CL′ — the two-leaf closing lemma** "(fixed point `D(1−y)/(1−xy)`, admissible with margin `≥ depth`)"; "the closed-up points for `a, b ≥ 2` are dense in the lens of two leaf discs". (CL′ with an explicit inverse = J13-T8: "`(x, y) = (z̄/z, (z − D)/(z̄ − D)) ∈ T²` is the unique pair with `Q″ = z`".) **[hand; CL tools exact (levels 2, 3); two derivations — J12 §3.3; J13 from the statements (CL "B3 twice"; CL′ with necessity `D ≤ r + r′`); J13: "CL′'s density is the step everything rests on, and it holds"]**
+**FS91-J12-CL — the two-leaf closing lemma (= J12-CL′; id list split from a grouped header, J33)** "(fixed point `D(1−y)/(1−xy)`, admissible with margin `≥ depth`)"; "the closed-up points for `a, b ≥ 2` are dense in the lens of two leaf discs". (CL′ with an explicit inverse = J13-T8: "`(x, y) = (z̄/z, (z − D)/(z̄ − D)) ∈ T²` is the unique pair with `Q″ = z`".) [hand; CL tools exact (levels 2, 3); two derivations — J12 §3.3; J13 from the statements (CL "B3 twice"; CL′ with necessity `D ≤ r + r′`); J13: "CL′'s density is the step everything rests on, and it holds"]**
 Level 2 (`W₂ = c₀^a 0^b`, complete box `2 ≤ a, b ≤ 12`): 16 pairs admitted, all verified directly; level 3 (box `2 ≤ a, b ≤ 6` from
 `(2, 10)`): 17 admitted, all verified; plant P2 (the `X₃` margin as 1/6) admits 23 pairs that fail. Complete boxes a derivation fixed —
 the ban's edge, logged; no member is load-bearing for FS91-J12-MS, whose proof is existential. *Proof:* J12 §3.3, `data/fs91/j12/oneb-check.txt`.
-*Rests on it:* FS91-J12-H, J12-C2. *Kernel:* declined.
+*Proof verdict:* closes, twice (J13 from the statements: CL "B3 twice"; CL′ with necessity `D ≤ r + r′`; "CL′'s density is the step
+everything rests on, and it holds"). *Rests on it:* FS91-J12-H, J12-C2. *Prior art:* not stated in the record (`plans/FS91-S1D-one-prime.md`,
+J12 §3.3; `plans/FS91-S1V-one-prime.md`, J13's statements pass); §6's blanket note applies (pending the close gate; not found as stated,
+J23p result 6). *Kernel:* declined.
 
-**FS91-J12-H, J12-W, J12-Ω — the hierarchy:** "an infinite hierarchy of band torsion characters with words `W_{n+1} = W_n^{a}W_{n−1}^{b}`"; "the words are primitive; their S-adic subshift is minimal and aperiodic". **[hand (H: tools exact at levels 2, 3); two derivations — J12 §3.3; J13 from the statements (H "induction by CL′"; W by Lyndon–Schützenberger; Ω by Fine–Wilf): TRUE each]**
-*Proof:* J12 §3.3. *Rests on it:* FS91-J12-MS. *Kernel:* declined.
+**FS91-J12-H — the hierarchy (= J12-W, J12-Ω; id list split from a grouped header, J33):** "an infinite hierarchy of band torsion characters with words `W_{n+1} = W_n^{a}W_{n−1}^{b}`"; "the words are primitive; their S-adic subshift is minimal and aperiodic". [hand (H: tools exact at levels 2, 3); two derivations — J12 §3.3; J13 from the statements (H "induction by CL′"; W by Lyndon–Schützenberger; Ω by Fine–Wilf): TRUE each]**
+*Proof:* J12 §3.3. *Proof verdict:* closes, twice (J13 from the statements: H "induction by CL′", W by Lyndon–Schützenberger, Ω by
+Fine–Wilf, each TRUE). *Rests on it:* FS91-J12-MS. *Prior art:* not stated in the record (`plans/FS91-S1D-one-prime.md`, J12 §3.3;
+`plans/FS91-S1V-one-prime.md`, J13's statements pass); §6's blanket note applies (pending the close gate; not found as stated, J23p
+result 6). *Kernel:* declined.
 
 **FS91-J12-MS — "`MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists." (= J13-T7, X2 answered "no", by an independent route.) [hand; **two independent derivations by different routes** — J12 §3.3 (a hierarchy of periodic orbits closed by CL/CL′; constructive; its lemmas each derived by J13 from their statements, and J12's route re-run by J13: "TRUE, by J12's route too"); J13-T7 blind (a branching region and entropy compression; existence only); owner ruling: J12's route primary, J13's the second derivation]**
 Its points are switching characters on two letters (the parity leaf `0` and the `X₃` leaf `c₀`), uniformly recurrent, with bounded runs in
@@ -509,24 +538,32 @@ continued-fraction kind, in the closure of the torsion points); J13's is existen
 entropy `≥ (log 2)/200` per step — no conflict with Buzzi's zero entropy of piecewise rotations, which is for maps (J12's C0-b′ listed it as a
 prior against, not a claim). *Proof:* J12 §3.3, `tools/crunch_j12_oneb.py`; J13 §2.5, `tools/crunch_j13_check.py` →
 `data/fs91/j13/check.txt` (Part D; plants fire). *Proof verdict:* closes, twice. *Rests on it:* the correction owed to Frontier item 25 and
-G76 ("one prime fails for minimal sets too", inventory item 121); FS-89's D prediction (`MS₄({5})` false, 0.75) met by a different mechanism; the plan's P-MS5 (0.60) met. *Prior
-art:* the close gate: not found as stated (J23p result 6); `[Manners2015]` §5.5's assertion (above) bears; J13-L1's method is
+G76 ("one prime fails for minimal sets too", inventory item 121); FS-89's D prediction (`MS₄({5})` false, 0.75) met by a different mechanism; the plan's P-MS5 (0.60) met. *Prior art:*
+the close gate: not found as stated (J23p result 6); `[Manners2015]` §5.5's assertion (above) bears; J13-L1's method is
 `[GrytczukKozikMicek2013]`'s, cited from memory and unchecked against the paper (a prior-art debt, J13 §2.5). *Kernel:* declined.
 
-**FS91-J13-T6, J13-L1 — J13's route to `MS₄({5})` false:** "(branching at 5) Let `ρ₁ = 43/200` and `Ω := {L : |L| ≤ 1/4, ρ₁ ≤ |L − o| ≤ 1/4}`. For every `L ∈ Ω` at least two `n ∈ [1, 200]` give `L′ ∈ Ω`"; "(entropy compression with state-dependent lists) … For `K = 9` and every length, every `L₀ ∈ Ω` starts an admissible block word with no factor `V^K`". **[hand + tools (T6: a 60-digit inequality on 400 pieces of `[ρ₁, 1/4]`, margin `≥ 3.54°`; 200 exact sample states each with `≥ 11` admissible `n`; plants `ρ₁ = 0.1975` and `N₀ = 60` break it); one mind (J13); L1's method prior art, cited from memory]**
-T6 rests on the three-gap theorem (the largest circular gap of `{n·arg β̄}`, `n ≤ 200`, is `4.148° = ‖78α‖`). **Scope:** an inequality at `l = 5`
+**FS91-J13-T6 — J13's route to `MS₄({5})` false (= J13-L1; id list split from a grouped header, J33):** "(branching at 5) Let `ρ₁ = 43/200` and `Ω := {L : |L| ≤ 1/4, ρ₁ ≤ |L − o| ≤ 1/4}`. For every `L ∈ Ω` at least two `n ∈ [1, 200]` give `L′ ∈ Ω`"; "(entropy compression with state-dependent lists) … For `K = 9` and every length, every `L₀ ∈ Ω` starts an admissible block word with no factor `V^K`". [hand + tools; one mind (J13); L1's method prior art, cited from memory]**
+T6's tool evidence, moved out of the grade bracket (J33: format fix for the checker's `]`-in-grade parse failure — the interval `[ρ₁, 1/4]`
+breaks the grade delimiter; content unchanged): a 60-digit inequality on 400 pieces of `[ρ₁, 1/4]`, margin `≥ 3.54°`; 200 exact sample
+states each with `≥ 11` admissible `n`; plants `ρ₁ = 0.1975` and `N₀ = 60` break it. T6 rests on the three-gap theorem (the largest circular gap of `{n·arg β̄}`, `n ≤ 200`, is `4.148° = ‖78α‖`). **Scope:** an inequality at `l = 5`
 only; the route at another `l` needs its own `Ω` (the lens `D(0,1/4) ∩ D(o_l,1/4)` is non-empty at every `l`) — **not claimed** beyond 5 (J13).
-*Proof:* J13 §2.5, `tools/crunch_j13_check.py` Part D. *Rests on it:* the second derivation of FS91-J12-MS. *Prior art:*
+*Proof:* J13 §2.5, `tools/crunch_j13_check.py` Part D. *Proof verdict:* closes on one reading (one mind, J13; T6 checked by complete
+enumeration and by plants that fire). *Rests on it:* the second derivation of FS91-J12-MS. *Prior art:*
 `[GrytczukKozikMicek2013]` (method; debt). *Kernel:* declined (rests on a 60-digit numerical inequality).
 
 **FS91-J12-MSp — "the same at every `p ≡ 1 (mod 4)` (corollary; B1 re-derived at 5 only)." (= J13-T9: "J12-MSp at every `l ≡ 1 (mod 4)`, by J12's hierarchy on the frame J13-T1".) [hand; two derivations — J12 (stage 3 remarks, one mind); J13-T9, J12's route checked at every `l` on J13's own blind frame (J13-T1, with Part B's exact frame data at 8 primes); J13: "J12's route is the better one for `MS₄({p})`" — J13's own route (FS91-J13-T6) is proved at 5 only]**
 Uses only the parity and `X₃` leaves (margins `p`-free, A3), the rotating frame with `ε_p := w̄_p mod 3 ∈ μ₄`, and that `ω_p := ε̄_p w̄_p` is
 not a root of unity; J13: "the chain H, W, Ω, MS uses only the two centres `0`, `v₀` … and `arg β̄_l/2π ∉ ℚ`; nothing else is
-`p`-dependent". *Proof:* J12 stage 3 remarks; J13 stage 3 (MSp row), §2.1. *Rests on it:* the "every `p`" form of the Frontier correction.
+`p`-dependent". *Proof:* J12 stage 3 remarks; J13 stage 3 (MSp row), §2.1. *Proof verdict:* closes, twice (J12 stage 3 remarks, one mind;
+J13-T9 checks J12's route at every `l` on its own blind frame, and finds "J12's route is the better one for `MS₄({p})`"). *Rests on it:*
+the "every `p`" form of the Frontier correction. *Prior art:* not stated in the record (`plans/FS91-S1D-one-prime.md`, J12 stage 3
+remarks; `plans/FS91-S1V-one-prime.md`, J13-T9); §6's blanket note applies (pending the close gate; not found as stated, J23p result 6).
 *Kernel:* declined.
 
-**FS91-J12-C1, J12-C2 — torsion by closing:** "a torsion `τ_e` of order `N` is band iff the `w̄`-orbit of `e` in `N^{−1}ℤ[i]/ℤ[i]` stays in `Q` (`w̄ ↦ tπ̄²`, `t ≡ 5^{−1}`)"; "one-segment closing lemma: margin `r`, return `|z_L − z₀| ≤ r|1 − ω^L|` ⟹ a band torsion character". **[hand; two derivations — J12 stage 4; J13 from the statements (C1 "`w ≡ π²t (mod N)`"; C2 "then B3 (Euclidean distance to `∂Q₀` equals the sup-norm margin inside a square)"): TRUE each]**
-*Proof:* J12 stage 4. *Rests on it:* FS91-J12-C3. *Kernel:* declined.
+**FS91-J12-C1 — torsion by closing (= J12-C2; id list split from a grouped header, J33):** "a torsion `τ_e` of order `N` is band iff the `w̄`-orbit of `e` in `N^{−1}ℤ[i]/ℤ[i]` stays in `Q` (`w̄ ↦ tπ̄²`, `t ≡ 5^{−1}`)"; "one-segment closing lemma: margin `r`, return `|z_L − z₀| ≤ r|1 − ω^L|` ⟹ a band torsion character". [hand; two derivations — J12 stage 4; J13 from the statements (C1 "`w ≡ π²t (mod N)`"; C2 "then B3 (Euclidean distance to `∂Q₀` equals the sup-norm margin inside a square)"): TRUE each]**
+*Proof:* J12 stage 4. *Proof verdict:* closes, twice (J13 from the statements: C1, C2 each TRUE). *Rests on it:* FS91-J12-C3. *Prior art:*
+not stated in the record (`plans/FS91-S1D-one-prime.md`, J12 stage 4; `plans/FS91-S1V-one-prime.md`, J13's statements pass); §6's blanket
+note applies (pending the close gate; not found as stated, J23p result 6). *Kernel:* declined.
 
 **FS91-J12-C3 — ONE-c (U5): "the orders of band torsion characters of `R₅` are unbounded — the family `c₀^a 0^b`, `N_{a,b} > √(a+b)`." With FS91-J12-C4: "`N_{a,b} ∣ 2·Nm(π^L − (−i)^Lπ̄^L)`, `L = a+b`: the orders' primes are those of `Φ_k^{hom}(π, −iπ̄)`, `k ∣ L`"; and FS91-J12-C3p, "the same at every `p ≡ 1 (mod 4)` (corollary; family re-derived at 5 only)". [hand; tools exact (the complete box `a, b ≤ 10`: 14 members, three code paths; J13's E2 recomputes the 14 pairs and 14 orders exactly and checks each character's band on `U₅ mod N` independently; E2's plant, radius `1/13`, drops `(10, 5)` only); **two derivations** — J12 stage 4; J13 (C3, C4 TRUE from the statements; X3 "unbounded" blind by its own family, FS91-J13-T5); C3p = J13-T5 at every `l` (and J12's C3 route via CL′ is also `p`-free, J13)]**
 The advisor's pointer (primes dividing `Φ_k(w₅)`) meets the family in its primes (J12's C0-c′). **Correction owed (J13 stage 4, a wording
@@ -543,7 +580,9 @@ At 5 the members are `p = 0, 3, 5, 8, 10, 13, 15, 18, 23, 28, 33, 38` (12 of 41)
 under **one** condition where J12's CL has two — J12's `(1, 5)`, `(1, 10)` are J13's `p = 5, 10` (orders 234, 9111); J13's `p = 0, 3` (orders
 3, 48, both in S0B-L4's list) and `p = 8, 13, …` fail J12's first condition and are still band characters; J12's family admits `a ≥ 2`,
 which J13's does not consider. J12's condition is sufficient, J13's weaker, both correct. The order bound is **exponential** here against
-J12's general `N_{a,b} > √(a+b)`. *Proof:* J13 §2.4, `tools/crunch_j13_check.py` Part C, `data/fs91/j13/check.txt`. *Rests on it:* the
+J12's general `N_{a,b} > √(a+b)`. *Proof:* J13 §2.4, `tools/crunch_j13_check.py` Part C, `data/fs91/j13/check.txt`. *Proof verdict:*
+closes on one reading (one mind, J13; complete enumeration, and the plants — a non-member and a wrong step lattice — both fail as
+expected). *Rests on it:* the
 second derivation of ONE-c at every `p` (FS91-J12-C3p); the correction to J12's "no overlap with S0B-L4" sentence. *Prior art:* the close
 gate's result 6 (not found as stated). *Kernel:* declined (no consumer).
 
