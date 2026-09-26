@@ -211,3 +211,11 @@ rulings in `plans/FS75-close-inventory.md` (opened 35c82490): no swap; headline 
 spelling ambiguous at 167; statement shape identical to its siblings); ℚ(√47) after the gate only. **Running (3):** J51D, J51V, J52K.
 Next: on J51D + J51V, the owner reconciles verdicts (divergence table), then FS-100's close-math and front page; on J52K, the gate re-run
 by the owner, then FS-75's close and front page.
+
+**Update ~00:05 (2026-09-26) — J51V done (blind verifier, `plans/FS100-J51V-verification.md`).** Kronecker selection **as stated is FALSE**:
+a counterexample over ℚ (J51V-X1) — two characters at the two primes above 5 plus the dyadic parity make a proper four-colouring of a
+2-torus whose (T + A)-factor is a point. Re-derived by the owner and the tool re-run (ALL CHECKS PASS). It is true at rank one (row 98), and
+at ℚ(√47) the statement is equivalent to its own conclusion there, open at rank ≥ 2 outside E (J51V-EQ). The controls, KS-2 and K0 are
+TRUE. **Held until J51D reports:** re-aim stage 4 or close it as a no-go. **Owner slip:** a commit subject (3648d3a5) named the
+counterexample while J51D runs; logged in `plans/FS100-close-inventory.md`, and J51D's later FALSE verdicts get graded accordingly. J51D is
+fenced by message from J51V's files, the inventory and this handoff. **Running (2):** J51D, J52K.
