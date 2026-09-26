@@ -69,10 +69,8 @@ unless it is listed in §1 with a grade.*
   continuous in probability, `{e_j}`-valued, with a jointly measurable version equal to `c` on `R` a.s., and `P(c̃(x) = c̃(x + w)) = 0` for
   every `x ∈ G_S` and every `w ∈ T_S`." [hand, two blind (J28D; J28V)] — stated at four colours and over the S2 fields; its `k`-colour,
   totally-real form is not an input.
-- **I-MX** (`plans/M3-derivation.md` M3-J21-MX): "`K` compact abelian, `ν` a probability on `T_K ⊆ K`, `λ* = sup_{ξ≠0}|ν̂(ξ)| < 1/(k−1)`: for
-  every Borel graph `X`, a Borel proper `k`-colouring of `X × Cay(K, T_K)` yields the Borel proper `k`-colouring `φ(x) = min{j :
-  μ(W(x,·)^{-1}(j)) > λ*/(1+λ*)}` of `X`; for measurable `W` proper off a null vertex set, `φ` is measurable and proper off a null vertex set"
-  (format N′). [hand, two (J21; J22)] — the Borel/measurable form, one compact factor; its CP form over infinitely many factors is not an input.
+- **I-MX** — the held mixing selection (`plans/M3-derivation.md` M3-J21-MX, [hand, two]): its statement is in the sealed half. `LEDGER.md`
+  row 109 is fenced until your stage 3.
 - **I-MERGE** (`plans/FS100-X21V-verification.md` Lemma X21V-M): "for any graph `G`, `G × G` (categorical) has a CP `k`-colouring iff `G`
   does". [hand, two (X21V; X21D)]
 - **I-CPUP** (row 125): "`χ(F²) ≤ χ_CP(ℝ²)` for every countable `F ⊆ ℝ`". [hand, two blind (X21D; X21V)]
@@ -88,8 +86,9 @@ unless it is listed in §1 with a grade.*
 
 ## 2. The claims
 
-*For each: the statement, its source, and its controls (§3). **This list has a sealed half,** `data/fs103/claims-sealed.md`: a finer
-decomposition of the load-bearing claim and, for every claim, what a pass for the wrong reason would look like. **Open it only after your
+*For each: the statement and its source. **This list has a sealed half,** `data/fs103/claims-sealed.md`: a finer
+decomposition of the load-bearing claim, the held mixing lemma's statement, the planner's and the advisor's wrong-reason lines
+and controls, and registered expectations. **Open it only after your
 stage 3 is committed**; then score it against your own derivation — agree, or name what it missed or what you found that it lacks. The
 load-bearing claim is C-LB; derive it first.*
 
@@ -98,17 +97,15 @@ load-bearing claim is C-LB; derive it first.*
 - **C-F1-GEN.** "Given MR and T-J39-3, at a real field `F` with no non-thick stable place, **χ(ℝ²) = χ_CP(ℝ²) = χ(F²)**" (the stub,
   `plans/STUB-collapse-cp-plane.md` § The question, verbatim). **Proposed scope** (this list's wording): `F` a **totally real** number field,
   outside row 100's exception, with `N₆(F) = ∅` under D-THK (c); given MR(F). Judge both the stub's text and the proposed scope.
-  - *Control:* CTL-K7-6, CTL-K5-5, CTL-167-5 (each stops at the step "`N_k(F) = ∅`", which fails there).
 - **C-LB (the load-bearing step).** This list's wording, from T-J39-3's forward direction: *"If `F²` is `k`-colourable, then **either** (A)
   `Y_{F,k}` carries a CP `k`-colouring, **or** (B) some `U`-invariant finite positive measure `τ` on `R̂` has `τ(E) = 0` and `∫ Re χ(1) dτ(χ) <
   0`"* (wanted-poster §3.2, verbatim), **at `k = 4, 5, 6`, for a totally real `F` outside row 100's exception with `N_k(F) = ∅`**, so
   that (A) reads "`UD(ℝ²)` carries a CP `k`-colouring".
   - **Not an input:** T-J39-3 itself, and T-J39-1 and T-J39-4 (its instances). Their proofs are fenced by file in your brief. Permitted by
     statement: every §1 input.
-  - *Controls:* **CTL-167-4** and **CTL-dG4** below must come out of your derivation at `k = 4`; **CTL-K-4** must stop.
 - **C-CPUP (this list's wording).** `χ(ℝ²) ≤ χ_CP(ℝ²)` (from I-CPUP and I-DBE; no Tarski, no MR), and `χ(F²) ≤ χ(ℝ²)` for every `F ⊆ ℝ`.
 
-### 2B. The checkable instance, ℚ(√635087) (first)
+### 2B. The headline instance, ℚ(√635087) (first; MR needed only at degree 2)
 
 - **C-635-PL** (the stub, § What the milestone must do, item 1, verbatim): "`635087` prime, `≡ 7 (mod 8)`, so the wall is broken and `R = O′`;
   every prime `p ≡ 3 (mod 4)` below 103 inert, so its usable places are 103, 107, 127, 163, 191, … and the ramified 635087". Check it exactly
@@ -120,7 +117,7 @@ load-bearing claim is C-LB; derive it first.*
 - **C-635-TF** (this list's wording; a consequence, derive it as one): ℚ(√635087)'s plane has no unit triangle; so, given C-635-F1 and
   `χ(ℝ²) ≥ 6`, some finite triangle-free unit-distance graph has chromatic number at least six.
 
-### 2C. De Grey's field (the statement to publish)
+### 2C. De Grey's field (a second instance, graded separately after 2B; stated as a result only at two minds)
 
 - **C-dG-PL** (this list's wording, from `CLAUDE.md` G43 and `LEDGER.md` rows 52–53: "no prime below 131 is usable"; "first usable primes 131,
   479"): the exact list of stable places of `F_dG` below a bound you state (at least 500), computed with PARI with residue degrees; the places
@@ -146,21 +143,14 @@ load-bearing claim is C-LB; derive it first.*
   factors `G_v`, `v ∈ N₆(F)`, over all totally real `F`; (d) what is missing for all subfields of ℝ (D-S) and for fields with complex places.
 - **C-FMT** (this list's wording; **no assertion**; each part graded on its own, GAP expected somewhere): (a) every CP `k`-colouring of
   `UD(ℝ²)` has a jointly measurable version; (b) hence `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`; (c) `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`; (d) `χ_m⁰(ℝ²) = χ_m(ℝ²)`
-  (a measurable colouring proper at almost every edge can be made proper at every edge); (e) the stub's "`χ_CP ≤ χ_m`" — held with no MR,
-  or only through C-dG-F1?; (f) `χ_B(ℝ²)` against the others.
+  (a measurable colouring proper at almost every edge can be made proper at every edge); (e) `χ_B(ℝ²)` against the others.
+- **C-CPM** (the stub's, `plans/STUB-collapse-cp-plane.md`: "**`χ_CP ≤ χ_m`**; F1 claims `χ = χ_CP`, never `χ = χ_m`"): `χ_CP(ℝ²) ≤ χ_m(ℝ²)`.
+  **Unverified: no derivation of it is on record.** Judge it with no MR; say whether it follows from C-FMT's parts, and whether it holds only
+  through C-dG-F1 or C-635-F1 (which would give `χ_CP = χ ≤ χ_m`).
 
-## 3. Controls (each one's expected outcome is stated; a derivation that disagrees has found something, or is wrong)
+## 3. Controls — yours
 
-- **CTL-167-4:** ℚ(√167), `k = 4`: every stable place is 4-thick (row 123: "`χ(ℚ(√167)²) ≥ 5` by two routes (the class; every stable place
-  4-thick)"), so C-LB at `k = 4` plus I-CP57 gives `χ(ℚ(√167)²) ≥ 5` given MR — agreeing with row 123's class route.
-- **CTL-dG4:** `F_dG`, `k = 4`: all stable places 4-thick; the same gives `χ(F_dG²) ≥ 5` given MR — agreeing with I-DG5 (kernel, no MR).
-- **CTL-K-4 (tight boundary):** K = ℚ(√3,√11), `k = 4`: its dyadic places are stable and Hoffman-tight at four colours (`λ_min = −d/3`,
-  row 67), so `λ* ≥ 1/3` and the chain stops at `N₄ ≠ ∅`; `χ(K²) = 4` (row 57).
-- **CTL-K7-6:** `K(√7)`, `k = 6`: the place above 83 is not 6-thick (row 68: six at 83 needed a certificate beyond Hoffman) — the chain stops
-  at the step "`N₆ = ∅`" (it fails: `N₆` holds the places above 83); at `k = 5` it goes through (`2√83/84 = 0.217 < 1/4`), giving, given MR, `χ(K(√7)²) ≤ 5 ⟺ χ_CP(ℝ²) ≤ 5`.
-- **CTL-K5-5:** `K(√5) = ℚ(√3,√5,√11)` (Heule's field, `χ = 5`, row 53): 11 is usable and not 5-thick — the chain must stop, or it would
-  "prove" `χ_CP(ℝ²) ≤ 5`.
-- **CTL-167-5:** ℚ(√167), `k = 5`: `N₅ = {23, 23′, 43, 43′}` (row 110) — the chain stops; what holds is row 125's B-1.
-- **CTL-ABS (arithmetic-free; the advisor's):** `G = Cay(ℝ, {±1, ±√2})` has `χ = 2` and `χ_CP = 3`: an argument for "χ ≤ k ⟹ χ_CP ≤ k" that
-  would run on `G` is a wrong-reason pass. Check both values.
-- **CTL-Q2:** ℚ at `k = 2`: the dyadic place is stable and ramified in `L/F` (`λ* = 1`), `χ(ℚ²) = 2`, `χ_CP(ℝ²) ≥ 5` — the chain must stop there.
+Each verifier writes, for each claim, **its own** wrong-reason line (what a pass for the wrong reason would look like) and **its own** control
+(a field, or an arithmetic-free graph, where the same chain must stop — and the step where it stops; or one where the answer is known
+independently and the chain must reproduce it), **before** opening the sealed half. The sealed half holds the planner's and the advisor's
+lines and controls, for scoring afterwards.

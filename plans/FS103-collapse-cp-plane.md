@@ -479,3 +479,26 @@ The advisor's check of C-THKDEL as stated (one mind, advisor's): the right arith
 Recorded, not given to the verifiers. No disagreement remains open except item 8 of stage 5 (the headline field), held for the owner.
 
 ## Stage 5b — SAVED
+
+## Stage 5c — SAVED: the owner's rulings (binding), applied
+
+1. **Fence:** the held mixing lemma's statement (I-MX, with its selection formula) and every control with its "stops at step n" line moved to
+   `data/fs103/claims-sealed.md` beside the sub-claims and the wrong-reason lines; `LEDGER.md` row 109 is fenced to stage 3. Each verifier
+   writes its own wrong-reason line and control before opening the sealed half (claim list §3). `data/fs103/claims.md` now holds, for the
+   load-bearing step, only its top-level statement and the §1 inputs by statement.
+2. **Headline, settled:** the collapse itself, carried by ℚ(√635087) (MR at degree 2 only). De Grey's field is a second instance for both
+   verifiers, graded separately, stated as a result only at two minds, at one mind a candidate. (Stage 5's item 8 is closed by this ruling.)
+3. **`χ_CP ≤ χ_m`** is now an explicit claim, **C-CPM**, marked unverified ("no derivation of it is on record"); C-FMT keeps parts (a)–(e).
+   Everywhere the plan says "`χ_CP ≤ χ_m`" it means C-CPM, unverified (proposed edit 6.4 item 3 stands).
+
+*Consequences for §6:* V1's order is C-LB (6, 5, 4) → C-CPUP → ℚ(√635087) → `F_dG`'s assembly → C-FMT (a)–(b), C-CPM; V2's is C-635-PL/THK →
+C-LB blind → `F_dG`'s places, 131, thickness → C-S, C-F1-GEN's scope → C-FMT (c)–(e) → C-MR16 last and optional. E1–E10 stand; the controls
+are now each verifier's own, so E10 is scored on the sealed controls at stage 4.
+
+## Stage 7 — SAVED: the two verifier briefs (drafts for the owner)
+
+`data/fs103/briefs/V1-collapse-verifier.md` (Coxeter) and `data/fs103/briefs/V2-collapse-verifier.md` (de Bruijn), modelled on
+`data/crunch-2026-09-26-x2x3/briefs/X21V-167-and-family-verifier.md`: fences by file (the two proofs of T-J39-3 and everything around them;
+X21D/X21V/X22D/X22V/X23V; M3's mixing-selection proof and row 109; the stubs, the re-rank, the handoffs, this plan, the advisor's and the
+gate's records, the other verifier), an explicit override of `MEMORY.md`'s pointer to the handoff, a grep rule on neutral tokens, stage 3
+committed before anything fenced is opened, the sealed half scored at stage 4. Both derive C-LB blind. I launch neither.
