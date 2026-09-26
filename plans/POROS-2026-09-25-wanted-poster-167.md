@@ -247,3 +247,185 @@ Iso(F) ⟹ every four-colouring of `F²` is a pullback from a tight place") is t
 
 - Would have searched for a CP (or periodic) five-colouring of `Γ₂₃ × Γ₄₃ × (a finite model of the plane)`, to test PL(23, 43). Instead:
   named PL and its FS-67 form (§3.3 (d) J3).
+
+## Stage 4 — SAVED: the name, the killing test, the example invariant, the recommendation, the ledgers
+
+### 4.1 In its discipline's words, and the queries a prior-art job should run (not run here)
+
+Given MR, the poster is a question in **measurable (Borel) combinatorics**. Which colour counts admit a translation-invariant random
+colouring, continuous in probability, of a **categorical product** of three Cayley graphs of locally compact abelian groups: the
+Euclidean unit-distance graph and two `p`-adic unit-distance graphs? Its three pieces carry the literature's names:
+- G-∞ is the **measurable chromatic number of the plane** (Falconer 1981's `≥ 5`), in its stationary form;
+- G-H is **measurable Hedetniemi** (`[KechrisMarks2020]` Problem 4.23) for these factors;
+- G-43 is the chromatic number of a **`p`-adic plane** (`[BardestaniMallahiKarai2017]`).
+
+MR itself is **measure rigidity for an infinitely generated abelian group of automorphisms of an `S`-arithmetic solenoid** (Furstenberg ×2×3;
+Einsiedler–Lindenstrauss for `ℤ^d`-actions on solenoids, recalled, not read).
+
+Queries, in those words:
+1. zbMATH `ab:"measurable chromatic number" & ab:"plane"`; `au:"Falconer, K"`. Has anyone proved or claimed `χ_m(ℝ²) ≥ 6`, or shown that
+   the stationary, measurable and Borel versions of the plane's chromatic number coincide?
+2. `ab:"Borel chromatic number" & (ab:"product" | ab:"Hedetniemi")`: follow-ups to Kechris–Marks 4.23; the Borel / measurable /
+   factor-of-iid hierarchy for Euclidean distance graphs (Brandt, Chang, Grebík, Grunau, Rozhoň, Vidnyánszky).
+3. `ab:"Hedetniemi" & (ab:"Cayley" | ab:"abelian") & ab:"fractional"`: the product lemma for abelian Cayley factors, beyond `[Zhu2011]`,
+   `[Zhang2012]` and `[GodsilEtAl2020]` (held).
+4. `ab:"rigidity" & ab:"invariant measures" & (ab:"solenoid" | ab:"S-arithmetic") & ab:"torus"`: MR in the literature's form. Is the
+   norm-one `S`-unit group of a CM extension, acting on the dual of its ring, a known case?
+
+### 4.2 The killing test
+
+- **Cheapest: J46's verdict on SI-4 and R-U** (the blind check, running). Every theorem here composes them. A defect in either takes down
+  T-J39-1 to T-J39-5 together. They share that input with J37 and J38, so one verdict tests all three posters.
+- **The one-mind steps.** T-J39-1's steps 5 and 6 are new: continuity-in-probability extension to the completion, and J21-MX on an
+  infinite product in random form. A reviewer re-derives step 6 first. Its product-edge hypothesis rests on weak approximation for
+  `R¹_{L/F}𝔾_m` at every finite set of places. If the closure of `U` in the stable places is a proper subgroup of the product of circles,
+  step 6 must be run on that subgroup's graph.
+- **A scope slip already found and bounded.** "Local at no prime" is not proved at 43 at depth (P1). The poster's first row is weaker than
+  the brief's wording by exactly G-43.
+- **The reading that would die first.** T-J39-5's "not arithmetic" reading rests on PL(23, 43). Hedetniemi fails in general from four
+  colours up, so PL is a real hypothesis, not a formality.
+
+### 4.3 Flip the poster: the example invariant
+
+**(a) The natural candidate, EI-B, cannot beat the direct route: finite-place locality at five.** EI-B says "every five-colouring of a
+real field's plane is, in law, pulled back from a finite place".
+- *Every five-colouring we can prove exists carries it*: the residue colourings at 11 and 19 (row 52, `K(√5)`) and every other `L = 5`
+  instance.
+- *Held by all, it empties the class*, G-43 aside.
+- *Its shadows*: P1, and P3's no-real-place half.
+- *Does §IQ name it?* M3's IQ.2 names only its archimedean slice, "`χ_µ(ℝ²) ≥ 6` … only as its `S = {∞₁}` slice".
+- **It cannot beat the direct route.** Apply EI-B to a CP five-colouring of `ℝ²` restricted to ℚ(√167): EI-B implies `χ_CP(ℝ²) ≥ 6`. And
+  at seven colours EI-B is **false** for every field (the hexagonal colouring, J36 F7). So any proof must tell five or six from seven
+  **at the real place**, which is not arithmetic. J37 flagged this trap for EI-2 at ℚ(√47): "restricted to ℚ(√47), where no example
+  exists, EI-2 is equivalent to the goal itself". Here there are no examples at all, and the restriction is rung D.
+
+**(b) The candidate worth looking for — PL, the product-pullback invariant.** PL says "every CP `k`-colouring of `UD(ℝ²) × G`, where `G` is
+a product of local planes that refuse `k` at every level, comes from the `UD(ℝ²)` factor".
+- *It is an invariant of every solution*: a statement about all colourings of a product.
+- *It is proved in the general class for mixing or gap-free factors*: J21-MX, row 109, and FS-67's rows 114–115.
+- *Its shadow*: row 110's thick-place reduction.
+- *Held by all*: it empties G-H, and with MR and FS-69 it turns the five-colour question at ℚ(√167) into exactly `χ_CP(ℝ²) ≥ 6`
+  (T-J39-5).
+- *Does §IQ name it?* **Yes**: M3's IQ.2 structural form is PL's measurable form, with Zhang's count as its known half.
+- **Does looking for it beat closing the gap directly?** Yes. Closing the gap outright needs rung D, because G-∞ is in it. PL is the
+  largest piece of the 167 question that is not rung D.
+
+**(c) What the flip teaches about the conjecture.** At four colours the example invariant's archimedean case is a theorem: Falconer, and
+`[AmbrusEtAl2023]`'s `m₁ < 1/4`. So the four-colour posters reduce to finite-place lemmas. At five it is the plane's own open question.
+So the conjecture's content at `L ≥ 6` is archimedean, modulo MR and PL, and its content at `L ≤ 5` is arithmetic.
+
+### 4.4 The cards
+
+```markdown
+question: is-the-167-gap-arithmetic
+  evidence: this record T-J39-5 and §3.3 (b); plans/M3-S1D-windows-five.md §3.5 (D2(a) GAP-2); LEDGER.md rows 114–115 (FS-67)
+  expected: a residue of ℚ(√167)'s five-colour question that arithmetic could close
+  ask: does every CP five-colouring of UD(ℝ²) × G₂₃ × G₄₃ come from a CP five-colouring of UD(ℝ²) (PL(23, 43))?
+  if yes: with MR and FS-69, χ(ℚ(√167)²) ≥ 6 iff χ_CP(ℝ²) ≥ 6; FS-59 stops being an arithmetic target and its five is the plane's measurable problem
+  if no: a CP Hedetniemi failure among local unit-distance graphs; the first falsifier template for the five-clause at ℚ(√167) that is neither arithmetic nor archimedean
+  answered by: derivation
+  cost: one derivation milestone (FS-96 re-aimed), solver-free; its finite analogues wait for 2026-10-01
+  hunch: yes at 23, whose all-levels ratio 0.185 sits well below 1/5; open at 43, whose depth is itself open
+  falsifier: a finite abelian Cayley graph B with every level's ratio below 1/5 and λ* ≥ 1/4, and a graph A with χ(A) > 5 and χ(A × B) ≤ 5
+  rank: 1
+
+question: does-MR-carry-three-fields
+  evidence: T-J39-3, T-J39-4 (this record); J45-SP-Cor; T-J38-2 (iii)
+  expected: MR is ℚ(√47)'s lemma
+  ask: is one proof of MR(F), for every real quadratic F at once, the shared next derivation for ℚ(√47), the type-(B) fields and ℚ(√167)?
+  if yes: one milestone moves three exposed predictions (χ(ℚ(√47)²) = 5; row 88 given T-B1; χ(ℚ(√167)²) ≥ 5)
+  if no: MR is field-by-field, and the fields' arithmetic enters the measure rigidity; aim it at ℚ(√47) first
+  answered by: derivation
+  cost: a Furstenberg-type wall (J36 F5), so weeks at the least; a prior-art reading first (query 4)
+  rank: 2
+```
+
+### 4.5 Recommendations (ranked, with the default)
+
+| rank | recommendation | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| R1 | **Record T-J39-3 as the posters' common form** in FS-97's stub, MR's home: "for every totally real `F` and every `k`: if `F²` is `k`-colourable, then `Y_{F,k} = UD(ℝ²) × ∏_{v ∈ N_k(F)} G_v` has a CP `k`-colouring or SP has a witness over `F`; conversely the first gives a `k`-colouring". Record J45-SP-Cor (ℚ(√47)), T-J38-3 (type (B)) and T-J39-4 ("MR(ℚ(√167)) ⟹ `χ(ℚ(√167)²) ≥ 5`") as its instances | three field-specific statements | one lemma, one home; the difference between the posters is only which theorem decides `Y_{F,k}` | medium: steps 5–6 are one mind |
+| R2 | **A blind check**, after J46 returns, of T-J39-1, T-J39-3, T-J39-4, T-J39-5, with J37's T-J37-1 and J38's T-J38-1/2/3 in the same job. Statement for the brief: T-J39-3 verbatim (R1) and §3.2's steps 3, 5, 6 as the named new steps | leave at one mind | cheap; the new steps are short, and the owner asked for shared identities, which these are | high that 3 and 7 hold; medium on 5 and 6 |
+| R3 | **Re-aim FS-96**: (i) for existence the places are `{∞, 23, 43}`, modulo SP (the split places drop out, T-J39-1); (ii) GAP-1 does not arise in the CP format; (iii) GAP-2 is PL(23, 43), FS-67's Hedetniemi question in CP form (rows 114–115); (iv) its payoff is T-J39-5 | keep FS-96's nine places and GAP-1 | removes six places and a null-set step from the live question | medium-high |
+| R4 | **FS-59's bearing, restated honestly**: closing five at ℚ(√167) needs `χ_CP(ℝ²) ≥ 6` (rung D in measurable form). Its arithmetic parts are MR (shared with ℚ(√47)), FS-69 (43 at depth) and PL. Rank FS-59 as "the conjecture's widest gap, archimedean modulo MR and PL", not as a target an arithmetic milestone can close | leave "the widest gap" unqualified | the unqualified form invites an arithmetic week that cannot land | high on the fact (T-J39-5 (i)); medium on the ranking consequence |
+| R5 | **Corrections owed**: (a) J36 F7's "`97/529 = 0.1834`" is the level-one bound; the all-levels ratio is `97.984637/529 = 0.18523` (row 75), conclusion unchanged; (b) any text saying ℚ(√167)'s five-colouring is "local at no prime" should add "43 at depth excepted (FS-69)" | none | exact scope | high |
+| R6 | **Reading debt**: §4.1's queries 1 and 2 first. If the stationary and measurable chromatic numbers of the plane are known to agree, or `χ_m(ℝ²) ≥ 6` is claimed anywhere, T-J39-5 changes status at once | skip | cheap, and it decides whether T-J39-5 points at a known open problem or a known answer | medium |
+
+**If Kooshi does nothing:**
+- T-J39-1 to T-J39-5 stay in this record at one mind;
+- FS-96 keeps nine places and GAP-1;
+- FS-59 stays ranked first as "the widest gap", with no note that closing it is the plane's measurable chromatic number;
+- MR stays ℚ(√47)'s lemma in the records, though it is also ℚ(√167)'s lower bound five.
+
+### 4.6 Evidence inventory (Stage 1 re-read) and the hunch ledger
+
+- E1 (a gap containing the archimedean class; the posters differ in kind): **confirmed**, sharpened. The difference is at the last step
+  only.
+- E2 (the constraints): confirmed. There is one extra constraint, T-J39-1, and a scope hole at 43.
+- E3 (the example-invariant route is no easier): confirmed for EI-B. **Killed in part**: PL is an example invariant that is easier than the
+  gap.
+- E4 ("the posters are not all the same" is the finding): **half killed**. They are the same up to their last line, which is Kooshi's
+  suspicion, and they differ only there.
+
+```markdown
+hunch: shared-identities-break-at-five
+  claim: the identities J38 found at four colours break at five over ℚ(√167)
+  basis: prior
+  falsifier: an identity that survives verbatim at five
+  registered: 2026-09-25
+  status: killed (by: §3.2 step 3 and §3.4 — MR, SP, SI, R-U, EI-2 and Kronecker selection survive; only the last step breaks)
+
+hunch: gap-contains-the-plane
+  claim: closing χ(ℚ(√167)²) ≥ 6 implies χ_CP(ℝ²) ≥ 6
+  basis: derived
+  falsifier: a defect in T-J39-1's (⟸)
+  registered: 2026-09-25
+  status: confirmed (by: T-J39-5 (i), and J21-D0 for windows)
+
+hunch: PL-true-at-23
+  claim: every CP five-colouring of UD(ℝ²) × G₂₃ comes from UD(ℝ²)
+  basis: prior
+  falsifier: a CP five-colouring of UD(ℝ²) × G₂₃ with fibres not a.s. constant in the 23-adic coordinate, or a finite Hedetniemi failure with a factor of ratio < 1/5 and λ* ≈ 1/3
+  registered: 2026-09-25
+  status: open
+
+hunch: 43-tower-never-rises
+  claim: UD(O/43^m, 2) refuses five at every m
+  basis: analogy (G66 at 7, 11, 19, 23)
+  falsifier: a proper five-colouring of UD(ℤ/1849, 2)
+  registered: 2026-09-25
+  status: open
+```
+
+### 4.7 What the three posters share (J37 and J38 exist)
+
+- **One skeleton, now with its reach measured.** It has four steps:
+  1. the Følner step (P4);
+  2. SI at `k` colours;
+  3. R-U;
+  4. MR, or its failure, SP.
+
+  These carry every field and every colour count to T-J39-3's product `Y_{F,k}`, which includes the real place. J21-MX then deletes every
+  thick place. At four colours the real place is thick in effect (its ratio is below `1/4`), so the skeleton ends in finite-place lemmas:
+  a count at ℚ(√47) and T-B1 at type (B). At five it does not.
+- **One unified statement.** For every totally real `F`, MR(F) ⟹ [`F²` is `k`-colourable ⟺ `Y_{F,k}` has a CP `k`-colouring]. Its
+  instances are J45-SP-Cor, T-J38-3 (with Iso for rigidity) and T-J39-4.
+- **One shared missing lemma, MR, now for three predictions.** Five at ℚ(√47); row 88 at type (B), given T-B1; and **five as a lower bound
+  at ℚ(√167)** (T-J39-4).
+- **Not shared.** The last line. At ℚ(√167) and five colours it is `χ_CP(ℝ²) ≥ 6` plus PL(23, 43) plus FS-69. The first of these is the
+  plane's measurable question, which no field-level method can bypass.
+
+### 4.8 Would-have-searched-here log (Stage 4)
+
+- Would have searched finite products `Γ₂₃ × H` for five-colourings not pulled back from `H`, to test PL. Instead: card 1, a derivation,
+  with its falsifier stated in finite form.
+
+## Theorems this phase proved
+
+| id | statement | grade | address |
+|---|---|---|---|
+| T-J39-1 | if ℚ(√167)'s plane is five-colourable, then `UD(ℝ²) × G₂₃ × G₄₃` has a CP five-colouring or SP has a witness over ℚ(√167); the first gives a five-colouring | hand, one mind; composition of J45 SI (at `k`), RU, SP-oi, J21-MX (random form), J21-SL, P4 | §3.2 |
+| T-J39-3 | the same for every totally real `F` and every `k`, with `Y_{F,k} = UD(ℝ²) × ∏_{v ∈ N_k(F)} G_v`; given MR(F), an equivalence | hand, one mind; as T-J39-1 | §3.2 |
+| T-J39-4 | every stable place of ℚ(√167) is 4-thick; a four-colouring of its plane yields an SP witness; MR(ℚ(√167)) ⟹ `χ(ℚ(√167)²) ≥ 5` | hand, one mind + tools exact (`tools/crunch_j39_thick.py`, plants fire); uses `[AmbrusEtAl2023]`, not FS-66 | §3.3 (e), §2.3 |
+| T-J39-5 | (i) `χ(ℚ(√167)²) ≥ 6 ⟹ χ_CP(ℝ²) ≥ 6`; (ii) given MR(ℚ(√167)), 43's all-levels ratio `< 1/5` and PL(23, 43), the converse | hand, one mind; composition of T-J39-1 | §3.3 (f) |
+| (tool) | `λ*` at level one: `0.331695` (23), `0.271869` (43), `0.248626` (59); level two at 23, new characters `≤ 2/24` | tools exact (float, error `< 10⁻⁹`) | §2.3 |
