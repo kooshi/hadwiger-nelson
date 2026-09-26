@@ -21,6 +21,8 @@ opened.) Inputs read: `CLAUDE.md`, `LEDGER.md` rows 75 and 95–110, the `[Zhang
 | S1V-5 | V2: for countable amenable `G` acting on a graph, `k`-colourable ⟺ a `G`-invariant probability on proper `k`-colourings; hence `ι_G ≥ 1/k`. Amenability load-bearing: an explicit `F₂`-graph, 6-colourable, whose proper 6-colourings map equivariantly onto `∂F₂` | hand | §V2 |
 | S1V-6 | V3: a point (rational or not) of `Θ_k(Λ)` gives a proper `k`-colouring `⌊kθ̃⌋`, periodic under `ker θ` of finite index when `θ` is rational; `Θ₄(R) = ∅` ⟹ some saturated `Λ_M` of an exhausting chain has `Θ₄(Λ_M) = ∅` (non-effective) | hand | §V3 |
 | S1V-7 | `Cay(ℤ, ±{1,3,4,5})` is four-colourable (period 8, classes `{0,2},{1,3},{4,6},{5,7}` mod 8) with `Θ₄ = ∅` | hand | §V3 (ii) |
+| S1V-8 | S1e (non-blind): (i) holds once `Γ` is assumed four-colourable (as worded it fails vacuously otherwise), also with matrix coefficients; (ii) and (iii) hold as stated | hand | §2.3 |
+| S1V-9 | `ρ_per(ℚ(√47)) = max_w τ_w` with equality (the single-place reductions are admissible `L`; no surjectivity of `R → A_w` needed) | hand | §2.1 |
 
 ## Stage 0 — quotation check (standing rule 5)
 
@@ -167,3 +169,73 @@ on `M`.
 | V1, the ramified tower at 47 | the level-2 spectrum of `O_w/π²` (`47⁴` characters × 2,256 points) | derived the bound; checked the same derivation at the ramified place of ℚ(√7) at levels 2 and 3 (seconds) |
 | V3 (ii) | a `Θ₄` tree over candidate lattices plus a colouring finder, for a four-colourable `Λ` with `Θ₄ = ∅` | GAP, with the route named |
 | V2 | a vertex-transitive non-amenable counterexample to the `ι` clause | not needed for the claim; logged |
+
+## Stage 2 — SAVED: the deriver's record opened; divergences
+
+*Opened after stage 1's commit (`3bb6b771`): `plans/FS84-S1-derivation.md` (J31, 379 lines, read in full) and `plans/FS84-five-colours-47.md`
+§5.1–§5.2 and its §G line for R96. Still unopened: `data/crunch-2026-09-25/reports/J31.md`, the deriver's brief, `tools/fs84_s1_*`.*
+
+### 2.0 Quotation check, completed (standing rule 5)
+
+| brief's claim | source | verdict |
+|---|---|---|
+| V1 | plan §5.1 first bullet | **verbatim** |
+| V2 | plan §5.1 second bullet | **verbatim** |
+| V3, first sentence ("implies nothing …; a rational point … periodically") | not in the plan (grep for its phrases in the plan and in the deriver's record: nothing) | **not a quotation**: the planner's own formulation of "S1c's frame". The deriver's nearest text, §3.1: "A rational band character of `Λ_M` is a periodic four-colouring; whether `Θ₄(Λ_M) ≠ ∅` at all is a finder's question (out)." |
+| V3, second sentence (compactness) | plan §G, line 236: "R96 — bears: `Θ₄(R_{ℚ(√47)}) = ∅`; by compactness some finitely generated `Λ_M` already has `Θ₄ = ∅`" | **paraphrase**, "finitely generated" → "saturated"; harmless given an exhausting saturated chain (§V3 (iii)), but the brief's "verbatim from the plan's §M.1" is wrong for V3 |
+| "`[Zhang2012]` Thm 1.8(i)" (brief, verified inputs) | `BIBLIOGRAPHY.md` row: Thm 1.8 is the ratio equality; "(i)" is the MIS-normal half | the step both derivations use is Thm 1.8's equality, not (i). Wording only |
+
+### 2.1 Divergences on V1 (the deriver's S1a, claims 1–6 of its §4.3)
+
+| # | kind | the deriver | this record | resolution |
+|---|---|---|---|---|
+| D1 | truth | `ρ_per ≤ h*(31) = 0.2499972548 < 1/4`, binding at 31, margin `2.7452·10⁻⁶` (`1.5617·10⁻⁴` in `λ_min`) | the same numbers, independently | **agree** — P-S1a's "two derivations without `[AmbrusEtAl2023]`" is now met |
+| D2 | truth | "`ρ_per = max_𝔓 r_𝔓` exactly, `∈ [28/121, h*(31)]`"; "the true maximum is probably at 11" | the same bracket; attaining prime undecided (11 or 31) | **agree**. The deriver never says 31 attains the supremum ("attained in the bound at 31"). **The plan does** — §5.2 a4: "**The sup is attained** at 31 (`1/4 − 2.745·10⁻⁶`)" — which confuses the binding bound with the supremum: correction owed to the plan. Equality `ρ_per = max`: my route gives `≥` without Lemma R (a single-place reduction's image is a subgroup of `A_w` containing the image of `U`, whose Cayley graph has the ratio of `Cay(A_w, S_w)`), S1V-9 |
+| D3 | route | step 2 (finite quotients live at stable places) via Lemma R (`R` = the localisation at the stable primes; `ρ_N` onto) or J07's Lemma C + C′ | via integrality at stable primes, full rank, prime inversion (`p`-divisibility off `T`) and the "component" trick (`R_(p)/p^{e+c}O_(p)` a subgroup of `A_p`); surjectivity never used | **third route**, weaker input: needs only `R ⊆ ⋂_{stable} O_𝔓` and `1/p ∈ R` off `T` (`[Fischer1990b]`), not `R = ⋂ O_𝔓` |
+| D4 | route | step 3 (joint image) by the Cayley map `(1+is)/(1−is)` and weak approximation in `F` | rationality of the conic, weak approximation for `T`, and local constancy of `U → R/p^eR` (`R ∩ p^eR_(p) = p^eR`) | same substance |
+| D5 | route (sharper) | Lemma P: new characters at level `m ≥ 2` have `\|λ\| ≤ 2p^{m−1}` (one-step fibres) | `\|λ\| ≤ 2p^{⌈m/2⌉}` (the half-level kernel) | both TRUE; mine sharper from `m = 3`; they coincide at `m = 2`, where both the deriver's 47-ramified control (94 = `2·47`) and mine at the ramified place of ℚ(√7) (14 = `2·7`) attain the bound |
+| D6 | route | `λ_min` by interval arithmetic at 40 digits | at 80 digits, **and** an exact Sturm count on the integer polynomial `∏(x − λ(c))` (degree 30 at 31; 42 at 43; 46 at 47) | agree to every digit printed (`−10.666510494`, `−11.962230123`, `−12.846527722`, `−7.960687187`, …) |
+| D7 | route | the tail from 67 by Weil (`h ≤ 0.194033`) | 67 exact (`0.1812822`), Weil from 107 | immaterial |
+| D8 | extra | Theorem E at the ramified 47: levels 1–2 are homomorphically equivalent to `Γ₄₇`, so there the ratio is exactly `α(Γ₄₇)/47²` | not derived | not load-bearing; consistent (homomorphisms both ways between vertex-transitive graphs force equal ratios by the no-homomorphism lemma; level 2 is `𝔽_{47²}[ε]`, a ring containing its residue field) |
+| D9 | re-checks | FS-66's certificates at 11 and 19 re-run CERTIFIED at `--m 4` (6.9 s; 8 min 59 s, the latter without `slot.py`, logged by the deriver) | consumed at row 75's grade, not re-run | none |
+| D10 | scope | Corollary S1a′: no four-colouring of `Cay(R, U)` invariant under a finite-index `L`; "no proper colouring of ℚ(√47)² with four colours is periodic on any `R`-coset" | the same, plus what "periodic" does **not** cover (periodic colourings of a f.g. `Λ` with generators `U ∩ Λ`; invariant random colourings, since `ι ≥ ρ_per` only) | wording: the deriver's §2.3 item 4 has `ι ≥ ρ_per` too; no conflict |
+| D11 | the stable list | 11, 19, 23, 31, 43, 47, 67, 107, … and "59 is not stable" (a slip in the plan's §1.2) | the same list, computed independently (`(47/59) = −1`) | agree; the plan's §1.2 correction stands |
+
+### 2.2 Divergences on V2 (the deriver's S1b-i, S1b-ii)
+
+| # | kind | the deriver | this record | resolution |
+|---|---|---|---|---|
+| E1 | truth | S1b-i, S1b-ii TRUE, "Amenability is used only in ⟹" | the same | agree |
+| E2 | **necessity of amenability** | §2.4: "**not examined**: no non-amenable counterexample to S1b-i is exhibited. The plan's sketch (a free-group Cayley tree) does not work as stated" | an explicit counterexample: `F₂` acting on a 6-colourable graph whose proper 6-colourings map equivariantly onto `∂F₂` (§V2) | **the gap the deriver recorded is closed here**; the deriver's diagnosis of the plan's sketch agrees with mine (a connected bipartite graph has two 2-colourings, uniform measure invariant) |
+| E3 | wording | S1b-ii stated for "`G` amenable and transitive" | transitivity is not used for `≥ 1/k` at a given `v₀` | agree in substance (the deriver's Q4 says transitivity only fixes `v₀`-independence) |
+| E4 | route | Følner averaging of one colouring, weak* limit; symmetrise over `S_k`, read class 1 (`= 1/k` exactly) | invariant mean (Markov–Kakutani); pigeonhole a class `≥ 1/k` | same substance |
+| E5 | out of my list | S1b-W, S1b-iii (`ι_G = 1/χ_{f,0} = 1/ρ = 1/χ_{gf,G,0}`), claim 8 (`ι < 1/4` iff a finite `H` has `α(H) < \|H\|/4`) | **not verified** here (outside V1–V3); read without finding an error | a second check is owed if a ledger row rests on S1b-iii |
+
+### 2.3 Divergences on V3, and the verdict on S1e (non-blind)
+
+- **V3 (i):** agree (deriver §3.1).
+- **V3 (ii):** the deriver asserts nothing about non-four-colourability from `Θ₄ = ∅`; its S1c null ("no band character of order dividing 168, nor
+  of order 11, 19, 23, 31, 43 or 47" on the ten survivors, §3.2) is correctly graded there as **GAP** per lattice. No divergence of truth; my
+  GAP (no unit-distance witness for "four-colourable with `Θ₄ = ∅`") stands.
+- **V3 (iii):** not in the deriver's record (it is the plan's §G line). No divergence. The deriver's S1c tested ten saturated lattices from a
+  finite range (`M ≤ 2,520`, `24 | M`), which (iii) does not reach: (iii) is non-effective.
+- **Deriver's claim 9 (S1c's exact enumeration):** outside my list; not re-run.
+
+**S1e (the deriver's §4.2), non-blind verdicts:**
+- **(i) TRUE with one hypothesis added.** As worded — "a linear identity … valid for every proper four-colouring `c` of a lattice graph `Γ` has
+  `κ = 0`" — it fails when `Γ` has no proper four-colouring (then every `κ` is "valid"); the deriver's own next paragraph says "on a lattice
+  that is not four-colourable an identity is vacuous". Add "`Γ` four-colourable" to the statement. Proof checked: averaging over `S₄` (colour
+  permutations preserve properness) kills `κ`; `Σ_j A_j t_j = 0` with the `t_j` affinely independent forces `A_j` equal; conversely equal
+  `A_j` give 0. It survives **matrix** coefficients too: with `Σ_x M_x g(x) = κ` and `S₄` acting on the tetrahedron by `O_σ`, averaging gives
+  `κ = 0`, and `Σ_j B_j t_{π(j)} = 0` for every permutation `π` (`B_j` the class sums of the `M_x`) gives `(B_j − B_k)(t_a − t_b) = 0` for all
+  `a ≠ b`, so all `B_j` are equal. So "linear" may be read in either sense.
+- **(ii) TRUE.** Translate the gapped colouring so the gap sits at `x` with `a_x ≠ 0` (translation preserves properness on a Cayley graph);
+  recolour `x` with its missing colour: still proper, and two class weights move by `∓a_x`. The conclusion is in fact "every four-colouring
+  is gap-free at **every** vertex" (translation moves a gap anywhere), which is what the deriver's gloss "rigidity with no gap anywhere" says.
+- **(iii) TRUE.** An equilateral triangle in `F² = E` has third vertex `x + ζ₆^{±1}(y − x)`, so `ζ₆ ∈ E`, i.e. `√−3 ∈ F(i)`, i.e. `√3 ∈ F`
+  (for real `F`: `(a + bi)² = −3` forces `a = 0`, `b² = 3`); `√3 ∉ ℚ(√47)`. So no triangle of any side, and G75's `√3`-triple mechanism has
+  nothing to act on.
+
+## Stage 3 — not needed
+
+Phase 1 did not stall on any claim; the fallback (lemma statements only) was not used.
