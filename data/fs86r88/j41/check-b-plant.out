@@ -1,0 +1,3 @@
+FAIL: entry R88-TA has no LEDGER.md § B row
+R88 entries: 19; drafted lines: 18; failures: 1
+RESULT: FAIL

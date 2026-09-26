@@ -1,0 +1,12 @@
+{"status": {
+ "42": "done (J41 stage 2): R88-TC", "43": "done (J41 stage 2): R88-TCA", "44": "done (J41 stage 2): R88-TA, R88-TA1, R88-TA2, R88-CL",
+ "50": "done (J41 stage 2): resolved by J28V stage 5 (9262898f); applied as R88-TC's and R88-TCA's verification lines",
+ "56": "done (J41 stage 2): merged into R88-TC", "57": "done (J41 stage 2): merged into R88-TCA",
+ "58": "done (J41 stage 2): R88-TC-ext (= J28V-1), R88-J28V-2, R88-J28V-3",
+ "59": "done (J41 stage 2): R88-TA (blind half), R88-J28V-7; its FS86-V2 correction → stage 4 draft",
+ "60": "done (J41 stage 2): R88-J28V-6", "61": "done (J41 stage 2): R88-TA1, R88-TA2, R88-J28V-8d, R88-B2-2, R88-B2-3",
+ "62": "done (J41 stage 2): R88-B2-2 (J28V-10); J28V-11 filed as verification lines of R88-TC-ext, TC-Yp, TC-reg, TC-count",
+ "66": "done (J41 stage 2): applied in R88-TA's statement; → stage 4 draft (the row)",
+ "68": "done (J41 stage 2): R88-TC's verification line",
+ "71": "done (J41 stage 2): R88-J28V-7's *Prior art:*", "72": "done (J41 stage 2): R88-TA's and R88-CL's *Prior art:*; → stage 3 (§PA sweep)"
+}}

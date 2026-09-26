@@ -574,3 +574,34 @@ nor any HELD line** — J41 added them as rows 56–80, and rows 51–55 for ite
 | → stage 4, the drafts and stub files | 2, 3, 48, 52, 53, 59 (its FS86-V2 correction), 66 (row draft), 69, 70, 74, 75, 78, 80 | 13 (+2) |
 
 **Would have searched here (stage 1):** none — bookkeeping only.
+
+### Stage 2 — SAVED (the derivation file)
+
+`plans/R88-derivation.md` files every theorem the milestone proved outside the kernel: **19 entries** covering J28D's 14 named theorems
+(T-A, T-A1, T-A2, L-CL, TC, TC-Y′, TC-reg, TC-count, TC(A), TC-tab, B2-1, B2-2, B2-3, and C1–C3 as the extension lemma) and J28V's 11 (J28V-1 to
+J28V-11), duplicates merged, one entry per theorem with every other id in its title. J28V-11 (four re-derivations from statements) is filed as the
+verification lines of R88-TC-ext, R88-TC-Yp, R88-TC-reg and R88-TC-count, not as an entry. The id `TC-Y′` is spelled `R88-TC-Yp` (the check tool's
+id class has no prime; a primed id would be silently unparsed). **T-B1, T-B2 and T-C′ are not entries** — they are stated, with their named steps,
+in the file's §G.
+
+| verification | entries |
+|---|---|
+| two derivations, blind to each other | R88-TA, R88-CL, R88-TA2, R88-TC (over type (B)), R88-TC-ext (two routes), R88-TC-count (executed two ways), R88-TCA (over ℚ(√47)), R88-B2-1, R88-B2-2 (circle case), R88-B2-3; R88-TA1's chain T-B1 ⟹ Q-tr ⟹ T-B2 |
+| one derivation, re-derived by the other mind from its statement | R88-TC-reg, R88-TC-Yp, R88-B2-2 (general form), R88-TC-ext's converse |
+| one mind | R88-J28V-2, R88-J28V-3, R88-J28V-7 (in print), R88-J28V-8d; R88-TA1's remaining clauses (lines from T-A) |
+| class form beyond the blind check | R88-TC over S2 (J28D; J28V's stage-5 reading "my route reaches it unchanged"); R88-TCA over every real field with every stable place below 1/4 (J28D) |
+| tools grade | R88-TC-tab (float, controls and a plant; agreed by J28V's exact check) |
+| a third derivation of a held theorem | R88-J28V-6 (C14.2 (c) at `q = 2`, beside M3-J21-D1-2 and J22-T3) |
+
+**Kernel decisions:** one stub route — **R88-J28V-7 → FS-47** (the finite-index lemma by the rank argument, removing Lemma R from FS86-V2); the
+other 18 declined, each with its reason in the entry (measure theory on amenable and LCA groups off the kernel's surface; no consumer yet for the
+transience partials).
+
+**§ B lines (drafts for `LEDGER.md` § B, 19 lines):** `data/fs86r88/j41/ledger-b-draft.md`, reproduced in stage 4's drafts. Checked by
+`data/fs86r88/j41/check_b_draft.py`, which runs `tools/fs71_ledger_b_check.py`'s own parser and `--strict` check with the drafted lines appended to
+`LEDGER.md`'s text in memory, restricted to `R88-` ids: **PASS, 19 entries, 19 lines, 0 failures** (`check-b.out`); the plant (one drafted line
+dropped) **FAILS**, exit 1 (`check-b-plant.out`). The repository-wide `tools/fs71_ledger_b_check.py --strict` reads FAIL until a front-page job
+applies the § B lines — for these 19 ids, and at the time of this stage also for FS-67's close, which is filing `plans/FS67-derivation.md` in the
+same tree (not this job's).
+
+**Would have searched here (stage 2):** none — filing only.
