@@ -616,3 +616,51 @@ Rows 1–52 are the owner's; J51D's report (13 lines and 2 held items, after the
 
 **Would have searched here (stage 1):** none — reconciliation, and Legendre symbols of four fixed fields at the primes below 100 (by hand, then
 re-checked by sympy in seconds: a complete enumeration the derivation fixed, at the ban's edge).
+
+### Stage 2 — SAVED (the close-time prior-art gate, time-boxed; the file move)
+
+*Method (WORKFLOW 3.2 item 8, G49): zbMATH Open API for discovery, in the disciplines' words, with `ab:`, `ti:` and all-field queries side by side
+(G49: `ab:` cannot hit a record whose summary is withheld). Tool `data/fs100/j53/zb.py` (J51's `zb.py` with an HTTP 404 read as zero hits — the
+API answers 404 to an empty result); every query and hit in `data/fs100/j53/gate.out`. **Controls:** `ti:"topological self-joinings"` must hit
+Lindenstrauss–Wang 2012 (it does, Zbl 1258.37031); `"Borel chromatic number" & "Cayley"` must hit `[BardestaniMallahiKarai2017]` (it does, Zbl
+1360.05050). About 25 queries.*
+
+**Verdicts, per filed theorem.**
+
+| theorem | queries (disciplines) | verdict |
+|---|---|---|
+| KS-1's counterexample (J51V-X1 = J51D-T3) and J51V-X2 | measurable/Borel chromatic numbers of Cayley graphs on compact abelian groups (`ab:"measurable chromatic number" & ab:"Cayley"` 1 hit, Weilacher 2022, locally finite Borel graphs — not this; `"Borel chromatic" & "abelian"` 2 hits, Gao–Jackson 2015 and Gao–Jackson–Krohne–Seward 2024, Bernoulli shifts of `ℤⁿ` — not this); Kronecker factors and discrete spectrum (`"discrete spectrum" & ("coloring" \| "colouring")`, `ab:"Kronecker factor" & ab:"coloring"`: 0); measurable Hedetniemi (`"Hedetniemi" & ("measurable" \| "Borel")`: 1, Todorčević–Vidnyánszky 2021, a complexity result — not this) | **not found**. Its two ingredients are textbook: the norm-one torus at a split place is `F_v^×` embedded as `y ↦ (y, y⁻¹)`, and a co-normal (disjunctive) product is `χ(G)χ(H)`-colourable (`"disjunctive product" & "chromatic number"`: Akgüneş 2018, Fritz 2021; `ab:"co-normal product" & ab:"chromatic"`: Körner–Pilotto–Simonyi 2005 — the product's standard literature). The counterexample is a new use of both, filed as ours at "not found" |
+| J51D-T2, the conjugate-pair dichotomy | `"norm one torus" & "orbit closure"`: 0 | (a) **textbook** (a restatement of `u ū = 1` at a split place); (b) strong approximation, standard. Filed as a lemma with its textbook status stated, not as a new theorem |
+| KS-2 (J51D-T1, J51V-KS2) | `ab:"measurable coloring" & ab:"compact abelian group"`: 0 | **not found** as stated; a Fubini selection of the folklore kind. Filed as ours at "not found; likely folklore" |
+| J51-T1 (the class ⟺ `d ≡ 47, 143, 167 (mod 168)`) | `"chromatic number" & "quadratic field"`: 0; `"unit distance" & "quadratic field"`: 0; `"unit distance graph" & ("rational points" \| "number field" \| "algebraic numbers")`: 1 (Füredi–Kang 2004, ℓ₁ — not this) | the congruence family `L ≥ 5` is G61's, from `[Fischer1990]` Thm 10 (held, read); **the identification with T-C(A)'s class is ours** (its terms — all-levels four-colour ratios at stable places — are this project's) |
+| J51D-R (the reduction of KS-sat_E) and the rank-one lemmas J51D-T4/T5 | `"topological self-joinings"`: 2 (LW2012, `[Wang2012]`) | the nearest literature is the topological-rigidity line (Furstenberg 1967, Berend 1983/84, `[Wang2012]`, Lindenstrauss–Wang 2012); **neither Wang paper's hypotheses hold here** (J51-T2: no finitely generated `Γ ⊂ U` acts irreducibly on `R̂`). T4 and T5 compose held lemmas (weak approximation; FS89's PA-B2, VB1, SW-m) |
+
+**What the gate taught about the object (for the §PA sweep, stage 4).** Lindenstrauss–Wang's review (read in full): topological rigidity "means
+that closed invariant sets are either infinite or unions of translates of closed subgroups", and for Cartan `ℤ^r` actions the diagonal action on
+`𝕋^d × 𝕋^d` "has strong topological rigidity properties for `r ≥ 3` but not for `r = 2`". **KS-3's failure is exactly the allowed case**: the
+orbit closure `(T × 0) ∪ (0 × T)` of the pair `(ψ_w, ψ_w̄)` is a union of two closed invariant subgroups — rigid in Berend's sense, and not a full
+fibre. KS-sat asked for more than topological rigidity ever gives; the right saturation statement must allow unions of subgroup translates.
+[reading, J53]
+
+**Reading status (G50), for the bibliography drafts (stage 5):**
+- **EL2021 is held, and was before this milestone**: `~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf`,
+  key `[EinsiedlerLindenstrauss2022]` (J23p, 2026-09-25, "read: §1, pp. 1–3"), **byte-identical** to J51's fetch (md5
+  `1a32060a31636fcad481901dfa1c7e7b` both). Reading status unchanged: §1 read (J23p; J51 again); §§2–9 unread.
+- **Z. Wang 2012 is held**: `[Wang2012]`, `library/pdf/Wang2012-rigidity-commutative-non-hyperbolic-toral.pdf`, "read: abstract, §1, §2.3, §4.1, the
+  start of §4.2 (2026-09-25, J23p)". J51's §PA.2 and inventory row 8 call it "author's summary only … unread": **it was held and part-read**.
+- Lindenstrauss–Wang 2012 (Duke 161, Zbl 1258.37031): **not held**; zbMATH review read in full (J53). EL2003 (Zbl 1068.37002): author summary only.
+  Rudolph 1990, A. Johnson 1992, Host 1995: zbMATH reviews only (J51); the bibliography's joint row says "Listings only (J28 §PA.4)" — to be
+  updated. Bekka–Francini 2022 (Zbl 1518.22005): title and the review's first lines only (J51).
+- **Debts, and whose.** None of these bears on the truth of a filed theorem; LW2012, the rest of `[Wang2012]` and EL2021 §§2–9 bear on the GAP
+  (KS-sat_E's density step) and on MR, so they stay **the next FS-100 slot's reading** (the brief's default), as does Bekka–Francini.
+
+**A G50 instance (for the honesty tally).** J50 wrote "the four measure-rigidity papers are 'none held'" and J51 re-fetched EL2021 into the
+repository and read `[Wang2012]` by its zbMATH summary — both papers had been held and part-read since J23p's gate the day before, under keys by
+**journal year** (2022) where the milestone searched by arXiv year (2021). The bibliography's own rows would have answered in one grep of the
+arXiv id `2101.11120`. *Do* (for G49's list): grep `BIBLIOGRAPHY.md` for a paper's arXiv id and Zbl number, not only its author–year key, before
+fetching or calling it unheld.
+
+**The file move.** The house copy exists already (above), so nothing is copied; `data/fs100/j51/el2021.pdf` is removed from the repository by
+`git rm` in this stage's commit. The bibliography draft names `[EinsiedlerLindenstrauss2022]`'s existing address.
+
+**Would have searched here (stage 2):** none — literature queries only.

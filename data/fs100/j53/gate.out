@@ -1,0 +1,50 @@
+QUERY ab:"Borel chromatic number" & ab:"compact" hits 1
+- arXiv:2208.07764 | Raiean Banerjee; Michel Gaspar | 2022 | Borel chromatic numbers of locally countable $F_\sigma$ graphs and forcing with superperfect trees |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+QUERY ab:"measurable chromatic number" & ab:"Cayley" hits 1
+- 1521.03155 | Weilacher, Felix | 2022 | Descriptive chromatic numbers of locally finite and everywhere two-ended graphs | Groups, Geometry, and Dynamics | [summary] Summary: We construct Borel graphs which settle several questions in descriptive graph combinatorics. These include ``Can the Baire measurable chromatic number of a locally finite Borel graph exceed the usual chromatic n
+QUERY ab:"Borel chromatic" & ab:"abelian" hits 1
+- 1388.03044 | Gao, Su; Jackson, Steve | 2015 | Countable abelian group actions and hyperfinite equivalence relations | Inventiones Mathematicae | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+QUERY ab:"co-normal product" & ab:"chromatic" hits 2
+- 1071.05035 | Körner, János; Pilotto, Concetta; Simonyi, Gábor | 2005 | Local chromatic number and Sperner capacity | Journal of Combinatorial Theory. Series B | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1197.94166 | Kiviluoto, Lasse; Östergård, Patric R. J.; Vaskelainen, Vesa P. | 2009 | Sperner capacity of small digraphs | Advances in Mathematics of Communications | [review] The authors consider the problem of quantifying the Sperner capacity for digraphs. For small graphs the capacity can be computed by brute force, but estimates are already needed for graphs having on the order of 7 nodes.
+QUERY ab:"disjunctive product" & ab:"chromatic number" hits 2
+- 1478.05120 | Fritz, Tobias | 2021 | A unified construction of semiring-homomorphic graph invariants | Journal of Algebraic Combinatorics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1427.05097 | Akgüneş, Nihat | 2018 | Some properties on the disjunctive product over graphs of monogenic semigroups | Advances and Applications in Discrete Mathematics | [summary] Summary: In [\textit{K. C. Das} et al., J. Inequal. Appl. 2013, Paper No. 44, 13 p. (2013; Zbl 1283.05067)], it has been recently defined a new graph \(\Gamma(\mathcal{S}_M)\) on monogenic semigroups \(\mathcal{S}_M\) (w
+QUERY ab:"discrete spectrum" & ab:"coloring" hits 0 (HTTP 404 )
+QUERY ab:"Kronecker factor" & ab:"coloring" hits 0 (HTTP 404 )
+QUERY ab:"measurable" & ab:"Hedetniemi" hits 0 (HTTP 404 )
+QUERY ab:"measurable coloring" & ab:"compact abelian group" hits 0 (HTTP 404 )
+QUERY ab:"topological self-joining" hits 0 (HTTP 404 )
+QUERY ab:"norm one torus" & ab:"closed" & ab:"p-adic" & ab:"orbit" hits 0 (HTTP 404 )
+QUERY ab:"unit-distance graph" & ab:"number field" hits 0 (HTTP 404 )
+QUERY ab:"unit distance" & ab:"quadratic field" & py:1985-2026 hits 0 (HTTP 404 )
+QUERY ab:"invariant random coloring" | ab:"invariant random colouring" hits 0 (HTTP 404 )
+QUERY ab:"factor of IID" & ab:"proper coloring" hits 0 (HTTP 404 )
+QUERY ti:"topological self-joinings" hits 1
+- 1258.37031 | Lindenstrauss, Elon; Wang, Zhiren | 2012 | Topological self-joinings of Cartan actions by toral automorphisms | Duke Mathematical Journal | [review] One of the important topological results in the influential paper of \textit{H. Furstenberg} [Math. Syst. Theory 1, 1--49 (1967; Zbl 0146.28
+QUERY "topological self-joinings" hits 2
+- 1258.37031 | Lindenstrauss, Elon; Wang, Zhiren | 2012 | Topological self-joinings of Cartan actions by toral automorphisms | Duke Mathematical Journal | [review] One of the important topological results in the influential paper of \textit{H. Furstenberg} [Math. Syst. Theory 1, 1--49 (1967; Zbl 0146.28
+- 1278.37007 | Wang, Zhiren | 2012 | Rigidity of commutative non-hyperbolic actions by toral automorphisms | Ergodic Theory and Dynamical Systems | [summary] Summary: \textit{D. Berend} [Trans. Am. Math. Soc. 280, 509--532 (1983; Zbl 0532.10028)] obtained necessary and sufficient conditions on a \
+QUERY "Borel chromatic number" & "abelian" hits 1
+- arXiv:2401.13866 | Su Gao; Steve Jackson; Edward Krohne; Brandon Seward | 2024 | Borel Combinatorics of Abelian Group Actions |  | [summary] Summary: We study the free part of the Bernoulli action of $\mathbb{Z}^n$ for $n\geq 2$ and the Borel combinatorics of the associated Schrei
+QUERY "measurable chromatic number" & ("torus" | "compact group") hits 0 (HTTP 404 )
+QUERY "Hedetniemi" & ("measurable" | "Borel") hits 1
+- 1547.03314 | Todorčević, Stevo; Vidnyánszky, Zoltán | 2021 | A complexity problem for Borel graphs | Inventiones Mathematicae | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+QUERY "discrete spectrum" & ("coloring" | "colouring") hits 0 (HTTP 404 )
+QUERY "norm one torus" & "orbit closure" hits 0 (HTTP 404 )
+QUERY "unit distance graph" & ("rational points" | "number field" | "algebraic numbers") hits 1
+- 1043.05047 | Füredi, Zoltán; Kang, Jeong-Hyun | 2004 | Distance graph on \(\mathbb Z^n\) with \(\ell_{1}\) norm | Theoretical Computer Science | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+QUERY "invariant random" & "proper coloring" hits 0 (HTTP 404 )
+QUERY "disjunctive product" & "chromatic number" & "fractional" hits 1
+- 1478.05120 | Fritz, Tobias | 2021 | A unified construction of semiring-homomorphic graph invariants | Journal of Algebraic Combinatorics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+QUERY an:1258.37031 hits 1
+- 1258.37031 | Lindenstrauss, Elon; Wang, Zhiren | 2012 | Topological self-joinings of Cartan actions by toral automorphisms | Duke Mathematical Journal | [review] One of the important topological results in the influential paper of \textit{H. Furstenberg} [Math. Syst. Theory 1, 1--49 (1967; Zbl 0146.28502)] is that a closed subset of the circle invariant under two multiplicatively independent endomorphisms like \(x\mapsto 2x\) and \(x\mapsto 3x\) must be finite or the whole circle. \textit{D. Berend} [Trans. Am. Math. Soc. 286, 505--535 (1984; Zbl 0523.22004)] extended this to actions of semigroups by endomorphisms of compact abelian groups, characterising this topological rigidity. More generally, topological rigidity means that closed invariant sets are either infinite or unions of translates of closed subgroups. Here the setting considered is faithful \(\mathbb Z^r\) actions by automorphisms of the torus \(\mathbb T^d\) that are Cartan in the sense that the image subgroup of \(\mathrm{GL}_d(\mathbb Z)\) defined by the action has no larger abelian subgroup and contains an irreducible element. For such actions, under the additional assmption that some element is totally irreducible, the natural diagonal action on \(\mathbb T^d\times\mathbb T^d\) has strong topological rigidity properties for \(r\geq3\) but not for \(r=2\).
+QUERY an:1278.37007 hits 1
+- 1278.37007 | Wang, Zhiren | 2012 | Rigidity of commutative non-hyperbolic actions by toral automorphisms | Ergodic Theory and Dynamical Systems | [summary] Summary: \textit{D. Berend} [Trans. Am. Math. Soc. 280, 509--532 (1983; Zbl 0532.10028)] obtained necessary and sufficient conditions on a \(\mathbb Z^r\)-action \(\alpha\) on a torus \(\mathbb T^d\) by toral automorphisms in order for every orbit to be either finite or dense. One of these conditions is that for every common eigendirection of the \(\mathbb Z^r\)-action there is an element \(\mathbf n\in \mathbb Z^r\) such that \(\alpha^n\) expands this direction. In this paper, we investigate what happens when this condition is removed; more generally, we consider a partial orbit \(\{\alpha^n\cdot x:\mathbf n\in \Omega \}\) where \(\Omega\) is a set of elements which acts in an approximately isometric way on a given set of eigendirections. This analysis is used in an essential way in the work of the author with \textit{E. Lindenstrauss} [Duke Math. J. 161, No. 7, 1305--1350 (2012; Zbl 1258.37031)] classifying topological self-joinings of maximal \(\mathbb Z^r\)-actions on tori for \(r\geq 3\).
+QUERY "chromatic number" & "quadratic field" hits 0 (HTTP 404 )
+QUERY "Kronecker" & "chromatic number" & "Cayley" hits 0 (HTTP 404 )
+QUERY "cut and project" & ("coloring" | "chromatic") hits 0 (HTTP 404 )
+QUERY "measurable chromatic number" & "Cayley graph" hits 0 (HTTP 404 )
+QUERY "Borel chromatic number" & "Cayley" hits 2
+- 1360.05050 | Bardestani, Mohammad; Mallahi-Karai, Keivan | 2017 | On a generalization of the Hadwiger-Nelson problem | Israel Journal of Mathematics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1459.05071 | Bardestani, Mohammad; Mallahi-Karai, Keivan | 2020 | Polynomial configurations in sets of positive upper density over local fields | Journal d'Analyse Mathématique | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
