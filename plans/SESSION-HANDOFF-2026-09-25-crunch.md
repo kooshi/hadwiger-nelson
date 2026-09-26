@@ -64,30 +64,47 @@
 - **Rescued scratch:** `data/rescued-2026-09-25/` (manifest `SWEEP.tsv`); large files, renders and paper texts in `~/source/lean-dir-rescue/`; the owner's scratch (holds agent ids, never in the repo) in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`.
 - **Close inventories:** `plans/FS91-close-inventory.md` (M1), `plans/M2-close-inventory.md`, `plans/M3-close-inventory.md`.
 
-## 5. State at 18:05 (for a resume after compaction)
+## 5. State at 19:15 (for a resume after compaction) — READ THIS FIRST
 
-**Crunch launched 15:26.** Kooshi: "You are clear to launch." (defaults hold: at most three milestones open). Ids: owner scratch
-`…/scratchpad/owner-crunch/live-agents.md` (a snapshot also in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`).
+**Crunch launched 15:26** (Kooshi: "You are clear to launch."). Agent ids: owner scratch `…/scratchpad/owner-crunch/live-agents.md`
+(last line is current; a snapshot is copied to `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`). Never quote ids to Kooshi.
 
-**Done (reports in `data/crunch-2026-09-25/reports/`):** J01, J03a (band rigidity every k, two blind readings); J02, J09 (three colours,
-two derivations); J03, J04, J06 (reframes); J07, J10/J10b (CLG, blind-checked); J08, J11 (six at exposed fields, blind-checked); J12
-(one prime); J14, J15, J16, J17K (kernel: chain theorem, transcendence, prime inversion + stripe lemma, bridge conditional); J17 (bridge
-write-up); J18, J19, J20 (rank one: A-T1 open at a named step, blind-checked); J21, J22 B1 (windows over ℚ(√167)); J23p (M1 close
-prior-art gate: band rigidity PARTLY IN PRINT, [Manners2015] Lemma 5.3); J24a (front-page pointers); J30 (Kooshi's wiring audit: index
-`plans/CRUNCH-2026-09-25-INDEX.md`); clerk runs 1–4.
+**Running at 19:15 (5):**
+- **J24** — the front page: applies M1, M2, M3's close drafts (each plan's §R-close) to `CLAUDE.md`, `LEDGER.md` (rows from 98),
+  `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`, stubs, `CLOSED-QUESTIONS.md`; checks every draft against its source (all three closers ran
+  past 500k); resolves the two "G77"s. Brief `data/crunch-2026-09-25/briefs/J24-front-page.md`. When it reports: verify its gate quotes
+  (fact audit `--base 543b51d5`, `--dupes`, bib_audit, fs71 --strict), push; then M1–M3 are closed.
+- **J27** — FS-67's reframe (`…/briefs/J27-FS67-reframe.md`; plan `plans/FS67-tight-products.md`).
+- **J28** — the row-88 milestone's reframe, "is (0, 4) forced over ℚ(√59)?" (`…/briefs/J28-FS86-row88-reframe.md`; plan
+  `plans/FS86-row88-rigidity.md`).
+- **J31** — FS-84's stage S1 derivation, run early by owner ruling, solver-free, under the ban (`…/briefs/J29-S1-FS84-derivation.md`;
+  record `plans/FS84-S1-derivation.md`). Its blind verifier next: `…/briefs/J29-S1V-FS84-blind-verifier.md` (solver-free; run it after J31;
+  add `plans/CRUNCH-2026-09-25-INDEX.md` to its fence).
+- **J32** — fixes `scripts/gate_report.py` (it printed "match" for `CLAUDE.md` § The gate while reading only the baseline).
 
-**Running at 18:05:** J09v (blind reading of J09's J4), J13 (blind check of J12), J17K2 (Lemma NP in the kernel), J22b (J22 at B2),
-J26 (Ambrus 2023 certificate audit).
+**Next, in order:** J24's report → clerk run 6 (fold every report not in `data/crunch-2026-09-25/reports/FOLDED.txt`: J13, J17K2, J23a
+final, J23b, J23bd, J23c, J23cpa, J24, J29, and later ones; no clerk while J24 writes the inventories; be thorough — Kooshi) → the jobs J27
+and J28 propose (derivation + blind verifier each) → FS-84's S1V after J31 → kernel-lane candidates when a slot idles (FS-87's next target
+dB9's V1; FS-75's T4/J4 in the kernel) → **J25** at the crunch's end (scores the planner's §5 expectations, the queue's banner, the crunch's
+close; brief from queue §4.4). Keep 4–5 agents busy; at most three milestones open (FS-84, row 88, FS-67 now).
 
-**Next, in order:** when J13 lands → a FRESH **J23a2** on `data/crunch-2026-09-25/briefs/J23a-M1-close-math.md` (J23a stopped at
-STAGE 2 SAVED, harness 421k); when J17K2 lands → **J23b** (M2 close-math; `lake lint` once under slot.py after a green build; brief to
-write from queue §4.5, as J23a's); when J22b lands → **J23c** (M3 close-math); then **J24** (front page: apply all closes' drafts) and
-**J25** (the crunch's close). Clerk run 5 when no close job is writing an inventory. Fillers: J29 (FS-84 post-ban plan), J05 (optional);
-J27 (FS-67) waits for a milestone to close.
+**Results (all at exact scope, in the plans' §R-close):** M1 (FS-91) Paid (theorem): band rigidity at every band for |S| ≥ 2 (two blind
+readings; `[Manners2015]` Lemma 5.3 is the one-ring special case in print); CLG — **an existence statement**: a band k-character of a real
+number field's plane exists iff one exists at some stable place, so χ_char = min over targets (classification only at k = 3, J09's J4, two
+derivations); three colours ⟺ L ≤ 3 and the L ≤ 4 clause for every real number field (two derivations); χ_char(Γ₂₃) = 8, χ_char(Γ₄₃) = 9;
+one prime: MS₄({5}) false, orders unbounded (two routes). M2 Paid (kernel): chain theorem, transcendence (Madore Prop. 3.2 credited),
+prime inversion, stripe lemma, bridge conditional on `RealAlgebraicDescent`, Lemma NP; gate 1,130 clean / 11 / 5, vacuity 7051/304/279/257.
+M3: rank one NOT LANDED (one named step, three minds); windows over ℚ(√167) LANDED IN PART (MX, ≤ 9 places; FS-66 re-run at 23 CERTIFIED).
 
-**Rulings this session (owner):** J01-7 and CLG consumed as verified; A(R_F) = Hom_ℚ(F(i), ℝ) mod 1 (FS89-CL2 false as worded; CL3–CL5
-survive, two derivations); J17V skipped; J16 FS-47 first; `lake lint` once at M2's close; J19 aimed at A-T1; J18-DC's residue step waits
-for the ban to lift; VACUITY DECLARED never on a merely unproved hypothesis; J26 reconsiders FS-86 item 70.
+**Owner rulings this session:** defaults hold (≤ 3 milestones open; **a milestone whose close-math is done counts as closed for the cap**);
+FS-84 S1 runs early (solver-free); `lake lint` once at M2's close; J20's residue step waits for 2026-10-01; VACUITY DECLARED never on an
+unproved hypothesis; J13's ruling (J12's constructive route primary); Wolfram install declined; interval-certified W(t) only if C14 goes to
+print; clerk briefs ask for thoroughness (Kooshi).
 
-**Open with Kooshi:** papers by browser — Muchnik 2005, Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser 2001, Barajas–Serra 2009,
-Shimura 1964, Eggleton–Erdős–Skilton 1990 (Graphs Combin. 6), Johnson 2000/2006 (`plans/FS91-PA-close.md` §C.2).
+**Owner slips (logged in inventories):** CLG paraphrased as a classification (to Kooshi and in J29's brief; the M1 plan had it too); Manners
+§5.5 quote abridged; G27 attributed to Ambrus 2023 (it is Matolcsi 2025's); J09v's brief omitted FS81-T2; "one DECLARED hypothesis"; the EES
+1985 title given for the 1990 DOI.
+
+**Open with Kooshi (defaults hold if silent):** papers by browser — Muchnik 2005, Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser
+2001, Barajas–Serra 2009, Shimura 1964, Špacapan 2011 (EJC 32(8), doi 10.1016/j.ejc.2011.07.002), Eggleton–Erdős–Skilton 1990 (Graphs Combin.
+6), Johnson 2000/2006 (`plans/FS91-PA-close.md` §C.2); telling Ambrus et al. of their checker's two gaps (default: no).
