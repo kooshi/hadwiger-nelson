@@ -57,3 +57,15 @@ cross-referencing, not redundancy).
 
 **The estimate reaches ~14,000; the 15,000 floor needs C1–C9 all to land near estimate, and 20,000 is out of reach without trimming
 reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (batches 3–4), C5+C7 (batch 5), C8+C9 (batch 6).
+
+## Stage 2, batch 1 — SAVED (C1 + C2: the paths-forward table)
+
+- Rows 1, 2, 4–8, 10–12, 14, 15, 22, 27, 43–45 cut to the question's first clause, the live status and the bearing's first clause;
+  the "Ranked stubs" intro's re-rank narrative (history) replaced by a pointer. Rows 3, 9, 13, 16–21, 23–26, 28–42, 46–59 untouched.
+- Every dropped clause was checked against its `plans/FRONTIER-STUBS.md` row (grep, phrase by phrase): present, except FS-59's
+  "robust to every level of the tower at 23 (row 75)", which therefore stays in `CLAUDE.md`'s row. FS-17's "ceiling 8" is the
+  authoritative row's "χ ∈ {6, 7, 8} (eight in the kernel)". The first trial lost one token, `M1–M3`; it now names the crunch's three
+  milestones in the open-milestones paragraph.
+- Verdicts: `claude_md_fact_audit.py --base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **13**, exit 0;
+  `bib_audit.py` exit 0 ("every cited work resolves"). `LEDGER.md` untouched. ALLOW lines added: none.
+- Bytes: 296,413 → **291,789** (−4,624).
