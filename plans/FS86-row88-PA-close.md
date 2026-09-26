@@ -314,7 +314,7 @@ Decided in stage 3: **partly in print** — BMK 2017 §3.2 for `ℚ_p`, every `p
 3. **Johnson, P. D. Jr.**, *Infinite graphs and the fractional chromatic number: some recent surprises*, Geombinatorics 9(3) (2000) 135–144,
    Zbl 0945.05021 — with `[Johnson2000]`, `[Johnson2006]` (already listed), the one source that could pose T-C(A)'s fractional question.
 4. **Bergelson, V.**, *Sets of recurrence of ℤ^m-actions and properties of sets of differences in ℤ^m*, J. London Math. Soc. (2) 31 (1985)
-   295–304, Zbl 0579.10029 — the intersectivity lemma behind L-B2-2's method (optional; the method is textbook).
+   295–304 (pages confirmed from zbMATH), Zbl 0579.10029 — the intersectivity lemma behind L-B2-2's method (optional; the method is textbook).
 5. (Not needed for a verdict; free online if wanted) Boyle–Lind 1997, Trans. AMS 349, DOI 10.1090/S0002-9947-97-01634-6; Einsiedler–Lind–Miles
    2001, arXiv:math/0104261.
 
@@ -322,7 +322,7 @@ Decided in stage 3: **partly in print** — BMK 2017 §3.2 for `ℚ_p`, every `p
 
 | key | reference | role | copy | read |
 |---|---|---|---|---|
-| `[BergelsonMoragues2021]` | V. Bergelson, A. Ferré Moragues, *An ergodic correspondence principle, invariant means and applications*, Israel J. Math. (2021), zbMATH 1501.37009 (venue from the listing, volume unchecked); arXiv:2003.03029 | Thm 2.3 + Prop. 2.7 are L-CL (T-A (v)'s engine): `d*` of return times to a clopen set = max over invariant measures on the orbit closure | `library/pdf/BergelsonMoragues2021-ergodic-correspondence-invariant-means.pdf` | §1, §2 to Prop. 2.7 (2026-09-25, J35) |
+| `[BergelsonMoragues2021]` | V. Bergelson, A. Ferré Moragues, *An ergodic correspondence principle, invariant means and applications*, Israel J. Math. (2021), issue 2, 921–962, DOI 10.1007/s11856-021-2233-y, zbMATH 1501.37009 (volume number not in the listing); arXiv:2003.03029 | Thm 2.3 + Prop. 2.7 are L-CL (T-A (v)'s engine): `d*` of return times to a clopen set = max over invariant measures on the orbit closure | `library/pdf/BergelsonMoragues2021-ergodic-correspondence-invariant-means.pdf` | §1, §2 to Prop. 2.7 (2026-09-25, J35) |
 | `[ChenDai2017]` | Z. Chen, X. Dai, *Chaotic dynamics of minimal center of attraction of discrete amenable group actions*, J. Math. Anal. Appl. (2017) 1397–1414, Zbl 1385.37038 (summary withheld); arXiv:1707.07786 | Lemma 1.2: the minimal centre of attraction via positive upper density of return times — the literature's name for T-A (v)'s "transient" (measure centre in Pull) | `library/pdf/ChenDai2017-minimal-center-attraction-amenable.pdf` | §1, §2.3 (J35) |
 | `[LevitzMott1972]` | K. B. Levitz, J. L. Mott, *Rings with finite norm property*, Canad. J. Math. 24 (1972) 557–565, DOI 10.4153/CJM-1972-049-1, Zbl 0222.13006 | Thm 2.3 (with `A = ℤ`): every subring of a number field has every non-zero ideal of finite index — J28V-7, T-A (ii) | `library/pdf/LevitzMott1972-rings-finite-norm-property.pdf` | §2 in full (J35) |
 | `[ChewLawn1970]` | K. L. Chew, S. Lawn, *Residually finite rings*, Canad. J. Math. 22 (1970) 92–101, Zbl 0215.08901 | Thm 2.3 = Levitz–Mott Prop. 2.2 (FNP classification) | not held | listing |
