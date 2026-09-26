@@ -97,6 +97,77 @@ Any design that keeps only *Do* lines in context must give these three a line; u
 **Literal repetition is gone.** `tools/claude_md_fact_audit.py --dupes` on `CLAUDE.md` alone finds 2 repeated 10-word runs, 99 bytes (J05's
 no-loss pass removed the rest). Whatever merging buys, it buys by paraphrase, not by deleting repeats.
 
+## 2. The designs
+
+"If you do nothing": the next milestone close crosses 300,000. The file grew from 283,826 (J05's no-loss pass, 2026-09-25 23:31) to
+298,945 (2026-09-26 08:22), about 15k in nine crunch hours; a normal close adds 4–8k. J05 measured the no-loss floor near 228k on
+2026-09-21, and every pass since has found less.
+
+| design | what moves where | stays in context | `CLAUDE.md` after | what an ordinary session loses |
+|---|---|---|---:|---|
+| **(a) the cache** | every grokking, whole, to `GROKKINGS.md` (≈ 175.6k), identifiers and text unchanged | each entry's head (title + grade tag) and its *Do / Killing test* span, **generated** from `GROKKINGS.md`; for G21, G30, G46 their first sentence, verbatim, until each is given a *Do* line | **173,447** (measured on a prototype) | the bodies: mechanism, evidence, instances (≈ 129k bytes, ≈ 39k tokens) — read again at every reframe |
+| **(b) extraction** | G21/G49/G50/G72's instance lists (≈ 12–14k) to a method file or back to their milestones' plans, one example kept; the prior-art position's "Not ours" enumeration (5.6k) to `LEDGER.md` beside § The claim list; paths-forward ranks ≥ 30 (4.7k) to `plans/FRONTIER-STUBS.md` alone, one pointer kept; non-`[PROTECTED]` incident stories in § Building and "Make the gate fail", owner-read one by one (≈ 8k) | every rule's statement and *Do*, one example each; demotion records (the preamble requires them in the entry) | **≈ 267–270k** | the instances, the stories behind rules, the low-ranked stubs' one-liners |
+| **(c) merging** | G49 + G50 → one prior-art entry; G21 + G30 (G30's failure-mode list and G21's instances say the same thing at different milestones); G47 into G48 (already "subsumed by row 66"); the self-matching-pattern rules of § Building and "Make the gate fail" → one rule; every merged entry keeps all its identifiers in its head | the merged statements, every source's *Do* line verbatim | **≈ 290–294k** | a separate trigger per source entry, if any is lost in the merge |
+| (a) + (b) | (a), then (b) on the non-grokking sections | as (a) | ≈ 163k | as (a), plus (b)'s |
+
+(b) buys four to six closes; (c) buys one or two; (a) moves the growth itself — a new grokking adds about 575 bytes to `CLAUDE.md` (mean head +
+*Do*) instead of about 2,150 (mean entry). Only (a) answers "too much new knowledge to carry in every session"; (b) and (c) answer "this
+file is 1,000 bytes too big today".
+
+**The one design choice inside (a) that matters: the cache is generated, never written.** A hand-written summary would be a second home for
+every fact and drift from the first — the header's one-home rule forbids it, and `--dupes` would fire on every line that quotes its entry. Named
+in its discipline: a *materialized view* with a refresh check, not a copy. Edit `GROKKINGS.md`; regenerate; the audit fails on any difference.
+**And `GROKKINGS.md` is never `@`-imported** — an import is loaded at every session start, which is exactly the cost being removed.
+
+## 3. What each design does to the reframe (WORKFLOW 3.1) and to G67
+
+| design | how 3.1 still walks every entry | what it risks | the check that would catch it, and whether it can fail |
+|---|---|---|---|
+| (a) | the planner opens `GROKKINGS.md` in full, beside `LEDGER.md` (already "read in full at the reframe"); the §G it writes is unchanged; ordinary sessions act on the plan's phase-table extractions (3.1 item 2) and the cache's triggers | **the late bearing**: a body-only bearing needed mid-milestone, in a session that never opens `GROKKINGS.md` — FS-70's miss moved from plan time to work time. Second: **the skipped walk**, a planner who walks the cache and believes it walked the entries. Third: drift | *Late bearing:* every close's §G re-read (step 9) adds FS-75's column — each bear marked *Do* or *body*, and each bearing found after 3.1 marked "via cache" or "needed the body"; **the design fails if a needed-body late bearing is found at two of the next five closes.** Reachable: FS-75 had nine body bears; one needed mid-work would show there. *Skipped walk:* a §G with ten or more bears and none marked *body* is flagged to the owner (flag, not fail: FS-84 was legitimately written by *Do* lines). *Drift:* `--cache-check`, with a plant (a hand-edited cache line must fail, its faithful partner pass) |
+| (b) | unchanged — nothing a walk reads leaves the grokkings except instances | **a rule without the reason that made it stick** (the header's 2026-09-15 cost) | the fact audit's floor (numbers, keys, names survive across files) plus the owner reading the relocation map (`--moves`); **no automatic check can see a lost reason** — the audit says so of itself ("the floor, not the check"). This design cannot fail its check, so its check is not a test (G21) |
+| (c) | fewer entries to walk; each merged entry walked once | **a trigger lost in a merge**, or a merge that equates two rules which differ | mechanical: the count of *Do* spans before and after is equal, each source's *Do* verbatim inside its merged entry; the "rules that differ" half is judgment only |
+
+**G67 under (a).** G67 says the form sets the mode of reading, and FS-75's count says bodies bear too. (a) keeps the form in every session and
+the bodies at the one act that walks them; it turns G67's killing test from an occasional count into a column every close fills — the test
+the cache stands or falls on. It also exposes G67's own gap: G21, G30 and G46 never received the form.
+
+## 4. The tooling (a) needs — `tools/claude_md_fact_audit.py`
+
+1. **Corpus** = `CLAUDE.md` + `GROKKINGS.md` + `LEDGER.md`; at a base revision without `GROKKINGS.md` the old corpus is as today
+   (`corpus_rev` already tolerates a missing ledger — the 2026-09-22 extraction's precedent).
+2. **`entries()`**: lines inside the generated region keyed `cache Gnn`, full entries `Gnn`; the status-tag check runs on the full entries;
+   new checks — each cache line's tag equals its entry's; every entry has exactly one cache line and every cache line an entry.
+3. **`--dupes`** skips the generated region, as it skips `[PROTECTED]` regions.
+4. **One generator** (`tools/grokking_cache.py`, imported by the audit): `--write` refreshes the region between two marker comments;
+   `--check` exits 1 on any difference, and on an entry with neither a *Do* span nor a first sentence.
+5. **The dangling-pointer check** resolves `GN` against `GROKKINGS.md`.
+6. **Plants** (`--self-test`), each with a faithful partner that must pass: a hand-edited cache line; a cache line with no entry; a tag
+   changed only in the cache; an entry deleted from `GROKKINGS.md`; an `@GROKKINGS.md` import line in `CLAUDE.md`.
+
+## 5. Recommendation
+
+**The choice:** design (a), the generated cache, alone; (b) and (c) held back. **Alternative weighed:** (b) + (c) without a new file — keeps
+every body in every session and needs no new tool; it lost because it buys about six closes at the cost of exactly the reasoning the header
+says it has already paid hours for, and leaves the growth rate unchanged. **Second alternative:** (a′), a cache that also carries each entry's
+first body sentence (≈ +20k); held as the fallback the late-bearing check would trigger. **Confidence: medium.** **The one fact that would
+change it:** the late-bearing column — a needed-body bearing missed mid-milestone at two of the first five closes after the move means the
+bodies are read to good effect outside the reframe, and the answer becomes (a′) or the twelve most-used entries (≥ 6 bears, 44k) back in
+whole. **Default if Kooshi says nothing:** nothing moves; the next close meets the 300k ceiling and a trim pass.
+
+**Migration, every commit gate-green, nothing deleted:**
+
+| stage | commit | gates at that commit |
+|---|---|---|
+| S0 | the audit extended and the generator added; no document touched | `--self-test` green with every plant firing; the audit on the current tree unchanged |
+| S1 | **the move, atomic**: `GROKKINGS.md` = § Grokkings' preamble, theory paragraph and 80 entries byte-identical; in `CLAUDE.md` the section becomes its preamble plus the generated region | `--base <S0>` loses nothing across three files; `--check` clean; `--dupes` clean; bytes recorded. One commit because a copy alone duplicates 175k (`--dupes` fails) and a cut alone loses it |
+| S2 | the sentences that name the file, each shown to Kooshi verbatim first: WORKFLOW 3.1 item 4 ("`CLAUDE.md` and `LEDGER.md` open" → three files) and step 9 (mint in `GROKKINGS.md`, regenerate); the header's one-home sentence; the section preamble; every 3.1 brief says "read `GROKKINGS.md` in full" | audit green; no identifier moved |
+| S3 | *Do* lines for G21, G30, G46 (and G72's list form), drafted, approved by Kooshi — new text, so not the migrator's to write alone | `--check` stops flagging them |
+| S4 | optional, only if the budget binds again: (b)'s two Frontier items, which are already second tellings | audit with `--moves` read by the owner |
+
+**Held for Kooshi:** whether the 300,000 budget stays as the ceiling on `CLAUDE.md` alone (it would sit at ≈ 173k) or is lowered to keep the
+cache honest; and whether "cache" meant a generated view (this proposal) or a hand-written digest.
+
+
 ## Record
 
 *The job's own record: stages, method notes, slips.*
@@ -107,3 +178,8 @@ The measurement above. Method notes: `CLAUDE.md` read from disk as snapshot `a6f
 stale by rows 120–127 and G80). Measurement scripts ran in the scratchpad; their method is stated in §1 and reproducible from it.
 **Slip:** I stopped my own stray background diff with `pkill -f` on an anchored pattern — the method `CLAUDE.md` § Building forbids (kill by
 PID). It hit only the intended process; recorded here because the rule names it.
+
+### Stage 2 — SAVED
+
+Designs, their effect on the reframe and on G67, the tooling, the recommendation and migration. Would-have-searched log: none (no search
+needed; all figures are exact arithmetic on committed files).
