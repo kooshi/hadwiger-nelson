@@ -991,3 +991,18 @@ Empty: no stage of this job called for a finite-witness search.
 | **FS-84 S1** — done (FS-84 open) | `plans/FS84-five-colours-47.md` (J29) | — | `plans/FS84-close-inventory.md` | `plans/FS84-S1-derivation.md` (J31) | J29, J31 | — (next stages from 2026-10-01) |
 | **FS-84 S1V** — done | as above | — | as above | `plans/FS84-S1V-verification.md` | FS84-S1V | — |
 | **G79** — minted at the front page | `plans/CRUNCH-2026-09-25-post-close-inventory.md` row 25 | — | — | — | — | `CLAUDE.md` § Grokkings (J44) |
+
+## Addendum — the last jobs of the crunch (J25, the front page; addresses only)
+
+| item | record | tools and data | report | where it lands |
+|---|---|---|---|---|
+| **J36** — Poros: "reads infinitely many primes" named and ranked | `plans/POROS-2026-09-25-infinitely-many-primes.md` | `tools/crunch_j36_band7.py` | J36 | FS-100 (§2–§3); `plans/FS84-close-inventory.md` |
+| **J37** — Poros: the wanted poster at ℚ(√47), four colours | `plans/POROS-2026-09-25-wanted-poster-47.md` | — | J37 | FS-100 (§2.1, §3, §6.4 P1) |
+| **J38** — Poros: the wanted poster over the type-(B) fields | `plans/POROS-2026-09-25-wanted-poster-59.md` | `tools/crunch_j38_band.py`; `data/crunch-2026-09-25/j38-band.out` | J38 | FS-100 (§2.3, §9); FS-98's re-aim |
+| **J39** — Poros: the wanted poster at ℚ(√167), five colours | `plans/POROS-2026-09-25-wanted-poster-167.md` | `tools/crunch_j39_thick.py`; `data/crunch-2026-09-25/j39/` | J39 | FS-100 (§2.3, §2.5); FS-59's and FS-96's re-aims |
+| **J45** — SI and its companions, derived | `plans/FS84-SI-D-derivation.md` | `tools/crunch_j45_gap7.py` | J45 | FS-100 (§2.2); `plans/FS84-close-inventory.md` |
+| **J46** — the same, blind | `plans/FS84-SI-V-verification.md` | `tools/crunch_j46_checks.py`, `tools/crunch_j46_g2.py` | J46 | FS-100 (§2.2) |
+| **J47** — FS-100 minted | `data/crunch-2026-09-25/j47-record.md` | — | J47 | `plans/STUB-measure-rigidity-three-fields.md`; `plans/FRONTIER-STUBS.md` rank 3 |
+| **J48** — FS-100 stage 1, the bundled blind check | `plans/FS100-BC-verification.md` | `tools/crunch_j48_places.py`, `tools/crunch_j48_controls.py`; `data/fs100/j48/` | J48 | FS-100 (status block, §2.3) |
+| **J49** — FS-100 stage 2, KT-1 | `plans/FS100-KT1-ambrus-ball.md` | `tools/fs100_kt1_ball.py`, `tools/fs100_kt1_grid.py`; `data/fs100/kt1/` | J49 | `LEDGER.md` rows 92, 112 (grades); `BIBLIOGRAPHY.md` `[AmbrusEtAl2023]`; `plans/PA-ambrus2023-audit.md` |
+| **FS-100** — minted, stages 1–2 done, FS-97 absorbed; open, not run | `plans/STUB-measure-rigidity-three-fields.md` | — | J47, J48, J49 | `plans/FRONTIER-STUBS.md` rank 3; `CLAUDE.md` § Paths forward (a pointer) |

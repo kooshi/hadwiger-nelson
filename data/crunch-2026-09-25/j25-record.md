@@ -108,3 +108,17 @@ refuses, exit 1).
 | T-J39-4's two routes and J48's corollary go in the stub only | a `LEDGER.md` § B line | nothing from FS-100 enters the Frontier or the ledger before its milestone runs (brief A.6) | high |
 
 **Gates after the stage:** fact audit `--base 82dd14f8` exit 0, PASSED, **no new ALLOW line**; `--dupes` exit 0, **13**.
+
+## Stage 4 — SAVED (the post-close inventory's ticks; the crunch index; brief A.4, A.5)
+
+Applied by `data/crunch-2026-09-25/j25/apply_stage4.py` (plant fired first, exit 1, nothing written; a re-run refuses, exit 1).
+- **Post-close inventory ticked done:** 32 (the ceiling is 325,000 until the crunch ends, 6460c11e), 34 and 35 (J25 stage 3: FS-98 re-aimed;
+  DP and the control card in FS-100), 37 (15f5f37e), 38 and 39 (974f8810), 42 (J25 stage 3).
+- **Left open, not front-page targets** (listed for the owner): 1, 2, 15, 26, 29, 30, 31, 36 (job records, Poros records, plan bodies,
+  derivation files); 5 (a Lean module doc); 6, 14, 16, 18, 19, 20, 40 (tools and scripts); 21, 24 (briefs, standing rules); 22 (the owner's
+  decline, its own disposition); 23 (a loose data file, `data/m2/j23b/signatures.txt`, still untracked). 12 and 17 are dispositioned ("see
+  row 22"); 3, 4, 7–11, 13, 25, 27, 28, 33, 41 were already done.
+- **J48's and J49's reports are not folded** into any inventory (the clerk last folded through J47). Their front-page items are applied here
+  (stages 2–3); their other items — J48's plant slip, J49's prediction scores — stay in their records. The inventory is the owner's pen: I add
+  no rows.
+- **The index** (`plans/CRUNCH-2026-09-25-INDEX.md`): a second addendum, addresses only — J36, J37, J38, J39, J45, J46, J47, J48, J49 and FS-100.
