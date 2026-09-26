@@ -110,3 +110,18 @@ The fact audit then lost 30 tokens, every one from the cut rows: **24 are now `E
 audit reads that file and finds each (24 `HOMED` lines); the other **6 are the grouped rank labels** (`38–42`, `46–49`, `50–51`, `52–54`,
 `55–56`, `57–59`), added to `ALLOW` with that reason, since FRONTIER-STUBS numbers those rows one per rank. Gates: `--base 230ea964` PASS;
 `--self-test` PASS; `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.
+
+### 3c — SAVED: § Building (M11)
+
+`moves.py apply B`. `CLAUDE.md` 282,106 → 281,823; `plans/GROKKING-INSTANCES.md` 10,542 bytes (§ Building added). Only M11 moved from
+§ Building and "Make the gate fail": every other story there is the only example of its own sub-rule (stage 1's kept table).
+
+**The brief's plant on the real file** (item 5), run on copies through `--instances`, so no fault ever sat in the tree:
+- **planted** — `GRR 2017 Thm 4.9` (moved from G49 by M5; `4.9` occurs once in the new file and nowhere in `CLAUDE.md` or `LEDGER.md`)
+  deleted from a copy: `--base 230ea964 --instances <copy>` exit 1, `FAIL: lost ref token 'Thm 4.9'`, `FAIL: lost num token '4.9'`.
+- **partner** — an unaltered copy: exit 0, `AUDIT PASSED`.
+- **My slip, caught by an assertion:** the first attempt picked its token from the `num` class with length ≥ 4 and found none unique to the
+  new file; the plant script's `assert` refused to write, and the "planted" run that followed passed on an unaltered copy — a vacuous plant,
+  refused rather than believed. The second attempt searched every class.
+
+Gates: `--base 230ea964` PASS; `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.

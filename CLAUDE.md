@@ -1782,11 +1782,7 @@ and the file's digest identical across ten seconds. **Seventh and eighth instanc
 `setsid`; `ps` showed its pool at pgid `4088996`, that number went into the pgid file, and `kill -- -4088996`
 followed by a count of processes *in that group* reported **"survivors: 0"**. The sweep in fact ran in group
 `4131612` and kept going for **six more hours**, discovered only when a later `ps` showed nine live workers.
-**The verification tested the wrong proposition**: group membership, not whether the work stopped. (b) The
-repair attempt then ran `for p in $(pgrep -u $USER -f "fplane_sat_cube.py run"); do kill -TERM $p; done` —
-and `pgrep -f` matched **the shell executing the loop**, whose command line contains the pattern, so the
-shell killed itself mid-loop before reaching a single real target and exited 144, which reads like an
-unrelated failure. **The rule in one line: verify a kill against the thing you wanted stopped — the named
+**The verification tested the wrong proposition**: group membership, not whether the work stopped. (b), the eighth: `plans/GROKKING-INSTANCES.md` § Building. **The rule in one line: verify a kill against the thing you wanted stopped — the named
 pid absent from `ps`, and the artifact it was writing static across ten seconds — never against group
 membership, and never through a pattern that can match the killing shell.** Both checks are two commands
 and both would have fired here. **A hand-rolled scan of `/proc/*/cmdline` is `pkill -f` in a
