@@ -228,7 +228,7 @@ for the `L = 5` members no route here avoids it (J48-N4cor needs `N₄ = ∅`, f
 `1 ≤ 4 max(α(Y′), r_X) < 1` with the ramified places `p | d` for `p = 11, 19, 23, 31` — the family members with such ramified places, e.g.
 ℚ(√143) at 11, are exactly where the class form goes beyond ℚ(√47)'s factors).
 
-## Stage 4 — SAVED (B-1, B-2, B-3), 06:40
+## Stage 4 — SAVED (B-1, B-2, B-3), 06:34
 
 **Verdicts.** B-1 **TRUE** [hand; a composition]. B-2 **TRUE** [hand], and its hypothesis PL(23, 43) is exactly what its (⟸) needs (§4.2).
 B-3: **GAP** — the weakest sufficient statement is equivalent to the conclusion and has two conjuncts, `χ_CP(ℝ²) ≥ 6` and `PL_∃(23, 43)`;
