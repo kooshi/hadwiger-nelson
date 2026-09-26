@@ -291,3 +291,58 @@ expands the archimedean ones (totally real `F`); so polynomial growth of `U` (tr
 
 Every claim reached a verdict in stage 2 (EF_F's is a GAP at a named step, not a stall), so X01D's lemma statements were not opened; at
 05:56 X01D was still at its stage 2, so a statement-by-statement check belongs to the close, where both records are final.
+
+## Stage 4 — SAVED (triggered by the owner after stage 3: X01D's §3 read, proofs included, and checked step by step)
+
+*The owner's instruction (message, after 05:57): X01D reports EF_F TRUE in the stronger form EF_F⁺; read `plans/FS100-X01D-derivation.md`
+§2.0–§2.1 and §3 and decide whether its argument closes my named gap. This check is therefore **not blind**: it is a second reading of one
+derivation.* X01D's statement (§3.0, verbatim): "**EF_F⁺.** For every real number field `F`: every `U`-invariant finite positive Borel measure
+`μ` on `R̂` such that `h_μ(u*) = 0` for **one** non-torsion `u* ∈ U` satisfies `μ(R̂ ∖ (T + A)) = 0`."
+
+### 4.1 Step by step
+
+| X01D step | what it needs | my check |
+|---|---|---|
+| §3.1 Lemma PF | product formula, stable places bounded by `C_Λ` (`Λ = R^∨` a fractional ideal) | **valid** |
+| §3.2 Step 0 | a place `v*` with `\|u*\|_{v*} > 1` (Kronecker + product formula); `v*` split or archimedean | **valid** |
+| §3.3 Lemma 3.1′ | local injectivity: if `u*^i a₀ ∈ Q′` then `y′ = u*^{i+1}a₀ − b ∈ Λ` has product `< 1/C_Λ` by the choice of `ε`, so `y′ = 0`; hence every Bowen atom lies in a box `2ε`-fat at `∞`, `O_w`-fat at split `w`, and `s^{−(n−1)}`-thin at `v*`; SMB + Jacobs + Egorov give `μ(box) ≥ δ^β` for **every** `β > 0` | **valid** (the non-ergodic SMB limit handled by Jacobs, as written) |
+| §3.4 Step 3 | multipliers `V_M ⊆ U_ℚ`, `#V_M ≥ c₀M^{α}`, `α = 1/[F:ℚ]` (Lehmer's count; `H_L = H_{ℚ(i)}^{[F:ℚ]}` on `ℚ(i)`); each an isometry at every archimedean place of `L`; `δ = M^{−K}`, `β = α/(2K)`, so `Σ μ(vB) ≥ c₀M^{α/2} > μ(R̂)` | **valid**; the table's bounds (`\|e\|_w ≤ m(w)` at split `w ≠ v*`, `∏_w m(w) ≤ M²`) checked |
+| §3.5 Step 4 | `z = ℓ₂r₁ − ℓ₁r₂ = ℓ₁e₂ − ℓ₂e₁ ∈ Λ`; product `< (16ε)^{[L:ℚ]}·M^{3−K}·M⁶ < 1/C_Λ` for `K = 16`, `ε < 1/16`, `M` large; so `z = 0` — **only multiplication, no division** | **valid** |
+| §3.6 Step 5 | divide at `v*` only: `\|ℓ_j\|_{v*} ≥ 4^{−[L:ℚ]/2}M_j^{−2}` by Lemma PF for the single `ℓ_j ∈ R`; scales `M, M², M⁴, …` share one `t`; `(x̃ − t)_{v*} = 0` | **valid** |
+| §3.7 Step 6 | disjoint injective leaves `π(t + W_{v*})`; `L/Λ ≅ ⊕_{w stable} L_w/Λ_w` has finite `U`-orbits; on a leaf `U_t` acts linearly | **valid** |
+| §3.8 Step 7 | wandering shells at each split `w ≠ v*` (finite `ν_t`, `g^k ∈ U_t` rescales the `w`-coordinate) | **valid** (my stage 2's coset argument, X01V-T5, is the same mechanism) |
+
+**Verdict: X01D's step is VALID; EF_F⁺ holds, and with it EF_F** [hand: one derivation (X01D) and this checking reading, not independent].
+I found no failing line.
+
+### 4.2 Which of my stage-2 reasons was wrong
+
+1. **§2.3, Lemma 3.2 item 2 ("The images are small … Fails") and item 3 (the pigeonhole, "(log M)^k").** Wrong premise: I required the
+   images `u′B` to stay small at every place, as EF's Euclidean diameter argument does. The adelic argument needs only that the *product* over
+   all places of the error `z` be `< 1/C_Λ`. Fatness at a split `w ≠ v*` costs a factor `≤ m(w)`, whose product is bounded by the multipliers'
+   heights (polynomial in `M`), and Lemma 3.1′ lets the thinness at the one place `v*` be `M^{−K}` for any fixed `K` (because `β` may be taken
+   `α/(2K)`). So all of `U_ℚ ∩ U_M` are usable multipliers, not only `U_{supp(u)}`. **UZ is not needed; X01V-T7 is withdrawn as a no-go** (its
+   count is true and irrelevant).
+2. **§2.3 item 4 (division by `u₁ − u₂` amplifies errors at `∞` and at finite places).** Avoided: Step 4 multiplies (`z = ℓ₁e₂ − ℓ₂e₁`), and the
+   only division, at `v*` in Step 5, is bounded below by Lemma PF for one element of height `≤ M²`.
+3. **§2.3 "Entropy transfer … a positive-entropy statement that EF's route cannot supply" and the proposal to use EF_F⁰.** Wrong: the transfer
+   comes out of the zero-entropy argument itself, as EF's Lemma 3.2 gives it on 𝕋. X01V-T5 stands as a lemma (a measure carried by `E` has zero
+   entropy for every `u`), but **corrections 3.3 item 3 (EF_F → EF_F⁰) and item 6 (route (A) closed at UZ) are withdrawn**.
+
+### 4.3 Revised verdicts (supersede §3.1 for EF_F and EF-MR)
+
+| claim | X01V after stage 4 | X01D | difference of truth |
+|---|---|---|---|
+| EF-X | TRUE | TRUE | none |
+| EF-G (a) | FALSE as stated (ℚ(∛2), `u = (1+∛2 i)/(1−∛2 i)`), TRUE for totally real `F` | FALSE (ℚ(∛2), a relative unit with `H = 1`), TRUE for totally real `F` | none (two different counterexamples) |
+| EF-G (b) | TRUE for totally real `F`; `#U_N = ∞` otherwise | TRUE, degenerate when not totally real | none |
+| EF_F | **TRUE** (via EF_F⁺), [hand, one derivation + a checking reading] | TRUE (EF_F⁺) | my stage-3 GAP was an error of mine, not a difference in the mathematics |
+| EF-MR | TRUE as a conditional (EF_F now usable as stated); "`= 5`" still needs `χ(ℚ(√47)²) ≤ 5` named | (not read) | — |
+
+**Consequence (hand, from the two):** PE-2 ∧ EF_F⁺ ⟹ MR(F) for every real number field `F` (§2.4's argument, with EF_F⁺ in place of EF_F⁰).
+Route (A) is **open only at PE-2**. **Caveat for the close:** EF_F⁺ is a strong statement (one zero-entropy element forces `T + A`, with no
+ergodicity), so it deserves a blind second derivation before it enters `LEDGER.md` as more than one mind's.
+
+### 4.4 Would-have-searched-here log (stage 4)
+
+- none (reading and checking only).
