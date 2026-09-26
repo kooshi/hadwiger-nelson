@@ -193,9 +193,13 @@ statement about `B₁` is about FS-66's relaxation (row 75). *Kernel:* declined.
 **M3-J21-MX — the mixing selection: "`K` compact abelian, `ν` a probability on `T_K ⊆ K`, `λ* = sup_{ξ≠0}|ν̂(ξ)| < 1/(k−1)`: for every Borel graph `X`, a Borel proper `k`-colouring of `X × Cay(K, T_K)` yields the Borel proper `k`-colouring `φ(x) = min{j : μ(W(x,·)^{-1}(j)) > λ*/(1+λ*)}` of `X`; for measurable `W` proper off a null vertex set, `φ` is measurable and proper off a null vertex set" (format N′, every edge with an endpoint outside the null set). Its engine: the compact expander-mixing lemma `μ(P)μ(Q) ≤ λ*√(μ(P)(1−μ(P))μ(Q)(1−μ(Q)))` for edge-free `P, Q`. (= J22-T6.) [hand; two derivations: J21 §3.2; J22 §2.2 in B1 from the statement (blind to the proof), with the weaker N′ reading, and at B3 J21's stronger N′ (the outer-measure step) re-derived TRUE (J22 §4.2 row 8)]**
 *Scope:* the null-set step is named — edges with both ends in the null set are not controlled (J21 §3.2 last paragraph; under CH an
 independent set of a mixing compact Cayley graph can have full outer measure). *Classical case:* `K = ℤ/n`, `T_K = K ∖ 0` gives
-`χ(G × K_n) = min(χ(G), n)` (Burr–Erdős–Lovász 1976, as cited in `[Zhu2025]` §1). *In Kechris–Marks's terms:* a positive special case of
-Problem 4.23 — `C_B(k+1)` for pairs `(G, Cay(K, T_K))` with the second factor `k`-mixing (J21 §3.2). *Prior art:* J21's 9 zbMATH queries
-negative; the close's gate, stage 3. *Kernel:* a candidate in its finite form (a finite abelian Cayley factor, Parseval and a pigeonhole);
+`χ(G × K_n) = min(χ(G), n)` (Burr–Erdős–Lovász 1976, `[Tardif2008]` Thm 3.2 — corrected from J21's "as cited in `[Zhu2025]` §1", which credits BEL only with the conjecture; `plans/M3-PA-mixing.md` Stage 6). *In Kechris–Marks's terms:* a positive special case of
+Problem 4.23 — `C_B(k+1)` for pairs `(G, Cay(K, T_K))` with the second factor `k`-mixing (J21 §3.2). *Prior art (the close's reading job J23cpa, `plans/M3-PA-mixing.md` Stage 6):* **as stated — arbitrary first factor, compact `K`,
+Borel/measurable — not found** by 53 zbMATH queries and six papers read; **partly in print:** its threshold `λ(H)/r < 1/(k−1)` is
+`[PakVilenchik2013]` Thm 3 (first factor `K_k` only: unique and unique vector `k`-colourability; generalised by `[GodsilEtAl2020]` Cor.
+4.4), and its `K_n` case is BEL; `[AlonDinurFriedgutSudakov2004]`, `[TardifWrochna2019]` and `[GodsilEtAl2020]` do not contain it;
+undecided only at Špacapan 2011 (paywalled). The proof is BEL's plurality selection plus the expander mixing lemma, so a reviewer may call
+the finite case folklore. *Kernel:* a candidate in its finite form (a finite abelian Cayley factor, Parseval and a pigeonhole);
 declined for now — no consumer in the kernel, and the prior-art gate first.
 
 **M3-J21-UNIF — for the standard compact subgraph at a stable or split place, averaging any probability `ν` on `T_v ∩ K` over the norm-one torus gives the uniform (Haar) measure with `|ν̂_unif(ξ)| ≤ max_u |ν̂(uξ)|`: the uniform measure is optimal for both Hoffman and mixing, so no reweighting of the circle makes a non-thick place thick. [hand; two derivations: J21 §2.6 (b), §3.3; J22 §2.2 ("Uniform optimal", convexity plus transitivity of the torus on `T_K`), from MX/TH's statement]**
@@ -243,8 +247,7 @@ seven-colour half is already kernel (`plane_colorable_seven`); the four-colour h
 ## §7. The FS-66 checker re-run at 23 (the one item only the close could read)
 
 **M3-CHK23 — the frozen FS-66 checker (`tools/fs66_b1_cert_check.py`, sha256 prefix `735b926798ffac14`, matching row 75's) on the existing certificate `data/fs66/b1/cert-p23.json --m 5`. [an existing checker on an existing certificate (in, under the ban); J22's first run killed by its own 8 GiB slot cap at step 6/7 (exit 137, peak 8,383,092 kB — explained, not a crash); the owner's re-run under a 16 GiB slot, log `data/m3/j22/fs66-cert-p23-m5-rerun.out`]**
-*Verdict:* **pending at this file's stage-2 save** — filed in the plan's §R-close when the log's last line reads `exit=<code>`. D1-fac's 23
-clause rests on row 75's recorded CERTIFIED verdict either way.
+*Verdict:* **CERTIFIED, exit 0** (log `data/m3/j22/fs66-cert-p23-m5-rerun.out`, 69 lines, last written 19:03:39; launched about 18:14 under a 16 GiB slot, so about 49 minutes wall, one core). The frozen checker (sha256 `735b926798ffac14…`, matching row 75's) re-verified the certificate `data/fs66/b1/cert-p23.json` (sha256 `28cf189c83d2…`) through all seven steps — step 6: "identity (*) holds on 134447 canonical monomials (46 blocks, 138706 rows), coefficient by coefficient in exact integers"; step 7: "5 * U_num = 48992318760443262233948788623512870 < 529 * scale" — and printed: "CERTIFIED: every phi in [0,1]^529 with q(phi) >= 0 has sum(phi) <= U = 97.984637… … so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/23^k, 2), k >= 1, is 5-colourable. Standard-library checker, NOT the Lean kernel." **So D1-fac's clause at 23 is now confirmed first-hand** (grade: cert, an existing checker on an existing certificate), beside row 75's recorded verdict. Peak memory was not logged (no GNU time on this run); it stayed under the 16 GiB cap.
 
 ## §8. The planner's statements (J06), mapped
 
