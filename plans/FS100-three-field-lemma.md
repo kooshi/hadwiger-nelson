@@ -1872,6 +1872,8 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
   conjecture*, arXiv:1801.07802 (journal not checked) — names MR's character form (extremal traces of `C*(J ⋊ O*)` ↔ ergodic invariant measure
   plus isotropy character, via Neshveyev) and the finitely generated case as the open "generalized Furstenberg conjecture" (row 120) — held
   `data/fs100/x24r/LacaWarren2018-1801.07802.pdf`, **to move to `~/source/library/pdf/`** — abstract; pp. 7–9, 13–14 read (X24R).
+  *[Annotation, C3b, 2026-09-26: the move is done — X30F (commit `3b1952a6`) copied it to
+  `~/source/library/pdf/LacaWarren2018-phase-transitions-c-star-algebras-number-fields-generalized-furstenberg.pdf` and removed the repository copy.]*
 - **`[BauJohnsonNoble2021]`** (new) S. Bau, P. D. Johnson Jr., M. Noble, *On single-distance graphs on the rational points in Euclidean spaces*,
   Canad. Math. Bull. 64 (2021) 13–24, doi 10.4153/S0008439520000181, Zbl 1461.05078 — `χ(ℚⁿ, d)`; checked for a quadratic-field value, none — not
   held — abstract only.
@@ -1881,7 +1883,8 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
 - **`[EinsiedlerLindenstrauss2022]`** (amend read column): §1, §2 (pp. 5–9), §4.1–§4.3 (pp. 14–17) read (X24R, 2026-09-26); §§3, 5–9 unread; §2 is
   set-up only, PE-2 and EF_F⁺ not in it; Lemma 4.2 a lift for fixed `ℤ^d`.
 - **`[BekkaFrancini2022]`** (amend): add Thm 5.8's statement and §1 pp. 1–6 read (X24R); the torus case excluded by hypothesis; **PDF
-  `data/fs100/x03d/bekka-francini-2002.07497.pdf` to move to the library**.
+  `data/fs100/x03d/bekka-francini-2002.07497.pdf` to move to the library**. *[Annotation, C3b, 2026-09-26: done — X30F (commit `3b1952a6`);
+  now `~/source/library/pdf/BekkaFrancini2022-characters-algebraic-groups-number-fields.pdf`, the repository copy removed.]*
 - **`[Sataev1975]`** (amend): not in zbMATH (author listing checked); one Math-Net.ru fetch and one Russian web search failed; by Huang's
   description a circle theorem — not held, not read.
 - **`[EinsiedlerFish2010]`** (add one line): its citers — OpenAlex splits the ETDS and arXiv records (5 + 3), Semantic Scholar merges them (11); none is
@@ -1890,7 +1893,8 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
   (Badea–Grivaux, CMH 2020), **arXiv:1006.4491** (optimal transport) — abstracts read (X24R). *These six ids are the ones `tools/bib_audit.py` fails
   on at HEAD (inventory 33): listing them here clears it.*
 - **`[Huang2017]`, `[HuangLiShiXu2023]`**: PDFs `data/fs100/x01d/huang2017-1606.06078.pdf`, `data/fs100/x01d/hlsx2023-1908.02611.pdf` **to move to the
-  library** (inventory 42).
+  library** (inventory 42). *[Annotation, C3b, 2026-09-26: done — X30F (commit `3b1952a6`); now `~/source/library/pdf/Huang2017-fourier-coefficients-times-p-invariant-measures.pdf`
+  and `~/source/library/pdf/HuangLiShiXu2023-strongly-independent-matrices-rigidity-times-a-invariant-measures-n-torus.pdf`, the repository copies removed.]*
 - **Croft** (a debt, X21D): H. T. Croft, the tortoise construction giving `m₁(ℝ²) ≥ 0.2293` (usually cited as *Incidence incidents*, Eureka 30
   (1967) 22–26 — **the citation is from memory and must be checked before the row is written**; `[AmbrusEtAl2023]` is the held source that quotes
   it) — not held, unread.

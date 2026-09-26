@@ -190,8 +190,11 @@ row HX-1). *Rests on it:* nothing in the chain (the advisor's stage-0 irreducibi
 *Proof:* X02D §3.1–3.2 (Lemma Γ: a `Γ`-ergodic measure on `R̂` is `m` or of zero `Γ`-entropy, via the increasing factors `M̂_k`; `U` permutes the
 `Γ`-ergodic components); X02D §3.3 (a second route on `M̂_k`, one mind with the first); X02V §2.3 (reduction to `U`-ergodic `τ`; on each `M̂_j` a
 `Γ`-ergodic decomposition, uniqueness by Lemma H, a Haar mass constant up the inverse system, extension, extremality). *Proof verdict:* closes,
-twice. *Rests on it:* FS100-MR. *Prior art:* PE-2's shape is Johnson's nonlacunary theorem (1992, review only) transposed; **EL2021 §2 ("Actions
-on adelic solenoids") is unread and may already contain the inverse-limit step — no novelty claimed until it is read** (X02D §4.4). *Kernel:* declined.
+twice. *Rests on it:* FS100-MR. *Prior art:* PE-2's shape is Johnson's nonlacunary theorem (1992, `[JohnsonA1992]`, review only) transposed; EL2021 §2 ("Actions
+on adelic solenoids"), which X02D §4.4 held open ("no novelty claimed until it is read"), was read in full by X24R (`plans/FS100-X24R-prior-art.md`
+§3.1): *"It is set-up for **finitely generated** acting groups (`ℤ^d`) and holds no statement about invariant measures, zero entropy, infinitely
+generated groups or limits over growing modules"*; its Lemma 4.2 (§4.1–§4.3, also read) is *"a **factor** step for one fixed `ℤ^d`, not an inverse
+limit over `ℤ[Γ]`-submodules"*; *"So PE-2's step is not in EL2021, and neither is EF_F⁺."* The rest of the search: row 120's prior-art cell. *Kernel:* declined.
 
 **FS100-MR — MR(F) holds for every real number field `F` with `R = O′`: (a) PE-2 ∧ EF_F⁺ ⟹ MR(F) (`τ = a·m + τ′`, `τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`, so `τ′ = 0`); (b) given PE-2, MR(F) ⟺ every `U`-invariant `E`-null `τ` of zero entropy for every `u` is 0; (c) given R-U, MR(F) ⟺ PE-2(F); (d) every `U`-ergodic `μ` with `μ(E) = 1` has zero entropy for every `u`. (= X01D EF-MR first half, Corollary MR⟺PE; X01V-T5, T6, §4.3; X02V-8; X12B-MR.) [hand; (a) a composition, three minds (X01D, X01V, X12B); (b) X02V; (c) X01D, one mind; (d) X01V; resting on FS100-PE2 and FS100-EFP at their grades]**
 *Proof:* X01D §4.1, §4.3; X01V §2.4, §4.3; X02V §3.2; X12B §3.2. MR uses neither R-U nor `m(E) = 0`. *Proof verdict:* the plan's §R-close (stage 5) 1.1, row EF-MR,
