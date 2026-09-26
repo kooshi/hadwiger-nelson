@@ -59,6 +59,8 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # C3a, the claims sweep of the 2026-09-26 documentation consolidation (data/consolidation-2026-09-26/C3a-record.md).
+    "K0's": "item 12's 'five at K0's grade (row 121)', a superseded pointer rewritten to its grade and address ('five at [hand], through MR (row 123)'); K0 stays in rows 117, 121 and 123",
     # X10F, the front page of FS-100 stage 5 (the ×2×3 crunch, 2026-09-26; X10F's record, data/fs100/x10f-record.md).
     "G1–G79": "the stable-identifier range, extended to G1–G80 when G80 (infinite rank is the resource) was minted at FS-100 stage 5's front page",
     "1–119": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)",

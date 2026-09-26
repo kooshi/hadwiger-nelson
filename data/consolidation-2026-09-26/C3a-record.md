@@ -37,3 +37,59 @@ Gates after stage 2: fact audit `--base 9b3ec6ab` PASS (no ALLOW added); `--dupe
 numbering stands | — |", caught and reworded); ledger-§B strict PASS; bib PASS; architecture PASS. `CLAUDE.md` 297,506 bytes.
 
 Owed to C3b: `plans/STUB-five-colours-47.md`'s banner (closed, not re-aimed) and `plans/FRONTIER-STUBS.md`'s rank-4 row and closed list.
+
+## Stage 3 — SAVED
+
+The sweep of `CLAUDE.md` (item 5). Method: the diff since the version the X30F/X31C front pages started from (`a6ff3684`) read in full,
+so what they had already rewritten was not re-done; then every sentence carrying MR, `given MR`, a ℚ(√47)/ℚ(√167)/ℚ(√3,√5) value, `L ≤ 4/5`,
+`FS-59`, `55.1`, "exposed", "predicts", "open"/"not landed" near those fields, walked in context (141 + 40 hits), plus a read of the mission,
+"Where the problem stands" items 1–29, the paths-forward table rows 1–59 and G48, G55, G56, G59, G64 in full. Grade rule applied:
+"given MR" → "[hand], through MR (row 120/123)" or the row pointer; never a bare unconditional.
+
+| # | location | old claim (quoted) | new claim | row |
+|---|---|---|---|---|
+| 1 | § The mission (2) | "Its proved range is item 10's — every `L ≤ 5` (row 123);" | "…every `L ≤ 5`, at [hand] through MR (row 123);" | 120, 123 |
+| 2 | § The mission (2), exposed predictions | "— **all met** (rows 121, 123); and at least six at **ℚ(√167)**, proven 4 in the kernel (row 119) and ≥ 5 (row 123)," | "— **all met**, at [hand] through MR (rows 120–121, 123); … and ≥ 5 at [hand] (row 123)," | 120, 121, 123 |
+| 3 | § The mission (2), "A finite refusal only confirms" | "so five over ℚ(√167) cannot falsify it (FS-59)," | "so five over ℚ(√167), held at [hand] (row 123), confirmed it and could not falsify it," | 123 |
+| 4 | Frontier, Last-updated line | "**Paid (theorem); MR not landed** (`plans/FS100-three-field-lemma.md` §R-close)" | "…(…§R-close; MR landed at stage 5, row 120)" | 120 |
+| 5 | Item 2 | "over K that is sufficient for five, given M56's 8/3 forcer (G55)." | "…given M56's 8/3 forcer (G55) or, independently, through MR (row 123, [hand])." (wall-broken `F ⊇ K` has `L ≥ 5`, G56) | 123 |
+| 6 | Item 12 | "against four in the kernel (row 119) and five at K0's grade (row 121)." | "…and five at [hand], through MR (row 123)." | 123 (ALLOW `K0's`) |
+| 7 | Item 14 | "ℚ(√47)'s bracket (item 10) cannot close from above by residues at any depth (§1.7, row 75)." | "ℚ(√47)'s bracket closed at five from below (item 10, row 121); no residue at any depth could have closed it at four (§1.7, row 75)." | 121, 75 |
+| 8 | Item 18 | "(row 123, given MR)" | "(row 123, [hand], through MR)" | 123 |
+| 9 | Item 22 | "Five over ℚ(√167) holds by two routes (row 123);" | "…by two routes, at [hand] through MR (row 123);" | 123 |
+| 10 | Item 23 | "**Without triangles** rigidity is free in the abstract class and in the plane is Soifer's Open Problem 55.1 (row 86, §3), undecided at ℚ(√59) (item 24)." | "…free in the abstract class; in the plane it implies Soifer's Open Problem 55.1 (row 86, §3), whose existence half row 121 answers, and it is undecided at ℚ(√59) (item 24)." (row 86: rigidity ⟹ 55.1) | 86, 121 |
+| 11 | Item 24 | "with MR held (row 120)" | "with MR held at [hand] (row 120)" | 120 |
+| 12 | Item 27 | "the selection onto `T + A` is false as stated; at ℚ(√47) moot since row 121." | "…over T-C(A)'s class (the `L ≥ 5` fields) its `E`-form is moot through MR, no four-colouring existing there (rows 121, 123)." | 117, 123 |
+| 13 | Item 29 | "(rows 120–122; FS-100 stage 5)" | "(rows 120–122; FS-100 stage 5; [hand])" | 120–122 |
+| 14 | The open structural question | "Every known χ ≥ 5 argument factors as pigeonhole × kill (G15)." | "Every known χ ≥ 5 argument on a finite graph factors as pigeonhole × kill (G15); the field-level one through measure rigidity (row 121) names no finite graph." | 121 |
+| 15 | Paths forward rank 1, FS-59, question | "**Does ℚ(√167)² need five?** Solver-free routes first (row 84 …; `L21cc6506` is loose at four, row 81); 7 minimal lattices …" | "**Does ℚ(√167)² need five? Yes, at [hand] through MR, by two routes (row 123)** — the question is answered, and six is what is left (row 125). The finite routes stood so: …" | 123, 125 |
+| 16 | Paths forward rank 1, FS-59, bearing | "predicted ≥ 6 against a proven 4, … a five confirms and cannot falsify (FS-64); its ≥ 6 is archimedean modulo MR and PL; **≥ 5 by two routes (row 123)**;" | "predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119), … the five confirms and cannot falsify (FS-64); its ≥ 6 is archimedean modulo PL, MR being held (row 120);" | 119, 120, 123 |
+| 17 | Paths forward rank 2, FS-90, bearing | "a yes on the third is Soifer 55.1" | "…Soifer 55.1 as posed (its existence half answered, row 121)" | 121 |
+| 18 | Paths forward rank 5, FS-75, bearing | "none; the falsification field's best bound is now the kernel's" | "none; the falsification field's kernel bound (four; five at [hand], row 123)" | 119, 123 |
+| 19 | Paths forward rank 6, FS-80, bearing | "speculative; the only solver-free route to five at ℚ(√167) the competition left standing" | "…route to a certificate of five at ℚ(√167) … — five there is now held at [hand] by measure rigidity (row 123)" | 123 |
+| 20 | Paths forward rank 12, FS-64 | "the `E`-form open over T-C(A)'s class (rows 116–117), moot at ℚ(√47) (row 121)" | "the `E`-form moot over T-C(A)'s class through MR (rows 116–117, 123)" | 117, 123 |
+| 21 | Paths forward rank 16, FS-48 | "with MR, every entry" | "through MR (row 120, [hand]), every entry" | 120 |
+| 22 | Paths forward rank 20, FS-72 | "(row 123, given MR)"; bearing "the conjecture's last cheap prediction's last object …" | "(row 123, [hand], through MR)"; "the prediction it served, five over ℚ(√3,√5), is met (row 123), and the lattice would be its explicit object …" | 123 |
+| 23 | G15, killing test | "a χ ≥ 5 argument that does not factor, never yet met." | "a χ ≥ 5 argument on a finite graph that does not factor, never yet met." (scope: row 121's argument names no graph, so it neither meets nor tests universality) | 121 |
+| 24 | G48, the conjecture | "— attained at all six fields where χ is known —" | "— attained wherever χ is known —" (every real `L ≤ 5` field, rows 99, 123) | 99, 123 |
+| 25 | G48, Do | "at L ≤ 5 outside it the milestone is a test of the conjecture" | "outside it (now `L ≥ 6`) the milestone is a test of the conjecture" | 123 |
+| 26 | G48, falsifiers | "a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime;" | "…(none at `L = 5` through MR, row 123);" | 123 |
+| 27 | G55, consequences | "but at the descent: nothing gives four-colourings an ideal period." | "…period; five came by measure rigidity instead (row 123)." | 123 |
+| 28 | G55, killing test | "…failing to replicate, on which the five-colour consequences over K rest." | "…on which the chain's route to the five-colour consequences over K rests (row 123 reaches them through MR)." | 123 |
+| 29 | G56 | "A six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers, and its five-chromaticity is itself open." | "…none of the known five-forcers; every field with local bound ≥ 6 needs five through MR (row 123, [hand])." | 123 |
+| 30 | G59, what the conjecture makes of it | "if the wall holds, the main clause says nothing above five —" | "if the wall holds, the main clause (held through five, row 123) says nothing above five —" | 123 |
+| 31 | G59, ℚ(√167) | "…whichever way the wall goes (…), against a proven 4 (row 79)," | "…against a proven 5 (row 123, [hand]; 4 in the kernel, row 119)," | 119, 123 |
+| 32 | G59, killing tests | "(the conjecture above five; five there is FS-59's next question)" | "(the conjecture above five; five there is held, row 123)" | 123 |
+| 33 | G64, aiming statement | "it hides only in the gap between `L(F)` and `χ(F²)`," | "…between `L(F)` and `χ(F²)` at `L(F) ≥ 6`, where `χ(F²) ≥ 5` through MR (row 123)," | 123 |
+| 34 | G66 | "and ℚ(√47)'s bracket cannot close from above by residues (`CLOSED-QUESTIONS.md` §1.7)." | "…could not close from above by residues (`CLOSED-QUESTIONS.md` §1.7; it closed at five, row 121)." | 121 |
+
+**ALLOW line added (reviewed):** `"K0's"` — item 12's "five at K0's grade (row 121)", a superseded pointer rewritten to its grade and
+address; K0 stays in rows 117, 121 and 123.
+
+Already current when I arrived (rewritten by X30F/X31C, verified, not touched): item 10, item 29's body, the Last-updated line's stage-5
+entries, § The novel-results ledger's range, FS-100/FS-101/FS-97/FS-98 rows, G54's four-colour clause, G57's 55.1 clause, G60's `J₀`
+clause, G76's measure half and demotion, G79's instances, G80.
+
+Gates after stage 3: fact audit PASS (one ALLOW, above); `--self-test` PASS; `--dupes` 10; ledger-§B strict PASS; bib PASS; architecture
+PASS. `CLAUDE.md` 298,719 bytes — 1,281 under the budget; the remaining room is too small for further additions, so later stages
+rewrite in place or point.
