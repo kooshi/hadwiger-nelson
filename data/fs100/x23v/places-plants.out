@@ -1,0 +1,20 @@
+== plant dyadic-minus1-as-3
+FAIL (5):
+   K=Q(sqrt3,sqrt11): dyadic route A split (e=2,f=1) vs PARI {'nF': 2, 'e': 2, 'f': 1, 'stable': True}
+   Q(sqrt2,sqrt3): dyadic route A split (e=4,f=1) vs PARI {'nF': 1, 'e': 4, 'f': 1, 'stable': True}
+   Q(sqrt11): dyadic route A split (e=2,f=1) vs PARI {'nF': 1, 'e': 2, 'f': 1, 'stable': True}
+exit=1
+== plant flip-legendre-7
+FAIL (6):
+   K=Q(sqrt3,sqrt11): p=7 route A (st=True,e=1,f=2) vs PARI {'nF': 2, 'e': 1, 'f': 2, 'stable': False}
+   Q(sqrt2,sqrt3): p=7 route A (st=True,e=1,f=2) vs PARI {'nF': 2, 'e': 1, 'f': 2, 'stable': False}
+   Q(sqrt11): p=7 route A (st=False,e=1,f=1) vs PARI {'nF': 2, 'e': 1, 'f': 1, 'stable': True}
+exit=1
+== plant swap-47-23
+FAIL (1):
+   Q(sqrt47): class condition False, expected True
+exit=1
+== plant q35-wrong-congruence
+FAIL (1):
+   Q35: stable [11, 59, 71, 131, 179, 191, 239, 251, 311, 359] != predicted [11, 23, 59, 71, 83, 131, 179, 191, 239, 251, 263, 311, 359, 383]
+exit=1

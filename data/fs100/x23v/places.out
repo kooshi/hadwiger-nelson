@@ -1,0 +1,8 @@
+K=Q(sqrt3,sqrt11)    dyadic=('inert', 2, 2, 1)  class condition=False  failing places=[('2', 'inert, U_2 four-colourable: ratio >= 1/4')]
+Q(sqrt2,sqrt3)       dyadic=('inert', 2, 4, 1)  class condition=False  failing places=[('2', 'inert, U_2 four-colourable: ratio >= 1/4')]
+Q(sqrt11)            dyadic=('inert', 2, 2, 1)  class condition=False  failing places=[('2', 'inert, U_2 four-colourable: ratio >= 1/4'), ('7', 'stable, residue field F_7 (chi(Gamma_7) = 4)')]
+Q(sqrt23)            dyadic=('split', None, 2, 1)  class condition=False  failing places=[('7', 'stable, residue field F_7 (chi(Gamma_7) = 4)')]
+Q(sqrt47)            dyadic=('split', None, 2, 1)  class condition=True  failing places=[]
+Q(sqrt3,sqrt5)       dyadic=('split', None, 2, 2)  class condition=True  failing places=[]
+Q(sqrt3,sqrt5): stable odd primes < 400: [11, 59, 71, 131, 179, 191, 239, 251, 311, 359]
+ALL CHECKS PASS

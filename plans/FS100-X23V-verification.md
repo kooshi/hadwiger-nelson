@@ -90,3 +90,146 @@ T-C(A) holds at `S = ∅`, J45's A⁺ and SP-Cor hold with J45's proofs — so M
 ### 1.4 Would-have-searched-here log
 
 - (none at stage 1)
+
+## Stage 2 — SAVED (blind derivation: CTL, CLS, SPC, COR, Q35, D-1)
+
+*Inputs used, by statement only: R88-TCA and R88-TC's summaries in `plans/R88-derivation.md`; C14.1–C14.3 (`plans/FS86-C-Coxeter.md` §Proof of C14);
+FS86-LP (Lemma P, `plans/FS86-derivation.md`); J45 §Stage 3, §4.2, §5.4; X05V §2.1; rows 67, 75, 100, 112, 113, 117; G54, G56, G59; J48-THK
+(`plans/FS100-BC-verification.md`). J28D's §3.3 (the class form's own proof) not read: my class-form steps below are a re-walk from the summaries.*
+
+### 2.0 Two reductions used throughout
+
+**(R-a) Stable places and their targets.** A stable place is a prime `𝔭` of `F` not split in `L = F(i)`. Odd `𝔭`: `L/F` is unramified there
+(−1 is a unit), so stable ⟺ inert ⟺ `−1` a non-square in `𝔽_q = O_F/𝔭` ⟺ `q ≡ 3 (mod 4)` ⟺ `q = p^f`, `p ≡ 3 (mod 4)`, `f` odd (the usable
+primes). Dyadic `𝔭`: split (not stable), ramified in `L/F` (target two-colourable, ratio `1/2`), or inert (target `U_Q`, `Q = N𝔭`).
+
+**(R-b) Which stable targets have all-levels four-colour ratio `< 1/4`** [hand, from held certificates]. Odd `q`: `q = 3, 7` have `χ(Γ_q) = 3, 4`,
+so ratio `≥ 1/4` at level one (a colour class pulls back); `q = 11, 19` ratio `< 1/4` at every level by FS-66's certificates (row 75; ramified
+bases by FS86-LP: "FS-66's fibre-density inequality and its certificates bound every level of a ramified tower too"); `q = 23, 27, 31, 43, 47`
+by Hoffman at level one (23: `0.3317`; 31: `1/4 − 2.745·10⁻⁶`; 27, 43, 47: Hoffman floor 6, G56) and FS86-LP at new levels (`2/(p+3)`);
+`q ≥ 37` by Weil (`2√q/(q+1) < 1/3`) and FS86-LP. **Every odd usable `q ≥ 11` has all-levels ratio `< 1/4`, and `χ(Γ_q) ≥ 5` exactly for
+`q ≥ 11`** — so on odd stable places there is no integrality gap between "target needs five" and "ratio `< 1/4`". Dyadic inert: `Q ≤ 32`
+four-colourable (G56), ratio `≥ 1/4`; `Q = 64`: `λ_min = −15`, `d = 65`, Hoffman `0.1875`; `Q = 128`: floor 8; larger `Q` by Weil; at every
+level of an **unramified** base by G54's inert-tower theorem (`λ_min(G_j) = Q^{j−1}λ_min(G₁)`, "new for Galois rings and even Q").
+*Reading note:* FS86-LP is stated with `p`; at `q = p^f`, `f ≥ 3` (e.g. 27) over a ramified base I read it with `q` — not re-derived here.
+**Not covered by any held lemma: a dyadic inert stable place over a ramified base (`e(𝔭|2) ≥ 2`) with `Q ≥ 64`** — FS86-LP is for odd
+towers, G54's constancy for Galois rings (unramified). See 2.2.
+
+### 2.1 CTL — first
+
+**What a wrong-reason pass would look like** (written before the check):
+- (W1) The four `L ≤ 4` fields fail because of a factor every field has — e.g. the real places read with Hoffman's `0.2871` in place of `m₁` —
+  in which case ℚ(√47) fails too. The ℚ(√47) half guards this; the check must name, at each failing field, the failing **stable place**.
+- (W2) A failure at a place that is not stable (a split dyadic place counted as stable), or ℚ(√47) passing because 3 or 7 was dropped from the
+  stable list without being shown non-stable. The check must classify 2, 3, 7 by two routes.
+- (W3) Reading-mismatch: the class condition fails while T-C(A)'s *statement* holds (or conversely). At each failing place the check must also
+  exhibit what kills the statement: a four-colourable target whose residue pull-back is a periodic colouring, spectrum on `T`.
+
+**Check** (`tools/x23v_places.py` → `data/fs100/x23v/places.out`; route A Kummer theory over `ℚ_p`, route B PARI `idealprimedec` on `F` and
+on `L`, every prime `< 400`, agreeing everywhere; four plants fire, each for its intended reason — `data/fs100/x23v/places-plants.out`):
+
+| field | failing stable places (the class condition) | what kills T-C(A)'s statement | verdict |
+|---|---|---|---|
+| K = ℚ(√3,√11) | both dyadic places, inert in `L/F`, `Q = 2`: `U₂ = K₄`, ratio exactly `1/4` (row 89's two tight places) | the residue colouring at either (Theorem B), periodic | fails ✓ |
+| ℚ(√2,√3) | the dyadic place (`e = 4`, `f = 1`), inert, `Q = 2` | its `K₄` pull-back (G55: `χ = 4`) | fails ✓ |
+| ℚ(√11) | dyadic inert `Q = 2`, **and** 7 (split in `F`, `𝔽₇`, `Γ₇` four-colourable) | either pull-back (C9's colouring at 7) | fails ✓ |
+| ℚ(√23) | 7 (`23 ≡ 2`, a square mod 7); the dyadic place is split (`23 ≡ 7 (mod 8)`) | the `Γ₇` pull-back | fails ✓ |
+| ℚ(√47) | none: 2 split, 3 and 7 inert in `F` (`𝔽₉`, `𝔽₄₉`, not stable); 11, 19 FS-66; 23, 31, 43, 47 (ramified) Hoffman + LP; Weil above | — (R88-TCA itself, two derivations) | holds ✓ |
+
+W1 does not occur (every failure is at a named stable residue place, and ℚ(√47) passes); W2 does not occur (2, 3, 7 classified twice; plant
+"dyadic −1 read as 3" and plant "flip the symbol at 7" are both caught by the PARI route); W3 does not occur (each failing place carries a
+periodic four-colouring). **CTL: TRUE**, for the right reason.
+
+### 2.2 CLS
+
+**⟹ [hand].** If `L(F) ≤ 4`, some stable place's level-one target is four-colourable (R-a: residue field `𝔽₃`, `𝔽₇`, a ramified dyadic place,
+or inert dyadic with `Q ≤ 32`); the pull-back of a largest colour class is a measurable independent set of density `≥ 1/4` in `Cay(O_v, T_v)`,
+so the all-levels ratio is `≥ 1/4`. Contrapositive: the class condition ⟹ `L(F) ≥ 5`. Holds for every real number field.
+
+**⟸ [hand, given R-b's inputs].** If `L(F) ≥ 5`, no stable place has residue field `𝔽₃` or `𝔽₇`, none is a ramified dyadic place, and every
+inert dyadic one has `Q ≥ 64`. By R-b every odd stable place has all-levels ratio `< 1/4`, and so does every inert dyadic place over an
+**unramified** base.
+
+**GAP at one step, and it is realised.** An inert dyadic stable place over a **ramified** base with `Q ≥ 64` has level-one ratio `≤ 1/7`
+(`U₁₂₈`, floor 8) but no held lemma bounds its new levels. It occurs: **`F = ℚ(√3)·M₇`, `M₇` the degree-7 subfield of `ℚ(ζ₂₉)`** — totally
+real of degree 14; its one dyadic place has `(e, f) = (2, 7)` and is inert in `L/F` (`Q = 128`); 3 is stable with residue field `𝔽_{3⁷}`; 7 is
+not stable (PARI, `data/fs100/x23v/gapfield.gp` → `gapfield.out`; locally `F_v = U₇(√3)`, `U₇` unramified of odd degree, so neither `−1` nor
+`−3` is a square in `U₇` and `F_v(i) = F_v(√−3)` is unramified over `F_v`). So `L(F) ≥ 5` there, and CLS's ⟸ at `F` needs the missing
+step. **The missing lemma:** "a dyadic Lemma P" — on an inert dyadic tower over a ramified base, the characters new at level `m ≥ 2` have
+`|λ|/d < 1/3` (or directly: all-levels ratio `< 1/4`). **CLS: TRUE for every real number field with no inert dyadic stable place over a
+ramified base of norm `Q ≥ 64`; GAP there (the missing lemma named; realised at ℚ(√3)·M₇).** The named risks: `q = 27` — covered at level one
+(Hoffman floor 6) and, over an unramified base, by G54; over a ramified base by FS86-LP read with `q` (reading note in R-b); ramified stable
+places — odd ones by FS86-LP, ramified-in-`L/F` dyadic ones have ratio `1/2` and `L ≤ 2` (both sides of CLS false); the archimedean part at `n`
+places does not enter CLS (a condition on stable places only).
+
+### 2.3 SPC
+
+**(lit): "T-C(A)'s statement holds at `S = ∅`" ⟹ A⁺ at `S = ∅`, SP-Cor, and `χ ≥ 5` given MR — TRUE for every real number field** [hand].
+A⁺'s proof (SI-3, SI-4, N2, then T-C(A) as a black box) and SP-Cor's (amenability of `R ⋊ U`, `σ_μ` `U`-invariant, R-U, A⁺ with its remark
+(ii)) use no property of ℚ(√47): R-U and N1 are stated for every real number field (J45-RU, "with `G′_S` … R-U holds for every real number
+field"); SP-if's archimedean circle needs one real place, which `F ⊆ ℝ` supplies; `−1 ∈ U` always. X05V's P0–P8 re-run verbatim with `F`
+for ℚ(√47). Nothing about the number of real places enters **A⁺** at all.
+
+**(cls): the class condition ⟹ T-C(A)'s statement at `S = ∅` — where the archimedean step lives.** R88-TCA's count: extend the colouring to
+`G_∅ = ∏_{stable} O_{L_v} × (L⊗ℝ)` (R88-TC-ext; density by strong approximation, integrality by Lemma C′ — this is where row 100's exception
+scopes the claim), split `G_∅ = X × Y′`, bound each colour class's density by the ratio of the product, and `1 ≤ 4·max(α(Y′), r_X) < 1`.
+- **`n` real places — the named risk — is not a risk** [hand; a re-walk of C14]. By weak approximation for the `F`-rational torus `x² + y² = 1`,
+  `U` is dense in `(S¹)^{r₁}` (and in every finite product of local circles), so the archimedean compact part is the categorical product
+  `UD(ℝ²)^{×r₁}`. C14.2 (a) gives each factor ratio `m₁ ≤ 0.2470` with error `η`; C14.3 is an induction on the number of factors ("ratio of a
+  product is the larger ratio"; its (R2) is `I₁ × G₂`), so `UD(ℝ²)^{×n}` has ratio `m₁` with error `nη` **for every `n`**, and C14's windows
+  explicitly allow `s` archimedean factors. X03D's `Λ = 0.4028 > 1/3` is true and irrelevant: the product's least normalised eigenvalue is
+  `−0.4028` at **every** `n ≥ 1` (one factor at `J₀`'s minimum, the rest trivial), so Hoffman gives `0.2871 > 1/4` already at `n = 1, 2`;
+  ℚ(√47) (`n = 2`) was never done by first moments, and the `m₁` + Zhang-count route has no `n`-dependence.
+- **Complex places of `F` (not totally real `F`) — a step no cited proof covers.** At a complex place `w` of `F`, `L_w ≅ ℂ × ℂ` and
+  `T_w = {(z, 1/z) : z ∈ ℂ^×}` (the two extensions of `w` multiply to `N_{L/F}(u) = 1`): non-compact, and C14.2 has no archimedean lemma of
+  this kind (its windows `Q_n^s` are real-place squares). **Lemma X23V-CX [hand, one mind]:** restrict to the compact circle
+  `T′_w = {(e^{iθ}, e^{−iθ})} ⊆ T_w`; as vectors of `ℝ⁴`, `(cos θ, sin θ, cos θ, −sin θ) = cos θ·a + sin θ·b` with `a ⊥ b`, `|a| = |b| = √2`, so
+  `Cay(ℂ², T′_w) ≅ ℝ² × UD_{√2}(ℝ²)`, ratio `m₁` with C14's (R1) (Fubini over the orthogonal plane, tiling in the circle's plane) and (R2)
+  (the tiled set times `ℝ²`). An a.e.-proper colouring for `T_∅` is a.e.-proper for the smaller connection set with `T′_w` at `w`, so the count
+  runs with `X` containing `Cay(ℂ², T′_w)` at ratio `m₁`. So the complex places are harmless, **by a lemma added here**.
+- **Stable places.** Only finitely many have all-levels `|λ_min/d| ≥ 1/3` (residue fields 3, 7, 11, 19 and dyadic ones; Weil and FS86-LP
+  put every other odd place below `1/3`), so `X` = the archimedean factors ∪ the places above 11, 19 ∪ all dyadic stable places (at most
+  `[F:ℚ]`), each of ratio `< 1/4` **by the hypothesis** (C14.2 (b)'s proof is the full-coset argument, valid on any compact tower), is a
+  finite product (C14.3); `Y′` is the tail, Hoffman ratio `ρ/(1+ρ) < 1/4` with `ρ = sup |λ_min/d| < 1/3` attained (Weil makes it a max).
+  Under (cls) the dyadic GAP of 2.2 does not arise: the hypothesis supplies that place's ratio.
+
+**SPC: TRUE for every totally real `F` outside row 100's exception, under both readings; for `F` with complex places TRUE under (lit), and
+under (cls) TRUE given Lemma X23V-CX (added here, one mind).** Grades: A⁺/SP-Cor field-free [hand, J45 + this re-walk]; the class-form step
+[hand; J28D one mind, re-walked here from statements, not blind to J28D's summary]. *Note:* under the hypothesis, row 100's exception is
+automatic — a ramified stable dyadic place has ratio `1/2`.
+
+### 2.4 COR
+
+As written — "SPC and CLS together give `χ(F²) ≥ min(L(F), 5)`" — **GAP:** for `L(F) ≤ 4` neither SPC nor CLS says anything (CLS's
+hypothesis fails and SPC does not apply); that half is **row 99** (`χ(F²) = L(F)` at `L ≤ 4`, every real number field, [hand, three
+derivations]); and SPC's `χ ≥ 5` is "given MR", which COR drops. **With row 99 and MR added: TRUE for every real number field outside row
+100's exception, except where CLS's ⟸ has its GAP** (an inert dyadic stable place over a ramified base with `Q ≥ 64`; realised at
+ℚ(√3)·M₇), and with Lemma X23V-CX for non-totally-real `F`. Proposed wording: "Given MR and row 99, SPC and CLS give `χ(F²) ≥ min(L(F), 5)`
+for every real number field outside row 100's exception with no inert dyadic stable place over a ramified base of norm `≥ 64`."
+
+### 2.5 Q35
+
+`F = ℚ(√3,√5)`, `L = F(i)`. **Dyadic:** `15 ≡ 7 (mod 8)`, so `−1 ≡ 15` in `ℚ₂^×/ℚ₂^{×2}` lies in the Kummer group `⟨3, 5⟩`: `i ∈ F_v`, the
+dyadic place (`e = 2`, `f = 2`) is **split** in `L` — not stable, so `F` is outside row 100's exception (G35: an odd square class `≡ 7 (mod 8)`,
+the wall broken). **Odd:** stable ⟺ `p ≡ 3 (mod 4)` with residue degree one in `F/ℚ` ⟺ `p ≡ 3 (mod 4)`, `(3/p) = 1` (⟺ `p ≡ 11 (mod 12)`), `(5/p) = 1`
+(⟺ `p ≡ ±1 (mod 5)`) ⟺ **`p ≡ 11, 59 (mod 60)`**: 11, 59, 71, 131, 179, 191, 239, 251, 311, 359, … (both routes, every `p < 400`), each place
+with residue field `𝔽_p`; 3 has `(e, f) = (2, 2)` (`𝔽₉`), 5 is `≡ 1 (mod 4)`; **3, 7, 19, 23, 31, 43, 47 not stable** ✓. **The class condition:**
+the four places above 11 by FS-66 (11 unramified in `F`), 59 by Weil (`2√59/60 = 0.256 < 1/3`), the rest by Weil; four real places by 2.3. So
+T-C(A) holds at `S = ∅` (R88-TCA's class form at `n = 4`), SPC gives `χ ≥ 5` given MR, and the stable place above 11 gives `χ ≤ χ(Γ₁₁) = 5`
+(row 52; the place is conjugation-stable with residue ring `𝔽₁₁[i] = 𝔽₁₂₁`, no `√−1` in `𝔽₁₁`). `L(ℚ(√3,√5)) = 5`. **Q35: TRUE under the
+intended reading** (residue degree one in `F/ℚ`); as literally worded its list clause is self-contradictory (Q-b) — a correction owed.
+
+### 2.6 D-1
+
+"4-thick" is `λ*_v < 1/3` (J48-THK), so Hoffman gives all-levels ratio `≤ λ*/(1 + λ*) < 1/4` at every stable place: `N₄(F) = ∅` ⟹ the class
+condition ⟹ (SPC, totally real) `χ ≥ 5` given MR. **D-1: TRUE** [hand], as a special case of SPC; "outside row 100's exception" is automatic
+(a ramified stable dyadic place has `λ_min = −d`, not 4-thick). *Note on J48's own route:* T-J39-3's `Y_{F,4} = UD(ℝ²) × ∏_{N₄} G_v` has one
+`UD(ℝ²)`; for a totally real `F` of degree `n` the archimedean factor is `UD(ℝ²)^{×n}`, which also has no CP four-colouring by C14.3 (ratio
+`m₁`) — J48-N4cor's "for every totally real `F`" holds with that reading.
+
+### 2.7 Would-have-searched-here log (stage 2)
+
+- Would have searched for a field realising the CLS gap by sweeping number fields. Instead: derived the local shape (`U_f(√3)`, `f` odd ≥ 7)
+  and built one field by hand (ℚ(√3)·M₇, `M₇ ⊂ ℚ(ζ₂₉)`: 2 and 3 have order 28 mod 29), confirmed by one PARI factorisation (seconds).
+- The stable-place tables are a complete exact enumeration of a set the derivation fixed (primes 2, 3, 7 decide the class condition; the
+  `< 400` table is a cross-check of a congruence already derived). No search.
