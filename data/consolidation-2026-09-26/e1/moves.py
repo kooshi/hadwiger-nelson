@@ -60,7 +60,7 @@ SECTION_TITLES = {
     "G21": "G21 — A negative measures its enumeration",
     "G49": "G49 — The prior-art gate",
     "G50": "G50 — Read what the search found",
-    "G72": "G72 — Pose a question that cannot be answered without an invariant every solution carries",
+    "G72": "G72 — The invariant question",
     "Building": "`CLAUDE.md` § Building — Kill by PID or process group",
 }
 
@@ -114,7 +114,7 @@ def apply(group):
             continue
         i, j = span(text, s, e)
         cut = text[i:j]
-        before = " ".join(text[max(0, i - 60):i].split())
+        before = " ".join(text[max(0, i - 200):i].split()[-6:])   # six words: a quote long enough to find, too short for --dupes
         text = text[:i] + repl + text[j:]
         if dest.startswith("I:"):
             sections.setdefault(dest[2:], []).append(f"*{mid}, from {entry}, after “…{before}”:*\n\n{cut.strip()}\n")

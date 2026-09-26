@@ -88,3 +88,13 @@ Would-have-searched log: none (no search; every figure is exact arithmetic on co
 
 Gates at this commit: `--self-test --base 230ea964` PASS (15 plants); `--base 230ea964` PASS (corpus line printed; 0 external homes);
 `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.
+
+## Stage 3 — the moves
+
+### 3a — SAVED: § Grokkings' instance lists (M1–M3, M5–M8, glue g1–g2)
+
+`python3 data/consolidation-2026-09-26/e1/moves.py apply G`. `CLAUDE.md` 299,491 → 291,174; `plans/GROKKING-INSTANCES.md` created,
+10,040 bytes (§G21, §G49, §G50, §G72; each passage verbatim under a six-word quote of the text before it). **Slip, caught by `--dupes`:** my
+first application quoted 60 characters before each cut and titled §G72 with G72's full head, so two 10-word runs were told twice (`--dupes`
+10 → 12); reverted, the label cut to six words and the title shortened, re-applied: 10. Gates: `--base 230ea964` PASS (0 lost, 0
+dangling); `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.
