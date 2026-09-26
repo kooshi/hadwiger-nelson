@@ -5,8 +5,10 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
-- **Nothing is running** except, at the time of writing, **R3** (applying the re-rank; see §3). Check `data/rerank-2026-09-26/reports/R3.md`;
-  if it is there, R3 is done — verify its gates (§5) and tell Kooshi.
+- **Nothing is running** except, at the time of writing, **R4** (brief `data/rerank-2026-09-26/briefs/R4-claude-md-mirror.md`): R3 applied the
+  re-rank to `plans/FRONTIER-STUBS.md`, minted FS-103/104/105 and applied the three *Do* lines, but ran out of budget before mirroring the
+  ranking in `CLAUDE.md`; R4 does that. Check `data/rerank-2026-09-26/reports/R4.md`; if it is there, verify its gates (§5) and tell Kooshi.
+  New top: 1 FS-103, 2 FS-104, 3 FS-105, 4 FS-62, 5 FS-67, 6 FS-59, 7 FS-102 (`plans/FRONTIER-STUBS.md`).
 - **Today's results** (all [hand], every link two derivations or more unless the row says otherwise; nothing new in the kernel beyond row 127):
   `LEDGER.md` rows **120–127**. In one line each:
   - 120: MR — measure rigidity for the unit-vector group — for every real number field (EF_F⁺ by Einsiedler–Fish's method transferred; PE-2 by
