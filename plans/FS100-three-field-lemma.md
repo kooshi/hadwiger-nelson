@@ -703,3 +703,157 @@ drafted lines appended to `LEDGER.md`'s text in memory, restricted to `FS100-` i
   new: EL2003, Lindenstrauss–Wang 2012 (review read), Bekka–Francini 2022; the Rudolph/Johnson/Host row "Listings only" → "zbMATH reviews
   (J51)"); the stub re-aims as files (FS-100: stage 4 → KS-sat_E at ℚ(√47), K0 done, §2.3 cell and §5 item 5 corrections, PE-lim as stage 5, P1
   leads post-ban; FS-64: Kronecker selection with T-C(A) in the `E`-form). Inventory rows ticked "→ stage 5". The file move is done (stage 2).
+
+### Stage 4 — SAVED (J53b, the successor on the same brief: rulings; the re-reads; predictions; the verdict; the tallies; the ban measurement)
+
+*J53b (de Bruijn, Opus 5.5, 2026-09-26), resuming J53's brief at its first stage not SAVED (stages 1–3: `7fc933c7`, `0c61c274`, `0820043b`;
+report `5bcc8105`). Nothing saved above is redone.*
+
+**The owner's rulings on J53's held items (verbatim, the owner's message to J53b, 2026-09-26), applied here and in stage 5:**
+1. "Inventory row 66: KS-1 is recorded as refuted as stated, with KS-1_E (selection onto E = T + A + Fin_S) as the corrected, open statement.
+   FS-100's stage 4 is re-aimed, not closed as a no-go."
+2. "The no-swap trigger fired in its letter, not its sense: stage 6 (EI-2 over ℚ(√11)) does not take the derivation slot; the re-aimed stage 4
+   (KS-sat_E at ℚ(√47), J51D-R's density step) leads FS-100's next slot, with stage 6 kept as the fallback. Write that into the stub."
+3. "J53's G50 finding (EL2021 and Z. Wang 2012 were held since J23p under [EinsiedlerLindenstrauss2022] and [Wang2012], while J50 and J51
+   called them not held or unread) is an honesty-tally item and a G50 instance to draft for the front page, with its Do: grep BIBLIOGRAPHY.md by
+   arXiv id and Zbl number before fetching."
+
+*The trigger, for the record.* §S's head: "it changes if J51D finds KS-sat false while Kronecker selection is true — then the input is
+measure-theoretic after all and stage 6 takes the next slot." In letter it fired: KS-sat is false while KS-1's conclusion holds on ℚ(√11)'s
+instance (FS100-KS3's non-necessity clause). In sense it did not: KS-1 is false too (FS100-X1), and KS-sat's failure is closed-set and local — the
+orbit closure of `(ψ_w, ψ_w̄)` is the cross `(T × 0) ∪ (0 × T)`, a union of two closed invariant subgroups, which Lindenstrauss–Wang's topological
+rigidity allows (stage 2) — while the corrected form's missing step is a density statement (FS100-R), not the zero-entropy measure problem.
+
+#### 4.1 The §G re-read (which extractions paid; which bore and were missed) and forward propagation
+
+| entry (the plan's §G line) | outcome |
+|---|---|
+| G46 + G30: `R̂` a solenoid, Kronecker selection an orbit-closure (self-joining) question (§G.4 item 1) | **paid** — the orbit closure `cl Θ(U)` is the invariant that decided KS-1 and KS-3 (the cross: FS100-X1, FS100-KS3) and reduced the corrected form to one density step (FS100-R) |
+| G55: `R = O′` makes `R̂` S-adic with S infinite | **paid** — FS100-T2 in two lines; FS100-CP (b) by strong approximation |
+| G35, G43, G44, G66: the class check's inputs | **paid** — FS100-T1 (the class = `L ≥ 5`), re-checked by J51V and J53 |
+| G74 + rows 96, 98: rank one of Kronecker selection is band rigidity | **paid** — FS100-N1 is exactly that sentence, proved (J51V) |
+| G51: one derivation + one blind verifier from a fixed list | **paid** — the same counterexample found twice, both controls found uninformative by both, no divergence of truth (§R-close 1.1) |
+| G48, G64: targets as values of `L`; S and W apart | **paid** in wording; no ℚ(√167) claim was made |
+| G21 (route dependence; controls of the right shape) + §G.3's "a positive control proves only its generator's shapes" and "count generator parameters" | **extracted and misapplied** — the plan added the rank-two control KS-5, but its `W` still reads one coordinate, so both controls lie inside the image where KS-1 cannot fail (FS100-C45; inventory row 62). The rule was named and the control was built inside the same generator image: a G21 instance (drafted, stage 5) |
+| G77: CLG is existence-only; C9 the control | **used for the control only.** Its *Do* — "name the extra input … before saying every character colouring is local" — bore on KS-1 itself: a selection uniform over every real field is a classification claim for Kronecker (vector) colourings, which G77 and FS-92 hold open at `k ≥ 4`. The uniform quantifier should have been flagged at §S |
+| G56 (the ramified dyadic case) and G38 (the two-colour criterion), both marked silent | **missed.** FS100-X1 lives exactly where these entries put `χ(F²) = 2`: KS-1 quantified over every real field, the bipartite ones included, where a parity character times a split-place cross four-colours for free. Read against KS-1's quantifier, G56's *Do* ("L is 2, 3, 4, 5 or ≥ 7 before any solver") prices FALSE before any derivation — which J51D's domain pass did (`aa12db5e`). **Instance for WORKFLOW 3.1:** a lemma quantified over a class of fields is read against the grokking that decides each sub-class's value, the smallest values first |
+| G50: "EL 'recalled, not read' is the debt" | **missed in its own letter** — EL2021 and `[Wang2012]` were held and part-read (ruling 3; stage 2). A G50 instance, drafted in stage 5 with the ruling's *Do* |
+| G27, G54, G60, G71, G73, G76, G79 | not exercised: stage 5 (MR) and P1 did not run; G76's closed-set frame held (KS-3's failure is closed-set) |
+
+**Forward propagation.** No new grokking is minted (the decline, in four parts, is §4.3's). The G76 sentence drafted in stage 5 (the split-place
+cross, and saturation modulo unions of subgroup translates) bears on: **FS-100** (the stub's stage 4, written as a file in stage 5); **FS-64** (the
+`E`-form of its windows, written as a file in stage 5); **FS-92** (FS100-X1's clause (c), no naive vector form of band rigidity, is a
+classification statement for character vectors — a provisional-bearings line, drafted for `plans/FRONTIER-STUBS.md`); **FS-84** (FS100-K0: its
+five-clause route is shared with ℚ(√143), ℚ(√311), ℚ(√335) — drafted likewise). FS-84's and FS-92's stub files are outside this brief.
+
+#### 4.2 The §IQ re-read, G72's count and G79's record
+
+- **§IQ item 3 named the invariant, and it decided the round.** "Layer 1: the orbit closure of `Θ` under the diagonal `U`-action on `R̂ⁿ`" — computed
+  at one split place, it is the cross, and the cross refutes KS-1 and KS-3 and shows why ℚ(√47) is out of the counterexample's reach (a co-normal
+  product needs a bipartite factor at four colours, FS100-X2B). The reduction of the corrected form (FS100-R) is the same invariant's density
+  question. FS100-T1 came from extending a known tool (Legendre symbols and Lemma P, at the ban's edge). Layer 2's invariant (a property of every
+  four-colouring beyond its pair correlations that forces positive entropy) was **not found**; stage 5 did not run.
+- **G72's count, twelfth (FS-100):** through the structural question — its named invariant decided both uniform claims negatively and reduced the
+  corrected one to a named step; T1 by extending a known tool; layer 2's invariant not found: **twelve of twelve**.
+- **G79's record:** the result came from an **example** — an actual proper Kronecker four-colouring of ℚ² (FS100-X1) — and its invariant (the
+  cross); the counterexample invariant MR/SP was not advanced. It moved the question: the target relocated from `T + A` to `E`, and at ℚ(√47) the
+  selection, its `E`-form and the pure-point conclusion became one statement (FS100-EQ).
+
+#### 4.3 The §PA sweep — what the gate taught about the object
+
+| recognition | where it goes | decision |
+|---|---|---|
+| FS100-CP (a): at a split place the norm-one torus is `y ↦ (y, y⁻¹)` — the unit circle is a hyperbola — so the two conjugate primes' characters send `U` into a cross | **already in-house and in print**: FS86-Cx-C1 ("the field plane embeds injectively in the hyperbola graph at every split place", `LEDGER.md` § B) and `[BardestaniMallahiKarai2017]` §3.2 (the split-place hyperbola, in § The prior-art position's "Not ours") — **added to FS100-CP's *Prior art:* field in this stage**; the new content is the vector reading: no non-zero combination lands in `T + A` (FS100-CP (b)) | a G76 sentence (stage 5), not a grokking |
+| J51V's co-normal reading: at a split place `Cay(R, U)` maps into `Cay(T, I) ∗ Cay(T, I)`, `χ(G)²`-colourable | why the counterexample needs `χ(F²) = 2` at four colours, and why ℚ(√47) is out of its reach (FS100-X2B) | a reading (J51V's, with its killing test), carried in FS100-X2B and the FS-64 stub; not a grokking (one mind) |
+| Lindenstrauss–Wang 2012's topological rigidity: closed invariant sets are unions of translates of closed subgroups; KS-3's cross is such a union | the corrected saturation must be stated modulo unions of subgroup translates, or it asks for more than rigidity gives | a design note in the FS-100 stub's stage 4 (stage 5); [reading, J53] |
+| FS100-T1: among real quadratic fields "every stable place below `1/4` at all levels" is the conjecture's `L ≥ 5` | item 10's line (stage 5) | a Frontier line |
+
+**The decline of a new grokking (four parts).** *Choice:* no G80; the split-place cross enters G76 as one sentence. *Alternative:* mint G80, "the
+split-place cross", with a *Do* (at a split place, test every multi-character statement against `(ψ_w, ψ_w̄)`) and a killing test. *Why:* the fact is
+textbook and already twice in-house (FS86-Cx-C1, BMK §3.2); its one new consequence (no vector band rigidity; KS-1 false) sits where G76 already
+holds the closed-set frame, and a new entry in the *Do*/killing form costs about 900 bytes of a 3,000-byte allowance. *Confidence:* medium — if a
+second milestone trips on the cross, it earns its own entry.
+
+#### 4.4 Predictions, scored once each
+
+| id (source) | registered | outcome | score |
+|---|---|---|---|
+| X-KS (§P) | KS-1 TRUE 0.50 / FALSE 0.15 / GAP 0.35 | FALSE (FS100-X1) | **lost** (FALSE at 0.15) |
+| P-sat (§P) | KS-2 TRUE 0.85 | TRUE (FS100-KS2) | met |
+| P-sat1 (§P) | KS-3 at `n = 1` TRUE 0.70 | TRUE inside `E` (FS100-T4) and at ℚ (FS100-T5); GAP for general `F` off `E` | met in part; the rest open |
+| P-K0 (§P) | K0 TRUE 0.75 | TRUE with a scope note (FS100-K0) | met |
+| P-EL (§P) | EL2021 Thm 1.3's hypothesis holds for generic `Γ` 0.80 | not tested (stage 5 did not run) | unscored; carried to the stub |
+| P-ent (§P) | positive entropy forced here 0.05 | not forced; open | met |
+| X-MR (§P) | MR true 0.7; decided here 0.02 | not decided | the 0.02 met; the 0.7 a belief, unscored |
+| X-R1 (§P, carried) | FS-97's R1 closes by a limit argument 0.3 | not tested | carried to the stub |
+| J50's hunch `mr-is-open-measure-rigidity` | MR at least as hard as a known open problem unless its hypotheses supply entropy or rank | its falsifier ("MR reduced to a published theorem whose hypotheses are met here") not met: EL2021 Thm 1.2's total irreducibility fails (FS100-T2) | holds |
+| J50's card `is-mr-attackable`, hunch "first yes, second no" | — | "first yes, second no", the first yes conditional on PE-lim and a one-mind reading of Thm 1.3's hypothesis | met, conditionally |
+| J51D's C0 (`plans/FS100-J51D-derivation.md` §1.4) | KS-1 F 0.80; KS-2 T 0.95; KS-3 F 0.90; KS-3 rank one T 0.55 / G 0.40; KS-4 T 0.97; KS-5 T 0.95; KS-C T 0.85; KS-1_E G 0.55; K0 T 0.70 | as filed | all modal outcomes met; K0 met by J51V's proof (J51D did not reach K0) |
+| J51V's C0, first-read column (`plans/FS100-J51V-verification.md` §1.3) | KS-1 T 0.55; KS-2 T 0.85; KS-3 T/F 0.35/0.35; KS-4 T 0.92; KS-5 T 0.88; KS-C T 0.75; K0 T 0.80 | as filed | KS-1 **lost**; KS-3 FALSE (a tie); the other five met (J51V §3.3) |
+| J51V's C0, at-writing column | KS-1 F 0.75; KS-3 F 0.85 (informed by the split-place idea) | FALSE, FALSE | met |
+
+**What the table says.** Every uninformed prior on KS-1 was modal TRUE (the planner 0.50, J51V's first read 0.55); every prior written after a look
+at the split place was modal FALSE (J51D's domain pass 0.80, J51V's at-writing 0.75). The modeling pass, run before any derivation, moved the
+probability more than any reading did — the fresh `debruijn-domain-modeling` pass paid here in the most direct way available.
+
+#### 4.5 The verdict (four parts)
+
+- **The choice.** FS-100's in-ban round closes **not landed on its target** (MR, and through it five colours at ℚ(√47)), and **paid in theorems**:
+  stage 4's lemma is **refuted as stated** by two minds with a counterexample over ℚ (FS100-X1), its reduction is true in an arithmetic-free form
+  (FS100-KS2), its corrected form KS-1_E is **open at one named density step** (FS100-R), and at ℚ(√47) the selection, its `E`-form and the
+  pure-point conclusion are one statement (FS100-EQ); T-C(A)'s class among real quadratic fields is the `L ≥ 5` family (FS100-T1) and SP-Cor holds
+  over it (FS100-K0). **Stage 4 is re-aimed, not closed** (ruling 1), and the re-aimed stage 4 leads FS-100's next slot, stage 6 the fallback
+  (ruling 2).
+- **The alternative weighed.** Close stage 4 as a no-go ("Kronecker selection is false") and hand the slot to stage 6 (EI-2 over ℚ(√11)), since
+  the no-swap trigger fired in its letter.
+- **Why the choice won.** The refutation costs the uniform lemma, not the target: the counterexample needs a bipartite plane at four colours
+  (FS100-X2B), unavailable at ℚ(√47), and at ℚ(√47) the corrected statement is exactly the question (FS100-EQ, two derivations). The failure is
+  closed-set and local at one split place, and the corrected form's missing step is a density statement — the trigger's sense (a
+  measure-theoretic input) did not fire.
+- **Confidence: medium-high** on the re-aim; **medium** on the order — it changes if the next slot's reading of Lindenstrauss–Wang 2012 and
+  `[Wang2012]` shows KS-sat_E's density step equivalent to a zero-entropy measure statement; then stage 6 leads.
+
+#### 4.6 The honesty tally
+
+| # | whose | what | source | disposition |
+|---|---|---|---|---|
+| 1 | J51 (planner) | § A of `LEDGER.md` read by row heads (~240 characters), the consumed rows deeper — declared | inventory row 32 | accepted for this milestone |
+| 2 | J51 (planner) | the controls KS-4, KS-5 cannot fail — a G21 control of the wrong shape, named by both minds | row 62; FS100-C45 | a G21 instance, drafted (stage 5) |
+| 3 | J51 (planner, as J51D's brief-writer) | the brief's "a FALSE … over ℚ(√11) is 'the first control'" dropped the source's "in the gap" qualifier | row 63; J51D §1.2 B5 | caught by J51D's quotation check (standing rule 5 paid) |
+| 4 | J51 | its report promised 30 inventory lines and held 29 | row 68 | recorded |
+| 5 | J51V | fence breach by a broad `grep … plans/*.md` (K0's class membership only) | row 46 | accepted (row 49); K0 graded not blind |
+| 6 | J51V | two plants that could not fire (`c9-shift`, `forget-seven`), replaced by firing plants | row 47 | a G21 instance (the list's plants-that-could-not-fire line) |
+| 7 | owner | J51V's fence wording literally included J51V's own commits and report | row 34 | clarified at launch |
+| 8 | owner | commit `3648d3a5`'s non-neutral subject ("… its counterexample …"), visible to J51D at its stage 1 | row 52 | FS100-X1 graded "J51D's write-up possibly informed" (ruling 2 of stage 1) |
+| 9 | J47, J50, J51 (a chain) | EL2021 and `[Wang2012]` were in `BIBLIOGRAPHY.md` from `67fdcda2` (2026-09-25 19:30, J24 applying J23p's gate); J47's stub (`1332c108`, 21:51 the same evening) wrote "none held", J50's card carried that sentence as evidence, and J51 re-fetched EL2021 into the repository and read `[Wang2012]` by its zbMATH summary | stage 2; owner ruling 3 | a G50 instance, drafted (stage 5) with the ruling's *Do*. *Precision:* J53's stage 2 wrote "J50 wrote 'none held'" — J50 quoted J47's stub |
+| 10 | J53 | stage 1's walk left rows 5–9 and 64 at "→ stage 2" and row 33 at "→ stage 5" though stage 2 did them | inventory | ticked in this stage |
+| 11 | J53 | handed back at ≈370k against a brief of "about 300k … hand back by 380k" — inside the hand-back line | report `5bcc8105` | recorded |
+
+**Retractions:** none in either record — no verdict was committed and later withdrawn. J51V's timing note (its C0's two columns) is the one
+self-correction, made before any verdict.
+
+#### 4.7 The ban measurement (every would-have-searched line)
+
+| job | would have searched | did instead |
+|---|---|---|
+| J51 (stage 4) | a numerical look at `cl θ(U)` for a sample character of ℚ(√11) off `E` | registered P-sat1 for derivation; J51D proved it inside `E` and at ℚ |
+| J51D (stage 1) | sample characters of ℚ(√11) and plot `cl Θ(U)` | derived the valuation dichotomy (FS100-CP) |
+| J51D (stage 2) | a proper `W` on `T²` or `T³` with small fibres | FS100-CP plus a hand-built `W` (FS100-X1) |
+| J51V (stage 2) | a four-colour counterexample to KS-1 over ℚ(√47) (random character vectors, a `W`-finder on a discretised torus) | derived the split-place cross, and FS100-EQ: at ℚ(√47) such a counterexample is a four-colouring of the plane, so nothing short of the conjecture's falsifier exists to search for |
+| J51V (stage 2) | float samples of `cl Θ(U)` to test KS-sat | the identity from `u_w u_w̄ = 1`, checked exactly on a fixed enumeration |
+
+**At the ban's edge (complete enumerations of sets a derivation fixed, seconds each):** J51's Legendre symbols and stable-place lists (stage 1);
+J51D's 25,492 unit vectors of height `≤ 20,000` (`tools/j51d_or_check.py`); J51V's 3,920 unit vectors (`tools/j51v_cross.py`) and its 49 linear
+forms mod 7 (diagnosing an unreachable plant); J53's sympy Legendre re-check (stage 1). J51D's stage 3 and J53's stages 2–3 logged none.
+**Measured:** five search moves were displaced, and every displacing derivation gave more than the search could have: a float sample of
+`cl Θ(U)` cannot show that the closure *is* the cross, and a `W`-finder at ℚ(√47) would have been a finder for the conjecture's falsifier.
+
+#### 4.8 Inventory ticks (this stage)
+
+Rows 4, 13–17, 20–29, 45–47, 52, 61–63 ticked "done (J53b stage 4)" with their address in this stage; rows 5–9 and 64 ticked "done (J53 stage 2)";
+row 33 ticked "done (J53 stage 2, `0c61c274`)". One correction made to a saved file: FS100-CP's *Prior art:* field in `plans/FS100-derivation.md`
+gains its in-house and in-print addresses (4.3); nothing else there changes.
+
+**Theorems this stage proved:** none (re-reads and tallies).
+
+**Would have searched here (stage 4):** none.

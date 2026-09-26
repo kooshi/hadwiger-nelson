@@ -38,8 +38,9 @@ statement that is false in the form it was built for.
 J51V §2.4 step 3 at ℚ by the subring `R₀` and orders `5^k`. *Tools:* `tools/j51d_or_check.py` D1 (25,492 rational unit vectors of height
 `≤ 20,000`; 4,256 non-zero in each coordinate, none in both; plant P1, the place above 13, fires with 48 joint non-zeros); `tools/j51v_cross.py`
 C1 (3,920 unit vectors, 1,272 with a pole above 5; plant `same-prime` fires, 865 failures). *Proof verdict:* closes. *Rests on it:* FS100-X1,
-FS100-KS3, FS100-X2B. *Prior art:* (a) **textbook** — the norm-one torus at a split place is `F_v^×` embedded as `y ↦ (y, y⁻¹)`; (b) strong
-approximation for `L`, standard. Filed for its use, not as a new fact. *Kernel:* declined — no consumer in the kernel's surface.
+FS100-KS3, FS100-X2B. *Prior art:* (a) **textbook** — the norm-one torus at a split place is `F_v^×` embedded as `y ↦ (y, y⁻¹)`; in this project FS86-Cx-C1
+(the plane in the hyperbola graph at every split place) and, in print, `[BardestaniMallahiKarai2017]` §3.2 (the split-place hyperbola) — added
+by J53b's §PA sweep; (b) strong approximation for `L`, standard. Filed for its use, not as a new fact. *Kernel:* declined — no consumer in the kernel's surface.
 
 **FS100-X1 — KS-1 is false: over `F = ℚ` (`R = ℤ[i][1/q : q ≡ 1 (4)]`), with `τ` the dyadic parity character (`τ(U) = {1/2}`) and `w, w̄` the places above 5, `Θ = (τ + ψ_w, τ + ψ_w̄)` and `W(t₁, t₂) = 2⌊2t₁⌋ + ⌊2t₂⌋` satisfy KS-1's hypothesis (every `Θ(u)` has a coordinate equal to `1/2`, so `W(t) ≠ W(t + s)` for every `t` and every `s ∈ cl Θ(U)`) while `K̂′ = 0`, so `K′ = {0}` and no `W′` exists. The same holds over every real number field with a stable dyadic place ramified in `L/F`, i.e. with `χ(F²) = 2`; and `0 ∉ cl Θ(U)` does not force any non-zero `m·Θ` into `T + A` (no naive vector form of band rigidity). (= J51V-X1, X2 (a), X2 (c); J51D-T3.) [hand + tools exact; two derivations — J51V blind; J51D's construction committed before any disclosure, its write-up possibly informed that the verifier had refuted some claim; the owner's hand check a third mind, not blind]**
 *Proof:* J51V §2.4 (steps 1–4); J51D §2.4 (via FS100-CP). The two `W` are the same function. *What it is:* `x ↦ W(Θ(x) + t)` is the parity
