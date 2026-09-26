@@ -43,3 +43,44 @@ primes; 167 ends in the real place.
 **Falsifier of E1:** a record in the day's work that excludes measurable (or all) five-colourings supported on the real place's
 characters over ℚ(√167) — e.g. an M3 statement that uses something beyond density, such as the arithmetic of ℚ(√167) itself, to refuse
 the archimedean class.
+
+## Stage 2 — SAVED: quotation check, inventory, one exact check
+
+### 2.1 Quotation check (standing rule 5)
+
+| quoted in the brief or launch message | source | verdict |
+|---|---|---|
+| "The conjecture predicts at least six against a proven four; this is its widest gap" | `CLAUDE.md` Paths forward, FS-59 row: "the conjecture's widest gap — predicted ≥ 6 against a proven 4" | agrees |
+| "row 75 (five is refused at 23 at every level of the tower)" | `LEDGER.md` row 75 (`U = 97.984637` (23) against 529/5); `CLAUDE.md` item 17 | agrees; note it covers 7, 11, 19, 23 and **not 43** |
+| "row 96 (no character five-colouring)" | row 96: "ℚ(√167)'s has no character five-colouring (`Θ₅ = ∅`)" | agrees; row 101 says more ("character colourings of ℚ(√167)'s … planes need exactly 8", given CLG) |
+| "§3.2–§3.4 (mixing selection; at most nine places)" | `plans/M3-S1D-windows-five.md` §3.2–§3.4; J21-RED "`S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}`" | agrees |
+| owner 2: "the real place's independence ratio is at least 0.2293 > 1/5" | J36 F7: "`m₁(ℝ²) ≥ 0.2293` (Croft's construction), which exceeds 1/5, 1/6 and 1/7" | agrees |
+| owner 2: J38's MR(F) and "given isolation of the pullbacks" | J38 §3.5 T-J38-2 (iii): "MR(F) ∧ T-B1 ⟹ `F(R) ≠ 0`" | agrees |
+| J36 F7: "FS-66's certificate at 23 (`97/529 = 0.1834 < 1/5`)" | row 75: the all-levels certificate reads `U = 97.984637`, ratio `0.18523` (J21-D1fac); 97 is the **level-one** integer bound `α(Γ₂₃) ≤ 97` | **a small slip in J36 F7**: the level-one bound quoted as the all-levels ratio. Conclusion (`< 1/5`) unaffected. Correction owed |
+
+### 2.2 Evidence inventory (read against Stage 1)
+
+| item | expected (Stage 1) | surprised? |
+|---|---|---|
+| J38 poster §3, §4.3, §4.7 | MR at four colours; a prediction about 167 | no — §4.7 predicts "its skeleton breaks at step (2)", my E1 |
+| J37 poster §3.1–§3.3 | four-colour poster, Kronecker selection | **yes, one line**: J2's "fractional local–global principle `ι(F²) = max(m₁(ℝ²), max_stable r_v)`" — the real place already appears as a *factor* in a four-colour identity; at five it is the only factor that matters |
+| J36 F2–F5, F7, §4.1–§4.4 | F7 = my E1 | no on F7; **yes on F4/F5**: R-U and SP are colouring-free, so they survive at five verbatim — I had expected the shared identities to break, and the *colouring-free* half does not |
+| J45 (`plans/FS84-SI-D-derivation.md`) theorem list, §4.2 | SI at four colours | SI-1/SI-3's constants are the tetrahedron's `−1/3, −4/3`; the argument uses only a regular simplex, so at `k` colours they are `−1/(k−1)`, `−k/(k−1)` [checked by hand, §3.3 (a)] |
+| M3-S1D theorem list, §3.2–§3.6 | a window no-go at five | **yes**: J21-D0 already states my E1 ("a 'no' over every `S` containing a real place implies `χ_µ(ℝ²) ≥ 6`"); **J21-MX is k-generic and removes whole infinite products of places**, which is the tool that makes the five-colour reduction work (§3.3) |
+| M3 §R3.4–§R3.5, §IQ.2, §R4.L | "landed in part" | IQ.2 names the measurable Hedetniemi question and `χ_µ(ℝ²) ≥ 6` as its `S = {∞₁}` slice — but only for **window** colourings; it does not claim windows are all colourings (§3.3 shows that, modulo MR, they are) |
+| FS-59 stub §00, §0; FS-64 stub banners; FS-96 stub | the five-colour aim "untouched" | FS-96 carries GAP-1, GAP-2 and 43; its list of non-thick places includes the **split** places 2, 3, 5, 7, 29, 61, which the measure route removes (§3.3 (c)) |
+| `LEDGER.md` rows 75, 96, 98–115 (heads) | rows 75, 96 | rows 114–115 (FS-67: products with a gap-free or mixing factor; the `E_k(G)` criterion) bear on the product lemma the 167 poster needs (§3.3 (d)) |
+| `~/source/poros/.claude/skills/*` | — | **not read in full** (budget); the identity file `~/source/poros/CLAUDE.md` was read in full |
+
+### 2.3 One exact check (in ban: seconds, a derived claim's input)
+
+`tools/crunch_j39_thick.py` → `data/crunch-2026-09-25/j39/thick.out`: the mixing constant `λ*` of the stable local planes at level one is
+`0.331695` (23), `0.271869` (43), `0.248626` (59), reproducing J21-TH; so **23 is 4-thick but not 5-thick** (`1/4 < λ* < 1/3`, margin
+`1.6·10⁻³` below `1/3`); level two at 23's new characters reach `0.083332 ≤ 2/(p+1)` (Lemma P, sharp). Plants: `ξ = 0` fires; the first
+"wrong circle" plant (`x² + y² = 2`) **could not fire** — 2 is a square mod 23, so it is a scaled copy with the same spectrum — and was
+replaced by the split hyperbola `x² − y² = 1`, which fires. (Used in §3.3 (e), T-J39-4.)
+
+### 2.4 Would-have-searched-here log (Stages 1–2)
+
+- Would have asked a solver whether `UD(ℤ/1849, 2)` (43 at level two) is five-colourable, to close the hole in row (i). Instead: recorded the
+  hole (§3.1 P1) and pointed to FS-69's derivation route.

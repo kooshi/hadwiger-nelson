@@ -1,0 +1,5 @@
+p=23 level 1: |C|=24, lambda* = 0.331695
+p=43 level 1: |C|=44, lambda* = 0.271869
+p=59 level 1: |C|=60, lambda* = 0.248626
+p=23 level 2 new characters: |C|=552, max = 0.083332 (2/(p+1) = 0.083333)
+ALL ASSERTIONS PASS
