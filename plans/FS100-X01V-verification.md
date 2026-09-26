@@ -6,7 +6,22 @@ opened except `data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf`'
 
 ## Theorems this phase proved
 
-*(filled at each stage; grades as in `CLAUDE.md` § Notation)*
+*(grades as in `CLAUDE.md` § Notation; every proof is in this record, § Stage 2)*
+
+- **X01V-T1** [hand] For every real number field `F` and `u ∈ U`: `h_m(u) = Σ_{w ∈ supp(u) ∪ ∞} log max(1, |u|_w)` over the places of `L`;
+  for totally real `F` this is `log H(u)`. — §2.2 (a)
+- **X01V-T2** [tools exact + hand] Over `F = ℚ(∛2)`, `u = (1 + ∛2·i)/(1 − ∛2·i) ∈ U` has `h_m(u) = log 5 + 2.465761… > log 5 = log H(u)`; so
+  EF-G (a) is false for real fields with a complex place. — §2.2 (a), `tools/x01v_entropy_check.py`, `data/fs100/x01v/entropy-check.out`
+- **X01V-T3** [hand] For totally real `F`, `liminf_N log #U_N / log N ≥ 1/h_L > 0`; for `F` with a complex place, `#U_N = ∞` for every `N ≥ 1`.
+  — §2.2 (b)
+- **X01V-T4** [hand] Over every real `F`, normalised arc length on a circle of archimedean characters at one place of `L` over a real place of
+  `F` is `U`-invariant, `U`-ergodic (over ℚ, via `(3+4i)/5`), atomless, of zero entropy for every `u`, and carried by `A`. — §2.1
+- **X01V-T5** [hand] Every `U`-ergodic probability `μ` with `μ(E) = 1` lives on finitely many translates of the isometric part of `A` and has
+  `h_μ(u) = 0` for every `u ∈ U`; every `U`-invariant coset `t + A` lies in `T + A`. — §2.3 (entropy transfer; no counterexample)
+- **X01V-T6** [hand] PE-2 ∧ EF_F⁰ ⟹ MR(F), and PE-2 ∧ EF_F⁰ ⟹ EF_F, where EF_F⁰ is EF_F with "for some non-torsion `u`" replaced by "for every
+  `u`". — §2.3, §2.4
+- **X01V-T7** [hand; a statement about the route] In EF Lemma 3.2's transfer, the multipliers that keep Lemma 3.1's thin neighbourhood thin
+  are `U_{supp(u)}`, with `≍ (log M)^k` elements of height `≤ M`; the pigeonhole needs `M^{α}`. — §2.3
 
 ## Stage 1 — SAVED (quotation check, the claim list, the paper's theorem, C0)
 
@@ -224,3 +239,50 @@ concludes `χ(ℚ(√47)²) ≥ 5`, given T-C(A) at `S = ∅`. **`= 5` needs one
   `F`) and wrote down one element by hand, then checked it exactly (one field, one element, seconds).
 - EF_F: would have searched for a zero-entropy non-`E` measure (e.g. random invariant measures on finite quotients); instead derived the
   entropy-transfer content and the coset argument, and left the question as the named gap.
+
+## Stage 3 — SAVED (the write-up, before anything fenced was opened)
+
+### 3.1 Verdicts
+
+| claim | verdict | grade | where |
+|---|---|---|---|
+| **EF-X** (control) | **TRUE** | [hand] | §2.1; X01V-T4 |
+| **EF-G (a)** | **FALSE as stated** — counterexample `F = ℚ(∛2)`, `u = (1+∛2 i)/(1−∛2 i)`; **TRUE for totally real `F`** | [tools exact + hand] | §2.2; X01V-T1, T2 |
+| **EF-G (b)** | **TRUE for totally real `F`** (`≥ 1/h_L`); for `F` with a complex place `#U_N = ∞` (true only in the extended reals) | [hand] | §2.2; X01V-T3 |
+| **EF_F** | **GAP** at EF Lemma 3.2, steps 2–3 (the images `u′B` stay small / the pigeonhole): Lemma 3.1's analogue gives a neighbourhood thin only at `supp(u)`, and the multipliers that keep it thin are `U_{supp(u)}`, `(log M)^k` of them — lacunary. Named missing lemma **UZ** (§2.3). Also: as posed EF_F contains a positive-entropy entropy-transfer statement (X01V-T5) that EF's route cannot supply; the route needs only **EF_F⁰** | [hand] | §2.3; X01V-T5, T7 |
+| **EF-MR** | **TRUE** as a conditional (part 1, with EF_F⁰ in place of EF_F); part 2's "`= 5`" needs the unnamed input `χ(ℚ(√47)²) ≤ 5` (Theorem A at 11), SP-Cor giving `≥ 5` | [hand] | §2.4; X01V-T6 |
+
+**What route (A) buys, in one sentence.** Einsiedler–Fish's theorem does not transfer: its zero-entropy lemma works on 𝕋 because every
+multiplier expands the one direction the zero-entropy map shrinks, while in `R̂` each `u ∈ U` expands only its own split places and none
+expands the archimedean ones (totally real `F`); so polynomial growth of `U` (true) is the wrong hypothesis, and MR's zero-entropy half
+(EF_F⁰) stays exactly as open as before, with UZ as the named step an EF-style proof would need.
+
+### 3.2 C0 scored
+
+| claim | C0 P(TRUE as stated) | outcome |
+|---|---|---|
+| EF-G (a) | 0.35 | FALSE (true on the totally real part) |
+| EF-G (b) | 0.85 | TRUE (totally real); degenerate otherwise |
+| EF_F | 0.10 (GAP 0.70, FALSE 0.20) | GAP |
+| EF-MR | 0.85 | TRUE as a conditional, one input to name |
+| EF-X | 0.90 | TRUE |
+
+### 3.3 Corrections and proposals (the front-page lane decides; nothing edited here)
+
+1. **EF-G (a)** should read "for every **totally real** `F`", or use the full height `∏_{all w} max(1, |u|_w) = exp h_m(u)`.
+2. **EF-MR** part 2 should name `χ(ℚ(√47)²) ≤ 5` (Theorem A at 11) beside SP-Cor, or conclude `≥ 5`.
+3. **EF_F** should be replaced by **EF_F⁰** ("… with `h_μ(u) = 0` for every `u ∈ U` …") wherever it serves MR: the "for some `u`" form is
+   strictly stronger and its extra content is PE-2's.
+4. **The brief's address for EL2021** (`data/fs100/j51/el2021.pdf`) does not exist; the file is
+   `~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` (owner's message).
+5. **`BIBLIOGRAPHY.md` row proposed:** `[EinsiedlerFish2010]` M. Einsiedler, A. Fish, *Rigidity of measures invariant under the action of a
+   multiplicative semigroup of polynomial growth on 𝕋*, Ergodic Theory Dynam. Systems 30 (2010) 151–157, Zbl 1189.37005, arXiv:0804.3586.
+   Copy: `data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf` (+ `ef.txt`); not in `~/source/library/`. Read: §§1–4 in full
+   (arXiv v2). What rests on it here: FS-100 route (A)'s verdict (EF_F GAP). Also cited, not read: Lind–Ward 1988 (entropy of `S`-adic
+   solenoids; used for X01V-T1 by statement), Johnson 1992.
+6. **Stub re-aim (FS-100 stage 5):** route (A) as "transfer EF" is closed at a named step; what is left of it is UZ, a uniform-in-`M`
+   local-dimension bound for all-zero-entropy `U`-ergodic measures, and that is the zero-entropy half of MR restated, not a reduction of it.
+
+### 3.4 Would-have-searched-here log (stage 3)
+
+- none (write-up only).
