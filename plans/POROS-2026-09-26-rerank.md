@@ -211,3 +211,21 @@ hunch: the-collapse-composes
 ```
 
 ## Stage 3 — SAVED
+
+## Stage 4 — R1's full draft read; disagreements; report
+
+**R1's full draft** (`plans/RERANK-2026-09-26.md`, `af6e7589`): N1 (FS-103, the collapse) at 1, N2 (FS-104, `χ_CP(ℝ²)` at six) at 2,
+FS-59 re-aimed to `PL_∃(23, 43)` at 3, FS-67 at 4, FS-102 at 5, FS-63 at 6, FS-80 at 7, FS-62 at 8, FS-96 at 9, FS-64 at 10. Moving
+down: FS-90 from 2 to 26, FS-100 from 3 to 15, FS-75 from 5 to 25. My top two match R1's.
+
+| item | R1 | R2 | confidence |
+|---|---|---|---|
+| FS-64 and FS-96 | two rows (FS-64's six-colour "six below HN" is not FS-96's five) | accepted; not a disagreement | — |
+| FS-59 at 3 | "push first" | FS-62 (S's exact form, the frame for routes B and C) above its instance; I would rank FS-62 3, FS-67 4, FS-59 5 | medium |
+| FS-63 at 6 | "CP colourings are model-set colourings: route A's home" | at `N_k = ∅` route A has no p-adic factor and no model set; its home is the disciplines N1's gate lists. FS-63 belongs with route B | high |
+| N1's instance | de Grey's field | name ℚ(√635087) as the checkable instance (degree 2, where MR and T-J39-3 have run); de Grey's field stays the statement | high |
+| FS-69, FS-57 at 11–12 | route C up | route C bears only if HN = 7; minor | low |
+
+**Report sent to the owner** (SendMessage to "main", at most 12 lines), the same text as the final hand-back's summary.
+
+## Stage 4 — SAVED
