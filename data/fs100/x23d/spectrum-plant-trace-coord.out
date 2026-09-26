@@ -1,0 +1,9 @@
+CONTROL Q=3: degree 4, lambda_min -2 (expected -2) PASS
+CONTROL Q=2: degree 3, lambda_min -1 (expected -1) PASS
+CONTROL Q=32: degree 33, lambda_min -11 (expected -11) PASS
+CONTROL Q=64: degree 65, lambda_min -15 (expected -15) PASS
+TARGET Q=27: degree 28, spectrum (non-trivial chars) {-8: 112, -5: 84, -2: 168, 1: 84, 4: 168, 7: 84, 10: 28}
+TARGET Q=27: lambda_min = -8; Hoffman ratio |l|/(d+|l|) = 2/9 = 0.222222; < 1/4: True
+TARGET Q=27: Hoffman chromatic floor 1 + d/|l| = 9/2 = 4.5000
+TARGET Q=27: all-levels primitive bound 2/(q+1) = 1/14; all-levels Hoffman = max(level one, primitive)
+ALL CONTROLS PASS

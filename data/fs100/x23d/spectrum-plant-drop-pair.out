@@ -1,0 +1,6 @@
+CONTROL Q=3: degree 4, lambda_min -1 (expected -2) FAIL
+CONTROL Q=2: degree 3, lambda_min -1 (expected -1) PASS
+CONTROL Q=32: degree 33, lambda_min -13 (expected -11) FAIL
+CONTROL Q=64: degree 65, lambda_min -17 (expected -15) FAIL
+TARGET: assertion non-real eigenvalue at xi=1: [4, 12, 10]
+A CONTROL FAILED

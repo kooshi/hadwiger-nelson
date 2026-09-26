@@ -1,0 +1,38 @@
+== K = Q(sqrt3, sqrt11): gens [3, 11]
+  dyadic: inert, residue F_2, target U_2 (ratio >= 1/4: U_Q 4-colourable for Q <= 32; ramified: 1/2)
+  stable odd places below 200 (p, e): [(11, 2), (83, 1), (107, 1), (131, 1), (167, 1)]
+  breakers: ['dyadic inert U_2']
+  T-C(A)@0 class: False;  L(F) >= 5: False
+  expected class False: PASS
+== Q(sqrt2, sqrt3): gens [2, 3]
+  dyadic: inert, residue F_2, target U_2 (ratio >= 1/4: U_Q 4-colourable for Q <= 32; ramified: 1/2)
+  stable odd places below 200 (p, e): [(23, 1), (47, 1), (71, 1), (167, 1), (191, 1)]
+  breakers: ['dyadic inert U_2']
+  T-C(A)@0 class: False;  L(F) >= 5: False
+  expected class False: PASS
+== Q(sqrt11): gens [11]
+  dyadic: inert, residue F_2, target U_2 (ratio >= 1/4: U_Q 4-colourable for Q <= 32; ramified: 1/2)
+  stable odd places below 200 (p, e): [(7, 1), (11, 2), (19, 1), (43, 1), (79, 1), (83, 1), (107, 1), (127, 1), (131, 1), (139, 1), (151, 1), (167, 1)]
+  breakers: ['dyadic inert U_2', 'stable 7 (Gamma_7: ratio 2/7 >= 1/4)']
+  T-C(A)@0 class: False;  L(F) >= 5: False
+  expected class False: PASS
+== Q(sqrt23): gens [23]
+  dyadic: split
+  stable odd places below 200 (p, e): [(7, 1), (11, 1), (19, 1), (23, 2), (43, 1), (67, 1), (79, 1), (83, 1), (103, 1), (107, 1), (191, 1), (199, 1)]
+  breakers: ['stable 7 (Gamma_7: ratio 2/7 >= 1/4)']
+  T-C(A)@0 class: False;  L(F) >= 5: False
+  expected class False: PASS
+== Q(sqrt47): gens [47]
+  dyadic: split
+  stable odd places below 200 (p, e): [(11, 1), (19, 1), (23, 1), (31, 1), (43, 1), (47, 2), (67, 1), (107, 1), (127, 1), (139, 1), (151, 1), (163, 1), (167, 1), (179, 1), (199, 1)]
+  breakers: none
+  T-C(A)@0 class: True;  L(F) >= 5: True
+  expected class True: PASS
+== Q(sqrt3, sqrt5): gens [3, 5]
+  dyadic: split
+  stable odd places below 200 (p, e): [(11, 1), (59, 1), (71, 1), (131, 1), (179, 1), (191, 1)]
+  breakers: none
+  T-C(A)@0 class: True;  L(F) >= 5: True
+  expected class True: PASS
+row 117 cross-check, squarefree d < 2000: mismatches [] (0)
+ALL PASS

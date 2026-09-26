@@ -84,3 +84,94 @@ character of every level has normalised eigenvalue `> −1/3`.
 ### 1.5 Would-have-searched-here log (running)
 
 - (stage 1) none.
+
+## Stage 2 — SAVED (CTL, then CLS)
+
+**Verdicts. CTL: TRUE** as stated, every control for the stated reason [hand + tools exact]. **CLS: TRUE for every real number field**,
+totally real or not, and with or without row 100's exception (a ramified stable dyadic place makes both sides false) [hand + tools exact; one
+mind]. The advisor's named risks: **`q = 27` is not a risk** — `λ_min(Γ₂₇) = −8` exactly, Hoffman ratio `2/9`, and 27 is even an H*-place
+(`−8/28 = −0.2857 > −1/3`); the dyadic `U_Q`, `Q ≥ 64`, and the ramified stable odd places close by Lemma P, transcribed (below); the
+archimedean part does not enter CLS (it reads finite places only; it is SPC's, stage 3).
+
+### 2.1 The tools (exact; plants watched)
+
+- `tools/x23d_norm_one_spectrum.py` → `data/fs100/x23d/spectrum.out` (exit 0). Exact integer spectra of `U_Q = Cay(𝔽_{Q²}, μ_{Q+1})` for
+  `Q = 2^f, 3^f` (for these `p` the eigenvalues are rational integers: `−1 ∈ μ_{Q+1}` makes them real, and they lie in `ℚ(ζ_p)`). Controls,
+  all PASS: `Q = 3` → `−2` (Γ₃ Hoffman-tight at three colours), `Q = 2` → `−1` (`K₄`), `Q = 32` → `−11` (tight at four, G54), `Q = 64` →
+  `−15` (G56). **Target: `Γ₂₇` (degree 28) has spectrum `{−8: 112, −5: 84, −2: 168, 1: 84, 4: 168, 7: 84, 10: 28}` on the 728 non-trivial
+  characters** (sum `−28` = minus the degree, as it must be), so `λ_min(Γ₂₇) = −8`, Hoffman ratio `8/36 = 2/9`, Hoffman floor `χ(Γ₂₇) ≥ 4.5`,
+  i.e. `≥ 5`. Plants: `mu-minus` (`μ_{Q−1}`) and `drop-pair` (one inverse pair removed) each turn three controls red, exit 1
+  (`spectrum-plant-*.out`). **A plant that could not fire, kept and labelled:** `trace-coord` (the first coordinate in place of the trace)
+  stays green, because every non-zero `𝔽_p`-linear functional is `x ↦ Tr(cx)` and only permutes the spectrum — logged as a slip caught by
+  running it (G21: a control whose failure mode is unreachable tests nothing).
+- `tools/x23d_class.py` → `data/fs100/x23d/class.out` (exit 0). For real multiquadratic `F`: the dyadic place by 2-adic square classes
+  (`ℚ₂^×/ℚ₂^{×2} = ⟨−1, 2, 5⟩`: split iff `−1 ∈ H`; else inert iff adjoining `−1` doubles the residue degree), odd `p` by exact Legendre
+  symbols (residue degree 1 iff every class prime to `p` is a square mod `p`; stable iff `p ≡ 3 (mod 4)` and `f = 1`). The derivation (2.3)
+  fixes the finite set that decides the class: the dyadic place and `p ∈ {3, 7}`; the list of stable places below 200 is a sanity check.
+  Cross-check: row 117's `d ≡ 47, 143, 167 (mod 168)` for every squarefree `d < 2000`, 0 mismatches. Plants: `f-even-stable` (residue degree
+  2 treated as usable) and `dyadic-ignore-minus1` both fire (exit 1; 34 and 51 row-117 mismatches; `class-plant-*.out`).
+
+### 2.2 CTL
+
+| field | stable dyadic place | stable odd places that break the class | class | `L` | reason `L ≤ 4` |
+|---|---|---|---|---|---|
+| K = ℚ(√3,√11) | inert, residue `𝔽₂`, target `U₂ = K₄` (ratio exactly `1/4`; row 67's tight tower) | none (11 is stable with `e = 2`: class-good by FS-66 via Lemma P (ii); 3 has `𝔽₉`, 7 has `𝔽₄₉`) | **fails** | 4 | `χ(K₄) = 4` |
+| ℚ(√2,√3) | inert (`F_v = ℚ₂(√2,√3)` totally ramified, `e = 4`; `L_v ∋ √5 = i√3`), `U₂` | none (23, 47, 71, … stable) | **fails** | 4 | `U₂` |
+| ℚ(√11) | inert, `U₂` | 7 (`(11/7) = 1`, `Γ₇` ratio `2/7`) | **fails** | 4 | `U₂`, `Γ₇` |
+| ℚ(√23) | split (`23 ≡ 7 mod 8`) | 7 (`(23/7) = 1`) | **fails** | 4 | `Γ₇` |
+| ℚ(√47) | split | none (11, 19, 23, 31, 43, ramified 47, …) | **holds** | 5 | — |
+
+**What a wrong-reason pass would look like, and why this is not one:** K or ℚ(√2,√3) failing through a stable 3 or 7 (neither is stable
+there — the tool lists the breakers, and for both only the dyadic `U₂` breaks), or ℚ(√23) failing through its dyadic place (split). Each
+failure above is at the place whose level-one target has `χ ≤ 4`, which is CLS's mechanism; and ℚ(√47)'s pass is row 117's. The controls
+can fail: `dyadic-ignore-minus1` makes ℚ(√47) and ℚ(√3,√5) fail and K pass.
+
+### 2.3 CLS
+
+**Notation.** For a stable place `v` (`v` does not split in `L/F`), `G_{v,m} = Cay(O_{L_w}/𝔓^m, S_m)` its tower (`S_m` the image of `U`, the
+whole norm-one group mod `𝔓^m` by weak approximation and smoothness of `𝕋`), `r_v = sup_m α(G_{v,m})/|G_{v,m}|`.
+
+**Lemma CLS-0 (the stable places and their level-one targets) [hand].** `L/F` is unramified at every odd place (`disc(x² + 1) = −4`). An odd
+place with residue field `𝔽_q`, `q = p^f`, is stable iff `−1` is a non-square in `𝔽_q` iff `q ≡ 3 (mod 4)` iff `p ≡ 3 (mod 4)` and `f` odd;
+its level-one target is `Γ_q = Cay(𝔽_{q²}, μ_{q+1})`, whatever `e(v|p)`. A dyadic place is non-stable iff `i ∈ F_v`; if stable it is inert
+(target `U_Q`, `Q = N(v)`) or ramified in `L/F` (every unit vector reduces to 1; the target is bipartite, ratio `1/2`, G56 — row 100's
+exception). Stable places exist (Chebotarev: `L ≠ F` since `F ⊆ ℝ`).
+
+**Lemma CLS-1 (monotonicity) [hand].** `G_{v,m+1} → G_{v,m}` is a homomorphism with constant fibres, so pulling back an independent set
+gives `α(G_{v,m+1})/|G_{v,m+1}| ≥ α(G_{v,m})/|G_{v,m}|`: `r_v ≥ α(G_{v,1})/|G_{v,1}|`. Hence `r_v < 1/4 ⟹ χ(G_{v,1}) ≥ 5`.
+
+**Lemma CLS-2 (the ratio table, every stable place) [hand + tools exact; inputs named].** The usable `q ≤ 33` are exactly
+`3, 7, 11, 19, 23, 27, 31` (primes `≡ 3 mod 4`, and the one odd-exponent power `27 = 3³`; the next is `243`). Then:
+- `q = 3, 7`: level-one ratio `1/3`, `2/7`, so `r_v ≥ 1/4`, and `χ(Γ₃) = 3`, `χ(Γ₇) = 4`.
+- `q = 11, 19` (necessarily `f = 1`): `r_v < 1/4` at every level of the unramified tower (FS-66's certificates `U(11) = 28.2043`,
+  `U(19) = 77.5117`, row 75) and of every ramified one (Lemma P (ii), B1-LP: "FS-66's L1–L2 need only the coset structure and Hensel's count,
+  both valid at a ramified place"; checked by FFT at `e = 2`). *Not re-checked here at `e ≥ 3`*; the cited argument does not use `e`.
+- `q = 23, 31`: Hoffman at level one (0.249077; `1/4 − 2.745·10⁻⁶`) and Lemma P (i) at every level.
+- **`q = 27`**: `λ_min(Γ₂₇) = −8` (2.1), Hoffman `2/9`; every level by Lemma P (i) transcribed (next item), primitive normalised bound `2/28`.
+- `q ≥ 43`, prime or a power: Weil (`|λ| ≤ 2√q`, the eigenvalues of `Γ_q` being Kloosterman sums over `𝔽_q`) gives Hoffman
+  `≤ 2√q/(q + 1 + 2√q) < 1/4` iff `q > (3 + 2√2)² = 33.97`; Lemma P at every level.
+- **Lemma P, transcribed to residue field `𝔽_q` [hand].** The proof (`plans/FS84-S1-derivation.md`; B1-LP) is verbatim with `𝔽_q, 𝔽_{q²},
+  μ_{q+1}` for `𝔽_p, 𝔽_{p²}, μ_{p+1}`: the fibre of `S_m → S_{m−1}` over `s̄` is `s + π^{m−1}s₀·γ𝔽_q` (`q` points), a primitive `ψ` sums to
+  `qψ(s)` or 0 on it, and `β⁻¹𝔽_q^× ∩ μ_{q+1}` has at most two points (`𝔽_q^× ∩ μ_{q+1} = {±1}`): `|λ_ψ| ≤ 2q^{m−1}`.
+- **Dyadic inert, `Q = 2^f`** [hand + tools]: `Q ≤ 32`: `U_Q` is four-colourable (G56, FS-54), so `r_v ≥ 1/4` and `χ ≤ 4`. `Q ≥ 64`:
+  Weil gives Hoffman `≤ 2√Q/(Q + 1 + 2√Q) ≤ 16/81`, and exactly `λ_min(U₆₄) = −15` (2.1): `15/80`. Every level: **the dyadic Lemma P [hand,
+  new]** — for `L_𝔓/F_v` unramified with residue fields `𝔽_{Q²}/𝔽_Q`, `N(1 + π^{m−1}x) ≡ 1 + π^{m−1}Tr(x) (mod π^m)` for `m ≥ 2`, so the
+  fibre is `s + π^{m−1}s₀𝔽_Q` (`Q` points; in characteristic 2 the trace-zero line is `𝔽_Q`); a primitive `ψ` is trivial on it iff
+  `βs₀ ∈ 𝔽_Q`, and two such `s₀` differ by an element of `𝔽_Q^× ∩ μ_{Q+1} = {1}` (`gcd(Q − 1, Q + 1) = 1`): `|λ_ψ| ≤ Q^{m−1}`, normalised
+  `≤ 1/(Q + 1)`. It holds whatever `e(v|2)`. (For the unramified-over-ℚ₂ tower G54's exact constancy says the same.)
+- Dyadic ramified in `L/F`: ratio `1/2`, target `χ ≤ 2`.
+
+**Theorem CLS [hand + tools exact; one mind].** For every real number field `F`: every stable place has `r_v < 1/4` ⟺ no stable place's
+level-one target has `χ ≤ 4` ⟺ `L(F) ≥ 5`; and the same with `L` read at every level (row 75's reading).
+*Proof.* (⟹) CLS-1. (⟸) By CLS-2 the stable places with `r_v ≥ 1/4` are exactly those with `q ∈ {3, 7}`, dyadic inert `Q ≤ 32`, or dyadic
+ramified, and each of these has a level-one target of `χ ≤ 4` (3, 4, `≤ 4`, `≤ 2`). If `L(F) ≥ 5` none occurs, so every stable place has
+`r_v < 1/4`. The all-levels reading: `r_v < 1/4` bounds `χ ≥ 5` at every level, and the four exceptional kinds have `χ ≤ 4` at level one. ∎
+*Scope.* No step uses the degree, real or complex places, or row 100's exception (whose fields have `L = 2` and fail both sides).
+*What changes from degree 2:* residue fields `𝔽_{p^f}` with `f ≥ 3` (only `q = 27` below Weil's threshold), ramification `e ≥ 3` at 11 and 19
+(cited, not re-checked), dyadic `Q ≥ 8` (four-colourable to 32, Hoffman-and-Lemma-P from 64).
+
+### Would-have-searched-here log (stage 2)
+
+- Would have searched for a large independent set in `Γ₂₇` or a four-colouring of it. Instead: its exact spectrum (728 integer eigenvalues, a
+  complete computation whose extent CLS-2 fixed: the one usable non-prime `q` below 33.97); logged at the ban's edge as a complete exact
+  enumeration of a set the derivation fixed.
