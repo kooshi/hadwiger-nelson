@@ -184,3 +184,40 @@ held source not carried to the lemma that uses it (G49's pattern).
   spectrum in a locally compact dual is a pullback from a finite residue colouring. The nearest printed classifications of invariant
   measures on a proper-colouring shift are Peled–Spinka's (`[PeledSpinka2023]`: ℤ^d, bounded degree, measures of maximal entropy / Gibbs
   states, "long-range order" — a different notion, already recorded in `BIBLIOGRAPHY.md`).
+
+## Stage 4 — SAVED (result 3: T-C(A), the type-(A) form over ℚ(√47))
+
+**The object in its disciplines' words.** (Measurable / fractional colouring) "no translation-invariant random proper four-colouring of the
+unit-distance graph over ℚ(√47) is continuous in probability for an `S`-adic topology" — equivalently (J28V §2.2, J28D §3.3) the measurable
+independence ratio of the completion `G_S` is `< 1/4`, a **fractional-chromatic / independence-density** statement about the local–global
+product. (Euclidean Ramsey theory) the question it bears on is the chromatic number of the plane over a real quadratic field, `χ(ℚ(√47)²)`,
+which this project holds at `4 ≤ χ ≤ 5` (row 84).
+
+**Queries** (2026-09-25; `queries.log`):
+
+| db | query | hits | relevant |
+|---|---|---|---|
+| ZB | `"chromatic number" & "quadratic field" & "unit distance"` | 0 | — |
+| ZB | `"chromatic number" & "real quadratic" & plane` | 0 | — |
+| ZB | `ab:"unit distance graph" & ab:"number field"` | 0 | — |
+| ZB | `"unit-distance graph" & "algebraic numbers" & "chromatic"` | 0 | — |
+| ZB | `ti:"planar geometric graph"` (the 1994 vocabulary control) | 1 | `[Fischer1994]` (held) — the control fires |
+| ZB | `au:"Fischer, Klaus G."` (complete listing) | 27 | the three on the subject, all held: 1990 (Zbl 0744.05061), 1990 (Zbl 0733.05048), 1994 (Zbl 0836.05030) |
+| ZB | `au:"Johnson, Peter D.*" & (ti:"coloring" \| ti:"colouring" \| ti:"chromatic")` (the poser's listing) | 31 | Johnson 1982 *Coloring abelian groups* (Zbl 0485.05009); **Johnson 2000, *Infinite graphs and the fractional chromatic number: some recent surprises*, Geombinatorics 9(3) 135–144 (Zbl 0945.05021)** — review read: "the relation between the fractional chromatic number of the full graph and the fractional chromatic number of finite subgraphs"; `[Johnson2000]`, `[Johnson2006]` (already listed as unread debts) |
+| ZB | `au:"Johnson, Peter D." & "chromatic number"` | 0 | (name form; the wildcard form above is the one that works — recorded as an instrument note) |
+| OA | `chromatic number of the plane over a real quadratic field four colorings` | 286 | none on target (relevance noise) |
+| OA | `unit distance graph Q(sqrt 47) chromatic number` | 116 | none on target |
+| OA | `measurable chromatic number unit distance graph number field adelic` | 0 | — |
+
+**Papers opened.** None new beyond zbMATH review texts (Johnson 1999, 2000; Fischer's three are held and read, `BIBLIOGRAPHY.md`). The
+inputs of T-C(A) are T-C's (stage 3): BDOV 2014 Thm 2.2 (Hoffman on the tail), BMK 2017 §3.2 (split places, the dyadic one included —
+T-C(A)'s `S` may contain the split place above 2 of ℚ(√47), where `ℚ(√47)_v = ℚ₂(i)`), `[AmbrusEtAl2023]` (real place), FS-66 (11, 19),
+`[Zhang2012]` (the product count).
+
+**Verdict — T-C(A): not found by these searches** (the statement: "Over ℚ(√47), no translation-invariant Borel probability measure on
+`X₄(F)` has its spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places; hence …", plan §S.1). Its inputs are in
+print as listed. **Undecided at one named source:** `[Johnson2000]` (*Problems posed in or arising from "Colorings of metric spaces"*) and
+Johnson 2000 (*Infinite graphs and the fractional chromatic number*, Geombinatorics 9(3)) may pose the fractional/measurable question for
+rational or algebraic planes; neither is held (Geombinatorics — browser fetch). T-C(A) does **not** decide `χ(ℚ(√47)²)`, so it answers no
+posed question even if one is found there; it restricts the spectral type of a hypothetical four-colouring (the analogue of G60's
+fractional cap read on invariant measures).

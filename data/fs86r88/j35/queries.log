@@ -107,3 +107,51 @@
    2020 | Ágnes Backhausz, Balázs Szegedy | Action convergence of operators and graphs | Canadian Journal of Mathematics | https://doi.org/10.4153/s0008414x2000070x
    2014 | Mladen Bestvina, Kenneth Bromberg, Koji Fujiwara | Constructing group actions on quasi-trees and applications to mapping class groups | Publications mathématiques de l IHÉS | https://doi.org/10.1007/s10240-014-0067-4
    2020 | Ron Peled, Yinon Spinka | Three lectures on random proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.2001.11566
+[19:57] ZB '"chromatic number" & "quadratic field" & "unit distance"': 0 hits
+[19:57] ZB '"chromatic number" & "real quadratic" & plane': 0 hits
+[19:57] ZB 'ab:"unit distance graph" & ab:"number field"': 0 hits
+[19:57] ZB '"unit-distance graph" & "algebraic numbers" & "chromatic"': 0 hits
+[19:57] ZB 'ti:"planar geometric graph"': 1 hits
+   1994 | Fischer, Klaus G. | A planar geometric graph of chromatic number four | 0836.05030 | summary
+[19:57] ZB 'au:"Johnson, Peter D." & "chromatic number"': 0 hits
+[19:57] OA 'chromatic number of the plane over a real quadratic field four colorings': 286 hits
+   2006 | Shlomo Hoory, Nathan Linial, Avi Wigderson | Expander graphs and their applications | Bulletin of the American Mathematical So | https://doi.org/10.1090/s0273-0979-06-01126-8
+   2003 | Andrew M. Childs, Richard Cleve, E. Deotto | Exponential algorithmic speedup by a quantum walk | ? | https://doi.org/10.1145/780542.780552
+   1998 | Carlo Rovelli | Loop Quantum Gravity | Living Reviews in Relativity | https://doi.org/10.12942/lrr-1998-1
+   2008 | Nebojša Gvozdenović | Approximating the stability number and the chromatic number of a graph via semidefinite programming | Data Archiving and Networked Services (D | https://openalex.org/W1568838059
+   2011 | Olivier Bernardi, Mireille Bousquet‐Mélou | Counting colored planar maps: Algebraicity results | Journal of Combinatorial Theory Series B | https://doi.org/10.1016/j.jctb.2011.02.003
+   1999 | Andrea Schaerf | A Survey of Automated Timetabling | Artificial Intelligence Review | https://doi.org/10.1023/a:1006576209967
+[19:57] OA 'unit distance graph Q(sqrt 47) chromatic number': 116 hits
+   2017 | Csaba Bíró, Édouard Bonnet, Dániel Marx | Fine-Grained Complexity of Coloring Unit Disks and Balls | Journal of Computational Geometry (Carle | https://doi.org/10.20382/jocg.v9i2a4
+   2009 | Yilun Shang | Focusing of Maximum Vertex Degrees in Random Faulty Scaled Sector Graphs | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.0909.2933
+   2021 | Fedor V. Fomin, Petr A. Golovach | Subexponential Parameterized Algorithms and Kernelization on Almost Chordal Graphs | Algorithmica | https://doi.org/10.1007/s00453-021-00822-x
+   2016 | Paul Seiferth | Disk Intersection Graphs: Models, Data Structures, and Algorithms | Universitätsbibliothek der FU Berlin Hoc | https://doi.org/10.17169/refubium-8433
+   2021 | Christian Knaak, Jakob von Eßen, Moritz Kröger | A Spatio-Temporal Ensemble Deep Learning Architecture for Real-Time Defect Detection during Laser Welding on L | Sensors | https://doi.org/10.3390/s21124205
+   2018 | Stuart Hadfield | Quantum Algorithms for Scientific Computing and Approximate Optimization | arXiv (Cornell University) | https://doi.org/10.7916/d8x650c9
+[19:57] OA 'measurable chromatic number unit distance graph number field adelic': 0 hits
+[19:58] ZB 'au:"Johnson, Peter D.*" & (ti:"coloring" | ti:"colouring" | ti:"chromatic")': 31 hits
+   1982 | Johnson, P. D. | Coloring abelian groups | 0485.05009 | -
+   1999 | Johnson, P. D. jun. | More on the fractional chromatic number | 0941.05024 | review
+   2013 | Anderson, Loren, Johnson, Peter | Constructively coloring the line | 1310.05082 | summary
+   1996 | Johnson, P. D. jun. | About two definitions of the fractional chromatic number | 0856.05036 | review
+   2009 | Soifer, Alexander | The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Br | 1221.05001 | review
+   2009 | Johnson, P. D. jun. | The fractional chromatic number, the Hall ratio, and the lexicographic product | 1209.05086 | summary
+   2002 | Johnson, P. D. jun. | Hall's condition for list-coloring, and the Hall parameters: Recent developments | 1008.05054 | review
+   1990 | Hilton, Anthony, Johnson, Peter | A variation of Ryser's theorem and a necessary condition for the list- colouring problem | 0693.05034 | review
+   2000 | Johnson, P. D. jun. | Infinite graphs and the fractional chromatic number: Some recent surprises | 0945.05021 | review
+   1999 | Hoffman, D. G., Johnson, P. D. jun. | Greedy colorings and the Grundy chromatic number of the \(n\)-cube | 0937.05046 | review
+   2024 | Soifer, Alexander | The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewo | 1551.05001 | review
+   2021 | Johnson, Peter, Krumpelman, Alexis | On the Babai and upper chromatic numbers of graphs of diameter 2 | 1476.05054 | summary
+[19:58] ZB 'au:"Fischer, Klaus G."': 27 hits
+   1996 | Fischer, Klaus G., Shapiro, Jay | Mixed matrices and binomial ideals | 0864.15016 | review
+   1992 | Fischer, Klaus G., Shapiro, Jay | The prime ideal structure of the Minkowski ring of polytopes | 0756.52015 | review
+   1988 | Fischer, Klaus G. | Symmetric polynomials and Hall's theorem | 0656.13003 | review
+   1993 | Fischer, Klaus G., Shapiro, Jay | Generating prime ideals in the Minkowski ring of polytopes | 0792.13008 | review
+   1990 | Fischer, Klaus G. | Additive \(k\)-colorable extensions of the rational plane | 0744.05061 | summary
+   1997 | Fischer, Klaus G., Morris, Walter, Shapiro, Jay | Affine semigroup rings that are complete intersections | 0893.20047 | review
+   1998 | Fischer, Klaus G., Morris, Walter, Shapiro, Jay | Mixed dominating matrices | 0889.15020 | review
+   1980 | Beichelt, Frank, Fischer, Klaus | General failure model applied to preventive maintenance policies | 0426.60081 | -
+   1994 | Fischer, Klaus G. | A planar geometric graph of chromatic number four | 0836.05030 | summary
+   2005 | Fischer, Klaus | Self-organisation in holonic multiagent systems | 1098.68913 | summary
+   1978 | Fischer, Klaus G. | The decomposition of the module of \(n\)-th order differentials in arbitrary characteristic | 0338.14007 | -
+   1990 | Fischer, Klaus G. | The connected components of the graph \({\mathbb{Q}}(\sqrt{N_ 1},\dots ,\sqrt{N_ d})^ 2\) | 0733.05048 | review
