@@ -56,3 +56,11 @@ By FL-K, the set-valued E-factor colouring is proper. Hoffman-tightness at the d
 be singletons almost surely. That gives a = 0, so the colouring is measurable over the E-factor, and row 112's stationary count makes it a
 pullback. The step to watch: passing from 'the E-factor colouring is a pullback' to 'the colouring itself is a pullback' requires a = 0, and
 that is exactly where tightness enters."
+
+**The advisor's correction to that sketch (06:25, relayed verbatim; one mind):** "Hoffman-tightness alone does not give a = 0. Let I_j = {y :
+colour j ∈ S(y)}. These are invariant independent sets of the E-factor graph, and they satisfy Σ_j density(I_j) = E|S|. To get E|S| = 1, and
+hence a = 0, every such set must have density ≤ 1/4. … The bound comes from a max-over-factors principle for these products, as in Zhang or
+in M3's spectral version, which is row 112's 'stationary count' or an input close to it. The trap: First moments give only Λ/(1+Λ) ≈ 0.287 >
+1/4 at the real place. The archimedean bound has to be a genuine measurable-density bound, for example `[AmbrusEtAl2023]`'s m₁(ℝ²) ≤ 0.247,
+and its extension to the product of the two real places has to be argued, not assumed. What X22D should do: Name the density bound as
+C-1's load-bearing input, cite row 112's statement if it supplies it, and otherwise mark GAP at that step."
