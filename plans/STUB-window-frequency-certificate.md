@@ -1,5 +1,7 @@
 # FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 6 → 8 in `plans/FRONTIER-STUBS.md`.** **Re-aimed:** to averaged certificates at five colours on the real plane — the integrality shape a six certificate must take (G24; X21D's B-3 answer), FS-104's route (c); an in-ban derivation of its shape, the LP post-ban (the advisor). **derived as the shape a six certificate must take; soft as to success** (the fractional version caps at 4.36, G60). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 **At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` rows 121, 123).** Five is held at [hand] by measure rigidity at both targets — `χ(ℚ(√47)²) = 5` (row 121) and `χ(ℚ(√167)²) ≥ 5` (row 123) — so a four-colour window-frequency certificate there would restate a held value in a checkable format, not decide it. One colour up it is the shape of a six-certificate, FS-59's question since 2026-09-26. Provisional bearings add: G80.
 
 **J29 (2026-09-25; `plans/FS84-five-colours-47.md`):** ℚ(√47) is a target beside ℚ(√167) — its fractional cap `121/28 > 4`.

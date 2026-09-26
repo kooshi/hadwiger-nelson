@@ -1,5 +1,7 @@
 # FS-49 — One gadget for six: a five-colour virtual edge at distance 2 over a 6-open field, with Exoo–Ismailescu's {1, 2} graph as host (STUB, 2026-09-14; from GPT Astra's `six-colour-research-directions.md` §1)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 33 → 12 in `plans/FRONTIER-STUBS.md`.** Route D, the finite-graph form of rung D, needing no MR; given FS-103's F1 (a candidate composition, not a result: given MR, row 120, and T-J39-3, at a real field with no non-thick stable place, `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`), such a graph exists iff `χ_CP(ℝ²) ≥ 6` (the advisor). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 **At M3's close:** its measurable analogue is posed in print — Mixon's 2018 criterion (Polymath16 fourth thread): a five-colour forced `{1,2}`-vertex at an irrational angle proves `χ_µ(ℝ²) ≥ 6`; windows over finitely many places of ℚ(√167) cannot supply it from thick places (row 110).
 
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/six-colour-research-directions.md` §1 and `VERIFICATION.md`

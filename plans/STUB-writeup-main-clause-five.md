@@ -1,5 +1,7 @@
 # FS-102 — the fallback write-up: measure rigidity for the unit-vector group, and the local–global conjecture's main clause through five (stub)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 14′ → 7 in `plans/FRONTIER-STUBS.md`.** If FS-103 verifies, its possible headline is `χ(ℝ²) = χ_CP(ℝ²)` given MR — the collapse Kooshi named as a write-up (*"If we end up at a wall which collapses HN to another known open problem, that in itself would be a writeup."*). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Minted 2026-09-26 by consolidation job C3b (brief `data/consolidation-2026-09-26/briefs/C3b-claims-stubs.md`, item 3), at the owner's ruling
 under the stub rule (WORKFLOW step 2: every future milestone lives as a stub) and Kooshi's word that the write-up is the fallback. Rank 14′ in
 `plans/FRONTIER-STUBS.md` (the argument is in `data/consolidation-2026-09-26/C3b-record.md`; Kooshi's to move). **Solver column: none** — a
@@ -17,7 +19,7 @@ write-up, no finite-witness search at any stage. Read first: `CLAUDE.md` § The 
 - The target it is the fallback for: *"We now have a real foundation to reach for 6 (or prove that no field is 6 colorable, which would be
   fascinating) and potentially answer the HN problem definitively."*
 
-So this milestone does not run by default: the project pushes toward six first (FS-59 at rank 1 and the stubs aimed at six), and this stub is
+So this milestone does not run by default: the project pushes toward six first (FS-103 at rank 1 and the stubs aimed at six), and this stub is
 what runs when that push stalls, or when Kooshi calls it. The third quotation names a second trigger: a wall that reduces Hadwiger–Nelson to
 another known open problem would be a write-up of its own (a different paper, not this one).
 
@@ -128,6 +130,5 @@ None. It is the fallback if the push toward six stalls, and it states the founda
 
 ## Rank
 
-14′ in `plans/FRONTIER-STUBS.md`: just below the three stubs aimed at six at ℚ(√167) (FS-59 at 1, FS-64 at 12, FS-96 at 14), so every live
-six stub over the conjecture's widest gap comes before it, as Kooshi's "push … first" asks; the prime keeps every other rank number stable.
-Kooshi's to move.
+7 in `plans/FRONTIER-STUBS.md` since the 2026-09-26 re-rank (job R3): below the stubs aimed at six (FS-103, FS-104, FS-105, FS-62,
+FS-67, FS-59), as Kooshi's "push … first" asks. Kooshi's to move.

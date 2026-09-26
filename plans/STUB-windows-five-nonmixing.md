@@ -1,5 +1,7 @@
 # STUB — FS-96: windows at five colours over ℚ(√167) at the non-mixing places, and the null-set step (FS-64 at five, after M3)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 14 → 9 in `plans/FRONTIER-STUBS.md`.** `PL_∃(23, 43)`'s negation at five — one question with FS-59's from the other side (the advisor), kept a row. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 **Re-aimed at the crunch's close (2026-09-26, J25; J39's R3, `plans/POROS-2026-09-25-wanted-poster-167.md` §4.5):** "(i) for existence the places are `{∞, 23, 43}`, modulo SP (the split places drop out, T-J39-1); (ii) GAP-1 does not arise in the CP format; (iii) GAP-2 is PL(23, 43), FS-67's Hedetniemi question in CP form (rows 114–115); (iv) its payoff is T-J39-5". Both
 qualifiers, *for existence* and *modulo SP*, are part of the statement; a deterministic window over split places stays open as a window
 (FS-100 §2.5). T-J39-1 and T-J39-5 are blind-checked TRUE (J48, BC-2, BC-4; BC-4 (ii) with its 43 hypothesis dropped); SP and MR are

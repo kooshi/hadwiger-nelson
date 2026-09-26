@@ -1,5 +1,7 @@
 # FS-63 — the crystallography gate: coincidence site lattices, Moiré superlattices, aperiodic order
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 23 → 11 in `plans/FRONTIER-STUBS.md`.** **Re-aimed:** the aperiodic-order gate for `Y` with `p`-adic factors — the product-locality cluster (FS-67, FS-59, FS-96, FS-64). It is **not** `χ_CP(ℝ²)`'s home: with `N_k = ∅` there is no `p`-adic factor and no model set (the advisor; FS-103's gate runs in the measurable and harmonic-analysis words). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Minted 2026-09-17, after Kooshi asked whether any of this connects to Moiré patterns and the answer turned out to be that the
 project's rotation family IS the coincidence-rotation family, an identification already derived at M63 phase H3 and left in an
 appendix. Read beside: `CLAUDE.md` G62 (the frame), G7 (the type-M family), G46 and G49 (the recognition and prior-art rules),

@@ -1,5 +1,7 @@
 # FS-75 — the three-colour criterion in the kernel, and `χ(ℚ(√167)²) ≥ 4` with it (stub)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 5 → 26 in `plans/FRONTIER-STUBS.md`.** A kernel port; none on six. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 > **Minimal instance landed and closed, 2026-09-26** (FS-75's minimal instance; plan and close `plans/FS75-kernel-167.md`, its
 > §R-close first; kernel record `plans/FS75-K-kernel-167.md`; register `plans/FS75-derivation.md`; `LEDGER.md` row 119, drafted).
 > **`χ(ℚ(√167)²) ≥ 4` is in the kernel** — `four_le_chromaticNumber_planeOver_sqrt167`, standard three axioms, no native purchase, no

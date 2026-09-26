@@ -1,5 +1,7 @@
 # FS-57 — the fractional wall: refuse six colours at the members that can be reached
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 36 → 15 in `plans/FRONTIER-STUBS.md`.** Route C (47 and `U₆₄`), bearing on S's product conjunct only if HN = 7; **post-ban** (the owner, 2026-09-26). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Minted 2026-09-16 at FS-54's close, from Kooshi's question "Is it possible to attempt to prove that 6 is impossible?" and the
 assessment in `plans/FS54-twenty-seven.md` §W. Written for a session with zero conversation memory. Read beside: `CLAUDE.md`
 G56, **G59**; `reference/wall-at-six/WALL-AT-SIX.md` (§2 W and W_f, §4, §6.3) and its two responses in

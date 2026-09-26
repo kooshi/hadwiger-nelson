@@ -1,5 +1,7 @@
 # FS-100 — One missing lemma for three fields: the portrait of a four-colouring of ℚ(√47)'s plane, and the rule about rotation-invariant measures that would rule it out
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 3 → 16 in `plans/FRONTIER-STUBS.md`.** Its left items (TR-ROT at NA₀, C-4, the exception fields, the complex-place instance, the kernel port) bear none on six; MR's hardening moves to FS-105. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Minted 2026-09-25 by crunch job J47 (brief `data/crunch-2026-09-25/briefs/J47-milestone-stub-portrait-47.md`; record
 `data/crunch-2026-09-25/j47-record.md`), at Kooshi's request: *"Write up the portrait of 4 in 47 as a full milestone to be run at some point
 after the crunch. I suspect the other wanted posters will result in the same."* (relayed by the owner). The three wanted posters landed first

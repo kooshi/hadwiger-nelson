@@ -1,5 +1,7 @@
 # FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 40 → 13 in `plans/FRONTIER-STUBS.md`.** **Re-aimed:** given MR, a five-colouring of `K(√7)²` exists iff `UD(ℝ²)` has a CP one (R1's walk, from T-J39-3), so its question becomes the shape of a CP five-colouring of the plane — FS-104's mirror. derived frame (the upper side of rung D); low as work. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Read beside: `plans/FS38-residue-tower.md` §S2 D0.6 (over a sealed field the mechanism's second act cannot exist; over a 6-open
 field no residue instrument sees anything), `plans/M56-arithmetic-of-tightness.md` §R1 (the four-colour colouring space of
 K-fabric: residue-rigid at 2-adic depth ≥ 3, the additive family, the 16-pair non-additive residue), `plans/STUB-kempe-classes.md`

@@ -1,5 +1,7 @@
 # FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 3′ → 17 in `plans/FRONTIER-STUBS.md`.** Trust; none on six. FS-103's F1, if verified, is a candidate for the same named-hypothesis form. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 *Minted 2026-09-26 by crunch job X29C (the close planner of the ×2×3 crunch's wave 3), at the owner's instruction, which relays Kooshi
 verbatim: "The target for the Lean implementation should move to the more general "every real" claim." Solver column: **none** (a kernel
 port of derived statements; no finite-witness search at any stage). Read first: `plans/FS100-K-kernel-47.md` (X11K's dependency map §1.3–§1.4,

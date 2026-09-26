@@ -1,5 +1,7 @@
 # FS-69 — the all-levels certificate at 43: a smaller relaxation, not a bigger machine
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 35 → 14 in `plans/FRONTIER-STUBS.md`.** FS-59's necessary condition (five at every level of 43) and a wall member; **post-ban** (the owner, 2026-09-26). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 **At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 125).** In row 125's reduction of six at ℚ(√167), "43 at depth is FS-69" (the 23-adic factor alone "refuses five measurably"); six there is FS-59's question since 2026-09-26.
 
 **At M3's close (2026-09-25):** `B₁(43) < 369.8` would also close ℚ(√167)'s finite-place window count at five (D1-43, `plans/M3-derivation.md` M3-J21-D1-43p, M3-J22-T10: Hoffman alone reads `0.2138`, the fibre-share maximum is strictly below).

@@ -1,5 +1,7 @@
 # FS-62 — six is not a value: does the function F ↦ χ(F²) omit six?
 
+**At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 37 → 4 in `plans/FRONTIER-STUBS.md`.** **Re-aimed (the advisor's order, above FS-59):** S's exact form given MR — the adelic local–global principle folded here (R1 §2.2: given MR, `χ(F²) = min(χ_CP(ℝ²), local CP numbers)` iff product locality at every `k`); if FS-103's F1 (a candidate composition, not a result: given MR, row 120, and T-J39-3, at a real field with no non-thick stable place, `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`) holds, S ⟹ `χ(ℝ²) ≠ 6`, and S ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick place drops to six (a finite family of CP product statements; the advisor's formulation). §5's gate, the image of `F ↦ χ(F²)`, is an hour and unrun. **derived frame; soft as to truth** — Kooshi on this stub: *"It's just one possibility with some soft evidence"*. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
+
 > **CORRECTED AND DEMOTED 2026-09-19 — a frame, not a theorem target.** As minted, this stub's headline was an equivalence:
 > *no subfield of ℝ has χ(F²) = 6* ⟺ *χ(ℝ²) ∈ {5, 7}*, "Hadwiger–Nelson reduced from three values to two", with the wall at six as
 > its finite half. **Only one direction holds.** The strong statement implies the weak one trivially (ℝ is a subfield); nothing
