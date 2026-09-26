@@ -1442,3 +1442,156 @@ close above the in-ban one, whose last sentence and §1's "reading room at a kno
 `plans/STUB-infinite-place-spectra.md` — FS-97's banner records that its questions are answered.
 
 **Would have searched here (stage 4):** none.
+
+## §R-close (stage 5, wave 3) — the close of the ×2×3 crunch's third wave (WORKFLOW step 9, the mathematics half; crunch job X29C, the close planner)
+
+*de Bruijn (Opus 5.5), 2026-09-26, from 11:43 UTC. Brief `data/crunch-2026-09-26-x2x3/briefs/X29C-close-math-wave3.md` (template: X09C's brief)
+with its standing rules and the owner's launch notes (06:4x) and messages (X24R done; X26B added; the carry-over of X09C's inventory lines; the
+kernel lane's target moved to "every real"). Extends the §R-close above (waves 1–2, X09C) and rewrites none of it. Worked from
+`plans/FS100-x2x3-wave3-close-inventory.md` and the records `plans/FS100-X21D-derivation.md`, `plans/FS100-X21V-verification.md`,
+`plans/FS100-X23D-derivation.md`, `plans/FS100-X23V-verification.md`, `plans/FS100-X24R-prior-art.md`, with queue §7. X22D, X22V, X25B and X26B
+are folded in stage 1b if they report before 07:55. No subagents; no search.*
+
+### Stage 0 — SAVED (commit 586ae258): three of X09C's inventory lines still open after X10F carried into the wave-3 inventory as items 45–47.
+
+### Stage 1 — SAVED (quotation check; reconciliation of lists X21 and X23; X24R's verdict; the headline audited link by link; rulings)
+
+**1.0 Quotation check (standing rule 5).**
+- The owner's headline quotation, "given MR, χ(F²) ≥ min(L(F), 5), hence χ(F²) = L(F) for L ≤ 5, for EVERY real number field (X23D §3.3)", is a
+  **composite**: X23D §3.3 reads "For every real number field `F` **outside row 100's exception**, given MR(F) (and, with a complex place, MR's
+  own scope there): `χ(F²) ≥ min(L(F), 5)`; hence `χ(F²) = L(F)` whenever `L(F) ≤ 5`"; the "EVERY" is X23D's stage 5 item 1 ("SPC's scope
+  clause is redundant, and COR holds for every real number field") and its report line. Audited below in that composite form.
+- G64 (`CLAUDE.md`): "`χ(F²) ≤ L(F)` is a theorem (row 52, the field-level step is row 57's gap, FS-47)" — matches, bar punctuation.
+- Row 57, verbatim: "**Not proved:** that a number field with a conjugation-fixed prime supplies the valuation subring with residue field of
+  size N(𝔭)."
+- Row 100's exception, from its source (`plans/FS91-derivation.md` FS91-J07-4, verbatim): "except possibly `p = 2` when some stable dyadic place
+  is ramified in `L/F`; inert stable dyadic places always split off as full factors."
+- X23V's timing sentence, "its SPC, COR, Q35, D-1 were not yet written at 06:39" (X23V §Stage 4 header): **contradicted by git** — X23D's stage 3
+  (SPC, COR) was committed at 06:38:46 (`34ee0cb3`). Logged as a slip of X23V's clock; it does not affect independence (1.3 (b)).
+- My brief's per-field list and the queue's §7 claims were re-read against `plans/CRUNCH-2026-09-26-x2x3-queue.md` §7: match.
+
+**1.1 Reconciliation, lists X21 and X23** (D = derivation, V = blind verifier).
+
+| claim | D | V | blind? | divergence and ruling |
+|---|---|---|---|---|
+| Q-0 | X21D: TRUE (`ℚ₂(√d) = ℚ₂(i)` at `d ≡ 7 mod 8`) | X21V: TRUE, and the converse among real quadratic fields; C1 reproduces the exception fields ℚ(√5), ℚ(√17) | yes | none |
+| A-1 | TRUE, a composition; weakest link R88-TCA's class form (J28D, one derivation) | TRUE given inputs; control at ℚ(√23), ℚ(√31), ℚ(√59): the chain stops at T-C(A)@∅ where `χ ≤ 4` | yes | none |
+| A-2 | TRUE; 52 family fields `d ≤ 3000`, 44 with 11 or 19 stable | TRUE given A-1; `L = 5` at 47, 143, 311, 335 via a degree-one stable place above 11 | yes | none. X21V's "row 57's gap does not bite **for quadratic fields**" is narrower than the truth: the localisation of `O_F` at a non-zero prime is a DVR in every number field (1.3 (a)) |
+| A-3 (K0) | TRUE at FS100-K0's scope (not blind to K0's summary) | TRUE blind (owner's ruling, inventory 40: by commit order) | V yes | none; the scope note (A⁺ at `S ≠ ∅` needs T-C(A) at `S`) is FS100-K0's recorded statement; the queue's quotation lacked it |
+| A-4 | TRUE; independent of FS100-T1, T-C(A), SP-Cor; shares R-U and SP; reaches no `L = 5` member | TRUE; the two constants recomputed (0.4764127, 0.3804864) | yes | none — **ℚ(√167)'s `≥ 5` has two routes** |
+| B-1 | TRUE (⟸ needs no MR) | TRUE given inputs | yes | none |
+| B-2 | TRUE; given MR, `PL_∃(23, 43)` is exactly the missing direction | TRUE; (i) needs no field input (`χ(F²) ≤ χ_CP(ℝ²)` for countable `F`) | yes | none |
+| B-3 | GAP: the weakest statement is `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`, equivalent to "Y has no CP five-colouring"; nothing held gives either conjunct; no `m₁`-type density bound can | GAP at `χ_CP(ℝ²) ≥ 6` (necessary by projection) plus a product lemma; agrees with X21D-Y | yes | none; D states the biconditional, V the forward half and the density no-go. Both cite row 69 for "five refused at 43", not the queue's row 71 (inventory 9, 23) |
+| CTL | TRUE | TRUE, each failure at a named stable place with a periodic four-colouring | yes | none |
+| CLS | TRUE, every real number field [hand + tools exact] | stage 3 (blind): GAP at an inert stable dyadic place over a ramified base, `Q ≥ 64` (realised at ℚ(√3)·M₇, degree 14); stage 4: TRUE, closed by X23D's dyadic Lemma P re-derived from its statement | stage 3 yes; stage 4 no | **no difference of truth**; graded in 1.3 (c) |
+| SPC | TRUE totally real; with a complex place TRUE given SPC-cx (step 3′, new) | TRUE totally real; with a complex place TRUE given Lemma X23V-CX (new) | yes (1.3 (b)) | none; **one step found twice**, in two presentations |
+| COR | "TRUE once row 99 and MR are named"; as worded short one input | "GAP as written; TRUE with both" | yes | **one verdict in two labels: COR as worded is GAP (it omits row 99 for `L ≤ 4` and does not name MR); corrected, TRUE by two minds** |
+| Q35 | TRUE given MR; the clause "residue degree one in `L/ℚ(√3,√5)` … inert in `L/F`" self-contradictory, read "in `F/ℚ`" | TRUE (intended reading), two routes (Kummer, PARI) | yes | none; both flagged the same wording defect |
+| D-1 | TRUE, a sub-case of SPC | TRUE, SPC's special case | yes | none |
+
+**Divergences of truth after reconciliation: none.** X22D, X22V (list X22), X25B and X26B: stage 1b.
+
+**1.2 X24R's prior-art verdict, verbatim** (`data/crunch-2026-09-26-x2x3/reports/X24R.md`, RESULT line). **Neither the value nor MR was found in
+print**, so the close has nothing to report first:
+
+> "prior-art gate NEGATIVE on all four questions. (1) χ(ℚ(√47)²) = 5, five colours over any real field without √3, and a planar triangle-free
+> five-chromatic unit-distance graph: not found in print (zbMATH author listings of 12 posers + 15 abstract queries; arXiv with a positive
+> control; Polymath16 held text and the live 18th thread to 2026-09-24; Soifer 2024 chs. 11, 55) — Johnson2000/2006 still unread (archive 403),
+> so "first" stays unclaimed. (2) EL2021 §2 read in full: set-up only for ℤ^d; PE-2 and EF_F⁺ are not in it (nor in §4.1–4.3, whose Lemma 4.2
+> is a lift for fixed ℤ^d). (3) EF_F⁺ not in print: EF 2010's 11 citers (OpenAlex + S2, identifiers compared) are all circle/torus; Sataev
+> 1975 is the circle theorem, not in zbMATH, unheld. (4) MR not found under "norm one torus / rational points / adelic solenoid / character
+> rigidity / Schoenberg"; nearest: Bekka–Francini (unipotent-generated only) and NEW Laca–Warren 2018 (finitely generated units on tori =
+> "generalized Furstenberg conjecture", open)."
+
+Its wording rule for every front-page sentence (X24R §2.1, and its report's HELD line): the value "answers Soifer 55.1's existence question
+non-constructively" — 55.1 reads *"Construct a triangle-free 5-chromatic unit-distance graph"*. Its scope (G21): it does not reach
+`[Johnson2000]`, `[Johnson2006]`, recent Geombinatorics issues past zbMATH's horizon, talks or theses; **novelty is "not found", never "first"**.
+
+**1.3 The headline audited link by link** (the owner's launch note 2 (a)–(e)). **No link breaks.** Four scopes need wording, and the grade
+differs by field class.
+
+**(a) The upper half, `χ(F²) ≤ L(F)`.** Whichever stable place realises `L(F)`, its residue map is a graph homomorphism onto that target
+(odd place: the unit vectors are `v`-integral because the residue field has no `√−1`, and the valuation ring `O_{F,v}` — the localisation of
+`O_F` at a non-zero prime, a DVR **in every number field** — reduces them into `Γ_q`, or into the level-`m` tower target; dyadic inert: the
+same on the `L`-side ring `O_{L,𝔓}`; dyadic ramified in `L/F`: two colours, G56). This is row 52's bound, `[Moorhouse2010]` §8.2,
+`[Madore2015]` Prop. 3.2 and Cor. 3.4 (and Prop. 3.8 for tower levels). **Row 57's "Not proved" clause is a kernel gap** — the kernel holds
+`colorable_unitDistance_induce_of_valuationSubring` and lacks only the number-field supply of the valuation subring (X11K's record §1.3 U: one
+leaf) — **not a mathematical one**: the step is textbook for every number field, so X21V's restriction to quadratic fields is unnecessary.
+*So "= L(F)" is proved* (at the lower half's grade) **wherever the lower half is: every real number field with `L(F) ≤ 5`.** For
+`L(F) ≤ 4` both halves are row 99 (three derivations, no MR, no exception). For `L(F) = 5` the lower half is SPC ∘ CLS given MR. **For
+`L(F) ≥ 6` only `5 ≤ χ(F²) ≤ L(F)` is proved** (and `≤ 7` by the plane): ℚ(√167), K(√7), de Grey's field, the window fields; the conjecture's
+prediction there (6 or 7) is untouched.
+
+**(b) The complex-place step — two minds, and independent.** Commit times (git): **X23V-CX in X23V's stage 3 at 06:38:02 (`3249a87c`), 44 s
+before X23D's SPC-cx in X23D's stage 3 at 06:38:46 (`34ee0cb3`)**. X23V was fenced from X23D's record until its stage 3 was committed, so
+X23V-CX is blind by commit order (the KS-1 precedent, as for X21V's A-3). X23D's brief said "never contact it" but did not fence X23V's record by
+name, so X23D's independence rests on its own record, which labels step 3′ "[hand, new, one mind]", and on the route: X23D restricts both the
+group and the connection set to the real form `Δ_w = {(a, ā)}` and gets `UD(ℝ²)` exactly; X23V restricts only the connection set to the circle
+`{(e^{iθ}, e^{−iθ})}` and gets `ℝ² × UD_{√2}(ℝ²)`, ratio `m₁`. It is one idea — at a complex place of `F` the norm-one group's compact real form
+is a circle, and dropping edges is the safe direction — reached twice in two presentations. **Grade: [hand; two derivations, X23V's blind by
+commit order, X23D's by its own record and a different presentation]**; X26B (a blind third) pending.
+
+**(c) CLS's grade.** X23V's stage-3 derivation was blind and reached CLS everywhere except one case: an inert stable dyadic place over a
+ramified base with `Q ≥ 64`, at levels `m ≥ 2`, where it lacked a bound on the new characters; X23D's **dyadic Lemma P** supplies it, and
+X23V re-derived it from X23D's statement (not blind). **Grade: [hand + tools exact; two derivations blind to each other (X23D; X23V stage 3)
+except the dyadic Lemma P, one derivation (X23D) plus a re-derivation from its statement (X23V)]**. The dyadic Lemma P matters only for fields
+with an inert stable dyadic place over a ramified base of norm `≥ 64` (first found: ℚ(√3)·M₇, degree 14); for unramified-over-ℚ₂ dyadic
+towers G54's exact constancy covers the same ground independently. **Shared cited inputs** neither mind re-checked: FS-66's certificates at 11
+and 19; B1-LP (FS-66's L1–L2 at a ramified tower, FFT-checked at `e = 2`, **cited at `e ≥ 3`**); G56's four-colourings of `U_Q`, `Q ≤ 32`
+(solver-found colourings, re-checkable in seconds); Weil above `33.97`. X26B (blind) pending.
+
+**(d) MR at fields with complex places.** The waves 1–2 flags the X23D brief's addendum cites (X01V, X02V, X12B) are on **EF-G (a)** (the
+Haar-entropy formula `h_m(u) = log H(u)`, false at ℚ(∛2)) and on **ED-1 / EF-G (b)** (`U_N` infinite: the relative units have rank `r₂(F)`).
+**Neither is on MR's route.** MR = PE-2 ∧ EF_F⁺ (FS100-MR): PE-2 is stated and derived "for every real number field" by X02D and X02V; EF_F⁺ by
+X01D and X12B, whose multipliers are the rational unit vectors `U_ℚ` (isometries at every archimedean place, real or complex) and whose
+expanding place may be archimedean (X01D Step 0; X12B §2.4's audit line "`P⁺` may be archimedean; step 4's archimedean bounds cover it");
+the non-torsion `u* = (3+4i)/5 ∈ U_ℚ` exists over every field. **MR at a complex place stands at row 120's grade as stated**, with one caveat
+worth writing: no complex-place instance has been worked through either proof. Row 120 already reads "for every real number field `F` with
+`R_F = O′`"; no correction is owed to it.
+
+**(e) Row 100's exception is implied away — TRUE, two minds blind to each other.** The exception is a stable dyadic place **ramified in
+`L/F`** (FS91-J07-4, verbatim in 1.0). Its level-one target is bipartite (every unit vector reduces to 1; G56), ratio `1/2`, and CLS-1's
+monotonicity makes `r_v ≥ 1/2`; so no field in T-C(A)'s class has one, and SPC's scope clause is redundant (X23D stage 5 item 1; X23V §2.3,
+blind: "under the hypothesis, row 100's exception is automatic"). Its fields have `L = 2` and are covered by row 99, which carries no
+exception. Inert stable dyadic places (K's, `U₂`; ℚ(√3)·M₇'s, `U₁₂₈`) are not the exception. **So COR holds for every real number field** —
+and MR is used only inside the class, where `R = O′` holds.
+
+**1.4 The per-field values (the brief's rule: claimed only where TRUE by two minds, and outside row 100's exception).** "Given MR" is
+discharged by row 120 (MR held for every real number field with `R = O′`), so each value below is **[hand]** at row 120's grade plus its own
+links.
+
+| field | claim | two minds? | outside the exception? | thin inputs it touches | ruling |
+|---|---|---|---|---|---|
+| ℚ(√143), ℚ(√311), ℚ(√335) | `χ = 5` | A-2: X21D, X21V (blind) | yes, Q-0 (`≡ 7 mod 8`), two minds | ℚ(√143): the ramified 11-tower (`e = 2`, B1-LP, FFT-checked at `e = 2`); R88-TCA's class form (J28D + re-walks, 1.5) | **claimed** |
+| every squarefree `d ≡ 47, 143, 167 (mod 168)` with `L = 5` | `χ = 5` (44 of 52 with `d ≤ 3000` have 11 or 19 stable) | A-2 | yes | as above | **claimed** |
+| ℚ(√3,√5) | `χ = 5` | Q35: X23D, X23V (blind), two routes each | yes: `15 ≡ 7 (mod 8)`, no stable dyadic place, two minds | none of the thin ones: totally real, places above 11 have `e = f = 1`, no dyadic stable place | **claimed**; `CLAUDE.md` item 18's "Not landed: five over ℚ(√3,√5)" lands, non-constructively |
+| ℚ(√167) | `χ ≥ 5` | A-1 and A-4: both TRUE by both minds — **two routes** (the class; J48's 4-thick places) | yes, Q-0 | A-4 avoids R88-TCA | **claimed**; `5 ≤ χ ≤ 7` |
+| every real number field | `χ(F²) ≥ min(L(F), 5)`; `= L(F)` for `L ≤ 5` | COR corrected: X23D, X23V (blind at stage 3) | automatic (1.3 (e)) | by field class (1.5) | **claimed, graded by field class** |
+
+Nothing is claimed about six at ℚ(√167) beyond B-1, B-2 and B-3's reduction, graded as reductions (1.6).
+
+**1.5 Ruling on the grade each piece carries (four parts).**
+- **The choice.** COR is claimed for every real number field and **graded by field class**: (i) *totally real, with no inert stable dyadic place
+  over a ramified base of norm `≥ 64`, and no stable place above 11 or 19 with `e ≥ 3`* — every link held by two minds or more: MR (row 120),
+  CLS (two blind), J45's A⁺ and SP-Cor (field-free; K0 re-derived blind by X21V), R88-TCA's class form (J28D's derivation, re-walked in every
+  degree by X23D and X23V independently of each other, neither blind to J28D's route; X25B's blind derivation pending), row 99 below five, the
+  residue bound above; (ii) *with an inert stable dyadic place over a ramified base, `Q ≥ 64`*: plus the dyadic Lemma P [one derivation + a
+  from-statement re-derivation]; (iii) *with `e(v|11)` or `e(v|19) ≥ 3`*: plus B1-LP at `e ≥ 3` [cited; numerically checked at `e = 2` only];
+  (iv) *with a complex place*: plus SPC-cx [two minds, 1.3 (b)] and MR's complex-place case [row 120 as stated; no worked instance]. Every
+  named field (the quadratic family, ℚ(√3,√5)) sits in class (i) (ℚ(√143) touches B1-LP at `e = 2` only).
+- **The alternative weighed.** Grade COR uniformly at its weakest link ("one mind") — or restrict the ledger statement to totally real fields
+  of class (i). Either would have bought one short grade line.
+- **Why this one won.** A uniform "one mind" under-grades every named field, none of which touches a thin input (G21 cuts both ways: an
+  under-grade is also a mis-report); restricting the statement drops a derived, true claim over the other classes. The class list is short and
+  each thin input is named with the fields it touches.
+- **Confidence.** High that no link breaks and on the class list. Medium on class (iv) (two one-paragraph steps and an unexercised case of MR).
+  What would change it: X26B (a blind CLS and SPC-cx) or X25B (a blind R88-TCA class form) reporting a GAP or FALSE at a named step — that
+  demotes the classes whose inputs it touches, never the named fields unless it hits R88-TCA's count itself.
+
+**1.6 Six at ℚ(√167), as reductions only.** B-1 (given MR, `χ ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a CP five-colouring), B-2 (given MR and
+`PL_∃(23, 43)`, `χ ≥ 6` ⟺ `χ_CP(ℝ²) ≥ 6`), B-3 (GAP: `Y` has no CP five-colouring ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; no held result gives either
+conjunct; row 75 gives the 23-adic factor's refusal, a transcription of `χ_Bor(ℚ₂₃²) ≥ 6`, not new; 43 at depth is FS-69; Croft's
+`m₁ ≥ 0.2293 > 1/5` kills every one-point density refusal). **[hand, two minds each; reductions, not bounds].** So six at ℚ(√167) now
+**contains** `χ_CP(ℝ²) ≥ 6` — a statement about the real plane at least as hard as the measurable chromatic number's open lower bound.
+
+**Would have searched here (stage 1):** none (reading and checking only).
