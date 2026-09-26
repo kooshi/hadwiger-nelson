@@ -1,0 +1,13 @@
+OK   If `G` is `k`-colourable but not `k`-gap-free, then for every graph `H` with at least two 
+OK   If `G` is `k`-gap-free, then FS67(G, k) holds if and only if `χ(E_k(G)) ≤ k`.
+OK   For `k ≥ 3` and a connected graph `X` with `χ(X) > k`, the graph `G = K_k × X` is connecte
+OK   For every `k ≥ 4` there is a finite connected uniquely `k`-colourable graph `G` for which 
+OK   For every connected non-bipartite graph `G`, `χ(E_3(G)) ≤ 3`; hence FS67(G, 3) holds for e
+OK   `UD(𝔽₉, 2)`, and every level of the 3-adic tower that is Hoffman-tight at three colours, i
+OK   If `G` is 1-walk-regular with `χv(G) = k` and `H` is connected with `χv(H) > k`, then ever
+OK   If `G` is connected and `k`-gap-free, and `H = Cay(A, T)` for a finite abelian group `A` w
+OK   If `χv(G) = χv(H) = k`, `χ(H) > k`, `H` connected, and `G`, `H` satisfy `[GodsilEtAl2020]`
+OK   For some `k ≥ 4` there is a regular Hoffman-tight (`λ_min = −d/(k−1)`) connected graph `G`
+OK   Graphs are simple and loopless; `k ≥ 3`. A proper `k`-colouring `c` of `G` is *gap-free* i
+OK   for every connected `H` with `χ(H) > k`, every proper `k`-colouring of `G × H` is pulled b
+12 quotes, 0 missing
