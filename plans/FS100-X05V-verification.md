@@ -71,3 +71,91 @@ these `f` are exactly `L²(𝒜_S)` for a translation-invariant σ-algebra `𝒜
 ### 1.5 Would-have-searched-here log
 
 - none in stage 1.
+
+## Stage 2 — SAVED (KC, then SP-Cor)
+
+Conventions as §1.2. `g(x) = e_{c(x)}` with `⟨e_i, e_j⟩ = (4/3)δ_ij − 1/3`; `C(y) = E_μ⟨g(0), g(y)⟩ = σ̂(y) := ∫ χ(y) dσ(χ)`; `E_∅ = T + A`
+(`Fin_∅` is the trivial group). For `S = ∅` write `𝒜 = 𝒜_∅`, `p_j(x) = P(c(x) = j | 𝒜)`, `h = Σ_j p_j e_j`, and
+`A_u = Σ_j E[p_j(0) p_j(u)]`, `B = Σ_j E[p_j(0)²]`. Exact checks: `tools/x05v_checks.py` (18 lines PASS, exit 0; every plant fires; two
+mutants of the file go red, `mut1` at check 3 and 4b, `mut2` at check 5).
+
+### 2.1 The ladder as I run it (P0–P8), each step's input and grade
+
+Suppose a proper four-colouring of ℚ(√47)'s plane exists.
+
+| step | content | input | grade of the input |
+|---|---|---|---|
+| P0 | restrict it to `R ⊂ L` (the plane): a proper four-colouring of `Cay(R, U)`, so `X₄(F) ≠ ∅` | definition | — |
+| P1 | `R ⋊ U` is countable and solvable, hence amenable; it acts on the compact metrizable `X₄(F)` by translations and by rotations `(u·c)(x) = c(ux)` (proper, since `uU = U`); so an `R ⋊ U`-invariant Borel probability `μ` exists | Markov–Kakutani–Day | standard |
+| P2 | `σ := σ_μ` (Bochner on the discrete `R`): `σ(R̂) = C(0) = 1`; `σ̂(u) = C(u) = −1/3` for every `u ∈ U` (proper + Gram); rotation-invariance gives `C(uy) = C(y)`, so `σ` is `U`-invariant (uniqueness of Fourier–Stieltjes transforms on the compact `R̂`) | Bochner; check 1a | standard; tools exact |
+| P3 | `E = ⋃_S E_S` is a countable union of Borel sets (N1; finite sets of split places are countable), so Borel; `U`-invariant (`T`, `A`, `Fin_S` are each stable under `χ ↦ u·χ`, multiplication by `u` being an automorphism of `R` continuous for each topology); `m(E) = 0` (N1) | N1 | J45 [hand] |
+| P4 | `σ(E ∖ (T + A)) = 0` | R-U applied to the `U`-invariant finite `σ` | J45 [hand, one mind] |
+| P5 | **MR's hypothesis** applied to `σ|_{R̂∖E}` (finite, positive, `U`-invariant by P2–P3, `E`-null): `σ|_{R̂∖E} = a·m`, `a ≥ 0` | the hypothesis | — |
+| P6 | `m̂(y) = 0` for `y ≠ 0` (a non-trivial character integrates to 0 against Haar); `u ≠ 0`; so `∫_{R̂∖E} χ(u) dσ = 0` for every `u ∈ U` | Pontryagin duality | standard |
+| P7 | P4 + P6: `∫_{R̂∖(T+A)} Re χ(u) dσ = 0` for every `u ∈ U` | — | — |
+| P8 | **A⁺ at `S = ∅`**: some `u` has `∫_{R̂∖(T+A)} Re χ(u) dσ_μ < 0`. Contradiction with P7, so `χ(ℚ(√47)²) ≥ 5` | A⁺ (only its `S = ∅` instance) | J45 [hand, one mind], resting on T-C(A) at `S = ∅` |
+
+**P8 re-derived from its inputs** (so that the only load-bearing black boxes are N2, R-U and T-C(A)): by SI-1 and N2 (the spectral
+projection onto `E_∅` is `E[· | 𝒜]` and commutes with translation), `∫_{R̂∖E_∅} χ(u) dσ_μ = C(u) − E⟨h(0), h(u)⟩ = −1/3 −
+((4/3)A_u − 1/3) = −(4/3)A_u` (check 1b: `⟨Σ p_j e_j, Σ q_k e_k⟩ = (4/3)⟨p, q⟩ − 1/3` for probability vectors) — SI-3, real and `≤ 0`, zero
+iff `p_j(x) p_j(x+u) = 0` a.s. for every `j`, `x`. If it were zero at every `u`, `c′(x) := min supp p(x)` is defined a.s. (`Σ_j p_j = 1`),
+`𝒜`-measurable, translation-equivariant (`𝒜` is translation-invariant) and proper (disjoint supports on every edge): SI-4. Its law `ν` is a
+translation-invariant probability on `X₄(F)`; the coordinates of `g(c′(0))` lie in `L²(𝒜)`, so by N2 their spectral measures, which the
+factor map `ω ↦ c′_ω` carries to `σ_ν`, are carried by `E_∅ = T + A`. R88-TCA at `S = ∅` forbids such a `ν`. ∎ — **the same as J45's
+statement of A⁺, restricted to `S = ∅`.**
+
+### 2.2 KC first — the known-positive control
+
+**What a wrong-reason pass looks like (G21), written before running it.**
+- (W1) The chain halts at K or ℚ(√11) *before* P8 — no invariant `μ` (P1), `σ` not `U`-invariant (P2), R-U failing on the control's
+  spectrum (P4). Then "it stops" says nothing about P8, the one step that uses T-C(A).
+- (W2) MR's step (P5) is exercised only as `0 = 0·m` — the control's colourings have no `E`-null spectrum at all — so the MR step is never
+  tested with `a > 0`.
+- (W3) T-C(A) "fails" at the control field only vacuously, with no colouring whose spectrum is on `T + A` witnessing it.
+- (W4) The chain *runs through* at K and outputs `χ(K²) ≥ 5`, contradicting Theorem B. That is a FAIL (a defect in SP-Cor), not a pass.
+
+**At K = ℚ(√3,√11).** P0: four-colourings exist (Theorem B, row 57, kernel); take a residue colouring at a prime `𝔭` above 2. P1: its
+`R ⋊ U`-orbit is finite (rotations act on `R/(𝔭 ∩ R)` by multiplication by residues of unit vectors), so the uniform measure on the orbit is
+invariant. P2: the process is `(𝔭 ∩ R)`-periodic, so `σ` sits on the finitely many characters trivial on `𝔭 ∩ R`, all in `T`. P3–P4 ✓
+(`σ` on `T`). P5: `σ|_{R̂∖E} = 0 = 0·m` — consistent with MR (W2: exercised trivially here). P6–P7 ✓. **P8 fails exactly at its input:**
+T-C(A) at `S = ∅` is false at K, witnessed by this `μ` (spectrum on `T ⊂ T + A`; W3 answered); consistently, SI holds with equality
+(`𝒜 = everything`, `A_u = P(c(0) = c(u)) = 0`). By row 89 every four-colouring of `K²` is on `R` a pullback from one dyadic place, so every
+run at K stops at P8 the same way. (W4) does not occur.
+
+**At ℚ(√11).** Two colourings, each at a different step's full strength.
+- *Row 94's non-periodic C9* `⌊4θ⌋`, `θ = (2x+3y)/7` at the stable prime above 7 plus an archimedean term below `1/28`. Check 5: the 8
+  points of the circle over `𝔽₇` have `(2x+3y) mod 7 ∈ {2,3,4,5}`, and a step `s ∈ {2,…,5}/7` always changes `⌊4θ⌋ mod 4` (plants fire).
+  Its invariant measure has spectrum on `T + A` (row 112: "C9's colouring has spectrum on `T + A`"), so P5 is again `0 = 0·m`, and P8 fails
+  at T-C(A), witnessed.
+- *J45's F2 noisy colouring* (SI-C): the periodic pullback `γ` of `⌊4θ⌋` from `Γ₇`, with independent fair bits recolouring `Z̄ = {θ = 0}`
+  (density `1/7`) from 0 to 3. `Z̄` is independent (`θ(u) ≠ 0` on `U`) and its points miss colour 3 (G2-11), so the result is proper. Write
+  the bit as `½ + ½η`, `η = ±1`: `g = D + N`, `D` a function of the periodic structure, `N(x) = ½·1_{Z̄}(x)·η(x)·(e₃ − e₀)`. For `y ≠ 0`,
+  `E⟨N(0), N(y)⟩ = 0` and `E⟨D(0), N(y)⟩ = 0` (`η(y)` independent, mean 0), so `C = C_D + κ·δ₀` with
+  `κ = ¼·|e₃ − e₀|²·(1/7) = ¼·(8/3)·(1/7) = 2/21`, and **`σ = σ_D + (2/21)·m`**, `σ_D` on `T` (after averaging over the finite rotation
+  image, which keeps both parts). So P5 is exercised with **`a = 2/21 > 0`**: MR's conclusion holds non-trivially on this spectrum (W2
+  answered). P6–P7: `∫_{R̂∖(T+A)} Re χ(u) dσ = 0`, which is SI with equality — J45's SI-C, recovered. P8 fails exactly at T-C(A) (witness: `γ`,
+  spectrum on `T`).
+
+**Verdict KC: TRUE.** At both fields every step P0–P7 goes through and the chain stops at P8, exactly at T-C(A) at `S = ∅`, which is false
+there with a witness; at ℚ(√11) the MR step runs with a Haar part of mass `2/21`. **One correction to KC's wording:** "whose spectral
+measures lie in T + Fin_S plus Haar" is right for F2's noisy periodic colourings (`T` plus Haar), but row 94's *non-periodic* colourings —
+the ones KC names — have spectrum on `T + A` (their archimedean term is what makes them non-periodic), which is not in `T + Fin_S`. Read
+"T + A, or T plus Haar for the noisy ones".
+
+### 2.3 SP-Cor
+
+**Verdict: TRUE** — re-derived blind from the lemma statements (§2.1, P0–P8), with no step of §4's proof read. **What it rests on:**
+N1 (Borel, `U`-invariant, Haar-null `E`), N2, R-U, and A⁺ at `S = ∅` (re-derived above from SI-1, SI-3, SI-4 and N2), all J45 [hand, one
+mind]; R88-TCA at `S = ∅` (two minds at ℚ(√47)); standard facts (amenability of `R ⋊ U`, Bochner, `m̂(y) = 0` for `y ≠ 0`). **Not used:**
+SI-2, SI-5, SI-J, B⁺, SP-if, SP-oi, K0 (K0 is SP-Cor at ℚ(√143), ℚ(√311), ℚ(√335)). **For the headline:** the load-bearing single-mind
+inputs are **R-U** (P4; without it the `E ∖ (T + A)` part of `σ` is not controlled, since A⁺ is available only at a finite `S` while `E`
+is a union over all of them) and **N2** (P8). Two remarks that the record should carry:
+- P1 must produce a *rotation*-invariant `μ` (or average over `U`); a merely translation-invariant `μ` gives a `σ` to which neither MR nor
+  R-U applies. SP-Cor's statement is unaffected (the existence step is free by amenability), but a write-up must say it.
+- The argument uses MR only on measures of the form `σ_μ|_{R̂∖E}`, so SP-Cor holds under the weaker hypothesis "MR for colouring spectra";
+  that is the observation FL-2 tries to sharpen (stage 3).
+
+### 2.4 Would-have-searched-here log (stage 2)
+
+- Would have searched for a four-colouring of a control plane with a non-Haar `E`-null spectrum (to exercise P5 harder). Instead: used the
+  two held explicit colourings (row 94, J45's F2) and computed their spectra by hand.
