@@ -68,11 +68,11 @@ unless it is listed in §1 with a grade.*
   is carried by `T + A + Fin_S` iff `P(c(0) ≠ c(y)) → 0` as `y → 0` in `G_S`; then the colouring extends to a `G_S`-stationary process,
   continuous in probability, `{e_j}`-valued, with a jointly measurable version equal to `c` on `R` a.s., and `P(c̃(x) = c̃(x + w)) = 0` for
   every `x ∈ G_S` and every `w ∈ T_S`." [hand, two blind (J28D; J28V)] — stated at four colours and over the S2 fields; its `k`-colour,
-  totally-real form is claim C-EXTk, not an input.
+  totally-real form is not an input.
 - **I-MX** (`plans/M3-derivation.md` M3-J21-MX): "`K` compact abelian, `ν` a probability on `T_K ⊆ K`, `λ* = sup_{ξ≠0}|ν̂(ξ)| < 1/(k−1)`: for
   every Borel graph `X`, a Borel proper `k`-colouring of `X × Cay(K, T_K)` yields the Borel proper `k`-colouring `φ(x) = min{j :
   μ(W(x,·)^{-1}(j)) > λ*/(1+λ*)}` of `X`; for measurable `W` proper off a null vertex set, `φ` is measurable and proper off a null vertex set"
-  (format N′). [hand, two (J21; J22)] — the Borel/measurable form, one compact factor; its CP form is claim C-THKDEL, not an input.
+  (format N′). [hand, two (J21; J22)] — the Borel/measurable form, one compact factor; its CP form over infinitely many factors is not an input.
 - **I-MERGE** (`plans/FS100-X21V-verification.md` Lemma X21V-M): "for any graph `G`, `G × G` (categorical) has a CP `k`-colouring iff `G`
   does". [hand, two (X21V; X21D)]
 - **I-CPUP** (row 125): "`χ(F²) ≤ χ_CP(ℝ²)` for every countable `F ⊆ ℝ`". [hand, two blind (X21D; X21V)]
@@ -88,47 +88,24 @@ unless it is listed in §1 with a grade.*
 
 ## 2. The claims
 
-*For each: the statement; its source; **wrong-reason TRUE** — what a pass for the wrong reason would look like; **control** — a field where the
-same chain must stop, and the step where it stops. The load-bearing claims are C-LB6 and C-THKDEL; derive them first.*
+*For each: the statement, its source, and its controls (§3). **This list has a sealed half,** `data/fs103/claims-sealed.md`: a finer
+decomposition of the load-bearing claim and, for every claim, what a pass for the wrong reason would look like. **Open it only after your
+stage 3 is committed**; then score it against your own derivation — agree, or name what it missed or what you found that it lacks. The
+load-bearing claim is C-LB; derive it first.*
 
 ### 2A. The general statement and its load-bearing step
 
 - **C-F1-GEN.** "Given MR and T-J39-3, at a real field `F` with no non-thick stable place, **χ(ℝ²) = χ_CP(ℝ²) = χ(F²)**" (the stub,
   `plans/STUB-collapse-cp-plane.md` § The question, verbatim). **Proposed scope** (this list's wording): `F` a **totally real** number field,
   outside row 100's exception, with `N₆(F) = ∅` under D-THK (c); given MR(F). Judge both the stub's text and the proposed scope.
-  - *Wrong-reason TRUE:* a chain that applies the `k`-colour step at `k = 7` (at `F_dG`, 131 is not 7-thick: `0.1734 > 1/6`); a chain that
-    needs no MR and no `λ* < 1/(k−1)` (it would also "prove" the controls CTL-ABS and CTL-Q2 below); a chain valid for fields with complex places.
-  - *Control:* CTL-K7-6, CTL-K5-5, CTL-167-5 (stop at `N_k = ∅`).
-- **C-LB6 (the load-bearing step).** This list's wording, from T-J39-3's forward direction: *"If `F²` is `k`-colourable, then **either** (A)
+  - *Control:* CTL-K7-6, CTL-K5-5, CTL-167-5 (each stops at the step "`N_k(F) = ∅`", which fails there).
+- **C-LB (the load-bearing step).** This list's wording, from T-J39-3's forward direction: *"If `F²` is `k`-colourable, then **either** (A)
   `Y_{F,k}` carries a CP `k`-colouring, **or** (B) some `U`-invariant finite positive measure `τ` on `R̂` has `τ(E) = 0` and `∫ Re χ(1) dτ(χ) <
-  0`"* (wanted-poster §3.2, verbatim), **at `k = 6` and at `k = 5`, for a totally real `F` outside row 100's exception with `N_k(F) = ∅`**, so
+  0`"* (wanted-poster §3.2, verbatim), **at `k = 4, 5, 6`, for a totally real `F` outside row 100's exception with `N_k(F) = ∅`**, so
   that (A) reads "`UD(ℝ²)` carries a CP `k`-colouring".
-  - **Forbidden as inputs** (derive them or do without): T-J39-3, T-J39-1, T-J39-4 and their proofs; J48's BC-1, MXcp, EXT, N4, N4cor.
-    Permitted by statement: every §1 input.
-  - *Wrong-reason TRUE:* (i) citing T-J39-3 or any forbidden item; (ii) deleting a place because its independence ratio is `< 1/k` rather
-    than because `λ* < 1/(k−1)` (false in general: row 109, 125 colours); (iii) checking only `λ_min/d` (Hoffman's sign) instead of
-    `sup|ν̂|`, both signs; (iv) using a place-dependent `(K_v, ν_v)` without producing one threshold below `1/k` that works for all places at
-    once; (v) a selection `x ↦ min{j : Haar{b : C(x,b) = j} > θ}` that assumes `b ↦ C(x, b)` measurable without producing a jointly
-    measurable version (D-CP (b) excludes joint measurability from the definition); (vi) Fubini on a null set of edges read as properness at
-    every fixed edge; (vii) an argument that would also run on CTL-ABS.
-  - *Controls:* **CTL-167-4** and **CTL-dG4** below must come out of your derivation specialised to `k = 4`; **CTL-K-4** must stop.
-- **C-THKDEL (the step in its arithmetic-free form; this list's wording).** Let `H` be a second-countable LCA group with `T_H ⊆ H`, and `K =
-  ∏_{v ∈ V}` of countably many compact abelian second-countable groups `K_v`, with probabilities `ν_v` on `T_v ⊆ K_v`, `T_K = ∏_v T_v`, `ν =
-  ⊗_v ν_v`, and `λ*(ν) = sup_{ξ ≠ 0} |ν̂(ξ)| < 1/(k−1)`. Then every CP `k`-colouring (D-CP (b)) of `Cay(H × K, T_H × T_K)` yields a CP
-  `k`-colouring of `Cay(H, T_H)`.
-  - *Wrong-reason TRUE:* as C-LB6 (iv)–(vi); and treating `λ*(⊗ν_v)` as `sup_v λ*(ν_v)` without saying why (true or false, it needs a line).
-  - *Control:* `H` trivial, `K = ℤ/2`, `T_K = {1}`, `k = 2`: `λ* = 1`, the hypothesis fails, and the conclusion is meaningful — check your
-    derivation uses the hypothesis there.
-- **C-EXTk (this list's wording).** I-EXT4 holds with "four" replaced by "`k`" (simplex embedding) and `S = ∅`, for every totally real `F`
-  outside row 100's exception: a translation-invariant random `k`-colouring of `Cay(R, U)` with spectrum on `T + A` extends to a
-  `G_∅`-stationary process, continuous in probability, with a jointly measurable version, proper a.s. at every fixed edge `(x, x + w)`, `w ∈ T_∅`.
-  - *Wrong-reason TRUE:* an extension to `ι(R)` only, not to `G_∅`; properness checked on `ι(U)` and not on its closure.
-- **C-APX (this list's wording, two parts).** For a totally real `F` outside row 100's exception: (a) the closure of `ι(U)` in `(L ⊗ ℝ) ×
-  ∏_{stable w} O_{L_w}` is the full product of the local circles `∏ S¹ × ∏ T_w`; (b) `ι(R)` is dense in `G_∅`, so `T + A` is the image of the
-  dual map `Ĝ_∅ → R̂`.
-  - *Wrong-reason TRUE:* "weak approximation" cited for tori in general (it fails for some tori); name why it holds for this norm-one torus.
-- **C-MERGE-n (this list's wording).** For a totally real `F` of degree `n`, `Cay((L ⊗ ℝ), cl ι(U))` has a CP `k`-colouring iff `UD(ℝ²)` does
-  (`n` real places merge; `n = 2` at ℚ(√635087), `n = 16` at `F_dG`).
+  - **Not an input:** T-J39-3 itself, and T-J39-1 and T-J39-4 (its instances). Their proofs are fenced by file in your brief. Permitted by
+    statement: every §1 input.
+  - *Controls:* **CTL-167-4** and **CTL-dG4** below must come out of your derivation at `k = 4`; **CTL-K-4** must stop.
 - **C-CPUP (this list's wording).** `χ(ℝ²) ≤ χ_CP(ℝ²)` (from I-CPUP and I-DBE; no Tarski, no MR), and `χ(F²) ≤ χ(ℝ²)` for every `F ⊆ ℝ`.
 
 ### 2B. The checkable instance, ℚ(√635087) (first)
@@ -139,8 +116,6 @@ same chain must stop, and the step where it stops. The load-bearing claims are C
   every place above 2 with its splitting in `L/F`.
 - **C-635-THK** (this list's wording): `sup_v λ*_v < 1/5` over **all** stable places `v` of ℚ(√635087), every level, for the single standard
   choice of D-GV (so `N₅ = N₆ = ∅`); the stub's number: "`2√103/104 = 0.1952 < 1/5`".
-  - *Wrong-reason TRUE:* the ramified place 635087 or the dyadic places left out; Weil applied at a place whose residue field is not `𝔽_q`
-    with `q ≡ 3 (mod 4)`.
 - **C-635-F1** (this list's wording): given MR(ℚ(√635087)), `χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²)`.
 - **C-635-TF** (this list's wording; a consequence, derive it as one): ℚ(√635087)'s plane has no unit triangle; so, given C-635-F1 and
   `χ(ℝ²) ≥ 6`, some finite triangle-free unit-distance graph has chromatic number at least six.
@@ -151,16 +126,14 @@ same chain must stop, and the step where it stops. The load-bearing claims are C
   479"): the exact list of stable places of `F_dG` below a bound you state (at least 500), computed with PARI with residue degrees; the places
   above the primes 3, 5, 7, 11 (ramified in `F_dG/ℚ`) and above 2 each classified (stable or not, and why); no stable place lies above a
   prime below 131.
-  - *Wrong-reason TRUE:* the residue field read from the subfield (G43: "a larger field can LOSE a prime its subfield had" — 11 has residue
-    degree 2 in `F_dG`); a list over the unramified primes only.
 - **C-131** (control; this list's wording): the exact non-trivial spectrum of the level-one piece at a stable place of `F_dG` above 131, and
   its `max|λ|/(q+1)` beside Weil's `2√131/132 = 0.17342…`, with the value strictly below `1/5`.
 - **C-dG-THK** (this list's wording): `sup_v λ*_v < 1/5` over all stable places `v` of `F_dG`, every level, for the single standard choice of
   D-GV; hence `N₅(F_dG) = N₆(F_dG) = ∅`.
-- **C-MR16** (this list's wording): MR(`F_dG`) holds by row 120's derivation: `F_dG` is outside row 100's exception, and every hypothesis the
+- **C-MR16** (this list's wording; **last in your order, optional within your budget** — a first walk at degree 16, one mind; else it
+  goes to FS-105): MR(`F_dG`) holds by row 120's derivation: `F_dG` is outside row 100's exception, and every hypothesis the
   steps of FS100-PE2 and FS100-EFP use holds at degree 16 — PE-2's admissibility of its finitely generated pieces ("every finite-index
   subgroup of `Γ` spans `L`", row 120) and EF_F⁺'s count of unit vectors by height (row 120: "`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`").
-  - *Wrong-reason TRUE:* "row 120 says every real number field" taken as the check; the check is that each hypothesis is met at `F_dG`.
 - **C-dG-F1** (R1's statement, `plans/STUB-collapse-cp-plane.md` chain step 6): "Hence, given MR, `χ(F_dG²) ≤ k ⟺ χ_CP(ℝ²) ≤ k` for `k = 5,
   6`; with `χ(F²) ≤ χ(ℝ²) ≤ χ_CP(ℝ²) ≤ 7` …, F1" — i.e. **χ(ℝ²) = χ_CP(ℝ²) = χ(F_dG²)**, given MR(F_dG).
 
@@ -171,7 +144,6 @@ same chain must stop, and the step where it stops. The load-bearing claims are C
   and product locality at six — a finite family of CP product statements; R2's formulation)." Judge: (a) the first sentence given C-dG-F1;
   (b) the biconditional for S_nf over totally real fields; (c) whether "a finite family" is exact — how many local graph types can occur as
   factors `G_v`, `v ∈ N₆(F)`, over all totally real `F`; (d) what is missing for all subfields of ℝ (D-S) and for fields with complex places.
-  - *Wrong-reason TRUE:* S over all subfields written from number fields alone; place types counted by residue field alone.
 - **C-FMT** (this list's wording; **no assertion**; each part graded on its own, GAP expected somewhere): (a) every CP `k`-colouring of
   `UD(ℝ²)` has a jointly measurable version; (b) hence `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`; (c) `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`; (d) `χ_m⁰(ℝ²) = χ_m(ℝ²)`
   (a measurable colouring proper at almost every edge can be made proper at every edge); (e) the stub's "`χ_CP ≤ χ_m`" — held with no MR,
@@ -180,12 +152,12 @@ same chain must stop, and the step where it stops. The load-bearing claims are C
 ## 3. Controls (each one's expected outcome is stated; a derivation that disagrees has found something, or is wrong)
 
 - **CTL-167-4:** ℚ(√167), `k = 4`: every stable place is 4-thick (row 123: "`χ(ℚ(√167)²) ≥ 5` by two routes (the class; every stable place
-  4-thick)"), so C-LB6's form at `k = 4` plus I-CP57 gives `χ(ℚ(√167)²) ≥ 5` given MR — agreeing with row 123's class route.
+  4-thick)"), so C-LB at `k = 4` plus I-CP57 gives `χ(ℚ(√167)²) ≥ 5` given MR — agreeing with row 123's class route.
 - **CTL-dG4:** `F_dG`, `k = 4`: all stable places 4-thick; the same gives `χ(F_dG²) ≥ 5` given MR — agreeing with I-DG5 (kernel, no MR).
 - **CTL-K-4 (tight boundary):** K = ℚ(√3,√11), `k = 4`: its dyadic places are stable and Hoffman-tight at four colours (`λ_min = −d/3`,
   row 67), so `λ* ≥ 1/3` and the chain stops at `N₄ ≠ ∅`; `χ(K²) = 4` (row 57).
 - **CTL-K7-6:** `K(√7)`, `k = 6`: the place above 83 is not 6-thick (row 68: six at 83 needed a certificate beyond Hoffman) — the chain stops
-  at `N₆ = ∅`; at `k = 5` it goes through (`2√83/84 = 0.217 < 1/4`), giving, given MR, `χ(K(√7)²) ≤ 5 ⟺ χ_CP(ℝ²) ≤ 5`.
+  at the step "`N₆ = ∅`" (it fails: `N₆` holds the places above 83); at `k = 5` it goes through (`2√83/84 = 0.217 < 1/4`), giving, given MR, `χ(K(√7)²) ≤ 5 ⟺ χ_CP(ℝ²) ≤ 5`.
 - **CTL-K5-5:** `K(√5) = ℚ(√3,√5,√11)` (Heule's field, `χ = 5`, row 53): 11 is usable and not 5-thick — the chain must stop, or it would
   "prove" `χ_CP(ℝ²) ≤ 5`.
 - **CTL-167-5:** ℚ(√167), `k = 5`: `N₅ = {23, 23′, 43, 43′}` (row 110) — the chain stops; what holds is row 125's B-1.

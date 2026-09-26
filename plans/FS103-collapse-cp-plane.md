@@ -460,3 +460,22 @@ at `k = 6`; a stable place of `F_dG` with `λ* ≥ 1/5`; the claim in print. *Ad
   arithmetic of seconds, left to the verifiers as checks of derived claims.
 
 ## Stage 6 — SAVED
+
+## Stage 5b — SAVED: the claim list split in two (the advisor's second advice)
+
+| # | advice (FS103-A, second and third messages) | decision |
+|---|---|---|
+| 1 | the sub-claims plus the wrong-reason lines lay out the load-bearing route; a verifier would do a checking reading | **adopted**: `data/fs103/claims.md` keeps definitions, inputs, top-level claims and controls with expected outcomes; `data/fs103/claims-sealed.md` holds C-THKDEL, C-EXTk, C-APX, C-MERGE-n and every wrong-reason line, opened only after a verifier's stage 3, then scored against its own derivation. **Stated honestly:** I-MX's statement (with its selection formula) stays visible — it is also `LEDGER.md` row 109 and G76, both open to any verifier — so C-LB's blind content is "the CP / infinitely-many-places transposition of a held lemma, with the extension and approximation steps found unaided", a smaller claim than "two blind derivations from nothing". |
+| 2 | state C-LB at `k ∈ {4, 5, 6}` so the sandwich closes without row 123 | **adopted**: C-LB6 is renamed **C-LB**, at `k = 4, 5, 6` |
+| 3 | C-THKDEL's control was degenerate | **adopted**: the advisor's `H = ℝ, T_H = {±1, ±√2}, K = ℤ/2, ν = δ_1, k = 2` (sealed half) |
+| 4 | CTL-K7-6's wording | **fixed**: "stops at the step '`N₆ = ∅`' (it fails)" |
+| 5 | C-S (c) is not finite at full depth | **registered** in the sealed half as the expected answer (so the verdict can surprise); E7 stands |
+| 6 | C-MR16 last and optional | **adopted** in the claim and in V2's order |
+| 7 | C-635-PL: 2 ramified in `F/ℚ`, split in `L/F` | **adopted** as a wrong-reason line (sealed) |
+| 8 | the fibre measures of a modification: stationarity must be shown | **adopted**: C-LB wrong-reason (viii) (sealed) |
+| 9 | forbid by file and section, not by result names ("MXcp", "EXT" read as a route) | **adopted**: the open list names only T-J39-3/-1/-4; the briefs fence by file |
+
+The advisor's check of C-THKDEL as stated (one mind, advisor's): the right arithmetic-free form; `λ*(⊗ν_v) = sup_v λ*(ν_v)` with equality.
+Recorded, not given to the verifiers. No disagreement remains open except item 8 of stage 5 (the headline field), held for the owner.
+
+## Stage 5b — SAVED
