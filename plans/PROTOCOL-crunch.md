@@ -500,6 +500,6 @@ searched here: nothing.
 ### Stage 3 — SAVED (§8 the runs)
 
 Run 1 and run 2 each with clock, slots, jobs, what landed at what grade, expectations, budgets, retractions, slips and what each taught
-(pointing to §7's rules); §8.3 reads them together with the confounds. Grades are quoted from  rows 120, 121, 123 and 127 and
+(pointing to §7's rules); §8.3 reads them together with the confounds. Grades are quoted from `LEDGER.md` rows 120, 121, 123 and 127 and
 from each queue's §8.3/§5; none is raised. Run 1 kept no retraction tally; that is said. Harness count at this save: about 420k by the
 counter. Would have searched here: nothing.
