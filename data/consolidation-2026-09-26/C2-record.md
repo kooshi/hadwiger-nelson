@@ -20,7 +20,7 @@
 |---|---|
 | `python3 tools/bib_audit.py` (every `*.md`: `CLAUDE.md`, `LEDGER.md`, `CLOSED-QUESTIONS.md`, `plans/`, `data/`) | **exit 0**: 398 keyed rows, 12 retired/alternate keys; 228 arXiv ids and 380 bracketed keys cited; 0 unresolved |
 | `python3 tools/bib_audit.py --self-test` | exit 0, 3 controls fired |
-| `lean_key_scan.py .lean` (1,746 Lean files) | 7 citation keys, all resolve (`[AbrishamiEtAl2025]`, `[BrewsterEtAl2020]`, `[Fischer1990]`, `[Fischer1990b]`, `[Madore2015]`, `[Moorhouse2010]`, `[Parts2020a]`); 3 arXiv ids, all resolve. Exit 1 only on five yearless matches that are tactic lemma lists, not citations: `simp [MonoPair]`, `rw [NormBranch]`, `simp [PairsAt]`, `simp [PairsAtRatio]`, `simp [ValidOn]` (the audit's `NOT_KEYS` is for `*.md`; nothing to fix) |
+| `lean_key_scan.py .lean` (1,746 Lean files) | 7 citation keys, all resolve (`[AbrishamiEtAl2025]`, `[BrewsterEtAl2020]`, `[Fischer1990]`, `[Fischer1990b]`, `[Madore2015]`, `[Moorhouse2010]`, `[Parts2020a]`); 3 arXiv ids, all resolve. Exit 1 only on five yearless matches that are tactic lemma lists, not citations: `simp` / `rw` calls whose bracketed lemma lists name `MonoPair`, `NormBranch`, `PairsAt`, `PairsAtRatio`, `ValidOn` (the audit's `NOT_KEYS` is for `*.md`; nothing to fix) |
 
 **Unkeyed citations** (resolve by no key because they carry none; owed to C3a, not fixable here): `LEDGER.md` rows 92 (line 130) and 125
 (line 163) cite "Croft's `m₁ ≥ 0.22936`" / "`≥ 0.2293`" without `[Croft1967]`; row 120 cites "Sataev 1975" and "Johnson's nonlacunary theorem
@@ -126,3 +126,26 @@ Lind–Ward 1988 and Chothi–Everest–Ward 1997 (cited from memory for FS100-E
 | `[Chandgotia2017]` | row 119's prior art (ingredient of the winding form) | row 79 only — add row 119 |
 
 **Would have searched here (stage 1):** none (zbMATH and arXiv API lookups of known papers' fields, not searches for witnesses).
+
+## Stage 2 — SAVED (the fixes, `BIBLIOGRAPHY.md` only)
+
+Applied by `data/consolidation-2026-09-26/c2/stage2_edits.py` (each edit an exact, uniqueness-checked replacement; a miss aborts before
+writing — one did, on the § R.2 lookup, and nothing was written until it was fixed). No key renamed; no row removed.
+
+| check | fix |
+|---|---|
+| 2 | `[AxenovichEtAl2014]`: the stale "a browser save to `…-preprint.pdf` is the route" → "The KIT preprint is held (the copy column; fetched by the FS-58 sweep)". `[CostaSilvaFilho2026]`: "not held" → held, with its library path. `[GLV2009]`, `[GMS2012]`, `[LPS2017]`, `[dLMOV2021]`, `[BGSV2012]`: directory-only copy cells → full filenames. § B: seven new rows (those six PDFs; the `mrvz-2311.10069-fcn4` supplementary folder under `[MatolcsiEtAl2025]`, "used as data, not read as text") |
+| 3 | `[BekkaFrancini2022]` § C and § B: X03D's own words, "abstract, §1 (pp. 1–5: Theorem 1.1, its proof sketch, Remark 1.2 (i)–(v)); the rest unread", replacing the narrower "Thm 1.1 and Remark 1.2 (iii)–(iv)". `[LacaWarren2018]` § C and § B: X24R's item numbers (Prop. 3.5–3.8; Cor. 4.10, Thm 4.11) |
+| 4 | Fields from the zbMATH / arXiv APIs: `[EinsiedlerLindenstrauss2022]` (ETDS 42(2) 691–736, doi, Zbl 1489.37004; "cited in prose as EL2021"); `[LacaWarren2018]` (J. Operator Theory 83(1) (2020) 73–93, Zbl 1449.46057); `[LindenstraussWang2012]` (pp. 1305–1350, doi, arXiv:1101.0323); `[BekkaFrancini2022]` (16(4) 1119–1164, doi); `[BaderVigdorovich2022]` (U. Bader, I. Vigdorovich, *Charmenability and stiffness of arithmetic groups*, JEMS 28(8) (2026) 3581–3621, doi; no Zbl yet); `[Lindenstrauss2004]` (Israel J. Math. 149 (2005) 199–226, doi, Zbl 1155.37301); `[LindWard1988]`, `[ChothiEverestWard1997]` (pages, Zbl); `[JohnsonA1992]` (Aimee S. A. Johnson, Isr. J. Math. 77, 211–240); `[Croft1967]` (not in zbMATH). § A′: four aliases — `[EinsiedlerLindenstrauss2021]` (and the prose "EL2021"), `[LacaWarren2020]`, `[Lindenstrauss2005]`, `[BaderVigdorovich2026]` |
+| 5 | New **§ R.6** "Prior-art debts left open by the 2026-09-25/26 crunch": Johnson 2000/2006 (Kooshi, acquiring — the § R.2 status cells changed from "not requested" to match), Sataev 1975, `[LindSchmidt1999]` with `[EinsiedlerLindMiles2001]` (NA₀), `[LindWard1988]` with `[ChothiEverestWard1997]` (FS100-EFG) |
+| 6 | Rests-on added: `[EinsiedlerFish2010]` (EF_F⁺, FS100-MR, row 122's ED-2 quote); `[Croft1967]` (row 92); `[JohnsonA1992]` (FS100-PE2, row 120); `[LindSchmidt1999]` (X27D's proposed line, verbatim; row 126); `[EinsiedlerLindMiles2001]` (NA₀); `[Fischer1994]` (rows 89, 100, as a control); `[Moorhouse2010]` (§7.1 → FS54-T2, rows 70, 77); `[Johnson2000]`, `[Johnson2006]` (rows 121, 123); `[ExooIsmailescu2019]`, `[Soifer2024]` (row 121's answers); `[BergelsonMoragues2021]` (row 124); `[Chandgotia2017]` (row 119) |
+
+One quotation slip caught before commit: the `[Johnson2000]` line first carried row 121's words with its inner double quotes turned into
+single ones; restored to the row's exact words (standing rule 5).
+
+**Gates after the fixes:** `tools/bib_audit.py` exit 0 (398 keyed rows, 20 retired/alternate keys — 12 before, the four new alias rows × 2;
+229 arXiv ids and 384 keys cited; 0 unresolved; this record's own first draft had tripped it with five bracketed tactic-lemma names, since
+rewritten); `held_at.py`: 512 addresses, 7 misses, every one a web URL or the EL row's history note, 0 md5 mismatches; Lean scan unchanged
+(7 citation keys, all resolve). Table column counts unchanged on every edited row.
+
+**Would have searched here (stage 2):** none.
