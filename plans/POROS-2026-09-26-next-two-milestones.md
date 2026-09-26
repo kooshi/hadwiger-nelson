@@ -87,3 +87,34 @@ Owner slips to log (two, both from the brief's age, neither the owner's error at
 ### 1.3 Would have searched here
 
 - None. The one computation was a count over J43's committed facts file (seconds, exact, no search).
+
+## Stage 2 — the candidates — SAVED
+
+*Odds are mine, stated before any planner prices them; per queue §8.2 the crunch's planner under-priced blind-verified derivations
+(seven misses, all toward success), so I shade derivation odds up by about 0.05–0.10 against the stubs' priors and leave kernel odds at
+the rate the kernel lane showed (M2: four items landed; FS-87's target 1 in 17 minutes against a 4–6 hour price). "Fit" is at Kooshi's
+current cap of three agents (§1.1); the cap-two fit is in Stage 3.*
+
+| # | candidate | decides, at what grade | fit (4 h) | odds | bearing: χ ≥ 6 / the conjecture | its null teaches | ban |
+|---|---|---|---|---|---|---|---|
+| A | **FS-100 in-ban, one milestone**: stage 0 (the reframe) with stage 3 (the MR reading room) as its §PA; stage 4, Kronecker selection, derivation + blind verifier; the entropy question of stage 5 as §IQ's structural form | Kronecker selection TRUE (closes layer 1: FS-64's adelic windows at four colours over ℚ(√47)) or FALSE over ℚ(√11) ("the first control the gap has ever had"), at [hand, derivation + blind]; MR's status graded: the positive-entropy half in print or not, the zero-entropy half named | planner 45 min; derivation and verifier in parallel from a fixed claim list, ~2 h; close ~30 min | decided either way 0.45–0.50; TRUE 0.40 (stub's X-KS); MR's difficulty graded with a read citation 0.75 | none on six; **the conjecture's exposed five-clause** at ℚ(√47) and ℚ(√167) ≥ 5 wait on MR (stub §2–3) | a GAP at J37's named equidistribution step, and "MR is ×2×3-hard here" read, not recalled: the measure route to five at ℚ(√47) is then a reading room while that conjecture stands, and post-ban effort goes to P1's finite `H` | yes |
+| A′ | FS-100 as **two** milestones (A, plus stage 6: EI-2 over ℚ(√11) where colourings exist, or stage 5's MR proper) | as A, plus EI-2 at ℚ(√11): the first test of an example invariant (G79) on a field whose colourings exist | fits at three only with no kernel lane | EI-2 at ℚ(√11) decided 0.30; MR proper 0.10 | as A | EI-2's GAP is SI's "⟸" again | yes |
+| B | FS-98, T-B1 (the stub: "isolation across an ultrametric front") | T-B1 TRUE or FALSE; given MR, row 88 ⟺ T-B1 | a derivation + verifier fits | 0.15–0.20: "both stopped at one named step by two minds (row 111)" | none on six; row 88's other half, but only *given MR* — so a landed T-B1 still leaves row 88 on MR | the same named step, a third time | yes |
+| C | **Kernel: FS-75's minimal instance** — `χ(ℚ(√167)²) ≥ 4` in the kernel: the three-colour criterion in relation form (leaf 1), T41's 36-vector certificate (1,050 leaves) or its four-case hand proof, the lattice in the plane by `decide`, composed | the first field-level lower bound at an exposed field in the kernel (J43's count: none today), plus a reusable kernel criterion for every `Θ₃` certificate (FS-60's 13 fields, ℚ(√47)'s 2,997-node tree) | planner 45 min; implementer ~2–2.5 h; close 30 min; no blind verifier needed | 0.50 for the whole composition; 0.80 for the checker and the embedding; leaf 1 is the unpriced risk (the stub: "the cost, **unpriced**") | none on six; moves the conjecture's widest-gap field's bound from a checker's word to the kernel's | leaf 1's price, measured — which tells FS-75's S1 target what it costs | yes (kernel; existing certificates) |
+| D | Kernel: FS-87's targets 2–3 — dB9's V1, the checker for Parts's nine trees, then row 85 as a conditional theorem with (S″) named | row 85 (de Grey's lattice: all 9,120 four-colourings `8Λ`-periodic; Mixon's 2018 question) toward the kernel | fits; rate known from target 1 | 0.65 for targets 2–3; 0.35 for the conditional theorem | none; publication substrate (`CLOSED-QUESTIONS.md` §2.5) | a price for the trees' checker | yes |
+| E | FS-82 | — | — | — | — | — | **closed** (§1.1): not a candidate |
+| F | FS-67's remnant at three colours (`CLAUDE.md` row 11: "3-colour the non-zero-winding part of `E_3(G)`") | the product theorem completed at `k = 3` | a derivation + verifier fits | 0.40 (heights exist at three colours, G71) | none on six; none on the conjecture now that three colours are decided over every real field (row 99) | the winding part's colouring as a named step | yes |
+| G | FS-92, character classification at `k ≥ 4` | every band `k`-character is one place's pullback plus an archimedean part, or a counterexample | fits | 0.40 | none; characters are already excluded as falsifiers at the exposed fields (rows 96, 101) | the (g3) step at `e ≥ 2` | yes |
+| H | FS-99, the ℚ⁴ control ("is every four-colouring of `G(ℚ⁴)` the Benda–Perles pullback? Zaks 1989 first") | a control separating dyadic tightness from triangles | reading first, then a derivation | 0.30 | none; calibrates row 88 | — | yes |
+
+**Folded into A rather than a milestone of its own:** J43's second surprise (§1.2 (b)) — whether ℚ(√143), ℚ(√311), ℚ(√335) sit in T-C(A)'s
+class, i.e. whether FS-100's three-field lemma reaches the conjecture's other exposed five-clause fields. A few seconds of exact arithmetic
+for the J51 planner's §IQ item 5, logged at the ban's edge.
+
+**Checked and dropped as out of scope for four in-ban hours:** FS-42 (5-tight quotients: the one residue route to a five-forced pair, but
+its instrument is a quotient enumeration, which the ban names); FS-59 and FS-84 (their in-ban remainder *is* FS-100's MR; the rest is
+post-ban); FS-90 (Kooshi's grant, a search).
+
+### Would have searched here
+
+- None in this stage.
