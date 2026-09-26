@@ -142,3 +142,53 @@ from before "; it is **false**" to before today's "— adding material" (its sen
 | R13 | G52, the free circle | ", and the shared centre pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime)" | `34464cba^` |
 
 Gates after batch 1: audit PASS, dupes 10, ledger-B PASS, bib PASS, architecture PASS; `CLAUDE.md` 284,566 bytes.
+
+### Batch 2 — the narrative cut's method grokkings → `CLAUDE.md` (R-G21a, R-G30a–i, R-G46a, R-G49a, R-G50a, R-G51a)
+
+Verbatim from `c5e55f12^` except where noted (old words quoted):
+
+| id | entry | restored | rewording, with the old words |
+|---|---|---|---|
+| R-G30a | G30 | "Sorted by provenance, the record is close to a clean dichotomy: **derived from structure first, then measured — survived, every one**; **measured first, then interpreted — died, every one** … now 8-for-8 against the measurement-first column's 0-for-10. The rule this yields is NOT "measure less" — …"; Kooshi's "catch-22"; the falsifier (tally re-sorted every tenth milestone) | the two claim lists → GI §G30 with a pointer "(the two lists: …)"; "now 8-for-8 …" is the later instance's own words ("the derivation-first column wins again, now 8-for-8 against the measurement-first column's 0-for-10"); Kooshi's quote was "stated in this form on Kooshi's correction, which is the load-bearing half: *"…"*" |
+| R-G30b | G30 | the DIAL / CALIBRATED sentence, replacing today's "Prefer dials to searches for a positive, and calibrated beds whose answer is known." | dropped: "and has now come back flat four times" (a 2026-09-10 count) and "(`plans/M45-arity-floor.md` is that pattern made into a milestone)" — both in GI §G30 |
+| R-G30c | mode 1 | "Write the escape clause to the same standard as the prediction: a pre-registered interpretation is still an interpretation, and being committed in advance protects it from hindsight bias but not from being false." | old: "*The rule this adds: write the escape clause to the same standard as the prediction. A pre-registered interpretation …" |
+| R-G30d | mode 2 | "— "no seam-field object forces five" does not imply "no seam-field halo replaces a defect"." | — |
+| R-G30e | mode 3 | ", which converts one bug into two (a defer message said "cost budget", a cause that never fired, sending the first diagnosis toward budgets while the size guard was the culprit)" | old: "a verdict message that names a cause it did not check converts one bug into two"; "the defer message said …" |
+| R-G30f | mode 4 | ": "derived, therefore ours" is exactly the inference this grokking forbids everywhere else, and the search belongs at the opening, where it can still change the work." | old: "… and it had been running unchallenged. A derivation's novelty is a MEASUREMENT — a literature search — and it belongs at the milestone's opening, where it can still change the work." |
+| R-G30g | mode 6 | "**Every one of these readings is TRUE**, … *the instrument answered and the question closed*." | — |
+| R-G30h | the ladder | "**The pattern: the project hits a wall in discipline N; … which field each one belongs to.**" | — |
+| R-G30i | positive form | "Its positive form: Kooshi's instruction to write the conjecture UP for a stranger … *Rule: before spending days of compute on a conjecture, write it for an outside reader …*" | old head: "* **G30, a new instance — and its positive form.** … The positive lesson is about where the derivation came from: …" |
+| R-G21a | G21 | "— scope lines inside an artifact do not survive into summaries unless they are in the headline"; "When a sweep refuses, the first question is not … fully satisfied."; "— and if it is only sufficient, what a refusal therefore cannot mean"; "Falsifier: none needed — this is a methodological invariant, and it fails only by being ignored." | old: "… — and if it is only sufficient, to say what a refusal therefore cannot mean" |
+| R-G46a | G46 | "; and read a search's failure as information about the search's genre, not about the objects"; "*Falsifier for the rule: …*" | — |
+| R-G49a | G49 | "The check ran at the close, where it can only assign credit; run at the opening it changes what the milestone is *for*. Searching either literature alone finds nothing — … *the gap was real, and it was a gap between literatures, not in them.*"; "Falsifier: three milestones running whose gate changes nothing about their scope — …" | old: "**(a) The check ran at the close, where it can only assign credit.** Run at the opening it changes …"; "Searching either alone finds nothing" |
+| R-G50a | G50 | "**The more expensive misses were not unsearched — …** **So the sequence that actually happened is: search → record → rank → forget.** A title with a guess attached is not knowledge; it is a debt, … — and **the cost of the scan is not the reason it keeps being skipped — …**" | old: "… reachable in under five minutes, so **the cost of the scan is not …" |
+| R-G51a | G51 | "— one attempt failing is a fact about the attempt"; "and, of the design as minted, a second run of this shape in which the competitor and the advisor produce nothing …" | old: "One attempt failing is a fact about the attempt."; "*Falsifier: a second run of this shape …" |
+
+### Batch 3 — § The gate, § Searching, the kernel's cost model → `CLAUDE.md` (R-gate, R-search, R-kernel)
+
+All verbatim from `c5e55f12^`: the refutation skip's why ("— its binders are meant to be unsatisfiable, and flagging one is flagging a
+theorem for its own content"); `STALE`'s ("which is what makes the annotation a checked claim rather than a `# noqa`") and `GENERIC`'s
+("where **no inhabitant witness can exist**"); the load-bearing control's ("since a check that flags it is matching the family name rather
+than the instance and is worthless"); `rg`'s condition ("naming a hidden directory explicitly works; it is recursive discovery from `.`
+that skips it"); `exact?`'s example ("`Nat.testBit_two_pow_sub_one` was reported missing here on exactly that error"); the cost model's
+"This model predicted core's already-measured LRAT checker cost to within 20% (…), which is why to trust it."
+
+### Batch 4 — the incidentals → `plans/GROKKING-INSTANCES.md`, the owner's item 1, R14, the pointers
+
+- **GI** (`f1/gi_add.py`, re-runnable against `d03df9a8`'s GI): §G21, §G30, §G46, §G49, §G50 extended or minted from `c5e55f12^`'s
+  entries (`f1/excise.py`: the old entry, line wraps joined, every sentence and every 10-word run the corpus already holds replaced by
+  "[…]", so the one-home rule and `--dupes` hold); §G51, §G58, §G64, § standard of evidence, § Two machines, § Searching, § The gate,
+  § Make the gate fail minted, each passage headed by the commit that cut it. 9,599 → 60,864 bytes.
+- **The owner's item 1:** G21's FS-81 "contended times" clause and G49's row-88 "C14.2 (c) … never carried to the lemma" moved verbatim
+  to GI §G21 and §G49. Neither is its rule's only statement: "re-ask a deciding number alone" stands in § Two machines ("minimum of three
+  runs") and in "carry what it MEASURES" ("a contended-wall timing used as a quiet-CPU cost"); the held-paper clause is G49's *Do* ("a
+  held paper is prior art for questions it was not read for") with the Hubai instance beside it. G21 now reads "…never NONEMPTY; the second
+  and third, and the rest: …"; G49 "**Row 88's close:** zbMATH's `ab:` field …".
+- **R14** (cut at `6852a2ae`, 2026-09-15): § Two machines, "a population check that runs itself" + "— the answer to why writing a rule
+  down does not install it" (old: "**The mechanism this produced is worth more than either number, because it is the answer to why writing
+  a rule down does not install it.**").
+- **Pointers** ("More instances: `plans/GROKKING-INSTANCES.md` §…") added at G46, G51, G58, G64, § standard of evidence, § Two machines,
+  § Searching, § The gate, § Make the gate fail.
+
+Gates after batches 2–4 (one commit, so no commit carries a dangling pointer): audit `--base d03df9a8` PASS, `--dupes` 10, ledger-B PASS,
+bib PASS, architecture PASS; `CLAUDE.md` 290,964 bytes; GI 60,864 bytes.

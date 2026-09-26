@@ -494,8 +494,12 @@ unit-vector group (G80), with no forcer.
   exact certificate.*
 * **G21 — A negative measures its enumeration. [method]** A search run against a sufficient-but-not-necessary
   check measures the check; a verdict — negative, positive count, or speedup — is a statement about its
-  enumeration and conditioning, and both belong in the headline sentence. At registration, say whether the
-  acceptance test is also necessary. Point every new instrument at a known positive before believing its zero;
+  enumeration and conditioning, and both belong in the headline sentence — scope lines inside an artifact do not survive into
+  summaries unless they are in the headline. When a sweep refuses, the first question is not "what does this say about the
+  objects" but "is my acceptance test the exact condition, or a sufficient one?" — because a conservative test converts a
+  *finding* into a *measurement of my own instrument*, silently and with the registered-prediction discipline fully satisfied.
+  At registration, say whether the acceptance test is also necessary — and if it is only sufficient, what a refusal therefore
+  cannot mean. Falsifier: none needed — this is a methodological invariant, and it fails only by being ignored. Point every new instrument at a known positive before believing its zero;
   assert on the written artifact, never on the list that produced it; a control the instrument cannot see is
   not a control. **And where a phase's output is eliminations, its defects all point one way**: four in one phase
   (M63 phase G, 2026-09-11) — an edge law that drops an edge, an over-merged equivalence key, a float sign test inside
@@ -512,7 +516,7 @@ unit-vector group (G80), with no forcer.
   milestone, row 79): ℚ(√167)'s `L3e1c94c6` read as having no periodic three-colouring because the search stopped at `N = 20` —
   its least period is 23 — and the survivor `Ld14c588b` colours linearly with period index 1,080, past `N ≤ 30` and circular
   `N ≤ 120`. **Read a solver's colouring before searching its periods:** one Fourier transform of FS-61's 1.47 M-point colouring
-  showed a single character of amplitude 0.74 that named the period 23 at once. **And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question. **FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; **contended times inflate 2–3×** — the ladder read 983 s at the first refusing radius, the quiet minimum of three 463 s — so a number that enters a decision is re-asked alone; the third, and the rest: `plans/GROKKING-INSTANCES.md` §G21.
+  showed a single character of amplitude 0.74 that named the period 23 at once. **And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question. **FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; the second and third, and the rest: `plans/GROKKING-INSTANCES.md` §G21.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
@@ -567,17 +571,33 @@ unit-vector group (G80), with no forcer.
   on the cell family in either direction. Killing test: a scale with χ < 7, or a bounded refuting family whose defect tends
   to zero.*
 * **G30 — Measurement generates; derivation kills. [method]** A measurement buys a candidate pattern; a
-  conclusion is bought by a derivation or a pre-registered replication on fresh objects. Prefer dials to
-  searches for a positive, and calibrated beds whose answer is known. Failure modes:
-  1. An escape clause whose interpretation contradicts what is already proven about the objects.
-  2. A prediction applying a grokking whose quantifier does not match the measurement.
-  3. A verdict message naming a cause it did not check.
-  4. A derivation that is correct and second — novelty is a literature search at the opening (G49).
+  conclusion is bought by a derivation or a pre-registered replication on fresh objects. Sorted by provenance, the record is
+  close to a clean dichotomy: **derived from structure first, then measured — survived, every one**; **measured first, then
+  interpreted — died, every one** (the two lists: `plans/GROKKING-INSTANCES.md` §G30) — now 8-for-8 against the measurement-first
+  column's 0-for-10. The rule this yields is NOT "measure less" — every derivation above began life as a pattern somebody noticed in
+  a measurement, and the quadrature and stacking laws were derived precisely because earlier censuses had shown where to look
+  (Kooshi's correction, the load-bearing half: *"the interesting patterns that become intuited and derived show up first from
+  measurement, so it's a catch-22."*). Prefer measurements that turn a DIAL (a parameter whose behaviour is informative in both
+  directions — G29's ladder, the hetero-dimer effort curve against overlap) over searches that hunt for a POSITIVE (whose null
+  result is uninterpretable); and prefer CALIBRATED test beds — ask the new question on an object whose answer is already
+  certified, so a zero reading bounds the instrument instead of being mistaken for a fact about the world. Failure modes:
+  1. An escape clause whose interpretation contradicts what is already proven about the objects. Write the escape clause to the
+     same standard as the prediction: a pre-registered interpretation is still an interpretation, and being committed in advance
+     protects it from hindsight bias but not from being false.
+  2. A prediction applying a grokking whose quantifier does not match the measurement — "no seam-field object forces five" does
+     not imply "no seam-field halo replaces a defect".
+  3. A verdict message naming a cause it did not check, which converts one bug into two (a defer message said "cost budget", a
+     cause that never fired, sending the first diagnosis toward budgets while the size guard was the culprit).
+  4. A derivation that is correct and second — novelty is a literature search at the opening (G49): "derived, therefore ours" is
+     exactly the inference this grokking forbids everywhere else, and the search belongs at the opening, where it can still
+     change the work.
   5. A theorem over a provably empty domain: every theorem whose hypothesis is a structure ships a named
      inhabitant (`scripts/vacuity.sh` enforces this).
   6. A correct instance recorded where a theorem was available (look for `[measured]` beside a small finite
      list, hypotheses narrower than the proof uses, a `decide` doing a step ring theory names). After
-     generalizing, delete each hypothesis once and confirm the proof breaks.
+     generalizing, delete each hypothesis once and confirm the proof breaks. **Every one of these readings is TRUE**, which is
+     exactly why they survive every gate this project has — nothing is wrong, something is merely smaller than it needed to be.
+     The cause is not a bad inference; it is that *the instrument answered and the question closed*.
   7. A hypothesis implied by the emptiness of the conclusion's domain (`¬ Colorable G⁺ k → ∀ C : G.Coloring
      (Fin k), …` with G ≤ G⁺); remedies: the two-way form, a witness folded into the checked `Bool`
      (`NarrowCert.check`), or the inhabitant as a hypothesis.
@@ -586,6 +606,16 @@ unit-vector group (G80), with no forcer.
   (so far: graph theory → SAT → formal verification → Euclidean geometry → algebraic number theory → p-adic
   algebra → additive combinatorics → finite-field geometry; → topology (entered at FS-79: its cell-local four-colour formats are empty or blind and the coindex bounds stop at four on
   unit-distance graphs; the index bounds and non-local cocycles are open, row 80); → topological dynamics and algebraic `ℤ^d`-actions (entered at FS-89, row 95; its ergodic theory of amenable actions at row 88's close, row 111); → descriptive set theory (Borel and measurable combinatorics, entered at M3, rows 109–110); unentered: commutative algebra, FS-10).
+  **The pattern: the project hits a wall in discipline N; the wall is a theorem in discipline N + 1; that theorem explains the
+  wall and opens the next room. Every transition was forced by a specific obstruction, never by wandering — which is why
+  "derivation kills, measurement generates" keeps holding: the walls ARE the theorems, and the work is recognizing which field
+  each one belongs to.** Its positive form: Kooshi's instruction to write the conjecture UP for a stranger forced its structural
+  statement (the unit-distance graph on F² is the Cayley graph of the additive group F(i) with connection set the norm-one
+  torus), and the classical tool (Woodall/Fischer additive colourings) became visible the moment the object was named. *Rule:
+  before spending days of compute on a conjecture, write it for an outside reader in its native mathematical vocabulary; the
+  write-up is a derivation attempt in disguise, and it is cheaper than one census.* *Falsifier: none needed; like G21 this is a
+  methodological invariant and it fails only by being ignored — but the tally is falsifiable and should be re-sorted at every
+  tenth milestone.*
 * **G31 — No unit-distance object we hold, built or found, carries a pair compulsion at its top rung. [kernel on the
   sealed objects (row 66) and for the 1581's arity bracket; measured, complete at arity 2, on the 6-open ones]** **On
   sealed objects the arity-2 emptiness is a theorem**: Heule-510's `Forces ↔ =` and `Separated ↔ Adj` at five colours
@@ -753,11 +783,13 @@ unit-vector group (G80), with no forcer.
   already belongs to (Cayley graphs → character sums; frameworks → rigidity) and let that theory decide the
   question's shape before any search; the search then produces predicted instances, and the controls correct
   scope. Rank stubs accordingly: a finite exact computation plus a named theorem beats an object search; a
-  stub with no recognition yet is a reading room. The recognition sentence is the prior-art query (G49).
+  stub with no recognition yet is a reading room; and read a search's failure as information about the search's genre, not
+  about the objects. The recognition sentence is the prior-art query (G49).
   **And read the construction's own data layout, not only the plan's vocabulary for it** (2026-09-12): the result that
   closed M63's rotation screen came from four lines of `Arena.__init__` — the rotated half carries the same index set and
   internal edge list as the original — a mathematical fact the plan's vocabulary had no word for. When a plan and an
-  implementation describe the same object, the implementation is the one that cannot round off.
+  implementation describe the same object, the implementation is the one that cannot round off. *Falsifier for the rule: a frontier milestone whose object search delivers
+  what no recognition predicted — then the corollary's ranking is wrong for that genre.* More instances: `plans/GROKKING-INSTANCES.md` §G46.
 * **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]** Compulsions map forward along
   homomorphisms; on a Cayley graph a forced pair needs a period of every colouring. The distance law this entry
   carried (row 55) is the level-one shadow of the fan-gap theorem (row 66), which frees every pair at every distance over
@@ -790,7 +822,10 @@ unit-vector group (G80), with no forcer.
 * **G49 — The prior-art gate. [method, measured]** Recognition is half the rule; the other half is a search
   at the milestone's opening (WORKFLOW step 3.2): in the discipline's words, never ours; under two disciplines;
   for the question as well as the method; outside arXiv. Past misses came from checking at the close,
-  searching coined vocabulary, and searching one literature when the object sat in two. The field-plane
+  searching coined vocabulary, and searching one literature when the object sat in two. The check ran at the close, where it
+  can only assign credit; run at the opening it changes what the milestone is *for*. Searching either literature alone finds
+  nothing — which is also the honest explanation of why four milestones of reconstruction felt like discovery: *the gap was
+  real, and it was a gap between literatures, not in them.* The field-plane
   reduction was derived independently at least six times, and the Polymath16 corpus (2018–2026) poses
   Theorem B's question while citing Fischer, Moorhouse and Vinh zero times — **and Theorem B's value was in print in 1994**
   (`[Fischer1994]`, read and verified 2026-09-22): a seven-page proceedings paper titled in the discipline's word for our
@@ -806,12 +841,18 @@ unit-vector group (G80), with no forcer.
   the bibliography audit could not see pointed at the wrong paper for six days. **And a held blog text, not re-read (FS-73's close):**
   the archived Polymath16 threads, read thirteen days earlier for who first stated the 2-adic law, held Hubai's 2018 count of the Moser
   ring's four-colourings — 9,120, 380 with a triangle fixed, all 8-periodic, row 78's headline in ring form, which our census then
-  confirmed independently — and Parts's 2021 forced pair at 8/9; no zbMATH or citation search reaches a blog comment. More instances: `plans/GROKKING-INSTANCES.md` §G49. **Row 88's close:** C14.2 (c) is `[BardestaniMallahiKarai2017]` §3.2 in window form — held since FS-58 and named there, never carried to the lemma; and zbMATH's `ab:` field cannot hit a record whose summary is withheld (BMK 2017, `[ChenDai2017]`), so run `ti:`, `au:` and all-field queries beside it. *Do: at every
+  confirmed independently — and Parts's 2021 forced pair at 8/9; no zbMATH or citation search reaches a blog comment. More instances: `plans/GROKKING-INSTANCES.md` §G49. **Row 88's close:** zbMATH's `ab:` field cannot hit a record whose summary is withheld (BMK 2017, `[ChenDai2017]`), so run `ti:`, `au:` and all-field queries beside it. *Do: at every
   close, run the gate on the theorems filed, in the words of the discipline each belongs to; a held paper is prior art for questions it
   was not read for — and grep the held Polymath16 threads for every milestone's headline object, in the discipline's words ("ring",
-  "periodic", "colourings of `R₂`") and by its own numbers, before calling it new.*
+  "periodic", "colourings of `R₂`") and by its own numbers, before calling it new. Falsifier: three milestones running whose
+  gate changes nothing about their scope — then the cost is not buying anything and the gate should be a close-time check after
+  all.*
 * **G50 — Read what the search found. [method]** A held-but-unread paper, or a bibliography title whose guess
-  touches a live milestone, blocks that milestone's opening until scanned. An abstract is not a reading. Walk
+  touches a live milestone, blocks that milestone's opening until scanned. **The more expensive misses were not unsearched —
+  they were unread, sitting in our own bibliography under notes that had already guessed right.** **So the sequence that
+  actually happened is: search → record → rank → forget.** A title with a guess attached is not knowledge; it is a debt, and it
+  accrues interest at exactly the rate the project does work in that area — and **the cost of the scan is not the reason it
+  keeps being skipped — the reason is that a title with a guess attached reads like knowledge.** An abstract is not a reading. Walk
   the citation graph of the paper that *posed* the question; cross-check citations in two databases; mine
   every read paper's references into the bibliography the same day; mark reading per section. **FS-100's:** EL2021 and `[Wang2012]`, in `BIBLIOGRAPHY.md` since the day before under a journal-year key, were written "none held" in the milestone's stub, carried so into the advisor's card, re-fetched, and one read by its summary. EL2021 was fetched a third time, its path wrong in four briefs; its §2 on adelic solenoids is still unread where it may hold PE-2. More instances: `plans/GROKKING-INSTANCES.md` §G50. *Do: grep `BIBLIOGRAPHY.md` for a paper's arXiv id and Zbl number before fetching it or calling it unheld; scan, at the opening
   and before the derivation, every held-but-unread paper whose title touches the milestone. Killing test: three consecutive
@@ -997,7 +1038,7 @@ unit-vector group (G80), with no forcer.
   demonstrably exists — and the effort belongs on those half-size instances rather than on a full cube-and-conquer. **Asked as a DECISION at 23 (k = 7, 8)
   and 43 (k = 8), it returned nothing**: every refusal was free (the fixed-colour argument; an edge joining some `z` to `−z`) and
   every row that could carry a colouring was undecided at 3,000,000 conflicts. G58 asserts EXISTENCE, so its instrument is a FINDER
-  on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim. **Prior art** (searched 2026-09-16 under graph
+  on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim (More instances: `plans/GROKKING-INSTANCES.md` §G58). **Prior art** (searched 2026-09-16 under graph
   theory and algebraic combinatorics, in their words): the frame is the Burnside chromatic polynomial of group-invariant graphs,
   and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer2024]`, arXiv:2405.19543 — the key and id corrected by FS-71 batch 6a: 2303.06262 is `[CervantesKrebs2023]`) works on χ, not on invariance; **nothing
   found asserting or refuting this for any graph family** — the *distinguishing* chromatic number is the opposite question, and
@@ -1171,7 +1212,7 @@ unit-vector group (G80), with no forcer.
   reproduces `χ = 3, 4, 3, 5, 5` at `q = 3, 7, 9, 11, 19` and the controls `χ(Γ₅) = 3`, `χ(Γ₁₃) = 5`; 17, 25, 29
   are `≥ 5` and undecided at five. **The dimension-3 probe returned nothing** — `χ(UD(𝔽₃,3)) = 3` and every other case decided
   is `≥ 7` — so a six outside dimension two was unreachable *at the sizes the budget could decide*, and whether the skipping is
-  specific to the plane stays untested. *Do: never cite "six is skipped" as evidence for seven; aim any six-hunt at the gap
+  specific to the plane stays untested. More instances: `plans/GROKKING-INSTANCES.md` §G64. *Do: never cite "six is skipped" as evidence for seven; aim any six-hunt at the gap
   between `L(F)` and `χ(F²)`, where the residue, additive and hexagonal ceilings are silent; keep S and W apart in every
   sentence about six. Killing tests: a six-colouring at 17 (`χ ∈ {5,6}`), at `U₆₄` (`χ ∈ [6,8]`), or at any window member;
   or any plane pinned at exactly 11 (which refutes the two-form reading and confirms the mechanism one).*
@@ -1456,7 +1497,8 @@ unit-vector group (G80), with no forcer.
   this extends: a real field whose `U`-invariant `E`-null measures are not Haar (row 100's exception fields are uncovered for MR; they have `L = 2`, so no colouring consequence is lost, row 123).*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
-  two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
+  two independent attempts hitting one wall licensed an impossibility theorem (row 58) — one attempt failing is a fact about the
+  attempt. Design: isolate each
   agent's scratchpad (a shared temp directory is a covert channel), brief both identically, give the advisor
   the record and a written expectation, rule prior art shared. Records: `plans/COXETER-2026-09-08-mascot.md`,
   `plans/POROS-2026-09-08-mascot.md`. **The protocol and both briefs verbatim, with the review of what the advisor did (frame, instrument, refutation,
@@ -1470,7 +1512,9 @@ unit-vector group (G80), with no forcer.
   arrive later at full price.** *Do: at a wall, bring a second mind in while retraction is still free, and count the
   retractions — the wall FS-73 named for it — the inheritance question — returned a theorem at three colours; the next is the
   four-colour question (G71), where two independent attempts meeting one obstruction would license the negative.
-  Killing test: a phase whose disagreement cost more than the error it caught.* **Its runs** (FS-73, FS-79, FS-81, FS-85, FS-86, FS-89; each recorded, with its retractions and budgets, in the protocol's §3): first routes converge more often than they diverge (FS-73's heights, FS-79's edge-local heights, FS-85's abstract yes), and at FS-86 the sides converged twice without contact (HD1 for finite type; the measure-rigidity obstruction, G76); the contest has moved from between competitors to verification — *"the disagreement never started; verification is where contest must begin"* (FS-85) — where blind verifiers, quiet during a live competition, found every divergence and none of truth while retractions stayed free (FS-86: de Bruijn 2, Coxeter 1, Poros 0); FS-89 ran one derivation agent and blind verifiers: the second verifier's blind route stalled and D's lemma statements closed it — blindness bought a re-derivation of every lemma, not a second route; a verifier checks a fixed statement and cannot supply a missing route (FS-81). Every run found a covert channel (the list: the protocol's §3). The standing rules they left: hand-backs content-free, every report by explicit message; working files in scratch until hand-back; neutral commit subjects from the first competitive commit on; work in stages from the first turn (FS-86 lost three responses to the output-token limit); quote statements verbatim in briefs; tell the advisor of every stand-down and launch.
+  Killing test: a phase whose disagreement cost more than the error it caught; and, of the design as minted, a second run of this
+  shape in which the competitor and the advisor produce nothing the single agent would not have produced alone, and the
+  corrections all flow one way.* More instances: `plans/GROKKING-INSTANCES.md` §G51. **Its runs** (FS-73, FS-79, FS-81, FS-85, FS-86, FS-89; each recorded, with its retractions and budgets, in the protocol's §3): first routes converge more often than they diverge (FS-73's heights, FS-79's edge-local heights, FS-85's abstract yes), and at FS-86 the sides converged twice without contact (HD1 for finite type; the measure-rigidity obstruction, G76); the contest has moved from between competitors to verification — *"the disagreement never started; verification is where contest must begin"* (FS-85) — where blind verifiers, quiet during a live competition, found every divergence and none of truth while retractions stayed free (FS-86: de Bruijn 2, Coxeter 1, Poros 0); FS-89 ran one derivation agent and blind verifiers: the second verifier's blind route stalled and D's lemma statements closed it — blindness bought a re-derivation of every lemma, not a second route; a verifier checks a fixed statement and cannot supply a missing route (FS-81). Every run found a covert channel (the list: the protocol's §3). The standing rules they left: hand-backs content-free, every report by explicit message; working files in scratch until hand-back; neutral commit subjects from the first competitive commit on; work in stages from the first turn (FS-86 lost three responses to the output-token limit); quote statements verbatim in briefs; tell the advisor of every stand-down and launch.
 
 ## Whose work this is
 
@@ -1532,7 +1576,7 @@ convince someone who trusts none of this and reads none of the Python:
   pattern list to be a *superset* of the achievable patterns, never a set of achievable ones — which retired a third of
   its evidence and shrank the solver-dependent core from one claim about a 51,133-vertex object to **twenty claims about
   25,567-vertex halves** — a different *kind* of artifact, because twenty half-instance refutations are individually within reach of proof logging where one whole-object refutation was not. **The question that did the work is cheap and repeatable: *what must someone who trusts none of
-  this actually check?*** Ask it while the evidence is still being gathered, not at the write-up, or you will pay for evidence nothing rests on.
+  this actually check?*** Ask it while the evidence is still being gathered, not at the write-up, or you will pay for evidence nothing rests on. More instances: `plans/GROKKING-INSTANCES.md` § The standard of evidence.
 - **Order a verification's steps by marginal evidential value, never by narrative order.** Same session, twice:
   a verification script was written so its *least* informative step ran first, leaving the checks that decided
   the question queued behind slow ones that could not.
@@ -1666,10 +1710,10 @@ rebuilds the state from picklable arguments, which also survives a platform with
 PHYSICAL cores, 32 threads** (2 per core), 64 MiB L3 in two instances, 128 GB RAM — `nproc` says **32** and
 that is the *thread* count. 32-way solving showed no *large* contention penalty (**12.6 cubes/min** against ~8 at sixteen workers), but per-cube times at
 ONE width vary as much as any width effect (105.1 s and 129.2 s at 32-way, 126.6 s at 16-way), so **the width effect is not
-distinguishable from run-to-run variation in this data**.
+distinguishable from run-to-run variation in this data**. More instances: `plans/GROKKING-INSTANCES.md` § Toolchain — Two machines.
 
 **Keep a PREDICTED throughput beside the measured one and reconcile them whenever they disagree**: a prediction that can be
-divided back out of a rate is a population check that runs itself (it caught a before/after comparison over two cube ranges
+divided back out of a rate is a population check that runs itself — the answer to why writing a rule down does not install it (it caught a before/after comparison over two cube ranges
 of different difficulty — the cost model failed an arithmetic check). **Say physical cores when sizing memory-hungry work**; `nproc` disagreeing with a plan is the
 hardware moving — **ask which machine before treating a core or memory count as fact**, and ask to swap to the
 desktop when a step wants it (the SAT solving does). Timings compare only within one machine: per-operation
@@ -1834,7 +1878,8 @@ hand-written module before starting a long generated build.
   twice — in the elaborator and in the kernel — so it is ~2× slower and dies on `maxHeartbeats` first;
   `+kernel` needs no knob and buys the same axioms.
 - **Reduction-step count is the only thing that costs** (measured: ~33 µs per iteration of a trivial
-  recursive function). GMP-backed `Nat` arithmetic *and bitwise* operations are free at thousands of bits;
+  recursive function). This model predicted core's already-measured LRAT checker cost to within 20% (it rebuilds a 6,325-slot
+  array per step; 6,325 × 33 µs = 209 ms against 100–180 ms measured), which is why to trust it. GMP-backed `Nat` arithmetic *and bitwise* operations are free at thousands of bits;
   `USize` is stuck (its width is an `@[extern] opaque`); `Nat.ldiff` is not accelerated; `Nat.fold` is
   superlinear. Which operations are hardware-backed is invisible in the source — measure before believing.
 - **Data the kernel must *build* costs O(its whole size) per access; a *literal* does not.** A structure
@@ -1867,13 +1912,15 @@ hand-written module before starting a long generated build.
   anchor, so `grep -c "LDL^T re-run"` returns 0 for a string present four times** (2026-09-15, FS-53 phase B: it briefly made
   the LDL verification of six certificates read as *zero blocks checked* — failing, as ever, in the direction that looks like a
   clean negative). `grep -oF` counts correctly; `rg` and `grep -P` match correctly.
-- **The file selection.** `rg` respects `.gitignore`, which hides `.lake/` and `build/`. Use `rg` for
+- **The file selection.** `rg` respects `.gitignore`, which hides `.lake/` and `build/` (naming a hidden directory explicitly works; it is
+  recursive discovery from `.` that skips it). Use `rg` for
   searching source; use `rg -uu` or `grep -rP` for any completeness question (does this artifact exist, is
   this string anywhere); never believe a count from a bare `grep -E` alternation inside a star.
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the
-  statement (`= true` versus `decide (…)`, an iff versus an implication) first. **And Mathlib is not the
+  statement (`= true` versus `decide (…)`, an iff versus an implication) first — `Nat.testBit_two_pow_sub_one` was reported
+  missing here on exactly that error. **And Mathlib is not the
   whole library:** `grep -rn "<name-fragment>" $(lean --print-prefix)/src/lean/` searches core. Grep the
-  source before writing a proof, and before writing that something is missing.
+  source before writing a proof, and before writing that something is missing. More instances: `plans/GROKKING-INSTANCES.md` § Searching.
 
 ## The package
 
@@ -1895,16 +1942,18 @@ because a formalization that proves the *wrong* theorem is the characteristic fa
   empty domain. Vacuity is undecidable, so the check **requires evidence**, as `axioms.sh` requires every
   purchase to be declared. **The law:** a statement is vacuous exactly when some `∀`-binder has an empty
   domain; `(C : G.Coloring α)` is the dangerous binder, a `Forces` binder is a possible *overclaim* instead
-  (FS-29), and a declaration concluding `False` is a refutation and is skipped. **Verdicts:** `WITNESSED`
+  (FS-29), and a declaration concluding `False` is a refutation and is skipped — its binders are meant to be unsatisfiable, and flagging one
+  is flagging a theorem for its own content. **Verdicts:** `WITNESSED`
   (inhabitant proved); `DECLARED` (deliberate emptiness, named with its reason in the docstring as
   `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
-  not proved), which fail unconditionally before the baseline; `GENERIC` (parametric — the caller's
+  not proved, which is what makes the annotation a checked claim rather than a `# noqa`), which fail unconditionally before the baseline; `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's
   obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
   silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=7438 refutations-skipped=313
   sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`. The baseline's two entries,
   `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
   `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
-  at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`.
+  at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`, since a check that flags it is matching the family name rather than the
+  instance and is worthless. More instances: `plans/GROKKING-INSTANCES.md` § The gate.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`,
   `vacuity.sh` and `lean4checker.sh` save their tool's complete output under `build/gate/<gate>/` (`latest`
   is the last complete run; `scripts/gate-log.sh`) and print a digest: every count, whether the counts
@@ -2059,7 +2108,7 @@ lost its power to discriminate.
 **To compare POLICIES, replay them over a recorded decision sequence rather than re-running** (2026-09-12). A batch-size
 lever estimated at ~2.9× measured **2.31×** when every policy was replayed over one pilot's own accept/reject log — one run,
 one population, one thing differing — with the control that the replay reproduces the original run's exact cost; re-running
-would have compared two populations and one policy at once.
+would have compared two populations and one policy at once. More instances: `plans/GROKKING-INSTANCES.md` § Make the gate fail.
 
 **A cost measured on a FAILING run understates a succeeding one — and the tell is that the cheap steps are the failures**
 (2026-09-12). A reduction walk was costed at **24% expensive probes** from a sample already fallen into the cheap satisfiable
