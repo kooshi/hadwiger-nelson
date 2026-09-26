@@ -826,7 +826,7 @@ unit-vector group (G80), with no forcer.
   names the live radius sums before any base exists; one free prime kills. Necessary is proved; sufficient is untested, the
   record's rotation the only positive instance. **The apparent filter is free where the circle is free**: with the circle `t ×`
   the unit shell for an integer `t`, the certificate's defeat is automatic for even `t` (`φ` lands in a characteristic-2 residue
-  field, so every circle point carries the centre's residue), and the record has `t = 2`; so "this object defeats the residue
+  field, so every circle point carries the centre's residue, and the shared centre pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime)), and the record has `t = 2`; so "this object defeats the residue
   certificate" is not evidence about the object, and the live quantity is the **off-diagonal** share of monochromatic cross
   edges (the record 0 of 30, `ρ₆₃` 24 of 54). `|p|² = n` is free — nonempty by scaling alone — whenever `n = k²·m` with `m` a squared distance the lattice already
   realises (4, 16, 12 free; 2 not); the converse fails (`n = 5` has 60 points and no such decomposition — M63H2-T2's own correction record; FS-71, batch 4c). *Do: for every in-field rotation compute the live radius sums from its cosine before any
@@ -997,7 +997,7 @@ unit-vector group (G80), with no forcer.
   demonstrably exists — and the effort belongs on those half-size instances rather than on a full cube-and-conquer. **Asked as a DECISION at 23 (k = 7, 8)
   and 43 (k = 8), it returned nothing**: every refusal was free (the fixed-colour argument; an edge joining some `z` to `−z`) and
   every row that could carry a colouring was undecided at 3,000,000 conflicts. G58 asserts EXISTENCE, so its instrument is a FINDER
-  on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. **Prior art** (searched 2026-09-16 under graph
+  on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim. **Prior art** (searched 2026-09-16 under graph
   theory and algebraic combinatorics, in their words): the frame is the Burnside chromatic polynomial of group-invariant graphs,
   and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer2024]`, arXiv:2405.19543 — the key and id corrected by FS-71 batch 6a: 2303.06262 is `[CervantesKrebs2023]`) works on χ, not on invariance; **nothing
   found asserting or refuting this for any graph family** — the *distinguishing* chromatic number is the opposite question, and
@@ -1465,7 +1465,7 @@ unit-vector group (G80), with no forcer.
   the final plan contains none of those errors — **every retraction was free** (nothing committed, no solver time
   paid, nothing claimed to a third party). **Fast public error is the cheapest instrument available, but only while
   retraction is free, and in that window it should be spent rather than rationed**; once retraction is expensive the
-  same speed produces escalation. **Front-load the disagreement into the window before anything is paid for**, and
+  same speed produces escalation, because the cost of being wrong has become the cost of having *been* wrong. **Front-load the disagreement into the window before anything is paid for**, and
   **count the retractions in it: zero is not agreement, it means the disagreement has not started yet and will
   arrive later at full price.** *Do: at a wall, bring a second mind in while retraction is still free, and count the
   retractions — the wall FS-73 named for it — the inheritance question — returned a theorem at three colours; the next is the
@@ -1531,8 +1531,8 @@ convince someone who trusts none of this and reads none of the Python:
   only while writing it, that its 552 exhibited colourings were **not load-bearing at all** — the argument needed its
   pattern list to be a *superset* of the achievable patterns, never a set of achievable ones — which retired a third of
   its evidence and shrank the solver-dependent core from one claim about a 51,133-vertex object to **twenty claims about
-  25,567-vertex halves**. **The question that did the work is cheap and repeatable: *what must someone who trusts none of
-  this actually check?*** Ask it while the evidence is still being gathered.
+  25,567-vertex halves** — a different *kind* of artifact, because twenty half-instance refutations are individually within reach of proof logging where one whole-object refutation was not. **The question that did the work is cheap and repeatable: *what must someone who trusts none of
+  this actually check?*** Ask it while the evidence is still being gathered, not at the write-up, or you will pay for evidence nothing rests on.
 - **Order a verification's steps by marginal evidential value, never by narrative order.** Same session, twice:
   a verification script was written so its *least* informative step ran first, leaving the checks that decided
   the question queued behind slow ones that could not.
@@ -2001,7 +2001,7 @@ rulings in one night rested on a number measuring something adjacent: a per-*ask
 per-*candidate* cost (wrong by 30×); a contended-wall timing used as a quiet-CPU cost (1.59×); a mid-window ratio
 used as a completed-window one (16× against 7×). None was a wrong measurement, which is why none looked wrong.
 **A number in a ruling travels with its units, its conditions and its population, or the ruling is about
-something else**; the repair is to re-derive the decision from the corrected figure out loud.
+something else**; the repair is to re-derive the decision from the corrected figure out loud, because a ruling that survives its bad evidence needs new grounds, not a quiet pass.
 
 **And the sharp, checkable form of that rule, extracted 2026-09-12 after the same error's FOURTH instance in
 one milestone: when two numbers are compared, exactly ONE thing may differ between them.** A brief claimed a new
@@ -2017,11 +2017,11 @@ measurement of a different quantity, which is why none looked wrong to its autho
 recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
 prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a
 quantity ~90% of which is produced in the *other* phase on byte-identical code, so a ratio near 1 was forced.
-**Confirm that BOTH outcomes are reachable — the one that would teach you nothing and the one you predict.** And
+**Confirm that BOTH outcomes are reachable — the one that would teach you nothing and the one you predict.** A prediction whose target region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it fails. And
 the test of whether "mis-specified" is a diagnosis or an escape: **the evidence for the mis-specification must
 predate the result** (here the 90% split was in the run's own numbers before the prediction). **The rule is
 symmetric: a control going RED is not evidence either, until you can name what a wrong-reason red would look
-like** — three plants in one night fired for the wrong reason, one on an out-of-range index that died before
+like** — it is an unexplained failure that happens to agree with you. Three plants in one night fired for the wrong reason, one on an out-of-range index that died before
 reaching the guard it was written to test. The repair is a **pair**: the stub that must fail beside a faithful
 stub that must pass, so the refusal is seen to come from the cause and not the scaffolding.
 
@@ -2044,7 +2044,7 @@ ratio of 0.60 as `1×` — a display rounding turning a red into something that 
 output is the check**, and the last transformation before a human sees it is inside the trust boundary.
 
 **Bound a plant's effect on BOTH sides, and the control reports for free when it has gone blind.** A control
-that can say *"I can no longer tell"* beats one that can only pass or fail — but the mechanism, not the outcome,
+that can say *"I can no longer tell"* beats one that can only pass or fail, because that third state is where this file's oldest failure mode hides — but the mechanism, not the outcome,
 is what reproduces. Assert the two-sided form:
 
 ```
@@ -2086,7 +2086,7 @@ catches the whole class.
 **A TRUE explanation that fully accounts for the observation will stop you looking for a second one — and the second one may
 be the one about your own apparatus** (2026-09-12). An engineer tested a theorem out of sample at `n = 3`, where its load-bearing
 hypothesis `√(4n−1) ∉ K` fails by definition of the field (`4n−1 = 11`): the prediction was void, not met, and two laws "agreed
-300 of 300" because both were inapplicable. Its first account — a mis-filed fact — was wrong in the flattering direction: `n = 3`
+300 of 300" because both were inapplicable. Its first account — a mis-filed fact — was wrong in the flattering direction — a confession can flatter, because *"I filed it under the wrong heading"* is tidier and more forgivable than what actually happened: `n = 3`
 fails **two** gates, and a true, sufficient-sounding reason for the first (*"this member can never reach five colours"*) made the
 member look **safe to compute on** — dead as an object, free as a test case — so it never asked whether a second gate also
 failed. The first failure was about the member; the second was about its own instrument.
@@ -2100,7 +2100,7 @@ which is exactly when the result is most wanted and least examined.
 whose identity for a source file is `(size, mtime in whole seconds)`: a same-size mutation written inside one second left the
 interpreter executing mutated bytecode against a restored source — every plant "passing" while the arithmetic under test was
 wrong. What caught it was the harness **re-running its controls after the restore and asserting the guarded state comes
-back**. Restore, then re-verify.
+back**. Restore, then re-verify, and treat a same-size edit inside one second as the case your caching cannot see.
 
 **And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
 is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
@@ -2131,7 +2131,7 @@ the new one was not. **Before believing any zero over a family, write down the g
 inside it.**
 
 **Do not mistake a one-sided filter for an inverted monotonicity** (an advisor's correction of the product owner who wrote it).
-Once a base contains the witness, growing it cannot recover the four-colouring — adding material makes a graph harder to colour
+Once a base contains the witness, growing it cannot recover the four-colouring (more material adds colour differences, and the certificate needs a value outside them) — adding material makes a graph harder to colour
 and a *sufficient condition for colourability* harder to fire: one statement, seen directly and through a one-sided filter;
 nothing is inverted. An agent told to expect an inversion hunts one and misses what is unusual: the filter can be defeated by
 **breaking its applicability rather than its conclusion**, and a `not-applicable` on the same footing as a silence is a pass nobody
@@ -2141,4 +2141,4 @@ it inapplicable before the ways to make it fail.**
 **And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose control
 docstring already said *"a control that passes without its failure mode being reachable has not been tested by passing"* had
 written a control that could not fire earlier the same evening, and noticed only when it tried to plant a fault in it. **The
-habit that produces the principle is planting faults routinely, not reasoning about controls carefully.**
+habit that produces the principle is planting faults routinely, not reasoning about controls carefully.** Reasoning finds the controls you thought about; planting finds the ones you did not.

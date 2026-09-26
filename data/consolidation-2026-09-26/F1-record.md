@@ -116,3 +116,29 @@ for `GROKKING-INSTANCES.md`: 11 groups. Current-state rewrites and incidentals a
 (≈ 2,600 of the detector's candidates, most of them the narrative cut's history).
 
 **Would have searched here:** none — no finite-witness search is needed for a history audit.
+
+## Stage 3 — restorations (in batches)
+
+### Batch 1 — the 09-13 squeeze and the 09-21 trim → `CLAUDE.md` (R1–R13)
+
+Each is the removed words verbatim from the named parent revision, inserted where the surviving sentence stands today; the only
+edits are joining punctuation ("—", ";", "."), the line-wrap hyphen "whole- object" → "whole-object" (R5), and R3's parenthesis moved
+from before "; it is **false**" to before today's "— adding material" (its sentence was reshaped at `fc2775f2`).
+
+| id | where today | restored words | source |
+|---|---|---|---|
+| R1 | G58, after "never a decider on the full plane." | "A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim." | `d0df4f82^` |
+| R2 | G51, "the same speed produces escalation" | ", because the cost of being wrong has become the cost of having *been* wrong" | `34464cba` (cut at `fc2775f2`) |
+| R3 | "Do not mistake a one-sided filter …" | "(more material adds colour differences, and the certificate needs a value outside them)" | `34464cba` (cut at `fc2775f2`) |
+| R4 | "… scars, not foresight" | "Reasoning finds the controls you thought about; planting finds the ones you did not." | `34464cba` (cut at `fc2775f2`) |
+| R5 | § standard of evidence, the reviewer bundle | "— a different *kind* of artifact, because twenty half-instance refutations are individually within reach of proof logging where one whole-object refutation was not" | `34464cba^` |
+| R6 | same | ", not at the write-up, or you will pay for evidence nothing rests on" | `34464cba^` |
+| R7 | "carry what it MEASURES" | ", because a ruling that survives its bad evidence needs new grounds, not a quiet pass" | `34464cba^` |
+| R8 | "Confirm that BOTH outcomes are reachable" | "A prediction whose target region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it fails." | `34464cba^` |
+| R9 | "a control going RED is not evidence either" | "— it is an unexplained failure that happens to agree with you." (old: "Where the uninformative outcome cannot be named, **a red control is not yet evidence** — it is an unexplained failure that happens to agree with you.") | `34464cba^` |
+| R10 | "Bound a plant's effect on BOTH sides" | ", because that third state is where this file's oldest failure mode hides" | `34464cba^` |
+| R11 | "A TRUE explanation …" | "— a confession can flatter, because *"I filed it under the wrong heading"* is tidier and more forgivable than what actually happened" | `34464cba^` |
+| R12 | "… verify its own RESTORE" | ", and treat a same-size edit inside one second as the case your caching cannot see" | `34464cba^` |
+| R13 | G52, the free circle | ", and the shared centre pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime)" | `34464cba^` |
+
+Gates after batch 1: audit PASS, dupes 10, ledger-B PASS, bib PASS, architecture PASS; `CLAUDE.md` 284,566 bytes.
