@@ -171,3 +171,7 @@ brief); the ban to 2026-10-01; replace any agent above ~500k harness.
 was committed before its audit passed, because the commit was chained with `;`; fixed within minutes). **Running:** J50 (Poros, next two
 milestones) and **J05** (no-loss `CLAUDE.md` compression, ≥ 15,000 bytes; brief `data/crunch-2026-09-25/briefs/J05-claude-md-compression.md`).
 The planners J51/J52 should launch after J05 lands (they read `CLAUDE.md`), or beside it if Kooshi prefers.
+
+**Update ~03:45 — standing authorization:** *"Please carry on with the remaining agents and milestones. […]"* So: on J50's report the **default two milestones run without waiting for his word** (record the choice and its four parts for him read); launch J51/J52 once J05 lands (or beside it if J05 runs long); run each milestone through planner → derivation + blind
+verifier → close-math → front page, **≤ 3 agents at once**. Still his and held for him: contacting outsiders, installs, budget
+raises, force-pushes, anything that breaks the ban (to 2026-10-01). On an unexplained crash: halt, and leave the report here.
