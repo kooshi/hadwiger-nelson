@@ -999,3 +999,23 @@ drafted here (the brief's touch list).
   `(d, D)`; the two V2-format certificates on disk and that no other census field has one (producing one is a post-ban search); what stays.
 
 **Would have searched here (stage 5):** none.
+
+### Stage 6 — SAVED (the inventory's final walk; the hand-back)
+
+**The inventory.** All 49 rows of `plans/FS75-close-inventory.md` carry a status: 48 **done** (each with the stage or entry that closes
+it) and one **declined here** (row 42, the vacuity scanner's blind spot: `scripts/` is outside this job's lane; held for the owner). No
+row is left open (`grep -c "| open |"` reads 0).
+
+**Held for the owner** (the choices the templates call Kooshi's, by the owner's instruction routed through J54's report):
+1. Row 119 as a new row against an update of row 79 (5a; recommended: the new row, medium-high).
+2. The claim-list line (5b; recommended: add it, medium).
+3. FS-75's next target, the family theorem (row 82), as a milestone of its own — Kooshi's choice (inventory 46); default: nothing opens.
+4. Running the consumer on the two other V2-format certificates after `tools/j52_intcert.py` takes `(d, D)` (inventory 45); J52K's and
+   this close's recommendation: low priority, neither is new mathematics; default: nothing runs.
+5. The vacuity scanner's blindness to `Winding`-typed binders (inventory 42) — a `scripts/` fix for a non-crunch job.
+
+### Theorems this phase proved (J54)
+
+- **FS75-N1's counterexample, re-derived** [hand; a second reading of J52K's one-mind claim] — `plans/FS75-derivation.md` FS75-N1: at
+  `s = ![0]` on `ℤ` a winding would need `1/3 ≤ W(1) ≤ 2/3` in `ℤ`, while the Cayley graph is edgeless.
+- No other theorem: the close files, scores and drafts; the gate (stage 2) is a literature search.
