@@ -165,3 +165,9 @@ close-math → front page (the crunch's pattern; briefs written by the planners 
 
 **Standing:** never quote agent ids to Kooshi; commit by explicit path; push, never force-push; no child spawns children (say so in every
 brief); the ban to 2026-10-01; replace any agent above ~500k harness.
+
+**Update ~03:30 — the crunch is over** (Kooshi: the two-agent cap is removed; back to normal, generally no more than three agents at once).
+`CLAUDE.md`'s budget is back to 300,000 (25bff6a0; the audit's ALLOW for the superseded 325,000 tokens is d640c639 — **owner slip:** 25bff6a0
+was committed before its audit passed, because the commit was chained with `;`; fixed within minutes). **Running:** J50 (Poros, next two
+milestones) and **J05** (no-loss `CLAUDE.md` compression, ≥ 15,000 bytes; brief `data/crunch-2026-09-25/briefs/J05-claude-md-compression.md`).
+The planners J51/J52 should launch after J05 lands (they read `CLAUDE.md`), or beside it if Kooshi prefers.
