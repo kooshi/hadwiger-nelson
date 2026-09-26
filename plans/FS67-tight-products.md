@@ -416,3 +416,67 @@ entries; DD-2 via `K_k × X`.
 | P-K | DD-2 ends GAP | 0.60 (= P-D) |
 | P-L | J27V records at least one divergence from J27D on a claim | 0.50 |
 | P-M | DB-1's route needs the non-bipartite hypothesis only (not non-3-colourability) | 0.55 (= P-B's TRUE) |
+
+## Stage 5 — SAVED (§M, §X, the two briefs)
+
+### 5.1 §M — the modeling passes (fresh Skill invocations: `debruijn-domain-modeling`, then `debruijn-obligation-modeling`)
+
+**Domain pass — what the model is.**
+- **"Pulled back from `G`" is "constant on `H`-fibres".** When `H` has an edge, `β(x, h) = β(x, h′)` for all `x, h, h′` already makes
+  `c = β(·, h₀)` a proper colouring of `G` (pick an edge `h ∼ h′`), so no colouring `c` need be quantified. The briefs state it both ways.
+- **FS67(G, k) is a property of `G` alone.** By DA-1 and DA-2 it is exactly "`G` is `k`-gap-free and `χ(E_k(G)) ≤ k`" — a statement about the
+  exponential graph `K_k^G` (its loops are isolated and its non-loop part is `k`-colourable). Every claim is extrinsic (plain graphs, predicates
+  beside them), matching Mathlib's `SimpleGraph`; row 66's `FanGap` is the kernel name of a gap. No kernel work here (D4 stays a stub).
+- **Unsampled members, checked:** an isolated vertex is a gap (`N[v] = {v}` misses `k − 1 ≥ 2` colours), so "no isolated vertex" in DA-2 is
+  implied by `k`-gap-freedom; `G = K₁` fails FS67 by DA-1; `H` edgeless is excluded by `χ(H) > k`.
+- **DC-2's hypothesis on `H` carries the rest:** `λ* < 1/(k−1) < 1` forces `H` connected and non-bipartite, and the ratio bound gives
+  `α(H)/|H| ≤ λ*/(1+λ*) < 1/k`, so `χ(H) > k` — the statement needs no separate hypotheses on `H`.
+- **The `k`-colouring as a vector colouring** (DC-1, DD-1): colours ↦ the `k` simplex vectors (pairwise inner product `−1/(k−1)`); a Gram matrix
+  `M ⊗ J` means equal vectors along fibres, hence equal colours. The Gram form is the invariant, not the vectors (they are defined up to an
+  orthogonal map).
+
+**Obligation pass — children and where each hypothesis is used (the mutation audit).**
+- **DA-1:** (a) a gapped `c` with `b ∉ c(N[x])`; (b) properness at edges through `(x, h₀)` uses `b ∉ c(N(x))`; (c) non-pullback uses `b ≠ c(x)` and
+  `|V(H)| ≥ 2`. **"Connected" is never used** — restated below without it.
+- **DA-2 (PA-T6):** (i) loops isolated (gap-freedom); (ii) colourings ↔ homomorphisms `Φ : H → K_k^G` (definitional); (iii) connected `H` ⟹ `Φ`
+  constant at a loop or into `E_k(G)`; (iv) ⟸ by `χ(H) > k`; (v) ⟹ takes `H` a component of `E_k(G)` with `χ > k` (exists: a disjoint union of
+  `k`-colourable components is `k`-colourable, with choice for infinite `G`) and `β(u, f) = f(u)`.
+- **DA-3:** (a) connectivity of `K_k × X` (Weichsel; `K_k` non-bipartite at `k ≥ 3`); (b) unique `k`-colourability (GL Cor. 1; `X` connected,
+  `χ(X) > k`); (c) unique ⟹ gap-free (moving a recolourable vertex changes the partition unless it empties a class, impossible since
+  `χ(K_k × X) = k`, Burr–Erdős–Lovász, `[Tardif2008]` Thm 3.2); (d) ⟸ by `β(i, x, h) = c(x, h)`, non-pullback because `X` is not `k`-colourable;
+  (e) ⟹: `X × H` is connected (both non-bipartite) and if `χ(X × H) > k`, GL Cor. 1 on `K_k × (X × H)` makes `β` a pullback from `K_k`.
+- **DA-4:** `[Tardif2023]` Thm 1 at `n = k ≥ 4`, components attaining `χ` (finite), then DA-3 ⟸; the second clause is DA-3's contrapositive.
+- **DB-1:** (a) re-derive El-Zahar–Sauer's colouring of `K_3^G`'s improper maps from a source J27D can read (if none is held, re-derive it: the
+  pair `(f, g)`, `f ∼ g`, is one proper 3-colouring of the bipartite double cover `G × K₂`, whose 3-colourings carry heights, G71); (b) mark every
+  use of "`G` not 3-colourable" and show each is pointwise ("`f` improper") or "connected, non-bipartite"; (c) the colouring is proper on
+  `E_3(G)`; (d) DA-2. **Failure branch:** a use that needs non-3-colourability globally is the GAP's name; a 3-gap-free `G` with `χ(E_3(G)) ≥ 4`
+  built by hand is FALSE.
+- **DB-2:** connectivity of `UD(𝔽₉, 2)`; tight ⟹ every 3-colouring gap-free (G54 D2-A; Blokhuis–Brouwer–Haemers); tower levels tight (row 72).
+- **DC-1:** (a) `χv` of a 1-walk-regular graph is its Hoffman value `1 + d/|λ_min|` (quote the held `[GodsilRobersonRooney2017]` or GRRSV);
+  (b) the simplex vector colouring is optimal (Result 1); (c) Result 4 ⟹ Gram `M ⊗ J`; (d) pullback. `H` connected and `χv(H) > k` are Result 4's.
+- **DC-2:** (a) the finite mixing lemma; (b) J21-MX's plurality `φ` is proper; (c) gap-freedom of `φ` supplies `x_c`; (d) the contraction on
+  `ε = max_{x, c ≠ φ(x)} m_c(x)`; (e) `ε = 0` is pointwise constancy (finite `A`). **"`G` connected" is likely unused** (gap-freedom is per
+  component) — J27D deletes it and records the result.
+- **DD-1:** (a) Result 3/5's convex form `α(M_p ⊗ J) + (1−α)(J ⊗ M_q)`; (b) entries in `{1, −1/(k−1)}`; (c) `α = 0` would `k`-colour `H`, `α = 1`
+  is a pullback, `0 < α < 1` must be excluded from the entry constraint; (d) relate Result 5's hypothesis to Zhang's IS-imprimitivity.
+- **DD-2:** (a) spectrum of `K_k × X` for regular `X`: `{(k−1)μ, −μ}`, so tight iff `(k−1)μ_min(X) ≥ −d_X`; (b) a Hedetniemi pair at `k` with that
+  condition on `X`; (c) `[Zhu2011]` puts `χ_f ≤ k` on one factor; (d) `[Tardif2022frac]` first; else GAP naming the missing ingredient.
+
+**Final forms (the briefs quote these; §4.3 stands for the rest):**
+- **DA-1′** "If `G` is `k`-colourable but not `k`-gap-free, then for every graph `H` with at least two vertices there is a proper `k`-colouring of
+  `G × H` not pulled back from `G`."
+- **DA-2′** "If `G` is `k`-gap-free, then FS67(G, k) holds if and only if `χ(E_k(G)) ≤ k`."
+
+### 5.2 §X — the would-have-searched log
+
+| move a search would have made | what was done instead |
+|---|---|
+| The stub's D2: SAT with model counting over tight Cayley graphs ≤ 100 vertices against `K₄`, the spindle, `UD(𝔽₇, 2)` | Moved to PB (post-ban), with its generator image to be stated; the question it asked ("is gap-freedom enough?") answered at `k ≥ 4` by print (DSW + Tardif 2023) |
+| A finder for a 4-colouring of `E_4(U₃₂)` or `E_3(S₁)` | Not run; the question is DB-1/DD-2's, by derivation; finite tests PB |
+| A numerical check of the DC-2 contraction threshold by sampling fibre vectors | The threshold is J27D's derivation; the planner's naive bound (`λ* ≲ 0.44` at `k = 3`) was solved by hand from the inequality |
+| Computing `λ*` of residue planes for DC-3 | Left to J27D as exact arithmetic of seconds (G44's spectra), not a search |
+
+### 5.3 The briefs written
+
+`data/crunch-2026-09-25/briefs/J27D-FS67-derivation.md` (derivation) and `data/crunch-2026-09-25/briefs/J27V-FS67-verifier.md` (blind verifier,
+its fixed claim list written now, before any claim exists).
