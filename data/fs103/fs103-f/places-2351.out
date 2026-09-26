@@ -1,0 +1,41 @@
+d = 2351, prime: True, d mod 8 = 7; stable odd places below 1000:
+  p =      47 (split   ) w = 0.285652  h = 0.222185
+  p =      67 (split   ) w = 0.240746  h = 0.194033
+  p =      71 (split   ) w = 0.234060  h = 0.189666
+  p =      83 (split   ) w = 0.216915  h = 0.178250
+  p =     139 (split   ) w = 0.168426  h = 0.144148
+  p =     151 (split   ) w = 0.161687  h = 0.139183
+  p =     163 (split   ) w = 0.155697  h = 0.134721
+  p =     191 (split   ) w = 0.143961  h = 0.125844
+  p =     199 (split   ) w = 0.141067  h = 0.123628
+  p =     211 (split   ) w = 0.137036  h = 0.120521
+  p =     223 (split   ) w = 0.133332  h = 0.117646
+  p =     227 (split   ) w = 0.132162  h = 0.116735
+  p =     239 (split   ) w = 0.128830  h = 0.114127
+  p =     251 (split   ) w = 0.125738  h = 0.111694
+  p =     347 (split   ) w = 0.107057  h = 0.096704
+  p =     367 (split   ) w = 0.104115  h = 0.094298
+  p =     379 (split   ) w = 0.102463  h = 0.092940
+  p =     419 (split   ) w = 0.097474  h = 0.088816
+  p =     431 (split   ) w = 0.096114  h = 0.087686
+  p =     463 (split   ) w = 0.092748  h = 0.084876
+  p =     467 (split   ) w = 0.092351  h = 0.084544
+  p =     491 (split   ) w = 0.090075  h = 0.082632
+  p =     503 (split   ) w = 0.088999  h = 0.081725
+  p =     563 (split   ) w = 0.084141  h = 0.077610
+  p =     587 (split   ) w = 0.082408  h = 0.076134
+  p =     631 (split   ) w = 0.079493  h = 0.073639
+  p =     751 (split   ) w = 0.072884  h = 0.067933
+  p =     811 (split   ) w = 0.070143  h = 0.065545
+  p =     827 (split   ) w = 0.069463  h = 0.064951
+  p =     839 (split   ) w = 0.068965  h = 0.064516
+  p =     863 (split   ) w = 0.068002  h = 0.063672
+  p =     907 (split   ) w = 0.066336  h = 0.062209
+  p =     911 (split   ) w = 0.066190  h = 0.062081
+  p =     919 (split   ) w = 0.065902  h = 0.061828
+  p =     971 (split   ) w = 0.064117  h = 0.060254
+  p =     983 (split   ) w = 0.063725  h = 0.059908
+  p =    2351 (ramified) w = 0.041231  h = 0.039598
+  tail: every stable place above 1000 has h <= h(1019) = 0.058905
+max h over all stable places <= 0.222185; Croft's lower bound for m_1 = 0.22936
+TARGET MET: best local ratio is m_1(R^2)

@@ -11,7 +11,15 @@ contacted them. Contact: `main` only.*
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
-| (stage 1 proves nothing; see stages 2–3) | | | |
+| FS103-F-SI | J45's SI per class: for a translation-invariant random independent set `I`, `∫_{R̂∖E_S} χ(u) dσ_g = −E[p(0)p(u)] ≤ 0`; equality at every `u` ⟹ `J = {P(x ∈ I \| 𝒜_S) > 0}` is an `𝒜_S`-measurable equivariant independent set `⊇ I` | [hand; one mind; J45's proof transcribed] | §2.1 |
+| FS103-F-EXT | R88-TC-ext per class: an independent set with spectrum on `T + A` extends to a `G_∅`-stationary, CP, jointly measurable, a.e.-independent set of the same density | [hand; one mind; J28D C1–C3 transcribed] | §2.2 |
+| FS103-F-FRAC | given MR(F) (`R_F = O′`): every `R ⋊ U`-invariant random independent set of `F²` has density `≤ ρ(F) = max(m₁(ℝ²), sup_v r_v)`; so `α₁(F²) = α_inv(F²) = ρ(F)`; unconditionally, density `> ρ(F)` gives an SP witness | [hand; one mind; a composition of held lemmas, each per class in its proof (J45 N2, RU, SP-oi; X25B-L1, PZ, T; FS100-CX)] | §2.3 |
+| FS103-F-TJ | T-J39-3 per class: a density-`δ` invariant independent set gives `max(m₁, max_{v∈N_δ} r_v) ≥ δ` or an SP witness, `N_δ` the places with `λ*_v ≥ δ/(1−δ)`; the mixing selection per class keeps only density `≥ (δ−ϑ)/(1−ϑ)` | [hand; one mind] | §2.4 |
+| FS103-F-ROUND | row 123's lower bound is `χ(F²) ≥ ⌈1/ρ(F)⌉`: the colour count enters only as the pigeonhole on the densest class; `1/ρ(F) ≤ 4.36` at every field, so this route never gives six | [hand; one mind; a reading of FRAC] | §2.5 |
+| FS103-F-DV | given MR(ℚ(√635087)): `α₁(ℝ²) = m₁(ℝ²)`, i.e. `f(n)/n → m₁(ℝ²)` (`[DuczVarga2026]` Conjecture 1, first clause); `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.04876` | [hand + tools exact; one mind; MR's grade] | §3.2 |
+| FS103-F-TF | given MR(ℚ(√635087)): for every `ε > 0` a finite **triangle-free** unit-distance graph has independence ratio `≤ m₁(ℝ²) + ε ≤ 0.24699 + ε` | [hand; one mind; MR's grade] | §3.2 |
+| FS103-F-47 | given MR(ℚ(√47)) (row 121's own hypothesis), with only held certificates: `α₁(ℚ(√47)²) ≤ 1/4 − 2.745·10⁻⁶` (31's Hoffman bound binds), a triangle-free finite graph with `χ_f ≥ 4.0000439` | [hand + cert; one mind] | §3.2 |
+| FS103-F-PL | ℚ(√635087) (and ℚ(√2351)) has no stable dyadic place and every stable place has Weil–Hoffman ratio `< 0.22936`: max `0.16330` (103) and `0.22219` (47) | [tools exact; plants fire] | §3.1, `tools/fs103_f_places.py` |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -268,3 +276,186 @@ is an `R ⋊ U`-invariant random independent set when the colouring's law is, an
 
 - None. The one computation is `tools/fs103_f_places.py`: the stable places of ℚ(√635087) and ℚ(√2351) and their Weil–Hoffman bounds, a
   Legendre-symbol list over a range the derivation fixed, in seconds. It is filed with stage 3.
+
+## Stage 3 — SAVED (question 3: the consequence, its links, what it contradicts; proposals)
+
+### 3.0 Verdicts
+
+- **Per class, given MR:** `α₁(F²) = ρ(F)` at every real number field outside row 100's exception (FRAC). At a field whose stable places
+  all have ratio below Croft's `0.22936`, `ρ(F) = m₁(ℝ²)`.
+- **Hence, given MR at one such field** (ℚ(√635087), FS-103's headline field), `α₁(ℝ²) = m₁(ℝ²)`. That is **the first clause of
+  `[DuczVarga2026]`'s Conjecture 1**, "f (n)/n = m1 (R2 ) + o(1)". It also answers `[MatolcsiEtAl2025]` §2's open question ("it is not
+  known whether equality holds") with `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.04876`. The grade is [hand], one mind, conditional on MR (row 120).
+- **It contradicts nothing in print that still stands.** `[MatolcsiEtAl2025]`'s Conjecture 1 fell to `[DuczVarga2026]` in June 2026.
+  What FRAC contradicts, given MR, is two published *readings*: MRVZ's and Ambrus et al.'s expectation that the measurable and finitary
+  ratios differ (3.3).
+- **The three links** hold as needed (3.4). `m₁` bounds a CP stationary independent set through a measurable version: Theorem 1 of
+  `[AmbrusEtAl2023]` covers every measurable set, so their Lemma 1's periodicity is never needed.
+- **The owner's three possibilities:**
+  1. *Integrality at a named step:* yes — only the terminal pigeonhole, and it rounds up, it does not bound.
+  2. *A refutation of a published conjecture, given MR:* the conjecture was already refuted in print, and the live content is a
+     conditional **proof** of Dúcz–Varga's replacement conjecture.
+  3. *An error in a [hand] result:* none found. FRAC makes MR testable by finite graphs (3.5).
+
+### 3.1 The fields (FS103-F-PL) [tools exact]
+
+`tools/fs103_f_places.py` computes the stable places, with exact Legendre symbols:
+- An odd `p` is stable iff `p ≡ 3 (mod 4)` and `(d/p) ∈ {0, 1}`.
+- The dyadic place is not stable when `d ≡ 7 (mod 8)`: `F_v = ℚ₂(√7) = ℚ₂(i)`.
+
+For each stable place it bounds the all-levels ratio by `h(q) = w/(1 + w)`, with `w = max(2√q, 2)/(q+1)`: Weil at level one, the two-point
+bound at new levels (X26B-L1), and the measurable Hoffman bound. It bounds the tail beyond 1000 by `h` at the next prime `≡ 3 (mod 4)`.
+
+| field | first stable places (all split; plus the ramified `d`) | `max h` | outputs |
+|---|---|---|---|
+| ℚ(√635087) | 103, 107, 127, 163, 191, … (42 below 1000); 635087 ramified (`h = 0.0025`) | **`0.16330`** (at 103) | `data/fs103/fs103-f/places-635087.out`, exit 0 |
+| ℚ(√2351) | 47, 67, 71, 83, 139, …; 2351 ramified | **`0.22219`** (47, Weil; the exact spectrum gives `0.2111`) | `places-2351.out`, exit 0 |
+
+- **Plants:** `PLANT=1` swaps in `d = 47` and must fail because 11 is stable (`h = 0.35599 > 0.22936`); it exits 1 for that reason
+  (`places-plant1.out`). `PLANT=2` breaks Euler's criterion; the Legendre self-test fires with exit 1 (`places-plant2.out`).
+- **Cross-check:** ℚ(√635087)'s list agrees with the claims list's C-635-PL ("its usable places are 103, 107, 127, 163, 191, …").
+- **Scope:** the tool does not check the ratios at the certificate level beyond Weil and Hoffman; it does not need to, since every value is
+  below `0.22936 ≤ m₁`.
+
+### 3.2 The consequences, as theorem statements
+
+**FS103-F-DV [hand + tools exact; one mind; given MR(ℚ(√635087)), row 120's scope].**
+
+`α₁(ℝ²) = m₁(ℝ²)`. Equivalently `f(n)/n → m₁(ℝ²)`, where `f(n)` is the least independence number of an `n`-point unit-distance graph in the
+plane. Hence `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ∈ [1/0.246989, 1/0.22936] = [4.04876, 4.35987]`.
+
+*Proof.*
+1. By 3.1, `ρ(ℚ(√635087)) = max(m₁, ≤ 0.16330) = m₁`, since `m₁ ≥ 0.22936` (Croft).
+2. FRAC gives `α₁(ℚ(√635087)²) = m₁`. So `α₁(ℝ²) ≤ α₁(ℚ(√635087)²) = m₁ ≤ α₁(ℝ²)`: the infimum over more graphs is smaller, and
+   `[MatolcsiEtAl2025]` (14) gives `m₁ ≤ α₁`.
+3. `lim f(n)/n = α₁(ℝ²)`: `f(n) ≥ α₁ n` always; far-apart disjoint copies of a near-optimal graph, padded by fewer than `|G|` points, give
+   the other side.
+4. `χ_f,0 = 1/α₁` is `[MatolcsiEtAl2025]` Theorem 2. For `χ_f`: translates of a periodic measurable 1-avoiding set of density `m` form a
+   fractional colouring of weight `1/m` (the argument behind their bound (13), `χ_f ≤ 1/δ_Croft`). `m₁` is approached by periodic sets
+   (`[AmbrusEtAl2023]` §2, citing [deOV10, KeMOR16]), so `χ_f ≤ 1/m₁`. With `χ_f,0 ≤ χ_f`, both equal `1/m₁`. ∎
+
+*The same at every `F` outside row 100's exception whose stable places all have `r_v ≤ m₁` (ℚ(√2351), ℚ(√167), …). ℚ(√635087) is chosen
+because FS-103 already needs MR there.*
+
+**FS103-F-TF [hand; one mind; given MR(ℚ(√635087))].** For every `ε > 0` there is a finite unit-distance graph **without triangles** whose
+independence ratio is at most `m₁(ℝ²) + ε ≤ 0.24699 + ε`, so its fractional chromatic number is at least `4.0487 − O(ε)`.
+- *Proof:* FRAC's `α₁(ℚ(√635087)²) = m₁`. The plane over ℚ(√635087) has no unit triangle, since `√3 ∉ F` (G57, `[Krebs2022]` Lemma 5.1).
+- *Reading:* triangle-freeness does not raise the plane's finitary independence ratio. Every graph of `[DuczVarga2026]`'s blow-up contains
+  triangles: its field holds `ω₁ = ζ₆`.
+
+**FS103-F-47 [hand + cert; one mind; given MR(ℚ(√47)), row 121's own hypothesis].** With only held certificates,
+`α₁(ℚ(√47)²) ≤ max(0.246989, 0.2331 (11, FS-66), 0.2147 (19), 0.18523 (23), 1/4 − 2.745·10⁻⁶ (31, Hoffman), 0.21376 (43, Hoffman),
+0.2222 (47 ramified, Weil), Weil beyond) = 1/4 − 2.745·10⁻⁶`. So some finite triangle-free unit-distance graph over ℚ(√47) has
+`χ_f ≥ 4.0000439`.
+- This is **weaker than** `[DuczVarga2026]`'s `4.0007` (theirs is unconditional).
+- The binding place is 31. There, Hoffman misses `1/4` by `2.7·10⁻⁶` (J28V-3's table), while the level-one ratio is probably near `0.15`
+  (G59's `c(31) = 0.846`, a found set). A certificate of 31's all-levels ratio below `0.247` would lift ℚ(√47) to FS103-F-DV's bound. That
+  certificate is a machine-long relaxation, out under the ban; logged.
+
+### 3.3 `[MatolcsiEtAl2025]` §§1–3, and what exactly FRAC would contradict
+
+**Read** (this job; 2026-09-26): §1 (the introduction, including "we are tempted to conjecture that this bound cannot be testified by any
+finite graph"); §2 (the definitions of `χ_f(ℝ²)`, `χ_f,0(ℝ²)`, `α₁(ℝ²)`, `m₁(ℝ²)`, (12)–(14)); §3 (Theorem 1 with its Følner proof,
+Theorem 2 with its discrete-cube proof, and "The significance of Theorem 2"); and Conjecture 1 at the end of §4. Given MR at ℚ(√635087),
+each claim fares as follows:
+
+| their statement, verbatim | status |
+|---|---|
+| "Conjecture 1. χf,0 (R2 ) = 4, and for all finite unit distance graphs G ⊆ R2 we have χf (G) < 4." | **false, in print** (`[DuczVarga2026]` Thm 1, Cor. 1). Given MR, false by a margin: `χ_f,0 = 1/m₁ ≥ 4.0487` |
+| "(14) 0.22936... = δCroft ≤ m1 (R2 ) ≤ α1 (R2 ) ≤ 1/4 … we conjecture that the following equalities hold: δCroft = m1 (R2 ) and α1 (R2 ) = 1/4" | the second equality is false in print (DV). **Given MR, the middle inequality `m₁ ≤ α₁` is an equality**, the one place the chain has content. The first equality is untouched |
+| "It is clear that χf,0 (R2 ) ≤ χf (R2 ), but it is not known whether equality holds." | **given MR: equality** (FS103-F-DV) |
+| "if Conjecture 1 turns out to be true, we obtain the following very interesting property … α1 (R2 ) ̸= m1 (R2 ), i.e. the finitary independence ratio and the measurable independence ratio of R2 do not agree" | the hypothesis is false (DV); the conclusion is **false given MR** |
+| `[AmbrusEtAl2023]` §4 Remark: "… providing an interesting example of a natural infinite graph for which the measurable and the non-measurable variants of a parameter have different values" | **false given MR**: the fractional variants agree |
+| `[DuczVarga2026]` §2.1: "Conjecture 1. f (n)/n = m1 (R2 ) + o(1) and in particular that m1 (R2 ) = δCroft." | **first clause proved given MR**; the second clause untouched |
+
+**Why the published expectation pointed the other way, read through FRAC.** The graphs of Ambrus et al., MRVZ and `[Ducz2026]` live in the
+Moser lattice, inside `K²`. There FRAC's `ρ(K) = 1/4`: the dyadic places are tight. So no finite graph in `K²` can go below `1/4`, and
+`[Ducz2026]`'s "the entire Moser lattice is geometrically integer 4-colorable" is the same fact.
+- The finitary–measurable gap they saw is the **dyadic place's**, a torsion phenomenon of one field.
+- It is not a property of `ℝ²`. It disappears in any field whose places are all below `m₁`, and there FRAC says the finitary ratio *is*
+  `m₁`.
+- `[DuczVarga2026]` needed a point outside `K`, and "such augmentations are exceedingly rare". In FRAC's terms, they had to leave the
+  field whose dyadic place pins `1/4`.
+- This is CTL-ℤ[√2]'s mechanism in the plane.
+
+### 3.4 The three links, each on its own
+
+1. **`m₁(ℝ²) ≤ 0.2470` bounds a stationary random independent set continuous in probability.** It holds, by the route FRAC uses:
+   - Doob–Cohn gives a jointly measurable version.
+   - The reverse Fatou lemma (`E[limsup_R avg_{B_R} 1_W] ≥ P(0 ∈ W)`) gives a realisation of upper density `≥ P(0 ∈ W)`.
+   - Its Lebesgue density points are a genuinely 1-avoiding measurable set with the same density (X25B-T; R88-TC-reg).
+   - `[AmbrusEtAl2023]` Theorem 1 then applies as printed: "Any Lebesgue measurable, 1-avoiding planar set".
+
+   **It needs no more than that.** Their Lemma 1 is stated for "a measurable, periodic, 1-avoiding set A", and its atoms are exactly the
+   finite-dimensional probabilities of a randomly translated periodic set. So the owner's reading is right in substance. But a direct route
+   through Lemma 1 for a non-periodic stationary process would need their §5 Fourier step redone for a continuous positive-definite `f`
+   with non-discrete spectral measure (Bochner). That route is not needed and not checked here. Several real places: `UD(ℝ²)^{×n}` has
+   ratio `m₁` (X25B-PZ iterated; FS100-TCA's C14.3).
+2. **The invariant density of an independent set of `F²` is at least `α₁(ℝ²)`** — more exactly, `α_inv(F²) ≥ α₁(F²) ≥ α₁(ℝ²)`. It holds:
+   - The Følner averaging of maximum independent sets of finite pieces is FRAC step 1, then rotation averaging.
+   - The second inequality is monotonicity of an infimum.
+   - This is the direction FRAC needs (WR-4). The reverse (`α₁(F²) ≥ α_inv`) is false in general and never used.
+3. **Fractional colouring passes to finite subgraphs.** It holds, with no compactness:
+   - `α₁(F²) ≤ ρ` gives finite graphs with `α(G)/|G| ≤ ρ + ε`.
+   - Then `χ_f(G) ≥ |G|/α(G)` (MRVZ's (12)).
+   - The statement about `χ_f,0` is MRVZ's Theorem 2.
+   - The infinite graph's `χ_f` enters only in FS103-F-DV's last line, through the measurable upper bound.
+
+### 3.5 Where this leaves MR, and FS-103 (proposals; I edit none of these files)
+
+- **A new killing test for MR (G80, row 120):** any proof that `α₁(ℝ²) > m₁(ℝ²)` refutes MR at ℚ(√635087), by FRAC's unconditional form.
+  So does any lower bound `α₁(ℝ²) ≥ c` with `c > 0.246989` — for instance a non-measurable averaging argument. So does, at a field `F`, a
+  finite-graph proof that `α₁(F²) > ρ(F)`. Before this job, MR's only consequences were five-colour statements, falsifiable only by
+  colourings of whole planes. **Now it has a consequence about finite graphs**, a published conjecture of the people best placed to test
+  it. That is a reason to check MR harder, not a confirmation of it.
+- **FS-103's F1 (the collapse) has a fractional shadow that is free given MR:** `χ_f(ℝ²) = χ_f,0(ℝ²) = 1/m₁ = the CP fractional number`.
+  It needs neither T-J39-3's selection nor any product lemma (PL). It cannot reach six (2.5). So F1's content at six lies entirely in the
+  integral steps: the construction in BC's L5 and product colourability. That is where the verifiers' GAPs, if any, will be.
+- **Proposed `LEDGER.md` row** (after a second, blind mind): "The fractional local–global principle, given MR: `α₁(F²) = max(m₁(ℝ²),
+  sup_v r_v)` for every real number field outside row 100's exception; at ℚ(√635087), `α₁(ℝ²) = m₁(ℝ²)`, the first clause of
+  `[DuczVarga2026]`'s Conjecture 1, and `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²)`; triangle-free finite unit-distance graphs reach it." Grade
+  [hand], its chain's links graded as above, MR's grade. **Not claimed:** `m₁ = δ_Croft`; any value of `m₁`; anything at six.
+- **Grokkings** (the close's):
+  - G24: add the five-colour twin — "at five the content is per class; integrality only rounds `⌈1/ρ⌉`" (FS103-F-ROUND).
+  - G60: its cap is now reached from the MR side (`χ_f(F²) = 1/ρ(F)` given MR). R-C's `3.48` at ℚ(√167) is superseded given MR:
+    `ρ(ℚ(√167)) = m₁`.
+  - G80: the killing test above.
+  - G50: an instance (below).
+- **`CLOSED-QUESTIONS.md`:**
+  - `[DuczVarga2026]`'s Conjecture 1, first clause: answered **conditionally on MR** (a new entry).
+  - `[MatolcsiEtAl2025]`'s "whether equality holds": likewise.
+  - Erdős's `f(n)` asymptotics: `f(n)/n → m₁`, given MR.
+  - All three are conditional and one mind: not closed until a second mind and MR's status.
+- **`BIBLIOGRAPHY.md` read-status:**
+  - `[MatolcsiEtAl2025]`: §§1–3 re-read by FS103-F.
+  - `[AmbrusEtAl2023]`: Theorem 1, Lemma 1 and the §4 Remark re-read.
+  - `[DuczVarga2026]`: §§1–2.2 re-read; its Conjecture 1 (§2.1) is new to the row.
+  - arXiv:1401.7183 (*On the independence ratio of distance graphs*) seen in a search listing only.
+- **Stub to mint:** "FS-10x — the fractional collapse". A blind verification of FRAC and FS103-F-DV (two minds), with this record's
+  statements quoted verbatim and its proofs fenced; then a prior-art gate on "finitary = measurable independence ratio" under the
+  descriptive-combinatorics names ("measurable independence ratio", "Borel fractional chromatic number"). **Bearing on χ ≥ 6: none**
+  (2.5). It carries the programme's first statement about finite graphs that is not about four colours.
+- **FS-102 (the fallback write-up):** FS103-F-DV is a candidate section. It is conditional on the same MR the write-up already rests on,
+  and it answers a conjecture posed in print three months ago.
+
+### 3.6 Prior art for FRAC and FS103-F-DV (searched; not found)
+
+| # | where | query | hits / verdict |
+|---|---|---|---|
+| z1 | zbMATH | `ab:"independence ratio" & ab:"unit distance"` | 2: MRVZ 2023, DV 2026 (both held, read) |
+| z2 | zbMATH | `ab:"1-avoiding" & ab:"finite"` | 7: MRVZ; the rest off topic |
+| z3 | zbMATH | `ab:"fractional chromatic number" & ab:"unit distance" & py:2023-2026` | 4: MRVZ, `[Ducz2026]`, DV, one withheld record |
+| z4 | zbMATH | `ab:"Hall ratio" & ab:plane` | 1: MRVZ |
+| w1 | web | "finitary independence ratio" OR "measurable independence ratio" unit distance graph plane m1 equality 2026 | DV (arXiv, html, Pith review), MRVZ, arXiv:1401.7183 (listing only) — nothing proving `α₁ = m₁` |
+
+Negative, at the scope of five queries (G21). The statement is DV's own conjecture as of June 2026, so a proof of it in print before then
+is unlikely, and a proof after it would have to be under three months old. A prior-art gate in descriptive-combinatorics vocabulary is
+owed (the stub above).
+
+### 3.7 Would-have-searched-here log (stage 3)
+
+- Would have certified 31's all-levels ratio (a level-two moment relaxation, FS-66's instrument) to lift FS103-F-47 to `4.0487` at
+  ℚ(√47). Instead: moved to a field whose places are all below Croft's bound, where no certificate is needed (3.1). The 31 certificate is
+  machine-long and out under the ban.
+- Would have searched ℚ(√635087)'s plane for a finite graph of independence ratio near `m₁`. Instead: none. FS103-F-DV is existence
+  through MR, and the ban forbids the finder.
