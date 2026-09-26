@@ -240,3 +240,14 @@ alone, recorded in the README.
 - **Checks run** (one each, no loop): the script parses; one run against a stub DOM draws 2,190 SVG nodes with no exception. No browser
   is installed here for a screenshot (`chromium`, `google-chrome` absent), so the visual look happens on the published page.
 - **Would have searched here:** none.
+
+## Stage 4 — SAVED: published and handed over
+
+Published privately at **https://claude.ai/artifact/EpJZ2qMLnqEJtuKEXNEKHu** (Version 1); `README.md` beside the sources; a one-screen "How
+to read this map" (six numbered points, a real reading order) added to the page above the toolbar, beside the six-step guided view. The
+report is `data/crunch-2026-09-25/reports/J43.md`. Left: the first visual review (no browser on this machine), then one fix pass.
+
+## Theorems this phase proved
+
+None. The job built an instrument; its one computation (which primes are stable places of which field) is an exact rule checked against
+`data/fplane/map.json`, not a new result.
