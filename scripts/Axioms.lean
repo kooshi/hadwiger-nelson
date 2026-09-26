@@ -1708,6 +1708,78 @@ genus-0 twin `a² − 1` is false, NP is false in characteristic 2); C3: `2 + L`
 #print axioms HadwigerNelson.NoParam.isPureTower_bot_liouville
 #print axioms HadwigerNelson.NoParam.not_forall_mem_adjoinTranscendental_bot_liouville
 
+/-! ## FS-75 (job J52K) — the three-colour criterion's ⟹ in winding form, relation-branching certificates, and
+`χ(ℚ(√167)²) ≥ 4`
+
+`ThreeColour.lean`: a colouring proper along `s` carries a winding (leaf 1). `ThetaCert.lean`: a passing certificate
+leaves no winding (leaf 2). `ThetaPlane.lean`: the lattice in the plane over a real field holding `√d`, and the consumer.
+`Instances/SqrtOneSixSeven.lean`: the 1,050-leaf certificate checked by `decide +kernel` and the headline. No finite
+graph; **no native evaluation.** -/
+
+#print axioms HadwigerNelson.ThreeColour.step_mem
+#print axioms HadwigerNelson.ThreeColour.step_cast
+#print axioms HadwigerNelson.ThreeColour.height_append
+#print axioms HadwigerNelson.ThreeColour.height_cast
+#print axioms HadwigerNelson.ThreeColour.height_bounds
+#print axioms HadwigerNelson.ThreeColour.step_square
+#print axioms HadwigerNelson.ThreeColour.height_perm
+#print axioms HadwigerNelson.ThreeColour.wsum_append
+#print axioms HadwigerNelson.ThreeColour.wsum_flatMap
+#print axioms HadwigerNelson.ThreeColour.wsum_word
+#print axioms HadwigerNelson.ThreeColour.length_word
+#print axioms HadwigerNelson.ThreeColour.count_word
+#print axioms HadwigerNelson.ThreeColour.word_add_perm
+#print axioms HadwigerNelson.ThreeColour.height_add_gen
+#print axioms HadwigerNelson.ThreeColour.wind_add_gen
+#print axioms HadwigerNelson.ThreeColour.wind_shift
+#print axioms HadwigerNelson.ThreeColour.wind_add_diag
+#print axioms HadwigerNelson.ThreeColour.wind_add
+#print axioms HadwigerNelson.ThreeColour.wind_cast
+#print axioms HadwigerNelson.ThreeColour.minRise_le_wind
+#print axioms HadwigerNelson.ThreeColour.wind_eq_of_sub_eq
+#print axioms HadwigerNelson.ThreeColour.wsum_word_add
+#print axioms HadwigerNelson.ThreeColour.wsum_word_posPart
+#print axioms HadwigerNelson.ThreeColour.nonempty_winding
+#print axioms HadwigerNelson.ThreeColour.nonempty_winding_of_colorable
+#print axioms HadwigerNelson.ThreeColour.properAlong_one_two
+#print axioms HadwigerNelson.ThreeColour.nonempty_winding_one_two
+#print axioms HadwigerNelson.ThetaCert.getD_induction
+#print axioms HadwigerNelson.ThetaCert.getD_addL
+#print axioms HadwigerNelson.ThetaCert.getD_smulL
+#print axioms HadwigerNelson.ThetaCert.length_addL_le
+#print axioms HadwigerNelson.ThetaCert.length_smulL
+#print axioms HadwigerNelson.ThetaCert.vecOf_nil
+#print axioms HadwigerNelson.ThetaCert.vecOf_addL
+#print axioms HadwigerNelson.ThetaCert.vecOf_smulL
+#print axioms HadwigerNelson.ThetaCert.minRiseL_eq
+#print axioms HadwigerNelson.ThetaCert.sum_getD_lincomb
+#print axioms HadwigerNelson.ThetaCert.relMap_vecOf
+#print axioms HadwigerNelson.ThetaCert.Soundness.eval_zero
+#print axioms HadwigerNelson.ThetaCert.Soundness.eval_add
+#print axioms HadwigerNelson.ThetaCert.Soundness.eval_smul
+#print axioms HadwigerNelson.ThetaCert.Soundness.minRise_le_eval
+#print axioms HadwigerNelson.ThetaCert.Soundness.holds_dflt
+#print axioms HadwigerNelson.ThetaCert.Soundness.holds_cite
+#print axioms HadwigerNelson.ThetaCert.Soundness.leaf_bound
+#print axioms HadwigerNelson.ThetaCert.Soundness.leafOk_sound
+#print axioms HadwigerNelson.ThetaCert.Soundness.mem_eqRun
+#print axioms HadwigerNelson.ThetaCert.Soundness.exists_holds_childCons
+#print axioms HadwigerNelson.ThetaCert.Soundness.checkTree_sound
+#print axioms HadwigerNelson.ThetaCert.Soundness.checkKids_sound
+#print axioms HadwigerNelson.ThetaCert.Cert.isEmpty_winding
+#print axioms HadwigerNelson.ThetaCert.Cert.not_properAlong
+#print axioms HadwigerNelson.ThetaCert.tinyK4_isEmpty_winding
+#print axioms HadwigerNelson.ThetaPlane.iota_re
+#print axioms HadwigerNelson.ThetaPlane.iota_im
+#print axioms HadwigerNelson.ThetaPlane.iota_mem
+#print axioms HadwigerNelson.ThetaPlane.norm_iota
+#print axioms HadwigerNelson.ThetaPlane.properAlong_of_colorable
+#print axioms HadwigerNelson.ThetaPlane.four_le_chromaticNumber_of_cert
+#print axioms HadwigerNelson.Sqrt167.cert_units
+#print axioms HadwigerNelson.Sqrt167.cert_check
+#print axioms HadwigerNelson.four_le_chromaticNumber_planeOver_sqrt167
+#print axioms HadwigerNelson.four_le_chromaticNumber_planeOver_of_sqrt167_mem
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -296,7 +296,9 @@ empty, and neither is its conclusion. -/
 theorem properAlong_one_two : ProperAlong ![(1 : ℤ), 2] (fun x => (x : ZMod 3)) := by
   intro a j; fin_cases j <;> simp [show (2 : ZMod 3) ≠ 0 by decide]
 
-example : Nonempty (Winding ![(1 : ℤ), 2]) := nonempty_winding _ properAlong_one_two
+/-- **The inhabitant of `Winding`**, for every theorem that takes one as a hypothesis: `ℤ` along `(1, 2)` carries a
+winding. -/
+theorem nonempty_winding_one_two : Nonempty (Winding ![(1 : ℤ), 2]) := nonempty_winding _ properAlong_one_two
 
 /-! ### Spec examples: each definition on the inhabitant `x ↦ x mod 3` along `(1, 2)`, relation `(2, −1)` -/
 

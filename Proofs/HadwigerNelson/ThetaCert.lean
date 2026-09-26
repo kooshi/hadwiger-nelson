@@ -213,6 +213,7 @@ noncomputable def _root_.HadwigerNelson.ThreeColour.Winding.eval (W : Winding s)
 
 namespace Soundness
 
+-- Every theorem below takes a winding `W`; the inhabitant is `ThreeColour.nonempty_winding_one_two`.
 variable (W : Winding s)
 
 theorem eval_zero : W.eval 0 = 0 := by
@@ -379,6 +380,21 @@ example : ({ tinyK4 with rels := [[3, 0, 1], [2, -1, 0]] } : Cert).check = false
 /-- Plant: a dropped child — must fail. -/
 example : ({ tinyK4 with tree := .branch 0 1 1 [.leaf [(0, 1)], .leaf [(0, 1)]] } : Cert).check = false := by
   decide +kernel
+
+/-- Plant: a negative multiplier on a TRUE inequality. `ℤ` along `(1, 2)` with the relation `(2, −1)`, a branch at
+`lo = hi = 5`, and its first child `W r ≤ 4` — which the winding of `x ↦ x mod 3` satisfies — "refuted" with multiplier
+`−1` (`3·(−4) < minRise (−2, 1) = −3`). The checker must refuse it; without the sign guard it passes while its units
+carry a winding (the next example), so the guard is necessary, not merely used. -/
+def signPlant : Cert where
+  units := [[1], [2]]
+  rels := [[2, -1]]
+  tree := .branch 0 5 5 [.leaf [(0, -1)], .leaf [(0, -1)], .leaf [(0, 1)]]
+
+example : signPlant.check = false := by decide +kernel
+
+example : Nonempty (Winding signPlant.gen) := by
+  refine nonempty_winding _ (c := fun v => (v 0 : ZMod 3)) fun a j => ?_
+  fin_cases j <;> simp [Cert.gen, signPlant, show (2 : ZMod 3) ≠ 0 by decide]
 
 /-! ### Spec examples, one per definition -/
 

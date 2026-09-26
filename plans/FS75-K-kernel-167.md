@@ -168,3 +168,75 @@ never touched `Proofs/`; "removed" is therefore the restore check.
 ### Would have searched here (stage 4)
 
 - None. The certificate was transformed exactly (integer scaling per leaf) and checked; no new certificate was produced.
+
+## Stage 5 — SAVED
+
+### 5.1 The mutation audit (brief: "delete `hs` … and the sign guard … once each, and confirm the proofs break")
+
+| mutation (scratch copies, `lake env lean`) | result | the reason, read from the error |
+|---|---|---|
+| `hs` deleted from `nonempty_winding_of_colorable` | exit 1, "Unknown identifier `hs`" | the proof names it — a break for the wrong reason, so a second variant: |
+| `hs` deleted and its use replaced by `by simp_all` | exit 1, unsolved goal `h : s j = 0 ⊢ False` | the right reason: adjacency `a ~ a + s j` needs `s j ≠ 0` |
+| the sign guard `(cite path pm.1).isEq \|\| decide (0 ≤ pm.2)` replaced by `true` in `leafOk` | exit 1, "Type mismatch … has type `True` but is expected to have type `(cite path pm.1).isEq = true ∨ 0 ≤ pm.2`" | the right reason: `leaf_bound` needs the premise |
+
+**Both hypotheses are necessary, not merely used:**
+- *Without `hs` the theorem is false* [hand]: `s = ![0]` on `ℤ` gives `addCayley {0} = ⊥`, which is 3-colourable, while `relMap s` has kernel
+  all of `ℤ` and a winding would need `1 ≤ 3W(1)` (at `r = 1`) and `−2 ≤ −3W(1)` (at `r = −1`), i.e. `1/3 ≤ W(1) ≤ 2/3` in `ℤ`.
+- *Without the sign guard the checker is unsound* [kernel]: `signPlant` (`ℤ` along `(1, 2)`, relation `(2, −1)`, a branch at `lo = hi = 5`
+  whose true child `W r ≤ 4` is "refuted" by the multiplier `−1`, `3·(−4) < minRise(−2, 1) = −3`) passes the guard-free checker by
+  `decide +kernel` (scratch), while `Nonempty (Winding signPlant.gen)` holds. Made permanent in `ThetaCert.lean`: `signPlant.check = false`
+  and `Nonempty (Winding signPlant.gen)`, both kernel-checked.
+- The three well-formedness guards (`pm.1 < path.length`, `ri < rels.length`, `lo − 1 ≤ hi`) are *not* used by the proof (stage 3), so
+  deleting them would not break it; that is by design (defaults are harmless) and was not run as a mutation.
+
+### 5.2 The headline, read aloud against the informal claim
+
+`4 ≤ ((unitDistance ℂ).induce (planeOver (SquareClass.fieldOfRadicands {167}))).chromaticNumber` reads: *the graph on the points of `ℂ = ℝ²`
+whose two coordinates lie in the smallest subfield of `ℝ` containing `√167`, two points adjacent exactly when their Euclidean distance is 1,
+has chromatic number at least 4.* `fieldOfRadicands {167}` is `Subfield.closure {√167} = ℚ(√167)`; `unitDistance ℂ` is `dist x y = 1` in
+`ℂ`'s Euclidean metric; the bound is `ℕ∞`-valued, and the proof goes through `¬ Colorable 3` (`add_one_le_chromaticNumber_iff_not_colorable`),
+so it is not satisfied by a degenerate `⊤` or an empty graph. It is `χ(ℚ(√167)²) ≥ 4`, row 79's claim, in the form of the house precedent
+`four_le_chromaticNumber_planeOver_eleven`. The corollary `four_le_chromaticNumber_planeOver_of_sqrt167_mem` states it over every real field
+holding `√167`.
+
+### 5.3 The gate
+
+| item | result |
+|---|---|
+| the build | `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`: exit 0, "179 of 179 batches, 6 module(s) rebuilt, 0 module(s) with warnings, 3m50s" (`build/gate/build/20260926T052457Z-841658.log`) |
+| zero `sorry` | `grep -rn --include="*.lean" "sorry"` over the five new modules: no match (exit 1) |
+| `./scripts/axioms.sh` | exit 0, "**1193 clean, 11 axiom-free, 5 declared purchase(s)**" (`build/gate/axioms/20260926T052849Z-858627.log`); the 63 new entries (all public theorems of the four modules and the headline) each depend on a subset of `[propext, Classical.choice, Quot.sound]` — the headline on exactly the three; `Sqrt167.cert_check` and `cert_units` on `[propext]` only; no native purchase |
+| `./scripts/vacuity.sh` | exit 0, "`declarations=7279 refutations-skipped=309`", "`sites=279 vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2 untelescoped=0`" (`build/gate/vacuity/20260926T052908Z-859248.log`); sites unchanged — the scanner's site law does not cover a `Winding`-typed binder, so its inhabitant is supplied by hand |
+| `./scripts/vacuity.sh --self-test` | exit 0, "every control fired, and the two silent ones stayed silent" |
+| an inhabitant per structure hypothesis | `ProperAlong`: `properAlong_one_two`; `Winding`: `nonempty_winding_one_two` (named this stage; `ThetaCert`'s soundness section points to it); `c.check = true`: `tinyK4` and `Sqrt167.cert_check`; `units.all unitOk`: `Sqrt167.cert_units`; `Holds`: `holds_dflt` |
+| a spec example per definition | `ThreeColour`: ten `decide` examples on the inhabitant; `ThetaCert`: twelve, plus `tinyK4` and four plants; `ThetaPlane`: `unitOk` both ways; the literal: by `cert_check` and `tools/j52k_plant.py` |
+| the module map | five rows in `ARCHITECTURE.md` § 3; `python3 tools/check_architecture.py`: "RESULT: PASS" (176 rows, 0 import mismatches); a stray backticked `K₄` it flagged as an unknown identifier was removed |
+| linters | silent (0 modules with warnings) |
+
+### 5.4 ℚ(√47)'s tree (FS73-T26): format checked, out of scope
+
+`data/fs73/coxeter-c3/cert_47.json` has keys `key, d, basis, S, nodes, leaves` (key `60|5,1,5,3;0,2,0,2;0,0,10,2;0,0,0,4`, `d = 47`); each
+node carries a prefix `p` of unit-vector assignments, rational `θ`-bounds `yl`, `yu` and a list of child bands `ch` — **a `θ`-space tree for
+Coxeter's `certcheck.py`**, with no relation list and no branch/leaf nodes of V2's kind. **Not V2's relation-branching format; stopped, as
+the brief says** (a different checker). **P-47fmt scored: met** (the plan registered "not in V2's format" at 0.60).
+
+Seen while looking, read-only: `data/fs73/verify-v2/` also holds `Ld65c8ee8-empty.json.gz`, a V2-format certificate over `d = 11` (54 units,
+9,652 leaves), and `L21cc6506-empty.json.gz` (P-60's 60-vector control, 30 units, 30,344 leaves). Both are V2's format, so each is a
+one-line instance of `four_le_chromaticNumber_of_cert` once `tools/j52_intcert.py` takes `d` and `D` as arguments (it is hard-wired to
+`d = 167`, `D = 420`). Neither was run: ℚ(√11)'s bound is already in the kernel (row 73), and the brief scoped this stage to ℚ(√47).
+
+### 5.5 §P scored
+
+| id | registered | outcome |
+|---|---|---|
+| P-elem (0.90; mine 0.93) | leaf 1 closes with no analysis | **met**: `List.Perm`, `ZMod 3`, `omega`, `linarith`, `ring`, `Finset` sums; nothing else |
+| P-tree (0.80; mine 0.70) | nested-`Tree` soundness by mutual structural recursion, no `Tree.rec` fallback | **met**, pinned by `termination_by structural` |
+| P-price (0.70; mine 0.65) | the headline sorry-free, gate green, within 2.5 h of wall clock | **met**: 23:46 to 00:30, about 45 minutes to a green gate |
+| P-check (0.85) | `cert_check` in the real module reproduces 19.4 CPU s ±25 %, under 8 GB | **met**: 12.22 s + 7.12 s (instance + literal) = 19.34 s; peak 5.49 GiB |
+| P-47fmt (0.60) | ℚ(√47)'s tree is not V2's format | **met** |
+| P-60 (0.40) | the 60-vector certificate checks inside a 60 GB slot | **not run** (out of this job's scope) |
+
+### Would have searched here (stage 5)
+
+- None. No certificate was produced; the one move declined was running the two other V2-format certificates, which is checking, not
+  searching, and was out of scope.
