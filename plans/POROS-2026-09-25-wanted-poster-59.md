@@ -267,3 +267,197 @@ Under MR, row 88 **is** T-B1.
 
 - Would have hunted a stationary defect process over a pullback (a G-f witness) on a finite quotient. Instead: named DP and located it at
   J45's GAP (§3.3 (b)).
+
+## Stage 4 — SAVED: the name, the killing test, the example invariant, the recommendation, the ledgers
+
+### 4.1 In its discipline's words, and the queries a prior-art job should run (not run here)
+
+**The object.** `X₄(F)` is the four-colour **hom-shift** on the countable, non-finitely-generated abelian group `R`, with the affine group
+`R ⋊ U` acting. Pull is a finite set of **frozen** points (`[AlonEtAl2021]`'s word, R88-B2-1). The three pieces of the gap:
+- **G-tr**: T-B1 asks whether the frozen points are **isolated**, i.e. whether the hom-shift is **expansive at Pull** (Boyle–Lind's
+  expansive subdynamics, J35's reading). Transience is the **measure centre** of an orbit closure lying in Pull (`[ChenDai2017]`).
+- **G-f**: a stationary **defect process over a frozen configuration**: an invariant measure that is a **non-trivial extension of a
+  periodic factor** (a finite rotation) inside a hom-shift. In probability: can a proper colouring with a *gap-free* periodic factor carry
+  independent-looking randomness? The control uses gaps (F2's noise).
+- **G-n**: J37's §4.1 names, unchanged (model sets over `S`-adic internal spaces; ×p×q on an `S`-adic solenoid).
+
+**For a stranger.** *In a four-colour hom-shift over the ring `R`, the frozen periodic points are known to be determined by their
+complement of any finite set, and by any half-space. Are they determined by one finite window (isolated)? And if so, is every
+non-empty closed invariant subset disjoint from them forced to carry a non-Haar invariant measure of the rotation group on the dual —
+a Furstenberg-type object?*
+
+**Queries**, each tagged with its discipline:
+1. *Symbolic dynamics:* "frozen" & "isolated" & "proper colorings" (or "hom-shift") — does "frozen ⟹ isolated" fail or hold anywhere,
+   and under what mixing hypotheses; "expansive subdynamics" & "isolated points"; "strongly irreducible" & "frozen".
+2. *Unique continuation for colourings:* "unique continuation" & ("coloring" | "subshift") & "half-space" (H's route); Kari–Szabados
+   "forced periodicity" at infinite degree.
+3. *Topological dynamics of algebraic actions:* Einsiedler–Lind–Miles–Ward "expansive subdynamics for algebraic ℤ^d-actions" and the
+   `S`-adic / non-finitely-generated case (Lind–Schmidt on `S`-integer dynamics).
+4. *Invariant measures on hom-shifts:* "invariant measures" & "frozen" & "measure centre"; "periodic factor" & "extension" & "proper
+   coloring" & "stationary".
+5. *Shared with J37:* its queries 1, 4 (model sets; ×p×q on `S`-adic solenoids) — the MR side is the same for both posters.
+
+### 4.2 The killing test
+
+**KT-1, cheapest and sharpest — the grade of B⁺.** T-J38-2 (ii) and the shared-identity table rest on J45's B⁺, which is one derivation
+with J46's blind check pending. *The test:* J46's verdict on B⁺ and on SI-3/SI-4 (the selection step). If B⁺ fails, (i) stands (it needs
+only Theorem C), but (ii)–(iii) fall and the two posters are no longer shown to share MR. Cost: already running.
+
+**KT-2 — the shared external input.** J37's KT-1 (`[AmbrusEtAl2023]`'s H4 in ball arithmetic) is this poster's too: P3, P4, P9, P10 and
+T-J38-2 all rest on it through Theorem C. Cost: minutes (a tools job, in-ban).
+
+**KT-3 — scope.** T-J38-2 needs B⁺ to hold on the averaged measure `ν`, which is translation-invariant but not ergodic. B⁺ is stated for
+every translation-invariant `μ` (J45 Stage 3), so this holds as written. A verifier should read that line against J45's proof, whose
+selection is `𝒜_S`-measurable for any `μ`.
+
+### 4.3 Flip the poster: the example invariant
+
+**(a) The candidate: finite-window determinacy of the gap-free periodic colourings — a ladder, two rungs proved.** For a gap-free
+periodic colouring `p` (the pullbacks at type (B)), ask how small a region determines `p` among all four-colourings:
+
+| rung | statement | status |
+|---|---|---|
+| co-finite | agreeing with `p` off a finite set ⟹ equal to `p` ("frozen") | proved, two derivations (R88-B2-1) |
+| half-space | agreeing with `p` on an additive half-space ⟹ equal to `p` | proved, every number field, any number of colours (row 91's H) |
+| finite window | agreeing with `p` on some finite `B` ⟹ equal to `p` (isolation) | **T-B1, GAP**, the same step in both records |
+
+- *Every colouring we can prove exists carries the property that matters:* at K and at ℚ(√2,√3) (given T721) `X₄` is finite per coset,
+  so every point is isolated. At ℚ(√11) the gapped periodic colourings are limits of C9's non-periodic ones (shrink the archimedean
+  term), so **gaps break isolation**. The candidate is therefore stated for gap-free colourings only, which is where FS38-D2-A puts the
+  tight pullbacks.
+- *Held by all, it empties the class, given MR:* T-J38-2 (iii). Without MR it empties G-tr alone, and reduces the rest to ℚ(√47)'s form on
+  `X′`.
+- *Its shadows on the poster:* P7 (the co-finite rung) and P5's H (the half-space rung).
+- *Does §IQ name it?* **Half.** The row-88 §IQ names "transience (the upper Banach density of the places where it is not locally a
+  pullback)" as the invariant — the **measure** reading of the same property. It does not name determinacy or isolation, the **closed-set**
+  reading. T-B1 appears in §S.1 as a target, not as the invariant.
+- *Its killing test, in the abstract class:* row 80's T35 — transient walls between rigid phases in rank-one distance graphs. If those
+  phases are gap-free, finite-window determinacy fails without arithmetic, and the candidate needs §IQ's "two or more primes" as band
+  rigidity did (row 97). Reading T35's phases for gaps is a record read, not a search.
+
+**(b) EI-2 (J36, J37) at type (B): insufficient alone.** It empties G-n only. With DP it empties G-f as well, and with T-B1 all three. Its
+shadow here is P10 (B⁺).
+
+**(c) Does looking for the example invariant beat closing the gap directly?** **Yes, for T-B1, and T-J38-2 is the reason.**
+- Closing the gap directly means MR, J36 F5's Furstenberg wall, shared with ℚ(√47).
+- The type-(B)-specific content is T-B1 alone: a closed-set, finite-window statement of the kind rows 91 (H) and 95 (Berend) proved. Given
+  MR, row 88 **is** T-B1. So T-B1 is the part of row 88 that does not wait on Furstenberg, and its two lower rungs are proved.
+- **The unified statement both posters now share** (§4.7): for every real field in T-C(A)'s class or Theorem C's, "MR(F) ∧ Iso(F) ⟹ every
+  four-colouring of `F²` is a pullback from a tight place". Iso is vacuous where there is no tight place. At ℚ(√47) it reads `χ ≥ 5`, at
+  type (B) row 88.
+- Confidence: medium that T-B1 is the better next derivation. It would change on a proof that T-B1 needs a measure input: for instance,
+  that the split-dominated re-centring (R88 §G) cannot be closed without an equidistribution statement for `U`.
+
+### 4.4 The cards
+
+question: is-isolation-all-row-88-lacks
+  evidence: this record §3.5 T-J38-2 (given MR(F), row 88 ⟺ T-B1; one mind); `plans/R88-derivation.md` §G (T-B1 GAP at "unique continuation from a region that is no archimedean half-space", both records); row 91 H (half-space rung proved); R88-B2-1 (co-finite rung)
+  expected: finite-window isolation of gap-free pullbacks follows from the half-space rung plus band-type rigidity at two split primes
+  ask: over a type-(B) field, is every pullback determined among all four-colourings by its values on one finite window?
+  if yes: T-B1 lands; transience is closed (Q-tr), and row 88 reduces exactly to MR(F), the Furstenberg-type lemma it shares with ℚ(√47)
+  if no: the failing colouring is a non-pullback (R88-TA2) and row 88 is answered "no" by the witness
+  answered by: derivation
+  cost: one derivation job and a blind verifier, solver-free (FS-98 re-aimed)
+  hunch: yes, by an ultrametric unique-continuation lemma using two split primes' dense rotations, as row 95 used them for characters
+  falsifier: a gap-free periodic colouring of some real field's plane, with two split primes, that is a limit of other colourings
+  rank: 1
+
+question: does-an-inert-dyadic-tower-carry-no-band-character
+  evidence: §2.2 (the type-(B) tower, `Q = 2`, has no band-4 character at `O/𝔓²` and twelve at `O/𝔓⁴`); J36 §4.1 ("`U₄` has no band-4 character at level one"); CLG (row 100); S1V V3 (ii) GAP
+  expected: an inert dyadic tower of norm 4–32 gains band-4 characters at the level where `4O` is reached, as the type-(B) tower does
+  ask: for an inert dyadic place of norm Q ∈ {4, 8, 16, 32}, does O/4O carry a character nonzero-band on every norm-one unit?
+  if yes: the EI-1 control is not at the dyadic towers; S1V's GAP has no known site left
+  if no: a real field whose four-colourable targets are only such places has χ ≤ 4 and Θ₄ = ∅ (CLG), and compactness gives the control
+  answered by: run
+  cost: an exact enumeration of seconds per local field once a derivation fixes O and the level; the field realisation is a PARI query
+  hunch: yes at every Q
+  falsifier: a zero count at O/4O for some Q
+  rank: 2
+
+### 4.5 Recommendations (ranked, with the default)
+
+| rank | recommendation | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| R1 | **Re-aim FS-98 to T-B1 alone, recorded with T-J38-2.** Statement verbatim for a brief: "Over ℚ(√59), ℚ(√83), ℚ(√131): for each `p ∈ Pull` there is a finite `B ⊂ R` such that every `c ∈ X₄(F)` with `c\|_B = p\|_B` equals `p`. Route through the determinacy ladder (co-finite: R88-B2-1; half-space: FS86-dB-H); the named step is the split-dominated re-centring. Control: at ℚ(√11) a gapped periodic colouring is not isolated (C9 with a shrinking archimedean term), so the proof must use gap-freeness." T-B2 is demoted: T-B1 ⟹ Q-tr ⟹ T-B2 | keep T-B1 and T-B2 co-equal in FS-98 | given MR, row 88 is T-B1 (T-J38-2); T-B2 is implied by T-B1 and is Q-tr's weakest case | medium-high on the re-aim; about 0.5 that T-B1 is true and provable by a closed-set method |
+| R2 | **A blind check of T-J38-1 and T-J38-2**, added to J46's list or the next verifier (with J37's T-J37-1) | leave them at one mind | cheap (four and six steps); T-J38-2 is the shared identity the owner asked for | high that both are true given B⁺ |
+| R3 | **Record the unified statement** "MR(F) ∧ Iso(F) ⟹ `X₄(F)` = Pull(F)" (§4.7) as the posters' common form in FS-97's stub (spectra reading infinitely many places), so MR has one home for both fields | two stubs, one per field | one missing lemma, one home (the header's rule) | high |
+| R4 | **The control card (§4.4, rank 2)** as an in-ban exact job, after a derivation fixes each inert dyadic `O` of norm 4–32 | leave the EI-1 control hunt to after 2026-10-01 | seconds per field; it decides whether S1V's GAP has any site | medium |
+| R5 | **DP as a named lemma** on FS-97's line: "over a type-(B) field, a translation-invariant random four-colouring with a finite-place proper factor colouring is carried by Pull" | fold it into MR | it is the MR-free route for G-f and for the pure-point layer at type (B), and it is J45's GAP at the tight level, where SI-5 does not apply | medium-low on its value; its truth is open |
+| R6 | **Reading debt:** §4.1's queries 1–3 (frozen vs isolated; unique continuation; expansive subdynamics for `S`-adic actions) | skip | T-B1 may be a known "frozen ⟹ isolated under mixing" statement | medium |
+
+**If Kooshi does nothing:** FS-98 stays with T-B1 and T-B2 co-equal; T-J38-1 and T-J38-2 stay in this record at one mind; the two posters
+are carried as separate problems; the EI-1 control hunt waits for 2026-10-01.
+
+### 4.6 Evidence inventory (Stage 1 re-read) and the hunch ledger
+
+- `Stage 1 E2`, the gap contains J37's class plus transience and defect processes — read against: §3.3 (b) — surprised: no (DP located at J45's GAP; SI-5 does not reach it)
+- `Stage 1 E3`, isolation is the one type-(B) lemma — read against: §3.5 — surprised: yes (stronger than expected: given MR, row 88 is *equivalent* to T-B1, and J28D had named the dependency)
+- `Stage 1 E4`, ℚ(√59) is not the control — read against: §2.2 — surprised: yes (in the residue: level one of the tight tower has no band character, so J36's level-one evidence for the dyadic control sites decides nothing)
+- `Stage 1 E6`, a closed-set example invariant — read against: §4.3 — surprised: no (it is finite-window determinacy, a ladder with two rungs proved)
+
+hunch: isolation-is-the-type-b-content
+  claim: given MR(F), four-colour rigidity over a type-(B) field is equivalent to isolation of the pullbacks (T-B1)
+  basis: derived
+  falsifier: a defect in T-J38-2's steps 1–4, or B⁺ failing J46's blind check
+  registered: 2026-09-25
+  status: open (derived at one mind; confirmation needs a second derivation)
+
+hunch: t-b1-true-by-closed-set-method
+  claim: every pullback over a type-(B) field is isolated, provably by an ultrametric unique-continuation lemma using two split primes
+  basis: analogy
+  falsifier: a gap-free periodic colouring of a real field's plane with two split primes that is a limit of other colourings
+  registered: 2026-09-25
+  status: open
+
+hunch: level-one-decides-dyadic-band-characters
+  claim: a dyadic tower with no band-4 character at level one has none at any level
+  basis: prior
+  falsifier: a dyadic tower with none at level one and some higher up
+  registered: 2026-09-25
+  status: killed (by: `data/crunch-2026-09-25/j38-band.out` — the type-(B) tower has 0 at `O/2O` and 12 at `O/4O`)
+
+hunch: dp-open
+  claim: a stationary defect process over a gap-free pullback is not excluded by any record
+  basis: read
+  falsifier: a record proving "finite-place factor ⟹ Pull" at a tight place
+  registered: 2026-09-25
+  status: confirmed (by: J45 §5.1, "carries ⟹ equality" GAP; SI-5 needs (G2), which type (B) lacks)
+
+**Scored against Stage 1:** E1 confirmed, with the extension form and P4 added; E2 confirmed; E3 confirmed and sharpened; E4 confirmed,
+and the level-one residue added; E5 confirmed; E6 moved from "every closed set contains a finite-place colouring" to finite-window
+determinacy of the tight pullbacks; E7 (a) and (b) confirmed, (c) became KT-1; E8 confirmed: the reduction is T-J38-2, and the
+recommendation is R1.
+
+### 4.7 What the posters share (J37's record exists; J39's does not yet)
+
+- **One skeleton.** (1) Finite-structure exclusions: residue, periodic, character, finite-place window, one-character window (J37 P1–P5;
+  here P1–P4). (2) A spectral exclusion on every `E_S`: T-C(A) there, Theorem C here, the same stationary Zhang count. (3) One
+  colouring-free remainder, **MR(F)**: "every `U`-invariant finite positive measure on `R̂` with `τ(E) = 0` is a multiple of Haar
+  measure". J45-SP-Cor reaches it at ℚ(√47); T-J38-2 reaches it at type (B), given T-B1.
+- **One unified statement** (a composition of J45-SP-Cor and T-J38-2; one mind): *for every real field `F` in T-C(A)'s class or in
+  Theorem C's class S2, MR(F) ∧ Iso(F) ⟹ every four-colouring of `F²` is a pullback from a tight place.* Here Iso(F) is T-B1, vacuous when
+  there is no tight place. With Pull = ∅ this is `χ(F²) ≥ 5`; with one tight place it is `F(R) ≠ 0`. In G48's language, it is the
+  conjecture's four-colour clause on these classes, modulo MR and Iso.
+- **Shared inputs:** `[AmbrusEtAl2023]`; FS-66 at 11 and 19; C14; J45's SI, B⁺, R-U; row 98.
+- **Not shared:** Iso and DP exist only where Pull ≠ ∅. Kronecker selection finishes the pure-point layer at ℚ(√47) but only reaches DP
+  at type (B).
+- **For J39 (ℚ(√167), five colours), a prediction:** its skeleton breaks at step (2). J36 F7 ("a ratio count cannot refuse `k ≥ 5` for
+  finite-place colourings"; `m₁ ≥ 0.2293 > 1/5`) says there is no T-C(A) at five colours, so the unified statement has no five-colour
+  analogue by this route. The shared identity should be expected at four colours only.
+
+### 4.8 Would-have-searched-here log (Stage 4)
+
+- Would have searched finite quotients for a gap-free periodic colouring that fails isolation (the T-B1 falsifier). Instead: stated it as
+  a card and pointed to a record read (row 80's T35 phases, for gaps).
+- Would have enumerated inert dyadic local fields of norm 4–32 for band characters. Instead: a card, since a derivation must first fix
+  each `O` and the level.
+
+## Theorems this phase proved
+
+| id | statement | grade | address |
+|---|---|---|---|
+| T-J38-1 | over ℚ(√59), ℚ(√83), ℚ(√131), a one-character measurable window `W(θ(x) + t)`, proper for a.e. `t`, is a pullback for a.e. `t` | hand, one mind; composition of Steinhaus, row 98, Theorem C at `S = ∅` | §3.4 |
+| T-J38-2 | given T-B1: `X′ = X₄ ∖ Pull` is closed and satisfies T-C(A)'s statement; `X′ ≠ ∅` yields a `U`-invariant, `E`-null, non-Haar `τ` on `R̂` with negative mean at 1; so MR(F) ∧ T-B1 ⟹ `F(R) ≠ 0`, and given MR(F), row 88 ⟺ T-B1 | hand, one mind; composition of T-A (i), Theorem C, J45 B⁺, R-U, N1 | §3.5 |
+| T-J38-3 | for `F` in T-C(A)'s class or in S2: MR(F) ∧ Iso(F) ⟹ every four-colouring of `F²` is a pullback from a tight place | hand, one mind; J45-SP-Cor with T-J38-2 | §4.7 |
+| T-J38-4 | at the tight place of every type-(B) field, `\|S₄\| = 24`, `O/4O` carries exactly 12 band-4 characters (all of order 4), `O/8O` no others, `O/2O` none; so `Θ₄(R_F) ≠ ∅` and no lattice in a type-(B) ring is a four-colourable lattice with `Θ₄ = ∅` | tools exact (plant fires) + hand (restriction; HD1 for "all of `Θ₄`") | §2.2, `tools/crunch_j38_band.py` |
+| T-J38-5 | at type (B), DP ⟺ SI's "carries ⟹ equality" (for `S` fixed), and the G-f piece of the gap is non-empty at ℚ(√11) (F2) but uses its gaps | hand, one mind; B⁺ and Theorem C | §3.3 (b) |
