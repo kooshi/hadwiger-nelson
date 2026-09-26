@@ -149,3 +149,24 @@ question: does-the-collapse-hold-at-de-greys-field
 ```
 
 ## Stage 1 — SAVED
+
+## Stage 2 — the weak step, read in the record (before any draft of R1's)
+
+The card's addressee was "derivation"; the record answers most of it. **T-J39-3** (J39 §3.2, with J48's repair; quoted in
+`plans/FS100-X21D-derivation.md` line 65): *"Let `N_k(F)` be the finite set of stable places of `F` that are not `k`-thick, and `Y_{F,k} =
+UD(ℝ²) × ∏_{v ∈ N_k(F)} G_v`. … **So, given MR(F): `F²` is `k`-colourable iff `Y_{F,k}` has a CP `k`-colouring.**" (every `k`, every totally
+real `F`)*. De Grey's field is totally real and, by G43, has `N_5 = N_6 = ∅` if every stable place at `q ≥ 131` is thick (Weil: `λ*/d ≤
+0.1734 < 1/5`; higher levels `2/(q+1)`). Then `Y = UD(ℝ²)` and the collapse is a **two-line corollary of a held [hand] theorem**, stated for
+every `k` and every totally real field and applied, so far, only at ℚ(√167), where `N_5 = {23, 43}`.
+
+- Hunch `the-collapse-composes`: evidence for it strengthened (read); status still open — it needs a mind to write the corollary and the
+  exact thickness at the stable places of de Grey's field, and T-J39-3's own grade ([hand], J39 + J48 blind) carries into it.
+- Revised expectation: lands at [hand] P = 0.80; breaks P = 0.12 (the likely place now: the thickness definition at all levels, or T-J39-3's
+  CP format differing from `χ_CP` as row 125 uses it); found in print P = 0.08.
+- **The one question left open by the reading: which known problem `χ_CP(ℝ²)` is.** Row 110 names the formats: *"with a real place and only
+  thick finite places the question is exactly `χ_B(ℝ²) ≤ 5`"* (Borel, everywhere proper), and *"measurable into the null-vertex format"*,
+  with *"from measurable to everywhere-proper"* not claimed. If the CP format is Borel everywhere-proper, then `χ ≤ χ_m ≤ χ_B = χ_CP = χ`
+  and **given MR, `χ(ℝ²) = χ_m(ℝ²) = χ_B(ℝ²)`** — the plane's three chromatic numbers coincide. If it is null-tolerant, then `χ(ℝ²) =
+  χ_CP(ℝ²) ≤ χ_m(ℝ²)`, and rung D still ⟺ `χ_CP(ℝ²) ≥ 6`, a statement at least as strong as `χ_m ≥ 6`. Either way rung D is the CP form.
+
+## Stage 2 — SAVED
