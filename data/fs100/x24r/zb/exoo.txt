@@ -1,0 +1,103 @@
+## exoo: 'au:"Exoo, Geoffrey"'  total=102 fetched=102
+1546.05069 | 2023 | Exoo, Geoffrey | On mixed cages |  | summary 
+1243.05158 | 2012 | Exoo, Geoffrey | On the Ramsey number \(R(4,6)\) |  | summary *colorin
+0661.05044 | 1989 | Exoo, Geoffrey | A lower bound for R(5,5) |  | review *colou
+1461.05104 | 2020 | Exoo, Geoffrey | New small trivalent graphs for girths 17,18 and 20 |  | summary 
+1055.05048 | 2005 | Exoo, Geoffrey | \(\varepsilon\)-unit distance graphs |  | summary *unit/distance
+1266.05088 | 2013 | Exoo, Geoffrey | On some small classical Ramsey numbers |  | summary 
+1054.05051 | 2004 | Exoo, Geoffrey | Some applications of \(pq\)-groups in graph theory |  | summary *colorin
+0651.05041 | 1986 | Exoo, Geoffrey | Dense packings of induced subgraphs |  | review 
+1056.05075 | 2004 | Exoo, Geoffrey | Voltage graphs, group presentations and cages |  | summary 
+0814.05057 | 1994 | Exoo, Geoffrey | A lower bound for Schur numbers and multicolor Ramsey numbers |  | summary 
+1169.05336 | 2008 | Exoo, Geoffrey; Jajcay, Robert | Dynamic cage survey |  | summary 
+0493.94019 | 1982 | Exoo, Geoffrey | On a measure of communication network vulnerability |  |  
+0875.05002 | 1987 | Exoo, Geoffrey; Harary, Frank | Animal-trees and caterpillars are equivalent |  |  
+0436.05035 | 1980 | Exoo, Geoffrey; Harary, Frank | Step graphs |  |  
+0553.05045 | 1984 | Exoo, Geoffrey; Harary, Frank | Smallest cubic graphs with prescribed properties |  | review 
+0446.05026 | 1980 | Exoo, Geoffrey; Harary, Frank | The smallest graphs with certain adjacency properties |  |  
+0524.05041 | 1983 | Exoo, Geoffrey; Harary, Frank | Extremal graphs of small girth with an adjacency property |  |  
+0641.05042 | 1987 | Exoo, Geoffrey | Constructing Ramsey graphs with a computer |  | summary 
+0485.05037 | 1982 | Exoo, Geoffrey; Harary, Frank | The smallest cubic multigraphs with prescribed bipartite, block, Hamiltonian and planar properties |  |  
+0436.05057 | 1982 | Exoo, Geoffrey; Harary, Frank | The forcibly-tree and forcibly-unicyclic degree sequences |  |  
+0985.05040 | 2002 | Exoo, Geoffrey | A small trivalent graph of girth 14 |  | summary 
+0423.05018 | 1979 | Exoo, Geoffrey; Harary, Frank | The smallest regular graphs with irregular square |  |  
+0991.05060 | 2001 | Exoo, Geoffrey | A family of graphs and the degree/diameter problem |  | review 
+1018.05072 | 2003 | Exoo, Geoffrey | A Euclidean Ramsey problem |  | summary 
+0984.05030 | 2001 | Exoo, Geoffrey | A trivalent graph of girth 17 |  | review 
+0896.05043 | 1998 | Exoo, Geoffrey | Some new Ramsey colorings |  | review *colorin
+0507.05041 | 1983 | Exoo, Geoffrey | On line disjoint paths of bounded length |  |  
+0885.05057 | 1996 | Exoo, Geoffrey | A simple method for constructing small cubic graphs of girths 14, 15, and 16 |  | summary 
+0774.05066 | 1993 | Exoo, Geoffrey | Announcement: On the Ramsey numbers \(R(4,6)\), \(R(5,6)\) and \(R(3,12)\) |  | summary 
+0695.05047 | 1989 | Exoo, Geoffrey | On two classical Ramsey numbers of the form R(3,n) |  | review 
+0728.05046 | 1990 | Exoo, Geoffrey | A lower bound for \(r(K_ 5-e,K_ 5)\) |  | review 
+arXiv:2310.17099 | 2023 | Geoffrey Exoo | A Lower Bound for R(5,6) |  | summary 
+0735.05059 | 1990 | Exoo, Geoffrey | On construction hypergraphs without property \(B\) |  | summary *chromatic
+arXiv:2206.07153 | 2022 | Geoffrey Exoo | A Mixed Graph Achieving A Moore-like Bound |  | summary 
+0728.05045 | 1991 | Exoo, Geoffrey | Three color Ramsey number of \(K_ 4-e\) |  | review 
+0738.05061 | 1991 | Exoo, Geoffrey | A bipartite Ramsey number |  | review *chromatic/colorin
+0678.05017 | 1988 | Exoo, Geoffrey | Computer construction of Ramsey edge colorings |  | review *colorin
+arXiv:1403.5636 | 2014 | Geoffrey Exoo | Three Graphs and the Erdős-Gyárfás Conjecture |  | summary 
+0742.05062 | 1991 | Exoo, Geoffrey | Applying optimization algorithms to Ramsey problems |  | review *chromatic/colorin
+0494.05039 | 1982 | Boyles, Stephanie M.; Exoo, Geoffrey | A counterexample to a conjecture on paths of bounded length |  |  
+0458.05050 | 1980 | Akiyama, Jin; Exoo, Geoffrey; Harary, Frank | Covering and packing in graphs. III: Cyclic and acyclic invariants |  |  
+0758.05078 | 1991 | Exoo, Geoffrey | On isomorphic graph factoring |  | summary 
+1246.05070 | 2012 | Exoo, Geoffrey; Jajcay, Robert | Recursive constructions of small regular graphs of given degree and girth |  | summary 
+0479.05027 | 1981 | Akiyama, Jin; Exoo, Geoffrey; Harary, Frank | Covering and packing in graphs. IV: Linear arboricity |  |  
+0676.05061 | 1988 | Exoo, Geoffrey | Some constructions related to Ramsey multiplicity |  | review *chromatic/colorin
+1445.05040 | 2020 | Exoo, Geoffrey; Ismailescu, Dan | The chromatic number of the plane is at least 5: a new proof |  | review *chromatic
+1330.05051 | 2016 | Exoo, Geoffrey; Jajcay, Robert | Biregular cages of odd girth |  | summary 
+0635.05033 | 1987 | Exoo, Geoffrey | Ramsey numbers of hypergraphs |  | summary 
+0427.05059 | 1980 | Akiyama, Jin; Exoo, Geoffrey; Harary, Frank | A graph and its complement with specified properties. V: The self- complement index |  |  
+0481.05037 | 1981 | Exoo, Geoffrey | On an adjacency property of graphs |  |  
+0406.05058 | 1979 | Akiyama, Jin; Exoo, Geoffrey; Harary, Frank | The graphs with all induced subgraphs isomorphic |  |  
+0442.05021 | 1981 | Exoo, Geoffrey; Harary, Frank; Kabell, Jerald | The crossing numbers of some generalized Petersen graphs |  |  
+1226.05201 | 2011 | Exoo, Geoffrey; Jajcay, Robert | On the girth of voltage graph lifts |  | summary 
+1415.05051 | 2019 | Exoo, Geoffrey; Goedgebeur, Jan | Bounds for the smallest $k$-chromatic graphs of given girth |  | summary *chromatic
+1360.05032 | 2017 | Exoo, Geoffrey; Ismailescu, Dan | A unit distance graph in the plane with fractional chromatic number 383/102 |  |  *chromatic/unit/distance
+1559.05053 | 2023 | Exoo, Geoffrey; Ismailescu, Dan | A 5-chromatic same-distance graph in the hyperbolic plane |  | summary *chromatic/colorin/unit/distance/points
+0791.05033 | 1993 | Exoo, Geoffrey; Harary, Frank; Xu, Cheng-De | Vulnerability in graphs of diameter four |  | review *distance
+1452.05048 | 2020 | Exoo, Geoffrey; Ismailescu, Dan | A 6-chromatic two-distance graph in the plane |  | summary *chromatic/distance/points
+0472.05058 | 1981 | Blass, Andreas; Exoo, Geoffrey; Harary, Frank | Paley graphs satisfy all first-order adjacency axioms |  |  
+1273.05100 | 2009 | Jajcay, Robert; Exoo, Geoffrey | Properties of groups for the cage and degree/diameter problems |  | summary 
+1407.05072 | 2018 | Exoo, Geoffrey; Ismailescu, Dan | The Hadwiger-Nelson problem with two forbidden distances |  | editorial *distance/forbid
+0603.05021 | 1985 | Blass, Andreas; Exoo, Geoffrey; Harary, Frank | Outlinks and inlinks in digraphs |  | review 
+0456.05055 | 1980 | Exoo, Geoffrey | A new way to play Ramsey games |  |  
+0760.05086 | 1992 | Abbott, H. L.; Exoo, Geoffrey | On set systems not containing delta systems |  | review 
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *chromatic/unit/distance/triangle-free/points
+1327.05227 | 2015 | Exoo, Geoffrey; Tatarevic, Milos | New lower bounds for 28 classical Ramsey numbers |  | summary *colorin
+1477.05182 | 2021 | Exoo, Geoffrey; Fisher, David; Ismailescu, Dan | The chromatic number of the Minkowski plane -- the regular polygon case |  | summary *chromatic/unit/distance/points
+0739.05061 | 1991 | Exoo, Geoffrey; Harborth, Heiko; Mengersen, Ingrid | On Ramsey numbers of \(K_{2,n}\) |  | review 
+0473.05042 | 1982 | Asano, Takao; Saito, Nobuji; Exoo, Geoffrey; Harary, Frank | The smallest 2-connected cubic bipartite planar nonhamiltonian graph |  |  
+arXiv:1408.2002 | 2014 | Geoffrey Exoo; Dan Ismailescu | On the Chromatic Number of $\mathbb{R}^n$ for Small Values of $n$ |  | summary *chromatic
+1228.05227 | 2011 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero | Locating-dominating codes in cycles |  | summary 
+0648.05039 | 1988 | Exoo, Geoffrey; Harborth, Heiko; Mengersen, Ingrid | The Ramsey number of \(K_ 4\) versus \(K_ 5-e\) |  | review 
+1536.90181 | 2023 | Exoo, Geoffrey; Jajcay, Robert; Raiman, Tom | On decreasing the orders of \((k,g)\)-graphs |  | summary 
+1221.05198 | 2010 | Conder, Marston; Exoo, Geoffrey; Jajcay, Robert | On the limitations of the use of solvable groups in Cayley graph cage constructions |  | summary 
+0641.05043 | 1988 | Exoo, G. | Some new computer generated results in Ramsey graph theory |  | summary 
+1154.94013 | 2008 | Exoo, Geoffrey; Laihonen, Tero; Ranto, Sanna | New bounds on binary identifying codes |  | review 
+1326.94141 | 2007 | Exoo, Geoffrey; Laihonen, Tero; Ranto, Sanna M. | Improved upper bounds on binary identifying codes. |  |  
+1302.05051 | 2014 | Exoo, Geoffrey; Ismailescu, Dan; Lim, Michael | On the chromatic number of \(\mathbb R^4\) |  | summary *chromatic
+1225.05193 | 2011 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero | Locating-dominating codes in paths |  | summary 
+1269.05053 | 2013 | Exoo, Geoffrey; Jajcay, Robert; Širáň, Jozef | Cayley cages |  | summary 
+1229.05218 | 2010 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero | On location-domination of set of vertices in cycles and paths |  | summary 
+0651.05050 | 1988 | Exoo, Geoffrey; Reynolds, Donald F. | Ramsey numbers based on \(C_ 5\)-decompositions |  | review 
+1551.05001 | 2024 | Soifer, Alexander | The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewords by Pet |  | review *chromatic/colorin/distance/points
+1196.94094 | 2010 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero; Ranto, Sanna | Improved bounds on identifying codes in binary Hamming spaces |  | review *distance
+0464.05057 | 1981 | Akiyama, Jin; Era, Hiroshi; Exoo, Geoffrey | Further results on graph equations for line graphs and \(n\)-th power graphs |  |  
+1053.05090 | 2004 | Xu, Xiaodong; Xie, Zheng; Exoo, Geoffrey; Radziszowski, Stan | Constructive lower bounds on classical multicolor Ramsey numbers |  | summary 
+1327.05065 | 2016 | Araujo-Pardo, Gabriela; Exoo, Geoffrey; Jajcay, Robert | Small bi-regular graphs of even girth |  | summary 
+1182.94067 | 2009 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero; Ranto, Sanna | Upper bounds for binary identifying codes |  | summary 
+1243.05120 | 2012 | Exoo, Geoffrey; Gimbert, Joan; López, Nacho; Gómez, José | Radial Moore graphs of radius three |  | summary 
+1402.05038 | 2019 | Exoo, Geoffrey; Jajcay, Robert; Mačaj, Martin; Širáň, Jozef | On the defect of vertex-transitive graphs of given degree and diameter |  | summary 
+1552.05112 | 2024 | Exoo, Geoffrey; Kolokolnikov, Theodore; Janssen, Jeanette; S | Attainable bounds for algebraic connectivity and maximally connected regular graphs |  | summary 
+1184.05122 | 2008 | Exoo, Geoffrey; Junnila, Ville; Laihonen, Tero; Ranto, Sanna | Locating vertices using codes |  | summary *distance
+1217.90155 | 2011 | Exoo, Geoffrey; McKay, Brendan D.; Myrvold, Wendy; Nadon, Ja | Computational determination of (3,11) and (4,7) cages |  | summary 
+0463.05058 | 1980 | Exoo, Geoffrey; Hamada, Takashi | A note on the Blass-Harary axioms |  |  
+0957.90009 | 2000 | Exoo, Geoffrey; Jiang, Jianling; Zhao, Cheng | An application of multi-dimensional matching to logistics |  | summary 
+1298.05171 | 2010 | Capdevila, Carles; Conde, Josep; Exoo, Geoffrey; Gimbert, Jo | Ranking measures for radially Moore graphs |  | summary 
+None | 2026 | Exoo, Geoffrey; Goedgebeur, Jan; Jooken, Jorik; Stubbe, Loui | New small regular graphs of given girth: the cage problem and beyond |  | summary 
+0995.05129 | 2002 | Exoo, Geoffrey; Ling, Alan C. H.; McSorley, John P.; Phillip | Totally magic graphs |  | review *points
+1565.05048 | 2025 | Dalfó, Cristina; Erskine, Grahame; Exoo, Geoffrey; Fiol, Miq | On bipartite \((1,1,k)\)-mixed graphs |  | summary 
+0672.05062 | 1989 | Clapham, C.; Exoo, G.; Harborth, H.; Mengersen, I.; Sheehan, | The Ramsey number of \(K_ 5-e\) |  | review *colorin
+0771.05070 | 1992 | Cockayne, E. J.; Exoo, G.; Hattingh, J. H.; Mynhardt, C. M. | The irredundant Ramsey number \(s(4,4)\) |  | review 
+1544.05048 | 2024 | Dalfó, C.; Erskine, G.; Exoo, G.; Fiol, M. A.; López, N.; Me | On large regular \(( 1 , 1 , k )\)-mixed graphs |  | summary 

@@ -1,0 +1,32 @@
+## fischer: 'ai:fischer.klaus-g'  total=31 fetched=31
+0893.20047 | 1997 | Fischer, Klaus G.; Morris, Walter; Shapiro, Jay | Affine semigroup rings that are complete intersections |  | review 
+0864.15016 | 1996 | Fischer, Klaus G.; Shapiro, Jay | Mixed matrices and binomial ideals |  | review 
+0756.52015 | 1992 | Fischer, Klaus G.; Shapiro, Jay | The prime ideal structure of the Minkowski ring of polytopes |  | review 
+0426.60081 | 1980 | Beichelt, Frank; Fischer, Klaus | General failure model applied to preventive maintenance policies |  |  
+0828.90030 | 1995 | Fischer, Klaus; Müller, H. Jürgen | Cooperative problem solving in the transportation domain |  | summary 
+0792.13008 | 1993 | Fischer, Klaus G.; Shapiro, Jay | Generating prime ideals in the Minkowski ring of polytopes |  | review *points
+0889.15020 | 1998 | Fischer, Klaus G.; Morris, Walter; Shapiro, Jay | Mixed dominating matrices |  | review 
+0656.13003 | 1988 | Fischer, Klaus G. | Symmetric polynomials and Hall's theorem |  | review *unit
+0744.05061 | 1990 | Fischer, Klaus G. | Additive \(k\)-colorable extensions of the rational plane |  | summary *rational
+0831.90054 | 1995 | Fischer, K.; Kuhn, N.; Müller, H. J.; Müller, J. P. | Modeling the transportation domain |  | summary 
+1098.68913 | 2005 | Fischer, Klaus | Self-organisation in holonic multiagent systems |  | summary 
+0587.62120 | 1985 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review *points
+0579.62040 | 1983 | Bunke, Olaf; Fischer, Klaus | Some fundamentals and procedures of distribution-free and discrete discriminant analysis |  | summary 
+0411.14007 | 1979 | Bartz, H.; Fischer, K.; Folz, H.; Zimmer, H. G. | Some computations related to torsion points on elliptic curves over number fields |  |  *points
+0836.05030 | 1994 | Fischer, Klaus G. | A planar geometric graph of chromatic number four |  | summary *chromatic/colorin/distance/points
+0338.14007 | 1978 | Fischer, Klaus G. | The decomposition of the module of \(n\)-th order differentials in arbitrary characteristic |  |  
+0733.05048 | 1990 | Fischer, Klaus G. | The connected components of the graph \({\mathbb{Q}}(\sqrt{N_ 1},\dots ,\sqrt{N_ d})^ 2\) |  | review 
+1012.68543 | 2002 | Jung, Christoph G.; Fischer, Klaus | Logic-based hybrid agents |  | summary 
+0155.34702 | 1967 | Fischer, Klaus; Lindner, Rolf; Thiele, Helmut | Stabile stochastische Automaten |  |  
+0299.14002 | 1974 | Fischer, Klaus G. | The module decomposition of I(A/A) |  |  
+0515.13005 | 1983 | Fischer, Klaus | Derivations and smooth discriminant |  |  
+1098.68920 | 2004 | Schillo, Michael; Fischer, Klaus | A taxonomy of autonomy in multiagent organisation |  | summary 
+0487.13003 | 1982 | Draper, Richard; Fischer, Klaus | Derivations into the integral closure |  |  
+0989.68564 | 2001 | Fischer, Klaus; Funk, Petra; Ruß, Christian | Specialised agent applications |  | summary 
+1043.68931 | 2003 | Metzger, Jörg; Schillo, Michael; Fischer, Klaus | A multiagent-based peer-to-peer network in Java for distributed spam filtering |  | summary 
+0488.32003 | 1982 | Draper, Richard N.; Fischer, Klaus | Derivations and small \(C_ 4\). |  |  
+0582.90039 | 1985 | Bär, M.; Fischer, K.; Hertel, G. | A method of calculation for loss systems susceptible to failures with any number of repair channels and its application  |  | review 
+0327.13014 | 1976 | Draper, Richard N.; Fischer, Klaus G. | The homology of certain local rings |  |  
+0780.00030 | 1993 |  | Computational algebra. Papers from the Mid-Atlantic Algebra Conference, held at George Mason University, Fairfax, VA, US |  | review 
+0429.62046 | 1979 | Fischer, K.; Thiele, Chr. | On a distributionfree method in discriminant analysis |  |  
+0348.68002 | 1968 |  | Nicht-numerische Informationsverarbeitung. Beiträge zur Behandlung nicht-numerischer Probleme mit Hilfe von Digitalreche |  |  

@@ -1,0 +1,47 @@
+## ismailescu: 'au:"Ismailescu, Dan"'  total=46 fetched=46
+1445.05040 | 2020 | Exoo, Geoffrey; Ismailescu, Dan | The chromatic number of the plane is at least 5: a new proof |  | review *chromatic
+1360.05032 | 2017 | Exoo, Geoffrey; Ismailescu, Dan | A unit distance graph in the plane with fractional chromatic number 383/102 |  |  *chromatic/unit/distance
+1559.05053 | 2023 | Exoo, Geoffrey; Ismailescu, Dan | A 5-chromatic same-distance graph in the hyperbolic plane |  | summary *chromatic/colorin/unit/distance/points
+1452.05048 | 2020 | Exoo, Geoffrey; Ismailescu, Dan | A 6-chromatic two-distance graph in the plane |  | summary *chromatic/distance/points
+1407.05072 | 2018 | Exoo, Geoffrey; Ismailescu, Dan | The Hadwiger-Nelson problem with two forbidden distances |  | editorial *distance/forbid
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *chromatic/unit/distance/triangle-free/points
+1477.05182 | 2021 | Exoo, Geoffrey; Fisher, David; Ismailescu, Dan | The chromatic number of the Minkowski plane -- the regular polygon case |  | summary *chromatic/unit/distance/points
+1127.52019 | 2006 | Ismailescu, Dan; Jacobs, Jacqueline | On sequences of nested triangles |  | summary 
+0990.05077 | 2002 | Ismailescu, Dan; Stefanica, Dan | Minimizer graphs for a class of extremal problems |  | review 
+1302.05051 | 2014 | Exoo, Geoffrey; Ismailescu, Dan; Lim, Michael | On the chromatic number of \(\mathbb R^4\) |  | summary *chromatic
+1170.52001 | 2009 | Ismailescu, Dan | Circumscribed polygons of small area |  | review *unit
+1047.52010 | 2004 | Ismailescu, Dan; Radoičić, Radoš | A dense planar point set from iterated line intersections. |  | summary 
+arXiv:1408.2002 | 2014 | Geoffrey Exoo; Dan Ismailescu | On the Chromatic Number of $\mathbb{R}^n$ for Small Values of $n$ |  | summary *chromatic
+0986.52010 | 2001 | Ismailescu, D. | Inequalities between lattice packing and covering densities of centrally symmetric plane convex bodies |  | review *points
+1298.52020 | 2014 | Ismailescu, Dan; Kim, Brian | Packing and covering with centrally symmetric convex disks |  | review 
+1343.11020 | 2014 | Ismailescu, Dan; Shim, Peter C. | On numbers that cannot be expressed as a plus-minus weighted sum of a Fibonacci number and a prime |  | summary 
+1018.52012 | 2002 | Ismailescu, Dan | Restricted point configurations with many collinear \(k\)-tuplets |  | summary 
+1199.52005 | 2008 | Ismailescu, Dan | Illuminating a convex polygon with vertex lights |  | review 
+0962.52003 | 1998 | Ismailescu, D. | Covering the plane with copies of a convex disk |  | summary 
+1481.52002 | 2021 | Ismailescu, Dan; Kim, Min Jung; Wang, Eric | On the maximum area of inscribed polygons |  | summary 
+1043.52017 | 2003 | Ismailescu, Dan | Slicing the pie |  | editorial 
+1342.11011 | 2013 | Ismailescu, Dan; Park, Peter Seho | On pairwise intersections of the Fibonacci, Sierpiński, and Riesel sequences |  | summary 
+1419.11026 | 2017 | Ismailescu, Dan; Jones, Lenny; Phillips, Tristan | Primefree shifted Lucas sequences of the second kind |  | summary 
+1108.52016 | 2005 | Iorio, Margherita; Ismailescu, Dan; Radoičić, Radoš; Silva,  | On point sets containing their triangle centers |  | review *points
+1462.51012 | 2014 | Ismailescu, Dan; Park, Joseph | Improved upper bounds for the Steiner ratio |  | summary 
+arXiv:2501.04851 | 2025 | Dan Ismailescu; Yunkyu James Lee | Polynomially growing integer sequences all whose terms are composite |  | summary 
+1105.05015 | 2007 | Brass, Peter; Cenek, Eowyn; Duncan, Cristian A.; Efrat, Alon | On simultaneous planar graph embeddings |  | summary 
+1433.52023 | 2019 | Ismailescu, Dan; Laskawiec, Piotr | Dense packings with nonparallel cylinders |  | review 
+1183.52004 | 2009 | Ismailescu, Dan; Vojdany, Adam | Class preserving dissections of convex quadrilaterals |  | review 
+1358.11029 | 2014 | Ismailescu, Dan; Son, Jaesung | A new kind of Fibonacci-like sequence of composite numbers |  | summary 
+1331.05033 | 2014 | Ismailescu, Dan; Oh, Katherine | Note on the unit area triangle problem |  | summary *unit
+1574.52008 | 2023 | Hong, David E.; Ismailescu, Dan; Kwak, Alex; Park, Grace Y. | On the smallest area \((n-1)\)-gon containing a convex \(n\)-gon |  | review 
+arXiv:1501.00204 | 2014 | Jin Hyup Hong; Dan Ismailescu | On the Euclidean dimension of graphs |  | summary 
+None | 2023 | Choi, Erica; Ismailescu, Dan; Lee, Jiho; Lee, Joonsoo | Grid dissections of tangential quadrilaterals |  | review 
+1423.05187 | 2019 | An, Seung Hwan; Ismailescu, Dan; Ko, Kwon Il | Avoiding monochromatic configurations in the multi-colored plane |  | editorial *chromatic
+1442.11033 | 2019 | Ismailescu, Dan; Ko, Adrienne; Lee, Celine; Park, Jae Yong | On second-order linear sequences of composite numbers |  | review 
+arXiv:2008.09171 | 2020 | Dan Ismailescu; Joonsoo Lee; Andrew Yang | Outdegree conditions forcing short cycles in digraphs |  | summary 
+1278.68229 | 2003 | Brass, P.; Cenek, E.; Duncan, C. A.; Efrat, A.; Erten, C.; I | On simultaneous planar graph embeddings. |  | summary 
+arXiv:2008.09183 | 2020 | Dan Ismailescu; Sung Hoon Kim; Taeyang David Park | An improved upper bound for the size of the sphere of influence graph |  | summary 
+arXiv:2608.05309 | 2026 | Suyeong Hahn; Dan Ismailescu; Ganghun Kim; Minseung Kim | Explicit Algebraic Numbers all whose Integer Parts of Powers are Composite |  | summary 
+1572.11032 | 2025 | Ismailescu, Dan; Jeon, Daniel Hyunwoo; Kim, Aaron; Kwon, Joo | Shifting Lucas sequences away from primes |  | summary *unit
+1463.52002 | 2020 | Cho, J.; Ismailescu, D.; Kim, Y.; Lee, A. W. | On the area of the polygon determined by the short diagonals of a convex polygon |  | review 
+0889.52016 | 1997 | Csizmadia, Gy.; Ismailescu, D. | Maximum number of different distance counts |  | review *distance/points
+arXiv:1908.02749 | 2019 | Dan Ismailescu; Joehyun Kim; Kelvin Kim; Jeewoo Lee | The largest angle bisection procedure |  | summary 
+arXiv:1812.07682 | 2018 | Jacqueline Cho; Dan Ismailescu; Yiwon Kim; Andrew Woojong Le | On the polygon determined by the short diagonals of a convex polygon |  | summary 
+arXiv:0910.0452 | 2009 | Dan Ismailescu; Minsuk Kim; Kyung Jae Lee; Seong Hoon Lee; T | Area Problems Involving Kasner Polygons |  | summary 

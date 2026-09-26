@@ -1,0 +1,189 @@
+## johnson: 'au:"Johnson, Peter D. jun."'  total=188 fetched=188
+1221.05001 | 2009 | Soifer, Alexander | The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Branko Grünb |  | review *chromatic/colorin/unit/distance/points
+0701.05005 | 1990 | Johnson, Peter D. jun. | Two-colorings of a dense subgroup of \({\mathbb{Q}}^ n\) that forbid many distances |  | review *colou/colorin/distance/forbid/rational/points
+1371.97003 | 2017 | Soifer, Alexander | The Colorado Mathematical Olympiad: The third decade and further explorations. From the mountains of Colorado to the pea |  | review 
+0684.26009 | 1989 | Boghossian, Artin; Johnson, Peter D. jun. | Pointwise conditions for analyticity and polynomiality of infinitely differentiable functions |  | review 
+0907.26003 | 1998 | Johnson, Peter D. jun. | Continuous functions which change sign without properly crossing the \(x\)-axis |  | review 
+0848.05031 | 1994 | Johnson, Peter D. jun. | The choice number of the plane |  | review *colorin/unit/distance/points
+1551.05001 | 2024 | Soifer, Alexander | The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewords by Pet |  | review *chromatic/colorin/distance/points
+0771.05046 | 1992 | Johnson, Peter D. jun. | Unordered love in infinite directed graphs |  | review *points
+0786.05008 | 1992 | Johnson, Peter D. jun. | Maximal sets of translations forbiddable by two-colorings of abelian groups |  | summary *colorin/forbid
+0848.05029 | 1991 | Johnson, Peter D. jun. | Product colorings |  | review *colorin/distance/points
+1203.52007 | 2010 | Soifer, Alexander | Geometric etudes in combinatorial mathematics. With forewords to the 1st edition by Paul Erdős, Branko Grünbaum, and Cec |  | review *chromatic/colou/unit/distance/points
+0405.15019 | 1978 | Johnson, Peter D. jun. | Spectral radius and seminorms in finite-dimensional algebras |  |  
+1139.05021 | 2007 | Hoffman, Dean G.; Johnson, Peter D. jun. | Extending Hall's theorem into list colorings: a partial history |  | summary *colou/colorin
+0848.05030 | 1992 | Greenwell, Don; Johnson, Peter D. jun. | Forbidding prescribed distances for designated colors |  | review *chromatic/colorin/distance/forbid/points
+0539.05012 | 1984 | Johnson, Peter D. jun. | Simple product colorings |  | review *colorin/distance/forbid/points
+1180.52001 | 2009 | Soifer, Alexander | How does one cut a triangle? With forewords by Philip L. Engel, Paul Erdős, Branko Grünbaum, Peter D. Johnson jun. and C |  | review *unit/points
+1028.05076 | 2003 | Jamison, Robert E.; Johnson, Peter D. jun. | The structure of (\(t,r\))-regular graphs of large order |  | summary 
+0993.05096 | 2001 | Walsh, Matthew; Johnson, Peter D. jun. | Another network vulnerability parameter |  | summary 
+0339.26014 | 1975 | Johnson, Peter D. jun. | An algebraic definition of fractional differentiation |  |  
+1270.05075 | 2012 | Johnson, Peter D. jun.; Prier, D. R. | Graphs such that all minimum dominating sets intersect all maximally independent sets |  | review 
+1407.05234 | 2018 | Johnson, Peter | Two consequences of the recent discovery that \(\chi(\mathbb{R}^2,1)>4\) |  | editorial 
+0713.26010 | 1990 | Boghossian, Artin B.; Johnson, Peter D. jun. | A pointwise condition for an infinitely differentiable function of several variables to be a polynomial |  | review 
+0844.51007 | 1993 | Greenwell, Don; Johnson, Peter D. jun. | Functions which preserve unit distance |  | review *unit/distance
+1243.05082 | 2011 | Johnson, Peter | Euclidean distance graphs on the rational points |  | review *chromatic/distance/rational/points
+0764.05094 | 1991 | Johnson, P. D. jun. | A graph parameter of Shields and Harary |  | summary 
+0485.05009 | 1982 | Johnson, P. D. | Coloring abelian groups |  |  *colorin
+1164.05346 | 2005 | Cropper, M. M.; Johnson, Peter D. jun. | Problems on Hall \(t\)-chromaticity. |  | review *chromatic/colorin
+0951.05038 | 2000 | Johnson, P. D. jun. | Introduction to ``Colorings of metric spaces'', by Benda and Perles |  | review *colorin
+1209.05086 | 2009 | Johnson, P. D. jun. | The fractional chromatic number, the Hall ratio, and the lexicographic product |  | summary *chromatic
+0809.05045 | 1994 | Johnson, P. D. jun. | The Hall-condition number of a graph |  | review *chromatic/colou
+1001.05071 | 2001 | Harary, F.; Johnson, P. D. jun. | The Shields-Harary indices of vulnerability of a graph |  | review 
+1061.05033 | 2003 | Johnson, P. D. | Slice two-colorings that forbid monochromatic translates of many doubletons. |  | editorial *chromatic/colorin/forbid
+0941.05024 | 1999 | Johnson, P. D. jun. | More on the fractional chromatic number |  | review *chromatic
+0856.05036 | 1996 | Johnson, P. D. jun. | About two definitions of the fractional chromatic number |  | review *chromatic/colorin
+1008.05054 | 2002 | Johnson, P. D. jun. | Hall's condition for list-coloring, and the Hall parameters: Recent developments |  | review *colou/colorin
+1054.05077 | 2004 | Johnson, Peter D. jun.; Rubalcaba, Robert; Walsh, Matthew | The actions of fractional automorphisms |  | review 
+0497.15017 | 1982 | Grone, Robert; Johnson, Peter D. jun. | Spectral radius and seminorms in finite-dimensional algebras. II |  |  
+1030.94021 | 2003 | Hankerson, Darrel; Harris, Greg A.; Johnson, Peter D. jun. | Introduction to information theory and data compression. |  | review 
+0903.94001 | 1998 | Hankerson, Darrel R.; Harris, Greg A.; Johnson, Peter D. jun | Introduction to information theory and data compression |  | review 
+0945.05021 | 2000 | Johnson, P. D. jun. | Infinite graphs and the fractional chromatic number: Some recent surprises |  | review *chromatic
+0974.05029 | 2000 | Johnson, P. D. jun. | Problems posed in or arising from ``Colorings of metric spaces'': Status report |  | review *chromatic/colorin/distance/points
+1205.05086 | 2010 | Cropper, Mathew; Hilton, Anthony J. W.; Johnson, Peter D. ju | List multicoloring problems involving the \(k\)-fold Hall numbers |  | summary *colorin
+1416.05108 | 2017 | Johnson, Peter; Owens, Andrew | Edge colorings of complete multipartite graphs forbidding rainbow cycles |  | summary *colorin/forbid
+1416.05109 | 2017 | Johnson, Peter; Zhang, Claire | Edge colorings of $K(m,n)$ with $m+n-1$ colors which forbid rainbow cycles |  | summary *colorin/forbid
+1574.05217 | 2024 | Bau, Sheng; Johnson, Peter | Graphs which are intervals |  | summary *distance
+1476.05054 | 2021 | Johnson, Peter; Krumpelman, Alexis | On the Babai and upper chromatic numbers of graphs of diameter 2 |  | summary *chromatic
+1032.05088 | 2002 | Johnson, Peter D. jun.; Rubalcaba, Robert; Walsh, Matthew | Concerning fractional automorphisms |  | summary 
+1444.05049 | 2021 | Johnson, Peter; Yang, Nan | Achieving metric dimension one by weighting the edges of a connected network |  | summary *distance/points
+1549.05231 | 2024 | Johnson, Peter; Nochumson, Shayne | A characterization of partition-good and partition-wonderful complete multipartite graphs |  | summary 
+0648.05006 | 1987 | Johnson, P. D. jun. | Two-colorings of real quadratic extensions of \(Q^ 2\) that forbid many distances |  | review *colorin/distance/quadratic/forbid
+0624.05048 | 1986 | Johnson, P. D. jun.; Perry, R. L. | Inequalities relating degrees of adjacent vertices to the average degree |  | review 
+1416.05110 | 2015 | Johnson, Peter; Zha, Xiaoya | Scheduling $N$ burgers for a $k$-burger grill: chromatic numbers with restrictions |  | summary *chromatic/colorin
+1469.05055 | 2021 | Dorough, Stephanie; Johnson, Peter | Rainbow connectivity and proper rainbow connectivity of \(\theta(1,s,t)\) |  | summary *colorin
+1310.05082 | 2013 | Anderson, Loren; Johnson, Peter | Constructively coloring the line |  | summary *colorin/distance/forbid/points
+1581.05167 | 2026 | Johnson, Peter; Schmidt, Andrew | Frankl's conjecture holds for topologies on finite sets |  | summary 
+0728.46008 | 1989 | Johnson, P. D. jun. | The closed neighborhood and filter conditions in solid sequence spaces |  | summary 
+1426.05119 | 2019 | Johnson, Peter; Yang, Zechun | On the independence numbers of the Van der Waerden and cyclic Van der Waerden hypergraphs \(W(k,t)\) and \(W_c(k,t)\) wh |  | summary 
+1273.05026 | 2011 | Gossell, James; Johnson, Peter | A geometric extremal result for cubic arrays |  | review *points
+1050.05045 | 2003 | Chappell, Glenn G.; Johnson, Peter D. jun.; Wantland, Evan B | Hall \(t\)-chromatic graphs |  | summary *chromatic/colorin
+0937.05046 | 1999 | Hoffman, D. G.; Johnson, P. D. jun. | Greedy colorings and the Grundy chromatic number of the \(n\)-cube |  | review *chromatic/colou/colorin
+None | 2026 | Demars, Derrick; Johnson, Peter | Forbidding monochromatic odd cycles and rainbow cycles in complete graphs |  | summary *chromatic/colorin/forbid
+1360.05106 | 2016 | Barnett, Johnathan; Johnson, Peter | A function related to the Hall ratio |  | summary 
+1354.46007 | 2015 | Johnson, Peter D.; Polat, Faruk | On spaces derivable from a solid sequence space and a non-negative lower triangular matrix |  | review 
+0693.05034 | 1990 | Hilton, Anthony; Johnson, Peter | A variation of Ryser's theorem and a necessary condition for the list- colouring problem |  | review *colou
+1291.11022 | 2011 | Johnson, Peter; Laughlin, Michael | An anti-Waring conjecture and problem |  | review 
+1351.51014 | 2015 | Johnson, Peter; Noble, Matt | A very short proof of a well-known fact about circles in the plane |  | summary *rational/points
+1397.05130 | 2016 | Johnson, Peter; Weeks, John | On the secure-domination number of the full balanced binary tree |  | summary *distance
+1312.05113 | 2014 | Johnson, Peter; Jones, Cadavious | How to find a defense against an attack, when there is one |  | summary 
+1293.05257 | 2013 | Bragan, Kelly; Johnson, Peter | Relaxations of the definition of regular clique assemblies |  | summary 
+1113.05033 | 2007 | Hilton, A. J. W.; Johnson, P. D. | List multicolorings of graphs with measurable sets |  | summary *colorin
+1411.05079 | 2017 | Allred, Sarah; Johnson, Peter | Theta graphs are Hall \(t\)-chromatic for all \(t = 0, 1, 2, \ldots\) |  | summary *chromatic
+1277.05162 | 2011 | Burkert, Jeffrey; Johnson, Peter | Szlam's lemma: mutant offspring of a Euclidean Ramsey problem from 1973, with numerous applications |  | editorial 
+1346.05057 | 2016 | Anderson, Loren; Johnson, Peter | On a 3-uniform hypergraph coloring problem in the integers |  | editorial *colorin
+1247.05248 | 2011 | Johnson, Peter; Williams, Clarisa | A problem in graph theory arising from air traffic control |  | summary 
+1424.46010 | 2016 | Johnson, Peter D.; Polat, Faruk | Problems in matricially derived solid Banach sequence spaces |  | summary 
+0731.05017 | 1990 | Hilton, A. J. W.; Johnson, P. D. jun. | Extending Hall's theorem |  | review *colou
+0631.05024 | 1987 | Hilton, A. J. W.; Johnson, P. D. | Graphs which are vertex-critical with respect to the edge-chromatic number |  | review *chromatic
+1346.11028 | 2012 | Johnson, Peter; Looper, Nicole | Frobenius problems in integral domains |  | summary *quadratic
+0934.05001 | 1999 | Hilton, A. J. W.; Johnson, P. D. jun. | The Hall number, the Hall index, and the total Hall number of a graph |  | editorial 
+1451.05077 | 2021 | De Mars, Derrick; Johnson, Peter | A mixed Ramsey problem revisited |  | summary *colorin
+0725.05041 | 1989 | Hilton, A. J.; Johnson, P. D. | Graphs which are vertex-critical with respect to the edge-chromatic class |  | review *chromatic
+1432.26007 | 2013 | Johnson, Peter; Soybaş, Danyal | An integral inequality for probability spaces |  | summary 
+0615.05036 | 1987 | Edwards, Christopher S.; Johnson, Peter D.; Tuza, Zsolt | Another extremal property of some Turán graphs |  | editorial 
+0979.05051 | 2001 | Abrams, Aaron; Johnson, Peter | Yet another species of forbidden-distances chromatic number |  | review *chromatic/colorin/distance/forbid/points
+1291.05145 | 2013 | Johnson, Peter; McDonald, Jessica | Note on the inverse domination number problem |  | summary 
+1349.05098 | 2015 | Allagan, Julian; Johnson, Peter | Estimates of the choice numbers and the Ohba numbers of some complete multipartite graphs. |  | review *chromatic
+1432.05078 | 2013 | Blumenthal, Adam; Johnson, Peter | A note on stable matchings |  | summary 
+1287.05099 | 2013 | Dalal, Aseem; Johnson, Peter | On graphs with no proper perfect dominating set |  | summary 
+1431.05068 | 2019 | Hoffman, Dean; Horn, Paul; Johnson, Peter; Owens, Andrew | On rainbow-cycle-forbidding edge colorings of finite graphs |  | summary *colorin/forbid
+0514.51001 | 1983 | Johnson, Peter; Shult, Ernest | Gamma spaces which are locally polar spaces |  |  
+1256.05203 | 2011 | Hoffman, D. G.; Johnson, P. D. jun. | Graphs that accept forced relative self-complementation |  | summary 
+1347.05069 | 2016 | Johnson, Peter; Ryan, John | Coloring Euclidean spaces so that all translates of a given set are rainbow |  | summary *colorin
+1049.05071 | 2003 | Johnson, P. D. jun.; Morgan, E. J. | Sharpening the Faudree-Knisley theorem on \((2,r)\)-regularity |  | review 
+1224.05371 | 2008 | Johnson, P. D. jun.; Walsh, M. | Fractional inverse and inverse fractional domination. |  | summary 
+None | 2026 | Hoffman, Dean; Johnson, Peter; Schloss, Elizabeth | Existence of multi-Latin squares satisfying a persistent Sudoku condition |  | summary 
+1398.94016 | 2012 | Foster, Michelle; Johnson, Peter | An existence theorem in information theory |  | summary 
+1233.05126 | 2011 | Johnson, Peter; Slater, Peter; Walsh, Matt | The connected hub number and the connected domination number |  | summary 
+1246.05120 | 2012 | Isaak, Garth; Johnson, Peter; Petrie, Caleb | Integer and fractional security in graphs |  | summary 
+1059.05050 | 2005 | Johnson, P. D. jun.; Rodger, C. A. | Coloring the vertices of a graph with measurable sets in a probability space |  | summary *colorin
+1461.05078 | 2021 | Bau, Sheng; Johnson, Peter; Noble, Matt | On single-distance graphs on the rational points in Euclidean spaces |  | summary *distance/rational/points
+1073.05568 | 2002 | Johnson, P. D. jun.; Wantland, E. B. | Which graphs have Hall number two? |  | review *chromatic/forbid
+0996.05059 | 2001 | Johnson, P. D. jun.; Wantland, E. B. | Two problems concerning Hall's condition |  | review *colorin
+0643.05031 | 1988 | Hilton, A. J. W.; Johnson, P. D. | Reverse class critical multigraphs |  | review *chromatic
+1469.05052 | 2021 | Johnson, Peter; Osaye, Fadekemi Janet | On edge-weighted mean eccentricity of graphs |  | summary *distance
+1031.05045 | 2003 | Hoffman, D. G.; Johnson, P. D. jun. | Some inequalities for graphs derivable from Hölder's inequality |  | review 
+1171.05015 | 2008 | Allagan, Julian; Johnson, Peter | The choice number of \(K(4,2,\dots,2)\) -- a dispute resolved |  | summary 
+1142.05008 | 2007 | Bobga, B. B.; Johnson, P. D. jun. | Completing partial Latin squares: Cropper's problem |  | review 
+1157.05050 | 2008 | Holliday, John; Johnson, Peter | The Shields-Harary numbers of \(K_{m,n}\) for continuous concave cost functions vanishing at 1 |  | review 
+0801.05027 | 1993 | Hoffman, D. G.; Johnson, P. D. jun. | On the choice number of \(K_{m,n}\) |  | summary 
+1031.05123 | 2003 | Holliday, John; Johnson, Peter | Shields-Harary numbers of graphs with respect to continuous concave cost functions |  | summary 
+0991.05047 | 2001 | Daneshgar, A.; Hilton, A. J. W.; Johnson, P. D. jun. | Relations among the fractional chromatic, choice, Hall, and Hall-condition numbers of simple graphs |  | editorial *chromatic
+1075.05529 | 2002 | Johnson, P. D. jun.; Rodger, C. A. | Coloring the vertices of a graph with measurable sets in a probability space |  | editorial *colorin
+0586.05001 | 1986 | Johnson, P. D.; Rogers, D. G. | Compatible additive permutations of finite integral bases |  | editorial 
+0319.50005 | 1976 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  |  
+0862.05101 | 1990 | Hoffman, D. G.; Johnson, P. D. jun. | An extremal family of strongly regular graphs |  | summary 
+0959.05025 | 1998 | Hoffman, D. G.; Johnson, P. D. jun. | Covering numbers and list-colorings of \(K_{m,n}\) |  | summary *colorin
+1434.94050 | 2015 | Buhse, Chris; Johnson, Peter; Linz, William; Simpson, Matthe | Two conjectures about recency rank encoding |  | summary 
+0976.05033 | 2000 | Holliday, John; Johnson, Peter | The Shields-Harary numbers of \(K_n -e\), for continuous cost functions |  | summary 
+1037.05020 | 2003 | Bohannon, A. W.; Johnson, P. D.; Thomas, E. G. | An easier analogue of a difficult old Euclidean coloring problem |  | review *chromatic/colorin/points
+1431.05062 | 2020 | Aiken, A. Sophie; Boese, Sarah; Johnson, Peter | Hall 3-chromaticity of the Petersen graph and the weak Hall \(t\)-chromatic spectra of odd wheels |  | summary *chromatic/colorin
+1579.05169 | 2026 | Johnson, Peter; Kaya, Celalettin; Matzke, Ryan W. | Babai numbers and Babai spectra of paths and cycles |  | summary 
+1062.05072 | 2004 | Holliday, John; Johnson, Peter | A counterexample to the constant-weights-on-orbits conjecture |  | summary 
+1444.05009 | 2020 | Benali, Julian; Cobb, Harris; Johnson, Peter | An enumeration problem arising from a result about arithmetic progressions |  | summary 
+1338.05202 | 2015 | Hoffman, Dean; Johnson, Peter; McDonald, Jessica | Minimum \((n,k,t)\) clique graphs |  | review 
+0897.05040 | 1996 | Hilton, A. J. W.; Johnson, P. D. jun.; Wantland, E. B. | The Hall number of a simple graph |  | summary *colorin
+1229.05146 | 2010 | Johnson, P. D. jun.; Roblee, K. J. | Non-existence of a nearly extremal family of edge-regular graphs |  | summary 
+1127.05083 | 2007 | Bragan, Kelly; Hoffman, Dean; Johnson, Peter | Inferring regularity by a neglected theorem of Ryser |  | review 
+0974.68106 | 2000 | Foster, Michelle; Johnson, Peter | Some operations on probabilistic finite state source automata |  | summary 
+1085.05046 | 2005 | Johnson, P. D. jun.; Mohapatra, R. N. | A class of inequalities relating degrees of adjacent nodes to the average degree in edge-weighted uniform hypergraphs |  | summary 
+0961.05024 | 2000 | Eslahchi, Ch.; Hilton, A. J. W.; Johnson, P. D. jun. | Progress on the Hall-number-two problem |  | review *chromatic/forbid
+1420.05123 | 2018 | Hedetniemi, S.; Holliday, S.; Johnson, P. | Neighborhood representatives |  | summary *unit
+None | 2019 | Hedetniemi, S.; Holliday, S.; Johnson, P. | Distinct representatives in special set families in graphs |  | summary 
+0998.05067 | 2002 | Johnson, P. D. jun.; Roblee, K. J. | On an extremal subfamily of an extremal family of nearly strongly regular graphs |  | editorial 
+0991.05045 | 2001 | Johnson, P. D. jun.; Szlam, A. D. | A new connection between two kinds of Euclidean coloring problems |  | review *colorin/distance/forbid/points
+1090.68116 | 2005 | Hoffman, Dean; Johnson, Peter; Wilson, Nadine | Generating Huffman sequences |  | summary 
+0904.05032 | 1997 | Hilton, A. J. W.; Johnson, P. D. jun.; Leonard, D. A. | Hall's condition for multicolorings |  | editorial *colorin
+1440.05084 | 2018 | DeVilbiss, Matthew; Johnson, Peter; Matzke, Ryan | Edge Grundy numbers of the regular Turán graphs |  | summary 
+0589.46007 | 1985 | Johnson, P. D. jun.; Mohapatra, R. N. | The maximal normal subspace of the inverse image of a normal space of sequences by a non-negative matrix transformation |  | review 
+0961.05039 | 1999 | Johnson, P. D. jun.; Roblee, K. J. | More extremal graphs for a maximal-joint-neighborhood, average-triangles-per-edge inequality |  | summary 
+0411.46007 | 1980 | Johnson, P. D. jun.; Mohapatra, R. N. | Inequalities involving lower-triangular matrices |  |  
+0817.46009 | 1993 | Johnson, P. D. jun.; Mohapatra, R. N. | On an analogue of Hardy's inequality |  | review 
+1062.05111 | 2004 | Johnson, Peter; Rubalcaba, Robert; Walsh, Matthew | Domination null and packing null vertices |  | summary 
+0821.47008 | 1994 | Johnson, P. D. jun.; Mohapatra, R. N. | Best possible results in a class of inequalities. II |  | review 
+0585.46006 | 1984 | Johnson, P. D.; Mohapatra, R. N. | On inequalities related to sequence spaces ces[p,q] |  | summary 
+1248.05065 | 2010 | Gouge, Adam; Hoffman, Dean; Johnson, Peter; Nunley, Laura; P | Edge-colorings of \(K_n\) which forbid rainbow cycles |  | review *colorin/forbid
+1416.05154 | 2017 | Noble, Matt; Johnson, Peter; Hoffman, Dean; McDonald, Jessic | Application of an extremal result of Erdős and Gallai to the $(n,k,t)$ problem |  | summary 
+1223.05209 | 2010 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 
+1513.05132 | 2023 | Eller, Timothy; Johnson, Peter; Jones, William; Kraus, Jakub | Distance graphs on normed function spaces |  | summary *chromatic/unit/distance
+1320.26020 | 2015 | Carley, H.; Johnson, P. D.; Mohapatra, R. N. | Unifying inequalities of Hardy, Copson, and others |  | review 
+1338.05071 | 2015 | Allagan, Julian A.; Bobga, Benkam; Johnson, Peter | On the choosability of some graphs |  | summary *chromatic
+0418.46005 | 1979 | Johnson, P. D. jun.; Mohapatra, R. N. | Density of finitely non-zero sequences in some sequence spaces |  |  
+0418.46004 | 1979 | Johnson, P. D. jun.; Mohapatra, R. N. | Sectional convergence in spaces obtained as inverse images of sequence spaces under matrix transformations |  |  
+1154.05041 | 2007 | Johnson, P. D. jun.; Myrvol, W.; Roblee, K. J. | More extreme problems for edge-regular graphs |  | review 
+1278.05097 | 2012 | Burkert, Jeffrey; Cropper, Mathew; Johnson, Peter | Note on Hall \(t\)-chromatic spectra |  | summary *chromatic
+1006.05033 | 2001 | Holliday, S. H.; Johnson, P. D. jun. | On the constant-weight Shields-Harary numbers of a tree |  | summary 
+1247.05197 | 2011 | Johnson, Peter; McNellis, Robert; Roblee, Kenneth | Some conditions for edge-regularity |  | summary 
+1509.05069 | 2023 | Briggs, Joseph; Hoffman, Dean; Holliday, Sarah Heuss; Johnso | Self-colorings of graphs |  | summary *colorin
+0990.05048 | 2001 | Bohannon, Aaron; Johnson, Peter; Lanig, Jeremy; Rubalcaba, R | The chromatic numbers of some Euclidean distance graphs |  | review *chromatic/distance/points
+1552.05067 | 2024 | Hoffman, Dean; Johnson, Peter; Noble, Matt; Owens, Andrew; P | Proper rainbow-cycle-forbidding edge colorings of graphs |  | summary *colorin/forbid
+1404.05100 | 2018 | Bau, Sheng; Johnson, Peter; Jones, Edna; Kumwenda, Khumbo; M | Rainbow connectivity in some Cayley graphs |  | summary *colorin
+0835.05026 | 1994 | Hoffman, D. G.; Johnson, P. D. jun.; Wantland, E. B. | Restricted choice numbers |  | summary 
+0977.05136 | 2001 | Hoffman, D. G.; Johnson, P. D. jun.; Szlam, A. D. | A new lemma in Ramsey theory |  | review *colorin/distance/forbid
+1228.05083 | 2011 | Bobga, B. B.; Goldwasser, J. L.; Hilton, A. J. W.; Johnson,  | Completing partial Latin squares: Cropper's question |  | summary *colorin
+1119.05076 | 2006 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+0523.40001 | 1982 | Johnson, P. D. jun.; Mohapatra, R. N. | Best possible results in a class of inequalities |  |  
+1162.11017 | 2007 | Chidume, Okechukwu; Griswold, LaShundra; Hoffman, Dean; John | Self-referential derivation |  | summary 
+1581.51009 | 2026 | Briggs, Joseph; Davis, Elisabeth; Guo, Katherine; Johnson, P | On functions from \(\mathbb{R}\) into \(\mathbb{R}\) that preserve specified distances |  | summary *distance/rational
+0855.05057 | 1996 | Hoffman, D. G.; Johnson, P. D. jun.; Wantland, E. B. | Thwart numbers of some bipartite graphs |  | review *chromatic/colou
+1163.05032 | 2008 | Bailey, Brad; Holliday, John; Johnson, Peter D.; Spence, Dia | Edge-cut cycles and cutting numbers of cycles and graphs |  | summary 
+1116.05082 | 2007 | Hoffman, Dean; Johnson, Peter; Lin, Kevin; McSorley, John; P | There are no non-trivially uniformly \((t,r)\)-regular graphs for \(t>2\) |  | review *points
+1278.05085 | 2012 | Allagan, Julian; Hendon, Mo; Johnson, Peter jun.; Slutzky, D | On the existence of \(S\)-graphs |  | summary 
+0431.46007 | 1980 | Johnson, P. D. jun.; Mohapatra, R. N. | Inequalities involving infinite matrices with nonnegative entries |  |  
+1134.05038 | 2007 | Johnson, P. D. jun.; Roblee, K. J.; Smotzer, T. D. | Another extremal family of edge-regular graphs |  | summary 
+1388.05137 | 2017 | Guest, Kelly B.; Hammer, James M.; Johnson, Peter D.; Roblee | Regular clique assemblies, configurations, and friendship in edge-regular graphs |  | summary 
+1274.05076 | 2012 | Coolsaet, K.; Johnson, P. D. jun.; Roblee, K. J.; Smotzer, T | Some extremal problems for edge-regular graphs. |  | summary 
+1320.05088 | 2015 | Devilbiss, Matthew; Fain, Bradley; Johnson, Peter; Matzke, R | Note on the secure-domination number of a graph |  | summary 
+0362.40005 | 1978 | Johnson, P. D. jun.; Mohapatra, R. N. | A Hardy-Davies-Petersen inequality for a class of matrices |  |  
+1187.05051 | 2008 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 
+1090.05037 | 2005 | Holliday, John; Holliday, Sarah; Johnson, Peter | On the Shields-Harary numbers of trees |  | review 
+0428.05030 | 1979 | Greenwell, D.; Johnson, P. | On subgraphs of critical graphs of diameter k |  |  
+1375.05191 | 2017 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 
+1444.05097 | 2020 | Guest, Kelly; Holliday, Sarah; Johnson, Peter; Rautenbach, D | Closed-neighborhood union-closed graphs |  | summary 
+0944.05040 | 2000 | Cropper, M. M.; Goldwasser, J. L.; Hilton, A. J. W.; Hoffman | Extending the disjoint-representatives theorems of Hall, Halmos, and Vaughan to list-multicolorings of graphs |  | review *colorin
+1469.05051 | 2021 | Guest, Kelly; Johnson, Andrew; Johnson, Peter; Jones, Willia | Graphs with prescribed radius, diameter, and center |  | summary 
+1401.05104 | 2013 | Bennett, Katherine; Johnson, Peter; Deering, Jessie; Jamieso | On the chromatic numbers of some 3-uniform hypergraphs in the plane |  | review *chromatic
+1116.05026 | 2006 | Clark, Sally A.; Holliday, John E.; Holliday, Sarah H.; John | Chromatic villainy in graphs |  | review *chromatic
+1411.05078 | 2019 | Allagan, Julian; Bobga, Benkam; Cropper, Mathew; Hilton, Ant | Refinements of Hall's condition |  | summary *colorin
+1397.05055 | 2017 | Anderson, Loren; DeVilbiss, Matthew; Holliday, Sarah; Johnso | The edge Grundy numbers of some graphs |  | summary 

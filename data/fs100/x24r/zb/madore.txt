@@ -1,0 +1,14 @@
+## madore: 'au:"Madore, David A."'  total=13 fetched=13
+1167.14007 | 2008 | Madore, David A. | Rational equivalence on cubic hypersurfaces of bad reduction |  | review *quadratic/rational/points
+1073.14509 | 2003 | Madore, David A. | Rational equivalence on cubic hypersurfaces on \(p\)-adic fields. (Équivalence rationnelle sur les hypersurfaces cubique |  | summary *rational
+1056.14030 | 2004 | Colliot-Thélène, Jean-Louis; Madore, David A. | Del Pezzo surfaces without rational points on a field of cohomological dimension one |  | summary *rational/points
+1327.14095 | 2015 | Madore, David; Orgogozo, Fabrice | Calculability of étale cohomology modulo \(\ell\) |  | summary 
+1133.14036 | 2006 | Madore, David A. | Weak approximation at places of good reduction on cubic surfaces over function fields |  | review *rational/points
+1479.05123 | 2021 | Dutour Sikirić, Mathieu; Madore, David A.; Moustrou, Philipp | Coloring the Voronoi tessellation of lattices |  | summary *colorin
+1261.94025 | 2010 | Brier, Eric; Coron, Jean-Sébastien; Icart, Thomas; Madore, D | Efficient indifferentiable hashing into ordinary elliptic curves |  | summary 
+1376.94060 | 2015 | Mesnager, Sihem; Cohen, Gérard; Madore, David | On existence (based on an arithmetical problem) and constructions of bent functions |  | summary 
+arXiv:1509.07023 | 2015 | David A. Madore | The Hadwiger-Nelson problem over certain fields |  | summary 
+0978.14032 | 2000 | Madore, David A. | Theta divisors and the Frobenius morphism |  | review 
+arXiv:math/0605662 | 2006 | David A. Madore | Les hypersurfaces cubiques sont séparablement rationnellement connexes |  | summary 
+arXiv:2603.19946 | 2026 | Jean Abou Samra; David Alexander Madore | An order-reversing embedding of Turing degrees into Arthur-Nimue-Merlin degrees |  | summary 
+1445.14042 | 2020 | Blache, Régis; Couvreur, Alain; Hallouin, Emmanuel; Madore,  | Anticanonical codes from del Pezzo surfaces with Picard rank one |  | review 

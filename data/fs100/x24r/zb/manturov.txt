@@ -1,0 +1,168 @@
+## manturov: 'au:"Manturov, Vassily O."'  total=167 fetched=167
+1061.57013 | 2003 | Manturov, Vassily O. | Multi-variable polynomial invariants for virtual links. |  | review 
+1059.57006 | 2003 | Manturov, Vassily O. | Kauffman-like polynomial and curves in 2-surfaces. |  | summary 
+1064.57005 | 2004 | Manturov, Vassily O. | Long virtual knots and their invariants |  | review 
+1071.57011 | 2005 | Manturov, Vassily O. | Vassiliev invariants for virtual links, curves on surfaces and the Jones-Kauffman polynomial |  | review 
+1088.57006 | 2005 | Kauffman, Louis H.; Manturov, Vassily O. | Virtual biquandles |  | review 
+1088.57009 | 2005 | Manturov, Vassily O. | Flat hierarchy |  | review 
+1326.57018 | 2014 | Kauffman, Louis H.; Manturov, Vassily O. | A graphical construction of the sl(3) invariant for virtual knots |  | review 
+arXiv:2608.07976 | 2026 | Vassily Olegovich Manturov | Generalizations of the groups $G_{n}^{k}$: graphs, moduli spaces, algebraic geometry, spherical braids |  | summary 
+arXiv:2609.02123 | 2026 | Vassily Olegovich Manturov | Groups of Transverse Stratifications and the Hierarchy of Configuration Spaces |  | summary *points
+arXiv:2509.01971 | 2026 | Vassily Olegovich Manturov | Maps from knots to $2$-links, chord diagrams, and a way to enhance Vassiliev invariants |  | summary 
+arXiv:2505.06309 | 2025 | Vassily Olegovich Manturov | Shear coordinates and braid invariants |  | summary 
+1052.57001 | 2004 | Manturov, Vassily | Knot theory |  | review *colorin
+1210.57010 | 2010 | Manturov, V. O. | Parity in knot theory |  | review *points
+arXiv:2411.18991 | 2024 | Vassily Olegovich Manturov | Octagon and tropical octagon yield braid invariants |  | summary 
+arXiv:2309.01735 | 2023 | Vassily Olegovich Manturov | The Dijkgraaf-Witten invariant is a partial case of the photography method |  | summary 
+arXiv:2210.13338 | 2022 | Vassily Olegovich Manturov | Realisability of $G_{n}^{3}$, realisability projection, and kernel of the $G_{n}^{3}$-braid presentation |  | summary 
+arXiv:2201.00209 | 2022 | Vassily Olegovich Manturov | Cobordism invariants for knots with two indices |  | summary 
+1065.57005 | 2004 | Manturov, Vassily O. | Virtual knots and infinite-dimensional Lie algebras |  | review *colorin
+1014.57010 | 2002 | Manturov, Vassily O. | Chord diagrams and invariant tensors |  | review 
+arXiv:1812.08436 | 2018 | Vassily Olegovich Manturov | WITHDRAWN: Braid and knot invariants via triangulations and Ptolemy relations I |  | summary 
+arXiv:1801.07007 | 2018 | Vassily Olegovich Manturov | New groups and invariants of classical braids valued in $G_{n}^{2}$ |  | summary 
+1435.20045 | 2018 | Manturov, Vassily O.; Wu, J. | \(G_n^k\)-groups for simplicial complexes and the word problem on \(G^2(K)\) |  | review 
+1003.57005 | 2002 | Manturov, V. O. | On invariants of virtual links |  | review *colorin/points
+arXiv:1604.06597 | 2016 | Vassily Olegovich Manturov | A Note on a Map from Knots to $2$-Knots |  | summary 
+1280.57007 | 2013 | Manturov, Vassily Olegovich | Parity and projection from virtual knots to classical knots |  | review 
+1392.57001 | 2018 | Manturov, Vassily Olegovich | Knot theory |  | review 
+1117.57013 | 2007 | Manturov, Vassily Olegovich | Khovanov homology for virtual knots with arbitrary coefficients |  | review 
+arXiv:1501.05208 | 2015 | Vassily Olegovich Manturov | Non-Reidemeister Knot Theory and Its Applications in Dynamical Systems, Geometry, and Topology |  | summary 
+1371.20039 | 2017 | Manturov, V. O. | The groups \(G_n^2\) and Coxeter groups |  |  
+1084.57005 | 2005 | Fenn, Roger; Kauffman, Louis H.; Manturov, Vassily O. | Virtual knot theory -- unsolved problems |  | summary 
+1259.05047 | 2012 | Manturov, V. O. | Parity and cobordism of free knots |  | review *points
+1325.05158 | 2015 | Manturov, Vassily Olegovich | One-term parity bracket for braids |  | summary 
+1439.57028 | 2020 | Ilyutko, Denis P.; Manturov, Vassily O. | Picture-valued parity-biquandle bracket |  | summary *colorin
+arXiv:1004.4325 | 2010 | Vassily Olegovich Manturov | Free Knots, Groups, and Finite-Type Invariants |  | summary 
+arXiv:1011.4640 | 2010 | Vassily Olegovich Manturov | A Functorial Map from Virtual Knots to Classical Knots and Generalisations of Parity |  | summary 
+arXiv:0902.0127 | 2009 | Vassily Olegovich Manturov | On Free Knots and Links |  | summary 
+arXiv:0909.2230 | 2009 | Vassily Olegovich Manturov | Free Knos are Not Invertible |  | summary 
+arXiv:0901.2214 | 2009 | Vassily Olegovich Manturov | On Free Knots |  | summary 
+1367.57005 | 2017 | Manturov, V. O. | The groups \(G_n^k\) and fundamental groups of configuration spaces |  | summary 
+1325.57003 | 2013 | Chrisman, Micah W.; Manturov, Vassily O. | Fibered knots and virtual knots |  | review 
+1142.57007 | 2007 | Manturov, V. O. | Khovanov homology for virtual knots with arbitrary coefficients |  | review *unit
+1122.05030 | 2005 | Manturov, V. O. | A proof of Vassiliev's conjecture on the planarity of singular links |  | review *quadratic
+0979.37028 | 2000 | Manturov, V. O. | Bifurcations, atoms and knots |  | review 
+1511.20131 | 2021 | Manturov, V. O. | Invariants of classical braids valued in \(G_n^2 \) |  | summary 
+1165.57012 | 2007 | Manturov, V. O. | The Khovanov complex for virtual links |  | review 
+1284.57011 | 2013 | Manturov, V. O. | An almost classification of free knots |  | summary 
+None | 2026 | Manturov, Vassily Olegovich | An invariant of free knots valued in non-abelian groups |  | summary 
+1125.57300 | 2003 | Manturov, V. O. | Atoms and minimal diagrams of virtual links |  | editorial 
+arXiv:math/0502178 | 2005 | Vassily Olegovich Manturov | Minimal diagrams of virtual links: II |  | summary 
+arXiv:math/0501393 | 2005 | Vassily Olegovich Manturov | Minimal diagrams of classical and virtual links |  | summary 
+arXiv:math/0501510 | 2005 | Vassily Olegovich Manturov | Minimal diagrams of classical knots |  | summary 
+1581.57036 | 2025 | Manturov, Vassily Olegovich | Braids act on configurations of lines |  | summary 
+arXiv:math/0408255 | 2004 | Vassily Olegovich Manturov | Virtual links are algorithmically recognisable |  | summary 
+1473.57028 | 2021 | Manturov, Vassily Olegovich | A free-group valued invariant of free knots |  | summary 
+1441.57009 | 2020 | Akimova, Alyona A.; Manturov, Vassily O. | Labels instead of coefficients: a label bracket \([\cdot]_{\mathcal{L}}\) which dominates the Jones polynomial \(\mathca |  | summary 
+1309.05054 | 2009 | Manturov, V. O. | Embeddings of 4-valent framed graphs into 2-surfaces |  | summary 
+1552.57004 | 2024 | Manturov, Vassily O.; Nikonov, Igor M. | Maps from knots in the cylinder to flat-virtual knots |  | summary 
+1343.05065 | 2016 | Manturov, V. O. | On the chromatic numbers of integer and rational lattices |  | summary *chromatic/rational
+1527.57003 | 2023 | Manturov, Vassily O.; Nikonov, Igor M. | Maps to virtual braids and braid representations |  | summary *colou
+1302.05176 | 2014 | Manturov, Vassily Olegovich | Framed 4-valent graph minor theory. I: Introduction. A planarity criterion and linkless embeddability |  | summary *points
+1448.57008 | 2020 | Manturov, V. O. | The groups \(G_{k + 1}^k\) and fundamental groups of configuration spaces |  | summary 
+1353.57020 | 2016 | Manturov, V. O. | An elementary proof that classical braids embed in virtual braids |  | summary 
+1273.57008 | 2012 | Manturov, V. O. | Free knots and parity |  | review 
+1155.57303 | 2006 | Manturov, V. O. | The Khovanov complex and minimal knot diagrams |  | editorial 
+1358.57026 | 2016 | Fedoseev, Denis A.; Manturov, Vassily O. | Parities on 2-knots and 2-links |  | review *points
+1325.05157 | 2015 | Manturov, Vassily Olegovich | Reidemeister moves and groups |  | summary 
+1246.57019 | 2011 | Manturov, V. O. | Parity, free knots, groups, and invariants of finite type |  | summary 
+1206.57008 | 2008 | Manturov, V. O. | Compact and long virtual knots |  | review 
+1368.57006 | 2016 | Manturov, Vassily Olegovich | New parities and coverings over free knots |  | review 
+1219.05047 | 2011 | Manturov, Vassily Olegovich | Embeddings of four-valent framed graphs into 2-surfaces |  | review 
+1275.57013 | 2012 | Manturov, Vassily Olegovich | Virtual crossing numbers for virtual knots |  | review *quadratic
+1151.57303 | 2008 | Manturov, V. O. | Additional gradings in the Khovanov complex for thickened surfaces |  | editorial 
+1360.57017 | 2015 | Manturov, V. O. | Monodromy, groups, and picture-valued invariants of link |  | summary 
+1329.05273 | 2015 | Manturov, Vassily Olegovich | Framed 4-valent graph minor theory. II: Special minors and new examples |  | summary 
+arXiv:2606.04540 | 2026 | Seongjeong Kim; Vassily O. Manturov | 3-braids with 4-valent vertices and knot invariant |  | summary *points
+1144.20310 | 2005 | Manturov, V. O. | Recognition of virtual braids. |  | summary 
+0991.57007 | 2002 | Manturov, V. O. | A combinatorial representation of links by quasitoric braids |  | review 
+1197.57014 | 2002 | Manturov, V. O. | Invariants of virtual links |  |  
+1247.57011 | 2003 | Manturov, Vassily Olegovich | Curves on surfaces virtual knots, and the Jones-Kaufmann polynomial |  |  
+arXiv:1907.06502 | 2019 | A. A. Akimova; V. O. Manturov | Labels instead of coefficients: a label bracket which dominates the Jones polynomial, the Kuperberg bracket, and the nor |  | summary 
+1195.57018 | 2010 | Manturov, O. V.; Manturov, V. O. | Free knots and groups |  | review 
+1014.57003 | 2002 | Manturov, V. O. | Knots and the bracket calculus |  | review 
+1233.57007 | 2008 | Manturov, Vassily Olegovich | Additional gradings in Khovanov homology |  | summary 
+1487.57008 | 2022 | Kim, Sera; Kim, Seongjeong; Manturov, Vassily O. | On long knots in the full torus |  | summary 
+arXiv:2401.15345 | 2024 | Vassily Olegovich Manturov; Seongjeong Kim | The groups $G_{n}^{k}$ and $2n$-gon tilings |  | summary *points
+1169.57302 | 2004 | Manturov, V. O. | On polynomial invariants of virtual links |  | summary *points
+1270.57003 | 2013 | Manturov, Vassily Olegovich; Ilyutko, Denis Petrovich | Virtual knots. The state of the art |  | review *colou/colorin/unit/forbid/points
+1405.57037 | 2018 | Fedoseev, Denis A.; Manturov, Vassily O. | Cobordisms of graphs: a sliceness criterion for stably odd free knots and related results on cobordisms |  | summary 
+1457.57013 | 2020 | Ilyutko, Denis P.; Manturov, Vassily O. | An invariant of graph-links valued in graphs and an almost classification of graph-links |  | summary 
+1272.57005 | 2005 | Manturov, V. O. | On long virtual knots |  | editorial 
+1310.57010 | 2014 | Fenn, Roger; Ilyutko, Denis P.; Kauffman, Louis H.; Manturov | Unsolved problems in virtual knot theory and combinatorial knot theory |  | summary 
+1153.57008 | 2008 | Manturov, V. O. | Bracket structures and virtual knots |  | editorial 
+1025.37015 | 2001 | Manturov, V. O. | Maximally symmetric atoms and \(2 \times 2\) matrix groups |  | review 
+1351.57012 | 2006 | Kauffman, L. H.; Manturov, V. O. | Virtual knots and links |  | summary 
+arXiv:2603.25256 | 2026 | Seongjeong Kim; Yangzhou Liu; Vassily Olegovich Manturov | Secant-quandle: an invariant of braids and knots |  | summary 
+1431.57005 | 2019 | Kim, Seongjeong; Manturov, V. O. | Artin's braids, braids for three space, and groups \({\Gamma}_n^4\) and \(G_n^k\) |  | review 
+1339.20033 | 2015 | Manturov, Vassily Olegovich; Nikonov, Igor Mikhailovich | On braids and groups \(G_n^k\). |  | summary 
+0958.57010 | 2000 | Manturov, V. O. | The bracket semigroup of knots |  | review 
+1044.57003 | 2002 | Manturov, V. O. | An invariant polynomial of two variables for virtual links. |  | review 
+1127.57015 | 2005 | Manturov, V. O. | On cohomologies of some homogeneous spaces and relevant integer equations |  | summary 
+arXiv:2602.07890 | 2026 | Vassily Olegovich Manturov; Igor Mikhailovich Nikonov | A generalisation of the Burau representation and groups $G_{n}^{3}$ for classical braids |  | summary 
+1321.57010 | 2015 | Kauffman, Louis Hirsch; Manturov, Vassily Olegovich | Graphical constructions for the sl(3), \(C_2\) and \(G_2\) invariants for virtual knots, virtual braids and free knots |  | summary *colorin
+1282.57018 | 2004 | Manturov, V. O. | Finite-type invariants of virtual links and the Jones-Kauffman polynomial |  |  
+1261.57006 | 2010 | Manturov, V. O.; Manturov, O. V. | Free knots and groups |  | summary 
+1040.57009 | 2002 | Gaifullin, Alexander A.; Manturov, Vassily O. | On the recognition of braids |  | review *points
+arXiv:1911.07843 | 2019 | Denis P. Ilyutko; Vassily O. Manturov | Picture-valued parity-biquandle bracket II. Examples |  | summary 
+1537.13041 | 2023 | Manturov, Vassily Olegovich; Wan, Zheyan | The photography method: solving pentagon equation |  | summary 
+1031.53066 | 2002 | Manturov, V. O. | Locally minimal networks on two-dimensional surfaces of negative curvature with singularities |  | review *points
+arXiv:1612.03486 | 2016 | S. Kim; V. O. Manturov | Group G_{n}^{3} and imaginary generators |  | summary 
+1275.57014 | 2012 | Manturov, Vassily Olegovich; Wang, Hang | Markov theorem for free links |  | review 
+arXiv:2305.06316 | 2023 | Vassily Olegovich Manturov; Igor Mikhailovich Nikonov | The groups $\Gamma_{n}^{4}$, braids, and $3$-manifolds |  | summary *points
+1489.57018 | 2021 | Fedoseev, Denis A.; Manturov, Vassily O.; Nikonov, Igor M. | Manifolds of triangulations, braid groups of manifolds, and the groups \(\Gamma_n^k\) |  | review 
+1278.05083 | 2013 | Friesen, Tyler; Manturov, Vassily Olegovich | Embeddings of \(\ast\)-graphs into 2-surfaces |  | summary *quadratic
+arXiv:2210.06862 | 2022 | V. O. Manturov; I. M. Nikonov | Maps from braids to virtual braids and braid representations |  | summary 
+1489.57004 | 2021 | Manturov, Vassily O.; Fedoseev, Denis A.; Kim, Seongjeong; N | On groups \(G_n^k\) and \(\Gamma_n^k\): a study of manifolds, dynamics, and invariants |  | review *points
+0990.53002 | 2000 | Manturov, V. O. | On closedness of curves with periodic curvature |  | review 
+1033.57002 | 2000 | Manturov, V. O. | Chord diagrams, \(d\)-diagrams, and knots |  | summary 
+arXiv:2307.03437 | 2023 | L. Kauffman; V. O. Manturov; I. M. Nikonov; S. Kim | Photography principle, data transmission, and invariants of manifolds |  | summary 
+1582.57045 | 2025 | Kim, Seongjeong; Manturov, Vassily Olegovich | The groups \(G_n^k\), \(2n\)-gon tilings, and stacking of cubes |  | review 
+1256.57007 | 2012 | Ilyutko, D. P.; Manturov, V. O. | Graph-links |  | summary 
+1460.32062 | 2020 | Manturov, Vassily Olegovich; Wan, Zheyan | Studying complex manifolds by using groups \(G_n^k\) and \(\Gamma_n^k\) |  | summary 
+1525.11078 | 2023 | Moshchevitin, Nikolay; Manturov, Vassily | On approximations for \(n\) real numbers |  | review *rational
+1459.57006 | 2020 | Fedoseev, Denis A.; Kim, S.; Manturov, Vassily O. | Representations of \(G_n^3\) and related groups |  | summary 
+1189.57006 | 2009 | Ilyutko, Denis Petrovich; Manturov, Vassily Olegovich | Introduction to graph-link theory |  | review *points
+1337.57015 | 2015 | Fedoseev, Denis A.; Manturov, Vassily O.; Cheng, Zhiyun | On marked braid groups |  | summary 
+1305.05051 | 2014 | Friesen, Tyler; Manturov, Vassily Olegovich | Checkerboard embeddings of \(\ast\)-graphs into nonorientable surfaces |  | summary *quadratic
+1400.57009 | 2018 | Manturov, Vassily Olegovich; Rushworth, William | Additional gradings on generalizations of Khovanov homology and invariants of embedded surfaces |  | review 
+1359.57006 | 2016 | Kim, Seongjeong; Manturov, V. O. | On groups \(G_n^k\), braids and Brunnian braids |  | review 
+1331.57018 | 2015 | Manturov, Vassily Olegovich; Nikonov, Igor Mikhailovich | Homotopical Khovanov homology |  | review 
+1180.57012 | 2009 | Il'yutko, D. P.; Manturov, V. O. | Graph-links |  | editorial 
+1444.57009 | 2019 | Manturov, Vassiliĭ O.; Fedoseev, Denis A. | A sliceness criterion for odd free knots |  | review *points
+1221.57016 | 2011 | Dye, Heather Ann; Kauffman, Louis Hirsch; Manturov, Vassily  | On two categorifications of the arrow polynomial for virtual knots |  | review 
+1353.57012 | 2015 | Manturov, V. O.; Kim, Seongjeong | The group \(G_n^2\) and invariants of free links valued in free groups |  | review 
+1183.57002 | 2009 | Afanasiev, Denis Mikhailovich; Manturov, Vassily Olegovich | On virtual crossing number estimates for virtual links |  | review 
+1317.57003 | 2013 | Krasnov, Vladimir Aleksandrovich; Manturov, Vassily Olegovic | Graph-valued invariants of virtual and classical links and minimality problem |  | review *points
+1587.57015 | 2025 | Manturov, V. O.; Nikonov, I. M. | Flat-virtual knot: introduction and some invariants |  | review 
+1447.57001 | 2020 | Manturov, Vassily Olegovich; Fedoseev, Denis; Kim, Seongjeon | Invariants and pictures. Low-dimensional topology and combinatorial group theory |  | review *points
+1320.57001 | 2013 | Ilyutko, D. P.; Manturov, V. O.; Nikonov, I. M. | Parity in knot theory and graph-links |  | review 
+1275.57007 | 2012 | Chrisman, Micah Whitney; Manturov, Vassily Olegovich | Parity and exotic combinatorial formulae for finite-type invariants of virtual knots |  | review *colorin
+arXiv:1101.0128 | 2010 | D. Yu. Krylov; V. O. Manturov | Parity and Relative Parity in Knot Theory |  | summary 
+1546.57015 | 2024 | Manturov, V. O.; Nikonov, I. M. | On an invariant of pure braids |  | summary 
+1512.57009 | 2023 | Manturov, Vassily Olegovich; Nikonov, Igor Mikhailovich | Group-valued invariant of knots in the full torus |  | summary 
+1337.57003 | 2015 | Ilyutko, Denis Petrovich; Manturov, Vassily Olegovich | A parity map of framed chord diagrams |  | summary 
+1322.57006 | 2014 | Ilyutko, Denis Petrovich; Manturov, Vassily Olegovich; Nikon | Virtual knot invariants arising from parities |  | review 
+1459.57016 | 2020 | Cheng, Zhiyun; Fedoseev, Denis A.; Gao, Hongzhu; Manturov, V | From chord parity to chord index |  | summary 
+1387.57025 | 2015 | Ilyutko, D. P.; Manturov, V. O.; Nikonov, I. M. | Parity and patterns in low dimensional topology |  | review 
+1280.57011 | 2011 | Zenkina, M. V.; Manturov, V. O. | An invariant of links in a thickened torus |  | summary 
+1196.57005 | 2009 | Il'yutko, D. P.; Manturov, V. O. | Cobordisms of free knots |  | summary 
+1329.57013 | 2015 | Manturov, V. O.; Fedoseev, D. A. | Invariants of homotopy classes of curves and graphs on 2-surfaces |  | summary 
+arXiv:2109.06426 | 2021 | Vassily O. Manturov; Alexei Kanel-Belov; Seongjeong Kim | Two-dimensional self-interlocking structures in three-space |  | summary 
+1583.57011 | 2026 | Lee, Sang Youl; Manturov, Vassily Olegovich; Nikonov, Igor M | On biquandles for the groups \(G_n^k\) and surface singular braid monoid |  | summary 
+1146.57016 | 2005 | Campoamor-Stursberg, R.; Manturov, V. O. | Invariant tensor formulas via chord diagrams |  | editorial 
+1314.57001 | 2015 |  | New ideas in low dimensional topology |  | editorial 
+1176.57005 | 2009 | Afanasiev, D. M.; Manturov, V. O. | On minimal virtual link diagrams |  | editorial 
+1486.20042 | 2020 | Fedoseev, D. A.; Karpov, A. B.; Manturov, V. O. | Word and conjugacy problems in groups \(G_{k+1}^{k}\) |  | summary 
+1145.01310 | 2005 | Campoamor-Stursberg, R.; Manturov, V. O. | V. V. Trofimov's legacy in Lie theory |  |  
+1315.57001 | 2015 | Ilyutko, D. P.; Manturov, V. O.; Nikonov, I. M. | Graph-links: the state of the art |  | summary 
+1540.52003 | 2024 | Manturov, V. O.; Kanel-Belov, A. Ya.; Kim, S.; Nilov, F. K. | Two-dimensional self-trapping structures in three-dimensional space |  | summary 
+1575.01012 | 2025 | Bolsinov, A.; Dobrovol'skiĭ, N.; Ivanov, A.; Kudryavtseva, E | Anatoliĭ Timofeevich Fomenko |  |  
+1349.00205 | 2014 |  | Algebraic structures in low-dimensional topology. Abstracts from the workshop held May 25--31, 2014. |  | summary 
+None | 2025 |  | Preface |  |  
+1349.00027 | 2012 |  | Invariants in low-dimensional topology and knot theory. Abstracts from the workshop held June 3--9, 2012. |  | summary 
+1177.57004 | 2008 |  | Invariants in low-dimensional topology. Abstracts from the workshop held May 4--10, 2008. |  | editorial 
+1329.00177 | 2015 |  | Preface |  | editorial 
+1305.00126 | 2014 |  | Preface |  | editorial 
+1335.00161 | 2015 |  | Preface |  | editorial 
+1365.00055 | 2017 |  | Preface |  | editorial 

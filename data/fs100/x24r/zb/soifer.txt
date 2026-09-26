@@ -1,0 +1,128 @@
+## soifer: 'au:"Soifer, Alexander"'  total=127 fetched=127
+1086.52005 | 2006 | Soifer, Alexander | Covering a square of side \(n+\varepsilon\) with unit squares |  | summary *unit
+1035.05043 | 2003 | Soifer, Alexander | Chromatic number of the plane and its relatives |  | review *chromatic/distance/points
+1569.05108 | 2025 | Soifer, Alexander | New results and new open problems and conjectures related to the chromatic number of the plane problem |  | review *chromatic/colorin/distance
+1564.00004 | 2025 | Soifer, Alexander | Book review of: D. Gerbner and B. Patkóse, Extremal finite set theory |  | editorial 
+0812.00002 | 1994 | Soifer, Alexander | Colorado Mathematical Olympiad. The first 10 years and further explorations. Introductions by Philip L. Engel, Paul Erdő |  | review 
+None | 2024 | Soifer, Alexander | A popular biography with scholarly guest boxes. Book review of: C. Misak, Frank Ramsey. A sheer excess of powers |  | editorial 
+1559.05062 | 2024 | Soifer, Alexander | New open problems and conjectures in the new mathematical coloring book |  |  *colorin
+1560.49027 | 2023 | Soifer, Alexander | Nesting parallelepipeds, a minimax problem |  | review 
+1557.00009 | 2023 | Soifer, Alexander | Book review of: V. Jungić, Basics of Ramsey theory |  | editorial 
+1508.01023 | 2023 | Soifer, Alexander | Pragmatism beats historicism in our day and age |  |  
+1507.00014 | 2022 | Soifer, Alexander | ``The detailed treatment of the plenary lectures'' promised but not delivered: Alexander Soifer's review in 7 movements. |  | editorial 
+1484.00071 | 2021 | Soifer, Alexander | Mathematics in the early XX c. and her daughter Emmy Noether: review in 7 movements of ``Emmy Noether -- mathematician e |  | editorial 
+1403.05157 | 2018 | Soifer, Alexander | Progress in my favorite open problem of mathematics, chromatic number of the plane: an Étude in five movements |  |  *chromatic
+1452.01049 | 2020 | Soifer, Alexander | Remembering Ronald Lewis Graham (October 31, 1935 -- July 6, 2020) |  |  
+1452.01048 | 2020 | Soifer, Alexander | Remembering John Horton Conway (26 December 1937 -- 11 April 2020) |  |  
+0853.05038 | 1991 | Soifer, Alexander | Chromatic number of the plane: A historical essay |  | review *chromatic/colorin/distance/points
+1347.05081 | 2016 | Soifer, Alexander | The Hadwiger-Nelson problem |  | summary 
+1412.01032 | 2019 | Soifer, Alexander | Branko Grünbaum (1929--2018): the great geometer departs for meetings with Euclid and Archimedes |  |  
+None | 2019 | Soifer, Alexander | Chromatic number of the plane, breakthroughs and aspirations in six essays |  |  *chromatic
+1418.01038 | 2018 | Soifer, Alexander | In memory of Paul Erdős on his 105th birthday |  |  
+1274.01096 | 2013 | Soifer, Alexander | Paul Erdős at 100 and his problem book: an etude in six movements |  | review 
+0854.05052 | 1991 | Soifer, Alexander | Triangles in a two-colored plane |  | review *points
+1061.05038 | 2003 | Soifer, Alexander | Chromatic number of the plane and its relatives. II: Polychromatic number and 6-coloring. |  | editorial *chromatic/colorin
+1347.11004 | 2016 | Soifer, Alexander | A taste for duality: Erdős, Dilworth, Gallai, Milgram, and Mirsky |  | editorial 
+1352.05059 | 2015 | Soifer, Alexander | Geometric graphs |  | review *chromatic
+1216.00003 | 2011 | Soifer, Alexander | The Colorado Mathematical Olympiad and further explorations. From the mountains of Colorado to the peaks of mathematics |  | review *chromatic/colou/colorin/points
+1253.05073 | 2011 | Soifer, Alexander | A proof from The Book: a lower bound for the polychromatic number of the plane |  | review *chromatic/colorin/distance/points
+1205.01016 | 2011 | Soifer, Alexander | Ramsey theory before Ramsey, prehistory and early history: An essay in 13 parts |  | summary 
+1348.00027 | 2015 | Soifer, Alexander | Truth, like water, will find its way: My response to Günter M. Ziegler and the Deutsche Mathematiker-Vereinigung |  | editorial 
+1354.01041 | 2015 | Soifer, Alexander | The scholar and his profession; in search of moral compass: an essay in five movements |  |  
+1314.05050 | 2014 | Soifer, Alexander | Graphs defined by geometric considerations: étude in twelve movements |  | summary *chromatic/colorin/distance
+1332.00030 | 2014 | Soifer, Alexander | Whoever said ``no'' to the relativity theory. Book review of: M. Wazeck, Einstein's opponents. The public controversy ab |  | editorial 
+1292.01050 | 2013 | Soifer, Alexander | Problems of pgom Erdős |  | review 
+1263.01016 | 2012 | Soifer, Alexander | Van der Waerden and Heisenberg: the story of one friendship in seventeen sketches |  | review 
+1260.00005 | 2012 | Soifer, Alexander | Birth of a problem: the story of creation in seven stages |  | review 
+1226.05123 | 2011 | Soifer, Alexander | Chromatic number of the plane \& its relatives, history, problems and results: an essay in 11 parts |  | summary *chromatic
+1059.01013 | 2004 | Soifer, Alexander | In search of van der Waerden, Leipzig and Amsterdam, 1931-1951. I: Leipzig |  | review 
+1278.05108 | 2012 | Soifer, Alexander | A proof from The Book: a lower bound for the polychromatic number of the plane |  | editorial *chromatic
+1278.01007 | 2012 | Soifer, Alexander | van der Waerden and Heisenberg: the story of one friendship in seventeen sketches |  |  
+0889.52021 | 1997 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. I |  | review 
+1223.01033 | 2010 | Soifer, Alexander | The man behind the theory, Frank Plumpton Ramsey: an essay in six parts |  | review 
+1201.01027 | 2009 | Soifer, Alexander | Issai Schur, the first giant of Ramsey theory: an essay in seven parts |  | review *chromatic
+1171.00005 | 2009 | Soifer, Alexander | Mathematics as problem solving |  | review 
+1049.05039 | 2003 | Soifer, Alexander | Chromatic number of the plane: Its past and future |  | review *chromatic/colorin/distance/points
+1506.01014 | 2009 | Soifer, Alexander | The great geometer is 80 |  |  
+1167.01009 | 2008 | Soifer, Alexander | The drama of Bartel Leendert van der Waerden |  | review 
+1110.01011 | 2004 | Soifer, Alexander | In search of van der Waerden, Leipzig and Amsterdam, 1931-1951. II: Amsterdam, 1945 |  | review 
+1154.01019 | 2007 | Soifer, Alexander | Ramsey theory before Ramsey |  | review 
+0895.52005 | 1997 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. II |  | review *points
+1063.03035 | 2005 | Soifer, Alexander | Axiom of choice and chromatic number of \(R^n\) |  | review *chromatic/points
+0756.05057 | 1992 | Soifer, Alexander | A six-coloring of the plane |  | summary *colorin
+0836.05025 | 1994 | Soifer, Alexander | An infinite class of six-colorings of the plane |  | review *colorin/unit/distance
+1506.03106 | 2007 | Soifer, Alexander | Chromatic number of the plane theorem in Solovay's set theory |  |  *chromatic
+1506.01005 | 2007 | Soifer, Alexander | In search of Van der Waerden, the early years |  |  
+1115.52009 | 2006 | Soifer, Alexander | New results on covering triangles with triangles and squares with squares |  | review *unit
+1089.01013 | 2005 | Soifer, Alexander | In search of van der Waerden, Leipzig and Amsterdam, 1931-1951. III: Amsterdam, 1946-1951 |  | review 
+1095.52007 | 2005 | Soifer, Alexander | Two new problems on covering triangles with triangles and squares with squares |  | review *unit
+1506.52047 | 2005 | Soifer, Alexander | Cover-up squared. II |  |  
+0895.52006 | 1997 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. III |  | review 
+1049.00506 | 2004 | Soifer, Alexander | Review of ``Sandford L. Segal, Public life of mathematicians under the Nazis'' |  |  
+1076.00500 | 2004 | Soifer, Alexander | To leave, to die, or to compromise? A review of Maria Georgiadou's `Constantin Carathéodory: Mathematics and politics in |  |  
+0845.01018 | 1995 | Soifer, Alexander | Issai Schur: Ramsey theory before Ramsey |  | review 
+0927.52025 | 1998 | Soifer, Alexander | Packing clones in convex figures |  | review 
+0910.52013 | 1998 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. IV |  | review *unit
+0667.00001 | 1987 | Soifer, Alexander | Mathematics as problem solving |  | review 
+0872.01029 | 1997 | Soifer, Alexander | ``And you don't even have to believe in G'd but you have to believe that the book exists'' |  | review 
+1116.91301 | 2002 | Soifer, Alexander | A geometric interpretation for a game with evolving rules |  |  
+0910.52011 | 1997 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. I |  | review 
+0965.52001 | 2000 | Soifer, Alexander | Politics colored by mathematics |  | review *colorin/distance/points
+1009.00500 | 2000 | Soifer, Alexander | From problems of mathematical olympiads to open problems of mathematics |  |  
+0970.52010 | 1999 | Soifer, Alexander | Packing clones in convex figures |  | review *unit
+0929.52013 | 1999 | Soifer, Alexander | Packing triangles in triangles |  | review 
+0964.52017 | 1998 | Soifer, Alexander | In memory of Paul Erdős: Our joint problems in combinatorial geometry. II |  | review 
+0928.52008 | 1998 | Soifer, Alexander | Discs in a disc |  | review 
+0936.01024 | 1999 | Soifer, Alexander | Branko is 70 |  |  
+0854.05053 | 1991 | Soifer, Alexander | Triangles in a two-colored plane |  | review *chromatic/points
+0845.05039 | 1994 | Soifer, Alexander | Six-realizable set \(X_ 6\) |  | review *chromatic/colou/distance/forbid/points
+0867.01024 | 1997 | Soifer, Alexander | On the border of two years: An interview with Paul Erdős, Colorado Springs, December 24, 1991-January 9, 1992 |  |  
+0899.01018 | 1996 | Soifer, Alexander | The Baudet-Schur conjecture on monochromatic arithmetic progressions: An historical investigation |  | review *chromatic/quadratic
+0860.01020 | 1996 | Soifer, Alexander | Pierre Joseph Henry Baudet: Ramsey theory before Ramsey |  | review 
+0850.52014 | 1996 | Soifer, Alexander | Squares in a square. II |  |  
+0846.05033 | 1991 | Soifer, Alexander | Triangles in a three-colored plane |  | review *chromatic
+0534.20035 | 1983 | Soifer, Alexander | Countable countably-indecomposable Abelian groups, n-decomposable for any finite n |  | review 
+0853.05039 | 1992 | Soifer, Alexander | Relatives of chromatic number of the plane. I |  | review *chromatic/colorin/distance/points
+1221.05001 | 2009 | Soifer, Alexander | The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Branko Grünb |  | review *chromatic/colorin/unit/distance/points
+0854.05054 | 1992 | Soifer, Alexander | Triangles in a three-colored plane |  | review *points
+1162.52011 | 2008 | Karabash, Dmytro; Soifer, Alexander | Note on covering square with equal squares |  | review *unit
+0566.20040 | 1984 | Soifer, Alexander | Countable \(\aleph _ 0\)-indecomposable mixed Abelian groups of torsion- free rank 1 |  | review 
+1506.52034 | 2006 | Karabash, Dmytro; Soifer, Alexander | A sharper upper bound for cover-up squared |  |  
+1030.03035 | 2003 | Shelah, Saharon; Soifer, Alexander | Axiom of choice and chromatic number of the plane |  | review *chromatic/distance/points
+1371.97003 | 2017 | Soifer, Alexander | The Colorado Mathematical Olympiad: The third decade and further explorations. From the mountains of Colorado to the pea |  | review 
+0618.20037 | 1987 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+0647.20056 | 1987 | Soifer, Alexander | For singular cardinals \(\lambda\) of cofinality \(\omega\) , \(\lambda\)- decomposable groups are \(\lambda\) \(+\)-dec |  | review 
+1057.03036 | 2004 | Soifer, Alexander; Shelah, Saharon | Axiom of choice and chromatic number: Examples on the plane |  | review *chromatic
+0691.52001 | 1990 | Soifer, Alexander | How does one cut a triangle? With 80 illustr. and introductions by Philip L. Engel, Paul Erdős, Branko Grünbaum and Ceci |  | review *points
+1506.52033 | 2005 | Karabash, Dmytro; Soifer, Alexander | On covering of trigons |  |  
+1057.03037 | 2004 | Soifer, Alexander; Shelah, Saharon | Examples on the plane and \(R^n\) |  | review *chromatic
+1066.05067 | 2004 | Soifer, Alexander; Shelah, Saharon | How the axiom of choice can affect the chromatic number of distance graphs: three examples on the plane |  | review *chromatic/distance
+1551.05001 | 2024 | Soifer, Alexander | The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewords by Pet |  | review *chromatic/colorin/distance/points
+1049.05038 | 2003 | Shelah, Saharon; Soifer, Alexander | Chromatic numbers of the plane. III: Its future |  | review *chromatic/unit/distance
+1203.52007 | 2010 | Soifer, Alexander | Geometric etudes in combinatorial mathematics. With forewords to the 1st edition by Paul Erdős, Branko Grünbaum, and Cec |  | review *chromatic/colou/unit/distance/points
+1057.52009 | 2004 | Conway, John H.; Soifer, Alexander | Cover-up |  | review *unit
+0597.20049 | 1986 | Shelah, Saharon; Soifer, Alexander | Two problems on \(\aleph _ 0\)-indecomposable Abelian groups |  | review 
+1138.05023 | 2007 | Karabash, Dmytro; Soifer, Alexander | Distance graphs whose chromatic number is affected by the underlying set theory |  | review *chromatic/distance/points
+1506.05073 | 2007 | Karabash, Dmytro; Soifer, Alexander | On Shelah-Soifer class of graphs |  |  
+0586.20029 | 1986 | Shelah, Saharon; Soifer, Alexander | Countable \(\aleph _ 0\)-indecomposable mixed Abelian groups of finite torsion-free rank |  | review 
+0845.05037 | 1993 | Hoffman, Ilya; Soifer, Alexander | Almost chromatic number of the plane |  | review *chromatic/colou/colorin/distance/forbid/points
+1180.52001 | 2009 | Soifer, Alexander | How does one cut a triangle? With forewords by Philip L. Engel, Paul Erdős, Branko Grünbaum, Peter D. Johnson jun. and C |  | review *unit/points
+0850.52013 | 1995 | Erdős, Paul; Soifer, Alexander | Squares in a square |  |  
+0844.52002 | 1993 | Erdős, Paul; Soifer, Alexander | Triangles in convex polygons |  | review *points
+1327.01003 | 2015 | Soifer, Alexander | The scholar and the state: in search of Van der Waerden. With forewords by Dirk von Dalen, James W. Fernandez, Branko Gr |  | review *colorin/distance/points
+0865.05040 | 1996 | Hoffman, Ilya; Soifer, Alexander | Another six-coloring of the plane |  | review *colou/colorin/distance
+0845.05038 | 1994 | Hoffman, Ilya; Soifer, Alexander | Correction for: Almost chromatic number of the plane |  | review *chromatic
+1224.51026 | 2001 | Soifer, A. | From squares in a square to triangles in a triangle: a ride on a mathematical train of thought |  | review *unit/points
+1457.05038 | 2020 | Kahle, Matthew; Martinez-Figueroa, Francisco; Soifer, Alexan | A square-grid coloring problem |  | review *colorin
+0289.20035 | 1974 | Sojfer, A. Yu. | Criteria for the existence of irreducible systems of generators for abelian groups |  |  
+0221.20073 | 1971 | Sojfer, A. Yu. | Abelian groups possessing irreducible systems of generators |  |  
+1490.05068 | 2022 | Conway, John H.; de Grey, Aubrey D. N. J.; Parts, Jaan; Soif | Is there a better visualization of Coulson's ``15-colouring of 3-space omitting [monochromatic] distance one''? |  |  *chromatic/colou/distance
+0411.20031 | 1978 | Sojfer, A. Yu. | On large direct summands of Abelian groups |  |  
+1202.05004 | 2011 |  | Ramsey theory. Yesterday, today, and tomorrow |  | editorial 
+0232.20111 | 1971 | Sojfer, A. Yu. | Abelian groups prossessing irreducible systems of generators |  |  
+0285.20046 | 1974 | Sojfer, A. Yu. | A theorem on direct expansions of Abelian groups |  |  
+0279.20047 | 1974 | Sojfer, A. Yu. | Existenzkriterium irreduzibler Erzeugendensysteme bei abelschen Gruppen |  |  
+0315.20046 | 1974 | Sojfer, A. Yu. | On irredundant sets of generators of abelian groups |  |  
+0727.52001 | 1991 | Boltyanskij, Vladimir; Soifer, Alexander | Geometric etudes in combinatorial mathematics. With over 300 illustrations, index, and introductions by Paul Erdős, Bran |  | review 
+1372.97004 | 2017 |  | Competitions for young mathematicians. Perspectives from five continents |  | editorial 
+0935.00055 | 1999 |  | Special issue dedicated to the LXXth birthday of Branko Grünbaum |  | review 
