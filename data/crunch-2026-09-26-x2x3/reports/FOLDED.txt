@@ -4,3 +4,5 @@ X02D.md
 X02V.md
 X03D.md
 X05V.md
+X12B.md
+X13R.md
