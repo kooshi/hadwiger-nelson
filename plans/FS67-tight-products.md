@@ -329,3 +329,90 @@ volume). The author listing `au:"Tardif, Claude" & py:1995-2026` (73) was scanne
 
 `[DuffusSandsWoodrow1985]` §3 (the special cases of A(n), B(n)), `[ElZaharSauer1985]`, `[Tardif2006alg]`, Larose–Tardif 2000, Sauer 1992 — none
 held; `[GodsilRobersonRooney2017]`'s χv-of-1-walk-regular statement to be quoted by DC-1 from the held copy. Bibliography rows proposed at the close.
+
+## Stage 4 — SAVED (§IQ, §S, §P)
+
+### 4.1 §IQ — the invariant question (WORKFLOW 3.3)
+
+**Definitions (fixed here; the briefs quote them).** Graphs are simple and loopless; `k ≥ 3`. A proper `k`-colouring `c` of `G` is *gap-free* if
+every closed neighbourhood `N[x]` meets all `k` colours. `G` is *`k`-gap-free* if it is `k`-colourable and every proper `k`-colouring of it is
+gap-free. A `k`-colouring `β` of `G × H` (categorical product) is *pulled back from `G`* if `β(x, h) = c(x)` for some `k`-colouring `c` of `G`.
+`E_k(G)` is the graph on the maps `V(G) → [k]` that are not proper colourings, `f ∼ g` iff `f(u) ≠ g(v)` for every ordered edge `(u, v)` of `G`.
+**FS67(G, k)**: "for every connected `H` with `χ(H) > k`, every proper `k`-colouring of `G × H` is pulled back from `G`".
+
+1. **Existence form.** Is there a Hoffman-tight (or `k`-gap-free) `G`, a connected `H` with `χ(H) > k`, and a `k`-colouring of `G × H` not pulled
+   back from `G`?
+2. **Structural form.** For a graph `G`, describe *every* `k`-colouring of `G × H`, over *every* connected `H` with `χ(H) > k` at once — in the
+   most general class (any `G`, any cardinality, no arithmetic): for which `G` does FS67(G, k) hold, and what is the obstruction when it fails?
+3. **The invariant it forces.** Every solution carries its **fibre map** `Φ : H → K_k^G`, `Φ(h) = β(·, h)` (PA-T6), which is either constant at
+   a loop or lands in `E_k(G)`. So the answer is a property of `G` alone, `χ(E_k(G)) ≤ k`, and the invariant is:
+   - *for a yes*, a **selection** — a proper `k`-colouring of `E_k(G)` choosing a colour inside each map's image (Greenwell–Lovász's `γ′`;
+     at `k = 3`, El-Zahar–Sauer's colouring, whose engine is `K₃`'s height, G71);
+   - *in the strict spectral regime*, the **fibre-measure vector** `x ↦ (μ(β(x,·)⁻¹(j)))_j ∈ Δ_k` (J21-MX), or the **Gram matrix** `M ⊗ J`
+     (GRRSV Result 4);
+   - *for a no*, a **Hedetniemi pair** hidden in `E_k(G)`: `E_k(K_k × X)` contains the image of every `H` with `χ(X × H) ≤ k` (DA-3).
+4. **Route.** Derivation only (J27D); the verifier checks fixed statements (J27V); finite tests of `χ(E_k(G))` on named small `G` are PB, after
+   2026-10-01.
+5. **Open instances it would decide.** `S₁ = UD(𝔽₉, 2)` and every level of the 3-adic tower at `k = 3` (FS-58 D3.4, G61(3)); `U₃₂`, `U₄` and the
+   2-adic tower levels at `k = 4` (rows 67, 93); FS-61 A.7's non-affine periodic colourings; row 85's R3a as an instance; `[Zhang2012]`'s
+   exception (ii); the equal-`χv` pairs of GRRSV Result 3.
+
+### 4.2 §S — the stages as jobs
+
+**Bearing on χ ≥ 6, honestly:** none. The programme's own products — residue targets at four colours — are in the strict regime by PA-T4
+(every residue target needing five colours has `χ_f > 4`), where Zhang (i) already decides them; at five colours only through PA-T5's holes
+(`Γ₃₁`, tower levels ≥ 2 at 27, 31, 43, 47). FS-67 is mechanism: the three-colour justification under FS-58 and G61(3), and the answer to
+"when must a colouring of a product be local at one factor" in the class where the literature has it.
+
+| stage | job | what | size | stop rule |
+|---|---|---|---|---|
+| S1 | **J27D** (Opus, derivation) | the claims below, in the order DA → DC → DB → DD; a record with "Theorems this phase proved"; checks in `tools/crunch_j27d_*.py` with plants | ~3 h, 350k | hand back by 420k; DD may end GAP with the missing step named |
+| S2 | **J27V** (Opus, blind verifier) | the fixed claim list (§4.3), blind phase, then the lemma-statement phase, then the divergence table | ~2.5 h, 300k | a verdict per claim; blind phase capped at 60 % of budget |
+| PB | post-ban (≥ 2026-10-01; not queued) | `χ(E_3(G))` and `χ(E_4(G))` on named small tight `G` (`S₁`, `U₄`, `U₃₂`) by an exact finder, generator image stated (G21) | — | — |
+
+### 4.3 The claims (target statements; the verifier's fixed list quotes these verbatim)
+
+- **DA-1** "If `G` is connected and `k`-colourable but not `k`-gap-free, then for every graph `H` with at least one edge there is a proper
+  `k`-colouring of `G × H` not pulled back from `G`."
+- **DA-2** "If `G` is `k`-gap-free and has no isolated vertex, then FS67(G, k) holds if and only if `χ(E_k(G)) ≤ k`." (PA-T6, re-derived.)
+- **DA-3** "For `k ≥ 3` and a connected graph `X` with `χ(X) > k`, the graph `G = K_k × X` is connected and uniquely `k`-colourable, hence
+  `k`-gap-free; and FS67(K_k × X, k) fails if and only if some connected graph `H` with `χ(H) > k` has `χ(X × H) ≤ k`."
+- **DA-4** "For every `k ≥ 4` there is a finite connected uniquely `k`-colourable graph `G` for which FS67(G, k) fails; and for every `k ≥ 3`,
+  if FS67(G, k) holds for every finite connected `k`-gap-free `G`, then `χ(X × H) > k` for all finite graphs `X`, `H` with `χ(X), χ(H) > k`."
+- **DB-1** "For every connected non-bipartite graph `G`, `χ(E_3(G)) ≤ 3`; hence FS67(G, 3) holds for every connected 3-gap-free graph `G`."
+- **DB-2** "`UD(𝔽₉, 2)`, and every level of the 3-adic tower that is Hoffman-tight at three colours, is connected and 3-gap-free." (Consumer of
+  DB-1 or DC-1.)
+- **DC-1** "If `G` is 1-walk-regular with `χv(G) = k` and `H` is connected with `χv(H) > k`, then every proper `k`-colouring of `G × H` is pulled
+  back from `G`." (From `[GodsilEtAl2020]` Result 4; state the link between `χv(G) = k` and Hoffman-tightness for 1-walk-regular `G`, with its
+  source.)
+- **DC-2** "If `G` is connected and `k`-gap-free, and `H = Cay(A, T)` for a finite abelian group `A` with `λ* = max_{χ ≠ 1} |Σ_{t ∈ T} χ(t)|/|T| <
+  τ_k`, then every proper `k`-colouring of `G × H` is pulled back from `G`" — with `τ_k` an explicit function of `k` that J27D states and proves
+  (the target is Pak–Vilenchik's `1/(k−1)`; any explicit positive `τ_k` is a result).
+- **DC-3** A table: for `k = 3, 4, 5` and the residue planes `Γ_q` of G44's exact spectra, which satisfy DC-1's or DC-2's hypothesis on `H`
+  (exact, seconds; no search).
+- **DD-1** "If `χv(G) = χv(H) = k`, `χ(H) > k`, `H` connected, and `G`, `H` satisfy `[GodsilEtAl2020]` Result 5's hypothesis, then every proper
+  `k`-colouring of `G × H` is pulled back from `G`" — TRUE, FALSE with a counterexample, or GAP at a named step; and whether it reaches
+  `[Zhang2012]`'s IS-imprimitive exception.
+- **DD-2** "For some `k ≥ 4` there is a regular Hoffman-tight (`λ_min = −d/(k−1)`) connected graph `G` for which FS67(G, k) fails" — or its
+  negation for a named class, or GAP naming the missing ingredient (the route to test: `K_k × X` is Hoffman-tight iff `λ_min(X) ≥ −d_X/(k−1)`
+  for regular `X`, so DD-2 asks for a Hedetniemi pair `(X, H)` at `k` with that spectral condition on `X`; `[Tardif2022frac]`, *Counterexamples
+  to Hedetniemi's conjecture with large fractional chromatic numbers*, is the first reading).
+
+**Routes (fenced from J27V):** DA-1 recolour one gapped vertex in one fibre; DA-3 ⟸ by `β(i, x, h) = c(x, h)`, ⟹ by GL Cor. 1 on
+`K_k × (X × H)`; DA-4 from `[Tardif2023]` Thm 1 (components of max χ) and `[Shitov2019]`; DB-1 by re-deriving El-Zahar–Sauer's colouring of
+`K_3^G` and checking where non-3-colourability of `G` is used (the bipartite double cover `G × K₂` carries `(f, g)` as one proper 3-colouring;
+heights, G71); DC-1 from GRRSV Result 4 and `[GodsilRobersonRooney2017]`; DC-2 by bootstrapping J21-MX's mixing lemma with gap-freedom: with
+`ε = sup_{x, c ≠ φ(x)} m_c(x)`, the neighbour `x_c` of colour `c` gives `m_c(x)/(1 − m_c(x)) ≤ λ*²(k−1)ε/(1 − (k−1)ε)`, a contraction for small
+`λ*` (naively `λ* ≲ 0.44` at `k = 3`); sharpen toward `1/(k−1)`; DD-1 from Result 3/5's convex-combination form restricted to simplex Gram
+entries; DD-2 via `K_k × X`.
+
+### 4.4 §P — registered predictions (priors of §1.2 stand; added here, before J27D runs)
+
+| id | statement | prior |
+|---|---|---|
+| P-H | DC-1 TRUE as stated | 0.85 |
+| P-I | DC-2 proved at some explicit `τ_k > 0` | 0.90; at `τ_k = 1/(k−1)`: 0.45 (= P-C′) |
+| P-J | DD-1 TRUE | 0.40; FALSE 0.15; GAP 0.45 |
+| P-K | DD-2 ends GAP | 0.60 (= P-D) |
+| P-L | J27V records at least one divergence from J27D on a claim | 0.50 |
+| P-M | DB-1's route needs the non-bipartite hypothesis only (not non-3-colourability) | 0.55 (= P-B's TRUE) |
