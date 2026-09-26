@@ -59,3 +59,34 @@ COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1034 clean → 1130";
 self-match rule, in a checker's costume); the check that was used is `fuser` on the file's inode (exit 1: no holder),
 itself controlled on a scratch script that `bash` held open (exit 0). The edit was made on a copy and moved into place
 (new inode), so a running `bash` would have kept reading the old file.
+
+## Stage 3 — SAVED
+
+**Controls** (`data/gate-fix/j32/controls.py`; its output `data/gate-fix/j32/controls.out`; exit 0, "17 of 17 behaved").
+Fixtures: the saved scan `fixture-vacuity-scan.log` (= `build/gate/vacuity/20260926T000121Z-315327.log`, sha256
+`d98927309cf1fdf5…`) and audit `fixture-axioms-audit.log` (= `build/gate/axioms/20260926T000008Z-313215.log`,
+`9c373af661e42da3…`); their counts are read by the controls' own parser, never by `gate_report.py`'s. Copies of
+`CLAUDE.md` and the baseline are made in a temporary directory by string edits that must apply exactly once (else the
+controls refuse to run), passed to the digest by path, and deleted after. Each run is bounded on both sides: the planted
+source gets exactly the planted verdict (a STALE line whose items are exactly the planted count; or NOT COMPARED with the
+planted reason and exit 3), every other source reads "match (9 of 9 compared)", no source is reported twice or omitted,
+and the exit status is exactly the expected one.
+
+| control | plant | verdict seen |
+|---|---|---|
+| V1 | faithful copies (the baseline, and `CLAUDE.md` with § The gate's counts set to the scan's) | both "match (9 of 9 compared)", exit 0 |
+| V2 | `witnessed=18` in the `CLAUDE.md` copy | "RECORDED COUNTS ARE STALE in CLAUDE.md § The gate (read from …) — update it: witnessed 18 → 17"; baseline match |
+| V3 | `generic=256` in the baseline copy | "RECORDED COUNTS ARE STALE in …/vacuity-baseline.txt's header — update it: generic 256 → 257"; CLAUDE.md match |
+| V4, V5 | `unknown=` deleted; `sites=` doubled (CLAUDE.md) | NOT COMPARED "no unknown" / "sites recorded more than once", exit 3 |
+| V6 | `## The gate` heading renamed | NOT COMPARED "0 '## The gate' headings, not one", exit 3 |
+| V7 | the nine counts moved from § The gate into § The package | NOT COMPARED, all nine missing, exit 3 (the section, not the file, is read) |
+| V8 | `declarations=` deleted from the baseline header | NOT COMPARED naming the baseline, exit 3; CLAUDE.md match |
+| V9 | no baseline file | "does not exist (scripts/vacuity.sh fails on that)", exit 0 (documented) |
+| A1–A3 | Trust ledger faithful / 1131 clean / 6 purchases | match; "1131 clean → 1130"; "6 purchases → 5" |
+| A4–A6 | sentence reworded / moved to § Toolchain / doubled in § Trust ledger | NOT COMPARED "0 / 0 / 2 sentences …", exit 3 |
+| V2, A5 against `7d8ac03c`'s script | the two plants the defect hides | **RED for their own reason**: the old version exits 0 and prints "recorded counts (…'s header, CLAUDE.md § The gate): match" (V2) and "recorded count (CLAUDE.md § Trust ledger): match" for a sentence outside the section (A5) |
+
+**A wrong-reason red, caught on the way** (the file's own warning, reproduced): the first draft of the controls omitted
+the mode argument, so every run printed the usage text and exited 2 — and the two runs against the old version "went
+red" for that reason alone, while the fifteen others failed. The red-against-old check now also requires the old
+version to exit 0 and to print the false "match" line itself; with the argument restored all seventeen behave.
