@@ -8,8 +8,9 @@ proposals for the front-page lane.*
 
 ## Theorems this phase proved
 
-None. This is a reading job: its products are attributions and negatives, graded by what was read (per section, below). One small fact is
-checked here by hand where a verdict needed it; it is listed in the stage that uses it with its grade.
+A reading job: its products are attributions and negatives. Two small facts were checked by hand where a verdict needed them:
+- **[hand]** a one-vertex recolouring `c ↦ c[v↦b]`, `b ∉ c(N[v])`, is an arc of `K_k^G` — so "frozen in `R_k(G)`" ⟺ "isolated looped vertex of `K_k^G`" (with J27D's L1). §Stage 2.
+- **[hand, two lines from `[GreenwellLovasz1974]` Cor. 1]** FS67(G, k) holds for every `G` in which every vertex lies in a `k`-clique (`H` connected, `χ(H) > k`: each `X × H`, `X` a `k`-clique, is uniquely coloured through `X`; overlapping cliques agree). §Stage 2.
 
 ## Stage 1 — SAVED (quotation check)
 
@@ -107,3 +108,90 @@ G68) has three printed names — **fall colouring**, **frozen colouring**, **tig
 with G54's "Hoffman-tight": any write-up must say "gap-free (fall) colouring" and never "tight" unqualified. (2) FS67 holds for every
 connected graph in which every vertex lies in a `k`-clique (GL Cor. 1 on each clique, glued along overlaps as in Csernák's Lemma 3.5) —
 the Burr–Erdős–Lovász class; a derivation-grade observation for the close, not checked here beyond reading the two proofs it combines.
+
+## Stage 3 — SAVED (result 2: DC-2; result 3: DC-1, DD-1, DB-2 with Lemma T)
+
+**Queries** (`zb-r2.out`; `oa-pv.out`, `s2-pv.out`; 2026-09-25): `ab:"uniquely" & ab:"colorable" & ab:"eigenvalue"` 2 (GRR 2017, a
+proceedings volume); `… & ab:"spectral"` 1 (Bašić 2026, Cayley graphs — `[Basic2026]`, held); `ab:"categorical product" & ab:"eigenvalue"` 0;
+`ab:"fall coloring" & ab:"eigenvalue"` 0; `ab:"Kronecker product" & ab:"uniquely"` 12, `ab:"direct product" & ab:"uniquely"` 140,
+`ab:"tensor product" & ab:"uniquely"` 136, `ab:"pseudorandom" & ab:"uniquely"` 11, `ab:"uniquely" & ab:"Ramanujan"` 19 — first pages scanned
+by title, all off-topic (group, algebra and coding uses of the words); `ab:"Pak" & ab:"Vilenchik"` 0. With J23cpa's thirty (expander ×
+tensor/categorical/direct product, uniquely vector, uniquely × expander), 40 zbMATH queries in these words. **Citation walk of
+`[PakVilenchik2013]`:** OpenAlex 8 citing works; Semantic Scholar **0** (its record has no citations — recorded as that database's gap,
+not a negative). The on-point ones: GRR 2017 and GRRSV 2020 (held), **GRRSV 2019** (*Graph homomorphisms via vector colorings*, EJC 79;
+fetched, arXiv:1610.10002 → `~/source/library/pdf/arXiv-1610.10002-godsil-et-al-graph-homomorphisms-vector-colorings.pdf`; abstract read,
+full text grepped for "categorical", "product", "× H": no product statement — homomorphisms and cores), and **`[AbiadEtAl2025]`** (held;
+abstract and §4 read: Thm 4.1 "A non-trivially Hoffman colorable connected 2-walk-regular graph is not uniquely vector colorable").
+
+**Verdicts, at exact scope.**
+
+| result | verdict | where, exactly |
+|---|---|---|
+| **DC-2** (every `k`-colouring of `G × Cay(A, T)` pulled back from `G`, `G` any `k`-gap-free graph, `λ* < 1/(k−1)`) | **partly in print**: the case `G = K_k` is `[PakVilenchik2013]` Thm 3 ("Let H be an r-regular graph with λ < r/(k − 1). Then G = Kk ⊗ H is uniquely k-colorable …", J23cpa's reading), for **every** `r`-regular `H`, not only Cayley; and at `G = K_k` the integral conclusion needs no spectrum at all (GL Cor. 1, as GRRSV §4.1 remark). **Arbitrary gap-free `G`: not found by these searches** | 40 zbMATH queries, 2 citation databases (PV: 8 + 0 citing works), 2 surveys. Closest printed statements with a general first factor are vector ones (GRRSV Result 4: spectral condition on `G`, none on `H`) — the reverse of DC-2's split. **Scope note:** DC-2's route is the expander mixing lemma plus a plurality bootstrap (J27D (M), (P), (B)); a reviewer may call it folklore; any claim should be for the statement (arbitrary gap-free, possibly infinite `G`) and cite PV Thm 3 and GRRSV Cor. 4.4 as the printed uses of the threshold |
+| **DC-1** (1-walk-regular `G`, `χv(G) = k`, `H` connected, `χv(H) > k` ⟹ every proper `k`-colouring of `G × H` pulled back) | **partly in print**: the vector statement is `[GodsilEtAl2020]` **Thm 4.16(1)** ("If G is a 1-walk-regular graph … If H is a connected graph and χv (G) < χv (H), then every optimal vector coloring of G × H is induced by G."), and the simplex step is its §1 ("If G has a k-coloring …, then mapping each color class to one of the vertices of the regular k − 1 simplex gives a valid strict vector k-coloring"); **the integral corollary is not stated** in GRRSV (grep "k-coloring", "classical", "Hoffman": the only integral product statements are DSW's and PV's), nor in its 8 PV-citing neighbours | the link `χv = 1 + r/|λ_min|` for 1-walk-regular `G` is GRR 2017 Thm 4.9 / Cor. 4.10 (J27D quoted it) — in print. `[AbiadEtAl2025]` Thm 4.1 shows GRRSV Thm 4.16(2)'s *uniqueness* clause is empty for non-trivially Hoffman-colourable 2-walk-regular `G`; DC-1 uses item (1), which needs no uniqueness — no conflict |
+| **DD-1** (equal `χv`, Result 5's hypothesis, `χ(H) > k`, `H` connected ⟹ pullback) | **partly in print**: the vector statement is GRRSV Result 5 / Thm 4.16(3) (for connected 1-walk-regular `G`, `H`: "Every optimal vector coloring of G × H is a convex combination of vector colorings induced by G and H"); **the integral step (`χ(H) > k` excludes the `H`-weight) is not stated** there | as DC-1 |
+| **Lemma T** (Hoffman-tight at `k` ⟹ every proper `k`-colouring gap-free) | **in print, as a two-step corollary**: `[Haemers2021]` (held, arXiv:2102.05529, p. 4, verbatim) "in case G is regular we find that equality in the Hoffman bound implies that each vertex outside C has exactly αk/(n − α) = −λn neighbors in C"; with `λ_min = −d/(k−1)` every class of a `k`-colouring meets the bound, so every vertex has `d/(k−1) > 0` neighbours in each other class. G54 credits the same to Blokhuis–Brouwer–Haemers (not re-read here). This is the classical "Hoffman colouring" fact (`[AbiadEtAl2025]`'s vocabulary) | — |
+| **DB-2** (`UD(𝔽₉, 2)` and every tight level of the 3-adic tower connected and 3-gap-free) | **an instance, not a theorem to gate**: Lemma T (in print, above) applied to named graphs of this project; the connectivity step is Nakayama. No search can find `UD(𝔽₉, 2)` in print as a tight graph except through the finite-field unit-distance literature (`[MMST1998]`, Kloosterman spectra), already held | — |
+
+## Stage 4 — SAVED (result 4: Lemma W, DB-1's partial form; result 5: DC-3)
+
+**Lemma W** ("`D_C(f) = D_C(g) = 3w_C(f,g)` on every arc of `K_3^G`; `D_C` is a component invariant") and **DB-1 partial** ("components of
+`E_3(G)` with `D_C ≡ 0` for some odd `C` are 3-colourable"): **undecided.** The paper that decides it is **`[ElZaharSauer1985]`** (not held;
+Springer returns its paywall page to a script, `rd.springer.com` included — checked 2026-09-25): its proof is the classical colouring of
+`K_3^G` and, per J27D, the place where non-3-colourability of `G` enters. The printed winding framework is `[TardifWrochna2019]` §1.2–§2.2
+(held; J27D read it and quotes the walk and the universal-cover characterisation of `K_ε^C`'s edges); the step J27D proves — that the
+two-step displacement sum of the `f`-positions alone already equals `3w` on every arc, so the winding is a vertex function — was not
+located in TW's §1–§3 by J27D's reading and was not re-searched here. Queries carried: J27's `ab:"El-Zahar" & ab:"Sauer" & ab:"coloring"`
+(1: DSW) and `ab:"exponential graph" & ab:"coloring"` (0, here); Špacapan 2019 (the one "3-colorings of direct products" title among
+GL's and DSW's 159 citing works) is about `α₃` by its abstract. `[Tardif2006alg]` ("a polynomial algorithm, which inputs a 3-coloring of a
+categorical product of two graphs and outputs a 3-coloring of one of the factors", J27's review quote; Algorithms Combin. 26 (2006) 493ff.,
+zbl 1114.05040, no DOI in zbMATH) is the second paper that could decide DB-1's GAP. **Not searched further (budget; see the note below).**
+
+**DC-3** (which `Γ_p` meet DC-1's/DC-2's hypothesis on `H`): a table of this project's own graphs; **nothing to gate** — its inputs are
+exact spectra (G44; the Kloosterman form is `[MMST1998]`, held) and its content is a comparison with J27D's thresholds.
+
+## Stage 5 — SAVED (for Kooshi, proposals, would-have-searched log)
+
+**Papers for Kooshi (not fetchable by script).**
+1. D. Duffus, B. Sands, R. E. Woodrow, *On the chromatic number of the product of graphs*, J. Graph Theory 9(4) (1985) 487–495, doi
+   10.1002/jgt.3190090409 (Wiley; OpenAlex: not OA) — **decides result 1's construction** (`B(n) ⇒ H(n)` via `K_n × X`?).
+2. M. El-Zahar, N. Sauer, *The chromatic number of the product of two 4-chromatic graphs is 4*, Combinatorica 5 (1985) 121–126, doi
+   10.1007/BF02579374 (not OA) — **decides Lemma W / DB-1**.
+3. N. Sauer, *Hedetniemi's conjecture — a survey*, Discrete Math. 229 (2001) 261–292, doi 10.1016/S0012-365X(00)00213-2 (**Elsevier open
+   archive**: `https://www.sciencedirect.com/science/article/pii/S0012365X00002132/pdf`, blocked to scripts, a browser save) → `Sauer2001-survey-hedetniemi.pdf`.
+4. X. Zhu, *A survey on Hedetniemi's conjecture*, Taiwanese J. Math. 2(1) (1998) 1–24, doi 10.11650/twjm/1500406890 (**free**:
+   `https://projecteuclid.org/journals/taiwanese-journal-of-mathematics/volume-2/issue-1/A-SURVEY-ON-HEDETNIEMIS-CONJECTURE/10.11650/twjm/1500406890.pdf`,
+   Project Euclid returns HTML to a script) → `Zhu1998-survey-hedetniemi.pdf`.
+5. C. Tardif, *On the algorithmic aspects of Hedetniemi's conjecture*, in Topics in Discrete Mathematics, Algorithms Combin. 26, Springer
+   (2006), zbl 1114.05040 — DB-1's second decider.
+6. *(lower)* C. Tardif, *Counterexamples to Hedetniemi's conjecture with large fractional chromatic numbers*, Graphs Combin. 38 (2022) Paper
+   171, doi 10.1007/s00373-022-02576-x (DD-2's first reading); B. Larose, C. Tardif, *Hedetniemi's conjecture and the retracts of a
+   product of graphs*, Combinatorica 20 (2000) 531–544, doi 10.1007/s004930070006; N. W. Sauer, X. Zhu, *An approach to Hedetniemi's
+   conjecture*, J. Graph Theory 16 (1992) 423–436, doi 10.1002/jgt.3190160504 (the brief's "Sauer 1992" — it is Sauer–Zhu); D. Duffus,
+   N. W. Sauer, *Chromatic numbers and products*, Discrete Math. 300 (2005) 91–99 (Elsevier open archive).
+
+**Proposed `BIBLIOGRAPHY.md` rows (front-page lane; proposals only).**
+- **[Csernak2023]** T. Csernák, *Trivial coloring of Cartesian product of graphs* (the body is about direct products), arXiv:2303.06406v2
+  (22 Oct 2024) — "tight" colouring = gap-free; Thm 3.6 (weakly-cliqued `G` × tight `H`, `χ = k`, all colourings trivial); GL Thm 1 read as
+  "`H` tight ⟹ `K_k × H` trivially colourable". `pdf/Csernak2023-trivial-coloring-products.pdf`. Read: abstract, §1–§3 (2026-09-25, J40).
+- **[GodsilEtAl2019]** C. Godsil, D. E. Roberson, B. Rooney, R. Šámal, A. Varvitsiotis, *Graph homomorphisms via vector colorings*, European
+  J. Combin. 79 (2019), doi 10.1016/j.ejc.2019.04.001, arXiv:1610.10002. `pdf/arXiv-1610.10002-…`. Read: abstract; grep negative for
+  products (J40).
+- `[GodsilEtAl2020]` (update): read add §4.3 Thm 4.16, §4.4 with Thm 4.17's proof, §5's first page (J40).
+- `[AbiadEtAl2025]` (update): read add §4 Thm 4.1 (J40). `[Haemers2021]` (update): p. 4, the equality case of the ratio bound (J40).
+- `[DuffusSandsWoodrow1985]` (update): OpenAlex 69 / Semantic Scholar 71 citing works walked (J40); still not held.
+- listing rows: Dunbar–Hedetniemi–Hedetniemi–Jacobs–Knisely–Laskar–Rall, *Fall colorings of graphs* (2000, zbl 0962.05020; the vocabulary,
+  title and review); Belavadi–Cameron–Hildred 2025 (zbl 1579.05061; its review states frozen = fall); Špacapan 2019 (DMGT 39, doi
+  10.7151/dmgt.2085; abstract read, negative); Valencia-Pabon 2010, Klavžar–Mekiš 2011 (idomatic partitions of `K_n × K_m`; titles).
+
+**`CLOSED-QUESTIONS.md` candidates.** (1) **DSW's `B(n)`** (posed 1985, restated in `[Tardif2008]` §4.2 and GRRSV §1.3/§5 as open) —
+false for every `n ≥ 4` by DSW's own implication and `[Tardif2023]`; **A(n) likewise false for `n ≥ 4`** (A ⇒ B). Whether this counts as
+"answered by this project" is doubtful: it is a two-line composition of printed results, and the entry should say so; only `B(3)`, `A(3)`
+remain. (2) GRRSV §5's "(B′)" (uniquely vector colorable `G`, connected `H`, `χv(G) < χv(H)` ⟹ `G × H` uniquely vector colorable) is **not**
+touched by FS-67.
+
+**Would-have-searched log.** Empty: no finite-witness search was contemplated in a reading job.
+
+**Budget note.** Stopped at the harness's ~330k (brief: hand back by 350k). Left undone: a direct search for Lemma W's statement in the
+Hom-complex literature (`Hom(C_{2k+1}, K_3)`, Babson–Kozlov) and a Semantic Scholar walk of `[TardifWrochna2019]`'s citing works — both
+are cheap next steps for any successor, and both are for the close to schedule or decline.
