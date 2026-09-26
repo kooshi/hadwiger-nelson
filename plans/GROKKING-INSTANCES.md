@@ -54,6 +54,62 @@ told twice.*
 
 **THE STRENGTHENING (Kooshi, 2026-09-06, on the finite-plane pivot — his reading of the whole record as a ladder of disciplines, each hop forced by a wall that turned out to be a theorem in the next room):** *graph theory* (the problem, the Moser spindle) → *computational combinatorics / SAT* (the wall: hand refutation dies at ~20 vertices; de Grey, Heule, Polymath16) → *formal verification* (the wall: SAT certificates are opaque bitstreams; Lean's kernel — this project's entry point) → *Euclidean geometry* (the wall: the graphs are not abstract — rotation groups, spindle angles, the 1/√3 circle; M1–M20) → *algebraic number theory* (the wall: "why do all 5-chromatic graphs contain √5 or √7?" — a question about the coordinates' field, not the graph; M20–M24) → *p-adic / local algebra* (the wall: "what makes K = ℚ(√3,√11) special?" — how 2 factors when i is adjoined: ramification, inertia, residue fields; Theorem B — the steepest hop, where CS-flavoured discrete mathematics has almost no overlap) → *additive combinatorics* (the wall: "why does the residue method go blind between 4 and 7?" — it only uses homomorphisms, linear maps; the Cayley-graph reframing, M56) → *finite field geometry* (the wall: "is linearity the only thing the finite picture can do?" — no: the reduction lands in an actual finite Euclidean plane whose chromatic number is non-linear and sees 5; Vinh 2005 studied the objects, nobody had connected them to the field descent). Suggested and not yet entered: *algebraic topology* (Borsuk–Ulam, box complexes — the one lower-bound technique sharp at every integer; FS-9) and *commutative algebra* (Nullstellensatz certificates — polynomial infeasibility proofs sensitive to integrality; FS-10). […] *Rule this adds: when a measured wall resists derivation in the discipline it was found in, name the discipline the wall's statement naturally lives in and look for the theorem there before building another instrument here.*
 
+### The tally, re-sorted 2026-09-26 (job G2)
+
+*G2, 2026-09-26, at Kooshi's word: "may as well tally it now, then generalize the comment on it so we don't need to keep up with it."
+The working — every source line read, every death with its address — is `data/consolidation-2026-09-26/G2-record.md` §1–§2; this is
+its result. The earlier sorts: 7 of 7 against 0 of 10 at the minting (2026-08-13, the two lists above); 8 of 8 against 0 of 10 on
+2026-09-05, the eighth derivation-first survivor being the field wall ("settled by derivation"). No re-sort ran between 2026-09-05 and
+2026-09-26.*
+
+**Period and population.** Claims whose fate was decided 2026-09-05 → 2026-09-26 (ledger rows 48–127, M54 through the ×2×3 crunch), as the
+corpus of record holds them: `CLAUDE.md`'s demotion records and lost predictions, `LEDGER.md`'s rows, § B and its scored readings and
+predictions. The plans' own §R-close scorecards were read only where the corpus pointed to them — so, by G21, the count measures that
+enumeration.
+
+**Counting rule.** A claim is a general statement going beyond the data it was reached from. Its provenance is how it was first
+*asserted as a conclusion* — **D** on a derivation; **M** on data, a measured or computed pattern generalised beyond itself; **X** an
+exact computation on a finite object (the measurement itself, beside the dichotomy); **C** a conjecture, hunch or prior asserted on
+neither (listed, not in the ratio). A pattern first seen in a measurement and then derived counts as D (Kooshi's catch-22). Survived =
+held today after something that could have killed it; died = refuted, withdrawn, demoted or corrected as false in the period.
+
+| provenance | survived | died | died, per claim |
+|---|---|---|---|
+| D — derived from structure first | ≈ 605 `LEDGER.md` § B theorems from M54 on (596 hand or derived, 9 kernel); 67 ledger rows (61 derived, 6 kernel ports) | 15 | about 1 in 40 |
+| M — measured first, then interpreted | 3 (S1–S3 below) | 17 | about 6 in 7 |
+| X — exact computation | ≈ 94 § B lines; 12 ledger rows | 1 | about 1 in 100 |
+| C — conjecture, hunch, prior | not tallied | ≥ 11 recorded in the corpus | — |
+
+No ledger row 48–127 has a measured reading as its result: the ledger holds what a derivation or a certificate bought.
+
+**The D deaths** (one derivation's step each; D10–D15 caught inside their own milestone, D1–D9 after entering the record): D1 G35's
+"restates the wall as the ramification of a single algebra" (ℚ(√2), ℚ(√3)); D2 FS38-L1's "tightness propagates up a constant-fibre
+tower" (FS-86's B2; row 93); D3 the clause G56's demotion record quotes (outside review); D4 G57's first
+form (its demotion record); D5 FS-58's plan, "finite quotients of the 3-integral group are 3-groups"; D6
+G64's S ⟺ W (FS62-T1, withdrawn on review); D7 M63H2-T2's converse (`n = 5`); D8 M37's general-lattice bound (demoted to M37-C1 at FS-71);
+D9 `plans/FIELD-WALL-THEOREM.md` Prop. 6.4 (FS36-T1); D10 row 98's field clause with one embedding's `λ_e` (FS-91's second reading); D11
+Theorem C's "more generally a number field with no real place" (FS86-VD-7); D12 FS86-Cx-C11's single-annihilator "iff" (retracted);
+D13 Lemma R's scope (FS-86, CL2); D14 FS-86 plan §0.4's side claim at ℚ(√11); D15 M3's cylinder claim
+(row 110; G50's M3 instance).
+
+**The M deaths:** M1 G54 as minted, slack read as free (row 87); M2 G61's first reading (its demotion records); M3 G61's
+"COARSE" lattices (FS-61's census); M4 G61's "T4 … is unproved: no proof and no route to one" (row 82); M5–M7 FS-61's `d mod 8`,
+local-bound and character-mean readings (row 74); M8 G65's "every ball at degree ≥ 14 decides"; M9 G65's degree-18 prediction, "lost on
+both halves"; M10 G65's three cost predictors (counted once); M11 FS-70's fan-gap-classifies prediction (G69); M12 FS-66's "must beat the
+last instrument's reading" (G66); M13 FS-53's bias-corrected growth law (row 69); M14 FS-73's "no periodic three-colouring" at `N ≤ 20`
+(G21); M15 FS-79's one-period census of `L21cc6506` (G21); M16 G56's "+1 over the spectral floor"; M17 G74's disc-plus-torsion reading
+(fired at one prime, rows 97, 102).
+
+**The M survivors:** S1 the local–global conjecture (G48; minted on six instances; every exposed prediction since met — rows 73, 99,
+121, 123); S2 G59's `c ≲ 0.93` (its killing test at 19 closed from the refusing side, `α(Γ₁₉) ≤ 77`); S3 G65's hardness peak (the re-aim
+at degree 14 refused five new fields). **The X death:** FS85-A1, "`η^{±3} ∉ Λ`" in row 78 and FS73-T6. **Provenance not read (3):** P-D3
+(FS73-T3), FS-53's P3, M3's A-Kq plain-quotient clause.
+
+**What the counts support.** The dichotomy holds in its lopsided form, not in its "every one" form. Every death, D, M or X, was killed
+by a derivation, an exact computation or counterexample, a registered replication or test, or a review — none by a reading of a
+measurement alone; and each measurement-first survivor had since passed a test that could have killed it, or been derived — G30's own rule
+at work.
+
 ## G46 — Recognize the classical theory first
 
 *F1, from G46, cut in `34464cba` (2026-09-13), after “…the one that cannot round off.”:*

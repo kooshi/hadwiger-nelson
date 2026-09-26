@@ -167,3 +167,39 @@ claim died about once in forty, and each death was one derivation's step caught 
 counterexample; a measurement-first reading died about six times in seven, and the few that survived had been bought afterwards by a
 registered test or a derivation — which is G30's own rule ("a conclusion is bought by a derivation or a pre-registered replication").
 Caveat (G21): the population is the corpus of record; the plans' own scorecards were read only where the corpus pointed to them.
+
+## Stage 3 — SAVED (G30's sentence rewritten; the table to `plans/GROKKING-INSTANCES.md` §G30; gates)
+
+**Correction to stage 2, made here:** stage 2 says the three measurement-first survivors were each bought "by a registered test or a
+derivation". S3 (G65's re-aim at degree 14) was a test that could have failed; I did not read whether it was registered. The wording
+carried forward is "a test it could have failed, or a derivation".
+
+**`CLAUDE.md`, G30 only — two edits.**
+
+1. The tally sentence. Old: "Sorted by provenance, the record is close to a clean dichotomy: **derived from structure first, then
+   measured — survived, every one**; **measured first, then interpreted — died, every one** (the two lists: `plans/GROKKING-INSTANCES.md`
+   §G30) — now 8-for-8 against the measurement-first column's 0-for-10." New: "Sorted by provenance — three times, the last over
+   2026-09-05 to 2026-09-26 (the lists, the counting rule and the counts: `plans/GROKKING-INSTANCES.md` §G30) — the record is lopsided in
+   one direction: **derived from structure first — survived, all but a few**, and each that died was one derivation's step, caught by
+   another derivation, a review or an exact counterexample; **measured first, then interpreted — died, all but a few**, and each that
+   survived had been bought afterwards by a test it could have failed or by a derivation." Dated, so it stays true without upkeep; no count
+   in `CLAUDE.md` (one home per fact: the counts live in GI §G30).
+2. The falsifier's upkeep clause. Old: "— but the tally is falsifiable and should be re-sorted at every tenth milestone." New: "— but the
+   tally is falsifiable: by a measurement-first reading that survives with neither a registered test nor a derivation behind it, or by
+   derivation-first claims dying at the measurement-first rate." Everything before the dash kept word for word ("*Falsifier: none
+   needed; like G21 this is a methodological invariant and it fails only by being ignored"); the reasoning, the failure modes and the
+   ladder untouched.
+
+**Judgment call, flagged for the owner:** the brief asks both "keep G30's … killing test word for word" and "remove the 're-sort every
+tenth milestone' obligation", which sit in one sentence. I kept the killing test's words and replaced only the obligation, with a
+falsifier that fires on an event, not a schedule.
+
+**`plans/GROKKING-INSTANCES.md` §G30:** a new subsection "The tally, re-sorted 2026-09-26 (job G2)" at the end of §G30 — Kooshi's
+words, the earlier sorts, period, population, counting rule, the count table, the D and M deaths, the M survivors, the X death, what the
+counts support. Four verbatim quotes of dead claims were first copied there and raised `--dupes` from 10 to 14 (each already quoted in
+its `CLAUDE.md` demotion record); they were replaced by pointers to those records, and two phrasings of mine that repeated `CLAUDE.md`'s
+new sentence were reworded.
+
+**Gates (exit statuses read directly):** `claude_md_fact_audit.py --base b559e820` PASS (0 failures; "8-for-8" and "0-for-10" live in
+GI §G30's pre-cut text); `--dupes` 10 (baseline 10); `fs71_ledger_b_check.py --strict` PASS; `bib_audit.py` exit 0; `check_architecture.py`
+PASS; `CLAUDE.md` 291,894 bytes.

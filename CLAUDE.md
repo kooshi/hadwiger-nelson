@@ -571,10 +571,11 @@ unit-vector group (G80), with no forcer.
   on the cell family in either direction. Killing test: a scale with χ < 7, or a bounded refuting family whose defect tends
   to zero.*
 * **G30 — Measurement generates; derivation kills. [method]** A measurement buys a candidate pattern; a
-  conclusion is bought by a derivation or a pre-registered replication on fresh objects. Sorted by provenance, the record is
-  close to a clean dichotomy: **derived from structure first, then measured — survived, every one**; **measured first, then
-  interpreted — died, every one** (the two lists: `plans/GROKKING-INSTANCES.md` §G30) — now 8-for-8 against the measurement-first
-  column's 0-for-10. The rule this yields is NOT "measure less" — every derivation above began life as a pattern somebody noticed in
+  conclusion is bought by a derivation or a pre-registered replication on fresh objects. Sorted by provenance — three times, the
+  last over 2026-09-05 to 2026-09-26 (the lists, the counting rule and the counts: `plans/GROKKING-INSTANCES.md` §G30) — the record
+  is lopsided in one direction: **derived from structure first — survived, all but a few**, and each that died was one
+  derivation's step, caught by another derivation, a review or an exact counterexample; **measured first, then interpreted — died,
+  all but a few**, and each that survived had been bought afterwards by a test it could have failed or by a derivation. The rule this yields is NOT "measure less" — every derivation above began life as a pattern somebody noticed in
   a measurement, and the quadrature and stacking laws were derived precisely because earlier censuses had shown where to look
   (Kooshi's correction, the load-bearing half: *"the interesting patterns that become intuited and derived show up first from
   measurement, so it's a catch-22."*). Prefer measurements that turn a DIAL (a parameter whose behaviour is informative in both
@@ -614,8 +615,9 @@ unit-vector group (G80), with no forcer.
   torus), and the classical tool (Woodall/Fischer additive colourings) became visible the moment the object was named. *Rule:
   before spending days of compute on a conjecture, write it for an outside reader in its native mathematical vocabulary; the
   write-up is a derivation attempt in disguise, and it is cheaper than one census.* *Falsifier: none needed; like G21 this is a
-  methodological invariant and it fails only by being ignored — but the tally is falsifiable and should be re-sorted at every
-  tenth milestone.*
+  methodological invariant and it fails only by being ignored — but the tally is falsifiable: by a measurement-first reading
+  that survives with neither a registered test nor a derivation behind it, or by derivation-first claims dying at the
+  measurement-first rate.*
 * **G31 — No unit-distance object we hold, built or found, carries a pair compulsion at its top rung. [kernel on the
   sealed objects (row 66) and for the 1581's arity bracket; measured, complete at arity 2, on the 6-open ones]** **On
   sealed objects the arity-2 emptiness is a theorem**: Heule-510's `Forces ↔ =` and `Separated ↔ Adj` at five colours
