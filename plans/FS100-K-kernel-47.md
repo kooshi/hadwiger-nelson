@@ -460,3 +460,51 @@ below]. `exists_invariantColouring : (X4 F).Nonempty → Nonempty (InvariantColo
   the owner's to have checked. **G30 item 5 in a new costume:** a skeleton leaf is a claim, and a `sorry` at a false leaf proves the
   wrong theorem for free. X11K's §Stage 3 read the headline aloud for `F = ℚ(√47)`, where it is right; the general `F` of the
   composition lemmas was never read aloud.
+
+## X11K3 Stage 3 — SAVED (L1 repaired and named; the whole chain and the every-real headline gated)
+
+**L1 was not proved; it was restated true and named** (M2's `RealAlgebraicDescent` precedent), which let everything above it leave
+the skeleton. `SpectralChain.InvariantMeasureOnClosed F`: "every nonempty closed measurable set of colourings of `ℤ[U]`, stable
+under the shifts and rotations, carries a probability measure invariant under both" — amenability of the solvable group
+`ℤ[U] ⋊ U` (Markov–Kakutani twice), **true for every `F`**, in the classical theorem's own terms, and not implied by the headline's
+conclusion (it speaks of every closed invariant `K`, e.g. `K = univ`). Proved around it: `isClosed_X4`, `measurableSet_X4` (needs
+countable `ℤ[U]`), `shift_mem_X4`, `rot_mem_X4`, `exists_invariantColouring` (L1 from the named input, countable `ℤ[U]`),
+`countable_unitRing` (`ℤ[U]` countable when `F` is; over a number field by `Finsupp.Countable.of_moduleFinite`). The compositions
+`Interface.x4_eq_empty` and `Interface.five_le_chromaticNumber` now carry `[Countable (unitRing F)]` and `hL1` — so the false
+general statement of stage 2's finding is gone. **Plant:** deleting `[Countable (unitRing F)]` from `measurableSet_X4` is refused
+(instance failure at `MeasurableSet.iInter`; scratch copy). **L1 itself:** price unchanged, X11K's 100–200k (Mathlib has neither
+Markov–Kakutani nor invariant measures for amenable actions); not re-priced — no leaf of it was attempted.
+
+**Now in `Proofs/`** (the skeleton `data/fs100/x11k/skeleton/` is retired; git has it):
+- `Proofs/HadwigerNelson/SpectralChain.lean` — the whole chain: `posDef_corr`, node L3, SP-Cor, `five_le_chromaticNumber`, and
+  **`min_localBound_five_le_chromaticNumber`**, with `..._of_totallyReal` and `chromaticNumber_eq_localBound`.
+- `Proofs/HadwigerNelson/Instances/SqrtFortySeven.lean` — adds `countable_F47` and
+  `chromaticNumber_planeOver_sqrt47_eq_five_of_chain` (`χ(ℚ(√47)²) = 5` given the chain's named hypotheses).
+
+**The headline, read aloud against the informal claim.** *Lean* (`SpectralChain.min_localBound_five_le_chromaticNumber`): "for every
+real number field `F` (a subfield of `ℝ` with `[NumberField F]`): if Herglotz–Bochner holds on `ℤ[U]`, the classical invariant-measure
+theorem holds for closed invariant sets of colourings of `ℤ[U]`, and some interface `(E, TA, h)` satisfies the count (for totally real
+`F`, and for `F` with a complex place), A⁺ from R88-TCA, R-U, MR in the class `TCA F`, CLS's `L(F) ≥ 5 ⟹ TCA F`, and row 99's
+`L(F) ≤ 4 ⟹ L(F) ≤ χ(F²)`, then `min(L(F), 5) ≤ χ(F²)`." *Informal* (X23D-COR): "given MR and row 99: `χ(F²) ≥ min(L(F), 5)`, every
+real number field outside the exception." They differ as X11K's §Stage 3 items 1–2 and §X11K2 Stage 1R record (the interface is
+abstract: the Lean certifies the composition, and that the arithmetic `E`, `T + A`, entropy satisfy the `Prop`s is the [hand]
+lemmas' content; `APlus0` and `R88TCA` quantify over invariant colourings and are implied by the conclusion, their content being
+their derivations; the `S_m` caveat), plus the two classical inputs now named. Nothing in it is a `sorry`.
+
+**The gate** (final state; logs `data/fs100/x11k/x11k3-build3.log`, `x11k3-axioms.log`, `x11k3-vacuity.log`):
+- build: exit 0, **180 of 180 batches, 0 modules with warnings**.
+- `./scripts/axioms.sh`: exit 0, **1236 clean, 11 axiom-free, 5 declared purchases**; every new entry `[propext, Classical.choice,
+  Quot.sound]`, the headline and the ℚ(√47) corollary included.
+- `./scripts/vacuity.sh`: exit 0, **`declarations=7438 refutations-skipped=313`, `sites=279 vacuous=0 stale=0 declared=3
+  witnessed=17 generic=257 unknown=2`, rows: none changed**.
+- `tools/check_architecture.py`: PASS (178 rows, 0 import mismatches). Zero `sorry` in `Proofs/`'s new modules.
+
+## X11K3 — the report table
+
+| layer | what | where |
+|---|---|---|
+| **in `Proofs/`, unconditional** | `χ(ℚ(√47)²) ≤ 5` (`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`) | `Instances/SqrtFortySeven` |
+| **in `Proofs/`, conditional on named hypotheses** | the every-real headline `min(L(F), 5) ≤ χ(F²)` and `χ(F²) = L(F)` (`L ≤ 5`, totally real, given `hUpper`); `χ(ℚ(√47)²) = 5` (`..._eq_five_of_chain`); SP-Cor; nodes M, L0, L1-from-input, L3; `posDef_corr` | `SpectralChain`, `Instances/SqrtFortySeven` |
+| **skeleton** | nothing — retired | — |
+| **named classical inputs** | `BochnerHerglotz` (weeks: compactness of the dual, Stone–Weierstrass on it); `InvariantMeasureOnClosed` (100–200k: Markov–Kakutani) | hypotheses |
+| **named project lemmas ([hand])** | the count (`hTR`, `hCX`), A⁺ from R88-TCA, R-U, MR in the class (PE-2 over EL2021, EF_F⁺), CLS, row 99, `hUpper` (row 57's gap) | hypotheses; each months (entropy, spectral theory, N1's adelic dual), `hUpper` ~40–80k |

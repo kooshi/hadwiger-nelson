@@ -1,0 +1,234 @@
+slot: admitted env: mem 60 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20260926T120257Z-1315093.log
+==> up-to-date check: exit 3 after 2s (3 means something needs building) — walking the batches
+==> 179 batches of at most 10 modules, capped at 60G
+==> [1/179] 10 modules  07:02:59
+==> [2/179] 5 modules  07:03:00
+==> [3/179] 7 modules  07:03:01
+==> [4/179] 10 modules  07:03:02
+==> [5/179] 10 modules  07:03:02
+==> [6/179] 10 modules  07:03:03
+==> [7/179] 10 modules  07:03:04
+==> [8/179] 10 modules  07:03:04
+==> [9/179] 10 modules  07:03:05
+==> [10/179] 10 modules  07:03:06
+==> [11/179] 10 modules  07:03:07
+==> [12/179] 1 modules  07:03:07
+==> [13/179] 10 modules  07:03:08
+==> [14/179] 10 modules  07:03:09
+==> [15/179] 10 modules  07:03:10
+==> [16/179] 10 modules  07:03:10
+==> [17/179] 5 modules  07:03:11
+==> [18/179] 10 modules  07:03:12
+==> [19/179] 10 modules  07:03:13
+==> [20/179] 3 modules  07:03:14
+==> [21/179] 10 modules  07:03:15
+==> [22/179] 10 modules  07:03:16
+==> [23/179] 10 modules  07:03:17
+==> [24/179] 10 modules  07:03:18
+==> [25/179] 10 modules  07:03:19
+==> [26/179] 10 modules  07:03:20
+==> [27/179] 10 modules  07:03:21
+==> [28/179] 10 modules  07:03:22
+==> [29/179] 10 modules  07:03:23
+==> [30/179] 10 modules  07:03:24
+==> [31/179] 10 modules  07:03:25
+==> [32/179] 10 modules  07:03:25
+==> [33/179] 10 modules  07:03:26
+==> [34/179] 10 modules  07:03:27
+==> [35/179] 10 modules  07:03:28
+==> [36/179] 10 modules  07:03:29
+==> [37/179] 10 modules  07:03:30
+==> [38/179] 10 modules  07:03:31
+==> [39/179] 10 modules  07:03:32
+==> [40/179] 10 modules  07:03:33
+==> [41/179] 10 modules  07:03:34
+==> [42/179] 1 modules  07:03:35
+==> [43/179] 10 modules  07:03:35
+==> [44/179] 10 modules  07:03:37
+==> [45/179] 10 modules  07:03:38
+==> [46/179] 10 modules  07:03:39
+==> [47/179] 10 modules  07:03:40
+==> [48/179] 10 modules  07:03:42
+==> [49/179] 10 modules  07:03:43
+==> [50/179] 10 modules  07:03:44
+==> [51/179] 10 modules  07:03:45
+==> [52/179] 10 modules  07:03:47
+==> [53/179] 10 modules  07:03:48
+==> [54/179] 10 modules  07:03:49
+==> [55/179] 10 modules  07:03:50
+==> [56/179] 10 modules  07:03:52
+==> [57/179] 10 modules  07:03:53
+==> [58/179] 10 modules  07:03:54
+==> [59/179] 10 modules  07:03:55
+==> [60/179] 10 modules  07:03:57
+==> [61/179] 10 modules  07:03:58
+==> [62/179] 10 modules  07:03:59
+==> [63/179] 10 modules  07:04:00
+==> [64/179] 10 modules  07:04:02
+==> [65/179] 10 modules  07:04:03
+==> [66/179] 10 modules  07:04:04
+==> [67/179] 10 modules  07:04:05
+==> [68/179] 10 modules  07:04:07
+==> [69/179] 10 modules  07:04:08
+==> [70/179] 10 modules  07:04:09
+==> [71/179] 10 modules  07:04:10
+==> [72/179] 10 modules  07:04:12
+==> [73/179] 10 modules  07:04:13
+==> [74/179] 10 modules  07:04:14
+==> [75/179] 10 modules  07:04:15
+==> [76/179] 10 modules  07:04:17
+==> [77/179] 10 modules  07:04:18
+==> [78/179] 10 modules  07:04:19
+==> [79/179] 10 modules  07:04:20
+==> [80/179] 10 modules  07:04:22
+==> [81/179] 10 modules  07:04:23
+==> [82/179] 10 modules  07:04:24
+==> [83/179] 10 modules  07:04:25
+==> [84/179] 10 modules  07:04:27
+==> [85/179] 10 modules  07:04:28
+==> [86/179] 10 modules  07:04:29
+==> [87/179] 10 modules  07:04:30
+==> [88/179] 10 modules  07:04:32
+==> [89/179] 10 modules  07:04:33
+==> [90/179] 10 modules  07:04:34
+==> [91/179] 10 modules  07:04:35
+==> [92/179] 10 modules  07:04:37
+==> [93/179] 10 modules  07:04:38
+==> [94/179] 10 modules  07:04:39
+==> [95/179] 10 modules  07:04:40
+==> [96/179] 10 modules  07:04:42
+==> [97/179] 10 modules  07:04:43
+==> [98/179] 10 modules  07:04:44
+==> [99/179] 10 modules  07:04:45
+==> [100/179] 10 modules  07:04:46
+==> [101/179] 10 modules  07:04:48
+==> [102/179] 10 modules  07:04:49
+==> [103/179] 10 modules  07:04:50
+==> [104/179] 10 modules  07:04:51
+==> [105/179] 10 modules  07:04:53
+==> [106/179] 10 modules  07:04:54
+==> [107/179] 10 modules  07:04:55
+==> [108/179] 10 modules  07:04:56
+==> [109/179] 10 modules  07:04:57
+==> [110/179] 10 modules  07:04:59
+==> [111/179] 10 modules  07:05:00
+==> [112/179] 10 modules  07:05:01
+==> [113/179] 10 modules  07:05:02
+==> [114/179] 10 modules  07:05:04
+==> [115/179] 10 modules  07:05:05
+==> [116/179] 10 modules  07:05:06
+==> [117/179] 10 modules  07:05:07
+==> [118/179] 10 modules  07:05:08
+==> [119/179] 10 modules  07:05:10
+==> [120/179] 10 modules  07:05:11
+==> [121/179] 10 modules  07:05:12
+==> [122/179] 10 modules  07:05:13
+==> [123/179] 10 modules  07:05:15
+==> [124/179] 10 modules  07:05:16
+==> [125/179] 10 modules  07:05:17
+==> [126/179] 10 modules  07:05:18
+==> [127/179] 10 modules  07:05:19
+==> [128/179] 10 modules  07:05:21
+==> [129/179] 10 modules  07:05:22
+==> [130/179] 10 modules  07:05:23
+==> [131/179] 10 modules  07:05:24
+==> [132/179] 10 modules  07:05:25
+==> [133/179] 10 modules  07:05:27
+==> [134/179] 10 modules  07:05:28
+==> [135/179] 10 modules  07:05:29
+==> [136/179] 10 modules  07:05:30
+==> [137/179] 10 modules  07:05:31
+==> [138/179] 10 modules  07:05:33
+==> [139/179] 10 modules  07:05:34
+==> [140/179] 10 modules  07:05:35
+==> [141/179] 10 modules  07:05:36
+==> [142/179] 10 modules  07:05:37
+==> [143/179] 10 modules  07:05:39
+==> [144/179] 10 modules  07:05:40
+==> [145/179] 10 modules  07:05:41
+==> [146/179] 10 modules  07:05:42
+==> [147/179] 10 modules  07:05:43
+==> [148/179] 10 modules  07:05:45
+==> [149/179] 10 modules  07:05:46
+==> [150/179] 10 modules  07:05:47
+==> [151/179] 10 modules  07:05:48
+==> [152/179] 10 modules  07:05:50
+==> [153/179] 10 modules  07:05:51
+==> [154/179] 10 modules  07:05:52
+==> [155/179] 10 modules  07:05:53
+==> [156/179] 10 modules  07:05:54
+==> [157/179] 10 modules  07:05:56
+==> [158/179] 10 modules  07:05:57
+==> [159/179] 10 modules  07:05:58
+==> [160/179] 10 modules  07:05:59
+==> [161/179] 10 modules  07:06:01
+==> [162/179] 10 modules  07:06:02
+==> [163/179] 10 modules  07:06:03
+==> [164/179] 10 modules  07:06:04
+==> [165/179] 10 modules  07:06:05
+==> [166/179] 10 modules  07:06:06
+==> [167/179] 10 modules  07:06:07
+==> [168/179] 5 modules  07:06:08
+==> [169/179] 10 modules  07:06:09
+==> [170/179] 8 modules  07:06:11
+==> [171/179] 7 modules  07:06:12
+==> [172/179] 10 modules  07:06:13
+==> [173/179] 8 modules  07:06:15
+==> [174/179] 9 modules  07:06:17
+==> [175/179] 9 modules  07:06:19
+==> [176/179] 5 modules  07:06:20
+==> [177/179] 8 modules  07:06:21
+    rebuilt: Instances.SqrtFortySeven (2.9s)
+==> [178/179] 3 modules  07:06:25
+    ⚠ [3291/3291] Built Proofs.HadwigerNelson.SpectralChain (2.3s)
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:85:2: missing doc string for public field InvariantColouring.μ
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:86:2: missing doc string for public field InvariantColouring.isProb
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:87:2: missing doc string for public field InvariantColouring.carried
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:88:2: missing doc string for public field InvariantColouring.shift_inv
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:89:2: missing doc string for public field InvariantColouring.rot_inv
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:120:2: missing doc string for public field Interface.E
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:121:2: missing doc string for public field Interface.TA
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:122:2: missing doc string for public field Interface.measurableSet_E
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:123:2: missing doc string for public field Interface.measurableSet_TA
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:124:2: missing doc string for public field Interface.TA_subset_E
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:125:2: missing doc string for public field Interface.rot_preimage_E
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:126:2: missing doc string for public field Interface.h
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:258:2: missing doc string for public field StablePrime.P
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:259:2: missing doc string for public field StablePrime.isMaximal
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/SpectralChain.lean:260:2: missing doc string for public field StablePrime.comap_conj
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    rebuilt: SpectralChain (2.3s)
+==> [179/179] 1 modules  07:06:28
+    rebuilt: Proofs (1.5s)
+==> build: OK — 179 of 179 batches, 3 module(s) rebuilt, 1 module(s) with warnings, 3m32s
+    full output: build/gate/build/20260926T120257Z-1315093.log

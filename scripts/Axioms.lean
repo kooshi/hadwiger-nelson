@@ -1807,6 +1807,27 @@ the interface, measurability on `R̂`, and the local bound `L(F)` with Mathlib's
 #print axioms HadwigerNelson.SpectralChain.fieldI_conj
 #print axioms HadwigerNelson.SpectralChain.toFieldI_surjective
 #print axioms HadwigerNelson.SpectralChain.StablePrime.le_comap
+#print axioms HadwigerNelson.SpectralChain.tetra_eq
+#print axioms HadwigerNelson.SpectralChain.tetra_comm
+#print axioms HadwigerNelson.SpectralChain.abs_tetra_le
+#print axioms HadwigerNelson.SpectralChain.corr_sub
+#print axioms HadwigerNelson.SpectralChain.posDef_corr
+#print axioms HadwigerNelson.SpectralChain.rotInv_of_isTraceSpectral
+#print axioms HadwigerNelson.SpectralChain.X4_eq_iInter
+#print axioms HadwigerNelson.SpectralChain.setOf_pair_eq
+#print axioms HadwigerNelson.SpectralChain.isClosed_X4
+#print axioms HadwigerNelson.SpectralChain.measurableSet_X4
+#print axioms HadwigerNelson.SpectralChain.shift_mem_X4
+#print axioms HadwigerNelson.SpectralChain.rot_mem_X4
+#print axioms HadwigerNelson.SpectralChain.exists_invariantColouring
+#print axioms HadwigerNelson.SpectralChain.countable_unitRing
+#print axioms HadwigerNelson.SpectralChain.Interface.x4_eq_empty
+#print axioms HadwigerNelson.SpectralChain.Interface.five_le_chromaticNumber
+#print axioms HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber
+#print axioms HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal
+#print axioms HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound
+#print axioms HadwigerNelson.SqrtFortySeven.countable_F47
+#print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain
 
 #eval IO.println "=== PURCHASED ==="
 

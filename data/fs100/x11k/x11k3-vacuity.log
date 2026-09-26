@@ -1,10 +1,10 @@
 slot: admitted vacuity.sh: mem 40 GiB (hard cap), cpus 0,1,2,3
-==> vacuity: this run's full output: build/gate/vacuity/20260926T121032Z-1353678.log
-    scanned: declarations=7411  refutations-skipped=311
+==> vacuity: this run's full output: build/gate/vacuity/20260926T122608Z-1388046.log
+    scanned: declarations=7438  refutations-skipped=313
     sites:   sites=279  vacuous=0  stale=0  declared=3  witnessed=17  generic=257  unknown=2
     evidence: 4 emptiness proof(s), 41 witness(es)
-    RECORDED COUNTS ARE STALE in scripts/vacuity-baseline.txt's header — update it: declarations 7279 → 7411, refutations-skipped 309 → 311
-    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 7279 → 7411, refutations-skipped 309 → 311
+    RECORDED COUNTS ARE STALE in scripts/vacuity-baseline.txt's header — update it: declarations 7279 → 7438, refutations-skipped 309 → 313
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 7279 → 7438, refutations-skipped 309 → 313
     --- witnessed (17), with the evidence behind each ---
     WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
     WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
@@ -24,10 +24,10 @@ slot: admitted vacuity.sh: mem 40 GiB (hard cap), cpus 0,1,2,3
     WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
     WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
     --- changes since the previous complete run ---
-    previous: build/gate/vacuity/20260926T060436Z-903039.log
-    counts: declarations 7279 → 7411, refutations-skipped 309 → 311
+    previous: build/gate/vacuity/20260926T121032Z-1353678.log
+    counts: declarations 7411 → 7438, refutations-skipped 311 → 313
     rows: none changed
-    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20260926T121032Z-1353678.log
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20260926T122608Z-1388046.log
     --- declared empty, by design (3) ---
     DECLARED HadwigerNelson.core122_plane :: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content.
     DECLARED HadwigerNelson.core9_plane :: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous.
@@ -36,4 +36,4 @@ slot: admitted vacuity.sh: mem 40 GiB (hard cap), cpus 0,1,2,3
     UNKNOWN HadwigerNelson.hexShell_plane5
     UNKNOWN HadwigerNelson.hexShell_plane6
 ==> vacuity: OK
-    full output: build/gate/vacuity/20260926T121032Z-1353678.log
+    full output: build/gate/vacuity/20260926T122608Z-1388046.log
