@@ -388,3 +388,50 @@ still waits on a blind confirmation (X01V stage 4).
 
 ### Would have searched here (stage 8)
 - None.
+
+## Stage 9 — wave 3: which wanted posters the new tools move (resumed 06:17) — SAVED
+
+**State read** (the reports in `data/crunch-2026-09-26-x2x3/reports/`):
+- EF_F⁺ holds: X01D, then X01V at its stage 4 (UZ withdrawn), then X12B blind by its own route (Lemma Z).
+- PE-2 is TRUE given EL2021 Thm 1.2 through (★) (X02D, X02V); PE-1 as stated is FALSE.
+- X05V re-derived SP-Cor blind.
+- X03D: FL-1 and FL-2 are GAP at QTCA; ED-2 is FALSE (X13R: VALID).
+- `χ(ℚ(√47)²) = 5` [hand] was announced at 06:08.
+
+**Frame items sent to the planner (about 06:20), ranked:**
+- **F1. The posters are one theorem.** The inputs to SP-Cor (N1, N2, R-U, SI-1…4, A⁺) are field-general except T-C(A) at S=∅. The
+  lead ask has two halves:
+  - (a) SP-Cor(F) for every real `F` in the class. Named risk: A⁺'s archimedean step at `n = [F:ℚ]` real places, where `Λ = 0.4028 > 1/3`.
+  - (b) Class(F): T-C(A) at S=∅ ⟺ `L(F) ≥ 5`, from held results. Named risks: `q = 27`, `U_Q` with `Q ≥ 64`, ramified stable places,
+    the archimedean part.
+  - Together: `χ(F²) ≥ min(L(F), 5)` for every real number field, which is the main clause through `L = 5`.
+  - Degree 2 is already this: row 117 + K0 + MR. It gives every real quadratic field, **ℚ(√167) ≥ 5** included; the only extra owed is a
+    blind check of K0.
+- **F2. ℚ(√167) at six does not move.** That statement implies `χ(ℝ²) ≥ 6`, so it is rung D. What transfers is the reduction **SEL_k**:
+  MR + FL-K ⟹ every `k`-colouring of `F²` induces one whose spectral measure is carried by `E`. At `k = 5` over ℚ(√167) this becomes
+  row 110 / FS-96's window question at `{∞, 23, 43, …}`, together with a real-place part of `χ_B(ℝ²)` type. Grade it as a reduction.
+- **F3. Row 88 / T-B1.** Only the conditional moves: "row 88 ⟺ T-B1" becomes unconditional. Transience is outside the reach of the
+  invariant-measure tools. At most one 20-minute no-go note.
+- **F4. ℚ(√3,√5).** Exact check (sympy, Legendre symbols; the ban allows it). Below 200 the stable odd places are
+  **11, 59, 71, 131, 179, 191**. The primes 7, 19, 23, 31, 43, 47 are **not** stable, since their residue degree is 2. 3 has residue
+  field `𝔽₉`, and no dyadic place is stable, since 15 ≡ 7 mod 8. So the field is plausibly in the class, modulo the archimedean step at
+  `n = 4`. If that holds, `χ = 5` (`L = 5` via 11).
+- **F5. Prior-art gate before "ours".** EL2021 §2 and §4 ("an adelic version of the positive entropy theorem") may already hold PE-2
+  for `R̂`. Sataev 1975 may predate EF.
+
+hunch: main-clause-through-five
+  claim: SP-Cor(F) and Class(F) both hold for every real number field, so `χ(F²) ≥ min(L(F), 5)` in general
+  basis: derived (field-generality of X05V's P0–P8 inputs) and analogy
+  falsifier: A⁺ failing at `n ≥ 3` real places, or a stable-place target with `χ ≥ 5` and all-levels four-colour ratio `≥ 1/4`
+  registered: 2026-09-26
+  status: open — about 45 %. Degree 2 alone: about 80 %, since only K0's blind check is owed.
+
+hunch: six-at-167-does-not-move
+  claim: no wave-3 job proves `χ(ℚ(√167)²) ≥ 6`; the best transfer is the reduction SEL_5
+  basis: derived (`χ(ℚ(√167)²) ≥ 6` ⟹ `χ(ℝ²) ≥ 6`)
+  falsifier: a verified proof, which would be rung D itself
+  registered: 2026-09-26
+  status: open — about 99 %
+
+### Would have searched here (stage 9)
+- None: the ℚ(√3,√5) check was exact Legendre symbols.
