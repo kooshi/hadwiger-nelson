@@ -1,0 +1,7 @@
+(1) |C| = 8; monochromatic edges: 0
+(2) gapped vertices: 14; (theta*7, missing colours) classes: [(0, (3,)), (5, (3,))]
+(3) |Z| = 7; Z independent: True; every Z vertex gapped with missing colour 3: True
+(4) edges whose F2 support sets meet: 0
+(5) |W| = 14 (theta*7 in [0, 5]); directed edges inside W: 28; colour 3 absent on every closed neighbourhood of W: True
+VERDICT: all five checks pass
+exit 0

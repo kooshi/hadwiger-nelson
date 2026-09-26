@@ -1,0 +1,7 @@
+(1) |C| = 8; monochromatic edges: 0
+(2) gapped vertices: 14; (theta*7, missing colours) classes: [(0, (3,)), (5, (3,))]
+(3) |Z| = 7; Z independent: True; every Z vertex gapped with missing colour 2: False
+(4) edges whose F2 support sets meet: 56
+(5) |W| = 14 (theta*7 in [0, 5]); directed edges inside W: 28; colour 3 absent on every closed neighbourhood of W: True
+FAIL: (3) Z is not an independent set of gapped vertices with the declared missing colour; (4) F2's support map is not disjoint on every edge (PLANT=2)
+exit 1
