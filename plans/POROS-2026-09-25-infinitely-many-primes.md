@@ -105,3 +105,171 @@ four-colouring is local at a tight place" — which is G76's locality, so T-C's 
 - Would have searched a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (the fractional route). Not run; its price is corrected in Stage 4.
 - Would have run a `Θ₄` tree and a colouring finder for a four-colourable unit-distance lattice with `Θ₄ = ∅` (EI-1's falsifier, Stage 4). Not run (ban); posed.
 - **One exact check of seconds** (the ban's edge; a derivation fixed the set): the band-`k` characters of `Γ₇` at level one, all 48 non-zero characters (`tools/crunch_j36_band7.py` → `data/crunch-2026-09-25/j36/band7.out`): 0 at `k = 3`, **8 at `k = 4`**, 8 at `k = 5`. The plant (`PLANT=1`, the band replaced by `[0, 1)`) fires: 48 at every `k`, exit 1. Use: `Γ₇` does not falsify EI-1 (Stage 4).
+
+## Stage 3 — SAVED: the examination (F1–F8)
+
+*Everything here is advice: constructions in the hypothetical mood, each graded. Arguments marked "[hand, one mind, sketch]" are mine,
+written to be re-derived by the domain's own standard (a derivation job and a blind check), never to be cited as proved. Notation as in
+the plan's §S.0: `R = ℤ[U]`, `σ` the trace spectral measure of the tetrahedral embedding `g`, `E_S = T + A + Fin_S`, and `E = ⋃_S E_S`
+over finite sets `S` of split places.*
+
+### F1. What it is, in its discipline's words
+
+**T-C(A) says: no translation-invariant random proper four-colouring of ℚ(√47)'s unit-distance graph is continuous in probability for
+the topology of any locally compact completion of `R`.** The completions in question are `G_S = (L ⊗ ℝ) × ∏_{stable} O_v × ∏_{v∈S} L_v`.
+Equivalently: the stationary (Borel) independence ratio of each `G_S` is `< 1/4`, a fractional statement (J35's words, the PA-close stage 4).
+Against the brief's three candidate names:
+- **Not the Kronecker factor.** Discrete spectrum may read infinitely many places harmlessly: a character colouring whose characters
+  each read one split place lives on a compact infinite product, and `T + A + Fin_S` already reads *all* stable places, infinitely many,
+  because their product is compact. The finding is about **split** places only.
+- **Not zero entropy.** J28D §5.1 finds no entropy mechanism in the hypothesis, and I find none either.
+- **Local compactness, yes.** The finite sets `S` are exactly the ones for which `R` has a locally compact completion that is not
+  discrete. With every split place kept, `R` is a lattice of `S`-integers, discrete in its own restricted product. Then "continuous"
+  means nothing, and there is no Haar measure to run Fubini with (J28D §5.1, R1).
+
+So "reads infinitely many primes" means, precisely, **"is not stochastically continuous for any locally compact completion"**.
+
+### F2. The cheapest kill test: "carried by no `T + A + Fin_S`" is cheap wherever gapped colourings exist [hand, one mind; a construction]
+
+Over ℚ(√11) the stable place above 7 has residue plane `Γ₇`, slack at four colours with gapped four-colourings (G54; row 94's field).
+Take such a colouring `γ` of `Γ₇` and an independent set `Z̄ ⊂ Γ₇` of gapped vertices, with `g(z̄)` the missing colour at `z̄`. Let
+`Z = {z ∈ R : z mod 𝔓₇ ∈ Z̄}`, and let `ω` be i.i.d. fair bits on `R`. Put `c_ω(z) = g(z̄)` if `z ∈ Z` and `ω(z) = 1`, and `γ(z̄)`
+otherwise.
+- **It is proper.** No edge joins two points of `Z`, because `Z̄` is independent and every unit vector is non-zero mod `𝔓₇`. A recoloured
+  point takes the one colour missing from its neighbourhood.
+- **It is translation-invariant** once `γ ∘ ρ₇` is averaged over its finite translation orbit.
+- **Its spectral measure charges the infinite-type characters.** The i.i.d. part contributes a component equivalent to Haar measure on
+  `R̂`, and Haar measure gives `E` measure 0: each `E_S` is a σ-compact proper dense subgroup, so it is Haar-null by Steinhaus.
+
+So the *literal* counterexample invariant — a spectral measure carried by no `T + A + Fin_S` — is realised by **noise on a finite-place
+colouring**, at any field with a gap. What T-C(A) really excludes at ℚ(√47) is something else. In this example the noise carries **no
+unit-distance correlation**, and the finite-place colouring `γ ∘ ρ₇` survives as a **factor**: it can be read off `c_ω` by ergodic
+averages over residue classes. F3 shows that this is the whole content.
+
+### F3. The support identity, and T-C(A) and T-C sharpened [hand, one mind, sketch — for a derivation job]
+
+**Lemma SI.** Let `μ` be a translation-invariant random proper four-colouring, and `E′` a Borel subgroup of `R̂` of the form `E_S`. Write
+`𝒜` for the factor σ-algebra of the `τ_S`-continuous vectors. (Bounded continuous vectors are closed under products and truncation, so
+the continuous vectors are `L²(𝒜)`, and they are exactly the vectors whose spectral measure is carried by `E_S` — J28D's C1.) Put
+`p_j(x) = P(c(x) = j | 𝒜)` and `h(x) = E[g(x) | 𝒜] = Σ_j p_j(x) e_j`.
+
+1. For tetrahedral vectors, `⟨Σ p_i e_i, Σ q_j e_j⟩ = (4/3)Σ_i p_i q_i − 1/3 ≥ −1/3`, with equality iff the supports of `p` and `q` are
+   disjoint.
+2. The spectral projections commute with the translations, so for every `u ∈ U`:
+   `−1/3 = E⟨g(0), g(u)⟩ = E⟨h(0), h(u)⟩ + ∫_{R̂∖E_S} χ(u) dσ(χ)`.
+3. Hence **`∫_{R̂∖E_S} Re χ(u) dσ ≤ 0` for every `u`**.
+4. **If it is 0 for every `u`**, the supports of `p(x)` and `p(x+u)` are a.s. disjoint on every edge. Then `c′(x) = min supp p(x)` is an
+   `𝒜`-measurable, translation-equivariant proper four-colouring with spectral measure on `E_S`, and `c(x) ∈ supp p(x)` a.s.
+
+**T-C(A)⁺ (sharpened, no rotation averaging).** Given T-C(A): over ℚ(√47), for every translation-invariant `μ` on `X₄(F)` and every finite
+`S`, some `u ∈ U` has `∫_{R̂∖E_S} Re χ(u) dσ_μ(χ) < 0`. The part of a four-colouring's spectrum that no finite set of places reads must
+itself be **anticorrelated at unit distance**. Having mass there is not enough (F2).
+
+**T-C⁺ (sharpened, type (B)).** Given T-C: over a type-(B) field, every translation-invariant `μ` with `∫_{R̂∖E_S} Re χ(u) dσ_μ ≥ 0` for
+every `u` (some finite `S`) is carried by Pull.
+- *Sketch.* SI (4) gives two `𝒜`-measurable selections, `min supp` and `max supp`. Both are proper colourings with spectrum on `E_S`, so
+  both are pullbacks by T-C: `γ ∘ ρ₄` and `γ′ ∘ ρ₄`.
+- Where they differ at `x`, the neighbours `x + u` must avoid `γ′(x̄)` under `γ`. But `γ` is gap-free (the tight `P₄`, D2-A), and `U` maps
+  onto `S₄`, so some neighbour takes that colour.
+- Hence the supports are a.s. singletons, `c = c′`, and `c` is a pullback.
+
+T-C⁺ is strictly wider than T-C: it admits mass off `E_S`, provided that mass is not anticorrelated at unit distance.
+
+### F4. At type (A) the rotations may be averaged, and then the headline becomes literal [hand, one mind, sketch]
+
+J28D §5.1's objection to averaging over `U` — a weak-* limit can carry mass onto Pull — is **specific to type (B)**. At ℚ(√47), Pull is
+empty. Suppose `X₄ ≠ ∅`. Then `X₄` is compact and invariant under the amenable group `R ⋊ U`, so it carries an `R ⋊ U`-invariant `μ`, and
+`σ_μ` is `U`-invariant, because a rotation about 0 fixes `c(0)`.
+
+**Lemma R-U (recurrence).** Every `U`-invariant finite measure on `R̂` gives `E_S ∖ (T + A)` measure 0, for every finite `S`.
+- The image of `Ĝ_S` is a Borel copy of `Ĝ_S`, `U`-equivariantly (Lusin–Souslin).
+- At a split place `v ∈ S`, take `u = z/z̄` with `(z) = 𝔓_v^h`, where `h` is the class number. Then `u` acts on `L̂_v ≅ F_w²` as
+  `(ξ₁, ξ₂) ↦ (tξ₁, ξ₂/t)` with `|t| ≠ 1`. That action is wandering off 0, so every finite invariant measure there is a point mass at 0.
+
+**Consequences at ℚ(√47).**
+- **R1 is empty for rotation-averaged measures.** R1 is J28D's case "carried by `E` but by no single `E_S`"; by R-U such a measure is
+  carried by `T + A`.
+- **The headline becomes literal.** A four-colouring of ℚ(√47)'s plane, if one exists, has an `R ⋊ U`-invariant measure on its
+  `R ⋊ U`-orbit closure whose `U`-invariant spectral measure satisfies `∫_{R̂∖E} Re χ(1) dσ < 0`. Every character in `R̂ ∖ E` has
+  non-trivial components at infinitely many split places.
+- **Fewer inputs.** The chain uses T-C(A) **only at `S = ∅`**. So C14.2 (c), the split-place lemma (J21-D1-2 at `q = 2`, one mind), drops
+  out of it.
+
+### F5. The colouring-free remainder is Furstenberg's measure question, exactly, at the level of spectral measures [hand, one mind, sketch]
+
+Define **SP** (the sign problem): *is there a `U`-invariant finite positive measure `τ` on `R̂` with `τ(E) = 0` and
+`∫ Re χ(1) dτ(χ) < 0`?* By F3–F4, a "no" proves `χ(ℚ(√47)²) ≥ 5` from T-C(A) at `S = ∅`. **Claim: SP has answer "no" if and only if every
+`U`-invariant finite measure on `R̂` with `τ(E) = 0` is a multiple of Haar measure.** The sketch:
+- ⟸: Haar measure has `τ̂(1) = 0`.
+- ⟹, step 1. A non-Haar `τ` off `E` has `τ̂(r₀) ≠ 0` for some `r₀ ≠ 0`, and the value is real because `−1 ∈ U`.
+- ⟹, step 2. The push-forward by the dual of `x ↦ r₀x` is again `U`-invariant, again off `E`, and has coefficient `τ̂(r₀)` at 1. It stays
+  off `E` because `r₀R` is `τ_S`-open in `R`, of finite index (J28V-7), so `r₀χ ∈ E_S` forces `χ ∈ E_S`.
+- ⟹, step 3. If that coefficient is positive, convolve with the uniform measure on an archimedean circle whose `J₀`-value is negative (`U`
+  acts there by rotations). The result is `U`-invariant, off `E` (because `A + (R̂ ∖ E) ⊆ R̂ ∖ E`), and has a negative mean at 1.
+
+What this means:
+- **At type (A), T-C′'s colouring-free form is the zero-entropy Furstenberg-type rigidity problem for `U` acting on `R̂`, modulo `E`.** It
+  is not a weaker "sign" version of it.
+- The positive-entropy half should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read). Algebraic measures
+  off `E` are Haar: a non-zero `ℤ[U′]`-submodule of `R` has finite index, so its annihilator is torsion.
+- The zero-entropy half is open, as for ×2×3.
+- **So no route through the spectral measure alone can close the remainder without solving a Furstenberg-type conjecture.** This is J28V's
+  C0 remark ("any proof of T-C must use more of the colouring than its pair correlations") promoted from T-C to the remainder.
+
+### F6. One theorem behind several results — a finite-place product principle [reading]
+
+CLG, row 92, J21-RED, T-C and T-C(A) are one statement read on four kinds of object:
+
+> For a colouring of `F²` that factors through a locally compact completion `G_S` (all stable places, the archimedean places, finitely
+> many split places), the connection set is the full product of local circles, by weak approximation. So the colour-class densities
+> obey **the maximum of the local ratios** (Zhang's rule, made stationary), and at a strict tight maximum the colouring is **pulled back**
+> from that one place.
+
+The four kinds of object:
+- CLG: points, i.e. characters. There the closed-set form is band rigidity (Manners's pyjama lemma, M1's gate).
+- Row 92: deterministic Borel windows.
+- J21-RED: windows at five colours.
+- T-C and T-C(A): stationary processes, through continuity in probability.
+
+**The infinite-place remainder, at the single-class level,** is the gap between the finite-place stationary ratio `max_v r_v` and the
+full invariant ratio `ι(F²) = 1/χ_f(F²)` (S1b-iii). This is the arithmetic analogue of the plane's gap between `m₁(ℝ²)` and `α₁(ℝ²)`.
+`[MatolcsiEtAl2025]` conjectured the two differ (`δ_Croft = m₁`, `α₁ = 1/4`); `[DuczVarga2026]` moved `α₁` below 1/4. *Killing test:*
+a field where `ι(F²) > max_v r_v` is proved, i.e. the fractional chromatic number is strictly below every local one.
+
+### F7. Five at ℚ(√167), six and seven: silent, by one count [derived]
+
+- **The count.** T-C(A)'s count needs every factor of `G_S` below `1/k`. The archimedean factor has `m₁(ℝ²) ≥ 0.2293` (Croft's
+  construction), which exceeds 1/5, 1/6 and 1/7. **Four is the only colour count at which the real place refuses fractionally**
+  (`0.2293 ≤ m₁ ≤ 0.2470 < 1/4`), so the phenomenon is four-colour-specific.
+- **Five at ℚ(√167).** FS-66's certificate at 23 (`97/529 = 0.1834 < 1/5`) removes the 23 factor but not the real places. A five-colouring
+  with finite-place spectrum reduces at best to a Borel five-colouring of the archimedean factor times the undeletable places. For a real
+  quadratic field that factor is the categorical product of two copies of the plane's unit-distance graph. Its Borel five-colourability
+  is at least as open as the measurable chromatic number of the plane (Falconer's `≥ 5`; `≤ 7`). **So no: the method does not say that a
+  five-colouring of ℚ(√167)'s plane must read infinitely many primes.**
+- **FS-64.** Its window colouring reads finitely many places, so it lies inside T-C(A)'s class.
+  - At four colours, T-C(A)'s class form excludes it at ℚ(√47). It does so at every field all of whose stable places are below 1/4, which
+    probably includes ℚ(√167) (not checked).
+  - At five colours over ℚ(√167), nothing here touches it. It stays the one instrument aimed at that gap.
+- **Six and seven (G64).**
+  - At seven, the class is **non-empty for every field**: the hexagonal seven-colouring pulled back along one real place is a
+    finite-place colouring with spectrum in `A`.
+  - At six, finite-place six-colourings of `F²` are governed by Borel six-colourings of the archimedean factor times the undeletable
+    places. So *in the finite-place class, six hides in the measurable chromatic number of products of real planes* [reading]. That is a
+    sharper address than G64's "the gap between `L(F)` and `χ(F²)`", and it is silent on colourings that are not finite-place.
+
+### F8. What would make the finding weaker than it reads
+
+1. **Scope.**
+   - The literal counterexample invariant (mass off every `E_S`) is cheap (F2).
+   - The headline's "at once" is true only in the rotation-averaged, type-(A) form (F4). At translation-invariant scope it is "no single
+     finite `S`", which admits R1.
+2. **Shared inputs.** Both derivations use the same external and one-mind pieces:
+   - `[AmbrusEtAl2023]`'s `m₁ ≤ 0.2470`. It is essential: J28D's mutation audit shows that Hoffman's 0.2871 at the real place flips the
+     count.
+   - Coxeter's C14.1 and C14.3 (two derivations, per J28D).
+   - FS-66 at 11 and 19.
+   - A single defect in the stationary product count would sink both, since both use one architecture: extension, regularisation, count.
+   - Independent: the regularisations (J28D's TC-reg against J28V's C3) and the tail factor.
+3. **The "11 or 31" GAP (S1V)** does not touch T-C(A): its count needs only that every factor is below 1/4.
+4. **A stale price nearby** (S1 §2.3 item 3; the DuczVarga point, Stage 2). It does not weaken T-C(A). It does change what the
+   single-class route costs (Stage 4, R4).
