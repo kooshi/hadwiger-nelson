@@ -5,7 +5,18 @@ record `plans/POROS-2026-09-26-x2x3-crunch.md`, bodies of commits "X23D"/"X23 ad
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| X23V-CTL | the class condition fails at K, ℚ(√2,√3), ℚ(√11), ℚ(√23) — each at a named stable place carrying a periodic four-colouring (dyadic inert `Q = 2`; or `𝔽₇`) — and holds at ℚ(√47) | [tools exact, two routes, four plants fire; + hand] | §2.1, `tools/x23v_places.py` |
+| X23V-Rb | every odd usable `q ≥ 11` has all-levels four-colour ratio `< 1/4`, and `χ(Γ_q) ≥ 5` iff `q ≥ 11`: no integrality gap on odd stable places | [hand, from FS-66, Hoffman, Weil, FS86-LP, G56] | §2.0 |
+| X23V-CLS1 | the class condition ⟹ `L(F) ≥ 5`, every real number field | [hand] | §2.2 |
+| X23V-CLS2 | `L(F) ≥ 5` ⟹ the class condition, for every real number field with no inert dyadic stable place over a ramified base of norm `≥ 64` | [hand, given X23V-Rb's inputs] | §2.2 |
+| X23V-GF | `F = ℚ(√3)·M₇` (`M₇ ⊂ ℚ(ζ₂₉)`, degree 7) is totally real of degree 14, has one dyadic place, `(e, f) = (2, 7)`, inert in `F(i)/F` (`Q = 128`), and `L(F) ≥ 5`: CLS2's excluded case occurs | [hand + tools exact (PARI)] | §2.2, `data/fs100/x23v/gapfield.out` |
+| X23V-AR | `UD(ℝ²)^{×n}` has ratio `m₁` for every `n` (C14.2 (a) + C14.3's induction); its Hoffman ratio is `0.2871` at every `n ≥ 1` | [hand; a re-walk of C14] | §2.3 |
+| X23V-CX | at a complex place of `F`, the factor restricted to the circle `{(e^{iθ}, e^{−iθ})}` is `ℝ² × UD_{√2}(ℝ²)`, ratio `m₁`; so T-C(A)'s count runs over non-totally-real `F` | [hand, one mind] | §2.3 |
+| X23V-SPC | SPC as graded in §3 | [hand] | §2.3 |
+| X23V-Q35 | ℚ(√3,√5): dyadic place split in `L`; stable places exactly above `p ≡ 11, 59 (mod 60)`, all of residue degree one; class condition holds; `χ = 5` given MR and SPC | [hand + tools exact] | §2.5 |
+| X23V-D1 | `N₄(F) = ∅` ⟹ the class condition; so D-1 is SPC's special case | [hand] | §2.6 |
 
 ## Stage 1 — SAVED (quotation check; the claims verbatim; C0)
 
@@ -233,3 +244,44 @@ condition ⟹ (SPC, totally real) `χ ≥ 5` given MR. **D-1: TRUE** [hand], as 
   and built one field by hand (ℚ(√3)·M₇, `M₇ ⊂ ℚ(ζ₂₉)`: 2 and 3 have order 28 mod 29), confirmed by one PARI factorisation (seconds).
 - The stable-place tables are a complete exact enumeration of a set the derivation fixed (primes 2, 3, 7 decide the class condition; the
   `< 400` table is a cross-check of a congruence already derived). No search.
+
+## Stage 3 — SAVED (the write-up; committed before any fenced file is opened)
+
+### 3.1 Verdicts
+
+| claim | verdict | the one-line reason |
+|---|---|---|
+| **CTL** | **TRUE** | fails at K, ℚ(√2,√3), ℚ(√11) (dyadic inert `Q = 2`; and 7 at ℚ(√11)), ℚ(√23) (7), each at a named stable place with a periodic four-colouring; holds at ℚ(√47); no wrong-reason pass (§2.1 W1–W3) |
+| **CLS** | **GAP at one step** (TRUE elsewhere) | ⟹ TRUE for every real field; ⟸ TRUE except at an inert dyadic stable place over a ramified base of norm `Q ≥ 64`, where no held lemma bounds the new levels; the case occurs (ℚ(√3)·M₇, `Q = 128`). Missing lemma: a dyadic Lemma P |
+| **SPC** | **TRUE** for totally real `F`; for `F` with complex places TRUE given Lemma X23V-CX (added here, one mind) | A⁺ and SP-Cor are field-free given T-C(A)'s statement; the class-form step's archimedean factor at `n` real places is C14.3's induction (ratio `m₁` at every `n`) — the advisor's named risk does not bite, and first moments fail already at `n = 1` |
+| **COR** | **GAP as written** | for `L ≤ 4` it needs row 99, and "given MR" is dropped; with both added, TRUE outside CLS's gap (and with X23V-CX for non-totally-real `F`) |
+| **Q35** | **TRUE** (intended reading) | dyadic split (`15 ≡ 7 mod 8`); stable = above `p ≡ 11, 59 (mod 60)`; 3, 7, 19, 23, 31, 43, 47 not stable; FS-66 at 11, Weil above; `χ ≤ 5` from 11. Literal wording self-contradictory (Q-b) |
+| **D-1** | **TRUE** | 4-thick ⟹ Hoffman ratio `< 1/4` ⟹ the class condition; a special case of SPC |
+
+**C0 scored.** CTL 0.9 → TRUE; CLS 0.65 → GAP (the named dyadic risk was the live one; `q = 27` and ramified odd places were not); SPC 0.6 →
+TRUE (my risk was complex places, the advisor's `n > 2`; neither kills it, the first needs a lemma); COR 0.5 → GAP as written; Q35 0.75 →
+TRUE; D-1 0.85 → TRUE. I leaned toward GAP on COR and CLS before deriving; both GAPs are specific (a missing input named, a field exhibited).
+
+### 3.2 Corrections owed (proposed; the front-page lane decides)
+
+1. **Q35's wording** (`plans/CRUNCH-2026-09-26-x2x3-queue.md` list X23): "primes of residue degree one in `L/ℚ(√3,√5)` that are inert in
+   `L/F`" → "primes of residue degree one in `ℚ(√3,√5)/ℚ` (inert in `L/F`) — exactly those above `p ≡ 11, 59 (mod 60)`".
+2. **SPC's gloss** identifies T-C(A) with its class condition. Any ledger text should read: "for every real number field whose stable places
+   all have all-levels ratio `< 1/4`, T-C(A) holds at `S = ∅` (R88-TCA's class form; complex places by X23V-CX) and then J45's A⁺ and SP-Cor
+   hold with J45's proofs".
+3. **COR** should name its inputs: "given MR and row 99".
+4. **CLS / COR scope:** add "with no inert dyadic stable place over a ramified base of norm `≥ 64`" until a dyadic Lemma P is proved.
+5. **J48-N4cor / T-J39-3** (stub §2): for a totally real `F` of degree `n`, `Y_{F,4}`'s archimedean factor is `UD(ℝ²)^{×n}`; the conclusion
+   stands by C14.3.
+6. **Frontier item 18** ("Not landed: five over ℚ(√3,√5)"): given MR (and SPC's class form at four real places), `χ(ℚ(√3,√5)²) = 5`; an
+   exposed five-clause of the conjecture met modulo MR.
+
+### 3.3 Stub to mint or re-aim
+
+- **A dyadic Lemma P** (FS-100, or a line in FS-68's stub): on an inert dyadic tower over a ramified base (`e(𝔭|2) ≥ 2`, `Q ≥ 64`), bound the
+  characters new at level `m ≥ 2` (the odd analogue is FS86-LP, `|λ| ≤ 2p^{m−1}`); its first instance is ℚ(√3)·M₇ at `Q = 128`, `e = 2`.
+  Decides CLS's gap and COR's scope. Solver-free.
+
+### 3.4 Would-have-searched-here log (stage 3)
+
+- None.
