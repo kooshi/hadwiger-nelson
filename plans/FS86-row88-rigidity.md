@@ -286,3 +286,73 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 4. **The yes side is priced and dated, not run** (G65, rows 84, 86, 90): stage Y after 2026-10-01, with FS-90's grant Kooshi's.
 5. **Galois joins the acting group** (G27), and **the controls are named before any claim** (rows 66, 73, 89, 93, 94): ℚ(√11) (Q-μ fails,
    C9), K and ℚ(√2,√3) (both halves hold).
+
+## Stage 3 — SAVED (§PA, the prior-art gate; time-boxed, about 15k tokens of the 60k allowed)
+
+### PA.1 The object named in its disciplines' words
+
+1. **Topological dynamics / ergodic theory of amenable actions:** a compact subshift (the proper four-colourings of a Cayley graph of a
+   countable abelian group) with an action of a solvable affine group `R ⋊ U`; "rigid" = the subshift is a finite union of periodic orbits;
+   the question is **closed-set and measure rigidity of an `S`-arithmetic affine action on a subshift** — Furstenberg ×2×3 lifted from the
+   torus to a shift of colourings.
+2. **Symbolic dynamics / tilings:** "forced periodicity" (Kari–Szabados annihilators; Herva–Kari), "frozen" colourings (`[AlonEtAl2021]`),
+   invariant random colourings and factors of i.i.d. (descriptive combinatorics, `[KechrisMarks2020]`).
+3. **Euclidean Ramsey / unit-distance graphs:** colourings of rational spaces `G(ℚⁿ)`; triangle-free unit-distance graphs (Erdős's and
+   Soifer's questions).
+4. **Algebraic combinatorics:** Cayley graphs over finite rings with a multiplicative subgroup as connection set (generalized Paley,
+   unitary Cayley graphs), whose maximum cliques/independent sets are subfields or subspaces (Van Lint–MacWilliams, EKR) — the finite
+   towers' D2-B in their words.
+
+### PA.2 Queries (zbMATH Open API; full output `data/fs86r88/j28/zbmath.txt`, `zbmath2.txt`; tool `tools/crunch_j28_zbmath.py`)
+
+**Control:** `ab:"zzqxnonsenseword"` returns HTTP 404 — so 404 is the API's empty-result response (G21: checked, not assumed). 30 queries.
+- **Zero hits (404):** `ab:"invariant" & ab:"proper colorings" & ab:"periodic"`; `ab:"unit distance graph" & ab:"triangle-free" &
+  ab:"chromatic"`; `ab:"generalized Paley" & ab:"independent sets" & ab:"subspace"`; `ab:"Erdos-Ko-Rado" & ab:"Cayley graph" &
+  ab:"finite field"`; `ab:"independence density" & ab:"Cayley graph"`; `ab:"chromatic number" & ab:"unit distance" & ab:"number field"`;
+  `ab:"colorings" & ab:"p-adic" & ab:"rigid"`; `ab:"frozen" & ab:"colorings" & ab:"shift"`; `ab:"Furstenberg correspondence" &
+  ab:"independent set"`; `ab:"Rudolph" & ab:"Johnson" & ab:"invariant measures" & ab:"solenoid"`; `ab:"independence ratio" &
+  ab:"amenable"`; `ab:"Soifer" & ab:"open problem" & ab:"triangle"`; `ab:"Kronecker factor" & ab:"coloring"`; `ab:"stationary" &
+  ab:"proper coloring" & ab:"factor of iid"`.
+- **Hits, the relevant ones:** `ab:"forced periodicity"` (3: `[HervaKari2023]` held; Herva–Kari 2025, *Periodicity and local complexity
+  of Delone sets*, arXiv:2504.20709, listing); `ab:"multiplicatively invariant" & ab:"subshift"` (1: MacVicar 2023, arXiv:2301.09730,
+  multiplicative invariance of subsets of ℂ, listing); `ab:"invariant random" & ab:"coloring"` (1: Tóth 2021, Schreier decorations,
+  off-topic); `ab:"unit distance" & ab:"triangle-free"` (3: Exoo–Ismailescu 2016, *Small order triangle-free 4-chromatic unit distance
+  graphs*, Zbl 1362.05039; Silva Filho 2026, arXiv:2607.19995, exact coordinate fields of the triangle-free Exoo–Ismailescu graphs, listing);
+  `ab:"Van Lint" & ab:"MacWilliams"` (8: Asgarli–Yip 2022, Zbl 1496.05068; Yip 2026, Zbl 1584.05083, maximum cliques in Cayley graphs over
+  finite fields with multiplicative connection sets); `ab:"rational points" & ab:"chromatic number"` (5: **Zaks 1989, *On four-colourings
+  of the rational four-space*, Zbl 0705.05033 — reviewer's text: "in every 4-colouring of `G(ℚ⁴)` every colour is everywhere dense"**);
+  `ti:"chromatic number" & ab:"rational" & ab:"unit distance"` (2: Cibulka 2008, Mann 2001 — bounds, not structure); `Yu 2022, *Times two,
+  three, five orbits on 𝕋²*` (closed-set ×p×q on a torus, listing).
+- **The held Polymath16 threads** (`~/source/library/notes/polymath16-threads-1-18-text.txt`, grepped with `rg`): no mention of ℚ(√59) or
+  √59; three "triangle-free" passages — thread 17 (2021): "it seems likely that χ(Q(i,√3,√11)) = 4 … Without triangles, of course, it must be
+  computationally very hard (for example, if you take something like O'Donnell's construction for triangle-free 4-chromatic UDG)"; thread
+  18 (2025–26): Soifer's triangle-free five-chromatic question restated as open in the plane, and triangle-free five- and six-chromatic
+  unit-distance graphs in ℝ³ (`[deGrey2026]`, held as a listing) and ℝ⁴ (Haugstrup, a comment).
+
+### PA.3 What the gate found
+
+1. **No statement that every four-colouring of a rational or number-field unit-distance graph is periodic** was found, for any field — the
+   question is unasked in print in this form. The nearest printed structural statement about *every* four-colouring of a rational
+   unit-distance graph is **Zaks 1989 on `G(ℚ⁴)`** (every colour class dense) — a weak, triangle-full analogue (ℚ⁴'s four-colourability is
+   Benda–Perles's 2-adic quaternion residue, row 57). **The ℚ⁴ question "is every four-colouring of `G(ℚ⁴)` the Benda–Perles pullback?"
+   is a control this project had not named**: the same tight dyadic structure (`H/𝔓 ≅ 𝔽₄`), with triangles. Recorded as a lead, not
+   pursued (§PA.4).
+2. **The finite analogue is in print:** maximum cliques/independent sets of Cayley graphs over finite fields with multiplicative-subgroup
+   connection sets are subfields/subspaces (Asgarli–Yip; Yip; Blokhuis's Paley theorem) — the literature's form of G54's `U₃₂`
+   hyperplanes and of FS38-D2-B's "every colouring pulled back". The *infinite* (field-plane) form is not.
+3. **Closed-set rigidity for multiplicatively invariant sets** exists on tori and solenoids (Furstenberg; Berend, read; Yu 2022; MacVicar
+   2023 in ℂ); **nothing lifts it to a shift of colourings** (the four symbolic-dynamics queries return nothing).
+4. **Measure rigidity** (Rudolph 1990, Johnson 1992 — `[Johnson1992]` is in the bibliography under another Johnson? not checked —
+   Host 1995, Einsiedler–Lindenstrauss): not held; the positive-entropy theorems are what T-C′'s remainder would cite, and the zero-entropy
+   case is Furstenberg's open measure conjecture — so Q-μ in full may contain an open problem (Poros's FS-86-next claim, carried).
+5. **Soifer 55.1 is open in the plane** as of the 2026 threads; ℝ³ and ℝ⁴ have triangle-free five- and six-chromatic graphs.
+
+### PA.4 Debts and leads (for `BIBLIOGRAPHY.md`, via the front-page lane; not edited here)
+
+- Zaks 1989 (Zbl 0705.05033) — a reviewer's text read; the paper not held. Lead: the ℚ⁴ rigidity control (stub candidate, one line).
+- Asgarli–Yip 2022 (Zbl 1496.05068), Yip 2026 (Zbl 1584.05083) — listings; the finite analogue's attribution.
+- Exoo–Ismailescu 2016 (Zbl 1362.05039), Silva Filho 2026 (arXiv:2607.19995) — whether any small triangle-free four-chromatic graph's
+  coordinate field lies inside `ℚ₂(√3)` bears on stage Y's realisation question (row 90's T1); a listing only.
+- Herva–Kari 2025 (arXiv:2504.20709), MacVicar 2023 (arXiv:2301.09730), Yu 2022 (Zbl 1495.37039) — listings.
+- Rudolph 1990, Host 1995, Einsiedler–Lindenstrauss (2003/2006), Puzynina (row 85's exception) — not held; T-C′ needs the first three.
+- `[KechrisMarks2020]` (held): the invariant-random-colouring vocabulary; not re-read here.
