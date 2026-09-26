@@ -96,3 +96,23 @@ verbatim, with its hypotheses.
 
 **On leaning:** every claim above can be FALSE, and a FALSE with its counterexample, or a GAP with the step named, counts in full (standing
 rule 4). EF_F and ED-2 are the claims most likely to fail, and the brief of each job names the step where a failure is most likely.
+
+---
+
+## §4. The queue
+
+**Priority:** P1 launches at once or at the first free slot; P2 launches when its dependencies are met; P3 fills idle slots. **Kinds:**
+derivation, blind verifier, close-math, front-page, clerk. Wall hours and harness tokens are the planner's prices; reports record the
+actuals. A launch is one line: "Your brief is on disk: read `<path>` in full first."
+
+| id | model | kind | M | decides | inputs | output | deps | h | k | stop rule | spawns | pri | status |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| X01D | Opus | derivation | FS-100 s5 | list X01: does Einsiedler–Fish's zero-entropy argument transfer to `U` on `R̂` (EF_F) | EF 2010 (arXiv 0804.3586), its citing works, rows 98, 112–118 | `plans/FS100-X01D-derivation.md` | — | 1.0 | 250 | 220k or 06:50 | none planned | P1 | wave 1 |
+| X02D | Opus | derivation | FS-100 s5 | list X02: PE-lim through finitely generated submodules (PE-2); CE-1 | EL2021 §1 and what fixes Thm 1.2's hypotheses; rows 105, 116–118 | `plans/FS100-X02D-derivation.md` | — | 1.0 | 220 | 200k or 06:50 | none planned | P1 | wave 1 |
+| X03D | Opus | derivation | FS-100 s5 | list X03: the Fourier form; the averaging route (ED); the flip and what the consumer needs (FL) | SP-Cor (J45 §4.2), R88-TCA, rows 112–113, Bekka–Francini's statement | `plans/FS100-X03D-derivation.md` | — | 1.0 | 220 | 200k or 06:50 | none planned | P1 | wave 1 |
+| X01V | Opus | blind verifier | FS-100 s5 | list X01, blind | EF 2010 and the same public inputs; fenced from X01D and the advisor's record | `plans/FS100-X01V-verification.md` | — | 1.0 | 220 | 200k or 06:55 | none | P1 | wave 2 |
+| X02V | Opus | blind verifier | FS-100 s5 | list X02, then FR-1 and ED-1 from list X03, blind | EL2021; fenced from X02D, X03D and the advisor's record | `plans/FS100-X02V-verification.md` | — | 1.0 | 220 | 200k or 06:55 | none | P1 | wave 2 |
+| X05V | Opus | blind verifier | FS-100 s5 | SP-Cor (a blind re-derivation from its statement, the advisor's ladder item [P-5]), then FL-1, FL-2 | J45's lemma statements (not proofs), R88-TCA; fenced from X03D | `plans/FS100-X05V-verification.md` | — | 0.8 | 180 | 160k or 06:55 | none | P2 | first free slot |
+| J00 | Sonnet | clerk | — | folds reports into §4 statuses, `READY.md` and the close inventory | reports only | commits | every second report | 0.1 | 40 | brief | none | P1 | recurring |
+| X09C | Opus | close-math | FS-100 s5 | the derivation file's entries; §R-close for stage 5; predictions scored; ledger rows and `CLAUDE.md` lines drafted | every record and report, the close inventory | `plans/FS100-three-field-lemma.md` §R-close (s5) | the derivations reported, or 06:55 | 0.3 | 150 | 07:12 | none | P2 | 06:55 |
+| X10F | Opus | front-page | FS-100 s5 | applies X09C's drafts to `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`; scores §5; closes the queue | X09C's drafts | the four files | X09C | 0.25 | 120 | 07:26 | none | P2 | 07:10 |
