@@ -14,8 +14,10 @@ step 9 in full, and `LEDGER.md` rows 116–127 with their § B lines.
   column; the owner hands you that right for this job). Read every number from the item's source, never from the inventory.
 - The reports `data/fs103/reports/` and the records they name: `plans/FS103-V1-verification.md`, `plans/FS103-V2-verification.md` (read each
   "Theorems this phase proved" first), the advisor's `plans/POROS-2026-09-26-fs103-collapse.md` (its stage 4 is the comparison), the gate's
-  `plans/FS103-G-prior-art.md`, **`plans/FS103-F-fractional-shadow.md`** and **`plans/FS103-M-derivation.md`** (both finished before your launch;
-  read their reports first), the plan `plans/FS103-collapse-cp-plane.md` (§G, §PA.0, §IQ, §6.3's expectations, §6.4's proposed edits), the
+  `plans/FS103-G-prior-art.md`, **`plans/FS103-F-fractional-shadow.md`** with its blind second mind **`plans/FS103-B-verification.md`** (both finished: FRAC, TJ, ROUND,
+  DV, TF and 47 TRUE at two minds, DV/TF/47 given MR), and **`plans/FS103-M-derivation.md`** (finished, one mind) with its blind check
+  **`plans/FS103-N-verification.md`** (**still running at your launch**: the owner relays its verdict; until then treat M1, M1′ and Q4 as
+  one mind, and do their rows and drafts last); read their reports first, the plan `plans/FS103-collapse-cp-plane.md` (§G, §PA.0, §IQ, §6.3's expectations, §6.4's proposed edits), the
   claim lists `data/fs103/claims.md` and `claims-sealed.md`, and the stub `plans/STUB-collapse-cp-plane.md`.
 
 ## The headline rules
@@ -29,7 +31,10 @@ step 9 in full, and `LEDGER.md` rows 116–127 with their § B lines.
   Its instances are ℚ(√635087), which carries the headline (item 6), and de Grey's field. De Grey's field rests on row 120 as stated;
   C-MR16 is unreached and goes to FS-105.
 - **C-LB with no MR** (both verifiers): state it as its own theorem, with the SP-witness alternative.
-- **Whatever FS103-F and FS103-M found** is stated at its own grade and count of minds. One mind is a candidate, never a result. If FS103-F
+- **The fractional shadow** (FS103-F with FS103-B): at two minds, given MR. It answers, given MR at ℚ(√635087), the first clause of
+  `[DuczVarga2026]` Conjecture 1 and `[MatolcsiEtAl2025]` §2's equality question (FS103-B's held item). Every headline carries "given MR",
+  and FS103-B's corrections to FS103-F are applied in the derivation file, including the notation clash `ρ(F)` against MRVZ's `ρ`.
+- **Whatever FS103-M found** is stated at its own grade and count of minds, as FS103-N's verdict leaves it. One mind is a candidate, never a result. If FS103-F
   found that row 123's argument runs per class, or that it has a defect, that finding goes first in the verdict, above the collapse.
 - **Nothing about `χ_m`** beyond what two minds hold; C-FMT (d) is a gap in every record (item 56).
 - Novelty: the gate's verdict verbatim, "not found in print".
