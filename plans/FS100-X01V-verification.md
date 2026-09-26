@@ -286,3 +286,8 @@ expands the archimedean ones (totally real `F`); so polynomial growth of `U` (tr
 ### 3.4 Would-have-searched-here log (stage 3)
 
 - none (write-up only).
+
+## Stage 4 — not run (the fallback was not triggered)
+
+Every claim reached a verdict in stage 2 (EF_F's is a GAP at a named step, not a stall), so X01D's lemma statements were not opened; at
+05:56 X01D was still at its stage 2, so a statement-by-statement check belongs to the close, where both records are final.
