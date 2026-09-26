@@ -1922,8 +1922,8 @@ clause through five over every real number field, `χ(ℚ(√3,√5)²) = 5`, th
 **4.6 `plans/FRONTIER-STUBS.md` rows (drafts).**
 - **FS-100** (rank 3): "**MR proved (row 120); `χ(ℚ(√47)²) = 5` (row 121); wave 3: `χ(F²) = L(F)` for `L ≤ 5` over every real number field
   (row 123), the type-(B) rotation-invariant half (row 124), six at ℚ(√167) reduced (row 125)** — [hand]; prior-art gate negative (X24R). **Left:**
-  TR-ROT (X27, in flight at the close); C-4 (transience); MR at row 100's exception fields (no colouring consequence: they have `L = 2`); X26B's
-  blind check of CLS and the complex-place step; the kernel port (FS-101)". Bearing: none.
+  TR-ROT (X27, in flight at the close); C-4 (transience); MR at row 100's exception fields (no colouring consequence: they have `L = 2`); MR's
+  complex-place case on an instance; the kernel port (FS-101)". Bearing: none.
 - **FS-101 (new; rank: Kooshi's; default just below FS-100)** — "**the main clause through five in the kernel** — `plans/STUB-main-clause-five-kernel.md`
   | Kooshi's target (06:5x): *"The target for the Lean implementation should move to the more general 'every real' claim."* X11K2's skeleton
   `X11K.min_localBound_five_le_chromaticNumber` states `min(L(F), 5) ≤ χ(F²)` for every real number field over named inputs; `χ(ℚ(√47)²) ≤ 5`
