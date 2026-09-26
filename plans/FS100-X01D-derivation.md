@@ -13,6 +13,10 @@ claims; no contact. Working files: `data/fs100/x01d/`. Exact checks: `tools/x01d
 - **Haar entropy of `u ∈ U`**: `h_m(u) = Σ_v log⁺|u|_v` over all places of `L`; `= log H(u)` iff `u` is isometric at every archimedean place (always, when `F` is totally real) — [hand, cites the finite-S formula (Chothi–Everest–Ward)], §2.1
 - **EF-G (b)**: `#U_N(F) ≥ c·N^{1/[F:ℚ]}` via `U_ℚ ⊆ U_F` — [hand], §2.1
 - **EF-X**: the uniform measure on an archimedean circle is `U`-ergodic, zero-entropy for every `u`, non-atomic — [hand], §2.2
+- **Lemma PF** (product-formula gap for `R^∨`) — [hand], §3.1
+- **Lemma 3.1′** (one zero-entropy non-torsion `u*` ⟹ boxes thin at one expanding place `v*` carry mass `≥ δ^β` off a small set) — [hand], §3.3
+- **Lemma 3.2′ / Steps 3–5** (pigeonhole with `U_ℚ` multipliers + product formula ⟹ `x̃_{v*} ∈ L` for `μ`-a.e. `x`) — [hand], §3.4–3.6
+- **EF_F⁺** (one zero-entropy non-torsion `u` ⟹ `μ(R̂ ∖ (T + A)) = 0`, no ergodicity) and hence **EF_F** — [hand, one mind], §3.0–3.8
 
 ---
 
@@ -175,3 +179,161 @@ Also recorded: **the control does not test EF_F's direction** — it only shows 
 
 - EF-G (a): would have run a solver-free but exhaustive PARI hunt over many non-totally-real fields for norm-one units; instead derived the
   rank count and checked one field (ℚ(∛2)) with a control and a plant — seconds.
+
+---
+
+## Stage 3 — SAVED
+
+### 3.0 Verdict first
+
+**EF_F: TRUE** [hand, one mind; the transfer written out step by step below, every constant explicit]. In fact the derivation proves the
+**stronger statement**, recorded separately beside EF_F (brief, addendum 1):
+
+> **EF_F⁺.** For every real number field `F`: every `U`-invariant finite positive Borel measure `μ` on `R̂` such that `h_μ(u*) = 0` for **one**
+> non-torsion `u* ∈ U` satisfies `μ(R̂ ∖ (T + A)) = 0`. (No ergodicity; one element; the conclusion `T + A ⊆ E`.)
+
+**The planner's named risk, answered.** The pigeonhole runs with multipliers that expand places other than the one `u*` thins. The zero-entropy
+element is used once, to make boxes thin at **one** place `v*` where it expands (Lemma 3.1′). The multipliers `v ∈ U_ℚ` then act freely: their
+expansion at other places is paid for by their height, polynomially in `M`, and the product formula trades that against the `M^{−K}` thinness
+at `v*` (Steps 4–5). EF_F does **not** need weakening to "zero entropy for every `u`". The other places are then killed not by entropy but by
+invariance: the wandering-shell recurrence (Step 7) — which is where the one-place conclusion becomes `T + A`.
+
+### 3.1 The one lemma everything uses
+
+`Λ := R^∨ ⊂ W` (§2.0), a fractional `R`-ideal; `C_Λ := ∏_{w stable} sup_{y∈Λ} |y|_w` (finite: `Λ = 𝔡^{-1}R` differs from `R` at finitely many
+stable places; `C_R = 1`). `L` is totally complex (every embedding sends `i` off `ℝ`), so every archimedean place is complex, `|x|_v = |x|²`.
+
+**Lemma PF (product-formula gap)** [hand]. For `y ∈ Λ ∖ {0}`: `∏_{v|∞} |y|_v · ∏_{w split} |y|_w ≥ 1/C_Λ`; for `y ∈ R ∖ {0}` the bound is `≥ 1`.
+*Proof.* The product formula, with `∏_{w stable}|y|_w ≤ C_Λ` (resp. `≤ 1`). ∎
+
+Also used: `W_{v} := {a ∈ W : a_v = 0}` meets `L` (hence `Λ`) only in `0`, for any single place `v` of `W` — an element of a field with a
+zero component is `0`.
+
+### 3.2 Step 0 — an expanding place
+
+`u*` non-torsion ⟹ some place `v*` of `L` in `W` (a split finite place, or an archimedean one) has `|u*|_{v*} > 1`: otherwise `|u*|_v ≤ 1`
+everywhere, so `= 1` everywhere by the product formula, and `u*` is an algebraic integer unit with all conjugates of modulus 1, a root of unity
+(Kronecker). (A stable `w` has `|u|_w = 1` for every `u ∈ U`, so `v*` is split or archimedean.) Put `s := |u*|_{v*} > 1`. When `F` is totally
+real, `v*` is split finite (L is CM).
+
+### 3.3 Step 1–2 — Lemma 3.1′: zero entropy makes thin boxes heavy
+
+Boxes: `Q(ε) := {a ∈ W : |a|_v < ε at every archimedean v (ordinary modulus), a_w ∈ O_w at every split w}`, open; and
+`Q_{v*}(ε, δ) := {a ∈ Q(ε) : |a|_{v*} ≤ δ}`. `π : W → R̂ = W/Λ`.
+
+**Lemma 3.1′** [hand; EF Lemma 3.1 transferred]. Fix `ε > 0` with `∏_{v|∞}(2ε(1 + |u*|_v^{1/2}))² · ∏_{w split} max(1,|u*|_w) < 1/C_Λ`
+(ordinary moduli inside, normalised outside). For every `β > 0` and `η > 0` there are `δ₀ > 0` and a Borel `X′ ⊆ R̂` with `μ(X′) > μ(R̂) − η`
+such that `μ(π(x̃ + Q_{v*}(2ε, δ))) ≥ δ^β` for every `x ∈ X′`, every lift `x̃`, and every `0 < δ ≤ δ₀`.
+
+*Proof.* (i) *Partition.* `π(Q(ε))` is open and `R̂` compact, so finitely many translates `π(c_j + Q(ε))` cover `R̂`; let `ξ` be a Borel
+partition with each cell inside one of them. (ii) *Bowen atoms are thin at `v*`* (local injectivity). Let `x, y` lie in one atom of
+`ξ_n := ⋁_{i<n} u*^{−i}ξ`. Choose lifts `x̃, ỹ` in the `c_{j₀} + Q(ε)` of their common cell, `a₀ := ỹ − x̃ ∈ Q′ := Q(ε) − Q(ε)` (arch `< 2ε`,
+integral at every split `w`). Induction on `i < n − 1`: if `u*^i a₀ ∈ Q′`, the points `u*^{i+1}x, u*^{i+1}y` share a cell `j`, whose lifts give
+`b ∈ Q′` with `y′ := u*·u*^i a₀ − b ∈ Λ`. Bounds: ordinary `|y′|_v < 2ε(1 + |u*|_v^{1/2})` at archimedean `v`; `|y′|_w ≤ max(1,|u*|_w)` at split
+`w` (ultrametric). By the choice of `ε` and Lemma PF, `y′ = 0`, so `u*^{i+1}a₀ = b ∈ Q′`. Hence the atom of `x` lies in
+`π(x̃ + {a ∈ Q′ : u*^i a ∈ Q′ ∀ i < n}) ⊆ π(x̃ + Q_{v*}(2ε, c·s^{−(n−1)}))`, `c = 1` at a finite `v*`, `c = (2ε)²` at an archimedean one.
+(iii) *SMB* (EF Thm 2.1, a countably generated σ-algebra, a finite partition): `(1/n)I_μ(ξ_n)(x) → h_{μ_x^E}(u*, ξ)` a.e.; `0 ≤
+h_{μ_x^E}(u*, ξ) ≤ h_{μ_x^E}(u*)` and `∫ h_{μ_x^E}(u*) dμ = h_μ(u*) = 0` (Jacobs' integral formula), so the limit is `0` a.e. By Egorov there are
+`X′` with `μ(X′) > μ(R̂) − η` and `N₀` with `μ(ξ_n(x)) ≥ e^{−nβ₁}` for `n ≥ N₀`, `x ∈ X′`. (iv) Given `δ ≤ δ₀ := c·s^{−N₀}`, take the least `n`
+with `c·s^{−(n−1)} ≤ δ`; then `μ(π(x̃ + Q_{v*}(2ε, δ))) ≥ μ(ξ_n(x)) ≥ e^{−nβ₁} ≥ (δ/(cs))^{β₁/log s}`; choosing `β₁` small against `β`
+(and `δ₀` smaller) gives `≥ δ^β`. The set does not depend on the lift. ∎
+
+*Where the advisor's addendum 2 agrees:* "Along the two-sided refinement under u_p, the correction r ∈ R at each step is integral off S and
+≤ 2η at ∞ … r = 0 at every step." Here the one-sided refinement suffices, because only the expanding place `v*` is needed.
+
+### 3.4 Step 3 — Lemma 3.2′(a): the pigeonhole with free multipliers
+
+Multipliers: `V_M := {v ∈ U_ℚ : H(v) ≤ M} ⊆ U`. Every `v ∈ U_ℚ ⊂ ℚ(i)` has modulus 1 at **every** archimedean place of `L`, for every real `F`
+(each archimedean place of `L` restricts to the complex place of `ℚ(i)`). By §2.1 (b), `#V_M ≥ c₀M^α` for `M ≥ M₁`, `α = 1/[F:ℚ]`.
+
+Fix `K := 16`, `β := α/(2K)`, `δ(M) := M^{−K}` (at a finite `v*`, read in the normalised absolute value; at an archimedean one in the
+ordinary modulus), and `X′, δ₀` from Lemma 3.1′ for this `β` (any `η`). Let `M₂ ≥ M₁` with `δ(M₂) ≤ δ₀` and `c₀M₂^{α/2} > μ(R̂)`.
+
+For `x ∈ X′`, a fixed lift `x̃`, `M ≥ M₂`, put `B := π(x̃ + Q_{v*}(2ε, δ(M)))`. Each `v ∈ V_M` is a `μ`-preserving automorphism of `R̂`, so
+`μ(vB) = μ(B) ≥ δ(M)^β = M^{−α/2}`, and `Σ_{v∈V_M} μ(vB) ≥ c₀M^{α/2} > μ(R̂)`: two of the sets meet. So there are `v₁ ≠ v₂ ∈ V_M` and
+`a₁, a₂ ∈ Q_{v*}(2ε, δ(M))` with `r := v₁(x̃ + a₁) − v₂(x̃ + a₂) ∈ Λ`. Put `ℓ := v₁ − v₂ ∈ R ∖ {0}` and `e := ℓx̃ − r = v₂a₂ − v₁a₁ ∈ W`.
+With `m(w) := max(1, |v₁|_w, |v₂|_w)` (`∏_w m(w) ≤ H(v₁)H(v₂) ≤ M²`):
+
+| place | `|e|` | `|ℓ|` |
+|---|---|---|
+| archimedean `v` (ordinary) | `< 4ε` (or `≤ 2δ(M)` at `v* `if archimedean) | `≤ 2` |
+| `v*` finite (normalised) | `≤ M·δ(M)` | `≤ M` |
+| split `w ≠ v*` | `≤ m(w)` (`a_i ∈ O_w`) | `≤ m(w)` |
+
+**The planner's risk lives in the third row**: `e` is not small at `w ≠ v*` — each multiplier expands its own places — only bounded by the
+multipliers' heights. EF has no such row.
+
+### 3.5 Step 4 — two scales give one global point (the advisor's sketch (a), written out)
+
+Run Step 3 at `M` and at `M²` (same `x`, same lift): `(ℓ₁, r₁, e₁)`, `(ℓ₂, r₂, e₂)`. Then
+`z := ℓ₂r₁ − ℓ₁r₂ = ℓ₂(ℓ₁x̃ − e₁) − ℓ₁(ℓ₂x̃ − e₂) = ℓ₁e₂ − ℓ₂e₁ ∈ Λ` (an `R`-module); **`x̃` cancels exactly**. If `z ≠ 0`, Lemma PF gives
+`∏_{v|∞}|z|_v ∏_{w}|z|_w ≥ 1/C_Λ`. Upper bounds: archimedean, ordinary `|z| < 16ε`, so the normalised product is `< (16ε)^{[L:ℚ]}`; at a finite
+`v*`: `|z|_{v*} ≤ max(M·M²δ(M²), M²·Mδ(M)) ≤ M^{3−K}`; over split `w ≠ v*`: `∏|z|_w ≤ ∏_w m₁(w)m₂(w) ≤ M²·M⁴ = M⁶`. So
+`∏ ≤ (16ε)^{[L:ℚ]}·M^{9−K} = (16ε)^{[L:ℚ]}·M^{−7} < 1/C_Λ` for `M` large (and `ε < 1/16`). (An archimedean `v*`: its factor is
+`≤ (8δ(M))² ≤ 64M^{−32}` in place of `M^{3−K}`, and the rest is the same.) So **`z = 0`** and `t := r₁/ℓ₁ = r₂/ℓ₂ ∈ L`.
+
+*No `|ℓ|_{v*}^{-1}` appears here*, as the advisor said; the division comes in Step 5 and is paid for by Lemma PF applied to `ℓ`.
+
+### 3.6 Step 5 — the point is global at `v*`
+
+`e_j = ℓ_j x̃ − r_j = ℓ_j(x̃ − t)` in `W` (componentwise; `t ∈ L` diagonal). Lemma PF for `ℓ_j ∈ R ∖ {0}`:
+`|ℓ_j|_{v*} ≥ (∏_{v|∞, v≠v*}|ℓ_j|_v ∏_{w≠v*}|ℓ_j|_w)^{−1} ≥ 4^{−[L:ℚ]/2}·M_j^{−2}`. So, at a finite `v*`,
+`|x̃ − t|_{v*} = |e_j|_{v*}/|ℓ_j|_{v*} ≤ 2^{[L:ℚ]}·M_j^{3−K}`. Iterate the scales `M, M², M⁴, …` with one choice `(ℓ, r)` per scale; each
+consecutive pair gives `z = 0`, so all share **one** `t`. Letting `j → ∞`: **`(x̃ − t)_{v*} = 0`** (the same at an archimedean `v*`).
+
+So every `x ∈ X′` lies in `T + K_{v*}`, `K_{v*} := π(W_{v*})`; as `η` was arbitrary, `μ(R̂ ∖ (T + K_{v*})) = 0`. **Borel:** `W_{v*}` is closed
+in the σ-compact `W`, so `π(W_{v*})` is σ-compact, and `T = π(L)` is countable.
+
+### 3.7 Step 6 — leaves
+
+(i) `π` is injective on `W_{v*}` (`W_{v*} ∩ Λ = 0`), and the leaves `φ_t(W_{v*})`, `φ_t(a) := π(t + a)`, `t ∈ L/Λ`, are pairwise **disjoint**:
+`t + a ≡ t′ + a′ (mod Λ)` forces `t − t′ − λ ∈ L ∩ W_{v*} = 0`. Each `φ_t` is a continuous injection of a Polish space, hence a Borel
+isomorphism onto its (Borel) image (Lusin–Souslin). (ii) `L/Λ ≅ ⊕_{w stable} L_w/Λ_w` (strong approximation; `Λ` allows every split
+denominator), and `U` acts there by units, so every `U`-orbit on `L/Λ` is **finite** and the stabiliser `U_t` has finite index. (iii) For
+`u ∈ U_t`: `ut − t ∈ Λ`, so `u·φ_t(a) = π(ut + ua) = φ_t(ua)`, and `ν_t := (φ_t^{−1})_*(μ|_{φ_t(W_{v*})})` is a finite Borel measure on `W_{v*}`
+invariant under `a ↦ ua` for `u ∈ U_t`. (`μ` restricted to the finite union of the leaves of one orbit is `U`-invariant.)
+
+*The planner's measurability questions:* the lift is well defined and Borel (i); `K_{v*}` is Borel (σ-compact); the conclusion of Step 5 holds
+for `μ`-almost every `x` from Lemma 3.1′ at the single element `u*`.
+
+### 3.8 Step 7 — wandering shells kill every other place
+
+For a split place `w ≠ v*` of `W`: `(γ) = 𝔓_w^h` (`h` the class number) gives `g := γ/σ(γ) ∈ U` with `|g|_w = N𝔓_w^{−h} ≠ 1` (`v_{σw}(γ) = 0`),
+and some `g^k ∈ U_t`. The shells `A_j := {a ∈ W_{v*} : |a_w|_w = N𝔓_w^{j}}`, `j ∈ ℤ`, satisfy `g^k A_j = A_{j−hk}`, so `ν_t(A_j)` is periodic in
+`j`; their sum `ν_t(a_w ≠ 0)` is finite; so every `ν_t(A_j) = 0` and `ν_t(a_w ≠ 0) = 0`. Over the countably many split `w`: `ν_t` is carried by
+`W_{v*} ∩ L_∞`, i.e. by the archimedean coordinates. Hence `μ` is carried by `⋃_t π(t + L_∞) = T + A`. ∎ (EF_F⁺, hence EF_F, since
+`T + A = T + A + Fin_∅ ⊆ E`.) The same shells argument at an archimedean coordinate on which some `u ∈ U` is not isometric (only when `F` is not
+totally real) kills that coordinate too; not needed.
+
+**Sanity check (the advisor's):** a finite `U`-invariant measure on one `Fin_S` leaf is carried by `T + A` by Step 7 alone — that is R-U, a
+held result (SP-Cor's proof cites it), so EF_F⁺ agrees with it.
+
+### 3.9 The risks (i)–(iii) of the relayed reading, scored
+
+| risk | outcome |
+|---|---|
+| (i) "Lemma 3.1 applies to one u, and gives smallness only at S(u)" | **true, and enough**: one expanding place `v*` suffices; the rest is Step 7 |
+| (ii) "ℓ = v1 − v2 can be w-adically tiny … a product of maxima over two approximations is not a product of products" | **handled**: Step 4 multiplies through (`z = ℓ₁e₂ − ℓ₂e₁`, no division); Step 5 divides by `|ℓ_j|_{v*}` once, bounded below by Lemma PF for the single element `ℓ_j` (`≥ 2^{−[L:ℚ]}M_j^{−2}`). No product over two approximations of maxima is needed |
+| (iii) "the count #{v ∈ U : H(v) ≤ M} ≥ M^α … cite it rather than assume it" | **cited in its simplest form**: `U_ℚ ⊆ U_F` and Lehmer's Pythagorean count (§2.1 (b)); no torus point count is needed. Using `U_ℚ` also makes the multipliers archimedean isometries when `F` is not totally real, where the full `U_M` is infinite |
+| advisor's (b): "S = {π, π̄} and u = u_p … hyperbolically, as (a, a^{-1})" | **simplified**: one place `v* = π̄` from Lemma 3.1′ (one-sided refinement), then one coordinate at a time in Step 7; the hyperbolic pair is not needed. His conclusion ("carried by T + A") is confirmed |
+| advisor's constants "K > 6" | with my accounting `K > 9` (I keep `m(w)` rather than his local bounds); any fixed `K` works, so the discrepancy is bookkeeping |
+
+### 3.10 Audit of the result I like (standing rule 4)
+
+The result is the one the advisor predicted and the one that flatters the milestone, so each step was re-read looking for a failure:
+- **Lemma PF at stable places** — `Λ = R^∨` is not integral at the different's stable primes; the constant `C_Λ` absorbs it (finite). Checked.
+- **Totally complex `L`** — used to normalise archimedean factors as squares; true since `i ∉ ℝ`. Checked.
+- **Is `v*` in `W`?** — yes: `|u|_w = 1` at stable `w` for every `u ∈ U`, so an expanding place is split or archimedean. Checked.
+- **Different lifts at different scales** — one lift `x̃` is fixed for all scales; the atoms and boxes do not depend on it. Checked.
+- **SMB's limit is the ergodic components' entropy, not `h_μ`** — handled by Jacobs' formula (zero integral of a nonnegative function). Checked.
+- **Could the pigeonhole pair `v₁, v₂` give `ℓ` with `|ℓ|_{v*}` far below `M^{−2}`?** — impossible by Lemma PF: `ℓ ∈ R ∖ {0}` of height `≤ M²`.
+- **Is `T + K_{v*}` really `μ`-conull, not just `X′`?** — `η` arbitrary, `X′` depends on `η` only. Checked.
+- **Finite orbits on `L/Λ`** — `L/Λ` is a direct sum over stable places (split denominators are free in `Λ`), units act on each summand. Checked.
+- **A counterexample would have to be:** a `U`-invariant measure with one zero-entropy non-torsion element and mass off `T + A`. The only
+  candidates the project knows (EF-X's circles, the colourings' spectra at K and ℚ(√11), stage 4) are all on `T + A`. None found.
+- **What this does not prove:** anything about positive entropy — PE-2 is untouched. Grade: [hand, one mind]; the blind verifier X01V has the
+  claim list only.
+
+### 3.11 Would-have-searched-here log
+
+- None in stage 3: the transfer is a derivation; the only computation was bookkeeping of exponents, done by hand in §3.5–3.6.
