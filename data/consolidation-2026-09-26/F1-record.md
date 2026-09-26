@@ -192,3 +192,22 @@ that skips it"); `exact?`'s example ("`Nat.testBit_two_pow_sub_one` was reported
 
 Gates after batches 2–4 (one commit, so no commit carries a dangling pointer): audit `--base d03df9a8` PASS, `--dupes` 10, ledger-B PASS,
 bib PASS, architecture PASS; `CLAUDE.md` 290,964 bytes; GI 60,864 bytes.
+
+### Batch 5 — the owner's items 2 and 3
+
+- **Item 2, `CLAUDE.md`'s header:** after "…ranked ≥ 30 to `plans/FRONTIER-STUBS.md` alone" the budget history now reads "; E2's check
+  restored two intrinsics the pass had moved (283,274), and F1's audit of the git history (Kooshi: *"It's been a long struggle to
+  maintain the balance."*) restored the reasons and killing tests the compression passes since 2026-09-10 had cut, the stories to the
+  same file (291,306 bytes)" — E1's 282,481 kept as E1's figure. "Make the gate fail": "The self-match rule is on this page with eight
+  instances, all of them *kills*;" → "The self-match rule's eight recorded instances (§ Building; the eighth in
+  `plans/GROKKING-INSTANCES.md`) are all *kills*;" (only the sixth to eighth were on the page since `c5e55f12`; the eighth is now a
+  pointer).
+- **Item 3, `plans/FRONTIER-STUBS.md`:** row 34 (FS-65) "certificate ≤ 105" → "certificate ≤ 97 (FS-66's all-levels certificate, row 75;
+  FS-56's read ≤ 105)"; row 44 (FS-17) "(FS-56: α ≤ 105 < 106, `…N105.json`)" → "(FS-56: α ≤ 105 < 106, `…N105.json`; since FS-66,
+  `α(Γ₂₃) ≤ 97`, row 75)" — FS-56's refusal kept as the attribution, the current bound added (`LEDGER.md` row 75: "`α(Γ₂₃) ≤ 97` (was
+  105; bracket [87, 97]…)").
+- **Item 4:** G79's killing-test record untouched (the owner's ruling).
+
+Gates after batch 5: audit `--base d03df9a8` PASS, `--dupes` 10, ledger-B PASS, bib PASS, architecture PASS; `CLAUDE.md` 291,306 bytes.
+
+## Stage 3 — SAVED

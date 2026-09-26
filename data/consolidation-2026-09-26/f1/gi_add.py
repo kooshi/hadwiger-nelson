@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """F1 stage 3 batch 4: write the incidental restorations into plans/GROKKING-INSTANCES.md (remainders from f1/excise.py)."""
-T = '/tmp/claude-1000/'
+T = '/home/kooshi/source/lean-dir/data/consolidation-2026-09-26/f1/remainders/'
 rd = lambda f: '⟦ ' + open(T + f).read().strip() + ' ⟧'
 gi = open('plans/GROKKING-INSTANCES.md').read()
 def HDR(src, commit, date, after=None):
