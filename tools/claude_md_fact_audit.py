@@ -64,6 +64,15 @@ ALLOW: dict[str, str] = {
     "1–119": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)",
     "1–122": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–125 at FS-100 stage 5 wave 3's close (the 1–119 precedent)",
     "73–74": "§ The mission (2)'s citation of four proven at ℚ(√3,√5) (rows 73–74, G55), superseded when five landed there (row 123) at FS-100 stage 5 wave 3's front page; rows 73–74 stand in LEDGER.md",
+    # X31C, the fold of X27D/X27V and X11K3's kernel lane (2026-09-26; the owner's addition 2, X31C's record Stage 3).
+    "1–125": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–127 at FS-100 wave 3b's fold (X31C; the 1–122 precedent)",
+    "X27D/X27V": "the FS-98 paths-forward row's 'X27D/X27V attacked it at the close', superseded by their verdict (row 126: TR-ROT a GAP at NA₀); the records are plans/FS100-X27D-derivation.md and plans/FS100-X27V-verification.md",
+    "7279": "the vacuity gate's declaration count, 7279 -> 7438 at X11K3's gate (build/gate/vacuity/20260926T122608Z-1388046.log)",
+    "declarations=7279": "the same count, as the gate report prints it",
+    "309": "vacuity's refutations-skipped count, 309 -> 313 at X11K3's gate (the same log)",
+    "refutations-skipped=309": "the same count, as the gate report prints it",
+    "1193": "the axiom audit's clean count, 1193 -> 1236 at X11K3's gate (build/gate/axioms/20260926T122606Z-1387817.log; the 1130 precedent)",
+    "1209": "the axiom audit's record count, 1,209 at FS-75's close -> 1,252 at X11K3's gate (the same log)",
     # J55, the front page of FS-100's in-ban round and FS-75's minimal instance (2026-09-26; the owner's rulings, J55's record).
     "7051": "the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)",
     "declarations=7051": "the same count, as the gate report prints it",
@@ -286,6 +295,7 @@ ALLOW: dict[str, str] = {
 GATE_CHANGES: dict[tuple, str] = {
     (("1034", "5"), ("1130", "5")): "M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases",
     (("1130", "5"), ("1193", "5")): "FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases",
+    (("1193", "5"), ("1236", "5")): "X11K3's gate (FS-100 wave 3's kernel lane; build/gate/axioms/20260926T122606Z-1387817.log): 1,252 records, 1,236 clean, 11 axiom-free, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

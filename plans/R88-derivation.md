@@ -235,6 +235,10 @@ of invariant measures would still leave Q-tr. *Prior art:* via R88-CL (in print)
   (Rudolph, A. Johnson, Host, Einsiedler–Lindenstrauss; none held) do not visibly apply and the zero-entropy case is Furstenberg's measure question's
   analogue; and the spectral measure of a merely translation-invariant `μ` is not `U`-invariant, so even a full classification of `U`-invariant
   measures would leave Q-μ open without T-B1-type isolation (the weak-* limit of `U`-averages can move mass onto Pull, the plan's §M.1).
+  **Status (FS-100 wave 3b, `LEDGER.md` row 126): (R1) is closed given MR** — every translation-invariant `μ` has `σ_μ(E ∖ T₄) = 0`
+  (`plans/FS100-derivation.md` FS100-X27D-E = X27V-TA + X27V-FS, two derivations blind; `T₄ = (R ∩ 𝔓⁴)^⊥`), so a spectrum carried by `E` is
+  `T₄`'s and `μ` is a pullback (X27V-R1). Q-μ is then exactly (R2), and given MR it is TR-ROT itself, not a step inside it (FS100-X27D-EQ);
+  X22D §2.4's "TR-ROT, the step C-1 needs" is C-1 itself given MR. What is left is NA₀ / COL-E (`plans/FS100-derivation.md` §G).
 
 ## §K. Kernel decisions, summarised
 

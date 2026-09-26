@@ -9,6 +9,15 @@ its price table §Stage 5, and X11K2's re-aim §X11K2 Stage 1R), `plans/FS100-de
 **The target** (FS100-COR; `LEDGER.md` row 123, drafted): for every real number field `F`, `min(L(F), 5) ≤ χ(F²)`; with the upper half,
 `χ(F²) = L(F)` whenever `L(F) ≤ 5`; `χ(ℚ(√47)²) = 5` and `χ(ℚ(√3,√5)²) = 5` as corollaries.
 
+**Status: first slot done (X11K3, 2026-09-26; `LEDGER.md` row 127; record `plans/FS100-K-kernel-47.md` §X11K3; report
+`data/crunch-2026-09-26-x2x3/reports/X11K3.md`).** Route steps 1–2's gate and `posDef_corr` are done: `SpectralChain.min_localBound_five_le_chromaticNumber`
+(`min(L(F), 5) ≤ χ(F²)`, every real number field) and `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain` are in `Proofs/`, standard
+three axioms, conditional only on named hypotheses (`BochnerHerglotz`, `InvariantMeasureOnClosed`, and the chain's [hand] lemmas as named
+propositions); `χ(ℚ(√47)²) ≤ 5` is unconditional; `posDef_corr` is proved; the skeleton is retired. L1 is now the named classical input
+`InvariantMeasureOnClosed` (its repair, a countability hypothesis proved over number fields, is in the kernel record only — owner's ruling).
+**Next:** `InvariantMeasureOnClosed` as Markov–Kakutani (~100–200k), then the upper half `hUpper` via row 57's gap (~40–80k), then
+Herglotz–Bochner (weeks); step 4 below stands.
+
 **Where it stands at minting** (X11K2's report, `data/crunch-2026-09-26-x2x3/reports/X11K2.md`; record `plans/FS100-K-kernel-47.md` §X11K2):
 - `χ(ℚ(√47)²) ≤ 5` is **unconditional and sorry-free** in the skeleton (`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`, an elementary
   11-adic descent, no valuation subring; standard three axioms), **not yet gated into `Proofs/`** — X11K3 was gating it at minting.

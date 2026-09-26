@@ -10,7 +10,7 @@ T-J38-2 (given MR(F), row 88 ⟺ T-B1; blind-checked TRUE by J48, BC-6). J38's s
 demoted: T-B1 ⟹ Q-tr ⟹ T-B2. MR and DP are homed in FS-100, which absorbed FS-97. The determinacy ladder's two proved rungs: R88-B2-1
 (co-finite) and row 91's H (half-space).
 
-**TR-ROT beside T-B1 (FS-100 stage 5, wave 3, 2026-09-26; `LEDGER.md` row 124):** 'no translation-invariant non-pullback colouring measure has every `U`-Følner average converge onto the pullbacks' (X22V §3.3) — T-B1 ⟹ TR-ROT; X27D/X27V attacked it at the close (TR-ROT under attack; their verdict is a follow-on fold).
+**TR-ROT beside T-B1 (FS-100 stage 5, wave 3, 2026-09-26; `LEDGER.md` row 124):** 'no translation-invariant non-pullback colouring measure has every `U`-Følner average converge onto the pullbacks' (X22V §3.3) — T-B1 ⟹ TR-ROT. **Verdict (wave 3b, `LEDGER.md` row 126): GAP** — given MR, TR-ROT is all of Q-μ and is closed on `E`; the measure half now has its own named step **NA₀** beside T-B1: "No nonzero finite positive `E`-null measure on `R̂` is `T₄`-attracted under `U`" (X27D §2.6; pure dynamics of `U ↷ R̂`, sufficient; X27V's COL-E exact given MR). T-B1 ⟹ TR-ROT stays (X22D-RT's last clause).
 
 ## The mission, in plain language
 

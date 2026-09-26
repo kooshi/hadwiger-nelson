@@ -57,3 +57,34 @@ Stages 3–4 of this record (CLOSED-QUESTIONS, `--dupes`, the kernel row, the ga
 ### Would have searched here (Stage 2)
 
 - None.
+
+## Stage 3 — SAVED (the front page; the owner's two additions)
+
+- `LEDGER.md`: **row 126** (TR-ROT's verdict, X27D-EQ and E, NA₀ quoted verbatim from X27D §2.6) and **row 127** (FS-101's first slot, M2's
+  kernel-row form: the headline and `χ(ℚ(√47)²) = 5` over named hypotheses, `χ(ℚ(√47)²) ≤ 5` unconditional; gate numbers from X11K3's report,
+  the axiom counts re-read from `build/gate/axioms/20260926T122606Z-1387817.log`: 1,247 records in CLEAN of which 11 axiom-free, so 1,236 clean,
+  and 5 purchased — 1,252 records); row 124's "TR-ROT (under attack …)" replaced by "a GAP at one named step (row 126)"; § B lines (Stage 1).
+  Rows 88 and 113 carried no "under attack" text; unchanged.
+- `CLAUDE.md`: item 24, rank 3 and rank 8 rows (verdict for "under attack"); rank 3′ (FS-101's first slot); the ledger pointer 1–125 → 1–127; the
+  kernel paragraph (FS-101's first slot, row 127); the Last-updated line (wave 3b); G21's clause (the owner's slip); G79's clause (the data point).
+  **Gate counts** (owner's addition 2), from `build/gate/axioms/latest` and `build/gate/vacuity/latest` (`20260926T122608Z-1388046.log`:
+  `declarations=7438 refutations-skipped=313`, `sites=279 vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`): § Trust ledger
+  1193 → 1236 clean, 1,209 → 1,252 records; § The gate 7279 → 7438, 309 → 313. `scripts/vacuity-baseline.txt` comment line likewise.
+  `tools/claude_md_fact_audit.py`: ALLOWs `1–125`, `X27D/X27V` (the FS-98 row's "attacked it at the close", superseded by row 126), `7279`,
+  `declarations=7279`, `309`, `refutations-skipped=309`, `1193`, `1209`; GATE_CHANGES `(1193, 5) → (1236, 5)`, X11K3's gate log.
+- `plans/R88-derivation.md` §G T-C′: (R1) closed given MR; Q-μ = (R2) = TR-ROT given MR; NA₀ / COL-E left.
+- Stubs: FS-100's (wave-3 status sentence; a wave-3b line closing the J38 block, NA₀ verbatim); FS-98's (TR-ROT's verdict, NA₀ beside T-B1);
+  FS-101's (first slot done; next Markov–Kakutani, row 57's gap, Herglotz–Bochner).
+- `plans/FRONTIER-STUBS.md`: the open-milestones summary, rank 3 (FS-100), rank 3′ (FS-101), rank 8 (FS-98), and the wave-3 closed-list entry.
+- **`--dupes`: 11 at launch → 12 after row 126 was appended → 10.** Two second tellings made pointers to their one home (row 123's Fischer §1
+  quotation → "quoted in row 99"; row 123's copy of X24R's gate extent → "its extent in row 121"). **Left, with the reason:** the three runs
+  that are table structure, not retold facts — the milestone cell "FS-100 stage 5, wave 3 (crunch 2026-09-26)" closing rows 123, 124, 125 and
+  run into the next row's opening bar (two tellings; the second appeared when row 126 was appended after row 125), and two § B lines whose
+  statements both end "`L ≥ 5`" beside the same grade cell. The seven older runs predate the crunch's wave 3 and are outside the owner's note.
+
+Gates at this stage: fact audit `--base efa56d37` exit 0 PASS; `--dupes` 10 runs / 628 B; `fs71 --strict` exit 0 PASS; `bib_audit` exit 0;
+`check_architecture` exit 0 PASS. `CLAUDE.md` 295,503 → 296,094 bytes.
+
+### Would have searched here (Stage 3)
+
+- None.
