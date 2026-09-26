@@ -23,9 +23,9 @@ D = [
  ("replace", "G61 (3)", "(the general statement is FS-67, unproved, and false without gap-freedom)",
   "(at 11 a theorem: the plane is 3-gap-free and `Γ₁₁` mixes, `λ* < 1/2`, so every three-colouring of the product pulls back, rows "
   "114–115; at 7, where `Γ₇` neither mixes nor has `χv > 3`, still measured; false without gap-freedom)"),
- ("insert-after", "G72 count", "**nine of nine**.",
-  " **Tenth (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural "
-  "question; the spectral pullback by extending a known tool; the three-colour selection not found: **ten of ten**."),
+ ("insert-after", "G72 count (after the row-88 close's tenth sentence, itself after this anchor)", "**nine of nine**.",
+  " **Eleventh (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural "
+  "question; the spectral pullback by extending a known tool; the three-colour selection not found: **eleven of eleven**."),
  ("insert-after", "G21 instance", "an existence theorem paraphrased as a classification at four addresses (G77).",
   " **FS-67's two:** plants that could not fire — a tightness plant that left `λ_min` where it was, and a circle `x² + y² = 2` that "
   "built an isomorphic graph (every circle is a similarity image of the unit circle)."),

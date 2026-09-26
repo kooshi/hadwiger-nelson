@@ -553,8 +553,9 @@ the counterexample's) reads FS-67 exactly: the counterexample invariant (a Hedet
 invariant at three colours (a colouring of `E_3(G)`'s non-zero-winding part) is the missing step. **§IQ's open instances:** `S₁ = UD(𝔽₉, 2)` and
 the tight 3-adic levels are decided against every `H` with `χv(H) > 3` or `λ* < 1/2` (J27D's DB-2 consumer sentence; `Γ_p`, `p ≥ 11`), open
 against `Γ₇`-type `H`; `U₃₂`, `U₄`, the 2-adic levels, FS-61 A.7's colourings and R3a were not treated by the records; Zhang's exception is §5.3's
-GAP. **G72 count, tenth:** through the structural question — the criterion and the obstruction it names; the spectral pullback by extending a
-known tool; the three-colour selection not found: **ten of ten** (drafted for G72 in R.8).
+GAP. **G72 count, eleventh** (after the row-88 close's tenth, owner's numbering): through the structural question — the criterion and the
+obstruction it names; the spectral pullback by extending a known tool; the three-colour selection not found: **eleven of eleven** (drafted
+for G72 in R.8c, in its own sentence after the row-88 one).
 
 #### R.3 §PA sweep: what the milestone learned about what its object IS
 
@@ -673,7 +674,7 @@ class, checked here in one step): 20 entries.*
 | FS67-DD2R | FS-67 | `K_k × X` (`X` regular) Hoffman-tight at `k` ⟺ `μ_min(X) ≥ −d_X/(k−1)`; DD-2 via `K_k × X` ⟺ such a Hedetniemi pair | hand (two derivations) | `plans/FS67-derivation.md` FS67-DD2R | declined |
 | FS67-DD2N | FS-67 | a Hoffman-tight counterexample's `H` is not a mixing abelian Cayley graph, and for 1-walk-regular `G` has `χv(H) ≤ k < χ(H)` | hand (J27D; halves checked by J27V) | `plans/FS67-derivation.md` FS67-DD2N | declined |
 
-#### R.8c `CLAUDE.md` lines (drafts; net **+2,397 bytes** of the 3,000 allowed)
+#### R.8c `CLAUDE.md` lines (drafts; net **+2,406 bytes** of the 3,000 allowed)
 
 Measured by `data/fs67/j42/claude_md_drafts.py` against `CLAUDE.md` on disk at this stage (every anchor occurs exactly once; its plant, an
 absent G61 anchor, exits 1 — `claude-md-bytes-plant.out`); bytes per edit in `claude-md-bytes.out`. The front-page job re-measures against
@@ -690,8 +691,8 @@ NEW: «**In a product, Hoffman-tight pulls back where the other factor mixes** (
 --- G61 (3) [replace] anchor/old: «(the general statement is FS-67, unproved, and false without gap-freedom)»
 NEW: «(at 11 a theorem: the plane is 3-gap-free and `Γ₁₁` mixes, `λ* < 1/2`, so every three-colouring of the product pulls back, rows 114–115; at 7, where `Γ₇` neither mixes nor has `χv > 3`, still measured; false without gap-freedom)»
 
---- G72 count [insert-after] anchor/old: «**nine of nine**.»
-NEW: « **Tenth (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found: **ten of ten**.»
+--- G72 count (after the row-88 close's tenth sentence, itself after this anchor) [insert-after] anchor/old: «**nine of nine**.»
+NEW: « **Eleventh (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found: **eleven of eleven**.»
 
 --- G21 instance [insert-after] anchor/old: «an existence theorem paraphrased as a classification at four addresses (G77).»
 NEW: « **FS-67's two:** plants that could not fire — a tightness plant that left `λ_min` where it was, and a circle `x² + y² = 2` that built an isomorphic graph (every circle is a similarity image of the unit circle).»
@@ -745,3 +746,24 @@ correction in another job's brief; row 21, J40's next reading step, carried in F
 ruling, the PB-feasibility correction, G61 (3)'s 11 half, the predictions, J42's own slips, J27's flagged web summary, and a coordination slip: rows 11–22 — the clerk's fold of J27V's and
 J40's reports — and J42's ticks, uncommitted in the shared tree, were swept into the clerk's fold commit `475f8b6a` mid-stage; J42's stage-4
 commit `3d0ef240` carries one correction on top; nothing lost, the history misattributes the ticks). Every number in a tick was read from its source (`db.out`, `dc.out`, `fq9.out`, the records).
+
+### Stage 5 — SAVED (prior art, from J40's verdicts)
+
+J40 finished (`plans/FS67-PA-close.md`, final commit `fbfe53d3`; report `data/crunch-2026-09-25/reports/J40.md`). Its verdicts are copied into
+all 20 *Prior art:* fields of `plans/FS67-derivation.md` by `data/fs67/j42/fill_prior_art.py`, which asserts every quoted J40 fragment verbatim
+(whitespace-normalised) in J40's record before writing (plant: an altered fragment, exits 1 — `fill-plant.out`); **no "pending J40" remains**.
+Entries J40 did not gate (DA-1′, DC2S, DB1R, DD2R, DD2N; its list is its Stage 1) say so. **Owner's coordination notes applied:** the G72 draft
+is FS-67's **eleventh** count, in its own sentence after the row-88 close's tenth (R.2, R.8c; net `CLAUDE.md` drafts now **+2,406 bytes**).
+
+**The prior-art position of the headline results, at exact scope** (nothing here is called new; a negative measures J40's queries):
+- **No from four colours up** (FS67-DA4): **a composition of print, not ours** — Duffus–Sands–Woodrow 1985's `B(n) ⟹ H(n)` with `[Tardif2023]`
+  (owner's ruling; not a `CLOSED-QUESTIONS.md` entry). Ours only as its explicit `K_k × X` form, and even that is undecided until DSW 1985 is read.
+- **The criterion** (FS67-DA2): not found as a sentence by J40's searches; its `K_k` case is Greenwell–Lovász's proof, its `K_k^s` case
+  `[Larose2002]`; first stated here at FS-89's close (PA-T6). L1 is the known "frozen = fall" identification carried to `K_k^G`.
+- **The mixing pullback** (FS67-DC2): partly in print — `G = K_k` is `[PakVilenchik2013]` Thm 3; arbitrary gap-free `G` not found (40 zbMATH
+  queries, two citation databases); J40: a reviewer may call it folklore.
+- **DC-1, DD-1**: the integral corollaries of `[GodsilEtAl2020]` Thm 4.16 (1), (3), not stated there. **Lemma T**: in print (`[Haemers2021]`).
+- **Lemma W and DB-1's zero class**: undecided until `[ElZaharSauer1985]` is read (not held).
+
+**The repo-wide check.** `tools/fs71_ledger_b_check.py --strict` now fails on FS67's 20 ids (and the row-88 close's `R88-*` ids) until the
+front-page job applies both closes' § B lines — expected (owner's note); every FS67 entry parses with all five fields.

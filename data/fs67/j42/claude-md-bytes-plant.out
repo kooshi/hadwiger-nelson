@@ -2,10 +2,10 @@ Paths forward row 9 (FS-67)                   replace        old   783  new   82
 G54: products                                 insert-before  old     0  new   563  net  +563
 ANCHOR COUNT 0 (need 1): G61 (3) PLANT: (the general statement is FS-67, proved)
 G61 (3) PLANT                                 replace        old    40  new   240  net  +200
-G72 count                                     insert-after   old     0  new   249  net  +249
+G72 count (after the row-88 close's tenth sentence, itself after this anchor) insert-after   old     0  new   258  net  +258
 G21 instance                                  insert-after   old     0  new   216  net  +216
 Frontier item 28 (new line after item 27)     insert-after   old     0  new   469  net  +469
 Prior-art position, Ours                      insert-after   old     0  new   216  net  +216
 Prior-art position, Not ours                  insert-after   old     0  new   207  net  +207
 Last updated                                  insert-after   old     0  new   264  net  +264
-NET BYTES 2430 (budget 3000) -> within
+NET BYTES 2439 (budget 3000) -> within
