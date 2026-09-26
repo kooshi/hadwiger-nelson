@@ -221,3 +221,52 @@ Johnson 2000 (*Infinite graphs and the fractional chromatic number*, Geombinator
 rational or algebraic planes; neither is held (Geombinatorics — browser fetch). T-C(A) does **not** decide `χ(ℚ(√47)²)`, so it answers no
 posed question even if one is found there; it restricts the spectral type of a hypothetical four-colouring (the analogue of G60's
 fractional cap read on invariant measures).
+
+## Stage 5 — SAVED (result 4: the partials toward transience)
+
+**The objects in their disciplines' words.** (Symbolic dynamics) B2-1 "no colouring differs from a pullback on a finite non-empty set" is
+"every point of Pull is **frozen**" (`[AlonEtAl2021]`'s term, stage 2); T-B1 "every point of Pull is isolated in `X₄(F)`" is "Pull consists
+of **isolated points** of the shift" (Cantor–Bendixson rank, locally determined configurations); Theorem H and its ultrametric failure are
+**unique continuation / one-sided determinism from a half-space** — Boyle–Lind's **expansive subdynamics**, which for algebraic actions
+Einsiedler–Lind–Miles decide by the logarithmic image (**amoeba**) at archimedean **and** non-archimedean places. (Additive combinatorics)
+B2-2 / L-B2-2 and J28V's B2-e ("a circle has upper Banach density 0 in `R`") are **Poincaré recurrence for sets of positive upper Banach
+density**: a set of positive density meets a translate of itself in an infinite (indeed positive-density) set for some, indeed syndetically
+many, translations — which a circle (two translates meet in ≤ 2 points) cannot.
+
+**Queries** (2026-09-25; `queries.log`):
+
+| db | query | hits | relevant |
+|---|---|---|---|
+| ZB | `ti:"expansive subdynamics"` | 2 | **Boyle–Lind 1997** (Trans. AMS 349, 55–102; Zbl 0863.54034; summary read); **Einsiedler–Lind–Miles 2001** (ETDS 21, 1695–1729; Zbl 1003.37003; review read; arXiv math/0104261) |
+| ZB | `ab:"expansive" & ab:"half-plane" & ab:"subshift"` | 0 | — |
+| ZB | `ab:"Cantor-Bendixson" & ab:"subshift"` | 3 | computability of countable subshifts (off-target) |
+| ZB | `ab:"isolated points" & ab:"subshift"` | 4 | Frisch–Tamuz 2017 (generic shifts on amenable groups; off-target) |
+| ZB | `ab:"intersectivity lemma"`; `"intersectivity" & Bergelson` | 0; 1 | (Frantzikinakis–Kuca 2025, off-target) |
+| ZB | `ti:"sets of recurrence" & au:"Bergelson, Vitaly"` | 3 | Bergelson 1985, J. London Math. Soc. (Zbl 0579.10029) — the intersectivity lemma's source (not opened) |
+| ZB | `ab:"unique continuation" & ab:"coloring"` | 0 | — |
+| ZB | `ab:"domino problem" & ab:"abelian group"` | 0 | — |
+| ZB | `ab:"half-plane" & ab:"tiling" & ab:"determined"` | 1 | off-target |
+| OA | `frozen colorings Cayley graph infinite degree` (stage 2) | 33 | none beyond `[AlonEtAl2021]` |
+
+**Read.** Boyle–Lind's summary (zbMATH): expansiveness of a `ℤ^d`-action along a subspace `V ⊆ ℝ^d`; the expansive `k`-planes form an open
+set; properties change abruptly between components. Einsiedler–Lind–Miles's review: for algebraic `ℤ^d`-actions on compact abelian groups,
+"a complete characterization of expansiveness of subspaces", using "the logarithmic image of a variety" (the amoeba) and a directional
+Noetherianity. The papers themselves were not opened (budget); `[AlonEtAl2021]` §2 was read in stage 2.
+
+**Verdict — result 4: partly in print as frameworks and methods; the statements not found by these searches.**
+- **B2-1** ("every pullback is frozen"): the notion is `[AlonEtAl2021]`'s; its general criteria need bounded degree and are silent here. The
+  statement for `Cay(R, U)`: not found.
+- **L-B2-2** ("`d*(z + kU) = 0` for every `z ∈ R` and `k ≥ 1`", J28D §5.2; the brief's wider "every archimedean-bounded subset" is what
+  J28D's proof gives) and **B2-e**: the method is textbook — Poincaré recurrence for sets of positive upper Banach density (Furstenberg's
+  correspondence, stage 2's Bergelson–Moragues Thm 2.3; the intersectivity lemma of Bergelson 1985, not opened) — and the circle case is an
+  instance. *In print as a method*; the instance is not a claim of anyone's.
+- **Theorem H and its ultrametric failure** (FS-86's theorem, carried as a partial): not found as a statement. **A recognition for the
+  grokkings, graded [reading]:** J28D's named obstruction for T-B1 ("the re-centred region is `{w : |w + z_n|_v < |z_n|_v}`, an ultrametric
+  sphere … no ultrametric analogue of H is available from a finite set") is, in Boyle–Lind's language, the statement that archimedean
+  half-spaces are expansive at Pull while no split-place "half-space" is; for *algebraic* actions Einsiedler–Lind–Miles decide expansiveness
+  by the amoeba at **all** places, archimedean and non-archimedean, which is where this milestone's split places would enter. `X₄(F)` is not
+  an algebraic shift and `R` is not finitely generated, so no theorem transfers; the vocabulary does. *Killing test of the reading:* a
+  type-(B) configuration determined by its restriction to a split-place ball's complement (an ultrametric half-space analogue), which the
+  reading says Einsiedler–Lind–Miles-type directional analysis would rule out.
+- **T-B1, T-B2** (GAP in both records): no printed statement that isolated periodic points of a colouring shift on an infinite-degree abelian
+  Cayley graph exist or are forced; not found.
