@@ -1,0 +1,81 @@
+{
+ "verdict": "certified",
+ "exit": 0,
+ "reasons": [],
+ "plant": null,
+ "prec": 53,
+ "windows": null,
+ "target": "49997/50000",
+ "n_points": 493471,
+ "n_cells": {
+  "a": 475470,
+  "b": 9000,
+  "c": 9000
+ },
+ "margin_certified_lower": 2.348283217956503e-06,
+ "margin_enclosure": [
+  2.348283217956503e-06,
+  2.348283377273507e-06
+ ],
+ "margin_certified_lower_exact": "5623021187825846042206412589170616993168668437759579/2394524282602951341184917229922358099404279878411878400000",
+ "worst_cell": [
+  3.77488,
+  3.77489
+ ],
+ "worst_cell_region": "a",
+ "worst_cell_LB_enclosure": [
+  0.9999423482832179,
+  0.9999423482833772
+ ],
+ "min_point_W_lower": 0.9999500309633823,
+ "min_point_t": 3.77488,
+ "min_point_W_upper": 0.9999500309635417,
+ "points_certified_below_target": 0,
+ "first_point_below": [],
+ "max_ball_radius": 4.263256414560601e-13,
+ "L_derived_upper": {
+  "a": 1.536536086805986,
+  "b": 0.17725663050711946,
+  "c": 0.05605346827693847
+ },
+ "L_used": {
+  "a": 1.536536086805986,
+  "b": 0.17725663050711946,
+  "c": 0.05605346827693847
+ },
+ "L_invalid_regions": [],
+ "refuted_cells": 0,
+ "refuted_examples": [],
+ "cell_width_max": {
+  "a": 0.0010000000000047748,
+  "b": 0.10000000000013642,
+  "c": 1.0
+ },
+ "constants_report": {
+  "d_min_lower": 0.21493672220363552,
+  "Lambda1": 0.5818652242911636,
+  "Lambda1_refined_cells": 37,
+  "C_upper": 0.7993657557866202,
+  "S1_upper": 2.640707886740982,
+  "Sh_upper": 2.2174658999832824
+ },
+ "supplementary": {
+  "H5_sign_change_certified": true,
+  "H5_absJ0_upper": 0.025233701426691256,
+  "H5_tail_enclosure": [
+   1.0106668711290507,
+   1.0106668711290507
+  ],
+  "H5_tail_gt_1": true,
+  "NB_dW_1289_72": [
+   -0.03010999656449587,
+   -0.03010999656449587
+  ],
+  "NB_threshold": 0.03,
+  "NB_constant_refuted": true
+ },
+ "grid_sha256": "2ec0c4f6ec5e10f8004c6036dd6ccf6d6f655c8cd210e9630b78b1bf5da3e2ff",
+ "seconds": 17.6,
+ "seconds_eval": 9.4
+}
+CERTIFIED: min certified margin 2.348283e-06 on cell [3.77488, 3.77489]

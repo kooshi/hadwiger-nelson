@@ -6,13 +6,29 @@ the first stage not SAVED.*
 
 ## Theorems this phase proved
 
-*(filled at Stage 3)*
+- **J49-T1 — H4 certified in ball arithmetic.** For every `t ∈ [0, 10⁴]`, `ϕ(t) ≥ 1 − µ + 2.3482832995·10⁻⁶ = 0.9999423482…`
+  (`ϕ` = the paper's eq. (22) with `g23.csv`'s weights), on J26's covering (493,471 points, J26's grid bit for bit) with J26's Lipschitz
+  formulas enclosed. **[cert]** — arb (python-flint 0.9.0) at 80 bits, max ball radius 3.4·10⁻²¹, re-run at 53 bits with an enclosing
+  interval; the covering inequality and `|J₁″| ≤ 1` are hand (one line each, §1.4); **Watson §13.74 cited** (as J26). Address:
+  `tools/fs100_kt1_ball.py`, `data/fs100/kt1/verdict-prec80.json`, `run-prec80.out`; §3.1.
+- **J49-T2 — H5 (the tail) in ball arithmetic.** For `t > 10⁴`, `ϕ(t) ≥ 1.0106668711… > 1`, with a zero of `J₁` isolated in
+  `[999.8114, 999.8116]` by a certified sign change and `d_min² > 1/100` certified. **[cert]**; **Watson §15.31 cited** (as the paper and
+  J26). Same address, key `supplementary`.
+- **J49-T3 — the notebook's derivative bound on `[1000, 10⁴]` is false.** `W′(1289.72) ∈ −0.030109996564496 ± 10⁻²⁰`, so
+  `sup_{[1000,10⁴]} |W′| > 0.03`, the notebook's "Derivative is less than 0.03" (it bounds `|W′|` by `max|J₁(t)|, t > 1000` = 0.0252).
+  **[cert]** (one ball; the point from a double-precision scan). Harmless: with the derived `L_c ≤ 0.0561` the notebook's own step-1 minimum 1.03829 less
+  `0.0561/2` is 1.0102 > 1, and J49-T1 uses `L_c`, never the notebook's constant. Same address, key `NB_dW_1289_72`.
+- **With J26-T1's exact H1–H3, H6:** every hypothesis of Proposition 1 for `(X₂₃, g23.csv)` now rests on exact or ball arithmetic plus two
+  cited classical Bessel facts, so **`m₁(ℝ²) ≤ 0.246989 < 0.2470`** **[cert + hand]** — given Proposition 1 and the paper's §2
+  approximation (hand; read and found sound by J26).
 
 ## "Would have searched here" log
 
 - Would have located the true minimum of `W` on `[0, 10⁴]` by a root-finder on `W′` and certified around it — not done: the brief fixes
   J26's own evaluation points and derived constants, so the check is a fixed, finite set of ball evaluations whose extent J26's covering
   fixed first (a complete exact evaluation of a finite set, logged here as at the edge of the ban, allowed).
+- Would have maximised `|W′|` on `[1000, 10⁴]` by an optimiser to test the notebook's 0.03 — instead one double-precision evaluation of
+  `W′` on a fixed 900,001-point `linspace` (a measurement, seconds) named `t ≈ 1289.72`, and one ball checked the claim there (J49-T3).
 - Would have tuned the grid until the margin closed — not done; the grid is J26's, unchanged. A refinement is run only if the verdict is
   `inconclusive`, and then with its shape fixed before it runs (Stage 3).
 
@@ -134,3 +150,65 @@ containing J26's worst cell). Each plant's reason and two-sided bound are assert
 
 CLI failure paths read directly: `--plant target_between` → exit 2 with a stderr banner; the planted grid → exit 3 with a banner;
 `--plant lowprec` → exit 1 with a banner. Success prints one line.
+
+## Stage 3 — SAVED: the run and the verdict
+
+### 3.1 The run
+
+`scripts/slot.py --mem 6 --cpus 16 -- build/venv-flint/bin/python tools/fs100_kt1_ball.py --prec 80 --jobs 16 --json-out
+data/fs100/kt1/verdict-prec80.json` — **exit 0**, 21.6 s wall, 186 s CPU, 0.39 GB parent RSS (desktop). Output
+`data/fs100/kt1/run-prec80.out`; the same at 53 bits: `verdict-prec53.json`, exit 0.
+
+| quantity | 80 bits | 53 bits |
+|---|---|---|
+| verdict | **certified** | certified |
+| points / cells (`a`, `b`, `c`) | 493,471 / 475,470, 9,000, 9,000 | same |
+| min certified margin (`min LB − 0.99994`) | **2.3482832995458353·10⁻⁶** (exact rational in the JSON) | 2.348283217956503·10⁻⁶ |
+| its enclosure | [2.3482832995458353, 2.3482832995458366]·10⁻⁶ | [2.348283217956503, 2.348283377273507]·10⁻⁶ — contains the 80-bit one |
+| the cell | `[3.77488, 3.77489]` (J26's) | same |
+| min point value | `W(3.77488) ∈ 0.9999500309634645 ± 10⁻²¹` (the paper's "0.99995003 . . ." at "3.77488 . . .") | — |
+| points certified below 0.99994 | 0 | 0 |
+| max ball radius | 3.4·10⁻²¹ | 4.3·10⁻¹³ |
+| Lipschitz constants used = derived upper bounds | `L_a` 1.536536086806, `L_b` 0.177256630507, `L_c` 0.056053468277 | same |
+| difference quotients above the constant | 0 | 0 |
+| S-H5 tail | `[1.0106668711290507, same]`, sign change certified | — |
+| S-NB `W′(1289.72)` | −0.03010999656449587 (a ball of radius < 10⁻²⁰) | — |
+
+**Verdict: `certified`.** The margin is J26's to every printed digit (J26: "min lower bound 0.999942348"); ball arithmetic moved it by
+less than 10⁻¹⁸. Nothing needed refining.
+
+**Audited as hard as a failure would be (standing rule 4).** What could make this wrong, and what closes it: (i) the wrong function — the
+code's `W` reproduces J26's float worst bound to 12 digits, and J26's reproduces every recorded notebook output; (ii) the wrong points —
+sha256 of the regenerated grid equals the exporter's, which ran J26's own lines; (iii) a gap in the covering — the points span exactly
+`[0, 10⁴]` and every consecutive pair is a cell; (iv) a region's constant used outside its range — a cell takes `L_b`/`L_c` only when its
+left end is ≥ 100/1000, and `t·d ≥ 21.49 ≥ 10` there; (v) precision dependence — two precisions, nested enclosures; (vi) the controls —
+every plant fired for its own reason (Stage 2). **What remains on citation:** Watson §13.74 (`x(J₁² + Y₁²)` decreasing, for `L_b`, `L_c`
+and `Λ₁`'s tail) and §15.31 (decreasing extrema of `|J₀|`, for H5) — classical, and the same two J26 and the paper cite; and arb's
+correctness.
+
+### 3.2 What the verdict does to each row (the FS-100 stub's §6.2 table)
+
+The stub, verbatim: "*If it passes,* those three rows move from 'external, double precision' to [cert] on their shared input (J37 §4.2) —
+with J45's grades, five rows: P4, P5, P7, P8, P9."
+
+| row | effect of `certified` |
+|---|---|
+| P4 (row 92's ℚ(√47) clause), P5 (T-J37-1, the archimedean case), P7 (T-C(A)), P8 (A⁺), P9's SP-Cor | the shared input `m₁(ℝ²) ≤ 0.2470` moves from "external; certificate re-checked in double precision" to **[cert]** (J26 exact + J49 ball) |
+| T-J38-1/2/3, row 112 (Theorem C), T-J39-4 | the same input, the same upgrade (listed in §6.2's violated column as users of it) |
+| P1, P2, P3, P6, P10; T-J39-1, T-J39-3, T-J39-5 | none (they do not use `[AmbrusEtAl2023]`) |
+
+No row's statement changes; only the grade of one input. The stub's §7 failure clause ("Stage 2 violated → §6.2's table; inconclusive → the
+grade stays") does not fire. **Prediction scored:** X-KT1 ("high that it passes; the value is the grade, not the answer", stub §4) — **met**.
+
+### 3.3 Proposed edits (the front-page lane applies them; I edit none of these files)
+
+- **`LEDGER.md` row 92, `plans/FS86-derivation.md` FS86-Cx-C14 and FS86-CL1, `LEDGER.md` § B's C14 line, `plans/R88-derivation.md` line 88,
+  and the poster rows P4, P5, P7–P9:** the input's grade line becomes "`[AmbrusEtAl2023]` Thm 1 (`m₁(ℝ²) ≤ 0.2470`; external,
+  computer-assisted, published; **its certificate re-checked here: exact on H1–H3 and H6 (J26), ball arithmetic on H4 and H5 (J49,
+  `plans/FS100-KT1-ambrus-ball.md`); Watson §13.74 and §15.31 cited**)".
+- **`plans/PA-ambrus2023-audit.md`** (J26's record; not mine to edit): J26-T1's "H4 in double precision (… not interval-certified …)" and
+  §3.2's "the value of `J₀` at about 640,000 points in double precision" are superseded by J49-T1/T2. Two corrections owed there: the
+  covering has **493,471** distinct points (about 646,000 evaluations with the refined grids' overlaps, which is the notebook's count);
+  and J26-T3's "neither bites here" stands, but on `[1000, 10⁴]` the notebook's constant is not only unjustified but false (J49-T3).
+- **`BIBLIOGRAPHY.md`**, `[AmbrusEtAl2023]`'s role column: add "H4 and H5 re-checked in ball arithmetic by J49 (`tools/fs100_kt1_ball.py`)".
+- **The FS-100 stub** §6.2 / §7: Stage 2 (KT-1) is done, verdict `certified`.
