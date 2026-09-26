@@ -1,0 +1,15 @@
+ok   +127 B  item 10 (T-C(A) at ℚ(√47))
+ok   +317 B  item 24 (the decomposition and Theorem C)
+ok    +29 B  G76 header grade
+ok   +361 B  G76 body (the colouring-level split)
+ok   +157 B  G76 reading narrowed (J28D's proposed edit; P-real)
+ok   +146 B  G76 Do line
+ok   +120 B  G72 tenth count
+ok   +103 B  G44 Do line (the missed bearing)
+ok   +304 B  G49 instance (row 88's close)
+ok    +67 B  G30 ladder
+ok   +143 B  prior-art position, Ours
+ok   +339 B  prior-art position, Not ours
+FAIL: plant: `old` occurs 0 times (must be exactly once)
+net: +2213 bytes (budget 4000); CLAUDE.md after: 288,662 bytes (ceiling 300,000)
+RESULT: FAIL (1)

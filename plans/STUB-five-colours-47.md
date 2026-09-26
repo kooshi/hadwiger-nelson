@@ -1,5 +1,8 @@
 # FS-84 — ℚ(√47): five colours, the conjecture's cheapest exposed prediction (stub; FS-59's sibling)
 
+**At row 88's close (2026-09-25; `LEDGER.md` row 113, `plans/R88-derivation.md` R88-TCA).** No translation-invariant random four-colouring of ℚ(√47)'s plane has its spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places, the dyadic one included [hand, two derivations blind to each other; the class form one mind]; so a four-colouring falsifying the five-clause carries an invariant measure on its orbit closure whose spectrum is carried by no such class — it reads infinitely many split places in aggregate (FS-97 holds that remainder). `χ(ℚ(√47)²) = 5` is not claimed and this stub's question is untouched. Provisional bearings add: G76's colouring-level split (row 111).
+
+
 **At FS-91's close.** No character four-colouring of ℚ(√47)'s plane, now through the class theorem with no certificate (C-47, row 100), and at every `L = 5` field by CLG-g's (g1): a four-colouring falsifying the five-clause is no character colouring.
 
 **J29's reframe (2026-09-25; `plans/FS84-five-colours-47.md`, its stages from 2026-10-01):** the survivors' `Θ₄` cell analysis can only colour a survivor (G71, row 96); a refusal needs a finite graph or a four-class averaged certificate; `χ(ℚ(√47)²) = 5` answers Soifer 55.1 and Moorhouse's ℚ(√47) question.

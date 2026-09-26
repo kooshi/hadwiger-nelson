@@ -774,3 +774,104 @@ Bergelson 1985 (optional).
 ### Stage 4 — numbers reserved (written before the drafts, so FS-67's close can number after them)
 
 **`LEDGER.md` rows 111, 112, 113** (the last is **113**; FS-67's close numbers from 114). **Stubs FS-97, FS-98, FS-99** (the last is **FS-99**).
+
+### Stage 4 — SAVED (the drafts: ledger rows, § B lines, `CLAUDE.md` edits, `BIBLIOGRAPHY.md` rows, stubs, the one *Prior art:* field)
+
+*Every draft below is for a front-page job; this job wrote none of `LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md`, `plans/FRONTIER-STUBS.md`. It
+did write, as its brief allows: three new stub files, three stub re-aims, and one* Prior art: *field in `plans/FS86-derivation.md`.*
+
+#### 4.1 `LEDGER.md` § A — rows 111–113 (the last is **113**)
+
+| 111 | **Four-colour rigidity over a real S2 field splits into invariant measures and transience: `F(R) ≠ 0` iff every translation-invariant random four-colouring of the plane is a pullback from the tight place (Q-μ) and no colouring is transient — none whose orbit closure's invariant measures all live on the pullbacks without its being one (Q-tr); `F ⊆ F_μ ⊆ P` with `F_μ ∈ {0, P(R)}`; transience is zero upper Banach density of the non-pullback windows; over ℚ(√59), ℚ(√83), ℚ(√131) row 88's question stays undecided, its transience half stopped at two named steps** (row 88's question, crunch 2026-09-25; `plans/R88-derivation.md` R88-TA, CL, TA1, TA2, B2-1 to B2-3, J28V-8d). **[hand, two derivations (J28D; J28V blind); one scope repair — the Galois part of the acting group commutes with complex conjugation, automatic for type (B)]** Pull is the 1,179,936 pullbacks of row 67's `P₄`, finite and invariant; `F_μ` is an ideal by push-forward along the rotations (G55), so `0` or `P(R)`; (v) is the clopen correspondence (upper Banach density of return times = the largest invariant measure of the window); isolated pullbacks give Q-tr. **Partials toward transience:** every pullback is *frozen* (a defect forces defects on 8 of the 24 residue classes of `U` about it, so no finite defect); every archimedean-bounded subset of `R` has upper Banach density 0, so bounded propagation chains are thin; a sparse defect is transient — defect growth (T-B2) is Q-tr's single-pullback case, invisible to every invariant measure; isolation (T-B1) ⟹ Q-tr ⟹ T-B2; a FALSE for either is a non-pullback, i.e. row 88's "no". **The two gaps, the same step in both records:** isolation of a pullback from a finite patch — unique continuation from a region that is no archimedean half-space (a split-dominated re-centring gives an ultrametric sphere; the pinned bootstrap stops at the discreteness of `T(O_S)`); defect growth — from propagation to positive density. **Corrects row 88:** V2's finite-index step needs no Lemma R — every non-zero ideal of `ℤ[U_F]` has finite index for every real number field (R88-J28V-7; `[LevitzMott1972]` Thm 2.3). **Not claimed:** `F(R)` for any type-(B) field; isolation; defect growth; any statement outside S2 (at ℚ(√11) Q-μ fails, C9). **Prior art:** the correspondence is `[BergelsonMoragues2021]` Thm 2.3 + Prop. 2.7; transience is the *measure centre* in Pull (`[ChenDai2017]` Lemma 1.2, Følner-relative); *frozen* is `[AlonEtAl2021]`'s word (its criteria silent at infinite degree); the sandwich is FS-73's (G60); the decomposition's statements not found (J35). | `plans/R88-derivation.md` §1, §3, §G; `plans/FS86-R88-D-derivation.md` §Stage 2, §Stage 4; `plans/FS86-R88-V-verification.md` §2.3–§2.5, §Stage 5; `plans/FS86-row88-PA-close.md` §Stage 2, §Stage 5, §6.1 | row 88 (crunch 2026-09-25) |
+
+| 112 | **Theorem C over the real fields: over every real field in S2, a translation-invariant random four-colouring of the plane whose spectral measure reads finitely many places — is carried by `T + A + Fin_S` for a finite set `S` of split places — is almost surely a pullback from the tight dyadic place; the real place enters as an input, through `m₁(ℝ²) ≤ 0.2470 < 1/4`, not as the obstruction** (row 88's question; `plans/R88-derivation.md` R88-TC, TC-ext, J28V-2, TC-reg, TC-Yp, J28V-3, TC-count, TC-tab). **[hand; over ℚ(√59), ℚ(√83), ℚ(√131) two derivations blind to each other by independent routes (J28D; J28V) over common inputs — C14.1–C14.3, `[AmbrusEtAl2023]` Thm 1 (its certificate re-checked by J26), FS-66's certificates at 11 and 19, Lemmas D and P, FS38-D2-A/B, V3ram, VC-C2, weak and strong approximation; over the rest of S2 J28D's derivation, with J28V's reading that its route reaches it]** The hypothesis is exactly continuity in probability of `y ↦ P(c(0) ≠ c(y))` for the completion `G_S` (every stable place, the archimedean ones, `S`), so the colouring extends to a stationary, almost-everywhere proper random colouring of `Cay(G_S, T_S)`; the stable places where Hoffman fails (11 for ℚ(√59), 19 for ℚ(√83), ℚ(√131)), the real places and `S` form a factor of ratio `< 1/4`, every other stable place (Weil from 37, Lemma P at new levels) joins the tight factor (J28D) or a compact tail below `1/4` (J28V); a stationary form of Zhang's count against the compact Hoffman-tight factor makes almost every fibre a pullback, and gap-freeness one pullback. Neither route uses J21-MX (row 109) or C14/C14′ as black boxes — C14 reads the tight place at a finite level and C14′'s format is not what a random extension produces, found by both independently. **Sharp:** fails at ℚ(√11) (the stable 7's `2/7`; C9's colouring has spectrum on `T + A`), at K (a second tight place), and with Hoffman's 0.2871 in place of `m₁`. **Extends row 92** from measurable windows to invariant measures of finite-place spectral type, every stable place at once. **Narrows G76's reading:** on `T + A + Fin_S` the real place is not the obstruction. **Not claimed:** spectra carried by `⋃_S (T + A + Fin_S)` but by no single one, or reading infinitely many split places (FS-97); transient colourings (row 111; FS-98); anything at five colours. **Prior art:** partly in print, in its inputs — the measurable Hoffman bound on edge-null sets `[BachocEtAl2014]` Thm 2.2, the split places `[BardestaniMallahiKarai2017]` §3.2 (which is C14.2 (c)'s computation in window form), `[AmbrusEtAl2023]`, `[Zhang2012]` Thm 1.8's count, Bochner and Doob; the theorem not found (J35). | `plans/R88-derivation.md` §2; `plans/FS86-R88-D-derivation.md` §3.1–§3.2, §3.4; `plans/FS86-R88-V-verification.md` §2.1, §Stage 5; `tools/crunch_j28d_factors.py`, `tools/crunch_j28v_facts.py`; `data/fs86r88/j28d/`, `data/fs86r88/j28v/`; `plans/FS86-row88-PA-close.md` §Stage 3 | row 88 (crunch 2026-09-25) |
+
+| 113 | **At ℚ(√47) no invariant random four-colouring reads finitely many places: no translation-invariant probability on the four-colourings of ℚ(√47)'s plane has its spectral measure carried by a `T + A + Fin_S` (`S` a finite set of split places, the dyadic one included); so a four-colouring of that plane — a counterexample to the local–global conjecture's cheapest exposed five-clause — carries an invariant measure on its orbit closure whose spectrum is carried by no such class, reading infinitely many split places in aggregate** (row 88's question; `plans/R88-derivation.md` R88-TCA, R88-J28V-6). **[hand; two derivations blind to each other (J28D; J28V) over row 112's inputs; the class form — every real field whose stable places all have all-levels ratio `< 1/4` — J28D's; a split dyadic place rests on C14.2 (c) at `q = 2`, now three derivations (M3's two, row 110; J28V's), J28D's a re-reading]** Row 112's extension with no tight factor: every factor of the completion has ratio `< 1/4` (11 and 19 by FS-66; the tail by Hoffman, 31's `1/4 − 2.745·10⁻⁶` the largest; the ramified 47 by Lemma P; the real places `m₁`; split places 0), so four classes cannot cover. FS86-CL1's count (row 92) moved from measurable windows to invariant measures. **It does not decide `χ(ℚ(√47)²)`** (`4 ≤ χ ≤ 5` stands; FS-84). "Infinitely many" is in aggregate: a spectrum carried by `⋃_S Fin_S` but by no single one is not excluded (FS-97). **Corrects row 110's prior art:** C14.2 (c) at `q = 2` is partly in print — `[BardestaniMallahiKarai2017]` §3.2 over `ℚ_p`, every `p`; the `ℚ₂(i)` instance a transcription; whether Sally–Taibleson's Lemma 8(i) covers residue characteristic 2 undecided (not fetched). **Not claimed:** anything about four-colourings whose spectrum reads infinitely many places; five colours. **Prior art:** not found (J35); undecided on `[Johnson2000]` and Johnson's 2000 Geombinatorics paper (neither held), which could pose the fractional question on rational planes. | `plans/R88-derivation.md` §2; `plans/FS86-R88-D-derivation.md` §3.3; `plans/FS86-R88-V-verification.md` §2.2, §Stage 5; `plans/FS86-row88-PA-close.md` §Stage 3, §Stage 4 | row 88 (crunch 2026-09-25) |
+
+#### 4.2 `LEDGER.md` § B — 19 lines
+
+The lines are `data/fs86r88/j41/ledger-b-draft.md`, checked in stage 2 (`check_b_draft.py`: PASS; the plant fails). Insert them under a milestone
+group "row 88's question (crunch 2026-09-25)" after M3's lines.
+
+#### 4.3 `CLAUDE.md` — twelve edits, **net +2,246 bytes** (budget 4,000; the file would read 288,695 bytes)
+
+The edits are exact `(old, new)` pairs in `data/fs86r88/j41/claude_drafts.py`; the script checks each `old` occurs exactly once in `CLAUDE.md` on
+disk and prints the net bytes (`claude-drafts.out`: PASS; `--plant` adds an absent `old` and fails, exit 1). `--out <file>` writes the edited text
+to another file for the front page to diff; the script refuses to write `CLAUDE.md`. In words:
+
+| # | where | the edit |
+|---|---|---|
+| 1 | Frontier item 10 | after "open (row 84; FS-84)": a four-colouring there would carry an invariant measure whose spectrum is carried by no `T + A + Fin_S`, `S` finite (row 113) |
+| 2–3 | Frontier item 24 | rows list adds 111–113; one sentence: rigidity splits into invariant measures and transience (row 111); finite-place spectra are pullbacks (row 112); a "no" is transient or reads infinitely many split places; transience stops at isolation and defect growth |
+| 4–7 | G76 | grade adds "the measure half (rows 111–113)"; a body sentence on the colouring-level split and Theorem C; **the reading narrowed** — "false on `T + A + Fin_S`, where the real place is an input (`m₁ < 1/4`, row 112); it survives only for infinite-place spectra and transient colourings"; the *Do* adds "when an invariant measure's spectrum reads finitely many places, extend it to the completion and count (row 112), never search for its falsifier". **The killing test stands unchanged** (a non-periodic four-colouring of ℚ(√−709)'s plane): it tests the reading for all colourings, which T-C does not reach |
+| 8 | G72 | "**Tenth (row 88):** Q-μ's invariant (spectral type) found and decisive on `T + A + Fin_S`, Q-tr's not: **ten of ten**" — FS-67's close may also claim tenth; the front page orders them |
+| 9 | G44 (the missed bearing, 3.1) | *Do* adds: at four colours a field's stable place from 37 up has `\|λ_min\|/d ≤ 2√p/(p+1) < 1/3` and needs no certificate (row 112) |
+| 10 | G49 | a row-88 instance: C14.2 (c) is BMK 2017 §3.2 in window form (held since FS-58, never carried to the lemma); zbMATH's `ab:` field cannot hit withheld summaries — run `ti:`, `au:` and all-field queries beside it |
+| 11 | G30's ladder | topological dynamics now includes the ergodic theory of amenable actions (row 111) |
+| 12–13 | the prior-art position | **Ours:** the split into invariant measures and transience, Theorem C over the real S2 fields and its ℚ(√47) form (rows 111–113). **Not ours:** the clopen correspondence, the measure centre, frozen colourings, the measurable Hoffman bound, the split-place hyperbola computation, the finite norm property (their keys) |
+
+The Frontier's "Last updated" line and § Paths forward mirror are the front page's (4.5 gives the stub rows).
+
+#### 4.4 `BIBLIOGRAPHY.md` — rows proposed (J35's nine and two corrections, J28's missing listings)
+
+| key | reference | role | copy | read |
+|---|---|---|---|---|
+| `[BergelsonMoragues2021]` | V. Bergelson, A. Ferré Moragues, *An ergodic correspondence principle, invariant means and applications*, Israel J. Math. (2021), 921–962, doi 10.1007/s11856-021-2233-y, Zbl 1501.37009; arXiv:2003.03029 | Thm 2.3 + Prop. 2.7 are R88-CL (row 111 (v)) | `library/pdf/BergelsonMoragues2021-ergodic-correspondence-invariant-means.pdf` | §1, §2 to Prop. 2.7 (J35) |
+| `[ChenDai2017]` | Z. Chen, X. Dai, *Chaotic dynamics of minimal center of attraction of discrete amenable group actions*, J. Math. Anal. Appl. 456 (2017) 1397–1414, Zbl 1385.37038; arXiv:1707.07786 | Lemma 1.2: the measure centre by positive upper density of return times — row 111's "transient" | `library/pdf/ChenDai2017-minimal-center-attraction-amenable.pdf` | §1, §2.3 (J35) |
+| `[WangZhou2016]` | Wang, Zhou, the measure centre for amenable actions, Acta Sci. Nat. Univ. Sunyatseni 55(3) (2016) 52–54, Zbl 1363.28019 | defines the measure centre for amenable actions | not held | summary only (J35) |
+| `[LevitzMott1972]` | K. B. Levitz, J. L. Mott, *Rings with finite norm property*, Canad. J. Math. 24 (1972) 557–565, doi 10.4153/CJM-1972-049-1, Zbl 0222.13006 | Thm 2.3 (`A = ℤ`): every subring of a number field has every non-zero ideal of finite index — R88-J28V-7 | `library/pdf/LevitzMott1972-rings-finite-norm-property.pdf` | §2 in full (J35) |
+| `[ChewLawn1970]` | K. L. Chew, S. Lawn, *Residually finite rings*, Canad. J. Math. 22 (1970) 92–101, Zbl 0215.08901 | Thm 2.3 = Levitz–Mott's Prop. 2.2 | not held | listing |
+| `[SallyTaibleson1966]` | P. J. Sally Jr., M. H. Taibleson, *Special functions on locally compact fields*, Acta Math. 116 (1966) 279–309, doi 10.1007/BF02392818 | Lemma 8(i): the vanishing step behind BMK's Lemma 3.11 and C14.2 (c); whether it covers residue characteristic 2 is undecided | not held (Kooshi's fetch 1) | cited-by only |
+| `[BoyleLind1997]` | M. Boyle, D. Lind, *Expansive subdynamics*, Trans. AMS 349 (1997) 55–102, Zbl 0863.54034 | the vocabulary of FS-98's reading | not held (free online) | zbMATH summary only |
+| `[EinsiedlerLindMiles2001]` | M. Einsiedler, D. Lind, R. Miles, *Expansive subdynamics for algebraic actions*, ETDS 21 (2001) 1695–1729, Zbl 1003.37003; arXiv:math/0104261 | expansiveness decided by amoebas at archimedean and non-archimedean places — FS-98's reading | not held (free online) | review only |
+| `[Zaks1989]` | J. Zaks, *On four-colourings of the rational four-space*, Aequationes Math. 37 (1989) 259–266, doi 10.1007/BF01836448, Zbl 0705.05033 | every colour class dense in every four-colouring of `G(ℚ⁴)`: FS-99's control | not held (Kooshi's fetch 2) | reviewer's text (J28, J35) |
+| `[Johnson2000frac]` | P. D. Johnson Jr., *Infinite graphs and the fractional chromatic number: some recent surprises*, Geombinatorics 9(3) (2000) 135–144, Zbl 0945.05021 | could pose row 113's fractional question on rational planes | not held (Kooshi's fetch 3) | reviewer's text |
+| `[Bergelson1985]` | V. Bergelson, *Sets of recurrence of `ℤ^m`-actions and properties of sets of differences in `ℤ^m`*, J. London Math. Soc. (2) 31 (1985) 295–304, Zbl 0579.10029 | the intersectivity lemma (R88-B2-2's method) | not held (optional fetch 4) | listing |
+| `[AsgarliYip2022]`, `[Yip2026]` | S. Asgarli, C. H. Yip, Zbl 1496.05068; C. H. Yip, Zbl 1584.05083 — maximum cliques in Cayley graphs over finite fields with multiplicative connection sets | the finite analogue of R88-TC-count's equality case (subspaces) | not held | listings (J28 §PA.2) |
+| `[ExooIsmailescu2016]` | G. Exoo, D. Ismailescu, *Small order triangle-free 4-chromatic unit distance graphs*, Zbl 1362.05039 | stage Y1's realisation question (FS-90 (c)) | not held | listing |
+| `[Yu2022]` | Yu, *Times two, three, five orbits on `𝕋²`*, Zbl 1495.37039 | closed-set ×p×q on a torus (row 95's neighbour) | not held | listing |
+| `[Rudolph1990]`, `[JohnsonA1992]`, `[Host1995]` | D. Rudolph (1990); A. Johnson (1992; initials unchecked; **not** `[Johnson1992]`, P. D. Johnson Jr.'s two-colouring paper); B. Host (1995) — measure rigidity for ×p×q, positive entropy | what FS-97's (R2) would cite | not held | listings (J28 §PA.4) |
+
+**Corrections to existing rows:** `[BachocEtAl2014]` — "not held" is wrong: held as
+`library/pdf/arXiv-1301.1054-bachoc-decorte-oliveira-vallentin-spectral-bounds-operator.pdf`; read by J35: Def. 2.1, Thm 2.2 with proof, Thm 2.3's
+statement; role to add: Thm 2.2 is the Hoffman bound for edge-null sets behind C14.2 (c), R88-TC-count and R88-TC-Yp. `[BardestaniMallahiKarai2017]` —
+read status add: §3.2 (Thm 3.7, Lemmas 3.8–3.11) in full (J35); role add: C14.2 (c) (FS-86) is their §3.2 in window form. **Already rows, nothing
+owed:** `[HervaKari2025]`, `[MacVicar2023]`, `[SilvaFilho2026]`, and the Yip clique line.
+
+#### 4.5 `plans/FRONTIER-STUBS.md` — rows proposed (the front page ranks them)
+
+| stub | the question | bearing on χ ≥ 6 | proposed place |
+|---|---|---|---|
+| **FS-97 invariant four-colourings whose spectrum reads infinitely many places** — `plans/STUB-infinite-place-spectra.md` (minted at row 88's close) | row 88's measure half beyond Theorem C: spectra carried by `⋃_S (T + A + Fin_S)` but by no single one (R1), or reading infinitely many split places (R2); entropy and ×2×3; the ℚ(√47) form | none directly; the only measure route to `F(R)` over type (B) and to `χ(ℚ(√47)²)` | beside FS-64 (rank ~10) |
+| **FS-98 transience over the type-(B) fields** — `plans/STUB-ultrametric-continuation.md` (minted at row 88's close) | isolation across an ultrametric front (T-B1) and defect growth (T-B2), both stopped at one named step by two minds; the expansive-subdynamics reading | none directly; row 88's other half — either FALSE is its "no" | beside FS-76 (rank ~7) |
+| **FS-99 the ℚ⁴ control** — `plans/STUB-rational-four-space-rigidity.md` (minted at row 88's close) | is every four-colouring of `G(ℚ⁴)` the Benda–Perles pullback? The triangle-full analogue of row 88; Zaks 1989 first | none; a control that separates "dyadic tightness" from "triangles" | low (rank ~30) |
+| FS-84, FS-64, FS-90 | re-aimed at row 88's close (their stubs' opening paragraphs): row 113 at ℚ(√47); rows 111–113 and Y2 at FS-64; Y1 at FS-90 (c) | unchanged | unchanged |
+
+#### 4.6 Corrections owed elsewhere (drafts; not this job's files)
+
+- **`plans/FS86-derivation.md` FS86-V2** (its proof line): the finite-index step needs no Lemma R, for every real number field (R88-J28V-7; in print,
+  `[LevitzMott1972]` Thm 2.3). This job was allowed one field in that file (FS86-Cx-C14's *Prior art:*, below), so this one is a draft.
+- **`plans/FS86-row88-rigidity.md` §S.2 and §P**: recorded in 3.1 and 3.4 (this job may touch §R-close only).
+- **WORKFLOW 3.2 item 8** (the zbMATH instructions): the `ab:` caveat of 3.3 item 7 belongs there too; drafted in the G49 edit above.
+
+#### 4.7 Written by this job, as its brief allows
+
+- `plans/FS86-derivation.md` FS86-Cx-C14's *Prior art:* field: "C14.2 (c)'s computation (split places, ratio 0) is `[BardestaniMallahiKarai2017]` §3.2
+  in window form" (J35's attribution), and nothing else changed there.
+- New stubs: FS-97 (`plans/STUB-infinite-place-spectra.md`), FS-98 (`plans/STUB-ultrametric-continuation.md`), FS-99
+  (`plans/STUB-rational-four-space-rigidity.md`). J36's record existed at stage 4 with its stage 1 only (expectations written before reading);
+  FS-97 cites it as such.
+- Re-aims (an opening paragraph each): FS-84 (`plans/STUB-five-colours-47.md`), FS-64 (`plans/STUB-adelic-window-colouring.md`, carrying Y2), FS-90
+  (`plans/STUB-sanctioned-search-fs86.md`, carrying Y1).
+
+**Decisions this stage settled** (four parts each):
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| three ledger rows (111 decomposition and partials; 112 Theorem C; 113 its ℚ(√47) form) | one row for everything | row 113 is what item 10 and FS-84 cite; a single row would bury the ℚ(√47) consequence | high |
+| FS-98 carries both transience gaps (T-B1 and T-B2), named for the ultrametric reading | a stub for the ultrametric reading alone, T-B2 unhomed | both gaps sit in one half (Q-tr, R88-TA1), and T-B2 had no stub | medium — if the reading proves a dead end, T-B2 deserves its own stub |
+| Y2 carried into FS-64, Y1 into FS-90 (c) | a new stub for Y2 (`χ_f(ℚ(√59)²)`) | the brief pairs them so; FS-64 is the density-and-window instrument over many places, and FS-90 (c) is Y1 verbatim | medium — if Y2 is run it may want its own stub under G60 |
+| G76 edited, no new grokking minted | a G79 for "rigidity = measures + transience" | one home per fact: G76 is the four-colour-rigidity entry, and the split is its colouring-level form | high |
+| the ℚ⁴ control minted as FS-99 | decline it as "a lead, not pursued" (J28's §PA.3) | the stub rule: every candidate a milestone surfaces becomes a stub; it costs one file | high |
+
+**Would have searched here (stage 4):** none.

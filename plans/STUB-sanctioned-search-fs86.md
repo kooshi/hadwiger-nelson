@@ -1,5 +1,8 @@
 # FS-90 — two hours of sanctioned search: FS-86's finite-witness questions, priced side by side (stub)
 
+**At row 88's close (2026-09-25).** Candidate (c) — a triangle-free forcer of `(0, 4)` in a number field inside `ℚ₂(√3)` (row 90's T1) — is the row-88 plan's stage **Y1**, dated from 2026-10-01 and not briefed (`plans/FS86-row88-rigidity.md` §S.3; Kooshi's grant). Row 111 prices its other side: a counterexample to isolation (T-B1) or to defect growth (T-B2) is itself a non-pullback (R88-TA2), so no finite search for either is cheaper than row 88's "no"; a finite ball agreeing with a pullback on a patch measures balls, never the plane (FS-98). Price (c) by G65's four-colour band (row 84) before any run.
+
+
 **Re-aimed at FS-89's close (2026-09-25).** **(a)** HD1 is proved (`LEDGER.md` row 96), so by FS86-dB-HDcert a finite exact certificate exists on some finitely generated lattice (existence only, no size bound); two hours on `Λ₅₁₀` would price its size and a kernel-checkable form, and `Λ₅₁₀` is not known to carry it — the candidate is now a measurement of a certificate known to exist, never a test of HD1. **(b)** needs an **acquisition step first** (the next-step advisor's correction, `plans/POROS-2026-09-25-fs86-next.md` §5): Heule's T721 graph is not held and `[Heule2021]` is a loan; about an hour if the graph can be fetched, days if borrowed, and the audit runs only then. Kooshi has not ruled on the hours (FS-89 close inventory item 6); the default is T721's audit only if the graph can be fetched, otherwise banked until 2026-10-01.
 
 *Minted 2026-09-25 at FS-86's close for the post-close advisor and Kooshi, whose grant it is ("2 hours of sanctioned search time"). Rank 3 in
