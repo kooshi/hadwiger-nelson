@@ -211,3 +211,24 @@ bib PASS, architecture PASS; `CLAUDE.md` 290,964 bytes; GI 60,864 bytes.
 Gates after batch 5: audit `--base d03df9a8` PASS, `--dupes` 10, ledger-B PASS, bib PASS, architecture PASS; `CLAUDE.md` 291,306 bytes.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED (the report)
+
+| kind | count | where |
+|---|---|---|
+| compression commits audited | 38 | stage 1 table |
+| intrinsic, lost, restored to `CLAUDE.md` | 35 passages (reasons 26, killing tests 5 — G21, G30, G46, G49, G51's design test —, conditions 3, one rule with its only example: G30's "write it for an outside reader") | batches 1–4 |
+| intrinsic, parked for lack of room | 0 | — |
+| incidental, lost, restored to `plans/GROKKING-INSTANCES.md` | 16 passages in 14 sections (the pre-cut method grokkings G21, G30, G46, G49, G50, G51 and § The gate, § Searching, as at `c5e55f12^` with "[…]" for what the corpus holds; eight single incident sentences from `34464cba`, `fc2775f2`, `d0df4f82`, `0f4cf93a`) | batch 4 |
+| owner's items | 1 done (both moved: neither is its rule's only statement), 2 done, 3 done, 4 untouched | batches 4–5 |
+| current-state rewrites, and incidentals already in plans or records | every other flagged sentence (≈ 2,600 detector candidates; most are the narrative cut's history, the rest corrections or fact-audited pointer moves) | stage 2 table |
+
+`CLAUDE.md` 283,274 → **291,306 bytes** (+8,032: restorations ≈ 7,300, nine pointers ≈ 560, the header's budget line ≈ 330, less the
+owner's two moved passages ≈ 300). `plans/GROKKING-INSTANCES.md` 9,599 → 60,864. Gates at every commit: audit `--base d03df9a8` PASS,
+`--dupes` 10 (the launch count), ledger-B PASS, bib PASS, architecture PASS.
+
+**Limits of the audit.** The detector compares 5-word runs, so a sentence cut and its sense re-said in other words reads as kept, and a
+paraphrase-level loss is invisible to it; every flagged sentence in a grokking or a method section was read by hand, but the narrative
+cut's Frontier, ledger and paths-forward history (≈ 500 k bytes) was classed current-state by section, not read line by line, and its
+math grokkings were left to the 09-12 semantic audit (`724d4411`, `3b813df1`) and the G67 pass, which re-authored every math entry's
+killing test (the originals, cut at `c5e55f12`, were not restored).
