@@ -689,3 +689,17 @@ drafted lines appended to `LEDGER.md`'s text in memory, restricted to `FS100-` i
 `FS100-` ids, and nothing else (`repo-check.out`) — until a front-page job applies the § B lines.
 
 **Would have searched here (stage 3):** none — filing only.
+
+### Left for a successor on the same brief (J53 handed back at its context line after stage 3)
+
+- **Stage 4** — the §G re-read and forward propagation; the §IQ re-read and G72's count; the §PA sweep (candidates: FS100-CP's dichotomy; J51V's
+  co-normal reading; stage 2's "orbit closures are unions of subgroup translates", which also decides the no-swap trigger — FS100-KS3's note says
+  stage 6 does not take the slot, to be ruled here); predictions scored once each (X-KS, P-sat, P-sat1, P-K0, P-EL, P-ent, X-MR, X-R1, J50's
+  hunch and card, both C0 tables); the verdict in four parts; the honesty tally (inventory rows 32, 46, 47, 52, 62, 63, 34; stage 2's G50 instance;
+  J51's 30-for-29 lines); the ban measurement (every would-have-searched line). Inventory rows ticked "→ stage 4".
+- **Stage 5** — drafts: `LEDGER.md` rows **116** (Kronecker selection refuted as stated; KS-2; the `E`-form and FS100-EQ), **117** (T-C(A)'s
+  class = `L ≥ 5`; K0), **118** (rank one: N1, T4, T5; FS100-T2 and the card) — last number 118; the § B lines (`data/fs100/j53/ledger-b-draft.md`,
+  checked); `CLAUDE.md` lines ≤ 3,000 bytes net; `BIBLIOGRAPHY.md` rows (update `[EinsiedlerLindenstrauss2022]` and `[Wang2012]` rather than add;
+  new: EL2003, Lindenstrauss–Wang 2012 (review read), Bekka–Francini 2022; the Rudolph/Johnson/Host row "Listings only" → "zbMATH reviews
+  (J51)"); the stub re-aims as files (FS-100: stage 4 → KS-sat_E at ℚ(√47), K0 done, §2.3 cell and §5 item 5 corrections, PE-lim as stage 5, P1
+  leads post-ban; FS-64: Kronecker selection with T-C(A) in the `E`-form). Inventory rows ticked "→ stage 5". The file move is done (stage 2).
