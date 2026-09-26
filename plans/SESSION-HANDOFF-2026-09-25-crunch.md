@@ -183,3 +183,15 @@ J52, plan `plans/FS75-kernel-167.md`), swapping to FS-87's targets 2–3 if leaf
 earlier default said; why: both briefs handle a mid-compression read, and each planner reads a snapshot copy of `CLAUDE.md` taken at one
 commit, so the only thing waiting bought (a consistent read) is had without the idle hour; confidence high. **Running (3):** J05, J51, J52.
 Next: J51D + J51V (parallel), J52K, as slots free; then each milestone's close-math and front-page jobs.
+
+**Update ~04:10 — J05 done** (record `data/crunch-2026-09-25/j05-record.md`): `CLAUDE.md` 296,413 → 283,826 bytes, **12,587 freed — the
+brief's 15,000 floor not landed**; no fact lost (fact audit `--base 2802fd78` PASS after every batch, re-run by me; `--dupes` 13 → 7; bib and
+fs71 `--strict` PASS; no ALLOW lines). Where the bytes came from: the paths-forward table cut to first clauses (−5,405), Frontier items and
+the close log (−6,187), G72's count as one list, and the "Ours" claim list moved verbatim to `LEDGER.md` § The claim list with a pointer.
+**Owner rulings (for Kooshi's):** (1) the claim-list move is accepted — alternative, revert b6d96724 and keep it in context; why:
+the ledger is the home of what is ours, the re-grokking reads it in full, and the "Not ours" list, which guards against over-claiming, stays
+in context; confidence medium — if a reframe misses a claim because it was not in context, move it back. (2) The last ~2.4 KB is not taken —
+alternatives: move G56's named fields and G31's arena counts into ledger rows, or trim the incident narratives in § Building and § The gate;
+why not: the first moves numbers out of grokkings that reason with them, the second is the scars the file exists to keep; 16,174 bytes of
+headroom is two milestone closes; confidence high. Header's stale "with a compression pass to follow" rewritten (68c5bc9c, audit-gated).
+**Running (2):** J51, J52.
