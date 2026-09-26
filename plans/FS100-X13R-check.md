@@ -107,3 +107,61 @@ Re-run (scratch, 06:07): output identical to `data/fs100/x03d/weyl-check.out`; b
 
 - None. `tools/x13r_check.py` enumerates the fixed finite set `U_N` at `N = 100,000` (seconds; extent fixed before the run) and builds one
   witness by the §4.2 construction at parameters chosen before the run; neither searches.
+
+## Stage 3 — SAVED (X03D-Z)
+
+**Verdict: VALID.** "Every `U`-invariant finite positive `ν` on `R̂` has `ν(Z ∖ (T + A)) = 0`" (§4.4) checks step by step. The one step X03D
+left unwritten (measurability, "one line, not written out") holds, with the line supplied in (0); it needs the adelic model to be the
+`S`-adic one, which I state.
+
+### (0) The model, and measurability (the unwritten line)
+
+- Let `S_f` be the places of `L` above `P` and `𝔸_S = L_∞ × ∏′_{v∈S_f} L_v` (restricted product with respect to `O_v`). `R = ℤ[i][1/P]` is
+  the ring of `S`-integers and is a **cocompact lattice** in `𝔸_S`: discrete (`|x|_∞ < 1` and `x ∈ O_v` for all `v ∈ S_f` force `x ∈ ℤ[i]`,
+  `x = 0`) and cocompact (`𝔸_L = L + (L_∞ × ∏_v O_v)`, class number 1, gives `𝔸_S = R + (L_∞ × ∏_{S_f} O_v)`, and `[0,1)² × ∏_{S_f} O_v` is
+  compact). So `R̂ ≅ 𝔸_S/R^⊥` with `R^⊥ ⊂ L` diagonally (the elements `k ∈ L` with `k ∈ 𝔡_v^{−1}O_v` off `S`); this is X03D's
+  "`ξ ∈ 𝔸_L` modulo `L + 𝒪^⊥`" with the non-`S` components quotiented out. Every `χ` has representatives, each with `ξ_v ∈ O_v` at all but
+  finitely many `v ∈ S_f`.
+- Let `Ã ⊂ 𝔸_S` be the summable representatives: Borel (a countable sum of Borel functions converges). Step 1 below shows the quotient
+  map `q` is **injective on `Ã`**. `q|_Ã` is continuous and injective on a Borel subset of a Polish space, so by Lusin–Souslin `Z = q(Ã)` is
+  Borel and `(q|_Ã)⁻¹ : Z → Ã` (the canonical representative) is Borel. **Checks.** (In X03D's `𝔸_L` model injectivity fails through `o ∈ 𝒪^⊥`;
+  only the `P`- and `∞`-components are canonical there, which is all the proof uses, but the `S`-adic model makes the line one line.)
+
+### (1) Canonical representative
+
+- Summability, as defined ("`Σ_{p∈P} Σ_{v∣p} p^{−1−v(ξ_v)} < ∞`", over the places with `ξ_v ∈ O_v`, `p^{−∞} = 0`), is equivalent to
+  `Σ_{Q(ξ)} 1/p < ∞` with `Q(ξ) = {p : v(ξ_v) ≤ 0 at some v | p}`: places with `v(ξ_v) ≥ 1` contribute `≤ 2p^{−2}`, summable over all `p`.
+- Two summable representatives `ξ, ξ′` differ by `k ∈ R^⊥ ⊂ L`; off `Q(ξ) ∪ Q(ξ′)` (a set of finite `Σ 1/p`), `v(k) ≥ 1` at both places above
+  `p`. `P ∖ (Q ∪ Q′)` is infinite because `Σ_P 1/p = ∞` (Dirichlet). A non-zero `k ∈ L` has finitely many non-zero valuations, so `k = 0` ✓.
+- `U`-invariance: `(u·χ_ξ)(r) = ψ(ξ u r)`, so `u·χ_ξ = χ_{uξ}`; `u` is a unit at all but finitely many places, so `uξ` is summable; and
+  `(uξ)_v = ι_v(u) ξ_v` — the canonical representative is `U`-equivariant ✓.
+
+### (2) Wandering sets at one `p` (R-U's argument)
+
+- `u_p = π_p/π̄_p ∈ U` (norm `1`). `ι_{π_p}(u_p) =: t` has `|t|_p = p^{−1}`; `ι_{π̄_p}(u_p) = ι_{π_p}(π̄_p/π_p) = t⁻¹`; `u_p` is a unit at every other
+  finite place and has `|u_p|_∞ = 1`. So on the `p`-component `(x, y) ∈ L_{π_p} × L_{π̄_p} ≅ ℚ_p²`, `u_p` acts by `(x, y) ↦ (tx, t⁻¹y)` ✓.
+- `ν|_Z` is `U`-invariant (`Z` is `U`-invariant, `ν` is); by (0)–(1) the map `Φ_p : Z → ℚ_p²` (the canonical `p`-component) is Borel and
+  `Φ_p(u·χ) = M_u Φ_p(χ)`, so `Φ_{p*}(ν|_Z)` is a finite `M_{u_p}`-invariant measure ✓.
+- `M_{u_p}` carries `{|x| = p^{−n}} × ℚ_p` onto `{|x| = p^{−n−1}} × ℚ_p`: the sets `tⁿ{1 ≤ |x| < p}` (`= {|x| = p^{−n}}`) are disjoint, of equal
+  mass, with union `{x ≠ 0}`; finite total mass forces each to be 0, so `x = 0` a.e.; `u_p⁻¹` gives `y = 0` a.e. ✓ This is R-U's step verbatim
+  in route (J45 §4.1: "The sets `uⁿ{ξ : 1 ≤ |ξ₁|_v < |t|_v⁻¹}`, `n ∈ ℤ`, are disjoint, of equal `ν_S`-measure, with union `{ξ₁ ≠ 0}`"), run at
+  one place at a time. What makes it legitimate at infinitely many places is only that `Φ_p` is a well-defined equivariant Borel map on `Z`,
+  which (0)–(1) supply; R-U got the same from N1's Borel isomorphism at finite `S`.
+
+### (3) All places
+
+- `P` is countable: `ν`-a.e. `χ ∈ Z` has every `P`-component 0 (both places above every `p`, including the finitely many where `ξ_v ∉ O_v`).
+  Then `χ(r) = ψ_∞(ξ_∞ r)` in the `S`-adic model — archimedean — or, in X03D's `𝔸_L` model, that times `∏_{v∉P∪∞} ψ_v(ξ_v r)`, which is
+  non-trivial at finitely many `v` (where `ξ_v ∉ 𝔡_v^{−1}O_v`) and depends on `r` modulo a finite-index subgroup there: torsion. So
+  `χ ∈ T + A` ✓. (Also `T + A ⊆ Z`: torsion characters live at non-`P` places, since `P` is inverted in `R`.)
+
+### Side note on X03D-ED1′ (not in my brief; one line, because it uses `Z`)
+
+ED1′'s step "`x·χ ∈ Z ∪ E ⟹ χ ∈ Z ∪ E` (multiplying a summable `ξ` by `x⁻¹` changes finitely many valuations …)" skips that `χ ↦ x·χ` is not
+injective: `x·χ` determines `χ` only on `xR`, so `χ = χ_{x⁻¹η}·τ` with `τ` trivial on `xR ⊇ MR`, a torsion character. The conclusion still
+holds, because `Z` is stable under `T` (torsion characters have zero `P`-components). **Not a failure; a one-clause gap in the written
+reason**, for whoever checks ED1′.
+
+### Would-have-searched-here log (stage 3)
+
+- None: a reading check of a hand proof.
