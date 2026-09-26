@@ -152,3 +152,14 @@ outside my brief's touch list; `CLOSED-QUESTIONS.md` entries (§1.7, §3) for Mo
 no lane's touch list; under launch note 2 they would read "prior-art gate pending, X24R".
 
 **Would have searched here (stage 6):** none.
+
+## Stage 7 — SAVED (the queue plan: banner, §4 final statuses, §5 scored)
+
+`plans/CRUNCH-2026-09-26-x2x3-queue.md`: a banner under the title, "**CLOSED 2026-09-26 by X10F**", qualified with "waves 1–2 … §7's wave 3 was
+still running at this close and closes with X29C and X30F" (the file also holds wave 3's live rows; an unqualified CLOSED would mislead them).
+§4's status cells set to final: X11K run → DONE (its report, `reports/X11K.md`), X09C run → DONE, X10F 07:10 → DONE, J00 recurring → "DONE (waves
+1–2)"; the six derivation and verification rows and X12B, X13R were already DONE. §5 gains a column "scored at the close (X09C, §R-close
+(stage 5) 3.4)", one entry per expectation, copied from 3.4's scoring (items 2, 3, 9 and 6's ED-2 the long shots that fired; item 8 not met).
+Only the banner, the four status cells and §5 changed.
+
+**Would have searched here (stage 7):** none.

@@ -1,5 +1,8 @@
 # The ×2×3 crunch queue — two hours, six slots (planned 2026-09-26, 10:26–12:26 UTC)
 
+> **CLOSED 2026-09-26 by X10F** (waves 1–2: §4's statuses final, §5 scored from `plans/FS100-three-field-lemma.md` §R-close (stage 5) 3.4;
+> the front page applied, `LEDGER.md` rows 120–122). §7's wave 3 was still running at this close and closes with X29C and X30F.
+
 *Planner: de Bruijn (Opus 5.5), from the owner's brief `data/crunch-2026-09-26-x2x3/briefs/PLN-x2x3-planner.md`. Advisor: Poros, whose
 record is `plans/POROS-2026-09-26-x2x3-crunch.md`. Items the advisor changed are marked **[P-n]**, and §6 records where I disagreed. The
 plan is mine; the choices are Kooshi's, through the owner. The template is `plans/CRUNCH-2026-09-25-queue.md`; its §1 protocol holds
@@ -186,29 +189,29 @@ actuals. A launch is one line: "Your brief is on disk: read `<path>` in full fir
 | X01V | Opus | blind verifier | FS-100 s5 | list X01, blind | EF 2010 and the same public inputs; fenced from X01D and the advisor's record | `plans/FS100-X01V-verification.md` | — | 1.0 | 220 | 200k or 06:55 | none | P1 | DONE |
 | X02V | Opus | blind verifier | FS-100 s5 | list X02, then FR-1 and ED-1 from list X03, blind | EL2021; fenced from X02D, X03D and the advisor's record | `plans/FS100-X02V-verification.md` | — | 1.0 | 220 | 200k or 06:55 | none | P1 | DONE |
 | X05V | Opus | blind verifier | FS-100 s5 | SP-Cor (a blind re-derivation from its statement, the advisor's ladder item [P-5]), then FL-1, FL-2 | J45's lemma statements (not proofs), R88-TCA; fenced from X03D | `plans/FS100-X05V-verification.md` | — | 0.8 | 180 | 160k or 06:55 | none | P2 | DONE |
-| X11K | Opus | kernel | FS-100 s5 | — | — | — | — | — | — | — | — | — | run |
+| X11K | Opus | kernel | FS-100 s5 | — | — | — | — | — | — | — | — | — | DONE |
 | X12B | Opus | blind derivation | FS-100 s5 | — | — | — | — | — | — | — | — | — | DONE |
 | X13R | Opus | reading check | FS-100 s5 | — | — | — | — | — | — | — | — | — | DONE |
-| J00 | Sonnet | clerk | — | folds reports into §4 statuses, `READY.md` and the close inventory | reports only | commits | every second report | 0.1 | 40 | brief | none | P1 | recurring |
-| X09C | Opus | close-math | FS-100 s5 | the derivation file's entries; §R-close for stage 5; predictions scored; ledger rows and `CLAUDE.md` lines drafted | every record and report, the close inventory | `plans/FS100-three-field-lemma.md` §R-close (s5) | the derivations reported, or 06:55 | 0.3 | 150 | 07:12 | none | P2 | run |
-| X10F | Opus | front-page | FS-100 s5 | applies X09C's drafts to `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`; scores §5; closes the queue | X09C's drafts | the four files | X09C | 0.25 | 120 | 07:26 | none | P2 | 07:10 |
+| J00 | Sonnet | clerk | — | folds reports into §4 statuses, `READY.md` and the close inventory | reports only | commits | every second report | 0.1 | 40 | brief | none | P1 | DONE (waves 1–2) |
+| X09C | Opus | close-math | FS-100 s5 | the derivation file's entries; §R-close for stage 5; predictions scored; ledger rows and `CLAUDE.md` lines drafted | every record and report, the close inventory | `plans/FS100-three-field-lemma.md` §R-close (s5) | the derivations reported, or 06:55 | 0.3 | 150 | 07:12 | none | P2 | DONE |
+| X10F | Opus | front-page | FS-100 s5 | applies X09C's drafts to `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`; scores §5; closes the queue | X09C's drafts | the four files | X09C | 0.25 | 120 | 07:26 | none | P2 | DONE |
 
 ---
 
 ## §5. Registered expectations (the planner's, 05:50, before any job reports; the advisor's in its record)
 
-| # | outcome | P |
-|---|---|---|
-| 1 | Furstenberg's ×2×3 conjecture (the classical one) is proved | < 0.001 |
-| 2 | MR(F) lands: EF_F and PE-2 both TRUE, each by two minds, with no GAP | 0.08 |
-| 3 | EF_F: TRUE (X01D) / GAP at a named step / FALSE | 0.30 / 0.55 / 0.15 |
-| 4 | PE-2: TRUE by both minds / GAP / FALSE | 0.45 / 0.40 / 0.15 |
-| 5 | PE-1 FALSE as written (the subfield caveat), and TRUE in its corrected form | 0.30 |
-| 6 | FR-1 TRUE; ED-1 TRUE; ED-2 GAP (FALSE with a counterexample: 0.15) | 0.95; 0.90; 0.75 |
-| 7 | EF_F's derivation gives the stronger conclusion "carried by `T + A`" (G76's reading of the real place, falsifiable here) | 0.20 |
-| 8 | FL-1 TRUE as written (FL-2 then TRUE with it: 0.8) | 0.40 |
-| 9 | The headline `χ(ℚ(√47)²) = 5` is claimed at the close (it needs item 2 and X05V's SP-Cor check) | 0.05 |
-| 10 | Every job reports by 06:55 | 0.60 |
+| # | outcome | P | scored at the close (X09C, §R-close (stage 5) 3.4) |
+|---|---|---|---|
+| 1 | Furstenberg's ×2×3 conjecture (the classical one) is proved | < 0.001 | as predicted — not touched; the project's version sidesteps it because `U` is large |
+| 2 | MR(F) lands: EF_F and PE-2 both TRUE, each by two minds, with no GAP | 0.08 | **met** — a 0.08 outcome (the "no GAP" clause met only after X01V's blind GAP was withdrawn as its own error) |
+| 3 | EF_F: TRUE (X01D) / GAP at a named step / FALSE | 0.30 / 0.55 / 0.15 | TRUE — the 0.30 outcome |
+| 4 | PE-2: TRUE by both minds / GAP / FALSE | 0.45 / 0.40 / 0.15 | TRUE by both — the 0.45 outcome |
+| 5 | PE-1 FALSE as written (the subfield caveat), and TRUE in its corrected form | 0.30 | met — two counterexamples |
+| 6 | FR-1 TRUE; ED-1 TRUE; ED-2 GAP (FALSE with a counterexample: 0.15) | 0.95; 0.90; 0.75 | FR-1 TRUE; ED-1 TRUE where posed (ill-posed with a complex place); **ED-2 FALSE with an explicit character** — the 0.15 outcome |
+| 7 | EF_F's derivation gives the stronger conclusion "carried by `T + A`" (G76's reading of the real place, falsifiable here) | 0.20 | met — G76's registered falsifier fired |
+| 8 | FL-1 TRUE as written (FL-2 then TRUE with it: 0.8) | 0.40 | not met — GAP at QTCA_{1/3}, two blind minds (G60's `J₀` value predicted it) |
+| 9 | The headline `χ(ℚ(√47)²) = 5` is claimed at the close (it needs item 2 and X05V's SP-Cor check) | 0.05 | **met** — a 0.05 outcome |
+| 10 | Every job reports by 06:55 | 0.60 | met — all eight (X01D–X05V, X12B, X13R) by 06:15 |
 
 **What would make the two hours good:**
 - a verdict on EF_F, with the failing step named if it fails, and that step recorded as the honest statement of how hard MR is;
