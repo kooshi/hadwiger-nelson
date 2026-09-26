@@ -137,3 +137,34 @@ are in rows 114–115 and the stub); G76's old status tag (widened by row 88's d
 |---|---|---|---|
 | closed-list entries for row 88's question and FS-67 | none (neither is a closed stub) | once the next close rewrites "Last updated", the closed list is where `CLAUDE.md` sends a reader for earlier closes | high |
 | G79 forwarded to five stubs, those J37–J39 test and FS-67 | none until J37–J39 report | WORKFLOW 9 forwards every grokking minted at a close; the lines say the entry is untested and name its test | medium — if the owner wants an untested method kept out of stubs, the five lines are one revert |
+
+## Stage 5 — SAVED (`BIBLIOGRAPHY.md`, the inventory's ticks, the gates)
+
+- **`BIBLIOGRAPHY.md`** by `data/crunch-2026-09-25/j44/apply_bibliography.py` (plant — a key with no row — fired first, exit 1): § A gains
+  `[BergelsonMoragues2021]`, `[ChenDai2017]`, `[LevitzMott1972]`, `[SallyTaibleson1966]` (row 88) and `[Csernak2023]` (FS-67); § C gains 22
+  rows (row 88's listings; FS-67's `[GodsilEtAl2019]`, `[Tardif2006alg]`, `[Tardif2022frac]`, `[LaroseTardif2000]`, `[SauerZhu1992]`,
+  `[Sauer2001]`, `[Zhu1998survey]`, `[DuffusSauer2005]` and J40's four vocabulary listings); § B gains the five newly held files; § R.4 gains
+  items 21–22 (the fetches both closes hold for Kooshi). **Row 88's two corrections applied:** `[BachocEtAl2014]` held and read (Thm 2.2 an input
+  of row 112) — its § A row had said "not held, abstract only" while § B already listed the file (FS-58 sweep), so the two now agree;
+  `[BardestaniMallahiKarai2017]`'s §3.2 read and C14.2 (c)'s attribution. FS-67's eleven updates (R.8d, J40 Stage 5) applied in place.
+- **Two keys the drafts proposed were already taken, found here:** row 88's `[Johnson2000frac]` is the existing `[Johnson2000surprises]` (same
+  paper, Zbl 0945.05021) — that row updated, no new key; FS-67's `[Zhu1998]` (the Hedetniemi survey, Taiwanese J. Math.) collides with the
+  existing `[Zhu1998]` (*Pattern periodic coloring of distance graphs*, JCTB) — the survey keyed `[Zhu1998survey]`. One slip of mine, caught on
+  re-reading and fixed before commit: an author name ("D. W. Bange") I had put on the *Fall colorings* listing, which J40's source does not give.
+- **Post-close inventory** (`plans/CRUNCH-2026-09-25-post-close-inventory.md`): rows **3, 4, 7, 8, 9, 10, 11, 13, 25, 27, 28** ticked done, each
+  with its commit (all but 25 were discharged by J24 or by `a2099821`, checked here); row 17 was already dispositioned ("see row 22") and
+  `CLAUDE.md` carries the new counts. **Left open, not front-page targets:** 1, 2, 15, 26 (job records and derivation files), 5 (a Lean
+  module doc), 6, 14, 16, 18, 19, 20 (tools and scripts), 21, 24 (briefs and standing rules), 22 (owner's decline), 23 (a loose data file).
+  The two close inventories (`plans/FS86-row88-close-inventory.md`, `plans/FS67-close-inventory.md`) were fully ticked by their close planners.
+
+### Gates, final (each exit read directly)
+
+| gate | exit | verdict |
+|---|---|---|
+| `tools/claude_md_fact_audit.py --base fb5c224e` | 0 | AUDIT PASSED (0 failures), ten reviewed ALLOW lines (stage 3) |
+| `--dupes` | 0 | 13 (was 11): the two new runs are FS67-DC1/DC2/DD1's shared conclusion and grade in § B |
+| `tools/bib_audit.py` | 0 | every cited work resolves (384 keyed rows; 0 arXiv ids, 0 keys unlogged) |
+| `tools/fs71_ledger_b_check.py --strict` | 0 | PASS (714 entries, 714 § B rows) |
+| `tools/check_architecture.py` | 0 | PASS |
+
+`CLAUDE.md`: **294,994 bytes** (ceiling 300,000). No Lean file touched; no build run.
