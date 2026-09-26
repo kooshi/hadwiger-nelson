@@ -16,7 +16,7 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 300,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 300,000 bytes — 325,000 until the 2026-09-25 crunch ends** (Kooshi, 2026-09-25, with the file at 294,994: *"we can increase the CLAUDE.md budget to 325k until after this run"*; after the crunch the ceiling is his to re-decide, 300,000 by default, so the crunch's growth is compressed out at its end) (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
 200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
 on 2026-09-17 with the file at 199,785 bytes, from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
