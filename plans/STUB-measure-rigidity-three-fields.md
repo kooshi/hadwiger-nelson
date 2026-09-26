@@ -13,7 +13,24 @@ F2–F5 and §4.1; the two verification records `plans/FS84-SI-D-derivation.md` 
 `plans/FS84-close-inventory.md` rows 23–29. Every statement below is quoted with its address; a quotation is never a substitute for reading its
 source.*
 
-**Status at FS-100's in-ban close (2026-09-26, close planner J53/J53b; `plans/FS100-three-field-lemma.md` §R-close, `plans/FS100-derivation.md`,
+**Status at FS-100 stage 5's close (the ×2×3 crunch, 2026-09-26, close planner X09C; `plans/FS100-three-field-lemma.md` §R-close (stage 5),
+`plans/FS100-derivation.md` §3, drafted `LEDGER.md` rows 120–122).** **MR(F) is proved** for every real number field with `R_F = O′` (row 100:
+every `F` without a ramified stable dyadic place — ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√167), ℚ(√59), ℚ(√83), ℚ(√131) all qualify), [hand], by
+its two entropy halves: **PE-2** (PE-lim; FS100-PE2, two derivations blind to each other, through EL2021 Thm 1.2 on admissible `Γ` — PE-1 as the
+queue fixed it is false, FS100-PE1) and **EF_F⁺** (FS100-EFP, two derivations blind to each other: Einsiedler–Fish's pigeonhole with the rational
+unit vectors as multipliers and the product formula; a zero-entropy `U`-invariant measure is carried by `T + A`). **With SP-Cor: `χ(ℚ(√47)²) = 5`**
+(FS100-Q47; the headline rule met, §R-close stage 1b). **The three wanted posters, now:** ℚ(√47) — **answered, five**; ℚ(√167) — `χ ≥ 5` at K0's
+grade (one mind + a check; FS100-T1 puts it in the class), six waits on J39's T-J39-5 and its two lemmas; the type-(B) fields — **row 88 ⟺ T-B1**
+(T-J38-2 (iii) with MR held), so FS-98 carries row 88 alone. Also `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335) at K0's grade. **Not landed:** the
+one-sided flip (FL-1, FL-2: GAP at a quantitative T-C(A), QTCA_{1/3}, FS100-FLH); ED-2 is FALSE (FS100-ED2). **What is left of the milestone:**
+(i) the value's prior-art gate and EL2021 §2 (which may hold PE-2) before any novelty claim; (ii) MR at row 100's exception fields (ℚ(√5),
+ℚ(√17), ℚ(α)), where the adelic model needs `R = O′`; (iii) X11K's kernel lane on the ℚ(√47) chain (Kooshi's request); (iv) stage 4′
+(KS-sat_E) is **moot for ℚ(√47)** — Kronecker selection was a route to the pure-point layer, which MR closes — and is kept only as a question
+about windows; (v) P1 (post-ban): an explicit triangle-free five-chromatic unit-distance graph over ℚ(√47), which would answer Soifer 55.1 as
+posed ("Construct"), the existence half now being non-constructive. **Held for Kooshi:** the quantitative-T-C(A) stub (drafted in §R-close
+stage 4, not minted); whether the publication rule fires (`CLAUDE.md` § Publication).
+
+**Earlier: status at FS-100's in-ban close (2026-09-26, close planner J53/J53b; `plans/FS100-three-field-lemma.md` §R-close, `plans/FS100-derivation.md`,
 drafted `LEDGER.md` rows 116–118).** **Stage 0 — DONE** (J51, the plan: §G, §PA, §IQ, §S, §P). **Stage 1 — DONE** (J48,
 `plans/FS100-BC-verification.md`): BC-1 to BC-8 all TRUE, blind, "no difference of truth"; its caveat, J48's held item 1: "the confirmation is
 route-dependent for seven of eight claims (both minds composed the same permitted lemmas), so a flaw shared by J45's SI/R-U, T-C or row 98 would
@@ -28,8 +45,7 @@ SP-Cor holds there (FS100-K0). **The owner's rulings at the close (verbatim):** 
 E = T + A + Fin_S) as the corrected, open statement. FS-100's stage 4 is re-aimed, not closed as a no-go." — "stage 6 (EI-2 over ℚ(√11)) does not
 take the derivation slot; the re-aimed stage 4 (KS-sat_E at ℚ(√47), J51D-R's density step) leads FS-100's next slot, with stage 6 kept as the
 fallback." **The next slot, in order (§6.5):** stage 4′ (KS-sat_E at ℚ(√47)) → stage 5 (the reading room proper, then PE-lim as a derivation) →
-stage 6 only as the fallback; **P1 leads the post-ban plan** (from 2026-10-01). **FS-97 is absorbed here** (§9; its stub carries the banner). **MR
-is not landed; nothing here decides `χ` at any field.**
+stage 6 only as the fallback; **P1 leads the post-ban plan** (from 2026-10-01). **FS-97 is absorbed here** (§9; its stub carries the banner). (MR was not landed at that close; stage 5 landed it, above.)
 
 ## 1. Mission, in plain language
 
@@ -65,9 +81,10 @@ only such measure is the uniform one (a multiple of Haar measure). Given MR:
 - at ℚ(√167), five colours are necessary (J39 T-J39-4) — FS-59's own question — and whether six are necessary becomes exactly whether the
   Euclidean plane needs six colours in the continuous-in-probability sense (J39 T-J39-5, given two further lemmas).
 
-MR is a measure-rigidity statement of Furstenberg's ×2×3 kind (J36 F5): its zero-entropy case is open in the literature's analogue. The
-milestone is therefore two things at once: the one derivation route to three exposed predictions, and a reading room at a known wall. Its
-reachable deliverables are named in §6.
+MR is a measure-rigidity statement of Furstenberg's ×2×3 kind (J36 F5), but for a multiplier group of **polynomial growth**, where the
+literature's analogue is proved (Einsiedler–Fish 2010 on 𝕋): at stage 5 its zero-entropy half transferred (FS100-EFP) and its positive-entropy
+half came from Einsiedler–Lindenstrauss (FS100-PE2), so MR is a theorem and the "reading room at a known wall" this paragraph once described was
+not one — the wall was the classical, finitely generated case, which `U` sidesteps by being large. The reachable deliverables are in §6.
 
 ### 1.1 The recommendation this stub is built on (WORKFLOW's four parts)
 

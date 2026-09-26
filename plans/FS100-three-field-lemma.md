@@ -1301,3 +1301,144 @@ matching `U` exactly. The planner's and the advisor's estimates moved in the rig
 X13R, the advisor, the planner's queue, this close): **eleven moves** logged — X01D 1 (a PARI hunt over non-totally-real fields), X01V 2, X02D 2,
 X02V 2, X03D 2, X05V 2; X12B, X13R, the advisor and this close 0 (X12B's multiplier count and X13R's `U_N` enumeration logged at the ban's edge,
 extents fixed first). Each was replaced by a derivation plus one exact check of seconds. The ban cost the crunch nothing that a record names.
+
+### Stage 4 — SAVED (drafts for the front-page lane X10F; the stub re-aims as files; the inventory closed)
+
+*Drafts only: `LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md` and `plans/FRONTIER-STUBS.md` are X10F's to write. One home per fact: the numbers live in
+rows 120–122; `CLAUDE.md` points.*
+
+**4.1 `LEDGER.md` rows (numbered from 120; row 119 is FS-75's).**
+
+| 120 | **Measure rigidity for the unit-vector group: for every real number field `F` with `R_F = O′` (row 100 — every `F` without a ramified stable dyadic place), every `U_F`-invariant finite positive measure on `R̂` with `τ(E) = 0` is a multiple of Haar measure (MR(F)). It splits by entropy: every `U`-invariant `τ` is `a·m + τ′` with `τ′` of zero entropy for every `u` (PE-2, through Einsiedler–Lindenstrauss's Thm 1.2 on the finitely generated pieces `M̂`, applied only under admissibility — every finite-index subgroup of `Γ` spans `L`); and one non-torsion `u` of zero entropy puts a `U`-invariant measure on `T + A` (EF_F⁺, Einsiedler–Fish's pigeonhole with the rational unit vectors as multipliers and the product formula as the Diophantine step). PE-1 as first posed is false (ℚ(√47); ℚ(√5)), and CE-1's hypothesis is false (a rotation circle), so MR was never the classical finitely generated question** (FS-100 stage 5, the ×2×3 crunch; `plans/FS100-derivation.md` FS100-EFP, EFZ, PE1, PE2, MR, CE1, EFG, EFX, HX1). **[hand; PE-2 two derivations blind to each other (X02D, X02V), EL2021 Thm 1.2 by statement (external, in print; its proof in EL2021 §§2–9, unread here); EF_F⁺ two derivations blind to each other (X01D, X12B) and a checking reading (X01V, after its blind GAP, withdrawn as its own error); MR a composition, three minds]** Mechanism: `U` has polynomially many elements of bounded height (`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`), which is Einsiedler–Fish's hypothesis and which no finitely generated subgroup has (row 118's FS100-T2: none acts irreducibly either); the zero-entropy measures that survive sit on the archimedean isometric leaves, inside `E` (EF-X's circles). EF-G (a), `h_m(u) = log H(u)` with `H` over finite places, is false off the totally real fields (ℚ(∛2)); `h_m(u) = Σ_v log⁺|u|_v` over all places. HX-1: closed `U`-invariant subgroups of `R̂` are finite or everything. **Not claimed:** MR at row 100's exception fields (ℚ(√5), ℚ(√17), ℚ(α)), where the adelic model needs `R = O′`; anything about finitely generated `Γ` alone. **Prior art:** the zero-entropy method is `[EinsiedlerFish2010]` Lemmas 3.1–3.2 (on 𝕋; Sataev 1975 first, unread); the positive-entropy input `[EinsiedlerLindenstrauss2022]` Thm 1.2 (EL2003 Thm 1.1); the transfer to an `S`-adic solenoid or number field not found (four zbMATH queries; Huang 2017, Huang–Li–Shi–Xu 2023 read at §1: circle and tori only); **EL2021 §2 ("Actions on adelic solenoids") unread and may hold PE-2's inverse-limit step — no novelty claimed for PE-2 until it is read**; PE-2's shape is Johnson's nonlacunary theorem (1992, review only) transposed. | `plans/FS100-derivation.md` §3; `plans/FS100-X01D-derivation.md` §3–4; `plans/FS100-X12B-derivation.md` §2; `plans/FS100-X02D-derivation.md` §2–4; `plans/FS100-X02V-verification.md` §2; `plans/FS100-X01V-verification.md` §2, §4; `tools/x01d_unit_check.py`, `tools/x01v_entropy_check.py`, `tools/x02d_pe1_counterexample.py`, `tools/x02v_checks.py`, `tools/x12b_multiplier_count.py` | FS-100 stage 5 (crunch 2026-09-26) |
+
+| 121 | **`χ(ℚ(√47)²) = 5`: the local–global conjecture's cheapest exposed five-clause is met. MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at `S = ∅` gives `≥ 5`; the plane at 11 gives `≤ 5`. The plane over ℚ(√47) has no unit triangles, so by de Bruijn–Erdős a finite triangle-free five-chromatic unit-distance graph exists (none is exhibited). At their grades: `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335) (K0), `χ(ℚ(√167)²) ≥ 5`, and row 88 ⟺ T-B1 at ℚ(√59), ℚ(√83), ℚ(√131)** (FS-100 stage 5; FS100-Q47; `plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.2, 1b). **[hand; the headline rule met (every half two blind minds, SP-Cor checked blind): MR row 120's grade; SP-Cor three minds (J45; J46-13 from its statement; X05V blind) over N1, N2, R-U, A⁺ each two blind minds (J45; J46); T-C(A) at `S = ∅` two blind (row 113); `χ ≤ 5` row 52 at 11, prior art. The consequences: K0 one mind + a check (row 117), R88-TCA's class form one mind outside ℚ(√47); not kernel — X11K's lane has begun]** The ladder has six links (PE-2, EF_F⁺, MR, SP-Cor, T-C(A), the upper bound), none broken; the control holds: at K and ℚ(√11), where four-colourings exist, the chain stops exactly at T-C(A), with the MR step exercised at a Haar mass `2/21` (X05V-3). **Answers** (`CLOSED-QUESTIONS.md` §1.7, §3): `[Moorhouse2010slides]`'s *"What about χ(ℚ(√47)²)?"*; the existence half of `[Soifer2024]` Open Problem 55.1, non-constructively (55.1 asks to construct; 55.2 open); `[ExooIsmailescu2019]`'s smallest-subfield question in part (ℚ(√47) is the first real quadratic field needing five: `d < 47` has `L ≤ 4 = χ`, row 99). **Not claimed:** an explicit graph; `χ(ℚ(√167)²)` beyond `≥ 5`; anything on six. **Prior art:** the value's own gate not yet run (the posers' zbMATH listings, the Polymath16 threads) — owed before any novelty or publication claim. | `plans/FS100-derivation.md` FS100-Q47; `plans/FS100-X05V-verification.md` §2; `plans/FS84-SI-D-derivation.md` §4.2; `plans/FS84-SI-V-verification.md` §2–3; `plans/R88-derivation.md` R88-TCA; `tools/x05v_checks.py` | FS-100 stage 5 (crunch 2026-09-26) |
+
+| 122 | **Where the other routes to MR stop: the one-sided flip needs a quantitative T-C(A); equidistribution is false; the classical ℤ² hypothesis is false. The example invariant of an actual four-colouring (the `E`-null part of its spectrum has unit correlation `−P(c¹(0) = c²(u))/P(c¹(0) ≠ c²(0))` over the `E`-factor, so `τ̂₀ < 0` on `U`) reaches the consumer's `−1/3` only with QTCA_{1/3}, because every `U`-invariant measure on `T + A` obeys the sharp `ρ̂(1) ≥ −Λρ(R̂)` with `Λ ≥ −J₀(j₁,₁) = 0.402759 > 1/3` at the real place of every real field; and over ℚ a character built from a sparse set of split primes (`Σ1/p < ∞`) lies outside `E` with Weyl averages tending to `∏(1 − 1/p) ≠ 0`** (FS-100 stage 5; FS100-FLK, SPEC, FLH, ED1, ED2, FR1). **[hand (+ tools float with controls); FLK, SPEC, the GAP's step and FR-1, ED-1 two blind minds each (X03D; X05V or X02V); ED-2 and X03D-Z one derivation + a checking reading (X13R)]** Consumers: MR, or `H_κ` with QTCA_κ for one `κ > 0`; `H_κ` for every `κ` ⟺ MR (X05V-7/8). FR-1 makes MR a Schoenberg-type statement (radial positive-definite functions of the quadrance); ED-2 shows averaging over `U_N` is strictly stronger than rigidity (the Nazarov phenomenon, `[EinsiedlerFish2010]` §4). **Not claimed:** QTCA; ED-1′'s mean value over ℚ. **Prior art:** Bekka–Francini's character rigidity does not apply (a torus, not unipotent-generated; `[BekkaFrancini2022]` Thm 1.1, Remark 1.2 read); the ED gate (adelic equidistribution of Pythagorean points) not run. | `plans/FS100-derivation.md` FS100-FLK … FS100-ED2; `plans/FS100-X03D-derivation.md` §2–4; `plans/FS100-X05V-verification.md` §3; `plans/FS100-X13R-check.md`; `tools/x03d_factor_minima.py`, `tools/x03d_weyl.py`, `tools/x13r_check.py` | FS-100 stage 5 (crunch 2026-09-26) |
+
+**Row 118's text, corrected in place:** "The card's answer [reading, one mind]: EL2021 Thm 1.3 is the in-print positive-entropy statement that can
+apply, and MR is its zero-entropy half plus an owed lemma PE-lim" → "The card's answer [reading, one mind] — MR as its zero-entropy half plus an
+owed PE-lim — was right in shape; **both halves are now held (row 120)**: PE-lim through Thm 1.2 on the finitely generated pieces under
+admissibility, the zero-entropy half by Einsiedler–Fish". And its "EL2021 Thm 1.2 never applies" gains its scope: "on `R̂` itself; on the pieces
+`M̂` it applies exactly under admissibility (row 120)". **Not claimed: PE-lim; MR** → delete (superseded by row 120).
+
+**§ B lines (one per theorem; the `plans/FS100-derivation.md` entry is the address; kernel "declined" unless noted):**
+
+| id | row | statement | grade | address | kernel |
+|---|---|---|---|---|---|
+| FS100-EFP | row 120 | one zero-entropy non-torsion `u` puts a `U`-invariant finite measure on `T + A` (EF_F⁺), every real `F` with `R = O′` | hand, two blind derivations + a checking reading | `plans/FS100-derivation.md` FS100-EFP | X11K's lane |
+| FS100-EFZ | row 120 | `μ(E ∖ (T + A)) = 0` for every `U`-invariant finite `μ` (R-U, a third derivation) | hand, three derivations | FS100-EFZ | declined |
+| FS100-PE1 | row 120 | PE-1 false (ℚ(√47), ℚ(√5)); PE-1′ under admissibility; Lemma W | hand + tools exact, two blind | FS100-PE1 | declined |
+| FS100-HX1 | row 120 | closed `U`-invariant subgroups of `R̂` are finite or `R̂` | hand, three proofs | FS100-HX1 | declined |
+| FS100-PE2 | row 120 | PE-2: `τ = a·m + τ′`, `τ′` of zero entropy for every `u` | hand, two blind, on EL2021 Thm 1.2 | FS100-PE2 | X11K's lane |
+| FS100-MR | row 120 | PE-2 ∧ EF_F⁺ ⟹ MR(F); MR ⟺ PE-2 given R-U; given PE-2, MR ⟺ the zero-entropy half | hand, a composition, three minds | FS100-MR | X11K's lane |
+| FS100-Q47 | row 121 | `χ(ℚ(√47)²) = 5`; five at the K0 fields, `≥ 5` at ℚ(√167), row 88 ⟺ T-B1, at their grades | hand, the headline rule met | FS100-Q47 | X11K's lane |
+| FS100-EFG | row 120 | `h_m(u) = Σ_v log⁺|u|_v`; EF-G (a) false at ℚ(∛2); (b) holds | hand + tools exact, four minds | FS100-EFG | declined |
+| FS100-EFX | row 120 | archimedean circle measures: `U`-ergodic, zero entropy, atomless, on `A` | hand, two blind | FS100-EFX | declined |
+| FS100-CE1 | row 120 | CE-1 true and void: its hypothesis is false; Lemma LT | hand, two blind (LT one mind) | FS100-CE1 | declined |
+| FS100-FR1 | row 122 | `U`-orbits on `R ∖ 0` are the quadrance fibres | hand, two blind | FS100-FR1 | declined |
+| FS100-ED1 | row 122 | Weyl averages → 0 off `E` ⟹ MR; ill-posed with a complex place | hand, two blind | FS100-ED1 | declined |
+| FS100-ED2 | row 122 | ED-2 false over ℚ (sparse split characters); X03D-Z; ED-1′ | hand, one derivation + a checking reading | FS100-ED2 | declined |
+| FS100-FLK | row 122 | the `E`-null part's unit correlation of an actual colouring; `τ̂₀ < 0` on `U` | hand, two blind | FS100-FLK | declined |
+| FS100-SPEC | row 122 | `ρ̂(1) ≥ −Λρ(R̂)` on `T + A`, `Λ ≥ 0.402759`, sharp | hand + tools float, two blind | FS100-SPEC | declined |
+| FS100-FLH | row 122 | FL-1, FL-2 GAP at QTCA_{1/3}; the consumer statements | hand, the GAP two blind | FS100-FLH | declined |
+
+**4.2 `CLAUDE.md` lines (the front page applies; the rows above are the one home of every number).**
+- **Last updated:** lead with "FS-100 stage 5 (the ×2×3 crunch, 2026-09-26): **Paid (theorem)** — MR(F) (row 120) and **`χ(ℚ(√47)²) = 5`** (row 121),
+  the conjecture's cheapest exposed five-clause met; the flip not landed and ED-2 false (row 122) (`plans/FS100-three-field-lemma.md` §R-close
+  (stage 5))". Keep FS-100's in-ban round and FS-75 after it.
+- **§ The mission, the target paragraph (2):** "Its exposed predictions: exactly five at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5), where four
+  is proven …, ℚ(√47) the cheapest (row 84, FS-84; no character four-colouring, row 96)" → "exactly five at ℚ(√47) — **met** (row 121) — and at
+  ℚ(√143), ℚ(√311), ℚ(√335) (met at K0's grade, row 121) and ℚ(√3,√5) (open, four proven)"; "and at least six at ℚ(√167), proven 4" → "proven 4
+  in the kernel (row 119) and ≥ 5 at K0's grade (row 121)". Its remaining testable range at `L = 5` is ℚ(√3,√5) and FS-48's table.
+- **§ Publication** (held for Kooshi; the default leaves "It has not fired" standing): a candidate line — "**A candidate:** `χ(ℚ(√47)²) = 5` (row
+  121) answers Moorhouse's named question (2010) and the existence half of Soifer's Open Problem 55.1 (2019); hand-graded, resting on an external
+  theorem, not yet kernel; whether the rule fires is Kooshi's call, after the value's prior-art gate."
+- **Where the problem stands — item 10:** replace "at ℚ(√47) (L = 5: …) it predicts exactly five against a proven 4 ≤ χ ≤ 5 — open (row 84;
+  FS-84), and a four-colouring there would carry an invariant measure whose spectrum is carried by no `T + A + Fin_S` (row 113). Among real
+  quadratic fields that count's class is exactly `L ≥ 5` … (row 117), so MR would give five at ℚ(√143), ℚ(√311), ℚ(√335) as at ℚ(√47) (FS-100)"
+  → "at ℚ(√47) (L = 5) **χ = 5** (row 121: measure rigidity for the unit-vector group, row 120, with SP-Cor), and at ℚ(√143), ℚ(√311), ℚ(√335) —
+  T-C(A)'s class among real quadratic fields, exactly `L ≥ 5` (row 117) — five at K0's grade".
+- **Item 12:** "against a proven four (row 79)" → "against four in the kernel (row 119) and five at K0's grade (row 121)".
+- **Item 24:** "the plane is rigid iff `(0, 4)` is forced (row 88) — **undecided**" gains "; with MR held (row 120), row 88 ⟺ T-B1 (FS-98)".
+- **Item 27:** "at ℚ(√47) its `E`-form is the five-clause's pure-point layer, open at one density step" → "at ℚ(√47) moot since row 121".
+- **New item 29:** "**Measure rigidity for the unit-vector group, and five at ℚ(√47)** (rows 120–122; FS-100 stage 5). Every `U`-invariant `E`-null
+  measure on `R̂` is Haar, by entropy: Einsiedler–Lindenstrauss on the finitely generated pieces for positive entropy, Einsiedler–Fish's
+  pigeonhole for zero entropy — `U` is large enough for it, no finitely generated subgroup is (G80). With SP-Cor, `χ(ℚ(√47)²) = 5`; the flip
+  stops at a quantitative T-C(A) (row 122). Bearing on χ ≥ 6: none; ℚ(√167)'s gap is now [5, 7]."
+- **The prior-art position, "Not ours":** add "the zero-entropy pigeonhole for multiplier semigroups of polynomial growth (`[EinsiedlerFish2010]`,
+  after Sataev 1975) and the positive-entropy dichotomy for totally irreducible solenoid actions (`[EinsiedlerLindenstrauss2022]` Thm 1.2, EL2003)".
+- **Paths forward:** Open milestones — "**One is open: FS-84**" → "FS-84's question is **answered** by FS-100 stage 5 (row 121); its remaining
+  stages (S2 onward, from 2026-10-01) re-aim to an explicit triangle-free five-chromatic graph over ℚ(√47) (Soifer 55.1 as posed) or close — held
+  for Kooshi". Closed most recently: add FS-100 stage 5 first. Rows: see 4.4.
+- **G76:** its reading sentence "for all colourings the obstruction is the real place … survives only for infinite-place spectra and transient
+  colourings" → "**Demoted in MR's form** (row 120; §5 item 7's registered falsifier fired): a rotation-invariant colouring's spectrum is Haar plus a
+  part on `T + A`, so infinite-place spectra are out; the real place is where non-Haar invariant measures survive, and it lies inside `E`. The
+  reading survives only for transient colourings (T-B1, FS-98)." Its Do line gains: "when a group of multipliers has polynomially many elements of
+  bounded height, run Einsiedler–Fish's pigeonhole with the product formula before calling a measure question ×2×3-hard".
+- **G79's test record:** append "FS-100 stage 5: the headline from an example invariant of the acting group (entropy against growth); the colouring
+  flip GAP'd at QTCA_{1/3} (row 122)".
+- **G72's count:** "twelve of twelve" → "**twelve of thirteen**", appending "Thirteenth, FS-100 stage 5 — the headline (row 120) from recognition at the
+  prior-art gate and two known tools extended, §IQ's named invariant (entropy) right but written after the recognition; the structural form
+  produced the consumer statements and the example invariant (row 122)".
+- **G49 or G50 instance (G50):** "**FS-100 stage 5's:** the theorem that decided MR (`[EinsiedlerFish2010]`) is stated on 𝕋 for semigroups of ℕ, in
+  one-dimensional words; FS-100's gate searched 'solenoid & S-adic', read the zero as support for 'MR is ×2×3-hard', and missed it; the advisor
+  found it by one zbMATH query in the discipline's words ('multiplicative semigroup of polynomial growth'). EL2021 was fetched a third time, its path
+  wrong in four briefs; its §2 on adelic solenoids is still unread where it may hold PE-2."
+- **G60's Do line** gains: "the real place's `J₀` minimum `−0.40276` is below `−1/3`: a one-sided spectral bound at `−1/k`, `k ≥ 3`, fails over
+  every real field before it is tried (row 122; missed at FS-100 stage 5's registration)".
+- **G57's Do line** gains: "a five over a field without √3 answers Soifer 55.1's existence half (row 121)".
+- **G48's proved range:** add "and at ℚ(√47) (row 121; the K0 fields at their grade)".
+- **New grokking G80** (drafted, [hand theorem + reading]): "**Infinite rank is the resource: the unit-vector group is large enough for
+  rigidity that no finitely generated piece has.** `U_F` has polynomially many elements of bounded height; no finitely generated subgroup does, and
+  none acts irreducibly on `R̂` (row 118). The classical ×2×3 question lives at finite rank; `U` sidesteps it (row 120): positive entropy is
+  Einsiedler–Lindenstrauss on each finitely generated piece, zero entropy is Einsiedler–Fish's pigeonhole run with the whole group's growth, and
+  what survives is the archimedean isometric layer, inside `E`. *Do: when a question over a field's plane reduces to invariant measures under
+  `U_F`, count the group's elements by height before calling it ×2×3-hard; transfer a one-dimensional polynomial-growth theorem by running its
+  Diophantine step through the product formula at all places. Killing test of the reading that this extends: a real field whose `U`-invariant
+  `E`-null measures are not Haar (only row 100's exception fields are uncovered).*"
+
+**4.3 `BIBLIOGRAPHY.md` rows** (reading status per section; the copies to move are item 20's).
+- **`[EinsiedlerFish2010]`** M. Einsiedler, A. Fish, *Rigidity of measures invariant under the action of a multiplicative semigroup of polynomial
+  growth on 𝕋*, Ergodic Theory Dynam. Systems 30 (2010) 151–157, Zbl 1189.37005, arXiv:0804.3586 — row 120 (FS100-EFP: Lemmas 3.1–3.2 transferred) —
+  held `data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf`, **to move to `~/source/library/pdf/`** (inventory 20) — **read in full**
+  (the advisor; X01D; X01V §§1–4; X12B).
+- **`[Huang2017]`** H. Huang, *Fourier coefficients of ×p-invariant measures*, J. Mod. Dyn. 11 (2017) 551–562, Zbl 1402.37006, arXiv:1606.06078 —
+  EF's citing work; names Sataev 1975 — held `data/fs100/x01d/` — read §1, Remark 5.4, references (X01D).
+- **`[HuangLiShiXu2023]`** H. Huang, H. Li, E. Shi, H. Xu, *Strongly independent matrices and rigidity of ×A-invariant measures on n-torus*, Front.
+  Math. 18 (2023) 153–166, Zbl 1537.37013, arXiv:1908.02611 — EF's citing work; tori, not `S`-adic — held `data/fs100/x01d/` — read §1 (X01D).
+- **`[Sataev1975]`** E. A. Sataev, *On measures invariant with respect to polynomial semigroups of circle transformations*, Uspekhi Mat. Nauk 30
+  (1975) no. 2, 203–204 — EF's Thm 1.2 first (per Huang) — **not held, unread**.
+- **`[Lindenstrauss2004]`** E. Lindenstrauss, *Rigidity of multiparameter actions*, arXiv:math/0402165 — survey context for PE-2 — WebFetch copy,
+  not in the library — pp. 1–6 read (X02D).
+- **`[EinsiedlerLindenstrauss2022]`** (amend): §1 re-read in full by X02D and pp. 1–3 by X02V (2026-09-26); Thm 1.2 applies on `M̂` under
+  admissibility (row 120); **§2 ("Actions on adelic solenoids") unread — a prior-art debt on PE-2**; §§3–9 unread. The advisor's second copy
+  (`data/crunch-2026-09-26-x2x3/poros/`, arXiv 2101.11120) is a duplicate of the library copy (inventory 21): remove it.
+- **`[BekkaFrancini2022]`** (amend the existing key's status): Thm 1.1 and Remark 1.2 (iii)–(iv) read by X03D; its hypothesis (Levi component
+  semisimple, `L⁺ = L`) fails for `R ⋊ U` — PDF at `data/fs100/x03d/`, to move to the library.
+- **Lind–Ward 1988** (*Automorphisms of solenoids and p-adic entropy*, ETDS 8) and **Chothi–Everest–Ward 1997** (*S-integer dynamical systems:
+  periodic points*, J. reine angew. Math. 489): cited from memory for the entropy formula (FS100-EFG) — **not held, unread; a debt**; the duality
+  FS100-EFP uses is textbook (Tate/Weil) and re-derived by X02V and X12B.
+
+**4.4 `plans/FRONTIER-STUBS.md` rows (drafts).**
+- **FS-100** — re-aimed (the stub's status block, written here): "MR proved (row 120), `χ(ℚ(√47)²) = 5` (row 121). **Left:** the value's prior-art
+  gate and EL2021 §2; MR at row 100's exception fields; X11K's kernel port; stage 4′ moot for ℚ(√47). Bearing on χ ≥ 6: none." Rank: below FS-59.
+- **FS-84** — "**answered by FS-100 stage 5** (row 121); S2 onward (post-ban) re-aims to an explicit triangle-free five-chromatic graph over ℚ(√47)
+  (Soifer 55.1 as posed), or closes — held for Kooshi". Banner on `plans/STUB-five-colours-47.md` (the front page writes it).
+- **FS-59** — "its ≥ 5 waits only on MR" → "≥ 5 at K0's grade (row 121); six waits on J39's T-J39-5 and its two lemmas".
+- **FS-98** — "given MR, row 88 ⟺ T-B1" → "row 88 ⟺ T-B1 (MR held, row 120)"; its bearing unchanged.
+- **FS-97** — the banner written in its file (answered at FS-100 stage 5).
+- **FS-64** — "four-colour Kronecker windows: the `E`-form open over T-C(A)'s class" gains "moot at ℚ(√47) (row 121)".
+- **Candidate, held for Kooshi (the owner's note: drafted, not minted): "FS-101? QTCA_κ — a quantitative T-C(A)."** *Question:* does every
+  rotation-invariant four-colouring over a field in T-C(A)'s class have `Σ_j E[p_j(0)p_j(u)] ≥ κ(1 − Σ_j E[p_j(0)²])` for some `κ > 0` (X05V's
+  form), equivalently `s_E ≤ s* < 0.8276` (X03D-FL-Q)? *Why:* the only route from the flip to a consumer weaker than MR. *Bearing on χ ≥ 6:*
+  none; with MR held its value is mechanism only (a second, spectral proof of five). *Recommendation:* do not mint — MR supersedes its purpose;
+  keep the text here. Confidence medium.
+- **Declined:** X02D's "zero-entropy classification for solenoidal ℤ²-actions with isometric directions" (inventory 68) — moot for MR, which uses
+  the whole group; at finite rank it is the classical open question with no consumer here. X03D's "ED-1′ mean value over ℚ" (inventory 95) — ED-2
+  shows equidistribution is strictly stronger than rigidity and MR is held; no consumer.
+
+**4.5 The stub re-aims, as files (done in this stage):** `plans/STUB-measure-rigidity-three-fields.md` — a new status block at FS-100 stage 5's
+close above the in-ban one, whose last sentence and §1's "reading room at a known wall" paragraph are rewritten to current state;
+`plans/STUB-infinite-place-spectra.md` — FS-97's banner records that its questions are answered.
+
+**Would have searched here (stage 4):** none.

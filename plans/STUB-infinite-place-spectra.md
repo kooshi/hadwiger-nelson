@@ -2,8 +2,11 @@
 
 > **Absorbed into FS-100 (2026-09-26; owner ruling on J47's proposal, applied by front-page job J25).** Its questions are FS-100's
 > (`plans/STUB-measure-rigidity-three-fields.md` §9): Q2 is MR (SP ⟺ ¬MR, two derivations), Q3 is answered at type (A) by R-U and reduced
-> to T-B1 at type (B) by T-J38-2, Q4 is SP-Cor, and (R1) at type (B) is reached through T-B1 (FS-98). Its priors carry to FS-100 §4. Kept as
-> the record of its minting; demoted, never deleted.
+> to T-B1 at type (B) by T-J38-2, Q4 is SP-Cor, and (R1) at type (B) is reached through T-B1 (FS-98). Its priors carry to FS-100 §4. **Answered at FS-100 stage 5 (the ×2×3
+> crunch, 2026-09-26):** MR is proved for every real number field with `R = O′` (`plans/FS100-derivation.md` FS100-MR), so Q2 is settled (every
+> `U`-invariant `E`-null measure is a Haar multiple), (R1) and (R2) at type (A) are closed through SP-Cor, the entropy question is answered
+> (zero entropy for one `u` ⟹ carried by `T + A`; positive entropy ⟹ Haar plus a zero-entropy part), and the ℚ(√47) form is `χ(ℚ(√47)²) = 5`.
+> At type (B) only T-B1 remains (FS-98). Kept as the record of its minting; demoted, never deleted.
 
 *Minted 2026-09-25 at the close of the milestone "row 88's question" (crunch job J41, from `plans/FS86-row88-close-inventory.md` row 48 and
 J28D's §5.1). Read first: `plans/R88-derivation.md` §2 (R88-TC, R88-TCA) and its §G ("T-C′"); `plans/FS86-R88-D-derivation.md` §5.1;
