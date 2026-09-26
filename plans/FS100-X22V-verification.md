@@ -10,7 +10,12 @@ Working files `data/fs100/x22v/`; checks `tools/x22v_*.py`.*
 |---|---|---|---|
 | X22V-C0 | over ℚ(√59), ℚ(√83), ℚ(√131) the unique dyadic place of `F` (`e = 2, f = 1`) is inert in `L = F(i)`, so none is a ramified stable dyadic place | [tools exact; controls ℚ(√5) ramified, ℚ(√167) split; plant fires] + [hand] | Stage 1 §1.3; `tools/x22v_c0.py`, `data/fs100/x22v/c0*.out` |
 
-(Filled in at each stage.)
+| X22V-F1 | a finite positive `U`-invariant `E`-null measure on `R̂` has, given MR, Fourier coefficients 0 at every `y ≠ 0` | [hand] | §2.1 |
+| X22V-F2 | given MR, over a type-(B) field, every `R ⋊ U`-invariant probability on `X₄(F)` is carried by Pull (no T-B1) | [hand, one mind] | §2.1 |
+| X22V-R | given MR, over a type-(B) field, every four-colouring outside Pull is affinely transient; so row 88 ⟺ no affinely transient colouring | [hand, one mind] | §2.3, corrected §3.1 |
+| X22V-T4 | a transient colouring shows every measure method only Pull: its Følner spectral measures and their `U`-averages are carried by the finite `D = (R ∩ 𝔓⁴)^⊥` | [hand, one mind] | §2.5 |
+| X22V-FLk | FL-K at `k` colours: `ν̂(u) = −(k/(k−1)) P(c¹(0) = c²(u))`, `ν(R̂) = (k/(k−1)) P(c¹(0) ≠ c²(0))` | [hand, not blind (§1.5); identities tools exact] | §2.6; `tools/x22v_simplex.py` |
+| X22V-SELk | SEL-k TRUE given MR: `F²` is `k`-colourable iff it has a translation- and rotation-invariant random `k`-colouring with spectrum on `T + A` | [hand, one mind] | §2.6 |
 
 ## Stage 1 — SAVED (the claims verbatim, quotation check, C-0, C0)
 
@@ -241,3 +246,56 @@ through MR's scope; R-U, N1, N2 hold for every real number field. Reading: "`F²
   step and the functional that would close it. (No finite quotient could decide it anyway: periodic colourings are pullbacks.)
 - C-4: would have searched for transient colourings near a pullback with a sparse defect; instead proved the method's blindness (X22V-T4).
 - SEL-k: would have tried random joint laws in floating point; instead an exact rational check of the two identities with a plant.
+
+## Stage 3 — SAVED (the write-up: verdicts, committed before any fenced file is opened)
+
+### 3.1 Verdicts
+
+| claim | verdict | grade of what I hold | the step, or the route |
+|---|---|---|---|
+| **C-0** | **TRUE** | [tools exact + hand] | `d ≡ 3 (mod 8)`: one dyadic place, `F_𝔭 = ℚ₂(√3)`, inert in `L/F` (`L_𝔓 = ℚ₂(√3)(√−3)`); controls ℚ(√5) ramified, ℚ(√167) split; plant fires (§1.3) |
+| **C-1** | **GAP** | TRUE on `M_Aff` [hand, one mind] (X22V-F2) | as stated (every *translation*-invariant `μ`): the step "a translation-invariant `μ` with `μ(Pull) = 0` has an `R ⋊ U`-invariant limit off Pull". The step of T-J38-2 that used T-B1 is (i), closedness of `X′`, used only to get an `R ⋊ U`-invariant probability on `X′`; for rotation-invariant measures MR with Theorem C (via R-U, SI-3, B⁺) replaces it, for translation-invariant ones nothing I have does (§2.2). **"T-B1 is not used" holds only for the rotation-invariant half of Q-μ** |
+| **C-2** | **GAP** | the corrected form TRUE [hand, one mind] (X22V-R) | (⟹) R88-TA (iv); (⟸) is the same step as C-1: Q-tr is about translation orbit closures, the missing step is rotational. **What holds:** given MR, every four-colouring outside Pull is *affinely transient* (every `R ⋊ U`-invariant probability on its `R ⋊ U`-orbit closure is on Pull), so row 88 ⟺ no affinely transient colouring |
+| **C-3** | **GAP** | T-B1 ⟺ row 88 ⟹ Q-tr TRUE (inputs: T-J38-2 (iii), R88-TA1, R88-TA (iv)) | the last link, Q-tr ⟹ row 88, is C-2's (⟸) |
+| **C-4** | **GAP** | X22V-T4 [hand, one mind]: a transient colouring shows every measure method only Pull's spectrum (carried by the finite `D = (R ∩ 𝔓⁴)^⊥`) | EF_F⁺'s three tools each need a measure off Pull (the pigeonhole needs zero entropy of a measure; Lemma Z's wandering needs finite mass; the multipliers live inside the pigeonhole); a transient colouring supplies none, so the method returns nothing. C-4 stays as open as row 88; not FALSE (a transient colouring would be row 88's "no"). Wrong-reason pass: §2.5 (i)–(iii) |
+| **SEL-k** | **TRUE, given MR** | [hand, one mind; the identities exact-checked, `tools/x22v_simplex.py`] | (⟸) trivial; (⟹) an `R ⋊ U`-invariant `μ` exists (amenability); R-U and MR make its non-`E` part `b·m`, so `ν̂(u) = 0`; FLk (`k` colours) gives disjoint conditional supports on every edge; SI-4's selection is an `𝒜_∅`-measurable, translation- and rotation-invariant random `k`-colouring with spectrum on `T + A ⊂ E`. FL-K is load-bearing only as SI-3's identity at `k` colours (FLk), derived here — **not blind** (§1.5) |
+
+**The main finding, in one sentence.** MR closes the **rotation-invariant** half of Q-μ at the type-(B) fields with no T-B1, but Q-μ and row 111
+quantify over translation-invariant measures, and between the two sits exactly the step T-B1 was bought for: a translation-invariant non-Pull
+colouring measure whose rotations all drift onto Pull (a colouring that is affinely transient but not transient). So given MR the type-(B) question
+is: **row 88 ⟺ T-B1 ⟺ no affinely transient colouring**, with Q-tr strictly downstream, not equivalent, as far as I can derive.
+
+**A correction to stage 2's §2.3 (my own), recorded here rather than by editing a saved stage:** "Affine transience and Q-tr's transience are not
+comparable in general" is stronger than I proved. What I can say: no implication between them is known to me, and **"affinely transient ⟹
+transient", given MR, would prove C-1** (given MR every non-Pull colouring is affinely transient; if each were transient, a `μ ∈ M′` would have
+`μ`-a.e. point transient, but `μ`-a.e. point is generic for an ergodic component `μ_c` with `μ_c(X′) = 1`, so non-transient — so `M′ = ∅`). So the
+single missing step of C-1, C-2 and C-3 can be stated three equivalent-looking ways: (a) the closure of `M′` contains no `U`-fixed point; (b) every
+affinely transient colouring is transient; (c) for every `μ ∈ M′`, `lim inf_n |Φ_n|⁻¹ Σ_{u∈Φ_n} P_μ(c(0) ≠ c(4u)) > 0` for some Følner `Φ_n`.
+(I have checked (a) ⟺ C-1-given-MR and (b) ⟹ C-1-given-MR; (c) ⟹ C-1 via F2 as in §2.2; the converses of (b) and (c) I have not checked.)
+
+### 3.2 C0 scored
+
+| claim | C0 (P TRUE) | verdict | comment |
+|---|---|---|---|
+| C-0 | 0.97 | TRUE | as expected |
+| C-1 | 0.20 | GAP | the prior came from R88 §G's reading, which the derivation confirms at the same step |
+| C-2 | 0.20 | GAP | as expected; the corrected form (affine transience) is new here |
+| C-3 | 0.20 | GAP | as expected |
+| C-4 | 0.05 | GAP | as expected; X22V-T4 makes the method's blindness a theorem |
+| SEL-k | 0.70 | TRUE given MR | easier than expected: MR is used only as "no SP witness" |
+
+### 3.3 Proposed edits (the front-page lane decides; I edit none of these files)
+
+- **Stub `plans/STUB-measure-rigidity-three-fields.md` §2.3 / status block and `CLAUDE.md` item 24 / FS-98's row:** wherever MR is said to reduce
+  the type-(B) question, keep "row 88 ⟺ T-B1 (given MR)" and **do not add "⟺ Q-tr"** unless a derivation closes the rotational step; add
+  "given MR, every non-Pull colouring is affinely transient (X22V-R)". If X22D reports C-1 TRUE, its proof must be checked at the step "a
+  translation-invariant `μ` with `μ(Pull) = 0` is not moved onto Pull by `U`-averaging" before any row carries it.
+- **`LEDGER.md` § B, two lines** (X22V-F2, X22V-R), one (X22V-T4), and SEL-k (X22V-SELk) at [hand, one mind, given MR].
+- **`plans/R88-derivation.md` §G, T-C′'s last clause:** its reading ("even a full classification of `U`-invariant measures would leave Q-μ open
+  without T-B1-type isolation") is now a derived statement at the type-(B) fields: MR is that classification, it gives `M_Aff ⊂` Pull-measures,
+  and the remainder is the rotational step (a)–(c) above.
+- **FS-98's stub** (transience over the type-(B) fields): a second target beside T-B1, "affinely transient ⟹ transient" (§3.1 (b)).
+
+### Would-have-searched-here log (stage 3)
+
+(none: the stage is a write-up)
