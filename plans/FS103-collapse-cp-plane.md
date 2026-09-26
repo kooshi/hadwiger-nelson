@@ -361,3 +361,32 @@ Polymath16 threads and wiki (`CLAUDE.md` G49 item) for "measurable", "stationary
 J39's steps; and G79's: example invariant (fibre measures, spectral measure) or counterexample invariant (the SP witness).
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the fixed claim list (`data/fs103/claims.md`) and the advisor's first advice
+
+**The list** (ids, one line each): C-F1-GEN (F1, stub's text and the proposed totally-real scope); **C-LB6** (load-bearing: T-J39-3's forward
+either/or at `k = 5, 6` with `N_k = ∅`, forbidden inputs named); **C-THKDEL** (the step arithmetic-free: CP selection through a countable
+product of mixing compact factors); C-EXTk (R88-TC-ext at `k` colours, `S = ∅`, jointly measurable version); C-APX (closure of `ι(U)` is the full
+product of circles; `ι(R)` dense in `G_∅`); C-MERGE-n; C-CPUP; C-635-PL, C-635-THK, C-635-F1, C-635-TF; C-dG-PL, C-131, C-dG-THK, C-MR16,
+C-dG-F1; C-S (R1's text, four parts); C-FMT (six parts, no assertion). Controls: CTL-167-4, CTL-dG4 (positive, answer known), CTL-K-4 (tight
+boundary), CTL-K7-6, CTL-K5-5, CTL-167-5, CTL-ABS, CTL-Q2 (must stop).
+
+**The advisor's advice (FS103-A, message of 2026-09-26, its record `plans/POROS-2026-09-26-fs103-collapse.md` at `0a0eed9c`), item by item:**
+
+| # | advice | decision |
+|---|---|---|
+| 1 | state the uniform bound as one quantity (one standard `(K, ν)`, every place, every level) | **adopted**: C-635-THK, C-dG-THK are `sup_v`; C-LB6 wrong-reason (iv) |
+| 2 | step 5's two approximation inputs as claims; weak approximation holds because the norm-one torus is rational | **adopted**: C-APX (a), (b), with the wrong-reason line; the reason is left to the verifiers (statements only) |
+| 3 | T-J39-3 used only at `k ∈ {5, 6}`; at `k = 7`, 131 is not 7-thick | **adopted**: C-F1-GEN's first wrong-reason line |
+| 4 | "`χ_CP ≤ χ_m`" has no derivation on record; a sketch gives `χ_CP = χ_m⁰` | **adopted as a claim, not as a belief**: C-FMT (a)–(f), no assertion. My own reading before the advice: a Følner limit taken pointwise need not be continuous in probability (a measurable set with ever finer structure far out), so `χ_CP ≤ χ_m` is not free; the advisor's weak-* route in `L^∞` avoids that objection. Both readings go to the verifiers only as the neutral C-FMT(c), (e). |
+| 5 | S's scope: number fields only; specialisation raises χ | **adopted**: C-S (b)–(d); D-S and S_nf separated |
+| 6 | the abstract control `Cay(ℝ, {±1, ±√2})`, and ℚ at `k = 2` | **adopted**: CTL-ABS, CTL-Q2 |
+| 7 | a tight-boundary control: K at `k = 4` | **adopted**: CTL-K-4 |
+| 8 | headline at ℚ(√635087); `F_dG` named second until FS-105 walks degree 16 | **partly adopted, one disagreement, held for the owner:** the verification order is ℚ(√635087) first (already the stub's); C-MR16 stays in V2's list as a first walk of degree 16 (one mind), because Kooshi named `F_dG` the publication instance. Whether the *headline* is `F_dG` then waits on FS-105's second mind — the owner's call. |
+| 9 | fence leaks: `MEMORY.md` points every agent at the handoff; a memory file states the chain | **adopted** in both briefs (explicit override) |
+| 10 | fence the proofs and J21-MX's proof until stage 3 | **adopted**; the list of fenced files is in the briefs |
+
+The advisor's probabilities (its message): at ℚ(√635087), given MR — survives 0.85, named GAP 0.10, FALSE 0.02, in print 0.03; MR at degree 16
+a gap 0.15.
+
+## Stage 5 — SAVED
