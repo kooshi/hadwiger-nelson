@@ -214,3 +214,39 @@ The tool's plants fire for the right reasons: `PLANT=1` (a non-band functional) 
   FALSE. Instead: proved (SI-5) that one such colouring suffices and that none is needed if none exists — the step is equivalent to that open
   existence question.
 - The tool is a complete enumeration of `Γ₇` (49 vertices, 8 unit vectors), a set the derivation fixed: the ban's edge, logged.
+
+## Stage 3 — SAVED (A⁺ and B⁺)
+
+**Verdicts. A⁺: TRUE given T-C(A)** [hand]. **B⁺: TRUE given T-C** and the gap-freeness of every proper four-colouring of `P₄` (FS38-D2-A,
+Blokhuis–Brouwer–Haemers's equality case) [hand]. Neither uses SI's unproved "⟸".
+
+**Lemma A⁺ [hand; given T-C(A)].** Over ℚ(√47) (and every field in T-C(A)'s class), for every translation-invariant random proper four-colouring
+`μ` and every finite set `S` of split places, some `u ∈ U` has `∫_{R̂∖E_S} Re χ(u) dσ_μ < 0`; equivalently (SI-3) the relatively independent
+self-joining over `𝒜_S` has `P(c¹(0) = c²(u)) > 0`.
+*Proof.* If equality held for every `u`, SI-4 gives `c′ = min ∘ M`, a.s. in `X₄(F)`, `𝒜_S`-measurable and equivariant. Its law `μ′` (restricted to
+the invariant full-measure event `{c′ ∈ X₄(F)}`) is a translation-invariant Borel probability on `X₄(F)`. The coordinates of `e_{c′(0)}` lie in
+`L²(𝒜_S)`, so their spectral measures — the same in `μ`'s Koopman representation and in `μ′`'s, the factor map intertwining them — are carried
+by `E_S` (N2): `σ_{μ′}` is carried by `T + A + Fin_S`, which T-C(A) (R88-TCA, verbatim: "no translation-invariant Borel probability on `X₄(F)`
+has spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places") forbids. ∎
+*Remarks.* (i) The `E_S` here is T-C(A)'s own, read literally (N1): nothing is transported between topologies. (ii) If `μ` is also
+rotation-invariant (`R ⋊ U`), `σ_μ` and `E_S` are `U`-invariant, so `u ↦ ∫_{R̂∖E_S} χ(u) dσ_μ` is constant on `U`: strict at every `u`, in
+particular at `u = 1`.
+
+**Lemma B⁺ [hand; given T-C].** Over a type-(B) field (and every field in T-C's class, `P₄` being that class's tight level), if a
+translation-invariant random proper four-colouring `μ` satisfies `∫_{R̂∖E_S} Re χ(u) dσ_μ = 0` for every `u ∈ U`, for some finite `S`, then `μ`
+is carried by Pull.
+*Proof.* SI-4: `c₁ = min ∘ M` is an `𝒜_S`-measurable equivariant proper colouring, and as in A⁺ its law has spectral measure on `E_S`; T-C makes it
+a.s. a pullback, `c₁ = γ₁ ∘ π₄`, `γ₁` a proper four-colouring of `P₄ = Cay(O/𝔓⁴, S₄)`, `S₄ = π₄(U)`. Suppose `|M(x₀)| ≥ 2` with positive
+probability and pick there `j ∈ M(x₀) ∖ {c₁(x₀)}`. For every `u ∈ U`, `c₁(x₀ + u) ∈ M(x₀ + u)`, which is disjoint from `M(x₀) ∋ j` (SI-3); and
+`c₁(x₀) ≠ j`. Since `π₄(x₀ + U) = π₄x₀ + S₄`, the colour `j` is missing from `γ₁` on the closed neighbourhood of `π₄x₀`: a gap. `P₄` is
+Hoffman-tight at four colours (row 67; J28D's Lemma D, FS38-D2-B), so every proper four-colouring of it is gap-free (FS38-D2-A). So a.s. every
+`M(x)` is a singleton, `c = c₁` on `R` (SI-2; `R` countable), and `μ` is carried by Pull. ∎
+*Remarks.* (i) One selection suffices; the Poros sketch's two (`min`, `max`) reach the same gap. (ii) The converse is immediate (a pullback has
+spectral measure on `T`, so `σ_μ(R̂ ∖ E_S) = 0`), so **given T-C, at type (B): equality for every `u` ⟺ carried by Pull ⟺ spectral measure on
+`E_S`**. **Correction owed** to the Poros record §F3 ("T-C⁺ is strictly wider than T-C: it admits mass off `E_S`, provided that mass is not
+anticorrelated at unit distance"): wider as a hypothesis, but, given T-C, no `μ` with mass off `E_S` satisfies it. The content is the
+dichotomy: **every `μ` over a type-(B) field is carried by Pull or strictly anticorrelated off every `E_S` at some unit vector** — A⁺'s shape.
+
+### Would-have-searched-here log (stage 3)
+
+- None: both lemmas are two-line compositions of SI-3/SI-4 with T-C(A), T-C and D2-A.
