@@ -93,3 +93,70 @@ the next-lemma test — does KS-C follow in two lines from the selection plus T-
 
 **What the pass changed:** the target subgroup (`T + A` → `E`), flagged as the statement's main defect before any proof; KS-2 to be proved
 arithmetic-free; a predicted FALSE for KS-1 and KS-3 as stated, to be written out and checked, not assumed.
+
+### §M.2 — `debruijn-obligation-modeling` on KS-1 (fresh invocation, 2026-09-26)
+
+**The space.** KS-1 quantifies over all real fields `F`, all f.g. `Γ ⊆ R̂` and all measurable `W`: no example verifies it. The **local
+obligation** that discharges it is a per-point statement about the closed set `C = cl ev(U)` — fibre saturation, "`s + K₀ ⊆ C` for each
+`s ∈ C`" (KS-sat) — and the bridge from it to the global selection is KS-2 (Fubini + Steinhaus, no induction). So the statement from which
+the proof derives is a statement **about `C` alone**, with `W` gone; KS-1 = KS-2 ∘ KS-sat, and all the arithmetic sits in KS-sat.
+
+**Derive the statement (strengthen / weaken).**
+- *Weakest one-shot hypothesis.* KS-2's argument needs, for each `s′ ∈ π(C)`, that the fibre `C_{s′} ⊆ s + K₀` meets every non-empty open set
+  of the coset (so that it meets the Steinhaus set `{ζ : |P ∩ (Q − ζ)| > 0}` of any two positive-measure colour sets); for closed `C` that is
+  the full fibre. So KS-sat is not an over-strengthening — it is the exact hypothesis of a one-shot selection. **Recorded as the adversarial
+  mutation:** weaken "full fibre" to "each fibre contains a translate of a proper subtorus in every direction" (directional saturation) and the
+  selection breaks (the OR fibre of §M.1).
+- *The general form that carries itself.* KS-2 should be stated arithmetic-free: **`K` compact abelian, `C ⊆ K` closed, `H ≤ K` closed with
+  `C + H = C`; a measurable proper four-colouring of `Cay(K, C)` yields one of `Cay(K/H, C/H)`.** It iterates (a chain `H₁ ≤ H₂ …` of
+  saturating subgroups), and it is what both readings (`T + A`, `E`) consume.
+- *KS-3 splits along a filtration of `R̂`, not along coordinates.* `T + A ⊆ E ⊆ R̂`, both **pure** (if `mθ ∈ E_S` then `θ ∈ E_S`: `A` and
+  `Fin_S` are divisible, and `m(θ − λ/m − φ/m) ∈ T` forces the rest torsion), so `Γ = Γ_{T+A} ⊕ Γ_{Fin} ⊕ Γ_∞` with `Γ_{T+A} = Γ ∩ (T+A)`,
+  `Γ ∩ E = Γ_{T+A} ⊕ Γ_{Fin}`. The children, each with its own tool:
+  1. **inside `E`, the `T + A` reading** — does `C` saturate over `Γ_{Fin}`? Tool: weak approximation (FS91-J10-L2), because a character of
+     `E_S` reads only `∞`, finitely many stable places at finite level, and the places of `S` (no uncontrolled places). Predicted **FALSE** at
+     a conjugate pair `{w, w̄}` (the valuation dichotomy `v_w(u) = −v_w̄(u)`); a finite exact identity, checkable in seconds.
+  2. **rank one inside `E`** (`θ ∈ E ∖ (T + A)`): `cl θ(U) = T` by weak approximation — predicted TRUE.
+  3. **rank one off `E`, `F = ℚ`**: through row 98's machinery on `R_S` (Lemma E, JC, PA-B2, VB1's mechanism) with the sweep SW-m run at an
+     arc `J` instead of at 0 — predicted TRUE, a re-reading of held lemmas.
+  4. **rank one off `E`, general `F`**: the same needs PA-B2 and JC over `R_{F,S}` (degree-2 local fields, several archimedean circles); row
+     98's field clause went through a band-dependent gluing that does not transfer (a torsion-order bound is used). Predicted GAP.
+  5. **rank `n` off `E` (KS-sat_E)**: joint density of the off-`E` values with the `E`-values pinned — the real obligation. It is a **set**
+     statement, so Weyl's criterion does not apply character by character; it needs either an equidistribution (a measure whose Fourier
+     coefficients vanish) or the orbit-closure theory of the diagonal `U`-action on `R̂ⁿ` (topological self-joinings). Predicted GAP, at the
+     named step: *for `u` with prescribed components at `∞`, the stable places and `S`, the values of characters that read infinitely many split
+     places cannot be steered without controlling `u` at every place, and `U_Σ` is discrete in `∏_Σ`* (no strong approximation for the
+     anisotropic torus).
+- *KS-C* is a two-line composition (random placement, then T-C(A)); its only obligation is that the placed colouring's spectrum lies in
+  `Γ_sel ⊆ E_S` for one finite `S` — true for f.g. `Γ_sel` since `E` is an increasing union of subgroups.
+
+**Validate adversarially (planned checks).** `tools/j51d_or_check.py`: exact arithmetic over rational unit vectors (a complete enumeration of
+the finite set of Pythagorean triples up to a height fixed in advance), asserting that `(ψ_π(u), ψ_π̄(u))` never has both coordinates
+non-zero, and that the four-colouring `W` of the adversarial member is proper on every enumerated edge; plant: `ψ_π̄` replaced by `ψ` at a
+prime of 13 (both coordinates then non-zero together) — must fire. Mutation audit of KS-2: delete "`C + H = C`" and exhibit the OR fibre
+as the failure.
+
+**What the pass changed:** the decomposition of KS-3 into five children by the purity filtration `T + A ⊆ E`; KS-2 to be proved in the
+arithmetic-free general form with iteration; the real obligation named (child 5) before any derivation; the exact check designed with its
+plant.
+
+### 1.4 C0 — my probabilities before any derivation (after §M; the planner's §P for comparison)
+
+| claim | TRUE | FALSE | GAP | planner (§P) | why, one line |
+|---|---|---|---|---|---|
+| KS-1 | 0.10 | 0.80 | 0.10 | X-KS 0.50 / 0.15 / 0.35 | §M.1's adversarial member: a proper `W` with `Γ ∩ (T + A) = 0` over `ℚ` looks constructible |
+| KS-2 | 0.95 | 0.02 | 0.03 | P-sat 0.85 | Fubini + Steinhaus |
+| KS-3 | 0.05 | 0.90 | 0.05 | P-sat1 0.70 (rank one only) | the conjugate-pair OR fibre |
+| KS-3, rank one | 0.55 | 0.05 | 0.40 | P-sat1 0.70 | TRUE inside `E` and at `ℚ`; general `F` off `E` likely GAP |
+| KS-4 | 0.97 | 0.03 | — | — | `W` reads only the `T + A` coordinate; cannot fail (an uninformative control) |
+| KS-5 | 0.95 | 0.05 | — | — | as KS-4 |
+| KS-C | 0.85 (as an implication) | 0.05 | 0.10 | — | two-line composition |
+| KS-1_E (proposed) | 0.35 | 0.10 | 0.55 | — | child 5 is the equidistribution J37 named |
+| K0 | 0.70 | 0.05 | 0.25 | P-K0 0.75 | not read yet |
+
+### 1.5 Would have searched here (stage 1)
+
+- None. (A search would have been "sample characters of ℚ(√11) and plot `cl Θ(U)`"; the valuation dichotomy was derived instead, and its
+  check in stage 2 is an exact identity over a fixed finite set.)
+
+## Stage 1 — SAVED
