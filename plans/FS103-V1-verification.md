@@ -7,7 +7,20 @@ opened before stage 3's commit.*
 
 ## Theorems this phase proved
 
-*(filled at stage 3; one line each, grade, address)*
+- **V1-LB (C-LB)** — for totally real `F` outside row 100's exception and any `k ≥ 2` with `N_k(F) = ∅`: `F²` `k`-colourable ⟹ `UD(ℝ²)` has a CP
+  `k`-colouring, or an SP witness exists; no MR; general form keeps the non-thick factors. [hand, one mind, blind] — §Stage 2a.
+- **V1-L2** — the `T + A` spectral subspace of a translation-invariant colouring measure is `L²` of a factor (conditional expectation). [hand] — §2a.
+- **V1-L3** — the dichotomy: `τ = σ|_{R̂∖(T+A)}` always has `∫χ(1)dτ ≤ 0`; `= 0` iff adjacent conditional colour laws have disjoint supports. [hand] — §2a.
+- **V1-L5** — extension of the conditional-law process to `G_∅` (I-EXT4's form at `k` colours, `S = ∅`). [hand] — §2a.
+- **V1-L6** — selection over a compact factor with `λ* < 1/(k−1)` by a randomised threshold on fibre masses, sharp at `K_k`. [hand] — §2a.
+- **V1-L8** — merging real places by the diagonal (I-MERGE's needed direction, one line). [hand] — §2a.
+- **C-635-F1 / C-F1-GEN (scope)** — given MR, `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)` for every totally real `F` outside the exception with `N₆(F) = ∅`;
+  instances ℚ(√635087), `F_dG`. [hand, assembly one mind] — §2b.
+- **Density-point lemma** (C-FMT (d)'s partial step) — density-point regularisation of an a.e.-proper measurable colouring avoids distance 1
+  everywhere off a null set. [hand, one mind] — §2b.
+- **Places and spectra** — ℚ(√635087)'s stable places below 1000, `F_dG`'s below 600 (131, 479 only), dyadic splitting, level-one `λ*(Γ_p)`
+  for 17 primes incl. 131 (`0.168047`) and the non-6-thick list. [tools exact, two code bases] — `tools/fs103_v1_checks.py`,
+  `data/fs103/fs103-v1/{places,dyadic}.gp`, `checks.out`.
 
 ## Stage 1 — SAVED (quotation check, C0, wrong-reason lines and controls)
 
@@ -274,3 +287,41 @@ bound (I-CP57's lower half applies to a.e.-proper colourings); `χ_B` against `�
 
 - None. Every computation was an exact spectrum or a PARI place list of seconds; no colouring, independent-set or quotient search was
   contemplated (the claims are derivational).
+
+
+## Stage 3 — SAVED (the write-up; committed before anything fenced was opened)
+
+| claim | verdict | grade · minds (mine) | the step, if not TRUE |
+|---|---|---|---|
+| **C-LB** | **TRUE**, `k = 4, 5, 6` (every `k ≥ 2`), **with no MR** | [hand] · 1 blind (V1-LB); inputs I-RU, I-C′, I-WEIL by statement | — |
+| C-F1-GEN, stub's text | **MISSTATED** | — | "real" must be "totally real" (complex places untreated); "no non-thick place" must be `N₆(F) = ∅` (with 5-thick only, `χ(F²) = 6 < χ_CP = 7` is not excluded) |
+| C-F1-GEN, proposed scope | **TRUE** given MR(F); T-J39-3 not needed | [hand] · 1 | — |
+| C-CPUP | **TRUE** | [hand, classical] · 1 | — |
+| C-635-PL | **TRUE** (lists above, bound 1000) | [tools exact, two code bases] | — |
+| C-635-THK | **TRUE**, `sup λ* ≤ 0.1952` | [hand + tools; I-WEIL] · 1 | — |
+| C-635-F1 | **TRUE** given MR(ℚ(√635087)) | [hand] · 1 | — |
+| C-635-TF | **TRUE** given C-635-F1 | [hand] · 1 | — |
+| C-dG-PL, C-131, C-dG-THK | **TRUE** (bound 600; `λ*(Γ₁₃₁) = 0.168047`) | [tools exact] · 1 (other verifier's by assignment; checked anyway) | — |
+| C-dG-F1 (assembly) | **TRUE** given MR(`F_dG`) and the place list | [hand] · 1 | — |
+| C-MR16 | **unreached** | — | budget (optional per brief) |
+| C-S (a) | **TRUE** (trivial for S; the S_nf form via either instance) | [hand] · 1 | — |
+| C-S (b) | **TRUE** for S_nf over totally real fields, given MR, "drops to six" = `χ(F²) = 6` | [hand] · 1 | — |
+| C-S (c) | **MISSTATED** | [hand + tools] · 1 | finite in residue fields (14 odd `q` + dyadic `Q ≤ 64`, `U₁₂₈` unchecked), infinite in local planes (`[F_v:ℚ_p]` unbounded) |
+| C-S (d) | answered: Q-const (G63) for transcendental subfields; complex places untreated by V1-LB and MR unexercised there | [hand] · 1 | — |
+| C-FMT (a), (b) | **TRUE** | [classical; hand] · 1 | — |
+| C-FMT (c) | **GAP** | — | the Følner limit of random translates need not be continuous in probability |
+| C-FMT (d) | **GAP** | — | colouring the null set of non-density points (the rest proved: density-point classes avoid distance 1 everywhere) |
+| C-FMT (e) | relations stated: `χ ≤ χ_m ≤ χ_B ≤ 7`, `χ_m⁰ ≤ χ_m`, `χ_m⁰ ≥ 5`; `χ_B` vs `χ_CP` the (c) GAP | [hand] · 1 | — |
+| C-CPM | **GAP** without MR (the Følner step; not a consequence of C-FMT); **TRUE** through C-635-F1 given MR | [hand] · 1 | the Følner step |
+
+**What the owner should know first.** C-LB holds without MR and without T-J39-3's proofs, by a route whose one non-routine step is V1-L2 +
+V1-L3: condition the colouring on its `T + A` factor; the positive-definite pairing at an edge splits into a factor part `≥ −1/(k−1)` and an
+`E`-null part, so either the `E`-null part is an SP witness or the factor's conditional colour laws have disjoint supports at every edge — a
+"fractional colouring" that extends to the adelic completion and is then collapsed onto the real factor by a mixing selection. So, given MR
+(row 120), **χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²) = χ(F_dG²)** at my one-mind [hand] grade.
+
+**Corrections owed (proposed; the close writes them).** (1) The stub's C-F1-GEN text: "totally real" and "`N₆(F) = ∅`". (2) C-S (c): "a
+finite family" → "finitely many residue fields; infinitely many local planes". (3) I-MERGE's needed direction is the diagonal homomorphism
+(one line) — if a held proof works harder, the row can say so. (4) My stage-1 control misread row 110's "59 has ratio 0.199119854095" as
+`λ*`; it is the Hoffman ratio `λ*/(1+λ*)` (`λ*(Γ₅₉) = 0.248626`, so **59 is not 6-thick**) — a reading slip of mine, fixed in the tool before
+any verdict used it.
