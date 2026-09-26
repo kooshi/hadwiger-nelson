@@ -121,3 +121,150 @@ at `k ≥ 4`; equal ratio, IS-imprimitive; the gap regime), **V** (blind verifie
 - G74 — silent: field-level layers.
 - G75 — bears: R3a (row 85) answered FS-67 once at `k = 4` by a pointwise tetrahedron splitting — a structure-derived pullback route → DD candidate route.
 - G76 — bears: S2's pullback uses Zhang (i) strictly (row 88); two tight places give a choice per coset (row 89) → §S bearing; DA control.
+
+## Stage 2 — SAVED (§G.2 rows, §G.3 method rules, §G.4)
+
+### 2.1 §G.2 — `LEDGER.md` rows 1–97, by mechanism
+
+- row 1 — silent: two-circle 3-colourability.
+- row 2 — silent: seam identity.
+- row 3 — silent: coverage monotonicity.
+- row 4 — bears: fan ⟺ compulsory coverage; "every closed neighbourhood sees all colours" is the gap-free notion GL's hypothesis is (PA-P1) → DA.
+- row 5 — silent: class confinement.
+- row 6 — silent: 120° identity.
+- row 7 — silent: greedy colouring.
+- row 8 — silent: de Grey balanced colouring.
+- row 9 — silent: 120° compulsion.
+- row 10 — silent: one-pivot cap.
+- row 11 — silent: strip automaton.
+- row 12 — silent: extension profile.
+- row 13 — silent: growth-family hunt.
+- row 14 — silent: pair gluing.
+- row 15 — silent: extension pressure.
+- row 16 — silent: coupled automaton.
+- row 17 — silent: gluing classification.
+- row 18 — silent: near-relation.
+- row 19 — silent: kill mechanism.
+- row 20 — silent: pivot triangle.
+- row 21 — silent: registered statistics.
+- row 22 — silent: ladder pair.
+- row 23 — silent: four-ladder object.
+- row 24 — silent: hexagram.
+- row 25 — silent: field-wall identity.
+- row 26 — silent: de Grey anatomy.
+- row 27 — silent: quadrature censuses.
+- row 28 — silent: 2-adic kill engine.
+- row 29 — silent: stacking law.
+- row 30 — silent: criticality factorisation.
+- row 31 — silent: Act One carriers.
+- row 32 — silent: hex-shell pigeonhole.
+- row 33 — silent: classical interval.
+- row 34 — silent: coset colourings.
+- row 35 — silent: coarse cells.
+- row 36 — silent: scale non-monotone.
+- row 37 — silent: gap atlas.
+- row 38 — silent: gradient hunt.
+- row 39 — silent: gap atlas kernel.
+- row 40 — silent: fine tail.
+- row 41 — silent: limit lemma.
+- row 42 — bears (weak): `Forces`/`Separated` vocabulary; "pulled back from `G`" is "every `(x,h),(x,h′)` forced equal" — the kernel form's phrasing option (D4) → V, stub D4.
+- row 43 — silent: de Grey bracket.
+- row 44 — silent: spindle theorem.
+- row 45 — silent: batch descent.
+- row 46 — silent: copy unions.
+- row 47 — silent: M53 residue obstruction.
+- row 48 — silent: critical-set localisation.
+- row 49 — silent: absorption kernel.
+- row 50 — silent: additive yardstick.
+- row 51 — silent: additive rigidity.
+- row 52 — silent: finite-plane bound.
+- row 53 — silent: field sieve.
+- row 54 — silent: lift.
+- row 55 — silent: residue distance law.
+- row 56 — bears (weak): `card_le_chromaticNumber_mul_indepNum` — the ratio bound DC's "class of measure > θ" uses in fractional form → DC.
+- row 57 — silent: Theorems A and B (the colourings, not products).
+- row 58 — bears: tight residue planes force (the rhombus at 3) — the tight → forcing mechanism FS-67 generalises to products → DD.
+- row 59 — silent: 2-adic law on K.
+- row 60 — silent: plane freedom.
+- row 61 — silent: six-target statements.
+- row 62 — silent: overcompression.
+- row 63 — silent: two colours from inertia.
+- row 64 — silent: ρ₆₃ arena.
+- row 65 — silent: Parts coordinate shape.
+- row 66 — bears: fan gap frees every pair above it — the gapped half; its `FanGap`/`Slack` vocabulary is D4's → DA, stub D4.
+- row 67 — bears: the 2-adic tower is tight at four colours at every level and forces from level 5 — a tight `G` family at `k = 4` beyond `K₄` for DD's instance list → DD.
+- row 68 — silent: six refused at 83.
+- row 69 — silent: window.
+- row 70 — silent: five refused at 27.
+- row 71 — silent: five refused at 23; χ_f(K²) (the fractional min is G59's, not this row's).
+- row 72 — bears: the 3-adic plane is tight at three colours at every level — DB's first consumer (FS-58's measured fact) → DB.
+- row 73 — silent: quadratic fields need four.
+- row 74 — silent: census.
+- row 75 — bears (weak): fibre-share ratio at every level supplies `χ_f` of stable targets (PA-T4/T5 table) — the strict/gap regime classification of the programme's `H` → §S bearing.
+- row 76 — silent: five over ℚ(√3,√5).
+- row 77 — silent: theorem audit.
+- row 78 — bears (weak): `F = P = 8Λ` — every four-colouring local at one dyadic place; the product reading's instance → §S bearing.
+- row 79 — bears: three colours linear via heights; ES/TW's topological route at `k = 3` is the same universal-cover fact → DB.
+- row 80 — bears: at four colours no cell-local certificate — DD expects no local invariant for `χ(E_4(G)) > 4` witnesses either → DD.
+- row 81 — silent: `L21cc6506` loose.
+- row 82 — bears (weak): three-colourings over fields; affinity consumer beside DB → DB.
+- row 83 — silent: census certificates.
+- row 84 — silent: four-colour calibration.
+- row 85 — bears: R3a — on each component the colouring of (tight dyadic quotient) × (non-4-colourable mod-5 torus) is local at one prime, by pointwise tetrahedron splitting — FS-67 at `k = 4` answered once, a DD route → DD.
+- row 86 — bears: `K_k × Y` uniquely colourable (Klotz–Sander Thm 4.2 after Greenwell–Lovász; `Y` connected) — the construction DA's `G = K_k × X` uses → DA.
+- row 87 — bears: the middle case — a slack plane whose colourings all pull back from a tight quotient; pullback structure without tightness → DD (hypothesis: "pulls back from a tight quotient").
+- row 88 — bears: Zhang Thm 1.8(i) at strict ratio gives the S2 pullback — the strict case already used; DC must say what it adds beyond it → DC.
+- row 89 — bears: equal ratio `1/4` between two tight dyadic factors, each class `a(x) + b(y)` — the equal-ratio case with `χ(H) = k`, decided by tightness; DD's tool for the IS-imprimitive case → DD.
+- row 90 — bears (weak): local rigidity at `ℚ₂(√3)` — pullback from `P₄` per coset; consumer → §S bearing.
+- row 91 — silent: type-(B) no-gos (constructions of non-periodic colourings).
+- row 92 — silent: measurable windows.
+- row 93 — bears: tightness does not propagate up towers in general (Λ₅₁₀) — DD's instance list must check tightness per level, not assume it → DD.
+- row 94 — silent: ℚ(√11) non-periodic colouring.
+- row 95 — silent: band characters.
+- row 96 — silent: band consequences.
+- row 97 — silent: one prime.
+
+### 2.2 §G.3 — method rules (`CLAUDE.md` § Grokkings [method] entries, § Building, § The gate, § What compute helps)
+
+- G21 (negative measures its enumeration) — bears: PB's generator image stated; a "no counterexample" is about tight Cayley graphs of the sizes enumerated → PB.
+- G30 (derivation kills; failure modes 1–7) — bears: modes 5 and 7 (inhabitants; emptiness of the conclusion's domain: "every `k`-colouring of `G × H`" with `G × H` `k`-colourable by pullback, so nonempty) → DA–DD, V.
+- G46 (classical theory first) — bears: §PA.
+- G49 (prior-art gate) — bears: §PA item 8 (zbMATH author listings).
+- G50 (read what the search found) — bears: §PA reading list gates DB.
+- G51 (competitor and advisor) — bears: §S staffing (derivation + blind verifier).
+- G67 (form of grokkings) — bears: close.
+- G72 (invariant question) — bears: §IQ.
+- Checkpointing [PROTECTED] — silent: no run over 15 minutes (hand derivation).
+- Blocking run presumed killable [PROTECTED] — silent: no runs.
+- Kill by PID, never by pattern — silent: no background jobs.
+- Pipes kill producers / exit status through `tail` — bears (weak): the `tools/crunch_j27d_*` checks run with exit status read directly → DA–DC tools.
+- Never edit a running shell script — silent.
+- Generated modules and invalidation; kernel cost model — silent: no kernel job in this milestone (D4 stays a stub).
+- `scripts/build.sh` only; `lake env lean` is not the check — silent (no Lean).
+- `scripts/slot.py` for jobs over 2 GiB / 2 min — bears (weak): any exact spectrum computation for DC's table stays under the threshold; else slot → DC.
+- Unexplained crash: halt — silent unless it happens.
+- Symmetry breaking before (UN)SAT — bears: PB only (post-ban small-case counts).
+- Python 3.14 forkserver — silent.
+- Searching: `ugrep` alternation, `rg -uu` — bears (weak): §PA greps of held PDFs use `grep -F`/`rg`.
+- Every gate keeps its output — silent.
+- Make the gate fail, watch it fail; plant faults — bears: every `tools/crunch_j27d_*` check plants a fault (a non-gap-free `G`; a colouring that is a pullback) and watches it fire → DA–DC.
+- State the uninformative outcome and confirm it reachable — bears: P-A's route must be checked to be able to fail (e.g., if `G = K_k × X` were not gap-free the construction proves nothing about FS-67's hypothesis) → DA.
+- One thing may differ between compared numbers — bears (weak): DC's threshold comparisons (`λ*` two-sided vs `λ_min/d` one-sided) → DC.
+- A positive control proves only shapes the generator represents — bears: PB.
+- A measured half and a derived half fail in opposite directions — silent (no measured graphs).
+- Write the certificate for the reviewer early; order verification by evidential value — bears: V's claim list is written now (§S), before claims exist.
+- Standard of evidence above rung B — silent: nothing here is χ ≥ 6.
+
+### 2.3 §G.4 — what the re-grokking changed
+
+1. **Added DA, the Hedetniemi transfer (G71, G73, row 86, G30 mode 5):** the stub's D3 asked "is gap-freedom in every colouring enough, or is
+   the spectrum doing work?"; row 86's `K_k × Y` construction plus `[Tardif2023]` answers it at `k ≥ 4` in two lines (P-A) — so the stub's
+   jackpot clause ("gap-freedom as the exact hypothesis") is expected dead at `k ≥ 4` and alive only at `k = 3` (DB) or for Hoffman-tight `G`
+   (DD).
+2. **Re-ordered: DB (three colours) before DD** (G71, row 79, G61(3)): at `k = 3` the universal-cover route exists and the consumer is named
+   (FS-58's D3.4, G61(3)); at `k ≥ 4` the routes are combinatorial (G24, G73).
+3. **Added DC, the spectral pullback** (G44, G54, row 88, J21-MX): it covers non-vertex-transitive `G`, which neither Zhang nor PA-P5
+   reach, and tells the programme which residue `H` it applies to.
+4. **Moved the stub's D2 (small-case SAT) to PB**, post-ban, with its generator image to be written (G21).
+5. **The §S bearing statement changes** (G43, G55, G59, rows 75, 88): the programme's own products (residue targets at four colours) are in
+   the strict regime by PA-T4, so FS-67's open remainder bears on no residue product at four colours; at five only through PA-T5's holes.
