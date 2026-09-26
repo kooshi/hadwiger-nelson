@@ -1,0 +1,56 @@
+QUERY au:"Chandgotia, Nishant" hits 18
+- 1469.60119 | Chandgotia, Nishant; Weiss, Benjamin | 2021 | Predictive sets | Stochastics and Dynamics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1382.37040 | Chandgotia, Nishant; Marcus, Brian | 2018 | Mixing properties for hom-shifts and the distance between walks on associated graphs | Pacific Journal of Mathematics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1356.37030 | Chandgotia, Nishant; Meyerovitch, Tom | 2016 | Markov random fields, Markov cocycles and the 3-colored chessboard | Israel Journal of Mathematics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- None | Chandgotia, Nishant; Marcus, Brian; Richey, Jacob; Wu, Chengyu | 2026 | Shifts of finite type obtained by forbidding a single pattern | Discrete and Continuous Dynamical Systems | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1283.37017 | Chandgotia, Nishant; Han, Guangyue; Marcus, Brian; Meyerovitch, Tom; Pavlov, Ronnie | 2014 | One-dimensional Markov random fields, Markov chains and topological Markov fields | Proceedings of the American Mathematical Society | [review] The authors investigate the concept of topological Markov fields (TMF) in one dimension that is a new property of a shift space. Some relations beetwen a TMF an
+- 1489.82008 | Chandgotia, Nishant; Peled, Ron; Sheffield, Scott; Tassy, Martin | 2021 | Delocalization of uniform graph homomorphisms from \({\mathbb{Z}}^2\) to \({\mathbb{Z}} \) | Communications in Mathematical Physics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1466.05062 | Alon, Noga; Briceño, Raimundo; Chandgotia, Nishant; Magazinov, Alexander; Spinka, Yinon | 2021 | Mixing properties of colourings of the \(\mathbb{Z}^d\) lattice | Combinatorics, Probability and Computing | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1369.37013 | Chandgotia, Nishant | 2017 | Four-cycle free graphs, height functions, the pivot property and entropy minimality | Ergodic Theory and Dynamical Systems | [summary] Summary: Fix \(d\geq 2\). Given a finite undirected graph \({\mathcal{H}}\) without self-loops and multiple edges, consider the corresponding `vertex' shift, \(
+- 1506.37011 | Chandgotia, Nishant; Meyerovitch, Tom | 2021 | Borel subsystems and ergodic universality for compact \(\mathbb{Z}^d\)-systems via specification and beyond | Proceedings of the London Mathematical Society. Third Series | [review] A Borel \(\mathbb{Z}^d\) dynamical system \((X,S)\) is almost Borel universal if any free Borel \(\mathbb{Z}^d\) dynamical system \((Y,T)\) whose Gurevich entro
+- 1407.37060 | Aaronson, Jon; Bromberg, Michael; Chandgotia, Nishant | 2018 | Rational ergodicity of step function skew products | Journal of Modern Dynamics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1416.05273 | Chandgotia, Nishant; Pak, Igor; Tassy, Martin | 2019 | Kirszbraun-type theorems for graphs | Journal of Combinatorial Theory. Series B | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2304.08468 | Nishant Chandgotia; Scott Sheffield; Catherine Wolfram | 2026 | Large deviations for the 3D dimer model |  | [summary] Summary: In 2000, Cohn, Kenyon and Propp studied uniformly random perfect matchings of large induced subgraphs of $\mathbb Z^2$ (a.k.a. dimer configurations or 
+- 1374.60191 | Chandgotia, Nishant | 2017 | Generalisation of the Hammersley-Clifford theorem on bipartite graphs | Transactions of the American Mathematical Society | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1582.37015 | Chandgotia, Nishant; Unger, Spencer | 2025 | Borel factors and embeddings of systems in subshifts | Israel Journal of Mathematics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2305.00248 | Jérôme Buzzi; Nishant Chandgotia; Matthew Foreman; Su Gao; Felipe García-Ramos; Anton Gorodetski; François Le Maitre; Federico Rodríguez-Hertz; Marcin Sabok | 2023 | Open questions in descriptive set theory and dynamical systems |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2510.11969 | Nishant Chandgotia; Silvère Gangloff; Benjamin Hellouin de Menibus; Piotr Oprocha | 2026 | On the cohomology of homshifts |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- None | Chandgotia, Nishant; Gangloff, Silvère; de Menibus, Benjamin Hellouin; Oprocha, Piotr | 2026 | Undecidability of the block gluing classes of homshifts | Nonlinearity | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2605.02226 | Nishant Chandgotia; Aditya Thorat | 2026 | Finitely Dependent Processes on Subshifts |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+EXIT=0
+QUERY au:"Meyerovitch, Tom" & ab:"color*" hits 6
+- 1192.37022 | Hochman, Michael; Meyerovitch, Tom | 2010 | A characterization of the entropies of multidimensional shifts of finite type | Annals of Mathematics. Second Series | [review] To a finite alphabet \(\Sigma\) there is associated \(\Sigma^{Z^d}\) - the space of \(\Sigma\)-colorings of \(Z^d\) or the full shift on \(\Sigma\). A shift of 
+- 1356.37030 | Chandgotia, Nishant; Meyerovitch, Tom | 2016 | Markov random fields, Markov cocycles and the 3-colored chessboard | Israel Journal of Mathematics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1465.60082 | Barbieri, Sebastián; Gómez, Ricardo; Marcus, Brian; Meyerovitch, Tom; Taati, Siamak | 2021 | Gibbsian representations of continuous specifications: the theorems of Kozlov and Sullivan revisited | Communications in Mathematical Physics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1506.37011 | Chandgotia, Nishant; Meyerovitch, Tom | 2021 | Borel subsystems and ergodic universality for compact \(\mathbb{Z}^d\)-systems via specification and beyond | Proceedings of the London Mathematical Society. Third Series | [review] A Borel \(\mathbb{Z}^d\) dynamical system \((X,S)\) is almost Borel universal if any free Borel \(\mathbb{Z}^d\) dynamical system \((Y,T)\) whose Gurevich entro
+- 1258.60015 | Angel, Omer; Benjamini, Itai; Gurel-Gurevich, Ori; Meyerovitch, Tom; Peled, Ron | 2012 | Stationary map coloring | Annales de l'Institut Henri Poincaré. Probabilités et Statistiques | [review] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1375.37051 | Meyerovitch, Tom | 2017 | Direct topological factorization for topological flows | Ergodic Theory and Dynamical Systems | [summary] Summary: This paper considers the general question of when a topological action of a countable group can be factored into a direct product of non-trivial action
+EXIT=0
+QUERY ab:"height function*" & ab:"3-color*" hits 2
+- 1489.82008 | Chandgotia, Nishant; Peled, Ron; Sheffield, Scott; Tassy, Martin | 2021 | Delocalization of uniform graph homomorphisms from \({\mathbb{Z}}^2\) to \({\mathbb{Z}} \) | Communications in Mathematical Physics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2605.02226 | Nishant Chandgotia; Aditya Thorat | 2026 | Finitely Dependent Processes on Subshifts |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+EXIT=0
+QUERY ab:"three-color*" & ab:"height" hits 3
+- 0990.05020 | Propp, James | 2001 | The many faces of alternating-sign matrices |  | [summary] Summary: I give a survey of different combinatorial forms of alternating-sign matrices, starting with the original form introduced by \textit{W. H. Mills, D. P.
+- 0695.17008 | Pearce, Paul A.; Seaton, Katherine A. | 1989 | Exact solution of cyclic solid-on-solid lattice models | Annals of Physics | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1242.05003 |  | 2011 | Extended abstracts of the sixth European conference on combinatorics, graph theory and applications, EuroComb 2011, Budapest, Hungary, August 29 -- September 2, 2011 | Electronic Notes in Discrete Mathematics | [editorial] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+EXIT=0
+QUERY ab:"winding" & ab:"color*" & ab:"Z^d" hits 0 (HTTP 404 )
+EXIT=0
+QUERY ab:"homomorphism*" & ab:"K_3" & ab:"lift*" hits 0 (HTTP 404 )
+EXIT=0
+QUERY ab:"3-color*" & ab:"Cayley graph*" & ab:"abelian" hits 6
+- arXiv:2606.23762 | Nathan Tung | 2026 | Coloring sparse random Cayley graphs |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- arXiv:2511.10813 | Katherine Eng; Timothy Harris; Mike Krebs; Mason Meeks; Claudia Maria Schmidt | 2025 | Four plane unit vectors generate a $3$-colorable graph |  | [summary] Summary: We show that given an arbitrary set of four plane unit vectors $v_1, v_2, v_3, v_4$, the Cayley graph generated by $\{\pm v_1, \pm v_2, \pm v_3, \pm v_
+- arXiv:2303.06272 | Jonathan Cervantes; Mike Krebs | 2025 | Chromatic numbers of Cayley graphs of abelian groups: Cases of small dimension and rank |  | [summary] Summary: A connected Cayley graph on an abelian group with a finite generating set $S$ can be represented by its Heuberger matrix, i.e., an integer matrix whose
+- arXiv:2607.23841 | Ferdous Ahmed; David Asraf; David Bonds; Jonathan Davidson; Yunhee Jang; Mike Krebs; Anand Prakash; Edgar Yak-De Padua | 2026 | Chromatic numbers of circulants with indispensable generators |  | [summary] Summary: The Cayley graph $\text{Cay}(G,S)$ is the graph whose vertex set is the group $G$, where two vertices $x$ and $y$ are adjacent if and only if $xy^{-1}$
+- 1354.05002 |  | 2016 | Discrete mathematics days. Extended abstracts of the 10th ``Jornadas de matemática discreta y algorítmica'' (JMDA), Barcelona, Spain, July 6--8, 2016 | Electronic Notes in Discrete Mathematics | [editorial] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1375.05004 |  | 2017 | Extended abstracts of the ninth European conference on combinatorics, graph theory and applications, EuroComb 2017, Vienna, Austria, August 28 -- September 1, 2017 | Electronic Notes in Discrete Mathematics | [editorial] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+EXIT=0
+QUERY ab:"cohomolog*" & ab:"graph homomorphism*" & ab:"obstruction" hits 1
+- arXiv:2605.02226 | Nishant Chandgotia; Aditya Thorat | 2026 | Finitely Dependent Processes on Subshifts |  | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+EXIT=0
+QUERY ab:"circular color*" & ab:"Cayley graph*" & ab:"character" hits 0 (HTTP 404 )
+EXIT=0
+QUERY ab:"proper 3-coloring*" & ab:"rotation number" hits 0 (HTTP 404 )
+EXIT=0

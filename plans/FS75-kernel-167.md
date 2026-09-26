@@ -651,3 +651,44 @@ came after the last row; its eleven INVENTORY lines and two HELD decisions are f
 Each row is ticked at the stage that closes it; stage 6 is the final walk.
 
 **Would have searched here (stage 1):** none.
+
+### Stage 2 — SAVED (the close-time prior-art gate, time-boxed at about ten minutes)
+
+**The question.** Is the winding form of the three-colour criterion's ⟹ direction in print — from a proper three-colouring of a Cayley
+graph of an abelian group along `s`, an additive functional `W` on the relation lattice with `Σ_j min(r_j, 2r_j) ≤ 3W(r)`, with no averaging?
+
+**The queries** (zbMATH Open API, WORKFLOW 3.2 item 8; `data/fs75/j54/zb.py`, a copy of J53's one-query helper; raw output
+`data/fs75/j54/gate-raw.out`, `gate-raw2.out`), in the discipline's words — heights, cocycles of homshifts, homomorphisms to `K₃`, integer
+tensions, abelian Cayley graphs:
+
+| # | query | hits | bearing |
+|---|---|---|---|
+| 1 | `au:"Chandgotia, Nishant"` (the full listing) | 18 | two: Zbl 1369.37013 (Chandgotia 2017, *Four-cycle free graphs, height functions, the pivot property and entropy minimality*, ETDS) — the height lift, already credited in the "Not ours" list; arXiv:2510.11969 (`[CGHO2025coh]`, held and read §1–§3.2) — see below |
+| 2 | `au:"Meyerovitch, Tom" & ab:"color*"` | 6 | Zbl 1356.37030 (Chandgotia–Meyerovitch 2016, *Markov random fields, Markov cocycles and the 3-colored chessboard*): cocycles of Gibbs specifications on the grid, not the height's winding on a relation lattice (summary withheld; title-level only) |
+| 3–4 | `ab:"height function*" & ab:"3-color*"`; `ab:"three-color*" & ab:"height"` | 2; 3 | none (six-vertex/alternating-sign-matrix surveys, solid-on-solid models) |
+| 5 | `ab:"winding" & ab:"color*" & ab:"Z^d"` | 0 | — |
+| 6 | `ab:"homomorphism*" & ab:"K_3" & ab:"lift*"` | 0 | — |
+| 7 | `ab:"3-color*" & ab:"Cayley graph*" & ab:"abelian"` | 6 | the Krebs line (`[CervantesKrebs2023]`, held; `[FourUnitVectors2025]`, held): colourings through the **Heuberger matrix** — an abelian Cayley graph presented by its relation lattice, our `ker relMap s` in that discipline's words; no winding or height |
+| 8 | `ab:"cohomolog*" & ab:"graph homomorphism*" & ab:"obstruction"` | 1 | a 2011 conference abstract volume; nothing on it |
+| 9–10 | circular colourings with characters; `ab:"proper 3-coloring*" & ab:"rotation number"` | 0; 0 | — |
+| 11 | `au:"Minty, George J." & py:1962` | 3 | Zbl 0108.36601 (*Amer. Math. Monthly*, 1962; the API withholds the title): Minty's orientation theorem, the classical form of "a `k`-colouring is an integer tension with values in `[1, k−1]`" — **listing only; the title is from memory, unverified** |
+| 12 | `ab:"tension*" & ab:"Cayley graph*" & ab:"color*"` | 0 | — |
+| 13 | `ab:"3-colorable" & ab:"abelian group*" & ab:"generat*"` | 3 | the Krebs line again |
+| 14 | `au:"Krebs, Mike" & ab:"color*"` | 6 | the same; nothing on heights |
+
+**The held paper that bears most,** `[CGHO2025coh]`, read again at its Example 2.4 (pp. 8–9): for three-colourings of `ℤ²` a cocycle
+`c : ℤ² × X_{K₃} → ℤ` counts the crossings `01` minus `10` along a generator and extends by the cocycle equation; it is non-trivial
+(their Prop. 4.8), and a border coloured `(012)⁸` cannot be filled because the cocycle would read 0 and 8 around one square. That is the
+height's winding as a **cocycle over the shift on the grid**, and the grid has no relation lattice beyond commutation.
+
+**The verdict — not found as a statement; the ingredients are classical.** In the discipline's words the winding form composes three known
+things: the integer lift of a proper `k`-colouring to a tension with values in `[1, k−1]` (Minty 1962; Tutte's flow–tension duality), the
+height through `K₃`'s universal cover (Chandgotia 2017), and the cocycle viewpoint (`[CGHO2025coh]`, after Klaus Schmidt). What it adds is
+the translation-invariant form on an arbitrary abelian group — the circulation of the lifted tension around a relation loop is the same at
+every base point and in every order (the square argument, `step_square`, `height_perm`), bounded below by the box — which is FS73-T42's
+steps 1–3 (V2) with the averaging removed. **Not claimed as new mathematics**; its use as the semantics of a relation-branching certificate,
+so that the kernel needs no averaging, compactness or duality, is this milestone's, and it is recorded as ours only in that sense (the claim
+list already carries "every kernel certificate"). No `BIBLIOGRAPHY.md` row is proposed for Minty (listing only, title unverified); a row for
+Chandgotia 2017 is proposed in stage 5's drafts, since the "Not ours" list credits it without a key.
+
+**Would have searched here (stage 2):** none — fourteen reviews-database queries are a literature search, not a finite-witness search.
