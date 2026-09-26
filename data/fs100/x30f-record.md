@@ -70,3 +70,28 @@ No grade, verdict or statement changed. **Gate:** `fs71_ledger_b_check.py --stri
 (X29C's 19 and X28D's 7), which stage 3's § B lines fix.
 
 **Would have searched here (stage 2):** none.
+
+## Stage 3 — SAVED (`LEDGER.md`: rows 123–125, corrections to rows 113, 117, 120, 121, 26 § B lines, the claim list)
+
+Applied by script (the scratchpad's `ledger3.py`; every replacement asserted unique; the drafted rows and § B lines read from the plan file, never
+retyped; every inserted row checked at 5 unescaped pipes, every § B line at 7). Departures from "apply exactly", each named:
+- **Row 123, launch note 3's one sentence** after "…the circle inside the norm-one hyperbola.": "The complex-place case is inhabited and not
+  reducible to totally real fields by monotonicity: ℚ(√23, ∛2) has `L = 5` while its totally real subfields have `L ≤ 4` (X28D-CP2), so the
+  complex-place step is load-bearing there." Its address column gains `plans/FS100-X28D-derivation.md` §2.3, §3.3 and `tools/x28d_check.py`.
+- **Row 120:** the draft replaces the span from "**EL2021 §2 … until it is read**" to "prior-art gate on MR pending, X24R" with one text; the
+  clause between them, "PE-2's shape is Johnson's nonlacunary theorem (1992, review only) transposed", is a fact the draft does not supersede,
+  so it is kept between the draft's two halves (EL2021 §2's reading before it; "MR not found under its discipline's names …" after it). The
+  draft's `\"` written as plain quotes.
+- **Row 121:** the draft's "and `χ = 5` at …" follows a full stop in the row ("(none is exhibited). At their grades: …"); written "Also `χ = 5`
+  at ℚ(√143), ℚ(√311), ℚ(√335), `χ(ℚ(√167)²) ≥ 5` (row 123), and row 88 …". The other two replacements and "Keep the existence half …"
+  as drafted.
+- **Rows 113, 117:** as drafted (row 117's "Not claimed" keeps its closing full stop).
+- **§ B:** X29C's 19 lines with the address column in the table's convention (`` `plans/FS100-derivation.md` FS100-Q0 ``); **X28D's seven**
+  (launch note 3), mapped to row 123, statements in short form from X28D's table (FS100-X28D-CUBE's full statement holds `w | v`, whose pipe
+  would split the cell; the short form takes its "hence" clause), grades as stated plus "one mind", kernel "undecided (the owner's)".
+- **The claim list:** X29C 4.5 appended to the **Ours** list, ending with ";" as its predecessors do.
+
+**Gates:** `fs71_ledger_b_check.py --strict` **exit 0, PASS** (778 § B rows). `claude_md_fact_audit.py --base 7eb4398c` **exit 0, AUDIT PASSED**
+(LOST 0 in every class).
+
+**Would have searched here (stage 3):** none.
