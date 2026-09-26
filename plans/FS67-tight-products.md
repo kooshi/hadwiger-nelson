@@ -742,6 +742,6 @@ Row 9 (FS-67) takes the `CLAUDE.md` row above in its full form, **rank unchanged
 
 `plans/FS67-close-inventory.md`: **29 rows, none open** — rows 1–22 ticked (20 done, 2 declined with the reason: row 16, a cosmetic
 correction in another job's brief; row 21, J40's next reading step, carried in FS67-W's field), rows 23–29 added (the owner's numbering
-ruling, the PB-feasibility correction, G61 (3)'s 11 half, the predictions, J42's own slips, J27's flagged web summary, and a note that rows
-11–22 — the owner's fold of J27V's and J40's reports — were uncommitted in the working tree and are committed with these ticks, unedited
-but for their status column). Every number in a tick was read from its source (`db.out`, `dc.out`, `fq9.out`, the records).
+ruling, the PB-feasibility correction, G61 (3)'s 11 half, the predictions, J42's own slips, J27's flagged web summary, and a coordination slip: rows 11–22 — the clerk's fold of J27V's and
+J40's reports — and J42's ticks, uncommitted in the shared tree, were swept into the clerk's fold commit `475f8b6a` mid-stage; J42's stage-4
+commit `3d0ef240` carries one correction on top; nothing lost, the history misattributes the ticks). Every number in a tick was read from its source (`db.out`, `dc.out`, `fq9.out`, the records).
