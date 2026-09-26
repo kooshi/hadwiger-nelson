@@ -297,18 +297,33 @@ The claims:
 - **C-4.** "Over ℚ(√59), no four-colouring of the plane is transient." (TRUE, FALSE, or GAP at a named step. It asks whether EF_F⁺'s method —
   Lemma 3.1′, EF's pigeonhole against polynomially many rational unit-vector multipliers, Lemma Z's wandering shells — transfers from invariant
   measures to a single colouring's orbit.)
+- **SEL-k** (the advisor's F2; a reduction, for every `k`). "For every real number field `F` outside row 100's exception and every `k ≥ 2`,
+  given MR: `F²` is `k`-colourable iff it has a translation- and rotation-invariant random `k`-colouring whose spectral measure is carried by
+  `E`." **Named risk:** it rests on X03D's FL-K (the relatively independent self-joining over the `E`-factor), which is one mind; check it
+  blind. At `k = 5` over ℚ(√167) it would turn six into row 110's window question at `{∞, 23, 43, …}`, graded as a reduction, never as a
+  bound.
 
-### List X23 — beyond quadratic fields (X23D derives; X23V verifies blind if a slot allows)
+### List X23 — every real number field: SP-Cor(F) and the class (X23D derives; X23V verifies blind) — **revised 06:27, before any X23 job launched, on the advisor's F1 and F4**
 
-- **D-1.** "Given MR, for every totally real number field `F` outside row 100's exception with `N₄(F) = ∅`: `χ(F²) ≥ 5`."
-- **D-C** (controls with known answers). "`N₄(K) ≠ ∅` for `K = ℚ(√3,√11)`, and `N₄(ℚ(√11)) ≠ ∅`, consistent with `χ = 4` at both."
-- **D-2.** "`ℚ(√3,√5)` lies outside row 100's exception, and either `N₄(ℚ(√3,√5)) = ∅` or it lies in T-C(A)'s class at `S = ∅` (every stable
-  place of `L` of all-levels four-colour ratio `< 1/4`, with J45's lemmas holding there). Hence, given MR, `χ(ℚ(√3,√5)²) = 5`."
-- **D-3.** "Among real quadratic fields, `N₄(ℚ(√d)) = ∅` holds for a proper subfamily of T-C(A)'s class, and fails at ℚ(√47)." (The J48 route
-  is the weaker-input route. Where it fails, the T-C(A) route is needed.)
-- **D-4.** "Among real biquadratic fields `ℚ(√a,√b)` with the wall broken (`CLAUDE.md` G35), those meeting D-1's hypothesis or T-C(A)'s class
-  at `S = ∅` are: [the job's derived list, with the finite search range fixed by a derivation before any computation]." (Its exact
-  enumeration is at the ban's edge: in only if a derivation fixes the finite set first, and it is logged.)
+*The first draft (D-1 to D-4, 06:25) is replaced. D-1 and D-C survive below as D-1 and CTL. Nothing had been derived on the first draft.*
+
+Inputs quoted verbatim: row 117 (quoted in list X21); SP-Cor and A⁺ at `S = ∅` (`plans/FS84-SI-D-derivation.md` §4.2, §5.4); X05V's re-derivation
+P0–P8 (`plans/FS100-X05V-verification.md` §2.1); J48-N4cor (quoted in list X21).
+
+- **SPC(F)** (SP-Cor for every real number field; the advisor's F1 (a)). "For every real number field `F` outside row 100's exception: if T-C(A)
+  holds at `S = ∅` (every stable place of `L = F(i)` has all-levels four-colour ratio `< 1/4`), then J45's A⁺ and SP-Cor hold with J45's
+  proofs, and, given MR, `χ(F²) ≥ 5`." **Named risk (the advisor):** A⁺'s archimedean step when `F` has `n = [F:ℚ] > 2` real places. X03D's
+  `Λ = 0.4028 > 1/3` shows that first moments alone cannot do it; J45 did it at `n = 2`.
+- **CLS(F)** (the class; the advisor's F1 (b)). "For every real number field `F` outside row 100's exception: T-C(A) holds at `S = ∅` iff
+  `L(F) ≥ 5`." **Named risks (the advisor):** `q = 27`; the dyadic `U_Q` for `Q ≥ 64`; ramified stable places; the archimedean part at `n`
+  places.
+- **COR.** "SPC and CLS together give `χ(F²) ≥ min(L(F), 5)` for every real number field outside row 100's exception."
+- **CTL** (controls; each must come out as stated, and each can fail). "T-C(A) at `S = ∅` fails at K = ℚ(√3,√11), ℚ(√2,√3), ℚ(√11) and ℚ(√23),
+  where `L ≤ 4`. At ℚ(√47) it holds."
+- **Q35.** "ℚ(√3,√5) lies outside row 100's exception. Its stable places are exactly those above 11, 59 and the other primes of residue
+  degree one in `L/ℚ(√3,√5)` that are inert in `L/F`; 3, 7, 19, 23, 31, 43 and 47 are not stable; and T-C(A) holds there at `S = ∅`. Hence,
+  given MR and SPC, `χ(ℚ(√3,√5)²) = 5`." (The advisor's F4; its Legendre-symbol list is one mind. An exact check of seconds is in.)
+- **D-1** (the J48 route, kept). "Given MR, for every totally real number field `F` outside row 100's exception with `N₄(F) = ∅`: `χ(F²) ≥ 5`."
 
 ### Queue rows (wave 3; stop time 12:30 UTC; close from 07:30)
 
@@ -317,9 +332,9 @@ The claims:
 | X21D | Opus | derivation | FS-100 s5 (w3) | list X21: ℚ(√167) ≥ 5, the family's five, six at ℚ(√167) as a CP question | rows 111, 117; the stub's §2; waves 1–2 records by statement | `plans/FS100-X21D-derivation.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
 | X21V | Opus | blind verifier | FS-100 s5 (w3) | list X21, blind (A-3 = K0's blind second mind) | same, fenced from X21D | `plans/FS100-X21V-verification.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
 | X24R | Opus | reader | FS-100 s5 (w3) | the prior-art gate for MR and for the value `χ(ℚ(√47)²) = 5`; EL2021 §2; Sataev 1975; Huang 2017 | `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md` §1.7, §3 | `plans/FS100-X24R-prior-art.md` | — | 0.75 | 200 | 07:30 | none | P1 | ready |
-| X22D | Opus | derivation | FS-100 s5 (w3) | list X22: the type-(B) fields given MR — Q-μ, and row 88 as transience alone | T-J38-2/3, rows 88, 111, 112 | `plans/FS100-X22D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X22D | Opus | derivation | FS-100 s5 (w3) | list X22: the type-(B) fields given MR (Q-μ; row 88 as transience alone; C-4 capped at 20 minutes), and SEL-k | T-J38-2/3, rows 88, 111, 112 | `plans/FS100-X22D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
 | X22V | Opus | blind verifier | FS-100 s5 (w3) | list X22, blind | same, fenced | `plans/FS100-X22V-verification.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
-| X23D | Opus | derivation | FS-100 s5 (w3) | list X23: fields beyond quadratic; ℚ(√3,√5) | J48-N4cor, row 117, G35, G56 | `plans/FS100-X23D-derivation.md` | a free slot | 0.75 | 220 | 200k or 07:30 | none | P2 | ready |
-| X23V | Opus | blind verifier | FS-100 s5 (w3) | list X23, blind | same, fenced | `plans/FS100-X23V-verification.md` | X23D launched | 0.6 | 200 | 07:30 | none | P3 | ready |
+| X23D | Opus | derivation | FS-100 s5 (w3) | list X23: SP-Cor and the class for every real number field; ℚ(√3,√5) | SP-Cor, A⁺, X05V's P0–P8, row 117, J48-N4cor | `plans/FS100-X23D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X23V | Opus | blind verifier | FS-100 s5 (w3) | list X23, blind | same, fenced | `plans/FS100-X23V-verification.md` | a free slot | 0.75 | 250 | 07:30 | none | P1 | ready |
 | X29C | Opus | close-math | FS-100 s5 (w3) | wave 3's close: derivation entries, §R-close (wave 3), drafts | wave-3 reports | `plans/FS100-three-field-lemma.md` | 07:30 | 0.3 | 150 | 07:50 | none | P2 | wait |
 | X30F | Opus | front-page | FS-100 s5 (w3) | applies X29C's drafts | X29C | the four front files | X29C | 0.25 | 150 | 08:05 | none | P2 | wait |
