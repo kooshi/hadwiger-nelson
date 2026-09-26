@@ -144,3 +144,32 @@ Applied by the application script (`--inplace --files CLAUDE.md`), byte-identica
 0, PASS; `tools/bib_audit.py` exit 0; `tools/check_architecture.py` exit 0; `CLAUDE.md` 287,087 bytes (under 290,000).
 
 **Would have searched here (stage 3):** none.
+
+## Stage 4 — SAVED (`plans/FRONTIER-STUBS.md`; FS-84's and FS-92's provisional-bearings lines)
+
+**`plans/FRONTIER-STUBS.md`** (`git log fd285b33..HEAD` on it was empty before the edit):
+- J54's five `STUBS` pairs (the FS-75 row's question, cost and status cells; the FS-60 row's question and status cells), by the application script.
+- Open milestones: **FS-75's minimal instance — CLOSED** (row 119; **Paid (kernel)**; the stub re-aimed, rank 5) and **FS-100's in-ban round —
+  CLOSED** (rows 116–118; the plan's §R-close first; stage 4 re-aimed as 4′, which leads FS-100's next slot, stage 6 the fallback; **Paid (theorem);
+  MR not landed**), ahead of row 88's question. FS-84 stays the one open milestone.
+- A re-rank note at the head of § Ranked stubs: no rank moved; FS-100, FS-75, FS-64, FS-60 re-aimed; FS-84's and FS-92's bearings updated.
+- FS-100's row (rank 3), following the re-aimed stub's status block and §R-close 5.4's banner: "**Its in-ban round ran** … **stage 4 run in-ban:
+  Kronecker selection FALSE as stated** (row 116), **re-aimed as 4′ (KS-sat_E at ℚ(√47))**, open at one density step, **which leads the next
+  slot**; then stage 5 (the reading room, then PE-lim); stage 6 (EI-2 at ℚ(√11)) the fallback; K0 done — the class is `L ≥ 5` (row 117); **P1 leads
+  post-ban**"; the cost, status and solver cells to match (solver: "none for stages 4′, 5, 6 (derivation, reading: in-ban); post-ban P1 …").
+- FS-64's row (rank 12): an "At FS-100's in-ban close" clause mirroring `CLAUDE.md`'s draft and the stub's head block; its status "re-aimed at the
+  M1, M3, row-88 and FS-100 closes".
+- § Closed, absorbed and demoted: two entries in the FS-67 entry's form — FS-75's minimal instance (closed as a milestone, the stub kept at rank 5)
+  and FS-100's in-ban round (closed, the milestone kept at rank 3).
+
+**The two provisional-bearings lines** (brief item 2), J53b's §R-close 5.4 drafts verbatim, each as a new line headed "Provisional bearings,
+updated at FS-100's in-ban close (2026-09-26, J55; drafted by J53b, …)" above J44's line of the same form, nothing else in either file touched:
+`plans/STUB-five-colours-47.md` (FS-84) and `plans/STUB-character-classification.md` (FS-92).
+
+**Gates** (exit statuses read directly): fact audit `--base fd285b33` exit 0, PASSED; `--dupes` 7; `fs71 --strict` exit 0; `bib_audit` exit 0;
+`check_architecture` exit 0; `CLAUDE.md` 287,087 bytes.
+
+**Found, outside this job's lane (for the owner):** `scripts/vacuity-baseline.txt` line 25 still reads "declarations=7051  refutations-skipped=304"
+(J54's note (2)); FS-46's stub could carry "`ThreeColour`'s vocabulary is in the kernel (row 119)" (J54's note (3), undrafted); both left.
+
+**Would have searched here (stage 4):** none.

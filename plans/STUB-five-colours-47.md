@@ -9,6 +9,8 @@
 
 **J29's reframe (2026-09-25; `plans/FS84-five-colours-47.md`, its stages from 2026-10-01):** the survivors' `Θ₄` cell analysis can only colour a survivor (G71, row 96); a refusal needs a finite graph or a four-class averaged certificate; `χ(ℚ(√47)²) = 5` answers Soifer 55.1 and Moorhouse's ℚ(√47) question.
 
+**Provisional bearings, updated at FS-100's in-ban close (2026-09-26, J55; drafted by J53b, `plans/FS100-three-field-lemma.md` §R-close 5.4):** FS-100 (rows 116–117): ℚ(√143), ℚ(√311), ℚ(√335) are in T-C(A)'s class and SP-Cor holds there, so FS-84's five-clause route is shared with them; Kronecker selection onto `T + A` is false as stated, and at ℚ(√47) its `E`-form is the pure-point layer of the five-clause (FS-100's stage 4′).
+
 **Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 — the wall here is a counterexample invariant (rows 96, 113); flip the poster and ask what every four-colouring the plane already has must carry. The wanted-poster session J37 is its first test.
 
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G77 (no character four-colouring at any `L = 5` field, CLG-g's (g1)).

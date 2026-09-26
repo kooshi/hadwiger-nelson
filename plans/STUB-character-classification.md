@@ -73,6 +73,8 @@ failure.
 
 ## Provisional bearings (for the re-grokking at the opening, WORKFLOW 3.1)
 
+**Provisional bearings, updated at FS-100's in-ban close (2026-09-26, J55; drafted by J53b, `plans/FS100-three-field-lemma.md` §R-close 5.4):** FS-100 (row 116; FS100-X1 (c)): no naive vector form of band rigidity — `0 ∉ cl Θ(U)` forces no non-zero `m·Θ` into `T + A`; any classification of character vectors must allow the split-place cross.
+
 **Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** rows 114–115 — FS67-DC1 and DC2 are pullback theorems of the shape "a colouring of a product of local targets is local at one place", and FS67-DA4 shows that locality can fail between gap-free factors from four colours up (G54).
 
 G77 (the class theorem at existence scope), G71 (scope: characters only, and existence against classification), G72 (§IQ's structural
