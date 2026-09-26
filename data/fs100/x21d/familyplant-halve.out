@@ -1,0 +1,8 @@
+lambda*(Gamma_11) = 0.238206 (deg 12)
+lambda*(Gamma_19) = 0.190243 (deg 20)
+family (squarefree d <= 3000): 52 fields; first 12: [47, 143, 167, 215, 311, 335, 383, 479, 503, 551, 647, 671]
+with 11 or 19 stable (L = 5): 44; first 12: [47, 143, 215, 311, 335, 383, 479, 503, 551, 647, 671, 719]
+Q(sqrt167) stable odd places < 100: [23, 43, 59, 67, 71, 79, 83]
+FAIL:
+  (e) lambda*(Gamma_11) = 0.238206 not > 1/3
+  (e) lambda*(Gamma_19) = 0.190243 not > 1/3
