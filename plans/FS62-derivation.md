@@ -44,9 +44,8 @@ the compositum `F′ = FE ⊆ ℝ` is a finite extension of `F` with `6 ≤ χ(F
 in `plans/STUB-plane-bridge.md` §5. *Proof verdict:* closes. *Rests on it:* the stub's own reading of what the wall (b)
 and the gap theorem (c) can and cannot buy (§2); FS-39's phase C ("a rewrite of the prose sentences to cite it"). *Prior art:* ours — a restatement of Hadwiger–Nelson at its top rung, not a reduction of it ("six is never where the climb
 stops", per the stub's own honest framing); not separately searched (the statement is a direct corollary of the bridge
-and elementary set manipulation). *Kernel:* stub (FS-39 phase C / FS-62 D1, `plans/STUB-plane-bridge.md` §4 phase C — "the
-corollary `chromaticNumber_plane_eq_iSup_numberField` and a rewrite of the prose sentences to cite it", an hour once the
-bridge itself is built).
+and elementary set manipulation). *Kernel:* kernel, conditional on `RealAlgebraicDescent` (M2, 2026-09-25; `plans/M2-derivation.md`
+§I.9, §I.6): `HadwigerNelson.Bridge.chromaticNumber_plane_ne_six_iff_of_descent` (`Proofs/HadwigerNelson/Bridge.lean`) — `= J17-T9`.
 
 **FS62-T3 — S factors through the local bound and the window's finite classification (this is G64's own stated conclusion; the entry supplies its proof). [derived]** Combining `χ(F²) ≤ L(F)` (row 52, `M53-T1`, "Theorem A") with the classification of which
 finite planes can possibly be exactly six-chromatic (rows 68–70; FS53-T1/T2, FS54-T5 — the window is `q ∈ {23, 27, 31,
