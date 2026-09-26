@@ -363,3 +363,41 @@ form is not an input; I derived it (after the logged slip, having seen I-MX's st
 - **CTL-ABS: checked** (above).
 - **CTL-Q2 = my K4: reproduced.**
 - **CTL-FRAC:** §4.1.
+
+### 4.3 The fenced proofs of T-J39-3, against mine
+
+The sources, both read in full at their proof sections:
+- the wanted poster (J39, Poros), `plans/POROS-2026-09-25-wanted-poster-167.md` §3.2 — **P**;
+- J48's blind check, `plans/FS100-BC-verification.md` §2.1 (L1–L7) and §2.2 (BC-1) — **B**.
+
+**Divergences of truth: none found.** All three derivations reach the same dichotomy by the same five movements, with the same threshold
+interval `(λ*/(1+λ*), 1/k)` and the same threshold placed at random. The movements are:
+1. an `R ⋊ U`-invariant measure;
+2. the simplex identity at `k`;
+3. R-U for `τ(E) = 0`;
+4. the support selection;
+5. extension to the completion, weak approximation, and the mixing selection over the product of all thick places.
+
+P's number at 59, `0.24863`, matches my exact `0.248626`. That the skeleton is shared looks forced by the statement, not copied: I wrote
+mine before opening either.
+
+**Divergences of route and of rigour:**
+
+| step | P | B | mine |
+|---|---|---|---|
+| the `T + A` factor, and `R` dense in `G` | J45-N1/N2, cited | N1/N2 plus FS-91's Lemmas C and C′ (profinite = stable topology) | re-derived. The factor comes from Bochner on `G`. Density comes from strong approximation for the additive group off one split prime, plus `R = O′`. |
+| row 100's exception | not treated | handled: `Ĝ` has finite index in `Ĝ⁺`, and the colouring is extended by independent copies on the cosets | excluded, because `N_k = ∅` forces it out (a ramified stable dyadic place has `λ* = 1`). That suffices for C-LB, but **not for T-J39-3 in general**, where `N_k ≠ ∅` is allowed. B's coset step is the one needed there. |
+| the extension | Mackey's point realisation | limits in probability | limits in probability (as B) |
+| the measurable version | **not taken**: "runs fibrewise" and uses `Haar{b : C(x, b) = j}` directly — wrong-reason line (v) of the sealed half | taken, citing Doob–Cohn | proved (my L2, Borel–Cantelli on a dense sequence) |
+| the law of `m_j` (sealed line (viii)) | not addressed | "stationary … because `c` is under `G × K`" — **line (viii) as the advisor wrote it**. True, but the step fixing the law of `m_j` from finite-dimensional laws is not written | written: `m_j(x)` is the `L²(P)`-Bochner integral of `y ↦ 1[c̃(x, y) = j]`, whose law is fixed by finite-dimensional laws |
+| continuity in probability of the selection | `E|m_j(x) − m_j(x′)| ≤ P(…)`, the threshold missing the values a.s. | `P(φ(x) ≠ φ(y)) ≤ Σ_j E|Δm_j|/|I|` — cleaner than mine | a `δ`-split bound, equivalent |
+| new levels, `2/(q+1)` | cited | the two-point bound (FS86-LP, M3-J22-T8) | re-derived (V2-NL): the same count of lines through 0, found independently |
+| merging real places | J21-SL (`C(x, x + s, y)`) | a diagonal pullback (L4) | a diagonal restriction (L4) — as B |
+| complex places | "Not claimed" | "`F` totally real so `L⊗ℝ = ℂⁿ`" | **claimed**, by restriction to the compact real form. **One mind; the owner should weigh it** (§4.2, sealed line C-F1-GEN (3)). |
+
+**Count of minds for C-LB's statement at `N_k = ∅`:**
+- Three derivations: P, B and mine. Mine is blind to both proofs; my only exposure was row 109's statement, as logged.
+- The three share the forced skeleton, and none contradicts another.
+- Mine alone writes the law of `m_j` (line (viii)); P omits the measurable version; B's is cited.
+- **Grade:** C-LB for totally real `F` with `N_k = ∅`: [hand, three derivations, one of them — mine — blind to the other two]. The
+  complex-place widening: [hand, one mind].
