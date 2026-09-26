@@ -270,3 +270,86 @@ Noetherianity. The papers themselves were not opened (budget); `[AlonEtAl2021]` 
   reading says Einsiedler–Lind–Miles-type directional analysis would rule out.
 - **T-B1, T-B2** (GAP in both records): no printed statement that isolated periodic points of a colouring shift on an infinite-degree abelian
   Cayley graph exist or are forced; not found.
+
+## Stage 6 — SAVED (result 5: J28V's side results; the lists)
+
+### 6.1 J28V-7 — "every non-zero ideal of `ℤ[U_F]` has finite index, for every real `F` (no Lemma R)"
+
+**Discipline:** commutative algebra — rings with the **finite norm property** (FNP: `A/I` finite for every non-zero ideal `I`), also called
+**residually finite** rings. Queries (ZB): `ab:"residually finite" & ab:"ring" & ab:"finite index"` (18 hits; Orzech–Ribes 1970, Hirano 1993),
+`ti:"residually finite rings"` (3: **Chew–Lawn 1970**, Canad. J. Math. 22, 92–101, Zbl 0215.08901), `ti:"finite norm property"` (2: **Levitz–Mott
+1972**, Canad. J. Math. 24, 557–565, Zbl 0222.13006), `ab:"finite norm property" & ab:"ideal"` (8); OA: `Rings with finite norm property Levitz
+Mott` (13), `Residually finite rings Chew Lawn` (80). **Read:** Levitz–Mott 1972 (saved `LevitzMott1972-rings-finite-norm-property.pdf`,
+Cambridge Core open archive), §2 in full: **Theorem 2.3** — "Let `A` be an integral domain with identity and with quotient field `K`. Let `L`
+be a finite algebraic extension of `K`. Let `A′` be a ring such that `A ⊆ A′ ⊆ L`. If `A` has FNP, then `A′` has FNP" (proof by
+Krull–Akizuki and **Prop. 2.2**, which is Chew–Lawn's Thm 2.3: a commutative ring with identity has FNP iff it is a field, a Noetherian
+domain whose non-zero primes have finite index, or finite).
+**Verdict — in print.** With `A = ℤ` and `L = F(i)`, Levitz–Mott Thm 2.3 says every subring of a number field — `ℤ[U_F]` for every real
+number field `F` — has every non-zero ideal of finite index. J28V's route (a non-zero integer `m` in `δR` from `δ`'s minimal polynomial, then
+`|R/mR| ≤ m^{rank}` for a torsion-free group of finite rank) is the standard elementary proof and needs no Krull–Akizuki; its conclusion is
+Levitz–Mott's. Grade stands [hand], attribution `[LevitzMott1972]` owed where T-A (ii) is filed. (Scope: J28V states "for every real `F`",
+meaning every real number field; for an `F ⊆ ℝ` of infinite degree over ℚ the rank argument and Levitz–Mott both fail, and the ring need
+not have FNP — not a claim anyone made, recorded so the "every real `F`" is not read wider.)
+
+### 6.2 J28V-6 — "C14.2 (c) holds at `q = 2` (the split-place integrals are `1, −1, 0, 0, …`)"
+Decided in stage 3: **partly in print** — BMK 2017 §3.2 for `ℚ_p`, every `p`; the one-variable values are BMK Lemma 3.10 / textbook; the
+`ℚ₂(i)` instance is a transcription; one step (Sally–Taibleson 1966 Lemma 8(i) at residue characteristic 2) undecided, not fetched.
+
+### 6.3 The J28 §PA debts named as leads in the brief (status for these results only)
+
+| lead | bears on J35's results? | status |
+|---|---|---|
+| Zaks 1989, *On four-colourings of the rational four-space*, Aequationes Math. 37 (1989) 259–266, DOI 10.1007/BF01836448, Zbl 0705.05033 | yes — the one printed structural statement about **every** four-colouring of a rational unit-distance graph ("in every 4-colouring of `G(ℚ^p)` every colour is everywhere dense", review read); a triangle-full analogue of T-A's question, not an instance | review read; EuDML → GDZ PDF refused scripted fetch (HTML) — **for Kooshi** |
+| Asgarli–Yip 2022 (Zbl 1496.05068), Yip 2026 (Zbl 1584.05083) | the finite analogue of C6 (maximum independent sets / cliques of Cayley graphs over finite fields with multiplicative connection sets are subspaces) — bears on C6's finite shadow, which G54's Blokhuis–Brouwer–Haemers citation already covers | listings; not opened |
+| Exoo–Ismailescu 2016, Silva Filho 2026 | no (stage Y's realisation question, not these results) | not opened |
+| Herva–Kari 2025, MacVicar 2023, Yu 2022 | no (closed-set rigidity, row 95) | not opened |
+| Rudolph 1990, Host 1995, Einsiedler–Lindenstrauss | T-C′ only (not gated here: no truth claim) | not held |
+
+### 6.4 Papers for Kooshi to fetch (browser)
+
+1. **Sally, P. J. Jr.; Taibleson, M. H.**, *Special functions on locally compact fields*, Acta Math. 116 (1966) 279–309, DOI 10.1007/BF02392818
+   — decides whether Lemma 8(i) (BMK's Lemma 3.11, C14.2 (c)'s vanishing step) covers residue characteristic 2 (`rd.springer.com` returned HTML).
+2. **Zaks, J.**, *On four-colourings of the rational four-space*, Aequationes Math. 37 (1989) 259–266, DOI 10.1007/BF01836448 (GDZ
+   PPN002037645) — the ℚ⁴ control of J28 §PA.3.
+3. **Johnson, P. D. Jr.**, *Infinite graphs and the fractional chromatic number: some recent surprises*, Geombinatorics 9(3) (2000) 135–144,
+   Zbl 0945.05021 — with `[Johnson2000]`, `[Johnson2006]` (already listed), the one source that could pose T-C(A)'s fractional question.
+4. **Bergelson, V.**, *Sets of recurrence of ℤ^m-actions and properties of sets of differences in ℤ^m*, J. London Math. Soc. (2) 31 (1985)
+   295–304, Zbl 0579.10029 — the intersectivity lemma behind L-B2-2's method (optional; the method is textbook).
+5. (Not needed for a verdict; free online if wanted) Boyle–Lind 1997, Trans. AMS 349, DOI 10.1090/S0002-9947-97-01634-6; Einsiedler–Lind–Miles
+   2001, arXiv:math/0104261.
+
+### 6.5 Proposed `BIBLIOGRAPHY.md` entries (proposals; the front-page lane writes them)
+
+| key | reference | role | copy | read |
+|---|---|---|---|---|
+| `[BergelsonMoragues2021]` | V. Bergelson, A. Ferré Moragues, *An ergodic correspondence principle, invariant means and applications*, Israel J. Math. (2021), zbMATH 1501.37009 (venue from the listing, volume unchecked); arXiv:2003.03029 | Thm 2.3 + Prop. 2.7 are L-CL (T-A (v)'s engine): `d*` of return times to a clopen set = max over invariant measures on the orbit closure | `library/pdf/BergelsonMoragues2021-ergodic-correspondence-invariant-means.pdf` | §1, §2 to Prop. 2.7 (2026-09-25, J35) |
+| `[ChenDai2017]` | Z. Chen, X. Dai, *Chaotic dynamics of minimal center of attraction of discrete amenable group actions*, J. Math. Anal. Appl. (2017) 1397–1414, Zbl 1385.37038 (summary withheld); arXiv:1707.07786 | Lemma 1.2: the minimal centre of attraction via positive upper density of return times — the literature's name for T-A (v)'s "transient" (measure centre in Pull) | `library/pdf/ChenDai2017-minimal-center-attraction-amenable.pdf` | §1, §2.3 (J35) |
+| `[LevitzMott1972]` | K. B. Levitz, J. L. Mott, *Rings with finite norm property*, Canad. J. Math. 24 (1972) 557–565, DOI 10.4153/CJM-1972-049-1, Zbl 0222.13006 | Thm 2.3 (with `A = ℤ`): every subring of a number field has every non-zero ideal of finite index — J28V-7, T-A (ii) | `library/pdf/LevitzMott1972-rings-finite-norm-property.pdf` | §2 in full (J35) |
+| `[ChewLawn1970]` | K. L. Chew, S. Lawn, *Residually finite rings*, Canad. J. Math. 22 (1970) 92–101, Zbl 0215.08901 | Thm 2.3 = Levitz–Mott Prop. 2.2 (FNP classification) | not held | listing |
+| `[SallyTaibleson1966]` | P. J. Sally Jr., M. H. Taibleson, *Special functions on locally compact fields*, Acta Math. 116 (1966) 279–309, DOI 10.1007/BF02392818 | Lemma 8(i): the non-stationary vanishing of the `p`-adic Bessel/Kloosterman integral, C14.2 (c)'s step via BMK Lemma 3.11 | not held (fetch 1) | cited-by only |
+| `[BoyleLind1997]`, `[EinsiedlerLindMiles2001]` | Trans. AMS 349 (1997) 55–102, Zbl 0863.54034; ETDS 21 (2001) 1695–1729, Zbl 1003.37003, arXiv:math/0104261 | expansive subdynamics; for algebraic actions, decided by amoebas at archimedean and non-archimedean places — the vocabulary of Theorem H and T-B1's ultrametric obstruction ([reading], stage 5) | not held | zbMATH summary / review only |
+| `[Zaks1989]` | J. Zaks, *On four-colourings of the rational four-space*, Aequationes Math. 37 (1989) 259–266, DOI 10.1007/BF01836448, Zbl 0705.05033 | the ℚ⁴ analogue of row 88's question (every colour class dense) | not held (fetch 2) | reviewer's text (J28 and J35) |
+| `[Johnson2000frac]` | P. D. Johnson Jr., *Infinite graphs and the fractional chromatic number: some recent surprises*, Geombinatorics 9(3) (2000) 135–144, Zbl 0945.05021 | possible poser of the fractional/measurable question on rational planes (T-C(A), G60) | not held (fetch 3) | reviewer's text |
+| `[Bergelson1985]` | V. Bergelson, J. London Math. Soc. (2) 31 (1985), Zbl 0579.10029 | intersectivity lemma (L-B2-2's method) | not held | listing |
+
+**Corrections owed to existing rows:** `[BachocEtAl2014]` — "not held" is wrong: held as `library/pdf/arXiv-1301.1054-bachoc-decorte-oliveira-vallentin-spectral-bounds-operator.pdf`;
+read by J35: Def. 2.1, Thm 2.2 with proof, Thm 2.3 statement; role to add: Thm 2.2 is the Hoffman bound for edge-null sets used in C14.2 (c),
+NH-Y′ and C6. `[BardestaniMallahiKarai2017]` — read status: §3.2 (Thm 3.7, Lemmas 3.8–3.11) read in full by J35; role to add: C14.2 (c)'s
+computation (FS-86) is their §3.2 in window form.
+
+### 6.6 `CLOSED-QUESTIONS.md` candidates
+
+**None.** The milestone decides no question found posed in print: row 88 itself is undecided (T-B1, T-B2 GAP); T-A, T-C, T-C(A) are
+reductions and partial classifications. The posed questions nearest to it — `[Ellenberg2018]` at `k = 4`, Soifer's Open Problem 55.1,
+BMK's Question 1, Zaks's ℚ⁴ structure — are neither answered nor re-posed by these results.
+
+### 6.7 Recognitions for the grokkings (proposals; §PA sweep, WORKFLOW 9)
+
+1. **T-A's "transient" is the literature's measure centre** — "the closed support of the invariant measures on `c`'s orbit closure lies in
+   Pull"; T-A (v) is Chen–Dai's Lemma 1.2 with `d*` for `d̄_F`, and its engine L-CL is Bergelson–Moragues Thm 2.3 + Prop. 2.7. For G76 or
+   row 88's mechanism line: Q-tr is "every orbit closure's measure centre lies in Pull".
+2. **C14.2 (c) is Bardestani–Mallahi-Karai's hyperbola computation** (their §3.2), which FS-58 had already recognised as "the published local
+   form of FS-58 D6" (`BIBLIOGRAPHY.md`) and FS-86 did not carry to the lemma — G49's held-but-uncarried instance, for its list.
+3. **J28V-7 is Levitz–Mott 1972 Thm 2.3** (finite norm property of every subring of a number field).
+4. **[reading] Theorem H vs its ultrametric failure is expansive subdynamics' archimedean/non-archimedean split** (stage 5), a vocabulary
+   for T-B1's named step and a candidate prior-art room (Einsiedler–Lind–Miles) for a future ultrametric unique-continuation lemma.
