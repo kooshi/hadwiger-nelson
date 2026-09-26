@@ -125,3 +125,164 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 - G74 — bears: layer gluing by relations over infinitely many layers is the template for T-C's Kronecker part → T-C.
 - G75 — falsifiable: registered as **P-G75″** (a triangle-free pinning identity on a type-(B) plane appears; C11 says it exists iff `F(R) ≠ 0`).
 - G76 — bears: the frame this plan lifts from `R̂` to `X₄`; **falsifiable** also: its reading "the obstruction is the real place" is registered as **P-real** (scored by T-C).
+
+## Stage 2 — SAVED (§G.2 rows; §G.3 rules; §G.4 what changed)
+
+### 2.1 §G.2 — the ledger rows 1–97, by mechanism
+
+- row 1 — silent: two-circle 3-colourability.
+- row 2 — silent: seam rotation.
+- row 3 — silent: coverage monotonicity.
+- row 4 — bears: fan ⟺ coverage; gap-freeness of every rigid colouring is its contrapositive → T-B.
+- row 5 — silent: class-only graphs.
+- row 6 — silent: 120° identity (triangles).
+- row 7 — silent: greedy colouring.
+- row 8 — silent: de Grey's balanced colouring.
+- row 9 — silent: 120° compulsion.
+- row 10 — silent: one-pivot cap.
+- row 11 — bears: a strip automaton's windows extend (rank-one transfer-matrix precedent for Q-tr's walls) → T-B (reading only).
+- row 12 — silent: extension profile tool.
+- row 13 — silent: growth-family hunt.
+- row 14 — silent: pair gluing.
+- row 15 — silent: extension pressure.
+- row 16 — silent: coupled automaton.
+- row 17 — silent: gluing classification.
+- row 18 — silent: near-relation.
+- row 19 — silent: kill mechanism.
+- row 20 — silent: pivot triangle.
+- row 21 — silent: registered statistics.
+- row 22 — silent: ladder pair (K).
+- row 23 — silent: four-ladder (K).
+- row 24 — silent: hexagram (K).
+- row 25 — silent: field-wall identity.
+- row 26 — silent: de Grey anatomy.
+- row 27 — silent: quadrature census.
+- row 28 — silent: kill engine.
+- row 29 — silent: stacking law.
+- row 30 — silent: mechanism hunt.
+- row 31 — silent: Act One carriers.
+- row 32 — silent: six-programme.
+- row 33 — silent: the interval.
+- row 34 — silent: coset colourings.
+- row 35 — silent: cell colourings.
+- row 36 — silent: scale non-monotone.
+- row 37 — silent: gap atlas.
+- row 38 — silent: gradient hunt.
+- row 39 — silent: gap atlas kernel.
+- row 40 — silent: fine tail.
+- row 41 — silent: limit lemma (bounded-drawing families; not field planes).
+- row 42 — silent: arity floor (top-rung arity 2 is the question itself).
+- row 43 — bears: `transport_pair_of_isometry`, `Forces.planeIn` — the kernel form of `Aff_F`-transport → T-A (a kernel candidate named, not built).
+- row 44 — silent: spindle theorem (no chain: `1/δ ∉ R`).
+- row 45 — silent: batch descent.
+- row 46 — silent: copy unions.
+- row 47 — silent: M53.
+- row 48 — bears: a forcer of `(0, 4)` has no critical vertex (distance 4 > 2) → stage Y's shape.
+- row 49 — silent: absorption.
+- row 50 — silent: additive yardstick (superseded by row 88).
+- row 51 — silent: additive rigidity.
+- row 52 — silent: finite-plane bound at five.
+- row 53 — silent: sieve at five.
+- row 54 — silent: lift.
+- row 55 — silent: residue obstruction at five.
+- row 56 — bears: `addCayleyMap`, `unitQuadrance_colorable_of_quotient` — pullbacks are homomorphism pullbacks → T-A's Pull.
+- row 57 — bears: Theorem A (residue colourings) supplies Pull's colourings; B's value is Fischer's; K's rigidity is the triangle-full control → §0, controls.
+- row 58 — bears: no minimal forcing gadget at `k ≥ 4` — a yes-forcer is non-minimal → stage Y.
+- row 59 — silent: K's 2-adic law (the analogue here is row 88's `P`).
+- row 60 — silent: plane freedom at primes (finite planes).
+- row 61 — silent: statements at their level (six).
+- row 62 — silent: orbit-closure gap of reductions.
+- row 63 — silent: two colours from inertia.
+- row 64 — silent: ρ₆₃ arena.
+- row 65 — silent: shape-dropping.
+- row 66 — bears: gap transport frees pairs (the ℚ(√11) control: `F = 0` there by a gapped `Γ₇`) → controls.
+- row 67 — bears: `P₄`, `Forces ⟺ 𝔓⁴`, D2-B — Pull and every local input → T-A, T-B, T-C.
+- row 68 — silent: six at 83.
+- row 69 — silent: the window at six.
+- row 70 — silent: five at 27.
+- row 71 — bears: the blow-up — `χ(F²) ≥ ⌈χ_gf(H)⌉`; χ_f(ℚ(√59)²) = 4 would make the field "density-tight" → T-C (density form), §S.4 post-ban LP.
+- row 72 — silent: 3-adic barrier (three colours).
+- row 73 — bears: ℚ(√11)'s χ = 4 — the `F = 0` control field with the same dyadic tower → controls.
+- row 74 — bears: `χ(ℚ(√59)²) = 4` certified (FS-61) → §0.1.
+- row 75 — bears: FS-66's all-levels certificates at 11, 19 (V3's inputs) → T-C's hypotheses.
+- row 76 — silent: ℚ(√3,√5) at five.
+- row 77 — bears (method): theorems filed as found; under-grading is the corpus's bias → §M, the derivation file at close.
+- row 78 — bears: `forces_iff_exists_finite`, `forcedSubgroup`, `InheritanceQuestion` (kernel) — T-A's vocabulary; KR6 an open four-colour control → T-A.
+- row 79 — bears: at three colours `P = F` for the whole class by height + density — the structural precedent for "every colouring periodic"; four colours lack it (G71) → §IQ.
+- row 80 — bears: rank one: plain density fails, one-way walls, `P ≠ F` iff every cyclic phase rigid and a wall exists (T35) — Q-tr's rank-one analogue (walls are transient colourings) → T-B.
+- row 81 — silent: `L21cc6506` (ℚ(√167), loose).
+- row 82 — bears: χ ≥ 4 over ℚ(√59) (59 ≡ 11 mod 12) → §0.1.
+- row 83 — bears: ℚ(√59)'s structural certificate on its FS-61 witness (T15) → §0.1.
+- row 84 — bears: the four-colour band's price (≥ 1,284× the control) → stage Y priced, not run.
+- row 85 — bears: F = P = 8Λ by an annihilator identity pinning the spectrum (triangles), pointwise kill at a tight quotient — the positive control's mechanism → §IQ, P-G75″.
+- row 86 — bears: 𝒮 ⟺ 𝒯 — a yes over ℚ(√59) is at least Soifer 55.1; abstract triangle-free rigidity is free → §0.2, stage Y.
+- row 87 — bears: second moments cannot lift; slack planes can force — T-C must be pointwise/higher-order → T-C.
+- row 88 — bears: the frame (`F ∈ {0, P}`, `P = R ∩ 𝔓⁴`, V3) — the milestone's question → everywhere.
+- row 89 — bears: K classified (two tight places, per-coset choice) — the rigid control with triangles → controls.
+- row 90 — bears: local rigidity; `F(R) ⊆ F_tf ∩ R`; `4 ∈ F_tf` ⟺ a number field in `ℚ₂(√3)` carries a triangle-free forcer → stage Y, §IQ.
+- row 91 — bears: D, D′, H, D₀, HD4, HD1-fin, C0 — partial answers to Q-tr (walls, patchworks, half-space defects) and to Q-μ (finite-type) → T-B, T-C.
+- row 92 — bears: measurable windows over finitely many places are pullbacks (the real place through `m₁ ≤ 0.2470`) — Q-μ's discrete-spectrum case over finitely many places → T-C.
+- row 93 — bears: ℚ(√2,√3) in S2 with triangles, rigid given T721 — the second rigid control → controls.
+- row 94 — bears: C9 (a non-periodic colouring of ℚ(√11)'s plane by formula — Q-μ fails there) and Theorem C (imaginary, `T + A + Fin`) — T-C's template → T-C, controls.
+- row 95 — bears: closed-set Furstenberg–Berend rigidity at ≥ 2 primes modulo the rotated direction — the method §IQ lifts to `X₄` → §IQ, T-C.
+- row 96 — bears: HD1 — the character slice of `X₄` is Pull → §0.2, T-C.
+- row 97 — bears: at one prime heteroclinic characters exist (leaf discs meet); the colouring analogue is a transient heteroclinic — Q-tr's shape → T-B.
+
+### 2.2 §G.3 — the method rules
+
+- § Grokkings [method] entries G21, G30, G46, G49, G50, G67, G72 and G51 — walked in §G.1.
+- Delegation one level deep — bears: no child agents; every brief states it with its reason → §S briefs.
+- Standard of evidence: no native evaluation in a headline — silent (no certificate here).
+- Standard of evidence: the certificate plus checker, never the search — bears: every tools-exact check in T-A…T-C is a derived claim's check → briefs.
+- Standard of evidence: the witness independently re-derivable — bears: any colouring by formula (a "no") is stated as a formula (C9's form) → T-B/T-C briefs.
+- Standard of evidence: read the final statement aloud — bears: T-A's two halves read against row 88's `F(R)` → §M.
+- Standard of evidence: report the hunt honestly — bears: §X log; nulls typed.
+- Standard of evidence: write the reviewer's certificate early — bears: J28V's fixed list is written now, before claims → §S.
+- Standard of evidence: order verification by marginal value — bears: J28V checks T-C's real-place step first (the least-certain, highest-value) → J28V brief.
+- What compute helps: re-price a kernel leaf from its first two — silent (no kernel job).
+- GPU is not a SAT accelerator — silent.
+- Toolchain: the ban to 2026-10-01 — bears: derivation only; stage Y and the density LP are post-ban, dated → §S.4.
+- Toolchain: the would-have-searched log — bears: §X; every brief carries it.
+- Toolchain: break the symmetry before SAT — bears: stage Y's post-ban brief carries it (no triangle pin available: ω = 2).
+- Toolchain: pysat CaDiCaL ignores interrupt — silent (no solver).
+- Toolchain: venvs outside `build/` — silent.
+- Toolchain: Python 3.14 forkserver — silent.
+- Toolchain: two machines; CPU seconds; name the machine — silent (no timing).
+- Toolchain: predicted beside measured throughput — silent.
+- Building: `./scripts/build.sh` only — silent (no Lean).
+- Building: `lake env lean` is not the check — silent.
+- Building: halt on any unexplained crash — bears: in every brief (standing rule 8).
+- Building: RAM is the discriminator; `scripts/slot.py` — bears: any tools check over 2 GiB/2 min runs under a slot → briefs.
+- Building: checkpoint and resume [PROTECTED] — bears: stages saved and committed; no long run planned → briefs.
+- Building: a blocking run is presumed killable [PROTECTED] — silent (no long run).
+- Building: kill by PID, never by pattern — silent (no background jobs planned).
+- Building: a pipe can kill the producer; read exit status from the gate — bears: tools checks write to files, exit status read directly → briefs.
+- Building: never edit a running script — silent.
+- Building: generated-module invalidation; kernel cost model — silent.
+- Searching: `grep -E` is ugrep; `rg -uu` for completeness; a failed `exact?` is not an absence — bears: this plan's thread grep used `rg` after ugrep refused a pattern → §PA.
+- The gate: vacuity, inhabitants for structure hypotheses — bears: T-A ships inhabitants (ℚ(√11) for Q-μ failing, K for both holding) → §M.
+- The gate: every check's negative control, watched to fail — bears: every `tools/crunch_j28*` check plants a fault → briefs.
+- The gate: a positive signal for the thing that did not happen; reachable outcomes both ways — bears: §P lists, per prediction, both outcomes' reachability.
+- The gate: carry what a number measures; one thing differs between compared numbers — bears: ratios (`m₁`, 1/4, Hoffman) quoted with their populations (measurable sets vs weighted spectra) → T-C.
+- The gate: measured vs derived halves fail in opposite directions — silent (no measured graph).
+- The gate: a check reads the shipped value; formatting is part of the check; two-sided plant bounds — bears: tools checks in the briefs.
+- The gate: replay policies; cost on a failing run — silent.
+- The gate: a caveat written and stepped over — bears: "`X₄ = Pull`" claims are re-read against "per `R`-coset" and "type (B) only" → §M.
+- The gate: count the generator's free parameters; a positive control proves only its shape — bears: T-C's "spectral measure on `T + A + Fin`" is a generator image; the remainder is named, not called empty → T-C.
+- The gate: a true explanation stops the search for a second — bears: controls are checked against every hypothesis of T-C, not only the one that fails.
+- The gate: enumerate the parameter first — bears: T-A's class is stated over all of S2, not the three fields the question names.
+- The gate: one-sided filters can be made inapplicable — bears: T-C's hypotheses (spectral type) are the filter; a "no" could live exactly outside them — stated → §IQ.
+- The gate: rules are scars — silent.
+
+### 2.3 §G.4 — what the re-grokking changed
+
+1. **The structural form moved from "an operator every colouring is an eigenvector of" (FS-86 §IQ, not found) to the colouring space's
+   dynamics** (G46, G72 move 3, G76, rows 95–97): `X₄(F)` under `Aff_F`, Pull a finite invariant set, and the question Pull = `X₄`.
+2. **The decomposition into Q-μ and Q-tr** (G21 — each half measures a different thing; G60's `F ⊆ F_μ ⊆ P`; row 80's T35 and row 97's
+   heteroclinics as the transient shape). Rows 91's no-gos are sorted by half, which shows where the record is thin: **Q-tr has only
+   geometric no-gos (walls, half-spaces), Q-μ has the finite-type and finitely-many-place cases.**
+3. **The real place becomes an input, not only the obstruction** (G54, G73, rows 87, 92): spectra cannot pin (C0), so T-C's route runs
+   through `m₁(ℝ²) ≤ 0.2470` as row 92 did — which tests G76's reading directly (P-real).
+4. **The yes side is priced and dated, not run** (G65, rows 84, 86, 90): stage Y after 2026-10-01, with FS-90's grant Kooshi's.
+5. **Galois joins the acting group** (G27), and **the controls are named before any claim** (rows 66, 73, 89, 93, 94): ℚ(√11) (Q-μ fails,
+   C9), K and ℚ(√2,√3) (both halves hold).
