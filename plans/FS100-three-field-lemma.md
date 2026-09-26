@@ -525,3 +525,94 @@ factor reading of "the (T + A)-part", is in §S above.
 ### Theorems this phase proved
 
 - None new (J51-T1 to T3 are in stages 1 and 3).
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; crunch job J53, the close planner)
+
+*Written by J53 (de Bruijn, Opus 5.5, 2026-09-26) under `data/crunch-2026-09-25/briefs/J53-FS100-close-math.md` (templates J41's and J23a's
+briefs) and `STANDING-RULES.md`, worked from `plans/FS100-close-inventory.md`. Results are filed in `plans/FS100-derivation.md`; every draft for
+`LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md` and `plans/FRONTIER-STUBS.md` is written here and nowhere else. Nothing here judges a verdict a record
+reached; where the records differ, both are filed. **The milestone's target — MR, and through it five colours at ℚ(√47) — is not reached; its
+stage-4 lemma is refuted as stated by two minds, with its corrected form pinned at a named step.** Working files: `data/fs100/j53/`.*
+
+### Stage 1 — SAVED (quotation check; reconciliation; K0's one-step check; the inventory walk)
+
+**Quotation check of the brief (standing rule 5).** Every quoted or summarised item was checked against its source:
+- the commit facts — `2654b675` at 23:59:22 ("J51D: stage 1 (obligation-modeling pass, C0)", its C0 row "KS-1 | 0.10 | 0.80 | 0.10"); `aa12db5e` at
+  23:58:31, whose §M.1 already reads "**`T + A` is the wrong subgroup to select onto**" and "Over a field with a two-colouring (`ℚ`) that is enough
+  for a proper `W` with `Γ ∩ (T + A) = 0`"; `3648d3a5` at 00:01:16, subject "FS-100 close inventory: J51V's items, the owner's check of its
+  counterexample, rulings"; `616ee08b` (J51D stage 2) at 00:03:57 — **exact** (`git log -1 --format=%ci`);
+- the results list against J51D's and J51V's records and reports — **faithful**, with one wording note: the brief's "every real field with a
+  ramified stable dyadic place, i.e. `χ(F²) = 2`" joins J51V-X2 (a) ("a stable dyadic place ramified in `L/F`") and J51D §2.4 ("a stable place with
+  residue field `𝔽₂`, i.e. `χ(F²) = 2`, G56"); for a real number field the two conditions coincide (G55: `χ(F²) = 2 ⟺ L(F) = 2`; G56's ramified
+  case), so the join is exact;
+- J51's report says "INVENTORY: 30 lines follow" and holds **29** (inventory rows 1–29 are those 29); J51's held item (4) (the `CLAUDE.md`
+  snapshot) had no row — added as row 68.
+
+#### 1.1 Reconciliation — the divergence table
+
+*Per claim and per extension: J51D's verdict, J51V's verdict, the routes, the scope, and whether the routes are independent. "Blind" means the
+mind had not seen the other's work; the owner's check (inventory row 48) is a third mind, not blind.*
+
+| claim / extension | J51D | J51V | routes | independent? |
+|---|---|---|---|---|
+| **KS-1** (select onto `T + A`) | FALSE, T3 over ℚ: `Θ = (τ + ψ_w, τ + ψ_w̄)`, `W = 2[t₁ ≥ ½] + [t₂ ≥ ½]` | FALSE, X1 over ℚ: `Θ = (θ + ψ_w, θ + ψ_w̄)`, `W = 2⌊2t₁⌋ + ⌊2t₂⌋` — **the same `Θ` and the same `W`** | the cross (T2 (a) / X1 step 1): the same one-line identity `ι(ū) = ι(u)⁻¹`; `K̂′ = 0`: J51D by strong approximation (T2 (b), every field), J51V by an explicit subring `R₀` and orders `5^k` (at ℚ) | **the same counterexample found twice**: J51V blind; J51D's construction sketched in its own §M.1 at `aa12db5e`, before any disclosure; its written proof after `3648d3a5` (ruling 2). The `K̂′ = 0` steps are different proofs |
+| KS-1's reach | every real field with `χ(F²) = 2` | every real field with a ramified stable dyadic place (X2 (a)); the `k²`-colour analogue over **every** real field (X2 (b)) | X2 (b) replaces parity by a band character's `k`-colouring: a co-normal product (§3.2 reading) | X2 (a) = J51D's reach (one class); **X2 (b) one mind (J51V)** |
+| KS-1 at `n = 1` | not stated | TRUE given row 98 (N1) | N1: a proper `W` forces `0 ∉ cl θ(U)`, so `θ` is a band character, row 98 puts it in `T + A` | one mind (J51V); see ruling 1 |
+| **KS-2** | TRUE, T1 in a general form (`K` compact abelian, `C + H = C`), change of variables | TRUE, Weil's formula and a Borel section | two proofs of one Fubini argument | **two derivations, blind to each other** (J51D fenced from J51V; J51V blind) |
+| **KS-3** | FALSE, `Θ = (ψ_w, ψ_w̄)` over every real field; non-vacuous over ℚ(√11) with `θ_{C9}` added (KS-sat not necessary for KS-1) | FALSE, the same example; also `(ψ_w, ψ_w̄)` alone, every field | the cross | two derivations; the non-necessity remark one mind (J51D) |
+| KS-3 at `n = 1` (P-sat1: `θ ∉ T + A ⟹ cl θ(U) = T`) | T4 TRUE inside `E` (every field); T5 TRUE at ℚ; **GAP** off `E` for general `F` (field form of PA-B2 and JC) | "Not decided … not needed for any verdict" (§2.5) | — | one mind (J51D); no divergence |
+| conjugate-pair dichotomy | T2 (a), (b), every real field, every split place | (a) as X1 step 1 and §2.5's mechanism, every field; (b) only at ℚ, at 5 | (a) one line; (b) strong approximation vs explicit orders | (a) two minds + the owner's check; (b) in general one mind (J51D), at ℚ two |
+| no naive vector band rigidity | implied by T3 (`0 ∉ cl Θ(U)`, `K̂′ = 0`) | X2 (c), stated | a witness is X1 = T3 | the witness is two minds |
+| **KS-4, KS-5** | TRUE, "uninformative": "`θ₁ ∉ E`" never used (§2.5) | TRUE; §2.1–§2.2 "what a wrong-reason pass looks like"; KS-5's "image" → "closure of the image" | `W` factors through `π` | two derivations, **both minds found the controls unable to fail** |
+| **KS-C** | TRUE as an implication; KS-C_E TRUE; at ℚ(√47) KS-1 ⟺ KS-1_E ⟺ KS-C's conclusion (§3.3) | TRUE as an implication, "hollow"; J51V-EQ: KS-1 at `F` ⟺ X at `F` wherever T-C(A)@∅ holds; X holds for `Θ ∈ Eⁿ` and at `n = 1` | random placement, then T-C(A) | two derivations; the equivalence at ℚ(√47) reached by both |
+| KS-1_E / KS-sat_E (the corrected statement) | proposed; **GAP** at J51D-R's density step | — (not on the fixed list) | — | one mind |
+| **K0** | not started (stop rule) | TRUE with a scope note (A⁺ at a finite `S` needs T-C(A) at that `S`); class membership not blind | — | one mind + J53's one-step check (ruling 3) |
+| the mechanism | §M.1: fibres "small but colourable" (an OR fibre; the product case is Hedetniemi-type) | §3.2: the co-normal product `Cay(T, I) ∗ Cay(T, I)`, `χ(G)²`-colourable [reading] | — | two readings of one mechanism, one mind each |
+
+**Ruling 1 — rank one: two different statements, no divergence.** J51V-N1 is KS-1 at `n = 1`: if `θ ∉ T + A` and a proper `W` exists then
+`0 ∉ cl θ(U)` (J51V-L2: `s = 0` would violate properness), so `θ ∈ Θ_k` for some `k` and row 98 puts `θ ∈ T + A`; the hypothesis is empty, the
+claim holds vacuously; if `θ ∈ T + A`, `K′ = K`. J51D's GAP is KS-3 at `n = 1`: for `θ ∉ T + A`, purity (J51V-L0) gives `K̂′ = 0`, `K₀ = K =
+cl θ(R) = T` (`θ` non-torsion), and KS-sat reads `cl θ(U) = T` — a density statement. The two are logically independent in the needed
+direction: density implies N1 (then `0 ∈ cl θ(U)`), N1 does not imply density. **The owner's reading is confirmed**; J51V's "KS-sat at `n = 1`:
+not decided" is the statement J51D decided in part. Filed as two entries.
+
+**Ruling 2 — KS-1's independence.** J51V's X1 is blind (fence log §1.2: its one breach touched only K0's class membership). J51D's
+counterexample was predicted and its construction sketched in its own committed §M.1 (`aa12db5e`, 23:58:31) and priced FALSE 0.80 in C0
+(`2654b675`, 23:59:22), both **before** `3648d3a5` (00:01:16) put "counterexample" into a subject J51D could read (owner error, inventory row 52);
+its stage-2 write-up committed at 00:03:57. **Grade: KS-1 FALSE — [hand + tools exact; two derivations: J51V blind, J51D independent in its
+construction (committed before the disclosure) and possibly informed, in its write-up, that the verifier had refuted some claim; the owner's hand
+check a third, not blind].** The `K̂′ = 0` step has two different proofs; the counterexample itself is one object found twice.
+
+**Ruling 3 — K0, J53's one-step check (not blind: J51V §2.7 and J45 §§3, 4.1–4.2, 5.4 read).** SP-Cor's proof (J45 §4.2) uses, in order: (i) an
+`R ⋊ U`-invariant measure on the compact `X₄(F)` — `R ⋊ U` countable and abelian-by-abelian, `x ↦ vx + y` an automorphism of `Cay(R, U)` for
+`v ∈ U`: **every real number field**; (ii) `σ_μ` is `U`-invariant (`C(vy) = C(y)`): **field-free**; (iii) R-U: stated and proved by J45 "for every
+real number field" (its N1 (b) supplies density with no Lemma R); (iv) A⁺ at `S = ∅` with remark (ii): its proof uses SI-4 and N2 (field-free:
+statements about `μ`, `𝒜_S`, `τ′_S`) and **T-C(A) at `S = ∅`** — J45's own lemma text already reads "Over ℚ(√47) (and every field in T-C(A)'s
+class)". No step reads ℚ(√47) except through T-C(A). **T-C(A) at `S = ∅` at the three fields.** R88-TCA's proof at ℚ(√47) lists its inputs as
+"11 and 19 by FS-66, the tail by Hoffman — the maximum 31's `1/4 − 2.745·10⁻⁶` —, the ramified 47 by Lemma P, the real places `m₁`, split places
+0". Re-derived by Legendre symbols (J53, by hand): ℚ(√143) — `143 ≡ 7 (mod 8)` (dyadic split in `L/F`), `(143/3) = (143/7) = (143/19) = (143/23) =
+−1` (inert, not stable), 11 ramified (FS-66 through Lemma P (ii)), `(143/31) = +1` (31 split, stable: Hoffman `1/4 − 2.745·10⁻⁶`), 43 and above by
+Weil + Hoffman + Lemma P; ℚ(√311) — `311 ≡ 7 (mod 8)`, `(311/3) = (311/7) = −1`, 11 and 19 split (FS-66), 23 and 31 split (Hoffman 0.249077 and `1/4 − 2.745·10⁻⁶`,
+Lemma P (i)), 311 ramified (Weil + Lemma P); ℚ(√335) — `335 ≡ 7 (mod 8)`, `(335/3) = (335/7) = −1`, 11 split (FS-66), 23 and 31 split
+(Hoffman), 67 ramified (Weil + Lemma P). The stable lists below 100 were re-checked by exact Legendre symbols (sympy, seconds): {11 ram, 31,
+43, 47, 59, 67, 71, 79}, {11, 19, 23, 31, 43, 59, 71}, {11, 23, 31, 47, 67 ram, 79, 83} — J51V §2.7's lists exactly. Each input of R88-TCA's list has its
+analogue; the real places are two `m₁`'s; split places 0. So T-C(A) holds at the three fields **at R88-TCA's class-form grade (J28D, one mind
+outside ℚ(√47))**, and SP-Cor and A⁺@∅ hold there with J45's proofs. **Grade of K0: [hand; one mind (J51V) + one-step check (J53); class
+membership J51-T1 (hand + tools exact, one mind) with J51V's partly blind check; resting on R88-TCA's class form (one mind)]**, the house form of
+FS67-CL. J51V's scope note stands: A⁺ at a finite `S ≠ ∅` needs T-C(A) at that `S`, which R88-TCA's class form supplies.
+
+#### 1.2 The inventory walk
+
+Rows 1–52 are the owner's; J51D's report (13 lines and 2 held items, after the last row) and J51's held item (4) had no rows — added as rows
+53–68. Dispositions (the ticks are written into the inventory's status column):
+
+| disposition | rows |
+|---|---|
+| done now (answered in this stage or by a job; nothing owed) | 30, 31, 32, 34, 49, 50, 51, 67, 68 |
+| → stage 3, the derivation file | 1, 2, 3, 35–41, 48, 53–59 |
+| → stage 4, §R-close (re-reads, predictions, verdict, tallies, ban measurement, §PA sweep) | 4, 13–17, 20–29, 45–47, 52, 61–63 |
+| → stage 2, the close-time prior-art gate | 5–9, 64 |
+| → stage 5, drafts, stub files and the file move | 10, 11, 12, 18, 19, 33, 42, 43, 44, 60, 65, 66 |
+
+**Would have searched here (stage 1):** none — reconciliation, and Legendre symbols of four fixed fields at the primes below 100 (by hand, then
+re-checked by sympy in seconds: a complete enumeration the derivation fixed, at the ban's edge).
