@@ -326,3 +326,38 @@ Polymath16 threads and wiki (`CLAUDE.md` G49 item) for "measurable", "stationary
 - **A named colouring number between `χ` and `χ_m`** → claim C-FMT's comparison is with it, and Phase 3's question is re-stated in its words.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: §IQ, the invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** Given MR, does `F_dG²` (or ℚ(√635087)²) have a `k`-colouring exactly when the plane has a stationary random
+   `k`-colouring continuous in probability — so `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`? Two existence questions per `k` (a colouring of `F²`; a CP
+   colouring of `UD(ℝ²)`) and an equivalence between them. This is F1.
+2. **The stub's claim, tested: "the structural form is F1 itself" — it is not.** F1 is an equality of chromatic numbers; it says nothing about
+   *every* colouring. Its structural form, about every solution: **what does every `R ⋊ U`-invariant random `k`-colouring of `F²` carry
+   that a CP `k`-colouring of `UD(ℝ²)` also carries — and is the passage from the first to the second (averaging, selection at the thick
+   places, extension to the completion, merging real places) a map from all solutions to all solutions?** In the most general class, with
+   the arithmetic stripped: `G` a countable abelian group embedded densely and diagonally in `H × K`, `H` an LCA group carrying the
+   question, `K = ∏_v K_v` compact with every factor mixing (`λ*_v < 1/(k−1)`, `sup_v λ*_v < 1/(k−1)`); does every invariant random
+   `k`-colouring of `Cay(G, T)` whose spectral measure off `Ĥ × {0}` is carried by no Haar-singular part yield a CP `k`-colouring of
+   `Cay(H, T_H)`, and does every CP colouring of `Cay(H, T_H)` restrict to one of `Cay(G, T)`? The arithmetic re-enters only through
+   which places are mixing (thickness) and through MR (the Haar-singular part is empty).
+3. **The invariant it forces: named.** The spectral measure (equivalently the correlation function `y ↦ P(c(0) = c(y))` under the simplex
+   embedding, positive definite by Herglotz–Bochner) of the averaged colouring, and on the thick factor the **fibre colour-measure vector**
+   `x ↦ (Haar{b : C(x, b) = j})_j`, whose continuity in probability is what lets the selection be CP. An *example* invariant (G79): every
+   solution carries it; the counterexample invariant (an SP witness) is what MR removes.
+4. **Its route: derivation only.** V1 and V2 derive the load-bearing step C-LB6 blind; the stripped form is what their derivations must
+   actually prove (the arithmetic enters as inputs I-THK, I-MR). No search checks it; the exact spectrum at 131 and the PARI place list
+   check derived claims' inputs.
+5. **The open instances it would decide, listed for the day a procedure lands:**
+   - `F_dG = ℚ(√3,√5,√7,√11)` (`N₆ = ∅`): `χ(F_dG²) = χ(ℝ²) = χ_CP(ℝ²)`, given MR;
+   - ℚ(√635087), ℚ(√823415), ℚ(√1017623), ℚ(√1598231), ℚ(√1971119) (the stub's list; squarefreeness of the composite ones to be checked by
+     V2 before use), and `K(√5,√7,√247)` (P103-R1);
+   - `K(√7)` at `k = 5` only (`N₅ = ∅`, `N₆ ∋ 83`): `χ(K(√7)²) ≤ 5 ⟺ χ_CP(ℝ²) ≤ 5`, given MR;
+   - the conjecture's bold form at `F_dG` (`L ≥ 8`): under F1 it is `χ(ℝ²) = 7`;
+   - FS-49's gadget: under F1 a five-colour virtual edge at distance 2 exists in some real field iff `χ_CP(ℝ²) ≥ 6`;
+   - S (G64): under F1, S ⟹ `χ(ℝ²) ≠ 6`; S's exact form is claim C-S.
+
+*G72's count, to be scored at the close:* whether the verdicts come through the structural form (the stripped statement) or from walking
+J39's steps; and G79's: example invariant (fibre measures, spectral measure) or counterexample invariant (the SP witness).
+
+## Stage 4 — SAVED
