@@ -37,7 +37,7 @@ No fenced file opened. `plans/CRUNCH-2026-09-26-x2x3-queue.md`: only §2 (lines 
 
 (none yet)
 
-## Stage 2 — SAVED (the derivation; 11:25 UTC)
+## Stage 2 — SAVED (the derivation; 11:12 UTC)
 
 **Verdict: EF_F⁺ TRUE [hand, one mind]; EF_F TRUE as its corollary.** The route is Einsiedler–Fish's Lemma 3.2 run at the places where
 `u*` expands, followed by a second step EF does not need (on `𝕋` there are no other places): a finite `U`-invariant measure on the
@@ -163,3 +163,64 @@ there is a non-torsion `u ∈ U` with `H(u) = 1` while `h_m(u) = Σ_{v∈S∪∞
 | move I would have made by search | what I did instead |
 |---|---|
 | none: the route was derived; the only computation is the exact multiplier count at fixed checkpoints (a complete enumeration of a finite set whose extent the derivation fixed) | — |
+
+## Stage 3 — SAVED (the write-up; 11:30 UTC)
+
+### 3.1 Verdicts, per claim
+
+| claim | verdict | grade | where |
+|---|---|---|---|
+| **EF_F⁺** (brief's quotation; source fenced, unchecked) | **TRUE** | [hand, one mind, blind to X01D] | §2.1 Lemma Z + §2.2 X12B-EF |
+| **EF_F** (queue §2, verbatim) | **TRUE** (corollary: an ergodic probability is a finite positive measure; `T + A ⊆ E`) | [hand, one mind] | §2.3 |
+
+**The hard point, answered in one paragraph.** A zero-entropy `u*` thins Bowen sets only at `P⁺ = {|u*|_v > 1}` (non-empty for
+non-torsion `u*`, by Kronecker and the product formula). The multipliers are the **rational unit vectors** `(a+bi)/c ∈ U`,
+`(4/π + o(1))·M^{1/[L:ℚ]}` of them up to height `M` (exact check at `X = 5 … 1500`), which are **rotations at every archimedean place**
+and may expand any finite place they like: the argument never asks them to shrink anything, it only uses `μ(qB) = μ(B)`, reads the
+overlap equation (an equation in `L`) at `P⁺` for smallness and elsewhere for a height bound polynomial in `M`, and lets the product
+formula make `x` exactly `L`-rational at `P⁺`. **The other places are not controlled by the multipliers at all**: once `x` is
+`P⁺`-rational, the rest of `x` lives in the non-compact group `𝔸_{S∖P⁺}`, and a finite `U`-invariant measure there vanishes at every
+finite split place, because `U` contains, for each split `w`, an element `α/ᾱ` of `w`-valuation `h ≠ 0` (Lemma Z). That second step
+has no analogue in EF (on `𝕋` there are no other places) and it is where invariance under all of `U` — not only the multipliers — is spent.
+
+### 3.2 Consequences worth the owner's attention
+
+- **For invariant measures, `E` and `T + A` are the same target** (X12B-E): `μ(E ∖ (T + A)) = 0` for every `U`-invariant finite `μ`.
+  In FL-1's decomposition `σ = a·m + σ_E + τ`, `σ_E` is carried by `T + A`.
+- **PE-2 + EF_F⁺ ⇒ MR(F), with no ergodic decomposition** [hand, two lines; PE-2 not checked here]: if `τ` is `U`-invariant and
+  `E`-null, PE-2 writes `τ = a·m + τ′` with `h_{τ′}(u) = 0` for all `u`; `m(E) = 0`, so `τ′ ≤ τ` is `E`-null; EF_F⁺ puts `τ′` on
+  `T + A ⊆ E`; so `τ′ = 0` and `τ = a·m`. This is EF-MR's first sentence (queue §2), stated for the non-ergodic form.
+- **Robustness to Lemma C′'s exception** (a ramified stable dyadic place where `R` may be a proper order): the proof uses `R` only as a
+  `U`-stable discrete cocompact subgroup of `𝔸_S` with `ℚR = L`; `T = ℚΛ′/Λ′` and `A` keep their shape. Not affected.
+- **Side finding (§2.5):** list X01's EF-G(a) is false at `F = ℚ(∛2)` (a relative unit has `H(u) = 1`, `h_m(u) > 0`); true in shape
+  for totally real `F`, which covers the FS-100 targets. Repair: take `H` over all places.
+
+### Theorems this phase proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| X12B-R | `R̂ ≅ 𝔸_S/𝔡⁻¹R` (`S` = split places), with `T = L/𝔡⁻¹R`, `A` = image of `L_∞`, `Fin_{S′}` = image of `L_∞ × L_{S′}` | [hand; standard — Tate duality, `S`-integers] | §2.0 |
+| X12B-Z | `P ≠ ∅` finite: a `U`-invariant finite measure carried by `L + Z_P` is carried by `T + A` | [hand, one mind] | §2.1 |
+| X12B-E | `U`-invariant finite `μ` ⇒ `μ(E ∖ (T + A)) = 0` | [hand, one mind] | §2.1 |
+| X12B-EF | `μ` finite, invariant under `u*` (non-torsion) and the rational unit vectors, `h_μ(u*) = 0` ⇒ `μ` carried by `L + Z_{P⁺(u*)}` | [hand, one mind; EF Lemmas 3.1–3.2 transferred] | §2.2 |
+| X12B-EF⁺ | **EF_F⁺ TRUE**; hence **EF_F TRUE** | [hand, one mind] | §2.3 |
+| X12B-MR | PE-2 and EF_F⁺ imply MR(F) for every real number field `F` | [hand, conditional on PE-2] | §3.2 |
+| X12B-G | EF-G(a) fails at `ℚ(∛2)`; `U_1` infinite there | [hand] | §2.5 |
+| X12B-N | `#{q ∈ U_ℚ(i) : den q ≤ X} = 4 + 8·#{primitive triples, hypotenuse ≤ X}`, `≥ X` at the checkpoints `5 … 1500` | [tools exact; classical asymptotic `4X/π`] | `tools/x12b_multiplier_count.py` |
+
+**Kernel decision:** declined for now — every step rests on Shannon–McMillan–Breiman, Lusin–Souslin and adelic duality, none of which
+Mathlib holds at this generality; a kernel port would be months, and the consumer (MR ⇒ `χ(ℚ(√47)²) = 5`) still has other hand steps.
+
+### Proposed `BIBLIOGRAPHY.md` row (for the front-page lane)
+
+`[EinsiedlerFish2010]` M. Einsiedler, A. Fish, *Rigidity of measures invariant under the action of a multiplicative semigroup of
+polynomial growth on T*, Ergodic Theory Dynam. Systems 30 (2010) 151–157, Zbl 1189.37005, arXiv:0804.3586 — held at
+`data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf` — **read in full (all 8 pp., §§1–4 and references), X12B,
+2026-09-26** — role: Lemmas 3.1–3.2 are the method of X12B-EF (zero entropy ⇒ zero dimension ⇒ Diophantine approximation by
+pigeonhole over the semigroup ⇒ rationality); its Thm 1.2 uses Johnson 1992 for the positive-entropy half, which X12B does not use.
+(Not found in `BIBLIOGRAPHY.md` by arXiv id or Zbl number, 2026-09-26 06:09.)
+
+### What is left
+
+A second, independent check of X12B-EF's steps 1 (the Bowen-atom inclusion) and 5 (the product-formula stabilisation), and of Lemma Z's
+use of `α/ᾱ`; the comparison with X01D (fenced here) is the owner's.
