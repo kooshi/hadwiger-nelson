@@ -184,13 +184,11 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    would be the first exactly six-chromatic finite Euclidean plane**. No field containing K can use any member, so **six is
    arithmetically excluded for every field the hunt has built in**. The window decides whether six is *reachable by the residue
    method*; its sharp target is fractional, α < q²/6 (G59).
-12. **What the wall leaves, and where the conjecture points** (G59, row 70). The wall is six finite graphs — 23, 27, 31, 43, 47
-   and U₆₄ — in reach only at 47 and U₆₄ (FS-57); a composite residue target escapes it only through an integrality gap. **If it
-   holds, the conjecture's main clause says nothing above five**, and its sharpest remaining prediction is **ℚ(√167)**: at least six
-   (five refused at 23 at every level of the tower, row 75) against a proven four (row 79).
-13. **Fractional colourings see fields the residue method cannot** (G60, row 71). `[MatolcsiEtAl2025]`'s blow-up never leaves the
-   field, so a finite `H ⊂ F²` with geometric fractional chromatic number above `k` proves `χ(F²) ≥ k + 1`; with their `G27` and
-   Theorem B, **χ_f(K²) = 4**. Capped by every usable residue plane's `χ_f` (3.5 at 𝔽₇) and by 4.36, so it proves at most five.
+12. **What the wall leaves, and where the conjecture points** (G59, row 70): six finite graphs, in reach only at 47 and U₆₄ (FS-57).
+   **If it holds, the conjecture's main clause says nothing above five**, and its sharpest remaining prediction is **ℚ(√167)**: at least
+   six (five refused at 23 at every level of the tower, row 75) against a proven four (row 79).
+13. **Fractional colourings see fields the residue method cannot** (G60, row 71): `[MatolcsiEtAl2025]`'s blow-up never leaves the
+   field, whence **χ_f(K²) = 4**; capped by every usable residue plane's `χ_f` (3.5 at 𝔽₇) and by 4.36, it proves at most five.
 14. **Real quadratic fields: three colours are decided, and four is a theorem of the family** (G61, G74, G65; rows 72–74, 79, 82–84).
    **The plane over any subfield of ℝ needs four once 1/3 lies in its unit-vector ring and it has an odd cycle** [hand, two independent derivations; row 82]
    — so every squarefree d ≡ 11 (mod 12) needs four (T4); **nothing is claimed new while `[Johnson2000]` and `[Johnson2006]` are unread**.
@@ -199,10 +197,9 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 15. **Six may be a value no field attains — a claim stronger than χ(ℝ²) ≠ 6, not equivalent to it** (G64, FS-62): the wall at six
    (G56, G59) decides the value set of L and whether the conjecture predicts 6 or 7 at ℚ(√167); six hides only in the gap between L(F)
    and χ(F²), where every ceiling we own is silent but FS-64. Six being skipped is *not* evidence for seven.
-16. **The construction grammar is crystallography's, and transcendence is free** (G62, G63). Every witness is a twisted bilayer
-   whose rotation is the Σ = n coincidence rotation of the order of discriminant 1 − 4n; commensurate twists are periodic, hence
-   bounded by a finite quotient (FS-63 is the gate). And χ(F(t)²) = χ(F²) for transcendental t (`[Fischer1990]` Thm 6), so
-   χ(ℚ(π)²) = 2: the chromatic number cannot see transcendence degree.
+16. **The construction grammar is crystallography's, and transcendence is free** (G62, G63): every witness is a twisted bilayer whose
+   rotation is a Σ = n coincidence rotation (FS-63 is the gate), and χ(F(t)²) = χ(F²) for transcendental t (`[Fischer1990]` Thm 6), so
+   χ(ℚ(π)²) = 2.
 17. **The residue ceiling does not drop up the tower where it can be certified** (G66, row 75): at 7, 11, 19, 23 no level reads
    lower than level one, so `UD(ℤ/529, 2)` cannot five-colour ℚ(√167)'s plane, `α(Γ₂₃) ≤ 97`, and χ_Bor of the `p`-adic plane is
    unbounded in `p` (`CLOSED-QUESTIONS.md` §1.8). That the ratio is exactly constant is **not proved** (FS-68).
@@ -212,13 +209,11 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    closed**: `F = P = 8Λ` on de Grey's lattice (rows 78, 85; item 23), and every four-colouring of `K²` is, per coset, local at one
    dyadic place, `F(R_K) = 4R_K` (row 89).
 19. **The derivations are counted, and the corpus graded itself down more often than up** (row 77, FS-71): 254 theorems proved outside the kernel since M17, 184 by hand, filed one entry each in `plans/<home>-derivation.md` and indexed in `LEDGER.md` § B; one hand claim wrong (now a conjecture), under-grades four to one over-grade (G21), six results found in an uncited session record (G70).
-20. **At three colours the inheritance question is a theorem, and the answer is topological, not arithmetic** (row 79, G71): three-colourability
-   of an abelian Cayley graph is a polytope question on the character torus, periodic three-colourings are dense, and it answers a question posed
-   three times in 2018 (`CLOSED-QUESTIONS.md` §2.4). **It stops at three by a fact about `K₄`** (G71, row 80); at four colours a two-sided
-   certificate exists only if four-colourability is decidable, stated open in print (`[CGHO2025bg]` §6.2.1).
-21. **Four colours, cell by cell** (row 80, G73): read one cell at a time, `K₄` certifies nothing — no edge-local height beyond Moore–Newman's
-   rank-2 case, no loop winding, no face flux, no coindex bound above four. **Each no-go is for its format, never for a kind of invariant**:
-   averaged, non-local and structure-derived certificates stay open (FS-80) — row 85's is structure-derived (G75).
+20. **At three colours the inheritance question is a theorem, and the answer is topological, not arithmetic** (row 79, G71): it answers
+   a question posed three times in 2018 (`CLOSED-QUESTIONS.md` §2.4). **It stops at three by a fact about `K₄`** (G71, row 80); at four
+   colours a two-sided certificate exists only if four-colourability is decidable, stated open in print (`[CGHO2025bg]` §6.2.1).
+21. **Four colours, cell by cell** (row 80, G73): read one cell at a time, `K₄` certifies nothing. **Each no-go is for its format,
+   never for a kind of invariant**: averaged, non-local and structure-derived certificates stay open (FS-80) — row 85's is structure-derived (G75).
 22. **ℚ(√167) at four colours** (row 81): `L21cc6506`, the lattice of `χ ≥ 4`, is loose (`F = P = 0`); seven minimal lattices on a finite part
    of the saturated chain outlast every capped screen — survivors, not refusals. Five over ℚ(√167) is FS-59's question.
 23. **De Grey's lattice, derived; four-colour rigidity without triangles** (rows 85–87, G75, G54). De Grey's lattice has 9,120 four-colourings, each `8Λ`-periodic and local at one prime above 2, derived from Parts's trees twice independently (row 85; Mixon's 2018 question, `CLOSED-QUESTIONS.md` §2.5; the literal ring is FS-88). **Without triangles** rigidity is free in the abstract class and in the plane is Soifer's Open Problem 55.1 (row 86, §3), undecided at ℚ(√59) (item 24). No-gos, and a slack plane that forces: row 87. Kooshi: *"A proven theorem about why its impossible is also valid. All novel knowledge is a success"* — no-gos count (`plans/FS85-rigidity-without-triangles.md` §R-close.2).
@@ -239,7 +234,9 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    rank-one question is *countable ⟹ finite* for four-colouring shifts of distance graphs on ℤ — **not landed**, stalled at one step by
    three minds. At five colours a factor leaves a product colouring when it **mixes**, not when its ratio is small, so the window question
    over ℚ(√167) lives at nine places; nothing touches `χ_µ(ℝ²)`.
-28. **Colourings of products: mixing pins them, gap-freedom does not** (rows 114–115; FS-67, `plans/FS67-derivation.md`). A `k`-colouring of `G × H` must come from `G` exactly when `G`'s colourings are gap-free and the improper part of `K_k^G` is `k`-colourable; from four colours up that fails for some uniquely colourable `G` (a composition of print), and it holds whenever `H` mixes (G54). Three colours and Hoffman-tight `G` are open. Bearing on χ ≥ 6: none.
+28. **Colourings of products: mixing pins them, gap-freedom does not** (rows 114–115, G54; FS-67, `plans/FS67-derivation.md`): from four
+   colours up a `k`-colouring of `G × H` need not come from gap-free `G`, and it must whenever `H` mixes. Three colours and Hoffman-tight `G`
+   are open. Bearing on χ ≥ 6: none.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -1392,9 +1389,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   finding one is the milestone. When a new exact decision procedure lands, point it at the open-instance list the same day. Killing test:
   across derivation milestones, count the results that came through the structural question against those that came from searches or
   extensions of a known tool. If the structural question keeps producing nothing a direct attack would not, the method is ceremony.*
-  **First count (FS-79, `plans/FS79-invariant-question.md` §R-close.3):** the class-level results — four no-gos of named formats and
-  the rank-1 criterion (row 80) — came through the structural question, by derivation; the instance result — `L21cc6506` loose (row
-  81) — came from an exact computation, an extension of FS-73's `Θ` tree, aimed at a derived claim by the advisor's question; and the *Do*'s last sentence was missed once (the new tool not aimed at phase 0's survivors the day it landed; run the next day as P3b). **Second count (FS-81, `plans/FS81-quadratic-four-colours.md` §R-close.3):** the class theorem (row 82) came through the structural question — classify `Θ₃(F)` for every `F ⊆ ℝ` — and the recognition arrived with the question; the census's certificates (row 83) were derived from its finite shadow, then certified; stage D (row 84) is a calibration. **Third count (FS-85, §R-close.4):** through the structural question — rows 85, 86 answer S1 and S2, row 87's no-gos the same questions. The plan-phase advisor's split, target-moving results apart from no-gos, **Kooshi declined: "yes", no-gos count** (2026-09-24); so the method stands **four of four** — FS-73, FS-79, FS-81, FS-85. **Fourth count (FS-86, §R-close):** through the structural question — S1 asked of every four-colouring and answered by derivation, the invariant being locality at the tight place (rows 88–92); the pinning operator §IQ hoped for was neither found nor excluded: **five of five**. **Sixth (FS-89):** §IQ posed Berend's MT/ID property modulo the isometric direction; row 95 is that property: **six of six**. **Seventh (FS-91):** the class theorem through the structural question — the peel on the value-set profile — and no mixing at `k = 3` with it; band rigidity at every band by extending a known tool: **seven of seven**. **Eighth (M2):** its one derivation, the bridge (J17), through the structural question — a ring hom into `ℝ_alg` is Artin–Lang — with a classical answer; the kernel ports are outside the count: **eight of eight**. **Ninth (M3):** both questions through the structural form; Q2's invariant found (the fibre's classes above the mixing threshold), Q1's not (FW rules out every Kempe invariant): **nine of nine**. **Tenth (row 88):** Q-μ's invariant (spectral type) found and decisive on `T + A + Fin_S`, Q-tr's not: **ten of ten**. **Eleventh (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found: **eleven of eleven**.
+  **The count so far — eleven of eleven** (each derivation close's §IQ record): FS-73 (the instance); FS-79
+  (`plans/FS79-invariant-question.md` §R-close.3) — the class-level results (four no-gos of named formats, the rank-1 criterion, row 80)
+  through the structural question, by derivation; the instance result (`L21cc6506` loose, row 81) from an exact computation, an extension
+  of FS-73's `Θ` tree, aimed at a derived claim by the advisor's question; the *Do*'s last sentence missed once (the new tool not aimed at phase 0's survivors the day it landed; run the next day as P3b); FS-81 (`plans/FS81-quadratic-four-colours.md` §R-close.3) — the class theorem (row 82): classify `Θ₃(F)` for every `F ⊆ ℝ`, the recognition arriving with the question; the census's certificates (row 83) derived from its finite shadow, then certified; stage D (row 84) a calibration; FS-85 (§R-close.4) — rows 85, 86 answer S1 and S2, row 87's no-gos the same questions; the plan-phase advisor's split, target-moving results apart from no-gos, **Kooshi declined: "yes", no-gos count** (2026-09-24); FS-86 (§R-close) — S1 asked of every four-colouring and answered by derivation, the invariant locality at the tight place (rows 88–92); the pinning operator §IQ hoped for neither found nor excluded; FS-89 — §IQ posed Berend's MT/ID property modulo the isometric direction, and row 95 is that property; FS-91 — the class theorem via the peel on the value-set profile, and no mixing at `k = 3` with it; band rigidity at every band by extending a known tool; M2 — its one derivation, the bridge (J17): a ring hom into `ℝ_alg` is Artin–Lang, with a classical answer; the kernel ports outside the count; M3 — both questions through the structural form, Q2's invariant found (the fibre's classes above the mixing threshold), Q1's not (FW rules out every Kempe invariant). Tenth, row 88 — Q-μ's invariant (spectral type) found and decisive on `T + A + Fin_S`, Q-tr's not. Eleventh, FS-67 — the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found.
 * **G73 — Four colours, cell by cell: the colour complex gives a four-colouring of a lattice graph nothing to certify with, one
   cell at a time. [hand, two independent derivations (de Bruijn, Coxeter) read by Poros, with exact rank checks (row 80); one
   reading]** Read `K₄` through the cells of `Cay(Λ, S)` and every local invariant a certificate could use is empty or blind.

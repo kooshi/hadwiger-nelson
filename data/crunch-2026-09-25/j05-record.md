@@ -106,3 +106,17 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0.
   ALLOW lines: none.
 - Bytes: 288,586 → **287,833** (−753; total −8,580).
+
+## Stage 2, batch 5 — SAVED (C7: G72's count; items 12, 13, 16, 20, 21, 28)
+
+- G72's count: the running totals ("four of four" … "ten of ten") are superseded by the current one; the count is now one list headed
+  "eleven of eleven", every close's verdict, address and Kooshi's ruling ("yes", no-gos count, 2026-09-24) kept word for word where they
+  were facts. The ordinal labels Tenth and Eleventh are kept as labels (the first trial dropped them and failed on two name tokens).
+  G72's *Do* and killing test untouched.
+- Items 12, 13, 16, 20, 21, 28 keep claim and pointers; checked in their homes: item 12's escape through an integrality gap in G59/G43;
+  item 13's blow-up and `G27` in G60 and row 71; item 16's discriminant form and commensurate-periodic step in G62; item 20's polytope and
+  density in G71; item 21's four formats in G73; item 28's criterion (`E_k(G)`, the improper part of `K_k^G`) in row 114 and its mixing
+  half in G54.
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0.
+  ALLOW lines: none.
+- Bytes: 287,833 → **286,556** (−1,277; total −9,857).
