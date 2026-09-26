@@ -89,3 +89,230 @@ identity), so they are not naive priors.
    the equality under exactly that hypothesis.
 2. *Would have* run a float finder for characters of `R_ℚ` whose values on `U` avoid an interval (a window counterexample to (SI)'s "⟸").
    *Instead:* derive (stage 2) that any such character is a band character and invoke row 98.
+
+## Stage 2 — SAVED (the blind phase)
+
+*Committed before anything fenced was opened.* Verdicts first; proofs in §2.1–§2.9. Exact checks: `tools/crunch_j46_checks.py` (three
+identities, three plants, all fire; output `data/fs84/j46/checks.out`, 0.36 s).
+
+| claim | verdict (blind) |
+|---|---|
+| (SI) the inequality | **TRUE** — in the exact form `∫_{R̂∖E_S} Re χ(u) dσ_μ = −(4/3)·E[Σ_j a_j(0) a_j(u)]` (J46-2) |
+| (SI) "equality ∀u ⟹ the `E_S`-factor carries a proper equivariant `c′` [with the support clause]" | **TRUE** (J46-3) |
+| (SI) "⟸" as written | **GAP** at the step named in §2.3; **the support clause is vacuous as written** (R5). Under the reading "`supp a(x) = {c′(x)}`" the "⟹" is **FALSE** (the control is a counterexample). The repaired "iff" — equality ∀u ⟺ the `E_S`-conditional supports are disjoint along every edge ⟺ the factor carries an edge-disjoint equivariant list assignment containing `c(x)` — is **TRUE** (J46-3) |
+| (A⁺) given T-C(A) | **TRUE** (J46-5) |
+| (B⁺) given T-C | **TRUE**, with FS38-D2-A's gap-freeness as a second input; and conversely Pull ⟹ equality (J46-6) |
+| (R-U) | **TRUE** (J46-7) |
+| (SP) | **TRUE** under the positive reading (J46-8). Under the literal signed reading (`τ` signed, `τ(E) = 0` not `\|τ\|(E) = 0`) the right side is trivially true and (SP) becomes an open measure-rigidity statement: **ill-posed as written in that reading** |
+| control (noisy colourings over ℚ(√11)) | **passes**: equality for every `u` and every `S` (J46-9) |
+| W1 (T-J37-1), given row 98 and T-C(A) at `S = ∅` | **TRUE** (J46-10) |
+
+### 2.0 Inputs used, with addresses
+
+- **(D) Density.** `R` is dense in `L_∞ × ∏_{v∈S} L_v` (strong approximation away from a split place outside `S`): R88-TC-ext's density
+  step, two derivations there. Used only for the uniqueness of components (J46-1 (c)) in (R-U) and (SP)'s remark.
+- **(WA) Weak approximation for `T = R¹_{L/F} G_m`.** `U = T(F)` is dense in `∏_{v∈S'} T(F_v)` for every finite set `S'` of places. Proof
+  (hand, standard): the Cayley map `s ↦ (1 + is)/(1 − is)` (in coordinates `((1 − s²)/(1 + s²), 2s/(1 + s²))`) is a homeomorphism from
+  an open dense subset of `F_v` onto `T(F_v) ∖ {−1}` at every place (at a split `v`, `i ∈ F_v`, domain `F_v ∖ {±i}`, image
+  `F_v^× ∖ {−1}` under `T(F_v) ≅ F_v^×`, `x + iy ↦ x + iy`), and `F` is dense in `∏_{v∈S'} F_v`.
+- **(FI) Finite index.** Every non-zero ideal of `R` has finite index (R88-J28V-7, in print as `[LevitzMott1972]` Thm 2.3).
+- **(TC), (TCA)** R88-TC, R88-TCA, as quoted in R6. **(GF)** FS38-D2-A: every proper four-colouring of a Hoffman-tight plane is gap-free
+  (Blokhuis–Brouwer–Haemers), applied to row 67's `P₄` (tight at four colours, R88 Notation / FS-86 Notation); and `π₄(U)` is `P₄`'s
+  generating set (`P₄ = Cay(O/𝔓⁴, T mod 𝔓⁴)`, and `U` maps onto `T mod 𝔓⁴` by (WA)).
+- **(R98)** Row 98: `Θ_k(R_F) ⊆ T + A(R_F)` for every `F ⊆ ℝ`, `k ≥ 2`.
+- Textbook: Bochner / SNAG for lcsc abelian groups, uniqueness of Fourier–Stieltjes transforms, the mean ergodic theorem.
+
+### 2.1 J46-1 — the `E_S`-factor is exactly the `E_S` spectral subspace
+
+**Statement.** (a) `E_S` is the set of characters of `R` continuous for the topology `τ′_S` that `R` inherits from
+`G′_S = L_∞ × R̂_pro × ∏_{v∈S} L_v` (`R̂_pro = lim R/mR`, the profinite completion). (b) `H_S = {f : y ↦ U_y f is τ′_S-continuous}`.
+(c) Given (D): the sum map `T × L̂_∞ × ∏_{v∈S} L̂_v → R̂` is injective, so each `χ ∈ E_S` has a unique **`S`-component** `φ̃_S(χ) ∈ ∏ L̂_v`,
+Borel in `χ` and `U`-equivariant, and `χ ∈ T + A ⟺ φ̃_S(χ) = 0`. (d) `L²(𝒜_S) = H_S`; hence `P_S = E[· | 𝒜_S]`.
+
+*Proof.* (a) Every element of `T` (continuous for the profinite topology), `A` and `Fin_S` is `τ′_S`-continuous, hence so is their sum.
+Conversely a `τ′_S`-continuous character extends to the closure `R̄ ⊆ G′_S` and then (Pontryagin) to a continuous character of `G′_S`,
+whose restriction is a sum of an `A`-, a `T`- (the dual of a profinite group is torsion) and a `Fin_S`-character.
+(b) ⟹: `‖U_y f − f‖² = ∫ |χ(y) − 1|² dσ_f`, and each `χ ∈ E_S` is `τ′_S`-continuous; `τ′_S` is metrizable, so dominated convergence
+suffices. ⟸: the representation on the cyclic space `Z(f)` is uniformly `τ′_S`-continuous (`‖U_y h − U_{y′} h‖ = ‖U_{y−y′} h − h‖`), so it
+extends to a strongly continuous unitary representation of the lcsc abelian group `R̄`; by SNAG, `⟨V_z f, f⟩ = ∫ Χ(z) dρ(Χ)` on `R̄`;
+restricting to `R`, `σ_f` is the image of `ρ` under `Χ ↦ Χ|_R`, which lands in `E_S` by (a); uniqueness of Fourier–Stieltjes on `R̂`.
+(c) If `τ + α + φ = 0`: `mφ = −mα` for `m = ord τ`, a character continuous for both the archimedean and the `S`-adic topology; its
+extensions `Α` to `L_∞` and `Φ` to `L_S` give the character `(y, z) ↦ Α(y)Φ(z)⁻¹` of `L_∞ × L_S`, trivial on the diagonal `R`, dense by
+(D); so `Α = Φ = 1`, `mα = mφ = 0`; a torsion character continuous for a divisible group's topology extends to a continuous character of
+`L_∞` (resp. `L_S`, divisible since `F_v` is) with finite image, hence trivial; so `α = φ = 0` and `τ = 0`. The source is σ-compact, the map
+continuous and injective, so `E_S` is Borel and the inverse Borel (Lusin–Souslin). `U` acts on each factor by multiplication by `u`
+(an archimedean isometry since `|σ(u)| = 1` at every complex place of the CM field `L`; a homeomorphism of each `L_v`), so the
+decomposition is equivariant.
+(d) By (b), `H_S` is closed under `f ↦ φ∘f` for Lipschitz `φ` (`‖U_y(φ∘f) − φ∘f‖ ≤ Lip(φ)‖U_y f − f‖`) and under products of bounded
+elements (`‖U_y(fh) − fh‖ ≤ ‖h‖_∞‖U_y f − f‖ + ‖f‖_∞‖U_y h − h‖`); it contains the constants and is closed under conjugation (`E_S = −E_S`).
+Then `𝒜 := {B : 1_B ∈ H_S}` is a σ-algebra (complements, products, monotone `L²`-limits); every real `f ∈ H_S` is `𝒜`-measurable
+(`1_{f > s} = lim_n min(1, n(f − s)⁺)` in `L²`); so `𝒜 = σ(H_S) = 𝒜_S`, `H_S ⊆ L²(𝒜_S)`, and simple `𝒜_S`-functions lie in `H_S`, so
+`L²(𝒜_S) ⊆ H_S`. ∎ *(hand; one mind.)*
+
+### 2.2 J46-2 — (SI)'s inequality, in exact form
+
+**Statement.** For every real number field `F`, every translation-invariant random proper four-colouring `μ` of `Cay(R, U)`, every finite
+set `S` of split places and every `u ∈ U`:
+`∫_{R̂∖E_S} Re χ(u) dσ_μ(χ) = −(4/3)·E[Σ_{j=0}^{3} a_j(0) a_j(u)] ≤ 0`, with equality iff `supp a(0) ∩ supp a(u) = ∅` a.s.
+
+*Proof.* Let `h_k = (I − P_S) g_k`. The spectral measure of `h_k` is `σ_{g_k}|_{R̂∖E_S}`, so the left side is `Σ_k ⟨U_u h_k, h_k⟩`
+(real: `σ_μ` is symmetric and so is `R̂∖E_S`). By J46-1 (d), `P_S g = p(0)` with `p(x) = E[g(x) | 𝒜_S] = Σ_j a_j(x) e_j`, and `𝒜_S` is
+invariant, so `Σ_k ⟨U_u h_k, h_k⟩ = E⟨g(0), g(u)⟩ − E⟨p(0), p(u)⟩` (the cross terms equal `E⟨p(0), p(u)⟩` because `p(u)` is
+`𝒜_S`-measurable). Properness gives `E⟨g(0), g(u)⟩ = −1/3`. The Gram matrix gives `⟨p(0), p(u)⟩ = (4/3)Σ_j a_j(0)a_j(u) − 1/3` for any
+probability vectors (check (1) of the tool, symbolic, plant P1 fires). Subtract. The expectation of a non-negative variable is `0` iff the
+variable is `0` a.s. ∎ *(hand; one mind; the identity checked exactly on a finite model, check (2), both branches exercised, plants P1–P2
+fire.)*
+
+### 2.3 J46-3, J46-4 — (SI)'s equality clause
+
+**J46-3 (statement).** Equality for every `u ∈ U` ⟺ a.s., for every `x ∈ R` and `u ∈ U`, `supp a(x) ∩ supp a(x + u) = ∅` ⟺ the
+`E_S`-factor carries an equivariant list assignment `x ↦ Λ(x) ⊆ {0,1,2,3}`, `𝒜_S`-measurable, with `Λ(x) ∩ Λ(x + u) = ∅` and
+`c(x) ∈ Λ(x)` a.s. ⟹ the `E_S`-factor carries a proper equivariant four-colouring `c′` with `c′(x) ∈ supp a(x)` (and, vacuously,
+`c(x) ∈ supp a(x)`) a.s.
+
+*Proof.* First ⟺: J46-2 for each `u`, then apply the measure-preserving `T_x` and take the countable union over `(x, u)`. Second ⟺:
+`Λ(x) = supp a(x)` is `𝒜_S`-measurable and equivariant and contains `c(x)` a.s. (R5); conversely `c(x) ∈ Λ(x)` a.s. with `Λ(x)`
+`𝒜_S`-measurable gives `Σ_{j∈Λ(x)} a_j(x) = P(c(x) ∈ Λ(x) | 𝒜_S) = 1`, so `supp a(x) ⊆ Λ(x)`. Last ⟹: `c′(x) = min supp a(x)`
+(`a(x)` is a probability vector a.s., so the support is non-empty). ∎ *(hand; one mind.)*
+
+**The claim as written.** Its right side reduces (R5) to "the `E_S`-factor carries a proper equivariant `c′`". **⟹ TRUE** (J46-3).
+**⟸ GAP.** The named step: *"if the `E_S`-factor of `μ` carries a proper equivariant four-colouring, then the `E_S`-conditional supports of
+`c` are disjoint along every edge."* Nothing links a colouring living in the factor to the supports of `c`'s colour classes; I found no
+proof and no counterexample. What I can say about it:
+- **Where it holds.** Over ℚ(√47), given T-C(A), no `μ` has a factor carrying a proper `c′` (J46-5's argument), so "⟸" holds vacuously.
+  Over a type-(B) field, given T-C and (GF), "⟸" is equivalent to *"if the `E_S`-factor of `μ` contains a pullback, then `μ` is carried
+  by Pull"* (by T-C every such `c′` is in Pull, and by J46-6 equality ⟺ Pull) — which is not implied by T-C and is a Q-μ-type statement.
+- **What a counterexample needs.** A colour class `J = c⁻¹(j)` whose `E_S`-envelope `{x : a_j(x) > 0}` contains an edge, so `1_J` has
+  spectral mass outside `E_S` with negative real part at some `u`. **The cheapest shape is excluded (J46-4 below): a one-character window
+  class is always `E_S`-measurable.** So a counterexample must be a non-window structure with spectral mass outside `E_S`; a local
+  (finitely dependent) one cannot keep an infinite-degree class independent.
+- **Readings.** With "`c′(x) ∈ supp a(x)`" in place of the vacuous clause, "⟸" is the same GAP. With "`supp a(x) = {c′(x)}`" (the
+  factor determines `c`), "⟸" is TRUE (then `a(x) = δ_{c′(x)}`) and "⟹" is **FALSE**: the control (J46-9) has equality with two-point
+  supports at gapped points. The repaired statement (the list form of J46-3) is TRUE and is, I believe, what the claim means.
+
+**J46-4 (the window lemma).** *Let `θ ∈ R̂` and `V ⊆ ℝ/ℤ` measurable with `|V| > 0` and `|V ∩ (V + θ(u))| = 0` for every `u ∈ U`. Then,
+given (R98), `θ ∈ T + A`.* *Proof.* `s ↦ |V ∩ (V + s)|` is continuous (translation is continuous in `L¹(ℝ/ℤ)`), equals `|V| > 0` at
+`s = 0` and vanishes on `θ(U)`, hence on its closure; so some `(−δ, δ)` misses `θ(U)`, i.e. `θ ∈ Θ_k(R_F)` for `k = ⌈1/δ⌉ ≥ 2`, and (R98)
+gives `θ ∈ T + A`. ∎ *Consequence:* a random independent set `{x : θ(x) + t ∈ V}` (`t` uniform) has all its spectrum in `ℤθ ⊆ T + A ⊆
+E_S`, so it is `𝒜_S`-measurable and its envelope is itself; it cannot produce overlapping supports. *(hand given row 98; one mind.)*
+
+### 2.4 J46-5 — (A⁺)
+
+**Statement.** Over ℚ(√47), given T-C(A): for every translation-invariant random proper four-colouring `μ` and every finite `S`, some
+`u ∈ U` has `∫_{R̂∖E_S} Re χ(u) dσ_μ < 0`. (Vacuous if `X₄(ℚ(√47)) = ∅`.)
+
+*Proof.* Otherwise J46-3 gives an `𝒜_S`-measurable, equivariant, a.s.-proper `c′`. Modify it on a null set to be proper everywhere; its law
+`ν` is a translation-invariant Borel probability on `X₄`. The coordinates of `ω ↦ e_{c′(0)(ω)}` are bounded and `𝒜_S`-measurable, so lie in
+`L²(𝒜_S) = H_S` (J46-1 (d)): the trace spectral measure of `ν` — computed from the same correlation `E⟨e_{c′(0)}, e_{c′(y)}⟩` — is carried
+by `E_S`, and so is the matrix-valued one (it is dominated by its trace). This contradicts T-C(A) at `S`. ∎ *(hand, given T-C(A); one
+mind.)*
+
+### 2.5 J46-6 — (B⁺), and its converse
+
+**Statement.** Over a type-(B) field, given T-C and (GF): equality for every `u` (at some finite `S`) ⟹ `μ` is carried by Pull.
+Conversely, `μ` carried by Pull ⟹ equality for every `u` and every `S`.
+
+*Proof.* As in J46-5, `c′ = min supp a` has a law with spectrum carried by `E_S`, so by T-C `c′ ∈ Pull` a.s.: `c′ = γ ∘ π₄` for a (random)
+proper four-colouring `γ` of `P₄`. By (GF) `γ` is gap-free and `π₄(x + U) = π₄(x) + π₄(U)` is the full neighbourhood of `π₄(x)`, so
+`{c′(x + u) : u ∈ U} = {0,1,2,3} ∖ {c′(x)}`. Each `c′(x + u) ∈ supp a(x + u)`, disjoint from `supp a(x)` (J46-3), so
+`supp a(x) ⊆ {c′(x)}`, hence `= {c′(x)}`; and `c(x) ∈ supp a(x)` a.s. (R5), so `c = c′` a.s. (countably many `x`): `μ(Pull) = 1`.
+Converse: Pull is a finite set of colourings each of which is a function of `π₄`, whose characters are torsion; so `c` is
+`𝒜_S`-measurable, `a(x) = δ_{c(x)}`, and the supports are disjoint along edges by properness. ∎ *(hand, given T-C and FS38-D2-A; one
+mind.)* **The control shows the gap-freeness input is needed:** over ℚ(√11) the pullback from 7 is gapped and equality holds for a
+non-pullback (J46-9).
+
+### 2.6 J46-7 — (R-U)
+
+**Statement.** For every real number field `F`, every finite set `S` of split places and every finite (positive, or signed) `U`-invariant
+Borel measure `τ` on `R̂`: `τ(E_S ∖ (T + A)) = 0`.
+
+*Proof.* (Signed: apply the positive case to `τ⁺`, `τ⁻`, each invariant by uniqueness of the Jordan decomposition.) `B = E_S ∖ (T + A)`
+is a `U`-invariant Borel set, and by J46-1 (c) `B = {χ ∈ E_S : φ̃_S(χ) ≠ 0}`. Push `τ|_B` forward by the Borel, `U`-equivariant `φ̃_S` to a
+finite measure `τ′` on `∏_{v∈S} L_v ∖ {0}` (`L̂_v ≅ L_v` by the trace pairing, under which `u` acts by multiplication). `u` acts on
+`L_v ≅ F_v × F_v` by `(a, b) ↦ (t a, t⁻¹ b)`, `(t, t⁻¹)` the image of `u` (`ū = u⁻¹`). The measure `τ′` is invariant under the image of `U`
+in `∏_{v∈S} T(F_v)`, dense by (WA); `g ↦ g_*τ′` is weak-* continuous, so `τ′` is invariant under all of `∏_{v∈S} T(F_v) ≅ ∏ F_v^×`. Fix
+`v ∈ S` and push `τ′` to the `v`-coordinate: a finite measure on `F_v²` invariant under `F_v^×` acting by `(a, b) ↦ (ta, b/t)`. On
+`{ab ≠ 0}`, `(a, b) ↦ (ab, a)` conjugates the action to `(k, a) ↦ (k, ta)`, and the sets `ϖⁿ·(F_v^× × O_v^×)`, `n ∈ ℤ`, are disjoint
+translates of one set, all of equal finite measure: each is null. On the axes `{(a, 0)}`, `{(0, b)}` (`a, b ≠ 0`) the same with
+`ϖⁿ O_v^×`. So the `v`-coordinate of `τ′`-a.e. point is `0`, for every `v ∈ S`: `τ′ = 0`, `τ(B) = 0`. ∎ *(hand, given (D) and (WA); one
+mind.)* *(Remark: nothing here uses the colouring; it is the non-compactness of the split tori.)*
+
+### 2.7 J46-8 — (SP)
+
+**Statement (positive reading).** For every real number field `F` the following are equivalent: (L) some finite positive `U`-invariant
+`τ` on `R̂` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`; (R) some finite positive `U`-invariant `τ` with `τ(E) = 0` is not a multiple of Haar.
+
+*Proof.* Every `U`-invariant positive `τ` has **real** Fourier coefficients: `τ̂(−x) = conj τ̂(x)` (positivity) and `τ̂(−x) = τ̂(x)`
+(`−1 ∈ U`). (L) ⟹ (R): `c·Haar` has coefficient `0` at `1 ≠ 0`. (R) ⟹ (L): `τ ≠ c·Haar` for every `c`, so `τ̂(r) ≠ 0` for some `r ≠ 0`
+(uniqueness). Let `m_r θ = θ(r ·)` and `τ_r = (m_r)_*τ`: `U`-invariant (`m_r` commutes with the `U`-action), positive, `τ̂_r(1) = τ̂(r)`.
+**`m_r⁻¹(E_S) = E_S`**: `⊇` since multiplication by `r` is continuous for every topology in play; `⊆`: if `θ(r ·) = τ + α + φ`, transport
+`α, φ` to characters of `rR` and extend them archimedeanly and `S`-adically to `α″ ∈ A`, `φ″ ∈ Fin_S` (`rR` is dense wherever `R` is), extend
+`τ(r⁻¹ ·)` to some `τ″ ∈ R̂`, torsion because `R/rR` is finite (FI); then `θ − τ″ − α″ − φ″` kills `rR`, so is torsion. Hence
+`τ_r(E) = 0`. If `τ̂(r) < 0`, `τ_r` witnesses (L). If `τ̂(r) > 0`, let `λ` be the uniform probability on the archimedean characters
+`x ↦ Re(ξ σ₁(x)) mod 1`, `|ξ| = ρ` (one complex place `σ₁`), with `J₀(2πρ) < 0` (`2πρ = 3.8317`, `J₀ = −0.4028`; check (3), plant P3
+fires). `λ` is `U`-invariant (`u` rotates `ξ` by `σ₁(u)`, of modulus 1), carried by `A ⊆ E`, and `λ̂(1) = J₀(2πρ)`. Then `τ_r * λ` is positive,
+`U`-invariant (`U` acts by automorphisms), `E`-null (`(τ_r * λ)(E) = ∫ τ_r(E − α) dλ(α) = τ_r(E)`, `E` a group containing `A`), and
+`(τ_r * λ)^(1) = τ̂(r)·J₀(2πρ) < 0`. ∎ *(hand; one mind; uses (FI), not (D).)*
+
+**The signed reading.** If "finite measure" on the right may be signed with the literal `τ(E) = 0` (not `|τ|(E) = 0`), then (R) holds
+for every `F` (`δ_0 − λ′`, `λ′` the uniform measure on an archimedean circle: `U`-invariant, `τ(E) = 1 − 1 = 0`, not a multiple of Haar),
+so (SP) would assert (L) outright — by J46-8 equivalent to the existence of a non-Haar, `E`-null, `U`-invariant probability on `R̂`, the
+Furstenberg-type measure question R88's T-C′ reading names. Under that reading the claim is **ill-posed** (a trivially true side), and
+not decided here. With `|τ|(E) = 0` the signed reading reduces to the positive one (Jordan).
+
+### 2.8 J46-9 — the control
+
+**Statement.** Over ℚ(√11), under R8 (a.s. proper; recolourings conditionally independent given the translate `t`), equality holds in
+(SI) for every `u` and every finite `S`.
+
+*Proof.* Model: `ω = (t, (V_x)_{x∈R})`, `t` uniform in `𝔽₄₉`, `V_x` i.i.d. uniform in `[0,1]`, `c(x) = γ(π(x) + t)` at non-gapped
+points and the `⌈V_x |A(x)|⌉`-th element of `A(x)` at gapped ones; `T_y ω = (t + π(y), V_{·+y})`. (i) *`𝒜_S ⊆ σ(t)`*: a function `f` of
+`ω` with `E[f | t] = 0` depending on finitely many `V`'s has correlation supported on a finite set of `y` (outside it, `U_y f` and `f`
+are conditionally independent given `t` with conditional mean 0), so `σ_f ≪` Haar; such `f` are dense in `L²(ω) ⊖ L²(t)` and
+`≪ Haar` is closed in total variation. `E_S` is Haar-null (J46-1 (c): the non-compact σ-compact injective image `A + Fin_S` is a proper
+Borel subgroup of the connected `R̂`, so null by Steinhaus; `E_S` is a countable union of its translates). So the `E_S`-spectral
+functions of `ω` are functions of `t`. (ii) *The class-set function is in `𝒜_S`*: for each residue `r`, the set `Â(r)` of colours that `c`
+takes on `π⁻¹(r − t)` is `{γ(r)}` if `r` is non-gapped and `A` there otherwise (each available colour occurs a.s., infinitely many
+independent trials); `Â` is a function of `c` and of `t` alone, so its functions have torsion spectrum: `σ(Â) ⊆ 𝒜_S`. (iii) Given `t`,
+`c(x)` is uniform on `Â(π(x) + t)` (a point mass at non-gapped points), a function of `Â`; so `a(x) = P(c(x) = · | t)` by the tower
+property. (iv) Given `t` the values are independent, so `0 = P(c(x) = c(x+u) | t) = Σ_j a_j(x) a_j(x + u)`: disjoint supports, and
+J46-2 gives equality. ∎ *(hand; one mind.)* *Remark:* the recoloured `μ` is not a pullback and its spectrum has a Haar-absolutely-
+continuous part, so the control also shows that B⁺'s gap-freeness hypothesis cannot be dropped (§2.5).
+
+### 2.9 J46-10 — W1 (T-J37-1)
+
+**Statement.** Over ℚ(√47), given (R98) and T-C(A) at `S = ∅`: there is no `θ ∈ R̂` and Lebesgue measurable `W : ℝ/ℤ → {0,1,2,3}` with
+`c_t(x) = W(θ(x) + t)` a proper four-colouring for almost every `t`.
+
+*Proof.* Suppose there were. Properness at `x = 0`: for each `u`, `W(t) ≠ W(t + θ(u))` for a.e. `t`, so each class `C_j = W⁻¹(j)`
+has `|C_j ∩ (C_j − θ(u))| = 0`. Some `|C_j| ≥ 1/4 > 0`; by J46-4, `θ ∈ T + A`. The random colouring `t ↦ c_t` (`t` uniform; redefined
+on the null set of improper `t`) is a translation-invariant Borel probability on `X₄` (`c_t(· + y) = c_{t + θ(y)}`), and
+`E⟨e_{c_t(0)}, e_{c_t(y)}⟩ = ∫ ⟨f(t), f(t + θ(y))⟩ dt = Σ_n |f̂(n)|² e(nθ(y))` for `f = e ∘ W`, so its spectral measure is
+`Σ_n |f̂(n)|² δ_{nθ}`, carried by `ℤθ ⊆ T + A = E_∅`. T-C(A) at `S = ∅` forbids this. ∎ *(hand, given row 98 and T-C(A); one mind.)*
+*(T-C(A)'s own inputs include `[AmbrusEtAl2023]`'s `m₁(ℝ²) ≤ 0.2470`, which matters exactly when `θ` has an archimedean part — as W1's
+source says.)*
+
+### 2.10 Would-have-searched log (continued)
+
+3. *Would have* tried random samples of `Cay(ℤ/N, ·)` models to test (SI)'s identity. *Instead:* one fixed finite model enumerated exactly
+   (check (2)), with both branches (equality, strict) exercised and two plants.
+4. *Would have* searched for a non-window, non-local random colouring over ℚ with overlapping `E_S`-supports and parity in its factor (a
+   counterexample to (SI)'s "⟸"). *Instead:* named the step as a GAP and proved the window shape is excluded (J46-4).
+
+### Theorems this phase proved (stage 2)
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| J46-1 | `E_S` = the `τ′_S`-continuous characters; `H_S` = the `τ′_S`-continuous vectors; `L²(𝒜_S) = H_S`; given density, unique `U`-equivariant components | hand | §2.1 |
+| J46-2 | `∫_{R̂∖E_S} Re χ(u) dσ_μ = −(4/3)E[Σ_j a_j(0)a_j(u)] ≤ 0`, `= 0` iff supports disjoint | hand + tools exact (finite model) | §2.2, `tools/crunch_j46_checks.py` |
+| J46-3 | equality ∀u ⟺ edge-disjoint supports ⟺ an edge-disjoint `𝒜_S`-list assignment containing `c` ⟹ a proper `c′` in the factor | hand | §2.3 |
+| J46-4 | window lemma: a positive-measure window avoiding `θ(U)`-translates forces `θ ∈ T + A` (given row 98) | hand given row 98 | §2.3 |
+| J46-5 | (A⁺) given T-C(A) | hand given T-C(A) | §2.4 |
+| J46-6 | (B⁺) given T-C and FS38-D2-A, and Pull ⟹ equality | hand given T-C, D2-A | §2.5 |
+| J46-7 | (R-U), positive and signed | hand given density and weak approximation | §2.6 |
+| J46-8 | (SP), positive reading; the signed literal reading trivialises its right side | hand | §2.7 |
+| J46-9 | the ℚ(√11) noisy colourings satisfy (SI) with equality | hand | §2.8 |
+| J46-10 | W1 given row 98 and T-C(A) at `S = ∅` | hand given row 98, T-C(A) | §2.9 |
+
+**Scored against C0 (§1.3):** every verdict fell on the side given the larger probability, except (SI)'s equality "iff", which landed in
+its GAP column (0.55) with a TRUE repaired form, and (SP), whose TRUE (0.55) holds under the positive reading only.

@@ -1,0 +1,9 @@
+ok    (1) tetrahedral identity: got True, expected True (check passes)
+ok    (1) plant P1 (Gram -1/4): got False, expected False (plant fires)
+ok    (2) finite-model identity, K={0,6} (equality on edges): got True, expected True (check passes)
+ok    (2) finite-model identity, K={0,3,6,9} (strict on edges): got True, expected True (check passes)
+ok    (2) plant P1 (Gram -1/4): got False, expected False (plant fires)
+ok    (2) plant P2 (non-invariant conditioning): got False, expected False (plant fires)
+ok    (3) J0(3.8317) < -0.4: got True, expected True (check passes)
+ok    (3) plant P3 (J0 at 2.0): got False, expected False (plant fires)
+ALL OK
