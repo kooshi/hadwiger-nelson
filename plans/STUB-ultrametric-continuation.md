@@ -5,6 +5,11 @@ two GAP verdicts). Read first: `plans/R88-derivation.md` §3 and §G; `plans/FS8
 §2.4–§2.5 and §Stage 5 rows V18–V19; `plans/FS86-row88-PA-close.md` §Stage 5. Solver column: **none until 2026-10-01**; after it, a finite shadow
 (a ball agreeing with a pullback on a patch) measures balls, never the plane — the questions are derivations.*
 
+**Re-aimed at the crunch's close (2026-09-26, J25; post-close inventory rows 34–35, J38 §4.5 R1):** to **T-B1 alone**, recorded with
+T-J38-2 (given MR(F), row 88 ⟺ T-B1; blind-checked TRUE by J48, BC-6). J38's statement for a brief, verbatim: "Over ℚ(√59), ℚ(√83), ℚ(√131): for each `p ∈ Pull` there is a finite `B ⊂ R` such that every `c ∈ X₄(F)` with `c|_B = p|_B` equals `p`. Route through the determinacy ladder (co-finite: R88-B2-1; half-space: FS86-dB-H); the named step is the split-dominated re-centring. Control: at ℚ(√11) a gapped periodic colouring is not isolated (C9 with a shrinking archimedean term), so the proof must use gap-freeness." T-B2 is
+demoted: T-B1 ⟹ Q-tr ⟹ T-B2. MR and DP are homed in FS-100, which absorbed FS-97. The determinacy ladder's two proved rungs: R88-B2-1
+(co-finite) and row 91's H (half-space).
+
 ## The mission, in plain language
 
 Row 88 asks whether every four-colouring of the plane over ℚ(√59) (and ℚ(√83), ℚ(√131)) is a "pullback" read off the field's tight 2-adic place.

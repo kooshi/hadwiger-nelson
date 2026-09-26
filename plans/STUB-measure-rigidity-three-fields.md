@@ -13,6 +13,14 @@ F2–F5 and §4.1; the two verification records `plans/FS84-SI-D-derivation.md` 
 `plans/FS84-close-inventory.md` rows 23–29. Every statement below is quoted with its address; a quotation is never a substitute for reading its
 source.*
 
+**Status at the crunch's close (2026-09-26, front-page job J25).** **Stage 1 — DONE** (J48, `plans/FS100-BC-verification.md`): BC-1 to
+BC-8 all TRUE, blind, "no difference of truth" (J48's report); its caveat, J48's held item 1: "the confirmation is route-dependent for
+seven of eight claims (both minds composed the same permitted lemmas), so a flaw shared by J45's SI/R-U, T-C or row 98 would be shared
+too". Its corrections (J48 §3.4) are applied in §2.3. **Stage 2 — DONE, certified** (J49, `plans/FS100-KT1-ambrus-ball.md`):
+`m₁(ℝ²) ≤ 0.246989 < 0.2470` [cert + hand]. **FS-97 is absorbed here** (owner ruling on J47's proposal; §9; its stub carries the banner).
+Left in-ban: stages 0, 3, 4 (Kronecker selection, after the crunch, per Kooshi), 5 and 6; P1 from 2026-10-01. **Nothing here is a
+Frontier result: the milestone has not run.**
+
 ## 1. Mission, in plain language
 
 **The field and the prediction.** Colour the points of the plane whose coordinates lie in the real quadratic field ℚ(√47), so that two points
@@ -75,10 +83,10 @@ mind" means one derivation, unchecked.*
 | P1 | "no level at 11 or 19 is four-colourable" (row 75); "the four-colour sign at ℚ(√47)'s usable primes refuses at 23, 31, 43" (row 84, T25); "the tower's Hoffman ratio is `L/(p+1+L)` … at every level" (S1a-P); the dyadic place "is split" (J28D §3.3) | every stable place of ℚ(√47, i), every tower level; so `c` is a residue colouring at no place and no depth | [cert + hand] at 11, 19; [tools exact] at 23, 31, 43; [hand, two derivations] for every level | rows 75, 84; `plans/FS84-S1-derivation.md` §1.3 step 7 |
 | P2 | "No proper four-colouring of `Cay(R, U)` is invariant under a finite-index subgroup `L ≤ R`." | every finite-index period | [hand + cert + tools exact; two derivations (S1, S1V blind)]; **no `[AmbrusEtAl2023]`** | S1 §4.3 claim 2; S1V-4 |
 | P3 | "ℚ(√47)'s plane has no character four-colouring (`Θ₄ = ∅`)" | every `θ ∈ R̂`, colouring `x ↦ ⌊4θ(x)⌋` | [hand; two derivations]; **no `[AmbrusEtAl2023]`** | rows 96, 100 |
-| P4 | "no measurable window four-colouring exists at all" (over ℚ(√47)), with the dyadic split place allowed (row 110's correction) | windows reading finitely many places measurably, proper off a null set (C14′) | [hand, two derivations]; rests on `[AmbrusEtAl2023]` | rows 92, 110 |
-| P5 | **T-J37-1**: "Over ℚ(√47) there is no proper four-colouring of the form `c_t(x) = W(θ(x) + t)` with `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}` Lebesgue measurable, and `c_t` proper for almost every `t ∈ ℝ/ℤ`." | one character of any type, any measurable circle window | **[hand, two minds]** — J37 §3.4 and J46's blind W1 ("TRUE given row 98 and T-C(A), J46-10"; "W1 is now two minds", J46 §3.2); rests on `[AmbrusEtAl2023]` when `θ` has an archimedean part | J37 §3.4; J46 §2.9 |
+| P4 | "no measurable window four-colouring exists at all" (over ℚ(√47)), with the dyadic split place allowed (row 110's correction) | windows reading finitely many places measurably, proper off a null set (C14′) | [hand, two derivations]; rests on `[AmbrusEtAl2023]` ([cert + hand] since J49) | rows 92, 110 |
+| P5 | **T-J37-1**: "Over ℚ(√47) there is no proper four-colouring of the form `c_t(x) = W(θ(x) + t)` with `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}` Lebesgue measurable, and `c_t` proper for almost every `t ∈ ℝ/ℤ`." | one character of any type, any measurable circle window | **[hand, two minds]** — J37 §3.4 and J46's blind W1 ("TRUE given row 98 and T-C(A), J46-10"; "W1 is now two minds", J46 §3.2); rests on `[AmbrusEtAl2023]` ([cert + hand] since J49) when `θ` has an archimedean part | J37 §3.4; J46 §2.9 |
 | P6 | "If `G` is amenable: `Γ` is `k`-colourable ⟺ `Col_k(Γ)` carries a `G`-invariant Borel probability measure" | the existence of `c` is that of an invariant random colouring | [hand; two derivations (S1b-i; S1V-5, which also shows amenability is load-bearing)] | S1 §2.2, §2.3 item 1 |
-| P7 | **T-C(A):** "no translation-invariant Borel probability on `X₄(F)` has spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places, dyadic ones included; so a four-colouring of ℚ(√47)'s plane, if one exists, has an invariant measure on its orbit closure whose spectrum is carried by no `T + A + Fin_S`" | translation-invariant measures; each finite `S` separately | [hand; two derivations at ℚ(√47), J28D and J28V blind]; rests on `[AmbrusEtAl2023]`, FS-66 at 11 and 19, Lemma P, C14.1–C14.3, C14.2 (c) at `q = 2` (J28V and M3) | row 113; `plans/R88-derivation.md` R88-TCA |
+| P7 | **T-C(A):** "no translation-invariant Borel probability on `X₄(F)` has spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places, dyadic ones included; so a four-colouring of ℚ(√47)'s plane, if one exists, has an invariant measure on its orbit closure whose spectrum is carried by no `T + A + Fin_S`" | translation-invariant measures; each finite `S` separately | [hand; two derivations at ℚ(√47), J28D and J28V blind]; rests on `[AmbrusEtAl2023]` ([cert + hand] since J49), FS-66 at 11 and 19, Lemma P, C14.1–C14.3, C14.2 (c) at `q = 2` (J28V and M3) | row 113; `plans/R88-derivation.md` R88-TCA |
 | P8 | **T-C(A)⁺ (J45's A⁺):** "over ℚ(√47), given T-C(A): every `μ`, every finite `S`, some `u` has strict inequality (constant in `u` if `μ` is rotation-invariant)" | as P7 | **[hand, two derivations, given T-C(A)]** — J45 A⁺ TRUE; J46-5 TRUE blind (J45 §5.1; J46 §3.2) | J45 Stage 3; J46 §2.4 |
 | P9 | **Rotation-averaged:** "a four-colouring of ℚ(√47)'s plane, if one exists, has an `R ⋊ U`-invariant measure … whose `U`-invariant spectral measure satisfies `∫_{R̂∖E} Re χ(1) dσ < 0`"; uses T-C(A) only at `S = ∅` | `R ⋊ U`-invariant measures | **[hand; a composition of two-derivation lemmas — P6, R-U (J45; J46-7 blind), A⁺ at `S = ∅` (given T-C(A)) — made by J45 in SP-Cor's proof and re-derived by J46-13 from its statement]**; was J36's "[hand, one mind, sketch]" | J36 F4; J45 §4.1–§4.2; J46 §3.3 |
 | P9′ | **SP-Cor** (J45): "over ℚ(√47), given T-C(A) at `S = ∅`: if every `U`-invariant finite positive `E`-null measure on `R̂` is a Haar multiple, `χ(ℚ(√47)²) ≥ 5`"; R-U: "every finite `U`-invariant measure on `R̂` gives `E_S ∖ (T + A)`, hence `E ∖ (T + A)`, measure 0; every real number field" | the whole remainder at ℚ(√47) is MR | SP-Cor **[hand, one mind + re-derived from its statement]** (inventory row 26); R-U **[hand, two derivations]** | J45 theorems table; J46 §3.3 |
@@ -115,7 +123,7 @@ reading its right side "holds over every real number field", so it would assert 
 
 ### 2.3 The siblings, and the one identity they share
 
-**J38 (ℚ(√59), ℚ(√83), ℚ(√131), four colours) — every theorem [hand, one mind]:**
+**J38 (ℚ(√59), ℚ(√83), ℚ(√131), four colours) — every theorem [hand, one mind; blind-checked TRUE by J48, stage 1]:**
 - **T-J38-1** (§3.4): "Over ℚ(√59), ℚ(√83), ℚ(√131), if `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}` is Lebesgue measurable and `c_t(x) = W(θ(x) + t)` is
   proper for almost every `t ∈ ℝ/ℤ`, then `c_t ∈ Pull` for almost every `t`."
 - **T-J38-2** (§3.5): "Let `F` be of type (B), and assume **T-B1** ('every point of Pull is isolated in `X₄(F)`', R88 §G). Then: (i) `X′ =
@@ -125,21 +133,33 @@ reading its right side "holds over every real number field", so it would assert 
   multiple of Haar measure; (iii) so **MR(F) ∧ T-B1 ⟹ `F(R) ≠ 0`** … **given MR(F), row 88 is equivalent to T-B1.**"
 - **T-J38-3** (§4.7): "*for every real field `F` in T-C(A)'s class or in Theorem C's class S2, MR(F) ∧ Iso(F) ⟹ every four-colouring of `F²` is
   a pullback from a tight place.* Here Iso(F) is T-B1, vacuous when there is no tight place."
+  *J48's correction (§3.4 item 4):* it holds "on each `R`-coset of `F²`", and outside ℚ(√47) and type (B) it rests on the one-mind
+  class forms of T-C and T-C(A).
 
-**J39 (ℚ(√167), five colours) — every theorem [hand, one mind]; `Y` uses J39's notation: `G_v` the full-depth local plane at a stable place,
+**J39 (ℚ(√167), five colours) — every theorem [hand, one mind; blind-checked TRUE by J48, stage 1]; `Y` uses J39's notation: `G_v` the full-depth local plane at a stable place,
 "CP colouring" a translation-invariant random colouring, continuous in probability, proper almost surely at each fixed edge; "thick" means the
 place's compact local piece has mixing constant `λ* < 1/(k−1)`:**
 - **T-J39-3** (§3.2): "Let `N_k(F)` be the finite set of stable places of `F` that are not `k`-thick, and `Y_{F,k} = UD(ℝ²) × ∏_{v ∈ N_k(F)}
   G_v`. If `F²` is `k`-colourable, then **either** (A) `Y_{F,k}` carries a CP `k`-colouring, **or** (B) some `U`-invariant finite positive measure
   `τ` on `R̂` has `τ(E) = 0` and `∫ Re χ(1) dτ(χ) < 0` (an SP witness, so MR(F) fails, J45 SP-oi). Conversely (A) ⟹ `F²` is `k`-colourable. **So,
   given MR(F): `F²` is `k`-colourable iff `Y_{F,k}` has a CP `k`-colouring.**" (every `k`, every totally real `F`)
+  *J48's correction (§3.4 item 1; the theorem unchanged):* step 5's "`R̂_prof = ∏_{stable w} O_{L_w}`" had no input — by Lemma C
+  (FS91-J07-3) the profinite and stable topologies on `R` agree, and by Lemma C′ (FS91-J07-4) `(L⊗ℝ) × R̂_prof` is an open subgroup of
+  finite index of `(L⊗ℝ) × ∏_{stable w} O_{L_w}`, equal to it unless a stable dyadic place is ramified in `L/F` with `R̄₂` proper
+  (ℚ(√5)); there the colouring extends by independent copies on the finitely many cosets. Lemmas C and C′ join its inputs.
 - **T-J39-1** (§3.2): "At `F = ℚ(√167)`, `k = 5`: `N₅(F)` is the four places above 23 and 43 (J21-TH; §2.3), and merging each conjugate pair
   (J21-SL) gives `Y = UD(ℝ²) × G₂₃ × G₄₃`. **The split places 2, 3, 5, 7, 29, 61 do not appear.**"
 - **T-J39-4** (§3.3 (e)): "A four-colouring of ℚ(√167)'s plane yields an SP witness over ℚ(√167); so MR(ℚ(√167)) ⟹ `χ(ℚ(√167)²) ≥ 5`." It
-  "uses neither FS-66 nor Zhang".
+  "uses neither FS-66 nor Zhang". **Re-graded onto two routes (owner ruling on J48's held item 2):** J39's, through `m₁`
+  (`[AmbrusEtAl2023]`), and **J48's, through de Grey's graph** — J48-N4, "`N₄(ℚ(√167)) = ∅`: every stable place of ℚ(√167) is 4-thick,
+  23 by `0.331695… < 1/3` (margin `1.6·10⁻³`)" [tools, rigorous interval arithmetic], so `Y_{F,4} = UD(ℝ²)`, and a CP four-colouring of
+  it would four-colour de Grey's 1581-vertex graph almost surely, which rung B refuses (J48 §2.4). **The de Grey route needs no
+  `[AmbrusEtAl2023]`**; its one numerical input is the 23 margin. BC-3 TRUE [hand + tools]. **J48's corollary (J48-N4cor) [hand]:** "For
+  every totally real `F` with `N₄(F) = ∅` — every stable place 4-thick — MR(F) ⟹ `χ(F²) ≥ 5`".
 - **T-J39-5** (§3.3 (f)): "(i) Unconditionally: `χ(ℚ(√167)²) ≥ 6 ⟹ χ_CP(ℝ²) ≥ 6`. (ii) If MR(ℚ(√167)) holds, 43's all-levels ratio is `< 1/5`,
   and PL(23, 43) holds, then `χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6`." PL(23, 43) is "every CP five-colouring of `UD(ℝ²) × G₂₃ × G₄₃` yields one of
   `UD(ℝ²)`" (§3.3 (b)).
+  *J48's correction (§3.4 item 2):* (ii)'s hypothesis "43's all-levels ratio is `< 1/5`" is used by neither proof and is dropped.
 
 **The shared identity, stated once** (J39 §4.7, verbatim): "For every totally real `F`, MR(F) ⟹ [`F²` is `k`-colourable ⟺ `Y_{F,k}` has a CP
 `k`-colouring]. Its instances are J45-SP-Cor, T-J38-3 (with Iso for rigidity) and T-J39-4." The skeleton: "the Følner step (P4); SI at `k`
@@ -151,7 +171,7 @@ at the tight place; at ℚ(√167), nothing we own. There `Y` contains the plane
 | MR / SP | the whole remainder (SP-Cor) | the remainder, given T-B1 (T-J38-2) | gives `χ ≥ 5` (T-J39-4); at five, reduces to `Y` (T-J39-1) |
 | Kronecker selection | finishes the pure-point layer | "only reaches DP" (J38 §4.7) | "survives as a reduction … does not finish" (J39 §3.4) |
 | the last step | T-C(A)'s count at `S = ∅` | Theorem C and T-B1 | PL(23, 43), 43 at depth (FS-69), `χ_CP(ℝ²) ≥ 6` |
-| `[AmbrusEtAl2023]` | P4, P5, P7, P8, P9 | Theorem C (row 112) | T-J39-4 only (`m₁ < 1/4` at four); not T-J39-3 |
+| `[AmbrusEtAl2023]` ([cert + hand] since J49) | P4, P5, P7, P8, P9 | Theorem C (row 112) | T-J39-4's `m₁` route only; its de Grey route (J48) and T-J39-3 need none |
 
 ### 2.4 Kept apart — measured nulls and readings (these constrain nothing; J37 §3.2)
 
@@ -233,10 +253,11 @@ of which only G-SP is MR's.
 | X-EIF-ℝ | EI-F for the plane: "`α₁(ℝ²) = m₁(ℝ²) ≤ 0.2470`" | registered, no number | J37 §4.3 (b), §4.5 R4 | a proof that `α₁(ℝ²) > m₁(ℝ²)` (this stub's wording; the source names none; "`α₁ ≥ m₁` holds by averaging random congruent copies", J37 §4.3 (b)) |
 | X-EI2 | EI-2 "true over slack fields" | "about 0.4" | J36 §4.1 (c) | J36's falsifier, "a translation-invariant four-colouring over ℚ(√11) whose part off every T + A + Fin_S is anticorrelated at some unit vector" (J36 §4.2), **falsifies EI-2 only through SI's "⟸", a GAP** (§3); the direct falsifier is a random four-colouring over ℚ(√11) with no proper factor colouring continuous in probability at finitely many places |
 | X-R2 | FS-97's (R2) "contains a genuinely open measure-rigidity problem" | 0.6 | `plans/STUB-infinite-place-spectra.md` (J41) | a proof that the unit-distance constraint forces positive entropy on the infinite-type part (J36 §4.1 (c): "One fact would change the ranking") |
-| X-KT1 | KT-1 passes | "high that it passes; the value is the grade, not the answer" | J37 §4.5 R1 | the ball-arithmetic evaluation finding a violated margin (§6 Stage 2) |
-| X-BC | the bundled blind check finds J39's steps 3 and 7 TRUE, 5 and 6 at risk | "high that 3 and 7 hold; medium on 5 and 6" | J39 §4.5 R2 | a FALSE or GAP at step 5 or 6 |
+| X-KT1 | KT-1 passes | "high that it passes; the value is the grade, not the answer" | J37 §4.5 R1 | the ball-arithmetic evaluation finding a violated margin (§6 Stage 2) — **scored: met** (J49, certified; §7's failure clause does not fire) |
+| X-BC | the bundled blind check finds J39's steps 3 and 7 TRUE, 5 and 6 at risk | "high that 3 and 7 hold; medium on 5 and 6" | J39 §4.5 R2 | a FALSE or GAP at step 5 or 6 — **scored by J48:** BC-1 TRUE; steps 3, 6 and 7 hold; step 5 held after a repair of its statement (Lemma C and a finite-index extension, §2.3) |
 | X-PL23 | "every CP five-colouring of UD(ℝ²) × G₂₃ comes from UD(ℝ²)" | hunch, open | J39 §4.6 | "a CP five-colouring of UD(ℝ²) × G₂₃ with fibres not a.s. constant in the 23-adic coordinate, or a finite Hedetniemi failure with a factor of ratio < 1/5 and λ* ≈ 1/3" |
-| X-MR | MR(F) for every real quadratic `F` (uniform), or for ℚ(√47) alone | **unregistered**: the opening registers one, with its uninformative outcome and whether it is reachable (G21) | — | an SP witness over any real field (a `U`-invariant, positive, `E`-null measure with negative mean at 1) |
+| X-MR | MR(F) for every real quadratic `F` (uniform), or for ℚ(√47) alone | **unregistered: the FS-100 planner registers it at stage 0**, with its uninformative outcome and whether it is reachable (G21) | — | an SP witness over any real field (a `U`-invariant, positive, `E`-null measure with negative mean at 1) |
+| X-R1 | FS-97's (R1) "closes by a limit argument" (carried at FS-97's absorption) | 0.3 ("J41's prior, from the records only") | `plans/STUB-infinite-place-spectra.md` | none named there; the planner writes one at stage 0 |
 
 ## 5. §IQ's seed (WORKFLOW 3.3)
 
@@ -260,15 +281,15 @@ of which only G-SP is MR's.
 | stage | what | kind | the default if it does not land |
 |---|---|---|---|
 | 0 | the reframe: §G, §PA, §IQ (WORKFLOW 3.1–3.3) | re-grokking; prior-art gate | — |
-| 1 | the bundled blind check of the posters' one-mind theorems (§6.1) | blind verification | the posters' shared form stays one mind; ℚ(√47)'s route (SP-Cor) is unaffected |
-| 2 | KT-1: `[AmbrusEtAl2023]`'s obligation H4 in ball arithmetic (§6.2) | tools, exact check of an existing certificate | the shared input stays "double precision … not interval-certified" |
+| 1 | **DONE (J48)** — the bundled blind check of the posters' one-mind theorems (§6.1) | blind verification | the posters' shared form stays one mind; ℚ(√47)'s route (SP-Cor) is unaffected |
+| 2 | **DONE, certified (J49)** — KT-1: `[AmbrusEtAl2023]`'s obligation H4 in ball arithmetic (§6.2) | tools, exact check of an existing certificate | the shared input stays "double precision … not interval-certified" |
 | 3 | the MR reading room: the prior-art gate on measure rigidity for this action, read before any derivation (G50) | reading | MR's status recorded as "open, with its nearest literature named" |
 | 4 | Kronecker selection: a derivation and a blind check (§3's statement verbatim) | derivation + blind check | GAP with the missing equidistribution step named |
 | 5 | MR itself: uniform over real quadratic fields first, ℚ(√47) alone as the fallback; the entropy question | derivation, reading room unless a handle appears | a reduction theorem, or "open at the named Furstenberg-type step" |
 | 6 | EI-2 where colourings exist (ℚ(√11)): SI "⟸" as J45's equivalence (SI-5) | derivation | GAP, as now |
 | P1 | post-ban: J37's R4, a triangle-free Dúcz–Varga-type finite `H ⊂ ℚ(√47)²` (EI-F's route) | construction (finite-witness search) | EI-F's prediction unscored |
 
-### 6.1 Stage 1 — the bundled blind check, its fixed claim list (for a brief; Kooshi may run it inside the crunch)
+### 6.1 Stage 1 — the bundled blind check, its fixed claim list — DONE (J48, `plans/FS100-BC-verification.md`)
 
 *Rules for the verifier's brief: blind until its stage 2 is committed — it does not open the three poster records, their reports, this stub, the
 crunch index, or the bodies of commits whose subjects start "J37", "J38" or "J39". It may use as given, by statement: J45's lemma statements
@@ -292,7 +313,7 @@ GAP at a named step; a blind phase that stalls moves to the lemma statements (FS
 at ℚ(√11) with `k = 4` four-colourings exist (C9, row 94), so BC-1 forces branch (A) or an SP witness there — the verifier says which, or
 names what it cannot decide; for BC-5, T-J37-1's own control transposed: "over ℚ(√11) the theorem must fail, and does" (J37 §3.4).
 
-### 6.2 Stage 2 — KT-1, and what its failure would do to each row
+### 6.2 Stage 2 — KT-1, and what its failure would do to each row — DONE, certified (J49, `plans/FS100-KT1-ambrus-ball.md`)
 
 J37 §4.2: "evaluate J26's own covering (`tools/j26_ambrus_check.py`'s points and derived Lipschitz constants) in ball arithmetic. This is an
 exact check of an existing certificate, allowed under the ban, and costs minutes." Current state: "in double precision … not
@@ -313,7 +334,7 @@ Two failures are possible, and they do different things:
 | P5 (T-J37-1) | holds for torsion `θ` ("otherwise S1a suffices", J37 §3.4); loses the case with an archimedean part |
 | P7 (T-C(A)), P8 (A⁺), P9's SP-Cor | lose their input; ℚ(√47)'s route to five through MR is cut at its last step |
 | T-J38-1/2/3, row 112 (Theorem C) | lose their input |
-| T-J39-4 | loses `Y_{F,4}`'s refusal; MR alone no longer gives `χ(ℚ(√167)²) ≥ 5` |
+| T-J39-4 | its `m₁` route loses `Y_{F,4}`'s refusal; the de Grey route (J48) does not, so MR still gives `χ(ℚ(√167)²) ≥ 5` |
 | T-J39-3, T-J39-1, T-J39-5 | unaffected ("*Not used:* FS-66, Zhang, `[AmbrusEtAl2023]`", J39 §3.2); the five-colour real-place fact is Croft's `m₁ ≥ 0.2293` |
 
 "*If it passes,* those three rows move from 'external, double precision' to [cert] on their shared input" (J37 §4.2) — with J45's grades, five
@@ -346,10 +367,10 @@ rows: P4, P5, P7, P8, P9.
   gap layer closes and no colouring is exhibited in it. The report says "not landed" in those words. Stages 1–3 can land while the milestone
   does not.
 - **What each null teaches:**
-  - Stage 1 FALSE at step 5 or 6 → the common form T-J39-3 is unproved; the three fields keep their own routes (J45 SP-Cor at ℚ(√47) and
+  - (Did not fire: J48.) Stage 1 FALSE at step 5 or 6 → the common form T-J39-3 is unproved; the three fields keep their own routes (J45 SP-Cor at ℚ(√47) and
     T-J38-2 at type (B) do not use it; T-J39-4 does, and falls back to T-C(A)'s class form at ℚ(√167), which J36 F7 read as "probably includes
     ℚ(√167) (not checked)").
-  - Stage 2 violated → §6.2's table; inconclusive → the grade stays.
+  - Stage 2 violated → §6.2's table; inconclusive → the grade stays. (Neither fired: J49 certified.)
   - Stage 4 GAP → the equidistribution statement J37 names is the missing input; FALSE → the gap's first control, and the template for a
     ℚ(√47) counterexample.
   - Stage 5 reduces MR to a known open conjecture → the milestone's MR route is a reading room for as long as that conjecture stands, and the
@@ -378,9 +399,16 @@ this paragraph's substance.
 
 **FS-97** (`plans/STUB-infinite-place-spectra.md`) holds "what is left of the measure half: invariant four-colourings whose spectrum reads
 infinitely many split places". Since its minting: its question 3 ("Rotations cannot be averaged in") is answered at type (A) by R-U (Pull is empty
-at ℚ(√47), J36 F4) and reduced to T-B1 at type (B) by T-J38-2; its question 2 is MR (SP ⟺ ¬MR, two derivations); its question 4 is SP-Cor. **This
-stub proposes that FS-97 be absorbed into FS-100** at the next front-page pass, with a banner; its (R1) question at type (B) is reached through
-T-B1 (FS-98). Held for the owner; FS-97's stub is not edited here.
+at ℚ(√47), J36 F4) and reduced to T-B1 at type (B) by T-J38-2; its question 2 is MR (SP ⟺ ¬MR, two derivations); its question 4 is SP-Cor. **FS-97 is
+absorbed into FS-100** (owner ruling on J47's proposal, applied 2026-09-26 by front-page job J25; FS-97's stub carries the banner); its (R1)
+question at type (B) is reached through T-B1 (FS-98), and its priors carry to §4 (X-R2, X-R1).
+
+**Also homed here from J38 (post-close inventory row 35; J38 §4.5 R5, R4):** DP as a named lemma, verbatim: "over a type-(B) field, a
+translation-invariant random four-colouring with a finite-place proper factor colouring is carried by Pull" — the MR-free route for the
+pure-point layer at type (B); and J38's control card (§4.4, rank 2): for an inert dyadic place of norm `Q ∈ {4, 8, 16, 32}`, does `O/4O`
+carry a band-4 character — an exact enumeration once a derivation fixes `O` and the level (standing rule 3's edge). Its evidence is
+T-J38-4 [tools exact] (row 34 of the post-close inventory): "tight dyadic tower of type (B): |S₄|=24, 12 band-4 characters on O/4O (order
+4), none on O/2O; Θ₄(R_F)≠∅, so no type-(B) lattice is the control; level one decides nothing at dyadic towers".
 
 ## 10. Provisional bearings (to be replaced by the re-grokking at the opening)
 

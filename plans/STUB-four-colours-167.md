@@ -1,5 +1,9 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+**Re-aimed at the crunch's close (2026-09-26, J25; post-close inventory row 42, from J39's R4):** "refusing five at ℚ(√167) (χ ≥ 6) needs χ_CP(ℝ²) ≥ 6 modulo MR, PL(23,43), FS-69; FS-59's own χ ≥ 5 waits only on MR (T-J39-4)". T-J39-4 is blind-checked
+TRUE (J48, BC-3) and by J48's de Grey route needs no `[AmbrusEtAl2023]`; MR is FS-100's lemma. J39's ranking line: "the conjecture's widest
+gap, archimedean modulo MR and PL". A five-colouring falsifying "≥ 6" is local at no prime, 43 at depth excepted (FS-69).
+
 **Cross-reference (2026-09-25, J47):** J39 found "MR(ℚ(√167)) ⟹ `χ(ℚ(√167)²) ≥ 5`" (T-J39-4, one mind), so this stub's question waits on the lemma FS-100 carries (`plans/STUB-measure-rigidity-three-fields.md`); the conjecture's "≥ 6" needs `χ_CP(ℝ²) ≥ 6` (T-J39-5 (i)). J39's re-aim of this stub's bearing (its R4) is listed there, §2.5, for the next front-page pass.
 
 **Re-aimed at FS-91's close.** Given CLG_7, `χ_char(ℚ(√167)²) = 8` (row 101; unconditionally `6 ≤ χ_char ≤ 8`): no character colouring with five, six or seven colours exists, so any colouring of this plane with fewer than eight colours — and any falsifier of the prediction "≥ 6" — is one no character gives. The known bracket is `4 ≤ χ(ℚ(√167)²) ≤ 7`.

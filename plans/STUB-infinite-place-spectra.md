@@ -1,5 +1,10 @@
 # STUB — FS-97: invariant four-colourings whose spectrum reads infinitely many places (T-C′, the remainder of row 88's measure half)
 
+> **Absorbed into FS-100 (2026-09-26; owner ruling on J47's proposal, applied by front-page job J25).** Its questions are FS-100's
+> (`plans/STUB-measure-rigidity-three-fields.md` §9): Q2 is MR (SP ⟺ ¬MR, two derivations), Q3 is answered at type (A) by R-U and reduced
+> to T-B1 at type (B) by T-J38-2, Q4 is SP-Cor, and (R1) at type (B) is reached through T-B1 (FS-98). Its priors carry to FS-100 §4. Kept as
+> the record of its minting; demoted, never deleted.
+
 *Minted 2026-09-25 at the close of the milestone "row 88's question" (crunch job J41, from `plans/FS86-row88-close-inventory.md` row 48 and
 J28D's §5.1). Read first: `plans/R88-derivation.md` §2 (R88-TC, R88-TCA) and its §G ("T-C′"); `plans/FS86-R88-D-derivation.md` §5.1;
 `plans/FS86-R88-V-verification.md` §2.1. Solver column: **none** — a derivation question; no finite witness bears on it.*

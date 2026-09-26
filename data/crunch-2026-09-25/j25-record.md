@@ -77,3 +77,34 @@ brief's number: "cert + hand: `m₁(ℝ²) ≤ 0.246989 < 0.2470` — exact on H
   external") names no Ambrus grade; left. Row 113 cites "row 112's inputs" and so inherits the grade without an edit.
 
 **Gates after the stage:** fact audit `--base 82dd14f8` exit 0, PASSED; `--strict` exit 0, PASS; bib audit exit 0, PASS.
+
+## Stage 3 — SAVED (FS-100, the re-aims, FS-97's absorption, their mirrors; brief A.2, A.3)
+
+Applied by `data/crunch-2026-09-25/j25/apply_stage3.py` (plant fired first — every other anchor matched, exit 1, nothing written; a re-run
+refuses, exit 1).
+- **FS-100** (`plans/STUB-measure-rigidity-three-fields.md`): a status block under the header (stage 1 DONE by J48 with its route caveat
+  verbatim; stage 2 DONE, certified, by J49; FS-97 absorbed; what is left in-ban; "Nothing here is a Frontier result"); J38's and J39's
+  theorem lists marked blind-checked TRUE by J48; **J48's corrections** under T-J38-3 (per `R`-coset; the one-mind class forms), T-J39-3
+  (step 5 by Lemmas C, C′ and a finite-index coset extension, the ℚ(√5) exception; the theorem unchanged) and T-J39-5 (ii) (the 43 hypothesis
+  dropped); **T-J39-4 on two routes** (J39's through `m₁`; J48's through de Grey's graph, no `[AmbrusEtAl2023]`) and **J48's corollary**
+  (J48-N4cor, verbatim); P4, P5, P7 and the identity table's Ambrus row marked "[cert + hand] since J49"; §4: X-KT1 scored met, X-BC scored by
+  J48, **X-MR "unregistered: the FS-100 planner registers it at stage 0"**, X-R1 carried from FS-97; §6's stage rows and §6.1/§6.2 headings
+  DONE; §6.2's T-J39-4 row (the de Grey route survives a violated H4); §7's two clauses "did not fire"; §9: FS-97 absorbed, and J38's DP lemma
+  and control card homed here (post-close inventory row 35), T-J38-4 as the card's evidence (row 34).
+- **FS-59**: a re-aim block, post-close inventory row 42 verbatim, J39's ranking line, and "local at no prime, 43 at depth excepted (FS-69)".
+- **FS-96**: the J47 cross-reference replaced by the re-aim, J39's R3 verbatim.
+- **FS-97**: the banner "Absorbed into FS-100 … demoted, never deleted".
+- **FS-98** (`plans/STUB-ultrametric-continuation.md`): re-aimed to T-B1 alone, J38's R1 statement verbatim (post-close inventory rows 34–35).
+- **`plans/FRONTIER-STUBS.md`**: a re-rank paragraph (no rank moved); FS-59's, FS-100's, FS-96's, FS-98's rows; FS-97's row marked absorbed
+  and a closed-list entry.
+- **`CLAUDE.md`**: "Last updated" (the crunch closed, 2026-09-26; FS-100's stages 1–2 ran, FS-97 absorbed — pointers only); the ranked-stubs
+  note; the FS-59, FS-100, FS-97, FS-96, FS-98 rows. **295,923 → 296,569 bytes.**
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| FS-97 keeps rank 13 under an "absorbed" banner; no rank moves | drop it from the table and renumber ranks 14–58 | renumbering changes every group-rank range the fact audit tracks, which needs reviewed ALLOW lines in `tools/claude_md_fact_audit.py` — outside my touch list (J47's slip was exactly that); a banner row is honest and costs nothing | medium — if the owner wants absorbed stubs out of the table, the next re-rank removes the row and adds the ALLOW lines |
+| re-aim FS-98's stub under brief A.4 (inventory rows 34–35) | leave FS-98 untouched (not among "the stubs named above") | A.4 authorises open inventory rows "whose target is a front-page file, stub or index", and rows 34–35 target FS-98 and FS-97's MR home | medium — if the touch list was meant literally, the FS-98 block is one revert |
+| home J38's DP lemma and control card in FS-100 | put them in FS-98 | row 35 says "DP and MR one home in FS-97", and FS-97 is now FS-100 | high |
+| T-J39-4's two routes and J48's corollary go in the stub only | a `LEDGER.md` § B line | nothing from FS-100 enters the Frontier or the ledger before its milestone runs (brief A.6) | high |
+
+**Gates after the stage:** fact audit `--base 82dd14f8` exit 0, PASSED, **no new ALLOW line**; `--dupes` exit 0, **13**.
