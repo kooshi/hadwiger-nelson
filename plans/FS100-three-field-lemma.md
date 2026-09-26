@@ -857,3 +857,202 @@ gains its in-house and in-print addresses (4.3); nothing else there changes.
 **Theorems this stage proved:** none (re-reads and tallies).
 
 **Would have searched here (stage 4):** none.
+
+### Stage 5 — SAVED (J53b: the drafts for the front-page lane; the stub re-aims as files; the inventory closed)
+
+*Every draft below is for a front-page job to apply; nothing here was written into `CLAUDE.md`, `LEDGER.md`, `BIBLIOGRAPHY.md` or
+`plans/FRONTIER-STUBS.md`. The `CLAUDE.md` and `LEDGER.md` drafts are machine-checked by `data/fs100/j53/front_page_drafts.py` against the files
+as they stand: every anchor occurs exactly once, and `CLAUDE.md`'s net is **+2,357 bytes** against the brief's 3,000 (`front-page-drafts.out`,
+exit 0; the plant — an anchor that does not exist — fails, exit 1, `front-page-drafts-plant.out`). The text below is that file's `--markdown`
+output, so the two cannot drift. A front-page job re-runs the check first; an anchor moved by an intervening edit reads `FAIL`, never a silent
+miss.*
+
+#### 5.1 `LEDGER.md` rows 116–118 (the last number is **118**; FS-75's close numbers from 119) and `CLAUDE.md` lines
+
+##### CLAUDE.md
+
+- **item 10 — T-C(A)'s class among real quadratic fields (row 117)** — replace
+  > carried by no `T + A + Fin_S`, `S` finite (row 113). With every
+
+  with
+  > carried by no `T + A + Fin_S`, `S` finite (row 113). Among real quadratic fields that count's class is exactly `L ≥ 5`, `d ≡ 47, 143, 167 (mod 168)` (row 117), so MR would give five at ℚ(√143), ℚ(√311), ℚ(√335) as at ℚ(√47) (FS-100). With every
+
+- **item 27 — Kronecker windows at four colours (row 116)** — replace
+  > over ℚ(√167) lives at nine places; nothing touches `χ_µ(ℝ²)`.
+
+  with
+  > over ℚ(√167) lives at nine places; nothing touches `χ_µ(ℝ²)`. **Kronecker windows at four colours** (row 116; FS-100): selecting one onto its `T + A` characters is false — at a split place a unit vector is integral at one of the two conjugate primes, so the pair sees only a cross, and over a bipartite plane parity times the cross four-colours with no such factor; at ℚ(√47) the selection onto `E = T + A + Fin_S` is the five-clause's pure-point layer itself, open at one density step.
+
+- **G76 — the split-place cross (body)** — replace
+  > torsion orders all fail (rows 97, 102).
+
+  with
+  > torsion orders all fail (rows 97, 102). **For vectors of characters** a split place pairs its conjugate primes into a cross (`ψ_w(u) = 0` or `ψ_w̄(u) = 0` on every unit vector): no naive vector band rigidity, Kronecker selection onto `T + A` false (row 116), and a closed invariant set may be a union of subgroup translates (`[LindenstraussWang2012]`), which a saturation statement must allow.
+
+- **G76 — the split-place cross (Do)** — replace
+  > (one is not enough); when an invariant measure's
+
+  with
+  > (one is not enough); test a statement about several characters against a split place's pair `(ψ_w, ψ_w̄)` first; when an invariant measure's
+
+- **G21 — FS-100's instances** — replace
+  > (every circle is a similarity image of the unit circle).
+
+  with
+  > (every circle is a similarity image of the unit circle). **FS-100's two:** a rank-two control added under the rule that a control proves only its generator's shapes, whose window still read one coordinate, so neither control could fail (row 116); and two plants that could not fire.
+
+- **G50 — FS-100's instance and the Do (owner ruling 3)** — replace
+  > went unsearched. *Do: scan, at the opening
+
+  with
+  > went unsearched. **FS-100's:** EL2021 and `[Wang2012]`, in `BIBLIOGRAPHY.md` since the day before under a journal-year key, were written "none held" in the milestone's stub, carried so into the advisor's card, re-fetched, and one read by its summary. *Do: grep `BIBLIOGRAPHY.md` for a paper's arXiv id and Zbl number before fetching it or calling it unheld; scan, at the opening
+
+- **G72 — the count's total** — replace
+  > **The count so far — eleven of eleven**
+
+  with
+  > **The count so far — twelve of twelve**
+
+- **G72 — the twelfth close** — replace
+  > the three-colour selection not found.
+
+  with
+  > the three-colour selection not found. Twelfth, FS-100 — §IQ's named invariant, the orbit closure of `Θ(U)`, refuted both uniform selection claims and reduced the corrected one to one density step; the class identification by extending a known tool; layer 2's invariant not found.
+
+- **G79 — its first record** — replace
+  > which set counterexample invariants side by side.*
+
+  with
+  > which set counterexample invariants side by side; FS-100's result came from an example's (the cross of an actual four-colouring of ℚ², row 116).*
+
+- **Paths forward — FS-100's row (rank 3; no rank moves)** — replace
+  > stages 1 (blind check, J48) and 2 (KT-1, J49) done — the stub's status block; FS-97 absorbed; next the reframe, MR's reading room, Kronecker selection
+
+  with
+  > its in-ban round ran (the stub's status block): Kronecker selection refuted as stated, its `E`-form open at one density step, which leads the next slot, stage 6 the fallback (row 116); the class is `L ≥ 5` (row 117); MR = its zero-entropy half plus PE-lim (row 118); FS-97 absorbed; P1 leads post-ban
+
+- **Paths forward — FS-64's row** — replace
+  > (rows 92, 96, 101, 110, 112–113; FS-96, FS-98)
+
+  with
+  > (rows 92, 96, 101, 110, 112–113; FS-96, FS-98); four-colour Kronecker windows: the `E`-form open over T-C(A)'s class (rows 116–117)
+
+- **Last updated — FS-100's in-ban round** — replace
+  > FS-100's stages 1–2 ran and FS-97 was absorbed into it (the stub).
+
+  with
+  > FS-100's stages 1–2 ran and FS-97 was absorbed into it (the stub); then FS-100's in-ban round (rows 116–118) — **Paid (theorem); MR not landed** (`plans/FS100-three-field-lemma.md` §R-close).
+
+##### LEDGER.md
+
+- **§ A — rows 116–118 after row 115 (last number 118)** — append after row 115's line:
+
+  | 116 | **Kronecker selection is false as stated, and at ℚ(√47) its corrected form is the question. For a real number field `F`, `R = ℤ[U_F]`, `Θ : R → Tⁿ` and a measurable `W` proper on `Cay(cl Θ(R), cl Θ(U))`, a proper `W′` on the factor `K/K₀` spanned by the `T + A` combinations need not exist: over ℚ, `Θ = (τ + ψ_w, τ + ψ_w̄)` (`τ` the dyadic parity, `w, w̄` above 5) with `W = 2⌊2t₁⌋ + ⌊2t₂⌋` is proper while `K̂′ = 0`; the same over every real field with `χ(F²) = 2`, and at `k²` colours over every real field. The reduction holds in an arithmetic-free form (`C + H = C` in a compact abelian group ⟹ selection to `K/H`); saturation onto `T + A` fails over every real field; and wherever T-C(A) holds, the selection, its form onto `E = T + A + Fin_S` (KS-1_E) and "no Kronecker four-colouring" are one statement, proved for `Θ ∈ Eⁿ` and `n = 1`, open for `n ≥ 2` off `E`** (FS-100; `plans/FS100-derivation.md` FS100-X1, X2B, KS2, KS3, CP, L0, EQ, C45, R). **[hand + tools exact; the counterexample two derivations — J51V blind, J51D's construction committed before any disclosure, its write-up possibly informed — and the owner's check; KS-2, KS-3 and the equivalence two derivations blind to each other; the `k²` form, the `E`-form and the reduction R one mind]** Mechanism: at a split place a unit vector is integral at one of the two conjugate primes (`ι_w̄(u) = ι_w(u)⁻¹`), so `(ψ_w, ψ_w̄)` maps `U` into the cross `(T × 0) ∪ (0 × T)` and `Cay(R, U)` into a co-normal product, `χ(G)²`-colourable [reading, J51V]; at four colours that needs a bipartite plane, so it cannot reach ℚ(√47). The corrected saturation KS-sat_E is equivalent to the density of `Φ(N)` for off-`E` families on neighbourhoods of 1 in `U`, stopped at one named step (uncontrolled poles against the discreteness of `U_{Σ′}`: cut-and-project sums). The plan's controls KS-4, KS-5 could not fail (their window reads one coordinate). **Not claimed:** KS-1_E or KS-sat_E; anything at ℚ(√47) beyond the equivalence; the co-normal reading as the only cheap mechanism. **Prior art (`plans/FS100-three-field-lemma.md` §R-close stage 2):** the counterexample not found; its ingredients textbook — the split norm-one torus `y ↦ (y, y⁻¹)` (FS86-Cx-C1; `[BardestaniMallahiKarai2017]` §3.2) and the co-normal product's `χ(G)χ(H)` bound; the reduction not found, likely folklore; the cross is a union of subgroups, which `[LindenstraussWang2012]`'s topological rigidity allows. | `plans/FS100-derivation.md` §1; `plans/FS100-J51D-derivation.md` §2–§3; `plans/FS100-J51V-verification.md` §2.3–§2.6, §3.2; `tools/j51d_or_check.py`, `tools/j51v_cross.py` | FS-100 (crunch 2026-09-26) |
+
+  | 117 | **T-C(A)'s class among real quadratic fields is the conjecture's `L ≥ 5` family, and SP-Cor holds over it. For `ℚ(√d)` real quadratic: every stable place of `ℚ(√d, i)` has all-levels four-colour ratio `< 1/4` ⟺ `d ≡ 47, 143, 167 (mod 168)` ⟺ `L(ℚ(√d)) ≥ 5`; and over every real number field where T-C(A) holds at `S = ∅`, J45's A⁺ and SP-Cor hold with J45's proofs — so MR(F) ⟹ `χ(F²) ≥ 5` at ℚ(√143), ℚ(√311), ℚ(√335) as at ℚ(√47)** (FS-100; FS100-T1, K0). **[hand + tools exact, one mind (J51), re-derived by J51V (not blind) and J53 (Legendre symbols); K0 hand, one mind (J51V) + a one-step check (J53); both on R88-TCA's class form, one mind outside ℚ(√47)]** The inputs: the dyadic place split iff `d ≡ 7 (mod 8)`; 3 and 7 not stable; FS-66 at 11 and 19; Lemma P at a ramified place; the Hoffman table (31's `1/4 − 2.745·10⁻⁶` the largest) and Weil above. A⁺ at a finite `S ≠ ∅` needs T-C(A) at that `S`, which the class form supplies. ℚ(√167) is in the class; ℚ(√59) and ℚ(√11) are not. **Not claimed:** MR anywhere; the class among fields of higher degree. **Prior art:** the congruence family is G61's (`[Fischer1990]` Thm 10); its identification with T-C(A)'s class not found (J53's gate). | `plans/FS100-derivation.md` §2; `plans/FS100-three-field-lemma.md` §1.4, §R-close 1.1; `plans/FS100-J51V-verification.md` §2.7; `tools/j51_tca_class.py`, `tools/j51v_class.py` | FS-100 (crunch 2026-09-26) |
+
+  | 118 | **Rank one of Kronecker selection, and why Einsiedler–Lindenstrauss's classification does not apply. Over every real number field one character carries the selection (given row 98, a proper window forces a band character, hence `θ ∈ T + A`), and `θ ∈ E ∖ (T + A)` has `cl θ(U) = T`; at `F = ℚ` every `θ ∉ T + A` has `cl θ(U) = T`. No finitely generated `Γ ⊂ U_F` acts irreducibly on the solenoid `R̂` (`R = O′` inverts infinitely many primes, `ℤ[Γ]` finitely many), so EL2021 Thm 1.2 never applies** (FS-100; FS100-N1, T4, T5, T2). **[hand; one mind each — J51V, J51D, J51D, J51]** For general `F` off `E` the rank-one density is a GAP at the field form of FS89's PA-B2 and JC over `R_{F,S}` (row 98's gluing does not transfer). The card's answer [reading, one mind]: EL2021 Thm 1.3 is the in-print positive-entropy statement that can apply, and MR is its zero-entropy half plus an owed lemma PE-lim (from finitely generated `Γ` to `U`); nothing known forces positive entropy from the four-colouring constraint. **Not claimed:** PE-lim; MR; the rank-one density off `E` in general. **Prior art:** the nearest is the topological-rigidity line (`[Furstenberg1967]`, `[Berend1983]`, `[Wang2012]`, `[LindenstraussWang2012]`), whose hypotheses fail here (FS100-T2); T4 and T5 compose held lemmas. | `plans/FS100-derivation.md` FS100-N1, T4, T5, T2; `plans/FS100-three-field-lemma.md` §PA.3 | FS-100 (crunch 2026-09-26) |
+
+- **row 98 — Not claimed (J51V-X2 (c))** — replace
+  > one prime (rows 97, 102); anything kernel-checked.
+
+  with
+  > one prime (rows 97, 102); anything kernel-checked; any vector form — `0 ∉ cl Θ(U)` forces no non-zero `m·Θ` into `T + A` (false, row 116).
+
+- **the claim list — Ours** — replace
+  > Theorem C over the real S2 fields and its ℚ(√47) form (rows 111–113);
+
+  with
+  > Theorem C over the real S2 fields and its ℚ(√47) form (rows 111–113); Kronecker selection refuted as stated, its reduction and its corrected form's reduction to one density step (row 116); T-C(A)'s class among real quadratic fields and SP-Cor over it (row 117); rank one of the selection and the non-irreducibility of the unit-vector group on its solenoid (row 118);
+
+
+#### 5.2 `LEDGER.md` § B lines (15; checked in stage 3 and again in stage 4 — `data/fs100/j53/check-b-stage4.out`, PASS, exit 0)
+
+Append to § B, under the milestone heads' order (the file `data/fs100/j53/ledger-b-draft.md` holds the same lines):
+
+| FS100-L0 | row 116 | `T + A` and `E` pure in `R̂`: `K̂′` a direct summand, `Θ = (Φ, B)` after a unimodular change, `K/K₀ ≅ cl Φ(R)`; properness at `Θ(U)` extends to its closure | hand, two derivations (blind) | `plans/FS100-derivation.md` FS100-L0 | declined |
+| FS100-KS2 | row 116 | KS-2, arithmetic-free: `C + H = C` in a compact abelian `K` ⟹ a measurable proper 4-colouring of `Cay(K, C)` selects to `Cay(K/H, C/H)`; so KS-sat ⟹ Kronecker selection | hand, two derivations (blind) | `plans/FS100-derivation.md` FS100-KS2 | declined |
+| FS100-CP | row 116 | the conjugate-pair dichotomy: at a split place `w w̄`, `ψ_w(u) = 0` or `ψ_w̄(u) = 0` for every unit vector; no non-zero `m₁ψ_w + m₂ψ_w̄` in `T + A` (every real field) | hand; (a) two derivations + tools exact (textbook); (b) one mind in general | `plans/FS100-derivation.md` FS100-CP | declined |
+| FS100-X1 | row 116 | KS-1 (Kronecker selection onto `T + A`) is FALSE: over ℚ, `Θ = (τ + ψ_w, τ + ψ_w̄)` at 5 with `W = 2⌊2t₁⌋ + ⌊2t₂⌋`; every field with `χ(F²) = 2`; no naive vector band rigidity | hand + tools exact, two derivations (J51V blind; J51D's construction before disclosure) | `plans/FS100-derivation.md` FS100-X1 | declined |
+| FS100-X2B | row 116 | the `k²`-colour analogue of KS-1 fails over every real number field (band character plus a split pair: a co-normal product); unavailable at four colours over ℚ(√47) | hand, one mind (J51V) | `plans/FS100-derivation.md` FS100-X2B | declined |
+| FS100-KS3 | row 116 | KS-3 (saturation onto `T + A`) FALSE over every real field (`(ψ_w, ψ_w̄)`: a union of two subgroups); non-vacuous over ℚ(√11), where KS-1 holds, so KS-sat is not necessary | hand + tools exact, two derivations (blind); non-necessity one mind | `plans/FS100-derivation.md` FS100-KS3 | declined |
+| FS100-EQ | row 116 | KS-C: where T-C(A) holds, KS-1 ⟺ KS-1_E ⟺ X (no Kronecker four-colouring); X proved for `Θ ∈ Eⁿ` and `n = 1`, open for `n ≥ 2` off `E` | hand, two derivations (blind); the `E`-form one mind | `plans/FS100-derivation.md` FS100-EQ | declined |
+| FS100-C45 | row 116 | the controls KS-4, KS-5 over ℚ(√11) hold and cannot fail (`W` factors through `π`): uninformative, a G21 control of the wrong shape | hand + tools exact, two derivations (blind) | `plans/FS100-derivation.md` FS100-C45 | declined |
+| FS100-R | row 116 | KS-sat_E ⟺ density of `Φ(N)` for off-`E` families on neighbourhoods of 1 in `U`; stopped at "uncontrolled poles vs `U_Σ′` discrete" (cut-and-project sums) | hand, one mind (J51D) | `plans/FS100-derivation.md` FS100-R | declined |
+| FS100-T1 | row 117 | real quadratic ℚ(√d) is in T-C(A)'s class (every stable place below 1/4 at all levels) ⟺ `d ≡ 47, 143, 167 (mod 168)` ⟺ `L ≥ 5` | hand + tools exact, one mind + two checks | `plans/FS100-derivation.md` FS100-T1 | declined |
+| FS100-K0 | row 117 | J45's SP-Cor and A⁺@∅ hold wherever T-C(A)@∅ holds; so MR ⟹ five colours at ℚ(√143), ℚ(√311), ℚ(√335) | hand, one mind + one-step check; on R88-TCA's class form | `plans/FS100-derivation.md` FS100-K0 | declined |
+| FS100-N1 | row 118 | Kronecker selection at `n = 1` holds over every real field given row 98 (a proper `W` forces a band character) | hand, one mind (J51V) | `plans/FS100-derivation.md` FS100-N1 | declined |
+| FS100-T4 | row 118 | `θ ∈ E ∖ (T + A)` ⟹ `cl θ(U) = T`, every real field (weak approximation) | hand, one mind (J51D) | `plans/FS100-derivation.md` FS100-T4 | declined |
+| FS100-T5 | row 118 | at `F = ℚ`, `θ ∉ T + A` ⟹ `cl θ(U) = T` (PA-B2, VB1, the sweep at an arc); GAP for general `F` off `E` | hand, one mind (J51D) | `plans/FS100-derivation.md` FS100-T5 | declined |
+| FS100-T2 | row 118 | no finitely generated `Γ ⊂ U_F` acts irreducibly on the solenoid `R̂` (`R/ℤ[Γ]` infinite), so EL's Thm 1.2 never applies | hand, one mind (J51) | `plans/FS100-derivation.md` FS100-T2 | declined |
+
+After they land, `python3 tools/fs71_ledger_b_check.py --strict` should read PASS; until then it reads FAIL (15), exactly the fifteen `FS100-` ids
+(`data/fs100/j53/repo-check-stage4.out`).
+
+#### 5.3 `BIBLIOGRAPHY.md` (update two rows and two listings; add three)
+
+- **`[EinsiedlerLindenstrauss2022]`** (update, do not add): role column, append "; FS-100: its Thm 1.2 (EL2003's Thm 1.1) never applies to a
+  finitely generated subgroup of the unit-vector group on `R̂` (row 118), its Thm 1.3 is the in-print positive-entropy statement that can
+  [reading, one mind; J51 §PA.3]"; read column, append "; re-read at §1 by J51, 2026-09-26, from a re-fetched copy (byte-identical, md5
+  `1a32060a…`, removed from the repository at `0c61c274`); §§2–9 unread — FS-100's next slot". Its library-index row is unchanged.
+- **`[Wang2012]`** (update): role column, append "; FS-100: the nearest in print to KS-sat_E's density step (row 116); its hypotheses fail for
+  the unit-vector group (row 118)"; read column unchanged, with "(J51 read only its zbMATH summary on 2026-09-26, not knowing it held)".
+- **The Einsiedler–Lindenstrauss listing row** ("which paper is the nearest was not settled"): append "**FS-100 (2026-09-26):** for MR's
+  positive-entropy half the nearest is EL2021 Thm 1.3 (`[EinsiedlerLindenstrauss2022]`, §1 read); its Thm 1.2 never applies (row 118)."
+- **`[Rudolph1990]` / `[JohnsonA1992]` / `[Host1995]`**: "**Listings only** (J28 §PA.4)" → "**zbMATH reviews only** (J51, 2026-09-26: Zbl
+  0709.28013, 0790.28012, 0839.11030): Rudolph's theorem as EL2021 Thm 1.1 quotes it; Johnson's Theorem A, an invariant measure is Lebesgue or
+  of entropy zero (*Measures on the circle invariant under multiplication by a nonlacunary subsemigroup of the integers*, Israel J. Math. 77
+  (1992)); Host's a normality criterion (*Nombres normaux, entropie, translations*, Israel J. Math. (1995))". Johnson's initials stay unchecked.
+- **New `[EinsiedlerLindenstrauss2003]`** — M. Einsiedler, E. Lindenstrauss, *Rigidity properties of ℤ^d-actions on tori and solenoids*,
+  Electron. Res. Announc. Amer. Math. Soc. 9 (2003) 99–110, Zbl 1068.37002 | **author's summary only** (J51; the AMS PDF returned a bot-check
+  page twice) — EL2021 says its Thm 1.1 is EL2021's Thm 1.2 | not held.
+- **New `[LindenstraussWang2012]`** — E. Lindenstrauss, Z. Wang, *Topological self-joinings of Cartan actions by toral automorphisms*, Duke Math.
+  J. 161 (2012), Zbl 1258.37031 (pages unchecked) | **zbMATH review read in full** (J53, 2026-09-26): closed invariant sets of products are
+  unions of translates of closed subgroups, strong for `r ≥ 3`, not for `r = 2` — KS-3's cross is such a union (row 116) | not held; FS-100's
+  next slot reads it.
+- **New `[BekkaFrancini2022]`** — B. Bekka, C. Francini, *Characters of algebraic groups over number fields*, Groups Geom. Dyn. (2022), Zbl
+  1518.22005 | **title and the review's first lines only** (J51): positive-type functions on `G(K)` via solenoid rigidity; by Bochner a
+  `U`-invariant measure on `R̂` is a `U`-invariant positive-definite function on `R`, so possibly the nearest in print to MR | not held; a
+  prior-art debt of FS-100's next slot.
+
+#### 5.4 `plans/FRONTIER-STUBS.md` (drafts; no rank moves)
+
+- **FS-100's row (rank 3):** as the `CLAUDE.md` Paths-forward draft above; its banner line "stage 4 run in-ban: Kronecker selection FALSE as
+  stated, re-aimed as 4′ (KS-sat_E at ℚ(√47)), which leads the next slot; stage 6 the fallback; P1 leads post-ban". **Solver column:** stages 4′,
+  5, 6 in-ban (derivation, reading); P1 post-ban.
+- **FS-64's row (rank 12):** as the `CLAUDE.md` draft above.
+- **FS-84's provisional-bearings line** (its stub is outside this brief): "FS-100 (rows 116–117): ℚ(√143), ℚ(√311), ℚ(√335) are in T-C(A)'s class
+  and SP-Cor holds there, so FS-84's five-clause route is shared with them; Kronecker selection onto `T + A` is false as stated, and at ℚ(√47) its
+  `E`-form is the pure-point layer of the five-clause (FS-100's stage 4′)."
+- **FS-92's provisional-bearings line** (outside this brief): "FS-100 (row 116; FS100-X1 (c)): no naive vector form of band rigidity —
+  `0 ∉ cl Θ(U)` forces no non-zero `m·Θ` into `T + A`; any classification of character vectors must allow the split-place cross."
+- **The visualization's facts** (inventory row 11; `visualizations/` is outside this brief): tag ℚ(√143), ℚ(√311), ℚ(√335) with row 117
+  (FS100-T1) at the local–global map's next build.
+
+#### 5.5 Stubs written as files; mints and declines
+
+- **`plans/STUB-measure-rigidity-three-fields.md` (FS-100), re-aimed:** the status block rewritten to the in-ban close with the owner's two rulings
+  verbatim; §2.3's "Kronecker selection" cell (J51V §3.4 item 1); §3's selection, with the factor reading (inventory row 12), the counterexample,
+  the "not in the gap" qualifier (row 63), the corrected statement KS-1_E / KS-sat_E and the union-of-subgroups design note; §3's "recalled, not
+  read" answered; §5 item 5 (J51-T1, K0); §6's order and table (stage 4 RUN, stage 4′ leads, stage 6 the fallback); §6.3's "none held" corrected
+  (G50, ruling 3), stage 4's qualifier, **PE-lim as stage 5's derivation**; §6.4 **P1 leads post-ban**; new **§6.5, the next slot**; §7's
+  failure clause scored and its "(not checked)" answered; §4's X-R1 killing test, P-EL and an unregistered X-KS′; §10's bearings from this close.
+- **`plans/STUB-adelic-window-colouring.md` (FS-64), re-aimed:** a head block — Kronecker windows at four colours, the selection's failure over
+  bipartite planes, and the corrected ask (KS-1_E with T-C(A) at every finite `S` closes four-colour Kronecker windows over every field in
+  T-C(A)'s class, inventory row 19), with the five-colour remark [derived, J53b].
+- **No new stub (four parts).** *Choice:* mint none. *Alternative:* a stub for PE-lim (inventory row 18), or one for KS-sat_E. *Why:* PE-lim is
+  FS-100's stage 5 and KS-sat_E its stage 4′ — both questions the FS-100 stub holds, with §6.5 their order; a separate stub would split one
+  milestone's next slot across two files. *Confidence:* high — it changes only if PE-lim is wanted outside FS-100 (for row 88's type (B) via
+  T-J38-2, it is the same MR).
+
+#### 5.6 Inventory ticks (this stage)
+
+Rows 10, 11, 12, 18, 19, 42, 43, 44, 60, 65, 66 ticked; every row of `plans/FS100-close-inventory.md` is now "done" or "declined, with the reason".
+Row 44's three parts: KS-5's wording is in FS100-C45 (stage 3); K0's A⁺ scope is in FS100-K0 and the stub; the brief input list's two slips
+(SP-oi not in J45 §5.4; row 105 does not state `R = O′`, Lemma C′ does) are recorded here and need no file edit.
+
+**Theorems this stage proved:** one remark, [derived, J53b] — the co-normal mechanism cannot give five colours over any field in T-C(A)'s class
+among real quadratic fields (`k² ≤ 5` needs a two-colourable factor; those fields need four, row 82) — recorded in the FS-64 stub, not filed
+(a two-line corollary of FS100-X2B).
+
+**Would have searched here (stage 5):** none.

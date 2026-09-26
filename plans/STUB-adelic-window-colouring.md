@@ -1,5 +1,18 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+**At FS-100's in-ban close (2026-09-26; `plans/FS100-derivation.md`; drafted `LEDGER.md` rows 116–118).** A four-colour *Kronecker window*
+`x ↦ W(Θ(x) + t)`, `Θ : R → Tⁿ`, need not select onto its `T + A` characters: over ℚ, `Θ = (τ + ψ_w, τ + ψ_w̄)` at 5 with `W = 2⌊2t₁⌋ + ⌊2t₂⌋`
+is proper while no non-zero combination lies in `T + A` (FS100-X1, two minds) — over every bipartite plane, and at `k²` colours over every real
+field (FS100-X2B, one mind), because at a split place the two conjugate primes' characters send every unit vector into a cross (FS100-CP). So
+"local at no place" in the `T + A` sense is cheap where the plane is bipartite, and a window colouring's locality must be asked of `E = T + A +
+Fin_S`. **The corrected ask for four colours (inventory row 19):** KS-1_E — selection onto `Γ ∩ E` — with T-C(A) at every finite `S` closes
+four-colour Kronecker windows over **every field in T-C(A)'s class** (FS100-EQ): among real quadratic fields exactly `d ≡ 47, 143, 167 (mod 168)`,
+the `L ≥ 5` family (FS100-T1) — ℚ(√47), ℚ(√143), ℚ(√167), ℚ(√311), ℚ(√335), …. It holds for `Θ ∈ Eⁿ` and at `n = 1` (FS100-N1), and is open for
+`n ≥ 2` off `E`, at FS100-R's density step — FS-100's stage 4′, which leads that milestone's next slot. At five colours the co-normal mechanism needs
+`k² ≤ 5`, i.e. a two-colourable factor, and every field in the class needs four colours (`d ≡ 11 (mod 12)`, row 82), so it is unavailable
+there too [derived, J53b]. **Provisional bearings added:** G76's drafted split-place-cross
+sentence; G21 (a window control that reads one coordinate cannot fail).
+
 **At row 88's close (2026-09-25; `LEDGER.md` rows 111–113).** At four colours over the type-(B) fields, every translation-invariant random four-colouring whose spectrum is carried by `T + A + Fin_S`, `S` finite, is a pullback from the tight place (row 112, extending row 92 from windows to invariant measures of that spectral type), and over ℚ(√47) none exists (row 113); the four-colour remainder is spectra reading infinitely many split places (FS-97) and transient colourings (FS-98). **Carried here, post-ban and Kooshi's call:** the row-88 plan's stage Y2 — `χ_f(ℚ(√59)²)` by an exact LP on layered configurations a derivation fixes first, its dual read back as an identity (`plans/FS86-row88-rigidity.md` §S.3). The five-colour aim at ℚ(√167) is untouched (the count needs every non-tight ratio below `1/k`, and at five the real place's `m₁` exceeds `1/5`, row 92).
 
 

@@ -13,13 +13,23 @@ F2–F5 and §4.1; the two verification records `plans/FS84-SI-D-derivation.md` 
 `plans/FS84-close-inventory.md` rows 23–29. Every statement below is quoted with its address; a quotation is never a substitute for reading its
 source.*
 
-**Status at the crunch's close (2026-09-26, front-page job J25).** **Stage 1 — DONE** (J48, `plans/FS100-BC-verification.md`): BC-1 to
-BC-8 all TRUE, blind, "no difference of truth" (J48's report); its caveat, J48's held item 1: "the confirmation is route-dependent for
-seven of eight claims (both minds composed the same permitted lemmas), so a flaw shared by J45's SI/R-U, T-C or row 98 would be shared
-too". Its corrections (J48 §3.4) are applied in §2.3. **Stage 2 — DONE, certified** (J49, `plans/FS100-KT1-ambrus-ball.md`):
-`m₁(ℝ²) ≤ 0.246989 < 0.2470` [cert + hand]. **FS-97 is absorbed here** (owner ruling on J47's proposal; §9; its stub carries the banner).
-Left in-ban: stages 0, 3, 4 (Kronecker selection, after the crunch, per Kooshi), 5 and 6; P1 from 2026-10-01. **Nothing here is a
-Frontier result: the milestone has not run.**
+**Status at FS-100's in-ban close (2026-09-26, close planner J53/J53b; `plans/FS100-three-field-lemma.md` §R-close, `plans/FS100-derivation.md`,
+drafted `LEDGER.md` rows 116–118).** **Stage 0 — DONE** (J51, the plan: §G, §PA, §IQ, §S, §P). **Stage 1 — DONE** (J48,
+`plans/FS100-BC-verification.md`): BC-1 to BC-8 all TRUE, blind, "no difference of truth"; its caveat, J48's held item 1: "the confirmation is
+route-dependent for seven of eight claims (both minds composed the same permitted lemmas), so a flaw shared by J45's SI/R-U, T-C or row 98 would
+be shared too". **Stage 2 — DONE, certified** (J49, `plans/FS100-KT1-ambrus-ball.md`): `m₁(ℝ²) ≤ 0.246989 < 0.2470` [cert + hand]. **Stage 3 —
+the card answered, the reading owed** (J51 §PA.3): "the first yes, the second no" — EL2021 Thm 1.3 is the in-print positive-entropy statement that
+can apply, Thm 1.2 never does (FS100-T2), and **MR is its zero-entropy half plus an owed lemma PE-lim** [reading, one mind]. **Stage 4 — RUN
+(J51D derivation, J51V blind): Kronecker selection as stated (selecting onto `T + A`) is FALSE** — one counterexample over ℚ found by both minds
+(FS100-X1); the reduction KS-2 is TRUE (FS100-KS2); saturation onto `T + A` is FALSE over every real field (FS100-KS3); at ℚ(√47), given T-C(A),
+the selection, its corrected form onto `E` and the pure-point conclusion are one statement (FS100-EQ), **open at one named density step**
+(FS100-R). **K0 — DONE:** ℚ(√143), ℚ(√311), ℚ(√335) are in T-C(A)'s class, which among real quadratic fields is exactly `L ≥ 5` (FS100-T1), and
+SP-Cor holds there (FS100-K0). **The owner's rulings at the close (verbatim):** "KS-1 is recorded as refuted as stated, with KS-1_E (selection onto
+E = T + A + Fin_S) as the corrected, open statement. FS-100's stage 4 is re-aimed, not closed as a no-go." — "stage 6 (EI-2 over ℚ(√11)) does not
+take the derivation slot; the re-aimed stage 4 (KS-sat_E at ℚ(√47), J51D-R's density step) leads FS-100's next slot, with stage 6 kept as the
+fallback." **The next slot, in order (§6.5):** stage 4′ (KS-sat_E at ℚ(√47)) → stage 5 (the reading room proper, then PE-lim as a derivation) →
+stage 6 only as the fallback; **P1 leads the post-ban plan** (from 2026-10-01). **FS-97 is absorbed here** (§9; its stub carries the banner). **MR
+is not landed; nothing here decides `χ` at any field.**
 
 ## 1. Mission, in plain language
 
@@ -169,7 +179,7 @@ at the tight place; at ℚ(√167), nothing we own. There `Y` contains the plane
 | identity | ℚ(√47), four | type (B), four | ℚ(√167), five |
 |---|---|---|---|
 | MR / SP | the whole remainder (SP-Cor) | the remainder, given T-B1 (T-J38-2) | gives `χ ≥ 5` (T-J39-4); at five, reduces to `Y` (T-J39-1) |
-| Kronecker selection | finishes the pure-point layer | "only reaches DP" (J38 §4.7) | "survives as a reduction … does not finish" (J39 §3.4) |
+| Kronecker selection | onto `T + A` FALSE as stated (FS100-X1); the `E`-part is finished by T-C(A) at finite `S`, rank one by row 98 with T-C(A)@∅ (FS100-N1); the rank `≥ 2` non-`E` part is open and equivalent to KS-1_E here (FS100-EQ) | "only reaches DP" (J38 §4.7) | "survives as a reduction … does not finish" (J39 §3.4) |
 | the last step | T-C(A)'s count at `S = ∅` | Theorem C and T-B1 | PL(23, 43), 43 at depth (FS-69), `χ_CP(ℝ²) ≥ 6` |
 | `[AmbrusEtAl2023]` ([cert + hand] since J49) | P4, P5, P7, P8, P9 | Theorem C (row 112) | T-J39-4's `m₁` route only; its de Grey route (J48) and T-J39-3 need none |
 
@@ -227,6 +237,18 @@ is false (T-J37-4, one line): "take `Θ = (θ₁, θ₂)` with `θ₁` arbitrary
 > `K′ ⊆ T^n`, the closure of the image of `Θ`'s `(T + A(R_F))`-part, and a measurable `W′ : K′ → {0,1,2,3}` proper for the closure of that part's
 > image of `U`. Rank one is T-J37-1. Control: over ℚ(√11) with `Θ = (θ_{C9}, θ₁)`, `θ₁ ∉ E`, W reading only the first coordinate must pass."
 
+**At FS-100's in-ban round (2026-09-26; `plans/FS100-derivation.md` §1).** Read as the factor `K′ = K/K₀` of `K = cl Θ(R)`, with `K̂′ = {m : m·Θ ∈ T
++ A}` (the literal "closed subgroup `K′ ⊆ Tⁿ`" is ill-defined when no coordinate split exists; inventory row 12), the statement is **FALSE**: over ℚ,
+`Θ = (τ + ψ_w, τ + ψ_w̄)` (`τ` the dyadic parity, `w, w̄` above 5) with `W = 2⌊2t₁⌋ + ⌊2t₂⌋` is proper while `K̂′ = 0` (FS100-X1; the same over every
+field with `χ(F²) = 2`, and at `k²` colours over every real field, FS100-X2B). The mechanism: at a split place a unit vector is integral at one of the
+two conjugate primes (FS100-CP), so `(ψ_w, ψ_w̄)` sees only the cross `(T × 0) ∪ (0 × T)`. The FALSE is over ℚ, **not in the gap** J37 §4.3 (d)
+names (its spectrum is in `E_{5}`), so it is not "the first control the gap has ever had" — it is the control every future selection statement
+must be run against (the plan's controls KS-4, KS-5 could not fail, FS100-C45). **The corrected statement, open:** KS-1_E — select onto `Γ ∩ E`,
+`E = T + A + Fin_S`; KS-2 reduces it to KS-sat_E (`s + ann(Γ ∩ E) ⊆ cl Θ(U)` for `s ∈ cl Θ(U)`), and FS100-R reduces that to the density of `Φ(N)`
+for finitely generated `Φ` independent off `E` on neighbourhoods `N` of 1 in `U`, stopped at "uncontrolled poles vs `U_Σ′` discrete" (cut-and-project
+sums) — J37's missing equidistribution, in concrete form. Design note [reading, J53]: Lindenstrauss–Wang's topological rigidity allows closed
+invariant sets that are unions of subgroup translates (the cross is one), so a saturation statement must allow them.
+
 Its tool and its missing input (J37 §3.3 (d) J1): "row 109's mixing selection: delete the coordinates whose characters have Fourier coefficients
 below `1/3` on a measure on `cl Θ(U)`. The missing input is an equidistribution statement for the `U`-values of an infinite-type character —
 stronger than band rigidity, which only says they are not confined to a band." Grade: open; one mind stated it.
@@ -237,7 +259,7 @@ spectrum continuous, so this layer is not disjoint from the first: the first is 
 
 **SP's Furstenberg equivalence, at its verified grade** (§2.2): SP ⟺ ¬MR, **[hand, two derivations], positive reading** (J46-8 above). J36 F5's
 reading of it, [hand, one mind]: "**At type (A), T-C′'s colouring-free form is the zero-entropy Furstenberg-type rigidity problem for `U` acting
-on `R̂`, modulo `E`.**" The positive-entropy half "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)";
+on `R̂`, modulo `E`.**" The positive-entropy half "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)" — read at §1 by J51 (§PA.3): EL2021 Thm 1.2 never applies to finitely generated `Γ ⊂ U` (FS100-T2), Thm 1.3 can, modulo PE-lim;
 "The zero-entropy half is open, as for ×2×3." **At ℚ(√47) MR closes both layers at once** (SP-Cor); Kronecker selection closes layer 1 only.
 
 **The gap at the siblings** (for the instances): at type (B), J38's three pieces "transient; defect processes over a pullback, DP; J37's class
@@ -257,7 +279,9 @@ of which only G-SP is MR's.
 | X-BC | the bundled blind check finds J39's steps 3 and 7 TRUE, 5 and 6 at risk | "high that 3 and 7 hold; medium on 5 and 6" | J39 §4.5 R2 | a FALSE or GAP at step 5 or 6 — **scored by J48:** BC-1 TRUE; steps 3, 6 and 7 hold; step 5 held after a repair of its statement (Lemma C and a finite-index extension, §2.3) |
 | X-PL23 | "every CP five-colouring of UD(ℝ²) × G₂₃ comes from UD(ℝ²)" | hunch, open | J39 §4.6 | "a CP five-colouring of UD(ℝ²) × G₂₃ with fibres not a.s. constant in the 23-adic coordinate, or a finite Hedetniemi failure with a factor of ratio < 1/5 and λ* ≈ 1/3" |
 | X-MR | MR(F) for every real quadratic `F` (uniform), or for ℚ(√47) alone | **unregistered: the FS-100 planner registers it at stage 0**, with its uninformative outcome and whether it is reachable (G21) | — | an SP witness over any real field (a `U`-invariant, positive, `E`-null measure with negative mean at 1) |
-| X-R1 | FS-97's (R1) "closes by a limit argument" (carried at FS-97's absorption) | 0.3 ("J41's prior, from the records only") | `plans/STUB-infinite-place-spectra.md` | none named there; the planner writes one at stage 0 |
+| X-R1 | FS-97's (R1) "closes by a limit argument" (carried at FS-97's absorption) | 0.3 ("J41's prior, from the records only") | `plans/STUB-infinite-place-spectra.md` | written by J51 (plan §P): "a `U`-invariant `E`-null `τ` that is a weak* limit of measures carried by `Fin_S` and is not Haar" — unscored, carried |
+| P-EL | "EL2021 Thm 1.3's hypothesis holds for generic `Γ ⊂ U` on `R̂`" (plan §P) | 0.80 | `plans/FS100-three-field-lemma.md` §P | "a virtually cyclic solenoid factor" — unscored (stage 5 did not run), carried to §6.5 |
+| X-KS′ | KS-sat_E at ℚ(√47) (stage 4′) | **unregistered: the next slot's planner registers it**, with its uninformative outcome (GAP at FS100-R's step, reachable) | — | an off-`E` family `Φ` and a neighbourhood `N` of 1 in `U` with `Φ(N)` not dense |
 
 ## 5. §IQ's seed (WORKFLOW 3.3)
 
@@ -271,22 +295,23 @@ of which only G-SP is MR's.
    Furstenberg-type zero-entropy rigidity." Finding a property of every four-colouring beyond its pair correlations — entropy, a joint window
    statistic, locality — is the milestone. Write "none known" at the opening unless the prior-art gate finds one.
 4. **Its route.** Derivation only; a search never answers EI-2 or MR (it may later check a derived claim, post-ban).
-5. **The open instances it would decide.** ℚ(√47) (and ℚ(√143), ℚ(√311), ℚ(√335) if they sit in T-C(A)'s class: not checked here); row 88 at
-   ℚ(√59), ℚ(√83), ℚ(√131), given T-B1; `χ(ℚ(√167)²) ≥ 5`; FS-64's adelic windows at four colours over ℚ(√47) (Kronecker selection).
+5. **The open instances it would decide.** ℚ(√47) (and ℚ(√143), ℚ(√311), ℚ(√335), which sit in T-C(A)'s class — exactly the `L ≥ 5` family among real quadratic fields, FS100-T1 — and where SP-Cor holds, FS100-K0); row 88 at
+   ℚ(√59), ℚ(√83), ℚ(√131), given T-B1; `χ(ℚ(√167)²) ≥ 5`; FS-64's adelic windows at four colours over ℚ(√47) and every field in T-C(A)'s class (KS-1_E, the corrected selection; FS100-EQ).
 
 ## 6. The shape of the milestone (a provisional outline for the planner)
 
-**Order:** Stage 0 → Stages 1 and 2 together → Stage 3 → Stages 4 and 5 → Stage 6 → close; post-ban P1 from 2026-10-01. Stages 0–6 are in-ban.
+**Order as run:** Stage 0 → Stages 1 and 2 together → Stage 3's card → Stage 4 (the in-ban round, closed 2026-09-26). **Order for the next slot (owner ruling):** Stage 4′ (KS-sat_E at ℚ(√47)) → Stage 5 → Stage 6 only as the fallback; post-ban P1 leads from 2026-10-01.
 
 | stage | what | kind | the default if it does not land |
 |---|---|---|---|
-| 0 | the reframe: §G, §PA, §IQ (WORKFLOW 3.1–3.3) | re-grokking; prior-art gate | — |
+| 0 | **DONE (J51)** — the reframe: §G, §PA, §IQ (WORKFLOW 3.1–3.3) | re-grokking; prior-art gate | — |
 | 1 | **DONE (J48)** — the bundled blind check of the posters' one-mind theorems (§6.1) | blind verification | the posters' shared form stays one mind; ℚ(√47)'s route (SP-Cor) is unaffected |
 | 2 | **DONE, certified (J49)** — KT-1: `[AmbrusEtAl2023]`'s obligation H4 in ball arithmetic (§6.2) | tools, exact check of an existing certificate | the shared input stays "double precision … not interval-certified" |
-| 3 | the MR reading room: the prior-art gate on measure rigidity for this action, read before any derivation (G50) | reading | MR's status recorded as "open, with its nearest literature named" |
-| 4 | Kronecker selection: a derivation and a blind check (§3's statement verbatim) | derivation + blind check | GAP with the missing equidistribution step named |
+| 3 | **the card answered (J51 §PA.3); the reading owed (§6.5)** — the MR reading room: the prior-art gate on measure rigidity for this action, read before any derivation (G50) | reading | MR's status recorded as "open, with its nearest literature named" |
+| 4 | **RUN (J51D, J51V): FALSE as stated; re-aimed as 4′** — Kronecker selection: a derivation and a blind check (§3's statement verbatim) | derivation + blind check | GAP with the missing equidistribution step named |
+| 4′ | **next slot, leads (owner ruling)** — KS-sat_E at ℚ(√47): FS100-R's density step (§6.5) | derivation + blind check | GAP at the named step, sharpened |
 | 5 | MR itself: uniform over real quadratic fields first, ℚ(√47) alone as the fallback; the entropy question | derivation, reading room unless a handle appears | a reduction theorem, or "open at the named Furstenberg-type step" |
-| 6 | EI-2 where colourings exist (ℚ(√11)): SI "⟸" as J45's equivalence (SI-5) | derivation | GAP, as now |
+| 6 | **fallback only (owner ruling)** — EI-2 where colourings exist (ℚ(√11)): SI "⟸" as J45's equivalence (SI-5) | derivation | GAP, as now |
 | P1 | post-ban: J37's R4, a triangle-free Dúcz–Varga-type finite `H ⊂ ℚ(√47)²` (EI-F's route) | construction (finite-witness search) | EI-F's prediction unscored |
 
 ### 6.1 Stage 1 — the bundled blind check, its fixed claim list — DONE (J48, `plans/FS100-BC-verification.md`)
@@ -344,22 +369,39 @@ rows: P4, P5, P7, P8, P9.
 
 - **Stage 3 (reading room first).** J37 §4.1's queries 1, 4, 6 ("model sets over `S`-adic internal spaces; solenoid measure rigidity; `α₁` vs
   `m₁`", its R5), J39 §4.1's queries 1–4, and FS-97's four named papers ("Rudolph 1990, A. Johnson 1992, Host 1995, Einsiedler–Lindenstrauss;
-  none held"), fetched and read before any MR derivation. The prior-art debts already logged: "Einsiedler–Lindenstrauss positive-entropy measure
+  none held" — **wrong when written**: EL2021 was held and part-read as `[EinsiedlerLindenstrauss2022]`, and Z. Wang 2012 as `[Wang2012]`, since
+  2026-09-25 19:30; the other three have zbMATH reviews only; grep `BIBLIOGRAPHY.md` by arXiv id and Zbl number before fetching), fetched and read before any MR derivation. The prior-art debts already logged: "Einsiedler–Lindenstrauss positive-entropy measure
   rigidity on S-adic solenoids: recalled, not read" (J36's report); "MR as solenoid measure rigidity" (J39's report).
-- **Stage 4.** Kronecker selection, §3's statement verbatim, one derivation and one blind verifier. A proof "closes FS-64's adelic windows at
-  four colours over ℚ(√47)"; a counterexample over ℚ(√11) "is **the first control the gap has ever had**" (J37 §4.3 (d)).
+- **Stage 4 — RUN, FALSE as stated (§3).** Kronecker selection, §3's statement verbatim, one derivation and one blind verifier. A proof "closes FS-64's adelic windows at
+  four colours over ℚ(√47)"; a counterexample over ℚ(√11) "is **the first control the gap has ever had**" (J37 §4.3 (d)) — the source's condition
+  is a counterexample *in the gap*; the one found is over ℚ and not in it. **Re-aimed as stage 4′** (§6.5).
 - **Stage 5.** MR: first the uniform form over real quadratic fields (J39 card "does-MR-carry-three-fields"), else ℚ(√47) alone; the question J36
   §4.1 (c) names — does the colouring constraint force positive entropy on the infinite-type part? — and FS-97 Q2's "Is that right, or does the
-  unit-distance constraint force entropy?" A reading room unless a handle appears; its landed form may be a reduction theorem.
-- **Stage 6.** EI-2 over ℚ(√11): J45-SI-5, "under (G2), '`𝒜_S` carries a proper colouring ⟹ equality' holds for every `μ` over `F` iff every `μ`
+  unit-distance constraint force entropy?" A reading room unless a handle appears; its landed form may be a reduction theorem. **At the in-ban
+  close:** its derivation is **PE-lim** (from EL2021 Thm 1.3 at finitely generated `Γ` to all of `U`: positive entropy ⟹ Haar), after the reading of §6.5.
+- **Stage 6 — the fallback only (owner ruling, 2026-09-26).** EI-2 over ℚ(√11): J45-SI-5, "under (G2), '`𝒜_S` carries a proper colouring ⟹ equality' holds for every `μ` over `F` iff every `μ`
   over `F` has equality at `S`" — decide the right side over ℚ(√11), or name its step.
 
 ### 6.4 Post-ban (from 2026-10-01)
 
-- **P1 — J37's R4:** "a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (Dúcz–Varga-type, triangle-free), proving five outright (P10)". It scores X-EIF
+- **P1 — J37's R4 — leads the post-ban plan** (J50's card, branch "first yes, second no"): "a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (Dúcz–Varga-type, triangle-free), proving five outright (P10)". It scores X-EIF
   and X-EIF-ℝ, and it replaces FS-84's stale P-int price (`plans/FS84-close-inventory.md` row 23). Its cost is unknown; price it before any run.
 - **FS-84's own post-ban stages stay in FS-84** — S4 (the colouring side), S2 (the four-class window LP) and S3 (the finite refusal): see
   `plans/FS84-five-colours-47.md` §4.2. They are cross-referenced here, not copied (§9).
+
+### 6.5 The next slot (after the in-ban round; owner rulings of 2026-09-26)
+
+1. **Stage 4′ — leads.** KS-sat_E at ℚ(√47), FS100-R's density step: for finitely generated `Φ` independent off `E` and a neighbourhood `N` of 1
+   in `U` (topology of finitely many places), is `Φ(N)` dense? The named obstruction: `g ∈ N` is controlled at finitely many places, its poles
+   elsewhere are not, and `U_Σ′` is discrete in `∏_{Σ′}`, so the values are sums over a cut-and-project set. State it modulo unions of subgroup
+   translates (§3's design note). One derivation and one blind verifier; **both run FS100-X1 as the control**, with a window that reads the
+   non-`E` coordinates. At ℚ(√47) a proof closes the pure-point layer (FS100-EQ); a FALSE there is a four-colouring of the plane (the
+   conjecture's falsifier).
+2. **Stage 5.** The reading room proper, before PE-lim: `[LindenstraussWang2012]` (not held; zbMATH review read), `[Wang2012]` beyond its read
+   sections, EL2021 §§2–9 (`[EinsiedlerLindenstrauss2022]`), Bekka–Francini 2022 (title and review's first lines only), Rudolph and Johnson at
+   their proofs. Then **PE-lim** as a derivation. The first two bear on stage 4′ too; read them before stage 4′ if the slot allows.
+3. **Stage 6 — the fallback only:** if stage 4′'s step turns out equivalent to a zero-entropy measure statement, stage 6 takes the slot.
+4. **Post-ban, P1 leads** (§6.4).
 
 ## 7. Failure clauses
 
@@ -369,10 +411,12 @@ rows: P4, P5, P7, P8, P9.
 - **What each null teaches:**
   - (Did not fire: J48.) Stage 1 FALSE at step 5 or 6 → the common form T-J39-3 is unproved; the three fields keep their own routes (J45 SP-Cor at ℚ(√47) and
     T-J38-2 at type (B) do not use it; T-J39-4 does, and falls back to T-C(A)'s class form at ℚ(√167), which J36 F7 read as "probably includes
-    ℚ(√167) (not checked)").
+    ℚ(√167) (not checked)" — **checked: yes**, FS100-T1).
   - Stage 2 violated → §6.2's table; inconclusive → the grade stays. (Neither fired: J49 certified.)
   - Stage 4 GAP → the equidistribution statement J37 names is the missing input; FALSE → the gap's first control, and the template for a
-    ℚ(√47) counterexample.
+    ℚ(√47) counterexample. **Fired (2026-09-26): FALSE as stated, over ℚ, not in the gap** — a control for every selection statement, not a
+    ℚ(√47) template (at four colours its mechanism needs a bipartite plane, FS100-X2B); the corrected form is GAP at FS100-R's step, which is
+    stage 4′.
   - Stage 5 reduces MR to a known open conjecture → the milestone's MR route is a reading room for as long as that conjecture stands, and the
     deliverable is the reduction, graded.
   - P1 finds no `H` at its budget → a null at that budget (G21), which does not score X-EIF.
@@ -430,6 +474,10 @@ T-J38-4 [tools exact] (row 34 of the post-close inventory): "tight dyadic tower 
 - **G73** — no cell-local certificate exists at four colours; the averaged and structure-derived formats are the ones left, and MR is an
   averaged statement.
 - **G51** — every result above that is one mind goes to a blind verifier before it is built on (Stage 1).
+- **At the in-ban close (2026-09-26):** G76's drafted split-place-cross sentence (test several characters against `(ψ_w, ψ_w̄)` first); G21's
+  control shape (a selection control whose window reads only one coordinate cannot fail — run FS100-X1); G56 and G38 (a statement quantified
+  over every real field includes the bipartite ones: read the smallest-value sub-class first); G77 (a uniform selection is a classification
+  claim); G50 (grep `BIBLIOGRAPHY.md` by arXiv id and Zbl number before calling a paper unheld).
 
 ## 11. Bearing on χ ≥ 6
 
