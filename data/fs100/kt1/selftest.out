@@ -1,0 +1,33 @@
+--- faithful run on the self-test windows (must certify) ---
+  ok   faithful: exit 0, margin 2.348e-06
+--- plant halfL: L_a halved (must go red for INVALID-LIPSCHITZ, region a only) ---
+  ok   halfL: exit 2, reasons ['INVALID-LIPSCHITZ'], regions ['a']
+  ok   halfL: derived/used == 2 exactly
+  ok   halfL: 0 < margin rise 3.841e-06 <= (L_a/2) * max width / 2 = 3.841e-04
+--- plant notebookL: the notebook's constants 1, 0.1, 0.03 (must be INVALID in all three regions) ---
+  ok   notebookL: exit 2, reasons ['INVALID-LIPSCHITZ'], regions ['a', 'b', 'c']
+--- plant tinyL: L_a / 16 ~ 0.096 < max|W'| ~ 0.15 near t = 0.9 (must be REFUTED by difference quotients) ---
+  ok   tinyL: exit 2, reasons ['INVALID-LIPSCHITZ', 'REFUTED-LIPSCHITZ']
+  ok   tinyL: 0 < 99 refuted cells <= 20736, examples in [0.85, 0.95]
+--- plant target_past_min: target 0.99996 (must be VIOLATED; points below target: True) ---
+  ok   target_past_min: exit 2, reasons ['VIOLATED']
+  ok   target_past_min: 3098 points certified below target
+  ok   target_past_min: margin drop 2.000e-05 == target shift 2.000e-05
+--- plant target_between: target 0.999945 (must be VIOLATED; points below target: False) ---
+  ok   target_between: exit 2, reasons ['VIOLATED']
+  ok   target_between: 0 points certified below target
+  ok   target_between: margin drop 5.000e-06 == target shift 5.000e-06
+--- plant lowprec: 12-bit balls (must be INCONCLUSIVE, exit 1) ---
+  ok   lowprec: exit 1, reasons [], enclosure [-0.20380510455543407, 0.09011204445659701]
+  ok   lowprec: enclosure width 2.94e-01 > guarded 1.29e-21, and the two enclosures overlap
+  ok   faithful supplementary: H5 tail [1.0106668711290507, 1.0106668711290507] > 1, notebook's 0.03 refuted at 1289.72 ([-0.03010999656449587, -0.03010999656449587])
+--- plant h5_w1: w1 lowered by 0.011 (the tail check must fail; its tail must drop by 0.011) ---
+  ok   h5_w1: tail [0.9996668711290506, 0.9996668711290506] not > 1; H4 unaffected (exit 0)
+  ok   h5_w1: the tail's drop encloses exactly 0.011
+--- plant nb_thr: threshold 0.0302 above |W'(1289.72)| ~ 0.03011 (the refutation must NOT fire) ---
+  ok   nb_thr: not refuted at 0.0302; H4 unaffected
+--- plant sel_drop: the exporter's grid with one refined k dropped (must be NOT RUN, exit 3) ---
+  ok   sel_drop: NotRun (regenerated grid sha256 319c36466e734066… (n = 493421) != th…)
+
+SELF-TEST OK: the faithful windows certify, and every plant fired for its own reason with its bounds
+12.65 s wall, 36.84 s user, 102344 KB

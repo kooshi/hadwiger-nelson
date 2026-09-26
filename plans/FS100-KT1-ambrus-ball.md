@@ -92,3 +92,45 @@ The covering inequality is sound for any Lipschitz bound `L` on `[a, b]`: for `t
   the squared distances, regenerates the points in Python floats (the same IEEE operations as numpy) and **asserts the point list's
   sha256 equals the exporter's**, then runs §1.4. The selection step (scipy, double precision) chooses *where* the grid is fine; it is not
   a certification step — any grid gives a sound covering — so it needs no enclosure.
+
+## Stage 2 — SAVED: the ball-arithmetic checker and its controls
+
+**Files.** `tools/fs100_kt1_grid.py` (system `python3`; imports `tools/j26_ambrus_check.py` read-only) → `data/fs100/kt1/j26-grid.json`;
+`tools/fs100_kt1_ball.py` (`build/venv-flint/bin/python`; flint + stdlib). The exporter reproduces J26 exactly: "ok len(sel) == 2629", "ok
+J26 worst lb 0.999942348 reproduced", "ok J26 worst cell [3.77488, 3.77489] reproduced"; **493,471** unique points (not ~640,000: the
+refined 201-point grids of adjacent `k` overlap), sha256 `2ec0c4f6ec5e10f8…`, which the checker regenerates in Python floats bit for bit.
+
+**What the checker does** (§1.4, implemented): `W(t)` as an arb ball at every point, from exact weights (`g23.csv`), exact squared
+distances and arb's `J₀`; the constants re-derived by J26's formulas with enclosures — `Λ₁ = 0.58186522429…` (grid on `[0, 10]` step
+10⁻³, 37 cells re-cut at 10⁻⁵, remainder `h²/8`; tail `C/√10`), `C ≤ 0.79936575579`, `d_min ≥ 0.2149367` (every `d² > 1/100` certified),
+giving `L_a ≤ 1.536536086806`, `L_b ≤ 0.177256630507`, `L_c ≤ 0.056053468277` (J26's floats: 1.53653608678, 0.177256630507,
+0.0560534682769 — agreement to the printed digits; the certified `L_a` is larger by ~2·10⁻¹¹, from the `h²/8` term); every cell's
+`LB` computed exactly (Fractions) from the balls' endpoints; a necessary-condition check that no cell's difference quotient certifiably
+exceeds its constant; point values certified below target counted separately. **Precision: 80 bits.** Justification: the largest Bessel
+argument is `10⁴ · 2.291 ≈ 2.3·10⁴`, so an input radius of `2.3·10⁴ · 2⁻⁸⁰ ≈ 2·10⁻²⁰` per term, 27 terms, weights `|w| < 1.1`: a
+predicted `W` radius near 10⁻¹⁸, twelve orders below the double-precision margin 2.3·10⁻⁶; observed on the self-test windows: max
+radius **7.3·10⁻²²**. Runtime 1.4 s for 20,856 points on 4 workers, so the full grid is about 30 s on 16.
+
+**Supplementary, beside H4 (not in its exit code):** S-H5, the tail `t > 10⁴`, by eq. (23) with a zero of `J₁` isolated in
+`[999.8114, 999.8116]` by a certified sign change and `|J₀|` enclosed over that interval; S-NB, whether the notebook's "Derivative is
+less than 0.03" on `[1000, 10⁴]` is certifiably false at `t = 1289.72` (the point from a double-precision scan of `W′`, max `|W′| ≈ 0.030110`
+there — a measurement; the claim is then one ball).
+
+**Controls** (`--self-test`, `data/fs100/kt1/selftest.out`, exit 0, 12.7 s; on the windows `[0.85, 0.95] ∪ [3.70, 3.85]`, 20,856 points,
+containing J26's worst cell). Each plant's reason and two-sided bound are asserted:
+
+| plant | must | result |
+|---|---|---|
+| none (faithful) | certify | exit 0, margin 2.348·10⁻⁶ |
+| `halfL` (`L_a` halved) | red for INVALID-LIPSCHITZ, region `a` only | exit 2, `['INVALID-LIPSCHITZ']`, `['a']`; derived/used = 2 exactly; `0 <` margin rise 3.841·10⁻⁶ `≤` 3.841·10⁻⁴ |
+| `notebookL` (1, 0.1, 0.03) | INVALID in all three regions | exit 2, `['a', 'b', 'c']` |
+| `tinyL` (`L_a/16 ≈ 0.096`) | REFUTED by difference quotients near `t = 0.9` | exit 2, 99 refuted cells `≤` 20,736, examples in `[0.85, 0.95]` |
+| `target_past_min` (0.99996) | VIOLATED, points below target | exit 2, 3,098 points below; margin drop = target shift 2·10⁻⁵ exactly |
+| `target_between` (0.999945) | VIOLATED, no point below target | exit 2, 0 points below; drop = shift 5·10⁻⁶ exactly |
+| `lowprec` (12 bits) | INCONCLUSIVE | exit 1; enclosure width 0.294 > 1.3·10⁻²¹; the two enclosures overlap |
+| `h5_w1` (`w1 − 0.011`) | the tail check fails, H4 unaffected | tail 0.99967 not > 1; the drop encloses 0.011 exactly |
+| `nb_thr` (threshold 0.0302) | S-NB must not fire | not refuted |
+| `sel_drop` (one refined `k` dropped; `data/fs100/kt1/j26-grid-plant-sel_drop.json`) | NOT RUN, exit 3 | sha256 `319c3646…` (n = 493,421) ≠ `2ec0c4f6…` |
+
+CLI failure paths read directly: `--plant target_between` → exit 2 with a stderr banner; the planted grid → exit 3 with a banner;
+`--plant lowprec` → exit 1 with a banner. Success prints one line.
