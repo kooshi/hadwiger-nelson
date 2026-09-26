@@ -65,3 +65,54 @@ the §G21 pointer ("the third, and the rest") sits after FS-81's items, so it do
 earlier in the paragraph; and G68 ("row 81; G21") and G73 ("G21's one-period census") address M2 by its old place (stage 2).
 
 Would-have-searched log: none.
+
+## Stage 2 — SAVED: the judgement, passage by passage
+
+**The test** (E1's brief's standard): a removed passage is **intrinsic** if it carried a rule's only statement, a *why*, a condition, a
+*Do* line, a killing test, a demotion record, the rule's only example (the one that best shows the failure), or a current-state fact
+the Frontier or a grokking reasons from; otherwise, if its lesson is stated elsewhere in `CLAUDE.md` (or in `WORKFLOW.md`, which
+`CLAUDE.md` imports), it is a second or later instance — **incidental**. When unsure, intrinsic. `[PROTECTED]` text: none touched (the
+fact audit's byte-identity check of both PROTECTED regions passes at `aeef4e58`, and no span lies in them).
+
+### What E1 removed
+
+| passage (E1's id) | bytes | verdict | reason |
+|---|---:|---|---|
+| G21, "**And a periodic search measures its period cap**" … `N ≤ 120`. (M1) | 349 | **INTRINSIC — restore** | a bold rule statement found nowhere else in `CLAUDE.md` (G68's "an UNSAT … at one `N` proves nothing" is the one-period screen, not a search stopped at a cap), and it is the **failure** the next, kept sentence answers: "Read a solver's colouring before searching its periods" names the period 23 that this search, stopped at `N = 20`, missed. Without it the kept rule keeps its remedy and loses the failure it prevents. E1's reason ("a second instance of G21's own rule") would move FS-81's relation tree too, which E1 kept as a rule's only statement; the two have the same form |
+| G21, "**And a one-period census measures its period**" … measures that point. (M2) | 452 | **INTRINSIC — restore** | it carries a *why* stated nowhere else — "a finite set of periodic colourings can only ever pin a full-rank group", which is why a one-period census cannot show rigidity — and its rule's only failure example (4,490 Kempe-rigid orbits read as rigid; `P = F = 0`). Two grokkings address it by its place: G73 "(row 81; G21's one-period census)" and G68 "(row 81; G21; …)". G73's *Do* keeps the remedy (compute `Θ_k` cells), not the why |
+| G21, "; and **a finite configuration measures its depth**" … "(row 126)." (M3) | 2,160 | incidental | every lesson in it is stated elsewhere: the finite configuration and FS81-T8 in G74's *Do* ("a finite configuration holds points the field does not (FS81-T8 …)") and G61's *Do* (`d < 21·5^{K−1}`); the rank-1 scan and the proof "checked by its points" are G21's head sentence (a check measures the check); plants that could not fire, a wrong-reason red, a positive control of the wrong shape — "Make the gate fail"; "quote a statement verbatim in a brief" — G51's standing rules; FS-89's blind verifier — G51's "Its runs" (the same event, "a verifier checks a fixed statement"); existence paraphrased as classification — G77. No demotion record: "Wave 3b's" is an owner slip whose result is row 126 |
+| G49, "**FS-79's instance, the question itself:**" … "the day it was needed." (M5) | 1,329 | incidental | instances of G49's head ("for the question as well as the method"; "in the discipline's words") and *Do* ("a held paper is prior art for questions it was not read for"), whose kept example is FS-71's six re-attributions; the question rule's example stays in G49's opening (Theorem B's value in print since 1994) and in `WORKFLOW.md` 3.2 item 3. The attributions it names (`[Ellenberg2018]`, `[KlotzSander2017]` Thm 4.2, GRR 2017) are in the "Not ours" list and item 20 |
+| G50, "**FS-79's instances:**" … "went unsearched." (M6) | 1,526 | incidental | instances of G50's rule; the kept examples are FS-100's (the *Do*'s: "none held" written for held papers; "one read by its summary") and the EL2021 debt, and `WORKFLOW.md` 3.2 item 6 has "an abstract is not a reading" with its own example. The one current-state debt in it, Nešetřil–Rödl "still unchecked", is tracked in `BIBLIOGRAPHY.md` (line 772, "unchecked"); Puzynina "not held" is a bibliography status, and G75 keeps Puzynina's role |
+| G50, "**FS-100 stage 5's:**" … polynomial growth"). (M7) | 369 | incidental | its mathematics is two *Do* lines on disk — G76's "run Einsiedler–Fish's pigeonhole with the product formula before calling a measure question ×2×3-hard" and the next grokking's "count the group's elements by height before calling it ×2×3-hard"; its method lessons are G49's head (discipline's words) and G21's (a zero is not support). "MR is ×2×3-hard" was never a grokking's claim, so no demotion record is owed. Its last sentence (EL2021 fetched a third time; §2 unread) stayed, now under FS-100's, where it reads true |
+| G72, the per-milestone count (M8) | 2,389 | incidental | the killing test's data; its state ("twelve of thirteen") and the one exception (the thirteenth) stay. The owner ruling inside it ("Kooshi declined: 'yes', no-gos count", 2026-09-24) is Frontier item 23's, verbatim in substance ("no-gos count") |
+| Frontier, "**Not ours:**" list (M9) | 4,640 | incidental — the owner's named incidental | E1's brief names it. `LEDGER.md`'s preamble said it "stays in context against misclaims" (J05): a *why* for keeping it loaded. E1 kept that why as an instruction in the pointer ("read it before calling anything ours"). Verdict: the design is the owner's; the why survives as a *Do*. E1's held item (1) stands for the owner |
+| Frontier, paths-forward ranks 30–59 (M10) | 4,843 | incidental — the owner's named incidental | every row is in `plans/FRONTIER-STUBS.md` with every fact token (stage 1) except the reviewed allowances. **One finding:** FRONTIER-STUBS's FS-17 (rank 44) and FS-65 (rank 34) rows still read `α(Γ₂₃) ≤ 105`; the removed `CLAUDE.md` row had `≤ 97` (FS-66's certificate). The fact stays in `CLAUDE.md` (Frontier item 17), so nothing is lost, but the stubs' rows are stale — owed to FRONTIER-STUBS |
+| § Building, "(b) The repair attempt …" (M11) | 343 | incidental | the rule it illustrates, "never through a pattern that can match the killing shell", keeps its example in the next sentences (the `/proc/*/cmdline` scan "matched its own pattern … and killed its own process group") and in "Make the gate fail" ("a `grep` that killed its own shell"). Side effect: "Make the gate fail" still says "the self-match rule is on this page with eight instances"; one is now a pointer (a count of history; not restored) |
+| header, "(nothing lost, across both files)" → "across the three files" | 4 | a rewrite, current state | correct: the audit now reads three files |
+| glue g1, "P3b typed" → "P3b (FS-79) typed" | +8 | revert with M2 | E1 added the milestone because M2's cut removed "(FS-79, row 81)" from the sentence before; restoring M2 restores the original words |
+
+**Restorations owed: M1 and M2** (801 bytes of text, with g1 reverted: `CLAUDE.md` +793 bytes net), back into G21 at their original
+place, word for word from `230ea964`, and their two blocks removed from `plans/GROKKING-INSTANCES.md` §G21, where they would otherwise
+be duplicates.
+
+### What E1 kept — the other direction (reported, not acted on: E2 restores, it does not move)
+
+| kept passage | E1's reason | E2's verdict |
+|---|---|---|
+| G21: M63 phase G's four defects; "the mechanism is selection" | the rule's example and reasoning | agree — intrinsic |
+| G21: FS-71's census, "a conclusion with no chain is the shape to re-derive first" | only statement | agree |
+| G21: "Read a solver's colouring before searching its periods" + the Fourier example | only statement | agree (and see M1) |
+| G21: P3b, "a control at the scale of the question" | a condition on "point every instrument at a known positive" | agree — the condition is stated nowhere else |
+| G21: FS-81's relation tree ("the screen runs first … UNDECIDED, never NONEMPTY") | only statement | agree |
+| G21: FS-81's **contended times** ("re-asked alone"), 181 B | only statement | **disagree — over-kept.** Its rule is stated twice already: § Two machines ("Measure in CPU seconds (user + sys), minimum of three runs") and "Make the gate fail" ("a contended-wall timing used as a quiet-CPU cost (1.59×)"); its number (463 s quiet) is G65's. A second instance |
+| G49: two-database zero; FS-73's held Polymath16 text; `ab:` limit | sub-rules with their only example | agree |
+| G49: row 88's first half, "C14.2 (c) is `[BardestaniMallahiKarai2017]` §3.2 … never carried to the lemma", 130 B | kept with the `ab:` half | **disagree — over-kept.** An instance of the *Do*'s "a held paper is prior art for questions it was not read for", whose kept example is FS-71's six re-attributions; only its `ab:` half is a sub-rule |
+| G50: FS-100's example and the EL2021 debt | the *Do*'s example; a current debt | agree |
+| G72: "twelve of thirteen" and the thirteenth | the killing test's state and its one exception | agree |
+| G79: the killing-test record ("First test: … row 126"), ≈ 870 B | inside the *Killing test* span | **defensible, inconsistent with M8.** It is the same kind of text as G72's per-milestone list, which moved; but G79 has no summary tally, so the record is the only statement of its killing test's state. Moving it needs a one-line tally first (owner's call) |
+| G67's first data points; G71's, G74's killing-test status | inside the *Do* span | agree — the status of a falsifier is state |
+| G51's "Its runs" | readings and the standing rules they left | agree; its per-run counts ("de Bruijn 2, Coxeter 1, Poros 0") are small history |
+| § Building: Sixth instance; `$!`'s shell; (a) the wrong pgid; `/proc` scan; pipes; script edits | each its sub-rule's only example | agree |
+| § Building: Ninth instance (`flock` wrapper) | only example | borderline: its mechanism is `$!`'s (killing a parent leaves the child), but "verify … the lock free" is a condition stated nowhere else — keep |
+| "Make the gate fail": every paragraph | each a distinct rule with its only example | agree, walked paragraph by paragraph; two carry more than one example ("carry what it MEASURES", three rulings; "exactly ONE thing may differ", two) — kept, since each list is the evidence its head sentence counts |
+| § What compute actually helps: M2's and FS-75's re-pricings | a condition | agree — M2's adds "grep Mathlib by the statement's shape", FS-75's that even the two-leaf re-price ran high |
