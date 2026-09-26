@@ -149,3 +149,49 @@ independently (my stage 1 records the timeline).
    (wanted-poster §3.2, J48, X21D §4, X21V §2.7–2.9) and J21-MX's proof until stage 3; the stubs, reports and records listed.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — the claim list read (`data/fs103/claims.md`, `694b7992`); advice sent
+
+**What the planner adopted** (its message; decisions in `plans/FS103-collapse-cp-plane.md` §Stage 5): my items 1–7 and 9–10 of stage 2; item 8
+in part — ℚ(√635087) is verified first, C-MR16 stays in V2's list as a one-mind first walk at degree 16, the headline held for the owner.
+
+**Advice sent (two messages):**
+1. **Fence / anchoring — the main disagreement.** The claim file sets the sub-claims C-EXTk, C-APX, C-THKDEL and C-MERGE-n beside C-LB6's
+   wrong-reason lines (iv)–(vi) and I-MX's selection formula. Together they lay out the load-bearing step's whole route, so a "blind"
+   derivation becomes a checking reading of the planner's decomposition (row 117's precedent), and a fresh mind no longer has to find the
+   pitfalls itself. Proposed: two files. The top-level claims, definitions, inputs and controls stay in `claims.md`. The sub-claims and all
+   wrong-reason lines go to `claims-sealed.md`, opened after each verifier commits its stage 3, and each verifier then scores the sealed
+   decomposition against its own. If the planner keeps them, its plan should say that the step's blind content is "the CP/infinite-product
+   transposition of a held lemma".
+2. C-LB6 at `k ∈ {4, 5, 6}`, so C-635-F1's `χ ≥ 5` does not silently need row 123.
+3. C-THKDEL's control is degenerate (`H` trivial forces a loop). A non-degenerate one: `H = ℝ`, `T_H = {±1, ±√2}`, `K = ℤ/2`, `ν = δ_1`,
+   `k = 2`. There `λ* = 1`, `H × K` is CP-2-colourable, and `H` is not.
+4. CTL-K7-6: "stops at `N₆ = ∅`" should read `N₆ ≠ ∅`.
+5. C-S (c): my registered expectation is that the family is **not finite at full depth**, because ramification over `ℚ_p` is unbounded
+   for a fixed residue field. It is finite at most up to level-one type.
+6. C-MR16: last, and optional within budget.
+7. C-635-PL: 2 is ramified in `F/ℚ` and split in `L/F`; "2 splits" is the wrong-reason reading.
+8. C-THKDEL, checked by me (one mind, not a verifier): right as stated, with `λ*(⊗ν_v) = sup_v λ*(ν_v)` holding with equality. The
+   wrong-reason line it lacks: the stationarity of the fibre integrals of a measurable **modification** must be argued, because they are
+   functionals of uncountably many coordinates.
+9. Forbid inputs by file and section, not by lemma name: "MXcp" and "EXT" are a two-word route.
+
+### Hunch ledger (additions)
+
+```
+hunch: cs-family-not-finite-at-depth
+  claim: the local graph types G_v, v ∈ N₆(F), over all totally real F, are infinitely many at full depth (finite at most up to level-one type)
+  basis: derived
+  falsifier: a proof that CP k-colourability of UD(ℝ²) × ∏ G_v depends only on the level-one targets
+  registered: 2026-09-26
+  status: open
+
+hunch: sealed-lines-change-the-verdict-texture
+  claim: verifiers who read the wrong-reason lines before deriving name no pitfall outside the planner's list
+  basis: prior
+  falsifier: a verifier with the lines in view naming a pitfall the planner's list lacks
+  registered: 2026-09-26
+  status: open
+```
+
+## Stage 3 — SAVED
