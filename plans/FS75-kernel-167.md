@@ -611,3 +611,43 @@ falsifier did not fire; the hunch's status moves from open to supported (one min
   needed for the full criterion (FS81-T2's route), not for any relation-branching certificate. Its status: "open; J52K running" once launched.
 - `plans/FRONTIER-STUBS.md` row FS-75: the same one line.
 - `BIBLIOGRAPHY.md`: nothing new.
+
+## §R-close — FS-75's minimal instance, closed (crunch job J54, de Bruijn, Opus 5.5, 2026-09-26)
+
+*WORKFLOW step 9 for the milestone "FS-75's minimal instance: `χ(ℚ(√167)²) ≥ 4` in the kernel", from
+`data/crunch-2026-09-25/briefs/J54-FS75-close.md` (templates: J41's brief and M2's §R-close, `plans/M2-kernel-lane.md`; with
+`STANDING-RULES.md`). The inventory is `plans/FS75-close-inventory.md`; the derivation file (kernel register and entries) is
+`plans/FS75-derivation.md`; working files `data/fs75/j54/`. A kernel milestone: no §IQ. The gate was re-run by the owner at J52K's end
+(inventory 31) and is not re-run here (no Lean is built by this job). Drafts for `LEDGER.md`, `CLAUDE.md` and `plans/FRONTIER-STUBS.md`
+live here only; a front-page job applies them with FS-100's.*
+
+### Stage 1 — SAVED (the quotation check; the inventory walk opened)
+
+**1a. The quotation check (standing rule 5).** Every quotation and every stated number in J54's brief, against its source:
+
+| # | the brief's text | source | verdict |
+|---|---|---|---|
+| Q1 | "a kernel leaf priced after a fine obligation pass is priced high" | `CLAUDE.md` line 1548 (on disk, after J05's compression): "**A kernel leaf priced after a fine obligation pass is priced high** (FS-73)" | verbatim (capital A in the source) |
+| Q2 | `four_le_chromaticNumber_planeOver_sqrt167`, `four_le_chromaticNumber_planeOver_of_sqrt167_mem` (`…/Instances/SqrtOneSixSeven.lean`) | that file, lines 37 and 43 | present |
+| Q3 | `ThreeColour.nonempty_winding`, `ThetaCert.Cert.isEmpty_winding`, `ThetaPlane.four_le_chromaticNumber_of_cert` | `ThreeColour.lean:257`, `ThetaCert.lean:336`, `ThetaPlane.lean:83` | present |
+| Q4 | "`Sqrt167.cert_check` by `decide +kernel` in 12.22 CPU s at 5.49 GiB" | `plans/FS75-K-kernel-167.md` Stage 4 table: "**12.22 s** \| 5.49 GiB (5,753,076 KB)" | matches (instance module; the literal module is a further 7.12 s, 2.09 GiB) |
+| Q5 | "the job took about 45 minutes against a planned 4.5 hours" | K record §5.5 P-price: "23:46 to 00:30, about 45 minutes to a green gate"; plan §S.0: "**Total ≈ 4.5 h at plan rates**" | matches; by commit times the launch (`147412fe`, 23:46) to the report (`5e4c22a4`, 00:33) is 47 minutes |
+| Q6 | "both audited hypotheses shown necessary (J52K record §5.1)" | K record §5.1: "**Both hypotheses are necessary, not merely used**" | matches |
+| Q7 | "`Σ_j min(r_j, 2r_j) ≤ 3W(r)`" | K record, "Theorems this phase proved": "`Σ_j min(r_j, 2r_j) ≤ 3W(r)`" | verbatim |
+| Q8 | "FS-100's close took 116–118"; "FS-100's drafts add about 2,400 to 283,904" | `data/fs100/j53/front-page-drafts.out`: "rows 116–118 … (last number 118)", "CLAUDE.md: net +2357 bytes"; `wc -c CLAUDE.md` = 283,904 | matches |
+| Q9 | "J52's 16 bears" | plan §G.4 item 5: "of the 16 grokking bears" | matches (grokkings only; rows 7 + § B 4, method rules 53 are separate) |
+| Q10 | "It is red now on the 15 FS100 ids" | `python3 tools/fs71_ledger_b_check.py --strict`, exit 1: "RESULT: FAIL (15)", all 15 lines FS100 | matches |
+| Q11 | "`tools/j52_intcert.py` needs `(d, D)` parameters first" | K record §5.4: "it is hard-wired to `d = 167`, `D = 420`" | matches |
+| Q12 | "ℚ(√47)'s tree is a `θ`-space tree, not V2's relation-branching format" | K record §5.4 | matches |
+| Q13 | "The owner re-ran the gate at the milestone's end (build, axioms, vacuity, architecture)" | inventory row 31 | matches |
+| Q14 | J52's §P ids "P-elem, P-tree, P-price, P-check, P-47fmt, P-60"; J50's hunch `leaf-one-is-elementary` | plan §P; `plans/POROS-2026-09-26-next-two-milestones.md` lines 217–223 | all present |
+| Q15 | "M2's rows 103–107 are the precedent for kernel ports" | `LEDGER.md` rows 103–107 | present |
+
+No quotation fails.
+
+**1b. The inventory walk.** `plans/FS75-close-inventory.md` held rows 1–33 at launch. J52K's report (`data/crunch-2026-09-25/reports/J52K.md`)
+came after the last row; its eleven INVENTORY lines and two HELD decisions are folded in as rows 34–46, and this close's own findings as rows
+47–49 (a correction owed to `CLAUDE.md` § The gate's vacuity counts, read from the owner's gate log; the ban measurement; the prior-art gate).
+Each row is ticked at the stage that closes it; stage 6 is the final walk.
+
+**Would have searched here (stage 1):** none.
