@@ -161,3 +161,20 @@ growth) supplies what the known theorems need. The killing stays pending until X
 
 ### Would have searched here (stage 2)
 - None: one arXiv API query (literature).
+
+## Stage 3 — the planner's queue draft (`8c865d6f`) reviewed — SAVED
+
+The draft was read after stages 0–2 were saved. It adopts EF as route (A) [P-1], PE-2 as route (B) and FR-1 as route (C). The claim
+lists are fixed at 05:45. Pushes sent at about 05:48, ranked:
+1. **Waves.** Blind verifiers derive from the fixed claim lists, and the clerk is idle until reports exist. So wave 1 should be
+   X01D, X01V, X02D and X02V; wave 2 (about 06:05) X05V (SP-Cor and the ladder), then X03D.
+2. **ED-2 is harder than MR** (EF §4: Nazarov's semigroups are rigid without equidistribution). ED-1 is one line. Cap ED-2 at
+   20 minutes, with GAP-at-a-step the expected outcome.
+3. **EF-G(b) in two lines.** `U_ℚ ⊆ U_F`, and `H_L = H_{ℚ(i)}^{[F:ℚ]}`, so `#U_N(F) ≥ #U_{N^{1/n}}(ℚ) ~ N^{1/n}/(2π)`
+   (primitive Pythagorean triples).
+4. **EF-X is TRUE in one line** (the circle measure in `A`). EF_F may be stated in the stronger form `µ(T + A) = 1`.
+5. **Missing items.** The known-positive control (K, ℚ(√11)). And PE-1 needs `ℚ(Γ′) = L` for every finite-index `Γ′`, not only
+   for `Γ`.
+
+### Would have searched here (stage 3)
+- None.
