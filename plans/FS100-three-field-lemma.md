@@ -1623,3 +1623,42 @@ turns six into a question about invariant random five-colourings with spectrum o
 named risk (FL-K, one mind) is discharged: FL-K has two minds (X03D; X22D, wider).
 
 **Would have searched here (stage 1b):** none.
+
+### Stage 1c — SAVED (X25B folded; the divergence at a complex place ruled)
+
+**X25B** (`plans/FS100-X25B-derivation.md`; commits 06:43:46–06:52:47): TCA-cls at `S = ∅` **TRUE over every totally real field in the class**;
+finite `S` TRUE given C14.2 (c); **FS100-T1 TRUE, all three equivalences, re-derived blind**; X25B-LP (the new-level bound `|λ| ≤ 2p^{k−1}` at a
+ramified stable place of a real quadratic field, so FS-66's certificates apply at ℚ(√143)'s ramified place above 11); X25B-PZ (Zhang's count
+in stationary form, `r(G × H) ≤ max(r(G), r(H))` for LCA Cayley graphs, continuous factors included). **Grade (owner's ruling on its held item):
+a second derivation, blind to the prior proofs but not to their outline** (its fence log item 1: the route sketch "1 ≤ 4 max(α(Y′), r_X) < 1",
+also the open text of rows 112–113). **Effect:** R88-TCA's class form, the one one-derivation link under every value of the wave (X21D's
+remark), is now **two derivations (J28D; X25B, blind to the proofs)** over totally real fields, re-walked by X23D and X23V; FS100-T1 (row 117's
+class identification) is **two derivations (J51; X25B blind)**. So ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) rest on no one-derivation link but
+MR's external input (EL2021 Thm 1.2).
+
+**The divergence: X25B-G1 against SPC-cx / X23V-CX.** X25B, blind to both, reports GAP at "the archimedean factor of a complex place of `F`,
+`Cay(ℂ², {(a, a⁻¹)})`, whose ratio nothing derives" (its §Stage 2: "Its neighbourhood of 0 has triangles (`b = ωa`) and no `K₄`, so no
+clique bound gives `< 1/4` for free"). X23D (step 3′) and X23V (Lemma X23V-CX) supply that step. **Ruling, in four parts.**
+- **The choice.** **The restriction argument answers G1; G1 names a real gap in the cited inputs (C14.2 has no complex-place lemma, and J28D's
+  and R88-TCA's texts assume real places), not in the argument that closes it.** The count needs only an *upper* bound on the factor's
+  independence ratio, and the ratio is monotone under removing edges: for `T′ ⊆ T`, every a.e.-independent set of `Cay(ℂ², T)` is one of
+  `Cay(ℂ², T′)`, so `r(Cay(ℂ², T)) ≤ r(Cay(ℂ², T′))`. With `T′` the compact real form — the circle `{(e^{iθ}, e^{−iθ})} = T_w ∩ {(a, ā)}` —
+  `Cay(ℂ², T′)` is `ℝ²` copies of a scaled unit-distance plane (X23V: `ℝ² × UD_{√2}(ℝ²)`; the scale is irrelevant to a density), so its
+  ratio is `m₁ ≤ 0.2470` by Fubini over the cosets of the circle's plane (X23V; C14's (R1), (R2)); X23D gets the same by restricting the
+  stationary process to the closed subgroup `Δ_w = {(a, ā)} ≅ ℝ²` (legitimate because step 3's properness holds for **every** `x` and `t`, and
+  the process is continuous in probability). So `r(Cay(ℂ², {(a, a⁻¹)})) ≤ m₁ < 1/4`, and X25B-PZ then takes it into the product. The
+  complex-place step is **TRUE**.
+- **The alternative weighed.** Hold the claim at "every totally real field; with a complex place, disputed" (the owner's interim wording)
+  until X26B reports.
+- **Why this one won.** G1 asks for the full factor's ratio; neither X23D nor X23V needs it, and the one-line monotonicity plus the circle's
+  ratio is checkable by any reader — X25B's record states no flaw in the restriction (it never saw it), only that its own inputs did not
+  cover the factor. Two minds derived the fix independently (1.3 (b)), the close checked it, and X25B's finding confirms the step was
+  needed — the text of R88-TCA and row 113 must name it.
+- **Confidence.** High on the argument. **Grade: [hand; two derivations (X23D; X23V, blind by commit order), checked by the close; X25B, blind,
+  located the need]**; X26B (blind, stop 07:50) is its third mind. What would change it: X26B finding a defect in the restriction — e.g. that
+  the count needs a doubling/Følner property the restricted group lacks (it has it: `G″ ≅ ℂ^{r₁+r₂} × compact`).
+
+**Correction owed (X25B):** R88-TCA (`plans/R88-derivation.md` l. 161) and rows 113, 117's "every real field" class must name the complex-place
+step: "with a complex place, by restriction to the compact real form (FS100-CX)". Drafted for X30F in stage 4.
+
+**Would have searched here (stage 1c):** none.
