@@ -1,0 +1,41 @@
+## chow: 'au:"Chow, Timothy Y."'  total=40 fetched=40
+0917.03001 | 1998 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+0847.05098 | 1996 | Chow, Timothy Y. | The path-cycle symmetric function of a digraph |  | review *chromatic
+1003.11063 | 1999 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review *rational/field
+0944.05095 | 1999 | Chow, Timothy Y. | Descents, quasi-symmetric functions, Robinson-Schensted for posets, and the chromatic symmetric function |  | review *chromatic
+None | 2025 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 
+0832.52003 | 1995 | Chow, Timothy Y. | Penny-packings with minimal second moments |  | review *unit
+1410.05222 | 2018 | Brosnan, Patrick; Chow, Timothy Y. | Unit interval orders and the dot action on the cohomology of regular semisimple Hessenberg varieties |  | review *chromatic/unit
+1512.05153 | 2022 | Chow, Timothy Y. | Digraph analogues of the Tutte polynomial |  | summary 
+1548.00026 | 2023 | Chow, Timothy Y. | A mathematician reads the kalam cosmological argument |  |  
+1428.03074 | 2019 | Chow, Timothy Y. | The consistency of arithmetic |  | review 
+1215.68100 | 2011 | Chow, Timothy Y. | Almost-natural proofs |  | summary 
+1092.55014 | 2006 | Chow, Timothy Y. | You could have invented spectral sequences |  | summary 
+1183.03037 | 2009 | Chow, Timothy Y. | A beginner's guide to forcing |  | review 
+1205.05029 | 2009 | Chow, Timothy Y. | Reduction of Rota's basis conjecture to a problem on three bases |  | summary 
+0882.05089 | 1997 | Chow, Timothy Y. | The \(Q\)-spectrum and spanning trees of tensor products of bipartite graphs |  | summary 
+1252.68124 | 2011 | Chow, Timothy Y. | What is \dots a natural proof? |  | review 
+0854.05020 | 1995 | Chow, Timothy Y. | On the Dinitz conjecture and related conjectures |  | review *chromatic
+arXiv:2603.23879 | 2026 | Timothy Y. Chow | Foata, Hikita, and the Bulldozer Problem |  | summary 
+0915.11046 | 1998 | Chow, Timothy Y. | The combinatorics behind number-theoretic sieves |  | review 
+1473.20022 | 2021 | Chow, Timothy Y.; Paulhus, Jennifer | Algorithmically distinguishing irreducible characters of the symmetric group |  | review 
+1014.05017 | 2003 | Chow, Timothy Y. | Symplectic matroids, independent sets, and signed graphs |  | summary 
+1562.11112 | 2024 | Chow, Timothy | A well-motivated proof that Pi is irrational |  | summary *rational
+0932.05007 | 1999 | Chow, Timothy; West, Julian | Forbidden subsequences and Chebyshev polynomials |  | summary *forbid
+1569.05358 | 2025 | Chow, Timothy Y.; Tiefenbruck, Mark G. | The Latin tableau conjecture |  | summary 
+arXiv:math/9712230 | 2002 | Timothy Y. Chow | A note on a combinatorial interpretation of the e-coefficients of the chromatic symmetric function |  | summary *chromatic
+arXiv:math/0103229 | 2001 | Timothy Y. Chow | Symmetric function generalizations of graph polynomials |  | summary 
+1384.05156 | 2017 | Brosnan, Patrick; Chow, Timothy Y. | Unit interval orders and the dot action on the cohomology of regular semisimple Hessenberg varieties |  | summary *unit
+1056.90022 | 2004 | Chow, Timothy Y.; Lin, Philip J. | The ring grooming problem |  | summary 
+arXiv:math/9804004 | 1998 | Timothy Y. Chow | An independent set axiomatization for symplectic matroids |  | summary 
+0852.05017 | 1996 | Chow, Timothy | A short proof of the rook reciprocity theorem |  | summary 
+arXiv:math/9712229 | 1997 | Timothy Y. Chow | Descents, quasi-symmetric functions, and the chromatic symmetric function |  | summary *chromatic
+0771.05035 | 1993 | Chow, Timothy | Distances forbidden by two-colorings of \(\mathbb{Q}^ 3\) and \(A_ n\) |  | summary *colorin/distance/forbid
+arXiv:2509.10471 | 2026 | Nick Ballard; Timothy Y. Chow | Bluffing in Scrabble |  | summary 
+1029.05049 | 2003 | Chow, Timothy Y.; Fan, C. Kenneth; Goemans, Michel X.; Vondr | Wide partitions, Latin tableaux, and Rota's basis conjecture |  | summary 
+0729.11048 | 1991 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+arXiv:0808.1517 | 2008 | Timothy Y. Chow; C. Kenneth Fan | The power of multifolds: Folding the algebraic closure of the rational numbers |  | summary *rational
+0936.11059 | 1999 | Chow, Timothy Y.; Long, Christopher D. | Additive partitions and continued fractions |  | review *rational
+1074.05007 | 2005 | Chow, Timothy Y.; Eriksson, Henrik; Fan, Kenneth C. | Chess tableaux |  | review 
+1156.05005 | 2009 | Chapman, Robin J.; Chow, Timothy Y.; Khetan, Amit; Moulton,  | Simple formulas for lattice paths avoiding certain periodic staircase boundaries |  | summary 
+1157.90002 | 2009 |  | Communicating mathematics. A conference in honor of Joseph A. Gallian's 65th birthday, Duluth, MN, USA, July 16--19, 200 |  | editorial 

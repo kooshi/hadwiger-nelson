@@ -1,0 +1,19 @@
+## q1_11: 'ab:"Hadwiger-Nelson" & py:2019-2026'  total=18 fetched=18
+1558.52027 | 2025 | Alon, Noga; Bucić, Matija; Sauermann, Lisa | Unit and distinct distances in typical norms |  | summary 
+arXiv:2608.04542 | 2026 | Jan Kristian Haugland | A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane |  | summary *5-chromatic
+None | 2024 | Bernstein, Daniel Irving; Dewar, Sean; Gortler, Steven J.; N | Maximum likelihood thresholds via graph rigidity |  | summary 
+1560.05126 | 2025 | Davies, James | Chromatic number of spacetime |  | summary 
+arXiv:2606.16642 | 2026 | Amnon Rosenmann | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm |  | summary 
+1514.05057 | 2023 | Chybowska-Sokół, Joanna; Junosza-Szaniawski, Konstanty; Węse | Coloring distance graphs on the plane |  | summary 
+arXiv:2512.15516 | 2025 | Maria Axenovich; Dingyuan Liu; Arsenii Sagdeev | Ramsey problems for graphs in Euclidean spaces and Cartesian powers |  | summary 
+arXiv:2501.18527 | 2025 | Konrad Mundinger; Max Zimmer; Aldo Kiem; Christoph Spiegel;  | Neural Discovery in Mathematics: Do Machines Dream of Colored Planes? |  | summary 
+1580.05061 | 2025 | Ágoston, Péter | A lower bound on the number of colours needed to nicely colour a sphere |  | summary 
+1586.05103 | 2026 | Kovač, Vjekoslav | Coloring and density theorems for configurations of a given volume |  | summary 
+arXiv:2304.10163 | 2023 | Vsevolod Voronov | The chromatic number of the plane with an interval of forbidden distances is at least 7 |  | summary 
+None | 2026 | Sokolov, Georgy; Voronov, Vsevolod | On the chromatic number of the plane for map-type colorings |  | summary 
+1497.05101 | 2022 | Voronov, V. A.; Neopryatnaya, A. M.; Dergachev, E. A. | Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres |  | summary *5-chromatic
+1551.05109 | 2019 | Bock, F. | \(\varepsilon\)-colorings of strips |  | summary 
+arXiv:2601.05137 | 2026 | Knut Vanderbush; Melanie Weber | Neural Algorithmic Reasoning for Approximate $k$-Coloring with Recursive Warm Starts |  | summary 
+1484.05116 | 2022 | Janssen, Remie; van Steijn, Leonie | Connectedness of unit distance subgraphs induced by closed convex sets |  | summary 
+1417.05063 | 2019 | DeCorte, Evan; Golubev, Konstantin | Lower bounds for the measurable chromatic number of the hyperbolic plane |  | summary 
+1496.05050 | 2022 | Gwyn, Haydn; Stavrianos, Jacob | A finite graph approach to the probabilistic Hadwiger-Nelson problem |  | summary 

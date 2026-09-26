@@ -1,0 +1,27 @@
+## chil: 'au:"Chilakamarri, Kiran B."'  total=26 fetched=26
+0642.05047 | 1988 | Chilakamarri, Kiran B. | Unit-distance graphs in rational n-spaces |  | editorial *unit/distance/rational
+0803.05021 | 1993 | Chilakamarri, Kiran B. | The unit-distance graph problem: A brief survey and some new results |  | review *chromatic/colorin/unit/distance/rational
+0716.05022 | 1991 | Chilakamarri, Kiran B. | Unit-Distance Graphs in Minkowski metric spaces |  | editorial *unit/distance
+1251.05149 | 2012 | Chilakamarri, Kiran B.; Dean, Nathaniel; Kang, Cong X.; Yi,  | Iteration index of a zero forcing set in a graph |  | summary 
+0794.05111 | 1993 | Chilakamarri, Kiran B. | A characterization in \(\mathbb{Z}^ n\) of finite unit-distance graphs in \(\mathbb{R}^ n\) |  | review *unit/distance
+0705.05034 | 1990 | Chilakamarri, Kiran B. | On the chromatic number of rational five-space |  | review *chromatic/distance/rational
+0851.52010 | 1995 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E | Venn diagrams: Announcement of some new results |  | review 
+0661.05039 | 1988 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+0863.05030 | 1996 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E | Venn diagrams and planar graphs |  | editorial 
+0848.05028 | 1995 | Chilakamarri, Kiran B. | Some problems arising from unit-distance graphs |  | review *chromatic/unit/distance
+0848.05027 | 1995 | Chilakamarri, Kiran B. | A \(4\)-chromatic unit-distance graph with no triangles |  | review *chromatic/colorin/unit/distance/triangle
+0831.05023 | 1995 | Chilakamarri, Kiran B.; Dean, Nathaniel | The Ulam number of infinite graphs |  | review *distance
+1302.92143 | 2009 | Balaban, Alexandru T.; Chilakamarri, Kiran B.; Klein, Dougla | Protochirons and protohelices |  | summary 
+0782.05035 | 1993 | Chilakamarri, Kiran B.; Hamburger, Peter | On a class of kernel-perfect and kernel-perfect-critical graphs |  | review 
+0856.05028 | 1996 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E | Hamilton cycles in planar graphs and Venn diagrams |  | review 
+0719.76077 | 1991 | Chilakamarri, Kiran B.; Foster, M. R. | Rotating, stratified flow past a shallow ridge |  | summary 
+0838.05049 | 1995 | Chilakamarri, Kiran B.; Fricke, Gerd H.; Perkel, Manley | Packing an equilateral polygon in a thin strip |  | review *chromatic/unit/distance
+0972.05017 | 2000 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E | Analysis of Venn diagrams using cycles in graphs |  | review 
+0829.05045 | 1992 | Chilakamarri, Kiran B.; Hamburger, Peter | A note on packing paths into complete bipartite graphs |  | review 
+0896.05021 | 1995 | Chilakamarri, Kiran; Dean, Nathaniel; Littman, Michael | Three-dimensional Tutte embedding |  | summary 
+0843.05055 | 1995 | Chilakamarri, Kiran B.; Mahoney, Carolyn R. | Maximal and minimal forbidden unit-distance graphs in the plane |  | editorial *unit/distance/forbid
+arXiv:1310.2268 | 2013 | Kiran B. Chilakamarri; M. F. Khan; C. E. Larson; C. J. Tymcz | Self-Similar Graphs |  | summary 
+0848.05026 | 1996 | Chilakamarri, Kiran B.; Mahoney, Carolyn R. | Unit-distance graphs, graphs on the integer lattice and a Ramsey type result |  | review *chromatic/colorin/unit/distance
+0805.76088 | 1993 | Chilakamarri, Kiran B.; Foster, M. R.; Hamburger, Peter | A note on the asymmetry of rotating, stratified flow past a shallow ridge |  | summary 
+1425.37056 | 2017 | Wang, Yunjiao; Chilakamarri, Kiran; Kazakos, Demetrios; Leit | Relations between the dynamics of network systems and their subnetworks |  | summary 
+1373.37198 | 2017 | Wang, Yunjiao; Omidiran, Bamidele; Kigwe, Franklin; Chilakam | Relations between the conditions of admitting cycles in Boolean and ODE network systems |  | summary 

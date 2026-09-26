@@ -1,0 +1,2 @@
+## q3_4: 'ab:"norm one torus" & ab:"invariant"'  total=1 fetched=1
+arXiv:2605.17427 | 2026 | Mathieu Florence; Akinari Hoshi; Aiichi Yamasaki | Rationality problem for norm one tori of tensor products of étale algebras and Hasse norm principle |  | summary *norm one/torus

@@ -1,0 +1,2 @@
+## q1_7: 'ab:"chromatic number" & ab:"quadratic extension"'  total=1 fetched=1
+1244.05122 | 2012 | Baber, Rahil; Talbot, John | New Turán densities for 3-graphs |  | summary *quadratic/rational

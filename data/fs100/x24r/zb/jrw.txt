@@ -1,0 +1,3 @@
+## jrw: 'au:"Jungreis, Douglas" & au:"Reid, Michael"'  total=2 fetched=2
+0774.05087 | 1992 | Jungreis, Douglas S.; Reid, Michael | Labeling grids |  | review 
+0771.05039 | 1990 | Reid, Michael; Jungreis, Douglas S.; Witte, Dave | Distances forbidden by some two-coloring of \(\mathbb{Q}^ 2\) |  | review *colou/colorin/distance/forbid/rational

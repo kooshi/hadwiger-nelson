@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/lbDGFEeQzBKfZMCr6IdgxKD4UaI</id>
+  <title>arXiv Query: search_query=all:triangle-free AND all:unit-distance&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-26T11:30:32Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:triangle-free+AND+all:unit-distance&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>4</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.19995v3</id>
+    <title>Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 and EI19 (HoG 51375, 51376): a solvable-non-solvable dichotomy (origami vs. S20) and the Laman-number conjecture</title>
+    <updated>2026-07-27T21:17:28Z</updated>
+    <link href="https://arxiv.org/abs/2607.19995v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.19995v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We certify, exactly, the coordinate fields of a faithful planar realization of two neighbouring triangle-free Exoo-Ismailescu unit-distance graphs (UDGs), and show they realize the two opposite extremes of the constructibility hierarchy. The 17-vertex graph EI17 (House of Graphs 51375) is the smallest triangle-free UDG with chromatic number 4; the 19-vertex graph EI19 (HoG 51376) is its state-of-the-art origami neighbour. In both, fixing a rational base edge, the remaining vertices are intersections of unit circles -- each on the radical axis of its two neighbours, a tower of square roots over the free angles -- and a small closure system locks the realization. For EI19 the base lies in Q(sqrt 2, sqrt 5, sqrt 7) and a single free angle has an irreducible degree 12 = 2^2*3 minimal polynomial with Galois group the solvable transitive group 12T236 (order 2304 = 2^8*3^2): not ruler-and-compass, but origami-constructible (the cubic Beloch fold O6 necessary, in casus irreducibilis). For EI17 two free angles are locked by two closures, whose resultant is irreducible of degree 20 = 2^2*5 with Galois group the full symmetric group S20 (a Frobenius census exhibits a 17-cycle, forcing A20 by Jordan, and an odd 20-cycle, raising it to S20): non-solvable, so the coordinates are not expressible by radicals -- neither compass nor origami of any fold order. Thus the smallest triangle-free 4-chromatic UDG is the generic, maximally exotic case, the exact opposite of its origami neighbour. We give the full certification pipeline as explicit algorithms, record two methodological pitfalls, and read the pair through a conjectural bridge between the Laman number and the Galois group.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-22T10:27:06Z</published>
+    <arxiv:comment>33 pages, 24 figures. v2: all figure labels translated to English; minor corrections</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Haroldo Costa Silva Filho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.02039v3</id>
+    <title>On almost-equidistant sets - II</title>
+    <updated>2019-04-16T22:02:13Z</updated>
+    <link href="https://arxiv.org/abs/1708.02039v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.02039v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A set in $\mathbb R^d$ is called almost-equidistant if for any three distinct points in the set, some two are at unit distance apart. First, we give a short proof of the result of Bezdek and Lángi claiming that an almost-equidistant set lying on a $(d-1)$-dimensional sphere of radius $r$, where $r&lt;1/\sqrt{2}$, has at most $2d+2$ points. Second, we prove that an almost-equidistant set $V$ in $\mathbb R^d$ has $O(d)$ points in two cases: if the diameter of $V$ is at most $1$ or if $V$ is a subset of a $d$-dimensional ball of radius at most $1/\sqrt{2}+cd^{-2/3}$, where $c&lt;1/2$. Also, we present a new proof of the result of Kupavskii, Mustafa and Swanepoel arXiv:1708.01590 that an almost-equidistant set in $\mathbb R^d$ has $O(d^{4/3})$ elements.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-07T08:48:47Z</published>
+    <arxiv:comment>8 pages. All proofs are simplified. Open problems are added. Key words: equidistant sets, almost-equidistant sets, unit distance graph, diameter graph, triangle-free graph, Perron-Frobenius Theorem. To appear in the Electronic Journal of Combinatorics</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Alexandr Polyanskii</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.12881v2</id>
+    <title>Computing Diameter +1 in Truly Subquadratic Time for Unit-Disk Graphs</title>
+    <updated>2024-10-31T14:29:31Z</updated>
+    <link href="https://arxiv.org/abs/2401.12881v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.12881v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Finding the diameter of a graph in general cannot be done in truly subquadratic assuming the Strong Exponential Time Hypothesis (SETH), even when the underlying graph is unweighted and sparse. When restricting to concrete classes of graphs and assuming SETH, planar graphs and minor-free graphs admit truly subquadratic algorithms, while geometric intersection graphs of unit balls, congruent equilateral triangles, and unit segments do not. Unit-disk graphs are one of the major open cases where the complexity of diameter computation remains unknown. More generally, it is conjectured that a truly-subquadratic time algorithm exists for pseudo-disk graphs where each pair of objects has at most two intersections on the boundary.
+  In this paper, we show a truly-subquadratic algorithm of running time $\tilde{O}(n^{2-1/18})$, for finding the diameter in a unit-disk graph, whose output differs from the optimal solution by at most 1. This is the first algorithm that provides an additive guarantee in distortion, independent of the size or the diameter of the graph. Our algorithm requires two important technical elements. First, we show that for the intersection graph of pseudo-disks, the graph VC-dimension, either of $k$-hop balls or the distance encoding vectors, is 4. Second, we introduce a clique-based $r$-clustering for geometric intersection graphs, which is an analog of the $r$-division construction for planar graphs. We also showcase the new techniques by establishing new results for distance oracles for unit-disk graphs with subquadratic storage and $O(1)$ query time. The results naturally extend to unit $L_1$- or $L_\infty$-disks and fat pseudo-disks of similar size. Last, if the pseudo-disks additionally have bounded ply, we have a truly-subquadratic algorithm to find the exact diameter.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-23T16:20:20Z</published>
+    <arxiv:comment>Improving the approximation to +1 from +2 in the previous conference version. Incorporating reviewers' comments. 30 pages, 9 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Hsien-Chih Chang</name>
+    </author>
+    <author>
+      <name>Jie Gao</name>
+    </author>
+    <author>
+      <name>Hung Le</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.09236v1</id>
+    <title>Identifiability of Latent Space Network Models on Anisotropic Thurston Geometries</title>
+    <updated>2026-09-08T01:27:17Z</updated>
+    <link href="https://arxiv.org/abs/2609.09236v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.09236v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A latent space network model places the nodes in a metric space and lets the probability of a tie decrease with distance. In a space of constant curvature, pairwise distances determine the positions up to an isometry. In the products and in the three remaining three-dimensional model geometries they do not. We study the three geometries that are neither of constant curvature nor products: the Heisenberg group, the solvable group and the universal cover of the unit tangent bundle of the hyperbolic plane. We ask what one network identifies about positions in them and when their geometry is detectable. Two anchors remove the isometry ambiguity. Small configurations are not determined by their distances, and generic local identification holds beyond a finite threshold, certified in the Heisenberg group. We derive the posterior on the quotient by the isometry group. For small configurations, the divergence to the nearest product or constant-curvature competitor is the stress component of the curvature difference and vanishes at high order in the scale; undirected ties therefore detect the geometry only in large networks with large enclosed areas. Directed ties expose it at first order: in the two twisted geometries, asymmetric preferences circulate around triangles in proportion to enclosed area, which no additive ranking produces. On dense competitive-game counter networks, the coupled model beats rankings on every geometry, degree-corrected rankings and free antisymmetric terms. A Euclidean model with the same coupled term matches it, so the gain is the coupling of similarity and circulation through shared coordinates. An additive-and-multiplicative-effects model predicts better still.</summary>
+    <category term="physics.soc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-08T01:27:17Z</published>
+    <arxiv:comment>Preprint</arxiv:comment>
+    <arxiv:primary_category term="physics.soc-ph"/>
+    <author>
+      <name>Marios Papamichalis</name>
+    </author>
+    <author>
+      <name>Regina Ruane</name>
+    </author>
+  </entry>
+</feed>

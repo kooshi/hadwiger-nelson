@@ -1,0 +1,3 @@
+## q1_4: 'ab:"triangle-free" & ab:"chromatic number of the plane"'  total=2 fetched=2
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *triangle
+1329.05004 | 2015 |  | Extended abstracts of the eight European conference on combinatorics, graph theory and applications, EuroComb 2015, Berg |  | editorial 

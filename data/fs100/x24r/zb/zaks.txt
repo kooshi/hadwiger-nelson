@@ -1,0 +1,85 @@
+## zaks_probe: 'au:"Zaks, Joseph"'  total=84 fetched=84
+0651.52003 | 1988 | Zaks, Joseph | Nearly-neighborly families of tetrahedra and the decomposition of some multigraphs |  | review 
+1406.52027 | 2018 | Zaks, Joseph | Putting convex \(d\)-polytopes inside frames |  | review 
+0524.05031 | 1983 | Zaks, Joseph | Extending Kotzig's theorem |  |  
+1402.52011 | 2018 | Zaks, Joseph | Two neighborly families of 3-pyramids and of 3-boxes in \(E^{3}\) |  | review 
+0445.05065 | 1980 | Zaks, Joseph | Non-Hamiltonian simple 3-polytopes having just two types of faces |  |  
+0997.52003 | 2001 | Grünbaum, Branko; Zaks, Joseph | Convexification of polygons by flips and by flipturns |  | review 
+0298.05112 | 1974 | Grünbaum, Branko; Zaks, Joseph | The existence of certain planar maps |  |  
+0469.51016 | 1981 | Zaks, Joseph | Neighborly families of \(2^ k\) k-simplices in \(E^ k\). |  |  
+1426.52005 | 2019 | Zaks, Joseph | Revisiting the \(2^d\) neighborly \(d\)-simplices in \(E^d\) |  | editorial 
+1452.11023 | 2019 | Zaks, Joseph | On a geometric proof of sums of powers |  | summary 
+1101.51010 | 2006 | Zaks, Joseph | The rational analogue of the Beckman-Quarles theorem and the rational realization of some sets in \(E^d\) |  | review *unit/distance/rational
+0222.05103 | 1971 | Zaks, Joseph | The analogue of Eberhard's theorem for 4-valent graphs on the torus |  |  
+1338.51018 | 2014 | Zaks, Joseph | Some reflections on a simple geometric problem |  | review 
+0418.52012 | 1979 | Zaks, Joseph | Bounds of neighborly families of convex polytopes |  |  
+0291.05103 | 1974 | Zaks, Joseph | The maximum genus of Cartesian products of graphs |  |  
+0723.52004 | 1991 | Zaks, Joseph | No nine neighborly tetrahedra exist |  | review 
+0357.05052 | 1977 | Zaks, Joseph | Non-Hamiltonian non-Grinbergian graphs |  |  
+0585.05026 | 1985 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+1264.51016 | 2009 | Zaks, Joseph | Rationally realizing sets, five years later |  | editorial *rational
+1264.51018 | 2009 | Zaks, Joseph | The rational analogue of the Beckman-Quarles theorem and the rational realization of some sets in \(E^d\) |  | summary *rational
+1506.01015 | 2009 | Zaks, Joseph | Branko Grünbaum is eighty |  |  
+0493.05022 | 1982 | Zaks, Joseph | Non-Hamiltonian simple planar graphs |  | editorial 
+0609.52002 | 1986 | Zaks, Joseph | A solution to Bagemihl's conjecture |  | review 
+1089.51002 | 2005 | Zaks, Joseph | On mappings of \(\mathbb Q^d\) to \(\mathbb Q^d\) that preserve distances 1 and \(\sqrt 2\) and the Beckman-Quarles theo |  | review *distance/rational
+0298.52003 | 1971 | Zaks, Joseph | The chair theorem |  |  
+0766.05032 | 1992 | Zaks, Joseph | On the chromatic number of some rational spaces |  | review *chromatic/colorin/distance/rational
+1028.51015 | 2003 | Zaks, Joseph | The Beckman-Quarles theorem for rational spaces |  | review *unit/distance/rational
+0728.05039 | 1990 | Zaks, Joseph | On the connectedness of some geometric graphs |  | review *distance
+1006.51012 | 2001 | Zaks, Joseph | A discrete form of the Beckman-Quarles theorem for rational spaces |  | review *unit/distance/rational
+0309.05120 | 1976 | Zaks, Joseph | Pairs of Hamiltonian circuits in 5-connected planar graphs |  |  
+0848.51012 | 1996 | Zaks, Joseph | On the products of cross-ratios on diagonals of polygons |  | review 
+0507.05032 | 1983 | Zaks, Joseph | Extending two theorems of A. Kotzig |  |  
+0747.05060 | 1989 | Zaks, Joseph | Parsons graphs of matrices |  | review *field
+0247.05157 | 1970 | Zaks, Joseph | On the 1-factors of n-connected graphs |  |  
+0291.05102 | 1974 | Zaks, Joseph | 6-valent analogues of Eberhard's theorem |  |  
+0940.05025 | 1999 | Zaks, Joseph | On odd integral distances rational graph in four-dimensions |  | editorial *distance/rational
+0936.01030 | 1999 | Zaks, Joseph | Branko Grünbaum is seventy |  |  
+0705.05033 | 1989 | Zaks, Joseph | On four-colourings of the rational four-space |  | review *chromatic/colou/distance/rational
+0891.52012 | 1997 | Zaks, Joseph | Monohedrally knotted tilings of the 3-space |  | review 
+0889.51008 | 1997 | Zaks, Joseph | Some functions of points in projective spaces |  | review 
+0617.52008 | 1987 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | review 
+0845.51015 | 1995 | Zaks, Joseph | On the products of cross-ratios on diagonals of polygons. A short note |  | review 
+0849.55001 | 1995 | Zaks, Joseph | Towards a simpler proof of the Brouwer fixed point theorem |  | review 
+0591.52007 | 1986 | Zaks, Joseph | Arbitrarily large neighborly families of symmetric convex polytopes |  | review 
+0485.05036 | 1982 | Zaks, Joseph | Extending an extension of Grinberg's theorem |  |  
+0518.05045 | 1982 | Zaks, Joseph | Shortness coefficient of cyclically 5-connected cubic planar graphs |  |  
+1047.51004 | 2003 | Connelly, Robert; Zaks, Joseph | The Beckman-Quarles theorem for rational \(d\)-spaces, \(d\) even and \(d \geq 6\) |  | review *unit/distance/rational
+0783.05046 | 1992 | Zaks, Joseph | Uniform distances in rational unit-distance graphs |  | review *unit/distance/rational
+0306.05123 | 1975 | Zaks, Joseph | Hamiltonian cycles in products of graphs |  |  
+0224.52005 | 1971 | Zaks, Joseph | On realizing symmetric 3-polytopes |  |  
+0206.51304 | 1971 | Zaks, Joseph | On a conjecture of A. J. Hoffman |  |  
+0413.05026 | 1978 | Zaks, Joseph | Some Hamiltonian results in polytopal graphs |  |  
+0393.51009 | 1978 | Zaks, Joseph | Semi-regular polyhedra and maps |  |  
+0219.05074 | 1971 | Zaks, J. | On the 1-factors of n-connected graphs |  |  
+0559.52010 | 1984 | Zaks, Joseph | Extending Kotzig's theorem: Hensley's lattice polytope theorem |  | review 
+1402.52015 | 2018 | Zaks, Joseph; Zaks, Ayal | Neighborly families in \(E^d\) consisting of either \(d\)-pyramids over \((d-1)\)-cubes, or else of \(d\)-cubes |  | review 
+0239.52004 | 1972 | Zaks, Joseph | On a conjecture of A. J. Hoffman. II |  |  
+1434.11005 | 2018 | Zaks, Joseph; Zaks, Ayal | On odd sums' properties of integers |  |  
+0357.05051 | 1974 | Zaks, Joseph | Recent results in graph theory |  |  
+1168.52005 | 2009 | Mehlhorn, Kurt; Sack, Jörg; Zaks, Joseph | Note on the paper ``K-vertex guarding simple polygons'' |  | editorial 
+0176.53204 | 1969 | Zaks, Joseph | On a minimality property of complexes |  |  
+0534.05001 | 1983 | Kotzig, A.; Zaks, J. | The three permutations theorem |  | review *colorin
+0561.52002 | 1985 | Katchalski, M.; Lewis, T.; Zaks, J. | Geometric permutations for convex sets |  | review 
+0289.05127 | 1974 | Zaks, Joseph | On the 1-factors of n-connected graphs |  |  
+0208.51103 | 1971 | Zaks, Joseph | Errata. Correction to: Trivially extending decompositions of \(E^n\) |  | editorial 
+0186.30404 | 1969 | Zaks, J. | On the number of k-simplexes in the m-th barycentric subdivision of an r- simplex |  |  
+0172.48702 | 1969 | Zaks, J. | On minimal complexes |  |  
+0176.20202 | 1969 | Zaks, Joseph | On finite decompositions of \(E^{2n-1}\) |  |  
+0476.05050 | 1980 | Zaks, J. | Non Hamiltonian cubic planar graphs having just two types of faces |  | editorial 
+0251.52017 | 1973 | Kelly, L. M.; Zaks, J. | On the length of some curves in the unit sphere |  |  *unit
+0231.52007 | 1972 | Kelly, L. M.; Zaks, J. | On the length of some curves in the unit sphere |  |  *unit
+0281.05109 | 1974 | Zaks, J. | Non-Hamiltonian square-minus-two |  |  
+0176.52303 | 1969 | Zaks, J. | Trivially extending decompositions of \(E^ n\) |  |  
+0749.52003 | 1992 | Czyzowicz, Jurek; Rivera-Campo, Eduardo; Urrutia, Jorge; Zak | Separating convex sets in the plane |  | review 
+0517.05014 | 1982 | Hobbs, A.; Kotzig, A.; Zaks, J. | Latin squares with high homogeneity |  |  
+0216.42902 | 1971 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  |  
+0443.52010 | 1982 | Zaks, J.; Perles, M. A.; Wills, J. M. | On lattice polytopes having interior lattice points |  |  
+0813.05023 | 1994 | Czyzowicz, Jurek; Rivera-Campo, Eduardo; Urrutia, Jorge; Zak | Protecting convex sets |  | editorial 
+0317.52006 | 1975 | Gallivan, S.; Zaks, J. | Replacing convex sets by polytopes |  |  
+0838.52007 | 1995 | Czyzowicz, Jurek; Gaujal, Bruno; Rivera-Campo, Eduardo; Urru | Illuminating high-dimensional convex sets |  | review 
+0793.68165 | 1994 | Czyzowicz, J.; Rivera-Campo, E.; Santoro, N.; Urrutia, J.; Z | Guarding rectangular art galleries |  | summary 
+0783.68131 | 1992 | Czyzowicz, J.; Rivera-Campo, E.; Santoro, N.; Urrutia, J.; Z | Tight bounds for the rectangular art gallery problem |  | summary 
+0986.00076 | 2001 |  | Selected papers in honor of Helge Tverberg |  | review 
+0549.00001 | 1984 |  | Convexity and graph theory. Proceedings of the Conference on Convexity and Graph Theory, Israel, March 1981 |  | review 

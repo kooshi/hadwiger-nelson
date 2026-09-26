@@ -1,0 +1,4 @@
+## q1_13: 'ab:"five colors" & ab:"unit distance"'  total=3 fetched=3
+1452.05069 | 2020 | Parts, Jaan | What percent of the plane can be properly 5- and 6-colored? |  | summary *five
+1477.05182 | 2021 | Exoo, Geoffrey; Fisher, David; Ismailescu, Dan | The chromatic number of the Minkowski plane -- the regular polygon case |  | summary *five
+1559.05057 | 2024 | Mundinger, Konrad; Pokutta, Sebastian; Spiegel, Christoph; Z | Extending the continuum of six-colorings |  | summary *five

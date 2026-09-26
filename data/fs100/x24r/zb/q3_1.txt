@@ -1,0 +1,80 @@
+## q3_1: 'au:"Sataev"'  total=79 fetched=79
+1101.37022 | 2005 | Sataev, E. A. | Nonexistence of stable trajectories in nonautonomous perturbations of Lorenz-type systems. |  | review 
+0336.28007 | 1976 | Sataev, E. A. | On the number of invariant measures for flows on orientable surfaces |  |  
+0795.58036 | 1992 | Sataev, E. A. | Invariant measures for hyperbolic maps with singularities |  | review 
+1174.37008 | 2009 | Sataev, E. A. | Some properties of singular hyperbolic attractors |  | review 
+1203.37045 | 2010 | Sataev, E. A. | Invariant measures for singular hyperbolic attractors |  | review 
+1358.37061 | 2015 | Sataev, Evgueni A. | Mixing and eigenfunctions of singular hyperbolic attractors |  | summary 
+1563.37032 | 2010 | Sataev, E. A. | Stochastic properties of the singular hyperbolic attractors |  | summary 
+0894.58043 | 1993 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R.; Chua, L.  | Two-parameter study of transition to chaos in Chua's circuit: renormalization group, universality and scaling |  | summary 
+0870.58061 | 1996 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R.; Chua, L.  | Multi-parameter criticality in Chua's circuit at period-doubling transition to chaos |  | summary 
+1203.37043 | 2007 | Kuznetsov, S. P.; Sataev, I. R. | Hyperbolic attractor in a system of coupled non-autonomous van der Pol oscillators: numerical test for expanding and con |  | summary 
+1358.70006 | 2014 | Borisov, Alexey V.; Kazakov, Alexey O.; Sataev, Igor R. | The reversal and chaotic attractor in the nonholonomic model of Chaplygin's top |  | summary 
+0874.58030 | 1996 | Sataev, E. A. | Convergence of invariant measures for degenerating sequences of hyperbolic mappings with singularities |  | summary 
+1127.37037 | 2005 | Kuznetsov, S. P.; Kuznetsov, A. P.; Sataev, I. R. | Multiparameter critical situations, universality and scaling in two-dimensional period-doubling maps |  | summary 
+0368.58010 | 1976 | Katok, A. B.; Sataev, A. B. | Standardness of automorphisms of transposition of intervals and fluxes on surfaces |  |  
+1144.37433 | 1999 | Sataev, E. A. | Ergodic properties of the Belykh map. |  | editorial 
+1140.82023 | 2008 | Kuznetsov, S. P.; Mailybaev, A. A.; Sataev, I. R. | Birth of a new class of period-doubling scaling behavior as a result of bifurcation in the renormalization equation |  | review 
+1263.74021 | 2012 | Borisov, Alexey V.; Jalnine, Alexey Yu.; Kuznetsov, Sergey P | Dynamical phenomena occurring due to phase volume compression in nonholonomic model of the rattleback |  | summary 
+0930.37021 | 1999 | Sataev, E. A. | Schwartzian derivative for multidimensional maps and flows |  | editorial 
+0925.58058 | 1997 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | A variety of period-doubling universality classes in multi-parameter analysis of transition to chaos |  | summary 
+0802.58039 | 1992 | Sataev, E. A. | Gibbs measures for one-dimensional attractors of hyperbolic mappings with singularities |  | review 
+1298.37006 | 1996 | Sataev, E. A. | Erratum to: ``Convergence of invariant measures for degenerating sequences of hyperbolic mappings with singularities'' |  | editorial 
+0840.60080 | 1995 | Sataev, E. A. | Continuous dependence of final distributions on transition probabilities of an asymptotically Markov process |  | review 
+0323.28012 | 1975 | Sataev, E. A. | Über die Anzahl der invarianten Maße für Flüsse auf orientierbaren Flächen |  |  
+1221.34098 | 2011 | Kuznetsov, A. P.; Sataev, I. R.; Turukina, L. V. | On the road towards multidimensional tori |  | summary 
+1326.34100 | 2013 | Emelianova, Yu. P.; Kuznetsov, A. P.; Sataev, I. R.; Turukin | Synchronization and multi-frequency oscillations in the low-dimensional chain of the self-oscillators |  | summary 
+0865.60072 | 1994 | Sataev, E. A. | Asymptotically Markov stochastic processes |  | summary 
+1304.34073 | 2013 | Kuznetsov, Alexander P.; Kuznetsov, Sergey P.; Sataev, Igor  | About Landau-Hopf scenario in a system of coupled self-oscillators |  | summary 
+1055.37526 | 1995 | Afraĭmovich, V. S.; Chernov, N. I.; Sataev, E. A. | Statistical properties of 2-D generalized hyperbolic attractors. |  | summary 
+0645.58032 | 1987 | Sataev, E. A. | The Schwarz derivative for diffeomorphisms and flows in \({\mathbb{R}}^ n\) |  | review 
+1378.37112 | 2016 | Borisov, Alexey V.; Kazakov, Alexey O.; Sataev, Igor R. | Spiral chaos in the nonholonomic model of a Chaplygin top |  | review *torus
+1197.01061 | 2007 | Zhirov, A. Yu.; Kochergin, A. V.; Plykin, R. V.; Sataev, E.  | Mathematical life. Dmitrii Viktorovich Anosov (on his 70th birthday) |  |  
+1574.34225 | 2011 | Kuznetsov, Aleksandr Petrovich; Sataev, Igor' Rustamovich; T | Forced synchronization of two coupled Van der Pol self-oscillators |  | summary 
+0389.28008 | 1977 | Sataev, E. A. | An invariant of monotone equivalence determining the quotients of automorphisms monotonely equivalent to a Bernoulli shi |  |  
+0886.58042 | 1997 | Kuznetsov, S. P.; Sataev, I. R. | Period-doubling for two-dimensional non-invertible maps: Renormalization group analysis and quantitative universality |  | summary 
+1367.70049 | 2015 | Kuznetsov, Alexander P.; Migunova, Natalia A.; Sataev, Igor  | From chaos to quasi-periodicity |  | summary 
+0376.28014 | 1977 | Sataev, E. A. | Eine Invariante einer monotonen Äquivalenz, die Faktoren von Automorphismen definiert, die der Bernoulliverschiebung mon |  |  
+0755.58041 | 1991 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | Period doubling system under fractal signal: Bifurcation in the renormalization group equation |  | review 
+1574.34228 | 2010 | Kuznetsov, A. P.; Sataev, I. R.; Tyuryukina, L. V. | Synchronization and multi-frequency oscillations in the chain of phase oscillators |  | summary 
+1563.37060 | 2013 | Isaeva, Ol'ga Borisovna; Kuznetsov, Sergeĭ Petrovich; Sataev | On a bifurcation scenario of a birth of attractor of Smale-Williams type |  | summary *solenoid
+1494.34116 | 2022 | Kuznetsov, Alexander P.; Sataev, Igor R.; Turukina, Ludmila  | Regional structure of two- and three-frequency regimes in a model of four phase oscillators |  | summary 
+1119.37309 | 2006 | Kuznetsov, S. P.; Sataev, I. R. | Verification of hyperbolicity conditions for a chaotic attractor in a system of coupled nonautonomous van der Pol oscill |  | review 
+0959.37505 | 1994 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | Three-parameter scaling for one-dimensional maps |  | summary 
+1352.70039 | 2014 | Borisov, Alexey V.; Kazakov, Alexey O.; Sataev, Igor R. | Regular and chaotic attractors in the nonholonomic model of Chapygin's ball |  | review 
+0826.58024 | 1991 | Anosov, D. V.; Aranson, S. Kh.; Grines, V. Z.; Plykin, R. V. | Dynamical systems IX |  | review 
+1249.34117 | 2010 | Kuznetsov, A. P.; Sataev, I. R.; Tyuryukina, L. V. | Phase dynamics of periodically driven quasiperiodic self-vibrating oscillators |  | summary 
+1328.37034 | 2015 | Isaeva, Olga B.; Kuznetsov, Sergey P.; Sataev, Igor R.; Savi | Hyperbolic chaos and other phenomena of complex dynamics depending on parameters in a nonautonomous system of two altern |  | summary 
+None | 2025 | Kuznetsov, A. P.; Sataev, I. R.; Stankevich, N. V.; Turukina | On chaos with additional zero Lyapunov exponents and related effects. Overview and illustrations |  |  
+1086.37018 | 2005 | Kuznetsov, S. P.; Mailybaev, A. A.; Sataev, I. R. | Bifurcation of universal regimes at the border of chaos |  | review 
+0900.70329 | 1993 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | Variety of types of critical behavior and multistability in period-doubling systems with unidirectional coupling near th |  |  
+1465.37035 | 2021 | Kuznetsov, S. P.; Kruglov, V. P.; Sataev, I. R. | Smale-Williams solenoids in autonomous system with saddle equilibrium |  | summary *solenoid
+1319.34081 | 2012 | Isaeva, Olga B.; Kuznetsov, Sergey P.; Sataev, Igor R. | A ``saddle-node'' bifurcation scenario for birth or destruction of a Smale-Williams solenoid |  | summary *solenoid
+1004.37503 | 1997 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | Codimension and typicality in the context of description of transmission to chaos via period-doubling in dissipative dyn |  | review 
+0874.58042 | 1991 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | Bicritical dynamics of period-doubling systems with unidirectional coupling |  | summary 
+1574.34158 | 2012 | Kuznetsov, Aleksandr Petrovich; Kuznetsov, Sergeĭ Petrovich; | Landau-Hopf scenario in the ensemble of interacting oscillators |  | summary 
+1457.34059 | 2014 | Emelianova, Yulia P.; Kuznetsov, Alexander P.; Turukina, Lud | A structure of the oscillation frequencies parameter space for the system of dissipatively coupled oscillators |  | summary 
+1249.34143 | 2010 | Kuznetsov, A. P.; Sataev, I. R.; Tyuryukina, L. V. | On the way towards multidimensional tori |  | summary 
+1313.34147 | 2014 | Kuznetsov, A. P.; Tyuryukina, L. V.; Sataev, I. R.; Chernysh | Synchronization and multi-frequency quasi-periodicity in the dynamics of coupled oscillators |  | summary 
+1222.01042 | 2011 | Anosov, Dmitry V.; Antonovskii, Mikhail Ya; Buchstaber, Vict | Romen Vasil'evich Plykin (obituary) |  |  
+1563.37108 | 2012 | Kuznetsov, Sergeĭ Petrovich; Zhalnine, Alekseĭ Yur'evich; Sa | Phenomena of nonlinear dynamics of dissipative systems in nonholonomic mechanics of the rattleback |  | summary 
+1458.34091 | 2021 | Sataev, I. R.; Stankevich, N. V. | Cascade of torus birth bifurcations and inverse cascade of Shilnikov attractors merging at the threshold of hyperchaos |  | summary *torus
+1195.37009 | 2006 | Kuznetsov, S. P.; Sataev, I. R. | A new type of period-doubling scaling behavior in two-dimensional area-preserving map |  | summary 
+1119.70319 | 2006 | Kuznetsov, A. P.; Kuznetsov, S. P.; Savin, A. V.; Sataev, I. | Critical behavior of asymmetrically coupled noisy driven non-identical systems with period-doubling |  | review 
+1544.37030 | 2023 | Kruglov, Vyacheslav; Sataev, Igor | On hyperbolic attractors in a modified complex Shimizu-Morioka system |  |  
+None | 2022 | Grines, Evgeny A.; Kazakov, Alexey; Sataev, Igor R. | On the origin of chaotic attractors with two zero Lyapunov exponents in a system of five biharmonically coupled phase os |  |  
+1563.37061 | 2008 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R.; Sedova, Y | Critical point of accumulation of fold-flip bifurcation points and critical quasi-attractor (the review and new results) |  | summary 
+1347.37114 | 2016 | Sataev, Igor' Rustamovich; Kazakov, Alekseĭ Olegovich | Scenarios of transition to chaos in the nonholonomic model of a Chaplygin top |  | summary 
+1201.37044 | 2007 | Kuznetsov, A. P.; Savin, A. V.; Sataev, I. R. | On the critical behavior of non-identical asymmetric coupled Chua circuits |  | review 
+0959.37503 | 1994 | Kuznetsov, A. P.; Kuznetsov, S. P.; Sataev, I. R. | From bimodal one-dimensional maps to Hénon-like two-dimensional maps: does quantitative universality survive? |  | summary 
+1274.34107 | 2012 | Kuznetsov, A. P.; Sataev, I. R.; Sedova, Yu. V.; Tyuryukina, | On modelling the dynamics of coupled self-oscillators using the simplest phase maps |  | summary *torus
+1229.34053 | 2008 | Kuznetsov, A. P.; Sataev, I. R.; Sedova, J. V. | Dynamics of coupled non-identical systems with period-doubling cascade |  | summary 
+1323.01030 | 2015 | Aseev, S. M.; Buchstaber, V. M.; Grigorchuk, R. I.; Grines,  | Obituary: Dmitrii Viktorovich Anosov. |  |  
+1109.70306 | 2003 | Kuznetsov, A. P.; Kuznetsova, A. Yu.; Sataev, I. R. | Critical behavior of the map with Neimark-Sackers bifurcation for the phase synchronization breakup at the accumulation  |  | review 
+1049.37509 | 2002 | Kuznetsov, A. P.; Tyuryukina, L. V.; Savin, A. V.; Sataev, I | Multi-parameter picture of transition to chaos |  | review 
+1316.70023 | 2014 | Kuznetsov, Aleksander P.; Migunova, Nataliya A.; Sataev, Igo | Dynamics of coupled chaotic oscillators: from chaos to quasiperiodicity |  | summary *torus
+1127.70312 | 2004 | Kuznetsov, A. P.; Sedava, Yu. V.; Sataev, I. R. | The structure of the space of control parameters of nonidentical-coupled systems with a doubling period |  | review 
+1468.34068 | 2021 | Kruglov, V. P.; Krylosova, D. A.; Sataev, I. R.; Seleznev, E | Features of a chaotic attractor in a quasiperiodically driven nonlinear oscillator |  | summary 
+0809.58029 | 1991 | Anosov, D. V.; Aranson, S. Kh.; Grines, V. Z.; Plykin, R. V. | Dynamical systems with hyperbolic behavior |  | review 
+1150.93519 | 2001 | Preobrazhenskij, A. V.; Sataev, V. V. | The quality of ship steering using the separatrix effect |  | summary 
+0556.93014 | 1982 | Kochubievskij, I. P.; Sataev, A. G. | Potential realizability: pragmatic aspect |  | review 

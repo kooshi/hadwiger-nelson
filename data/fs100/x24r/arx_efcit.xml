@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Bk41p7AG2Te22hCi3tAe6jACtXY</id>
+  <title>arXiv Query: search_query=&amp;id_list=2608.24503,2303.01089,1909.06866&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-26T11:34:16Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2608.24503,2303.01089,1909.06866" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1909.06866v2</id>
+    <title>Decomposition of random walk measures on the one-dimensional torus</title>
+    <updated>2020-03-04T08:36:13Z</updated>
+    <link href="https://arxiv.org/abs/1909.06866v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.06866v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The main result of this paper is a decomposition theorem for a measure on the one-dimensional torus. Given a sufficiently large subset $S$ of the positive integers, an arbitrary measure on the torus is decomposed as the sum of two measures. The first one $μ_1$ has the property that the random walk with initial distribution $μ_1$ evolved by the action of $S$ equidistributes very fast. The second measure $μ_2$ in the decomposition is concentrated on very small neighborhoods of a small number of points.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-15T19:43:17Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Tom Gilat</name>
+    </author>
+    <arxiv:doi>10.19086/da.11888</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.19086/da.11888" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.24503v2</id>
+    <title>Generic Zero-Entropy Optimization for Finitely Generated Nonlacunary Actions on the Circle</title>
+    <updated>2026-08-31T17:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2608.24503v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.24503v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $T_n(x)=nx\pmod 1$ on $\T=\mathbb R/\mathbb Z$, and let $Σ\subset\mathbb N$ be a finitely generated nonlacunary multiplicative semigroup. We prove that, for every $1\le s\le\infty$, there is an open dense set of potentials $f\in W^{1,s}(\T)$ such that every measure that maximizes or minimizes $\int f\,dμ$ over the $Σ$-invariant probability measures satisfies $h_μ(T_r)=0$ for all $r\inΣ\setminus\{1\}$. For each fixed $s$, a single dense $G_δ$ subset of $W^{1,s}(\T)$ works simultaneously for all finitely generated nonlacunary multiplicative semigroups. The proof combines Rudolph--Johnson entropy rigidity with periodic-grid perturbations that generically exclude Haar measure from the optimizing faces. In particular, without any uniqueness assumption, the result applies to simultaneous $T_p,T_q$-invariance whenever $p,q\ge2$ are multiplicatively independent.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-25T12:49:35Z</published>
+    <arxiv:comment>11 pages. v2: The main theorem is extended from Lipschitz potentials to \(W^{1,s}(\mathbb T)\) for every \(1\leq s\leq\infty\). Added a sharpness result for the periodic-grid estimate and a uniform-topology analogue for continuous potentials; proofs, discussion, and references have been expanded</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Hang Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.01089v3</id>
+    <title>Around Furstenberg's times $p$, times $q$ conjecture: times $p$-invariant measures with some large Fourier coefficients</title>
+    <updated>2024-11-06T08:52:10Z</updated>
+    <link href="https://arxiv.org/abs/2303.01089v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.01089v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For each integer $n\ge 1$, denote by $T_{n}$ the map $x\mapsto nx\mod 1$ from the circle group $\mathbb{T} = \mathbb{R}/\mathbb{Z}$ into itself. Let $p,q\ge 2$ be two multiplicatively independent integers. Using Baire Category arguments, we show that generically a $T_{p}$-invariant probability measure $μ$ on $\mathbb{T}$ with no atom has some large Fourier coefficients along the sequence $(q^n)_{n\ge 0}$. In particular, $(T_{q^{n}}μ)_{n\ge 0}$ does not converges weak-star to the normalised Lebesgue measure on $\mathbb{T}$. This disproves a conjecture of Furstenberg and complements previous results of Johnson and Rudolph. In the spirit of previous work by Meiri and Lindenstrauss-Meiri-Peres, we study generalisations of our main result to certain classes of sequences $(c_n)_{n\ge 0}$ other than the sequences $(q^{n})_{n\ge 0}$, and also investigate the multidimensional setting.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-02T09:18:36Z</published>
+    <arxiv:comment>31 p, published in Discrete Analysis</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Catalin Badea</name>
+    </author>
+    <author>
+      <name>Sophie Grivaux</name>
+    </author>
+  </entry>
+</feed>

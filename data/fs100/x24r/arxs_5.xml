@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/lBtUp9ncjppknqxuR4Z5t4UdR/M</id>
+  <title>arXiv Query: search_query=abs:"Hadwiger-Nelson" AND abs:"field"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-26T11:29:55Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22Hadwiger-Nelson%22+AND+abs:%22field%22&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1509.07023v1</id>
+    <title>The Hadwiger-Nelson problem over certain fields</title>
+    <updated>2015-09-23T15:08:24Z</updated>
+    <link href="https://arxiv.org/abs/1509.07023v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.07023v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We compute the Hadwiger-Nelson numbers $χ(E^2)$ for certain number fields $E$, that is, the smallest number of colors required to color the points in the plane with coordinates in~$E$ so that no two points at distance $1$ from one another have the same color. Specifically, we show that $χ(\mathbb{Q}(\sqrt{2})^2) = 2$, that $χ(\mathbb{Q}(\sqrt{3})^2) = 3$, that $χ(\mathbb{Q}(\sqrt{7})^2) = 3$ despite the fact that the graph $Γ(\mathbb{Q}(\sqrt{7})^2)$ is triangle-free, and that $4 \leq χ(\mathbb{Q}(\sqrt{3}, \sqrt{11})^2) \leq 5$. We also discuss some results over other fields, for other quadratic fields. We conclude with some comments on the use of the axiom of choice.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-23T15:08:24Z</published>
+    <arxiv:comment>preliminary version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>David A. Madore</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1507.05300v4</id>
+    <title>On a generalization of the Hadwiger-Nelson problem</title>
+    <updated>2016-01-12T20:57:22Z</updated>
+    <link href="https://arxiv.org/abs/1507.05300v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.05300v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For a field $F$ and a quadratic form $Q$ defined on an $n$-dimensional vector space $V$ over $F$, let $\mathrm{QG}_Q$, called the quadratic graph associated to $Q$, be the graph with the vertex set $V$ where vertices $u,w \in V$ form an edge if and only if $Q(v-w)=1$. Quadratic graphs can be viewed as natural generalizations of the unit-distance graph featuring in the famous Hadwiger-Nelson problem. In the present paper, we will prove that for a local field $F$ of characteristic zero, the Borel chromatic number of $\mathrm{QG}_Q$ is infinite if and only if $Q$ represents zero non-trivially over $F$. The proof employs a recent spectral bound for the Borel chromatic number of Cayley graphs, combined with an analysis of certain oscillatory integrals over local fields. As an application, we will also answer a variant of question 525 proposed in the 22nd British Combinatorics Conference 2009.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-19T15:27:53Z</published>
+    <arxiv:comment>This is the final version. Accepted in Israel Journal of Mathematics</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Mohammad Bardestani</name>
+    </author>
+    <author>
+      <name>Keivan Mallahi-Karai</name>
+    </author>
+  </entry>
+</feed>

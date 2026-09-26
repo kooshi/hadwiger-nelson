@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ZNlFGo+463fvuZOVUhD6hsp1ePU</id>
+  <title>arXiv Query: search_query=abs:"invariant measures" AND abs:solenoid AND abs:entropy&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-26T11:36:00Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22invariant+measures%22+AND+(abs:solenoid+AND+abs:entropy)&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.17743v1</id>
+    <title>Fourier Decay of SRB Measures for Skew Products</title>
+    <updated>2026-09-15T18:51:38Z</updated>
+    <link href="https://arxiv.org/abs/2609.17743v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.17743v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study Fourier decay of natural invariant measures for real analytic skew products $T(x,y)=(f(x),g(x,y))$ on $\mathbb{S}^1 \times [-1,1]$, where $f$ is expanding and $0&lt;|\partial_y g(x,y)|&lt;1$. Let $\mathcal S$ denote the associated solenoidal attractor. We prove a dichotomy: either $\mathcal S$ is a single horizontal graph, or both the SRB measure and the measure of maximal entropy have polynomial Fourier decay. No transversality assumption is imposed.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-15T18:51:38Z</published>
+    <arxiv:comment>46 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Gaétan Leclerc</name>
+    </author>
+    <author>
+      <name>Haojie Ren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.10623v1</id>
+    <title>Fourier decay of equilibrium states for bunched attractors</title>
+    <updated>2023-01-25T15:02:11Z</updated>
+    <link href="https://arxiv.org/abs/2301.10623v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.10623v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $M$ be a closed manifold, and let $f:M \rightarrow M$ be a $C^{2+α}$ Axiom A diffeomorphism. Suppose that $f$ has an attractor $Ω$ with codimension 1 stable lamination. Under a generic nonlinearity condition and a suitable bunching condition, we prove polynomial Fourier decay in the unstable direction for a large class of invariant measures on $Ω$. Our result applies in particular for the measure of maximal entropy. We construct in the appendix an explicit solenoid that satisfies the nonlinearity and bunching assumption.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-25T15:02:11Z</published>
+    <arxiv:comment>This is a first work on trying to understand the Fourier transform of equilibrium states for Axiom A diffeomorphisms using Markov partitions. This is part of the author's PhD and might not be published soon, as we are working on another approach that might gives better results</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Gaétan Leclerc</name>
+    </author>
+  </entry>
+</feed>

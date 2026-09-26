@@ -1,0 +1,6 @@
+## q3_10: 'ab:"characters" & ab:"number field" & ab:"algebraic group" & py:2015-2026'  total=5 fetched=5
+1336.14020 | 2015 | Gorodnik, Alexander; Takloo-Bighash, Ramin; Tschinkel, Yuri | Multiple mixing for adele groups and rational points |  | review *number field/adel/rational points
+1518.22005 | 2022 | Bekka, Bachir; Francini, Camille | Characters of algebraic groups over number fields |  | review *number field/solenoid/adel
+1494.11001 | 2018 | Gan, Wee Teck; Gao, Fan; Weissman, Martin H. | L-groups and the Langlands program for covering groups |  | review *number field/torus
+1386.14169 | 2016 | Grekhov, M. V. | Integral models of algebraic tori over fields of algebraic numbers |  | review *number field/torus
+None | 2026 | Li, Wen-Wei | Stabilization of the trace formula for metaplectic groups |  | review *number field

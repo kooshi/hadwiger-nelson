@@ -1,0 +1,3 @@
+## q3_7: 'ab:"multiplicative semigroup" & ab:"invariant measure"'  total=2 fetched=2
+0272.43002 | 1975 | Dunkl, Charles F.; Ramirez, Donald E. | A family of countably compact P\(_*\)-hypergroups |  |  
+1402.37006 | 2017 | Huang, Huichi | Fourier coefficients of \(\times p\)-invariant measures |  | summary 

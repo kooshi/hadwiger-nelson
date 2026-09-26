@@ -1,0 +1,2266 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/IzNiCvQVY+w7uObajgNAoUeDWao</id>
+  <title>arXiv Query: search_query=abs:chromatic AND abs:plane&amp;id_list=&amp;start=200&amp;max_results=100</title>
+  <updated>2026-09-26T11:30:50Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:chromatic+AND+abs:plane&amp;start=200&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>259</opensearch:totalResults>
+  <opensearch:startIndex>200</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2407.14356v1</id>
+    <title>Atmosphyre: Modelling Atmospheric Chromatic Dispersion for Multi-Object Spectrographs</title>
+    <updated>2024-07-19T14:36:18Z</updated>
+    <link href="https://arxiv.org/abs/2407.14356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.14356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The wavelength dependent refraction of light in the atmosphere causes the chromatic dispersion of a target on the focal plane of an instrument. This is known as atmospheric dispersion, with one of the consequences being wavelength dependent flux losses which are difficult to minimise, requiring analysis in both instrument design and operations. We present Atmosphyre, a novel python package developed to characterise the impact of atmospheric dispersion on a spectrograph, with a focus on fibre multi-object spectrographs (MOS) which will be at the forefront of ground-based astronomy for the next few decades.
+  We show example simulations and provide recommendations for minimising fibre MOS flux losses. We conclude that the guiding wavelength should typically be bluer than the observing band mid-wavelength, around 25-45% of the way through the band. The aperture should be centred on this wavelength's location on the focal plane. This wavelength/position remains constant for all reasonable declinations and target hour angles. We also present an application of the package to MOSAIC, the ELT's multi-object spectrograph. We find that differential losses greater than 10% are unavoidable for 1h observations that are a) after a local hour angle of 2.5h, or b) at declinations below -60 degrees and above 10 degrees. We identify that the introduction of an atmospheric dispersion corrector (ADC) would result in the significant reduction of spectral distortions, a gain in survey speed for many observations, and enable the implementation of wider visible observing bands; as a result, there has been a proposal to adopt ADCs at a positioner level for MOSAIC. Future work includes adding field differential refraction to Atmosphyre, important for future wide-field multi-object spectrograph projects such as the proposed WST.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-19T14:36:18Z</published>
+    <arxiv:comment>10 pages, 6 figures, submitted to SPIE Astronomical Telescopes &amp; Instrumentation, Ground-based and Airborne Instrumentation for Astronomy X (Conference 13096, Paper 219)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>J. Stephan</name>
+      <arxiv:affiliation>UK Astronomy Technology Centre</arxiv:affiliation>
+    </author>
+    <author>
+      <name>R. Sánchez-Janssen</name>
+      <arxiv:affiliation>UK Astronomy Technology Centre</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.19863v1</id>
+    <title>Potts Partition Function Zeros and Ground State Entropy on Hanoi Graphs</title>
+    <updated>2024-09-30T01:42:22Z</updated>
+    <link href="https://arxiv.org/abs/2409.19863v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.19863v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study properties of the Potts model partition function $Z(H_m,q,v)$ on $m$'th iterates of Hanoi graphs, $H_m$, and use the results to draw inferences about the $m \to \infty$ limit that yields a self-similar Hanoi fractal, $H_\infty$. We also calculate the chromatic polynomials $P(H_m,q)=Z(H_m,q,-1)$. From calculations of the configurational degeneracy, per vertex, of the zero-temperature Potts antiferromagnet on $H_m$, denoted $W(H_m,q)$, estimates of $W(H_\infty,q)$, are given for $q=3$ and $q=4$ and compared with known values on other lattices. We compute the zeros of $Z(H_m,q,v)$ in the complex $q$ plane for various values of the temperature-dependent variable $v=y-1$ and in the complex $y$ plane for various values of $q$. These are consistent with accumulating to form loci denoted ${\cal B}_q(v)$ and ${\cal B}_v(q)$, or equivalently, ${\cal B}_y(q)$, in the $m \to \infty$ limit. Our results motivate the inference that the maximal point at which ${\cal B}_q(-1)$ crosses the real $q$ axis, denoted $q_c$, has the value $q_c=(1/2)(3+\sqrt{5} \, )$ and correspondingly, if $q=q_c$, then ${\cal B}_y(q_c)$ crosses the real $y$ axis at $y=0$, i.e., the Potts antiferromagnet on $H_\infty$ with $q=(1/2)(3+\sqrt{5} \, )$ has a $T=0$ critical point. Finally, we analyze the partition function zeros in the $y$ plane for $q \gg 1$ and show that these accumulate approximately along parts of the sides of an equilateral triangular with apex points that scale like $y \sim q^{2/3}$ and $y \sim q^{2/3} e^{\pm 2πi/3}$. Some comparisons are presented of these findings for Hanoi graphs with corresponding results on $m$'th iterates of Sierpinski gasket graphs and the $m \to \infty$ limit yielding the Sierpinski gasket fractal.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-30T01:42:22Z</published>
+    <arxiv:comment>43 pages, 17 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>J. Stat. Phys. 192, 23 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Shu-Chiuan Chang</name>
+    </author>
+    <author>
+      <name>Robert Shrock</name>
+    </author>
+    <arxiv:doi>10.1007/s10955-025-03398-w</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10955-025-03398-w" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1903.04787v2</id>
+    <title>Shaping of a laser-accelerated proton beam for radiobiology applications via genetic algorithm</title>
+    <updated>2019-11-12T10:52:59Z</updated>
+    <link href="https://arxiv.org/abs/1903.04787v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1903.04787v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Laser-accelerated protons have a great potential for innovative experiments in radiation biology due to the sub-picosecond pulse duration and high dose rate achievable. However, the broad angular divergence makes them not optimal for applications with stringent requirements on dose homogeneity and total flux at the irradiated target. The strategy otherwise adopted to increase the homogeneity is to increase the distance between the source and the irradiation plane or to spread the beam with flat scattering systems or through the transport system itself. Such methods considerably reduce the proton flux and are not optimal for laser-accelerated protons. In this paper we demonstrate the use of a Genetic Algorithm (GA) to design an optimal non-flat scattering system to shape the beam and efficiently flatten the transversal dose distribution at the irradiated target. The system is placed in the magnetic transport system to take advantage of the presence of chromatic focusing elements to further mix the proton trajectories. The effect of a flat scattering system placed after the transport system is also presented for comparison. The general structure of the GA and its application to the shaping of a laser-accelerated proton beam are presented, as well as its application to the optimisation of dose distribution in a water target in air.</summary>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-03-12T08:55:24Z</published>
+    <arxiv:primary_category term="physics.med-ph"/>
+    <arxiv:journal_ref>Physica Medica: European Journal of Medical Physics, Volume 67, 123 - 131 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Marco Cavallone</name>
+    </author>
+    <author>
+      <name>Alessandro Flacco</name>
+    </author>
+    <author>
+      <name>Victor Malka</name>
+    </author>
+    <arxiv:doi>10.1016/j.ejmp.2019.10.027</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.ejmp.2019.10.027" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1709.06965v3</id>
+    <title>Drawing Graphs on Few Circles and Few Spheres</title>
+    <updated>2019-04-01T14:23:45Z</updated>
+    <link href="https://arxiv.org/abs/1709.06965v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1709.06965v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a drawing of a graph, its \emph{visual complexity} is defined as the number of geometrical entities in the drawing, for example, the number of segments in a straight-line drawing or the number of arcs in a circular-arc drawing (in 2D). Recently, Chaplick et al. [GD 2016] introduced a different measure for the visual complexity, the \emph{affine cover number}, which is the minimum number of lines (or planes) that together cover a crossing-free straight-line drawing of a graph $G$ in 2D (3D). In this paper, we introduce the \emph{spherical cover number}, which is the minimum number of circles (or spheres) that together cover a crossing-free circular-arc drawing in 2D (or 3D). It turns out that spherical covers are sometimes significantly smaller than affine covers. Moreover, there are highly symmetric graphs that have symmetric optimum spherical covers but apparently no symmetric optimum affine cover. For complete, complete bipartite, and platonic graphs, we analyze their spherical cover numbers and compare them to their affine cover numbers as well as their segment and arc numbers. We also link the spherical cover number to other graph parameters such as chromatic number, treewidth, and linear arboricity.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-09-20T16:58:01Z</published>
+    <arxiv:comment>21 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Myroslav Kryven</name>
+    </author>
+    <author>
+      <name>Alexander Ravsky</name>
+    </author>
+    <author>
+      <name>Alexander Wolff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1207.6778v1</id>
+    <title>Two player game variant of the Erdos-Szekeres problem</title>
+    <updated>2012-07-29T14:06:26Z</updated>
+    <link href="https://arxiv.org/abs/1207.6778v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1207.6778v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The classical Erdos-Szekeres theorem states that a convex $k$-gon exists in every sufficiently large point set. This problem has been well studied and finding tight asymptotic bounds is considered a challenging open problem. Several variants of the Erdos-Szekeres problem have been posed and studied in the last two decades. The well studied variants include the empty convex $k$-gon problem, convex $k$-gon with specified number of interior points and the chromatic variant.
+  In this paper, we introduce the following two player game variant of the Erdos-Szekeres problem: Consider a two player game where each player playing in alternate turns, place points in the plane. The objective of the game is to avoid the formation of the convex k-gon among the placed points. The game ends when a convex k-gon is formed and the player who placed the last point loses the game.
+  In our paper we show a winning strategy for the player who plays second in the convex 5-gon game and the empty convex 5-gon game by considering convex layer configurations at each step. We prove that the game always ends in the 9th step by showing that the game reaches a specific set of configurations.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-07-29T14:06:26Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Parikshit Kolipaka</name>
+    </author>
+    <author>
+      <name>Sathish Govindarajan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.13896v2</id>
+    <title>Optical MIMO Communication Using Holographic Spectral Multiplexing of Pulsed Ultrashort Laser</title>
+    <updated>2022-02-02T17:39:58Z</updated>
+    <link href="https://arxiv.org/abs/2106.13896v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.13896v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce Holographic Spectral Multiplexing (HSM) as a novel technique to enable multiple-input multiple-output (MIMO) communication in optical networks. HSM uses the spectral space of ultrashort laser pulses to create line codes in the form of 2D holograms. The pulse processing is performed in the temporal Fourier domain by spatially dispersing the pulse frequency components in a spectral processing device (SPD). The 2D holograms are composed of the patterns of intensity disparities that an SLM inscribes on the spectrally-decomposed Fourier plane of the pulse. The holographic line codes defined in this way transform the ultrashort laser pulses into high-entropy data symbols, hence, enhance the communication's spectral efficiency. Unlike conventional optical multiplexing schemes (e.g., TDM, WDM, or SDM), HSM does not physically or abstractly separate the communication propagation space into subchannels. Rather, HSM realizes a MIMO communication paradigm by allowing the photonic waves under the pulse envelope to propagate in the same space so they scatter and interfere by chromatic dispersion. This allows HSM to form beams between the pixels of SLM at the sender and receiver sides and optimize the beam to adapt to channel scattering situations. In this way, HSM delivers a rate gain that in the best case exponentially increases the information rate of communication.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-25T21:57:55Z</published>
+    <arxiv:comment>Needs more improvement</arxiv:comment>
+    <arxiv:primary_category term="cs.NI"/>
+    <author>
+      <name>Alireza Khodaei</name>
+    </author>
+    <author>
+      <name>Jitender Deogun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.09158v1</id>
+    <title>On the chromatic number of disjointness graphs of curves</title>
+    <updated>2018-11-22T13:05:55Z</updated>
+    <link href="https://arxiv.org/abs/1811.09158v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.09158v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $ω(G)$ and $χ(G)$ denote the clique number and chromatic number of a graph $G$, respectively. The {\em disjointness graph} of a family of curves (continuous arcs in the plane) is the graph whose vertices correspond to the curves and in which two vertices are joined by an edge if and only if the corresponding curves are disjoint. A curve is called {\em $x$-monotone} if every vertical line intersects it in at most one point. An $x$-monotone curve is {\em grounded} if its left endpoint lies on the $y$-axis.
+  We prove that if $G$ is the disjointness graph of a family of grounded $x$-monotone curves such that $ω(G)=k$, then $χ(G)\leq \binom{k+1}{2}$. If we only require that every curve is $x$-monotone and intersects the $y$-axis, then we have $χ(G)\leq \frac{k+1}{2}\binom{k+2}{3}$. Both of these bounds are best possible. The construction showing the tightness of the last result settles a 25 years old problem: it yields that there exist $K_k$-free disjointness graphs of $x$-monotone curves such that any proper coloring of them uses at least $Ω(k^{4})$ colors. This matches the upper bound up to a constant factor.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-22T13:05:55Z</published>
+    <arxiv:comment>21 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Janos Pach</name>
+    </author>
+    <author>
+      <name>Istvan Tomon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1703.01679v1</id>
+    <title>Astrometric calibration and performance of the Dark Energy Camera</title>
+    <updated>2017-03-05T22:30:49Z</updated>
+    <link href="https://arxiv.org/abs/1703.01679v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1703.01679v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We characterize the ability of the Dark Energy Camera (DECam) to perform relative astrometry across its 500~Mpix, 3 deg^2 science field of view, and across 4 years of operation. This is done using internal comparisons of ~4x10^7 measurements of high-S/N stellar images obtained in repeat visits to fields of moderate stellar density, with the telescope dithered to move the sources around the array. An empirical astrometric model includes terms for: optical distortions; stray electric fields in the CCD detectors; chromatic terms in the instrumental and atmospheric optics; shifts in CCD relative positions of up to ~10 um when the DECam temperature cycles; and low-order distortions to each exposure from changes in atmospheric refraction and telescope alignment. Errors in this astrometric model are dominated by stochastic variations with typical amplitudes of 10-30 mas (in a 30 s exposure) and 5-10 arcmin coherence length, plausibly attributed to Kolmogorov-spectrum atmospheric turbulence. The size of these atmospheric distortions is not closely related to the seeing. Given an astrometric reference catalog at density ~0.7 arcmin^{-2}, e.g. from Gaia, the typical atmospheric distortions can be interpolated to 7 mas RMS accuracy (for 30 s exposures) with 1 arcmin coherence length for residual errors. Remaining detectable error contributors are 2-4 mas RMS from unmodelled stray electric fields in the devices, and another 2-4 mas RMS from focal plane shifts between camera thermal cycles. Thus the astrometric solution for a single DECam exposure is accurate to 3-6 mas (0.02 pixels, or 300 nm) on the focal plane, plus the stochastic atmospheric distortion.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-03-05T22:30:49Z</published>
+    <arxiv:comment>Submitted to PASP</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>G. M. Bernstein</name>
+    </author>
+    <author>
+      <name>R. Armstrong</name>
+    </author>
+    <author>
+      <name>A. A. Plazas</name>
+    </author>
+    <author>
+      <name>A. R. Walker</name>
+    </author>
+    <author>
+      <name>T. M. C. Abbott</name>
+    </author>
+    <author>
+      <name>S. Allam</name>
+    </author>
+    <author>
+      <name>K. Bechtol</name>
+    </author>
+    <author>
+      <name>A. Benoit-Lévy</name>
+    </author>
+    <author>
+      <name>D. Brooks</name>
+    </author>
+    <author>
+      <name>D. L. Burke</name>
+    </author>
+    <author>
+      <name>A. Carnero Rosell</name>
+    </author>
+    <author>
+      <name>M. Carrasco Kind</name>
+    </author>
+    <author>
+      <name>J. Carretero</name>
+    </author>
+    <author>
+      <name>C. E. Cunha</name>
+    </author>
+    <author>
+      <name>L. N. da Costa</name>
+    </author>
+    <author>
+      <name>D. L. DePoy</name>
+    </author>
+    <author>
+      <name>S. Desai</name>
+    </author>
+    <author>
+      <name>H. T. Diehl</name>
+    </author>
+    <author>
+      <name>T. F. Eifler</name>
+    </author>
+    <author>
+      <name>E. Fernandez</name>
+    </author>
+    <author>
+      <name>P. Fosalba</name>
+    </author>
+    <author>
+      <name>J. Frieman</name>
+    </author>
+    <author>
+      <name>J. García-Bellido</name>
+    </author>
+    <author>
+      <name>D. W. Gerdes</name>
+    </author>
+    <author>
+      <name>D. Gruen</name>
+    </author>
+    <author>
+      <name>R. A. Gruendl</name>
+    </author>
+    <author>
+      <name>J. Gschwend</name>
+    </author>
+    <author>
+      <name>G. Gutierrez</name>
+    </author>
+    <author>
+      <name>K. Honscheid</name>
+    </author>
+    <author>
+      <name>D. J. James</name>
+    </author>
+    <author>
+      <name>S. Kent</name>
+    </author>
+    <author>
+      <name>E. Krause</name>
+    </author>
+    <author>
+      <name>K. Kuehn</name>
+    </author>
+    <author>
+      <name>N. Kuropatkin</name>
+    </author>
+    <author>
+      <name>T. S. Li</name>
+    </author>
+    <author>
+      <name>M. A. G. Maia</name>
+    </author>
+    <author>
+      <name>M. March</name>
+    </author>
+    <author>
+      <name>J. L. Marshall</name>
+    </author>
+    <author>
+      <name>F. Menanteau</name>
+    </author>
+    <author>
+      <name>R. Miquel</name>
+    </author>
+    <author>
+      <name>R. L. C. Ogando</name>
+    </author>
+    <author>
+      <name>K. Reil</name>
+    </author>
+    <author>
+      <name>A. Roodman</name>
+    </author>
+    <author>
+      <name>E. S. Rykoff</name>
+    </author>
+    <author>
+      <name>E. Sanchez</name>
+    </author>
+    <author>
+      <name>V. Scarpine</name>
+    </author>
+    <author>
+      <name>R. Schindler</name>
+    </author>
+    <author>
+      <name>M. Schubnell</name>
+    </author>
+    <author>
+      <name>I. Sevilla-Noarbe</name>
+    </author>
+    <author>
+      <name>M. Smith</name>
+    </author>
+    <author>
+      <name>R. C. Smith</name>
+    </author>
+    <author>
+      <name>M. Soares-Santos</name>
+    </author>
+    <author>
+      <name>F. Sobreira</name>
+    </author>
+    <author>
+      <name>E. Suchyta</name>
+    </author>
+    <author>
+      <name>M. E. C. Swanson</name>
+    </author>
+    <author>
+      <name>G. Tarle</name>
+    </author>
+    <arxiv:doi>10.1088/1538-3873/aa6c55</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1538-3873/aa6c55" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.07188v1</id>
+    <title>Tight bounds for intersection-reverse sequences, edge-ordered graphs and applications</title>
+    <updated>2024-11-11T18:03:47Z</updated>
+    <link href="https://arxiv.org/abs/2411.07188v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.07188v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 2006, Marcus and Tardos proved that if $A^1,\dots,A^n$ are cyclic orders on some subsets of a set of $n$ symbols such that the common elements of any two distinct orders $A^i$ and $A^j$ appear in reversed cyclic order in $A^i$ and $A^j$, then $\sum_{i} |A^i|=O(n^{3/2}\log n)$. This result is tight up to the logarithmic factor and has since become an important tool in Discrete Geometry. We improve this to the optimal bound $O(n^{3/2})$. In fact, we show that if $A^1,\dots,A^n$ are linear orders on some subsets of a set of $n$ symbols such that no three symbols appear in the same order in any two distinct linear orders, then $\sum_{i} |A^i|=O(n^{3/2})$. Using this result, we resolve several open problems in Discrete Geometry and Extremal Graph Theory as follows.
+  We prove that every $n$-vertex topological graph that does not contain a self-crossing four-cycle has $O(n^{3/2})$ edges. This resolves a problem of Marcus and Tardos from 2006. We also show that $n$ pseudo-circles in the plane can be cut into $O(n^{3/2})$ pseudo-segments, which, in turn, implies new bounds on point-circle incidences and on other geometric problems. Moreover, we prove that the edge-ordered Turán number of the four-cycle $C_4^{1243}$ is $Θ(n^{3/2})$. This answers a question of Gerbner, Methuku, Nagy, Pálvölgyi, Tardos and Vizer.
+  Using different methods, we determine the largest possible extremal number that an edge-ordered forest of order chromatic number two can have. Kucheriya and Tardos showed that every such graph has extremal number at most $n2^{O(\sqrt{\log n})}$, and conjectured that this can be improved to $n(\log n)^{O(1)}$. We disprove their conjecture by showing that for every $C&gt;0$, there exists an edge-ordered tree of order chromatic number two whose extremal number is $Ω(n 2^{C\sqrt{\log n}})$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-11T18:03:47Z</published>
+    <arxiv:comment>16 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Barnabás Janzer</name>
+    </author>
+    <author>
+      <name>Oliver Janzer</name>
+    </author>
+    <author>
+      <name>Abhishek Methuku</name>
+    </author>
+    <author>
+      <name>Gábor Tardos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.12412v1</id>
+    <title>Impact of water vapor seeing on mid-infrared high-contrast imaging at ELT scale</title>
+    <updated>2022-10-22T10:29:57Z</updated>
+    <link href="https://arxiv.org/abs/2210.12412v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.12412v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The high-speed variability of the local water vapor content in the Earth atmosphere is a significant contributor to ground-based wavefront quality throughout the infrared domain. Unlike dry air, water vapor is highly chromatic, especially in the mid-infrared. This means that adaptive optics correction in the visible or near-infrared domain does not necessarily ensure a high wavefront quality at longer wavelengths. Here, we use literature measurements of water vapor seeing, and more recent infrared interferometric data from the Very Large Telescope Interferometer (VLTI), to evaluate the wavefront quality that will be delivered to the METIS mid-infrared camera and spectrograph for the Extremely Large Telescope (ELT), operating from 3 to 13 μm, after single-conjugate adaptive optics correction in the near-infrared. We discuss how the additional wavefront error due to water vapor seeing is expected to dominate the wavefront quality budget at N band (8-13 μm), and therefore to drive the performance of mid-infrared high-contrast imaging modes at ELT scale. Then we present how the METIS team is planning to mitigate the effect of water vapor seeing using focal-plane wavefront sensing techniques, and show with end-to-end simulations by how much the high-contrast imaging performance can be improved.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-22T10:29:57Z</published>
+    <arxiv:comment>13 pages, paper presented at SPIE Astronomical Telescopes + Instrumentation 2022</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>Proceedings of the SPIE, Volume 12185, id. 1218511 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Olivier Absil</name>
+    </author>
+    <author>
+      <name>Christian Delacroix</name>
+    </author>
+    <author>
+      <name>Gilles Orban de Xivry</name>
+    </author>
+    <author>
+      <name>Prashant Pathak</name>
+    </author>
+    <author>
+      <name>Matthew Willson</name>
+    </author>
+    <author>
+      <name>Philippe Berio</name>
+    </author>
+    <author>
+      <name>Roy van Boekel</name>
+    </author>
+    <author>
+      <name>Alexis Matter</name>
+    </author>
+    <author>
+      <name>Denis Defrere</name>
+    </author>
+    <author>
+      <name>Leo Burtscher</name>
+    </author>
+    <author>
+      <name>Julien Woillez</name>
+    </author>
+    <author>
+      <name>Bernhard Brandl</name>
+    </author>
+    <arxiv:doi>10.1117/12.2627972</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.2627972" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.02378v1</id>
+    <title>Maximizing the scientific return of Roman and Rubin with a joint wide-sky observing strategy</title>
+    <updated>2024-02-04T07:22:01Z</updated>
+    <link href="https://arxiv.org/abs/2402.02378v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.02378v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents the case for a single-band LSST-matched depth Roman Community Survey over the footprint of the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST) Wide-Fast-Deep to enhance the key science programs of both missions. We propose to observe the ~18K sq deg LSST Wide-Fast-Deep footprint in the F146 filter to mAB~25; this will take approximately 5 months of Roman observing time. The combination of the multiwavelength nature of LSST and angular resolution of Roman would lead to enhanced scientific returns for both the Roman and LSST surveys. Galaxy deblending and crowded field photometry will be significantly improved. The extension of Rubin LSST six-band optical photometry to IR wavelengths would improve photometric redshift (photo-z) estimation, leading to improved cosmological parameter estimation, penetrate interstellar dust in the Galactic plane, improve differential chromatic refraction derived Spectral Energy Distributions, maximize galaxy-star separation and minimize crowding confusion through improved angular resolution. Conversely, the LSST survey will provide a time-domain extension of the Roman survey on the shared footprint and 6-band optical photometry with sensitivity extending all the way to ultraviolet wavelengths.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-04T07:22:01Z</published>
+    <arxiv:comment>This document was written in response to the Call for Community Input into the Definition of the Roman Space Telescope's Core Community Surveys (June 2023)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Federica B. Bianco</name>
+      <arxiv:affiliation>University of Delaware, Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Blum</name>
+      <arxiv:affiliation>Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Andrew Connolly</name>
+      <arxiv:affiliation>U. Washington, Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Melissa Graham</name>
+      <arxiv:affiliation>U. Washington, Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Leanne Guy</name>
+      <arxiv:affiliation>Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Zeljko Ivezic</name>
+      <arxiv:affiliation>University of Washington, Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Steve Ritz</name>
+      <arxiv:affiliation>UC Santa Cruz, Rubin Observatory</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Michael A. Strauss</name>
+      <arxiv:affiliation>Princeton University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Tony Tyson</name>
+      <arxiv:affiliation>UC Davis, Rubin Observatory</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1610.04741v2</id>
+    <title>Drawing graphs using a small number of obstacles</title>
+    <updated>2017-07-17T09:02:42Z</updated>
+    <link href="https://arxiv.org/abs/1610.04741v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.04741v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An obstacle representation of a graph $G$ is a set of points in the plane representing the vertices of $G$, together with a set of polygonal obstacles such that two vertices of $G$ are connected by an edge in $G$ if and only if the line segment between the corresponding points avoids all the obstacles. The obstacle number ${\rm obs}(G)$ of $G$ is the minimum number of obstacles in an obstacle representation of $G$.
+  We provide the first non-trivial general upper bound on the obstacle number of graphs by showing that every $n$-vertex graph $G$ satisfies ${\rm obs}(G) \leq n\lceil\log{n}\rceil-n+1$. This refutes a conjecture of Mukkamala, Pach, and Pálvölgyi. For $n$-vertex graphs with bounded chromatic number, we improve this bound to $O(n)$. Both bounds apply even when the obstacles are required to be convex.
+  We also prove a lower bound $2^{Ω(hn)}$ on the number of $n$-vertex graphs with obstacle number at most $h$ for $h&lt;n$ and a lower bound $Ω(n^{4/3}M^{2/3})$ for the complexity of a collection of $M \geq Ω(n\log^{3/2}{n})$ faces in an arrangement of line segments with $n$ endpoints. The latter bound is tight up to a multiplicative constant.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-15T14:19:29Z</published>
+    <arxiv:comment>18 pages, 13 figures, minor changes</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Martin Balko</name>
+    </author>
+    <author>
+      <name>Josef Cibulka</name>
+    </author>
+    <author>
+      <name>Pavel Valtr</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.24289v1</id>
+    <title>Demonstration of simultaneous PIAA- coronagraphy and wavefront sensing using a single metasurface-based focal-plane optic</title>
+    <updated>2026-08-25T09:17:18Z</updated>
+    <link href="https://arxiv.org/abs/2608.24289v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.24289v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Controlling residual wavefront aberrations downstream of an extreme adaptive optics (ExAO) system is a major challenge in high-contrast imaging. These aberrations produce quasi-static speckles due to differences between the wavefront-sensing and science paths. Highly sensitive wavefront sensors, such as Zernike wavefront sensors (ZWFSs), are used to mitigate these non-common path aberrations. High-performing coronagraphs, such as complex mask coronagraphs (CMCs), are also implemented in the focal plane. Both perform better with lossless apodization such as phase-induced amplitude apodization (PIAA) optics. Metasurfaces can have chromatic responses, allowing a single focal-plane optic to have different functionalities in different wavelength bands. We demonstrate such an optic by manufacturing a hybrid metasurface designed to function as a CMC and a ZWFS in two intermediate-band filters in the H band, each with a fractional bandwidth of approximately 1\%. We show measured optical responses with phases of $\sim π/2$ at shorter wavelengths and $π$ at longer wavelengths between $1500$ and $1700,\text{nm}$. This would allow for wavefront sensing at the shorter wavelength of $\sim1500\,\text{nm}$ and coronagraphy at the longer wavelength of $\sim1700\,\text{nm}$. Additionally, we tested the mask on-sky with the MagAO-X instrument at the Magellan Clay 6.5 m telescope at Las Campanas Observatory, Chile. On-sky results show a contrast of $\sim 10^{-1}$ at a non-ideal wavelength of $\sim 1600\,\text{nm}$. This is comparable to simulated contrast curves using the measured optical responses around that wavelength. Finally, we evaluated the wavefront-sensing performance of the metasurface using the MagAO-X internal source at $1300\,\mathrm{nm}$. The measured reconstruction error is consistent with simulations of an ideal Zernike wavefront sensor, confirming its wavefront-sensing functionality.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-25T09:17:18Z</published>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>Proc. SPIE 14154, 141545H (2026)</arxiv:journal_ref>
+    <author>
+      <name>Dhwanil Patel</name>
+    </author>
+    <author>
+      <name>Sebastiaan Y. Haffert</name>
+    </author>
+    <author>
+      <name>Skyler Palatnick</name>
+    </author>
+    <author>
+      <name>Adam Taras</name>
+    </author>
+    <author>
+      <name>Maxwell A. Millar-Blanchaer</name>
+    </author>
+    <author>
+      <name>Matthijs Mars</name>
+    </author>
+    <author>
+      <name>Elena Tonucci</name>
+    </author>
+    <author>
+      <name>Jared R. Males</name>
+    </author>
+    <author>
+      <name>Laird M. Close</name>
+    </author>
+    <author>
+      <name>Joshua Liberman</name>
+    </author>
+    <author>
+      <name>Warren B. Foster</name>
+    </author>
+    <author>
+      <name>Kyle Van Gorkom</name>
+    </author>
+    <author>
+      <name>Olivier Guyon</name>
+    </author>
+    <author>
+      <name>Alexander D. Hedglen</name>
+    </author>
+    <author>
+      <name>Parker T. Johnson</name>
+    </author>
+    <author>
+      <name>Maggie Y. Kautz</name>
+    </author>
+    <author>
+      <name>Jay K. Kueny</name>
+    </author>
+    <author>
+      <name>Jialin Li</name>
+    </author>
+    <author>
+      <name>Joseph D. Long</name>
+    </author>
+    <author>
+      <name>Jennifer Lumbres</name>
+    </author>
+    <author>
+      <name>Eden A. McEwen</name>
+    </author>
+    <author>
+      <name>Avalon McLeod</name>
+    </author>
+    <author>
+      <name>Lauren Schatz</name>
+    </author>
+    <author>
+      <name>Katie Twitchell</name>
+    </author>
+    <author>
+      <name>Robert J. Harris</name>
+    </author>
+    <author>
+      <name>Viktoria Kutnohorsky</name>
+    </author>
+    <arxiv:doi>10.1117/12.3100860</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.3100860" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1907.05168v5</id>
+    <title>Graph product structure for non-minor-closed classes</title>
+    <updated>2022-11-18T21:48:24Z</updated>
+    <link href="https://arxiv.org/abs/1907.05168v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1907.05168v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dujmović et al. [\emph{J.~ACM}~'20] recently proved that every planar graph is isomorphic to a subgraph of the strong product of a bounded treewidth graph and a path. Analogous results were obtained for graphs of bounded Euler genus or apex-minor-free graphs. These tools have been used to solve longstanding problems on queue layouts, non-repetitive colouring, $p$-centered colouring, and adjacency labelling. This paper proves analogous product structure theorems for various non-minor-closed classes. One noteable example is $k$-planar graphs (those with a drawing in the plane in which each edge is involved in at most $k$ crossings). We prove that every $k$-planar graph is isomorphic to a subgraph of the strong product of a graph of treewidth $O(k^5)$ and a path. This is the first result of this type for a non-minor-closed class of graphs. It implies, amongst other results, that $k$-planar graphs have non-repetitive chromatic number upper-bounded by a function of $k$. All these results generalise for drawings of graphs on arbitrary surfaces. In fact, we work in a more general setting based on so-called shortcut systems, which are of independent interest. This leads to analogous results for certain types of map graphs, string graphs, graph powers, and nearest neighbour graphs.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-07-11T12:59:49Z</published>
+    <arxiv:comment>v2 Cosmetic improvements and a corrected bound for (layered-)(tree)width in Theorems 2, 9, 11, and Corollaries 1, 3, 4, 6, 12. v3 Complete restructure. v4 Major revision, improved constants for 1-planar and d-map graphs. v5 Clarifications and corrections suggested by referee</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Vida Dujmović</name>
+    </author>
+    <author>
+      <name>Pat Morin</name>
+    </author>
+    <author>
+      <name>David R. Wood</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.09058v2</id>
+    <title>Unit and distinct distances in typical norms</title>
+    <updated>2024-11-07T14:52:50Z</updated>
+    <link href="https://arxiv.org/abs/2302.09058v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.09058v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Erdős' unit distance problem and Erdős' distinct distances problem are among the most classical and well-known open problems in discrete mathematics. They ask for the maximum number of unit distances, or the minimum number of distinct distances, respectively, determined by $n$ points in the Euclidean plane. The question of what happens in these problems if one considers normed spaces other than the Euclidean plane has been raised in the 1980s by Ulam and Erdős and attracted a lot of attention over the years. We give an essentially tight answer to both questions for almost all norms on $\mathbb{R}^d$, in a certain Baire categoric sense.
+  For the unit distance problem we prove that for almost all norms $\|.\|$ on $\mathbb{R}^d$, any set of $n$ points defines at most $\frac{1}{2} d \cdot n \log_2 n$ unit distances according to $\|.\|$. We also show that this is essentially tight, by proving that for every norm $\|.\|$ on $\mathbb{R}^d$, for any large $n$, we can find $n$ points defining at least $\frac{1}{2}(d-1-o(1))\cdot n \log_2 n$ unit distances according to $\|.\|$.
+  For the distinct distances problem, we prove that for almost all norms $\|.\|$ on $\mathbb{R}^d$ any set of $n$ points defines at least $(1-o(1))n$ distinct distances according to $\|.\|$. This is clearly tight up to the $o(1)$ term.
+  We also answer the famous Hadwiger--Nelson problem for almost all norms on $\mathbb{R}^2$, showing that their unit distance graph has chromatic number $4$.
+  Our results settle, in a strong and somewhat surprising form, problems and conjectures of Brass, Matoušek, Brass-Moser-Pach, Chilakamarri, and Robertson. The proofs combine combinatorial and geometric ideas with tools from Linear Algebra, Topology and Algebraic Geometry.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-17T18:49:46Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Noga Alon</name>
+    </author>
+    <author>
+      <name>Matija Bucić</name>
+    </author>
+    <author>
+      <name>Lisa Sauermann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.05208v1</id>
+    <title>Active focal plane phase mask coronagraphy with a discrete pixelated device: I. Study of the theoretical performance trade space</title>
+    <updated>2026-09-04T14:41:12Z</updated>
+    <link href="https://arxiv.org/abs/2609.05208v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.05208v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in high-contrast exoplanet imaging instrumentation have introduced the concept of adaptive coronagraphy. For example, liquid-crystal-on-silicon spatial light modulators can be used as programmable phase masks or digital micro-mirror devices as configurable pupil apodizers. Adaptive coronagraphy offers the ability to adjust in real time to changing observing conditions and science goals, such as switching between blind surveys and follow-ups of known objects, or optimizing observations of multiple star systems including binaries and triples. At the same time, these active devices present challenges: finite spatial sampling, limited phase resolution, and the scalar nature of their modulation can all reduce coronagraphic performance. We look at the performance of a coronagraph utilizing pixelated discrete focal plane masks in function of various key parameters, notably spatial sampling, phase resolution, temporal jitter, and calibration errors. The analysis includes several FPM designs: vortex, four-quadrant phase mask, Roddier and Roddier, dual-zone phase mask, and azimuthal cosine phase mask. Both monochromatic and 20% broadband imaging conditions are considered, along with the absence or presence of a central obstruction from a secondary mirror in the telescope pupil, associated with variations in Lyot stop sizing. Our results identify the main error sources and limiting parameters of scalar, pixelated FPM coronagraphs. Under ideal conditions, performance is mainly limited by spatial sampling and chromaticity of scalar phase modulation. These devices are therefore primarily relevant to ground-based high-contrast imaging rather than the deeper contrast regimes required by future space observatories. Although motivated mainly by SLM implementations, the conclusions should also apply to other discrete pixelated focal-plane phase masks.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-04T14:41:12Z</published>
+    <arxiv:comment>Accepted in Journal of Astronomical Telescopes, Instruments, and Systems (JATIS), 48 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Liurong Lin</name>
+    </author>
+    <author>
+      <name>Axel Potier</name>
+    </author>
+    <author>
+      <name>Ruben Tandon</name>
+    </author>
+    <author>
+      <name>Lucas Marquis</name>
+    </author>
+    <author>
+      <name>Jonas G. Kühn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.03249v2</id>
+    <title>Multimodal Colored Point Cloud to Image Alignment</title>
+    <updated>2022-04-12T13:59:55Z</updated>
+    <link href="https://arxiv.org/abs/2110.03249v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.03249v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reconstruction of geometric structures from images using supervised learning suffers from limited available amount of accurate data. One type of such data is accurate real-world RGB-D images. A major challenge in acquiring such ground truth data is the accurate alignment between RGB images and the point cloud measured by a depth scanner. To overcome this difficulty, we consider a differential optimization method that aligns a colored point cloud with a given color image through iterative geometric and color matching. In the proposed framework, the optimization minimizes the photometric difference between the colors of the point cloud and the corresponding colors of the image pixels. Unlike other methods that try to reduce this photometric error, we analyze the computation of the gradient on the image plane and propose a different direct scheme. We assume that the colors produced by the geometric scanner camera and the color camera sensor are different and therefore characterized by different chromatic acquisition properties. Under these multimodal conditions, we find the transformation between the camera image and the point cloud colors. We alternately optimize for aligning the position of the point cloud and matching the different color spaces. The alignments produced by the proposed method are demonstrated on both synthetic data with quantitative evaluation and real scenes with qualitative results.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-07T08:12:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Noam Rotstein</name>
+    </author>
+    <author>
+      <name>Amit Bracha</name>
+    </author>
+    <author>
+      <name>Ron Kimmel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.07704v1</id>
+    <title>DP color functions versus chromatic polynomials (II)</title>
+    <updated>2022-03-15T07:45:51Z</updated>
+    <link href="https://arxiv.org/abs/2203.07704v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.07704v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For any connected graph $G$, let $P(G,m)$ and $P_{DP}(G,m)$ denote the chromatic polynomial and DP color function of $G$, respectively. It is known that $P_{DP}(G,m)\le P(G,m)$ holds for every positive integer $m$. Let $DP_\approx$ (resp. $DP_&lt;$) be the set of graphs $G$ for which there exists an integer $M$ such that $P_{DP}(G,m)=P(G,m)$ (resp. $P_{DP}(G,m)&lt;P(G,m)$) holds for all integers $m \ge M$. Determining the sets $DP_\approx$ and $DP_&lt;$ is a key problem on the study of the DP color function. For any edge set $E_0$ of $G$, let $\ell_G(E_0)$ be the length of a shortest cycle $C$ in $G$ such that $|E(C)\cap E_0|$ is odd whenever such a cycle exists, and $\ell_G(E_0)=\infty$ otherwise. Write $\ell_G(E_0)$ as $\ell_G(e)$ if $E_0=\{e\}$.
+  In this paper, we prove that if $G$ has a spanning tree $T$ such that $\ell_G(e)$ is odd for each $e\in E(G)\setminus E(T)$, the edges in $E(G)\setminus E(T)$ can be labeled as $e_1,e_2,\cdots, e_q$ with $\ell_G(e_i)\le \ell_G(e_{i+1})$ for all $1\le i\le q-1$ and each edge $e_i$ is contained in a cycle $C_i$ of length $\ell_G(e_i)$ with $E(C_i)\subseteq E(T)\cup \{e_j: 1\le j\le i\}$, then $G$ is a graph in $DP_{\approx}$. As a direct application of this conclusion, all plane near-triangulations and complete multipartite graphs with at least three partite sets belong to $DP_{\approx}$. We also show that if $E^*$ is an edge set of $G$ such that $\ell_{G}(E^*)$ is even and $E^*$ satisfies certain conditions, then $G$ belongs to $DP_&lt;$. In particular, if $\ell_G(E^*)=4$, where $E^*$ is a set of edges between two disjoint vertex subsets of $G$, then $G$ belongs to $DP_&lt;$. Both results extend known ones in [DP color functions versus chromatic polynomials, $Advances\ in\ Applied\ Mathematics$ 134 (2022), article 102301].</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-15T07:45:51Z</published>
+    <arxiv:comment>24 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Meiqiao Zhang</name>
+    </author>
+    <author>
+      <name>Fengming Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.06384v1</id>
+    <title>Prism-array lenses for energy filtering in medical x-ray imaging</title>
+    <updated>2021-01-16T06:54:58Z</updated>
+    <link href="https://arxiv.org/abs/2101.06384v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.06384v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conventional energy filters for x-ray imaging are based on absorbing materials which attenuate low energy photons, sometimes combined with an absorption edge, thus also discriminating towards photons of higher energies. These filters are fairly inefficient, in particular for photons of higher energies, and other methods for achieving a narrower bandwidth have been proposed. Such methods include various types of monochromators, based on for instance mosaic crystals or refractive multi-prism x-ray lenses (MPL's). Prism-array lenses (PAL's) are similar to MPL's, but are shorter, have larger apertures, and higher transmission. A PAL consists of a number of small prisms arranged in columns perpendicular to the optical axis. The column height decreases along the optical axis so that the projection of lens material is approximately linear with a Fresnel phase-plate pattern superimposed on it. The focusing effect is one dimensional, and the lens is chromatic. Hence, unwanted energies can be blocked by placing a slit in the image plane of a desired energy. We present the first experimental and theoretical results on an energy filter based on a silicon PAL. The study includes an evaluation of the spectral shaping properties of the filter as well as a quantification of the achievable increase in dose efficiency compared to standard methods. Previously, PAL's have been investigated with synchrotron radiation, but in this study a medical imaging setup, based on a regular x-ray tube, is considered.</summary>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-16T06:54:58Z</published>
+    <arxiv:primary_category term="physics.med-ph"/>
+    <arxiv:journal_ref>Proc. SPIE 6510, Medical Imaging 2007: Physics of Medical Imaging, 65100S (7 March 2007)</arxiv:journal_ref>
+    <author>
+      <name>Erik Fredenberg</name>
+    </author>
+    <author>
+      <name>Bjorn Cederstrom</name>
+    </author>
+    <author>
+      <name>Carolina Ribbing</name>
+    </author>
+    <author>
+      <name>Mats Danielsson</name>
+    </author>
+    <arxiv:doi>10.1117/12.713767</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.713767" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1604.05958v1</id>
+    <title>Circular Backbone Colorings: on matching and tree backbones of planar graphs</title>
+    <updated>2016-04-20T13:50:14Z</updated>
+    <link href="https://arxiv.org/abs/1604.05958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1604.05958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a graph $G$, and a spanning subgraph $H$ of $G$, a circular $q$-backbone $k$-coloring of $(G,H)$ is a proper $k$-coloring $c$ of $G$ such that $q\le \lvert c(u)-c(v)\rvert \le k-q$, for every edge $uv\in E(H)$. The circular $q$-backbone chromatic number of $(G,H)$, denoted by $CBC_q(G,H)$, is the minimum integer $k$ for which there exists a circular $q$-backbone $k$-coloring of $(G,H)$.
+  The Four Color Theorem implies that whenever $G$ is planar, we have $CBC_2(G,H)\le 8$. It is conjectured that this upper bound can be improved to 7 when $H$ is a tree, and to 6 when $H$ is a matching. In this work, we show that: 1) if $G$ is planar and has no $C_4$ as subgraph, and $H$ is a linear spanning forest of $G$, then $CBC_2(G,H)\leq 7$; 2) if $G$ is a plane graph having no two 3-faces sharing an edge, and $H$ is a matching of $G$, then $CBC_2(G,H)\leq 6$; and 3) if $G$ is planar and has no $C_4$ nor $C_5$ as subgraph, and $H$ is a mathing of $G$, then $CBC_2(G,H)\leq 5$. These results partially answer questions posed by Broersma, Fujisawa and Yoshimoto (2003), and by Broersma, Fomin and Golovach (2007). It also points towards a positive answer for the Steinberg's Conjecture.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-04-20T13:50:14Z</published>
+    <arxiv:comment>19 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Julio Araujo</name>
+    </author>
+    <author>
+      <name>Fabricio Benevides</name>
+    </author>
+    <author>
+      <name>Alexandre Cezar</name>
+    </author>
+    <author>
+      <name>Ana Silva</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0904.3909v1</id>
+    <title>Astrometric Redshifts for Quasars</title>
+    <updated>2009-04-24T17:00:45Z</updated>
+    <link href="https://arxiv.org/abs/0904.3909v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0904.3909v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The wavelength dependence of atmospheric refraction causes differential chromatic refraction (DCR), whereby objects imaged at different optical/UV wavelengths are observed at slightly different positions in the plane of the detector. Strong spectral features induce changes in the effective wavelengths of broad-band filters that are capable of producing significant positional offsets with respect to standard DCR corrections. We examine such offsets for broad-emission-line (type 1) quasars from the Sloan Digital Sky Survey (SDSS) spanning 0&lt;z&lt;5 and an airmass range of 1.0 to 1.8. These offsets are in good agreement with those predicted by convolving a composite quasar spectrum with the SDSS bandpasses as a function of redshift and airmass. This astrometric information can be used to break degeneracies in photometric redshifts of quasars (or other emission-line sources) and, for extreme cases, may be suitable for determining "astrometric redshifts". On the SDSS's southern equatorial stripe, where it is possible to average many multi-epoch measurements, more than 60% of quasars have emission-line-induced astrometric offsets larger than the SDSS's relative astrometric errors of 25-35 mas. Folding these astrometric offsets into photometric redshift estimates yields an improvement of 9% within Delta z+/-0.1. Future multi-epoch synoptic surveys such as LSST and Pan-STARRS could benefit from intentionally making ~10 observations at relatively high airmass (AM~1.4) in order to improve their photometric redshifts for quasars.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-04-24T17:00:45Z</published>
+    <arxiv:comment>29 pages, 13 figures (3 color); AJ, accepted</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>Astron.J.138:19-27,2009</arxiv:journal_ref>
+    <author>
+      <name>Michael C. Kaczmarczik</name>
+      <arxiv:affiliation>Drexel University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Gordon T. Richards</name>
+      <arxiv:affiliation>Drexel University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Sajjan S. Mehta</name>
+      <arxiv:affiliation>Drexel University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>David J. Schlegel</name>
+      <arxiv:affiliation>LBNL</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1088/0004-6256/138/1/19</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0004-6256/138/1/19" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.03850v1</id>
+    <title>Proposal of Bragg Diffraction Imaging on Protein Crystals with Precession-Electron Annular-Bright-Field Microscopy</title>
+    <updated>2021-05-09T06:33:01Z</updated>
+    <link href="https://arxiv.org/abs/2105.03850v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.03850v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this theoretical study, the author firstly discusses the wave interference of Bragg diffraction inside 3D crystal, followed by quantum mechanical interpretation on the diffraction process, and proves that the interference fringe between Bragg diffraction and the incident beam is identical to the lattice plane. By introducing the beam expander concept, we may explain the image projection mechanism of Bragg diffractions propagating through TEM: Transmission Electron Microscope. In practice, we will take projection images at zone axes, because of its symmetric high-density diffractions associated with flat Ewald sphere and minimum overlap with the neighboring molecules. By precessing the illuminating beam around the zone axis, and introducing annular objective aperture, we select only the kinematic Bragg diffractions which correctly contribute to the real image reconstruction on the 2D electron detector. The outcome should be a positive contrast, clean image with no dynamical diffractions nor Moiré patterns. Importantly, the image should be insensitive to the defocus, and the spatial resolution may not be limited by the spherical and the chromatic aberrations of objective lens. Therefore, the imaging of small molecules, such as, the drug structure will be straightforward. By taking multiple projection images at the different zone axes from many micro-crystals, or from surrounding thin edges of a large crystal, we may reconstruct 3D structure of the larger protein complex in atomic resolution.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-09T06:33:01Z</published>
+    <arxiv:comment>30 pages, 17 figures, not yet opened anywhere</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Tsumoru Shintake</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9707096v1</id>
+    <title>Families of Graphs with W_r({G},q) Functions That Are Nonanalytic at 1/q=0</title>
+    <updated>1997-07-09T19:36:10Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9707096v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9707096v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Denoting $P(G,q)$ as the chromatic polynomial for coloring an $n$-vertex graph $G$ with $q$ colors, and considering the limiting function $W(\{G\},q) = \lim_{n \to \infty}P(G,q)^{1/n}$, a fundamental question in graph theory is the following: is $W_r(\{G\},q) = q^{-1}W(\{G\},q)$ analytic or not at the origin of the $1/q$ plane? (where the complex generalization of $q$ is assumed). This question is also relevant in statistical mechanics because $W(\{G\},q)=\exp(S_0/k_B)$, where $S_0$ is the ground state entropy of the $q$-state Potts antiferromagnet on the lattice graph $\{G\}$, and the analyticity of $W_r(\{G\},q)$ at $1/q=0$ is necessary for the large-$q$ series expansions of $W_r(\{G\},q)$. Although $W_r$ is analytic at $1/q=0$ for many $\{G\}$, there are some $\{G\}$ for which it is not; for these, $W_r$ has no large-$q$ series expansion. It is important to understand the reason for this nonanalyticity. Here we give a general condition that determines whether or not a particular $W_r(\{G\},q)$ is analytic at $1/q=0$ and explains the nonanalyticity where it occurs. We also construct infinite families of graphs with $W_r$ functions that are non-analytic at $1/q=0$ and investigate the properties of these functions. Our results are consistent with the conjecture that a sufficient condition for $W_r(\{G\},q)$ to be analytic at $1/q=0$ is that $\{G\}$ is a regular lattice graph $Λ$. (This is known not to be a necessary condition).</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1997-07-09T19:36:10Z</published>
+    <arxiv:comment>22 pages, Revtex, 4 encapsulated postscript figures, to appear in Phys. Rev. E</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Phys. Rev. E56, 3935 (1997)</arxiv:journal_ref>
+    <author>
+      <name>Robert Shrock</name>
+      <arxiv:affiliation>Institute for Theoretical Physics, State University of New York at Stony Brook</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shan-Ho Tsai</name>
+      <arxiv:affiliation>Institute for Theoretical Physics, State University of New York at Stony Brook</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevE.56.3935</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevE.56.3935" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1506.01887v2</id>
+    <title>Fractional and $j$-fold colouring of the plane</title>
+    <updated>2015-10-05T18:15:20Z</updated>
+    <link href="https://arxiv.org/abs/1506.01887v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1506.01887v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present results referring to the Hadwiger-Nelson problem which asks for the minimum number of colours needed to colour the plane with no two points at distance $1$ having the same colour. Exoo considered a more general problem concerning graphs $G_{[a,b]}$ with $\mathbb{R}^2$ as the vertex set and two vertices adjacent if their distance is in the interval $[a,b]$. Exoo conjectured $χ(G_{[a,b]}) = 7$ for sufficiently small but positive difference between $a$ and $b$. We partially answer this conjecture by proving that $χ(G_{[a,b]}) \geq 5$ for $b &gt; a$.
+  A $j$-fold colouring of graph $G = (V,E)$ is an assignment of $j$-elemental sets of colours to the vertices of $G$, in such a way that the sets assigned to any two adjacent vertices are disjoint. The fractional chromatic number $χ_f(G)$ is the infimum of fractions $k/j$ for $j$-fold colouring of $G$ using $k$ colours. We generalize a method by Hochberg and O'Donnel (who proved that $G_{[1,1]} \leq 4.36$) for fractional colouring of graphs $G_{[a,b]}$, obtaining a bound dependant on $\frac{a}{b}$.
+  We also present few specific and two general methods for $j$-fold coloring of $G_{[a,b]}$ for small $j$, in particular for $G_{[1,1]}$ and $G_{[1,2]}$. The $j$-fold colouring for small $j$ has strong practical motivation especially in scheduling theory, while graph $G_{[1,2]}$ is often used to model hidden conflicts in radio networks.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-06-05T12:41:21Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput Geom (2016) 55: 594</arxiv:journal_ref>
+    <author>
+      <name>Jarosław Grytczuk</name>
+    </author>
+    <author>
+      <name>Konstanty Junosza-Szaniawski</name>
+    </author>
+    <author>
+      <name>Joanna Sokół</name>
+    </author>
+    <author>
+      <name>Krzysztof Węsek</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-016-9769-3</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-016-9769-3" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0807.4055v1</id>
+    <title>Preliminary optical design of PANIC, a wide-field infrared camera for CAHA</title>
+    <updated>2008-07-25T10:49:10Z</updated>
+    <link href="https://arxiv.org/abs/0807.4055v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0807.4055v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this paper, we present the preliminary optical design of PANIC (PAnoramic Near Infrared camera for Calar Alto), a wide-field infrared imager for the Calar Alto 2.2 m telescope. The camera optical design is a folded single optical train that images the sky onto the focal plane with a plate scale of 0.45 arcsec per 18 micron pixel. A mosaic of four Hawaii 2RG of 2k x 2k made by Teledyne is used as detector and will give a field of view of 31.9 arcmin x 31.9 arcmin. This cryogenic instrument has been optimized for the Y, J, H and K bands. Special care has been taken in the selection of the standard IR materials used for the optics in order to maximize the instrument throughput and to include the z band. The main challenges of this design are: to produce a well defined internal pupil which allows reducing the thermal background by a cryogenic pupil stop; the correction of off-axis aberrations due to the large field available; the correction of chromatic aberration because of the wide spectral coverage; and the capability of introduction of narrow band filters (~1%) in the system minimizing the degradation in the filter passband without a collimated stage in the camera. We show the optomechanical error budget and compensation strategy that allows our as built design to met the performances from an optical point of view. Finally, we demonstrate the flexibility of the design showing the performances of PANIC at the CAHA 3.5m telescope.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-07-25T10:49:10Z</published>
+    <arxiv:comment>This paper has been presented in the SPIE of Astronomical Telescopes and Instrumentation 2008 in Marseille (France)</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <arxiv:journal_ref>In Ground-based and Airborne Instrumentation for Astronomy II, edited by Ian S. McLean, Mark M. Casali, Proceedings of SPIE Vol. 7014 (SPIE, Bellingham, WA 2008) 70142Q</arxiv:journal_ref>
+    <author>
+      <name>M. C. Cardenas</name>
+    </author>
+    <author>
+      <name>J. Rodriguez Gomez</name>
+    </author>
+    <author>
+      <name>R. Lenzen</name>
+    </author>
+    <author>
+      <name>E. Sanchez-Blanco</name>
+    </author>
+    <arxiv:doi>10.1117/12.787390</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.787390" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.22551v1</id>
+    <title>Dimpled scalar vortex coronagraph laboratory demonstration</title>
+    <updated>2026-03-23T20:22:25Z</updated>
+    <link href="https://arxiv.org/abs/2603.22551v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.22551v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Achieving the Habitable Worlds Observatory (HWO) goal of 10^-10 contrast at a separation of 3 $λ$/D across a 20% bandwidth requires coronagraph focal plane masks with both broadband high contrast performance and high planet throughput. Scalar vortex coronagraphs (SVCs) offer a promising alternative to polarization-sensitive vector vortex designs but face chromatic limitations. This work presents the latest laboratory demonstrations of second-generation scalar vortex prototypes that incorporate radial phase dimples to improve broadband starlight suppression. We compare these new "dimpled" sawtooth masks to previous-generation scalar designs through high-contrast imaging experiments on the In-Air Coronagraph Testbed. Using electric field conjugation, we achieve near testbed-limited contrasts across both narrow (2%) and broadband (10%) spectral ranges. We report the best in-air contrasts achieved to date for scalar vortex masks across narrow and broadband spectral ranges and we also show that the dimpled vortex predicted bench-limited contrast performances for 2%, 10% and 18% bandwidths agree with the measured lab contrasts within a factor of two. These results highlight the potential of topographically achromatized scalar vortex masks as candidates for future space-based high-contrast imaging missions and mark a significant step toward polarization-independent coronagraphs capable of meeting HWO performance requirements.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-23T20:22:25Z</published>
+    <arxiv:comment>Accepted for publication in JATIS special edition in Habitable Worlds Observatory</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Niyati Desai</name>
+    </author>
+    <author>
+      <name>Garreth Ruane</name>
+    </author>
+    <author>
+      <name>Susan Redmond</name>
+    </author>
+    <author>
+      <name>Dimitri Mawet</name>
+    </author>
+    <author>
+      <name>Eugene Serabyn</name>
+    </author>
+    <author>
+      <name>Bertrand Mennesson</name>
+    </author>
+    <arxiv:doi>10.1117/1.JATIS.12.4.041006</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/1.JATIS.12.4.041006" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.5143v2</id>
+    <title>Calibration of quasi-static aberrations in exoplanet direct-imaging instruments with a Zernike phase-mask sensor</title>
+    <updated>2013-05-31T16:23:31Z</updated>
+    <link href="https://arxiv.org/abs/1305.5143v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.5143v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Context. Several exoplanet direct imaging instruments will soon be in operation. They use an extreme adaptive optics (XAO) system to correct the atmospheric turbulence and provide a highly-corrected beam to a near-infrared (NIR) coronagraph for starlight suppression. The performance of the coronagraph is however limited by the non-common path aberrations (NCPA) due to the differential wavefront errors existing between the visible XAO sensing path and the NIR science path, leading to residual speckles in the coronagraphic image. Aims. Several approaches have been developed in the past few years to accurately calibrate the NCPA, correct the quasi-static speckles and allow the observation of exoplanets at least 1e6 fainter than their host star. We propose an approach based on the Zernike phase-contrast method for the measurements of the NCPA between the optical path seen by the visible XAO wavefront sensor and that seen by the near-IR coronagraph. Methods. This approach uses a focal plane phase mask of size λ/D, where λ and D denote the wavelength and the telescope aperture diameter, respectively, to measure the quasi-static aberrations in the upstream pupil plane by encoding them into intensity variations in the downstream pupil image. We develop a rigorous formalism, leading to highly accurate measurement of the NCPA, in a quasi-linear way during the observation. Results. For a static phase map of standard deviation 44 nm rms at λ = 1.625 μm (0.026 λ), we estimate a possible reduction of the chromatic NCPA by a factor ranging from 3 to 10 in the presence of AO residuals compared with the expected performance of a typical current-generation system. This would allow a reduction of the level of quasi-static speckles in the detected images by a factor 10 to 100 hence, correspondingly improving the capacity to observe exoplanets.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-22T14:11:18Z</published>
+    <arxiv:comment>11 pages, 14 figures, A&amp;A accepted, 2nd version after language-editor corrections</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>M. N'Diaye</name>
+    </author>
+    <author>
+      <name>K. Dohlen</name>
+    </author>
+    <author>
+      <name>T. Fusco</name>
+    </author>
+    <author>
+      <name>B. Paul</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/201219797</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/201219797" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1908.10683v1</id>
+    <title>A plasmonic painter's method of color mixing for a continuous RGB palette</title>
+    <updated>2019-08-27T11:41:46Z</updated>
+    <link href="https://arxiv.org/abs/1908.10683v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1908.10683v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ability of mixing colors with remarkable results had long been exclusive to the talents of master painters. By finely combining colors at different amounts on the palette intuitively, they obtain smooth gradients with any given color. Creating such smooth color variations through scattering by the structural patterning of a surface, as opposed to color pigments, has long remained a challenge. Here, we borrow from the painter's approach and demonstrate color mixing generated by an optical metasurface. We propose a single-layer plasmonic color pixel and a method for nanophotonic structural color mixing based on the additive RGB color model. The color pixels consist of plasmonic nanorod arrays that generate vivid primary colors and enable independent control of color brightness without affecting chromaticity, by simply varying geometric in-plane parameters. By interleaving different nanorod arrays, we combine up to three primary colors on a single pixel. Based on this, two and three color mixing is demonstrated, enabling the continuous coverage of a plasmonic RGB color gamut and yielding a palette with a virtually unlimited number of colors. With this multi-resonant color pixel, we show the photorealistic printing of color and monochrome images at the nanoscale, with ultra-smooth transitions in color and brightness. Our color mixing approach can be applied to a broad range of scatterer designs and materials, and has the potential to be used for multi-wavelength color filters and dynamic photorealistic displays.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-08-27T11:41:46Z</published>
+    <arxiv:comment>33 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <arxiv:journal_ref>ACS Nano 14 (2020) 1783-1791</arxiv:journal_ref>
+    <author>
+      <name>Claudio U. Hail</name>
+    </author>
+    <author>
+      <name>Gabriel Schnoering</name>
+    </author>
+    <author>
+      <name>Mehdi Damak</name>
+    </author>
+    <author>
+      <name>Dimos Poulikakos</name>
+    </author>
+    <author>
+      <name>Hadi Eghlidi</name>
+    </author>
+    <arxiv:doi>10.1021/acsnano.9b07523</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/acsnano.9b07523" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.00034v2</id>
+    <title>Formulating and critically examining the assumptions of global 21-cm signal analyses: How to avoid the false troughs that can appear in single spectrum fits</title>
+    <updated>2020-06-05T18:00:02Z</updated>
+    <link href="https://arxiv.org/abs/2005.00034v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.00034v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The assumptions inherent to global 21-cm signal analyses are rarely delineated. In this paper, we formulate a general list of suppositions underlying a given claimed detection of the global 21-cm signal. Then, we specify the form of these assumptions for two different analyses: 1) the one performed by the EDGES team showing an absorption trough in brightness temperature that they modeled separately from the sky foreground and 2) a new, so-called Minimum Assumption Analysis (MAA), that makes the most conservative assumptions possible for the signal. We show fits using the EDGES analysis on various beam-weighted foreground simulations from the EDGES latitude with no signal added. Depending on the beam used, these simulations produce large false troughs due to the invalidity of the foreground model to describe the combination of beam chromaticity and the shape of the Galactic plane in the sky, the residuals of which are captured by the ad hoc flattened Gaussian signal model. On the other hand, the MAA provides robust fits by including many spectra at different time bins and allowing any possible 21-cm spectrum to be modeled exactly. We present uncertainty levels and example signal reconstructions found with the MAA for different numbers of time bins. With enough time bins, one can determine the true 21-cm signal with the MAA to $&lt;10$ times the noise level.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-30T18:04:41Z</published>
+    <arxiv:comment>19 pages, 4 figures, accepted to ApJ. Since previous version, added frequency correlation structure under MAA analysis and laid out extension of MAA to motion-induced dipole of 21-cm signal</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Keith Tauscher</name>
+    </author>
+    <author>
+      <name>David Rapetti</name>
+    </author>
+    <author>
+      <name>Jack O. Burns</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4357/ab9a3f</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4357/ab9a3f" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.01915v2</id>
+    <title>Is there any hidden symmetry in the stripe structure of perovskite high temperature superconductors?</title>
+    <updated>2019-02-13T15:07:58Z</updated>
+    <link href="https://arxiv.org/abs/1902.01915v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.01915v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Local and fast structural probes using synchrotron radiation have shown nanoscale striped puddles and nanoscale phase separation in doped perovskites.It is known that the striped phases in doped perovskites are due to competing interactions involving charge, spin and lattice degrees of freedom,but while many theoretical models for spin and charge stripes have been proposed we are missing theoretical models describing the complex lattice striped modulations in doped perovskites. In this work we show that two different stripes can be represented as a superposition of a pair of stripes, U(theta_n) and D(theta_n), characterized by perovskite tilts where one of the pair is rotated in relation to the other partner by an angle Delta(theta _n)=pi/2. The spatial distribution of the U and D stripes is reduced to all possible maps in the well-known mathematical four-color theorem. Both the periodic striped puddles and random structures can be represented by using $planar$ graphs with a chromatic number. To observe the colors in mapping experiments, it is necessary to recover variously oriented tilting effects from the replica. It is established that there is an interplay between the annihilation/creation of new stripes and ordering/disordering tilts in relation to the theta _n angle in the CuO2 plane, where the characteristic shape of the stripes coincides with the tilting-ordered regions. By their origin, the boundaries between the stripes should be atomically sharp.</summary>
+    <category term="cond-mat.supr-con" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-05T21:20:39Z</published>
+    <arxiv:comment>6 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.supr-con"/>
+    <arxiv:journal_ref>The Journal of Physical Chemistry Letters 10, 1840-1844 (2019)</arxiv:journal_ref>
+    <author>
+      <name>Vladimir A. Gavrichkov</name>
+    </author>
+    <author>
+      <name>Yury Shanko</name>
+    </author>
+    <author>
+      <name>Natalia G. Zamkova</name>
+    </author>
+    <author>
+      <name>Antonio Bianconi</name>
+    </author>
+    <arxiv:doi>10.1021/acs.jpclett.9b00513</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/acs.jpclett.9b00513" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.02185v3</id>
+    <title>Packing, Hitting, and Colouring Squares</title>
+    <updated>2024-06-03T16:16:27Z</updated>
+    <link href="https://arxiv.org/abs/2206.02185v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.02185v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a finite family of squares in the plane, the packing problem asks for the maximum number $ν$ of pairwise disjoint squares among them, while the hitting problem for the minimum number $τ$ of points hitting all of them. Clearly, $τ\ge ν$. Both problems are known to be NP-hard, even for families of axis-parallel unit squares.
+  The main results of this work provide the first non-trivial bounds for the $τ/ ν$ ratio for not necessarily axis-parallel squares. We establish an upper bound of $6$ for unit squares and $10$ for squares of varying sizes. The worst ratios we can provide with examples are $3$ and $4$, respectively. For comparison, in the axis-parallel case, the supremum of the considered ratio is in the interval $[\frac{3}{2},2]$ for unit squares and $[\frac{3}{2},4]$ for squares of varying sizes. The methods we introduced for the $τ/ν$ ratio can also be used to relate the chromatic number $χ$ and clique number $ω$ of squares by bounding the $χ/ω$ ratio by $6$ for unit squares and $9$ for squares of varying sizes.
+  The $τ/ ν$ and $χ/ω$ ratios have already been bounded before by a constant for "fat" objects, the fattest and simplest of which are disks and squares. However, while disks have received significant attention, specific bounds for squares have remained essentially unexplored. This work intends to fill this gap.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-05T14:12:10Z</published>
+    <arxiv:comment>The structure and several proofs have been improved. The section about rectangles with bounded aspect ratios has been removed. (32 pages, 20 figures)</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Marco Caoduro</name>
+    </author>
+    <author>
+      <name>András Sebő</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1801.06600v1</id>
+    <title>Status and performance of the THD2 bench in multi-deformable mirror configuration</title>
+    <updated>2018-01-19T23:38:46Z</updated>
+    <link href="https://arxiv.org/abs/1801.06600v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.06600v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The architecture of exoplanetary systems is relatively well known inward to 1 AU thanks to indirect techniques, which have allowed characterization of thousands of exoplanet orbits, masses and sometimes radii. The next step is the characterization of exoplanet atmospheres at long period, which requires direct imaging capability. While the characterization of a handful of young giant planets is feasible with dedicated instruments like SPHERE/VLT, GPI/Gemini, SCExAO/Subaru and soon with the coronagraphic capabilities aboard JWST, the spectroscopic study of mature giant planets and lower mass planets (Neptune-like, Super Earths) requires the achievement of better coronagraphic performance. While space-based coronagraph on WFIRST-AFTA might start this study at low spectroscopic resolution, dedicated projects on large space telescope and on the ELT will be required for a more complete spectroscopic study of these faint planets. To prepare these future instruments, we developed a high contrast imaging bench called THD, then THD2 for the upgraded version using multi-DM configuration. The THD2 bench is designed to test and compare coronagraphs as well as focal plane wavefront sensors and wavefront control techniques. It can simulate the beam provided by a space telescope and soon the first stage of adaptive optics behind a ground-based telescope. In this article, we describe in details the THD2 bench and give the results of a recent comparison study of the chromatic behavior for several coronagraph on the THD2.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-19T23:38:46Z</published>
+    <arxiv:comment>9 pages, 5 figures, 1 Table, AO4ELT 2017 conference proceeding</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Pierre Baudoz</name>
+    </author>
+    <author>
+      <name>Raphael Galicher</name>
+    </author>
+    <author>
+      <name>Fabien Patru</name>
+    </author>
+    <author>
+      <name>Olivier Dupuis</name>
+    </author>
+    <author>
+      <name>Simone Thijs</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1502.04499v1</id>
+    <title>Color Image Enhancement Using the lrgb Coordinates in the Context of Support Fuzzification</title>
+    <updated>2015-02-16T11:32:00Z</updated>
+    <link href="https://arxiv.org/abs/1502.04499v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1502.04499v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Image enhancement is an important stage in the image-processing domain. The most known image enhancement method is the histogram equalization. This method is an automated one, and realizes a simultaneous modification for brightness and contrast in the case of monochrome images and for brightness, contrast, saturation and hue in the case of color images. Simple and efficient methods can be obtained if affine transforms within logarithmic models are used. A very important thing in the affine transform determination for color images is the coordinate system that is used for color space representation. Thus, the using of the RGB coordinates leads to a simultaneous modification of luminosity and saturation. In this paper using the lrgb perceptual coordinates one can define affine transforms, which allow a separated modification of luminosity l and saturation s (saturation being calculated with the component rgb in the chromatic plane). Better results can be obtained if partitions are defined on the image support and then the pixels are separately processed in each window belonging to the defined partition. Classical partitions frequently lead to the appearance of some discontinuities at the boundaries between these windows. In order to avoid all these drawbacks the classical partitions may be replaced by fuzzy partitions. Their elements will be fuzzy windows and in each of them there will be defined an affine transform induced by parameters using the fuzzy mean, fuzzy variance and fuzzy saturation computed for the pixels that belong to the analyzed window. The final image is obtained by summing up in a weight way the images of every fuzzy window.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-02-16T11:32:00Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>Romanian Academy Journal, Fuzzy systems and A. I., Reports and Letters, F.S.A.I., Vol.10, Nos. 1-2, pp. 29-40, 2004</arxiv:journal_ref>
+    <author>
+      <name>Vasile Patrascu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1104.4808v1</id>
+    <title>Clustering Properties of Far-Infrared Sources in Hi-GAL Science Demonstration Phase Fields</title>
+    <updated>2011-04-25T20:42:34Z</updated>
+    <link href="https://arxiv.org/abs/1104.4808v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1104.4808v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We use a Minimum Spanning Tree algorithm to characterize the spatial distribution of Galactic Far-IR sources and derive their clustering properties. We aim to reveal the spatial imprint of different types of star forming processes, e.g. isolated spontaneous fragmentation of dense molecular clouds, or events of triggered star formation around HII regions, and highlight global properties of star formation in the Galaxy. We plan to exploit the entire Hi-GAL survey of the inner Galactic plane to gather significant statistics on the clustering properties of star forming regions, and to look for possible correlations with source properties such as mass, temperature or evolutionary stage. In this paper we present a pilot study based on the two 2x2 square degree fields centered at longitudes l=30 and l=59 obtained during the Science Demonstration Phase (SDP) of the Herschel mission. We find that over half of the clustered sources are associated with HII regions and infrared dark clouds. Our analysis also reveals a smooth chromatic evolution of the spatial distribution where sources detected at short-wavelengths, likely proto-stars surrounded by warm circumstellar material emitting in the far-infrared, tend to be clustered in dense and compact groups around HII regions while sources detected at long-wavelengths, presumably cold and dusty density enhancements of the ISM emitting in the sub-millimeter, are distributed in larger and looser groups.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-04-25T20:42:34Z</published>
+    <arxiv:comment>17 pages, 9 figures, accepted for publication in ApJ</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>N. Billot</name>
+    </author>
+    <author>
+      <name>E. Schisano</name>
+    </author>
+    <author>
+      <name>M. Pestalozzi</name>
+    </author>
+    <author>
+      <name>S. Molinari</name>
+    </author>
+    <author>
+      <name>A. Noriega-Crespo</name>
+    </author>
+    <author>
+      <name>J. C. Mottram</name>
+    </author>
+    <author>
+      <name>L. D. Anderson</name>
+    </author>
+    <author>
+      <name>D. Elia</name>
+    </author>
+    <author>
+      <name>G. Stringfellow</name>
+    </author>
+    <author>
+      <name>M. A. Thompson</name>
+    </author>
+    <author>
+      <name>D. Polychroni</name>
+    </author>
+    <author>
+      <name>L. Testi</name>
+    </author>
+    <arxiv:doi>10.1088/0004-637X/735/1/28</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0004-637X/735/1/28" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1203.3071v1</id>
+    <title>Existence of Multiple Vortices in Supersymmetric Gauge Field Theory</title>
+    <updated>2012-03-14T13:00:39Z</updated>
+    <link href="https://arxiv.org/abs/1203.3071v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1203.3071v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two sharp existence and uniqueness theorems are presented for solutions of multiple vortices arising in a six-dimensional brane-world supersymmetric gauge field theory under the general gauge symmetry group $G=U(1)\times SU(N)$ and with $N$ Higgs scalar fields in the fundamental representation of $G$. Specifically, when the space of extra dimension is compact so that vortices are hosted in a 2-torus of volume $|\Om|$, the existence of a unique multiple vortex solution representing $n_1,...,n_N$ respectively prescribed vortices arising in the $N$ species of the Higgs fields is established under the explicitly stated necessary and sufficient condition \[ n_i&lt;\frac{g^2v^2}{8πN}|\Om|+\frac{1}{N}(1-\frac{1}{N}[\frac{g}{e}]^2)n,\quad i=1,...,N,] where $e$ and $g$ are the U(1) electromagnetic and SU(N) chromatic coupling constants, $v$ measures the energy scale of broken symmetry, and $n=\sum_{i=1}^N n_i$ is the total vortex number; when the space of extra dimension is the full plane, the existence and uniqueness of an arbitrarily prescribed $n$-vortex solution of finite energy is always ensured. These vortices are governed by a system of nonlinear elliptic equations, which may be reformulated to allow a variational structure. Proofs of existence are then developed using the methods of calculus of variations.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-03-14T13:00:39Z</published>
+    <arxiv:comment>23 pages</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Shouxin Chen</name>
+    </author>
+    <author>
+      <name>Yisong Yang</name>
+    </author>
+    <arxiv:doi>10.1098/rspa.2012.0159</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1098/rspa.2012.0159" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.16088v1</id>
+    <title>Geochromatic Number when Crossings are Independent</title>
+    <updated>2024-03-24T11:03:31Z</updated>
+    <link href="https://arxiv.org/abs/2403.16088v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.16088v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A geometric graph, $\overline{G}$, is a graph drawn in the plane, with straight line edges and vertices in general position. A geometric homomorphism between two geometric graphs $\overline{G}$, $\overline{H}$ is a vertex map $f:\overline{G}\to\overline{H}$ that preserves vertex adjacency and edge crossings. The geochromatic number of $\overline{G}$, denoted $X(\overline{G})$, is the smallest integer $n$ so that there is a geometric homomorphism from $\overline{G}$ to some geometric realization of $K_n$. Recall that the chromatic number of an abstract graph $G$, denoted $χ(G)$, is the smallest integer $n$ for which there is a graph homomorphism from $G$ to $K_n$. It is immediately clear that $χ(G)\leq X(\overline{G})$. This paper establishes some upper bounds on $X(\overline{G})$ in terms of $χ(G)$. For instance, if all crossings are at distance at least 1 from each other, then $X(\overline{G})\leq 3χ(G)$. However, there are more precise results. If all crossing are at distance at least 2, then $X(\overline{G})\leq χ(G)+2$. If all crossings are at distance at least 1, and there is a graph homomorphism $f: G \to K_n$ that maps no pair of edges that cross in $\overline{G}$ to the same edge in $K_n$, then $X(\overline{G})\leq 2n$. Finally, if $χ(G)\in \{2,3\}$ and all crossings are at distance at least 1, then $X(\overline{G})\leq 2χ(G)$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-24T11:03:31Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Debra Boutin</name>
+    </author>
+    <author>
+      <name>Alice Dean</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.06169v1</id>
+    <title>Observing the Reionization : Effect of Calibration and Position Errors on Realistic Observation Conditions</title>
+    <updated>2022-07-13T13:06:13Z</updated>
+    <link href="https://arxiv.org/abs/2207.06169v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.06169v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Observation of the redshifted 21-cm signal from Cosmic Dawn and Epoch of Reionization is a challenging endeavor in observational cosmology. Presence of orders of magnitude brighter astrophysical foregrounds and various instrumental systematics increases the complexity of these observations. This work presents an end-to-end pipeline dealing with synthetic interferometric data of sensitive radio observations . The mock sky model includes the redshifted 21-cm signal and astrophysical foregrounds. The effects of calibration error and position error in the extraction of the redshifted 21-cm power spectrum has been simulated. The effect of the errors in the image plane detection of the cosmological signal has also been studied. A comparative analysis for array configurations like the SKA1-Low, MWA and HERA has been demonstrated. The calibration error tolerance of the arrays, under some assumptions about the nature of the systematic components, is optimally found to be $\sim 0.01\%$ for the detection of the signal. For position errors, an offset of $\gtrapprox 5\arcsec$ makes the residual foregrounds obscure the target signal. These simulations also imply that in the SKA-1 Low performs marginally better than the others in the image domain, while the same is true for MWA in the power spectrum domain. This is one of the first studies that compares performance of various radio telescopes operating under similar observing conditions towards detecting the cosmological signal. This end-to-end pipeline can also be extended to study effects of chromatic primary beam, radio frequency inferences, foregrounds with spectral features, etc.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-13T13:06:13Z</published>
+    <arxiv:comment>19 pages, 21 figures, Accepted for publication in MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Aishrila Mazumder</name>
+    </author>
+    <author>
+      <name>Abhirup Datta</name>
+    </author>
+    <author>
+      <name>Arnab Chakraborty</name>
+    </author>
+    <author>
+      <name>Suman Majumdar</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stac1994</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stac1994" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1603.08928v1</id>
+    <title>A Cloaking Device for Transiting Planets</title>
+    <updated>2016-03-29T20:00:03Z</updated>
+    <link href="https://arxiv.org/abs/1603.08928v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1603.08928v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The transit method is presently the most successful planet discovery and characterization tool at our disposal. Other advanced civilizations would surely be aware of this technique and appreciate that their home planet's existence and habitability is essentially broadcast to all stars lying along their ecliptic plane. We suggest that advanced civilizations could cloak their presence, or deliberately broadcast it, through controlled laser emission. Such emission could distort the apparent shape of their transit light curves with relatively little energy, due to the collimated beam and relatively infrequent nature of transits. We estimate that humanity could cloak the Earth from Kepler-like broadband surveys using an optical monochromatic laser array emitting a peak power of about 30 MW for roughly 10 hours per year. A chromatic cloak, effective at all wavelengths, is more challenging requiring a large array of tunable lasers with a total power of approximately 250 MW. Alternatively, a civilization could cloak only the atmospheric signatures associated with biological activity on their world, such as oxygen, which is achievable with a peak laser power of just around 160 kW per transit. Finally, we suggest that the time of transit for optical SETI is analogous to the water-hole in radio SETI, providing a clear window in which observers may expect to communicate. Accordingly, we propose that a civilization may deliberately broadcast their technological capabilities by distorting their transit to an artificial shape, which serves as both a SETI beacon and a medium for data transmission. Such signatures could be readily searched in the archival data of transit surveys.</summary>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.pop-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-03-29T20:00:03Z</published>
+    <arxiv:comment>10 pages, 6 figures, accepted in MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.EP"/>
+    <author>
+      <name>David M. Kipping</name>
+    </author>
+    <author>
+      <name>Alex Teachey</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stw672</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stw672" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1710.11197v1</id>
+    <title>On-sky closed loop correction of atmospheric dispersion for high-contrast coronagraphy and astrometry</title>
+    <updated>2017-10-30T19:02:53Z</updated>
+    <link href="https://arxiv.org/abs/1710.11197v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.11197v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adaptive optic (AO) systems delivering high levels of wavefront correction are now common at observatories. One of the main limitations to image quality after wavefront correction comes from atmospheric refraction. An Atmospheric dispersion compensator (ADC) is employed to correct for atmospheric refraction. The correction is applied based on a look-up table consisting of dispersion values as a function of telescope elevation angle. The look-up table based correction of atmospheric dispersion results in imperfect compensation leading to the presence of residual dispersion in the point-spread function (PSF) and is insufficient when sub-milliarcsecond precision is required. The presence of residual dispersion can limit the achievable contrast while employing high-performance coronagraphs or can compromise high-precision astrometric measurements. In this paper, we present the first on-sky closed-loop correction of atmospheric dispersion by directly using science path images. The concept behind the measurement of dispersion utilizes the chromatic scaling of focal plane speckles. An adaptive speckle grid generated with a deformable mirror (DM) that has a sufficiently large number of actuators is used to accurately measure the residual dispersion and subsequently correct it by driving the ADC. We have demonstrated with the Subaru Coronagraphic Extreme AO (SCExAO) system on-sky closed-loop correction of residual dispersion to &lt; 1 mas across H-band. This work will aid in the direct detection of habitable exoplanets with upcoming extremely large telescopes (ELTs) and also provide a diagnostic tool to test the performance of instruments which require sub-milliarcsecond correction.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-30T19:02:53Z</published>
+    <arxiv:comment>8 pages, 6 figures, accepted to PASP</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Prashant Pathak</name>
+    </author>
+    <author>
+      <name>Olivier Guyon</name>
+    </author>
+    <author>
+      <name>Nemanja Jovanovic</name>
+    </author>
+    <author>
+      <name>Julien Lozi</name>
+    </author>
+    <author>
+      <name>Frantz Martinache</name>
+    </author>
+    <author>
+      <name>Yosuke Minowa</name>
+    </author>
+    <author>
+      <name>Tomoyuki Kudo</name>
+    </author>
+    <author>
+      <name>Takayuki Kotani</name>
+    </author>
+    <author>
+      <name>Hideki Takami</name>
+    </author>
+    <arxiv:doi>10.1088/1538-3873/aa96f9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1538-3873/aa96f9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0902.3265v2</id>
+    <title>Characterisations and Examples of Graph Classes with Bounded Expansion</title>
+    <updated>2009-02-19T22:42:59Z</updated>
+    <link href="https://arxiv.org/abs/0902.3265v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0902.3265v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Classes with bounded expansion, which generalise classes that exclude a topological minor, have recently been introduced by Nešetřil and Ossona de Mendez. These classes are defined by the fact that the maximum average degree of a shallow minor of a graph in the class is bounded by a function of the depth of the shallow minor. Several linear-time algorithms are known for bounded expansion classes (such as subgraph isomorphism testing), and they allow restricted homomorphism dualities, amongst other desirable properties. In this paper we establish two new characterisations of bounded expansion classes, one in terms of so-called topological parameters, the other in terms of controlling dense parts. The latter characterisation is then used to show that the notion of bounded expansion is compatible with Erdös-Rényi model of random graphs with constant average degree. In particular, we prove that for every fixed $d&gt;0$, there exists a class with bounded expansion, such that a random graph of order $n$ and edge probability $d/n$ asymptotically almost surely belongs to the class. We then present several new examples of classes with bounded expansion that do not exclude some topological minor, and appear naturally in the context of graph drawing or graph colouring. In particular, we prove that the following classes have bounded expansion: graphs that can be drawn in the plane with a bounded number of crossings per edge, graphs with bounded stack number, graphs with bounded queue number, and graphs with bounded non-repetitive chromatic number. We also prove that graphs with `linear' crossing number are contained in a topologically-closed class, while graphs with bounded crossing number are contained in a minor-closed class.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-02-19T07:33:04Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>European J. Combinatorics 33.3:350-373, 2012</arxiv:journal_ref>
+    <author>
+      <name>Jaroslav Nešetřil</name>
+    </author>
+    <author>
+      <name>Patrice Ossona de Mendez</name>
+    </author>
+    <author>
+      <name>David R. Wood</name>
+    </author>
+    <arxiv:doi>10.1016/j.ejc.2011.09.008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.ejc.2011.09.008" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.00960v2</id>
+    <title>Tune modulation effects in the High Luminosity Large Hadron Collider</title>
+    <updated>2020-03-03T14:58:34Z</updated>
+    <link href="https://arxiv.org/abs/2003.00960v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.00960v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Several transverse noise sources, such as power supply ripples, can potentially act as an important limiting mechanism for the luminosity production of the Large Hadron Collider (LHC) and its future High-Luminosity upgrade (HL-LHC). In the presence of non-linearities, depending on the spectral components of the power supply noise and the nature of the source, such a mechanism can increase the diffusion of the particles in the distribution through the excitation of sideband resonances in the vicinity of the ones driven by the lattice non-linearities. For the HL-LHC, due to the reduction of the beam size in the Interaction Points (IP) of the high luminosity experiments (IP1 and 5), increased sensitivity to noise effects is anticipated for the quadrupoles of the inner triplets. The modulation that may arise from the power supply ripples will be combined with the tune modulation that intrinsically emerges from the coupling of the transverse and longitudinal plane for off-momentum particles through chromaticity. To this end, the aim of this paper is to study the impact of tune modulation effects on the transverse beam motion resulting from the interplay between quadrupolar power supply ripples and synchro-betatron coupling. A power supply noise threshold for acceptable performance is estimated with single-particle tracking simulations by investigating the impact of different modulation frequencies and amplitudes on the Dynamic Aperture. The excitation of sideband resonances due to the modulation is demonstrated with frequency maps and the higher sensitivity to specific modulation frequencies is explained. Finally, a power supply noise spectrum consisting of several tones is considered in the simulations to determine whether the presence of power supply ripples in the quadrupoles of the inner triplet will limit the luminosity production in the HL-LHC era.</summary>
+    <category term="physics.acc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-02T15:06:25Z</published>
+    <arxiv:primary_category term="physics.acc-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Accel. Beams 23, 121001 (2020)</arxiv:journal_ref>
+    <author>
+      <name>Sofia Kostoglou</name>
+    </author>
+    <author>
+      <name>Hannes Bartosik</name>
+    </author>
+    <author>
+      <name>Yannis Papaphilippou</name>
+    </author>
+    <author>
+      <name>Guido Sterbini</name>
+    </author>
+    <author>
+      <name>Natalia Triantafyllou</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevAccelBeams.23.121001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevAccelBeams.23.121001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/astro-ph/0301579v2</id>
+    <title>Reprocessing the Hipparcos data for evolved stars III Revised Hipparcos period-luminosity relationship for galactic long-period variable stars</title>
+    <updated>2003-03-07T00:42:00Z</updated>
+    <link href="https://arxiv.org/abs/astro-ph/0301579v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/astro-ph/0301579v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We analyze the K band luminosities of a sample of galactic long-period variables using parallaxes measured by the Hipparcos mission. The parallaxes are in most cases re-computed from the Hipparcos Intermediate Astrometric Data using improved astrometric fits and chromaticity corrections. The K band magnitudes are taken from the literature and from measurements by COBE, and are corrected for interstellar and circumstellar extinction. The sample contains stars of several spectral types: M, S and C, and of several variability classes: Mira, semiregular SRa, and SRb. We find that the distribution of stars in the period-luminosity plane is independent of circumstellar chemistry, but that the different variability types have different P-L distributions. Both the Mira variables and the SRb variables have reasonably well-defined period-luminosity relationships, but with very different slopes. The SRa variables are distributed between the two classes, suggesting that they are a mixture of Miras and SRb, rather than a separate class of stars. New period-luminosity relationships are derived based on our revised Hipparcos parallaxes. The Miras show a similar period-luminosity relationship to that found for Large Magellanic Cloud Miras by Feast et al. (1989). The maximum absolute K magnitude of the sample is about -8.2 for both Miras and semi-regular stars, only a little fainter than the expected AGB limit. We show that the stars with the longest periods (P&gt;400d) have high mass loss rates and are almost all Mira variables.</summary>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2003-01-29T14:01:21Z</published>
+    <arxiv:comment>Comments welcome. Submitted to A&amp;A 11 pages, 7 figs, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="astro-ph"/>
+    <arxiv:journal_ref>Astron.Astrophys.403:993-1002,2003</arxiv:journal_ref>
+    <author>
+      <name>G. R. Knapp</name>
+    </author>
+    <author>
+      <name>D. Pourbaix</name>
+    </author>
+    <author>
+      <name>I. Platais</name>
+    </author>
+    <author>
+      <name>A. Jorissen</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361:20030429</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361:20030429" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1407.2314v1</id>
+    <title>The Integral Field Spectrograph for the Gemini Planet Imager</title>
+    <updated>2014-07-09T00:02:48Z</updated>
+    <link href="https://arxiv.org/abs/1407.2314v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1407.2314v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Gemini Planet Imager (GPI) is a complex optical system designed to directly detect the self-emission of young planets within two arcseconds of their host stars. After suppressing the starlight with an advanced AO system and apodized coronagraph, the dominant residual contamination in the focal plane are speckles from the atmosphere and optical surfaces. Since speckles are diffractive in nature their positions in the field are strongly wavelength dependent, while an actual companion planet will remain at fixed separation. By comparing multiple images at different wavelengths taken simultaneously, we can freeze the speckle pattern and extract the planet light adding an order of magnitude of contrast. To achieve a bandpass of 20%, sufficient to perform speckle suppression, and to observe the entire two arcsecond field of view at diffraction limited sampling, we designed and built an integral field spectrograph with extremely low wavefront error and almost no chromatic aberration. The spectrograph is fully cryogenic and operates in the wavelength range 1 to 2.4 microns with five selectable filters. A prism is used to produce a spectral resolution of 45 in the primary detection band and maintain high throughput. Based on the OSIRIS spectrograph at Keck, we selected to use a lenslet-based spectrograph to achieve an rms wavefront error of approximately 25 nm. Over 36,000 spectra are taken simultaneously and reassembled into image cubes that have roughly 192x192 spatial elements and contain between 11 and 20 spectral channels. The primary dispersion prism can be replaced with a Wollaston prism for dual polarization measurements. The spectrograph also has a pupil-viewing mode for alignment and calibration.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-07-09T00:02:48Z</published>
+    <arxiv:comment>13 pages, 10 figures. Proceedings of the SPIE, 9147-55</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>James E. Larkin</name>
+    </author>
+    <author>
+      <name>Jeffrey K. Chilcote</name>
+    </author>
+    <author>
+      <name>Theodore Aliado</name>
+    </author>
+    <author>
+      <name>Brian J. Bauman</name>
+    </author>
+    <author>
+      <name>George Brims</name>
+    </author>
+    <author>
+      <name>John M. Canfield</name>
+    </author>
+    <author>
+      <name>Andrew Cardwell</name>
+    </author>
+    <author>
+      <name>Daren Dillon</name>
+    </author>
+    <author>
+      <name>René Doyon</name>
+    </author>
+    <author>
+      <name>Jennifer Dunn</name>
+    </author>
+    <author>
+      <name>Michael P. Fitzgerald</name>
+    </author>
+    <author>
+      <name>James R. Graham</name>
+    </author>
+    <author>
+      <name>Stephen Goodsell</name>
+    </author>
+    <author>
+      <name>Markus Hartung</name>
+    </author>
+    <author>
+      <name>Pascale Hibon</name>
+    </author>
+    <author>
+      <name>Patrick Ingraham</name>
+    </author>
+    <author>
+      <name>Christopher A Johnson</name>
+    </author>
+    <author>
+      <name>Evan Kress</name>
+    </author>
+    <author>
+      <name>Quinn M. Konopacky</name>
+    </author>
+    <author>
+      <name>Bruce A. Macintosh</name>
+    </author>
+    <author>
+      <name>Kenneth G. Magnone</name>
+    </author>
+    <author>
+      <name>Jérôme Maire</name>
+    </author>
+    <author>
+      <name>Ian S. McLean</name>
+    </author>
+    <author>
+      <name>David Palmer</name>
+    </author>
+    <author>
+      <name>Marshall D. Perrin</name>
+    </author>
+    <author>
+      <name>Carlos Quiroz</name>
+    </author>
+    <author>
+      <name>Fredrik Rantakyrö</name>
+    </author>
+    <author>
+      <name>Naru Sadakuni</name>
+    </author>
+    <author>
+      <name>Leslie Saddlemyer</name>
+    </author>
+    <author>
+      <name>Andrew Serio</name>
+    </author>
+    <author>
+      <name>Simon Thibault</name>
+    </author>
+    <author>
+      <name>Sandrine J. Thomas</name>
+    </author>
+    <author>
+      <name>Philippe Vallee</name>
+    </author>
+    <author>
+      <name>Jason L. Weiss</name>
+    </author>
+    <arxiv:doi>10.1117/12.2056504</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.2056504" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.08627v2</id>
+    <title>A consistent second-order hydrodynamic model in the time domain for floating structures with large horizontal motions</title>
+    <updated>2021-10-06T10:52:35Z</updated>
+    <link href="https://arxiv.org/abs/2106.08627v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.08627v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Floating offshore structures often exhibit low-frequency oscillatory motions in the horizontal plane, with amplitudes in the same order as their characteristic dimensions and larger than the corresponding wave-frequency responses, making the traditional formulations in an inertial coordinate system inconsistent and less applicable. To address this issue, we extend and explore an alternative formulation completely based on a non-inertial body-fixed coordinate system. Unlike the traditional seakeeping models, this formulation consistently allows for large-amplitude horizontal motions. A numerical model based on a higher-order boundary element is applied to solve the resulting boundary-value problems in the time domain. A recently developed new set of explicit time-integration methods, which do not necessitate the use of upwind schemes for spatial derivatives, are adopted to deal with the convective-type free-surface conditions. To suppress the weak saw-tooth instabilities on the free surface in time marching, we also present novel low-pass filters based on optimized weighted-least-squares, which are in principle applicable for both structured and unstructured meshes. The presented schemes for the convection equation and the low-pass filter are also relevant for other engineering fields dealing with similar mathematical problems. For ship seakeeping and added resistance analyses, we show that the present computational model does not need to use soft-springs for surge and sway, in contrast to the traditional models. For a floating monopile, the importance of consistently taking into account the effects of large horizontal motions is demonstrated considering the bi-chromatic incident waves. The present model is considered as a complete 2nd order wave-load model, as all the 2nd order wave loads, including the sum-frequency and difference-frequency components, are solved simultaneously.</summary>
+    <category term="physics.flu-dyn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-16T08:34:15Z</published>
+    <arxiv:primary_category term="physics.flu-dyn"/>
+    <author>
+      <name>Yanlin Shao</name>
+    </author>
+    <author>
+      <name>Zhiping Zheng</name>
+    </author>
+    <author>
+      <name>Hui Liang</name>
+    </author>
+    <author>
+      <name>Jikang Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.07603v1</id>
+    <title>Multi-Resolution Electron Spectrometer Array for Future Free-Electron Laser Experiments</title>
+    <updated>2021-03-13T02:55:34Z</updated>
+    <link href="https://arxiv.org/abs/2103.07603v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.07603v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We report the design of an angular array of electron Time-of-Flight (eToF) spectrometers intended for non-invasive spectral, temporal, and polarization characterization of single shots of high-repetition rate, quasi-continuous, short-wavelength Free-Electron Lasers (FELs) such as the LCLS-II at SLAC. This array also enables angle-resolved, high-resolution eToF spectroscopy to address a variety of scientific questions of ultrafast and nonlinear light--matter interaction at FELs. The presented device is specifically designed for the Time-resolved atomic, Molecular and Optical science end station (TMO) at LCLS-II. In its final version, it can comprise of up to 20 eToF spectrometers aligned to collect electrons from the interaction point defined by the intersection of the incoming FEL radiation and a gaseous target. There are 16 such spectrometers forming a circular equiangular array in the plane normal to x-ray propagation and 4 spectrometers at 54.7$^\circ$ angle relative to the principle linear x-ray polarization axis. The spectrometers are capable of independent and minimally chromatic electrostatic lensing and retardation in order to enable simultaneous angle-resolved photo-electron and Auger electron spectroscopy with high energy resolution. They are designed to ensure energy resolution of 0.25 eV across an energy window of up to 75 eV which can be individually centered via the adjustable retardation to cover ranges of electron kinetic energies relevant to soft x-ray methods, 0--2 keV. The full spectrometer array will enable non-invasive and online spectral-polarimetry measurements, polarization-sensitive attoclock spectroscopy for characterizing the full time--energy structure of even SASE or seeded LCLS-II pulses, and also supports emerging trends in molecular frame spectroscopy measurements.</summary>
+    <category term="physics.ins-det" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-13T02:55:34Z</published>
+    <arxiv:comment>under review</arxiv:comment>
+    <arxiv:primary_category term="physics.ins-det"/>
+    <author>
+      <name>Peter Walter</name>
+    </author>
+    <author>
+      <name>Andrei Kamalov</name>
+    </author>
+    <author>
+      <name>Averell Gatton</name>
+    </author>
+    <author>
+      <name>Taran Driver</name>
+    </author>
+    <author>
+      <name>Dileep Bhogadi</name>
+    </author>
+    <author>
+      <name>Jean-Charles Castagna</name>
+    </author>
+    <author>
+      <name>Xianchao Cheng</name>
+    </author>
+    <author>
+      <name>Hongliang Shi</name>
+    </author>
+    <author>
+      <name>James Cryan</name>
+    </author>
+    <author>
+      <name>Wolfram Helml</name>
+    </author>
+    <author>
+      <name>Markus Ilchen</name>
+    </author>
+    <author>
+      <name>Ryan N. Coffee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/physics/9907038v1</id>
+    <title>Atom focusing by far-detuned and resonant standing wave fields: Thin lens regime</title>
+    <updated>1999-07-22T19:32:45Z</updated>
+    <link href="https://arxiv.org/abs/physics/9907038v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/physics/9907038v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The focusing of atoms interacting with both far-detuned and resonant standing wave fields in the thin lens regime is considered. The thin lens approximation is discussed quantitatively from a quantum perspective. Exact quantum expressions for the Fourier components of the density (that include all spherical aberration) are used to study the focusing numerically. The following lens parameters and density profiles are calculated as functions of the pulsed field area $θ$: the position of the focal plane, peak atomic density, atomic density pattern at the focus, focal spot size, depth of focus, and background density. The lens parameters are compared to asymptotic, analytical results derived from a scalar diffraction theory for which spherical aberration is small but non-negligible ($θ\gg 1$). Within the diffraction theory analytical expressions show that the focused atoms in the far detuned case have an approximately constant background density $0.5(1-0.635θ^{- 1/2})$ while the peak density behaves as $% 3.83θ^{1/2}$, the focal distance or time as $θ^{-1}(1+1.27θ^{- 1/2})$, the focal spot size as $0.744θ^{-3/4}$, and the depth of focus as $1.91θ^{- 3/2}$. Focusing by the resonant standing wave field leads to a new effect, a Rabi- like oscillation of the atom density. For the far-detuned lens, chromatic aberration is studied with the exact Fourier results. Similarly, the degradation of the focus that results from angular divergence in beams or thermal velocity distributions in traps is studied quantitatively with the exact Fourier method and understood analytically using the asymptotic results. Overall, we show that strong thin lens focusing is possible with modest laser powers and with currently achievable atomic beam characteristics.</summary>
+    <category term="physics.atom-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1999-07-22T19:32:45Z</published>
+    <arxiv:comment>21 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.atom-ph"/>
+    <author>
+      <name>J. L. Cohen</name>
+      <arxiv:affiliation>University of Michigan</arxiv:affiliation>
+    </author>
+    <author>
+      <name>B. Dubetsky</name>
+      <arxiv:affiliation>University of Michigan</arxiv:affiliation>
+    </author>
+    <author>
+      <name>P. R. Berman</name>
+      <arxiv:affiliation>University of Michigan</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1103/PhysRevA.60.4886</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevA.60.4886" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.22109v2</id>
+    <title>Field-level constraints on cosmic birefringence from hybrid ILC maps combining $E$- and $B$-mode channels</title>
+    <updated>2025-10-24T09:23:28Z</updated>
+    <link href="https://arxiv.org/abs/2507.22109v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.22109v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cosmic birefringence, arising from a potential parity-violating interaction between cosmic microwave background (CMB) photons and evolving pseudo-scalar fields such as axion-like particles, can rotate the CMB polarization plane and induce an effective correlation between the CMB $E$- and $B$-mode polarization. In this work, we introduce a hybrid internal linear combination (ILC) method that combines both $E$- and $B$-mode frequency maps into the component separation pipeline, enabling the disentanglement of correlated and uncorrelated components of CMB polarization in the presence of cosmic birefringence and instrumental polarization angle miscalibration. We derive an analytic linear relation connecting the birefringence-induced correlated component of the CMB $E$- (or $B$-) mode field to the full CMB $B$- (or $E$-) mode field convolved with a modulating field. By performing linear regression between these fields across multiple sky patches, we directly estimate the birefringence angle at the field level. This allows us to distinguish cosmic birefringence from polarization angle miscalibration and foreground contamination, as the ILC responds differently to achromatic cosmic birefringence and chromatic systematic effects, with its weights projecting spatial or harmonic dependence only onto the latter. This non-parametric, field-level approach provides a novel way to probe cosmic birefringence directly in real space. When applied to realistic simulations of the forthcoming LiteBIRD satellite mission, our method yields constraints that are competitive with, and complementary to, existing power spectrum-based analyses. When applied to Planck Release 4 (PR4) data, we find a birefringence angle of $β= 0.32^\circ \pm 0.12^\circ$, a $2.7σ$ detection that remains robust against varying sky fractions.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-29T18:00:00Z</published>
+    <arxiv:comment>41 pages, 14 figures, 3 tables. Updated to match version accepted by JCAP</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Mathieu Remazeilles</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0808.2367v1</id>
+    <title>Extreme multiplex spectroscopy at wide-field 4-m telescopes</title>
+    <updated>2008-08-18T09:52:38Z</updated>
+    <link href="https://arxiv.org/abs/0808.2367v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0808.2367v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We describe the design and science case for a spectrograph for the prime focus of classical 4-m wide-field telescopes that can deliver at least 4000 MOS slits over a 1 degree field. This extreme multiplex capability means that 25000 galaxy redshifts can be measured in a single night, opening up the possibilities for large galaxy redshift surveys out to z~0.7 and beyond for the purpose of measuring the Baryon Acoustic Oscillation (BAO) scale and for many other science goals. The design features four cloned spectrographs and exploits the exclusive possibility of tiling the focal plane of wide-field 4-m telescopes with CCDs for multi-object spectroscopic purposes. In ~200 night projects, such spectrographs have the potential to make galaxy redshift surveys of ~6 million galaxies over a wide redshift range and thus may provide a low-cost alternative to other survey routes such as WFMOS and SKA. Two of these extreme multiplex spectrographs are currently being designed for the AAT (NG1dF) and Calar Alto (XMS) 4-m class telescopes. NG2dF, a larger version for the AAT 2 degree field, would have 12 clones and at least 12000 slits. The clones use a transparent design including a grism in which all optics are smaller than the clone square subfield so that the clones can be tightly packed with little gaps between the contiguous fields. Only low cost glasses are used; the variations in chromatic aberrations between bands are compensated by changing one or two of the lenses adjacent to the grism. The total weight and length is smaller with a few clones than a unique spectrograph which makes it feasible to place the spectrograph at the prime focus.</summary>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-08-18T09:52:38Z</published>
+    <arxiv:comment>8 pages, 4 figures, to appear in proceedings of Astronomical Telescopes and Instrumentation, SPIE conference, Marseille, 23-28 June, 2008</arxiv:comment>
+    <arxiv:primary_category term="astro-ph"/>
+    <author>
+      <name>Robert Content</name>
+    </author>
+    <author>
+      <name>Tom Shanks</name>
+    </author>
+    <arxiv:doi>10.1117/12.790523</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.790523" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1009.3675v2</id>
+    <title>Coherent Structures and Carrier Shocks in the Nonlinear Periodic Maxwell Equations</title>
+    <updated>2010-11-18T04:07:31Z</updated>
+    <link href="https://arxiv.org/abs/1009.3675v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1009.3675v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the one-dimensional propagation of electromagnetic waves in a weakly nonlinear and low-contrast spatially inhomogeneous medium with no energy dissipation. We focus on the case of a periodic medium, in which dispersion enters only through the (Floquet-Bloch) spectral band dispersion associated with the periodic structure; chromatic dispersion (time-nonlocality of the polarization) is neglected. Numerical simulations show that for initial conditions of wave-packet type (a plane wave of fixed carrier frequency multiplied by a slow varying, spatially localized function) very long-lived spatially localized coherent soliton-like structures emerge, whose character is that of a slowly varying envelope of a train of shocks. We call this structure an envelope carrier-shock train.
+  The structure of the solution violates the oft-assumed nearly monochromatic wave packet structure, whose envelope is governed by the nonlinear coupled mode equations (NLCME). The inconsistency and inaccuracy of NLCME lies in the neglect of all (infinitely many) resonances except for the principle resonance induced by the initial carrier frequency. We derive, via a nonlinear geometrical optics expansion, a system of nonlocal integro-differential equations governing the coupled evolution of backward and forward propagating waves. These equations incorporate effects of all resonances. In a periodic medium, these equations may be expressed as a system of infinitely many coupled mode equations, which we call the extended nonlinear coupled mode system (xNLCME). Truncating xNLCME to include only the principle resonances leads to the classical NLCME.
+  Numerical simulations of xNLCME demonstrate that it captures both large scale features, related to third harmonic generation, and fine scale carrier shocks features of the nonlinear periodic Maxwell equations.</summary>
+    <category term="nlin.PS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-09-20T01:16:32Z</published>
+    <arxiv:comment>18 figures, added references, fixed typos</arxiv:comment>
+    <arxiv:primary_category term="nlin.PS"/>
+    <author>
+      <name>Gideon Simpson</name>
+    </author>
+    <author>
+      <name>Michael I. Weinstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0106607v2</id>
+    <title>Potts Model Partition Functions for Self-Dual Families of Strip Graphs</title>
+    <updated>2001-07-03T17:43:32Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0106607v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0106607v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We consider the $q$-state Potts model on families of self-dual strip graphs $G_D$ of the square lattice of width $L_y$ and arbitrarily great length $L_x$, with periodic longitudinal boundary conditions. The general partition function $Z$ and the T=0 antiferromagnetic special case $P$ (chromatic polynomial) have the respective forms $\sum_{j=1}^{N_{F,L_y,λ}} c_{F,L_y,j} (λ_{F,L_y,j})^{L_x}$, with $F=Z,P$. For arbitrary $L_y$, we determine (i) the general coefficient $c_{F,L_y,j}$ in terms of Chebyshev polynomials, (ii) the number $n_F(L_y,d)$ of terms with each type of coefficient, and (iii) the total number of terms $N_{F,L_y,λ}$. We point out interesting connections between the $n_Z(L_y,d)$ and Temperley-Lieb algebras, and between the $N_{F,L_y,λ}$ and enumerations of directed lattice animals. Exact calculations of $P$ are presented for $2 \le L_y \le 4$. In the limit of infinite length, we calculate the ground state degeneracy per site (exponent of the ground state entropy), $W(q)$. Generalizing $q$ from ${\mathbb Z}_+$ to ${\mathbb C}$, we determine the continuous locus ${\cal B}$ in the complex $q$ plane where $W(q)$ is singular. We find the interesting result that for all $L_y$ values considered, the maximal point at which ${\cal B}$ crosses the real $q$ axis, denoted $q_c$ is the same, and is equal to the value for the infinite square lattice, $q_c=3$. This is the first family of strip graphs of which we are aware that exhibits this type of universality of $q_c$.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2001-06-28T17:09:32Z</published>
+    <arxiv:comment>36 pages, latex, three postscript figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physica A 301, 301-329 (2001)</arxiv:journal_ref>
+    <author>
+      <name>Shu-Chiuan Chang</name>
+    </author>
+    <author>
+      <name>Robert Shrock</name>
+    </author>
+    <arxiv:doi>10.1016/S0378-4371(01)00409-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0378-4371(01)00409-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.10726v2</id>
+    <title>The geometry of diagonal groups</title>
+    <updated>2021-05-06T14:33:53Z</updated>
+    <link href="https://arxiv.org/abs/2007.10726v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.10726v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Diagonal groups are one of the classes of finite primitive permutation groups occurring in the conclusion of the O'Nan-Scott theorem. Several of the other classes have been described as the automorphism groups of geometric or combinatorial structures such as affine spaces or Cartesian decompositions, but such structures for diagonal groups have not been studied.
+  The main purpose of this paper is to describe and characterise such structures, which we call diagonal semilattices. Unlike the diagonal groups in the O'Nan-Scott theorem, which are defined over finite characteristically simple groups, our construction works over any group, finite or infinite.
+  A diagonal semilattice depends on a dimension m and a group T. For m=2, it is a Latin square, the Cayley table of T, though in fact any Latin square satisfies our axioms. However, for m&gt;=3, the group T emerges naturally and uniquely from the axioms. (The situation somewhat resembles projective geometry, where projective planes exist in profusion but higher-dimensional structures are coordinatised by an algebraic object, a division ring.)
+  A diagonal semilattice is contained in the partition lattice on a set, and we provide an introduction to the calculus of partitions. Many of the concepts and constructions come from experimental design in statistics.
+  We also determine when a diagonal group can be primitive, or quasiprimitive (these conditions are equivalent for diagonal groups).
+  Associated with the diagonal semilattice is a graph, the diagonal graph, which has the same automorphism group except in four small cases with m&lt;=3. The class of diagonal graphs includes some well-known families, Latin-square graphs and folded cubes. We obtain partial results on the chromatic number of a diagonal graph, and mention an application to synchronization.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-21T11:39:22Z</published>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>R. A. Bailey</name>
+    </author>
+    <author>
+      <name>Peter J. Cameron</name>
+    </author>
+    <author>
+      <name>Cheryl E. Praeger</name>
+    </author>
+    <author>
+      <name>Csaba Schneider</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.08812v1</id>
+    <title>Computing the Morava K-theory of real Grassmanians using chromatic fixed point theory</title>
+    <updated>2021-11-16T22:27:48Z</updated>
+    <link href="https://arxiv.org/abs/2111.08812v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.08812v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study K(n)*(Gr(d,m)) for all n - the 2-local Morava K-theories of the real Grassmanian Gr(d,m) of d-planes in R^m, about which very little has been previously computed. We conjecture that the Atiyah-Hirzebruch Spectral Sequences computing these all collapse after the first possible non-zero differential, and give much evidence that this is the case. Computational patterns for all n seem similar to the known calculation of H*(Gr(d,m);Q), the n=0 case.
+  We use a novel method to show that higher differentials can't occur: we get a lower bound on the size of K(n)*(Gr(d,m)) by constructing an action of C = the cyclic group of order 4, on our Grassmanians, and then applying the chromatic fixed point theory of the authors' previous paper. In essence, we bound the size of K(n)*(Gr(d,m)) from below by computing K(n-1)*(Gr(d,m)^C).
+  Meanwhile, the AHSS after the first differential is determined by Q_n-homology, where Q_n is Milnor's nth primitive operation in mod 2 cohomology. Whenever we are able to calculate this, we have found that it agrees with our lower bound for the size of K(n)*(Gr(d,m)). We have two general families where we prove this: m at most 2^{n+1} and all d, and d=2 and all m and n. Computer calculations have allowed us to check many other examples with larger values of d.</summary>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-16T22:27:48Z</published>
+    <arxiv:comment>31 pages</arxiv:comment>
+    <arxiv:primary_category term="math.AT"/>
+    <arxiv:journal_ref>Algebr. Geom. Topol. 24 (2024) 919-950</arxiv:journal_ref>
+    <author>
+      <name>Nicholas J. Kuhn</name>
+    </author>
+    <author>
+      <name>Christopher J. R. Lloyd</name>
+    </author>
+    <arxiv:doi>10.2140/agt.2024.24.919</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2140/agt.2024.24.919" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1807.07973v1</id>
+    <title>Chromatic transit light curves of disintegrating rocky planets</title>
+    <updated>2018-07-20T18:00:03Z</updated>
+    <link href="https://arxiv.org/abs/1807.07973v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1807.07973v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Context. Kepler observations have revealed a class of short period exoplanets, of which Kepler-1520 b is the prototype, which have comet-like dust tails thought to be the result of small, rocky planets losing mass. The shape and chromaticity of the transits constrain the properties of the dust particles originating from the planet's surface, offering a unique opportunity to probe the composition and geophysics of rocky exoplanets.
+  Aims. We aim to approximate the average Kepler long-cadence light curve of Kepler-1520 b and investigate how the optical thickness and transit cross-section of a general dust tail can affect the observed wavelength dependence and depth of transit light curves.
+  Methods. We developed a new 3D model that ejects sublimating particles from the planet surface to build up a dust tail, assuming it to be optically thin, and used 3D radiative transfer computations that fully treat scattering using the distribution of hollow spheres (DHS) method, to generate transit light curves between 0.45 and 2.5 $μ$m.
+  Results. We show that the transit depth is wavelength independent for optically thick tails, potentially explaining why only some observations indicate a wavelength dependence. From the 3D nature of our simulated tails, we show that their transit cross-sections are related to the component of particle ejection velocity perpendicular to the planet's orbital plane and use this to derive a minimum ejection velocity of 1.2 kms$^{-1}$. To fit the average transit depth of Kepler-1520 b of 0.87%, we require a high dust mas-loss rate of 7 $-$ 80 M$_\oplus$ Gyr$^{-1}$ which implies planet lifetimes that may be inconsistent with the observed sample. Therefore, these mass-loss rates should be considered to be upper limits.</summary>
+    <category term="astro-ph.EP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-07-20T18:00:03Z</published>
+    <arxiv:comment>22 pages, 22 figures, accepted for publication in A&amp;A</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.EP"/>
+    <arxiv:journal_ref>A&amp;A 618, A97 (2018)</arxiv:journal_ref>
+    <author>
+      <name>A. R. Ridden-Harper</name>
+    </author>
+    <author>
+      <name>C. U. Keller</name>
+    </author>
+    <author>
+      <name>M. Min</name>
+    </author>
+    <author>
+      <name>R. van Lieshout</name>
+    </author>
+    <author>
+      <name>I. A. G. Snellen</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/201731947</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/201731947" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1702.00406v1</id>
+    <title>Models of the strongly lensed quasar DES J0408-5354</title>
+    <updated>2017-02-01T19:00:02Z</updated>
+    <link href="https://arxiv.org/abs/1702.00406v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1702.00406v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present gravitational lens models of the multiply imaged quasar DES J0408-5354, recently discovered in the Dark Energy Survey (DES) footprint, with the aim of interpreting its remarkable quad-like configuration. We first model the DES single-epoch $grizY$ images as a superposition of a lens galaxy and four point-like objects, obtaining spectral energy distributions (SEDs) and relative positions for the objects. Three of the point sources (A,B,D) have SEDs compatible with the discovery quasar spectra, while the faintest point-like image (G2/C) shows significant reddening and a `grey' dimming of $\approx0.8$mag. In order to understand the lens configuration, we fit different models to the relative positions of A,B,D. Models with just a single deflector predict a fourth image at the location of G2/C but considerably brighter and bluer. The addition of a small satellite galaxy ($R_{\rm E}\approx0.2$") in the lens plane near the position of G2/C suppresses the flux of the fourth image and can explain both the reddening and grey dimming. All models predict a main deflector with Einstein radius between $1.7"$ and $2.0",$ velocity dispersion $267-280$km/s and enclosed mass $\approx 6\times10^{11}M_{\odot},$ even though higher resolution imaging data are needed to break residual degeneracies in model parameters. The longest time-delay (B-A) is estimated as $\approx 85$ (resp. $\approx125$) days by models with (resp. without) a perturber near G2/C. The configuration and predicted time-delays of J0408-5354 make it an excellent target for follow-up aimed at understanding the source quasar host galaxy and substructure in the lens, and measuring cosmological parameters. We also discuss some lessons learnt from J0408-5354 on lensed quasar finding strategies, due to its chromaticity and morphology.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-02-01T19:00:02Z</published>
+    <arxiv:comment>12 pages, 8 figures, MNRAS subm. 30/01/2017. Based on the discovery results of H~Lin et al. (2017), ApJL subm. This paper has been approved for submission by DES, via Collaboration-Wide Review</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Adriano Agnello</name>
+    </author>
+    <author>
+      <name>Huan Lin</name>
+    </author>
+    <author>
+      <name>L. Buckley-Geer</name>
+    </author>
+    <author>
+      <name>T. Treu</name>
+    </author>
+    <author>
+      <name>V. Bonvin</name>
+    </author>
+    <author>
+      <name>F. Courbin</name>
+    </author>
+    <author>
+      <name>C. Lemon</name>
+    </author>
+    <author>
+      <name>T. Morishita</name>
+    </author>
+    <author>
+      <name>A. Amara</name>
+    </author>
+    <author>
+      <name>M. W. Auger</name>
+    </author>
+    <author>
+      <name>S. Birrer</name>
+    </author>
+    <author>
+      <name>J. Chan</name>
+    </author>
+    <author>
+      <name>T. Collett</name>
+    </author>
+    <author>
+      <name>A. More</name>
+    </author>
+    <author>
+      <name>C. D. Fassnacht</name>
+    </author>
+    <author>
+      <name>J. Frieman</name>
+    </author>
+    <author>
+      <name>P. J. Marshall</name>
+    </author>
+    <author>
+      <name>R. G. McMahon</name>
+    </author>
+    <author>
+      <name>G. Meylan</name>
+    </author>
+    <author>
+      <name>S. H. Suyu</name>
+    </author>
+    <author>
+      <name>F. Castander</name>
+    </author>
+    <author>
+      <name>D. Finley</name>
+    </author>
+    <author>
+      <name>A. Howell</name>
+    </author>
+    <author>
+      <name>C. Kochanek</name>
+    </author>
+    <author>
+      <name>M. Makler</name>
+    </author>
+    <author>
+      <name>P. Martini</name>
+    </author>
+    <author>
+      <name>N. Morgan</name>
+    </author>
+    <author>
+      <name>B. Nord</name>
+    </author>
+    <author>
+      <name>F. Ostrovski</name>
+    </author>
+    <author>
+      <name>P. Schechter</name>
+    </author>
+    <author>
+      <name>D. Tucker</name>
+    </author>
+    <author>
+      <name>R. Wechsler</name>
+    </author>
+    <author>
+      <name>T. M. C. Abbott</name>
+    </author>
+    <author>
+      <name>F. B. Abdalla</name>
+    </author>
+    <author>
+      <name>S. Allam</name>
+    </author>
+    <author>
+      <name>A. Benoit-Lévy</name>
+    </author>
+    <author>
+      <name>E. Bertin</name>
+    </author>
+    <author>
+      <name>D. Brooks</name>
+    </author>
+    <author>
+      <name>D. L. Burke</name>
+    </author>
+    <author>
+      <name>A. Carnero Rosell</name>
+    </author>
+    <author>
+      <name>M. Carrasco Kind</name>
+    </author>
+    <author>
+      <name>J. Carretero</name>
+    </author>
+    <author>
+      <name>M. Crocce</name>
+    </author>
+    <author>
+      <name>C. E. Cunha</name>
+    </author>
+    <author>
+      <name>C. B. D'Andrea</name>
+    </author>
+    <author>
+      <name>L. N. da Costa</name>
+    </author>
+    <author>
+      <name>S. Desa</name>
+    </author>
+    <author>
+      <name>J. P. Dietrich</name>
+    </author>
+    <author>
+      <name>T. F. Eifler</name>
+    </author>
+    <author>
+      <name>B. Flaugher</name>
+    </author>
+    <author>
+      <name>P. Fosalba</name>
+    </author>
+    <author>
+      <name>J. García-Bellido</name>
+    </author>
+    <author>
+      <name>E. Gaztanaga</name>
+    </author>
+    <author>
+      <name>D. A. Goldstein</name>
+    </author>
+    <author>
+      <name>D. Gruen</name>
+    </author>
+    <author>
+      <name>R. A. Gruendl</name>
+    </author>
+    <author>
+      <name>J. Gschwend</name>
+    </author>
+    <author>
+      <name>G. Gutierrez</name>
+    </author>
+    <author>
+      <name>K. Honscheid</name>
+    </author>
+    <author>
+      <name>D. J. James</name>
+    </author>
+    <author>
+      <name>K. Kuehn</name>
+    </author>
+    <author>
+      <name>N. Kuropatkin</name>
+    </author>
+    <author>
+      <name>T. S. Li</name>
+    </author>
+    <author>
+      <name>M. Lima</name>
+    </author>
+    <author>
+      <name>M. A. G. Maia</name>
+    </author>
+    <author>
+      <name>M. March</name>
+    </author>
+    <author>
+      <name>J. L. Marshall</name>
+    </author>
+    <author>
+      <name>P. Melchior</name>
+    </author>
+    <author>
+      <name>F. Menanteau</name>
+    </author>
+    <author>
+      <name>R. Miquel</name>
+    </author>
+    <author>
+      <name>R. L. C. Ogando</name>
+    </author>
+    <author>
+      <name>A. A. Plazas</name>
+    </author>
+    <author>
+      <name>A. K. Romer</name>
+    </author>
+    <author>
+      <name>E. Sanchez</name>
+    </author>
+    <author>
+      <name>R. Schindler</name>
+    </author>
+    <author>
+      <name>M. Schubnell</name>
+    </author>
+    <author>
+      <name>I. Sevilla-Noarbe</name>
+    </author>
+    <author>
+      <name>M. Smith</name>
+    </author>
+    <author>
+      <name>R. C. Smith</name>
+    </author>
+    <author>
+      <name>F. Sobreira</name>
+    </author>
+    <author>
+      <name>E. Suchyta</name>
+    </author>
+    <author>
+      <name>M. E. C. Swanson</name>
+    </author>
+    <author>
+      <name>G. Tarle</name>
+    </author>
+    <author>
+      <name>D. Thomas</name>
+    </author>
+    <author>
+      <name>A. R. Walker</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stx2242</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stx2242" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.23010v3</id>
+    <title>Helmlab: A Two-Space Family of Analytical, Data-Driven Color Spaces for UI Design Systems</title>
+    <updated>2026-05-06T15:51:51Z</updated>
+    <link href="https://arxiv.org/abs/2602.23010v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.23010v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Helmlab, a family of two purpose-built color spaces for UI design systems sharing a common 11-stage analytical structure: MetricSpace, a 72-parameter space optimized for color-difference prediction, and GenSpace, a 44-parameter space optimized for gradient and palette generation. The forward transform maps CIE XYZ to a perceptually-organized Lab representation through learned matrices, per-channel power compression, Fourier hue correction, and embedded Helmholtz-Kohlrausch lightness adjustment. A post-pipeline neutral correction holds gray-axis chroma below 1e-5 on a 21-step ramp, and a rigid rotation of the chromatic plane improves hue-angle alignment without affecting the distance metric (which is invariant under isometries).
+  On COMBVD (3,813 color pairs), MetricSpace v21 achieves STRESS 22.48, a 23 percent reduction from CIEDE2000 (29.20). On the held-out MacAdam 1974 dataset it scores 19.51 (CIEDE2000: 22.13; CAM16-UCS leads at 18.71). On a self-collected 3,552-judgement screen-condition set it scores 23.26 vs 62.54 for CIEDE2000. On academic He et al. 2022 (82 3D-printed pairs) MetricSpace scores 35.9 vs CIEDE2000 32.6, a regression we own. Averaging the three primary datasets, MetricSpace scores 21.75 vs the next-best baseline CIECAM02-UCS at 35.98.
+  GenSpace v0.11.1 trades distance accuracy for generation quality: on a 90-metric, 3,038-pair gradient/palette benchmark across sRGB, P3, and Rec.2020, it wins 65 of 90 vs OKLab. The transform is invertible with round-trip errors below 1e-13. Production implementations ship on PyPI, npm, Color.js (PR 722, merged), and as a PostCSS plugin.</summary>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-26T13:52:42Z</published>
+    <arxiv:comment>16 pages, 7 figures, 4 tables. Code, datasets, and live benchmark at https://github.com/Grkmyldz148/helmlab and https://helmlab.space</arxiv:comment>
+    <arxiv:primary_category term="cs.GR"/>
+    <author>
+      <name>Gorkem Yildiz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.10814v1</id>
+    <title>Signed projective cubes, a homomorphism point of view</title>
+    <updated>2024-06-16T06:39:58Z</updated>
+    <link href="https://arxiv.org/abs/2406.10814v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.10814v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The (signed) projective cubes, as a special class of graphs closely related to the hypercubes, are on the crossroad of geometry, algebra, discrete mathematics and linear algebra. Defined as Cayley graphs on binary groups, they represent basic linear dependencies. Capturing the four-color theorem as a homomorphism target they show how mapping of discrete objects, namely graphs, may relate to special mappings of plane to projective spaces of higher dimensions. In this work, viewed as a signed graph, first we present a number of equivalent definitions each of which leads to a different development. In particular, the new notion of common product of signed graphs is introduced which captures both Cartesian and tensor products of graphs. We then have a look at some of their homomorphism properties. We first introduce an inverse technique for the basic no-homomorphism lemma, using which we show that every signed projective cube is of circular chromatic number 4. Then observing that the 4-color theorem is about mapping planar graphs into signed projective cube of dimension 2, we study some conjectures in extension of 4CT. Toward a better understanding of these conjectures we present the notion of extended double cover as a key operation in formulating the conjectures. With a deeper look into connection between some of these graphs and algebraic geometry, we discover that projective cube of dimension 4, widely known as the Clebsh graph, but also known as Greenwood-Gleason graph, is the intersection graph of the 16 straight lines of an algebraic surface known as Segre surface, which is a Del Pezzo surface of degree 4. We note that an algebraic surface known as the Clebsch surface is one of the most symmetric presentations of a cubic surface. Recall that each smooth cubic surface contains 27 lines. Hence, from hereafter, we believe, a proper name for this graph should be Segre graph.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-16T06:39:58Z</published>
+    <arxiv:comment>26 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Meirun Chen</name>
+    </author>
+    <author>
+      <name>Reza Naserasr</name>
+    </author>
+    <author>
+      <name>Alessandra Sarti</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.25784v1</id>
+    <title>Hector Galaxy Survey: Data Processing, Quality Control and Early Science</title>
+    <updated>2025-09-30T04:56:31Z</updated>
+    <link href="https://arxiv.org/abs/2509.25784v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.25784v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hector Galaxy Survey is a new optical integral field spectroscopy (IFS) survey currently using the AAT to observe up to 15,000 galaxies at low redshift ($z &lt; 0.1$). The Hector instrument employs 21 optical fibre bundles feeding into two double-beam spectrographs to enable wide-field multi-object IFS observations of galaxies. To efficiently process the survey data, we adopt the data reduction pipeline developed for the SAMI Galaxy Survey, with significant updates to accommodate Hector's dual-spectrograph system. These enhancements address key differences in spectral resolution and other instrumental characteristics relative to SAMI, and are specifically optimised for Hector's unique configuration. We introduce a two-dimensional arc fitting approach that reduces the RMS velocity scatter by a factor of 1.2--3.4 compared to fitting arc lines independently for each fibre. The pipeline also incorporates detailed modelling of chromatic optical distortion in the wide-field corrector, to account for wavelength-dependent spatial shifts across the focal plane. We assess data quality through a series of validation tests, including wavelength solution accuracy, spectral resolution, throughput characterisation, astrometric precision, sky subtraction residuals, and flux calibration stability (4\% systematic offset when compared to Legacy Survey fluxes). We demonstrate that Hector delivers high-fidelity, science-ready datasets, supporting robust measurements of galaxy kinematics, stellar populations, and emission-line properties, and provide examples. Additionally, we address systematic uncertainties identified during the data processing and propose future improvements to enhance the precision and reliability of upcoming data releases. This work establishes a robust data reduction framework for Hector, delivering high-quality data products that support a broad range of extragalactic studies.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-30T04:56:31Z</published>
+    <arxiv:comment>26 pages, 24 figures, accepted for publication in PASA</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>S. Oh</name>
+    </author>
+    <author>
+      <name>M. L. P. Gunawardhana</name>
+    </author>
+    <author>
+      <name>S. M. Croom</name>
+    </author>
+    <author>
+      <name>G. Quattropani</name>
+    </author>
+    <author>
+      <name>S. Tuntipong</name>
+    </author>
+    <author>
+      <name>J. J. Bryant</name>
+    </author>
+    <author>
+      <name>P. Corcho- Caballero</name>
+    </author>
+    <author>
+      <name>P. K. Das</name>
+    </author>
+    <author>
+      <name>O. Çakır</name>
+    </author>
+    <author>
+      <name>J. H. Lee</name>
+    </author>
+    <author>
+      <name>A. Ristea</name>
+    </author>
+    <author>
+      <name>S. Barsanti</name>
+    </author>
+    <author>
+      <name>M. Pak</name>
+    </author>
+    <author>
+      <name>S. M. Sweet</name>
+    </author>
+    <author>
+      <name>T. J. Woodrow</name>
+    </author>
+    <author>
+      <name>T. Rutherford</name>
+    </author>
+    <author>
+      <name>Y. Mai</name>
+    </author>
+    <author>
+      <name>M. S. Owers</name>
+    </author>
+    <author>
+      <name>M. Colless</name>
+    </author>
+    <author>
+      <name>L. S. J. Stuart</name>
+    </author>
+    <author>
+      <name>H. R. M. Zovaro</name>
+    </author>
+    <author>
+      <name>S. P. Vaughan</name>
+    </author>
+    <author>
+      <name>J. van de Sande</name>
+    </author>
+    <author>
+      <name>T. Farrell</name>
+    </author>
+    <author>
+      <name>M. Beom</name>
+    </author>
+    <author>
+      <name>J. Bland-Hawthorn</name>
+    </author>
+    <author>
+      <name>J. Chung</name>
+    </author>
+    <author>
+      <name>C. Foster</name>
+    </author>
+    <author>
+      <name>K. Grasha</name>
+    </author>
+    <author>
+      <name>H. Jeong</name>
+    </author>
+    <author>
+      <name>J. C. Lee</name>
+    </author>
+    <author>
+      <name>A. Mailvaganam</name>
+    </author>
+    <author>
+      <name>K. Oh</name>
+    </author>
+    <author>
+      <name>S. O'Toole</name>
+    </author>
+    <author>
+      <name>E. N. Taylor</name>
+    </author>
+    <author>
+      <name>T. Zafar</name>
+    </author>
+    <author>
+      <name>G. S. Bhatia</name>
+    </author>
+    <author>
+      <name>D. Brodrick</name>
+    </author>
+    <author>
+      <name>R. Brown</name>
+    </author>
+    <author>
+      <name>E. Cheng</name>
+    </author>
+    <author>
+      <name>R. Content</name>
+    </author>
+    <author>
+      <name>F. Crous</name>
+    </author>
+    <author>
+      <name>P. Gillingham</name>
+    </author>
+    <author>
+      <name>E. Houston</name>
+    </author>
+    <author>
+      <name>J. Lawrence</name>
+    </author>
+    <author>
+      <name>H. McGregor</name>
+    </author>
+    <author>
+      <name>M. Mohanan</name>
+    </author>
+    <author>
+      <name>S. Min</name>
+    </author>
+    <author>
+      <name>B. Norris</name>
+    </author>
+    <author>
+      <name>N. Pai</name>
+    </author>
+    <author>
+      <name>A. Sadman</name>
+    </author>
+    <author>
+      <name>W. Saunders</name>
+    </author>
+    <author>
+      <name>A. H. Wang</name>
+    </author>
+    <author>
+      <name>R. Zhelem</name>
+    </author>
+    <author>
+      <name>J. Zheng</name>
+    </author>
+    <arxiv:doi>10.1017/pasa.2025.10106</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/pasa.2025.10106" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.07357v1</id>
+    <title>On the Existence of the Plateau Emission in High-Energy Gamma-Ray Burst LightCurves observed byFermi-LAT</title>
+    <updated>2021-05-16T05:29:53Z</updated>
+    <link href="https://arxiv.org/abs/2105.07357v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.07357v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Large Area Telescope (LAT) on board the \Fermi Gamma-ray Space Telescope (\Fermi) shows long-lasting high-energy emission in many gamma-ray bursts (GRBs), similar to X-ray afterglows observed by the Neil Gehrels Swift Observatory \citep[\textit{Swift};][]{gehrels2004}. Some LAT light curves (LCs) show a late-time flattening reminiscent of X-ray plateaus. We explore the presence of plateaus in LAT temporally extended emission analyzing GRBs from the second \lat GRB Catalog \citep[2FLGC;][]{Ajello2019apj} from 2008 to May 2016 with known redshifts, and check whether they follow closure relations corresponding to 4 distinct astrophysical environments predicted by the external forward shock (ES) model. We find that three LCs can be fit by the same phenomenological model used to fit X-ray plateaus \citep{Willingale2007} and show tentative evidence for the existence of plateaus in their high-energy extended emission. The most favorable scenario is a slow cooling regime, whereas the preferred density profile for each GRBs varies from a constant density ISM to a $r^{-2}$ wind environment. We also compare the end time of the plateaus in $γ$-rays and X-rays using a statistical comparison with 222 \textit{Swift} GRBs with plateaus and known redshifts from January 2005 to August 2019. Within this comparison, the case of GRB 090510 shows an indication of chromaticity at the end time of the plateau. Finally, we update the 3-D fundamental plane relation among the rest frame end time of the plateau, its correspondent luminosity, and the peak prompt luminosity for 222 GRBs observed by \textit{Swift}. We find that these three LAT GRBs follow this relation.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-16T05:29:53Z</published>
+    <arxiv:comment>28 pages, 10 pictures, 3 Tables to appear on ApJ Supplement</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>Maria Giovanna Dainotti</name>
+    </author>
+    <author>
+      <name>Nicola Omodei</name>
+    </author>
+    <author>
+      <name>Gokul . P. Srinivasaragavan</name>
+    </author>
+    <author>
+      <name>Giacomo Vianello</name>
+    </author>
+    <author>
+      <name>Richard Willingale</name>
+    </author>
+    <author>
+      <name>Paul O' Brien</name>
+    </author>
+    <author>
+      <name>Shigehiro Nagataki</name>
+    </author>
+    <author>
+      <name>Vahe Petrosian</name>
+    </author>
+    <author>
+      <name>Zooey Nuygen</name>
+    </author>
+    <author>
+      <name>Xavier Hernandez</name>
+    </author>
+    <author>
+      <name>Magnus Axelsson</name>
+    </author>
+    <author>
+      <name>Elisabetta Bissaldi</name>
+    </author>
+    <author>
+      <name>Francesco Longo</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4365/abfe17</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4365/abfe17" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.06177v1</id>
+    <title>Using Tanner Spectral Reduction to Improve Multi-Layer Optical Lattice Routing for Hypergraph-Product and Bivariate Bicycle qLDPC Codes</title>
+    <updated>2026-07-07T11:54:26Z</updated>
+    <link href="https://arxiv.org/abs/2607.06177v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.06177v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We characterize the Tanner graph spectrum of hypergraph-product (HGP) / lifted-product (LP) codes and bivariate-bicycle (BB) codes, informing qubit routing for three-dimensional reconfigurable qubit architectures. Syndrome-extraction routing depth on HGP/LP Tanner graphs reduces to a single SVD on the base parity-check matrix, using a spectral ratio $β_\text{HGP} = (1 + β_\text{base})/2$ where $β_\text{base} = σ_2(H)/σ_1(H)$ for the base parity-check matrix, and a diameter identity $D_T = 2 D_\text{base}$ where $D_\text{base}$ is the base Tanner graph diameter. Fourier spectral reduction reveals that the BB Tanner graph spectrum equals the union, over the $l \times m$ grid of characters of $\mathbb{Z}_l \times \mathbb{Z}_m$, of the singular values of a single $2 \times 2$ symbol matrix built from the two defining polynomials. This reduces spectral analysis from an $O((lm)^3)$ diagonalization of the $4lm$-node Tanner graph to $lm$ independent $2 \times 2$ SVDs. These results compose into a multi-layer three-dimensional AOL routing protocol with one-time setup cost $T_\text{Valiant} = O(\log N)$ atom rearrangements amortizable over a memory experiment of $R$ rounds. For a Tanner graph chromatic index $χ'$ and $L_\text{layers}$ stacked AOL planes, the per-syndrome-cycle depth is $\lceil χ'/L_\text{layers} \rceil$ AOL pattern activations with no atom motion, an $8\times$ step-count reduction at $L_\text{layers} \geq χ' = 8$. Contingent on multi-layer AOL hardware, this yields an estimated $\sim50-300\times$ per-cycle wall-clock advantage over a single-layer AOD baseline (degrading to $\sim5-100\times$ under AOD-crosstalk overhead), reducing to equality in the single-layer limit. This paper therefore presents a route toward practical routing improvement for future quantum hardware incorporating multi-layer reconfigurable qubit architectures.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-07T11:54:26Z</published>
+    <arxiv:comment>24 pages, 3 figures, 9 tables</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Joshua M. Courtney</name>
+    </author>
+  </entry>
+</feed>

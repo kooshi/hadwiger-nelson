@@ -1,0 +1,7 @@
+## q3_13: 'ab:"Rudolph" & ab:"Johnson" & ab:"entropy" & ab:"invariant"'  total=6 fetched=6
+0783.28009 | 1993 | Feldman, J. | A generalization of a result of R. Lyons about measures on \([0,1)\) |  | review 
+1237.37009 | 2009 | Bourgain, Jean; Lindenstrauss, Elon; Michel, Philippe; Venka | Some effective results for \(\times a\times b\) |  | review *semigroup
+1253.37007 | 2012 | Hochman, Michael | Geometric rigidity of \(\times m\) invariant measures |  | review 
+0990.28012 | 2001 | Lindenstrauss, Elon | \(p\)-adic foliation and equidistribution |  | review 
+1251.28008 | 2012 | Hochman, Michael; Shmerkin, Pablo | Local entropy averages and projections of fractal measures |  | review 
+arXiv:2608.24503 | 2026 | Hang Zhao | Generic Zero-Entropy Optimization for Finitely Generated Nonlacunary Actions on the Circle |  | summary *nonlacunary

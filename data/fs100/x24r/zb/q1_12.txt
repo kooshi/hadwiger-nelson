@@ -1,0 +1,11 @@
+## q1_12: 'ti:"chromatic number of the plane" & py:2020-2026'  total=10 fetched=10
+1569.05110 | 2025 | Thürey, Volker Wilhelm | More than `the chromatic number of the plane' |  | summary 
+1445.05040 | 2020 | Exoo, Geoffrey; Ismailescu, Dan | The chromatic number of the plane is at least 5: a new proof |  | review *five
+1455.05020 | 2020 | Parts, Jaan | The chromatic number of the plane is at least 5 -- a human-veriviable proof |  | summary 
+arXiv:2311.10069 | 2023 | Máté Matolcsi; Imre Z. Ruzsa; Dániel Varga; Pál Zsámboki | The fractional chromatic number of the plane is at least 4 |  | summary 
+1569.05108 | 2025 | Soifer, Alexander | New results and new open problems and conjectures related to the chromatic number of the plane problem |  | review 
+1522.05117 | 2023 | Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör | Almost-monochromatic sets and the chromatic number of the plane |  | summary 
+1560.68210 | 2020 | Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör | Almost-monochromatic sets and the chromatic number of the plane |  | summary 
+None | 2026 | Sokolov, Georgy; Voronov, Vsevolod | On the chromatic number of the plane for map-type colorings |  | summary 
+arXiv:2304.10163 | 2023 | Vsevolod Voronov | The chromatic number of the plane with an interval of forbidden distances is at least 7 |  | summary 
+1585.05050 | 2025 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 

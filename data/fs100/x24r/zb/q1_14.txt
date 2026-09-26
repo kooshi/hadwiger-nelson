@@ -1,0 +1,8 @@
+## q1_14: 'ab:"girth" & ab:"unit distance" & ab:"chromatic"'  total=7 fetched=7
+1581.05080 | 2026 | de Grey, Aubrey | A 5-chromatic, triangle-free unit-distance graph in \(\mathbb{R}^3\) with 61 vertices |  | summary *triangle/47/5-chromatic
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *triangle
+0937.05038 | 2000 | O'Donnell, Paul | Arbitrary girth, 4-chromatic unit distance graphs in the plane. ~I: Graph description |  | review 
+1338.52019 | 2014 | Raigorodskii, Andrei M. | Cliques and cycles in distance graphs and graphs of diameters |  | review 
+0979.05045 | 2000 | O'Donnell, Paul | Arbitrary girth, 4-chromatic unit distance graphs in the plane. II: Graph embedding |  | review 
+1573.05097 | 2025 | zbMATH Open Web Interface contents unavailable due to confli | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | summary 
+1271.05002 | 2013 |  | The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroComb 2013, Pi |  | editorial 

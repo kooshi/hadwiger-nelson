@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/p1SA7/WaWg6C/TSdWPZ4dR9Idew</id>
+  <title>arXiv Query: search_query=&amp;id_list=2609.17453,2606.28157,2606.12325,2606.29415,2609.10791&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-26T11:32:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2609.17453,2606.28157,2606.12325,2606.29415,2609.10791" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12325v1</id>
+    <title>A note on geometric colorings of the Moser lattice</title>
+    <updated>2026-06-10T16:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.12325v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12325v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In arXiv:2311.10069, Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T16:59:20Z</published>
+    <arxiv:comment>5 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.29415v2</id>
+    <title>Algorithmic exploration of the unit distance problem in the rational plane</title>
+    <updated>2026-09-03T11:24:31Z</updated>
+    <link href="https://arxiv.org/abs/2606.29415v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.29415v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents reproducible experimental evidence on unit-distance graph density. Our approach is based on a novel algorithmic exploration of the rational plane for the generation of unit-distance graphs. An efficient algorithm for this utility must perform a local-breadth search on a bounded and finite set of elements and generate a graph that potentially encompasses the general properties of a unit-distance graph, not affected by restrictions on its generation. To this end, we show that our approach accomplishes this purpose by overcoming the limitations of grid-based structures, used in the literature for generating unit-distance graphs. When applied to large unit-distance graphs, our method generates large graphs with a scaling exponent of 1.17, that surpasses recent theoretical predictions on graph density growth.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-28T14:25:17Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Panteleimon Rodis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.17453v1</id>
+    <title>One Arithmetic Gadget, Two Problems</title>
+    <updated>2026-09-15T16:56:02Z</updated>
+    <link href="https://arxiv.org/abs/2609.17453v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.17453v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is an absolute constant $c&gt;0$ such that, for every $0&lt;\varepsilon\leq1$, arbitrarily large finite sets $A\subset\mathbb{C}$ satisfy \[
+  |A+A|\leq |A|^{1+\varepsilon},\qquad
+  |AA|\leq |A|^{2-c\varepsilon},\qquad
+  ν_1(A)\geq |A|^{1+c\varepsilon}, \] where $ν_1(A)$ counts unordered unit-distance pairs. We combine the arithmetic directions from the recent unit-distance construction with the multiplicative enlargement used in the recent sum-product construction. The arithmetic ingredients are stated as explicit inputs.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-15T16:56:02Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jozsef Solymosi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.10791v1</id>
+    <title>Perspectives on the unit distance problem</title>
+    <updated>2026-09-09T19:55:45Z</updated>
+    <link href="https://arxiv.org/abs/2609.10791v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.10791v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is a survey on an old open problem in combinatorics called the unit distance problem, and the field of mathematics around it, called incidence geometry. What do we know about the problem? Why is it difficult? How does it connect with other parts of math?</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-09T19:55:45Z</published>
+    <arxiv:comment>31 pages</arxiv:comment>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Larry Guth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28157v1</id>
+    <title>A unit-distance graph in the plane with independence ratio below 1/4</title>
+    <updated>2026-06-26T14:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.28157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that there exists a finite unit-distance graph in the plane with independence ratio strictly smaller than 1/4, answering a question of Erdős. Our proof closely follows the framework of Matolcsi, Ruzsa, Varga, and Zsámboki, based on the geometric fractional chromatic number, but adds a carefully chosen two-vertex augmentation that pushes their 27-vertex construction from geometric fractional chromatic number $4$ to a value strictly larger than 4. This disproves their Conjecture 1, and implies that the fractional chromatic number of the plane is strictly larger than 4. The proof can be made fully constructive, but the resulting finite graph has an enormous number of vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T14:54:23Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+  </entry>
+</feed>

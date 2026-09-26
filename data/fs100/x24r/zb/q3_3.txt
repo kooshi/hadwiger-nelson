@@ -1,0 +1,3 @@
+## q3_3: 'ab:"invariant measure" & ab:"adele"'  total=2 fetched=2
+0118.11405 | 1960 | Tamagawa, T. | On Selberg's trace formula |  |  
+1062.11074 | 2004 | Nakamura, Yoshihide; Watanabe, Takao | The normalization constant of a certain invariant measure on \(\text{GL}_n(D_{\mathbb A})\) |  | review *rational points

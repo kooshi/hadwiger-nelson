@@ -1,0 +1,5 @@
+## q1_2: 'ti:"triangle-free" & ti:"unit distance"'  total=4 fetched=4
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *triangle
+0847.05050 | 1995 | O'Donnell, Paul | A 40-vertex \(4\)-chromatic triangle-free unit distance graph |  | review *triangle
+1581.05080 | 2026 | de Grey, Aubrey | A 5-chromatic, triangle-free unit-distance graph in \(\mathbb{R}^3\) with 61 vertices |  | summary *triangle/47/5-chromatic
+arXiv:2607.19995 | 2026 | Haroldo Costa Silva Filho | Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 and EI19 (Ho |  | summary *triangle/field

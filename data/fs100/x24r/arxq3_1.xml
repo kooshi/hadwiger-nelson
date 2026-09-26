@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mk0MZfWLfBJH3QHpAm6lQNZycw0</id>
+  <title>arXiv Query: search_query=abs:nonlacunary AND abs:invariant AND abs:measures&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-26T11:35:56Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:nonlacunary+AND+(abs:invariant+AND+abs:measures)&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.24503v2</id>
+    <title>Generic Zero-Entropy Optimization for Finitely Generated Nonlacunary Actions on the Circle</title>
+    <updated>2026-08-31T17:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2608.24503v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.24503v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $T_n(x)=nx\pmod 1$ on $\T=\mathbb R/\mathbb Z$, and let $Σ\subset\mathbb N$ be a finitely generated nonlacunary multiplicative semigroup. We prove that, for every $1\le s\le\infty$, there is an open dense set of potentials $f\in W^{1,s}(\T)$ such that every measure that maximizes or minimizes $\int f\,dμ$ over the $Σ$-invariant probability measures satisfies $h_μ(T_r)=0$ for all $r\inΣ\setminus\{1\}$. For each fixed $s$, a single dense $G_δ$ subset of $W^{1,s}(\T)$ works simultaneously for all finitely generated nonlacunary multiplicative semigroups. The proof combines Rudolph--Johnson entropy rigidity with periodic-grid perturbations that generically exclude Haar measure from the optimizing faces. In particular, without any uniqueness assumption, the result applies to simultaneous $T_p,T_q$-invariance whenever $p,q\ge2$ are multiplicatively independent.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-25T12:49:35Z</published>
+    <arxiv:comment>11 pages. v2: The main theorem is extended from Lipschitz potentials to \(W^{1,s}(\mathbb T)\) for every \(1\leq s\leq\infty\). Added a sharpness result for the periodic-grid estimate and a uniform-topology analogue for continuous potentials; proofs, discussion, and references have been expanded</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Hang Zhao</name>
+    </author>
+  </entry>
+</feed>

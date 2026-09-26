@@ -1,0 +1,5 @@
+## q3_5: 'ab:"S-arithmetic" & ab:"measure rigidity"'  total=4 fetched=4
+1423.22014 | 2019 | Einsiedler, Manfred; Lindenstrauss, Elon | Joinings of higher rank torus actions on homogeneous spaces |  | review *torus
+0801.22007 | 1993 | Ratner, Marina | Raghunathan's conjectures for \(p\)-adic Lie groups |  | review 
+1258.37034 | 2011 | Mohammadi, Amir | Measures invariant under horospherical subgroups in positive characteristic |  | review 
+1535.22029 | 2022 | Aka, Menny | Joinings classification and applications [after Einsiedler and Lindenstrauss] |  | review *torus

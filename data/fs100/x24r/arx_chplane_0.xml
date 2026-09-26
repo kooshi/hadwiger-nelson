@@ -1,0 +1,2275 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/wb8BduzH9BKCftpHECX5u5Ub+0Y</id>
+  <title>arXiv Query: search_query=abs:chromatic AND abs:plane&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-09-26T11:30:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:chromatic+AND+abs:plane&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>259</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1507.00025v2</id>
+    <title>Chromatic number of Euclidean plane</title>
+    <updated>2023-01-05T13:26:06Z</updated>
+    <link href="https://arxiv.org/abs/1507.00025v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1507.00025v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>If the chromatic number of Euclidean plane is larger than four, but it is known that the chromatic number of planar graphs is equal to four, then how does one explain it? In my opinion, they are contradictory to each other. This idea leads to confirm the chromatic number of the plane about its exact value.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-07-01T04:07:40Z</published>
+    <arxiv:comment>there was an error that appears in proof of the theorem</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Kai-Rui Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.11824v4</id>
+    <title>Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres</title>
+    <updated>2022-10-22T08:36:37Z</updated>
+    <link href="https://arxiv.org/abs/2106.11824v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.11824v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper is devoted to the development of algorithms for finding unit distance graphs with chromatic number greater than 4, embedded in a two-dimensional sphere or plane. Such graphs provide a lower bound for the Nelson-Hadwiger problem on the chromatic number of the plane and its generalizations to the case of the sphere. A series of 5-chromatic unit distance graphs on 64513 vertices embedded into the plane is constructed. Unlike previously known examples, these graphs do not contain the Moser spindle as a subgraph. The construction of 5-chromatic graphs embedded in a sphere at two values of the radius is given. Namely, the 5-chromatic unit distance graph on 372 vertices embedded into the circumsphere of an icosahedron with a unit edge length, and the 5-chromatic graph on 972 vertices embedded into the circumsphere of a great icosahedron are constructed.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-07T14:18:45Z</published>
+    <arxiv:comment>20 pages, 12 figures. Fixed a few minor mistakes. Changes suggested by the reviewers have been made. Simplified some formulas</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Mathematics, 345(12), 113106 (2022)</arxiv:journal_ref>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+    <author>
+      <name>Anna Neopryatnaya</name>
+    </author>
+    <author>
+      <name>Eugene Dergachev</name>
+    </author>
+    <arxiv:doi>10.1016/j.disc.2022.113106</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.disc.2022.113106" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0707.1177v3</id>
+    <title>Unit distance graphs with ambiguous chromatic number</title>
+    <updated>2009-12-16T08:16:08Z</updated>
+    <link href="https://arxiv.org/abs/0707.1177v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0707.1177v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  First Laszlo Szekely and more recently Saharon Shelah and Alexander Soifer have presented examples of infinite graphs whose chromatic numbers depend on the axioms chosen for set theory. The existence of such graphs may be relevant to the Chromatic Number of the Plane problem. In this paper we construct a new class of graphs with ambiguous chromatic number. They are unit distance graphs with vertex set R^n, and hence may be seen as further evidence that the chromatic number of the plane might depend on set theory.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-07-09T03:52:53Z</published>
+    <arxiv:comment>7 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Electron. J. Combin. 16 (2009), no. 1, Note 31</arxiv:journal_ref>
+    <author>
+      <name>Michael S. Payne</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0805.0530v2</id>
+    <title>Analytical Equations to the Chromaticity Cone: Algebraic Methods for Describing Color</title>
+    <updated>2008-06-01T19:25:20Z</updated>
+    <link href="https://arxiv.org/abs/0805.0530v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0805.0530v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We describe an affine transformation on the (CIE) color matching functions and map the spectral locus as a circle. We then homogenize the right circular cylinder erected by the circle, with respect to a normalizing plane and develop an analytical equation to the chromaticity cone, for the spectral colors. In the interior of the (CIE) chromaticity diagram, by homogenizing elliptic cylinders with respect to the normalizing planes, analytical equations to subsets (also cones) of the chromaticity cone are developed. These equations provide an algebraic method for describing color perception. As an application of the interior chromaticity cones, we demonstrate that by sectioning homogenized cones with planes and projecting, analytical equations to the Macadam ellipses may be derived. Further, the cone equations are used to propose new types of color order systems.</summary>
+    <category term="q-bio.OT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-05-05T13:42:02Z</published>
+    <arxiv:comment>20 pages, 17 figures, 1 table</arxiv:comment>
+    <arxiv:primary_category term="q-bio.OT"/>
+    <author>
+      <name>Prashanth Alluvada</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1501.01647v1</id>
+    <title>The Fractional Chromatic Number of the Plane</title>
+    <updated>2015-01-07T21:17:13Z</updated>
+    <link href="https://arxiv.org/abs/1501.01647v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1501.01647v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number of the plane is the chromatic number of the uncountably infinite graph that has as its vertices the points of the plane and has an edge between two points if their distance is 1. This chromatic number is denoted $χ(\mathcal{R}^2)$. The problem was introduced in 1950, and shortly thereafter it was proved that $4\le χ(\mathcal{R}^2)\le 7$. These bounds are both easy to prove, but after more than 60 years they are still the best known. In this paper, we investigate $χ_f(\mathcal{R}^2)$, the fractional chromatic number of the plane. The previous best bounds (rounded to five decimal places) were $3.5556 \le χ_f(\mathcal{R}^2)\le 4.3599$. Here we improve the lower bound to $76/21\approx3.6190$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-01-07T21:17:13Z</published>
+    <arxiv:comment>20 pages, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Combinatorica. Vol. 37(5), October 2017, pp. 837-861</arxiv:journal_ref>
+    <author>
+      <name>Daniel W. Cranston</name>
+    </author>
+    <author>
+      <name>Landon Rabern</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1209.1595v5</id>
+    <title>Triangle-free intersection graphs of line segments with large chromatic number</title>
+    <updated>2014-12-26T12:25:42Z</updated>
+    <link href="https://arxiv.org/abs/1209.1595v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1209.1595v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the 1970s, Erdos asked whether the chromatic number of intersection graphs of line segments in the plane is bounded by a function of their clique number. We show the answer is no. Specifically, for each positive integer $k$, we construct a triangle-free family of line segments in the plane with chromatic number greater than $k$. Our construction disproves a conjecture of Scott that graphs excluding induced subdivisions of any fixed graph have chromatic number bounded by a function of their clique number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-09-07T17:31:03Z</published>
+    <arxiv:comment>Small corrections, bibliography update</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>J.Combin.Theory Ser.B 105 (2014) 6-10</arxiv:journal_ref>
+    <author>
+      <name>Arkadiusz Pawlik</name>
+    </author>
+    <author>
+      <name>Jakub Kozik</name>
+    </author>
+    <author>
+      <name>Tomasz Krawczyk</name>
+    </author>
+    <author>
+      <name>Michał Lasoń</name>
+    </author>
+    <author>
+      <name>Piotr Micek</name>
+    </author>
+    <author>
+      <name>William T. Trotter</name>
+    </author>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+    <arxiv:doi>10.1016/j.jctb.2013.11.001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jctb.2013.11.001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0812.4346v1</id>
+    <title>The Plane-Width of Graphs</title>
+    <updated>2008-12-23T07:49:12Z</updated>
+    <link href="https://arxiv.org/abs/0812.4346v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0812.4346v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Map vertices of a graph to (not necessarily distinct) points of the plane so that two adjacent vertices are mapped at least a unit distance apart. The plane-width of a graph is the minimum diameter of the image of the vertex set over all such mappings. We establish a relation between the plane-width of a graph and its chromatic number, and connect it to other well-known areas, including the circular chromatic number and the problem of packing unit discs in the plane. We also investigate how plane-width behaves under various operations, such as homomorphism, disjoint union, complement, and the Cartesian product.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-12-23T07:49:12Z</published>
+    <arxiv:primary_category term="cs.DM"/>
+    <arxiv:journal_ref>Journal of Graph Theory 68 (2011) 229-245</arxiv:journal_ref>
+    <author>
+      <name>Marcin Kaminski</name>
+    </author>
+    <author>
+      <name>Paul Medvedev</name>
+    </author>
+    <author>
+      <name>Martin Milanic</name>
+    </author>
+    <arxiv:doi>10.1002/jgt.20554</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1002/jgt.20554" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1701.02693v2</id>
+    <title>Clique colourings of geometric graphs</title>
+    <updated>2018-12-02T15:49:07Z</updated>
+    <link href="https://arxiv.org/abs/1701.02693v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1701.02693v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A clique colouring of a graph is a colouring of the vertices such that no maximal clique is monochromatic (ignoring isolated vertices). The least number of colours in such a colouring is the clique chromatic number. Given $n$ points $x_1, \ldots,x_n$ in the plane, and a threshold $r&gt;0$, the corresponding geometric graph has vertex set $\{v_1,\ldots,v_n\}$, and distinct $v_i$ and $v_j$ are adjacent when the Euclidean distance between $x_i$ and $x_j$ is at most $r$. We investigate the clique chromatic number of such graphs.
+  We first show that the clique chromatic number is at most 9 for any geometric graph in the plane, and briefly consider geometric graphs in higher dimensions. Then we study the asymptotic behaviour of the clique chromatic number for the random geometric graph $RG$ in the plane, where $n$ random points are independently and uniformly distributed in a suitable square. We see that as $r$ increases from 0, with high probability the clique chromatic number is 1 for very small $r$, then 2 for small $r$, then at least 3 for larger $r$, and finally drops back to 2.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-01-10T17:15:26Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Colin McDiarmid</name>
+    </author>
+    <author>
+      <name>Dieter Mitsche</name>
+    </author>
+    <author>
+      <name>Pawel Pralat</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14398v2</id>
+    <title>A lower bound on the number of colours needed to nicely colour a sphere</title>
+    <updated>2025-04-18T17:55:55Z</updated>
+    <link href="https://arxiv.org/abs/2404.14398v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14398v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hadwiger--Nelson problem is about determining the chromatic number of the plane (CNP), defined as the minimum number of colours needed to colour the plane so that no two points of distance 1 have the same colour. In this paper we investigate a related problem for spheres and we use a few natural restrictions on the colouring. Thomassen showed that with these restrictions, the chromatic number of all manifolds satisfying certain properties (including the plane and all spheres with a large enough radius) is at least 7. We prove that with these restrictions, the chromatic number of any sphere with a large enough radius is at least 8. This also gives a new lower bound for the minimum colours needed for colouring the 3-dimensional space with the same restrictions.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T17:57:46Z</published>
+    <arxiv:comment>The result was presented at CCCG 2020. The present paper is a revised version of the paper in the conference proceedings</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Péter Ágoston</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.03724v1</id>
+    <title>On $4$-chromatic Schrijver graphs: their structure, non-$3$-colorability, and critical edges</title>
+    <updated>2019-12-08T17:42:52Z</updated>
+    <link href="https://arxiv.org/abs/1912.03724v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.03724v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give an elementary proof for the non-$3$-colorability of $4$-chromatic Schrijver graphs thus providing such a proof also for $4$-chromatic Kneser graphs. To this end we use a complete description of the structure of $4$-chromatic Schrijver graphs that was already given by Braun and even earlier in an unpublished manuscript by Li. We also address connections to surface quadrangulations. In particular, we show that a spanning subgraph of $4$-chromatic Schrijver graphs quadrangulates the Klein bottle, while another spanning subgraph quadrangulates the projective plane. The latter is a special case of a result by Kaiser and Stehlík. We characterize the color-critical edges of $4$-chromatic Schrijver graphs and also present preliminary results toward the characterization of color-critical edges in Schrijver graphs of higher chromatic number. Finally, we show that (apart from two cases of small parameters) the subgraphs we present that quadrangulate the Klein bottle are edge-color-critical. The analogous result for the subgraphs quadrangulating the projective plane is an immediate consequence of earlier results by Gimbel and Thomassen and was already noted by Kaiser and Stehlík.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-08T17:42:52Z</published>
+    <arxiv:comment>32 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Gábor Simonyi</name>
+    </author>
+    <author>
+      <name>Gábor Tardos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28157v1</id>
+    <title>A unit-distance graph in the plane with independence ratio below 1/4</title>
+    <updated>2026-06-26T14:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.28157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that there exists a finite unit-distance graph in the plane with independence ratio strictly smaller than 1/4, answering a question of Erdős. Our proof closely follows the framework of Matolcsi, Ruzsa, Varga, and Zsámboki, based on the geometric fractional chromatic number, but adds a carefully chosen two-vertex augmentation that pushes their 27-vertex construction from geometric fractional chromatic number $4$ to a value strictly larger than 4. This disproves their Conjecture 1, and implies that the fractional chromatic number of the plane is strictly larger than 4. The proof can be made fully constructive, but the resulting finite graph has an enormous number of vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T14:54:23Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.14859v1</id>
+    <title>An improvement on the bound for the acyclic chromatic index</title>
+    <updated>2026-02-16T15:53:07Z</updated>
+    <link href="https://arxiv.org/abs/2602.14859v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.14859v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The acyclic chromatic index (or acyclic edge-chromatic number) of a graph is the least number of colors needed to properly color its edges so that none of its cycles has only two colors. We show that for a graph of max degree $Δ$, the acyclic chromatic index is at most $3.142(Δ-1)+1$, improving on the (best to date) bound of Fialho et al. (2020). Our improvement is made possible by considering unordered (non-plane) trees, instead of ordered (plane) ones, as witness structures for the Lovász Local Lemma, a key combinatorial tool often used in related works. The counting of these witness structures entails methods of Analytic Combinatorics.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-16T15:53:07Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Lefteris Kirousis</name>
+    </author>
+    <author>
+      <name>John Livieratos</name>
+    </author>
+    <author>
+      <name>Alexandros Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.12011v1</id>
+    <title>On the balanced upper chromatic number of finite projective planes</title>
+    <updated>2020-05-25T10:02:07Z</updated>
+    <link href="https://arxiv.org/abs/2005.12011v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.12011v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we study vertex colorings of hypergraphs in which all color class sizes differ by at most one (balanced colorings) and each hyperedge contains at least two vertices of the same color (rainbow-free colorings). For any hypergraph $H$, the maximum number $k$ for which there is a balanced rainbow-free $k$-coloring of $H$ is called the balanced upper chromatic number of the hypergraph. We confirm the conjecture of Araujo-Pardo, Kiss and Montejano by determining the balanced upper chromatic number of the desarguesian projective plane $\mathrm{PG}(2,q)$ for all $q$. In addition, we determine asymptotically the balanced upper chromatic number of several families of non-desarguesian projective planes and also provide a general lower bound for arbitrary projective planes using probabilistic methods which determines the parameter up to a multiplicative constant.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-25T10:02:07Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Zoltán L. Blázsik</name>
+    </author>
+    <author>
+      <name>Aart Blokhuis</name>
+    </author>
+    <author>
+      <name>Štefko Miklavič</name>
+    </author>
+    <author>
+      <name>Zoltán Lóránt Nagy</name>
+    </author>
+    <author>
+      <name>Tamás Szőnyi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12630v1</id>
+    <title>On upper bounds for the multi-fold chromatic numbers of the plane</title>
+    <updated>2022-06-25T12:11:00Z</updated>
+    <link href="https://arxiv.org/abs/2206.12630v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12630v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The multi-fold chromatic number of the plane $χ_m$ is the smallest number of colors $k$, sufficient to color each point of the Euclidean plane in exactly $m$ colors, so that for any pair of points at a unit distance from each other, two corresponding $m$-subsets of $k$-set do not contain any common color. We consider upper bounds for $m$-fold chromatic numbers of the plane. Our main result is that for any $m$ the inequality $χ_m&lt;(1+2/\sqrt3)^2\cdot m+3.501$ holds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:11:00Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 30/4 (2021) 177-189</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1109.3218v2</id>
+    <title>Colouring the Triangles Determined by a Point Set</title>
+    <updated>2011-09-19T03:52:17Z</updated>
+    <link href="https://arxiv.org/abs/1109.3218v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1109.3218v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let P be a set of n points in general position in the plane. We study the chromatic number of the intersection graph of the open triangles determined by P. It is known that this chromatic number is at least n^3/27+O(n^2), and if P is in convex position, the answer is n^3/24+O(n^2). We prove that for arbitrary P, the chromatic number is at most n^3/19.259+O(n^2).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-09-14T22:10:21Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>J. Computational Geometry 3:86-101, 2012</arxiv:journal_ref>
+    <author>
+      <name>Ruy Fabila-Monroy</name>
+    </author>
+    <author>
+      <name>David R. Wood</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1304.0122v1</id>
+    <title>Color Perception: Opening up the Chromaticity Cone</title>
+    <updated>2013-03-30T16:29:57Z</updated>
+    <link href="https://arxiv.org/abs/1304.0122v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1304.0122v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the XYZ color space, the subset of the tri-stimuli corresponding to spike-type (monochromatic) impingement of energy is the chromaticity cone, CC. Using a family of concentric spheres, we describe a nonlinear transformation over the CC and construct a bijection from the CC onto the flat plane. In the process, we open up the CC and view it as a chart on the plane. Because the map is a bijection, the color perception information is preserved (invariant) through the transformation. We discuss stereographic projection of the chromaticity chart and some examples.</summary>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-03-30T16:29:57Z</published>
+    <arxiv:comment>20 pages, 31 figures</arxiv:comment>
+    <arxiv:primary_category term="q-bio.QM"/>
+    <author>
+      <name>Prashanth Alluvada</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9910503v1</id>
+    <title>Chromatic Polynomials, Potts Models and All That</title>
+    <updated>1999-10-30T00:48:28Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9910503v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9910503v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  The q-state Potts model can be defined on an arbitrary finite graph, and its partition function encodes much important information about that graph, including its chromatic polynomial, flow polynomial and reliability polynomial. The complex zeros of the Potts partition function are of interest both to statistical mechanicians and to combinatorists. I give a pedagogical introduction to all these problems, and then sketch two recent results: (a) Construction of a countable family of planar graphs whose chromatic zeros are dense in the whole complex q-plane except possibly for the disc |q-1| &lt; 1. (b) Proof of a universal upper bound on the q-plane zeros of the chromatic polynomial (or antiferromagnetic Potts-model partition function) in terms of the graph's maximum degree.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1999-10-30T00:48:28Z</published>
+    <arxiv:comment>10 pages (LaTeX). 3 style files included (eqsection.sty, indent.sty, subeqnarray.sty)</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physica A279 (2000) 324-332</arxiv:journal_ref>
+    <author>
+      <name>Alan D. Sokal</name>
+      <arxiv:affiliation>NYU</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1016/S0378-4371(99)00519-1</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0378-4371(99)00519-1" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.25644v1</id>
+    <title>Winding number and circular coloring</title>
+    <updated>2026-06-24T09:52:56Z</updated>
+    <link href="https://arxiv.org/abs/2606.25644v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.25644v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1996, Youngs proved a surprising theorem that quadrangulations of the projective plane could never have chromatic number exactly 3. This sparked a lot of interest, and the result has been further developed in many directions over the past decades. For example, the result is strengthened by considering the circular chromatic number, which is a real-valued lower bound on the chromatic number. The circular chromatic number of a quadrangulation cannot be in the interval (2,4). This parameter allows a generalization to larger even faces, for which a similar gap exists.
+  In this work, we place these results into a framework based on the notion of winding number using extensions of colorings to continuous mappings. This yields unified and simplified proofs of gaps in the circular chromatic number for graphs with a distinguished set of directed even cycles. This generalizes the setting of graphs embedded on surfaces where every face is even.
+  We further establish an analogous gap phenomenon when all faces are of a given odd length, previously known only in the case of triangulations. For example, we conclude that if G is a graph embedded on the projective plane such that all faces are 5-cycles, then either its circular chromatic number is 5/2 or at least 3, the former being the case only if G is Eulerian and every noncontractible facial walk is of odd length...</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-24T09:52:56Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Reza Naserasr</name>
+    </author>
+    <author>
+      <name>Cyril Pujol</name>
+    </author>
+    <author>
+      <name>Lujia Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.12373v1</id>
+    <title>Chromatic Confocal Tomography</title>
+    <updated>2022-01-28T19:04:04Z</updated>
+    <link href="https://arxiv.org/abs/2201.12373v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.12373v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Confocal microscopy is the backbone of cellular research labs across the world but unfortunately, the imaging is restricted to a single plane. Chromatic confocal microscopy offers the possibility to image multiple planes simultaneously thus providing a manifold increase in the imaging speed whereas eliminating the need for z-axis scanning. Standard chromatic confocal systems have a limited imaging range of the order of a few hundreds of micrometers which limits their applications. In this work, using a single zinc selenide lens, we demonstrate a chromatic confocal tomography system that has an imaging range of 18 mm with an average lateral resolution of 2.46 microns and another system with a 1.55 mm imaging range with 0.86 microns average lateral resolution. Doing so, we have pushed the imaging range of chromatic confocal systems from micrometer to centimeter regime, an improvement of approximately two orders of magnitude. The proposed approach can be a powerful tool for confocal imaging of biological samples or surface profiling of industrial samples.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.bio-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-28T19:04:04Z</published>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Gargi Sharma</name>
+    </author>
+    <author>
+      <name>Kanwarpal Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.05958v3</id>
+    <title>List star edge coloring of generalized Halin graphs</title>
+    <updated>2021-06-21T10:23:20Z</updated>
+    <link href="https://arxiv.org/abs/2104.05958v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.05958v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A star $k$-edge coloring is a proper edge coloring such that there are no bichromatic paths or cycles of length four. The smallest integer $k$ such that $G$ admits a star $k$-edge coloring is the star chromatic index of $G$. Deng \etal \cite{MR2933839}, and Bezegov{á} \etal \cite{MR3431294} independently proved that the star chromatic index of a tree is at most $\lfloor \frac{3Δ}{2} \rfloor$, and the bound is sharp. Han \etal \cite{MR3924408} strengthened the result to list version of star chromatic index, and proved that $\lfloor \frac{3Δ}{2} \rfloor$ is also the sharp upper bound for the list star chromatic index of trees. A generalized Halin graph is a plane graph that consists of a plane embedding of a tree $T$ with $Δ(T) \geq 3$, and a cycle $C$ connecting all the leaves of the tree such that $C$ is the boundary of the exterior face. In this paper, we prove that if $H := T \cup C$ is a generalized Halin graph with $|C| \neq 5$, then its list star chromatic index is at most \[ \max\left\{\left\lfloor\frac{θ(T) + Δ(T)}{2}\right\rfloor, 2 \left\lfloor\frac{Δ(T)}{2}\right\rfloor + 7\right\}, \] where $θ(T) = \max_{xy \in E(T)}\{d_{T}(x) + d_{T}(y)\}$. As a consequence, if $H$ is a (generalized) Halin graph with maximum degree $Δ\geq 13$, then the list star chromatic index is at most $\lfloor \frac{3Δ}{2} \rfloor$. Moreover, the upper bound for the list star chromatic index is sharp.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-13T06:18:42Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Zhengke Miao</name>
+    </author>
+    <author>
+      <name>Yimin Song</name>
+    </author>
+    <author>
+      <name>Tao Wang</name>
+    </author>
+    <author>
+      <name>Xiaowei Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1412.2091v1</id>
+    <title>Measurable Chromatic Number of Spheres</title>
+    <updated>2014-12-05T18:24:01Z</updated>
+    <link href="https://arxiv.org/abs/1412.2091v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1412.2091v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We examine the measurable chromatic number of distance colorings on the surface of 2-dimensional spheres of varying radii, showing in particular that similar arguments to those used to raise lower bounds in the plane work for all but a countable set of radii. Furthermore, we show that measurable chromatic number as a function of the radius, or more generally the curvature, is not monotonic.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-12-05T18:24:01Z</published>
+    <arxiv:comment>9 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Greg Malen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1312.1559v4</id>
+    <title>Outerstring graphs are $χ$-bounded</title>
+    <updated>2018-12-02T11:19:33Z</updated>
+    <link href="https://arxiv.org/abs/1312.1559v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1312.1559v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An outerstring graph is an intersection graph of curves that lie in a common half-plane and have one endpoint on the boundary of that half-plane. We prove that the class of outerstring graphs is $χ$-bounded, which means that their chromatic number is bounded by a function of their clique number. This generalizes a series of previous results on $χ$-boundedness of outerstring graphs with various additional restrictions on the shape of curves or the number of times the pairs of curves can cross. The assumption that each curve has an endpoint on the boundary of the half-plane is justified by the known fact that triangle-free intersection graphs of straight-line segments can have arbitrarily large chromatic number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-12-05T14:24:54Z</published>
+    <arxiv:comment>Introduction extended by a survey of results on (outer)string graphs, some minor corrections</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Alexandre Rok</name>
+    </author>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12633v1</id>
+    <title>On the plane and its coloring</title>
+    <updated>2022-06-25T12:18:52Z</updated>
+    <link href="https://arxiv.org/abs/2206.12633v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12633v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We provide a human-verifiable proof that, in a certain sense, the chromatic number of the plane is exactly 7.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:18:52Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 31/4 (2022) 189-195</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1010.0133v1</id>
+    <title>Local chromatic number of quadrangulations of surfaces</title>
+    <updated>2010-10-01T12:02:23Z</updated>
+    <link href="https://arxiv.org/abs/1010.0133v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1010.0133v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The local chromatic number of a graph was introduced by Erdős et al. [4]. In [17] a connection to topological properties of (a box complex of) the graph was established and in [18] it was shown that if a graph is strongly topologically 4-chromatic then its local chromatic number is at least four. As a consequence one obtains a generalization of the following theorem of Youngs: If a quadrangulation of the projective plane is not bipartite it has chromatic number four. The generalization states that in this case the local chromatic number is also four. Both papers [1] and [13] generalize Youngs's result to arbitrary non-orientable surfaces replacing the condition of the graph being not bipartite by a more technical condition of an odd quadrangulation. This paper investigates when these general results are true for the local chromatic number instead of the chromatic number. Surprisingly, we find out that (unlike in the case of the chromatic number) this depends on the genus of the surface. For the non-orientable surfaces of genus at most four, the local chromatic number of any odd quadrangulation is at least four, but this is not true for non-orientable surfaces of genus 5 or higher. We also prove that face subdivisions of odd quadrangulations and Fisk triangulations of arbitrary surfaces exhibit the same behavior for the local chromatic number as they do for the usual chromatic number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-10-01T12:02:23Z</published>
+    <arxiv:comment>22 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Bojan Mohar</name>
+    </author>
+    <author>
+      <name>Gábor Simonyi</name>
+    </author>
+    <author>
+      <name>Gábor Tardos</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0511557v3</id>
+    <title>The chromatic polynomial of fatgraphs and its categorification</title>
+    <updated>2007-11-28T17:12:47Z</updated>
+    <link href="https://arxiv.org/abs/math/0511557v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0511557v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Motivated by Khovanov homology and relations between the Jones polynomial and graph polynomials, we construct a homology theory for embedded graphs from which the chromatic polynomial can be recovered as the Euler characteristic. For plane graphs, we show that our chromatic homology can be recovered from the Khovanov homology of an associated link. We apply this connection with Khovanov homology to show that the torsion-free part of our chromatic homology is independent of the choice of planar embedding of a graph.
+  We extend our construction and categorify the Bollobas-Riordan polynomial (a generalisation of the Tutte polynomial to embedded graphs). We prove that both our chromatic homology and the Khovanov homology of an associated link can be recovered from this categorification.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2005-11-22T13:30:08Z</published>
+    <arxiv:comment>A substantial revision. To appear in Advances in Mathematics</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Adv. Math., 217 (2008) 1558-1587</arxiv:journal_ref>
+    <author>
+      <name>Martin Loebl</name>
+    </author>
+    <author>
+      <name>Iain Moffatt</name>
+    </author>
+    <arxiv:doi>10.1016/j.aim.2007.11.016</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.aim.2007.11.016" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2001.09901v1</id>
+    <title>Hasse diagrams with large chromatic number</title>
+    <updated>2020-01-27T16:38:22Z</updated>
+    <link href="https://arxiv.org/abs/2001.09901v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2001.09901v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For every positive integer $n$, we construct a Hasse diagram with $n$ vertices and chromatic number $Ω(n^{1/4})$, which significantly improves on the previously known best constructions of Hasse diagrams having chromatic number $Θ(\log n)$. In addition, if we also require that our Hasse diagram has girth at least $k\geq 5$, we can achieve a chromatic number of at least $n^{\frac{1}{2k-3}+o(1)}$.
+  These results have the following surprising geometric consequence. They imply the existence of a family $\mathcal{C}$ of $n$ curves in the plane such that the disjointness graph $G$ of $\mathcal{C}$ is triangle-free (or have high girth), but the chromatic number of $G$ is polynomial in $n$. Again, the previously known best construction, due to Pach, Tardos and Tóth, had only logarithmic chromatic number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-01-27T16:38:22Z</published>
+    <arxiv:comment>11 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Andrew Suk</name>
+    </author>
+    <author>
+      <name>István Tomon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12158v1</id>
+    <title>Antenna beam characterisation for the global 21cm experiment LEDA and its impact on signal model parameter reconstruction</title>
+    <updated>2022-06-24T08:41:04Z</updated>
+    <link href="https://arxiv.org/abs/2206.12158v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12158v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cosmic Dawn, the onset of star formation in the early universe, can in principle be studied via the 21cm transition of neutral hydrogen, for which a sky-averaged absorption signal, redshifted to MHz frequencies, is predicted to be {\it O}(10-100)\,mK. Detection requires separation of the 21cm signal from bright chromatic foreground emission due to Galactic structure, and the characterisation of how it couples to instrumental response. In this work, we present characterisation of antenna gain patterns for the Large-aperture Experiment to detect the Dark Ages (LEDA) via simulations, assessing the effects of the antenna ground-plane geometries used, and measured soil properties. We then investigate the impact of beam pattern uncertainties on the reconstruction of a Gaussian absorption feature. Assuming the pattern is known and correcting for the chromaticity of the instrument, the foregrounds can be modelled with a log-polynomial, and the 21cm signal identified with high accuracy. However, uncertainties on the soil properties lead to \textperthousand\ changes in the chromaticity that can bias the signal recovery. The bias can be up to a factor of two in amplitude and up to few \% in the frequency location. These effects do not appear to be mitigated by larger ground planes, conversely gain patterns with larger ground planes exhibit more complex frequency structure, significantly compromising the parameter reconstruction. Our results, consistent with findings from other antenna design studies, emphasise the importance of chromatic response and suggest caution in assuming log-polynomial foreground models in global signal experiments.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-24T08:41:04Z</published>
+    <arxiv:comment>Accepted for publication in MNRAS</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>M. Spinelli</name>
+    </author>
+    <author>
+      <name>G. Kyriakou</name>
+    </author>
+    <author>
+      <name>G. Bernardi</name>
+    </author>
+    <author>
+      <name>P. Bolli</name>
+    </author>
+    <author>
+      <name>L. J. Greenhill</name>
+    </author>
+    <author>
+      <name>A. Fialkov</name>
+    </author>
+    <author>
+      <name>H. Garsden</name>
+    </author>
+    <arxiv:doi>10.1093/mnras/stac1804</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1093/mnras/stac1804" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.14714v1</id>
+    <title>On lower bounds of the order of $k$-chromatic unit distance graphs</title>
+    <updated>2023-03-26T13:02:20Z</updated>
+    <link href="https://arxiv.org/abs/2303.14714v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.14714v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Here we give refined numerical values for the minimum number of vertices of $k$-chromatic unit distance graphs in the Euclidean plane.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-26T13:02:20Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 32/2 (2022) 72-74</arxiv:journal_ref>
+    <author>
+      <name>Aubrey D. N. J. de Grey</name>
+    </author>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12632v1</id>
+    <title>A 6-chromatic odd-distance graph in the plane</title>
+    <updated>2022-06-25T12:15:30Z</updated>
+    <link href="https://arxiv.org/abs/2206.12632v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12632v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two vertices of an odd-distance graph are connected by an edge if and only if their Euclidean distance is an odd integer. We construct a 6-chromatic odd-distance graph in the plane.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-25T12:15:30Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 31/3 (2022) 124-137</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12325v1</id>
+    <title>A note on geometric colorings of the Moser lattice</title>
+    <updated>2026-06-10T16:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.12325v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12325v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In arXiv:2311.10069, Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T16:59:20Z</published>
+    <arxiv:comment>5 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.01081v1</id>
+    <title>Lower bounds for the measurable chromatic number of the hyperbolic plane</title>
+    <updated>2017-08-03T09:53:14Z</updated>
+    <link href="https://arxiv.org/abs/1708.01081v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.01081v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consider the graph $\mathbb{H}(d)$ whose vertex set is the hyperbolic plane, where two points are connected with an edge when their distance is equal to some $d&gt;0$. Asking for the chromatic number of this graph is the hyperbolic analogue to the famous Hadwiger-Nelson problem about colouring the points of the Euclidean plane so that points at distance $1$ receive different colours.
+  As in the Euclidean case, one can lower bound the chromatic number of $\mathbb{H}(d)$ by $4$ for all $d$. Using spectral methods, we prove that if the colour classes are measurable, then at least $6$ colours are are needed to properly colour $\mathbb{H}(d)$ when $d$ is sufficiently large.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-03T09:53:14Z</published>
+    <arxiv:comment>13 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput Geom (2018)</arxiv:journal_ref>
+    <author>
+      <name>Evan DeCorte</name>
+    </author>
+    <author>
+      <name>Konstantin Golubev</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-018-0027-8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-018-0027-8" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.12666v1</id>
+    <title>Developing a Wyne Corrector for higher spectral bandwidth focal plane wavefront sensing</title>
+    <updated>2024-07-17T15:49:38Z</updated>
+    <link href="https://arxiv.org/abs/2407.12666v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.12666v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Focal plane wavefront sensing techniques are generally limited to using imaging systems that have below 1% spectral bandwidths, due to the radial smearing of speckles from chromatic diffraction that causes optical image magnification over larger spectral bandwidths. Wyne (1979) designed a pair of triplet lenses to optically minimize this chromatic magnification and increase the spectral bandwidth. Such a Wyne corrector could enable focal plane wavefront sensing at up to 50% spectral bandwidths and as a result open enable $&gt;50x$ higher-speed focal plane wavefront sensing. We present results of the design and laboratory testing of a Wyne corrector prototype, including a detailed tolerancing analysis considering manufactural wavelength ranges and alignment tolerances. These tests show promising results that this technology can be deployed to current and future high speed focal plane wavefront sensing instruments to enable significant performance enhancements. This document number is LLNL-ABS-857246.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-17T15:49:38Z</published>
+    <arxiv:comment>5 pages, 5 figures, submitted to SPIE proceedings</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <author>
+      <name>Dominic F. Sanchez</name>
+    </author>
+    <author>
+      <name>Benjamin L. Gerard</name>
+    </author>
+    <author>
+      <name>Bautista R. Fernandez</name>
+    </author>
+    <author>
+      <name>Brian Bauman</name>
+    </author>
+    <author>
+      <name>Philip M. Hinz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.01958v1</id>
+    <title>On the chromatic number of the plane for map-type colorings</title>
+    <updated>2025-02-04T03:08:07Z</updated>
+    <link href="https://arxiv.org/abs/2502.01958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.01958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Hadwiger-Nelson problem on the chromatic number of the plane under conditions of coloring a map containing a finite number of vertices in any bounded region. Woodall (1973) and Townsend (1981) showed that at least 6 colors would be required. In the present paper, it is shown that at least 7 colors are required to color a map in which the boundaries are not arcs of a unit circle and three boundaries connect at each vertex. As a corollary, we obtain that at least 7 colors are required for a proper coloring in which the regions are arbitrary polygons. The proof relies on techniques developed for a similar result concerning the chromatic number of the plane with a forbidden interval of distances.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T03:08:07Z</published>
+    <arxiv:comment>29 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Georgy Sokolov</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.12656v2</id>
+    <title>A small 6-chromatic two-distance graph in the plane</title>
+    <updated>2023-03-26T13:01:21Z</updated>
+    <link href="https://arxiv.org/abs/2010.12656v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.12656v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give a new, simple proof for the lower bound of the chromatic number of the Euclidean plane with two forbidden distances, based on a graph with only 16 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-23T20:43:43Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 29/3 (2020) 111-115</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.01759v1</id>
+    <title>Triangles and Vitali sets</title>
+    <updated>2023-10-03T02:53:06Z</updated>
+    <link href="https://arxiv.org/abs/2310.01759v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.01759v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is consistent relative to an inaccessible cardinal that ZF+DC holds, the hypergraph of equilateral triangles in Euclidean plane has countable chromatic number, while there is no Vitali set.</summary>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-03T02:53:06Z</published>
+    <arxiv:primary_category term="math.LO"/>
+    <author>
+      <name>Jindrich Zapletal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.12661v1</id>
+    <title>The chromatic number of the plane is at least 5 -- a human-verifiable proof</title>
+    <updated>2020-10-23T20:51:07Z</updated>
+    <link href="https://arxiv.org/abs/2010.12661v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.12661v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a new proof of the known fact that the chromatic number of the plane is at least 5. The main difference of this proof is that it can be verified manually without the help of the computer.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-23T20:51:07Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 30/2 (2020) 77-102</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.05517v2</id>
+    <title>The chromatic Brauer category and its linear representations</title>
+    <updated>2020-10-08T12:25:00Z</updated>
+    <link href="https://arxiv.org/abs/1902.05517v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.05517v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Brauer category is a symmetric strict monoidal category that arises as a categorification of the Brauer algebras in the context of Banagl's framework of positive topological field theories (TFTs). We introduce the chromatic Brauer category as an enrichment of the Brauer category in which the morphisms are component-wise labeled. Linear representations of the (chromatic) Brauer category are symmetric strict monoidal functors into the category of real vector spaces and linear maps equipped with the Schauenburg tensor product. We study representation theory of the (chromatic) Brauer category, and classify all its faithful linear representations. As an application, we use indices of fold lines to construct a refinement of Banagl's concrete positive TFT based on fold maps into the plane.</summary>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-14T17:52:15Z</published>
+    <arxiv:primary_category term="math.AT"/>
+    <author>
+      <name>Felipe Müller</name>
+    </author>
+    <author>
+      <name>Dominik Wrazidlo</name>
+    </author>
+    <arxiv:doi>10.1007/s10485-020-09619-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10485-020-09619-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1108.2808v3</id>
+    <title>A set of chromatic roots which is dense in the complex plane and closed under multiplication by positive integers</title>
+    <updated>2013-06-11T13:16:56Z</updated>
+    <link href="https://arxiv.org/abs/1108.2808v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1108.2808v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study a very large family of graphs, the members of which comprise disjoint paths of cliques with extremal cliques identified. This broad characterisation naturally generalises those of various smaller families of graphs having well-known chromatic polynomials. We derive a relatively simple formula for an arbitrary member of the subfamily consisting of those graphs whose constituent clique-paths have at least one trivial extremal clique, and use this formula to show that the set of all non-integer chromatic roots of these graphs is closed under multiplication by natural numbers. A well-known result of Sokal then leads to our main result, which is that there exists a set of chromatic roots which is closed under positive integer multiplication in addition to being dense in the complex plane. Our findings lend considerable weight to a conjecture of Cameron, who has suggested that this closure property may be a generic feature of the chromatic polynomial. We also hope that the formula we provide will be of use to those computing with chromatic polynomials.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-08-13T17:20:56Z</published>
+    <arxiv:comment>11 pages, significantly revised. Replaces previous note titled "A note on chromatic polynomials of clique-theta graphs"</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Adam Bohn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0012369v3</id>
+    <title>Chromatic roots are dense in the whole complex plane</title>
+    <updated>2003-08-28T21:04:01Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0012369v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0012369v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  I show that the zeros of the chromatic polynomials P_G(q) for the generalized theta graphs Θ^{(s,p)} are, taken together, dense in the whole complex plane with the possible exception of the disc |q-1| &lt; 1. The same holds for their dichromatic polynomials (alias Tutte polynomials, alias Potts-model partition functions) Z_G(q,v) outside the disc |q+v| &lt; |v|. An immediate corollary is that the chromatic zeros of not-necessarily-planar graphs are dense in the whole complex plane. The main technical tool in the proof of these results is the Beraha-Kahane-Weiss theorem on the limit sets of zeros for certain sequences of analytic functions, for which I give a new and simpler proof.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2000-12-19T22:20:33Z</published>
+    <arxiv:comment>LaTeX2e, 53 pages. Version 2 includes a new Appendix B. Version 3 adds a new Theorem 1.4 and a new Section 5, and makes several small improvements. To appear in Combinatorics, Probability &amp; Computing</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Combin. Probab. Comput. 13, 221-261 (2004)</arxiv:journal_ref>
+    <author>
+      <name>Alan D. Sokal</name>
+    </author>
+    <arxiv:doi>10.1017/S0963548303006023</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/S0963548303006023" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.18295v1</id>
+    <title>Coloring equilateral triangles</title>
+    <updated>2025-03-24T02:43:14Z</updated>
+    <link href="https://arxiv.org/abs/2503.18295v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.18295v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is consistent relative to an inaccessible cardinal that ZF+DC holds, the hypergraph of equilateral triangles on a given Euclidean space has countable chromatic number, while the hypergraph of isosceles triangles in the plane does not.</summary>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-24T02:43:14Z</published>
+    <arxiv:primary_category term="math.LO"/>
+    <author>
+      <name>Jindrich Zapletal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.06444v2</id>
+    <title>On the cromatic number of infinitesimal plane layer</title>
+    <updated>2017-10-22T18:15:38Z</updated>
+    <link href="https://arxiv.org/abs/1512.06444v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.06444v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider natural generalization of plane chromatic number problem. We consider chromatic numbers $χ$ of spaces $\mathbb{R}^n \times [0,\varepsilon]^k$ for arbitrary small $\varepsilon$.
+  We prove that $5 \leqχ(\mathbb{R}^2\times [0,\varepsilon])\leq 7$ and ${6\leq χ(\mathbb{R}^2\times [0,\varepsilon]^2) \leq 7}$.
+  Also we consider natural questions, arising from this considerations.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-20T22:07:12Z</published>
+    <arxiv:comment>13 pages, 3 figures, in Russian</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Algebra i Analiz, 2017, Volume 29, Issue 5, Pages 68--89</arxiv:journal_ref>
+    <author>
+      <name>A. J. Kanel-Belov</name>
+    </author>
+    <author>
+      <name>V. Voronov</name>
+    </author>
+    <author>
+      <name>D. Cherkashin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.06801v1</id>
+    <title>A 5-chromatic same-distance graph in the hyperbolic plane</title>
+    <updated>2023-03-13T01:18:15Z</updated>
+    <link href="https://arxiv.org/abs/2303.06801v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.06801v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number of the plane problem asks for the minimum number of colors so that each point of the plane can be assigned a single color with the property that no two points unit-distance apart are identically colored. It is now known that the answer is 5, 6, or 7.
+  Here we consider the problem in the context of the hyperbolic plane. We prove that there exists a distance $d\approx 1.375033509$ so that every 4-coloring of the hyperbolic plane contains two points distance $d$ apart, which are identically colored.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-13T01:18:15Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Geoffrey Exoo</name>
+    </author>
+    <author>
+      <name>Dan Ismailescu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1601.07748v1</id>
+    <title>Focal plane wavefront sensor achromatization : The multireference self-coherent camera</title>
+    <updated>2016-01-28T13:16:40Z</updated>
+    <link href="https://arxiv.org/abs/1601.07748v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1601.07748v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>High contrast imaging and spectroscopy provide unique constraints for exoplanet formation models as well as for planetary atmosphere models. But this can be challenging because of the planet-to-star small angular separation and high flux ratio. Recently, optimized instruments like SPHERE and GPI were installed on 8m-class telescopes. These will probe young gazeous exoplanets at large separations (~1au) but, because of uncalibrated aberrations that induce speckles in the coronagraphic images, they are not able to detect older and fainter planets. There are always aberrations that are slowly evolving in time. They create quasi-static speckles that cannot be calibrated a posteriori with sufficient accuracy. An active correction of these speckles is thus needed to reach very high contrast levels (&gt;1e7). This requires a focal plane wavefront sensor. Our team proposed the SCC, the performance of which was demonstrated in the laboratory. As for all focal plane wavefront sensors, these are sensitive to chromatism and we propose an upgrade that mitigates the chromatism effects. First, we recall the principle of the SCC and we explain its limitations in polychromatic light. Then, we present and numerically study two upgrades to mitigate chromatism effects: the optical path difference method and the multireference self-coherent camera. Finally, we present laboratory tests of the latter solution.
+  We demonstrate in the laboratory that the MRSCC camera can be used as a focal plane wavefront sensor in polychromatic light using an 80 nm bandwidth at 640 nm. We reach a performance that is close to the chromatic limitations of our bench: contrast of 4.5e-8 between 5 and 17 lambda/D.
+  The performance of the MRSCC is promising for future high-contrast imaging instruments that aim to actively minimize the speckle intensity so as to detect and spectrally characterize faint old or light gaseous planets.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-01-28T13:16:40Z</published>
+    <arxiv:comment>14 pages, 20 figures</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>A&amp;A 588, A136 (2016)</arxiv:journal_ref>
+    <author>
+      <name>J. -R. Delorme</name>
+    </author>
+    <author>
+      <name>R. Galicher</name>
+    </author>
+    <author>
+      <name>P. Baudoz</name>
+    </author>
+    <author>
+      <name>G. Rousset</name>
+    </author>
+    <author>
+      <name>J. Mazoyer</name>
+    </author>
+    <author>
+      <name>O. Dupuis</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/201527657</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/201527657" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1805.12181v1</id>
+    <title>Computing Small Unit-Distance Graphs with Chromatic Number 5</title>
+    <updated>2018-05-30T19:05:11Z</updated>
+    <link href="https://arxiv.org/abs/1805.12181v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.12181v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a new method for reducing the size of graphs with a given property. Our method, which is based on clausal proof minimization, allowed us to compute several 553-vertex unit-distance graphs with chromatic number 5, while the smallest published unit-distance graph with chromatic number 5 has 1581 vertices. The latter graph was constructed by Aubrey de Grey to show that the chromatic number of the plane is at least 5. The lack of a 4-coloring of our graphs is due to a clear pattern enforced on some vertices. Also, our graphs can be mechanically validated in a second, which suggests that the pattern is based on a reasonably short argument.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-30T19:05:11Z</published>
+    <arxiv:comment>To appear in Geombinatorics XXVIII(1) in July-2018, a special issue dedicated to 5-chromatic unit-distance graphs</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Marijn J. H. Heule</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1201.0887v2</id>
+    <title>Coloring intersection graphs of x-monotone curves in the plane</title>
+    <updated>2013-08-26T17:57:42Z</updated>
+    <link href="https://arxiv.org/abs/1201.0887v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1201.0887v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A class of graphs G is chi-bounded if the chromatic number of the graphs in G is bounded by some function of their clique number. We show that the class of intersection graphs of simple x-monotone curves in the plane intersecting a vertical line is chi-bounded. As a corollary we show that the class of intersection graphs of rays in the plane is chi-bounded, and the class of intersection graphs of unit segments in the plane is chi-bounded</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-01-04T13:55:24Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Andrew Suk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1508.00889v1</id>
+    <title>Measuring chromatic aberrations in imaging systems using plasmonic nano-particles</title>
+    <updated>2015-08-04T19:52:39Z</updated>
+    <link href="https://arxiv.org/abs/1508.00889v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1508.00889v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Chromatic aberration in optical systems arises from the wavelength dependence of a glass's refractive index. Polychromatic rays incident upon an optical surface are refracted at slightly different angles and in traversing an optical system follow distinct paths creating images displaced according to color. Although arising from dispersion, it manifests as a spatial distortion correctable only with compound lenses with multiple glasses and accumulates in complicated imaging systems. While chromatic aberration is measured with interferometry, simple methods are attractive for their ease of use and low cost. In this letter we retrieve the longitudinal chromatic focal shift of high numerical aperture (NA) microscope objectives from the extinction spectra of metallic nanoparticles within the focal plane. The method is accurate for high NA objectives with apochromatic correction, and enables rapid assessment of the chromatic aberration of any complete microscopy systems, since it is straightforward to implement</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-08-04T19:52:39Z</published>
+    <arxiv:comment>4 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Sylvain D. Gennaro</name>
+    </author>
+    <author>
+      <name>Tyler R. Roschuk</name>
+    </author>
+    <author>
+      <name>Stefan A. Maier</name>
+    </author>
+    <author>
+      <name>Rupert F. Oulton</name>
+    </author>
+    <arxiv:doi>10.1364/OL.41.001688</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1364/OL.41.001688" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.10038v3</id>
+    <title>On the location of chromatic zeros of series-parallel graphs</title>
+    <updated>2023-05-15T09:09:00Z</updated>
+    <link href="https://arxiv.org/abs/2204.10038v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.10038v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we consider the zeros of the chromatic polynomial of series-parallel graphs. Complementing a result of Sokal, showing density outside the disk $|q-1|\leq1$, we show density of these zeros in the half plane $\Re(q)&gt;3/2$ and we show there exists an open region $U$ containing the interval $(0,32/27)$ such that $U\setminus\{1\}$ does not contain zeros of the chromatic polynomial of series-parallel graphs.
+  We also disprove a conjecture of Sokal by showing that for each large enough integer $Δ$ there exists a series-parallel graph for which all vertices but one have degree at most $Δ$ and whose chromatic polynomial has a zero with real part exceeding $Δ$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-21T11:49:17Z</published>
+    <arxiv:comment>Small changes based on referee comments. Accepted for publication in the Electronic Journal of Combinatorics</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ferenc Bencs</name>
+    </author>
+    <author>
+      <name>Jeroen Huijben</name>
+    </author>
+    <author>
+      <name>Guus Regts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1310.7558v3</id>
+    <title>Coloring intersection graphs of arc-connected sets in the plane</title>
+    <updated>2014-08-26T02:05:28Z</updated>
+    <link href="https://arxiv.org/abs/1310.7558v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1310.7558v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A family of sets in the plane is simple if the intersection of its any subfamily is arc-connected, and it is pierced by a line $L$ if the intersection of its any member with $L$ is a nonempty segment. It is proved that the intersection graphs of simple families of compact arc-connected sets in the plane pierced by a common line have chromatic number bounded by a function of their clique number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-10-28T19:53:45Z</published>
+    <arxiv:comment>Minor changes + some additional references not included in the journal version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput.Geom. 52 (2014) 399-415</arxiv:journal_ref>
+    <author>
+      <name>Michał Lasoń</name>
+    </author>
+    <author>
+      <name>Piotr Micek</name>
+    </author>
+    <author>
+      <name>Arkadiusz Pawlik</name>
+    </author>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-014-9614-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-014-9614-5" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.04652v2</id>
+    <title>Winding number and circular 4-coloring of signed graphs</title>
+    <updated>2024-03-01T17:34:29Z</updated>
+    <link href="https://arxiv.org/abs/2307.04652v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.04652v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Concerning the recent notion of circular chromatic number of signed graphs, for each given integer $k$ we introduce two signed bipartite graphs, each on $2k^2-k+1$ vertices, having shortest negative cycle of length $2k$, and the circular chromatic number 4.
+  Each of the construction can be viewed as a bipartite analogue of the generalized Mycielski graphs on odd cycles, $M_{\ell}(C_{2k+1})$. In the course of proving our result, we also obtain a simple proof of the fact that $M_{\ell}(C_{2k+1})$ and some similar quadrangulations of the projective plane have circular chromatic number 4. These proofs have the advantage that they illuminate, in an elementary manner, the strong relation between algebraic topology and graph coloring problems.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-10T15:49:47Z</published>
+    <arxiv:comment>16 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anna Gujgiczer</name>
+    </author>
+    <author>
+      <name>Reza Naserasr</name>
+    </author>
+    <author>
+      <name>Rohini S</name>
+    </author>
+    <author>
+      <name>S Taruni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1709.06209v1</id>
+    <title>Chromatic polynomials of random graphs</title>
+    <updated>2017-09-19T00:31:39Z</updated>
+    <link href="https://arxiv.org/abs/1709.06209v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1709.06209v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Chromatic polynomials and related graph invariants are central objects in both graph theory and statistical physics. Computational difficulties, however, have so far restricted studies of such polynomials to graphs that were either very small, very sparse or highly structured. Recent algorithmic advances (Timme et al 2009 New J. Phys. 11 023001) now make it possible to compute chromatic polynomials for moderately sized graphs of arbitrary structure and number of edges. Here we present chromatic polynomials of ensembles of random graphs with up to 30 vertices, over the entire range of edge density. We specifically focus on the locations of the zeros of the polynomial in the complex plane. The results indicate that the chromatic zeros of random graphs have a very consistent layout. In particular, the crossing point, the point at which the chromatic zeros with non-zero imaginary part approach the real axis, scales linearly with the average degree over most of the density range. While the scaling laws obtained are purely empirical, if they continue to hold in general there are significant implications: the crossing points of chromatic zeros in the thermodynamic limit separate systems with zero ground state entropy from systems with positive ground state entropy, the latter an exception to the third law of thermodynamics.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-09-19T00:31:39Z</published>
+    <arxiv:comment>13 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>J. Phys. A: Math. Theor. 43 175002 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Frank Van Bussel</name>
+    </author>
+    <author>
+      <name>Christoph Ehrlich</name>
+    </author>
+    <author>
+      <name>Denny Fliegner</name>
+    </author>
+    <author>
+      <name>Sebastian Stolzenberg</name>
+    </author>
+    <author>
+      <name>Marc Timme</name>
+    </author>
+    <arxiv:doi>10.1088/1751-8113/43/17/175002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1751-8113/43/17/175002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1405.3183v2</id>
+    <title>The edge chromatic number of outer-1-planar graphs</title>
+    <updated>2014-05-14T17:05:56Z</updated>
+    <link href="https://arxiv.org/abs/1405.3183v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1405.3183v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A graph is outer-1-planar if it can be drawn in the plane so that all vertices are on the outer face and each edge is crossed at most once. In this paper, we completely determine the edge chromatic number of outer 1-planar graphs.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-05-13T15:18:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Xin Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.13519v1</id>
+    <title>Hadwiger conjecture for 8-coloring graph</title>
+    <updated>2021-04-28T01:23:37Z</updated>
+    <link href="https://arxiv.org/abs/2104.13519v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.13519v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hadwiger Conjecture has been an open problem for over a half century1,6, which says that there is at most a complete graph Kt but no Kt+1 for every t-colorable graph. A few cases of Hadwiger Conjecture, such as 1, 2, 3, 4, 5, 6-colorable graphs have been completely proved to convince all1-5, but the proofs are tremendously difficult for over the 5-colorable graph6,7. Although the development of graph theory inspires scientists to understand graph coloring deeply, it is still an open problem for over 7-colorable graphs6,7. Therefore, we put forward a brand new chromatic graph configuration and show how to describe the graph coloring issues in chromatic space. Based on this idea, we define a chromatic plane and configure the chromatic coordinates in Euler space. Also, we find a method to prove Hadwiger Conjecture for every 8-coloring graph feasible.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-28T01:23:37Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>T. -Q. Wang</name>
+    </author>
+    <author>
+      <name>X. -J. Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0908.2375v1</id>
+    <title>Weighted Graph Colorings</title>
+    <updated>2009-08-17T15:43:44Z</updated>
+    <link href="https://arxiv.org/abs/0908.2375v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0908.2375v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study two weighted graph coloring problems, in which one assigns $q$ colors to the vertices of a graph such that adjacent vertices have different colors, with a vertex weighting $w$ that either disfavors or favors a given color. We exhibit a weighted chromatic polynomial $Ph(G,q,w)$ associated with this problem that generalizes the chromatic polynomial $P(G,q)$. General properties of this polynomial are proved, and illustrative calculations for various families of graphs are presented. We show that the weighted chromatic polynomial is able to distinguish between certain graphs that yield the same chromatic polynomial. We give a general structural formula for $Ph(G,q,w)$ for lattice strip graphs $G$ with periodic longitudinal boundary conditions. The zeros of $Ph(G,q,w)$ in the $q$ and $w$ planes and their accumulation sets in the limit of infinitely many vertices of $G$ are analyzed. Finally, some related weighted graph coloring problems are mentioned.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2009-08-17T15:43:44Z</published>
+    <arxiv:comment>60 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <arxiv:journal_ref>J. Stat. Phys. 138, 496-542 (2010)</arxiv:journal_ref>
+    <author>
+      <name>Shu-Chiuan Chang</name>
+    </author>
+    <author>
+      <name>Robert Shrock</name>
+    </author>
+    <arxiv:doi>10.1007/s10955-009-9882-2</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10955-009-9882-2" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0204587v3</id>
+    <title>Transfer Matrices and Partition-Function Zeros for Antiferromagnetic Potts Models III. Triangular-Lattice Chromatic Polynomial</title>
+    <updated>2003-04-09T16:03:02Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0204587v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0204587v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the chromatic polynomial P_G(q) for m \times n triangular-lattice strips of widths m &lt;= 12_P, 9_F (with periodic or free transverse boundary conditions, respectively) and arbitrary lengths n (with free longitudinal boundary conditions). The chromatic polynomial gives the zero-temperature limit of the partition function for the q-state Potts antiferromagnet. We compute the transfer matrix for such strips in the Fortuin--Kasteleyn representation and obtain the corresponding accumulation sets of chromatic zeros in the complex q-plane in the limit n\to\infty. We recompute the limiting curve obtained by Baxter in the thermodynamic limit m,n\to\infty and find new interesting features with possible physical consequences. Finally, we analyze the isolated limiting points and their relation with the Beraha numbers.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2002-04-27T10:27:50Z</published>
+    <arxiv:comment>105 pages, LaTeX2e. Self-unpacking archive containing the tex file, three sty files, 36 ps files, and a Mathematica file (transfer3.m). The background material can be found in cond-mat/0004330 and cond-mat/0011456. Section 6 has been rewritten and new results are presented. To be published in J. Stat. Phys</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>J.Statist.Phys. 112 (2003) 921-1017</arxiv:journal_ref>
+    <author>
+      <name>Jesper Lykke Jacobsen</name>
+      <arxiv:affiliation>LPTMS-Orsay</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Jesús Salas</name>
+      <arxiv:affiliation>Zaragoza Univ.</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alan D. Sokal</name>
+      <arxiv:affiliation>New York Univ.</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1023/A:1024611424456</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1023/A:1024611424456" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1001.0330v1</id>
+    <title>A note on dilation coefficient, plane-width, and resolution coefficient of graphs</title>
+    <updated>2010-01-02T20:10:55Z</updated>
+    <link href="https://arxiv.org/abs/1001.0330v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1001.0330v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  In this note we study and compare three graph invariants related to the 'compactness' of graph drawing in the plane: the dilation coefficient, defined as the smallest possible quotient between the longest and the shortest edge length; the plane-width, which is the smallest possible quotient between the largest distance between any two points and the shortest length of an edge; and the resolution coefficient, the smallest possible quotient between the longest edge length and the smallest distance between any two points. These three invariants coincide for complete graphs.
+  We show that graphs with large dilation coefficient or plane-width have a vertex with large valence but there exist cubic graphs with arbitrarily large resolution coefficient. Surprisingly enough, the one-dimensional analogues of these three invariants allow us to revisit the three well known graph parameters: the circular chromatic number, the chromatic number, and the bandwidth. We also examine the connection between bounded resolution coefficient and minor-closed graph classes.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-01-02T20:10:55Z</published>
+    <arxiv:comment>14 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Martin Milanic</name>
+    </author>
+    <author>
+      <name>Tomaz Pisanski</name>
+    </author>
+    <author>
+      <name>Arjana Zitnik</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1504.00162v1</id>
+    <title>Non-interleaved FFS design</title>
+    <updated>2015-04-01T09:33:08Z</updated>
+    <link href="https://arxiv.org/abs/1504.00162v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1504.00162v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The requirements on the Final Focusing System (FFS) for a new linear collider has lead to lattice designs where chromaticity is corrected either locally or non-locally. Here, we present the status of an alternative lattice design developed for the current CLIC 500GeV beam parameters where chromaticity is corrected upstream the Final Doublet (FD) and the geometrical components in the vertical plane are corrected locally. The diagnose of this design showed to possible variations two the lattice : the second order dispersion and its derivative with respect to $s$ must be cancelled before the FD, or some dispersion must be tolerated at the sextupole located inside the FD.</summary>
+    <category term="physics.acc-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-04-01T09:33:08Z</published>
+    <arxiv:comment>Talk presented at the International Workshop on Future Linear Colliders (LCWS14), Belgrade, Serbia, 6-10 October 2014</arxiv:comment>
+    <arxiv:primary_category term="physics.acc-ph"/>
+    <author>
+      <name>Oscar Blanco</name>
+    </author>
+    <author>
+      <name>Rogelio Tomas</name>
+    </author>
+    <author>
+      <name>Philip Bambade</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.07741v3</id>
+    <title>Simulating the Detection of the Global 21 cm Signal with MIST for Different Models of the Soil and Beam Directivity</title>
+    <updated>2024-05-24T02:26:43Z</updated>
+    <link href="https://arxiv.org/abs/2310.07741v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.07741v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Mapper of the IGM Spin Temperature (MIST) is a new ground-based, single-antenna, radio experiment attempting to detect the global 21 cm signal from the Dark Ages and Cosmic Dawn. A significant challenge in this measurement is the frequency-dependence, or chromaticity, of the antenna beam directivity. MIST observes with the antenna above the soil and without a metal ground plane, and the beam directivity is sensitive to the electrical characteristics of the soil. In this paper, we use simulated observations with MIST to study how the detection of the global 21 cm signal from Cosmic Dawn is affected by the soil and the MIST beam directivity. We simulate observations using electromagnetic models of the directivity computed for single- and two-layer models of the soil. We test the recovery of the Cosmic Dawn signal with and without beam chromaticity correction applied to the simulated data. We find that our single-layer soil models enable a straightforward recovery of the signal even without chromaticity correction. Two-layer models increase the beam chromaticity and make the recovery more challenging. However, for the model in which the bottom soil layer has a lower electrical conductivity than the top layer, the signal can be recovered even without chromaticity correction. For the other two-layer models, chromaticity correction is necessary for the recovery of the signal and the accuracy requirements for the soil parameters vary between models. These results will be used as a guideline to select observation sites that are favorable for the detection of the Cosmic Dawn signal.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-10T23:53:34Z</published>
+    <arxiv:comment>Matches version published in The Astrophysical Journal. Journal reference and DOI provided</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>2024, ApJ, 961, 56</arxiv:journal_ref>
+    <author>
+      <name>Raul A. Monsalve</name>
+    </author>
+    <author>
+      <name>Christian H. Bye</name>
+    </author>
+    <author>
+      <name>Jonathan L. Sievers</name>
+    </author>
+    <author>
+      <name>Vadym Bidula</name>
+    </author>
+    <author>
+      <name>Ricardo Bustos</name>
+    </author>
+    <author>
+      <name>H. Cynthia Chiang</name>
+    </author>
+    <author>
+      <name>Xinze Guo</name>
+    </author>
+    <author>
+      <name>Ian Hendricksen</name>
+    </author>
+    <author>
+      <name>Francis McGee</name>
+    </author>
+    <author>
+      <name>F. Patricio Mena</name>
+    </author>
+    <author>
+      <name>Garima Prabhakar</name>
+    </author>
+    <author>
+      <name>Oscar Restrepo</name>
+    </author>
+    <author>
+      <name>Nithyanandan Thyagarajan</name>
+    </author>
+    <arxiv:doi>10.3847/1538-4357/ad0f1b</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3847/1538-4357/ad0f1b" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.10755v1</id>
+    <title>Coloring triangle-free L-graphs with $O(\log\log n)$ colors</title>
+    <updated>2020-02-25T09:13:59Z</updated>
+    <link href="https://arxiv.org/abs/2002.10755v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.10755v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is proved that triangle-free intersection graphs of $n$ L-shapes in the plane have chromatic number $O(\log\log n)$. This improves the previous bound of $O(\log n)$ (McGuinness, 1996) and matches the known lower bound construction (Pawlik et al., 2013).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-25T09:13:59Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.23057v1</id>
+    <title>Colouring normal quadrangulations of projective spaces</title>
+    <updated>2025-03-29T12:30:12Z</updated>
+    <link href="https://arxiv.org/abs/2503.23057v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.23057v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Youngs proved that every non-bipartite quadrangulation of the projective plane $\mathbb{R}\mathrm{P}^2$ is 4-chromatic. Kaiser and Stehlík [J. Combin. Theory Ser. B 113 (2015), 1-17] generalised the notion of a quadrangulation to higher dimensions and extended Youngs' theorem by proving that every non-bipartite quadrangulation of the $d$-dimensional projective space $\mathbb{R}\mathrm{P}^d$ with $d \geq 2$ has chromatic number at least $d+2$. On the other hand, Hachimori et al. [European. J. Combin. 125 (2025), 104089] defined another kind of high-dimensional quadrangulation, called a normal quadrangulation. They proved that if a non-bipartite normal quadrangulation $G$ of $\mathbb{R}\mathrm{P}^d$ with any $d \geq 2$ satisfies a certain geometric condition, then $G$ is $4$-chromatic, and asked whether the geometric condition can be removed from the result. In this paper, we give a negative solution to their problem for the case $d=3$, proving that there exist 3-dimensional normal quadrangulations of $\mathbb{R}\mathrm{P}^3$ whose chromatic number is arbitrarily large. Moreover, we prove that no normal quadrangulation of $\mathbb{R}\mathrm{P}^d$ with any $d \geq 2$ has chromatic number $3$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-29T12:30:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Tomáš Kaiser</name>
+    </author>
+    <author>
+      <name>On-Hei Solomon Lo</name>
+    </author>
+    <author>
+      <name>Atsuhiro Nakamoto</name>
+    </author>
+    <author>
+      <name>Yuta Nozaki</name>
+    </author>
+    <author>
+      <name>Kenta Ozeki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1608.08159v3</id>
+    <title>Coloring Jordan regions and curves</title>
+    <updated>2017-09-14T08:17:33Z</updated>
+    <link href="https://arxiv.org/abs/1608.08159v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1608.08159v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A Jordan region is a subset of the plane that is homeomorphic to a closed disk. Consider a family $\mathcal{F}$ of Jordan regions whose interiors are pairwise disjoint, and such that any two Jordan regions intersect in at most one point. If any point of the plane is contained in at most $k$ elements of $\mathcal{F}$ (with $k$ sufficiently large), then we show that the elements of $\mathcal{F}$ can be colored with at most $k+1$ colors so that intersecting Jordan regions are assigned distinct colors. This is best possible and answers a question raised by Reed and Shepherd in 1996. As a simple corollary, we also obtain a positive answer to a problem of Hliněný (1998) on the chromatic number of contact systems of strings.
+  We also investigate the chromatic number of families of touching Jordan curves. This can be used to bound the ratio between the maximum number of vertex-disjoint directed cycles in a planar digraph, and its fractional counterpart.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-08-29T18:01:24Z</published>
+    <arxiv:comment>17 pages, 7 figures - final version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>SIAM Journal on Discrete Mathematics 31(3) (2017), 1670-1684</arxiv:journal_ref>
+    <author>
+      <name>Wouter Cames van Batenburg</name>
+    </author>
+    <author>
+      <name>Louis Esperet</name>
+    </author>
+    <author>
+      <name>Tobias Müller</name>
+    </author>
+    <arxiv:doi>10.1137/16M1092726</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1137/16M1092726" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.13695v1</id>
+    <title>Note on the chromatic number of Minkowski planes: the regular polygon case</title>
+    <updated>2023-01-31T15:13:49Z</updated>
+    <link href="https://arxiv.org/abs/2301.13695v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.13695v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The famous Hadwiger-Nelson problem asks for the minimum number of colors needed to color the points of the Euclidean plane so that no two points unit distance apart are assigned the same color. In this note we consider a variant of the problem in Minkowski metric planes, where the unit circle is a regular polygon of even and at most 22 vertices. We present a simple lattice-sublattice coloring scheme that uses 6 colors, proving that the chromatic number of the Minkowski planes above are at most 6. This result is new for regular polygons having more than 8 vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-31T15:13:49Z</published>
+    <arxiv:comment>15 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Panna Gehér</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.14722v1</id>
+    <title>More certainty in coloring the plane with a forbidden distance interval</title>
+    <updated>2023-03-26T13:19:50Z</updated>
+    <link href="https://arxiv.org/abs/2303.14722v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.14722v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the mysterious and colorful world of chromatic numbers, where there are a lot of unknown, there is an amazing thing. It turns out that for some intervals of forbidden distances on the plane, one can specify the exact value of the chromatic number $χ$. Two sets of such intervals have been found, for $χ=7$ and 9. We call them islands of certainty. Here we increase the size of these islands, and add three new ones with $χ=8$, 12, 13. We also %formulate conjectures which predict conjecture islands for $χ=14$, 15, 16. Are there islands of certainty for $χ$=10 or 11? This is still a mystery. Roll up for the Mystery Tour.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-26T13:19:50Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Geombinatorics 32/4 (2023) 159-185</arxiv:journal_ref>
+    <author>
+      <name>Jaan Parts</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.02483v2</id>
+    <title>Prime and polynomial distances in colourings of the plane</title>
+    <updated>2024-05-22T19:49:54Z</updated>
+    <link href="https://arxiv.org/abs/2308.02483v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.02483v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give two extensions of the recent theorem of the first author that the odd distance graph has unbounded chromatic number. The first is that for any non-constant polynomial $f$ with integer coefficients and positive leading coefficient, every finite colouring of the plane contains a monochromatic pair of distinct points whose distance is equal to $f(n)$ for some integer $n$. The second is that for every finite colouring of the plane, there is a monochromatic pair of points whose distance is a prime number.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-04T17:55:08Z</published>
+    <arxiv:comment>24 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>James Davies</name>
+    </author>
+    <author>
+      <name>Rose McCarty</name>
+    </author>
+    <author>
+      <name>Michał Pilipczuk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.10163v3</id>
+    <title>The chromatic number of the plane with an interval of forbidden distances is at least 7</title>
+    <updated>2025-04-13T17:17:35Z</updated>
+    <link href="https://arxiv.org/abs/2304.10163v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.10163v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The work is devoted to one of the variations of the Hadwiger--Nelson problem on the chromatic number of the plane. In this formulation one needs to find for arbitrarily small $\varepsilon$ the least possible number of colors needed to color a Euclidean plane in such a way that any two points, the distance between which belongs to the interval $[1-\varepsilon, 1+\varepsilon]$, are colored differently. The conjecture proposed by G. Exoo in 2004, states that for arbitrary positive $\varepsilon$ at least 7 colors are required. Also, with a sufficiently small $\varepsilon$ the number of colors is exactly 7. The main result of the present paper is that the conjecture is true for the Euclidean plane as well as for any Minkowski plane.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-20T08:50:06Z</published>
+    <arxiv:comment>16 pages, 6 figures. Extended the bibliography and details of proofs concerning arbitrary norm. Added a theorem on covering a disk of radius 3 by closed sets. Corrected some inaccuracies</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1907.06251v1</id>
+    <title>Imaging over an unlimited bandwidth with a single diffractive surface</title>
+    <updated>2019-07-14T17:33:42Z</updated>
+    <link href="https://arxiv.org/abs/1907.06251v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1907.06251v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is generally thought that correcting chromatic aberrations in imaging requires multiple surfaces. Here, we show that by allowing the phase in the image plane of a flat lens to be a free parameter, it is possible to correct chromatic aberrations over an almost unlimited bandwidth with a single diffractive surface. Specifically, we designed, fabricated and characterized a flat multi-level diffractive lens (MDL) that images at the wavelengths from 450nm to 850nm. We experimentally characterized the focusing efficiency, modulation-transfer function, wavefront aberrations, vignetting, distortion and signal-to-noise ratio performance of a camera comprised of this MDL and a conventional image sensor. Further, we designed two MDLs with operating wavelengths from 500nm to 15μm, and from 2μm to 150μm, respectively. With no apparent limitation in the operating bandwidth, such flat lenses could replace multiple refractive surfaces that are traditionally required for chromatic corrections, leading to thinner, lighter and simpler imaging systems with bandwidth limited primarily by the quantum efficiency of the sensor.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-07-14T17:33:42Z</published>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Sourangsu Banerji</name>
+    </author>
+    <author>
+      <name>Monjurul Meem</name>
+    </author>
+    <author>
+      <name>Apratim Majumder</name>
+    </author>
+    <author>
+      <name>Berardi Sensale-Rodriguez</name>
+    </author>
+    <author>
+      <name>Rajesh Menon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/0407444v3</id>
+    <title>Transfer Matrices and Partition-Function Zeros for Antiferromagnetic Potts Models. IV. Chromatic polynomial with cyclic boundary conditions</title>
+    <updated>2006-06-07T13:52:22Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/0407444v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/0407444v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the chromatic polynomial P_G(q) for m \times n square- and triangular-lattice strips of widths 2\leq m \leq 8 with cyclic boundary conditions. This polynomial gives the zero-temperature limit of the partition function for the antiferromagnetic q-state Potts model defined on the lattice G. We show how to construct the transfer matrix in the Fortuin--Kasteleyn representation for such lattices and obtain the accumulation sets of chromatic zeros in the complex q-plane in the limit n\to\infty. We find that the different phases that appear in this model can be characterized by a topological parameter. We also compute the bulk and surface free energies and the central charge.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-07-16T15:32:21Z</published>
+    <arxiv:comment>55 pages (LaTeX2e). Includes tex file, three sty files, and 22 Postscript figures. Also included are Mathematica files transfer4_sq.m and transfer4_tri.m. Journal version</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>J.Statist.Phys. 122 (2006) 705-760</arxiv:journal_ref>
+    <author>
+      <name>Jesper Lykke Jacobsen</name>
+    </author>
+    <author>
+      <name>Jesus Salas</name>
+    </author>
+    <arxiv:doi>10.1007/s10955-005-8077-8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s10955-005-8077-8" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9903233v1</id>
+    <title>Ground State Entropy of the Potts Antiferromagnet on Cyclic Strip Graphs</title>
+    <updated>1999-03-15T16:58:58Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9903233v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9903233v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We present exact calculations of the zero-temperature partition function (chromatic polynomial) and the (exponent of the) ground-state entropy $S_0$ for the $q$-state Potts antiferromagnet on families of cyclic and twisted cyclic (Möbius) strip graphs composed of $p$-sided polygons. Our results suggest a general rule concerning the maximal region in the complex $q$ plane to which one can analytically continue from the physical interval where $S_0 &gt; 0$. The chromatic zeros and their accumulation set ${\cal B}$ exhibit the rather unusual property of including support for $Re(q) &lt; 0$ and provide further evidence for a relevant conjecture.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1999-03-15T16:58:58Z</published>
+    <arxiv:comment>7 pages, Latex, 4 figs., J. Phys. A Lett., in press</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>J. Phys. A (Lett.) 32, L195 (1999)</arxiv:journal_ref>
+    <author>
+      <name>Robert Shrock</name>
+    </author>
+    <author>
+      <name>Shan-Ho Tsai</name>
+    </author>
+    <arxiv:doi>10.1088/0305-4470/32/17/102</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/0305-4470/32/17/102" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.13476v1</id>
+    <title>Inverse-designed flat lens for imaging in the visible &amp; near-infrared with diameter &gt; 3mm and NA=0.3</title>
+    <updated>2020-04-25T17:32:43Z</updated>
+    <link href="https://arxiv.org/abs/2004.13476v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.13476v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is generally thought that correcting chromatic aberrations in imaging requires multiple surfaces. Here, we show that by allowing the phase in the image plane of a flat lens to be a free parameter, it is possible to correct chromatic aberrations over a large continuous bandwidth with a single diffractive surface. We experimentally demonstrate imaging using a single flat lens of diameter &gt; 3mm, focal length = 5mm (NA = 0.3, f/1.59) that is achromatic from 0.45um to 1um. This combination of size, NA and operating bandwidth has not been demonstrated in a flat lens before. We experimentally characterized the point-spread functions, off-axis aberrations and the broadband imaging performance. In contrast to conventional lens design, we utilize inverse design, where phase in the focal plane is treated as a free parameter. This approach attains a phase-only (lossless) pupil function, which can be implemented as a multi-level diffractive flat lens that achieves achromatic focusing and imaging.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.app-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-25T17:32:43Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:1907.06251</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Monjurul Meem</name>
+    </author>
+    <author>
+      <name>Sourangsu Banerji</name>
+    </author>
+    <author>
+      <name>Apratim Majumder</name>
+    </author>
+    <author>
+      <name>Christian Pies</name>
+    </author>
+    <author>
+      <name>Timo Oberbiermann</name>
+    </author>
+    <author>
+      <name>Berardi Sensale-Rodriguez</name>
+    </author>
+    <author>
+      <name>Rajesh Menon</name>
+    </author>
+    <arxiv:doi>10.1063/5.0012759</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/5.0012759" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1908.03880v2</id>
+    <title>Lattice approach to plane colorings</title>
+    <updated>2019-08-27T06:26:40Z</updated>
+    <link href="https://arxiv.org/abs/1908.03880v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1908.03880v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>I propose a fixed-range interaction multicomponent spin model, to be used as a physical analog to problems in plane geometry. Specifically, the model is applied to the open problem of the chromatic number of the plane. When spin values are interpreted as colors, the lowest energy configurations of the lattice spin system can be interpreted as approximations to plane colorings. In general minimum energy configurations of the model give optimal colorings, corresponding to minimum probability of any color realizing distance one. Approximate optimal lattice colorings with two to seven colors towards the continuum limit suggest that a true coloring of the plane cannot be achieved with less than seven colors.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-08-11T10:17:02Z</published>
+    <arxiv:comment>20 pages, 10 pdf figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <author>
+      <name>Sami Heinäsmäki</name>
+      <arxiv:affiliation>Aalto University</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.01595v2</id>
+    <title>The vector graph and the chromatic number of the plane, or how NOT to prove that $χ(\mathbb{E}^2)&gt;4$</title>
+    <updated>2016-08-04T22:00:15Z</updated>
+    <link href="https://arxiv.org/abs/1509.01595v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.01595v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The chromatic number $χ\left(\mathcal{E^2}\right)$ of the plane is known to be some integer between 4 and 7, inclusive. We prove a limiting result that says, roughly, that one cannot increase the lower bound on $χ\left(\mathcal{E^2}\right)$ by pasting Moser Spindles together, even countably many.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-04T20:15:25Z</published>
+    <arxiv:comment>To appear in Australasian Journal of Combinatorics</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jeremy F. Alm</name>
+    </author>
+    <author>
+      <name>Jacob Manske</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.04855v1</id>
+    <title>Coloring hypergraphs that are the union of nearly disjoint cliques</title>
+    <updated>2023-04-10T20:25:11Z</updated>
+    <link href="https://arxiv.org/abs/2304.04855v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.04855v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the maximum chromatic number of hypergraphs consisting of cliques that have pairwise small intersections. Designs of the appropriate parameters produce optimal constructions, but these are known to exist only when the number of cliques is exponential in the clique size. We construct near designs where the number of cliques is polynomial in the clique size, and show that they have large chromatic number.
+  The case when the cliques have pairwise intersections of size at most one seems particularly challenging. Here we give lower bounds by analyzing a random greedy hypergraph process. We also consider the related question of determining the maximum number of caps in a finite projective/affine plane and obtain nontrivial upper and lower bounds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-10T20:25:11Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Dhruv Mubayi</name>
+    </author>
+    <author>
+      <name>Jacques Verstraete</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.05146v2</id>
+    <title>Benefits of adding radial phase dimples on scalar coronagraph phase masks</title>
+    <updated>2024-07-08T23:41:31Z</updated>
+    <link href="https://arxiv.org/abs/2309.05146v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.05146v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Current scalar coronagraph focal plane mask designs are performance-limited by chromaticity. We investigate the effects of adding central Roddier and dual zone phase dimples to scalar vortex masks to improve broadband performance by suppressing the chromatic stellar leakage. We present hybrid designs with radial phase dimples integrated with the sawtooth vortex, wrapped vortex, and cosine phase mask. We show that using these dimples, it is possible to substantially improve the broadband contrast performance of scalar phase masks. We also show that although adding a phase dimple does not increase the sensitivity to low-order aberrations, suppressing the central leakage of scalar vortex coronagraphs does not restore the aberrations sensitivities to their notional state.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-10T21:42:52Z</published>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>J. Astron. Telesc. Instrum. Syst. 10(1) 015001 (14 February 2024)</arxiv:journal_ref>
+    <author>
+      <name>Niyati Desai</name>
+    </author>
+    <author>
+      <name>Dimitri Mawet</name>
+    </author>
+    <author>
+      <name>Eugene Serabyn</name>
+    </author>
+    <author>
+      <name>Garreth Ruane</name>
+    </author>
+    <author>
+      <name>Arielle Bertrou-Cantou</name>
+    </author>
+    <author>
+      <name>Jorge Llop-Sayson</name>
+    </author>
+    <author>
+      <name>A J Eldorado Riggs</name>
+    </author>
+    <arxiv:doi>10.1117/1.JATIS.10.1.015001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/1.JATIS.10.1.015001" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.04542v4</id>
+    <title>A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane</title>
+    <updated>2026-08-17T09:28:17Z</updated>
+    <link href="https://arxiv.org/abs/2608.04542v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.04542v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With regard to the Hadwiger-Nelson problem, several 5-chromatic unit distance graphs in the Euclidean plane have been discovered in recent years. While most constructions rely heavily on the Moser spindle, a few recent examples completely avoid it, the smallest one consisting of 1441 vertices. In this note, we introduce an original geometric approach to constructing such graphs by utilizing the arcs of a 7-fold symmetric unit distance graph on 21 vertices, and obtain a Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices. While this is not a record small result, it arises from a straightforward, structured rule rather than a purely automated or brute-force search.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-05T07:20:58Z</published>
+    <arxiv:comment>8 pages, 2 figures. Rewrote Section 4 to make it more to the point. A couple of other minor edits</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jan Kristian Haugland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.23562v3</id>
+    <title>Higher-dimensional generalization of Youngs' theorem and circular colorings</title>
+    <updated>2026-07-01T14:16:29Z</updated>
+    <link href="https://arxiv.org/abs/2505.23562v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.23562v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1996, Youngs proved that any quadrangulation of the real projective plane is not 3-chromatic. This result has been extended in various directions over the years, including to other non-orientable closed surfaces, higher-dimensional analogues of quadrangulations and circular colorings. In this paper, we provide a generalization which yields some of these extensions of Youngs' theorem.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-29T15:37:30Z</published>
+    <arxiv:comment>20 pages, final version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Journal of Combinatorial Theory, Series B, volume 180, 62-83, 2026</arxiv:journal_ref>
+    <author>
+      <name>Kengo Enami</name>
+    </author>
+    <author>
+      <name>Takahiro Matsushita</name>
+    </author>
+    <arxiv:doi>10.1016/j.jctb.2026.06.002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jctb.2026.06.002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.00960v4</id>
+    <title>On the density of sets of the Euclidean plane avoiding distance 1</title>
+    <updated>2022-05-27T15:50:23Z</updated>
+    <link href="https://arxiv.org/abs/1810.00960v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.00960v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A subset $A \subset \mathbb R^2$ is said to avoid distance $1$ if: $\forall x,y \in A, \left\| x-y \right\|_2 \neq 1.$ In this paper we study the number $m_1(\mathbb R^2)$ which is the supremum of the upper densities of measurable sets avoiding distance 1 in the Euclidean plane. Intuitively, $m_1(\mathbb R^2)$ represents the highest proportion of the plane that can be filled by a set avoiding distance 1. This parameter is related to the fractional chromatic number $χ_f(\mathbb R^2)$ of the plane.
+  We establish that $m_1(\mathbb R^2) \leq 0.25647$ and $χ_f(\mathbb R^2) \geq 3.8991$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-01T20:20:01Z</published>
+    <arxiv:comment>13 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Mathematics &amp; Theoretical Computer Science, vol. 23 no. 1, Combinatorics (August 31, 2021) dmtcs:5153</arxiv:journal_ref>
+    <author>
+      <name>Thomas Bellitto</name>
+    </author>
+    <author>
+      <name>Arnaud Pêcher</name>
+    </author>
+    <author>
+      <name>Antoine Sédillot</name>
+    </author>
+    <arxiv:doi>10.46298/dmtcs.5153</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.46298/dmtcs.5153" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.10578v3</id>
+    <title>Multifrequency polarimetry of High-Synchrotron Peaked blazars probes the shape of their jets</title>
+    <updated>2024-11-25T13:42:24Z</updated>
+    <link href="https://arxiv.org/abs/2407.10578v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.10578v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multifrequency polarimetry is emerging as a powerful probe of blazar jets, especially due to the advent of the Imaging X-ray Polarimetry Explorer (IXPE) space observatory. We study the polarization of High-Synchrotron Peaked (HSP) blazars, where both optical and X-ray emission can be attributed to synchrotron radiation from a population of non-thermal electrons. We adopt an axisymmetric stationary force-free jet model, where the electromagnetic fields are determined by the jet shape. When the jet is nearly parabolic, the X-ray polarization degree is $Π_{\rm X}\sim 15-50\%$, and the optical polarization degree is $Π_{\rm O}\sim 5-25\%$. The polarization degree is strongly chromatic, as $Π_{\rm X}/Π_{\rm O}\sim 2-9$. The chromaticity is due to the softening of the electron distribution at high energies, and is much stronger than for a uniform magnetic field. The Electric Vector Position Angle (EVPA) is aligned with the projection of the jet axis on the plane of the sky. These results compare very well with multifrequency polarimetric observations of HSP blazars. Instead, when the jet is nearly cylindrical, the polarization degree is large and weakly chromatic (we find $Π_{\rm X}\sim 70\%$ and $Π_{\rm O}\sim 60\%$, close to the expected values for a uniform magnetic field). The EVPA is perpendicular to the projection of the jet axis on the plane of the sky. Then, a cylindrical geometry is practically ruled out by current observations. The polarization degree and the EVPA may be less sensitive to the specific particle acceleration process (e.g.,~magnetic reconnection or shocks) than previously thought.</summary>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-15T09:56:41Z</published>
+    <arxiv:comment>Published in A&amp;A, Volume 690, id.A14, October 2024</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.HE"/>
+    <author>
+      <name>F. Bolis</name>
+    </author>
+    <author>
+      <name>E. Sobacchi</name>
+    </author>
+    <author>
+      <name>F. Tavecchio</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/202450387</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/202450387" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.05042v2</id>
+    <title>A solution to Ringel's circle problem</title>
+    <updated>2023-09-06T12:36:31Z</updated>
+    <link href="https://arxiv.org/abs/2112.05042v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.05042v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We construct families of circles in the plane such that their tangency graphs have arbitrarily large girth and chromatic number. This provides a strong negative answer to Ringel's circle problem (1959). The proof relies on a (multidimensional) version of Gallai's theorem with polynomial constraints, which we derive from the Hales-Jewett theorem and which may be of independent interest.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-09T17:09:31Z</published>
+    <arxiv:comment>new section on an "induced" version of Gallai's theorem with constraints, minor other improvements</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>James Davies</name>
+    </author>
+    <author>
+      <name>Chaya Keller</name>
+    </author>
+    <author>
+      <name>Linda Kleist</name>
+    </author>
+    <author>
+      <name>Shakhar Smorodinsky</name>
+    </author>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.07612v2</id>
+    <title>Expansions of the Potts model partition function along deletions and contractions</title>
+    <updated>2024-05-16T05:20:55Z</updated>
+    <link href="https://arxiv.org/abs/2405.07612v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.07612v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We establish two expansions of the Potts model partition function of a graph. One is along the deletions of a graph, a rewritten formula given in Biggs (1977). The other is along the contractions of a graph. Then, we specialize the partition function to the chromatic or flow polynomial by the Möbius inversion formula, and prove two known equations of the two polynomials. One expresses the chromatic polynomial as a weighted sum of flow polynomials of deletions, the other expresses the flow polynomial as a weighted sum of chromatic polynomials of contractions. The proof of the former by Biggs formula is due to Bychkov et al. (2021). The two expressions are considered to be dual in the sense of their forms, and transfer to each other with plane duality. This relation also holds in our expansions of the Potts model partition function. We clarify this duality by using matroid duality. Partition functions can be extended to matroids, and the two expansions can also be extended. The two expansions transfer to each other with matroid duality, so in addition to an elementary combinatorial proof of the two, we give another proof by the "duality" relation between them.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-13T10:21:29Z</published>
+    <arxiv:comment>12 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ryo Takahashi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/cond-mat/9712148v1</id>
+    <title>Chromatic Polynomials for Families of Strip Graphs and their Asymptotic Limits</title>
+    <updated>1997-12-13T19:00:54Z</updated>
+    <link href="https://arxiv.org/abs/cond-mat/9712148v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/cond-mat/9712148v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We calculate the chromatic polynomials $P((G_s)_m,q)$ and, from these, the asymptotic limiting functions $W(\{G_s\},q)=\lim_{n \to \infty}P(G_s,q)^{1/n}$ for families of $n$-vertex graphs $(G_s)_m$ comprised of $m$ repeated subgraphs $H$ adjoined to an initial graph $I$. These calculations of $W(\{G_s\},q)$ for infinitely long strips of varying widths yield important insights into properties of $W(Λ,q)$ for two-dimensional lattices $Λ$. In turn, these results connect with statistical mechanics, since $W(Λ,q)$ is the ground state degeneracy of the $q$-state Potts model on the lattice $Λ$. For our calculations, we develop and use a generating function method, which enables us to determine both the chromatic polynomials of finite strip graphs and the resultant $W(\{G_s\},q)$ function in the limit $n \to \infty$. From this, we obtain the exact continuous locus of points ${\cal B}$ where $W(\{G_s\},q)$ is nonanalytic in the complex $q$ plane. This locus is shown to consist of arcs which do not separate the $q$ plane into disconnected regions. Zeros of chromatic polynomials are computed for finite strips and compared with the exact locus of singularities ${\cal B}$. We find that as the width of the infinitely long strips is increased, the arcs comprising ${\cal B}$ elongate and move toward each other, which enables one to understand the origin of closed regions that result for the (infinite) 2D lattice.</summary>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-lat" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1997-12-13T19:00:54Z</published>
+    <arxiv:comment>48 pages, Latex, 12 encapsulated postscript figures, to appear in Physica A</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.stat-mech"/>
+    <arxiv:journal_ref>Physica A 252, 505 (1998)</arxiv:journal_ref>
+    <author>
+      <name>Martin Rocek</name>
+      <arxiv:affiliation>Institute for Theoretical Physics, State University of New York at Stony Brook</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert Shrock</name>
+      <arxiv:affiliation>Institute for Theoretical Physics, State University of New York at Stony Brook</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Shan-Ho Tsai</name>
+      <arxiv:affiliation>Institute for Theoretical Physics, State University of New York at Stony Brook</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1016/S0378-4371(98)00034-X</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/S0378-4371(98)00034-X" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1111.1217v1</id>
+    <title>Propagation of Aberrations through Phase Induced Amplitude Apodization coronagraph</title>
+    <updated>2011-11-04T19:15:10Z</updated>
+    <link href="https://arxiv.org/abs/1111.1217v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1111.1217v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The specification of polishing requirements for the optics in coronagraphs dedicated to exo-planet detection requires careful and accurate optical modelling. Numerical representations of the propagation of aberrations through the system as well as simulations of the broadband wavefront compensation system using multiple DMs are critical when one devises an error budget for such a class of instruments. In this communication we introduce an analytical tool that serves this purpose for Phase Induced Amplitude Apodisation (PIAA) coronagraphs. We first start by deriving the analytical form of the propagation of a harmonic ripple through a PIAA unit. Using this result we derive the chromaticity of the field at any plane in the optical train of a telescope equipped with such a coronagraph. Finally we study the chromatic response of a sequential DM wavefront actuator correcting such a corrugated field and thus quantify the requirements on the manufacturing of PIAA mirrors</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-11-04T19:15:10Z</published>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>JOSA A, Vol. 28, Issue 2, pp. 189-202 (2011)</arxiv:journal_ref>
+    <author>
+      <name>Laurent Pueyo</name>
+    </author>
+    <author>
+      <name>N. Jeremy Kasdin</name>
+    </author>
+    <author>
+      <name>Stuart Shaklan</name>
+    </author>
+    <arxiv:doi>10.1364/JOSAA.28.000189</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1364/JOSAA.28.000189" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.07308v2</id>
+    <title>A Sparse Representation Based Joint Demosaicing Method for Single-Chip Polarized Color Sensor</title>
+    <updated>2021-04-08T02:33:20Z</updated>
+    <link href="https://arxiv.org/abs/1912.07308v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.07308v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The emergence of the single-chip polarized color sensor now allows for simultaneously capturing chromatic and polarimetric information of the scene on a monochromatic image plane. However, unlike the usual camera with an embedded demosaicing method, the latest polarized color camera is not delivered with an in-built demosaicing tool. For demosaicing, the users have to down-sample the captured images or to use traditional interpolation techniques. Neither of them can perform well since the polarization and color are interdependent. Therefore, joint chromatic and polarimetric demosaicing is the key to obtaining high-quality polarized color images. In this paper, we propose a joint chromatic and polarimetric demosaicing model to address this challenging problem. Instead of mechanically demosaicing for the multi-channel polarized color image, we further present a sparse representation-based optimization strategy that utilizes chromatic information and polarimetric information to jointly optimize the model. To avoid the interaction between color and polarization during demosaicing, we separately construct the corresponding dictionaries. We also build an optical data acquisition system to collect a dataset, which contains various sources of polarization, such as illumination, reflectance and birefringence. Results of both qualitative and quantitative experiments have shown that our method is capable of faithfully recovering full RGB information of four polarization angles for each pixel from a single mosaic input image. Moreover, the proposed method can perform well not only on the synthetic data but the real captured data.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-16T12:01:24Z</published>
+    <arxiv:comment>10 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>IEEE Transactions on Image Processing 2021</arxiv:journal_ref>
+    <author>
+      <name>Sijia Wen</name>
+    </author>
+    <author>
+      <name>Yinqiang Zheng</name>
+    </author>
+    <author>
+      <name>Feng Lu</name>
+    </author>
+    <arxiv:doi>10.1109/TIP.2021.3069190</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TIP.2021.3069190" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.16635v1</id>
+    <title>The Penrose-Kauffman Polynomial</title>
+    <updated>2026-04-17T18:46:13Z</updated>
+    <link href="https://arxiv.org/abs/2604.16635v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.16635v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For any cubic graph in a closed orientable surface and a perfect matching, the Penrose-Kauffman polynomial is a sum of chromatic polynomials of a collection of associated graphs. A knot-theoretic perspective affords elementary proofs of old and new results about the polynomial. The Four Color Theorem is shown to be equivalent to a statement about 3-coloring alternating link diagrams in the plane that are reduced and have no bigon regions.</summary>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-17T18:46:13Z</published>
+    <arxiv:comment>33 pages, 28 figures</arxiv:comment>
+    <arxiv:primary_category term="math.GT"/>
+    <author>
+      <name>Louis H. Kauffman</name>
+    </author>
+    <author>
+      <name>Daniel S. Silver</name>
+    </author>
+    <author>
+      <name>Susan G. Williams</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.06181v2</id>
+    <title>Solution to a problem of Erdős on the chromatic index of hypergraphs with bounded codegree</title>
+    <updated>2024-10-19T14:12:52Z</updated>
+    <link href="https://arxiv.org/abs/2110.06181v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.06181v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1977, Erdős asked the following question: for any integers $t,n \in \mathbb{N}$, if $G_1 , \dots , G_n$ are complete graphs such that each $G_i$ has at most $n$ vertices and every pair of them shares at most $t$ vertices, what is the largest possible chromatic number of the union $\bigcup_{i=1}^{n} G_i$? The equivalent dual formulation of this question asks for the largest chromatic index of an $n$-vertex hypergraph with maximum degree at most $n$ and maximum codegree at most $t$. For the case $t = 1$, Erdős, Faber, and Lovász famously conjectured that the answer is $n$, which was recently proved by the authors for all sufficiently large $n$. In this paper, we answer this question of Erdős for $t \geq 2$ in a strong sense, by proving that every $n$-vertex hypergraph with maximum degree at most $(1-o(1))tn$ and maximum codegree at most $t$ has chromatic index at most $tn$ for any $t,n \in \mathbb{N}$. Moreover, equality holds if and only if the hypergraph is a $t$-fold projective plane of order $k$, where $n = k^2 + k + 1$. Thus, for every $t \in \mathbb N$, this bound is best possible for infinitely many integers $n$. This result also holds for the list chromatic index.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-12T17:27:54Z</published>
+    <arxiv:comment>Final version, to appear in Proceedings of the London Mathematical Society (26 pages)</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Dong Yeap Kang</name>
+    </author>
+    <author>
+      <name>Tom Kelly</name>
+    </author>
+    <author>
+      <name>Daniela Kühn</name>
+    </author>
+    <author>
+      <name>Abhishek Methuku</name>
+    </author>
+    <author>
+      <name>Deryk Osthus</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.05794v1</id>
+    <title>Optimized focal and pupil plane masks for vortex coronagraphs on telescopes with obstructed apertures</title>
+    <updated>2015-09-18T20:45:49Z</updated>
+    <link href="https://arxiv.org/abs/1509.05794v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.05794v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present methods for optimizing pupil and focal plane optical elements that improve the performance of vortex coronagraphs on telescopes with obstructed or segmented apertures. Phase-only and complex masks are designed for the entrance pupil, focal plane, and the plane of the Lyot stop. Optimal masks are obtained using both analytical and numerical methods. The latter makes use of an iterative error reduction algorithm to calculate "correcting" optics that mitigate unwanted diffraction from aperture obstructions. We analyze the achieved performance in terms of starlight suppression, contrast, off-axis image quality, and chromatic dependence. Manufacturing considerations and sensitivity to aberrations are also discussed. This work provides a path to joint optimization of multiple coronagraph planes to maximize sensitivity to exoplanets and other faint companions.</summary>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-18T20:45:49Z</published>
+    <arxiv:primary_category term="astro-ph.IM"/>
+    <arxiv:journal_ref>Proc. SPIE 9605, Techniques and Instrumentation for Detection of Exoplanets VII, 96051I (2015)</arxiv:journal_ref>
+    <author>
+      <name>Garreth J. Ruane</name>
+    </author>
+    <author>
+      <name>Olivier Absil</name>
+    </author>
+    <author>
+      <name>Elsa Huby</name>
+    </author>
+    <author>
+      <name>Dimitri Mawet</name>
+    </author>
+    <author>
+      <name>Christian Delacroix</name>
+    </author>
+    <author>
+      <name>Brunella Carlomagno</name>
+    </author>
+    <author>
+      <name>Pierre Piron</name>
+    </author>
+    <author>
+      <name>Grover A. Swartzlander</name>
+    </author>
+    <arxiv:doi>10.1117/12.2187236</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1117/12.2187236" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1712.04524v2</id>
+    <title>Conflict-Free Coloring of String Graphs</title>
+    <updated>2019-01-18T11:53:29Z</updated>
+    <link href="https://arxiv.org/abs/1712.04524v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1712.04524v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conflict-free coloring (in short, CF-coloring) of a graph $G = (V,E)$ is a coloring of $V$ such that the neighborhood of each vertex contains a vertex whose color differs from the color of any other vertex in that neighborhood. Bounds on CF-chromatic numbers have been studied both for general graphs and for intersection graphs of geometric shapes. In this paper we obtain such bounds for several classes of string graphs, i.e., intersection graphs of curves in the plane:
+  (i) We provide a general upper bound of $O(χ(G)^2 \log n)$ on the CF-chromatic number of any string graph $G$ with $n$ vertices in terms of the classical chromatic number $χ(G)$. This result stands in contrast to general graphs where the CF-chromatic number can be $Ω(\sqrt{n})$ already for bipartite graphs.
+  (ii) For some central classes of string graphs, the CF-chromatic number is as large as $Θ(\sqrt{n})$, which is the upper bound for any graph even in the non-geometric context. For several such classes (e.g., intersection graphs of frames) we prove a tight bound of $Θ(\log n)$ with respect to the notion of $k$-CF-coloring (in which the punctured neighborhood of each vertex contains a color that appears at most $k$ times), for a small constant $k$.
+  (iii) We obtain a general upper bound on the $k$-CF-chromatic number of arbitrary hypergraphs: Any hypergraph with $m$ hyperedges can be $k$-CF colored with $\tilde{O}(m^{\frac{1}{k+1}})$ colors. This bound, which extends a bound of Pach and Tardos (2009), is tight for some string graphs, up to a logarithmic factor.
+  (iv) Our fourth result concerns circle graphs in which coloring problems are motivated by VLSI designs. We prove a tight bound of $Θ(\log n)$ on the CF-chromatic number of circle graphs, and an upper bound of $O(\log^{3} n)$ for a wider class that contains circle graphs, namely, intersection graphs of grounded L-shapes.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-12-12T21:17:14Z</published>
+    <arxiv:comment>33 pages, 8 figures. A major extension of the previous version (that contained 19 pages), adding an upper bound on the CF-chromatic number of grounded L-shapes and other results</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Chaya Keller</name>
+    </author>
+    <author>
+      <name>Alexandre Rok</name>
+    </author>
+    <author>
+      <name>Shakhar Smorodinsky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1212.2058v3</id>
+    <title>Triangle-free geometric intersection graphs with large chromatic number</title>
+    <updated>2014-12-26T12:34:26Z</updated>
+    <link href="https://arxiv.org/abs/1212.2058v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1212.2058v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Several classical constructions illustrate the fact that the chromatic number of a graph can be arbitrarily large compared to its clique number. However, until very recently, no such construction was known for intersection graphs of geometric objects in the plane. We provide a general construction that for any arc-connected compact set $X$ in $\mathbb{R}^2$ that is not an axis-aligned rectangle and for any positive integer $k$ produces a family $\mathcal{F}$ of sets, each obtained by an independent horizontal and vertical scaling and translation of $X$, such that no three sets in $\mathcal{F}$ pairwise intersect and $χ(\mathcal{F})&gt;k$. This provides a negative answer to a question of Gyarfas and Lehel for L-shapes. With extra conditions, we also show how to construct a triangle-free family of homothetic (uniformly scaled) copies of a set with arbitrarily large chromatic number. This applies to many common shapes, like circles, square boundaries, and equilateral L-shapes. Additionally, we reveal a surprising connection between coloring geometric objects in the plane and on-line coloring of intervals on the line.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-12-10T13:36:35Z</published>
+    <arxiv:comment>Small corrections, bibliography update</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Comput.Geom. 50 (2013) 714-726</arxiv:journal_ref>
+    <author>
+      <name>Arkadiusz Pawlik</name>
+    </author>
+    <author>
+      <name>Jakub Kozik</name>
+    </author>
+    <author>
+      <name>Tomasz Krawczyk</name>
+    </author>
+    <author>
+      <name>Michał Lasoń</name>
+    </author>
+    <author>
+      <name>Piotr Micek</name>
+    </author>
+    <author>
+      <name>William T. Trotter</name>
+    </author>
+    <author>
+      <name>Bartosz Walczak</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-013-9534-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-013-9534-9" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1703.07871v3</id>
+    <title>Burling graphs, chromatic number, and orthogonal tree-decompositions</title>
+    <updated>2018-01-29T09:59:47Z</updated>
+    <link href="https://arxiv.org/abs/1703.07871v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1703.07871v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A classic result of Asplund and Grünbaum states that intersection graphs of axis-aligned rectangles in the plane are $χ$-bounded. This theorem can be equivalently stated in terms of path-decompositions as follows: There exists a function $f:\mathbb{N}\to\mathbb{N}$ such that every graph that has two path-decompositions such that each bag of the first decomposition intersects each bag of the second in at most $k$ vertices has chromatic number at most $f(k)$. Recently, Dujmović, Joret, Morin, Norin, and Wood asked whether this remains true more generally for two tree-decompositions. In this note we provide a negative answer: There are graphs with arbitrarily large chromatic number for which one can find two tree-decompositions such that each bag of the first decomposition intersects each bag of the second in at most two vertices. Furthermore, this remains true even if one of the two decompositions is restricted to be a path-decomposition. This is shown using a construction of triangle-free graphs with unbounded chromatic number due to Burling, which we believe should be more widely known.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-03-22T22:03:01Z</published>
+    <arxiv:comment>v3: minor changes made following comments by the referees, v2: minor edits</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Electronic Journal of Combinatorics, 25/1:P1.35, 2018</arxiv:journal_ref>
+    <author>
+      <name>Stefan Felsner</name>
+    </author>
+    <author>
+      <name>Gwenaël Joret</name>
+    </author>
+    <author>
+      <name>Piotr Micek</name>
+    </author>
+    <author>
+      <name>William T. Trotter</name>
+    </author>
+    <author>
+      <name>Veit Wiechert</name>
+    </author>
+    <arxiv:doi>10.37236/7052</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.37236/7052" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1709.04958v1</id>
+    <title>A counterexample to a conjecture on facial unique-maximal colorings</title>
+    <updated>2017-09-14T19:52:09Z</updated>
+    <link href="https://arxiv.org/abs/1709.04958v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1709.04958v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A facial unique-maximum coloring of a plane graph is a proper vertex coloring by natural numbers where on each face $α$ the maximal color appears exactly once on the vertices of $α$. Fabrici and Göring proved that six colors are enough for any plane graph and conjectured that four colors suffice. This conjecture is a strengthening of the Four Color theorem. Wendland later decreased the upper bound from six to five. In this note, we disprove the conjecture by giving an infinite family of counterexamples. Thus we conclude that facial unique-maximum chromatic number of the sphere is five.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-09-14T19:52:09Z</published>
+    <arxiv:comment>4 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Bernard Lidický</name>
+    </author>
+    <author>
+      <name>Kacy Messerschmidt</name>
+    </author>
+    <author>
+      <name>Riste Škrekovski</name>
+    </author>
+    <arxiv:doi>10.1016/j.dam.2017.11.037</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.dam.2017.11.037" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2301.11017v1</id>
+    <title>Chromatic aberrations correction of attosecond high-order harmonic beams by flat-top spatial shaping of the fundamental beam</title>
+    <updated>2023-01-26T10:11:14Z</updated>
+    <link href="https://arxiv.org/abs/2301.11017v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2301.11017v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Attosecond pulses created by high-order harmonic generation in gases often exhibit strong chromatic aberrations, arising from the broad bandwidth and wavelength-dependent nonlinear light-matter interaction. When the driving laser intensity varies spatially, as for Gaussian driving beams, the apparent source position of the harmonics differs significantly from one order to the next, thus affecting the achievable intensity and duration of the attosecond pulses when they are focused on a target. We show that these chromatic aberrations can be reduced by spatially shaping the fundamental beam to generate high-order harmonics with a driver having a flat-top profile inside the gas medium. By measuring both the intensity profile and wavefront for each harmonic in a plane, we access the extreme ultra-violet (XUV) beam properties and investigate these properties near focus. We observe that controlling chromatic aberrations by flat-top spatial shaping strongly reduces the variation of the XUV spectrum on the beam axis during propagation and, in return, the longitudinal sensitivity of both the temporal profiles and the temporal shifts of the focused attosecond pulses.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-01-26T10:11:14Z</published>
+    <arxiv:comment>12 pages, 8 figures + supplementary material: 10 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>K. Veyrinas</name>
+    </author>
+    <author>
+      <name>M. Plach</name>
+    </author>
+    <author>
+      <name>J. Peschel</name>
+    </author>
+    <author>
+      <name>M. Hoflund</name>
+    </author>
+    <author>
+      <name>F. Catoire</name>
+    </author>
+    <author>
+      <name>C. Valentin</name>
+    </author>
+    <author>
+      <name>P. Smorenburg</name>
+    </author>
+    <author>
+      <name>H. Dacasa</name>
+    </author>
+    <author>
+      <name>S. Maclot</name>
+    </author>
+    <author>
+      <name>C. Guo</name>
+    </author>
+    <author>
+      <name>H. Wikmark</name>
+    </author>
+    <author>
+      <name>A. Zair</name>
+    </author>
+    <author>
+      <name>V. Strelkov</name>
+    </author>
+    <author>
+      <name>C. Picot</name>
+    </author>
+    <author>
+      <name>C. Arnold</name>
+    </author>
+    <author>
+      <name>P. Eng-Johnsson</name>
+    </author>
+    <author>
+      <name>A. L Huillier</name>
+    </author>
+    <author>
+      <name>E. Mevel</name>
+    </author>
+    <author>
+      <name>E. Constant</name>
+    </author>
+    <arxiv:doi>10.1088/1367-2630/acb795</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1367-2630/acb795" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.03738v2</id>
+    <title>Conflict-free incidence coloring of outer-1-planar graphs</title>
+    <updated>2022-10-09T06:34:16Z</updated>
+    <link href="https://arxiv.org/abs/2202.03738v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.03738v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An incidence of a graph $G$ is a vertex-edge pair $(v,e)$ such that $v$ is incidence with $e$. A conflict-free incidence coloring of a graph is a coloring of the incidences in such a way that two incidences $(u,e)$ and $(v,f)$ get distinct colors if and only if they conflict each other, i.e.,(i) $u=v$, (ii) $uv$ is $e$ or $f$, or (iii) there is a vertex $w$ such that $uw=e$ and $vw=f$. The minimum number of colors used among all conflict-free incidence colorings of a graph is the conflict-free incidence chromatic number. A graph is outer-1-planar if it can be drawn in the plane so that vertices are on the outer-boundary and each edge is crossed at most once. In this paper, we show that the conflict-free incidence chromatic number of an outer-1-planar graph with maximum degree $Δ$ is either $2Δ$ or $2Δ+1$ unless the graph is a cycle on three vertices, and moreover, all outer-1-planar graphs with conflict-free incidence chromatic number $2Δ$ or $2Δ+1$ are completely characterized. An efficient algorithm for constructing an optimal conflict-free incidence coloring of a connected outer-1-planar graph is given.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-08T09:25:42Z</published>
+    <arxiv:comment>This paper is acccepted for publication in Acta Mathematicae Applicatae Sinica (English Series) under the current title as a reviewer suggested</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Mengke Qi</name>
+    </author>
+    <author>
+      <name>Xin Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0707.3010v2</id>
+    <title>Gale duality bounds for roots of polynomials with nonnegative coefficients</title>
+    <updated>2009-11-16T09:51:48Z</updated>
+    <link href="https://arxiv.org/abs/0707.3010v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0707.3010v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We bound the location of roots of polynomials that have nonnegative coefficients with respect to a fixed but arbitrary basis of the vector space of polynomials of degree at most $d$. For this, we interpret the basis polynomials as vector fields in the real plane, and at each point in the plane analyze the combinatorics of the Gale dual vector configuration. This approach permits us to incorporate arbitrary linear equations and inequalities among the coefficients in a unified manner to obtain more precise bounds on the location of roots. We apply our technique to bound the location of roots of Ehrhart and chromatic polynomials. Finally, we give an explanation for the clustering seen in plots of roots of random polynomials.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-07-20T07:57:24Z</published>
+    <arxiv:comment>25 pages, 10 figures. Final version incorporating referees' comments, to appear in J. Comb. Theory, Ser. A</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Julian Pfeifle</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.07001v3</id>
+    <title>Burling graphs revisited, part I: New characterizations</title>
+    <updated>2023-09-07T07:41:37Z</updated>
+    <link href="https://arxiv.org/abs/2104.07001v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.07001v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Burling sequence is a sequence of triangle-free graphs of increasing chromatic number. Each of them is isomorphic to the intersection graph of a set of axis-parallel boxes in $R^3$. These graphs were also proved to have other geometrical representations: intersection graphs of line segments in the plane, and intersection graphs of frames, where a frame is the boundary of an axis-aligned rectangle in the plane. We call Burling graph every graph that is an induced subgraph of some graph in the Burling sequence. We give five new equivalent ways to define Burling graphs. Three of them are geometrical, one is of a more graph-theoretical flavour and one is more axiomatic.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-14T17:33:50Z</published>
+    <arxiv:comment>32 pages, 20 figures. Some typos fixed in this new version</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>European Journal of Combinatorics, Volume 110,2023,103686</arxiv:journal_ref>
+    <author>
+      <name>Pegah Pournajafi</name>
+    </author>
+    <author>
+      <name>Nicolas Trotignon</name>
+    </author>
+    <arxiv:doi>10.1016/j.ejc.2023.103686</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.ejc.2023.103686" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0606131v1</id>
+    <title>The Sylvester-Gallai Theorem, colourings and algebra</title>
+    <updated>2006-06-06T10:24:44Z</updated>
+    <link href="https://arxiv.org/abs/math/0606131v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0606131v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  Our point of departure is the following simple common generalisation of the Sylvester-Gallai theorem and the Motzkin-Rabin theorem:
+  Let S be a finite set of points in the plane, with each point coloured red or blue or with both colours. Suppose that for any two distinct points A,B in S sharing a colour there is a third point C in S, of the other colour, collinear with A and B. Then all the points in S are collinear.
+  We define a chromatic geometry to be a simple matroid for which each point is coloured red or blue or with both colours, such that for any two distinct points A,B in S sharing a colour there is a third point C in S, of the other colour, collinear with A and B. This is a common generalisation of proper finite linear spaces and properly two-coloured finite linear spaces, with many known properties of both generalising as well. One such property is Kelly's complex Sylvester-Gallai theorem. We also consider embeddings of chromatic geometries in Desarguesian projective spaces. We prove a lower bound of 51 for the number of points in a 3-dimensional chromatic geometry in projective space over the quaternions. Finally, we suggest an elementary approach to the corollary of an inequality of Hirzebruch used by Kelly in his proof of the complex Sylvester-Gallai theorem.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-06-06T10:24:44Z</published>
+    <arxiv:comment>23 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Discrete Mathematics 309 (2009), 385--399</arxiv:journal_ref>
+    <author>
+      <name>L. M. Pretorius</name>
+    </author>
+    <author>
+      <name>K. J. Swanepoel</name>
+    </author>
+    <arxiv:doi>10.1016/j.disc.2007.12.027</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.disc.2007.12.027" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/astro-ph/0404155v1</id>
+    <title>The WEBT BL Lacertae Campaign 2001 and its extension</title>
+    <updated>2004-04-07T09:52:00Z</updated>
+    <link href="https://arxiv.org/abs/astro-ph/0404155v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/astro-ph/0404155v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  BL Lacertae has been the target of four observing campaigns by the Whole Earth Blazar Telescope (WEBT) collaboration. In this paper we present $UBVRI$ light curves obtained by the WEBT from 1994 to 2002, including the last, extended BL Lac 2001 campaign. A total of about 7500 optical observations performed by 31 telescopes from Japan to Mexico have been collected, to be added to the $\sim 15600$ observations of the BL Lac Campaign 2000. All these data allow one to follow the source optical emission behaviour with unprecedented detail. The analysis of the colour indices reveals that the flux variability can be interpreted in terms of two components: longer-term variations occurring on a few-day time scale appear as mildly-chromatic events, while a strong bluer-when-brighter chromatism characterizes very fast (intraday) flares. By decoupling the two components, we quantify the degree of chromatism inferring that longer-term flux changes imply moving along a $\sim 0.1$ bluer-when-brighter slope in the $B-R$ versus $R$ plane; a steeper slope of $\sim 0.4$ would distinguish the shorter-term variations. This means that, when considering the long-term trend, the $B$-band flux level is related to the $R$-band one according to a power law of index $\sim 1.1$. Doppler factor variations on a "convex" spectrum could be the mechanism accounting for both the long-term variations and their slight chromatism.</summary>
+    <category term="astro-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-04-07T09:52:00Z</published>
+    <arxiv:comment>11 pages, 9 figures (4 included in the text, 5 in jpg format), to be published in Astronomy &amp; Astrophysics</arxiv:comment>
+    <arxiv:primary_category term="astro-ph"/>
+    <arxiv:journal_ref>Astron.Astrophys. 421 (2004) 103-114</arxiv:journal_ref>
+    <author>
+      <name>M. Villata</name>
+      <arxiv:affiliation>for the WEBT collaboration</arxiv:affiliation>
+    </author>
+    <author>
+      <name>C. M. Raiteri</name>
+      <arxiv:affiliation>for the WEBT collaboration</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.1051/0004-6361:20035895</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361:20035895" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1108.5009v1</id>
+    <title>Total coloring of pseudo-outerplanar graphs</title>
+    <updated>2011-08-25T05:31:31Z</updated>
+    <link href="https://arxiv.org/abs/1108.5009v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1108.5009v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A graph is pseudo-outerplanar if each of its blocks has an embedding in the plane so that the vertices lie on a fixed circle and the edges lie inside the disk of this circle with each of them crossing at most one another. In this paper, the total coloring conjecture is completely confirmed for pseudo-outerplanar graphs. In particular, it is proved that the total chromatic number of every pseudo-outerplanar graph with maximum degree $Δ\geq 5$ is $Δ+1$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-08-25T05:31:31Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Xin Zhang</name>
+    </author>
+    <author>
+      <name>Guizhen Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.17792v1</id>
+    <title>The Maximum Chromatic Number of the Disjointness Graph of Segments on $n$-point Sets in the Plane with $n\leq 16$</title>
+    <updated>2023-03-31T03:40:16Z</updated>
+    <link href="https://arxiv.org/abs/2303.17792v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.17792v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $P$ be a finite set of points in general position in the plane. The disjointness graph of segments $D(P)$ of $P$ is the graph whose vertices are all the closed straight line segments with endpoints in $P$, two of which are adjacent in $D(P)$ if and only if they are disjoint. As usual, we use $χ(D(P))$ to denote the chromatic number of $D(P)$, and use $d(n)$ to denote the maximum $χ(D(P))$ taken over all sets $P$ of $n$ points in general position in the plane. In this paper we show that $d(n)=n-2$ if and only if $n\in \{3,4,\ldots ,16\}$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-31T03:40:16Z</published>
+    <arxiv:comment>25 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jesús García-Davila</name>
+    </author>
+    <author>
+      <name>Jesús Leaños</name>
+    </author>
+    <author>
+      <name>Mario Lomelí-Haro</name>
+    </author>
+    <author>
+      <name>Luis Manuel Ríos-Castro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1305.2765v1</id>
+    <title>Coloring distance graphs: a few answers and many questions</title>
+    <updated>2013-05-13T13:08:13Z</updated>
+    <link href="https://arxiv.org/abs/1305.2765v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1305.2765v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a metric space and a set of distances, one constructs the associated distance graph by taking as vertices the points of the space and as edges the pairs whose distance is in the given set. It is a longstanding open question to determine the chromatic number of the graph obtained from the Euclidean plane and a set reduced to one distance. Surprisingly, while many variants of this problem have been studied, only a few non-Euclidean spaces seem to have been seriously considered. In this paper, we consider the planar translation-invariant metrics and the hyperbolic plane. We answer questions of Johnson and Szlam, prove a few other results, and ask many questions.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-05-13T13:08:13Z</published>
+    <arxiv:comment>17 pp</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Benoît Kloeckner</name>
+      <arxiv:affiliation>IF</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.01041v1</id>
+    <title>Conflict-Free Colouring of Subsets</title>
+    <updated>2022-07-03T13:34:38Z</updated>
+    <link href="https://arxiv.org/abs/2207.01041v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.01041v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce and study conflict-free colourings of $t$-subsets in hypergraphs. In such colourings, one assigns colours to all subsets of vertices of cardinality $t$ such that in any hyperedge of cardinality at least $t$ there is a uniquely coloured $t$-subset.
+  The case $t=1$, i.e., vertex conflict-free colouring, is a well-studied notion. Already the case $t=2$ (i.e., colouring pairs) seems to present a new challenge. Many of the tools used for conflict-free colouring of geometric hypergraphs rely on hereditary properties of the underlying hypergraphs. When dealing with subsets of vertices, the properties do not pass to subfamilies of subsets. Therefore, we develop new tools, which might be of independent interest.
+  (i) For any fixed $t$, we show that the $\binom n t$ $t$-subsets in any set $P$ of $n$ points in the plane can be coloured with $O(t^2 \log^2 n)$ colours so that any axis-parallel rectangle that contains at least $t$ points of $P$ also contains a uniquely coloured $t$-subset.
+  (ii) For a wide class of "well behaved" geometrically defined hypergraphs, we provide near tight upper bounds on their $t$-subset conflict-free chromatic number. For $t=2$ we show that for each of those "well -behaved" hypergraphs $H$, the hypergraph $H'$ obtained by taking union of two hyperedges from $H$, admits a $2$-subset conflict-free colouring with roughly the same number of colours as $H$. For example, we show that the $\binom n 2$ pairs of points in any set $P$ of $n$ points in the plane can be coloured with $O(\log n)$ colours such that for any two discs $d_1,d_2$ in the plane with $|(d_1\cup d_2)\cap P|\geq 2$ there is a uniquely (in $d_1 \cup d_2$) coloured pair.
+  (iii) We also show that there is no general bound on the $t$-subset conflict-free chromatic number as a function of the standard conflict-free chromatic number already for $t=2$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-03T13:34:38Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Bruno Jartoux</name>
+    </author>
+    <author>
+      <name>Chaya Keller</name>
+    </author>
+    <author>
+      <name>Shakhar Smorodinsky</name>
+    </author>
+    <author>
+      <name>Yelena Yuditsky</name>
+    </author>
+    <arxiv:doi>10.1007/s00454-023-00516-x</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00454-023-00516-x" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.05991v1</id>
+    <title>Disjointness graphs of short polygonal chains</title>
+    <updated>2021-12-11T14:08:06Z</updated>
+    <link href="https://arxiv.org/abs/2112.05991v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.05991v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The {\em disjointness graph} of a set system is a graph whose vertices are the sets, two being connected by an edge if and only if they are disjoint. It is known that the disjointness graph $G$ of any system of segments in the plane is {\em $χ$-bounded}, that is, its chromatic number $χ(G)$ is upper bounded by a function of its clique number $ω(G)$.
+  Here we show that this statement does not remain true for systems of polygonal chains of length $2$. We also construct systems of polygonal chains of length $3$ such that their disjointness graphs have arbitrarily large girth and chromatic number. In the opposite direction, we show that the class of disjointness graphs of (possibly self-intersecting) \emph{$2$-way infinite} polygonal chains of length $3$ is $χ$-bounded: for every such graph $G$, we have $χ(G)\le(ω(G))^3+ω(G).$</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-11T14:08:06Z</published>
+    <arxiv:comment>14 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>János Pach</name>
+    </author>
+    <author>
+      <name>Gábor Tardos</name>
+    </author>
+    <author>
+      <name>Géza Tóth</name>
+    </author>
+  </entry>
+</feed>

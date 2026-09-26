@@ -1,0 +1,5 @@
+## q3_8: 'ab:"adelic solenoid"'  total=4 fetched=4
+arXiv:1603.05676 | 2016 | Juan Manuel Burgos; Alberto Verjovsky | Adelic solenoid I: Structure and topology |  | summary *solenoid/adel
+1518.22005 | 2022 | Bekka, Bachir; Francini, Camille | Characters of algebraic groups over number fields |  | review *number field/solenoid/adel
+None | 2026 | Perez-Lona, Alonso; Sharpe, Eric; Yu, Xingyang; Zhang, Hao | Total instanton restriction via multiverse interference: noncompact gauge theories and \((-1)\)-form symmetries |  | summary 
+arXiv:2609.13027 | 2026 | Evgeniy Zorin | Kronecker sequences beyond the torus: nearest-neighbour distances and best returns |  | summary *torus

@@ -1,0 +1,4 @@
+## q1_1: 'ab:"triangle-free" & ab:"unit distance" & ab:"chromatic"'  total=3 fetched=3
+1362.05039 | 2016 | Exoo, Geoffrey; Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs |  | review *triangle
+arXiv:2607.19995 | 2026 | Haroldo Costa Silva Filho | Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 and EI19 (Ho |  | summary *triangle/field
+1271.05002 | 2013 |  | The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroComb 2013, Pi |  | editorial 

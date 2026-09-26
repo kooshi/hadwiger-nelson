@@ -1,0 +1,757 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/3jCDCQy0KIyeP/XQNvlyKMgntc4</id>
+  <title>arXiv Query: search_query=abs:"unit distance" OR abs:"unit-distance" OR ti:"chromatic number of the plane"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-26T11:32:04Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22unit+distance%22+OR+(abs:%22unit-distance%22+OR+ti:%22chromatic+number+of+the+plane%22)&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>226</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.24451v1</id>
+    <title>Geometric flows of branched transportation networks</title>
+    <updated>2026-09-21T11:58:20Z</updated>
+    <link href="https://arxiv.org/abs/2609.24451v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.24451v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The branched transport problem is a nonconvex and nonsmooth variational optimization problem on normal $1$-currents in $\mathbb{R}^n$ with prescribed boundary. The optimality is with respect to some non-decreasing, lower semicontinuous, and subadditive function $τ:\mathbb{R}_+\to\mathbb{R}_+$ with $τ(0)=0$ describing the cost $τ(m)$ to move an amount of mass $m$ per unit distance. The subadditivity leads to complicated, hierarchically ramified patterns in the support of (suboptimal) solutions. These network-like sets appear to have regularity properties similar to those of the singular surfaces arising in the so-called Brakke flow, a weak generalization of the mean curvature flow. We construct a geometric flow of transportation networks, which correspond to normal real $1$-rectifiable currents, by modifying Brakke's variational approximation scheme. We prove the existence of a limit that is Hölder continuous with respect to the flat norm and whose branched transport cost decreases along the geometric evolution. We further analyze a closely related geometric flow approximated by $1$-varifolds, whose weight measures model the branched transport cost, and establish its $1$-rectifiability together with a motion law analogous to Brakke's inequality.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-21T11:58:20Z</published>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Julius Lohmann</name>
+    </author>
+    <author>
+      <name>Yoshihiro Tonegawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.17453v1</id>
+    <title>One Arithmetic Gadget, Two Problems</title>
+    <updated>2026-09-15T16:56:02Z</updated>
+    <link href="https://arxiv.org/abs/2609.17453v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.17453v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>There is an absolute constant $c&gt;0$ such that, for every $0&lt;\varepsilon\leq1$, arbitrarily large finite sets $A\subset\mathbb{C}$ satisfy \[
+  |A+A|\leq |A|^{1+\varepsilon},\qquad
+  |AA|\leq |A|^{2-c\varepsilon},\qquad
+  ν_1(A)\geq |A|^{1+c\varepsilon}, \] where $ν_1(A)$ counts unordered unit-distance pairs. We combine the arithmetic directions from the recent unit-distance construction with the multiplicative enlargement used in the recent sum-product construction. The arithmetic ingredients are stated as explicit inputs.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-15T16:56:02Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jozsef Solymosi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.13757v1</id>
+    <title>The crossing number and the unit-distance crossing number of the Hamming graphs H(d,3)=K_3^{box d}, and their realizations over many coordinate fields</title>
+    <updated>2026-09-12T07:08:19Z</updated>
+    <link href="https://arxiv.org/abs/2609.13757v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.13757v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Hamming graph H(d,3)=K_3^{box d} (n=3^d vertices) is the graph of single-symbol errors of ternary codes, yet we ask a geometric question of it: can it be drawn in the plane with every edge exactly one unit long and no two non-adjacent vertices a unit apart? It can, for every d, joining two problems into one.
+  Where does it live? As a Minkowski sum of unit triangles, each H(d,3) has a hidden flexibility carrying its coordinates up the constructibility ladder (compass, origami, and beyond), so one graph is realizable over many number fields at once, in the plane and in R^3 (edim(H(d,q))=q-1). Yet almost every faithful realization is transcendental: the Galois picture is a measure-zero shadow of a vast transcendental continuum, matching the exists-R hardness of unit-distance recognition.
+  How crowded must a unit drawing be? We separate the ordinary crossing number from a unit-distance crossing number (absent from Schaefer's survey), and one recursion H(d,3)=H(d-1,3) box K_3 controls both. We prove cr(H)=Theta(n^2), with sharp one-page constant 7/6; and Omega(n^2) &lt;= udcr(H) &lt;= O(n^2 log n) by concentration, plus a closed-form majorant (3/2)n^2(L^2-L+1), L=log_3 n. The least-crossing drawing we find is constructible (origami): field and crossings are two readings of one geometry. All claims are verified computationally; the lower bound udcr=Omega(n^2 log n) is the central open problem.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-12T07:08:19Z</published>
+    <arxiv:comment>45 pages. Reproducible Python code included</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Haroldo Costa Silva Filho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.10791v1</id>
+    <title>Perspectives on the unit distance problem</title>
+    <updated>2026-09-09T19:55:45Z</updated>
+    <link href="https://arxiv.org/abs/2609.10791v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.10791v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is a survey on an old open problem in combinatorics called the unit distance problem, and the field of mathematics around it, called incidence geometry. What do we know about the problem? Why is it difficult? How does it connect with other parts of math?</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-09T19:55:45Z</published>
+    <arxiv:comment>31 pages</arxiv:comment>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Larry Guth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.26801v1</id>
+    <title>On the number of regular simplices in odd dimensions</title>
+    <updated>2026-09-07T16:30:27Z</updated>
+    <link href="https://arxiv.org/abs/2609.26801v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.26801v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $S^k_d(n)$ denote the maximum number of regular $(k-1)$-simplices spanned by $n$ points in $\mathbb{R}^d$. For all fixed $r\geq k\geq3$, the exact value of $S^k_{2r}(n)$ was recently determined by Dumitrescu and the authors for all sufficiently large $n$ when $k=3$, and conditionally on an optimization problem when $k\geq4$. In this paper we establish a sharp estimate in odd dimensions by proving that \[S^k_{2r+1}(n)=\binom{r}{k}\left(\frac{n}{r}\right)^k+Θ(n^{k-2/3})\] for all fixed $r\geq k\geq3$. This can be viewed as a generalization of the result by Erdős and Pach on unit distances in odd dimensions. We also establish a structural characterization of nearly extremal point sets. A notable difference from the even-dimensional case is that nearly extremal point sets in odd dimensions admit two distinct configurations. The proof leverages techniques from hypergraph Turán theory and linear algebra, with additional geometric arguments.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-07T16:30:27Z</published>
+    <arxiv:comment>13 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Felix Christian Clemen</name>
+    </author>
+    <author>
+      <name>Dingyuan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.28997v1</id>
+    <title>Verification abundance, adjudication scarcity: what happens to mathematical knowledge when proof checking becomes free</title>
+    <updated>2026-08-29T02:09:18Z</updated>
+    <link href="https://arxiv.org/abs/2608.28997v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.28997v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In May 2026 an OpenAI model produced a counterexample to the Erdős unit distance conjecture. Five mathematicians published a human-verified version the same day, and the result entered the literature within weeks. In August 2026 the same laboratory published ten mathematical and theoretical computer science results, each accompanied by a machine-checkable Lean 4 certificate with no unproved steps. Four weeks later, one remained the subject of an unresolved dispute over whether its formalization meant what it claimed.
+  We argue that this difference is structural. We distinguish three layers of verification: derivational validity, which a kernel checks; representational fidelity, whether the formal statement means the intended question; and epistemic significance. Only the first is mechanizable. Making it effectively free therefore does not eliminate verification work but shifts the burden to layers dependent on scarce expert attention.
+  Measurements of the August corpus illustrate the shift. The kernel-checked proofs total 20.6 MB, while the statements requiring human audit total 55.6 KB, a ratio of 379 to 1. Yet those statements contain 218 bespoke definitions rather than relying on community-vetted ones. The audit surface is therefore small in volume but irreducibly expert. We argue that machine checking produces verification abundance while leaving adjudication scarce. We propose a six-category taxonomy of representational mismatch, a disclosure schema for machine-generated mathematical claims, and implications for software, cryptography, and regulated decision systems.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-29T02:09:18Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Maher Kallel</name>
+    </author>
+    <author>
+      <name>Mohamed El Louadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.15666v2</id>
+    <title>Maximum-Area Small Polygons of Even Order</title>
+    <updated>2026-08-19T11:27:39Z</updated>
+    <link href="https://arxiv.org/abs/2608.15666v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.15666v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A small n-gon is a planar n-gon whose diameter is at most one. For odd n, Reinhardt proved that the regular polygon is optimal. For even n, the maximizer is nonregular, and only a few low orders were known exactly. We prove that for every even n &gt;= 8 the maximum-area small n-gon is unique up to Euclidean isometry and reflection. Foster and Szabo's description of the diameter graph reduces a maximizer to an (n-1)-cycle of unit distances together with one pendant diameter. We determine the compatible boundary order, interpret the cycle as the centers of a Reuleaux (n-1)-gon, and eliminate the pendant vertex by a one-variable area calculation. The remaining first-order equations have conserved translation and rotation quantities. In the resulting radial variables they become the critical-point equations of an explicit function on a convex domain. We prove that this function is strictly concave by factoring the relevant principal minors of its local Hessian. Compactness gives existence, while strict concavity gives uniqueness. The proof is analytic. The symbolic scripts supplied with the paper check algebraic identities but are not used as part of the proof. Combined with the classical odd-order and low-order results, this determines the maximal area for every n &gt;= 3.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-16T10:14:40Z</published>
+    <arxiv:comment>19 pages, 2 figures. Revised presentation with explicit geometric figures and a streamlined statement of the main theorem</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Dawid Trela</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.14837v1</id>
+    <title>Finiteness of Equidistant Affine Subspaces</title>
+    <updated>2026-08-14T19:21:59Z</updated>
+    <link href="https://arxiv.org/abs/2608.14837v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.14837v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let \(0\leqslant k&lt;n\), and let \(\mathcal N(k,n)\) denote the supremum of the cardinalities of finite families of affine \(k\)-planes in \(\R^n\) whose pairwise Euclidean separation distances are all equal to one. For \(k=1\), the finiteness of \(\mathcal N(1,n)\) was recently established by Solymosi and Zahl. We extend this result to affine subspaces of arbitrary dimension and prove the fully explicit bound \[ \mathcal N(k,n) \leqslant 2^{\,2^{\,10(k+1)(n-k)}}. \]
+  The main difficulty in higher dimensions is that the rational distance formula degenerates along several possible rank strata of \(\dim(U+V)\), rather than only along the parallel locus. For each fixed rank \(r\), we replace the choice of a nonvanishing Gram minor by a global sum-of-squares expression involving all minors. This produces a polynomial relation \(H_r(x,y)=0\) which encodes both the unit-distance equation and an upper-rank condition, while also vanishing on the diagonal.
+  We propagate this relation by means of the restricted Zariski closure and decompose the resulting algebraic set into an explicitly bounded number of connected Nash submanifolds. An analytic diagonal approximation argument shows that, within each Nash piece, the maximal possible value of \(\dim(U_x+U_y)\) must decrease. Iterating this rank descent over all possible ranks and combining the finitely many standard affine Grassmann charts yields the stated double-exponential upper bound.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-14T19:21:59Z</published>
+    <arxiv:comment>22pages,Comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Jia Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.09441v2</id>
+    <title>From Risk Prediction to Risk Mechanisms: A Multi-Resolution Causal Representation for Road Safety and Motor Insurance</title>
+    <updated>2026-08-27T12:44:20Z</updated>
+    <link href="https://arxiv.org/abs/2608.09441v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.09441v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Operational risk models can estimate event frequencies precisely while leaving the underlying mechanisms weakly resolved. We study this resolution mismatch using motor insurance and road safety. A revisable DAG represents trip-level crash generation; a separate predictive layer links annual rating information to latent driving states; and an observation process maps crashes into recorded liability claims. Compatibility sets collect the structural and crash-to-claim laws that reproduce an observed annual contrast under stated restrictions. External studies enter only through explicit bridge assumptions and sensitivity bounds. The framework therefore distinguishes sampling uncertainty from uncertainty about structure, observation, and study-to-target correspondence. Two limited examples illustrate the gap. A sublinear mileage relation constrains an aggregate accident rate per unit distance but not its mechanism. In French motor-liability data, the 18-20 versus 40-49 claim-frequency relativity is 3.388 in a model including vehicle and geographic variables and 1.235 when the same model also conditions on a medium-resolution bonus-malus score. These are different predictive functionals, not successive causal adjustments. A Spanish culpability estimate is used only to show how a strong cross-study bridge would restrict a toy bookkeeping region. The framework does not estimate the full DAG; it makes explicit which assumptions are needed before an annual predictive contrast can support a mechanism-specific risk statement.</summary>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-10T11:18:38Z</published>
+    <arxiv:primary_category term="stat.AP"/>
+    <author>
+      <name>Arthur Charpentier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.07102v1</id>
+    <title>Vertex-Ramsey theorems for Cartesian powers of graphs</title>
+    <updated>2026-08-07T10:56:53Z</updated>
+    <link href="https://arxiv.org/abs/2608.07102v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.07102v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>For graphs $G,H$ and positive integers $r$ and $n$ we write $G^{\square n} \xrightarrow{r} H$ if every $r$-vertex-coloring of the Cartesian power $G^{\square n}$ of $G$ contains a monochromatic copy of $H$. Since chromatic number $χ$ of $G^{\square n}$ is the same as $χ(G)$, there is an $r$-vertex coloring of $G^{\square n}$ for $r=χ(G)$, such that each color class is an independent set.
+  We prove that for $r&lt;χ(G)$ there is a large class of graphs $H$ such that $G^{\square n} \xrightarrow{r} H$. These graphs are so-called layered graphs in a hypercube. We also show that for some graphs $G$, such as for example odd cycles or cliques, the class of layered graphs $H$ is the only one satisfying the above Ramsey property when $χ(G)/2 &lt; r &lt; χ(G)$.
+  In addition, we prove a more general result relating Ramsey properties of $G$ and graphs $H$ such that $G^{\square n} \xrightarrow{r} H$. One of the technical tools is a Ramsey-type statement for discrete cubes $[m]^n$ that we call the Cube Layered Lemma, which is of independent interest. One of the original motivations for studying Ramsey properties of Cartesian powers of $G$ is the fact that $G^{\square n}$ is a unit distance graph if $G$ is a unit distance graph. This provides applications in Euclidean Ramsey theory.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-07T10:56:53Z</published>
+    <arxiv:comment>16 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Nóra Almási</name>
+    </author>
+    <author>
+      <name>Maria Axenovich</name>
+    </author>
+    <author>
+      <name>Arsenii Sagdeev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.04542v4</id>
+    <title>A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane</title>
+    <updated>2026-08-17T09:28:17Z</updated>
+    <link href="https://arxiv.org/abs/2608.04542v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.04542v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With regard to the Hadwiger-Nelson problem, several 5-chromatic unit distance graphs in the Euclidean plane have been discovered in recent years. While most constructions rely heavily on the Moser spindle, a few recent examples completely avoid it, the smallest one consisting of 1441 vertices. In this note, we introduce an original geometric approach to constructing such graphs by utilizing the arcs of a 7-fold symmetric unit distance graph on 21 vertices, and obtain a Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices. While this is not a record small result, it arises from a straightforward, structured rule rather than a purely automated or brute-force search.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-05T07:20:58Z</published>
+    <arxiv:comment>8 pages, 2 figures. Rewrote Section 4 to make it more to the point. A couple of other minor edits</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Jan Kristian Haugland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.13592v2</id>
+    <title>Origametry and antagonistic heptagon graphs: the braced {35,1} and the complete {21,2}</title>
+    <updated>2026-08-28T04:10:32Z</updated>
+    <link href="https://arxiv.org/abs/2608.13592v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.13592v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study two planar unit-distance graphs (UDGs) that both look like heptagons but have opposite rigidity yet kindred arithmetic: the braced heptagon {35,1} (19 vertices, 35 edges) and the complete heptagon {21,2} (21 vertices, 42 edges). Neither is straightedge-and-compass constructible -- already the regular 7-gon is not, by Gauss-Wantzel -- so the natural setting is origametry: the construction of each realization by Huzita-Hatori folds, with the quadratic fold O5 (straightedge-and-compass strength) versus the cubic Beloch fold O6. The complete heptagon is over-braced and globally rigid, with a unique realization whose 42 edges are certified unit exactly over Q(cos 2pi/7), a cyclic cubic field: every vertex is an origami number, reached by one Beloch fold. The braced heptagon is isostatic (minimally rigid) with thousands of non-congruent realizations and a large generic realization count N = 3869504 = 2^6 * 103 * 587; yet we prove that its unit realization is again origami-constructible. In Pegg's explicit construction the pinning angle is a root of an irreducible degree-12 palindromic polynomial whose Chebyshev reduction, an irreducible sextic, factors into quadratics over the heptagon cubic Q(cos 2pi/7); hence the coordinate field is a {2,3}-tower of degree 3*2^k, reached by one trisection followed by quadratics. The primes 103 and 587 therefore belong to the generic complex count, not to the folded coordinates. We solve the governing cubic explicitly by folding (Lill's method and the Beloch fold), place both graphs inside Alperin's field of origami numbers, and read the fold-branch signs of the construction as mountain-valley assignments with an empirical Maekawa-type balance. All claims are checked in exact arithmetic.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-28T03:59:49Z</published>
+    <arxiv:comment>12 pages, 8 figures. v2: corrected Sections 5-7 -- the braced heptagon {35,1} is proved origami-constructible (new theorem), replacing the former conditional exotic-field conjecture; the primes 103, 587 are the generic complex realization count, not the coordinate-field degree; abstract and the answer to Pegg updated accordingly</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <author>
+      <name>Haroldo Costa Silva Filho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.19995v3</id>
+    <title>Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 and EI19 (HoG 51375, 51376): a solvable-non-solvable dichotomy (origami vs. S20) and the Laman-number conjecture</title>
+    <updated>2026-07-27T21:17:28Z</updated>
+    <link href="https://arxiv.org/abs/2607.19995v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.19995v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We certify, exactly, the coordinate fields of a faithful planar realization of two neighbouring triangle-free Exoo-Ismailescu unit-distance graphs (UDGs), and show they realize the two opposite extremes of the constructibility hierarchy. The 17-vertex graph EI17 (House of Graphs 51375) is the smallest triangle-free UDG with chromatic number 4; the 19-vertex graph EI19 (HoG 51376) is its state-of-the-art origami neighbour. In both, fixing a rational base edge, the remaining vertices are intersections of unit circles -- each on the radical axis of its two neighbours, a tower of square roots over the free angles -- and a small closure system locks the realization. For EI19 the base lies in Q(sqrt 2, sqrt 5, sqrt 7) and a single free angle has an irreducible degree 12 = 2^2*3 minimal polynomial with Galois group the solvable transitive group 12T236 (order 2304 = 2^8*3^2): not ruler-and-compass, but origami-constructible (the cubic Beloch fold O6 necessary, in casus irreducibilis). For EI17 two free angles are locked by two closures, whose resultant is irreducible of degree 20 = 2^2*5 with Galois group the full symmetric group S20 (a Frobenius census exhibits a 17-cycle, forcing A20 by Jordan, and an odd 20-cycle, raising it to S20): non-solvable, so the coordinates are not expressible by radicals -- neither compass nor origami of any fold order. Thus the smallest triangle-free 4-chromatic UDG is the generic, maximally exotic case, the exact opposite of its origami neighbour. We give the full certification pipeline as explicit algorithms, record two methodological pitfalls, and read the pair through a conjectural bridge between the Laman number and the Galois group.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-22T10:27:06Z</published>
+    <arxiv:comment>33 pages, 24 figures. v2: all figure labels translated to English; minor corrections</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Haroldo Costa Silva Filho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.19946v1</id>
+    <title>The chromatic number of Euclidean space with dense color classes</title>
+    <updated>2026-07-22T09:21:54Z</updated>
+    <link href="https://arxiv.org/abs/2607.19946v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.19946v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this note we construct colorings of Euclidean space $\mathbb{R}^n$ with finitely many colors such that any two points at unit distance have different colors and, in addition, each color class is dense in $\mathbb{R}^n$. In particular, 12 dense colors suffice to color $\mathbb{R}^2$. In arbitrary dimension, we show that $nχ(\mathbb{R}^n)+1$ colors suffice, where $χ(\mathbb{R}^n)$ denotes the chromatic number of $\mathbb{R}^n$ in the standard formulation.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-22T09:21:54Z</published>
+    <arxiv:comment>10 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Maxim Didin</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.20525v1</id>
+    <title>Autonomous disproofs of the sum-product conjecture over $\mathbb R$ with GPT-5.5 Pro</title>
+    <updated>2026-07-09T23:28:37Z</updated>
+    <link href="https://arxiv.org/abs/2607.20525v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.20525v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>OpenAI's recent disproof of the Erdős unit distance conjecture marked a milestone for AI in mathematics. It also inspired another breakthrough: a human disproof of the Erdős--Szemerédi sum-product conjecture over $\mathbb R$. In this paper, we present a simple agent built on GPT-5.5 Pro. Using a problem-agnostic, three-stage prompting pipeline -- proof-plan proposal, proof construction, and review -- the agent autonomously generated correct proofs that the sum-product conjecture is false over $\mathbb R$ in 7 of 8 independent trials; in the remaining trial, it identified an unresolved gap in its argument. The seven proofs are diverse: some are close to existing unit-based constructions, while others avoid units by using $L^p$-type regions of algebraic integers. The system used an average of 132.4k reasoning tokens per trial. We release the code, intermediate outputs, and generated proofs, providing a reproducible, data-contamination-free case study in autonomous proof generation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-09T23:28:37Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yichen Huang</name>
+    </author>
+    <arxiv:doi>10.5281/zenodo.21286411</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5281/zenodo.21286411" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.06377v1</id>
+    <title>Automation Without Understanding</title>
+    <updated>2026-07-07T15:15:05Z</updated>
+    <link href="https://arxiv.org/abs/2607.06377v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.06377v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two developments are unfolding at once: artificial intelligence systems have begun to produce genuine research-level mathematics, and the United States is weakening the pipeline that produces humans capable of understanding what such systems are doing. This essay argues that, taken together, these developments amount to a strategic error. Mathematical capacity, which is the trained ability to verify, interpret, and challenge mathematical reasoning, is not a byproduct of theorem production but a form of infrastructure, built over generations by institutions that cannot be reconstituted on demand. Drawing on the May 2026 AI disproof of a longstanding Erdős conjecture on the planar unit distance problem and on recent disruptions to federal support for the mathematical sciences, the essay makes the case for treating mathematical capacity as a strategic asset on a par with semiconductor capability. It further proposes, among other measures, that AI systems performing consequential reasoning be required to expose their decision-critical claims in formal, machine-checkable form, converting part of AI reasoning from opaque persuasion into auditable structure.</summary>
+    <category term="math.HO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-07T15:15:05Z</published>
+    <arxiv:comment>10 pages. Comments welcome</arxiv:comment>
+    <arxiv:primary_category term="math.HO"/>
+    <author>
+      <name>Jun-Yong Park</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.05374v1</id>
+    <title>The Minkowski grid has robustly many repeated distances</title>
+    <updated>2026-07-06T17:52:52Z</updated>
+    <link href="https://arxiv.org/abs/2607.05374v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.05374v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that there exists a constant $δ&gt; 0$ such that for any positive integer $n$ there exists a set of $n$ points $P \subset \mathbb{R}^2$ with the following property: for every subset $A \subseteq P$ of size $|A| \geq 2$, \[ \max_{λ&gt;0}
+  \#\{(a,b)\in A \times A:
+  a\ne b,\ \lvert a-b\rvert=λ\} \gtrsim \frac{|A|^2}{n^{1-δ}}.\] Our result is a vertical amplification of a robust Ramanujan estimate recently established by Croot-Mao-Pohoata-Sheffer-Yip for arbitrary subsets of the ordinary square grid, and is inspired by recent constructions for the Erdős unit distance problem and the Elekes-Rónyai problem.
+  Taking $A=P$, the inequality above gives a distance occurring $n^{1+δ}$ times in $P$; thereby a scaled copy of $P$ is a counterexample for the unit-distance conjecture. In addition, the same inequality shows that (1) all subsets of $P$ of size $\gtrsim n^{1-δ}$ must contain isosceles triangles, and (2) all subsets of $P$ of size $\gtrsim n^{1/2-δ}$ must contain repeated distances. These features give polynomially improved estimates for old problems of Erdős. The existence of a set satisfying property (1) confirms a conjecture of Erdős from 1980, whereas the existence of a set with property (2) answers a question of Conlon-Fox-Gasarch-Harris-Ulrich-Zbarsky in the negative.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-06T17:52:52Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Sungchul Lee</name>
+    </author>
+    <author>
+      <name>Cosmin Pohoata</name>
+    </author>
+    <author>
+      <name>Daniel G. Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.05122v1</id>
+    <title>Green for Go, Red for No: Visual Grounding via Semantic Segmentation for VLA Navigation Policies</title>
+    <updated>2026-07-06T14:11:27Z</updated>
+    <link href="https://arxiv.org/abs/2607.05122v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.05122v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-language-action (VLA) models enable robot navigation from natural language and visual goals, but remain susceptible to perceptual distractions and ambiguous scene interpretations. This paper presents the first empirical evaluation of visual grounding for VLA navigation policies. We propose a real-time segmentation-based grounding method that highlights traversable areas in green and non-traversable areas in red using SegFormer. Two variants are evaluated: observation-only segmentation and joint observation-goal augmentation. Using OmniVLA on the Grand Tour dataset, we show that visual grounding reduces the mean waypoint error by 27-44% at the farthest waypoint, depending on the instruction length. The benefits are greater for long instructions than for short instructions, and grounding provides little improvement for image goals. Normalized error analysis indicates that grounding primarily acts as a trajectory length regularizer, reducing the predicted path length by 30% without improving per-unit-distance reasoning. Our results indicate that visual grounding offers a simple, computationally inexpensive method to improve VLA navigation without model retraining, although it cannot compensate for missing training signals in out-of-distribution instructions.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-06T14:11:27Z</published>
+    <arxiv:comment>Accepted for RSS 2026 workshop</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Adrian Szvoren</name>
+    </author>
+    <author>
+      <name>Dimitrios Kanoulas</name>
+    </author>
+    <author>
+      <name>Nilufer Tuptuk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.06576v1</id>
+    <title>Realized Rank Certificates for Matchstick Frameworks and Insertion Edges</title>
+    <updated>2026-07-02T17:16:52Z</updated>
+    <link href="https://arxiv.org/abs/2607.06576v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.06576v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give an exact, checkable rank-certificate method for realized planar unit-distance frameworks. The method is motivated by Vogel's computations for matchstick graphs and by the insertion-edge tests used in the Matchstick Graphs Calculator. Its algebraic core is independent of geometry. A singular square matrix $M$ is replaced by a sparse perturbation $B=M+UCV^T$. If $B$ is nonsingular and the inverse satisfies $V^TB^{-1}U=C^{-1}$, then the columns of $B^{-1}U$ and the rows of $V^TB^{-1}$ form bases of the right and left kernels of $M$, and the rank defect of $M$ is certified. Applied to the equilibrium matrix of a planar framework, this gives finite exact certificates for self-stresses, infinitesimal motions, redundant edges, and candidate edges whose constraints are already forced by the realized framework. The certificate data can be checked independently from the search that produced it, using exact matrix identities. We emphasize that matchstick frameworks are not generic: unit distances, triangles, rhombi, and symmetries can change the realized rank. The method therefore concerns the coordinate-dependent representation of a given drawing, not only the generic rigidity matroid of the abstract graph.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-02T17:16:52Z</published>
+    <arxiv:comment>15 pages, 4 figures, submitted to *Computing in Geometry and Topology* for review</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Mike Winkler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.29415v2</id>
+    <title>Algorithmic exploration of the unit distance problem in the rational plane</title>
+    <updated>2026-09-03T11:24:31Z</updated>
+    <link href="https://arxiv.org/abs/2606.29415v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.29415v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents reproducible experimental evidence on unit-distance graph density. Our approach is based on a novel algorithmic exploration of the rational plane for the generation of unit-distance graphs. An efficient algorithm for this utility must perform a local-breadth search on a bounded and finite set of elements and generate a graph that potentially encompasses the general properties of a unit-distance graph, not affected by restrictions on its generation. To this end, we show that our approach accomplishes this purpose by overcoming the limitations of grid-based structures, used in the literature for generating unit-distance graphs. When applied to large unit-distance graphs, our method generates large graphs with a scaling exponent of 1.17, that surpasses recent theoretical predictions on graph density growth.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-28T14:25:17Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Panteleimon Rodis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28157v1</id>
+    <title>A unit-distance graph in the plane with independence ratio below 1/4</title>
+    <updated>2026-06-26T14:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2606.28157v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28157v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that there exists a finite unit-distance graph in the plane with independence ratio strictly smaller than 1/4, answering a question of Erdős. Our proof closely follows the framework of Matolcsi, Ruzsa, Varga, and Zsámboki, based on the geometric fractional chromatic number, but adds a carefully chosen two-vertex augmentation that pushes their 27-vertex construction from geometric fractional chromatic number $4$ to a value strictly larger than 4. This disproves their Conjecture 1, and implies that the fractional chromatic number of the plane is strictly larger than 4. The proof can be made fully constructive, but the resulting finite graph has an enormous number of vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T14:54:23Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.27352v1</id>
+    <title>Congruent copies of finite patterns in planar point sets</title>
+    <updated>2026-06-25T17:56:01Z</updated>
+    <link href="https://arxiv.org/abs/2606.27352v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.27352v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a finite nonempty planar point set $S$, what is the maximum number of congruent copies of $S$ contained in a set of $n$ points in the Euclidean plane? Building on OpenAI's recent breakthrough on the unit distance problem, we construct planar sets consisting of $n$ points that contain $Ω_S(n^{1+δ_S})$ congruent copies of $S$, for some positive constant $δ_S$ depending only on $S$. This answers a question of Brass and Pach in a strong form, and makes progress on questions posed by Erdős and Purdy, and Ábrego and Fernández-Merchant. Our proof uses the number field construction from Sawin's quantitative refinement of OpenAI's result and consequently yields an explicit choice for $δ_S$ for each fixed $S$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-25T17:56:01Z</published>
+    <arxiv:comment>Comments welcome!</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Shubhrajit Bhattacharya</name>
+    </author>
+    <author>
+      <name>Ritesh Goenka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.25887v1</id>
+    <title>Furthest Pair Requires Quadratic Time in Superconstant Dimension under SETH</title>
+    <updated>2026-06-24T14:29:47Z</updated>
+    <link href="https://arxiv.org/abs/2606.25887v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.25887v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Several fundamental problems in computational geometry admit algorithms with running time $f(d) \cdot n^{2-Θ(1/d)}$ for $n$ points in $d$ dimensions, making them among the most prominent examples of barely subquadratic computation. Notable members of this class include Furthest Pair, Bichromatic Closest Pair, (Bichromatic) Maximum Innter Product, and Hopcroft's Problem. Chen [Theory Comput. 2020] proved that, assuming the Strong Exponential Time Hypothesis (SETH), these problems require $n^{2-o(1)}$ time when the dimension satisfies $d=2^{Θ(\log^* n)}$. We extend this lower bound to all efficiently constructible dimensions $d=ω(1)$. Thus, assuming SETH, the dependence of the best known algorithms on the dimension is essentially unavoidable. The proof utilizes techniques in OpenAI's recent disproof of the Erdos unit distance conjecture.
+  The proof was initially discovered by ChatGPT 5.5 Pro. The authors have validated and substantially edited the proof to improve the presentation.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-24T14:29:47Z</published>
+    <arxiv:comment>44 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Barna Saha</name>
+    </author>
+    <author>
+      <name>Yinzhan Xu</name>
+    </author>
+    <author>
+      <name>Christopher Ye</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.16642v2</id>
+    <title>On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm</title>
+    <updated>2026-06-25T13:50:45Z</updated>
+    <link href="https://arxiv.org/abs/2606.16642v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.16642v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the tropical chromatic number of $\mathbb{R}^n$, $χ_{\mathrm{tr}}(\mathbb{R}^n)$, the minimal number of colors needed to color $\mathbb{R}^n$, so that no two points at tropical unit distance have the same color. It is the tropical analogue of the well-known Hadwiger-Nelson problem in $\mathbb{R}^2$. We have $\displaystyle \binom{n+1}{\lfloor (n+1)/2 \rfloor} \leq χ_{\mathrm{tr}}(\mathbb{R}^n) \leq 2^n$ for every $n$, where the lower bound comes from Sperner's antichain bound on a maximal equilateral set, as shown by Swanepoel. It is conjectured that $χ_{\mathrm{tr}}(\mathbb{R}^n) = 2^n$, which is known to be the case for the measurable chromatic number. By constructing a graph with 62 vertices and 577 edges we demonstrate that $χ_{\mathrm{tr}}(\mathbb{R}^3)=8$. We also construct a graph in $\mathbb{Z}^4$ with 37 vertices and 386 edges that is 11-colorable but not 10-colorable, which is above Sperner's lower bound of 10.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T12:33:10Z</published>
+    <arxiv:comment>24 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Amnon Rosenmann</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.13566v2</id>
+    <title>A Three-Layer Framework for AI in Scientific Discovery</title>
+    <updated>2026-07-06T21:51:37Z</updated>
+    <link href="https://arxiv.org/abs/2606.13566v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.13566v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Current discussions of AI in scientific discovery are often dominated by two visible capabilities: search over existing knowledge and execution through optimization, simulation, and automation. Both are important, but neither fully captures the central act of discovery: the formation and evolution of models. This paper proposes a three-layer view of AI in discovery. Layer 1 is search and retrieval by large language models. Layer 2, as the main innovation of this paper, is model formation through qualitative reasoning: the capacity to recognize when a current framework is structurally inadequate and to understand the problem within a broader representational space, not through trial and error, but through structural insight into what is missing and where it can be found. Layer 3 is execution, optimization, and refinement. The main claim is that Layer 2 is both the most important and the least developed. Search without model formation remains confined to inherited frameworks, while execution without conceptual revision only amplifies an existing formulation. We illustrate Layer 2 reasoning through three case studies: S. S. Chern's intrinsic proof of the Gauss-Bonnet theorem, the resolution of the Nesterov Accelerated Gradient convergence problem via Lyapunov functions, and the autonomous disproof of the Erdos unit distance conjecture by OpenAI in 2026. Each case exhibits the same structural signature: a framework that had become inadequate, a missing conceptual object, and a resolution found in an unexpected neighboring field.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-11T16:56:27Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Guojun Liao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.12325v1</id>
+    <title>A note on geometric colorings of the Moser lattice</title>
+    <updated>2026-06-10T16:59:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.12325v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.12325v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In arXiv:2311.10069, Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-10T16:59:20Z</published>
+    <arxiv:comment>5 pages, 0 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.03419v5</id>
+    <title>Optimizing Explicit Unit-Distance Lower-Bound Certificates</title>
+    <updated>2026-06-09T13:18:56Z</updated>
+    <link href="https://arxiv.org/abs/2606.03419v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.03419v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The 2026 disproof of Erdős's unit-distance conjecture and Sawin's quantitative refinement show that the maximum number $u(n)$ of unit distances among $n$ planar points can exceed $n^{1+\varepsilon}$ for a fixed positive $\varepsilon$. Sawin's explicit bound gives more than $n^{1.014}$ unit distances for arbitrarily large $n$ and exposes integer parameters whose choice is not fully optimized. This report treats Sawin's parameter selection as a nonlinear integer optimization problem and develops an open-source Python optimization and verification pipeline for certificates involving prime sets $T$ and $S_Q$, integer multiplicities $k(p)$, and a rationally encoded real parameter $R$. After reproducing Sawin's certificate with $δ=0.014114\ldots$, the pipeline yields improved certificates with the same $T$. We develop a tailored integer evolution strategy achieving a certificate with $δ=0.015263\ldots$ and supporting the cautious statement $u(n)&gt;n^{1.0152}$ for arbitrarily large $n$. For extended ramified prime ranges, the Emmerich--Cordella certificate obtained with the same framework reports $u(n)&gt;n^{1.031}$ for $\#T=67$, illustrating the importance of enlarging $T$. Very recent MathOverflow discussions, brought to the author's attention as of version~4, report further improvements, including certificates above $δ&gt;0.035$ and beyond $δ&gt;0.036$. Some of these improvements may rely not only on larger prime ranges but also on modified constraint systems and additional degrees of freedom that deviate from Sawin's original formulation. Beyond this application, the work illustrates how randomized optimization heuristics can improve, verify, and refine explicit certificates for combinatorial geometry through nonlinear integer optimization.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-02T10:05:23Z</published>
+    <arxiv:comment>17 pages, 9 figures. Added a declaration on the use of AI. Added references to further contributions discussed on MathOverflow, including a reference to the independently developed verification pipeline and certificate package by Tseng (2026), published on Zenodo</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Michael T. M. Emmerich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.26145v1</id>
+    <title>An incomplete attack on the upper bound of the unit distance problem</title>
+    <updated>2026-05-22T21:30:47Z</updated>
+    <link href="https://arxiv.org/abs/2605.26145v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.26145v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This is an incomplete attempt to show that the upper bound of $\lesssim n^\frac{4}{3}$ on the number unit distances determined by a large finite set of $n$ points in the plane is not sharp. The methods also say something about sets of $n$ points and $n$ lines that attain the sharp bound of the Szemerédi-Trotter point-line incidence bound.</summary>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-22T21:30:47Z</published>
+    <arxiv:comment>Notes from several years of effort that did not yield a theorem, but might be of independent interest. 6 figures</arxiv:comment>
+    <arxiv:primary_category term="math.GM"/>
+    <author>
+      <name>Steven Senger</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.20695v1</id>
+    <title>Remarks on the disproof of the unit distance conjecture</title>
+    <updated>2026-05-20T04:46:35Z</updated>
+    <link href="https://arxiv.org/abs/2605.20695v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.20695v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a short, digested, human-verified version of the recent OpenAI-generated counterexample to the Erdős unit distance conjecture, and a sequence of reflections on it. The argument relies crucially on ideas that may, at least in retrospect, be attributed to Ellenberg-Venkatesh, Golod-Shafarevich, and Hajir-Maire-Ramakrishna.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-20T04:46:35Z</published>
+    <arxiv:comment>19 pages; expository note based on very recent developments</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Noga Alon</name>
+    </author>
+    <author>
+      <name>Thomas F. Bloom</name>
+    </author>
+    <author>
+      <name>W. T. Gowers</name>
+    </author>
+    <author>
+      <name>Daniel Litt</name>
+    </author>
+    <author>
+      <name>Will Sawin</name>
+    </author>
+    <author>
+      <name>Arul Shankar</name>
+    </author>
+    <author>
+      <name>Jacob Tsimerman</name>
+    </author>
+    <author>
+      <name>Victor Wang</name>
+    </author>
+    <author>
+      <name>Melanie Matchett Wood</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.18093v2</id>
+    <title>Where solitons are in a KdV soliton gas</title>
+    <updated>2026-09-17T15:10:45Z</updated>
+    <link href="https://arxiv.org/abs/2605.18093v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.18093v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Korteweg-De Vries (KdV) equation, a paradigmatic integrable model, admits multi-soliton solutions where localised profiles interact by elastic, factorised scattering. But when solitons interact, their shapes are modified, and individual solitons cannot be identified anymore, a key problem in soliton gases where one needs a density of solitons per unit distance. This is the question of quasi-particles in integrable systems: can we locate asymptotic objects at finite times and densities in the macroscopic limit of infinite number of solitons? A good definition of solitons' positions should guarantee that the field in any mesoscopic neighbourhood is determined by solitons lying there. We solve this problem for the KdV equation. We define solitons' positions as explicit solutions to the semiclassical Bethe equations. We show a density lower bound generalising the hard-rod condition and reminiscent of the condensate lower-bound known from soliton gases. We construct a fluid-cell projection, that projects out solitons lying outside mesoscopic regions, and show that the result is a field composed solely of the remaining solitons, unchanged in this region and exponentially supported there. From this we show that in the weak limit, conserved densities are given by the empirical density for these solitons' positions. Thus we have associated a kinetic theory of quasi-particles to the KdV equation. We also find new bounds on the growth of the multi-soliton support and on the supremum of the field and its derivatives. The results hold under natural conditions on spectral and impact parameters, and no randomness or large-wavelength conditions are required. Our proof is based on a novel solitonic tau function. This is a first step towards rigorously deriving the kinetic equation of the KdV soliton gas, first proposed by Gennady El in 2003. The methods are generalisable to other solitonic models.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T09:10:09Z</published>
+    <arxiv:comment>v1: 85 pages, 3 figures. v2: 109 pages, 3 figures. A new, exact solution to the semiclassical Bethe equations (SBE) has been found. This allowed us to significantly reduce the assumption, make their physical meaning much clearer, and substantially strengthen the main results. Thus, the analysis is now based on the SBE instead of magnifying-glass positions</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Benjamin Doyon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.25997v1</id>
+    <title>Collisional energy loss distribution of a fast parton in a hot or dense QCD medium</title>
+    <updated>2026-04-28T18:00:01Z</updated>
+    <link href="https://arxiv.org/abs/2604.25997v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.25997v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We compute the probability distribution for collisional energy loss of an ultrarelativistic parton crossing a quark-gluon plasma. This collisional quenching weight has not been determined previously, unlike the average collisional loss per unit distance, although it should be a more accurate quantity to use in jet-quenching phenomenology. The quenching weight is obtained from a well-known kinetic equation which resums an arbitrary number of elastic scatterings of the energetic parton with the medium, providing a complete description of the stochastic energy exchange, including the possibility of energy gain from thermal fluctuations. The formulation also naturally extends the standard treatment of collisional energy loss to finite path lengths, which could be relevant not only for heavy-ion collisions, but also for light-ion, and possibly proton-nucleus and proton-proton collisions. We predict the quenching weight in a setup where individual elastic scatterings are described using the hard thermal loop approximation for soft exchanges, with a smooth matching to the hard domain.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-28T18:00:01Z</published>
+    <arxiv:comment>38 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>G. Jackson</name>
+    </author>
+    <author>
+      <name>S. Peigné</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.19848v1</id>
+    <title>Unit distance graphs with few crossings per edge</title>
+    <updated>2026-03-20T10:59:09Z</updated>
+    <link href="https://arxiv.org/abs/2603.19848v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.19848v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A graph is called a $k$-planar unit distance graph if it can be drawn in the plane such that every edge is a unit line segment and is involved in at most $k$ crossings. We investigate $u_k(n)$, the maximum number of edges of such graphs on $n$ vertices. For $k=1$, we improve the best known upper bound, by showing that $u_1(n) \leq 3n - c\sqrt{n}$ for some constant $c&gt;0$. This bound is tight up to the value of the constant $c$. For $k=2$, we establish the first non-trivial upper bound by proving that $u_2(n) \leq 4n - 8$. Regarding lower bounds we give a construction for $k=2$ that shows $u_2(n) \geq u_0(n) + c\sqrt{n}$ if $n$ is sufficiently large.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-20T10:59:09Z</published>
+    <arxiv:comment>14 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Panna Gehér</name>
+    </author>
+    <author>
+      <name>Dömötör Pálvölgyi</name>
+    </author>
+    <author>
+      <name>Dániel G. Simon</name>
+    </author>
+    <author>
+      <name>Géza Tóth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.18831v1</id>
+    <title>Rigidity-Induced Scaling Laws in Unit Distance Graphs: The Algebraic Collapse of Dense Substructures</title>
+    <updated>2026-01-25T17:46:15Z</updated>
+    <link href="https://arxiv.org/abs/2601.18831v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.18831v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We revisit the classical Unit Distance Problem posed by Erdős in 1946. While the upper bound of $O(n^{4/3})$ established by Spencer, Szemer'edi, and Trotter (1984) is tight for systems of pseudo-circles, it fails to account for the algebraic rigidity inherent to the Euclidean metric. By integrating structural rigidity decomposition with the theory of Cayley-Menger varieties, we demonstrate that unit distance graphs exceeding a critical density must contain rigid bipartite subgraphs. We prove a "Flatness Lemma," supported by symbolic computation of the elimination ideal, showing that the configuration variety of a unit-distance $K_{3,3}$ (and by extension $K_{4,4}$) in $\mathbb{R}^2$ is algebraically singular and collapses to a lower-dimensional locus. This dimensional reduction precludes the existence of the amorphous, high-incidence structures required to sustain the $n^{4/3}$ scaling, effectively improving the upper bound for non-degenerate Euclidean configurations.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-25T17:46:15Z</published>
+    <arxiv:comment>5 pages. Includes a "Flatness Lemma" proven via symbolic computation. Python verification script included as an ancillary file. Linguistic refinement and LaTeX formatting assisted by AI (Gemini)</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Lucas Aloisio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.07828v1</id>
+    <title>On the range of two-distance graphs</title>
+    <updated>2026-01-12T18:58:38Z</updated>
+    <link href="https://arxiv.org/abs/2601.07828v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.07828v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The topic of this paper is related to the well-known notion of unit distance graphs. Take a graph with its edges coloured red and blue such that for some $d$ it can be mapped into the plane with all vertices going to distinct points, the red edges to segments of length $1$ and the blue edges to segments of length $d$. We define the range of this graph to be the set of such numbers $d$. It is easy to show that the range of any edge-bicoloured graph consists of finitely many intervals with algebraic endpoints, and we now prove that any such set with a finite positive upper and lower bound is the range of a suitable graph.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-12T18:58:38Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Péter Ágoston</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.07105v4</id>
+    <title>A sharp point-sphere incidence bound for $(u, s)$-Salem sets</title>
+    <updated>2026-06-06T12:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2601.07105v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.07105v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We establish a sharp point-sphere incidence bound in finite fields for point sets exhibiting controlled additive structure. Working in the framework of \((4,s)\)-Salem sets, which quantify pseudorandomness via fourth-order additive energy, we prove that if \(P\subset \mathbb{F}_q^d\) is a \((4,s)\)-Salem set with \(s\in \big( \frac{1}{4}, \frac{1}{2} \big]\) and \(|P|\ll q^{ \frac{d}{4s}}\), then for any finite family \(S\) of spheres in \(\mathbb{F}_q^d\), \[ \bigg| I(P,S)-\frac{|P||S| }{q} \bigg| \ll q^{\frac{d}{4}}\,|P|^{1-s}\,|S|^{\frac{3}{4}}. \] This estimate improves the classical point-sphere incidence bounds for arbitrary point sets across a broad parameter range. The proof combines additive energy estimates with a lifting argument that converts point-sphere incidences into point-hyperplane incidences in one higher dimension while preserving the \((4,s)\)-Salem property. As applications, we derive refined bounds for unit distances and sum-product type phenomena, and we extend the method to \((u,s)\)-Salem sets for even moments \(u\ge4\).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-12T00:05:47Z</published>
+    <arxiv:comment>Accepted for publication in Finite Fields and Their Applications</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Steven Senger</name>
+    </author>
+    <author>
+      <name>Dung The Tran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.15516v2</id>
+    <title>Ramsey problems for graphs in Euclidean spaces and Cartesian powers</title>
+    <updated>2025-12-18T12:00:27Z</updated>
+    <link href="https://arxiv.org/abs/2512.15516v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.15516v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a graph $H$, let $χ_H(\mathbb{R}^n)$ be the smallest positive integer $r$ such that there exists an $r$-coloring of $\mathbb{R}^n$ with no monochromatic unit-copy of $H$, that is a set of $|V(H)|$ vertices of the same color such that any two vertices corresponding to an edge of $H$ are at distance one.
+  This Ramsey-type function extends the famous Hadwiger--Nelson problem on the chromatic number $χ(\mathbb{R}^n)=χ_{K_2}(\mathbb{R}^n)$ of the space from a complete graph $K_2$ on two vertices to an arbitrary graph $H$. It also extends the classical Euclidean Ramsey problem for congruent monochromatic subsets to the family of those defined by a specific subset of unit distances.
+  Among others, we show that $χ_H(\mathbb{R}^n)=χ(\mathbb{R}^n)$ for any even cycle $H$ of length $8$ or at least $12$ as well as for any forest and that $χ_H(\mathbb{R}^n)=\lceilχ(\mathbb{R}^n)/2\rceil$ for any sufficiently long odd cycle. Our main tools and results, which are of independent interest, establish that Cartesian powers enjoy Ramsey-type properties for graphs with favorable Turán-type characteristics, such as zero hypercube Turán density.
+  In addition, we prove induced variants of these results, find bounds on $χ_H(\mathbb{R}^n)$ for growing dimensions $n$, and prove a canonical-type result. We conclude with many open problems. One of these is to determine $χ_{C_4}(\mathbb{R}^2)$, for a cycle $C_4$ on four vertices.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-17T15:13:27Z</published>
+    <arxiv:comment>28 pages (including appendix), minor \LaTeX\ compilation errors fixed</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Maria Axenovich</name>
+    </author>
+    <author>
+      <name>Dingyuan Liu</name>
+    </author>
+    <author>
+      <name>Arsenii Sagdeev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.12757v3</id>
+    <title>Simplex volumes in hyperplane arrangements</title>
+    <updated>2026-07-21T10:57:20Z</updated>
+    <link href="https://arxiv.org/abs/2512.12757v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.12757v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the dual variants of the Erdős's distinct distances and unit distance problems. Instead of considering distances determined by points, we consider simplex volumes determined by hyperplanes. We investigate: (1) the maximum number of unit $d$-volume $d$-simplices determined by an arrangement of $n$ hyperplanes in $\mathbb{R}^d$, (2) the maximum number of minimum/maximum $d$-volume $d$-simplices determined by an arrangement of $n$ hyperplanes in $\mathbb{R}^d$, and (3) the maximum number $D_d(n)$ such that any arrangement of $n$ hyperplanes in $\mathbb{R}^d$ in general position contains $D_d(n)$ hyperplanes forming $d$-simplices of distinct $d$-volumes.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-14T16:43:49Z</published>
+    <arxiv:comment>23 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Koki Furukawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.17737v1</id>
+    <title>Who Needs Crossings?: Noncrossing Linkages are Universal, and Deciding (Global) Rigidity is Hard</title>
+    <updated>2025-10-20T16:48:35Z</updated>
+    <link href="https://arxiv.org/abs/2510.17737v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.17737v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We exactly settle the complexity of graph realization, graph rigidity, and graph global rigidity as applied to three types of graphs: "globally noncrossing" graphs, which avoid crossings in all of their configurations; matchstick graphs, with unit-length edges and where only noncrossing configurations are considered; and unrestricted graphs (crossings allowed) with unit edge lengths (or in the global rigidity case, edge lengths in $\{1,2\}$). We show that all nine of these questions are complete for the class $\exists\mathbb{R}$, defined by the Existential Theory of the Reals, or its complement $\forall\mathbb{R}$; in particular, each problem is (co)NP-hard.
+  One of these nine results--that realization of unit-distance graphs is $\exists\mathbb{R}$-complete--was shown previously by Schaefer (2013), but the other eight are new. We strengthen several prior results. Matchstick graph realization was known to be NP-hard (Eades \&amp; Wormald 1990, or Cabello et al.\ 2007), but its membership in NP remained open; we show it is complete for the (possibly) larger class $\exists\mathbb{R}$. Global rigidity of graphs with edge lengths in $\{1,2\}$ was known to be coNP-hard (Saxe 1979); we show it is $\forall\mathbb{R}$-complete.
+  The majority of the paper is devoted to proving an analog of Kempe's Universality Theorem--informally, "there is a linkage to sign your name"--for globally noncrossing linkages. In particular, we show that any polynomial curve $φ(x,y)=0$ can be traced by a noncrossing linkage, settling an open problem from 2004. More generally, we show that the regions in the plane that may be traced by a noncrossing linkage are precisely the compact semialgebraic regions (plus the trivial case of the entire plane). Thus, no drawing power is lost by restricting to noncrossing linkages. We prove analogous results for matchstick linkages and unit-distance linkages as well.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-20T16:48:35Z</published>
+    <arxiv:comment>75 pages, 22 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CG"/>
+    <arxiv:journal_ref>Journal of Computational Geometry, 16(1), 2025</arxiv:journal_ref>
+    <author>
+      <name>Zachary Abel</name>
+    </author>
+    <author>
+      <name>Erik D. Demaine</name>
+    </author>
+    <author>
+      <name>Martin L. Demaine</name>
+    </author>
+    <author>
+      <name>Sarah Eisenstat</name>
+    </author>
+    <author>
+      <name>Jayson Lynch</name>
+    </author>
+    <author>
+      <name>Tao B. Schardl</name>
+    </author>
+    <arxiv:doi>10.20382/jocg.v16i1a12</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.20382/jocg.v16i1a12" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.15002v3</id>
+    <title>Determining unit distance graphs with coordinates in $\mathbb{Z}^2$ is NP-complete</title>
+    <updated>2026-05-21T23:30:13Z</updated>
+    <link href="https://arxiv.org/abs/2510.15002v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.15002v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of determining whether a graph $G$ can be realized as a unit-distance graph in $\mathbb{Z}^2$ is NP-complete. As far as we can tell, a proof of this result has never been written up. We prove NP-completeness of this problem by implementing Eades and Whitesides' logic engine in this setting, and construct a graph that is realizable if and only if an arbitrary NA3SAT formula is satisfiable.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-16T01:12:31Z</published>
+    <arxiv:comment>It turns out that this result is already known. A stronger result (about unit-distance trees instead of arbitrary graphs) is: Sandeep N. Bhatt, Stavros S. Cosmadakis, The complexity of minimizing wire lengths in VLSI layouts, 1987</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Eric Binnendyk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.05997v1</id>
+    <title>Well-Separated Pairs Decomposition Revisited</title>
+    <updated>2025-09-07T10:13:40Z</updated>
+    <link href="https://arxiv.org/abs/2509.05997v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.05997v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We revisit the notion of WSPD (i.e., well-separated pairs-decomposition), presenting a new construction of WSPD for any finite metric space, and show that it is asymptotically instance-optimal in size. Next, we describe a new WSPD construction for the weighted unit-distance metric in the plane, and show a bound $O( \varepsilon^{-2} n \log n)$ on its size, improving by a factor of $1/\varepsilon^2$ over previous work. The new construction is arguably simpler and more elegant.
+  We point out that using WSPD, one can approximate, in near-linear time, the distortion of a bijection between two point sets in low dimensions. As a new application of WSPD, we show how to shortcut a polygonal curve such that its dilation is below a prespecified quantity. In particular, we show a near-linear time algorithm for computing a simple subcurve for a given polygonal curve in the plane so that the new subcurve has no self-intersection.</summary>
+    <category term="cs.CG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-07T10:13:40Z</published>
+    <arxiv:primary_category term="cs.CG"/>
+    <author>
+      <name>Sariel Har-Peled</name>
+    </author>
+    <author>
+      <name>Benjamin Raichel</name>
+    </author>
+    <author>
+      <name>Eliot W. Robson</name>
+    </author>
+  </entry>
+</feed>

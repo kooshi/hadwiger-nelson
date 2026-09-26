@@ -1,0 +1,2 @@
+## q3_6: 'ab:"nonlacunary" & ab:"invariant measure"'  total=1 fetched=1
+0790.28012 | 1992 | Johnson, Aimee S. A. | Measures on the circle invariant under multiplication by a nonlacunary subsemigroup of the integers |  | review *nonlacunary/semigroup

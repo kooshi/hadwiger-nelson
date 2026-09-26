@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ikZx0aocuOqt+6sFTLqDddqEd0s</id>
+  <title>arXiv Query: search_query=abs:"measure rigidity" AND abs:"number field" AND abs:torus&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-26T11:36:03Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22measure+rigidity%22+AND+(abs:%22number+field%22+AND+abs:torus)&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/math/0607815v1</id>
+    <title>The distribution of periodic torus orbits on homogeneous spaces</title>
+    <updated>2006-07-31T14:43:25Z</updated>
+    <link href="https://arxiv.org/abs/math/0607815v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0607815v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We prove results towards the equidistribution of certain families of periodic torus orbits on homogeneous spaces, with particular focus on the case of the diagonal torus acting on quotients of $\PGL_n(\R)$. After attaching to each periodic orbit an integral invariant (the discriminant) our results have the following flavour: certain standard conjectures about the distribution of such orbits hold up to exceptional sets of at most $O(Δ^ε)$ orbits of discriminant $\leq Δ$. The proof relies on the well-separatedness of periodic orbits together with measure rigidity for torus actions. We also give examples of sequences of periodic orbits of this action that fail to become equidistributed, even in higher rank.
+  We give an application of our results to sharpen a theorem of Minkowski on ideal classes in totally real number fields of cubic and higher degrees.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2006-07-31T14:43:25Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Manfred Einsiedler</name>
+    </author>
+    <author>
+      <name>Elon Lindenstrauss</name>
+    </author>
+    <author>
+      <name>Philippe Michel</name>
+    </author>
+    <author>
+      <name>Akshay Venkatesh</name>
+    </author>
+  </entry>
+</feed>

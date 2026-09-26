@@ -1,0 +1,6 @@
+## q3_2: 'ab:"invariant measures" & ab:"solenoid"'  total=5 fetched=5
+1124.37009 | 2003 | Benedetti, Riccardo; Gambaudo, Jean-Marc | On the dynamics of \(\mathbb G\)-solenoids. Applications to Delone sets |  | summary *solenoid
+1394.37046 | 2017 | Ilyashenko, Yu.; Shilin, I. | Attractors and skew products |  | review *solenoid/semigroup
+1550.37039 | 2024 | Leclerc, Gaétan | Fourier decay of equilibrium states for bunched attractors |  | summary 
+None | 2026 | Bochi, Jairo | An isolated Lyapunov exponent |  | review *solenoid
+1318.57001 | 2014 |  | Foliations: dynamics, geometry and topology. Lecture notes of some of the courses, Barcelona, Spain, May 2010 |  | review *solenoid/torus

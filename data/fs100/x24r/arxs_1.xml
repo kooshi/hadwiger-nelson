@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cZfNNrRXp4nQpDpxaiE474VjGgA</id>
+  <title>arXiv Query: search_query=abs:"triangle-free" AND abs:"unit distance" AND abs:"chromatic"&amp;id_list=&amp;start=0&amp;max_results=40</title>
+  <updated>2026-09-26T11:29:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22triangle-free%22+AND+(abs:%22unit+distance%22+AND+abs:%22chromatic%22)&amp;start=0&amp;max_results=40&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>40</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.19995v3</id>
+    <title>Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 and EI19 (HoG 51375, 51376): a solvable-non-solvable dichotomy (origami vs. S20) and the Laman-number conjecture</title>
+    <updated>2026-07-27T21:17:28Z</updated>
+    <link href="https://arxiv.org/abs/2607.19995v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.19995v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We certify, exactly, the coordinate fields of a faithful planar realization of two neighbouring triangle-free Exoo-Ismailescu unit-distance graphs (UDGs), and show they realize the two opposite extremes of the constructibility hierarchy. The 17-vertex graph EI17 (House of Graphs 51375) is the smallest triangle-free UDG with chromatic number 4; the 19-vertex graph EI19 (HoG 51376) is its state-of-the-art origami neighbour. In both, fixing a rational base edge, the remaining vertices are intersections of unit circles -- each on the radical axis of its two neighbours, a tower of square roots over the free angles -- and a small closure system locks the realization. For EI19 the base lies in Q(sqrt 2, sqrt 5, sqrt 7) and a single free angle has an irreducible degree 12 = 2^2*3 minimal polynomial with Galois group the solvable transitive group 12T236 (order 2304 = 2^8*3^2): not ruler-and-compass, but origami-constructible (the cubic Beloch fold O6 necessary, in casus irreducibilis). For EI17 two free angles are locked by two closures, whose resultant is irreducible of degree 20 = 2^2*5 with Galois group the full symmetric group S20 (a Frobenius census exhibits a 17-cycle, forcing A20 by Jordan, and an odd 20-cycle, raising it to S20): non-solvable, so the coordinates are not expressible by radicals -- neither compass nor origami of any fold order. Thus the smallest triangle-free 4-chromatic UDG is the generic, maximally exotic case, the exact opposite of its origami neighbour. We give the full certification pipeline as explicit algorithms, record two methodological pitfalls, and read the pair through a conjectural bridge between the Laman number and the Galois group.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-22T10:27:06Z</published>
+    <arxiv:comment>33 pages, 24 figures. v2: all figure labels translated to English; minor corrections</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Haroldo Costa Silva Filho</name>
+    </author>
+  </entry>
+</feed>

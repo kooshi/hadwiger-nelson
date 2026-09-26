@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/aLJWeASX+YZcdYSt5a8A6/MR1m8</id>
+  <title>arXiv Query: search_query=&amp;id_list=2607.19946&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-26T11:32:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2607.19946" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.19946v1</id>
+    <title>The chromatic number of Euclidean space with dense color classes</title>
+    <updated>2026-07-22T09:21:54Z</updated>
+    <link href="https://arxiv.org/abs/2607.19946v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.19946v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this note we construct colorings of Euclidean space $\mathbb{R}^n$ with finitely many colors such that any two points at unit distance have different colors and, in addition, each color class is dense in $\mathbb{R}^n$. In particular, 12 dense colors suffice to color $\mathbb{R}^2$. In arbitrary dimension, we show that $nχ(\mathbb{R}^n)+1$ colors suffice, where $χ(\mathbb{R}^n)$ denotes the chromatic number of $\mathbb{R}^n$ in the standard formulation.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-22T09:21:54Z</published>
+    <arxiv:comment>10 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Maxim Didin</name>
+    </author>
+    <author>
+      <name>Vsevolod Voronov</name>
+    </author>
+  </entry>
+</feed>

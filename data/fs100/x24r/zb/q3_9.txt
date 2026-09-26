@@ -1,0 +1,10 @@
+## q3_9: 'ab:"character rigidity"'  total=9 fetched=9
+1347.20051 | 2016 | Peterson, Jesse; Thom, Andreas | Character rigidity for special linear groups. |  | review *number field
+1411.46046 | 2018 | Hadwin, Don; Shulman, Tatiana | Stability of group relations under small Hilbert-Schmidt perturbations |  | summary 
+1504.22009 | 2021 | Boutonnet, Rémi; Houdayer, Cyril | Stationary characters on lattices of semisimple Lie groups |  | summary 
+1524.22019 | 2021 | Alekseev, Vadim; Brugger, Rahel | A rigidity result for normalized subfactors |  | review 
+1571.20069 | 2025 | Freslon, Amaury; Skalski, Adam; Wang, Simeng | Tracial central states on compact quantum groups |  | review 
+arXiv:2607.00781 | 2026 | Michael Björklund; Alexander Fish | Directional expansion in ergodic actions of countable groups |  | summary 
+arXiv:2507.21862 | 2025 | Alon Dogon; Michael Glasner; Yuval Gorfine; Liam Hanany; Ari | Non-uniform higher-rank lattices are character rigid |  | summary 
+arXiv:2506.20843 | 2026 | Alon Dogon; Itamar Vigdorovich | Hyperlinearity, stability and asymptotic spectral gap of higher rank lattices |  | summary 
+1349.00047 | 2014 |  | Working session: Superigidity. Abstracts from the working session held March 30 -- April 5, 2014. |  | summary 
