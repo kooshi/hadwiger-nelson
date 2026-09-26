@@ -1595,3 +1595,31 @@ conjunct; row 75 gives the 23-adic factor's refusal, a transcription of `χ_Bor(
 **contains** `χ_CP(ℝ²) ≥ 6` — a statement about the real plane at least as hard as the measurable chromatic number's open lower bound.
 
 **Would have searched here (stage 1):** none (reading and checking only).
+
+### Stage 1b — SAVED (list X22 folded: X22D and X22V)
+
+**Blindness, checked in git:** X22V's blind verdicts are its stage 3, committed at 06:49:16 (`26921d37`), before it opened anything fenced;
+X22D's derivations were committed by 06:48:44. X22V's one fence slip (06:38, an over-wide `sed` range showing X03D-FL-K's three lines) touches
+FL-K only; the owner ruled that its FL-K check does not count and that FL-K stands on X03D and X22D.
+
+| claim | X22D | X22V (blind) | ruling |
+|---|---|---|---|
+| C-0 | TRUE: one stable dyadic place, inert in `L/F` | TRUE; controls ℚ(√5) ramified, ℚ(√167) split; plant fires | **TRUE, two blind**: the type-(B) fields lie outside row 100's exception |
+| C-1 (Q-μ, translation-invariant measures) | GAP at TR-ROT; TRUE for `R ⋊ U`-invariant measures (X22D-QR, two routes) | GAP; TRUE for rotation-invariant measures (X22V-F2) | **GAP at TR-ROT, two blind; the rotation-invariant form TRUE, two blind** (X22D-QR ≡ X22V-F2) |
+| C-2 | ⟹ TRUE; ⟸ GAP at TR-ROT (TRUE with rigid-motion transience, X22D-TRM) | GAP (TRUE with affine transience, X22V-R) | **GAP at TR-ROT, two blind; X22D-TRM ≡ X22V-R TRUE, two blind** |
+| C-3 | GAP at TR-ROT; T-B1 ⟺ row 88 and row 88 ⟹ Q-tr TRUE | GAP; T-B1 ⟺ row 88 ⟹ Q-tr TRUE | **GAP, two blind** |
+| C-4 | GAP at C4-S | GAP (X22V-T4: measure methods see only Pull) | **GAP, two blind**; X22V-T4 one mind |
+| SEL-k | TRUE, every real number field, given MR | TRUE given MR | **TRUE, two blind** |
+
+**What moved at type (B), in one line:** given MR, every rotation- and translation-invariant random four-colouring over ℚ(√59), ℚ(√83), ℚ(√131)
+is a pullback from the tight place (no T-B1), so **row 88 ⟺ no rigid-motion-transient four-colouring**; the translation-invariant half of Q-μ is
+exactly TR-ROT, which T-B1 implies; C-4 is untouched by measure methods (X22V-T4). The advisor's F3 ("only the conditional moves") missed the
+rotation-invariant half (X22D §3.2). **Wording rule (X22V §3.3): never "given MR, row 88 ⟺ Q-tr".** **X27D and X27V** (launched 06:54, stop
+07:50) attack TR-ROT and its G79 flip; this close does not wait for them, and every front-page line says "TR-ROT under attack (X27)", not a
+verdict.
+
+**SEL-k, the advisor's F2, ruled as a reduction:** TRUE by two blind minds over every real number field given MR; at `k = 5` over ℚ(√167) it
+turns six into a question about invariant random five-colourings with spectrum on `T + A` — **graded as a reduction, never as a bound**. The
+named risk (FL-K, one mind) is discharged: FL-K has two minds (X03D; X22D, wider).
+
+**Would have searched here (stage 1b):** none.
