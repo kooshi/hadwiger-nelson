@@ -9,6 +9,12 @@ only this file, `data/fs100/x03d/`, `tools/x03d_*.py` and my report. Blind verif
 |---|---|---|---|
 | X03D-FR1 | for every real number field `F`, the `U`-orbits on `R` are exactly the fibres of `x ↦ x x̄`; a finite measure `τ` on `R̂` is `U`-invariant iff `τ̂` is constant on those fibres (FR-1 TRUE) | [hand] | §2.1 |
 | X03D-ED1 | for every real number field `F` and every sequence of finite non-empty `Y_N ⊆ U`: if every `χ ∉ E` has `(1/#Y_N) Σ_{u∈Y_N} χ(u) → 0`, then MR(F); so ED-1 is TRUE whenever `U_N` is finite, in particular for every totally real `F` | [hand] | §2.2 |
+| X03D-FL-K | for every rotation-invariant random proper four-colouring over a real field, `ν := σ|_{R̂∖E}` has `ν̂(u)/ν(R̂) = −P(c¹(0) = c²(u)) / P(c¹(0) ≠ c²(0))` for every `u ∈ U`, `(c¹, c²)` the relatively independent self-joining over the `E`-factor | [hand] | §3.2 |
+| X03D-FL-1a | FL-1's first two clauses: over ℚ(√47), given T-C(A) at `S = ∅`, `τ ≠ 0`, `τ` is not a Haar multiple, and `τ̂(u) = τ̂(1)` for every `u ∈ U`, for every admissible `a` | [hand] | §3.2 |
+| X03D-SPEC | every `U`-invariant finite positive `ρ` carried by `T + A` has `ρ̂(1) ≥ −Λ(F)·ρ(R̂)`, `Λ(F) := −inf_{T+A} M ≥ −J₀(j₁,₁) = 0.402759` over every real field, and this is sharp; at ℚ(√47) `Λ = 0.402759` (the real place; 11 gives 0.3996, 19 gives 0.3805) | [hand + tools, float with controls] | §3.3, `tools/x03d_factor_minima.py` |
+| X03D-FL-H | over a real field where T-C(A) holds at `S = ∅`, FL-1's inequality and FL-2's implication both follow from `Λ(F) ≤ 1/3`; that hypothesis fails over every real field (the real place) | [hand] | §3.4 |
+| X03D-FL-12 | FL-1 ⟹ FL-2 (given T-C(A) at `S = ∅` and the upper bound `χ ≤ 5`) | [hand] | §3.5 |
+| X03D-FL-Q | if `s_E := σ_E(R̂) ≤ s* < 1/(3Λ) = 0.8276` for every four-colouring, the consumer needs only "every non-zero `U`-invariant `E`-null `ν` has `ν̂(1)/ν(R̂) > (−1/3 + Λ s*)/(1 − s*)`", a threshold in `(−1/3, 0)` | [hand] | §3.5 |
 | X03D-ED1-R | for `F` with a complex place (e.g. ℚ(∛2)), `U_1` is infinite (norm-one units, rank `r₂(F)`), so ED-1's average is undefined as written; with the archimedean places added to `H`, ED-1 holds with the same proof | [hand] | §2.2 |
 
 ## Stage 1 — SAVED (quotation check, claims copied, C0, the Bekka–Francini discharge)
@@ -133,3 +139,123 @@ ED-1 is the lemma with `Y_N = U_N`.
 ### Would-have-searched-here log (stage 2)
 
 - None: both are short derivations.
+
+## Stage 3 — SAVED (FL-1 and FL-2)
+
+**Verdicts. FL-1: GAP.** Its first two clauses are TRUE (`τ ≠ 0`, non-Haar, `τ̂(u) = τ̂(1)`: X03D-FL-1a). Its inequality
+`τ̂(1) ≤ −τ(R̂)/3` is **not derivable from T-C(A) and rows 112–113's inputs**. The planner's route (bound the `E`-part's unit correlation by
+the factors) fails at one named step, and the step fails over **every** real field, not only ℚ(√47). **The step:** the `E`-part must satisfy
+`σ̂_E(1) ≥ −(σ_E(R̂) + a)/3`, the Hoffman-type condition `Λ ≤ 1/3` on the `E`-completion. The spectral input gives only `≥ −Λ·σ_E(R̂)`, with
+`Λ = 0.402759` at ℚ(√47): the real place's Bessel minimum, where the Hoffman bound is `0.2871 > 1/4`. The ratio-`< 1/4` inputs (`m₁ ≤ 0.2470`,
+FS-66 at 11 and 19) are integrality statements and enter only through T-C(A), which gives `σ̂_E(1) > −1/3`, not normalised by mass. FL-1 is
+vacuously true if `χ(ℚ(√47)²) = 5`, so no FALSE is available short of a four-colouring of that plane. **FL-2: GAP at the same step.** It
+follows from FL-1 (X03D-FL-12), and its hypothesis is implied by MR, but its sufficiency is exactly FL-1's missing inequality.
+
+### 3.1 Setting (J45's, `plans/FS84-SI-D-derivation.md` §1.2)
+
+`μ` is an `R ⋊ U`-invariant probability on `X₄(F)`, `g(x) = e_{c(x)}` (tetrahedral), `σ = σ_μ` with `σ̂(y) = E⟨g(0), g(y)⟩`. So `σ(R̂) = 1`,
+`σ̂(u) = −1/3` for every `u ∈ U` (properness), and `σ` is `U`-invariant (SP-Cor's proof). R-U gives `σ(E ∖ (T + A)) = 0`, so `σ_E := σ|_E = σ|_{T+A}`.
+`ν := σ|_{R̂∖E}` is `U`-invariant, positive and `E`-null. Haar measure is `E`-null (J45-N1), so FL-1's `a·m + τ` is a split of `ν`. **Reading of
+"non-Haar":** `a` is not fixed by the claim; I keep it free in `[0, a_max]`, `a_max = sup{b : ν − b·m ≥ 0}`. The inequality is weakest at
+`a = a_max`, and every verdict below holds for every admissible `a`. `p(x) = P(c(x) = · | 𝒜_∅)`, `h = E[g | 𝒜_∅] = Σ_j p_j e_j`, and by J45-N2
+`σ̂_E(y) = E⟨h(0), h(y)⟩`.
+
+### 3.2 What every actual four-colouring's spectrum carries (the example invariant, G79)
+
+**Lemma X03D-FL-K [hand].** With `(c¹, c²)` the relatively independent self-joining of `μ` over `𝒜_∅` and `u ∈ U`:
+`ν̂(u) = −(4/3) P(c¹(0) = c²(u))`, `ν(R̂) = (4/3) P(c¹(0) ≠ c²(0))`, hence **`ν̂(u)/ν(R̂) = −P(c¹(0) = c²(u)) / P(c¹(0) ≠ c²(0))`.**
+*Proof.* `⟨e_j, e_k⟩ = (4/3)δ_jk − 1/3` and `Σ_j p_j = 1` give `⟨h(0), h(y)⟩ = (4/3)⟨p(0), p(y)⟩ − 1/3`, and `E⟨p(0), p(y)⟩ = P(c¹(0) = c²(y))`
+(conditional independence). At `y = u`: `ν̂(u) = σ̂(u) − σ̂_E(u) = −1/3 − (4/3)P(c¹(0) = c²(u)) + 1/3`. At `y = 0`:
+`ν(R̂) = 1 − E|h(0)|² = (4/3)(1 − P(c¹(0) = c²(0)))`. ∎ The first identity is J45-SI-3 (read from the source, not re-proved). The ratio is new
+here, as far as I know.
+
+**Lemma X03D-FL-1a [hand; given T-C(A) at `S = ∅`].** For every admissible `a`: `τ := ν − a·m` is `U`-invariant, `τ̂(u) = τ̂(1)` for `u ∈ U`,
+`τ ≠ 0`, and `τ` is not a multiple of Haar measure.
+*Proof.* `ν` and `m` are `U`-invariant, and `u x̄u = 1 = 1·1̄`, so FR-1 gives `τ̂(u) = τ̂(1)`. A⁺ at `S = ∅` with its remark (ii) gives
+`∫_{R̂∖E_∅} Re χ(1) dσ < 0`; `E ∖ E_∅` is `σ`-null (R-U), so `ν̂(1) < 0`. `m̂(1) = 0`, so `τ̂(1) = ν̂(1) < 0`, which no Haar multiple (`τ = 0`
+included) has. ∎
+
+So, in the joining's words, every four-colouring over ℚ(√47) carries: **a monochromatic unit edge between the two conditionally independent
+copies has positive probability** (A⁺), and its ratio to a pointwise disagreement is the normalised unit correlation of the `E`-null part.
+**FL-1's inequality, restated exactly:**
+
+> (★) `P(c¹(0) = c²(u)) ≥ P(c¹(0) ≠ c²(0))/3 − a/4`, equivalently `σ̂_E(1) ≥ −(σ_E(R̂) + a)/3`.
+
+The two copies independent (`p ≡ 1/4`) give `1/4` against `(3/4)/3`: equality at `a = 0`. (★) says the `E`-factor can never push the
+cross-monochromatic rate below that independent baseline, per unit of disagreement.
+
+### 3.3 The spectral input: `Λ`
+
+**Lemma X03D-SPEC [hand; the numbers tools].** Let `ρ` be a `U`-invariant finite positive measure carried by `T + A`. Then
+`ρ̂(1) = ∫ M(χ) dρ(χ)`, where `M(χ) = ∏_v M_v(χ_v)` is the mean of `χ` over the closure `Ū` of `U` in the compact group on which `χ|_U` is
+continuous: the stable places at `χ`'s torsion level and the circles `T(F_v)` at the real places `v`. So `ρ̂(1) ≥ −Λ(F)·ρ(R̂)` with
+`Λ(F) := −inf_{χ∈T+A} M(χ)`, and the bound is sharp.
+*Proof.* A character in `T + A` is `θα` with `θ` of finite order `n`, factoring through `R/nR`, i.e. through the stable places dividing `n` at
+finite level, and `α(r) = e(Σ_w Re(ξ_w r_w))` over the complex places `w` of `L`. On `U`, `χ` extends continuously to `Ū ⊆ ∏_{v∈Σ} T(F_v)`
+(`Σ` finite: those stable places and the real places). `T = R¹_{L/F}𝔾_m` is rational, so weak approximation makes `U = T(F)` dense in
+`∏_{v∈Σ} T(F_v)`: `Ū` is the whole product, and its Haar measure is the product. `ρ̂(u) = ρ̂(1)` on `U` (FR-1) and `u ↦ ρ̂(u)` is continuous
+on `Ū` (dominated convergence), so `ρ̂(1) = ∫_Ū ρ̂ dHaar = ∫ (∫_Ū χ) dρ = ∫ M dρ` (Fubini). The local means are normalised eigenvalues:
+`J₀(2π|ξ_w|)` at a real place, and the character sum over the circle at a stable place's level. Each lies in `[−Λ_v, 1]`, and an odd number of
+negative factors gives a product `≥ −max_v Λ_v`. So `Λ(F) = max_v Λ_v`, attained by one factor at its minimum with every other factor
+trivial. Sharpness: SP-if step (3)'s `λ` (uniform on the circle `|ξ| = j₁,₁/(2π)` at one complex place) is `U`-invariant, carried by
+`A`, with `λ̂(1) = J₀(j₁,₁)`. ∎
+
+**At ℚ(√47)** (`tools/x03d_factor_minima.py`; float with controls; the plant, one point dropped from the circle, turns the control at 31 red):
+real place `J₀(j₁,₁) = −0.402759`; 11: `−0.399646`; 19: `−0.380486`; controls 23: `−0.331695` (margin `+1.638·10⁻³`, R88-TC-tab "23 by
+`1.6·10⁻³`") and 31: margin `+4.880·10⁻⁶` (R88-TC-tab "31 by `4.9·10⁻⁶`"). Every other stable place satisfies H* (R88-TC-tab below 72; Weil
+above), the dyadic place is split (no torsion characters: `1/2 ∈ R`), and inert towers keep the ratio (G54). So **`Λ(ℚ(√47)) = 0.402759`,
+attained at the real place.** And `Λ(F) ≥ 0.402759` over **every** real field, because `A` always contains the circle characters.
+
+### 3.4 Where the route stops, and a scenario the inputs cannot exclude
+
+The inputs give two lower bounds on `σ̂_E(1)`: A⁺ (from T-C(A), hence from the ratio-`< 1/4` facts) gives `> −1/3`, and X03D-SPEC gives
+`≥ −Λ·σ_E(R̂)`. (★) needs `≥ −(σ_E(R̂) + a)/3`. With `a = 0`, **the window `−Λ·s_E ≤ σ̂_E(1) < −s_E/3` (`s_E = σ_E(R̂) ∈ (0, 1)`) is excluded by
+neither.** It is non-empty exactly because `Λ > 1/3`.
+
+**Lemma X03D-FL-H [hand].** If `Λ(F) ≤ 1/3` and T-C(A) holds at `S = ∅`, then (★) holds for every `μ`, and so do FL-1's inequality and FL-2's
+implication (both clauses). *Proof:* X03D-SPEC with `Λ ≤ 1/3` is (★) at `a = 0`, and a larger `a` only weakens (★). ∎ **Its hypothesis fails
+over every real field** (the real place, 3.3). So the planner's route is closed for FL-1 everywhere, not only at ℚ(√47).
+
+**The scenario (why no argument from these inputs alone can prove (★)).** Take `ξ` uniform on the circle `|ξ| = j₁,₁/(2π)` in the first
+complex place, `φ` a uniform phase, `v ∈ ℝ⁴` with `Σ v_j = 0`, `ε|v_j| ≤ 1/4`, and set `p(x) = (1/4)𝟙 + ε v cos(2π Re(ξ̄ x_{w₁}) + φ)`.
+- It is a stationary, rotation-invariant field of probability vectors indexed by `R`, and its spectrum lies on `A ⊆ E`.
+- With `δ = p − 1/4`: `E⟨δ(0), δ(u)⟩ = J₀(j₁,₁)·E|δ(0)|² = −0.4028·V`, `V = E|δ|²`.
+- If it were the `E`-projection of a four-colouring, then `P(c¹(0) = c²(u)) − P(c¹(0) ≠ c²(0))/3 = −(Λ − 1/3)V = −0.0694·V < 0`: (★) fails
+  at `a = 0`.
+- Meanwhile the joining's monochromatic rate is `1/4 − 0.4028·V > 0`, so A⁺'s conclusion holds.
+- It is not a colouring (`p` is far from the vertices), so T-C(A) does not touch it.
+- Its `E`-null complement would have normalised unit correlation `−1/3 + O(V)` above `−1/3`, so FL-2's hypothesis does not touch it either.
+
+Whether a field of this kind can be the `E`-projection of a proper four-colouring of ℚ(√47)'s plane is exactly the missing input. This is
+not a counterexample: a counterexample needs a four-colouring, and one would falsify the conjecture's five-clause at ℚ(√47) by itself. It
+shows that (★) needs an input about how a proper colouring's fractional `E`-projection can oscillate, which the listed inputs do not supply.
+The fractional side is where the real place's Hoffman value `0.2871 > 1/4` lives; `m₁ ≤ 0.2470` uses integrality (the set constraints of
+`[AmbrusEtAl2023]`) that a conditional expectation does not satisfy.
+
+### 3.5 FL-2, and what the consumer can be given instead
+
+**Lemma X03D-FL-12 [hand].** FL-1 ⟹ FL-2. *Proof:* if `X₄ ≠ ∅`, take `μ` (SP-Cor's amenability step). FL-1's `τ ≠ 0` has
+`τ̂(1) ≤ −τ(R̂)/3`, contradicting FL-2's hypothesis. So `χ ≥ 5`, and `χ ≤ 5` is row 84's. ∎
+
+**FL-2 without FL-1.** Under FL-2's hypothesis, every four-colouring would sit in the window of 3.4 (`σ̂_E(1) < −s_E/3`, because
+`ν̂(1) > −ν(R̂)/3` with `ν = τ + a·m` and `m̂(1) = 0`). Nothing listed excludes the window, so the implication is GAP at (★). FL-2's hypothesis is
+implied by MR (for `ν = a·m`, `ν̂(1) = 0 > −a/3`), so FL-2 would be a genuinely smaller consumer if (★) were supplied.
+
+**The only homogeneous consumer the spectral inputs support is SP's.** From 3.2–3.3, the normalised unit correlation of the `E`-null part obeys
+`κ(ν) := ν̂(1)/ν(R̂) ≤ (−1/3 + Λ s_E)/(1 − s_E)`. As `s_E → 1` this bound tends to `+∞`, so without control of `s_E` all that survives is A⁺'s
+`κ < 0`. "No `U`-invariant `E`-null `ν` has `κ(ν) < 0`" is equivalent to MR (J45's SP, both directions). So:
+- **Lemma X03D-FL-Q [hand].** If some `s* < 1/(3Λ) = 0.8276` bounds `s_E` for every rotation-invariant four-colouring over ℚ(√47) (a
+  *quantitative* T-C(A): the `E`-factor explains at most `s*` of the colouring's variance), then the consumer needs only "every non-zero
+  `U`-invariant `E`-null `ν` has `κ(ν) > κ* := (−1/3 + Λ s*)/(1 − s*)`", with `κ* ∈ (−1/3, 0)`. *Proof:* the displayed bound at `s_E ≤ s*`,
+  and `(−1/3 + Λs)/(1 − s)` increases in `s`. ∎
+- T-C(A) itself says only `s_E < 1` for each `μ` (`s_E = 1` iff `c` is `𝒜_∅`-measurable). A uniform `s* < 0.8276` would be its stability
+  form. It is open, and it is a statement about colourings, where the counting of R88-TC-count lives. The ratio margins are small
+  (`1/4 − 0.2470 ≈ 0.003` at the real place), so any such `s*` would be close to 1, and the gain over MR's threshold `0` small.
+
+### Would-have-searched-here log (stage 3)
+
+- Would have searched for a stationary proper four-colouring of a model Cayley graph (a product `X × Y`, `X` with ratio `< 1/4` and `Λ_X > 1/3`)
+  whose `X`-projection violates (★), as a relative counterexample. Instead: the scenario of 3.4, derived, with its status stated (not a
+  counterexample).
+- `tools/x03d_factor_minima.py` is an exact-shape evaluation of seconds checking a derived claim (four fixed primes and one Bessel zero), not a
+  search.
