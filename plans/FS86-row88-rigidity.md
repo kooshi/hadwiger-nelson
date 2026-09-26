@@ -364,7 +364,7 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 1. **The existence form.** Is there a four-colouring of ℚ(√59)'s plane (one `R`-coset) that is not a pullback from `P₄` — equivalently, is
    `(0, 4)` not forced — equivalently (row 78's `forces_iff_exists_finite`), is there no finite triangle-free unit-distance graph over ℚ(√59)
    forcing `(0, 4)`?
-2. **The structural form, about every four-colouring.** For every field `F` in S2, **is every closed `Aff_F`-invariant subset of `X₄(F)`
+2. **The structural form, about every four-colouring.** For every field `F` in S2 where row 88's frame holds, **is every closed `Aff_F`-invariant subset of `X₄(F)`
    contained in Pull, and every `Aff_F`-invariant probability measure on `X₄(F)` carried by Pull?** It splits (T-A) into **Q-μ** (the
    measures) and **Q-tr** (no *transient* colouring: none that is locally a pullback at Følner-almost every place without being one).
    *The class, and why the arithmetic cannot be stripped further:* with the arithmetic removed the answer is **no** — rank-one distance graphs
@@ -402,7 +402,8 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 
 ### S.1 The target statements (verbatim; J28D proves or refutes, J28V verifies blind)
 
-- **T-A (the decomposition).** "Let `F` be a real field in S2, and `X₄(F)`, Pull, `Aff_F`, `F_μ`, `F^tr_μ` as in §S.0. (i) Pull is finite,
+- **T-A (the decomposition).** "Let `F` be a type-(B) field, or any real field in S2 for which row 88's frame holds (`F(R) ∈ {0, P(R)}`,
+  `P(R) = R ∩ 𝔓⁴`, every periodic four-colouring a pullback), and `X₄(F)`, Pull, `Aff_F`, `F_μ`, `F^tr_μ` as in §S.0. (i) Pull is finite,
   closed and `Aff_F`-invariant. (ii) `F_μ(R)` and `F^tr_μ(R)` are ideals of `R`, each equal to `0` or to `P(R)`, and
   `F(R) ⊆ F^tr_μ(R) ⊆ F_μ(R) ⊆ P(R)`. (iii) `F_μ(R) ≠ 0` if and only if (Q-μ) every `Aff_F`-invariant Borel probability measure on `X₄(F)`
   is carried by Pull. (iv) `F(R) ≠ 0` if and only if (Q-μ) holds and (Q-tr) no colouring is transient. (v) A colouring
