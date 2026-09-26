@@ -225,3 +225,38 @@ the mixing inequality, never a ratio; (iii) the product edge set is weak approxi
 ### Would-have-searched-here log (stage 2)
 - Would have run a SAT/finder at 27 for `λ*`: not needed — 27 is only named as "possibly non-6-thick"; the spectrum at 27 (exact, seconds)
   is left to the close.
+
+## Stage 3 — SAVED (verdicts; committed before any fenced file is opened)
+
+| claim | verdict | grade | minds (mine) |
+|---|---|---|---|
+| C-LB | **TRUE** at every `k ≥ 2` (so 4, 5, 6), over every real number field with `N_k(F) = ∅` — wider than stated | [hand] | 1 |
+| C-CPUP | **TRUE** | [hand] | 1 |
+| C-635-PL | **TRUE** (usable 103, 107, 127, 163, 191, …, ramified 635087 stable; dyadic split) | [tools exact, 2 paths, 3 plants] | 1 |
+| C-635-THK | **TRUE**, `sup λ* = 0.192617` (exact at 103), not the stub's Weil 0.1952 | [tools + hand, given I-WEIL] | 1 |
+| C-635-F1 | **TRUE given MR(ℚ(√635087))** | [hand] | 1 |
+| C-635-TF | **TRUE given C-635-F1 and `χ(ℝ²) ≥ 6`** | [hand] | 1 |
+| C-dG-PL | **TRUE** (131, 479 below 600; ramified 3, 5, 7, 11 and 2 not stable) | [tools exact] | 1 |
+| C-131 | **TRUE**, 0.168047 < 0.17342 < 1/5 | [tools, float with error bound] | 1 |
+| C-dG-THK | **TRUE**, `sup λ* = 0.168047` | [tools + hand, given I-WEIL] | 1 |
+| C-MR16 | **NOT REACHED** | — | — |
+| C-dG-F1 | **TRUE given MR(`F_dG`)** | [hand] | 1 |
+| C-F1-GEN | stub text **MISSTATED** ("real field"; thickness's `k` unnamed); corrected form **TRUE** given MR(F): every real number field with `N₆(F) = ∅`; proposed scope **TRUE** | [hand] | 1 |
+| C-S | (a) **TRUE** (trivial for D-S; for S_nf given C-635-F1 or C-dG-F1); (b) **TRUE** given MR, over every real number field; (c) **GAP** at "finitely many local types" (infinitely many local fields per residue size; unbounded multiplicities); (d) **GAP** at Q-const for transcendence degree `≥ 1` | [hand] | 1 |
+| C-FMT | (a) **TRUE**; (b) **TRUE**; (c) **GAP** at continuity in probability of the Følner limit; (d) **GAP** (null-set step, not derived); (e) `χ ≤ χ_m ≤ χ_B ≤ 7`, `5 ≤ χ_m⁰ ≤ χ_m`; `χ_B` vs `χ_CP` is (c)'s GAP | [hand] | 1 |
+| C-CPM | **GAP** with no MR (the (c) step); **TRUE given C-635-F1** | [hand] | 1 |
+
+**The headline, as I now hold it:** given MR at the single real quadratic field ℚ(√635087), `χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²)`, and the
+load-bearing step needs none of T-J39-3's proofs: invariant measure, the `T + A` factor, a support selection, extension to the completion,
+weak approximation for the circle, and a mixing selection over the (infinite) compact stable product in the format of processes continuous in
+probability. Confidence: medium-high. **The two facts that would change it:** a defect in L3's use of a jointly measurable version inside a
+Bochner-integral law argument (I believe it sound), or R-U failing for the trace spectral measure (it needs only `U`-invariance, which
+rotation-invariance of `μ` gives).
+
+**Corrections proposed (the close decides):** the stub's C-635-THK number should read "exactly 0.192617 (Weil 0.1952)"; C-F1-GEN's text
+should read "every real number field `F` with `N₆(F) = ∅`"; C-S (c)'s "a finite family" should read "a family indexed by finitely many
+residue sizes, infinite as stated".
+
+**Stage 4 not started** (budget; the brief's stop rule). Nothing fenced has been opened after the slip logged in §1.1, so a resume can run
+stage 4 blind-clean: open `data/fs103/claims-sealed.md` (including the owner's added control), score it, then read the two fenced proofs of
+T-J39-3.
