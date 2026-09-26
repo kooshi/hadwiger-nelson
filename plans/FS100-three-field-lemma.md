@@ -1744,8 +1744,8 @@ class of every actual colouring obeys, place by place; the no-gos (B-3's density
   answered by a one-line monotonicity the close checked, and its thin inputs are named with the fields they touch; restricting would drop a
   true theorem to protect against a step that is not in dispute on its merits. X26B can only demote named classes, and a follow-on fold can
   record that.
-- **Confidence.** High on the named fields and the quadratic family (every link two derivations or more, bar EL2021 Thm 1.2, external). High
-  on totally real fields of class (i); medium on classes (ii)–(iv). What would change it: X26B or a later check finding a defect in CLS's
+- **Confidence.** High on the named fields and the quadratic family (every link two derivations or more, bar EL2021 Thm 1.2, external). After
+  X26B (stage 1d) high on every real number field, with one caveat named: MR's complex-place case has never been exercised on an instance. What would change it: X26B or a later check finding a defect in CLS's
   table, the dyadic Lemma P or the restriction; a defect in EL2021's use through (★) would take every value with it.
 
 **3.6 "Would have searched here", counted.** Across the seven wave-3 records: **fifteen lines, fourteen search moves and one deferred reading**
@@ -1799,14 +1799,14 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
 | FS100-FAM | row 123 | `χ(ℚ(√d)²) ≥ 5` on the family; `= 5` where `L = 5` (ℚ(√143), ℚ(√311), ℚ(√335)) | hand + tools exact, two blind | FS100-FAM | FS-101 (with COR) |
 | FS100-K0b | row 123 | K0 blind: T-C(A) at `S` ⟹ A⁺ at `S`; T-C(A)@∅ ⟹ SP-Cor, every real field | hand, two (one blind) | FS100-K0b | FS-101 |
 | FS100-167 | row 123 | `χ(ℚ(√167)²) ≥ 5` by two routes | hand + tools, two blind | FS100-167 | FS-101 |
-| FS100-CLS | row 123 | the class ⟺ no four-colourable stable target ⟺ `L(F) ≥ 5`, every real field | hand + tools exact, two blind but the dyadic Lemma P | FS100-CLS | FS-101 (finite parts) |
-| FS100-DLP | row 123 | the dyadic Lemma P; Lemma P over `𝔽_q` | hand, one + a from-statement re-derivation | FS100-DLP | declined |
+| FS100-CLS | row 123 | the class ⟺ no four-colourable stable target ⟺ `L(F) ≥ 5`, every real field | hand + tools exact, three derivations (two fully blind) | FS100-CLS | FS-101 (finite parts) |
+| FS100-DLP | row 123 | the dyadic Lemma P; Lemma P over `𝔽_q` | hand, two blind + a from-statement re-derivation | FS100-DLP | declined |
 | FS100-G27 | row 123 | `λ_min(Γ₂₇) = −8`; the level-one Hoffman table | tools exact / float with controls, two blind | FS100-G27 | declined |
 | FS100-TCA | row 123 | R88-TCA@∅ in every degree; `UD(ℝ²)^{×n}` ratio `m₁`; `r(G × H) ≤ max` | hand, two derivations (J28D, X25B) + two re-walks | FS100-TCA | FS-101 |
-| FS100-CX | row 123 | a complex place: restriction to the compact real form, ratio `m₁` | hand, two derivations, checked by the close | FS100-CX | FS-101 |
+| FS100-CX | row 123 | a complex place: restriction to the compact real form, ratio `m₁` | hand, three minds, two routes | FS100-CX | FS-101 |
 | FS100-SPC | row 123 | A⁺@∅ and SP-Cor on the class, every degree | hand, two blind | FS100-SPC | FS-101 |
-| FS100-EXC | row 123 | row 100's exception lies outside the class | hand, two blind | FS100-EXC | declined |
-| FS100-COR | row 123 | `χ(F²) ≥ min(L(F), 5)`; `= L(F)` for `L ≤ 5`, every real field | hand, two blind; graded by field class | FS100-COR | **FS-101 (X11K2's headline)** |
+| FS100-EXC | row 123 | row 100's exception lies outside the class | hand, three minds | FS100-EXC | declined |
+| FS100-COR | row 123 | `χ(F²) ≥ min(L(F), 5)`; `= L(F)` for `L ≤ 5`, every real field | hand, every link two derivations or more; MR's complex-place case unexercised | FS100-COR | **FS-101 (X11K2's headline)** |
 | FS100-Q35 | row 123 | `χ(ℚ(√3,√5)²) = 5` | hand + tools exact, two blind | FS100-Q35 | FS-101 (a corollary) |
 | FS100-D1 | row 123 | `N₄(F) = ∅` ⟹ the class | hand, two blind | FS100-D1 | declined |
 | FS100-CTL | row 123 | the class fails at K, ℚ(√2,√3), ℚ(√11), ℚ(√23); holds at ℚ(√47), ℚ(√3,√5), K(√5), K(√7) | hand + tools exact, two blind | FS100-CTL | declined |
