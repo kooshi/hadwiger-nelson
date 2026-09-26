@@ -53,3 +53,22 @@ decorrelated recheck (`data/fs61/owner/recheck-all.out`, a sha256 per file).
 
 
 **Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — every witness here is a *three-colour* refusal on a lattice, and FS-73 showed such a refusal is certified by an empty rotation set `Θ₃`: ℚ(√47)'s shape in 2,997 nodes (653 KB) against a ball's LRAT of tens of MB (T26), ℚ(√11)'s `Ld65c8ee8` in 20,843 nodes (T43), and **ℚ(√167) joins the input set** — `χ(ℚ(√167)²) ≥ 4` by `L21cc6506`'s empty `Θ₃` (T39; row 79), with a 36-vector minimal obstruction and a half-page proof (T41). The kernel route is FS-75 (`plans/STUB-three-colour-criterion-kernel.md`): one checker and one soundness theorem for every field, in place of one LRAT per field. Price the `Θ` route on ℚ(√23) against the `UDCert` route before choosing the shape.
+
+## What FS-75's minimal instance added (2026-09-26) — `Θ₃` certificates are one line each now
+
+*Re-aimed at FS-75's close (`plans/FS75-kernel-167.md` §R-close; `LEDGER.md` row 119, drafted).*
+
+1. **The consumer exists.** `ThetaPlane.four_le_chromaticNumber_of_cert` turns any certificate in V2's relation-branching format
+   (integer multipliers; `ThetaCert.Cert.check = true`) whose units satisfy `a² + d·b² + c² + d·e² = D²`, `ab + ce = 0` into
+   `χ(F²) ≥ 4` for every real field `F ∋ √d` — one line per field, as `Instances/SqrtOneSixSeven.lean` does for `d = 167`. The
+   `Θ` route of the provisional bearings above is therefore priced: 1,050 leaves checked in 12.2 CPU s at 5.5 GiB, against the
+   `UDCert` route's 32.8 s for ℚ(√11).
+2. **The emitter needs `(d, D)` first.** `tools/j52_intcert.py` (the exact integer scaling of V2's rational multipliers, with its Lean
+   literal emitter and six plants) is hard-wired to `d = 167`, `D = 420`.
+3. **The V2-format certificates on disk:** `data/fs73/verify-v2/Ld65c8ee8-empty.json.gz` over `d = 11` (54 units, 9,652 leaves — a
+   second kernel route to row 73's bound, not new) and `L21cc6506-empty.json.gz` (ℚ(√167)'s 60-vector control, 30,344 leaves; P-60,
+   whether it checks inside a 60 GB slot, was registered at 0.40 and not run). ℚ(√47)'s T26 tree is a `θ`-space tree and needs a
+   second checker. **For the other census fields no V2-format certificate exists**; producing one is a search (after 2026-10-01), and
+   FS-75's family theorem (row 82) would cover every `d ≡ 11 (mod 12)` at once.
+4. **What stays here:** the LRAT witnesses of FS-58 and FS-61 in their own format (13 fields), the upper halves (§3), and the choice
+   between one certificate type over `Adjoin d ℤ` and per-field `Θ` certificates — now a pricing question with both sides measured.

@@ -1,5 +1,22 @@
 # FS-75 — the three-colour criterion in the kernel, and `χ(ℚ(√167)²) ≥ 4` with it (stub)
 
+> **Minimal instance landed and closed, 2026-09-26** (FS-75's minimal instance; plan and close `plans/FS75-kernel-167.md`, its
+> §R-close first; kernel record `plans/FS75-K-kernel-167.md`; register `plans/FS75-derivation.md`; `LEDGER.md` row 119, drafted).
+> **`χ(ℚ(√167)²) ≥ 4` is in the kernel** — `four_le_chromaticNumber_planeOver_sqrt167`, standard three axioms, no native purchase, no
+> finite graph — from T41's 36-vector certificate (1,050 leaves, 12.2 CPU s). Three reusable pieces: `ThreeColour.nonempty_winding`
+> (the criterion's ⟹ in **winding form**: a colouring proper along `s` of any abelian group carries an additive `W` on the relation
+> lattice with `Σ_j min(r_j, 2r_j) ≤ 3W(r)`), `ThetaCert.Cert.isEmpty_winding` (V2's relation-branching format, integer multipliers)
+> and `ThetaPlane.four_le_chromaticNumber_of_cert` (any `d`, `D`, any real `F ∋ √d`). **What the shape below over-asked:** item 1's
+> averages, compactness and descent are needed only for the full criterion (the real point `θ`), never by a relation-branching
+> certificate; the "finite-box route" option is closed (the winding needs no limit). **Next (Kooshi's choice; a milestone of its
+> own):** the family theorem, row 82 (FS81-T1–T5), with `nonempty_winding` as its first input and, as its second, the real point
+> `x ∈ [1/3, 2/3]^m` with `r·x ∈ ℤ` on the lattice from a winding by finite LP duality (stated in this vocabulary at the plan's §M,
+> not proved); then S1 and no mixing (row 99), as re-aimed below. **ℚ(√47)'s T26 tree** is a `θ`-space tree (Coxeter's `certcheck.py`
+> format), not V2's: it needs a second checker. **Vocabulary for the next gate** (the close's gate, `plans/FS75-kernel-167.md` §R-close
+> stage 2): the winding is the circulation of an integer tension (Minty 1962; Tutte's flow–tension duality), the relation lattice is the
+> Heuberger matrix's (`[CervantesKrebs2023]`), the height is `[Chandgotia2017]`'s, the cocycle `[CGHO2025coh]`'s. **Price:** 4.5 h
+> planned, 45 minutes to a green gate; even the re-price from the first two leaves ran 2–3× high. Solver needs: none.
+
 **Re-aimed at FS-91's close.** The kernel target is S1 over every real number field (J02-T2's chain: J02-L1, L2, L3, L4(a) and a finite sumset) and no mixing (FS91-J09-J4, J09's proposal); every leaf is finite algebra plus one character-sum bound (Weil above 243, exact below), with FS81-T2 and FS73-T22's ⟹ as the named hand inputs. Fallback: a checker for ℚ(α,√7)'s prime data (FS91-J02-C1) and FS-81's census certificates.
 
 > **Re-aimed at FS-81's close (2026-09-24).** The target is now **T4 for the whole family**, not one field. FS-81 proved at [hand, two
@@ -97,3 +114,5 @@ certificate type that refuses colourings of an infinite graph by a polytope rath
 - `plans/FS91-S0FV-three-colours-blind.md` §3.5 — job J09's record, its re-aim of this stub
 - `data/crunch-2026-09-25/reports/J02.md`, `J09.md` — the job reports
 - `plans/FS91-close-inventory.md` rows 11, 117 — the re-aims
+- `plans/FS75-kernel-167.md` (J52's plan; §R-close, J54), `plans/FS75-K-kernel-167.md` (J52K), `plans/FS75-derivation.md`,
+  `plans/FS75-close-inventory.md` — FS-75's minimal instance, 2026-09-26

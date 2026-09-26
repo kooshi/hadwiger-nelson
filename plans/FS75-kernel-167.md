@@ -854,3 +854,148 @@ was searched and no certificate was produced. It is the cleanest instance of the
 the kernel's with no finite witness sought.
 
 **Would have searched here (stage 4):** none.
+
+### Stage 5 — SAVED (the drafts, and the two stub re-aims as files)
+
+#### 5a. `LEDGER.md` — a new row 119, not an update of row 79 (the decision, in four parts)
+
+- **The choice:** a new row, **119** (FS-100's close took 116–118), kernel grade, one paragraph, pointing to row 79 for the mathematics;
+  row 79's "Not claimed: … the kernel form (stub …)" becomes "the kernel form, which is row 119 (FS-75)".
+- **The alternative weighed:** update row 79 in place — add "[kernel]" to its ℚ(√167) clause and the Lean names to its address column.
+  That keeps one home for the fact `χ(ℚ(√167)²) ≥ 4` and adds no row.
+- **Why the new row won:** M2's rows 103–107 are the precedent for kernel ports (each a new row, the hand result's row left standing);
+  the new row carries facts row 79 does not — the winding form for any abelian group, the checker, the consumer for any `(d, D)`, the two
+  necessity results — which are reusable products, not a grade change; and row 79 is already 8,078 bytes, the longest in § A. The one-home
+  rule is kept by the pointer both ways: row 79 names row 119 for the kernel form, row 119 names row 79 for the bound.
+- **Confidence: medium-high.** What would change it: the owner reading "one home per fact" as forbidding a second row whose headline is
+  another row's fact; then the in-place update, with the three reusable pieces moved to row 79's address column.
+
+#### 5b. The claim list — one line, the owner's call (four parts)
+
+- **The choice:** add to `LEDGER.md`'s claim list (**Ours**) "the winding form of the three-colour criterion's ⟹ as a `Θ₃` certificate's
+  semantics, and the certificate's kernel checker (row 119)".
+- **The alternative:** add nothing — `CLAUDE.md` already keeps "every kernel certificate" among the kernel's holdings, and J52 claimed no
+  novelty for the winding form.
+- **Why the line:** the close's gate (stage 2) did not find the winding form stated, and M2 set the precedent of listing a kernel-side
+  form as ours ("prime inversion in valuation form, with no number field", row 105); the line says "as a certificate's semantics", which
+  is what is ours, not the lift, which is T42's.
+- **Confidence: medium.** It changes if the owner rules that a reformulation whose ingredients are classical (Minty, Chandgotia, CGHO)
+  is not a claim; then drop the draft (it is independent of the others).
+
+#### 5c. The drafts, machine-checked
+
+`data/fs75/j54/front_page_drafts.py` holds every draft as an (anchor, replacement) pair; it applies FS-100's drafts (J53's file, imported)
+first and asserts each of these anchors unique in the result. **Run:** exit 0, "RESULT: PASS" (`data/fs75/j54/front-page-drafts.out`):
+`CLAUDE.md` **+880 bytes net** (budget 1,500; with FS-100's +2,357 the file goes from 283,904 to about 287,141, under 300,000),
+`LEDGER.md` +2,319 (plus the seven § B lines of `data/fs75/j54/ledger-b-draft.md`, appended at § B's end), `plans/FRONTIER-STUBS.md` +731.
+Two `CLAUDE.md` anchors and two `LEDGER.md` anchors exist only after FS-100's drafts (Last updated, G79; row 118, the claim list), so
+**FS-100's drafts go first**. **Plant:** an anchor that does not exist, exit 1, "FAIL … (anchor found 0x)", "RESULT: FAIL"
+(`front-page-drafts-plant.out`). The drafts, as `--markdown` prints them (`data/fs75/j54/drafts.md`):
+
+##### CLAUDE.md
+
+- **What the kernel holds — FS-75 (row 119)** — replace `and Lemma NP (row 107);` with:
+
+  and Lemma NP (row 107); **FS-75** — `χ(ℚ(√167)²) ≥ 4`, the first field-level lower bound at an exposed field of the conjecture, with no finite graph: the criterion's ⟹ in winding form and a checker for `Θ₃` certificates (row 119);
+
+- **Open milestones — FS-75's minimal instance closed** — replace ``plans/FRONTIER-STUBS.md`'s closed list): row 88's question` with:
+
+  `plans/FRONTIER-STUBS.md`'s closed list): FS-75's minimal instance (row 119; `plans/FS75-derivation.md`; the stub re-aimed); row 88's question
+
+- **Last updated — FS-75's close (after FS-100's clause)** — replace `(`plans/FS100-three-field-lemma.md` §R-close).` with:
+
+  (`plans/FS100-three-field-lemma.md` §R-close). Then FS-75's minimal instance (row 119) — **Paid (kernel)** (`plans/FS75-kernel-167.md` §R-close).
+
+- **Paths forward — FS-75's row (rank 5; no rank moves)** — replace `S1 and no mixing in the kernel (row 99), with FS81-T2 and T22's ⟹ as the named hand inputs … | none; the falsification field's best bound from a checker's word to the kernel's |` with:
+
+  **minimal instance landed** (row 119: `χ(ℚ(√167)²) ≥ 4`); next the family theorem (row 82), the winding its first input; then S1 and no mixing (row 99) … | none; the falsification field's best bound is now the kernel's |
+
+- **Paths forward — FS-60's row** — replace `row 83's structural certificates are the per-field fallback) …` with:
+
+  row 83's structural certificates are the per-field fallback); V2-format `Θ₃` certificates are one line each through FS-75's consumer (row 119) …
+
+- **G79 — FS-75's record (after FS-100's)** — replace `row 116).*` with:
+
+  row 116); so did FS-75's kernel port (the winding every three-colouring carries, row 119).*
+
+- **What compute actually helps — the price instance** — replace `(`plans/M2-kernel-lane.md` §R-close 3e).` with:
+
+  (`plans/M2-kernel-lane.md` §R-close 3e). **FS-75 once more** (4.5 h planned, 45 minutes): even the re-price from the first two leaves ran 2–3× high, and the saving came from the obligation pass cutting the statement's analytic half, not from Mathlib (`plans/FS75-kernel-167.md` §R-close 4d).
+
+- **Trust ledger — the audit's count (inventory 33; the fact audit needs the reviewed transition ('1130','5') → ('1193','5'))** — replace `current audit reads 1130 clean and 5 declared purchases (and 11 axiom-free; 1,146 records at M2's close)` with:
+
+  current audit reads 1193 clean and 5 declared purchases (and 11 axiom-free; 1,209 records at FS-75's close)
+
+- **The gate — the vacuity counts (inventory 47)** — replace ``declarations=7051 refutations-skipped=304` with:
+
+  `declarations=7279 refutations-skipped=309
+
+##### LEDGER.md
+
+- **§ A — row 119 after row 118 (FS-100's last)** — insert after FS-100's row 118:
+
+  | 119 | **`χ(ℚ(√167)²) ≥ 4` in the kernel, with no finite graph: a proper three-colouring of any abelian Cayley graph carries a winding — an additive `W` on the relation lattice with `Σ_j min(r_j, 2r_j) ≤ 3W(r)` — and a passing relation-branching `Θ₃` certificate leaves none; T41's 36-vector certificate passes, so the plane over every real field holding `√167` needs four colours** (FS-75's minimal instance, 2026-09-26, J52 and J52K; `plans/FS75-kernel-167.md`, `plans/FS75-K-kernel-167.md`; register `plans/FS75-derivation.md` FS75-W, C, T, H). **[kernel; standard three axioms, no native purchase]** The winding is FS73-T42's forward lift read on words: steps in `{1, 2}`, path-independent by the square argument, `≡ 0 (mod 3)`, bounded below by the box — no averaging, compactness, duality, torsion-freeness or generation hypothesis, so the kernel never meets `θ` or the real point. The checker is V2's format with integer multipliers, sound by mutual structural recursion on the nested tree; its sign guard and the hypothesis `s j ≠ 0` are necessary (FS75-N1, N2). The consumer takes any `d`, `D` and any real `F ∋ √d`; `Sqrt167.cert_check` runs in 12.2 CPU s at 5.5 GiB. The conjecture's widest gap now has its lower end in the kernel (four proven, at least six predicted; G59). **Not claimed:** the criterion's ⟸ or its `θ` form; the 60-vector trees; ℚ(√47)'s `θ`-space tree (another checker); the family theorem (row 82). **Prior art:** the bound is row 79's (FS-73), the lift T42's; the winding form not found stated (FS-75's close, fourteen zbMATH queries) — its ingredients are Minty's integer tensions, `[Chandgotia2017]`'s heights and `[CGHO2025coh]`'s cocycles; the kernel forms ours. | `ThreeColour.lean`, `ThetaCert.lean`, `ThetaPlane.lean`, `Instances/SqrtOneSixSeven.lean` (+ `/Cert.lean`); `tools/j52_intcert.py`, `tools/j52k_plant.py` | FS-75 (crunch 2026-09-26) |
+
+- **row 79 — Not claimed: the kernel form is row 119** — replace `the kernel form (stub `plans/STUB-three-colour-criterion-kernel.md`)` with:
+
+  the kernel form, which is row 119 (FS-75)
+
+- **§ B — FS73-T22's kernel column** — replace ``plans/FS73-derivation.md` T22 | **stub** (`plans/STUB-three-colour-criterion-kernel.md`) |` with:
+
+  `plans/FS73-derivation.md` T22 | kernel for ⟹ in winding form (`ThreeColour.nonempty_winding_of_colorable`, row 119); ⟸ and the `θ` form stub (`plans/STUB-three-colour-criterion-kernel.md`) |
+
+- **§ B — FS73-T39's kernel column** — replace ``plans/FS73-derivation.md` T39 | **stub** (box-LP checker + T22's ⟹; `plans/STUB-three-colour-criterion-kernel.md`) |` with:
+
+  `plans/FS73-derivation.md` T39 | kernel for the field bound, through T41's sub-lattice (`four_le_chromaticNumber_planeOver_sqrt167`, row 119); the 60-vector trees not |
+
+- **§ B — FS73-T41's kernel column** — replace ``plans/FS73-derivation.md` T41 | with T39's stub (its smallest instance) |` with:
+
+  `plans/FS73-derivation.md` T41 | kernel: its 1,050-leaf certificate (`Sqrt167.cert_check`, row 119); the four-case hand proof not |
+
+- **§ B — FS73-T42's kernel column** — replace ``plans/FS73-derivation.md` T42 | with T39's stub |` with:
+
+  `plans/FS73-derivation.md` T42 | kernel, steps 1–3 without the averaging (`ThreeColour.nonempty_winding`, row 119) |
+
+- **the claim list — Ours (the owner's call; stage 5's decision 5b)** — replace `on its solenoid (row 118);` with:
+
+  on its solenoid (row 118); the winding form of the three-colour criterion's ⟹ as a `Θ₃` certificate's semantics, and the certificate's kernel checker (row 119);
+
+##### plans/FRONTIER-STUBS.md
+
+- **FS-75's row — the question cell (landed; next)** — replace `| **Re-aimed at FS-91's close:** S1 over every real number field` with:
+
+  | **Minimal instance landed 2026-09-26 (row 119; `plans/FS75-kernel-167.md` §R-close):** `χ(ℚ(√167)²) ≥ 4` in the kernel, no finite graph, by T22's ⟹ in winding form and a checker for V2's certificates; **next the family theorem (row 82)**, the winding its first input, then FS81-T2's inverse limit and C1(5)'s cells; ℚ(√47)'s `θ`-space tree needs a second checker. **Re-aimed at FS-91's close:** S1 over every real number field
+
+- **FS-75's row — the cost cell** — replace `| T22's ⟹ unpriced (price from its first two leaves); C1(5) a finite computation; the rest short |` with:
+
+  | T22's ⟹ in the kernel (winding form; 45 minutes against 4.5 h planned); FS81-T2's inverse limit next; C1(5) a finite computation; the rest short |
+
+- **FS-75's row — the status cell** — replace `| minted at FS-73's close; re-aimed at FS-81's close ; re-aimed at FS-91's close |` with:
+
+  | minted at FS-73's close; re-aimed at FS-81's close ; re-aimed at FS-91's close; minimal instance closed and re-aimed 2026-09-26 |
+
+- **FS-60's row — the question cell** — replace `the upper halves need the number-field residue step (FS-37/FS-47) |` with:
+
+  the upper halves need the number-field residue step (FS-37/FS-47). **Since FS-75's minimal instance (row 119)** every V2-format `Θ₃` certificate is one line through `ThetaPlane.four_le_chromaticNumber_of_cert`, once `tools/j52_intcert.py` takes `(d, D)` (`Ld65c8ee8` over `d = 11` first) |
+
+- **FS-60's row — the status cell** — replace `| minted 2026-09-17; input set grown by FS-61 |` with:
+
+  | minted 2026-09-17; input set grown by FS-61; re-aimed at FS-75's close |
+
+
+**Notes for the front-page job.** (1) The trust-ledger count needs `tools/claude_md_fact_audit.py`'s reviewed gate-count transition
+('1130', '5') → ('1193', '5') with the owner's gate log `build/gate/axioms/20260926T053431Z-866750.log` (inventory 33). (2) The vacuity
+counts may also stand in `scripts/vacuity-baseline.txt`'s header (inventory 47); that file is outside every crunch job's lane. (3) FS-46's
+stub (`plans/STUB-three-colour-classification.md`) could carry one line — "`ThreeColour`'s vocabulary is in the kernel (row 119)" — not
+drafted here (the brief's touch list).
+
+#### 5d. The stub re-aims, as files
+
+- `plans/STUB-three-colour-criterion-kernel.md` (FS-75): a banner above the FS-91 re-aim — the minimal instance landed; what the shape
+  over-asked (averages and compactness belong to the full criterion only; the finite-box option closed); next the family theorem (row 82)
+  with the winding and then the LP-duality real point as its inputs, Kooshi's choice; ℚ(√47)'s tree needs a second checker; the gate's
+  vocabulary for the next milestone; the price. One address line added to its "Where the 2026-09-25 work on this lives".
+- `plans/STUB-quadratic-witnesses-kernel.md` (FS-60): a section "What FS-75's minimal instance added" — the consumer; the emitter's
+  `(d, D)`; the two V2-format certificates on disk and that no other census field has one (producing one is a post-ban search); what stays.
+
+**Would have searched here (stage 5):** none.

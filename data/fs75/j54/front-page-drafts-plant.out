@@ -1,0 +1,32 @@
+CLAUDE.md (after FS-100's drafts):
+  ok    +222 B  What the kernel holds — FS-75 (row 119)  (anchor found 1x)
+  ok     +83 B  Open milestones — FS-75's minimal instance closed  (anchor found 1x)
+  ok    +102 B  Last updated — FS-75's close (after FS-100's clause)  (anchor found 1x)
+  ok     +49 B  Paths forward — FS-75's row (rank 5; no rank moves)  (anchor found 1x)
+  ok     +85 B  Paths forward — FS-60's row  (anchor found 1x)
+  ok     +81 B  G79 — FS-75's record (after FS-100's)  (anchor found 1x)
+  ok    +255 B  What compute actually helps — the price instance  (anchor found 1x)
+  ok      +3 B  Trust ledger — the audit's count (inventory 33; the fact audit needs the reviewed transition ('1130','5') → ('1193','5'))  (anchor found 1x)
+  ok      +0 B  The gate — the vacuity counts (inventory 47)  (anchor found 1x)
+  FAIL   -29 B  PLANT (an anchor that does not exist)  (anchor found 0x)
+CLAUDE.md: FS-75's net +880 bytes (budget 1500)
+  present before FS-100's drafts too: What the kernel holds=1, Open milestones=1, Last updated=0, Paths forward=1, Paths forward=1, G79=0, What compute actually helps=1, Trust ledger=1, The gate=1
+LEDGER.md (after FS-100's drafts):
+  ok   +1928 B  § A — row 119 after row 118 (FS-100's last)  (anchor found 1x)
+  ok     -27 B  row 79 — Not claimed: the kernel form is row 119  (anchor found 1x)
+  ok    +105 B  § B — FS73-T22's kernel column  (anchor found 1x)
+  ok     +49 B  § B — FS73-T39's kernel column  (anchor found 1x)
+  ok     +57 B  § B — FS73-T41's kernel column  (anchor found 1x)
+  ok     +68 B  § B — FS73-T42's kernel column  (anchor found 1x)
+  ok    +139 B  the claim list — Ours (the owner's call; stage 5's decision 5b)  (anchor found 1x)
+LEDGER.md: FS-75's net +2319 bytes
+  present before FS-100's drafts too: § A=0, row 79=1, § B=1, § B=1, § B=1, § B=1, the claim list=0
+plans/FRONTIER-STUBS.md (after FS-100's drafts):
+  ok    +380 B  FS-75's row — the question cell (landed; next)  (anchor found 1x)
+  ok     +50 B  FS-75's row — the cost cell  (anchor found 1x)
+  ok     +49 B  FS-75's row — the status cell  (anchor found 1x)
+  ok    +225 B  FS-60's row — the question cell  (anchor found 1x)
+  ok     +27 B  FS-60's row — the status cell  (anchor found 1x)
+plans/FRONTIER-STUBS.md: FS-75's net +731 bytes
+  present before FS-100's drafts too: FS-75's row=1, FS-75's row=1, FS-75's row=1, FS-60's row=1, FS-60's row=1
+RESULT: FAIL
