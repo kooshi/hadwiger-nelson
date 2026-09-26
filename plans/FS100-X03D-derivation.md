@@ -7,7 +7,9 @@ only this file, `data/fs100/x03d/`, `tools/x03d_*.py` and my report. Blind verif
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
-| (filled at each stage) | | | |
+| X03D-FR1 | for every real number field `F`, the `U`-orbits on `R` are exactly the fibres of `x ↦ x x̄`; a finite measure `τ` on `R̂` is `U`-invariant iff `τ̂` is constant on those fibres (FR-1 TRUE) | [hand] | §2.1 |
+| X03D-ED1 | for every real number field `F` and every sequence of finite non-empty `Y_N ⊆ U`: if every `χ ∉ E` has `(1/#Y_N) Σ_{u∈Y_N} χ(u) → 0`, then MR(F); so ED-1 is TRUE whenever `U_N` is finite, in particular for every totally real `F` | [hand] | §2.2 |
+| X03D-ED1-R | for `F` with a complex place (e.g. ℚ(∛2)), `U_1` is infinite (norm-one units, rank `r₂(F)`), so ED-1's average is undefined as written; with the archimedean places added to `H`, ED-1 holds with the same proof | [hand] | §2.2 |
 
 ## Stage 1 — SAVED (quotation check, claims copied, C0, the Bekka–Francini discharge)
 
@@ -72,7 +74,7 @@ component; `k`-points, not a ring).
 
 ### 1.4 C0 — probabilities before derivation
 
-Written at 06:03, after the reading above and a ten-minute mental sketch while reading (so not a pure prior; said so).
+Written at 05:55 (an earlier text said 06:03, a slip), after the reading above and a ten-minute mental sketch while reading (so not a pure prior; said so).
 
 | claim | P(TRUE as stated) | the step I expect to decide it |
 |---|---|---|
@@ -85,3 +87,49 @@ Written at 06:03, after the reading above and a ten-minute mental sketch while r
 ### 1.5 Would-have-searched-here log (stage 1)
 
 - None.
+
+## Stage 2 — SAVED (FR-1 and ED-1)
+
+**Verdicts. FR-1: TRUE** [hand], every real number field. **ED-1: TRUE** [hand] for every real number field where `U_N` is finite, which
+includes every totally real `F` (so ℚ, ℚ(√47), ℚ(√167), K); **ill-posed as written** when `F` has a complex place, where `U_1` is already
+infinite; true there too once `H` includes the archimedean places. The addendum's one-line proof ("dominated convergence, plus the fact that
+r^{-1}E ⊆ E for r ≠ 0") is the proof below.
+
+### 2.1 FR-1
+
+*Proof.* Conjugation `x ↦ x̄` is the non-trivial automorphism of `L/F`, and `U` is the set of all `u ∈ L` with `u ū = 1` (notation, verbatim:
+"the unit vectors (norm-one elements of `L/F`)"). (a) `R` is a ring containing `U`, so `U·x ⊆ R`, and `(ux)(ux)‾ = x x̄`: each orbit lies in a
+fibre. (b) Let `x, y ∈ R ∖ {0}` with `x x̄ = y ȳ`. In the field `L`, `u := y/x` satisfies `u ū = y ȳ/(x x̄) = 1`, so `u ∈ U` and `y = u x`: the
+fibre lies in one orbit. The fibre over `0` is `{0}`, since `x x̄ = 0` forces `x = 0` in a field. (c) For `u ∈ U`, the push-forward of `τ` under
+`χ ↦ u·χ` has Fourier coefficients `∫ (u·χ)(x) dτ = ∫ χ(ux) dτ = τ̂(ux)`. A finite measure on the compact group `R̂` is determined by its
+coefficients on the discrete group `R`, so `τ` is invariant under every `u` iff `τ̂(ux) = τ̂(x)` for all `u ∈ U`, `x ∈ R`, iff (by (a), (b))
+`τ̂(x) = τ̂(y)` whenever `x x̄ = y ȳ`. ∎
+
+*The Fourier form of MR, restated.* `τ̂(x) = φ(x x̄)` for a function `φ` on the norm set `{x x̄ : x ∈ R}`. So MR(F) says: every positive-definite
+function on the discrete group `R` that factors through the quadrance `x ↦ x x̄` and has an `E`-null spectral measure is `c·δ₀`. This is a
+Schoenberg-type statement (radial positive-definite functions), but on an `S`-arithmetic ring, not on a Euclidean space.
+
+### 2.2 ED-1
+
+**Lemma X03D-ED1 [hand].** Let `F` be a real number field and `(Y_N)` any sequence of finite non-empty subsets of `U`. If every `χ ∈ R̂ ∖ E`
+satisfies `A_N(χ) := (1/#Y_N) Σ_{u∈Y_N} χ(u) → 0`, then MR(F).
+*Proof.* Let `τ` be `U`-invariant, finite, positive, with `τ(E) = 0`, and fix `x ∈ R ∖ {0}`. By FR-1, `τ̂(ux) = τ̂(x)` for every `u ∈ U`, so
+`τ̂(x) = (1/#Y_N) Σ_{u∈Y_N} τ̂(ux) = ∫ A_N(x·χ) dτ(χ)`, where `(x·χ)(r) = χ(xr)`. J45's SP-if step (2) (`plans/FS84-SI-D-derivation.md` §4.2,
+verbatim: "**Off `E`:** if `χ(r₀·) ∈ E_S` then `χ ∈ E_S`") gives: `χ ∉ E ⟹ x·χ ∉ E`. So `A_N(x·χ) → 0` for `τ`-almost every `χ`, `|A_N| ≤ 1`, and
+`τ` is finite: by dominated convergence `τ̂(x) = 0`. Hence `τ̂ = τ(R̂)·δ₀ = τ(R̂)·m̂`, and `τ = τ(R̂)·m`. ∎
+
+**When `U_N` is finite.** For `u ∈ U`, `ū = u⁻¹`. If `F` is totally real, `L` is CM and conjugation is complex conjugation at every archimedean
+place, so `|u|_w = 1` at every archimedean `w`; then `H(u)` is the full multiplicative height, and Northcott gives `#U_N < ∞`; `1 ∈ U_N`.
+ED-1 is the lemma with `Y_N = U_N`.
+
+**When it is not (X03D-ED1-R).** If `F` has a complex place, the relative norm-one units `{ε ∈ O_L^× : ε ε̄ = 1}` have rank
+`rk O_L^× − rk O_F^× = (r₁(F) + 2r₂(F) − 1) − (r₁(F) + r₂(F) − 1) = r₂(F) ≥ 1`, and each has `H(ε) = 1` (a unit at every finite place). So
+`U_1` is infinite and `(1/#U_N) Σ` is undefined; ED-1 as written is ill-posed there (F = ℚ(∛2): `r₂ = 1`). Adding the archimedean places to
+`H` makes `U_N` finite (Northcott) and the lemma applies unchanged. This touches no field the project uses (all totally real so far).
+
+*Remark (the addendum's point, recorded).* ED-1's hypothesis is sufficient, not necessary: the lemma needs pointwise convergence for every
+`χ ∉ E`, while MR constrains only what an invariant measure can charge. Stage 4 makes this concrete over ℚ.
+
+### Would-have-searched-here log (stage 2)
+
+- None: both are short derivations.
