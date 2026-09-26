@@ -737,3 +737,11 @@ and J27V:**
 
 Row 9 (FS-67) takes the `CLAUDE.md` row above in its full form, **rank unchanged** (a re-rank is the front-page lane's). The stub file
 `plans/STUB-tight-product-colourings.md` is re-aimed in this stage (its new top section).
+
+### Stage 4 — SAVED (the inventory)
+
+`plans/FS67-close-inventory.md`: **29 rows, none open** — rows 1–22 ticked (20 done, 2 declined with the reason: row 16, a cosmetic
+correction in another job's brief; row 21, J40's next reading step, carried in FS67-W's field), rows 23–29 added (the owner's numbering
+ruling, the PB-feasibility correction, G61 (3)'s 11 half, the predictions, J42's own slips, J27's flagged web summary, and a note that rows
+11–22 — the owner's fold of J27V's and J40's reports — were uncommitted in the working tree and are committed with these ticks, unedited
+but for their status column). Every number in a tick was read from its source (`db.out`, `dc.out`, `fq9.out`, the records).
