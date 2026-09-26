@@ -5,7 +5,16 @@
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| X02V-1 | HX-1: every closed `U`-invariant subgroup of `R̂` is finite or `R̂` (closed invariant subgroups ↔ ideals of `R`) | hand | §2.1 |
+| X02V-2 | PE-1 is false: over `ℚ(√5)`, `Γ = ⟨(2+i)/√5, (5+12i)/13⟩` has `ℚ(Γ) = L`, its index-2 subgroup lies in `ℚ(i)`, the action on `M̂ = ℤ[Γ]^` is not totally irreducible, and `(m_{Y₁} + m_{Y₂})/2` is a `Γ`-ergodic, positive-entropy, non-Haar measure on it | hand + tools exact | §2.2; `tools/x02v_checks.py` C1 |
+| X02V-3 | PE-1′: with (★) `ℚ(Γ′) = L` for every finite-index `Γ′ ⊆ Γ`, EL2021 Thm 1.2 applies on `M̂` for every finitely generated `ℤ[Γ]`-module `M ⊆ R` with `ℚM = L` (Lemma TI); every non-torsion `u ∈ U` lies in such a `Γ ≅ ℤ²` (Lemma W); Haar measure has positive `u`-entropy (Lemma H) | hand | §2.2 |
+| X02V-4 | PE-2 (PE-lim): every `U`-invariant finite positive `τ` is `a·m + τ′` with `τ′` `U`-invariant of zero entropy for every `u`; equivalently PE-erg | hand, one mind; on EL2021 Thm 1.2 by statement | §2.3 |
+| X02V-5 | CE-1, strengthened: if every ergodic measure of a totally irreducible, not virtually cyclic `ℤ²`-solenoid action is Haar or finitely supported, then every `U`-invariant `τ` with `τ(T) = 0` is a multiple of `m` (so MR(F) for every real number field); via `⋂_k Z_{Γ_k} = T` | hand, one mind | §2.4 |
+| X02V-6 | FR-1: `U`-orbits on `R ∖ 0` are the fibres of `x ↦ xx̄`; `τ` is `U`-invariant iff `τ̂` is constant on them | hand | §2.5 |
+| X02V-7 | ED-1 for totally real `F` (and for any sequence of finite subsets of `U`); for `F` with a complex place `U_N` is infinite (rank `r₂(F)` of norm-one units), checked at `ℚ(∛2)` | hand + tools exact | §2.6; `tools/x02v_checks.py` C2 |
+| X02V-8 | Given X02V-4: MR(F) ⟺ every `U`-invariant, `E`-null finite positive `τ` with `h_τ(u) = 0` for every `u` is 0 (uses `m(E) = 0`: each `E_S` is a proper σ-compact subgroup of the connected `R̂`, Haar-null by Steinhaus) | hand | §3.2 |
 
 ## Stage 1 — SAVED
 
@@ -253,3 +262,48 @@ EF-G (b) is ill-posed there (`#U_N = ∞`). I have not seen X01's derivations; t
   subgroup inside a proper subfield) and wrote down one instance, checked exactly.
 - ED-1: would have searched units of several non-totally-real fields for a norm-one unit; instead derived the rank `r₂(F)` and checked
   one field's fundamental units exactly (a complete, derivation-fixed computation of seconds).
+
+## Stage 3 — SAVED
+
+*The write-up, committed before anything fenced was opened. Nothing fenced has been opened at this commit.*
+
+### 3.1 Verdicts
+
+| claim | verdict | the deciding step | C0 |
+|---|---|---|---|
+| **HX-1** | **TRUE** | duality: closed `U`-invariant subgroups ↔ ideals of `R`; non-zero ideals have finite index | 0.95 |
+| **PE-1** | **FALSE** as stated, with a counterexample (`F = ℚ(√5)`, `Γ = ⟨(2+i)/√5, (5+12i)/13⟩`, `M = ℤ[Γ]`): `ℚ(Γ) = L` does not give total irreducibility — the index-2 subgroup `⟨w², v⟩` lies in `ℚ(i)` — and on this `(M̂, Γ)` Thm 1.2's **conclusion** fails too (a `Γ`-ergodic, positive-entropy, non-Haar measure). **TRUE with (★)** (PE-1′), and (★)-groups exist through every non-torsion `u` | 0.15 |
+| **PE-2** | **TRUE** (hand, one mind), on EL2021 Thm 1.2 by statement, through PE-1′; the non-`Γ`-ergodic push-forwards handled by the `Γ`-ergodic decomposition, Jacobs, and a Haar-atom that is constant up the inverse system | 0.8 |
+| **CE-1** | **TRUE** (hand, one mind), and stronger: `T` may replace `E`. The step that needed care: one `Γ` sees only the finitely many split places `S_Γ`, so countably many `Γ_k` exhausting the split places are needed (`⋂_k Z_{Γ_k} = T`) | 0.75 |
+| **FR-1** | **TRUE** | `y/x ∈ U` whenever `xx̄ = yȳ`; Fourier uniqueness | 0.95 |
+| **ED-1** | **TRUE for totally real `F`**; **ill-posed at every real `F` with a complex place** (`U_N` infinite: the norm-one units have rank `r₂(F)`, all with `H = 1`; exact at `ℚ(∛2)`). The proof uses only that `U_N` is finite, and that `E` is carried onto itself by multiplication by `x ∈ R ∖ 0` | 0.6 |
+
+**C0 scored:** the two claims I put lowest were the ones with a defect (PE-1 false; ED-1 ill-posed off totally real fields); the four I put
+at 0.75–0.95 came out TRUE. The step named in C0 was the deciding step in every row.
+
+### 3.2 What the verdicts say about MR (for the close)
+
+- **PE-lim holds.** With X02V-4, row 118's "MR is its zero-entropy half plus an owed lemma PE-lim" is now "MR is its zero-entropy half"
+  (X02V-8): MR(F) ⟺ every `U`-invariant, `E`-null finite positive measure of zero entropy for every `u ∈ U` is 0.
+- **What MR is conditional on** (CE-1, X02V-5): the measure form of Furstenberg's ×2×3 question for totally irreducible, not virtually cyclic
+  `ℤ²`-actions on solenoids — only for the countably many `(M̂, Γ_k)` of §2.4, but those are ordinary such actions. So MR(F), for every real
+  number field at once, is no harder than that classical open question; nothing here says it is easier.
+- **Row 118's "EL2021 Thm 1.2 never applies"** stands for `R̂` itself and is untouched: the theorem applies to the finitely generated pieces
+  `M̂`, and only under (★), which the queue's PE-1 omitted.
+- **ED-1** is an averaging route to MR only over totally real `F`; the three wanted-poster fields (`ℚ(√47)`, `ℚ(√167)`, the type-(B) fields)
+  are totally real, so the restriction costs nothing there, but the notation's `H` must say so.
+
+### 3.3 Proposed edits (the front-page lane writes them)
+
+- **`LEDGER.md` row 118**, "Not claimed: PE-lim" → PE-lim proved (hand, one mind here; its derivation job's record to be compared), with
+  (★) named; "MR is its zero-entropy half" (X02V-8).
+- **`plans/CRUNCH-2026-09-26-x2x3-queue.md` §2 notation and every claim using `U_N`** (ED-1, ED-2, EF-G): add "`F` totally real", or put
+  the archimedean places into `H`. EF-G (a) as worded fails at `ℚ(∛2)`.
+- **`BIBLIOGRAPHY.md` `[EinsiedlerLindenstrauss2022]`**: its Thm 1.2 applies on the finitely generated pieces of `R̂` under (★) and there
+  gives PE-lim (X02V-4); reading unchanged (§1, pp. 1–3; re-read 2026-09-26 by X02V, including the definitions of solenoid, total
+  irreducibility and virtual cyclicity); §§2–9 unread.
+- **The brief's EL2021 path** `data/fs100/j51/el2021.pdf` does not exist (the library copy is the one read).
+
+### 3.4 Would-have-searched-here log (stage 3)
+
+- none.
