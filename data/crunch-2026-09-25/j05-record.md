@@ -94,3 +94,15 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
   holds for real quadratic fields" is superseded by item 10's "every real number field" (row 99) and is gone.
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **9** (was 12), exit 0. ALLOW lines: none.
 - Bytes: 290,478 → **288,586** (−1,892; total −7,827).
+
+## Stage 2, batch 4 — SAVED (C5, C9, table rows 16–36 second pass, items 4 and 10)
+
+- The exposed predictions have one home, the target paragraph (§ The mission (2)); item 10 keeps the proved range, the ℚ(√11)/ℚ(√23)
+  and ℚ(√47) facts and points there; the target's "(2)" points to item 10 for the proved range. Kooshi's quotation and (1), (3) untouched.
+- Item 4 points at G31 for the 1581's arity facts and Heule-510's kernel emptiness (G31 states both, with rows 43 and 66).
+- Grokkings intro: "each ends with what it makes you do and what would kill it (G67)" → "each ending in G67's form" (a `--dupes` run);
+  the FS-70 instance stays (its names G16/G32's, G40's are in no other corpus text — the first trial lost them and was reverted).
+- Table rows 16, 23, 29, 31, 34, 36: provenance and restated-bearing clauses dropped; each is in its `plans/FRONTIER-STUBS.md` row.
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0.
+  ALLOW lines: none.
+- Bytes: 288,586 → **287,833** (−753; total −8,580).
