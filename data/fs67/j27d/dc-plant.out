@@ -1,0 +1,26 @@
+A  identities: (F-e) rewrite residue 0; (e*-e0)(1+s)(k-1-s) - (1-(k-1)s) = 0
+A  k=3 lam=1/(k-1)-1/1000: e0=0.33244 e*=0.33422 descends=True e_40=4.848e-11
+A  k=3 lam=1/(k-1)+1/1000: e0=0.33422 e*=0.33244 descends=False e_40=3.342e-01
+A  k=4 lam=1/(k-1)-1/1000: e0=0.24888 e*=0.25056 descends=True e_40=2.392e-18
+A  k=4 lam=1/(k-1)+1/1000: e0=0.25112 e*=0.24944 descends=False e_40=2.511e-01
+A  k=5 lam=1/(k-1)-1/1000: e0=0.19872 e*=0.20043 descends=True e_40=1.402e-23
+A  k=5 lam=1/(k-1)+1/1000: e0=0.20128 e*=0.19957 descends=False e_40=2.013e-01
+A  k=8 lam=1/(k-1)-1/1000: e0=0.12347 e*=0.12525 descends=True e_40=7.767e-34
+A  k=8 lam=1/(k-1)+1/1000: e0=0.12653 e*=0.12474 descends=False e_40=1.265e-01
+B  p=  3 d=  2 lmin/d=       -0.5 l2/d=      -0.5 lam*=       0.5  k=3:nn k=4:nn k=5:nn
+B  p=  7 d=  6 lmin/d=-0.67481956 l2/d=0.11533691 lam*=0.67481956  k=3:nn k=4:nn k=5:nn
+B  p= 11 d= 10 lmin/d=-0.56265848 l2/d=0.37169527 lam*=0.56265848  k=3:nn k=4:nn k=5:nn
+B  p= 19 d= 18 lmin/d=-0.47839719 l2/d=0.30604471 lam*=0.47839719  k=3:YY k=4:nn k=5:nn
+B  p= 23 d= 22 lmin/d= -0.4238997 l2/d=0.27146228 lam*= 0.4238997  k=3:YY k=4:nn k=5:nn
+B  p= 31 d= 30 lmin/d=-0.42221702 l2/d=0.24572553 lam*=0.42221702  k=3:YY k=4:nn k=5:nn
+B  p= 43 d= 42 lmin/d=-0.33041503 l2/d=0.22539325 lam*=0.33041503  k=3:YY k=4:YY k=5:nn
+B  p= 47 d= 46 lmin/d=-0.31339405 l2/d=0.24488281 lam*=0.31339405  k=3:YY k=4:YY k=5:nn
+B  p= 59 d= 58 lmin/d=-0.29168236 l2/d=0.21590114 lam*=0.29168236  k=3:YY k=4:YY k=5:nn
+B  p= 67 d= 66 lmin/d=-0.25724354 l2/d=0.19839966 lam*=0.25724354  k=3:YY k=4:YY k=5:nn
+B  p= 71 d= 70 lmin/d=-0.23092867 l2/d=0.19814206 lam*=0.23092867  k=3:YY k=4:YY k=5:YY
+B  p= 79 d= 78 lmin/d=-0.24481542 l2/d=0.17709909 lam*=0.24481542  k=3:YY k=4:YY k=5:YY
+B  p= 83 d= 82 lmin/d=-0.23972406 l2/d=0.18692658 lam*=0.23972406  k=3:YY k=4:YY k=5:YY
+B  p=103 d=102 lmin/d=-0.21509684 l2/d=0.17042103 lam*=0.21509684  k=3:YY k=4:YY k=5:YY
+B  smallest |value - 1/(k-1)| over the table, p > 3: 0.0029183 (50-digit arithmetic; p = 3 at k = 3 is exact equality)
+B  control p=3 lmin/d = -1/2: True;  control p=31 lmin + d/3 = -2.66651 (G54: 1.5617e-4): False
+FAILED

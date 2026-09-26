@@ -110,8 +110,8 @@ Let `k ≥ 3`, `X` connected, `χ(X) > k` (so `X` has an edge and an odd cycle).
 ### DA-4 — TRUE [hand from `[Tardif2023]` Thm 1 (external, read here)]
 
 *First clause.* Fix `k ≥ 4`; `[Tardif2023]` Thm 1 with `n = k`, `m = k + 1` gives `X′, H′` with `χ(X′) ≥ k + 1`, `χ(H′) > k`, `χ(X′ × H′) ≤ k`. The
-paper's graphs are finite (they are built from finite exponential-graph pieces; the abstract's claim is about graphs, and its §2 proof builds
-finite ones — **[external]**, not re-derived here). A finite graph's chromatic number is attained on a component: take components `X ⊆ X′`,
+paper's graphs are finite — read in its §2: "Our graph G is Ωw (Km )", whose vertices are tuples of subsets of `V(K_m)`, and "Our graph H is
+the exponential graph KnG . Its vertices are the n|V (G)| functions" (**[external]**, the construction not re-derived here). A finite graph's chromatic number is attained on a component: take components `X ⊆ X′`,
 `H ⊆ H′` with `χ(X) = χ(X′)`, `χ(H) = χ(H′)`; `X × H ⊆ X′ × H′`, so `χ(X × H) ≤ k`. DA-3 (⟸ and (b), (c)): `G = K_k × X` is finite, connected,
 uniquely `k`-colourable, and FS67(G, k) fails (witness `H`). *Second clause.* Given finite `X′, H′` with `χ > k`, take max-`χ` components `X, H`;
 `K_k × X` is finite, connected, `k`-gap-free (DA-3); FS67 there and DA-3 (⟹, contrapositive) give `χ(X × H) > k`, hence `χ(X′ × H′) > k`. ∎
@@ -121,3 +121,76 @@ Tardif 2023 Thm 1 alone covers every `k ≥ 4` (its `n` is arbitrary `≥ 4`), s
 second clause is El-Zahar–Sauer's `H(3)` (true), so FS67 at `k = 3` survives this route — DB's question.
 
 *Theorems of this stage:* DA-1′, L1, DA-2′ with the characterisation, GL re-derived (FS67(K_k, k)), DA-3, DA-4 — [hand]; checks A–C [tools].
+
+## Stage 3 — SAVED (DC-1, DC-2, DC-3)
+
+### DC-1 — TRUE [hand, conditional on `[GodsilEtAl2020]` Results 1, 4 and §1.2, and `[GodsilRobersonRooney2017]` Thm 4.9 — external, read here]
+
+*The link.* `[GodsilRobersonRooney2017]` Thm 4.9's proof, for 1-walk-regular `r`-regular `G` with `τ = λ_min(A)`: the scaled least-eigenvalue
+framework satisfies "p̃ᵢᵀ p̃ᵢ = 1, for all i ∈ [n] and p̃ᵢᵀ p̃ⱼ = τ/r for all i ∼ j", and Cor. 4.10(i): "The assignment i ↦ √(n/d) pᵢ is an optimal
+strict vector coloring of G." So **`χv(G) = 1 − r/λ_min = 1 + r/|λ_min|` for 1-walk-regular `G`**, and `χv(G) = k` ⟺ `λ_min = −r/(k−1)` ⟺ `G` is
+Hoffman-tight at `k` (G54's sense). DC-1 is therefore: *1-walk-regular + Hoffman-tight at `k`* ⟹ the pullback property against every connected
+`H` with `χv(H) > k` — equivalently (Γ as `H`, arc-transitive) `|λ_min(H)|/d(H) < 1/(k−1)` when `H` is 1-walk-regular.
+
+*Proof.* Let `β` be a proper `k`-colouring of `G × H` (finite graphs, as in GRRSV). Send colour `j` to the vertex `s_j` of a regular simplex
+(`|s_j| = 1`, `⟨s_i, s_j⟩ = −1/(k−1)`, `i ≠ j`); `p(x, h) = s_{β(x,h)}` is a vector `k`-colouring of `G × H`. Result 1 gives `χv(G × H) = min(k,
+χv(H)) = k`, so `p` is optimal. `G` 1-walk-regular has a strictly complementary dual solution with strictly positive diagonal (GRRSV §1.2), `H` is
+connected and `χv(G) < χv(H)`: Result 4 says `p` is induced by `G`, i.e. its Gram entry at `(x, h)(x, h′)` depends only on `(x, x)`, hence equals
+the diagonal entry 1; unit vectors with inner product 1 coincide, so `s_{β(x,h)} = s_{β(x,h′)}` and `β(x, h) = β(x, h′)`. `H` has an edge
+(`χv(H) > k ≥ 2`), so `c = β(·, h₀)` is proper and `β = c ∘ π₁`. ∎ *Hypothesis use:* `χv(G) = k` for optimality; 1-walk-regular for Result 4's
+dual condition; `H` connected and `χv(H) > k` are Result 4's. **Reach:** `χv(H) ≤ χ_f(H)`, so DC-1 never sees the gap `χ_f(H) ≤ k < χ(H)`; and
+it needs no vertex-transitivity of `H`, unlike `[Zhang2012]` (i). For `G` not `k`-colourable the same proof says `χ(G × H) > k`.
+
+### DC-2 — TRUE at `τ_k = 1/(k−1)`, Pak–Vilenchik's threshold [hand; the algebra checked exactly]
+
+Let `H = Cay(A, T)`, `A` finite abelian, `T = −T ∌ 0`, `λ* = max_{χ ≠ 1} |Σ_{t∈T} χ(t)|/|T| < 1/(k−1)`; `G` `k`-gap-free (any cardinality). Let `β` be a
+proper `k`-colouring of `G × H` and `m_c(x) = |{a : β(x, a) = c}|/|A|` (the fibre measures; `Σ_c m_c(x) = 1`); `r(μ) = μ/(1 − μ)`.
+
+- **(M) Mixing.** For `S, S′ ⊆ A` of measures `μ, μ′`: `|P(a ∈ S, a + t ∈ S′) − μμ′| ≤ λ* √(μ(1−μ)μ′(1−μ′))` (`a` uniform in `A`, `t` in `T`). *Proof:*
+  Fourier expansion gives `P = Σ_χ f̂(χ) conj(ĝ(χ)) E_t conj(χ(t))`; the trivial character contributes `μμ′`, each other `|E_t χ(t)| ≤ λ*`; Cauchy–
+  Schwarz and Parseval (`Σ_{χ≠1} |f̂|² = μ − μ²`). For `x ∼ y` in `G` and a colour `c`, `S = β(x,·)⁻¹(c)` and `S′ = β(y,·)⁻¹(c)` have `P = 0`
+  (properness), so `μμ′ ≤ λ*√(μ(1−μ)μ′(1−μ′))`: **`r(m_c(x))·r(m_c(y)) ≤ λ*²`** when both are in `(0, 1)`, and `m_c(x) = 1 ⟹ m_c(y) = 0`.
+- **(P) Plurality is proper.** `φ(x) ∈ argmax_c m_c(x)` has `m_{φ(x)}(x) ≥ 1/k`, `r ≥ 1/(k−1)`; `x ∼ y` with `φ(x) = φ(y)` would give a product
+  `≥ 1/(k−1)² > λ*²`. So `φ` is a proper `k`-colouring of `G`, hence **gap-free** (the only use of the hypothesis on `G`).
+- **(B) Bootstrap.** Let `s = (k−1)λ*²` and let `e` bound `m_c(x)` for all `x` and all `c ≠ φ(x)`. For such `(x, c)`, gap-freedom gives `x_c ∈ N(x)` with
+  `φ(x_c) = c`. *Start:* `m_c(x_c) ≥ 1/k` gives `r(m_c(x)) ≤ s`, so `e₀ = s/(1+s)`. *Step:* `m_c(x_c) ≥ 1 − (k−1)e` gives `r(m_c(x)) ≤ λ*²(k−1)e/(1 −
+  (k−1)e)`, so `e ↦ F(e) = s e / (1 − (k−1−s)e)`. `F` is increasing, `F(e) < e` exactly on `(0, e*)` with `e* = (1−s)/(k−1−s)`, and
+  **`e* − e₀ = (1 − (k−1)s)/((1+s)(k−1−s))`, positive iff `λ* < 1/(k−1)`**. Then `e_n = Fⁿ(e₀)` decreases to the only fixed point of `F` below
+  `e*`, namely 0. So `m_c(x) = 0` for `c ≠ φ(x)`: on finite `A`, `β(x, a) = φ(x)` for every `a` — **`β = φ ∘ π₁`, pulled back.** ∎
+
+*"Connected" deleted:* the proof never uses connectivity of `G` (gap-freedom is local; the bootstrap bound is a supremum over all vertices), so
+DC-2 holds for every `k`-gap-free `G`, connected or not, finite or not; `H`'s connectivity, non-bipartiteness and `χ(H) > k` are consequences of
+`λ* < 1/(k−1)` (M with `S = S′` independent gives `α(H)/|A| ≤ λ*/(1+λ*) < 1/k`), not hypotheses. With `A` compact abelian and `β` measurable
+the conclusion holds almost everywhere on each fibre. *Checks* (`tools/crunch_j27d_dc.py` A, `data/fs67/j27d/dc.out`): both identities (the
+rewrite of `F(e) < e` and `e* − e₀`) reduce to 0 in sympy; exact rational iteration at `λ* = 1/(k−1) ∓ 1/1000`, `k = 3, 4, 5, 8`, descends below
+the threshold (`e₄₀ ≤ 5·10⁻¹¹`) and does not start above it (`e₀ > e*`) — the method's boundary is exactly the threshold.
+*Relation to print:* at `G = K_k` it is `[PakVilenchik2013]` Thm 3; J21-MX's plurality step is (P); GRRSV Result 4 needs a spectral condition on
+`G` and none on `H` beyond `χv(H) > k`, DC-2 the reverse — **no spectral or transitivity condition on `G`, only gap-freedom**. Not claimed new
+until a gate is run on "uniquely colourable graph × expander" (prior-art debt).
+
+### DC-3 — the residue planes as `H` [tools: 50-digit arithmetic, controls]
+
+`Γ_p = Cay(𝔽_p², {x² + y² = 1})`, `d = p + 1`, one character per norm class; `Y`/`n` = DC-1's hypothesis on `H` (`|λ_min|/d < 1/(k−1)`, i.e.
+`χv(Γ_p) > k`, Γ_p being arc-transitive hence 1-walk-regular) / DC-2's (`λ* < 1/(k−1)`). Source: `data/fs67/j27d/dc.out`.
+
+| `p` | `λ_min/d` | `λ₂/d` | `λ*` | `k = 3` | `k = 4` | `k = 5` |
+|---|---|---|---|---|---|---|
+| 3 | −0.5 (tight) | 0.25 | 0.5 | nn | nn | nn |
+| 7 | −0.56174 | 0.33650 | 0.56174 | nn | nn | nn |
+| 11 | −0.39965 | 0.47641 | 0.47641 | YY | nn | nn |
+| 19 | −0.38049 | 0.37544 | 0.38049 | YY | nn | nn |
+| 23 | −0.33170 | 0.32908 | 0.33170 | YY | YY | nn |
+| 31 | −0.333328 | 0.29287 | 0.333328 | YY | YY (margin 4.9·10⁻⁶) | nn |
+| 43 | −0.27187 | 0.26012 | 0.27187 | YY | YY | nn |
+| 47 | −0.26764 | 0.27597 | 0.27597 | YY | YY | nn |
+| 59–103 | | | ≤ 0.2486 | YY | YY | YY |
+
+(59, 67, 71, 79, 83, 103 rows in `dc.out`.) Smallest margin to a threshold, `p > 3`: `4.88·10⁻⁶` (31 at `k = 4`), far above the arithmetic's
+error. Controls: `λ_min/d = −1/2` at 3 exactly (G54's tight case) and `λ_min + d/3 = 1.5617·10⁻⁴` at 31 (G54's number). Plant (drop one antipodal
+pair from every circle): the 31 control fails — fires (`dc-plant.out`). **Reading of the table:** at every usable prime the two hypotheses
+coincide (the least eigenvalue dominates except at 11, 47, 67, 71, where `λ₂` does and both still hold); so for `k = 3` every `Γ_p`, `p ≥ 11`, is an
+`H` against which *every* `k`-gap-free `G` pulls back (DC-2) — `Γ₇` and `Γ₃` are in the gap regime (`χv(Γ₇) = 2.78 < 3 < χ(Γ₇) = 4`); at `k = 4`
+from 23; at `k = 5` from 59, which is where Hoffman already refuses five colours (G44).
+
+*Theorems of this stage:* the link `χv = 1 + r/|λ_min|` (GRR2017, quoted); DC-1 [hand, conditional]; (M), (P), (B) and DC-2 at `τ_k = 1/(k−1)`
+without connectivity [hand]; DC-3's table [tools].
