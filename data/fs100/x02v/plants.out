@@ -1,0 +1,36 @@
+== plant dep
+PASS C1 w norm one
+PASS C1 v norm one
+PASS C1 w^2 in Q(i)
+PASS C1 w^2 = (2+i)/(2-i)
+PASS C1 [Q(w):Q] = 4, so Q(w) = L
+   valuation matrix of (w^2, v) at (2+i, 3+2i): [[1, 0], [2, 0]]
+FAIL C1 w^2, v multiplicatively independent (det != 0)
+PASS C2 cbrt2: a fundamental unit gives a norm-one non-torsion u
+PASS C2 control sqrt2 (totally real): every eps/sigma(eps) torsion
+1 CHECK(S) FAILED: ['C1 w^2, v multiplicatively independent (det != 0)']
+exit=1
+== plant subfield
+PASS C1 w norm one
+PASS C1 v norm one
+PASS C1 w^2 in Q(i)
+FAIL C1 w^2 = (2+i)/(2-i)
+FAIL C1 [Q(w):Q] = 4, so Q(w) = L
+   valuation matrix of (w^2, v) at (2+i, 3+2i): [[2, 0], [0, 1]]
+PASS C1 w^2, v multiplicatively independent (det != 0)
+PASS C2 cbrt2: a fundamental unit gives a norm-one non-torsion u
+PASS C2 control sqrt2 (totally real): every eps/sigma(eps) torsion
+2 CHECK(S) FAILED: ['C1 w^2 = (2+i)/(2-i)', 'C1 [Q(w):Q] = 4, so Q(w) = L']
+exit=1
+== plant notnormone
+PASS C1 w norm one
+PASS C1 v norm one
+PASS C1 w^2 in Q(i)
+PASS C1 w^2 = (2+i)/(2-i)
+PASS C1 [Q(w):Q] = 4, so Q(w) = L
+   valuation matrix of (w^2, v) at (2+i, 3+2i): [[1, 0], [0, 1]]
+PASS C1 w^2, v multiplicatively independent (det != 0)
+FAIL C2 cbrt2: a fundamental unit gives a norm-one non-torsion u
+PASS C2 control sqrt2 (totally real): every eps/sigma(eps) torsion
+1 CHECK(S) FAILED: ['C2 cbrt2: a fundamental unit gives a norm-one non-torsion u']
+exit=1
