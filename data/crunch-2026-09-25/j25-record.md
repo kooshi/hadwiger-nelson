@@ -146,3 +146,18 @@ a re-run refuses, exit 1). No `wait`, `ready`, `run` or `HALTED` status is left 
 | score §5 by "met when it happened at p ≥ 0.5, or did not at p < 0.5", with the Brier score beside it | a Brier score alone | the brief asks "met or missed" per line; the Brier score keeps the probabilities' information the binary loses | high |
 | list FS-45's D3 among the post-ban stages | only the six the brief names | §2's own "Not queued" list names D3 as post-ban; leaving it out would drop a thread the queue already holds | medium — one line to remove if the owner's list was meant to be complete |
 | harness totals only from the reports' first lines, own counts in brackets | read the task notifications | the brief says "read from the reports"; the owner holds the notifications | high |
+
+## Stage 6 — SAVED (gates, final; the report)
+
+| gate | exit | verdict |
+|---|---|---|
+| `tools/claude_md_fact_audit.py --base 82dd14f8` | 0 | AUDIT PASSED (0 failures); **no ALLOW line added** (the tool untouched) |
+| `--dupes` | 0 | 13 repeated runs, 910 bytes — unchanged from launch |
+| `tools/bib_audit.py` | 0 | every cited work resolves |
+| `tools/fs71_ledger_b_check.py --strict` | 0 | PASS (714 entries, 714 § B rows) |
+| `tools/check_architecture.py` | 0 | PASS |
+
+`CLAUDE.md`: **296,569 bytes** — under the 300,000 default Kooshi re-decides after the crunch (ceiling 325,000 until then). No `[PROTECTED]`
+paragraph, status tag, *Do* line or killing test touched. No Lean file touched; no build run.
+
+Report: `data/crunch-2026-09-25/reports/J25.md`, sent to the owner by SendMessage.
