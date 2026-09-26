@@ -319,7 +319,44 @@ nor MR, nor the value at ℚ(√47), in print.
 
 **FS100-X28D-CUBE — cube roots are impotent exactly where `μ₃` is absent: for `E = F(∛m)` and a stable place `v` with `ζ₃ ∉ F_v`, some `w | v` has `f(w|v) = 1` and odd local degree, so `w`'s target is `v`'s; hence `L(F(∛m)) = L(F)` whenever some place attaining `L(F)` has `ζ₃ ∉ F_v` (residue `𝔽_q`, `q ≡ 2 mod 3`; `𝔽₃` without `ζ₃`; dyadic of odd residue degree), and then `χ(F(∛m)²) = χ(F²)` unconditionally when `L(F) ≤ 4` (row 99). [hand]** *Proof:* `plans/FS100-X28D-derivation.md` §3.2. *Proof verdict:* one mind (X28D); not reconciled at the close — X28D reported after X29C (`data/crunch-2026-09-26-x2x3/reports/X28D.md`). *Rests on it:* none recorded at the close. *Prior art:* standard local algebraic number theory; no gate run. *Kernel:* no decision recorded at the close (the owner's).
 
+## §5. Wave 3b (the ×2×3 crunch, 2026-09-26: TR-ROT and its flip)
+
+*Filed by X31C (de Bruijn, Opus 5.5) from `plans/FS100-X27D-derivation.md` (X27D) and `plans/FS100-X27V-verification.md` (X27V, blind through
+its stage 3, committed at `9feb1e73` before any fenced file; its stage 4 checked X27D's statements, §4.1). Reconciliation and the owner's rulings:
+the plan's §R-close (stage 5, wave 3b). Notation X27D §2 (X27V's `D` = `T₄`, its `4R` = `I`): `𝔓` the stable dyadic prime; `I = R ∩ 𝔓⁴`;
+`T₄ = I^⊥`, a finite group of characters; Pull the pullbacks of row 67's `P₄` through `R/I`; `M_T` the translation-invariant probabilities on
+the four-colourings; `M′ = {μ ∈ M_T : μ(Pull) = 0}`; `σ_μ` the tetrahedral trace spectral measure. "Given MR" = row 120, with X22D-QR = X22V-F2.
+Every entry: **Prior art:** not searched; home discipline homoclinic points of algebraic actions (`[LindSchmidt1999]`, reviews only, unread) —
+a prior-art debt. **Kernel:** declined (invariant random colourings and spectral measures on the dual of a non-finitely-generated ring; no
+entropy or such Haar theory in Mathlib).*
+
+**Wave 3b's result in one paragraph.** TR-ROT — row 124's one step — is **GAP**, and given MR it is not a step inside Q-μ but all of it
+(FS100-X27D-EQ). Given MR its spectral side is closed on `E`: every translation-invariant random four-colouring of a type-(B) plane gives
+`E ∖ T₄` no spectral mass (FS100-X27D-E), so T-C′'s (R1) is closed. What is left is one wall, named at two strengths: X27D's **NA₀**, "No nonzero
+finite positive `E`-null measure on `R̂` is `T₄`-attracted under `U`" (every `U`-Følner average of it converging onto `T₄`; X27D §2.6), pure
+dynamics of `U ↷ R̂`, sufficient; and X27V's **COL-E**, the same statement for the `E`-null remainders of colourings' spectra, exact given MR.
+The flip (TR-ROT-flip) is TRUE as worded only vacuously and, in the kind an averaging proof uses, equivalent to TR-ROT (FS100-X27D-FL); it is
+retired. Two routes to NA₀ / COL-E are closed: two-summand combinatorics (FS100-X27D-SIERP) and points-to-measures (FS100-X27V-PM).
+
+**FS100-X27D-EQ — Given MR, at a type-(B) field, TR-ROT ⟺ Q-μ ⟺ `M′ = ∅`: row 124's "one step" is the whole measure half; unconditionally Q-μ ⟹ TR-ROT. (= X27V-EQ.) [hand, two derivations, blind; from X22D-RT]** *Proof:* X27D §2.1; X27V §2.1. *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row EQ. *Rests on it:* FS-100's and FS-98's stub lines; row 126. *Prior art:* the header's. *Kernel:* declined (the header's reason).
+
+**FS100-X27D-E — Given MR, over ℚ(√59), ℚ(√83), ℚ(√131) every translation-invariant random four-colouring has `σ_μ|_E = σ_μ|_{T₄}`, i.e. `σ_μ(E ∖ T₄) = 0`: torsion and archimedean orbits are compact, `U`-invariant and miss `T₄` (X27D-TA), and a component at a split place goes to Haar along a Følner sequence shifted in the hyperbolic direction, by Ramanujan vanishing on `O_v^×` (X27D-SPL). Corollary (X27V-R1; X27D's corollary likewise): a translation-invariant `μ` whose spectrum is carried by `E` is a.s. a pullback — T-C′'s (R1), FS-97's first half, closed given MR; Theorem C's conclusion for spectra carried by all of `E`, not one `E_S`. (= X27V-TA + X27V-FS.) [hand, two derivations, blind (owner's ruling); given MR and X22D-QR; weak approximation for `x² + y² = 1`]** *Proof:* X27D §2.2–§2.5 (with X27D-L0, X27D-PC); X27V §2.2, and its stage 4 re-derived SPL's product-of-local-means step (§4.1). *Tools:* `tools/x27d_ramanujan.py` (the local vanishing in a finite model, 19,722 instances; plant = the unit set enlarged by 0, goes RED, exit 1, watched). *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row E. *Rests on it:* row 126; `plans/R88-derivation.md` §G, T-C′'s (R1); NA₀'s formulation (FS100-X27D-ATT). Shared inputs, and so shared risks: X22D-QR = X22V-F2 and weak approximation. *Prior art:* the header's. *Kernel:* declined (the header's reason).
+
+**FS100-X27D-ATT — The shape of a counterexample, given MR: if `μ ∈ M′` exists over a type-(B) field, then (S1) `σ_μ = σ_μ|_{T₄} + ρ₀` with `ρ₀ = σ_μ|_{R̂∖E}` `E`-null, of mass `δ = 1 − σ_μ(T₄) > 0`, and Haar-singular; (S2) `ρ₀` is `T₄`-attracted along every `U`-Følner sequence; (S3) the conditional colour law given `𝒜_E` is `I`-periodic (a random proper colouring over a Pull-shaped fog); (S4) `f(z) = P_μ(c(0) ≠ c(z))` on `I` is subadditive, symmetric, not zero, and of upper Banach density 0 above every `ε` on every rotation circle. [hand, one mind; (S1)–(S2) matched blind by X27V-R2; Haar-singularity and (S3) re-derived by X27V from the statements]** *Proof:* X27D §2.6, §3.1; X27V §2.3 (COL-E: given MR, Q-μ ⟺ TR-ROT ⟺ no translation-invariant `μ` charges `R̂ ∖ E`), §4.1. *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row ATT. *Rests on it:* NA₀ and COL-E as named steps (§G); the stub lines. *Prior art:* the header's; (S4)'s "attracted in density" is homoclinicity weakened to density, unsearched. *Kernel:* declined (the header's reason).
+
+**FS100-X27D-FL — TR-ROT-flip. As worded ("invariant under translation, continuous under weak-* limits, zero on Pull and positive whenever `μ(Pull) = 0`") it is TRUE with a trivial witness — X27D's affine, weak-* continuous window-defect series `Σ_k 2^{−k} μ{c|_{B_k} ∉ Pull|_{B_k}}`, X27V's `d(μ, P_Pull)` — which is not rotation-invariant and proves nothing; in the kind an averaging proof uses (concave, in particular affine, `U`-invariant, upper semicontinuous, `≥ 0`, vanishing on the Pull-measures), given MR every such quantity vanishes on all of `M_T`, so one witnesses the flip iff `M′ = ∅`, and without MR its existence proves TR-ROT. The canonical quantity `Φ₀(μ) = σ_μ(R̂ ∖ T₄)` has every property but continuity (lower semicontinuous only), and given MR it is continuous iff Q-μ (X27V-F3); no quantity reading the spectrum only through `E ∖ T₄` separates (X27V-F4). (= X27V-F1, F2.) [hand, two derivations, blind]** *Proof:* X27D §3.2; X27V §2.4. *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row FL; the flip is retired as equivalent to TR-ROT (owner's ruling). *Rests on it:* the retirement; G21's instance (the flip as posed dropped X22V §2.2's "affine, `U`-invariant"). *Prior art:* the header's. *Kernel:* declined (the header's reason).
+
+**FS100-X27D-SIERP — The two-summand combinatorial route to NA₀ is false: circle-density 1 plus subadditivity does not give `G + G = I` — a countable Sierpiński decomposition gives, for each `z ≠ 0`, a set co-finite on every rotation circle with `z ∉ G + G`; a proof of NA₀ must use three or more summands, positive-definiteness, or the arithmetic of `U ↷ R̂`. [hand, one mind]** *Proof:* X27D Stage 4. *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row SIERP (not checked by X27V, whose stage 4 read X27D's stage-2 statements). *Rests on it:* the stub lines (which routes to NA₀ are closed). *Prior art:* the header's; Sierpiński's decomposition is classical. *Kernel:* declined (the header's reason).
+
+**FS100-X27V-PM — Points to measures fails for abstract actions: in `{0,1}^ℤ` a measure can collapse onto `δ₀` along every averaging scheme while each of its points has a thick bad set (bad blocks at point-dependent places), so "no single character collapses" does not yield COL-E; an argument must use the group structure of `R̂` or the colouring. [hand, one mind; a standard shape]** *Proof:* X27V §3.2; the single-character case is itself open (X27V §4.2's correction: rows 95, 98 are band rigidity, and a homoclinic point of a hyperbolic toral automorphism is attracted to 0 along every Følner sequence of `ℤ`). *Proof verdict:* the plan's §R-close (stage 5, wave 3b) 1, row PM. *Rests on it:* the stub lines (the pointwise route to COL-E is closed). *Prior art:* the header's; a standard shape, not a statement about `R̂`. *Kernel:* declined (the header's reason).
+
 ## §G. Stated and not proved (no truth claims; not entries)
+
+- **NA₀** (X27D §2.6, verbatim): "No nonzero finite positive `E`-null measure on `R̂` is `T₄`-attracted under `U`" (every `U`-Følner average
+  of it converging onto `T₄`). Given MR, NA₀ ⟹ TR-ROT ⟺ Q-μ; the converse is not claimed. Pure dynamics of `U ↷ R̂`. The single-character case
+  is open too (FS100-X27V-PM's note).
+- **COL-E** (X27V §2.3, verbatim): "No non-zero `E`-null part `τ_μ = σ_μ|_{R̂∖E}` of the spectral measure of a translation-invariant random
+  four-colouring has its `U`-averages converge onto `D` along every averaging scheme." NA₀ ⟹ COL-E; given MR, COL-E ⟺ Q-μ ⟺ TR-ROT.
 
 - **KS-1_E / KS-sat_E** (J51D §M.1): KS-1 and KS-sat with `Γ ∩ E` in place of `Γ ∩ (T + A)` — the corrected Kronecker selection. KS-2 reduces
   KS-1_E to KS-sat_E; FS100-R reduces KS-sat_E to a density statement stopped at a named step. At ℚ(√47) it is FS100-EQ's X.
@@ -332,6 +369,9 @@ nor MR, nor the value at ℚ(√47), in print.
   §R-close stage 2).
 
 ## §K. Kernel decisions, summarised
+
+**Wave 3b (§5):** all six entries declined (invariant random colourings and spectral measures on the dual of a non-finitely-generated ring;
+no entropy or such Haar theory in Mathlib).
 
 **Wave 3 (§4):** FS100-COR is **X11K2's re-aimed lane** (Kooshi, 06:5x: the Lean target moves to the "every real" claim — given MR, `χ(F²) ≥ min(L(F), 5)` for every real number field — with ℚ(√47) and ℚ(√3,√5) as corollaries); FS100-FAM, K0b, 167, SPC, TCA, CX, Q35 ride with it; FS100-CLS's finite parts (the Hoffman table, Weil's threshold, the `q`-list) are the lane's to decide; everything else declined (CP colourings, invariant random colourings, towers).
 
