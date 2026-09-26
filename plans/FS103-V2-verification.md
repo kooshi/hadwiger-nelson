@@ -56,3 +56,114 @@ No subagents; no finite-witness search; I touch only this file, `data/fs103/fs10
 
 ### 1.4 Would-have-searched-here log
 - None yet: the place lists are exact PARI of seconds (allowed), not a search.
+
+## Stage 2a — SAVED (the headline field's places; the load-bearing step C-LB)
+
+### 2.1 Places and level-one spectra (C-635-PL, C-dG-PL, C-131; exact, `tools/fs103_v2_places.py`, output `data/fs103/fs103-v2/`)
+
+- **Stable, odd `p`:** `v` is stable iff `i ∉ F_v` iff the residue field `𝔽_q` of `F_v` has `q ≡ 3 (mod 4)` (Hensel; `ℚ_p(i)/ℚ_p` is
+  unramified, so ramification of `F_v/ℚ_p` does not matter). Path A: PARI `idealprimedec`, `q = p^f`. Path B (unramified `p`): Frobenius
+  order from Legendre symbols. They agree on every unramified prime below the bound.
+- **ℚ(√635087)** (bound 1000): 635087 prime, `≡ 7 (mod 8)`; all 13 primes `p ≡ 3 (mod 4)` below 103 inert (residue `𝔽_{p²}`, not stable);
+  stable places over 42 primes below 1000, first **103, 107, 127, 163, 191**, 211, 239, 263, 271, 311 (each split, two places); the
+  ramified 635087 (residue `𝔽_{635087}`, `≡ 3 (mod 4)`) is stable. Dyadic: one prime of `F` (`e = 2, f = 1`), two of `L` above it:
+  **split** in `L/F`, not stable (the wall is broken); no ramified stable dyadic place, so `R = O′` (I-C′). C-635-PL: **TRUE**.
+- **`F_dG`** (bound 600): stable places over **131 and 479 only** (16 places each, `f = 1`); above 3, 5, 7, 11: four places each with
+  `e = f = 2`, residue fields of 9, 25, 49, 121 elements, all `≡ 1 (mod 4)`: **not stable**; the four dyadic places (`e = f = 2`) each
+  split into two in `L`: not stable. C-dG-PL: **TRUE** (no stable place above a prime below 131).
+- **Level one** (float64; each value a sum of `q + 1` cosines, error < 1e-12): `max|λ|/(q+1)` = **0.192617** at 103 (Weil 0.195171),
+  **0.168047** at 131 (Weil 0.173417). C-131: **TRUE** (0.168047 < 0.17342 < 1/5). Smaller primes, for the controls:
+  `data/fs103/fs103-v2/level-one-ratios.out` (3: 0.5, 7: 0.561745, 11: 0.476413, 19: 0.380486, 23: 0.331695, 31: 0.333328, 43: 0.271869,
+  47: 0.275974, 59: 0.248626, 67: 0.221976, 71: 0.220416, 79: 0.213774, 83: 0.210818) — 7 and 23 agree with G60's independently recorded
+  −0.5617 and −0.3317.
+- **Plants** (each exits 1 for its own reason): `legendre-flip` → paths A and B disagree, B listing 3, 7, 11, …; `wrong-torus` (`μ_{q−1}`)
+  → ratio 1.000000 (the split torus lies on a line a character kills), "exceeds Weil"; `stable-mod` (`p ≡ 1 (4)` stable) → path A lists
+  3, 5, 7, … and disagrees with B.
+
+### 2.2 V2-NL: new levels at an odd stable place are at most `2/(q+1)` [hand, one mind]
+
+`F_v` with residue field `𝔽_q`, `q ≡ 3 (4)`, any ramification `e`; `L_w = F_v(i)` unramified, residue `𝔽_{q²}`; `π` a uniformiser of `F_v`
+(conjugation-fixed). Let `ξ` be a character of `O_w` trivial on `𝔓^j`, not on `𝔓^{j−1}`, `j ≥ 2`. Cosets of `T′ = T_w ∩ (1 + 𝔓^{j−1})` in
+`T_w`: for `δ ∈ 𝔓^{j−1}`, `N(1 + δ) ≡ 1 + δ + δ̄ (mod 𝔓^j)` (as `2j − 2 ≥ j`), so `T′` mod `𝔓^j` is `{1 + π^{j−1}x : x + x^q = 0}`, an
+`𝔽_q`-line `ℓ ⊂ 𝔽_{q²}`, every point lifting to `T_w` (the torus is smooth). On the coset `t₀T′`, `ξ(t₀(1 + π^{j−1}x)) = ξ(t₀)ξ(t₀π^{j−1}x)`,
+and `x ↦ ξ(t₀π^{j−1}x)` is a non-trivial additive character of `𝔽_{q²}` restricted to `t̄₀ℓ` (bar = reduction): its sum over the line is
+`q` or `0`, and it is `q` for exactly one line through 0 (a non-trivial `ψ(Tr_{q²/p}(a·))` kills the line `𝔽_q z` iff `Tr_{q²/q}(az) = 0`).
+`t̄₀ ∈ μ_{q+1}` and `t̄₀ℓ = t̄₁ℓ` iff `t̄₀/t̄₁ ∈ 𝔽_q^× ∩ μ_{q+1} = {±1}`; so exactly 2 of the `q + 1` residues `t̄₀` give a non-zero coset sum,
+and Haar measure is uniform over cosets: `|ν̂_w(ξ)| ≤ 2/(q+1)`. ∎ (Agrees with I-WEIL's second half; dyadic inert towers not re-derived.)
+
+### 2.3 C-LB, derived blind [hand, one mind]
+
+**Setting.** `F` a real number field (not assumed totally real), `L, U, R, R̂, E, T, A` as D-RUL/D-TAE; `k ≥ 2`; `N_k(F) = ∅` under
+D-THK (c) with the Haar `ν_w`. **Step 0.** A ramified stable dyadic place has `λ* = 1` (every `t ∈ T_w` is `≡ 1 (mod 𝔓_w)`, since
+`t̄ ≡ t` and `t² ≡ 1` in characteristic 2; a level-one character with `ξ(1) = −1` gives `ν̂_w(ξ) = −1`), so `N_k = ∅` puts `F` outside row
+100's exception and `R = O′` (I-C′). Also `λ* := sup_v λ*_v < 1/(k−1)`: each term is, finitely many places have residue size below any
+`Q₀`, and above it `λ*_v ≤ 2√q/(q+1)` (I-WEIL level one, V2-NL deeper) tends to 0.
+
+**Step 1.** If `F²` is `k`-colourable, so is `Cay(R, U)`; its colourings `X_k` form a non-empty compact space on which the countable
+solvable group `R ⋊ U` acts; take an invariant probability `μ`. Let `σ` be the trace spectral measure of `g(x) = e_{c(x)}` (D-TAE):
+`σ(R̂) = 1`, `σ̂(u) = −1/(k−1)` for every `u ∈ U` (properness), and `v_*σ = σ` for `v ∈ U` (rotation invariance).
+
+**L1 (the `T + A` factor).** `G := R̂_prof × (L ⊗ ℝ)`, `R ↪ G` diagonal. (a) `R̂_prof = ∏_{stable} O_w` (`R/nR ≅ ∏_{stable 𝔓|n} O/𝔓^{v_𝔓(n)}`
+as `R = O′`). (b) `R` is dense in `G`: strong approximation for `G_a` off one split prime `𝔔` gives `x ∈ L` integral at every finite place
+`≠ 𝔔` and close to any target at finitely many stable and all archimedean places, and such `x` lies in `O′ = R`. (c) The `τ_G`-continuous
+characters of `R` are exactly `T + A` (restrictions of `Ĝ = (R̂_prof)^ × (L⊗ℝ)^`, injective by density). (d) `H := {f ∈ L²(μ) : y ↦ V_y f` is
+`τ_G`-continuous`}` is the spectral subspace of `T + A`: ⟸ by dominated convergence; ⟹ because `y ↦ ⟨V_y f, f⟩` is then uniformly continuous
+positive definite on `R`, extends to `G`, and Bochner on `G` plus uniqueness on `R̂` puts `σ_f` on the image of `Ĝ`. (e) `H = L²(𝒜)` for a
+translation-invariant σ-algebra `𝒜`: `H` is closed, conjugation-closed, contains constants, and `‖V_y φ(f) − φ(f)‖ ≤ Lip(φ)‖V_y f − f‖` makes
+it closed under Lipschitz maps and bounded products; so `𝒜 = {A : 1_A ∈ H}` is a σ-algebra and every `f ∈ H` is `𝒜`-measurable. (This is
+J45-N1/N2 at `S = ∅`, re-derived.)
+
+**Step 2 (the dichotomy).** `p_j(x) = P(c(x) = j | 𝒜)`, `h(x) = Σ p_j(x)e_j = E[g(x)|𝒜]`, the spectral projection of `g(x)` onto `T + A`.
+For `u ∈ U`: `∫_{T+A} χ(u) dσ = E⟨h(0), h(u)⟩ = (k/(k−1))·E Σ_j p_j(0)p_j(u) − 1/(k−1)`, hence
+`∫_{R̂∖(T+A)} χ(u) dσ = −(k/(k−1))·E Σ_j p_j(0)p_j(u) ≤ 0`, the same number for every `u` (`σ` and `T + A` are `U`-invariant). Put
+`τ := σ|_{R̂∖(T+A)}`: finite, positive, `U`-invariant, and `τ(E) = σ(E ∖ (T+A)) = 0` by R-U (`σ` is `U`-invariant).
+- If `E Σ_j p_j(0)p_j(1) > 0`: `∫ Re χ(1) dτ < 0` — **(B)**.
+- If it is 0: then for every `x ∈ R`, `u ∈ U` (stationarity) a.s. `supp p(x) ∩ supp p(x+u) = ∅`; `c′(x) := min supp p(x)` is an
+  `𝒜`-measurable, translation-equivariant, a.s. proper `k`-colouring of `Cay(R, U)`, and the spectral measure `σ′` of `e_{c′(0)}` is carried
+  by `T + A` (its coordinates lie in `H`). Go to L2.
+
+**L2 (extension; V2-MV).** `P(c′(0) ≠ c′(y)) = ((k−1)/k)∫(1 − Re χ(y)) dσ′ → 0` as `y → 0` in `τ_G` (L1 (c), dominated convergence), so by
+stationarity `c′` is uniformly continuous in probability and extends (limits in probability along `x_n → g`) to `c̃` on `G`: stationary,
+continuous in probability, and `P(c̃(g) = c̃(g + w)) = 0` for every `g ∈ G`, `w ∈ T_G := cl_G(U)` (approximate by `x_n → g`, `u_n → w`).
+*Measurable version:* with an invariant metric `d` on `G` and a dense `{d_i}`, pick `δ_n` with `P(c̃(0) ≠ c̃(z)) < 2^{−n}` for `d(z, 0) < δ_n`,
+set `c_n(g) = c̃(d_{i_n(g)})`, `i_n(g)` the least `i` with `d(g, d_i) < δ_n`; `c_n` is jointly measurable, `P(c_n(g) ≠ c̃(g)) < 2^{−n}`, so
+(Borel–Cantelli) the eventual value `c̄` (0 if none) is jointly measurable and `c̄(g) = c̃(g)` a.s. for every `g`. This works for every
+second-countable LCA Cayley graph — **C-FMT (a)**.
+
+**L-WA (the edge set is a product).** The circle `x² + y² = 1` over `F` is a rational curve with the point `(1, 0)`, so `U = T(F)` is
+dense in `∏_{v ∈ S} T(F_v)` for every finite set `S` of places (weak approximation for rational varieties); with the product topology,
+`T_G = ∏_{v|∞} T(F_v) × ∏_{stable} T_w`. So `Cay(G, T_G) = X × Cay(K, T_K)`, categorical, with `X := Cay(L ⊗ ℝ, ∏_{v|∞} T(F_v))`,
+`K := ∏_{stable} O_w` (compact metrisable), `T_K := ∏ T_w`.
+
+**L3 (mixing selection in the CP format).** `ν := ⊗_w ν_w` on `T_K`; a non-trivial character of `K` is non-trivial on finitely many
+factors, so `|ν̂(ξ)| ≤ λ* < 1/(k−1)`. With `c̄` from L2, `m_j(x) := Haar{y ∈ K : c̄(x, y) = j}`. Fix an edge `(x, x + w)` of `X`: every
+`((x, y), (x + w, y + t))`, `t ∈ T_K`, is an edge, so by Fubini, a.s. `(Haar ⊗ ν){(y, t) : c̄(x, y) = c̄(x + w, y + t)} = 0`. For
+`A = {c̄(x, ·) = j}`, `B = {c̄(x + w, ·) = j}` of masses `a, b`, Parseval gives
+`0 = ∫∫ 1_A(y)1_B(y + t) dy dν(t) ≥ ab − λ*√(a(1−a)b(1−b))`, so `a, b` are not both `> θ := λ*/(1 + λ*)`; and `θ < 1/k` iff
+`λ* < 1/(k−1)`. With an independent threshold `θ′ ~ Unif(θ, 1/k)`, `c″(x) := min{j : m_j(x) > θ′}` (defined: some `m_j ≥ 1/k`) is proper
+at each fixed edge a.s.; stationary (the law of `(m(x_i))` is fixed by the finite-dimensional laws of `c̃`: `m_j(x)` is the `L²(P)`-Bochner
+integral of the continuous `y ↦ 1[c̃(x, y) = j]`); and continuous in probability:
+`P(c″(x) ≠ c″(x′)) ≤ 2kδ/(1/k − θ) + (k/δ²)·P(c̃(x, 0) ≠ c̃(x′, 0))` for every `δ > 0`. (The random threshold is what removes the atoms of
+`m_j(x)` at a fixed threshold; a fixed `θ` can break continuity in probability.) So `X` carries a CP `k`-colouring.
+
+**L4 (restriction).** Restricting a CP colouring along a continuous injective homomorphism that maps edges into edges gives a CP
+colouring (the process is defined pointwise; no measurability is involved). At a real `v`, `T(F_v) = S¹ ⊂ ℂ`; at a complex `v`,
+`L ⊗_F F_v ≅ ℂ × ℂ` with conjugation swapping, `T(F_v) = {(z, z⁻¹)}`, and `a ↦ (a, ā)` maps `ℝ² ≅ ℂ` onto a closed subgroup carrying the
+circle `(z, z̄)`, `|z| = 1` (the compact real form). With the diagonal `ℝ² → (ℝ²)^{r₁ + r₂}`, `UD(ℝ²)` maps into `X`. **(A).** ∎
+
+**Verdict C-LB: TRUE** at every `k ≥ 2`, in particular 4, 5, 6 [hand, one mind], over every real number field with `N_k(F) = ∅` — wider
+than the claim list's scope (totally real is not used; row 100's exception is implied). Inputs used: I-C′, I-RU, I-WEIL (level one), and
+classical facts (Bochner, strong approximation for `G_a`, weak approximation for a rational curve, Parseval); not I-SEL, I-EXT4, I-MX
+or I-MERGE (L4 replaces the merge by the diagonal).
+
+**Controls (as registered in 1.3).** (K1) K, ℚ(√11): the dyadic place with `U₂ = K₄` has `λ* = 1/3`, so `N₄ ≠ ∅`; L3 is exactly where it
+stops (at `λ* = 1/3`, `a = b = 1/4 = θ` meets the inequality with equality), and keeping the factor, (A) holds by the dyadic pullback
+(spectrum on `T`, so `τ = 0` and (B) fails) — reproduced. (K2) ℚ(√47): 11 splits (`(47/11) = 1`), `λ*(Γ₁₁) = 0.476 > 1/3`, so the chain does
+not apply at `k = 4`; with those factors kept, refuting (A) needs the ratio route (R88-TCA), after which (B) and MR give five — consistent
+with row 121, not re-derived here. (K3) ℚ(√635087), `N₄ = ∅`: `χ_CP(ℝ²) ≥ 5` (I-CP57) forces (B) — J45's A⁺ at `S = ∅` (strict
+anticorrelation off `E`), reproduced by a route that uses `λ* < 1/3` instead of T-C(A). (K4) ℚ at `k = 2`: `N₂ ∋ 2` (ramified dyadic,
+`λ* = 1`), the chain stops, and ℚ² is bipartite — consistent.
+
+**Wrong-reason lines, avoided:** (i) the measurable version is proved (L2), not assumed; (ii) the threshold is `λ* < 1/(k−1)`, used through
+the mixing inequality, never a ratio; (iii) the product edge set is weak approximation (L-WA); (iv) `sup_v λ*_v < 1/(k−1)` is shown
+(Step 0); (v) the extension is on `T + A` only — `E ∖ (T + A)` is removed by R-U before the selection, so no split place enters.
