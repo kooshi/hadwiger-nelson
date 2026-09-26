@@ -1,0 +1,13 @@
+C1 PASS: s = 2/5: 2s = 4/5 < 1 and 21 > ((1+2s)/s)^2 = 81/4
+C2 PASS: sigma_hat(2 pi q) > 1 - 4.466e-09 at q = 33461 (Pell); no decay
+C3 PASS: proper at 1600 sampled e1-edges; window average at N = 1024: 0.500000 (-> 1/2)
+C4 PASS: 3000 exact trials: support respected; disagreement <= sum_j |S_j(0) - S_j(h)|
+ALL PASS
+PLANT C1: check returned FAIL -- diameter 2s = 1 not < 1
+PLANT C1 caught
+PLANT C2: check returned FAIL -- lower bound 0.7959183673469388 at q = 5 not above 0.999
+PLANT C2 caught
+PLANT C3: check returned FAIL -- improper e1-edge at x = -359109/4663, N = 2
+PLANT C3 caught
+PLANT C4: check returned FAIL -- disagreement 121/360 > bound 8/45 at a = [Fraction(0, 1), Fraction(13, 36), Fraction(7, 12), Fraction(1, 18), Fraction(0, 1)], b = [Fraction(0, 1), Fraction(1, 10), Fraction(33, 40), Fraction(0, 1), Fraction(3, 40)]
+PLANT C4 caught
