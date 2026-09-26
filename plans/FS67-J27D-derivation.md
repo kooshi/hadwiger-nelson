@@ -6,7 +6,43 @@ blind phase is committed.***
 
 ## Theorems this phase proved
 
-*(Filled at stage 5; grades per `CLAUDE.md` § Notation.)*
+| # | theorem (one line) | grade | address |
+|---|---|---|---|
+| 1 | DA-1′: `k`-colourable, not `k`-gap-free ⟹ for every `H` with ≥ 2 vertices a non-pullback `k`-colouring of `G × H` (no connectivity used) | [hand] + check | §Stage 2 |
+| 2 | L1: a gap-free proper colouring is an isolated looped vertex of `K_k^G` | [hand] + check | §Stage 2 |
+| 3 | DA-2′ and the characterisation FS67(G,k) ⟺ all proper `k`-colourings gap-free ∧ `χ(E_k(G)) ≤ k` | [hand] | §Stage 2 |
+| 4 | GL re-derived as FS67(K_k, k) via the repeated-colour selection on `E_k(K_k)` | [hand] + check | §Stage 2 |
+| 5 | DA-3: `K_k × X` connected, uniquely `k`-colourable, gap-free; FS67 fails ⟺ a Hedetniemi partner of `X` | [hand] | §Stage 2 |
+| 6 | DA-4: FS67 fails for a finite connected uniquely `k`-colourable `G` at every `k ≥ 4`; FS67 on that class ⟹ `H(k)` | [hand from `[Tardif2023]` Thm 1] | §Stage 2 |
+| 7 | `χv = 1 + r/\|λ_min\|` for 1-walk-regular graphs, so `χv(G) = k` ⟺ Hoffman-tight at `k` | [external, GRR2017 Thm 4.9, quoted] | §Stage 3 |
+| 8 | DC-1: 1-walk-regular, `χv(G) = k`, `H` connected, `χv(H) > k` ⟹ pullback | [hand, conditional on GRRSV R1, R4] | §Stage 3 |
+| 9 | (M) the variance-sharpened mixing inequality on abelian Cayley graphs; (P) plurality is proper at `λ* < 1/(k−1)` | [hand] | §Stage 3 |
+| 10 | DC-2 at `τ_k = 1/(k−1)`, `G` any `k`-gap-free graph, connectivity of `G` unused | [hand] + exact algebra | §Stage 3 |
+| 11 | DC-3: which `Γ_p` (`p ≤ 103`) meet DC-1's / DC-2's hypothesis at `k = 3, 4, 5` | [tools] | §Stage 3, `dc.out` |
+| 12 | DB-1 reformulation: `χ(E_3(G)) ≤ 3` ⟺ every 3-colouring of `G × H` has a proper fibre | [hand] | §Stage 4 |
+| 13 | Lemma W: `D_C(f) = D_C(g) = 3w_C(f,g)` on every arc of `K_3^G`; `D_C` is a component invariant | [hand] + check | §Stage 4 |
+| 14 | DB-1 partial: components of `E_3(G)` with `D_C ≡ 0` for some odd `C` are 3-colourable | [hand; TW §3 external] | §Stage 4 |
+| 15 | Lemma T: Hoffman-tight at `k` ⟹ every proper `k`-colouring gap-free | [hand] | §Stage 4 |
+| 16 | DB-2: `UD(𝔽₉,2)` and every tight level of `UD(ℤ₃[i]/3^j, 2)` are connected and 3-gap-free | [hand + tools] | §Stage 4 |
+| 17 | DD-1: equal `χv`, Result 5's hypothesis, `χ(H) > k`, `H` connected ⟹ pullback | [hand, conditional on GRRSV R1, R5] | §Stage 5 |
+| 18 | DD-2 reduction: for regular `X`, `K_k × X` is Hoffman-tight at `k` ⟺ `μ_min(X) ≥ −d_X/(k−1)` | [hand] | §Stage 5 |
+| 19 | For tight `G` (1-walk-regular or not), every failing `H` avoids DC-2's regime; for 1-walk-regular tight `G`, `χv(H) ≤ k` | [hand] | §Stage 5 |
+
+**Claim table (divergence-ready).**
+
+| claim | verdict | where |
+|---|---|---|
+| DA-1′ | TRUE | §Stage 2 |
+| DA-2′ | TRUE | §Stage 2 |
+| DA-3 | TRUE | §Stage 2 |
+| DA-4 | TRUE (from `[Tardif2023]` Thm 1; finiteness read in its §2) | §Stage 2 |
+| DB-1 | GAP — first clause TRUE for non-3-colourable `G` (external), open for 3-colourable `G` at "3-colour the nonzero-winding components of `E_3(G)`"; second clause GAP at the same step | §Stage 4 |
+| DB-2 | TRUE (tower clause conditional on tightness, as stated) | §Stage 4 |
+| DC-1 | TRUE, conditional on GRRSV Results 1, 4 (external) | §Stage 3 |
+| DC-2 | TRUE at `τ_k = 1/(k−1)`; "connected" unused | §Stage 3 |
+| DC-3 | table computed | §Stage 3 |
+| DD-1 | TRUE, conditional on GRRSV Result 5 (external); Zhang's exception: GAP | §Stage 5 |
+| DD-2 | GAP — missing ingredient named | §Stage 5 |
 
 ## Stage 1 — SAVED (quotation check, C0)
 
@@ -251,3 +287,61 @@ proved here (G54 records the 2-adic analogue; row 72 the 3-adic plane). With DC-
 tight level `G` satisfies FS67 against every connected `H` with `χv(H) > 3` — `Γ_p` for `p ≥ 11` among them (DC-3).
 
 *Theorems of this stage:* the reformulation, Lemma W, the partial form of DB-1 [hand; TW §3 external]; Lemma T, DB-2 [hand + tools].
+
+## Stage 5 — SAVED (DD-1, DD-2, log, scores)
+
+### DD-1 — TRUE, conditional on `[GodsilEtAl2020]` Results 1 and 5 [hand]; Zhang's exception GAP
+
+Read Result 5's conclusion in Gram form (GRRSV's convex combinations are of vector colourings, i.e. of Gram matrices): the Gram matrix of every
+optimal vector colouring of `G × H` is `P = M̄ ⊗ J + J ⊗ N̄` with `M̄ = Σ αᵢ Mᵢ`, `N̄ = Σ βⱼ Nⱼ`, `Mᵢ`, `Nⱼ` Gram matrices of optimal vector colourings of `G`,
+`H`, `αᵢ, βⱼ ≥ 0`, `a := Σ αᵢ = 1 − Σ βⱼ`. *Proof.* A proper `k`-colouring `β` gives the simplex colouring `p` (as in DC-1), optimal since `χv(G × H) =
+k` (Result 1). Fix `x ∈ V(G)` and an edge `h ∼ h′` of `H`: `P_{(x,h),(x,h′)} = a + N̄_{hh′} ≤ a − (1 − a)/(k−1)` (each `Nⱼ` is a vector `k`-colouring, `≤ −1/(k−1)`
+on edges). The entry is `1` or `−1/(k−1)` (simplex). If `a < 1` the bound is `< 1`, so every such entry is `−1/(k−1)`: `β(x, h) ≠ β(x, h′)` on every
+edge of `H`, i.e. `β(x, ·)` is a proper `k`-colouring of `H` — impossible (`χ(H) > k`). So `a = 1`, `P = M̄ ⊗ J`, the entry at `(x,h)(x,h′)` is `M̄_{xx} = 1`,
+and `β(x, ·)` is constant: pulled back (`H` has an edge). ∎ *Hypothesis use:* `χ(H) > k` is used exactly once, to exclude `a < 1`; `H` connected
+enters only through Result 5. **Zhang's IS-imprimitive exception:** not decided. DD-1 reaches it iff some IS-imprimitive factor with `χv = k`
+admits a connected strictly complementary dual solution — the missing step is that comparison (GRRSV's "connected" dual condition against
+`[Zhang2012]` Thm 1.8's IS-primitivity), not attempted within budget. **GAP.**
+
+### DD-2 — GAP, missing ingredient named; two negations for named classes [hand]
+
+*Reduction.* For `d_X`-regular `X` with adjacency eigenvalues `μ`, `K_k × X` is `(k−1)d_X`-regular with eigenvalues `(k−1)μ` and `−μ`, so `λ_min(K_k × X) =
+min((k−1)μ_min(X), −d_X)`, and **`K_k × X` is Hoffman-tight at `k` ⟺ `μ_min(X) ≥ −d_X/(k−1)`** (Hoffman's bound for `X` at least `k`). With DA-3:
+*DD-2 holds via `K_k × X` iff there is a Hedetniemi pair `(X, H)` at `k ≥ 4` with `X` connected, regular, and `μ_min(X) ≥ −d_X/(k−1)`.* **That pair is the
+missing ingredient.** `[Tardif2023]`'s `X = Ω_w(K_m)` is not known to be regular (its vertices are tuples of nested subsets of different sizes) and
+its spectrum is not computed here; `[Tardif2022frac]` is not held. *Constraints any witness obeys:* (i) if `X` is 1-walk-regular, `χv(X) ≥ k` and
+GRRSV Result 1 (`χv(X × H) ≤ χ(X × H) ≤ k`) force `χv(H) ≤ k` unless `χv(X) = k`; (ii) **negation for a class of `H`:** for every Hoffman-tight
+`k`-colourable `G` (tight ⟹ gap-free, Lemma T), no `H = Cay(A, T)` with `λ* < 1/(k−1)` witnesses failure (DC-2); (iii) **negation for a class of
+`G`:** for 1-walk-regular tight `G`, every witness `H` has `χv(H) ≤ k < χ(H)` (DC-1). So a tight counterexample, if it exists, lives in the gap regime
+of `H` — exactly where Hedetniemi counterexamples live (one factor of a pair has `χ_f ≤ k`, `[Zhu2011]`).
+
+### Would-have-searched log
+
+| move a search would have made | what was done instead |
+|---|---|
+| a 3-colouring finder on the nonzero-winding part of `E_3(C₅)` (60 maps, 60 edges) | not run; DB-1 left GAP at that step; its structure evaluated exactly (a fixed 243-map set — at the edge, logged) |
+| a hunt for a 3-gap-free `G` with `χ(E_3(G)) ≥ 4` (a DB-1 counterexample) | not run; post-ban stage PB-1 below |
+| a sweep of regular graphs `X` for a Hedetniemi partner with `μ_min(X) ≥ −d/(k−1)` (DD-2) | not run; the ingredient named; PB-2 below |
+| random `(G, H, β)` near `λ* = 1/(k−1)` to probe DC-2's threshold | the threshold was derived; exact rational iteration on both sides of it only |
+| checking DC-2 on instances by enumerating colourings of small products | not run (enumeration of colourings is a search); the algebra is checked instead |
+| searching IS-imprimitive vertex-transitive graphs with connected dual solutions (Zhang's exception) | not run; DD-1's sub-question left GAP |
+
+**Post-ban stages (≥ 2026-10-01; not queued):** PB-1 — an exact 3-colouring finder on `E_3(G)`'s nonzero-winding part for `G = C₅`, `C₇`, `K₃ × C₅`,
+generator image stated (G21); a found colouring suggests the missing construction, a refusal at `C₅` is FALSE for DB-1's first clause (not for its
+gap-free clause). PB-2 — spectra of `[Tardif2023]`'s `Ω_w(K_m)` and of the factors in `[Tardif2022frac]` once held.
+
+### Priors scored (plan §1.2, §4.4; this record's C0)
+
+P-A (0.90 TRUE) → TRUE. P-A′ (0.70) → TRUE. P-B (0.55 T / 0.15 F / 0.30 GAP) → GAP. P-C (0.90) → TRUE. **P-C′ (0.45, `τ_k = 1/(k−1)`) → TRUE.** P-D
+(0.60 GAP) → GAP. P-E → GAP. P-H (0.85) → TRUE (conditional). P-I → TRUE at both strengths. P-J (0.40 TRUE) → TRUE (conditional). P-K (0.60) → GAP. P-M
+(0.55) → not reached (DB-1 GAP). C0: DB-1's 0.45 GAP, DC-2-at-threshold's 0.70, DD-1's 0.60, DD-2's 0.80 GAP all landed on their modal outcome.
+
+### Proposed edits for the owner (not made here)
+
+- **`BIBLIOGRAPHY.md`** (front-page lane): `[TardifWrochna2019]` read §1–§3 (for DB-1's route); `[Tardif2023]` Thm 1 and §2's construction read;
+  `[GodsilRobersonRooney2017]` Thm 4.9 and Cor. 4.10 read (the `χv` of 1-walk-regular graphs); `[GodsilEtAl2020]` Results 1–5 and §1.2 read, §4 not.
+  Still owed: `[ElZaharSauer1985]`, `[Tardif2006alg]`, `[Tardif2022frac]`, Duffus–Sands–Woodrow 1985.
+- **Prior-art debt:** DC-2 for arbitrary gap-free `G` — a gate in the words "uniquely colorable graph", "categorical product", "expander" /
+  "spectral gap", "unique coloring" before any novelty claim.
+- **`plans/STUB-tight-product-colourings.md` re-aim:** the question at `k ≥ 4` is answered negatively (DA-4); the live residue is DB-1's GAP at
+  three colours (B(3) in DSW's words, generalised to gap-free) and DD-2's tight counterexample.
