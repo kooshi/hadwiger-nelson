@@ -246,3 +246,45 @@ Manners §5.5's assertion proved in band form on `R_{{p}}`, row 102).
 or committed here.
 
 **Would have searched here (stage 4):** none.
+
+## Stage 5 — SAVED (`BIBLIOGRAPHY.md`, the inventories' ticks, the gates)
+
+**`BIBLIOGRAPHY.md`** (67fdcda2, by `data/crunch-2026-09-25/j24/bib_apply.py`; read statuses copied from the reading records, never
+upgraded): § A +27 rows — J23p §C.3/§C.2 (`[Manners2015]`, `[Wang2012]`, `[EinsiedlerLindenstrauss2022]`, `[KravitzLeng2025]`,
+`[MalikiosisMatolcsiRuzsa2013]`, `[BarajasSerra2008]`, `[BarajasSerra2009]`, `[Muchnik2005]`, `[BosioVivaldi2000]`, `[Vivaldi2006]`,
+`[AdlerKitchensTresser2001]`, `[AkiyamaPetho2013]`), M1 4.8 (`[GrytczukKozikMicek2013]`, `[Shimura1964]` — each **checked against zbMATH
+here**, records `data/crunch-2026-09-25/j24/zbmath-*.json`: Random Struct. Algorithms 42(2) (2013) 214–225, Zbl 1349.68131; Ann. of Math.
+(2) 79 (1964) 369–409, Zbl 0144.29504), M2 4f (`[Snyder2000]`), J23cpa Stage 6 over M3 R4.Bib (`[Zhu2021]`, `[AlonDinurFriedgutSudakov2004]`,
+`[TardifWrochna2019]`, `[PakVilenchik2013]`, `[BrakensiekDavies2024]`, `[Spacapan2011]`, `[KechrisSoleckiTodorcevic1999]`,
+`[KrivelevichSudakov2006]`), J29 §3.1 verdict 4 (`[Johnson1996fcn]`, `[Johnson2000surprises]`, `[JohnsonRodger2005]`,
+`[Johnson2011rational]`; J29's `[SilvaFilho2026]` and `[JoeNoble2023]` were already rows — the first now an alias of
+`[CostaSilvaFilho2026]`); updates to `[Madore2015]` (¶5.4 re-read; Prop. 3.2 read), `[Soifer2024]` (Open Problem 11.1 verbatim),
+`[BendaPerles2000]`, `[Parts2020hv]`, `[Polymath16]` (Mixon's MCNP ≥ 6 criterion), `[GodsilEtAl2020]`, `[Tardif2008]`, `[Johnson2000]` and
+`[Johnson2006]` (they gate `CLOSED-QUESTIONS.md` §2.6), `[KechrisMarks2020]` (quote the Addendum beside §4.6); J26 §4.4's merge — one
+row keyed `[AmbrusEtAl2023]` / `[AmbrusEtAl2024]` / `[Ambrus2023]`, venue Math. Program. 207 (2024) 303–327, read in full, the R₂ claim
+corrected, eq. (23)'s typo; the old row deleted; § B +11 lines (the second GRRSV copy included); § C +3; § R.4 items 16–20; rule 0e's
+partial-read list. **Outside the closes, to keep the gate green:** J27's `[DuffusSandsWoodrow1985]` (from § R.4 item 9's reference) and
+J28's two arXiv listings (Herva–Kari 2025, MacVicar 2023, as § C rows from its gate's own words). `bib_audit.py` exit 0, "every cited work
+resolves to a row or a recorded alias"; `--self-test` exit 0, "3 controls, ALL FIRED".
+
+**The inventories** (`data/crunch-2026-09-25/j24/inventory_tick.py`): each headed **CLOSED 2026-09-25** with the numbers assigned and the
+four commits; ticked — FS-91 40 rows (its 30 stage-4 rows, M1 4.8's record corrections kept "listed for later" per the owner's ruling, and
+the crunch-wide rows 125, 141–147, 149, 153, 155), M2 17 rows (every "drafts for J24" row; row 68, a Lean question, stays held), M3 17 rows
+(every row routed to R4.L/B/G/F/S/Bib or R5; row 69's J21-record half **held**: a job record, not the front page's; row 71 listed in § R.4).
+
+**Gates at the end** (exit statuses read from the tools, outputs captured to files):
+
+| gate | exit | result |
+|---|---|---|
+| fact audit `--base 543b51d5` | 0 | "AUDIT PASSED (0 failure(s))" |
+| `--dupes` | 0 | "11 repeated runs of >= 10 words" (as the brief expects) |
+| `tools/bib_audit.py` | 0 | "every cited work resolves to a row or a recorded alias" |
+| `tools/check_architecture.py` | 0 | "RESULT: PASS" |
+| `tools/fs71_ledger_b_check.py` (non-strict) | 1 | "RESULT: FAIL (6)" — J33 in flight (its edit to `plans/FS91-derivation.md` uncommitted, M3's not begun): one respelling seen (`FS91-J02-A2.1′` → `FS91-J02-A21p`); M3's four ids unchanged |
+| `tools/fs71_ledger_b_check.py --strict` | 1 | "RESULT: FAIL (49)" — the same six ids plus 43 M3 entries missing fields: **exactly J33's items**, none in a front-page file |
+
+**Owed after J33 lands:** § B's ids follow J33's respellings (five lines: `FS91-J02-A2.1′`, `M3-J18-KE⟹`, `M3-J19-AF✗`, and any id J33 splits
+out of a grouped header needs its own line); then `--strict` is re-run.
+
+**Would have searched here (stage 5):** none — two zbMATH look-ups checked references already named (a reading, not a search for a
+witness).
