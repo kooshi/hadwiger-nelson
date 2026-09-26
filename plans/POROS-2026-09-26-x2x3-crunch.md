@@ -255,3 +255,93 @@ get the slots; resume me by SendMessage at about 06:40 to read X01D's and X02D's
 
 ### Would have searched here (stage 6)
 - None: one arXiv fetch (literature).
+
+## Stage 7 — X01V's GAP tested against my sketch (resumed 05:58, owner's request) — SAVED
+
+**Read:** `plans/FS100-X01V-verification.md` §2.2–§2.4. Fenced files were not opened, and none of the derivers was messaged.
+
+### 7.1 Verdict: UZ is not needed. The GAP sits in the literal transcription of EF Lemma 3.2, and my route (a) closes it.
+
+- **X01V's steps 2–3.** X01V keeps EF's requirement that the images `u′N` be **small**. That leaves only the multipliers supported in
+  `supp(u)`, and there are `(log M)^k` of them, which is lacunary.
+- **Why the requirement is unnecessary.** The pigeonhole uses only measure: `µ(vN) = µ(N)` holds for **every** `v ∈ U_M`, however fat
+  `vN` is off `S`. Where the images are fat, only the error bounds at the places off `S` are affected, and the product formula pays
+  for that with the height, which is `M^{O(1)}` with a **fixed** exponent. Thinness at `S` is `δ = M^{−K}` with `K` **free**, because
+  Lemma 3.1′ allows every `β > 0`.
+- **The only element whose entropy is used is the fixed `u`.** So `δ₀(u)` and `X′` do not move with `M`, and UZ, the uniform-in-`M`
+  bound, never arises.
+- **X01V's item 4 already names the tool** ("the product formula with heights"). It does not notice that the same tool removes item 2's
+  smallness requirement. **Its step 4(i) (tiny `|ℓ|_∞`) is harmless:** nothing is ever divided at `∞`, and a small `|ℓ|_∞` only
+  enlarges `|ℓ|_π|ℓ|_π̄`.
+
+### 7.2 The step, written out [hand, one mind; for totally real `F`]
+
+**Setting.**
+- `F` is totally real of degree `n`, and `L = F(i)`, so every `u ∈ U` has `|u|_v = 1` at the `n` complex places.
+- The cover is `Y = L_∞ × ∏'_{w split} L_w`, and `R̂ ≅ Y/Λ`, where `Λ` is the dual lattice (`R` up to a fixed fractional ideal).
+- The fundamental domain is `D = D_∞ × ∏ O_w`. It is one because `Λ ∩ (L_∞ × ∏O_w)` is a lattice in `L_∞`, and strong approximation
+  away from `∞` gives surjectivity.
+- The zero-entropy element is a fixed non-torsion `u`. Let `S = supp(u)`, the split places where `|u|_w ≠ 1`, and let `λ = min_{w∈S}
+  |u|_w^{±1} > 1`.
+
+**L3.1′.**
+- Take `ξ`, a finite partition of `D` that is `η`-small at `∞` and at `S`, with no condition elsewhere.
+- For the atoms of `⋁_{|i|≤k} u^{−i}ξ`, the corrections are elements `r ∈ Λ`. They satisfy `|r| ≤ 2η` at `∞`, `≤ C_uη` at `S`, `≤ 1`
+  at split `w ∉ S`, and a fixed bound `c_v` at the stable places.
+- The product formula therefore forces `r = 0`.
+- So an atom is `x̃ + {d : |d|_∞ ≤ η, |d|_S ≤ ηλ^{−k}, d_w ∈ O_w elsewhere}`.
+- Shannon–McMillan–Breiman and `h_µ(u) = 0` then give: for every `β, ε`, there are `X′` with `µ(X′) > 1 − ε` and `δ₀`, such that
+  `µ(B) > δ^β` for the atom `B ∋ x` at every thinness `δ ≤ δ₀`. The same statement as X01V's L3.1 analogue.
+
+**L3.2′ — pigeonhole.**
+- Fix `x ∈ X′` and `M`. Set `δ ≈ M^{−K}` and take `β < α/K`, where `#U_M ≥ cM^α` (X01V's EF-G (b) gives `α ≥ 1/h_L`).
+- Then `#U_M·δ^β > 1`, so `v₁B ∩ v₂B ≠ ∅` for some `v₁ ≠ v₂` in `U_M`.
+- Lifting: `ℓx̃ − r = e := v₂d₂ − v₁d₁`, with `ℓ = v₁ − v₂ ∈ R ∖ 0` and `r ∈ Λ`.
+- **Bounds on `e`:**
+  - at each `∞`: `≤ 2η`;
+  - at `w ∈ S`: `≤ Mδ`;
+  - at split `w ∉ S`: `≤ m_w := max(1, |v₁|_w, |v₂|_w)`, with `∏ m_w ≤ H(v₁)H(v₂) ≤ M²`.
+- **Bounds on `ℓ`:** `≤ 2` at `∞`, `≤ M` at `S`, `≤ m_w` off `S`, `≤ 1` at the stable places.
+
+**L3.2′ — separation (my check (a)).**
+- Take two scales: `M₁` and `M₂ = M₁²`.
+- Set `z := ℓ₂r₁ − ℓ₁r₂ = ℓ₁e₂ − ℓ₂e₁ ∈ Λ`.
+- **Normalised bounds on `z`:**
+  - at each `∞`: `≤ (8η)²`;
+  - at each `w ∈ S`: `≤ M₁M₂δ₁ = M₁^{3−K}`;
+  - off `S`, in product: `≤ ∏ m_w^{(1)}m_w^{(2)} ≤ M₁⁶`;
+  - at the stable places, in product: `≤ C_st`.
+- If `z ≠ 0`, then `1 = ∏_v |z|_v ≤ (64η²)ⁿ · M₁^{2(3−K)} · M₁⁶ · C_st`, which is `< 1` for `K > 6` and `M₁` large. **So `z = 0`,
+  and `q := r₁/ℓ₁ = r₂/ℓ₂`.**
+- **Stability.**
+  - Iterate along `M₁, M₁², M₁⁴, …`; the same `q` appears at every scale.
+  - The product formula for `ℓ_k` gives `|ℓ_k|_π|ℓ_k|_π̄ ≥ 1/(4ⁿM_k²)`. With `|ℓ_k|_{π̄} ≤ M_k` this gives `|ℓ_k|_π ≥ 1/(4ⁿM_k³)`.
+  - Hence `|x̃_π − q| ≤ M_kδ_k·4ⁿM_k³ = 4ⁿM_k^{4−K} → 0`, and likewise at `π̄`.
+  - **So `x̃ = q` at `S`.**
+
+**Conclusion.**
+- **Leaves.** `x ∈ [q] + K_S`, with `[q] ∈ T` and `K_S` the image of `V_S = L_∞ × ∏'_{w∉S} L_w`. That image is injective, and
+  `K_S ∩ T = 0`. Since `µ(X′) > 1 − ε` for every `ε`, `µ(T + K_S) = 1`.
+- **Recurrence.**
+  - The leaves `t + K_S` are countably many and disjoint, and `U` permutes them.
+  - The stabiliser `U_t = {u : (u−1)t = 0}` has finite index, because `U` acts on the finite set `R̂[m]`.
+  - Pull `µ|_{t+K_S}` back to `V_S`. The result is `U_t`-invariant under `a ↦ ua`.
+  - For each split pair `(π′, π̄′) ∉ S`, some `u_{p′}^j ∈ U_t` shifts `f = log|a_{π′}|` by `−j·log p′ ≠ 0`. So `{a_{π′} ≠ 0}` is null,
+    and likewise at `π̄′`.
+  - **So `µ` is carried by `T + A ⊆ E`.** ∎
+- **What this proves:** EF_F with the hypothesis on **one** non-torsion `u`, for totally real `F`. It contains the positive-entropy
+  transfer that X01V's T5 notes. There is no conflict: EF's own Lemma 3.2 gives that on 𝕋 too, without Johnson.
+
+### 7.3 What my sketch did get wrong (from X01V §2.2)
+
+My "sanity fact" said that `U ∩ O_L^×` is torsion **for every real `F`**, by Kronecker. That is false for `F` with complex places,
+because the relative units expand archimedean places. **EF_F (and EF-G (a)) must be stated for totally real `F`.** The three fields
+(ℚ(√47), the type-(B) fields, ℚ(√167)) are totally real, so the consumer loses nothing. The non-totally-real case needs the full height
+`exp h_m(u)`, and I do not claim it.
+
+hunch: ef-transfers-modulo-archimedean — **status: open, about 70 %** (for totally real `F`). The route is now written out; nobody has
+checked it but me. Its falsifier is a flaw in 7.2, most likely in the local-injectivity bound for L3.1′ or in the `Λ`-versus-`R`
+bookkeeping at the stable places.
+
+### Would have searched here (stage 7)
+- None.
