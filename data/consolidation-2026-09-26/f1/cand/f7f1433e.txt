@@ -1,0 +1,36 @@
+--- [Frontier] a=0.14 b=0.39 c=0.64 inCommit=0.50 (438 B)
+*Last updated: 2026-09-20 — **FS-61 closed** (row 74; G61 rewritten; G65 minted): the census of real quadratic fields — **14 of the forty squarefree d ≡ 11 (mod 12) below 500 certified to need four colours**, 8 of them fields nobody had reached and 5 new exact values (χ = 4 at d = 59, 119, 239, 359, 431); what decides a field is its supply of unit vectors; a ball's average degree, not its size, decides whether a solver answers.
+--- [Frontier] a=0.00 b=0.00 c=0.50 inCommit=0.50 (110 B)
+**FS-66** (does the residue ceiling drop up the tower?) and **FS-67** (3-colourings of tight products) minted.
+--- [Frontier] a=0.03 b=0.05 c=0.51 inCommit=0.56 (255 B)
+Before that, 2026-09-19 — G64 corrected (*no field is six-chromatic* implies χ(ℝ²) ∈ {5, 7} and is not implied by it); 2026-09-17 — FS-58 closed (rows 72–73): **χ(ℚ(√11)²) = 4 with the lower half in the kernel**, and the 3-adic barrier.*
+--- [Where the problem stands] a=0.48 b=0.48 c=0.48 inCommit=0.48 (163 B)
+**What the kernel holds, beyond the interval** (the ledger below has each result and its address): **χ(ℚ(√11)²) ≥ 4** and the 3-adic barrier (rows 72–73)
+--- [Where the problem stands] a=0.45 b=0.45 c=0.58 inCommit=0.45 (386 B)
+**the χ ≥ 6 target as a theorem** — χ(ℝ²) ≥ k + 1 follows from a k-colour virtual edge at √3 AND one at 2, never either alone, and over the distance set {1, 2} a single five-colour √3 gadget gives χ(ℝ²; {1,2}) ≥ 6 (rows 43, 61); the seam-field closures, each exactly 4-chromatic (rows 1–25); the pigeonhole carriers (rows 31–32); the cell family (rows 34–41).
+--- [Where the problem stands] a=0.05 b=0.09 c=0.23 inCommit=0.50 (176 B)
+Heule-510's arity-2 emptiness at five colours is kernel (row 66: `Forces ↔ =`, `Separated ↔ Adj`, arity floor ≥ 3) and holds for every unit-distance graph over its field.
+--- [Where the problem stands] a=0.31 b=0.31 c=0.39 inCommit=0.49 (299 B)
+De Grey's 1581 has no compulsion at arity 2 or 3 (complete sweeps) and arity floor 4 or 5, and the `ρ₆₃` arena reads 0 at arity 2 — both in **6-open** fields, where no residue target exists, so those nulls stay measured and unexplained: a χ ≥ 6 gadget must be constructed, not found (G31).
+--- [Where the problem stands] a=0.10 b=0.10 c=0.59 inCommit=0.52 (168 B)
+Its cheapest exposed predictions — four for ℚ(√11) and ℚ(√23), four or five for ℚ(√47) — are met: χ = 4 at 11 (kernel) and 23, χ ≥ 4 at 47 (row 73).
+--- [Where the problem stands] a=0.11 b=0.19 c=0.30 inCommit=0.29 (448 B)
+A finite plane UD(𝔽_q, 2) with q ≡ 3 (mod 4) of odd degree can be exactly six-chromatic only at **q ∈ {23, 27, 31, 43, 47}** — the exact spectra put 71 at ≥ 7, and exact certificates put 83 and **79, 67, 59** at ≥ 7 (α ≤ 1046, 1023, 745, 575; FS-53 phase B), Weil refuses six from 98 — and none of the five is decided (floors **6, 6**, 5, **6, 6**; ceilings 8, 7, 8, 8, 10 by verified colourings; no six-colouring found anywhere).
+--- [Where the problem stands] a=0.09 b=0.24 c=0.33 inCommit=0.29 (383 B)
+**At 23, 27, 43 and 47 five is refused by certificate too — α ≤ 105 and ≤ 141 (the level-3 relaxation, FS-56 and FS-54) against the 106 and 146 five needs, ≤ 365 against 370, and ≤ 371 against 442 — so their floor is six, and a single verified six-colouring at any of them would be the first exactly six-chromatic finite Euclidean plane**; only at 31 is five still open.
+--- [Where the problem stands] a=0.00 b=0.48 c=0.64 inCommit=0.48 (325 B)
+The finding side has reached no threshold anywhere: the best sets are 87 at 23 (against 89 — about 96,000 restarts over three stages, three seeds, eight rotation orders and a line quotient never produced 88, on an instrument that attains the true α at 11 in two seconds), 146 at 31 (161), 258 at 43 (309), 265 at 47 (369).
+--- [Where the problem stands] a=0.29 b=0.29 c=0.40 inCommit=0.29 (497 B)
+What the window decides is whether six is *reachable by the residue method*: no six-chromatic plane means no field has local bound 6, so any field holding a six-chromatic unit-distance graph has every usable plane at ≥ 7 and the finite planes can never pin it — under the conjecture six is then a value no field attains (χ(ℝ²) = 7 itself needs only the bold form, at K(√7), and not the window); one six-chromatic plane means a field with χ(F²) ≤ 6 by theorem and predicted 6 (FS-53).
+--- [Where the problem stands] a=0.00 b=0.00 c=1.00 inCommit=0.43 (58 B)
+No real quadratic field was known to need more than three.
+--- [Where the problem stands] a=0.06 b=0.27 c=0.63 inCommit=0.42 (381 B)
+**certified (tools): χ = 4 at d = 23, 59, 71, 95, 119, 191, 239, 359, 431 and 4 ≤ χ ≤ 5 at d = 47, 143, 311, 335** — 14 of the forty squarefree d ≡ 11 (mod 12) below 500, the only real quadratic fields that *can* need four (`[Johnson1987]`, `[Fischer1990]` Thms 8–9); the upper halves are the dyadic bound (`[Fischer1990]` Thm 10(i)) and the residue planes at 7 and 11.
+--- [Where the problem stands] a=0.13 b=0.20 c=0.43 inCommit=0.37 (283 B)
+What decides a field is how many unit vectors its lattices hold — one integral lattice shape refuses over ℚ(√11), where it holds 108, and is periodically 3-colourable over five fields where it holds 20–36 — not its congruence class (11 and 59 both land at d ≡ 3 (mod 8)).
+--- [Where the problem stands] a=0.00 b=0.03 c=0.24 inCommit=0.14 (198 B)
+ℚ(√167), where the conjecture predicts six: its one ball capable of refusing coloured in 3.66 s; not landed (FS-59, whose first experiment is now the chain route seeded on its 7-cycle triangle).
+--- [Where the problem stands] a=0.48 b=0.48 c=0.68 inCommit=0.52 (226 B)
+The exact form, given FS-39's bridge: **χ(ℝ²) ≠ 6 ⟺ every six-chromatic number field has a seven-chromatic finite extension** — six is never where the climb *stops*, which restates the problem and does not reduce it.
+--- [Where the problem stands] a=0.24 b=0.24 c=0.33 inCommit=0.58 (271 B)
+And χ(F(t)²) = χ(F²) for transcendental t (`[Fischer1990]` Thm 6, by the same evaluation at 0), so χ(ℚ(π)²) = 2: the chromatic number is an arithmetic invariant that cannot see transcendence degree, and "other subsets of ℝ" is a smaller category than it looks.

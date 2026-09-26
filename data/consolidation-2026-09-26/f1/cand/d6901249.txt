@@ -1,0 +1,10 @@
+--- [The novel-results ledger] a=0.00 b=0.43 c=0.81 inCommit=0.43 (197 B)
+**[kernel]** `colorable_finitePlane23_eight`: χ(UD(𝔽₂₃,2)) ≤ 8 on `[propext, Classical.choice, Quot.sound]` with no native purchase — the first kernel statement about any window member.
+--- [The novel-results ledger] a=0.20 b=0.53 c=0.70 inCommit=0.53 (192 B)
+**[measured]** A fractional route is capped by every usable residue plane's χ_f (3 at 𝔽₃, 3.5 at 𝔽₇) and by 4.36; on `G27` the level-1, level-2 and full programmes read 3, 3.722, 4.
+--- [G56] a=0.44 b=0.44 c=0.69 inCommit=0.44 (401 B)
+**The fractional wall W_f** — α(U_Q) < Q²/6 at 23, 27, 31, 43, 47 and 64 — proves the window empty with no reading at all, and by `[Zhu2011]`/`[Zhang2012]` rules six out for every CRT product of first-level targets; a composite target with χ = 6 needs a factor of residue size in {23, 27, 31, 43, 47, 59, 64, 67, 79, 83} at some tower level (the Hoffman floor is constant up inert towers, G54).
+--- [G56] a=0.38 b=0.38 c=0.38 inCommit=0.38 (59 B)
+What the conjecture makes of the window if it holds is G59.
+--- [G57] a=0.42 b=0.42 c=0.42 inCommit=0.42 (105 B)
+Hence 31 and 43 can serve only fields *without* `√3`, whose own planes are therefore **triangle-free**.

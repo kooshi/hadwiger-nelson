@@ -1,0 +1,16 @@
+--- [The mission] a=0.47 b=0.47 c=0.89 inCommit=0.47 (209 B)
+Its proved range is item 10's; its remaining *testable* range is L = 5 outside it (ℚ(√3,√5) and FS-48's table), then **nothing at L = 6 if the wall holds**, and then L ≥ 7, which is the problem itself.
+--- [The mission] a=0.43 b=0.45 c=0.89 inCommit=0.43 (395 B)
+**Its exposed predictions:** exactly five at ℚ(√47) — **met** (row 121) — and at ℚ(√143), ℚ(√311), ℚ(√335) (met at K0's grade, row 121) and ℚ(√3,√5) (open, four proven: rows 73–74, G55); and at least six at **ℚ(√167)**, proven 4 in the kernel (row 119) and ≥ 5 at K0's grade (row 121), the widest gap, at discriminant 668 (characters need eight there, row 101).
+--- [Where the problem stands] a=0.39 b=0.41 c=0.55 inCommit=0.39 (275 B)
+**The conjecture's proved range** (G55; GPT Astra, hand, read here): χ(F²) = L(F) for every real number field with **L ≤ 4** (row 99, [hand, three derivations]; G74), and, given the measured 8/3 forcer, for every multiquadratic F ⊇ K with L ≤ 5, by the chain theorem.
+--- [Where the problem stands] a=0.18 b=0.26 c=0.79 inCommit=0.18 (381 B)
+Its exposed predictions are the target's (§ The mission): the cheapest, four for ℚ(√11) and ℚ(√23), are met (row 73); at ℚ(√47) (L = 5) **χ = 5** (row 121: measure rigidity for the unit-vector group, row 120, with SP-Cor), and at ℚ(√143), ℚ(√311), ℚ(√335) — T-C(A)'s class among real quadratic fields, exactly `L ≥ 5` (row 117) — five at K0's grade.
+--- [Where the problem stands] a=0.33 b=0.33 c=1.00 inCommit=0.33 (41 B)
+**Not landed: five over ℚ(√3,√5).**
+--- [Where the problem stands] a=0.00 b=0.00 c=1.00 inCommit=0.00 (42 B)
+Five over ℚ(√167) is FS-59's question.
+--- [Paths forward, ranked] a=0.25 b=0.25 c=1.00 inCommit=0.25 (146 B)
+**Left:** the value's prior-art gate and EL2021 §2; MR at row 100's exception fields; X11K's kernel port; stage 4′ moot for ℚ(√47) | none |
+--- [G48] a=0.38 b=0.38 c=0.91 inCommit=0.40 (266 B)
+**Proved range:** L ≤ 4 over every real number field (row 99), L ≤ 5 over multiquadratic F ⊇ K (G55), and at ℚ(√47) (row 121; the K0 fields at their grade); L(F) is the sharp form — the residue graph's chromatic number, 2 at ℚ(√5) where |κ| reads 4.

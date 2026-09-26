@@ -1,0 +1,62 @@
+--- [The novel-results ledger] a=0.00 b=0.58 c=0.89 inCommit=0.58 (265 B)
+**The mechanism that produced the certificate:** the exact bound is rounded from a fresh short continuation's own dual, never from a long-run iterate or through a nudge — SCS's adaptive scale is not checkpointed and drifts (1082 against 1260 from the same solve).
+--- [The novel-results ledger] a=0.00 b=0.19 c=0.56 inCommit=0.19 (304 B)
+**And "short" was too short** (FS-53 phase B, measured): from one parent iterate at q = 67, a **+500** continuation rounded to 748.83 — clearing its threshold by nothing — while **+2,000** gave 745.23, a float bound 1.21 lower whose dual also rounds 2.5× tighter (rounding loss 1.633 against 4.022).
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.00 inCommit=0.00 (63 B)
+The mechanism is unchanged; the number in the recipe was wrong.
+--- [The novel-results ledger] a=0.08 b=0.08 c=0.69 inCommit=0.08 (121 B)
+**Grokkings:** G56 (the window, reciprocity's exclusion), G57 (a field contains √3 iff its usable planes have triangles
+--- [The novel-results ledger] a=0.12 b=0.56 c=0.72 inCommit=0.56 (304 B)
+**no candidate field holds a Moser spindle**), G58 (the antipodal conjecture, 4 of 4). | `data/fs53/` (window.md, CLOSE.md, README.md, g58/, runs/, controls/, ledag/), `data/fplane/map.md`, `Proofs/HadwigerNelson/CayleyCertificate.lean`, `tools/fplane_sat_cube.py`, `plans/STUB-sixth-colour.md` | FS-53 |
+--- [G56] a=0.01 b=0.01 c=0.38 inCommit=0.02 (553 B)
+*Correction record: this entry first named ℚ(√2,√31), ℚ(√5,√51), ℚ(√10,√23), ℚ(√7,√89) and asserted that no single radicand sees a member first with the wall broken (the search stopped at small radicands, 167 > 100); it then named the conductor-13 cubic field for 27 and a cyclic quartic for 31, using "a fixed prime above 2 of norm ≤ 4" as the test — wrong, since a ramified one two-colours at any norm, and both fields are 4-colourable or less; and it proposed ℚ(√3, α), α³ = α + 1, which has a usable plane at 11.*
+--- [G56] a=0.26 b=0.26 c=0.61 inCommit=0.26 (347 B)
+**And 27 is the unique non-prime member, permanently:** usable means q ≡ 3 (mod 4), which for q = p^f holds iff p ≡ 3 (mod 4) **and f is odd** — so "odd residue degree" is not an extra hypothesis but the congruence restated — and of the non-prime prime powers below Weil's cap of 97 (4, 8, 9, 16, 25, 27, 32, 49, 64, 81) only 27 qualifies.
+--- [G56] a=0.15 b=0.15 c=0.41 inCommit=0.15 (197 B)
+**25 = 5² fails twice** (5 ≡ 1 mod 4, and the degree is even) and **49 = 7² fails on the degree alone**, which is the same mechanism that costs de Grey's field the prime 11 at residue degree 2.
+--- [G56] a=0.22 b=0.22 c=0.83 inCommit=0.22 (155 B)
+The next usable prime powers are 3⁵ = 243 and 7³ = 343, far beyond the cap, so the tooling's prime-only assumption costs exactly one member and no more.
+--- [G56] a=0.44 b=0.44 c=0.51 inCommit=0.44 (262 B)
+*Demotion record: this sentence went on "so over a field it seals the residue mechanism forces no pair"; slack only permits gaps (G54's middle case is open), no six-colouring of any window plane is known, and an outside review (2026-09-16) caught the overreach.*
+--- [G58] a=0.35 b=0.35 c=0.70 inCommit=0.35 (159 B)
+**Attempted 2026-09-16 at 23 (k = 7, 8) and 43 (k = 8) as a decision, and it returned NOTHING — every refusal was free and every informative row undecided.**
+--- [G58] a=0.02 b=0.02 c=0.19 inCommit=0.02 (331 B)
+The `(2,2,2,2)` rows fall to the fixed-colour argument in 0 s, the identity rows fall in 0 s to a single edge (some `z` is adjacent to `−z`, so `c(z) = c(−z)` is immediate), and the rows with a τ fixing several colours — the only ones that could carry a colouring — were undecided at 3,000,000 conflicts after 170–483 s.
+--- [G58] a=0.00 b=0.00 c=0.25 inCommit=0.00 (133 B)
+A test whose informative outcome was never shown to be reachable, which is this file's own rule broken by its author within the hour.
+--- [G58] a=0.16 b=0.16 c=0.47 inCommit=0.16 (206 B)
+**The design fix is to change instrument, not budget: G58 asserts EXISTENCE, so the right tool is a FINDER on the antipodal quotient — roughly `(q²+1)/2` orbits — and not a decider on the full plane.**
+--- [G58] a=0.00 b=0.00 c=0.81 inCommit=0.00 (110 B)
+A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim.
+--- [G58] a=0.09 b=0.09 c=0.29 inCommit=0.10 (601 B)
+**Prior art, searched 2026-09-16 (WORKFLOW 3a), under two disciplines and in their words — graph theory (*colouring invariant under a graph automorphism*, *vertex-transitive chromatic number*) and algebraic combinatorics (*Cayley graph colouring invariant under inversion*, *group-invariant colouring*): the discipline's frame is the **Burnside chromatic polynomial of group-invariant graphs**, which counts colourings invariant under a group action, and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer]`, the matrix method of arXiv:2303.06262) works on χ itself and not on invariance.
+--- [G58] a=0.29 b=0.29 c=0.29 inCommit=0.29 (76 B)
+**Nothing found asserting or refuting this statement for any graph family.**
+--- [G58] a=0.21 b=0.21 c=0.55 inCommit=0.21 (314 B)
+Two neighbours that are NOT it: the *distinguishing* chromatic number is the opposite question (colourings preserved by NO non-trivial automorphism), and the known failure of "an optimal colouring invariant under the FULL automorphism group" says nothing about a single involution taken up to a colour permutation.
+--- [G58] a=0.00 b=0.00 c=0.17 inCommit=0.00 (63 B)
+Negative recorded as a finding; the bibliography keys are owed.
+--- [G59] a=0.20 b=0.20 c=0.20 inCommit=0.20 (49 B)
+*Reading — c is bounded by ≈ 0.92 over odd q.
+--- [G59] a=0.25 b=0.25 c=0.53 inCommit=0.25 (188 B)
+**Killing tests, both cheap and both on instruments already built: an independent set of 78 at q = 19, or of 263 at q = 43** — either gives c ≥ 0.933 and kills the uniform route to 31.
+--- [G59] a=0.00 b=0.00 c=0.12 inCommit=0.00 (69 B)
+The margin is 1.3 %: `0.93·19^{3/2} = 77.0` against the measured 76.
+--- [G59] a=0.03 b=0.03 c=0.05 inCommit=0.03 (383 B)
+**The killing test at 19 has now been attacked from both sides and neither lands** (FS-62 §2a, `data/fs62/q19/`): no set of 78 from local search (521,874 restarts), from branch-and-reduce, or from SAT, and no refutation either — the level-3 relaxation reads **80.59** at 19, a float and not a certificate, so `α(19) ∈ [76, 80]` on that reading and the deciding 77 is inside it.
+--- [G59] a=0.00 b=0.00 c=0.00 inCommit=0.00 (49 B)
+**Both routes are now characterised and closed.**
+--- [G59] a=0.32 b=0.32 c=0.39 inCommit=0.34 (253 B)
+SAT: three sound normalisations of the 361 translations (origin pin, centroid, lex-least) leave `k = 78` undecided, and the solver's frontier on this graph is `k ≈ 108`, about thirty above the answer (`k = 110` refutes in 383 s, `k = 105` not in 900).
+--- [G59] a=0.00 b=0.00 c=0.65 inCommit=0.00 (468 B)
+The relaxation: the **fixed-cardinality moment equations** (an external review's first recommendation; 573 of them at 19, exactly the 1 + 17 + 555 it predicted, needing no new moment variables, controlled to machine precision at three field sizes) **add nothing** — the `|T| ≥ 2` equations force `tr Y = k` on their own, so the programme is a pure feasibility test whose threshold can never exceed `⌊N⌋`, and at 19 the threshold is exactly `⌊80.588⌋ = 80`.
+--- [G59] a=0.15 b=0.15 c=0.18 inCommit=0.15 (343 B)
+**And the two EXACT normalisations are both slower than the weak pin and slower than no break at all** — at `k = 115`, 467 s and 1,110 s against the pin's 97 s and 408 s for nothing — because the pin's 22 unit clauses propagate where modular sums and lex chains do not: a symmetry break is an encoding, and is measured rather than argued.*
+--- [G59] a=0.00 b=0.00 c=0.00 inCommit=0.00 (160 B)
+This refines, and does not contradict, the older reading that a proof must see something changing between 19 and 23 — it does, but only for those two members.
+--- [G64] a=0.30 b=0.30 c=0.59 inCommit=0.30 (325 B)
+Both lines of its proof established S ⟹ W; the wall bears on S and on the value set of `L`, never on W, as FS-57's stub and FS-53's plan (corrected 2026-09-15) already said; FS-62's conditional target dissolved with it (under the bold form the plane is 7 with no wall; under the main clause the conclusion does not follow).
+--- [G64] a=0.36 b=0.36 c=0.36 inCommit=0.43 (335 B)
+**Measured 2026-09-17** (`tools/fq_chi.py`, `data/fs62/`): an independent rebuild reproduces `χ = 3, 4, 3, 5, 5` at `q = 3, 7, 9, 11, 19` and gives `χ(UD(𝔽₅,2)) = 3`, `χ(UD(𝔽₁₃,2)) = 5` (both `[Moorhouse2010]` Table 6.1 / M58, so controls, not findings), with 17, 25, 29 at `≥ 5` and undecided at five colours in 90 s.
+--- [G64] a=0.11 b=0.11 c=0.46 inCommit=0.11 (182 B)
+A fresh instance of this file's own rule: the probe's design confirmed that a six was reachable *in principle* and never that it was reachable *at the sizes the budget could decide*.

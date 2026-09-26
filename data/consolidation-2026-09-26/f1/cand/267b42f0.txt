@@ -1,0 +1,30 @@
+--- [Frontier] a=0.02 b=0.11 c=0.32 inCommit=0.11 (428 B)
+*Last updated: 2026-09-16 — FS-53 closed: the window for an exactly six-chromatic finite Euclidean plane fell from eight members to five, **five colours refused by certificate at 43 and 47** so their floor is six and one verified six-colouring at either settles the question, the certificate side exhausted (23, 27, 31, 47 converged and final), every member's field named, and three grokkings minted (G56, G57, G58) — row 69
+--- [Frontier] a=0.01 b=0.04 c=0.33 inCommit=0.24 (525 B)
+**FS-54 twenty-seven opened the same day and is in progress** (`plans/FS54-twenty-seven.md`): **five colours refused at 27 by an exact level-3 certificate, α ≤ 141**, so χ(UD(𝔽₂₇,2)) ∈ {6, 7}; α(27) ≥ 117 everywhere against the 122 six needs; the 2-adic trichotomy (odd-degree fields are 2-colourable); and the wall at six written up for outside help (`reference/wall-at-six/WALL-AT-SIX.md`) and answered twice the same day — the fractional wall W_f, U₃₂'s rigidity, the inert-tower Hoffman invariance.*
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.12 inCommit=0.17 (171 B)
+**FS-53 closed 2026-09-16** (row 69; G56, G57, G58): the window down to five members, five refused at 43 and 47, the certificate side exhausted, every member's field named
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.05 inCommit=0.10 (152 B)
+**FS-54 twenty-seven is the next milestone** (Kooshi) — the one member no instrument here can look at, and the one whose six-question needs the least.
+--- [Paths forward, ranked] a=0.00 b=0.08 c=0.67 inCommit=0.11 (259 B)
+**FS-50 closed 2026-09-15** (row 68, G56): six colours refused at 83 by two independent exact certificates, the instrument (the triple-level SDP in real blocks on the GPU, the exact rational certificate, the stranger-checkable checker) proved at 11, 23 and 83
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.20 (58 B)
+**FS-53 the sixth colour is the next milestone** (Kooshi).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (169 B)
+**Ranked stubs** (re-ranked 2026-09-15 at FS-50's close: FS-53 the next milestone (Kooshi); FS-40 absorbed; FS-51/52 listed; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (192 B)
+| 1 | **FS-54 twenty-seven — IN PROGRESS** (`plans/FS54-twenty-seven.md`, handoff `plans/SESSION-HANDOFF-2026-09-16-fs54.md`) | what is α(UD(𝔽₂₇,2)), and is that plane six-chromatic?
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (209 B)
+**Every method stops at α ≥ 117** (six needs 122): exhaustive subspace-periodic 117, KaMIS 117 on 7 seeds, every prime-order symmetry class ≤ 117, the Rust ladder 117 at every stage; all 117-sets 4-rigid.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.21 inCommit=0.00 (186 B)
+**Five refused**: the GLV level-3 certificate gives **α ≤ 141** (`data/fs54/cert-q27-l3-N141.json`, CERTIFIED, 21 controls; also α(7) = 14 and α(11) = 28 exactly), so χ ∈ {6, 7}.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.05 inCommit=0.00 (136 B)
+**Next: level 3 at 47**, where α ≤ 368 refuses six and proves W_f there (0.76 % below the converged 371.84), then 23 (five if < 106).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (188 B)
+The strangeness is explained: the integer spectrum is Bridges–Mena plus a mod-3 congruence (Moisio's elliptic curves), the triangles are collinear 𝔽₃-lines, |Aut| = 122,472 exactly.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.10 inCommit=0.00 (229 B)
+Found on the way: **every odd-degree field is 2-colourable** (a ramified prime above 2), the smallest fields per member are quadratic, and **U₆₄ = Cay(𝔽₄₀₉₆, μ₆₅) is a 2-adic window member** (Hoffman floor 6).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.15 inCommit=0.00 (292 B)
+The outward request for the governing theorem: `reference/wall-at-six/WALL-AT-SIX.md` | **the highest of any open stub in either outcome** — five refused there puts its floor at six at the most achievable threshold in the window; a plateau far below 122 brings the negative close in sight |
+--- [G56] a=0.12 b=0.14 c=0.50 inCommit=0.22 (458 B)
+**Under the conjecture the window's sharpest consequence is quadratic** (FS-54 §W): ℚ(√167) breaks the wall and its usable planes below 100 are 23, 43, 59, 67, 71, 79, 83, so once five is refused at 23 the conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way the window goes (6 if Γ₂₃ or Γ₄₃ is six-chromatic, 7 by the bold form if not), against a proven 3 in a triangle-free quadratic field — the cheapest place the bold form can fail.

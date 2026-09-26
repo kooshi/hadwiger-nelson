@@ -1,0 +1,26 @@
+--- [Where the problem stands] a=0.08 b=0.08 c=0.08 inCommit=0.08 (103 B)
+**Six may be a value nothing attains, and proving that is a two-value Hadwiger–Nelson** (G64, FS-62).
+--- [Where the problem stands] a=0.13 b=0.19 c=0.26 inCommit=0.23 (197 B)
+*"No subfield of ℝ has χ(F²) = 6"* is equivalent to χ(ℝ²) ∈ {5, 7} (modulo FS-39), so the value-skipping this project keeps observing is the open problem reduced from three values to two.
+--- [Where the problem stands] a=0.17 b=0.17 c=0.24 inCommit=0.17 (166 B)
+It factors into the wall at six — finite, six graphs, G56/G59 — and a gap theorem χ(F²) ≥ 6 ⟹ χ(F²) ≥ 7, whose engine is G55's chain at one rung higher.
+--- [Where the problem stands] a=0.38 b=0.38 c=0.49 inCommit=0.49 (275 B)
+Unconditionally, since L(F) is never 6, **the only fields that could be exactly six-chromatic are the ones the conjecture predicts to be seven**: six hides only in the gap between L(F) and χ(F²), where every ceiling we own is silent (FS-64 is the one proposal that is not).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (190 B)
+**Ranked stubs** (re-ranked 2026-09-17 at FS-58's close, and again the same day when a conversation on where six could hide minted FS-62–FS-64; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.03 b=0.05 c=0.18 inCommit=0.12 (488 B)
+| 1 | **FS-62 six is not a value** — `plans/STUB-six-is-not-a-value.md` | state and attack *no subfield of ℝ has χ(F²) = 6*, which is χ(ℝ²) ∈ {5, 7} — the finite half is the wall (FS-57), the mathematical half a gap theorem χ ≥ 6 ⟹ χ ≥ 7 through G55's chain at six; prerequisites FS-39 and FS-47 | **none on finding a 6-forcer; the largest theorem target on the board** — a two-value Hadwiger–Nelson, and it re-aims the wall and census work that already exists |
+--- [G64] a=0.19 b=0.19 c=0.36 inCommit=0.19 (243 B)
+* **G64 — Six is the value nothing attains, and saying so IS the theorem. [derived; the pattern a reading]** **The equivalence, modulo FS-39:** *no subfield `F ⊆ ℝ` has `χ(F²) = 6`* ⟺ `χ(ℝ²) ≠ 6` ⟺ **`χ(ℝ²) ∈ {5, 7}`**.
+--- [G64] a=0.00 b=0.00 c=0.14 inCommit=0.00 (66 B)
+Backward: the plane's value is the supremum of the fields' values.
+--- [G64] a=0.14 b=0.14 c=0.14 inCommit=0.14 (196 B)
+**So the observed value-skipping is not a curiosity about quadratic fields — it is Hadwiger–Nelson reduced from three values to two, and would be the first narrowing since de Grey removed 4.**
+--- [G64] a=0.21 b=0.23 c=0.72 inCommit=0.44 (223 B)
+`χ(F²) ≤ L(F)` is a theorem (row 52; the field-level step is row 57's gap, FS-47), so every field with a usable small prime is *already* excluded as a home for six; and the wall at six (G56, G59) says `L(F)` is never 6.
+--- [G64] a=0.31 b=0.31 c=0.50 inCommit=0.31 (185 B)
+What remains is a **gap theorem** — `χ(F²) ≥ 6 ⟹ χ(F²) ≥ 7` — whose engine would be G55's chain theorem one rung up: a 6-colour forced pair at `δ` with `1/δ ∈ ℤ[U]`.
+--- [G64] a=0.17 b=0.17 c=0.22 inCommit=0.17 (150 B)
+Half the target is a finite computation already down to six graphs; the other half is this file's own open structural question at six instead of five.
+--- [G64] a=0.00 b=0.00 c=0.07 inCommit=0.00 (182 B)
+**Unconditionally, and this is the aiming statement:** since `L` is never 6, **the only fields that could have `χ(F²) = 6` are exactly the fields the conjecture predicts to be 7.**

@@ -1,0 +1,30 @@
+--- [Frontier] a=0.00 b=0.03 c=0.48 inCommit=0.11 (483 B)
+Before that, 2026-09-17 — **FS-58 closed** (rows 72–73, G61): **the plane over ℚ(√11) needs four colours, in the kernel** — a 204-point triangle-free unit-distance graph with coordinates in ℚ(√11) admits no proper 3-colouring (`four_le_chromaticNumber_planeOver_eleven`), so χ(ℚ(√11)²) = 4 with the prior-art upper bound; χ ≥ 4 certified for ℚ(√23), ℚ(√47), ℚ(√71), ℚ(√95), ℚ(√191) (four exactly except 47); the 3-adic barrier in the kernel
+--- [Frontier] a=0.40 b=0.40 c=0.80 inCommit=0.20 (47 B)
+**χ(ℚ(√167)²) ≥ 4 not landed** (FS-59).
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (38 B)
+FS-56 closed the day before (row 71).*
+--- [Where the problem stands] a=0.00 b=0.00 c=0.33 inCommit=0.33 (64 B)
+**Real quadratic fields need four colours** (G61, rows 72–73).
+--- [Where the problem stands] a=0.04 b=0.11 c=0.30 inCommit=0.20 (253 B)
+**χ(ℚ(√11)²) = 4**, the lower half in the kernel from a 204-point triangle-free graph, and **χ(ℚ(√d)²) = 4 for d = 23, 71, 95, 191**, `4 ≤ χ(ℚ(√47)²) ≤ 5`, certified (tools); the upper halves are the residue plane at 7 (11 for 47).
+--- [Where the problem stands] a=0.00 b=0.22 c=0.28 inCommit=0.22 (149 B)
+Over ℚ(√11) a 52-point forcer and a four-copy chain (G55 at three colours); elsewhere balls of saturated 3-non-integral lattices refuse outright.
+--- [The novel-results ledger] a=0.00 b=0.23 c=0.36 inCommit=0.23 (191 B)
+**Prior art:** the framework and the 1/k obstruction (no additive k-colouring, k ≤ 10, of a wall-broken plane) are `[Fischer1990]` Thm 10(ii). | `Additive.lean`, `tools/additive.py` | M56 |
+--- [Paths forward, ranked] a=0.00 b=0.33 c=0.50 inCommit=0.50 (101 B)
+**FS-61, the census of real quadratic fields, opened 2026-09-19** (`plans/FS61-quadratic-census.md`).
+--- [Paths forward, ranked] a=0.00 b=0.03 c=0.50 inCommit=0.33 (192 B)
+**FS-58 closed 2026-09-17** (rows 72–73, G61): χ(ℚ(√11)²) = 4 with the lower half in the kernel; χ ≥ 4 certified for five more real quadratic fields; ℚ(√167) not landed (FS-59).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (173 B)
+**Ranked stubs** (re-ranked 2026-09-19: FS-61 opened; G64's equivalence corrected, which sends FS-62, FS-57 and FS-65 to rank 8; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.06 b=0.06 c=0.28 inCommit=0.06 (546 B)
+| open | **FS-61 the quadratic census** (opened 2026-09-19, `plans/FS61-quadratic-census.md`) — `plans/STUB-quadratic-census.md` | for which real quadratic `d` does FS-58's direct route (saturated 3-non-integral lattice, quotient filter, ball refusal, extraction) prove χ ≥ 4, and what arithmetic decides it; known 2- and 3-chromatic fields as controls | none directly; high for the conjecture's level-4 clause across a family (candidate T4: every squarefree d ≡ 11 (mod 12) needs four — the whole family that can, 40 fields below 500) |
+--- [Paths forward, ranked] a=0.03 b=0.05 c=0.12 inCommit=0.39 (589 B)
+| 1 | **FS-59 four colours over ℚ(√167)** — `plans/STUB-four-colours-167.md` | the conjecture predicts six; nothing above three proven; no coarse 3-non-integral lattice with short odd cycles to denominator 2520; two balls (2.36M, 4.46M points) undecided at 1,800 s; routes: decide them, search further, forcer-shaped chain pieces, rigidity of the 3-integral graph | **the conjecture's cheapest exposed prediction and therefore, under the 2026-09-17 target, the falsification target** — predicted ≥ 6 against a proven 3, and the last testable case below Hadwiger–Nelson itself |
+--- [G61] a=0.39 b=0.39 c=0.39 inCommit=0.39 (210 B)
+* **G61 — Three colours break at arithmetic, not at size. [kernel + certified + measured; two readings]** Over a real quadratic field with `d ≡ 2 (mod 3)` three things meet in every finite refutation found.
+--- [G61] a=0.15 b=0.15 c=0.15 inCommit=0.33 (198 B)
+(3) **The rational directions are load-bearing** [measured]: the `√d`-vectors alone force nothing in either field tried; with the axis and the `(3/5, 4/5)` family, ℚ(√11) forces from margin 2.
+--- [G61] a=0.41 b=0.41 c=0.59 inCommit=0.41 (165 B)
+*Readings, each with its test:* forcing at small size tracks short odd cycles in a coarse 3-non-integral lattice (ℚ(√167) has none to denominator 2520 — FS-59)

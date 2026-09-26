@@ -1,0 +1,6 @@
+--- [Frontier] a=0.00 b=0.00 c=0.62 inCommit=0.19 (119 B)
+**FS-54 twenty-seven is the next milestone** (Kooshi: "It is very suspicious, and we need to tweak our tools for it").*
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.12 (159 B)
+**The only window member no instrument here can look at** — both Rust search tools take `--p <PRIME>` and 27 = 3³, so its α cell is the table's only blank.
+--- [Paths forward, ranked] a=0.04 b=0.04 c=0.17 inCommit=0.25 (856 B)
+It is the **unique non-prime member and permanently so** (usable needs q ≡ 3 mod 4, i.e. p ≡ 3 mod 4 with ODD degree; of the non-prime prime powers under Weil's cap only 27 qualifies — 25 fails twice, 49 on the degree alone); its λ_min is **exactly −8** where every other member has irrational Kloosterman values; it has the **worst certificate reach measured, 0.9110, converged**; it **misses refusing five by one integer**, permanently; its ω = 3 comes from the **characteristic**, where √3 = 0 and the equilateral triangle degenerates, unexplained; and **six needs less of it than of any member** (α/N ≥ 0.827, against 0.994 at 47) | **the highest of any open stub in either outcome** — five refused there puts its floor at six at the most achievable threshold in the window; a plateau far below 122 brings the negative close in sight |

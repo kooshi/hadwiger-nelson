@@ -1,0 +1,4 @@
+--- [Where the problem stands] a=0.00 b=0.22 c=0.30 inCommit=0.00 (139 B)
+Every Γ_p with p ≡ 3 (mod 4) from 59 up refuses five colours by its spectrum, and Γ₈₃ refuses six by an exact certificate (row 68).
+--- [G73] a=0.46 b=0.46 c=0.51 inCommit=0.46 (246 B)
+**What survives, colour-generically, is a looseness instrument:** a full-dimensional cell of `Θ_k` gives `P = F = 0` at `k` colours, which is how `L21cc6506` was shown loose after 4,490 Kempe-rigid orbits of one period had looked rigid (row 81).

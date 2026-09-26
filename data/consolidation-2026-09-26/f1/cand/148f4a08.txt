@@ -1,0 +1,6 @@
+--- [Frontier] a=0.02 b=0.12 c=0.28 inCommit=0.22 (355 B)
+*Last updated: 2026-09-15 — FS-50 closed: six colours refused at 83 by two independent exact certificates (row 68), the sieve's six gone from K(√7); the window for an exactly six-chromatic plane and reciprocity's exclusion of it for every field containing ℚ(√3,√11) (G56); the sixth-colour question minted as FS-53, the next milestone (Kooshi).*
+--- [Paths forward, ranked] a=0.05 b=0.05 c=0.15 inCommit=0.05 (155 B)
+| 1 | FS-53 the sixth colour — `plans/STUB-sixth-colour.md` | which prime has χ(UD(𝔽_p,2)) = 6 exactly, and which field has local bound 6 through it?
+--- [Paths forward, ranked] a=0.12 b=0.12 c=0.22 inCommit=0.19 (590 B)
+The window is p ∈ {23, 31, 43, 47, 59, 67, 79} (71 is ≥ 7 by spectrum, 83 refused six by certificate on 2026-09-15, Weil refuses it from 103), none decided; by reciprocity no field containing ℚ(√3,√11) can use a window prime, so six needs a field without √11 (ℚ(√2,√3,√31) sees only 23, ℚ(√2,√3,√7) only 47); under the conjecture the window decides whether six exists at all: no six-chromatic plane ⟹ χ(ℝ²) ∈ {5, 7}; one ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness | the highest in either outcome |

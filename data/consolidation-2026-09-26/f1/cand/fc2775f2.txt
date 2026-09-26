@@ -1,0 +1,72 @@
+--- [Frontier] a=0.03 b=0.13 c=0.50 inCommit=0.17 (212 B)
+*Last updated: 2026-09-13 — FS-38 closed (rows 66–67, G54): the fan gap frees every pair over a sealed field, and the 2-adic tower stabilises at level 4; the frontier re-ranked on the tight/slack classifier.*
+--- [The novel-results ledger] a=0.00 b=0.11 c=0.14 inCommit=0.52 (409 B)
+Proof logs — 0.35 GB DRAT, 1,001 MB text LRAT over 11.8 M lines, all 20 UNSAT ending in the empty clause with a negative control discriminating — were **generated, never checked** (no DRAT or LRAT checker on this machine; LRAT is the pipeline's input, not the kernel's format; kernel-checking priced at ~15× the per-cube volume row 40 declined) and **never committed: they lived in `/tmp` and are gone**.
+--- [The novel-results ledger] a=0.00 b=0.26 c=0.32 inCommit=0.26 (134 B)
+Residual, priced not pursued: `n = 10` (`K(√13)`, at risk) uncomputed at ~6.6 M points; the sub-bound radius lever is worth 6–23%.
+--- [The novel-results ledger] a=0.00 b=0.59 c=0.59 inCommit=0.59 (188 B)
+**Prior art:** the move is `[Polymath16blog]`, Silberman, 2018-04-19, never returned to; the coincidence-site-module literature excludes the object by definition (`[BaakeZeiner2017]` §6).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.14 inCommit=0.00 (103 B)
+**Ranked stubs** (re-ranked 2026-09-13 at the FS-38 close; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [G7] a=0.46 b=0.46 c=0.46 inCommit=0.46 (171 B)
+Both detunes above are members: **`n = 3` IS the Moser twist** (`cos θ = 5/6`, 33.557°, radicand 11) and **`n = 4` IS ρ₁₅** (`cos θ = 7/8`, 28.955°, radicand 15).
+--- [G21] a=0.32 b=0.32 c=0.38 inCommit=0.32 (340 B)
+**The mechanism is selection, and it is general**: a defect whose result displeases is investigated within the hour; one whose result pleases is congratulated and kept — five independent defects in three phases of M63, including a solver engine present in the code and in neither document whose bounds ran high, were every one flattering.
+--- [G31] a=0.47 b=0.47 c=0.57 inCommit=0.48 (394 B)
+The `ρ₆₃` arena — produced, purpose-built, in a 6-open field where row 55's bar does not apply, so a five-colour forced pair was permitted at every distance — has **0 forced pairs of 1,307,266,278 and 0 virtual edges of 1,306,721,748**, certified by 4,480 exhibited five-colourings with no solver UNSAT, the survivor set a superset of the truth; Heule-510 and Heule-553 return 0 and 0.
+--- [G31] a=0.42 b=0.42 c=0.42 inCommit=0.42 (101 B)
+Open: arity 3, swept only on 163 interface vertices (`1.6e-7` of the space), 337 candidates standing.
+--- [G46] a=0.00 b=0.00 c=0.00 inCommit=0.00 (68 B)
+Its discoverer declined the credit for depth and named this instead.
+--- [G53] a=0.43 b=0.43 c=0.46 inCommit=0.43 (471 B)
+A **counting** compulsion, a shape the vocabulary lacked — not "this pair is forced" (`Forces`) nor "this k-set is covered" (`Fan`) but "at least `L` of these `n` points share one designated point's colour" — with a forced pair as `L = count` and an intersecting family as `2L > count`; it explains why both fail on `ρ₆₃`, where `L/count = 10/30` (provisional, under two-sided re-verification) and no circle point is forced (all 30 satisfiable, self-certifying).
+--- [G51] a=0.40 b=0.40 c=0.40 inCommit=0.40 (93 B)
+**Extended 2026-09-12 with the mechanism, which is not carefulness — it is a COST WINDOW.**
+--- [G51] a=0.21 b=0.21 c=0.21 inCommit=0.21 (343 B)
+In one phase three agents exchanged about twenty messages: four of the advisor's constructions were retracted, three of the planner's catches landed on the advisor, one of the planner's registrations was mis-specified, the prior-art agent refuted something and corrected its own refutation — and the final plan contains none of those errors.
+--- [G51] a=0.32 b=0.32 c=0.59 inCommit=0.32 (157 B)
+**Every one of those retractions was free**: nothing committed, no solver time paid, nothing claimed outside the room; the cost of being wrong was one reply.
+--- [G51] a=0.06 b=0.06 c=0.52 inCommit=0.06 (205 B)
+Once retraction is expensive — after a commit, a paid run, a statement to a third party — the same speed produces escalation, because the cost of being wrong has become the cost of having *been* wrong.
+--- [G51] a=0.00 b=0.00 c=0.25 inCommit=0.00 (151 B)
+Its author declined the credit and named the sequencing: having been wrong twice that evening on the same kind of step made the third one cheap to see.
+--- [Toolchain] a=0.00 b=0.00 c=0.00 inCommit=0.00 (211 B)
+**Corrected 2026-09-12**, where this file had said "32 cores": an agent sizing a job from it reasoned that 32 concurrent solvers on 16 cores must be contending, killed a running job and relaunched at half width.
+--- [Toolchain] a=0.23 b=0.23 c=0.23 inCommit=0.23 (409 B)
+Restoring 32-way was right — observed throughput **12.6 cubes/min** against the ~8/min sixteen workers give — but within one difficulty class the per-cube times at ONE width vary by as much as any width effect (32-way 105.1 s and 129.2 s on two runs, 16-way 126.6 s), so **the width effect is not distinguishable from run-to-run variation in this data**, and only "no *large* contention penalty" survives.
+--- [Toolchain] a=0.00 b=0.00 c=0.11 inCommit=0.38 (299 B)
+The agent had just been credited with instancing *"a number carries what it measures"* and then broke it again inside the act of correcting the first break — comparing "the numbers from before" against "the numbers from after" without checking that the two cube ranges had the same difficulty mix.
+--- [Building] a=0.32 b=0.32 c=0.32 inCommit=0.32 (201 B)
+It first asks Lake once, under the same cap, whether any of those modules is out of date (`lake build --no-build`, which compiles nothing): about 2 seconds, against about 3 minutes to walk the batches.
+--- [The kernel's cost model] a=0.00 b=0.00 c=0.00 inCommit=0.00 (68 B)
+Extract the core first (recipe: `Instances/TwoAdicFive/Edges.lean`).
+--- [Make the gate fail, and watch it fail] a=0.41 b=0.41 c=0.53 inCommit=0.41 (117 B)
+The **lower** bound fails when the plant has stopped firing at all; the **upper** bound fails when it fires too much.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (118 B)
+**A plant asserted only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.04 inCommit=0.00 (157 B)
+The replay also showed the adaptive policy slightly worse than the best fixed one until the accept rate falls, which a second run would have hidden in noise.
+--- [Make the gate fail, and watch it fail] a=0.48 b=0.48 c=0.57 inCommit=0.48 (160 B)
+The 24% came from a walk already fallen into the cheap satisfiable regime, where each step is answered in a millisecond because the object has stopped refusing.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (75 B)
+The headline was amplified twice and kept a dead object alive an extra day.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.24 inCommit=0.00 (149 B)
+Third instance in one milestone of a decisive zero from a generator that could not represent its target, every one with its positive control passing.
+--- [Make the gate fail, and watch it fail] a=0.11 b=0.11 c=0.35 inCommit=0.11 (299 B)
+An engineer proved a two-case theorem whose load-bearing hypothesis — `√(4n−1) ∉ K`, without which the arena lies in `K²` and Theorem B four-colours it — it had just argued for, then tested it out of sample at `n = 3`, where `4n−1 = 11` and `√11 ∈ K` **by definition of the field**.
+--- [Make the gate fail, and watch it fail] a=0.31 b=0.31 c=0.37 inCommit=0.31 (488 B)
+**Its first account of the miss — a mis-filed fact — was wrong in the direction that flattered it**: `n = 3` fails **two** gates, the 2-adic wall and `sin θ ∉ K`; it had noticed the first, attributed the consequence to it, been correct (*"this member can never reach five colours"* is true), and so **a true and sufficient-sounding reason made the member look SAFE to compute on** — dead as an object, free as a test case — and it never asked whether a second gate also failed.
+--- [Make the gate fail, and watch it fail] a=0.23 b=0.23 c=0.46 inCommit=0.23 (94 B)
+The archetype above in a costume: a check that loads two versions and identifies them by name.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (58 B)
+**And do not cite that catch as evidence the rule works.**
+--- [Make the gate fail, and watch it fail] a=0.38 b=0.38 c=0.38 inCommit=0.38 (210 B)
+Its finder declined exactly that: it had been forced to reason about module identity hours earlier, on a task that happened to load two copies in one process, and archiving carried the reasoning along for free.
+--- [Make the gate fail, and watch it fail] a=0.27 b=0.27 c=0.30 inCommit=0.27 (262 B)
+Someone archiving a script that only ever loaded one tree gets a harness printing `ALL MATCH` while comparing today against today — the argument **for** writing the rule down: **it does not reproduce from care, only from the negative control being mandatory.**
+--- [Make the gate fail, and watch it fail] a=0.36 b=0.36 c=0.45 inCommit=0.36 (157 B)
+**Do not mistake a one-sided filter for an inverted monotonicity** — a correction to this entry, made by an advisor against the product owner who wrote it.
+--- [Make the gate fail, and watch it fail] a=0.28 b=0.28 c=0.50 inCommit=0.48 (416 B)
+Once a base contains the witness, growing it cannot recover the four-colouring (more material adds colour differences, and the certificate needs a value outside them); it is **false** that this inverts the usual direction — adding material makes a graph harder to colour and makes a *sufficient condition for colourability* harder to fire, the same statement seen once directly and once through a one-sided filter.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (84 B)
+Reasoning finds the controls you thought about; planting finds the ones you did not.

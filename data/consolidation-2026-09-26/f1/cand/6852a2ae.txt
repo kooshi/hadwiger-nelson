@@ -1,0 +1,18 @@
+--- [The novel-results ledger] a=0.00 b=0.04 c=0.04 inCommit=0.04 (262 B)
+Registered predictions: P4a/P5/P8 met, P4b refuted, P4c met one level deeper, P2 undecided, P3 vacuous, P6 missed, P7 refuted literally, P1 missed (certificate deferred). | `DistanceGraph.lean`, `OneDefect.lean`, `tools/twodist.py`, `tools/killengine.py` | M49 |
+--- [The novel-results ledger] a=0.00 b=0.14 c=0.16 inCommit=0.14 (326 B)
+Proof logs (0.35 GB DRAT, 1,001 MB LRAT over 11.8 M lines, all 20 UNSAT ending in the empty clause, a negative control discriminating) were **generated, never checked** (no checker on this machine; kernel-checking priced at ~15× the per-cube volume row 40 declined) and **never committed: they lived in `/tmp` and are gone**.
+--- [The novel-results ledger] a=0.13 b=0.22 c=0.22 inCommit=0.24 (255 B)
+**The result is the field, not the size**: `K(√7)` is 6-open, so 11 is not usable there and row 55's bar does not apply — not the first such platform (de Grey's field is 6-open, G43) but one at half the degree, reached by the screen rather than found.
+--- [G3] a=0.20 b=0.20 c=0.20 inCommit=0.20 (94 B)
+This is the hexagonal fabric's form — Haugland's heptagonal forcer (G11) uses a cubic field.
+--- [G12] a=0.00 b=0.00 c=0.00 inCommit=0.00 (76 B)
+It includes the conjugate-ring channel (17 ∓ √33)/6 ↔ (17 ± √33)/6.
+--- [G46] a=0.27 b=0.27 c=0.69 inCommit=0.27 (355 B)
+The result that closed M63's rotation screen — a radius-free, base-free elimination — is a corollary of Theorem B applied to an object nobody had pointed it at, and what produced it was four lines of `Arena.__init__`: the rotated half carries the **same index set and the same internal edge list** as the original, so one colouring covers both halves.
+--- [Toolchain] a=0.00 b=0.00 c=0.14 inCommit=0.00 (138 B)
+**The mechanism this produced is worth more than either number, because it is the answer to why writing a rule down does not install it.**
+--- [Toolchain] a=0.02 b=0.02 c=0.20 inCommit=0.02 (294 B)
+An agent compared "the numbers from before" against "the numbers from after" without checking that the two cube ranges had the same difficulty mix; what caught it was **the cost model failing an arithmetic check** — 32 workers at ~125 s should yield 15 cubes/min, far more than it was seeing.
+--- [Building] a=0.46 b=0.46 c=0.54 inCommit=0.46 (193 B)
+Put checkpoints outside the scratch tree, and name the **resume command** in the subplan beside the checkpoint's path — a checkpoint nobody knows how to resume from is a file, not a recovery.

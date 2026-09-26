@@ -1,0 +1,4 @@
+--- [Paths forward, ranked] a=0.15 b=0.22 c=0.83 inCommit=0.17 (469 B)
+| 13 | **FS-97 invariant four-colourings whose spectrum reads infinitely many places** — `plans/STUB-infinite-place-spectra.md` (minted at row 88's close) | row 88's measure half beyond Theorem C (row 112): spectra on the union over finite `S` of `T + A + Fin_S` and on no single one (R1), or reading infinitely many split places (R2); entropy and ×2×3; the ℚ(√47) form | none directly; the only measure route to `F(R)` over type (B) and to `χ(ℚ(√47)²)` |
+--- [Paths forward, ranked] a=0.27 b=0.27 c=0.69 inCommit=0.58 (225 B)
+| 14 | **FS-96 windows at the non-mixing places** — `plans/STUB-windows-five-nonmixing.md` (minted at M3's close) | D2 at seven places, the null-set step; FS-64 at five colours over ℚ(√167) after row 110 | speculative |

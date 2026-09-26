@@ -1,0 +1,2 @@
+--- [Paths forward, ranked] a=0.14 b=0.14 c=1.00 inCommit=0.14 (243 B)
+Next: gate into `Proofs/`, `posDef_corr`, the upper half from row 52 and the stable-prime valuation subring (row 57's gap), then which inputs to build and which to keep as interfaces | none; the conjecture's proved range to the kernel's word |

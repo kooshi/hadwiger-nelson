@@ -1,0 +1,8 @@
+--- [Paths forward, ranked] a=0.00 b=0.25 c=0.38 inCommit=0.25 (126 B)
+**FS-70 — five colours over ℚ(√3,√5) — chosen 2026-09-21** (Kooshi; `plans/STUB-five-over-sqrt3-sqrt5.md`; running).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (90 B)
+**Kooshi's sequencing (2026-09-21, evening): FS-70 first; FS-59's R9 deferred behind it.**
+--- [Paths forward, ranked] a=0.00 b=0.13 c=0.29 inCommit=0.04 (327 B)
+| 1 | **FS-70 five colours over ℚ(√3,√5)** — `plans/STUB-five-over-sqrt3-sqrt5.md` | the smallest field outside the conjecture's proved range with allowance five (usable planes 11, 59, 71; wall broken; χ ≥ 4 by FS-48's rhombus chain; predicted 5) — and **no Moser spindle can be drawn in it** (√3 yes, √11 no).
+--- [Paths forward, ranked] a=0.00 b=0.07 c=0.10 inCommit=0.00 (400 B)
+Target: a four-colour forced pair at distance 2 on ℚ(√3,√5) fabric closed by ρ₁₅ ∈ ℚ(√3,√5) (the chain, 1/2 ∈ ℤ[U]); gate first on the fields of `[Voronov2021]`'s and `[Haugland2026]`'s Moser-free five-forcers | **the conjecture's last meetable prediction, and the vocabulary a six-forcer needs**: the window fields admit no spindle either (G57); mechanism high, six indirect |

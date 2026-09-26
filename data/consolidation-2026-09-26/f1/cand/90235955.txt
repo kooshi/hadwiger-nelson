@@ -1,0 +1,8 @@
+--- [Paths forward, ranked] a=0.24 b=0.24 c=0.60 inCommit=0.24 (386 B)
+**One is open: FS-84** (ℚ(√47): five colours; `plans/FS84-five-colours-47.md`) — its question is **answered** by FS-100 stage 5 (row 121); S1, its derivation, and S1V, its blind verification, are done (`plans/FS84-S1-derivation.md`, `plans/FS84-S1V-verification.md`); its remaining stages (S2 onward, from 2026-10-01) are re-aimed toward Soifer 55.1 as posed (the table's rank 4).
+--- [Paths forward, ranked] a=0.11 b=0.18 c=0.36 inCommit=0.11 (228 B)
+| 4 | **FS-84 ℚ(√47): five colours** — `plans/STUB-five-colours-47.md` (FS-59's sibling) | L = 5 at every level and `4 ≤ χ ≤ 5`: the conjecture's cheapest exposed five-clause; 25 survivors of 127 lattices, 10 minimal.
+--- [Paths forward, ranked] a=0.11 b=0.11 c=0.96 inCommit=0.11 (213 B)
+**Answered by FS-100 stage 5** (row 121); S2 onward (post-ban) re-aimed to an explicit triangle-free five-chromatic graph over ℚ(√47) (Soifer 55.1 as posed) — the owner's ruling, Kooshi may close it instead.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.14 inCommit=0.00 (272 B)
+Before the answer, a falsifying four-colouring was shown to be no finite-place window, no character colouring, and to carry no finite-place spectrum (rows 92, 96, 113) | none directly (5-sealed); a five would answer Soifer's Open Problem 55.1 (`CLOSED-QUESTIONS.md` §3) |

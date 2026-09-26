@@ -1,0 +1,20 @@
+--- [Where the problem stands] a=0.41 b=0.41 c=0.56 inCommit=0.41 (358 B)
+**The design target has no instance** (G48, row 66): the six-level question — a pair forced equal at five colours over a 5-sealed field at 11 ∣ d², spindled into a 6-open field — is answered **no by theorem** over every 5-sealed multiquadratic F ⊇ K: Γ₁₁'s fan gap, repainted along the residue map, frees every pair above it, at every distance.
+--- [Where the problem stands] a=0.41 b=0.41 c=0.41 inCommit=0.41 (211 B)
+The frame that replaces it is **tight or slack** (G54): the residue plane forces pairs where it is Hoffman-tight, or where its colourings pull back from a tight quotient (row 87); no 5-sealing plane does either.
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (50 B)
+The two members below the record die by Theorem B.
+--- [Where the problem stands] a=0.21 b=0.33 c=0.52 inCommit=0.36 (192 B)
+**The census is complete** (row 83); ℚ(√47) stands at `4 ≤ χ(ℚ(√47)²) ≤ 5`, five not landed (row 84, FS-84), and cannot close from above by residues at any depth (§1.7, row 75).
+--- [Where the problem stands] a=0.12 b=0.25 c=1.00 inCommit=0.12 (93 B)
+*"No subfield of ℝ has χ(F²) = 6"* implies χ(ℝ²) ∈ {5, 7} and is not implied by it.
+--- [Where the problem stands] a=0.42 b=0.44 c=0.45 inCommit=0.42 (389 B)
+A gapped periodic four-colouring of `Λ/NΛ` frees every pair on the lattice (rows 56, 66), and periodic colourings are residue colourings prime by prime, so a lattice is rigid — the chain route's fabric — only where every odd prime's target refuses: de Grey's lattice over K does at 5, 7, 11, 13; no lattice of rank ≤ 6 over ℚ(√3,√5) does; the rank-8 one is undecided (FS-72).
+--- [Where the problem stands] a=0.00 b=0.25 c=0.50 inCommit=0.00 (62 B)
+The split-prime tower at 2 is tight with forcing from depth 3.
+--- [Where the problem stands] a=0.00 b=0.00 c=0.38 inCommit=0.00 (155 B)
+No other rank-4 CM lattice in FS-73's table is rigid at four colours; rank 6 adds L3 (loose with no gap) and KR6 (`F ⊇ 8Λ_dG`, four-colourability open).
+--- [Where the problem stands] a=0.38 b=0.40 c=0.48 inCommit=0.38 (397 B)
+Rigidity splits into invariant measures and transience (row 111): every invariant random four-colouring whose spectrum reads finitely many places is a pullback (row 112), so a "no" is transient or reads infinitely many split places; transience stops at two named steps (isolation from a finite patch, defect growth). ℚ(√2,√3), its member with triangles, is rigid given Heule's T721 (row 93).
+--- [Where the problem stands] a=0.33 b=0.38 c=0.71 inCommit=0.33 (189 B)
+FS-76's rank-one question (every phase rigid ⟹ no wall) is *countable ⟹ finite* for four-colouring shifts of distance graphs on ℤ, and a statement about single heteroclinic colourings

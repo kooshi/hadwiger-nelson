@@ -1,0 +1,2 @@
+--- [Building] a=0.00 b=1.00 c=1.00 inCommit=0.00 (342 B)
+(b) The repair attempt then ran `for p in $(pgrep -u $USER -f "fplane_sat_cube.py run"); do kill -TERM $p; done` — and `pgrep -f` matched **the shell executing the loop**, whose command line contains the pattern, so the shell killed itself mid-loop before reaching a single real target and exited 144, which reads like an unrelated failure.

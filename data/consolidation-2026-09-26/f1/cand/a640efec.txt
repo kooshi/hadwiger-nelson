@@ -1,0 +1,6 @@
+--- [Paths forward, ranked] a=0.03 b=0.06 c=0.28 inCommit=0.03 (299 B)
+**FS-71 — the theorem audit — OPEN** (Kooshi, 2026-09-22; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): every theorem every prior milestone proved outside the kernel, found and filed in a per-milestone derivation file with a kernel decision and indexed in `LEDGER.md` § B.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.12 inCommit=0.24 (195 B)
+Six reading batches (M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38, FS-50–FS-66), Sonnet 5 implementers, every derivation the owner's; its gate's first instance is G35's correction.
+--- [Paths forward, ranked] a=0.00 b=0.02 c=0.10 inCommit=0.00 (398 B)
+| 1 | **FS-71 the theorem audit** — `plans/STUB-theorem-audit.md` | every theorem every prior milestone proved by hand, by derivation or at tools grade, found and filed (`plans/<milestone>-derivation.md`, `LEDGER.md` § B, a kernel decision each; prior art re-attributed; proofs that do not close demoted to conjectures) | none directly; the derivations' census — the programme's own priority |

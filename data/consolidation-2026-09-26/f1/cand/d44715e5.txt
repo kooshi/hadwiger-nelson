@@ -1,0 +1,4 @@
+--- [G47] a=0.14 b=0.26 c=0.35 inCommit=0.26 (414 B)
+The distance law this entry carried — over a field where 11 is usable, forced at five colours ⟹ 11 ∣ d² and virtual edge ⟹ d² ≡ 1 (mod 11) — is now the level-one shadow of the fan-gap theorem: over every such field `Forces ↔ =` and `Separated ↔ Adj`, so a five-colour forced pair is a single vertex and a virtual edge a unit edge at every distance, and the residue-allowed distances name nothing.
+--- [G48] a=0.35 b=0.35 c=0.52 inCommit=0.40 (275 B)
+**Proved range** (GPT Astra, G55): L ≤ 3 for every real number field; L ≤ 4 for every field containing √3; L ≤ 5 for every multiquadratic F ⊇ K given the 8/3 forcer; L(F) is the sharp form — the residue graph's chromatic number, 2 at ℚ(√5) where |κ| reads 4.

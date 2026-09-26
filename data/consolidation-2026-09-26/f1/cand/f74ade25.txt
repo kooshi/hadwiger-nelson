@@ -1,0 +1,10 @@
+--- [The mission] a=0.16 b=0.16 c=0.62 inCommit=0.16 (267 B)
+**And the fields may skip six**: G64 — under the conjecture's bold form, if the wall at six holds, no field is exactly six-chromatic, six is a value the function F ↦ χ(F²) omits, and the next rung above five is **seven**, first reachable at K(√7) where L = 7.
+--- [The mission] a=0.40 b=0.40 c=0.47 inCommit=0.40 (102 B)
+That is a claim about the fields' value set: stronger than χ(ℝ²) ≠ 6, and not equivalent to it |
+--- [The novel-results ledger] a=0.19 b=0.25 c=0.33 inCommit=0.33 (408 B)
+**`[Fischer1994]` (found 2026-09-19; summary read, paper unread) appears to hold B's VALUE — an additive ℤ/4 colouring of ℚ(√p,√q)², p ≡ 3, q ≡ 11 (mod 16), pq ≡ 1 (mod 32), and χ(ℚ(√3,√11)²) = 4 in those words; until it is read, "B answers" below means "B's kernel proof re-establishes", and ours are the kernel proof, the 𝔽₄ residue colouring and Theorem A (§ Publication).**
+--- [Paths forward, ranked] a=0.00 b=0.07 c=0.57 inCommit=0.36 (99 B)
+**FS-58 closed 2026-09-17** (rows 72–73): χ(ℚ(√11)²) = 4 with the lower half in the kernel.
+--- [G43] a=0.33 b=0.33 c=0.33 inCommit=0.33 (90 B)
+**Row 52 is about the proper subfield ℚ(√3,√5,√11)**, never about de Grey's field.

@@ -1,0 +1,4 @@
+--- [Where the problem stands] a=0.35 b=0.55 c=1.00 inCommit=0.35 (133 B)
+**The census is complete** (row 83); ℚ(√47)'s bracket (item 10) cannot close from above by residues at any depth (§1.7, row 75).
+--- [Where the problem stands] a=0.43 b=0.61 c=1.00 inCommit=0.43 (157 B)
+**Without triangles** rigidity is free in the abstract class and in the plane is Soifer's Open Problem 55.1 (row 86, §3), undecided at ℚ(√59) (item 24).

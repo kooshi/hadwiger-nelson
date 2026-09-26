@@ -1,0 +1,86 @@
+--- [Frontier] a=0.11 b=0.11 c=0.47 inCommit=0.22 (294 B)
+*Last updated: 2026-09-24 — **FS-81 closed** (rows 82–84; G74 minted; G61 rewritten with a demotion record): **three colours are decided over every real quadratic field** (row 82, [hand, two independent derivations]), nothing claimed new while `[Johnson2000]` and `[Johnson2006]` are unread
+--- [Frontier] a=0.00 b=0.00 c=0.32 inCommit=0.00 (157 B)
+**the census completed**, 40 of 40, by structural certificates; four colours calibrated on de Grey's lattice and ℚ(√47) screened — **five not landed**.
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (49 B)
+**No SAT solver runs until 2026-10-01** (Kooshi).
+--- [Frontier] a=0.06 b=0.13 c=0.25 inCommit=0.06 (651 B)
+Before that: 2026-09-24 — FS-79 closed (rows 80–81; G73): four colours, cell by cell — four no-gos, each for its named format, rank-1 density false, `L21cc6506` loose at four colours. 2026-09-23 — FS-73 closed (rows 78–79; G71): `F = P = 8Λ` at four colours on de Grey's lattice, the inheritance question a theorem at three colours, χ(ℚ(√167)²) ≥ 4. 2026-09-22 — FS-71 closed (row 77), the theorem audit; FS-70 closed (row 76; G68, G69), five over ℚ(√3,√5) not landed. 2026-09-21 — FS-66 closed (row 75; G66). 2026-09-20 — FS-61 closed (row 74). 2026-09-19 — G64 corrected; 2026-09-17 — FS-58 closed (rows 72–73).*
+--- [Where the problem stands] a=0.38 b=0.41 c=0.43 inCommit=0.38 (356 B)
+None of the five is decided — floors **6, 6**, 5, **6, 6** (five is refused by certificate everywhere but 31), ceilings 8, 7, 8, 8, 10, no six-colouring found anywhere, and no independent set found reaches a threshold (row 69) — so **a single verified six-colouring at 23, 27, 43 or 47 would be the first exactly six-chromatic finite Euclidean plane**.
+--- [Where the problem stands] a=0.46 b=0.46 c=0.54 inCommit=0.48 (295 B)
+No field containing K can use any member (3 or 11 is a non-square at each), so every field the hunt has built in has local bound 5 or ≥ 7: **six is arithmetically excluded for all of them**, and a six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers.
+--- [Where the problem stands] a=0.06 b=0.06 c=0.16 inCommit=0.06 (231 B)
+**The sharp target is fractional**: α < q²/6 at the five members and U₆₄ proves no target six-chromatic with no rounding heuristic, and closes the composite-ideal hatch too; 47 is nearest, 368 against the certified 371 (G59).
+--- [Where the problem stands] a=0.16 b=0.16 c=0.24 inCommit=0.22 (212 B)
+The wall is finite — six graphs, 23, 27, 31, 43, 47 and U₆₄ — and in reach only at 47 and U₆₄ (FS-57); no uniform independence bound can carry all of it (one could close 31, 43 and 47, never 23: G59).
+--- [Where the problem stands] a=0.14 b=0.14 c=0.21 inCommit=0.57 (111 B)
+A composite residue target escapes it only through an integrality gap, and inert towers keep the Hoffman bound.
+--- [Where the problem stands] a=0.42 b=0.44 c=0.53 inCommit=0.56 (285 B)
+**If it holds, the conjecture's main clause says nothing above five**, and its sharpest remaining prediction is quadratic: **ℚ(√167)** — predicted to need at least six (five is refused at 23 by certificate — at every level of the tower, row 75), against a proven four (row 79).
+--- [Where the problem stands] a=0.06 b=0.26 c=0.42 inCommit=0.16 (323 B)
+**The census is complete:** all 40 squarefree d ≡ 11 (mod 12) below 500 — the only real quadratic fields that *can* need four — carry a certified finite witness, the last 25 by one five-layer configuration and a structural certificate, independent of that argument (row 83); χ(ℚ(√11)²) ≥ 4 is kernel (row 72).
+--- [Where the problem stands] a=0.12 b=0.21 c=0.27 inCommit=0.17 (344 B)
+**ℚ(√47) at four colours** (row 84): calibrated first — de Grey's lattice with one extra edge refuses four at R = 1.4 by certificate, and refusals stay undecided at `d_ball` 8.3–14.7 — then 102 of 127 lattices four-colour and 25 survive capped screens; a matched refusal is priced out (≥ 1,284 times the control's points, [reading])
+--- [Where the problem stands] a=0.00 b=0.00 c=0.26 inCommit=0.26 (138 B)
+A three-colour question over any real field is now a question about 1/3 (G74); `Θ₃`-emptiness trees remain the finite witness (row 79).
+--- [Where the problem stands] a=0.14 b=0.18 c=0.41 inCommit=0.55 (335 B)
+Every witness is a twisted bilayer whose rotation is the Σ = n coincidence rotation of the order of discriminant 1 − 4n; commensurate twists are periodic, hence bounded by a finite quotient, hence unable to raise the colour count — the field wall in the vocabulary of a discipline with classification theorems (FS-63 is its gate).
+--- [Where the problem stands] a=0.30 b=0.31 c=0.38 inCommit=0.47 (545 B)
+A gapped periodic four-colouring of `Λ/NΛ` four-colours every graph on the lattice and frees every pair (rows 56, 66); periodic colourings are residue colourings prime by prime, so a lattice is rigid — the chain route's fabric — only where every odd prime's target refuses, which de Grey's lattice over K does at 5, 7, 11, 13 (its unit vectors are the residue tori) and no lattice of rank ≤ 6 over ℚ(√3,√5) does; the rank-8 lattice with no periodic colouring found is dense only from `10⁷` points and undecided six times (FS-72).
+--- [Where the problem stands] a=0.07 b=0.09 c=0.19 inCommit=0.27 (468 B)
+**Over K the question is closed** (row 78): `F = P = 8Λ` — every four-colouring of de Grey's lattice is 8Λ-periodic, forced by one 2,044-point certificate; Hubai had the ring form in 2018 (9,120 colourings, all 8-periodic, on a ring the lattice's rotations do not preserve) — and no other rank-4 CM lattice in FS-73's table is rigid at four colours; rank 6 adds a lattice loose with no gap (L3) and one with `F ⊇ 8Λ_dG` whose four-colourability is open (KR6).
+--- [Where the problem stands] a=0.07 b=0.12 c=0.18 inCommit=0.07 (427 B)
+Of the four hand claims found with no proof on disk, three closed when written and one was wrong (the general-lattice coset bound, now a conjecture); four grokkings had graded a hand derivation as measured or derived, one had asserted a false "exactly" (G35); six results sat in a session record no grokking cited (MASCOT-T6–T11: a √3-clean four-colouring of the Moser lattice is one of Theorem B's two residue colourings).
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (72 B)
+Every kernel target the audit named already had a stub; none was minted.
+--- [Where the problem stands] a=0.04 b=0.04 c=0.16 inCommit=0.52 (196 B)
+It derives ℚ(√11)'s `F = 3Λ` with no forcer, settles `[AbrishamiEtAl2025]` Problem 4.6 at three colours for them, and certifies non-three-colourability far more cheaply than a refusal's LRAT.
+--- [Where the problem stands] a=0.22 b=0.30 c=0.33 inCommit=0.22 (403 B)
+**It stops at three by a fact about `K₄`**: `K₄`'s square complex is `ℝP²`, whose one loop invariant is fixed by the graph — a relation's parity (row 80) — so four colours — where every question the hunt asks lives — have no such criterion, and a two-sided certificate exists only if four-colourability of these graphs is decidable, which is stated open in print (`[CGHO2025bg]` §6.2.1).
+--- [Where the problem stands] a=0.14 b=0.29 c=0.52 inCommit=0.40 (453 B)
+Read one cell at a time, `K₄` certifies nothing: edge-local heights live only on sum-closed halves of `S` (rank ≤ 2, always four-colourable; Moore–Newman's triangular lattice is the case) and, from five colours up, on no presentation with two generator classes; the loop winding is the graph's parity; parity-free face fluxes are trivial wherever directions span induced cubes; coindex topological bounds stop at four on every unit-distance graph.
+--- [Where the problem stands] a=0.24 b=0.24 c=0.29 inCommit=0.24 (237 B)
+**Each no-go is for its format, never for a kind of invariant**: window-frequency certificates, cocycles of radius ≥ 2, the index topological bounds and algebraic certificates are open, and at ℚ(√167) they are what is left (FS-80).
+--- [Where the problem stands] a=0.38 b=0.69 c=0.69 inCommit=0.38 (197 B)
+**ℚ(√167) at four colours** (row 81). `L21cc6506`, the lattice of `χ ≥ 4`, is four-colourable and loose (`F = P = 0`, a full-dimensional `Θ₄` cell), so the chain route has no input there.
+--- [Where the problem stands] a=0.11 b=0.27 c=0.30 inCommit=0.11 (252 B)
+On a finite part of the saturated chain 118 of 130 screened lattices four-colour and 7 minimal ones survive capped screens, then P3b's calibrated `Θ₄` finder (no point in 1,100 s) and quotients to `N = 15` (none colours) — survivors, not refusals.
+--- [Paths forward, ranked] a=0.04 b=0.06 c=0.31 inCommit=0.06 (484 B)
+**FS-81 — four colours over real quadratic fields — CLOSED 2026-09-24** (rows 82–84, G74; `plans/STUB-quadratic-four-colour-classification.md` carries the banner; `plans/FS81-quadratic-four-colours.md`, its §R-close first; `plans/FS81-derivation.md` T1–T25): three colours decided at the field level for every real quadratic field, the census completed, ℚ(√47) screened at four colours and five not landed; FS-82, FS-83, FS-84 minted; FS-48, FS-59, FS-64, FS-75 re-aimed.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.27 inCommit=0.10 (355 B)
+**Next, Kooshi's choice (2026-09-24): FS-85, can four-colour rigidity exist without triangles?** (`plans/STUB-four-colour-rigidity-without-triangles.md`; FS-74 absorbed as step 1; FS-83 the fallback), in the finite-witness-free week (2026-09-24 to 2026-10-01; § Toolchain), on the algebra-week advisor's advice (`plans/POROS-2026-09-24-algebra-week.md`).
+--- [Paths forward, ranked] a=0.00 b=0.02 c=0.06 inCommit=0.00 (949 B)
+**Earlier closes**, each with its record and its stub's banner: FS-79 (rows 80–81, G73; `plans/FS79-invariant-question.md`, `plans/FS79-derivation.md` T1–T43), FS-73 (rows 78–79, G71; `plans/FS73-rigidity-dichotomy.md`, `plans/FS73-derivation.md` T1–T45; five stubs minted, FS-74 to FS-78), FS-71 (row 77; `plans/FS71-theorem-audit.md`: seventeen Sonnet 5 reading batches over M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38 and FS-50–FS-66, 254 theorems in 53 files `plans/<milestone>-derivation.md`), FS-70 (row 76, G68, G69; FS-72 and FS-73 minted from it), FS-66 (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint), FS-61 (row 74), FS-58 (rows 72–73); earlier ones in `plans/FRONTIER-STUBS.md` and git.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.03 inCommit=0.03 (430 B)
+**Ranked stubs** (re-ranked 2026-09-24 at FS-81's close, one rank per row: FS-81 closed; FS-59 stays at rank 1 with its solver-free routes first; FS-83, FS-84, FS-82 minted at ranks 2, 3, 9; FS-75 re-aimed to T4 for the family (rank 5), FS-48 to multiquadratic fields without √3 (rank 10); FS-64 routed to FS-83, FS-60 superseded for its lower halves by FS-75; G74 forwarded into FS-48, FS-59, FS-64, FS-75, FS-82, FS-83, FS-84.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.18 (107 B)
+A solver column there marks the stubs a SAT-free week can run; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.16 inCommit=0.53 (348 B)
+| 1 | **FS-59 ℚ(√167): five colours** — `plans/STUB-four-colours-167.md` (§0 first) | **After FS-81:** four is also row 82's, and the four-colour band is measured with a matched ball priced out (row 84), so the solver-free routes come first — the `Θ₄` cells of the seven survivors, the chain route on any that stays rigid, FS-80, FS-83.
+--- [Paths forward, ranked] a=0.00 b=0.32 c=0.32 inCommit=0.00 (131 B)
+Four is proven (row 79); at four colours `L21cc6506` is four-colourable and loose (row 81), so the chain route must look beyond it.
+--- [Paths forward, ranked] a=0.12 b=0.12 c=0.44 inCommit=0.55 (752 B)
+Next, cheapest first: quotients at `N ≥ 16` on all seven and `N = 15` on all but Λ₂₄₄₈, longer asks where P3b was undecided, and longer residue asks; the classification at 43; a real price of the exact `Θ₄` tree (one subtree to completion) and a second finder with another search order (one full-dimensional cell makes a survivor loose, G73); the chain route (G55) on any survivor that stays rigid; derive the `8 ∤ M` pattern; a ball only after, priced by a measured four-colour hardness band | **the conjecture's widest gap** — predicted ≥ 6 against a proven 4, robust to every level of the tower at 23 (row 75); a five confirms and cannot falsify (only a whole-plane colouring with ≤ 5 colours, local at no prime, would: FS-64).
+--- [Paths forward, ranked] a=0.05 b=0.25 c=0.45 inCommit=0.05 (406 B)
+| 4 | **FS-74 the algebraic explanation** — `plans/STUB-algebraic-explanation.md` (Kooshi's) | **Re-aimed at FS-79's close:** de Grey's rigidity is not an edge-local height even on its own language, and each of its 48 non-Eisenstein unit vectors sits alone in an Eisenstein coset, so the stripes and `8Λ` are a many-layer effect (row 80). why is every four-colouring of de Grey's lattice `8Λ`-periodic?
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.27 inCommit=0.03 (438 B)
+Lead 1: prove on `Λ` Hubai's 2018 description of the Moser ring's colourings (stripes of period 2 on the Eisenstein sublattice, one chirality: rotation by `k·arccos(5/6)` acts as `±k·120°`) and read `8Λ` off it; then B's tight-prime reading against the 2-adic tower, the √3 dichotomy over the 11 dirty classes, Baxter's height | none directly; high on the programme — a five-forcer-grade certificate replaced by its derivation |
+--- [Paths forward, ranked] a=0.12 b=0.12 c=0.34 inCommit=0.48 (344 B)
+As minted, `χ(ℚ(√167)²) ≥ 4` in the kernel: T22's ⟹ direction by V2's forward lift, V2's relation-form certificate checker with its soundness theorem, the 36-vector certificate (1,050 leaves) first; then FS-60's fields through `Θ` in place of LRATs | none; the falsification field's best bound from a checker's word to the kernel's |
+--- [Paths forward, ranked] a=0.12 b=0.12 c=0.35 inCommit=0.53 (284 B)
+**Re-aimed 2026-09-22 (G68, G69):** for d = 23, 47 run the CM-subfield table and the quotient/periodic Kempe screens on every candidate lattice before any ball — FS-70 spent three phases on lattices the screens close in minutes | none on six; medium-low mechanism, high as a table |
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.06 inCommit=0.42 (206 B)
+Phase B′, the transcendence lemma, is a half-day kernel theorem — prior art, `[Fischer1990]` Thm 6, whose Remark 1 is this bridge with a false step (G63): the product is the repair and the kernel form |
+--- [Paths forward, ranked] a=0.07 b=0.07 c=0.58 inCommit=0.30 (554 B)
+As minted: χ ≥ 4 for the 13 certified fields beyond 11 in the kernel through a certificate type over `Adjoin d ℤ`, parametric in `d`, or through `Θ` certificates (FS-75), ℚ(√167) now among them (one witness format, one checker; 131–2,360 points, seven 1-minimal; 239's LRAT is 43 MB and 59's 39.7 MB, 95 is the expensive field to shrink; 11 has a 189-point direct witness beside the kernel's 204-point chain one); the upper halves wait on the number-field residue step (FS-37/47) | none; field values from the checker's word to the kernel's |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.17 inCommit=0.58 (398 B)
+| 25 | **FS-65 exact independence numbers** — `plans/STUB-exact-independence-solver.md` | compute `α(Γ_q)` exactly at the window members, where every off-the-shelf exact solver fails: at 19 (361 vertices) branch-and-reduce returned 70 and `struction` 66 against a local search's 76, because no reduction fires on a vertex-transitive graph and triangle-freeness leaves the clique bound at `n/2`.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.18 inCommit=0.23 (389 B)
+D1 re-asked the decision problem in SAT with the symmetry breaking the toolchain section prescribes: **row 68's null is NOT about the encoding** (`k = 78` undecided at 19, the frontier thirty above the answer, G59) — the case for D2 and D4, the symmetry-aware methods; D3 is the circle decomposition — the plane as `q−1` cosets of `μ_{q+1}`, an optimisation over 18 variables at 19.
+--- [G54] a=0.48 b=0.48 c=0.48 inCommit=0.48 (152 B)
+Slack: expect gaps, and with one gapped colouring the freedom of every pair above it (row 66) — ask no solver for forced pairs on that plane's fabric.
+--- [G54] a=0.41 b=0.41 c=0.82 inCommit=0.41 (152 B)
+Killing test: a k-colouring of a tight plane that is unbalanced or gapped; a slack plane every one of whose k-colourings is gap-free (the middle case).*
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.00 c=0.00 inCommit=0.00 (210 B)
+On the plan-phase advisor's proposed split — target-moving results counted apart from no-gos, **Kooshi's call, open** — the method stands two for three: FS-73 and FS-81 moved targets, FS-79 produced no-gos.

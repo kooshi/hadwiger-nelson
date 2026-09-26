@@ -1,0 +1,28 @@
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.57 (111 B)
+**Ranked stubs** (re-ranked 2026-09-14 after GPT Astra's response; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.05 b=0.05 c=0.19 inCommit=0.48 (456 B)
+| 2 | FS-45 chain, don't spindle — `plans/STUB-chain-theorem.md` | GPT Astra's chain theorem (G55) in the kernel: the chain lemma, the 18-vertex ℚ(√2,√3) instance, and `five_le_chromaticNumber_planeOver (K(√7))` from eight copies of the 588-core 8/3 forcer with its pinned refusal as an LRAT | none on six directly; medium, mechanism — the conjecture's five-level over K given one forcer, and a 6-open field's five-digit in the kernel cheaply |
+--- [Paths forward, ranked] a=0.04 b=0.04 c=0.47 inCommit=0.15 (304 B)
+| 4 | FS-39 the bridge to the plane — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup_F χ(F²): de Bruijn–Erdős plus the algebraic-drawing lemma, invoked in prose since M58 and never stated or cited; T2 ⟹ χ(ℝ²) = 7 rests on it | none on a 6-forcer; high on every χ(ℝ²) sentence after M58 |
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.38 inCommit=0.00 (473 B)
+| 5 | FS-41 `forces_of_tight` — `plans/STUB-forces-of-tight.md` | the kernel target phase D names: on a Cayley graph of a finite abelian group with λ_min = −d/(k−1), every k-colouring is balanced, H_min-periodic and gap-free; the 2-adic and 3-adic towers and the finite-plane table as instances, the level-4 spectrum as its `decide` base case, the four-element lattice certificate | medium, mechanism — the derivation the programme says matters more than objects |
+--- [Paths forward, ranked] a=0.17 b=0.27 c=0.44 inCommit=0.17 (425 B)
+| 6 | FS-46 three colours over √3-fields — `plans/STUB-three-colour-classification.md` | GPT Astra's Theorem 3.1: for √3 ∈ F, χ(F²) = 3 iff some prime has residue field 𝔽₃ (the rhombus period, the descent to R/3R, `[ElZaharSauer1985]`); the conjecture for L ≤ 4; the open cases ℚ(√11), ℚ(√23), ℚ(√47), ℚ(√3,√5); Hedetniemi fails at five, so the method stops here | none; medium, mechanism |
+--- [Paths forward, ranked] a=0.04 b=0.04 c=0.31 inCommit=0.05 (689 B)
+| 7 | FS-42 5-tight quotients of 6-open planes — `plans/STUB-tight-quotients.md` | a reading with its falsifier: the only constructive residue route to a five-colour forced pair that row 66 leaves open is a Cayley quotient Cay(F²/Λ, S̄) of a 6-open field's plane that is 5-colourable AND 5-tight — then Theorem D2-A forces pairs and G48's spindle gives a 6-forcer; the prime quotients are ≥ 6-chromatic, so the candidates are non-prime lattices Λ (composite ideals — Moorhouse §9's bar rests on the Hedetniemi conjecture `[Shitov2019]` refuted — and wall-broken 2-adic quotients); falsifier: the candidates' spectra, none 5-tight | medium-low; the next Poros pass's object |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.30 inCommit=0.05 (411 B)
+| 8 | FS-44 the fifth colour — `plans/STUB-fifth-colour-structure.md` | what structure five-colourings of K(√7)-fabric have when no residue or additive colouring exists: a residue four-colouring per K-piece plus a fifth-colour set, related across the √7 cross edges (G53 is the first relation); re-aims FS-2; FS-43's frozen set is its input | medium-high as a frame, low as work until a statement exists |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.29 (256 B)
+| 9 | FS-20 the paper — `plans/STUB-theorem-B-writeup.md` | Theorem A as the formulation seven lineages stopped short of, now with rows 57, 66, 67 and G55 to carry; blocked on FS-27 §2, `[Johnson2006]`, `[Fischer1990b]` | none; the publication trigger |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.56 inCommit=0.06 (351 B)
+| 10 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? the plane is slack at five colours, so the tightness screen cannot decide it — slack says gaps are permitted if a colouring exists, and whether one exists is this stub's question, untouched | medium as a frame; the disproof-side digit |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.41 inCommit=0.00 (197 B)
+| 11 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not; M56's depth-6 fact, which the tower does not explain | medium, mechanism only |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.38 inCommit=0.00 (137 B)
+| 12 | FS-13 the finite planes' 6-critical cores — `plans/STUB-finite-plane-cores.md` | cube-and-conquer autopsy objects | low-medium |
+--- [Paths forward, ranked] a=0.00 b=0.10 c=0.71 inCommit=0.19 (319 B)
+| 13 | FS-12 the hub scan as a design instrument — `plans/STUB-hub-scan-design.md` | a hub whose support is forced rainbow at five colours is a kill — re-read against `not_fan_of_fanGap`: over a sealed field a fan survives only if its support has a partner on the gap colour in every gapped colouring | medium-low |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.30 inCommit=0.30 (157 B)
+| 14 | FS-19 𝔭-adic classification of forbidden distances — `plans/STUB-padic-distance-classification.md` | `[Chow1993]` with v_𝔭(d²) | low-medium |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.17 inCommit=0.13 (224 B)
+| 15 | FS-37 the 2-adic criteria at the field level — `plans/STUB-field-level-criteria.md` | Theorem A's own gap: a passing field supplies the valuation subring; row 67's [hand 2] is the same gap at 2 | none; feeds FS-20 |

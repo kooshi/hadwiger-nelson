@@ -1,0 +1,4 @@
+--- [G56] a=0.44 b=0.44 c=0.48 inCommit=0.44 (461 B)
+**Real quadratic fields with local bound at least 6 exist, and each is decided by one or two planes**: with d ≤ 30,000 there are 16 whose wall is broken and whose usable planes avoid {3, 7, 11, 19, 23, 31}, and every one has 43 or 47 usable, so its L is 6 exactly when a usable one of those two is six-chromatic and ≥ 7 otherwise — the smallest are **ℚ(√2351)** (usable 47, 67, 71, 83, …: decided by 47 alone) and **ℚ(√4703)** (43, 47, 79, …).
+--- [G56] a=0.28 b=0.39 c=0.59 inCommit=0.39 (259 B)
+**So a six-colouring at 43 or 47 — the two members where five is already refused, hence the two a single hit settles — makes χ(ℚ(√4703)²) ≤ 6, and at 47 also χ(ℚ(√2351)²) ≤ 6, a theorem: the first number field with local bound exactly 6.**

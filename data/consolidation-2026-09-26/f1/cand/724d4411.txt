@@ -1,0 +1,12 @@
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (41 B)
+**A 6-open platform now exists for G48.**
+--- [The novel-results ledger] a=0.00 b=0.10 c=0.12 inCommit=0.46 (257 B)
+**The result is the field, not the size** — `K(√7)` is 6-open where de Grey's, the record's and the M53 witnesses' fields are all 5-sealed, so 11 is not usable there and row 55's bar on five-colour forced pairs **lifts**: G48's mechanism has a platform.
+--- [Paths forward, ranked] a=0.00 b=0.15 c=0.15 inCommit=0.46 (186 B)
+**M63 phase H2 closed 2026-09-12** with a five-chromatic unit-distance graph in a **6-open** field (row 64), so the sixth colour's only known mechanism has a platform for the first time.
+--- [G43] a=0.00 b=0.00 c=0.00 inCommit=0.00 (104 B)
+**De Grey's field is NOT 6-open** — corrected 2026-09-11, where this entry contradicted ledger row 52.
+--- [G43] a=0.00 b=0.09 c=0.18 inCommit=0.06 (198 B)
+It is K(√5) = K(√15), and 15 ≡ 4 (mod 11) **is** a square, so 11 **splits**, stays usable, and the field is **5-sealed** — which is exactly what row 52's χ(ℚ(√3,√5,√11)²) = 5 says.
+--- [G43] a=0.00 b=0.00 c=0.00 inCommit=0.00 (92 B)
+A contradiction between two halves of this file is worse than either half being wrong alone.

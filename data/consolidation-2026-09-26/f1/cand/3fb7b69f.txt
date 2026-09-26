@@ -1,0 +1,8 @@
+--- [The novel-results ledger] a=0.07 b=0.50 c=0.53 inCommit=0.54 (425 B)
+**Every member's field named** (the smallest by complete enumeration, corrected at FS-54: 23 → ℚ(√167), 31 → a cyclic quartic of disc 1125, 43 → ℚ(√4703), 47 → ℚ(√2351), 27 → the cyclic cubic field of conductor 13), so the milestone's target statement has a consumer: a six-colouring at 43 or 47 makes χ(ℚ(√4703)²) ≤ 6 a theorem, and ℚ(√2351)'s local bound is six exactly when 47's plane is.
+--- [G56] a=0.06 b=0.06 c=0.12 inCommit=0.06 (507 B)
+They are **23 → ℚ(√167), 31 → the cyclic quartic x⁴ − 30x² + 45 (disc 1125; the smallest quadratic is ℚ(√1055)), 43 → ℚ(√4703), 47 → ℚ(√2351), and 27 → the cyclic cubic field of conductor 13, x³ − x² − 4x − 1 (disc 169)** — the arithmetically smallest field that sees any member first: no quadratic field reaches residue field 𝔽₂₇, a quartic with a degree-3 prime above 3 also has a degree-1 one, and Minkowski puts every field of degree ≥ 5 above disc 169.
+--- [G56] a=0.00 b=0.00 c=0.35 inCommit=0.48 (352 B)
+*Correction record: this entry first named ℚ(√2,√31), ℚ(√5,√51), ℚ(√10,√23), ℚ(√7,√89) and asserted that no single radicand both breaks the wall and sees a member first, and it proposed ℚ(√3, α), α³ = α + 1, for 27; the search behind it stopped at small radicands (167 > 100), and ℚ(√3, α) has a usable plane at 11.
+--- [G56] a=0.00 b=0.00 c=0.56 inCommit=0.00 (81 B)
+The biquadratic fields still see their members first; they are not the smallest.*

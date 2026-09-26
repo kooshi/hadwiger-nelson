@@ -1,0 +1,36 @@
+--- [Frontier] a=0.05 b=0.06 c=0.49 inCommit=0.10 (456 B)
+*Last updated: 2026-09-16 — **FS-56 ℚ(√167) closed** (row 71, G60): five colours refused at 23 by exact certificate (α ≤ 105), so the conjecture's prediction for ℚ(√167) — at least six colours — stands; `[MatolcsiEtAl2025]`'s fractional blow-up stays inside the field, so **χ_f(ℚ(√3,√11)²) = 4** (Cranston–Rabern's first question) and fractional colourings are a lower-bound instrument over fields the residue method cannot touch
+--- [Frontier] a=0.09 b=0.27 c=0.55 inCommit=0.36 (150 B)
+**χ(ℚ(√167)²) ≥ 4 not landed** — the plane is starved at small height (odd girth 7, 3-colourable balls of 215,409 points), carried to FS-58.
+--- [Frontier] a=0.00 b=0.00 c=0.33 inCommit=0.00 (36 B)
+FS-54 closed the same day (row 70).*
+--- [Where the problem stands] a=0.14 b=0.14 c=0.24 inCommit=0.43 (154 B)
+Its cheapest exposed predictions are quadratic — four for ℚ(√11) and ℚ(√23), four or five for ℚ(√47) — with no forcer known there (FS-46).
+--- [Where the problem stands] a=0.00 b=0.00 c=0.06 inCommit=0.00 (203 B)
+Over ℚ(√167) it has not landed: small pieces have odd girth 7 and 3-colourable balls reach 215,409 points; the reading that its limit is 3.48 wherever every compact place reads above −1/2 is FS-58.
+--- [The novel-results ledger] a=0.00 b=0.05 c=0.20 inCommit=0.05 (289 B)
+Over ℚ(√167) at small height: unit vectors of denominator ≤ 10,920 form no triangle and no 5-cycle, odd girth 7, their lattices additively 4- or 5-colourable up to 5,460, the radius-3 balls at denominators 420 and 2184 (37,681 and 215,409 points) 3-colourable, verified exhaustively.
+--- [The novel-results ledger] a=0.12 b=0.56 c=0.69 inCommit=0.56 (223 B)
+**Not landed:** χ(ℚ(√167)²) ≥ 4 (FS-58). | `plans/FS56-quadratic-167.md`, `plans/FS56-field-blowup.md`, `tools/fs56_gf_check.py`, `tools/fs56_low_height.py`, `data/fs56/`, `data/fs54/cert-q23-l3-N105.json` | FS-56 |
+--- [Paths forward, ranked] a=0.04 b=0.04 c=0.29 inCommit=0.17 (154 B)
+**FS-56 closed 2026-09-16** (row 71, G60): five refused at 23; χ_f(ℚ(√3,√11)²) = 4; four colours over ℚ(√167) not landed and carried to FS-58.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.36 inCommit=0.00 (111 B)
+**FS-54 closed 2026-09-16** (row 70, G59): five refused at 27, the 2-adic trichotomy, the wall at six answered.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (52 B)
+**FS-53 closed 2026-09-16** (row 69; G56, G57, G58).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (42 B)
+**FS-50 closed 2026-09-15** (row 68, G56).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (48 B)
+**FS-38 closed 2026-09-13** (rows 66–67, G54).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (125 B)
+**Ranked stubs** (re-ranked 2026-09-16 at FS-56's close: FS-58 minted and first; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.08 b=0.10 c=0.33 inCommit=0.15 (268 B)
+| 1 | **FS-58 four colours beyond the residue method** — `plans/STUB-fractional-four.md` | χ(F²) ≥ 4 from one finite H ⊂ F² with χ_gf(H) > 3 (the field blow-up, row 71), first at ℚ(√167), where the conjecture predicts six or seven against a proven three.
+--- [Paths forward, ranked] a=0.08 b=0.11 c=0.33 inCommit=0.08 (413 B)
+R1 the derivation: the ratio bound on unit-vector lattices tends to the least local character mean over compact places (real −0.40276), which would give χ ≥ 4 for every real field whose compact places read above −1/2; R2 the level-2 programme at height with a new certificate for its independent-set inequality; R3 SAT on balls of 10⁶–10⁷ points; ℚ(√11), ℚ(√23) as side targets (ceiling 3.5).
+--- [Paths forward, ranked] a=0.02 b=0.02 c=0.08 inCommit=0.00 (457 B)
+**Read first: `plans/FS58-prelude-seven-cycle-gadget.md`** — ℚ(√167)'s 7-cycle is a run of three plus two 7–24–25 diamonds (a non-forcing relative of the Moser spindle), and graphs whose directions have 3-free denominators are 3-colourable, so a four-colour graph needs a 3 in some direction's denominator | none directly (the route proves at most five); high as mechanism — the conjecture's lower levels over fields no residue plane can bound |
+--- [G48] a=0.48 b=0.48 c=0.54 inCommit=0.56 (345 B)
+*Falsifiers: a field with χ(F²) < min(7, L(F)) — cheapest a four-colouring of ℚ(√11)² or ℚ(√23)² (L = 4), local at no prime and non-additive (FS-46); a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime; for the six-question, a 5-colourable, 5-tight Cayley quotient of a 6-open plane (FS-42).*
+--- [G60] a=0.00 b=0.00 c=0.09 inCommit=0.00 (419 B)
+**What stops a finite search is height, not the ceiling** [measured]: over ℚ(√167) the unit vectors of denominator ≤ 10,920 form no triangle and no 5-cycle, odd cycles start at length 7, their lattices are additively 4- or 5-colourable up to 5,460, and 3-colourable balls reach 215,409 points, while a triangle-rich graph starts from χ_f = 3 and congruences of pairs lift it most of the way (`G27`: 3, 3.722, 4).

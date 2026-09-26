@@ -1,0 +1,26 @@
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (82 B)
+*Last updated: 2026-09-20 — **FS-61 closed** (row 74; G61 rewritten; G65 minted)
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (50 B)
+**FS-66** and **FS-67** minted (§ Paths forward).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.42 inCommit=0.00 (169 B)
+**FS-66 — does the residue ceiling drop up the tower? — open 2026-09-20** (Kooshi's go; `plans/FS66-residue-tower-drop.md`, stub `plans/STUB-residue-tower-drop.md`).
+--- [Paths forward, ranked] a=0.00 b=0.20 c=0.30 inCommit=0.20 (119 B)
+**FS-61, the census of real quadratic fields, closed 2026-09-20** (row 74, G61, G65; `plans/FS61-quadratic-census.md`).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (86 B)
+**Kooshi's sequencing (2026-09-20): FS-66 first, then FS-59's first experiment (R9).**
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.44 (166 B)
+**Ranked stubs** (re-ranked 2026-09-20: FS-61 closed; FS-66 and FS-67 minted; FS-59 re-aimed by G65 and by its stub's R9; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.03 b=0.06 c=0.67 inCommit=0.06 (406 B)
+| 1 | **FS-66 does the residue ceiling drop up the tower?** — `plans/STUB-residue-tower-drop.md` | every ceiling we own, and the conjecture's local bound L, uses the FIRST residue level; reduction mod 𝔓² lands in `UD(ℤ/p²,2)`, a sparse lift (1/p of the blow-up's edges), so χ(F²) ≤ χ(level two) ≤ χ(level one) and nothing makes the second an equality outside the tight planes (2, 3) and 7.
+--- [Paths forward, ranked] a=0.00 b=0.57 c=0.57 inCommit=0.57 (97 B)
+Floor 4 by ℚ(√47)'s certified graph; M59's critical cores do not lift mod p² | none directly
+--- [Paths forward, ranked] a=0.00 b=0.06 c=0.63 inCommit=0.00 (335 B)
+**decides what the conjecture says** — a 4-colouring gives χ(ℚ(√47)²) = 4, refutes the level-one form at a case cheaper than ℚ(√167), and leaves "predicted ≥ 6 at ℚ(√167)" unproven until `UD(ℤ/529,2)` is asked at five, where a colouring is the theorem χ(ℚ(√167)²) ≤ 5; resistance strengthens the prediction.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (56 B)
+Hours; run before FS-59's compute; prior-art gate owed |
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.08 inCommit=0.50 (251 B)
+Phase B′, the transcendence lemma, is a half-day kernel theorem by itself — **prior art, `[Fischer1990]` Thm 6**, whose Remark 1 is this very bridge with a false step (G63): the stub's product is the repair and the kernel form, not the statement |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.59 inCommit=0.47 (163 B)
+| 8 | FS-62 six is not a value — `plans/STUB-six-is-not-a-value.md` | **a frame, demoted 2026-09-19**: its headline equivalence held in one direction only (G64).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.60 inCommit=0.22 (327 B)
+What is left: the exact equivalence (G64) as a small corollary riding on FS-39; the gap question in its two strengths; and an unrun prior-art gate (has anyone asked for the image of F ↦ χ(F²)?) | none; its strong statement is what the conjecture plus the wall would give, its weak one is Hadwiger–Nelson at the top rung |

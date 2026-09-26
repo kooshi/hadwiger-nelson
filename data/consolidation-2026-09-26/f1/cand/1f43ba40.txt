@@ -1,0 +1,4 @@
+--- [G56] a=0.38 b=0.38 c=0.41 inCommit=0.42 (456 B)
+So over the residue fields a number field can have, **a plane with χ exactly 6 can live only at q ∈ {23, 27, 31, 43, 47}**, with floors 6, 6, 5, 6, 6 — five is refused by certificate at 23 and 27 (the level-3 relaxation, α ≤ 105 and ≤ 141; FS-56 and FS-54, rows 71, 70), 43 and 47 (row 69) — and none decided: at 31, the one member where five is not refused, it is CDCL-undecided, and no six-colouring was found (ceilings and searches: row 69).
+--- [G56] a=0.26 b=0.26 c=0.55 inCommit=0.26 (429 B)
+**All three deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`): six at 23 needs α ≥ 89 against a plateau of 87; at 47 a certificate 99.4 % tight, seen only at q = 7; at 43 the independent set stuck at 258 against 309 for three hours, the six-colour search stalled 2 h 52 m, the equivariant sweep 0 of 21 — nulls at a budget, not refusals, but they put these fields most likely at local bound ≥ 7.

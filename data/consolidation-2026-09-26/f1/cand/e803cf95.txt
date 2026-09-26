@@ -1,0 +1,6 @@
+--- [Toolchain] a=0.00 b=0.00 c=0.00 inCommit=0.07 (202 B)
+**Measured on 552 SAT cubes of one instance: 32-way median 120.6 s per cube against 16-way 122.8 s — statistically identical, so no measurable contention penalty and half the throughput thrown away.**
+--- [Toolchain] a=0.00 b=0.00 c=0.09 inCommit=0.00 (313 B)
+Its own diagnosis of the error is the transferable part: it took the **first** cube's 11.28 s as an uncontended baseline and inferred a contention factor from it — one sample, and a solver-found pattern rather than an enumerated one, so a measurement of a different population (see § "carry what it MEASURES").
+--- [Toolchain] a=0.11 b=0.11 c=0.11 inCommit=0.26 (195 B)
+Two lessons, each with its scope: **say physical cores when sizing memory-hungry work**, and **on this machine and this workload SMT is close to free, so measure contention before conceding it.**

@@ -1,0 +1,8 @@
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.80 inCommit=0.00 (64 B)
+**A hypothesis is not checked by being MENTIONED** (2026-09-12).
+--- [Make the gate fail, and watch it fail] a=0.12 b=0.12 c=0.71 inCommit=0.12 (311 B)
+**And it had written the fact down**: that `n = 3`'s radicand lies in `K` was in its notes, **filed under the wrong gate** — recorded as "so this member can never reach five colours", a fact about the *member*, when the operative consequence was "so my law does not apply here", a fact about the *instrument*.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=1.00 inCommit=0.00 (87 B)
+**The same true sentence under the wrong heading becomes a note instead of a blocker.**
+--- [Make the gate fail, and watch it fail] a=0.28 b=0.28 c=0.28 inCommit=0.28 (269 B)
+So a hypothesis is checked only by being *evaluated at the instance*, and the cheap habit is to re-read every hypothesis against the test case immediately before believing an out-of-sample result — which is precisely when the result is most wanted and least examined.

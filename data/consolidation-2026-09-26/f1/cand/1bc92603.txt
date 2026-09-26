@@ -1,0 +1,14 @@
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (262 B)
+*Last updated: 2026-09-14 — GPT Astra's response folded in (G55; FS-45–49 minted); FS-40's cheap checks run (no six-colouring at 83 by the symmetric census or local search, nothing decided) and the digit's necessary half minted as FS-50, the next milestone.*
+--- [Paths forward, ranked] a=0.07 b=0.10 c=0.24 inCommit=0.17 (272 B)
+**FS-38 closed 2026-09-13** (rows 66–67, G54): the residue plane's arity-2 compulsion structure at its sealing colour count pulls back to every graph over the field, and is trivial; where the plane is tight — at 2 with four colours — the tower stabilises at level 4.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.07 (168 B)
+**Ranked stubs** (re-ranked 2026-09-15: FS-53 minted as the milestone after FS-50 at Kooshi's instruction; FS-51/52 listed; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.26 inCommit=0.00 (209 B)
+| 1 | FS-50 the independence number at the threshold — `plans/STUB-independence-threshold.md` | is α(UD(𝔽₈₃,2)) ≥ 1,149, the size a six-colouring's largest class needs (`card_le_mul_of_colorable`)?
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.30 inCommit=0.00 (282 B)
+Hoffman allows 1,199 and ϑ = ϑ′ = Hoffman there, so only search decides: a local search for one large independent set (evidence) and cube-and-conquer over the rotation orbits with proof logs (the certificate), calibrated at 23 (α ≥ 106 for five colours, undecided since M61).
+--- [Paths forward, ranked] a=0.05 b=0.05 c=0.51 inCommit=0.05 (244 B)
+A refusal at 83 is χ ≥ 7 on the solver's word: the field's local bound 7 and the conjecture's boldest prediction pinned to the field we built in | none directly; medium-high on the conjecture; unifies FS-17's and FS-40's certificate halves |
+--- [Paths forward, ranked] a=0.01 b=0.01 c=0.08 inCommit=0.01 (507 B)
+| 7 | FS-40 the first digit at 83 — `plans/STUB-first-digit-83.md` | phases A and A′ run 2026-09-14: the symmetric census (59 of 63 rows refused, four open at the budget in both formulations) and the Rust local-search colourer (whole plane and the three minimal quotients: not found, a ≈ 6% plateau with classes already the size the spectrum permits and not independent) found no six-colouring; the certificate side is FS-50, the colouring side waits on its set | medium; decided by FS-50 either way |

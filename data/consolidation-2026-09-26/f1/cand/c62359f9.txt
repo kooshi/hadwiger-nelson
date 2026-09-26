@@ -1,0 +1,10 @@
+--- [The mission] a=0.10 b=0.10 c=0.85 inCommit=0.30 (120 B)
+The conjecture is proved for L ≤ 4 over every real number field (row 99) and L ≤ 5 for multiquadratic F ⊇ K (G55).
+--- [Where the problem stands] a=0.07 b=0.13 c=0.13 inCommit=0.07 (120 B)
+Heule-510's arity-2 emptiness at five colours is kernel (row 66) and holds for every unit-distance graph over its field.
+--- [Where the problem stands] a=0.36 b=0.36 c=0.40 inCommit=0.36 (268 B)
+De Grey's 1581 (no compulsion at arity 2 or 3, arity floor 4 or 5; row 43) and the `ρ₆₃` arena (0 at arity 2) sit in **6-open** fields, where no residue target exists, so those nulls stay measured and unexplained: a χ ≥ 6 gadget must be constructed, not found.
+--- [Paths forward, ranked] a=0.46 b=0.46 c=0.77 inCommit=0.46 (221 B)
+Certified within 0.1–11 % at 7–23, exact at level two of 7 … | none directly; mechanism — whether `L(F)` is the right invariant or must become its all-levels form, and the first exact density of a `p`-adic plane |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.57 inCommit=0.46 (244 B)
+A vertex with a free colour in some five-colouring is forced to nothing (row 66 against the graph itself) … | medium as an instrument — explains H4's null by theorem or hands the hunt its first frozen material in a 6-open field; two-sided |

@@ -1,0 +1,14 @@
+--- [The mission] a=0.47 b=0.47 c=0.83 inCommit=0.34 (371 B)
+**Its exposed predictions:** exactly five at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5), where four is proven (rows 73–74, G55), ℚ(√47) the cheapest (row 84, FS-84; no character four-colouring, row 96); and at least six at **ℚ(√167)**, proven 4 (rows 79, 82), the widest gap, at discriminant 668 (characters need eight there, row 101).
+--- [Where the problem stands] a=0.13 b=0.19 c=0.72 inCommit=0.37 (391 B)
+Its exposed predictions are the target's (§ The mission): the cheapest, four for ℚ(√11) and ℚ(√23), are met (row 73); at ℚ(√47) (L = 5: 3 and 7 unusable, 11 usable) it predicts exactly five against a proven 4 ≤ χ ≤ 5 — open (row 84; FS-84), and a four-colouring there would carry an invariant measure whose spectrum is carried by no `T + A + Fin_S`, `S` finite (row 113).
+--- [Where the problem stands] a=0.12 b=0.30 c=1.00 inCommit=0.15 (200 B)
+Among real quadratic fields that count's class is exactly `L ≥ 5`, `d ≡ 47, 143, 167 (mod 168)` (row 117), so MR would give five at ℚ(√143), ℚ(√311), ℚ(√335) as at ℚ(√47) (FS-100).
+--- [Where the problem stands] a=0.45 b=0.45 c=1.00 inCommit=0.55 (195 B)
+**Kronecker windows at four colours** (row 116; FS-100): the selection onto `T + A` is false as stated; at ℚ(√47) its `E`-form is the five-clause's pure-point layer, open at one density step.
+--- [Paths forward, ranked] a=0.16 b=0.18 c=0.75 inCommit=0.18 (778 B)
+| 3 | **FS-100 one missing lemma for three fields** — `plans/STUB-measure-rigidity-three-fields.md` (minted by J47) | the wanted posters at ℚ(√47), the type-(B) fields and ℚ(√167) "share every step but the last": given MR(F) — every `U`-invariant `E`-null measure on `R̂` is a multiple of Haar — `χ(ℚ(√47)²) = 5`, row 88 ⟺ T-B1, and `χ(ℚ(√167)²) ≥ 5`; its in-ban round ran (the stub's status block): Kronecker selection refuted as stated, its `E`-form open at one density step, which leads the next slot, stage 6 the fallback (row 116); the class is `L ≥ 5` (row 117); MR = its zero-entropy half plus PE-lim (row 118); FS-97 absorbed; P1 leads post-ban | none directly; five at ℚ(√47) confirms the conjecture, a four-colouring falsifies it |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.40 (135 B)
+A falsifying four-colouring is no finite-place window, no character colouring, and carries no finite-place spectrum (rows 92, 96, 113).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.37 inCommit=0.47 (163 B)
+**Open:** S1 and S1V done, the next stages from 2026-10-01 | none directly (5-sealed); a five would answer Soifer's Open Problem 55.1 (`CLOSED-QUESTIONS.md` §3) |

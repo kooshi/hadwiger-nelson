@@ -1,0 +1,20 @@
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.05 inCommit=0.00 (331 B)
+**Next: FS-73, the rigidity dichotomy** (Kooshi, 2026-09-22; `plans/STUB-rigidity-dichotomy.md`) — opens in a fresh session at the reframe, with G70 (MASCOT-T6's √3-clean rigidity theorem, Coxeter's) and G51 (a competitor session on its inheritance question) in its bearings; FS-59's screens stay rank 1 in the table behind it.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (127 B)
+**Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.07 inCommit=0.00 (214 B)
+**Ranked stubs** (re-ranked 2026-09-22: FS-71 closed (row 77); FS-70 closed; FS-73 minted at rank 3, FS-72 at rank 5; FS-48 and FS-59 re-aimed by G68/G69 — the quotient and periodic Kempe screens before any ball.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.04 inCommit=0.04 (215 B)
+Before that, 2026-09-21: FS-66 closed; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.13 inCommit=0.03 (596 B)
+| 3 | **FS-73 the rigidity dichotomy** — `plans/STUB-rigidity-dichotomy.md` | does *rigid under every periodic colouring* imply a finite ball forces (G69's inheritance question; true over K by Harder's object, unexplained)? which real fields have a rank-4 CM lattice that is 3-non-integral and rigid at every odd prime (K yes; ℚ(√3,√5) no — its six quartic CM subfields each loose at 5 or 7)? what decides the Kempe index at rank 6? | none directly; high on the programme — the statement of where a forcer can live, which every six-forcer over a window field needs in the same words |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.17 inCommit=0.00 (141 B)
+| 1 | **FS-59 four colours over ℚ(√167)** — `plans/STUB-four-colours-167.md` | the conjecture predicts six; nothing above three proven.
+--- [Paths forward, ranked] a=0.00 b=0.56 c=0.56 inCommit=0.00 (245 B)
+FS-61 asked 167 its first question that could refuse — the one lattice reaching degree 14 under a 2M-point cap, 1,474,541 points — and it coloured in 3.66 s: 167's 3-non-integral lattices hold too few unit vectors (20–36 against 11's 108).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.12 inCommit=0.00 (322 B)
+**First experiment (stub R9): the chain route seeded on Kooshi's 7-cycle triangle** — on pure 3-integral material, is there a 3-colouring with `c(0) ≠ c(3w)` across the triangle's base? a refusal is a forcer, and `1/6 = 1 + 1 − w − w̄ − w′ − w̄′` makes twelve transported copies and an edge four colours.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.11 inCommit=0.00 (91 B)
+Then R5–R8: degree-aimed asks, counterexample-guided growth of a core, the rigidity dial.
+--- [Paths forward, ranked] a=0.12 b=0.14 c=0.15 inCommit=0.36 (534 B)
+**Re-aimed 2026-09-22 (G68, G69):** before R9's ball, the quotient screen at three colours on the 7-cycle triangle's lattice — a gapped periodic 3-colouring kills the chain route there by theorem (row 66 is colour-generic), and the CM-subfield table names which lattices can be rigid at all | **the conjecture's cheapest exposed prediction and therefore, under the 2026-09-17 target, the falsification target** — predicted ≥ 6 against a proven 3, and FS-66 made the prediction robust to every level of the tower at 23 (row 75) |

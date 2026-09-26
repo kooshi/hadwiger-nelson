@@ -1,0 +1,14 @@
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (52 B)
+*Last updated: 2026-09-12, at M63 phase H3's close.*
+--- [The novel-results ledger] a=0.08 b=0.46 c=0.46 inCommit=0.46 (124 B)
+The whole family is ≥ 7 at every scale by `[Voronov2023]` Thm 1.1 and `[SokolovVoronov2025]`. | `tools/celllat.py` | M43 |
+--- [The novel-results ledger] a=0.00 b=0.28 c=0.31 inCommit=0.38 (274 B)
+Shipped as a **19.5 MB** bundle (base half once plus 20 deltas) whose `reconstitute.sh` verifies each rebuild against a SHA-256 and is proven to refuse a planted clause; the durable commits are the 151 KB certificate and 5 KB manifest at `data/m62/m63-phaseH2-rho63-*.json`.
+--- [The novel-results ledger] a=0.00 b=0.25 c=0.25 inCommit=0.25 (177 B)
+| `plans/M63-phaseH3-plan.md`, `plans/M63-phaseH3-solver.md`, `plans/M63-phaseH3-crossedges.md`, `plans/M63-phaseH3-module.md`, `plans/M63-phaseH3-prior-art.md` | M63 phase H3 |
+--- [Grokkings — the working theory of the 5t] a=0.08 b=0.08 c=0.08 inCommit=0.08 (91 B)
+Entries are rewritten in place; when a reading dies the entry states what is known instead.
+--- [G31] a=0.04 b=0.04 c=0.04 inCommit=0.26 (199 B)
+* **G31 — NO unit-distance object here holds anything to extract, built or found. [kernel + measured, complete at arity 2]** **Extended 2026-09-12 from "existing witnesses" to everything we hold.**
+--- [Building] a=0.25 b=0.25 c=0.75 inCommit=0.25 (113 B)
+Do not diagnose, retry, or work past it — working past one is how a filesystem event lost ~50 compiled modules.

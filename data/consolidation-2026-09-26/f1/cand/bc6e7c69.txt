@@ -1,0 +1,6 @@
+--- [G56] a=0.11 b=0.11 c=0.30 inCommit=0.26 (275 B)
+So **a plane with χ exactly 6 can live only at p ∈ {23, 31, 43, 47, 59, 67, 79}**, spectral floors 5 at the first four and 6 at the last three, and none is decided: "no object here is six-chromatic" has so far been "the only primes where it could be were never looked at".
+--- [G56] a=0.26 b=0.26 c=0.42 inCommit=0.40 (389 B)
+Under the conjecture (G48) the window decides whether six exists at all: a finite unit-distance graph has algebraic coordinates, so χ(ℝ²) = sup_F χ(F²) (FS-39, unstated in the kernel); no six-chromatic window plane ⟹ no six-chromatic number field ⟹ χ(ℝ²) ∈ {5, 7}, and one ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness.
+--- [G56] a=0.00 b=0.00 c=0.07 inCommit=0.00 (167 B)
+The reading with two data points — χ one above the spectral floor, as at 11 and 83 — predicts six at 23–47 and seven at 59–79; FS-53 scores it prime by prime.

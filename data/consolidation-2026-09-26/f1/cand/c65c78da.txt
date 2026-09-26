@@ -1,0 +1,6 @@
+--- [The mission] a=0.25 b=0.25 c=0.46 inCommit=0.48 (357 B)
+Its remaining *testable* range is L ≤ 5 outside those classes (FS-61, FS-46, FS-48), then **nothing at L = 6 if the wall holds**, and then L ≥ 7, which is the problem itself — so **the conjecture has one cheap exposed prediction left and it is ℚ(√167): predicted ≥ 6, proven 4 (row 79), where FS-58 and FS-61 had failed to land even 4 (FS-59).**
+--- [The mission] a=0.00 b=0.00 c=0.23 inCommit=0.00 (132 B)
+A gap of two colours at a field of discriminant 668 is the best available place to be wrong, and belief should be spent there first.
+--- [Where the problem stands] a=0.18 b=0.18 c=0.41 inCommit=0.18 (122 B)
+Its cheapest exposed predictions — four for ℚ(√11) and ℚ(√23), four or five for ℚ(√47) — are met (row 73).

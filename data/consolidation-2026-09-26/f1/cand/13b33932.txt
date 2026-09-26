@@ -1,0 +1,22 @@
+--- [Where the problem stands] a=0.25 b=0.25 c=0.32 inCommit=0.25 (180 B)
+The wall is six finite graphs — 23, 27, 31, 43, 47 and U₆₄ — in reach only at 47 and U₆₄ (FS-57); a composite residue target escapes it only through an integrality gap.
+--- [Where the problem stands] a=0.36 b=0.43 c=0.69 inCommit=0.36 (288 B)
+**Fractional colourings see fields the residue method cannot** (G60, row 71). `[MatolcsiEtAl2025]`'s blow-up never leaves the field, so a finite `H ⊂ F²` with geometric fractional chromatic number above `k` proves `χ(F²) ≥ k + 1`; with their `G27` and Theorem B, **χ_f(K²) = 4**.
+--- [Where the problem stands] a=0.22 b=0.28 c=0.66 inCommit=0.22 (213 B)
+Every witness is a twisted bilayer whose rotation is the Σ = n coincidence rotation of the order of discriminant 1 − 4n; commensurate twists are periodic, hence bounded by a finite quotient (FS-63 is the gate).
+--- [Where the problem stands] a=0.41 b=0.41 c=0.41 inCommit=0.41 (217 B)
+**Four colours, cell by cell** (row 80, G73): read one cell at a time, `K₄` certifies nothing — no edge-local height beyond Moore–Newman's rank-2 case, no loop winding, no face flux, no coindex bound above four.
+--- [Where the problem stands] a=0.04 b=0.07 c=1.00 inCommit=0.07 (271 B)
+A `k`-colouring of `G × H` must come from `G` exactly when `G`'s colourings are gap-free and the improper part of `K_k^G` is `k`-colourable; from four colours up that fails for some uniquely colourable `G` (a composition of print), and it holds whenever `H` mixes (G54).
+--- [Grokkings — the working theory of the 5t] a=0.02 b=0.42 c=0.49 inCommit=0.42 (361 B)
+**Second count (FS-81, `plans/FS81-quadratic-four-colours.md` §R-close.3):** the class theorem (row 82) came through the structural question — classify `Θ₃(F)` for every `F ⊆ ℝ` — and the recognition arrived with the question; the census's certificates (row 83) were derived from its finite shadow, then certified; stage D (row 84) is a calibration.
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.53 c=0.53 inCommit=0.53 (139 B)
+**Third count (FS-85, §R-close.4):** through the structural question — rows 85, 86 answer S1 and S2, row 87's no-gos the same questions.
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.50 c=0.50 inCommit=0.50 (197 B)
+The plan-phase advisor's split, target-moving results apart from no-gos, **Kooshi declined: "yes", no-gos count** (2026-09-24); so the method stands **four of four** — FS-73, FS-79, FS-81, FS-85.
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.45 c=0.47 inCommit=0.45 (283 B)
+**Fourth count (FS-86, §R-close):** through the structural question — S1 asked of every four-colouring and answered by derivation, the invariant being locality at the tight place (rows 88–92); the pinning operator §IQ hoped for was neither found nor excluded: **five of five**.
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.47 c=1.00 inCommit=0.47 (126 B)
+**Sixth (FS-89):** §IQ posed Berend's MT/ID property modulo the isometric direction; row 95 is that property: **six of six**.
+--- [Grokkings — the working theory of the 5t] a=0.00 b=0.48 c=0.71 inCommit=0.48 (221 B)
+**Eighth (M2):** its one derivation, the bridge (J17), through the structural question — a ring hom into `ℝ_alg` is Artin–Lang — with a classical answer; the kernel ports are outside the count: **eight of eight**.

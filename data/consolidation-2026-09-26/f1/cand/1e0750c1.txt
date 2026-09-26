@@ -1,0 +1,16 @@
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.67 inCommit=0.00 (101 B)
+**Open milestones, in order** (Kooshi, 2026-09-10: *"the next session will be 100% repro of his algo.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=1.00 inCommit=0.00 (66 B)
+The session after that will be introducing our new angle on it"*):
+--- [Paths forward, ranked] a=0.00 b=0.00 c=1.00 inCommit=0.00 (116 B)
+**M63 — reproduce `[Parts2020a]`'s minimization algorithm end to end** (FS-33, `plans/M63-parts-reproduction.md`).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=1.00 inCommit=0.00 (33 B)
+The reduction stage is reproduced
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (132 B)
+**open at phases C–E** — the correction-set hypergraph work, the held-out runs, the outer loop, the intermediate symmetry rungs.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.40 inCommit=0.40 (96 B)
+**M62 — the evolutionary type-M search** (`plans/M62-evolutionary-type-m.md`; paused for M63).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.45 inCommit=0.00 (197 B)
+Beat the 509-vertex record with a search whose genome, feasibility filter and fitness come from this project's theorems; its arena base is `typem.parts_lattice`, and its phases D and E are not run.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.50 inCommit=0.00 (60 B)
+It is the rehearsal for FS-6, the same search one colour up.

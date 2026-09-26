@@ -1,0 +1,6 @@
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.39 inCommit=0.17 (290 B)
+**Ranked stubs** (re-ranked 2026-09-25 at the crunch's close (M1–M3), one rank per row: FS-91 and FS-82 closed, FS-83 answered; FS-92 to FS-96 minted; FS-39 moved below FS-68, FS-69 up one; FS-39, FS-45, FS-47, FS-48, FS-59, FS-64, FS-69, FS-75, FS-76, FS-87 re-aimed; G77, G78 forwarded.
+--- [Paths forward, ranked] a=0.03 b=0.14 c=0.52 inCommit=0.07 (243 B)
+| 9 | FS-67 3-colourings of tight products — `plans/STUB-tight-product-colourings.md` | **re-aimed at FS-85's close to its four-colour form**: `G` Hoffman-tight at `k`, `χ(H) > k` — is every `k`-colouring of `G × H` pulled back from `G`?
+--- [Paths forward, ranked] a=0.00 b=0.01 c=0.36 inCommit=0.00 (539 B)
+Yes for `G = K_k^s` (Greenwell–Lovász), once off it (R3a, row 85), and, `H` vertex-transitive, by `[Zhang2012]` Thm 1.8(i) at a strict ratio (row 88) or an equal one with IS-primitive factors, leaving the gap `χ_f(H) ≤ k < χ(H)`, at equality only with an IS-imprimitive factor (row 89) … | none; mechanism — the justification under G61 (2) and FS-61's missing rule for non-affine quotient colourings, and the three-colour model of "when must a colouring of a product of local targets be local at one place" (G48, FS-64, FS-66) |

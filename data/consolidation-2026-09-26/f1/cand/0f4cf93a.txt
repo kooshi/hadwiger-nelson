@@ -1,0 +1,54 @@
+--- [The mission] a=0.06 b=0.09 c=1.00 inCommit=0.21 (184 B)
+The conjecture is proved only for L ≤ 3 generally, L ≤ 4 given √3, and L ≤ 5 for multiquadratic F ⊇ K (G55); since FS-81 also L ≤ 4 for every real quadratic field (row 82).
+--- [The mission] a=0.44 b=0.44 c=1.00 inCommit=0.44 (102 B)
+Four at the census's 25 open fields, and at every squarefree d ≡ 11 (mod 12), is met (rows 82–83).
+--- [Frontier] a=0.03 b=0.08 c=0.72 inCommit=0.03 (298 B)
+*Last updated: 2026-09-25 — **FS-89 closed** (rows 95–97; G76 rewritten; G74, G30 corrected): rational band rigidity (row 95) and its consequences at the exposed fields (rows 96–97); verdict **Paid (theorem)**, outcome O1 at a prior of 0.10 (`plans/FS89-rational-band-rigidity.md` §R-close).
+--- [Where the problem stands] a=0.00 b=0.00 c=1.00 inCommit=0.00 (74 B)
+A three-colour question over any real field is a question about 1/3 (G74).
+--- [Where the problem stands] a=0.15 b=0.15 c=0.62 inCommit=0.15 (95 B)
+So a falsifier of the conjecture at ℚ(√47) or ℚ(√167) is no character (FS-83 answered).
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (45 B)
+Berend's method, not his statements (row 95).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.84 inCommit=0.00 (319 B)
+**Three are open, as the 2026-09-25 crunch** (queue `plans/CRUNCH-2026-09-25-queue.md`; index `plans/CRUNCH-2026-09-25-INDEX.md`, which carries results and which blind verifiers do not open; none of the crunch's work enters this file before its milestone closes): **M1** = FS-91 (`plans/FS91-character-local-global.md`)
+--- [Paths forward, ranked] a=0.29 b=0.29 c=1.00 inCommit=0.29 (86 B)
+**M2** = the kernel lane, FS-45, FS-39, and FS-87 or FS-47 (`plans/M2-kernel-lane.md`)
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.86 inCommit=0.04 (209 B)
+**Ranked stubs** (re-ranked 2026-09-25 at FS-89's close, one rank per row: FS-89 closed; FS-91 minted at rank 2; FS-83 answered and moved below FS-84; FS-59, FS-84, FS-64, FS-90, FS-76 re-aimed; G76 forwarded.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.48 inCommit=0.00 (448 B)
+| 2 | **FS-91 band rigidity at six colours, and at one prime** — `plans/STUB-band-rigidity-six.md` (minted at FS-89's close) | does row 95's route reach band 1/6 (Lemma SW and VB1 re-read there; the parity line lands in `Θ₃`, which is rigid) and 1/8; D's band-1/6 exit lemma; `MS₄({5})` and U3 at one prime; absorbs FS-83's `k ≥ 6` remainder; solver-free | speculative; the first character statement at six, ℚ(√167)'s predicted count |
+--- [Paths forward, ranked] a=0.06 b=0.06 c=0.79 inCommit=0.06 (251 B)
+| 5 | **FS-83 the layer method at four and five colours** — `plans/STUB-layer-method-five-colours.md` (minted at FS-81's close) | can one character of `ℤ[U_F]` put every unit vector in `[1/k, 1 − 1/k]`, a whole-plane colouring local at no prime?
+--- [Paths forward, ranked] a=0.00 b=0.03 c=0.17 inCommit=0.00 (180 B)
+**Answered at FS-89's close:** no, at `k = 4` over ℚ(√47) and `k = 5` over ℚ(√167) (row 96); left, `k ≥ 6` (FS-91) | none now at the exposed fields; kept for its banner |
+--- [Paths forward, ranked] a=0.12 b=0.13 c=0.63 inCommit=0.28 (448 B)
+| 6 | **FS-75 the three-colour criterion in the kernel** — `plans/STUB-three-colour-criterion-kernel.md` | **re-aimed at FS-81's close: T4 for the whole family in the kernel** — T22's ⟹, then FS81-T1–T5; fallback, a kernel checker for FS-81's structural certificates on the census (row 83); the minted target, `χ(ℚ(√167)²) ≥ 4`, is an instance … | none; the falsification field's best bound from a checker's word to the kernel's |
+--- [Paths forward, ranked] a=0.06 b=0.09 c=0.52 inCommit=0.06 (458 B)
+| 12 | **FS-82 three colours at residue degree three** — `plans/STUB-three-colours-residue-degree-three.md` | the one class of real number fields row 82 leaves open (FS81-T7): every prime above 3 of odd residue degree has degree ≥ 3, so no additive three-colouring exists; first ℚ(α, √7), α³ = α + 1, where L = 4 by the plane at 7 … | none on six; completes the three-colour classification of real number fields; a cheap exposed test at L = 4 |
+--- [Paths forward, ranked] a=0.41 b=0.41 c=0.78 inCommit=0.50 (250 B)
+| 13 | FS-48 the ℚ(√3,√d) table — `plans/STUB-biquadratic-table.md` | **re-aimed at FS-81's close: multiquadratic fields without √3** — three colours decided there (row 82), `χ(ℚ(√2,√7)²) ≥ 4`, L ≥ 5 by the verifier's reading.
+--- [Paths forward, ranked] a=0.02 b=0.09 c=0.30 inCommit=0.04 (339 B)
+| 19 | FS-45 chain, don't spindle — `plans/STUB-chain-theorem.md` | GPT Astra's chain theorem in the kernel with its instances: the 18-vertex ℚ(√2,√3) graph, and `five_le_chromaticNumber_planeOver (K(√7))` from eight copies of the 588-core 8/3 forcer with its pinned refusal as an LRAT | none on six directly; medium, mechanism |
+--- [Paths forward, ranked] a=0.00 b=0.05 c=0.71 inCommit=0.14 (167 B)
+| 20 | **FS-39 the bridge to the plane** — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup over number fields of χ(F²), invoked in prose since M58 and never stated.
+--- [Paths forward, ranked] a=0.12 b=0.12 c=0.45 inCommit=0.14 (276 B)
+**Route C, new 2026-09-17 (G63):** χ(F(t)²) = χ(F²) for transcendental t, by the place t ↦ 0 through machinery that already exists … | none on finding a 6-forcer; high on every χ(ℝ²) sentence the programme writes, with FS-62's one correct form as a corollary … |
+--- [G63] a=0.00 b=0.03 c=1.00 inCommit=0.03 (271 B)
+**The remaining gap is a different one**: descending an arbitrary finitely generated `F ⊆ ℝ` needs a place whose residue field stays **formally real** (real places, Artin–Lang), where the model-theoretic route needs Tarski–Seidenberg, which Mathlib does not hold.
+--- [G63] a=0.00 b=0.00 c=0.00 inCommit=0.00 (29 B)
+Price both before committing.
+--- [G63] a=0.47 b=0.47 c=0.60 inCommit=0.47 (303 B)
+***Prior art, found 2026-09-19 (FS-61's gate; read first-hand in the held PDF): this is `[Fischer1990]` Theorem 6** — "`F^d` can be k-colored iff `F(α)^d` can", for every dimension and for additive colourings too, proved by writing a unit vector over `F[x]` without common factor and setting `x = 0`.
+--- [G63] a=0.00 b=0.00 c=0.00 inCommit=0.00 (88 B)
+The paper had been in our bibliography, its row naming the theorem, for two weeks (G50).
+--- [G63] a=0.39 b=0.39 c=0.75 inCommit=0.39 (327 B)
+**And his Remark 1 is FS-39's bridge, with the gap this entry names**: it reduces a finitely generated `E ⊂ ℝ` to a number field by calling `E` "a purely transcendental extension of some finite algebraic extension" of ℚ, which is false in general (a function field of positive genus), and then invokes de Bruijn–Erdős.
+--- [G63] a=0.03 b=0.03 c=1.00 inCommit=0.03 (192 B)
+So the statement χ(ℝ²) = sup over number fields has been in print since 1990 with a flawed step; what is left to us is the repair (real places, or Tarski–Seidenberg) and the kernel form.
+--- [G63] a=0.00 b=0.00 c=0.30 inCommit=0.00 (75 B)
+Nothing in this entry is ours but the valuation reading and the named gap.*
+--- [G63] a=0.00 b=0.12 c=1.00 inCommit=0.12 (101 B)
+Killing test: a unit vector of `F(t)²` with a pole at a place whose residue field is formally real.*
+--- [G76] a=0.44 b=0.44 c=0.87 inCommit=0.44 (357 B)
+For characters the exclusion is **closed-set** (Furstenberg–Berend) rigidity on `R̂` with the archimedean directions rotated, and it holds at two or more primes: an orbit closure has archimedean small differences, and meets `T + A`, or every difference, and the band forces a corner (row 95); so HD1 holds (row 96); at one prime two leaves glue (row 97).

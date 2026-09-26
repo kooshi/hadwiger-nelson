@@ -1,0 +1,4 @@
+--- [The novel-results ledger] a=0.09 b=0.09 c=0.09 inCommit=0.09 (116 B)
+*Kernel-checked unless marked **[tools]** (measured on exact arithmetic with controls) or **[hand]** (a hand proof).
+--- [Grokkings — the working theory of the 5t] a=0.37 b=0.37 c=0.37 inCommit=0.37 (269 B)
+Every entry carries a status: **[kernel]**, **[measured]** (tools-side, exact arithmetic or a controlled instrument), **[reading]** (an interpretation, believed and falsifiable), **[external]** (claimed in the literature, unchecked here), **[method]** (a working rule).

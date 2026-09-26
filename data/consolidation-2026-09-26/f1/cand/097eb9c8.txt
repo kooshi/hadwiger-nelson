@@ -1,0 +1,6 @@
+--- [Frontier] a=0.00 b=0.02 c=0.19 inCommit=0.60 (374 B)
+**FS-54 twenty-seven opened the same day and is in progress** (`plans/FS54-twenty-seven.md`): α(27) ≥ 117 everywhere against the 122 six needs, a level-3 relaxation reading ≈ 142 under the 146 that refusing five needs, the 2-adic trichotomy (odd-degree fields are 2-colourable), and the wall at six written up for outside help (`reference/wall-at-six/WALL-AT-SIX.md`).*
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.12 inCommit=0.00 (188 B)
+**The upper side moved**: the GLV level-3 relaxation reads ≈ 142 against the converged three-point 147.58 — below the 146 that refusing five needs; an exact certificate is being built.
+--- [G56] a=0.21 b=0.31 c=0.31 inCommit=0.31 (362 B)
+The registered reading is **χ = ⌈q²/α⌉ at every plane** (true at 3 and 11, consistent at 7 and 19; it replaces the "+1 over the spectral floor" reading, which fails at the Hoffman-tight q = 3), under which α decides χ: the calibrated searcher's plateau α(23) = 87 against the 89 six needs is the advisor's 2:1 bet that 23 is empty, and FS-53 scores it.

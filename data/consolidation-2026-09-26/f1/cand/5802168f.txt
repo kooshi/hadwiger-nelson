@@ -1,0 +1,8 @@
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (73 B)
+**And check which way "more material" runs before assuming it tightens.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.26 (294 B)
+Here adding vertices or edges almost always makes refusal *easier* — but for the residue certificate the direction **inverts**: growing a base only **adds** to the set of colour differences, and the certificate needs a value **outside** that set, so more material makes it **harder** to fire.
+--- [Make the gate fail, and watch it fail] a=0.18 b=0.18 c=0.55 inCommit=0.18 (96 B)
+**Once a base contains the witness, the elimination cannot be recovered by enlarging the base.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (97 B)
+An engineer carrying the usual intuition will spend hours re-checking something that cannot bite.

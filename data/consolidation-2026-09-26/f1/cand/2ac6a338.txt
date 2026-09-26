@@ -1,0 +1,2 @@
+--- [Paths forward, ranked] a=0.00 b=0.02 c=0.52 inCommit=0.07 (279 B)
+A point colours the whole plane, local at no prime when its archimedean part is nonzero: at `k = 5` over ℚ(√167) it falsifies the conjecture, at `k = 4` over ℚ(√47) its five-clause; from four colours up emptiness proves only that no character colouring exists (G71, G73).

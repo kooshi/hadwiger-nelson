@@ -1,0 +1,14 @@
+--- [Frontier] a=0.03 b=0.06 c=0.58 inCommit=0.04 (532 B)
+*Last updated: 2026-09-16 — **FS-54 twenty-seven closed** (row 70, G59): five colours refused at 27 by an exact level-3 certificate (α ≤ 141, so χ(Γ₂₇) ∈ {6, 7}); α ≥ 117 by every method; the 2-adic trichotomy (odd-degree real fields are 2-colourable; U₆₄ joins the window); the wall at six written up and answered twice by GPT Astra (the fractional wall, U₃₂'s rigidity, the inert-tower Hoffman invariance), five of our errors fixed; `[Fischer1990b]` read, 1989 prior art for multiquadratic prime inversion.
+--- [Frontier] a=0.00 b=0.00 c=0.39 inCommit=0.09 (167 B)
+**FS-56 ℚ(√167) is the next milestone** (Kooshi): the smallest field with no usable prime giving five colours or fewer, where the conjecture predicts at least six.
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (40 B)
+FS-53 closed the same morning (row 69).*
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.08 inCommit=0.00 (114 B)
+**FS-56 ℚ(√167) is the next milestone** (Kooshi) — the smallest field our conjecture says needs six colours.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.08 (150 B)
+**Ranked stubs** (re-ranked 2026-09-16 at FS-54's close: FS-56 the next milestone (Kooshi); FS-57 minted; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.10 b=0.14 c=0.24 inCommit=0.24 (387 B)
+| 1 | **FS-56 ℚ(√167)** — `plans/STUB-quadratic-167.md` | the smallest-discriminant real field with no usable prime giving ≤ 5 colours (167 ≡ 7 mod 8; a non-residue at 3, 7, 11, 19; usable planes 23, 43, 59, …), so the conjecture predicts its plane needs ≥ 6 colours once five is refused at 23 (Q0, about one CPU-hour) — against a proven 3, with no √3 and no triangles.
+--- [Paths forward, ranked] a=0.02 b=0.02 c=0.06 inCommit=0.02 (417 B)
+Its unit-vector ring is known exactly (`[Fischer1990b]` Thm 5), and by the chain theorem one k-colour forced pair at an invertible distance gives χ > k: Q1 a three-colour forcer, Q2 four and five, Q3 what could six-colour it, Q4 growth | **the highest in both outcomes**: a non-five-colourable graph here is χ(ℝ²) ≥ 6; a plane that stays small is the conjecture's first gap, where the residue method runs out |

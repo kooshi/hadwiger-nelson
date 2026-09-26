@@ -1,0 +1,6 @@
+--- [Frontier] a=0.02 b=0.05 c=0.09 inCommit=0.02 (353 B)
+*Last updated: 2026-09-14 — the outside advisor's response folded in (GPT Astra, G55): the chain theorem, the unit-vector ring's prime inversion, the conjecture's two-, three- and conditional five-colour levels, every one a kernel target (FS-45–48); the biquadratic table and the one-gadget six-target minted (FS-48, FS-49); the frontier re-ranked.*
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (154 B)
+**Ranked stubs** (re-ranked 2026-09-14 after GPT Astra's response and Kooshi's kernel-everything instruction; `plans/FRONTIER-STUBS.md` is authoritative):
+--- [Paths forward, ranked] a=0.01 b=0.01 c=0.37 inCommit=0.03 (593 B)
+| 1 | FS-40 the first digit at 83 — `plans/STUB-first-digit-83.md` | is UD(𝔽₈₃,2) six-colourable? floor 6 (Hoffman 5.743); the first usable prime of the `ρ₆₃` arena's field K(√7), whose other usable primes have floor ≥ 8, so under the conjecture χ(K(√7)²) = 6 iff yes, else 7, and de Grey's field is 7 outright; the equivariant ask is minutes, the line-periodic route refused in all 42 directions, cube-and-conquer priced as FS-17's | medium — the one cheap computation whose answer changes what the conjecture predicts for the only 6-open field we built an object in |

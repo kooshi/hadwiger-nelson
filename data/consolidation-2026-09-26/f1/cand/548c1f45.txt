@@ -1,0 +1,4 @@
+--- [The mission] a=0.33 b=0.39 c=0.42 inCommit=0.47 (235 B)
+**This has fired once, for Theorem B** (χ(ℚ(√3,√11)²) = 4), which settles a question posed or named as open at least six times across fifty years (the three oldest postings do not cite one another; `CLOSED-QUESTIONS.md` §1.1).
+--- [G63] a=0.00 b=0.00 c=0.00 inCommit=0.00 (188 B)
+*Prior art unchecked and probably folklore — this is the standard specialisation argument in valuation dress; FS-39's gate owes the search and nothing here may be claimed until it runs.*

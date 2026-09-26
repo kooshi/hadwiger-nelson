@@ -1,0 +1,272 @@
+--- [Frontier] a=0.00 b=0.00 c=0.00 inCommit=0.00 (197 B)
+*Last updated: 2026-09-13 — the backlog branch reviewed (eighteen readers; gate green on the tip) and its record corrected in place; M63 phase H4 open, its last measurement withdrawn at the tip.*
+--- [Where the problem stands] a=0.21 b=0.21 c=0.74 inCommit=0.24 (227 B)
+**The design target** (G48): a pair forced equal at five colours over a 5-sealed field, at a distance with 11 ∣ d², then spindled — the spindle removes exactly the sealing prime and lands in a 6-open field by construction.
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (32 B)
+This is FS-6, the sequel of M62.
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (170 B)
+The null is **stronger than it reads**: his field is 6-open (G43), so no arithmetic bar — not row 55's, which is scoped to the √7-free tower — explains the absence.
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (118 B)
+A 6-open platform has carried a five-chromatic object since 2018 and yielded no five-colour compulsion at arity ≤ 3.
+--- [Where the problem stands] a=0.23 b=0.36 c=0.57 inCommit=0.54 (363 B)
+**The type-M rotations are a classified one-integer family, and the record is its cheapest live member** — `cos θ = (2n−1)/(2n)`, which is the spindle at distance `√n`; `n = 3` is the Moser twist, `n = 4` the record, `n = 16` is `ρ₆₃`, whose arena is **5-chromatic in the 6-open field `ℚ(√3,√7,√11)`**, produced rather than inherited (row 64).
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.11 (115 B)
+The two members cheaper than the record die by **Theorem B**, which is why no other rotation was ever made to work.
+--- [Where the problem stands] a=0.02 b=0.02 c=0.04 inCommit=0.06 (269 B)
+**The platform is not the first, it is the smallest and the first built to order**: de Grey's own field is 6-open (G43), so G48's bar has been liftable since 2018; `ℚ(√3,√7,√11)` is degree 8 against his degree 16, and the screen reached it rather than found it.
+--- [Where the problem stands] a=0.00 b=0.07 c=0.07 inCommit=0.07 (284 B)
+His base graph is his §5.6 closed form: 1,603 points in 92 orbits under his order-24 group ⟨ζ₆⟩ ⋊ Gal(K/ℚ), in which complex conjugation is itself a Galois element (`typem.parts_lattice`); our ρ₁₅ cross-edge law returns his two connecting orbits with his edge counts.
+--- [Where the problem stands] a=0.00 b=0.03 c=0.35 inCommit=0.03 (248 B)
+Extended to radius 2.44 (3,433 points, 179 orbits) the **arena** — base together with its rotated copy — contains Heule-510 exactly (2,504 of 2,504 edges, none extra), split 375 base-side and 136 copy-side with the shared centre counted in both
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.55 (73 B)
+**the base alone cannot**, since it lies in K² and χ(K²) = 4 (row 57).
+--- [Where the problem stands] a=0.00 b=0.00 c=0.00 inCommit=0.00 (125 B)
+The record is specified by his Tables 3–4 (374 + 136 vertices sharing the centre; `data/m62/parts509-orbit-fillings.json`).
+--- [Where the problem stands] a=0.31 b=0.31 c=0.69 inCommit=0.31 (135 B)
+His reduction stage is reproduced on every attested number, with complete level sets, about 150× faster than his implementation (M63).
+--- [Where the problem stands] a=0.00 b=0.12 c=0.12 inCommit=0.19 (127 B)
+Best 1-minimal objects by symmetry rung: 624 (order 24), 576 (6), 558 (3), 582 (1); best object 559 vertices, census-certified.
+--- [The novel-results ledger] a=0.00 b=0.47 c=0.47 inCommit=0.47 (735 B)
+**Over the √7-free tower with 11 ∤ D, a five-colour forced pair has 11 ∣ d² and a virtual edge d² ≡ 1 (mod 11), so neither a √3 nor a distance-2 gadget exists** (`not_separated_sqrt3_11`, `not_separated_two_11`) — and, by the same law at the rational squared distance 25/9 (`not_forces_of_distSq_ratio`, `not_forces_five_thirds_11`, modelled on Heule-510's 5/3 pairs), Polymath16's 2018 question "is 5/3 always coloured like 0?" has the answer no for every such certificate; the field-level reading, wherever 11 is usable, adds M58's hand reduction, and the √247 variant stays a hand argument (`CLOSED-QUESTIONS.md` §1.4). | `ResidueObstruction.lean`, `Instances/ResidueObstruction11.lean`, `tools/fpcompel.py` | M60 |
+--- [The novel-results ledger] a=0.00 b=0.08 c=0.33 inCommit=0.10 (323 B)
+**The rotation is not new either, corrected 2026-09-12**: it is `ω₁₆` of `[Polymath16wikiMain]`'s own 2018 list, which also records de Grey's 20,425-vertex graph as living in `ℤ[ω₁, ω₃, ω₄, ω₁₆]` — so `ρ₆₃` is a generator of **de Grey's own ring**, and it is a G8 generator here for that reason.
+--- [The novel-results ledger] a=0.00 b=0.42 c=0.42 inCommit=0.42 (139 B)
+**What is ours in this row is the field screen that selected it, the 6-openness, and the produced refusal — nothing about the rotation.**
+--- [The novel-results ledger] a=0.00 b=0.17 c=0.23 inCommit=0.19 (761 B)
+**At `n = 16`: `χ ≥ 5` on 51,133 vertices / 544,530 edges in `ℚ(√3,√7,√11)`**, established twice — a complete 552-pattern enumeration with **0 of 304,704** admissible pairs, and **552/552 UNSAT** cube-and-conquer in 20.03 core-hours — sharing only the completeness of the 552, the first claim confirmed on **four** independent solver codebases (CaDiCaL ×2, Glucose, Minisat) and the other nineteen on two (CaDiCaL, Glucose), with paired positive controls, and produced as **0.35 GB of DRAT** (807 MB bundled, each instance repeating the base half) covering the whole 20-claim trust core — **the first here, but GENERATED and not CHECKED**: no DRAT checker exists on this machine, so what holds is only that CaDiCaL's own `--checkproof` was on.
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.06 inCommit=0.12 (233 B)
+**Regenerated as text LRAT** with `scripts/regen-check.sh`'s own flags: all 20 exit UNSAT, all 20 end in the empty clause with a negative control proving that check discriminates, **1,001.2 MB over 11.8 M lines**, 406 solver-seconds.
+--- [The novel-results ledger] a=0.02 b=0.02 c=0.02 inCommit=0.02 (354 B)
+**Status: generated, not checked** — and the format is **the input to this project's conversion pipeline, NOT one the kernel consumes**: core's LRAT checker cannot kernel-reduce at all (`USize` width is an `@[extern] opaque`, so it buys a native axiom per certificate) and M05's kernel-reducible checker takes a packed `Nat` encoding derived from LRAT.
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.00 inCommit=0.12 (158 B)
+**Kernel-checking is priced and declined for now**: at 585–614 k lines each, one is ~0.75× the per-cube volume row 40 declined and all twenty are ~15× it.
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.05 inCommit=0.00 (282 B)
+Bundled as **19.5 MB** (base half once plus 20 deltas) with a `reconstitute.sh` that verified each rebuild against a SHA-256 and refused a planted clause — **but the DRAT, LRAT and bundle lived in the session's `/tmp` and were never committed; they are gone** (review 2026-09-13).
+--- [The novel-results ledger] a=0.07 b=0.07 c=0.14 inCommit=0.19 (292 B)
+**Not the FIRST such platform, corrected 2026-09-12**: de Grey's own field ℚ(√3,√5,√7,√11) is 6-open (G43; the coordinates span all sixteen basis slots of the tower over `Instances/DeGrey`'s certificate, and `data/fplane/map.md:20` has said so since M58), as is K(√5,√7,√247).
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.65 inCommit=0.00 (139 B)
+The 5-sealed ones are the record's K(√15) = K(√5), the M53 witnesses' K(√247) and K(√23), and Heule-510/553's ℚ(√3,√5,√11).
+--- [The novel-results ledger] a=0.13 b=0.13 c=0.30 inCommit=0.43 (155 B)
+What is new is a platform at **half the degree** (8 against 16), reached **by the screen** rather than found, carrying an object whose refusal is produced.
+--- [The novel-results ledger] a=0.00 b=0.06 c=0.34 inCommit=0.06 (258 B)
+**χ(arena) = 5 EXACTLY** (2026-09-12: nothing on record had the upper half; CaDiCaL was undecided at 300 s; an explicit construction took 0.7 s and was **verified proper on all 544,530 edges, 0 improper** — `plans/M63-phaseH4-reduce-the-platform.md` §R).
+--- [The novel-results ledger] a=0.00 b=0.42 c=0.48 inCommit=0.46 (575 B)
+[tools] Also: the circle count is the base's norm-`n` shell count and is **free** when `n = k²m` with `k ∈ ℤ` and `m` a realised distance; the 30 circle points admit exactly **19** colour patterns in `1 + 6·3` orbits under `ζ₆`, every one half-turn invariant; and `h(K) = h(K(i)) = 1` with `μ(K(i)) = ⟨ζ₁₂⟩` (pari). | `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH2-solver.md`, `plans/M63-phaseH2-plan.md`, `plans/POROS-2026-09-12-m63-phaseH2.md`, `plans/M63-phaseH4-reduce-the-platform.md` (the χ = 5 witness), `data/m62/README.md` | M63 phase H2 |
+--- [The novel-results ledger] a=0.00 b=0.47 c=0.47 inCommit=0.47 (128 B)
+| 65 | [tools] **Dropping `[Parts2020a]`'s coordinate shape: the object dies, and the family gains six results** (M63 phase H3).
+--- [The novel-results ledger] a=0.00 b=0.33 c=0.40 inCommit=0.53 (296 B)
+Dropped at `n = 2` (`ρ₂ = (3+i√7)/4`, circle `\|p\|² = 2`, bound `4/√7`, field `ℚ(√3,√7,√11)`, 6-open), the base is the ℤ-span of its own **60** unit vectors — index 256, group-closed under order **48** not Parts's 24, **16,309** points, confirmed by three independent routes.
+--- [The novel-results ledger] a=0.00 b=0.48 c=0.56 inCommit=0.50 (333 B)
+**THE OBJECT IS FOUR-COLOURABLE, at every radius, by derivation**: an arena colouring is a **pair** `(f,g)` of base colourings meeting 132 interface constraints, and searching them **independently** over the additive family gives **576 of 124,416** in 1.7 s — **none a twist**, which is why a twist-only search had read it as live.
+--- [The novel-results ledger] a=0.00 b=0.44 c=0.67 inCommit=0.44 (192 B)
+Additive colourings are lattice homomorphisms and the cross edges are pinned at 252 by the bound, so growth cannot help (exercised at 32,617 / 83,905 / 301,537 vertices, 0 monochromatic each).
+--- [The novel-results ledger] a=0.00 b=0.36 c=0.68 inCommit=0.36 (176 B)
+**Every 6-open member FS-30 lists (16, 20, 44, 60, 64, 76, 108, 112) is `≡ 0 (mod 4)` and immune: phase H3 picked the cheapest member of exactly the class this route kills.**
+--- [The novel-results ledger] a=0.00 b=0.31 c=0.50 inCommit=0.36 (231 B)
+Also: **(i)** the endpoint bound `1/\|sin θ\|` governs cross-edge **endpoints, not a base's extent** — Parts went **past** his by 1.222× (his base is a selection of 37+14 orbits, not a disk cut), phase H2 stopped exactly at his
+--- [The novel-results ledger] a=0.00 b=0.18 c=0.30 inCommit=0.18 (236 B)
+**(ii)** **growing a base is provably monotone** — colourings of a larger base restrict to the smaller, so the interface pattern set only shrinks while the circle count is fixed (first measurement: `10²¹ → 10⁴` for a 2.6× base)
+--- [The novel-results ledger] a=0.00 b=0.23 c=0.46 inCommit=0.23 (284 B)
+**(iii)** the circle sits at `√(1−1/(4n))` of the bound — 93.5/96.8/99.2% at `n` = 2/4/16 — so **the circle is on the arena boundary in every member by construction**, and the free-circle theorem's hypothesis (radius `\|k\|+1`) **has never been satisfied by any object built**
+--- [The novel-results ledger] a=0.00 b=0.37 c=0.37 inCommit=0.36 (408 B)
+**(iv)** a **two-case classification** of monochromatic cross-edge kinds over `V = n(g−h)² + gh`, with `\|u\|²,\|v\|²,σ,δ²` all homogeneous of degree 0 and the endpoint bound a corollary — case A (`g,h` both `𝔭`-units) monochromatic for every `n`, case B iff `v_𝔭(gh) < v_𝔭(n)`, needing `n` even; retrodicts 12/12 families, one out-of-sample landing (`Sh(64)=12` predicted mid-enumeration)
+--- [The novel-results ledger] a=0.00 b=0.28 c=0.48 inCommit=0.45 (223 B)
+**(v)** the shape trade measured — each conjugate condition beyond the first costs **2.0–2.6×** in realised connectivity, so dropping the shape buys 2× nominal and pays ≈5.3×, **net ≈2.6× worse at equal radius**
+--- [The novel-results ledger] a=0.00 b=0.12 c=0.29 inCommit=0.21 (188 B)
+**(vi)** a **one-sided kill test** for whether phase H2's interface reduction is affordable, milliseconds from one base colouring — **it rules candidates out and can never rule one in**.
+--- [The novel-results ledger] a=0.00 b=0.23 c=0.28 inCommit=0.38 (306 B)
+**The premise is confirmed where it matters most:** at `n = 4`, the record's **own** rotation, dropping the shape takes raw off-diagonal cross edges **36 → 312** and monochromatic ones **0 → 144** (195,961 points, 492/492 confirmed, 0 invented) — **the shape, not the rotation, was the obstruction.**
+--- [The novel-results ledger] a=0.00 b=0.20 c=0.39 inCommit=0.20 (422 B)
+**Prior art:** the move is `[Polymath16blog]`, Silberman, 2018-04-19 — *"take points each of whose coordinates is a point in the field"*, both obstacles named, *"I'll try implementing this later"*, never returned to, nothing following it in 1.69 M characters across eighteen threads; the coincidence-site-module literature excludes the object **by definition** (`[BaakeZeiner2017]` §6 admits only same-rank submodules).
+--- [The novel-results ledger] a=0.00 b=0.23 c=0.39 inCommit=0.25 (500 B)
+**And the DIRECTION closes with the object**: run over Parts's **shaped** lattice the same screen shows every member he can realise with a nonempty circle is either **odd** (at risk, but dead anyway — odd `n` fails the 2-adic wall) or **`4 \| n`** (immune), so **dropping the shape reaches only members this route kills**; `n = 16` is the cheapest 6-open immune member, nothing lies below it (`n` = 4, 8, 12 are 5-sealed), and it is realisable **shaped** at 25,567 points — phase H2's own object.
+--- [The novel-results ledger] a=0.00 b=0.00 c=0.67 inCommit=0.00 (114 B)
+**Every member worth having was already reachable on Parts's lattice; the shape-free construction has no target.**
+--- [The novel-results ledger] a=0.00 b=0.09 c=0.23 inCommit=0.50 (158 B)
+Residual, priced not pursued: `n = 10` is at risk and **uncomputed** at ~6.6 M points; the sub-bound radius lever is worth **6–23%, not orders** (measured).
+--- [The novel-results ledger] a=0.00 b=0.17 c=0.33 inCommit=0.17 (73 B)
+**Nothing kernel-checked; no proof log, because no solver produced one.**
+--- [The novel-results ledger] a=0.00 b=0.40 c=0.40 inCommit=0.40 (226 B)
+| `plans/M63-phaseH3-plan.md`, `plans/M63-phaseH3-solver.md`, `plans/M63-phaseH3-crossedges.md`, `plans/M63-phaseH3-module.md`, `plans/M63-phaseH3-prior-art.md`, `plans/POROS-2026-09-12-m63-phaseH3.md` (the retraction ledger).
+--- [The novel-results ledger] a=0.00 b=0.57 c=0.57 inCommit=0.57 (187 B)
+**Its certificate and `recheck.py` were left under the gitignored `build/` and are not in the repository** (review 2026-09-13; `data/m62/README.md` § Not recorded here). | M63 phase H3 |
+--- [Paths forward, ranked] a=0.05 b=0.16 c=0.16 inCommit=0.30 (255 B)
+**M63 phase H2 closed 2026-09-12** with a five-chromatic unit-distance graph in a **6-open** field (row 64) — **not the first** such platform, since de Grey's own field is 6-open (G43), but the smallest and the first reached by design rather than found.
+--- [Paths forward, ranked] a=0.00 b=0.13 c=0.24 inCommit=0.13 (450 B)
+**Phase H3 closed 2026-09-12 with its object DEAD and the family six results richer** (row 65): dropping `[Parts2020a]`'s coordinate shape at `n = 2` gives a base that is four-colourable **at every radius, by derivation**, and the reason generalises — **the additive-pair route is open exactly when `4 ∤ n`**, while **every 6-open member we list is `≡ 0 (mod 4)`**, so the phase picked the cheapest member of exactly the class that route kills.
+--- [Paths forward, ranked] a=0.00 b=0.35 c=0.43 inCommit=0.35 (184 B)
+The premise it was chartered to test is nevertheless **confirmed**: at the record's own rotation `n = 4`, dropping the shape takes monochromatic off-diagonal cross edges **0 → 144**.
+--- [Paths forward, ranked] a=0.00 b=0.12 c=0.24 inCommit=0.12 (307 B)
+**The DIRECTION is closed too, and that is the phase's real result:** on Parts's shaped lattice every member with a nonempty circle that the route can kill is **odd**, and odd `n` fails the 2-adic wall outright (dead by Theorem B), while **every even member his lattice realises has `4 | n` and is immune**.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.33 inCommit=0.00 (110 B)
+So dropping the shape reaches only `n ≡ 2 (mod 4)` and odd `n` — **exactly the members this route kills.**
+--- [Paths forward, ranked] a=0.00 b=0.14 c=0.46 inCommit=0.14 (243 B)
+**`n = 16` is the cheapest 6-open immune member and nothing lies below it** (`n` = 4, 8, 12 are 5-sealed, checked in `tools/fplane.py`) — and it is realisable on his **shaped** lattice at 25,567 points, which *is* phase H2's verified object.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.67 inCommit=0.00 (114 B)
+**Every member worth having was already reachable on Parts's lattice; the shape-free construction has no target.**
+--- [Paths forward, ranked] a=0.00 b=0.18 c=0.45 inCommit=0.23 (156 B)
+One residual, priced not pursued: `n = 10` (`K(√13)`, 6-open, `4 ∤ 10`) is **at risk but UNCOMPUTED** at ~6.6 M points, past the present Python tooling.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (310 B)
+The Poros pass of 2026-09-13 re-ranked the set below: the live continuation is **FS-38, the residue tower**, with FS-6's mechanism second and its never-run instance test restored; `plans/FRONTIER-STUBS.md` is authoritative and carries the caution that phase H2 decided **one object** and phase H3 **one more**.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.33 inCommit=0.00 (108 B)
+**M62** — the evolutionary type-M search (`plans/M62-evolutionary-type-m.md`) — stays paused behind M63.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.20 inCommit=0.00 (463 B)
+**Ranked stubs** (re-ranked 2026-09-13 by the Poros wall-breaking pass, `plans/POROS-2026-09-13-wall-breaking.md`: every five-colour pair sweep ever run read zero on a *critical* 5-chromatic object, in sealed and 6-open fields alike, while the four-colour forced pairs the 5-forcers were built from were read off deep 4-colourable fabric at 2-adic depth 3 with no mechanism derived — the frame reads a prime at level one; the tower above it is the new top row):
+--- [Paths forward, ranked] a=0.01 b=0.01 c=0.19 inCommit=0.01 (541 B)
+| 1 | FS-38 the residue tower — `plans/FS38-residue-tower.md` | the level-m residue planes P_m = Cay(O/𝔭^m, S_m) (`unitQuadrance (ZMod (p ^ m))`): at which level does every k-colouring become constant on 𝔭^d-cosets — at 2 with four colours first (must reproduce M56's depth-3 forcing), then at 11 with five (UD(ℤ/121, 2), one Separated ask per coset class)? continuity at 11 names the depth and size of a fabric that forces a pair at 11 ∣ d²; no continuity closes route A at its mechanism | medium-high as a frame; two-sided |
+--- [Paths forward, ranked] a=0.16 b=0.16 c=0.37 inCommit=0.31 (360 B)
+| 2 | FS-6 the six-level design target — `plans/STUB-family-keeping-thickening.md` | a pair forced equal at five colours over a 5-sealed field at 11 ∣ d², spindled into a 6-open field (G48); its central computation (the forced-distance table at residue norm 0, backlog B9 (i)) was never built and is FS-38's phase C | medium — the only known mechanism |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.21 inCommit=0.29 (295 B)
+| 3 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? five-colourable says 23 seals like 11 and 19; a refusal is the first plane exactly 6-chromatic and names 6-hosting fields by congruences | medium as a frame; the disproof-side digit |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.47 inCommit=0.47 (179 B)
+| 6 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not; where FS-6's §7 hands its question | medium, mechanism only |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.10 inCommit=0.00 (140 B)
+| 7 | FS-16 residue-allowed distances — `plans/STUB-residue-allowed-distances.md` | the 51 undecided asks at residue norm 1 | low-medium |
+--- [Grokkings — the working theory of the 5t] a=0.26 b=0.26 c=0.48 inCommit=0.32 (189 B)
+So a 6-forcer, by the only mechanism known, is a pair forced equal at five colours over a 5-sealed field at a distance with 11 ∣ d², spindled into a field that is 6-open by construction.
+--- [G7] a=0.33 b=0.33 c=0.56 inCommit=0.33 (139 B)
+The wiki's own list is *"particularly the Loeschian numbers 1, 3, 4, 7, 9, 12, …"*, the squared distances the triangular lattice realises
+--- [G7] a=0.07 b=0.07 c=0.17 inCommit=0.28 (222 B)
+**2 is not Loeschian** while 3, 4 and 16 are, so the restriction is an independent second reason — beside the census-image failure of `plans/M63-phaseH2-prior-art.md` §PA.4 — that `n = 2` was never examined by anyone.
+--- [G21] a=0.38 b=0.38 c=0.38 inCommit=0.38 (102 B)
+**And where a phase's output is eliminations, its defects are not random — they all point one way.**
+--- [G21] a=0.07 b=0.07 c=0.40 inCommit=0.27 (124 B)
+A defect whose result displeases gets investigated within the hour; a defect whose result pleases is congratulated and kept.
+--- [G31] a=0.00 b=0.00 c=0.00 inCommit=0.00 (69 B)
+Heule-510 and Heule-553, in a **5-sealed** field, return 0 and 0 too.
+--- [G31] a=0.00 b=0.00 c=0.50 inCommit=0.00 (87 B)
+**Four objects, both sealing statuses, one null: the emptiness is not a field effect.**
+--- [G31] a=0.20 b=0.20 c=0.32 inCommit=0.36 (185 B)
+Open: **arity 3**, swept only on 163 interface vertices (`1.6e-7` of the space, a choice not a derivation), **337 candidates standing**; the arity-2 null makes any real one irreducible.
+--- [G31] a=0.30 b=0.30 c=0.62 inCommit=0.43 (327 B)
+**And a filter cannot help here, by a theorem: a field is 5-sealed exactly when some usable prime's plane is 5-colourable, which IS the residue filter's hypothesis — so "6-open" and "residue-filterable at five colours" are COMPLEMENTARY BY DEFINITION, and every object worth sweeping for χ ≥ 6 is un-filterable this way.**
+--- [G43] a=0.15 b=0.15 c=0.19 inCommit=0.30 (169 B)
+**Row 52 is about the proper subfield ℚ(√3,√5,√11) and never about de Grey's field**; reading it as the field is what made this entry briefly claim the opposite.
+--- [G43] a=0.00 b=0.00 c=0.20 inCommit=0.00 (102 B)
+A composite ideal cannot beat the best prime without refuting Hedetniemi's conjecture (Moorhouse §9).
+--- [G46] a=0.00 b=0.00 c=0.14 inCommit=0.33 (137 B)
+Its discoverer declined the credit for depth and named this instead, which is why it is written as a habit rather than as an achievement.
+--- [G47] a=0.03 b=0.03 c=0.26 inCommit=0.53 (219 B)
+So over a field where 11 is usable, forced at five colours ⟹ 11 ∣ d² and virtual edge ⟹ d² ≡ 1 (mod 11) — the residue-allowed distances (2√3, 8/3, √23, …) are where a five-colour virtual edge can live.
+--- [G48] a=0.44 b=0.44 c=0.59 inCommit=0.44 (222 B)
+So the six-level is one question — does a 5-sealed field carry a pair forced equal at five colours, necessarily at 11 ∣ d²? — whose spindle (√43, √131, 5√7, √10, …) lands in a 6-open field by construction.
+--- [G48] a=0.37 b=0.37 c=0.46 inCommit=0.52 (327 B)
+**The conjecture the mechanism was minted to serve, restated so it can be pushed back on** (FS-15, opened at the M61 close): *χ(F²) equals its best local bound wherever that bound is ≤ 6* — attained at all six fields where χ is known, twice predicted before the forcer was built — whose **bold form is χ(ℝ²) = 7**.
+--- [G49] a=0.21 b=0.21 c=0.24 inCommit=0.21 (225 B)
+So the check is not "ask two databases", it is *ask two databases and confirm they are not quoting the same record* — compare identifiers and versions, not counts, and open the citing lists rather than reading their length.
+--- [G49] a=0.35 b=0.35 c=0.61 inCommit=0.55 (197 B)
+Run that way it paid for itself immediately: it surfaced a 2007 paper counting sums of two squares over a **real quadratic** base, which is the case the survey's own inventory says nobody has done.
+--- [G52] a=0.17 b=0.17 c=0.39 inCommit=0.39 (122 B)
+Whether a cross edge is invisible depends on that sum alone, via `d² = σ − (σ−1)/cos θ` — no radius, no lattice.
+--- [G52] a=0.00 b=0.00 c=0.67 inCommit=0.00 (121 B)
+**This is the first named mechanism for the gap between "the field breaks the wall" (G1, G35) and "the object uses it".**
+--- [G52] a=0.28 b=0.28 c=0.30 inCommit=0.35 (277 B)
+Measured on M63 phase G's new rotation: it breaks the wall, and dies anyway because `[Parts2020a]`'s lattice cannot realise the live radius sum — the Diophantine system has **no** solution there, while the identical search returns **30** at his own angle, exactly its census.
+--- [G52] a=0.27 b=0.27 c=0.36 inCommit=0.18 (84 B)
+**Read the scope exactly: this is a fact about that lattice, not about that angle.**
+--- [G52] a=0.15 b=0.15 c=0.59 inCommit=0.21 (238 B)
+Inverted, it is a **design target**: the cosine alone names the live radius sums before any base exists, each handing back the two radii a base must contain as roots of a quadratic, at **both** primes — one free prime is enough to kill.
+--- [G52] a=0.15 b=0.15 c=0.38 inCommit=0.15 (114 B)
+**Necessary is proved; sufficient is untested, and the record's own rotation is the only positive instance held.**
+--- [G52] a=0.00 b=0.00 c=0.00 inCommit=0.00 (70 B)
+**Sharpened 2026-09-12, and it removes this entry's apparent filter.**
+--- [G52] a=0.23 b=0.23 c=0.34 inCommit=0.34 (451 B)
+Where the cross edges come from a *free* circle — the circle being `t ×` the unit shell for an integer `t` (`plans/M63-phaseH2-the-family.md` §4) — the certificate's defeat is **automatic whenever `t` is even**: `φ` is a homomorphism into a characteristic-2 residue field, so every circle point carries the centre's residue, and the shared centre pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime).
+--- [G52] a=0.19 b=0.19 c=0.74 inCommit=0.19 (203 B)
+The live quantity is the **off-diagonal** share of the monochromatic cross edges — the part forced by neither the centre nor the circle: the record's share is **0 of 30**, `ρ₆₃`'s is **24 of 54**.
+--- [G52] a=0.08 b=0.08 c=0.39 inCommit=0.27 (361 B)
+And the free-circle condition is wider than a perfect square: `|p|² = n` is free iff `n = k²·m` with `k ∈ ℤ` and `m` a squared distance the lattice **already realises** (so `4 = 2²·1`, `16 = 4²·1` and `12 = 2²·3` are free, and `2` is not) — `k` must be a **multiplier of the module**, which is automatic for `k ∈ ℤ` and false for `k = 2√3`.
+--- [G53] a=0.00 b=0.00 c=0.00 inCommit=0.00 (32 B)
+**sufficient, never necessary.**
+--- [G53] a=0.26 b=0.26 c=0.26 inCommit=0.59 (240 B)
+This is a **counting** compulsion, a shape this project's vocabulary lacked: not *"this pair is forced"* (`Forces`, arity 2) nor *"this k-set is covered"* (`Fan`) but *"at least `L` of these `n` points share one designated point's colour"*.
+--- [G53] a=0.16 b=0.16 c=0.22 inCommit=0.27 (360 B)
+It subsumes the two obvious cheap routes as the extreme cases — a forced pair is `L = count`, an intersecting family is `2L > count` — and it explains why both fail on `ρ₆₃`, where `L/count = 10/30 = 1/3` (provisional, under two-sided re-verification) and no circle point is forced (all 30 tested, all satisfiable, SAT answers and so self-certifying).
+--- [G51] a=0.00 b=0.00 c=0.34 inCommit=0.10 (208 B)
+**Every one of those retractions was free**: all three were writing documents, nothing was committed, no solver time had been paid, nothing had been claimed outside the room, and no implementer held anything.
+--- [G51] a=0.06 b=0.06 c=0.78 inCommit=0.56 (243 B)
+Once retraction is expensive — after a commit, after a paid run, after a statement to a third party — the same speed produces **escalation** instead of correction, because the cost of being wrong has become the cost of having *been* wrong.
+--- [G51] a=0.00 b=0.00 c=0.58 inCommit=0.00 (104 B)
+And the tell that makes this checkable rather than aspirational: **count the retractions in that window.
+--- [The standard of evidence above rung B] a=0.45 b=0.45 c=0.45 inCommit=0.55 (333 B)
+That retired a third of its evidence and shrank the solver-dependent core from one claim about a 51,133-vertex object to **twenty claims about 25,567-vertex halves** — a different *kind* of artifact, because twenty half-instance refutations are individually within reach of proof logging where one whole- object refutation was not.
+--- [The standard of evidence above rung B] a=0.47 b=0.47 c=0.47 inCommit=0.53 (236 B)
+**The question that did the work is cheap and repeatable: *what must someone who trusts none of this actually check?*** Its discoverer declined the credit for insight and named the question instead, which is the version that reproduces.
+--- [The standard of evidence above rung B] a=0.28 b=0.28 c=0.28 inCommit=0.56 (118 B)
+Ask it while the evidence is still being gathered, not at the write-up, or you will pay for evidence nothing rests on.
+--- [Toolchain] a=0.00 b=0.00 c=0.03 inCommit=0.29 (294 B)
+Restoring 32-way was right — observed throughput **12.6 cubes/min** against the ~8/min sixteen workers give — but **the two figures first reported here (32-way 120.6 s against 16-way 122.8 s, "statistically identical") are STRUCK**: they compared a mixed cube population against a pure one.
+--- [Toolchain] a=0.00 b=0.00 c=0.14 inCommit=0.00 (233 B)
+Restricted to one difficulty class, the same data reads 32-way **105.1 s** (n=43), 16-way **126.6 s** (n=32), 32-way again **129.2 s** (n=117) — **two runs at the SAME width differing by as much as the width effect being claimed.**
+--- [Toolchain] a=0.12 b=0.12 c=0.15 inCommit=0.12 (191 B)
+Third lesson, with its scope: **say physical cores when sizing memory-hungry work**, and **derive a rate from your own numbers and check it against the observed one before believing either.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (52 B)
+**neither could have told anyone the run had died.**
+--- [Make the gate fail, and watch it fail] a=0.29 b=0.29 c=0.29 inCommit=0.29 (63 B)
+Both passed review; both were found only by opening the module.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (241 B)
+Asked why, it declined the credit and gave the mechanism: it had already written the argument against itself one commit earlier, when a *different* planted fault failed to fire and it had to decide whether to rewrite a check until it agreed.
+--- [Make the gate fail, and watch it fail] a=0.44 b=0.44 c=0.44 inCommit=0.44 (121 B)
+So this is sequencing rather than virtue, and it is cheap: settle the policy while the number under dispute is not yours.
+--- [Make the gate fail, and watch it fail] a=0.47 b=0.47 c=0.47 inCommit=0.47 (274 B)
+The same evening, a whole-run wall-clock test was traded for a six-point component measurement that established a cost law's *shape* by construction instead of by curve-fitting — strictly better on the thing it measures, and blind to any cost living outside the component.
+--- [Make the gate fail, and watch it fail] a=0.20 b=0.20 c=0.20 inCommit=0.20 (171 B)
+The repair when it happens: re-derive the decision from the corrected figure out loud, because a ruling that survives its bad evidence needs new grounds, not a quiet pass.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (98 B)
+The two instances that produced it are worth keeping because they are one error wearing two faces.
+--- [Make the gate fail, and watch it fail] a=0.45 b=0.45 c=0.55 inCommit=0.45 (181 B)
+A product owner scored an off-diagonal **raw count** against `24/54`, which is a share of the **monochromatic** cross edges under a particular colouring — a different denominator.
+--- [Make the gate fail, and watch it fail] a=0.44 b=0.44 c=0.44 inCommit=0.44 (145 B)
+The check costs seconds and ends the unit-shell case immediately: **write both numbers as fractions with the denominators spelled out in words.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.41 inCommit=0.00 (141 B)
+A prediction whose target region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it fails.
+--- [Make the gate fail, and watch it fail] a=0.48 b=0.48 c=0.48 inCommit=0.48 (301 B)
+And the honest test for whether "the prediction was mis-specified" is a diagnosis or an escape: **the evidence for the mis-specification must predate the result** — here the 90% split was in the run's own recorded numbers before the prediction was written, so it is checkable rather than convenient.
+--- [Make the gate fail, and watch it fail] a=0.42 b=0.42 c=0.77 inCommit=0.42 (186 B)
+The repair that works is a **pair**: the stub that must fail beside a faithful stub that must **pass**, so a reader can tell the refusal came from the cause and not from the scaffolding.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (151 B)
+Where the uninformative outcome cannot be named, **a red control is not yet evidence** — it is an unexplained failure that happens to agree with you.
+--- [Make the gate fail, and watch it fail] a=0.14 b=0.14 c=0.19 inCommit=0.14 (234 B)
+M63 phase G, 2026-09-12: the product owner ruled "believe a refusal immediately" from the measured half and applied it to an arena whose novelty lives entirely in the derived half, where the law at a new parameter was tied to nothing.
+--- [Make the gate fail, and watch it fail] a=0.24 b=0.24 c=0.29 inCommit=0.24 (276 B)
+A control that can say *"I can no longer tell"* beats one that can only say pass or fail, because that third state is where this file's oldest failure mode hides — but **"give controls a third state" is the outcome, not the mechanism, and the mechanism is what reproduces.**
+--- [Make the gate fail, and watch it fail] a=0.43 b=0.43 c=0.43 inCommit=0.43 (120 B)
+Re-running instead would have compared two populations and one policy at once, which is this file's most-repeated error.
+--- [Make the gate fail, and watch it fail] a=0.38 b=0.38 c=0.38 inCommit=0.38 (121 B)
+A reduction walk was costed at **24% expensive probes**; measured on a walk that was actually progressing it is **~75%**.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.31 (93 B)
+The product owner amplified the headline twice, and it kept a dead object alive an extra day.
+--- [Make the gate fail, and watch it fail] a=0.35 b=0.35 c=0.35 inCommit=0.35 (155 B)
+So: after writing a scope qualifier, re-read the summary sentence against it, because the qualifier's presence is exactly what stops a reader applying one.
+--- [Make the gate fail, and watch it fail] a=0.25 b=0.25 c=0.25 inCommit=0.25 (128 B)
+The prediction was void, not met, and the two independent laws "agreed 300 of 300" precisely because **both were inapplicable**.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.22 (67 B)
+**Its first account of the miss was that it had mis-filed the fact.
+--- [Make the gate fail, and watch it fail] a=0.02 b=0.02 c=0.14 inCommit=0.29 (276 B)
+That account was wrong, and wrong in the direction that flattered it** — a confession can flatter, because *"I filed it under the wrong heading"* is tidier and more forgivable than what actually happened. `n = 3` fails **two** gates: the 2-adic wall, **and** `sin θ ∉ K`.
+--- [Make the gate fail, and watch it fail] a=0.23 b=0.23 c=0.37 inCommit=0.23 (272 B)
+**That is the trap: a true and sufficient-sounding reason fully answered "is anything wrong with `n = 3`?", which made the member look SAFE to compute on** — a member dead as an object costs nothing to test with — so it never asked whether a *second* gate also failed.
+--- [Make the gate fail, and watch it fail] a=0.31 b=0.31 c=0.31 inCommit=0.38 (195 B)
+**This is the archetype above wearing a costume**: a check that loads two versions of something and identifies them by name, where the name is `(size, mtime)` and the registry is the interpreter.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.00 (110 B)
+So: restore, then re-verify, and treat a same-size edit inside one second as the case your caching cannot see.
+--- [Make the gate fail, and watch it fail] a=0.38 b=0.38 c=0.42 inCommit=0.38 (148 B)
+**The sharp form is not "moved to a new context" in the abstract; it is: a check that loads two versions of something and identifies them BY NAME.**
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.00 inCommit=0.52 (170 B)
+Someone archiving a script that only ever loaded one tree has no such prior, will not notice, and gets a harness printing `ALL MATCH` while comparing today against today.
+--- [Make the gate fail, and watch it fail] a=0.45 b=0.45 c=0.50 inCommit=0.55 (159 B)
+That is the argument **for** writing the rule down rather than against it: **it does not reproduce from care, only from the negative control being mandatory.**
+--- [Make the gate fail, and watch it fail] a=0.48 b=0.48 c=0.48 inCommit=0.48 (138 B)
+**An omission is worse than a miscount**, because a miscount is a wrong number in a row you can check and an omission is a silent absence.
+--- [Make the gate fail, and watch it fail] a=0.41 b=0.41 c=0.41 inCommit=0.41 (286 B)
+Sibling defect, same file, same day: an enumerator whose cut is **one-sided on a dense set** has no well-defined answer at all, so its `span` parameter *is* the answer rather than a truncation of it — and the tell is that the totals never converge while the quantity of interest does.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=0.10 inCommit=0.48 (141 B)
+Third instance of this shape in one milestone — and note that a working positive control does not distinguish a false zero from a real one.
+--- [Make the gate fail, and watch it fail] a=0.27 b=0.27 c=0.27 inCommit=0.50 (200 B)
+It is *true* that once a base contains the witness, growing it cannot recover the four-colouring: more material only adds to the set of colour differences and the certificate needs a value outside it.
+--- [Make the gate fail, and watch it fail] a=0.00 b=0.00 c=1.00 inCommit=0.36 (113 B)
+**Those are the same statement about the same quantity, seen once directly and once through a one-sided filter.**
+--- [Make the gate fail, and watch it fail] a=0.30 b=0.30 c=0.42 inCommit=0.40 (275 B)
+The cost of the wrong framing is specific and was measured: **an agent told to expect an inversion spends its attention hunting one, and misses what is genuinely unusual here** — that this filter can be defeated by **breaking its applicability rather than its conclusion**.
+--- [Make the gate fail, and watch it fail] a=0.22 b=0.22 c=0.31 inCommit=0.33 (241 B)
+That matters most exactly when you are *designing* the object the filter will judge: a constructed base can "survive" by making the check inapplicable, and a `not-applicable` returned on the same footing as a silence is a pass nobody earned.

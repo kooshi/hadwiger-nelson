@@ -1,0 +1,46 @@
+--- [Frontier] a=0.10 b=0.13 c=0.32 inCommit=0.11 (479 B)
+*Last updated: 2026-09-25 — **FS-86 closed** (rows 88–94; G76 minted; G54, G75 corrected): over the triangle-free type-(B) fields four-colour rigidity is one pair, `(0, 4)` (row 88), left **undecided**; the plane over `ℚ₂(√3)` is rigid (row 90), every four-colouring of `K²` is classified (row 89), and every natural construction of a non-periodic colouring is impossible (rows 91–92); verdict **Paid (no-go)**, by ruling (`plans/FS86-dyadic-rigidity.md` §R-close).
+--- [Where the problem stands] a=0.42 b=0.42 c=0.55 inCommit=0.42 (298 B)
+De Grey's lattice has exactly 9,120 four-colourings, each `8Λ`-periodic and local at one prime above 2 — derived from Parts's trees, twice independently, with no solver refusal (row 85), answering Mixon's 2018 question at its exact scope (`CLOSED-QUESTIONS.md` §2.5; the literal ring is FS-88).
+--- [Where the problem stands] a=0.29 b=0.42 c=0.58 inCommit=0.42 (222 B)
+**Without triangles** rigidity is free in the abstract class and in the plane exactly Soifer's Open Problem 55.1 (row 86; `CLOSED-QUESTIONS.md` §3), with no instance known (FS-86 left it undecided at ℚ(√59), item 24).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.32 inCommit=0.00 (266 B)
+**FS-86 — four-colour rigidity over ℚ(√59) and ℚ(√83) — CLOSED 2026-09-25** (rows 88–94, G76; `plans/FS86-dyadic-rigidity.md`, its §R-close first; `plans/FS86-derivation.md`; the stub, `plans/STUB-dyadic-rigidity-triangle-free.md`, carries the banner)
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.09 inCommit=0.00 (230 B)
+**Next, Kooshi's choice (2026-09-25): FS-89, re-posed by the next-step advisor as a closed-set question over ℚ(i)** (`plans/POROS-2026-09-25-fs86-next.md`; the stub), in the finite-witness-free week to 2026-10-01 (§ Toolchain).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.27 inCommit=0.08 (196 B)
+**Ranked stubs** (re-ranked 2026-09-25 at FS-86's close, one rank per row: FS-86 closed; FS-89, FS-90 minted at ranks 2, 3; FS-59, FS-83, FS-84, FS-64, FS-67, FS-76, FS-87 re-aimed; G76 forwarded.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.28 inCommit=0.00 (588 B)
+| 2 | **FS-89 the missing theorem: measure rigidity with isometric archimedean directions** — `plans/STUB-isometric-measure-rigidity.md` (minted at FS-86's close) | every non-periodic construction reading finitely much is dead (rows 91–92); HD1 needs an `S`-adic, Berend-type rigidity theorem for the unit-vector action on `R̂` with isometric archimedean directions, not in print (G76); with it Lemma X, the three-phase case; solver-free | none directly; HD1 false gives `F(R) = 0` over ℚ(√59), HD1 true excludes every character colouring; reading-room research, low confidence |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (47 B)
+The plan-phase advisor's question; solver-free.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.41 inCommit=0.00 (269 B)
+**At FS-86's close:** dead at `k = 4` on type-(B) planes and for windows over ℚ(√47) (rows 91–92); live at `k = 5` and for characters of infinite type (FS-89) | speculative; the only solver-free instrument aimed at the conjecture's falsifier where it is exposed |
+--- [Paths forward, ranked] a=0.06 b=0.06 c=0.50 inCommit=0.52 (457 B)
+| 6 | **FS-75 the three-colour criterion in the kernel** — `plans/STUB-three-colour-criterion-kernel.md` | **re-aimed at FS-81's close: T4 for the whole family in the kernel** — T22's ⟹, then FS81-T1–T5 (the pull-back lemma, L1 as an inverse limit, C1(5), L3 with the torsion character, the five-layer statement parametric in `d`); fallback, a kernel checker for FS-81's structural certificates on the census (row 83); the old target is an instance.
+--- [Paths forward, ranked] a=0.16 b=0.16 c=0.37 inCommit=0.29 (264 B)
+As minted, `χ(ℚ(√167)²) ≥ 4` in the kernel by V2's forward lift and relation-form checker, the 36-vector certificate (1,050 leaves) first, then FS-60's fields through `Θ` | none; the falsification field's best bound from a checker's word to the kernel's |
+--- [Paths forward, ranked] a=0.16 b=0.16 c=0.43 inCommit=0.49 (827 B)
+| 7 | **FS-80 a window-frequency certificate at four colours** — `plans/STUB-window-frequency-certificate.md` (minted at FS-79's close) | the one obstruction route FS-79 left open (row 80, G73): an invariant-measure (window-frequency) Farkas certificate of non-four-colourability whose size the point group and the multilayer structure keep small — `Θ₃`'s averaging move at four colours — aimed at ℚ(√167)'s survivors; the advisor's residue-label reading as its first test; beside it the radius-≥ 2 cocycle route (`[CGHO2025coh]` Thm 5.8) and the index topological bounds; on de Grey's lattice radius 1 cannot lift `120Λ` to `8Λ` (row 87), so price radius ≥ 2 | speculative; the only solver-free route to five at ℚ(√167) the competition left standing; a size no-go sends five back to arithmetic (FS-59) |
+--- [Paths forward, ranked] a=0.33 b=0.36 c=0.66 inCommit=0.47 (927 B)
+| 8 | **FS-76 four colours: inheritance, certificates, decidability** — `plans/STUB-four-colour-inheritance.md` | existence and inheritance at four colours for Cayley graphs of ℤ^r (`[Ellenberg2018]`'s question at `k = 4`, `[AbrishamiEtAl2025]` 4.6; plain density is false in rank 1, row 80); the chirality reduction is a theorem and the rank-1 criterion exact (`plans/FS79-derivation.md` T34–T35), so rank 1 closes if "every phase rigid ⟹ no wall" is proved; Kooshi's question — a two-sided four-colour certificate exists iff four-colourability is decidable, stated open in print; local instances FS-72 and KR6; `P = F` now holds on de Grey's lattice by derivation (row 85); over type-(B) fields Kempe swaps, patchworks and half-space defects cannot break inheritance (row 91) | none directly; high on the programme — whether lattice compulsions at four and five colours are always visible to periodic colourings |
+--- [Paths forward, ranked] a=0.00 b=0.04 c=0.31 inCommit=0.29 (387 B)
+| 10 | FS-67 3-colourings of tight products — `plans/STUB-tight-product-colourings.md` | **re-aimed at FS-85's close to its four-colour form**, answered yes once (R3a, row 85: the tight dyadic quotient times the mod-5 torus), bearing on FS-86; as minted: `G` Hoffman-tight at three colours (every colouring gap-free), `χ(H) > 3`: is every 3-colouring of `G × H` pulled back from `G`?
+--- [Paths forward, ranked] a=0.03 b=0.03 c=0.09 inCommit=0.03 (244 B)
+Measured yes at the 3-adic plane against the planes at 7 and 11 (FS-58) and leaned on as if proved; false without gap-freedom (`C₅ × K₄`); not Greenwell–Lovász, not multiplicativity; the four originals unread (`BIBLIOGRAPHY.md` § R.4).
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.62 inCommit=0.00 (88 B)
+Its one-place, windowless case — one character colouring the whole field — is FS-83.
+--- [Paths forward, ranked] a=0.29 b=0.29 c=0.29 inCommit=0.29 (149 B)
+It would halve every colouring instance and make a symmetry-restricted search **complete** … | medium-high as an instrument, not a decider of six |
+--- [Paths forward, ranked] a=0.11 b=0.11 c=0.57 inCommit=0.57 (203 B)
+M63 phase H3 opened the door on one front and closed three | none directly; free classification theorems if they exist, the negative if they do not, and the paper's second-discipline vocabulary (FS-20) |
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (32 B)
+Asymmetric: closes, never opens.
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.50 inCommit=0.00 (47 B)
+Same target as FS-57 from the other direction |
+--- [G50] a=0.00 b=0.33 c=0.33 inCommit=0.33 (181 B)
+**FS-86's:** Berend 1984 and Einsiedler–Lindenstrauss, which both competitors named as the missing theorem's literature, are unread, and Puzynina (row 85's exception) is not held.
+--- [G76] a=0.42 b=0.42 c=0.56 inCommit=0.40 (382 B)
+**A "no" must disagree with every pullback in every archimedean direction, patch no two pullbacks, and read infinitely many split places** (rows 91–92); what would exclude it is measure rigidity for the unit-vector action on `R̂` whose archimedean directions are isometries (Berend and Einsiedler–Lindenstrauss need expansion), and both competitors stopped there independently.
+--- [G51] a=0.05 b=0.05 c=0.24 inCommit=0.05 (270 B)
+Every run found a covert channel — a shared temp directory, working files drafted into `plans/`, an interim hand-back delivered to whichever agent last woke the advisor, the owner's writes and commit subjects, the harness's start-up snapshot of the last five subjects.

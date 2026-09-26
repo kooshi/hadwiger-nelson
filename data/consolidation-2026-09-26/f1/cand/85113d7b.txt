@@ -1,0 +1,6 @@
+--- [The novel-results ledger] a=0.02 b=0.11 c=0.61 inCommit=0.11 (294 B)
+**Every member's field named** (23 → ℚ(√2,√31), 31 → ℚ(√5,√51), 43 → ℚ(√10,√23), 47 → ℚ(√7,√89); 27 alone has none from square roots), so the milestone's target statement finally has a consumer: a six-colouring at 43 makes χ(ℚ(√10,√23)²) ≤ 6 a theorem.
+--- [G56] a=0.32 b=0.32 c=0.40 inCommit=0.36 (506 B)
+**Each member now has its field named** (`data/fs53/window.md`, computed 2026-09-16): the smallest field whose FIRST usable prime is that member **and whose 2-adic wall is broken** — the second condition being what makes a local bound of 6 worth anything, since a wall-standing field is already four-colourable by Theorem B, and **every minimal field satisfying only the first has the wall standing** (ℚ(√41), ℚ(√2,√5), ℚ(√6,√14), ℚ(√2,√17) see 23, 31, 43, 47 and are all 4-sealed).
+--- [G56] a=0.00 b=0.00 c=0.36 inCommit=0.00 (282 B)
+They are **23 → ℚ(√2,√31), 31 → ℚ(√5,√51), 43 → ℚ(√10,√23), 47 → ℚ(√7,√89)** (also ℚ(√2,√3,√7)); 27 has none built from square roots, since 𝔽₂₇ needs residue degree 3, leaving ℚ(√3, α) with α³ = α + 1 as the standing candidate.

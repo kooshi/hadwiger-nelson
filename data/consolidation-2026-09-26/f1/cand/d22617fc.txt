@@ -1,0 +1,8 @@
+--- [Paths forward, ranked] a=0.00 b=0.00 c=0.00 inCommit=0.00 (40 B)
+Opens in a fresh session at the reframe.
+--- [G35] a=0.04 b=0.04 c=0.13 inCommit=0.04 (469 B)
+**The wall is the ramification set of one algebra, and reciprocity bounds it** [hand; the quaternion facts are textbook, the identification with our wall is ours and its prior art is **unchecked** — probably folklore in the quaternion-algebra literature, and the G49 search is owed before any of it is claimed]: breaking the wall — −1 a square in every completion above 2 — says exactly that the quaternion algebra `(−1,−1)_F` splits at every place above 2.
+--- [G35] a=0.39 b=0.39 c=0.39 inCommit=0.39 (413 B)
+That algebra splits at every odd finite place (its coefficients are units there) and is a division algebra at every real place (there it is Hamilton's), so **a broken wall forces its ramification set to be exactly the real places of F**; the set is even by Hilbert reciprocity, so **no field with an odd number of real places can break the wall** — in particular none of odd degree, since r ≡ [F:ℚ] (mod 2).
+--- [G35] a=0.20 b=0.20 c=0.20 inCommit=0.20 (220 B)
+That is G56's odd-degree two-colourability with its local-degree parity argument replaced by a reciprocity law, and it restates the wall as the ramification of a single algebra rather than a congruence on square classes.
