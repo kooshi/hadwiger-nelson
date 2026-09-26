@@ -1,0 +1,6 @@
+A  K_3^C5: 1026 arcs; arcs violating D(f) = D(g) = 3w: 270
+A  E_3(C5): 213 improper maps; by D: {0: 153, 6: 30, -6: 30}; proper maps by D: {-6: 15, 6: 15}
+A  edges of E_3(C5) among improper maps with D != 0: 60
+B  UD(F9,2): d = 10, circle = [((0, 0), (1, 0)), ((0, 0), (2, 0)), ((0, 1), (0, 1)), ((0, 1), (0, 2)), ((0, 2), (0, 1)), ((0, 2), (0, 2)), ((1, 0), (0, 0)), ((2, 0), (0, 0)), ((1, 0), (1, 0)), ((2, 0), (2, 0))]; lam_min = -5.0; tight at 3 (lam_min = -d/2): True
+B  l(x,y) = x0 + y0 + x1 is nonzero on every circle point (a proper 3-colouring): True; circle spans 81 of 81 (connected: True)
+FAILED

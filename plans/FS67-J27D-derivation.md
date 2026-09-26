@@ -194,3 +194,60 @@ from 23; at `k = 5` from 59, which is where Hoffman already refuses five colours
 
 *Theorems of this stage:* the link `χv = 1 + r/|λ_min|` (GRR2017, quoted); DC-1 [hand, conditional]; (M), (P), (B) and DC-2 at `τ_k = 1/(k−1)`
 without connectivity [hand]; DC-3's table [tools].
+
+## Stage 4 — SAVED (DB-1, DB-2)
+
+### DB-1 — GAP at a named step (TRUE for non-3-colourable `G`; open here for 3-colourable `G`)
+
+*Reformulation [hand, from DA-2′'s currying].* For any `G`, `χ(E_3(G)) ≤ 3` ⟺ every proper 3-colouring of `G × H`, `H` connected with `χ(H) > 3`, has
+at least one fibre `β(·, h)` that is a proper colouring of `G`. (⟹: all fibres improper put `Φ_β(H)` inside `E_3(G)`, which would 3-colour `H`;
+⟸: DA-2′'s (⟹) construction on a component `D` has only improper fibres.)
+
+*Non-3-colourable `G`: TRUE [external].* `E_3(G) = K_3^G`; `[TardifWrochna2019]` Thm 1 ("[ES85; Häg+88]") makes `K_3` strongly multiplicative,
+hence multiplicative, and "a graph K is multiplicative if and only if K^G admits a homomorphism to K, for all G that do not" (TW §1.2) gives
+`χ(K_3^G) ≤ 3`. This is El-Zahar–Sauer's `H(3)`.
+
+*The winding invariant (Lemma W) [hand; checked exactly on `K_3^{C₅}`].* Let `C = (c₀, …, c_{L−1})` be an odd closed walk in `G`. For any map
+`f : V(G) → ℤ/3` put `D_C(f) = Σ_{j<L} δ₂(f(c_{2j}), f(c_{2j+2}))` (indices mod `L`), with `δ₂(a, a) = 0`, `δ₂(a, a−1) = +2`, `δ₂(a, a+1) = −2`. Then for
+every arc `(f, g)` of `K_3^G`, **`D_C(f) = D_C(g) = 3·w_C(f, g)`**, where `w_C(f, g)` is the winding number of the closed walk `f(c₀), g(c₁), f(c₂), …,
+g(c_{L−1}), g(c₀)`… of length `2L` in `K₃` (TW §1.2's walk). *Proof:* in the ℤ-lift of that walk, two consecutive steps from an even position to the
+next even position start at `f(c_{2j})` and end at `f(c_{2j+2})`; a two-step `±1` walk has displacement in `{−2, 0, 2}`, fixed by its endpoints mod 3,
+namely `δ₂`; summing over the `L` even-to-even pairs gives the total `3w`. The odd positions carry `g` along the same step-2 order. ∎ So `D_C` is a
+**vertex function constant on every component** of `K_3^G` with an edge, `3 | D_C`, and a proper colouring `c` has `D_C(c) = 6u`, `u` odd
+(its single-step winding on `C`, doubled). *Check* (`tools/crunch_j27d_db.py` A, `data/fs67/j27d/db.out`): all 1,026 arcs of `K_3^{C₅}` satisfy
+it; plant (sign of `δ₂` flipped): 270 violations — fires.
+
+*What Lemma W settles.* If a component `Q` of `E_3(G)` has `D_C ≡ 0` for some odd closed walk `C`, the restriction `f ↦ f|_C` maps `Q` into the
+winding-0 arcs of `K_3^C`, i.e. into `K_ε^C = τ(U(K₃)^C)` (TW §2.2: its edges "are precisely" the arcs whose walks lift to the universal cover),
+and TW §3 builds a homomorphism `τ(U(K)^{C_{2k+1}}) → K` for square-free `K` by medians **[external, TW §3, not re-derived]**; so `χ(Q) ≤ 3`.
+**The named GAP:** components `Q` of `E_3(G)`, `G` 3-colourable, on which `D_C ≠ 0` for *every* odd closed walk `C` of `G`. They exist and have
+edges already at `G = C₅`: `E_3(C₅)` has 213 maps, `D` = 0 on 153 and ±6 on 60, and the ±6 maps span 60 edges (`db.out`; a complete evaluation of
+a set the derivation fixed — logged). El-Zahar–Sauer's route closes them only by the contradiction `G → K₃`, which a 3-colourable `G` does not
+give; the step missing is **a 3-colouring of the nonzero-winding part of `E_3(G)` built without "G is not 3-colourable"** (candidates: a phase
+read off the ℤ-lift of `f`'s two-step walk, or `[Tardif2006alg]`'s algorithm, not held). DB-1's second clause (FS67(G, 3) for connected
+3-gap-free `G`) inherits the same GAP; what is proved is its **partial form**: for connected 3-gap-free `G`, every 3-colouring `β` of `G × H` (`H`
+connected, `χ(H) > 3`) is pulled back from `G` unless `Φ_β(H)` lies in a component of `E_3(G)` of nonzero `D_C` for every odd `C` [hand, with TW §3
+external]. Neither a proof nor a counterexample; P-M's registered route ("non-bipartite only") is not reached.
+
+### DB-2 — TRUE [hand + tools]
+
+*Lemma T (tight ⟹ gap-free) [hand; Hoffman, BBH].* Let `G` be `d`-regular on `n` vertices with `λ_min = −d/(k−1)` and `c` a proper `k`-colouring.
+The ratio bound gives every class `|S| ≤ n/k`, so all equal `n/k`. For `x = 1_S − (1/k)𝟙`, `xᵀAx = −d|S|²/n` and `|x|² = |S|(1 − 1/k)`; their ratio is
+`−d/(k−1) = λ_min`, so `x` is a `λ_min`-eigenvector and `(A1_S)(v) = λ_min(−1/k) + d/k = d/(k−1) > 0` for `v ∉ S`: every vertex sees every other
+class. ∎ (Every proper `k`-colouring of a tight graph is gap-free.)
+
+*`S₁ = UD(𝔽₉, 2)`.* Its circle is the 8 points `(±1, 0), (0, ±1), (±i, ±i)` (`𝔽₉ = 𝔽₃[i]`). They span `𝔽₉²` (e.g. `(i, −i) + (−i, −i) = (0, i)`), so
+`S₁` is connected; `ℓ(x, y) = x₀ + y₀ + x₁` (`x = x₀ + x₁i`) is nonzero on every circle point, so `ℓ` is a proper 3-colouring; `ℓ = tr(αx + βy)` for a
+character with `tr ≠ 0` on the whole circle, whose eigenvalue is `0·… − 8/2 = −4 = −d/2` (the exact integer spectrum, `db.out` B, agrees: `λ_min =
+−4`). So `S₁` is tight at 3, 3-colourable, hence **3-gap-free** by Lemma T, and connected. *Plant note:* the tightness check has no plant that
+fired — dropping one circle point and adding the non-circle pair `±(1, 1)` both keep `λ_min = −d/2`; the value is cross-checked by the hand
+computation above instead (a positive: tightness at 3 survives these perturbations). The whole-tool plant fires through part A.
+
+*The tower levels.* `L_j = UD(R/3^jR, 2)`, `R = ℤ₃[i]` (level 1 is `S₁`): (a) **connected** — the additive span `M` of the level-`j` circle is a
+`ℤ/3^j`-submodule of the finitely generated `ℤ/3^j`-module `N = (R/3^j)²`; the circle reduces onto level 1's (Hensel: `(2x, 2y) ≢ 0` mod 3), which
+spans `N/3N`, so `M + 3N = N` and Nakayama gives `M = N`; (b) **3-colourable** — reduction `L_j → S₁` is a homomorphism, so `ℓ` pulls back;
+(c) so every level that is Hoffman-tight at three colours is 3-gap-free by Lemma T. ∎ Whether every level *is* tight is the hypothesis, not
+proved here (G54 records the 2-adic analogue; row 72 the 3-adic plane). With DC-1 (a tower level is arc-transitive, so 1-walk-regular), every
+tight level `G` satisfies FS67 against every connected `H` with `χv(H) > 3` — `Γ_p` for `p ≥ 11` among them (DC-3).
+
+*Theorems of this stage:* the reformulation, Lemma W, the partial form of DB-1 [hand; TW §3 external]; Lemma T, DB-2 [hand + tools].
