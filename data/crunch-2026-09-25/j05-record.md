@@ -82,3 +82,15 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **12** (was 13), exit 0; `bib_audit.py` exit 0.
   ALLOW lines added: none.
 - Bytes: 291,789 → **290,478** (−1,311; total −5,935).
+
+## Stage 2, batch 3 — SAVED (C4 + C6: Frontier items that retold rows and grokkings)
+
+- Items 1, 3, 8, 11, 14, 15, 17, 18, 24, 26, 27 keep their claim and pointers; the retold mechanism now lives only in its home. Each
+  dropped clause was checked in its home: item 8's "`n = 3` the Moser twist, `n = 4` the record … the two below it die by Theorem B" in
+  G7 and row 64; item 18's gap-frees-every-pair and prime-by-prime clauses in G68/G69, "refusing targets at 5, 7, 11, 13" in G69, the
+  split-prime tower at 2 in row 76 (and FS70-T7), L3 and KR6 in row 78 and FS-77's row; item 24's list of excluded constructions in rows
+  91–92 and G76, its two named steps in FS-98's row; item 26's 8/17/22 in G64; item 27's R2 in row 108 and G78, the 43 and real-place
+  window facts in row 110; items 11, 15 in G56, G64; item 14's ℚ(√47) bracket in item 10. Item 14's "the conjecture's L ≤ 4 clause
+  holds for real quadratic fields" is superseded by item 10's "every real number field" (row 99) and is gone.
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **9** (was 12), exit 0. ALLOW lines: none.
+- Bytes: 290,478 → **288,586** (−1,892; total −7,827).

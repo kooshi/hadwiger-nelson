@@ -151,16 +151,14 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 
 **What the hunt has established** (the reasons are in § Grokkings):
 1. **The 4/5 wall is 2-adic.** A unit-distance graph forces a fifth colour only if its coordinates break the
-   2-adic wall — contain an odd square class ≡ 7 (mod 8) (G1, G35).
+   2-adic wall (G1, G35).
 2. **The field sieve.** For F ⊇ K: 6-open ⟺ the 2-adic wall is broken and 11 is inert. Every Γ_p with p ≡ 3 (mod 4) from 59 up
    refuses five colours by its spectrum, and Γ₈₃ refuses six by an exact certificate (row 68). Every field the descent ever used is
    5-sealed (G43, G44). The wall is broken exactly when 1/2 lies in the unit-vector ring, and over K that is sufficient for five,
    given M56's 8/3 forcer (G55).
-3. **The design target has no instance** (G48, row 66): the six-level question — a pair forced equal at five colours over a
-   5-sealed field at 11 ∣ d², spindled into a 6-open field — is answered **no by theorem** over every 5-sealed multiquadratic
-   F ⊇ K: Γ₁₁'s fan gap, repainted along the residue map, frees every pair above it, at every distance. FS-6 is dead; a 6-forcer's
-   compulsions all live in 6-open fields. The frame that replaces it is **tight or slack** (G54): the residue plane forces pairs where
-   it is Hoffman-tight, or where its colourings pull back from a tight quotient (row 87); no 5-sealing plane does either.
+3. **The design target has no instance** (G48, row 66): a pair forced equal at five colours over a 5-sealed field, spindled into a
+   6-open field, is refused **by theorem** over every 5-sealed multiquadratic F ⊇ K — Γ₁₁'s fan gap frees every pair above it. FS-6 is
+   dead; a 6-forcer's compulsions all live in 6-open fields. The frame that replaces it is **tight or slack** (G54, row 87).
 4. **Existing witnesses hold nothing to extract — on sealed objects by theorem, on 6-open ones by measurement** (G31). Heule-510's
    arity-2 emptiness at five colours is kernel (row 66) and holds for every unit-distance graph over its field. De Grey's 1581 (no
    compulsion at arity 2 or 3, arity floor 4 or 5; row 43) and the `ρ₆₃` arena (0 at arity 2) sit in **6-open** fields, where no
@@ -171,10 +169,9 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    below the interval, and the finite planes' chromatic numbers are integrality-carried (G38, G41, G44, G48).
 7. **The cell family is closed in both directions** — no six-colouring, no bounded witness family — and its
    ≥ 7 floor is `[SokolovVoronov2025]`'s χ_poly(ℝ²) = 7 (G22, G24, G29).
-8. **The type-M rotations are a classified one-integer family** (G7) — `cos θ = (2n−1)/(2n)`, the spindle at distance `√n`;
-   `n = 3` is the Moser twist, `n = 4` the record, `n = 16` the `ρ₆₃` arena, **5-chromatic in the 6-open field K(√7)**, produced
-   rather than inherited (row 64). The two members below the record die by Theorem B. Not the first 6-open platform (de Grey's own
-   field is 6-open, G43) but the smallest, degree 8 against 16, and reached by the screen rather than found.
+8. **The type-M rotations are a classified one-integer family** (G7): `cos θ = (2n−1)/(2n)`, the spindle at distance `√n`; its member
+   `n = 16`, the `ρ₆₃` arena, is **5-chromatic in the 6-open field K(√7)**, produced rather than inherited (row 64) — not the first 6-open
+   platform (de Grey's own field is, G43) but the smallest, degree 8 against 16, and reached by the screen rather than found.
 9. **`[Parts2020a]`'s 509-vertex record is reproduced and partly explained** (M62–M64, row 62): his reduction stage is reproduced
    on every attested number, a descent cannot reach the record, **overcompression is an orbit-closure gap**, and what is left of his loop is
    the expansion step, which has no termination measure (FS-35).
@@ -183,11 +180,11 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    outside that range — four for ℚ(√11) and ℚ(√23) — are met (row 73); at ℚ(√47) (L = 5: 3 and 7 unusable, 11 usable) it predicts
    exactly five against a proven 4 ≤ χ ≤ 5, as at ℚ(√143), ℚ(√311), ℚ(√335) (row 74) — open (row 84; FS-84); a four-colouring there would carry an invariant measure whose spectrum is carried by no `T + A + Fin_S`, `S` finite (row 113). With every residue level
    allowed, `L` is unchanged at 7, 11, 19, 23 (row 75, G66).
-11. **The window for six, and who can see it** (G56, G59; rows 68–71). A usable plane Γ_q can be exactly six-chromatic only at
-   **q ∈ {23, 27, 31, 43, 47}** (six is refused from 59 up); none is decided, so **a single verified six-colouring at 23, 27, 43 or 47
+11. **The window for six, and who can see it** (G56, G59; rows 68–71). Six colours on a usable plane Γ_q are possible only in a
+   five-member window (six is refused from 59 up), none decided, so **a single verified six-colouring at 23, 27, 43 or 47
    would be the first exactly six-chromatic finite Euclidean plane**. No field containing K can use any member, so **six is
-   arithmetically excluded for every field the hunt has built in**, and a six-chromatic number field contains no √11. The window
-   decides whether six is *reachable by the residue method*; its sharp target is fractional, α < q²/6 (G59).
+   arithmetically excluded for every field the hunt has built in**. The window decides whether six is *reachable by the residue
+   method*; its sharp target is fractional, α < q²/6 (G59).
 12. **What the wall leaves, and where the conjecture points** (G59, row 70). The wall is six finite graphs — 23, 27, 31, 43, 47
    and U₆₄ — in reach only at 47 and U₆₄ (FS-57); a composite residue target escapes it only through an integrality gap. **If it
    holds, the conjecture's main clause says nothing above five**, and its sharpest remaining prediction is **ℚ(√167)**: at least six
@@ -197,29 +194,24 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    Theorem B, **χ_f(K²) = 4**. Capped by every usable residue plane's `χ_f` (3.5 at 𝔽₇) and by 4.36, so it proves at most five.
 14. **Real quadratic fields: three colours are decided, and four is a theorem of the family** (G61, G74, G65; rows 72–74, 79, 82–84).
    **The plane over any subfield of ℝ needs four once 1/3 lies in its unit-vector ring and it has an odd cycle** [hand, two independent derivations; row 82]
-   — so every squarefree d ≡ 11 (mod 12) needs four (T4) and the conjecture's L ≤ 4 clause holds for real quadratic fields; **nothing is
-   claimed new while `[Johnson2000]` and `[Johnson2006]` are unread**. **The census is complete** (row 83); ℚ(√47) stands at `4 ≤ χ(ℚ(√47)²) ≤ 5`,
-   five not landed (row 84, FS-84), and cannot close from above by residues at any depth (§1.7, row 75). Over a number field three colours ask for a
-   prime above 3 of residue field 𝔽₃, not for 1/3 (row 99, G74).
-15. **Six may be a value no field attains — a claim stronger than χ(ℝ²) ≠ 6, not equivalent to it** (G64, FS-62). *"No subfield of
-   ℝ has χ(F²) = 6"* implies χ(ℝ²) ∈ {5, 7} and is not implied by it. So the wall at six (G56, G59) decides the value set of L — hence,
-   under the conjecture's bold form, of F ↦ χ(F²) — and whether the conjecture predicts 6 or 7 at ℚ(√167). **A six-chromatic field has
-   L(F) ≥ 6, and L(F) = 6 needs one of six named finite graphs to be six-chromatic**; six hides only in the gap between L(F) and χ(F²),
-   where every ceiling we own is silent but FS-64. Six being skipped is *not* evidence for seven.
+   — so every squarefree d ≡ 11 (mod 12) needs four (T4); **nothing is claimed new while `[Johnson2000]` and `[Johnson2006]` are unread**.
+   **The census is complete** (row 83); ℚ(√47)'s bracket (item 10) cannot close from above by residues at any depth (§1.7, row 75). Over a
+   number field three colours ask for a prime above 3 of residue field 𝔽₃, not for 1/3 (row 99, G74).
+15. **Six may be a value no field attains — a claim stronger than χ(ℝ²) ≠ 6, not equivalent to it** (G64, FS-62): the wall at six
+   (G56, G59) decides the value set of L and whether the conjecture predicts 6 or 7 at ℚ(√167); six hides only in the gap between L(F)
+   and χ(F²), where every ceiling we own is silent but FS-64. Six being skipped is *not* evidence for seven.
 16. **The construction grammar is crystallography's, and transcendence is free** (G62, G63). Every witness is a twisted bilayer
    whose rotation is the Σ = n coincidence rotation of the order of discriminant 1 − 4n; commensurate twists are periodic, hence
    bounded by a finite quotient (FS-63 is the gate). And χ(F(t)²) = χ(F²) for transcendental t (`[Fischer1990]` Thm 6), so
    χ(ℚ(π)²) = 2: the chromatic number cannot see transcendence degree.
 17. **The residue ceiling does not drop up the tower where it can be certified** (G66, row 75): at 7, 11, 19, 23 no level reads
-   lower than level one — one fibre-share inequality, exact certificates at every depth, level two at 11 kernel-checked —
-   so `UD(ℤ/529, 2)` cannot five-colour ℚ(√167)'s plane, `α(Γ₂₃) ≤ 97`, and χ_Bor of the `p`-adic plane is unbounded in `p`
-   (`CLOSED-QUESTIONS.md` §1.8). That the ratio is exactly constant is **not proved** (FS-68).
-18. **Where a five-forcer can live in a field is decided on finite quotients, and over ℚ(√3,√5) it is nowhere dense** (G68, G69,
-   row 76). A gapped periodic four-colouring of `Λ/NΛ` frees every pair on the lattice (rows 56, 66), and periodic colourings are
-   residue colourings prime by prime, so a lattice is rigid — the chain route's fabric — only where every odd prime's target refuses:
-   de Grey's lattice over K does at 5, 7, 11, 13; no lattice of rank ≤ 6 over ℚ(√3,√5) does; the rank-8 one is undecided (FS-72). The
-   split-prime tower at 2 is tight with forcing from depth 3. **Not landed: five over ℚ(√3,√5).** **Over K the question is closed**: `F = P = 8Λ` on de Grey's lattice (rows 78, 85; item 23), and at the field level every four-colouring of `K²` is, per coset, local at one dyadic place, `F(R_K) = 4R_K` (row 89). No other rank-4 CM lattice in FS-73's table is rigid at four colours; rank 6 adds L3 (loose with no gap) and KR6
-   (`F ⊇ 8Λ_dG`, four-colourability open).
+   lower than level one, so `UD(ℤ/529, 2)` cannot five-colour ℚ(√167)'s plane, `α(Γ₂₃) ≤ 97`, and χ_Bor of the `p`-adic plane is
+   unbounded in `p` (`CLOSED-QUESTIONS.md` §1.8). That the ratio is exactly constant is **not proved** (FS-68).
+18. **Where a five-forcer can live in a field is decided on finite quotients `Λ/NΛ`, and over ℚ(√3,√5) it is nowhere dense** (G68,
+   G69, row 76): a lattice is rigid — the chain route's fabric — only where every odd prime's periodic target refuses; no lattice of
+   rank ≤ 6 over ℚ(√3,√5) does, the rank-8 one is undecided (FS-72). **Not landed: five over ℚ(√3,√5).** **Over K the question is
+   closed**: `F = P = 8Λ` on de Grey's lattice (rows 78, 85; item 23), and every four-colouring of `K²` is, per coset, local at one
+   dyadic place, `F(R_K) = 4R_K` (row 89).
 19. **The derivations are counted, and the corpus graded itself down more often than up** (row 77, FS-71): 254 theorems proved outside the kernel since M17, 184 by hand, filed one entry each in `plans/<home>-derivation.md` and indexed in `LEDGER.md` § B; one hand claim wrong (now a conjecture), under-grades four to one over-grade (G21), six results found in an uncited session record (G70).
 20. **At three colours the inheritance question is a theorem, and the answer is topological, not arithmetic** (row 79, G71): three-colourability
    of an abelian Cayley graph is a polytope question on the character torus, periodic three-colourings are dense, and it answers a question posed
@@ -233,17 +225,21 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 23. **De Grey's lattice, derived; four-colour rigidity without triangles** (rows 85–87, G75, G54). De Grey's lattice has 9,120 four-colourings, each `8Λ`-periodic and local at one prime above 2, derived from Parts's trees twice independently (row 85; Mixon's 2018 question, `CLOSED-QUESTIONS.md` §2.5; the literal ring is FS-88). **Without triangles** rigidity is free in the abstract class and in the plane is Soifer's Open Problem 55.1 (row 86, §3), undecided at ℚ(√59) (item 24). No-gos, and a slack plane that forces: row 87. Kooshi: *"A proven theorem about why its impossible is also valid. All novel knowledge is a success"* — no-gos count (`plans/FS85-rigidity-without-triangles.md` §R-close.2).
 24. **Over the triangle-free fields ℚ(√59), ℚ(√83), ℚ(√131) one pair decides four-colour rigidity, and every natural way to break it fails**
    (rows 88–94, 96, 111–113, G76): the plane is rigid iff `(0, 4)` is forced (row 88) — **undecided**; the plane over `ℚ₂(√3)` is rigid (row 90), so the
-   question is realising a local forcer without triangles; patchworks, half-space defects, walls, stripes, Kempe swaps, measurable windows
-   and **every character colouring** are excluded (rows 91–92, 96: HD1 holds), so a "no" must be a colouring no character gives. Rigidity splits into invariant measures and transience (row 111): every invariant random four-colouring whose spectrum reads finitely many places is a pullback (row 112), so a "no" is transient or reads infinitely many split places; transience stops at two named steps (isolation from a finite patch, defect growth).
-   ℚ(√2,√3), its member with triangles, is rigid given Heule's T721 (row 93). Toward six only through Soifer 55.1 (row 86).
+   question is realising a local forcer without triangles. Every construction of a "no" that reads finitely much, and **every character
+   colouring**, is excluded (rows 91–92, 96: HD1 holds); a "no" is transient or reads infinitely many split places (rows 111–112), and
+   transience stops at two named steps (FS-98). ℚ(√2,√3), its member with triangles, is rigid given Heule's T721 (row 93). Toward six only
+   through Soifer 55.1 (row 86).
 25. **Two primes restore Furstenberg–Berend rigidity modulo the rotated direction, at every band** (rows 95–97, 98, 102; G76): every band
    character of `ℤ[i][1/p : p ≡ 1 (4)]`, hence of every real field's unit-vector ring, is torsion plus archimedean at the places of `F(i)`;
    at one prime it fails for points, minimal sets and torsion orders. The band condition is the pyjama problem's (`[Manners2015]`, row 98).
 26. **Character colourings are local in the existence sense** (rows 100–101, G77): a real number field's plane has a character `k`-colouring
    iff some residue target does, so a falsifier of the conjecture is no character at `k ≤ 5` (FS-83 answered) or over a quadratic field;
-   given CLG, characters need 8 colours at ℚ(√167), 17 at K(√7), 22 at de Grey's field, 8 on Γ₂₃ and 9 on Γ₄₃ — the window is closed to
-   characters. That every character colouring is local is proved only at three colours (row 99) and at HD1's fields.
-27. **Rank one at four colours, and windows at five over ℚ(√167)** (rows 108–110, G78; M3 of the 2026-09-25 crunch, `plans/M3-derivation.md`). FS-76's rank-one question (every phase rigid ⟹ no wall) is *countable ⟹ finite* for four-colouring shifts of distance graphs on ℤ, and a statement about single heteroclinic colourings; **not landed**, stalled at one step by three minds (G78). At five colours no window reads finitely many places of ℚ(√167) with no real place and none above 43; a factor leaves a product colouring when it **mixes**, not when its ratio is small, so the window question lives at nine places; nothing touches `χ_µ(ℝ²)`.
+   given CLG the window is closed to characters (8 colours on Γ₂₃, 9 on Γ₄₃; the exposed fields: G64). That every character colouring is
+   local is proved only at three colours (row 99) and at HD1's fields.
+27. **Rank one at four colours, and windows at five over ℚ(√167)** (rows 108–110, G78, G76; M3, `plans/M3-derivation.md`). FS-76's
+   rank-one question is *countable ⟹ finite* for four-colouring shifts of distance graphs on ℤ — **not landed**, stalled at one step by
+   three minds. At five colours a factor leaves a product colouring when it **mixes**, not when its ratio is small, so the window question
+   over ℚ(√167) lives at nine places; nothing touches `χ_µ(ℝ²)`.
 28. **Colourings of products: mixing pins them, gap-freedom does not** (rows 114–115; FS-67, `plans/FS67-derivation.md`). A `k`-colouring of `G × H` must come from `G` exactly when `G`'s colourings are gap-free and the improper part of `K_k^G` is `k`-colourable; from four colours up that fails for some uniquely colourable `G` (a composition of print), and it holds whenever `H` mixes (G54). Three colours and Hoffman-tight `G` are open. Bearing on χ ≥ 6: none.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
