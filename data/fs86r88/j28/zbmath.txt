@@ -1,0 +1,36 @@
+QUERY 'ab:"invariant" & ab:"proper colorings" & ab:"periodic"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"invariant random" & ab:"coloring"': 1 hits
+   2021 | Tóth, László Márton | Invariant Schreier decorations of unimodular random networks | 1492.37048 | summary
+QUERY 'ab:"forced periodicity"': 3 hits
+   2023 | Herva, Pyry, Kari, Jarkko | On forced periodicity of perfect colorings | 1526.37018 | summary
+   2025 | Pyry Herva, Jarkko Kari | Periodicity and local complexity of Delone sets | arXiv:2504.20709 | summary
+   2025 | Slunyaev, Alexey V. | Breathers of the nonlinear Schrödinger equation are coherent self-similar solutions | 1564.35240 | summary
+QUERY 'ab:"multiplicatively invariant" & ab:"subshift"': 1 hits
+   2023 | Neil MacVicar | Multiplicative Invariance for a Class of Subsets of the Complex Plane | arXiv:2301.09730 | summary
+QUERY 'ab:"times 2 times 3" | ab:"x2 x3" & ab:"subshift"': 26 hits
+   1985 | Borwein, Peter B. | On the complexity of calculating factorials | 0576.68027 | summary
+   2022 | Yu, Han | Times two, three, five orbits on \(\mathbb{T}^2\) | 1495.37039 | summary
+   1992 | Loeb, Daniel E. | A generalization of the binomial coefficients | 0769.05006 | review
+   2013 | Shirakawa, Toshihiro, Uehara, Ryuhei | Common developments of three incongruent orthogonal boxes | 1330.51013 | summary
+   2012 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | 1254.15009 | summary
+   2021 | Yu, Han | An improvement on Furstenberg's intersection problem | 1479.11132 | review
+QUERY 'ab:"unit distance graph" & ab:"triangle-free" & ab:"chromatic"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"generalized Paley" & ab:"independent sets" & ab:"subspace"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"Erdos-Ko-Rado" & ab:"Cayley graph" & ab:"finite field"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"measurable chromatic number" & ab:"plane"': 3 hits
+   2009 | Payne, Michael S. | Unit distance graphs with ambiguous chromatic number | 1185.05063 | summary
+   2018 | Donnelly, John | The chromatic number of the taxicab plane | 1407.05233 | summary
+   2015 | Malen, Greg | Measurable colorings of \(\mathbb{S}^2_r\) | 1345.05031 | summary
+QUERY 'ab:"independence density" & ab:"Cayley graph"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"unitary Cayley graph" & ab:"chromatic number"': 12 hits
+   2007 | Klotz, Walter, Sander, Torsten | Some properties of unitary Cayley graphs | 1121.05059 | summary
+   2009 | Akhtar, Reza, Boggess, Megan, Jackson-Henderson, Tiffany | On the unitary Cayley graph of a finite ring | 1230.05149 | summary
+   2014 | Adiga, Chandrashekar, Sampathkumar, E., Sriraj, M. A. | Color energy of a unitary Cayley graph | 1303.05056 | summary
+   2026 | zbMATH Open Web Interface contents unavailable due to conflicting licenses., zbMATH Open Web Interface contents unavailable due to conflicting licenses., zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | ? | summary
+   2014 | zbMATH Open Web Interface contents unavailable due to conflicting licenses., zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | 1291.05052 | summary
+   2017 | Abudayah, Mohammad, Al-Ezeh, Hasan | Unitary Cayley graphs over ring of dual numbers | 1371.05117 | summary
+QUERY 'ab:"chromatic number" & ab:"unit distance" & ab:"number field"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"colorings" & ab:"p-adic" & ab:"rigid"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"frozen" & ab:"colorings" & ab:"shift"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"Furstenberg correspondence" & ab:"independent set"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"Rudolph" & ab:"Johnson" & ab:"invariant measures" & ab:"solenoid"': ERROR HTTP Error 404: Not Found

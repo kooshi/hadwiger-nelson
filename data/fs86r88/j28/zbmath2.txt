@@ -1,0 +1,50 @@
+QUERY 'ab:"zzqxnonsenseword"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"unit distance" & ab:"triangle-free"': 3 hits
+   2016 | Exoo, Geoffrey, Ismailescu, Dan | Small order triangle-free 4-chromatic unit distance graphs | 1362.05039
+   2026 | Haroldo Costa Silva Filho | Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 an | arXiv:2607.19995
+   2013 |  | The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroCom | 1271.05002
+QUERY 'ab:"Paley graph" & ab:"maximum independent"': 1 hits
+   2023 | Chaluvaraju, B., Basha, Shaikh Ameer | Existence of Latin square designs arising from classical graph parameters | 1538.05026
+QUERY 'ab:"Van Lint" & ab:"MacWilliams"': 8 hits
+   1983 | Assmus, Edward F. jun. | The binary code arising from a 2-design with a nice collection of ovals | 0505.94023
+   2024 | Minjia Shi, Ruowen Liu, Patrick Solé | Some $3$-designs invariant under $2.P{\Sigma}L(2,49).$ | arXiv:2407.16310
+   2001 | Hollmann, Henk D. L., Xiang, Qing | On binary cyclic codes with few weights | 1015.94548
+   2022 | Asgarli, Shamil, Yip, Chi Hoi | Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs over finite fields | 1496.05068
+   2026 | Yip, Chi Hoi | Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs over finite fields. II. | 1584.05083
+   2026 | Yip, Chi Hoi | Restricted sumsets in multiplicative subgroups | None
+   2013 | Cozzens, Margaret, Miller, Steven J. | The mathematics of encryption. An elementary introduction | 1284.94001
+QUERY 'ab:"proper colorings" & ab:"invariant measure"': 1 hits
+   2022 | Airey, Dylan, Bowen, Lewis, Lin, Yuqing Frank | A topological dynamical system with two different positive sofic entropies | 1497.37013
+QUERY 'ab:"proper colourings" & ab:"invariant"': 1 hits
+   2017 | Imrich, Wilfried, Kalinowski, Rafał, Pilśniak, Monika | Bounds for distinguishing invariants of infinite graphs | 1368.05051
+QUERY 'ab:"4-colorings" & ab:"periodic"': 1 hits
+   2025 | Alkauskas, Giedrius | Coloring monohedral tilings: defects and grain boundaries | None
+QUERY 'ab:"rational points" & ab:"chromatic number"': 5 hits
+   2004 | Füredi, Zoltán, Kang, Jeong-Hyun | Distance graph on \(\mathbb Z^n\) with \(\ell_{1}\) norm | 1043.05047
+   1989 | Zaks, Joseph | On four-colourings of the rational four-space | 0705.05033
+   1999 | Zaks, Joseph | On odd integral distances rational graph in four-dimensions | 0940.05025
+   1990 | Chilakamarri, Kiran B. | On the chromatic number of rational five-space | 0705.05034
+   2011 |  | Ramsey theory. Yesterday, today, and tomorrow | 1202.05004
+QUERY 'ab:"independence ratio" & ab:"amenable"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"Soifer" & ab:"open problem" & ab:"triangle"': ERROR HTTP Error 404: Not Found
+QUERY 'ti:"chromatic number" & ab:"rational" & ab:"unit distance"': 2 hits
+   2008 | Cibulka, Josef | On the chromatic number of real and rational spaces | 1190.05067
+   2001 | Mann, Matthias | A new bound for the chromatic number of the rational five-space | 0995.05051
+QUERY 'ab:"x2x3" | ab:"times-2 times-3" | ab:"×2×3"': 29232 hits
+   1985 | Borwein, Peter B. | On the complexity of calculating factorials | 0576.68027
+   2022 | Yu, Han | Times two, three, five orbits on \(\mathbb{T}^2\) | 1495.37039
+   1992 | Loeb, Daniel E. | A generalization of the binomial coefficients | 0769.05006
+   2013 | Shirakawa, Toshihiro, Uehara, Ryuhei | Common developments of three incongruent orthogonal boxes | 1330.51013
+   2012 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | 1254.15009
+   1969 | Hasse, Helmut | Über die Klassenzahl des Körpers \(P(\sqrt{-2p})\) mit einer Primzahl \(p\ne 2\) | 0167.32302
+   1963 | Hooley, C. | On the representations of a number as the sum of two cubes | 0112.27502
+QUERY 'ab:"Kronecker factor" & ab:"coloring"': ERROR HTTP Error 404: Not Found
+QUERY 'ab:"stationary" & ab:"proper coloring" & ab:"factor of iid"': ERROR HTTP Error 404: Not Found
+== 0705.05033 (review): On four-colourings of the rational four-space
+   Let \(Q^ p\) denote the collection of all the rational points of the p- space \(E^ p\), and let \(G(Q^ p)\) denote the graph, obtained by taking \(Q^ p\) as the vertex set, and connecting 2 points iff they are at a distance 1 (the usual Euclidean distance). There is shown that in every 4-colouring of \(G(Q^ p)\) every colour is everywhere dense. The chromatic number of \(G(Q^ 6)\), \(G(Q^ 7)\) and \(G(Q^ 8)\) is at least 6, 8 and 9, respectively.
+== 1496.05068 (summary): Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs over finite fields
+   zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+== 1495.37039 (summary): Times two, three, five orbits on \(\mathbb{T}^2\)
+   zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+== 1584.05083 (summary): Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs over finite fields. II.
+   zbMATH Open Web Interface contents unavailable due to conflicting licenses.
