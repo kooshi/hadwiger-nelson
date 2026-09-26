@@ -210,3 +210,30 @@ get the slots; resume me by SendMessage at about 06:40 to read X01D's and X02D's
 
 ### Would have searched here (stage 4)
 - None.
+
+## Stage 5 — for the close: where this came from, and the misses it exposes — SAVED
+
+- **Where the route came from.** Neither G72's structural question nor a search produced it. It came from a recognition in the
+  discipline's own words: `U` is a *multiplicative semigroup of polynomial growth*. The prior-art gate (G49/G46) did the work. The
+  invariant used is the acting group's growth, not an invariant of solutions. G79: an example invariant of the acting group, not a
+  counterexample invariant. **G72: from elsewhere (recognition).**
+- **The miss, for 3.1/G49's instances.**
+  - FS-100's gate (J51 §PA.2) searched `solenoid & invariant measure & (S-adic | infinitely many primes | S-integers)`, got 0 hits,
+    and read the zero as support for "MR is ×2×3-hard".
+  - The theorem that decides it is stated on 𝕋 for semigroups of ℕ, in one-dimensional vocabulary. The negative measured its query's
+    words (G21, G49).
+  - My own J50 hunch said "unless the stub's hypotheses supply the entropy **or rank** the known theorems need". Its escape clause
+    named the resource, but I did not check it: at J50 I never asked whether infinite rank is a hypothesis anywhere in print.
+    **Owned.**
+- **Honesty line for the report.** If X01 and X02 land, the crunch has not touched the classical ×2×3 conjecture. It has shown that
+  the project's version sidesteps it, because `U` is large. That is the sentence Kooshi should read first.
+- **Consequences to list at the close, each with its weakest link:**
+  - MR(F) for every real number field;
+  - five at ℚ(√47), by SP-Cor (one mind, re-derived), T-C(A) (row 117) and A⁺;
+  - five at ℚ(√143), ℚ(√311), ℚ(√335), by K0 (one mind);
+  - `χ(ℚ(√167)²) ≥ 5`, which the stub's third poster names;
+  - row 88 at ℚ(√59), ℚ(√83), ℚ(√131), given T-B1.
+- **The control, stated plainly.** MR must hold at K and at ℚ(√11), where four-colourings exist, and SP-Cor must fail there exactly at T-C(A).
+
+### Would have searched here (stage 5)
+- None.
