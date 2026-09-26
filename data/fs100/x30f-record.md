@@ -95,3 +95,30 @@ retyped; every inserted row checked at 5 unescaped pipes, every § B line at 7).
 (LOST 0 in every class).
 
 **Would have searched here (stage 3):** none.
+
+## Stage 4 — SAVED (`BIBLIOGRAPHY.md`; the four PDF moves)
+
+**File moves** (launch note 1): copied into `~/source/library/pdf/` under the `<Key>-<title-words>.pdf` convention, each md5 identical to its
+source — `LacaWarren2018-phase-transitions-c-star-algebras-number-fields-generalized-furstenberg.pdf` (`d444eed9…`),
+`BekkaFrancini2022-characters-algebraic-groups-number-fields.pdf` (`f2be9857…`), `Huang2017-fourier-coefficients-times-p-invariant-measures.pdf`
+(`5e9d353a…`), `HuangLiShiXu2023-strongly-independent-matrices-rigidity-times-a-invariant-measures-n-torus.pdf` (`869fa1e8…`); then `git rm` of
+the four repository copies (`data/fs100/x24r/LacaWarren2018-1801.07802.pdf`, `data/fs100/x03d/bekka-francini-2002.07497.pdf`,
+`data/fs100/x01d/huang2017-1606.06078.pdf`, `data/fs100/x01d/hlsx2023-1908.02611.pdf`) in this stage's commit.
+
+**`BIBLIOGRAPHY.md`** (X29C 4.3): § A — `[EinsiedlerLindenstrauss2022]`'s read column (§2, §4.1–§4.3 read by X24R; §§3, 5–9 unread; the PE-2 debt
+cleared); `[EinsiedlerFish2010]`'s one line (its citers, the six arXiv ids). § B (the library table) — the EL2022 row brought into agreement;
+four new rows for the moved PDFs. § C — `[BekkaFrancini2022]` amended (X24R's reading; the library address), `[Huang2017]` and
+`[HuangLiShiXu2023]` (library addresses), `[Sataev1975]` amended; new `[LacaWarren2018]`, `[BauJohnsonNoble2021]`, `[Soifer2025open]`.
+Departures, named:
+- **`[Croft1967]`** (launch note 1: "to be checked against the paper or marked 'from memory'"): checked against the held
+  `[AmbrusEtAl2023]` (pdftotext of the library copy): its reference list reads "H.T. Croft, Incidence incidents. Eureka 30, 22–26 (1967)", and
+  its §1 gives the tortoise's density "maximal at x = 0.96553 . . . yielding m1 (R2 ) ⩾ 0.22936". The row is written with that citation,
+  "checked against `[AmbrusEtAl2023]`'s reference [Cr67] (the paper itself unheld)"; Croft's paper not held, unread.
+- **`[BaderVigdorovich2022]`**, arXiv:2208.07347: `bib_audit.py` fails on it at launch and X29C's 4.3 did not draft it. A minimal § C row
+  copies X24R's own record (Stage 3, Question 4's table: "Bader–Vigdorovich arXiv:2208.07347 (stiffness of stationary measures on character
+  spaces)", "(c) abstract only"); initials not written (not checked).
+
+**Gates:** `bib_audit.py` **exit 0** — 0 arXiv ids and 0 keys unresolved (from 8 and 1 at launch). `claude_md_fact_audit.py --base 7eb4398c`
+exit 0, AUDIT PASSED.
+
+**Would have searched here (stage 4):** none (Croft checked against a held paper, not searched).
