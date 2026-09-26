@@ -15,6 +15,9 @@ only this file, `data/fs100/x03d/`, `tools/x03d_*.py` and my report. Blind verif
 | X03D-FL-H | over a real field where T-C(A) holds at `S = ∅`, FL-1's inequality and FL-2's implication both follow from `Λ(F) ≤ 1/3`; that hypothesis fails over every real field (the real place) | [hand] | §3.4 |
 | X03D-FL-12 | FL-1 ⟹ FL-2 (given T-C(A) at `S = ∅` and the upper bound `χ ≤ 5`) | [hand] | §3.5 |
 | X03D-FL-Q | if `s_E := σ_E(R̂) ≤ s* < 1/(3Λ) = 0.8276` for every four-colouring, the consumer needs only "every non-zero `U`-invariant `E`-null `ν` has `ν̂(1)/ν(R̂) > (−1/3 + Λ s*)/(1 − s*)`", a threshold in `(−1/3, 0)` | [hand] | §3.5 |
+| X03D-ED2 | ED-2 is FALSE: over ℚ, for every infinite set `P′` of primes `≡ 1 (mod 4)` with `Σ_{P′} 1/p < ∞`, `χ_{P′}(r) = ∏_{p∈P′} e({ι_{π̄_p}(r)}_p)` is a character of `R` outside `E` whose averages over `U_N` tend to `∏_{p∈P′}(1 − 1/p) ≠ 0` | [hand, on one classical input (joint equidistribution of Pythagorean points at finitely many places); the local factor and the limit checked exactly, plants fire] | §4.1–4.3, `tools/x03d_weyl.py` |
+| X03D-Z | over ℚ, the summable set `Z` (characters with a representative `ξ ∈ 𝔸_{ℚ(i)}`, `Σ_{v∣p∈P} p^{−1−v(ξ_v)} < ∞`) carries a canonical representative, and every `U`-invariant finite positive measure gives `Z ∖ (T + A)` measure 0 | [hand; measurability one line, not written out] | §4.4 |
+| X03D-ED1′ | over ℚ: if every `χ ∉ Z ∪ E` has `(1/#U_N) Σ_{U_N} χ(u) → 0`, then MR(ℚ) | [hand] | §4.4 |
 | X03D-ED1-R | for `F` with a complex place (e.g. ℚ(∛2)), `U_1` is infinite (norm-one units, rank `r₂(F)`), so ED-1's average is undefined as written; with the archimedean places added to `H`, ED-1 holds with the same proof | [hand] | §2.2 |
 
 ## Stage 1 — SAVED (quotation check, claims copied, C0, the Bekka–Francini discharge)
@@ -171,7 +174,7 @@ here, as far as I know.
 
 **Lemma X03D-FL-1a [hand; given T-C(A) at `S = ∅`].** For every admissible `a`: `τ := ν − a·m` is `U`-invariant, `τ̂(u) = τ̂(1)` for `u ∈ U`,
 `τ ≠ 0`, and `τ` is not a multiple of Haar measure.
-*Proof.* `ν` and `m` are `U`-invariant, and `u x̄u = 1 = 1·1̄`, so FR-1 gives `τ̂(u) = τ̂(1)`. A⁺ at `S = ∅` with its remark (ii) gives
+*Proof.* `ν` and `m` are `U`-invariant, and `u ū = 1 = 1·1̄` (a slip in the saved stage 3 text read "`u x̄u`"), so FR-1 gives `τ̂(u) = τ̂(1)`. A⁺ at `S = ∅` with its remark (ii) gives
 `∫_{R̂∖E_∅} Re χ(1) dσ < 0`; `E ∖ E_∅` is `σ`-null (R-U), so `ν̂(1) < 0`. `m̂(1) = 0`, so `τ̂(1) = ν̂(1) < 0`, which no Haar multiple (`τ = 0`
 included) has. ∎
 
@@ -259,3 +262,100 @@ implied by MR (for `ν = a·m`, `ν̂(1) = 0 > −a/3`), so FL-2 would be a genu
   counterexample).
 - `tools/x03d_factor_minima.py` is an exact-shape evaluation of seconds checking a derived claim (four fixed primes and one Bessel zero), not a
   search.
+
+## Stage 4 — SAVED (ED-2 over ℚ; the refined exceptional set)
+
+**Verdict. ED-2: FALSE**, with an explicit character. This is the planner's named risk, confirmed in the form the planner guessed: a
+character non-trivial at a sparse set `P′` of split primes with `Σ_{P′} 1/p < ∞` has Weyl limit `∏_{P′}(1 − 1/p) ≠ 0`. The refined exceptional
+set `Z` (the summable characters) is **charged by no `U`-invariant finite measure off `T + A`** (X03D-Z; R-U's wandering-set argument, run at
+infinitely many places, which canonical representatives make possible). So the averaging route survives in the refined form ED-1′, **GAP at
+one named step:** the Weyl limit for characters non-trivial at a *non-summable* set of split places. There the finite-place truncation has
+tail `Σ_{p>M} 1/p = ∞` and no equidistribution statement I know controls it. The addendum's warning applies to that step: EF's Nazarov
+construction shows rigidity can hold where equidistribution along a semigroup fails, so ED-1′'s hypothesis may be false while MR(ℚ) is true.
+Capped at 20 minutes (06:00–06:20) per the addendum.
+
+### 4.1 Set-up over ℚ
+
+`L = ℚ(i)`, `P = {p ≡ 1 (mod 4)}`, `R = ℤ[i][1/p : p ∈ P]` (row 98), `U = {(a + bi)/c : a² + b² = c², gcd(a, b, c) = 1}`. For `u = z/z̄`,
+`z` primitive, `H(u) = ∏_{p} p^{|v_π(z) − v_π̄(z)|} = c` (the finite places of `L` above `p ∈ P` are `π, π̄`; at other primes `u` is a unit). So
+`U_N` is the set of Pythagorean points of hypotenuse `≤ N`. Characters of `R` are `χ_ξ(r) = ψ_𝔸(ξ r)` with `ξ ∈ 𝔸_L` modulo `L + 𝒪^⊥`, where
+`𝒪^⊥ = ∏_{v ∉ P∪∞} 𝔡_v^{−1}O_v` (duality: `R = L ∩ 𝒪` with `𝒪 = L_∞ × ∏_{v∣P} L_v × ∏_{v∉P} O_v`, and `(L ∩ 𝒪)^⊥ = L + 𝒪^⊥`).
+
+### 4.2 The character, and why it is outside `E`
+
+Fix an infinite `P′ ⊆ P` with `Σ_{P′} 1/p < ∞` and `P ∖ P′` infinite (e.g. the least prime `≡ 1 (mod 4)` above `4^k`, `k ≥ 1`). For each
+`p ∈ P′` fix `π_p` above `p`, and let `ι_p := ι_{π̄_p} : L → ℚ_p`, `ψ_p(y) = e({y}_p)`. Define
+**`χ(r) := ∏_{p∈P′} ψ_p(ι_p(r))`**. For each `r` only the finitely many `p` in `r`'s denominator contribute, so `χ ∈ R̂`.
+
+**`χ ∉ E` [hand].** Every character in `E_S = T + A + Fin_S` is continuous for `τ′_S` (J45-N1's topology: `R → R̂_prof × ℂ × ∏_{v∈S} L_v`). A
+torsion character of order `n` is trivial on `nR`, and `nR` has finite index. The basic neighbourhoods of 0 are
+`W = {r ∈ nR : |r|_∞ < ε, ι_v(r) ∈ 𝔭_v^M (v ∈ S)}`. Given `n, ε, M`, put `λ₀ = n σ^M` with `σ = ∏_{v∈S}` (a generator of `𝔭_v`). Pick
+`p ∈ P′` not below `S` and prime to `n N(σ)`, and `q′ ∈ P ∖ P′` likewise (both infinite supplies). Pick `y ∈ ℤ[i]` with
+`ι_p(λ₀ y) ≡ ⌊p/2⌋ (mod p)`. The set `{λ₀ z/q′^j}` is dense in `ℂ`, so pick `z, j` with `|λ₀ y/p − λ₀ z/q′^j| < ε`, and set
+`r = λ₀(y/p − z/q′^j)`. Then:
+- `r ∈ W`: `n | λ₀`; `σ^M` gives the `S`-conditions, since `p` and `q′` are units there.
+- At every `p″ ∈ P′ ∖ {p}`, `ι_{p″}(r) ∈ ℤ_{p″}` (its only denominators are `p` and `q′ ∉ P′`).
+- So `χ(r) = e(⌊p/2⌋/p)`, and `|χ(r) − 1| > 1.9`.
+
+So `χ` is continuous for no `τ′_S`, lies in no `E_S`, and not in `E = ⋃_S E_S`. ∎ In adelic terms, `ξ = 1` at `π̄_p` (`p ∈ P′`) and 0
+elsewhere, and no `k ∈ L` cancels it at cofinitely many `P`-places. (A caution found on the way, recorded because it misleads: on elements
+whose only denominator is at one `π̄_p`, `χ` agrees with the archimedean `e(2 Re r)` by the product formula, so test elements with a single
+denominator never witness the discontinuity; the witness needs two primes.)
+
+### 4.3 The Weyl limit
+
+**Local factor [hand].** `X = {a² + b² = c²}` is a smooth conic over `ℤ_p`, `p ∈ P`, and `u ↦ t := ι_{π_p}(u)` (so `ι_p(u) = t⁻¹`) is an
+isomorphism `X_{ℤ_p} ≅ ℙ¹_{ℤ_p}`, through the linear forms `a ± i_p b` with product `c²`. The limit measure of `U_N` at `p` is the
+`PGL₂(ℤ_p)`-invariant probability on `ℙ¹(ℚ_p)`: mass `1/(p+1)` per residue disc, and `(p−1)p^{−k}/(p+1)` on `{v(t) = k}`, `k ≥ 1`.
+`ψ_p(t⁻¹) ≠ 1` only if `v(t) ≥ 1`. On `{v(t) = k}` the inverse `t⁻¹` is Haar-uniform on `p^{−k}ℤ_p^×`, where `ψ_p` averages to `−1/(p−1)` at
+`k = 1` and to 0 at `k ≥ 2` (a Ramanujan sum). So
+`I_p = 1 − 1/(p+1) − [(p−1)/(p(p+1))]·[1/(p−1)] = 1 − 1/p`.
+
+**The limit [hand, on one classical input].**
+- *The input:* for every finite `Σ ⊂ P` and every level, the points of `U_N` equidistribute jointly in `∏_{p∈Σ} X(ℚ_p)` to the product
+  of these measures. This is Gaussian integers in a disc counted in residue classes mod `∏ π^k`, with Möbius for primitivity. [classical;
+  not re-derived here]
+- *Tail:* `#{u ∈ U_N : π_p | z(u)} ≤ C N/p` uniformly for `p ≤ N` (lattice points of `π_p ℤ[i]` in a disc of radius `√N`), and `#U_N ≍ N`.
+  So `χ` and its truncation `χ_M` to `P′ ∩ [1, M]` differ on a fraction `≤ C′ Σ_{p∈P′, p>M} 1/p` of `U_N`, uniformly in `N`.
+- *Levels:* `v(t) ≥ J` has mass `≤ p^{−J}`, uniformly.
+- *So:* `lim_N (1/#U_N) Σ_{U_N} χ(u) = ∏_{p∈P′}(1 − 1/p) > 0`.
+
+**Exact check** (`tools/x03d_weyl.py`, output `data/fs100/x03d/weyl-check.out`; integer arithmetic for the values, a float average of exact
+roots of unity; seconds). At `N = 400,000` (`#U_N = 509,356`):
+- `P′ = {5}` reproduces `0.8`; `{13}` gives `0.92333` against `12/13`; `{5, 13}` gives `0.73844` against `0.73846`.
+- The sparse nine-prime `P′ = {5, 17, 73, 257, 1033, 4129, 16417, 65537, 262153}` gives `0.73856` against `0.73878`.
+- Plants: a non-root of `−1` (so `χ` is no character) gives `0.507`; predicting `1 − 1/(p+1)` misses by `0.034`. Both go red.
+- My own slip on the way: the first sparse list contained `4099 ≡ 3 (mod 4)`; the tool now computes the list by its rule.
+
+### 4.4 The refined exceptional set, and whether an invariant measure can charge it
+
+Let `Z` be the set of `χ ∈ R̂` with a representative `ξ ∈ 𝔸_L` such that `Σ_{p∈P} Σ_{v∣p} p^{−1−v(ξ_v)} < ∞`. The sum runs over the places
+where `ξ_v ∈ O_v` (finitely many exceptions allowed), and `p^{−∞} = 0`. By the local factors, a non-zero Weyl limit needs this (a limit
+heuristic outside 4.3's case, not proved in general). `χ_{P′} ∈ Z ∖ E`.
+
+**Lemma X03D-Z [hand].** Every `U`-invariant finite positive `ν` on `R̂` has `ν(Z ∖ (T + A)) = 0`.
+*Proof.*
+1. *Canonical representative.* Two summable representatives differ by `k + o`, `k ∈ L`, `o ∈ 𝒪^⊥` (zero at `P`-places and at `∞`). Both have
+   `v(ξ_v) ≥ 1` at both places above `p` for all `p` outside a set `Q` with `Σ_Q 1/p < ∞`. So `k` is divisible by every `p ∈ P ∖ Q`, an
+   infinite set, and `k = 0`. The `P`-components and `ξ_∞` are therefore well defined on `Z`. `U` acts componentwise (`u·χ_ξ = χ_{uξ}`, and
+   `uξ` is summable), so `Z` is `U`-invariant.
+2. *Wandering sets at one `p`.* Fix `p ∈ P` and `u_p = π_p/π̄_p ∈ U`, which acts at `(π_p, π̄_p)` by `(x, y) ↦ (t x, t⁻¹ y)` with
+   `|t|_p = p^{−1}` and by units elsewhere. The push-forward of `ν|_Z` to `ℚ_p²` is finite and invariant. The sets `tⁿ{1 ≤ |x| < p}` are
+   disjoint with equal mass, so `x = 0` a.e.; `u_p⁻¹` gives `y = 0` a.e. (J45's R-U argument, verbatim in route).
+3. *All places.* Over the countably many `p ∈ P`, `ν`-a.e. `χ ∈ Z` has every `P`-component 0. So `ξ` is supported on `∞` and the non-`P`
+   places, and `χ ∈ T + A = E_∅` (J45-N1). ∎
+
+**Lemma X03D-ED1′ [hand].** Over ℚ: if every `χ ∉ Z ∪ E` has `A_N(χ) → 0`, then MR(ℚ).
+*Proof:* ED-1's proof. `τ(Z ∪ E) = 0` by X03D-Z and `τ(E) = 0`. `x·χ ∈ Z ∪ E ⟹ χ ∈ Z ∪ E` (multiplying a summable `ξ` by `x⁻¹` changes
+finitely many valuations; for `E`, SP-if step (2)). ∎
+
+**The GAP, named:** `A_N(χ) → 0` for `χ` non-trivial at a non-summable set of split places, where the truncation in 4.3 fails
+(`Σ_{p>M} 1/p = ∞`). Over the full set `P` the local product `∏(1 − 1/p)` is 0, consistent with a zero limit, but a product of local
+integrals is not a proof when no finite set of places controls the average. The step is a mean-value theorem for functions
+`z ↦ χ(z/z̄)` on primitive Gaussian integers: additive characters of the cofactor, neither multiplicative nor of bounded level. Per the
+addendum (EF §4, Nazarov), it is not implied by MR and may fail where MR holds.
+
+### Would-have-searched-here log (stage 4)
+
+- Would have searched characters of `R` for one with a non-zero Weyl limit. Instead derived one (`χ_{P′}`) from the local factor and checked
+  the derived limit exactly at four fixed sets `P′`, chosen before the run by a stated rule.
