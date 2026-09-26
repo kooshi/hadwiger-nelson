@@ -26,7 +26,7 @@ TRUE, FALSE with a counterexample, or GAP at a named step.
 
 ## Read first
 
-- EL2021 at `data/fs100/j51/el2021.pdf`: §1 (read by J51: the definitions of solenoid, irreducible, totally irreducible, virtually cyclic
+- EL2021 at `~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` (the held copy, under its journal-year key; J51's `data/fs100/j51/el2021.pdf` is not on disk): §1 (read by J51: the definitions of solenoid, irreducible, totally irreducible, virtually cyclic
   factor; Thms 1.1–1.3), and whatever of §§2–9 fixes what Thm 1.2 assumes (is `μ` required ergodic; is the acting group `ℤ^d` exactly;
   what "no virtually cyclic factor" means there). Mark reading status per section.
 - `plans/FS100-three-field-lemma.md` §PA.1–§PA.3 (J51-T2 and the PE-lim sketch through Thm 1.3); `plans/FS100-derivation.md` FS100-T2;

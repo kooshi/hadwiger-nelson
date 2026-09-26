@@ -26,7 +26,7 @@ Copy §2's notation paragraph, **list X02** (HX-1, PE-1, PE-2, CE-1), and **FR-1
 verbatim, and work from that copy. Order: X02's claims first; FR-1 and ED-1 only if budget remains after PE-2.
 
 **Verified inputs you may use as given, by statement:** row 105 and Lemmas C, C′ (`R = O′`, a Dedekind domain); EL2021
-(`data/fs100/j51/el2021.pdf`; read what you use, and mark reading status per section); row 118's FS100-T2 (no finitely generated `Γ`
+(`~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` (the held copy, under its journal-year key; J51's `data/fs100/j51/el2021.pdf` is not on disk); read what you use, and mark reading status per section); row 118's FS100-T2 (no finitely generated `Γ`
 acts irreducibly on `R̂`); standard ergodic theory (ergodic decomposition; Kolmogorov–Sinai entropy of factors and inverse limits; Bochner).
 
 ## Stages

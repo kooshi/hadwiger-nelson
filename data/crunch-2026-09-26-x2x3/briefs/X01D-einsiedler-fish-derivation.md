@@ -31,7 +31,7 @@ TRUE, FALSE with a counterexample, or GAP at a named step.
 - **Its citing works, as prior art for EF_F** (read these before any novelty claim): "Strongly Independent Matrices and Rigidity of
   ×A-invariant Measures on n-torus" (2023), and Huang 2017 (Zbl 1402.37006). They may already be the higher-dimensional EF. Fetch them.
   Check `BIBLIOGRAPHY.md` and `~/source/library/` first.
-- `LEDGER.md` rows 98, 112, 113, 116–118; `plans/FS100-three-field-lemma.md` §PA.1–§PA.3; EL2021 at `data/fs100/j51/el2021.pdf` §1.
+- `LEDGER.md` rows 98, 112, 113, 116–118; `plans/FS100-three-field-lemma.md` §PA.1–§PA.3; EL2021 at `~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` (the held copy, under its journal-year key; J51's `data/fs100/j51/el2021.pdf` is not on disk) §1.
 - **The advisor's reading of EF, relayed verbatim** (Poros, by message to the planner, 2026-09-26; one mind, not checked):
   > "Lemma 3.1 (by Shannon–McMillan–Breiman): h(T_p) = 0 ⟹ µ(B_δ(x)) > δ^β on a set of measure 1−ε."
   > "Lemma 3.2 has two steps: (a) Pigeonhole: the M^{α/2} images qB_δ(x), q ≤ M, each of mass > δ^β, cannot be disjoint. (b) The

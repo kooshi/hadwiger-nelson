@@ -26,7 +26,7 @@ Copy §2's notation paragraph and list X01 (EF-G, EF_F, EF-MR, EF-X) into your r
 of that plan are open to you; §6 is fenced.
 
 **Verified inputs you may use as given, by statement:** row 98 (band rigidity, `Θ_k(R_F) ⊆ T + A`); row 105 and Lemmas C, C′ (`R = O′`);
-rows 112–113; SP-Cor's statement (`plans/FS84-SI-D-derivation.md` §4.2); EL2021 §1 (`data/fs100/j51/el2021.pdf`); Furstenberg 1967;
+rows 112–113; SP-Cor's statement (`plans/FS84-SI-D-derivation.md` §4.2); EL2021 §1 (`~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` (the held copy, under its journal-year key; J51's `data/fs100/j51/el2021.pdf` is not on disk)); Furstenberg 1967;
 Berend 1983/1984; the counting of rational points of bounded height on tori and conics (cite what you use).
 
 ## Stages
