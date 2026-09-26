@@ -7,7 +7,17 @@ with a counterexample / GAP at a named step.*
 
 ## Theorems this phase proved
 
-*(filled stage by stage; grade per `CLAUDE.md` § Notation; address in this file)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| J51D-T1 | KS-2 in general form: `C + H = C` (closed `H ≤ K` compact abelian) ⟹ a measurable proper 4-colouring of `Cay(K, C)` selects to `Cay(K/H, C/H)` | hand, one mind | §2.1 |
+| J51D-T2 | conjugate-pair dichotomy: `ψ_w(u) = 0` or `ψ_w̄(u) = 0` for every `u ∈ U`; `m₁ψ_w + m₂ψ_w̄ ∉ T + A` for `m ≠ 0`; every real field, every split place | hand, one mind; (a) tools exact at ℚ, 25,492 unit vectors | §2.2; `tools/j51d_or_check.py` |
+| J51D-T3 | KS-1 is false over ℚ: `Θ = (τ + ψ_w, τ + ψ_w̄)`, `W = 2[t₁ ≥ ½] + [t₂ ≥ ½]`; also every real field with `χ(F²) = 2` | hand + tools exact | §2.4 |
+| J51D-KS3 | KS-3 false over every real field (`Θ = (ψ_w, ψ_w̄)`); non-vacuous over ℚ(√11) with `θ_{C9}` added, where KS-1's conclusion still holds | hand + tools exact | §2.3 |
+| J51D-T4 | `θ ∈ E ∖ (T + A)` ⟹ `cl θ(U) = T`, every real field | hand, one mind | §3.1 |
+| J51D-T5 | `F = ℚ`: `θ ∉ T + A` ⟹ `cl θ(U) = T` (PA-B2 + VB1's mechanism + the sweep at an arc) | hand, one mind; a composition of two-derivation and one-derivation lemmas | §3.1 |
+| J51D-R | KS-sat_E ⟺ density of `Φ(N)` for off-`E` families on neighbourhoods of 1 in `U` (reduction; the GAP's statement) | hand, one mind | §3.2 |
+| J51D-C | KS-C as an implication, and KS-C_E; at ℚ(√47), KS-1 ⟺ KS-1_E ⟺ KS-C's conclusion | hand, one mind | §3.3 |
+| — | KS-4, KS-5 TRUE (uninformative controls) | hand + tools exact | §2.5 |
 
 ## Stage 1 — quotation check, the claims verbatim, §M, C0
 
@@ -248,3 +258,56 @@ cannot reach it [reading, sketch: its fibres are an "OR" of two coordinates, whi
   checks a derived identity on a complete finite set fixed in advance (heights `≤ 20,000`, seconds).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — KS-3's remainder (rank one; rank `n` in the corrected reading) and KS-C (written at the stop rule: 250k passed at stage 2)
+
+### 3.1 Rank one (P-sat1: `θ ∉ T + A ⟹ cl θ(U) = T`)
+
+- **J51D-T4 — inside `E`, every real field: TRUE** [hand, one mind]. `θ = τ + λ + Σ_{w|S} c̄_w` with the `Fin_S` part non-zero and canonical
+  (two representations differ by a pure-local element of `T + A`, zero by the argument of J51D-T2 (b)). For every `u ∈ U`,
+  `θ(u) = τ(u) + λ(u) + Σ_{w|S} ψ_v(c_w ι_w(u))` depends only on `u` at `∞`, finitely many stable places (finite level) and `S`; `U` is dense in
+  that finite product (weak approximation, FS91-J10-L2). Fixing all but one place `v` with `c_w ≠ 0` and letting `|ι_w(u)| → ∞`, the values
+  `ψ_v(c_w x)` over the shells `|x| = p^k` are `p^{−k′}`-dense; so `cl θ(U) = T`.
+- **J51D-T5 — `F = ℚ`, every `θ`: TRUE** [hand, one mind; a composition of held lemmas]. (i) `θ ∉ T + A(Q)` ⟹ `θ|_{R_S} ∉ T + A(R_S)` for
+  some finite `S` with `|S| ≥ 2` (otherwise the archimedean parts agree, `T ∩ A(R_S) = 0` for `S ≠ ∅`, and the torsion parts have one order,
+  because `R_S/mR_S ≅ ℤ[i]/m` for `m` prime to `S`, so `θ ∈ T + A(Q)`). (ii) In `R̂_S`, `Y = cl(U_Sθ)`: if a minimal subset is `R̂_S`, then
+  `ev₁(Y) = T`; otherwise it lies in `T + A` (FS91-J01-2, PA-B2, band-free, two derivations), and VB1's proof (FS89-S1VB, Lemma E and JC; no
+  band used before its last line) gives `x′ + c̄′ ∈ Y` for all `c′` in a ball `c(1 + p^j O_v)`, `c ≠ 0`. (iii) The sweep at an arc instead of
+  at 0 (SW-m's proof with `m` free): an expanding `u` maps the ball onto a coset of `π_v^{−m}O_v`, and `ev₁(u(x′ + c̄′))` fills a coset of
+  `(1/p^m)ℤ/ℤ`; `m` is arbitrary and `ev₁(Y)` closed, so `ev₁(Y) = T`. Hence `cl θ(U) ⊇ cl θ(U_S) = T`.
+- **General `F`, `θ ∉ E`: GAP** at the field form of PA-B2 and JC over `R_{F,S}` (degree-2 local fields `L_w`, `[F:ℚ]` archimedean circles).
+  Row 98's field clause does not transfer: its gluing (FS89-S0A-2) uses a torsion-order bound that only the band supplies; without it the
+  rational layers `b·ℤ[U_ℚ]` can all be `T + A` while `θ ∉ T + A` (e.g. `θ = ψ_w` at the split place of ℚ(√47) above 3, which no rational
+  layer sees as more than torsion of unbounded order).
+
+### 3.2 Rank `n` — the corrected saturation, KS-sat_E: GAP at a named step
+
+KS-sat fails for the wrong reason (2.3): its `K₀` contains `Fin` directions, where the conjugate-pair dichotomy makes fibres an "OR". The
+reading that survives is **KS-sat_E**: `s + ann(Γ ∩ E) ⊆ C` for `s ∈ C`. `E` is pure (`A`, `Fin_S` divisible), so `Γ = Γ_E ⊕ Γ_∞` with
+`Γ_∞ ∩ E = 0`. Reduction [hand, one mind]: with `u₀` fixed, `Γ_E(u₀g) ≈ Γ_E(u₀)` for `g` in a neighbourhood `N` of 1 in `U` for the topology of
+the finite set `Σ` of places `Γ_E` reads, and `Γ_∞(u₀g) = (u₀·Γ_∞)(g)`, `u₀·Γ_∞` again independent off `E`. So KS-sat_E ⟺ **for every f.g.
+`Φ` independent off `E` and every such `N`, `Φ(N)` is dense in `T^k`**. The named step: *the characters of `Φ` read infinitely many split
+places; `g ∈ N` can be controlled only at finitely many places (weak approximation), and at the others its poles are uncontrolled; controlling
+all poles means `g ∈ U_{Σ′}`, which is discrete in `∏_{Σ′}` (no strong approximation for the anisotropic norm-one torus), so `N ∩ U_{Σ′}` is a
+cut-and-project set in `∏_{Σ′∖Σ} F_v^×` and the values are sums `Σ_v h_v(g_v)` over its points.* Density of those sums is J37's "equidistribution
+statement for the `U`-values of an infinite-type character" in concrete form — equivalently the orbit closure of the diagonal `U`-action on
+`R̂^{k+|Σ|}` (topological self-joinings; Lindenstrauss–Wang 2012 not read). The OR obstruction does not arise off `E` (a `g` can have poles on
+the `w`-side at one place and the `w̄`-side at another), so no FALSE is in sight; nothing proves TRUE.
+
+### 3.3 KS-C — TRUE as an implication; the corrected form too
+
+*Proof.* Given `(Θ, W)` proper for a.e. `t`, KS-1 at ℚ(√47) gives `W′` on `K′`; `c_{t′}(x) = W′(πΘ(x) + t′)` is proper for a.e. `t′`
+(countably many edges); `t′` Haar makes it a translation-invariant probability on `X₄(F)`, whose spectral measure is carried by
+`K̂′ ∘ πΘ = Γ ∩ (T + A) ⊆ E_∅`; T-C(A) at `S = ∅` (R88-TCA) excludes it. ∎ [hand, one mind]. **But KS-1 is false as a uniform statement
+(2.4)**, so the hypothesis must be KS-1 *at ℚ(√47)*. Two remarks [hand, one mind]: (a) **KS-C_E** — KS-1_E at ℚ(√47) with T-C(A) at every
+finite `S` (which R88-TCA gives; `Γ ∩ E ⊆ E_S` for one finite `S`, `Γ` being f.g.) — is TRUE as an implication by the same two lines;
+(b) **at ℚ(√47) the two readings coincide**: given T-C(A) at finite `S`, KS-1, KS-1_E and KS-C's conclusion are equivalent there (a proper `W`
+is exactly a Kronecker four-colouring). So the refutation costs the milestone its uniform lemma, not its target: ℚ(√47)'s pure-point layer
+is closed iff KS-1_E holds there, and KS-2 reduces that to KS-sat_E at ℚ(√47) — the GAP of 3.2.
+
+### 3.4 Left
+
+- **K0** — not started (J45 §5.4 not read). Budget.
+- The field form of the rank-one step (3.1, third bullet); KS-sat_E (3.2); Lindenstrauss–Wang 2012 and Z. Wang 2012 unread.
+
+## Stage 3 — SAVED (stage 4's KS-C folded in; K0 left)
