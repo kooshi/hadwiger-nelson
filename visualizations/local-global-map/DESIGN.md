@@ -191,3 +191,37 @@ reply funds the next: a pinned card offers "follow this field" and "follow this 
 
 *Validate as the user* happens at stage 4: a cold read of the published page against §1.7's three questions, each answered by looking
 alone, recorded in the README.
+
+## Stage 2 — SAVED: the facts table and its checker
+
+- **Builder** `tools/viz_local_global_map_build.py` → `data/viz/local-global-map/facts.json`: 22 places; 32 rows (31 fields and the
+  plane); 35 target facts (floors and caps of the finite planes, the dyadic targets, the real place, four character chromatic numbers);
+  35 field facts (proven lower bounds, three recorded upper bounds, the plane's 7 for every field); 8 colourings owned beyond the caps;
+  4 shadows with 16 carved formats; 11 walls; **829 theorems** — the 115 ledger rows and **714** `LEDGER.md` § B entries (the brief's 675
+  predates the crunch's close), 188 of them minted in the crunch.
+- **Shared text rules** `tools/viz_local_global_map_common.py`: normalisation, the grade fold, the ledger parser, the keyword tag rule,
+  and the builder's arithmetic (which the checker does not use).
+- **Checker** `tools/viz_local_global_map_check.py`: **checked 1593, failed 0, errors 0.** Each fact's pattern, filled with its value and
+  its source's grade words, is found verbatim in its source (or its one ledger row); the page grade must be the fold of those words; a
+  fact graded kernel through a Lean name needs a row whose address is a `.lean` module; field rules (d mod 12, "contains K") are
+  recomputed; every place state is recomputed by brute-force square roots (not the builder's Euler criterion) and controlled against
+  `data/fplane/map.json` (21 fields matched); every theorem's grade and tags are recomputed from `LEDGER.md`.
+- **Controls** (`--self-test`, PASSED): the faithful copy passes; five plants each fire **exactly once, naming their fact** — a wrong grade
+  (`t.23.floor` called kernel), a wrong number (`t.43.floor` set to 5), an unreadable source (`w.real4`, exit 2), a wrong theorem grade
+  (`row113`), a wrong place state (`field.Q47.11`).
+- **What the checker caught in my own transcription, before the controls:** 19 failures on the first run — map.json's indentation, four
+  facts sourced from ledger row 75 that the parser had truncated, grade words I had typed that were not the row's own, and three facts
+  graded hand-2 by me that the source's words fold to hand-1 or measured (the builder now takes the fold, never my typing).
+- **The fold, and a decision in it.** *Choice:* exact arithmetic inside a hand proof or certificate is that proof's input and does not
+  lower its grade; a claim resting on a tool alone is "measured". *Alternative:* the weakest-part rule applied literally, which graded
+  "hand + tools exact; two derivations" as measured (14 facts). *Why:* § Notation's [tools] is "exact arithmetic with controls, or a
+  controlled instrument"; when exact arithmetic checks a step of a two-derivation hand proof, the hand proof is the weakest link. *Confidence:*
+  medium — it would change if the owner reads "tools exact" as weaker than a one-mind hand proof.
+- **Source defect found (reported, not fixed):** eight `LEDGER.md` table lines carry an unescaped `|` inside a code span — rows 75, 76, 78,
+  80, 85, 86 and § B entries FS66-L1, M3-J22-T8 (e.g. row 75's `` `|λ| ≤ 2p^{k−1}` ``); GitHub's table renderer splits the cell there. The
+  parser treats a pipe inside backticks as literal.
+- **Theorem density, as computed** (mentions by the keyword rule, not coverage): of 829 theorems, 618 name no field in the map (general
+  statements). Most-mentioned fields: K 95, the plane 36, ℚ(√167) 29, ℚ(√59) 24, ℚ(√11) 22, K(√7) 20, ℚ(√47) 18; the real quadratic fields
+  ℚ(√71), ℚ(√95), ℚ(√191), ℚ(√2351), ℚ(√4703) have one each. Places: above 2 — 115, the primes ≡ 1 (mod 4) — 62, 3 — 35, the real place
+  — 32, 11 — 23, 7 — 20, 23 — 15; 31, 47, 59, 67, 83 have one to four.
+- **Would have searched here:** none. The only computation is the place rule, seconds, exact.
