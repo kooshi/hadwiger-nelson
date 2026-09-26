@@ -5,6 +5,8 @@ case this is), `plans/FS50-certificate-soundness.md` (the one-page derivation), 
 checker whose pair-level restriction is the object here), `Proofs/HadwigerNelson/LocalGlobal.lean`
 (`add_one_le_chromaticNumber_of_indepNum_le`), `Instances/IndependenceThreshold.lean`; `LEDGER.md` row 53, G44, G54, FS-41.*
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** Lemma T (FS67-T, row 115) is the ratio bound's equality lemma — Hoffman-tight at `k` ⟹ every `k`-colouring balanced and gap-free; in print, `[Haemers2021]` p. 4.
+
 ## 1. Mission context, in plain language
 
 Every floor this project states for a finite plane's chromatic number above five — "`χ(UD(𝔽₈₃, 2)) ≥ 6` by the spectrum",

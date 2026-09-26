@@ -981,3 +981,13 @@ blind verifiers included**, so every line proposed for it is address-only.
 ### 5.2 Would-have-searched-here log
 
 Empty: no stage of this job called for a finite-witness search.
+
+## Addendum — the closes after M1–M3 (J44, the front page; addresses only)
+
+| item | plan and close | derivation file | close inventory | records | reports | front page |
+|---|---|---|---|---|---|---|
+| **Row 88's question** (FS-86's continuation) — closed | `plans/FS86-row88-rigidity.md` §R-close (J41) | `plans/R88-derivation.md` | `plans/FS86-row88-close-inventory.md` | `plans/FS86-R88-D-derivation.md` (J28D), `plans/FS86-R88-V-verification.md` (J28V), `plans/FS86-row88-PA-close.md` (J35) | J28, J28D, J28V, J35, J41 | `LEDGER.md` rows 111–113; FS-97, FS-98, FS-99 |
+| **FS-67** — closed as a milestone, the stub re-aimed | `plans/FS67-tight-products.md` §R-close (J42) | `plans/FS67-derivation.md` | `plans/FS67-close-inventory.md` | `plans/FS67-J27D-derivation.md` (J27D), `plans/FS67-J27V-verification.md` (J27V), `plans/FS67-PA-close.md` (J40) | J27, J27D, J27V, J40, J42 | `LEDGER.md` rows 114–115; `plans/STUB-tight-product-colourings.md` |
+| **FS-84 S1** — done (FS-84 open) | `plans/FS84-five-colours-47.md` (J29) | — | `plans/FS84-close-inventory.md` | `plans/FS84-S1-derivation.md` (J31) | J29, J31 | — (next stages from 2026-10-01) |
+| **FS-84 S1V** — done | as above | — | as above | `plans/FS84-S1V-verification.md` | FS84-S1V | — |
+| **G79** — minted at the front page | `plans/CRUNCH-2026-09-25-post-close-inventory.md` row 25 | — | — | — | — | `CLAUDE.md` § Grokkings (J44) |

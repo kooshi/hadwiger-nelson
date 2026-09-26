@@ -7,6 +7,8 @@
 
 **J29's reframe (2026-09-25; `plans/FS84-five-colours-47.md`, its stages from 2026-10-01):** the survivors' `Θ₄` cell analysis can only colour a survivor (G71, row 96); a refusal needs a finite graph or a four-class averaged certificate; `χ(ℚ(√47)²) = 5` answers Soifer 55.1 and Moorhouse's ℚ(√47) question.
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 — the wall here is a counterexample invariant (rows 96, 113); flip the poster and ask what every four-colouring the plane already has must carry. The wanted-poster session J37 is its first test.
+
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G77 (no character four-colouring at any `L = 5` field, CLG-g's (g1)).
 
 **At FS-89's close (2026-09-25):** no **character** four-colouring of ℚ(√47)'s plane exists (`LEDGER.md` row 96; `plans/FS89-derivation.md` CL4; hand, given Lemma R and Weil), so a four-colouring falsifying the conjecture's five-clause here is a colouring no character gives (and, by FS-86's row 92, no measurable window over finitely many places). `χ(ℚ(√47)²) = 5` is not claimed; this stub's question is untouched. Now rank 4 in `plans/FRONTIER-STUBS.md`, above FS-83.

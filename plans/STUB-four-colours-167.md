@@ -4,6 +4,8 @@
 
 **At M3's close (2026-09-25):** FS-64's window format at five is reduced to nine places (row 110); a window falsifier of '≥ 6' must read a place above 43 or one of 2, 3, 5, 7, 23, 29, 61 with a real place.
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 (the wanted-poster session J39 is its first test); G76's row-88 edit does not reach five colours here — the count needs every non-tight ratio below `1/5`, and the real place's `m₁ ≥ 0.229` exceeds it (row 92's "Not claimed"), so row 112 says nothing at ℚ(√167).
+
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G77 (a character colouring here needs eight colours given CLG, row 101 — look for colourings no character gives) and G76 (the window format at five, row 110).
 
 **At FS-89's close (2026-09-25):** no **character** five-colouring of ℚ(√167)'s plane exists (`LEDGER.md` row 96; `plans/FS89-derivation.md` CL5; hand + cert, given FS-53's and FS-66's certificates at 43 and 23). This stub's question — does ℚ(√167)² need five colours at all? — is untouched: a five-colouring that is no character is not excluded. It removes one kind of falsifier of the conjecture's widest prediction (FS-64's windowless case, FS-83).

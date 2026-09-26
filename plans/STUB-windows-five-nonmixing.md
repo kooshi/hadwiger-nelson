@@ -56,6 +56,8 @@ close.
 
 ## Provisional bearings
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G54's product sentence (row 115, FS67-DC2): a `k`-gap-free factor pulls back against every abelian Cayley factor with `λ* < 1/(k−1)`, sharp — the integral twin of M3-J21-MX.
+
 G76 (with M3's addendum: mixing, not ratio, decides removal), G54 (the spectrum first — here its absolute value), G24/G43 (the real
 factor's integrality gap), G60 (the density cap), G66 (43's tower), G48 (the conjecture's falsifier format), G50 (a held paper applied past
 its statement: `[Zhang2012]`'s maximum sets), G72.

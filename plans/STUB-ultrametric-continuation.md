@@ -57,6 +57,8 @@ Boyle–Lind 1997 and Einsiedler–Lind–Miles 2001 (free online; J35 §6.4 ite
 
 ## Provisional bearings
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 — both gaps describe what a non-pullback must carry; the example invariant is what every pullback carries that a transient colouring could not. The wanted-poster session J38 is its first test.
+
 G76 (a "no" must disagree with every pullback in every archimedean direction), G13 (gap-freeness drives propagation), G71 (no height at four
 colours), G73 (cell-local formats closed), G78 (Kempe moves cannot see a frozen wall — the rank-one analogue of a frozen pullback), row 80 (T35's
 transient walls), row 97 (one-prime heteroclinics).

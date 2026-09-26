@@ -118,3 +118,22 @@ are in rows 114–115 and the stub); G76's old status tag (widened by row 88's d
 | G79's instances by address only (rows 96, 113; G22; G48, G31; G57 / G71, G74; G75; G76; row 95) | one clause per instance | the brief's instruction and the one-home rule; each instance is told in its own entry | high |
 | keep J24's M1–M3 line in "Last updated", after the new closes | replace it | the crunch's three closes are still the file's newest state for those rows; the line is a pointer | medium — if the owner wants one close per line, the M1–M3 sentence moves to `plans/FRONTIER-STUBS.md`'s closed list |
 | move FS-64's bearing back from FS-92's row | leave the defect | a mirrored table with a row missing its bearing misleads the ranking's readers | high |
+
+## Stage 4 — SAVED (`plans/FRONTIER-STUBS.md`, the stubs, the index)
+
+- **`plans/FRONTIER-STUBS.md`** by `data/crunch-2026-09-25/j44/apply_frontier_stubs.py` (plant fired first, exit 1): the open-milestones line
+  (FS-84 open, S1/S1V done; row 88's question and FS-67 CLOSED); a new re-rank paragraph on top of the earlier ones (the file's convention);
+  FS-67's row in the full form of R.8c/R.8e at its rank (now 10); FS-84's, FS-90's and FS-64's cells and FS-64's status re-aimed per their
+  stubs' opening paragraphs (§R-close 4.5, 4.7); FS-98 (7), FS-97 (12), FS-99 (31) inserted with cost, status and solver read from their stub
+  files; ranks checked 1–58; the closed list gains row 88's question and FS-67 (closed as a milestone). +4,389 bytes.
+- **Forward propagation** (WORKFLOW 9) by `data/crunch-2026-09-25/j44/apply_stub_bearings.py` (plant fired first): one line
+  "Provisional bearings, updated at row 88's and FS-67's closes (J44)" in 11 stubs — FS-67's list (R.1): FS-96, FS-64, FS-92, FS-42, FS-51,
+  FS-76; row 88's (3.1): FS-64 (G76's split), FS-59 (the row-88 edit does not reach five colours there — J41's "not widened" note); G79 to
+  the stubs whose wall it bears on: FS-84 (J37), FS-97 and FS-98 (J38), FS-59 (J39), FS-67 (J42's own R.2 reading). FS-84's and FS-90's
+  row-88 bearings were already written by J41.
+- **`plans/CRUNCH-2026-09-25-INDEX.md`**: an addendum table, addresses only — row 88's close, FS-67's close, FS-84 S1 (J31) and S1V, G79.
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| closed-list entries for row 88's question and FS-67 | none (neither is a closed stub) | once the next close rewrites "Last updated", the closed list is where `CLAUDE.md` sends a reader for earlier closes | high |
+| G79 forwarded to five stubs, those J37–J39 test and FS-67 | none until J37–J39 report | WORKFLOW 9 forwards every grokking minted at a close; the lines say the entry is untested and name its test | medium — if the owner wants an untested method kept out of stubs, the five lines are one revert |

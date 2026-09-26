@@ -73,6 +73,8 @@ failure.
 
 ## Provisional bearings (for the re-grokking at the opening, WORKFLOW 3.1)
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** rows 114–115 — FS67-DC1 and DC2 are pullback theorems of the shape "a colouring of a product of local targets is local at one place", and FS67-DA4 shows that locality can fail between gap-free factors from four colours up (G54).
+
 G77 (the class theorem at existence scope), G71 (scope: characters only, and existence against classification), G72 (§IQ's structural
 form), G74 (the layer gluing), G76 (closed-set rigidity), G66 (level collapse), G54 (tight/slack at the dyadic tower), G59 (Lemma AV), G35
 (the dyadic trichotomy), G21 (a control's shape).

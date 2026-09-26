@@ -53,6 +53,8 @@ structural question), row 109 (the mixing selection this stub's DC-2 bootstraps)
 
 **At M3's close:** for maps *into the Moser spindle* the answer is yes in print (`[TardifWrochna2019]` Thm 2, strong multiplicativity; found by M3's prior-art reader, `plans/M3-PA-mixing.md` Stage 2).
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 — FS-67's close reads itself this way (`plans/FS67-tight-products.md` §R-close R.2): the counterexample invariant, a Hedetniemi pair in `E_k(G)`, came from print; the example invariant at three colours, a colouring of `E_3(G)`'s non-zero-winding part, is the missing step.
+
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G76's mixing sentence (a factor leaves a product colouring when it mixes, not when its ratio is small, row 109).
 
 **At FS-89's close (2026-09-25), from the Greenwell–Lovász / Larose–Tardif reading (`plans/PA-products-GL1974-LT2002.md` §4; PA-P1 to PA-P5, hand, filed there):**

@@ -4,6 +4,8 @@
 classifier); `plans/M58-field-sieve.md` (which primes are usable where); `plans/M61-local-global-tightness.md` (the
 periodic quotient `unitQuadrance_colorable_of_quotient`, `addCayleyMap`); `[Moorhouse2010]` §9; `[Shitov2019]`.*
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** Lemma T (FS67-T, row 115): a 5-Hoffman-tight quotient is 5-gap-free, so its products with mixing factors pull back (FS67-DC2; G54's product sentence).
+
 ## 1. Mission context, in plain language
 
 FS-38 closed the six-level's only known mechanism over sealed fields: a residue plane that seals a field at five colours is

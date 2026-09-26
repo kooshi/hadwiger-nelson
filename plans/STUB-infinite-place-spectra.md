@@ -61,5 +61,7 @@ A derivation record with, per question, TRUE / FALSE / GAP at a named step; the 
 
 ## Provisional bearings
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** G79 — this stub's class is what a counterexample must carry and may be empty; flip the poster and ask what every invariant four-colouring must carry. The wanted-poster session J38 is its first test.
+
 G76 (the frame and its narrowed reading), G72 (move 3: invariant measures), G74 (gluing across infinitely many layers), G48 (the colouring-level
 Hasse principle), G60 (`F ⊆ F_μ ⊆ P`), G54 (spectra cannot pin on a slack plane; row 112 goes through `m₁`), G50 (the unheld measure-rigidity papers).

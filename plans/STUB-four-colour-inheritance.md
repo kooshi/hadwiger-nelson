@@ -2,6 +2,8 @@
 
 **At M3's close (2026-09-25):** rank one (R2) is equivalent to *a countable four-colouring shift of a distance graph is finite* and to a statement about single heteroclinic colourings (J18-DC); open at one step reached by three minds; frozen walls are invisible to Kempe arguments. `plans/M3-derivation.md` §1–§4; `LEDGER.md` row 108; follow-on FS-95 (`plans/STUB-rank-one-walls.md`).
 
+**Provisional bearings, updated at row 88's and FS-67's closes (2026-09-25, J44):** FS67-DA4 (row 114): non-local four-colourings of products exist between gap-free factors from four colours up (G54's product sentence).
+
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G78 (rank one is countable ⟹ finite; frozen walls are invisible to Kempe arguments, row 108) and G77 (characters cannot break inheritance where CLG classifies, row 100).
 
 **At FS-89's close (2026-09-25):** over the type-(B) fields ℚ(√59), ℚ(√83), ℚ(√131) character colourings cannot break four-colour inheritance either: HD1 holds (`LEDGER.md` row 96), every four-colour band character of those planes being a dyadic pullback. A failure `P(R) ≠ F(R)` there needs a colouring no character gives; `F(R)` stays undecided (row 88).
