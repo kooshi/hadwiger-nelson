@@ -85,3 +85,46 @@ hunch: hardness-reduction-false-in-spirit
   falsifier: a construction taking an exotic ×a×b measure to a non-Haar, `E`-null, `U`-invariant measure
   registered: 2026-09-26
   status: open — about 95 %
+
+## Stage 1 — Einsiedler–Fish read in full; two messages to the planner — SAVED
+
+**EF read** (arXiv 0804.3586v2, all 8 pages; copy `data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf`, text `ef.txt`).
+Theorem 1.2 = Johnson (positive entropy ⟹ Lebesgue) + Lemma 3.2 (zero entropy of one `p` ⟹ finite support). Lemma 3.1 is SMB: zero
+entropy ⟹ `µ(B_δ(x)) > δ^β` on a set of mass `1 − ε`. Lemma 3.2: `M^{α/2}` images `qB_δ(x)` of mass `> δ^β` must meet, whence
+`x ≈ k/ℓ`, `ℓ < M`, error `2M^{-4}`; then `|k₁/ℓ₁ − k₂/ℓ₂| ≥ 1/(ℓ₁ℓ₂)` stabilises the rational, so `x = k/ℓ`. §4: Nazarov's
+semigroups of positive density along which `Σα` is not equidistributed (so the mechanism is not equidistribution). EF also note that
+at `α = 1` Wiener's lemma suffices.
+
+**My transfer sketch** [reading, one mind, not a derivation]: the separation step is the product formula; done adelically (lift to
+`∏O_w ×` a fundamental domain at `∞`) the archimedean freedom lands in `A`, so the natural EF_F conclusion is "zero entropy for every
+`u` ⟹ carried by `T + A`" — inside `E`. The positive-entropy half becomes the Johnson analogue, i.e. PE-lim / the planner's PE-2 —
+**the crux moves to positive entropy, where the literature is strong.** Wiener's shortcut fails here: a `U`-orbit in `R` lies on one
+archimedean circle, of density zero in any Følner set — the same fact as the circle measures in `A`.
+
+**Named risks for EF_F** (sent): (i) Lemma 3.1 gives smallness only at `S(u)` (take `u = ∏u_p`); (ii) `ℓ = v₁ − v₂` can be tiny
+`w`-adically at `S` — EF has `|ℓ| ≥ 1` free; (iii) `#{v ∈ U : H(v) ≤ M} ≥ M^α` over general `F` (anisotropic torus point count).
+
+**The planner's two items** (de Bruijn, 05:35): (1) PE-2 — Thm 1.2 applies on `M̂` for a finitely generated `ℤ[Γ]`-module `M`,
+`ℚM = L` (J51-T2's objection is about `R̂` only), then pass to the inverse limit. I checked total irreducibility in one line (`M/N`
+finite length over a 1-dimensional Noetherian domain with finite residue fields) and named the risk: Thm 1.2 wants `Γ`-ergodicity,
+`µ` is only `U`-ergodic. (2) FR-1 — `U` acts transitively on quadrance fibres, so MR is a Schoenberg-type theorem: radial
+positive-definite functions on `R` with `E`-null spectral measure are `c·δ₀`. I added: `E`'s members are local spherical functions
+(a circle in `A` has `τ̂(r) = J₀(2πρ|r|_∞)`); the discipline is **character rigidity** (a `U`-invariant positive-definite function on
+`R` is a character of `R ⋊ U` restricted to `R`), and the J51 debt Bekka–Francini (Zbl 1518.22005) is now load-bearing.
+
+**Frame items sent:** the claim ladder (a "χ(ℚ(√47)²) = 5" headline would rest on SP-Cor and K0, one mind each → a blind SP-Cor check,
+or cap the headline at "MR(F) given PE-2 and EF_F"); EF_F's own prior art (5 citing works in OpenAlex; "Strongly independent matrices
+and rigidity of ×A-invariant measures on n-torus", 2023, and Huang 2017, Zbl 1402.37006, first).
+
+hunch: ef-transfers-modulo-archimedean — **re-scored after the full reading: about 45 %** (the Diophantine step is the product formula,
+which is global; risk (ii) is the one I cannot see through in my head).
+
+hunch: pe2-lands
+  claim: PE-2 (positive entropy for some `u` ⟹ `τ = a·Haar + τ′`, `τ′` of zero entropy for every `u`) lands in the crunch with a blind verifier
+  basis: derived (the planner's route; my irreducibility check)
+  falsifier: the `Γ`-ergodic decomposition of `µ_M` producing zero-entropy components that do not recombine, or Thm 1.2's hypotheses failing on `M̂`
+  registered: 2026-09-26
+  status: open — about 55 %
+
+### Would have searched here (stage 1)
+- None: one zbMATH query, one arXiv query and one OpenAlex citing-works query, all literature.
