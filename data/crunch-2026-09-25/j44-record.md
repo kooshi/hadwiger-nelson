@@ -1,0 +1,68 @@
+# J44 — the front-page pass for row 88's close, FS-67's close and G79 (record)
+
+*De Bruijn (Opus 5.5), 2026-09-25, crunch job J44, under `data/crunch-2026-09-25/briefs/J44-front-page-row88-FS67.md` (template
+`J24-front-page.md`) and `STANDING-RULES.md`. HEAD at launch: `fb5c224e`. Front-page files only; no job record, close record, plan body
+or Lean file is touched.*
+
+## Theorems this phase proved
+
+None — a front-page pass applies drafts; it proves nothing.
+
+## Would have searched here
+
+None — bookkeeping and editing only.
+
+## Stage 1 — SAVED (quotation check; gates at launch; the edit list)
+
+### 1.1 Quotation check (standing rule 5)
+
+| # | in the brief | source | result |
+|---|---|---|---|
+| Q1 | "13 exact `CLAUDE.md` edit pairs (net +2,246 bytes)" | `data/fs86r88/j41/claude_drafts.py` (13 pairs; run at launch: "net: +2246 bytes … RESULT: PASS", exit 0) | **agrees with the script**; the plan's heading §R-close 4.3 says "twelve edits" over a table numbered 1–13 — J41's miscount, cosmetic |
+| Q2 | "`LEDGER.md` rows 111–113 and 19 § B lines" | `plans/FS86-row88-rigidity.md` §R-close 4.1, 4.2; `data/fs86r88/j41/ledger-b-draft.md` (19 lines) | agrees |
+| Q3 | "15 `BIBLIOGRAPHY.md` rows and 2 corrections" | §R-close 4.4: 15 table rows (18 keys: two rows carry two and three keys), 2 corrections | agrees (rows, not keys) |
+| Q4 | "new stubs FS-97, FS-98 and FS-99, plus the re-aims of FS-84, FS-64 and FS-90, already written as files" | §R-close 4.7; the six files exist on disk | agrees |
+| Q5 | "`LEDGER.md` rows 114–115 and 20 § B lines" | `plans/FS67-tight-products.md` §R-close R.8a, R.8b (20 lines) | agrees |
+| Q6 | "`CLAUDE.md` drafts (+2,406 bytes, G72's eleventh count)" | R.8c; `data/fs67/j42/claude_md_drafts.py` at launch: "NET BYTES 2406 (budget 3000) -> within", exit 0 | agrees |
+| Q7 | "Its verdict is 'Paid (theorem and no-go)'. Its bearing on χ ≥ 6 is none." | R.5: "**Paid (theorem and no-go)**"; "**Bearing on χ ≥ 6: none.**" | verbatim |
+| Q8 | Kooshi's words, *"This is an interesting grokking too: walls often show up as 'the (impossible?) counter-example invariant' and we have had a successful breakthrough when looking for the 'example invariant'."* | `plans/CRUNCH-2026-09-25-post-close-inventory.md` row 25 | verbatim |
+| Q9 | instances "row 96, T-C(A) (row 113 or whichever row carries it), G22, G48/G31, G57"; "G71/G74's slope, G75's eigen-equation, G76's locality, row 95" | inventory row 25 | verbatim; T-C(A) is row 113 (§R-close 4.1) |
+| Q10 | "FS67-CL's grade is 'hand, one mind (J40) + a one-step check (J42)'" | owner ruling (brief); R.8b's draft reads "hand (one mind, one-step check)" | **the ruling overrides the draft**; applied in the § B line |
+| Q11 | "'B(n) and A(n) are false for n ≥ 4' is a composition of print, not ours, and not a `CLOSED-QUESTIONS.md` entry" | R.3 item 2 (owner's ruling, same words in substance); J40 Stage 5 proposed it as a candidate | agrees; `CLOSED-QUESTIONS.md` not touched |
+| Q12 | "It stood at 286,449 at J24's close" | `wc -c CLAUDE.md` at launch: 286,449 | agrees |
+
+### 1.2 Gates at launch (HEAD `fb5c224e`; each exit read directly)
+
+| gate | exit | verdict |
+|---|---|---|
+| `tools/claude_md_fact_audit.py --base fb5c224e` | 0 | AUDIT PASSED (0 failures); one gate-count transition in force (`1034 → 1130`, M2's close) |
+| `--dupes` | 0 | 11 repeated runs, 729 bytes |
+| `tools/bib_audit.py` | 1 | FAIL (39): 5 arXiv ids and 23 keys cited but undefined — all from the two closes' plans; 28 unlogged prior art |
+| `tools/fs71_ledger_b_check.py --strict` | 1 | FAIL (39): the 19 `R88-*` and 20 `FS67-*` entries have no § B row — expected |
+| `tools/check_architecture.py` | 0 | PASS |
+
+### 1.3 The edit list, file by file
+
+**`LEDGER.md`** — rows 111–113 (§R-close 4.1, verbatim); rows 114–115 (R.8a, verbatim); § B: 19 `R88-*` lines
+(`data/fs86r88/j41/ledger-b-draft.md`) and 20 `FS67-*` lines (R.8b; FS67-CL's grade per the owner's ruling); the header's crunch
+paragraph gains rows 111–113 and 114–115; row 88 is corrected by row 111 (V2's finite-index step: R88-J28V-7) — row 88 gets a pointer
+only if its text claims Lemma R is needed (checked in stage 2); row 110's prior art is corrected by row 113 (C14.2 (c) partly in print) —
+same check.
+
+**`CLAUDE.md`** — row 88's 13 pairs (script); FS-67's 9 (script; the G72 eleventh after the tenth); G79 minted (brief item 3); the
+"Last updated" line (row 88 and FS-67 closed; the crunch's M1–M3 line kept); "Open milestones" (row 88's question and FS-67 CLOSED;
+FS-84 open, S1 and S1V done, next stages post-ban); "Rows 1–110" → "Rows 1–115"; § Paths forward: the re-rank note, FS-67's row (R.8c),
+FS-97/98/99 rows mirroring `plans/FRONTIER-STUBS.md`; the FS-64 row missing its bearing cell and the FS-92 row carrying FS-64's bearing
+(a J24 table defect found here) repaired.
+
+**`plans/FRONTIER-STUBS.md`** — the open-milestones paragraph; the re-rank note; FS-67's row (R.8e); FS-97 beside FS-64, FS-98 beside
+FS-76, FS-99 low (§R-close 4.5); FS-84, FS-64, FS-90 rows re-aimed per their stubs' opening paragraphs; FS-67 stub already re-aimed.
+
+**`BIBLIOGRAPHY.md`** — row 88: the 15 rows and 2 corrections of §R-close 4.4; FS-67: J40's proposals (`plans/FS67-PA-close.md` Stage 5)
+and R.8d's additions; `bib_audit.py` must pass (the 5 arXiv ids and 23 keys above).
+
+**`plans/CRUNCH-2026-09-25-INDEX.md`** — address-only rows for row 88's close, FS-67's close and FS-84's S1/S1V.
+
+**`plans/CRUNCH-2026-09-25-post-close-inventory.md`** — ticks for front-page rows (3, 4, 7–11, 17, 25, 27, 28 examined; see stage 5).
+
+**Not touched:** `CLOSED-QUESTIONS.md` (neither close drafted an entry; the owner ruled the `B(n)`/`A(n)` composition out).
