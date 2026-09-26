@@ -135,3 +135,12 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0;
   `fs71_ledger_b_check.py --strict` **RESULT: PASS**, exit 0. ALLOW lines: none.
 - Bytes: `CLAUDE.md` 286,556 → **284,055** (−2,501; total −12,358); `LEDGER.md` 357,110 → 359,928.
+
+## Stage 2, batch 7 — SAVED (triple-told census; item 2; the theory paragraph's retold G48 clause)
+
+- `L21cc6506`'s 4,490-orbit census was told three times (G21, G68, G73); G21 keeps it (its method home), G68 and G73 point.
+- Item 2: the spectral refusal from 59 and the certificate at 83 point at G44/G56 and row 68 instead of restating their mechanism.
+- The theory paragraph's "where no residue plane is five-colourable" (a `--dupes` run with G48) now points at G48.
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **7**, exit 0; `bib_audit.py` exit 0.
+  ALLOW lines: none.
+- Bytes: 284,055 → **283,826** (−229; total −12,587).

@@ -151,10 +151,9 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 **What the hunt has established** (the reasons are in § Grokkings):
 1. **The 4/5 wall is 2-adic.** A unit-distance graph forces a fifth colour only if its coordinates break the
    2-adic wall (G1, G35).
-2. **The field sieve.** For F ⊇ K: 6-open ⟺ the 2-adic wall is broken and 11 is inert. Every Γ_p with p ≡ 3 (mod 4) from 59 up
-   refuses five colours by its spectrum, and Γ₈₃ refuses six by an exact certificate (row 68). Every field the descent ever used is
-   5-sealed (G43, G44). The wall is broken exactly when 1/2 lies in the unit-vector ring, and over K that is sufficient for five,
-   given M56's 8/3 forcer (G55).
+2. **The field sieve.** For F ⊇ K: 6-open ⟺ the 2-adic wall is broken and 11 is inert. The finite planes refuse five from 59 up and
+   six at 83 (row 68), and every field the descent ever used is 5-sealed (G43, G44). The wall is broken exactly when 1/2 lies in the
+   unit-vector ring, and over K that is sufficient for five, given M56's 8/3 forcer (G55).
 3. **The design target has no instance** (G48, row 66): a pair forced equal at five colours over a 5-sealed field, spindled into a
    6-open field, is refused **by theorem** over every 5-sealed multiquadratic F ⊇ K — Γ₁₁'s fan gap frees every pair above it. FS-6 is
    dead; a 6-forcer's compulsions all live in 6-open fields. The frame that replaces it is **tight or slack** (G54, row 87).
@@ -351,8 +350,8 @@ sealed its fabric. That mechanism now has no instance: the sealing plane at 11 h
 pair above it (row 66), so over every 5-sealed field the five-colour compulsion structure at arity 2 is trivial —
 forced pairs are single vertices, virtual edges unit edges — and a residue plane forces pairs only where it is
 Hoffman-tight or pulls back from a tight quotient (row 87), which at five colours no sealing plane does (G54; at 2 with four colours the plane is tight and the
-tower forces from level 5, row 67). So a 6-forcer's every compulsion lives in a 6-open field, where no residue
-plane is five-colourable and the residue method is silent; what it can still name is a 5-colourable, 5-tight
+tower forces from level 5, row 67). So a 6-forcer's every compulsion lives in a 6-open field (G48), where the
+residue method is silent; what it can still name is a 5-colourable, 5-tight
 quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
 
 * **G1 — The field wall. [kernel]** The Moser twist is a seam-group word (ρσ² = −1), the seam group's
@@ -1290,7 +1289,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   four-colouring that carries a four-colour forced pair — which would refute the reduction's being a homomorphism, i.e. an
   incomplete `U`, never row 66.* **A gap is sufficient for looseness, not necessary** (FS-73, row 78): the rank-6 L3 is gap-free at
   every period and still loose — one period-2 colouring's Kempe period group (the translations fixing every Kempe component) is 0 —
-  so finitely many periodic colourings whose Kempe period groups meet in 0 make a lattice loose, a gap being the case of an isolated component — sufficient, not necessary: `L21cc6506` is loose through a full-dimensional `Θ₄` cell, infinitely many periodic colourings, while all 4,490 orbits of one period have full-rank Kempe groups (row 81; whether finitely many already meet in 0 there is open). *Where every colouring is gap-free, compute the Kempe period groups, and the `Θ_k` cells (G73), before calling a lattice rigid.*
+  so finitely many periodic colourings whose Kempe period groups meet in 0 make a lattice loose, a gap being the case of an isolated component — sufficient, not necessary: `L21cc6506` is loose through a full-dimensional `Θ₄` cell, infinitely many periodic colourings (row 81; G21; whether finitely many already meet in 0 there is open). *Where every colouring is gap-free, compute the Kempe period groups, and the `Θ_k` cells (G73), before calling a lattice rigid.*
 * **G69 — Rigidity is arithmetic, decided on the quotient, and over ℚ(√3,√5) it pulls apart from density. [hand + tools; FS-70
   phases 1c–1e; one prediction of the owner's lost on the way]** The chain route (G55) needs a four-colourable lattice with a
   *forced* pair — a rigid colouring space — and rigidity is decided before any ball is built. **Periodic colourings are residue
@@ -1403,7 +1402,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (cocycles reading windows of radius ≥ 2, `[CGHO2025coh]` Thm 5.8's route) or structure-derived (group ring, counting on a base
   pattern). **On de Grey's lattice** (rows 85, 87) radius-1 averaging cannot lift `120Λ` to `8Λ`; the
   proof that does is structure-derived (G75). **What survives, colour-generically, is a looseness instrument:** a full-dimensional cell of `Θ_k` gives `P = F = 0` at `k`
-  colours, which is how `L21cc6506` was shown loose after 4,490 Kempe-rigid orbits of one period had looked rigid (row 81). On field planes in FS-86's class S2 the measurable-window format and finite-type character colourings are closed at four colours (rows 91–92). *Reading, with its test (Poros): arithmetic cannot enter an averaged certificate as a residue label — the product of an invariant measure with
+  colours, as at `L21cc6506` (row 81; G21's one-period census). On field planes in FS-86's class S2 the measurable-window format and finite-type character colourings are closed at four colours (rows 91–92). *Reading, with its test (Poros): arithmetic cannot enter an averaged certificate as a residue label — the product of an invariant measure with
   Haar measure on the 𝔭-adic odometer is always a consistent joint. Killing test: a residue-labelled window LP that refutes where the
   same window's unlabelled one does not.* *Do: when a four-colour certificate is wanted on a lattice graph, build no cell-local
   topological invariant — an edge height, a loop winding, a face flux or a coindex bound is empty or blind by theorem — and price a
