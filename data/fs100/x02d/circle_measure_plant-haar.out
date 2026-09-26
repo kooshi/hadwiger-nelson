@@ -1,0 +1,4 @@
+nu-hat(1) = 0
+not Haar (|nu-hat(1)| > 0.1): FAIL
+Cesaro means of |nu-hat(j)|^2 at N = 10, 100, 1000: ['0.0', '0.0', '0.0']
+no atoms (mean -> 0): FAIL

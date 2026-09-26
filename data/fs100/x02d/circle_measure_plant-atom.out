@@ -1,0 +1,4 @@
+nu-hat(1) = 0.61013845426996723113844082536
+not Haar (|nu-hat(1)| > 0.1): ok
+Cesaro means of |nu-hat(j)|^2 at N = 10, 100, 1000: ['0.309665', '0.271513', '0.257043']
+no atoms (mean -> 0): FAIL
