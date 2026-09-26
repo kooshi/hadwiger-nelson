@@ -433,3 +433,95 @@ aside, G76) — **not** the zero-entropy measure problem. Its risk, read: that a
 ### Would have searched here (stage 3)
 
 - None: every query was a literature query (zbMATH, arXiv, OpenAlex).
+
+## Stage 4 — SAVED: §IQ, §S, §P, §M (left), §X, and the briefs
+
+### §IQ (WORKFLOW 3.3)
+
+1. **Existence form.** Is there a four-colouring of ℚ(√47)'s plane — and (§1.4) of ℚ(√143)'s, ℚ(√311)'s, ℚ(√335)'s?
+2. **Structural form.** EI-2, about every solution: *does every translation-invariant random four-colouring of the plane over a real number
+   field have a proper factor colouring continuous in probability at finitely many places?* Stripped of the colouring, its shadow is MR
+   (every `U`-invariant `E`-null finite positive measure on `R̂` is Haar). **This milestone's rung of it** is layer 1: *does every pure-point
+   (Kronecker) four-colouring `x ↦ W(Θ(x) + t)` select onto its (T + A)-factor?* — Kronecker selection.
+3. **The invariant it forces.** Layer 1: **the orbit closure of `Θ` under the diagonal `U`-action on `R̂ⁿ`** (a closed invariant set, a
+   topological self-joining) — named, and decisive through KS-sat (§PA.3). Layer 2: the carrier `τ = σ_μ|_{R̂∖E}`; the deciding property is
+   **entropy** — positive entropy is handled in print modulo PE-lim (EL2021 Thm 1.3); **for zero entropy none is known**, and finding a
+   property of every four-colouring beyond its pair correlations remains the milestone's open core (G79: an example invariant).
+4. **Route.** Derivation only; no search answers EI-2, MR or Kronecker selection.
+5. **Open instances it would decide.** Kronecker selection with T-C(A) at `S = ∅`: FS-64's adelic windows at four colours over **every field
+   in T-C(A)'s class** — among real quadratic fields exactly `d ≡ 47, 143, 167 (mod 168)` (J51-T1): ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335),
+   ℚ(√167), … MR: `χ = 5` at ℚ(√47) (SP-Cor), and at ℚ(√143), ℚ(√311), ℚ(√335) **if SP-Cor transfers** (claim K0); row 88 at ℚ(√59),
+   ℚ(√83), ℚ(√131) given T-B1; `χ(ℚ(√167)²) ≥ 5`.
+
+### §S — the stages as jobs
+
+**Head: the stage-4 / stage-6 swap is NOT made.** Reason (§PA.3): Kronecker selection's missing input can be posed as the closed-set
+statement KS-sat, whose failure mode is the closed-set theory of a non-irreducible action (EL2021: "much less understood"), not the
+zero-entropy measure problem; and KS-sat ⟹ Kronecker selection needs no measure (J51-T3). Confidence medium: it changes if J51D finds
+KS-sat false while Kronecker selection is true — then the input is measure-theoretic after all and stage 6 takes the next slot.
+
+**The precise reading of the statement** (a domain-modeling observation made before §M; J51D confirms or corrects it at its stage 1): "the
+closure of the image of `Θ`'s `(T + A(R_F))`-part" is read as the **factor** `K′ = K / K₀` of `K = cl Θ(R)`, where `K̂′ = {m ∈ ℤⁿ : m·Θ ∈ T +
+A(R_F)}` and `K₀ = ann(K̂′)` — the Kronecker factor spanned by the (T + A) characters among the combinations of `Θ`'s coordinates;
+`K′` is a closed subgroup of `T^{n′}` through any basis of `K̂′`. The literal "subgroup of `Tⁿ`" is ill-defined when no coordinate
+decomposition exists (e.g. `Θ = (θ_E, θ_E + ψ)`).
+
+**The claims (fixed now; J51V's list quotes them verbatim):**
+
+| id | claim, verbatim | kind |
+|---|---|---|
+| KS-1 | "Let `F ⊆ ℝ` be a real number field, `R = ℤ[U_F]`, `n ≥ 1`, `Θ : R → Tⁿ` a homomorphism, `K = cl Θ(R)`, `K̂′ = {m ∈ ℤⁿ : m·Θ ∈ T + A(R_F)}`, `K₀ = ann_K(K̂′)`, `π : K → K′ = K/K₀`, and `W : K → {0,1,2,3}` measurable with `W(t) ≠ W(t + s)` for Haar-almost every `t ∈ K` and every `s ∈ cl Θ(U)`. Then there is a measurable `W′ : K′ → {0,1,2,3}` with `W′(t′) ≠ W′(t′ + s′)` for almost every `t′` and every `s′ ∈ cl π(Θ(U))`." (Kronecker selection, J37 §4.5 R2, in the reading above) | TRUE / FALSE / GAP |
+| KS-2 | "If, for every `s ∈ cl Θ(U)`, `s + K₀ ⊆ cl Θ(U)` (KS-sat), then the conclusion of KS-1 holds, with `W′(π(t))` any measurable selection from the colours `W` takes on a positive-measure part of `t + K₀`." | TRUE / FALSE / GAP |
+| KS-3 | "KS-sat holds for every real number field `F`, every `n` and every homomorphism `Θ : R → Tⁿ`." | TRUE / FALSE / GAP |
+| KS-4 | "Over ℚ(√11), with `Θ = (θ_{C9}, θ₁)`, `θ_{C9}` row 94's character `(2x + 3y)/7` plus an archimedean term below `1/28`, `θ₁ ∉ E`, and `W` reading only the first coordinate as `⌊4·⌋`, KS-1's conclusion holds with `W′` the same window." (the stub's control) | TRUE / FALSE |
+| KS-5 | "Over ℚ(√11), with `Θ = (θ_{C9}, θ_{C9} + θ₁)`, `θ₁ ∉ E`, and `W(t₁, t₂) = ⌊4t₁⌋`, KS-1's conclusion holds, and `K′` is the image of `θ_{C9}`." (a rank-two control of the shape T-J37-4 names) | TRUE / FALSE |
+| KS-C | "Over ℚ(√47), KS-1 together with T-C(A) at `S = ∅` implies: no four-colouring of ℚ(√47)'s plane has the form `x ↦ W(Θ(x) + t)` with `Θ : R → Tⁿ` a homomorphism, `W` measurable and the colouring proper for almost every `t`." | TRUE / FALSE / GAP |
+| K0 | "J45's A⁺ and SP-Cor hold, with the same proofs, over every real quadratic field in T-C(A)'s class (so over ℚ(√143), ℚ(√311), ℚ(√335)), given T-C(A) there at `S = ∅`." | TRUE / GAP at a named step |
+
+**Jobs.**
+
+| job | what | size | runs |
+|---|---|---|---|
+| **J51D** | the derivation of KS-1 to KS-5, KS-C, K0 (brief `data/crunch-2026-09-25/briefs/J51D-FS100-kronecker-derivation.md`); its stage 1 also runs §M's two skills on KS-1 | ~2 h, 300k | now, beside J51V |
+| **J51V** | blind verifier of the same list (brief `…/J51V-FS100-kronecker-verifier.md`) | ~2 h, 300k | now, beside J51D |
+| stage 5 (next, not briefed) | the MR reading room proper: EL2021 §§2–4 and §7 (the entropy-ratio theorem), Z. Wang 2012, Lindenstrauss–Wang 2012, Bekka–Francini 2022, Rudolph and Johnson at their proofs; then PE-lim as a derivation | ~2 h reading + a derivation job | after J51D/J51V |
+| stage 6 (fallback) | EI-2 over ℚ(√11), J45-SI-5's right side | derivation | only if KS-3 turns out measure-theoretic |
+| P1 (from 2026-10-01) | a triangle-free finite `H ⊂ ℚ(√47)²` with `α(H) < \|H\|/4` | construction; price first | post-ban |
+
+### §P — registered before J51D or J51V runs
+
+| id | statement | prior | uninformative outcome, and reachability (G21) | killing test |
+|---|---|---|---|---|
+| X-MR | MR(F) holds for every real quadratic `F` (uniform) | **0.7** that it is true (the Furstenberg analogue is believed); **0.02** that this milestone decides it | "open at the zero-entropy half" — reachable and expected (0.95); a proof is not reachable in-ban on §PA's reading, so X-MR is a belief, not a prediction this milestone can score | an SP witness over any real field |
+| X-KS | KS-1 TRUE | **0.50** TRUE, 0.15 FALSE, 0.35 GAP (at KS-3's self-joining step) — up from J37's 0.4 by J51-T3 | GAP at KS-3 — reachable and informative (it names the closed-set step) | a proper `W` on some `K` with no proper `W′` on `K′` |
+| P-sat | KS-2 TRUE | 0.85 | — | a proper `W` with KS-sat and no proper selection |
+| P-sat1 | KS-3 at `n = 1`: for `θ ∉ T + A`, `cl θ(U)` is the whole circle | 0.70 | GAP at a non-dense `U`-value set of a `Fin_S` character | a character off `T + A` whose `U`-values avoid an interval |
+| P-K0 | K0 TRUE | 0.75 | GAP at a step of A⁺ that uses ℚ(√47)'s own arithmetic | such a step, named |
+| P-EL | EL2021 Thm 1.3's hypothesis holds for generic `Γ ⊂ U` on `R̂` | 0.80 | — | a virtually cyclic solenoid factor |
+| P-ent | the four-colouring constraint is shown to force positive entropy in this milestone | 0.05 | "open" — reachable, expected | — |
+| X-R1 (carried) | FS-97's R1 closes by a limit argument | 0.3 | — | **written now:** a `U`-invariant `E`-null `τ` that is a weak* limit of measures carried by `Fin_S` and is not Haar |
+
+### §M — the modeling passes: **LEFT**
+
+Not run: the context budget went to §G, §PA and the briefs, as the brief's order allows ("say that §M is left"). **Proposed:** J51D's stage 1
+invokes `debruijn-domain-modeling` and `debruijn-obligation-modeling` freshly on KS-1 (its brief says so); the one pre-pass observation, the
+factor reading of "the (T + A)-part", is in §S above.
+
+### §X — would have searched here
+
+- Stage 1: none (a complete enumeration fixed by a derivation, logged).
+- Stage 3: none (literature queries only).
+- Stage 4: a numerical look at `cl θ(U)` for a sample character of ℚ(√11) off `E` (P-sat1) — **not done**; registered as a prediction
+  instead, for J51D to derive.
+
+### Proposed edits for the front-page lane (not made here)
+
+- `plans/STUB-measure-rigidity-three-fields.md` §5 item 5: "not checked here" → J51-T1 (in T-C(A)'s class: exactly `d ≡ 47, 143, 167 (mod
+  168)`); §2.3's "probably includes ℚ(√167) (not checked)" → checked, yes.
+- `BIBLIOGRAPHY.md`: EL2021 (arXiv 2101.11120v1; §1 read), EL2003 (summary only), Rudolph 1990, Johnson 1992, Host 1995 (reviews only),
+  Z. Wang 2012, Lindenstrauss–Wang 2012 (summary/review only), Bekka–Francini 2022 (debt); EL2021's copy to `~/source/library/`.
+- J43's facts file: tag ℚ(√143), ℚ(√311), ℚ(√335) with row 113's class form (J51-T1).
+
+### Theorems this phase proved
+
+- None new (J51-T1 to T3 are in stages 1 and 3).
