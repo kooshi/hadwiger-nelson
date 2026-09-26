@@ -88,3 +88,30 @@ Gates at this stage: fact audit `--base efa56d37` exit 0 PASS; `--dupes` 10 runs
 ### Would have searched here (Stage 3)
 
 - None.
+
+## Stage 4 — SAVED (`CLOSED-QUESTIONS.md` to current state; final gates)
+
+`CLOSED-QUESTIONS.md` (owner's note 1), each rewritten to current state with grade [hand] and novelty "not found in print":
+- §1.7: title ("fourteen fields answered" → "four for the whole family, five at `L = 5`"); the Moorhouse quotation's gloss (the bracket →
+  the value, row 121); "a bracket, not a value" → the value `χ(ℚ(√47)²) = 5` (rows 120–121), with FS-66's residue fact kept as "could not
+  close the bracket from above"; "the value five is not claimed" → given MR there is no four-colouring (row 121), the conjecture's 5 met;
+  "at least four for fourteen fields, and no real quadratic field is known to need five … not proved; 26 of the 40 fields are open" → four
+  for the whole family (row 82, two derivations; row 83) and five at every `L = 5` real quadratic field (rows 121, 123); "ℚ(√167) … still at a
+  proven three" → four (row 79; kernel row 119), five through MR (row 123), six reduced (row 125); the brackets row of the field table marked
+  closed at five; the Status line. The section's "by rule" pointer (nothing recorded as closed until `[Johnson2000]`, `[Johnson2006]` are
+  read) is kept, and nothing is moved to "closed".
+- §2.6 "Our answer": the `L(F) = 5` clause (row 123, [hand], through MR; not found in print, X24R); "Not kernel-checked" → except row 123's
+  composition, in the kernel over named hypotheses (row 127).
+- §3: "all have degree 8" → the degree-8 fields plus ℚ(√3,√5) (degree 4) and the `L = 5` real quadratic fields (degree 2), ℚ(√47) the
+  least `d`; the stale bracket sentence folded in; X30F's "ℚ(√47) is the first real quadratic field needing five" → "the real quadratic field
+  of least `d` needing five … not found in print" (the "never 'first'" rule); Soifer 55.1 → **answered in its existence half only,
+  non-constructively** (de Bruijn–Erdős over a triangle-free field; "construct" and 55.2 open; FS-84 carries the explicit graph).
+
+Final gates (exit statuses read directly): fact audit `--base efa56d37` exit 0, AUDIT PASSED (reviewed ALLOWs added by X31C: `1–125`,
+`X27D/X27V`, `7279`, `declarations=7279`, `309`, `refutations-skipped=309`, `1193`, `1209`, each with its reason in the tool; GATE_CHANGES
+`(1193, 5) → (1236, 5)`); `--dupes` 10 runs / 628 B (launch 11; the three left are table structure, Stage 3); `fs71 --strict` exit 0 PASS;
+`bib_audit` exit 0; `check_architecture` exit 0 PASS. `CLAUDE.md` 296,094 bytes.
+
+### Would have searched here (Stage 4)
+
+- None.

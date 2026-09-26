@@ -253,7 +253,7 @@ record, 0); none addresses a field plane.
 
 ---
 
-### 1.7 The chromatic number of the plane over real quadratic fields — fourteen fields answered
+### 1.7 The chromatic number of the plane over real quadratic fields — four for the whole family, five at `L = 5`
 
 > **Benda–Perles, Open Problem 11.6** (`[Soifer2024]` ch. 11): *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic
 > extension of `ℚ²`."* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
@@ -262,7 +262,7 @@ record, 0); none addresses a field plane.
 > **And for quadratic fields by name** — `[Moorhouse2010slides]` (found 2026-09-19, FS-61's gate; read in the PDF's text layer): *"We are
 > especially interested in how much the chromatic number can grow for quadratic extensions. … What can we say about `χ(K²)` when
 > `K = ℚ(√d)`, `d ≥ 2` a squarefree integer? … If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`. **What about `χ(ℚ(√47)²)`?**"* The
-> bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` below is a partial answer to that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
+> value `χ(ℚ(√47)²) = 5` below (row 121, [hand]) answers that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
 > answer to the general one as far as finite witnesses reach.
 
 > **Pointer (FS-81's close, 2026-09-24) — this section is NOT rewritten as answered, by rule:** FS-81 certified the census's remaining 25
@@ -280,7 +280,7 @@ certified a finite graph forcing four colours over **fourteen** of the forty:
 | | fields | the matching upper bound, all prior art |
 |---|---|---|
 | **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **239**, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i)); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
-| **`4 ≤ χ(ℚ(√d)²) ≤ 5`** — brackets | 47, **143**, **311**, **335** | the residue plane at 11 |
+| **`4 ≤ χ(ℚ(√d)²) ≤ 5`** — FS-61's brackets, each closed at five by FS-100 stage 5 (rows 121, 123, [hand], through MR) | 47, **143**, **311**, **335** | the residue plane at 11 |
 
 *(Bold: first proved by FS-61's census. **`d = 239` landed last**, from a 2,360-point witness on a denser ball of its own
 refusing lattice, asked under tier `1u` after two extraction attempts on a sparser ball of the same lattice had been stopped —
@@ -296,17 +296,18 @@ Certificates: `data/fs58/witness-*/` (FS-58: 11, 23, 47, 71, 95, 191) and `data/
 ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
 `plans/FS61-quadratic-census.md` §R; `data/fs61/census.md`.
 
-**What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a bracket, not a value. **And the residue method cannot close that bracket at any depth** (FS-66, §1.8): every conjugation-fixed split prime of
+**What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a value: `χ(ℚ(√47)²) = 5` (FS-100 stage 5, `LEDGER.md` rows 120–121, [hand], through MR; not found in print, its gate below). Before it, **the residue method could not close the bracket `4 ≤ χ ≤ 5` from above at any depth** (FS-66, §1.8): every conjugation-fixed split prime of
 `ℚ(√47)` is a `p ≡ 3 (mod 4)` with 47 a square — 11, 19, 23, 31, 43, … (not 3, not 7; the dyadic place gives nothing, `47 ≡ 7 (mod 8)`) —
 and **no level of any of those towers `UD(ℤ/p^k, 2)` is four-colourable**: at 11 and 19 by the exact all-levels certificates, and at
 every `p ≥ 23` by the ratio bound, whose chromatic floor exceeds 4 there (4.0148 at 23, 4.000044 at 31, 4.68 at 43, 4.74 at 47, and Weil's bound from there up)
-and is the same at every level of the tower. So if `χ(ℚ(√47)²) = 4`, it is by a colouring local at no prime at any depth — **and, since
-FS-89, by no character colouring either** (`LEDGER.md` row 96: `Θ₄(R_{ℚ(√47)}) = ∅`, hand; the value five is not claimed); the
-local–global conjecture, read with every level allowed, predicts 5. His general question — *how much
-can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for fourteen
-fields, and no real quadratic field is known to need five.** The census's candidate class theorem (*every squarefree `d ≡ 11 (mod 12)`
-needs four*) is **not proved**; 26 of the 40 fields are open, each with the kind of null recorded. And `ℚ(√167)`, where this project's
-local–global conjecture predicts six or more, is still at a proven three (FS-59).
+and is the same at every level of the tower. So a four-colouring would have been local at no prime at any depth — **and, since
+FS-89, no character colouring** (`LEDGER.md` row 96: `Θ₄(R_{ℚ(√47)}) = ∅`, hand); given MR there is none (row 121), and the
+local–global conjecture's prediction of 5, read with every level allowed, is met. His general question — *how much
+can the chromatic number grow for quadratic extensions* — is answered through five: **four for every squarefree `d ≡ 11 (mod 12)`** (the census's
+candidate class theorem, proved by hand with two derivations, row 82; all forty below 500 certified, row 83) **and exactly five at every real
+quadratic field with `L = 5`** — ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) among them (rows 121, 123, [hand], through MR; not found in print). And
+`ℚ(√167)`, where this project's local–global conjecture predicts six or more, is at a proven four (row 79; in the kernel, row 119) and five
+through MR (row 123); six there reduces to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`, which nothing held gives (row 125).
 
 **Prior art that constrains the claim.** The upper bounds and the odd cycles are theirs — and the lower bound 3 is older than this
 file said: **`[Fischer1990]` Thm 8 gives `χ ≥ 3` for every `N ≡ 3 (mod 4)`, and the sentence after his Thm 9 states `χ(ℚ(√N)²) = 3`
@@ -325,7 +326,8 @@ for a contrary claim:** `[Johnson2006]` (the compendium, which by `[Johnson2010]
 **The value, and its prior-art gate** (FS-100 stage 5, 2026-09-26; `LEDGER.md` rows 121, 123). *"Prior-art gate for the value (X24R, 2026-09-26, `plans/FS100-X24R-prior-art.md` §2.1): no printed value of `χ(ℚ(√47)²)` and no printed five-colour lower bound for any real field without √3 were found in zbMATH (author listings of Moorhouse, Soifer, Exoo, Ismailescu, Fischer, Johnson, Madore, Manturov, Zaks, Chilakamarri, Chow, Jungreis–Reid; abstract searches), arXiv, the Polymath16 threads (held text and the live eighteenth thread to 2026-09-24) or `[Soifer2024]` chs. 11 and 55; `[Johnson2000]` and `[Johnson2006]` remain unread."* Our value: `χ(ℚ(√47)²) = 5` (row 121), and `= 5` at ℚ(√143), ℚ(√311), ℚ(√335), every real quadratic `ℚ(√d)` with `L = 5` (row 123); `≥ 5` at ℚ(√167). By `[Moorhouse2010slides]`'s own criterion (*"If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`"*) these are the fields his slides left open, less the type-(B) ones (row 124). The section's rule stands: nothing recorded as closed until the two Johnson papers are read.
 
 **Status:** `ℚ(√11)`'s lower bound kernel-checked; the other twelve tools-certified (their kernel forms are FS-60); the upper bounds hand /
-prior art. Not written up. `ℚ(√167)`, where the local–global conjecture predicts at least six, is not answered (FS-59).
+prior art; the fives [hand], `χ(ℚ(√47)²) ≤ 5` in the kernel and its lower half there over named hypotheses (row 127). Not written up.
+`ℚ(√167)`'s six, the local–global conjecture's prediction, is not answered (FS-59; row 125).
 
 ---
 
@@ -499,14 +501,16 @@ on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-
 derivations): for every real number field `F`, `χ(F²) ≤ 3` iff `L(F) ≤ 3`, and `χ(F²) = L(F)` whenever `L(F) ≤ 4`; a non-bipartite real
 number field's plane is three-chromatic iff some prime of `F` above 3 has residue field `𝔽₃`. For **character colourings** at every `k`
 (row 100, the class theorem, at existence scope and given band rigidity at every band, row 98): the plane has a character `k`-colouring
-iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five) — the conjecture's
+iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **At `L(F) = 5`** (FS-100 stage 5, wave 3; `LEDGER.md` row 123,
+[hand], through MR, row 120): `χ(F²) ≥ min(L(F), 5)` for every real number field, so `χ(F²) = L(F)` whenever `L(F) ≤ 5` — the criterion's
+answer through five; not found in print (X24R). **Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five) — the conjecture's
 open range; that every character colouring is local at one place (proved at three colours and at HD1's fields only; FS-92); the general
 subfield of ℝ (S1 extends to every algebraic `F` and every purely transcendental extension of one, with `L(F)` read over all stable
 valuation rings, row 99). **Why a candidate, not fired:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
 `[Johnson2006]` — a status report and a compendium on exactly this question, both unread and waiting on Kooshi's fetch (`BIBLIOGRAPHY.md`
 § R.4); no zbMATH gate on "no mixing" in the literature's words was run. **Not ours:** the question (Fischer; Benda–Perles); the real
 quadratic and `√3 ∈ F` cases (row 82; G55, GPT Astra); the additive case (`[Fischer1990]` Thm 9, which row 99 generalises). **Not
-kernel-checked** (FS-75).
+kernel-checked** (FS-75), except row 123's composition, in the kernel over named hypotheses (row 127).
 
 **Recorded so that no one claims them** (J23p §C.4): `[Manners2015]` Remark 5.4(i)'s density question (*"We know of no reason why the
 result could not be strengthened to give `Y = Â`"*) is not answered here — row 98 proves values near 0, not density; Green's request for
@@ -525,19 +529,19 @@ here in band form on `R_{{p}}` (row 102).
   row 62). Best object here: 559 vertices, census-certified.
 - **The smallest field whose plane needs five colours.** `[ExooIsmailescu2019]`, right after the question of
   §1.1 row 5: *"More generally, what is the smallest subfield of E2 that requires 5 colors?"* `ℚ(√3,√11)` does
-  not (Theorem B). The fields known here to need exactly five — `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
-  `ℚ(√3,√11,√23)` (ledger rows 47, 52–53) — all have degree 8. Any field needing five must break the 2-adic
-  wall (`CLAUDE.md` G1, G35), which screens candidates by congruence. The smallest candidates examined are quadratic:
-  `4 ≤ χ(ℚ(√47)²) ≤ 5` (§1.7; the local–global conjecture predicts 5), and FS-81 screened ℚ(√47) at four colours without landing five
-  (`LEDGER.md` row 84; FS-84 carries it). **At FS-100 stage 5** (`LEDGER.md` rows 121, 123; [hand]; prior-art gate X24R, `plans/FS100-X24R-prior-art.md` §3.4, verbatim): *"a quadratic field needing five would be of the least degree possible (ℚ's plane is two-chromatic), so 'smallest' would be answered by degree; whether ℚ(√47) is the smallest *quadratic* one is a separate question (every squarefree `d < 47` has `χ(ℚ(√d)²) ≤ 4` by `[Moorhouse2010slides]`: 'If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`')."* With `χ(ℚ(√47)²) = 5` (row 121), ℚ(√47) is the first real quadratic field needing five.
+  not (Theorem B). The fields known here to need exactly five are `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
+  `ℚ(√3,√11,√23)` (ledger rows 47, 52–53; degree 8), and since FS-100 stage 5 ℚ(√3,√5) (degree 4) and every real quadratic field with
+  `L = 5`, ℚ(√47) the least `d` (degree 2; rows 121, 123, [hand], through MR). Any field needing five must break the 2-adic
+  wall (`CLAUDE.md` G1, G35), which screens candidates by congruence; FS-81 had screened ℚ(√47) at four colours without landing five
+  (`LEDGER.md` row 84). **At FS-100 stage 5** (`LEDGER.md` rows 121, 123; [hand]; prior-art gate X24R, `plans/FS100-X24R-prior-art.md` §3.4, verbatim): *"a quadratic field needing five would be of the least degree possible (ℚ's plane is two-chromatic), so 'smallest' would be answered by degree; whether ℚ(√47) is the smallest *quadratic* one is a separate question (every squarefree `d < 47` has `χ(ℚ(√d)²) ≤ 4` by `[Moorhouse2010slides]`: 'If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`')."* With `χ(ℚ(√47)²) = 5` (row 121, [hand]), ℚ(√47) is the real quadratic field of least `d` needing five, so the question is answered by degree and then by `d`; not found in print.
 - **A triangle-free 5-chromatic unit-distance graph, and one of the smallest order.** `[Soifer2024]` ch. 55, p. 699: **Open Problem
   55.1 (Soifer 2019)**, *"Construct a triangle-free 5-chromatic unit-distance graph"*, and **55.2**, one of the smallest order (found
   2026-09-24 by the algebra-week advisor, `plans/POROS-2026-09-24-algebra-week.md` §6.7; the text confirmed in the held PDF by the owner).
   Still open in the plane per the Polymath16 threads (Haugstrup, December 2025); de Grey found one only in ℝ³ (`[deGrey2026]`, 61
-  vertices) and Haugstrup's pseudo-edges give triangle-free forcing in ℝ⁴. **We are well placed and have not answered it:** a field
-  without √3 has no unit triangles (`CLAUDE.md` G57), so a certified `χ(ℚ(√47)²) = 5` — the local–global conjecture's prediction —
-  would answer 55.1, and with it `[ExooIsmailescu2019]`'s smallest-subfield question above and Moorhouse's `ℚ(√47)` question (§1.7).
-  FS-81 got four colours calibrated and ℚ(√47) screened, not five (`LEDGER.md` row 84); FS-84 carries it.
+  vertices) and Haugstrup's pseudo-edges give triangle-free forcing in ℝ⁴. **Answered in its existence half only, non-constructively** (FS-100 stage 5; `LEDGER.md` row 121, [hand], through MR):
+  a field without √3 has no unit triangles (`CLAUDE.md` G57), and `χ(ℚ(√47)²) = 5`, so by de Bruijn–Erdős some finite unit-distance graph
+  over ℚ(√47) is triangle-free and five-chromatic — but none is constructed, so 55.1's "construct" and 55.2 stay open. FS-84 (post-ban)
+  carries the explicit graph.
   **FS-85 located it exactly** (`LEDGER.md` row 86, `plans/FS85-derivation.md` FS85-dB4, two derivations): a finite triangle-free
   unit-distance graph with a four-colour forced pair exists **iff** 55.1 has an answer (a five-critical subgraph minus an edge; conversely
   `m ≥ 4` copies chained at generic angles and closed by one edge), so any triangle-free four-colour rigidity in the plane — a lattice
