@@ -250,3 +250,67 @@ dichotomy: **every `μ` over a type-(B) field is carried by Pull or strictly ant
 ### Would-have-searched-here log (stage 3)
 
 - None: both lemmas are two-line compositions of SI-3/SI-4 with T-C(A), T-C and D2-A.
+
+## Stage 4 — SAVED (R-U and SP)
+
+**Verdicts. R-U: TRUE** [hand], for every real number field, every finite `S`, and every finite (positive, signed or complex) `U`-invariant
+measure. **SP, "only if": TRUE** [hand; one line]. **SP, "if": TRUE** [hand] for finite positive measures (the standard reading, 1.2), and for
+signed or complex ones when "`τ(E) = 0`" is read as `|τ|(E) = 0`; under the literal value reading for signed measures the hypothesis is always
+met (below), so that reading would make SP's "if" assert the open existence question outright — it is not the claim's intended sense.
+
+### 4.1 R-U
+
+**Lemma R-U [hand].** Every finite `U`-invariant measure `ν` on `R̂` has `|ν|(E_S ∖ (T + A)) = 0` for every finite `S`; hence also
+`|ν|(E ∖ (T + A)) = 0`.
+*Proof.* `|ν|` is again invariant, so take `ν ≥ 0`. `E_S` is `U`-invariant, and by N1 (b) `ρ` is a `U`-equivariant Borel isomorphism
+`Ĝ′_S → E_S`; let `ν̃` be `ν|_{E_S}` pulled back, and `ν_S` its push-forward to the `S`-component `∏_{v∈S} L̂_v ≅ ∏_{v∈S} L_v`, on which `u` acts
+by multiplication by `u_v` (the trace pairing). For `v ∈ S`, `v` split, write `L_v = L_𝔓 × L_𝔓̄ ≅ F_v × F_v` and take `z` with `(z) = 𝔓^h`,
+`h` the class number of `L`, and `u = z/z̄ ∈ U` (`N_{L/F}(u) = 1`). At `v`, `u` acts as `(ξ₁, ξ₂) ↦ (tξ₁, t⁻¹ξ₂)` with `|t|_v = |z|_𝔓 < 1`
+(`z̄` generates `𝔓̄^h` and is a unit at `𝔓 ≠ 𝔓̄`); at every other place of `S` it acts by units. The sets
+`uⁿ{ξ : 1 ≤ |ξ₁|_v < |t|_v⁻¹}`, `n ∈ ℤ`, are disjoint, of equal `ν_S`-measure, with union `{ξ₁ ≠ 0}`; finiteness forces
+`ν_S{ξ₁ ≠ 0} = 0`, and `u⁻¹` does the same for `ξ₂`. Over all `v ∈ S`, `ν_S` is a point mass at 0, so `ν̃` is carried by `{ψ_S = 1}`, whose
+image is `T + A` (N1 (a)); by injectivity `ν(E_S ∖ (T + A)) = 0`. `E` is a countable union. ∎
+*Against the sketch.* The Poros record's F4 proof is this one; it cites Lusin–Souslin for "a Borel copy of `Ĝ_S`", which needs `R` dense in
+`G_S` (J28D's C1: strong approximation and Lemma R (a)). With `G′_S`, N1 (b) supplies density with no Lemma R, so R-U holds for every real
+number field.
+
+### 4.2 SP
+
+**Lemma SP-only-if [hand].** If a finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`, then `τ` itself is a `U`-invariant
+finite measure with `τ(E) = 0` that is not a multiple of Haar: `∫ χ(1) dHaar = 0` because `1 ≠ 0` in `R`. ∎
+
+**Lemma SP-if [hand].** If some finite positive `U`-invariant `ν` with `ν(E) = 0` is not a multiple of Haar, then some finite positive
+`U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`.
+*Proof.* (1) By Fourier uniqueness on the compact `R̂`, `ν̂(r₀) = ∫ χ(r₀) dν ≠ 0` for some `r₀ ≠ 0`; `−1 ∈ U` gives `ν̂(r₀) = ν̂(−r₀) = conj ν̂(r₀)`,
+so it is real. (2) Let `m(χ) = χ(r₀ ·)`, the dual of multiplication by `r₀` on the ring `R`, and `τ′ = m_*ν`: positive, `U`-invariant (`m`
+commutes with the action), `τ̂′(1) = ν̂(r₀)`. **Off `E`:** if `χ(r₀·) ∈ E_S` then `χ ∈ E_S`. Indeed `r₀R ⊇ MR` for a non-zero integer `M`
+(J28V-7), so `r₀R` is open in `τ′_S` (it contains the profinitely open `MR`); on it `χ(y) = χ(r₀·)(y/r₀)`, and `y ↦ y/r₀` is `τ′_S`-continuous
+`r₀R → R` (continuous at the archimedean and `S`-places; and `y ∈ MN′R ⟹ y/r₀ ∈ N′R`, because `MR ⊆ r₀R`); a character continuous on an open
+subgroup is continuous. So `m⁻¹(E) ⊆ E` and `τ′(E) ≤ ν(E) = 0`. If `ν̂(r₀) < 0`, take `τ = τ′`. (3) If `ν̂(r₀) > 0`, fix a real place of `F`
+(one exists, `F ⊆ ℝ`) and the complex place `w₀` of `L` above it; let `λ` be the uniform probability on the archimedean characters
+`x ↦ exp(2πi Re(ξ x_{w₀}))`, `|ξ| = r` (other archimedean components 0), with `2πr = j₁,₁ ≈ 3.8317`, so `λ̂(1) = J₀(2πr) ≈ −0.4028`. `U` acts
+on this circle by the rotation `ξ ↦ u_{w₀}ξ`, `|u_{w₀}| = 1`, so `λ` is `U`-invariant; `τ = τ′ * λ` is positive, `U`-invariant (the action is by
+automorphisms), `τ̂(1) = ν̂(r₀) J₀(2πr) < 0`, and `τ(E) = ∫ τ′(E − a) dλ(a) = τ′(E) = 0` because `λ` is carried by `A ⊆ E` and `E` is a group. ∎
+*Against the sketch.* Steps 1–3 are the Poros record's F5, verbatim in route. Its step 2 cites "`r₀R` is `τ_S`-open in `R`, of finite index
+(J28V-7)": for J28D's `τ_S` (stable places at full depth) that openness needs torsion characters to be stable-continuous (Lemma C (d)); for
+`τ′_S` it is immediate. The two agree wherever Lemma C holds.
+
+**Readings.** For a *complex* `ν` with `|ν|(E) = 0`: `Re ν`, `Im ν` and their Jordan parts are `U`-invariant (uniqueness of the decomposition)
+and `E`-null, and one of them is a non-Haar positive measure: SP-if applies. Under the *literal value* reading "`ν(E) = 0`" for signed `ν`, the
+hypothesis holds over every real number field — `ν = λ_r − λ_{r′}` for two archimedean circles, `r ≠ r′` (`U`-invariant, `ν(E) = 1 − 1 = 0`,
+not a multiple of Haar) — so "if" would assert that the sign problem has answer yes everywhere, which is the open question itself. Not the
+intended sense; recorded so that no one reads it that way.
+
+**Corollary SP-Cor (why SP matters; the Poros record's F4 chain, re-derived) [hand; given T-C(A) at `S = ∅`].** Over ℚ(√47): if every finite
+positive `U`-invariant measure on `R̂` with `τ(E) = 0` is a multiple of Haar measure, then `χ(ℚ(√47)²) ≥ 5`.
+*Proof.* If `X₄(F) ≠ ∅`, it is compact and invariant under the countable amenable (abelian-by-abelian) group `R ⋊ U` acting by `c ↦ c(v· + y)`;
+take an invariant `μ`. Then `C(vy) = C(y)` (a rotation about 0 fixes `c(0)`), so `σ_μ` is `U`-invariant; R-U gives `σ_μ(E ∖ (T + A)) = 0`, so
+`τ := σ_μ|_{R̂∖E}` is positive, `U`-invariant, `E`-null, and `∫ Re χ(1) dτ = ∫_{R̂∖E_∅} Re χ(1) dσ_μ < 0` by A⁺ at `S = ∅` with its remark (ii).
+So `τ` is not a multiple of Haar. ∎ Only T-C(A) at `S = ∅` is used, so the split-place lemma C14.2 (c) is not an input (the Poros record's F4
+"fewer inputs", confirmed). **Not claimed:** the converse, or anything about whether non-Haar invariant measures off `E` exist (the
+zero-entropy Furstenberg-type question the Poros record's F5 names; nothing here decides it).
+
+### Would-have-searched-here log (stage 4)
+
+- Would have searched for a non-Haar `U`-invariant measure on `R̂` off `E` (e.g. from a character orbit reading infinitely many split places).
+  Instead: none; SP is a derived equivalence and needs no instance.
