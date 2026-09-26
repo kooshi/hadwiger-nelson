@@ -101,6 +101,8 @@ about its enumeration: the checker must re-derive every constraint), G61 (the 3-
 denominator — `L21cc6506`'s key does). Rows 72–74, 79. Theorems FS73-T22, T23, T25, T26, T39–T42, T44; FS58-T4 (compactness, now
 kernel through `forces_iff_exists_finite`).
 
+**Provisional bearings added (2026-09-26, consolidation job C3b; `LEDGER.md` rows 123, 127):** ℚ(√167) needs five at [hand], through MR (row 123), so this stub's instance is that field's kernel lower bound (four); row 127 names row 99 among FS-101's hypotheses, so this stub's re-aimed target (S1 and no mixing, row 99, in the kernel) would discharge one (FS-101's `hRow99`).
+
 ## Bearing on χ ≥ 6
 
 None directly. It puts the conjecture's falsification field's best lower bound in the kernel, and it is the first kernel

@@ -1,5 +1,7 @@
 # FS-67 — 3-colourings of a tight graph times a non-3-colourable one: do they all come from the tight factor?
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 125).** Its CP form at 23 and 43, `PL_∃(23, 43)`, is one conjunct of six at ℚ(√167): "Given MR: `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a cut-and-project five-colouring (the ⟸ half needs no MR; two real places merge to one `UD(ℝ²)` factor because `G × G` is CP-`k`-colourable iff `G` is); `Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; and `PL_∃(23, 43)` is exactly the direction missing from `χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6`. No held result gives either conjunct, and no one-point density bound can (Croft's `m₁ ≥ 0.2293 > 1/5`, `[Croft1967]`)." (FS-96, FS-59.)
+
 **Closed as a milestone, re-aimed (FS-67's close, 2026-09-25, crunch job J42; `plans/FS67-tight-products.md` §R-close first, then
 `plans/FS67-derivation.md`; draft ledger rows 114–115).** Words, fixed: *gap-free* colouring = a **fall** (frozen) colouring, every closed
 neighbourhood meets every colour; *Hoffman-tight* = `λ_min = −d/(k−1)` (G54). Csernák 2023's "tight" means gap-free, not Hoffman-tight; this

@@ -1,5 +1,7 @@
 # FS-69 — the all-levels certificate at 43: a smaller relaxation, not a bigger machine
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 125).** In row 125's reduction of six at ℚ(√167), "43 at depth is FS-69" (the 23-adic factor alone "refuses five measurably"); six there is FS-59's question since 2026-09-26.
+
 **At M3's close (2026-09-25):** `B₁(43) < 369.8` would also close ℚ(√167)'s finite-place window count at five (D1-43, `plans/M3-derivation.md` M3-J21-D1-43p, M3-J22-T10: Hoffman alone reads `0.2138`, the fibre-share maximum is strictly below).
 
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G76's mixing sentence and row 110 (43 is the one finite place the window count at five still needs).

@@ -5,6 +5,8 @@ qualifiers, *for existence* and *modulo SP*, are part of the statement; a determ
 (FS-100 §2.5). T-J39-1 and T-J39-5 are blind-checked TRUE (J48, BC-2, BC-4; BC-4 (ii) with its 43 hypothesis dropped); SP and MR are
 FS-100's. The questions below stand as M3 left them, read through (i)–(iv).
 
+**Since wave 3 (2026-09-26, consolidation job C3b; `LEDGER.md` rows 120, 123, 125):** "Given MR: `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a cut-and-project five-colouring (the ⟸ half needs no MR; two real places merge to one `UD(ℝ²)` factor because `G × G` is CP-`k`-colourable iff `G` is); `Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; and `PL_∃(23, 43)` is exactly the direction missing from `χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6`. No held result gives either conjunct, and no one-point density bound can (Croft's `m₁ ≥ 0.2293 > 1/5`, `[Croft1967]`)." T-J39-5 is exact; SP ⟺ ¬MR (FS-100 §2), so with MR held at [hand] (row 120) the qualifier *modulo SP* is met at that grade, and this stub's existence question is FS-59's six question in CP form. Five over ℚ(√167) is held (row 123), so a window five-colouring here would falsify the conjecture's "≥ 6". Provisional bearings add: G80; FS-59's head block.
+
 *Minted 2026-09-25 at M3's close (crunch job J23c, from `plans/M3-close-inventory.md` rows 23 and 61, and the prior-art debt of row 22).
 Numbered FS-96 by the front-page job (J24). Read first: `plans/M3-derivation.md` §5–§6, `plans/M3-S1D-windows-five.md` §3,
 `plans/M3-S1V-windows-five.md` §2.1 and §3.4. Solver column: **none until 2026-10-01** for the derivations; the `κ` questions below are

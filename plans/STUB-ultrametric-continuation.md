@@ -70,6 +70,8 @@ G76 (a "no" must disagree with every pullback in every archimedean direction), G
 colours), G73 (cell-local formats closed), G78 (Kempe moves cannot see a frozen wall — the rank-one analogue of a frozen pullback), row 80 (T35's
 transient walls), row 97 (one-prime heteroclinics).
 
+**Provisional bearings added (2026-09-26, consolidation job C3b; `LEDGER.md` rows 120, 124, 126):** MR is held at [hand] since FS-100 stage 5 (row 120), so "given MR" above is met at that grade; G80 — NA₀ is a statement about `U ↷ R̂` alone (row 126), so count `U`'s elements by height before calling it hard; its home discipline is homoclinic points of algebraic actions (`[LindSchmidt1999]`, reviews only; row 126: "Prior art: not searched").
+
 ## Where the 2026-09-26 work on this lives
 
 *Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*

@@ -1,5 +1,7 @@
 # FS-90 — two hours of sanctioned search: FS-86's finite-witness questions, priced side by side (stub)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 121).** A yes on (c) would be Soifer 55.1 **as posed**: its existence half is answered, non-constructively, by `χ(ℚ(√47)²) = 5` (row 121, [hand], through MR). Kooshi's ruling closing FS-84 (*"I'm not interested in taking the time to find a triangle free graph. That's incidental to the goal."*) was about the explicit graph over ℚ(√47); (c)'s forcer bears on row 88 as well, and whether the ruling reaches it is his call.
+
 **At row 88's close (2026-09-25).** Candidate (c) — a triangle-free forcer of `(0, 4)` in a number field inside `ℚ₂(√3)` (row 90's T1) — is the row-88 plan's stage **Y1**, dated from 2026-10-01 and not briefed (`plans/FS86-row88-rigidity.md` §S.3; Kooshi's grant). Row 111 prices its other side: a counterexample to isolation (T-B1) or to defect growth (T-B2) is itself a non-pullback (R88-TA2), so no finite search for either is cheaper than row 88's "no"; a finite ball agreeing with a pullback on a patch measures balls, never the plane (FS-98). Price (c) by G65's four-colour band (row 84) before any run.
 
 

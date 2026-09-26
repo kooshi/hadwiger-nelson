@@ -18,6 +18,8 @@ chain theorem), `plans/STUB-plane-bridge.md` (FS-39), `plans/STUB-unit-vector-ri
 
 ---
 
+**Kooshi's target (2026-09-26, consolidation job C3b; `CLAUDE.md` § The mission):** *"We now have a real foundation to reach for 6 (or prove that no field is 6 colorable, which would be fascinating) and potentially answer the HN problem definitively."* `CLAUDE.md` reads the parenthesis as G64's S — this stub's strong statement, *no subfield `F ⊆ ℝ` has χ(F²) = 6* (a reading C3a held for the owner). Since row 123 (`χ(F²) ≥ min(L(F), 5)`, [hand], through MR) the gap in which six can hide is at `L(F) ≥ 6`, where `χ(F²) ≥ 5`; at ℚ(√167) six contains `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (row 125). Whether this frame becomes a target again, and its rank (37), are Kooshi's call; the demotion's correction (S ⟹ W only) stands.
+
 ## 1. The question, and what it is not
 
 Every time this project pins the chromatic number of a plane over a coefficient structure it gets **2, 3, 4, 5 or 7**. It has never
@@ -92,7 +94,7 @@ finite planes would not narrow Hadwiger–Nelson). Sort the fields by local boun
 |---|---|---|
 | `L(F) ≤ 5` | `χ ≤ L` — (a) | theorem (row 57's hand step aside) |
 | `L(F) = 6` | the wall: no such field exists — (b) | **finite**: six graphs, none decided, four beyond any priced instrument |
-| `L(F) ≥ 7` | nothing we hold; needs (c) on these fields | **open, and infinite**: ℚ(√167) (if the wall holds; proven `3 ≤ χ ≤ 7`), `K(√7)` and de Grey's field (`5 ≤ χ ≤ 7`), and every real field containing one of them |
+| `L(F) ≥ 7` | nothing we hold; needs (c) on these fields | **open, and infinite**: ℚ(√167) (if the wall holds; proven `5 ≤ χ ≤ 7`, five at [hand] through MR, `LEDGER.md` row 123), `K(√7)` and de Grey's field (`5 ≤ χ ≤ 7`), and every real field containing one of them |
 
 The theorem is one-sided — `χ ≤ L` — so **closing the wall proves "no field has local bound six", never "no field has chromatic
 number six"**; the step between them is `χ = L`, which is the conjecture. And **W follows from the third row alone** [derived; rests

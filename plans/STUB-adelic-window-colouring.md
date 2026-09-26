@@ -1,5 +1,7 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+**Status at the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` rows 120, 123, 125).** Over ℚ(√167) the bracket is `5 ≤ χ ≤ 7` (five at [hand], through MR, row 123), so a mixed colouring that reaches five there would falsify the conjecture's "≥ 6". Row 125: "Given MR: `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a cut-and-project five-colouring (the ⟸ half needs no MR; two real places merge to one `UD(ℝ²)` factor because `G × G` is CP-`k`-colourable iff `G` is); `Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; and `PL_∃(23, 43)` is exactly the direction missing from `χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6`. No held result gives either conjunct, and no one-point density bound can (Croft's `m₁ ≥ 0.2293 > 1/5`, `[Croft1967]`)." So this stub's mixed instrument at `{∞, 23, 43}` is exactly the five-colour question at ℚ(√167), and its failure there is six (FS-59's question since 2026-09-26). At four colours the Kronecker windows' `E`-form is moot over T-C(A)'s class, the `L ≥ 5` fields: through MR no four-colouring exists there (rows 120, 123). Provisional bearings add: G80; FS-59's head block; FS-96.
+
 **At FS-100's in-ban close (2026-09-26; `plans/FS100-derivation.md`; drafted `LEDGER.md` rows 116–118).** A four-colour *Kronecker window*
 `x ↦ W(Θ(x) + t)`, `Θ : R → Tⁿ`, need not select onto its `T + A` characters: over ℚ, `Θ = (τ + ψ_w, τ + ψ_w̄)` at 5 with `W = 2⌊2t₁⌋ + ⌊2t₂⌋`
 is proper while no non-zero combination lies in `T + A` (FS100-X1, two minds) — over every bipartite plane, and at `k²` colours over every real
@@ -88,7 +90,7 @@ torus, a finite level `m`), this is a finite constraint problem — SAT or ILP �
 | ignore the 3-adic factor, over anything | **7** (row 33's brick/torus certificate) | the encoding is wrong |
 | the product, over `ℚ(√3,√11)` | `≤ 4` | if it reads worse than 4, the mixed encoding is losing information the pure one keeps |
 
-**Then the target:** over `ℚ(√167)`, whose bracket is currently `3 ≤ χ ≤ 7` (the ceiling from the hexagonal colouring, and `≤ 8`
+**Then the target:** over `ℚ(√167)`, whose bracket is currently `5 ≤ χ ≤ 7` (five at [hand], through MR, `LEDGER.md` row 123; the ceiling from the hexagonal colouring, and `≤ 8`
 from `colorable_finitePlane23_eight` through the usable plane at 23), **does any mixed colouring reach 6 or 5?**
 
 **Two configurations, and they differ in kind — run both.**

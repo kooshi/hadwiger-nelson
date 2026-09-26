@@ -1,5 +1,7 @@
 # FS-48 — Extensions of ℚ(√2,√3): the ℚ(√3,√d) table, explicit rhombus chains, and the fields where the three-colour theorem is non-constructive (STUB, 2026-09-14; Kooshi: explore derivations and extensions of the ℚ(√2,√3) result)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` rows 120, 123).** Through MR (row 120, [hand]) every entry of the table with `L ≥ 5` has `χ ≥ 5`, and `χ = L = 5` at `L = 5` (row 123); `χ(ℚ(√3,√5)²) = 5` (row 123). So the five-level cases this stub names (d = 5, 23, 47 over ℚ(√3)) are decided at [hand] wherever `L = 5`, and `χ(ℚ(√2,√7)²) ≥ 5` holds if its `L ≥ 5` reading does (re-derive the usable primes at the opening). The table is `L(F)` alone up to five; what is left is the table of `L(F)` itself, the explicit objects, and six.
+
 **Re-aimed at FS-91's close.** Three colours are decided for every multiquadratic (indeed every real number) field: `χ = 3` iff non-bipartite and some prime above 3 has residue field `𝔽₃` (row 99). What remains is the four- and five-colour table.
 
 > **Re-aimed at FS-81's close (2026-09-24): extended to multiquadratic fields without √3** (close inventory item 28). FS-81's

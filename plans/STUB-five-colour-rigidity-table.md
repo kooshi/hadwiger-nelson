@@ -1,5 +1,7 @@
 # FS-78 — the five-colour rigidity table: where can a five-colour forced pair live in a 6-open field? (stub)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 123).** Every 6-open real field — K(√7), K(√13), K(√79), K(√127), de Grey's field — has `L ≥ 6`, so `χ ≥ 5` through MR (row 123, [hand]) with no forcer. Five no longer needs a compulsion; six by the chain or a spindle still does (G48, G55), so this table asks only where a five-colour **compulsion** can live. Provisional bearings add: G80 (five came by measure rigidity, which names no pair), G64 (six hides in the gap at `L ≥ 6`).
+
 *Minted 2026-09-23 at FS-73's close, from `plans/FS73-derivation.md` T14–T15 and phase P2's pilot. Rank 5: screens, minutes each.*
 
 ## The question

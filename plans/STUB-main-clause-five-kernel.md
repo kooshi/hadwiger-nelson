@@ -40,6 +40,8 @@ Herglotz–Bochner (weeks); step 4 below stands.
 5. The corollaries: `NumberField` for ℚ(√47) (~5k) and `5 ≤ localBound` there (CTL at ℚ(√47): every stable prime of `𝓞(ℚ(√47, i))` and its
    target — weeks); the same for ℚ(√3,√5).
 
+**Provisional bearings added (2026-09-26, consolidation job C3b):** FS-75 — its re-aimed target, row 99 in the kernel, is the named hypothesis `hRow99` (row 127 names row 99 among the chain's [hand] steps); FS-47 with FS-37 — row 57's gap is `hUpper` (row 127); G80 (the mechanism under `hMR`); FS-102 (the write-up's `comparator/` surface either waits for these hypotheses to shrink or names them — Kooshi's call).
+
 **Bearing on χ ≥ 6:** none. It puts the conjecture's proved range (G48) on the kernel's word, one named interface at a time.
 
 **Provisional bearings** (WORKFLOW 3.1 item 5): G48 (the proved range is the target), G55 (the chain theorem's ring form, row 103, a kernel

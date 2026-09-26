@@ -1,5 +1,7 @@
 # FS-20 — The paper, re-scoped: one reduction, seven lineages, a 1994 answer nobody cited, and the kernel form
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b).** The fallback write-up of `LEDGER.md` rows 120–123 — the one for which the publication rule half fires (Kooshi, 2026-09-26, `CLAUDE.md` § Publication) — is a separate stub, **FS-102** (`plans/STUB-writeup-main-clause-five.md`); this stub stays the Theorem B paper. One naming table (`BIBLIOGRAPHY.md` §E) serves both.
+
 > **RE-SCOPED 2026-09-22 — `[Fischer1994]` is read and its proof stands; this stub's original title and premise are false.**
 > K. G. Fischer, *A planar geometric graph of chromatic number four*, Congressus Numerantium 104 (1994) 73–79, proves an additive
 > 4-colouring — a homomorphism from the group the unit vectors generate to `ℤ/4`, nonzero on every unit vector, of the **whole plane**

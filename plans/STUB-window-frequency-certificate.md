@@ -1,5 +1,7 @@
 # FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` rows 121, 123).** Five is held at [hand] by measure rigidity at both targets — `χ(ℚ(√47)²) = 5` (row 121) and `χ(ℚ(√167)²) ≥ 5` (row 123) — so a four-colour window-frequency certificate there would restate a held value in a checkable format, not decide it. One colour up it is the shape of a six-certificate, FS-59's question since 2026-09-26. Provisional bearings add: G80.
+
 **J29 (2026-09-25; `plans/FS84-five-colours-47.md`):** ℚ(√47) is a target beside ℚ(√167) — its fractional cap `121/28 > 4`.
 
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G78 (in rank one the Kempe route cannot see a frozen wall — an averaged certificate is not a Kempe argument, row 108).

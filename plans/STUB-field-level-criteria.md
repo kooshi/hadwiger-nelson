@@ -1,5 +1,7 @@
 # FS-37 — The 2-adic colouring criteria at the field level, in the kernel (stub)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 127).** Row 57's gap, shared with FS-47, is FS-101's named upper half `hUpper` (row 127).
+
 **From M2's close (2026-09-25):** row 57's gap is the one lemma under three results — Theorem A's field-level form, prime inversion's number-field reading (in the kernel in valuation form, `UnitRing.inv_natCast_mem_unitRingOver_iff`, row 105), and ASTRA T7 beyond `K(√7)`; closing it closes all three.
 
 *Minted 2026-09-11 by FS-36's planning (`plans/FS36-multiquadratic-decomposition.md` §3 D3), as that milestone's

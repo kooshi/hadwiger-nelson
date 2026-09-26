@@ -1,5 +1,7 @@
 # FS-60 — the quadratic four-colour witnesses in the kernel
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` rows 121, 123, 127).** ℚ(√47)'s value is five at [hand] (row 121), and its upper half `≤ 5` is in the kernel unconditionally (row 127, `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`); ℚ(√143), ℚ(√311), ℚ(√335) are five at [hand] (row 123). This stub's kernel lower bounds (four) stay below those values; the kernel's five at these fields is FS-101's.
+
 *Minted 2026-09-17 at FS-58's close. Read beside: `plans/FS58-four-colours.md` §R-D2, §R-B5; `Proofs/HadwigerNelson/Instances/SqrtEleven.lean`;
 `data/fs58/witness-{23,47,71,95,191}/`; `tools/fs58_emit_witness.py`.*
 

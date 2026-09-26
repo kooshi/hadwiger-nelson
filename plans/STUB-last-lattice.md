@@ -1,5 +1,7 @@
 # FS-72 — the last lattice: decide `group:u3:2+w4` at four colours (stub)
 
+**At the 2026-09-26 consolidation (2026-09-26, consolidation job C3b; `LEDGER.md` row 123).** Five over ℚ(√3,√5) holds at [hand], through MR (`χ(ℚ(√3,√5)²) = 5`, row 123), so some finite unit-distance graph over the field is five-chromatic (de Bruijn–Erdős), none exhibited. This lattice's question is now whether that graph lives on `group:u3:2+w4` — the explicit object for a held value (FS-100's P1, its ℚ(√3,√5) half; ℚ(√3,√5) has triangles, so Kooshi's ruling closing FS-84 does not name it). A four-colouring of the lattice with no periodic colouring would be C3-aper's first counterexample at four colours (FS-76).
+
 *Minted 2026-09-22 at FS-70's close. Rank 5 (below FS-71, FS-59); a priced object, not a mechanism.*
 
 > **FS-79's verdict (2026-09-24): not reached.** Named as an open instance (§IQ item 5), not decided. By G73, no cell-local
