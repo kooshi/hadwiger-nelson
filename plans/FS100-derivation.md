@@ -173,16 +173,17 @@ Mathlib's surface; X11K's lane (Kooshi's request, 06:08) decides what of the cha
 
 **FS100-EFZ — For every real number field `F` and every `U`-invariant finite positive measure `μ` on `R̂`: `μ(E ∖ (T + A)) = 0`; and a `U`-invariant finite measure carried by `L + Z_P` (`P` a non-empty finite set of places) is carried by `T + A`. (= X12B-Z, X12B-E; X01D Step 7; J45's R-U, J46-7.) [hand; R-U now three derivations, two blind to each other (J45, J46-7) and X12B's by valuations]**
 *Proof:* X12B §2.1 (push to the adelic coordinates, `ord_w` equivariant, a finite measure on `ℤ ∪ {∞}` invariant under `k ↦ k + h` charges no
-integer). *Rests on it:* SP-Cor's P4; the corollary MR ⟹ PE-2 (FS100-MR (c)). *Prior art:* the non-compactness of the split torus (J46-7's remark).
+integer). *Proof verdict:* valid on the close's check (the plan's §R-close (stage 5) 1b, "Lemma Z's `α/ᾱ`"). *Rests on it:* SP-Cor's P4; the corollary MR ⟹ PE-2 (FS100-MR (c)). *Prior art:* the non-compactness of the split torus (J46-7's remark).
 *Kernel:* declined (as FS100-EFP).
 
 **FS100-PE1 — PE-1 is FALSE as written: over ℚ(√47), `Γ = ⟨v, u′⟩` (`v = (329+√−47)/(48√47)`, `u′ = (3+√−47)/(3−√−47)`) has `ℚ(Γ) = L` but an index-2 subgroup inside ℚ(√−47); over ℚ(√5), `Γ = ⟨(2+i)/√5, (5+12i)/13⟩` has an index-2 subgroup inside ℚ(i), and there Thm 1.2's conclusion fails too (`(m_{Y₁} + m_{Y₂})/2` is `Γ`-ergodic, of positive entropy, not Haar). PE-1′: for admissible `Γ` the action on `M̂` (`M ⊆ R` finitely generated over `ℤ[Γ]`, `ℚM = L`) is by automorphisms of a solenoid, totally irreducible (iff admissible), not virtually cyclic and without virtually cyclic factor, so EL2021 Thm 1.2 applies. Lemma W: every non-torsion `u ∈ U` lies in an admissible `⟨u, w⟩ ≅ ℤ²`, `w = z/c(z)`, `(z) = 𝔓ʰ` at a totally split prime. (= X02D-CX, X02D-C, X02D-PE1′, X02D-W; X02V-2, X02V-3.) [hand + tools exact; two derivations blind to each other, two counterexamples, one Lemma W found twice]**
-*Proof:* X02D §2.2; X02V §2.2 (Lemma TI by Krull dimension one). *Tools:* `tools/x02d_pe1_counterexample.py` (plants `--plant-norm`,
+*Proof:* X02D §2.2; X02V §2.2 (Lemma TI by Krull dimension one). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row PE-1. *Tools:* `tools/x02d_pe1_counterexample.py` (plants `--plant-norm`,
 `--plant-dependent` fire); `tools/x02v_checks.py` C1. *Rests on it:* FS100-PE2. *Prior art:* the definitions and Thm 1.2 are
 `[EinsiedlerLindenstrauss2022]` §1 (read in full by X02D, pp. 1–3 by X02V); the subfield failure mode is the advisor's addendum. *Kernel:* declined.
 
 **FS100-HX1 — For every real number field `F`, every closed `U`-invariant subgroup of `R̂` is finite or `R̂`: its annihilator is a `U`-stable subgroup of `R`, hence an ideal (`ℤ[U] = R`), and a non-zero ideal has finite index. (= X02D-HX1; X02V-1; X01V's held proof.) [hand; three proofs, two blind to each other]**
-*Rests on it:* nothing in the chain (the advisor's stage-0 irreducibility remark). *Prior art:* `[LevitzMott1972]` Thm 2.3 for the finite index.
+*Proof:* X02D §2.1 (X02D-HX1); X02V §2.1 (X02V-1); X01V's held proof (the close inventory, item 18). *Proof verdict:* TRUE by all three (the plan's §R-close (stage 5) 1.1,
+row HX-1). *Rests on it:* nothing in the chain (the advisor's stage-0 irreducibility remark). *Prior art:* `[LevitzMott1972]` Thm 2.3 for the finite index.
 *Kernel:* declined.
 
 **FS100-PE2 — PE-2 (PE-lim): for every real number field `F`, every `U`-invariant finite positive measure `τ` on `R̂` is `a·m + τ′`, `a ≥ 0`, `τ′` `U`-invariant with `h_{τ′}(u) = 0` for every `u ∈ U`; equivalently every `U`-ergodic `ν` is `m` or of zero entropy for every `u`. (= X02D-LΓ, X02D-PE2; X02V-4.) [hand; two derivations blind to each other, by different routes, both applying EL2021 Thm 1.2 by statement only on admissible `Γ` — E1 external, in print, its proof in EL2021 §§2–9, unread here]**
@@ -193,43 +194,59 @@ twice. *Rests on it:* FS100-MR. *Prior art:* PE-2's shape is Johnson's nonlacuna
 on adelic solenoids") is unread and may already contain the inverse-limit step — no novelty claimed until it is read** (X02D §4.4). *Kernel:* declined.
 
 **FS100-MR — MR(F) holds for every real number field `F` with `R = O′`: (a) PE-2 ∧ EF_F⁺ ⟹ MR(F) (`τ = a·m + τ′`, `τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`, so `τ′ = 0`); (b) given PE-2, MR(F) ⟺ every `U`-invariant `E`-null `τ` of zero entropy for every `u` is 0; (c) given R-U, MR(F) ⟺ PE-2(F); (d) every `U`-ergodic `μ` with `μ(E) = 1` has zero entropy for every `u`. (= X01D EF-MR first half, Corollary MR⟺PE; X01V-T5, T6, §4.3; X02V-8; X12B-MR.) [hand; (a) a composition, three minds (X01D, X01V, X12B); (b) X02V; (c) X01D, one mind; (d) X01V; resting on FS100-PE2 and FS100-EFP at their grades]**
-*Proof:* X01D §4.1, §4.3; X01V §2.4, §4.3; X02V §3.2; X12B §3.2. MR uses neither R-U nor `m(E) = 0`. *Rests on it:* FS100-Q47; FS100-K0's fields;
+*Proof:* X01D §4.1, §4.3; X01V §2.4, §4.3; X02V §3.2; X12B §3.2. MR uses neither R-U nor `m(E) = 0`. *Proof verdict:* the plan's §R-close (stage 5) 1.1, row EF-MR,
+and 1.2, link L3. *Rests on it:* FS100-Q47; FS100-K0's fields;
 the stub's three wanted posters. *Prior art:* as FS100-EFP and FS100-PE2. *Kernel:* X11K's lane.
 
-**FS100-Q47 — `χ(ℚ(√47)²) = 5`. Consequences at their grades: `χ(F²) = 5` at ℚ(√143), ℚ(√311), ℚ(√335) (K0; 11 usable at each, so `χ ≤ 5`); `χ(ℚ(√167)²) ≥ 5` (FS100-T1 puts it in T-C(A)'s class, K0's argument applies); at ℚ(√59), ℚ(√83), ℚ(√131), row 88 ⟺ T-B1 (T-J38-2 (iii)). (EF-MR's second half; X01D §4.1, X01V §2.4 part 2; X05V-1, X05V-2.) [hand; at ℚ(√47): FS100-MR at its grade; SP-Cor three minds (J45; J46-13 from its statement; X05V blind) over N1, N2, R-U, A⁺ each two blind minds (J45; J46-1, J46-7, J46-5); T-C(A) at `S = ∅` two blind (J28D, J28V; row 113); `χ ≤ 5` row 52 at 11 (`47 ≡ 5² (mod 11)`), prior art `[Moorhouse2010]`, `[Madore2015]`. The consequences carry K0's and R88-TCA's class form's one-mind grades (FS100-K0, FS100-T1)]**
-*Proof:* the ladder, the plan's §R-close stage 1, 1.2 (L1–L6), no link broken. *Tools:* `tools/x05v_checks.py` (KC check 5, the MR step exercised at
+**FS100-Q47 — `χ(ℚ(√47)²) = 5`. Consequences at their grades: `χ(F²) = 5` at ℚ(√143), ℚ(√311), ℚ(√335) (K0; 11 usable at each, so `χ ≤ 5`); `χ(ℚ(√167)²) ≥ 5` (FS100-T1 puts it in T-C(A)'s class, K0's argument applies); at ℚ(√59), ℚ(√83), ℚ(√131), row 88 ⟺ T-B1 (T-J38-2 (iii)). (EF-MR's second half; X01D §4.1, X01V §2.4 part 2; X05V-1, X05V-2.) [hand; at ℚ(√47): FS100-MR at its grade; SP-Cor three minds (J45; J46-13 from its statement; X05V blind) over N1, N2, R-U, A⁺ each two blind minds (J45; J46-1, J46-7, J46-5); T-C(A) at `S = ∅` two blind (J28D, J28V; row 113); `χ ≤ 5` row 52 at 11 (`47 ≡ 5² (mod 11)`), prior art. The consequences carry K0's and R88-TCA's class form's one-mind grades (FS100-K0, FS100-T1)]**
+*Proof:* the ladder, the plan's §R-close stage 1, 1.2 (L1–L6). *Proof verdict:* no link broken (the plan's §R-close (stage 5) 1.2, 1b). *Tools:* `tools/x05v_checks.py` (KC check 5, the MR step exercised at
 `a = 2/21` on J45's F2 colouring over ℚ(√11); plants fire). *Control (KC):* at K and ℚ(√11), where four-colourings exist, the chain stops exactly at
 T-C(A) (X05V-3; X01D §4.2). *What it answers* (`CLOSED-QUESTIONS.md` §1.7, §3): Moorhouse's "What about `χ(ℚ(√47)²)`?"; the existence half of
 Soifer's Open Problem 55.1, **non-constructively** (the plane has no unit triangles, G57; de Bruijn–Erdős gives a finite five-chromatic subgraph,
-none exhibited); Exoo–Ismailescu's smallest-subfield question in part (ℚ(√47) is the first real quadratic field needing five). *Prior art:* **a
+none exhibited); Exoo–Ismailescu's smallest-subfield question in part (ℚ(√47) is the first real quadratic field needing five). *Rests on it:* the plan's §R-close (stage 5)
+1b ("What the headline answers") and 4.4 (FS-84, FS-59). *Prior art:* the upper bound `χ ≤ 5` is `[Moorhouse2010]`, `[Madore2015]` (row 52); **a
 gate on the value is owed** (the posers' author listings in zbMATH, the Polymath16 threads) before any novelty or publication claim. *Kernel:*
 X11K's lane (Kooshi's request); nothing of the chain is kernel yet.
 
 **FS100-EFG — For `u ∈ U`, `h_m(u) = Σ_v log max(1, |u|_v)` over all places of `L` (the finite ones in `supp u`); `= log H(u)` for totally real `F`. EF-G (a) is FALSE for `F` with a complex place: over ℚ(∛2), a non-torsion relative unit has `H = 1 < exp h_m` (X01D's `u₀`; X01V's `u = (1+∛2 i)/(1−∛2 i)`, `h_m = log 5 + 2.4658… > log 5 = log H`); `U_N` is then infinite (rank `r₂(F)`). EF-G (b) holds (`#U_N ≥ c·N^{1/[F:ℚ]}` via `U_ℚ ⊆ U_F`). (= X01D EF-G; X01V-T1, T2, T3; X12B-G; X02V's C2.) [hand + tools exact; four minds, three blind to one another]**
-*Tools:* `tools/x01d_unit_check.py`, `tools/x01v_entropy_check.py` (Sturm count; its first certificate could not fire, replaced before any
+*Proof:* X01D §2.1 (EF-G); X01V §2.2 (X01V-T1–T3); X12B §2.5 (X12B-G). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row EF-G. *Tools:* `tools/x01d_unit_check.py`,
+`tools/x01v_entropy_check.py` (Sturm count; its first certificate could not fire, replaced before any
 verdict), `tools/x02v_checks.py` C2. *Rests on it:* the owner's ruling that claim lists say "totally real" where they mean it (inventory 16).
 *Prior art:* the entropy formula is Lind–Ward 1988 and Chothi–Everest–Ward 1997's (cited from memory, unread — a debt). *Kernel:* declined.
 
 **FS100-EFX — Over every real `F`, normalised arc length on a circle of archimedean characters at one complex place of `L` over a real place of `F` is `U`-invariant, `U`-ergodic, atomless, of zero entropy for every `u`, carried by `A`. So EF_F's conclusion cannot be finite support. (= X01D EF-X; X01V-T4.) [hand; two blind]**
-*Rests on it:* FS100-CE1's refutation of (H). *Kernel:* declined.
+*Proof:* X01D §2.2 (EF-X); X01V §2.1 (X01V-T4). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row EF-X. *Rests on it:* FS100-CE1's refutation of (H).
+*Prior art:* none recorded at the close; the X24R gate is running. *Kernel:* declined.
 
 **FS100-CE1 — CE-1 is TRUE as an implication and void: its hypothesis (every ergodic measure of a totally irreducible, not virtually cyclic ℤ²-solenoid action is Haar or finitely supported) is FALSE for the actions PE-1′ produces over every real `F` (a rotation circle at a complex place over a real embedding; Fourier coefficient `J₀(2π) ≠ 0`, atomless). Under it, every `U`-invariant `τ` with `τ(T) = 0` would be a multiple of Haar — refuted by FS100-EFX. Lemma LT: `⋂_{Γ admissible}{χ : χ|_{ℤ[Γ]} of finite image} = T`, given `R = O′`. (= X02D-HF, X02D-LT; X02V-5.) [hand; the implication two blind minds; the hypothesis's falsity X02D (numeric sanity `tools/x02d_circle_measure.py`), confirmed by X02V's own strengthened conclusion against FS100-EFX; LT one mind (X02D), with X02V §2.4 Step C the same intersection]**
+*Proof:* X02D §4.1 (X02D-HF), §4.2 (X02D-LT); X02V §2.4 (X02V-5). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row CE-1. *Rests on it:* the plan's §R-close (stage 5) 3.2 item 5.
+*Prior art:* none recorded at the close; the X24R gate is running.
 *Correction owed:* X02V §3.2's "MR … is no harder than that classical open question" — (HF) is false, not open. *Kernel:* declined.
 
-**FS100-FR1 — For every real `F`, the `U`-orbits on `R ∖ 0` are the non-empty fibres of `x ↦ x x̄`; so `τ` is `U`-invariant iff `τ̂` is constant on them. (= X03D-FR1; X02V-6.) [hand; two blind]** *Kernel:* declined (one line each way).
+**FS100-FR1 — For every real `F`, the `U`-orbits on `R ∖ 0` are the non-empty fibres of `x ↦ x x̄`; so `τ` is `U`-invariant iff `τ̂` is constant on them. (= X03D-FR1; X02V-6.) [hand; two blind]**
+*Proof:* X03D §2.1 (X03D-FR1); X02V §2.5 (X02V-6). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row FR-1. *Rests on it:* the plan's §R-close (stage 5) 3.2 item 4. *Prior art:* none recorded at the close; the X24R gate is running.
+*Kernel:* declined (one line each way).
 
-**FS100-ED1 — If `Y_N ⊆ U` are finite and every `χ ∉ E` has `(1/#Y_N)Σ_{Y_N} χ(u) → 0`, then MR(F); so ED-1 is TRUE wherever `U_N` is finite (every totally real `F`) and ill-posed as written when `F` has a complex place. (= X03D-ED1, ED1-R; X02V-7.) [hand; two blind]** *Kernel:* declined.
+**FS100-ED1 — If `Y_N ⊆ U` are finite and every `χ ∉ E` has `(1/#Y_N)Σ_{Y_N} χ(u) → 0`, then MR(F); so ED-1 is TRUE wherever `U_N` is finite (every totally real `F`) and ill-posed as written when `F` has a complex place. (= X03D-ED1, ED1-R; X02V-7.) [hand; two blind]**
+*Proof:* X03D §2.2 (X03D-ED1, ED1-R); X02V §2.6 (X02V-7). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row ED-1. *Rests on it:* none recorded; the ladder
+(the plan's §R-close (stage 5) 1.2) does not use it. *Prior art:* the ED gate not run (the close inventory, item 90). *Kernel:* declined.
 
 **FS100-ED2 — ED-2 is FALSE: over ℚ, for every infinite set `P′` of primes `≡ 1 (mod 4)` with `Σ_{P′} 1/p < ∞`, `χ_{P′}(r) = ∏_{p∈P′} e({ι_{π̄_p}(r)}_p)` is a character of `R` outside `E` whose averages over `U_N` tend to `∏_{P′}(1 − 1/p) ≠ 0`. Also X03D-Z (no `U`-invariant finite measure charges the summable set `Z` off `T + A`) and X03D-ED1′ (Weyl averages → 0 off `Z ∪ E` would give MR(ℚ); a GAP at the mean value for non-summable split characters). (= X03D-ED2, Z, ED1′.) [hand, on one classical input (Gaussian lattice points in residue classes, Möbius, Hilbert 90, CRT); one derivation (X03D) + a checking reading (X13R, not blind), which found both VALID]**
 *Tools:* `tools/x03d_weyl.py` (finite-`P′` averages as floats at tolerance `5·10⁻³`; three defects logged by X13R: a mislabelled plant, a PASS
-line blind to its five largest primes, a plant that fires by `0.24·10⁻³`); `tools/x13r_check.py`. *Rests on it:* nothing in the chain — it
+line blind to its five largest primes, a plant that fires by `0.24·10⁻³`); `tools/x13r_check.py`. *Proof:* X03D §4.1–4.3 (X03D-ED2), §4.4 (X03D-Z,
+X03D-ED1′). *Proof verdict:* X03D-ED2 and X03D-Z VALID on X13R's reading (`plans/FS100-X13R-check.md`; the plan's §R-close (stage 5) 1b). *Prior art:* the ED gate
+not run (the close inventory, item 90). *Rests on it:* nothing in the chain — it
 shows equidistribution is strictly stronger than rigidity here (the advisor's Nazarov warning, EF §4). *Kernel:* declined.
 
-**FS100-FLK — The example invariant of an actual four-colouring's spectrum (G79): for every rotation-invariant random proper four-colouring over a real field, `ν := σ|_{R̂∖E}` has `ν̂(u)/ν(R̂) = −P(c¹(0) = c²(u))/P(c¹(0) ≠ c²(0))` (the relatively independent self-joining over the `E`-factor); over ℚ(√47), given T-C(A) at `S = ∅`, `τ₀ = σ|_{R̂∖E} ≠ 0`, not a Haar multiple, with `τ̂₀(u) ≡ −(4/3)Σ_j E[p_j(0)p_j(u)] < 0` on `U`. (= X03D-FL-K, FL-1a; X05V-4.) [hand; two blind]** *Kernel:* declined.
+**FS100-FLK — The example invariant of an actual four-colouring's spectrum (G79): for every rotation-invariant random proper four-colouring over a real field, `ν := σ|_{R̂∖E}` has `ν̂(u)/ν(R̂) = −P(c¹(0) = c²(u))/P(c¹(0) ≠ c²(0))` (the relatively independent self-joining over the `E`-factor); over ℚ(√47), given T-C(A) at `S = ∅`, `τ₀ = σ|_{R̂∖E} ≠ 0`, not a Haar multiple, with `τ̂₀(u) ≡ −(4/3)Σ_j E[p_j(0)p_j(u)] < 0` on `U`. (= X03D-FL-K, FL-1a; X05V-4.) [hand; two blind]**
+*Proof:* X03D §3.2 (X03D-FL-K, FL-1a); X05V §3.1 (X05V-4). *Proof verdict:* the plan's §R-close (stage 5) 1.1, rows FL-1, FL-2 (their GAP is FS100-FLH's step). *Rests on it:*
+FS100-FLH; the plan's §R-close (stage 5) 3.3 (G79's record). *Prior art:* none recorded at the close; the X24R gate is running. *Kernel:* declined.
 
-**FS100-SPEC — Every `U`-invariant finite positive `ρ` carried by `T + A` has `ρ̂(1) ≥ −Λ(F)ρ(R̂)`, sharp, with `Λ(F) ≥ −J₀(j₁,₁) = 0.402759` over every real field (the real place); at ℚ(√47) `Λ = 0.402759` (11: 0.3996; 19: 0.3805). So no spectral route reaches `−1/3`. (= X03D-SPEC; X05V-6.) [hand + tools (float, with controls matching R88-TC-tab at 23 and 31); two blind]** *Tools:* `tools/x03d_factor_minima.py`; `tools/x05v_checks.py` checks 2b, 3, 4. *Kernel:* declined.
+**FS100-SPEC — Every `U`-invariant finite positive `ρ` carried by `T + A` has `ρ̂(1) ≥ −Λ(F)ρ(R̂)`, sharp, with `Λ(F) ≥ −J₀(j₁,₁) = 0.402759` over every real field (the real place); at ℚ(√47) `Λ = 0.402759` (11: 0.3996; 19: 0.3805). So no spectral route reaches `−1/3`. (= X03D-SPEC; X05V-6.) [hand + tools (float, with controls matching R88-TC-tab at 23 and 31); two blind]** *Proof:* X03D §3.3 (X03D-SPEC); X05V §3.1 (X05V-6). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row FL-1 ("one step, two wordings"). *Tools:*
+`tools/x03d_factor_minima.py`; `tools/x05v_checks.py` checks 2b, 3, 4. *Rests on it:* FS100-FLH. *Prior art:* none recorded at the close; the X24R gate is running. *Kernel:* declined.
 
-**FS100-FLH — FL-1's inequality `τ̂(1) ≤ −τ(R̂)/3` is equivalent to `σ̂_E(1) ≥ −(σ_E(R̂) + a)/3` (X05V-5), which follows from `Λ(F) ≤ 1/3` and T-C(A) (X03D-FL-H) — never met over a real field; so FL-1 and FL-2 are GAP at that one step, QTCA_{1/3}. FL-1 ⟹ FL-2 (X03D-FL-12). The consumer needs MR, or `H_κ` with QTCA_κ for one `κ > 0` (X05V-7); `H_κ` for every `κ > 0` ⟺ MR (via SP-if); MR ⟹ `H_{1/3}` (X05V-8); a bound `s_E ≤ s* < 0.8276` would give a threshold in `(−1/3, 0)` (X03D-FL-Q). [hand; the GAP two blind minds at one step; the consumer statements one mind each]** *Rests on it:* the stub QTCA_κ (held for Kooshi: drafted, not minted). *Kernel:* declined.
+**FS100-FLH — FL-1's inequality `τ̂(1) ≤ −τ(R̂)/3` is equivalent to `σ̂_E(1) ≥ −(σ_E(R̂) + a)/3` (X05V-5), which follows from `Λ(F) ≤ 1/3` and T-C(A) (X03D-FL-H) — never met over a real field; so FL-1 and FL-2 are GAP at that one step, QTCA_{1/3}. FL-1 ⟹ FL-2 (X03D-FL-12). The consumer needs MR, or `H_κ` with QTCA_κ for one `κ > 0` (X05V-7); `H_κ` for every `κ > 0` ⟺ MR (via SP-if); MR ⟹ `H_{1/3}` (X05V-8); a bound `s_E ≤ s* < 0.8276` would give a threshold in `(−1/3, 0)` (X03D-FL-Q). [hand; the GAP two blind minds at one step; the consumer statements one mind each]** *Proof:* X03D §3.4 (X03D-FL-H), §3.5 (X03D-FL-12, FL-Q); X05V §3.1 (X05V-5), §3.2 (X05V-7, 8). *Proof verdict:* the plan's §R-close (stage 5) 1.1, rows FL-1, FL-2.
+*Rests on it:* the stub QTCA_κ (held for Kooshi: drafted, not minted). *Prior art:* none recorded at the close; the X24R gate is running. *Kernel:* declined.
 
 ## §G. Stated and not proved (no truth claims; not entries)
 

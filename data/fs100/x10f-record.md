@@ -35,3 +35,30 @@ None (a front-page pass: it applies drafts, it proves nothing).
 - `CLAUDE.md`: **287,240 bytes** before.
 
 **Would have searched here (stage 1):** none.
+
+## Stage 2 — SAVED (the derivation file's mechanical fixes, authorized by the owner 06:3x)
+
+The owner's ruling (verbatim): "You may edit plans/FS100-derivation.md §3 for mechanical fixes only: (1) move `[Moorhouse2010]` and
+`[Madore2015]` out of FS100-Q47's grade bracket into its prior-art field; (2) add the missing field labels (*Proof:*, *Proof verdict:*,
+*Rests on it:*, *Prior art:*) where the entry already states the content; (3) where a field's content is absent, write the address of the
+record that holds it … or, for prior art with none recorded, "none recorded at the close; the X24R gate is running". Invent no mathematics and
+change no grade or verdict."
+
+**Entries touched (14)**, each by exact replacement (script: the scratchpad's `fixderiv.py`; every old string asserted to occur once):
+- **FS100-Q47**: the two keys moved from the grade bracket to *Prior art:* ("the upper bound `χ ≤ 5` is `[Moorhouse2010]`, `[Madore2015]` (row
+  52)"); "no link broken" relabelled *Proof verdict:*; *Rests on it:* → the plan's §R-close (stage 5) 1b and 4.4. The header now parses.
+- **FS100-HX1**: *Proof:* X02D §2.1, X02V §2.1, X01V's held proof (inventory 18); *Proof verdict:* "TRUE by all three" (§R-close 1.1, row HX-1).
+- **FS100-MR**, **FS100-PE1**, **FS100-EFG**, **FS100-EFX**, **FS100-CE1**, **FS100-FR1**, **FS100-ED1**, **FS100-FLK**, **FS100-SPEC**,
+  **FS100-FLH**: *Proof verdict:* as an address into §R-close (stage 5) 1.1's reconciliation row (1.2's link L3 for MR); *Proof:* where missing,
+  the records' section addresses from their "Theorems this phase proved" tables (X01D §2.1–2.2; X01V §2.1–2.2; X12B §2.5; X02D §4.1–4.2; X02V
+  §2.4–2.6; X03D §2.1–2.2, §3.2–3.5; X05V §3.1–3.2); *Rests on it:* where missing, an address (§R-close 3.2 items 4–5, 3.3) or "none recorded;
+  the ladder (§R-close 1.2) does not use it" (ED1), or FS100-FLH (FLK, SPEC); *Prior art:* "none recorded at the close; the X24R gate is
+  running." (EFX, CE1, FR1, FLK, SPEC, FLH) or "the ED gate not run (the close inventory, item 90)" (ED1).
+- **FS100-EFZ**: *Proof verdict:* "valid on the close's check (§R-close (stage 5) 1b, Lemma Z)".
+- **FS100-ED2**: *Proof:* X03D §4.1–4.4; *Proof verdict:* "X03D-ED2 and X03D-Z VALID on X13R's reading"; *Prior art:* the ED gate not run
+  (inventory 90).
+
+No grade, verdict or statement changed. **Gate:** `fs71_ledger_b_check.py --strict` exit 1, FAIL (16): only the 16 "has no § B row" lines left
+(FS100-Q47 now among them, its header parsing), which stage 3's § B lines fix. `bib_audit.py` unchanged by this stage (the two keys stay in the file).
+
+**Would have searched here (stage 2):** none.
