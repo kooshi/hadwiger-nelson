@@ -248,3 +248,9 @@ instance. **Running (2):** J52K, J53b.
 - **J53b:** FS-100's close complete (inventory 68/68). Deferred to Kooshi's: tagging ℚ(√143), ℚ(√311), ℚ(√335) with row 117 on
   the Local–Global Map (his first look at the map comes first).
 - **Next:** J55, one front-page job for both closes (brief `data/crunch-2026-09-25/briefs/J55-front-page-FS100.md`), after J54.
+
+**Update ~01:20 — J54 done (FS-75's close: "Paid (kernel)", not new mathematics; the winding form not found in print, its ingredients
+classical); J55 (front page for both closes) running.** Owner rulings: LEDGER row 119 is a new row, with a pointer from row 79 (M2's kernel
+rows are the precedent); a claim-list line for the winding form with the gate's caveat; `scripts/vacuity.sh` not seeing `Winding`-typed
+binders is logged for a later tools job. **Held for Kooshi (defaults hold):** FS-75's next milestone, the family theorem (row 82) — default
+nothing opens; the consumer on the two other V2-format certificates — default nothing runs.
