@@ -127,3 +127,32 @@ Read every number from the item's source, never from this file.*
 | 119 | owner note | Kooshi: "The target for the Lean implementation should move to the more general "every real" claim." X11K2 retargeted at 06:50; told at 06:55 to state the headline for totally real F first. | owner | done (X29C): FS-101's stub, `plans/STUB-main-clause-five-kernel.md` |
 | 120 | owner note | X27D and X27V (TR-ROT, the step X22D and X22V both named, plus TR-ROT-flip) launched 06:54, stop 07:50. | owner | done (X29C): named as in flight in every draft |
 | 121 | held for Kooshi | Acquiring [Johnson2000]/[Johnson2006] (HTTP 403; subscription, loan or emailing the author) — until then χ(ℚ(√47)²) = 5 is "not found in print", never "first". | report X24R | declined (X29C): Kooshi's call |
+| 122 | result | X27D-EQ: given MR, at type (B) TR-ROT ⟺ Q-μ ⟺ M′ = ∅; the brief's "one step" is the whole measure half | plans/FS100-X27D-derivation.md §2.1 | done (X31C): FS100-X27D-EQ, two blind with X27V-EQ; row 126 |
+| 123 | result | X27D-E (with TA, SPL, PC, L0): given MR, σ_μ(E ∖ T₄) = 0 for every translation-invariant μ; corollary Theorem C's conclusion for spectra carried by all of E | X27D §2.2–§2.5 | done (X31C): FS100-X27D-E, two blind (owner's ruling 1); row 126 |
+| 124 | result | X27D-ATT: a counterexample's shape given MR ((S1)–(S4)) | X27D §2.6, §3.1 | done (X31C): FS100-X27D-ATT |
+| 125 | result | X27D-FL: a concave, U-invariant, u.s.c. Q ≥ 0 vanishing on Pull-measures vanishes on M_T given MR; without MR its existence proves TR-ROT | X27D §3.2 | done (X31C): FS100-X27D-FL; the flip retired (owner's ruling 2) |
+| 126 | result | X27D-FLit: the flip as worded has a trivial affine, weak-* continuous witness | X27D §3.2 | done (X31C): folded into FS100-X27D-FL |
+| 127 | result | X27D-SIERP: the two-summand combinatorial route to NA₀ is false (a countable Sierpiński decomposition) | X27D Stage 4 | done (X31C): FS100-X27D-SIERP |
+| 128 | correction owed | the flip as posed dropped X22V §2.2's "affine, U-invariant"; a G21 instance | X27D §1.2, §3.5 | done (X31C): G21 clause (owner's ruling 4) |
+| 129 | prediction scored | X27D's C0: TR-ROT GAP 0.87; literal flip TRUE 0.90; useful flip GAP 0.85 | X27D §3.3 | done (X31C): the plan's §R-close (stage 5, wave 3b) 3 |
+| 130 | prior-art debt | NA₀'s home: homoclinic / asymptotic-in-density points of algebraic actions; [LindSchmidt1999] reviews only, unread; infinitely generated acting groups and density versions unsearched | X27D §2.6, §3.5 | done (X31C): logged in every §5 entry's prior-art field and in row 126; BIBLIOGRAPHY.md's "rests on it" line proposed, not written (not on X31C's touch list) |
+| 131 | stub to mint or re-aim | NA₀ as a named step in FS-100's stub (J38 block) and FS-98's beside T-B1 | X27D §3.5 | done (X31C): a line in each (owner's ruling 3) |
+| 132 | tool defect | none; tools/x27d_ramanujan.py, plant watched | tools/x27d_ramanujan.py | done: no defect |
+| 133 | result | G79 data point: X27D-E from an example invariant; the flip's counterexample form gave only FL | X27D §3.4 | done (X31C): G79 clause (owner's ruling 5) |
+| 134 | result | X27V-EQ: given MR, TR-ROT ⟺ M′ = ∅ ⟺ Q-μ; unconditionally Q-μ ⟹ TR-ROT | plans/FS100-X27V-verification.md §2.1 | done (X31C): folded into FS100-X27D-EQ |
+| 135 | result | X27V-TA + X27V-FS: given MR, σ_μ(E ∖ D) = 0 | X27V §2.2, §4.1 | done (X31C): folded into FS100-X27D-E |
+| 136 | result | X27V-R1: given MR, a spectrum carried by E is a pullback's: T-C′'s (R1), FS-97's first half, closed | X27V §2.2 | done (X31C): FS100-X27D-E's corollary line; plans/R88-derivation.md §G |
+| 137 | result | X27V-R2 / COL-E: given MR, Q-μ ⟺ no μ charges R̂ ∖ E ⟺ COL-E; NA₀ ⟹ COL-E | X27V §2.3, §4.1 | done (X31C): FS100-X27D-ATT's proof line; COL-E in plans/FS100-derivation.md §G |
+| 138 | result | X27V-F1–F4: the flip as worded met vacuously; averaging kind ⟺ Q-μ given MR; Φ₀ named; no E ∖ D reader separates | X27V §2.4, §4.1 | done (X31C): folded into FS100-X27D-FL |
+| 139 | result | X27V-PM: points to measures fails for abstract actions | X27V §3.2 | done (X31C): FS100-X27V-PM |
+| 140 | correction owed | plans/R88-derivation.md §G T-C′: (R1) closed given MR; X22D §2.4's "TR-ROT, the step C-1 needs" is C-1 itself given MR | X27V §3.4 | done (X31C) |
+| 141 | slip | X27V stage 3 over-claimed closed-set rigidity for single characters; corrected at its stage 4 | X27V §4.2 | done (X31C): the plan's §R-close (stage 5, wave 3b) 5 |
+| 142 | slip | X27V fence touch after its stage 3 commit (L0's proof, (S4)'s proof, one flip-table row) | X27V §4 header | done (X31C): the same §5; no grade moves |
+| 143 | prediction scored | X27V's C0: TR-ROT GAP 0.95; flip as worded 0.9; no-go of a stated kind 0.4 | X27V §3.3 | done (X31C): the plan's §R-close (stage 5, wave 3b) 3 |
+| 144 | stub to re-aim | FS-100's and FS-98's stubs: (R1) closed given MR; the measure half's target NA₀ / COL-E | X27V §2.3, §4.2 | done (X31C): with item 131 |
+| 145 | owner ruling | X27D-E graded two derivations, blind; the flip retired; NA₀ a line, not a stub; the owner's slip to G21; G79's data point | brief X31C | done (X31C): the plan's §R-close (stage 5, wave 3b) 2 |
+| 146 | owner ruling | FS-101's rank stays 3′; item 10 keeps the 8/3-forcer route; the byte ceiling after the crunch is Kooshi's | owner's note to X31C (from X30F's held items) | done: nothing to change |
+| 147 | correction owed | CLOSED-QUESTIONS.md §1.7, §2.6, §3 stale current-state text; --dupes 7 → 11 through drafts applied as written | report X30F; owner's note to X31C | done (X31C): see the record, stages 3–4 |
+| 148 | owner note | a kernel row after the TR-ROT row for SpectralChain.min_localBound_five_le_chromaticNumber and SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain; FS-101's stub and FRONTIER row; the L1 repair in the kernel record only | owner, after X11K3; report X11K3 | done (X31C): row 127 |
+| 149 | owner note | stale gate counts in CLAUDE.md § Trust ledger and § The gate; the audit's gate-count table; vacuity-baseline comment | owner, after X11K3 | done (X31C) |
+| 150 | slip | X31C's brief paraphrased NA₀ without "positive" and called COL-E "the same step" | data/fs100/x31c-record.md §1.1 | done (X31C): every text quotes the sources |

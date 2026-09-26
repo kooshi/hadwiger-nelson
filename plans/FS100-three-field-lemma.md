@@ -2001,3 +2001,76 @@ F₄-linear at 4, 16)"; FS-86's C14 "a complex place looks split; … not claime
 **In flight still:** X27D, X27V (TR-ROT), X28D (the odd-degree reduction of the complex-place case — now a third route, not a rescue).
 
 **Would have searched here (stage 1d):** none.
+
+
+## §R-close (stage 5, wave 3b) — TR-ROT and its flip folded (WORKFLOW step 9; crunch job X31C, close-math and front page in one job)
+
+*X31C (de Bruijn, Opus 5.5), from 12:26 UTC, after X30F's hand-back. Sources: `plans/FS100-X27D-derivation.md` (X27D, one mind),
+`plans/FS100-X27V-verification.md` (X27V, blind through its stage 3, committed `9feb1e73` before any fenced file; stage 4 checked X27D's
+statements), the two reports under `data/crunch-2026-09-26-x2x3/reports/`. Record: `data/fs100/x31c-record.md`. Filed: `plans/FS100-derivation.md`
+§5; `LEDGER.md` row 126.*
+
+### 1. Verdicts, per claim (the two records agree; differences of truth: none, X27V §4.1)
+
+| row | claim | X27D | X27V | folded verdict and grade |
+|---|---|---|---|---|
+| EQ | given MR, TR-ROT ⟺ Q-μ ⟺ `M′ = ∅` (row 124's "one step" is the whole measure half) | X27D-EQ | X27V-EQ, blind | **TRUE given MR**; [hand, two derivations, blind] |
+| E | given MR, `σ_μ(E ∖ T₄) = 0` for every translation-invariant random four-colouring; T-C′'s (R1) closed | X27D-TA + SPL + E | X27V-TA + FS + R1, blind; SPL's product-of-local-means step re-derived at its stage 4 | **TRUE given MR and X22D-QR**; [hand, two derivations, blind] (owner's ruling 1) |
+| TR-ROT | as stated | GAP at NA₀ | GAP at COL-E | **GAP**: one wall, two strengths — NA₀ (pure dynamics of `U ↷ R̂`) sufficient, COL-E exact given MR; NA₀ ⟹ COL-E |
+| ATT | a counterexample's shape (S1)–(S4) | X27D-ATT | (S1)–(S2) blind as X27V-R2; Haar-singularity, (S3) re-derived from the statements | **TRUE given MR**; [hand, one mind; (S1)–(S2) matched blind] |
+| FL | the flip: as worded TRUE vacuously; in the averaging kind ⟺ TR-ROT given MR | X27D-FL, FLit | X27V-F1–F4, blind | **retired as equivalent to TR-ROT** (owner's ruling 2); [hand, two derivations, blind] |
+| SIERP | the two-summand combinatorial route to NA₀ | FALSE (Sierpiński) | not checked | **route closed**; [hand, one mind] |
+| PM | points to measures | — | X27V-PM | **route closed** for abstract actions; the single-character case also open (X27V §4.2); [hand, one mind] |
+
+**FALSE was not available** to either mind: a counterexample to TR-ROT is a translation-invariant random four-colouring outside Pull, i.e.
+row 88's "no" (R88-TA2).
+
+### 2. The owner's rulings (applied)
+
+1. X27D-E / X27V-TA+FS graded **two derivations, blind**, given MR and X22D-QR.
+2. TR-ROT-flip **retired** as equivalent to TR-ROT (X27D-FL, X27V-F2); not re-posed.
+3. NA₀ enters as **a line** in FS-100's stub (the J38 block) and in FS-98's (beside T-B1 and TR-ROT), not as a stub of its own.
+4. **Owner slip, for the record:** the X27 briefs posed the flip without X22V §2.2's qualifiers "affine, `U`-invariant", which made it vacuous — a
+   G21 instance (a paraphrase that empties a claim); one clause in G21.
+5. **G79's data point:** X27D-E came from an example invariant (the rotation-averaged spectrum every translation-invariant `μ` carries); the
+   flip's counterexample-invariant form gave only an equivalence; one clause in G79's record.
+6. (Owner's added notes, from X30F's report) `CLOSED-QUESTIONS.md` §1.7, §2.6, §3 rewritten to current state; `--dupes` brought back to the
+   launch count; FS-101 stays at rank 3′; item 10 keeps the 8/3-forcer route.
+7. (Owner's two additions, after X11K3 landed) a kernel row 127 for the every-real headline in `Proofs/`, and the gate counts refreshed.
+
+### 3. Predictions scored (both sealed C0 tables)
+
+| claim | X27D's C0 (sealed 06:58) | X27V's C0 (sealed 06:58) | outcome | score |
+|---|---|---|---|---|
+| TR-ROT | GAP 0.87, "stopped by the `E`-null part" | GAP 0.95, "given MR TR-ROT ⟺ Q-μ" | GAP at NA₀ / COL-E; the `E` part fell | both met; X27V did not expect the `E ∖ D` part to die |
+| flip, literal | TRUE 0.90 | 0.9 that a distance function qualifies | TRUE, vacuous | both met |
+| flip, averaging kind | GAP 0.85, a spectral no-go expected provable | name one 0.03; a no-go of a stated kind 0.4 | GAP; no-go for the spectral kinds (FL (b)) and for `E ∖ T₄` readers (X27V-F4) | met; the useful no-go (pair-correlation functionals) not reached |
+
+### 4. The ban log
+
+Neither mind searched: X27D's four stages and X27V's four each log "would have searched here: none" beyond X27D's stage 2 note (numerical
+rotation averages on a finite set of characters, not done). X27D's one tool (`tools/x27d_ramanujan.py`) is exact arithmetic of seconds checking a
+derived local identity, plant watched. X31C: none.
+
+### 5. Slips
+
+- **X27V, disclosed (2):** its stage 3 over-claimed that closed-set rigidity settles COL-E for single characters (corrected at stage 4, §4.2;
+  verdict unchanged); a fence touch — X27D-L0's four-line proof, (S4)'s two-line proof and one row of X27D's flip table were on screen while it
+  read statements, all after its stage 3 was committed. Neither changes a grade: EQ, E, FL were committed blind before the touch.
+- **The owner's:** the flip posed without "affine, `U`-invariant" (ruling 4).
+- **The brief's (X31C's quotation check):** NA₀ paraphrased without "positive", and COL-E called "the same step" as NA₀ where X27V §4.1 says
+  the two differ in strength; every text X31C wrote quotes the sources.
+
+### 6. §G, §IQ, prior art
+
+- **G79** (ruling 5) and **G72:** the structural question — what every translation-invariant `μ`'s spectrum looks like after rotation averaging
+  — produced E; the existence question produced nothing directly (X27D §3.4). A thirteenth for G72's count is the owner's to add (the count
+  closes per milestone, and FS-100's is counted).
+- **Prior-art debt:** NA₀'s home discipline is homoclinic and asymptotic-in-density points of algebraic actions of infinitely generated abelian
+  groups (`[LindSchmidt1999]`, in `BIBLIOGRAPHY.md` as reviews only; Einsiedler–Lind–Miles unsearched). Not searched at this close; logged
+  in the inventory for the next gate.
+
+### 7. Inventory
+
+**Inventory:** `plans/FS100-x2x3-wave3-close-inventory.md` items 122 onward (X27D's and X27V's INVENTORY lines, the owner's rulings and
+additions) appended and ticked by X31C.

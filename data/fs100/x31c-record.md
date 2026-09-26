@@ -47,3 +47,13 @@ points of algebraic actions (`[LindSchmidt1999]`, reviews only, unread) — logg
 
 § B lines for §5 were added in this stage (six, pointing at row 126, written at Stage 3) so that `fs71 --strict` passes at every commit:
 exit 0, PASS, 784 rows.
+
+## Stage 2 — SAVED (the plan's §R-close (stage 5, wave 3b); the wave-3 inventory, items 122–150, appended and ticked)
+
+`plans/FS100-three-field-lemma.md` § "§R-close (stage 5, wave 3b)": verdicts per claim (EQ, E, TR-ROT, ATT, FL, SIERP, PM), the owner's rulings
+1–7, both C0 tables scored, the ban log, slips (X27V's two, the owner's, the brief's), §G/§IQ/prior art. Items 147–149 are ticked for work in
+Stages 3–4 of this record (CLOSED-QUESTIONS, `--dupes`, the kernel row, the gate counts); a later stage that does not land one reopens it.
+
+### Would have searched here (Stage 2)
+
+- None.
