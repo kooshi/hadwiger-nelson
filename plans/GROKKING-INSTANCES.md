@@ -176,6 +176,10 @@ The paper had been in our bibliography, its row naming the theorem, for two week
 
 FS-103's: `[DuczVarga2026]`, held and read in full at FS-56's §PA (2026-09-16), had disproved `[MatolcsiEtAl2025]` Conjecture 1 in June 2026; the gate framed CTL-FRAC as "refuting a published conjecture", and the owner repeated it to Kooshi (`plans/FS103-close-inventory.md` items 38, 28). BDOV 2014 and Ambrus et al. §4, held and read at J26, bore on `χ_CP` and were not drawn until the gate; zbMATH's `ab:` missed BDOV (summary withheld).
 
+*FS105-X, FS-105's close (§R-close 4.6):*
+
+FS-105 (`plans/FS105-harden-mr.md` §PA.1, §R-close 3.1): **the proof 'used by statement' was in neither paper the record named.** Row 120 said EL2021 Thm 1.2's proof was 'in EL2021 §§2–9, unread here'; EL2021 p. 2 attributes it to EL2003 ('already proven in the announcement [7]'), and EL2003, fetched by Kooshi's upload, is an announcement whose §6 is 'Outline of the proof of Theorem 1.1'. The theorem stands on EL2021 Thm 1.3 plus a deduction nobody had written. In the same milestone, twice more: the plan owed a new row to `[BekkaFrancini2020]`, 'abstract only', a paper held as `[BekkaFrancini2022]` with §1 read twice; and W listed Jungić's *Still Spinning* as a new title, owed since FS-58's §PA.
+
 ## G51 — A competitor and an advisor beat one mind
 
 *F1: G51 as at `c5e55f12^`.*
@@ -199,6 +203,10 @@ Its author declined the credit and named the sequencing: having been wrong twice
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
 
 FS-103 (two blind verifiers, an advisor comparing them, two blind checks of one-mind derivations): no divergence of truth in four pairings; the free-window retractions were the advisor's endorsement of "totally real" for the wrong reason, V1's "the exception is needed", V1's 59 misread, and F's §3.4 item 2 (by B). The owner's trims of verbatim claims cost twice: claims-m2 dropped M1's hypothesis `T ⊆ supp σ` (false as written, found by N as N-SUPP) and N's brief pointed at "A-E3 in the claims", which no open file held.
+
+*FS105-X, FS-105's close (§R-close 4.6):*
+
+FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1; inventory items 12, 24, 28): **two covert channels open to every blind job of FS-103 and FS-105.** (1) The session transcripts (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/` — 717 files carrying X01D's and X12B's route — were fenced in no FS-103 blind brief (V1, V2, B, N) and not in FS-105's B105 as drafted; the advisor found it before B's launch (A Stage 3). (2) The harness scratchpad is one directory shared by every subagent of the session, across milestones (579 entries), so B's fence 'outside your own scratchpad' fenced nothing; the blind D found it in its stage 1 (D §1.5) and overwrote two same-named files there. None of the blind jobs reported reading either; B confirmed 'none' (item 28), and FS-103's blind grades stand (the close's ruling, 3.8). G51's own design lesson — 'isolate the scratchpad per agent' — had stood since 2026-09-09; the briefs isolated the record, not the harness's directories. Also: no divergence of truth in four pairings (R–D on the deduction; R–W on (a1)–(a8) at de Grey's field; B–X01D/X12B/X01V on EF_F⁺; A–R, a misattributed route); the free-window slips were the owner's paraphrase 'a withdrawn checking reading' (item 7), R's scope tool passing a plant silently (item 20), B's constant on the equality boundary (item 27) and W's inert split filter (item 31).
 
 ## G54 — Tight or slack
 
@@ -241,11 +249,19 @@ Thirteenth, FS-100 stage 5 — the headline (row 120) from recognition at the pr
 
 Fourteenth, FS-103 (`plans/FS103-collapse-cp-plane.md` §R-close 3.3) — through the structural question: CTL-FRAC ("does the argument run one class at a time?") is a question about every invariant independent set, and FRAC answered it (row 129); both blind C-LB derivations carried §IQ's named invariant, the fibre colour-measure vector; the measurable equality (row 130) came from extending a known tool (weak-* compactness; BDOV's operator).
 
+*FS105-X, FS-105's close (§R-close 4.6):*
+
+Fifteenth, FS-105 (`plans/FS105-harden-mr.md` §R-close 3.3): the other kind. A hardening; its §IQ structural form (what every invariant measure with zero entropy for one element carries, for a group with polynomially many elements of bounded height) was answered — `T + A` at ℚ(√635087) (FS105-B), any positive growth exponent (FS105-W-G) — but the products came from reading (R, D) and from re-deriving a known proof (B, W).
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
 
 First test: the wanted-poster sessions J37–J39, which set counterexample invariants side by side; FS-100's result came from an example's (the cross of an actual four-colouring of ℚ², row 116); so did FS-75's kernel port (the winding every three-colouring carries, row 119); FS-100 stage 5: the headline from an example invariant of the acting group (entropy against growth); the colouring flip GAP'd at QTCA_{1/3} (row 122); FS-100 wave 3: the class theorem and SP-Cor in every degree from an example invariant (the independence-ratio profile every colour class obeys, place by place); the no-gos (B-3, C-4, TR-ROT) from counterexample invariants; wave 3b: TR-ROT's closure on `E` from an example invariant (the rotation-averaged spectrum every translation-invariant colouring measure carries), its flip, a counterexample invariant, only an equivalence (row 126).
+
+*FS105-X, FS-105's close (§R-close 4.6):*
+
+FS-105: B's EF_F⁺ from an example invariant of the acting group (the height count) against the measure's (zero local dimension); FS105-DED from what every Thm 1.3 decomposition carries under total irreducibility; (W) and (W′), counterexample invariants — the shapes a refutation must carry — located row 129's test and produced no theorem.
 
 ## `CLAUDE.md` § Delegation — one level deep
 
@@ -268,6 +284,10 @@ unrelated failure.
 *F1, from the reviewer-bundle bullet, cut in `34464cba` (2026-09-13), after “…trusts none of this actually check?”:*
 
 Its discoverer declined the credit for insight and named the question instead, which is the version that reproduces.
+
+*FS105-X, FS-105's close (§R-close 4.6):*
+
+FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1): asked of MR, 'what must someone who trusts none of this actually check?' moved the external weight from EL2021 Thm 1.2, whose proof is nowhere in print, to Thm 1.3 plus ten lines.
 
 ## `CLAUDE.md` § Toolchain — Two machines
 

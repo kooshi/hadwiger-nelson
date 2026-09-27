@@ -353,7 +353,9 @@ first." Copy the best instance below and change only its slots. Paths are relati
 5. **The statements, verbatim, each with its source address** — the fixed claim list, with its notation's address. Never a paraphrase
    (§7 rule 7).
 6. **For a blind job, the fences:** every path by name — the derivation's record, data, tools, brief and report, the close inventory, the
-   index, the advisor's record, the queue sections that carry routes, the bodies of the fenced jobs' commits — and "if a search prints fenced
+   index, the advisor's record, the queue sections that carry routes, the bodies of the fenced jobs' commits; the session transcripts
+   (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/`; `git log -p` on fenced paths; and the shared
+   harness scratchpad outside the job's own subdirectory `scratchpad/<job id>/`, which the brief assigns — and "if a search prints fenced
    text, stop reading it and log the touch" (§7 rules 10–11).
 7. **What may be used as given, by statement**, with each input's grade.
 8. **Stages, each with a size.** Stage 1 is the quotation check and a C0 table (a probability per claim) before any derivation. A verifier
@@ -425,7 +427,7 @@ list of owner slips is `plans/CRUNCH-2026-09-25-queue.md` §8.5; run 2's invento
 
 | # | rule | the incident |
 |---|---|---|
-| 10 | Fence a blind job from the derivation's record, data, tools, brief and report, the close inventory, the index, the advisor's record and the commit bodies of the fenced jobs; name every path. | J51V's and X12B's fence lists (§6). |
+| 10 | Fence a blind job from the derivation's record, data, tools, brief and report, the close inventory, the index, the advisor's record and the commit bodies of the fenced jobs; the session transcripts (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/`; `git log -p` on fenced paths; and the shared harness scratchpad outside the job's own subdirectory `scratchpad/<job id>/`, which the brief assigns; name every path. | J51V's and X12B's fence lists (§6). FS-105: every FS-103 and FS-105 blind brief left the transcripts and the shared scratchpad open (the advisor found the first before B105's launch, the blind D the second); no blind job reported reading them. |
 | 11 | A fence touch is logged by the job at once; the owner rules on it by commit order and by what the touched text carried. | X21V touched a fence at 06:35, after its blind A-3 was committed at 06:34: counted blind. X23V blind "by commit order" (44 s). X25B saw a route outline only: graded "blind to the proofs, not the outline". X05V saw one line naming itself and the headline cap: harmless. J51V's grep of `plans/*.md` reached K0's membership: that verdict not counted blind. |
 | 12 | Commit subjects stay neutral while any blind job runs. | Owner commit 3648d3a5 named a counterexample while J51D could read `git log`; J51D's prior (0.80 FALSE) predated it, and its FALSE verdicts were graded with that noted. |
 

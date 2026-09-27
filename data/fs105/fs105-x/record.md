@@ -110,3 +110,19 @@ mirror:** `CLAUDE.md` ranks 1–27 and the `28–60` group checked against this 
 `bib_audit.py` exit 0.
 
 ### Stage 4 — SAVED
+
+## Stage 5 — SAVED (`plans/GROKKING-INSTANCES.md`; the two protocol fixes)
+
+- **Instances** by `data/fs105/fs105-x/instances_edits.py` (each at the end of its section, before the next heading; `--check` PASS,
+  `--self-test` refuses a planted heading; 70,388 → 73,765 bytes): §G50, §G51, §G72, §G79, § The standard of evidence — C's five texts,
+  checked verbatim by script against §R-close 4.6 (5 of 5 found). **First application raised `--dupes` from 10 to 12**: my attribution
+  line (`*FS105-X, a new instance, FS-105's close (\`plans/FS105-harden-mr.md\` §R-close 4.6):*`) ran into the instances' own opening
+  address, a repeated 10-word run; reverted, the attribution shortened to `*FS105-X, FS-105's close (§R-close 4.6):*` (each instance
+  carries its full source address in its first words), re-applied: `--dupes` 10.
+- **Protocols** (by hand, after reading each target): `plans/PROTOCOL-competitor-and-advisor.md` rule 1, C's paragraph after the first
+  sentence's instance ("… Give each session its own directory and say so."); `plans/PROTOCOL-crunch.md` §6.1 item 6, C's clause after "the
+  bodies of the fenced jobs' commits"; §7's rules table, rule 10, the same list and C's incident sentence. All three checked verbatim by
+  script against §R-close 4.7 (whitespace-normalised: 3 of 3).
+- **Gates:** fact audit exit 0, AUDIT PASSED; `--dupes` 10.
+
+### Stage 5 — SAVED

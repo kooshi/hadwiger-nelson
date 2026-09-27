@@ -22,6 +22,13 @@ disagreement before anything is paid for, and count the retractions — zero mea
 1. **Isolate each agent's scratchpad.** Coxeter found the owner's `ladder.py` in its own scratchpad four minutes after the owner's
    hint arrived — a shared temp directory is a covert channel; Coxeter disclosed it at once, declined to run the contaminated line
    and took a different route (which is where the rigidity theorem came from). Give each session its own directory and say so.
+   **Fence the harness's own directories by name** (FS-105, 2026-09-26). The harness scratchpad
+   (`/tmp/claude-1000/-home-kooshi-source-lean-dir/<session>/scratchpad/`) is one directory for every subagent of the session, across
+   milestones, so 'outside your own scratchpad' fences nothing; and the session transcripts
+   (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl` and `subagents/`) and `chats-bak/` hold every earlier agent's route. Every
+   blind brief fences all three by path, forbids `git log -p` on fenced paths, and gives the job its own subdirectory
+   `scratchpad/<job id>/`, to create, list and read files only there; a job that lists the shared root, or opens a file it did not
+   create, logs it as a fence touch.
    **The working files and the advisor's record live in those scratch directories until hand-back, never in `plans/`** — every
    agent reads `plans/`, so a competitor's file there is the same covert channel one directory up (FS-73: the first drafts put
    them in `plans/`; the owner caught it before launch). **The advisor may read exactly the two working files**, and **each
