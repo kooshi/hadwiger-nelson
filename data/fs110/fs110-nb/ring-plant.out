@@ -1,0 +1,13 @@
+OK  ring hexagonal d e f d e f: proper=True W=2 swaps=[]
+OK  ring reversed hexagonal: proper=True W=-2 swaps=[]
+OK  ring two colours, 60-degree arcs: proper=True W=0 swaps=['0', '60', '120', '180', '240', '300']
+OK  ring d e d e f f (60 each): proper=False W=- swaps=-
+OK  ring three 120-degree arcs: proper=False W=- swaps=-
+OK  ring hexagonal, shifted arcs 50/70 (a 70-degree arc: improper): proper=False W=- swaps=-
+BAD ring PLANT improper (partners coincide): proper=False W=- swaps=-
+OK  tile triangle b1 b2 b3: s parity=0 transport parity on R_1=0
+OK  tile square b1 b2 b1 b2: s parity=0 transport parity on R_1=0
+OK  tile square b1 b2 b3 b2: s parity=0 transport parity on R_1=0
+OK  tile pentagon five distinct: s parity=0 transport parity on R_1=0
+OK  tile pentagon b1 b2 b3 b4 b2: s parity=1 transport parity on R_1=1
+unexpected=1

@@ -119,3 +119,148 @@ prior. FALSE and GAP are reachable for every item (a counterexample ring or loca
 | 13 N-X (a)–(c) | 0.5 | 0.35 | 0.15 |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — derivations from the statements alone, and the killing tests
+
+*Standing facts used (each re-derived here, [hand, one mind]):* **A-EXACT** (interior points of same-colour tiles are never exactly 1 apart; open
+tiles, null unit pairs). **A-CIRC**: if `u ∈ cl T`, `T` open connected of colour `j`, then no tile-interior point `z ∈ ω(u)` has colour `j` — move `z`
+radially by `±δ` inside its tile; the distance to points of `T` near `u` takes values near `1 ± δ`, so by connectedness the value 1: holds for a cusp
+tile (no angle is used). **TS-C** (cluster diameter `≤ 1`, `plans/FS106-TS-derivation.md` §2.4). Coordinates: the centre at 0, the point `x = (1, 0)`,
+`σx = (½, √3/2)`; at `x` the tangents of `ω(0)` are `90°`/`270°`, of `ω(σx)` are `30°` (outside `B(0,1)`) and `210°` (inside), of `ω(σ⁻¹x)` are
+`330°` (outside) and `150°` (inside).
+
+### 2.1 Item 11, N-E2 — TRUE [hand, one mind]
+The distance map on `T × T′` (open, connected) avoids 1 (A-EXACT), so all values `< 1` or all `> 1`; letting `q → u′ ∈ cl T′` gives `T ⊆ B̄(u′, 1)`, or
+`T ∩ B(u′, 1) = ∅`, and symmetrically. Needs connected tile interiors (`𝓜_K`). Used below as: a tile at `y` meeting `B(x, 1)` is Siamese with every
+same-colour tile at `x`, so those lie in the closed half-plane at `x` facing `y`; a tile at `y` meeting the outside of `B̄(x, 1)` is outer, so those face away.
+
+### 2.2 Item 1, N2-RING — TRUE [hand, one mind]
+Lift the ring to `L : ℝ → ℤ` (steps `±1`), `L(θ + 2π) = L(θ) + 3W`; `h(θ) = L(θ + π/3) − L(θ) ≢ 0 (mod 3)` off finitely many `θ` (A-EXACT). A change
+of one endpoint moves `h` by `±1` and keeps it in its class `{3m+1, 3m+2}`; a simultaneous change moves it by `0` or `±2`, and `±2` (the only class
+change) is exactly the exchange `(a, b) → (b, a)`, a swap. With no swap `h ∈ {3m+1, 3m+2}` throughout, and `3W = Σ_{k=0}^{5} h(θ + kπ/3) ∈
+[6(3m+1), 6(3m+2)]`, so `W ∈ [6m+2, 6m+4]`: `|W| ≥ 2`. So `|W| ≤ 1` (not only `W = 0`) forces a swap. The six-colour step: the ring has exactly three
+colours (`P_cl(u)^c`); with seven colours (K1) it has four and the degree to `K₃` is undefined — six is spent there. Checked on named rings by
+`tools/fs110_nb_ring.py` (§2.10).
+
+### 2.3 Item 6, N2-V4 — first step TRUE; second step GAP, and under Condition 5 vacuous [hand, one mind]
+*First step:* `|P_cl(v)| ≥ 5` leaves one colour for `ω(v) ∖ Γ` (finite `Γ`-trace), and points `60°` apart share it — against A-EXACT. TRUE.
+*Second step.* With `|P_cl(v)| = 4` the ring is two-coloured `{e, f}` with `c(θ + 60°) ≠ c(θ)`, so every change point `y` is a swap with `σ_v y` and
+`σ_v^{-1}y`. At `y` the four directions of `ω(σ_v^{±1}y)` must avoid `P_cl(σ_v^{±1}y) ⊇ {e, f}` (A-CIRC), unless `Γ` runs along them. Hence:
+- `P_cl(y) = {e, f}` (the covering pair the statement asks for) **only if `Γ` carries arcs of `ω(σ_v y)` and `ω(σ_v^{-1}y)` at `y`**;
+- otherwise `y` has an inner colour `i` (inside `B(v,1)`, Siamese) and an outer colour `o` (outer), both in `P_cl(v)`, and `i ≠ o` (a tile of `v` of that
+  colour cannot be both inside `B̄(y,1)` and outside `B(y,1)`).
+**NB-4 (theorem, [hand, one mind]): if in one `σ_v`-orbit `y₀, …, y₅` of change points no `Γ`-arc of `ω(y_k)` or `ω(y_{k±1})` passes through `y_k`, then
+`|P_cl(v)| = 4` is impossible.** *Proof.* Then `|P_cl(y_k)| ≤ 4` (first step at `y_k`), so `P_cl(y_k) = {e, f, i_k, o_k}`, and `i_k, o_k ∉ P_cl(y_{k+1})`
+(they sit on `ω(y_{k+1})`): consecutive pairs `{i_k, o_k}` are disjoint 2-subsets of the 4-set `P_cl(v)`, so they alternate `{A, B}`, `{C, D}`. For each
+even `k`, `A`'s sectors at `v` lie in the closed half-plane facing `y_k` (if `A = i_k`) or facing away (if `A = o_k`); three half-planes whose lines
+are `60°` apart meet in a closed `60°` arc or nothing. So each of the four colours owns at most `60°` at `v`: `240° < 360°`. ∎ So the second step's
+content lies entirely in the configurations with unit arcs at the change points, which the statement does not name (its proviso names only arcs on
+`ω(v)`). **Verdict: GAP at "some change point is exactly bichromatic" when `Γ` carries arcs of `ω(y)` or `ω(σ_v^{±1}y)` at a change point `y`;
+vacuously TRUE otherwise (NB-4).** Under Condition 5 there is no four-colour vertex at all — S–V's Lemma 2 (chromaticity `≤ 3`) re-proved
+region-only for `𝓜_K`; K-CHR4's `|P(x)| = 4` closed for such maps under Condition 5.
+
+### 2.4 Item 13, N-X — (a)–(c) TRUE, (d) TRUE as far as quoted [hand, one mind]; and a corollary the side may not state
+(a) The half-arcs of `ω(u)` at `w₀` lie in tiles of colours `∉ P_cl(u)`, hence of `v` (A-CIRC; the types cover `[6]`; no unit arc there); likewise for
+`ω(v)`; the four tangents alternate. (b) The `u`-colour tile on `ω(v)`'s inner half-arc meets `B(u,1)` (Siamese), the outer one lies outside
+(outer); one colour cannot be both (N-E2). (c) `ω(w₀)`'s half-arcs at `u` must avoid `P_cl(w₀) ⊇ {a, b}`, so lie in `a′` (or along `Γ`); if `a′` were one
+sector holding both `±τ` in its interior, `a` and `b` would share an interval of `< 180°` missing `±τ`, i.e. one open half-plane — against `a` facing
+`w₀` and `b` facing away. So two `a′` sectors straddle the tangent line. (d) as quoted is A-CIRC with the two-colour ring.
+**NB-5 (corollary, [hand, one mind]): under Condition 5 no tight six-map in `𝓜_K` has a close covering pair.** At a common unit point `w₀`
+(two exist for `0 < |u − v| < 2`), `w₀ ∈ Γ` and is a vertex (N-SEAM: a non-vertex seam needs a unit arc), `|P_cl(w₀)| ≥ 4` (N-X (a), (b)), `≤ 4`
+(item 6's first step), and `≠ 4` (NB-4). So under Condition 5 **every** escape of C-SEAMLIST dies at `w₀` — the tangent interface and the bowtie at `u`
+or `v` included — and the tangency seam is exactly the unit-arc seam. Controls: K1 and the slack hexagonal colouring have no covering pairs (seven
+colours; six is spent at "the half-arcs of `ω(u)` carry `v`'s colours" and at "the third colours at `y_k` lie in `P_cl(v)`"); Townsend's ⅔π sector is
+outside Condition 5.
+
+### 2.5 Item 2, N2-SWAP — TRUE given item 6's second step, which it inherits; under Condition 5 TRUE outright [hand, one mind]
+At a swap point `x` (`a | b` at `x`, `b | a` at `σx`): the half-arcs of `ω(σx)` at `x` (`30°` outer, `210°` inner) avoid `P_cl(σx) ⊇ {a, b}`. Unless
+`Γ` runs along them, `x` has an outer colour `o` and an inner colour `i` outside `{a, b}`. If `o = i = g`: `g ∉ P_cl(u)` (Siamese and outer at once), so
+`g = c`, the third ring colour; if `P_cl(x) = {a, b, c}`, `(u, x)` is a covering pair at distance 1. Otherwise `|P_cl(x)| ≥ 4`: `= 4` if `ω(x)` carries no
+`Γ`-arc, and item 6's second step gives the pair `(x, y)`. The route matches the statement's shape. Under Condition 5, NB-4 removes the four-colour case,
+so a swap gives `(u, x)` directly. Note: a swap may also give `(u, σx)` (the same argument at `σx`); the statement's parenthesis lists `(u, x)` and
+`(x, y)` — harmless if "swap point" names either end.
+
+### 2.6 Item 3, N2-ACT1-W0 — TRUE under Condition 5; GAP otherwise, inheriting item 6 [hand, one mind]
+Under Condition 5: a four-colour vertex does not exist (NB-4, so that clause is vacuous) and a swap gives `(u, x)` (§2.5). Without it, "bar the named unit
+arcs" names arcs of `ω(σx)` at `x`, of `ω(x)` and of `ω(v)`, but not the arcs at the change points of a four-colour vertex's ring that item 6's second
+step needs. **Scope note (divergence of consequence):** by NB-5, under Condition 5 a close covering pair is impossible, so N2-ACT1-W0 under Condition 5
+reads: *a tight six-map in `𝓜_K` under Condition 5 has no swap anywhere and no four-colour vertex* — every trivalent ring has `|W| ≥ 2`. Act One under
+Condition 5 is then equivalent to the non-existence of such maps.
+
+### 2.7 Item 4, N2-TRANS — TRUE at the nerve step under its hypotheses, bar `d = 2` [hand, one mind, a sketch at genericity]
+For `z` on the edge (type `{a, b}`) colour `ω(z) ∖ Γ` by `{c, d, e, f}` (A-CIRC) and collapse `c, d ↦ ∗`; `W_∗(z)` is defined (finite trace: no unit
+arcs) and changes only when `ω(z)` sweeps across a vertex `p`, by the degree of `p`'s collapsed sector cycle (tangency births change nothing). All of
+`p`'s sectors are crossed on one side or the other, so `P_cl(p) ⊆ {c, d, e, f}`, and a non-zero jump needs `P_cl(p) ⊇ {e, f}` plus `c` or `d`:
+`{c, e, f}` is complementary to `u′`, `{d, e, f}` to `u`, at distance `≤ |p − z| + |z − u| ≤ 2` (equality only in the collinear `d = 2` configuration);
+`{c, d, e, f}` makes `(z, p)` a covering pair at distance 1. All excluded in an Act-One-free map, bar `d = 2`. The ends: as `z → u`, `ω(z)` passes a change
+point `q` of `u`'s ring on one side; a jump there needs `q ⊇ {c, e, f}` — complementary to `u′`, or with `d`, covering with `z`, or with `a`/`b` a
+four-colour vertex (item 6; none under Condition 5 by NB-4). So the identification holds; the residue is the `d = 2` configuration and a four-colour
+`q` without Condition 5.
+
+### 2.8 Item 5, N2-FLIP — the parity TRUE; the chain TRUE under Condition 5 given item 4 [hand, one mind]
+Around a tile `T` of colour `a` with neighbours `b₁, …, b_n` (consecutive distinct), `u_i = {a, b_{i−1}, b_i}`, ring `R_i = S ∖ {b_{i−1}, b_i}`,
+`S = [6] ∖ {a}`. Item 4's transport `R_i → R_{i+1}` is the restriction of the transposition `t_i = (b_{i−1} b_{i+1})` of `S` (identity when `b_{i−1} =
+b_{i+1}`, i.e. `u_i`, `u_{i+1}` of one type). `Π = t_n ⋯ t_1` preserves `R_1`; `sgn Π = (−1)^{n − s}` (`s` the same-type steps), and `Π` swaps
+`{b_n, b_1}` iff `n` is odd (each step exchanges the older and newer neighbour). So `sgn(Π|R_1) = (−1)^s`: **reversed iff `s` is odd.** Instances:
+the pentagon `b₁ b₂ b₃ b₄ b₂` has `s = 1` (reversed); the pentagon with five distinct neighbours, the triangle and the squares `b₁b₂b₁b₂`, `b₁b₂b₃b₂`
+have `s` even (checked in `tools/fs110_nb_ring.py`). Then `W(u₁) = −W(u₁) = 0`, a swap (item 1), a covering pair (§2.5) — under Condition 5 with no
+other input. Needs every boundary vertex of `T` trivalent (true under Condition 5 by NB-4, bar bichromatic vertices of degree `≥ 4`, through which the
+transport of item 4 runs unchanged since `z` keeps type `{a, b}`).
+
+### 2.9 Items 7–10, 12
+- **Item 7, N-SEAM — TRUE [hand, one mind].** `w₀ ∉` a tile of colour `j ∈ P_cl(x)` (A-CIRC), so `w₀ ∈ Γ`; each tile at `w₀` is Siamese or outer to `x`'s
+  same-colour tile (N-E2), i.e. on one side of `ω(x)`. At a non-vertex `w₀` with sides `T₁, T₂`: a side constrained by `ω(x)` forces the arc tangent to
+  `ω(x)` at `w₀`; constraints from both `ω(u)` and `ω(v)` would need both tangents, impossible for `0 < |u − v| < 2`; so both side colours are one `x`'s,
+  one side Siamese and one outer, and the arc lies on `ω(x)`. TS-U then fills `x`'s side cones with its other colours: one colour in two sectors (a
+  cusp of `c′` cannot merge them) when `|P_cl(x)| = 3`. Needs only `P_cl(u) ∪ P_cl(v) = [6]`, as stated.
+- **Item 8, N2-S1 — TRUE, with the exceptional distances exact [hand, one mind].** The `c`-tile at `w₀` is locally `B(u,1)`'s side of the arc; a
+  `c`-tile at `p = σ_v^{±1}w₀` (`|p − w₀| = 1`) must be Siamese or outer to it, which needs `ω(p)` tangent to `ω(u)` at `w₀`: `p = u` or `p = 2w₀ − u`;
+  likewise for `c′`. `p = u` iff `|u − v| = 1`; `p = 2w₀ − u` iff `|u − v|² = |(w₀ − v) + (w₀ − p)|² = 2 + 2cos 60° = 3`. Otherwise `p`'s tiles avoid `c, c′`,
+  and `v`'s ring (colours `P_cl(u) = {c, c′, γ}`) is `γ` on both sides of `p`. The side located `{1, √3}` numerically; they are exact.
+- **Item 9, N2-HEX — TRUE given no `Γ`-arc of `ω(x_{k±1})` at the six rotation points (e.g. Condition 5) [hand, one mind].** At a rotation point
+  `x_k` (`d | e`, partners `e | f` and `f | d`) the directions `330°`, `30°` must avoid `{f, d}`, `{e, f}`; a second `d`- or `e`-sector there is excluded by
+  **TS-C** (it would be `> 1` from the same-colour cluster reaching `x_{k∓1}`: `|x + t e_φ − x_{k−1}|² = 1 + 2t cos(φ − 60°) + t² > 1` on the cone). So an
+  outer colour `g ∈ P_cl(u)` sits at `x_k`, and `g`'s sectors at `u` face away from `x_k` (N-E2). With `S_g` the rotation points `g` serves, `g` owns at
+  most `180° − spread(S_g)`; covering six points `60°` apart forces `Σ spread ≥ 180°`, so equality, and the only tiling is three consecutive pairs:
+  sectors of exactly `120°`, each facing away from two consecutive rotation points. **Without TS-C the statement fails locally**: rotation points that are
+  bichromatic degree-4 vertices `d, e, d, e` satisfy every pairwise constraint; TS-C is what kills them.
+- **Item 10, N2-ROT — TRUE for swap-free patterns under Condition 5; "no other pattern forces a colour at `x`" is FALSE if a swap partner counts as a
+  pattern [hand, one mind].** Partners at `σx`: `e→f` (rotation with `x`), `f→d` (the other rotation), `e→d` (swap), constant `f`; at `σ⁻¹x` likewise.
+  (A+, A−) = both rotating as in item 9: outward cone forced (colour in `P_cl(u)` by TS-C; one colour only under Condition 5 by NB-4), `u`'s sector away
+  from `x`; (B+, B−): inward, toward `x`; mixed rotations and constant partners force nothing (`d` or `e` can span the cone). **A swap partner forces
+  colours at `x` on both sides** (§2.5). Reconstruction of the patterns is mine; stage 4 checks the side's definitions.
+- **Item 12, N-HORN — (i) and (ii) TRUE; C-CUSP-K TRUE at LIM (a cusp is a zero-width sector of the tangent or bowtie kind), the transfer to R-CP only in
+  V-CP's projection reading [hand, one mind].** (ii): `ω(z)` near `u` is `y = t + x²/2`; it enters `κ₁x²/2 < y < κ₂x²/2` for small `t > 0` iff `κ₂ > 1`,
+  for `t < 0` iff `κ₁ < 1`; missed both ways iff `κ₂ ≤ 1 ≤ κ₁`, impossible. `κ₁ ≠ κ₂` holds because two circular arcs with one tangent and one curvature
+  coincide. At LIM the kill is exact (A-EXACT on the open horn), so the pigeonhole `B_u ∩ B_v = ∅` runs with the horn counted as a ray. For SEQ, a horn
+  contains no cone of positive angle, so R's fatness (`K(x, I_j; r, s) ⊆ C_j`) does not apply; V-CP's projection form (`A_j` open connected, projection
+  containing `(r, sσ)`) does. A cusp that saves a pair makes a degenerate bowtie (`b, c_horn, b, a`) or a tangent horn (a T1 tangent seam).
+
+### 2.10 Tool
+`tools/fs110_nb_ring.py` (exact, `Fraction` angles in degrees): for rings given by formula (lists of arcs) it computes `W` and the swap points and checks
+`|W| ≥ 2` when swap-free; for tiles given by their neighbour sequences it computes `s` and the parity of `Π|R_1` by the permutation product. Named
+rings: the hexagonal ring `d e f d e f` and its reverse (`W = ±2`, no swap); two-coloured `60°` arcs (`W = 0`, six swaps); `d e d e f f`, three `120°`
+arcs and a hexagonal ring with arcs `50°/70°` are refused as improper (an arc over `60°` holds a unit pair — why N2-HEX's arcs are exactly `60°`); five
+tiles (`s` parity equals the transport parity on `R_1` in all five, the pentagon `b₁b₂b₃b₄b₂` odd). Recorded run exit 0,
+`data/fs110/fs110-nb/ring.out`; plant (an improper ring declared proper) goes red for that row alone, `ring-plant.out`, exit 1 as intended.
+
+### 2.11 The killing tests
+- **Seven-colour control** (tight and slack hexagonal): every item spends six at a named step — item 1 at "three ring colours", NB-4 at "the third
+  colours at `y_k` lie in `P_cl(v)`", N-X and NB-5 at "the half-arcs carry the partner's colours", items 7–8 at `P_cl(u) ∪ P_cl(v) = [6]`; K1 has no
+  four-colour vertex and no covering pair, as the items require. Pass.
+- **Townsend's ⅔π sector:** a unit-arc model; every Condition-5 result above is silent on it, and items 7, 8 (unit-arc seams) have no covering pair
+  there (two colours). Pass.
+- **Strip, pinhole, Parts:** the thirteen statements are exact statements about LIM, not area arguments; N-HORN's R-CP transfer is the only area
+  claim, and in V-CP's form it inherits V-CP's scale bound. Parts's tiling has voids, so it is outside LIM. No test fires.
+- **C-SEAMLIST completeness.** At a vertex of `𝓜_K` every blow-up is a cone; `T_u` is null iff two colours of `P(u)` lie in opposite closed
+  half-planes: with three sectors a shared ray on `e_u^⊥` (tangent, T1 or T2); with a colour in two or more sectors, a bowtie; a zero-angle sector
+  (cusp, item 12); or the hypothesis fails by size (cusp's `|P_ess| = 2`, V5's two- and four-sets) or `d = 2`. The list is complete **as a list of
+  C-T-TAN's failures**; "sliver" is a positive-scale notion with no LIM content. **But completeness is the wrong question:** by NB-5, surviving
+  C-T-TAN at `u` and `v` is not enough — `w₀` must itself be a unit-arc seam or a vertex with four or more colours, and without unit arcs neither
+  survives. The seam list should be read at `w₀`, not at `u` and `v`.
+- **Act One apart from the kills.** Items 1–3 and 5 produce a covering pair at distance exactly 1 using only A-EXACT, A-CIRC, N-E2 and (item 5)
+  item 4's transport; no kill is used. Proved apart from the kills: yes, in the cases they cover. **But** NB-5 turns this round under Condition 5:
+  the kills are total there, so Act One is not needed to finish — any covering pair is a contradiction — and what is open is only whether a
+  Condition-5 map can avoid every swap (every trivalent ring `|W| ≥ 2`, every tile with even `s`).
+
+## Stage 2 — SAVED
