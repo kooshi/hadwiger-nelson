@@ -1,0 +1,7 @@
+s=0.5    eps=7.812e-03: min_(P_good) |band ∩ Q| / (eps s) = 1.0568 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1635 (need <= 0.6);  inside = True  -> PASS
+s=0.5    eps=1.000e-05: min_(P_good) |band ∩ Q| / (eps s) = 1.0568 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1871 (need <= 0.6);  inside = True  -> PASS
+s=0.2    eps=1.250e-03: min_(P_good) |band ∩ Q| / (eps s) = 1.0084 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1636 (need <= 0.6);  inside = True  -> PASS
+s=0.2    eps=1.000e-06: min_(P_good) |band ∩ Q| / (eps s) = 1.0084 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1865 (need <= 0.6);  inside = True  -> PASS
+s=0.05   eps=7.813e-05: min_(P_good) |band ∩ Q| / (eps s) = 1.0005 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1637 (need <= 0.6);  inside = True  -> PASS
+s=0.05   eps=1.000e-08: min_(P_good) |band ∩ Q| / (eps s) = 1.0005 (need >= 1);  max_Q |band ∩ P| / (eps s) = 0.1864 (need <= 0.6);  inside = True  -> PASS
+ALL PASS

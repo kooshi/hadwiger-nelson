@@ -1,0 +1,42 @@
+self-test: closed-form min/max distance vs brute force, worst excess 8.882e-16 -> PASS
+
+on-axis cross-check (u alone, s=0.33): grid (0.000087, 0.015426) vs closed form (0.000087, 0.015427) -> PASS;  band length 0.01534 vs R's t1 - 2r = 0.01810
+
+== C1: narrow cone mu = 20 deg, s = 0.33 (curvature window 1.5 sin(mu/2) < s < 2 sin(mu/2)) ==
+[C1] d=1.4142 s=0.33 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0001,0.0573) len 0.0572;  v (0.0001,0.0573) len 0.0572;  s*sin(mu/2) = 0.0573
+   R's bound (t1-2r)^2 = 3.277e-04  (t1 = 0.0191);  forced area in B(w, 0.0873) at grids (801, 1601): 2.165e-04, 2.165e-04
+
+== C1b: same, s = 0.45 (beyond the window: the lower end drops and the area grows again) ==
+[C1b] d=1.4142 s=0.45 r=0.001 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0002,0.0781) len 0.0780;  v (0.0002,0.0781) len 0.0780;  s*sin(mu/2) = 0.0781
+   R's bound (t1-2r)^2 = 5.783e-04  (t1 = 0.0260);  forced area in B(w, 0.0873) at grids (801, 1601): 2.274e-03, 2.273e-03
+
+== C2: same angles, s = 0.02 (small-scale regime) ==
+[C2] d=1.4142 s=0.02 r=0.0001 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0000,0.0035) len 0.0035;  v (0.0000,0.0035) len 0.0035;  s*sin(mu/2) = 0.0035
+   R's bound (t1-2r)^2 = 9.171e-07  (t1 = 0.0012);  forced area in B(w, 0.0873) at grids (801, 1601): 1.009e-05, 1.029e-05
+
+== C3: same angles, s = 0.1 ==
+[C3] d=1.4142 s=0.1 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0001,0.0174) len 0.0173;  v (0.0001,0.0174) len 0.0173;  s*sin(mu/2) = 0.0174
+   R's bound (t1-2r)^2 = 2.293e-05  (t1 = 0.0058);  forced area in B(w, 0.0873) at grids (801, 1601): 1.398e-04, 1.402e-04
+
+== C4: blocking broken -- sectors (-70,70), (110,150), (210,250) at u leave a large void; no common projection ==
+[C4] d=1.4142 s=0.1 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0002,-0.0002) len -0.0003;  v (0.0001,0.0174) len 0.0173;  s*sin(mu/2) = 0.0174
+   R's bound (t1-2r)^2 = 2.293e-05  (t1 = 0.0058);  forced area in B(w, 0.0873) at grids (801, 1601): 0.000e+00, 0.000e+00
+
+== C5: tangent Y-junction at u (cuts -90,30,150: an interface along e_u-perp), s = 0.1 ==
+[C5] d=1.4142 s=0.1 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0000,-0.0000) len -0.0000;  v (0.0001,0.0174) len 0.0173;  s*sin(mu/2) = 0.0174
+   R's bound (t1-2r)^2 = 2.293e-05  (t1 = 0.0058);  forced area in B(w, 0.0873) at grids (801, 1601): 6.749e-05, 6.786e-05
+
+summary:
+   on-axis grid = closed form: True
+   C1 (s = 0.33, in the curvature window) forced < R's bound: True
+   C1b (s = 0.45) forced >= R's bound: True
+   C2 (s = 0.02) forced >= R's bound: True
+   C3 (s = 0.1) forced >= R's bound: True
+   C4 (blocking broken) forced == 0: True
+   C5 (tangent) forced > 0 though the linear blocking length is 0: True
