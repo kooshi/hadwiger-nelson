@@ -401,6 +401,54 @@ every lemma; or an improper reduced circle) did not occur.
 | **Theorem D2: no colliding pigeonhole pair at distance 2** | [hand]; identities [tools] | §2.7 |
 | Exact checks A1–A4, B with fired plants | [tools] | `tools/fs110_cd_checks.py`, `data/fs110/fs110-cd/checks.out` |
 
+## Stage 4 — SAVED (after stage 3's commit 8c997666: `plans/FS110-CB-verification.md` in full; `plans/FS106-V-verification.md` § Continuation V2 stage 3 row SV-L4 and V3 stage 4)
+
+### 4.1 Divergences with FS110-CB (blind) and FS106-V2/V3
+
+| step | FS110-CB | FS106-V2/V3 | this job | kind |
+|---|---|---|---|---|
+| **no `d = 2` exception** | TRUE: the reduction makes `d = 2` **unreachable** — "every pigeonhole point but the eleventh lies in the open disc" (D5 item 4) | open; V3 "reduced", "no local contradiction at first order" | TRUE: `d = 2` collisions are **killed where they stand** by Lemma H and the two-disc identity (Theorem D2); strict interiority not needed | **truth agrees** (two blind minds); **routes differ** |
+| CB's sub-claim "every pigeonhole point but the eleventh lies in the open disc" | asserted: "a path that met Ω again would have made it an arc end" | — | **GAP**, at two configurations: **(E3)** a surviving colour change `b` that is itself a vertex `{a,c,i}` with its `i`-sector inside the disc and its `a|c` edge leaving outward has **no inward path** at all — CB's item 4 presumes every change has one; its endpoint is `b ∈ ω(u)`. **(β)** a path arriving at a vertex `v′ ∈ ω(u)` whose three edges all enter the disc (`i`-sector inside, both arcs of `ω(u)` in one sector `S ∈ {a, c}`): CB's item 1 counts it ("a vertex on Ω counts"), but item 2's "also Ω's colour just outside the arc at both ends" fails when the minor arc lies on the `S`-side of the path — then beyond `b` the circle is `a` and beyond `v′` it is `S = c`, so no single recolouring absorbs both ends and `v′` survives as a change whose path returns. Configuration (β): `v′ = (1, 0)`, `u = 0`; edges at `v′` entering along 150° (`e_ac`, the path), 180° (`e_ai`), 210° (`e_ci`); sectors `a` = (150°, 180°), `i` = (180°, 210°), `c` = the rest (holding the circle directions 90°, 270°); the path from `v′` curves up to meet `ω(u)` at `b` about 40° counter-clockwise. In both cases the endpoint is a **V-in vertex on `ω(u)`**, which Theorem D2 handles | truth of a **sub-claim**: CB's route is incomplete; its conclusion survives through Theorem D2 |
+| the disjoint `d = 2` pair (eleventh point vs an endpoint) | named; closed by "its partner is an open-disc endpoint" | not named | closed by the cusp at `u` (Theorem D2 (ii)), whether or not the endpoint is on `ω(u)` | route (and CB's closure inherits the GAP above) |
+| V3's first-order consistency | — | "`R_i` in `{a·e ≥ 0}`, `Rʲ` toward `u`, `Rᵏ` away" — consistent | the consistent case has one endpoint **V-out**; Lemma E shows a V-out vertex is never an endpoint after the circle-only reduction (arrival along `e_ac` from inside makes it circle-bichromatic, hence returning); the both-toward-`u` case dies exactly (`R_i ⊆ {u}`), not only at first order | complementary; no conflict |
+| the pairing rule of the circle-only reduction | pair `b` with any point of `ω(u)` with `c′ ⊇ {a, b}` reached by the path | V3: "a re-choice of the nine circle points … not attempted" | pair only **circle-bichromatic** returns (regular points, V-out vertices); these always have beyond-colour `a` at both ends (§3.0.1) | route; CB's rule mishandles (β) |
+| `d = 1`, same multicolour | **closed** by (P′): `|x − y| = 1 ⟹ c(x) ⊄ c(y)` | V2: reached by the transplanted bicycle (sketch) | left open (§2.8.1) | **truth**: I checked CB's (P′) at this stage — the punctured arc `ω(y) ∩ B(x, ρ) ∖ {x}` is two open arcs in regions of colours in `c(x)`, absent from `c(y)` by the open-ball form of (F2). **TRUE; my §2.8.1 is withdrawn** |
+| the eleventh point in multiply connected regions | hole-filling (Voronov's Obs. 2.2), AE-valid | the `{4,5,6}`-component "after fills" | left open (§2.8.2) | truth: CB's fill checked in outline here — two points of a filled hole lie inside the convex hull of a region of diameter ≤ 1, so are closer than 1; a unit circle from outside through a filled point leaves the hole (diameter 2) and crosses the surrounding region. **My §2.8.2 is closed by CB's repair** |
+| bi–bi (Prop. 14) | derived, (ii) from (P) under transversality | — | read from print | CB's (ii) checked here: TRUE |
+| Lemma 5, Prop. 18 | accepted from print | — | re-derived; checked on formula-given colourings | route; both needed |
+| Lemma 3 (all `1 < d < 2`), Prop. 17 | derived (exact bicycle; cone count at `u`) | V2: bicycle sketch; Prop. 17 repaired | read, not re-derived; **not checked by this job** | — |
+
+### 4.2 A slip of mine, found at this stage
+
+§2.3's V-in bullet says "V-in ⟹ `e_ac` does not enter the disc" and "a V-in vertex is circle-bichromatic". **False**: its proof claims that
+walking the interior half from `J₁` to `J₂` across three edges ends in a different sector, but three crossings return to the starting
+sector. Correct statement: a V-in vertex is circle-bichromatic **iff** `e_ac` does not enter the disc (case α, the (E3) type); if `e_ac`
+enters (case β above), both arcs of `ω(u)` lie in one sector and the vertex is not circle-bichromatic. Likewise §2.3's (E2) parenthetical
+"then `e_ac` arrived tangent from inside" should read "arrived from inside". **Consequence: none for Lemma E, Lemma R or Theorem D2**, which
+treat every V-in endpoint alike and pair only circle-bichromatic returns; §3.0.3's "a continuation cannot arrive at an (E3) vertex" is right
+(case α). Found while testing CB's pairing rule against Lemma L.
+
+### 4.3 Minds and grades after this job
+
+- **No `d = 2` exception in Corollary 1 a.e. (curved cubic maps, Condition 5):** TRUE at **two blind minds** (CB, this job) by different
+  routes; the route without a known gap is this job's (Theorem D2 with Lemmas H, E, R) — **one mind**. A second mind on §2.2 + §2.7 (two pages)
+  is the check this result now needs.
+- **The circle-only reduction replacing Prop. 19:** two minds (CB, this job), differing in the pairing rule; this job's rule is the one
+  that keeps both ends absorbed.
+- **CB's "every pigeonhole point but the eleventh lies in the open disc":** GAP at (E3) and (β); should be restated as "every pigeonhole
+  point lies in the open disc or is a V-in vertex of `ω(u)`".
+- **Corollary 1 a.e. as a whole:** with CB's (P′) (`d = 1`) and hole-filling (eleventh point), both checked here, what remains unchecked by
+  this job is Lemma 3 a.e. and Prop. 17 a.e. (CB, one mind each on those routes).
+
+### 4.4 Proposed edits (for the close; I edit none of these files)
+
+- `LEDGER.md` / `plans/FS106-derivation.md` FS106-SV2 (and wherever "except possibly at the `d = 2` edge case" stands): the edge case is
+  closed — cite **FS110-CD Theorem D2** (Lemma H and the two-disc identity), with the circle-only reduction at two minds (FS110-CB D5,
+  FS110-CD Lemma R); note that FS110-CB's strict-interiority claim is replaced by "open disc or V-in vertex on `ω(u)`".
+- `plans/FS110-CB-verification.md` D5 items 1, 2 and 4 carry the (E3)/(β) gap; the fix is this record's pairing rule plus Theorem D2.
+- `BIBLIOGRAPHY.md` `[SokolovVoronov2025]` reading status: add "Prop. 18/19 list `{1, 3}` twice; the appendix's 'regions of colors 1, 2, 3
+  whose vertex is u' means `u`'s colours" (FS110-CD); `[Voronov2023]`: "Prop. 3.3's proof ends 'equal to 1' for 'greater than 1'" (FS110-CD).
+
 ### Would-have-searched log
 
 | move I would have made by search | what I did instead |
