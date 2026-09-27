@@ -64,3 +64,134 @@ condition at `u` and rests on CB's D2 strip alone, but I knew that CD closes the
 ### Would have searched here (standing rule 3)
 
 - (none yet)
+
+## Stage 2 — SAVED (the derivations, and their exact checks)
+
+Setting and notation are CB's (§1.2, D1–D2): after merging, every vertex is a trichromatic cubic vertex; `M = c(u) = {4,5,6}`, `Ω = ω(u)`,
+`c′ = c ∩ {1,2,3}`. A **cusp vertex** has two equal boundary tangents (a horn: a sector of angle 0); a **double cusp** has three. A **spike** is a point
+`x ∈ Ω` with `|c′(x)| = 2` and the same circle colour on both sides of it. Cusps produce spikes (a horn tangent to Ω; a vertex on Ω whose two circle
+directions lie in one sector), and so do plain tangencies (a boundary arc tangent to Ω). A vertex `{a,c,i}` on Ω with `i ∈ M` is **V-in** if its
+`i`-sector lies inside the disc, and **V-out** otherwise. By (P) from u, Ω never enters an `i`-sector, so every such vertex is one or the other.
+
+### E1 — D4, Lemma 3's bicycle, at cusps
+
+**What the bicycle takes from the map.** Read line by line, CB's D4 (l. 137–157) uses only these facts about the map:
+- (M1) (i) and (ii) under transversality. These come from D2's strip at the centres `u1`, `u2`, and CC's C1–C3 extend that strip to cusp and
+  double-cusp centres.
+- (M2) `|c′| ≤ 2` on each circle. This is Cor. 3 AE with the circle point itself as a centre; CC covers it when that point is a cusp.
+- (M3) `{x : a ∈ c′(x)}` is closed. This needs local finiteness only.
+- (M4) Only finitely many points have `|c′| = 2`. This needs Conditions 3 and 5 only.
+
+Everything else in D4 is geometry of two circles: C3's turning locus `cos θ* = (3+d²)/(4d)` and the overshoot. None of it looks at a sector at
+`u1`, `u2`, `x1`, `y1` or `z1`. So a cusp can enter D4 only through spikes, in three places. I checked each.
+- **The bands.** A spike is a special time at which neither lift jumps, so D does not change there. The band is fixed between special times by (i)
+  at points with one-colour `c′`. The ±2 step still needs both points to be genuine colour changes, and there (ii) applies. At the partner's
+  turning time (d > √3), `ω(z)` is tangent to Ω1 at x. But `ω(x)` crosses Ω2 at z transversally, because `|x − u2| < 2` there, so (i) and (ii)
+  still hold.
+- **(ii) at a spike holds.** Take x a spike with `c′(x) = {a,b}`, and y with `c′(y) = {a,b}`, `|x − y| = 1`, the crossing transversal. Then `ω(y)`
+  enters `N_x` strictly on side `σ_x`, and there it meets the interior of a tile whose closure contains x. That tile's colour lies in
+  `{1,2,3} ∩ c(x) = {a,b} ⊆ c(y)`, which contradicts (P). This is CB's proof word for word; it never uses that x is a colour change.
+- **The endpoint cases, exhausted.** The sets `c′(x1)` and `c′(z1)` are known only from below: from the one-sided limits and from G. A point
+  whose known colours are a single colour may carry an unknown second one (a spike). Treating that unknown adversarially, the exhaustion BIKE
+  finds **0 surviving assignments** for `d ≤ √3` and for `d > √3`. Every case closes on fully known sets, exactly as CB's four cases do.
+- **A completion CB owes.** CB writes "WLOG n = −1 (negating colours)". The E band can have any n. Write each 60° step as `3k + e`, `e ∈ {1,2}`. Then
+  `D_y − D_z = 6k + e1 + e2 − J + J_z`, which lies in `{−1,0,1}` only for `k ∈ {0, −1}`, and `k = −1` is `k = 0` negated. BIKE runs
+  `k ∈ [−3, 3]`: still 0 survivors.
+- **Plants.** `noII`: 48 assignments survive, all in the overshoot regime. This matches CB, whose d ≤ √3 case closes by closedness alone.
+  `noClosure`: 16 and 48 survive.
+
+**D4 at cusps is TRUE.** The cusp enters only through D2 (CC) and through spikes (harmless, as above).
+
+### E2 — D5 item 1 at cusps
+
+TRUE. Corners of a path, cusp corners included, keep one a-tile beside the path, and a tile has diameter ≤ 1. **One small misstatement:** "= 1 is
+(P′)" fails when the two ends are vertices `{a,c,i}` and `{a,c,j}` with `i ≠ j`, because those multicolours do not nest. Distance 1 is excluded there
+by (ii) instead (both ends have `c′ = {a,c}` on one circle).
+
+### E3 — D5 item 2: its parenthetical is FALSE at (β) and at spike returns
+
+Item 2 says: "Recolour each maximal such arc [p1, p2] … by a, the colour of the tile beside the path outside Q (it is also Ω's colour just outside
+the arc at both ends)".
+- **At (β)**, CD's configuration in rational form (BETA, exact). `v′ = (1,0)`. The edges run a|c along `(−4,3)/5`, a|i along `(−1,0)`, c|i along
+  `(−4,−3)/5`. P is the circle of centre `(4/3, 4/9)` and radius `5/9`, tangent to the a|c edge at `v′` and passing through `b = (4/5, 3/5)`.
+  Its arc between them lies in the open disc: 902 rational points were checked, and `⟨C, w⟩` has no maximum inside the arc. At `v′` the circle's
+  two directions and the Q-wedge all lie in sector c. The tile beside P outside Q is a. So item 2 recolours `[b, v′]` by a while Ω just beyond `v′`
+  is c, and `v′` becomes a new colour change whose inward path P returns to the absorbed point b. **FALSE; two minds (CD, and me with a
+  rational instance).**
+- **At a spike return (new here, one mind).** The path can touch Ω without Ω changing colour, in two ways. It can be tangent to Ω from inside at
+  a regular boundary point (SPIKE: the circle of radius 1/2 tangent at `s = (1,0)` meets Ω only at s). Or it can pass through a spike corner, where
+  both circle directions lie in one sector and the other sector, a wedge or a horn, lies inside. CB's item 1 counts such an s as a return
+  ("`c′ ⊇ {a,b}`"). There the tile between P and Ω is Ω's colour S, P's far side is `T ≠ S`, and Ω beyond s is S. The mismatch is the same, and s
+  becomes a change whose path is P's continuation past s. Cusps add instances: a horn of colour T tangent to Ω from inside.
+- **Where the parenthetical holds** [hand]. It holds at the start point, and at every return where Ω changes colour: a transversal crossing, a
+  corner that Ω crosses, or a V-out vertex. There the arc side of the return is P's Q-side colour and the far side is P's other colour a, because
+  Ω's two directions at the return lie in different sectors, one on each side of P.
+
+**Local repair (R).** Four rules, applied in order:
+- (R1) An inward a|c path continues through every spike it meets. At a spike the continuation stays inside, because the non-S sector lies inside.
+- (R2) The path ends at its first trichromatic vertex, which may be a V-in vertex on Ω. A V-out vertex cannot be reached from inside unless Ω
+  changes colour there.
+- (R3) Only returns at colour changes of the circle are circle-to-circle, and only their arcs are recoloured. There the parenthetical holds.
+- (R4) A selected change that is itself a V-in vertex is its own endpoint.
+
+R3 coincides with CD's pairing rule (l. 414), and I saw that line before deriving mine (§1.2).
+
+### E4 — D5 item 3 at cusps, for the repaired reduction
+
+TRUE. `ω(w)` enters Q at x transversally (at 60°) and meets the arc only at x. Take the boundary point p of the component of `ω(w) ∩ Q` that
+starts at x. Then p lies on P, and just past p `ω(w)` is on P's outside-Q side, which is the a-tile at a regular point and at any corner. Two cases
+need a remark:
+- If P touches the minor arc at a spike (R1), Q is pinched there, the Q-side colour equals S, and the argument runs on each piece.
+- If `ω(w)` leaves through a spike of P on Ω (then `x ± 120°` is that spike), it can pass straight out of the disc. That happens for finitely many
+  x, and there (i) follows by rotating the pair within the arc, as for spikes in E1.
+
+### E5 — D5 item 4: GAP at (E3) and (β), with cusp instances
+
+**The statement.** CB's item 4 says: "Every surviving colour change's inward path ends at a trichromatic vertex of the OPEN disc".
+
+**(E3).** A selected change that is itself a V-in vertex has its a|c edge on the side away from its i-sector, so outside the disc. It therefore has
+no inward path, and its trichromatic point lies on Ω. **GAP; two minds, CD's and mine.** Cusps give more instances:
+- **E3H, exact.** The i-sector is a horn tangent to Ω from inside, with edge curvatures 2 and 3, and the a|c edge leaves along +x.
+- The circle's direction runs inside an a-horn whose edges have curvatures on either side of 1; the a|c edge is then the outer edge and leaves
+  tangentially outward.
+- A double cusp tangent to Ω, with the circle's branch inside one horn and the other horn inside the disc.
+
+**(β).** Under item 2 as written, `v′` survives as a change whose path returns (E3). **GAP.**
+
+**The third colour.** Item 4's "its third colour is in {4,5,6}" is TRUE, for endpoints on Ω too, because `|c′| ≤ 2`.
+
+### E6 — the Antipodal Lemma, and D5 item 6
+
+**Antipodal Lemma (AL).** Let u be a trichromatic cubic vertex; cusps and double cusps are allowed. Call `x ∈ Ω` **M-in** if some tile of a colour in
+M has x in its closure and has interior points strictly inside Ω arbitrarily close to x. Then **no two M-in points of Ω are at distance 2.**
+
+*Proof.* Take an M-in point `x = u + e`.
+- The strip's majority side `σ_e` is outside. If it were inside, the M-coloured interior points near x would contradict D2's strip.
+- So at least two of u's arcs vote "outside" at e: `|u + e − x_ij(δ)| < 1`, for every small δ by CC's C2, including along a horn's normal.
+- An arc point `x ≠ u` cannot be within 1 of both `u + e` and `u − e`: that would give `2 = |2e| ≤ |u+e−x| + |x−u+e| < 2`.
+- So the votes "outside" at e and at −e number at most three, not four. ∎
+
+No tangent is used, so cusps enter nowhere. AL's exact check covers an ordinary vertex, three cusps (the a6 horn among them) and a double cusp, over
+46 directions including the horn normal. The `nearAntipodal` plant fires: for directions `(s, ±c)`, which are not antipodal, an arc votes outside at
+both. **AL is one-sided.** At the a6 cusp all three arcs vote *inside* at both ±n, so two antipodal V-out points are not excluded. That is why (R2) ends
+paths only at V-in vertices.
+
+**Consequences for item 6.**
+- V-in vertices on Ω are M-in (i ∈ M).
+- The eleventh point w, when it lies on Ω, is M-in. CB's R lies inside every γ(u), hence in the closed disc, so R's tiles at w, being open, lie in
+  the open disc.
+- Under (R1)–(R4) the pigeonhole points are u, endpoints in the open disc, V-in vertices on Ω, and w. Two of them at distance 2 would have to be two
+  antipodal M-in points, which AL excludes. **So every pair handed to Lemma 3 or Cor. 3 is at distance < 2, at cusps too.**
+
+**Item 6's other steps at cusps.**
+- **`|p − p′| ≥ 1`.** The a-side curves argument holds with a self-endpoint (R4: a constant curve in the a-sector). It also holds at a cusp
+  endpoint whose a-sector is a horn, since the curve ends within any ε of p inside the horn, as in CC's C1.
+- **`≠ 1`.** (P′) holds, since the multicolours are equal.
+- **The eleventh point.** Its existence uses only that R's outer boundary carries two colours of M after hole-filling. That is a topological fact;
+  a horn changes nothing in it.
+
+### Would have searched here
+
+- BIKE: I would have fuzzed pseudo-colourings on two circles for a bicycle that escapes. Instead I derived the lift relations and exhausted the
+  finite residue system they leave, with spikes adversarial.
+- AL: I would have sampled random cusp centres numerically. Instead I derived the two-disc inequality and confirmed the exact votes on rational arcs.

@@ -1,0 +1,18 @@
+ok    BIKE d <= sqrt3: 0 surviving assignments
+FAIL  BIKE d > sqrt3 (overshoot): 48 surviving assignments, e.g. (k,J,Jz,e1,e2,G) = [(-1, -1, 1, 1, 2, -11), (-1, -1, 1, 1, 2, -8), (-1, -1, 1, 1, 2, -5)]
+ok    AL ordinary: 46 directions, no arc votes outside at both e and -e, majority never outside at both (0 violations)
+ok    AL cusp, straddling horn (kappa 3, 1/2) + arc: 46 directions, no arc votes outside at both e and -e, majority never outside at both (0 violations)
+ok    AL a6 cusp (kappa 1/2, -1/2) + segment along -tau: 46 directions, no arc votes outside at both e and -e, majority never outside at both (0 violations)
+ok    AL cusp, horn (kappa 3, 2) + segment along -tau: 46 directions, no arc votes outside at both e and -e, majority never outside at both (0 violations)
+ok    AL double cusp along tau (kappa -2, 1/2, 3): 46 directions, no arc votes outside at both e and -e, majority never outside at both (0 violations)
+ok    AL one-sided: at the a6 cusp all three arcs vote INSIDE at both +n and -n (antipodal V-out points are not excluded)
+ok    BETA: P (centre (4/3,4/9), radius 5/9 != 1) passes through v' and b
+ok    BETA: P is tangent to the a|c edge direction (-4,3) at v'
+ok    BETA: P leaves v' clockwise about its centre, in direction (-4,3)/5
+ok    BETA: 902 rational points of P strictly between v' and b all lie in the open disc
+ok    BETA: the circle and Q lie in sector c = S at v' (both circle arcs in one sector)
+ok    BETA: the tile beside P outside Q is a: item 2 recolours [b, v'] by a, while the circle just beyond v' is c -- MISMATCH
+ok    BETA: all three edges enter the disc, the circle avoids the i-sector
+ok    SPIKE: the path circle meets the closed disc's boundary only at s (internally tangent); c'(s) = {S, T}, no colour change at s
+ok    E3H: horn edges (curvature 2, 3) lie in the closed disc, the circle never enters the horn, the a|c segment along +x leaves the disc
+1 FAILURE(S)
