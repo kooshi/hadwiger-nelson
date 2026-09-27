@@ -83,8 +83,8 @@ list does not restate them; its §9 corrections are applied here.*
     and away colours, `u` a strong escape, and the arc's ends vertices meeting a colour of `P(v)`." [hand; one mind, with YB's GAP at item 4] — the GAP
     (verbatim): "a GAP when both side colours are cusps at `u`".
   - **Fragment S1** (FS110-FRAGS, verbatim): "S1 (a bowtie centred on two boundary unit arcs)" — "ACCEPT and tight on both" checkers. [tools, exact]
-  - **C-S1-G** *(this list)*: can a whole tight map use (S1) at every close covering pair it does not otherwise escape? Status: open. Its incidence
-    (self, pair, free) at the arc's centre is part of any answer.
+  - **C-S1-G** *(this list)*: can a whole tight map use (S1) at every close covering pair it does not otherwise escape? Status: open. Its contact
+    kind (in-, out-, both, inert; §0) at the arc's centre is part of any answer.
 - **T2, the double unit-arc seam (the rhombus)** (`data/fs110/claims.md` §2, verbatim): "`u, v` both emit arcs of `ω(w₀)`, and of `ω(w₀′)` for the second
   unit point, so `u w₀ v w₀′` is a unit rhombus of **vertices** (the spindle's rhombus), `ω(w₀) ∩ ω(w₀′) = {u, v}`".
   - **Y-T2W** (`plans/FS110-derivation.md`, verbatim): "A pair saved at its seam point by T2 makes the point a vertex of degree at least 4 whose branches of
@@ -102,7 +102,8 @@ list does not restate them; its §9 corrections are applied here.*
     pair `(v, y)`, `y ∈ ω(v)`, has on `ω(v)` either arcs of `Γ` of total length `≥ 60°`, or at least six arcs of `Γ` (centred at `v`), one inside each of
     six consecutive `60°` windows." [hand, one mind, trivial]
   - **C-SEAMS-TWO** *(this list; the advisor's reading, basis read)*: T2's seam points are four-colour vertices (in fragment T2, verbatim A4-TSU:
-    "`P_cl(w) = {1, 3, 4, 5}`"; FS112-A: "P(w′) = {1,2,4,6}"), and N-X forces a four-colour vertex wherever no unit arc passes through the seam point —
+    "`P_cl(w) = {1, 3, 4, 5}`"; FS112-A: "P(w′) = {1,2,4,6}"), and N-X (verbatim: "At a seam point with no unit arc and disjoint types, the point is a four-colour vertex …") forces a four-colour
+    vertex wherever no unit arc passes through the seam point **and the types are disjoint** —
     so the three seams are two species: a three-colour unit-arc centre ((S1)) and a four-colour vertex with its arcs (T2 = NB-4's exception at `w₀`).
     TRUE / FALSE / GAP.
   - **C-V4-K** *(this list)*: with unit arcs allowed, a four-colour vertex in a tight map is excluded, or realisable as a tight local fragment by formula,
@@ -121,7 +122,7 @@ Antipodal Lemma); the base at cusp sectors: D2, D5 item 5 and D1 two readings (A
 (R1–R4, the Antipodal Lemma) one mind, no step found failing that was not repaired; the residue lemma one mind (NB4); fragments tools, exact, two checkers]"
 
 **The question for every step (C-CHAIN-n)** *(this list)*: with Condition 5 dropped (unit arcs allowed), the step (a) holds as written, (b) holds off a
-named exception (at which incidence: self, pair, free; at the arc's centre, on the arc, at its ends), or (c) fails, with the configuration, given by
+named exception (at which contact kind of §0: in-, out-, both, inert; at the arc's centre, on the arc, at its ends), or (c) fails, with the configuration, given by
 formula when it is a local one. **Name, per step, which unit circles the step reads**: two distinct unit circles meet in at most two points, so a
 unit arc centred at `P` breaks Condition 5 on exactly one circle, `ω(P)` (FS112-A); "survives off unit-arc centres" is then a checkable scope. The first
 failure in chain order is the milestone's first result either way. Statements verbatim from
@@ -185,7 +186,8 @@ the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 
 
 ## 6. The unit-arc centre (the structural form of `plans/FS112-unit-arc-half.md` §IQ; each a claim to decide, none held)
 
-- **C-UA-INC** *(this list)*: which of the incidences self, pair, free (§0) occur at the centre of a unit arc of a tight six-map, alone and together.
+- **C-UA-INC** *(this list)*: which of the contact kinds of §0 (in-, with its self case; out-; both; inert) occur at the centre of a unit arc of a tight
+  six-map.
 - **C-UA-WEDGE** *(this list; §IQ candidate (a))*: if the centre `P` carries a side colour `c` of the arc, the `c`-tiles at `P` face the arc and both side
   cones at `P` are empty of both side colours. Killing test: a tight fragment whose unit-arc centre carries a side colour in a side cone.
 - **C-UA-BUDGET** *(this list; §IQ candidate (b))*: at every four-colour vertex `v` of a tight six-map, **on the branch with no covering pair `(v, y)`,
@@ -202,15 +204,24 @@ the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 
   "At an isolated tight contact point a₀, neither bend is obviously free." — **a GAP at those points**. *(this list)* The radius-2 concentric partner is
   FS-110's `d = 2` geometry returning (G-CONE's antipodal contacts, CE5's Antipodal Lemma). If ARC-INERT holds, the object reduces to unit arcs with a
   contact at the centre (§0's in-, out- or both).
-- **C-GLOBAL** *(this list)*: every NO route has a step that reads the plane beyond every disc of radius `√(5/2 + 9/(2√5)) ≈ 2.12426` and beyond every strip
-  of height `√15/2 + √3` (row 134's was N4-PROP's bi-infinite stuck line), because a valid six-colouring of the strip (and, once rebuilt, of the disk: §7) is a
-  local positive no local argument can refute. The route names its global step.
+- **C-BEYOND** *(this list; FS112-A's naming)*: every NO route has a step that reads the plane beyond every strip of height `√15/2 + √3` (so beyond every disc
+  of radius `(√15/2 + √3)/2 ≈ 1.834`, the largest a strip holds) — **and, once CAL-DISK is rebuilt (§7), beyond every disc of radius
+  `√(5/2 + 9/(2√5)) ≈ 2.12426`** — because a valid six-colouring of the strip (and of the disk) is a local positive no argument confined to it can refute.
+  The route names that step. (A radius-3 argument meets C-BEYOND; it is not a claim about globality.)
+- **C-LOCAL** *(this list; FS112-A's rank-1 card)*: is there a NO of Q-full whose every step reads a disc of bounded radius `R`? TRUE (with `R`) / FALSE /
+  GAP. Row 134's only unbounded step was N4-PROP's bi-infinite stuck line. *(this list)* At bounded `K`, a NO gives some radius by compactness; the claim
+  asks for an explicit `R` from the route.
+- **C-ARC-END** *(this list; FS112-A)*: the end vertices of a unit arc of a tight map are realised in a fully coloured neighbourhood (an **arc-closed**
+  fragment), or excluded, or a GAP. FS-110's fragments realise the seams with **open** ends (S1's arc tiles closed by segments to `(9/10)w` and `(11/10)w`,
+  uncoloured beyond the arc's ends; T2 and BB flowers truncated at `1/4` and `1/10`, FS112-A's reading); for (S1) the ends are Y2-S1I's item 4, "the
+  arc's ends vertices meeting a colour of `P(v)`".
 - **HOCK** (Polymath16 thread 6, "Wrestling with infinite graphs", a comment by Bernhard Hockertz, `~/source/library/notes/polymath16-threads-1-18-text.txt`,
   verbatim): "So far all possible tesselations that use some other kind of boundary can be reduced to one using only straight lines and unit radius arcs." and
   "The curvature of the boundary is limited to arcs with radius of unit distance or greater, because every arc with a radius that's smaller than 1 can be
   filled up to radius 1 without increasing the exclusion zone." *(this list)* A blog claim about everywhere-proper tilings, unproved in print. **C-HOCK**:
-  in a tight six-map of the class, every boundary arc of radius `< 1` can be replaced keeping validity (TRUE / FALSE / GAP); N4-SHADOW's horn curvatures in
-  `(−1, 1)` are the first place to test it.
+  in a tight six-map of the class, every boundary arc of radius `< 1` can be replaced keeping validity (TRUE / FALSE / GAP). N4's horn curvatures in
+  `(−1, 1)` are radii `> 1`, which the claim allows; its first exact test instance is FS-110's A6-C2 (radii "2, 4, 9/10, 11/10 and segments",
+  `plans/POROS-2026-09-27-fs110-competition.md` § Stage A6-3): fill its radius-`9/10` arc to radius 1 and check the result exactly (FS112-A).
 
 ## 7. Calibration: the known positive and the controls (every new checker, before any refusal is believed)
 
@@ -223,9 +234,13 @@ the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 
   demonstrated by the tiling shown in Fig. 6").
 - **CAL-DISK** (`[Polymath2021]` p. 199, verbatim): "For k = 6, our best result is the disk shown in Fig. 10, whose radius is" — the radical is garbled in
   the text layer; the caption reads, on the page image, "A 6-tiling of a disk of radius √(5/2 + 9/(2√5))" — "(The relative simplicity of the expression for
-  this radius arises because the points A,B,C,D,E lie at the vertices of a unit-edge regular pentagon.)" *(this list)* No construction rule and no
-  coordinates are printed: **no positive until reconstructed by formula**, and a reconstruction fitted to the figure is a search (standing rule 3); a
-  derived one, from the pentagon and the tactic, is in. Until then it enters no killing test.
+  this radius arises because the points A,B,C,D,E lie at the vertices of a unit-edge regular pentagon.)"; and for `k = 4` (p. 198): "Note that we again
+  employ the tactic of drawing inter-tile boundaries as arcs of radius 1"; for `k = 5`: "arises from a similar approach". *(this list)* No construction
+  rule and no coordinates are printed. **No positive until rebuilt**, in three separated steps (FS112-A, adopted): the **combinatorics transcribed by eye**
+  from Fig. 10 (tiles, adjacencies, which edges are unit arcs and where each is centred — reading, after FS-85's by-eye transcription of Parts's trees,
+  protocol §1 rule 11); the **exact constraint system solved** by computer algebra; **fitting coordinates to pixels stays out** (a search). The built-in
+  control: the rebuild reproduces `r² = (25 + 9√5)/10` exactly. Until then it enters no killing test. It is the only held positive that refutes a
+  disc-local argument at radii between `≈ 1.834` and `≈ 2.124`.
 - **CAL-7** *(this list)*: a tight seven-colouring fragment — row 33's boundary-tight brick colouring (G20: "boundary-tight by force (cell diagonal exactly
   1)") — accepted as valid. It calibrates straight self-contact.
 - **CAL-FRAGS** *(this list)*: FS-110's fragments S1, T2, BB, MX, WC, WC1H and A6-C2, rebuilt from their formulas (`tools/fs110_y_fragments.py`,
@@ -248,12 +263,13 @@ the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 
 2. **The exact check** (`data/fs110/claims.md` §4, test 6, verbatim): "a same-colour tile pair — **including a tile with itself (diameter `≤ 1`)**, FS110-A —
    whose exact cross-distance range has 1 in its interior". *(this list)* "W's exact check certifies MEMBERS": a fragment is a fragment, not a map.
 3. **Class density** (W's test 3, verbatim): "Each class's density is at most 0.2470." (periodic candidates)
-4. **G17's** *(this list)*: a unit-arc seam with no tight local fragment by formula (every seam is expected to be realisable locally).
+4. **G17's** *(this list, rewritten on FS112-A's reading)*: a unit-arc seam with no tight **arc-closed** local fragment by formula (C-ARC-END) — FS-110's
+   fragments realise every seam with open ends, so the open-ended form cannot fire.
 5. **G71's** *(this list)*: a bowtie seam with unit arcs that defeats the index `|Ind γ₁ − Ind γ₂| ≤ 1` with no swap.
 6. **§IQ's three** *(this list)*: C-UA-WEDGE's, C-UA-BUDGET's, C-UA-CHAIN's (§6).
-8. **The local positives** *(this list; FS112-A item 5)*: every NO route fails on CAL-STRIP (and, once rebuilt, CAL-DISK) at a named step and says where the
-   plane beyond them is spent (C-GLOBAL). A route with no such step is refuted by the strip.
 7. **The chain's** *(this list)*: a step of §3 declared to survive unit arcs, and a tight local fragment by formula violating its conclusion.
+8. **The local positives** *(this list; FS112-A item 5)*: every NO route fails on CAL-STRIP (and, once rebuilt, CAL-DISK) at a named step and says where the
+   plane beyond them is spent (C-BEYOND). A route with no such step is refuted by the strip.
 
 ## 9. Failure clauses
 

@@ -479,8 +479,8 @@ A4-SIX-ARCS, **C-SEAMS-TWO**, **C-V4-K**, **C-V56** (with de Grey's 2018 six-col
 per step (holds / holds off a named exception, by contact kind / fails, with the configuration; the circles each step reads named); §4 **C-SAME**
 (YB3-SAME, ranked last, no bearing on Q-full), **C-68a–c**, Y-BIKE-3C, YB-V5X, N2-SWAP, A3-HOLE; §5 shared constraints (W-EQ-K, W-TAN with CUSP-K, TS-U
 with A4-TSU, FS106-IND-X, K-DENS, K-INT, K-CHR4, maps need six); §6 the unit-arc centre: **C-UA-INC**, **C-UA-WEDGE**, **C-UA-BUDGET** (both branches),
-**C-UA-CHAIN**, **ARC-INERT** (narrowed, a GAP at isolated contact points), **C-GLOBAL**, **HOCK / C-HOCK**; §7 calibration: **CAL-STRIP** (rebuilt by
-formula from the printed rule), **CAL-DISK** (no positive until derived), **CAL-7**, **CAL-FRAGS**, the checker's order and its three REJECT causes,
+**C-UA-CHAIN**, **ARC-INERT** (narrowed, a GAP at isolated contact points), **C-BEYOND**, **C-LOCAL**, **C-ARC-END**, **HOCK / C-HOCK**; §7 calibration: **CAL-STRIP** (rebuilt by
+formula from the printed rule), **CAL-DISK** (no positive until rebuilt: combinatorics by eye, exact solve, the printed radius as control), **CAL-7**, **CAL-FRAGS**, the checker's order and its three REJECT causes,
 **CAL-PLANT**; §8 eight killing tests; §9 failure clauses; §10 not claimed.
 
 **The advisor's advice** (FS112-A, two messages; its record `plans/POROS-2026-09-27-fs112-unit-arc-half.md` §2), and my decisions:
@@ -491,11 +491,103 @@ formula from the printed rule), **CAL-DISK** (no positive until derived), **CAL-
 | 2 | §IQ (b) dropped A4-SIX-ARCS's hypothesis; NB-4's printed exception has a circle through its own centre | **adopted**; both branches quoted in C-UA-BUDGET and §IQ; the printed form quoted and marked MISSTATED-suspect (checked: `plans/FS110-NB-verification.md` l. 164 reads "`ω(y_k)` … passes through `y_k`") — my slip, logged for the report |
 | 3 | YB3-SAME has no bearing on the answer (a Condition-5 statement; its event has no unit arc); rank it last | **adopted** |
 | 4 | a unit arc breaks Condition 5 on one circle only; the chain walk names the circles each step reads | **adopted** into C-CHAIN's question |
-| 5 | local or global: the strip and `[Polymath2021]`'s disk are local six-positives; every NO route must fail on them at a named step and name its global step | **adopted with one reservation**: the disk enters the killing tests only once rebuilt **by derivation** (the print gives no rule beyond "a unit-edge regular pentagon" and no coordinates; fitting the figure would be a search); C-GLOBAL and killing test 8 carry the rest |
+| 5 | local or global: the strip and `[Polymath2021]`'s disk are local six-positives; every NO route must fail on them at a named step and name its global step | **adopted with one reservation**, then resolved by the advisor's second review: the disk enters the killing tests only once rebuilt (no printed rule, no coordinates) — by the combinatorics transcribed by eye, the exact system solved, pixels never fitted, `r² = (25 + 9√5)/10` the control; C-BEYOND (renamed from C-GLOBAL, which was misnamed: a radius-3 argument meets it) and killing test 8 carry the rest, and the open question of a bounded-radius NO is C-LOCAL |
 | 6 | no frozen checker can accept the strip (ℚ(√3,√5) needed); a number-field checker, run in the order fragments → CAL-7 → strip → disk; three REJECT causes; two independent rebuilds | **adopted** (§7 "The checker"); the owner's inventory item 3 already carries it |
 | 7 | the seams are two species (T2's seam points are four-colour vertices) | **adopted** as a claim, C-SEAMS-TWO |
-| 8 | register the stub's 0.03 with `[Parts2020c]` §3's own population, and a dial beside it | **adopted**; the population quotation verified on p. 38 ("Here we have restricted ourselves to the case of highly symmetrical tilings with only a few tiles in the repeating cell, and in the case of k = 6 to tilings in which all tiles are congruent"); the dial is registered in stage 5 with my own number |
+| 8 | register the stub's 0.03 with `[Parts2020c]` §3's own population, and a dial beside it | **adopted**; the population quotation verified on pp. 37–38 ("Here we have restricted ourselves to the case of highly symmetrical tilings with only a few tiles in the repeating cell, and in the case of k = 6 to tilings in which all tiles are congruent"); the dial is registered in stage 5 with my own number |
+
+**The advisor's second review** (of the list at b8e561c2), all adopted: (1) the stale "self, pair, free" replaced by §0's kinds in C-S1-G, C-CHAIN's
+question and C-UA-INC; (2) C-SEAMS-TWO had dropped N-X's "and disjoint types" — restored (my second standing-rule-5 slip of the day); (3) C-GLOBAL renamed
+C-BEYOND, its disk clause made conditional on CAL-DISK, and C-LOCAL added; (4) CAL-DISK rebuilt in three separated steps (combinatorics by eye, exact
+solve, no pixel fitting; the printed radius the control), an optional construction-side stage after CAL-STRIP; (5) killing test 4 could not fire as
+written — FS-110's fragments are open-ended — so C-ARC-END added, the test rewritten for arc-closed fragments, and the largest arc-closed patch made the
+construction side's first product (the dial); (6) C-HOCK's first test instance is A6-C2's radius-9/10 arc, not N4's horns (radii `> 1` are allowed by
+the claim); (7) killing tests reordered. Staffing: agreed, with YB's strip rebuild independent from `[AxenovichEtAl2014]`'s words.
 
 Fences (the advisor's request, adopted): the advisor's record is fenced by path from both sides and every blind verifier (stage 5's briefs).
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the plan (WORKFLOW 4) and the briefs
+
+### 5.1 Phases (at most three agents at once, all Opus 5.5; one level deep)
+
+| phase | jobs (records) | what | budget (harness) | stop rule | checkpoint and resume |
+|---|---|---|---|---|---|
+| **P0 reading** (beside FS112-A's last stage; two agents) | **FS112-PA**, a reading job (`plans/FS112-PA-reading.md`, `data/fs112/fs112-pa/`) | Polymath16 threads 6–9 and 16 read in full for their unit-arc tiling arguments and the two constructions (the strip's and the 2.124 disk's), every relevant passage extracted **verbatim with its address**; `[Coulson2004]`'s figures viewed; `[Soifer2024]`'s pages on Thomassen's nice colourings located and read; a verdict per print claim (HOCK, de Grey's degree-4 and six-colour-vertex sketches, Gibbs's constraint) as *stated / argued / proved*; **the disk's construction rule, if the threads print one** (CAL-DISK then becomes derivable) | ≈ 200k | every thread read, the extracts committed | SAVED stages; a successor continues at the first unread thread |
+| **P1 contest** | **FS112-N**, the proof side (`plans/FS112-N-proof.md`, `data/fs112/fs112-n/`, `tools/fs112_n_*`); **FS112-Y**, the construction side (`plans/FS112-Y-construction.md`, `data/fs112/fs112-y/`, `tools/fs112_y_*`); **FS112-A2**, a fresh competition advisor (`plans/POROS-2026-09-27-fs112-competition.md`, `data/fs112/fs112-a2/`) | **Stage 1, both sides, blind:** the quotation check; the PA extracts read; **the chain walk** — every C-CHAIN step of the claim list §3 given a verdict with unit arcs allowed and the circles it reads named. N gives each verdict by derivation; Y first builds and calibrates its exact number-field checker (claim list §7, in its order: FS-110's fragments, CAL-7, CAL-STRIP rebuilt by formula), then realises each failure it claims by a tight **arc-closed** local fragment given by formula (C-ARC-END). A2 compares the two walks before round 1 (the free window, G51). **Then:** N works the seams (§2), the unit-arc centre (§6, §IQ's structural form) and C-GLOBAL; Y realises each seam arc-closed and each §6 killing test it can (a unit-arc cycle; a four-colour centre; C-HOCK on A6-C2), grows the largest arc-closed patch (the dial, 5.3 E6), optionally rebuilds CAL-DISK after CAL-STRIP, and attempts a global candidate, checked exactly; N states C-BEYOND's step and answers C-LOCAL | N, Y ≈ 400k each; A2 ≈ 250k | a side hands back when every claim it took has a verdict, or at its budget with its record SAVED | per-stage SAVED sections committed and pushed; a resumed job continues at the first unsaved stage |
+| **P2 verification** | **FS112-NB** (blind on N), **FS112-YB** (blind on Y; a second, independent rebuild of the strip and of each fragment, with its own checker), launched into N's and Y's slots at their hand-backs; A2 stays for the comparison | each derives the side's claimed verdicts from the statements alone, commits its own verdicts, then reads the record and lists divergences | ≈ 300k each | verdicts committed before the record is opened | as P1 |
+| **Round 2+** | set by A2's comparison (the owner's call) | the break point both sides converge on | as P1 | as P1 | as P1 |
+| **P3 close** | FS112-C (the owner briefs it) | from `plans/FS112-close-inventory.md`: `plans/FS112-derivation.md`, the ledger row, the stubs, the §G re-read, G72's count and G79's record | — | — | — |
+
+**Exact checks** (in at all times; each seconds long): Y's number-field curved-map checker `tools/fs112_y_check.py` (the frozen FS-110 checkers work
+in ℚ(√3) or fall to intervals and cannot accept the strip; claim list §7). For each same-colour tile pair of an object given by formula, **a tile with
+itself included**, it computes the exact minimum and maximum cross-distance and REJECTs when 1 is interior; it prints the number of tile pairs examined
+against the number the object has; its suspect verdict is ACCEPT. YB builds its own. N's exact checks of derived identities go in `tools/fs112_n_*.py`.
+
+### 5.2 Decisions (four parts each)
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **D1** Staffing: a proof side against a construction side, a fresh competition advisor, a blind verifier per side at hand-back — FS-110's shape | a single derivation agent on the chain walk, then a construction agent on the break it finds, in sequence | the break point is decisive only when attacked from both sides at once, and FS-110's four rounds found every divergence of truth at a verifier or an advisor (its §R-close 3.1, G51) | medium-high — if both stage-1 walks put the first break at the same step with the same fragment, round 2 can be one side plus a verifier |
+| **D2** A reading job (P0) before the contest | each side reads threads 6–9 at its own stage 1 | two sides reading 30,000 words each doubles the cost and makes their first findings share a source unevenly; one reading, extracted verbatim, gives both the same prior art (protocol §1 rule 4) — and FS-110's recorded miss was prior art read in round 3 (its §R-close 3.1, X10) | high |
+| **D3** Stage 1 is the chain walk, derived by both sides | the local calculus again (FS-110's stage 1); or the walk by N alone | the stub's first question is which steps survive, and Y's building is aimed by the answer; two blind walks give the first two-mind result of the milestone in the free window. The calculus (A-EXACT, A-CIRC, A-SIX) stands at FS-110's grades and is reused | high |
+| **D4** A new exact checker in number-field arithmetic, built by Y and independently by YB | extend a frozen FS-110 checker (forbidden: standing rule 7); or check each object by hand in `sympy` | the strip needs ℚ(√3, √5) and the disk a nested radical; one tool with plants and calibrations, rebuilt blind by YB, is the only way an ACCEPT means anything (G21, X17) | high |
+| **D5** The 2.124 disk is a positive only once rebuilt: its combinatorics transcribed by eye from Fig. 10, the exact system solved, the printed radius reproduced; an optional Y stage after CAL-STRIP | fit its figure's pixels; or leave the disk out | pixel fitting is a search (standing rule 3); leaving it out forfeits the only positive that refutes disc-local arguments between radii 1.834 and 2.124; the transcription is reading, with a built-in control (the advisor's second review) | medium — if P0 finds a printed rule in thread 16, the transcription is replaced by it |
+| **D6** No Lean phase in FS-112; kernel decisions per theorem at the close (the map argument is one stub with row 134's) | formalise N4-FIN now, "an exact inequality chain, a leaf" (`plans/FS110-derivation.md`) | formalisation is not a cost (counter-priors), but whether N4-FIN survives unit arcs is this milestone's question; formalising a lemma whose hypothesis may change is premature | medium |
+| **D7** The verifiers launch at hand-back, not during the contest | protocol §1 rule 11: a verifier on a finished result while the contest runs | the three-agent cap: N, Y and A2 fill it | high |
+| **D8** YB3-SAME last, one in-ban fragment by Y if time allows | a proof-side stage on it | no bearing on Q-full (the advisor's reading, adopted: a Condition-5 statement) | high |
+
+### 5.3 Registered expectations (instruments for G21, scored at the close; never caps; each with its population and both outcomes reachable)
+
+| # | expectation | p | population, and why both outcomes are reachable |
+|---|---|---|---|
+| E1 | C-CHAIN-1 (NB-4) and C-CHAIN-2 (NB-5) fail as written with unit arcs, realised by FS-110's own fragments (T2's four-colour seam points; S1's saved covering pair) | 0.9 | the chain's first two steps; reachable NO: a reading of T2 or S1 that shows the fragment is not a counterexample to the step's local argument |
+| E2 | the stub's "the chain's W-MERGE and N4 steps survive unit arcs outside the arcs' centres (0.6)", re-registered at **0.6** for W-MERGE and N3-CONF, **0.5** for the N4 chain | 0.6 / 0.5 | the local steps C-CHAIN-3…11 read circles `ω(v)`, `ω(v ± n)`; a unit arc breaks Condition 5 on `ω(P)` only (4.4), so each step survives exactly when no circle it reads is an arc centre's — both outcomes turn on a checkable scope |
+| E3 | the first break inside the N4 chain, if any, sits at the curvature endpoints `±1` that Condition 5 made strict (N3-DEG's "curvatures in `(−1, 1)`", N4-FIN's `−1 < λ_k < υ_k < 1`): a horn bounded by a unit arc | 0.5 | N4-FIN's inequalities; reachable either way by derivation at named values |
+| E4 | the stub's "the first obstruction is at a unit-arc centre carrying four colours (0.5)", re-registered: the proof side's first step it cannot close sits at a four-colour vertex that is a unit-arc centre (C-UA-BUDGET's first branch) | 0.5 | population: the steps N takes up; reachable otherwise at a three-colour (S1) centre or at T2's rhombus |
+| E5 | **the stub's "a YES by formula (0.03)", re-registered at 0.03 with its population stated**: a full tight six-map of the plane given by formula and accepted exactly, within FS-112, in the population of asymmetric curved maps with unit-arc seams and four-colour vertices. No print prices this population: `[Parts2020c]`'s designs are, in its own words (pp. 37–38), "restricted … to the case of highly symmetrical tilings with only a few tiles in the repeating cell, and in the case of k = 6 to tilings in which all tiles are congruent", and put unit arcs only on voids; `[Parts2021]`'s wavy sides saved colours once in `m ≤ 2000` (at `m = 6`, a multi-fold problem, "due to reduction of d by only 0.15%"); Polymath16's 2018 search stopped at the 2.124 disk and the 3.668 strip. The 0.03 is the bold form's prior (G64: not evidence) and FS-110's closure of Condition 5 | 0.03 | YES reachable by a formula and the exact checker; NO by derivation |
+| E6 | **the dial** (FS112-A's proposal): Y exhibits by formula, checked exactly, a tight six-coloured disc of radius `> √(5/2 + 9/(2√5)) ≈ 2.12426` or strip of height `> √15/2 + √3 ≈ 3.66854` — a record over print | 0.2 | informative both ways: a record moves the local frontier the NO must exceed (C-GLOBAL); a stall at the print's values with a named obstruction is evidence for the NO's global step |
+| E7 | CAL-STRIP rebuilt by formula from its printed rule and accepted by Y's checker; **and** it carries out-contacts | 0.85; 0.6 | the rebuild is a derivation; a REJECT has three named causes (claim list §7) |
+| E8 | C-SEAMS-TWO TRUE (the seams are a three-colour centre and a four-colour vertex with arcs) | 0.7 | a reachable FALSE: a T2 realisation whose seam points carry three colours |
+| E9 | ARC-INERT TRUE off isolated contact points, a GAP at them (its author's form) | 0.6 | reachable FALSE: an inert arc whose bend creates a same-colour unit pair away from contact points |
+| E10 | C-UA-CHAIN's killing test fires: a closed cycle of unit arcs realised as a tight local fragment by formula | 0.35 | informative both ways: a cycle kills §IQ's propagation route; its impossibility is a lemma for it |
+| E11 | G17: every unit-arc seam is realised as a tight **arc-closed** local fragment (C-ARC-END; the obstruction, if any, is global) | 0.6 | killing test 4 as rewritten: FS-110's open-ended fragments cannot fire it; the arc-closed form can fail at the arc's end vertices |
+| E12 | G71 survives: no bowtie seam with unit arcs defeats the index without a swap | 0.75 | killing test 5 |
+| E13 | C-HOCK: arcs of radius `< 1` can be replaced keeping validity | 0.6 | a blog claim; its first exact test is A6-C2's radius-9/10 arc filled to radius 1 — ACCEPT or REJECT both reachable in seconds |
+| E14 | a NO of Q-full at one mind with every GAP named, within P1 | 0.3 | a NO needs a step past the strip (C-BEYOND); reachable either way |
+| E17 | C-LOCAL: a NO exists whose every step reads a disc of bounded radius (row 134's needed a bi-infinite line) | 0.35 | at bounded `K` a NO implies some radius by compactness, so the expectation is about an **explicit** `R` from a derivation; a FALSE of C-LOCAL at bounded `K` would be a YES |
+| E15 | a named obstruction or GAP as the milestone's product | 0.85 | — |
+| E16 | a blind verifier finds a divergence of truth | 0.4 | FS-110's rate (its E12 met) |
+
+### 5.4 The ban, and Kooshi's ruling beyond it
+
+Every brief carries standing rule 3's in/out lists and the "would have searched here" log. Out for Y in particular: a parameter scan over arc
+centres, radii or tile shapes; fitting a printed figure; any optimiser over tilings (FS-109 is post-ban). In: a family given by formula whose free
+parameters are fixed by derived equations, checked at the named values; the checker on each member. Kooshi, beyond 2026-10-01: *"search for a finite
+graph is out. It would be huge, not feasible."* — and `[Polymath2021]`'s own proposed route, "an exhaustive computer search of all possibilities", is
+exactly what the plan replaces by derivation.
+
+### 5.5 Carry-over (not this milestone's work; for the owner and the close)
+
+- **Correction owed** (the owner's inventory item 6): NB-4's printed form (`plans/FS110-NB-verification.md` l. 164, "`ω(y_k)` … passes through
+  `y_k`") — N checks it at stage 1; the close corrects `plans/FS110-derivation.md` if it is a slip.
+- **`BIBLIOGRAPHY.md` rows** (§PA): Kruskal 2008 → "abstract read (FS112-P): two- and three-colourings of bounded regions; silent on six-maps";
+  Ágoston 2025 → title and authors verified, abstract read; `[Oostema2020]` new row, abstract read; Boronska 2009 thesis, title only; Polymath16 threads
+  6–9 → "grepped (FS112-P); read in full by FS112-PA" when P0 lands.
+- **FS-109**: the dial E6 is a disc/strip-size dial beside FS-109's hole dial; the close decides whether it folds into FS-109's stub.
+- **The stub**: its banner's re-registration request is met by 5.3 E5; the close rewrites the stub's registered-expectations line.
+
+### 5.6 Proposed edits for the close (I edit none of these files)
+
+`LEDGER.md` — none until results; `CLAUDE.md` § Paths forward row 1 — unchanged until the close; `plans/FRONTIER-STUBS.md` — FS-112 "open (P0)"
+when the owner launches; `BIBLIOGRAPHY.md` — 5.5's rows.
+
+### 5.7 Briefs drafted (for the owner to launch)
+
+`data/fs112/briefs/PA112-reading.md` (P0); `N112-proof.md`, `Y112-construction.md`, `A2-112-competition-advisor.md` (P1);
+`NB112-verify-proof.md`, `YB112-verify-construction.md` (P2, templates: the owner adds the claim ids the side's report lists). Each carries the ban,
+the fences (standing rule 13; both advisors' records; the other side's files; the verifiers'; the close inventory; `git log` beyond the start-up
+snapshot), the one-level-deep rule with its reason, and the content-free hand-back.
+
+## Stage 5 — SAVED
