@@ -294,6 +294,7 @@ radius exactly 1.*
 | N2-ACT1-W0 | Act One holds in every tight six-map having a vertex of four colours or a trivalent vertex with a swap (in particular with `W = 0`), bar the named unit arcs; under Condition 5 unconditionally | [hand, one mind] | §4.4 |
 | N2-ROT | at a ring change point with pattern (A+, A−) one colour `g ∈ P_cl(u)` fills the outward 60° cone at `x`, and `u`'s `g`-sector lies in the closed half-plane away from `x`; with (B+, B−) the inward cone and the half-plane toward `x`; no other pattern forces a colour at `x` | [hand, one mind; table checked on named rings] | §4.3 |
 | N2-HEX | a purely rotating ring (six 60° arcs, `W = ±2`) forces `u` regular: three sectors of exactly 120°, each facing away from two consecutive rotation points | [hand, one mind] | §4.4 |
+| N2-S1 | at a non-vertex seam point `w₀` on a unit arc of `ω(u)` (the (S1) seam), with `(u, v)` a disjoint (3,3) covering pair, `\|u − v\| ∉ {1, √3}`, and `ω(v)` free of `Γ`-arcs at `σ_v^{±1}w₀`: `v`'s ring changes freely at `w₀`, and both hexagon neighbours `σ_v^{±1}w₀` carry `u`'s bowtie colour `γ` on both sides along `ω(v)` | [hand, one mind; the exceptional distances located numerically, §5.1] | stage 5, §5.1 |
 
 ### N2: would-have-searched-here log
 
@@ -400,3 +401,58 @@ the kill is not local at one vertex: it must read how windings of adjacent verti
 live in triples that share one colour). Unit-arc maps are the second branch (the swap's exceptions are the T2/S1 seams' unit arcs).
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: (S1) at the seam point, the vertex case with unit arcs, and the global claims
+
+### 5.1 N2-S1: what an (S1) seam forces on the partner's circle [hand, one mind]
+
+*Setting.* `(u, v)` a covering pair with `P_cl(u) = {α, β, γ}`, `P_cl(v) = {δ, ε, ζ}` (disjoint), `|u − v| < 2`; `w₀` a common unit point on the
+interior of an arc `A ⊂ ω(u) ∩ Γ` (N-SEAM (c)); `α` the inner side colour of `A`, `β` the outer, `γ` filling both side cones at `u` (N-SEAM (d); a
+bowtie of degree 4 at `u`). `σ_v` is the rotation by 60° about `v`.
+
+**N2-S1.** *If `|u − v| ∉ {1, √3}` and `ω(v)` carries no arc of `Γ` at `σ_v^{±1}w₀`, then along `ω(v)` both sides of `σ_v w₀` and of `σ_v⁻¹w₀` are
+coloured `γ`.* *Proof.* `ω(v)` crosses `A` transversally at `w₀`, so `w₀` is a change point of `v`'s ring (colours `t(v)^c = {α, β, γ}`) with
+`{p, q} = {α, β}` and third colour `r = γ`. Apply N2-ROT's four conditions. (A+) would put the `q`-tile at `w₀` in `B̄(σ_v w₀, 1)`; but at the non-vertex
+`w₀` the `q`-tile is a half-disc bounded by `A`, which lies in a disc through `w₀` only if that disc's circle is tangent to `ω(u)` at `w₀`, i.e.
+`σ_v w₀ − w₀ = ±(u − w₀)`. In the triangle `u w₀ v` the angle at `w₀` is `π − 2ψ` (`|u − v| = 2cos ψ`), so this happens only at `ψ = π/3` (`σ_v w₀ = u`,
+`|u − v| = 1`) or `ψ = π/6` (`σ_v^{∓1}w₀ = 2w₀ − u`, `|u − v| = √3`) — located numerically as the zeros of the cross product (a spot check, not a
+proof; the angle count is the proof). The same holds for (B+), (A−), (B−). With none of the four, N-E0 leaves only `r` at `σ_v^{±1}w₀±`. ∎
+
+*What it says.* An (S1) seam is not free: the bowtie colour `γ` of the centre must reappear at the two points of the partner's circle 60° from `w₀`
+(each at distance 1 from `w₀` and from `v`). If `w₀′` (the mirror seam point) is also (S1) centred at `u`, the same at `σ_v^{±1}w₀′`; an (S1) seam
+centred at `v` gives `v`'s bowtie colour on `u`'s circle. *Where six is spent:* "`r` is unique" — with seven colours `t(v)^c` has four colours and the
+conclusion weakens to "one of two colours", as required. *Townsend's ⅔π sector:* TS-U's own control; N2-S1 reads the sector from the partner's side and
+adds no new use of six. *Not derived:* whether the `γ` points at `σ_v^{±1}w₀` force a further covering pair (they lie at distance `2 sin|60° − ψ|` from
+`u`, not 1, so N-E2 does not reach them): the next link of the (S1) cascade is a GAP.
+
+### 5.2 The vertex case (S2) with unit arcs at `w₀`: a reduction, not a verdict [hand, one mind]
+
+At a vertex `w₀`, each of the four unit tangents (`τ_u^±` of `ω(u)`, `τ_v^±` of `ω(v)`, alternating) either starts an arc of that unit circle in `Γ`, or is
+straddled by a tile whose colour belongs only to the other point (N-SEAM (b) and the curvature-slot argument of N2-SWAP). Sixteen patterns, up to the
+symmetries `u ↔ v` and reflection: **no arcs** is N-X (four colours at `w₀`, pattern `v, u, v, u`); **both `τ_u^±` arcs, no `τ_v` arcs** is (S1) at a
+vertex — the two `u`-colour straddlers of `τ_v^±` lie on opposite sides of `ω(u)` and differ (N-X (b)'s argument), so `w₀` has at least two `u`-colours
+and the arc of `ω(u)` through `w₀` is an (S1) arc; **all four arcs** is `ω(u)` and `ω(v)` both in `Γ` through `w₀`, the four quadrants each on fixed
+sides of both circles, with no colour of `u` (resp. `v`) on both sides of `ω(u)` (resp. `ω(v)`) — consistent as far as I derived; **one arc** patterns
+mix N-X with (S1). Each pattern's kill is open; the useful fact is that no new seam kind appears: every (S2) vertex is N-X, (S1) at a vertex, or a
+crossing of two seam arcs. **Verdict: GAP** at every pattern but N-X's (which N held).
+
+### 5.3 The global claims
+
+- **C-T2 (ii): GAP; N's registered bet (FALSE at every `K`) stands, unproved.** What I add: N2-SWAP shows every swap on a winding-zero ring near a T2
+  rhombus demands another unit arc or a covering pair, and N2-S1 shows each non-vertex unit-arc seam demands its centre's bowtie colour at two further
+  points; neither closes the cascade. The step named: **a finiteness count** — at bounded `K` the number of unit arcs per unit disc is bounded, and the
+  cascade must be shown to demand more.
+- **C-BOW-K (ii): GAP.** N2-S1 is the first "forced partner" fact for a bowtie seam (the brief's third route: "forcing a non-escaping partner"), but the
+  forced `γ` points are not yet shown to create a covering pair without an escape. The step named: **does a `γ` point at `σ_v w₀` form, with a vertex of
+  type `t(u)^c ∪ …`, a covering pair saved by no escape?**
+- **C-ACT1: GAP** (stage 4): Act One proved at four-colour vertices and at rings with a swap; open for maps whose every trivalent ring winds.
+
+### 5.4 Registered (G21 instruments, scored at the close)
+
+| id | prediction | probability |
+|---|---|---|
+| N2-P1 | the winding case of Act One (§4.4) is not killed by any argument local to one vertex and its circle | 0.8 |
+| N2-P2 | C-ACT1 is TRUE for tight six-maps in `𝓜_K` without unit arcs | 0.6 |
+| N2-P3 | a local fragment realising (S1) with N2-S1's `γ` points exists (the construction side's (S1) fragment will meet N2-S1) | 0.7 |
+
+## Stage 5 — SAVED
