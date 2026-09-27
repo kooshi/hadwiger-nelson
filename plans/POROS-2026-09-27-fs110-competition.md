@@ -844,3 +844,83 @@ be saved.
 - the registrations of rounds 1–2 — read against: that they would meet by round 2 — surprised: no (A3 recorded the pattern); they never met
 
 ## Stage A4-1 — SAVED
+
+## Stage A4-2 — SAVED: FS110-NB against the proof side (brief item 3), and round 3 re-weighed
+
+*Read on the owner's word that NB's report exists: `data/fs110/reports/FS110-NB.md`; `plans/FS110-NB-verification.md` §2.3–2.6, §2.11 and stage 4 (the
+divergence table); the heading list. YB's record is still fenced (not opened).*
+
+### A4-2.1 NB against N and N2: divergences, and the count of minds
+
+| item | NB (blind) | the side | divergence | minds now |
+|---|---|---|---|---|
+| N-E2, N-SEAM, N2-RING, N2-TRANS (bar `d = 2`), N2-FLIP, N2-HEX, N2-S1 (exceptions exactly `{1, √3}`) | TRUE | TRUE | none | **two, one blind** each. N2-TRANS's genericity step is a sketch in both |
+| N-X (a)–(d) | TRUE | TRUE | none | **three** (N, Y2-W4 independent, NB blind) |
+| N-HORN / C-CUSP-K | TRUE at LIM | TRUE | none | three (N, Y's cusp row, NB) |
+| N2-V4 | step 1 TRUE; step 2 a GAP in the claim list's **disjoint** reading, TRUE in the union reading | TRUE with the arc proviso (union) | **definition only** (NB's D1). Card 3 settled the union for both sides | step 1 four (A3, N2, Y2, NB); step 2 (union) three plus NB's acceptance |
+| N2-SWAP, N2-ACT1-W0 | TRUE under Condition 5; outside it they inherit item 6's GAP | TRUE, "bar the named unit arcs" | scope: in the disjoint reading the proviso misses the arcs at the four-colour ring's change points. In the union reading the side's proviso suffices | two, one blind (Condition 5) |
+| N2-ROT | the section TRUE; **the table line MISSTATED** (it drops "(A+, B+), (A−, B−) is a swap") | §4.3 states the swap clause; the table line omits it | a table line, FS-107's M3 kind | two |
+| **NB-4, NB-5** | new | not stated (the side left the cascade a GAP) | beyond the side | **two, one blind**: NB, and my check below |
+
+### A4-2.2 NB-4 and NB-5, checked (the second mind NB asks for) [hand; sighted, having read both the side and NB]
+
+- **NB-4** ("under Condition 5 … no vertex has four colours"): **TRUE**, every step checked.
+  1. The ring of `v` is two-coloured `{e, f}` with the `60°` alternation, so its change points come in `σ_v`-orbits `y₀, …, y₅`.
+  2. The half-arcs of `ω(y_{k±1})` at `y_k` lie in tiles whose colours avoid `{e, f}` (A-CIRC at `y_{k±1}`, which are change points too). They split
+     into an inner colour `i_k` and an outer colour `o_k`, both in `P_cl(v)`, with `i_k ≠ o_k` (N-E2 against `v`'s tile).
+  3. Condition 5 and N2-V4's step 1 at `y_k` give `P_cl(y_k) = {e, f, i_k, o_k}`, exactly.
+  4. A-CIRC at `y_{k+1}` gives `{i_k, o_k} ∩ {i_{k+1}, o_{k+1}} = ∅`, so the pairs alternate `{A, B}`, `{C, D}`.
+  5. For each colour, N-E2 at three points `120°` apart puts its sectors at `v` into three closed half-planes whose lines are `60°` apart. They meet in
+     a closed arc of at most `60°`. Four colours fill at most `240° < 360°`.
+- **NB-5** ("no close covering pair at all"): **TRUE**, with one precision.
+  - It **needs no disjointness**. The half-arcs of `ω(u)` at `w₀` carry two distinct colours of `[6] ∖ P_cl(u)`, and those of `ω(v)` carry two of
+    `[6] ∖ P_cl(v)`. In the union sense these are disjoint sets, so `|P_cl(w₀)| ≥ 4` (or the pair dies at once).
+  - Y2's remark "`≥ 3` when the types overlap in one colour" is therefore short. The two branch colours on `ω(u)` lie outside `P(u)`, hence in
+    `P(v) ∖ P(u)`, and the two on `ω(v)` lie in `P(u) ∖ P(v)`. [hand, one mind]
+- **What NB-4/NB-5 retire.**
+  - My hunch `every-escape-is-paid-on-a-unit-circle` is **killed**. Under Condition 5 no escape survives at all (it placed one at a four-colour seam
+    point, and NB-4 excludes those).
+  - A4-SIX-ARCS is **vacuous under Condition 5** and stands outside it.
+  - Y2's BB fragment cannot extend to a full map under Condition 5 (its seam points are four-colour and carry no arcs). Y2-LAT's failure is one
+    instance of this.
+- **Prior art, for the conclusion only:** NB-4's four-colour half is `[SokolovVoronov2025]` Lemma 2 in a region-only, almost-everywhere form (NB's own
+  note). FS110-PA is checking S–V on Condition 5 without Condition 6.
+
+### A4-2.3 Where FS-110 stands now (the headline changes)
+
+**Under Condition 5 (no boundary arc of radius 1), the tangency seam is closed.** A tight six-map in `𝓜_K` has:
+- no four-colour vertex (NB-4) and no close covering pair (NB-5), hence no swap (N2-SWAP) and no odd tile (N2-FLIP);
+- rings that all wind, `|W| ≥ 2`, consistently along edges (N2-TRANS);
+- no same-type monotone pair in `(1, 2)`, given A4-BAND and a transposed swap.
+
+So **Q-full under Condition 5 is one question: does a winding map exist?** W-POLY adds that such a map is not polygonal (bar `d = 2`), so it needs
+curved arcs of radius `≠ 1`. [NB-4/NB-5: two minds, one blind; the rest one mind each, as stated.] **Outside Condition 5** the live objects are:
+- (S1) and T2;
+- NB-4's exception (arcs of `ω(y_k)` through the change points);
+- A4-SIX-ARCS's `≥ 6` unit arcs at a four-colour vertex.
+
+### A4-2.4 Round 3, re-weighed (four parts; replaces A4-1.9's choice)
+
+- **The choice: round 3 on the winding question under Condition 5, both sides on it.**
+  - *N:* no winding map exists in `𝓜_K`. Candidate tools: N2-TRANS as a flat structure over the plane; N2-HEX's rigidity; A4-BAND's same-type spacing
+    with a transposed swap; a count of ring changes (`≥ 3|W|` per vertex) against edge length at bounded `K`.
+  - *Y:* build one, a periodic curved six-map given by formula with every ring winding, checked exactly (in under the ban).
+  - The pre-round question to both is the same: the other side's step on this object. **A YES is decisive with no MR** (a full tight six-map, W-EQ-K:
+    `χ(ℝ²) ≤ 6`). A NO decides S–V Question 2's Condition-5 half almost everywhere at bounded `K`: partial, and reported so.
+  - The unit-arc branch ((S1), T2, NB-4's exception) goes to round 4 or a stub.
+- **The alternatives weighed:**
+  - A4-1.9's choice, the four-colour seam point's circle. **Dead under Condition 5 by NB-4**; it survives only in the unit-arc branch.
+  - Closing FS-110 now, with NB-4/NB-5 as the headline and stubs for the winding question and the unit-arc branch.
+- **Why this one:** NB-4/NB-5 turn half of FS-110 into one existence question with a named invariant, `W`, that both sides already hold tools for.
+  - It is the first object on which the registrations can meet, and a YES is the strongest outcome FS-110 has.
+  - Against closing: the question is fresh and exact, and both sides' round-2 tools aim at it.
+  - Against the unit-arc branch first: it has three objects and no single invariant yet.
+- **Confidence: medium.** Two things would change it:
+  - **FS110-PA's finding.** If S–V's own argument for Conditions 5 and 6 (or Townsend's) already excludes winding rings with Condition 6 dropped,
+    round 3 should re-prove their step almost everywhere instead: cheaper, and the same product.
+  - YB finding a defect in Y2-W4 (an input to NB-5's count, though N-X and NB carry it too).
+- **Default:** the owner waits for PA and YB, and then picks. With no word, this goes to the close as the recommendation.
+
+**Would have searched here:** a winding-map existence check by solver. Instead it is named as round 3's exact-check target, to be built by formula only.
+
+## Stage A4-2 — SAVED
