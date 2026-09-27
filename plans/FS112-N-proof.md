@@ -309,11 +309,25 @@ Notation as §1.3 of this record and FS110-N4's frame (`plans/FS110-N-proof.md` 
 
 ### N2: theorems this continuation proved
 
-*(filled stage by stage; one line each, grade and address)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| N2-SIGN | every point `≠ P` of a side-colour tile is within `< 1` of all of `int α` or `> 1` from all of it (near / far tiles) | hand, one mind | stage N2-3 |
+| N2-ENV | a lens point's disc leaves the union of unit discs about `ᾱ` only near `P` (toward lens) or near `R₂(α)` (away lens), within `r(ψ) → 0` | hand, one mind; identities tools exact (`ENVT`, `ENVA`) | N2-3 |
+| N2-TOWARD | `s_out ∉ P_cl(P)` ⟹ the whole unit arc, end vertices included, bends toward `P` (no stub) | hand, one mind | N2-3 |
+| N2-AWAY | `s_in ∉ P_cl(P)` and no `s_in` tile touching `R₂(α)` (ends included) ⟹ the whole arc bends away; the end vertex's only blocker is R2 at the end | hand, one mind | N2-3 |
+| N2-TAN | isolated R2 contacts (and ends of R2 sub-arcs) are cleared by a tangent bend; only R2 along an arc blocks (NB-ISO closed) | hand, one mind (NB's sketch completed); `TAN` exact | N2-3 |
+| N2-RED | N112-RED with its end-vertex and isolated-contact GAPs closed, and its termination (no stubs) | hand, one mind | N2-3 |
+| N2-FLANK-Q | a horn bound `±1` sits on a (Q) arc (FLANK's in-type exception, then two-sided) or an (R2) arc (FLANK's out-type tile along the radius-2 circle) | hand, one mind | N2-4 |
+| N2-RAY | N4-FIN's application fails at a chain's end; a one-sided stuck chain (`λ_k = −1/(k+1)`, `υ_k = 0`) is consistent with N4-FIN; N4-CONE is a GAP under unit arcs | hand, one mind | N2-4 |
+| N2-TERM | the terminal map: arcs (Q)/(R2); vertices cubic, NB4′ exceptions, or stuck on chains ending near (Q)/(R2)/NB4′ or running to infinity (GAP) | hand, one mind | N2-4 |
+| N2-DENSE | in `M*`, every trichromatic cubic vertex has a unit-arc centre within 4 or a stuck vertex within 3; every disc of radius 5 contains one | hand, one mind, over the base (row 134's grade), NB4′ (two), N2-TERM (one) | N2-5 |
 
 ### N2: would-have-searched-here log
 
-- (none yet)
+- End-vertex contact configurations (enumerate sector orders at an arc's end): derived from the two contact half-planes through `τ_A` (N2-3).
+- The tangent bend's curvature `κ` (a scan): derived as `1 − κ ≪ 1 − 2κ_Y` (N2-3).
+- The stuck ray's realisability (a family of horn lines): not built; named GAP (N2-4, N2-5).
+- The strip's end vertices (read coordinates off a rebuild): not rebuilt by me; a prediction stated for the construction side's exact object (N2-5 §5.5).
 
 ### N2: fence log
 
@@ -322,6 +336,7 @@ Notation as §1.3 of this record and FS110-N4's frame (`plans/FS110-N-proof.md` 
 2. `ls data/fs112/` printed the names of fenced directories (`fs112-a`, `fs112-a2`, `fs112-y`, `fs112-yb`, `reports`); nothing inside them listed or
    opened. `ls data/fs112/briefs/` printed the other jobs' brief names; none opened.
 3. Read, not fenced for me: `plans/FS112-unit-arc-half.md` §5.3 (the owner lifted it for the proof side after N's stage 1; N2's brief does not re-fence it).
+4. Card X arrived by message from FS112-A3; its file copy `data/fs112/fs112-a3/card-X.md` was not opened (the message carried the text).
 
 ## Stage N2-1 — SAVED: quotation check; what N2 inherits
 
@@ -485,3 +500,83 @@ hexagonal seven-colouring is terminal, cubic, with no unit arc and no stuck vert
 nothing there; its midline vertices are NB4′'s (E1) exceptions (four arcs, `62.09°`); no step of this stage forbids it.
 
 ## Stage N2-4 — SAVED
+
+## Stage N2-5 — SAVED: item 3, the first global step (route B); card X answered
+
+### 5.1 The route, a decision in four parts
+
+- **The choice.** Route B: S–V Cor. 1 almost everywhere (row 134's base: CB, CD, CE, CUSP-BASE), run on the terminal map `M*` of N2-TERM, first in its
+  **avoidance form** (the base applied where no unit-arc centre or stuck vertex is within its reading radius), then with (Q) centres admitted.
+- **The alternative weighed.** Route A, the (E2)/end-vertex chain (C-UA-CHAIN): each (Q) centre on NB4′'s (E2) branch forces a both-kind arc centred at
+  a ring point, a unit-distance chain of four-colour vertices.
+- **Why B won.** Card X1: every midline vertex of the rebuilt strip is a (Q) centre on the **(E1)** branch (four centred arcs, `62.09°`), and on (E1)
+  route A forces no further vertex; so route A has no step that fires on the one held valid object beyond radius 1.8, and could decide nothing about
+  maps built like it. Route B's base reads a disc of radius 3 around a trichromatic vertex — beyond the strip's half-height `1.834` — and its unit-arc
+  exceptions are named (B1–B3, the chain walk, two minds).
+- **Confidence: medium.** What would change it: a reading of the base in which a (Q) centre's (P′)-failure (below) is needed by Lemma 4's pigeonhole
+  at every trichromatic vertex near it — then route B's second step is as hard as the whole question, and route A's chain would be worth a second look
+  on the (E2) branch.
+
+### 5.2 What the base's exceptions become in `M*` [hand, one mind]
+
+The chain walk (rows 13–17; N and NB agree letter for letter) puts every Condition-5 use of the base at one of three exceptions. In `M*`:
+- **(B1) is empty.** (B1) is an arc of `Ω = ω(u)` **inert** at `u` (both sides outside `c(u)`); `M*` has no inert arc (N2-TERM 1). An (R2) arc on `Ω`
+  has `s_out ∈ c(u)`, so `|c′| = |{s_in}| = 1` along it: CB's "finitely many points with `|c′| = 2`" survives.
+- **(B3) is (P′) failing exactly at (Q) arcs.** (P′) ("unit pairs never nest", CB D1) fails for `x` interior to a unit arc centred at `y` precisely
+  when both side colours lie in `c(y)`: then `c(x) = {s_in, s_out} ⊆ c(y)`. In `M*` that is a (Q) arc (an (R2) arc has `s_in ∉ c(y)`, so (P′) holds).
+- **(B2)** (an arc leaving `u` on `ω(u + e)`, `e ∈ Ω`) is an arc centred at a point of `Ω`; in `M*` it is (Q) or (R2) there.
+- **The end vertex of a (Q) arc** (the joint A2 named): if `E` ends a (Q) arc `α ⊂ ω(y)`, the circle `ω(y)` leaves `E` beyond `α` either along another
+  unit arc centred at `y` or through a tile whose colour is outside `c(y)` (N-E1 at `y`) — a ring colour of `y`. So `c(E)` contains a colour outside
+  `c(y)` unless two consecutive arcs of `ω(y)` meet at `E`: a trichromatic end vertex nests into its centre only at a junction of two centred arcs.
+
+### 5.3 N2-DENSE — the first global step [hand, one mind for the assembly; over the base at row 134's grade, NB4′ (two minds), N2-TERM (one mind)]
+
+*Let `M*` be the terminal modification of a valid map (N2-TERM) and `u` a trichromatic cubic vertex of `M*`. Then `B̄(u, 4)` contains a unit-arc
+centre, or `B̄(u, 3)` contains a stuck vertex.*
+
+*Proof.* Suppose neither. (1) A unit arc meeting `B̄(u, 3)` has its centre in `B̄(u, 4)`; so `Γ ∩ B̄(u, 3)` has no unit arc and every unit circle meets it
+finitely: Condition 5 holds inside `B̄(u, 3)`. (2) Every vertex `w ∈ B̄(u, 3)` has `≤ 3` colours: NB4′'s exceptions need an arc centred at `w` or at a
+point of `ω(w)`, a centre in `B̄(u, 4)`; NB-SIX's likewise. (3) No vertex in `B̄(u, 3)` repeats a colour (N2-TERM 2: it would be stuck). So `M*` is cubic on
+`B̄(u, 3)` (sectors possibly horns; CUSP-BASE's unit-arc exception is a centre at `w ± n`, in `B̄(u, 4)`). (4) The base at `u` reads: the closed unit
+disc about `u` (Lemma 4's eleven pigeonhole points and the boundary paths followed inward), pairs `u₁, u₂` there at distance `< 2` (Lemma 3's bicycle,
+Cor. 3), the circles `ω(u_i)`, `ω(x(t))`, `ω(y(t))` with `x(t), y(t)` on them (centres in `B̄(u, 2)`, points in `B̄(u, 3)`), CE's Antipodal Lemma and
+CUSP-BASE at `u ± e`, and the hole-filling of `u`'s `{4,5,6}`-component (CB D5 item 6; it survives unit arcs by the same generic move of the outside
+centre within its tile, which also avoids the finitely many centres). Its exceptions (B1)–(B3) are unit-arc centres at points it reads, all in
+`B̄(u, 4)`. So the base applies unchanged and refutes the colouring of `B̄(u, 3)`. ∎
+
+**Corollary (every disc of radius 5).** Every disc of radius 1 contains a vertex of `M*` (a tile has diameter `≤ 1`; a tile with a single neighbour
+is surrounded by it, and nested surrounding tiles all lie within `B(x, 1)`, finitely many by local finiteness — a sketch). A vertex is cubic, an NB4′
+exception (a centre within distance 1), or stuck. So **every disc of radius 5 of `M*` contains a unit-arc centre or a stuck vertex.** Bends and
+merges create no unit arc, so the centres are the original map's: *in every valid six-map with unit arcs, every disc of radius 5 contains a unit-arc
+centre, or a stuck vertex of its terminal modification.* Under Condition 5 on the whole plane there are neither (N4-CONE), which is row 134.
+
+**What it says, and what it does not.** Q-full's YES must carry unit-arc centres (or stuck chains, which end at them or run to infinity) at every
+scale-5 window of the plane: a C5 region of radius 5 is impossible. It is **not** an exclusion. *Where six is spent:* in the base (S–V's ten-plus-one
+count) and in NB4′. *Seven-colour control:* the hexagonal seven-colouring has no unit-arc centre and no stuck vertex, and is valid: the base does not
+start there (four ring colours), as required. **Killing test 8 (the strip):** every trichromatic vertex of the strip is within `1.834` of a midline
+(Q) centre, so N2-DENSE holds on it; the step reads outside the strip only around a vertex farther than 4 from every centre, which the strip has none
+of. **C-LOCAL:** N2-DENSE is local (radius 5, explicit), but it is not a NO; the named next step is.
+
+### 5.4 The next step, named (C-BEYOND's step for route B)
+
+**GAP — the base at a trichromatic vertex within distance 4 of a (Q) or (R2) centre.** In `M*` the base's remaining exceptions are (B2) and (B3) at
+(Q)/(R2) centres, and the stuck chains. The step: rerun Lemma 4's pigeonhole at `u` and show that a (P′)-nesting pair `(x, y)` (`x` on a (Q) arc
+centred at `y`) cannot be one the pigeonhole hands to Lemma 3 or Cor. 3, or name the configuration where it is. By 5.2 last item, a trichromatic
+pigeonhole point nests into a (Q) centre only at a junction of two consecutive arcs of that centre's circle, which is where the next derivation
+should start. Separately, **the stuck ray** (N2-RAY) must be excluded or realised: it is a whole-line object that no disc-local argument can see.
+
+### 5.5 Card X (FS112-A3) answered
+
+- **X1 / part 2:** noted; N112-P1 met exactly and P2's conclusion held — my predecessor's registrations score in their favour. Item 3 taken as the
+  round's aim (stages N2-3, N2-4 were carried to the depth item 3 consumes).
+- **X2 (the strip at each step's reading radius):** N2-TOWARD, N2-AWAY, N2-TAN read up to the radius-2 circle about a centre; on the strip every arc
+  is (Q), so their hypotheses fail and they do nothing — consistent; the strip's own radius-2 points over vertical arcs lie outside it, so it cannot
+  test (R2). N2-FLANK-Q and N2-RAY need a stuck vertex; the strip has none. N2-TERM describes the strip exactly (midline (E1) exceptions, the rest
+  cubic). N2-DENSE: 5.3. **The end vertices of the strip's arcs:** 5.2's last item predicts, checkable on the exact rebuild, that `ω(P)` leaves each end
+  vertex through a tile of one of `P`'s two ring colours or along the next arc centred at `P`.
+- **X3:** no action (as the card says). **X4:** not worked this round.
+
+**Would have searched here:** whether the stuck ray is realisable (a line of horn pairs; a parameter family by formula with an exact check would be
+in-ban, but its free parameters were not derived) — named as a GAP instead.
+
+## Stage N2-5 — SAVED
