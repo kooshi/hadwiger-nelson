@@ -234,3 +234,33 @@ curved arcs of radius `≠ 1`. [NB-4/NB-5: two minds, one blind; the rest one mi
 - **NO** decides the Condition-5 half of `[SokolovVoronov2025]` Question 2 almost everywhere, at bounded `K`: a partial answer, and reported as one.
 
 The unit-arc branch ((S1), T2, NB-4's exception, A4-SIX-ARCS) is not round 3's object.
+
+
+### 7.1 The terms W-3 uses, defined (the owner's addendum; sent to both sides word for word)
+
+W-3 is stated in the proof side's round-2 vocabulary. The construction side asked for the definitions, so they are quoted here verbatim, with their
+addresses, for both sides. These are definitions, not proofs; the proofs stay in the records.
+
+**The ring of a trivalent vertex, its winding `W` and a swap point** (`plans/FS110-N-proof.md` §4.3, verbatim):
+
+*Setting.* `u` a vertex, `t = P_cl(u)`, `|t| = 3`, `ω(u)` carrying no arc of `Γ`. By N-E1, `ω(u)°` is coloured by `t^c`; by N-E0, `c(θ) ≠ c(θ + 60°)`.
+Identify `t^c` with `ℤ/3`; lift `c` to `c̃` along the circle, changing by `+1` or `−1` at each colour change (a point of `Γ ∩ ω(u)` with the same colour on
+both sides changes nothing). `W(u) = (c̃(θ + 360°) − c̃(θ))/3 ∈ ℤ` (its sign depends on the identification). `σ` is the rotation by `+60°` about `u`;
+`c(x±)` are the colours just after and just before `x` in the positive sense. A **swap point** is a change point `x` with `c(σx−) = c(x+)` and
+`c(σx+) = c(x−)` (or the same with `σ⁻¹`).
+
+**"Consistently along edges"** is N2-TRANS (the theorem table of `plans/FS110-N-proof.md`, verbatim):
+
+| N2-TRANS | along an edge `uu′` (common colours `a, b`) of an Act-One-free map without unit arcs, `W(u)` on the ring oriented `(d, e, f)` equals `W(u′)` on `(c, e, f)` — `u′`'s third colour `d` replaced by `u`'s third colour `c` | [hand, one mind, a sketch at the nerve step] | stage 6, §6.1 |
+
+**A tile's count, and even and odd tiles** (`plans/FS110-N-proof.md` §6.2, verbatim): the count is `k`, the number of same-type steps around the
+tile. An **even tile** has `k` even; an **odd tile** has `k` odd and forces Act One.
+
+
+Around a tile of colour `a` with neighbours `b_0, …, b_{m−1}` (boundary vertices `v_i` of type `{a, b_{i−1}, b_i}`, all trivalent), N2-TRANS moves a
+label from colour `b_{i+1}` to `b_{i−1}`. Extend the labels to all five colours of `[6] ∖ {a}` (the two colours `b_{i−1}, b_i` outside the ring
+carry labels 4, 5): each step is the transposition `(b_{i−1} b_{i+1})` of labels, trivial exactly at a same-type step (`b_{i−1} = b_{i+1}`). After a full
+turn the total parity is `(−1)^{m−k}` (`k` same-type steps); the two outside labels leapfrog one index per step and return swapped iff `m` is odd,
+
+**Terms that are not part of W-3's definition.** "A4-BAND", "same-type monotone pair" and "transposed swap" appear only in the advisor's framing sentence
+quoted in §7 ("given A4-BAND and a transposed swap"), where they carry one mind and a sketch. W-3 as stated above does not use them.
