@@ -3,7 +3,8 @@
 *Filed by the close planner FS110-C (de Bruijn, Opus 5.5), 2026-09-27, from the records `plans/FS110-N-proof.md` (the proof side: FS110-N, then
 § Continuation — FS110-N2, N3, N4), `plans/FS110-Y-construction.md` (the construction side: FS110-Y, Y2, Y3, Y4; the sides blind to each other until
 hand-back), the blind verifiers `plans/FS110-NB-verification.md`, `FS110-YB-`, `FS110-NB3-`, `FS110-YB3-`, `FS110-NB4-`, `FS110-YB4-verification.md`, the
-blind checks of the base `plans/FS110-CB-verification.md`, `plans/FS110-CD-verification.md`, `plans/FS110-CC-verification.md`, the prior-art check
+blind checks of the base `plans/FS110-CB-verification.md`, `plans/FS110-CD-verification.md`, `plans/FS110-CC-verification.md`, the second mind at cusp
+vertices `plans/FS110-CE-verification.md` (FS110-CE1–CE7, filed by job BK of the consolidation run, 2026-09-27), the prior-art check
 `plans/FS110-PA-prior-art.md`, and the advisors `plans/POROS-2026-09-27-fs110-tangency-seam.md` (FS110-A) and `plans/POROS-2026-09-27-fs110-competition.md`
 (A2–A6). Reconciliation: `data/fs110/fs110-c/reconciliation.md`. Notation: `data/fs110/claims.md` §0, §7.1, §8. `𝓜_K`: FS-107's locally finite maps with
 at most `K` circular or straight arcs per unit disc and radii at least `1/K`; a map is **valid** when it is a full a.e.-proper six-colouring (no two interior
@@ -17,7 +18,8 @@ has four colours and no close covering pair exists (NB-4, NB-5); Woodall's merge
 outside Woodall's cone (W-MERGE, N3-DEG); a shave, a ray merge and a propagation lemma remove the cone, since a cone no move removes forces a bi-infinite
 chain along its normal line that curvature monotonicity forbids (the N4 chain); the terminal map is cubic, and S–V's Corollary 1, proved almost everywhere
 for curved cubic maps with no `d = 2` exception (CB, CD), refutes it. Grade: the chain two minds, one blind; the base two minds, both blind; the base at
-cubic vertices with a cusp sector two readings at D2, D5 item 5 and D1, **under check at D4 and D5 items 1–4, 6** (FS110-CE). Not in print (FS110-PA).
+cubic vertices with a cusp sector two readings at D2, D5 item 5 and D1, one reading at D4, and at D5 items 1–4, 6 one mind after CE's local repair
+(FS110-CE1–CE7). Not in print (FS110-PA).
 Beside it: the local calculus of close complementary vertices, the Act-One and winding apparatus the rounds built on the way (off the headline's path,
 with one GAP, YB3-SAME), and exact local fragments of every seam (two checkers). Nothing moves a value: the unit-arc half of Question 2 is open.
 
@@ -27,7 +29,7 @@ with one GAP, YB3-SAME), and exact local fragments of every seam (two checkers).
 *Proof:* NB-4, NB-5; W-MERGE; N4-TERM and N4-CONE (every valid map has a terminal valid modification, cubic at every vertex); FS110-COR1-NOD2 on the
 modification, with FS110-CUSP-BASE for cubic vertices whose third colour is a doubly shadowed single horn (the residue, FS110-NB4-CS; it exists locally,
 FS110-A6-C2). Headline as A6-2.1 states it (`plans/POROS-2026-09-27-fs110-competition.md` l. 1485). *Proof verdict:* holds given the base at cusp sectors
-(NB4 §2.9); the base at cusps read twice at D2, D5 item 5, D1 (A6-1.5; CC); D4's bicycle and D5 items 1–4, 6 at cusp vertices under check. **Polarity:**
+(NB4 §2.9); the base at cusps read twice at D2, D5 item 5, D1 (A6-1.5; CC); D4's bicycle read at cusp vertices once (FS110-CE1), D5 items 1–4, 6 true there after CE's local repair (FS110-CE6). **Polarity:**
 N4-4 wrote "answered NO" — a sign slip (A6 §7; NB4 D1). **Scope:** no step uses the complexity bound `K` (A6-C1; NB4-TM and NB4-SC use local finiteness
 only), so the map statement is for every locally finite map; `K` is load-bearing only in FS-107's W-EQ-K, where vanishing holes become a map. *Rests on it:*
 with W-EQ-K (row 133), under Condition 5 vanishing holes at bounded complexity cannot save a colour; FS-110's question left at the unit-arc half. *Prior art:*
@@ -96,7 +98,8 @@ residue. *Prior art:* not found in print. *Kernel:* with FS110-CLOSURE.
 **FS110-COR1-NOD2 — S–V Corollary 1 holds almost everywhere for curved cubic maps under Condition 5 with no `d = 2` exception, for same- and disjoint-multicolour pairs. [hand; two minds, both blind, different routes: CB; CD]**
 *Proof:* CB §D5–D6 (a circle-only reduction replacing S–V Prop. 19's plane recolouring; every pigeonhole endpoint in the open disc or a V-in vertex on
 `ω(u)`); CD §2.2–2.7 (Lemmas H, H′, L, E, R; Theorem D2: antipodal same-multicolour endpoints give `R_i ⊆ B̄(p, 1) ∩ B̄(p′, 1) = {u}`, the disjoint pair
-leaves the cusps at `u` uncovered), `tools/fs110_cd_checks.py`. *Proof verdict:* TRUE; CB's "open disc" a GAP at (E3), (β), harmless via D2 (CD); Lemma 5
+leaves the cusps at `u` uncovered), `tools/fs110_cd_checks.py`. *Proof verdict:* TRUE; CB's "open disc" a GAP at (E3), (β) (FS110-CE4), harmless via D2 (CD) and closed by CE's repair (FS110-CE5, CE6); CB's item 2
+fails at (β) and spike returns (FS110-CE3), item 1 needs (ii) (FS110-CE7); Lemma 5
 and Prop. 18 re-derived by CD, from print in CB; CD takes Props. 9–11 and 17 from print. *Rests on it:* FS110-CLOSURE; row 132's `d = 2` exception struck
 (FS106-SV2, FS106-AE-POLY, FS106-AE-CONV). *Prior art:* `[SokolovVoronov2025]` Cor. 1 everywhere-proper; the a.e. form and the `d = 2` closure not in print.
 *Kernel:* with FS110-CLOSURE.
@@ -109,9 +112,64 @@ was a sketch. *Rests on it:* FS110-COR1-NOD2; FS106-SV2's weakest link. *Prior a
 
 **FS110-CUSP-BASE — CB's route holds at cubic vertices with a cusp or double cusp at D2's strip (a)–(c), D5 item 5 and D1's (P′); along a cusp's normal `|u ± n − x(m)|² − 1 = 4R(R ∓ 1)m²/(1 + m²)`. [hand and tools; two readings at these steps: A6 sighted, CC; D4 one reading, CE; D5 items 1–4, 6 one mind after CE's repair]**
 *Proof:* CC §C1–C6 (`tools/fs110_cc_cusp.py`, two plants firing for their named reasons); A6-1.5. *Proof verdict:* no step fails, no repair; CB's D5 item 5
-omits an inner-`q` case, impossible by the same branch constraints (a completion). Not yet read at cusps: D4's bicycle and D5 items 1–4, 6 (FS110-CE, running);
+omits an inner-`q` case, impossible by the same branch constraints (a completion). Read at cusps by CE: D4's bicycle (FS110-CE1, CE2), and D5 items 1–4, 6, true after CE's repair (FS110-CE3–CE7);
 S–V's printed Prop. 17 at a horn rests on Prop. 16 there (CD's from-print route). *Rests on it:* FS110-CLOSURE at the residue. *Prior art:* not found in
 print. *Kernel:* with FS110-CLOSURE.
+
+**FS110-CE1 — CB's D4, Lemma 3's exact bicycle with the overshoot for `d > √3`, holds at cusp and double-cusp vertices: the map enters only through (i), (ii), `|c′| ≤ 2`, closedness and finiteness, and spikes are harmless. [hand and tools; one mind on cusps: CE; D4's endpoint cases two minds: CB; CE]**
+*Proof:* CE §E1 (the map's inputs M1–M4 read line by line from CB's D4; (ii) re-proved at a spike, word for word CB's proof; the endpoint cases
+exhausted with the unknown second colour of a spike adversarial), `tools/fs110_ce_scope.py` BIKE (0 surviving assignments for `d ≤ √3` and for
+`d > √3`; the plants `noII`, 48 survivors, and `noClosure`, 16 and 48, fire). *Proof verdict:* TRUE, one mind on cusps; the cusp enters only through
+D2, read by CC, and through spikes. *Rests on it:* FS110-CUSP-BASE at D4; FS110-CLOSURE at the cusp residue (FS110-NB4-CS). *Prior art:* not found in
+print; the bicycle is `[Voronov2023]` Thm 1.2, §5, as in FS110-CB-LEMMA3. *Kernel:* with FS110-CLOSURE.
+
+**FS110-CE2 — CB's "WLOG n = −1" completed: with each 60° step of the E band written `3k + e`, `e ∈ {1, 2}`, every band offset `k ≠ 0, −1` dies on the D band, and `k = −1` is `k = 0` negated. [hand and tools; one mind: CE]**
+*Proof:* CE §E1, "A completion CB owes" (`D_y − D_z = 6k + e1 + e2 − J + J_z` lies in `{−1,0,1}` only for `k ∈ {0, −1}`); BIKE runs `k ∈ [−3, 3]`,
+0 survivors. *Proof verdict:* TRUE; a completion of CB's step as written, not a repair. *Rests on it:* FS110-CB-LEMMA3; FS110-CE1. *Prior art:* not
+found in print. *Kernel:* with FS110-CLOSURE.
+
+**FS110-CE3 — CB's D5 item 2 parenthetical, that the recolouring colour a is also the circle's colour just outside the arc at both ends, is FALSE at CD's configuration (β) and at spike returns, and TRUE at every return where the circle changes colour. [hand and tools; two minds at (β): CD; CE. One mind at spike returns: CE]**
+*Proof:* CE §E3: at (β) a rational instance (BETA, exact: `v′ = (1,0)`; P the circle of centre `(4/3, 4/9)` and radius `5/9`, tangent to the a|c
+edge at `v′` and through `b = (4/5, 3/5)`; 902 rational points of its arc in the open disc), so item 2 recolours `[b, v′]` by a while `ω(u)` just
+beyond `v′` is c; at a spike return (SPIKE: a circle of radius 1/2 tangent to `ω(u)` from inside at `s = (1,0)`, or a path through a spike corner),
+and in cusp form a horn tangent to `ω(u)` from inside; the positive half at a transversal crossing, a corner the circle crosses, or a V-out vertex.
+`tools/fs110_ce_scope.py` BETA, SPIKE. *Proof verdict:* FALSE as stated; two minds at (β) (FS110-CD §4.1; CE's rational instance), one at spike
+returns. *Rests on it:* the local repair R1–R4 (FS110-CE6); row 134's Corrections clause. *Prior art:* not found in print; CB's D5 is his replacement
+for S–V Prop. 19's plane recolouring. *Kernel:* declined — a counterexample to CB's text; its positive half is carried inside FS110-CE6.
+
+**FS110-CE4 — CB's D5 item 4, that every surviving colour change's inward path ends at a trichromatic vertex of the open disc, has a GAP at (E3) and at (β), with cusp instances; its "third colour in {4,5,6}" holds, endpoints on the circle included. [hand and tools; two minds: CD; CE]**
+*Proof:* CE §E5: at (E3) a selected change that is a V-in vertex has its a|c edge outside the disc, so no inward path, and its trichromatic point
+lies on `ω(u)`; cusp instances E3H (exact: an i-horn tangent to `ω(u)` from inside, edge curvatures 2 and 3), an a-horn whose a|c edge leaves
+tangentially outward, and a double cusp tangent to `ω(u)`; at (β) `v′` survives under item 2 as written; the third colour by `|c′| ≤ 2`.
+`tools/fs110_ce_scope.py` E3H. *Proof verdict:* GAP as written; repaired by R2 and R4 (endpoints in the open disc, or V-in vertices on the circle).
+*Rests on it:* FS110-CE6; row 134's Corrections clause. *Prior art:* not found in print. *Kernel:* declined — a GAP in CB's text, superseded by
+FS110-CE6.
+
+**FS110-CE5 — The Antipodal Lemma: at a trichromatic cubic vertex u, cusps and double cusps allowed, no two M-in points of `ω(u)` are at distance 2; it is one-sided, and two antipodal points may both have the strip inside. [hand and tools; one mind: CE]**
+*Proof:* CE §E6 (a point x of `ω(u)` is M-in if a tile of a colour of `M = c(u)` has x in its closure and interior points strictly inside the circle
+arbitrarily close to x): at an M-in point `u + e` the strip's majority side is outside, by D2's strip and CC's C2 along a horn's normal, so two of
+u's arcs vote outside there; an arc point `x ≠ u` cannot lie within 1 of both `u + e` and `u − e`, since `2 = |2e| ≤ |u+e−x| + |x−u+e| < 2`; so
+the outside votes at ±e number at most three, not four. No tangent is used. `tools/fs110_ce_scope.py` AL: an ordinary vertex, three cusps and a
+double cusp over 46 directions including the horn normal; the `nearAntipodal` plant fires. *Proof verdict:* TRUE, one mind; one-sided (at the a6
+cusp all three arcs vote inside at both ±n), which is why R2 ends paths only at V-in vertices. *Rests on it:* FS110-CE6; the `d = 2` closure's
+second route, beside CD's Theorem D2 (row 134's grade; FS110-COR1-NOD2). *Prior art:* not found in print. *Kernel:* with FS110-CLOSURE.
+
+**FS110-CE6 — CB's D5 repaired by R1–R4 and the Antipodal Lemma: every pair the chain hands to S–V Lemma 3 or Cor. 3 is at distance below 2, at cusp centres and cusp endpoints included, so S–V Cor. 1 almost everywhere needs no `d = 2` exception. [hand; one mind by this route: CE]**
+*Proof:* CE §E3's repair (R1 an inward a|c path continues through every spike it meets; R2 it ends at its first trichromatic vertex, which may be
+a V-in vertex on the circle; R3 only returns at colour changes of the circle are circle-to-circle, and only their arcs are recoloured; R4 a
+selected change that is itself a V-in vertex is its own endpoint); §E4, item 3 for the repaired reduction; §E6, item 6 (the pigeonhole points are
+u, open-disc endpoints, V-in vertices on the circle and the eleventh point w, each M-in when it lies on the circle, so FS110-CE5 excludes a pair
+at distance 2; `|p − p′| ≥ 1` by the a-side curves, a self-endpoint and a horn endpoint included; `≠ 1` by (P′); the eleventh point topological).
+*Proof verdict:* TRUE after repair, one mind by this route; R3 coincides with CD's pairing rule (FS110-CD l. 414), which CE saw before deriving
+(CE §1.2), so R3 is not blind to CD. Not checked by CE: CB's `< 9` changes branch, hole-filling beyond "a horn changes nothing", Lemma 5 and
+Prop. 18. *Rests on it:* FS110-CUSP-BASE at D5 items 1–4, 6; FS110-COR1-NOD2 at cusps; FS110-CLOSURE; row 134's grade. *Prior art:* not found in
+print. *Kernel:* with FS110-CLOSURE.
+
+**FS110-CE7 — CB's D5 item 1 holds at cusps, but its "= 1 is (P′)" is misstated when the two ends are vertices `{a,c,i}` and `{a,c,j}` with `i ≠ j`; there (ii) excludes distance 1. [hand; one mind: CE]**
+*Proof:* CE §E2: corners of a path, cusp corners included, keep one a-tile beside the path, and a tile has diameter ≤ 1; the two ends'
+multicolours do not nest, and both ends have `c′ = {a,c}` on one circle, which is (ii)'s case. *Proof verdict:* TRUE; MISSTATED, closed by (ii).
+*Rests on it:* FS110-CE6 at item 1; row 134's Corrections clause. *Prior art:* not found in print. *Kernel:* declined — a one-line correction,
+carried inside FS110-CE6.
 
 **FS110-P17 — Under Condition 5 no vertex with exactly three sectors has a purely rotating ring (six 60° arcs). [hand; many minds, three blind: N3 by two routes; NB3; Y3 and YB3 as Y3-SIX; CB's Prop. 17 a.e.; S–V Prop. 17 as FS106-V repaired]**
 *Proof:* N3 §2.4; NB3 §2.4 (the bracketing pair, exact checks C3–C4); Y3 §8.5; YB3 §2.7 (a counting lemma, then a forced unit arc); CB §D5 item 5 (cones
