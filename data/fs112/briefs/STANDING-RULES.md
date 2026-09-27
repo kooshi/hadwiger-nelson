@@ -77,8 +77,8 @@ queue are gone; its rules on blindness, stages and quotation stay. Every brief p
    INVENTORY kinds: result, correction owed, prediction registered or scored, slip, tool defect, prior-art debt, stub to mint or re-aim, file
    to rescue. The final text of your turn: "<job id> idle; report sent to the owner by SendMessage".
 
-10. **Budget — guidance, not a limit.** Your brief names a size in the harness's count. Kooshi, 2026-09-27: *"It's ok if jobs overrun a
-    bit. Setting a budget is reasonable, but holding them to it is not worth the stress."* Work to a natural stage boundary; if you grow large
+10. **Budget — guidance, not a limit.** Your brief names a size in the harness's count. Kooshi, 2026-09-27 (`plans/CONSOLIDATION-2026-09-27.md` item 20): *"It's ok if jobs
+    overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."* Work to a natural stage boundary; if you grow large
     (the harness counts about half again what agents see), hand back there with your record saved, and a successor continues.
 
 11. **Reading is in; cite what you read.** The Geombinatorics archive (1991–2026) is reachable only through `tools/geomb_fetch.sh` (usage in
