@@ -731,3 +731,221 @@ programme now knows exactly which two statements decide it at six colours.
 - VW: a numerical sweep of HX's optimum → derived (pair 2 minus pair 1 is `6t − 3`); a search for a local cusp counterexample to W-TAN → the step named,
   no counterexample derived (GAP, not FALSE); a better absorption than HX → not its job.
 - A, A2, and this close: none.
+
+## §R-close stage 4 — SAVED: the drafts (FS107-X applies them; nothing here is applied to a target file)
+
+*Stage 4a (`a3a1760d`) wrote the stub files directly, as the brief allows: `plans/STUB-tangency-seam.md` (FS-110, SWAP-PRICE folded in as its
+same-type half, seam 4), `plans/STUB-reg-scale.md` (FS-111), C-VOID's thin-hole refutation folded into `plans/STUB-hole-dial.md` (FS-109), and a
+closing banner on `plans/STUB-regularity-wall.md`. **The folding, with reasons:** SWAP-PRICE into FS-110 — FS-110's NO must kill equal-type pairs as well
+as complementary ones, and on the limit object that is `[Voronov2023]` Lemma 6.1 branch (i) itself (FS-108's item 2 is its print residual, cross-referenced);
+C-VOID into FS-109 — since RR does not give C-VOID (V), its refutation is a fact about hole shape along a family, the dial's subject, and it runs inside the
+ban by formula; REG-SCALE its own stub, FS-111 — door (B) is a different object (unbounded complexity) in a different room (De Giorgi), no existing stub fits,
+and the owner's ruling (item 28) names it a stub beside FS-110.*
+
+### 4.1 `LEDGER.md`
+
+**Row 133 (new; one row for the meeting point, as the owner expected — the lemmas are § B lines).**
+
+```
+| 133 | **Stability at six meets at one seam. R's reduction: given the quantified cone lemma, `χ_m⁰(ℝ²) ≥ 7` (row 131's C-Q-STAB, disc form) follows from (A) a complementary pair of fat junctions at distance in `[η, 2 − η]`, blocking toward a common unit point, in every `U_R` of every band-proper partial six-colouring with small holes, and (B) a lower bound on their cone scale — for two such junctions force `|H ∩ B(w, µ/4)| ≥ (t₁ − 2r)(t₁′ − 2r′)`, `t₁ = s·sin(µ/2)/3`, for every `ε ≥ 0`, repair-robust and with an uncovered disc, when `s, s′ ≤ µη²/100`, `2r < t₁` and each colour's arc meets the arc of half-width `π/2 − µ` about the direction (FS107-R-CP). W's equivalence: at bounded arc complexity `K`, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity `≤ K` exists (⟸ at `O(K)`, `δ(ε) = O(ε)`, periodised by a seam strip), and in such a map complementary-type vertices within distance 2 are tangent pairs or bowties — the cone lemma read as a design rule (W-TAN), a GAP at cusp vertices. So stability at six is two questions: does a tight six-map with only tangent, bowtie or cusp seams exist (FS-110; YES gives `χ(ℝ²) ≤ 6` with no MR, NO answers `[SokolovVoronov2025]` Question 2 a.e. for locally finite arc-bounded maps), and do near-optimal colourings keep a cone scale (FS-111). No-gos: polygonal designs of bounded complexity keep holes `≥ δ₀(K)`, bar `d = 2` (W-POLY); an argument reading at a flat swap only the away-facing colour is capped at `2εs(1 + o(1))`, while the facing colour alone certifies `s³/256` (OB′ corrected; SW). Measured: the hexagonal seven-colouring with one class absorbed by straight triangles stalls at hole density `π/(42√3) ≈ 0.0432`, attained by no member (HX-STALL). It moves no value** (FS-107; FS107-RR, R-CP, W-EQ-K, W-TAN, W-POLY, R-SW, R-OB′, HX-STALL, R-SAT, W-RATE, V-C5, MEET). **[hand; RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind (R and V; W and VW); SW's `s³` and OB′'s correction one mind (V); W-TAN over C-T-TAN, one mind (TS), a GAP at cusps; the meeting one mind (A2); HX-STALL exact in ℚ(√3) by two checkers]** Mechanism: a certificate on cones of scale `s` costs `≍ s²` whatever `ε`, so what a stability proof must bound is a feature's scale, not the band's (G82 as corrected); C-T-TAN is read from both sides, as an area on the sequence and as a rule on the limit. **Not claimed:** (A), (A″) or (B); C-VOID (RR does not give it); R″; any hole-vanishing family; W-TAN at cusps; FS107-V's C5, that tangent ring junctions still force holes at positive scale (one instance and a sketch, one mind). **Prior art:** not found in print (FS-107's gate); the qualitative cone lemma is `[Voronov2023]` Prop. 2.2's tangent form (FS106-TAN); the periodic approximation of one class is `[DeCorteOliveiraVallentin2022]` Lemma 6.2. | `plans/FS107-derivation.md`; `plans/FS107-R-stability.md` §3; `plans/FS107-W-near-colourings.md` §§2–3; `plans/FS107-V-verification.md`; `plans/FS107-VW-verification.md`; `tools/fs107_v_cp_check.py`, `tools/fs107_v_sw_check.py`, `tools/fs107_vw_hx_check.py`, `tools/fs107_vw_member_check.py` | FS-107 (2026-09-27) |
+```
+
+**Row 131, two corrections in place** (items 7, 26):
+- its mechanism sentence "Voronov's contradiction is feature-local, so a stability proof must count a defect spread over positive measure (G82)" →
+  "a stability proof must count a defect at a scale independent of `ε` — spread over positive measure, or at features whose scale is bounded below (G82;
+  row 133's cone lemma is such a certificate)";
+- its prior-art clause "the compactness step of the `m₁(ℝ²)` literature not searched (a debt)" → "the periodic half of the compactness step is, for one
+  class, `[DeCorteOliveiraVallentin2022]` Lemma 6.2 (FS-107's gate); the Rajchman step not found in print".
+
+**§ B lines** (after FS106-PDEQ):
+
+```
+| FS107-R-SAT | row 133 | a saturated band-proper partial six-colouring's holes are a.e. the open six-sighted set (`ε > 0`) | hand, two minds, one blind | `plans/FS107-derivation.md` FS107-R-SAT | declined |
+| FS107-R-CP | row 133 | two fat complementary junctions blocking toward a unit point force holes `≥ (t₁ − 2r)(t₁′ − 2r′)`, `ε`-free, repair-robust; needs `s, s′ ≤ µη²/100`, `2r < t₁`, arc-margin blocking | hand, two minds by different routes, one blind | `plans/FS107-derivation.md` FS107-R-CP | stub (FS-101, with R's half) |
+| FS107-V-CP | row 133 | the projection form with `s ≤ min(sin(µ/2), sin θ/18)`; false for unrestricted `s` (C1) | hand, one mind; C1 tools, float | `plans/FS107-derivation.md` FS107-V-CP | declined |
+| FS107-RR | row 133 | (A) ∧ (B) ⟹ C-Q-STAB given CP, after two repairs; C-VOID does not follow | hand, two minds, one blind; the C-VOID failure one mind | `plans/FS107-derivation.md` FS107-RR | declined |
+| FS107-R-SW | row 133 | a flat swap costs `≥ 2ε√(s² − ε²)` from the away-facing colour (sharp) and `≥ s³/256` from the facing colour, every hole set | hand and tools; the `εs` part two minds, one blind; the `s³` part one mind | `plans/FS107-derivation.md` FS107-R-SW | declined |
+| FS107-R-OB′ | row 133 | reading only the away-facing colour at a flat swap caps at `2εs(1 + o(1))`; "must read both colours" FALSE | hand, one mind | `plans/FS107-derivation.md` FS107-R-OB′ | declined |
+| FS107-V-C5 | row 133 | a tangent ring junction still forces holes at positive scale; the general claim a sketch | tools, one instance, and a sketch; one mind | `plans/FS107-derivation.md` FS107-V-C5 | declined |
+| FS107-W-EQ-K | row 133 | at bounded arc complexity, vanishing holes ⟺ a full tight a.e.-proper six-map; ⟸ at `O(K)` with a seam strip | hand, two minds, one blind | `plans/FS107-derivation.md` FS107-W-EQ-K | stub (FS-101, after FS106-EQ) |
+| FS107-W-POLY | row 133 | polygonal bounded designs keep holes `≥ δ₀(K)`, bar `d = 2` | hand, two minds, one blind; over AE-POLY | `plans/FS107-derivation.md` FS107-W-POLY | declined |
+| FS107-W-RATE | row 133 | a tight map in `𝓜_K` gives `δ = O(ε)`; `O(ε²)` at isolated transversal contacts | hand, two minds, one blind; the pinhole clause a reading | `plans/FS107-derivation.md` FS107-W-RATE | declined |
+| FS107-W-TAN | row 133 | close complementary vertices of a tight map are tangent pairs or bowties; GAP at cusps; the second clause for three-element types | derived, two minds, one blind; over C-T-TAN | `plans/FS107-derivation.md` FS107-W-TAN | declined |
+| FS107-HX-STALL | row 133 | family HX is band-proper iff two conditions; `inf δ = π/(42√3)`, attained by no member | hand and tools exact, two minds, one blind | `plans/FS107-derivation.md` FS107-HX-STALL | declined |
+| FS107-K-C6 | row 133 | in six colours disjoint triples are complementary | hand, one mind, trivial | `plans/FS107-derivation.md` FS107-K-C6 | declined |
+| FS107-K-BICH | row 133 | every six-colour map has a trichromatic vertex | hand, one mind | `plans/FS107-derivation.md` FS107-K-BICH | declined |
+| FS107-K-AD | row 133 | named-form hole arguments certify `≍ N(A, ε)·ε²`; "two doors" a reading | hand, one mind; the doors a reading | `plans/FS107-derivation.md` FS107-K-AD | declined |
+| FS107-MEET | row 133 | RR's (A) and (B) are W's doors; W-TAN ≡ CP on LIM | derived, one mind | `plans/FS107-derivation.md` FS107-MEET | declined |
+```
+
+### 4.2 `CLAUDE.md` (net budget below; every line replaces the one named)
+
+**"Last updated" (l. 206–209):**
+> *Last updated: 2026-09-27 — **FS-107, stability, closed** (row 133; `plans/FS107-stability.md` §R-close): both claims GAP; R's reduction and W's
+> equivalence meet at the tangency seam (FS-110) and the cone scale (FS-111). Before it, **FS-106** (rows 131–132) and **the reframe** (Kooshi,
+> 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain).
+> Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+
+**§ The aim, the program paragraph (l. 109–112):**
+> **The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
+> Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
+> complexity are a tight six-map; **FS-110, the tangency seam** — does such a map exist, its close complementary vertices tangent, bowtie or cusp;
+> **FS-111, the cone scale** — the same at unbounded complexity; **Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the
+> collapse, the measurable chain, the map argument.
+
+**"Where the problem stands", item 31 (l. 320–323):**
+> 31. **The regularity wall, verified; the question is stability, and it meets at one seam** (§ The aim; rows 131–133; FS-110, FS-111). Regular
+>    classes need seven almost everywhere — slack, polygons and convex tilings (bar `d = 2`), nice maps — and maps six; closed classes are the tight
+>    question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map exists, its close
+>    complementary vertices tangent, bowtie or cusp; past it, whether junctions keep a cone scale (row 133). Bearing on the answer: none moved; the
+>    question located.
+
+**"Open milestones" (l. 344–347):**
+> **Open milestones, in order.** **None is open.** FS-107, stability, is **closed** (row 133; `plans/FS107-stability.md` §R-close). **Next: FS-110,
+> the tangency seam** (the owner's ruling, 2026-09-27; `plans/STUB-tangency-seam.md`); the finite-witness-free week runs to 2026-10-01 (§ Toolchain).
+> **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close: `plans/FRONTIER-STUBS.md`'s closed list.
+
+**Paths forward — rows 1–5 (replace l. 353–356; old ranks 5–28 renumber to 6–29; old 29, FS-98, joins the bucket):**
+```
+| 1 | **FS-110 the tangency seam** — `plans/STUB-tangency-seam.md` (FS-107's successor; SWAP-PRICE folded in) | does a full tight a.e.-proper six-colouring by a locally finite arc-bounded map exist? Its close complementary vertices must be tangent pairs, bowties or cusps (row 133), a tangent ring may still force holes at positive scale (FS107-V's C5, one mind), and equal-type pairs in `(1, 2)` must survive the bicycle | decisive both ways at bounded complexity: YES gives `χ(ℝ²) ≤ 6` with no MR; NO answers S–V Question 2 a.e. for such maps and closes door (A) |
+| 2 | **FS-111 the cone scale** — `plans/STUB-reg-scale.md` | door (B): do near-optimal band-proper six-colourings keep junction cone scales `≥ s₀` on a set of positive measure? De Giorgi's room (link 6) | decisive jointly with FS-110's NO (`χ_m⁰ = 7`, so `χ(ℝ²) = 7` given MR); alone a regularity theorem |
+| 3 | [the FS-104 row as it stands, with "is FS-107's sub-question" → "is row 131's sub-question"] |
+| 4 | [the FS-109 row as it stands, with "a dial on FS-107's question" → "a dial on row 131's question; C-VOID's thin-hole test runs in the ban, by formula"] |
+| 5 | [the FS-108 row as it stands] |
+```
+**The bucket row:** `| 30–63 | FS-76, …` → `| 30–64 | FS-98, FS-76, …` (FS-98's full row leaves the table; its row stays in `plans/FRONTIER-STUBS.md`).
+
+**G72's count line (l. 1509):** "**The count so far — thirteen of sixteen** (… the latest, FS-106, the other kind: its headline from extending row 130's
+compactness, its structural form yielding lemmas and a no-go)" → "**The count so far — fourteen of seventeen** (each derivation close's §IQ record;
+milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-107, through: the meeting point from candidate (b), junction types)".
+
+**G82 (l. 1590–1596), rewritten with its demotion record:**
+> * **G82 — The measurable question is a stability question: a refutation is regular, and only its limit is wild. [hand, two minds, one blind
+>   (row 131); the reading one mind, corrected at FS-107]** A weak-* limit of near-colourings is a colouring (the circle measure is Rajchman), so
+>   `χ_m⁰ ≥ 7` is the stability of a regular theorem: W's objects are periodic tilings checked exactly, and R must count a defect at a scale
+>   independent of `ε` — spread over positive measure, or at features whose own scale is bounded below (row 133's (B)). *Demotion record:* as minted it
+>   read "R must count a defect non-locally, Voronov's contradiction being feature-local"; row 133's cone lemma is feature-local and `ε`-independent —
+>   feature scale is not band scale. *Do: when a question asks whether a class of colourings exists, ask whether its limit object is a weak-* limit of
+>   regular near-solutions; if so, pose it as stability, build on the regular objects, test a stability proof against strips and erosion (row 131's
+>   no-gos) first, and price each certificate at its feature's scale, never at `ε`'s. Nothing kills the equivalence; it forbids a construction needing a
+>   wild set. Killing test of the reading: a proof of `lim µ₆(ε) < 1` whose features' scale is not bounded below.*
+
+**G82's killing test, scored against RR:** not fired as worded — RR is a GAP, not a proof; but the reading's inference is refuted by a proved lemma
+(FS107-R-CP, two minds, one blind): a feature-local certificate whose cost is independent of `ε` and survives every repair at scale `≪ s`. R flagged it
+(R stage 4), A2 concurred (§5.8). If (A) and (B) land, RR is a feature-local proof of `lim µ₆(ε) < 1` — the old killing test would fire; the new one
+(features' scale not bounded below) would not, because (B) bounds the scale. Corrected, not demoted: the equivalence and the *Do* stand.
+
+**Corrections owed elsewhere in `CLAUDE.md`:** none of truth. The G21 and § Make the gate fail instances go to the instances file (4.5).
+
+**Budget, computed on a copy** (4.8 below).
+
+### 4.3 `BIBLIOGRAPHY.md`
+
+- `[MundingerEtAl2025]`: held at `~/source/library/pdf/arXiv-2501.18527-mundinger-neural-discovery-colored-planes.pdf`; read §1 "Variant 1", §4.1 with
+  Table 1, App. B's pipeline paragraph (FS107-P, 2026-09-27); FS-107 bearing: its periodic cell designs are FS107-W-POLY's class at fixed resolution,
+  so their removed fraction is bounded below there (§R-close 3.2). A held-copies row for the path.
+- `[DeCorteOliveiraVallentin2022]`: add "§6.1 (Lemmas 6.1–6.2) read (FS107-P, 2026-09-27)"; bearing: Lemma 6.2 is the one-class form of FS106-SUP's
+  "`µ₆^per(ε) = µ₆(ε)`" (row 131's prior-art clause, corrected), Lemma 6.1 is W's torus; the held-copies row's read column gains "§6.1".
+- `[Voronov2023]`: "§§2–6 re-read in full (FS107-R, 2026-09-27)".
+- `[Parts2020c]`: "§2.3's parameters used to compute the void area per cell, `S∆ ≈ 6.6·10⁻⁵` per cell of area `≈ 0.461` (FS107-V, 2026-09-27)".
+- **Unheld, listing rows (item 8):** `[Bukh2008]` (GAFA 18, 668–697; FS-111's gate first); Croft–Falconer 1981, *On maximal Euclidean sets avoiding
+  certain distance configurations* (Zbl 0494.52008); Falconer–Marstrand 1986 (Bull. LMS 18, 471–474; Zbl 0599.28008); Croft 1967 (*Eureka* 30, in no
+  index); Hoffman–Soifer 1993, "Almost chromatic number of the plane" (Geombinatorics 3(2); title only — by `[MundingerEtAl2025]`'s text the
+  off-diagonal variant, not holes); `[Townsend2005]` (requested, FS-106 item 59). OpenAlex not run (plan §PA row 7).
+
+### 4.4 `plans/FRONTIER-STUBS.md`
+
+- **Closed list, first entry:** "* **FS-107 stability: can vanishing holes save a colour?** — `plans/STUB-regularity-wall.md` § FS-107. **Closed
+  2026-09-27** (record `plans/FS107-stability.md` §R-close; `plans/FS107-derivation.md`; close inventory `plans/FS107-close-inventory.md`; `LEDGER.md`
+  row 133, row 131 corrected): **Paid (reduction and equivalence)** — R's reduction RR and W's W-EQ-K (two minds, one blind each), the cone lemma CP ≡
+  the design rule W-TAN (a GAP at cusps); no-gos W-POLY and OB′ corrected; HX stalls at `π/(42√3)`. Not landed: R, R′, R″, W. Its successors: FS-110
+  (SWAP-PRICE folded in), FS-111, FS-109 (C-VOID's thin-hole test folded in)."
+- **The header note** replaced: "*At FS-107's close (2026-09-27, FS107-X; `plans/FS107-stability.md` §R-close 4.4): FS-107 closed and left the table;
+  **minted:** FS-110, the tangency seam (1; SWAP-PRICE folded in) and FS-111, the cone scale (2); FS-104, FS-109 (C-VOID folded in) and FS-108 move to
+  3–5; old ranks 5–63 become 6–64. Rows 6–64 keep six-framed bearings (FS-106 inventory items 5 and 82): a ranking task still owed.*"
+- **Row 1:** `| 1 | **FS-110 the tangency seam** — `plans/STUB-tangency-seam.md` (minted 2026-09-27 by FS107-C) | does a full tight a.e.-proper
+  six-colouring by a locally finite arc-bounded map exist? Necessary: close complementary vertices tangent, bowtie or cusp (row 133's W-TAN; cusps a GAP);
+  FS107-V's C5 (one mind) may close tangency at positive scale; seams 1–4 in the stub, the same-type half (SWAP-PRICE, bicycle-free Voronov) folded in |
+  **decisive both ways at bounded complexity**: YES `χ(ℝ²) ≤ 6` with no MR (W-EQ-K); NO answers S–V Question 2 a.e. for such maps and closes door (A);
+  a named seam either way is a result | unpriced (counter-priors, rule 1); the protocol's staffing | minted 2026-09-27 | none; a candidate map given by
+  formula is checked exactly |`
+- **Row 2:** `| 2 | **FS-111 the cone scale (REG-SCALE)** — `plans/STUB-reg-scale.md` (minted 2026-09-27 by FS107-C) | door (B): a cone-scale lower
+  bound for near-optimal band-proper partial six-colourings (RR's (B)); De Giorgi's room; gate first on Bukh 2008 and Falconer–Marstrand 1986 (unheld) |
+  decisive jointly with FS-110's NO (`χ_m⁰ = 7`; `χ(ℝ²) = 7` given MR); alone a regularity theorem | unpriced | minted 2026-09-27 | none |`
+- **Rows 3–5:** FS-104 (its "FS-107's sub-question" → "row 131's sub-question"), FS-109 (its question gains "and C-VOID's thin-hole refutation, by
+  formula, in the ban"; solver "post-ban for the optimiser; the C-VOID test in the ban"), FS-108 unchanged.
+
+### 4.5 `plans/GROKKING-INSTANCES.md` (each under its entry, with its source)
+
+- **§G51** — *FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 4.5):* "The ninth run, FS-107, a construction against a proof with a
+  blind verifier per side: the two programmes met exactly (R's reduction and W's doors pair up, A2 §5.1) and never contested a truth; all three
+  divergences of truth (OB′, RR ⟹ C-VOID, W-TAN at cusps) came from the blind verifiers. The registrations bracketed the open step before any work. Its
+  record: `plans/PROTOCOL-competitor-and-advisor.md` §3, the ninth run."
+- **§G51, under "quote statements verbatim in briefs"** — "FS-107's slips (inventory items 2, 21; §R-close 1.0): the advisor brief's 'C-Q-LOCAL (local
+  repairs cost `O(ε²)`)' — the `O(ε²)` is A8b's; the W brief's 'a corner-circle rule is only sufficient' for the source's 'may be only sufficient'; and
+  at the close the owner's launch message put the inventory's paraphrase of FS107-V's C5 in quotation marks, and its brief stated FS-110's question
+  without A2's 'a candidate' and 'for locally finite arc-bounded maps'."
+- **§G51, under the fence rule** — "FS-107's fence listings (items 17, 27): both competitors listed `data/fs107/reports/` at their first command and saw
+  `FS107-P.md` by name, unopened; R also saw the directory names `fs107-a`, `fs107-p`. Disclosed at once; no content crossed. A listing of a fenced
+  directory is a touch."
+- **§G72** — *FS107-X, FS-107's close (FS107-C, §R-close 3.3):* "Seventeenth, FS-107: through — the meeting point and R's reduction came through §IQ's
+  candidate (b), the junction-type structure every tiling member carries, and W-TAN is candidate (b) read as a rule; W-EQ-K came from the generator-image
+  rule and compactness, an extension of a known tool. Mixed, counted through because the milestone's product, FS-110's question, is candidate (b)'s object."
+- **§G79** — *FS107-X, FS-107's close (§R-close 3.3):* "FS-107: SAT and W-EQ-K from example invariants (the open six-sighted hole set every saturated
+  colouring carries; the tight map every bounded vanishing-holes family carries as its limit); CP, SW, OB′, W-POLY and HX-STALL counterexample invariants.
+  The flip ran once and made the synthesis: W-TAN is C-T-TAN's no-go read as the rule every door-(A) solution carries, and it met R's CP at one object.
+  No breakthrough of either kind."
+- **§G21** — *FS107-X, FS-107's close (§R-close 3.1, M3 and M4):* "A theorem line is a quotation surface: FS107-R's 'Theorems this phase proved' line
+  for its cone lemma compressed §3.2's Claim 2 and dropped the scale bound, the void bound and the definition of blocking, and the blind verifier's
+  MISSTATED was earned by the line, not the lemma (FS107-V §4.1). And a list of exceptions measures its class: FS106-TAN listed C-T-TAN's failures as
+  cones, cusps and weak-* blow-ups; FS107-W's W-TAN took 'every vertex a cone point' and missed that a cusp is a cone of angle 0 at which the
+  multicolour drops to two (FS107-VW §4 item 4)."
+- **§ Make the gate fail, "exactly ONE thing may differ"** — *FS107-X (§R-close 3.1, M2):* "FS107-R's prediction P1 compared `(t₁ − 2r)(t₁′ − 2r′)`, an
+  absolute area, with `δ₆`, a fraction of the plane; the blind verifier caught it and named the right comparison, the Parts void area `≈ 6.6·10⁻⁵` per
+  cell of area `≈ 0.461` (FS107-V §4.2)."
+
+### 4.6 `plans/PROTOCOL-competitor-and-advisor.md`
+
+**§1 rule 1, the amendment** — replace the sentence beginning "**The working files and the advisor's record live in those scratch directories until
+hand-back, never in `plans/`**" up to "…moves the files into `plans/` and commits them." with:
+> **Records live in `plans/`, fenced by path and committed per stage** (FS-107, 2026-09-27, the owner's ruling, inventory item 9). Each competitor's
+> record and working directory, and each advisor's record, are named by path in every other job's fence, with a rule excluding them from every grep;
+> commit subjects are neutral; listing a fenced directory is a fence touch, logged and disclosed. The reason: the checkpoint rule is PROTECTED
+> (a stage lost to a crash costs a stage, not a job), and the harness scratchpad is itself a recorded covert channel (FS-105). History: FS-73's first
+> drafts put records in `plans/` unfenced and the owner moved them to scratch; FS-107 moved them back, fenced. **The fallback is worktree isolation**
+> (`isolation: "worktree"`) for the next round's competitors after any disclosed fence touch that crossed content (FS107-A's proposal, item 10).
+
+**§1 rule 1, a harness note after "…a background watcher's completion is treated the same way.":**
+> **A competitor's message to an idle advisor resumes it, and the advisor's hand-back notices then route to that competitor** (FS-107, item 22: W woke
+> the advisor, and the advisor's content-free hand-backs reached W, not the owner) — content-free hand-backs make it harmless; and no hint goes to an
+> agent after its hand-back, because the hint resumes it (item 27).
+
+**§3, the run record** — after the eighth run:
+> **The ninth run: FS-107, stability (2026-09-27) — a construction against a proof, a blind verifier per side.** Records: the plan
+> `plans/FS107-stability.md` (§R-close), `plans/FS107-close-inventory.md`, R `plans/FS107-R-stability.md`, W `plans/FS107-W-near-colourings.md`, V
+> `plans/FS107-V-verification.md` (blind on R), VW `plans/FS107-VW-verification.md` (blind on W), the advisors' `plans/POROS-2026-09-27-fs107-stability.md`
+> (planning) and `plans/POROS-2026-09-27-fs107-competition.md` (competition).
+> - **Staffing.** Planner P with advisor A; then R, W and a fresh competition advisor A2 (A stood idle at 306k by the harness, its own count "≈60k");
+>   V and VW took the competitors' slots at hand-back. Three agents at once throughout.
+> - **Budget anchors** (the harness's where reported, own counts beside): P ≈245k (own ≈140k); A2 ≈185k (own ≈120k); A 306k at idle; R, W, V, VW
+>   reported own counts only (≈255k, ≈220k, ≈135k, ≈125k) and marked the harness's unknown — none passed an own count off as the harness's.
+> - **Records in `plans/`, fenced by path** (§1 rule 1 as amended): two listings of a fenced directory, disclosed, no content crossed.
+> - **Incidents.** W's message resumed the idle advisor and routed its hand-back notices to W; A2 sent a movement-only hint after W's hand-back, which
+>   resumed W (content-free re-hand-back); two quotation slips in briefs; a theorem line that dropped its lemma's hypotheses.
+> - **Findings about the design.** The two programmes met at one object: R's reduction (a forced complementary pair plus a scale bound) and W's two
+>   doors are one split (A2 §5.1), and the registrations, made before any work, bracketed the open step — each side's reason the other's negation.
+>   No divergence of truth between the competitors; **all three came from the blind verifiers**, as at FS-106. Retractions R 2, W 1, A2 0 (one hunch
+>   killed), all free. **Lesson:** a construction against a proof locates the question more than it contests it; the verifier per side is where the
+>   contest happens — keep it, and brief the next round (FS-110) on the meeting point, not on either side's programme.
+
+### 4.7 `data/fs107/claims.md` — the appended section (written directly, this stage)
+
+See `data/fs107/claims.md` § 7.
+
+### 4.8 The `CLAUDE.md` budget
+
+Computed on a copy (below): the file before, the drafts applied, and the result against 300,000 bytes.
+`python3 data/fs107/fs107-c/budget_sim.py [out]` applies 4.2's drafts to a copy (every anchor asserted unique; a planted missing anchor fired its
+assertion): **before 299,242, after 299,438 bytes (+196), margin 562 under 300,000.** The paths-forward row for FS-98 (old rank 29) leaves `CLAUDE.md`
+for the bucket, which pays for FS-111's row; the rest is the G82 demotion record (+~260) and item 31 (+~160), offset by the shorter "Last updated",
+"Open milestones", G72 and FS-104 lines. Nothing intrinsic is cut. FS107-X may reuse the script's texts: they are 4.2's, verbatim.

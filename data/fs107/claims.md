@@ -167,3 +167,25 @@ curve near `10⁻⁴` is R's evidence, a falling one W's." (FS-109, `plans/STUB-
   §2.2): "The operator-norm convergence is the step I have not written in full." Object: both (a colouring of the whole plane, no holes).
 - **FS106-LOCAL at `δ = δ₆`**: GAP, "the missing step: 1_H ∗ 1_{U₃} is non-constant".
 - **FS106-AE-CLOSED**: "The question itself is open." (closed classes are the tight question itself.)
+
+## 7. Corrections at the close (FS107-C, 2026-09-27; `plans/FS107-close-inventory.md` items 21, 26, 30, 32; `plans/FS107-stability.md` §R-close)
+
+*Appended by the close planner. The rows above stand as they were fixed and read during the competition; these notes correct them.*
+
+- **§1, row W — A2 §3.3's sentence** "Tight polygonal tilings in `[Parts2020c]`'s framework with voids tending to 0 would do, because TQ-SUP equates
+  the tight and slack suprema" has an **empty hypothesis at bounded complexity, bar `d = 2`**: polygonal designs of bounded complexity keep holes
+  `≥ δ₀(K) > 0` (FS107-W-POLY, two minds, one blind; over FS106-AE-POLY). Only curved tiles (FS-110) or unbounded complexity (FS-111) can carry W.
+- **K-REG** — annotated: the owner's correction of 2026-09-27 stands, and W-POLY makes it quantitative: a polygonal bounded family is excluded not
+  only in the limit but along the family (`δ ≥ δ₀(K)`); curved bounded families are exactly door (A), FS107-W-EQ-K.
+- **W's brief (item 21)** said "a corner-circle rule is only sufficient"; its source (the plan §PA row 6; this list) says it "may be only sufficient".
+  W's checker used the exact interval either way (W §1.1).
+- **§1, row R′ (C-VOID)** — R's reduction does not give it: in the branch "holes `≥ δ` in `U_R`" no disc is produced (FS107-V §4.2; `plans/FS107-derivation.md`
+  FS107-RR). C-VOID's thin-hole test moves to FS-109 (`plans/STUB-hole-dial.md`).
+- **K-TAN** — the limit's exceptional set, read as a design rule (FS107-W-TAN), includes **cusp vertices**: a tile of angle 0 has density 0 at the vertex,
+  so the vertex's essential type has two colours and C-T-TAN is silent there (FS107-VW §4 item 4). W-TAN's second clause holds for three-element types
+  (trivalent maps), not for bichromatic vertices of degree `≥ 4`.
+- **The reading attached to R in `CLAUDE.md` G82** ("R must count a defect non-locally, Voronov's contradiction being feature-local") is corrected: R
+  must count a defect at a scale independent of `ε` — spread over positive measure, or at features whose own scale is bounded below (A2 §5.8; FS107-R-CP
+  is a feature-local certificate of `ε`-independent cost).
+- **FS107-R-CP's one-line statement** needs §3.2's hypotheses to be true: `s, s′ ≤ µη²/100`, `2r < t₁`, `2r′ < t₁′`, and blocking in R's arc-margin sense
+  (FS107-V §4.1–4.2).
