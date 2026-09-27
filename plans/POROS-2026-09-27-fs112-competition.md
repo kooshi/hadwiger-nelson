@@ -468,3 +468,164 @@ section never rewrites A2's stages. **Label note:** A2's stage 2b follows Y in c
 (FS-113 ranked 8; FS-112's row now cites `[Polymath2021]` p. 199 and `[Parts2021]` p. 182). Nothing in my brief depends on those lines.
 
 ## Stage A3-0 — SAVED
+
+## Stage A3-1 — SAVED: the construction half compared; the held claim decided; the registrations and pre-round answers scored (brief item 1)
+
+### A3-1.1 Y against YB — every divergence, and how each settles
+
+YB's stage 5 table (D1–D12) was checked against both records. **No divergence of truth; no object or verdict differs.** Two blind rebuilds from
+`[AxenovichEtAl2014]` p. 8's words, two independent exact checkers (Y's tower of quadratic fields with a float-guarded map hypothesis; YB's
+multiquadratic field with an exact meeting test), the same strip, the same colouring up to relabelling, ACCEPT on the same population of pairs.
+
+| # | divergence (YB's numbering) | settlement | owed, and to whom |
+|---|---|---|---|
+| D1 | `(3/2, 0)` called "`P_2`" | slip; it is `P_3`. Carried into A2's stage 2b and the YB instance file; no object changes | nothing |
+| D2 | valley or apex in "the point of intersection of circular arcs" | both readings give the same height exactly (YB): the rule is unambiguous | nothing |
+| D3 | CAL-7's object | the claim list names row 33's **brick**; Y calibrated on the hexagonal colouring. The named object is ACCEPTed by one checker (YB's) only | the construction successor: Y's checker on the brick (seconds) |
+| D4 | the checker model | YB's exact map-consistency confirms Y's map hypothesis **on the strip only** | the construction successor: **both checkers on every new object** (the disk, dial patches, the horn fragment); a wrong transcription breaks exactly Y's map hypothesis |
+| D5 | 60 ordered pairs against 36 of 90 orbit pairs | the same population | nothing |
+| D6 | 22 arcs read against 12 per period | unreconciled, verdict-neutral (a window edge, probably) | one line for the successor |
+| D7 | plants | the cross-run agrees pair for pair | nothing |
+| D8 | found by YB only: T2 on a **thin** unit rhombus (`A_j, A′_j` at `√15/2`, seams `P_j, P_{j+1}` at distance `1/2`); the overlapping covering pairs `(P_j, P_{j+1})` | stands, one mind, exact. **A correction owed to the claim list:** §2 defines T2 with the parenthesis "(the spindle's rhombus)"; the strip realises it on a unit rhombus with diagonals `1/2` and `√15/2` | the close |
+| D9 | Y112-EDGE | two minds, one blind (YB adds the exact open cone `(30°, 165.52°)` and a control) | nothing |
+| D10–D12 | framing and coverage | consistent | nothing |
+
+### A3-1.2 Y's held claim: C-UA-BUDGET's second branch — decided
+
+**FALSE as stated** [tools, exact; two minds, one blind: Y; YB]. Claim list §6, verbatim: "**on the other branch** (a covering pair at a ring point `y`),
+the arcs sit on `ω(σ_v^{±1}y)` through `y` — centred at ring points at distance 1 from `v`, not at `v`". At `P_1` (`{1,2,4,5}`), `y = P_3` (`{1,3,4,6}`)
+is a ring point at distance 1 whose types cover `[6]` in the list's union sense (§0, correction 1). `σ^{±1}P_3 = W, W′` are valleys; no unit arc of the
+strip is centred off the midline, so no arc of `ω(W)` or `ω(W′)` exists, and `P_1`'s own four arcs lie on `ω(P_1)`. **The corrected branch 2 is TRUE at
+two minds** (N §2.3; NB §1.6, NB's (1)–(2) predicting blind exactly this configuration: a four-colour ring partner, and an arc of `ω(v)` at an orbit
+point). The strip realises the correction through its `ω(v)` alternative. Under the disjoint sense of "covering pair" the branch has no instance on
+the strip, and branch 1 holds there (`62.09° ≥ 60°`, exact). **The two branches are exclusive as hypotheses and not as conclusions** (NB; YB): the
+strip's four-colour vertices meet branch 2's hypothesis and branch 1's conclusion at once. Four minds agree that branch 2 is not TRUE as stated.
+
+### A3-1.3 The one divergence of truth left between the sides after card W: W1 (ii)
+
+- **The construction side** (Y §2.3 W1 (ii), verbatim): "**Yes, the alternation uses `|P_cl(y_k)| ≤ 4`:** … A fifth colour at `y_k` lets the two inner
+  half-arcs carry two colours and breaks the disjointness." Y adds exception (γ), "`Γ`-arcs of total measure `≥ 180°` on some `ω(y_k)`".
+- **The proof side** (N §2.1 W1 (ii); NB §1.5, blind): no. The straddler pair of `ω(y_{k+1})` at `y_k` lies on `ω(y_{k+1})`, so by N-E1 it avoids
+  `P_cl(y_{k+1})`. Then `P_cl(y_{k+1}) ∩ P_cl(v)` lies in the complementary 2-set of `P_cl(v)`, and the bound on `|P_cl(y_{k+1})|` is a consequence.
+- **My reading: the proof side is right.** Y's sentence is true of NB's printed proof, which states the bound as its first step. It is false as a claim that
+  the alternation needs the bound: a fifth colour at `y_k` would be a third colour of `P_cl(v)` there, and the neighbour's straddlers exclude it.
+  Y112-NB4-MIS is **TRUE but weaker**, with one redundant exception. **N112-NB4′ stands** (two minds, one blind).
+- **Owed:** the construction successor re-derives (ii). A retraction there would be Y's fourth.
+
+### A3-1.4 The proof side's pre-round answer and registrations, scored against the strip
+
+| item | registered (verbatim or by id) | outcome |
+|---|---|---|
+| **N's pre-round answer** (stage 2a) | "What would show me wrong: an exact fragment, accepted by two checkers, covering ω(v) entirely (every point of the ring coloured or on Γ) with \|P_cl(v)\| = 4" | **FALSIFIED by its own named observation** [tools, exact]: two blind rebuilds, two checkers; `ω(P_1)` lies wholly inside the strip (radius 1, half-height ≈ 1.834), every ring point coloured or on `Γ`, `\|P_cl(P_1)\| = 4`. N's P1/P2 had flipped to the opposite without withdrawing the answer (A2 §3.2) |
+| N's secondary | "C-ARC-END for (S1) at both ends of the arc fails for the same reason at the ends' vertices" | **untested**: the strip holds no (S1) seam (YB O2) |
+| **N112-P1** (0.8) | "every unit arc is (Q) … none is (R2)" | **MET** [tools, exact; two minds, one blind]: 12 arcs per period, each centred at a midline vertex of four colours, of kind both (self in-contact and out-contact); none out-only, so none (R2) |
+| **N112-P2** (0.85) | "every four-colour vertex of CAL-STRIP within `0.834` of the midline with no covering pair on its ring has centred arcs of total `≥ 60°` (four arcs, each `< 60°`)" | **vacuous as registered** in the list's union sense: every four-colour vertex (the midline `P_j`) has covering partners `P_{j±2}` on its ring. **Met in the disjoint sense.** **Its conclusion holds unconditionally:** four arcs of `≈ 15.52°` each, total `62.09°` (exact cosine, YB) |
+| N112-P3 (0.7) | CAL-DISK's `{1,3,5,6}` junction is (Q) | **open**: the disk is not rebuilt |
+
+### A3-1.5 The construction side's pre-round answer, scored
+
+- **What Y named:** "Step: C-UA-CHAIN …, the monotone quantity excluding bi-infinite chains of unit arcs, and with it any NO route shaped like
+  N4-PROP/N4-FIN; next most likely, C-UA-BUDGET's second branch."
+- **C-UA-BUDGET's second branch: met** (A3-1.2).
+- **C-UA-CHAIN: supported, not yet scorable.** The bi-infinite periodic chain of unit arcs is exact at two minds, one blind (YB-CHAIN). No local
+  monotone quantity along it can exclude it. The proof side has proposed no such quantity: N and NB grade C-UA-CHAIN a GAP, and N2's brief names the
+  chain route as one candidate for its item 3.
+- **The N4-PROP/N4-FIN clause: not met.** Both walks keep N4-FIN as written. Its application at horn bound `±1` is a GAP (A2 §3.1, 1′), not a failure.
+- **Y's falsifier (a), "my stage-2 exact checker REJECTs the rebuilt strip": did not fire.**
+
+### A3-1.6 What the list does not name (A2's brief item 5)
+
+1. **T2 beyond the spindle's rhombus** (D8): a seam realisation that §2's parenthesis excludes. A correction owed to the list.
+2. **The overlapping covering pairs are saved by (S2) with arcs, exactly** [my reading, one mind, from Y's and YB's exact types]:
+   - `(P_1, P_3)`: `{1,2,4,5}` and `{1,3,4,6}`, distance 1. Its common unit points are the valleys `W, W′`.
+   - At `W`, an arc of `ω(P_1)` (to `A_1`) and an arc of `ω(P_3)` (to `A_2`) both start. The other tangent direction of each circle enters a tile
+     whose colour only the other point holds: arch 2, colour 3; arch 1, colour 2. That is the Q-rule's (S2) with one arc of each circle ending at the
+     seam.
+   - The same holds at the apexes for `(P_j, P_{j+1})` at distance `1/2`.
+   - Claim list §1 records (S2)-with-arcs as "GAP at every pattern but N-X's". **This pattern is realised locally, exactly and arc-closed.**
+   - It is T2 read from the rhombus's other diagonal: in T2, `u` and `v` each emit arcs of both `ω(w₀)` and `ω(w₀′)`, so from the pair `(w₀, w₀′)`
+     both circles have arcs ending at `u`. Hunch `a3-t2-dual`.
+3. **Every close complementary pair of the strip is saved by a four-colour centre at one seam, and the `(V, A)` pairs at one seam only** (YB-SEAMS,
+   exhaustive over a period):
+   - `(W, W′)` at `√3` and `(A_j, A′_j)` at `√15/2` are saved at both common unit points.
+   - The `(V, A)` pairs at `≈ 0.757` (12 per period) are saved at `P_j` and not at their second point, **which is an edge vertex**, where the colouring
+     cannot continue (Y112-EDGE, two minds).
+   - The same edge is where the circles of Lemma 3's and Cor. 3's configurations leave the strip (Y §1.4 row 13; YB O5 C-CHAIN-14): the strip holds
+     the base's forbidden point configurations, and escapes only through its edge. Hunch `a3-base-reads-beyond`.
+4. **An ACCEPT that no plant could turn into a REJECT: not fired.** Y's `endpoints_only` plant is unreachable on the strip (Y says so). Every other plant
+   fired at its predicted pairs, on two checkers.
+5. **A local TRUE scored as a refutation of the NO: not fired.** Both score the strip as a strip.
+6. **A seven-colouring in disguise: no** (six colours).
+
+### A3-1.7 The plan's §5.3, the construction half
+
+| # | p | outcome |
+|---|---|---|
+| E5 YES by formula | 0.03 | not met in round 1 (no global candidate attempted) |
+| E6 the dial | 0.2 | not attempted in round 1 |
+| E7 strip rebuilt and accepted; carries out-contacts | 0.85; 0.6 | **both MET**: two blind rebuilds, two exact checkers; every arc of kind both |
+| E8 C-SEAMS-TWO TRUE | 0.7 | not met as stated (proof half, A2 §3.3); the construction half's reachable FALSE ("a T2 realisation whose seam points carry three colours") did not fire: T2 on two rhombi, seam points four-colour, exact |
+| E10 a closed cycle of unit arcs | 0.35 | **not met**: no cycle; bi-infinite chains instead, the sibling outcome that defeats a chain-local monotone quantity |
+| E11 every seam arc-closed | 0.6 | **two of three**: T2 (two rhombi) and NB-4's four-colour vertex with its whole ring, exact; (S1) not realised arc-closed |
+| E12 G71 survives | 0.75 | untested (no bowtie seam with unit arcs in the strip) |
+| E13 C-HOCK | 0.6 | untested (left to the successor) |
+| E1 (construction half's share) | 0.9 | NB-4 and NB-5 fail as written, now also by an exact print object; the "FS-110's fragments" half stays not met |
+| E2 (W-MERGE) | 0.6 | met at three minds (N, NB, Y after its retraction) |
+| E16 | 0.4 | YB found no divergence of truth with Y (E16 was met on the proof half) |
+
+### A3-1.8 Hunches
+
+**Scored:**
+- `a2-arc-ends-bind`: **killed** [hand, one mind, on the exact strip].
+  - At `P_1` the sectors are the four quadrants (YB O1). Arcs end at directions `60°, 75.52°, 104.48°, 120°` and their mirrors.
+  - For each end `x`, the sectors at `P_1` whose colours lie in `P_cl(x)` sit off the tangent of `ω(x)` at `P_1` by at least `14.48°`
+    (`75.52°`: `G` and `M` against the line `165.52°/345.52°`).
+  - Every centre carries four arcs and no end constraint is tight: the falsifier fires. The arc ends are not the construction's binding difficulty at
+    the strip's scale.
+- `h-seams-two` (planning advisor): **supported** at two minds, exact.
+- `h-no-local-kill`: supported at the strip's scale (C-BEYOND at 1.834, exact); radius 3 untouched.
+- `h-lattice`, `h-yb3-counter`: untested.
+- `h-dial`: open.
+- `h-discharging`: open, sharpened by A3-1.6 item 3.
+
+**Registered (2026-09-27, after reading both halves, before the card):**
+
+hunch: a3-base-reads-beyond
+  claim: a NO's step past CAL-STRIP is the base's reading of unit circles about trivalent vertices (C-CHAIN-13/14's Cor. 3 and Lemma 3 configurations, four-colour unit-arc centres admitted), not a monotone quantity local to a chain of unit arcs
+  basis: read (Y §1.4 row 13, §2.3 W6; YB O3, O5 C-CHAIN-14)
+  falsifier: a NO whose step past the strip is local to a chain of unit arcs; or Lemma 3, with four-colour centres admitted, refuted by the strip or the disk at its own reading radius
+  registered: 2026-09-27
+  status: open
+
+hunch: a3-t2-dual
+  claim: T2 at the pair (u, v) of a unit rhombus u w₀ v w₀′ is the (S2)-with-arcs pattern "one arc of each circle ending at the seam" for the other diagonal pair (w₀, w₀′), whenever that pair is covering; the strip realises it at (P_j, P_{j+2}) and (P_j, P_{j+1})
+  basis: derived
+  falsifier: a T2 realisation whose other diagonal is a covering pair that fails (S2) at u or v
+  registered: 2026-09-27
+  status: open
+
+hunch: a3-disk-stops-at-a-seam
+  claim: the rebuilt CAL-DISK cannot be continued past a point that is an unsaved common unit point of a close complementary pair, as the strip cannot past its edge vertices
+  basis: analogy
+  falsifier: the rebuilt disk's non-continuable boundary points include none that is a common unit point of a close complementary pair
+  registered: 2026-09-27
+  status: open
+
+**Retractions, construction half:**
+- Y: 3, all free (W2, W3, W5, at stage 2). One more is owed, or its defence, at W1 (ii).
+- YB: 0 of substance. Two harness defects were caught by its own plants.
+- A3: 0 so far.
+
+### A3-1.9 Evidence inventory (A3)
+
+- A2's record, read in full — read against: the brief's summary of the hand-over — surprised: yes; stage 2b labels `(3/2, 0)` "`P_2`" after Y
+- `data/fs112/fs112-a2/card-walks.md`, `pre-round-question.md` — read against: card W as the records quote it — surprised: no
+- `plans/FS112-Y-construction.md` stages 1–2 — read against: a calibrated checker, the strip accepted, card W answered — surprised: yes; at W1 (ii) Y answers the opposite of N and NB, and adds exception (γ)
+- `plans/FS112-YB-verification.md` stages 1–5 — read against: a blind rebuild agreeing with Y — surprised: yes; T2 on a thin rhombus, and the base's forbidden configurations present in the strip, saved only by its edge
+- `data/fs112/reports/FS112-Y.md`, `FS112-YB.md`, `FS112-N.md`, `FS112-NB.md` — read against: their records — surprised: no
+- `plans/FS112-N-proof.md`, including N2's stage 1 — read against: N2 starting its item 1 — surprised: no
+- `data/fs112/claims.md` §0–2, §6–9 — read against: the statements being scored — surprised: yes; T2's definition says "(the spindle's rhombus)"
+- `plans/FS112-unit-arc-half.md` §5.1–5.3 — read against: the E rows — surprised: no
+- `plans/FS112-NB-verification.md` §1.5–1.6, by grep — read against: W1 (ii) and C-UA-BUDGET — surprised: yes; NB's branch-2 diagnosis predicted the strip's configuration blind
+
+## Stage A3-1 — SAVED
