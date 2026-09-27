@@ -288,7 +288,8 @@ region points, boundaries and vertices carrying no colour (D-AEMAP); for maps wh
 
 ### Would-have-searched-here log (V3)
 
-- Stages 0–3: none (reading and hand verification; one hand-arithmetic check of Pritikin's 6197.08).
+- Stages 0–4: none (reading and hand verification; one hand-arithmetic check of Pritikin's 6197.08). Stage 4 would have run a float
+  search for VB's Obs. 1 configuration at a run apex; derived instead (the tangent circle's second crossing, in closed form).
 
 ### V3 stage 0 — SAVED: quotation check of the V3 brief
 
@@ -467,3 +468,79 @@ In the plane (i) is vacuous, (ii) holds with an absolute `k`, (iii) holds; the t
 - Pritikin's uncovered set is closed with density ≈ 1.61·10⁻⁴; his classes are open heptagons, pairwise more than 1 apart — [hand].
 
 ### V3 stage 3 — SAVED
+
+### V3 stage 4 — SAVED: FS106-V2's verdicts against the blind verifier FS106-VB; the d = 2 edge case
+
+**Correction to stage 3 (mine).** Stage 3's line "Woodall's Theorem 6, steps 1–7 verified" overstates: steps 1, 4 and 6 were checked, steps
+2, 3, 5 and 7 read and checked in outline (step 7's "a diagram will make this clear" not drawn), step 8 not checked. The grade of that line
+is [hand, one mind, outline].
+
+**The question that matters most: does V2's region-only replacement of Observation 1 handle VB's counter-configuration?** VB's configuration
+(`plans/FS106-VB-verification.md` §3a): "a `{1,2}`-boundary point `b` with a colour-1 boundary point at distance 1 whose unit circle is tangent
+to the boundary at `b` from the colour-2 side: the triangle recolouring then creates a monochromatic unit pair." It bears on Prop. 8 through
+Prop. 7, whose recolouring of the tip at a vertex `z` needs every colour-1 point's unit circle that meets the tip to meet a colour-1 region.
+FS106-V's region-only variant of Prop. 7 was asserted, not written (the advisor's stage 4, divergence 1). **Written here** (the run form of
+FS106-V's repair: a run of consecutive sectors at `z` of total angle `β < π`, flanked by colour-1 regions `X`, `Y` along its bounding rays
+`ρ_X`, `ρ_Y`; the tip `T` = triangle `z, x, y`, `x ∈ ρ_X`, `y ∈ ρ_Y` at distance `s` from `z`, recoloured 1 together with the old boundary
+segments inside it). Claim: for `s` small, no **region** point `u` of colour 1 has `ω(u) ∩ cl T ≠ ∅`. Proof:
+- (A) `z ∈ ω(u)`: every `u′ ≠ u` near `u` has `ω(u′)` passing `z` at a small offset, as a nearly straight arc whose direction lies in the run's
+  range or the opposite one; an offset to either side makes it cross `ρ_X` or `ρ_Y` transversally next to `z` (a displacement along the
+  tangent gives an offset of second order toward `u`), so it enters `X` or `Y`; so no region point near `u` is colour 1 — impossible for a
+  region point `u`.
+- (B) `z ∉ ω(u)`: near `z`, `ω(u)` is an arc of curvature 1 through a point of the cone of angle `β < π` at distance `O(s)` from its apex; it
+  leaves the cone toward the apex through `ρ_X` or `ρ_Y`. At a transversal crossing it enters `X` or `Y`. **At a tangency from inside the run
+  — VB's configuration —** put `ρ_X` on the positive axis, `b = (s_b, 0)`, the circle's centre `(s_b, 1)`; it meets `ρ_Y` (angle `β`) where
+  `ρ² − 2ρ(s_b cos β + sin β) + s_b² = 0`, whose small root `ρ₋ ≈ s_b²/(2 sin β) > 0` is a simple root: **a transversal crossing of `ρ_Y` at
+  distance `≈ s_b²/(2 sin β)` from `z`, into `Y`.** An arc entering and leaving `T` through `xy` crosses `ρ_X` or `ρ_Y` just beyond `x` or `y`.
+So every such circle meets `X ∪ Y`, and the recolouring is proper at region points. **VB's configuration therefore cannot occur at a run
+apex**: a colour-1 point there would already be at unit distance from `Y` (in the everywhere-proper setting too, where `b` is a boundary point
+coloured 1 by Obs. 1). **Verdict: V2's replacement handles VB's configuration; Prop. 8 TRUE region-only, and Observation 1 is not needed by
+SV-2** — [hand, one mind (V3), with the closed-form crossing]. **Minds on SV-2 as a whole:** the chain V → V2 → V3 is one sighted line; VB,
+blind, found the configuration but graded Prop. 8 a GAP and did not resolve it, so the resolution is one mind. VB independently agrees on the
+two other repairs SV-2 uses: Lemma 1's region-only proof and Lemma 4's last step by the maximal `C(u)`-coloured union with hole fills (VB's
+"maximal connected `C(u)`-coloured union `W`" is V2's "`{4,5,6}`-component of `u`"; VB's "hole-filling works at exact distance for maps" is
+FS106-V's H3). **So SV-2 stands repaired at one mind, with two of its repairs at two (one blind), and one step open (d = 2, below).**
+
+**Divergences of V2's verdicts from VB** (extending the advisor's stage 4, which compared FS106-V's stages 1–3):
+
+| claim / step | V2 | VB | kind |
+|---|---|---|---|
+| SV-L3, the printed three-curve construction | fails for `√3 ≤ d < 2` (FS106-V: the relation graph is a 4-cycle); repaired by the transplanted bicycle for `1 ≤ d < 2`, transversality written | "asserted … not proved … very likely true; not verified" | **truth**: VB did not detect the failure above `√3`; VB has no repair |
+| SV-L3 at `d = 1` | reached by the transplanted bicycle | not raised | route (VB silent) |
+| SV-L4 (a), a trichromatic point within 1 | TRUE for cubic maps; **GAP under Condition 6** (bichromatic vertices of degree ≥ 4) | "a nested-fill argument, 'straightforward' in the text" (within SV-1) | **truth** (the advisor's divergence 2, confirmed against V2's fuller analysis): VB's nested fills pass to "the region containing that ring", which is one region only when no two same-coloured regions touch at a vertex |
+| SV-L4 (c), "If the multicolors of two points pj coincide, we immediately get the desired one" | needs the distance in `(1, 2)`: `< 1` by the colour-curve argument, `= 1` by the bicycle, `= 2` open | not raised | route (VB silent) |
+| SV-L4, the eleventh point | the `{4,5,6}`-component of `u` | the maximal `C(u)`-coloured union, after fills | **agreement, blind** |
+| Prop. 16 | MISSTATED (needs the outer-`A(u)` hypothesis) | "TRUE as far as checked" (Props. 14–19 read) | **truth**: VB's check did not reach the hypothesis |
+| Prop. 17's last step | argument supplied (a unit arc on a boundary) | as above | route |
+| Prop. 19 (fills) | GAP at the fill step (fewer than nine points after fills; Condition 6 not preserved) — repair route: fill first | as above | **truth** |
+| Lemma 5 | TRUE, nesting step repaired | TRUE ("its six-arc cyclic recolouring checked") | agreement |
+| Obs. 1 | GAP as a WLOG, avoidable | GAP, with the counter-configuration | agreement on GAP; resolved above |
+| Prop. 8 | TRUE (runs; the full scope at bichromatic vertices) | GAP (the configuration) | resolved above in V2's favour |
+| SV-1 | GAP: SV-L4 (a) and the fills under Condition 6 | GAP: SV-L3's construction, SV-L4's last step, Obs. 1 | the gaps differ: VB's three are repaired in the V line; V2's two are not seen by VB |
+| SV-2 | repaired except `d = 2` | GAP (Prop. 8, inherited) | as above |
+
+**A tool for SV-1's open step, from the readings.** Woodall's step 3 (stage 3) merges two same-coloured regions touching at a vertex across a
+sector of angle `< π` ("each unit circle through Q, except for those through P, passes through X or Y"): the centres of those circles, the points
+of `ω(Q)`, then carry no colour-1 region point, so `Q` may join the colour. It is region-only, and it removes exactly the bichromatic vertices of
+degree ≥ 4 that break SV-L4 (a) — **except Woodall's "cone"** (the two regions inside the cusps between two unit discs tangent at the vertex),
+which for five colours his step 5 excludes and for six colours nothing here excludes. A stub for FS106-TS or the close.
+
+**Stretch — the `d = 2` edge case (two `pⱼ` of one multicolour `{a, b, i}` antipodal on `ω = ω(u)`): not closed; reduced.** Write `pⱼ = u + e`,
+`p_k = u − e`; `i ∈ {4,5,6}` is one of `u`'s colours; `R_i`, `Rʲ`, `Rᵏ` the colour-`i` sectors at `u`, `pⱼ`, `p_k` (degree 3 after Prop. 8).
+- **Derived [hand]:** for `v = u + ta ∈ R_i`, `q = pⱼ + t′b ∈ Rʲ`, `|q − v|² = 1 + 2(t′ b·e − t a·e) + O(t² + t′²)`, so a unit pair of colour
+  `i` exists unless `{a·e}` and `{b·e}` have weakly opposite signs. Applied to both pairs: `R_i` lies in a closed half-plane `{a·e ≥ 0}` (say),
+  and then `Rʲ` points toward `u` and `Rᵏ` away from `u` (both in `{b·e ≤ 0}`). With Prop. 9's side criterion (FS106-V, SV-C2: the outer side of a
+  unit circle at a point is complement-coloured exactly when two of the centre's three boundary directions lie within `π/2` of it), the
+  `{1,2,3}`-side of `ω(u)` is outer at `pⱼ` and inner at `p_k`, and the complement sides of `ω(pⱼ)`, `ω(p_k)` at `u` are outer and inner — **all
+  consistent**: no local contradiction exists at first order.
+- **What closing it would take:** a global argument — Lemma 3 at `d = 2`, where `ω(pⱼ)` and `ω(p_k)` are tangent at `u` and V2's bicycle start
+  (`|x₀ − u₂|` just below `1 + r₋ < 2`) no longer exists; or a re-choice of the nine circle points (Prop. 18 gives a `{1,2}`-point in every arc of
+  length `π/3`) so that no walk ends at an antipode of another of the same multicolour. Not attempted beyond this.
+
+### V3 stage 4 — theorems proved
+- Prop. 7 region-only (the run form): the tip recolouring is proper at region points; a unit circle tangent from inside to one bounding ray of a
+  run of angle `β < π` at distance `s_b` from the apex crosses the other ray at `≈ s_b²/(2 sin β)` — [hand, one mind]. Hence Prop. 8 region-only,
+  and SV-2 needs no Observation 1.
+- The `d = 2` configuration's orientation constraints — [hand, one mind]; the case stays open.
+
+### V3 stage 4 — SAVED
