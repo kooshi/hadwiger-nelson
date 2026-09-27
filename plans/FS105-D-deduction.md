@@ -5,7 +5,11 @@ Blind until stage 2 is committed: nothing on the brief's fence list opened.*
 
 ## Theorems this phase proved
 
-*(filled at stage 2)*
+| id | statement | grade, minds | address |
+|---|---|---|---|
+| D-T1 | For a ℤ^d-action α by automorphisms of a solenoid X: if α is irreducible and not virtually cyclic, then d ≥ 2 and no algebraic factor map φ : X → X₂ onto a non-trivial X₂ carries a virtually cyclic action; if α is totally irreducible, the same holds for every restriction α_Λ′, Λ′ of finite index | [hand], 1 mind (this job) | §2.1 steps 0a–0d |
+| D-T2 | EL2021 Theorem 1.3, as stated and read in the senses S1–S6 of §2.3, implies EL2021 Theorem 1.2 | [hand], 1 mind (this job) | §2.1 steps 1–3 |
+| D-T3 | (classical, re-derived for the record) if G ≤ X is a finite subgroup, T an automorphism of X with T(G) = G and µ a T-invariant probability measure, then h_µ(T) = h_{π_*µ}(T_{X/G}) | [hand] from the Abramov–Rokhlin formula, 1 mind | §2.1 step 3, B1 |
 
 ## Stage 1 — SAVED
 
@@ -79,3 +83,108 @@ The harness-assigned scratchpad (`/tmp/claude-1000/-home-kooshi-source-lean-dir/
 my `pdftotext` also wrote `el2021.txt` and `el2003.txt` into that shared root, overwriting two same-named files (produced from the same PDFs,
 so probably identical, unverified). All my later work is in the subdirectory `scratchpad/fs105d/`. For the owner: a covert channel for blind
 verifiers, and a way for one agent to clobber another's working files.
+
+## Stage 2 — SAVED
+
+**Verdict: TRUE.** Theorem 1.2 follows from Theorem 1.3's statement, in a page, with the definitions read in the senses S1–S6 below; the
+one sense that is forced rather than natural is S3 (the trivial factor is excluded from "virtually cyclic factors"). Grade **[hand]**, **one
+mind** (this blind job). Of Theorem 1.3's conclusions the deduction uses the existence of Λ and of the decomposition, pairwise singularity,
+the invariance half of (1), (2) and (4); **(3) is not used**, nor is ergodicity of the µ_j.
+
+### 2.1 The deduction
+
+*Setting.* α is a ℤ^d-action by automorphisms of a solenoid X, totally irreducible and not virtually cyclic (the senses of these words:
+§2.3); µ is an α-invariant, α-ergodic Borel probability measure on X. X̂ is a subgroup of some ℚ^m, hence countable, so X is compact
+metrizable and every finite Borel measure on it is regular. Fix a translation-invariant metric on X.
+
+**Step 0 — the hypotheses of Theorem 1.3 hold.**
+
+- **0a (d ≥ 2).** If d = 1, α is virtually cyclic (n = 1, Λ = ℤ, k = m); if d = 0, α is virtually cyclic (n = 0, Λ = {0}). So d ≥ 2.
+  (This holds under either reading of the Λ-quantifier in "virtually cyclic", S2.)
+- **0b.** X is a solenoid, and µ is an α-invariant, ergodic probability measure: as in Theorem 1.3.
+- **0c (X ≠ {0}).** On X = {0} every action is virtually cyclic (n = 0). So X ≠ {0}; being connected and Hausdorff, X is infinite.
+- **0d (no virtually cyclic factors, sense S3).** Let φ : X → X₂ be an algebraic factor map (p. 4) with X₂ ≠ {0}, and K = ker φ. K is
+  closed; it is α-invariant (φ(αⁿ x) = α₂ⁿ(φ x) = 0 for x ∈ K); it is proper (X₂ ≠ {0}). α is irreducible (total irreducibility with
+  Λ = ℤ^d), so K is not infinite: K is finite. Suppose the action α₂ on X₂ is virtually cyclic, with n ∈ ℤ^d and Λ of finite index: for
+  each m ∈ Λ there is k ∈ ℤ with α₂^m = α₂^{kn}. Put β = α^{m−kn}, a continuous automorphism of X. Then φ∘β = α₂^{m−kn}∘φ = φ, so
+  f(x) = β(x) − x lies in K for every x. f is a continuous homomorphism from the connected X into the finite (hence discrete) K, so f(X)
+  is a connected subset of a discrete space containing 0: f ≡ 0. Hence α^m = α^{kn} for every m ∈ Λ, with the same n and Λ: α is virtually
+  cyclic, a contradiction. The case φ = id_X (K = {0}) is included. *If "factors" also counts the factors of a restriction α_Λ′* (S3′):
+  the same argument, with total irreducibility at Λ′ making K finite, and the Λ-subgroup Λ″ ≤ Λ′ it produces being of finite index in ℤ^d.
+
+  **So Theorem 1.3 applies**: there are Λ ≤ ℤ^d of finite index, q := [ℤ^d : Λ], and µ = (1/J)(µ₁ + … + µ_J), the µ_j pairwise
+  singular probability measures (S4), each α_Λ-invariant (from (1)), with closed α_Λ-invariant subgroups G_j such that µ_j is
+  G_j-translation-invariant (2) and h_{µ_j}(αⁿ_{X/G_j}) = 0 for n ∈ Λ (4).
+
+**Step 1 — each G_j is finite or all of X.** G_j is a closed subgroup invariant under α_Λ with Λ of finite index. Total irreducibility (S1)
+says no such subgroup is both proper and infinite. So G_j = X or G_j is finite. *(Irreducibility alone would not do: G_j is only
+α_Λ-invariant.)*
+
+**Step 2 — Case A: some G_{j₀} = X. Then µ = m_X.**
+- µ_{j₀} is a Borel probability measure invariant under every translation of X, so µ_{j₀} = m_X by uniqueness of Haar measure (C1).
+- m_X is α-invariant: αⁿ_* m_X is a translation-invariant probability measure (αⁿ is a surjective continuous homomorphism), hence m_X.
+- So ν := µ − (1/J)m_X = (1/J)Σ_{k≠j₀} µ_k is an α-invariant measure (difference of two α-invariant finite measures, and positive).
+  Suppose J ≥ 2 and put ν′ = ν/ν(X) = (1/(J−1))Σ_{k≠j₀} µ_k, an α-invariant probability measure. Each µ_k (k ≠ j₀) is singular to
+  µ_{j₀} = m_X, so ν′ ⊥ m_X: there is a Borel A with m_X(A) = 1 and ν′(A) = 0. Put A′ = ∩_{n∈ℤ^d} α^{−n}A, a countable intersection,
+  exactly α-invariant. m_X(A′) = 1 (each α^{−n}A has m_X-measure 1, m_X being α-invariant) and ν′(A′) ≤ ν′(A) = 0. Then
+  µ(A′) = (1/J)·1 + ((J−1)/J)·0 = 1/J ∈ (0, 1), contradicting the ergodicity of µ (C3). So J = 1 and µ = µ₁ = m_X.
+
+**Step 3 — Case B: every G_j is finite. Then h_µ(αⁿ) = 0 for every n ∈ ℤ^d.**
+- **B1 (to X, for each j and n ∈ Λ).** Let N = |G_j|, π : X → Y := X/G_j, T = αⁿ, S = αⁿ_{X/G_j} (defined because αⁿ(G_j) = G_j), so
+  π∘T = S∘π, and µ_j is T-invariant (step 0d). The σ-algebra 𝒜 = π^{−1}ℬ_Y is countably generated, T^{−1}𝒜 = 𝒜 (S is a homeomorphism),
+  and its atoms are the fibres π^{−1}(y) = x + G_j, N points each. The conditional measures of µ_j given 𝒜 are a.e. carried by the atoms
+  (X standard Borel, 𝒜 countably generated), so for every finite partition R of X, H_{µ_j}(R | 𝒜) = ∫ H_{(µ_j)_x^𝒜}(R) dµ_j(x) ≤ log N,
+  a measure on N points charging at most N cells. Applying this to R = ⋁_{i<k} T^{−i}P gives h_{µ_j}(T, P | 𝒜) = lim_k (1/k)
+  H(⋁_{i<k}T^{−i}P | 𝒜) = 0 for every finite P, so h_{µ_j}(T | 𝒜) = 0. By the Abramov–Rokhlin formula (C4),
+  h_{µ_j}(T) = h_{π_*µ_j}(S) + h_{µ_j}(T | 𝒜) = 0 + 0, the first term being Theorem 1.3(4). (Values in [0, ∞]; no finiteness is used.)
+- **B2 (to µ, for n ∈ Λ).** Each µ_j is αⁿ-invariant, so by affinity of entropy (C5) h_µ(αⁿ) = (1/J)Σ_j h_{µ_j}(αⁿ) = 0.
+- **B3 (to ℤ^d).** For n ∈ ℤ^d, qn ∈ Λ (Lagrange in the finite group ℤ^d/Λ). µ is αⁿ-invariant, and h_µ((αⁿ)^q) = q·h_µ(αⁿ) (C6), so
+  q·h_µ(αⁿ) = h_µ(α^{qn}) = 0, whence h_µ(αⁿ) = 0.
+
+Steps 1–3 exhaust the cases, so either µ = m_X or h_µ(αⁿ) = 0 for all n ∈ ℤ^d: Theorem 1.2. ∎
+
+### 2.2 Classical theorems used
+
+| id | theorem | used at |
+|---|---|---|
+| C1 | uniqueness of Haar probability measure on a compact (here metrizable) group; a continuous automorphism preserves it | step 2 |
+| C2 | the continuous image of a connected space is connected; a finite Hausdorff space is discrete | step 0d |
+| C3 | an ergodic measure is not a proper convex combination of two mutually singular invariant probability measures (proved in step 2 from the definition, by the invariant set A′) | step 2 |
+| C4 | Abramov–Rokhlin: h_µ(T) = h_{π_*µ}(S) + h_µ(T \| π^{−1}ℬ_Y) for a factor map π of measure-preserving systems on standard Borel spaces (EL2021 p. 17 uses it as "the Rokhlin entropy addition formula"); with disintegration of µ over a countably generated σ-algebra | step 3, B1 |
+| C5 | affinity of entropy: h_{Σ p_j µ_j}(T) = Σ p_j h_{µ_j}(T) for T-invariant µ_j (e.g. Walters, *An Introduction to Ergodic Theory*, Thm 8.1; only "≤" is needed, and that follows from H_{Σp_jµ_j}(P) ≤ Σ p_j H_{µ_j}(P) + H(p)) | step 3, B2 |
+| C6 | Abramov's power formula h_µ(T^q) = q·h_µ(T), q ≥ 1 (e.g. Walters Thm 4.13) | step 3, B3 |
+
+The textbook sources are cited from standard knowledge; none was opened at this job (no copy found under `~/source/library/`).
+
+### 2.3 The senses the deduction needs
+
+| id | word | sense needed | why it is the paper's sense | if read otherwise |
+|---|---|---|---|---|
+| S1 | "totally irreducible" | there is no **pair** (Λ, Y), Λ ≤ ℤ^d of finite index, Y ≤ X a proper, infinite, closed, α_Λ-invariant subgroup | the literal "no Λ and no Y" is false of every action (Λ = ℤ^d exists) | — |
+| S2 | "virtually cyclic" | ∃n ∈ ℤ^d ∃Λ of finite index ∀m ∈ Λ ∃k ∈ ℤ: α^m = α^{kn} | the natural parse | the reading "for every finite-index Λ" (i.e. α(ℤ^d) ⊆ ⟨αⁿ⟩) changes nothing: steps 0a and 0d run verbatim under it |
+| S3 | "α has no virtually cyclic factors" | no algebraic factor map (p. 4) onto a **non-trivial** solenoid carries a virtually cyclic action; equivalently no quotient X/K, K a closed α-invariant **proper** subgroup | the hypothesis is stated before µ, so it concerns α alone; the one use of it (Lemma 7.4) produces an algebraic factor ("X has a factor isomorphic to Y_irred"); the paper writes "measurable factor" when it means one | **counting the trivial factor X/X = {0}**, which is virtually cyclic for every action (n = 0), makes Theorem 1.3's hypothesis unsatisfiable and the deduction vacuous — the one reading under which "TRUE" would be a wrong-reason TRUE. Counting also the factors of α_Λ′ (S3′) is harmless: step 0d covers it. Reading "factor" as *measurable* factor is not the paper's sense and is not attempted |
+| S4 | the µ_j | Borel **probability** measures | EL2021's own proof (§4.3): "the probability measures µ_j are α_Λ-invariant and ergodic" | if the µ_j were only positive measures, step 2's normalisation still works when each µ_j ≠ 0 (a zero µ_j cannot be ergodic) |
+| S5 | "ergodic", "α_Λ-ergodic" | invariant, and every invariant Borel set has measure 0 or 1 | standard | — |
+| S6 | h_µ(αⁿ), h_{µ_j}(αⁿ_{X/G_j}) | Kolmogorov–Sinai entropy of the single transformation, w.r.t. the measure (the push-forward π_*µ_j on X/G_j) | standard; §3's "entropy contributions" are a different quantity, and not the one in 1.2–1.3 | — |
+
+### 2.4 Audit of the TRUE against §1.3's wrong-reason list
+
+(a) finite non-zero G_j: handled (B1). (b) α_Λ- versus α-invariance: step 1 uses total irreducibility, and says why plain irreducibility
+does not suffice. (c) Λ to ℤ^d and µ_j to µ: B2 and B3. (d) the orbit of the µ_j: not used; Case A uses only that µ and m_X are
+α-invariant. (e) "no virtually cyclic factors" for every non-trivial factor, and the trivial one excluded by name (S3). (f) d ≥ 2: 0a.
+Also checked: X = {0} is excluded by "not virtually cyclic" (0c), so "nontrivial factor" and "infinite factor" coincide (a non-trivial
+quotient of a connected group is connected, hence infinite).
+
+### 2.5 What this does and does not settle
+
+It settles only the logical step 1.3 ⟹ 1.2. It gives Theorem 1.2 exactly the grade of Theorem 1.3: [external], a published theorem with a
+complete proof in EL2021 (ETDS 42 (2022)), unchecked here. It checks nothing inside that proof; in particular the reduction Lemma 4.2 (to
+adelic actions) and Lemma 7.4 (where "no virtually cyclic factors" is consumed) were read (§4.1–§4.3, §7.2 to Cor. 7.6) but not audited.
+Reading status of the two papers for `BIBLIOGRAPHY.md`: EL2021 — §1 in full, §2 in full, §3.1–§3.3 read, §4.0–§4.4 in full, §5 Theorem
+5.1's statement only, §7.1 Theorem 7.1's statement and Lemma 7.2's opening, §7.2 through Corollary 7.6; §§6, 8, 9 unread. EL2003 — held
+(`~/source/library/pdf/EinsiedlerLindenstrauss2003-rigidity-zd-actions-tori-solenoids-era-9-99-110.pdf`); §1 in full, §2 to Prop. 2.1 and
+the definition of arithmetic actions, §3's opening, §6 in full; §§4–5 unread.
+
+**Proposed `BIBLIOGRAPHY.md` edit** (the close writes it): the `[EinsiedlerLindenstrauss2003]` row (line 706) says "Author's summary only …
+Not held"; it is now held at the path above, read in the sections just listed, and its Thm 1.1 is verbatim EL2021's Thm 1.2 except
+"Let µ be an α-ergodic measure" for EL2021's "Let µ be an α-invariant and ergodic probability measure", and "λ" for "m_X".
