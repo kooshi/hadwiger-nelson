@@ -480,3 +480,10 @@ hunch: round2-registrations-cross-at-s1-and-act-one
 - the owner's round-2 note — read against: nothing yet — surprised: unread
 
 ## Stage A3-1 — SAVED
+
+## Stage A3-2 — round 2's registrations (in progress)
+
+**The owner's round-2 notes, read** (`data/fs110/owner-notes-round2.md`, filed by the owner at `e6f8f753`). Stage A3-0's "unread" row is answered here.
+Read against: "the correction may already settle A3-HOLE". Surprised: no. Note 2 quotes A2 §4.4 verbatim, and neither note mentions arcs of `Γ` on
+`ω(v)`. Card 2 checks the frame fact itself and does not duplicate them (the owner, by message). Both notes told both sides to check the frame fact before
+relying on it. A side that relies on it unchecked for Act One's scope is the G21 instance I watch.
