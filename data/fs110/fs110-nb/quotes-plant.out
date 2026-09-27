@@ -1,0 +1,32 @@
+M_K            OK   (want OK) plans/FS107-derivation.md 
+tight          OK   (want OK) data/fs106/claims.md 
+siamese        MISS (want MISS) plans/FS107-stability.md longest present prefix 6/59: 'twodis'
+siamese@TQ-PLANT MISS (want MISS) plans/FS106-TQ-derivation.md longest present prefix 34/59: 'twodistincttilesofonecolourhaveall'
+types          OK   (want OK) plans/STUB-tangency-seam.md 
+K-C6           OK   (want OK) plans/FS107-derivation.md 
+tan/bowtie a   OK   (want OK) plans/FS106-TS-derivation.md 
+tan/bowtie b   OK   (want OK) plans/FS106-TS-derivation.md 
+cusp           MISS (want MISS) plans/FS107-VW-verification.md longest present prefix 36/139: 'acuspisaconepointwhosetilehasangle0:'
+cusp-bullet    OK   (want OK) plans/FS107-VW-verification.md 
+ring junction  OK   (want OK) plans/FS107-derivation.md 
+sliver         OK   (want OK) plans/FS107-derivation.md 
+fat junction   OK   (want OK) plans/FS107-derivation.md 
+V-C5           OK   (want OK) plans/FS107-derivation.md 
+V-C5 kill      OK   (want OK) plans/FS107-V-verification.md 
+W-TAN          OK   (want OK) plans/FS107-derivation.md 
+C-T-TAN        OK   (want OK) plans/FS106-TS-derivation.md 
+C-T-TAN six    OK   (want OK) plans/FS106-TS-derivation.md 
+TS-U           OK   (want OK) plans/FS106-TS-derivation.md 
+K-KILL 2       OK   (want OK) plans/FS106-TS-derivation.md 
+C-T-BIKE       OK   (want OK) plans/FS106-TS-derivation.md 
+K-CHR4         OK   (want OK) plans/FS106-TS-derivation.md 
+Townsend       OK   (want OK) plans/FS106-V-verification.md 
+VW 2b.4        OK   (want OK) plans/FS107-VW-verification.md 
+IND-X          OK   (want OK) plans/FS106-derivation.md 
+AE-Q2 G2       OK   (want OK) plans/FS106-derivation.md 
+rule0          OK   (want OK) CLAUDE.md 
+rule3          OK   (want OK) CLAUDE.md 
+rule3b         OK   (want OK) CLAUDE.md 
+rule4          OK   (want OK) CLAUDE.md 
+invented       MISS (want MISS) plans/FS107-derivation.md longest present prefix 4/46: 'Thet'
+rows=31 unexpected=0
