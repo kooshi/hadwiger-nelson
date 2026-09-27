@@ -41,6 +41,39 @@
 - Not yet read: `plans/FS106-SB-verification.md`, `plans/FS106-QB-verification.md` (fenced until their reports exist); V3's comparison section of
   `plans/FS106-V-verification.md` (for stage 1).
 
+
+## Stage 1 — expectation, written before either blind report exists (06:20 UTC; neither report file present)
+
+*Read the blind records only after this is committed. Probabilities are G21 instruments, scored in stage 1.*
+
+**QB on TQ.**
+- TQ-EQ: TRUE, 0.85. The likeliest divergence is a route one. QB may prove `(c) ⟹ (a)` stationarily (Route I), or flag a definition:
+  - upper versus lower density in D-MU;
+  - whether (d) is the negation of S–V's printed `µ∗₆ < 1`, which needs `µ∗₆` read as uniform in `ε`.
+  A GAP, if there is one, sits at the weak-* continuity of `∫_Q⟨g, g ⋆ σ⟩` (M1's Step 2), which I re-derived above as a compact-operator fact.
+- TQ-EPS2: TRUE, 0.75. The constant may differ. The load-bearing input is C-CS-2 at radius 3.
+- TQ-SUP: TRUE, 0.8. A divergence could come at the order of limits or at the box sequence.
+- TQ-HIT: TRUE as a statement about strips, 0.9. QB may say that "hitting form" is undefined as a class of proofs, which is a scope point, not a
+  truth point.
+- C-Q-REM: TRUE, with other constants.
+- C-Q-COMP: TRUE, 0.85.
+- C-Q-LOCAL: TRUE for `δ > δ₆`, 0.7, graded conditional on Parts [external].
+
+**SB on TS.**
+- TS-C: TRUE, 0.85.
+- TS-T: TRUE, 0.7. A GAP could come at "fills strictly grow" or at the hull's finiteness.
+- TS-U: TRUE, 0.75.
+- TS-L1: TRUE, 0.7.
+- C-AE-POLY: TRUE except `d = 2`, 0.6. A blind reader may grade SV-L3's transplanted bicycle (V2, sketch) as a GAP.
+- C-AE-CONV: TRUE given C-AE-POLY, 0.65. A possible divergence: the merged regions may be non-simply-connected, against S–V's map conditions.
+- C-T-IND corrected: TRUE, 0.7.
+- C5: TRUE as a local configuration, 0.75.
+
+**V3's comparison of V2 with VB** (read at stage 5 of my inventory, sighted):
+- V3's closed-form crossing checks: the small root `ρ₋ ≈ s_b²/(2 sin β)` of `ρ² − 2ρ(s_b cos β + sin β) + s_b² = 0` is simple and positive for
+  `β ∈ (0, π)`.
+- TS's stage-3 region-only Prop. 7 is a second written version, sighted (it saw V2's assertion, not V3's text). SB is the first blind mind on it.
+
 ## Stage 2 — SAVED: the predecessor's expectation and hunches, scored
 
 Sources for "what landed": close inventory items 21, 24, 28, 33, 39, 41–44, 46, 49, 55, with the records they cite. "One mind" means the
