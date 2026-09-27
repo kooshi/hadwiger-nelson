@@ -7,7 +7,14 @@ text and Fig. 5 rendered), `[Voronov2023]` (`~/source/library/pdf/arXiv-2304.101
 
 ## Theorems this phase proved
 
-*(filled at stage 3; one line per theorem, grade and address)*
+- **(P)/(P′)** unit pairs never nest, `|x−y| = 1 ⟹ c(x) ⊄ c(y)`, under Conditions 3, 5 — [hand], one mind — §D1.
+- **Strip + Cor. 3 AE** (S–V Props. 9–11, Cor. 2–3 repaired for curved cubic vertices) — [hand], one mind — §D2.
+- **Fig. 5 flip**: the printed 3-cycle holds for d < √3 and fails for √3 ≤ d < 2; `|q3−u1|² = 2 + 2cos(2θ0 − 60°)` — [hand + tools] — §D3,
+  `tools/fs110_cb_geometry.py`.
+- **Lemma 3 AE, all 1 < d < 2** (exact bicycle on pseudo-coloured circles, overshoot case at d > √3) — [hand + tools], one mind — §D4.
+- **Prop. 17 AE** (no regular hexagon), a new route by cones at u — [hand], one mind — §D5 item 5.
+- **Circle-only reduction** (replaces S–V Prop. 19's plane recolouring) — [hand], one mind — §D5 items 1–4.
+- **Corollary 1 AE for curved cubic maps, no d = 2 exception** — [hand], one mind; Lemma 5 and Prop. 18 accepted from print — §D6.
 
 ## Stage 1 — SAVED
 
@@ -197,3 +204,21 @@ Lemma 5 and Prop. 18 accepted from print (circle-abstract, needing only (i) and 
 
 - The branch endings and turning points in D3/D4: I would have swept d and pictures numerically for the flip; instead derived the tangency
   identity and the turning-point locus `cos θ* = (3+d²)/(4d)`, and checked them on formulas at nine values (`tools/fs110_cb_geometry.py`).
+
+## Stage 3 — SAVED (verdicts, committed before anything fenced is opened)
+
+| # | claim | verdict | grade, minds |
+|---|---|---|---|
+| 1 | S–V Corollary 1 AE, curved cubic maps, Condition 5 | **TRUE — and the "except possibly d = 2" is not needed**: the repaired chain (D1–D6) never hands Lemma 3 or Cor. 3 a pair at distance 2. "The printed chain, repaired" = Lemma 2 dropped (vacuous for cubic); Props. 1, 3, 4, Lemma 1 → (P)/(P′); Props. 9–11 → the per-direction strip; Cor. 3 via γ-curves; Props. 14–15 → (i)/(ii) under transversality; **Prop. 19's plane recolouring → the circle-only reduction**; Prop. 17 → the cone count at u; Lemma 3 → the exact bicycle; hole-filling kept for the eleventh point | [hand], one mind (Lemma 5, Prop. 18 from print) |
+| 2 | S–V Lemma 3 at √3 ≤ d < 2 | **TRUE**, by Voronov's bicycle (his **Thm 1.2 / §5**, not Lemma 6.1) run exactly on the two pseudo-coloured circles; the printed Fig. 5 proof **fails** there by a proven pairing flip at d = √3. The one step beyond Voronov: at d > √3 one partner overshoots z1 and returns, and the endpoint analysis (four cases) closes each by (ii) or by `G ∉ c′(x1)` | [hand + tools], one mind |
+| 3 | the d = 2 case | **What it is:** two points of the closed disc about a trichromatic u that both lie on ω(u), antipodally — a same-multicolour pair (both vertices {a,b,q}, q ∈ c(u)) **or a disjoint pair** (the eleventh point on ∂R against an endpoint on ω(u)). **Reachable?** Only if a pigeonhole point sits on ω(u), i.e. a pair-boundary returns to the circle; the circle-only reduction removes exactly those, so **the repaired chain cannot reach it**. As a standalone configuration I found no local contradiction (the q-sector of u is confined to one side or a cusp; nothing more) — **not needed, not decided** | [hand], one mind |
+
+**Registered expectation, scored.** S2 TRUE (0.7) — met, and more: all d. Fig. 5 fails beyond √3 (0.6) — met, with the mechanism. S1 TRUE bar
+d = 2 (0.55) — met in a stronger form (no d = 2 exception). S3 avoidable (0.35) — **met; I had it at 0.65 against**. Selection audit (G21): the
+result that flatters (the chain closes) got the extra checks — D5's reduction was checked for nested arcs, shared endpoints and equal
+recolour colours, Prop. 17's cone count for every distribution of the q's, the bicycle's cases for both approach sides.
+
+**What would falsify these.** D5: a circle-to-circle path whose recoloured arc makes (i) fail against a partner w with a colour I did not
+consider (the proof covers w unrecoloured and w recoloured to the same colour a; w recoloured to a different colour is automatically fine).
+D4: a case of `(J, J_z, e1, e2)` I dropped — the constraint `J − J_z ≥ e1 + e2 − 1 ≥ 1` with `J, J_z ∈ {−1,0,1}` leaves exactly the four listed.
+Prop. 17: a vertex x_i whose q-sector meets the tangent line of Ω (excluded: the strip colour must reach x_i along Ω on both sides).
