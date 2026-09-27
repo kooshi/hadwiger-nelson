@@ -1,0 +1,12 @@
+  WCH disc (0,0): uncovered 0.00e+00 overlap 0.00e+00
+  WCH disc (0,1): uncovered 0.00e+00 overlap 0.00e+00
+  WCH disc (0,-1): uncovered 0.00e+00 overlap 0.00e+00
+  WCH band: uncovered 0.00e+00 overlap 0.00e+00
+  WCH: sampled ranges inside exact ranges; worst gap to the exact ends 0.0219; bad=0
+  WC1H disc (0,0): uncovered 0.00e+00 overlap 0.00e+00
+  WC1H disc (0,1): uncovered 0.00e+00 overlap 0.00e+00
+  WC1H disc (0,-1): uncovered 0.00e+00 overlap 0.00e+00
+  WC1H band: uncovered 0.00e+00 overlap 0.00e+00
+  WC1H: sampled ranges inside exact ranges; worst gap to the exact ends 0.0201; bad=0
+SAMPLE-PASS
+sample_exit=0

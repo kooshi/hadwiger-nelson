@@ -7,7 +7,18 @@
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, its grade and address)*
+- **YB4-MU** — Y4-MU re-derived blind (unit offset: `μ = λ/(1+λ)`, `λ > −1`), and discriminated exactly (`κ₂ = 3/10` ACCEPT, `9/25` REJECT at
+  `μ = 1/3`) — [hand + tools exact; two minds with the side's, this one blind] — Stage 2 §2.3.
+- **YB4-MEMBERS** — WC, WC1, WCEQ, WCH, WC1H, rebuilt from the formulas (completions stated), ACCEPT with 4, 2, 4 (arcs), 8, 4 exact tight
+  pairs; every tip recolouring and every side plant gives the side's verdict at the side's pair — [tools, exact, my checker] — §2.2.
+- **YB4-WINDOW** — `R_y = [−T²/6, T²/2)` at `κ = ±1/2`: both ends confirmed on four exact members; a window colour above `R_y` leaves the
+  tip recolouring legal — [hand + tools exact; blind] — §2.2, §2.3.
+- **YB4-TIP** — Y4-TIP re-derived blind at second order; precision: a double-horn cone needs one recolouring per horn — [hand, two minds, this
+  one blind] — §2.3.
+- **YB4-D2** — at any Woodall cone `y ∉ P_cl(S′)`, `x ∉ P_cl(N)`; so tip-hard ⇒ `P_cl(N) ≠ P_cl(S′)`, and `P_cl(N) = P_cl(S′)` ⇒ both windows
+  empty — [hand, two minds with the side's, this one blind] — §2.3.
+- **YB4-WC-WORDING** — Y4-WC's "every curvature strictly inside `(−1, 1)`" is false literally (`N1`'s arc: 2; the ring: `10/9`); true for
+  the horn-bounding curvatures — [hand, exact] — §2.3.
 
 ## Fence log
 
@@ -22,7 +33,12 @@
 
 ## Would have searched here
 
-*(one line per move a search would have made, and what I did instead)*
+- Scanning the horn curvatures `κ₂` against `μ` to locate the threshold numerically: instead derived `μ = λ/(1+λ)` (offset curve) and
+  checked two exact members on either side of `μ = 1/3` (`κ₂ = 3/10`, `9/25`).
+- Scanning the window colour's position at `N` to find where the tip recolouring becomes legal: instead derived `R_y` and checked four
+  exact members placed inside, below and above it.
+- Varying the free completion parameters (cap radius, horn length, sector radius, `t₀`) over a grid: instead two fixed alternative
+  settings each, stated in advance (`tools/fs110_yb4_run.py` `robust`).
 
 ## Stage 1 — SAVED
 
@@ -85,3 +101,138 @@
 | Y4-D2 | TRUE for closure types; a scope note if G-d2 reads essential types | a tip-hard cone with `P_cl(N) = P_cl(S′)` |
 
 Probability that at least one of the five carries a divergence of truth or scope: 0.6 (an instrument for G21, scored at stage 4).
+
+## Stage 2 — SAVED
+
+### 2.1 My checker (built before looking at the side's; `tools/fs110_yb4_check.py`)
+
+- **The rule** (claims §4 test 6, exactly): for each pair of same-colour tiles, a tile with itself included, the exact range `[m, M]` of
+  cross-distances over the closures must have `m ≥ 1` or `M ≤ 1` (a tile with itself: `M ≤ 1`). For open connected tiles the distances
+  between interior points form the open interval `(m, M)`, so this is A-EXACT exactly, and it is the Siamese-or-`≥ 1` rule.
+- **How `m`, `M` are found.** They are attained at critical pairs of the distance on the product of the boundaries, or at a common point.
+  The checker enumerates all of them: endpoint–endpoint; endpoint–piece (the foot on a segment; the two radial points on an arc);
+  arc–arc on the line of centres (concentric arcs: the radial pairs, `|R₁ − R₂|` and `R₁ + R₂`); arc–segment along the segment's normal
+  through the centre; and piece–piece intersections (distance 0). Every candidate is a genuine pair of closure points, so the minimum and
+  maximum over the candidates are `m` and `M` exactly.
+- **Arithmetic.** Exact in `ℚ` or in one field `ℚ(√d)` (Fractions); otherwise a rigorous 60-digit interval. A comparison with 1 is exact,
+  or decided by interval separation, or reported AMBIG (none occurred: `amb_cmp = 0` in every run). Equality with 1 is asserted only
+  exactly; every tight contact found is exact (rational or in `ℚ(√d)`).
+- **One instrument defect, found and repaired before any verdict was read.** An arc-membership test left undecided by the interval
+  arithmetic was first treated as "the candidate is an arc endpoint"; a probe showed some undecided cases 4.27 (in squared distance) from
+  both endpoints: exact collinearities (a candidate exactly antipodal to an arc's start) computed through intervals. Repaired: such a case
+  is decided by 60-digit angles when it is at least `10⁻³⁰` (in angle) from both endpoints (139 cases in the full run), and only otherwise
+  identified with the endpoint (1,450 cases, every one at angle gap below `10⁻³⁰`). This defect could only drop candidates, i.e. it
+  biased toward ACCEPT (G21's direction); after the repair all verdicts were unchanged.
+- **Controls** (all PASS, `data/fs110/fs110-yb4/run.out`): the tight hexagonal seven-colouring (side `1/2`, colours `(m + 3n) mod 7`, 49
+  hexagons, exact in `ℚ(√3)`) ACCEPTs with every self-pair tight at diameter exactly 1 and class density `1/7 ≤ 0.2470`; known REJECTs:
+  side `51/100` (diameter), colours `(m + n) mod 7` (same-colour neighbours), two discs of radius `1/4` at distance `149/100`, two
+  crossing bars; tight ACCEPT: the discs at `3/2`.
+- **Planted faults in my checker, each seen to fire for its own reason:** `no_self` (the diameter REJECT turns ACCEPT); `no_arc_arc`
+  (the disc REJECT, whose minimum is interior to both arcs, turns ACCEPT); `no_vertex_arc` (a vertex at distance `0.99` from an arc's
+  interior: REJECT turns OK); `no_intersect` (crossing bars: REJECT turns OK); `closed_interval` (REJECTs exactly the tight cross pairs:
+  4 in WC, 8 in WCH, 4 in WC1H, 4 in WCEQ — tightness certified). A first control for `no_vertex_arc` (the side's `wc_flat`) could not
+  fire: its horn endpoint is also within `1` of the contact tile's cap corner (`d² = 0.9999969`), so the pair REJECTs through an
+  endpoint pair too — noted, and replaced by a control where only the vertex–arc candidate is below 1.
+- **Float guard on my construction** (`tools/fs110_yb4_sample.py`, predicates written independently of the boundary pieces): WCH and
+  WC1H have no overlaps and no gaps on 200,000 samples in each of the discs of radius `0.05` about `v`, `N`, `S′` and 400,000 in the band
+  `0.93 ≤ r ≤ 1.07`; every same-colour pair's sampled distances lie inside the exact `[m, M]`, within `0.022` of its ends.
+
+### 2.2 The fragments rebuilt from the formulas alone
+
+`tools/fs110_yb4_fragments.py`. Coordinates `v = 0`, `a = (1, 0)`, `n = (0, 1)`, `N = (0, 1)`, `S′ = (0, −1)`, box `[−1/10, 1/10]²`,
+ring `9/10 ≤ r ≤ 11/10` cut at `2 atan t` (exact rational directions, e.g. `t = 4/7` gives `(33/65, 56/65)`), colours `6,5,4,6,5,4,6,5,4`
+counter-clockwise from the piece about `0°`.
+
+**What the formulas leave open, and my choices** (each varied once more in the robustness pass; no verdict moved):
+1. **The contact tiles' extent.** "colour-1 tile above the arc of radius `1/2` about `(0, 3/2)`" does not bound the tile. The whole disc
+   cut by the band reaches angle `103.4°`, past the piece about `90°` (which is `(59.49°, 100.39°)`, not centred on `90°`), so "wraps"
+   fails for it. I cut it by `B(N, 1/10)` (angles `90° ± 5.8°`); variant `1/20`.
+2. **WCH's horn length**: `|T| < 1/20`; variants `1/40`, `1/10`.
+3. **WC1H's sector radius**: `1/20`; variants `1/10`, `1/40`.
+4. **The tip radius**: `t₀ = 1/20, 1/100` (and `1/1000` in the robustness pass).
+5. **`wc1h_ylow`**: I read "turned to reach `−30°`" as the colour-3 sector rotated to `(−30°, 30°)`, the ring piece filling `(30°, 60°)`.
+
+**Results** (all exact; pairs enumerated from the colour map, counts asserted):
+
+| fragment | pairs (asserted) | verdict | tight contacts (exact) |
+|---|---|---|---|
+| WC | 30 | **ACCEPT** | 4: `(h±, N1)` at `(v, N)`, `(h±, S1)` at `(v, S′)` |
+| WC1 | 26 | **ACCEPT** | 2 |
+| WCEQ | 30 | **ACCEPT** | 4 pairs, each along a contact arc (concentric radii 3, 2: every radial pair at exactly 1, e.g. the horn's end `(1/10, 3 − √899/10)` at exactly 1 from `N1`) |
+| WCH | 40 | **ACCEPT** | 8: the 4 of WC and `(v3, yN±)` at `(v, N)`, `(v2, xS±)` at `(v, S′)` |
+| WC1H | 30 | **ACCEPT** | 4: `(h+, N1)`, `(h+, S1)`, `(v3, yN)`, `(v2, xS)` |
+
+**Tip recolourings**, `Θ = h ∩ B(v, t₀)` made a tile of colour `j`, the rest of the horn kept colour 1:
+
+| fragment | tip → 2 | tip → 3 | tip → 4 |
+|---|---|---|---|
+| WC (`h+` and `h−`) | ACCEPT | ACCEPT | REJECT at `r2`, `r5`, `r8` (the three colour-4 ring pieces) |
+| WCH (`h+`; `h−` mirrored) | REJECT at `(xS+, tip)` only (`xS−` for `h−`) | REJECT at `(yN+, tip)` only (`yN−`) | REJECT at `r2, r5, r8` |
+| WC1H | REJECT at `(xS, tip)` only | REJECT at `(yN, tip)` only | REJECT at `r2, r5, r8` |
+
+**The side's plants, rebuilt:** `wc_flat` REJECTs at exactly the four horn–contact pairs, minimum `√0.9983328 = 0.99917` at the horn's end
+against `N1`'s arc (the side's number); `wc_fat` at `(h+, N1)` only; `wc_col2` at `(v2, r2)` only; `eq_steep` at `(h±, N1)` only (the `N`
+side); WCEQ's first build (WC's lower arc against `μ_S = 1/3`) at `(h±, S1)` only; `wch_ywide` at `(v3, yN±)` and `(v2, xS±)`;
+`wc1h_ylow` at `(v3, yN)` and `(v2, xS)`. Every one for the reason the side gives.
+
+**My own sharp tests (not the side's):**
+- *`μ = λ/(1 + λ)`*: with a contact of curvature `λ = 1/2` (`μ = 1/3`), horns with `κ₂ = 3/10` ACCEPT and with `κ₂ = 9/25` REJECT on the `N`
+  side only. This separates `λ/(1+λ)` from `λ/2` (which would reject `3/10`) and from `λ` (which would accept `9/25`). A contact of
+  curvature `λ = −1/2` (`μ = −1`) REJECTs WC's horns on the `N` side.
+- *`R_y = [−T²/6, T²/2)` at WC's `κ = ±1/2`*: a colour-3 double horn at `N` spanning `Y ∈ (−3/20, 1/4)·T²` ACCEPTs and makes tip → 3
+  REJECT; spanning `(−9/50, 1/4)·T²` (below `−1/6`) the fragment itself REJECTs at `(v3, yN±)`; spanning `(3/5, 4/5)·T²` (above `R_y`,
+  below `N1`'s `T²`) the fragment ACCEPTs and **tip → 3 ACCEPTs** (the cone is soft on that side although `y ∈ P_cl(N)`); spanning
+  `(2/5, 4/5)·T²` (meeting `R_y`'s top) tip → 3 REJECTs. Both ends of the window are where Y4-TIP puts them, at `t₀ = 1/20` and `1/200`.
+
+### 2.3 Hand derivations and verdicts (before opening the side's record)
+
+**Y4-MU — TRUE** at second order [hand; my derivation, the side's one mind: two minds, this one blind; tools exact on members].
+The set of points `q` whose unit circle meets `T_N` near `N` is bounded by the inner unit offset of `∂T_N`. An offset at distance `d` of a
+curve of curvature `λ` (bending away from the side offset to) has curvature `λ/(1 + dλ)`; at `d = 1` this is `μ = λ/(1 + λ)`, finite iff
+`λ > −1`. Directly: `ω(v + (t, y))` near `N` is `(t + s, 1 + y − s²/2 + O(s⁴))`, and `T_N = {Y > λX²/2 + O(X³)}`, so `ω(q)` enters `T_N` iff
+`y > min_s [s² + λ(t + s)²]/2 = λt²/(2(1+λ))` (minimum at `s = −λt/(1+λ)`, valid iff `1 + λ > 0`; for `λ ≤ −1` every `q` is hit). By A-EXACT
+such `q` are not `c`. Mirrored at `S′`. So `κ₂ ≤ μ_N`, `κ₁ ≥ −μ_S`, equality at the next order. **Precision:** "`λ = ∞` at a corner" is
+per side of `v`: in WC1H the corner's ray at `60°` gives `μ = 1` for `t > 0`, while its ray along `180°` (tangent to `a`) gives `λ = 0`,
+`μ = 0` for `t < 0` — which is why WC1H has one horn. The statement's "one-sided, per side of `v`" covers this.
+
+**Y4-WC — TRUE for the members; MISSTATED in one phrase** [tools, exact, my checker; the formulas completed as in 2.2]. All three
+ACCEPT, tight; `W = 3` (the nine ring changes are all `−1` in `ℤ/3`, `W = −9/3`); `N-E0` holds (pieces `39.5°–41°` wide, so
+`θ, θ + 60°` lie one or two pieces apart); no arc of radius 1. **The phrase "with every curvature strictly inside `(−1, 1)`" is false
+read literally**: `N1`'s arc has curvature `2`, WCEQ's contact arcs `1/2` are fine but the ring's inner arc has curvature `10/9`.
+Corrected statement: "with every horn-bounding curvature strictly inside `(−1, 1)`" (`±1/2`; `±1/3` in WCEQ) — which is N3-DEG's
+condition. Also: the contact tiles are not bounded by the formula (choice 1 above); the verdict does not depend on the choice made.
+
+**Y4-TIP — TRUE at second order, with one precision** [hand, two minds, this one blind; tools exact on eight members].
+- *Ring colour:* `Θ ⊕ S¹` contains, for each point `z` of `ω(v)` at angle `θ` with `cos θ ≠ 0`, interior pairs at distance below and
+  above 1 (`|z − (t, 0)|² = 1 − 2t cos θ + t²`, and `z` moved off `ω(v)`), so every ring tile with interior on `ω(v)` off `±n` is at
+  distance exactly 1 from `Θ`: blocked.
+- *`j = x`:* off `±n`, `ω(q)` crosses the horn transversally near `v` and meets `x`'s sector, so no `x` there; near `N`, `ω(p)` meets `v`'s
+  `x`-sector for every `p` (the condition `Y + s²/2 > κ₂(T+s)²/2` holds for large `s` since `κ₂ < 1`), so no `x` at `N`; at `S′`, `x` is
+  allowed exactly where `Y ≤ κ₂T²/(2(1+κ₂))` (A-EXACT against `v`'s `x`-sector, minimising `s² + κ₂(T+s)²`), and the tip's circles
+  sweep exactly `Y > min_{0<t<t₀}[κ₁t² + (T−t)²]/2 = κ₁T²/(2(1+κ₁))` (minimiser `t = T/(1+κ₁)`, inside `(0, t₀)` iff
+  `0 < T < (1+κ₁)t₀`; for `T < 0` the sweep starts at `T²/2`, above the allowed region). So blocked for every `t₀` iff `x`-interior
+  accumulates at `S′` inside `R_x`, as stated.
+- *`j = y`:* the mirror: `y` allowed at `N` iff `Y ≥ κ₁T²/(2(1−κ₁))` (maximising `κ₁(T+s)² − s²`), swept iff `Y < κ₂T²/(2(1−κ₂))`
+  (minimiser `t = T/(1−κ₂)`). My four `R_y` members confirm both ends exactly.
+- *Consistency bullet:* correct (`R_y`'s top is below the contact iff `λ ≥ κ₂/(1−κ₂)`, which is `μ_N ≥ κ₂`; above `ω(v)` always).
+- **Precision (scope):** at a double-horn cone (WC, WCH) one tip recolouring removes one horn; `v` keeps the other and is still a Woodall
+  cone (N3-DEG: "every `c`-sector at `v` is a cusp horn along `±a`" — one sector qualifies). The cone is lost only when every horn's tip
+  is recoloured: two one-tile moves, each legal under the same window test on its own side (`T < 0` for `h−`). "loses its cone to a
+  one-tile recolouring" is literally true for single-horn cones only. Blocking is unaffected (a blocked tip on either side keeps the cone).
+
+**Y4-HARD — TRUE** [tools, exact; the reason derived by hand and confirmed by my window members]. WCH and WC1H ACCEPT, tight; every tip
+recolouring REJECTs at exactly the pair the side names, and the REJECT is caused by the window colour: moving the `y`-horn out of `R_y`
+(above it) makes tip → 3 legal, inside it REJECTs. `N`, `S′` in WC1H are ordinary trivalent vertices with sectors `120°, 60°, 180°`, closure =
+essential types `{1,3,4}`, `{1,2,5}`; only `v` is degenerate. In WCH, `N`'s closure type `{1,3,4}` differs from its essential type
+`{1,4}` (the `y`-cusp), so `N` is itself a cusp vertex; WC1H is the member that avoids this, as the side says.
+
+**Y4-D2 — TRUE for closure types, with a scope note** [hand; my derivation, the side's one mind: two minds, this one blind].
+At **any** cone (tip-hard or not), `y ∉ P_cl(S′)`: every `p` near `S′` has `ω(p)` through `v`'s `y`-sector (the condition
+`Y − s²/2 < κ₁(T+s)²/2` holds for large `s` since `κ₁ > −1`), so a `y`-tile with `S′` in its closure violates A-EXACT; likewise
+`x ∉ P_cl(N)`. A tip-hard cone has `y`-interior accumulating at `N` (so `y ∈ P_cl(N)`, which needs `x ≠ y`) and `x` at `S′`. Hence
+`y ∈ P_cl(N) ∖ P_cl(S′)`. Stronger, and worth recording: **at any cone, `P_cl(N) = P_cl(S′)` forces both windows empty**, so the cone
+is soft (both tips recolour legally into `y` or `x`, given the window test). **Scope notes:** (i) the "so" clause concerns the pair
+`(N, S′)` and tip-hard cones; whether N3-RED's "hard" is tip-hard I cannot check (its definition is in the fenced N-side record);
+(ii) read with **essential** types the conclusion can fail: `y` sits in a zero-angle window at `N`, so `P_ess(N) = {1, r_N}` and
+`P_ess(S′) = {1, r_S}`, equal when the ring has one colour at `±n`; nothing forbids that locally. Moot if G-d2 reads closure types, and
+moot altogether given claims §8's second update (G-d2 does not arise; two blind minds).

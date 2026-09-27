@@ -1,0 +1,120 @@
+== controls
+PASS hex7 tight (a=1/2): ACCEPT pairs=196 tight_pairs=49 tight_points=294
+PASS hex7 fat (a=51/100) [known REJECT: diameter]: REJECT pairs=11 reject=(H-1,-1,H-1,-1),(H-1,0,H-1,0),(H-1,1,H-1,1),(H0,-1,H0,-1),(H0,0,H0,0),(H0,1,H0,1),(H1,-1,H1,-1),(H1,0,H1,0),(H1,1,H1,1) tight_pairs=0 tight_points=0
+PASS hex (m+n)%7 [known REJECT: same colour neighbours]: REJECT pairs=14 reject=(H-1,0,H0,-1),(H-1,1,H0,0),(H-1,1,H1,-1),(H0,0,H1,-1),(H0,1,H1,0) tight_pairs=9 tight_points=54
+PASS discs at 3/2 [tight ACCEPT]: ACCEPT pairs=3 tight_pairs=1 tight_points=1
+PASS discs at 149/100 [known REJECT]: REJECT pairs=3 reject=(D1,D2) tight_pairs=0 tight_points=0
+PASS crossing X [known REJECT: touch]: REJECT pairs=3 reject=(X1,X1),(X1,X2),(X2,X2) tight_pairs=0 tight_points=0
+== fragments
+PASS WC: ACCEPT pairs=30 tight_pairs=4 tight_points=8
+   tight ('h+', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h+', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   tight ('h-', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h-', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   (1.3s)
+PASS WC1: ACCEPT pairs=26 tight_pairs=2 tight_points=4
+   tight ('h+', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h+', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   (1.2s)
+PASS WCEQ: ACCEPT pairs=30 tight_pairs=4 tight_points=16
+   tight ('h+', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('v-arc', 0.1, 0.00166713, 0.066666667, 1.00111142), ('concentric', -0.149953118, 0.00375, -0.099968745, 1.0025), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h+', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.1, -0.00166713, 0.066666667, -1.00111142), ('centres', 0.0, 0.0, 0.0, -1.0), ('concentric', 0.149953118, -0.00375, 0.099968745, -1.0025)]
+   tight ('h-', 'N1'): [('v-arc', -0.1, 0.00166713, -0.066666667, 1.00111142), ('v-arc', 0.0, 0.0, 0.0, 1.0), ('concentric', -0.149953118, 0.00375, -0.099968745, 1.0025), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h-', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('v-arc', -0.1, -0.00166713, -0.066666667, -1.00111142), ('centres', 0.0, 0.0, 0.0, -1.0), ('concentric', 0.149953118, -0.00375, 0.099968745, -1.0025)]
+   (1.3s)
+PASS WCH: ACCEPT pairs=40 tight_pairs=8 tight_points=20
+   tight ('h+', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h+', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   tight ('h-', 'N1'): [('v-arc', 0.0, 0.0, 0.0, 1.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h-', 'S1'): [('v-arc', 0.0, 0.0, 0.0, -1.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   tight ('v2', 'xS+'): [('v-v', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.0, -1.0, 0.0, 0.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   tight ('v2', 'xS-'): [('v-v', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.0, -1.0, 0.0, 0.0), ('centres', 0.0, 0.0, 0.0, -1.0)]
+   tight ('v3', 'yN+'): [('v-arc', 0.0, 1.0, 0.0, 0.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   tight ('v3', 'yN-'): [('v-arc', 0.0, 1.0, 0.0, 0.0), ('centres', 0.0, 0.0, 0.0, 1.0)]
+   (2.3s)
+PASS WC1H: ACCEPT pairs=30 tight_pairs=4 tight_points=18
+   tight ('h+', 'N1'): [('v-v', 0.0, 0.0, 0.0, 1.0), ('v-seg', 0.0, 0.0, 0.0, 1.0), ('v-arc', 0.0, 1.0, 0.0, 0.0), ('normal', 0.0, 0.0, 0.0, 1.0)]
+   tight ('h+', 'S1'): [('v-v', 0.0, 0.0, 0.0, -1.0), ('v-seg', 0.0, 0.0, 0.0, -1.0), ('v-arc', 0.0, -1.0, 0.0, 0.0), ('normal', 0.0, 0.0, 0.0, -1.0)]
+   tight ('v2', 'xS'): [('v-v', 0.0, 0.0, 0.0, -1.0), ('v-seg', 0.0, 0.0, 0.0, -1.0), ('v-seg', 0.0, -1.0, 0.0, 0.0), ('v-arc', 0.0, -1.0, 0.0, 0.0), ('normal', 0.0, 0.0, 0.0, -1.0)]
+   tight ('v3', 'yN'): [('v-v', 0.0, 0.0, 0.0, 1.0), ('v-seg', 0.0, 0.0, 0.0, 1.0), ('v-arc', 0.0, 1.0, 0.0, 0.0), ('v-seg', 0.0, 1.0, 0.0, 0.0), ('normal', 0.0, 0.0, 0.0, 1.0)]
+   (1.2s)
+== tips
+PASS WC tip->2 t0=1/20: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WC tip->3 t0=1/20: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WC tip->4 t0=1/20: REJECT pairs=34 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=2 tight_points=4
+PASS WC tip(h-)->2 t0=1/20: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WCH tip->2 t0=1/20: REJECT pairs=44 reject=(xS+,tip) tight_pairs=7 tight_points=20
+PASS WCH tip->3 t0=1/20: REJECT pairs=44 reject=(yN+,tip) tight_pairs=7 tight_points=20
+PASS WCH tip(h-)->2 t0=1/20: REJECT pairs=44 reject=(xS-,tip) tight_pairs=7 tight_points=20
+PASS WCH tip(h-)->3 t0=1/20: REJECT pairs=44 reject=(yN-,tip) tight_pairs=7 tight_points=20
+PASS WCH tip->4 t0=1/20: REJECT pairs=44 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=6 tight_points=16
+PASS WC1H tip->2 t0=1/20: REJECT pairs=33 reject=(xS,tip) tight_pairs=2 tight_points=10
+PASS WC1H tip->3 t0=1/20: REJECT pairs=33 reject=(yN,tip) tight_pairs=2 tight_points=10
+PASS WC1H tip->4 t0=1/20: REJECT pairs=34 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=2 tight_points=10
+PASS WC tip->2 t0=1/100: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WC tip->3 t0=1/100: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WC tip->4 t0=1/100: REJECT pairs=34 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=2 tight_points=4
+PASS WC tip(h-)->2 t0=1/100: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WCH tip->2 t0=1/100: REJECT pairs=44 reject=(xS+,tip) tight_pairs=7 tight_points=20
+PASS WCH tip->3 t0=1/100: REJECT pairs=44 reject=(yN+,tip) tight_pairs=7 tight_points=20
+PASS WCH tip(h-)->2 t0=1/100: REJECT pairs=44 reject=(xS-,tip) tight_pairs=7 tight_points=20
+PASS WCH tip(h-)->3 t0=1/100: REJECT pairs=44 reject=(yN-,tip) tight_pairs=7 tight_points=20
+PASS WCH tip->4 t0=1/100: REJECT pairs=44 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=6 tight_points=16
+PASS WC1H tip->2 t0=1/100: REJECT pairs=33 reject=(xS,tip) tight_pairs=2 tight_points=10
+PASS WC1H tip->3 t0=1/100: REJECT pairs=33 reject=(yN,tip) tight_pairs=2 tight_points=10
+PASS WC1H tip->4 t0=1/100: REJECT pairs=34 reject=(r2,tip),(r5,tip),(r8,tip) tight_pairs=2 tight_points=10
+== plants
+PASS plant wc_flat: REJECT pairs=30 reject=(h+,N1),(h+,S1),(h-,N1),(h-,S1) tight_pairs=0 tight_points=0
+   ('h+', 'N1'): REJECT straddle min^2=~0.998332754034 (A:v-arc) max^2=~1.22650473524 (A:v-arc) n=17
+   ('h+', 'S1'): REJECT straddle min^2=~0.998332754034 (A:v-arc) max^2=~1.22650473524 (A:v-arc) n=17
+   ('h-', 'N1'): REJECT straddle min^2=~0.998332754034 (A:v-arc) max^2=~1.22650473524 (A:v-arc) n=17
+   ('h-', 'S1'): REJECT straddle min^2=~0.998332754034 (A:v-arc) max^2=~1.22650473524 (A:v-arc) n=17
+PASS plant wc_fat: REJECT pairs=30 reject=(h+,N1) tight_pairs=3 tight_points=6
+PASS plant wc_col2: REJECT pairs=29 reject=(v2,r2) tight_pairs=4 tight_points=8
+PASS plant eq_steep: REJECT pairs=30 reject=(h+,N1),(h-,N1) tight_pairs=2 tight_points=8
+PASS slip WCEQ-first (lower arc of WC): REJECT pairs=30 reject=(h+,S1),(h-,S1) tight_pairs=2 tight_points=8
+PASS plant wch_ywide: REJECT pairs=40 reject=(v2,xS+),(v2,xS-),(v3,yN+),(v3,yN-) tight_pairs=4 tight_points=8
+PASS plant wc1h_ylow: REJECT pairs=30 reject=(v2,xS),(v3,yN) tight_pairs=2 tight_points=8
+== windows
+PASS mu test: lambda_N=1/2 (mu=1/3), kappa2=3/10: ACCEPT pairs=30 tight_pairs=4 tight_points=8
+PASS mu test: lambda_N=1/2 (mu=1/3), kappa2=9/25: REJECT pairs=30 reject=(h+,N1),(h-,N1) tight_pairs=2 tight_points=4
+PASS mu test: lambda_N=-1/2 (mu=-1) with WC horns: REJECT pairs=30 reject=(h+,N1),(h-,N1) tight_pairs=2 tight_points=4
+PASS R_y test: y-horn at N, Y in (-3/20, 1/4) T^2: ACCEPT pairs=35 tight_pairs=6 tight_points=12
+PASS    tip->3 t0=1/20: REJECT pairs=39 reject=(yN+,tip) tight_pairs=5 tight_points=12
+PASS    tip->3 t0=1/200: REJECT pairs=39 reject=(yN+,tip) tight_pairs=5 tight_points=12
+PASS R_y test: y-horn at N, Y in (-9/50, 1/4) T^2: REJECT pairs=35 reject=(v3,yN+),(v3,yN-) tight_pairs=4 tight_points=8
+PASS R_y test: y-horn at N, Y in (3/5, 4/5) T^2: ACCEPT pairs=35 tight_pairs=6 tight_points=12
+PASS    tip->3 t0=1/20: ACCEPT pairs=39 tight_pairs=6 tight_points=16
+PASS    tip->3 t0=1/200: ACCEPT pairs=39 tight_pairs=6 tight_points=16
+PASS R_y test: y-horn at N, Y in (2/5, 4/5) T^2: ACCEPT pairs=35 tight_pairs=6 tight_points=12
+PASS    tip->3 t0=1/20: REJECT pairs=39 reject=(yN+,tip) tight_pairs=5 tight_points=12
+PASS    tip->3 t0=1/200: REJECT pairs=39 reject=(yN+,tip) tight_pairs=5 tight_points=12
+== checkerplants
+PASS checker plant no_self: REJECT -> ACCEPT (must flip REJECT to not-REJECT)
+PASS checker plant no_arc_arc: REJECT -> ACCEPT (must flip REJECT to not-REJECT)
+PASS checker plant no_vertex_arc: REJECT -> OK (must flip REJECT to not-REJECT)
+PASS checker plant no_intersect: REJECT -> OK (must flip REJECT to not-REJECT)
+PASS checker plant closed_interval on WC: rejects 4 = tight cross pairs 4
+PASS checker plant closed_interval on WCH: rejects 8 = tight cross pairs 8
+PASS checker plant closed_interval on WC1H: rejects 4 = tight cross pairs 4
+PASS checker plant closed_interval on WCEQ: rejects 4 = tight cross pairs 4
+== robust
+PASS WC CAP=1/20 HN=1/40 RS=1/10: ACCEPT pairs=30 tight_pairs=4 tight_points=8
+PASS WC1 CAP=1/20 HN=1/40 RS=1/10: ACCEPT pairs=26 tight_pairs=2 tight_points=4
+PASS WCEQ CAP=1/20 HN=1/40 RS=1/10: ACCEPT pairs=30 tight_pairs=4 tight_points=16
+PASS WCH CAP=1/20 HN=1/40 RS=1/10: ACCEPT pairs=40 tight_pairs=8 tight_points=20
+PASS WC1H CAP=1/20 HN=1/40 RS=1/10: ACCEPT pairs=30 tight_pairs=4 tight_points=18
+PASS   WCH tip->3 t0=1/1000: REJECT pairs=44 reject=(yN+,tip) tight_pairs=7 tight_points=20
+PASS   WC1H tip->2 t0=1/1000: REJECT pairs=33 reject=(xS,tip) tight_pairs=2 tight_points=10
+PASS   WC tip->3 t0=1/1000: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+PASS WC CAP=1/10 HN=1/10 RS=1/40: ACCEPT pairs=30 tight_pairs=4 tight_points=8
+PASS WC1 CAP=1/10 HN=1/10 RS=1/40: ACCEPT pairs=26 tight_pairs=2 tight_points=4
+PASS WCEQ CAP=1/10 HN=1/10 RS=1/40: ACCEPT pairs=30 tight_pairs=4 tight_points=16
+PASS WCH CAP=1/10 HN=1/10 RS=1/40: ACCEPT pairs=40 tight_pairs=8 tight_points=20
+PASS WC1H CAP=1/10 HN=1/10 RS=1/40: ACCEPT pairs=30 tight_pairs=4 tight_points=18
+PASS   WCH tip->3 t0=1/1000: REJECT pairs=44 reject=(yN+,tip) tight_pairs=7 tight_points=20
+PASS   WC1H tip->2 t0=1/1000: REJECT pairs=33 reject=(xS,tip) tight_pairs=2 tight_points=10
+PASS   WC tip->3 t0=1/1000: ACCEPT pairs=32 tight_pairs=2 tight_points=4
+LOG {'amb_member': 1450, 'amb_cmp': 0, 'amb_tau_max': 1.593060796056063e-56, 'amb_member_angle': 139, 'amb_gap_max': 0}
+ALL-PASS
+run_exit=0
