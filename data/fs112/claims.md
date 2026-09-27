@@ -107,8 +107,9 @@ list does not restate them; its §9 corrections are applied here.*
     so the three seams are two species: a three-colour unit-arc centre ((S1)) and a four-colour vertex with its arcs (T2 = NB-4's exception at `w₀`).
     TRUE / FALSE / GAP.
   - **C-V4-K** *(this list)*: with unit arcs allowed, a four-colour vertex in a tight map is excluded, or realisable as a tight local fragment by formula,
-    or a named GAP. **C-V56** *(this list)*: the same for five- and six-colour vertices; the print's sketch, verbatim (Polymath16 thread 7 or 8, a comment
-    by Aubrey de Grey, `~/source/library/notes/polymath16-threads-1-18-text.txt`): "those six tiles must jointly cover a disk of radius 1 centred on V, and
+    or a named GAP. **C-V56** *(this list)*: the same for five- and six-colour vertices; the print's sketch, verbatim (Polymath16 thread 8, comment [08.17], Aubrey de Grey,
+    28 June 2018, `data/fs112/fs112-pa/extracts.md`; it rests on his Reuleaux-merge step [08.16], which nobody proves, and Gibbs's [08.18] argues the
+    same independently — *owner's correction from FS112-PA, before the contest's launch*): "those six tiles must jointly cover a disk of radius 1 centred on V, and
     the boundaries between them must meet the edge of that disk at the vertices of a regular hexagon. Thus, each tile must lie entirely within the
     Reuleaux triangle defined by its vertices." [a blog sketch, everywhere-proper, unproved]
 - **The seam kinds together.** **C-UA-SEAMS** *(this list)*: every close covering pair of a tight map with unit arcs is saved at its seam point by (S1),
