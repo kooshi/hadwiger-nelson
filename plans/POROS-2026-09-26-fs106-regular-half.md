@@ -167,3 +167,37 @@ question: is-SV-question-2-the-first-target
   and applications to image processing*, J. Eur. Math. Soc. 3 (2001) 39–92 — recalled, not read; unheld. Role: (R3).
 - `[Townsend1981]` — reading status: read in full 2026-09-26 (FS106-A); it contains no proof; its content is the unit-arc counterexample
   to `[Woodall1973]` and the announcement of a lemma on finitely disconnected unit annuli.
+
+## Stage 2 — SAVED (the planner's §G and reading, answered)
+
+**Evidence.** FS106-P's message (2026-09-26, after its commit `5994764b`), received after stage 1 was written:
+- its §G bears list;
+- a G50 recognition: `[SokolovVoronov2025]` "already contains the exact-distance transplant of Voronov's method for maps";
+- a reading, one mind: (REM) quantified D1 plus (COMP) M1's weak-* compactness give "χ_m⁰(ℝ²) ≥ 7 ⟺ limsup_{ε→0} µ₆(ε) < 1", with two
+  routes, T-S (structural) and T-Q (stable Voronov).
+
+**Scored.** Hunch `robust-voronov-is-the-cheapest-decisive-route` and the planner's T-Q were reached independently: my stage 1 was saved at
+`d8a6ec5f`, before the message arrived. That is two minds on one route, and an equivalence on the planner's side where I had only
+sufficiency. The hunch is re-stated, not confirmed; a convergence is not a derivation.
+
+**Sent to FS106-P** (SendMessage, one message):
+- REM's band half TRUE with `η < 1/48` (one mind).
+- REM's density half TRUE in the CP form only; named step: "the origin is almost surely a density point of its class".
+- COMP's named step: band-properness is weak-* closed in spectral form, because the Fourier transform of `1_A` lies in `C₀`.
+- The attack on T-Q: the deleted set can swallow every trichromatic point, as SV §9's vertex excision shows. The claim "six band-proper
+  colours plus a free seventh of density ≤ δ" needs Lemmas 2.2 and 6.1 with holes; that is T-Q's named step.
+- My stage-1 points (A1–A5; Townsend's unit-arc counterexample).
+- SV Lemma 1 a.e.: expected to hold for C² interfaces by a second-order test, (2κ_x−1)(2κ_y−1) ≥ 1 for one colour and the reverse sign
+  for the other (one mind).
+- Verbatim statements for the claim list.
+- The fences.
+
+```
+hunch: stable-voronov-needs-lemma-6.1-with-holes
+  claim: the only obstruction to T-Q is that a vanishing-density defect set can contain every trichromatic point; a version of Voronov's
+         Lemmas 2.2/6.1 in which holes count as a free colour closes it
+  basis: derived (SV §9's excision of vertex neighbourhoods; Voronov's proof is driven entirely by trichromatic points and bicycles)
+  falsifier: a proof of T-Q that never locates a trichromatic point, or a band-proper six-colouring plus a free colour of density → 0
+  registered: 2026-09-26
+  status: open
+```
