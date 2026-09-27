@@ -438,3 +438,50 @@ terminal modification on the whole plane; **no stubs arise**, because every bend
 half-planes through `τ_A`; the tangent bend's `κ` (a scan) — derived as `1 − κ ≪ 1 − 2κ_Y`.
 
 ## Stage N2-3 — SAVED
+
+## Stage N2-4 — SAVED: the terminal map (item 2) — FLANK's exception placed; divergence 1′ named, with a new object (the stuck ray)
+
+*Frame of FS110-N4 §N4-2: a colour `c` with a horn `H₊` along `+a` at `v`, arcs of upward curvature `κ₋ < κ₊` in `[−1, 1]` (N3-DEG with unit arcs, row 5),
+flanks `g` above, `h` below; `N = v + n`, `S′ = v − n`; chains `P_k = v + kn` with curvatures `λ_k < υ_k` as in N4-FIN.*
+
+**N2-FLANK-Q — FLANK's exception is a (Q) centre, and its non-exception at bound `±1` is an (R2) arc [hand, one mind; the failure itself two minds:
+N, NB].** Let `κ₊ = 1`, so `H₊`'s upper arc `α_N` lies on `ω(N)`, with `s_in(α_N) = g` (the flank, inside `B(N, 1)`) and `s_out(α_N) = c`. At a vertex
+with `int D_c(v) = ∅` (the only place FLANK is used), N3-DEG gives an out-type `c`-tile at `N`: `c ∈ P_cl(N)`, an out-contact of `α_N`.
+- *FLANK's exception* (an in-type `g`-tile at `N`, Siamese with the flank) puts `g ∈ P_cl(N)`: `α_N` is **both** kind at `N`. In a terminal map
+  (N2-RED plus W-MERGE, RAY, SHAVE with the corrected shadows) a both arc is (Q): **`N` carries at least four colours.** Moreover the flank tile is then
+  inside `B̄(N, 1)`, and once N4-STUCK (ii) makes `g` one sector filling the `+n` side, **both** horns' upper arcs lie on `ω(N)`: the exception is one
+  unit arc of `ω(N)` through `v`, never one-sided.
+- *No exception:* `g ∉ P_cl(N)` (an out-type `g` at `N` would put the flank's directions in `{d·n ≤ 0}`), so `α_N` is out-only and, terminal, **(R2)**: a
+  `g`-tile along the radius-2 circle about `N`, which passes through `S′` tangent to `a` with upward curvature `1/2`. That tile is exactly FLANK's
+  out-type `g`-tile at `S′`, and `f̃(1/2) = 1` = `κ₊`: it shadows all of `H₊` (`σ_g = κ₊`). Mirror at `κ₋ = −1`: (Q) at `S′`, or (R2) through `N` with
+  `f(−1/2) = −1` (NB's FLAT, exact).
+So **every horn bound `±1` sits on a (Q) or an (R2) unit arc** — divergence 1′'s first half placed as A2 asked.
+
+**N4-STUCK under unit arcs [hand, one mind].** (i) holds with bounds in `[−1, 1]`. (ii) holds: the in-type `g`-contact at `N` gives the same half-plane
+`{d·n ≥ 0}` as the out-type one at `S′`, and "`g₋ = h₊` has in- and out-contacts at one point" is still impossible (N3-CONF). (iii)–(iv) change only at
+the exceptions: an in-type `g` at `N` (then `N` is (Q), `|P_cl(N)| ≥ 4`), an arc of `ω(v)` through `N` (row 8's), or NB4′ at `N`. **So N4-PROP runs
+along the normal line until it meets a point that is a (Q) or (R2) centre or an NB4′ exception, within distance 1 of a unit arc.**
+
+**N2-RAY — divergence 1′'s second half: N4-FIN's application fails at a chain's end, and a one-sided chain is consistent [hand, one mind].** N112-END
+(and NB-END) exclude `λ_{k+1} = −1` or `υ_{k−1} = 1` only when the arc's centre `P_k` itself carries the stuck structure. At a chain's **end** the centre
+is not stuck, so a finite chain may end with its outermost bound exactly `±1` (the arc (Q) or (R2) at the next point). N4-FIN forbids only bi-infinite
+chains, and **the other direction may run to infinity**: from `λ_0 = −1` the recursion `λ_k ≤ f(λ_{k+1})` is met with equality by `λ_k = −1/(k + 1)`,
+`υ_k = 0` (straight upper arcs), `k ≥ 0` — N4-FIN's upward bound (`υ > 0` dies in `1/υ` steps) never fires. N's row 9 ("its application also
+survives") is overstated on this second count as well as on NB's. **So N4-CONE ("no colour has two sectors at any vertex of a terminal map") is a GAP
+under unit arcs**, at: (a) finite stuck chains between two exceptions; (b) the **stuck ray** — a one-sided infinite chain of degree-4 vertices at unit
+spacing from a (Q)/(R2)/NB4′ exception, horn curvatures tending to 0. Neither is refuted or realised here; realisation is a whole-line object, not a
+local fragment.
+
+**N2-TERM — the terminal-map statement (item 2) [hand, one mind; over N2-RED, N4-TERM's enumeration, NB4′].** *Every valid map has a valid
+modification `M*`, creating no unit arc, in which:*
+1. *every unit arc is (Q) (both side colours at its centre, `≥ 4` colours there, the two side cones covered by distinct other colours) or (R2);*
+2. *every vertex is cubic (`≤ 3` colours, one sector each; sectors possibly horns), or an **NB4′ exception** (`≥ 4` colours: on the (E1) branch a
+   unit-arc centre with `≥ 60°` or `≥ 6` centred arcs, on the (E2) branch a vertex whose ring point lies in the closure of an arc centred at a ring
+   point), or **stuck**;*
+3. *every stuck vertex lies on a stuck chain along its normal line; the chain is not bi-infinite; each end that is not at infinity is within distance
+   1 of a (Q) or (R2) arc or an NB4′ exception, and every horn bound `±1` on it is a (Q) or (R2) arc (N2-FLANK-Q). One-sided infinite chains: GAP.*
+*Six is spent* in NB4′ (the ring's two colours) and in N4-STUCK (NB-4 at `N`); N2-RED, N2-FLANK-Q, N2-RAY spend nothing. *Seven-colour control:* the
+hexagonal seven-colouring is terminal, cubic, with no unit arc and no stuck vertex. *The strip (card X):* all its arcs are (Q) (X1), so N2-RED does
+nothing there; its midline vertices are NB4′'s (E1) exceptions (four arcs, `62.09°`); no step of this stage forbids it.
+
+## Stage N2-4 — SAVED
