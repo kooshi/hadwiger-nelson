@@ -136,8 +136,8 @@ MR in full" — true until FS-113's row lands.
 - 28: "Bearing on χ ≥ 6: none." → "Bearing on the answer: none."
 - 29: "Bearing on χ ≥ 6: none; ℚ(√167)'s gap is now [5, 7]." → "Bearing on the answer: none; ℚ(√167)'s gap is now [5, 7]."
 - 30: "Bearing on χ ≥ 6: given MR, rung D is six over ℚ(√635087), and six for measurable colourings modulo null sets of unit pairs (G81)." →
-  "Bearing on the answer: link 1 — given MR, rung D is the value at ℚ(√635087) and of `χ_m⁰(ℝ²)` (G81)." (`χ_m⁰` is § Notation-free but defined
-  in § The aim's link 1 as exactly "modulo null sets of unit pairs".)
+  "Bearing on the answer: link 1 — given MR, rung D is the value at ℚ(√635087) and of `χ_m⁰(ℝ²)` (G81)." (`χ_m⁰` has no § Notation line; § The aim's
+  link 1 defines it as the fewest colours in a measurable colouring whose unit pairs are bichromatic almost everywhere.)
 
 **Bytes:** `CLAUDE.md` 295,846 before, **295,825** after (−21), against the 300,000 limit.
 
@@ -154,3 +154,40 @@ MR in full" — true until FS-113's row lands.
 
 **Checks, exit statuses read directly:** `claude_md_fact_audit.py --base a5fe409d` exit 0, "AUDIT PASSED (0 failure(s))", LOST 0 in every
 class; `--dupes` exit 0, 10 runs; `data/rerank-2026-09-27/rk_mirror_check.py` exit 0, PASS (64 ranked stubs).
+
+## Stage 5 — SAVED (the three inventories' open items)
+
+Every item whose status cell read "open" in the three inventories, checked against the tree; status cells only were edited. None is left open.
+
+| inventory | item | kind | new status |
+|---|---|---|---|
+| FS-106 | 78 | result (FS106-C done) | done — rows 131–132 and 40; `plans/FS106-derivation.md` (46 entries, 46 § B lines); G82; stubs FS-108, FS-109 |
+| FS-106 | 79 | owner ruling (row 131 over A2's addendum) | done — row 131 |
+| FS-106 | 80 | correction owed | done — `[deGreyParts2023]` in `BIBLIOGRAPHY.md`; `CLOSED-QUESTIONS.md` §3's `d(6) = 1` entry carries "repaired … except one edge case, `d = 2`", since closed at FS-110: **draft D1 below** |
+| FS-106 | 81 | slip | done — recorded at `plans/FS106-regular-half.md` §R-close 1.0 Q2 |
+| FS-106 | 82 | owner ruling (six-framed bearings carried) | done — `plans/RERANK-2026-09-27.md` and BK stages 3–4 |
+| FS-106 | 83 | tool defect (nested brackets) | done — BK stage 2 |
+| FS-107 | 35 | result (FS107-C done) | done — row 133; `plans/FS107-derivation.md` 16 entries = 16 § B lines (the file has held 16 headers since C's own commit 18d3a50e; C's report's "19" is a count of something else) |
+| FS-107 | 36 | owner ruling (ranking) | done — applied, since superseded by FS-110's close and the ranking pass (FS-112 at 1) |
+| FS-107 | 37 | slip | done — the stub kept Q-full and Q-rule apart; FS-110 ran both |
+| FS-107 | 38 | owner ruling (six entries granted to X) | done — FS107-X stage 2 (c334073a); all six present with ASCII ids |
+| FS-107 | 39 | tool defect (parenthetical, non-ASCII) | done — BK stage 2 |
+| FS-110 | 109 | result (FS110-C done) | done — its "under check (CE)" resolved by items 112–113 |
+| FS-110 | 110 | slip | done — recorded in `data/fs110/fs110-c/reconciliation.md` §1.0 |
+| FS-110 | 111 | owner ruling (front page waits for CE) | done — items 113–115 |
+| FS-110 | 112 | result (FS110-CE done) | done — FS110-CE1–CE7 filed (BK stage 1) |
+| FS-110 | 113 | owner ruling (row 134 in Form A) | done — row 134, the two cells, and CB's D5 corrections in row 134 and § B |
+
+## Drafts for the owner (files BK does not own)
+
+- **D1 — `CLOSED-QUESTIONS.md` §3, the `d(6) = 1` entry** (FS-106 item 80; `CLOSED-QUESTIONS.md` is LP's in this run). It reads: "`[SokolovVoronov2025]`
+  answers no — its printed proof repaired at FS-106 except one edge case, `d = 2` (row 132)." Row 132 now says of polygonal colourings "(the
+  `d = 2` edge case does not arise: FS-110's CB and CD, both blind)". Proposed: "`[SokolovVoronov2025]` answers no — its printed proof repaired at
+  FS-106, and its one edge case, `d = 2`, closed at FS-110 (CB, CD, both blind; row 132)."
+- **D2 — FS-101's ranked row in `plans/FRONTIER-STUBS.md` and its mirror in `CLAUDE.md` § Paths forward (rank 8)** say no row carries MR in full;
+  true until FS-113's row lands (the owner's, after this job). FS-101's stub now points at FS-113 (stage 3).
+- **D3 — FS-101's ranked row**, "seven by FS-110's *no* with FS-111", predates FS-110's close; FS-111's own row reads "decisive jointly with row
+  134 … and FS-112's unit-arc half". Proposed: "seven through row 134, FS-111 and FS-112". The stub now says so (stage 3).
+- **D4 — FS-60's ranked row** says "moves 13 field values from the checker's word to the kernel's"; the stub's old bearing said "six", and its §1
+  and §3 list five lower-bound witnesses and six upper halves. The stub's new bearing names no number; the row's 13 is worth a recount.
+- **D5 — the brief's "26 stub files"**: `plans/RERANK-2026-09-27.md` § 3 lists 27 files (28 locations); all were done.
