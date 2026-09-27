@@ -1,6 +1,6 @@
 # The consolidation and library run, 2026-09-27 — run record and inventory
 
-*Opened by the product owner (the top-level session), 2026-09-27 16:00 UTC by the clock. The owner is its only writer; jobs send their items
+*Opened by the product owner (the top-level session), 2026-09-27 15:45 UTC by the clock (the first draft said 11:00, written before reading the clock — corrected). The owner is its only writer; jobs send their items
 to the owner, who logs them the same turn (WORKFLOW step 5's inventory rule, applied to a run that is not a milestone). Agent ids live only in
 the owner's job log, never here.*
 
@@ -41,9 +41,9 @@ domain landed, but look around the recent articles for anything that might be us
 
 | job | brief | touches | state |
 |---|---|---|---|
-| **LP** — the papers | `data/consolidation-2026-09-27/briefs/LP-papers.md` | `BIBLIOGRAPHY.md` (its papers' entries, § R), `CLOSED-QUESTIONS.md`, `LEDGER.md` (claim list and novelty sentences), `plans/STUB-regular-half-residuals.md`, library notes; `CLAUDE.md` by draft only | launched |
-| **LW** — the archive walk | `data/consolidation-2026-09-27/briefs/LW-archive-walk.md` | `~/source/library/geombinatorics/`, `BIBLIOGRAPHY.md` (a new section), its record; everything else by draft | launched |
-| **BK** — the bookkeeping | `data/consolidation-2026-09-27/briefs/BK-bookkeeping.md` | `CLAUDE.md` (§ Where the problem stands items 28–30 only), `plans/FRONTIER-STUBS.md`, the 26 stub files of `plans/RERANK-2026-09-27.md` § 3, `plans/FS110-derivation.md`, `LEDGER.md` § B, the FS-106/107/110 inventories' status cells | launched |
+| **LP** — the papers | `data/consolidation-2026-09-27/briefs/LP-papers.md` | `BIBLIOGRAPHY.md` (its papers' entries, § R), `CLOSED-QUESTIONS.md`, `LEDGER.md` (claim list and novelty sentences), `plans/STUB-regular-half-residuals.md`, library notes; `CLAUDE.md` by draft only | launched 15:49 UTC |
+| **LW** — the archive walk | `data/consolidation-2026-09-27/briefs/LW-archive-walk.md` | `~/source/library/geombinatorics/`, `BIBLIOGRAPHY.md` (a new section), its record; everything else by draft | launched 15:49 UTC |
+| **BK** — the bookkeeping | `data/consolidation-2026-09-27/briefs/BK-bookkeeping.md` | `CLAUDE.md` (§ Where the problem stands items 28–30 only), `plans/FRONTIER-STUBS.md`, the 26 stub files of `plans/RERANK-2026-09-27.md` § 3, `plans/FS110-derivation.md`, `LEDGER.md` § B, the FS-106/107/110 inventories' status cells | launched 15:49 UTC |
 
 ## Items
 
@@ -52,3 +52,5 @@ domain landed, but look around the recent articles for anything that might be us
 | 1 | owner ruling | `.env` made git-ignored before any use (1797700a); the fetcher committed (e11db724) with no credential in it | owner | done |
 | 2 | owner ruling | Johnson 2006 filed (identity checked from the rendered first sheet: title, author, pp. 209 ff.); the three old issues and the 45 recent ones filed under `~/source/library/geombinatorics/` | owner | done |
 | 3 | owner question | For Kooshi: does S–V Question 2's Condition-5 half (row 134) get a `CLOSED-QUESTIONS.md` row (the owner recommends yes, as a partial answer)? Does MR in full in Lean get its own stub? | RK §4; FS-110 report | asked |
+| 4 | slip | The owner wrote the run's opening time (11:00) before reading the clock (10:45) — the recurring slip; corrected in place | owner | done |
+| 5 | owner ruling | LP, LW and BK launched together at 15:49 UTC by the clock (three of three; briefs a5fe409d); the fact audit's base for the run is a5fe409d | owner | done |
