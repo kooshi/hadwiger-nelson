@@ -412,3 +412,35 @@ rows (listing only):** Kruskal 2008; Alm–Manske 2013 (abstract read, FS110-P);
    FS-108 item 2 (S–V Lemma 3's transplanted bicycle at `√3 ≤ d < 2`), shared with seam 4.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the fixed claim list (`data/fs110/claims.md`) and the advisor's first advice
+
+**The list** (statements only, verbatim, each with its object LIM, SEQ or both):
+- §0, definitions: `𝓜_K`, tight, Siamese/outer, `P_ess` and `P_cl` (D-TYPE), covering pair, tangent pair and bowtie, cusp, ring junction, sliver
+  (undefined in its source, so every user defines it), fat junction and blocking, close pair.
+- §1, the questions: Q-full, Q-rule, Q-rule_cl and Q-rule_ess, S–V Question 2 with Conditions 5 and 6, and C-ACT1 (Act One).
+- §1b, the local calculus: A-EXACT, A-CIRC, A-SIX, C-TAN-POS, D-TYPE.
+- §2, the seams: SEAM-T1, SEAM-T2 (the double unit-arc rhombus), SEAM-T with V-C5 and C-TAN-K, SEAM-B with C-BOW-K, SEAM-C with C-CUSP-K,
+  SEAM-S (K-KILL's second half, C-T-BIKE, (A″), FS-108 item 2), V5 with C-V5-K, and C-SEAMLIST.
+- §3, 23 shared constraints with their grades.
+- §4, twelve killing tests; §5, five failure clauses; §6, not claimed.
+
+**The advisor's advice** (FS110-A to FS110-P, 2026-09-27; its record `plans/POROS-2026-09-27-fs110-tangency-seam.md` §1, commits 445ae7c9 and
+c728acef):
+- **Adopted:**
+  - Both type readings, and the covering pair (A-SIX's (2, 4) case).
+  - The local calculus, fixed in the list before either side starts, and derived by both sides at stage 1 while retraction is free (G51).
+  - The tangent seam split into T1 and T2.
+  - Four-colour vertices added to V5.
+  - Three killing tests: C-TAN-POS's, the bicycle's formula 3-colouring, and Act One's intersecting family.
+  - The fences, the advisor's own record included, and blind verifiers fenced from §G and §IQ.
+  - A fresh competition advisor.
+- **Disagreements, recorded:**
+  - (1) The advisor recommends stating Q-rule on closure types. I state it both ways and use Q-rule_cl as the working form, but its necessity rests on
+    A-EXACT at one mind, so it counts as necessary only after a second derivation. Q-rule_ess rests on W-TAN at two minds.
+  - (2) The advisor's sketch reduces the cusp to the tangent seam under closure types. SEAM-C stays its own seam until that is derived (G21: cusps were
+    dropped once already).
+- **Route hints withheld from the briefs:** Y's first object (the printed index's failure configuration built into the double unit-arc rhombus) and N's
+  first steps (Act One and the bicycle). The advisor offers both as hints; they stay in its fenced record.
+
+## Stage 4 — SAVED
