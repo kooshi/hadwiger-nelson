@@ -288,7 +288,7 @@ region points, boundaries and vertices carrying no colour (D-AEMAP); for maps wh
 
 ### Would-have-searched-here log (V3)
 
-- Stages 0–1: none (reading and hand verification).
+- Stages 0–2: none (reading and hand verification).
 
 ### V3 stage 0 — SAVED: quotation check of the V3 brief
 
@@ -376,3 +376,60 @@ excluded by S–V's Condition 5), and it survives region-only (`S` and `T` alone
   [hand, one mind].
 
 ### V3 stage 1 — SAVED
+
+### V3 stage 2 — SAVED: `[Thomassen1999]`, the nice-map theorem
+
+*Read in full from the held text `~/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt` (Amer. Math. Monthly
+106 (1999) 850–853, all four pages; an OCR text, not the page images). **OCR damage that bears on the mathematics:** "open discs of radius 2" in
+the definition of area must be radius ½ (the proof places disjoint discs about points pairwise more than 1 apart; with radius 2 condition (ii)
+is empty in the plane); "Since S has diameter at least 12k + 3" against condition (iii)'s "12k + 30" and the last line's "12k + 29"; indices
+("x,1x1", "D,(x)") garbled throughout. The page images should be checked before any of these is quoted as the paper's.*
+
+**Definitions and theorem, verbatim (OCR text).**
+- Nice, in the plane: "The upper bound 7 is obtained from a hexagonal tiling of the plane such that the hexagons are regular and of diameter
+  slightly less than 1. All points inside a hexagon are colored with the same color. Two hexagons are colored differently if the distance between
+  them is less than one. A coloring of this type will be called nice."
+- Nice, in general: "We let G be a connected graph on S, i.e., the vertices of G are elements of S, and the edges of G are simple arcs on S that
+  are pairwise disjoint except at a common vertex. Moreover, we assume that each face (i.e., arcwise connected component of S\G) has diameter less
+  than 1, is homeomorphic to a disc, and is bounded by a cycle in G. Now a nice coloring of S obtained from G is a coloring such that each color
+  class is the union of faces (and part of their boundaries) such that the distance between any two of these faces is greater than 1."
+- The conditions: "(i) Every noncontractible simple closed curve has diameter at least 2. (ii) If C is a simple closed curve of diameter less than
+  2, then the area of int(C) is at most k. (iii) The diameter of S is at least 12k + 30."
+- "Theorem 1. Let G be a connected graph on a surface S satisfying (i), (ii), and (iii). Then evety [sic, OCR] nice coloring needs at least 7
+  colors."
+- "Lemma 1. If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G has a vertex of degree at least 6."
+
+In the plane (i) is vacuous, (ii) holds with an absolute `k`, (iii) holds; the theorem's content there is: a nice colouring of the plane needs 7.
+
+| step | verdict | minds / grade | the argument, and what uses niceness |
+|---|---|---|---|
+| **Lemma 1** | **TRUE, one inference supplied** | 1 / [hand] | Max degree `≤ 5`, `x` of maximum degree. Degree 3: `{x} ∪ D₁(x)` is `K₄` and closed — 4 vertices. Degree 4: each `y ∈ D₁(x)` has `≥ 2` neighbours in `D₁(x)` (the cycle on `D₁(y)` through `x`), so `≤ 1` in `D₂(x)`, and each `z ∈ D₂(x)` has `≥ 3` neighbours in `D₁(x)` (its two cycle-neighbours in `D₁(y)` avoid `x`, plus `y`); so `|D₂| ≤ 1`, `D₃ = ∅`, `≤ 6` vertices. Degree 5: `y ∈ D₁(x)` has `≤ 2` neighbours in `D₂(x)`; **"every neighbor z of y in D2(x) has at least two neighbors in D1(x)" needs the step: `y` is one, and at most one of `z`'s two cycle-neighbours in `D₁(y)` lies in `D₂(x)` (only one other is available), so the other lies in `D₁(x)`** — supplied; then `|D₂| ≤ 5`, each `z` has `≤ 1` neighbour in `D₃` (two would force two `D₂`-neighbours on the cycle of `D₁(z)`, degree 6), each `w ∈ D₃` has `≥ 3` in `D₂`, so `|D₃| ≤ 1`, `D₄ = ∅` (a `D₄` vertex has no cycle-neighbours in `D₁(w)`), `≤ 12` vertices. Colour-free. |
+| **The rainbow step** ("x and its neighbors must have distinct colors because x corresponds to a face of diameter < 1") | **TRUE; niceness used** | 1 / [hand] | Faces whose boundary cycles meet are at distance 0; two faces meeting the closure of face `x` are at distance `≤ diam x < 1`. **Nice** ("distance … greater than 1" between same-coloured faces) makes both pairs differently coloured. |
+| **The nice case** (all `x₁,…,x_k` distinct) | TRUE, one hypothesis unstated | 1 / [hand] | Consecutive faces around `C_x` share the vertex between them, so `D₁(x)` carries the cycle; `M` connected; diameter gives `> 12` vertices; Lemma 1 and the rainbow step finish. **Local finiteness of `M`** (Lemma 1's hypothesis) is not stated or argued; it holds when each vertex of `G` meets finitely many faces, which faces bounded by finite cycles force near a vertex (sketch). |
+| **Repeated appearances; 2-separators** | TRUE at the level of each claim; four topological steps asserted | 1 / [hand] | Checked: dropping vertex-only repeats keeps consecutive entries adjacent (both meet the dropped vertex); `{x, y}` sharing two edges is a 2-separator (`R` contractible in the plane). **Asserted, not argued:** "`M − x` is connected"; "`M − x − y` is connected unless `y` appears twice"; "`M − x − y` has precisely one such component" (the class argument with `e₁,…,e_m`); "one of the edges `xu` or `xv` is crucial". None is false as far as I can see; none is written. |
+| **The count in `int(R)`** ("By (ii), there are at most k points Pz") | **TRUE after one repair; niceness used** | 1 / [hand] | Points `P_z` in colour-1 faces inside `R` are pairwise `> 1` apart (**nice**); (ii) counts disjoint discs *contained in* `int(R)`, and the discs about the `P_z` need not be. **Repair (plane):** the `P_z` lie in `int(R)`, of diameter `< 2`, so the discs of radius ½ about them are disjoint and lie in a disc of radius `2/√3 + ½` — at most 10 of them; take `k = 10` (a general surface needs the area defined by discs centred in the set). |
+| **H, crucial edges, the end** | TRUE at the level of its claims | 1 / [hand] | `H` locally Hamiltonian (the reduced cyclic sequence has `≥ 3` distinct entries, else `M` has diameter `≤ 12k + 1`); degree `≥ 6` in `H` finishes by the rainbow step; otherwise `≤ 12` vertices, `≤ 30` edges, and pasting gives diameter `≤ 12k + 29`. |
+| **Theorem 1 (plane)** | **TRUE** | 1 / [hand] | Via the steps above, with the four asserted topological steps accepted. **A second route for locally finite `G`, independent of them:** each colour class's closure is a locally finite union of closed faces, each of diameter `< 1`, pairwise more than 1 apart, so it realizes no distance 1; six such closed sets covering `U₃(0)` contradict `[Voronov2023]` Theorem 1.3 (V-1.3, verified in §2.1). Two lines. |
+
+**Where niceness is used, and what survives a.e.** (for FS106-TS's C-AE-NICE).
+- Niceness is used at exactly **two** steps: the rainbow step (touching faces, and two faces touching one face, differ) and the count of
+  same-coloured faces inside a curve of diameter `< 2`. Everything else is graph topology on `S` and the hypotheses on `G` (face diameter `< 1`).
+- **Boundary colours are never used**: niceness is a condition on faces as sets ("the distance between any two of these faces"), and the phrase
+  "(and part of their boundaries)" is never read. So **the theorem with open faces coloured and boundaries free is Thomassen's theorem with the
+  same proof**, and it survives a.e. in that sense. Proposed statement for the list:
+  **C-AE-NICE** — "Let `G` be a connected graph in `ℝ²` whose faces are open topological discs of diameter `< 1`, each bounded by a cycle of `G`. If
+  each face receives one of `k` colours so that any two distinct faces of one colour are at distance `> 1` (points of `G` carry no colour), then
+  `k ≥ 7`." TRUE by `[Thomassen1999]`'s proof, and for locally finite `G` by V-1.3 in two lines — [hand, one mind].
+- **The a.e.-proper strengthening does not follow.** If faces of one colour are only required not to realize the distance 1 between points of open
+  faces (**C-AE-NICE′**, the same statement with "at distance `> 1`" replaced by "with no two points at distance exactly 1"), both niceness steps
+  fail: two small faces touching face `x` may share a colour when their union has diameter `< 1`, and the count of same-coloured faces in a small
+  disc is unbounded. C-AE-NICE′ is a map-type colouring with faces of diameter `< 1` — within C-AE-Q2's scope (Question 2), not Thomassen's. For
+  locally finite `G`, C-AE-NICE′ with closed classes realizing no distance 1 reduces to C-AE-CLOSED (§2.1: open).
+
+### V3 stage 2 — theorems proved
+- `[Thomassen1999]` Lemma 1 (one inference supplied) and Theorem 1 in the plane (the count repaired with `k = 10`; four topological steps
+  asserted in print, accepted) — [hand, one mind].
+- Nice colourings of the plane from a locally finite `G` need seven by V-1.3 in two lines — [hand, one mind].
+- C-AE-NICE as proposed holds; C-AE-NICE′ is not reached by the proof — [hand, one mind].
+
+### V3 stage 2 — SAVED
