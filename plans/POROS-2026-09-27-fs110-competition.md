@@ -1118,3 +1118,29 @@ N3: 0 (card 4 answered, no verdict changed). Y3: 0 so far. A5: 0.
 - FS106-V's SV-1 and Props. 7–8 rows — read against: S–V Thm 1 held for cubic maps only if it is Cor. 1 — surprised: no; it is Cor. 1, one mind, and the degree reduction is proved for polygons only
 
 ## Stage A5-2 — SAVED
+
+## Stage A5-3 — SAVED: Y3's answer to card 4
+
+**Y3's answer, verbatim** (by message, copied to "main"): "I work in the reading "|P_cl(u)| = 3 at any degree". Y3-GP (a ring whose change points are
+never ≡ 0 mod 60° apart winds W ≡ 3 mod 6) and Y3-PROP (N2-TRANS, rederived with NB-5 at both ends) hold at bowties; Y3-SIX (no ring of exactly six
+arcs) uses three essential sectors, so degree 3 only, open at bowties. At a bowtie (a,b,a,c), tile b's two b|a edges form one homotopy path linking the
+flanking vertices {a,b,x}, {a,b,y} by (x y); the two N2-TRANS steps give (x c)(c y); they agree iff x = y or c ∈ {x,y}, else W = 0 [hand, one mind].
+Record: plans/FS110-Y-construction.md stage 8."
+
+**Card 4 scored:** both sides work in one reading, `|P_cl(u)| = 3` at any degree, **independently** (N3 from its record's §4.3; Y3 from the card).
+Retractions: none (Y3's pre-round answer read "trivalent" as degree 3; its answer adopts the other reading without changing a verdict — I do not count
+it, since the pre-round answer named no verdict that the reading reverses; if Y3 withdraws the bowtie clause of its bet, that is a retraction).
+
+**What the answer adds (one mind each, not checked by me yet):**
+- **Y3-PROP** is N2-TRANS re-derived blind by the construction side, with NB-5 at both ends: with N2 and NB, N2-TRANS now has three minds, two of
+  them independent of N (one blind). Its nerve step's grade is to be read at the hand-back.
+- **The bowtie consistency condition** (x = y or c ∈ {x, y}, else `W = 0`) is the construction side **extending N2-FLIP's bookkeeping across a
+  bowtie**, which the owner's scope note said was owed by "either side". It is a NO-direction constraint derived by the YES side: a winding map's
+  bowties must have flanking third colours equal, or one of them `c`. That shrinks the construction space; it does not kill it.
+- **Y3-GP** and **Y3-SIX** are ring-level; Y3-SIX (no six-arc ring) is S–V Prop. 17's content (N3's pre-round answer: "the six-arc rotating ring at a
+  cubic vertex is S–V Prop. 17's kill under Condition 5"), derived on the construction side at degree 3 and open at bowties.
+
+**Nothing carried.** Y3's lemmas stay with Y3; N3 gets none of them. The two sides now hold the same object and, for the first time, overlapping
+lemmas (N2-TRANS three ways; the six-arc ring twice). I compare at the hand-backs.
+
+## Stage A5-3 — SAVED
