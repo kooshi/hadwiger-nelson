@@ -509,11 +509,14 @@ T-J38-4 [tools exact] (row 34 of the post-close inventory): "tight dyadic tower 
   over every real field includes the bipartite ones: read the smallest-value sub-class first); G77 (a uniform selection is a classification
   claim); G50 (grep `BIBLIOGRAPHY.md` by arXiv id and Zbl number before calling a paper unheld).
 
-## 11. Bearing on χ ≥ 6
+## 11. Bearing on the answer
 
-**None directly.** At ℚ(√47) a four-colouring falsifies the five-clause and a proof of five confirms it. At ℚ(√167), T-J39-5 converts the
-conjecture's "≥ 6" into the plane's measurable chromatic number, `χ_CP(ℝ²) ≥ 6`, given MR, PL(23, 43) and 43's depth: it locates six, and does
-not advance it. Since wave 3 (row 125, [hand]): "`Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`", and "No held result gives either conjunct". On the programme: MR is one lemma under three exposed predictions.
+**None on the answer.** MR at the fields link 1 of the direction uses is held (rows 120, 128; at de Grey's field walked once, FS-105), and
+the stub's left items — TR-ROT at NA₀, C-4, row 100's exception fields, the complex place — sit at fields the direction does not visit. At
+ℚ(√47) its five-clause is met (row 121). At ℚ(√167), T-J39-5 converts the conjecture's "≥ 6" into the plane's measurable chromatic number,
+`χ_CP(ℝ²) ≥ 6`, given MR, PL(23, 43) and 43's depth: it locates six at link 1's question and does not advance it. Since wave 3 (row 125,
+[hand]): "`Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`", and "No held result gives either conjunct". Its kernel port is FS-101; MR in
+full in Lean is FS-113's (`plans/STUB-mr-in-lean.md`).
 
 **Cost.** Stage 1, one verifier (about one crunch slot); Stage 2, minutes; Stage 3, a day of reading; Stage 4, one derivation and one verifier;
 Stage 5, unpriced — "a Furstenberg-type wall (J36 F5), so weeks at the least; a prior-art reading first" (J39 §4.4); P1, unpriced.

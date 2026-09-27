@@ -71,16 +71,15 @@ half lives. G36 already records the `d = 2` instance measured on our own objects
   classical; the literature to search first is **quadratic forms over number fields / Hasse–Minkowski**, not
   the colouring literature. (Prior-art gate, `WORKFLOW.md` step 3.2.)
 
-## 5. Bearing on χ(ℝ²) ≥ 6, stated honestly
+## 5. Bearing on the answer
 
-**Low-to-medium, and mostly indirect.** This does not build a 6-forcer and does not touch a wall. What it buys:
-(a) a *complete* statement of what the project's own central instrument can and cannot forbid, which is the kind
+**None on the answer; low-medium as mechanism.** It builds no forcer and touches no wall, and the direction does not use the residue
+method it classifies: at the fields where the field is the plane every place mixes (row 128). What it buys:
+(a) a *complete* statement of what the project's own residue instrument can and cannot forbid, which is the kind
 of thing a write-up needs and which G38/G43 currently assert rather than prove; (b) C3, which if true is a
 structural explanation of the residue method's blindness above four; (c) it is a **derivation**, cheap, with the
 machinery in the kernel already, and it answers the number-field analogue of a completely-solved rational
 problem — the shape G46 says to prefer over an object search.
-
-**It should NOT displace FS-6.** The 6-hunt's design target is unaffected by any of this.
 
 ## 6. Cost
 

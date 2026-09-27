@@ -29,7 +29,10 @@ only lattices inside a quartic CM subfield (implementer F, P4).
 G68, G69, G48 (the six-level question lives in 6-open fields), G55 (the chain theorem's five-colour consequences over K), G26 and FS-49
 (one five-colour virtual edge at distance 2), G54 (tight or slack at `k = 5`), G56/G59 (the window planes' colourings). Rows 64, 66, 78.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-Medium: it is the screen that says where FS-49's gadget can be built at all, and a "loose everywhere" table would retire the lattice
-fabric route to six in those fields.
+None beyond FS-49's (one five-colour virtual edge at distance 2, whose six-chromatic graph would give `χ(ℝ²) ≥ 6` with no MR; a finite
+witness for six is out as a route, Kooshi). Medium as FS-49's supply: it is the screen that says where a five-colour compulsion, the
+chain's input to a finite six-graph, can live over the 6-open fields, and a table loose everywhere retires the lattice route to six in
+those fields. Since row 123 every 6-open real field needs five through MR, with no forcer. The direction (links 1–6 of `CLAUDE.md`
+§ The aim) does not use it.

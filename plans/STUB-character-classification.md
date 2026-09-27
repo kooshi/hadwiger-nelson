@@ -47,9 +47,10 @@ residue characters at the primes of residue field `𝔽₃`; two independent der
 
 ## Why it matters, stated honestly
 
-**Bearing on χ ≥ 6: none directly.** It decides the *shape* a character falsifier of the local–global conjecture would need: CLG-g already
-excludes character colourings with fewer than `L(F)` colours at `k ≤ 5` and over quadratic fields; the exception is the only character
-route left at six and seven, and the classification says whether a character colouring can be local at no prime at all.
+**Bearing on the answer: none;** the direction does not use character colourings. Field-level, it decides the *shape* a character
+falsifier of the local–global conjecture would need: CLG-g already excludes character colourings with fewer than `L(F)` colours at `k ≤ 5`
+and over quadratic fields; the exception is the only character route left at six and seven, and the classification says whether a
+character colouring can be local at no prime at all.
 
 ## Registered expectations (the stub-writer's guesses, to be replaced by the planner's §P)
 

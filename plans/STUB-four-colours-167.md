@@ -313,7 +313,12 @@ them, re-aimed by R5.
 * **Informative failure:** a proof that every graph over ℚ(√167) up to some height is 3-colourable by an explicit non-residue rule.
 * **Not a failure:** an `Unknown` at a budget.
 
-**Bearing on χ(ℝ²) ≥ 6:** none directly; high for the conjecture's account of fields no residue plane bounds.
+**Bearing on the answer:** only through the plane. Six at ℚ(√167) gives `χ(ℝ²) ≥ 6` (its plane is a subgraph of ℝ²'s), narrowing the
+answer to {6, 7}; but it contains `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (row 125, given MR), so it is never cheaper than FS-104's question plus
+product locality, and the direction reaches ℚ(√167) only through FS-104 (link 1's measurable question at six). Its own content is a
+field's: the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119), robust to every level of
+the tower at 23 (row 75); a five confirms and cannot falsify (FS-64). The smallest 6-open real field, every lattice over it of rank ≤ 4:
+the cheapest arena for six by rank [reading, Poros, 2026-09-24].
 
 **Provisional bearings, updated 2026-09-22 (FS-70's close):** G68 (the quotient/fan-gap screen — at three colours a gapped periodic 3-colouring of the lattice R9 would build on kills its chain route by theorem; run it first, minutes), G69 (rigidity prime by prime: the CM field of the 7-cycle triangle's directions, its primes above 5, 7, 11, 13 classified, decides whether any lattice there can be rigid), G65 (the shell-indexed core ceiling on word balls), FS70-T10 (the periodic Kempe screen, `tools/fs70_periodic_kempe.py`, needs only a generator grammar for the field).
 

@@ -34,7 +34,7 @@ claim two derivations, J12 and its blind check J13):
 
 ## Why it matters, stated honestly
 
-**Bearing on χ ≥ 6: none.** Every real field's unit-vector ring has infinitely many split primes, where two-prime rigidity applies; the
+**Bearing on the answer: none.** Every real field's unit-vector ring has infinitely many split primes, where two-prime rigidity applies; the
 one-prime set is a model of what the second prime forbids. Its value is mechanism and a clean dynamical object (a piecewise isometry of the
 square with nine centres), possibly already classified in the discretized-rotation literature.
 

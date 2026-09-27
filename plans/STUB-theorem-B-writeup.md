@@ -513,5 +513,6 @@ construction and names us sixth — but Soifer is the reader most able to tell i
 ## 9. Cost and bearing
 
 Four to six days of writing (up from three to five: the unification is real work). **No compute, no new Lean.**
-Bearing on `χ(ℝ²) ≥ 6`: **none directly** — but the unification is the literature review the programme's own
-next milestones need, and doing it once properly is what stops G49 firing a third time.
+Bearing on the answer: **none** — the stub is ranked on the publication trigger, which since 2026-09-26 is formalization in Lean in full,
+with no declared purchases (`CLAUDE.md` § Publication). The unification is the literature review the programme's own next milestones need,
+and doing it once properly is what stops G49 firing a third time.

@@ -66,11 +66,11 @@ something an exact solver does not.
    **not run**. *Falsifier, registered by M64: the useful directions leave the current base's orbit
    support entirely, so no inequality over the present orbits can see them.*
 
-## §3 — Bearing on χ(ℝ²) ≥ 6
+## §3 — Bearing on the answer
 
-**Indirect, and it must be said so.** This is a measure for a search loop, not a construction. Its
-value is that M62's own angle is an expansion strategy, and today it has no way to tell a
-working expansion from a stalled one.
+**None on the answer; indirect, and it must be said so.** This is a measure for a search loop, not a construction, and the loop it serves,
+M62's search for a five-chromatic unit-distance graph below 509 vertices, moves no value of `χ(ℝ²)`. Its value is that M62's own angle is
+an expansion strategy, and today it has no way to tell a working expansion from a stalled one.
 
 ## §4 — Instruments and addresses
 

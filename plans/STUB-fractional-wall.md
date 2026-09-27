@@ -61,5 +61,7 @@ residue target built from first-level primes (`CLAUDE.md` G43/G59).
 4. **Stop rule:** if step 3 finds no route for 23, 27, 31 or 43, write the wall up as proved at the members that fell and
    open at the rest, and stop.
 
-**Bearing on χ ≥ 6:** none directly — W is a statement about what the residue method can certify, and it neither proves nor
-refutes χ(ℝ²) ≥ 6. Its value is structural (G59) and it sharpens FS-56's prediction from "≥ 6" to "7".
+**Bearing on the answer:** none — W is a statement about what the residue method can certify (`L(F) ≠ 6` for every `F`), and it neither
+proves nor refutes a value of `χ(ℝ²)`; the fields where the field is the plane (row 128) have no window member (first stable places 103;
+131 and 479). Its value is structural (G59): it sharpens FS-56's prediction from "≥ 6" to "7", closes the composite-ideal hatch, and `U₆₄`
+is the cheapest live killing test of G64's norm reading.

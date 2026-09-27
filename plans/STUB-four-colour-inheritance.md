@@ -84,10 +84,12 @@ G71 (the dividing line and its forbids), G69 and G68 (looseness without a gap; t
 next wall), G21 (a periodic search measures its period cap), G65 (a refusal is still a finite graph). Rows 78–79; theorems FS73-T21–T24,
 T29, T30, T31–T35, T36–T38.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None directly; high on the programme. Every five- or six-forcer the hunt builds is a four- or five-colour compulsion on lattice fabric,
-and whether such compulsions are always visible to periodic colourings — and certifiable — is this stub's question.
+None on the answer: its object is compulsions on lattice fabric (Cayley graphs of `ℤ^r`) at four and five colours, a finite-fabric
+programme the direction (links 1–6 of `CLAUDE.md` § The aim) does not use. High on that programme: every five- or six-forcer built from
+fabric is a four- or five-colour compulsion on lattice fabric, and whether such compulsions are always visible to periodic colourings — and
+certifiable — is this stub's question.
 
 ## Where the 2026-09-25 work on this lives
 

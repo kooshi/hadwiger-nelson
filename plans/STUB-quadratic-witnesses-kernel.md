@@ -32,7 +32,8 @@ FS-58 put `χ(ℚ(√11)²) ≥ 4` in the kernel (32.8 CPU seconds, standard thr
 * Each witness costs under two minutes of kernel time (high, from ℚ(√11)'s 32.8 s and the LRAT sizes).
 * **Not a failure:** a field whose LRAT is too large for the kernel pattern at this size — report the price.
 
-**Bearing on χ(ℝ²) ≥ 6:** none; it moves six field values from the checker's word to the kernel's.
+**Bearing on the answer:** none; it moves field values from the checker's word to the kernel's — the five witnesses of §1 and, with row
+57's gap, the upper halves of §3. The direction does not use them.
 
 ## What FS-61 added (2026-09-20) — the input set, and four things to know
 

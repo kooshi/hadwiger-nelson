@@ -32,6 +32,8 @@ counterexample at four colours (FS-76) on arithmetic fabric — the first anywhe
 G68, G69 (rigid fabric plus a wall-breaking copy), G65, G21, G71 (four colours: no `Θ`), G62 and G7 (`ρ₁₅` is the type-M rotation at `n = 4`).
 Row 78; FS73-T31–T35.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None on six. On the programme: the smallest place a four-colour C3-aper counterexample could be on arithmetic fabric.
+None on the answer: a question about periodic colourings of one lattice, which the direction does not use. On that programme: the
+smallest place a four-colour C3-aper counterexample could be on arithmetic fabric — four-colourable with no periodic colouring would be
+the first.

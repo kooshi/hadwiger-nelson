@@ -61,11 +61,13 @@ and `[GLV2009]` are already in the bibliography as listings), searched in that d
 4. **Record** what it licenses: no level of the tower at 43 five-colourable; `α(UD(𝔽₄₃,2)) ≤ ⌊U⌋` against 365; `χ_Bor(ℚ₄₃²) ≥ 6`;
    and, with 23, **the conjecture's prediction at `ℚ(√167)` robust to every level of every usable tower below the spectral refusals**.
 
-## 4. Bearing on χ(ℝ²) ≥ 6, stated honestly
+## 4. Bearing on the answer
 
-**None directly; idle compute and reading-room work.** It completes FS-66's statement for `ℚ(√167)` (23 alone leaves 43 as the
-one tower the certificate does not cover), and it attacks FS-57's fractional wall and FS-65's exact numbers from a direction neither
-stub considered — if this instrument beats the level-3 relaxation at 43 and 47 as it did at 19 and 23, the six-colour thresholds there
+**None on the answer; idle compute and reading-room work.** A residue plane at 43 bounds only the fields that use it, never ℝ², and the
+fields where the field is the plane (link 1) have no usable plane there (row 128). Field-level: it completes FS-66's statement for
+`ℚ(√167)` (23 alone leaves 43 as the one tower the certificate does not cover; "43 at depth" is part of six there, row 125), it is the
+last gap in M3's finite-place window count, and it attacks FS-57's fractional wall and FS-65's exact numbers from a direction neither stub
+considered — if this instrument beats the level-3 relaxation at 43 and 47 as it did at 19 and 23, the six-colour thresholds there
 (`α < 308` and `α < 368`) come into a certifier's reach for the first time. A six refused at 43 or 47 removes a window member (G56).
 
 ## 5. Failure and jackpot clauses

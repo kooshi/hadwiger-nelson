@@ -48,7 +48,8 @@ clause only (neither graph is claimed 3-gap-free). **PB-2**: the spectrum of `Ω
 `[Tardif2022frac]`'s factors once held. **Not feasible as written:** the plan's PB on `UD(𝔽₉, 2)`, `U₄`, `U₃₂` — `E_k(G)` has `k^{|V(G)|}`
 vertices (`3^81`, `4^16`, `4^1024`).
 
-**Bearing on χ ≥ 6: none.** Mechanism only: the answer to "when must a colouring of a product be local at one factor" in the class where
+**Bearing on the answer: none** (product locality is content only at a stable place that is not 6-thick, and link 1's fields have
+none, row 128; § 4). Mechanism only: the answer to "when must a colouring of a product be local at one factor" in the class where
 it is sharp (mixing factors), and a clean no-go (gap-freedom alone, from four colours up). **Provisional bearings:** G54 (tight ⟹ gap-free;
 the drafted product sentence), G61 (3), G71 (heights: Lemma W is the height read two steps at a time), G72 (the criterion came through the
 structural question), row 109 (the mixing selection this stub's DC-2 bootstraps).
@@ -130,11 +131,15 @@ colourings are affine). It is not a theorem anyone here has found.
 | D3 | **The proof or its obstruction**: check the sweep's eigenvalue sketch; the gap-free case without tightness (is gap-freedom in *every* colouring enough, or is the spectrum doing work?) | open |
 | D4 | **The kernel form**, if D3 lands: `Coloring (G ×ˢ H) (Fin 3)` factors through `G` under `GapFree` — row 66's `FanGap` vocabulary already names the hypothesis's negation | days |
 
-## 4. Bearing on χ(ℝ²) ≥ 6, stated honestly
+## 4. Bearing on the answer
 
-None directly. It is mechanism: the justification under FS-58's blind-screen reading and FS-61's A.7, and the three-colour model of
-a statement the programme wants at five colours — *when does a colouring of a product of local targets have to be local at one
-place?* — which is the local–global conjecture's shape (G48) and FS-66's and FS-64's common ground.
+None on deciding `χ(ℝ²)`, and none on its formalization: product locality (PL) is content only at fields with a stable place that is not
+6-thick, and at the fields where every place mixes the field is the plane (row 128, G81), so the direction (links 1–6 of `CLAUDE.md`
+§ The aim) never meets it. **Derived:** PL is necessary for S under HN = 7 and for the conjecture's six-clauses, and its CP form at 23 and
+43, `PL_∃(23, 43)`, is one conjunct of six at ℚ(√167) (row 125; FS-96, FS-59). **Soft as to truth:** Hedetniemi fails for finite graphs
+from four colours up, and these factors do not mix. Its own value is mechanism: the justification under FS-58's blind-screen reading and
+FS-61's A.7 (G61 (3)'s 11 half is now a theorem, its 7 half measured), and the model of a statement the local–global conjecture's shape
+(G48) needs — *when does a colouring of a product of local targets have to be local at one place?*
 
 ## 5. Failure and jackpot clauses
 

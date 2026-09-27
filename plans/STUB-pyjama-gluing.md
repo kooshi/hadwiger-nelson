@@ -36,7 +36,7 @@ group `U_S`, other `S`, and the field clause. Undecided until `[Muchnik2005]` (*
 
 ## Why it matters, stated honestly
 
-**Bearing on χ ≥ 6: none.** It settles attribution for band rigidity (row 95 and FS-91's row) and would make `H_k` effective — a finite,
+**Bearing on the answer: none.** It settles attribution for band rigidity (row 95 and FS-91's row) and would make `H_k` effective — a finite,
 checkable torsion list at every band, which turns every "given `H_k`" in the class theorem into a finite statement.
 
 ## Registered expectations (the stub-writer's guesses)

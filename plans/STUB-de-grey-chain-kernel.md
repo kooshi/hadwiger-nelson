@@ -32,10 +32,11 @@ formalize ("an algebraic explanation … rather than formalizing a big graph", F
    colouring, and Mycielski's theorem (check Mathlib first) for the forced pair.
 6. **The second route** (V7: dB10, dB11 with V6's repair) — only if a consumer wants `P = F` by stripe coupling as well.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None. High on the standard of evidence: row 85 moves from a checker's and two readers' word to the kernel's, and a future write-up of
-Mixon's 2018 question (`CLOSED-QUESTIONS.md` §2.5; FS-20) needs exactly this.
+None on the answer. High on the standard of evidence: row 85 moves from a checker's and two readers' word to the kernel's, and since
+nothing is published before it is formalized in Lean (`CLAUDE.md` § Publication), a write-up of Mixon's 2018 question
+(`CLOSED-QUESTIONS.md` §2.5; FS-20) needs exactly this.
 
 **Provisional bearings:** § The standard of evidence above rung B; § The kernel's cost model; G18 (certify components, compose in the
 kernel); G21 and G30(5) (ship an inhabitant; a conditional theorem over an empty hypothesis is vacuous); G70 (the √3-clean class is the

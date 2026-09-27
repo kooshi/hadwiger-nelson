@@ -80,3 +80,52 @@ row check, correctly: PLANTD parses). Old checker: exit 1, `RESULT: FAIL (1)`, t
 declared non-entry); the non-strict run exit 0; `--self-test` exit 0, every line True. The first draft of the parsed-grade rule ("any `[` in a
 grade") fired on FS91-J07-10's legitimate interval and the first draft of the shape rule on M53's declared non-entry; both were refined before
 this stage was saved (the real tree never changed).
+
+## Stage 3 — SAVED (the stubs' six-framed bearings rewritten)
+
+**Scope.** `plans/RERANK-2026-09-27.md` § 3 lists 28 locations in **27** stub files (16 headings, 12 bold-led paragraphs, FS-67 in both lists);
+the brief's "26" counts one fewer — every listed location was done. Each bearing is rewritten in current-state words, agreeing with the stub's
+row in `plans/FRONTIER-STUBS.md` (read from disk at 290f5678), adding only what the stub's own text supports; grades and "soft" warnings kept.
+Headings renamed "Bearing on the answer" (section numbers kept: "## 4. Bearing on the answer", "## §3 — Bearing on the answer"); bold leads
+renamed "**Bearing on the answer…**". Nothing else in those files was touched: "Provisional bearings", "Solver" and "Cost" paragraphs inside a
+bearing section are unchanged. The edits are `data/consolidation-2026-09-27/bk/stage3_bearings.py` (line ranges with a guard on each first
+line; it refuses to run if a file moved).
+
+| rank | stub | location | the bearing now, in short |
+|---|---|---|---|
+| 10 | FS-67 `STUB-tight-product-colourings` | status paragraph (l. 51); § 4 | none: product locality is content only at a place that is not 6-thick, and link 1's fields have none (row 128, G81); derived for S and six at ℚ(√167) (`PL_∃(23, 43)`, row 125); soft as to truth |
+| 16 | FS-102 `STUB-writeup-main-clause-five` | heading | none: the fallback write-up; it writes up MR, on which link 1 rests; waits on formalization (FS-101, FS-113) |
+| 7 | FS-80 `STUB-window-frequency-certificate` | heading | derived as the shape of a six certificate (link 3); soft as to success; gives `χ_CP ≥ 6`, so `χ(ℝ²) ≥ 6` given MR — the lower half only |
+| 17 | FS-69 `STUB-certificate-at-43` | heading | none: 43 bounds only fields that use it, and link 1's fields have no usable plane there; field-level value kept |
+| 19 | FS-100 `STUB-measure-rigidity-three-fields` | § 11 (first paragraph) | none: MR at link 1's fields held; left items at fields the direction does not visit; kernel port FS-101, MR in Lean FS-113 |
+| 23 | FS-78 `STUB-five-colour-rigidity-table` | heading | none beyond FS-49's; medium as FS-49's supply; the direction does not use it |
+| 28 | FS-75 `STUB-three-colour-criterion-kernel` | heading | none: row 82 to the kernel; row 99 in the kernel discharges a named hypothesis of FS-101 — the main clause's, not the answer's |
+| 31 | FS-76 `STUB-four-colour-inheritance` | heading | none: a finite-fabric programme the direction does not use; high on that programme |
+| 33 | FS-87 `STUB-de-grey-chain-kernel` | heading | none; the formalization a write-up of Mixon's question needs |
+| 35 | FS-68 `STUB-tower-never-rises` | heading | none: at link 1's fields neither `L(F)` nor its all-levels form enters; mechanism and row 129's `r_v` at an odd place |
+| 40 | FS-72 `STUB-last-lattice` | heading | none: five over ℚ(√3,√5) met (row 123); a periodic-free four-colouring would be C3-aper's counterexample, not a falsifier |
+| 41 | FS-77 `STUB-kr6` | heading | none; the smallest place for a four-colour C3-aper counterexample |
+| 42 | FS-88 `STUB-literal-ring-mixon` | heading | none; closes a question posed in print |
+| 53 | FS-19 `STUB-padic-distance-classification` | § 5 | none; low-medium as mechanism; the "It should NOT displace FS-6" paragraph removed (FS-6 is dead by theorem, row 66) |
+| 54 | FS-37 `STUB-field-level-criteria` | heading | none; feeds FS-20 and closes Theorem A's own gap |
+| 59 | FS-35 `STUB-expansion-measure` | § 3 | none: the loop it serves (M62, a five-chromatic graph below 509) moves no value |
+| 11 | FS-59 `STUB-four-colours-167` | paragraph | only through the plane: contains `χ_CP ≥ 6 ∧ PL_∃(23, 43)` (row 125), never cheaper than FS-104; the conjecture's widest gap |
+| 13 | FS-64 `STUB-adelic-window-colouring` | paragraph | none on `χ(ℝ²)`; derived as one way six occurs at a field if HN = 7; soft; the only ceiling instrument for six at a field |
+| 18 | FS-57 `STUB-fractional-wall` | paragraph | none: a statement about the residue method; link 1's fields have no window member |
+| 8 | FS-101 `STUB-main-clause-five-kernel` | paragraph | none on deciding; conditional on the formalization: its collapse slot is link 1 in the kernel over named hypotheses; MR in Lean is FS-113 |
+| 34 | FS-92 `STUB-character-classification` | paragraph | none; field-level shape of a character falsifier |
+| 37 | FS-60 `STUB-quadratic-witnesses-kernel` | paragraph | none; field values to the kernel (the row says 13 values, the stub's old line six: neither number is restated) |
+| 43 | FS-93 `STUB-pyjama-gluing` | paragraph | none; attribution and effectivity |
+| 44 | FS-94 `STUB-one-prime-minimal-sets` | paragraph | none; mechanism |
+| 49 | FS-20 `STUB-theorem-B-writeup` | § 9's bearing line | none; ranked on the publication trigger |
+| 55 | FS-27 `STUB-consolidation-remainder` | paragraph | none; §2 blocks the paper; "the hunt continues in M63, M62 and FS-6" replaced by the direction |
+| 61 | FS-29 `STUB-vacuity-coverage` | paragraph | none; the statement-level gate; "M62 (FS-6) remains the ranked rank-1 milestone" removed (stale) |
+
+**Stale pointers removed, each inside a bearing section:** FS-6 (dead by theorem, row 66) in FS-19, FS-27 and FS-29; "the push toward six"
+recast in FS-102; "Kooshi's 2026-09-26 target (six)" left out of FS-59's (the row still carries it). **Two facts a bearing now cites that
+postdate the ranking pass:** FS-113, MR in full in Lean (`plans/STUB-mr-in-lean.md`, minted 290f5678), in FS-100, FS-101 and FS-102; and
+FS-112 beside FS-111 in FS-101's "seven" clause (the row's "seven by FS-110's *no* with FS-111" predates FS-110's close; FS-111's row now reads
+"decisive jointly with row 134 … and FS-112's unit-arc half"). **For the owner:** FS-101's ranked row still says "no row of this table carries
+MR in full" — true until FS-113's row lands.
+
+**Check:** no "Bearing on χ" or "Bearing on `χ" remains in the 27 files (grep); no file lost its final newline.

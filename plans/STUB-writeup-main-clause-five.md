@@ -130,9 +130,12 @@ came through the structural question and an example invariant — say so in the 
 claims). Stubs: FS-20 (the Theorem B paper — one naming table for both), FS-101 (the kernel port), FS-63 (the second-discipline vocabulary),
 FS-23 (the citation graph).
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None. It is the fallback if the push toward six stalls, and it states the foundation the six hunt now stands on.
+None: it is the fallback write-up of rows 120–123 (its lead, rows 128–130, Kooshi's call). It writes up MR (row 120), on which link 1 of
+the direction rests, and by the 2026-09-26 publication rule it waits on its rows' formalization in Lean in full, with no declared
+purchases (`CLAUDE.md` § Publication; FS-101's lane, and FS-113 for MR itself). The push toward six it was the fallback for was replaced
+by the aim.
 
 ## Rank
 

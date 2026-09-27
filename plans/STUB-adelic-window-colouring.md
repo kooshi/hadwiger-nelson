@@ -186,10 +186,13 @@ A negative is a finding and goes in §PA.
 
 ## 5. Where this sits
 
-**Bearing on χ ≥ 6: it is the only ceiling instrument that could decide the value-6 question.** G64 proves six can hide nowhere but
-the gap between `L(F)` and `χ(F²)`; closing that gap from above is exactly what this would do, and nothing else we own points
-there. It is also the only stub in the set whose *success* would refute the conjecture's bold form rather than support it — which is the
-right relationship between an instrument and a belief, and the reason both are worth holding.
+**Bearing on the answer: none.** A window colouring of `F²` bounds `χ(F²)`, and `χ(ℝ²)` only if it reads the real place alone (FS-44's
+object); where every place mixes the field is the plane (row 128), so link 1's fields leave it nothing to add. **Derived:** one of the two
+ways six can occur at a field if HN = 7 ("six below HN", R1); **soft** (the conjecture predicts no). **It is the only ceiling instrument
+that could decide six at a field:** G64 proves six can hide nowhere but the gap between `L(F)` and `χ(F²)`, and closing that gap from above
+is exactly what this would do. It is also the only stub in the set whose *success* would refute the conjecture's bold form rather than
+support it — a 6 or a 5 over a field with `L ≥ 7` — which is the right relationship between an instrument and a belief. The finite-place
+half at five over ℚ(√167) is a theorem off 43, and given MR the live places are `{∞, 23, 43}` (row 125; FS-96).
 
 ## Where the 2026-09-25 work on this lives
 

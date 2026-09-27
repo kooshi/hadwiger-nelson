@@ -61,11 +61,12 @@ If not in general, can it prove the concrete instances FS-36's decomposition nam
      the generators alone only reaches `𝔽₂`.
    - `FieldWall4` solves the analogous problem for `ℚ(√3,√11)`; read its §1–§5 before pricing again.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-**None.** Upper bounds on multiquadratic planes below five do not touch the six-level. It feeds FS-20 (the
-Theorem A section of the paper), where a field-level statement is worth more than a subring-level one. It would
-also turn FS-36's decomposition into a kernel statement about four-chromatic planes.
+**None.** Upper bounds on multiquadratic planes below five do not touch the direction, which works where every place mixes (row 128). It
+feeds FS-20 (the Theorem A section of the paper), where a field-level statement is worth more than a subring-level one, and it closes
+Theorem A's own gap (`plans/A1-theorem-A-kernel.md` §R2); it would also turn FS-36's decomposition into a kernel statement about
+four-chromatic planes.
 
 ## Registered expectation
 

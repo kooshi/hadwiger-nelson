@@ -26,10 +26,10 @@ finitely many four-colourings (up to its period) — is not answered either.
    families there (Parts's G481 needs families outside the ring's), and whether row 85's chain (C7 → C15 → C9) runs on the ring's own graph.
 3. **Finitely many colourings:** a count modulo the period, derived as C9 derived 9,120 — no enumeration.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None. It closes the literal form of a question posed in print in 2018 (`CLOSED-QUESTIONS.md` §2.5), which row 85 answered only at its
-exact scope.
+None on the answer. It closes the literal form of a question posed in print in 2018 (`CLOSED-QUESTIONS.md` §2.5), which row 85 answered
+only at its exact scope.
 
 **Provisional bearings:** G70 (√3-clean is residue), G69 (rigidity prime by prime), G75 (the mechanism), G49/G50 (read the held threads
 for the exact object first), G21 (a result's scope is its enumeration's); rows 78, 85.

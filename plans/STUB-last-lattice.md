@@ -40,10 +40,11 @@ G68 and G69 (silent here by construction — that is the point), G65 (the shell-
 peak), G66's instrument lessons (ask the whole graph clique-pinned; a level-two refutation projects), row 75's certificate
 instrument for route 3, G21 (every UNKNOWN is about an encoding), G27 (the group is exactly 96; the pin leaves 8).
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None directly. On the conjecture: this is its last cheap prediction's last object — five here, or a four-colouring of a lattice
-with no periodic colouring, which would be the first such object anywhere and the falsifier G48 names.
+None on the answer. The prediction it served, five over ℚ(√3,√5), is met (row 123, [hand], through MR), so some finite graph over that
+field is five-chromatic and this lattice would be its explicit object. A four-colouring of the lattice with no periodic colouring would be
+C3-aper's first counterexample at four colours (FS-76), not a falsifier of the conjecture. The direction does not use it.
 
 **Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — at four colours there is no height, no slope and no `Θ`-type certificate: a refusal here is still a finite graph, and a four-colouring with no periodic colouring would also be the first instance of C3-aper failing (FS-76, `[AbrishamiEtAl2025]` Problem 4.6 at `k = 4`), which is open. **G68's addition** — a gap is sufficient for looseness, not necessary (FS-73's L3, loose at every period with no gap): where every colouring found is gap-free, compute the Kempe period groups before calling the lattice rigid. FS-73's implementer D found the rich 2-unit lattices over ℚ(√3,√5) (`twounits:14/30/42`, generator graphs) rigid-found with `P_found` of rank 8 and finite index, forcing undecided (row 78; `tools/fs73_census_check.py`, frozen) — the nearest objects to this one in the record.
 

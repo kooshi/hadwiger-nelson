@@ -58,12 +58,13 @@ It is **not proved at any prime for all levels**, and known exactly at one place
 5. **The kernel form of what is proved**: (E) is a two-line `unitQuadrance.map` argument; (W) is a finite family of `decide`s plus a
    general lemma. Hours, and they are statements nobody had.
 
-## 4. Bearing on χ(ℝ²) ≥ 6, stated honestly
+## 4. Bearing on the answer
 
-**None directly.** It decides whether the local–global conjecture's local bound `L(F)` is the right invariant or must be replaced by
-its all-levels form — and FS-66 already shows the two agree wherever we can certify. Its value is as mechanism (what a residue
-colouring can and cannot see at depth), as the first exact measurable-density value for a `p`-adic plane (deliverable 1 or 2), and as
-the missing control (3) for any future level-two ask. It is idle-compute and reading-room work beside FS-59.
+**None on the answer.** It decides whether the local–global conjecture's local bound `L(F)` is the right invariant or must be replaced by
+its all-levels form — and FS-66 already shows the two agree wherever we can certify; at the fields link 1 of the direction uses every
+stable place mixes, and neither form enters (row 128). Its value is as mechanism (what a residue colouring can and cannot see at depth), as
+the first exact measurable-density value for a `p`-adic plane (deliverable 1 or 2; row 129's local term `r_v` at an odd place), and as the
+missing control (3) for any future level-two ask. It is idle-compute and reading-room work beside FS-59.
 
 ## 5. Failure and jackpot clauses
 

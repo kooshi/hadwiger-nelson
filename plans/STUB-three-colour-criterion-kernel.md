@@ -106,11 +106,13 @@ kernel through `forces_iff_exists_finite`).
 
 **Provisional bearings added (2026-09-26, consolidation job C3b; `LEDGER.md` rows 123, 127):** ℚ(√167) needs five at [hand], through MR (row 123), so this stub's instance is that field's kernel lower bound (four); row 127 names row 99 among FS-101's hypotheses, so this stub's re-aimed target (S1 and no mixing, row 99, in the kernel) would discharge one (FS-101's `hRow99`).
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None directly. It put the falsification field's kernel lower bound, four, in the kernel (row 119; five there is [hand], through MR,
-row 123), and it is the first kernel
-certificate type that refuses colourings of an infinite graph by a polytope rather than a finite graph by a resolution proof.
+None on the answer: it lifts row 82 from [hand] to the kernel — a class theorem over a family of fields, and a write-up's backbone if the
+Johnson papers leave it ours. It put the falsification field's lower bound, four, in the kernel (row 119; five there is [hand], through
+MR, row 123), and it is the first kernel certificate type that refuses colourings of an infinite graph by a polytope rather than a finite
+graph by a resolution proof. Its re-aimed target, row 99 in the kernel, would discharge one of FS-101's named hypotheses (row 127 names
+row 99) — the main clause's, not the answer's.
 
 ## Where the 2026-09-25 work on this lives
 

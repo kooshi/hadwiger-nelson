@@ -201,7 +201,6 @@ subplanned separately if it is taken.
 
 **Cost:** A+B one hour. D's eleven, an afternoon. C, a day or more, and it is research-shaped.
 
-**Bearing on χ(ℝ²) ≥ 6: none, and this stub says so.** Its value is the one FS-26 named: **this is
-the only kind of work on the board that could find another `core9_plane`** — a theorem that passes
-the build, the axiom audit, the sorry scan and a read-aloud, and still says nothing.
-**M62 (FS-6) remains the ranked rank-1 milestone for the hunt itself.**
+**Bearing on the answer: none, and this stub says so.** It is the statement-level gate over the toolkit's `Forces`/`Separated`/`Fan`
+consumers, and its value is the one FS-26 named: **this is the only kind of work on the board that could find another `core9_plane`** —
+a theorem that passes the build, the axiom audit, the sorry scan and a read-aloud, and still says nothing.

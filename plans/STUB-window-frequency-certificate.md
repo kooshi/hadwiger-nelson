@@ -89,7 +89,11 @@ it does not), G71 (the three-colour certificate this imitates), G62/G7 (the mult
 certificate must beat), G21 (a size claim measures the family it was measured on), G51 (a competition fits: two routes, window LPs and
 radius-2 cocycles). Kernel: FS-75 is the model of a certificate type with a soundness theorem.
 
-## Bearing on χ ≥ 6
+## Bearing on the answer
 
-None directly; speculative and high on the programme: a four-colour certificate that scales with the symmetry is the first solver-free
-route to five on lattices whose refuting patches are out of a solver's reach, and one colour up it is the shape of a six-certificate.
+**Derived as the shape a certificate of six must take; soft as to success.** Link 3 of the direction: one colour class at a time caps
+below 4.37 (row 129; the fractional version at 4.36, G60), so a proof of six must read how the classes fit together, and averaged window
+frequencies on the real plane are that shape (G24's integrality; FS-104's route (c)). A certificate at five colours on the real plane
+gives `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130), hence `χ(ℝ²) ≥ 6` given MR (row 128): the lower half at six, not the answer alone. At four
+colours, the stub's first object, it is a solver-free certificate format whose size the symmetry controls; over ℚ(√167) it would restate
+a value held at [hand] by measure rigidity (row 123) in a checkable format.

@@ -49,7 +49,12 @@ Herglotz–Bochner (weeks); step 4 below stands.
 
 **Provisional bearings added (2026-09-26, consolidation job C3b):** FS-75 — its re-aimed target, row 99 in the kernel, is the named hypothesis `hRow99` (row 127 names row 99 among the chain's [hand] steps); FS-47 with FS-37 — row 57's gap is `hUpper` (row 127); G80 (the mechanism under `hMR`); FS-102 (the write-up's `comparator/` surface either waits for these hypotheses to shrink or names them — Kooshi's call).
 
-**Bearing on χ ≥ 6:** none. It puts the conjecture's proved range (G48) on the kernel's word, one named interface at a time.
+**Bearing on the answer:** none on deciding. On the Lean formalization of the answer, conditional: its collapse slot (FS-103's Phase 4,
+Kooshi's call, after `InvariantMeasureOnClosed` as Markov–Kakutani) is link 1 in the kernel over named hypotheses, which every lower bound
+above five proved through MR needs (seven through row 134, FS-111 and FS-112; six through FS-104), and which an upper bound given by a CP
+colouring (link 2) does not need. MR itself stays a named hypothesis here; MR in full in Lean is FS-113's (`plans/STUB-mr-in-lean.md`). Its
+first slot, the main clause through five (row 127), puts the conjecture's proved range (G48) on the kernel's word one named interface at a
+time, and bears none on the answer.
 
 **Provisional bearings** (WORKFLOW 3.1 item 5): G48 (the proved range is the target), G55 (the chain theorem's ring form, row 103, a kernel
 precedent), G63 (the valuation-subring lemma's two instances), G64 (row 57's gap is the kernel's), G54 and G56 (CLS's table), G67, G72 (a kernel
