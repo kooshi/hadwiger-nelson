@@ -29,6 +29,8 @@ committed. Claims are `data/fs106/claims.md` §6; definitions §0 (D-MU, D-NF, D
   `δ > δ₆`. [hand, one mind; Parts [external]] — §4.3.
 - **TQ-HIT** — strips of width `2ε` at spacing `1/2` (density `4ε`) are effective holes meeting every unit circle and bicycle: a hitting-form
   argument proves at most `O(ε)`. [hand, one mind] — §4.4.
+- **TQ-SYN** — TS's open steps are regularity gaps and TQ's is the hole gap; TQ-EQ (e) trades the first for the second. Hadwiger–Nelson's
+  measurable form is "Voronov's argument on regular colourings, robust to a free colour of vanishing density". [derived, one mind] — §5.2.
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -486,3 +488,70 @@ as `ε → 0` (TQ-EQ (e) makes it the natural numerical experiment). Instead: th
 the experiment is proposed for after 2026-10-01 (stub proposal in the report).
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: FS106-TS's record read, divergences
+
+Read `plans/FS106-TS-derivation.md` stages 1–5 (at commit `2920150a`) after my stage 4 was committed (`178be4cc`, `5fb54fa1`). TS worked the
+structural route in the normal form D-NF (full colourings, no holes).
+
+### 5.1 Agreements (independent: TS was blind to this record, and I to TS's until now; one mind each side)
+
+- **Point features are not forced.** TS: C-T-TRIa FALSE — a cusped hexagonal colouring has no point with three colours of positive density
+  (two minds, with the advisor's A7). Mine: TQ-ERODE / L1 — a band-proper partial colouring can be made to have **no** multichromatic coloured point
+  at `O(κ)` cost. These are the same phenomenon in the two settings: density-read features vanish under cusps (full colourings) and under erosion
+  (partial ones).
+- **Small same-colour pieces.** TS-C (a chain of same-colour regions whose closures meet has diameter `≤ 1`) and TS-C′ (supports) match the island
+  structure used in §4.3: a band-proper partial colouring's same-colour pieces have diameter `≤ 1 − ε`, and two of them are either all within
+  `1 − ε` or all beyond `1 + ε` — `[Parts2020c]`'s Siamese / outer dichotomy.
+- **TS's K3** (a density-open class with a fat-Cantor edge) is harmless to the quantitative route. TQ-SUP's kept sets use only Lebesgue
+  density (the fat Cantor set's points are density points of the other class), and TQ-ERODE is applied after Lemma T, whose squares have finite
+  boundary. K3 is why the order matters: erode a K3 class directly and its infinite edge length makes the cost unbounded.
+
+### 5.2 The divergence that is a synthesis (not a contradiction)
+
+**TS's open steps are regularity gaps; TQ's open step is the hole gap; TQ-EQ exchanges one for the other.**
+- TS's GAPs in D-NF are all about the absence of regular structure:
+  - C-T-TRIb, a trichromatic support point to start from;
+  - C-T-ANN, "in D-NF there are no curves to start from";
+  - C-T-IND, where the index needs "finitely many essential changes", and "whether a tight 6-colouring can be forced to have it … is the question K3
+    poses to FS-107";
+  - [G1]–[G3], unit arcs and bowties.
+- TQ-EQ (e) answers K3's question in exchange for holes. If `χ_m⁰(ℝ²) ≤ 6`, there are **periodic grid-square** partial six-colourings with slack
+  `ε` and vanishing holes. On them:
+  - every compact arc meets finitely many square boundaries, so C-T-IND's finiteness holds and its corrected form applies;
+  - there are no unit arcs and no cusps, and every vertex of the grid is a square corner;
+  - TQ-ERODE removes even the multichromatic points.
+- So **the regular half of Voronov's method becomes available, and the whole difficulty moves to the free colour on the holes** (C-Q-STAB, TQ-HIT's
+  constraint on its proof).
+- Conversely, D-NF has no holes, and there TS's route meets the regularity gaps head on.
+- Neither record closes the other's gap. **Hadwiger–Nelson's measurable form is "Voronov's argument on regular colourings, robust to a free colour
+  of vanishing density".** Voronov's argument is TS's, run on regular colourings; the robustness is TQ's.
+  [derived from TS's verdicts and TQ-EQ; one mind]
+
+### 5.3 Divergences in verdict: none found
+
+- TS's C-AE-POLY (TRUE except the `d = 2` edge case), C-AE-FA (GAP), C-AE-Q2 (GAP) and C-AE-MAP6 (GAP) are special cases of `χ_m⁰(ℝ²) ≥ 7`. C-Q-STAB
+  would imply each; none contradicts TQ-EQ.
+- TS's "bicycle needs three colours at every `d ∈ (1, 2)`" is compatible with TQ-HIT, which uses bicycles only as sets for holes to meet.
+
+### 5.4 Proposals for the close (I edit none of these files)
+
+- **`LEDGER.md`, a new row** (or an addendum to row 130).
+  - The row: TQ-EQ, TQ-SUP, TQ-COMP (both routes), TQ-EPS2, TQ-HIT, TQ-ERODE; [hand, one mind each]; C-Q-REM (i) with `η = 1/20`.
+  - Headline: "S–V §9's stability bound is equivalent to `χ_m⁰(ℝ²) ≥ 7`. Hence given MR it is `χ(ℝ²) = 7`, and its failure is `χ(ℝ²) ≤ 6` with no
+    MR. The tight and slack suprema coincide. Every band-proper partial six-colouring leaves `≥ ε²/78` uncovered, and hitting-form arguments are
+    capped at `O(ε)`."
+- **`BIBLIOGRAPHY.md`.**
+  - `[Parts2020c]`: held (`library/pdf/arXiv-2010.12668-parts-what-percent-plane-5-6-colored.pdf`); read in full 2026-09-27 (FS106-TQ) for §§1–3
+    and Table 1.
+  - `[SokolovVoronov2025]` §9: re-read 2026-09-27, with the sentence after the conditional ("1/6997 part of the plane remains uncolored").
+  - New row, listing only: Parts 2022, *On lower bounds of the order of `k`-chromatic unit distance graphs* (zbMATH `au:"Parts, Jaan"`).
+- **`CLOSED-QUESTIONS.md`.** S–V §9's conditional is answered in the converse direction: its hypothesis is necessary for `χ_m⁰ = 7`, not only
+  sufficient for `χ_map = 7`. That settles no posed question. It belongs to the report, not the list.
+- **Hand-over to FS-107** (plan §5.4).
+  - W's target in its regular form: periodic grid-square partial six-colourings with slack, holes `→ 0`, necessarily `≥ ε²/78`.
+  - R's target: a Voronov-type contradiction robust to a free colour on any set thin at a scale `ρ₀`, not of the hitting form.
+  - A numerical experiment for after 2026-10-01: trace `1 − µ₆^per(ε)` as `ε → 0` from `[Parts2020c]`'s eroded tilings. Is the curve flat at
+    `≈ 1.43·10⁻⁴` or falling?
+
+## Stage 5 — SAVED
