@@ -129,3 +129,28 @@ FS-112 beside FS-111 in FS-101's "seven" clause (the row's "seven by FS-110's *n
 MR in full" — true until FS-113's row lands.
 
 **Check:** no "Bearing on χ" or "Bearing on `χ" remains in the 27 files (grep); no file lost its final newline.
+
+## Stage 4 — SAVED (the front files' six-framed lines)
+
+**`CLAUDE.md` § Where the problem stands** (items 28–30 only; each ending rewritten, nothing else in the items):
+- 28: "Bearing on χ ≥ 6: none." → "Bearing on the answer: none."
+- 29: "Bearing on χ ≥ 6: none; ℚ(√167)'s gap is now [5, 7]." → "Bearing on the answer: none; ℚ(√167)'s gap is now [5, 7]."
+- 30: "Bearing on χ ≥ 6: given MR, rung D is six over ℚ(√635087), and six for measurable colourings modulo null sets of unit pairs (G81)." →
+  "Bearing on the answer: link 1 — given MR, rung D is the value at ℚ(√635087) and of `χ_m⁰(ℝ²)` (G81)." (`χ_m⁰` is § Notation-free but defined
+  in § The aim's link 1 as exactly "modulo null sets of unit pairs".)
+
+**Bytes:** `CLAUDE.md` 295,846 before, **295,825** after (−21), against the 300,000 limit.
+
+**`plans/FRONTIER-STUBS.md`** (the open-milestones table and the ranking-rule sentence only; the ranked table untouched):
+- The ranking rule: "Every stub is read against the field sieve: a route to χ ≥ 6 must end in a 6-open field (`plans/M58-field-sieve.md`)." →
+  "Every stub is read against the direction (`CLAUDE.md` § The aim, links 1–6), its bearing stated on the answer; a route through a field is
+  also read against the field sieve: a field-level route to six ends in a 6-open field (`plans/M58-field-sieve.md`), and where every stable
+  place mixes the field is the plane (row 128)."
+- The table's last column: "next, and bearing on χ ≥ 6" → "next, and bearing on the answer".
+- M63's cell: "Bearing: none directly — it is M62's calibrated bed." → "Bearing on the answer: none — it is M62's calibrated bed, and M62 moves no
+  value."
+- M62's cell: "Bearing: indirect — it is the rehearsal for FS-6, which is the same search one colour up." → "Bearing on the answer: none — a smaller
+  five-chromatic graph moves no value, and FS-6, the six-level search it rehearsed, is dead by theorem (row 66)."
+
+**Checks, exit statuses read directly:** `claude_md_fact_audit.py --base a5fe409d` exit 0, "AUDIT PASSED (0 failure(s))", LOST 0 in every
+class; `--dupes` exit 0, 10 runs; `data/rerank-2026-09-27/rk_mirror_check.py` exit 0, PASS (64 ranked stubs).
