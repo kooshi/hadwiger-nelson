@@ -221,3 +221,69 @@ a character with a finite `Γ`-orbit is fixed by some `γ ≠ 1`, and `γr = r` 
 | move I would have made by search | what I did instead |
 |---|---|
 | none | — |
+
+## Stage 3 — SAVED ((a9): what Thm 1.3's proof assumes, checked against the pieces; (a1), (a2), (a5), (a7), (a8))
+
+### 3.1 Reading status of EL2021 (G50), after this job
+
+| section | status | what was read |
+|---|---|---|
+| §1 (pp. 1–5) | **read in full** (this job; X02D before) | definitions, Thms 1.1–1.3, Cors 1.4–1.5, §1.4 (the history of [7]) |
+| §2 (pp. 5–9) | **read in full** (this job; X24R before) | adeles; adelic actions; adelic subgroups (Lemma 2.1); A-irreducibility (Prop. 2.2); product formula (Prop. 2.3); Lemma 2.4 |
+| §3 (pp. 9–14) | **partly**: §3.2 (the set-up, the S-linear subgroups, the set `S` of (3.5)); the statements of Props. 3.4 and 3.5 and footnote 3 | the leafwise-measure machinery is cited to [9, Lem. 3.2], [28, §3], [10, §7], [11, Prop. 6.4] — **not read** (unheld) |
+| §4 (pp. 14–18) | **read in full** (this job; §4.1–4.3 X24R before) | Thm 4.1; Lemmas 4.2, 4.3; §4.3 (Thm 1.3 from Thm 4.1); §4.4's standing assumptions and the chain (4.1) |
+| §5 (pp. 18–22) | **statement only** (Thm 5.1, p. 18) | the proof "follows closely … [7, §4]", which I read in EL2003 (pp. 104–106, a complete proof there) |
+| §6 (pp. 22–28) | **statements only** (Thm 6.1; Lemmas 6.2, 6.3; Prop. 6.4) and the paragraph on [11, Lemma 5.2] | the proofs not read |
+| §7 (pp. 28–35) | **partly**: Thm 7.1 (statement), Lemma 7.2 (statement), Lemma 7.4 with proof, Prop. 7.5 (statement), Cor. 7.6 with proof, and **the proof of Thm 4.1 from Cor. 7.6 in full** (pp. 33–35) | the proofs of Thm 7.1 and Prop. 7.5 not read |
+| §§8–9 (pp. 35–41) | **not read** (headings and first lines only) | applications (disjointness; measurable factors), **not used** by the proof of Thm 1.3 |
+
+### 3.2 (a9) Does the proof of Thm 1.3 assume anything about `X`, `α`, `µ` beyond Thm 1.3's hypotheses? — checked against the pieces [reading, one mind]
+
+The pieces, in EL2021's terms: `X = M̂`, lifted (Lemma 4.2) to `𝔸_L/L` (`[L:ℚ] = 4` at `F₁`, 32 at `F_dG`), `ζ_n = uᵃwᵇ`; the action is
+**semisimple** (multiplication in a field), **totally A-irreducible** (every `ℚ(Γ_Λ) = L`), and **isometric at every archimedean place**
+(`|σ(γ)| = 1`, both fields totally real), so every non-zero Lyapunov weight is non-archimedean: `χ_v(a, b) = log|uᵃwᵇ|_v` at the finitely many
+finite places of `L` in the supports of `u` and `w`.
+
+| possible extra assumption | where it could enter | finding for our pieces |
+|---|---|---|
+| a hyperbolic element; expansiveness | Berend's topological theorem needs one (EL2021 p. 2) | **not assumed** by Thm 1.2/1.3 — EL2003 p. 100: "Notice that we do not assume any hyperbolicity in Theorem 1.1"; nothing in §§4, 7 as read uses it. Entropy is carried by the stable horospherical subgroup with **equality** in Prop. 3.5 for `V = U_T^−` — isometric directions contribute nothing and need not be absent |
+| an archimedean (real) expanding direction | the last step of Thm 4.1's proof (p. 33–34) takes a `v ∈ W_x ∖ {0}` | **handled both ways**: "If v has a nontrivial real component …" and "So suppose now v has trivial real component and let us write vp for the p-adic component …" (p. 34) — our case is the second, written in full |
+| two independent Lyapunov weights | Lemma 7.4, used by Prop. 7.5 | proved in EL2021 from "no virtually cyclic factors" (Dirichlet's unit theorem); **for our pieces directly**: `χ_𝔓 = (0, h·log|…|)`-type and `χ_v = (log|u|_v, 0)`-type (stage 2.3) |
+| `h_λ(α^n_irred) > 0` | Thm 5.1's denominator | on the lift, `h_λ(γ) ≥ h_{m_{M̂}}(γ) ≥ log 2` for every `γ ≠ 1` (stage 2.5 (ii-a)) |
+| semisimplicity | footnote 3 (p. 13): non-trivial Jordan form "can be easily modified … we leave the details to the readers"; p. 33: "[5, Prop. 6.2] shows that Wx = W̃x is itself S-linear, at least if the action is semisimple"; Lemmas 6.2–6.3, Prop. 6.4 (unipotent parts) | **our action is semisimple**, so the unwritten non-semisimple modification is never needed, and `α_uni` is trivial (Prop. 6.4 vacuous) |
+| Thm 4.1's extra hypothesis ("every adelic subgroup … invariant under … a finite index subgroup … is actually invariant under Zd") | §4.3 via Lemma 4.3 | for our pieces the only adelic subgroups invariant under any `Γ_Λ` are `0` and all of `𝔸_L/L` (dual `L`-subspaces of `L`), so it holds with `Λ = ℤ²` |
+| finite `S` of (3.5) | §3.2, Lemma 7.4 | `S` = the primes below the supports of `u`, `w`, plus `∞`: finite |
+| "no virtually cyclic factors" for `α_Λ` and for the lift | §4.3, Lemma 4.2 (not written there) | stage 2.1, Lemma 2.1 (general), and 2.3 (ours, directly) |
+
+**Verdict (a9): TRUE as far as read — no extra hypothesis found, and every place where one could enter is either written for our case (the
+p-adic branch of the final step) or checked directly on the pieces. The honest limit: GAP (reading, not mathematics) at the cited
+machinery** — §3's leafwise measures ([10, §7], [11, Prop. 6.4 and Lemma 5.2], [9, Lem. 3.2], [28, §3]), §6's product structure ([5, Thm 8.2,
+Prop. 6.2, Lemma 5.10], [10, Cor. 8.6]), and the proofs of Thm 7.1 and Prop. 7.5 (Rudolph's [34, Thm 3.7] step) are **unread here**. None of
+these is suspected; they are the standard Einsiedler–Katok–Lindenstrauss toolkit, and EL2003 §§3–5 (read) prove Thm 4.1's single-automorphism
+bound (EL2021's Thm 5.1) in full.
+
+**Two misprints in EL2021 found on the way** (neither affects us): Thm 7.1 says "without cyclic factors" (for "virtually cyclic"), and states
+`κ > 0` where Lemma 7.2 gives `≥ 0` — positivity is Prop. 7.5's ("hence κµ̃,Ω > 0").
+
+### 3.3 The remaining items [hand, one mind]
+
+- **(a1) Solenoid: TRUE at both fields.** `M ⊂ L` is countable and torsion-free, so `M̂` is compact, metrizable and connected; `M` embeds in
+  `L ≅ ℚ⁴` (`F₁`) or `ℚ³²` (`F_dG`), finite-dimensional — EL2021's definition verbatim.
+- **(a2) Action: TRUE.** `γ, γ⁻¹ ∈ ℤ[Γ]`, so `γM = M` and multiplication by `γ` is an automorphism of `M`, whose dual is a continuous automorphism
+  of `M̂`; `Γ` is abelian and `ℤ² ≅ Γ`, so `n ↦ α^n` is a `ℤ²`-action.
+- **(a5) `d = 2`: TRUE** (and forced anyway by "not virtually cyclic", stage 2.1 step 1(a)).
+- **(a7) Entropy: TRUE.** EL2021's `hµ(αn)` is the Kolmogorov–Sinai entropy of the single automorphism `α^n` (Props. 3.4–3.5 compute it through
+  entropy contributions; Thm 1.2 states it for single elements); X02D's T2 limit is for the single `γ`, over σ-algebras `π_k^{−1}𝔅(M̂_k)` that are
+  `γ`-invariant (`π_k` is `γ`-equivariant and `γ` an automorphism of `M̂_k`) and generate — the same notion.
+- **(a8) Lemma W at the field: TRUE at both fields** [hand; Chebotarev; checked line by line — X02D §2.2 and X02V §2.2 prove it identically].
+  The proof is uniform: `L` is Galois over ℚ at both fields (biquadratic; multiquadratic of degree 32), so Chebotarev gives infinitely many
+  primes split completely; one avoids `u`'s support; the contradiction for `wᵏ ∈ L′ ⊊ L` uses only that the `[L:L′] ≥ 2` primes of `L` over
+  `𝔓 ∩ L′` are unramified and that `w`'s divisor is `𝔓^h c(𝔓)^{−h}` — **no enumeration of subfields** (the C0 wrong reason avoided: the 373
+  proper subfields at `F_dG` are all excluded at once). An exact instance at `F₁` (1.2: `h = 965`, `p = 17`, `[ℚ(wᵏ):ℚ] = 4`, `k ≤ 6`, plant
+  fires).
+
+### 3.4 Would-have-searched-here log (stage 3)
+
+| move I would have made by search | what I did instead |
+|---|---|
+| none (reading only) | — |
