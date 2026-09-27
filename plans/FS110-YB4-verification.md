@@ -249,3 +249,65 @@ moot altogether given claims §8's second update (G-d2 does not arise; two blind
 
 Registered expectation scored: I gave 0.6 to "at least one divergence of truth or scope"; found: one misstated phrase and two scope
 precisions, no divergence of truth before reading the side.
+
+## Stage 4 — SAVED (after opening the side's record §§ Continuation — FS110-Y4, `tools/fs110_y_cone.py` in part, `y4_cone_none.out` in part)
+
+Read after stage 3 (`1664a5ef`): the side's § Continuation — FS110-Y4 in full (lines 668–861), `tools/fs110_y_cone.py`'s header and its
+`n_tile` and `build_trivalent_hard`, and the WC block of `data/fs110/fs110-y/y4_cone_none.out`. The side's theorem list in the instance is
+verbatim against the record's "Theorems this phase proved (FS110-Y4)" (read line by line).
+
+### 4.1 Divergences of truth
+
+**None.** Every verdict the side claims holds on my independent rebuild and checker, and every hand statement re-derives. Where both of us
+computed the same number, it agrees: the ring pieces' exact ranges to six decimals (e.g. `(r0, r3)` `[1.161499, 2.166743]`, `(r2, r2)` max
+`0.768641`), `wc_flat`'s minimum `0.99917`.
+
+### 4.2 Divergences of scope and wording (item by item)
+
+| # | where | the side | mine | proposed edit (the close writes it) |
+|---|---|---|---|---|
+| S1 | Y4-WC's theorem line (also the pre-round answer) | "with every curvature strictly inside `(−1, 1)`" | false literally: `N1`'s arc has curvature 2, the ring's inner arc `10/9`; true for the horns' bounding curvatures | "with every horn-bounding curvature strictly inside `(−1, 1)`" |
+| S2 | Y4-TIP's line; §11.5 held item ("fragment `WC` is a cone that one tile's recolouring removes") | one tip recolouring removes the cone | at a double-horn cone (WC, WCH) one tip recolouring leaves the other horn, and `v` is still a Woodall cone (single horn, as WC1); I checked `h−`'s tip separately (WC tip(`h−`) → 2 ACCEPT; WCH's `h−` tips REJECT at `xS−`, `yN−`) | "loses each horn to a one-tile recolouring of its tip … (a double-horn cone needs one per horn)"; §11.5: "two tiles' recolourings, one per horn" |
+| S3 | §11.2's definition of `λ = ∞` | "a corner of `τ` at `N` with both rays strictly above the tangent line counts as `λ = ∞`" | WC1H's corner has its `180°` ray **on** the tangent line; the side's `μ = 1` there is right on `h+`'s side only (the `60°` ray), with `μ = 0` on the other side, which is why WC1H has one horn | "per side: a boundary ray of `τ` leaving `N` strictly above the tangent line on that side counts as `λ = ∞`" |
+| S4 | Y4-WC / Y4-HARD formulas | the contact tiles' extent away from `N`, `S′` is not in the formula ("the arc of radius `1/2` about `(0, 3/2)`" bounds the tile below only) | a completion is needed; the whole disc cut by the band does not fit inside the piece about `90°` (`(59.49°, 100.39°)`) | add the side's completion to the formula (its tool: the arc from `(−10/101, 102/101)` to `(10/101, 102/101)`, then vertical sides to `y = TOP`); verdicts do not depend on it (mine: the disc cut by `B(N, 1/10)` or `B(N, 1/20)`) |
+| S5 | Y4-D2's "so" clause | "G-CONE is never an instance of G-d2" | TRUE for closure types at tip-hard cones and the pair `(N, S′)`; with essential types it can fail when the ring has one colour at `±n` (`P_ess(N) = {1, r_N}`, `P_ess(S′) = {1, r_S}`); and whether N3-RED's "hard" is tip-hard is open (the side holds the same question for the owner) | add "(closure types; the pair `N`, `S′`; tip-hard cones)"; moot given claims §8's second update |
+
+### 4.3 Divergences of route
+
+- **Y4-MU:** the side proves sufficiency by the triangle inequality with the osculating disc and necessity by the parallel curve; I used the
+  offset-curve curvature and a direct minimisation over the circle's parameter. Same constant, same domain `λ > −1`.
+- **Y4-D2:** the side reads `x ∉ P_cl(N)`, `y ∉ P_cl(S′)` from A-CIRC at `N`, `S′` (`ω(N)` near `v` lies in `x`); I read them from A-EXACT
+  at points near `S′` against `v`'s `y`-sector. Equivalent.
+- **Completions:** the side's contact tiles are boxes above the arc; mine discs cut by a small disc. The side's WC1H sectors are polygons cut
+  by the box `[−1/10, 1/10] × [1, 11/10]`; mine circular sectors. The side's `wc1h_ylow` turns only the lower ray to `−30°` (sector
+  `(−30°, 60°)`); I rotated the sector to `(−30°, 30°)`. Same verdicts, same reject pairs.
+- **What I add that the side did not test:** the windows' ends. The side's plants test each window from one side only (`wch_ywide`: below
+  `R_y`). My members test both ends: a `y`-cusp at `N` spanning `(3/5, 4/5)·T²` — above `R_y`, below the contact — leaves the fragment ACCEPT
+  **and the tip recolouring into `y` legal**, so `y ∈ P_cl(N)` does not by itself make a cone tip-hard; the window's position does. And the
+  `μ` discrimination (`κ₂ = 3/10` ACCEPT, `9/25` REJECT at `μ = 1/3`), which a plant at WC's own numbers (`μ = 2/3` against `κ₂ = 1/2`) cannot
+  separate from `μ = λ/2` or `μ = λ`.
+
+### 4.4 Proposed edits for the close
+
+- Grades: Y4-MU, Y4-TIP, Y4-D2 → **[hand], two minds, one blind** (FS110-Y4; FS110-YB4). Y4-WC, Y4-HARD → **[tools, exact], two independent
+  checkers** (the side's; `tools/fs110_yb4_check.py`), the reason for each tip REJECT confirmed blind by moving the window colour.
+- Wording: S1, S2, S3, S5 above; S4 the completion.
+- A new line for the claim list or the ledger (the close decides): **YB4-WINDOW** — "at WC's curvatures `κ = ±1/2`, a `y`-cusp at `N` inside
+  `R_y = [−T²/6, T²/2)` blocks the tip recolouring into `y`, and one above `R_y` (below the contact `Y = λT²/2`) does not; below `−T²/6` it
+  violates A-EXACT" — [hand + tools exact, one mind (blind)].
+- **Tool defect (mine, repaired before any verdict was read):** an undecided arc-membership test was taken as "at an endpoint"; some were exact
+  collinearities far from the endpoints. Its bias was toward ACCEPT; repaired in `tools/fs110_yb4_check.py` (`_member`), verdicts unchanged.
+
+### 4.5 Registered expectations, scored
+
+| claim | expected | found |
+|---|---|---|
+| Y4-MU | TRUE | TRUE (+ S3's per-side precision) |
+| Y4-WC | members ACCEPT; a wording precision likely | as expected (S1), plus S4 |
+| Y4-TIP | TRUE with the double-horn precision | as expected (S2) |
+| Y4-HARD | ACCEPT; REJECT at the named pairs | as expected |
+| Y4-D2 | TRUE for closure types; an essential-type note | as expected (S5) |
+
+The 0.6 on "at least one divergence of truth or scope": scope divergences found (five), truth none. My blind expectations matched every
+outcome, which says the claims were stated close to what the objects show; it also says the discriminating tests that mattered were the
+ones I added (4.3), not the expectations.
