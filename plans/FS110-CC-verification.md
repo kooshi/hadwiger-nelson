@@ -10,7 +10,17 @@ the session transcripts, `chats-bak/`, and scratchpad files I did not create. So
 
 ## Theorems this phase proved
 
-(filled at stage 3)
+- **C1** S–V Prop. 2 AE holds with a horn tile beside the arc; at the far end the path must hug the arc within an `O(δ²)` margin — [hand], one mind — §C1.
+- **C2** along a cusp's normal `±n`, `|u ± n − x(m)|² − 1 = 4R(R ∓ 1)m²/(1+m²)` on every boundary circle of signed radius R tangent at u: sign `1 ∓ κ`
+  at every δ, never 0 under Condition 5; in every other direction all small δ work (Condition 5 alone) — [hand + tools] — §C2, `tools/fs110_cc_cusp.py`.
+- **C3** any two of u's three arcs border all three colours of `c(u)`, at a cusp and a double cusp — [hand] — §C3.
+- **Cusp corollary** CB's D2 strip, its γ-curves, Cor. 3 AE and the pseudo-colouring's properties hold at cusp and double-cusp centres — [hand],
+  one mind on the cusp case (CB's uniform derivation is the other, not aimed at cusps) — §C1–C3.
+- **C4** a horn at the centre u obeys CB's D5 item 5 cone condition (`⟨τ, e_i⟩ ≤ 0`); along the normal the exact condition is second order (met iff
+  the larger curvature exceeds 1) — [hand + tools] — §C4.
+- **C5** no hexagon vertex `x_i` of D5 item 5 can be a cusp or a double cusp, and the inner-q case CB leaves unwritten is impossible — [hand + tools
+  (exhaustion of the twelve-position image)] — §C5.
+- **C6** D1's (P′) holds at cusp vertices — [hand] — §C6.
 
 ## Stage 1 — SAVED
 
@@ -155,3 +165,35 @@ and `c(v) ⊄ c(N)`.
 - C5: I would have swept random tangent triples and curvatures numerically for a cusp hexagon vertex; instead derived the four-case exclusion and
   checked it by exhausting the twelve-position image (a finite check of a derived claim, not a witness search).
 - C4: I would have sampled circles `ω(z)` numerically near the horn; instead wrote an exact rational sign-change certificate on a segment inside it.
+
+## Stage 3 — SAVED (verdicts)
+
+| # | step at a cusp vertex | verdict | grade, minds |
+|---|---|---|---|
+| D2 (a) | the three numbers `\|u + e − x_ij(δ)\| − 1` nonzero for a suitable δ, including along the cusp's normal | **TRUE, stronger**: for each e every δ below some `δ_e` works (Condition 5: the arc meets the fixed circle `ω(u+e)` finitely, u among the points); along `±n` the sign is exactly `sign(1 ∓ κ)` for every δ. The cusp changes only the sign pattern: the two horn arcs may disagree along `+n`, and then the third arc sets the side | [hand + tools], one mind on cusps |
+| D2 (b) | a horn tile holds "a curve beside the arc" | **TRUE**, with one care: along the normal the margin at the path's far end is `≈ \|1−κ\|δ²/2`, the order of the horn's width, so the path hugs the arc at its end rather than running down the horn's middle | [hand], one mind |
+| D2 (c) | any two arcs border all of `{4,5,6}` | **TRUE** (labels unchanged at a cusp and a double cusp); the step is implicit in CB l. 108–110 | [hand], one mind |
+| D2 at every centre it serves | u; the Lemma 3 endpoints (D4); the Cor. 3 pair | **TRUE**: none of these uses u's sector angles, only (a)–(c); the cusp enters nowhere else in D2 | [hand], one mind on cusps |
+| D5 item 5 | Prop. 17 AE with a cusp | **TRUE.** A horn at the centre u obeys the cone condition (C4) and the count closes (a horn fits a 0° or 60° cone; the other two sectors still need 360°; a double cusp fails the same count). No hexagon vertex can be a cusp (C5). **Completion owed to CB's text:** "the interval structure … forces the q_i-sector to contain [−30°, 30°]" leaves the inner-q case unwritten; it is impossible by the same four branch constraints (C5) — a completion, not a gap | [hand + tools], one mind |
+| D1 (P′) | unit pairs never nest, at a cusp | **TRUE**; the proof never uses tangents (C6) | [hand], one mind |
+
+**No step fails at cusps, so no local repair is needed.** Nothing I found makes CB's D2 or D5 item 5 depend on distinct tangents: CB's route covers
+cusp vertices, and double cusps, as written, with the two additions above ((b)'s margin; D5 item 5's inner-q case, which is not about cusps).
+
+**Registered expectation, scored** (formed after one pass in my head, so a weak test): (a) TRUE 0.85 — met, with the exact normal formula; (b) TRUE
+with an `O(δ²)` margin 0.8 — met; (c) 0.95 — met; D5 item 5 TRUE, no cusp at `x_i` 0.7 — met, plus the unwritten inner-q case; (P′) 0.95 — met.
+
+**Selection audit (G21).** The flattering outcome is "CB's route covers cusps". Tried against it: a horn straddling curvature 1 (the horn arcs'
+signs disagree along the normal: the majority still exists, C2's instance); a double cusp (all three signs curvature-set; D5's count still fails);
+a cusp at a hexagon vertex (excluded in all 27 admissible placements, and the exclusion is lost exactly when the Ω constraint is dropped, plant
+noOmega); a horn tangent to a branch direction (the odd positions of C5's image); the far-end margin of the horn path (C1). **Not checked, not asked:**
+D4's bicycle and D5 items 1–4, 6 at cusps. On one reading each uses no sector angle at a centre beyond D2 (item 6's a-side curve at a horn endpoint
+runs inside the horn, as in C1), but I did not derive them.
+
+**Aside, outside the brief, not checked:** S–V's printed Prop. 17 (the proof FS110-CD takes from print) argues by the three sector angles; at a horn
+the smallest angle tends to 0, so it runs in its "angles not equal" case with an arc of length tending to π, and rests on Prop. 16 there. I did not
+check Prop. 16 at a horn.
+
+**Proposed edits (for the close; I edit none of these files).** Wherever FS110-CB's D2 and D5 item 5 are filed (`LEDGER.md` § B, the FS-110
+derivation file): "cusp and double-cusp vertices included (FS110-CC C1–C6)"; D2's item (a) in the stronger form of C2; D5 item 5's proof completed by
+C5's inner-q case. No `BIBLIOGRAPHY.md` change: `[SokolovVoronov2025]` §6 (Props. 9–11, Cor. 2–3, Prop. 17) read again, no new section.
