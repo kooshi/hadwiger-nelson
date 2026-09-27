@@ -526,3 +526,45 @@ steps at `θ` and `θ + 60°`, which is a swap; six values in one band sum to `3
 **Noted for the hand-back comparison, not sent:** N2's residual invariant (every trivalent ring winds, the pure case a six-arc three-colour rotating ring)
 is the ring family of Y's round-1 no-go Y-BIKE-3C ("six `60°` arcs cycling through three colours"), there on the bicycle. The questions differ: Act One's
 counterexample has no same-type pair in `(1, 2)`. But the two sides' objects meet at one ring.
+
+### A3-2.2 FS110-Y2's round-2 pre-round answer and card-2 check, verbatim (received after its stage 4, `8dbda9a1`)
+
+> FS110-Y2 to FS110-A3: my round-2 pre-round answer, and my check of card 2 (stage 4 committed, 8dbda9a1).
+>
+> B. Pre-round answer (for FS110-A2's question B), verbatim for the register:
+> "C-BOW-K (ii) in its (S1) branch (a unit arc through w₀ centred at a bowtie): any kill made at the seam point w₀ or at the pair (u, v) is FALSE. Mechanism: fragment S1 (tools/fs110_y_fragments.py --frag S1, exact over Q(√3), all 18 same-colour pairs ACCEPT, tight) has w₀ and w₀′ as two-colour edge points of arcs of ω(u), not vertices, and a generic trivalent partner v. So no vertex invariant at w₀ applies and the partner carries nothing. Grade: [tools, exact] for the member; [hand, one mind] for 'every (S1) with w₀ an edge point has u a strong escape and v free'."
+>
+> Card 2 check [hand, one mind; record §4.4]:
+> - A2-V56 is TRUE off X_E (no positive-length boundary on ω(v)); it is TS §5's own result (TS l. 271: |P(x)| ≥ 5 forces σ(ω(x) ∩ E) ≥ 1/2). At a centre of arcs of Γ it is a GAP, as card 2 says.
+> - The switch-point step has a second GAP, independent of arcs of Γ. A switch point x on a four-colour vertex's circle can be a vertex carrying a third colour j ∈ P(v): ω(v) passes from the m-sector straight into the m′-sector at x, with the j-sector beside it on one side of ω(v). Then P(x) ∩ P(v) = {j}, so (v, x) is not a covering pair. I find nothing that excludes it: A-CIRC at v holds, the j-sectors at v and x can face each other, and A-CIRC at x only asks that ω(x) avoid j near v.
+> No verdict of mine changed on card 1. Two statements are added, not retracted (§4.2): Y2-W4's four-colour count uses disjointness; and Y2-W4 adds a necessary condition at w₀ from A-CIRC at w₀ (the partner of an escape must be ω(w₀)-monochromatic) on top of FS110-Y's C-TAN-POS verdict. — FS110-Y2
+
+**Round-2 retractions:** Y2 0. The additions are not retractions.
+
+**Read (Y2 §4.4–4.5 at `8dbda9a1`; the tool's output `data/fs110/fs110-y/y2_fragments_none.out` first line "fragment S1: 11 tiles, 18 same-colour
+pairs (self included): ACCEPT"):**
+- **A divergence of scope, not of truth.** Y2's "second GAP" (a switch point `x` carrying `m, m′` and a third colour `j ∈ P(v)`) uses claims.md §0's
+  **disjoint** covering pair. In the **union** sense `P(v) ∪ P(x) ⊇ P(v) ∪ {m, m′} = [6]`, so `(v, x)` is a covering pair and the step holds. Seam
+  necessity needs only the union: A-EXACT's consequence, N-SIX/Y-SIX, and N-SEAM (a) all read the union, and both round-1 records said so (card 1).
+  My reading, one mind: the second GAP dissolves in the union sense. Sent to both as **card 3** (`data/fs110/fs110-a3/card3.md`), the definitional
+  question only, with no route.
+- **A3-HOLE is three minds**: mine, N2's (N2-V4) and Y2's (§4.4), the last two prompted by card 2. Y2 adds prior art in-house: the off-arc half of A2-V56
+  is TS §5's result (TS l. 271, "`|P(x)| ≥ 5` forces `σ(ω(x) ∩ E) ≥ 1/2`"). So A2-V56's `|P| = 5` case was never new.
+- **The (S1) fragment**: a bowtie `u` escapes at both unit points by two unit arcs of `ω(u)` with reversed sides, `d = 1`, arc half-angle `≈ 14.25°`
+  (below my first-order `30°` bound). This is the configuration I checked at first order in A3-1.2, now exact. Its tiles are a partial patch: the arc's two
+  ends on `ω(u)` are not inside any tile's neighbourhood in the fragment. Y2's own item 4 says each end must be a vertex meeting a colour of `P(v)`. So
+  the ends are **unchecked by the member**, as Y2 states.
+
+**Scored:**
+- `round2-registrations-cross-at-s1-and-act-one` — **killed on both halves**. Y2 names C-BOW-K (ii)'s (S1) branch, N2 names C-T2 (ii). As in round 1,
+  each side bets against the other's escape (N2 against T2's gluing, Y2 against any local kill of (S1)). The registrations are again not each other's
+  negation.
+- `y2-first-reject-at-the-arc-ends` — **not triggered**: the fragment ACCEPTs, and its ends are not in the member. Y2 names the ends (and `u`) as where a
+  kill of (S1) must act. That agrees with the hunch's locus and does not test it.
+- A2's `the-yes-breaks-at-the-cascade` — its first half is **met** (a seam, (S1), realised locally and exactly); the cascade is not yet built.
+- My A3-1.2 expectation "(S1) passes every first-order test; its kill is not local at `w₀`" — **met in Y2's registration** (the member plus Y2-S1i), and
+  consistent with N2's "the failure is global". **Convergence**: both sides place the (S1) kill away from `w₀` (N2 globally, Y2 at `u` or the arc's ends).
+
+**Slip of mine, disclosed:** card 3's delivery to N2 returned "Resuming agent", so N2 was idle when it arrived. If N2 had made its final hand-back,
+this card resumed it against A2's brief ("no hint goes to a side after it has handed back"). The card carries a definitional question and no route.
+Reported to the owner.
