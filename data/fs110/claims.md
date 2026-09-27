@@ -274,3 +274,35 @@ quoted in §7 ("given A4-BAND and a transposed swap"), where they carry one mind
 "trivalent" means `|P_cl(u)| = 3` at any degree, so a bowtie's ring must wind as well. N2-FLIP's bookkeeping, and so the "even count" bullet, is
 established only at tiles whose boundary vertices each have type `{a, b_{i−1}, b_i}`. At a tile flanked by a bowtie's repeated colour, W-3's
 second bullet is undefined until either side extends it. Y3's answer to card 4 is pending.
+
+
+## 8. Round 4 (the owner's addendum, 2026-09-27): the `d = 2` seam
+
+**Round 3's product, as the round-4 frame.**
+- **N3-RED** holds at two minds, one of them blind: FS110-N3 derived it, and FS110-NB3 confirmed it blind with one-line repairs.
+- It rests on **W-MERGE**, also two minds, one blind.
+- It also rests on **FS106-V's repaired S–V Cor. 1**, which is one mind. A blind second mind (FS110-CB) is checking it now.
+
+The two statements, verbatim from the proof side's table (`plans/FS110-N-proof.md` § Continuation — FS110-N3):
+
+| N3-DEG | `int D_c(v) = ∅` only in **Woodall's cone**: `c` has out-type contacts at both `v ± n` (`n ⊥ a`), and every `c`-sector at `v` is a cusp horn along `±a` with bounding curvatures in `(−1, 1)` (strict by Condition 5) | [hand, one mind] | §2.3 |
+| N3-RED | a tight six-map in `𝓜_K` under Condition 5 has, in every disc of radius 3, a hard Woodall-cone vertex or (after W-MERGE) S–V's `d = 2` configuration — given FS106-V's repaired S–V Cor. 1 (cubic maps, Condition 5; one mind, a sketch at Lemma 3 for `√3 ≤ d < 2`) | [hand, one mind, over FS106-V's one mind] | §2.5 |
+
+**Round 3's verifier found a gap in the winding framing** (FS110-YB3, YB3-SAME): `W` is not transported across a same-type edge. N3-RED does not use
+windings, so the reduction above is untouched by that gap; the winding framing of §7 is what weakens.
+
+**What the two remaining steps have in common**, quoted verbatim from the competition advisor's record (`plans/POROS-2026-09-27-fs110-competition.md`
+§ A5-5.4):
+
+**Both of W-3's remaining steps sit at distance exactly 2.** G-CONE: the two out-contacts of colour `c` touch `ω(v)` at `v ± n`, antipodal, so
+`N, v, S′` are collinear with `|N − S′| = 2` and `v` the midpoint (N3 §2.3). G-d2: two same-multicolour points antipodal on `ω(u)`. And `d = 2` is the
+configuration set aside at every earlier step: W-POLY and K-REG ("bar `d = 2`"), close pairs (`< 2`, "W-TAN's `d = 2` collinear configuration is
+separate"), C-SEAMLIST ("not at `d = 2`"), N2-TRANS (NB: "TRUE bar `d = 2`"), Y3-PROP ("the case of distance exactly 2 is W-TAN's separate `d = 2`
+configuration"), FS106-AE-POLY.
+
+**W-4 (the `d = 2` seam).** In a tight six-map in `𝓜_K` under Condition 5, can a hard Woodall-cone vertex (G-CONE), or S–V's `d = 2` configuration
+(G-d2), occur? Are the two one configuration, decided by one argument?
+- **NO at both** closes the Condition-5 half of `[SokolovVoronov2025]` Question 2 almost everywhere, at bounded `K`. That is a partial answer to a
+  question in print, given its base (FS106-V's Cor. 1 repair, under blind check).
+- **YES** (a local fragment realising one, given by formula and checked exactly) is a local realisation, not a map. It names where the construction
+  must go.
