@@ -581,3 +581,153 @@ before R's record; VW: stage 3 `ef9e955a` before W's record). No children were s
 **Divergences of truth in the milestone: three**, every one found by a blind mind and settled by derivation: OB′ (V), RR ⟹ R′ (V), W-TAN at cusps
 and at two-element types (VW). **None between the competitors** (A2 §5.3). Three statement-level corrections (the CP line, W-EQ-K's complexity, the
 W-RATE and W-TAN table lines). Retractions (A2 §5.5, from the registrations on): R 2, W 1, A2 0 (one hunch killed); FS107-A 0; V and VW 0.
+
+## §R-close stage 2 — SAVED: `plans/FS107-derivation.md` (commit `18d3a50e`)
+
+Nineteen entries in FS-106's form (§1 R's side with V: SAT, CP, V-CP, RR, SW, OB′ corrected, V-C5; §2 W's side with VW: W-EQ-K with VW-ERODE and
+VW-CPT, W-POLY, W-RATE with VW-PIN, W-TAN, HX-STALL, the tools; §3 K-C6, K-BICH, K-AD, MEET; §4 the DOV re-attribution). Grades carry no nested
+brackets. Kernel: two stubs (FS107-R-CP and FS107-W-EQ-K, to FS-101 when their half lands, X17); every other entry declined with its reason.
+
+## §R-close stage 3 — SAVED: the §G re-read, the §PA sweep, the §IQ re-read, the predictions, the verdict
+
+### 3.1 §G re-read (WORKFLOW 9): which extractions paid
+
+| X | paid? | how |
+|---|---|---|
+| X1 strip-and-erosion first | **paid** | R ran the five killing tests on its shape before any proof (R §2.2); V and VW ran them on finished statements (V §2.1). R's retraction 2 (Theorem OB) was the same discipline turned on its own draft |
+| X2 where the pigeonhole lives | **paid** | R §2.3: the pigeonhole lives at the complementary pair, not in the holes; the free colour cannot absorb a forced region of area `≍ ss′` |
+| X3 non-hitting shapes | unused | neither side took PD-EQ's quadratic form or the measure fan |
+| X4 integrality | **paid** | six enters through K-C6 (disjoint triples are complementary only at six); CP is its metric content |
+| X5 object labels | **paid** | every R lemma labelled SEQ, LIM or both; SW's `εs` is SEQ-pointwise in R, a.e. in V |
+| X6 special cases below the equivalence | held | R-S's Question 2 steps stayed tools; W-EQ-K made C-AE-Q2 an equivalent at bounded complexity, which is why FS-110 now leads |
+| X7 driving parameter ≠ grid scale | **paid** | HX's parameter is the void radius `ρ` |
+| X8 the checker's shape, planted pairs | **paid** | W-CHK with three plants; VW's independent checker agreed on all six members |
+| X9 generator image first | **paid, most** | W §2.1's image statement produced W-EQ-K directly: the two doors are the image's two complements |
+| X10 antipodal ansatz | unused | optional |
+| X11 class density | **paid** | W's killing test 3 on HX (W §3.6) |
+| X12 the advisor's pre-round question | **paid** | the two registrations bracket (B) exactly (A2 §5.1: "Each is the other's negation") |
+| X13 audit TRUE at FALSE's rate | **paid** | V audited SW's `s³`; VW audited HX's "iff for every parameter" symbolically at five values |
+| X14 §PA in three vocabularies | **paid** | DOV Lemma 6.2; `[MundingerEtAl2025]` (see 3.2) |
+| X15 the bold form falsifiable | not fired | E3 not met |
+| X16 five and six apart | kept | — |
+| X17 Lean slot | named | two kernel stubs filed (stage 2) |
+| X18 finite-graph shadow closed | held | — |
+| X19 example/counterexample record | done | 3.3 |
+
+**Misses — entries that should have borne and were not used (each an instance, drafted in stage 4):**
+- **M1, G82's own reading** misdirected: the plan carried "R must count a defect non-locally, Voronov's contradiction being feature-local" into the
+  briefs, and A2's stage-1 expectation priced a junction as a point (its hunch `r-first-mechanism-is-local-and-pinhole-killed`, killed). FS107-R-CP is
+  a feature-local certificate whose cost is `ε`-independent: feature scale is not band scale. Corrected at this close (3.5, stage 4).
+- **M2, § Make the gate fail, "exactly ONE thing may differ"**: R's P1 compared `(t₁ − 2r)(t₁′ − 2r′)`, an area, with `δ₆`, a density; V caught it
+  (V §4.2: compare with the Parts void, `S∆ ≈ 6.6·10⁻⁵` per cell of area `≈ 0.461`).
+- **M3, standing rule 5 / G21 "scope lines do not survive into summaries"**: R's "Theorems this phase proved" line for CP is a compression of §3.2's
+  Claim 2 that drops its scale bound, void bound and blocking definition; V's stage-3 MISSTATED was earned by the line, not the lemma. A theorem line is
+  a quotation surface (WORKFLOW 7's heading) and must carry its hypotheses.
+- **M4, G21 "a list of exceptions measures its class"** (FS-106's bearing for FS-107): FS106-TAN lists C-T-TAN's failures as "cone points (tangent
+  interfaces, bowties), and also … cusps and … blow-ups converging only weak-*"; W-TAN took "every vertex a cone point" and missed that a cusp is a cone of
+  angle 0 where the multicolour drops to two (VW §4 item 4).
+
+**New grokkings minted at this close:** none; G82's reading is corrected in place (stage 4). **Forward propagation:** G82 (corrected) and G79's
+flip (3.3) to FS-110 and FS-111's provisional bearings; G21 (M3, M4) to FS-110's (its rule has exceptional sets); FS-104's null-set step no longer
+sits under FS-107 (drafted in stage 4).
+
+### 3.2 §PA sweep — what the gate taught about our own object
+
+1. **`[MundingerEtAl2025]`'s near six-colourings are W-POLY's class** (read with W-POLY, FS107-W-POLY): periodic, piecewise constant on
+   sub-parallelogram cells, so polygonal of bounded complexity at fixed resolution — their removed fraction (`0.04 %`) is bounded below at that resolution,
+   and only unbounded complexity (door (B), FS-111) or curved tiles (door (A), FS-110) can send it to 0. A recognition for FS-109 and FS-110's stubs.
+2. **The periodic-approximation step is the (iii) literature's** (DOV Lemma 6.2, one class): the re-attribution of FS106-SUP's periodic half, drafted
+   for row 131 and `BIBLIOGRAPHY.md` (stage 4).
+3. **The question as posed is new, the quantity old** (§PA row 3): "`µ₆(ε) → 1`?" not found posed; FS-110's question is S–V's Question 2 at bounded
+   complexity with the rule W-TAN attached — its gate is FS-110's own opening.
+4. **Hoffman–Soifer 1993's "almost chromatic number" is the off-diagonal variant** (a sixth colour at another distance), by `[MundingerEtAl2025]`'s
+   text — a naming hazard for FS-110's gate: "almost" in print is not holes.
+5. **Debts carried:** OpenAlex not run; unheld Bukh 2008, Croft–Falconer 1981, Falconer–Marstrand 1986, Croft 1967, Hoffman–Soifer 1993,
+   `[Townsend2005]` (inventory item 8) — FS-111's gate needs Bukh and Falconer–Marstrand (compactness for distance-avoiding sets) first.
+
+### 3.3 §IQ re-read; G72's count and G79's record
+
+**§IQ's structural form** — "What does every band-proper partial six-colouring carry, uniformly in `ε`, that ties its uncovered measure to its
+geometry?" — answered in part, through **candidate (b)**, "the junction-type structure every tiling member carries — which multicolours meet at its
+vertices and how close complementary types sit": CP prices a close complementary pair at area `≍ ss′`, W-TAN says a hole-free limit keeps every close
+complementary pair tangent, bowtie or cusp, and the meeting point is that the two are one statement. SAT answers candidate (c)'s setting (the holes are
+the open six-sighted set). Candidates (a) (PD-EQ's pair fraction) and (d) (the index) were not used. **The invariant is not found**; FS-110's rule is
+where it is sought next.
+
+**G72's count: fourteen of seventeen.** FS-107 counts **through the structural question**: the meeting point and RR came through candidate (b) (R
+stage 4: "The reduction RR came through §IQ's structural question … candidate (b), junction types"), and W-TAN is candidate (b) read as a design rule;
+W-EQ-K came from X9 (the generator image) and compactness, an extension of a known tool. Mixed, counted through because the product (FS-110's question)
+is candidate (b)'s object.
+
+**G79's record for FS-107.** Example invariants: SAT (every saturated colouring carries the open six-sighted hole set); W-EQ-K (every vanishing-holes
+family at bounded complexity carries a tight map as its limit). Counterexample invariants: CP, SW, OB′, W-POLY, HX-STALL (what a hole-free family must
+avoid). **The flip, once, and it produced the milestone's synthesis:** W-TAN is C-T-TAN's no-go ("a counterexample would need …") read as the rule every
+door-(A) solution must carry — exactly G79's *Do* — and it met R's counterexample invariant CP at one object. No breakthrough of either kind; the killing
+test did not fire.
+
+### 3.4 E1–E8 and every registered prediction, scored
+
+| # | registered | p | outcome |
+|---|---|---|---|
+| E1 | R proves C-Q-STAB | 0.10 | not met (GAP at (A)/(A″), (B)) |
+| E2 | R proves C-VOID | 0.05 | not met (GAP; RR does not give it, V) |
+| E3 | W meets claim W | 0.07 | not met (GAP; HX stalls at `π/(42√3)`) |
+| E4 | R names an obstruction beyond HIT, PIX, pinhole | 0.45 | **met, weakly**: OB′, of HIT's logical type — as R stated it FALSE; its corrected form (away-facing colour, V) is the obstruction |
+| E5 | W names a void lower bound for a named class | 0.40 | **met**: W-POLY (two minds), HX-STALL (two minds) |
+| E6 | a W family refutes C-VOID | 0.30 | not met (untested; HX's voids have radius `≥ 0.22`) |
+| E7 | R″, order `ε` | 0.20 | not met (SW gives `≥ εs` per regular swap; forcing a swap is (A) again) |
+| E8 | first breaks where A2's table puts them | 0.50 | **half**: W at the junction void, yes; R at the bicycle branch, not the anchor step |
+| falsifiable | G82's reading dies by a feature-local proof of `lim µ₆ < 1` | 0.02 | **not fired as worded** (RR is a GAP); **the reading's inference refuted** by CP (a feature-local, `ε`-independent certificate), and R flagged it; corrected |
+| falsifiable | K-AD (b) | 0.05 | not fired (CP's holes are door 2) |
+| falsifiable | the bold form `χ(ℝ²) = 7` dies with no MR | — | not fired |
+| FS107-A | two doors (void conservation or a positive-measure defect) | — | consistent; CP is the void-conservation door in R's form (A2 §5.7: `void-conservation-is-the-crux` supported) |
+| FS107-A | round one is about C-VOID | — | **killed** (W's first family aimed at door (A)) |
+| FS107-A | `w-first-family-moves-the-void` | — | first half confirmed by derivation (HX: a positive floor); migration not shown |
+| FS107-A | `complementary-type-is-the-combinatorial-core` | — | supported (W-TAN ≡ CP) |
+| FS107-A | `rq-collapses-to-rs` | — | at risk, not killed |
+| A2 | `bounded-complexity-families-keep-their-voids` | — | confirmed as an equivalence (W-EQ-K, now two minds) |
+| A2 | `w-first-family-has-bounded-complexity` | — | confirmed (HX) |
+| A2 | X2: W breaks at row 3 for a reason of class | — | half: row 3 yes; the reason geometric (K-ISL), not compactness |
+| A2 | `r-first-mechanism-is-local-and-pinhole-killed` | — | killed (A2 stage 4) |
+| R | W fails first at row 3 | — | confirmed in outcome, mechanism untested |
+| R P1 | Parts has no fat complementary pair costing `> δ₆` | 0.9 | unscored ([external] coordinates); **mis-specified** — an area against a density (M2); the comparison is with the void, `≈ 6.6·10⁻⁵` per cell |
+| R P2 | every W family with holes `→ 0` has cone scale `→ 0` at complementary pairs | 0.95 | vacuously consistent (HX has no complementary types) |
+| R P3 | bicycle-free Voronov (A) false | 0.6 | untested |
+| W | C-VOID fails first | — | untested |
+| W P-W1, P-W2, P-W3 | HX geometry | — | lost, lost, won (each caught by W's own checker) |
+| V | CP MISSTATED at constants 0.25; implication TRUE after repair 0.7; SAT; SW `εs`; SW `s³` 0.65; OB′ MISSTATED 0.5 | — | all met (CP's branch through curvature, not location) |
+| VW | HX 0.8; W-EQ-K 0.6; W-RATE 0.7; W-POLY 0.7; W-TAN GAP at cusps or two-colour vertices 0.5 | — | all met; W-TAN's Jordan-boundary gap unregistered |
+
+*Calibration:* the three outcomes registered near one half (E4, E5, E8) landed met, met and half; the five below 0.3 did not land. No expectation
+capped an aim (counter-priors rule 2).
+
+### 3.5 The verdict, in four parts
+
+- **The choice:** close FS-107 as **not landed** on all four claims (R, R′, R″ GAP; W GAP), with its product the **meeting point** — RR (two minds),
+  W-EQ-K (two minds), FS107-R-CP ≡ W-TAN (two minds each; W-TAN a GAP at cusps) — and the no-gos (W-POLY; OB′ corrected; HX-STALL as a measured fact
+  about one family); open **FS-110, the tangency seam**, next (the owner's ruling, item 28), with **FS-111 (REG-SCALE)** minted beside it.
+- **The alternative weighed:** a second round inside FS-107 on the same question (A2 §5.9's form) — one reframe cheaper; or REG-SCALE first (A2 §5.9's
+  alternative), where R must win in the end.
+- **Why this one:** the tangency seam is a new object — maps with tangent, bowtie or cusp seams, where Townsend's ⅔π counterexample already lives —
+  that needs its own re-grokking and prior-art gate (item 28); it is local and derivable within the ban; its YES (a full tight map) is decisive with no
+  MR through W-EQ-K; its NO answers `[SokolovVoronov2025]` Question 2 almost everywhere for locally finite arc-bounded maps, a question in print; and
+  REG-SCALE's escape is the same rule at every scale, so FS-110's answer is REG-SCALE's first lemma either way.
+- **Confidence: medium-high.** What would change it: V's C5 proved in general (tangent rings force holes at every positive scale) would narrow FS-110 to
+  bowtie and cusp seams — the same milestone, smaller; a hand argument that the rule can be met only by degenerating at every scale would merge FS-110
+  into FS-111 and make REG-SCALE the milestone.
+
+**Not landed, said plainly:** no stability theorem, no vanishing-hole family, C-VOID untested, R″ not reached. "All novel knowledge is a success": the
+programme now knows exactly which two statements decide it at six colours.
+
+### 3.6 Would have searched here (every job's log)
+
+- P: an OpenAlex cross-check of the citing lists (a debt, §PA row 7); planning none.
+- R: an offset scan over `(φ, ψ)` for C-T-BIKE's arc ansatz → two windows by hand at `d = 1.9`, stopped; a numerical optimisation of CP's constants
+  against Parts → constants stated, P1 registered.
+- W: a greedy fill of the hex member's 351 fillable squares → a diagnostic count only; a scan of HX's `D`, `ρ` or triangle shape → the stall derived
+  exactly, four members placed by the derivation.
+- V: a scan of CP's failure region over `(s, µ, d, cut angles)` → one derived geometry, its on-axis band in closed form and a six-by-five dial on it;
+  colouring Parts's tiling from its figure to scan its complementary pairs → not done, the test run at the level of constants.
+- VW: a numerical sweep of HX's optimum → derived (pair 2 minus pair 1 is `6t − 3`); a search for a local cusp counterexample to W-TAN → the step named,
+  no counterexample derived (GAP, not FALSE); a better absorption than HX → not its job.
+- A, A2, and this close: none.
