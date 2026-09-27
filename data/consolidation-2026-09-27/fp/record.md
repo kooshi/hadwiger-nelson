@@ -213,3 +213,21 @@ each addition names a row, a stub or `CLOSED-QUESTIONS.md` rather than retelling
 LX found mis-scoped (item 28, which the owner applies to `CLOSED-QUESTIONS.md` after FP).
 
 **Fact audit** (`--base cc0881df`): exit 0, AUDIT PASSED, LOST 0 in every class, no dangling pointer.
+
+## Stage 5 — SAVED: gates
+
+The first `--dupes` run read **12** repeated runs against the base's **10** (checked by running the base revision's audit on the base's three
+files): both new ones were mine, in the §G49 instance — the Johnson 2006 p. 214 quotation (already in `LEDGER.md` row 73's prior art) and "a held
+paper is prior art for questions it was not read for" (G49's own *Do* line). Both replaced by pointers ("quoted in `LEDGER.md` row 73's prior
+art"; "the held-paper clause once more"), one home per fact; the re-run reads 10, the base's count.
+
+| gate (each exit status read directly, output to a file) | result |
+|---|---|
+| `python3 tools/claude_md_fact_audit.py --base cc0881df` | exit 0, AUDIT PASSED (0 failures; LOST 0 in every class; no dangling pointer); one ALLOW line added, G56's tag (stage 4) |
+| `python3 tools/claude_md_fact_audit.py --dupes` | exit 0; 10 repeated runs (the base's 10; none new) |
+| `python3 tools/fs71_ledger_b_check.py --strict` | exit 0, PASS (947 rows) |
+| `python3 tools/bib_audit.py` | exit 0, every cited work resolves |
+| `python3 tools/check_architecture.py` | exit 0, PASS |
+| `python3 data/rerank-2026-09-27/rk_mirror_check.py` | exit 0, PASS |
+
+`CLAUDE.md`: 295,835 → 296,956 bytes.
