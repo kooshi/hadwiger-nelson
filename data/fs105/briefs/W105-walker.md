@@ -27,7 +27,9 @@ rate of one they dislike (`CLAUDE.md` G21).
 2. **(c) EF_F⁺ at degree 16.** Walk X01D §3 and X12B §2 step by step at `F_dG`: the multiplier count (EF-G (b), `#U_N ≥ c·N^{1/16}`) — and, the
    deciding question, **what growth the argument actually needs and whether `1/16` (or any fixed positive exponent) supplies it**, written as an
    inequality with every constant's dependence on the degree named; the expanding place; the product formula over 32-dimensional `L`; the
-   leaves at the sixteen complex places; `h_m = log H` for totally real `F`. When two quantities are compared, exactly one thing may differ:
+   leaves at the sixteen complex places; `h_m = log H` for totally real `F`. Walk too the advisor's registered risks (`plans/POROS-2026-09-26-fs105-harden-mr.md`
+   stage 1, its EF_F⁺ and degree-16 rows): zero entropy of one `u` controls only `u`'s own expanding places; a `Γ` built from `U_ℚ ⊂ ℚ(i)` alone
+   spans only `ℚ(i)` and is not admissible. When two quantities are compared, exactly one thing may differ:
    state the height normalisation once and use it for both. Exact checks of seconds under `tools/fs105_w_*.py`, each with a plant. Save.
 3. **(c) PE-2 at degree 16**, written **before** you open `plans/FS105-R-reading.md` (the reader's, on the same items; commit this stage first so
    the two are separate minds): (a1)–(a8) of the claim list at `F_dG` — Lemma W's totally split prime, admissibility against the proper
@@ -35,7 +37,10 @@ rate of one they dislike (`CLAUDE.md` G21).
 4. **(d) Row 129's test.** (d1) the chain MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`, every inequality's direction named, from `LEDGER.md` row 129 and
    `plans/FS103-derivation.md` §2 (and its sources there); (d2) the weakest statement about finite unit-distance graphs that would prove
    `α₁(ℝ²) > m₁(ℝ²)`, given the best proved bounds (read them in `[AmbrusEtAl2023]`, `[MatolcsiEtAl2025]`, `[DuczVarga2026]`, held — grep
-   `BIBLIOGRAPHY.md`); (d3) whether anything in print or held proves it or comes within a named margin, with the margin as a number and its source;
+   `BIBLIOGRAPHY.md`); (d3) whether anything in print or held proves it or comes within a named margin — in
+   particular (the advisor's point) any proof that `α₁(ℝ²) ≥ 1/4` (every finite unit-distance graph of fractional chromatic number at most
+   4 up to `o(1)`), which with `m₁(ℝ²) ≤ 0.2470` would refute MR, and on the prediction side the best explicit graph's ratio against MR's
+   `α₁(ℝ²) = m₁(ℝ²)` — with the margin as a number and its source;
    one zbMATH API query set (WORKFLOW 3.2 item 8) on the citers. **No search for graphs** (the ban). Save.
 5. The write-up: a verdict per claim ((c) TRUE / FALSE / GAP at a named step; (d1)–(d3) each), your grade and count of minds (a walk of written
    proofs is a checking reading, not a blind mind — say so). Save; the report.
