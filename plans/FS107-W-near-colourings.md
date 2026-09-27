@@ -116,3 +116,121 @@ arc-bounded tight maps, and W's first obstruction theorem is scoped to polygonal
   `1.150`; no complementary-type pairs (no junction has a three-element type).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the generator image, its parameter count, and where vanishing holes can live
+
+### 2.1 The generator (X9, written before any member of the family is checked)
+
+Every W member I build is produced in three steps, each a formula:
+1. **A design** `P`: a periodic partial six-colouring of the plane by closed tiles, each bounded by at most `K` circular arcs (radius `≥ 1/K`)
+   or segments, at most `K` tiles meeting any unit disc, periodic under a lattice. Its parameters per period cell: the vertex coordinates
+   (`2V` reals), one curvature per boundary piece (`E` reals in `[−K, K]`), the colours (discrete), and the period lattice (4 reals) — finitely
+   many, `2V + E + 4`.
+2. **Slack**: erosion by `κ` (TQ-ERODE: slack `2κ`, cost `≤ κ·L + O(κ²)`, `L` the boundary length density), or, where the design allows, a void
+   of radius `O(κ)` only at each contact point (2.4). One real parameter.
+3. **Rasterisation** at mesh `h ≪ κ` (Lemma T by centres: slack loss `≤ √2 h`, coverage loss `≤ h·L`). One real parameter.
+
+The **generator image** `Γ_K` is the set of all rasterised members so produced from designs of complexity `≤ K`; the image over all `K` is
+every SEQ member (a grid-square colouring is its own design, with `K ≍ 1/h`). **Parameter count against W's claim:** W quantifies one
+tolerance `δ` and asks for one `ε(δ)` and one member; a family indexed by `n` must supply `(P_n, κ_n, h_n)` with `δ_n → 0`. At fixed `K` the
+design space is finite-dimensional per period, so **vanishing holes lie inside `Γ_K` only if the design space at complexity `K` contains a
+full tight colouring** (2.2). Outside every `Γ_K` (complexity unbounded) the image is all of SEQ and nothing is excluded by the generator.
+So the generator image contains vanishing holes by one of exactly two doors: **(A)** a full tight a.e.-proper six-colouring of bounded arc
+complexity, or **(B)** unbounded complexity.
+
+### 2.2 W-EQ-K — at bounded complexity, W is the map question [hand, one mind]
+
+**Theorem W-EQ-K.** Fix `K`. If band-proper designs `P_n ∈ 𝓜_K` (2.1, step 1) have slack `ε_n → 0` and uncovered density `δ_n → 0`, then
+there is a full a.e.-proper six-colouring of the plane by tiles of `𝓜_K`: closed tiles covering the plane, bounded by `≤ K` arcs or
+segments, `≤ K` meeting any unit disc, no two interior points of one colour at distance exactly 1. Conversely, such a colouring `M` gives, by
+erosion and rasterisation, a W family with `δ(ε) = O(ε)` (with `ε ≍ κ`), and so `χ(ℝ²) ≤ 6` with no MR (I-EASY).
+
+*Proof (⟹).*
+1. *Centring.* By Route II's maximal-inequality step (TQ §3.3), translate each `P_n` so that every disc `B(0, r)` has uncovered measure
+   `→ 0` as `n → ∞`.
+2. *Compactness.* On `B(0, r)` the tiles of `P_n` are `≤ K(r + 1)²·const` sets, each bounded by `≤ K` arcs of curvature in `[−K, K]` whose
+   endpoints lie in a bounded set: a compact parameter space (arcs degenerate to arcs, segments or points). A diagonal subsequence converges on
+   every `B(0, r)`: each tile to a compact tile `τ_∞` of `𝓜_K` (zero-area limits dropped), boundaries in Hausdorff distance, hence the colour
+   classes in `L¹_loc` (their symmetric difference lies in an `η`-neighbourhood of boundaries of bounded length).
+3. *Covering.* `L¹_loc` convergence and step 1 give limit classes covering every disc up to a null set; closed tiles, finitely many per disc,
+   so they cover everything.
+4. *Properness.* If `p ∈ int τ_∞`, `q ∈ int τ′_∞` (one colour) had `|p − q| = 1`, take `r` with `B(p, r) ⊂ τ_∞`, `B(q, r) ⊂ τ′_∞`. The unit
+   pairs in `B(p, r) × B(q, r)` have positive `Leb ⊗ σ` measure; those with an end outside `τ_n` or `τ′_n` have measure `≤ C(|B(p,r) ∖ τ_n| +
+   |B(q,r) ∖ τ′_n|) → 0`. So for large `n` member `n` has a monochromatic pair at distance exactly 1, inside its band. Contradiction. ∎
+
+*Proof (⟸).* In `M` each tile has diameter `≤ 1` and two tiles of one colour have cross-distances all `≥ 1` or all `≤ 1` (else an interval
+of distances straddling 1 carries a positive measure of unit pairs); boundaries have finite length density. That is TQ-ERODE's hypothesis:
+erosion by `κ` has no monochromatic pair in `(1 − 2κ, 1 + 2κ)` and costs `≤ κL + O(κ²)`. Rasterise (Lemma T). ∎
+
+*What it says.* Bounded-complexity W is exactly S–V's map question in its a.e. form (C-AE-Q2 / FS106-AE-NICE's relaxation) at complexity
+`K`: a family of mine at bounded complexity succeeds iff its designs converge to a full tight map, and fails iff no such map exists. **`[Parts2020c]`'s
+framework is inside `𝓜_K`** (17-gons, wavy sides, curved pairs); his convergent refinements with fixed voids are numerical evidence
+[external] that his symmetric class holds no full tight map.
+
+### 2.3 W-POLY — polygonal designs of bounded complexity cannot make their holes vanish, bar `d = 2` [hand, one mind; over FS106-AE-POLY]
+
+If every design is polygonal (all curvatures 0), the limit of 2.2 is a locally finite polygonal a.e.-proper six-colouring of the plane, which
+FS106-AE-POLY excludes except at its `d = 2` edge case. So **for each `K` there is `δ₀(K) > 0` with `δ ≥ δ₀(K)` for every band-proper
+polygonal design in `𝓜_K`, at every slack** (for slack `≥ ε₀` TQ-EPS2 gives `ε₀²/78`), unless a full polygonal tight six-colouring exists in
+the `d = 2` edge case. *Grade:* [hand, one mind for the limit step]; AE-POLY's own grade (two minds, one blind; SV-L3's repair a sketch) and
+its `d = 2` residual carry over. **Consequence for W:** a polygonal refutation needs complexity → ∞, or lives in the `d = 2` edge case.
+
+### 2.4 W-RATE — how fast the holes of a door-(A) family would vanish [hand, one mind]
+
+Let `M` be a full tight colouring as in 2.2.
+- **Always `δ(ε) = O(ε)`** (erosion; the moats are thin holes, K-THIN).
+- **`δ(ε) = O(ε²)` when every *contact* of `M` is isolated and transversal.** A contact is a pair `p, q` in the closures of tiles of one colour
+  with `|p − q| = 1` (two tiles, or one tile's diameter). If near `p` and `q` the tiles are cones whose directions make `|p′ − q′| − 1 ≥
+  c(|p′ − p| + |q′ − q|)` for `c > 0` (transversal), the band-violating pairs near the contact lie within `ε/c` of `p` and `q`: removing two
+  discs of radius `ε/c` costs `O(ε²)`. Contacts that are tangent (distance growing quadratically) cost `O(ε^{3/2})` each; a *tight curve* (a
+  boundary arc of radius 1 facing a point of the same colour, or two parallel sides at distance 1) costs `O(ε·length)`.
+- **At a trichromatic vertex no void is needed beyond the contacts'**: the tight constraint there forbids, at `x + u`, the colours whose sectors
+  meet the slab `|⟨v, u⟩| ≤ ε` (FS107-W §1.3 item (2); 2.5 below) — a slack-`ε` condition that a tight map meets wherever its colours near `T₁(x)`
+  stay `≥ ε` off the shadow boundaries, i.e. away from tight curves.
+
+**So the floor's order `ε²` (K-FLOOR, `ε²/(6+ε)²`) is exactly the rate of a door-(A) family with isolated transversal contacts, and R's pinhole
+test (killing test 5) is a test against precisely these families:** an R argument that survives pinholes at the contacts cannot exclude them,
+and one that fails the pinhole test is not wrong about them — it is capped at their rate. (A registration for the joint dial, FS-109: along a
+door-(A) family, `1 − µ₆(ε)` falls like `ε²` with isolated contacts, like `ε` with tight curves; Parts-type tilings, which have curved pairs,
+would fall at most like `ε` toward their `δ₆`.)
+
+### 2.5 W-TAN — the junction rule a door-(A) design must obey [derived, one mind; over C-T-TAN, one mind]
+
+Junctions of a full tight map are its vertices; K-BICH says a six-colour map has trichromatic ones. C-T-TAN (`plans/FS106-TS-derivation.md`
+l. 258, verbatim in part): for `|u − v| < 2` and "`P(u) ∩ P(v) = ∅`, `|P(u)| = |P(v)| = 3`", with strong blow-ups, "If `T_u` and `T_v` both
+have positive length, the configuration does not occur"; at cone points `T_u` is null only for "an interface at `u` tangent to the unit circle
+about `w₀`" or "the bowtie". For a map every vertex is a cone point (strong blow-ups hold). Hence:
+
+**Rule W-TAN.** In a full tight six-colouring by a locally finite map, every two trichromatic vertices of complementary types at distance `< 2`
+are a tangent pair — at `u` or at `v`, a boundary ray perpendicular to `w₀ − u` (resp. `w₀ − v`) for one of the two points `w₀` at distance 1
+from both — or one of them is a bowtie. **Adjacent tiles bring this rule everywhere:** two vertices of adjacent tiles are within `≤ 2` of each
+other (each tile has diameter `≤ 1`), so, off tangencies, bowties and the `d = 2` boundary case, **the vertex types of any two adjacent tiles
+form an intersecting family** (one triple from each complementary pair, K-C6).
+
+*What it does to the design.* A generic map breaks the rule; a tight map is not generic (its constraints are equalities), so the rule is a
+**design constraint**, not an impossibility: every complementary pair within distance 2 must be paid for with a tangency or a bowtie.
+The global way to satisfy it with no tangency — every vertex containing one colour, as in the hexagonal tiling with colour 1 on the index-3
+sublattice — gives colour 1 density `1/3 > 0.2470` (K-DENS), and its colour-1 hexagons sit `D/√3 < 1` apart, not Siamese: excluded twice. So a
+door-(A) design must change its intersecting family from region to region, with tangencies or bowties at the seams. *Not done here (a stub
+proposal, §4):* decide whether any planar map with six colours, tiles of diameter `≤ 1`, class densities `≤ 0.2470` and Siamese-or-`≥ 1`
+same-colour pairs satisfies the adjacent-tile intersecting rule with no tangency at all — a finite local-rule question per tile ring, answerable
+by hand derivation, never by enumeration (the ban; Kooshi's ruling on finite search).
+
+### 2.6 The concrete family for stage 3 (by formula; a probe of door (A) at its crudest)
+
+**Family HX(ρ): the hexagonal seven-colouring with the seventh class absorbed.** Hexagonal lattice spacing `D`, seven-colouring
+`col(mu + nv) = (m + 3n) mod 7`; each hexagon of colour 0 is cut into six triangles (apex its centre `c₀`, base an edge), each triangle joins the
+neighbouring hexagon across its base — every hexagon of colour `j ≠ 0` has exactly one colour-0 neighbour, in the direction `w_j` with
+`col(w_j) = −j`, so every colour-`j` tile is a translate of one hexagon-plus-triangle `P_j` by the index-7 lattice. A void `B(c₀, ρ)` is left at
+every centre; nothing else is uncovered. Parameters: `D` and `ρ` (and `h`, `ε`); `δ = πρ²/(7·(√3/2)D²)`. **The driving parameter is `ρ`**
+(not the grid scale). The junction is six-chromatic: its type is all six colours.
+
+*Hand analysis (registered before any member is checked; G21):* the binding pairs are (a) the tile's own diameter, far hexagon vertex to the
+truncated tip, `≈ √(7/3)·D − 0.756ρ < 1 − ε`, and (b) the tip against the second-neighbour same-colour hexagon's vertex, `≈ (2/√3)·D + 0.5ρ >
+1 + ε`. They are compatible only for `ρ ≳ 0.228 + 1.64ε` (first order in `ρ`), so **HX's holes stop shrinking at `ρ* ≈ 0.31` at `ε = 1/20`,
+`δ* ≈ 0.08` — above the control's `1/7 ≈ 0.143`? no: below it, but bounded away from 0**. **Registered prediction P-W1:** at `D = 0.775`
+(`u = (31, 0)`, `h = 1/40`), `ε = 1/20`, members with `ρ ≥ 0.34` ACCEPT, `ρ ≤ 0.28` REJECT, the transition in `[0.28, 0.34]`, and the binding
+offset at the transition is (a) or (b). *What P-W1 cannot mean:* HX is the crudest door-(A) probe; its stall says a six-chromatic junction
+with straight absorbed triangles needs a void of radius `≍ 0.3`, nothing about curved designs. Its value is a checked, named stall.
+
+## Stage 2 — SAVED
