@@ -71,3 +71,36 @@ edge lengths are arbitrary numbers in the band, while an a.e. hypothesis on pair
 for each tile a colour of **positive measure** in it; a monochromatic tile pair at a distance in the shrunk band then carries a
 positive-measure set of monochromatic pairs at distances in the original band. Either route works; the claim must say which measure the
 a.e. is taken in.
+
+## A3′ — Correction: A3 is FS-103's D1 read from the other point
+
+`plans/FS103-M-derivation.md` §3.1, D1: "If `y ∈ S̃_j` and `d̄_j(x) = θ > 0`, then `|x − y| ≠ 1`." A3's conclusion (density 0 at `y`) is D1's
+contrapositive with the roles of `x` and `y` exchanged. A3 is not new. FS106-P caught it; I had not read D1 before deriving A3 (a G50 instance).
+
+## A7 — C-T-TRI in its density form fails: cusp junctions
+
+Start from any band-proper colouring, for instance the hexagonal seven-colouring with slack. Inside a ball about each vertex, much smaller
+than the slack, redraw the junction as a cusp: the boundary between two of the regions is a smooth curve `Γ` through the vertex, and the
+third region enters as a horn tangent to `Γ`, such as `{0 < x, x² < y < 2x²}`. The horn has area `O(r³)` in `B(v, r)`, so density 0 at `v`.
+The redrawn colouring is still band-proper for a smaller band, hence a.e.-proper, and no point has three colours of positive upper density:
+`|P(x)| ≤ 2` everywhere, while `P_supp(v)` (colours of positive measure in every neighbourhood) still has three. So the existence of
+trichromatic points is a closure statement, the kills are density statements, and a cusp vertex is where the two part. (one mind)
+
+## A8 — Holes: small ones are invisible, and features are cheap to excise
+
+(a) Let `x` be trichromatic in a band-`ε` colouring and remove `B(x, ρ)` with `ρ < ε/2`. Points of each colour of `C(x)` within `2ρ` of
+`x` still exist around the hole. Their band-annuli contain `T_1(x)` widened by `ε − 2ρ > 0`. So Voronov's step "`T_1(x)` avoids `C(x)`"
+survives, and a small hole acts like a tile.
+(b) Conversely, excising discs of radius `ρ ≪ ε` about every trichromatic point costs `N π ρ²` per unit area and leaves a complement with no
+trichromatic point, so V-2.2 read in the complement fails. Voronov's proof uses about ten features per unit disc (V-6.1), so breaking the
+proof costs `O(ε²)` per unit area, matching `[SokolovVoronov2025]` §9's `S(ε) = Ω(ε²)`. A stable form (C-Q-STAB) therefore cannot come
+from stabilizing the proof. It needs an obstruction carried by sets of positive measure. (one mind)
+
+## A9 — Second-order test for bichromatic pairs at unit distance (C-T-L1a)
+
+At first order, blow-ups at `x` and `y = x + e` conflict unless the two colours' tangent classes are complementary half-planes with
+interfaces perpendicular to `e`. Write the colour-1 interfaces as `e·a = κ_x|a⊥|²` at `x` (colour 1 on the side toward `y`) and
+`e·b = −κ_y|b⊥|²` at `y` (colour 1 on the side toward `x`). Up to higher order, colour 1 has no unit pair iff the quadratic form
+`(2κ_x−1)|a⊥|² + 2a⊥·b⊥ + (2κ_y−1)|b⊥|²` is ≥ 0. With `u = 2κ_x − 1` and `v = 2κ_y − 1`, that is `u, v > 0` and `uv ≥ 1`. Colour 2 (the
+backs) has no unit pair iff `u, v < 0` and `uv ≥ 1`. The two conditions are disjoint. The borderline `u = 0` is `x`'s interface lying on the
+unit circle about `y`, which is `[SokolovVoronov2025]`'s Condition 5. (one mind, sketch)

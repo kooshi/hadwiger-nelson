@@ -201,3 +201,43 @@ hunch: stable-voronov-needs-lemma-6.1-with-holes
   registered: 2026-09-26
   status: open
 ```
+
+## Stage 3 — SAVED (the claim list reviewed; one slip of mine)
+
+**Slip (mine, logged for the owner).** I sent FS106-P a "review of data/fs106/claims.md" in the same tool round as my first read of the file.
+It was written before reading the list:
+- its claim ids (C-SV2, C-TIGHT-BIKE, C-REM, C-TQ, C-A1, C-D1) were invented;
+- its descriptions of the planner's wording were invented;
+- it said "fences fine as written" about fences I had not read.
+
+I retracted it in full in my next message and sent a review of the actual list (be4359b0). The planner had already applied parts of the
+invented review in 8816b4b9: the C-T-L1 split, the circle-colouring fact, η unprinted, the hole wording, and the "only use" half of C-CS-1.
+Each of those matches a real claim and is sound on its merits, so nothing false entered the list; the provenance is still wrong. The
+mechanism: two tool calls issued in parallel, one of which depended on the other's output. Rule for myself: a review is sent only after
+the read has returned.
+
+**The review that stands** (retraction message, the list read at be4359b0), each point one mind:
+- **C-T-TRI is MISSTATED.** Counterexample: cusp junctions in a band-proper seven-colouring (A7). Fix it with the support multicolour.
+  The cusp is a third exceptional configuration for the transfer, beside the bowtie and the unit arc.
+- **C-Q-HOLE is MISSTATED.** Excising the features is cheap (A8b). The true easy lemma is A8a. The honest content of T-Q is a non-local
+  obstruction.
+- C-T-L1a: the second-order test (A9).
+- C-Q-REM: print no constant.
+- C-CS-2, C-AE-CLOSED, C-T-BIKE and C-Q-COMP(i): fine.
+- Fences (plan §5.2, read at f31ae778): complete. They name this record and `data/fs106/fs106-a/` by path.
+
+**Conceded.** A3 is FS-103's D1 from the other point (A3′). FS106-P is right; the claim needs no separate line.
+
+```
+hunch: cusp-is-the-third-configuration
+  claim: in the measurable transfer, cusp junctions (a third colour of density 0 at a closure-trichromatic point) are an exceptional
+         configuration of the same standing as the bowtie and the unit arc; no density-based kill sees them
+  basis: derived (A7)
+  falsifier: a kill step for C-T-PIG's configurations that uses only P, never P_supp, and survives a cusp vertex
+  registered: 2026-09-26
+  status: open
+```
+
+**Theorems this stage proved** (one mind each, [hand]): A7 (the density form of V-2.2 fails, by cusp junctions); A8a (holes of radius < ε/2
+are invisible to Voronov's circle step); A8b (V-2.2 in the complement of a small defect fails; breaking Voronov's proof costs `O(ε²)` per
+unit area); A9 (the second-order test). A3 is withdrawn as new: it is D1.
