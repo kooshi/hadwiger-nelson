@@ -8,17 +8,22 @@
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
-| Y112-STRIP-RULE | `[AxenovichEtAl2014]` Thm 4.2's strip, rebuilt from its printed words (geometry) and Fig. 4 (combinatorics, by eye): arches of width 1/2 with unit arcs centred at the opposite bottom corners, apex height `√15/4`, top and bottom rows fixed by "distance 1 between the point of intersection of circular arcs and the opposite corner", total height `√15/2 + √3` exactly | hand, one mind (stage 1); exact check owed to stage 2 | §1.3 |
-| Y112-STRIP-KINDS | every unit arc of the strip is centred at a midline vertex, which is a four-colour vertex of degree 4, and every arc is of kind **both** (self in-contact and out-contact) | hand, one mind; checker owed | §1.3 |
-| Y112-NB4-MIS | NB-4's general form as filed ("a four-colour vertex needs an arc of `Γ` of `ω(y)` or `ω(σ_v^{±1}y)` through a change point of every orbit of its ring") is MISSTATED: it omits arcs of `ω(v)` itself; the strip's midline vertex escapes in the orbit of its apex change points by an arc of `ω(v)` alone | hand, one mind; rests on the strip's validity (stage 2) | §1.4 row 1 |
-| Y112-WALK | the chain walk: first break at C-CHAIN-1 (NB-4), locally, with C-CHAIN-2 (NB-5) and C-CHAIN-10's "every vertex is cubic" broken by the same object; per-step verdicts and circles in §1.4 | hand, one mind | §1.4 |
-| Y112-T2-SQRT3 | the strip carries T2 at `d = √3`, arc-closed: the valley `(1, √3/2)` `{2,3,4}` and its mirror `{1,5,6}` both emit arcs of `ω((1/2,0))` and `ω((3/2,0))`, whose points are four-colour vertices `{1,2,4,5}`, `{1,3,4,6}` | hand, one mind; checker owed | §1.3 |
-| Y112-EDGE | the strip's top edge passes through the upper common unit point `Q = (1/4, H/2)` of the close complementary pair `V₀ = (0, √3/2)` `{1,3,5}`, `A₁ = (3/4, √15/4)` `{2,4,6}` (distance `√(9 − 3√5)/2 ≈ 0.757`), and no colour is available just above `Q` without changing the sectors at `V₀` or `A₁` | hand, one mind | §1.5 |
+| Y112-STRIP-RULE | `[AxenovichEtAl2014]` Thm 4.2's strip, rebuilt from its printed words (geometry) and Fig. 4 (colour pattern, by eye), is a valid six-colouring of the strip `|y| ≤ √15/4 + √3/2`: 60 of 60 same-colour pairs within reach ACCEPT; every contact exact at 1 (tight); height exactly `√15/2 + √3` | tools, exact, one checker (`tools/fs112_y_check.py`); the rebuild hand, one mind | §1.3, §2.2 |
+| Y112-STRIP-KINDS | every unit arc of the strip (22 read in columns −1…4) is centred at a midline vertex with four colours and is of kind **both** (self in-contact and out-contact) | tools, exact | §2.2 |
+| Y112-NB4-MIS | NB-4's general form as filed omits arcs of `ω(v)`; corrected per orbit (W1): the proof runs in an orbit `y₀…y₅` if (α) no arc of `Γ` on `ω(v)` contains an orbit point, (β) no arc of `ω(y_{k±1})` runs along `Γ` at `y_k`, (γ) `Γ ∩ ω(y_k)` has measure `< 180°`; the strip's midline vertex fails (α) in every orbit | hand, one mind; the strip exact | §1.4 row 1, §2.3 W1 |
+| Y112-WALK | the chain walk: first break C-CHAIN-1, locally; C-CHAIN-2 and C-CHAIN-10's "cubic" broken by the same exact object; after Card W: W-MERGE and N4-RAY hold as written (two retractions), P17's exception is of kind both, the base's circles as in §2.3 W4 | hand, one mind | §1.4, §2.3 |
+| Y112-T2-SQRT3 | the strip carries T2 at `d = √3`, arc-closed: `W = (1, √3/2)` `{2,3,4}`, `W′` `{1,5,6}`, seam points `P_1` `{1,2,4,5}`, `P_2` `{1,3,4,6}` | tools, exact (types and validity) | §1.3, §2.2 |
+| Y112-EDGE | the strip's top edge passes through the upper common unit point `Q = (1/4, H/2)` of `V₀` `{1,3,5}`, `A₁` `{2,4,6}`, `|V₀ − A₁|² = (9 − 3√5)/4`; no colour is available just above `Q` without changing the sectors at `V₀` or `A₁` | the identities tools, exact; the no-colour step hand, one mind | §1.5, §2.2 |
+| Y112-CHK | the exact tower checker reproduces the frozen FS-110 checker's verdict on every pair of 14 fragment builds (390 pairs, 6 REJECTs, 0 disagreements) and CAL-7's three controls | tools, exact | §2.1 |
 
 ## Fence log (standing rule 13; brief § Fences)
 
 1. Stage 1, first minutes: `ls data/fs112/` printed the directory **names** `fs112-a` and `reports` (fenced paths) among others; no file in them was
-   listed or opened. 2. The same moment, `ls plans/FS112*` printed the **name** `plans/FS112-close-inventory.md` (fenced); not opened. Nothing else.
+   listed or opened. 2. The same moment, `ls plans/FS112*` printed the **name** `plans/FS112-close-inventory.md` (fenced); not opened.
+3. Not a fence touch, but held for the owner: my one SendMessage to FS112-A2's raw agent id (the pre-round answer) **resumed that agent under
+   this session** ("Resuming agent a8d6b60"), and its hand-backs ("FS112-A2 idle; no content in this hand-back") arrived here as if from my
+   child. I launched nothing; I sent no further message to A2. Standing rule 1 may need a harness note (reply through "main"?).
+4. §5.3 read after the owner lifted its fence (stage 2), after my stage 1 was committed (`3fdae23d`).
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -133,3 +138,128 @@ shows as the same pair ACCEPTed by a hand computation of its exact range, or as 
 recomputed by hand straddles 1) — then the rows of §1.4 that rest on the strip are withdrawn and the print's Thm 4.2 is reported refuted.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the exact checker, calibrated in the claim list's order; CAL-STRIP ACCEPTs; Card W answered
+
+### 2.0 The generator image (written before any object; G21)
+
+My objects are tiles bounded by segments and circular arcs whose endpoints, centres and radii lie in a **tower of real quadratic fields**
+`Q(√d₁)…(√d_K)` (stage 2: `Q(√3)` and `Q(√3)(√5)`); colours by a finite pattern, possibly periodic in one direction. **What the image cannot
+represent:** data outside a quadratic tower (a disc whose radius generates a non-2-power extension); non-circular boundaries; tilings not given by a
+finite formula. **The strip's free parameters against the rule's:** none — every length is fixed by "width 1/2", "radius 1 centred at the opposite
+corner" and "distance 1 … to the opposite corner"; the colour pattern is Fig. 4's. So the strip calibrates what it contains (arcs of kind both at
+four-colour centres, straight self-contacts at diameter 1, outer segment contacts at gap 1) and nothing else.
+
+### 2.1 The checker — `tools/fs112_y_check.py` [tools, exact]
+
+A field is a tower; an element of level `k` is `a + b√d_k` with `a, b` of level `k − 1`; the sign is exact by recursion (`sign(a + b√d)` from
+`sign a`, `sign b` and `sign(a² − d b²)`). The geometry is FS110-Y's candidate list, made generic (every candidate distance `|√A + B|`, `A, B ∈ F`);
+`closure_type` computes `P_cl` exactly; a float partition guard (never a verdict) samples a period for overlaps and holes. Calibration
+(`tools/fs112_y_calibrate.py`; outputs `data/fs112/fs112-y/calibrate_*.out`), in the claim list's order:
+
+| # | object | pairs examined / present | verdict | against |
+|---|---|---|---|---|
+| 1 | FS-110's S1, T2, BB, MX, WC, WC1, WCEQ, WCH, WC1H, A6-C2, A6-C2 tip→2, A6-C2 plant deep, S1 plant `s1_flat`, T2 plant `t2_flat` — built by FS-110's own builders (imported, unedited), converted to the tower `Q(√3)` | 390 / 390 (generated from each colour map, self pairs included) | 6 REJECT pairs where the frozen checker has them, **0 disagreements pair by pair** | `tools/fs110_y_check.py` |
+| 2 | CAL-7: the tight hexagonal 7-colouring, side 1/2; side 11/20; the index-4 colouring | 7, 7, 13 | ACCEPT, REJECT, REJECT | as wanted |
+| 3 | **CAL-STRIP** (§1.3), columns −4…7 | **60 / 60** ordered same-colour pairs with `T` in one period and horizontal gap `≤ 1` (exact rational extents; a window twice as wide adds none) | **ACCEPT** | the printed Thm 4.2 |
+
+### 2.2 CAL-STRIP, read off the exact object
+
+- Height `2(√3/2 + √15/4) = √15/2 + √3` **exactly** (in `Q(√3, √5)`). Every tile has diameter exactly 1; the checker's `closed_interval` plant
+  REJECTs **all 60 pairs**: every same-colour pair within reach touches at exactly 1 — the strip is tight everywhere it could be.
+- Float partition guard, one period: 4,896 samples, 0 overlaps, 0 holes.
+- **Contact kinds:** 22 unit arcs read in columns −1…4; every one is centred at a midline vertex with `|P_cl| = 4` and is of kind **both**
+  (Y112-STRIP-KINDS). `P_cl` exact: `P_1` `{1,2,4,5}`, `P_2` `{1,3,4,6}`, `W` `{2,3,4}`, `V₀` `{1,3,5}`, `A₁` `{2,4,6}`, `W′` `{1,5,6}`.
+  So CAL-STRIP calibrates self in-contact **and** out-contact, at four-colour centres; it holds no inert arc, no in-only or out-only arc, and no
+  unit-arc centre with three colours.
+- Y112-EDGE's identities exact: `|Q − V₀| = |Q − A₁| = |P_1 − V₀| = |P_1 − A₁| = 1`, `|V₀ − A₁|² = (9 − 3√5)/4`.
+- **CAL-PLANT**, each beside the faithful strip (which ACCEPTs), each firing for its named reason: `tall` (`H/2 + 1/100`) → REJECT at exactly the six
+  C/D self pairs (diameter > 1); `flat` (shared arcs → chords) → 24 REJECT pairs, all `(C, B)` or `(D, A)` (each top tile reaches inside the unit disc
+  of its out-contact centre); `swap` (the colours of `C_j`, `j ≡ 1, 2`, exchanged) → REJECT at `(B_0, C_1)`, `(B_2, C_2)` only, each holding a swapped
+  tile. Checker plants: `closed_interval` REJECTs all 60 (tightness); `noself` on `tall` → ACCEPT (it loses exactly the self REJECTs); `cw_arcs` →
+  42 REJECTs; `endpoints_only` → ACCEPT: **unreachable on this object** (it can only lose REJECTs and the faithful strip has none), so it tests
+  nothing here — it was tested on FS110-Y's controls.
+- **E7 scored (plan §5.3):** rebuilt by formula and accepted: met; "carries out-contacts": met (all 22 arcs).
+- **The three REJECT causes** (§1.6) were not needed: no REJECT occurred.
+
+### 2.3 Card W (FS112-A2, "where your two stage-1 chain walks disagree") — my verdicts again [hand, one mind]
+
+**W1 — NB-4's corrected exception.** (i) **Yes, an arc of `ω(v)` that ends at an orbit point must be named, per orbit.** NB §2.3's first move ("every
+change point `y` is a swap with `σ_v y` and `σ_v^{-1}y`") needs the points of `ω(v)` near `σ_v^{±1}y` to be tile-interior; if an arc of `Γ` on `ω(v)`
+contains or ends at `σ_v^{±1}y` (or at `y`), the 60° constraint `c(θ + 60°) ≠ c(θ)`, which binds tile-interior points only, forces nothing there. In the
+strip every orbit of change points of `ω(P_1)` meets an arc end: the orbit of `0°` (change points `P_2`, `P_0`) at `σ^{±1}P_2 = W, W′` (ends of arcs of
+`ω(P_1)`); the orbit of `arccos(1/4)` at `A₁` itself; the orbit of `180° − arccos(1/4)` at its apex. (ii) **Yes, the alternation uses
+`|P_cl(y_k)| ≤ 4`:** with `P_cl(y_k) = {e, f, i_k, o_k}` the four half-arcs of `ω(y_{k±1})` at `y_k` lie in `{i_k, o_k}`, one inner and one outer, and
+consecutive pairs `{i_k, o_k}` are disjoint 2-subsets of `P_cl(v)`. A fifth colour at `y_k` lets the two inner half-arcs carry two colours and breaks
+the disjointness. And `|P_cl(y_k)| ≥ 5` needs the tile-interior set `S ⊂ ω(y_k)` to satisfy `S ∩ (S + 60°) = ∅` (one colour for all of it), so
+`Γ ∩ ω(y_k)` must have measure `≥ 180°`. **Corrected statement** (Y112-NB4-MIS): *a four-colour vertex needs, in every `σ_v`-orbit of change points,
+(α) an arc of `Γ` on `ω(v)` containing an orbit point, or (β) an arc of `ω(y_{k±1})` along `Γ` at some `y_k`, or (γ) `Γ`-arcs of total measure `≥ 180°`
+on some `ω(y_k)`.* Both walks' forms are special cases; the "arc of `ω(y)` through `y`" of the printed form is empty. **TRUE at one mind.**
+
+**W2 — W-MERGE: I retract my GAP; it holds as written** (with "Condition 5 kept" vacuous). A unit arc of `ω(v′)` through `v` (`v′` a `c`-contact at
+`v + n`) has tangent `a` at `v`, on the boundary line of the contact's half-plane, so it can bound a sector of `G` only at an end of `G` on `∂D_c(v)`,
+where the adjacent `c`-sector is a horn along `a`. An in-type contact puts that horn inside `B̄(v′, 1)` (Siamese with the `c`-tile at `v′`) and `G` on
+the `+n` side above it; an out-type contact puts the horn outside `B(v′, 1)` and `G` on the `−n` side below it (a horn outside `B(v′,1)` against an
+in-type tile would straddle 1). Either way the unit arc bounds the horn on its far side from `G`, `cl R ∩ ω(v′) = {v}`, and `D_c(v′)` is unchanged.
+A `G` lying between a horn and the tangent line across a unit arc needs a second horn along `a` on its other side — MERGE-RAY's case, not W-MERGE's.
+**Retraction 1 (free, counted).**
+
+**W3 — N4-RAY: I retract; it holds as written.** RAY reads (1) the stack's outermost curvatures `κ₁`, `κ₄` only to say a unit circle through `t`
+leaves the stack, (2) that no unit circle through `v` tangent to `a` passes through `t` (those are `ω(N)`, `ω(S′)`, the stack's outer boundaries;
+`t` is strictly inside), and (3) the boundary arcs of `M`, the inner boundaries of the two `c`-horns. Those have curvatures strictly between the
+stack's outer ones, which lie in `[−1, 1]`, so strictly inside `(−1, 1)`: step (3)'s "different curvature" holds, and a curvature-1 circle through
+`t` rises above `M`'s top (relative curvature `1 − κ_M > 0`) within `O(|t − v|)`, long before `∂B(v, ρ)`. Step (1) as printed ("outside
+`[κ₁, κ₄]ρ²/2`") fails at `κ₄ = 1`, but the argument needs only `M`'s boundaries. **Retraction 2 (free, counted).** FLANK at `κ = ±1` stands as
+before (both walks agree).
+
+**W4 — the base's circles, from `plans/FS110-CB-verification.md` D1–D5 (lines 89–193):**
+- **D1 (P′), l. 94–98:** `ω(y)` near `x` for every unit pair `(x, y)` the chain uses ("each meets `ω(y)` finitely (Condition 5)");
+- **D2, l. 105–109:** `ω(u + e)` for every `e ∈ Ω`, i.e. every unit circle through `u` ("which move with δ because no arc from u lies on a unit circle
+  (Condition 5)"): the exception is **a boundary arc leaving `u` that is a unit arc, centred on `ω(u)`**; l. 115: `Ω = ω(u)` itself (finitely many
+  `|c′| = 2` points); l. 118–120 ((i)/(ii)): `ω(y)` at `x` and `ω(x)` at `y` for pairs `x ∈ ω(u₁)`, `y ∈ ω(u₂)`;
+- **D3–D4, l. 124–158:** `ω(u₁)`, `ω(u₂)` and the partner circles `ω(x(t))` along the bicycle;
+- **D5, l. 170–193:** `Ω`; item 3 `ω(w)` for `w = x ± 60°` on `Ω`; item 5 `ω(x_{i±1})` at `x_i` and `ω(z)` for `z` near `x_i`; item 6 (P′) at the pigeonhole pairs.
+So the other walk is right and my row 13 understated: **the base reads every unit circle through `u` (D2), `ω(u)`, and `ω(y)` at each unit pair it
+uses.** Its exceptions: unit arcs centred at `u` or `v`; **unit arcs leaving `u` or `v` (centred on their circles)**; unit arcs of `ω(y)` at the pair
+points. **The strip realises the second at both ends of Cor. 3's configuration:** every boundary arc at `V₀` and at `A₁` is a unit arc centred at a
+midline vertex on their circles (`P_0`, `P_1`; `P_1`, `P_2`), and the directions where D2's six directions fail to move are exactly those of the
+four-colour vertices — the same places. **Row 13's verdict: (b), with the exception list above.**
+
+**W5 — P17's exception is of kind both** (I retract "out-contact for g"; **retraction 3**). N3 §2.4 confines the sector across the `ω(x₂)`-tangent
+ray at `x₁` to `B̄(x₂, 1)` because it is Siamese with `x₂`'s `q`-tile, so `q ∈ P_cl(x₂)`; the arc of `ω(x₂)` at `x₁` has inner colour `q ∈ P_cl(x₂)`
+(in-contact; self if one tile holds both) and outer colour `g ∈ P_cl(x₂)` (out-contact): **both**. One mind.
+
+**W6 — the held positives at each (b)/(c) step's own reading radius** (killing test 8; C-BEYOND):
+
+| step | reading radius | CAL-STRIP (exact) | FS-110's fragments | CAL-DISK (printed words only) |
+|---|---|---|---|---|
+| 1 NB-4 | `ω(v)` (1), `ω(y_k)` whole (2) | realises exception (α) at `P_1` with the whole of `ω(P_1)` coloured; reaches radius 1.834 about `P_1`, **not 2**: the top of `ω(y_k)` for `y_k` near `90°` leaves the strip | T2, BB, MX: four-colour `w, w′` with rings uncoloured (flowers of radius 1/10): cannot reach radius 1 | a `{1,3,5,6}` junction "at 2 o'clock on the central tile" (`[16.106]`): would reach NB-4's radius 2 only if it lies within 0.124 of the centre — unknown until rebuilt |
+| 2 NB-5 | near `w₀` on `ω(u)`, `ω(v)`; NB-4 at `w₀` | realises (`W, W′`) saved at both seams, whole rings of `P_1`, `P_2` coloured; not radius 2 about the seams | S1 (out), T2 (both at `d = 1`), BB, MX: open-ended, near `w₀` only | not decidable from words |
+| 5 N3-DEG, 6, 7, 11, 17 (`κ = ±1`) | `ω(v)`, `ω(N)`, `ω(S′)` | no horns: cannot realise | WC family: horn radii 2, 3 (`κ` strictly inside): cannot realise | — |
+| 8 N4-STUCK | `B(v, 2)` and along PROP | no stuck vertex (no colour has two sectors) | WCH is STUCK (iv) truncated, `κ` inside `(−1, 1)` | — |
+| 10 N4-TERM "cubic" | as 4, 7, 8 | **realises**: terminal and degree 4 at every midline vertex | — | — |
+| 12 P17 | `ω(u)`, `ω(x_{i±1})` | the valleys' and apices' rings leave the strip (`ω(V₀)` reaches `√3/2 + 1 > H/2`): cannot reach | — | — |
+| 13–16 base | every unit circle through `u`, `ω(u)`, `ω(y)` at pairs | realises D2's exception (unit arcs leaving `V₀`, `A₁`) and Cor. 3's point configuration, **not** the circles `γ(V₀)`, `γ(A₁)` need (they leave the strip at `Q`'s height), and its escape at `P_1` is non-cubic | — | — |
+
+**What W6 says about C-BEYOND for the strip:** every step the strip breaks, it breaks within radius 1.834 of a midline vertex; every step it cannot
+reach needs a circle about a valley or apex, which leaves the strip exactly at the top edge — the same place as Y112-EDGE's `Q`.
+
+### 2.4 Retractions this stage: 3 (W2, W3, W5), all free (nothing built on them).
+
+### 2.5 Left for a successor (my context is at its limit; brief § Rules)
+
+1. **CAL-DISK** in three separated steps (owner's ruling: transcribe `[Polymath2021]` Fig. 10's combinatorics by eye first; report ambiguity, never
+   resolve it by a solver): render p. 199's figure from `~/source/library/geombinatorics/geombinatorics-v30-n4-2021-04.pdf`, list tiles, adjacencies,
+   unit arcs and their centres against `[11.34]`'s five-pentagon skeleton and `[16.346]`'s dual rule; then the exact system in the tower
+   `Q(√5)(√(10 + 2√5))` (or larger if the radius demands; `r² = (25 + 9√5)/10` is not a square there — checked by hand), the checker already generic.
+2. **The dial (E6):** grow an arc-closed patch past `√15/2 + √3`: the obstruction to beat is Y112-EDGE's `Q` (change the sectors at `V₀` or `A₁`).
+3. **A `κ = ±1` horn fragment** (N3-DEG's exception, out-contact at `N`): WC with the horn's upper arc on `ω(N)`; it is the first object that can reach
+   steps 5–7, 11, 17.
+4. **§6's killing tests:** C-UA-CHAIN — the strip already carries a bi-infinite periodic zigzag chain of unit arcs (arcs meeting at valleys and apices),
+   valid in the strip: every local monotone quantity along it is periodic (a reading of the exact object, one mind; the closed cycle of E10 not built);
+   C-UA-WEDGE as literally stated ("the `c`-tiles at `P` face the arc") is **MISSTATED** for the outer side colour: in the strip the outer colour's
+   tile at `P_1` (`B_0`, colour 4, directions `[180°, 270°]`) faces away, as TS-U says (one mind); C-UA-BUDGET's second branch ("the arcs sit on
+   `ω(σ_v^{±1}y)`") fails at `P_1`, which has covering pairs at `P_1 ± (1, 0)` and all its arcs on `ω(P_1)` (one mind; exact object). C-HOCK on A6-C2's
+   radius-9/10 arc (seconds, in-ban).
+
+## Stage 2 — SAVED

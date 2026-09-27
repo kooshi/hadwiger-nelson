@@ -1,0 +1,18 @@
+ok       S1/T2/BB/MX S1              11 tiles,  18 same-colour pairs examined of 18; REJECT pairs 0 (frozen 0); disagreements []
+ok       S1/T2/BB/MX T2              14 tiles,  24 same-colour pairs examined of 24; REJECT pairs 0 (frozen 0); disagreements []
+ok       S1/T2/BB/MX BB              16 tiles,  30 same-colour pairs examined of 30; REJECT pairs 0 (frozen 0); disagreements []
+ok       S1/T2/BB/MX MX              15 tiles,  27 same-colour pairs examined of 27; REJECT pairs 0 (frozen 0); disagreements []
+ok       cone WC                     15 tiles,  30 same-colour pairs examined of 30; REJECT pairs 0 (frozen 0); disagreements []
+ok       cone WC1                    14 tiles,  26 same-colour pairs examined of 26; REJECT pairs 0 (frozen 0); disagreements []
+ok       cone WCEQ                   15 tiles,  30 same-colour pairs examined of 30; REJECT pairs 0 (frozen 0); disagreements []
+ok       cone WCH                    19 tiles,  40 same-colour pairs examined of 40; REJECT pairs 0 (frozen 0); disagreements []
+ok       cone WC1H                   16 tiles,  30 same-colour pairs examined of 30; REJECT pairs 0 (frozen 0); disagreements []
+ok       A6-C2                       16 tiles,  30 same-colour pairs examined of 30; REJECT pairs 0 (frozen 0); disagreements []
+ok       A6-C2 tip->2                17 tiles,  33 same-colour pairs examined of 33; REJECT pairs 1 (frozen 1); disagreements []
+ok       A6-C2 plant deep            16 tiles,  30 same-colour pairs examined of 30; REJECT pairs 2 (frozen 2); disagreements []
+ok       G plant s1_flat             11 tiles,  18 same-colour pairs examined of 18; REJECT pairs 1 (frozen 1); disagreements []
+ok       G plant t2_flat             14 tiles,  24 same-colour pairs examined of 24; REJECT pairs 2 (frozen 2); disagreements []
+ok       CAL-7 tight hexagonal 7-colouring, side 1/2             pairs 7 (class 0 against its translates within 3); want ACCEPT got ACCEPT
+ok       hexagonal 7-colouring, side 11/20 (diameter 1.1)        pairs 7 (class 0 against its translates within 3); want REJECT got REJECT
+ok       index-4 hexagonal colouring (same colour sqrt3 apart)   pairs 13 (class 0 against its translates within 3); want REJECT got REJECT
+ALL AS EXPECTED

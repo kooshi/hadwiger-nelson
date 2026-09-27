@@ -1,0 +1,15 @@
+ok       strip height exactly sqrt15/2 + sqrt3 = 3.668542481
+ok       strip: ordered same-colour pairs examined (T in one period, T' within horizontal gap 1): 60; the object has 60 (counted on a window twice as wide)
+ok       CAL-STRIP verdict ACCEPT; REJECT pairs []
+ok       every tile's diameter is 1 to float precision (12 self pairs; exact: ACCEPT above, and closed_interval below)
+ok       float partition guard on one period: 4896 samples, 0 overlaps, 0 holes
+ok       unit arcs read off (columns -1..4): 22; kinds ['both']; centres' |P_cl| [4]
+ok       P_cl(midline P_1 = (1/2, 0)) = [1, 2, 4, 5]
+ok       P_cl(midline P_2 = (3/2, 0)) = [1, 3, 4, 6]
+ok       P_cl(valley W = (1, sqrt3/2)) = [2, 3, 4]
+ok       P_cl(valley V0 = (0, sqrt3/2)) = [1, 3, 5]
+ok       P_cl(apex A1 = (3/4, sqrt15/4)) = [2, 4, 6]
+ok       P_cl(mirror W' = (1, -sqrt3/2)) = [1, 5, 6]
+ok       Y112-EDGE: the common unit points of V0 {1,3,5} and A1 {2,4,6} are P_1 = (1/2, 0) and the top corner Q = (1/4, H/2), exactly
+ok       |V0 - A1|^2 = (9 - 3 sqrt5)/4 exactly (0.572949017)
+ALL AS EXPECTED

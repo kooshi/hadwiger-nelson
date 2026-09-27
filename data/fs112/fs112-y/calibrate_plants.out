@@ -1,0 +1,8 @@
+ok       object plant tall : REJECT, 6 REJECT pairs, e.g. [('C0', 'C0'), ('C1', 'C1'), ('C2', 'C2'), ('D0', 'D0')] -- H/2 raised by 1/100: the C and D tiles' diameters exceed 1 -- REJECT exactly at their self pairs
+ok       object plant flat : REJECT, 24 REJECT pairs, e.g. [('A0', 'D-1'), ('A0', 'D2'), ('A1', 'D0'), ('A1', 'D3')] -- shared arcs replaced by chords: each C tile reaches inside omega(P) of its out-contact centre -- REJECT at (C, B) and (D, A) pairs only
+ok       object plant swap : REJECT, 4 REJECT pairs, e.g. [('B0', 'C1'), ('B2', 'C2'), ('C1', 'B0'), ('C2', 'B2')] -- C_1, C_2 colours exchanged: every REJECT pair holds a swapped C tile
+ok       checker plant closed_interval on faithful strip: want REJECT got REJECT (60 pairs) -- every exact contact at distance 1 turns REJECT: the strip is tight
+ok       checker plant noself          on tall strip: want ACCEPT got ACCEPT (0 pairs) -- the tall plant's only REJECTs are self pairs, which noself skips
+ok       checker plant endpoints_only  on faithful strip: want ACCEPT got ACCEPT (0 pairs) -- unreachable here? (a REJECT needs an interior extreme; recorded either way)
+ok       checker plant cw_arcs         on faithful strip: want REJECT got REJECT (42 pairs) -- minor arcs become major arcs: diameters blow up
+ALL AS EXPECTED
