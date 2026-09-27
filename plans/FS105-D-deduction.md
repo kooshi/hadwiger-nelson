@@ -188,3 +188,31 @@ the definition of arithmetic actions, §3's opening, §6 in full; §§4–5 unre
 **Proposed `BIBLIOGRAPHY.md` edit** (the close writes it): the `[EinsiedlerLindenstrauss2003]` row (line 706) says "Author's summary only …
 Not held"; it is now held at the path above, read in the sections just listed, and its Thm 1.1 is verbatim EL2021's Thm 1.2 except
 "Let µ be an α-ergodic measure" for EL2021's "Let µ be an α-invariant and ergodic probability measure", and "λ" for "m_X".
+
+## Stage 3 — SAVED (after stage 2 was committed as 46550398: `plans/FS105-R-reading.md` §2.1, with its §2.2, read)
+
+**Truth: no divergence.** FS105-R §2.1 reaches TRUE for "Thm 1.3 ⟹ Thm 1.2", with the same forced sense of "no virtually cyclic factors"
+(non-trivial algebraic factors; the trivial factor makes Thm 1.3 vacuous; Lemma 7.4 as the witness of the paper's sense), the same case split
+(each `G_j` finite or `X`, by total irreducibility at Λ), and the same classical inputs (Haar uniqueness, ergodic ⟹ extreme, Abramov–Rokhlin
+with the `log |G_j|` fibre bound, affinity, Abramov's power formula). Each step of its §2.1 was re-checked against my §2.1; I found no error in
+it. **The deduction now stands at [hand], two minds, reached blind.**
+
+**Divergences of route** (none changes the verdict):
+
+| # | step | FS105-R §2.1 | this job | comment |
+|---|---|---|---|---|
+| 1 | virtually cyclic factor lifts to α (my 0d, its 1(b)) | dual: `X′^⊥` has finite index in the torsion-free `X̂`, and an automorphism of `X̂` is fixed by its restriction to a finite-index subgroup | primal: `x ↦ α^{m−kn}x − x` is a continuous homomorphism of the connected `X` into the finite `ker φ`, hence 0 | the same fact seen from the two sides of Pontryagin duality |
+| 2 | Case A (some `G_j = X`) | uses Thm 1.3(3): the ℤ^d-orbit of `j` is `{j}`, the rest is a union of orbits, so `µ″` is α-invariant; then extremality | does not use (3): `µ − (1/J)m_X` is α-invariant because µ and `m_X` are; then an explicit α-invariant set of µ-measure `1/J` | mine needs one fewer conclusion of Thm 1.3 (my §2 opening: (3) is not used at all) |
+| 3 | scope of the "factor" lemma | its Lemma 2.1 proves, for **every** α, that the hypothesis passes to α_Λ (via `X″ = ⋂ αⁿX′`) and to the adelic lift | my 0d covers factors of α_Λ′ only under total irreducibility (S3′), and I did not audit the adelic lift (§2.5) | its Lemma 2.1 is stronger and I checked (i) by hand: the relations `α^m = α^{kn₀}` mod `X′` conjugate to mod `αⁿX′` with the same `k`, `X″ ⊆ X′ ⊊ X`, `X″` α-invariant. Sound. (ii) not re-checked |
+| 4 | senses written out | S3 explicitly; total irreducibility "quantifies over every finite-index Λ" (= my S1); probability of the µ_j implicit | S1–S6 tabled, including the literal "no Λ and no Y" parse of total irreducibility (S1) and the Λ-quantifier of "virtually cyclic" (S2), both shown harmless | presentation only |
+| 5 | `X = {0}` | not mentioned | excluded by "not virtually cyclic" (0c) | not a gap in its argument: for `X = {0}` the conclusion µ = m_X = δ₀ holds anyway |
+
+**What neither does:** audit Thm 1.3's own proof. FS105-R's (a0) is explicitly "provided Thm 1.3's proof … holds for the actions used", its
+(a9), stage 3 — outside this job's fence and not read here.
+
+### Inventory items for the owner (standing rule 9)
+
+- result — EL2021 Thm 1.3 ⟹ Thm 1.2: TRUE [hand], now two blind minds (FS105-R §2.1, FS105-D §2.1); Case A needs neither Thm 1.3(3) nor the orbit argument — `plans/FS105-D-deduction.md` §2.1, Stage 3.
+- result — D-T1: irreducible + not virtually cyclic ⟹ d ≥ 2 and no non-trivial virtually cyclic algebraic factor [hand] — §2.1 step 0d.
+- correction owed — `BIBLIOGRAPHY.md` line 706, `[EinsiedlerLindenstrauss2003]` "Author's summary only … Not held": held since 2026-09-26, sections read listed — §2.5.
+- slip / tool defect — the harness scratchpad handed to this blind job is shared with other sessions (other agents' files visible by name); I overwrote two same-named files (`el2021.txt`, `el2003.txt`, same PDFs) — §1.5.
