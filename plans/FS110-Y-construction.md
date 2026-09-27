@@ -664,3 +664,58 @@ distance between every pair of adjacent change points, which eight arcs do not g
 unit-distance change points) is realisable at a vertex at all — the construction side's next question, and the one a winding map must answer first.
 
 ## Stage 9 — SAVED (FS110-Y3)
+
+## § Continuation — FS110-Y4
+
+*Job FS110-Y4 (de Bruijn, Opus 5.5), 2026-09-27, round 4 (the `d = 2` seam, W-4). Brief: `data/fs110/briefs/Y4-110-round4.md` (wins where they
+differ) with `data/fs110/briefs/Y110-construction.md` and `data/fs110/briefs/STANDING-RULES.md`. Start-up state: `e89d35d6` (the owner's hand-off
+commit; the harness's own snapshot line read `58bf282a`, one commit earlier). Earlier verdicts above are FS110-Y's, Y2's and Y3's and are not
+rewritten. Working files `data/fs110/fs110-y/y4_*`; tools `tools/fs110_y_*.py`; scratch `scratchpad/fs110-y3/`.*
+
+### The pre-round question (answered before my first saved stage; sent to "main" 11:5x UTC)
+
+*"before your first saved stage of round 4, name the step of the proof side's programme on W-4 that you expect to fail, and say what would show you
+wrong."* (my brief, § Your task)
+
+I do not hold the proof side's programme (fenced); I answer against `claims.md` §8. **The step I expect to fail is turning G-CONE into a pair that a
+pair argument decides**: "the two out-contacts `N = v + n`, `S′ = v − n` form a same-multicolour pair at distance 2", which would make G-CONE an instance
+of G-d2, or of a bicycle at `d = 2` with `v` at the circles' tangency point. Nothing local forces `N` and `S′` to be vertices, or their types to agree.
+I expect a local fragment in which `N`, `S′` are two-colour edge points with different types `{c, p}`, `{c, q}`; then `ω(N)`, `ω(S′)` each avoid
+only two colours and no bicycle arises. Behind it, a second expectation: **no local kill of the cone at `v`, `N`, `S′` under Condition 5.** By my
+derivation (§10.2), an out-type `c`-tile whose boundary has curvature `λ` at `N` (bending away from `v`) forbids `c` near `v` only above
+`y = μ t²/2`, with `μ = λ/(1 + λ)` (`μ = 1` at a corner of that tile). So `c`-horns with bounding curvatures `κ₁ < κ₂` fit whenever
+`−μ_S ≤ κ₁ < κ₂ ≤ μ_N`: room with every curvature strictly inside `(−1, 1)`, and no arc of radius 1 is needed.
+
+**What would show me wrong:** (a) a derivation that an out-type contact at `N` forces `N` to be a vertex of the same type as `S′`, or forces a
+four-colour vertex, a close covering pair or a unit arc among `v`, `N`, `S′` (NB-4, NB-5, Condition 5); (b) my exact check rejecting the fragment for
+a reason the curvature inequality does not explain; (c) a lemma that `v`'s ring (`ω(v)` coloured by the three colours outside `P_cl(v)`) or the horns'
+own tiles cannot close near `v ± a`.
+
+### Which Condition 5 I use
+
+The print's: "If any boundary intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden."
+(`[SokolovVoronov2025]` p. 4, as quoted in `claims.md` §1). In `𝓜_K` it coincides with the gloss "no boundary arc of radius 1" (Y3-C5, above:
+[hand, one mind, trivial]). Every fragment below has no arc of radius 1 at all.
+
+### Theorems this phase proved (FS110-Y4)
+
+*(filled at each saved stage)*
+
+### Fence log (FS110-Y4)
+
+- **Touch 1 (11:3x UTC, disclosed):** my first command, `ls data/fs110/briefs/ data/fs110/reports/`, listed the file names in both directories (the
+  other briefs' and reports' names; no content opened).
+- **Touch 2 (11:3x UTC, disclosed):** an `ls` of the harness scratchpad's root (to create my subdirectory) listed the names of files I did not create
+  (`a0.txt` … `a4.txt`, `a2.out`, `a3.out`, `a4.out`, `a3new`, `a3old`). No content opened. I work only in `scratchpad/fs110-y3/`.
+- **Touch 3 (disclosed):** a `git log --oneline -1` printed `e89d35d6 Handoff: FS-110 round 4`, the owner's commit preceding my launch; I take it as
+  my start-up state and take hashes from commit outputs from here on.
+
+### Would-have-searched-here log (FS110-Y4)
+
+- (none yet)
+
+## Stage 10 — SAVED (FS110-Y4): the pre-round answer; Condition 5
+
+The pre-round answer and the Condition-5 statement above, sent to "main" before this stage was saved. Retractions are counted from here on.
+
+## Stage 10 — SAVED (FS110-Y4)
