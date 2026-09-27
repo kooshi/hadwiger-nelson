@@ -1,3 +1,34 @@
+*Owner's re-brief, 2026-09-27, before launch: read this block first. Where it differs from the planner's text below, this block wins.*
+
+- **Wave 1 is done; these are your inputs** (read them from disk):
+  - `plans/FS106-V-verification.md`, including **§ Continuation — FS106-V2**;
+  - `plans/FS106-VB-verification.md`;
+  - the advisor's comparison, `plans/POROS-2026-09-26-fs106-regular-half.md` stage 4.
+
+  The state, at one mind unless marked otherwise:
+  - **`[Voronov2023]` Thms 1.1–1.3:** TRUE after the same local repairs. Two minds, one of them blind.
+  - **C-AE-SLACK:** TRUE.
+  - **C-AE-CLOSED:** equivalent to "no almost-everywhere-proper six-colouring of `U₃(0)` with essentially closed classes".
+  - **`[SokolovVoronov2025]` SV-2 (polygons need seven) and Cor. 1 (cubic maps):** repaired by V2 at [hand, one mind], except one named edge
+    case: two same-multicolour points antipodal on ω, `d = 2`. The blind verifier VB found SV-2 a GAP through Observation 1, with a local
+    counter-configuration; V2 says every use of Obs. 1 has a region-only replacement. The two have not been compared yet (FS106-V3 is doing that
+    now).
+  - **SV-1 (maps with Conditions 3, 5, 6):** GAP at the Condition-6 steps (SV-L4 (a) with bichromatic vertices of degree ≥ 4; Prop. 19's fills).
+  - **SV-L3:** GAP as printed. The transplanted-bicycle repair for `1 ≤ d < 2` is written as a sketch (V2).
+- **The planner's rule on an SV-2 GAP, applied:** where a claim of yours rests on SV-1 or SV-2, rest it on the repaired form, and name its grade
+  and its open step.
+- **No advisor runs during wave 2.** The one who compared wave 1 is at its token limit and has been retired. Wherever the text below says "send the
+  advisor a short note", send `"main"` a two-line note after each saved stage instead. A fresh advisor compares TS and TQ after both report.
+- **Your fence against the other wave-2 job** covers its files named below and standing rule 13's list: the session transcripts, `chats-bak/`, and
+  every scratchpad file you did not create.
+- **Hold rule.** If you reach a verdict that would move the answer, put it in your report's first line. That means an almost-everywhere-proper
+  five- or six-colouring, or a proof of seven that covers tight, non-closed classes. It is held at one mind until a blind second mind confirms it.
+  Do not soften it, and do not announce it anywhere outside the files.
+- `[Parts2020c]` is held at `~/source/library/pdf/arXiv-2010.12668-parts-what-percent-plane-5-6-colored.pdf`: 95.99 % of the plane
+  five-coloured, more than 99.985698 % six-coloured. Read its constructions for what they say about C-Q-STAB's refuting sequence.
+
+---
+
 *Brief for job **FS106-TQ**: the quantitative route — is Hadwiger–Nelson's measurable form the stability of Voronov's theorem? Opus 5.5. Drafted by the
 planner (FS106-P) for the product owner to launch in wave 2. Not blind to the print or to wave 1; blind to FS106-TS until your verdict stage is saved.*
 
