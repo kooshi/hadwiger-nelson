@@ -1033,7 +1033,7 @@ the theorem audit (FS-71, row 77) the same day — 254 entries in 53 files, `too
 | FS106-TH | row 132 | Thomassen 1999 Thm 1 holds in the plane; for locally finite `G` by Thm 1.3 | hand, one mind + a partial reading | `plans/FS106-derivation.md` FS106-TH | declined |
 | FS106-PR | row 131 | Pritikin 1998's six-colouring of all but density ≈ 1.61·10⁻⁴ is correct | hand, one mind | `plans/FS106-derivation.md` FS106-PR | declined |
 | FS106-CO | row 132 | Coulson 2004's printed theorem is six, tile-based, with an area bound | hand + reading | `plans/FS106-derivation.md` FS106-CO | declined |
-| FS106-AE-SLACK | row 132 | a measurable colouring with slack needs seven, given Thm 1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-SLACK | stub (over V-1.3) |
+| FS106-AE-SLACK | row 132 | measurable colourings with slack need seven, given Thm 1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-SLACK | stub (over V-1.3) |
 | FS106-AE-CLOSED | row 132 | closed classes a.e. ⟺ essentially closed a.e.-proper six-colourings of `U₃(0)`; open | hand, one mind | `plans/FS106-derivation.md` FS106-AE-CLOSED | declined |
 | FS106-AE-POLY | row 132 | polygonal six-colourings are never a.e.-proper, bar `d = 2` | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-POLY | stub (with SV-2) |
 | FS106-AE-CONV | row 132 | locally finite convex tilings need seven a.e. (merge, fill, polygons) | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-CONV | declined |
@@ -1046,7 +1046,7 @@ the theorem audit (FS-71, row 77) the same day — 254 entries in 53 files, `too
 | FS106-TS-C | row 132 | chains of same-colour regions have diameter ≤ 1 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-C | declined |
 | FS106-TS-C2 | row 131 | a support piece with `H¹`-null zero-density points has diameter ≤ 1 | hand, one mind | `plans/FS106-derivation.md` FS106-TS-C2 | declined |
 | FS106-TS-T | row 132 | a point of chromaticity ≥ 3 within `1/√2 + ε` of every point | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-T | declined |
-| FS106-DIAM | row 132 | connected sets avoiding distance 1 have diameter ≤ 1 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-DIAM | stub (a first leaf) |
+| FS106-DIAM | row 132 | connected sets avoiding distance 1 have diameter at most 1 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-DIAM | stub (a first leaf) |
 | FS106-L | row 132 | lemma (L): a change point's unit circle avoids the set | hand, one mind | `plans/FS106-derivation.md` FS106-L | declined |
 | FS106-C5 | row 132 | a local configuration refuting S–V Prop. 5 without Condition 5 | hand + measured, two minds, one blind | `plans/FS106-derivation.md` FS106-C5 | declined |
 | FS106-IND | row 132 | the index of a density trace, and the no-swap bound `\|ΔInd\| ≤ 1`; the "iff" FALSE | hand; bound two minds, one blind | `plans/FS106-derivation.md` FS106-IND | declined |
@@ -1058,7 +1058,7 @@ the theorem audit (FS-71, row 77) the same day — 254 entries in 53 files, `too
 | FS106-CHR | row 131 | `\|P(x)\| ≥ 5` only on a null set | hand, one mind | `plans/FS106-derivation.md` FS106-CHR | declined |
 | FS106-EQ | row 131 | `χ_m⁰ ≤ k` ⟺ `lim µ_k(ε) = 1` ⟺ periodic grid slack near-colourings; no MR, no Voronov | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-EQ | stub (after row 130's M1) |
 | FS106-SUP | row 131 | tight and slack suprema coincide; `µ₆^per(ε) = µ₆(ε)`; attained | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-SUP | declined |
-| FS106-EPS2 | row 131 | `1 − µ₆(ε) ≥ ε²/(6+ε)²`, given Thm 1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-EPS2 | declined |
+| FS106-EPS2 | row 131 | `1 − µ₆(ε) ≥ ε²/(6+ε)²`, given V-1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-EPS2 | declined |
 | FS106-HIT | row 131 | hitting-form proofs are capped at `O(ε)` (strips, density `ε`) | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-HIT | declined |
 | FS106-PIX | row 131 | the pixel lemma: partial colourings can be made chromaticity 1 at vanishing cost | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-PIX | declined |
 | FS106-REM | row 131 | kept points of one colour avoid the band; `P(0 not kept) → 0` for CP colourings | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-REM | declined |

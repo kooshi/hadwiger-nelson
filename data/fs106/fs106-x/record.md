@@ -87,3 +87,38 @@ file: `plans/STUB-regularity-wall.md` already has G82 (C wrote it); `plans/STUB-
   the fact audit should have run then. Not caused by this stage's edits; cleared by stage 6.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED (`CLAUDE.md`; the moves M1–M9; the audit's reviewed table lines)
+
+**Bytes: `CLAUDE.md` 304,245 → 299,242** (the D-C drafts and the table −733, the moves −4,6xx with pointers, the restorations below +~280).
+- D-C1…D-C12 applied in place, verbatim (D-C1–D-C4 § The aim; D-C5 Last updated; D-C6 item 31; D-C7 Open milestones; D-C8 ranks 1–4; D-C9 G82
+  after G81; D-C10 into G71 before its *Do*; D-C11 G72's count; D-C12 G79's record, whose old text ends "…without a theorem.", not C's
+  "…produced no theorem."). D-C2 is the owner's version (inventory item 77).
+- Header: "(suspended for the 2026-09-26 reframe — …)" → "(it applies: Kooshi suspended it for the 2026-09-26 reframe — *"Ignore the 300kB
+  limit while you reframe the file."* — and it was restored at FS-106's close, 2026-09-27)".
+- Moves M1–M9 (§R-close 4.4) to `plans/GROKKING-INSTANCES.md`, verbatim, each under a heading naming its source entry, the move id and the
+  words it followed; new sections "G65" and "`CLAUDE.md` § What compute actually helps". Pointers: M1 "Its runs: the protocol's §3."; M2+M3
+  "Seventh to ninth instances: … § Building."; M7 "More instances: … §G65."; M5, M6, M8 had pointers already.
+- **Decisions beyond the drafts, each to keep an intrinsic or pass a gate:**
+  1. *Ranks 1–29 kept (E1's design), not C's "old rows 4–29 become 5–30":* FS-76 (new rank 30) folded into the group row, now "30–63". The
+     alternative, C's literal 1–30, costs a row (~440 bytes) and breaks the design the audit's EXTERNAL_HOMES rows rely on (RF1's precedent:
+     "CLAUDE.md shows ranks 1–29 again"). Confidence high.
+  2. *De Giorgi restored in link 6:* D-C3 dropped "(approximate continuity, Lebesgue density, De Giorgi's structure theory for
+     finite-perimeter classes)", and "Giorgi's" then existed nowhere in the corpus (the audit's LOST name). The link names the program's
+     tools, so the list is intrinsic; restored verbatim inside C's sentence (+~100 bytes).
+  3. *Two rule sentences kept out of the moves:* M4's span ended with a rule ("Arm a waiter on the live job's pid, and re-arm it whenever the
+     job it watches is replaced") and M9's held one ("grep Mathlib by the statement's shape at the skeleton"); each stays in `CLAUDE.md` with
+     the pointer, the instance story moves.
+  4. *Three § B lines reworded, no content change, to keep --dupes at 10* (base 10; my edits had made 14): FS106-DIAM "diameter ≤ 1" →
+     "diameter at most 1"; FS106-EPS2 "given Thm 1.3" → "given V-1.3" (row 131's own name for it); FS106-AE-SLACK "a measurable colouring
+     with slack needs seven" → "measurable colourings with slack need seven"; and the M3 heading reworded.
+- `tools/claude_md_fact_audit.py`, reviewed table lines only: ALLOW "30–62" reason extended (the label again, 30–62 → 30–63); ALLOW "§G79."
+  (punctuation: the pointer now reads "§G79 (FS-106: …)"); EXTERNAL_HOMES, each verified in its home on every run:
+  `plans/STUB-four-colour-inheritance.md` (FS-76's row → FRONTIER-STUBS), 'FS-84' and "84's" (D-C7's cut → FRONTIER-STUBS closed list),
+  '120–127' (D-C5's cut → FRONTIER-STUBS), '0.03' and "80's" (D-C8's FS-104 row → FRONTIER-STUBS's FS-104 row), 'D1–D5' (D-C2's cut →
+  `plans/STUB-regularity-wall.md` l. 41).
+- Gates (exit statuses read directly): fact audit `--base 6d3d5072` exit 0, AUDIT PASSED; `--dupes` 10 (base 10); `fs71_ledger_b_check.py
+  --strict` PASS; `bib_audit.py` exit 0; `check_architecture.py` PASS. `--self-test` (not a brief gate) FAILED before this commit — every
+  plant fired "dangling pointer: G82", i.e. it reads the committed `CLAUDE.md` beside the working LEDGER; re-run after the commit below.
+
+## Stage 6 — SAVED

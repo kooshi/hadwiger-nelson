@@ -301,7 +301,7 @@ ALLOW: dict[str, str] = {
     # FS103-X, the front page of FS-103's close (2026-09-26; data/fs103/fs103-x/record.md): ranges superseded by the close's drafts.
     "1–127": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–130 at FS-103's close (FS103-C's C5; the 1–125 precedent)",
     "G1–G80": "the stable-identifier range, extended to G1–G81 when G81 (where every place mixes, the field is the plane) was minted at FS-103's close (C14, C15; kept by the owner's ruling 3)",
-    "30–62": "the paths-forward table's group rank, renumbered 29–61 when FS-103's row left the table at its close (C17)",
+    "30–62": "the paths-forward table's group rank, renumbered 29–61 when FS-103's row left the table at its close (C17); the label again at FS-106's close, 30–62 -> 30–63 (FS106-X: FS-106 left, FS-109 and FS-108 minted at 3–4, FS-76 folded into the group row so CLAUDE.md shows ranks 1–29, E1's design)",
     "121–125": "FS-105's paths-forward row's 'rows 121–125 and FS-103 rest on MR', superseded by 'rows 121–130 rest on MR' at FS-103's close (C17); rows 121–125 stand in LEDGER.md",
     # FS105-X, the front page of FS-105's close (2026-09-26; data/fs105/fs105-x/record.md): row 120's text superseded by the close's drafts.
     "§§2–9": "row 120's grade 'its proof in EL2021 §§2–9, unread here', superseded at FS-105's close (FS105-C's §R-close 4.1): Thm 1.2's proof is EL2021 Thm 1.3 plus FS105-DED; plans/FS105-harden-mr.md keeps the old reading",
@@ -310,6 +310,8 @@ ALLOW: dict[str, str] = {
     "29–61": "the paths-forward table's group rank, renumbered 28–60 when FS-105's row left the table at its close (§R-close 4.2; the 30–62 precedent)",
     # RF1, the paths-forward mirror of the reframe (2026-09-26; data/reframe-2026-09-26/rf1-record.md): FS-106 and FS-107 minted at ranks 1-2.
     "28–60": "the paths-forward table's group rank, renumbered 30–62 when FS-106 and FS-107 were minted at ranks 1–2 at the reframe (RF1; every rank from FS-104's on moved down two, so CLAUDE.md shows ranks 1–29 again, E1's design; the 29–61 precedent)",
+    # FS106-X, the front page of FS-106's close (2026-09-27; data/fs106/fs106-x/record.md).
+    "§G79.": "G79's pointer '`plans/GROKKING-INSTANCES.md` §G79.' now reads '§G79 (FS-106: …)' (FS106-C's D-C12); punctuation only, the address stands",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
@@ -401,6 +403,15 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     '121–130': ("plans/STUB-harden-mr.md", "FS-105's rank-1 row's bearing 'rows 121–130 rest on MR (row 120), the table's weakest link', which left the table at FS-105's close (§R-close 4.2); the stub keeps it"),
     '§§3': ("plans/STUB-harden-mr.md", "FS-105's rank-1 row's question 'Thm 1.2's proof (§§3, 5–9 unread)', answered at FS-105's close (row 120's grade); the stub keeps it"),
     '5–9': ("plans/STUB-harden-mr.md", "the same row's '§§3, 5–9 unread'; the stub keeps it"),
+    # FS106-X, the front page of FS-106's close (2026-09-27; data/fs106/fs106-x/record.md): FS-76's row left ranks 1–29, and FS-106's
+    # drafts D-C2, D-C5, D-C7, D-C8 cut history and addresses whose homes are these files; each token verified in its home on every run.
+    'plans/STUB-four-colour-inheritance.md': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-76, which left CLAUDE.md's ranks 1–29 at FS-106's close (FS106-X; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'FS-84': ("plans/FRONTIER-STUBS.md", "the Open-milestones paragraph's 'Kooshi's rulings (FS-84's among them)', cut by D-C7 at FS-106's close; the closed list holds FS-84's entry and ruling"),
+    "84's": ("plans/FRONTIER-STUBS.md", "the same clause ('FS-84's'); the closed list holds it"),
+    '120–127': ("plans/FRONTIER-STUBS.md", "the Last-updated line's 'FS-100 stage 5 with its waves (rows 120–127)', cut by D-C5 at FS-106's close; the closed list holds it"),
+    '0.03': ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
+    "80's": ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
+    'D1–D5': ("plans/STUB-regularity-wall.md", "link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'"),
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as

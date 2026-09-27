@@ -36,6 +36,10 @@ told twice.*
 
 A list of exceptions measures the class it was derived in: the advisor's 'the tangent form fails only at bowties and unit-curvature interfaces, and nowhere else' was derived for piecewise-smooth blow-ups; cusps, spiralling boundaries and weak-* limits joined within a day (A2 §2.3 rule 2). And the flattering TRUE was the one missing a step: C-AE-CONV, TRUE at the deriver, GAP at the blind verifier (A12), closed by fills.
 
+*FS106-X, moved from G21 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M5), after “…litude 0.74 that named the period 23 at once.”:*
+
+**And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question.
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -145,6 +149,13 @@ Its discoverer declined the credit for depth and named this instead, which is wh
 
 **AND ON 2026-09-09 (FS-23) THE THESIS STOPPED BEING AN ARGUMENT AND BECAME A MEASUREMENT.** All eighteen Polymath16 threads — **1,673,859 characters, April 2018 to January 2026**, the community that works on this exact problem with this exact field — were searched. **"Fischer": 0. "Moorhouse": 0. "Vinh": 0.** "Madore" appears in one thread, "Woodall" in four. These are the people who would most have benefited: on **2 May 2018** one of them wrote *"Madore proved that `ℚ[√3,√11] × ℚ[√3,√11]` can be 5-colored. As Dustin asked in one of his posts, it would be nice to decide if the chromatic number of this subfield is 5"* — the question Theorem B answers — and in the first thread another sketched the residue colouring for UFDs, an eighth independent statement of the reduction. **A literature that does not talk to itself is no longer a reading of this project's bad luck; it is a table.** **What FS-18 adds is the failure mode one step further in, and it is a different rule: G50 below.**
 
+*FS106-X, moved from G49 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M6), after “… see pointed at the wrong paper for six days.”:*
+
+**And a held blog text, not re-read (FS-73's close):**
+  the archived Polymath16 threads, read thirteen days earlier for who first stated the 2-adic law, held Hubai's 2018 count of the Moser
+  ring's four-colourings — 9,120, 380 with a triangle fixed, all 8-periodic, row 78's headline in ring form, which our census then
+  confirmed independently — and Parts's 2021 forced pair at 8/9; no zbMATH or citation search reaches a blog comment.
+
 ## G50 — Read what the search found
 
 *M6, from G50, after “…same day; mark reading per section.”:*
@@ -188,6 +199,10 @@ FS-105 (`plans/FS105-harden-mr.md` §PA.1, §R-close 3.1): **the proof 'used by 
 
 Four in one milestone. `[SokolovVoronov2025]`'s exact-distance transplant, §9 and Question 2, held since FS-18, drawn only at FS-106's planning; `[Townsend1981]` cited in `CLAUDE.md` link 4 as a proof that maps need six while printing none; `[Coulson2004]`, held and unread, cited among map theorems while its theorem is tile-based; `[Parts2020c]` listed "not held" while held, and `[deGreyParts2023]` called unheld (as "Parts 2022") while held under its arXiv id.
 
+*FS106-X, moved from G50 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M8), after “…raphy the same day; mark reading per section.”:*
+
+**FS-100's:** EL2021 and `[Wang2012]`, in `BIBLIOGRAPHY.md` since the day before under a journal-year key, were written "none held" in the milestone's stub, carried so into the advisor's card, re-fetched, and one read by its summary. EL2021 was fetched a third time, its path wrong in four briefs; its §2 was read at FS-100 and holds no PE-2, and the proof of its Thm 1.2 is in neither paper cited for it (FS-105).
+
 ## G51 — A competitor and an advisor beat one mind
 
 *F1: G51 as at `c5e55f12^`.*
@@ -220,6 +235,10 @@ FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1; inventory items 12, 24, 28): *
 
 FS-106's three paraphrases in quotation marks: the owner's re-brief glossed C-AE-CLOSED without 'measurable'; standing rule 3 quotes Kooshi as 'The intent of the ban is …', a phrase not in his words; the quantitative brief's C-Q-STAB was longer than anything on disk; and the close brief's addition quotes TS as 'Prop. 12 holds wherever the curves exist' for TS's table row. Each was caught by the recipient's first-stage quotation check (standing rule 5), none reached a verdict.
 
+*FS106-X, moved from G51 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M1), after “…nstances: `plans/GROKKING-INSTANCES.md` §G51.”:*
+
+**Its runs** (FS-73, FS-79, FS-81, FS-85, FS-86, FS-89; each recorded, with its retractions and budgets, in the protocol's §3): first routes converge more often than they diverge (FS-73's heights, FS-79's edge-local heights, FS-85's abstract yes), and at FS-86 the sides converged twice without contact (HD1 for finite type; the measure-rigidity obstruction, G76); the contest has moved from between competitors to verification — *"the disagreement never started; verification is where contest must begin"* (FS-85) — where blind verifiers, quiet during a live competition, found every divergence and none of truth while retractions stayed free (FS-86: de Bruijn 2, Coxeter 1, Poros 0); FS-89 ran one derivation agent and blind verifiers: the second verifier's blind route stalled and D's lemma statements closed it — blindness bought a re-derivation of every lemma, not a second route; a verifier checks a fixed statement and cannot supply a missing route (FS-81). Every run found a covert channel (the list: the protocol's §3).
+
 ## G54 — Tight or slack
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -243,6 +262,12 @@ FS-103's §G read G60 and G24 only for "no bound on `χ_CP`"; their sharper bear
 *F1, from G64, cut in `d0df4f82` (2026-09-21), after “…specific to the plane stays untested.”:*
 
 A fresh instance of this file's own rule: the probe's design confirmed that a six was reachable *in principle* and never that it was reachable *at the sizes the budget could decide*.
+
+## G65 — The refusal phase diagram
+
+*FS106-X, moved from G65 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M7), after “…he shell's degree gain, at the shell's size.*”:*
+
+**The four-colour band, measured once** (FS-81, row 84; one lattice, one encoding, one wall): on de Grey's lattice with the certified forcing graph X_A, refusals stay undecided at `d_ball` 8.3–14.7, first decide at 16.6 (463 s quiet) and take 55 s at 18.4 — so the law's four-colour aim is about 18.4, where a triangle-free survivor over ℚ(√47) needs ≥ 1,284 times the control's points; the three-colour numbers above do not transfer.
 
 ## G72 — The invariant question
 
@@ -293,6 +318,12 @@ FS-106: TQ-EQ from an example invariant (the weak-* limit colouring every near-c
 
 FS-106's: three of three agents that night quoted their own count as the harness's and passed their hand-back lines unnoticed — FS106-TS 'harness≈280k' at 451k, FS106-TQ '≈255k' at 427k, FS106-V3 '≈295k' at 475k; FS106-QB, under the corrected prompt, reported an estimate as the harness's ('≈205k' at 380k). Read the harness's count from the task notification, never from the agent.
 
+## `CLAUDE.md` § What compute actually helps
+
+*FS106-X, moved from § What compute actually helps at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M9), after “…irst two leaves, never from the plan's table.”:*
+
+**M2 measured it seven times more** (5× to ≥ 30× in time, never in tokens): each time the non-obvious input was already in Mathlib, so grep Mathlib by the statement's shape at the skeleton (`plans/M2-kernel-lane.md` §R-close 3e). **FS-75 once more** (4.5 h planned, 45 minutes): even the re-price from the first two leaves ran 2–3× high, and the saving came from the obligation pass cutting the statement's analytic half, not from Mathlib (`plans/FS75-kernel-167.md` §R-close 4d).
+
 ## `CLAUDE.md` § Building — Kill by PID or process group
 
 *M11, from § Building, Kill by PID, after “…membership, not whether the work stopped.”:*
@@ -302,6 +333,22 @@ repair attempt then ran `for p in $(pgrep -u $USER -f "fplane_sat_cube.py run");
 and `pgrep -f` matched **the shell executing the loop**, whose command line contains the pattern, so the
 shell killed itself mid-loop before reaching a single real target and exited 144, which reads like an
 unrelated failure.
+
+*FS106-X, moved from § Building, kill by PID at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M2), after “…e file's digest identical across ten seconds.”:*
+
+**Seventh and eighth instances, 2026-09-16, both in one night and the second while writing up the first.**
+(a) **A pgid read from `ps` at launch was not the group the work ran in.** A cube sweep was launched under
+`setsid`; `ps` showed its pool at pgid `4088996`, that number went into the pgid file, and `kill -- -4088996`
+followed by a count of processes *in that group* reported **"survivors: 0"**. The sweep in fact ran in group
+`4131612` and kept going for **six more hours**, discovered only when a later `ps` showed nine live workers.
+**The verification tested the wrong proposition**: group membership, not whether the work stopped. (b), the eighth: `plans/GROKKING-INSTANCES.md` § Building.
+
+*FS106-X, the ninth kill-by-PID instance, M3 of FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4), after “…ds open**, which cannot match a command line.”:*
+
+**Ninth instance, 2026-09-23 (FS-73): a lock wrapper is a parent like any other.** A `flock` wrapper believed to be
+still waiting was killed and reported stopped — but it had already started its child, which inherited the lock's descriptor and
+ran an obsolete search orphaned, holding the machine's one heavy lock for about 17 minutes while every queued job waited; found
+by a `ps` sorted by CPU. Kill the process group, and verify against the work: the child absent from `ps` and the lock free.
 
 ## `CLAUDE.md` § The standard of evidence above rung B
 
@@ -373,3 +420,7 @@ Third instance in one milestone of a decisive zero from a generator that could n
 
 TQ §4.4 scored the advisor's 'robust Voronov, linear in ε' on uncovered area over plane area; the hunch counted monochromatic band pairs per unit area, whose band has measure ≈ 4πε — two denominators, one credited (A2 §2.2).
 
+*FS106-X, moved from § Make the gate fail at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M4), after “… PIDs cannot self-match; patterns always can.”:*
+
+**Fourth instance (FS-79 phase 0): a waiter on the log of a chain
+that had already been killed and replaced** — its condition could never become true, and it was found only at the phase's end.
