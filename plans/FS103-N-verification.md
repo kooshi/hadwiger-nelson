@@ -22,6 +22,8 @@ list opened until stage 3 is committed.*
 - **N-OP** (§2.4): `I` is independent for `[BachocEtAl2014]`'s `A_σ` (Def. 2.1 with (9)) iff `(Leb × σ){(x, w) : x, x + w ∈ I} = 0`;
   so `χ(A_σ) = χ_m⁰(ℝ²)`. [hand, one mind]
 - **N-AE3** (§2.6): `χ(Cay(ℝ, {±1, ±√2})) = 2`, `χ_CP = 3`, `χ_m⁰ = χ_m = χ_B = 3`. [hand + tools exact, one mind]
+- **N-Q4** (stage 3, §3.1): given MR(ℚ(√635087)) and the held collapse, `χ(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)`. [hand;
+  a composition — its links' grades in §3.1]
 - **N-EASY** (§2.7, C6): `χ(ℝ²) ≤ χ_m⁰(ℝ²)` with no MR and no CP (random rigid motion + Fubini + de Bruijn–Erdős). [hand, one mind;
   classical in shape]
 
@@ -254,3 +256,57 @@ a.e.-proper colouring into an everywhere-proper one.
 
 `tools/fs103_n_checks.py` (four exact checks, each with a plant that fires alone); output `data/fs103/fs103-n/checks-stage2.txt`
 (script exit statuses read directly: all 0; each plant "fired alone, as it must").
+
+## Stage 3 — SAVED (committed before anything fenced was opened)
+
+### 3.1 Q4 — TRUE given MR and the held collapse, as a composition of four links
+
+"given MR: `χ(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)`" (claims-m2). The chain:
+
+| link | statement | status here |
+|---|---|---|
+| L1, the collapse | given MR(ℚ(√635087)): `χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²)` | **held by statement** (claims-m2: two blind minds); its proof is fenced from this job and **not checked here** |
+| L2 | `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)` | N-M1, derived blind (§2.1) |
+| L3 | `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)` | held C-FMT (a), (b) (two blind minds); re-derived here (N-FMTa) |
+| L4 | `χ_m⁰(ℝ²) = χ(A_σ)` | N-OP, definitional from `[BachocEtAl2014]` Def. 2.1, §2.4, §3.1 (9) |
+
+L2 ∧ L3 ∧ L4 is M1′, unconditional; with L1, Q4 follows. **Grade: [hand], conditional on MR at ℚ(√635087) (row 120's grade, EL2021 Thm 1.2
+external) and on L1 at its held grade.** MR applies: `635087` is prime and `≡ 7 (mod 8)` (sympy, seconds), so `ℚ₂(√635087) = ℚ₂(√7) =
+ℚ₂(i)`, the dyadic place splits in `F(i)`, no stable dyadic place exists and `R = O′` — row 120's hypothesis, consistent with C-635-PL (not
+this job's claim).
+
+**Where Q4's strength lives (C6).** `χ(ℝ²) ≤ χ_m⁰(ℝ²)` holds with no MR (N-EASY). So Q4's new content is `χ_m⁰(ℝ²) ≤ χ(ℝ²)`, which comes
+from L1 (`χ_CP ≤ χ` given MR) through L3. **Q4 is exactly as strong as the collapse; M1 adds the identification, not the strength.** The
+flattering reading "Hadwiger–Nelson is a question about measurable colourings" is correct given MR and L1, and in this form: *the least
+number of colours for a colouring of the plane equals the least number for a measurable colouring whose monochromatic unit pairs form a
+null set of `ℝ² × S¹`* (not the everywhere-proper `χ_m`, whose relation to `χ_m⁰` is C-FMT (d), not claimed here).
+
+**G21 audit of the pleasing result.** The acceptance tests were the controls: C1 and C1b (known positives) reproduced; C2, C2′, C4, C5
+stopped the arguments where they must; C3 found a real scope condition (N-SUPP), i.e. one statement in the family is false as it may be
+worded; C7 consistent. The one link that could make Q4 false and that this job did not check is L1.
+
+### 3.2 Verdicts (count of minds: this job's, blind; FS103-M's derivation not yet read)
+
+| claim | verdict | grade | note |
+|---|---|---|---|
+| **M1** (`χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`) | **TRUE** | [hand], one mind here (blind) | §2.1, route: Følner limit on the weak-* space of fractional colourings; Rajchman compactness; Lebesgue-point version; one shared threshold; continuity for every `w` |
+| M1, "general form for Rajchman edge measures on `ℝⁿ`" | **TRUE with `T ⊆ supp σ`; FALSE without** | [hand], one mind | N-SUPP counterexample `T = ±[1, 2] ∪ {±3}` (`χ_m⁰ ≤ 3 < 4 ≤ χ_CP`); MISSTATED if the trimmed wording lacks the support condition — scored at stage 4 |
+| **M1′** | **TRUE** | [hand], one mind; `χ_m⁰ ≤ χ_CP` also held (two) | the equality with `χ(A_σ)` is definitional, not stated in BDOV (§3.1 there gives only `χ(A_ν) ≤ χ_m`) |
+| **M1″** | **TRUE** | [hand], one mind | trivial from M1; **C-CPM holds with no MR**, not only through C-dG-F1 or C-635-F1 |
+| **M1.1** | **TRUE** | [hand], one mind | needs the `L^∞` (jointly measurable) setting; C5 (i.i.d.) shows it fails for general invariant random colourings |
+| **M1.2** | **TRUE** for "survives when `σ̂ → 0`"; **TRUE** for "not otherwise" as an existential (C4); **GAP** if "not otherwise" means every non-Rajchman `σ` | [hand], one mind | |
+| **A-E3′** | **TRUE** | [hand + tools exact], one mind | and A-E3's `χ = 2`, `χ_CP = 3` re-derived (§2.6) |
+| **Q4** | **TRUE given MR and L1** | [hand], a composition | L1 unchecked here (fenced) |
+
+### 3.3 Items for the owner (proposed; the close writes them)
+
+- **Correction owed, `BIBLIOGRAPHY.md` line 168** `[Falconer1981]`: "not held" → held at `~/source/library/papers/falconer-1981-…-jcta-31-184-189.pdf`;
+  "read in full (§§1–3), 2026-09-26, FS103-N"; "its Lemma 1 meets the null boundary in one point, so Theorem 2 bounds `χ_m`, not `χ_m⁰`".
+- **`BIBLIOGRAPHY.md` `[BachocEtAl2014]` read status:** add §2.5, §2.6 to Thm 2.5's statement, §3.1 (eq. (9) and the respect argument), §3.2's opening.
+- **`BIBLIOGRAPHY.md` `[KechrisMarks2020]` read status:** §3's definitions of `χ⁰_B`, `χ⁰_µ`, `χ^ap_µ` (p. 18) and §5 Example 5.1 (pp. 45–46).
+- **Naming clash (for FS-20 / any write-up):** Kechris–Marks' `χ⁰_µ` is the minimum over **invariant conull vertex sets**; on the connected
+  `UD(ℝ²)` it equals `χ_B`. The project's `χ_m⁰` ignores **null sets of edges**. Write-ups should rename (e.g. `χ_m^{a.e.}`) or say so.
+- **Scope condition for any ledger row of M1's general form:** `T ⊆ supp σ` (N-SUPP).
+- **Prior-art debt:** "an a.e.-proper measurable colouring of an amenable group with a Rajchman edge measure yields a stationary colouring
+  continuous in probability" not searched (invariant random colourings; factor-of-i.i.d. and ergodic-theory literatures). BDOV do not state
+  `χ(A_σ) = χ_m⁰`.
