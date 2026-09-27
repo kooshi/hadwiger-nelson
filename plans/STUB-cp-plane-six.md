@@ -71,7 +71,7 @@ probability, proper almost surely on every unit pair (FS100-BC's definition, quo
 G24 (the step to seven in the cell family is integrality; a relaxation that sees the gap is open), G60 (the fractional cap 4.36 and the real
 place's `J₀` minimum), G64 (six in the gap; skipping is not evidence), G48, G59, G80, G73 (averaged certificates are one of the formats left),
 G72 and G79 (pose the structural form; hunt the invariant every CP colouring carries), G21, G49/G50 (Falconer not held). Stubs: FS-103 (whose
-F1 makes this rung D), FS-44 (the mirror), FS-80 (route (c)), FS-49 (the finite-graph route to the same rung, post-ban), FS-102.
+F1 makes this rung D), FS-44 (the mirror), FS-80 (route (c)), FS-49 (the finite-graph route to the same rung, post-ban), FS-102. **Added at FS-106's close (owner, 2026-09-27):** G82 — row 131 holds at every `k`, so this stub's question is a stability question at five: `χ_CP(ℝ²) ≥ 6` ⟺ `lim_{ε→0} µ₅(ε) < 1`, and a five-colour refutation is a sequence of periodic grid-square slack colourings with vanishing holes; FS-107's R and W at `k = 5`.
 
 ## Bearing on χ ≥ 6
 
