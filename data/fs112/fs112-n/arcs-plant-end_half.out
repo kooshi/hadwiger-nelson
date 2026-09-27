@@ -1,0 +1,2 @@
+END twin: |z - c|^2 = 0.990100; region beyond the arc farther than 1 from z: True
+PLANT end_half: twin behaves as derived

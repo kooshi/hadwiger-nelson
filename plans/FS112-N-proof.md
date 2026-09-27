@@ -18,12 +18,19 @@ dropped). `𝒫` is the set of **unit-arc centres** (centres of boundary arcs of
 | N112-NB4 | NB-4's general form, corrected: at a four-colour vertex `v`, if in one `σ_v`-orbit `y₀,…,y₅` of change points no arc of `Γ` on `ω(y_{k±1})` passes through `y_k`, contradiction; the bound `\|P_cl(y_k)\| ≤ 4` is not needed (derived from the alternation) | hand, one mind (NB's route, one hypothesis removed) | §1.2, §1.4 row 1 |
 | N112-A4SIX | A4-SIX-ARCS is TRUE (a second mind) | hand, two minds: A4; this job | §1.4 row 1 |
 | N112-END | In a stuck chain (N4-STUCK's structure at every `P_k`) the horn curvatures cannot reach the closed ends: `λ_{k+1} = −1` or `υ_{k−1} = 1` contradicts N112-U1 at `P_k` | hand, one mind | §1.4 row 9 |
+| N112-L60 | A boundary arc of radius 1 with constant sides has angular length `< 60°` (its outer tile would have diameter `> 1`); along `ω(P)` neither side colour recurs `60°` apart | hand, one mind; tools exact at named values (`tools/fs112_n_arcs.py` L60) | stage 2, §2.2 |
+| N112-LOCK | For `w` interior to a unit arc `α ⊂ ω(P)`, a tile of either side colour touches `ω(w)` only at `P` (inner colour: facing cone; outer: away cone) or, for the inner colour only, at `P + 2e_w` from outside `B(P, 2)` | hand, one mind; the outer colour's exclusion at radius 2 tools exact (R2) | §2.2 |
+| N112-BEND | Off its end vertices, a unit arc can be bent off radius 1, keeping validity and creating no unit arc: toward `P` unless its outer colour is at `P`; away from `P` unless its inner colour is at `P` or lies along the radius-2 circle | hand, one mind; GAP at the end vertices | §2.2 |
+| N112-RED | Every valid map has a valid modification (merges, bends) in which every unit arc is (Q) centred at a vertex with `≥ 4` colours carrying both its side colours, or (R2) out-contact with the inner colour along the radius-2 circle | hand, one mind; GAP at end vertices and at termination's bookkeeping | §2.3 |
+| N112-NB4′ | N112-NB4 as corrected at stage 2 (W1): the six orbit points need `{e, f} ⊆ P_cl(y_k)`, which fails only at an arc of `ω(v)` containing an orbit point in its closure; "passes through `y_k`" read as "has `y_k` in its closure" | hand, one mind | §2.1 W1 |
 
 ## Would-have-searched-here log (standing rule 3)
 
 - The chain walk's exceptions could be "tested" by enumerating vertex figures with unit arcs at each step: not done; each exception is derived from
   the step's proof and named by the circle it reads.
 - Whether a purely rotating ring is realisable with unit arcs (C-CHAIN-12's exception): not searched for; named, and left to a formula fragment.
+- N112-RED's termination and end-vertex cases could be probed by enumerating vertex figures at an arc's end: not done; named as a GAP.
+- Whether CAL-STRIP's and CAL-DISK's arcs are all of type (Q): not fitted to any figure; read from the printed words only (§2.4) and registered.
 
 ## Fence log (standing rule 13; brief § Fences)
 
@@ -129,3 +136,166 @@ Condition 5 (where FS-110 checked its controls); N112-SIX with seven colours lea
 lives on a unit arc (FS106-V), the configuration of row 6's `C = 0`; its detailed relation to N112-U1 is not derived here.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: card W answered; the unit-arc centre (§6); the reduction to four-colour centres
+
+*A2's card W arrived after stage 1 was committed (its W1–W6, quoted in my answers by number only). The owner lifted the fence on the plan's §5.3
+after both stage-1 commits; §5.3 was read after this stage's derivations were formed (its E1–E17 are not used below). Retractions counted from
+stage 1: one (W1 (i), a precision of N112-NB4).*
+
+### 2.1 Card W
+
+**W1 (i) — an arc of `ω(v)` that ends at an orbit point must be named; retraction 1.** NB-4's argument uses, at each of the six orbit points,
+`{e, f} ⊆ P_cl(y_k)` (so that the straddlers of `ω(y_{k±1})` at `y_k` avoid `e, f`). Starting from a change point `y₀` (an `e`-arc and an `f`-arc
+of `ω(v) ∖ Γ` meeting at `y₀`), this propagates round the orbit by `c(θ + 60°) ≠ c(θ)` as long as each orbit point has both sides off `Γ`; it fails
+exactly at an orbit point lying on an arc of `Γ` on `ω(v)` **or at an end of one** (then one side of the orbit point on `ω(v)` is boundary, and
+`f` need not be at it). Likewise, NB-4's straddler count needs all four tangent directions at `y_k` straddled, so an arc of `ω(y_{k±1})` that merely
+**ends** at `y_k` also breaks it. **N112-NB4′ (corrected):** *let `(v, y₀)` be a covering pair at a change point of the four-colour vertex `v`; if
+no point of `y₀`'s `σ_v`-orbit lies in the closure of an arc of `Γ` on `ω(v)`, and no arc of `Γ` on `ω(y_{k±1})` has `y_k` in its closure
+(`k = 0, …, 5`), contradiction.* Both exceptions sit in the same orbit, the covering pair's. [hand, one mind]
+**W1 (ii) — no; the alternation does not use `|P_cl(y_k)| ≤ 4`, and the two inner half-arcs carry one colour.** Write `Q⁺_k` (`Q⁻_k`) for the two
+straddler colours of `ω(y_{k+1})` (`ω(y_{k−1})`) at `y_k`, one inner (its tile in `B(v, 1)`), one outer. (1) Straddlers lie in `P_cl(v)` and avoid
+the other circle's centre's type (N-E1): `Q⁺_k ∩ P_cl(y_{k+1}) = ∅`. (2) `Q^±_{k+1} ⊆ P_cl(y_{k+1})`. (3) At one point an inner and an outer
+straddler never share a colour (N-E2 against `v`'s tile of that colour). By (1)–(2), `P_cl(y_{k+1}) ∩ P_cl(v)` lies in the 2-set
+`P_cl(v) ∖ Q⁺_k` and contains the 2-sets `Q⁻_{k+1}`, `Q⁺_{k+1}`: so `Q⁻_{k+1} = Q⁺_{k+1}`, and by (3) the inner colours agree and the outer colours
+agree. So the inner half-arcs of `ω(y_{k+1})` and `ω(y_{k−1})` at `y_k` lie in **one** colour `i_k` whether or not `ω(y_k)` carries arcs of `Γ`;
+`|P_cl(y_k)| ≤ 4` follows (it is `{e, f} ∪ Q_k`), it is not an input. `ω(y_k)` is read nowhere. [hand, one mind]
+
+**W2 — the clause holds; the configuration is empty.** Let `c ∈ P_cl(v′)` and `v` lie on a unit arc `A` of `ω(v′)`; put `n = v′ − v`, `a ⊥ n`. Then
+`v′` is a `c`-contact of `v`, so `D_c(v)` lies in `{d·n ≥ 0}` (in-type) or `{d·n ≤ 0}` (out-type), and `A`'s tangent `±a` is on `∂D_c(v)`.
+- An arc between two gap sectors cannot have its tangent on `∂D_c(v)` (one of its two sectors would leave the convex cone `D_c(v)`).
+- So `A` could only bound the gap at its end, beside the `c`-sector `S₁`, which W-MERGE's proof makes a horn along `a`. In-type at `v′`: `v`'s
+  `c`-sectors are Siamese to `v′`'s `c`-tile (N-E2), so inside `B̄(v′, 1)`, above `A` (`y ≥ x²/2`); the horn is then above `A` and `A` bounds the horn,
+  not the gap. Out-type: the `c`-sectors are outer, below `A`; the gap, inside `D_c(v) ⊆ {d·n ≤ 0}`, is below the horn, and again `A` (above the horn)
+  does not bound it.
+- Hence `cl R ∩ ω(v′) ⊆ {v}` and `D_c(v′)` is unchanged. **W-MERGE stays (a)** [hand, one mind]. (The other walk's worry is real in one sense: had
+  `A` bounded a gap sector, the merge would put `c` interior to `ω(v′)` and break N-E1 at `v′` — so W-MERGE's clearness proof would have failed there;
+  the derivation shows it cannot arise.)
+
+**W3 — N4-RAY reads only the middle region's two boundary arcs and `v`; its step (1), as written, reads the stack.** RAY needs: a unit circle through
+`t ∈ M` leaves `M` (not the stack) through a boundary arc of `M`, crossing into a `c`-horn. `M`'s boundary arcs are the inner arcs of the two
+`c`-horns, with curvatures `κ₂, κ₃` strictly inside `(−1, 1)` whenever the `c`-horns have positive width (`κ₁ < κ₂`, `κ₃ < κ₄`, `κ₁ ≥ −1`, `κ₄ ≤ 1`),
+and a unit arc tangent to `a` at `v` has curvature `±1`, so neither is a unit arc. Step (1) as printed ("the stack is `κ₁x²/2 < y < κ₄x²/2` with
+`−1 < κ₁ < κ₄ < 1` … leaves it before `x = ρ`") **fails at `κ₄ = 1`**: a unit circle about `N + (X, h)`, `X, h` small, runs inside the stack along the
+top arc. It is not needed: with `M` in place of the stack the same curvature comparison holds. **RAY stays (a), step (1) restated for `M`** [hand,
+one mind].
+
+**W4 — every circle the base reads (CB's lines).**
+
+| CB line | step | circle read | unit-arc exception |
+|---|---|---|---|
+| 91–93 | (P) sweep | `ω(y)`, at an interior point of a tile | none (N-E1's content; no Condition 5) |
+| 94–97 | (P′) | `ω(y)` near `x`, `\|x − y\| = 1` ("each meets `ω(y)` finitely (Condition 5)") | `y ∈ 𝒫`, an arc of `ω(y)` with `x` in its closure; nesting possible when both its side colours lie in `c(y)` (both kind) |
+| 100–101 | transversal form | `ω(y)` crossing `Ω = ω(u)` at `x` | `ω(y)` along `Γ` at `x` (same as (P′)) |
+| 105–112 | D2's strip | `ω(u + e)`, `e ∈ Ω` ("no arc from u lies on a unit circle (Condition 5)") | an arc leaving `u` that lies on `ω(u + e)` |
+| 115 | pseudo-colouring | `Ω = ω(u)` ("finitely many points with `\|c′\| = 2` (Conditions 3, 5)") | an arc of `Ω` with both sides outside `c(u)` (inert at `u`) |
+| 118–120 | (i)/(ii) | `ω(y)` for `y` on the partner circle, entering the strip beside `x` | as (P′); plus D2's exception at `u₁` |
+| 126 | D3 | `ω(x) ∩ ω(u₁)` (geometry only) | none |
+| 138–156 | D4 bicycle | `Ω₁ = ω(u₁)`, `Ω₂ = ω(u₂)` (finitely many special times), `ω(x(t))` (bands via (i), (ii)) | as lines 115, 118 |
+| 159–193 | D5 (items 1, 3, 5, 6) | `Ω`, `ω(w)` for `w = x ± 60°` (item 3), `ω(x_{i±1})` (item 5, via (P′)), (P′) at item 1 and 6 | as (P′) and line 115 |
+
+**W5 — both.** At `x₁` the arc of `ω(x₂)` separates `q` (inside `B̄(x₂, 1)`) from `g` (outer). `q ∈ P_cl(x₂)`: N2-ROT's (A+) is `c(σx₁−) = q`, the
+colour just before `x₂` on the ring — **in-contact**. `g ∈ P_cl(x₂)` in P17's own setting (its proof uses "`x₂`'s `g`-tile") — **out-contact**. So
+**both**; "out-contact for `g`" is the half of it that names `g`.
+
+**W6 — the held positives at each (b)/(c) step's reading radius.**
+- **FS-110's fragments** (flowers of radius `1/4` and `1/10` about the four points of a unit rhombus) reach no step that reads a whole unit circle:
+  rows 1, 2, 8, 12–17 are out of their reach. They reach rows 5–7 only at `N`'s flower (radius `1/10`), below a horn's scale. T2's `w` is an (E1)
+  centre (arcs of `ω(w)` at `u`, `v`); BB's `w`, a four-colour vertex with no unit arc, shows the flowers cannot test NB-4 (it is forbidden in a full
+  map under Condition 5).
+- **CAL-STRIP**, from its printed words ("The curved lines are arcs at constant radius 1 from the opposite corner, so each vertex down the middle
+  mandates four such curved edges", thread 7, `[07.10]`): its middle vertices are centres of four unit arcs. Its half-height `(√15/2 + √3)/2 ≈ 1.834`
+  holds `ω(v)` whole for vertices within `0.834` of the midline, so row 1's (E1) and A4-SIX-ARCS are within its reach; row 1's (E2) (radius 2) and the
+  base (radius up to 2 about `u`) are not wholly.
+- **CAL-DISK**, from its printed words (Sirgedas, `[16.346]`: "In the dual graphs, they both have quads on the interior, and triangles on the
+  exterior. Arrows in the dual graph correspond to curved edges in the tile graph. Each quad in the dual graph “emits” four arrows."; de Grey,
+  `[16.106]`: a `{1,3,5,6}` junction on the central tile): radius `2.12426` holds `ω(v)` whole for vertices within `1.124` of the centre, so the
+  `{1,3,5,6}` junction's ring (row 1's (E1)) is in reach, its (E2) circles not wholly.
+- **The recognition (§2.4):** "each quad emits four arrows" is row 1's (E1) at every interior degree-4 vertex, and N112-RED's type (Q).
+
+### 2.2 Three facts about one unit arc
+
+**N112-L60.** Let `α ⊂ ω(P)` be an arc of `Γ` with one tile `T_out` outside and one `T_in` inside along it, angular length `ℓ`. `T_out` contains points
+`(1 + ε)e` beside each end direction `e`; two such points are `(1 + ε)|e₁ − e₂|` apart. At `ℓ = 60°` that is `1 + ε > 1`, against a tile's diameter
+`≤ 1` (TS-C); so **`ℓ < 60°`**. For two tiles of one colour beside the arc `60°` apart, N-E1 at the first point is broken by the second (its unit
+circle crosses `ω(P)` transversally there, into the tile). [hand, one mind; `tools/fs112_n_arcs.py` L60, exact at `60°` and `50°`]
+
+**N112-LOCK.** Let `w` be interior to `α`, and `X` a tile of a side colour with a contact `Q ∈ ω(w) ∩ cl X`, `e = Q − w`. For `z` near `w`, `ω(z)`
+near `Q` is to first order the line `{x : x·e = (z − w)·e}`; `X`'s cone at `Q` (or its horn, by N-HORN) is met for all small `(z − w)·e` of one sign.
+So `X`'s shadow near `w` contains a half-plane bounded by the line through `w` normal to `e`. That half-plane meets both open half-discs of `w`
+(`T_in`'s and `T_out`'s) unless `e ∥ e_w`, and it meets the tile beside `w` of `X`'s own colour — against N-E0. Hence **`e = ±e_w`: `Q = P` or
+`Q = P + 2e_w`.** At `Q = P`: the inner colour faces `α`, the outer faces away (N112-U1). At `Q = P + 2e_w`: an outer-colour tile inside `B(P, 2)`
+has, against `T_out`, cross-distances on both sides of 1 (N-E2 forbids it; exact at named points, R2); an inner-colour tile outside `B(P, 2)` is
+farther than 1 from all of `B̄(P, 1)` (triangle inequality; the plant `r2_outside` checks the twin). **So along a unit arc's interior the only
+contacts of its side colours are its centre's tiles and inner-colour tiles along the concentric circle of radius 2.** [hand, one mind]
+*Consequence for ARC-INERT (E9):* its "finitely many isolated contact points" do not exist in the arc's interior.
+
+**N112-BEND.** Bending `α`'s interior toward `P` recolours a thin lens inside `B(P, 1)` by the outer colour; the lens is clear unless some outer-colour
+tile has a contact on `ω(w)`, `w ∈ α`, that bounds the shadow on the lens's side — by LOCK, only an outer-colour tile at `P` (an out-contact). Bending
+away recolours a lens outside by the inner colour, blocked only by an in-contact at `P` or an inner-colour tile along the radius-2 circle (call it
+**R2**). The new arc has radius `≠ 1`; types only shrink except at points of the new arc (chosen to avoid the finitely many unit-arc centres
+nearby). **At the end vertices** the lens tapers into a thin sector at `A`, clear by N3-CLEAR when its directions stay strictly inside every
+side-colour contact half-plane of `ω(A)`; a contact with `e ⊥ τ_A` is again at `P` or `P + 2e_A` — sketched, not written out: **GAP at the end
+vertices**. [hand, one mind]
+
+### 2.3 The reduction, and the §6 claims
+
+**N112-RED.** *Every valid map has a valid modification, by W-MERGE (row 4, which survives) and N112-BEND, creating no unit arc, in which every unit
+arc `α ⊂ ω(P)` is of one of two kinds: **(Q)** `P` carries both side colours and at least four colours; **(R2)** `P` carries the outer side colour, not
+the inner, and an inner-colour tile runs along the radius-2 circle about `P` over all of `α`.*
+*Proof.* A unit arc with no out-contact bends toward `P`; one with an out-contact but no in-contact bends away wherever R2 fails (R2 on a sub-arc
+leaves that sub-arc, an (R2) arc). There remains the **both** kind. At a both-centre `P` the inner colour is in the facing cone, the outer in the away
+cone, and each side cone (angle `ℓ > 0`) is covered by positive-angle sectors of other colours (N112-U1). If one colour `γ` covers both side cones, it
+has two positive-angle sectors, so `int D_γ(P) ≠ ∅` and the convex cone `D_γ(P)` holds the facing gap or the away gap; W-MERGE recolours that gap near
+`P` by `γ`, removing the inner or the outer side colour from `P`, and the arc then bends. Otherwise the two side cones carry different colours: `P`
+carries `≥ 4` colours, type (Q). Each move is local, lowers (unit-arc pieces, `Φ`) and creates no unit arc; the terminal modification exists as in
+N4-TERM. ∎ [hand, one mind; GAP at N112-BEND's end vertices and at the bookkeeping that a bend never creates a new contact at another arc's centre
+(argued: types only shrink off the new arc, which avoids the centres)]
+*Where six is spent:* nowhere in the reduction (it is geometry of contacts); six enters when (Q)'s four colours meet NB-4. *Seven-colour control:* the
+hexagonal seven-colouring has no unit arc; nothing to reduce, as required.
+
+**What it does to the question.** After N112-RED, unit arcs live only at **four-colour (or more) vertices that carry both side colours** — Polymath's
+tactic at a vertex of degree `≥ 4` — or at the radius-2 configuration; and by N112-NB4′ every four-colour vertex is itself a unit-arc centre (E1) or has
+a covering pair whose orbit meets an arc through a ring point (E2). So in the reduced map, **unit arcs and four-colour vertices come together**:
+the unit-arc half of Question 2 is a question about **four-colour vertices that are unit-arc centres**, plus R2.
+
+| claim | verdict | grade, minds |
+|---|---|---|
+| **C-UA-WEDGE** | **MISSTATED.** "the `c`-tiles at `P` face the arc" holds for the **inner** side colour only; the outer side colour's tiles face **away**. Corrected (N112-U1): *an inner side colour at `P` has its sectors in the closed cone of angle `π − ℓ` facing the arc, an outer one in the cone facing away; neither meets the open side cones.* TRUE as corrected; its killing test (a side colour in a side cone) cannot fire | hand; TS-U's content (row 132, two minds, one blind) re-derived as a shadow statement, this job one mind |
+| **C-UA-BUDGET**, first branch | **TRUE** (A4-SIX-ARCS) | hand, two minds: A4; this job (stage 1 row 1) |
+| **C-UA-BUDGET**, second branch | **MISSTATED.** Not "the arcs sit on `ω(σ_v^{±1}y)` through `y`" for the given `y`: by N112-NB4′, in `y`'s `σ_v`-orbit some point has an arc of `ω(y_{k±1})` in its closure, **or** some orbit point lies in the closure of an arc of `ω(v)` (centred at `v`). Corrected statement TRUE | hand, one mind |
+| **ARC-INERT** | **TRUE, stronger, off the end vertices**: an inert arc bends toward its centre everywhere in its interior; the isolated tight contact points it names do not occur there (N112-LOCK). **GAP at the end vertices** | hand, one mind |
+| **C-UA-INC** | **Local:** all four kinds are consistent with N112-U1 (both: FS-110's S1, exact; self in-: CAL-STRIP by its words; out: `[Parts2021]` by its words; inert: any arc whose centre lies inside a third colour's tile). **Up to N112-RED:** only **both** at a `≥ 4`-colour centre (Q), and **out** with R2, survive; in-only, out-only (without R2), inert and three-colour both-centres are removable | hand, one mind; the global question is Q-full |
+| **C-SEAMS-TWO** | **MISSTATED.** (S1)'s centre in its three-colour form is a bowtie both-centre, **removable** by N112-RED (the bowtie colour merges through a gap, then the arc bends). Up to reduction the seams are **one species** — a `≥ 4`-colour vertex carrying both side colours of its unit arcs (T2's `w`, `P_cl(w) = {1, 3, 4, 5}`, is one) — plus R2 | hand, one mind |
+| **C-UA-CHAIN** | **GAP** at "each unit arc forces a further unit arc". Reduced form: a (Q) centre is a four-colour vertex; on N112-NB4′'s (E2) branch it forces a both-kind arc centred at a ring point at distance 1, whose centre is then (Q) — a unit-distance chain of four-colour vertices; on the (E1) branch no further vertex is forced by this route. The print's version is Sirgedas's `[16.347]` for the strip ("A quad can’t be added because each new vertex will emit a conflicting arrow") | hand, one mind |
+| **C-V56** | N112-SIX: a six-colour vertex has `ω(v) ⊆ Γ`, every arc of it both-kind; a five-colour vertex `≥ 180°` of centred arcs. De Grey's "those six tiles must jointly cover a disk of radius 1": **GAP** (not derived) | hand, one mind |
+
+### 2.4 The held positives read against N112-RED (a recognition, and a registered prediction)
+
+Sirgedas's rule (`[16.346]`) — at every interior degree-4 vertex (a quad of the dual graph) four curved edges — and de Grey's (`[07.10]`) — four arcs
+of radius 1 centred at each vertex down the strip's middle — describe, in the prints' own words, **type (Q)**: four-colour vertices each the centre of
+unit arcs whose side colours are the vertex's own (a tile's arc centred at its own opposite corner, the neighbour across it of the colour diagonal at
+that corner: Polymath's tactic, self and out at once). So the only two held six-coloured regions beyond radius 1.8 are built entirely from what
+N112-RED says a tight map must be built from, and no (R2) arc is described in either. **Registered (G21 instruments, scored at the close):**
+
+| id | prediction | p | both outcomes reachable |
+|---|---|---|---|
+| N112-P1 | CAL-STRIP's rebuild: every unit arc is (Q) — its centre is a vertex of `≥ 4` colours carrying both its side colours (self and out); none is (R2) | 0.8 | the rebuild reads each arc's centre type exactly; an arc of another kind that does not bend is a counterexample to N112-BEND |
+| N112-P2 | every four-colour vertex of CAL-STRIP within `0.834` of the midline with no covering pair on its ring has centred arcs of total `≥ 60°` (four arcs, each `< 60°`) | 0.85 | A4-SIX-ARCS predicts it; a rebuild with less is a counterexample to a two-mind theorem |
+| N112-P3 | CAL-DISK's `{1,3,5,6}` junction is a (Q) centre | 0.7 | as P1, once the disk is rebuilt |
+
+### 2.5 C-BEYOND and C-LOCAL for this programme
+
+The programme so far is a **reduction**, not a refutation: N112-RED, N112-NB4′ and the chain walk are local (each reads a disc of radius 2 about a
+point) and **all hold on CAL-STRIP and CAL-DISK**, which are valid; so none of them can be the step that decides Q-full. **C-BEYOND's step, named:**
+the exclusion of a map whose unit arcs are all (Q) or (R2) and whose four-colour vertices meet N112-NB4′ — the step Sirgedas's `[16.347]` performs for
+the strip in words ("the 6-color strip can’t be extended") and which must read beyond radius `2.12426` (the disk realises (Q) that far). Not derived.
+**C-LOCAL: GAP** — no explicit `R` from this programme; its only candidate global step is C-UA-CHAIN's (E2) chain.
+
+### 2.6 Where six is spent, controls
+
+N112-L60, LOCK, BEND, RED spend nothing (contacts and shadows of one colour); six enters at N112-NB4′ (two ring colours outside a four-set) and N112-SIX.
+Seven-colour control: no unit arc in the hexagonal seven-colouring, so every statement here is vacuous there, and NB4′ with seven colours leaves three
+ring colours (its alternation fails), as required.
+
+## Stage 2 — SAVED

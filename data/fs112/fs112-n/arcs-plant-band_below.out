@@ -1,0 +1,2 @@
+BAND: z in horn = False; |z - p1|^2 = 0.838100, |z - p2|^2 = 1.031998, straddle = True
+PLANT band_below: fired (refused)

@@ -1,0 +1,3 @@
+R2: side tile T_in: |side(w) - X|^2 = 1.040400, |side(w') - X|^2 = 1.199592, straddle = False
+  twin (X outside B(P,2)): both > 1: True
+PLANT r2_outside: twin behaves as derived
