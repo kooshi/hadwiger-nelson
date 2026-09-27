@@ -230,3 +230,29 @@ NO" is a sign slip (a wording correction owed; claims §7's "decides" is neutral
 - WCH's horn lengths at `N` are not given in the fragment: instead of scanning for a witness scale, the witness is computed at `x ≈ 4T/3` and the
   scale `T → 0` argument used (any positive horn length contains it).
 - Nothing else.
+
+## Stage 3 — SAVED (verdicts committed before opening anything fenced)
+
+| claim | verdict | minds (with N4) | grade | note |
+|---|---|---|---|---|
+| N4-SHADOW | **TRUE** | two (one blind) | [hand + exact] | §2.1, C1 |
+| N4-FLANK | **TRUE** (holds for flanks of any shape: the colour adjacent across the arc) | two (one blind) | [hand] | §2.2 |
+| N4-SHAVE | **TRUE**; "both inside the horn" is automatic given validity and `σ_h < σ_g` | two (one blind) | [hand] | §2.3 |
+| N4-RAY | **TRUE** | two (one blind) | [hand] | §2.4 |
+| N4-STUCK | **TRUE over NB-4, W-MERGE and N3-DEG** (N3-DEG re-derived with my `D_c`) | two (one blind) | [hand] | §2.5 |
+| N4-PROP | **TRUE** | two (one blind) | [hand] | §2.6 — FIN's inequalities come from validity, not blocking |
+| N4-FIN | **TRUE**; strictness `λ_k < υ_k` necessary | two (one blind) | [hand + exact] | §2.7, C2 + plant |
+| N4-TERM | **TRUE** | two (one blind) | [hand] | §2.8 |
+| N4-CONE | **TRUE over its inputs** | two (one blind) | [hand] | §2.9 |
+| N4-RED | **TRUE** as the cubic modification | two (one blind) | [hand] | §2.9 |
+| W-4 NO (the claimed consequence) | **GAP at the base's scope**: the terminal map keeps single cusp horns (they exist in tight maps from the start, WC1); the base must be confirmed for cubic maps with cusp horns (N4 says so itself); proposal NB4-CS narrows it to doubly-shadowed cusps | — | — | §2.9 |
+| "the Condition-5 half of S–V Question 2 is answered NO" (instance block) | **MISSTATED (sign)**: W-4 NO answers S–V's "Is it true that 7 colors are needed" **YES** in that half, a.e., at bounded complexity, for circular/straight arcs | — | — | §2.9 |
+| N4-HEX | not examined (moot: G-d2 does not arise, claims §8 second update) | — | — | — |
+| Controls | **WCH**: `v` stuck in N4's sense, SHAVE blocked (`σ_h = −1/3 < σ_g = 1/3`), `N` not stuck; **WC1H**: `v` cubic with a cusp, not a two-sector cone; SHAVE applies (`σ_h = σ_g = 0`) | — | [tools, exact] | §2.10, C3–C4 |
+
+**Registered expectations scored:** all as predicted, except FLANK (I registered 0.55 on "TRUE as stated", with a MISSTATED possible for horn flanks;
+it is TRUE for flanks of any shape — my expectation was too pessimistic) and WC1H (registered "SHAVE applies" at 0.7: met).
+
+**Correction to §2.10 (found while re-reading, before opening anything):** `ω(N)` meets the ring band `0.9 ≤ |z| ≤ 1.1` where `|z|² = 2y`, i.e.
+`y ∈ [0.405, 0.605]`, at directions `26.7°–33.4°` and `146.6°–153.3°` from `v` (not `26.9°–37.3°`, `142.7°–153.1°`); both inside the colour-5
+pieces, so the conclusion (no colour-4 contact on `ω(N)`) stands.
