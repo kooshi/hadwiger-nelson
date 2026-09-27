@@ -312,6 +312,10 @@ ALLOW: dict[str, str] = {
     "28–60": "the paths-forward table's group rank, renumbered 30–62 when FS-106 and FS-107 were minted at ranks 1–2 at the reframe (RF1; every rank from FS-104's on moved down two, so CLAUDE.md shows ranks 1–29 again, E1's design; the 29–61 precedent)",
     # FS106-X, the front page of FS-106's close (2026-09-27; data/fs106/fs106-x/record.md).
     "§G79.": "G79's pointer '`plans/GROKKING-INSTANCES.md` §G79.' now reads '§G79 (FS-106: …)' (FS106-C's D-C12); punctuation only, the address stands",
+    # FS107-X, the front page of FS-107's close (2026-09-27; data/fs107/fs107-x/record.md).
+    "1–130": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–133 at FS-107's close (FS107-X; rows 131–133 had been added at FS-106's and FS-107's closes; the 1–127 precedent)",
+    "30–63": "the paths-forward table's group rank, renumbered 30–64 at FS-107's close (§R-close 4.2): FS-107 left, FS-110 and FS-111 minted at ranks 1–2, FS-98 folded into the group (the 30–62 precedent)",
+    "G82:[hand, two minds, one blind (row 131); the reading one mind]": "G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
@@ -412,6 +416,14 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     '0.03': ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
     "80's": ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
     'D1–D5': ("plans/STUB-regularity-wall.md", "link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'"),
+    # FS107-X, the front page of FS-107's close (2026-09-27; data/fs107/fs107-x/record.md): FS-107's rank-1 row and FS-98's row left CLAUDE.md's
+    # ranks 1–29 (§R-close 4.2), and the Open-milestones sentence's address left with FS-107; each token verified in its home on every run.
+    'plans/STUB-ultrametric-continuation.md': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-98, which left CLAUDE.md's ranks 1–29 at FS-107's close (§R-close 4.2; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'J38': ("plans/FRONTIER-STUBS.md", "the same row's 're-aimed (J38's R1)'; FS-98's row in plans/FRONTIER-STUBS.md keeps it"),
+    "J38's": ("plans/FRONTIER-STUBS.md", "the same clause; FS-98's row in plans/FRONTIER-STUBS.md keeps it"),
+    '§ FS': ("plans/FRONTIER-STUBS.md", "the address '`plans/STUB-regularity-wall.md` § FS-107' in FS-107's rank-1 row and the Open-milestones sentence, both replaced at FS-107's close (§R-close 4.2); the closed-list entry keeps it"),
+    'δ₀': ("plans/STUB-regularity-wall.md", "FS-107's rank-1 row's question 'leaves `δ₀|U_R|` uncovered, for every `ε`' (claim R), which left the table at FS-107's close; the stub's § FS-107 keeps it, and row 133 cites it as row 131's C-Q-STAB"),
+    'δ₀|U_R': ("plans/STUB-regularity-wall.md", "the same clause; the stub's § FS-107 keeps it"),
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
