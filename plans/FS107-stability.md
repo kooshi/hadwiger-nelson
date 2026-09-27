@@ -949,3 +949,11 @@ Computed on a copy (below): the file before, the drafts applied, and the result 
 assertion): **before 299,242, after 299,438 bytes (+196), margin 562 under 300,000.** The paths-forward row for FS-98 (old rank 29) leaves `CLAUDE.md`
 for the bucket, which pays for FS-111's row; the rest is the G82 demotion record (+~260) and item 31 (+~160), offset by the shorter "Last updated",
 "Open milestones", G72 and FS-104 lines. Nothing intrinsic is cut. FS107-X may reuse the script's texts: they are 4.2's, verbatim.
+
+## §R-close stage 5 — SAVED: the inventory ticked, and the report
+
+All 34 items ticked "done" with their addresses (item 14 was already done); none declined. **Item 33** (the owner's instance block pointed to
+`claims.md` for R's definitions of fat, void and blocking, which live in R §3.2) is a brief's pointer slip, logged here beside the quotation slips of
+4.5: a verifier sent to the wrong file for a definition reconstructs its own (V did, §1.2), which is how V's projection reading of "blocking" produced
+C1. **Left for FS107-X:** apply 4.1–4.6 (the budget script's texts are 4.2's), renumber `plans/FRONTIER-STUBS.md` ranks 2–63 to 3–64 beside the two new
+rows, and run `tools/claude_md_fact_audit.py --base <FS-106's close> --dupes` and `tools/bib_audit.py`.
