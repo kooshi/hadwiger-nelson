@@ -33,3 +33,22 @@ grade clause as stated). CE's record `plans/FS110-CE-verification.md`, report `d
   is outside my touch list: held for the owner.
 - `plans/FRONTIER-STUBS.md` rank 5, FS-108 "the print residuals of the regular half", names "S–V Thm 2's `d = 2` edge case and its Lemma 3", both
   answered at FS-110 (row 132's correction; FS110-COR1-NOD2, FS110-CB-LEMMA3). C drafted no re-aim: listed as left (a stub to re-aim), no text written.
+
+## Stage 2 — SAVED: `LEDGER.md`
+
+- **Row 134** inserted after row 133: C's Form A text (§R-close 4.1) with the grade clause set as inventory item 113 states — the chain two minds, one
+  blind; S–V Cor. 1 a.e. with no `d = 2` exception two minds, both blind (CB, CD), the closure by two routes (CD's Theorem D2; CE's Antipodal Lemma);
+  the cusp base D2, D5 item 5, D1 two readings (A6, CC), D4 one reading (CE), D5 items 1–4, 6 true after CE's local repair, one mind, no step failing
+  unrepaired. CB's D5 corrections (CE §E2–E5) added as a **Corrections:** clause after **Not claimed:**; proof column gains
+  `plans/FS110-CE-verification.md` and `tools/fs110_ce_scope.py`. Polarity (item 97): "answered yes" throughout; no "NO".
+- **Row 132's correction** (§R-close 4.1, four edits): the `d = 2` edge case "does not arise: FS-110's CB and CD, both blind" (the comma before
+  "except" dropped so the parenthesis reads); Lemma 3 by Voronov's bicycle (FS110-CB-LEMMA3); grade as drafted **plus** ", the closure by two routes
+  (CD's Theorem D2; CE's Antipodal Lemma)" — item 113's citation of the closure, carried to the one other row that states it; "`d = 2`;" struck from
+  Not claimed. § B: FS106-SV2 loses "except `d = 2`", FS106-AE-POLY loses "bar `d = 2`" (FS106-AE-CONV's line never carried it).
+- **§ B:** the 42 lines appended after FS-107's (no heading: § B is one table). FS110-CLOSURE and FS110-CUSP-BASE grade cells per item 113;
+  FS110-CUSP-BASE's theorem cell names D4 and D5 items 1–4, 6 so that it matches its grade; FS110-COR1-NOD2's theorem cell carries CB's D5 corrections
+  (item 113: "into row 134's 'Not claimed / corrections' and § B"); FS110-YB4-WINDOW's garbled cells rewritten (grade from the derivation header).
+- `python3 tools/fs71_ledger_b_check.py --strict`: exit 0, PASS (940 rows; it was FAIL (42) at launch).
+- **Left:** CE's theorems CE1–CE7 have no entries in `plans/FS110-derivation.md` (written before CE reported) and so no § B lines — adding § B lines
+  without entries fails the checker, and the derivation file is outside my touch list. FS110-CLOSURE's and FS110-CUSP-BASE's entry headers in
+  `plans/FS110-derivation.md` still read "under check"; `plans/FS106-derivation.md` owes its one line per entry (row 132's correction).
