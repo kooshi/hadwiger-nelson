@@ -214,3 +214,31 @@ of a flat swap and fails for the other.
   argument, its on-axis band in closed form, and a dial of six values of `s` and five of `d` on that named configuration (seconds).
 - The Parts calibration per junction: I would have coloured the Parts tiling from its figure and scanned its complementary pairs.
   Not done (the colour assignment is not in the text layer); the test was run at the level of constants (§2.1).
+
+## Stage 3 — SAVED: verdicts (before reading R's record)
+
+All verdicts are on the statements as quoted in the instance block, read with **my** definitions of the terms the claim list does
+not define (§1.1: fat, void, blocking, `µ`, `s`, saturated, swap, flat boundaries). "Minds" counts derivations: R's and mine,
+mine blind to R's.
+
+| # | statement | verdict | minds / grade | the reason in one line |
+|---|---|---|---|---|
+| 1 | FS107-R-CP | **MISSTATED.** Corrected (V-CP): with the scale restricted, `s, s′ ≤ min(sin(µ/2), sin θ/18)`, two fat complementary junctions blocking toward `w` force `|H ∩ B(w, µ/4)| ≥ (s sin(µ/2)/4 − r)(s′ sin(µ/2)/4 − r′)` for every `ε ≥ 0`, with an uncovered disc, stable to `O(ρs)` under repairs inside radius `ρ` — **TRUE**. As stated, with `s` unrestricted, **FALSE in my reading**: configuration C1 (`µ = 20°`, `s = 0.33`) is a band-proper local colouring whose holes in `B(w, µ/4)` are `2.165·10⁻⁴` against R's bound `3.277·10⁻⁴`; failure window `≈ 1.54 sin(µ/2) < s < 2 sin(µ/2)` for that geometry. `ε`-independence, the repair clause, the disc and the LIM reading are TRUE. | V-CP: two (R; V) if R's definitions carry a scale restriction, else one (V) / [hand] + [tools, float] for the counterexample and the constant check | the curvature of unit circles subtracts up to `s²/2` from a colour's exclusion range; R's `t₁ = s sin(µ/2)/3` is the linear value, right only while `s ≲ sin(µ/2)` |
+| 1′ | the five killing tests on CP | passes tests 2–5; test 1 constrains (A) ∧ (B), not CP (a forced area `(s₀ sin(µ/2)/6)²` must fit in a Parts void, so `s₀ sin(µ/2) ≲ 0.05` or (A) ∧ (B) fails on the eroded Parts tiling). **CP contradicts no held constraint** (K-CEIL, K-HIT, A8b/K-AD). | one (V) / [hand] | CP is an exclusion lemma about fat colour pieces, not an argument about holes |
+| 2 | (A) and (B) ⟹ R, given CP | **TRUE after two repairs:** the disc is `U_{R+1+µ/4}`, not `U_{R+1}` (a slip); and CP's scale restriction must be threaded into (B) — voids small relative to `min(s, sin(µ/2))·sin(µ/2)` — since (B) bounds `s` only from below. The quoted "and a C-VOID disc" does **not** follow for C-VOID as stated (GAP at the branch "holes `≥ δ`", where no disc is produced). | one (V), R's a second if R's record has the repairs / [hand] | quantifiers check: `δ₀ = min(δ|U_R|, (s₀σ/6)²)/|U_{R*}|`, all `ε`-independent |
+| 3 | FS107-R-SAT | **TRUE** (needs `ε > 0`) | two (R; V) / [hand] | `g_j = 1_{C_j} ∗ 1_{A_ε}` is continuous; Fubini one way, saturation plus a density point the other |
+| 4a | FS107-R-SW, `εs` part | **TRUE**; sharp constant `2εs` for half-discs of radius `s` (strip of width `ε`); every flat orientation costs at least this order | two (R; V) / [hand] | fibre argument on the away-facing colour; tilted boundaries only add overlap |
+| 4b | FS107-R-SW, `s³` part | **TRUE** — R's sketch promoted: `|H ∩ (B(p,s) ∪ B(q,s))| ≥ s³/256` for `s ≤ 1/2`, every `ε ≤ s²/32`, independent of `ε` | two (R's sketch; V's proof) / [hand] + [tools] for the two inequalities | double count of band pairs between two regions of the facing half-discs |
+| 5 | FS107-R-OB′ | **MISSTATED.** Corrected: *an argument that reads at a flat swap only the pairs of the away-facing colour is capped at `2εs(1 + o(1))` per swap (hitting form)* — TRUE. As stated ("one colour"), FALSE for the facing colour, whose pairs alone certify `s³/256`. | one (V) / [hand] | 4a's strip realises the cap; 4b's proof reads only the facing colour |
+
+**Audit of the flattering results at a FALSE's rate.** The results that would move R toward the answer are CP's `ε`-independence
+(held, and I found its constant too generous, not too weak) and 4b's `ε`-independent `s³` (flattering to R). 4b was re-checked on
+the points a G21 reader would press: both regions lie inside the facing half-discs; the band interval lies inside `Q`'s depth range
+for every `y′` when `ε ≤ s²/32` (`β* ∈ (5s²/128, 0.53s²)`, margin `1.2ε`); the double count uses only that inside `Q` every point is
+colour `b` or a hole, which is the flat-boundary hypothesis; the planted swap to the away-facing colour sends (i) to 0. Its reach is
+narrow: it prices flat facing configurations, which a colouring avoids by curving its boundaries (TS-U's side cones); it is not a
+door to R by itself.
+
+**Predictions scored** (§1.3): CP — the "MISSTATED at the constants" branch fired (registered 0.25), but through the curvature
+window, not the location condition I had in mind; implication — TRUE after repair (registered 0.7) ✓; SAT ✓; SW `εs` ✓; SW `s³` ✓
+(0.65); OB′ — MISSTATED (0.5) ✓.
