@@ -1529,3 +1529,56 @@ circular arcs or segments; unbounded complexity in the FS-107 sense (FS-111).
 - NB4 and YB4 — read against: A6-1.8 — surprised: unread (not yet reported; handed to a successor)
 
 ## Stage A6-2 — SAVED
+
+## Stage A6-3 — SAVED: card A6-C2 built and checked at the owner's request — the cusp scope is live
+
+*The owner (message, after stage 2): build A6-C2 with the construction side's checker, try every N4 operation, and name the step of CB's route that
+would carry cusp sectors. Tool: `data/fs110/fs110-a6/a6_c2_single_horn.py` (imports `tools/fs110_y_cone.py` unedited); output `a6_c2_single_horn.out`.*
+
+**The fragment (A6-C2).** Y4's WC1H with one change: at `N` the colour-3 sector's lower boundary, which ran along `+a`, is bent to the arc of the circle
+centred `(0, −3)` of radius 4 through `N` (upward curvature `−1/4`, `Y ≈ −T²/8`, inside Y4's window `R_y = [−T²/6, T²/2)`), ending at
+`R′ = (640/6401, 6393/6401)`; the colour-4 ring piece that wraps `N` follows it; `S′` is the mirror. No arc of radius 1 (radii 2, 4, 9/10, 11/10 and
+segments). `N` is an ordinary trivalent vertex `{1, 3, 4}`, `S′` `{1, 2, 5}`; `v` is a cubic vertex `{1, 2, 3}` whose colour-1 sector is a single cusp
+horn. N4-SHADOW: `σ_h = f(−1/4) = −1/3`, `σ_g = +1/3`, both inside `(κ_−, κ_+) = (−1/2, 1/2)`: **doubly shadowed**.
+
+| run | predicted | verdict (exact, FS110-Y's checker) |
+|---|---|---|
+| the fragment | ACCEPT | **ACCEPT**, 16 tiles, 30 same-colour pairs; float geometry guard: 0 overlaps, 0 holes in 4,917 samples |
+| MERGE, MERGE-RAY at `v`, `N`, `S′` | not applicable | every colour has one sector at each of the three vertices (by construction; nothing to merge) |
+| tip → 2, tip → 3 (the flanks) | REJECT | REJECT at `(tip, xS)`, `(tip, yN)` |
+| tip → 4, 5, 6 (the ring colours) | REJECT | REJECT against three ring pieces each |
+| SHAVE split along `y = 0` | REJECT on both sides | REJECT at `(tipL, yN)` and `(tipU, xS)` |
+| SHAVE split giving colour 3 all it may take (below a chord under `Σ(−1/3)`) | REJECT, colour-2 side only | REJECT at `(tipU, xS)` only |
+| SHAVE split giving colour 2 all it may take (above a chord over `Σ(+1/3)`) | REJECT, colour-3 side only | REJECT at `(tipL, yN)` only |
+| control: unbent WC1H split along `y = 0` | ACCEPT | ACCEPT (as A6-SHAVE-WC1H) |
+| plant: `N`'s boundary at curvature `−1/2` (below `R_y`) | REJECT, for the window's reason | REJECT at `(v3, yN)` and `(v2, xS)` |
+
+**Theorem this stage proved.** **A6-C2** — a cubic vertex whose one sector is a doubly shadowed cusp horn, with both antipodes ordinary trivalent
+vertices, is realised locally under Condition 5, and no N4 operation (MERGE, MERGE-RAY, SHAVE) and no single-colour tip recolouring applies to it.
+[tools, exact, on the named member; the reading hand, one mind] **So N4's terminal map `M*` can keep a cubic vertex with a cusp sector, and N4-RED's
+headline is conditional on S–V Cor. 1 covering cusp sectors.** Card A6-C2's "if yes" branch fired. (It stays local: whether such a vertex survives in a
+whole map is the base's question, not the fragment's.)
+
+**The step of CB's route that would carry it** (for a second mind to check alone). CB runs the chain "on any trichromatic `u`" (l. 199). Every trichromatic
+vertex that serves as a circle centre (`u` itself, and every pigeonhole endpoint handed to Lemma 3's bicycle on the circles `ω(u1)`, `ω(u2)` (D4,
+l. 135–158) or to Cor. 3 AE (l. 111–112)) needs **D2's strip** at that vertex, and a cusp vertex can be any of them (the endpoints of D5 item 4, l. 176ff,
+are whatever trichromatic vertices the boundary paths reach). So:
+1. **Load-bearing: D2, l. 104–112** — "At u the three arcs leave with tangents `τ45, τ46, τ56` … Choosing δ per direction, each e has a neighbourhood
+   `N_e` and a side σ_e (the side named by the majority sign) such that every tile point of `N_e` strictly on side σ_e of Ω has colour in {1,2,3}". The
+   check: with two of the three tangents equal (a cusp between the arcs to `x_45(δ)` and `x_46(δ)`), (a) the three numbers `|u + e − x_ij(δ)| − 1` are
+   still nonzero off finitely many directions for a suitable `δ`, including `e` normal to the cusp; (b) "a curve in the i-tile beside the arc from u to
+   `x_ij`" exists inside a horn tile; (c) two positive (or two negative) numbers still exclude all of `{4, 5, 6}` on that side, because any two of the three
+   arcs border all three tiles. My reading says yes to all three (A6-1.5), one mind.
+2. **Secondary: D5 item 5, l. 180–185** — a cusp sector at a hexagon vertex `x_i` (it holds at most one of the four branch directions, so the
+   edge-point contradiction applies) and at `u` (the sectors' closures still cover every direction; a transversal circle meets a horn's interior).
+3. **Secondary: D1 (P′), l. 94–97** — at a cusp point, each open arc of `ω(y)` near `x` lies in one tile (Condition 5), whichever side of the horn.
+
+If step 1 fails at a cusp, the base needs a cusp lemma (S–V Props. 9–11 re-derived for coinciding tangents), and FS-110's headline is conditional on it.
+**Grade of the cusp coverage now:** [hand, one mind, sighted (A6-1.5)], over CB's blind derivation, which never considered cusps.
+
+**Hunch `cb-covers-cusps`** (A6-1.8): unchanged, open; its falsifier is now aimed at D2, l. 104–112, alone.
+
+**Budget.** My own count is at the brief's hand-back line. Item 3 (the NB4 and YB4 comparison) is left to a successor, as A6-2.3 lists; to it add:
+read YB4's and NB4's reports for any statement about cusp sectors at cubic vertices, and score A6-C2 against them.
+
+## Stage A6-3 — SAVED
