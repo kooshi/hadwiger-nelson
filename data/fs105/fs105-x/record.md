@@ -126,3 +126,31 @@ mirror:** `CLAUDE.md` ranks 1–27 and the `28–60` group checked against this 
 - **Gates:** fact audit exit 0, AUDIT PASSED; `--dupes` 10.
 
 ### Stage 5 — SAVED
+
+## Stage 6 — SAVED (the final gates; what is left; the report)
+
+**Final gates** (HEAD `039e6f08` plus this stage's record; each exit status read directly):
+| gate | exit | reading |
+|---|---|---|
+| `claude_md_fact_audit.py --base 1796ca10` | 0 | AUDIT PASSED — with four ALLOW lines (`§§2–9`, `§4.1–4.3`, `c·M^{1/[F:ℚ]}`: row 120's superseded text; `29–61`: the renumbered group label) and six verified EXTERNAL_HOMES (`plans/RERANK-2026-09-26.md`, `RERANK`, `plans/STUB-harden-mr.md` in `plans/FRONTIER-STUBS.md`; `121–130`, `§§3`, `5–9` in `plans/STUB-harden-mr.md`), each with its reason in the tool |
+| `claude_md_fact_audit.py --dupes` | 0 | 10 (not above 10; unchanged from launch) |
+| `claude_md_fact_audit.py --self-test` | 0 | SELF-TEST PASSED |
+| `fs71_ledger_b_check.py --strict` | 0 | PASS (836 § B rows; launch: FAIL (19), the missing FS105 rows) |
+| `bib_audit.py` | 0 | every cited work resolves (launch: 3 unlogged) |
+| `check_architecture.py` | 0 | PASS |
+
+**`CLAUDE.md`: 296,232 bytes before, 296,382 after** (+150, C's figure), under 300,000; nothing moved to the instances file for budget.
+
+**Verbatim check** (script, whitespace-normalised) of C's quoted texts against the files: §R-close 4.2 — every new text present, every
+old text gone; 4.3 — every text present except the two C wrote as one string that the file's columns split (EL2003's held/path/md5
+sentence; the new R.6 row's rests/state), both present cell by cell; 4.4 — every text present; 4.6 — 5 of 5; 4.7 — 3 of 3.
+
+**Left (applied nothing in its place):**
+- `CLOSED-QUESTIONS.md`: C drafted no row; untouched.
+- §R-close 4.8: FS-102's **stub** (`plans/STUB-writeup-main-clause-five.md`) gaining the Thm 1.3 / `[11]` Prop. 6.4 sentence (its
+  FRONTIER-STUBS row has it), and FS-100's "MR's complex-place case on an instance now carries B's scope remark (ii), Lemma 0, as its named
+  step" (no exact text drafted for the row or the stub): outside the touch list.
+- Noticed, not drafted: `BIBLIOGRAPHY.md` § A `[EinsiedlerLindenstrauss2022]`'s "what rests" cell still reads "its Thm 1.2 (EL2003's
+  Thm 1.1) … PE-2's positive-entropy input (row 120)"; row 120 now names Thm 1.3 plus FS105-DED as the input.
+
+### Stage 6 — SAVED
