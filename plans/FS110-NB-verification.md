@@ -15,9 +15,21 @@ snapshot ("FS-110: inventory", a neutral subject). Nothing else fenced was opene
 
 *(one line each, grade and address; filled stage by stage)*
 
+- **NB-4** — in a tight six-map in `𝓜_K` (connected tiles), a vertex `v` with `|P_cl(v)| = 4` needs a `Γ`-arc of `ω(y)` or `ω(σ_v^{±1}y)` through some change
+  point `y` of every `σ_v`-orbit of its ring; so **under Condition 5 no vertex has four colours** (and none five, N2-V4's first step) — [hand, one mind], §2.3.
+- **NB-5** — under Condition 5 a tight six-map in `𝓜_K` has **no close covering pair**: its common unit point would be a vertex of exactly four colours —
+  [hand, one mind, over N-SEAM, N-X (a)–(b) and NB-4, each re-derived here], §2.4.
+- N2-RING strengthened: `|W| ≤ 1` forces a swap — [hand, one mind], §2.2.
+- N2-FLIP's parity: the transport around a tile is odd on `R_1` iff `s` is odd — [hand + exact check on five tiles, `tools/fs110_nb_ring.py`], §2.8.
+- N2-S1's exceptional distances are exactly `|u − v| ∈ {1, √3}` — [hand, one mind], §2.9.
+- N2-HEX needs TS-C (cluster diameter) to exclude rotation points that are bichromatic degree-4 vertices, which pass every pairwise test — [hand, one mind], §2.9.
+- Re-derived, one mind each: N2-RING, N2-SWAP (given N2-V4), N2-TRANS (bar `d = 2`), N-SEAM, N2-S1, N2-HEX, N2-ROT (swap-free), N-E2, N-HORN, N-X (a)–(c), A-CIRC
+  (cusps included), N2-V4's first step.
+
 ## Would have searched here
 
 - Stage 1: none (a quotation check by a tool, the rest by hand).
+- Stage 2: a search for a local configuration realising a four-colour vertex whose ring change points are all four-coloured (a counterexample to N2-V4's second step) — instead the constraints were derived, and they closed into the `240°` count (NB-4). A search over rotation-point types for N2-HEX — instead TS-C and a counting.
 
 ## Stage 1 — quotation check, definitions, restatements, registered expectations
 
@@ -264,3 +276,33 @@ tiles (`s` parity equals the transport parity on `R_1` in all five, the pentagon
   Condition-5 map can avoid every swap (every trivalent ring `|W| ≥ 2`, every tile with even `s`).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — verdicts (committed before opening the side's record)
+
+| # | statement | my verdict | minds / grade | the step that decides it |
+|---|---|---|---|---|
+| 1 | N2-RING | **TRUE**, and stronger: `|W| ≤ 1` forces a swap | 1 / [hand] + exact check | §2.2 |
+| 2 | N2-SWAP | **TRUE given N2-V4's second step** (inherits its GAP); **TRUE outright under Condition 5** (NB-4) | 1 / [hand] | §2.5 |
+| 3 | N2-ACT1-W0 | **TRUE under Condition 5** (the four-colour clause vacuous there); **GAP without it**: the arc exceptions named omit the arcs at a four-colour ring's change points | 1 / [hand] | §2.6 |
+| 4 | N2-TRANS | **TRUE at the nerve step**, bar the collinear `d = 2` configuration and, without Condition 5, a four-colour change point of `u`'s ring (item 6) | 1 / [hand, a sketch at genericity] | §2.7 |
+| 5 | N2-FLIP | **parity TRUE** (exact on five tiles); **the chain TRUE under Condition 5** given item 4 | 1 / [hand] + exact check | §2.8 |
+| 6 | N2-V4 | first step **TRUE**; second step **GAP** at change points carrying unit arcs of `ω(y)`, `ω(σ_v^{±1}y)` (unnamed in the statement), and **vacuous elsewhere: no four-colour vertex exists there (NB-4)** | 1 / [hand] | §2.3 |
+| 7 | N-SEAM | **TRUE** | 1 / [hand] | §2.9 |
+| 8 | N2-S1 | **TRUE**; the exceptional distances are exactly `{1, √3}` | 1 / [hand] | §2.9 |
+| 9 | N2-HEX | **TRUE** given no unit arc of `ω(x_{k±1})` at the rotation points, **through TS-C** (without it a bichromatic degree-4 rotation point defeats every pairwise test) | 1 / [hand] | §2.9 |
+| 10 | N2-ROT | **TRUE for swap-free patterns** (one colour in the cone needs Condition 5 or NB-4's hypothesis); "**no other pattern forces a colour**" **FALSE if a swap partner counts** — it forces colours at `x` on both sides | 1 / [hand]; the pattern names reconstructed | §2.9 |
+| 11 | N-E2 | **TRUE** (connected tiles) | 1 / [hand] | §2.1 |
+| 12 | N-HORN; C-CUSP-K | (i), (ii) **TRUE**; **C-CUSP-K TRUE at LIM** (a horn is a zero-width sector; a cusp that saves a pair is a degenerate bowtie or a tangent horn); the transfer to R-CP holds in V-CP's projection reading, not R's cone reading | 1 / [hand] | §2.9 |
+| 13 | N-X | (a)–(c) **TRUE**; (d) TRUE as far as quoted (truncated in my brief) | 1 / [hand] | §2.4 |
+
+**On the side's claimed verdicts on the claims** (instance block): **C-ACT1 GAP** — agree, and under Condition 5 its open case is exactly "every
+trivalent ring `|W| ≥ 2` and every tile with even `s`" (NB-5 makes any covering pair contradictory there). **C-CUSP-K TRUE** — agree. **C-TAN-POS: TRUE at a
+non-vertex `w₀`, GAP at a vertex `w₀`** — under Condition 5 the vertex case is closed by NB-5 (a close covering pair does not exist), so the GAP is only
+the unit-arc case. **C-SEAMLIST MISSTATED** — agree in substance: complete as a list of C-T-TAN's failures at `u` and `v` (§2.11), but the seam must
+survive at `w₀`, where only unit arcs let it (NB-5). **C-T2 (ii), C-BOW-K (ii), S2 with unit arcs GAP** — consistent: every live case carries a unit arc.
+
+**Registered expectations scored (G21):** items 1, 7, 11 as expected (TRUE); 6 GAP as expected; 2, 3 GAP-inheriting as expected; 4 came TRUE bar edge
+cases (I gave 0.45); 9 and 8 TRUE; 10 split (TRUE and a FALSE clause), inside my 0.3 + 0.2; 12, 13 TRUE. The unexpected product is NB-4/NB-5, which no
+row predicted.
+
+## Stage 3 — SAVED
