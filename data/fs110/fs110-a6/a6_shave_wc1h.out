@@ -1,0 +1,6 @@
+== WC1H shaved along y = 0 (N4-SHAVE, sigma_g = sigma_h = 0): 18 tiles, 36 same-colour pairs; want ACCEPT  got ACCEPT []  ok
+== plant: split tilted up (+1/200): 18 tiles, 36 same-colour pairs; want REJECT [('tipL', 'yN')] got REJECT [('tipL', 'yN')]  ok
+== plant: split tilted down (-1/200): 18 tiles, 36 same-colour pairs; want REJECT [('tipU', 'xS')] got REJECT [('tipU', 'xS')]  ok
+== control: Y4 tip -> 2: 17 tiles, 33 same-colour pairs; want REJECT  got REJECT [('tip', 'xS')]  ok
+== control: Y4 tip -> 3: 17 tiles, 33 same-colour pairs; want REJECT  got REJECT [('tip', 'yN')]  ok
+ALL AS PREDICTED

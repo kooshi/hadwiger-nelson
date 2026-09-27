@@ -1284,3 +1284,189 @@ Condition-5 half at bounded `K`, almost everywhere, reduces to the cone and S–
 - G-CONE beside G-d2 — read against: two unrelated leftovers — surprised: yes; both are antipodal on a unit circle, at distance exactly 2 (A5-5.4)
 
 ## Stage A5-5 — SAVED
+
+## § Continuation — FS110-A6
+
+*Poros (Opus 5.5), 2026-09-27, competition advisor for round 4's comparison (W-4, the `d = 2` seam) and the verdict. Brief:
+`data/fs110/briefs/A6-110-competition-advisor-round4.md` (wins where it differs) with FS110-A2's brief and `STANDING-RULES.md`. Sides (handed back):
+FS110-N4 (proof, `plans/FS110-N-proof.md` § Continuation — FS110-N4) and FS110-Y4 (construction, `plans/FS110-Y-construction.md` § Continuation —
+FS110-Y4). I touch only this section and `data/fs110/fs110-a6/`. Every result here is one mind (mine, sighted) unless marked.*
+
+### Theorems this phase proved (FS110-A6)
+
+- **A6-SHAVE-WC1H** — N4-SHAVE's equality case (`σ_g = σ_h`) removes Y4's tip-hard single horn WC1H: at WC1H `σ_h = f(0) = 0` (colour 3 at `N` has its
+  lower ray along `+a`) and `σ_g = 0` (mirror), and the tip recoloured 2 above the tangent line `y = 0` and 3 below is ACCEPTed by FS110-Y's exact
+  checker; tilting the split by `±1/200` REJECTs at exactly `(tipL, yN)` and `(tipU, xS)`, and Y4's single-colour tips REJECT as recorded. After the
+  shave `v` is a `2|3` edge point: colour 1 has left `v`. [tools, exact, on the named member; the reading of N4-SHAVE hand, one mind] —
+  `data/fs110/fs110-a6/a6_shave_wc1h.py`, output `a6_shave_wc1h.out`. Stage A6-1.
+- **A6-WCH** — Y4's WCH is doubly shadowed in N4's sense (`σ_h = f(−1/4) = −1/3 < σ_g = +1/3`, both inside `(κ_−, κ_+) = (−1/2, 1/2)`), and it is
+  N4-STUCK's structure exactly (`P_cl(N) = {1, 3, 4} = {c, h, r}`, colour 3 a double horn at `N`; mirror at `S′`): the first three links of N4-PROP's
+  chain, truncated where the fragment stops. [hand, one mind; from Y4's formulas, `tools/fs110_y_cone.py` l. 11–13 and 146–152] Stage A6-1.
+
+### Would-have-searched-here log (A6)
+
+- A fragment realising a doubly shadowed **single** horn at a cubic vertex (card A6-C2): not built; derived from Y4's windows and N4-SHADOW and
+  offered in the hypothetical mood.
+
+### Fence log (A6)
+
+- Read, as my brief allows: this record (A5's section in full; earlier sections by heading), the reports of NB3, YB3, CB, CD, Y4, N4; N4's section
+  (l. 694–1007) and Y4's section (l. 668–861) in full; `plans/FS110-CB-verification.md` l. 1–20, 49–121, 159–202; `plans/FS110-CD-verification.md`
+  l. 77–164, 264–324; `data/fs110/claims.md` l. 60–70 and §8; `tools/fs110_y_cone.py` (builders and checker driver), `tools/fs110_y_check.py` l. 1–30.
+- `git status --short` printed the **names** of three untracked files `tools/fs110_yb4_*.py` (a blind verifier's). Names only; not opened.
+- Not opened: anything of FS110-YB4 or FS110-NB4, the transcripts, `chats-bak/`, other scratchpad files, `plans/FS110-close-inventory.md`.
+
+## Stage A6-0 — SAVED: quotation check and reading
+
+| quotation or fact in my brief | source | result |
+|---|---|---|
+| rule 0 (Kooshi, "From here on out … you will surprise yourself.") | `CLAUDE.md` § Counter-priors, read from disk | verbatim |
+| "a NO at G-CONE must use non-local structure" | `data/fs110/reports/FS110-Y4.md` RESULT; Y4 §11.5 | verbatim bar the capital ("A NO …") |
+| N4's seven lemma names; "Hard cones are removable … which curvature monotonicity forbids" (not in quotation marks) | N4 theorem table (l. 712–726) | matches |
+| "W-4 is NO: the Condition-5 half of S–V Question 2 is answered NO almost everywhere at bounded `K`" (not in quotation marks) | N4-4 (l. 993–996) | matches N4's words, **with a polarity slip carried from N4**: the print asks "Is it true that 7 colors are needed …?" (claims l. 63); W-4's NO answers that half **yes** — seven are needed. Correction owed (A6-1.6) |
+| "N4-RED needs S–V Cor. 1 for cubic maps whose sectors may be **cusp horns**" | N4-RED row (l. 726) | matches |
+| NB3, YB3, CB, CD summaries | their reports | match; NB3 also makes **N3-DEG two minds, one blind**, which N4's chain still lists as "[one]" (l. 1001): correction owed |
+
+## Stage A6-0 — SAVED
+
+## Stage A6-1 — SAVED: round 4's comparison, the bets, and the base's scope (brief items 1–2)
+
+### A6-1.1 The apparent tension: two statements about different objects, and no divergence of truth
+
+- **Y4's "hard" is weaker than N4's "stuck".** Y4-TIP tests **single-colour** tip recolourings; a cone is tip-hard when both are blocked, i.e. `y` at
+  `N` reaches `R_y` and `x` at `S′` reaches `R_x` (Y4 §11.4). In N4-FLANK's terms that is `σ_h < κ_+` and `σ_g > κ_−`. N4-SHAVE recolours the tip with
+  **both** flank colours, split along the shadow circle `Σ(σ_h)`, and is blocked only when **doubly shadowed**, `σ_h < σ_g` (N4 §2.2). So tip-hard
+  cones with `σ_g ≤ σ_h` are shaveable.
+- **WC1H is one of them** (the owner's hunch was the right place to look): `σ_g = σ_h = 0`. The split along the tangent line is ACCEPTed exactly
+  (A6-SHAVE-WC1H). It is degree 3 with a single horn, so N4 would not even need it removed (`Φ(v) = 0`); it is a cubic vertex with a cusp sector, which
+  N4-RED hands to the base (A6-1.5) — and it is also shaveable.
+- **WCH is stuck at `v` and is N4's chain, truncated** (A6-WCH). Its `N` and `S′` are cone vertices of exactly N4-STUCK (iv)'s kind. In the fragment
+  they are shadowed from `v`'s side only (nothing at `v ± 2n`), so SHAVE applies at `N` and `S′` first, and then at `v`: N4-TERM's order unwinds it.
+  Y4 §11.5 item 3 named this cascade ("colour 3 is itself a cusp with an out-type contact at `N − n = v` only").
+- **So Y4's "a NO at G-CONE must use non-local structure" is confirmed by N4's route, not contradicted:** the non-local structure is N4-PROP's chain
+  and N4-TERM's whole-plane limit. Y4's YES is local and N4's NO is global; both can hold, and on Y4's fragments they do.
+
+### A6-1.2 Convergences (independent unless marked)
+
+| finding | N4 | Y4 | minds |
+|---|---|---|---|
+| an out-type tangent contact of curvature `λ` at an antipode forbids its colour near `v` beyond the concentric curve of curvature `λ/(1+λ)` | N4-SHADOW, `f(λ) = λ/(1+λ)` | Y4-MU, `μ = λ/(1+λ)` | **two, independent**, each with an exact check (N4 C1–C2; Y4's plants) |
+| a horn at `v` is shadowed by its flanks only through out-type tangent flank tiles at the **opposite** antipodes (`h` at `N`, `g` at `S′`) | N4-FLANK | Y4-TIP's windows `R_y`, `R_x` | two, independent |
+| the structure forced at the antipodes of a hard double horn: `P_cl(N) = {c, h, r}`, `P_cl(S′) = {c, g, r′}`, a cascade along `n` | N4-STUCK (iv), N4-PROP | Y4-HARD (WCH), §11.5 items 1 and 3 | two routes (a derivation; a realisation matching it) |
+| G-CONE is not an instance of G-d2 | "one calculus, two configurations" (§2.8) | Y4-D2 | two, independent |
+| no local kill of the cone | N4's kill is the chain plus N4-FIN | §11.5 | two |
+
+### A6-1.3 Divergences
+
+- **Of truth:** none found.
+- **Of scope (the word "hard"):** A6-1.1. Y4 asked the owner which "hard" N3-RED counts; the answer is N4's: a cone survives N4's operations only when
+  doubly shadowed, and then only as a link of a bi-infinite chain.
+- **Of route:** N4 derived and closed; Y4 built and bounded. Y4 never saw MERGE-RAY or the two-colour split, so its tip tests are a proper subset of
+  N4's moves.
+
+### A6-1.4 The pre-round bets scored, and retractions
+
+| bet | scored |
+|---|---|
+| N4: "every cone vertex given by formula [loses] its repeated colour by recolouring one horn tip near the vertex with a flank colour, unless both flank colours carry tangent horns at the antipodes `v ± n`; and then those antipodes must themselves be cone vertices"; wrong if a fragment has "every point of both `c`-horn tips … at unit distance from tiles of BOTH flank colours, while an antipode `v ± n` is not itself a cone vertex", or a finite closed chain | **confirmed on both of Y4's fragments** (one mind): WC1H's tip goes to the flanks (both of them, split; the bet's "a flank colour" is N4-SHAVE's letter only at `g = h`); WCH is doubly shadowed and its antipodes are cone vertices. The falsifier did not fire: in WCH the horn points beyond `σ_g`'s circle are shadowed by `h` only |
+| N4-P2 (0.9): "any hard cone fragment … admits a SHAVE at one of its horns, or has an antipode that is not a cone vertex" | **met**: WC1H at `v` (exact, A6-SHAVE-WC1H); WCH at the horns of `N` and `S′`, which are singly shadowed inside the fragment (hand) |
+| Y4, first half: "The step I expect to fail is turning G-CONE into a pair that a pair argument decides" | **moot**: the proof side never took that step; both sides agree G-CONE is not G-d2 (A6-1.2). A miss of aim, not an error |
+| Y4, second half: "no local kill of the cone at `v`, `N`, `S′` under Condition 5" | **confirmed**: N4's kill is non-local; none of Y4's three "what would show me wrong" items fired against N4's text (N4-STUCK forces `N` to be a vertex, but of a type different from `S′`'s) |
+| A5's hunch on card `is-FS-110's-residue-one-object-at-distance-2` ("one") | **killed** by N4 §2.8 ((out, out) against (in, out)), Y4-D2, and CB+CD (G-d2 does not arise). The card's branch "two" fired |
+
+**Retractions, round 4:** N4 1 (a garbled sentence of §2.1, free, no verdict changed), Y4 0 (the WCEQ slip was caught by its own checker before any
+claim), A6 0, A5's hunch killed. No retraction crossed the line this round; the two sides converged without contact (G51's pattern at FS-86).
+
+### A6-1.5 The base's scope (N4's held question), answered from CB's and CD's text
+
+**No radius lower bound, in either.** CB's setting M (`plans/FS110-CB-verification.md` l. 58) and CD's setting (A) (`plans/FS110-CD-verification.md`
+l. 79) ask only for local finiteness, circular arcs and segments, none of radius 1. Neither record mentions `𝓜_K`, `1/K` or compactness (grep: empty),
+and every radius they choose (`δ`, `ρ`, `η`) is chosen locally. N4-TERM's shrinking supports are therefore no obstacle.
+
+**Cusp sectors: CB's route covers them on my reading; CD's does not by its own text.** Neither record names a zero-angle sector.
+- **CB.** The setting allows horn tiles. I read the three steps where an angle could enter:
+  - *D2, the strip* (l. 106–110). The side at `e` is the majority sign of three nonzero numbers `|u + e − x_ij(δ)| − 1`. Any two of the three arcs
+    border all three colours `{4, 5, 6}`, whether or not two tangents coincide, and a horn tile beside an arc still holds a curve from near `u` to
+    `x_ij(δ)`. So the side criterion does not count directions. This is where N4 located the risk ("S–V's Prop. 9 side criterion counts boundary
+    directions, which coincide at a cusp", N l. 921), and CB's replacement escapes it.
+  - *D5 item 5 at a hexagon vertex `x_i`* (l. 180–182). A cusp `q_i`-sector holds at most one of the four branch directions (±30°, ±150°). The
+    alternating pattern then kills it, exactly as in the edge-point case, so a cusp is excluded there, not needed.
+  - *D5 item 5 at `u`* (l. 183–185). The contradiction needs only that the closures of `u`'s three sectors cover every direction, and a circle crossing
+    a horn transversally meets its interior.
+- **CD.** CD's own steps (Lemma H, H′, Theorem D2 (i)–(ii), l. 150–164 and 270–278) use open regions and finitely many edges only; D2 (ii) needs just
+  that an open cusp region at `u` meets some region, which holds. But CD **takes S–V Props. 9–11 and Prop. 17 from print, not re-derived** (§2.9, l. 314
+  and 318). Those are the steps N4 flags, so CD alone does not cover cusps.
+- **Grade:** covered at [hand, one mind (mine, sighted), over CB's one blind mind, which never considered cusps]. What a covering argument at two minds
+  needs: a second mind re-reading CB D2 and D5 item 5 with a zero-angle sector at `u`, at a hexagon vertex, and at a circle-bichromatic vertex on `Ω`. That
+  is an hour's reading, not a derivation.
+
+**The scope question is live, not vacuous** (card A6-C2): a doubly shadowed **single** horn at a cubic vertex survives every N4 operation.
+
+### A6-1.6 Corrections owed (for the close)
+
+1. **Polarity.** `[SokolovVoronov2025]` Question 2 asks "Is it true that 7 colors are needed …?" (claims l. 63). N4-4 (l. 995), N4's report and my
+   brief say its Condition-5 half is "answered NO". It is answered **yes**: seven colours are needed (a.e.). W-4's NO is the NO to a six-map.
+2. **N3-DEG's count.** It is two minds, one blind (NB3), not "[one]" as N4-4 lists (l. 1001).
+3. **The `K` in the headline.** N4-2's setting is every valid map, "Tightness is never used" (l. 781), and N4-RED says "(indeed every valid map)"
+   (l. 916); nothing in N4 or in CB/CD uses `K`. So the chain's scope is every locally finite map with straight or circular boundary arcs, none of
+   radius 1, at any complexity. `K` enters only upstream, where FS-107 turns vanishing holes into a map. The headline should say so (A6-C1).
+
+### A6-1.7 Cards (fates blank)
+
+question: does-W-4's-NO-need-bounded-K
+  evidence: N4 l. 781 ("Tightness is never used"), l. 916 ("indeed every valid map"); CB l. 58, CD l. 79 (no radius bound); claims §8 ("at bounded `K`")
+  expected: `K` is load-bearing somewhere in the chain, as §8's wording implies
+  ask: does any step from N4-2 to CB's D6 use a uniform bound on arc count or radius, or is the NO about every locally finite circular-arc map?
+  if none uses it: the headline drops "at bounded `K`" for maps; `K` stays only in FS-107's step from holes to a map, and FS-111's question narrows to that step
+  if one does: the headline keeps `K`, and the step is named for FS-111
+  answered by: NB4
+  cost: one line in NB4's report, or an hour of reading
+  hunch: none uses it (N4-TERM is local; CB/CD choose every radius locally)
+  falsifier: a step whose constant depends on a global bound on arcs per unit disc
+  rank: 1
+
+question: does-a-doubly-shadowed-single-horn-survive-into-M*
+  evidence: Y4 §11.4 (`R_y` admits `y`-boundaries of curvature down to `κ_1/(1−κ_1)`); N4-SHAVE (blocked iff `σ_h < σ_g`); N4 §2.8's remedy excludes "a single horn with out-type `c`-contacts at both `N` and `S′`"
+  expected: M*'s cusps are harmless leftovers that some further shave removes
+  ask: is WC1H with `N`'s colour-3 lower boundary bent to curvature `−1/4` (`σ_h = −1/3 < σ_g = 1/3`) a valid fragment in which no MERGE, MERGE-RAY or SHAVE applies?
+  if yes: M* can keep a cusp at an ordinary-looking cubic vertex, and N4-RED's base must cover cusp sectors (A6-1.5 carries the weight)
+  if no: the check names what forbids it, and the scope condition may be removable by one more operation
+  answered by: a run
+  cost: one exact check with Y4's checker, minutes
+  hunch: yes (the windows allow it and nothing at `N` or `S′` is forced)
+  falsifier: the fragment REJECTed exactly for a reason other than a plant
+  rank: 2
+
+### A6-1.8 Hunches (registered 2026-09-27, before NB4 or YB4 reports)
+
+hunch: nb4-finds-the-chain-true
+  claim: NB4 finds N4-STUCK, N4-PROP, N4-FIN and N4-TERM TRUE, with at most local repairs (most likely in N4-STUCK (ii)–(iv)'s case split or N4-TERM's limit)
+  basis: read (each step local; N4-FIN's recursions re-derived here: `1/f̃(x) = 1/x − 1`, `1/f(x) = 1/x + 1`)
+  falsifier: NB4 reports FALSE, or a GAP at N4-PROP or N4-FIN
+  registered: 2026-09-27
+  status: open
+
+hunch: yb4-confirms-the-fragments-and-finds-them-shaveable-or-truncated
+  claim: YB4 finds Y4's five fragments ACCEPT and the tip tests as recorded; nothing it finds contradicts A6-1.1
+  basis: read (Y4's own plants fired for their reasons; A6-SHAVE-WC1H used Y4's checker)
+  falsifier: YB4 REJECTing a fragment Y4 ACCEPTed, or finding a WCH antipode that is not a cone vertex
+  registered: 2026-09-27
+  status: open
+
+hunch: cb-covers-cusps
+  claim: CB's derivation of Cor. 1 AE holds unchanged for cubic maps with zero-angle sectors
+  basis: read (sighted, one mind; A6-1.5)
+  falsifier: a second mind naming a step of CB D2 or D5 that needs a positive angle at a cusp
+  registered: 2026-09-27
+  status: open
+
+### A6-1.9 Evidence inventory
+
+- WC1H — read against: a tip-hard cone N4 cannot touch — surprised: yes; `σ_g = σ_h = 0`, SHAVE's equality case removes it (exact)
+- WCH — read against: a counterexample to N4-STUCK or N4-PROP — surprised: no; it is their structure, truncated
+- Y4-MU against N4-SHADOW — read against: two different local laws — surprised: yes; the same map `λ ↦ λ/(1+λ)`, derived twice blind
+- CB and CD on cusps — read against: an explicit scope line either way — surprised: yes; neither names cusps; CB's route happens to be angle-free
+- N4-4's "answered NO" — read against: the print's question — surprised: yes; the polarity is inverted
+- NB4 and YB4 — read against: A6-1.8 — surprised: unread (fenced until their reports exist)
+
+## Stage A6-1 — SAVED
