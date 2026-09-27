@@ -18,12 +18,16 @@ subdirectory `…/scratchpad/fs106-ts/`.*
 - **TS-C**: a chain of same-colour regions whose closures meet has diameter `≤ 1` (any map, a.e.-proper) — [hand, one mind], §2.4.
 - **TS-T**: a point of chromaticity `≥ 3` within 1 of every point (any a.e.-proper map); with Conditions 5, 6 it is trichromatic, closing SV-L4 (a)
   — [hand, one mind], §2.4.
+- **C-AE-POLY** at SV-2's repaired grade except its `d = 2` edge case, by a region-only route that never uses Observation 1 (Prop. 7 region-only);
+  hence SV-2 without Observation 1 — [hand, one mind here + V2], §3.
+- **C-AE-CONV** with 7 colours for locally finite convex tilings, from C-AE-POLY — [hand, one mind], §3.
 - **C5**: a local configuration satisfying Prop. 5's hypothesis and every pairwise constraint, where Prop. 5's conclusion fails (unit arcs
   allowed) — [hand, one mind], §2.5.
 
 ## Would-have-searched-here log
 
 - Stage 1: none (a quotation check and the controls, by hand).
+- Stage 3: none.
 - Stage 2: a search for a global 6-colouring extending C5, or realising [G3]'s cone; instead each stated as a local configuration and checked by hand.
 
 ## Stage 1 — SAVED: quotation check and the controls
@@ -206,3 +210,22 @@ a 4-chromatic point, or a unit-arc boundary through a trichromatic point, or a b
 configuration and checked by hand.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the other regular classes almost everywhere
+
+*FS106-V3 had committed nothing when this stage ran (`git fetch`: no commits past `0254a287`), so `[Thomassen1999]` was read here (the text
+file, pp. 849–852: statement, the nice-colouring definition, Lemma 1's statement, Theorem 1's proof — read once, the clique step checked, the
+2-separator surgery read, not re-derived). Townsend's manuscript was not read (see C-AE-MAP6). SV-2's `d = 2` edge case is V3's and is not
+touched here.*
+
+| claim | verdict | minds / grade | the argument |
+|---|---|---|---|
+| **C-AE-POLY** | **TRUE except one named step** — it rests on SV-2's repaired form (FS106-V2) and inherits its open edge case: two `pⱼ` of one multicolour antipodal on `ω` (`d = 2`), held by FS106-V3; and SV-L3's transplanted bicycle at V2's sketch grade | 1 (V2) + 1 (this job, for the region-only reading) / [hand] | Every step V2 verified is region-only (V2's map). The two steps V2 flagged as using boundary colours are **moot in the a.e. form**, which has no boundary colours: (i) Prop. 7, region-only: a unit circle meeting `int(pqz)` either crosses `zx` or `zy` transversally — then it enters the colour-1 region beside the segment — or it has both ends of its arc inside `xyz` on `xy` (a tangency from inside does not stop it), where its sagitta is at most that of `ω(v)`'s chord `xy`, which is the distance from `xy` to `l`, so it cannot reach `int(pqz)`; or it passes through `z`, where Prop. 4 runs on the colour-1 **regions** flanking `zx` and `zy` (the crossing of `ω(u′)` with the path is not at `z` because `|u′ − z| ≠ 1`). So Prop. 7 and Prop. 8 hold region-only, and **FS106-VB's GAP on Prop. 8 and Observation 1 does not touch the a.e. form**: VB's counter-configuration is about a boundary point's colour. Since an everywhere-proper polygonal colouring is a.e.-proper, **C-AE-POLY ⟹ SV-2** by a route that never uses Observation 1. Controls: K1 is polygonal, a.e.-proper, 7 colours, and every step that spends "six" (Lemma 2, Cor. 3, Lemma 3) fails on it as V/VB recorded. |
+| **C-AE-FA** | **GAP at one named step**: Prop. 19's fill step under Condition 6 (FS106-V2's residual: a boundary walk from a chosen point returning to an unchosen point within 1; fills can create trichromatic vertices of degree 4) — plus C-AE-POLY's edge case | 1 / [hand] | SV-1's other open step, **SV-L4 (a), is closed here** (TS-C, TS-T with Lemma 2, stage 2 §2.4). Everything else is region-only (V2's map). |
+| **C-AE-NICE** (the a.e. form of `[Thomassen1999]` Theorem 1 on the plane) | **its a.e. form is the theorem itself**: Thomassen's nice condition is already a condition on open faces ("each color class is the union of faces (and part of their boundaries) such that the distance between any two of these faces is greater than 1", faces of "diameter less than 1"), and his proof uses no boundary point's colour — only that a face and every face whose facial cycle meets its cycle are pairwise at distance `< 1` (checked: two such neighbours `y, z` of `x` have points `p ∈ C_y ∩ C_x`, `q ∈ C_z ∩ C_x` with `|p − q| ≤ diam cl F_x < 1`), so they form a clique of the colour-conflict graph, and a map-graph vertex of degree `≥ 6` (his Lemma 1 after the 2-separator surgery) gives 7 colours. So C-AE-NICE ⟺ TH-99 on the plane; its truth is TH-99's proof, whose verification is V3's. **The relaxation that matters is different**: faces of one colour with no unit pair between them (instead of distance `> 1`) is a subcase of C-AE-Q2, and there Thomassen's clique step fails — two small faces of one colour on the rim of a third face can be `< 1` apart with no unit pair (their union of diameter `< 1`) — so that form is **GAP with C-AE-Q2** | 1 / [hand] + [external, read once] | For the plane, (i)–(iii) of TH-99 hold; nice colourings are everywhere proper for every choice of boundary colours (a monochromatic unit pair on closures would put two faces of one colour at distance `≤ 1`). |
+| **C-AE-CONV** (the a.e. form of `[Coulson2004]`) | **TRUE with 7 colours at C-AE-POLY's grade, for locally finite tilings by convex polygons**; the non-locally-finite case is outside this reduction | 1 / [hand] | Merge adjacent tiles of one colour across their shared open edges: no unit pair is created (a unit circle through an interior point of an open edge enters one of the two open tiles beside it, so the conflict existed before), and the result is an a.e.-proper polygonal map; apply C-AE-POLY. That is stronger than Coulson's six. **Reading debt:** Coulson's own hypotheses (local finiteness, tile sizes) are unread here — `[Coulson2004]` is held and unread (FS106-V's stage 5); the verdict is stated for the locally finite case only. |
+| **C-AE-MAP6** (the a.e. form of `[Townsend2005]` / Townsend's manuscript: five colours) | **GAP, pending FS106-V3's reading of Townsend's proof; reduced here to one step** | 1 / [hand] | What holds with no Condition 5 or 6, five colours, a.e.-proper: TS-T gives a point `u` of chromaticity `≥ 3` within 1 of every point; region points of `ω(u)` avoid `c(u)` (stage 2 §2.5, row "Prop. 6, Lemma 2"), so they use at most two colours; a region arc of `ω(u)` of one colour longer than `π/3` carries a unit pair. **What is left is exactly Townsend's printed lemma in a.e. form** (TW-81: "any 2-colouring of A° contains a monochrome unit" for a "finitely disconnected unit annulus" with a cut-point-free segment of length `> π/3`): the two free colours must fill a deformed annulus about `ω(u)`, and unit-arc boundaries are what disconnect it (K2 is the reason the hypothesis has cut points). The exact-distance circle alone does not refute two colours (alternating arcs of `π/3`), so the thickening is essential. **"Boundaries of measure 0" is not used by any step written here**; it matters only for the link to `χ_m⁰` (a fat boundary is an uncoloured positive-measure set). |
+
+**Would have searched here:** none.
+
+## Stage 3 — SAVED
