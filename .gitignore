@@ -34,3 +34,6 @@ data/fs62/q19/cube/cube78.log
 data/fs62/q19/cube/*.pgid
 data/fs62/q19/*.pgid
 data/fs62/q19/sat78.log
+
+# Local settings file (Kooshi, 2026-09-27). Never commit.
+.env
