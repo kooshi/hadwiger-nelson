@@ -391,3 +391,13 @@ ruling on `F_dG`) → row 128 keeps ℚ(√635087) as the headline carrier and s
 **1.5 Would have searched here (this job, stage 1):** nothing.
 
 ### Stage 1 — SAVED
+
+### Stage 2 — SAVED (the derivation file `plans/FS105-derivation.md`)
+
+Nineteen entries in `plans/FS100-derivation.md`'s form, every field present (checked with `tools/fs71_ledger_b_check.py`'s own parser):
+§1 PE-2's external step (FS105-DED, -VC, -NVC, -L21, -PEH, -H, -L74, -SCOPE); §2 EF_F⁺ blind (FS105-B-M1, -L5, -L6, -EFP, -EF0); §3 C-MR16
+(FS105-W-H, -W-G, -W-LW, -MR16); §4 row 129 (FS105-W-D1, -W-D2). Two findings filed as readings, not entries: EL2003 is not a proof (two
+readers); nothing in print near (W). Kernel: every entry declined; FS-101's `hMR` unaffected (the statement did not move). Their `LEDGER.md`
+§ B lines are drafted in stage 4.
+
+### Stage 2 — SAVED
