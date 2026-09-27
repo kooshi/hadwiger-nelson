@@ -54,7 +54,7 @@ an author. Row 1 predates the answer; rows 2–7 do not.
 
 | # | who, when | verbatim |
 |---|---|---|
-| 1 | **Benda & Perles**, circulated **1976**, published 2000 (`[BendaPerles2000]` p. 126, Open Question (4); read from the source 2026-09-27); restated by `[Johnson2000]` p. 176 as Problem 4.4, *"Find the chromatic number of (ℚ²(√2), 1), and, in general, of (𝔽, 1), for any finite algebraic extension 𝔽 of ℚ²"*; recorded in `[Soifer2024]` ch. 11 as **Open Problem 11.6** | *"(4) Find the chromatic number of Q²(√2) and, in general, of any algebraic extension of Q²."* (p. 121 has its first form: *"But we have not thought of the chromatic number for, say G₁(Q²(√2)) or of other extension and we leave this as an open problem."*) |
+| 1 | **Benda & Perles**, circulated **1976**, published 2000 (`[BendaPerles2000]` p. 126, Open Question (4); read from the source 2026-09-27); restated by `[Johnson2000]` p. 176 as Problem 4.4, *"Find the chromatic number of (ℚ²(√2), 1), and, in general, of (𝔽, 1), for any finite algebraic extension 𝔽 of ℚ²"*; recorded in `[Soifer2024]` ch. 11 as **Open Problem 11.6** | *"(4) Find the chromatic number of Q²(√2) and, in general, of any algebraic extension of Q²."* (p. 121 has its first form: *"But we have not thought of the chromatic number for, say G₁(Q²(√2) or of other extension and we leave this as an open problem."* (the print's parenthesis unclosed)) |
 | 2 | **`[Moorhouse2010]`** §1 (unpublished draft, 3 March 2010) | *"We have not determined the exact value of `χ(K²)` in this case."* — having named `ℚ(√3,√11)` as the smallest number field whose plane holds a Moser spindle, and proved `χ ≥ 4` |
 | 3 | **`[Madore2015]`** Prop. 4.6 (arXiv:1509.07023) | proves `4 ≤ χ(ℚ(√3,√11)²) ≤ 5` and leaves the gap, which stood for eleven years |
 | 4 | **`[CranstonRabern2015]`** (Combinatorica) | *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`? What about its chromatic number?"* |
@@ -106,14 +106,19 @@ F^d are translates of C₀(F^d), to k-color F^d it suffices to k-color C₀(F^d)
 `G(S, D)`, `S` an additive subgroup of ℝⁿ and `D` any set of distances: *"An additive k-coloring of G(S, D) is a proper coloring
 achieved by finding a group homomorphism of ⟨S_D⟩ into some abelian group of order k so that each u ∈ S_D is mapped to a non-zero group
 element, which assures that G₀(S, D) is properly colored, and then copying the coloring on the other components of G(S, D), which are
-copies of G₀(S, D) associated with the cosets of ⟨S_D⟩ in S."* So the step Madore declined in 2015 was taken in 1990.
+copies of G₀(S, D) associated with the cosets of ⟨S_D⟩ in S."* So the step Madore declined in 2015 was taken in 1990 — and its first
+instances are older still: `[BendaPerles2000]` (circulated 1976) two-colours `ℚ²` by the parity of the unit-vector group `H²` and extends it
+coset by coset, *"It can be extended to the whole Q² since the other connected components, being cosets of H², are isomorphic to it in the
+graph structure"* (p. 120), and `ℚ³` the same way (p. 121). (Second reading, 2026-09-27, the consolidation run's job LV.)
 
 **Our answer.** The formulation for an arbitrary graph drawn in an arbitrary abelian group — no metric, torsion allowed, any subgroup
 containing the edge differences — kernel-checked: a routine abstraction of Fischer's construction.
 
 **Prior art that constrains the claim.** His Prop. 3.2 *is* the valuation-subring form, so
 `colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours; the coset construction out of a subgroup is `[Fischer1990]`
-Thm 1(i), in `[Johnson2006]`'s form for every `G(S, D)`. **Ours:** the metric-free, arbitrary-group statement and the kernel proof. The
+Thm 1(i), in `[Johnson2006]`'s form for every `G(S, D)`. **Ours:** the metric-free, arbitrary-group statement — not found in print as far as read; `[Johnson1982]`, *Coloring Abelian groups*
+(Discrete Math. 40 (1982) 219–223), which `[Johnson2006]` cites on the same page as its [10], is unread and is the paper likeliest to hold
+it (a debt: open access at the publisher, whose bot check refused a scripted fetch) — and the kernel proof. The
 delimitation is written into ledger row 57 and must survive into any manuscript. **Not proved:** that a number field with a
 conjugation-fixed prime supplies the valuation subring with residue field of size `N(𝔭)` (`CLAUDE.md` G35).
 
@@ -554,7 +559,7 @@ quantitative bounds is `[KravitzLeng2025]`'s for the half ring, not ours (row 98
 assertion that "the appropriate results are false for the smaller set `{θ₅^r : r ≥ 0}`" — an assertion, not a posed question — is proved
 here in band form on `R_{{p}}` (row 102).
 
-### 2.7 The group the unit vectors of `𝔽ⁿ` generate — answered at `n = 2` for every real number field, at [hand]; open at `n = 3, 4`
+### 2.7 The group the unit vectors of `𝔽ⁿ` generate — answered at `n = 2` for every real number field outside row 100's ramified-dyadic exception, at [hand]; open at `n = 3, 4`
 
 > **`[Johnson2000]`** §5, p. 177 (read 2026-09-27): *"One kind of problem that arises from these results in COMS is the problem of
 > characterizing the additive group A generated by the unit vectors in 𝔽ⁿ, where 𝔽 is a finite real algebraic extension of ℚ. In
@@ -566,8 +571,8 @@ here in band form on `R_{{p}}` (row 102).
 number field `F` with no ramified stable dyadic place, the group the unit vectors generate is the ring `R_F = O′` of elements of `F(i)`
 integral at every conjugation-stable prime — no Galois hypothesis; the exception fields (ℚ(√5), ℚ(√17), …) are outside Lemma C′. And `A ≠ F²`:
 `(F², 1)` has infinitely many components for every real number field, the exception fields included [derived: unit vectors are integral at every stable prime —
-`[Fischer1990]` Thm 1 and `[Madore2015]` Prop. 3.2's argument — and infinitely many primes of `F` are inert in `F(i)`, by Chebotarev].
-**Not answered:** `n = 3, 4`; the exception fields' `A`. **Prior art that constrains the claim:** the quadratic and multiquadratic cases
+`[Fischer1990b]` Lemma 1 for multiquadratic `F` and `[Madore2015]` Prop. 3.2's argument — and infinitely many primes of `F` are inert in `F(i)`, by Chebotarev; two readers, the consolidation run's LP and LV; in print for multiquadratic `F` as `[Fischer1990b]`'s Corollary, and for ℚ(√m), `m ≢ 7 (mod 8)`, as Zaks's (`[Johnson2000]` p. 177)].
+**Not answered:** `n = 3, 4`; the exception fields' `A` beyond the quadratic ones (`[Fischer1990b]` Thm 5 gives `A` in closed form for every real quadratic field, ℚ(√5) and ℚ(√17) included). **Prior art that constrains the claim:** the quadratic and multiquadratic cases
 are `[Fischer1990b]`'s (Johnson's "[7]"), `ℚ²`'s is `[BendaPerles2000]`'s (`H²` is the points `(a, b)/e` *"where e is a product of primes of
 the form 4k + 1"*, p. 120), prime inversion in general is GPT Astra's (G55); the general form of Lemma C′ not found in print (FS-91's gate),
 `[Shimura1964]` undecided. **Not kernel-checked** beyond prime inversion in valuation form (row 105). **Status:** not written up.
@@ -652,7 +657,7 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   of (ℝ², 1)]?"* — the equality row 129 gives, given MR; Johnson's χ_f of an infinite graph (weights on independent sets) agrees with
   `[MatolcsiEtAl2025]`'s (finitely many sets) by his own truncation, `[Johnson1996fcn]` p. 106. **His "Benda–Perles–Tarski property"**
   (`[Johnson1996fcn]` p. 104, Question 3; `[Johnson2000surprises]` p. 143, Problem 4: *"Is χ_f(ℝ², 1) = χ_f(𝒜², 1), where 𝒜² is the "algebraic
-  plane", the field of algebraic complex numbers?"*) follows given MR [derived, one mind]: every finite subgraph of `(ℝ², 1)` is one of
+  plane", the field of algebraic complex numbers?"*) follows given MR [derived; two readers, the consolidation run's LP and LV]: every finite subgraph of `(ℝ², 1)` is one of
   `(𝒜², 1)` (`[BendaPerles2000]` pp. 117–118 as `[Johnson2000]` §3 states it), so `χ_f,0(ℝ²) ≤ χ_f(𝒜²) ≤ χ_f(ℝ²)`, and row 129 closes the
   sandwich. **Fisher–Ullman's assertion** that a measurable periodic independent set of density `ρ` gives `χ_f(ℝ²) ≤ 1/ρ`, for which
   `[Johnson1996fcn]` p. 105, Question 5, asks *"if that assertion at the end of [7] is true, and … for a proof"*, is FS103-B-CHIF [hand, one
