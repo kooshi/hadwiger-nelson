@@ -1,0 +1,6 @@
+== X4: the strip's close covering pairs of midline vertices, read at their common unit points (the Q-rule's (S2) with arcs)
+ok       PLANT: W with the pair (P_1, P_2): pair (P_1, P_2) |P_1P_2| = 1/2, types [1, 2, 4, 5] [2, 3, 5, 6] covering=True; P_cl(seam) = [2, 3, 4]; both at distance 1: False; omega(P_1) dir +: an arc of Gamma starts at the seam; omega(P_1) dir -: inside ['A2'] colour [3] -> only the other points colour; omega(P_2) dir +: inside ['A1'] colour [2] -> NOT only the other points; omega(P_2) dir -: inside ['A2'] colour [3] -> NOT only the other points
+ALL AS EXPECTED
+== D6: the strip's unit arcs in columns -1..4, every one read with both its tiles
+ok       arcs of arches in columns -1..4: 24; read with both tiles: 22 (want 22); missing an outer tile: 2 [['A4'], ['B4']]; kinds [('both', 4)]
+ALL AS EXPECTED

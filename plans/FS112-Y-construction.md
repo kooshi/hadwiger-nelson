@@ -263,3 +263,116 @@ reach needs a circle about a valley or apex, which leaves the strip exactly at t
    radius-9/10 arc (seconds, in-ban).
 
 ## Stage 2 — SAVED
+
+# § Continuation — FS112-Y2
+
+*Job FS112-Y2, de Bruijn on Opus 5.5, launched 2026-09-27 at HEAD `6cf6bdeb`. Brief: `data/fs112/briefs/Y2-112-construction-continued.md` with
+`data/fs112/briefs/Y112-construction.md` and `STANDING-RULES.md`. I continue Y's record here and never rewrite a verdict above; where I disagree with one I
+say so in this section. Working files: `data/fs112/fs112-y/` (prefix `y2_`); tools `tools/fs112_y2_*.py`. Every fragment is **a local fragment, not a map**.*
+
+## Y2 — Theorems this phase proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| Y2-NB4 | NB-4 corrected (supersedes Y112-NB4-MIS's (γ)): a four-colour vertex `v` needs, in every `σ_v`-orbit of change points `y₀…y₅`, (α) an arc of `Γ` on `ω(v)` containing or ending at an orbit point, or (β) an arc of `ω(y_{k±1})` along `Γ` at some `y_k`. Off (α), (β): `P_cl(y_k) ∩ P_cl(v)` is exactly a 2-set, so `|P_cl(y_k)| = 4` is a consequence of the alternation, not an input; the proof reads only `ω(v)` and neighbourhoods of `v` and the `y_k`: radius `1 + ε` | hand, one mind (mine), agreeing with the proof side's two minds on the bound (card X3) | §3.2 |
+| Y2-X4 | the strip realises the Q-rule's (S2) with arcs, exactly and arc-closed: the covering pair `(P_1, P_3)` (distance 1, types `{1,2,4,5}`, `{1,3,4,6}`) at the valleys `W`, `W′`, and `(P_1, P_2)` (distance `1/2`, `{1,2,4,5}`, `{2,3,5,6}`) at the apexes `A_1`, `A′_1`: at each seam point each circle has one half-arc along `Γ` (an arc ending at the seam) and the other in a tile whose colour belongs only to the other point | tools, exact | §3.5 |
+| Y2-D3 | FS112-Y's checker ACCEPTs CAL-7's brick (row 33's), REJECTs YB's two plants at the same pairs, and certifies its tightness at the same three contacts; 0 disagreements with FS112-YB's checker pair by pair | tools, exact | §3.3 |
+| Y2-D4S | FS112-Y's strip object passes FS112-YB's checker (exact meeting test, no map hypothesis): 60 of 60 pairs ACCEPT, 0 distinct same-colour tiles meet, 60 exact contacts | tools, exact | §3.3 |
+| Y2-D6 | the strip's arc count is 24 in columns −1…4; Y's 22 is a window effect (the right arcs of `A_4`, `B_4`, whose outer tiles `C_5`, `D_5` lay outside Y's tile window) | tools, exact | §3.4 |
+| Y2-X2 | the unit circles about the strip's unit-arc end vertices leave it exactly through edge vertices: `ω(V_0)` crosses the top line at `(±1/4, top)`, reaching `1 − √15/4 ≈ 0.0318` above; `ω(A_0)` at `(−1/4, top)`, `(3/4, top)`, `≈ 0.1340` above | tools, exact | §3.6 |
+
+## Y2 — Fence log
+
+1. At start-up `ls data/fs112/briefs/` (with `wc -c`) printed the **file names and sizes** of the fenced briefs (A112, A2-112, A3-112, N112, N2-112,
+   NB112-instance, NB112-verify-proof, P112, PA112, YB112-instance, YB112-verify-construction); none was opened. A listing of a fenced directory's names: logged.
+2. My scratch directory is `scratchpad/fs112-y2/` (its `ls -la` printed only `.` and `..`); nothing else in the shared scratchpad was listed or opened.
+
+## Y2 — Would-have-searched-here log
+
+- CAL-DISK transcription (stage 4): I would have fitted Fig. 10's vertices to pixels; instead each vertex is defined by a rule read from the figure's
+  topology and the printed skeleton, and pixel positions (Fig. 10 rendered at 400 dpi) were used only to recognise which skeleton point a tile corner is
+  (each recognition checked by eye to about 2 % of a unit, never adjusted). Disclosed in §4.
+
+## Stage 3 — SAVED: quotation check; card X part 1; housekeeping (A3-2.3 item 0)
+
+### 3.1 Read from disk; quotation check
+
+Read: `STANDING-RULES.md` (rule 0 first), `CLAUDE.md` § The aim and § Counter-priors (at `6cf6bdeb`; link 2 differs from my context's snapshot by one
+sentence of attribution), Y's brief and mine, this record in full (stages 1–2, §2.5), Y's and YB's reports, `plans/FS112-YB-verification.md` in full,
+`data/fs112/claims.md` in full, the plan's §1.3, §G part 3, §PA, §IQ, stage 5 (§5.1–5.7 and the addendum; §5.3 is open to my side since Y's stage 1),
+`plans/FS112-PA-reading.md` stages 3–6 (the disk's skeleton `[11.34]`), `plans/FS110-NB-verification.md` §2.1–2.5 (NB-4's proof, for X3), the tools
+`tools/fs112_y_check.py`, `fs112_y_calibrate.py` (strip and kinds), `fs112_yb_check.py` (header, field, pair verdict), `fs112_yb_calib.py` (the brick),
+`[Polymath2021]` pp. 197–199 (text) and Fig. 10 (PDF p. 36, rendered at 150, 400 and 800 dpi).
+**Quotation check (standing rule 5).** My brief's two block quotations (card X part 1, `data/fs112/fs112-a3/card-X.md`; A3-2.3, the advisor's record)
+come from sources fenced for me: **not checked**, logged. The quotations my brief inherits from Y's are re-checked at today's HEAD by Y's tool
+(`python3 tools/fs112_y_quotes.py`): 33 found, 0 missing. X3's summary of my side ("`|P_cl(y_k)| ≤ 4` … unit arcs of total `≥ 180°` on some `ω(y_k)`")
+matches this record's §2.3 W1 (ii).
+
+### 3.2 X3 — W1 (ii) re-derived with the neighbours' circles in view [hand, one mind]: **I retract (γ); the bound is a consequence**
+
+Setting (NB §2.3): `P_cl(v) = [6] ∖ {e, f}`; off (α) the ring of `ω(v)` is two-coloured `{e, f}` near each orbit point, every change point `y_k` a swap,
+`e, f ∈ P_cl(y_k)` for every `k`. At `y_k` four half-arcs start: two of `ω(y_{k+1})` (tangents `θ_k + 30°` outward, `θ_k + 210°` inward) and two of
+`ω(y_{k−1})` (`θ_k + 330°` outward, `θ_k + 150°` inward). Off (β) each is tile-interior near `y_k` (isolated points aside). Write `H_k^±` for the colours on
+the half-arcs of `ω(y_{k±1})` at `y_k`, `H_k = H_k^+ ∪ H_k^−`.
+1. `H_k^± ∩ P_cl(y_{k±1}) = ∅` (A-CIRC: tile-interior points of `ω(y)` avoid `P_cl(y)`), so `H_k ⊆ [6] ∖ {e, f} = P_cl(v)`; and `H_k ⊆ P_cl(y_k)` (they are
+   tiles at `y_k`).
+2. Each `H_k^±` holds an **inner** colour (its half-arc enters `B(v, 1)`) and an **outer** one, distinct: a colour of `P_cl(v)` with a tile meeting `B(v, 1)`
+   has its tiles at `v` facing `y_k`, one with a tile outside `B̄(v, 1)` facing away (N-E2), and a sector at `v` cannot do both. So `|H_k^±| ≥ 2`.
+3. **The step X3 asks for:** `H_{k+1}^−` lies on `ω(y_k)`, so `H_{k+1}^− ∩ P_cl(y_k) = ∅`. Then `P_cl(y_k) ∩ P_cl(v) ⊆ P_cl(v) ∖ H_{k+1}^−`, a set of at most
+   `4 − 2 = 2` colours, and it contains `H_k^+`, of at least 2. **So `P_cl(y_k) ∩ P_cl(v) = H_k^+ = H_k^− = H_k`, a 2-set, and `P_cl(y_k) = {e, f} ∪ H_k`.**
+   A third colour of `P_cl(v)` at `y_k` would leave at most one colour for `H_{k+1}^−`, against step 2 at `y_{k+1}`. Nothing about `ω(y_k)`'s `Γ`-trace is used.
+4. Hence `H_k ∩ H_{k+1} = ∅`, the pairs alternate `{A, B}`, `{C, D}`, and NB's count finishes (each colour confined to `60°` at `v` by the half-planes of
+   `y_0, y_2, y_4`, `240° < 360°`).
+**Verdict:** the other side is right (card X3's "two minds"); my W1 (ii) and Y112-NB4-MIS's clause (γ) are **withdrawn as unnecessary**: (γ) is implied by
+nothing and needed by nothing — a fifth colour at `y_k` is already excluded off (β) at `y_{k±1}`. **Y2-NB4** (table above) replaces Y112-NB4-MIS. Its
+reading radius is `1 + ε` about `v` (ω(v), and neighbourhoods of `v` and of the `y_k`): card X2's question for NB-4 has the answer "inside every strip
+about a midline vertex", and the strip's `P_j` sits in its exception (α) there (§2.3 W1 (i), unchanged). **Retraction 4 (free; nothing built on (γ)).**
+
+### 3.3 D3 and D4 on held objects (`tools/fs112_y2_house.py brick ystrip`; `data/fs112/fs112-y/y2_house.out`) [tools, exact]
+
+| object | pairs examined / present | FS112-Y's checker | FS112-YB's checker | disagreements |
+|---|---|---|---|---|
+| CAL-7, row 33's brick (YB's builder, imported) | 11 / 11 (cell `(0,0)` with itself and each same-colour cell `|i|,|j| ≤ 4`; YB's exact gap bound dismisses the rest) | ACCEPT | ACCEPT | 0 |
+| plant: colour `(i + 2j) mod 7` | 11 / 11 | REJECT at `(−2, 1)`, `(2, −1)` | same | 0 |
+| plant: cell `81/100 × 3/5` | 11 / 11 | REJECT at the self pair | same | 0 |
+| CAL-7 under `closed_interval` | 11 / 11 | contacts at 1: the self pair, `(±1, ±2)` | same | 0 |
+| Y's strip object, converted exactly into YB's field `ℚ(√3, √5)` | 60 / 60 (Y's population) | ACCEPT | ACCEPT; exact meeting test: no two distinct same-colour tiles meet; 60 contacts at 1 | 0 |
+
+So D3 is met (Y's checker now calibrated on the named brick, not only the hexagonal 7-colouring) and D4's model divergence is closed on the strip: YB's
+exact meeting test confirms, on Y's own object, the map hypothesis Y's verdict assumed.
+
+### 3.4 D6 reconciled (`arcs` section) [tools, exact]
+
+Y's reading keyed each arc by (centre, endpoints) over tiles of columns −1…4 and kept an arc only when **both** its tiles were in that window. The right arcs
+of `A_4` and `B_4` are shared with `C_5` and `D_5`, outside it: 24 − 2 = 22. Read with outer tiles from columns −1…5: **24 arcs, all kind both, every
+centre `|P_cl| = 4`**. The plant `--plant arcs_window` (Y's window) returns 22 with exactly `A_4`, `B_4` missing their outer tile.
+
+### 3.5 X4 on the strip: **confirmed at the valleys and at the apexes** — filed as a seam realisation (`x4` section) [tools, exact]
+
+X4's reading: T2 at a pair `(u, v)` with seam points `w₀, w₀′` may be the Q-rule's (S2) with arcs at the other diagonal pair `(w₀, w₀′)`. On the strip:
+- **Valleys.** The rhombus `P_1 W P_3 W′` (`W = (1, √3/2)`): T2 at `(W, W′)` (Y112-T2-SQRT3) is, read at the other diagonal, the covering pair `(P_1, P_3)`
+  (distance 1, types `{1,2,4,5}`, `{1,3,4,6}`, overlap `{1,4}`) saved at `W` (`P_cl = {2,3,4}`, trivalent) and `W′` (`{1,5,6}`).
+- **Apexes** (YB's thin rhombus): the covering pair `(P_1, P_2)`, `P_2 = (1, 0)` (distance `1/2`, `{1,2,4,5}`, `{2,3,5,6}`, overlap `{2,5}`) saved at
+  `A_1 = (3/4, √15/4)` (`{2,4,6}`) and `A′_1` (`{1,3,5}`).
+At each of the four seam points, exactly: **each of `ω(u)`, `ω(v)` has one tangent direction that starts an arc of `Γ` on that circle (the arc of the arch
+ending at the seam point) and the other inside a tile whose colour belongs only to the other point** — e.g. at `W`: `ω(P_1)` starts `A_1`'s right arc
+(to `A_1`) and runs into `A_2` (colour 3 ∈ `P_cl(P_3)` only); `ω(P_3)` starts `A_2`'s left arc and runs into `A_1` (colour 2 ∈ `P_cl(P_1)` only); and every
+tile at the seam lies on one side of `ω(x)` for each `x` holding its colour (the arches inside, the top tile outside). **This is the (S2)-with-arcs pattern
+"one arc of each circle ending at the seam", realised exactly and arc-closed** (the arcs' other ends are the apexes and valleys, interior to the strip) —
+a pattern claim list §1 records as "GAP at every pattern but N-X's". The plant `x4_wrongpair` (W asked for `(P_1, P_2)`, not its pair) fails for its own
+reason: `W ∉ ω(P_2)`, and two tangent tiles carry colours of both points. **So on the strip T2 and (S2)-with-arcs are one configuration seen from its two
+diagonals** (X4 TRUE on the strip; one mind, exact). Whether that identity holds in every tight map is not claimed.
+
+### 3.6 X2 on the exact strip (`x2` section) [tools, exact]
+
+- The strip's unit-arc end vertices are the valleys and apexes. Their unit circles leave the strip **exactly through edge vertices**: `ω(V_0)` meets
+  `y = top` at `(±1/4, top)` and rises `1 − √15/4 ≈ 0.0318` above it; `ω(A_0)` meets it at `(−1/4, top)` and `(3/4, top)` and rises `1 − √3/2 ≈ 0.1340`
+  above. Each crossing point is an edge vertex with two colours. The midline vertices' circles stay inside (height 1 < 1.834).
+- Per step (with W6 of §2.3): **NB-4 corrected** reads radius `1 + ε` about `v` — inside the strip at `P_j`, where its exception (α) is realised. **NB-5** reads
+  NB-4 at the seam points: at `P_j` inside the strip; at a valley or apex seam point (X4's patterns) the step's circles `ω(u)`, `ω(v)` are midline circles,
+  inside. **P17, the base (13–16), CUSP-BASE**: every configuration they forbid that the strip holds (same-type trivalent pairs, YB's `C-CHAIN-14` row)
+  needs the circle of a valley or apex, which leaves the strip exactly at the edge vertices above it — the same points as Y112-EDGE's `Q`.
+- **The forbidden configurations inside the strip are all at four-colour vertices or their seams; every one outside is reached only through the edge
+  vertices.** This is C-BEYOND for the strip, now exact on both halves.
+
+## Stage 3 — SAVED
