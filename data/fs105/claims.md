@@ -45,6 +45,8 @@ against its source at their stage 1 (a source fenced for a job: "deferred to sta
 **The claims to decide** (each TRUE / FALSE / GAP-at-step / MISSTATED, at `F₁` and at `F_dG` separately):
 - **(a0) Provenance.** EL2021 Thm 1.2 is proved: either in EL2003 (reference [7], Electron. Res. Announc. AMS 9 (2003) 99–110, unheld) or as a
   consequence of EL2021 Thm 1.3, whose proof (§4.3 "Proof of Theorem 1.3 assuming Theorem 4.1", §§4.4–7) is complete as far as it is used.
+  *Note at the close: EL2003 is held since 2026-09-26 and read in full — an announcement whose §6 is an outline (FS105-R §1.3); (a0) was
+  decided through Thm 1.3 (FS105-DED).*
 - **(a1) Solenoid.** For `M ⊆ R` finitely generated over `ℤ[Γ]` with `ℚM = L`, `M̂` is a solenoid in EL2021's sense (`dim_ℚ L = 4` at `F₁`,
   `32` at `F_dG`).
 - **(a2) Action.** `n ↦` (the dual of multiplication by the `n`-th element of `Γ`) is a `ℤ²`-action by continuous automorphisms of `M̂`.

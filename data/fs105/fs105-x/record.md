@@ -46,3 +46,17 @@ Stage 3: `CLAUDE.md` from `claude_md_drafts.py`. Stage 4: `BIBLIOGRAPHY.md` (4.3
 **Would have searched here:** nothing — this job edits text from drafts.
 
 ### Stage 1 — SAVED
+
+## Stage 2 — SAVED (`LEDGER.md`, the two derivation homes, the (a0) note)
+
+- `ledger_drafts.py --check --dir <my scratch>`: PASS (every pair once; FS105 entries 19 = § B rows 19); `--self-test`: the planted row
+  caught. The copies were diffed against the files before copying: `LEDGER.md` lines 165 (row 120), 173–174 (rows 128, 129), 922, 926,
+  977 (§ B: FS100-EFP, FS100-PE2, FS103-DG) and 19 appended § B rows (1002a1003,1021); `plans/FS100-derivation.md` lines 160, 189, 214
+  (`pe2`, `efp`, `efg`); `plans/FS103-derivation.md` line 52 (`dg`). Nothing else moved. Bytes: `LEDGER.md` 422,988 → 428,504.
+- `data/fs105/claims.md`: C's note (§R-close 4.1) added verbatim, italic, under the (a0) bullet; the fixed list itself untouched.
+- **Gates after stage 2:** `fs71_ledger_b_check.py --strict` exit 0, PASS (836 § B rows); `claude_md_fact_audit.py --base 1796ca10`
+  first read exit 1, three lost tokens from row 120's superseded text — `§§2–9` (its old grade), `§4.1–4.3` (its old reading scope),
+  `c·M^{1/[F:ℚ]}` (its old count) — each superseded by C's drafts, so three ALLOW lines were added with those reasons under an FS105-X
+  comment in `tools/claude_md_fact_audit.py`; re-run exit 0, AUDIT PASSED; `--self-test` exit 0; `--dupes` 10 (unchanged).
+
+### Stage 2 — SAVED

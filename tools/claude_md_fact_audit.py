@@ -303,6 +303,10 @@ ALLOW: dict[str, str] = {
     "G1–G80": "the stable-identifier range, extended to G1–G81 when G81 (where every place mixes, the field is the plane) was minted at FS-103's close (C14, C15; kept by the owner's ruling 3)",
     "30–62": "the paths-forward table's group rank, renumbered 29–61 when FS-103's row left the table at its close (C17)",
     "121–125": "FS-105's paths-forward row's 'rows 121–125 and FS-103 rest on MR', superseded by 'rows 121–130 rest on MR' at FS-103's close (C17); rows 121–125 stand in LEDGER.md",
+    # FS105-X, the front page of FS-105's close (2026-09-26; data/fs105/fs105-x/record.md): row 120's text superseded by the close's drafts.
+    "§§2–9": "row 120's grade 'its proof in EL2021 §§2–9, unread here', superseded at FS-105's close (FS105-C's §R-close 4.1): Thm 1.2's proof is EL2021 Thm 1.3 plus FS105-DED; plans/FS105-harden-mr.md keeps the old reading",
+    "§4.1–4.3": "row 120's prior-art cell 'EL2021 §2 and §4.1–4.3 read (X24R)', widened to 'EL2021 §§1, 2, 4 read in full (X24R; FS105-R)' at FS-105's close (4.1)",
+    "c·M^{1/[F:ℚ]}": "row 120's mechanism '`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`', sharpened to the exact constant `(4/π + o(1))M^{1/[F:ℚ]}` at FS-105's close (4.1; FS105-W-H)",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
