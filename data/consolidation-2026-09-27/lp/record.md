@@ -6,7 +6,17 @@ the full transcriptions are in the reading notes under `~/source/library/notes/`
 
 ## Theorems this phase proved
 
-*(Filled as they come; none at stage 1 — stage 1 is a reading.)*
+*This job moves attributions, not the answer; each item below is held at one mind and is answer-neutral.*
+- **The fractional Benda–Perles–Tarski property, given MR** — `χ_f(𝒜²) = χ_f(ℝ²)` (`[Johnson1996fcn]` Q3; `[Johnson2000surprises]` Problem 4):
+  every finite subgraph of `(ℝ², 1)` is one of `(𝒜², 1)` (Tarski, `[BendaPerles2000]` pp. 117–118 as `[Johnson2000]` §3 states it), so
+  `χ_f,0(ℝ²) ≤ χ_f(𝒜²) ≤ χ_f(ℝ²)`, and row 129 (given MR) closes it — [derived, one mind], stage 4.
+- **Johnson's `χ_f(ℝ²)` is `[MatolcsiEtAl2025]`'s** — weights on independent sets against finitely many sets: equal, by `[Johnson1996fcn]`'s own
+  truncation (p. 106) — his proof, read and checked here [hand, one mind], stage 4.
+- **`(F², 1)` has infinitely many components for every real number field** — unit vectors are integral at every conjugation-stable prime
+  (`[Fischer1990]` Thm 1, `[Madore2015]` Prop. 3.2's argument), and Chebotarev gives infinitely many primes of `F` inert in `F(i)` — [derived, one
+  mind], stage 2 (`CLOSED-QUESTIONS.md` §2.7); with row 100's Lemma C′ it answers `[Johnson2000]` §5 at `n = 2`.
+- **A non-bipartite unit-distance graph with `χ_f < 2 + ε` exists** — the regular `(2k+1)`-gon of unit side, induced, `χ_f = 2 + 1/k`
+  (`[Johnson1996fcn]` Q4; `[Johnson2000surprises]` Problem 5) — [hand, elementary], stage 4; not ours in any sense worth a row.
 
 ## Stage 1 — SAVED
 
@@ -292,3 +302,69 @@ row of `LEDGER.md` for the derived sandwich (a draft for the owner, if wanted).
 ### Would have searched here
 
 Nothing.
+
+## Stage 5 — SAVED
+
+### Folded in
+
+- **`LEDGER.md`** (§ The claim list, and the prior-art or novelty sentences of rows 57, 63, 73, 82, 99, 100, 107, 121, 123, 129, 132): the
+  claim list's two "`[Johnson2000]` and `[Johnson2006]` unread" clauses rewritten as "read, not found"; **Not ours** gains the bridge as
+  `[BendaPerles2000]`'s (Madore's ¶5.4 a restatement), Theorem A's coset construction (`[Fischer1990]` Thm 1(i); `[Johnson2006]` p. 213), the
+  unit-vector ring of ℚ (`[BendaPerles2000]` p. 120) and the two surveys' restatements of `[Fischer1994]`'s value. Row 57: Theorem A partly
+  prior art. Row 63: the multiquadratic iff not found in print. Row 73: Johnson's "≥ 4" question posed as open (answered). Row 82: the gap it
+  closes is named by `[Johnson2006]` p. 213; not found. Row 99: Johnson's question is his Problem 4.4. Row 100: Lemma C′ answers `[Johnson2000]`
+  §5 at `n = 2`. Row 107: the bridge is Benda–Perles's. Rows 121, 123: "read, not found". Row 129: Johnson posed its equality first (1996, 2000).
+  Row 132: `[Townsend2005]` is the manuscript.
+- **`BIBLIOGRAPHY.md`**: every entry touched in stages 1–4; § R.2 (items 2–3 left, arrived), § R.3 (item 6 left; item 21's
+  `[Johnson2000surprises]` held and read), § R.5 (`[Townsend2005]` left), § R.6 (the Johnson row closed); § B rows for the six Geombinatorics
+  files read or fetched (the three old issues, V(3), IX(2), and the Johnson 2006 PDF); rules 0d, 0e.
+- **The three closes' `BIBLIOGRAPHY.md` drafts, checked:** FS-110 §R-close 4.3 (a)–(e), FS-107 §R-close 4.3, FS-106 §R-close 4.5 — **all
+  applied by the front-page jobs**, each checked against its row. One applied draft was wrong in substance and is corrected here: FS110-PA's and
+  4.3 (b)'s *"`[Soifer2024]` ch. 25 … reprints Townsend's proof"* — the chapter is Townsend's 2007 exposition (book p. 255), not a reprint of
+  `[Townsend2005]` (stage 3). FS-106's `[BendaPerles2000]` "not read" line is superseded (read in full, stage 2).
+
+### Drafts for the owner — `CLAUDE.md` (each measured against the file at this stage; total **+219 bytes**)
+
+| # | where | now | proposed | bytes |
+|---|---|---|---|---|
+| D-1 | § Where the problem stands, item 14 (l. 270) | `**nothing is claimed new while \`[Johnson2000]\` and \`[Johnson2006]\` are unread**` | `not found in print — \`[Johnson2000]\` and \`[Johnson2006]\` pose it as open (\`CLOSED-QUESTIONS.md\` §1.7)` | +25 |
+| D-2 | § The prior-art position (l. 331) | `**Ours:** Theorem A's general form (that formulation);` | `**Ours:** Theorem A's general form (that formulation, metric-free; its construction is \`[Fischer1990]\` Thm 1(i));` | +59 |
+| D-3 | § Publication, the Theorem B bullet (l. 180) | `What is ours: the kernel proof, Theorem A's general form (his congruence family` | `Two surveys restated it (\`[Johnson2000]\`, \`[Johnson2006]\`). What is ours: the kernel proof, Theorem A's metric-free form (his congruence family` | +64 |
+| D-4 | Paths forward, rank 17, FS-102 (l. 370) — **the "`[Johnson2000]`, `[Johnson2006]` first" condition is met** | `` `[Johnson2000]`, `[Johnson2006]` first; `` | `` `[Johnson2000]`, `[Johnson2006]` read, not found; `` | +10 |
+| D-5 | G63 (l. 1261) | `` is **`[Madore2015]` ¶5.4 with ¶1.3, by Tarski** (noted by `[BendaPerles2000]`, unread; `` | `` is **`[BendaPerles2000]` pp. 117–118 (1976), by Tarski** (restated as `[Madore2015]` ¶5.4 with ¶1.3; `` | +16 |
+| D-6 | G56's grade (l. 1041) | `` bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős]** `` | `` bridge, which is `[BendaPerles2000]` pp. 117–118 (Madore's ¶5.4) plus de Bruijn–Erdős]** `` | +30 |
+| D-7 | Paths forward, rank 5, FS-108 (stage 3's draft) | `three of five items answered at FS-110 (row 134); left: Townsend's (c) in full; \`[Townsend2005]\`` | `four of five answered (row 134; \`[Townsend2005]\` is the manuscript, (c) unargued); left: Townsend's (c) in full` | +15 |
+
+D-3's first sentence belongs to § Publication's `[Fischer1994]` paragraph; if the owner prefers, the survey fact can live in `LEDGER.md` row 57 alone
+(already written there) and D-3 shrinks to the Theorem A qualifier (+14). G67's M2-miss sentence (l. 1394) quotes G56's old text as history
+and stays.
+
+### Drafts for the owner — other files
+
+- **`WORKFLOW.md` step 3.2 item 8** (l. 111): *"it is in neither OpenAlex nor Semantic Scholar and nothing cites it, so **no citation walk can
+  arrive at it**"* — false in its middle: `[Johnson2000]` (its [9]) and `[Johnson2006]` (its [8]) cite `[Fischer1994]`. Proposed: *"it is in
+  neither OpenAlex nor Semantic Scholar, and the two surveys that cite it (`[Johnson2000]`, `[Johnson2006]`) are themselves in no citation
+  database, so **no citation walk can arrive at it**"*. The item's lesson stands, strengthened: reading the field's own surveys, held in the
+  journal nobody indexes, would have found the value in 2000.
+- **`plans/GROKKING-INSTANCES.md` §G49** (a new instance; the rule for instances): *"The consolidation run (2026-09-27, job LP): `[Fischer1994]`'s
+  value was restated in the two Geombinatorics surveys of the direction, `[Johnson2000]` p. 176 and `[Johnson2006]` p. 214 — the second being
+  the survey `[Soifer2024]` ch. 11 sends readers to — and both posed the four-colour family as open (2000: m ≡ 11 mod 12; 2006: 'does there
+  exist a positive integer m such that χ(G(ℚ²(√m), 1)) ≥ 4?'). And Theorem A's construction was `[Fischer1990]` Thm 1(i), held and marked read
+  since 2026-09-08 and credited only with 'the unit argument' — a held paper is prior art for questions it was not read for."*
+- **`plans/STUB-theorem-B-writeup.md` (FS-20):** open items R2 (`[Johnson2006]`) and R3 (quote Open Problem 11.6 from the source) are met
+  (stages 1–2); the manuscript's headline (Theorem A's general form, `CLOSED-QUESTIONS.md` §1.2) is now prior art in its construction — FS-20's
+  remaining novel content is the kernel proof, the `𝔽₄` residue colouring and the metric-free statement (with §1.6's field-internal reading).
+- **`plans/FRONTIER-STUBS.md`**: rank 5's row (D-7) and rank 17's (D-4), mirrored.
+- **A `LEDGER.md` row?** The derived fractional sandwich (Q3 / Problem 4, given MR) is a corollary of row 129; the owner may fold it into row 129's
+  statement rather than mint a row. Default if nothing is done: it stays in `CLOSED-QUESTIONS.md` §3 and this record.
+
+### Gates (each exit status read directly)
+
+| gate | result |
+|---|---|
+| `python3 tools/bib_audit.py` | **exit 0** — every cited work resolves (stage 2's exit 1 was job LW's `[GwynStavrianos2022]`, since defined) |
+| `python3 tools/claude_md_fact_audit.py --base a5fe409d` | **exit 0**, AUDIT PASSED (0 failures) |
+
+*Commit note (the owner's message):* this stage's `BIBLIOGRAPHY.md` edits (§ R, § C's FS-61 sentence, § R.2 item 4's route) were committed inside
+job LW2's 6a8d9ead, which committed the file whole; checked with `git diff HEAD -- BIBLIOGRAPHY.md` (empty) and `git show HEAD:BIBLIOGRAPHY.md`
+(all four edits present). Nothing lost; this stage's own commit carries `LEDGER.md`, the record and the report.
