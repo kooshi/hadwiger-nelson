@@ -5,11 +5,13 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
-- **FS-103, the collapse, is open** (Kooshi, after compaction: *"the you are go for the collapse milestone"*). Opening commit 1413cc69:
-  `data/fs103/briefs/` (standing rules; planner FS103-P, advisor FS103-A, prior-art reader FS103-G — all three running), close inventory
-  `plans/FS103-close-inventory.md` (owner the only writer). Next: the planner delivers `data/fs103/claims.md` and two verifier-brief drafts;
-  the owner reviews them and launches two blind verifiers when slots allow (cap three). R4 finished the re-rank's mirror in `CLAUDE.md`
-  (gates re-run by the owner: all PASS, 296,759 bytes). New top: 1 FS-103, 2 FS-104, 3 FS-105, 4 FS-62, 5 FS-67, 6 FS-59, 7 FS-102.
+- **FS-103, the collapse — all derivation jobs done; the close is running** (job FS103-C, brief `data/fs103/briefs/C103-close-math.md`; then
+  FS103-X, the front page, brief `data/fs103/briefs/X103-front-page.md`, launched by the owner when C reports). Work from the close inventory
+  `plans/FS103-close-inventory.md` (items 1–78; owner the only writer except C's status ticks). Held at [hand], two blind minds each:
+  (1) C-LB, no MR needed; (2) given MR, `χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²) = χ(F_dG²)` (totally real; complex places one mind);
+  (3) FRAC/DV: given MR, `α₁(ℝ²) = m₁(ℝ²)` — first clause of `[DuczVarga2026]` Conj. 1 — and row 123's route is per class, never six;
+  (4) M1: `χ_CP(ℝ²) = χ_m⁰(ℝ²)`, so given MR `χ(ℝ²) = χ_m⁰(ℝ²)`; the step to Falconer's `χ_m` (colour the null set E) is a GAP.
+  Kooshi gets ONE full report on return (the owner's context holds it; the inventory is its source).
 - **Today's results** (all [hand], every link two derivations or more unless the row says otherwise; nothing new in the kernel beyond row 127):
   `LEDGER.md` rows **120–127**. In one line each:
   - 120: MR — measure rigidity for the unit-vector group — for every real number field (EF_F⁺ by Einsiedler–Fish's method transferred; PE-2 by
