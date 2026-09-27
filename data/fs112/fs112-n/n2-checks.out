@@ -2,3 +2,6 @@ R2OUT: GREEN STRADDLE    |p1-Q|^2 = 0.9999800001, |p2-Q|^2 = 1.0001799971
 R2IN : GREEN STRADDLE    |p1-Y|^2 = 0.9998200081, |p2-Y|^2 = 1.0006198801
 END  : GREEN STRADDLE    lam = -1: arc points at squared distance 1.0020610 and 0.99810100 from z
 L60  : GREEN DIAM_OVER   l = pi/3: squared distance 10201/10000 > 1
+ENVT : GREEN IDENTITY    toward: |p-z|^2 - 1 = 8cos(eta)sin(eta+D/2)sin(D/2) + s(4cos(eta)cos(eta+D) - 2) + s^2
+ENVA : GREEN IDENTITY    away: |p-z|^2 - 1 = 8cos(eta)sin(eta+D/2)sin(D/2) - s(4cos(eta)cos(eta+D) - 2) + s^2
+TAN  : GREEN IDENTITY    cap beyond radius 2: cos >= 1 - (2h - h^2)/(4(1+h)) at rho = 2

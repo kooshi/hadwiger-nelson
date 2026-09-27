@@ -29,6 +29,17 @@ inside (|p| < 1 near w).
          (1 + eps)^2 * 4 sin^2(l/2); at l = 60 deg that exceeds 1, so diam T_out > 1 (TS-C).  Expected: DIAM_OVER.
          plant l60_fifty: l = 50 deg: the same points are within 1 -> RED, DIAM_OK.
 
+  ENVT   (N2-ENV, toward lens; stage N2-3): with p = P + rho e_psi beyond the end A by the angle eta (rho = 2 cos eta: p on omega(A)) and
+         z = P + (1 - s)e_phi0, phi0 at angle Delta past A, the identity
+           |p - z|^2 - 1 = 8 cos(eta) sin(eta + Delta/2) sin(Delta/2) + s(4 cos(eta) cos(eta + Delta) - 2) + s^2 .  Expected: IDENTITY.
+         plant envt_sign: the away sign (1 + s) in z -> the identity fails -> RED, NOT_IDENTITY.
+  ENVA   (N2-ENV, away lens): the same with z = P + (1 + s)e_phi0:
+           |p - z|^2 - 1 = 8 cos(eta) sin(eta + Delta/2) sin(Delta/2) - s(4 cos(eta) cos(eta + Delta) - 2) + s^2 .  Expected: IDENTITY.
+         plant enva_sign: the toward sign (1 - s) in z -> RED, NOT_IDENTITY.
+  TAN    (N2-TAN, the tangent bend at an isolated R2 contact; stage N2-3): for z = P + (1 + h)e_w, the part of B(z, 1) at radius
+         rho >= 2 from P has cos(psi - phi_w) >= (rho^2 + 2h + h^2)/(2 rho (1 + h)), and at rho = 2 the bound equals
+         1 - (2h - h^2)/(4(1 + h)).  Expected: IDENTITY.  plant tan_rho: evaluate at rho = 2 + h (the wrong edge) -> RED, NOT_IDENTITY.
+
 Exit 0 iff the requested run behaves as expected (faithful: all GREEN; --plant X: exactly X RED with its reason; --self-test: all of it).
 """
 from __future__ import annotations
@@ -39,9 +50,10 @@ from fractions import Fraction as F
 
 import sympy as sp
 
-REASONS = ("STRADDLE", "NO_STRADDLE", "UNSHADOWED", "DIAM_OVER", "DIAM_OK")
+REASONS = ("STRADDLE", "NO_STRADDLE", "UNSHADOWED", "DIAM_OVER", "DIAM_OK", "IDENTITY", "NOT_IDENTITY")
 PLANTS = {"r2_inner": ("R2OUT", "NO_STRADDLE"), "r2in_outside": ("R2IN", "UNSHADOWED"),
-          "end_half": ("END", "UNSHADOWED"), "l60_fifty": ("L60", "DIAM_OK")}
+          "end_half": ("END", "UNSHADOWED"), "l60_fifty": ("L60", "DIAM_OK"),
+          "envt_sign": ("ENVT", "NOT_IDENTITY"), "enva_sign": ("ENVA", "NOT_IDENTITY"), "tan_rho": ("TAN", "NOT_IDENTITY")}
 
 
 def d2(p, q):
@@ -119,7 +131,44 @@ def check_L60(plant: bool):
         (False, "DIAM_OK", f"l = {l}: squared distance {sp.N(dist2, 8)} <= 1")
 
 
-CHECKS = {"R2OUT": check_R2OUT, "R2IN": check_R2IN, "END": check_END, "L60": check_L60}
+def _env(sign_z: int, sign_claim: int):
+    eta, D, sv = sp.symbols("eta Delta s", real=True)
+    rho = 2 * sp.cos(eta)
+    ang = eta + D                                       # angle between e_psi and e_phi0
+    lhs = rho ** 2 - 2 * (1 + sign_z * sv) * rho * sp.cos(ang) + (1 + sign_z * sv) ** 2 - 1
+    rhs = 8 * sp.cos(eta) * sp.sin(eta + D / 2) * sp.sin(D / 2) + sign_claim * sv * (4 * sp.cos(eta) * sp.cos(ang) - 2) + sv ** 2
+    diff = sp.simplify(sp.expand_trig(sp.expand(lhs - rhs)))
+    return diff == 0
+
+
+def check_ENVT(plant: bool):
+    ok = _env(+1 if plant else -1, +1)
+    return (True, "IDENTITY", "toward: |p-z|^2 - 1 = 8cos(eta)sin(eta+D/2)sin(D/2) + s(4cos(eta)cos(eta+D) - 2) + s^2") if ok else \
+        (False, "NOT_IDENTITY", "the identity fails for the planted z")
+
+
+def check_ENVA(plant: bool):
+    ok = _env(-1 if plant else +1, -1)
+    return (True, "IDENTITY", "away: |p-z|^2 - 1 = 8cos(eta)sin(eta+D/2)sin(D/2) - s(4cos(eta)cos(eta+D) - 2) + s^2") if ok else \
+        (False, "NOT_IDENTITY", "the identity fails for the planted z")
+
+
+def check_TAN(plant: bool):
+    rho, h = sp.symbols("rho h", positive=True)
+    bound = (rho ** 2 + 2 * h + h ** 2) / (2 * rho * (1 + h))
+    # |p - z|^2 <= 1 with p = P + rho e_psi, z = P + (1 + h) e_w  <=>  cos(psi - phi_w) >= bound
+    c = sp.symbols("c", real=True)
+    ineq = sp.expand(rho ** 2 - 2 * (1 + h) * rho * c + (1 + h) ** 2 - 1)
+    solved = sp.solve(sp.Eq(ineq, 0), c)
+    ok1 = len(solved) == 1 and sp.simplify(solved[0] - bound) == 0
+    at = 2 + h if plant else 2
+    ok2 = sp.simplify(bound.subs(rho, at) - (1 - (2 * h - h ** 2) / (4 * (1 + h)))) == 0
+    return (True, "IDENTITY", "cap beyond radius 2: cos >= 1 - (2h - h^2)/(4(1+h)) at rho = 2") if (ok1 and ok2) else \
+        (False, "NOT_IDENTITY", f"solved = {solved}; edge value mismatch at rho = {at}")
+
+
+CHECKS = {"R2OUT": check_R2OUT, "R2IN": check_R2IN, "END": check_END, "L60": check_L60, "ENVT": check_ENVT, "ENVA": check_ENVA,
+          "TAN": check_TAN}
 
 
 def run(plant: str | None):

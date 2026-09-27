@@ -368,3 +368,73 @@ draft's R2 points `(1 ± t, s)` left the claimed side of `α`; the side assertio
 divergence 1′ (FLANK) is about whether that structure holds, and is stage N2-4's.
 
 ## Stage N2-2 — SAVED
+
+## Stage N2-3 — SAVED: the end vertices closed; NB-ISO closed by the tangent bend; RED's termination
+
+*Card X from FS112-A3 (A2's successor) arrived while this stage was being written: A2's §3.5 clause has fired (N112-P1 met exactly on the
+rebuilt strip; P2's conclusion holds), so item 3 is now the round's whole aim and items 1–2 are lemmas carried as far as item 3 needs. This
+stage was already derived; it is saved as that lemma. Frame: `α ⊂ ω(P)` a unit arc with constant sides `s_in | s_out`, closure `ᾱ = [A, B]`,
+angular length `ℓ < 60°` (N112-L60); `R₂(α) = {P + 2e_w : w ∈ ᾱ}`; `Δ(w)` the angular distance from `w` to the nearer end.*
+
+**N2-SIGN [hand, one mind].** *For every point `p ≠ P` of a tile of colour `s_in` or `s_out`, `|p − w| − 1` has one strict sign on all of `int α`.*
+If `ω(p)` crossed `α` transversally at an interior `w` it would enter both side tiles, one of which has `p`'s colour (N-E0). A tangency at interior
+`w` puts `p ∈ {P, P + 2e_w}` (LOCK exact); at `P + 2e_w`, `ω(p)` runs just outside `α` into `T_out` (fatal for `s_out`), and for `s_in` the tile's
+points `P + (2 − ε)e_w` near `p` cross `α` transversally. So each side-colour tile is **near** (inside `I = B̄(A, 1) ∩ B̄(B, 1)`, the set within 1 of
+all of `ᾱ`) or **far** (outside `⋃_{w ∈ int α} B(w, 1)`), by connectedness. `T_in`, `T_out` are near.
+
+**N2-ENV [hand, one mind; the identities tools exact, `ENVT`/`ENVA`].** For `z = P + (1 ∓ s)e_{φ₀}` (toward / away lens point) and
+`p = P + ρe_ψ` beyond the end `A` by the angle `η` on `ω(A)` (`ρ = 2cos η`), with `Δ` the angle from `A` to `φ₀`:
+`|p − z|² − 1 = 8cos η·sin(η + Δ/2)·sin(Δ/2) ± s(4cos η·cos(η + Δ) − 2) + s²`, and `|p − z|` increases with `ρ` beyond `2cos η`. With a lens
+**profile** `s ≤ ψ·Δ(w)` (corner angle `ψ`; `sin(Δ/2) ≥ Δ/π` since `Δ < 60°`) this gives, for the uncovered part of the lens point's disc:
+- *toward:* `B̄(z, 1) ∖ ⋃_{w ∈ ᾱ} B(w, 1) ⊆ B(P, r(ψ))`, `r(ψ) → 0`. (Within the arc's directions it is empty: `B̄(z, 1) ⊆ B̄(P, 2 − s)`. Beyond an
+  end, the first term dominates unless `cos η ≲ πψ/2`, i.e. `p` near `P`; near `q_A = P + 2e_A` the `−2s` term has the wrong sign to help.)
+- *away:* `B̄(z, 1) ∖ ⋃_{w ∈ ᾱ} B(w, 1) ⊆ N(R₂(α), r(ψ))`: within the directions a cap of radial height `≤ s` and angular half-width `≍ √s` about
+  `P + 2e_{φ₀}` (`TAN` exact); beyond an end, only near `q_A` (small `η`).
+- *near tiles:* for the toward lens every `p ∈ I` has `|p − z| < 1` (on `∂I`'s arcs of `ω(A)`, `ω(B)` the margin is `≳ Δ·sin ℓ − s`, at the corner
+  `P` it is `s`); for the away lens the same off `B(P, r(ψ))` (at `P`, `|P − z| = 1 + s`).
+
+**N2-TOWARD — the end-vertex GAP of the toward bend is closed [hand, one mind].** *If `s_out ∉ P_cl(P)`, recolouring the lens between `α` and a chain
+`β` of circular arcs of radius `≠ 1` from `A` to `B` (inside `T_in`'s sectors at `A`, `B`: a corner of angle `ψ`, or a tangent start of curvature in
+`(κ_σ, 1)` where `T_in`'s sector is a horn bounded by `σ`) with `s_out` is valid, removes `α` entirely, and creates no unit arc.* Proof: near tiles
+never reach distance 1 from a lens point (N2-ENV); far `s_out` tiles meet `B̄(z, 1)` only inside `B(P, r(ψ))`, and no `s_out` tile's closure contains
+`P`, so `ψ` below the distance from `P` to them clears the lens. `T_out ∪ L` has diameter `< 1` inside itself (the lens lies in `B̄(A, 1) ∩ B̄(B, 1)`).
+**What the brief's worry reduces to:** at `A` the direction `τ_A` lies on a contact half-plane's boundary only for contacts at `P` or `q_A`; a Siamese
+`s_out` tile at `q_A` would need `ᾱ ⊆ B̄(q_A, 1)`, false for `ℓ > 0`, and an outer one contains the lens's directions. So nothing at the end vertex
+blocks the toward bend. (N112-BEND's and NB's "a contact arc of `ω(E)` ending at `P`" puts `P` in the closure of an `s_out` tile: excluded by hypothesis.)
+
+**N2-AWAY [hand, one mind].** *If `s_in ∉ P_cl(P)` and no `s_in` tile has a point of `R₂(α)` in its closure (ends included), the away lens (recoloured
+`s_in`, inside `T_out`, same profile) removes `α` entirely.* Near `s_in` tiles are at positive distance from `P`; far ones from `R₂(α)`.
+**The end vertex's own blocker is exactly R2 at the end:** at `A`, the away bend is blocked at first order by an `s_in` tile touching `q_A` (out-type
+relative to `A`, half-plane `{d·e_A ≤ 0}`), and by nothing else.
+
+**N2-TAN — NB-ISO closed [hand, one mind; NB's sketch completed; `TAN` exact].** Let `C₂(α) = {w ∈ ᾱ : P + 2e_w ∈ cl Z, Z an s_in tile}` — closed, a
+finite union of points and closed arcs (a far tile's closure meets the radius-2 circle only along its own boundary arcs or at points). At an
+**isolated** point `w₀` of `C₂` (interior, or an end of `α`), or on the non-R2 side of an end of an arc component, bend with an arc tangent to `α` at
+`w₀` of curvature `κ ∈ (κ*, 1)`: the lens has height `h ≤ (1 − κ)δ²/2` at offset `δ`, and the part of `B̄(z, 1)` beyond radius 2 is the cap of height
+`h`, half-width `≍ √h`. A tile `Y ∋ q₀ = P + 2e_{w₀}` lies outside the radius-2 circle near `q₀` (N2-SIGN); on each side its points at angular offset
+`δ` rise **linearly** (a sector not tangent to the circle) or **quadratically** (a boundary arc tangent at `q₀` of curvature `κ_Y < 1/2`: height
+`≥ (1 − 2κ_Y)δ²`), and `κ_Y = 1/2` means the boundary **is** the radius-2 circle on that side — an arc component of `C₂`, not an isolated point. With
+`1 − κ` small against `1 − 2κ_Y` the cap misses `Y`. The pair `(w₀, q₀)` stays outer (`|z − q₀|² ≈ 1 − 2h + 2δ² > 1`). **So N's l. 231 is false (NB
+right, conceded), and the GAP it hid is closed: isolated R2 contacts do not block; only R2 along an arc does.**
+
+**N2-RED — N112-RED with both GAPs closed [hand, one mind].** *Every valid map has a valid modification, by W-MERGE, N2-TOWARD, N2-AWAY and N2-TAN,
+creating no unit arc, in which every unit arc is **(Q)** (both side colours at the centre; by U1 the side cones hold neither, and no colour holds both
+side cones, else W-MERGE applies: `≥ 4` colours) or **(R2)** (outer colour at the centre, not the inner; an inner-colour tile along the radius-2 circle
+over all of `ᾱ`).* **Termination.** The moves never add a colour to a unit-arc centre (new arcs avoid the finitely many centres nearby; W-MERGE's
+radius avoids them); a bend removes colours only at points of `int α`, which carry two colours and so are never (Q) centres; the witness of an (R2)
+arc is cut only by a W-MERGE near it (a bend's lens meets another arc's witness arc at most at a point: radius 1 against radius 2). Each W-MERGE
+lowers `Φ` at one vertex and new vertices have `Φ = 0`, so a bounded region sees finitely many; each bend removes an arc (or replaces it by (R2)
+pieces) and is re-enabled only by a W-MERGE or by a colour lost at its centre (then it is removed for good). The enumeration of N4-TERM then gives a
+terminal modification on the whole plane; **no stubs arise**, because every bend reaches the end vertices. *Six:* nowhere (geometry of contacts).
+*Seven-colour control:* no unit arc, nothing to do.
+
+| NB divergence | status after this stage |
+|---|---|
+| #4 (N's l. 231; RED's GAP at isolated contacts) | l. 231 FALSE, conceded (two minds: NB, and I on re-reading); the GAP it hid is closed by N2-TAN (one mind) |
+| #5 (end vertices; stub accumulation) | closed by N2-TOWARD, N2-AWAY (one mind): the bends reach the ends, so no stubs |
+| #7 (C-UA-CHAIN's (E2) "both kind") | unchanged; item 3's business |
+
+**Would have searched here:** the end-vertex contact configurations (enumerate sector orders at `A`) — derived instead from the two boundary
+half-planes through `τ_A`; the tangent bend's `κ` (a scan) — derived as `1 − κ ≪ 1 − 2κ_Y`.
+
+## Stage N2-3 — SAVED
