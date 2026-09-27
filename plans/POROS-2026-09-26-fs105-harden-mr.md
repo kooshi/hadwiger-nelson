@@ -5,7 +5,12 @@
 
 ## Theorems this phase proved
 
-*(none yet — an advisor proves nothing by default; any hand fact used in advice is listed here with its grade)*
+- **PE-2's passage to `U` is clean given Thm 1.2 on the pieces** (the Haar weight is constant up the chain; `ν = μ − a·m` exists on `R̂` by
+  Kolmogorov and is `U`-invariant of zero entropy) — [hand, one mind, a sketch for comparison], §Stage 1.
+- **EL2021 Thm 1.3 ⟹ Thm 1.2** for totally irreducible, not virtually cyclic actions, given "virtually cyclic factor" read as *non-trivial*
+  factor — [hand, one mind], §2.2.
+- **X12B §2.2 (EF_F⁺'s core lemma) checked step by step: no failing line** — [checking reading, one mind, NOT blind; adds a reading, not a
+  derivation], §2.1.
 
 ## Stage 1 — SAVED: the expectation, written before the planner's drafts
 
@@ -93,3 +98,69 @@ hunch: uq-multipliers-not-admissible
 ### Would have searched here
 
 - nothing yet.
+
+## Stage 2 — SAVED: readings against the stage-1 expectation, and the advice
+
+**Read (against stage 1's expectations):** `plans/FS100-X01V-verification.md` §1.3, §1.4, §2.3–2.4, §4 (in full); `plans/FS100-X12B-derivation.md`
+§1.2, fence log, §2.2–2.4 (in full); EL2021 pp. 1–4 (Thms 1.2, 1.3, definitions; `pdftotext`, scratch only); `data/fs105/claims.md` (the
+planner's draft, stage 5); the planner's plan §G (stages 2–3). `BIBLIOGRAPHY.md` rows `[EinsiedlerFish2010]`, `[DuczVarga2026]`,
+`[MatolcsiEtAl2025]`. **Not read:** X01D, X02D, X02V, `plans/FS100-derivation.md` §3, EL2021 §§3, 5–9.
+
+### 2.1 EF_F⁺ — surprised, in the direction of soundness
+
+- **X01V's blind GAP** (§2.3) was exactly my stage-1 worry (i): "Lemma 3.2's multiplier step … images `u′B` small at every place" — it
+  required every multiplier to keep the neighbourhood thin, found only `(log M)^k` such multipliers, and named a missing lemma UZ. Its stage 4
+  (§4.2) names the wrong premise concretely: "The adelic argument needs only that the *product* over all places of the error `z` be `< 1/C_Λ`."
+- **X12B §2.2, read step by step** (my check, not blind): the overlap equation `(q₁ − q₂)x̃ = λ + q₂ỹ₂ − q₁ỹ₁` is read at `P⁺` (where `u*`
+  expands) for smallness and everywhere else only for a height bound polynomial in `X`; two scales `X, X²` give `ℓ − ℓ′` of product `< 1`,
+  hence `0`; Lemma Z (wandering shells, stabiliser `U_ℓ` of finite index because `L/Λ′ ≅ ⊕_{stable} L_v/Λ′_v` has finite `U`-orbits) kills
+  every other split coordinate. Checked: step 1's box (the partition is pulled back from `X_Q = R̂/K_Q`, so atoms are `K_Q`-saturated — the
+  fat `∏_{w∉Q}O_w` is honest); step 4's lower bounds `|q₁−q₂|_v ≥ X^{−2}` (arch, `N ∈ ℤ[i]∖0`) and `≥ (4X⁴)^{−[L:ℚ]}` (finite); `H′(ℓ)`'s
+  finiteness (only places dividing `c₁c₂N`, `𝔡`, or the lift's support contribute); step 5's exponent bookkeeping; step 6's order of
+  choices; Lemma Z's linearity on the coset (`gℓ − ℓ ∈ Λ′`). **No failing line.**
+- **Degree:** the pigeonhole counts `U_ℚ(X) = {den ≤ X}`, `≈ (4/π)X`, **linear in `X` at every degree**; `[L:ℚ]` enters only the constants
+  `a, b` of step 4, hence `K`, hence `β = 1/(2K)`, which SMB supplies for every `β > 0`. So C-MR16 for EF_F⁺ is a walk of constants, not a
+  risk. (Row 120's "`c·M^{1/[F:ℚ]}`" is the same count in `H_L`-normalisation.)
+- **Hunches scored:** `one-u-zero-entropy-overreach` — **killed** (by X12B §2.2 steps 3–5: one thin place suffices; the product formula pays for
+  fatness elsewhere). `uq-multipliers-not-admissible` — **true and moot** (`U_ℚ` is used only as pigeonhole multipliers; PE-2 uses
+  `Γ = ⟨u, w⟩`, admissible by Lemma W). `x01v-withdrawal-is-selection` — **half**: the withdrawal was a non-independent reading (X01V says so),
+  but it names its wrong premise, and X12B's blind TRUE is the independent evidence. `ef-transfer-is-the-weak-step` — **weakened** (below).
+
+### 2.2 PE-2 — the external step, read at its statement
+
+EL2021 p. 2, Thm 1.2 has no `d ≥ 2`; "not virtually-cyclic" carries it. Thm 1.3 (p. 2–3) gives `Λ`, `µ = (1/J)(µ₁ + … + µ_J)`, closed
+`G_j`, zero entropy on `X/G_j`. **Deduction 1.3 ⟹ 1.2** (my hand, one mind): total irreducibility makes each `G_j` finite or `X`; `G_j = X` for
+one `j` gives all (`α^n G_j = G_k`), so `µ = m_X`; all finite gives zero entropy on `X` (finite-to-one extension, Abramov–Rokhlin with
+finite fibres) for `n ∈ Λ`, hence for all `n`. **Two definitional points the claim list should carry:** (i) the trivial factor `X/X` is
+virtually cyclic by the letter of p. 2's definition (`n = 0`), so "no virtually cyclic factors" must mean *non-trivial* factors; (ii)
+totally irreducible + not virtually cyclic ⟹ no non-trivial virtually cyclic factor: a factor `X/Y` has `Y` finite, and `α^{m−kn} = id` on
+`X/Y` gives `(α^{m−kn} − 1)X ⊆ Y`, so `= 0` by connectedness. Hyperbolicity is **not** a hypothesis of either statement (p. 4, Cor. 1.4:
+"we do not assume that the actions are totally non-symplectic or hyperbolic") — which matters, because our pieces have a large isometric
+(archimedean) part.
+
+### 2.3 Row 129 (d) — surprised, and the test has a cheap form already scored
+
+`[DuczVarga2026]` (held, read in full): a finite unit-distance graph with independence ratio **below 1/4** (`χ_gf(G29) > 4.0007`). A proof
+that every finite UD graph has ratio `≥ 1/4` would have refuted MR at ℚ(√635087) (`m₁ ≤ 0.2470`); that failure was reachable and **did not
+happen** — a met prediction, weak because nobody predicted otherwise after MRVZ's Conjecture 1 fell. The live refutation window is
+`α₁(ℝ²) ∈ (0.2470, 0.24996]`. And (d1)'s softest link is not MR but **B-AMEN** (row 129: "B-AMEN and B-CHIF one mind") — the step
+"finitary `α₁(F²)` = the sup density of `R ⋊ U`-invariant random independent sets" (amenability, Følner averaging): standard, one mind.
+
+### 2.4 Updated probabilities (supersede stage 1's table for scoring at the close; stage 1's stays as registered)
+
+| step | stage 1 | now | what moved it |
+|---|---|---|---|
+| PE-2 (EL Thm 1.2, admissibility, pieces, passage) | 0.08 | **0.04** | Thm 1.3's statement read; the deduction is short; hyperbolicity explicitly not assumed |
+| EF_F⁺ | 0.25 | **0.05** | X12B §2.2 read step by step, no failing line; X01V's GAP located and its premise named |
+| degree 16 | 0.07 | **0.03** | the count is linear in the denominator at every degree |
+| scope `R_F = O′` | 0.05 | **0.04** | unchanged in substance; the non-totally-real clause stays the residual |
+| **P(MR survives FS-105 with no named gap)** | 0.62 | **0.85** | |
+| P(blind B reports GAP) | 0.40 | **0.35**; of which P(at X01V's step) ≈ 0.6 | |
+
+*G21 note on myself:* every update above moved toward the liked result. The readings were of records that concluded TRUE; the one blind
+contrary reading (X01V) I read too, and its withdrawal is concrete. What would reverse me: a failing line in X01D (unread by me) that X12B
+does not share, or EL2021 §§4–7 using a hypothesis Thm 1.3's statement omits.
+
+### Would have searched here (stage 2)
+
+- none: every check was a reading of held records and one held paper.
