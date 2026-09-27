@@ -236,3 +236,19 @@ assignment appears) caught.
 All runs of stage 2 are in `data/fs110/fs110-yb3/stage2-runs.txt`: three faithful runs exit 0; seven plants each caught for its own reason (exit 0
 in plant mode). **Slip (mine, repaired):** my first batch of plant runs read exit statuses through `| tail -1` (standing rule 8); I discarded that
 batch and re-ran every tool with its status read directly into the file.
+
+## Stage 3 — SAVED (verdicts committed before FS110-Y3's record, directory and tools are opened)
+
+| id | my verdict | grade, minds | the step it turns on |
+|---|---|---|---|
+| Y3-C5 | **TRUE** | [hand, trivial]; my mind blind | two distinct circles share ≤ 2 points |
+| Y3-GP | **TRUE** | [hand]; my mind blind; exact on six rings of mine | `g` confined to two consecutive values; `m` constant, `= 3` in GP |
+| Y3-RING | my six rings reproduce `W = 0, 2, 3` (aligned) and `3, −3, 9` (GP); the side's rings to be rebuilt at stage 4 | [tools, exact] | — |
+| Y3-PROP, first clause | **TRUE for `c ≠ d`**, with a **scope divergence at `d = 2`** (collinear event vertex at distance exactly 2 from an endpoint; NB-5 covers `< 2`) | [hand]; my mind blind | YB3-EVENT + NB-4 + NB-5 at both ends |
+| Y3-PROP, second clause ("`|W|` one constant on a connected map") | **GAP at the same-type step** (`c = d`): the merge leaves an event type `{c, r_i, r_j}` no hypothesis excludes; a swept `c`-tile ringed by `d, e, f` changes `W` by `±1` | [hand, one mind] | YB3-SAME |
+| Y3-FLIP | **algebra TRUE; as a statement about `W`, GAP at the same-type step** (`k` odd needs `k ≥ 1` same-type steps) | [hand + tools exact] | YB3-SAME |
+| Y3-BOW | **TRUE** (the `W = 0` clause, three `c ≠ d` transports); the single homotopy through the bowtie meets YB3-TRANS's rigour exactly; the "merged neighbour, same-type iff `x = y`" bookkeeping is consistent, its `x = y` case inheriting YB3-SAME's GAP; `d = 2` caveat as above | [hand]; my mind blind; algebra exhaustive | YB3-EVENT through `u` |
+| Y3-SIX | **TRUE** | [hand]; my mind blind; exact geometry | counting lemma ⟹ `s_k = s_{k+1}` ⟹ a unit arc on `ω(z_{k+1})` |
+
+Registered expectations (§1.5) scored now, before the opening: Y3-C5, Y3-GP, Y3-PROP (both clauses), Y3-FLIP, Y3-BOW, Y3-SIX all landed on the
+registered outcome. None moved.
