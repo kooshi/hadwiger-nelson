@@ -306,3 +306,14 @@ configuration"), FS106-AE-POLY.
   question in print, given its base (FS106-V's Cor. 1 repair, under blind check).
 - **YES** (a local fragment realising one, given by formula and checked exactly) is a local realisation, not a map. It names where the construction
   must go.
+
+**Update to §8, filed before round 4 launched (the owner; both sides read it).** FS110-CB, a blind second mind on the Cor. 1 base, reports
+(`plans/FS110-CB-verification.md`, theorem list, verbatim):
+- "**Corollary 1 AE for curved cubic maps, no d = 2 exception** — [hand], one mind; Lemma 5 and Prop. 18 accepted from print — §D6."
+- "**Circle-only reduction** (replaces S–V Prop. 19's plane recolouring) — [hand], one mind — §D5 items 1–4."
+- "**Lemma 3 AE, all 1 < d < 2** (exact bicycle on pseudo-coloured circles, overshoot case at d > √3) — [hand + tools], one mind — §D4."
+
+If the circle-only reduction holds, **G-d2 does not arise**. Then N3-RED's residue under Condition 5 is G-CONE alone: a hard Woodall-cone vertex in
+every disc of radius 3. CB asks for a second mind on its reduction before FS106-SV2's `d = 2` exception is withdrawn, and that second mind is running.
+Until then, treat G-d2 as "possibly vacuous, one mind". CB also notes that FS106-SV2's chain admits a **disjoint** pair at exactly 2 besides the
+same-multicolour one.
