@@ -424,6 +424,22 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     '§ FS': ("plans/FRONTIER-STUBS.md", "the address '`plans/STUB-regularity-wall.md` § FS-107' in FS-107's rank-1 row and the Open-milestones sentence, both replaced at FS-107's close (§R-close 4.2); the closed-list entry keeps it"),
     'δ₀': ("plans/STUB-regularity-wall.md", "FS-107's rank-1 row's question 'leaves `δ₀|U_R|` uncovered, for every `ε`' (claim R), which left the table at FS-107's close; the stub's § FS-107 keeps it, and row 133 cites it as row 131's C-Q-STAB"),
     'δ₀|U_R': ("plans/STUB-regularity-wall.md", "the same clause; the stub's § FS-107 keeps it"),
+    # RK, the ranking pass (2026-09-27; plans/RERANK-2026-09-27.md): ranks 4-29 of the paths-forward mirror shortened to a short question
+    # and bearing each (the brief: point to plans/FRONTIER-STUBS.md for the full text); each token verified in its home on every run.
+    'J47': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    'Y1': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    "(3)'s": ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '06:5x': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-101 (rank 19 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '10⁻⁴': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-109 (rank 4 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '112–113': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '116–117': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '116–118': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    '4′': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    "HD1-cert's": ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    'PL(23': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-96 (rank 11 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    "R1's": ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-44 (rank 15 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    'T-J39-5': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-59 (rank 8 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    'μ_min': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
