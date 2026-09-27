@@ -40,3 +40,25 @@ Would have searched here: nothing (an editing pass).
   exit 0, RESULT: PASS, FS106=46.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED (`BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md`)
+
+- `BIBLIOGRAPHY.md`, from §R-close 4.5: new § A row `[Townsend1979ms]` (after `[Townsend1981]`); copy and read columns rewritten for
+  `[Townsend1981]` (held, read in full, no proof; its citation's "not fetched" removed), `[Townsend2005]` (unheld, request sent 2026-09-27),
+  `[Coulson2004]` (read in full), `[Woodall1973]` (read §3), `[Thomassen1999]`, `[Pritikin1998]`, `[Parts2020c]` (held; statuses as drafted),
+  `[SokolovVoronov2025]`, `[Voronov2023]` (re-reads), `[BendaPerles2000]` (held as a scan, not read). The role columns of `[Townsend1981]`,
+  `[Thomassen1999]`, `[Pritikin1998]` and `[Parts2020c]` gained one clause each naming what of FS-106 rests on them (the row's column (i)).
+  § B: six new file rows (every path checked with `ls`); Coulson, Woodall and S–V statuses updated; both "Held and not read" lists lose
+  Coulson and Woodall and gain `[BendaPerles2000]`. § C: listing rows for `[AmbrosioCasellesMasnouMorel2001]`, `[CherkashinVoronov2024]`,
+  `[AxenovichLiuSagdeev2025]`, `[LukesMalyZajicek1986]`, `[Wilczynski2002]` (titles from P §PA, marked "[title from a search listing]";
+  authors by surname, as P gives them). `[DidinVoronov2026]` already had a row (§ C, FS103-G); unchanged. `[deGreyParts2023]`: no row change
+  (C: "No new row"; the correction is to inventory item 51 and TQ §4.7).
+- **Beyond the drafts, to pass the gate** (my decision): `tools/bib_audit.py` exited 1 on four citations FS-106's own records make and no
+  draft logged — arXiv:2208.02230, 2302.09972, 2404.11454 (P §PA.1's citing works) and `[MartiniSwanepoelWeiss2001]` (FS106-V l. 94). Logged
+  each as a § C listing row from the citing text alone (titles not recorded; the Minkowski survey "[title unverified]"). Alternative: leave the
+  gate red and report — rejected, because the rows add no claim beyond what the records say. Confidence high.
+- `CLOSED-QUESTIONS.md` §3, from 4.6: "`[SokolovVoronov2025]` answers no" → "… answers no — its printed proof repaired at FS-106 except one edge
+  case, `d = 2` (row 132)."
+- Gate: `tools/bib_audit.py` exit 0 ("every cited work resolves to a row or a recorded alias").
+
+## Stage 3 — SAVED

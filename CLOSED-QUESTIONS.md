@@ -580,7 +580,7 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   four colours, is not answered by it: FS-89 is about character colourings of infinitely generated field planes, and §2.4 about every
   colouring of a finitely generated group.
 - *Closed by others, listed so it is not re-closed:* **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
-  more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no.
+  more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no — its printed proof repaired at FS-106 except one edge case, `d = 2` (row 132).
 
 ---
 
