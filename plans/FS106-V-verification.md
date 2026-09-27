@@ -206,3 +206,28 @@ reduces, as far as §§2–6 go, to the print's own conditions; §7 and Lemma 4 
 6. Stage 6: divergences with FS106-VB once this record's verdict stage is complete.
 
 ## Stage 3 — SAVED (partial)
+
+## § Continuation — FS106-V2
+
+*Job FS106-V2 (de Bruijn), Opus 5.5, 2026-09-26/27. Brief `data/fs106/briefs/V2-106-verify-print-continued.md` with the standing rules (rule 0
+first: `CLAUDE.md` § The aim and § Counter-priors read from disk) and FS106-V's brief `data/fs106/briefs/V106-verify-print.md`. Not blind. This
+section extends FS106-V's record; its verdicts above are not rewritten. Resuming check: no V2 section existed, so no stage of mine was saved;
+FS106-V's last SAVED stage is "Stage 3 (partial)" (commit `84cdbe9f`). Order of execution: stage 3's remainder (verdicts), then stage 6's
+comparison with FS106-VB (only after the verdicts are committed), then stage 5's readings, then stage 6's quote-check. Working files:
+`data/fs106/fs106-v/`.*
+
+### Theorems this phase proved (V2)
+
+*(filled stage by stage)*
+
+### Would-have-searched-here log (V2)
+
+- Stage 0: none.
+
+### V2 stage 0 — SAVED: quotation check of the V2 brief
+
+The V2 brief quotes no source: its only quoted strings are this section's heading, the commit subject, the addressee and the final turn text.
+Its glosses, checked against FS106-V's record above: "SV-L4 (a), with bichromatic vertices of degree ≥ 4" — matches §3.1's SV-L4 row (a);
+"the printed proof fails because Fig. 5's triangle is bipartite there" — matches §3.1's SV-L3 row (b) (the relation graph is a 4-cycle for
+`√3 ≤ d < 2`); "FS106-V sketched one" — matches the SV-L3 row's repair sketch. The brief's claim that Pritikin 1998 is held is confirmed at
+`~/source/library/pdf/1-s2.0-S0095895698918196-main.pdf` (from the owner's inventory line 20, read for that line only); Townsend 2005 is not held.
