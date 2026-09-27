@@ -422,8 +422,7 @@ G79's example invariant in its first form: what every unit arc's centre carries 
 - `plans/FS112-N-proof.md` stage 2 — read against: a round-1 proof side answering card W and working §6 — surprised: yes. It is a reduction theorem
   (RED), not a set of seam kills, and N registered predictions (P1–P3) that contradict its own pre-round answer without saying so.
 - `plans/FS112-NB-verification.md` stage 2 — read against: a verifier confirming the walk — surprised: yes, twice. NB found a FALSE sentence and an
-  unnamed GAP in RED (#4). And NB's own FLANK verdict reversed toward the side's, the second instance in two milestones of a verifier's stage 1 being the
-  wrong one at a curvature endpoint.
+  unnamed GAP in RED (#4). And NB's own FLANK verdict reversed toward the side's, at a curvature endpoint.
 - `data/fs112/reports/FS112-N.md`, `FS112-NB.md` — read against: their records — surprised: no. The NB report's "letter-for-letter" matches its §2.3.
 
 ## Stage 3 — SAVED
