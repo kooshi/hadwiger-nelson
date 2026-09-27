@@ -212,3 +212,8 @@ merged cubic map, proved apart from its kills (Lemma 3, Cor. 3). C-SEAMLIST's re
 | N3-P17 | TRUE (second route, bracketing pair) | 1 / [hand; C3–C4] |
 | N3-RED | TRUE as a reduction, over FS106-V2's Cor. 1 (one mind) | 1 / [hand] |
 | W-3 | GAP at G-CONE and G-d2 (and SV-L3's sketch) | 1 / [hand] |
+
+## Stage 3 — SAVED: verdicts committed
+
+Verdicts committed at `859a6468` (stage 2). Only now do I open `plans/FS110-N-proof.md` (§ Continuation — FS110-N3), `data/fs110/fs110-n/` and
+`tools/fs110_n_*`. Every other fence stands (the earlier and concurrent verifiers' records, the plan, the advisors, the inventory, the reports).
