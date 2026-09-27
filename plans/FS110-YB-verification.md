@@ -7,7 +7,7 @@ record; that quotation is checked against the record at stage 4, after my verdic
 
 ## Theorems this phase proved
 
-*(one line each, grade and address; filled stage by stage)*
+*(one line each, grade and address; the list is §3.2)*
 
 ## Would-have-searched-here log
 
@@ -198,3 +198,29 @@ registered). Y2-S1i: GAP at cusps (registered TRUE at 0.65, the arc-end outcome 
 registered). Y-BIKE-3C: GAP (one of the two registered). Y2-LAT: TRUE for my reading.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the side's record read (after stage 3 was committed); divergences and proposed edits
+
+Read: `plans/FS110-Y-construction.md` l. 1–30 (table), l. 216–226 (Y-BIKE-3C), l. 296–400 (Y2-W4, Y2-W4e, Y2-S1i), and
+`data/fs110/fs110-y/y2_fragments_none.out`. Not read for lack of budget: the rest of the record, `tools/fs110_y_*` (never run). **Quotation check
+of the instance block:** the table lines l. 27, 263, 272, 279 match the instance block's text (checked by prefix); not checked line by line.
+
+| # | item | kind | the side | mine | proposed edit for the close |
+|---|---|---|---|---|---|
+| 1 | Y-BIKE-3C | **truth** | TRUE: "each component of the allowed region, lifted, is a band whose section at fixed `α` is one half-open interval of exactly `120°` … `C` lies in one component" | GAP at grid-corner passages | The allowed half-open cells of adjacent bands meet at grid corners (the closure of cell `(i, j)` holds the corner that belongs to `(i+1, j+1)`), so the allowed region is **connected across the forbidden stripes**, and a cross curve passing diagonally through a corner stays proper there; the lift then jumps by 2 without touching the forbidden value. The side's "C lies in one component" is the missing step. Its section argument at `α = 0` (partners `2γ` apart, `γ = arccos((d − 1)/2) > 60°` iff `d < 2`) is exact and better than my measured ranges: adopt it. Edit: **"TRUE for offsets `(φ, ψ)` whose cross curve meets no grid corner; GAP at corner passages"** [hand, two minds for the generic case (Y's route and mine), the GAP one mind] |
+| 2 | Y2-W4 (d) | **truth (scope)** | "colours are in `P(u) ∖ P_cl(w)`, **at most one colour** `m_u(w)` (none when `\|P(u)\| = 2`)" | at most `\|P(u)\| − 2` | False at the four-colour end of a (4, 2) pair: two colours remain. Edit: "at most `\|P(u)\| − 2` colours: one at (3, 3), none at the two-colour end, two at the four-colour end" |
+| 3 | Y2-W4e, the (2, 4) bullet | **scope** | "a bichromatic degree-`≥ 4` vertex in a (2, 4) covering pair is the crossing point of two unit arcs, centred at `w` and `w′`" | vacuous: **YB-V5X** — under the same hypothesis no such pair exists | Y2-W4 (b) makes one of the bichromatic end's colours lie wholly inside `ω(w)` at it and the other wholly outside; alternating sectors forbid it. So a V5 end of a covering pair needs an arc of Γ at every common unit point with transversal branches — the (S1) mechanism — or cusps. Edit: state YB-V5X, and C-V5-K's live case as "(2, 4) pairs only at arcs of Γ or cusps" [hand, one mind; the side's (b) is the same lemma as my YB-L, so two minds for the lemma] |
+| 4 | Y2-W4e, escape partner | **scope** | "If `u` is a strong escape at `w` … `v` must be `ω(w)`-monochromatic … A generic trivalent `v` … is excluded" | holds for **every** (3, 3) covering pair at such a `w`, escape or not | (d) at `v` does not use `u`'s escape. Edit: "at a common unit point with no arc of Γ, both ends of a (3, 3) covering pair are `ω(w)`-monochromatic or boundary-lined; a generic trivalent vertex is never an end" |
+| 5 | Y2-S1i item 4 | **truth** | TRUE: "past its ends, tile-interior points of `ω(u)` carry colours outside `P(u)` … so each end on `ω(u)` is a vertex meeting a colour of `P(v)`" | GAP at cusps | Past an end, `ω(u)` may continue **along another boundary** instead of into tile interiors. TS-U excludes every continuation with sides in `P(u)` except the swap `(c′ \| c)`, which confines `c′` and `c` near `u` to the rays `θ₂ ± 90°` — admissible for cusp tiles. Then the end is a bichromatic degree-4 vertex `c, c′, c, c′` meeting no colour of `P(v)`. Edit: "TRUE when the arc's side colours have sectors of positive angle at `u`; GAP when both are cusps at `u`" |
+| 6 | Y-T2W | scope (unchecked against the side's text) | "a pair saved at `w₀` by T2 makes `w₀` a vertex of degree `≥ 4`" | TRUE at (3, 3); GAP at (2, 4) | At (4, 2) the four-colour end can carry a unit arc of `ω(u)` into `w₀`; then the `P(u)`-colours at `w₀` are that arc's sides. "The inner arc colour" should read "an inner colour" |
+| 7 | Y-BLOCK "hence C-TAN-POS TRUE" | grade | TRUE "at the level of A-EXACT's disjointness", completeness not claimed | GAP at completeness | The inference needs the complete list; a named hole is the cusp tangent to the tangent line (`τ ⊥ e_u`), where "`≍ s·\|τ·e_u\|`" degenerates |
+| 8 | the fragments S1, T2, BB, MX | agreement | ACCEPT, 18 / 24 / 30 / 27 pairs, tight | same, with my own checker and closings; T2's 8 contacts; the four plants REJECT at the pairs the side names; `t2_flat` range `[0.9923, 1.3716]` against `≈[0.992, 1.372]`; S1's ranges equal the side's to six places | Grade Y2-S1 (fragment), Y2-T2F, Y2-BB, Y2-MX **[tools, exact, two independent checkers]** |
+| 9 | Y2-LAT | agreement (reading) | fails at its four-colour points | my reading REJECTs, 36 pairs, all `u`-type against a four-colour point placed as `w′` | Compare the side's formula with mine at the close; I did not |
+| 10 | claims list | correction owed | — | — | `data/fs110/claims.md` §0 "Siamese and outer": the source is `plans/FS106-TQ-derivation.md` l. 348, not `plans/FS107-stability.md` l. 348 |
+
+**Where the divergences come from:** items 1 and 5 are the same shape — a proof that follows a curve through tile interiors (or through cell
+interiors) and misses the measure-zero passage where it runs along a boundary (a grid corner; an arc of `ω(u)` continuing past the end). Both are
+the flattering direction (G21): each missed case is a possible escape for the construction side's opponent, so the side's TRUEs close more than
+they prove.
+
+## Stage 4 — SAVED
