@@ -1,0 +1,35 @@
+## Thread 9 — "Searching for a 6-coloring" (posted July 2, 2018; comments July 2 – August 28, 2018)
+
+> The opening post's summary, verbatim: "We can now 6-color $[0,2]\times\mathbb{R}$ ." and "We now have a laundry list of necessary conditions for a certain family of tile-based 6-colorings of the plane. The next step is to search for a 6-coloring of the plane."
+
+### The strip: its width, and who had it
+@09.13 ¦ * ¦ some inadequate gibberish. ¦ Smith cannot find the proof that `[0,2]×ℝ` is six-colourable behind the post's link.
+@09.15 ¦ * ¦ * ¦ **Gibbs: "We already had a strip of width 3.7 in thread 7"**; the `[0,2]×ℝ` strip was five tiles wide in the grid representation.
+@09.17 ¦ * ¦ would this give a larger strip example? ¦ An anonymous reader proposes re-colouring translated tiles of the strip.
+@09.18 ¦ * ¦ * ¦ De Grey: no; "Even to get a height of 5 tiles we need the central tile to be “fat” at both top and bottom."
+@09.100 ¦ * ¦ * ¦ **Parts: the Pritikin-style design of thread 7 (`[07.10]`), used as an infinite strip "without round boundaries", gives width `√3(1+√5/2) ≈ 3.668`** — the same number as `[AxenovichEtAl2014]` Thm 4.2's `√15/2 + √3`; "without round boundaries" is ambiguous in the held text (the disk's edge, or the tiles' arcs).
+@09.101 ¦ * ¦ * ¦ Parts: starting widths for 4 and 5 colours (triangles, pentagons `13/8`).
+@09.102 ¦ * ¦ * ¦ Parts corrects the 4-colour width to `√3/2`.
+@09.103 ¦ * ¦ * ¦ Parts: a string of truncated circles gives `√3/2` for 3 colours and `√8/3` for 4.
+@09.104 ¦ * ¦ * ¦ Parts: pentagons give `(√3/4)(√5+2) ≈ 1.834` for 5 colours, "just a half of Pritikin’s style design for 6-coloring" (withdrawn next comment).
+@09.105 ¦ * ¦ One should return to $\frac{13}{8}$ . ¦ Parts withdraws it: back to `13/8`.
+
+### The tile enumeration and the search for a six-tiling
+@09.11 ¦ * ¦ * ¦ Gibbs's edge-joining rules: valencies match in reverse; a vertex–edge constraint on one side excludes one on the other; an unconstrained edge or diagonal has length "strictly less than one".
+@09.20 ¦ * ¦ * ¦ Gibbs's plan: 2,788,341 tile-pair questions, then vertex arrangements with angle constraints, then islands ("1-Uzbek").
+@09.21 ¦ But I’m still not optimistic ¦ Can more than that be said arising from angle issues? ¦ De Grey: at most `valency − 2` edges at a 4- or 5-valent vertex can have length 1 (rule 3's analogue).
+@09.22 ¦ Any tile vertex has a maximum and minimum angle ¦ narrow down the possibilities for arranging tiles around a vertex. ¦ Gibbs: each tile vertex has an angle range from its constraints; angles round a vertex sum to 360 degrees.
+@09.28 ¦ If you count our good tiles by numbers of sides ¦ but imposes more geometric constraints. ¦ Gibbs's counts: 78 tiles by sides and valency, 313 with edge–vertex constraints, 563 with vertex–vertex constraints; the grid search reached 6 by 10.
+@09.73 ¦ As you’ll recall, the roadblock ¦ each other’s annulus of exclusion), ¦ **De Grey: to cover more than about 2×2 needs "unscaleable tilings with curves as boundaries"**, which pixel methods miss; an exhaustive search of such tilings (Siamese pairs excluded) is under way.
+@09.74 ¦ But with that limitation acknowledged ¦ but I’m not sure I can prove it. ¦ De Grey's refined pixel criterion: a square of edge 3 six-colours, one of edge 4 does not, on coarse grids; he believes the method "overly permissive" but cannot prove it (a search, unproved as a refutation).
+
+### Small tiles, holes, and three dimensions
+@09.65 ¦ * ¦ * ¦ De Grey: tilings covering nearly all the plane with fewer than seven colours may point to six-colourings of the whole plane.
+@09.66 ¦ * ¦ * ¦ **Parts: a six-colouring of the plane with holes** (Pritikin-style; "attach round segments to some edges"; every unit-distance graph of order 6906 is six-colourable) — not a colouring of the whole plane.
+@09.90 ¦ * ¦ * ¦ Parts: tilings by small tiles, several inside a unit circle (Siamese in FS-110's words), need 8 or 9 colours in his examples.
+@09.91 ¦ * ¦ * ¦ Parts's definition: a tile is small if some circle (of unit diameter) contains it and part of another same-colour tile.
+@09.92 ¦ We’re seeing the same with Aubrey’s pentagon tesselation. ¦ allowing for the known 7-coloring. ¦ Hockertz: in de Grey's pentagon tiling "The curved boundaries break two more connections, allowing for the known 7-coloring."
+@09.95 ¦ * ¦ bringing the exclusion set size of the center cell down to 85. ¦ Hockertz's 3-D conjecture: a lattice–sublattice scheme with "unit distance radius arc hypersurfaces" reducing exclusion sets.
+
+### Claimed six-colourings of the whole plane
+> None in thread 9. Parts's six-colouring has holes (`[09.66]`); de Grey's pixel runs found no square of edge 4 (`[09.74]`).

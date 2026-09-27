@@ -107,6 +107,26 @@ fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11
      larger than about 4.5 across" (`[08.105]`).
 - **No six-colouring of the whole plane is claimed in thread 8.**
 
+## Stage 5 — SAVED (thread 9 read in full)
+
+- **Read:** thread 9, "Searching for a 6-coloring", all 105 comments (July 2 – August 28, 2018), text only (Gibbs's spreadsheets `philgibbs.uk/out*.csv`,
+  Parts's Google-drive figures, Hockertz's previews not held). The probability thread inside it (`[09.29]`–`[09.62]`, Tao's Propositions 35–36, Lemma 38)
+  and the bichromatic-origin and two-distance items (`[09.75]`–`[09.88]`) are off this milestone's object and are not extracted. 27 extracts, `spec_09.txt`.
+- **What thread 9 holds on this milestone's object:**
+  1. **The strip's width, from the thread's own construction** (`[09.100]`, Jaan Parts, August 27, 2018): "we can do much more already using Pritikin’s
+     style design, as it was described here: Polymath16, seventh thread: Upper bounds One should use the same infinite design without round boundaries. It
+     gives the width $\sqrt3 (1+\sqrt5/2) \approx 3.668$ ." That is `√3 + √15/2`, `[AxenovichEtAl2014]` Thm 4.2's number; with Gibbs's "a strip of
+     width 3.7 in thread 7" (`[09.15]`) and the thread-7 identity (Stage 3), **the thread's strip and the 2014 print's strip have the same height**. The
+     threads never cite `[AxenovichEtAl2014]` (grep: no "Axenovich" in threads 1–18? — checked in Stage 7). Whether they are the same tiling is for the
+     sides' rebuild (CAL-STRIP).
+  2. **Curved boundaries are needed past about 2×2** (`[09.73]`, de Grey): "the only way to cover more than about a 2×2 area is by using unscaleable
+     tilings with curves as boundaries" — stated, from the pixel searches' failures.
+  3. **Gibbs's enumeration state** (`[09.28]`): 78 / 313 / 563 tile types by the constraint level; the search for a six-tiling of the plane was planned
+     (`[09.20]`) and not reported finished in thread 9.
+  4. **Parts's six-colouring with holes** (`[09.66]`, August 1, 2018): Pritikin-style, "attach round segments to some edges", every unit-distance graph of
+     order 6906 six-colourable — the hole-density question of link 5 (FS-109's dial) in 2018 form, not a whole-plane colouring.
+- **No six-colouring of the whole plane is claimed in thread 9.**
+
 ## Would have searched here
 
 - Solving de Grey's column (`[07.10]`) as a constraint system to confirm it is `[AxenovichEtAl2014]`'s strip: not done (a derivation for the sides;
