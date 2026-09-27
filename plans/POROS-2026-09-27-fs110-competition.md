@@ -353,3 +353,58 @@ registrations were not each other's negation; each bet against the other's cheap
   either side (it rests on both sides' round-1 routes).
 
 ## Stage 4 — SAVED
+
+## § Continuation — FS110-A3
+
+*Poros (Opus 5.5), 2026-09-27, taking over at round 2. Brief: `data/fs110/briefs/A3-110-competition-advisor-continued.md` (wins where it differs)
+with FS110-A2's brief and `STANDING-RULES.md`. Sides: FS110-N2 (`adfbdc9b283eb0c65`, `plans/FS110-N-proof.md` § Continuation — FS110-N2) and
+FS110-Y2 (`adcd3fb432b11b1b7`, `plans/FS110-Y-construction.md` § Continuation — FS110-Y2). I touch only this section and `data/fs110/fs110-a3/`.
+Every result here is one mind (mine) unless marked.*
+
+### Theorems this phase proved (FS110-A3)
+
+- **A3-HOLE** — A2-V56's step "one colour cannot fill a unit circle" and the Act One combination's step "a switch point between the two outside
+  colours on `ω(v)` is a covering pair with `v`" both assume that `ω(v) ∩ Γ` contains no arc. When `ω(v)` carries unit arcs of `Γ` centred at `v`,
+  their side colours lie in `P_cl(v)` (TS-U), so the tile-interior arcs of `ω(v)` may each be shorter than `60°` and one colour each, separated by
+  those unit arcs, and an endpoint `y` of such an arc has `P_cl(v) ∪ P_cl(y) ⊇ P_cl(v) ∪ {a}`, five colours, not six. So A2-V56 is TRUE for vertices with
+  no arc of `Γ` on their unit circle and a **GAP** otherwise; the combination is TRUE for four-colour vertices whose unit circle meets the two outside
+  colours at a point, and a **GAP** at four-colour vertices whose outside colours are separated on `ω(v)` by unit arcs centred at `v`. [hand, one mind,
+  sketch; not a refutation — no such vertex is built, and TS-U's side-cone conditions at `v` may exclude it.] **Consequence:** "Act One's open case is
+  the maps whose every vertex has at most three colours" (A2 §4.4) is short by exactly the four-colour vertices that are centres of unit-arc seams —
+  the escaping centres of (S1). Act One's four-colour remainder and round 2's (S1) are one object.
+
+### Would-have-searched-here log (A3)
+
+- (none yet)
+
+### Fence log (A3)
+
+- `ls data/fs110/fs110-a2 data/fs110/reports` (my first commands) listed the **file names** in `data/fs110/reports/` (`FS110-A.md`, `FS110-N.md`,
+  `FS110-P.md`, `FS110-Y.md`); none opened. Disclosed.
+- Read, not fenced for me: both successor briefs (`N2-110-proof-continued.md`, `Y2-110-construction-continued.md`), `data/fs110/fs110-a2/`. Not read:
+  `plans/FS110-close-inventory.md`, `data/fs110/reports/`, the transcripts, `chats-bak/`, other scratchpad files.
+
+## Stage A3-0 — SAVED: quotation check and reading
+
+| quotation or fact in my brief | source | result |
+|---|---|---|
+| rule 0 (Kooshi, "From here on out … surprise yourself.") | `CLAUDE.md` § Counter-priors, read from disk | verbatim |
+| round 1: retractions N 1, Y 2, A2 0, all free; A-EXACT, A-CIRC, A-SIX three minds, D-TYPE two; C-CUSP-K TRUE two minds, different routes | A2 §4.1, §4.3 | matches |
+| "a seam point `w₀` with no unit arc is a vertex of degree ≥ 4, with alternating colours (N-X; Y-T2W)" | A2 §4.1 last row; N-X, Y-T2W | matches in sense; **scope:** N-X assumes disjoint types and no arc of `Γ` along any of the four unit directions at `w₀`; Y-T2W is the T2 sub-case with no reciprocal arc |
+| A2's combination "every tight six-map with a four-colour vertex has a covering pair at distance 1" | A2 §4.4 | matches; **its step is short at unit arcs centred at the vertex (A3-HOLE)** |
+| the owner's round-2 note and "a verbatim correction of its frame fact" | not on disk for me | **unread**: asked of the owner (stage A3-1 report) |
+| A2-V56's text as sent to both sides | `data/fs110/fs110-a2/round2-open.md` §C | read; quoted verbatim in card 2 |
+
+**Read from disk:** `CLAUDE.md` § The aim, § Counter-priors, G82, G51 (§ The aim on disk differs from the loaded copy: FS-106, FS-107 closed, rows 131–133,
+FS-110/111 named); A2's record in full; `data/fs110/claims.md` in full; `plans/FS110-N-proof.md` stages 1–3 (§1.3–2.6 in full); `plans/FS110-Y-construction.md`
+stages 1–3 (§1.4–3 in full, header); both successor briefs; `round2-open.md`; Poros core skill in full (companions not loaded: budget; to be loaded at an
+impasse). Not re-read: the planning advisor's record (A2 carried its hunches, §1.4, §4.5), `plans/FS110-tangency-seam.md`.
+
+**Clock slip (for the owner):** `date` read 09:53 UTC at my start, yet A2's record logs round-1 answers at "about 10:00", "10:15", "10:20" UTC on the
+same date. A2's times are not read from the clock, or the clock moved. I log only `date` readings.
+
+**First move (09:5x UTC, before this expectation was committed):** card 2 (`data/fs110/fs110-a3/card2.md`) sent to both sides at once, identical text:
+A3-HOLE as a question about A2-V56, with no route of either side. Sent first because it changes the proof side's Act One scope while retraction is free
+(G51); it carries a frame check, not a prediction.
+
+## Stage A3-0 — SAVED
