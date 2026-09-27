@@ -426,3 +426,45 @@ G79's example invariant in its first form: what every unit arc's centre carries 
 - `data/fs112/reports/FS112-N.md`, `FS112-NB.md` — read against: their records — surprised: no. The NB report's "letter-for-letter" matches its §2.3.
 
 ## Stage 3 — SAVED
+
+---
+
+# § Continuation — FS112-A3
+
+*Poros (Opus 5.5), 2026-09-27, taking over from FS112-A2 (replaced at about 480k tokens) for the construction half's comparison and round 2. Brief:
+`data/fs112/briefs/A3-112-competition-advisor-continued.md` plus A2's brief, with `STANDING-RULES.md`. HEAD at launch `c9d22f72`. Working directory
+`data/fs112/fs112-a3/`. The proof side's successor FS112-N2 (agent `ad14d810fd7717a7e`) is running; the construction side has no successor yet. This
+section never rewrites A2's stages. **Label note:** A2's stage 2b follows Y in calling `(3/2, 0)` "`P_2`"; by Y's own formula `P_j = (j/2, 0)` it is
+`P_3` (YB's D1). Below, `P_j = (j/2, 0)` throughout, in Y's colour labels 1–6.*
+
+## A3: theorems this continuation proved
+
+*(none — an advisor's record. The derivations below are hunches with basis "derived", handed to nobody as results.)*
+
+## A3: would-have-searched-here log
+
+- Would have computed the strip's end-vertex tangent margins numerically for every arc to price `a2-arc-ends-bind`. Instead: by hand from the exact
+  quadrant sectors at `P_1` (YB O1) and the eight end directions, at one midline vertex; the translation symmetry carries it to the rest.
+- Would have enumerated the strip's covering pairs and their common unit points to classify every seam. Instead: read YB's exhaustive list
+  (`strip-objects.txt` as summarised in YB O2–O3) and derived the two overlapping pairs' seams by hand (A3-1.6).
+
+## A3: fence log
+
+- Not a blind job. Read per my brief: `plans/FS112-Y-construction.md` (stages 1–2 in full), `plans/FS112-YB-verification.md` (stages 1–5 in full), the
+  reports `FS112-Y.md`, `FS112-YB.md`, `FS112-N.md`, `FS112-NB.md` (the brief: "all reports in `data/fs112/reports/`; the records are yours to read").
+  Also `plans/FS112-N-proof.md` in full, including FS112-N2's stage 1 (committed `b0356886` after my launch), and NB §1.5–1.6 by grep.
+- Not opened: `plans/FS112-close-inventory.md` (fenced by A2's brief; mine does not lift it); the transcripts; `chats-bak/`; scratchpad files I did not
+  create (I work in `scratchpad/fs112-a3/`).
+
+## Stage A3-0 — SAVED: quotation check (standing rule 5)
+
+| quotation in my brief | source | verdict |
+|---|---|---|
+| A2's §3.5 confidence clause: "The fact that would change it: **N's own registrations N112-P1 and P2** (the strip's arcs all (Q), with rings inside it). If they are confirmed exactly at the end vertices — arc-closed (Q) centres in a held valid object — then the end-vertex analysis cannot end in a local exclusion." | this record, stage 3 §3.5 | **verbatim** (the brief drops the leading "**Confidence: medium.**", outside its quotation marks) |
+| Y's §2.5 list: "CAL-DISK with Fig. 10 transcribed first, the dial past 3.668, a `κ = ±1` horn fragment, C-HOCK on A6-C2" | `plans/FS112-Y-construction.md` §2.5 items 1–4 | the brief's own words, outside quotation marks; faithful to items 1–4 |
+| standing rules 0, 3, 4, 10's quotations of Kooshi | `CLAUDE.md`; `plans/CONSOLIDATION-2026-09-27.md` | `STANDING-RULES.md` unchanged since `1e8afbe4`, before A2's stage 0, which found all verbatim; rule 4's re-checked against `CLAUDE.md` item 23 on disk: verbatim |
+
+`CLAUDE.md` read from disk: since `e133253b` it changed in § The aim link 2 (`[GwynStavrianos2022]`), the prior-art paragraph, and the ranked table
+(FS-113 ranked 8; FS-112's row now cites `[Polymath2021]` p. 199 and `[Parts2021]` p. 182). Nothing in my brief depends on those lines.
+
+## Stage A3-0 — SAVED
