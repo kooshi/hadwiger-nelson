@@ -53,3 +53,105 @@ sector is a **horn** between arcs 45 and 46, of curvatures `κ45 ≠ κ46` measu
 ### Would have searched here (standing rule 3)
 
 - (none yet)
+
+## Stage 2 — SAVED (the derivations, and their exact checks)
+
+Frame of §1.2: cusp vertex u = 0, `c(u) = {4,5,6}`, horn of colour 4 along `τ = (1,0)` between arcs 45 and 46 (signed curvatures `κ45 ≠ κ46`
+toward `n = (0,1)`, each `≠ ±1`), arc 56 with tangent `τ56`. `x_ij(δ)`: the point of arc ij at distance δ from u, unique for `δ < δ0`, where
+`δ0` is so small that `B(u, δ0)` meets no boundary but the three arcs and each arc meets every circle `∂B(u, r)`, `r ≤ δ0`, once (local
+finiteness; circle arcs through u are radially monotone near u). Then `B(u, δ0)` minus the arcs has exactly three components, one per sector,
+the horn component being `{points between arcs 45 and 46}`, of angular width `w(r) = |arcsin(κ45 r/2) − arcsin(κ46 r/2)| > 0` at radius r.
+
+### C1 — S–V Prop. 2, AE, with a horn tile (item (b))
+
+**Claim.** If `sign(|z − u| − 1) = −sign(|z − x_ij(δ)| − 1) ≠ 0` for some `δ < δ0`, then `i, j ∉ c(z)`.
+*Proof.* For each tile T ∈ {the i-tile, the j-tile} along arc ij near u there is a path P ⊂ T from a point p with `|p − u| < ||z−u| − 1|` to
+a point p′ with `|p′ − x_ij(δ)| < ||z − x_ij(δ)| − 1|`: T's component of `B(u, δ0)` minus the arcs has the whole arc ij in its closure, so
+take P = the arc pushed into T by an angular offset `ε(r) < w(r)` (horn) or `< ` the sector's width (flank), for r from `|p|` to δ, ending
+within the required distance of `x_ij(δ)`. Then p and p′ lie on opposite sides of `ω(z)`, P crosses `ω(z)` at an interior point of T, and
+(P) sweep (CB D1) gives `colour(T) ∉ c(z)`. ∎
+**The one care a horn needs.** Along the normal the margin at the far end is second order: by C2, `||u + n − x_ij(δ)| − 1| ≈ |1 − κ_ij| δ²/2`,
+the same order as the horn's width there, `≈ |κ45 − κ46| δ²/2`. So the path cannot run down the horn's middle to its end; it must hug the arc
+within that margin at the far end. It can, because `x_ij(δ)` is a boundary point of the horn, so horn points lie within any distance of it.
+**(b) is TRUE.**
+
+### C2 — the sign along a cusp's normal, exactly (item (a))
+
+A circle arc of signed radius R (curvature `κ = 1/R` toward n) tangent to τ at u, `x(m) = (2Rm/(1+m²), 2Rm²/(1+m²))`, satisfies
+**`|u + n − x(m)|² − 1 = 4R(R−1)m²/(1+m²)`** and **`|u − n − x(m)|² − 1 = 4R(R+1)m²/(1+m²)`**; a segment along τ gives `s²`. So along `±n` every
+number has the sign of `1 ∓ κ` **at every point of the arc, for every δ**, and is never 0, since `|κ| ≠ 1` (Condition 5). For every other
+direction e, and for any arcs at all (curved Jordan arcs included): each arc from u meets `ω(u+e)` in finitely many points (Condition 5), u
+among them, so there is `δ_e > 0` with `x_ij(δ) ∉ ω(u+e)` for every `δ ∈ (0, δ_e)` and all three arcs; `N_e` then comes from continuity.
+**(a) is TRUE, in a stronger form than CB states:** not "a suitable δ" but every small δ, and exactly along the normal. What the cusp changes is
+only the sign pattern there: the two horn arcs may disagree along `+n` (one curvature above 1, one below; checked instance `κ = 3, 1/2`: signs
+`(−, +)`), and then the third arc fixes the majority and hence the strip's side; at a double cusp all three signs are curvature-set.
+Checked: `tools/fs110_cc_cusp.py` C2 (sympy identities; the a6 horn `κ = ±1/2` with the segment, all `+` along `±n`; the straddling horn).
+
+### C3 — any two arcs border all of {4,5,6} (item (c))
+
+The three arcs carry the labels 45, 46, 56 at a cusp exactly as at an ordinary vertex (the horn 4 lies between 45 and 46, flank 5 between 45
+and 56, flank 6 between 46 and 56; at a double cusp the same labels, two horns and one 360° sector), and any two of `{45, 46, 56}` have label
+union `{4,5,6}`. **(c) is TRUE.** With C1–C3, CB's strip goes through word for word: on side `σ_e`, at least two arcs have
+`sign(|z − x_ij| − 1) = −sign(|z−u| − 1)`, C1 removes their four labels, C3 says those are all of `{4,5,6}`.
+
+**Instance, read off the a6 fragment** (its frame has `c(v) = {1,2,3}`, horn 1 along `+a`, `κ = ±1/2`, the 2|3 segment along `−a`): along
+`+n` all three signs are `+`, so the strip lies **inside** `ω(v)` at `N = v + n`. The fragment puts its colour-1 out-tile and its colour-3
+sector **outside** `ω(v)` at N and the ring colour 4 inside: exactly the side C2 predicts, and `c(N) = {1,3,4}` with pseudo-colour `{4}`.
+
+### C4 — D5 item 5 with a horn at the centre u
+
+CB's step "by (P) at u (z = x_i + t e_i reaches u's q_i-sector at radius ≈ t/⟨d, e_i⟩) u's q_i-sector lies in `{⟨d, e_i⟩ ≤ 0}`" needs, for
+a horn of colour `q = q_i` along τ: **if `⟨τ, e_i⟩ > 0`, then `ω(u + (1+t)e_i)` meets the horn's interior for all small t > 0.** *Proof:*
+`|u − z| = 1 + t > 1` while `|x_45(δ0) − z|² = 1 + 2t − 2δ0⟨e_i, τ⟩ + O(δ0², tδ0) < 1` once `t ≪ δ0⟨e_i, τ⟩`; so arc 45 crosses `ω(z)`, at
+radius `≈ t/⟨τ, e_i⟩`, transversally (its tangent ≈ τ is not ⊥ `e_i`), and on one side of arc 45 there lies the horn. ∎ So the horn's one
+direction τ obeys CB's cone condition, and the count closes as CB wrote it: sector angles still sum to 360° (0 for the horn), each colour class of
+the q's has exactly two members with a cone of 60° or 0° (a 0° cone is the line `⟨d, e_i⟩ = 0`, which holds a horn and no sector of positive
+angle), a class of three leaves the cone `{0}`, which holds no horn either; the other two sectors need 360° from cones totalling ≤ 120°. A double
+cusp (one sector of 360°) fails the same count. Along the normal (`⟨τ, e_i⟩ = 0`) the first-order condition is void and the exact truth is second
+order: `ω((0, 1+t))` meets a boundary circle of curvature κ tangent to τ at u, near u, **iff κ > 1** (intersection `y = t(2+t)κ/(2(κ(1+t)−1))`,
+`x² = y(2/κ − y)`), so there the horn is met iff its larger curvature exceeds 1 — an extra constraint CB does not need.
+Checked: C4 (an exact certificate on the a6 horn with `e = (3/5, 4/5)`: a vertical segment strictly inside the horn on which `|p − z|² − 1` changes
+sign) and C4′ (κ ∈ {3, 2, 3/2, 11/10, 9/10, 1/2, −1/2, −3}, t ∈ {1/100, 1/10⁴}).
+
+### C5 — D5 item 5: no hexagon vertex is a cusp; and the case CB's "interval structure" leaves unwritten
+
+At a hexagon vertex `x_i` (outward normal 0°; Ω's tangent ±90°), with `c(x_i) = {c_{i−1}, c_i, q_i}`, `q_i ∈ {4,5,6}`, six branch constraints hold:
+(Ω+) Ω's branch at 90° lies in the `c_i`-tile and (Ω−) its branch at 270° in the `c_{i−1}`-tile (pseudo-colours; (P) from u keeps the q-tile off
+Ω); (B1) `ω(x_{i+1})`'s branches at 30°, 210° lie in `c_{i−1}`- or q-tiles; (B2) `ω(x_{i−1})`'s at 150°, 330° in `c_i`- or q-tiles ((P) from
+`x_{i±1}`). A branch lies in the tile whose sector holds its tangent; at a boundary tangent (a horn's included) in some tile adjacent there,
+decided by curvature (never along the boundary: Condition 5).
+**Claim.** Every placement of the three sectors satisfying the six constraints has no sector of zero width (**no cusp, no double cusp at `x_i`**),
+has 0° strictly inside the q-sector, and sends both ±30° branches into the q-tile.
+*Proof, by hand.* **(q a horn.)** A horn holds at most one of the four branch tangents and neither Ω branch; if the 30° branch is not in it, it
+is in `c_{i−1}`, so `c_i` — an arc of directions ending at τ and at the third tangent b, holding 90° and neither 30° nor 270° — lies in
+[30°, 270°]; then 330° must be the horn's τ, an endpoint of `c_i` outside [30°, 270°]; contradiction; symmetric if the 330° branch is not in it.
+**(`c_{i−1}` a horn.)** It must hold the 270° Ω branch, so τ = 270°; then 30° and 210° lie in q, a flank whose endpoints are 270° and b; an arc
+of directions holding 30° and 210° holds 90° or 270° inside it, and neither is possible. **(`c_i` a horn):** mirror. **(No horn, q inner,
+i.e. q ⊂ [90°, 270°]):** then 30° ∈ `c_{i−1}` and 330° ∈ `c_i`, so the outer boundary b0 between `c_i` (counter-clockwise of it, holding 90°)
+and `c_{i−1}` must satisfy b0 < −30° and b0 > 30°. **(No horn, q outer):** 150° ∈ `c_i`, 210° ∈ `c_{i−1}`, and 30°, 330° ∈ q as CB says. ∎
+The fourth case is not in CB's text ("the interval structure of the three sectors forces the q_i-sector to contain [−30°, 30°]"): **CB's claim is
+true, and the inner-q case closes by the same four branch constraints**; that is a completion, not a gap.
+Checked: C5, an exhaustion of all placements of three tangents on the twelve positions {0°, 30°, …, 330°} (odd = exactly a branch tangent,
+where the branch may enter any sector adjacent there; even = an open cell, which holds no branch, so the image is every real placement), all six
+colour orders: 27 admissible, 0 violations.
+
+### C6 — D1's (P′) at a cusp vertex
+
+(P′)'s proof uses only that the boundary arcs through x meet `ω(y)` finitely, so that the two punctured branches of `ω(y)` near x each lie in one
+tile. At a cusp x a branch tangent to τ lies in the horn or a flank (its curvature 1 differs from both horn curvatures), still one tile; at a
+double cusp likewise. **TRUE; nothing in it depends on tangents.** Instance: in the a6 fragment `|v − N| = 1`, `c(N) = {1,3,4} ⊄ c(v) = {1,2,3}`
+and `c(v) ⊄ c(N)`.
+
+### Plants (standing rule 7), each fired for its named reason
+
+- `--plant kappa1` (C2 at κ = 1): the normal's number is **0** on the whole arc (`[0, 1, 1]`): the arc lies on `ω(u + n)`, which Condition 5 forbids.
+  `data/fs110/fs110-cc/cusp-check-plant-kappa1.out`.
+- `--plant noOmega` (C5 without (Ω±)): 500 admissible placements, 374 violations, the first a **double cusp at 0° with q the 360° sector** — a
+  q-tile meeting Ω, exactly what the dropped constraint forbids. `data/fs110/fs110-cc/cusp-check-plant-noOmega.out`.
+- Unplanted: `data/fs110/fs110-cc/cusp-check.out`, "ALL AS PREDICTED", exit 0.
+
+### Would have searched here
+
+- C5: I would have swept random tangent triples and curvatures numerically for a cusp hexagon vertex; instead derived the four-case exclusion and
+  checked it by exhausting the twelve-position image (a finite check of a derived claim, not a witness search).
+- C4: I would have sampled circles `ω(z)` numerically near the horn; instead wrote an exact rational sign-change certificate on a segment inside it.

@@ -1,0 +1,29 @@
+ok    C2: x(m) lies on the circle centred (0,R) of radius |R| through u, tangent to tau
+ok    C2: |u + n - x(m)|^2 - 1 = 4*R*m**2*(R - 1)/(m**2 + 1)
+ok    C2: |u - n - x(m)|^2 - 1 = 4*R*m**2*(R + 1)/(m**2 + 1)
+ok    C2: segment along -tau: |u + n - (-s,0)|^2 - 1 = s^2
+ok    C2 a6 horn (kappa +1/2, -1/2, segment): signs along +n = [1, 1, 1] (want [1, 1, 1]; None = mixed or zero)
+ok    C2 a6 horn (kappa +1/2, -1/2, segment): signs along -n = [1, 1, 1] (want [1, 1, 1]; None = mixed or zero)
+ok    C2 straddling horn (kappa 3, 1/2, segment): signs along +n = [-1, 1, 1] (want [-1, 1, 1]; None = mixed or zero)
+ok    C2 straddling horn (kappa 3, 1/2, segment): signs along -n = [1, 1, 1] (want [1, 1, 1]; None = mixed or zero)
+ok    C4: the segment {r} x [-w, w], r = 0.00166815, w = r^2/8, lies strictly inside the a6 horn
+ok    C4: |p - z|^2 - 1 changes sign on it (5.57e-07, -5.57e-07): omega(z) meets the horn, <tau,e> = 3/5
+ok    C4': kappa = 3, t = 1/100: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 3, t = 1/10000: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 2, t = 1/100: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 2, t = 1/10000: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 3/2, t = 1/100: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 3/2, t = 1/10000: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 11/10, t = 1/100: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 11/10, t = 1/10000: omega((0,1+t)) meets the arc near u: True (want True)
+ok    C4': kappa = 9/10, t = 1/100: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = 9/10, t = 1/10000: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = 1/2, t = 1/100: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = 1/2, t = 1/10000: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = -1/2, t = 1/100: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = -1/2, t = 1/10000: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = -3, t = 1/100: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C4': kappa = -3, t = 1/10000: omega((0,1+t)) meets the arc near u: False (want False)
+ok    C5: 27 admissible placements; none has a cusp/thin sector, a q-sector missing 0 deg, or a +-30 deg branch outside q (0 violations)
+ALL AS PREDICTED
+exit=0
