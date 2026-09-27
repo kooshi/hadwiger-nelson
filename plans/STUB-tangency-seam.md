@@ -1,5 +1,7 @@
 # FS-110 — the tangency seam: does a tight six-map exist whose close complementary vertices are all tangent pairs, bowties or cusps? (stub)
 
+**[CLOSED 2026-09-27 — FS-110 closed at `plans/FS110-tangency-seam.md` §R-close (row 134): under Condition 5 no curved map six-colours the plane almost everywhere, the Condition-5 half of S–V Question 2 answered yes; the unit-arc half is FS-112, `plans/STUB-unit-arc-half.md`.]**
+
 *Minted 2026-09-27 by the close planner FS107-C at FS-107's close (`plans/FS107-close-inventory.md` items 23, 25, 28–31; the owner's ruling, item 28:
 "the tangency-seam question opens as its own milestone with a fresh reframe"). **Solver column: none** — derivation by hand; a candidate map given by
 formula may be checked exactly (a check of a given object, allowed at all times), and nothing is searched (Kooshi: *"search for a finite graph is out.
