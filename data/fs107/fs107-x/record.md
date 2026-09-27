@@ -92,3 +92,40 @@ address "`plans/STUB-regularity-wall.md` § FS-107"), `δ₀`, `δ₀|U_R` (FS-1
 
 **Gates on the stage's tree** (exit status read directly): fact audit `--base 66f1f51a` exit 0, AUDIT PASSED (LOST 0; homed outside 6); `--dupes`
 10; § B `--strict` exit 0; `bib_audit` exit 0; `check_architecture` exit 0. **`CLAUDE.md`: 299,242 → 299,438 bytes** (under 300,000 by 562).
+
+## Stage 4 — SAVED: `BIBLIOGRAPHY.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`, the protocol
+
+**`BIBLIOGRAPHY.md` (4.3):** `[MundingerEtAl2025]` held at its path, read §1 "Variant 1", §4.1 with Table 1, App. B's pipeline paragraph (FS107-P),
+FS-107 bearing added, and a held-copies row; `[DeCorteOliveiraVallentin2022]` §6.1 (Lemmas 6.1–6.2) read (the plan's §PA row 2 says "§6.1 in full",
+so "NOT read" now says "any other proof … §6 bar §6.1"), bearing added, held-copies row gains §6.1; `[Voronov2023]` "§§2–6 re-read in full
+(FS107-R)"; `[Parts2020c]` the void area per cell (FS107-V). Listing rows: `[Bukh2008]`, `[CroftFalconer1981]`, `[Croft1967]` exist — each gains an
+FS-107 note; **new § C rows** `[FalconerMarstrand1986]` and `[HoffmanSoifer1993]`, their titles, authors, pages and Zbl numbers checked against the
+zbMATH Open API (seconds; the drafts gave neither title nor first names for the first) — Falconer–Marstrand: *Plane sets with positive density at
+infinity contain all large distances*, Bull. Lond. Math. Soc. 18 (1986) 471–474, Zbl 0599.28008; Hoffman–Soifer: Geombinatorics 3(2) (1993) 38–40,
+Zbl 0845.05037, with a correction, 3(3) (1994) 102, Zbl 0845.05038. `[Townsend2005]` already carries "requested"; unchanged. "OpenAlex not run" as an
+R.6 debt row. No `CLOSED-QUESTIONS.md` draft exists in §R-close: nothing applied there.
+
+**`plans/FRONTIER-STUBS.md` (4.4):** the closed list's first entry (FS-107); the header note (FS-106's replaced by FS-107's, as drafted); rows 1–2
+FS-110 and FS-111 (item 36); old ranks 2–63 renumbered 3–64 (FS-107's row removed); FS-104 (rank 3) "sub-question of row 131's question", and its
+rank label "Rank 2 since FS-106's close, below FS-107" → "Rank 3 since FS-107's close, below FS-110 and FS-111 (item 36)" — the label was a
+current-state fact the renumbering falsified; FS-109 (rank 4) question and solver cells as drafted, **and its bearing "a dial on FS-107's question" →
+"row 131's"**, mirroring 4.2's `CLAUDE.md` edit (4.4 names only the question and solver). **The Open-milestones paragraph** mirrors 4.2's
+`CLAUDE.md` text (4.4 has no draft for it; it named FS-107 as next).
+
+**The mirror, checked by script:** `CLAUDE.md` ranks 1–29 equal `plans/FRONTIER-STUBS.md`'s, and the bucket `30–64` lists ranks 30–64 in order (35
+of 35).
+
+**`plans/GROKKING-INSTANCES.md` (4.5):** seven instances, each text extracted verbatim from 4.5 by script and placed at the end of its entry's
+section (§G51 ×3, §G72, §G79, §G21, § Make the gate fail). Two drafts had no italic header; I wrote house-form headers ("under the fence rule";
+"the rule 'quote statements verbatim in briefs'"). The first wording of the latter repeated FS106-X's header for ten words and raised `--dupes` to
+11; reworded, back to 10.
+
+**`plans/PROTOCOL-competitor-and-advisor.md` (4.6):** the §1 rule 1 amendment, the harness note, and the ninth run before "The next use", all
+verbatim from 4.6's blockquotes (wrapped to the file's width). **One deviation, decided here:** 4.6's replaced span ran through "**The advisor may
+read exactly the two working files**, and **each competitor is told, in words, not to open the other's file until it has handed back.**", and the
+replacement text omits both. I kept them, verbatim, after the amendment. Alternative: drop them as drafted — then the new sentence "each
+competitor's record … named by path in every other job's fence" reads as fencing the advisor off both records, against FS-107's own practice
+(A107b rule 5: "You may read exactly the two records named in the briefs"). Confidence high; the owner may strike them.
+
+**Gates on the stage's tree** (exit status read directly): fact audit `--base 66f1f51a` exit 0, AUDIT PASSED; `--dupes` 10; § B `--strict` exit 0,
+PASS; `bib_audit` exit 0; `check_architecture` exit 0. `CLAUDE.md` 299,438 bytes.

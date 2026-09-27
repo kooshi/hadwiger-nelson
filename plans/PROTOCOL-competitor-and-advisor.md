@@ -29,16 +29,23 @@ disagreement before anything is paid for, and count the retractions — zero mea
    blind brief fences all three by path, forbids `git log -p` on fenced paths, and gives the job its own subdirectory
    `scratchpad/<job id>/`, to create, list and read files only there; a job that lists the shared root, or opens a file it did not
    create, logs it as a fence touch.
-   **The working files and the advisor's record live in those scratch directories until hand-back, never in `plans/`** — every
-   agent reads `plans/`, so a competitor's file there is the same covert channel one directory up (FS-73: the first drafts put
-   them in `plans/`; the owner caught it before launch). **The advisor may read exactly the two working files**, and **each
-   competitor is told, in words, not to open the other's file until it has handed back.** At hand-back the owner moves the files
-   into `plans/` and commits them. **Hand-backs are content-free, and every report goes by an explicit message to a named recipient**
+   **Records live in `plans/`, fenced by path and committed per stage** (FS-107, 2026-09-27, the owner's ruling, inventory item 9). Each
+   competitor's record and working directory, and each advisor's record, are named by path in every other job's fence, with a rule
+   excluding them from every grep; commit subjects are neutral; listing a fenced directory is a fence touch, logged and disclosed. The
+   reason: the checkpoint rule is PROTECTED (a stage lost to a crash costs a stage, not a job), and the harness scratchpad is itself a
+   recorded covert channel (FS-105). History: FS-73's first drafts put records in `plans/` unfenced and the owner moved them to scratch;
+   FS-107 moved them back, fenced. **The fallback is worktree isolation** (`isolation: "worktree"`) for the next round's competitors
+   after any disclosed fence touch that crossed content (FS107-A's proposal, item 10). **The advisor may read exactly the two working files**, and
+   **each competitor is told, in words, not to open the other's file until it has handed back.**
+   **Hand-backs are content-free, and every report goes by an explicit message to a named recipient**
    (FS-79, 2026-09-24): the harness delivers an agent's hand-back to **whichever agent last woke it**, not to the one that launched it,
    so when a competitor's message resumed the advisor, the advisor's interim hand-back — its status notes and Coxeter's progress —
    reached de Bruijn, who disclosed it at once and fenced off what it had seen. Every hand-back is exactly "<name> idle; no content in
    this hand-back; my reports go to the owner by SendMessage", every report to the owner goes by SendMessage to "main", every card to a
    competitor by SendMessage to that competitor, and a background watcher's completion is treated the same way.
+   **A competitor's message to an idle advisor resumes it, and the advisor's hand-back notices then route to that competitor** (FS-107,
+   item 22: W woke the advisor, and the advisor's content-free hand-backs reached W, not the owner) — content-free hand-backs make it
+   harmless; and no hint goes to an agent after its hand-back, because the hint resumes it (item 27).
    **The fence reaches the owner's own writes and the commit log** (FS-85, 2026-09-24). The owner wrote round-1 progress of both sides
    into the close inventory, a successor preamble into `data/fs85/briefs/` and descriptive commit subjects — all readable by every agent;
    and the harness's session-start snapshot prints **the last five commit subjects** to every newly launched agent, which is how a
@@ -251,6 +258,23 @@ records `plans/FS89-S0A-gluing-verification.md`, `plans/FS89-S0B-band-set.md`, `
   of contesting. **Lesson:** two routes to one heart are a synthesis, not a competition; FS-107's split puts a construction against a proof, the
   shape where contest is possible (A2 §3.7). The retractions were free throughout (TS 0 of truth before SB, TQ 1 at the endpoint, QB 1, A 1, the
   owner 0 of truth).
+
+**The ninth run: FS-107, stability (2026-09-27) — a construction against a proof, a blind verifier per side.** Records: the plan
+`plans/FS107-stability.md` (§R-close), `plans/FS107-close-inventory.md`, R `plans/FS107-R-stability.md`, W `plans/FS107-W-near-colourings.md`, V
+`plans/FS107-V-verification.md` (blind on R), VW `plans/FS107-VW-verification.md` (blind on W), the advisors' `plans/POROS-2026-09-27-fs107-stability.md`
+(planning) and `plans/POROS-2026-09-27-fs107-competition.md` (competition).
+- **Staffing.** Planner P with advisor A; then R, W and a fresh competition advisor A2 (A stood idle at 306k by the harness, its own count "≈60k");
+  V and VW took the competitors' slots at hand-back. Three agents at once throughout.
+- **Budget anchors** (the harness's where reported, own counts beside): P ≈245k (own ≈140k); A2 ≈185k (own ≈120k); A 306k at idle; R, W, V, VW
+  reported own counts only (≈255k, ≈220k, ≈135k, ≈125k) and marked the harness's unknown — none passed an own count off as the harness's.
+- **Records in `plans/`, fenced by path** (§1 rule 1 as amended): two listings of a fenced directory, disclosed, no content crossed.
+- **Incidents.** W's message resumed the idle advisor and routed its hand-back notices to W; A2 sent a movement-only hint after W's hand-back, which
+  resumed W (content-free re-hand-back); two quotation slips in briefs; a theorem line that dropped its lemma's hypotheses.
+- **Findings about the design.** The two programmes met at one object: R's reduction (a forced complementary pair plus a scale bound) and W's two
+  doors are one split (A2 §5.1), and the registrations, made before any work, bracketed the open step — each side's reason the other's negation.
+  No divergence of truth between the competitors; **all three came from the blind verifiers**, as at FS-106. Retractions R 2, W 1, A2 0 (one hunch
+  killed), all free. **Lesson:** a construction against a proof locates the question more than it contests it; the verifier per side is where the
+  contest happens — keep it, and brief the next round (FS-110) on the meeting point, not on either side's programme.
 
 **The next use** (G51's *Do*): FS-91's first question — a blind verifier given FS89-PA-B2's and PA-B3's statements (two minds reached the
 same widening from one lemma, so it is not yet evidence) — then FS-80's window-frequency certificate, or FS-76's rank-1 proof, routes two

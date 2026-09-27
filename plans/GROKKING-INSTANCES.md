@@ -40,6 +40,10 @@ A list of exceptions measures the class it was derived in: the advisor's 'the ta
 
 **And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question.
 
+*FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 3.1, M3 and M4):*
+
+A theorem line is a quotation surface: FS107-R's 'Theorems this phase proved' line for its cone lemma compressed §3.2's Claim 2 and dropped the scale bound, the void bound and the definition of blocking, and the blind verifier's MISSTATED was earned by the line, not the lemma (FS107-V §4.1). And a list of exceptions measures its class: FS106-TAN listed C-T-TAN's failures as cones, cusps and weak-* blow-ups; FS107-W's W-TAN took 'every vertex a cone point' and missed that a cusp is a cone of angle 0 at which the multicolour drops to two (FS107-VW §4 item 4).
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -239,6 +243,18 @@ FS-106's three paraphrases in quotation marks: the owner's re-brief glossed C-AE
 
 **Its runs** (FS-73, FS-79, FS-81, FS-85, FS-86, FS-89; each recorded, with its retractions and budgets, in the protocol's §3): first routes converge more often than they diverge (FS-73's heights, FS-79's edge-local heights, FS-85's abstract yes), and at FS-86 the sides converged twice without contact (HD1 for finite type; the measure-rigidity obstruction, G76); the contest has moved from between competitors to verification — *"the disagreement never started; verification is where contest must begin"* (FS-85) — where blind verifiers, quiet during a live competition, found every divergence and none of truth while retractions stayed free (FS-86: de Bruijn 2, Coxeter 1, Poros 0); FS-89 ran one derivation agent and blind verifiers: the second verifier's blind route stalled and D's lemma statements closed it — blindness bought a re-derivation of every lemma, not a second route; a verifier checks a fixed statement and cannot supply a missing route (FS-81). Every run found a covert channel (the list: the protocol's §3).
 
+*FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 4.5):*
+
+The ninth run, FS-107, a construction against a proof with a blind verifier per side: the two programmes met exactly (R's reduction and W's doors pair up, A2 §5.1) and never contested a truth; all three divergences of truth (OB′, RR ⟹ C-VOID, W-TAN at cusps) came from the blind verifiers. The registrations bracketed the open step before any work. Its record: `plans/PROTOCOL-competitor-and-advisor.md` §3, the ninth run.
+
+*FS107-X at FS-107's close — the rule "quote statements verbatim in briefs" (FS107-C, `plans/FS107-stability.md` §R-close 4.5):*
+
+FS-107's slips (inventory items 2, 21; §R-close 1.0): the advisor brief's 'C-Q-LOCAL (local repairs cost `O(ε²)`)' — the `O(ε²)` is A8b's; the W brief's 'a corner-circle rule is only sufficient' for the source's 'may be only sufficient'; and at the close the owner's launch message put the inventory's paraphrase of FS107-V's C5 in quotation marks, and its brief stated FS-110's question without A2's 'a candidate' and 'for locally finite arc-bounded maps'.
+
+*FS107-X, FS-107's close, under the fence rule (FS107-C, `plans/FS107-stability.md` §R-close 4.5):*
+
+FS-107's fence listings (items 17, 27): both competitors listed `data/fs107/reports/` at their first command and saw `FS107-P.md` by name, unopened; R also saw the directory names `fs107-a`, `fs107-p`. Disclosed at once; no content crossed. A listing of a fenced directory is a touch.
+
 ## G54 — Tight or slack
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -294,6 +310,10 @@ Fifteenth, FS-105 (`plans/FS105-harden-mr.md` §R-close 3.3): the other kind. A 
 
 Sixteenth, FS-106: the other kind — its headline (row 131) from a prior-art recognition (S–V §9) and row 130's weak-* compactness extended to the slack side; the structural form (what every a.e.-proper colouring carries on its circles) produced TS's lemmas and the index no-go (row 132). And G72 at ranking time: with an equivalence on the table, the planner and the advisor still ranked a special case (S–V's Question 2) first as 'the wall' (A2 §2.3 rule 1).
 
+*FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 3.3):*
+
+Seventeenth, FS-107: through — the meeting point and R's reduction came through §IQ's candidate (b), the junction-type structure every tiling member carries, and W-TAN is candidate (b) read as a rule; W-EQ-K came from the generator-image rule and compactness, an extension of a known tool. Mixed, counted through because the milestone's product, FS-110's question, is candidate (b)'s object.
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -307,6 +327,10 @@ FS-105: B's EF_F⁺ from an example invariant of the acting group (the height co
 *FS106-X, FS-106's close (FS106-C, `plans/FS106-regular-half.md` §R-close 3.3):*
 
 FS-106: TQ-EQ from an example invariant (the weak-* limit colouring every near-covering family carries), D1 and TS-T likewise; the walls from counterexample invariants — C5 and the swap (what W's limit must carry where the index fails), TQ-HIT, the pixel lemma; the one flip, PD-EQ (the band-pair fraction every CP colouring drives to 0), located R's decisive quantity (one mind, sketch).
+
+*FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 3.3):*
+
+FS-107: SAT and W-EQ-K from example invariants (the open six-sighted hole set every saturated colouring carries; the tight map every bounded vanishing-holes family carries as its limit); CP, SW, OB′, W-POLY and HX-STALL counterexample invariants. The flip ran once and made the synthesis: W-TAN is C-T-TAN's no-go read as the rule every door-(A) solution carries, and it met R's CP at one object. No breakthrough of either kind.
 
 ## `CLAUDE.md` § Delegation — one level deep
 
@@ -424,3 +448,7 @@ TQ §4.4 scored the advisor's 'robust Voronov, linear in ε' on uncovered area o
 
 **Fourth instance (FS-79 phase 0): a waiter on the log of a chain
 that had already been killed and replaced** — its condition could never become true, and it was found only at the phase's end.
+
+*FS107-X, FS-107's close, under "exactly one thing may differ" (FS107-C, `plans/FS107-stability.md` §R-close 3.1, M2):*
+
+FS107-R's prediction P1 compared `(t₁ − 2r)(t₁′ − 2r′)`, an absolute area, with `δ₆`, a fraction of the plane; the blind verifier caught it and named the right comparison, the Parts void area `≈ 6.6·10⁻⁵` per cell of area `≈ 0.461` (FS107-V §4.2).
