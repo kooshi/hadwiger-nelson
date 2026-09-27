@@ -35,3 +35,29 @@ None — no search is in scope.
 
 **The simulation.** `budget_sim.py`'s output diffs against `CLAUDE.md` exactly in 4.2's places (program paragraph, "Last updated", item 31, "Open
 milestones", paths-forward rows 1–30 and the bucket, G72's count, G82); every other `FS-107` mention in `CLAUDE.md` lies inside those spans.
+
+## Stage 2 — SAVED: `LEDGER.md` and the derivation file (the owner's grant)
+
+**The owner's grant** (message to FS107-X, 2026-09-27, after stage 1): the touch list gains `plans/FS107-derivation.md` for six entries — K-C6,
+K-BICH, K-AD, MEET, FS107-R-OB′ and FS107-V-C5: fill the missing fields from the sources, pointing by address, "none recorded" where a source is
+silent; make the two headers parse with an ASCII id and no parenthetical before the dash, the old name kept in the text, the same ids in the § B
+lines and row 133; no nested brackets in any grade.
+
+**`plans/FS107-derivation.md`, applied:**
+- `**FS107-R-OB′ (corrected) —` → `**FS107-R-OB2 — (FS107-R-OB′, corrected)`; `**FS107-V-C5 (observation) —` → `**FS107-V-C5 — (observation)`.
+- K-C6: *Proof:* (FS107-A l. 16–19, "trivial", no proof text recorded), *Proof verdict:* (§R-close 1.3 l. 574, quoted), *Rests on it:* (R-CP; R's
+  registered part (2), A2 l. 265–267, quoted; W-orient, FS107-A l. 88–92), *Prior art:* none recorded (FS107-A; the plan's §PA l. 366–396).
+- K-BICH: *Proof:* (FS107-A l. 20–23, quoted), *Proof verdict:* (l. 575), *Rests on it:* (FS107-A l. 72–73 and l. 91–92, quoted), *Prior art:*
+  none recorded.
+- K-AD: *Proof:* (FS107-A l. 12–15, quoted; the grade split l. 175–177), *Rests on it:* (FS107-A l. 70; the plan's E7, l. 481, quoted),
+  *Prior art:* none in print (§PA checked); in-house TQ §4.4's dichotomy (FS107-A l. 15, quoted).
+- MEET: *Proof verdict:* (§R-close 1.3 l. 578, quoted), *Prior art:* none recorded (A2 §5.1; §PA).
+- The §PA (plan l. 366–396) was grepped for C6, BICH, anchors, junctions and the meeting point before "none recorded" was written: no hit.
+
+**`LEDGER.md`, applied from §R-close 4.1 verbatim** (extracted by script from its two code blocks, 1 row + 16 lines asserted):
+- row 133 after row 132, its id list's `R-OB′` → `R-OB2` (the owner's grant);
+- row 131's two corrections in place (mechanism sentence; prior-art clause), each anchor asserted unique;
+- the 16 § B lines after FS106-PDEQ, `FS107-R-OB′` → `FS107-R-OB2`.
+
+**Gates on the stage's tree** (exit status read directly): § B `--strict` exit 0, PASS (898 entries, 898 rows; FS107 = 16); fact audit
+`--base 66f1f51a` exit 0, AUDIT PASSED (LOST 0 in every class); `--dupes` 10 (unchanged); `bib_audit` exit 0; `check_architecture` exit 0.

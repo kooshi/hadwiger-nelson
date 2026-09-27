@@ -60,12 +60,12 @@ margin `1.2ε`; `tools/fs107_v_sw_check.py`). *Proof verdict:* TRUE; V audited t
 flat facing configurations, which a colouring avoids by curving its boundaries (TS-U's side cones). *Rests on it:* OB′ corrected; (A″)'s swap price
 (`k = 3` at flat swaps). *Prior art:* none found. *Kernel:* declined.
 
-**FS107-R-OB′ (corrected) — An argument that reads, at a flat swap, only the pairs of the away-facing colour is capped at `2εs(1 + o(1))` per swap (hitting form). As R stated it — "only the pairs of one colour … Stability must read both colours at a swap" — it is FALSE: the facing colour's pairs alone certify `s³/256`. [hand, one mind: V; R's statement FALSE]**
+**FS107-R-OB2 — (FS107-R-OB′, corrected) An argument that reads, at a flat swap, only the pairs of the away-facing colour is capped at `2εs(1 + o(1))` per swap (hitting form). As R stated it — "only the pairs of one colour … Stability must read both colours at a swap" — it is FALSE: the facing colour's pairs alone certify `s³/256`. [hand, one mind: V; R's statement FALSE]**
 *Proof:* V §2.6 and §4.2 item 5 (the `εs` strip realises the cap; the `s³` proof reads only the facing colour). *Proof verdict:* corrected form TRUE;
 R's form FALSE. *Rests on it:* E4's scoring (a named class of arguments, of HIT's logical type). *Prior art:* FS106-HIT (strips) is its sibling.
 *Kernel:* declined.
 
-**FS107-V-C5 (observation) — At a fixed scale `s`, a ring junction (three colours filling `B(x, s) ∖ B(x, r)`) with an interface exactly along `e_u^⊥` still forces a band of depth `≍ s²/2` on the inner side: configuration C5 forces area `6.8·10⁻⁵` at `s = 0.1` against an exactly tangent interface. Sketch of the general claim: "every ring junction blocks every direction, on one side or the other, at depth `≳ min(s·(angular margin), s²/2)`, unless a colour is a sliver near `θ ± 90°`". [tools, one instance, and a sketch; one mind: V]**
+**FS107-V-C5 — (observation) At a fixed scale `s`, a ring junction (three colours filling `B(x, s) ∖ B(x, r)`) with an interface exactly along `e_u^⊥` still forces a band of depth `≍ s²/2` on the inner side: configuration C5 forces area `6.8·10⁻⁵` at `s = 0.1` against an exactly tangent interface. Sketch of the general claim: "every ring junction blocks every direction, on one side or the other, at depth `≳ min(s·(angular margin), s²/2)`, unless a colour is a sliver near `θ ± 90°`". [tools, one instance, and a sketch; one mind: V]**
 *Proof:* V §4.3 (for `ρ ∈ (−s²/2, 0)` the unit circle about `z` bends into the front half at radius `√(2|ρ|) ≤ s` and meets the front colour, its back
 part the other two). *Proof verdict:* the instance TRUE (one mind); the general claim a candidate. *Killing test* (V): a ring junction and a direction
 `θ` with no forced band on either side. *Rests on it:* if it holds, blocking is automatic for ring junctions, and the escapes left to door (A) are
@@ -121,16 +121,33 @@ agree; `data/fs107/fs107-vw/members_check.out`) [tools, exact: VW]. *Kernel:* de
 
 ## §3. The advisors' results and the meeting point
 
-**FS107-K-C6 — In a six-colour palette two three-element multicolours are disjoint iff complementary; a colouring avoids C-T-TAN's configuration iff in every disc of diameter 2 its junction types choose at most one triple from each of the 10 complementary pairs. [hand, one mind, trivial: FS107-A]** *Kernel:* declined.
+**FS107-K-C6 — In a six-colour palette two three-element multicolours are disjoint iff complementary; a colouring avoids C-T-TAN's configuration iff in every disc of diameter 2 its junction types choose at most one triple from each of the 10 complementary pairs. [hand, one mind, trivial: FS107-A]**
+*Proof:* FS107-A's record `plans/POROS-2026-09-27-fs107-stability.md` l. 16–19 (stage 1, E2), graded there "[hand, one mind, trivial.]"; no proof text recorded beyond that.
+*Proof verdict:* "TRUE; one mind; CP is its metric content (R stage 4)" (`plans/FS107-stability.md` §R-close 1.3, l. 574). *Rests on it:*
+FS107-R-CP's "complementary types (K-C6)" (§1 above); R's registered part (2), "I expect the voids at junctions of complementary type within
+distance 2 (K-C6) to stop shrinking before that balance is met" (A2 §5.1, `plans/POROS-2026-09-27-fs107-competition.md` l. 265–267); FS107-A's
+W-orient test (FS107-A l. 88–92). *Prior art:* none recorded (FS107-A l. 16–19 and the plan's §PA, `plans/FS107-stability.md` l. 366–396, checked). *Kernel:* declined.
 
-**FS107-K-BICH — A map whose face-adjacency graph is connected and whose every vertex meets at most two colours uses at most two colours; so every six-colour map has a vertex where three colours meet. [hand, one mind: FS107-A]** *Kernel:* declined.
+**FS107-K-BICH — A map whose face-adjacency graph is connected and whose every vertex meets at most two colours uses at most two colours; so every six-colour map has a vertex where three colours meet. [hand, one mind: FS107-A]**
+*Proof:* FS107-A's record l. 20–23 (stage 1, E2): "merge equal-coloured neighbours; then colours alternate around each vertex, so every
+edge-neighbour of a face of colour `a` has one colour `b`, and connectivity spreads the pair." *Proof verdict:* "TRUE; one mind" (§R-close 1.3,
+l. 575). *Rests on it:* FS107-A's door (R-ρ₀), "Anchors can be junctions, because junctions are unavoidable (BICH: every six-colour map has a
+vertex where three colours meet)" (FS107-A l. 72–73); its W-orient test, "A single star (every junction contains colour 1) fails by BICH applied
+to the complement of colour 1" (l. 91–92). *Prior art:* none recorded (FS107-A l. 20–23 and the plan's §PA, `plans/FS107-stability.md` l. 366–396, checked). *Kernel:* declined.
 
-**FS107-K-AD — (a) An argument whose only use of the holes is "an effective hole within `Cε` of every anchor of a set `A`" certifies at most `≍ N(A ∩ Q, ε)·ε²` of hole area per unit square. (b) Reading: `Θ(1)` comes only from anchors of positive measure or holes of `ε`-independent size. [hand for a, one mind: FS107-A, credit TQ §4.4; b a reading]** *Proof verdict:* (a) TRUE; (b) not fired — FS107-R-CP's
+**FS107-K-AD — (a) An argument whose only use of the holes is "an effective hole within `Cε` of every anchor of a set `A`" certifies at most `≍ N(A ∩ Q, ε)·ε²` of hole area per unit square. (b) Reading: `Θ(1)` comes only from anchors of positive measure or holes of `ε`-independent size. [hand for a, one mind: FS107-A, credit TQ §4.4; b a reading]**
+*Proof:* FS107-A's record l. 12–15 (stage 1, E1): the count by the `ε`-covering number, "`ε²` for finitely many anchors per unit area (A8b,
+TQ-EPS2), `ε` for curves of anchors (TQ-HIT), `Θ(1)` only for anchors of positive measure — or for holes of an `ε`-independent size `ρ₀`"; the
+grades split at l. 175–177, (a) "K-HIT's logical type, [hand, one mind]", (b) "the [reading]". *Proof verdict:* (a) TRUE; (b) not fired — FS107-R-CP's
 holes are of the second kind (R stage 4). *Killing test of (b):* an argument whose anchors form a null set of dimension `< 2` certifying hole area bounded
-below uniformly in `ε`. *Kernel:* declined.
+below uniformly in `ε`. *Rests on it:* FS107-A's "So R has exactly two doors (TQ §4.4 names both; AD above interpolates)" (l. 70); the plan's
+prediction E7, "K-AD (b) predicts it needs curves of anchors" (`plans/FS107-stability.md` l. 481). *Prior art:* none recorded in print
+(the plan's §PA, `plans/FS107-stability.md` l. 366–396, checked); in-house, "it is TQ §4.4's dichotomy with the exponent interpolated, credit TQ" (FS107-A l. 15). *Kernel:* declined.
 
 **FS107-MEET — The meeting point: R's (A) and (B) are W's doors (A) and (B) seen from the proof side; W-TAN and FS107-R-CP are one fact, C-T-TAN's cone case, read as a design rule and as an area. [derived, one mind: A2; each part two minds, one blind]**
-*Proof:* A2 §5.1. *Rests on it:* FS-110 (bounded complexity) and REG-SCALE (unbounded). *Kernel:* declined.
+*Proof:* A2 §5.1. *Proof verdict:* "a synthesis; both halves rest on C-T-TAN, whose cone case now has three derivations: TS; R (sighted of TS); V
+(blind to R, read TS)" (§R-close 1.3, l. 578). *Rests on it:* FS-110 (bounded complexity) and REG-SCALE (unbounded). *Prior art:* none recorded
+(A2 §5.1 and the plan's §PA, `plans/FS107-stability.md` l. 366–396, checked). *Kernel:* declined.
 
 ## §4. Re-attribution (prior art, not ours)
 
