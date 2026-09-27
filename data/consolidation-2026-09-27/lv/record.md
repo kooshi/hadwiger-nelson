@@ -262,3 +262,12 @@ Moser lattice and fails in general — de Grey's lattice has twelve colouring cl
 
 **Front-file draft for the owner** (not applied; `LEDGER.md` rows are outside this job's scope beyond novelty sentences): if LV-T3 survives a
 second reader, a clause in row 59's **Open:** *"(in `ℚ⁴` both directions hold — `[Zaks1999]` Lemma 1 with the quaternion residue, LV-T3)"*.
+
+## Stage 4 — SAVED: gates and report
+
+| gate | result |
+|---|---|
+| `python3 tools/bib_audit.py` | **exit 0** (after stages 2 and 3's edits as well) |
+| `python3 tools/claude_md_fact_audit.py --base 2d229561` | **exit 0**, AUDIT PASSED (0 failures) |
+
+Report: `data/consolidation-2026-09-27/reports/LV.md`; sent to the owner by SendMessage.
