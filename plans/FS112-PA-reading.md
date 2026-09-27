@@ -127,6 +127,46 @@ fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11
      order 6906 six-colourable — the hole-density question of link 5 (FS-109's dial) in 2018 form, not a whole-plane colouring.
 - **No six-colouring of the whole plane is claimed in thread 9.**
 
+## Stage 6 — SAVED (thread 16 read in full; targeted reads of threads 10, 11, 12, 14, 15, 17)
+
+- **Read:** thread 16, "Writing the paper and chasing down loose ends, II", all 350 comments (May 11, 2020 – February 1, 2021), text only (Parts's and
+  de Grey's figures, Sirgedas's imgur disk images, the dropbox draft `stripdisk.pdf`, the Google group `hadwiger-nelson-problem` not held). Off-object
+  stretches not extracted: the 3-disk proofs (`[16.165]`–`[16.236]`), higher-dimensional lattices (`[16.141]`, `[16.266]`–`[16.305]`), the human proof of
+  CNP ≥ 5 (`[16.308]`–`[16.317]`, except `[16.317]`'s last paragraph). 27 extracts, `spec_16.txt`.
+- **Targeted reads outside the brief's thread list** (the brief names threads 6–9 and 16; the held file is the same, so no fetch): a grep of the held file for
+  "Siamese", "Philip's disk/disc", "6-flower", "Gibbs disc" and unit-arc words found 57 comments in threads 1–5, 10–15, 17, 18; the 12 bearing on the object
+  were read whole and extracted (`spec_x_other.txt`, § Outside the brief's threads). **Their threads are not read.**
+- **What thread 16 and the targeted reads hold on this milestone's object:**
+  1. **The disk (CAL-DISK) is "Philip’s disk", Gibbs's `[07.49]` of June 17, 2018, and the threads print its skeleton and radius** (`[11.34]`, Jaan
+     Parts, September 29, 2018, verbatim): "A little bit cleaner picture of 6-flower (Philip’s disk) is shown below. One can see here a skeleton from five
+     connected regular pentagons with unit edges (dotted lines). Minimum radius of 6-flower is $r=\frac{1+\sqrt5}{2} \sqrt{\frac{15+\sqrt5}{10}}
+     \approx 2.12426$ ." **An identity of seconds (by hand, checking the quoted radius):** `φ²·(15+√5)/10 = (3+√5)(15+√5)/20 = (25+9√5)/10`, which is
+     CAL-DISK's `r² = (25 + 9√5)/10` and `[Polymath2021]` Fig. 10's `√(5/2 + 9/(2√5))`. So the paper's pentagon ABCDE is Parts's "five connected regular
+     pentagons with unit edges". **What is not printed in the held text:** which edges are unit arcs, where each is centred, the tile list — the picture
+     carrying them is not held. The nearest to a rule is Sirgedas's dual-graph statement (`[16.346]`, January 30, 2021): the largest 6-colour disk and the
+     6-colour strip "both have quads on the interior, and triangles on the exterior. Arrows in the dual graph correspond to curved edges in the tile graph.
+     Each quad in the dual graph “emits” four arrows." Two facts about the disk's tiles are stated in words: ten small tiles of a seventh colour extend it,
+     and "they come in Siamese pairs" (`[16.91]`); and a `{1,3,5,6}` junction sits "at 2 o’clock on the central tile of the main disc" (`[16.106]`) — **a
+     four-colour junction in the disk as de Grey describes it** (C-V4-K's question meets a held positive, if the words are right; for the sides to check
+     in the rebuild).
+  2. **HOCK contested in 2020, in the hole-minimising setting** (`[16.39]`–`[16.51]`, `[16.80]`, `[16.85]`): Parts's arcs of radius about 0.5, de Grey's
+     "I can’t see any way that arcs of radius less than 1 could ever be optimal", Hockertz's restatement of HOCK, then de Grey's counter-calculation (a
+     quadrilateral with unit diagonals fattened by radius-0.5 arcs has area about 0.64 against about 0.62 with radius-1 arcs), and Hockertz's concession
+     that this is "just to minimize the area of one specific target color". **In a full six-colouring the question is never settled in the threads.**
+  3. **A claimed near-proof of the NO, for non-Siamese tilings, held nowhere here** (`[16.317]`, de Grey, October 31, 2020): "prove that the plane cannot
+     be 6-tlled with a non-Siamese tiling; Tom Sirgedas got very close to such a proof a while back and is trying a new approach now." With `[16.153]`
+     ("an exhaustive search of non-Siamese 6-tilings", Gibbs and Sirgedas) — **a prior-art debt**: the Google group `hadwiger-nelson-problem` and any
+     Sirgedas write-up.
+  4. **Why the strip stops** (`[16.347]`, Sirgedas): in the dual graph "A triangle can’t be added because all 6 colors are within two “steps” of the new
+     vertex. A quad can’t be added because each new vertex will emit a conflicting arrow" — an argument in words, about that strip, not a theorem.
+  5. **Siamese defined** (`[10.59]`, de Grey, September 3, 2018): "Siamese tiles (tiles that lie entirely within each other’s annulus of exclusion)";
+     the only Siamese tiling known in March 2019 was a stretched Pritikin seven-colouring (`[12.17]`). The threads disagree on what Thomassen leaves open
+     (`[14.160]` unscaleable, `[15.19]` Siamese; `[16.252]` both conditions).
+  6. **The T2 shape as an obstruction** (`[16.111]`, Parts): a unit rhombus `ABDE` with a boundary `AD` "all points of which must also be at a distance of 1
+     from points B and E" — invalidating a sphere construction (`[16.112]`).
+- **No six-colouring of the whole plane is claimed in thread 16.** Pálvölgyi's "there is a chance that CNP<=6" (`[16.253]`) is said of a sphere
+  7-tiling.
+
 ## Would have searched here
 
 - Solving de Grey's column (`[07.10]`) as a constraint system to confirm it is `[AxenovichEtAl2014]`'s strip: not done (a derivation for the sides;

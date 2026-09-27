@@ -1,0 +1,16 @@
+## Outside the brief's threads — targeted reads (threads 10, 11, 12, 14, 15, 17), not read in full
+
+> Found by grep of the held file for "Siamese", "Philip's disk/disc", "6-flower", "Gibbs disc" and unit-arc words; each comment below was read whole, its thread was not. The locator rule is the same.
+
+@10.59 ¦ * ¦ * ¦ **The definition of "Siamese tiles"** (de Grey, September 3, 2018): "tiles that lie entirely within each other’s annulus of exclusion".
+@11.1 ¦ For completeness ¦ Polymath16, seventh thread: Upper bounds ¦ De Grey: "Philip’s disk for k=6" is the one posted in thread 7 (so `[07.49]`, Gibbs, June 17, 2018).
+@11.34 ¦ * ¦ * ¦ **The disk's construction skeleton and exact radius** (Parts, September 29, 2018): "6-flower (Philip’s disk)"; "a skeleton from five connected regular pentagons with unit edges (dotted lines)"; minimum radius `φ·√((15+√5)/10) ≈ 2.12426` (the figure is not held).
+@11.35 ¦ * ¦ * ¦ Parts: "a lot of hidden pentagons", a "pentagonal grid".
+@12.17 ¦ * ¦ * ¦ De Grey (March 2019): "the only Siamese tiling we have" is the stretched Pritikin seven-colouring (diamonds of height 1/3, more than 1/2 apart in a column).
+@12.19 ¦ If we group such tilings by the amount ¦ couldn’t be converted into one another or a normal tiling. ¦ Hockertz: Siamese tilings classed by the number of same-colour regions in one exclusion zone (two likely fusable).
+@14.160 ¦ Concerning tile-based colouring ¦ Can you explain? ¦ De Grey: Thomassen's result leaves only "unscaleable" tilings, "in which some tiles have diameter exactly 1 and some pairs of tiles of the same colour are exactly 1 apart".
+@15.19 ¦ * ¦ * ¦ Pálvölgyi: "the only way to get a better upper bound would be to find ‘siamese’ tilings" (compare `[14.160]`: the threads disagree whether Thomassen leaves Siamese or unscaleable tilings).
+@15.161 ¦ 2) I made all edges of the arrowheads ¦ but I’m sure that’s worth it. ¦ De Grey's holes construction: arrowhead edges concave radius-1 arcs; sloping edges "wavy", "a string of four radius-1 arcs centred on the “far” vertices of the two relevant diamonds"; diamond edges forced to be convex arcs of radius 2.
+@17.5 ¦ Before I came along ¦ 7 if scaleable-non-Siamese-tile-based. ¦ De Grey's ladder of conditional lower bounds: 5 if measurable, 6 if tile-based, 7 if scaleable non-Siamese tile-based.
+@17.181 ¦ * ¦ * ¦ De Grey (January 2022): Philip's disc minus its outer ring, the central tile's vertices opened to short edges, an 11-tile design.
+@17.282 ¦ My focus is: in a hypothetical 6-tiling ¦ hence we need the points at 1 from one TP and d from the other to be less than 1 apart. ¦ De Grey (April 2022), for tilings avoiding the distances `[1, d]`: two trichromatic points sharing no colour must be at least 2 apart (the points at 1 from both would need a seventh colour) — FS-107's complementary junction pair, stated for slack tilings.
