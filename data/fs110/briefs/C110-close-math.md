@@ -28,8 +28,26 @@ of this brief; read rule 0 first.** Read these from disk:
 
 - **Grades come from the minds that actually derived.** A lemma a blind verifier confirmed is two minds, one blind; one it did not reach stays at one
   mind. Name every open step.
-- **The headline, as round 2 left it:** under Condition 5, NB-4 and NB-5 close the tangency seam (two minds, one blind), and Q-full under Condition 5
-  becomes W-3, the winding question. Report round 3's outcome on W-3 exactly as the records leave it. A YES held at one mind stays held.
+- **The headline, as round 4 left it** (FS110-A6's § A6-2.1; state it with the grade the verifiers leave it at): *"Under Condition 5, no locally
+  finite map whose boundaries are segments and circular arcs, none of radius 1, carries an a.e.-proper six-colouring."* **Polarity:** S–V
+  Question 2 asks "Is it true that 7 colors are needed …?", so its Condition-5 half is answered **YES**. N4, its report and some owner text say "NO";
+  correct every such place (inventory item 97). The chain behind it:
+  - NB-4 and NB-5;
+  - W-MERGE, which is Woodall's step 3 almost everywhere;
+  - N4's cone removal: SHAVE, RAY, STUCK, PROP, FIN, TERM and CONE;
+  - the base, S–V Cor. 1 almost everywhere with no `d = 2` exception (CB and CD, both blind);
+  - **the base at cusp sectors**, which FS110-CC is checking. A doubly shadowed single horn survives every operation (A6-C2, exact), so the base must
+    cover cubic vertices with a cusp sector.
+
+  **Its grade is one mind until FS110-NB4 (blind on N4's chain) and FS110-CC report.** Read their reports, and grade the headline exactly as they
+  leave it.
+  - If either finds a GAP, the headline is a reduction to that step, and says so.
+  - Card A6-C1 asks whether "at bounded `K`" can be dropped (nothing in N4, CB or CD uses `K`). Take NB4's answer.
+- **The reconciliation includes the round-4 verifiers:** compare FS110-NB4 with N4, and FS110-YB4 with Y4. No advisor did this, because FS110-A6
+  handed back first. Include every divergence and the final count of minds.
+- **Row 132's correction:** FS106-SV2, FS106-AE-POLY and FS106-AE-CONV lose their `d = 2` exception. FS110-CB and FS110-CD, both blind and by
+  different routes, give S–V Cor. 1 with no `d = 2` exception, and CD's Theorem D2 closes FS106-SV2's edge case for same- and disjoint-multicolour
+  pairs. **FS106-SV2's weakest link**, the sketch of the Lemma 3 repair, is now CB's full derivation. Draft row 132's new text.
 - **Propose ledger rows.** The next free number is 134; rows are never renumbered. My expectation, which you may overrule with a reason:
   - one row for the Condition-5 closure and its reduction to W-3, containing NB-4, NB-5, N2-RING, N2-SWAP, N2-TRANS, N2-FLIP, N-X, Y2-W4, YB-V5X
     and C-CUSP-K, each at its grade;
@@ -77,13 +95,15 @@ of this brief; read rule 0 first.** Read these from disk:
      - "Where the problem stands", item 31;
      - G82;
      - any correction owed;
-   - `BIBLIOGRAPHY.md`: Mundinger et al. 2025 (held), `[DeCorteOliveiraVallentin2022]` Lemma 6.2's bearing, and the unheld titles of item 8;
+   - `BIBLIOGRAPHY.md`: FS110-PA's four proposed edits, Soifer 2024 ch. 25, `[Woodall1973]` §3's reading status (read by NB3 and Y4), the unheld
+     titles of inventory item 8, and the two citations that now fail `tools/bib_audit.py`: arXiv:1305.5229 (in `data/fs110/reports/FS110-P.md`) and
+     `[MartiniMontejanoOliveros2019]` (in `plans/FS110-tangency-seam.md`);
    - `plans/FRONTIER-STUBS.md`: FS-110 to the closed list, and the new or re-aimed stubs ranked;
    - the GROKKING-INSTANCES entries;
    - the protocol amendment;
    - the claim-list corrections (items 21, 26), as an appended section of `data/fs110/claims.md`, which you may write directly.
 
-   **The budget:** `CLAUDE.md` is at about 299,242 bytes against its 300,000 limit. Every new line must be paid for: point to ledger rows instead
+   **The budget:** `CLAUDE.md` is at 295,695 bytes after the ranking pass, against its 300,000 limit. Every new line must be paid for: point to ledger rows instead
    of retelling them, and move later instances out. Draft so that the front page lands under the limit without cutting an intrinsic.
 
 ## Rules

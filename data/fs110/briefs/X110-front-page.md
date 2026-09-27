@@ -22,7 +22,7 @@ resuming;** continue at its first stage not marked SAVED.
 
    Where a draft is missing, apply nothing in its place, and list it as left.
 2. **Mirror the ranking change** into `CLAUDE.md`'s paths-forward table, from `plans/FRONTIER-STUBS.md`.
-3. **The budget.** `CLAUDE.md` is at about 299,438 bytes against its 300,000 limit (restored at FS-106's close). Keep it **under 300,000**, and
+3. **The budget.** `CLAUDE.md` is at 295,695 bytes (after the ranking pass) against its 300,000 limit. Keep it **under 300,000**, and
    report the count before and after. To make room, in this order:
    1. move second and later instances to `plans/GROKKING-INSTANCES.md` (step 9);
    2. make lines point to a ledger row instead of retelling it (one home per fact);
