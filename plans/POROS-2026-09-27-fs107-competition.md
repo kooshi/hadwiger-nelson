@@ -203,3 +203,40 @@ almost everywhere"; the polygonal half is a theorem (AE-POLY bar `d = 2`), the c
 
 ## Stage 3 — SAVED
 
+## Stage 4 — SAVED: R's stand-down (07:55 UTC), its card answer, and my hunches scored against it
+
+- **R handed back at its budget** (stage 4 saved; report `data/fs107/reports/FS107-R.md`, `ef74449a`). Owner's rulings: R's stage 5 (reading W's record)
+  goes to my comparison after W's hand-back; a blind verifier FS107-V checks R's four lemmas and RR's implication (I never contact it).
+- **R's retraction 2** (free, self-found before commit): the draft "Theorem OB" — "Voronov's bicycle branch is of hitting form, so every bicycle
+  argument is capped at `O(ε)`" — withdrawn; both premises false (TS's C-T-L1 excludes the swap at Jordan interfaces; an `ε`-strip legalises one colour
+  only). **Retractions: R 2, W 1, Poros 0.**
+- **R's answer to my second card** (`does-the-complementary-pair-cost-survive-parts`, sent 02:56): the first branch. Lemma CP needs cone scales
+  `s ≤ s₀ = µη²/100` and voids `2r < t₁ = s·sin(µ/2)/3`; at `µ = η = 1/2`, `s₀ ≈ 1.3·10⁻³`, `t₁ ≈ 10⁻⁴`, against Parts's void half-diagonals 0.0055 and 0.0133.
+  So Parts's junctions are not fat at any admissible scale and the bound (`≈ 10⁻⁸`) is far below `δ₆`: the calibration passes because the lemma bites
+  weakly. R's own consequences: "scale-invariant" should read "cost of order `min(s, s₀)²`, independent of `ε`"; a sharp `s₀` is the real question;
+  whether Parts has complementary pairs within distance 2 is R's P1 (0.9), unscored.
+- **What R left (read from `plans/FS107-R-stability.md` §§3–4, which my brief permits):** Lemma SAT (holes WLOG the open six-sighted set), Lemma CP
+  (complementary fat junctions within `[η, 2 − η]` blocking toward a common unit point cost `≥ (t₁ − 2r)(t₁′ − 2r′)`, independent of `ε`, repair-robust),
+  Lemma SW (a flat same-multicolour unit pair costs `≥ εs`; the swap `≳ s³` a sketch), Theorem OB′, and **reading RR: R follows from (A) a forced
+  complementary pair in every `U_R` and (B) a cone-scale lower bound**; W's only escape is cone scale → 0 at every complementary pair (K-TAN's exceptional
+  set at every scale) or no complementary pair within `[η, 2 − η]` (a K-C6 family). R flags G82's reading at risk: (A) + (B) would be a feature-local proof.
+- **Teasing hint to W** (movement only): R has handed back with GAPs at named steps, a reduction to two open statements and a repair-robust local
+  lemma under blind verification. Nothing of CP's mechanism carried; W already holds its qualitative content as K-TAN + K-C6.
+
+**My hunches, scored against R (G21: the ones I like at the rate of the ones I do not).**
+- `r-first-mechanism-is-local-and-pinhole-killed` — **killed** (by: Lemma CP, `plans/FS107-R-stability.md` §3.2, pending V). R's first surviving mechanism
+  *is* local (a junction pair) but its cost region has width `≍ s`, the cone scale, not `ε`: a pinhole at the certificate does not legalise it. My
+  stage-1 X2 assumed the forbidden regions near the circle intersection have width `O(ε)`; that holds for *point* junctions and fails for fat ones,
+  whose swept annuli have width set by the cones' radial extent. **The mechanism of the miss:** I priced the junction as a point (A8b's picture), not
+  as three cones. The pinhole test stays right as a test; my prediction of its verdict was wrong. Cost of the miss: nothing paid (no card rested on it).
+- FS107-A's `rq-collapses-to-rs` — **at risk, not killed**: CP is an `ε`-independent bound anchored at junction pairs with no limit, but R's (B) asks a
+  cone-scale lower bound "on a set of positive measure", which is link 6's regularity question — the collapse is into regularity, not into LIM.
+- FS107-A's `void-conservation-is-the-crux` — **supported**: RR's (B) is a void-conservation statement in cone form (a fat junction can shed its cone
+  scale only by degenerating).
+- FS107-A's `complementary-type-is-the-combinatorial-core` — **supported**: RR's (A) is C-T-PIG on SEQ, in K-C6's terms.
+- `bounded-complexity-families-keep-their-voids` — unchanged (open, shared frame).
+
+**For the close (inventory, sent to the owner):** G82's reading scored against RR if (A) or (B) lands (R's flag); my killed hunch and its mechanism.
+
+## Stage 4 — SAVED
+
