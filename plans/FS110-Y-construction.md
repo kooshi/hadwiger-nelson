@@ -846,3 +846,16 @@ G-d2 is not worked here (CB's circle-only reduction is fenced from me).
 (c) the ring closes (nine pieces). None of the three "what would show me wrong" items fired here. Retractions this round: none.
 
 ## Stage 11 — SAVED (FS110-Y4)
+
+## Stage 12 — SAVED (FS110-Y4): reading status, proposals, hand-back
+
+- **Read this round:** `[Woodall1973]` §3 (Theorem 5 and Theorem 6, steps 1–7), held PDF, text extracted to my scratch; step 3 is the "cone"
+  N3-DEG names. **Proposed `BIBLIOGRAPHY.md` status line** (the close writes it): "§3 (Thms 5–6, steps 1–7) read 2026-09-27 (FS110-Y4) for
+  Woodall's cone".
+- **Held for the owner:** which notion of "hard" N3-RED's residue uses. With N3-DEG's two bullets alone, fragment `WC` is a cone that one tile's
+  recolouring removes (§11.4); tip-hard cones carry more (`y` at `N`, `x` at `S′`) and still exist locally (`WCH`, `WC1H`).
+- **Left for a successor:** the horn tile beyond the contacts' reach; `v`'s ring with `N`'s and `S′`'s rings over a larger disc; the cascade at a
+  tip-hard cone's contacts (§11.5, items 1–3). G-d2 not worked.
+- Report: `data/fs110/reports/FS110-Y4.md`, the same text to "main".
+
+## Stage 12 — SAVED (FS110-Y4)
