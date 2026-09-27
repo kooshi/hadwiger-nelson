@@ -306,3 +306,30 @@ cases (I gave 0.45); 9 and 8 TRUE; 10 split (TRUE and a FALSE clause), inside my
 row predicted.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — the side's record read (after `2af3fe01`); divergences
+
+*Read: `plans/FS110-N-proof.md` §2.4 (N-X), §4.2–4.4, §6 in full; its heading list. Not read (budget): §1.4, §2.1–2.3, §2.5–2.6, §3, §5, the theorem
+tables line by line, `data/fs110/fs110-n/`, `tools/fs110_n_*`. So the thirteen quotations were compared with their sections (items 1–5, 9, 10, 13), not
+with the table lines character by character — left for the close.*
+
+| # | kind | divergence | resolution |
+|---|---|---|---|
+| D1 | **definition** | The side reads **covering pair as `P_cl(v) ∪ P_cl(y) = [6]`** (§4.2: "`P_cl(y) ⊇ {e, f}` and `P_cl(v) ∪ P_cl(y) = [6]`"; §4.3 (ii) "`r ∈ P_cl(x)` and `(u, x)` is a covering pair"); `data/fs110/claims.md` §0 defines it as **disjoint** types covering all six. | Under the union reading N2-V4's second step is TRUE as the side proves it (a change point has both ring colours), and my GAP (item 6) is against the claim list's definition only. The union form is enough for C-T-TAN (its proof uses only "all six classes are in `P(u) ∪ P(v)`") and for N-SEAM; **N-X assumes disjoint types**, so a union pair from N2-V4 feeds C-T-TAN but not N-X. Correction owed: one definition, stated in the claim list, and N-X's use checked against it. |
+| D2 | **result, beyond the side** | The side leaves "whether N-X's cascade closes at bounded `K`" a GAP (§2.4) and C-TAN-POS at a vertex `w₀` a GAP. | **NB-4/NB-5 close both under Condition 5**, with no bound on `K`: a four-colour vertex's ring change points carry inner and outer colours whose pairs alternate, and each of its four colours is squeezed into `60°` (`240° < 360°`). So under Condition 5 there is no four-colour vertex and **no close covering pair at all**; the seam question is then exactly the side's C-ACT1 residue (every trivalent ring swap-free, `|W| ≥ 2`, every tile even), and every live seam carries a unit arc. One mind (mine); a second mind owed. |
+| D3 | scope (table line) | N2-ROT's table line (my item 10) says "no other pattern forces a colour at `x`"; §4.3 names the swap patterns `(A+, B+)`, `(A−, B−)` first. | Agree with §4.3; the **table line drops the swap clause — MISSTATED as a line** (FS-107's M3 kind). "One colour" in the cone holds in an Act-One-free map (else a four-colour `x`), or under Condition 5 by NB-4. |
+| D4 | route | N2-HEX and N2-ROT: the side excludes a second `p`/`q` sector at a rotation point by N-E2 against the partner's ring tile; I used TS-C. | Same content (a tile reaching the partner is Siamese with it); no divergence of truth. |
+| D5 | route | N2-TRANS: the side's nerve is `K₄` on `{c, d, e, f}` with faces `cde`, `cdf` and a homology identity; mine collapses `c, d ↦ ∗` and counts jumps at sweep events. | Same exclusions (three-colour points must hold `c` and `d`; four-colour points excluded), same `d = 2` residue. Agree. |
+| D6 | agree | N2-RING, N2-SWAP, N2-FLIP (the leapfrog parity is the same argument), N2-HEX's counting, N-X (a)–(c), C-ACT1's GAP and its narrowed step. | — |
+| D7 | quotation | Item 13 was truncated in my instance block; the record's (d) continues "… alternating along `ω(w₀)` in arcs whose interior points `60°` apart differ (N-E0), and every point `y ∈ ω(w₀)` in the closure of both an `a′`-tile and a `c′`-tile makes `(w₀, y)` a covering pair at distance 1 — the cascade." | TRUE in the union reading; in the disjoint reading it is item 6's step, vacuous under Condition 5 (NB-4). |
+
+**Proposed edits for the close** (I edit none of these files):
+- `data/fs110/claims.md` §0: the Siamese quotation's address is `plans/FS106-TQ-derivation.md` l. 348, not `plans/FS107-stability.md` l. 348; fix
+  "covering pair" to one reading (the side's union form, or disjoint) and state which the kills need (C-T-TAN: union; N-X: disjoint).
+- The derivation file: NB-4 and NB-5 as theorems at [hand, one mind: FS110-NB], each needing a second mind before any ledger use; N2-ROT's table line
+  with its swap clause restored; N2-S1's exceptional distances exact (`{1, √3}`).
+- `LEDGER.md` (at the close, if a second mind holds): "under Condition 5 a tight six-map in `𝓜_K` has no vertex of four colours and no close covering
+  pair; the tangency seam there is the Act-One residue" — the four-colour half is S–V's Lemma 2 in a region-only, a.e. form for `𝓜_K`
+  (`[SokolovVoronov2025]`; prior art for the conclusion, not the route).
+
+## Stage 4 — SAVED
