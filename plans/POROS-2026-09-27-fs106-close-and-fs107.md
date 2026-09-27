@@ -74,6 +74,127 @@
   `β ∈ (0, π)`.
 - TS's stage-3 region-only Prop. 7 is a second written version, sighted (it saw V2's assertion, not V3's text). SB is the first blind mind on it.
 
+## Stage 1b — SAVED: TS against SB (blind), and V3's comparison of V2 with VB
+
+*Read after SB's report existed (`data/fs106/reports/FS106-SB.md`): `plans/FS106-SB-verification.md` §§2.2, 2.3, 4.1–4.3, the A12 row of §2.1, and
+the verdict table. Re-read: `plans/FS106-V-verification.md` ll. 104, 172, 249–256 (FS106-V and V2 on Lemma 4, the fills and SV-2). I ran SB's
+checker `tools/fs106_sb_c5_check.py`: exit 0, line (I) "Ind g1 = 1, Ind g2 = −1, |difference| = 2", PASS. It is a float sampling check of a
+derived configuration.*
+
+### 1b.1 A12 (simple connectivity at the eleventh point): handled by the V line's fills; the grade of "polygons need seven"
+
+- **SB's point is real, and it is not new to the sighted line.** FS106-V (l. 172 (b)) had found the same gap: "The Appendix's last step … needs
+  1-connected regions, i.e. Voronov's fills, which S–V never perform; repairable by fills (H3; fills preserve polygonality)". **So A12 now has
+  two minds, one blind (V; SB).** VB missed it.
+- **V2 performs the repair, in this order:**
+  - Prop. 8 first (degree ≤ 3 in the disc);
+  - then fill every non-simply-connected region in a bounded disc ("fill first", l. 249; "fills and degree 3 give" the colour switch, l. 252);
+  - then run Lemmas 2–6 on the filled colouring. The contradiction for the filled colouring refutes the original.
+- **What makes the order sound** [hand; my check of V2's one-line claim]:
+  - A fill recolours the regions inside a hole of `R` with `R`'s colour. It deletes those regions and the vertices on the hole's boundary, and
+    touches nothing on `R`'s outer boundary. So it creates no vertex, keeps degree ≤ 3, and keeps the boundaries polygonal.
+  - It keeps a.e.-properness by H3: the filled hull has diameter ≤ 1, so a unit circle from outside crosses `R` itself. H3 has two minds, one
+    blind (V; VB: "hole-filling valid at exact distance for maps").
+  - Fills terminate: local finiteness, and each fill absorbs a region.
+  - After the fills, SB's bad case cannot occur. A region lining the whole outer frontier `J` of `u`'s `{4,5,6}`-component, with other regions
+    inside `J`, is not a Jordan domain. Its boundary would contain the Jordan curve `J`, so the region would be `J`'s interior and contain them.
+- **TS's region-only route does not touch A12.** It concerns Props. 7–8 and inherits Lemma 4 from V2.
+- **Verdict: A12 is handled.** SB's "GAP" is closed by the V line's fill step. The step should be written into the chain explicitly: Prop. 8, then
+  fills, then Lemma 4.
+- **"Polygonal colourings need seven", everywhere and almost everywhere, after tonight:** TRUE at [hand], except two named residuals:
+  1. **the `d = 2` antipodal edge case**: open. V3 reduced it to orientation constraints with no local contradiction. SB's A11 missed it (SB's
+     own slip G1).
+  2. **SV-L3 at `√3 ≤ d < 2`**: rests on V2's transplanted bicycle at sketch grade, one mind. FS106-V found the printed Fig. 5 cannot exist
+     there. VB did not detect it, and SB took Lemma 3 as printed. **So this load-bearing step has one mind, at sketch grade — the weakest
+     link, weaker than A12.**
+- **Minds on the rest of the chain:** two. The sighted line V → V2 → V3 is one; SB, blind, confirmed every a.e.-specific step relative to the
+  printed chain. Prop. 7 region-only has three written versions (TS and V3 sighted, SB blind); SB: "the same Prop. 7 repair".
+
+### 1b.2 C-T-IND, and T1's bearing on C-AE-Q2
+
+- **The "iff" is FALSE; SB is right.** Under reading (A) (the lift agrees a.e.), TS's own two-class K3 trace has an index. `f(t) = 1/2 −
+  dist(t, C)` is continuous, pinned at the half-integer on the fat Cantor set, and `c ∘ f` is the trace a.e.; I checked it. Under reading (B)
+  (all but finitely many points), the "if" fails by points of `E`.
+  - TS's "no approximation defines one" holds only for a three-colour K3, or under (B).
+  - **What holds:** under (A), `Ind` is well defined whenever a continuous lift exists (SB's uniqueness argument). Finiteness is not the
+    criterion.
+- **The bound.** "No swap ⟹ `|ΔInd| ≤ 1`" is TRUE, for any continuous lifts (SB). TS proved the same under finitely many changes. **Two minds** on
+  the no-swap bound.
+- **TS's "swaps are excluded by C-T-L1" is FALSE; SB is right**, and the deciding step is plain:
+  - C-T-L1 speaks only of `P(x) = P(y)` with `|P| = 2`.
+  - In TS's own C5 the point `y` carries extra colours in its side cones (TS: "two further colours in the side cones"; SB: one, a bowtie). So at
+    the swap `P(x) = {1,2}` and `P(y) ⊋ {1,2}`, and C-T-L1 is silent.
+  - SB's translate curves realise `|ΔInd| = 2` [hand, one mind; checker line (I)].
+- **Bearing on C-AE-Q2: still GAP, with a fourth named step.** TS §2.5's row "Prop. 12, Cor. 4 … hold wherever the curves exist" is FALSE
+  without Conditions 5 and 6.
+  - Add **[G4]: Prop. 12's swap exclusion (the index bound), which fails locally at a unit-arc interface facing a bowtie or a 4-chromatic point.**
+    It needs a no-swap lemma, of C-T-TAN type or Condition-6 type.
+  - [G4] is distinct from [G1], which is Lemma 2's chromaticity cap. Even with the cap, a bowtie `y` (trichromatic, degree 4) swaps.
+  - C-AE-POLY is untouched: polygons satisfy Condition 5, and there Lemma 1 (TS-L1) excludes the swap, as SB and TS agree.
+- **For FS-107 (stage 3):** [G4] joins R's limit-route list. It is moot on W's grid objects, which have no unit arcs.
+
+### 1b.3 C-AE-CONV, and Coulson
+
+- **TS is right in outcome; SB's GAP is A12, and A12 is closed by fills (1b.1).** Merging tiles by colour gives an a.e.-proper polygonal map whose
+  regions may be annular. Filling them in a bounded disc gives simply connected polygonal regions, with degree preserved and H3 applying, and
+  C-AE-POLY applies.
+- **Verdict:** C-AE-CONV TRUE at C-AE-POLY's grade, with the same two residuals. The fill step should be written into TS's reduction. The regions
+  also have diameter ≤ 1, so none is unbounded.
+- **Coulson:** SB read `[Coulson2004]` in full. The printed theorem is six colours for tile-based colourings, with an area bound on the tiles
+  (Thm 3.5: "A tile based colouring with excluded distance D must employ at least 6 colours").
+  - So C-AE-CONV (seven, locally finite convex tilings, a.e.) supersedes Coulson's six for those tilings. It is a corollary of
+    `[SokolovVoronov2025]` Thm 2 applied to merged tilings.
+  - Novelty is "not found in print", and small.
+  - **Correction owed:** `CLAUDE.md` § The aim link 4 lists `[Coulson2004]` among "maps need six". It is a tile-based result with an area bound,
+    not a map theorem.
+
+### 1b.4 V3's comparison of V2 with VB (the other half of stage 1)
+
+V3's divergence table (`plans/FS106-V-verification.md` stage 4) is sound on every row I can check:
+- **Prop. 8 / Obs. 1: V2 is right.** V3's crossing (`ρ₋ ≈ s_b²/(2 sin β)`, a simple positive root) checks.
+- **SV-L3 above `√3`: V is right.** VB did not detect the failure; it is FS106-V's [hand + measured].
+- **SV-L4 (a) under Condition 6: V2 is right** that it was open. It is now closed by TS-T at two minds (TS; SB, blind and sharper).
+- **Prop. 16, Prop. 19: V2 is right.** VB's check did not reach them.
+- **Added tonight: A12** — V saw it, VB missed it, SB found it blind.
+
+### 1b.5 Count of minds, the TS half
+
+| result | minds | grade and note |
+|---|---|---|
+| TS-C | **2** (TS; SB blind, a different route) | [hand] |
+| TS-T | **2** (TS; SB blind, sharper: within `1/√2 + ε`; Condition 5 alone gives a trichromatic point) | [hand]. It closes SV-L4 (a) |
+| TS-U | 2 (SB, exact form) | [hand] |
+| TS-L1 | 2 | [hand] |
+| C5 | 2 (SB blind, sampling check with plants; it survives Condition 6 with a bowtie) | [hand] + [measured] |
+| C-T-IND | **MISSTATED**. Carry SB's form: under (A), a lift gives a well-defined index, and no swap ⟹ `|ΔInd| ≤ 1` (2 minds on the bound). The "iff" is FALSE (SB, one mind, explicit trace). A swap with `|ΔInd| = 2` exists without Conditions 5–6 (SB, one mind + checker) | [hand] |
+| C-AE-POLY with SV-2 | chain: 2 (the V line sighted; SB blind). A12 found by 2, one blind, and repaired by fills (H3 at 2; the order at V2 plus my check). **Residuals: `d = 2` open; SV-L3's bicycle for `√3 ≤ d < 2` at one mind, sketch** | [hand] |
+| C-AE-CONV | as C-AE-POLY, with the fill step written in | [hand]; Coulson's six superseded for locally finite convex tilings |
+| C-AE-Q2 | GAP at [G1]–[G4] ([G4] new, from SB's T1) | [hand] |
+
+### 1b.6 My stage-1 expectation, scored (SB half)
+
+| expectation | outcome |
+|---|---|
+| TS-C TRUE, 0.85 | met |
+| TS-T TRUE, 0.7 | met, sharpened |
+| TS-U, TS-L1 TRUE | met |
+| C5 TRUE, 0.75 | met, extended |
+| C-AE-POLY TRUE except `d = 2`, 0.6, possible GAP at SV-L3 | half met: SB raised A12, not SV-L3, and missed `d = 2` |
+| C-AE-CONV: a divergence over non-simply-connected merged regions, 0.65 | **met exactly** |
+| C-T-IND corrected TRUE, 0.7 | **missed**: MISSTATED |
+
+Across both halves: 13 of 15 met, and both misses were verdicts I expected TRUE that came back as a constant point or MISSTATED.
+
+### 1b.7 For the close (FS106-C)
+
+- **correction owed** — write the fill step into SV-2's repaired chain (Prop. 8 → fills → Lemma 4) and into C-AE-CONV's reduction. A12 is closed.
+- **result** — "polygons need seven" is TRUE [hand] except `d = 2` (open), with SV-L3 for `√3 ≤ d < 2` at one mind, sketch. Name SV-L3 as the
+  weakest link in the ledger row.
+- **correction owed** — C-T-IND is MISSTATED. Carry SB's form, and drop the "iff" and "K3 has no index".
+- **correction owed** — TS §2.5's Prop. 12 row: FALSE without Conditions 5–6. C-AE-Q2 gains [G4].
+- **correction owed** — § The aim link 4: `[Coulson2004]` is tile-based (six, with an area bound), not a map theorem.
+- **stub re-aim** — FS-107 R-S gains [G4] (the no-swap lemma); it is moot on W's grid objects.
+
 ## Stage 1a — SAVED: TQ against QB (blind)
 
 *Read after QB's report existed (`data/fs106/reports/FS106-QB.md`): `plans/FS106-QB-verification.md` §§2.3–2.4, 2.8–2.11, 3.1–3.2 and 4.1–4.5;
