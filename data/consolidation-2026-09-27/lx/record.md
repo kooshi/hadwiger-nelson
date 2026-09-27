@@ -211,7 +211,7 @@ homomorphism `ψ : A → G`, is `|G|`-colourable.
 | the colouring is a homomorphism | **yes, unnamed** — `B_k` are the fibres of `Σ m_h h ↦ Σ m_h mod n`, well defined exactly when `S` is weakly `n`-free |
 | the target `G` any finite abelian group | **no** — only `ℤ/n` |
 | `ψ` any map non-zero on the differences | **no** — `ψ = 1` on `S`. For `n ≥ 3` weak `n`-freeness excludes every pair `h, −h` (`h + (−h) = 0`, coefficient sum 2), so on the symmetric difference set `ψ` takes the values `±1` |
-| `|G| = 2` | **yes, in full**, and more: the converse (a two-colouring exists only if `S` is weakly 2-free) and the uniqueness (every proper two-colouring is the parity map on each coset), neither of which Theorem A states |
+| `\|G\| = 2` | **yes, in full**, and more: the converse (a two-colouring exists only if `S` is weakly 2-free) and the uniqueness (every proper two-colouring is the parity map on each coset), neither of which Theorem A states |
 
 **The reach at `n ≥ 3`** (LX-T7 below): a colouring from his Theorem is a graph homomorphism into `Cay(ℤ/n, {±1})`, the `n`-cycle, so the
 graph it colours has chromatic number at most 3. So `[Johnson1982]` colours no graph of chromatic number ≥ 4. That excludes every use of
@@ -305,7 +305,7 @@ case two of them had printed: metric-free at cyclic targets (`[Johnson1982]`), w
 Thm 1(i), `[Johnson2006]` p. 213). **Ours:** Theorem A's kernel proof (its statement is the one-line merge of those two, not found as one
 statement as far as read); Theorem B's kernel proof"*.
 
-**D5. `CLOSED-QUESTIONS.md` §3, the ℚ⁴ entry.**
+**D5. `CLOSED-QUESTIONS.md` §3, the ℚ⁴ entry.** *(Status at the end of stage 2: the owner's commit 2965c09a applied the scope line, the regrade, the `[Johnson1990]` Thm 3 attribution and the "Not claimed" line; only the component citation, the second bullet, is still owed.)*
 - Old *"**Answered at [derived, one mind]** (the consolidation run's job LV, 2026-09-27, LV-T3 in `data/consolidation-2026-09-27/lv/record.md`; a
   second reader owed): **exactly the `d` with `d² = p/q`, `p, q` odd — and then every proper four-colouring forbids `d`.**"* → new
   *"**Answered at [hand, two minds, the second blind]** (the consolidation run's job LV, LV-T3 in `data/consolidation-2026-09-27/lv/record.md`;
