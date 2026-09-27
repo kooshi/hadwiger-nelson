@@ -664,6 +664,22 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   mind; "likely folklore"; `[MatolcsiEtAl2025]`'s bound (13) is the argument at Croft's set]. **Not answered:** his Question 2, whether
   the supremum is attained by a finite subgraph (*"Intuition screams, "No!", but it looks like an excellent geombinatorial problem to prove it."*, p. 103); his Question 4 / Problem 5 (a non-bipartite `H` with
   `χ_f(H) < 2 + ε`) is elementary — the regular `(2k+1)`-gon of unit side, `χ_f = 2 + 1/k` — and not ours.
+- **Which distances can a four-colouring of `ℚ⁴` forbid beside 1?** `[Johnson2006]` p. 212: *"But I believe the following is still open: For which d > 0
+  does there exist a 4-coloring of ℚ⁴ which forbids both distances 1 and d?"* — after `[Zaks1999]`'s Lemmas 1–2 (every proper four-colouring of
+  `G(ℚ⁴, 1)` is monochromatic on pairs at `√2` and at 2), with his guess *"So perhaps all the distances 4k+2 and √4k + 2, k = 1, 2, … cannot be
+  forbidden by a proper 4-coloring of G(ℚ⁴, 1). But we leave this question for another day."* (the radical's bar covers `4k + 2`) **Answered at [derived, one mind]** (the
+  consolidation run's job LV, 2026-09-27, LV-T3 in `data/consolidation-2026-09-27/lv/record.md`; a second reader owed): **exactly the `d` with
+  `d² = p/q`, `p, q` odd — and then every proper four-colouring forbids `d`.** Read `ℚ⁴` as the rational quaternions, `|x|² = N(x)`; `O₂`, the
+  quaternions integral at 2, is the component of the origin (`[BendaPerles2000]`'s `[H⁴ : D] = 2`), `𝔓 = (1 + i)O₂` its maximal ideal, `O₂/𝔓 = 𝔽₄`
+  (`LEDGER.md` row 57's quaternion remark). Left multiplication by `1 + i` carries `G(ℚ⁴, 1)` onto `G(ℚ⁴, √2)`, whose components are the cosets
+  of `𝔓`; Zaks's Lemma 1 makes each monochromatic. So every proper four-colouring is, on each component, the residue colouring onto `𝔽₄` up to
+  relabelling (the unit vectors cover `𝔽₄ˣ`, so the quotient is `K₄`): a pair is **forced equal iff `v₂(|x − y|²) ≥ 1`, forced different iff
+  `= 0`, free iff `< 0`** (different components, relabelled independently). A colouring forbidding 1 and `d` with `v₂(d²) = −k < 0`, composed
+  with a rational similarity of ratio `d`, would forbid 1 and `1/d`, where `v₂ = k ≥ 1` — impossible. Johnson's guess is the case
+  `v₂ ∈ {1, 2}`. It is the `ℚ⁴` form of `LEDGER.md` row 59's valuation law with both directions, where over K the sufficiency is open (row 59;
+  §1.3), and the `ℚ⁴` shadow of `CLAUDE.md` G70's *√3-clean is residue*. **Prior art:** `[Johnson2006]` states it open in July 2006, after
+  `[Zaks1999]` and `[Zaks1989]`; nothing after 2006 searched; `[Zaks1989]` (the density of the colour classes) is held by reviewer's text
+  only. **Not claimed:** a gate; a second reader; the kernel.
 - *Checked, and not listed (no poser found):* **FS-89's rational band rigidity** (`LEDGER.md` row 95: every four- and five-colour band
   character of `ℤ[i][1/p : p ≡ 1 (4)]` is torsion plus archimedean; closed-set rigidity modulo an isometric direction at two or more
   primes). The plan's gate (26 zbMATH queries and Berend's citers), the close's (26 more, `data/fs89/close/prior-art-close-gate.txt`) and a

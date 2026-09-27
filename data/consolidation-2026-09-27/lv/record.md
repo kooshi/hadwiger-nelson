@@ -19,6 +19,14 @@ Scratch renders are not kept (they regenerate from the held PDFs with the comman
   fields are included. In print for multiquadratic `F`: `[Fischer1990b]` Lemma 1 (p. 215, the integrality) and its Corollary (the
   components); for ℚ(√m), `m ≢ 7 (mod 8)`: Zaks, per `[Johnson2000]` p. 177.
 
+- **LV-T3 [derived, one mind; a second reader owed]** — the four-colour compulsions of `G(ℚ⁴, 1)`: in every proper four-colouring, `x` and `y` are
+  the same colour iff `v₂(|x − y|²) ≥ 1`, different iff `v₂(|x − y|²) = 0`, and neither is forced when `v₂(|x − y|²) < 0`; so a four-colouring
+  forbidding 1 and `d` exists iff `d² = p/q` with `p, q` odd, and then every proper four-colouring forbids `d`. Proof (stage 3): quaternions;
+  `O₂ = H⁴` (Benda–Perles's `[H⁴ : D] = 2`, with `H⁴ ⊆ O₂ ⊋ D` of index 2); `(1 + i)·` maps `G(ℚ⁴, 1)` onto `G(ℚ⁴, √2)`, components onto
+  `𝔓`-cosets; Zaks's Lemma 1 (checked by hand) makes these monochromatic; per component the quotient is `K₄` on `𝔽₄`; negative valuation by a
+  rational similarity of ratio `d`. Answers `[Johnson2006]` p. 212's open question (`CLOSED-QUESTIONS.md` §3). Rests on BP pp. 122–125 as LP read
+  them (not re-read here).
+
 ## Stage 1 — SAVED: the sources, read before LP's words
 
 Renders: `pdftoppm -r 150 -f N -l N -png <pdf> <prefix>`, each landscape sheet cut into its two pages. Sheet-to-page maps found from
@@ -235,3 +243,22 @@ metadata lookups (zbMATH, OpenAlex, Semantic Scholar) for it.
   the `𝔽₄` residue colouring and the metric-free statement — the last not found in print, with `[Johnson1982]` unread: read it before any manuscript
   claims it."*
 - **Row 129's statement** — agree with LP's default (the sandwich stays in `CLOSED-QUESTIONS.md` §3 unless the owner folds it in).
+
+## Stage 3 — SAVED: `[Zaks1999]` read in full
+
+Geombinatorics IX(2), pp. 90–95 = sheets 29R–32L of `~/source/library/geombinatorics/geombinatorics-v09-n2-1999-10.pdf` (sheet `s` = pp. `2s+31`,
+`2s+32`), read at 150 dpi. Its statements, verbatim, are in `BIBLIOGRAPHY.md`'s `[Zaks1999]` entry (rewritten, 89c34d51).
+
+**Checked by hand:** the unit `K₄` `A, B, C, D` of p. 91 (six squared distances 1) and `E` adjacent to `B, C, D` with `|A − E|² = 2`; Lemma 1's
+reflection is rational and fixes `U`; Lemma 2's first proof works only with `[Johnson2006]` p. 212's `D = (1, 1, 0, 0)`; Theorem 3's chain of
+points along the segment is rational. Two misprints: p. 91 *"φ(B) = 4"* for `φ(D) = 4`; p. 92 *"φ(U) = φ(f(E)) = φ(W)"* for `φ(W₄)`.
+
+**Verdict: pre-empts nothing of ours.** LP's note — *"the ℚ⁴ analogue of row 59's valuation law"* — is right in spirit and understates it: Zaks
+proves compulsions (the **sufficient** direction) in `ℚ⁴` at `√2`, 2 and odd integers, where row 59 proves only the necessary direction over
+K and lists sufficiency as open. Composed with Benda–Perles's `[H⁴ : D] = 2` and the quaternion residue of row 57's remark, it gives the whole
+law in `ℚ⁴` (LV-T3) and answers `[Johnson2006]` p. 212's question, entered in `CLOSED-QUESTIONS.md` §3 at one mind. Bearing on the answer:
+none (dimension four; a model of what row 59's sufficiency would look like over K, where the analogue is G70's √3-clean-is-residue on the
+Moser lattice and fails in general — de Grey's lattice has twelve colouring classes, row 78).
+
+**Front-file draft for the owner** (not applied; `LEDGER.md` rows are outside this job's scope beyond novelty sentences): if LV-T3 survives a
+second reader, a clause in row 59's **Open:** *"(in `ℚ⁴` both directions hold — `[Zaks1999]` Lemma 1 with the quaternion residue, LV-T3)"*.
