@@ -1,0 +1,161 @@
+{
+ "name": "HX rho=28/100 U=31 v=(15,27) h=1/40 eps=1/20",
+ "colours": 6,
+ "h": "1/40",
+ "eps": "1/20",
+ "period_cell": {
+  "A": 217,
+  "B": 139,
+  "C": 27,
+  "squares": 5859
+ },
+ "square_period_L_grid_units": 5859,
+ "band_offsets_checked": 1656,
+ "ordered_pairs_checked": 9053352,
+ "violations": 922,
+ "violation_examples": [
+  {
+   "cell": [
+    46,
+    8
+   ],
+   "offset": [
+    -36,
+    -14
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9334077351297236,
+    0.9981232388838566
+   ]
+  },
+  {
+   "cell": [
+    46,
+    7
+   ],
+   "offset": [
+    -36,
+    -13
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.925,
+    0.9890020222426241
+   ]
+  },
+  {
+   "cell": [
+    46,
+    8
+   ],
+   "offset": [
+    -36,
+    -13
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.925,
+    0.9890020222426241
+   ]
+  },
+  {
+   "cell": [
+    46,
+    6
+   ],
+   "offset": [
+    -36,
+    -12
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9171968163922071,
+    0.9804335775563789
+   ]
+  },
+  {
+   "cell": [
+    46,
+    7
+   ],
+   "offset": [
+    -36,
+    -12
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9171968163922071,
+    0.9804335775563789
+   ]
+  },
+  {
+   "cell": [
+    46,
+    5
+   ],
+   "offset": [
+    -36,
+    -11
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9100137361600649,
+    0.9724325169388361
+   ]
+  },
+  {
+   "cell": [
+    46,
+    6
+   ],
+   "offset": [
+    -36,
+    -11
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9100137361600649,
+    0.9724325169388361
+   ]
+  },
+  {
+   "cell": [
+    46,
+    4
+   ],
+   "offset": [
+    -36,
+    -10
+   ],
+   "colour": 0,
+   "dist_interval": [
+    0.9034655499796327,
+    0.9650129532809392
+   ]
+  }
+ ],
+ "verdict": "REJECT",
+ "uncovered_density": "56/837",
+ "uncovered_density_float": 0.06690561529271206,
+ "class_densities": {
+  "0": "919/5859",
+  "1": "914/5859",
+  "2": "130/837",
+  "3": "101/651",
+  "4": "914/5859",
+  "5": "901/5859"
+ },
+ "max_class_density_float": 0.15685270523980202,
+ "K_DENS_ok": true,
+ "floor_eps2_over_(6+eps)^2": 6.830134553650706e-05,
+ "exact_slack": {
+  "expr": "1 - h*sqrt(1649)",
+  "value": -0.01519702521234767,
+  "offset": [
+   -31,
+   24
+  ]
+ },
+ "least_margin_to_band": -0.06519702521234767
+}

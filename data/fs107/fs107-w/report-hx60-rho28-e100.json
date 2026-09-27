@@ -1,0 +1,51 @@
+{
+ "name": "HX rho=28/100 U=60 v=(30,52) h=1/80 eps=1/100",
+ "colours": 6,
+ "h": "1/80",
+ "eps": "1/100",
+ "period_cell": {
+  "A": 420,
+  "B": 270,
+  "C": 52,
+  "squares": 21840
+ },
+ "square_period_L_grid_units": 21840,
+ "band_offsets_checked": 2088,
+ "ordered_pairs_checked": 42327936,
+ "violations": 0,
+ "violation_examples": [],
+ "verdict": "ACCEPT",
+ "uncovered_density": "14/195",
+ "uncovered_density_float": 0.07179487179487179,
+ "class_densities": {
+  "0": "563/3640",
+  "1": "3379/21840",
+  "2": "3379/21840",
+  "3": "3379/21840",
+  "4": "3379/21840",
+  "5": "563/3640"
+ },
+ "max_class_density_float": 0.15471611721611722,
+ "K_DENS_ok": true,
+ "floor_eps2_over_(6+eps)^2": 2.768541615333291e-06,
+ "exact_slack": {
+  "expr": "h*sqrt(6736) - 1",
+  "value": 0.025914226434159637,
+  "offset": [
+   -61,
+   -57
+  ]
+ },
+ "least_margin_to_band": 0.015914226434159635,
+ "junctions": {
+  "components_edge": 1,
+  "components_corner": 1,
+  "wrapping": 0,
+  "type_histogram": {
+   "012345": 1
+  },
+  "least_dist_complementary_types": null,
+  "equal_type_pairs_meeting_(1,2)": 6,
+  "least_dist_equal_types_meeting_(1,2)": 1.4146554350795109
+ }
+}

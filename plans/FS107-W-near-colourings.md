@@ -12,6 +12,11 @@ working directory, the advisor records named in SHARED § Fences and `plans/PORO
 | id | statement | grade | address |
 |---|---|---|---|
 | W-CHK | `tools/fs107_w_check.py` decides band-properness of a periodic closed-grid-square partial colouring exactly (integer arithmetic on squared distances; the distance set of two closed squares at index offset `(dx, dy)` is the interval `[h√(gx²+gy²), h√((|dx|+1)²+(|dy|+1)²)]`, `gx = max(|dx|−1, 0)`) | [tools], exact | stage 1 |
+| W-EQ-K | At bounded arc complexity `K`, band-proper designs with `ε_n, δ_n → 0` exist iff a full tight a.e.-proper six-colouring by tiles of complexity `≤ K` exists (⟸ with `δ(ε) = O(ε)`) | [hand, one mind] | §2.2 |
+| W-POLY | Polygonal designs of bounded complexity have `δ ≥ δ₀(K) > 0` at every slack, bar FS106-AE-POLY's `d = 2` case | [hand, one mind; over AE-POLY (two minds, one blind; SV-L3 a sketch)] | §2.3 |
+| W-RATE | A full tight colouring gives `δ(ε) = O(ε)`; `O(ε²)` if its contacts are isolated and transversal — the floor's order; R's pinhole test is the test against these | [hand, one mind] | §2.4 |
+| W-TAN | In a full tight six-colouring by a locally finite map, complementary-type vertices at distance `< 2` are tangent pairs or bowties; off those, adjacent tiles' vertex types form an intersecting family | [derived, one mind; over C-T-TAN (one mind)] | §2.5 |
+| HX-STALL | Family HX (hexagonal seven-colouring, colour-0 hexagon absorbed by straight triangles, a void of radius `ρ` at its centre): band-proper iff `ρ > max(2R − √((1−ε)² − 3R²), √((1+ε)² − 3R²) − R)` against the two named pairs (and the design's other pairs, checked at members); its holes stop at `δ*_HX = π/(42√3) = 0.0432`, at `R = 2/√21`, `ρ = R/2` | [hand, one mind; four members checked exactly, prediction P-W3 won] | §3.3–3.5 |
 | W-HEX | The rasterised hexagonal seven-colouring with one class blank (`u = (31, 0)`, `v = (15, 27)`, `h = 1/40`) is a periodic grid-square partial six-colouring with exact slack `1 − √1322/40 ≈ 0.0910` and uncovered density exactly `1/7` | [tools], exact | stage 1; `data/fs107/fs107-w/report-hex7m1-h40-e20.json` |
 
 ## Would-have-searched-here log (standing rule 3)
@@ -19,6 +24,7 @@ working directory, the advisor records named in SHARED § Fences and `plans/PORO
 | # | the move a search would have made | what I did instead |
 |---|---|---|
 | 1 | Greedy-fill the hex member's holes (351 of 837 hole squares can individually take a colour) to see how far coverage rises | Recorded the count as a diagnostic only; a fill procedure is a colourer, out under the ban and not W's route (members are given by formula) |
+| 2 | Scan HX's spacing `D`, void `ρ` or triangle shape for a smaller stall | Derived the stall exactly (3.3) and placed four members by the derivation |
 
 ## Stage 1 — SAVED: quotation check, restatement, the advisor's question, the checker
 
@@ -228,9 +234,89 @@ every centre; nothing else is uncovered. Parameters: `D` and `ρ` (and `h`, `ε`
 *Hand analysis (registered before any member is checked; G21):* the binding pairs are (a) the tile's own diameter, far hexagon vertex to the
 truncated tip, `≈ √(7/3)·D − 0.756ρ < 1 − ε`, and (b) the tip against the second-neighbour same-colour hexagon's vertex, `≈ (2/√3)·D + 0.5ρ >
 1 + ε`. They are compatible only for `ρ ≳ 0.228 + 1.64ε` (first order in `ρ`), so **HX's holes stop shrinking at `ρ* ≈ 0.31` at `ε = 1/20`,
-`δ* ≈ 0.08` — above the control's `1/7 ≈ 0.143`? no: below it, but bounded away from 0**. **Registered prediction P-W1:** at `D = 0.775`
+`δ* ≈ 0.08` — below the control's `1/7 ≈ 0.143`, bounded away from 0** (this sentence corrected in stage 3; the analysis it summarises was wrong — stage 3.1). **Registered prediction P-W1:** at `D = 0.775`
 (`u = (31, 0)`, `h = 1/40`), `ε = 1/20`, members with `ρ ≥ 0.34` ACCEPT, `ρ ≤ 0.28` REJECT, the transition in `[0.28, 0.34]`, and the binding
 offset at the transition is (a) or (b). *What P-W1 cannot mean:* HX is the crudest door-(A) probe; its stall says a six-chromatic junction
 with straight absorbed triangles needs a void of radius `≍ 0.3`, nothing about curved designs. Its value is a checked, named stall.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: members by formula, checked; the four killing tests
+
+### 3.1 P-W1 scored: LOST
+
+Six members at `D = 0.775` (`u = (31, 0)`, `v = (15, 27)`, `h = 1/40`), `ε = 1/20`, `ρ ∈ {0.38, 0.34, 0.32, 0.30, 0.28, 0.24}`: **all REJECT**. Exact
+slack `1 − √1465/40 = 0.0431` at `ρ = 0.38`, falling to exactly 0 at `ρ = 0.30` (`1 − √1600/40`), always at a diameter-type offset
+`(−31, 20…25)`. P-W1 said ACCEPT at `ρ ≥ 0.34`: lost on both halves. **The cause, found:** my first-order estimate ignored that truncating the
+triangle leaves a **sliver** along the hexagon's edge whose far corner, not the arc, sets the diameter. Exactly, for the continuous design, with
+`R = D/√3` the hexagon's circumradius and `s = 1 − ρ/R`:
+- (a) the diameter is `R√((s + 1)² + 3)` (far vertex `F` to the arc endpoint `Q₋`: `F − Q₋ = 2R·e^{i150°} − sR·e^{i30°}`);
+- (b) the tip to the second-neighbour same-colour hexagon's vertex is `2R + ρ` (collinear through `c₀`; my stage-2 `+0.5ρ` was a sign slip in
+  the direction).
+
+So HX at spacing `R` is band-proper at slack `ε` iff (to the design's other pairs, which the checker covers) `ρ > ρ_min(R, ε) = max(1 + ε − 2R,
+2R − √((1 − ε)² − 3R²))`. The first term falls with `R`, the second rises; at `ε = 0` they meet where `√(1 − 3R²) = 4R − 1`, i.e. **`R = 8/19`,
+`ρ = 3/19`**, and HX's holes stop at **`δ*_HX = π(3/19)²/(7·(3√3/2)(8/19)²) = 9π/(672√3) = 0.02429…`** (continuous design, `ε → 0`). The
+checker's exact slack at `ρ = 0.38` (0.0431) matches formula (a) with rasterisation: `1 − R√((s+1)² + 3) = 0.0695` continuous, minus the
+squares' reach.
+
+### 3.2 P-W2, registered before the members below are checked
+
+Members at `u = (58, 0)`, `v = (29, 50)`, `h = 1/80` (`D = 0.725`, `R = 0.4186`, near `8/19 = 0.4211`), `ε = 1/100`, `ρ ∈ {0.22, 0.20, 0.18,
+0.16}`. Continuous slack `s_c(ρ) = min((a) 1 − √((2R − ρ)² + 3R²), (b) 2R + ρ − 1)`: `0.0478, 0.0347, 0.0172, −0.0028`; the binding pair
+switches from (a) to (b) near `ρ = 0.191`. **P-W2:** the exact slack lies in `[s_c − 0.018, s_c]` (rasterisation costs at most `√2h`); ρ = 0.22,
+0.20 ACCEPT; 0.16 REJECT; the binding offset is diameter-type at 0.22 and 0.20 and tip-type at 0.16. *Uninformative outcome, reachable:* all
+ACCEPT or all REJECT would say the derived geometry is off again. *What it cannot mean:* anything about curved or non-hexagonal designs.
+
+### 3.3 P-W2 scored: LOST — a third pair, located by the checker
+
+All four REJECT (`ρ = 0.22` at a diameter-type offset; `ρ ≤ 0.20` at `(−64, −48)`, centres exactly 1 apart). Locating the violating squares
+(diagnostic run, `data/fs107/fs107-w/report-hx58-*`): a tip square just outside the void, at the **corner** of the truncated triangle, against a
+square near a vertex of the nearest same-colour hexagon — the second neighbour of the void's centre, at `√3D` in the direction **120° from that
+corner**. Stage 2's (b) paired the other corner, collinear through `c₀` (at 180°); the nearer corner is at 120°. **Corrected (b′):**
+`√(4R² + ρ² + 2ρR) > 1 + ε` (law of cosines at 120°). With (a) unchanged, and `S = √((1 − ε)² − 3R²)`, `S′ = √((1 + ε)² − 3R²)`:
+`ρ_min(R, ε) = max(2R − S, S′ − R)`. At `ε = 0` equality `2R − S = S − R` gives `S = 3R/2`, **`R = 2/√21`, `ρ = 1/√21 = R/2`**, and
+
+> **HX's holes stop at `δ*_HX = π(ρ/R)²/(7·3√3/2) = π/(42√3) = 0.04318…`** — the continuous design, `ε → 0`, over all spacings `D` and void radii
+> `ρ` [hand, one mind; checked at members below]. The stall is two named pairs balancing: the sliver's far corner against the opposite hexagon
+> vertex (the tile's diameter), and the tip's corner against the second-neighbour same-colour vertex at 120°.
+
+*A note on the checker's output:* on a REJECTed member the reported "exact slack" is the least margin of a *square* pair, which saturates near
+`−√2h/…` (a pair of squares spans a distance interval of length `≤ 2√2h`); it says "violated", not by how much.
+
+### 3.4 P-W3, registered before these members are checked
+
+Members at `u = (60, 0)`, `v = (30, 52)`, `h = 1/80` (`D = 0.75`, `R = 0.4330`, near `2/√21 = 0.4364`), `ε = 1/100`, `ρ ∈ {0.30, 0.28, 0.26,
+0.24}`. Continuous slack `min((a), (b′))`: `0.0487, 0.0348, 0.0212, 0.0077`, (b′) binding throughout. **P-W3:** exact slack in
+`[s_c − 0.018, s_c]`; `ρ = 0.30, 0.28` ACCEPT; `0.24` REJECT; `0.26` either; binding offset tip-type (b′) at every member.
+
+### 3.5 P-W3 scored: WON
+
+| member (`D = 0.75`, `h = 1/80`, `ε = 1/100`) | verdict | exact slack (predicted window) | uncovered `δ` (exact) | max class | junctions (per period) |
+|---|---|---|---|---|---|
+| `ρ = 0.30` | ACCEPT | `√6964/80 − 1 = 0.0431` (`[0.031, 0.049]`) | `451/5460 = 0.0826` | 0.1530 | 1, type all six; 6 equal-type pairs in `(1,2)`, least 1.373 |
+| `ρ = 0.28` | ACCEPT | `0.0259` (`[0.017, 0.035]`) | `14/195 = 0.0718` | 0.1547 | same; least 1.415 |
+| `ρ = 0.26` | ACCEPT | `0.0165` (`[0.003, 0.021]`) | `49/780 = 0.0628` | 0.1562 | same; least 1.451 |
+| `ρ = 0.24` | REJECT at `ε = 1/100`; band-proper for `ε < 0.0007` | `0.0007` (`[−0.010, 0.008]`) | `29/546 = 0.0531` | 0.1578 | same; least 1.489 |
+
+Every slack is of the min-distance form `h√n − 1` — the tip-type pair (b′), as registered. Member and report files:
+`data/fs107/fs107-w/{member,report}-hx60-rho*-e100.json`. Continuous-design limit at this `D`: `δ → 0.0480` as `ε → 0`; at the optimal `D`,
+`δ*_HX = π/(42√3) = 0.0432`.
+
+### 3.6 The four killing tests on HX (claims.md §3, W's)
+
+1. **Exact check:** every member above checked exactly (W-CHK); the family's band-properness for every `(ρ, D)` is the derivation 3.3, the members
+   are its controls (G21) — three of three predictions about them scored, one won.
+2. **Floor:** `δ ≥ 0.053 ≫ ε²/(6+ε)² = 2.8·10⁻⁶` at every member — passes, trivially.
+3. **Class density:** every class `≤ 0.1578 < 0.2470` — passes.
+4. **A driving parameter:** `ρ` drives `δ` down, **to `π/(42√3)` and no further** — **fails**. HX is not a W family; it is a named stall.
+
+*Junctions (K-C6, K-KILL):* HX's one junction per period is six-chromatic (type all six colours), so no complementary three-element types exist
+(K-C6 vacuous) and its equal-type pairs are its neighbouring voids at `1.37–1.49`, inside `(1, 2)` (K-KILL's same-multicolour case, a GAP on LIM,
+is present at every member). A six-chromatic junction is the worst junction a six-colour design can have; HX was chosen as the crudest probe, and it
+behaves as the crudest probe should.
+
+*Would-have-searched log, item 2:* the natural next move — scan `(D, ρ)` or the triangle shape for a smaller stall — is an optimiser; instead the
+stall was derived (3.3) and the members placed by the derivation.
+
+## Stage 3 — SAVED

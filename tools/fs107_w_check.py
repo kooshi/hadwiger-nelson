@@ -375,14 +375,14 @@ def junctions(mem: Member):
 # The report.
 # ----------------------------------------------------------------------------------------------------------------
 
-def check(mem: Member, with_junctions: bool = True) -> dict:
+def check(mem: Member, with_junctions: bool = True, window: Fraction = Fraction(1, 4)) -> dict:
     T = mem.torus
     n = T.det
     coloured = int((mem.M >= 0).sum())
     unc = Fraction(n - coloured, n)
     dens = {c: Fraction(int((mem.M == c).sum()), n) for c in range(mem.k)}
     viol, ex = band_check(mem)
-    slack = exact_slack(mem)
+    slack = exact_slack(mem, window)
     rep = {
         "name": mem.name, "colours": mem.k, "h": str(mem.h), "eps": str(mem.eps),
         "period_cell": {"A": T.A, "B": T.B, "C": T.C, "squares": n},
@@ -398,7 +398,7 @@ def check(mem: Member, with_junctions: bool = True) -> dict:
         "floor_eps2_over_(6+eps)^2": float(mem.eps ** 2 / (6 + mem.eps) ** 2),
     }
     if slack is None:
-        rep["exact_slack"] = ">= 1/4 (no same-coloured offset within 1/4 of the unit distance)"
+        rep["exact_slack"] = f">= {window} (no same-coloured offset within {window} of the unit distance)"
     else:
         m, off = slack
         rep["exact_slack"] = {"expr": ("1 - h*sqrt(%d)" if m[0] == "in" else "h*sqrt(%d) - 1") % m[1],
@@ -414,6 +414,7 @@ def main(argv=None) -> int:
     ap.add_argument("member", nargs="?")
     ap.add_argument("--json")
     ap.add_argument("--no-junctions", action="store_true")
+    ap.add_argument("--window", default="1/4", help="report the exact slack only within this distance of 1")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args(argv)
     if a.self_test:
@@ -426,7 +427,7 @@ def main(argv=None) -> int:
     except (ValueError, KeyError, AssertionError) as e:
         print(f"MALFORMED: {e}", file=sys.stderr)
         return 2
-    rep = check(mem, with_junctions=not a.no_junctions)
+    rep = check(mem, with_junctions=not a.no_junctions, window=Fraction(a.window))
     print(json.dumps(rep, indent=1, default=str))
     if a.json:
         with open(a.json, "w") as f:
