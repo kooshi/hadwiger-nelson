@@ -167,6 +167,39 @@ fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11
 - **No six-colouring of the whole plane is claimed in thread 16.** Pálvölgyi's "there is a chance that CNP<=6" (`[16.253]`) is said of a sphere
   7-tiling.
 
+## Stage 7 — SAVED (`[Coulson2004]`'s figures viewed; `[Soifer2024]` located and read)
+
+**`[Coulson2004]`, figures** (`~/source/library/pdf/jams-2004-coulson-chromatic-number-plane-tilings.pdf`, pages rendered with `pdftoppm -r 110`, all five
+figures viewed, 2026-09-27):
+- Fig. 1 (p. 192), the Moser spindle; Fig. 2 (p. 193), the hexagonal seven-colouring with its sublattice cells hatched.
+- Fig. 3 (a)–(c) (p. 195): Lemma 3.1's groups `G` and `M` in a **polygonal** tiling (straight edges only), the boundary component unbounded (a), interior
+  (b), exterior (c).
+- Fig. 4 (p. 195): (a) a tri-coloured vertex `T` (colours `a, b, c`) and the circle `C` of radius `D` about it with a neighbourhood `U`; (b) a non-interior
+  point of `C` separating `d` from `e` at distance `D` from an interior point (Lemma 3.3); (c) **the six non-interior points on `C`, a regular hexagon of
+  chords `D`, colours alternating `d, e`** (Corollary 3.4) — the same picture as FS-110's six change points of a ring (NB-4, A4-SIX-ARCS).
+- Fig. 5 (p. 195): (a) at the six points, like-coloured tile boundaries leave `C` outwards as **straight rays** meeting the chord at an angle marked
+  `90 − ε`, the text's "strictly acute angles with the line segment of length D"; (b) a boundary `B` between `a` and `b` at `T` and two points `P₁, P₂`
+  at distance `D` on `C`.
+- **No figure shows a curved boundary, let alone a unit arc**: Coulson's scheme is convex polygonal tiles with area bounded below (§2, p. 192, verbatim:
+  "Let us consider a colouring of Euclidean 2-space using polygonal tiles that are convex, (vertices having interior angles strictly less than π), locally
+  finite and all with area greater than some lower bound l."). A boundary lying along `C` itself — a unit arc about `T` — is outside his hypotheses and
+  outside his figures; Fig. 5(a)'s acute angle is where it would enter. (A reading of the figure, not a derivation.)
+
+**`[Soifer2024]`, located by the text layer** (`pdftotext -layout`, grep for "Thomassen", "nice colo(u)ring", "circular arc", "unit arc", "radius 1",
+"Reuleaux", "curvature", "Siamese", "Polymath16", "Pritikin", "strip"):
+- **Ch. 18, "Carsten Thomassen’s 7-Color Theorem", pp. 179–182 — read in full (text).** Verbatim, p. 179: "Given a graph G on a surface S, Thomassen
+  deﬁnes nice coloring of S as a coloring in which each color class is the union of regions (and part of their boundaries) such that the distance between
+  any two of these regions is greater than 1." Two notes for the sides, not derivations: (1) Soifer renders the hypothesis as "Thomassen assumes that each
+  region that has diameter less than 1 is homeomorphic to a Euclidean disc and is bounded by a cycle in G" — a restrictive clause, where
+  `[Thomassen1999]` p. 850 (claims §0) assumes each face "has diameter less than 1, is homeomorphic to a disc, and is bounded by a cycle in G"; the proof
+  then uses "a face of diameter < 1" (p. 181), so the assumption is the print's, the book's sentence misrenders it. (2) The theorem's condition (iii) reads
+  "12 k + 30" while the proof uses "12 k + 3", "12 k + 1" and "12 k + 29" — internal misprints. Soifer's closing remarks (p. 182) show the conditions are
+  needed ("A thin two-way inﬁnite cylinder has a nice 6-coloring").
+- **Map colourings with unit arcs: none in the book.** No occurrence of "Reuleaux", "Siamese", "unit arc" or "circular arc" as a tile boundary; Part IV
+  ("Coloring Maps", ch. 19–22) is the four-colour history. Ch. 54 (pp. 693–697; read in full at FS-70) cites `[Polymath2021]` as "[Poly] … all related to
+  circular disks and inﬁnite strips in the plane" and discusses only its 5-chromatic strip graph. Ch. 64 (p. 767) records `[Pritikin1998]`'s 6198 and
+  Parts's 6993 ("a tiling of more than 99.985698% of the Euclidean plane with 6 colors"). Ch. 25 (Townsend) was read by FS110-PA and job LP.
+
 ## Would have searched here
 
 - Solving de Grey's column (`[07.10]`) as a constraint system to confirm it is `[AxenovichEtAl2014]`'s strip: not done (a derivation for the sides;
