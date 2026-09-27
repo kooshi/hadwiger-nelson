@@ -1,6 +1,6 @@
 JOB FS110-CB — DONE   harness≈? (own≈190k)
 RESULT: S1 Cor.1 AE curved cubic TRUE, no d=2 exception [hand, 1 mind blind]; S2 Lemma 3 at √3≤d<2 TRUE by exact bicycle (printed Fig.5 proof FALSE from √3: pairing flip, |q3−u1|²=2+2cos(2θ0−60°)) [hand+tools]; S3 d=2 = antipodal points on ω(u), same- or DISJOINT-multicolour; unreachable after a circle-only reduction replacing Prop.19's plane recolouring
-RECORD: plans/FS110-CB-verification.md   COMMITS: stage1, stage2, e7f97689 (stage3), stage4 (this)
+RECORD: plans/FS110-CB-verification.md   COMMITS: b8a64466, 2e220908, e7f97689, 3f0448ce
 INVENTORY: 5
   result — Cor.1 AE (curved cubic, Cond.5) needs no d=2 exception: circle-only reduction puts every pigeonhole endpoint in the open disc — FS110-CB §D5, §Stage 3
   result — Lemma 3 AE all 1<d<2, exact bicycle; for d>√3 one partner overshoots z1 (turning at cos θ*=(3+d²)/(4d)), four endpoint cases closed — §D4, tools/fs110_cb_geometry.py
