@@ -8,13 +8,13 @@
 
 **Banner (job LP of the consolidation run, 2026-09-27): item 5 is answered.** `[Townsend2005]` (held: `~/source/library/geombinatorics/geombinatorics-v14-n4-2005-04.pdf`,
 pp. 184–193; reading note `~/source/library/notes/townsend-2005-reading.md`) is the 1979 manuscript word for word in every definition, theorem
-and proof — the differences are the affiliation, three sentences of abstract (*"This paper was written in 1979 but never published."*), `π/3`
+and proof — the differences are the affiliation, three sentences of abstract (*"This paper was written in 1979 but never published."*) and its *"(known) result"* made *"proposition"*, `π/3`
 for `⅓π`, and one garbled glyph — and its simplification (c) (p. 187) is the manuscript's sentence, again with no argument. So FS106-V3's GAP
 at (c) stands in print, and FS106-TW's fill (Woodall's steps 2, 3, 5, in outline) is still the only one. `[Soifer2024]` ch. 25 is a different
 text, Townsend's 2007 exposition (p. 255): (c) the same sentence (p. 257), but Theorem 5 re-argued — (i) at a vertex of degree 5, two cases
 by the angle at `v`, the cut points located; (ii) with *"at most two cut points"* and a `π/2` arc remark (pp. 264–267) — still resting on (c)
 for distinct colours at a vertex. **Left:** item 4, and with it a reading of the 2007 Theorem 5 against FS106-V3's other flagged steps
-(vertex existence; the cross-cut arguments), which it partly writes out. `data/consolidation-2026-09-27/lp/record.md` stage 3.
+(vertex existence; the cross-cut arguments), which it partly writes out. `data/consolidation-2026-09-27/lp/record.md` stage 3; checked by a second reader (job LV, three passages — (c), Theorem 1, the end of Theorem 5's proof — against the manuscript, `…/lv/record.md` stage 1).
 
 ## The question
 

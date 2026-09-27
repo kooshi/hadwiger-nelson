@@ -147,7 +147,7 @@ pp. `152+2s`, `153+2s`; XIV(4) sheet `s` = pp. `174+2s`, `175+2s`; V(3) sheet `s
 - **`[Townsend1979ms]`** (held Word PDF, "Copyright © 1979 Stephen P Townsend", created 2024-02-02), text layer: affiliation *"Department of
   Mathematics, University of Aberdeen"*; abstract ends *"This leads to a proof of the (known) result that every 5-coloured planar map contains
   two points of the same colour unit distance apart."* Three passages compared with the 2005 print: (c) — identical but for the ε glyph lost
-  in the text layer; Theorem 1's statement — identical but for `⅓π` against `π/3`; the closing paragraph of Theorem 4's proof part (ii), the
+  in the text layer; Theorem 1's statement — identical but for `⅓π` against `π/3`; the closing paragraph of Theorem 5's proof, part (ii) (it ends *"By theorem 4 every 5-coloured map contains a monochrome unit."*), the
   last sentence and the five references — identical (2005 adds the end-of-proof box). The body matches; the 2005 abstract changes *"(known)
   result"* to *"proposition"* and adds three sentences; the affiliation differs.
 - **`[Soifer2024]`** ch. 25 (text layer): p. 255 *"presented below exposition of the proof has been written by Professor Townsend especially for
@@ -158,3 +158,80 @@ pp. `152+2s`, `153+2s`; XIV(4) sheet `s` = pp. `174+2s`, `175+2s`; V(3) sheet `s
 
 Nothing of the banned kind. One reading fetch attempted (Johnson 1982's open-access PDF, refused by the publisher's bot check), three
 metadata lookups (zbMATH, OpenAlex, Semantic Scholar) for it.
+
+## Stage 2 — SAVED: verdicts, corrections, the corrected drafts
+
+### Verdicts, P1–P6
+
+| item | verdict | the source's words that decide it |
+|---|---|---|
+| **P1 — Theorem A.** Ledger row 57 / `colorable_of_residue`: for an additive group `M`, a subgroup `A`, a finite `G` and `ψ : A →+ G`, a graph `Γ` with a map `f : V → M` whose every edge difference lies in `A` with non-zero ψ-residue is `\|G\|`-colourable — no metric, field or ring. | **Agree** that the construction is `[Fischer1990]` Thm 1(i) (p. 183) and `[Johnson2006]` p. 213 for every `G(S, D)`. **Differ on two points.** (a) Its first printed instances are `[BendaPerles2000]`'s, 1976: `ℚ²` (p. 120) and `ℚ³` (p. 121), a parity colouring of the unit-vector group copied to its cosets — LP's record saw p. 120 but no front file said so. (b) "Ours: the metric-free, arbitrary-group statement" is **not found in print as far as read**, not established: `[Johnson1982]`, *Coloring Abelian groups*, is `[Johnson2006]`'s [10], cited on the very page that defines the additive colouring, and is unread (fetch refused, stage 1). What the print holds: `M = F^d` or a subgroup of `ℝⁿ`, `A` the unit-vector (or `S_D`) group, `f` the identity. What is left: `M` arbitrary (torsion allowed — the finite planes), `f` arbitrary, `A` any subgroup containing the edge differences, and the kernel proof — each a routine step. | Fischer p. 183 and Johnson p. 213, quoted in stage 1; BP p. 120: *"It can be extended to the whole Q² since the other connected components, being cosets of H², are isomorphic to it in the graph structure."* |
+| **P2 — the bridge; the unit-vector ring of ℚ.** | **Agree**: BP's, pp. 117–118 (typed 1976, Johnson's introduction p. 110), as `χ(ℝ²) = χ(𝔸²)`; the number-field form is one compactness line, printed with BP's credit in `[Johnson2006]` p. 214; `[Johnson2000]` §3 p. 174 is the embedding form, which is `RealAlgebraicDescent`'s unit-distance instance. `H²` p. 120 ✓ (a group in BP's words; the ring is immediate). **Differ in one word**: Madore's ¶5.4 is not a "restatement" — he re-derived it without the paper and his own footnote 5 credits BP through MathSciNet's review; and `[Fischer1990]` p. 182 had credited BP in 1990. Row 107, G56, G63: the credit moves as LP drafted; G63's "(noted by `[BendaPerles2000]`, unread" was already an unheeded pointer. | BP pp. 117–118, Madore fn. 5, Fischer p. 182, Johnson 2006 p. 214 — stage 1 |
+| **P3 — the posed questions.** | **Agree**, row by row. Johnson 2000 p. 176 and 2006 p. 214 verbatim ✓. Rows 73 and 121 answer them: 2006's "≥ 4" — yes at `m = 11`, **kernel** (row 73); 2006's ">" — yes at `m = 47`, **[hand], through MR** (row 121; kernel only over named hypotheses, row 127); 2000's family `m ≡ 11 (mod 12)` — four at every member, [hand] (row 82; forty below 500 certified, rows 73, 83), the value `L` wherever `L ≤ 5` ([hand], rows 99, 123, the fives through MR), open at `L ≥ 6`; his pointer ℚ(√23) is four (row 73, certified; upper bound the plane at 7). `CLOSED-QUESTIONS.md` §1.1, §1.2, §1.7, §2.3, §2.6, §2.8, §3 checked against the sources and rows; **three corrections** (below): §1.1's and `[BendaPerles2000]`'s p. 121 quotation closes a parenthesis the print leaves open; §1.2's "ours" loses its certainty (P1); §2.7's heading claims every real number field where its body excludes row 100's exception fields, and its derived bracket cites `[Fischer1990]` Thm 1, which holds no integrality (the integrality is `[Fischer1990b]` Lemma 1, and the multiquadratic disconnectedness is that paper's Corollary). §2.8: S–V Question 2 verbatim from the held v1 p. 26, Condition 5 p. 4; polarity right — "yes" is "seven needed", which row 134 gives under Condition 5, a subclass of the maps the question ranges over, so "partial". §3's `d(6) = 1` quotes match rows 132 and 134; Benda–Perles Question (2) and `[Johnson2000]` p. 175's *"the question is open, so far as I know"* ✓; the fractional entry's quotations of `[Johnson1996fcn]` pp. 103–105 and `[Johnson2000surprises]` p. 143 ✓. | stage 1 |
+| **P4 — `[Fischer1994]` cited.** | **Agree**: `[Johnson2000]` [9] (p. 178) and `[Johnson2006]` [8] (p. 216) are `[Fischer1994]`, each restating `χ(ℚ²(√3, √11)) = 4`; `WORKFLOW.md` 3.2 item 8's *"nothing cites it"* is false. Added: neither survey is in OpenAlex (title filters `forbid the distance one` → 0; `colorings of metric spaces` → one unrelated 2004 work, 2026-09-27); Semantic Scholar rate-limited, unchecked. | stage 1 |
+| **P5 — Townsend.** | **Agree**: the 2005 body matches the held manuscript in the three passages checked; (c) is unargued in both and in `[Soifer2024]` ch. 25 (p. 257); ch. 25 is Townsend's 2007 exposition (p. 255), not a reprint. **One omission in LP's list of differences**: the abstract's *"(known) result"* became *"proposition"* in 2005 (corrected in `[Townsend2005]`'s entry and FS-108's banner). And a caution on the word "manuscript": the held file is a Word PDF created 2024-02-02 bearing a 1979 copyright line; "word for word" compares two late artifacts, and the 1979 date is the author's. | stage 1 |
+| **P6 — LP's derived claims.** | **Both check at [hand]** (LV-T1, LV-T2 above). The fractional sandwich is unconditional; given MR, row 129 closes it. The disconnectedness needs only integrality at stable primes and Chebotarev, so it holds at the exception fields too; its citation is corrected (P3). Both entries now read "two readers". | — |
+
+### Corrections made in place (old → new, abridged to the changed words)
+
+1. `LEDGER.md` row 57: *"`[Johnson2006]` p. 213 for every `G(S, D)`; ours is the metric-free, arbitrary-group statement and the kernel proof (… read
+   2026-09-27)."* → *"… for every `G(S, D)`, its first instances `[BendaPerles2000]`'s (1976: a parity colouring of the unit-vector group copied to
+   its cosets, `ℚ²` p. 120, `ℚ³` p. 121); ours is the metric-free, arbitrary-group statement — not found in print as far as read, `[Johnson1982]`
+   (*Coloring Abelian groups*, `[Johnson2006]`'s [10]) unread — and the kernel proof (… read 2026-09-27, a second reading the same day)."*
+2. `LEDGER.md` § The claim list, Not ours: Theorem A's construction gains *"; first for `ℚ²` and `ℚ³`, `[BendaPerles2000]` pp. 120–121"*; the
+   bridge's *"restated as `[Madore2015]` ¶5.4"* → *"credited to them by `[Fischer1990]` p. 182; re-derived as `[Madore2015]` ¶5.4, whose footnote 5
+   credits them"*.
+3. `LEDGER.md` row 107: *"and restated as `[Madore2015]` ¶5.4 with ¶1.3,"* → *", credited to them by `[Fischer1990]` p. 182, and re-derived as
+   `[Madore2015]` ¶5.4 with ¶1.3 (its footnote 5 credits them, through MathSciNet's review),"*.
+4. `LEDGER.md` § The claim list, rows 82–83: *"`[Johnson2000]` p. 176 and `[Johnson2006]` p. 214, read 2026-09-27, pose the family as open"* →
+   *"`[Johnson2000]` p. 176 poses the family as open and `[Johnson2006]` p. 214 asks whether any `m` needs four, both read 2026-09-27"* (2006
+   asks the existence question, not the family).
+5. `LEDGER.md` row 100: *"Lemma C′ answers `[Johnson2000]` §5's question at `n = 2`"* → *"… at `n = 2` outside the exception fields"*.
+6. `CLOSED-QUESTIONS.md` §1.1 row 1 and `BIBLIOGRAPHY.md` `[BendaPerles2000]`: *"say G₁(Q²(√2)) or"* → *"say G₁(Q²(√2) or"* with *"(the print's
+   parenthesis unclosed)"*.
+7. `CLOSED-QUESTIONS.md` §1.2: after *"So the step Madore declined in 2015 was taken in 1990."* adds BP's 1976 instances with the p. 120 quotation;
+   **Ours** gains *"— not found in print as far as read; `[Johnson1982]` … is unread and is the paper likeliest to hold it (a debt: open access at the
+   publisher, whose bot check refused a scripted fetch) —"*.
+8. `CLOSED-QUESTIONS.md` §2.7: heading *"answered at `n = 2` for every real number field"* → *"… for every real number field outside row 100's
+   ramified-dyadic exception"*; the derived bracket's *"`[Fischer1990]` Thm 1 and `[Madore2015]` Prop. 3.2's argument"* → *"`[Fischer1990b]` Lemma 1
+   for multiquadratic `F` and `[Madore2015]` Prop. 3.2's argument"*, adding *"two readers, the consolidation run's LP and LV; in print for
+   multiquadratic `F` as `[Fischer1990b]`'s Corollary, and for ℚ(√m), `m ≢ 7 (mod 8)`, as Zaks's (`[Johnson2000]` p. 177)"*; *"Not answered: … the
+   exception fields' `A`."* → *"… beyond the quadratic ones (`[Fischer1990b]` Thm 5 gives `A` in closed form for every real quadratic field, ℚ(√5) and
+   ℚ(√17) included)."*
+9. `CLOSED-QUESTIONS.md` §3, the fractional entry: *"[derived, one mind]"* → *"[derived; two readers, the consolidation run's LP and LV]"*.
+10. `BIBLIOGRAPHY.md` `[BendaPerles2000]`: *"`[Madore2015]` ¶5.4 restating it in 2015"* → *"`[Fischer1990]` p. 182 crediting it to them (…),
+    `[Madore2015]` ¶5.4 re-deriving it in 2015 without the paper, whose footnote 5 credits it to them through MathSciNet's review"*.
+11. `BIBLIOGRAPHY.md` `[Townsend2005]` and `plans/STUB-regular-half-residuals.md`'s banner: the abstract's *"(known) result"* → *"proposition"* added to
+    the differences; the banner names the second reading.
+12. `BIBLIOGRAPHY.md` `[Johnson1982]`: its bearing on row 57's residual claim, the refused fetch, and Semantic Scholar's machine TLDR (marked as such).
+
+`python3 tools/bib_audit.py`: exit 0 after corrections 6, 10–12.
+
+### The corrected `CLAUDE.md` drafts (measured against the file at 3063678b/42aada3b, 295,835 bytes; total **+346 bytes** → 296,181)
+
+| # | where | now | proposed | bytes | against LP's |
+|---|---|---|---|---|---|
+| D-1 | item 14 (l. 270) | `**nothing is claimed new while \`[Johnson2000]\` and \`[Johnson2006]\` are unread**` | `not found in print — \`[Johnson2000]\` and \`[Johnson2006]\` pose it as open (\`CLOSED-QUESTIONS.md\` §1.7)` | +25 | LP's, unchanged |
+| D-2 | § The prior-art position (ll. 330–332) | `— and all stop where⏎Madore's Prop. 3.9 declines to formulate the general case. **Ours:** Theorem A's general form (that⏎formulation);` | `— and all but \`[Fischer1990]\` (Thm 1(i), the coset construction) stop where⏎Madore's Prop. 3.9 declines to formulate the general case. **Ours:** Theorem A's general form made metric-free (not found in⏎print; \`[Johnson1982]\` unread);` | +98 | **changed**: the lineage sentence "all stop where Madore declines" is false of Fischer's own lineage, which LP's draft left standing; and "ours" carries its unread paper |
+| D-3a | § Publication, Theorem B (l. 179) | `The equality is his; the six later posers` | `The equality is his, restated in two surveys (\`[Johnson2000]\` p. 176, \`[Johnson2006]\` p. 214); the six later posers` | +74 | **changed**: LP's "Two surveys restated it" put before "What is ours" read as ours; here it sits with the credit |
+| D-3b | same bullet (l. 180) | `Theorem A's general form (his congruence family is a proper subfamily` | `Theorem A's metric-free form and reach (the construction \`[Fischer1990]\`'s; his congruence family is a proper subfamily` | +50 | **changed**: the parenthesis is about which fields A four-colours, so "metric-free form" alone orphaned it |
+| D-4 | rank 17, FS-102 (l. 370) | `` `[Johnson2000]`, `[Johnson2006]` first; `` | `` `[Johnson2000]`, `[Johnson2006]` read, not found; `` | +10 | LP's, unchanged |
+| D-5 | G63 (l. 1261) | `` is **`[Madore2015]` ¶5.4 with ¶1.3, by Tarski** (noted by `[BendaPerles2000]`, unread; `` | `` is **`[BendaPerles2000]` pp. 117–118 (1976), by Tarski** (re-derived as `[Madore2015]` ¶5.4 with ¶1.3, whose fn. 5 credits them; `` | +44 | **changed**: "restated" → "re-derived …, whose fn. 5 credits them" |
+| D-6 | G56's grade (l. 1041) | `` bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős]** `` | `` bridge, which is `[BendaPerles2000]` pp. 117–118 (Madore's ¶5.4) plus de Bruijn–Erdős]** `` | +30 | LP's, unchanged |
+| D-7 | rank 5, FS-108 (l. 358) | `three of five items answered at FS-110 (row 134); left: Townsend's (c) in full; \`[Townsend2005]\`` | `four of five answered (row 134; \`[Townsend2005]\` is the manuscript, (c) unargued); left: Townsend's (c) in full` | +15 | LP's, unchanged |
+
+(`⏎` marks a line break in the file. G67's M2-miss sentence, l. 1394, quotes G56's old text as history and stays, as LP said.)
+
+### The other drafts, corrected
+
+- **`WORKFLOW.md` 3.2 item 8** (l. 110–111), now *"it is in neither OpenAlex nor Semantic Scholar and nothing cites it, so **no citation walk can
+  arrive at it**"* → **proposed**: *"it is in neither OpenAlex nor Semantic Scholar, and the two surveys that cite it (`[Johnson2000]`, `[Johnson2006]`,
+  in the same unindexed journal) are not in OpenAlex either, so **no database citation walk can arrive at it** — only reading the field's own surveys
+  can"*. LP's version said the surveys are "in no citation database"; checked for OpenAlex only (Semantic Scholar rate-limited).
+- **`plans/GROKKING-INSTANCES.md` §G49** — LP's instance, extended by one clause: *"… a held paper is prior art for questions it was not read for; and
+  `[Madore2015]`'s footnote 5, held and read since FS-18, had pointed the bridge at `[BendaPerles2000]` all along, as `[Fischer1990]` p. 182 had in
+  1990."* And the construction's instance gains *"its first instances `[BendaPerles2000]`'s (1976)"*.
+- **`plans/STUB-theorem-B-writeup.md` (FS-20)** — LP's note, with its last clause replaced: *"… FS-20's remaining novel content is the kernel proof,
+  the `𝔽₄` residue colouring and the metric-free statement — the last not found in print, with `[Johnson1982]` unread: read it before any manuscript
+  claims it."*
+- **Row 129's statement** — agree with LP's default (the sandwich stays in `CLOSED-QUESTIONS.md` §3 unless the owner folds it in).
