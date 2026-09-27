@@ -666,8 +666,8 @@ sketch; every step region-only, row 132). Its Lemma 4 is local to a disc of radi
 circle of radius 3", p. 26). **So every disc of radius 3 of such a map contains a hard Woodall-cone vertex, or the merged map realises S–V's
 `d = 2` configuration there.** ∎ Neither windings, N2-TRANS nor N2-FLIP is used: they are consequences, and the reduction bypasses them.
 *Where six is spent:* S–V's count of multicolours (ten of `C(6,3)/2`, plus one) and Lemma 2; W-MERGE spends nothing. *Seven-colour control:* the
-tight hexagonal seven-colouring is cubic, satisfies Condition 5, and W-MERGE leaves it unchanged; S–V's count needs `C(7,3)/2`-type slack and does
-not fire, as required. *Townsend's ⅔π sector:* it lives on a unit arc, outside Condition 5.
+tight hexagonal seven-colouring is cubic, satisfies Condition 5, and W-MERGE leaves it unchanged; there a trivalent vertex's circle carries four
+colours, so S–V's three-colour ring analysis (Lemma 5 onward) and its multicolour count do not start, as required. *Townsend's ⅔π sector:* it lives on a unit arc, outside Condition 5.
 
 **Verdict on W-3 (does a winding map exist?): GAP, at two named steps; NO given both.**
 - **G-CONE:** a tight six-map under Condition 5 with a vertex `v` where a colour `c` has cusp horns along both `+a` and `−a`, `c`-tiles tangent to
