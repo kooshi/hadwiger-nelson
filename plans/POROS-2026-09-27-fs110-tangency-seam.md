@@ -174,3 +174,26 @@ question: which-types-and-which-pairs-does-q-rule-read
   rank: 1
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: advice to the planner (SendMessage to FS110-P, about 09:20 UTC)
+
+Sent in full to FS110-P. The points, in short:
+- **Types.** Define `P_ess(u)` (colours of positive upper density at `u`) and `P_cl(u)` (colours of tiles whose closure contains `u`); `P_ess ⊆ P_cl`,
+  equal off zero-angle tiles. State Q-rule on `P_cl` with the exact form `B_u ∩ B_v = ∅` (A-EXACT); C-T-TAN is its first-order shadow.
+- **Complementary** = `P(u) ∩ P(v) = ∅` and `P(u) ∪ P(v)` all six (A-SIX): (2, 4) pairs and four-colour vertices enter (beside the planner's fifth
+  vertex kind, bichromatic degree `≥ 4`).
+- **Seams:** (1a) one-sided tangent or `κ ≠ 1` — closed by the sketch; (1b) the double unit-arc seam — live, Y's tangent object, a unit rhombus of
+  vertices `u w₀ v w₀′`; (2) bowtie / strong escape; (3) cusp — reduces to (1) on closure types; (4) the bicycle = C-T-BIKE (A-CIRC); (5) four-colour
+  and bichromatic `≥ 4` vertices; Act One separate.
+- **Killing tests:** V-C5's own (predicted to fire in band form); a separate claim C-TAN-POS with the falsifier in §1.7; a formula arc 3-colouring of
+  the bicycle, checked exactly; Act One's falsifier a tight map with locally intersecting junction types and no same-type pair in `(1, 2)`; the
+  hexagonal seven-colour control and a known-REJECT control before any YES verdict.
+- **Contest:** seam by seam, N against Y; fix the exact local calculus in the claim list before either side starts (G51's cost window); Y may start
+  where the index dies (a unit-arc interface facing a bowtie), N at Act One and the bicycle, neither told the other's start; a fresh competition
+  advisor, this record its carry-forward.
+- **Fences:** rule 13's trio; the other side's record and directory; both advisors' records — **this one included, §1.4 being a route**; the close
+  inventory; `data/fs110/reports/`; the owner's scripts; other jobs' briefs; `git log -p` on fenced paths; blind verifiers statements-only and fenced
+  from the plan's §G and §IQ as well, so C-TAN-POS gets a second mind blind to my sketch; neutral subjects; content-free hand-backs; worktree
+  isolation the fallback.
+
+## Stage 2 — SAVED
