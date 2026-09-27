@@ -944,6 +944,9 @@ mind (mine) unless marked.*
   the colours read `p | q` at `x` and `q | p` at `y`, `|x − y| = 1`, and the lift jumps by 2. So "C lies in one component" (the side's step) fails
   exactly at cross-swaps, and the **transposed swap** (A4's hunch `transposed-swap-holds`, not derived) would close Y-BIKE-3C's family. [hand, one mind,
   sighted; the GAP's location: three minds — YB blind, A4-BAND's "on 60° cells with no cross-swap", mine] Stage A5-1.
+- **A5-GP** — Y3-GP re-derived: a ring in general position winds `W = 6m + 3`. [hand; two minds, Y3 and mine] Stage A5-4.
+- **A5-BOW** — Y3-BOW's one-path homotopy passes through the bowtie `β`, whose ring under the merge `x ~ y` meets two classes only (degree 0), so
+  Y3-BOW needs exactly N2-TRANS's nerve step and nothing more. [hand, one mind] Stage A5-4.
 
 ### Would-have-searched-here log (A5)
 
