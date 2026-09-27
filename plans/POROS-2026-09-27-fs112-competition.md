@@ -20,6 +20,11 @@ sides' pre-round answers; `plans/PROTOCOL-competitor-and-advisor.md` §1 rule 1)
 - Not a blind job. My brief fences `plans/FS112-close-inventory.md` and `data/fs112/reports/`; **the owner's launch message directed me to read
   exactly items 10–16 of the inventory and `data/fs112/reports/FS112-PA.md`**, and I read exactly those (items 10–16 were printed by a filter on the
   item number; the table header, lines 1–8, came with them). Logged here because the brief's text and the owner's message differ.
+- **2026-09-27, stage 3:** at the owner's direction (message after N's and NB's hand-backs) I read `data/fs112/reports/FS112-N.md`,
+  `data/fs112/reports/FS112-NB.md` and `plans/FS112-NB-verification.md` (§ Theorems, § Fence log, stage 2 in full; stage 1 by its theorem table only),
+  although my brief fences the verifiers' records and `data/fs112/reports/`. The construction side's stage 2 and report are **not** read (the owner:
+  "Keep the construction side's material to the construction half"; YB is still running).
+- The owner lifted the §5.3 fence for both sides after stage 2b (owner's message; identical words to each side).
 - Read otherwise: my brief's list; `plans/FS110-derivation.md` §1 (l. 1–120) and its list of §§2–4 statements; `plans/FS110-NB-verification.md`
   §2.3–2.6 (NB-4's derivation, l. 157–200); `plans/FS110-Y-construction.md` by grep for T2 (its types, l. 413–440).
 
@@ -306,3 +311,119 @@ generic instruction to read every held positive at each step's reading radius, w
 requires of the proof side anyway. The C-UA-BUDGET item stays with me until Y's stage-2 check.
 
 ## Stage 2b — SAVED
+
+---
+
+## Stage 3 — SAVED: the proof half at N's and NB's hand-backs — every divergence and its settlement, the registrations scored, round 2's aim (brief item 6, proof half)
+
+*Read: `plans/FS112-N-proof.md` stage 2 (§2.1–2.6, at 74f0b705) and its theorem table; `data/fs112/reports/FS112-N.md`; `plans/FS112-NB-verification.md`
+§ Theorems, stage 2 (§2.1–2.5, at ebf3113e); `data/fs112/reports/FS112-NB.md`. Construction-side material stays in the construction half (stage 4, after YB).*
+
+### 3.1 N against NB — every divergence, and how each settles
+
+NB's stage 1 was blind (2cd9d152), and its stage 2 read N's record after that commit. The letter verdicts of the chain walk agree step for step:
+(a) at 3, 4, 9 and N4-RAY; (b) at 1, 2, 5–8 and 10–17; (c) at 18. Both put the first break at C-CHAIN-1. The divergences are NB's table §2.3, rows
+1–15, and each was checked against both texts:
+
+| # | topic | settlement | who stands | grade after |
+|---|---|---|---|---|
+| 1 | N4-FLANK at `κ = ±1` | **fails**: an in-type flank tile at `N`, Siamese with the flank, shadows a band of the horn. NB's stage 1 said it survives; NB re-derived N's failure and conceded | N | two minds (N blind, NB sighted) |
+| 1′ | **consequence NB draws, which N's record does not** | N112-END (= NB-END) is conditional on N4-STUCK's structure. At a stuck vertex whose horn is bounded at `±1`, FLANK's failure means that structure no longer follows. So **N's row 9, "its application also survives", is overstated**: N4-FIN's application is a GAP at chains with a horn bound `±1` | NB (by N's own row 7) | one mind (NB); **not yet a named GAP in N's record** |
+| 2 | "NB-4's exception is realised locally by T2" | withdrawn by NB. BB is all straight (Condition 5 holds locally) and still carries four-colour vertices, so FS-110's fragments are below NB-4's reading radius. **The first break is C-CHAIN-1, and no FS-110 fragment realises it** | N | two minds |
+| 3 | SHAVE's new arc | `σ_h = −1` puts `Σ` on the existing lower arc; no unit arc is created. NB's stage-1 sentence is withdrawn | N | two minds |
+| 4 | isolated inner-colour contacts at `P + 2e_{w₀}` | **N's l. 231 ("do not exist in the arc's interior") is FALSE** as a statement about contacts. NB's local example: a corner of an inner-colour tile outside `B̄(P, 2)` touching at `q₀`; every interior distance from `T_in ⊂ B(P,1)` exceeds 1. I re-checked it: a lens point `z = P + (1+δ)e_{w₀}` of the away-bend is at distance `1 − δ` from `q₀`, so the tile blocks the first-order away-bend. It is harmless to ARC-INERT (the toward-bend), but **N112-RED has a GAP its author does not name** (RED bends away "wherever R2 fails", with R2 meaning "over all of α"). The tangent bend that would close it is a sketch, one mind | NB | the FALSE sentence two minds (NB, my check); the GAP one mind |
+| 5 | N112-RED's GAPs | the union: end vertices; #4; the bookkeeping (a bend creating no new contact at another centre); and stub accumulation at an end vertex, which is why the end-vertex GAP also blocks termination | both, combined | — |
+| 6 | C-SEAMS-TWO's correction | two statements, both TRUE in their own frames. NB (unconditional): the seam point lies in the closure of a unit arc centred at `u` or `v`, or is a vertex of `≥ 4` colours. N (conditional on RED): one species up to reduction. NB's precision holds: on NB4′'s (E2) branch the seam point `w₀` carries no unit arc, and the (Q) centres are its ring points | both; **file NB's as the claim's correction and N's as a corollary conditional on RED** (my recommendation; NB held the choice for the owner) | one mind each |
+| 7 | C-UA-CHAIN's (E2) step | "both kind" at `y_{k±1}` is derived only when `y_k` is **interior** to the arc; an arc that only ends at `y_k` does not force its sides | NB's precision | GAP (two minds agree it is a GAP) |
+| 8–9 | U1 "is"/"contains"; L60's second clause | wording and scope; NB's forms are the precise ones | NB | — |
+| 10–14 | C-CHAIN-8, 15; C-UA-BUDGET's branches; C-LOCAL; C-BEYOND | compatible; NB sharper at 8 (`|P_cl(N)| ≥ 4`) and 15 | — | — |
+| 15 | `tools/fs112_n_arcs.py` | **tool defect stands**: the plants `r2_outside` and `end_half` are twins that exit 0, and no plant turns R2, END or L60 red. The checks are paired but not seen to fail (`CLAUDE.md` § Make the gate fail) | NB | — |
+
+**Card W on the proof side (A2's cards, answered by N, re-derived by NB):**
+- **W1 (NB-4's exception) is settled: N112-NB4′, two minds, one blind.** Arcs of `ω(v)` that *end* at an orbit point must be named (N's retraction 1,
+  prompted by the card). The bound `|P_cl(y_k)| ≤ 4` is not needed: NB found this blind, N found it independently.
+- **W2 (W-MERGE): the clause holds, and the configuration is empty.** N derived it; NB re-derived it by a shorter route. Two minds.
+- **W3 (N4-RAY): holds, but its printed step (1) fails at `κ₄ = 1`.** Step (1) is restated for the middle region `M` (N). NB agrees on RAY.
+- **W4: N named every circle the base reads**, with CB's line numbers (N §2.1 W4). **W5: both kind** (N).
+- The other walk's positions on W2 and W3 are scored in the construction half.
+
+### 3.2 My hunches and retractions (proof half)
+
+- `a2-nb4-three-circles` — **killed in its `ω(y_k)` part** (two minds, one blind: N; NB), **confirmed in its `ω(v)` part** (arcs of `ω(v)` with an orbit
+  point in their closure; N's retraction). My quick doubt in stage 2a — that the two inner half-arcs at `y_k` might carry two colours — is answered by
+  N's W1 (ii): `P_cl(y_{k+1}) ∩ P_cl(v)` is squeezed into one 2-set that must hold both `Q⁻_{k+1}` and `Q⁺_{k+1}`. **Retraction (A2, free: held, never sent).**
+- My stage-1 row 1 ("fails, realised by T2's `w`") — **retracted**: the fragment is below the reading radius (divergence 2). The planning advisor's
+  §4.3 made the same error, and so did NB's stage 1. Three minds read a truncated four-colour vertex as a counterexample to a ring statement; N's BB
+  remark caught all three. **A G21 instance**: the acceptance test ("a four-colour vertex exists in an exact fragment") was sufficient-looking and was
+  not the step's condition (a whole ring).
+- `h-nb4-slip` (planning advisor) — **confirmed in effect**: the printed `ω(y_k)` clause is empty or unneeded, and the corrected form carries `ω(v)`, in
+  closure form (two minds, one blind).
+- `h-arc-inert` — **confirmed, sharper** (two minds): no exceptional contact points for the toward-bend; the GAP moved to the end vertices.
+- `h-four-colour-crux` — **supported**: the reduction lands on (Q), vertices with `≥ 4` colours that are unit-arc centres carrying both side colours.
+- `h-loc` — **stands**: every step N derives reads a disc of radius at most 2 about a point, and N says so (§2.5).
+
+**Retractions, proof half:** A2 3 (step 5 at stage 2b; `a2-nb4-three-circles`'s `ω(y_k)` part; row 1's "realised by T2"). N 1 (W1 (i)). NB 3, all
+after its blind commit, none free. **One unstated flip:** N's pre-round expectation was that a four-colour vertex whose ring is wholly covered would fail
+to close in a tight fragment. N's own registration N112-P2 now predicts that the printed strip contains such vertices within `0.834` of its midline.
+N112-P2's hypothesis ("with no covering pair on its ring") narrows it, but N112-P1 ("every unit arc is (Q)") predicts four-colour centres with rings
+inside the strip either way. **The pre-round answer was not withdrawn in N's record.** It is scored in the construction half.
+
+### 3.3 The registrations, scored (proof half; the planning `E`s at `plans/FS112-unit-arc-half.md` §5.3)
+
+| id | registered | outcome |
+|---|---|---|
+| E1 (0.9) | NB-4 and NB-5 fail as written, realised by FS-110's own fragments | **half met**: they fail as written (two minds each); **not realised by FS-110's fragments** (below the reading radius) |
+| E2 (0.6 / 0.5) | W-MERGE and N3-CONF survive; the N4 chain survives off centres | **met**: W-MERGE and N3-CONF (a) at two minds; the N4 chain's exceptions all sit at unit arcs centred at `v`, `N` or `S′` |
+| E3 (0.5) | the first N4 break is at the curvature endpoints `±1` | **met**: FLANK at `κ = ±1`, two minds |
+| E4 (0.5) | the proof side's first unclosed step sits at a four-colour unit-arc centre | **met**: N112-RED's terminal object is (Q), and C-BEYOND's step is to exclude all-(Q)/(R2) maps |
+| E8 (0.7) | C-SEAMS-TWO TRUE | **not met as stated** (MISSTATED, two corrections); NB's unconditional correction keeps two species |
+| E9 (0.6) | ARC-INERT TRUE off isolated contact points, GAP at them | **met, sharper**: TRUE with no exceptional points; the GAP is at end vertices |
+| E14 (0.3) | a NO of Q-full at one mind within P1 | **not met**: a reduction, not a NO |
+| E15 (0.85) | a named obstruction or GAP as the product | **met** |
+| E16 (0.4) | a blind verifier finds a divergence of truth | **met**: #4 (N's l. 231 FALSE; RED's GAP unnamed) and #1′ (N4-FIN's application overstated); the one reversal, #1, went the side's way |
+| E17 (0.35) | an explicit `R` | not met (C-LOCAL a GAP) |
+
+### 3.4 What the proof half adds up to
+
+The proof side has turned §IQ's structural question into a **reduction theorem at one mind**. N112-RED says that every valid map can be modified,
+validly and creating no unit arc, until every unit arc is either (Q) — centred at a vertex of at least four colours that carries both of the arc's side
+colours, which is Polymath's tactic at a vertex of degree at least 4 — or (R2), an out-contact whose inner colour runs along the radius-2 circle. Beside
+it, N112-NB4′ (two minds, one blind) ties every four-colour vertex to a unit arc: one centred at the vertex, or one through a ring point of its covering
+pair's orbit. **So in a reduced map, unit arcs and four-colour vertices occur together.** Every step is local (radius at most 2), and the proof side
+itself says all of it holds on the strip and the disk. The decisive step, C-BEYOND's exclusion of all-(Q)/(R2) maps, is named and not derived. It is
+G79's example invariant in its first form: what every unit arc's centre carries after reduction.
+
+### 3.5 Round 2 for the proof side — a decision in four parts
+
+- **The choice.** The successor takes **the end vertices of unit arcs**, which are at once N112-RED's first GAP, C-ARC-END's question, and C-UA-CHAIN's
+  step ("each unit arc forces a further unit arc … at its end vertices"). In order:
+  1. Close N112-BEND at the end vertices, and NB-ISO's isolated radius-2 contacts by the tangent bend. Settle RED's termination, stub
+     accumulation included.
+  2. Combine RED with the N4 moves and the corrected FLANK into **one terminal-map statement**: every vertex cubic or a (Q) centre; every unit arc
+     (Q) or (R2); FLANK's `κ = ±1` exception placed inside (Q) or (R2), or named; N4-FIN's application at horn bound `±1` (divergence 1′) closed or
+     named.
+  3. With that object, the first global step, by one of two routes, with the choice stated: the (E2)/end-vertex chain (C-UA-CHAIN), or S–V Cor. 1
+     a.e. with (Q) centres admitted (the base's exceptions B1–B3 are all at arc centres, which RED makes (Q)).
+  The tool gets red plants at R2, END and L60 (divergence 15) before any of its checks is cited.
+- **The alternative weighed.** Go straight at C-BEYOND's global exclusion of all-(Q)/(R2) maps, carrying RED's GAPs as named.
+- **Why this one won.** Every global route consumes RED's terminal object. RED's open GAP sits at the arc's end vertices, and **the end vertices are
+  the joints where one unit arc meets the next** — the place any chain, count or propagation must pass through. So closing the end-vertex GAP is the
+  first half of the global question, not bookkeeping. A global attempt over a reduction that is open exactly at its joints would have to re-derive
+  them anyway, inside a harder argument. Item 2 also repairs the one overstatement that the two minds left in N's record (1′).
+- **Confidence: medium.** The fact that would change it: **N's own registrations N112-P1 and P2** (the strip's arcs all (Q), with rings inside it).
+  If they are confirmed exactly at the end vertices — arc-closed (Q) centres in a held valid object — then the end-vertex analysis cannot end in a
+  local exclusion. Item 3's global step then becomes the round's whole aim, and item 1 shrinks to a lemma.
+- **Default:** if the owner says nothing, the successor's brief is items 1–3 in order, with the tool plants first, and a blind verifier after it.
+- **Fence note for the successor's brief:** nothing of the construction side (its record, stage 2 or report) goes into it. Card W's text, NB's divergence
+  table and this section's four parts are proof-side material and may go in.
+
+### 3.6 Evidence inventory (additions)
+
+- `plans/FS112-N-proof.md` stage 2 — read against: a round-1 proof side answering card W and working §6 — surprised: yes. It is a reduction theorem
+  (RED), not a set of seam kills, and N registered predictions (P1–P3) that contradict its own pre-round answer without saying so.
+- `plans/FS112-NB-verification.md` stage 2 — read against: a verifier confirming the walk — surprised: yes, twice. NB found a FALSE sentence and an
+  unnamed GAP in RED (#4). And NB's own FLANK verdict reversed toward the side's, the second instance in two milestones of a verifier's stage 1 being the
+  wrong one at a curvature endpoint.
+- `data/fs112/reports/FS112-N.md`, `FS112-NB.md` — read against: their records — surprised: no. The NB report's "letter-for-letter" matches its §2.3.
+
+## Stage 3 — SAVED
