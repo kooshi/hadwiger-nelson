@@ -108,9 +108,15 @@ class Ring:
         n = len(self.x)
         return all((self.x[j] - self.x[i]) % 60 != 0 for i in range(n) for j in range(i + 1, n))
 
+    def h60(self):
+        """no two change points at angular distance exactly 60° (chord exactly 1) — the hypothesis of YB3-GP′."""
+        n = len(self.x)
+        return all((self.x[j] - self.x[i]) % 360 not in (60, 300) for i in range(n) for j in range(i + 1, n))
+
     def mechanism(self):
         """g takes ≤ 2 consecutive values ≢ 0 mod 3 (in GP); Σ_k g(θ+60k) = 3W; m constant."""
-        bp = self.breakpoints()
+        # partition by X − 60k for every k, so that all six points θ + 60k avoid the change points
+        bp = sorted({norm(x - 60 * k) for x in self.x for k in range(6)})
         cells = [norm((bp[i] + (bp[(i + 1) % len(bp)] + (360 if i + 1 == len(bp) else 0))) / 2) for i in range(len(bp))]
         W = self.W()
         gs, ms, sums = set(), set(), set()
@@ -140,6 +146,8 @@ RINGS = [
           [i % 3 for i in range(9)], "gp"), 3),
     (Ring("R5-gp-nine-arc-reversed", perturbed(9, [0, F(7, 10), F(-13, 10), F(11, 10), F(3, 10), F(-9, 10), F(17, 10), F(-1, 10), F(9, 10)]),
           [(-i) % 3 for i in range(9)], "gp"), -3),
+    # stage 4: aligned through a 180° pair but with no pair exactly 60° apart (YB3-GP′ applies, Y3-GP does not)
+    (Ring("R7-180-pair-no-60-pair", [0, 40, 80, 125, 180, 215, 255, 290, 325], [i % 3 for i in range(9)], "aligned"), 3),
     (Ring("R6-gp-27-arc", perturbed(27, [F((7 * i) % 11, 23) - F(1, 5) for i in range(27)]), [i % 3 for i in range(27)], "gp"), 9),
 ]
 
@@ -156,7 +164,7 @@ def main():
         W = R.W()
         g = R.gp()
         gs, ms, sums, _ = R.mechanism()
-        line = f"{R.name:28s} arcs={len(R.x):2d} valid={v} GP={g} W={W:3d} (registered {Wexp:3d}) W mod 6={W % 6} g-values={sorted(gs)} m={sorted(ms)}"
+        line = f"{R.name:28s} arcs={len(R.x):2d} valid={v} GP={g} W={W:3d} (registered {Wexp:3d}) W mod 6={W % 6} H60={R.h60()} g-values={sorted(gs)} m={sorted(ms)}"
         print(line)
         if not v:
             exp_fail.append(f"{R.name}: invalid")
@@ -166,6 +174,8 @@ def main():
             exp_fail.append(f"{R.name}: Σ g ≠ 3W ({sums})")
         if (g != (R.kind == "gp")):
             exp_fail.append(f"{R.name}: GP flag {g} ≠ kind {R.kind}")
+        if R.h60() and W % 6 != 3:
+            exp_fail.append(f"{R.name}: no 60°-pair but W ≢ 3 (mod 6)  <-- YB3-GP′ refuted")
         if g:
             # Y3-GP and its mechanism
             if W % 6 != 3:

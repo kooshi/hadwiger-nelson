@@ -12,6 +12,9 @@ both earlier verifiers' records, the plan, every advisor record and the proof si
 - **YB3-GP** — a §7.1 ring whose change points are pairwise at angular distance `≢ 0 (mod 60°)` has `W ≡ 3 (mod 6)`; mechanism: `g(θ) =
   c̃(θ+60°) − c̃(θ)` takes two consecutive values, `m = 3` — [hand; second mind, blind; `tools/fs110_yb3_ring.py` exact on six rings of mine,
   two plants and a known-REJECT control], §2.2.
+- **YB3-GP′** (stage 4) — a §7.1 ring with **no two change points exactly `60°` apart** (chord exactly 1) has `W ≡ 3 (mod 6)`: Y3-GP with a
+  strictly weaker hypothesis; so `W ∈ {0, ±1, ±2}` needs a pair of change points at distance exactly 1 — [hand, one mind; exact on R3 and R7, whose
+  only coincidences are `120°`/`180°`], §4.3.
 - **YB3-EVENT** — the window lemma: along a path with `{a,b} ⊆ P_cl(p)`, a merged winding changes only where `ω(p)` passes through a vertex whose
   closure type meets all three merge classes — [hand, one mind], §2.3.
 - **YB3-TRANS** — N2-TRANS for `c ≠ d`, along any path in the `a|b` interface (through bichromatic points and through vertices whose closure type
@@ -252,3 +255,60 @@ batch and re-ran every tool with its status read directly into the file.
 
 Registered expectations (§1.5) scored now, before the opening: Y3-C5, Y3-GP, Y3-PROP (both clauses), Y3-FLIP, Y3-BOW, Y3-SIX all landed on the
 registered outcome. None moved.
+
+## Stage 4 — SAVED: FS110-Y3's record opened; divergences
+
+*Opened after commit `4bcc8bee` (stage 3): `plans/FS110-Y-construction.md` § Continuation — FS110-Y3 (l. 475–666), `tools/fs110_y_ring.py`,
+`data/fs110/fs110-y/y3_ring_*.out`. Nothing else fenced opened.*
+
+### 4.1 Fence log, continued
+
+- **Touch 2 (after stage 3, disclosed).** My `ls data/fs110/fs110-y* tools/fs110_y_*` glob also matched `data/fs110/fs110-yb/` — the earlier verifier
+  FS110-YB's directory — and printed its four **file names** (`fragments.out`, `lattice.out`, `mapsanity.out`, `selftest.out`). Names only, no
+  content; after my verdicts were committed.
+
+### 4.2 Quotation check (deferred from §1.3)
+
+The seven statements in my instance block match FS110-Y3's theorem list (l. 507–522) **verbatim**.
+
+### 4.3 Divergences, item by item
+
+| # | claim | side | me | kind | the difference |
+|---|---|---|---|---|---|
+| D1 | **Y3-PROP**, second clause ("`|W|` is one constant on a connected map") | TRUE [hand, one mind] | **GAP at the same-type step** | **truth-status** | §8.3 merges `c ~ d`; at `c = d` there is nothing to merge and the interior circles carry four colours. The event types `{c, r_i, r_j}` are complementary to `{a, b, r_k}`, which neither end has, so NB-5 does not exclude them. §8.3 does not treat the case. My falsifying picture (§2.4, a swept `c`-tile ringed by `d, e, f`) meets every hypothesis I hold. |
+| D2 | **Y3-FLIP** as a statement about `W` | TRUE [hand, one mind] | algebra **TRUE**; about `W`, **GAP at the same-type step** | truth-status | the sign `(−1)^k = −1` needs `k` odd, so at least one same-type step, whose transport is D1's open step. The label algebra is right: two minds, mine blind, and tools on nine faces including the hexagon `2,3,4,2,3,4`. |
+| D3 | **Y3-PROP**, first clause (N2-TRANS) | TRUE; §8.3's body notes "the case of distance exactly 2 is W-TAN's separate `d = 2` configuration" | TRUE for `c ≠ d`, **off `d = 2`** | **MISSTATED (minor)** | the theorem line drops the body's `d = 2` exclusion (the brief's M3 rule). Corrected: "… at every vertex with `|P_cl| = 3` …, for edges whose ends have different third colours, off the collinear `d = 2` configuration". Two minds (§8.3; my YB3-TRANS, blind, different write-up: the window lemma YB3-EVENT is the nerve step spelled out). |
+| D4 | **Y3-BOW** | TRUE [hand, one mind] | TRUE; `d = 2` caveat inherited | scope (minor) | same route (one path vs two steps, disagreeing by `(x c)`). **The side's question answered:** the single homotopy through the bowtie meets exactly the rigour of the ordinary edge. YB3-EVENT needs only `{a,b} ⊆ P_cl(p)` along the path; the corner at the bowtie vertex is not an event, since events are points of the circles, not of the path; its event types are complementary to `v, v′` within `cl B`. The "merged neighbour" bookkeeping at `x = y` inherits D1. |
+| D5 | **Y3-GP** | TRUE, hypothesis "never at angular distance `≡ 0 (mod 60°)`" | TRUE; **the hypothesis can be weakened to "no pair exactly `60°` apart"** (YB3-GP′) | route / strength | only `60°` coincidences make `g` jump by 2. `Σ_k g(θ+60k) = 3W` for every `θ` makes `m` constant with no six-point invariance, and `m ∈ {0,6}` would make `g` constant, which a change point forbids. Needed by the side's own §8.7 bullet "at least eight with a **unit-distance** pair of change points (`|W| = 2`)", which Y3-GP, giving "1, √3 or 2", does not support. Checked on R3 (`40°k`) and R7 (a `180°` pair, no `60°` pair): `W = 3`. |
+| D6 | **Y3-SIX** | TRUE [hand, one mind] | TRUE | route (two routes now) | side: `j(θ) ≠ j(θ+60°)` directly (the branch of `ω(p_{60°})` at `p₀`, C5) then `K_{3,3}` room count; mine: a counting lemma forces `s_k = s_{k+1}`, which forces a unit arc. Both use C5 at the same place. **One inaccuracy, unused by the proof:** "by Y3-GP's closure the colours run `r₀ r₁ r₂ r₀ r₁ r₂` (… a two-colour ring winds 0)" — six-arc **three-colour** rings with `W = 0` exist (`0,1,0,2,1,2`, checked valid), and Y3-GP says nothing of aligned rings; the theorem covers every six-arc ring, as does mine. |
+| D7 | **Y3-RING** | [tools, exact] | TRUE | — | the side's six rings rebuilt from its formulas and run through **my** checker (`tools/fs110_yb3_theirs.py`): valid, `W`, GP and `m = 3` all agree. Its tool read in full: no defect found. Its plant `nolift` cannot reach monotone rings (the side noted it); my plant B reaches one (R5), so the two checkers' plants are complementary. |
+| D8 | **Y3-C5** | TRUE | TRUE | — | the same argument. |
+
+### 4.4 Proposed edits for the close (I edit nothing outside my files)
+
+1. **Y3-PROP's line:** "… for edges whose ends have different third colours, off the collinear `d = 2` configuration; `|W|` is constant along
+   different-type edges; across a same-type edge it is open (YB3-SAME)." Grade of the first clause: [hand, two minds, one blind].
+2. **Y3-FLIP's line:** "given transport at same-type steps" — or split it: the algebra [hand, two minds, one blind; tools], the consequence "`k` odd
+   ⟹ `W = 0`" GAP at the same-type step.
+3. **Claims §7 / W-3's frame:** "consistently along edges (N2-TRANS)" is a theorem at `c ≠ d` edges only. "Every tile has an even count" rests on
+   same-type transport, so the reduction "Q-full under Condition 5 is one question: does a winding map exist?" carries YB3-SAME's GAP. The same
+   applies to N2-FLIP if its proof treats the same-type step as the identity; its record is fenced for me.
+4. **A stub item (FS-110 or its successor):** *same-type transport* — prove `W(v_i) = W(v_{i+1})` across an `a|b` edge between two `{a,b,c}`
+   vertices, or refute it by an exact local fragment given by formula: a `c`-tile ringed by `d, e, f` inside `D°(v_i) ∖ D̄(v_{i+1})`, swept by the
+   family `ω(p)`. Such a check is allowed under the ban.
+5. **Y3-GP's line:** add YB3-GP′ (hypothesis "no two change points exactly `60°` apart"; conclusion "`W ∈ {0,±1,±2}` needs a pair at distance exactly
+   1"). Then §8.7's "eight arcs with a unit-distance pair" is supported.
+6. **Y3-SIX:** grade [hand, two minds, one blind, two routes]; drop the sentence on the colour pattern (D6).
+7. **A lead for the successor's eight-arc question** [a reading, one mind]: by YB3-GP′ every ring with `|W| ≤ 2` has two change points exactly
+   `60°` apart, which is where both Y3-SIX proofs start their lens. Whether the pair must bound one arc is open.
+
+### 4.5 My tool defect, found and fixed at stage 4
+
+My `mechanism()` partitioned the circle by `X ∪ (X − 60°)` only. So when two change points were `120°` or `180°` apart, a six-point sample could
+land on a change point. The first such ring, R7, **crashed** the tool (the crash is loud: exit 2, "not a catch"). I fixed the partition to
+`X − 60°k`, `k < 6`, and re-ran all rings and plants: `data/fs110/fs110-yb3/stage4-runs.txt`, faithful exit 0, plants A and B caught. The stage-2
+results are unaffected: every ring then had only `60°`-multiple coincidences, which the old partition covered, and none crashed.
+
+### 4.6 Registered expectations, scored
+
+Every stage-1 expectation landed on its registered outcome (§3). One thing I did not register: that Y3-GP's hypothesis could be weakened (D5).

@@ -1,0 +1,9 @@
+Y-alternating      valid=True W=  0 (side   0) GP=False (side False) m=[3] g=[-1, 1]
+Y-r0r1r2-twice     valid=True W=  2 (side   2) GP=False (side False) m=[0] g=[1]
+Y-r0r1r2-thrice    valid=True W=  3 (side   3) GP=False (side False) m=[3] g=[1, 2]
+Y-41k              valid=True W=  3 (side   3) GP=True (side True) m=[3] g=[1, 2]
+Y-41k-mirror       valid=True W= -3 (side  -3) GP=True (side True) m=[3] g=[-2, -1]
+Y-27               valid=True W=  9 (side   9) GP=True (side True) m=[3] g=[4, 5]
+six-arc-W0-three-colour valid=True W=0 arcs=6 colours=[0, 1, 2]
+RESULT: ALL MATCH
+exit=0

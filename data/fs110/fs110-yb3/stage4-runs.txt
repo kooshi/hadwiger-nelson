@@ -1,0 +1,52 @@
+### tools/fs110_yb3_ring.py
+mode: faithful
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  0 (registered   0) W mod 6=0 H60=False g-values=[-1, 1] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 H60=False g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W= -3 (registered  -3) W mod 6=3 H60=True g-values=[-2, -1] m=[3]
+R7-180-pair-no-60-pair       arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 H60=True g-values=[4, 5] m=[3]
+X1-known-reject              valid=False (must be False)
+RESULT: ALL PASS
+EXIT(tools/fs110_yb3_ring.py)=0
+### tools/fs110_yb3_ring.py --plant A
+mode: PLANT A
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  0 (registered   0) W mod 6=0 H60=False g-values=[-1, 1] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 H60=False g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W= -3 (registered  -3) W mod 6=3 H60=True g-values=[-2, -1] m=[3]
+R7-180-pair-no-60-pair       arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 H60=True g-values=[4, 5] m=[3]
+X1-known-reject              valid=True (must be False)
+FAIL: X1-known-reject: known-REJECT ring accepted
+PLANT A CAUGHT for its own reason
+EXIT(tools/fs110_yb3_ring.py --plant A)=0
+### tools/fs110_yb3_ring.py --plant B
+mode: PLANT B
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  3 (registered   0) W mod 6=3 H60=False g-values=[1, 2] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 H60=False g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W=  6 (registered  -3) W mod 6=0 H60=True g-values=[2, 4] m=[3]
+R7-180-pair-no-60-pair       arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 H60=True g-values=[1, 2] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 H60=True g-values=[4, 5] m=[3]
+X1-known-reject              valid=False (must be False)
+FAIL: R1-aligned-six-two-colour: W=3 ≠ registered 0
+FAIL: R5-gp-nine-arc-reversed: W=6 ≠ registered -3
+FAIL: R5-gp-nine-arc-reversed: no 60°-pair but W ≢ 3 (mod 6)  <-- YB3-GP′ refuted
+FAIL: R5-gp-nine-arc-reversed: GP ring with W ≢ 3 (mod 6)  <-- Y3-GP refuted
+FAIL: R5-gp-nine-arc-reversed: g outside two consecutive nonzero-mod-3 values
+PLANT B CAUGHT for its own reason
+EXIT(tools/fs110_yb3_ring.py --plant B)=0
+### tools/fs110_yb3_theirs.py
+Y-alternating      valid=True W=  0 (side   0) GP=False (side False) m=[3] g=[-1, 1]
+Y-r0r1r2-twice     valid=True W=  2 (side   2) GP=False (side False) m=[0] g=[1]
+Y-r0r1r2-thrice    valid=True W=  3 (side   3) GP=False (side False) m=[3] g=[1, 2]
+Y-41k              valid=True W=  3 (side   3) GP=True (side True) m=[3] g=[1, 2]
+Y-41k-mirror       valid=True W= -3 (side  -3) GP=True (side True) m=[3] g=[-2, -1]
+Y-27               valid=True W=  9 (side   9) GP=True (side True) m=[3] g=[4, 5]
+six-arc-W0-three-colour valid=True W=0 arcs=6 colours=[0, 1, 2]
+RESULT: ALL MATCH
+EXIT(tools/fs110_yb3_theirs.py)=0
