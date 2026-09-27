@@ -277,3 +277,29 @@ transfers to classes that are locally the sides of arcs.*
 **Would have searched here:** none.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: FS106-TQ's record read (after my stages 2–3 were committed), divergences
+
+*Read: `plans/FS106-TQ-derivation.md` at its stage 4 (`5fb54fa1`): the theorem list, §4.4 (TQ-HIT) and §4.5 (C-Q-STAB) in full, the verdict
+tables of §§2–4. Not read: `data/fs106/fs106-tq/`.*
+
+**No contradiction between the two records.** Where they meet:
+
+1. **A scope correction owed to TQ §4.5 item 5** ("Its a.e.-regular special cases (C-AE-Q2, C-AE-POLY, C-AE-FA, the tight map forms) are all implied
+   by C-Q-STAB, since each is a case of `χ_m⁰ ≥ 7`"): true for C-AE-POLY and C-AE-FA, and for C-AE-Q2 **only with null boundaries** — a map whose
+   boundaries are Osgood arcs of positive area leaves a positive-measure set uncoloured, so it is not a colouring of the plane (stage 2 §2.1).
+   Checked on the way: **Condition 5 forces null boundaries** (a boundary of positive area meets `ω(x)` in positive length for a positive-measure set
+   of centres `x`, by Fubini, hence in infinitely many points), so C-AE-FA and C-AE-POLY are inside TQ's sentence, and C-AE-Q2 is inside it exactly
+   for null-boundary maps.
+2. **The two routes see the same wall from its two sides.** TQ's L1 (a refuting sequence may be taken with no multichromatic coloured point) and
+   Parts's voids at every vertex (TQ §4.5 item 6 (b)) say the free colour sits exactly where the structural route starts: TS-T puts a point of
+   chromaticity `≥ 3` within 1 of every point of every a.e.-proper **map**, and C-T-TRIa's cusp shows that for measurable classes the density form
+   of that starting point can be removed at no cost. So the structural route's first step (a trichromatic point) is what a near-colouring deletes,
+   and TQ-HIT's "a proof must use how the holes sit relative to the colouring" is, on the structural side, "a proof must say what sits at the
+   trichromatic points" — C-T-TRIb's support form and C-T-TAN's exceptional set (tangent interfaces, bowties, cusps, weak-* blow-ups).
+3. **Locality.** TQ-HIT excludes hitting-form arguments for C-Q-STAB, whose objects have holes. The structural route's objects have none, and there a
+   local argument can close a class (C-AE-POLY is proved by one). The named GAPs here ([G1]–[G3], C-T-L1b, C-T-TRIb) are local configurations;
+   TQ's missing step is non-local. Both are FS-107's targets, on different objects: a tight exact colouring (TS) and a near-colouring sequence (TQ).
+4. **I-D1 now has three checks**: FS103-M's D1, FS106-VB's blind second mind, TQ-CORE (sighted). Every D-NF step here rests on it.
+
+## Stage 6 — SAVED
