@@ -283,3 +283,86 @@ question: are-the-seams-two
 - `plans/PROTOCOL-competitor-and-advisor.md` §1 — read against: the fences as amended — surprised: no
 
 ## Stage 1 — SAVED
+
+---
+
+## Stage 2 — SAVED: the planner's stages 1–3 read against my expectation; advice sent (brief item 2)
+
+*Read: `plans/FS112-unit-arc-half.md` stages 1, 2a, 2b, 3 (commits 13b13328, 0085b7df, 9a493af4, 619ea64e) and FS112-P's message with its §G bears
+list. Also `plans/POROS-2026-09-27-fs110-competition.md` l. 608–625 (A4-SIX-ARCS and A4-TSU, verbatim).*
+
+### 2.1 Against my expectation
+
+- **Convergences, reached independently** (my §1 was committed first, at 1ad0ee6c):
+  - the chain walk as the proof side's stage 1, with the verdicts survives / survives off centres / fails;
+  - the four-colour vertex's arc budget as §IQ (b) (my `h-four-colour-crux`);
+  - the strip rebuilt by formula as the construction side's first calibration;
+  - YB3-SAME as a counterexample invariant (G79).
+- **What the planner found that I did not:**
+  - the Polymath16 threads 6–9 (2018): Hockertz's reduction claim, de Grey's six-colour-vertex Reuleaux argument, and Gibbs's "constraint". The
+    question was worked informally in 2018;
+  - `[Parts2022]` p. 190's band triangle argument;
+  - the tight seven-colouring as a second checker control (G20).
+- **What I found that the plan did not have at stage 3:**
+  - the disk of radius 2.124 as a control;
+  - the frozen checkers' arithmetic;
+  - N4-PROP as the chain's only global step;
+  - the per-circle scope of Condition 5.
+- **Divergences:**
+  - the planner reads the strip as "self kind only" and says nothing held calibrates the pair kind; I read both claims as false (below);
+  - §IQ (b)'s paraphrase of A4-SIX-ARCS drops its hypothesis;
+  - §IQ item 5 puts YB3-SAME among instances a unit arc might break, but YB3-SAME is a Condition-5 statement.
+
+### 2.2 Advice sent to FS112-P (SendMessage, eight items; the planner decides)
+
+1. **The arc kinds.**
+   - Polymath's tactic is self and pair at one arc. Its T touches P and borders `E ⊂ ω(P)`.
+   - Polymath says the strip "makes use of a tactic that we shall also employ below". Fig. 6's caption: "The sloping boundaries are arcs of radius 1,
+     as explained in the main text". So the strip's pair kind is to be read from the reconstruction.
+   - The pair kind is calibrated locally by FS-110's S1: `u_b`–`w′_out` = `[1, 1.35]` along an arc of `ω(u)`
+     (`plans/FS110-Y-construction.md` §4.5).
+   - Proposal: define the kinds in N3-CONF's vocabulary — in-contact, out-contact, both, inert — by the arc's side colours in `P_cl(P)`. With it, a
+     claim ARC-INERT.
+2. **§IQ (b) drops A4-SIX-ARCS's hypothesis** "with no covering pair (v, y), y ∈ ω(v)". On the other branch NB §2.3 puts the arcs on
+   `ω(σ_v^{±1}y)`, centred at ring points. NB-4's printed exception reads "ω(y_k) … passes through y_k", which is impossible; it is a MISSTATED
+   suspect, likely `ω(v)`.
+3. **YB3-SAME** has no unit arc and no bearing on the answer. Rank it last, as a construction-side fragment.
+4. **Condition 5 fails on exactly one circle per arc**, `ω(P)`. The walk names, per step, the circles it reads.
+5. **Local or global.** N4-PROP is the chain's one global step. The strip and the disk are local six-maps with the tactic. Every NO route must fail on
+   them at a named step; the global step becomes a claim.
+6. **Checkers.** None frozen can ACCEPT the strip exactly. Build a new checker with general number-field arithmetic and calibrate it in this order:
+   FS-110's fragments with the frozen checkers' verdicts, then the seven-colouring, the strip, the disk. An ACCEPT calibrates the pair
+   (reconstruction, checker). A REJECT has three causes. Two independent reconstructions.
+7. **SEAMS-TWO** as a claim: T2's seam points are four-colour vertices.
+8. **The 0.03's population.** Take it from `[Parts2020c]` §3's own words. Register a dial beside it: the largest arc-closed disc or strip (0.3).
+
+Fences: this record, fenced by path from both sides and every blind verifier.
+
+### 2.3 Hunches (new; registered 2026-09-27)
+
+hunch: h-arc-inert
+  claim: a unit arc of `ω(P)` neither of whose side colours lies in `P_cl(P)` can be bent off curvature 1, locally and keeping the map valid, so every tight six-map with unit arcs may be assumed to have an in- or out-contact at every arc's centre
+  basis: derived
+  falsifier: an inert unit arc in a tight fragment whose every small bend creates a same-colour pair at distance exactly 1
+  registered: 2026-09-27
+  status: open (sketch: an arc of `ω(P)` is at distance exactly 1 from `P` along its length and from any other point at at most two of its points)
+
+hunch: h-nb4-slip
+  claim: NB-4's printed exception "no Γ-arc of ω(y_k) or ω(y_{k±1}) passes through y_k" is a slip for "of ω(v) or ω(y_{k±1})"
+  basis: read
+  falsifier: NB's author, or a re-derivation, showing an arc of `ω(y_k)` enters the argument at `y_k` in another sense
+  registered: 2026-09-27
+  status: open (`plans/FS110-NB-verification.md` §2.3; `ω(y_k)` is centred at `y_k` and cannot pass through it)
+
+### 2.4 Cards: fates
+
+- `is-the-no-local-or-global` (rank 1): sent to the planner as item 5; fate blank until the claim list.
+- `which-arithmetic-calibrates-the-strip` (rank 2): sent as item 6; fate blank.
+- `are-the-seams-two` (rank 3): sent as item 7; fate blank.
+
+### 2.5 Evidence inventory (additions)
+
+- `plans/FS112-unit-arc-half.md` stages 1–3 — read against: my §1 — surprised: yes; the Polymath16 threads carry the question in 2018 (Hockertz, de Grey, Gibbs), which my expectation did not know
+- A4-SIX-ARCS verbatim (FS110 competition record l. 612) — read against: §IQ (b)'s paraphrase — surprised: yes; the hypothesis "no covering pair (v, y), y ∈ ω(v)" is dropped in the paraphrase
+
+## Stage 2 — SAVED
