@@ -60,3 +60,31 @@ colouring is then checked exactly. The same reading of a figure's combinatorics 
 WC1 14/26, WCEQ 15/30, WCH 19/40, WC1H 16/30 ACCEPT; tip tests as predicted (WC tip→2, →3 ACCEPT; WC tip→4, WCH tip→2, →3, WC1H tip→2, →3, →4 REJECT,
 with their pairs). `a6_c2_single_horn.py`: A6-C2 16/30 ACCEPT and its ten runs as predicted. `tools/fs110_y_check.py`: its seven controls as expected.
 Outputs kept in `data/fs112/fs112-yb/frozen-verdicts.txt`.
+
+## Stage 2 — SAVED: my exact checker, its plants, and its calibration (claim list §7, in its order)
+
+**The checker** `tools/fs112_yb_check.py` (written without reading Y's; the frozen FS-110 checkers read, as the brief requires). For each same-colour
+pair of tiles, a tile with itself included, it decides exactly whether 1 lies in the open range `(m, M)` of cross-distances — REJECT iff `m < 1 < M`
+(the interior cross-distances fill exactly `(m, M)`, the tiles being open, connected and dense in their closures). `m` and `M` are the extremes over a
+complete list of critical pairs of the boundary pieces (endpoint–endpoint; endpoint–foot or radial point; segment–arc along the perpendicular through
+the arc's centre; arc–arc on the line of centres, concentric arcs radially; segment–segment is dominated), each a realised pair, plus an **exact meeting
+test** (so no map hypothesis is needed: two tiles touch iff two pieces meet). Arithmetic: exact multiquadratic field `ℚ(√2, √3, √5, …)`, signs by rational
+interval bounds on the square roots refined until decisive, zero decided exactly; one further square root (critical points, intersection points)
+handled as `a + b√g`. Floats are printed, never compared.
+
+**Self-test** (`--selftest`, output `data/fs112/fs112-yb/selftest.txt`): eight exact controls (Reuleaux triangle of width 1: ACCEPT; two at gap exactly 1:
+ACCEPT; at gap 9/10: REJECT; squares of diagonal 0.99 / 1.06; two unit caps whose nearest pair is interior to both arcs; a cap facing a bar, nearest pair
+interior to both; two crossing bars) and six checker plants, **each flipping exactly the controls predicted and no other**: `noself` (the 1.06 square
+passes), `endpoints_only` (both interior-pair controls pass), `no_arcarc` (the two caps pass), `no_sa` (the cap and bar pass), `no_meet` (the crossing
+bars pass), `closed_interval` (the width-1 Reuleaux triangle and the gap-1 pair reject: tightness is visible). A first design of three controls failed
+its own plants — their tiles had diameter above 1, so their self-pairs rejected whatever the plant did; the plants caught the bad controls, which were
+rebuilt with every tile of diameter at most 1.
+
+**Calibration** (`tools/fs112_yb_calib.py`, output `data/fs112/fs112-yb/calibration.txt`, 55 s): FS-110's fragments S1, T2, BB, MX, WC, WC1, WCEQ, WCH,
+WC1H and A6-C2, built by the frozen builders and converted exactly — **every pair's verdict equals the frozen checker's** (`tools/fs110_y_check.py`),
+all ACCEPT, pairs examined equal to `Σ n_c(n_c + 1)/2` in each; the frozen builders' eleven planted faults, the eight tip tests and A6-C2's ten runs —
+**same verdicts and the same rejected pairs**; both checkers under `closed_interval` — same rejected pairs (every fragment is tight). **CAL-7** (row 33's
+brick seven-colouring, cells `4/5 × 3/5`, shear `2/5`, colour `(i + 3j) mod 7`): the cell `(0,0)` against itself and all ten same-colour cells with
+`|i|, |j| ≤ 4` ACCEPT, three exact contacts at 1 (its diagonal, and the cells `(±1, ±2)` corner to corner); every cell beyond the window is at gap
+`≥ 8/5`, dismissed exactly. Plants beside it: colour `(i + 2j) mod 7` REJECTs at offsets `(∓2, ±1)` (the vector `−2 + ζ₆` of norm 3 in the kernel, as
+the Lean module's docstring predicts); cells `81/100 × 3/5` REJECT on the self-pair (diagonal above 1); `closed_interval` REJECTs CAL-7 (it is tight).

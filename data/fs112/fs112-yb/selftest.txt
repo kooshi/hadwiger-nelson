@@ -1,0 +1,17 @@
+  [faithful] ok       Reuleaux triangle, width 1 (self)                                           want ACCEPT got ACCEPT
+  [faithful] ok       two Reuleaux triangles 2 apart along x (gap exactly 1)                      want ACCEPT got ACCEPT
+  [faithful] ok       two Reuleaux triangles 19/10 apart (gap 9/10)                               want REJECT got REJECT
+  [faithful] ok       square of side 7/10 (diagonal 0.99)                                         want ACCEPT got ACCEPT
+  [faithful] ok       square of side 3/4 (diagonal 1.06)                                          want REJECT got REJECT
+  [faithful] ok       two unit caps facing, centres 297/100 apart (nearest pair interior to both arcs: 97/100) want REJECT got REJECT
+  [faithful] ok       unit cap facing a thin bar at x = 197/100 (nearest pair interior to both: 97/100) want REJECT got REJECT
+  [faithful] ok       two crossing bars of length 6, cross pair only                              want REJECT got REJECT
+  [noself] ok       square of side 3/4 (diagonal 1.06)                                          want ACCEPT got ACCEPT
+  [endpoints_only] ok       two unit caps facing, centres 297/100 apart (nearest pair interior to both arcs: 97/100) want ACCEPT got ACCEPT
+  [endpoints_only] ok       unit cap facing a thin bar at x = 197/100 (nearest pair interior to both: 97/100) want ACCEPT got ACCEPT
+  [no_arcarc] ok       two unit caps facing, centres 297/100 apart (nearest pair interior to both arcs: 97/100) want ACCEPT got ACCEPT
+  [no_sa] ok       unit cap facing a thin bar at x = 197/100 (nearest pair interior to both: 97/100) want ACCEPT got ACCEPT
+  [closed_interval] ok       Reuleaux triangle, width 1 (self)                                           want REJECT got REJECT
+  [closed_interval] ok       two Reuleaux triangles 2 apart along x (gap exactly 1)                      want REJECT got REJECT
+  [no_meet] ok       two crossing bars of length 6, cross pair only                              want ACCEPT got ACCEPT
+SELFTEST ALL AS PREDICTED

@@ -1,0 +1,58 @@
+== CAL-FRAGS: FS-110's fragments, pair by pair against the frozen checker
+  ok       S1 (fs110_y_fragments)                           tiles  11  pairs examined  18 of  18  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+  ok       T2 (fs110_y_fragments)                           tiles  14  pairs examined  24 of  24  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 8
+  ok       BB (fs110_y_fragments)                           tiles  16  pairs examined  30 of  30  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 8
+  ok       MX (fs110_y_fragments)                           tiles  15  pairs examined  27 of  27  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 8
+  ok       WC (fs110_y_cone)                                tiles  15  pairs examined  30 of  30  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+  ok       WC1 (fs110_y_cone)                               tiles  14  pairs examined  26 of  26  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 2
+  ok       WCEQ (fs110_y_cone)                              tiles  15  pairs examined  30 of  30  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+  ok       WCH (fs110_y_cone)                               tiles  19  pairs examined  40 of  40  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 8
+  ok       WC1H (fs110_y_cone)                              tiles  16  pairs examined  30 of  30  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+  ok       A6-C2 (a6_c2_single_horn)                        tiles  16  pairs examined  30 of  30  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+== the frozen builders' planted faults (each REJECT in the frozen record), rebuilt and compared
+  ok       S1 plant s1_flat                                 tiles  11  pairs examined  18 of  18  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('u_c', 'w_out')]
+  ok       T2 plant t2_flip                                 tiles  14  pairs examined  24 of  24  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_0', 'v_3'), ('W_2', 'v_1'), ('u_1', 'w_2'), ('u_3', 'w_0')]
+  ok       T2 plant t2_flat                                 tiles  14  pairs examined  24 of  24  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_0', 'v_1'), ('u_1', 'w_0')]
+  ok       T2 plant t2_six                                  tiles  14  pairs examined  24 of  24  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_1', 'u_3'), ('v_3', 'w_1')]
+  ok       BB plant bb_rot                                  tiles  16  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('u_b', 'w_2'), ('u_c', 'w_0')]
+  ok       WC plant wc_flat                                 tiles  15  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+  ok       WC plant wc_fat                                  tiles  15  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+')]
+  ok       WC plant wc_col2                                 tiles  15  pairs examined  29 of  29  frozen REJECT mine REJECT  pairs with an exact contact at 1: 5  rejected [('r2', 'v2')]
+  ok       WCH plant wch_ywide                              tiles  19  pairs examined  40 of  40  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('v2', 'xS+'), ('v2', 'xS-'), ('v3', 'yN+'), ('v3', 'yN-')]
+  ok       WCEQ plant eq_steep                              tiles  15  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+'), ('N1', 'h-')]
+  ok       WC1H plant wc1h_ylow                             tiles  16  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('v2', 'xS'), ('v3', 'yN')]
+== the frozen tip tests and A6-C2's runs (verdicts and rejected pairs as recorded)
+  ok       tip test WC  tip->2                              tiles  16  pairs examined  32 of  32  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 2
+  ok       tip test WC  tip->3                              tiles  16  pairs examined  32 of  32  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 2
+  ok       tip test WC  tip->4                              tiles  16  pairs examined  34 of  34  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+  ok       tip test WCH tip->2                              tiles  20  pairs examined  44 of  44  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('tip', 'xS+')]
+  ok       tip test WCH tip->3                              tiles  20  pairs examined  44 of  44  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('tip', 'yN+')]
+  ok       tip test WC1H tip->2                             tiles  17  pairs examined  33 of  33  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('tip', 'xS')]
+  ok       tip test WC1H tip->3                             tiles  17  pairs examined  33 of  33  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('tip', 'yN')]
+  ok       tip test WC1H tip->4                             tiles  17  pairs examined  34 of  34  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+  ok       A6-C2 tip -> 2                                   tiles  17  pairs examined  33 of  33  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('tip', 'xS')]
+  ok       A6-C2 tip -> 3                                   tiles  17  pairs examined  33 of  33  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('tip', 'yN')]
+  ok       A6-C2 tip -> 4                                   tiles  17  pairs examined  34 of  34  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+  ok       A6-C2 tip -> 5                                   tiles  17  pairs examined  34 of  34  frozen REJECT mine REJECT  pairs with an exact contact at 1: 3  rejected [('r1', 'tip'), ('r4', 'tip'), ('r7', 'tip')]
+  ok       A6-C2 tip -> 6                                   tiles  17  pairs examined  34 of  34  frozen REJECT mine REJECT  pairs with an exact contact at 1: 2  rejected [('r0', 'tip'), ('r3', 'tip'), ('r6', 'tip')]
+  ok       A6-C2 shave split y = 0                          tiles  18  pairs examined  36 of  36  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('tipL', 'yN'), ('tipU', 'xS')]
+  ok       A6-C2 shave split below                          tiles  18  pairs examined  36 of  36  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('tipU', 'xS')]
+  ok       A6-C2 shave split above                          tiles  18  pairs examined  36 of  36  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('tipL', 'yN')]
+  ok       A6-C2 control: unbent WC1H split                 tiles  18  pairs examined  36 of  36  frozen ACCEPT mine ACCEPT  pairs with an exact contact at 1: 4
+  ok       A6-C2 plant: curvature -1/2                      tiles  16  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('v2', 'xS'), ('v3', 'yN')]
+== the frozen checker's own planted faults, applied to IT, against this checker (closed_interval: every exact contact rejects)
+  ok       S1 under closed_interval (both checkers)         tiles  11  pairs examined  18 of  18  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('u_b', "w'_out"), ('u_b', 'w_in'), ('u_c', "w'_in"), ('u_c', 'w_out')]
+  ok       T2 under closed_interval (both checkers)         tiles  14  pairs examined  24 of  24  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_0', 'v_1'), ('W_1', 'u_1'), ('W_2', 'v_3'), ('W_3', 'u_2'), ('u_1', 'w_0'), ('u_3', 'w_2'), ('v_1', 'w_1'), ('v_2', 'w_3')]
+  ok       BB under closed_interval (both checkers)         tiles  16  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_0', 'v_c'), ('W_1', 'u_b'), ('W_2', 'v_b'), ('W_3', 'u_c'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_b', 'w_1'), ('v_c', 'w_3')]
+  ok       MX under closed_interval (both checkers)         tiles  15  pairs examined  27 of  27  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('W_0', 'v_3'), ('W_1', 'u_c'), ('W_2', 'v_1'), ('W_3', 'u_b'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_1', 'w_1'), ('v_2', 'w_3')]
+  ok       WC under closed_interval (both checkers)         tiles  15  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+  ok       WC1 under closed_interval (both checkers)        tiles  14  pairs examined  26 of  26  frozen REJECT mine REJECT  pairs with an exact contact at 1: 2  rejected [('N1', 'h+'), ('S1', 'h+')]
+  ok       WCEQ under closed_interval (both checkers)       tiles  15  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+  ok       WCH under closed_interval (both checkers)        tiles  19  pairs examined  40 of  40  frozen REJECT mine REJECT  pairs with an exact contact at 1: 8  rejected [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-'), ('v2', 'xS+'), ('v2', 'xS-'), ('v3', 'yN+'), ('v3', 'yN-')]
+  ok       WC1H under closed_interval (both checkers)       tiles  16  pairs examined  30 of  30  frozen REJECT mine REJECT  pairs with an exact contact at 1: 4  rejected [('N1', 'h+'), ('S1', 'h+'), ('v2', 'xS'), ('v3', 'yN')]
+== CAL-7: row 33's boundary-tight brick seven-colouring, and two plants beside it
+  CAL-7                                            pairs examined 11 (the cell (0,0) with itself and every same-colour cell with |i|,|j| <= 4); beyond: every cell at gap >= 8/5 (> 1: dismissed exactly); verdict ACCEPT; pairs with an exact contact at 1: 3
+  plant: colour (i + 2j) mod 7                     pairs examined 11 (the cell (0,0) with itself and every same-colour cell with |i|,|j| <= 4); beyond: every cell at gap >= 8/5 (> 1: dismissed exactly); verdict REJECT; pairs with an exact contact at 1: 1; rejected [('c0,0', 'c-2,1'), ('c0,0', 'c2,-1')]
+  plant: cell 81/100 x 3/5 (diagonal > 1)          pairs examined 11 (the cell (0,0) with itself and every same-colour cell with |i|,|j| <= 4); beyond: every cell at gap >= 41/25 (> 1: dismissed exactly); verdict REJECT; pairs with an exact contact at 1: 2; rejected [('c0,0', 'c0,0')]
+  CAL-7 under closed_interval (tightness)          pairs examined 11 (the cell (0,0) with itself and every same-colour cell with |i|,|j| <= 4); beyond: every cell at gap >= 8/5 (> 1: dismissed exactly); verdict REJECT; pairs with an exact contact at 1: 3; rejected [('c0,0', 'c0,0'), ('c0,0', 'c-1,-2'), ('c0,0', 'c1,2')]
+CALIBRATION ALL AS PREDICTED
