@@ -938,6 +938,12 @@ mind (mine) unless marked.*
   list's gloss "no boundary arc of radius 1" coincide: a segment, or a circular arc of radius `≠ 1` or of radius 1 about another centre, meets a unit
   circle in at most two points, and a unit circle meets finitely many arcs. [hand, trivial; **two minds**: FS110-Y3's Y3-C5, and mine, independent]
   Stage A5-0. It discharges FS110-PA's "round 3 must say which" for `𝓜_K` and LIM.
+- **A5-CORNER** — Y-BIKE-3C's missing case (YB's "grid-corner passage") is exactly a **cross-swap** in A4-BAND's sense. For `σσ′ = −1` the allowed
+  cells `(i, j)` (`i + j ≡ k − 1`) and `(i+1, j+1)` lie in adjacent bands and share a corner that belongs, half-open, to the allowed cell; for `σσ′ = +1`
+  the passage is `(i, j) → (i+1, j−1)` through one forbidden point of `C` (both ends are change points, so no neighbourhood is monochromatic). In both,
+  the colours read `p | q` at `x` and `q | p` at `y`, `|x − y| = 1`, and the lift jumps by 2. So "C lies in one component" (the side's step) fails
+  exactly at cross-swaps, and the **transposed swap** (A4's hunch `transposed-swap-holds`, not derived) would close Y-BIKE-3C's family. [hand, one mind,
+  sighted; the GAP's location: three minds — YB blind, A4-BAND's "on 60° cells with no cross-swap", mine] Stage A5-1.
 
 ### Would-have-searched-here log (A5)
 
@@ -977,3 +983,55 @@ mind (mine) unless marked.*
 Y3's answer is in its section (§ The pre-round question), sent to "main" at 05:4x. **Retractions count from both answers.**
 
 ## Stage A5-0 — SAVED
+
+## Stage A5-1 — SAVED: FS110-YB against the construction side (brief item 1)
+
+*Read: YB's report and record stages 3–4; the side's text at every item YB cites (l. 22–28, §2.3, §2.4, §4.3 (a)–(d), §4.5 item 4, stage 5's lattice
+paragraph); `tools/fs110_y_*.py` for a lattice formula (none). Nothing here goes to either side (YB is blind; its derivations stay fenced from both).*
+
+### A5-1.1 Divergences, each checked against the side's text, and the count of minds
+
+| item | the side | YB (blind) | my check (sighted) | minds now |
+|---|---|---|---|---|
+| fragments S1, T2, BB, MX | ACCEPT, tight, `tools/fs110_y_check.py` | ACCEPT, tight, 18/24/30/27 pairs, own checker, two closings, the side's plants REJECT at the named pairs | — | **[tools, exact, two independent checkers]**, one blind |
+| Y-AEX, Y-CIRC, Y-SIX, Y-TYPE | TRUE | TRUE (Y-SIX's failure-set paragraph not redone for (2, 4)) | — | the calculus: four (N, Y, A2, YB), one blind |
+| Y2-W4 (a)–(c) | TRUE | TRUE (its YB-L is the side's (b)) | — | **four**: Y2, N-X, NB, YB; two blind |
+| Y2-W4 (d) "at most one colour `m_u(w)`" | stated for covering pairs of any sizes (§4.3's setting fixes none) | MISSTATED: at most `\|P(u)\| − 2` | **TRUE that it is misstated**: at the four-colour end of a (4, 2) pair, (a)–(b) put two colours of `P(u)` in `P_cl(w)`, so two remain | two (YB blind, mine). **Vacuous under Condition 5** (NB-4: no four-colour vertex); a correction for the unit-arc branch |
+| Y2-W4e | escape partner `ω(w)`-monochromatic; the (2, 4) bichromatic end a crossing of two unit arcs | the partner rule holds for **every** (3, 3) pair; the (2, 4) bullet vacuous (YB-V5X) | the widening follows from (d) at `v`, which never uses `u`'s escape | scope, two |
+| Y2-S1i item 4 | "past its ends, tile-interior points of `ω(u)` carry colours outside `P(u)` … so each end … is a vertex meeting a colour of `P(v)`" | GAP when both side colours are cusps at `u` (the swap continuation `(c′ \| c)` along `ω(u)`) | the step presupposes that `ω(u)` enters tile interiors past the end; a continuation along a boundary with swapped sides is not treated | GAP location: two (YB blind, mine). Unit-arc branch |
+| Y-T2W | table line (l. 25) omits sizes; §2.3 fixes `P(u) = {1,2,3}`, `P(v) = {4,5,6}` | TRUE at (3, 3); GAP at (2, 4); "the inner arc colour" should read "an inner colour" (MX's `u` has two) | **no divergence of truth at the side's scope**: the table line drops §2.3's (3, 3) hypothesis (N2-ROT's kind of table-line slip); YB's wording fix stands | two at (3, 3), one blind. Unit-arc branch (T2 needs unit arcs) |
+| Y-BLOCK, "hence C-TAN-POS" | TRUE at A-EXACT's level, completeness not claimed | GAP at completeness (cusp tangent to the tangent line) | agreed: the "hence" needs a completeness the side does not claim | two; a grade, not a truth |
+| **Y-BIKE-3C** | TRUE: "`C` lies in one component" | **GAP at grid-corner passages**; TRUE for grids in general position (two routes) | **A5-CORNER: each corner passage is a cross-swap**, the escape A4-BAND named | generic case two (Y, YB); the GAP's location three (YB blind, A4, A5) |
+| **Y2-LAT** | a description, no formula (none in `tools/fs110_y_*`): "extending BB translation-invariantly over the unit triangular lattice (all unit `A`–`B` pairs covering, `C`-points four-colour) fails at the `C`-points" | REJECT on its reading (BB over the index-3 cosets; `u` at 0, `v` at 1, `w`'s quadrants at 2): 36 of 521 pairs, all `u`-type against a four-colour point's quadrant | **YB's reading is the side's description**; both fail at `A`-type against `C`-point colours | **three routes**: Y2 (hand), YB (exact, blind), NB-4 (the general form under Condition 5: a four-colour vertex cannot occur) |
+| YB-V5X (new) | — | a bichromatic vertex of degree `≥ 4`, sectors of positive angle, never ends a covering pair at a transversal common unit point | not re-derived | one (blind). Under Condition 5 NB-5 already removes close covering pairs; it matters in the unit-arc branch |
+
+**The pattern (YB's own, confirmed):** YB's two truth divergences (Y-BIKE-3C, Y2-S1i item 4) are one shape: a proof that follows a curve through tile or
+cell interiors and misses the measure-zero passage where the curve runs through a vertex or along a boundary. Both are the flattering direction (G21).
+**Where they fall:** one on W-3's side question (the bicycle, a cross-swap), one in the unit-arc branch (a cusp). **Round 3's pre-round answers name the
+same kind of passage:** N3's falsifier (1) is cusp horns at a repeated-colour vertex. Nothing of YB's goes to either side.
+
+### A5-1.2 What YB changes for round 3 and for round 4
+
+- **Round 3 (W-3):** nothing in W-3's definition rests on a YB-corrected item. The bicycle is not in W-3 (§7.1's last paragraph). YB's corrections bear
+  on A4's framing sentence ("no same-type monotone pair in `(1, 2)`, given A4-BAND and a transposed swap"): A5-CORNER makes the transposed swap the one
+  missing step for the 60°-cell family too.
+- **Round 4 (the unit-arc branch):** Y2-W4 (d), Y2-S1i item 4 (cusp continuation), Y-T2W's wording, YB-V5X, all there. (S1)'s arc ends acquire a
+  cusp escape, the second named cost of (S1) beside N2-S1's `γ` points.
+
+hunch: cusps-are-the-last-escape
+  claim: under Condition 5 in `𝓜_K`, a winding map exists only if some trichromatic or bichromatic vertex of degree at least 4 has a repeated colour whose sectors are cusp horns
+  basis: analogy
+  falsifier: a winding map given by formula and checked exactly with every sector of positive angle; or a NO of W-3 whose proof treats cusps and positive-angle sectors alike
+  registered: 2026-09-27
+  status: open — basis: YB's two GAPs sit at measure-zero passages (a cusp, a corner); N3's falsifier (1) names cusp horns; YB-V5X and N3's removal both need positive angle
+
+### A5-1.3 Evidence inventory
+
+- YB's Y-BIKE-3C GAP — read against: a scope slip at a rare configuration — surprised: yes; it is A4-BAND's cross-swap exactly (A5-CORNER)
+- Y2-LAT's formula — read against: a formula YB could compare — surprised: yes; there is none, only a description, and YB's reading matches it
+- Y-T2W at (2, 4) — read against: a divergence of truth — surprised: no divergence at the side's scope; a table line dropping §2.3's sizes
+- N3's and Y3's pre-round answers — read against: A4's pattern (the registrations never meet) — surprised: **yes; for the first time in FS-110 they
+  name one object**, the vertex where one colour holds two non-adjacent sectors (bowtie of degree `≥ 4`, bichromatic of degree `≥ 4`). Y3 bets the NO
+  stalls there; N3 bets such vertices with positive-angle sectors are removable, and names cusp horns as what would prove it wrong
+
+## Stage A5-1 — SAVED
