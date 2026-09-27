@@ -189,3 +189,32 @@ The planner adopted all six items of my first message (its plan, stage 4 table).
   type used on SEQ without a definition, item 2)
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: what the planner's drafts changed in my expectation (briefs at 3bee7561, read before either competitor exists)
+
+Read: `data/fs107/briefs/SHARED-107-competition.md`, `R107-stability.md`, `W107-near-colourings.md`, `A107b-advisor-competition.md` (in full, stages
+and rules); `data/fs107/claims.md` with D-JUNC, the K-AD split and C-VOID's exact form. The briefs are symmetric; both carry the junction language
+(K-C6, K-TAN, K-KILL) and the five killing tests.
+
+**Changes to E3, registered before round 1:**
+- **W's first product will be aimed at C-VOID, not at W.** C-VOID's refutation (hole inradius → 0 at bounded coverage) is named in W's own brief
+  as a result, and it is the cheaper target: it asks only that no void keep a fixed size, not that the total vanish. If W refutes C-VOID, R's door
+  R-ρ₀ closes and R is left with a positive-measure defect (R-meas), which runs through LIM.
+- **R's first target will be C-VOID** (a local anchor at junctions, the pinhole test standing against it). So round 1 is likely a contest over
+  C-VOID from both sides, which is the void-conservation crux of stage 1, now with a name.
+- The rest of E1–E3 stands.
+
+```
+hunch: round-one-is-about-c-void
+  claim: both competitors' first substantive cards in round 1 concern C-VOID (R proving it, W refuting it) rather than R or W themselves
+  basis: prior (the briefs name C-VOID for both; it is the cheaper target on each side)
+  falsifier: either side's first stage-2 argument or family aims at R or W directly without passing through C-VOID
+  registered: 2026-09-27
+  status: open
+```
+
+**On the planner's record placement** (competitors' records in `plans/`, committed per stage, fenced by path and by `rg --glob` exclusion — against
+protocol §1 rule 1's scratch-until-hand-back): my weigh-in goes to the owner by message (recommend keep, with a named trigger for moving to
+isolated worktrees).
+
+## Stage 3 — SAVED
