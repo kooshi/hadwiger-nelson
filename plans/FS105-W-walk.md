@@ -385,3 +385,64 @@ lower bound on `α₁(ℝ²)` with no technique in sight; the cheap form is fals
 
 - (d3): would have searched for finite unit-distance graphs of small independence ratio (to score the prediction side); instead read the
   best proved bound in `[DuczVarga2026]` and stated the margin. The ban holds.
+
+## Stage 5 — SAVED (the write-up)
+
+### 5.1 Verdicts
+
+| claim | verdict | grade; minds |
+|---|---|---|
+| **(c) C-MR16 — MR(`F_dG`) by row 120's proof, every step at `[F:ℚ] = 16`** | **TRUE** | [hand — a **checking reading** of the held derivations X01D, X12B (EF_F⁺) and X02D, X02V (PE-2) at degree 16, one mind, **not blind**; tools exact (S1–S8, G1–G4, A1–A3, plants fire)]; resting on EL2021 Thm 1.3 and FS105-R-D (the reader's grounding of Thm 1.2, one mind) and, for the entropy formula's exact form only, on Lind–Ward / Chothi–Everest–Ward (unread; its load-bearing consequence, positive Haar entropy, derived — X02D §3.3, FS105-R-H) |
+| (c-a) (a)'s items at `F_dG` | TRUE — (a1)–(a8); admissibility against all 373 proper subfields by two exact routes | as above; agrees with the reader (FS105-R), a separate mind on these items |
+| (c-b) EF_F⁺'s count and the growth it needs | TRUE — the argument needs `liminf log #V_M / log M > 0` (any fixed positive exponent: `K > 9` is degree-free and chosen first, then `β < γ/K`, Lemma 3.1′ supplying every `β`); `U_ℚ` gives `(4/π + o(1))M^{1/16}` exactly (G1); sub-polynomial growth (X01V's `(log M)^k`) would not suffice | as above |
+| (c-c) `h_m = log H` for totally real `F`, at `F_dG` | TRUE by statement (CM: no archimedean term); only positivity is load-bearing, and it is derived | as above |
+| (c-d) the leaves at the sixteen complex places | TRUE — `T + A` with `A` the image of `ℂ¹⁶`; EF-X's circles (and tori) in any of the sixteen coordinates are consistent controls | as above |
+| **(d1) MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`; row 129's killing test** | **TRUE as stated**; the only MR link is FRAC; the test uses B-AMEN's Følner half (two blind), not its one-mind reverse half, and not B-CHIF | [checking reading, one mind, not blind] |
+| **(d2) what a refutation needs** | (W) `α(G) ≥ c\|G\|` for every finite unit-distance graph with `c ∈ (0.24699…, 0.249956…)`, i.e. `sup_G χ_f(G) < 4.04876`; or (W′) `χ_f,0(ℝ²) < χ_f(ℝ²)` (with B-CHIF) | [derived from held papers, one mind] |
+| **(d3) anything near it** | **nothing**: the best proved lower bound on `α₁(ℝ²)` is `δ_Croft = 0.22936`, 0.0176 below what (W) needs, with no technique beyond averaging a measurable set; the cheap form `α₁ ≥ 1/4` (MRVZ's Conjecture 1) is false in print (`[DuczVarga2026]`); MR's prediction is unscored at a margin `≥ 0.00297` in ratio (`χ_f`: 4.0007 proved, `≥ 4.0488` predicted); zbMATH query set negative | [reading, one mind] |
+
+**No GAP and no FALSE found.** Audited at the rate of a disliked result (G21): the places a degree-16 failure would have had to sit (a
+degree-dependent exponent; an archimedean constant outgrowing the thinness; a count below what `β` allows; a normalisation mismatch;
+admissibility read off `ℚ(Γ) = L`; a `Γ` built from `U_ℚ`) were each checked, three of them exactly. The one defect found was mine (G2's inert
+split filter, §3.4), in a tool, and it did not move a number.
+
+### 5.2 C0 scored, and the plan's expectations
+
+| line | registered | outcome |
+|---|---|---|
+| (c-a) | 0.88 TRUE | TRUE |
+| (c-b) | 0.90 TRUE | TRUE; the named wrong reason (two normalisations) was present **in the records** (X01D `M^{1/16}`, X12B `M^{1/32}` for the same set) and is harmless: both positive; recorded (§2.0) so no one reads it as a discrepancy |
+| (c-c) | 0.93 TRUE | TRUE by statement; its literature debt carried |
+| (c-d) | 0.94 TRUE | TRUE |
+| (c) overall | 0.80 TRUE | TRUE |
+| (d1) | 0.82 TRUE | TRUE; the named wrong reason (B-AMEN taken as obvious) resolved by finding the used half has two derivations |
+| (d3) | 0.95 nothing in print | met |
+| plan §E5 | 0.80 walks through | **met** |
+| plan §E6 | 0.90 (d1) correct | **met** |
+| plan §E7 | 0.90 nothing in print; expectation heuristic | **met** (Ambrus et al.: "Based on this numerical evidence") |
+
+### 5.3 Proposed edits (for the close; I edit none of these files)
+
+- **`LEDGER.md` row 128** and **`plans/FS103-derivation.md` FS103-DG**: "MR at degree 16 as row 120 states it, its walk unexercised" → "MR at
+  degree 16 walked by FS105-W (a checking reading of row 120's proofs at `[F:ℚ] = 16`, one mind; admissibility at `F_dG` exact) and its
+  Thm 1.2 hypotheses checked by FS105-R".
+- **`LEDGER.md` row 129**, grade line: "B-AMEN and B-CHIF one mind" → "B-AMEN's reverse half and B-CHIF one mind, off the chain of the killing
+  test and of `α₁(ℝ²) = m₁(ℝ²)`, which use only the Følner half (two blind: F, B)". And the killing test could carry its window: "a proof
+  needs `α₁(ℝ²) > 0.24699…` against `[DuczVarga2026]`'s `< 0.249956`, or `χ_f,0(ℝ²) < χ_f(ℝ²)`".
+- **`LEDGER.md` row 120 / FS100-EFG**: EF-G (b)'s count is `#V_M = (4/π + o(1))M^{1/[F:ℚ]}` exactly (`H_L(q) = (den q)^{[F:ℚ]}`, FS105-W-H);
+  X12B's `H_L(q) ≤ c^{[L:ℚ]}` is valid and loose by a factor 2 in the exponent — no correction of truth, a normalisation note.
+- **G80's Do line** ("count the group's elements by height"): add "any positive exponent suffices, in `H_L`; the degree enters constants only
+  (FS105-W §2.1)".
+- **`BIBLIOGRAPHY.md`**: `[AmbrusEtAl2023]` — add "Theorem 1 and p. 19's computed value `0.24699…`, §4's Remark re-read 2026-09-26 (FS105-W)";
+  `[DuczVarga2026]` — "Lemma 1 and the blow-up paragraph re-read (FS105-W)"; `[MatolcsiEtAl2025]` — "§2 re-read (FS105-W)". New, **titles only,
+  not read**: V. Jungić, *Still Spinning: The Moser Spindle at Sixty*, Math. Mag. 96 (2023), doi 10.1080/0025570X.2023.2176684, Zbl 1535.05104
+  (zbMATH text withheld by licence; identified by Crossref); D. Czifra, Á. Dúcz, M. Matolcsi, D. Varga, P. Zsámboki, *Improved bounds for the
+  double cap conjecture*, arXiv:2605.28709; Á. Dúcz, *On the maximal measure of a spherical set avoiding solutions to x + y + z = 0*,
+  arXiv:2607.05083.
+
+### 5.4 Would have searched here (whole job)
+
+| move I would have made by search | what I did instead |
+|---|---|
+| stage 1: search `O_L` for an element of norm exactly divisible by a totally split prime | one family fixed in advance, `n = 1…60`, first hit `n = 21` |
+| stage 4: search for finite unit-distance graphs of small independence ratio (the prediction side) | read the best proved bound (`[DuczVarga2026]` Lemma 1) and stated the margin |
