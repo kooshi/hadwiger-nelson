@@ -168,3 +168,24 @@ hunch: complementary-type-is-the-combinatorial-core
   should say so.
 
 ## Stage 1b — SAVED
+
+## Stage 2 — SAVED: the claim list reviewed (`data/fs107/claims.md` at 605097e3)
+
+The planner adopted all six items of my first message (its plan, stage 4 table). My review of the list, sent by message the same turn:
+1. **K-AD's grade.** Split: the no-go for arguments of the named form is K-HIT's logical type, [hand, one mind]; the "exactly two doors" sentence
+   is the [reading], and the planner's killing test ("an argument whose anchors form a null set of dimension `< 2` that certifies hole area bounded
+   below uniformly in `ε`") kills the reading, not the no-go. I do not contest a single [reading] grade.
+2. **"Junction type" is undefined on SEQ** (K-PIX: coloured points may all have chromaticity 1). Proposed: for each component of the uncovered set,
+   the colours with a cell within a stated `r_J` of it.
+3. **W's exact check certifies members;** band-properness for every parameter value is a derivation (G21).
+4. **A known positive at six colours for W's checker:** the slack hexagonal seven-colouring with one class uncovered (`δ = 1/7`), rasterized;
+   `[MundingerEtAl2025]`'s data, if held, as a sharper one.
+5. **C-VOID's exact form:** "There are `ρ₀, R₀ > 0` such that for every `ε > 0` every band-proper partial six-colouring of ℝ² has, inside every
+   disc of radius `R₀`, a disc of radius `ρ₀` whose uncovered part has full measure."
+6. The planner's §PA finds (DeCorte–Oliveira–Vallentin 2022 Lemma 6.2; Mundinger et al. 2025) go to both competitors as shared prior art.
+
+**Evidence inventory, added:**
+- `data/fs107/claims.md` — read against: A2 §3.4–§3.6 verbatim, the close's grades beside them, my six items — surprised: yes, once (junction
+  type used on SEQ without a definition, item 2)
+
+## Stage 2 — SAVED
