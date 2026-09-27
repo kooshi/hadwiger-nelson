@@ -120,6 +120,8 @@ are out (FS106-AE-POLY, bar `d = 2`); curved bounded families are live, decided 
 
 ### 2.1 The shape: sort Voronov's certificates by their tight form, and keep only the ones that survive it
 
+*(Stage 3 §3.4 withdraws this table's bicycle row, its circle row's cost as a statement about the plane, and §2.2's bicycle column. Kept here as saved.)*
+
 By O1 (§1.5) a proof of R must hold in the tight world too. So I sort the certificates `[Voronov2023]`'s proof ends in by what happens to each at exact
 distance, and by what a *local repair* (a change of the colouring inside discs of radius `ρ` about boundedly many points per unit area — A8b's
 kind) does to it on SEQ:
@@ -168,3 +170,156 @@ concrete (§3.4).
   Q2 and AE-FA are not used.
 
 ## Stage 2 — SAVED
+
+---
+
+## Stage 3 — SAVED: three lemmas, a named obstruction, and the reduction they leave
+
+Notation: `H` is the uncovered set; "band-proper" is D-MU's condition on LIM and "no monochromatic pair at any distance in `[1 − ε, 1 + ε]`" on SEQ;
+`A_ε(z) = {q : \|q − z\| ∈ [1 − ε, 1 + ε]}`; `e_ψ = (cos ψ, sin ψ)`.
+
+### 3.1 Lemma SAT (on both) — WLOG the holes are exactly the six-sighted set, and it is open  [hand, one mind]
+
+*Statement.* Call a band-proper family `C₁, …, C₆` **saturated** if no band-proper family contains it (up to null sets) with a strictly larger union.
+Saturated families exist above every family (Zorn: a chain's union, taken along a countable cofinal sequence of measures, is band-proper by Fubini).
+For a saturated family, with `g_j(z) = \|A_ε(z) ∩ C_j\|` (a continuous function, being `1_{C_j} ∗ 1_{A_ε(0)}`):
+**`H = {z : g_j(z) > 0 for all six j}` up to a null set.** In particular `H` is a.e. an **open** set, and a.e. coloured point sees at most five colours
+on its band annulus.
+
+*Proof.* (⊇) A.e. `z ∈ C_j` has `g_j(z) = 0`, since otherwise the monochromatic band pairs of `C_j` have positive `Leb ⊗ Leb` measure (Fubini). So
+a.e. point with all six `g_j > 0` is uncovered. (⊆) Let `V_j = H ∩ {g_j = 0}` (measurable). If `\|V_j\| > 0`, pick a ball `B` of diameter `< 1 − ε`
+with `\|V_j ∩ B\| > 0` and put `C_j′ = C_j ∪ (V_j ∩ B)`. Pairs inside `B` are shorter than the band. For `z ∈ V_j`, `A_ε(z) ∩ C_j` is null, so the new
+monochromatic band pairs are null by Fubini. The union grew: this contradicts saturation. ∎
+
+*What it gives.* R becomes "`\|{z ∈ U_R : g_1(z), …, g_6(z) > 0}\| ≥ δ₀\|U_R\|` for saturated families", a statement about an **open** set defined by six
+continuous functions. W's checker can compute the same set on a member: any hole point that sees five colours or fewer can be coloured for free. A
+normal form for **partial** colourings, beside FS-103's D-NF for full ones. Not found in print (not searched beyond the planner's §PA; G21 — a
+negative about my query).
+
+### 3.2 Lemma CP (on both) — complementary fat junctions within distance 2 cost area independent of `ε`  [hand, one mind; the cone case of TS's C-T-TAN, quantified]
+
+*Definitions.* For a closed arc `I ⊂ S¹` of positive length and `0 < r < s`, the truncated cone `K(x, I; r, s) = {x + ρe_ψ : ψ ∈ I, r ≤ ρ ≤ s}`. A
+**fat junction of type `T = {a, b, c}` at `x`, scales `r < s`,** is three arcs `I_a, I_b, I_c` with `K(x, I_j; r, s) ⊆ C_j` (on LIM: up to a null
+set). Nothing is assumed inside `B(x, r)`: the void, a repair, anything. It **blocks direction `θ` on side `σ ∈ {±}` with margin `µ ∈ (0, π/2)`** if each
+`I_j` meets the open arc of half-width `π/2 − µ` about `θ` (`σ = +`) or about `θ + π` (`σ = −`).
+
+*Claim 1 (the chord).* Let `s ≤ sin(µ/2)`, `t₁ = s·sin(µ/2)/3`, `2r < t₁`. If `z = x + (1 + t)e_φ` with `\|φ − θ\| ≤ µ/2` and `σt ∈ [2r, t₁]`, then
+`T₁(z)` meets every cone `K(x, I_j; r, s)`, `j ∈ T`.
+
+*Proof.* Take `ψ` with `\|ψ − φ\| ≤ π/2 − µ/2` (`σ = +`) or `\|ψ − φ − π\| ≤ π/2 − µ/2` (`σ = −`), so that `c := \|cos(ψ − φ)\| ≥ sin(µ/2)`.
+- `σ = +` (`t > 0`, `\|x − z\| = 1 + t`). The ray `x + ρe_ψ` meets `T₁(z)` when `(1 + t)² c² ≥ 2t + t²`, which holds since `c² ≥ sin²(µ/2) ≥ 3t`. The
+  nearer meeting point is at `ρ = (2t + t²)/((1 + t)c + √(1 − (1 + t)²(1 − c²)))`. The denominator lies in `[c, 2 + t]`, so `t ≤ ρ ≤ 3t/sin(µ/2) ≤ s`,
+  and `ρ ≥ 2r > r`.
+- `σ = −` (`t = −τ < 0`, `\|x − z\| = 1 − τ`). Every ray meets `T₁(z)` once, at `ρ = (2τ − τ²)/((1 − τ)c + √((1 − τ)²c² + 2τ − τ²))`. The
+  denominator lies in `[2(1 − τ)c, 2]`, so `τ(1 − τ/2) ≤ ρ ≤ 2τ/sin(µ/2) ≤ s`; and `ρ > r`.
+
+The admissible `ψ` cover the open arc of half-width `π/2 − µ` about `θ` (or `θ + π`), since `\|φ − θ\| ≤ µ/2`. Each `I_j` meets that arc, so `T₁(z)`
+contains a point of `K(x, I_j; r, s) ⊆ C_j`. ∎
+
+*Claim 2 (the region).* Let `x` (type `T`) and `x′` (type `T′`, `T ∩ T′ = ∅`) be fat junctions with scales `r < s`, `r′ < s′`, both at most
+`s₀(µ, η)`. Let `\|x − x′\| = D ∈ [η, 2 − η]` and `\|w − x\| = \|w − x′\| = 1`. Suppose `x` blocks `θ = dir(w − x)` on side `σ` and `x′` blocks
+`θ′ = dir(w − x′)` on side `σ′`, both with margin `µ`, and `2r < t₁`, `2r′ < t₁′`. Then
+**`\|H ∩ B(w, µ/4)\| ≥ (t₁ − 2r)(t₁′ − 2r′)`, with `t₁ = s·sin(µ/2)/3` and `t₁′ = s′·sin(µ/2)/3`.** On LIM, where `H` is null, such a configuration does not
+occur.
+
+*Proof.* `F(z) = (\|z − x\| − 1, \|z − x′\| − 1)` is a local diffeomorphism at `w`, with `\|det DF\| = \|sin ω\|`, where `ω` is the angle between `z − x`
+and `z − x′`. At `w`, `sin ω = D√(1 − D²/4) ≥ η/2` (for `η ≤ 1`). For `s, s′ ≤ s₀ = µη²/100` (constants not optimised), the preimage `Q` of the box `σ[2r, t₁] × σ′[2r′, t₁′]`
+near `w` lies in `B(w, µ/4)`. So each `z ∈ Q` has `dir(z − x)` within `µ/2` of `θ`, and `dir(z − x′)` within `µ/2` of `θ′`. By Claim 1, `T₁(z)` meets all
+six classes, and `1 ∈ [1 − ε, 1 + ε]`, so `z ∉ C_j` for every `j`.
+- On LIM: for a.e. `z ∈ Q`, `T₁(z)` meets each cone in positive length, because `I_j` meets an open arc in a sub-arc of positive length, and the
+  null exceptions are null on a.e. circle (Fubini). So a.e.-properness gives the same conclusion.
+- Then `\|Q\| = ∫_box dτ dτ′/\|sin ω\| ≥ (t₁ − 2r)(t₁′ − 2r′)`. ∎
+
+*Its three properties* (why it is the right certificate):
+- **(scale)** The cost is `≍ ss′`. It is independent of `ε`, and depends on the cone scale only.
+- **(repair-robust)** Change the colouring inside `B(x, ρ) ∪ B(x′, ρ′)`, anywhere else away from the cones, or anywhere away from `Q`. The
+  hypotheses still hold with `r, r′` replaced by `ρ, ρ′`, and the bound moves by `O(ρs′ + ρ′s)`. **No local repair at scale `≪ s` breaks it**, which is
+  what A8b's `O(ε²)` repairs do to every other Voronov certificate.
+- **(disc)** `Q` is a curvilinear parallelogram of side widths `t₁ − 2r`, `t₁′ − 2r′` at angle `ω`. It contains a fully uncovered disc of radius
+  `≥ ½ sin ω·min(t₁ − 2r, t₁′ − 2r′)`: CP yields C-VOID's discs, not only area.
+
+### 3.3 Lemma SW (on SEQ) — a same-multicolour unit pair at a flat tangent interface costs exactly order `ε·s`  [hand, one mind; both bounds]
+
+*Statement.* Let `\|p − q\| = 1`, `e = q − p`, `ε ≤ s/2`, `s ≤ 1/10`. For each `v ⊥ e` with `\|v\| ≤ s/2`, suppose one half-segment
+`S_p(v) ∈ {p + v + [−s/2, 0]e, p + v + [0, s/2]e}` lies in `C_a ∪ H`, and one half-segment `S_q(v)` about `q` likewise. The choice of halves is
+the same for every `v`. This is "colour `a` on one side of a flat `{a, ·}`-boundary through `p`, and through `q`, the boundaries perpendicular to
+`pq`": the tangent interface, the one configuration C-T-L1a leaves a swap in the tight world. Then:
+- **(lower)** `\|H ∩ (B(p, s) ∪ B(q, s))\| ≥ ε·s`.
+- **(upper, for colour `a` only)** When the `a`-sides face apart, removing a strip of width `ε⁺` along one boundary (area `≈ εs`) leaves no
+  monochromatic band pair between the two `a`-regions. **It does not legalise the swap:** the other colour `b` then occupies the two half-discs that
+  face *each other*. There, `\|P − Q′\|² ≈ 1 + 2(α′ − α) + \|v − v′\|²` takes the value 1 on a 2-dimensional family, a tight violation. Separating
+  them needs strips of total width `≳ s²/2 + ε`, so *[sketch, one mind]* the swap costs `≳ εs + s³` at a flat interface of scale `s`.
+
+*Proof.*
+- (lower) Points `p + v + αe` and `q + v + α′e` are exactly `\|1 + α′ − α\|` apart, so a band pair on the line is `\|α′ − α\| ≤ ε`. Let
+  `X, Y` be the `α`'s of `C_a`-points on `S_p(v)` and `S_q(v)`. They must satisfy `\|α′ − α\| > ε` for all `α ∈ X`, `α′ ∈ Y`. In each of the
+  facing cases this forces the uncovered part of `S_p(v) ∪ S_q(v)` to have length `> ε`:
+  - apart: `inf Y − sup X > ε`;
+  - together: likewise, reversed;
+  - same side: `X, Y` are `ε`-separated inside one interval of length `s/2`, so the holes are `≥ s/2 + ε`.
+  Integrating over `\|v\| ≤ s/2` gives `≥ εs`.
+- (upper) With the `a`-sides facing apart and `α′ ≥ ε⁺` after the strip, every pair between the two `a`-regions is at distance
+  `√((1 + α′ − α)² + \|v′ − v\|²) ≥ 1 + α′ − α > 1 + ε`. ∎
+
+### 3.4 The named obstruction, and the reduction that is left
+
+**Correction to §2.1–§2.2, made before this stage was committed (self-audit, G21; my second retraction, free).** As drafted, this section held a
+"Theorem OB": branch (i) is of hitting form, so every bicycle argument is capped at `O(ε)`. Its premises were two:
+- "the swap's only tight form is the tangent interface". **False:** TS's C-T-L1 **excludes** the swap outright at Jordan interfaces in D-NF. C-T-L1a
+  shows the boundary is an arc of `ω(y)`, and TS-U then empties the side cones.
+- "an `ε`-strip legalises it". **False:** it legalises colour `a` only (§3.3).
+
+§2.1's bicycle row and §2.2's bicycle column ("survives strips … capped at `O(ε)`"; "a repair … at scale `ε`") are withdrawn with it, and so is the
+circle row's "cost `≍ ε²` per junction" **as a statement about the plane**. It holds for the one-dimensional circle. About a fat junction, the forbidden
+region is S–V's deformed annulus of width `≍ s`, whose three-colouring with a band is TS's [G2] gap, and I have not priced it. What stands: Lemma CP's
+column; Lemma SW's lower bound.
+
+**What stands — Theorem OB′ (on SEQ) [hand for CP and SW, one mind; the swap's `s³` a sketch].** Of `[Voronov2023]`'s certificates:
+- the **complementary pair** (Prop. 2.2; Lemma 6.1 branch (ii)) is proved **repair-robust**, at cost `≥ (t₁ − 2r)(t₁′ − 2r′) ≍ ss′` (Lemma CP);
+- the **swap** that a bicycle (branch (i)) needs costs `≥ εs` (Lemma SW) and, by the sketch, `≳ s³`. So it is tight-false at scale `s` as well,
+  consistent with C-T-L1.
+
+Each certificate's cost is a **positive power of the local regularity scale `s`**. The one certificate whose cost vanishes with `ε` at fixed `s` is
+the thin circle, which the plane never presents alone.
+
+**The obstruction that is proved (a result about arguments, [hand, one mind]):** *an argument that reads, at a swap, only the pairs of one colour is
+capped at `O(ε·s)` per swap (Lemma SW is sharp for one colour), so it is of hitting form.* Stability must read both colours at a swap, as C-T-L1 does.
+
+So the step where six must be re-spent robustly is still **Lemma 6.1 branch (i)**. It is now priced, not closed: robust if and only if the swap's
+two-colour cost is scale-invariant (`≳ s³`, the sketch), and if the circle rows' deformed annuli are too.
+
+**Reading RR — the reduction (one mind; with its killing test).** R, and R′ with it, follows from two statements, each open:
+- **(A) branch (ii) is forced.** For some `R, η, µ` and every band-proper partial six-colouring with holes `< δ` in `U_R`: `U_R` contains a
+  complementary pair of junctions at distance in `[η, 2 − η]`, blocking toward a point at distance 1 from both.
+- **(B) a regularity scale.** Those junctions are fat at a scale `s ≥ s₀`, with voids `r ≤ s·sin(µ/2)/12`.
+
+Given (A) and (B), Lemma CP gives `\|H ∩ U_{R+1}\| ≥ (s₀ sin(µ/2)/6)²`: R, and a C-VOID disc.
+- (A) fails for Voronov's own case analysis as stated, which has branch (i). Two ways on, either sufficing with (B):
+  - **(A″)** price branch (i) instead: prove the swap's two-colour cost `≳ s^k` (the §3.3 sketch says `k = 3`), and price the deformed annulus
+    (TS [G2]) likewise;
+  - or re-route it, **"bicycle-free Voronov"**: re-route the same-type branch so that
+  it too ends at a complementary pair. A first handle: in the overlap of the two deformed annuli about same-type junctions `u, v`, any junction of the
+  three complementary colours is complementary to `u` at distance `≈ 1`, so it is priced by CP. The index relations of the bicycle then have to come
+  from how colour boundaries cross that overlap, **at the annulus's scale, not at `ε`'s**.
+- (B) is link 6 of § The aim ("the gap to regular classes is quantitative"), made concrete as a **cone-scale lower bound**. W's only escape from a
+  forced complementary pair is to push the cone scale to 0 at every such pair: cusps, bowties, tangency (K-TAN's exceptional set) at every scale.
+- *Killing test:* a proof of R that uses neither a complementary pair nor a scale lower bound; or a W family with holes `→ 0` whose junctions keep a
+  cone scale bounded below. The second would make (B) true and (A) false, and the reading would die.
+
+### 3.5 Predictions registered (G21 instruments, scored at the close)
+
+- **P1:** `[Parts2020c]`'s tiling has no complementary pair of fat junctions at distance in `[η, 2 − η]` with `(t₁ − 2r)(t₁′ − 2r′) > δ₆`
+  (probability 0.9). Checkable exactly from his coordinates, when held; it is [external] now. Failing it refutes Parts's `δ₆` or my Lemma CP.
+- **P2:** every W family with holes `→ 0` has cone scale `→ 0` at its complementary pairs within `[η, 2 − η]` (or has none there) (0.95; forced by
+  CP, so it is a check on W's families, never a finding).
+- **P3:** "bicycle-free Voronov" (A) is FALSE as a universal statement, and a W-type construction avoids complementary pairs at every scale (0.6).
+  Registered so that the counter-priors do not turn my hope into a grade.
+
+### 3.6 Would-have-searched-here (added this stage)
+
+- C-T-BIKE: the offset scan over `(φ, ψ)` for TS's shared-colour arc ansatz (`T₁(u)` in `{1, 2}`, `T₁(v)` in `{1, 3}`, alternating `π/3` arcs). Instead I
+  worked two windows by hand at `d = 1.9`. With the colour-1 arc of `T₁(u)` at `[−30°, 30°)`, the branch gap `min(α + β) − max(α − β)` is 58.4°; shifted
+  by 9° it is 59.3°; the ansatz needs `> 60°`. So the **pure `π/3`-arc ansatz fails narrowly there** (hand arithmetic, not a claim about C-T-BIKE: general
+  tight 2-colourings of a circle are `E ∪ (E′ + 60°) ∪ …` for any `E ⊂ [0, 60°)`, and I did not use that freedom). I stopped rather than scan.
+
+## Stage 3 — SAVED
