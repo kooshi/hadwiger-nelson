@@ -1,5 +1,10 @@
 # FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)
 
+> **At FS-103's close (2026-09-26):** a second slot is ready as a statement — the collapse over named hypotheses (`plans/FS103-collapse-cp-plane.md`
+> §6.2: `MRHyp F`, `CollapseStep F k`, the place list; "CP-colourable ⟹ colourable" and `χ_CP ≤ 7` proved if Mathlib reaches them; no
+> `RealAlgebraicDescent`), at ℚ(√635087) first. FS-103's Phase 4 was held for Kooshi: whether it opens, and before or after this stub's own
+> next leaves, is his call.
+
 **At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 3′ → 17 in `plans/FRONTIER-STUBS.md`.** Trust; none on six. FS-103's F1, if verified, is a candidate for the same named-hypothesis form. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
 
 *Minted 2026-09-26 by crunch job X29C (the close planner of the ×2×3 crunch's wave 3), at the owner's instruction, which relays Kooshi

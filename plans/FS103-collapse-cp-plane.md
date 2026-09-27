@@ -775,3 +775,291 @@ existence instead); B 0; M 1 (tight 5- and 6-colourings for a non-list-colourabl
 this job 0. **Four lines across ten records**, each replaced by a derivation or an exact computation.
 
 ### Stage 3 — SAVED
+
+### Stage 4 — SAVED (drafts for the front-page job FS103-X; the stub re-aims as files; the inventory ticked)
+
+*FS103-X writes the target files. Nothing below is in them yet.*
+
+**4.1 `LEDGER.md` rows 128–130** (§ A, after row 127):
+
+| 128 | **The collapse: given MR, the plane's number is a field's. For every totally real number field `F` whose stable places are all 6-thick (`λ*_v < 1/5` at every level, both signs; `N₆(F) = ∅`, which puts `F` outside row 100's exception), `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`; instances ℚ(√635087) (first stable place 103, `sup_v λ*_v = 0.192617` exact; MR at degree 2) and de Grey's field `ℚ(√3,√5,√7,√11)` (first stable places over 131 and 479, `sup_v λ*_v = 0.168047`; MR at degree 16 as row 120 states it, its walk unexercised). The load-bearing step needs no MR: for totally real `F` with `N_k(F) = ∅`, `k ≥ 2`, a `k`-colouring of `F²` gives a CP `k`-colouring of `UD(ℝ²)` or an SP witness — condition on the `T + A` factor, extend to the adelic completion, select over all stable places at once by mixing, the colour count entering only at the covering pigeonhole `max_j m_j ≥ 1/k`. Consequences, given MR: rung D is six over ℚ(√635087), whose plane has no unit triangle (so `χ(ℝ²) ≥ 6` iff some finite triangle-free unit-distance graph is six-chromatic); S_nf ⟹ `χ(ℝ²) ≠ 6`, and over totally real fields S_nf ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick stable place has `χ(F²) = 6` (finitely many residue sizes, infinitely many local planes — not a finite family)** (FS-103; FS103-LB, SEL, F1, CPUP, 635, 635TF, DG, S, FMT, CTL; `plans/FS103-collapse-cp-plane.md` §R-close). **[hand + tools exact; the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2) — four derivations with the two held; the assemblies two blind; place lists and spectra tools exact, three code bases; MR row 120's grade; the complex-place widening one mind (V2), not claimed]** Mechanism: a stable place whose local piece mixes drops out (G76's selection over infinitely many places), MR removes the SP witness, and nothing arithmetic is left for a colouring to use (G81). Controls: the chain stops at K(√7) at six (83, `λ* = 0.210818`), at K(√5) at five (11), at ℚ(√167) at five (23, 43), at ℚ at two, and on `Cay(ℝ, {±1, ±√2})` (`χ = 2 < 3 = χ_CP`); at four it reproduces `χ ≥ 5` at ℚ(√167) and de Grey's field. The stub's "a real field with no non-thick place" was MISSTATED. **Not claimed:** MR at degree 16 (FS-105); the complex-place widening; anything at six. **Prior art:** not found in print (FS103-G: the posers' zbMATH listings, 39 queries, web, two citation walks); in print, `[Madore2015]` ¶5.4 (`χ(ℝ²)` over the real algebraic numbers, non-constructive, G63) and `[Payne2009]`'s "ambiguous chromatic number" (`χ ≠ χ_m`), whose ambiguous examples are fields with a non-thick place. | `plans/FS103-derivation.md` §1; `plans/FS103-V1-verification.md`; `plans/FS103-V2-verification.md`; `tools/fs103_v1_checks.py`, `tools/fs103_v2_places.py` | FS-103 (2026-09-26) |
+| 129 | **Row 123's five is a fractional bound rounded, and given MR the fractional local–global principle holds exactly. Row 123's chain runs one colour class at a time; the colour count enters only at the pigeonhole on the densest class, so its bound is `χ(F²) ≥ ⌈1/α_loc(F)⌉` with `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` (`r_v` a stable place's all-levels independence ratio) and `1/α_loc ≤ 4.36`: that route never gives six. Given MR(F), every `R ⋊ U`-invariant random independent set of `F²` has density at most `α_loc(F)`, so the finitary independence ratio is `α₁(F²) = α_loc(F)`; unconditionally a denser invariant set gives an SP witness. At ℚ(√635087), given MR there: `α₁(ℝ²) = m₁(ℝ²)`, i.e. `f(n)/n → m₁(ℝ²)` — the first clause of `[DuczVarga2026]` Conjecture 1 — and `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ∈ [4.04876, 4.35987]`, answering `[MatolcsiEtAl2025]` §2's "it is not known whether equality holds"; finite triangle-free unit-distance graphs reach it. At ℚ(√47), given MR there, held certificates give a triangle-free graph with `χ_f ≥ 4.0000439`** (FS-103; FS103-F-SI, EXT, FRAC, TJ, ROUND, DV, TF, 47, PL, B-AMEN, B-CHIF). **[hand + tools exact; FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record); B-AMEN and B-CHIF one mind; the whole weight MR's (row 120)]** Mechanism: the published expectation `α₁(ℝ²) ≠ m₁(ℝ²)` (`[AmbrusEtAl2023]` §4; `[MatolcsiEtAl2025]`) came from graphs in the Moser lattice, where the tight dyadic places pin `1/4`; the gap is a place's, gone at a field whose places all read below `m₁` (G60). **A finite-graph killing test for MR:** any proof that `α₁(ℝ²) > m₁(ℝ²)` refutes MR at ℚ(√635087). **Not claimed:** `m₁ = δ_Croft` (the conjecture's second clause); any value of `m₁`; anything at six. **Prior art:** `[MatolcsiEtAl2025]` Conjecture 1 was already disproved in print by `[DuczVarga2026]` (held, read); the equalities not found (F §3.6, five queries; a gate under descriptive-combinatorics names owed); B-CHIF likely folklore. Notation: F's `ρ(F)` is renamed `α_loc(F)` against MRVZ's Hall ratio `ρ(ℝ²) = 1/α₁`. | `plans/FS103-derivation.md` §2; `plans/FS103-F-fractional-shadow.md` §2–§3; `plans/FS103-B-verification.md` §2–§4; `tools/fs103_f_places.py`, `tools/fs103_b_places.py` | FS-103 (2026-09-26) |
+| 130 | **The stationary number is a measurable one, and given MR so is Hadwiger–Nelson. With no MR: `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)`, where `χ_m⁰` is the least `k` with a Lebesgue-measurable `k`-colouring proper at almost every unit pair and `χ(A_σ)` is `[BachocEtAl2014]`'s operator chromatic number of the circle's convolution operator: a measurable colouring proper at almost every edge gives a CP one (the weak-* orbit closure in `L^∞(ℝ², Δ_k)`, continuity in probability free, properness surviving because the circle measure's Fourier transform decays, one random threshold) — for any Rajchman edge measure `σ` with `T ⊆ supp σ`, false without it. Given MR (row 128): `χ(ℝ²) = χ_m⁰(ℝ²)`, so `χ(ℝ²) ≥ 6` iff every measurable 5-colouring of the plane has a positive-measure set of monochromatic unit pairs (the "only if" half unconditional). Falconer's `χ_m` (proper at every edge) is one step further: `χ_m⁰ = χ_m` iff some a.e.-proper colouring's metrical boundary (`[Falconer1981]`'s null set, where every point sees two colours of positive density) is list-colourable from lists of size at least two — a question about finite configurations — and colourings with slack, which would give Borel ones, need six colours** (FS-103 Phase 3; FS103-M1, M1b, M1c, M-FREE, M-NR, M-NSUPP, M-AE3, M-EASY, M-D, M-Q4). **[hand; M1, M1b, M1c, M-FREE, M-AE3 and M-Q4 two derivations (FS103-M; FS103-N blind to M's record); `χ_m⁰ ≤ χ_CP` two blind (the verifiers); the null-set reduction, NR, N-SUPP and N-EASY one mind each]** **Not claimed:** `χ(ℝ²) = χ_m(ℝ²)` (the null-set step, a GAP in every record); `χ_B` against `χ_m`; any value. **Prior art:** not found in print as a question or either inequality (FS103-G §2.2); BDOV define `χ(A_σ)` and print `χ(A) ≤ χ_m`, not `χ(A_σ) = χ_m⁰`; the Rajchman step not searched (N) — a debt. **Naming:** `[KechrisMarks2020]`'s `χ⁰_µ` (invariant conull vertex sets) is not this `χ_m⁰` (null sets of edges). | `plans/FS103-derivation.md` §3; `plans/FS103-M-derivation.md`; `plans/FS103-N-verification.md`; `tools/fs103_m_controls.py`, `tools/fs103_n_checks.py` | FS-103 Phase 3 (2026-09-26) |
+
+**4.1′ `LEDGER.md` § B lines** (33; after FS100-X27V-PM):
+
+| FS103-LB | row 128 | C-LB with no MR: totally real `F`, `N_k(F) = ∅`, `k ≥ 2`: a `k`-colouring of `F²` gives a CP `k`-colouring of `UD(ℝ²)` or an SP witness | hand, two blind (V1, V2) + two held | `plans/FS103-derivation.md` FS103-LB | stub (FS-101) |
+| FS103-SEL | row 128 | the CP mixing selection over a countable product of compact factors, `sup λ* < 1/(k−1)`; threshold off the atoms; the second class enters at `1/k` | hand, two blind | `plans/FS103-derivation.md` FS103-SEL | declined |
+| FS103-F1 | row 128 | given MR, totally real `F` with `N₆ = ∅`: `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` | hand, two blind | `plans/FS103-derivation.md` FS103-F1 | stub (FS-101) |
+| FS103-CX | row 128 | the complex-place widening of FS103-LB and FS103-F1 | hand, one mind | `plans/FS103-derivation.md` FS103-CX | declined |
+| FS103-CPUP | row 128 | `χ(F²) ≤ χ(ℝ²) ≤ χ_CP(ℝ²)`, de Bruijn–Erdős, no Tarski, no MR | hand, two | `plans/FS103-derivation.md` FS103-CPUP | stub (FS-101) |
+| FS103-635 | row 128 | ℚ(√635087): places, `sup λ* = 0.192617`, `N₆ = ∅`; the collapse given MR | tools exact + hand, two blind (+ B) | `plans/FS103-derivation.md` FS103-635 | stub (FS-101) |
+| FS103-635TF | row 128 | given MR, `χ(ℝ²) ≥ 6` iff a finite triangle-free unit-distance graph is six-chromatic | hand, two | `plans/FS103-derivation.md` FS103-635TF | declined |
+| FS103-DG | row 128 | de Grey's field: places over 131, 479 below 600; `sup λ* = 0.168047`; the collapse given MR(`F_dG`) | tools exact + hand, two blind; MR@16 unwalked | `plans/FS103-derivation.md` FS103-DG | stub (FS-101) |
+| FS103-R1 | row 128 | a totally real field containing de Grey's has no usable prime below 131 | derived, one mind | `plans/FS103-derivation.md` FS103-R1 | declined |
+| FS103-S | row 128 | S's exact form given MR; "a finite family" MISSTATED; S over all subfields needs Q-const | hand, two | `plans/FS103-derivation.md` FS103-S | declined |
+| FS103-FMT | row 130 | a CP colouring has a jointly measurable version; `χ_m⁰ ≤ χ_CP`; `χ ≤ χ_m ≤ χ_B ≤ 7` | hand, two | `plans/FS103-derivation.md` FS103-FMT | declined |
+| FS103-CTL | row 128 | the controls stop where they must; CTL-FRAC: the second class enters at the covering pigeonhole; 71 non-thick by a positive eigenvalue | hand + tools exact, two blind | `plans/FS103-derivation.md` FS103-CTL | declined |
+| FS103-F-SI | row 129 | J45's SI per class | hand, two | `plans/FS103-derivation.md` FS103-F-SI | declined |
+| FS103-F-EXT | row 129 | R88-TC-ext per class; `T_∅` the full product | hand, two | `plans/FS103-derivation.md` FS103-F-EXT | declined |
+| FS103-F-FRAC | row 129 | given MR(F), `α₁(F²) = α_inv(F²) = max(m₁, sup_v r_v)`; unconditionally denser ⟹ SP witness | hand, two | `plans/FS103-derivation.md` FS103-F-FRAC | declined |
+| FS103-F-TJ | row 129 | T-J39-3 per class: thick at density `δ` iff `λ* < δ/(1−δ)` | hand, two | `plans/FS103-derivation.md` FS103-F-TJ | declined |
+| FS103-F-ROUND | row 129 | row 123's bound is `⌈1/α_loc⌉ ≤ 5`: that route never gives six | hand, two | `plans/FS103-derivation.md` FS103-F-ROUND | declined |
+| FS103-F-DV | row 129 | given MR(ℚ(√635087)), `α₁(ℝ²) = m₁(ℝ²)`, `χ_f,0 = χ_f = 1/m₁` | hand + tools exact, two | `plans/FS103-derivation.md` FS103-F-DV | declined |
+| FS103-F-TF | row 129 | given MR(ℚ(√635087)), triangle-free finite graphs reach ratio `m₁ + ε` | hand, two | `plans/FS103-derivation.md` FS103-F-TF | declined |
+| FS103-F-47 | row 129 | given MR(ℚ(√47)), a triangle-free graph with `χ_f ≥ 4.0000439` | hand + tools, two | `plans/FS103-derivation.md` FS103-F-47 | declined |
+| FS103-F-PL | row 129 | ℚ(√635087), ℚ(√2351): every stable ratio `< δ_Croft`; ℚ(√635087)'s targets need ≥ 7 | tools exact, two | `plans/FS103-derivation.md` FS103-F-PL | declined |
+| FS103-B-AMEN | row 129 | `α₁(F²) = α_inv(F²)` for every real field, no MR | hand, one mind | `plans/FS103-derivation.md` FS103-B-AMEN | declined |
+| FS103-B-CHIF | row 129 | `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` with finitely many sets | hand, one mind | `plans/FS103-derivation.md` FS103-B-CHIF | declined |
+| FS103-M1 | row 130 | `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`; Rajchman form with `T ⊆ supp σ` | hand, two | `plans/FS103-derivation.md` FS103-M1 | declined |
+| FS103-M1b | row 130 | `χ_CP = χ_m⁰ = χ(A_σ)`, no MR | hand, two | `plans/FS103-derivation.md` FS103-M1b | declined |
+| FS103-M1c | row 130 | `χ ≤ χ_CP ≤ χ_m ≤ χ_B`, no MR | hand, two | `plans/FS103-derivation.md` FS103-M1c | declined |
+| FS103-M-FREE | row 130 | continuity in probability free; properness survives weak-* limits for Rajchman edge measures only | hand, two | `plans/FS103-derivation.md` FS103-M-FREE | declined |
+| FS103-M-NR | row 130 | the pointwise Følner route fails (a zigzag hexagonal 7-colouring) | hand, sketch, one mind | `plans/FS103-derivation.md` FS103-M-NR | declined |
+| FS103-M-NSUPP | row 130 | without `T ⊆ supp σ` the Rajchman form is false | hand, one mind | `plans/FS103-derivation.md` FS103-M-NSUPP | declined |
+| FS103-M-AE3 | row 130 | `Cay(ℝ, {±1, ±√2})`: `χ = 2`, `χ_CP = χ_m⁰ = χ_m = χ_B = 3` | hand + tools exact, two | `plans/FS103-derivation.md` FS103-M-AE3 | declined |
+| FS103-M-EASY | row 130 | `χ(ℝ²) ≤ χ_m⁰(ℝ²)`, no MR, no CP | hand, one mind | `plans/FS103-derivation.md` FS103-M-EASY | declined |
+| FS103-M-D | row 130 | the null-set step reduced to list-colouring Falconer's null set; slack costs a colour (`χ^{sl} ≥ 6`) | hand, one mind | `plans/FS103-derivation.md` FS103-M-D | declined |
+| FS103-M-Q4 | row 130 | given MR, `χ(ℝ²) = χ_CP = χ_m⁰ = χ(A_σ) = χ(ℚ(√635087)²)` | hand, two | `plans/FS103-derivation.md` FS103-M-Q4 | declined |
+
+**4.2 `CLAUDE.md`** — sixteen drafts and the ranked table, as exact anchored edits in `data/fs103/fs103-c/claude_md_drafts.py` (its text printed
+below by `--emit`; `--apply CLAUDE.md <out>` applies them all). **Measured:** 296,759 → **296,387 bytes**, headroom 3,613 under the 300,000
+budget — the Last-updated line and the Open-milestones paragraph shed their close history (it lives in `plans/FRONTIER-STUBS.md`'s closed list,
+and in git), G72's thirteenth and G79's run record move to `plans/GROKKING-INSTANCES.md` (4.7), and FS-103's row leaves the table; no intrinsic
+is cut. `--self-test`: a missing anchor and an over-budget result both fire. **FS103-X: run `tools/claude_md_fact_audit.py --base 319e5369
+--dupes` after applying** — the removed Last-updated history must be found in the closed list or git's close records; restore any item it
+reports lost.
+
+#### C1 — Last updated — replace the whole paragraph (replace-span)
+
+Anchor(s): `*Last updated: 2026-09-26 — **the paths forward re-ranked**` … `Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*`
+
+```text
+*Last updated: 2026-09-26 — **FS-103, the collapse**: **Paid (theorem)** — row 123's chain runs one colour class at a time, so its five is a fractional bound rounded up and that route never gives six; given MR, the fractional local–global principle, with `α₁(ℝ²) = m₁(ℝ²)` at ℚ(√635087), the first clause of `[DuczVarga2026]`'s conjecture (row 129); given MR, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` at every totally real field with every stable place 6-thick — ℚ(√635087), de Grey's field (row 128); `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR (row 130); **not landed:** Falconer's `χ_m` (the null-set step), MR at degree 16; prior-art gate negative (novelty "not found") (`plans/FS103-collapse-cp-plane.md` §R-close). Before it, the paths forward re-ranked (R1–R4, `plans/RERANK-2026-09-26.md`) and FS-100 stage 5 with its waves (rows 120–127; `plans/FS100-three-field-lemma.md` §R-close). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+```
+
+#### C2 — Open milestones — replace the whole paragraph (replace-span)
+
+Anchor(s): `**Open milestones, in order.** **None is open.** FS-84` … `banner on `plans/STUB-isometric-measure-rigidity.md`).`
+
+```text
+**Open milestones, in order.** **None is open.** FS-103, the collapse, is **closed** (rows 128–130; `plans/FS103-collapse-cp-plane.md` §R-close; the stub's banner). **Next:** Kooshi's choice; the default is the top row; the finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close, with its record, banner and Kooshi's rulings (FS-84's among them): `plans/FRONTIER-STUBS.md`'s closed list.
+```
+
+#### C3 — Where the problem stands — the lower-end paragraph, one sentence added (insert-after)
+
+Anchor(s): `de Grey's 2018 graph IMHO."`
+
+```text
+ **Given MR, the plane's number is a field's and a measurable one** (rows 128, 130): `χ(ℝ²) = χ(ℚ(√635087)²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)`, the least number of colours in a measurable colouring proper at almost every unit pair — [hand], two blind minds for the collapse, two for the last equality; Falconer's everywhere-proper `χ_m` is one step further, a GAP.
+```
+
+#### C4 — What the hunt has established — item 30 (insert-after)
+
+Anchor(s): `six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`.`
+
+```text
+30. **The collapse, and the fractional local–global principle** (rows 128–130; FS-103; [hand], every headline given MR). Row 123's chain runs one colour class at a time: its five is `⌈1/α_loc(F)⌉`, the fractional bound `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` rounded at one pigeonhole, and that route never gives six (G60); given MR the bound is exact, `α₁(F²) = α_loc(F)`, so at ℚ(√635087) `α₁(ℝ²) = m₁(ℝ²)` and `χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.0487` (row 129). At a totally real field whose stable places all mix at six colours, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` (row 128; its load-bearing step needs no MR), and `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR (row 130). Bearing on χ ≥ 6: given MR, rung D is six over ℚ(√635087), and six for measurable colourings modulo null sets of unit pairs (G81).
+```
+
+#### C5 — The ledger pointer (replace)
+
+Anchor(s): `**Rows 1–127 live in `LEDGER.md`**`
+
+```text
+**Rows 1–130 live in `LEDGER.md`**
+```
+
+#### C6 — G24 — the five-colour twin (insert-after)
+
+Anchor(s): `relaxation that sees the gap.`
+
+```text
+ At five the relation inverts: row 123's five is a fractional bound rounded up, the count entering at one pigeonhole (row 129, G60).
+```
+
+#### C7 — G48 — the proved range, at the collapse fields (insert-after)
+
+Anchor(s): `(rows 99, 123; `L = 5` given MR, row 120)`
+
+```text
+; given MR, at a totally real field with every stable place 6-thick the conjecture's value is the plane's own, `χ(F²) = χ(ℝ²)` (row 128), so its bold form at de Grey's field or ℚ(√635087) (`L ≥ 7`) is Hadwiger–Nelson itself
+```
+
+#### C8 — G60 — the cap is exact given MR, and it is row 123's five (insert-after)
+
+Anchor(s): `so it can never prove more than five colours.`
+
+```text
+ **Given MR the cap is exact, and it is what row 123 proves** (row 129, two minds): `α₁(F²) = max(m₁(ℝ²), sup_v r_v)`, the fractional local–global principle, and row 123's five is `⌈1/α₁⌉`, the colour count entering only at one pigeonhole on the densest class — so no argument that runs one class at a time gives six. The finitary–measurable gap `[AmbrusEtAl2023]` §4 expected is a tight place's (the Moser lattice's dyadic places), gone at ℚ(√635087), where `α₁(ℝ²) = m₁(ℝ²)` given MR.
+```
+
+#### C9 — G60 — the Do opens with the per-class test (replace)
+
+Anchor(s): `*Do: read the cap first`
+
+```text
+*Do: run a field-level lower bound on one colour class before believing it — if it runs per class it is `⌈1/α⌉ ≤ 5` (row 129); read the cap first
+```
+
+#### C10 — G64 — S and W given MR (insert-after)
+
+Anchor(s): `FS-64 is the one proposal for an instrument that is not.`
+
+```text
+ **Given MR the plane sits at the gap's top** (row 128): S_nf (no real number field has `χ(F²) = 6`) ⟹ `χ(ℝ²) ≠ 6`, and over totally real fields S_nf ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick stable place has `χ(F²) = 6` — never S ⟺ W.
+```
+
+#### C11 — G72 — the count (replace-span)
+
+Anchor(s): `**The count so far — twelve of thirteen**` … `its wave 3 transferred by extending held tools field by field (row 123).`
+
+```text
+**The count so far — thirteen of fourteen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72). Fourteenth, FS-103: through the structural question — "does the argument run one colour class at a time?", a question about every invariant independent set, gave the fractional local–global principle (row 129); the measurable equality (row 130) came from extending a known tool.
+```
+
+#### C12 — G79 — the record (replace-span)
+
+Anchor(s): `First test: the wanted-poster sessions J37–J39` … `its flip, a counterexample invariant, only an equivalence (row 126).*`
+
+```text
+Its record, milestone by milestone: `plans/GROKKING-INSTANCES.md` §G79. FS-103: every result from an example invariant (the fibre colour-measure vector every colouring carries; the per-class spectral pairing; the fractional colouring a measurable one induces); the wall at Falconer's `χ_m` arrived as a counterexample invariant (a non-list-colourable configuration on a null set), and its flip — every boundary point sees two colours of positive density — reduced it to a finite list problem (row 130).*
+```
+
+#### C13 — G80 — a finite-graph killing test (insert-after)
+
+Anchor(s): `no colouring consequence is lost, row 123).`
+
+```text
+ Since row 129 MR is testable on finite graphs: a proof that `α₁(ℝ²) > m₁(ℝ²)` refutes it at ℚ(√635087).
+```
+
+#### C14 — G81 — new grokking, after G80 (insert-after)
+
+Anchor(s): `refutes it at ℚ(√635087).*`
+
+```text
+* **G81 — Where every place mixes, the field is the plane. [hand, two blind minds (row 128); the ambiguity reading one mind]** A stable place whose local piece mixes (`λ*_v < 1/(k−1)`, both signs, every level) drops out of any `k`-colouring question (G76's selection, now over infinitely many places at once, the count entering only at the pigeonhole `max_j m_j ≥ 1/k`), and MR removes the one other escape, an SP witness. So at a totally real field with every stable place 6-thick — ℚ(√635087), de Grey's field — `χ(F²) = χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)` (rows 128, 130): the field's arithmetic is invisible, and `[Payne2009]`'s *ambiguity* (`χ ≠ χ_m`) lives only at non-thick places — his examples ℚ and ℚ(√3) are the chain's stopping controls. One arithmetic fact is read twice: de Grey's graph needed a field that no small residue plane seals; the collapse needs a field with no place a colouring could use to beat the plane. *Do: when a question is `χ(F²)`, list the field's non-`k`-thick stable places first (exact spectra, both signs, every level); with none, given MR, it is the plane's question — spend nothing field-specific on it; with some, the field's own content is product locality at exactly those places (FS-67). Killing test: a totally real field with every stable place 6-thick whose plane's chromatic number differs from `χ(ℝ²)` — it refutes MR there.*
+```
+
+#### C15 — The Grokkings header — the identifier range (replace)
+
+Anchor(s): `G1–G80 are stable identifiers`
+
+```text
+G1–G81 are stable identifiers
+```
+
+#### C16 — The theory in one paragraph — one clause (replace)
+
+Anchor(s): `unit-vector group (G80), with no forcer.`
+
+```text
+unit-vector group (G80), with no forcer; and where every stable place mixes, the field's number is the plane's (G81).
+```
+
+#### C17 — the ranked table (FS-103's row out; every later rank up one; `| 30–62 |` → `| 29–61 |`), with these in-row edits
+
+- `derived-decisive if FS-103's F1 holds (it is rung D)` → `decisive: given MR it is rung D (row 128), and a question about measurable colourings (row 130)`
+- `is `χ_CP(ℝ²) ≥ 6`? `[Falconer1981]` read first, as a CP statement; then` → `is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? First the null-set step to Falconer's `χ_m` (a finite list-colouring question on his null set), `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14); then`
+- `a third derivation of EF_F⁺, blind, at ℚ(√635087) |` → `a third derivation of EF_F⁺, blind, at ℚ(√635087); MR at degree 16 (de Grey's field, unreached at FS-103); row 129's finite-graph test of MR |`
+- `rows 121–125 and FS-103 rest on MR (row 120)` → `rows 121–130 rest on MR (row 120)`
+- `if FS-103's F1 (a candidate) holds, S ⟹ `χ(ℝ²) ≠ 6`, and S ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick place drops to six, a finite family of CP product statements (the advisor)` → `given MR, S ⟹ `χ(ℝ²) ≠ 6` (row 128), and over totally real fields S ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick place drops to six — finitely many residue sizes, infinitely many local planes, not a finite family`
+- `given FS-103's F1 (a candidate), PL is the only` → `given MR and row 128, PL is the only`
+- `given FS-103's F1 (a candidate), six at ℚ(√167)` → `given MR and row 128, six at ℚ(√167)`
+- `if FS-103 verifies, its possible headline is `χ(ℝ²) = χ_CP(ℝ²)` given MR` → `whether it now leads with rows 128–130 (the collapse; `α₁(ℝ²) = m₁(ℝ²)`, given MR) is Kooshi's call`
+- `(given FS-103's F1, such a graph exists iff `χ_CP(ℝ²) ≥ 6`, the advisor)` → `(given MR and row 128, such a graph exists iff `χ_CP(ℝ²) ≥ 6`)`
+- `Partly superseded by FS-103's F1 (a candidate), which would attain `χ(ℝ²)` at a named field` → `Partly superseded: given MR, row 128 attains `χ(ℝ²)` at a named field`
+- `Next: `InvariantMeasureOnClosed` as Markov–Kakutani,` → `Next: `InvariantMeasureOnClosed` as Markov–Kakutani; the collapse over named hypotheses (FS-103's Phase 4, Kooshi's call);`
+
+**4.3 `BIBLIOGRAPHY.md`** (keys and read-status; addresses in the gate's §3.3, M §1.2, B §3.5, N §3.3, V1 §4.5):
+- `[Falconer1981]` — **held** `~/source/library/papers/falconer-1981-realization-distances-measurable-subsets-covering-Rn-jcta-31-184-189.pdf`
+  (Kooshi's upload, 2026-09-26); **read in full, first-hand** (FS103-M, all six pages; FS103-N); Thm 2 `χ_m(ℝⁿ) ≥ n + 3` (proper everywhere; it
+  bounds `χ_m`, not `χ_m⁰`); Lemma 2's null set `E` is FS-104's question 2; Lemma 3 gives one small translation, not a positive-measure set (the
+  2005 exposition in `[Soifer2024]` ch. 9 differs there); role: FS-103 rows 130, FS-104.
+- New: `[ShelahSoifer2003]` (JCTA 103, 387–391; Zbl 1030.03035; held `data/fs103/fs103-g/shelah-soifer-2003-…pdf`, to `library/pdf/`; read in full,
+  FS103-G); `[SoiferShelah2004]` (JCTA 105, 359–364; Zbl 1057.03036; review read); `[ShelahSoifer2003b]` (Geombinatorics 13(1), 41–46; Zbl
+  1049.05038; review read); `[Soifer2005]` (JCTA 110, 169–173; Zbl 1063.03035; review read); `[Soifer2007]` (Geombinatorics 17(2), 85–87; Zbl
+  1506.03106; listing only); `[Szekely1984]` (promote from § C; Combinatorica 4, 213–218; review read; content via `[Payne2009]` §1);
+  `[Cohn1972]` (D. L. Cohn, *Measurable choice of limit points and the existence of separable and measurable processes*, Z. Wahrsch. verw.
+  Gebiete 22 (1972); cited by statement by V1 and J48; not held); § C: `[CroftFalconer1981]` (Math. Proc. Camb. Philos. Soc. 89, 79–88, listing),
+  `[Marks2023ICM]` (Zbl 1566.03232; fetched, keyword scan only), `[DidinVoronov2026]` (arXiv:2607.19946, abstract), Croft 1982 (Quart. J. Math.
+  33, 71–83; the source of Falconer's Lemmas 1, 3; unheld), Doob 1953 (named, not read).
+- Read-status updates: `[MatolcsiEtAl2025]` §§1–3 and Conjecture 1 (FS103-G; FS103-F; FS103-B); `[AmbrusEtAl2023]` Thm 1, Lemma 1, §4 Remark
+  (F); `[DuczVarga2026]` §§1–2.2, §3 definitions (F, B) — Conjecture 1 (§2.1) new to the row; `[BachocEtAl2014]` §2.4–2.6, §3.1 (G, M, N);
+  `[Payne2009]` Prop. 1, 2, Lemma 1, §3 (G) — role: "ambiguous chromatic number"; `[Madore2015]` ¶1.3, ¶5.4, §7.1–7.2 (G); `[KechrisMarks2020]`
+  §3 definitions, Ex. 5.1 (N) — naming note: its `χ⁰_µ` is not this project's `χ_m⁰`; `[CurrieEggleton2016]` Thm 1 re-read (M, D5);
+  `[Croft1967]` unheld, used by statement (B).
+
+**4.4 `CLOSED-QUESTIONS.md`** (the gate's two rows, the first surviving, the second merged; one new):
+- §3 (adjacent and open) — **Is `χ(ℝ²)` absolute, the same in ZFC and in ZF + DC + LM, and is the plane's chromatic number ambiguous?**
+  Shelah–Soifer 2003, epilogue ("…precisely because the answer depends upon the system of axioms we choose for set theory?"); `[Soifer2024]` Open
+  AC Problem 62.14; `[Payne2009]` ("…further evidence that the chromatic number of the plane might depend on set theory"). **Answered in part, at
+  [hand], given MR:** the plane is not ambiguous modulo null sets of unit pairs, `χ(ℝ²) = χ_m⁰(ℝ²)` (rows 128, 130, two minds); `χ = χ_m`
+  needs the null-set step (a GAP), and absoluteness a ZF + DC audit of the chain (FS-104; a reading, not claimed).
+- §3, answered at [hand] given MR — **`[DuczVarga2026]` Conjecture 1, first clause: "f (n)/n = m1 (R2 ) + o(1)"; and `[MatolcsiEtAl2025]` §2:
+  "It is clear that χf,0 (R2 ) ≤ χf (R2 ), but it is not known whether equality holds."** Given MR at ℚ(√635087), both hold (row 129, two
+  minds); the second clause (`m₁ = δ_Croft`) is open. The gate's "Is the finitary fractional chromatic number of the plane 4?" is merged here:
+  answered no in print (`[DuczVarga2026]`), and given MR its value is `1/m₁(ℝ²)`. Not closed until MR is hardened (FS-105).
+
+**4.5 `plans/FRONTIER-STUBS.md`:**
+- Open milestones: "**None is open.** FS-103, the collapse, is **closed** (2026-09-26; rows 128–130; `plans/FS103-collapse-cp-plane.md`
+  §R-close; its banner). Next: Kooshi's choice; the default is the top row." (FS-84's paragraph stays, below it.)
+- Ranked stubs: a re-rank note — "*At FS-103's close (2026-09-26, FS103-X): FS-103 closed and left the table; every later rank moved up one, no
+  order changed. Re-aimed: FS-104 (the measurable form; the null-set step first), FS-105 (C-MR16; row 129's finite-graph test of MR), FS-62
+  (S's exact form, not a finite family), FS-101 (the collapse slot), FS-102 (the lead, Kooshi's call); every row citing "FS-103's F1 (a
+  candidate)" now cites row 128.*" — then the rows renumbered and edited as C17 (the authoritative rows carry the same in-row edits, in their
+  own longer words).
+- Closed list, first: "* **FS-103 the collapse** — `plans/STUB-collapse-cp-plane.md`. **Closed 2026-09-26** (record
+  `plans/FS103-collapse-cp-plane.md` §R-close; `plans/FS103-derivation.md`): **Paid (theorem)** — row 123 runs per class (its five is a fractional
+  bound rounded; that route never gives six) and the fractional local–global principle given MR (row 129); the collapse given MR at every
+  totally real field with every stable place 6-thick, ℚ(√635087) and de Grey's field (row 128); `χ_CP = χ_m⁰` with no MR (row 130). Not landed:
+  Falconer's `χ_m`, MR at degree 16. Its successors: FS-104, FS-105, FS-62, FS-101, FS-102."
+
+**4.6 The stubs, as files** (edited in this commit): FS-103's banner (`plans/STUB-collapse-cp-plane.md`); re-aim blocks at the head of FS-104
+(`plans/STUB-cp-plane-six.md`), FS-105 (`plans/STUB-harden-mr.md`), FS-62 (`plans/STUB-six-is-not-a-value.md`), FS-101
+(`plans/STUB-main-clause-five-kernel.md`), FS-102 (`plans/STUB-writeup-main-clause-five.md`).
+
+**4.7 `plans/GROKKING-INSTANCES.md`** (new instances; the two moved passages verbatim):
+- **§G72**, *from G72, after "…(row 123)." (moved by FS103-X):* the passage beginning "Thirteenth, FS-100 stage 5 — the headline (row 120)
+  from recognition at the prior-art gate …" through "… field by field (row 123)." verbatim; then: "Fourteenth, FS-103 (`plans/FS103-collapse-cp-plane.md`
+  §R-close 3.3) — through the structural question: CTL-FRAC ("does the argument run one class at a time?") is a question about every invariant
+  independent set, and FRAC answered it (row 129); both blind C-LB derivations carried §IQ's named invariant, the fibre colour-measure vector;
+  the measurable equality (row 130) came from extending a known tool (weak-* compactness; BDOV's operator)."
+- **§G79**, *from G79 (moved by FS103-X):* the passage "First test: the wanted-poster sessions J37–J39 … only an equivalence (row 126)." verbatim.
+- **§G50** — "FS-103's: `[DuczVarga2026]`, held and read in full at FS-56's §PA (2026-09-16), had disproved `[MatolcsiEtAl2025]` Conjecture 1 in
+  June 2026; the gate framed CTL-FRAC as "refuting a published conjecture", and the owner repeated it to Kooshi (`plans/FS103-close-inventory.md`
+  items 38, 28). BDOV 2014 and Ambrus et al. §4, held and read at J26, bore on `χ_CP` and were not drawn until the gate; zbMATH's `ab:` missed
+  BDOV (summary withheld)."
+- **§G60 (new heading)** — "FS-103's §G read G60 and G24 only for "no bound on `χ_CP`"; their sharper bearing — that row 123's own five is G60's
+  fractional bound rounded, so its route cannot give six — was drawn by the gate (CTL-FRAC) and proved by FS103-F (row 129)
+  (`plans/FS103-collapse-cp-plane.md` §R-close 3.1)."
+- **§G54 (new heading)** — "FS-103's V1 read row 110's `0.199` at 59 — a Hoffman ratio — as `λ*` in a stage-1 control; the plan's X5 line
+  ("thickness is `sup|ν̂|`, both signs, not Hoffman's sign") caught it before any verdict (`plans/FS103-V1-verification.md` §Stage 3 correction 4)."
+- **§G51** — "FS-103 (two blind verifiers, an advisor comparing them, two blind checks of one-mind derivations): no divergence of truth in four
+  pairings; the free-window retractions were the advisor's endorsement of "totally real" for the wrong reason, V1's "the exception is needed",
+  V1's 59 misread, and F's §3.4 item 2 (by B). The owner's trims of verbatim claims cost twice: claims-m2 dropped M1's hypothesis `T ⊆ supp σ`
+  (false as written, found by N as N-SUPP) and N's brief pointed at "A-E3 in the claims", which no open file held."
+- **§ Delegation (budget)** — the planner (≈497k against a 450k line), the gate reader (≈454k against ~200k sizing) and the advisor (≈317k at
+  its stage 3 against 300k) ran past their hand-back lines (inventory items 13, 22, 29).
+
+
+**4.8 The inventory** (`plans/FS103-close-inventory.md`): items 1–78 ticked, 77 done, 1 declined (61: a one-off order slip, recorded in F §1.0,
+adding no rule).
+
+**4.9 Held for the owner** (each Kooshi's or the owner's call; the close's recommendation beside it):
+1. **FS-105 above FS-104?** Rows 121–130 all rest on MR, and row 129 makes MR testable on finite graphs; the drafts keep the order (FS-104 at
+   the top after renumbering). Recommend the swap — medium; it changes if Kooshi wants six attacked before the foundation is hardened.
+2. **FS-102's lead, and whether § Publication's condition fires.** Given MR, HN is `χ_m⁰(ℝ²) = χ(A_σ)` — a number defined in print whose value
+   is posed nowhere found — one step (the null-set GAP) from Falconer's `χ_m`, whose value is called unknown in print. Recommend stating it as
+   "collapsed to a named number next to a posed one", not as a collapse onto a posed problem — high.
+3. **G81** is minted in the drafts (C14, ~1.3 kB); declining it keeps the facts in rows 128–130 and item 30. Recommend keeping — medium.
+4. **The history cut** from `CLAUDE.md`'s Last-updated line and Open-milestones paragraph (C1, C2) is what keeps the file under budget; FS103-X
+   runs the fact audit and restores anything it reports lost to the closed list. Recommend — high.
+5. **Phase 4** (the collapse over named hypotheses in the kernel, an FS-101 slot) stays held for Kooshi (FS-101's re-aim says so).
+6. **Owner slips, logged** (4.7): the claims-m2 trim of M1's hypothesis; N's brief's "A-E3 in the claims"; M's brief's gate address; the
+   "refuting a published conjecture" relay to Kooshi (item 38).
+
+**Theorems this phase proved:** none — a close. The filing is `plans/FS103-derivation.md` (33 entries). **Would have searched here:** nothing.
+
+### Stage 4 — SAVED

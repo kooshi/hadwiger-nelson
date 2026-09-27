@@ -1,5 +1,11 @@
 # FS-105 — harden MR where the collapse uses it (stub)
 
+> **Re-aimed at FS-103's close (2026-09-26).** Rows 121–130 now rest on MR (row 120), the collapse and the fractional equality included. Add:
+> **C-MR16** — MR at de Grey's field walked at degree 16 (PE-2's admissibility; EF_F⁺'s count `c·M^{1/16}`), unreached by both FS-103 verifiers;
+> and **row 129's finite-graph test** — any proof that `α₁(ℝ²) > m₁(ℝ²)` (a statement about finite unit-distance graphs) refutes MR at
+> ℚ(√635087): the audit should look for one (FS103-F's held item: "an extra-hard audit of MR"). The close recommends this stub above FS-104
+> (Kooshi's call): everything FS-104 would build rests on MR.
+
 *Minted 2026-09-26 by job R3 from R1's N3 (`plans/RERANK-2026-09-26.md` §3.1, after the advisor's point (3): "Make MR's hardening an explicit
 rank"). Rank 3 in `plans/FRONTIER-STUBS.md`. **Solver column: none** — reading and derivation, in-ban. Written for a session with zero
 conversation memory.*

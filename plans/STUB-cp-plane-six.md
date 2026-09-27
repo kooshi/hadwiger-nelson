@@ -1,5 +1,16 @@
 # FS-104 — the stationary chromatic number at six: is `χ_CP(ℝ²) ≥ 6`? (stub)
 
+> **Re-aimed at FS-103's close (2026-09-26; `plans/FS103-collapse-cp-plane.md` §R-close).** `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)` with no MR (row 130,
+> two minds), and given MR it is `χ(ℝ²)` (rows 128, 130). So the question is now: **is the plane's measurable chromatic number, null sets of
+> unit pairs ignored, at least six?** In order: (1) **colour the metrical boundary** — `χ_m⁰ = χ_m` iff some a.e.-proper colouring's null set
+> `E` (`[Falconer1981]` Lemma 2) is list-colourable from lists of size ≥ 2 (FS103-M-D, one mind), with M's hunch first (two adjacent points of
+> `E` cannot have `P(x) = P(y) = {a, b}`; killing test: an a.e.-proper colouring with such a pair); slack colourings need six (`χ^{sl} ≥ 6`), so
+> a five would be tight; (2) `χ_B` against `χ_m` (the same step with a Borel choice); (3) the ZF + DC audit of the chain (MR, the load-bearing
+> step, M1): with (1) it would make `χ(ℝ²)` absolute and answer Soifer's Open AC Problem 62.14 at `n = 2` (a reading, not claimed); (4) the
+> prior-art debts: "a.e.-proper measurable colouring + Rajchman edge measure ⟹ stationary CP colouring" (N), and a gate under
+> descriptive-combinatorics names for "finitary = measurable independence ratio" (FS103-F §3.6); then the density family and correlation
+> constraints as before. The advisor's A-E5 has its second mind (FS103-N). Bearing on six: decisive, given MR; success very low.
+
 *Minted 2026-09-26 by job R3 from R1's N2 (`plans/RERANK-2026-09-26.md` §2.2) and the advisor's top-three item 2
 (`plans/POROS-2026-09-26-rerank.md` stage 1). Rank 2 in `plans/FRONTIER-STUBS.md`. **Solver column:** none for routes (a)–(c) (reading,
 derivation, in-ban); (d) is an LP on a finite configuration, post-ban. Written for a session with zero conversation memory.*

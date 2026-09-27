@@ -1,5 +1,11 @@
 # FS-102 — the fallback write-up: measure rigidity for the unit-vector group, and the local–global conjecture's main clause through five (stub)
 
+> **At FS-103's close (2026-09-26) — Kooshi's call:** whether the write-up now leads with FS-103 (rows 128–130): given MR, `χ(ℝ²) = χ(ℚ(√635087)²)
+> = χ_m⁰(ℝ²)` — Hadwiger–Nelson collapsed to the measurable chromatic number with null sets of unit pairs ignored, a number defined in print
+> (`[BachocEtAl2014]`'s `χ(A_σ)`) whose value is posed nowhere found, one step (the null-set GAP) from Falconer's `χ_m`, whose value
+> `[KechrisMarks2020]` Ex. 5.1 calls unknown — and `α₁(ℝ²) = m₁(ℝ²)`, the first clause of `[DuczVarga2026]`'s conjecture. Whether that is his
+> "wall which collapses HN to another known open problem" is his to say. Everything there rests on MR; FS-105 first is the close's advice.
+
 **At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 14′ → 7 in `plans/FRONTIER-STUBS.md`.** If FS-103 verifies, its possible headline is `χ(ℝ²) = χ_CP(ℝ²)` given MR — the collapse Kooshi named as a write-up (*"If we end up at a wall which collapses HN to another known open problem, that in itself would be a writeup."*). Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
 
 *Minted 2026-09-26 by consolidation job C3b (brief `data/consolidation-2026-09-26/briefs/C3b-claims-stubs.md`, item 3), at the owner's ruling

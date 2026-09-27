@@ -1,5 +1,14 @@
 # FS-103 — the collapse: at a field with no non-thick stable place, is `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`, given MR? (stub; the next milestone)
 
+> **CLOSED 2026-09-26 — answered (FS-103; record `plans/FS103-collapse-cp-plane.md` §R-close; theorems `plans/FS103-derivation.md`; `LEDGER.md`
+> rows 128–130).** Given MR, F1 holds in its corrected form — every **totally real** field with `N₆(F) = ∅` (the stub's "a real field with no
+> non-thick stable place" was MISSTATED) has `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`, at ℚ(√635087) and de Grey's field [hand, two blind]; the load-bearing
+> step needs no MR. `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR, so the stub's "`χ_CP ≤ χ_m`" (underived when written) now holds [hand, two]. Row 123's five
+> runs one colour class at a time and cannot give six; its per-class form, given MR, gives `α₁(ℝ²) = m₁(ℝ²)` [hand, two]. Corrections to the
+> text below: `2√103/104 = 0.1952` is Weil's bound (exact `0.192617`); the `N_k = ∅` deletion *was* exercised before, at `k = 4` over ℚ(√167)
+> (row 123's second route); "a finite family of CP product statements" is not finite at full depth. Not landed: Falconer's `χ_m` (FS-104), MR
+> at degree 16 (FS-105). Kept for its record; not a milestone.
+
 *Minted 2026-09-26 by job R3 (brief `data/rerank-2026-09-26/briefs/R3-apply-rerank.md`) from R1's N1 (`plans/RERANK-2026-09-26.md` §1.1, §2.2,
 §3.1) and the advisor's record (`plans/POROS-2026-09-26-rerank.md` stages 1–3). Rank 1 in `plans/FRONTIER-STUBS.md`. **Solver column: none** —
 derivation, PARI and reading; no finite-witness search at any stage. Written for a session with zero conversation memory.*

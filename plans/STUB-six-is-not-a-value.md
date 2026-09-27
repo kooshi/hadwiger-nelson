@@ -1,5 +1,11 @@
 # FS-62 — six is not a value: does the function F ↦ χ(F²) omit six?
 
+> **Re-aimed at FS-103's close (2026-09-26; `plans/FS103-derivation.md` FS103-S).** S's exact form, given MR, two minds: S_nf ⟹ `χ(ℝ²) ≠ 6`;
+> over totally real fields S_nf ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick stable place has `χ(F²) = 6`. R1's "a finite
+> family of CP product statements" is **MISSTATED**: the non-6-thick places have finitely many residue sizes (odd `q` below 101 of the window and
+> its neighbours; dyadic `U_Q` of small norm) but infinitely many local planes (`[F_v : ℚ_p]` unbounded). Over every subfield of ℝ, S needs
+> Q-const (G63); over every real number field, the complex-place case is one mind (V2).
+
 **At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 37 → 4 in `plans/FRONTIER-STUBS.md`.** **Re-aimed (the advisor's order, above FS-59):** S's exact form given MR — the adelic local–global principle folded here (R1 §2.2: given MR, `χ(F²) = min(χ_CP(ℝ²), local CP numbers)` iff product locality at every `k`); if FS-103's F1 (a candidate composition, not a result: given MR, row 120, and T-J39-3, at a real field with no non-thick stable place, `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`) holds, S ⟹ `χ(ℝ²) ≠ 6`, and S ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick place drops to six (a finite family of CP product statements; the advisor's formulation). §5's gate, the image of `F ↦ χ(F²)`, is an hour and unrun. **derived frame; soft as to truth** — Kooshi on this stub: *"It's just one possibility with some soft evidence"*. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
 
 > **CORRECTED AND DEMOTED 2026-09-19 — a frame, not a theorem target.** As minted, this stub's headline was an equivalence:
