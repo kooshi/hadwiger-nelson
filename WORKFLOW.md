@@ -218,7 +218,7 @@ advancement (Kooshi, 2026-09-22).
    **updates `CLAUDE.md` § Frontier and `LEDGER.md`** (the state-of-the-art summary, the novel-results ledger's new row, the ranked
    paths forward); a milestone whose close does not update the Frontier is not closed (rule set 2026-08-04). In the same close:
    - **Re-rank the frontier set** (`plans/FRONTIER-STUBS.md`; Kooshi, 2026-09-06): add every candidate the milestone surfaced
-     as a stub file, re-rank the table with each row's bearing on χ ≥ 6 stated honestly, demote with a banner, never delete;
+     as a stub file, re-rank the table with each row's bearing on the answer stated honestly, demote with a banner, never delete;
      § Paths forward mirrors the top of the table. Both files hold current state only: rewrite the affected text in place —
      no dated amendments, correction trails or superseded rankings — and leave the history to git and the milestone's plan.
    - **Re-read §G against what happened, and propagate forward** (step 3.1): which extractions paid, which entry should have

@@ -691,7 +691,7 @@ def self_test(text: str) -> int:
         (f"one number deleted ({once_num})", text.replace(once_num, "", 1), None, "lost num", True),
         (f"one bibliography key deleted ({once_bib})", text.replace(once_bib, "[x]", 1), None, "lost bib", True),
         ("one PROTECTED byte changed", text.replace(region, region[:200] + ("x" if region[200] != "x" else "y") + region[201:], 1), None, "PROTECTED", True),
-        ("gate sentence broken", text.replace("declared purchases", "declared purchase", 1), None, "gate-report", True),
+        ("gate sentence broken", GATE_RE.sub(lambda m: m.group(0).replace("declared purchases", "declared purchase"), text, count=1), None, "gate-report", True),
         ("heading renamed", text.replace(heading, heading + " (renamed)", 1), None, "heading disappeared", True),
         ("a pointer to a row that does not exist", text.replace("(row 68)", "(row 968)", 1), None, "dangling pointer", True),
         ("re-spelling WITHOUT a normalisation entry", text.replace("ρ₆₃", "ϱ63"), None, "lost", True),
@@ -732,7 +732,9 @@ def self_test_files(text: str) -> int:
     if pick is None:
         print("  BAD  three-file plants: no ordinary block with a once-only number to move (the plants would be vacuous)")
         return 1
-    main_moved = text.replace(pick, "moved: see the instances file", 1)
+    # the placeholder keeps the picked block's opening, so a PROTECTED region that the picked block closed stays closed
+    lead = "**" if pick.lstrip().startswith("**") else ""
+    main_moved = text.replace(pick, lead + "moved: see the instances file" + lead, 1)
     bad = 0
     with tempfile.TemporaryDirectory() as d:
         dm, di, dh = Path(d, "main.md"), Path(d, "instances.md"), Path(d, "home.md")

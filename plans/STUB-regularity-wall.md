@@ -92,8 +92,8 @@ G30 (the discipline ladder: geometric measure theory and circle topology are the
 Voronov's method is the nearest technology), G79 (the example invariant every tight colouring carries), G72 (the structural form: a
 question about every measurable colouring), G13 and G16 (fans and the measurable fan: the colour of a density point is excluded from a
 unit annulus around it), G20 and G22 (brick and polygonal colourings), G24 and G29 (integrality; the cell family closed), G60 (density
-caps), G21 (audit a result you like), G51 (the competition), G80 and G81. Stubs: FS-104 (absorbed: the null-set step is one sub-question of
-FS-107), FS-101 (Lean), FS-102 (the write-up, after Lean), FS-62 (six as a value of fields).
+caps), G21 (audit a result you like), G51 (the competition), G80 and G81. Stubs: FS-104 (re-aimed: its null-set step is one sub-question of
+FS-107; its other items stand), FS-101 (Lean), FS-102 (the write-up, after Lean), FS-62 (six as a value of fields).
 
 ## Bearing on the answer
 
