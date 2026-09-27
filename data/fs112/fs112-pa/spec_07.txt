@@ -1,0 +1,49 @@
+## Thread 7 — "Upper bounds" (posted June 16, 2018; comments June 16 – June 25, 2018)
+
+### The opening post: Thomassen's theorem and the disk question
+@07.1 ¦ * ¦ * ¦ De Grey: Thomassen's theorem assumes strict inequalities; the tilings under study have diameters and separations exactly 1, which it does not reach.
+@07.2 ¦ * ¦ * ¦ Mixon: an almost-everywhere six-colouring gives, by Pritikin's probabilistic argument and de Bruijn–Erdős, a six-colouring of the plane (with choice) — this project's link 2, in 2018 words (the comment is truncated in the held text).
+@07.3 ¦ * ¦ * ¦ Hockertz: a six-colouring would then give "a valid 6-chromatic Jordan curve bounded tiling" (stated).
+% OP text quoted in the record (Thomassen as Mixon states it; "What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?").
+
+### Disks and the strip: the constructions
+@07.5 ¦ The radius of the largest disk ¦ which is a circle with radius 1. ¦ Hockertz's first guess: the largest k-colourable disk has the circumradius of a unit regular k-gon (radius 1 for six); refuted in the next comments.
+@07.6 ¦ * ¦ * ¦ De Grey: Pritikin's tiling with one column of diamonds eliminated by fattening gives a six-coloured disk of radius "nearly 2".
+@07.8 ¦ * ¦ * ¦ De Grey: fattened-edge tilings avoid six colours meeting at a point; one of Gibbs's 18 surroundings of a pentagon reaches radius about 1.5.
+@07.10 ¦ * ¦ * ¦ **The construction rule in words**: in de Grey's column the curved lines are "arcs at constant radius 1 from the opposite corner", four at each vertex down the middle, interdigitating (the figure is not held).
+@07.15 ¦ Yes, I’m saying that a Rouleaux triangle ¦ in the sense of colouring those disks with fewer colours. ¦ De Grey: a Reuleaux triangle with valency-4 vertices, seven tiles, four-colours a disk of radius over 1 (corrected in [07.19]).
+@07.17 ¦ * ¦ * ¦ De Grey estimates the column disk's radius at 1.8 to 1.9.
+@07.18 ¦ * ¦ * ¦ De Grey: about 1.85; the outermost tiles (colours 5 and 2) are cut by the disk's edge.
+@07.19 ¦ * ¦ * ¦ De Grey corrects [07.15] (the Reuleaux construction reaches 0.869, above the pentagon's 0.851, for four colours) and gives a six-colouring of a disk of radius 1 from a Reuleaux triangle at the centre with valency-5 vertices.
+@07.45 ¦ * ¦ * ¦ **De Grey's six-coloured disk, radius stated exactly**: `sqrt((sqrt(3)/2 + sqrt{15)/4)^2 + 1/16) ~= 1.85123`.
+@07.46 ¦ * ¦ * ¦ Hockertz's LaTeX of it.
+@07.47 ¦ * ¦ * ¦ De Grey: `√(7+√45)/2`.
+@07.48 ¦ * ¦ * ¦ Gibbs: `(√10 + 3√2)/4`.
+@07.49 ¦ * ¦ * ¦ **Gibbs: beyond radius 2 "with something like this"** (figure not held) — the thread's first disk past 2.
+@07.50 ¦ * ¦ * ¦ De Grey improves Gibbs's disk by narrowing the uppermost blue tile; "the equivalent tiles at multiples of 72 degrees rotated" — the design has five-fold symmetry.
+@07.51 ¦ * ¦ * ¦ De Grey: "there’s more here".
+@07.52 ¦ * ¦ * ¦ Gibbs: agrees, not redrawn.
+@07.53 ¦ * ¦ * ¦ Mixon reports Boris's SAT six-colouring of a 2.4-by-2.4 square of 0.01 pixels; "Reuleaux-esque features" and "spray" (a measured object, radius 1.2 per [07.54]).
+@07.54 ¦ * ¦ * ¦ De Grey: the square has radius only 1.2.
+@07.64 ¦ * ¦ * ¦ Smith: the natural question is the largest width of a six-colourable infinite strip.
+@07.65 ¦ * ¦ * ¦ Gibbs: a graph that cannot be six-coloured must have radius greater than two.
+@07.77 ¦ The 2.4 x 2.4 square is the largest square ¦ even moderately small tiles, like side 1/6.) ¦ Boris: no six-colouring found on a torus nor on a square periodic in one direction (a search's null, at its budget).
+@07.81 ¦ * ¦ * ¦ **Gibbs: in the large-radius examples, points and edges at distance exactly one "cannot be shrunk or expanded without breaking the solution"; the arced edges must be represented exactly** — tightness stated.
+@07.82 ¦ * ¦ * ¦ De Grey asks whether a tiling shrunk to diameter `1 − ε` would give slack.
+@07.83 ¦ * ¦ * ¦ De Grey: "I’m starting to see why that may not be the case" — no slack by shrinking.
+@07.105 ¦ * ¦ than about 1.1 (see my sketches from yesterday). ¦ De Grey: radius thresholds for 4 (0.869) and 5 (about 1.1) colours; a non-six-colourable graph needs radius greater than two.
+
+### Gibbs's pentagon enumeration: "no 6-colouring … with exactly two vertices of valency 4"
+@07.25 ¦ * ¦ * ¦ **Gibbs: remove the strictness from Thomassen's inequalities**; restrict to pentagons with valencies 3 and 4, two 4-valent vertices per pentagon; seven tile configurations (figure not held) whose "highlighted diagonals must be be unit length"; "a convex edge cannot join to another convex edge".
+@07.27 ¦ One problem is that the M tile ¦ Does this tell us something? ¦ Gibbs: tile M (no geometric constraint) is universal; D, G, H eliminated; **"the B tile can be used to generate infinite strips that are four tiles wide"**; six-tile supertiles.
+@07.29 ¦ * ¦ * ¦ Gibbs: when the supertile covering can fail; assumes all tiles are pentagons.
+@07.31 ¦ * ¦ * ¦ **Gibbs's claimed elimination** (sketch, "I won’t write up all the details"): with pentagons of diameter one each having exactly two valency-4 vertices, the only option is Pritikin-like strips, which "cannot be coloured with more than four rows of the tiles".
+@07.33 ¦ * ¦ * ¦ Gibbs: adding the pentagon with one 5-valent vertex, five around that vertex and ten outside "is already not possible" to colour; hence some tiles need other valencies.
+@07.37 ¦ * ¦ * ¦ Gibbs: counting gives only an average of seven per tile; look at edges with both ends 4-valent.
+@07.38 ¦ * ¦ * ¦ **Gibbs's target statement**: no six-colouring in which all same-colour points closer than one are joined by a monochromatic path (i.e. with no Siamese pair, in FS-110's words).
+@07.41 ¦ * ¦ * ¦ Gibbs's tile definition (path components), holes filled, edges and vertices as limit points; asks whether it works.
+@07.43 ¦ * ¦ * ¦ Gibbs's sketch that some tile has diameter one (six neighbours, two share a colour, all their points more than one apart).
+@07.106 ¦ I am trying to prefect some methods ¦ is it more general? ¦ **Gibbs's sectors**: the neighbourhood of a vertex divided by lines perpendicular to the edges, colours in opposite sectors distinct — FS-110's side-cone apparatus in embryo; the topological hypothesis is asked, not given.
+
+### Context
+@07.42 ¦ As I understand, one of the biggest problems ¦ strictly requires this construction. ¦ Hockertz: Thomassen's diameter-less-than-1 condition cannot hold for efficient colourings; some tiles must have diameter exactly 1 (stated).
