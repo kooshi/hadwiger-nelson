@@ -5,6 +5,22 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
+- **OVERNIGHT PLAN (Kooshi approved the milestone; the owner runs it alone; one full report at the end):**
+  1. **FS106-V2 is running** (finishes the sighted check, aims at repairing Sokolov–Voronov). When it reports: log it; read its verdicts
+     on SV-L3, SV-L4, Obs. 1, Prop. 8, SV-1, SV-2 and its repairs; **re-brief wave 2** (`data/fs106/briefs/TS106-structural.md`,
+     `TQ106-quantitative.md`) so each takes V2's repairs and the advisor's comparison (`plans/POROS-2026-09-26-fs106-regular-half.md`
+     stage 4) as input, the planner's rule for an SV-2 GAP; then launch FS106-TS and FS106-TQ.
+  2. When TS and TQ report: launch wave 3 (the blind second minds, `B106-blind-second.md`, split as SB and QB per the plan) on whatever
+     each produced that is load-bearing; then a **fresh** Poros advisor (FS106-A is at ≈437k: replace, do not resume) to compare.
+  3. Then FS-106's close (the C/X pattern: `data/fs105/briefs/C105-close-math.md`, `X105-front-page.md` as templates), which also
+     corrects `CLAUDE.md` § The aim link 4 (Townsend 1981 has no proof; the map-six proof is Townsend's manuscript/2005; S–V's sevens are
+     GAP as printed unless repaired; Voronov holds after repairs) and LEDGER row 40 (Voronov Thm 1.3 alone). Then open **FS-107**
+     (regularity vs pathology; competitor protocol) with a planner and a fresh advisor.
+  4. Rules overnight: cap three agents, all Opus; replace any agent above ~500k; blind fences per standing rule 13; nothing announced
+     outside the files; **a result that would move the answer (a regular or wild a.e.-proper six-colouring; a proof of seven) is held at
+     one mind until a blind second mind confirms it** — never stop the pipeline to wait for Kooshi, but never overstate. On any
+     unexplained process crash: halt and report. Check `date` before logging any time.
+  5. Kooshi's items: Johnson 2000 and 2006 are still to be obtained. Benda–Perles 2000 is held (a scan: its problem (4) asks χ of any algebraic extension of ℚ² — a CLOSED-QUESTIONS candidate).
 - **FS-106 (the regular half) is OPEN** — plan `plans/FS106-regular-half.md`, claims `data/fs106/claims.md`, briefs `data/fs106/briefs/`,
   close inventory `plans/FS106-close-inventory.md` (items 1–27; owner sole writer). Wave 1 done: Voronov 2023 Thms 1.1–1.3 TRUE after repairs
   (two minds, one blind); Sokolov–Voronov 2025 Lemmas 3, 4, Obs. 1, Prop. 8 GAP as printed → their Thms 1–2 (seven for maps with conditions,
