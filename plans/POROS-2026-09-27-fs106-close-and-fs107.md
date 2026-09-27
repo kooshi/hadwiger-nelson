@@ -42,7 +42,7 @@
   `plans/FS106-V-verification.md` (for stage 1).
 
 
-## Stage 1 — expectation, written before either blind report exists (06:20 UTC; neither report file present)
+## Stage 1 — expectation, written before either blind report exists (committed 06:14 UTC; neither report file present)
 
 *Read the blind records only after this is committed. Probabilities are G21 instruments, scored in stage 1.*
 
