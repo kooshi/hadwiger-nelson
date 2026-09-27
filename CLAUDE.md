@@ -90,7 +90,7 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 4. **Regular colourings need seven, verified and almost everywhere** (row 132). Closed colour classes need seven (`[Voronov2023]` Thm 1.3: six
    closed sets covering a disc of radius 3 realize the unit distance; closedness enters once, as compactness giving a band), and so does any
    colouring with slack (Thm 1.1) — proofs repaired locally, the paper an unrefereed preprint. Almost everywhere, boundaries free: slack needs
-   seven; polygons and locally finite convex tilings need seven bar one edge case (`d = 2`), `[SokolovVoronov2025]` repaired, its map theorem a
+   seven; polygons and locally finite convex tilings need seven, `[SokolovVoronov2025]` repaired, its map theorem a
    GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing
    the other (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound.
 5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?** With no MR, `χ_m⁰(ℝ²) ≥ 7` iff six classes, each
@@ -108,7 +108,7 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 
 **The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
 Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
-complexity are a tight six-map; **FS-110, the tangency seam** — does such a map exist, its close complementary vertices tangent, bowtie or cusp;
+complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half**;
 **FS-111, the cone scale** — the same at unbounded complexity; **Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the
 collapse, the measurable chain, the map argument.
 
@@ -204,10 +204,10 @@ not update this section is not closed. The understanding the results add up to l
 the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
 point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-09-27 — **FS-107, stability, closed** (row 133; `plans/FS107-stability.md` §R-close): both claims GAP; R's reduction and W's
-equivalence meet at the tangency seam (FS-110) and the cone scale (FS-111). Before it, **FS-106** (rows 131–132) and **the reframe** (Kooshi,
-2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain).
-Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+*Last updated: 2026-09-27 — **FS-110, the tangency seam, closed** (row 134; `plans/FS110-tangency-seam.md` §R-close): under
+Condition 5 no curved map six-colours the plane almost everywhere — S–V Question 2's Condition-5 half answered yes. Before it, **FS-107** (row 133),
+**FS-106** (rows 131–132) and **the reframe** (Kooshi, 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search
+runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
 
 ### Where the problem stands
 
@@ -318,11 +318,11 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    pigeonhole for zero entropy — `U` is large enough for it, no finitely generated subgroup is (G80). With SP-Cor, `χ(ℚ(√47)²) = 5`; the flip
    stops at a quantitative T-C(A) (row 122). Bearing on χ ≥ 6: none; ℚ(√167)'s gap is now [5, 7]. Wave 3 (rows 123–125): the class is `L ≥ 5` in every degree and SP-Cor holds on it, so χ(F²) = L(F) for `L ≤ 5` everywhere; ℚ(√3,√5) five; the type-(B) fields' rotation-invariant half; six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`.
 30. **The collapse, and the fractional local–global principle** (rows 128–130; FS-103; [hand], every headline given MR). Row 123's chain runs one colour class at a time: its five is `⌈1/α_loc(F)⌉`, the fractional bound `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` rounded at one pigeonhole, and that route never gives six (G60); given MR the bound is exact, `α₁(F²) = α_loc(F)`, so at ℚ(√635087) `α₁(ℝ²) = m₁(ℝ²)` and `χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.0487` (row 129). At a totally real field whose stable places all mix at six colours, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` (row 128; its load-bearing step needs no MR), and `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR (row 130). Bearing on χ ≥ 6: given MR, rung D is six over ℚ(√635087), and six for measurable colourings modulo null sets of unit pairs (G81).
-31. **The regularity wall, verified; the question is stability, and it meets at one seam** (§ The aim; rows 131–133; FS-110, FS-111). Regular
-   classes need seven almost everywhere — slack, polygons and convex tilings (bar `d = 2`), nice maps — and maps six; closed classes are the tight
-   question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map exists, its close
-   complementary vertices tangent, bowtie or cusp; past it, whether junctions keep a cone scale (row 133). Bearing on the answer: none moved; the
-   question located.
+31. **The regularity wall, verified; the question is stability, and its Condition-5 half is closed** (§ The aim;
+   rows 131–134; FS-111, FS-112). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+   classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+   exists (row 133): under Condition 5 none does (row 134); with unit arcs, open. Past it, whether junctions keep a cone scale. Bearing on the answer:
+   none moved; half of door (A) closed.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -333,7 +333,7 @@ formulation); Theorem B's kernel proof and its 𝔽₄-valued residue colouring 
 
 ### The novel-results ledger
 
-**Rows 1–133 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
+**Rows 1–134 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
 address in `Proofs/` or `tools/` and its milestone. **Row numbers are stable identifiers cited across `plans/` and this file: never
 renumber, never reuse.** The file is not loaded here by design — results are looked up by row, understanding is reasoned from — and
 it is read in full at the reframe (step 3.1) and extended at the close (step 9).
@@ -343,15 +343,15 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on the answer stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **None is open.** FS-107, stability, is **closed** (row 133; `plans/FS107-stability.md` §R-close). **Next: FS-110,
-the tangency seam** (the owner's ruling, 2026-09-27; `plans/STUB-tangency-seam.md`); the finite-witness-free week runs to 2026-10-01 (§ Toolchain).
+**Open milestones, in order.** **None is open.** FS-110, the tangency seam, is **closed** (row 134; `plans/FS110-tangency-seam.md` §R-close). **Next:
+FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`), or FS-111 (Kooshi picks); the finite-witness-free week runs to 2026-10-01 (§ Toolchain).
 **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close: `plans/FRONTIER-STUBS.md`'s closed list.
 
 **Ranked stubs** (one rank per row, each bearing stated against the answer; the cells here are short, and `plans/FRONTIER-STUBS.md` is authoritative, with the full text, the re-rank history (the last, `plans/RERANK-2026-09-27.md`) and a solver column marking what the finite-witness-free week can run):
 
 | rank | stub | the question | bearing on the answer |
 |---|---|---|---|
-| 1 | **FS-110 the tangency seam** — `plans/STUB-tangency-seam.md` (FS-107's successor; SWAP-PRICE folded in) | does a full tight a.e.-proper six-colouring by a locally finite arc-bounded map exist? Its close complementary vertices must be tangent pairs, bowties or cusps (row 133), a tangent ring may still force holes at positive scale (FS107-V's C5, one mind), and equal-type pairs in `(1, 2)` must survive the bicycle | decisive both ways at bounded complexity: YES gives `χ(ℝ²) ≤ 6` with no MR; NO answers S–V Question 2 a.e. for such maps and closes door (A) |
+| 1 | **FS-112 the unit-arc half** — `plans/STUB-unit-arc-half.md` (FS-110's successor) | does a tight six-map exist once unit arcs are allowed? Every close complementary pair then sits on a unit arc ((S1), the T2 rhombus, NB-4's four-colour exception; row 134), each realised locally and exactly; W-3's winding transport fails across same-type edges (YB3-SAME) | decisive both ways at bounded complexity: YES gives `χ(ℝ²) ≤ 6` with no MR; NO answers `[SokolovVoronov2025]` Question 2 a.e. for circular-arc maps and closes door (A) |
 | 2 | **FS-111 the cone scale** — `plans/STUB-reg-scale.md` | door (B): do near-optimal band-proper six-colourings keep junction cone scales `≥ s₀` on a set of positive measure? De Giorgi's room (link 6) | decisive jointly with FS-110's NO (`χ_m⁰ = 7`, so `χ(ℝ²) = 7` given MR); alone a regularity theorem |
 | 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? — row 131's question at five colours; its null-set step to Falconer's `χ_m` is row 131's sub-question; standing here: `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14), the density family, `k`-point correlations (FS-80) | decisive: given MR it is rung D (row 128); success low, a named no-go the likely product |
 | 4 | **FS-109 the hole dial** — `plans/STUB-hole-dial.md` (post-ban) | trace `1 − µ₆^per(ε)` as `ε → 0` along eroded `[Parts2020c]` tilings and W's families; C-VOID's thin-hole test in the ban | link 5 as a dial on row 131's question: flat is R's evidence, falling W's; decides nothing alone |
@@ -1595,7 +1595,8 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   read "R must count a defect non-locally, Voronov's contradiction being feature-local"; row 133's cone lemma is feature-local and `ε`-independent —
   feature scale is not band scale. *Do: when a question asks whether a class of colourings exists, ask whether its limit object is a weak-* limit of
   regular near-solutions; if so, pose it as stability, build on the regular objects, test a stability proof against strips and erosion (row 131's
-  no-gos) first, and price each certificate at its feature's scale, never at `ε`'s. Nothing kills the equivalence; it forbids a construction needing a
+  no-gos) first, and price each certificate at its feature's scale, never at `ε`'s — and where the limit object is a map, look first for the printed regular
+  theorem's own chain (FS-110: S–V's Cor. 1 and Woodall's step 3, made curved and almost everywhere). Nothing kills the equivalence; it forbids a construction needing a
   wild set. Killing test of the reading: a proof of `lim µ₆(ε) < 1` whose features' scale is not bounded below.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and

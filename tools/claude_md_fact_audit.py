@@ -315,6 +315,8 @@ ALLOW: dict[str, str] = {
     # FS107-X, the front page of FS-107's close (2026-09-27; data/fs107/fs107-x/record.md).
     "1–130": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–133 at FS-107's close (FS107-X; rows 131–133 had been added at FS-106's and FS-107's closes; the 1–127 precedent)",
     "30–63": "the paths-forward table's group rank, renumbered 30–64 at FS-107's close (§R-close 4.2): FS-107 left, FS-110 and FS-111 minted at ranks 1–2, FS-98 folded into the group (the 30–62 precedent)",
+    "1–133": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–134 at FS-110's close (FS110-X; row 134 added; the 1–130 precedent)",
+    "131–133": "item 31's row range in § Where the problem stands, extended to 131–134 at FS-110's close (FS110-X; FS110-C's §R-close 4.2 rewrites item 31 with row 134)",
     "G82:[hand, two minds, one blind (row 131); the reading one mind]": "G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)",
 }
 
@@ -437,6 +439,8 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     '4′': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
     "HD1-cert's": ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
     'PL(23': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-96 (rank 11 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
+    'plans/STUB-tangency-seam.md': ("plans/FRONTIER-STUBS.md", "FS-110's stub, cited by CLAUDE.md's Open-milestones paragraph and paths-forward rank 1 until FS-110 closed (FS110-X; FS110-C's §R-close 4.2); plans/FRONTIER-STUBS.md's closed list keeps it"),
+    '(1, 2)': ("plans/STUB-tangency-seam.md", "FS-110's paths-forward row ('equal-type pairs in `(1, 2)` must survive the bicycle'), removed from CLAUDE.md when FS-110 closed and FS-112 took rank 1 (FS110-X; FS110-C's §R-close 4.2); the stub keeps the fact"),
     "R1's": ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-44 (rank 15 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
     'T-J39-5': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-59 (rank 8 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),
     'μ_min': ("plans/FRONTIER-STUBS.md", "the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it"),

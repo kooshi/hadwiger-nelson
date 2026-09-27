@@ -52,3 +52,23 @@ grade clause as stated). CE's record `plans/FS110-CE-verification.md`, report `d
 - **Left:** CE's theorems CE1–CE7 have no entries in `plans/FS110-derivation.md` (written before CE reported) and so no § B lines — adding § B lines
   without entries fails the checker, and the derivation file is outside my touch list. FS110-CLOSURE's and FS110-CUSP-BASE's entry headers in
   `plans/FS110-derivation.md` still read "under check"; `plans/FS106-derivation.md` owes its one line per entry (row 132's correction).
+
+## Stage 3 — SAVED: `CLAUDE.md`, `plans/FRONTIER-STUBS.md`, the audit's reviewed lines, and a stage-2 repair
+
+- **`CLAUDE.md`** (C's §R-close 4.2, applied as drafted): Last-updated line; § The aim link 4 ("bar one edge case (`d = 2`)" struck) and the
+  program line (FS-110 closed, FS-112 added); item 31 rewritten; Open milestones; paths-forward rank 1 → FS-112 (FS-111 stays rank 2, its short
+  mirror cell unchanged — C drafted no text for it); G82's *Do* gains the §PA-sweep clause; the ledger pointer "Rows 1–133" → "1–134" (the FS107-X
+  precedent). **Bytes: 295,695 → 295,853** (C estimated net −200; the drafts add +158; under 300,000, so no budget move was needed).
+- **`plans/FRONTIER-STUBS.md`** (C's 4.4): Open-milestones paragraph mirrors `CLAUDE.md`'s; rank 1 FS-110 → FS-112 (cost "unpriced (counter-priors,
+  rule 1)", status "minted 2026-09-27", solver "in-ban: derivation and exact fragments by formula"); FS-111's question gains "`K` enters the answer
+  only here and in W-EQ-K (row 134's scope)"; FS-110 heads the closed list.
+- **`tools/claude_md_fact_audit.py`, reviewed lines** (4 lost tokens, each reviewed): ALLOW "1–133" (the ledger pointer extended to 1–134, the 1–130
+  precedent) and "131–133" (item 31's row range, now 131–134, C's rewrite); EXTERNAL_HOMES 'plans/STUB-tangency-seam.md' → `plans/FRONTIER-STUBS.md`
+  (its closed list keeps the address) and '(1, 2)' → `plans/STUB-tangency-seam.md` (FS-110's removed row's "equal-type pairs in `(1, 2)`"; the stub
+  holds it twice; the audit reads the file and found it).
+- **A slip of mine, repaired here:** stage 2 was committed after the fact audit and `--strict` but **before `--dupes`**, which read 20 (10 at launch):
+  nine from C's § B grade cells repeating "hand; two minds, one blind: X; Y | `plans/FS110-derivation.md`" (exactly 10 words), one from the
+  two-routes clause I had carried into row 132. Repair: the 15 cells of that exact form rewritten "hand; two minds: X; Y, blind" (the blind mind
+  named, one word fewer, content unchanged); row 132's clause now points: "(FS110-CB, FS110-CD; the closure's two routes in row 134)".
+- Gates at this stage: fact audit `--base 939f0928` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `check_architecture` exit 0 PASS; RK's
+  mirror check exit 0 PASS; `bib_audit` exit 1 — the two FS-110 citations present at launch (stage 4).
