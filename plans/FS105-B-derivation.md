@@ -314,3 +314,36 @@ finitely generated subgroup lacks — against the **measure's invariant**: zero 
   is a stand-alone lemma that uses only `U`-invariance, not entropy.
 - **Proposed for the close (not written by me):** `LEDGER.md` row 120's grade line — "EF_F⁺ … a third derivation blind to the others
   (FS105-B), TRUE at ℚ(√635087)", with FS105-B's divergences from stage 4; `LEDGER.md` § B: FS105-B-M1, -L5, -L6, -EFP, -EF0.
+
+---
+
+## Stage 4 — divergences from X01D §3, X12B §2, X01V §2.3 and §4 (read only after `85c2eb2e`, stage 3) — SAVED
+
+**Deferred quotations, now checked.** `claims.md` (b)'s EF_F⁺ matches `plans/FS100-derivation.md` line 160 (FS100-EFP) verbatim; §0's
+"Added there" matches `plans/FS100-X02D-derivation.md` lines 12–13 ("Added here: …") verbatim. The brief's EF_F⁰ ("`U`-ergodic,
+`h_μ(u) = 0` for every `u` ⟹ `μ(E) = 1`") is an abbreviation of X01V §2.3's "**EF_F⁰:** every `U`-invariant, `U`-ergodic probability measure
+`μ` on `R̂` with `h_μ(u) = 0` for every `u ∈ U` satisfies `μ(E) = 1`" — same content; the advisor's own record was not opened.
+
+| step | FS105-B (mine) | X01D §3 | X12B §2 | truth |
+|---|---|---|---|---|
+| model | `R̂ = 𝔸_𝒮/D`, `ker Φ = D` **derived** (M1) | `W/Λ`, `Λ = R^∨` (§2.0, not read) | `𝔸_S/Λ′`, Tate duality, annihilator in one line | same model; none |
+| expanding place | Lemma 0, totally real only (`F₁`) | split or archimedean `v*`, every real `F` | `P⁺` split or archimedean | none at `F₁` |
+| Bowen atoms thin at one place | lift uniqueness in `𝔸`: `D ∩ (u*Ñ − Ñ) = 0` (Lemma 1a) | Lemma PF with `ε` chosen against `u*` | pass to `X_Q = R̂/K_Q`, injectivity radius | same lattice-gap mechanism; none |
+| multipliers | explicit `(s+i)/(s−i)`, `κ = 1/(2d)` | all of `U_ℚ`, Lehmer, `α = 1/d` | same, `4X/π` checked | mine weaker exponent, self-contained; any `κ > 0` suffices in all three; none |
+| Diophantine step | divide first: `ℓ_n = d/(q − q′)`; `|q−q′|`'s smallness at `∞` paid inside `H(q−q′)`; Liouville at `𝔓₀` | multiply through (`z = ℓ₂r₁ − ℓ₁r₂`, `x̃` cancels), divide once at `v*` by Lemma PF | divide; explicit lower bounds `|q₁−q₂|_v ≥ X^{−2}` at `∞`, a lift-dependent height `H′` | three bookkeepings of one product-formula argument; none |
+| scales | consecutive `n`, `M(n) ≍ e^{nβ/κ}` | `M, M², M⁴, …` | `X, X², X⁴, …` | none |
+| places made global | one (`𝔓₀`) | one (`v*`) | all of `P⁺` | none |
+| the other places | direct-sum coordinates `Ψ`; `π_Y` is `U`-equivariant, so no stabilisers; contraction `z/σz` with `z ∈ 𝔔 ∖ σ𝔔` (no class number) | leaves per torsion `t`, finite-index stabilisers `U_t`, class number | Lemma Z: `T × 𝔸_{S∖P}`, `ord_w` push-forward, class number | same shells mechanism; mine and X12B's avoid stabilisers; none |
+
+**Differences of truth: none.** **X01V's blind GAP ("UZ", §2.3 items 2–4)** assumed the translates must stay small at every place and
+worried that `|u₁ − u₂|_∞` amplifies the archimedean error. My proof, written blind to X01V, meets both exactly as X01V §4.2 concedes X01D
+does: fat places are paid for by the multipliers' heights (Step 4, (E2)), and the archimedean coordinate is bounded, never approximated,
+with `|q − q′|_∞` absorbed in `H(q − q′)` (h2, h3). I found no failing line in X01D §3 or X12B §2.
+
+**Blindness, honestly stated.** The route's outline was open to me and I knew it (row 120: "Einsiedler–Fish's pigeonhole with the rational
+unit vectors as multipliers and the product formula as the Diophantine step"; G76's *Do*). The step that made the other places vanish
+(X01D's "wandering shells", X12B's Lemma Z) was **not** in any open source; my Step 6 found it independently. The proof, every quantifier
+and constant, is mine.
+
+**Count of minds for EF_F⁺ at `F₁` after this job:** three derivations blind to one another (X01D, X12B, FS105-B) and one checking reading
+(X01V stage 4). Grade [hand].
