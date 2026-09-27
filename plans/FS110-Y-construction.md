@@ -16,9 +16,10 @@ Claim list: `data/fs110/claims.md` (quoted, never paraphrased). Blind to the pro
   failure-set analysis, which I redo for sizes 2 and 4 — [read + hand, one mind here; two with FS110-A's], §1.3.
 - **Y-TYPE** — D-TYPE TRUE for `𝓜_K` maps (and any locally finite map whose boundary arcs have one-sided tangents at `u`): `P_cl(u) ∖ P_ess(u)` is
   exactly the set of colours all of whose corners at `u` have angle 0 — [hand, one mind, trivial], §1.3.
-- **Y-BLOCK** — the blocking set `B_u(s) ∩ B(w₀, c)` of a trivalent or bowtie `𝓜_K` vertex has exactly five shapes (slab, one-sided band of depth
-  `≍ |1 − κ|s²/2` or `≍ s·|τ·e_u|`, thin double wedge of angle `≍ s` about the tangent line of `ω(u)` at `w₀`, empty); hence C-TAN-POS TRUE at the
-  level of A-EXACT's disjointness test — [hand, one mind], §1.4.
+- **Y-BLOCK** (as corrected at stage 3) — the blocking set `B_u(s) ∩ B(w₀, c)` of an `𝓜_K` vertex takes the shapes: one-sided band of depth
+  `≍ s·margin` (generic trivalent), `≍ |1 − κ|s²/2` (T1) or `≍ s·|τ·e_u|` (cusp); a two-sided ball only at vertices of degree `≥ 4` with no
+  escape; a thin double wedge of angle `≍ s` about the tangent line of `ω(u)` at `w₀` (T2); empty (escape). Completeness of this list is not
+  claimed. Hence C-TAN-POS TRUE at the level of A-EXACT's disjointness test — [hand, one mind], §1.4, §3.
 - **Y-CHK** — `tools/fs110_y_check.py`: exact min/max cross-distance for tiles bounded by segments and circular arcs over ℚ(√3), seven controls
   (three curved), four planted faults each firing for its own reason — [tools, exact], §2.2.
 - **Y-T2W** — a pair saved at `w₀` by T2 makes `w₀` a vertex of degree `≥ 4` whose branches of `ω(u)`, `ω(v)` alternate, with `P(u)`-colours at
@@ -226,3 +227,26 @@ periodic in `60°` cells on either circle — R's `E ∪ (E′ + 60°) ∪ …` 
 C-T2 (i) — a scan over the free ray angles at `u, v, w₀, w₀′`; instead the constraints of §2.3.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: retractions after FS110-A2's card 1 (free; counted by A2, G51)
+
+1. **§1.4's "fat" row is empty for trivalent vertices** (A2's point 3, checked): three sectors, and a line through `u` has two rays, so at most
+   two sectors contain a direction `±e_u^⊥` and the third lies in one open half-plane. The generic trivalent vertex blocks a **one-sided band** of
+   depth `≍ s·margin` (V-C5's "on one side or the other"). A two-sided set (a ball about `w₀`) arises only at vertices of degree `≥ 4` with no
+   escape (e.g. bichromatic `a, b, a, b`). **"Exactly five shapes" is withdrawn**: the shapes are the ones found, completeness not claimed.
+   **C-TAN-POS's verdict is unchanged**: one-sided band against one-sided band fails by the quadrant argument (the map `ζ ↦ (ζ·e_u, ζ·e_v)` is a
+   linear isomorphism, so the two half-open bands meet in the preimage of a rectangle adjacent to 0), and a band against a thin wedge fails.
+2. **"Strong escape" is MISSTATED in the claim list** (A2's point 2, checked): a vertex of type size 4 with sectors `c, d, c′, f` of four distinct
+   colours, each below `180°`, has `B_u ∩ B(w₀, c) = ∅` for every direction whose near-lines pass through `d` and `f` (a near-line then misses `c`
+   or `c′`) — an open escape with no colour repeated. Corrected definition: **"two sectors straddling every line of tilt `< µ` from the tangent line,
+   with at least one colour of `P(u)` lying wholly on each side"**; the bowtie is its case with the straddling colour repeated. My §1.4 table row
+   ("whose repeated or extra colour holds two sectors") is replaced by this definition.
+3. **Disjointness vs union** (A2's point 1): every statement of mine uses only "`P(u) ∪ P(v)` holds all six colours" — A-EXACT's consequence,
+   A-SIX, C-TAN-POS — so they hold verbatim for **overlapping** pairs whose types cover the six colours. For families of three or more vertices at
+   distance 1 from one `w₀`, A-EXACT still gives `⋂ B_{u_i} = ∅` when the types cover the six, but the pair argument does not transfer: three
+   one-sided bands through `w₀` can have empty common intersection near `w₀`.
+4. **C-TAN-POS's scope, one line each:** at `u` and `v` — trivalent (generic, T1, T2), bowtie, four-colour and cusp vertices of `𝓜_K` (C¹ arcs,
+   one-sided tangents), and bichromatic degree-`≥ 4` vertices against a four-set; nothing assumed at `w₀`; general Jordan boundaries not covered.
+   It rests on one necessary condition only: A-EXACT's `B_u(s) ∩ B_v(s) = ∅`, with `B_u` computed from the cone plus curvature at scale `s`.
+
+## Stage 3 — SAVED
