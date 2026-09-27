@@ -176,3 +176,68 @@ problem.
 - *Probability:* **0.015.** *Evidence:* existence iff HN ≥ 6 (compactness, derived); findable size: none; soft against: Polymath16 and Heule
   searched hard for six and reported nothing.
 - *Search:* yes — the path *is* search; banned to 2026-10-01.
+
+**Fact 3's second mind should check two details I passed over:** reflections (conjugation acts on the residue plane; randomise over it too, it
+is an automorphism) and a dyadic inert place realising `L(F)` (the same construction on `U_Q`). Fact 1's proof needs a right-Følner set
+(`|F_N φ Δ F_N| / |F_N| → 0`), which amenability supplies.
+
+## Stage 2b — SAVED (paths P3–P5)
+
+**P3 — six for `χ_m⁰` by analysis: correlation hierarchies on the product graph, transferred through MR.**
+- *The frame.* Row 129 proves the per-class route caps at `1/m₁ ≤ 4.36`. That cap is a statement about one colour class of `UD(ℝ²)`. The
+  classical door, in combinatorial optimisation's words: **`G` is `t`-colourable iff the Cartesian product `G □ K_t` has an independent set
+  meeting every fibre** (the Gvozdenović–Laurent reduction of `χ` to `α`; recalled, not read). For the plane: `χ_CP(ℝ²) ≤ t` iff
+  `UD(ℝ²) □ K_t` carries a rigid-motion-invariant random independent set of density exactly `1/t` per fibre. A *single* independent set of
+  the product is a *whole* colouring, so density bounds on the product graph are not subject to row 129's cap; the gain appears only at
+  higher levels of a moment (Lasserre / `k`-point) hierarchy — level one is the vector-colouring bound, below `χ_f`. With the collapse, `χ_CP
+  = χ(A_σ)` (BDOV's operator chromatic number, row 130), so the operator-SDP literature (Bachoc–DeCorte–Oliveira–Vallentin 2014;
+  DeCorte–Oliveira–Vallentin's complete-positivity bounds; de Laat–Vallentin's `k`-point hierarchy) **now bounds HN, given MR**, where before it
+  bounded only a measurable relaxation.
+- *What it would prove.* `χ_m⁰(ℝ²) ≥ 6`, hence (MR) `χ(ℝ²) ≥ 6`; or, if it provably cannot pass 5 at every level, a no-go of a named format.
+- *Rests on.* MR (row 120), row 128, row 130; an unproved completeness statement (does the hierarchy converge to `χ_CP`? — a derivation owed).
+- *Lean cost:* **very high**: Bessel functions (absent; `J₀`'s minimum `−0.40276` is one line on paper and weeks in Lean), Fourier analysis
+  on `ℝ² ⋊ SO(2)` and Bochner (absent), SDP certificates with transcendental entries (interval arithmetic), **plus P5** (MR in Lean) to
+  transfer. The costliest route in the table.
+- *First milestone (in-ban, derivation):* the level-two shape of the product-graph hierarchy for `k = 5` and whether its value can exceed
+  4.36 at all (a derivation, as FS-104's route (c) asks: "its shape derived first"); kill: a proof that every finite level equals `χ_f` on
+  vertex-transitive amenable graphs, or that level two stays below 5.
+- *Probability:* **0.005** (the answer and its Lean proof in a year). *Evidence:* the product reduction is classical [external, recalled];
+  its bite at the plane: none.
+- *Search:* none in-ban; the SDP is post-ban and machine-long, so it waits on the derivation.
+
+**P4 — from above: a measurable six- (or five-) colouring, MR-free.**
+- *What it proves.* By (E), a measurable colouring proper at almost every unit pair gives `χ(ℝ²) ≤ 6` with no MR; with a six-lower-bound
+  (P1/P2) that is the answer six; a five would be the answer five with the kernel's rung B.
+- *What is known about its shape* (the no-go map): no polygonal colouring uses six (`[SokolovVoronov2025]`; G22); no map-type colouring
+  (Townsend, Coulson — held or named, not read); **no slack colouring uses five** (`χ^{sl} ≥ 6`, `[CurrieEggleton2016]`, FS103-M D5), so a five
+  would be *tight*; each class has density at most `m₁ ≤ 0.247`. So a six has non-polygonal, non-map classes finer than 1/2.
+- *A new format-level question no stub names* [reading, prior]: **do a.e.-proper colourings with finite perimeter density need seven?** In
+  geometric measure theory's words: a Caccioppoli partition of the plane with no monochromatic unit pair a.e. — is Townsend's map argument
+  valid for it? If yes, `χ_m⁰ ≤ 6` needs **fractal (infinite-perimeter) classes**, and a perimeter-minimising selection (a minimiser exists:
+  perimeter is lower semicontinuous and the constraint is closed in `L¹`) would turn any finite-perimeter six into a regular one — the
+  variational door GMT supplies (Almgren–Taylor regularity of minimal partitions is its classical model). Two-sided: a yes is a no-go for
+  every tame format; a no names the shape a six must have.
+- *Lean cost:* **medium** for (E) and a concrete construction's properness; unknown for a fractal construction.
+- *First milestone:* the no-go map at six in one table with every entry graded (read Townsend 2005 and Coulson 2004, held or on loan), then
+  the finite-perimeter question as a derivation; kill (of the path, not of the question): a derivation that finite-perimeter a.e.-proper
+  colourings need seven *and* a reason fractal ones cannot do better — then P4 is closed at six and the evidence for seven rises.
+- *Probability:* **0.005** — needs HN ≤ 6 (my prior 0.45) and a construction no one has hinted at in seventy years.
+- *Search:* none for the derivation; a constructive search (a CP/model-set colouring of `ℝ²`, FS-64's instrument aimed at the real place) is
+  post-ban.
+
+**P5 — the MR lane: formalize MR once, reuse it everywhere (enabling, not a route to a value).**
+- *What it buys.* Rows 121, 123–130's lower halves in Lean; with (E), `χ(ℝ²) = χ_m⁰(ℝ²)` in Lean; every analytic lower bound (P0, P3)
+  becomes a Lean lower bound on HN. It is the only path whose cost is paid once and reused by several others.
+- *Lean cost:* **very high** if EL2021 Thm 1.3 is proved (KS entropy of `ℤ^d`-actions, leafwise measures, Einsiedler–Lindenstrauss's
+  entropy symmetry: person-years; nothing in Mathlib); **high** if Thm 1.3 enters as a named hypothesis, as `BochnerHerglotz` and
+  `InvariantMeasureOnClosed` already do in row 127 — then the in-house parts are EF's pigeonhole (elementary number theory + measure), the
+  entropy splitting PE-2 (still needs KS entropy), the solenoid `R̂` and its dual, and the mixing selection.
+- *First milestone:* **a ruling from Kooshi** (card C1 below) on whether a published theorem stated as a named hypothesis meets the bar;
+  then the smallest self-contained piece — EF's zero-entropy pigeonhole at ℚ(√635087), which is where the project's own mathematics is.
+- *Probability:* 0 on its own; it multiplies P0 and P3.
+- *Search:* none.
+
+### Would have searched here (stage 2)
+- P1's calibration: I would have run the invariant LP on small configurations in `K(√5)` to see whether `χ_g` reaches 5 below 509 points;
+  instead I derived its upper bound by the field wall (fact 3) and its sandwich `χ(H) ≤ χ_g ≤ χ(ΓH)` (fact 2), which say where and why it can
+  help, and left the calibration post-ban.
