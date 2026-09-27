@@ -629,3 +629,117 @@ hunch: a3-disk-stops-at-a-seam
 - `plans/FS112-NB-verification.md` §1.5–1.6, by grep — read against: W1 (ii) and C-UA-BUDGET — surprised: yes; NB's branch-2 diagnosis predicted the strip's configuration blind
 
 ## Stage A3-1 — SAVED
+
+## Stage A3-2 — SAVED: A2's §3.5 clause decided; card X; round 2's aim for the construction side (brief items 2–4)
+
+### A3-2.1 The clause has fired
+
+**A2 §3.5 (verbatim):** "The fact that would change it: **N's own registrations N112-P1 and P2** (the strip's arcs all (Q), with rings inside it). If
+they are confirmed exactly at the end vertices — arc-closed (Q) centres in a held valid object — then the end-vertex analysis cannot end in a local
+exclusion. Item 3's global step then becomes the round's whole aim, and item 1 shrinks to a lemma."
+
+**Each part of the condition, checked:**
+- **"The strip's arcs all (Q)":** met exactly at two minds (A3-1.4).
+- **"With rings inside it":** every midline vertex's unit circle lies in the strip.
+- **"Arc-closed … at the end vertices":** both ends of every arc are interior vertices of the coloured strip (YB O1; Y §1.3 item 4).
+- **"A held valid object":** two rebuilds, two checkers.
+- **P2's covering-pair hypothesis** is vacuous in the union sense (A3-1.4). The clause's substance does not rest on it.
+
+**The consequence, read against N2's items:**
+- **Item 1** (BEND at the end vertices, NB-ISO, termination) concerns arcs **without** a contact of one side colour at the centre. The strip's arcs are
+  of kind both and cannot be bent either way (YB-LOCK; N112-BEND's own statement). So the strip neither helps nor blocks item 1: it is RED's
+  completeness, a lemma.
+- **Item 3's chain route** passes through end vertices. There, the strip realises arcs of kind both, arc-closed. So no argument at end vertices alone
+  can exclude them, which is exactly the clause's "cannot end in a local exclusion".
+- **What the proof side should be told:** that the fact happened, and so, by the clause's own words, **item 3 is the round's whole aim**. With it goes one
+  movement hint and nothing of the construction side's derivations (A3-2.2).
+
+### A3-2.2 Card X (`data/fs112/fs112-a3/card-X.md`)
+
+**Part 1 is one text for both sides:**
+- X1: the strip's exact status, as a calibration fact about a printed object.
+- X2: read the strip at each step's own radius, at the arcs' end vertices and at the configurations the step forbids.
+- X3: the W1 (ii) divergence; the construction side acts.
+- X4: the T2/(S2) reading, one mind, no priority.
+
+**Part 2 for the proof side:** the clause and its consequence (A3-2.1), and the score of N's pre-round answer. It goes to FS112-N2 by SendMessage after
+this stage is committed.
+
+**Part 2 for the construction side:** A3-2.3, through its successor's brief.
+
+**Held back from the proof side** (construction-side derivations; the close or a later comparison may combine them):
+- Y112-EDGE and YB-EDGE: where the strip stops, and why.
+- YB-SEAMS: which seam saves each close complementary pair.
+- That the strip holds the base's forbidden configurations, with circles leaving at its edge (Y §1.4 row 13; YB O5).
+- The bi-infinite periodic chain (YB-CHAIN).
+- YB-LOCK.
+- The branch-2 counterexample's detail, and P2's vacuity. The proof side is told only that P2's hypothesis is scored in this record.
+
+X2 points at two of these places without saying what is there. That is a movement hint.
+
+### A3-2.3 Round 2's aim for the construction side — a decision in four parts
+
+- **The choice.** The successor does the following, in this order.
+  0. **Housekeeping**, seconds each:
+     - X3's re-derivation of W1 (ii), and the Y112-NB4-MIS statement it corrects.
+     - Y's checker on CAL-7's **brick** (D3).
+     - **Both checkers, Y's and YB's, on every new object** (D4). YB's tool is run, never edited.
+     - D6's arc count reconciled.
+     - X4 checked on the strip. If the (S2)-with-arcs pattern is confirmed at the valleys and apexes (A3-1.6 item 2), it is filed as a seam realisation.
+  1. **CAL-DISK**, in the three separated steps the owner ruled.
+     - First, `[Polymath2021]` Fig. 10's combinatorics transcribed by eye, with every ambiguity reported, never resolved by a solver.
+     - Then the exact system solved.
+     - Then both checkers, printing pairs examined against pairs present, with the control `r² = (25 + 9√5)/10`.
+     - Then the read-off: every unit arc's kind and centre (N112-P3); its end vertices (arc-closed?); its four-colour vertices' rings; its close
+       complementary pairs and where each common unit point is saved (YB-SEAMS for the disk); and where the disk cannot be continued
+       (`a3-disk-stops-at-a-seam`).
+  2. **The dial (E6), from both positives.**
+     - Each attempt is aimed at a named unsaved seam: the strip's edge vertices (Y112-EDGE: change the sectors at `V₀` or `A₁`), and the disk's
+       analogue from step 1.
+     - Each is built by formula with derived parameters (in-ban) and checked exactly.
+     - Each reports the seams it saves and the obstruction it meets, stated as a claim.
+     - If an attempt saves every seam of its patch, the global candidate it suggests (E5) is built and checked.
+  3. **The `κ = ±1` horn fragment:** WC with the horn's upper arc on `ω(N)`. It is the first object that reaches C-CHAIN 5–7, 11 and 17, and it tests
+     where FLANK's exception sits in the proof side's terminal-map statement.
+  4. **C-HOCK on A6-C2** (seconds).
+- **The alternatives weighed.**
+  - **(A) The dial first, from the strip alone.** It bears on the answer most directly, and its obstruction is already named at two minds.
+  - **(B) The horn fragment first.** It tests the proof side's item 2 soonest.
+- **Why this one won.**
+  - **Against (A):** the strip gives the dial one reading. Its stopping point is a single configuration, the second seam of a `(V, A)` pair, and
+    Polymath16 already reports in words that the strip cannot be extended (`[16.347]`). The rebuilt disk is a second positive built differently (a
+    five-fold skeleton). Its own stopping point, read beside the strip's, tells a law from a design, and that is what the dial exists to measure.
+  - **Also against (A):** the disk is the only calibration between radius 1.834 and 2.124. Without it, the next comparison cannot test any proof-side
+    step that reads a radius-2 disc. The base does: `ω(y)` for `y` on `ω(u)`. And N112-P3 stays unscored.
+  - **Against (B):** A2's clause has fired, so the proof side's items 1–2 are now lemmas feeding item 3. The horn fragment tests a lemma's exception, not
+    the global step.
+- **Confidence: medium.** Two facts would change it:
+  - **Fig. 10's transcription is ambiguous** at a unit arc's centre or an adjacency, so it cannot be fixed without a guess. Then step 1 stops at
+    "ambiguity reported", and the dial on the strip moves to first.
+  - **N2's global step, once stated, reads only unit circles about points inside the strip.** Then the disk adds nothing to the next comparison, and the
+    dial goes first.
+- **Default:** if the owner says nothing, the successor's brief is steps 0–4 in this order, with card X (part 1) quoted verbatim, followed by a blind
+  verifier on the disk (CAL-DISK's robust form is two rebuilds).
+- **Fence note for the successor's brief:**
+  - Nothing of the proof side goes in: not its round-2 record, not N2's stage sections, not card X's part 2 for the proof side.
+  - A3-1.2, A3-1.3's settlement and A3-1.6 are advisor readings about the construction half and may go in.
+
+### A3-2.4 The card in my record (the question I expect round 2 to answer; nothing below is sent)
+
+question: where-does-the-global-step-read-past-the-strip
+  evidence: card X1 (the strip exact, kind both, arc-closed); YB O5 C-CHAIN-14 and Y §1.4 row 13 (the base's forbidden configurations inside the strip, their circles leaving at its edge vertices); N §2.5 (C-BEYOND's step named, not derived)
+  expected: the proof side takes the chain route first, as its brief lists it first
+  ask: which circle does the proof side's global step read outside every strip of height √15/2 + √3, and is it centred at a trivalent vertex or along a chain of unit arcs?
+  if a trivalent vertex's circle: the route meets C-BEYOND where the strip stops; the next comparison scores it on the strip and on the rebuilt disk
+  if along a chain: the strip's periodic chain defeats every chain-local monotone quantity; the step must be re-aimed before more derivation is spent on it
+  answered by: FS112-N2
+  cost: one stage of N2
+  hunch: a trivalent vertex's circle (a3-base-reads-beyond)
+  falsifier: a derived step past the strip that is local to a chain of unit arcs
+  rank: 1
+
+**G51's count:**
+- **Retractions so far in FS-112:** A2 3, A3 0; N 1; NB 3; Y 3; YB 0. One is pending at W1 (ii).
+- **The disagreements that went to both sides:** card W (six items) and card X (four items).
+
+## Stage A3-2 — SAVED
