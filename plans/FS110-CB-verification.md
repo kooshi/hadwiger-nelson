@@ -222,3 +222,26 @@ recolour colours, Prop. 17's cone count for every distribution of the q's, the b
 consider (the proof covers w unrecoloured and w recoloured to the same colour a; w recoloured to a different colour is automatically fine).
 D4: a case of `(J, J_z, e1, e2)` I dropped — the constraint `J − J_z ≥ e1 + e2 − 1 ≥ 1` with `J, J_z ∈ {−1,0,1}` leaves exactly the four listed.
 Prop. 17: a vertex x_i whose q-sector meets the tangent line of Ω (excluded: the strip colour must reach x_i along Ω on both sides).
+
+## Stage 4 — SAVED (after stage 3's commit e7f97689: FS106-V § Continuation V2 stage 3 and V3 stage 4; FS106-derivation's FS106-SV2)
+
+| step | FS-106 (V2, V3, SV2) | FS110-CB (blind) | kind |
+|---|---|---|---|
+| **the d = 2 edge case** | open; "reduced" to orientation constraints with no local contradiction; closing it "would take … a re-choice of the nine circle points … so that no walk ends at an antipode … Not attempted" | **unreachable**: the circle-only reduction (D5 items 1–4) recolours, *on the circle's pseudo-colouring only*, every arc cut off by a walk that returns to ω, and proves (i)/(ii) survive; every surviving chosen point's walk then ends in the **open** disc, so every pair handed to Lemma 3 or Cor. 3 is at distance < 2. This is V3's "re-choice" route, carried out as a reduction | **truth**: Cor. 1 AE needs no exception (one mind, blind) |
+| a second distance-2 case | not named | the **disjoint** pair — the eleventh point on ∂R (closed disc) against a pⱼ on ω, antipodal — is equally at distance exactly 2 in any chain that lets pⱼ lie on ω, where Cor. 3 needs < 2 | **truth**: FS106-SV2's "one named edge case" is incomplete as stated; both close under D5 |
+| Prop. 19 as printed | GAP (diameter unargued; "coloring … will remain correct" unargued; < 9 points after fills); repair "fill first", walks may still return to unchosen points | GAP (the plane recolouring is proper only inside the disc and changes pseudo-colours where the strip lies outside ω); repair = circle-only reduction, then Lemma 5 / Prop. 17 / Prop. 18 rerun on the reduced colouring (so < 9 is handled by the k = 1, 2 argument) | agreement on GAP; **route** of repair differs |
+| Lemma 3, √3 ≤ d < 2 | printed proof fails there (FS106-V: "the relation graph is a 4-cycle"); repaired by a transplanted bicycle on perturbed γ-curves with Prop. 13 transversality, exact start arc of radius r₋ — "sketch: constants not computed" | printed proof fails exactly from √3 (`|q3−u1|² = 2 + 2cos(2θ0 − 60°)`, tangency at √3, `q3′p ∼ pq2′` beyond); repaired by the bicycle on the **exact** circles with the pseudo-colouring, tangency start kept, four endpoint cases closed exactly, and the **overshoot of z past z1 for d > √3** handled | agreement on truth (threshold √3, TRUE after repair); **route** differs (exact vs perturbed); the overshoot is invisible to a perturbed-curve proof that makes z1 a region point, and is the one place an exact proof needs more than Voronov |
+| d = 1 | reached by the transplanted bicycle | excluded directly: (P′), unit pairs never have one multicolour | route |
+| Prop. 17 | TRUE after two repairs; last step "a unit arc on a boundary"; Prop. 16 MISSTATED (needs the outer-A(u) hypothesis) | TRUE by a different route: (P′) at each xᵢ forces a vertex with qᵢ-sector ⊇ [−30°, 30°] outward, consecutive qᵢ differ, u's qᵢ-sectors lie in half-planes, total cone ≤ 180°; Prop. 16 not used | route |
+| Lemma 4 (a), cubic | TRUE for Cond. 7; GAP under Cond. 6 | TRUE for cubic after merging (no bichromatic vertex of degree ≥ 4 arises) | agreement |
+| the eleventh point | the {4,5,6}-component of u, after fills | the same (R inside every γ(u)), fills AE-valid | agreement, blind |
+| Observation 1 | avoided, region-only | never used (AE: boundaries uncoloured) | agreement |
+
+**Minds after this job.** SV-L3 (all 1 < d < 2): two, one blind, by different routes — mine exact, V2's a sketch. The d = 2 closure and the
+disjoint-pair observation: one mind (mine, blind) — **a second mind on D5 items 1–4 is the one check this result needs**, since it removes
+FS106-SV2's named exception.
+
+**Proposed edits (for the close; I edit none of these files).** `LEDGER`/`FS106-derivation.md` FS106-SV2 and FS106-AE-POLY: "except possibly at the
+d = 2 edge case" → cite FS110-CB D5 as closing it at one mind, pending a second; add the disjoint-pair case to the edge case's statement until
+then. `BIBLIOGRAPHY.md` `[Voronov2023]`: the bicycle is Thm 1.2 / §5 (the brief's "Lemma 6.1" is the pigeonhole). `[SokolovVoronov2025]` reading
+status: "p. 19's 'q2 ∈ A2' should read A1 (Fig. 5)" (FS110-CB).
