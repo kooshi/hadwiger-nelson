@@ -1,0 +1,14 @@
+    INFO z = sqrt3+sqrt5+sqrt7+sqrt11+n*i+1 with n = 21; v_p0(N z) = 1; H_L(w) = 14686380226777849875113223713389; H_L(w) = p0^k? 0
+S1 16 16
+S2 32 0 16
+S3 4 8 [[2,2]] [[2,2]]
+S4 4 [7,15,55,231]
+S5 421 32 [[1,1]]
+S6 1 1 1 1 32 2 2 2 1 1
+S7 1 1 1
+S8 12
+VERDICTS {'S1': True, 'S2': True, 'S3': True, 'S4': True, 'S5': True, 'S6': True, 'S7': True, 'S8': True}
+    INFO z = sqrt3+sqrt5+sqrt7+sqrt11+n*i+1 with n = 0; v_p0(N z) = 0; H_L(w) = 152587890625; H_L(w) = p0^k? 16
+PLANTED RUN S6: 1 1 0 0 2 2 2 2 0 1
+PLANT subfieldz: target S6 FIRED; other checks unaffected
+EXIT 0
