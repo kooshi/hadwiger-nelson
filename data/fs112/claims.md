@@ -149,8 +149,8 @@ failure in chain order is the milestone's first result either way. Statements ve
 | C-CHAIN-17 CUSP-BASE | "CB's route holds at cubic vertices with a cusp or double cusp at D2's strip (a)–(c), D5 item 5 and D1's (P′); along a cusp's normal `\|u ± n − x(m)\|² − 1 = 4R(R ∓ 1)m²/(1 + m²)`." | [hand and tools; two readings at D2, D5 item 5, D1; D4 one reading, CE; D5 items 1–4, 6 one mind after CE's repair] |
 | C-CHAIN-18 the headline | FS110-CLOSURE: "Under Condition 5 no locally finite map of the plane bounded by segments and circular arcs carries a full a.e.-proper six-colouring; the Condition-5 half of S–V Question 2 is answered yes, almost everywhere." | row 134's clause above |
 
-*(this list)* The stub's registered expectation (verbatim, `plans/STUB-unit-arc-half.md`): "the chain's W-MERGE and N4 steps survive unit arcs outside
-the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 5 with its population.
+*(this list)* The registered expectations about where the chain breaks are in `plans/FS112-unit-arc-half.md` §5.3, **fenced from both sides until each
+has committed its stage 1** (two blind walks are worth two samples only if they are not primed alike; FS112-A).
 
 ## 4. The winding apparatus and FS-110's other open items (off row 134's path)
 
@@ -209,8 +209,10 @@ the arcs' centres (0.6)". Re-registered in `plans/FS112-unit-arc-half.md` stage 
   `√(5/2 + 9/(2√5)) ≈ 2.12426`** — because a valid six-colouring of the strip (and of the disk) is a local positive no argument confined to it can refute.
   The route names that step. (A radius-3 argument meets C-BEYOND; it is not a claim about globality.)
 - **C-LOCAL** *(this list; FS112-A's rank-1 card)*: is there a NO of Q-full whose every step reads a disc of bounded radius `R`? TRUE (with `R`) / FALSE /
-  GAP. Row 134's only unbounded step was N4-PROP's bi-infinite stuck line. *(this list)* At bounded `K`, a NO gives some radius by compactness; the claim
-  asks for an explicit `R` from the route.
+  GAP. Row 134's only unbounded step was N4-PROP's bi-infinite stuck line. *(this list)* At bounded `K`, a NO gives some radius by compactness [hand, one mind:
+  FS112-A, over `plans/FS107-derivation.md` W-EQ-K's compactness step, verbatim: "a Hausdorff limit that is a full a.e.-proper six-colouring with `≤ K`
+  arcs per unit disc [hand, one mind: VW]", whose verdict reads "TRUE at W's class; under a per-tile count alone (VW's (Ct)) the compactness step is a
+  GAP that does not bear on `𝓜_K`"]; the claim asks for an explicit `R` from the route.
 - **C-ARC-END** *(this list; FS112-A)*: the end vertices of a unit arc of a tight map are realised in a fully coloured neighbourhood (an **arc-closed**
   fragment), or excluded, or a GAP. FS-110's fragments realise the seams with **open** ends (S1's arc tiles closed by segments to `(9/10)w` and `(11/10)w`,
   uncoloured beyond the arc's ends; T2 and BB flowers truncated at `1/4` and `1/10`, FS112-A's reading); for (S1) the ends are Y2-S1I's item 4, "the
