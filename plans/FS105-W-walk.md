@@ -34,6 +34,14 @@ MR's records are open to this job. Claims (c) and (d) of `data/fs105/claims.md`.
 - **FS105-W-MR16 (C-MR16)** — MR(`F_dG`) holds by row 120's proof, every step walked at `[F:ℚ] = 16`; no step fails; the degree enters
   constants only. [checking reading, one mind, not blind; given EL2021 Thm 1.2 by statement] §Stage 3.2.
 
+- **FS105-W-D1 (row 129's chain)** — MR(`ℚ(√635087)`) ⟹ `α₁(ℝ²) = m₁(ℝ²)` through `α₁(ℝ²) ≤ α₁(F₁²) ≤ α_inv(F₁²) ≤ α_loc(F₁) = m₁ ≤ α₁(ℝ²)`,
+  every direction named; the only MR-carrying link is FRAC; the killing test uses only B-AMEN's Følner half (two blind derivations), not its
+  one-mind reverse half, and not B-CHIF. [checking reading, one mind, not blind] §Stage 4.1.
+- **FS105-W-D2 (what a refutation needs)** — with the best proved bounds (`m₁ ≤ 0.24699…`, `[AmbrusEtAl2023]`; `α₁ < 1/4.0007`,
+  `[DuczVarga2026]`), a proof of `α₁(ℝ²) > m₁(ℝ²)` must be (W) a uniform bound `α(G) ≥ c|G|`, `c ∈ (0.24699…, 0.249956…)`, for every finite
+  unit-distance graph (equivalently `sup_G χ_f(G) < 4.04876`), or (W′) `χ_f,0(ℝ²) < χ_f(ℝ²)` (with B-CHIF) — MRVZ's open question answered
+  "strict"; neither implies the other. [derived from held papers, one mind] §Stage 4.2.
+
 ## Stage 1 — SAVED (quotation check; the setting at `F_dG`; C0)
 
 ### 1.1 Quotation check (standing rule 5)
@@ -263,3 +271,117 @@ unearned until G4. The plant outputs (`growth-plant-*.out`) predate G4 and targe
 ### Would have searched here (stage 3)
 
 - none: the admissibility checks are complete over the 31 non-trivial automorphisms; nothing enumerated beyond them.
+
+## Stage 4 — SAVED ((d) row 129's finite-graph test)
+
+*Read for this stage: `LEDGER.md` row 129; `plans/FS103-derivation.md` §2 (the FS103-F and FS103-B rows); `plans/FS103-F-fractional-shadow.md`
+§2.3 (FRAC, its step 1) and §§3.2–3.4; `plans/FS103-B-verification.md` §2.1 ("The equalities"), §3.2, Stage 4's divergences; `[MatolcsiEtAl2025]`
+§2 (the definitions, (12)–(14)) and Theorem 2's statement; `[AmbrusEtAl2023]` Theorem 1 and the end of its proof (p. 19), and the Remark of its
+§4 on measurable against non-measurable variants; `[DuczVarga2026]` abstract, §§1–2.2, Lemma 1 and the blow-up paragraph after it. All held
+(`~/source/library/pdf/`), read here in these sections by `pdftotext` in scratch. A checking reading, not a blind mind.*
+
+### 4.1 (d1) — the chain, every inequality's direction named
+
+The notation, from the sources: `α₁(X) = inf{α(G)/|G| : G ⊆ X finite unit-distance}` (MRVZ §2: "α1 (R2 ) = inf{α1 (G) : G ⊆ R2 , G is
+finite}"); `m₁(ℝ²)` the maximal upper density of a measurable 1-avoiding set (MRVZ §2, after `[AmbrusEtAl2023]`); `α_inv(F²)` the supremum of
+`P(0 ∈ I)` over `R ⋊ U`-invariant random independent sets of `Cay(R, U)`; `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` (row 129). `F₁ = ℚ(√635087)`.
+
+| link | inequality | direction and why | minds | uses MR? |
+|---|---|---|---|---|
+| L1 | `α₁(ℝ²) ≤ α₁(F₁²)` | an infimum over a larger family (every finite graph in `F₁²` is one in `ℝ²`) | trivial | no |
+| L2 | `α₁(F₁²) ≤ α_inv(F₁²)` | **Følner**: maximum independent sets `I_n` of Følner pieces `B_n ⊂ R`, uniformly translated, weak-* limit (`R`-invariant, independent, `P(0 ∈ I) ≥ α₁`), then rotations averaged over Følner sets of `U` (F) or a Markov–Kakutani fixed point (B); rotations fix `{0 ∈ I}` and normalise translations. A finite graph of `F₁²` lies in finitely many cosets of `R` (edges stay in cosets, `U ⊆ R`), so `α₁(F₁²) = α₁(Cay(R, U))` | **two**, blind to each other: F §2.3 step 1; B §2.1 ("`α_inv(F²) ≥ α₁(F²)`") — and this reading | no |
+| L3 | `α_inv(F₁²) ≤ α_loc(F₁)` | FRAC: an invariant set's spectral measure off `E` is `U`-invariant and `E`-null; MR makes it Haar; the per-class SI then puts the set inside one with spectrum on `T + A`, extended to `G_∅` and counted place by place. **Unconditionally:** density `> α_loc` gives an SP witness, which refutes MR (J45-SP-oi) | two blind (F; B) | **yes — the only use** |
+| L4 | `α_loc(F₁) = m₁(ℝ²)` | every stable place has `r_v ≤ 0.16330 < δ_Croft = 0.22936 ≤ m₁` (FS103-F-PL, exact to 2000 and Weil beyond); the real place contributes `m₁` (the density points of the extended set are everywhere 1-avoiding, B §3.2 (i)) | tools exact, two | no |
+| L5 | `m₁(ℝ²) ≤ α₁(ℝ²)` | a periodic 1-avoiding set of density `d → m₁` under a uniform translation meets a finite `G` in `d\|G\|` points on average — MRVZ (14): "0.22936... = δCroft ≤ m1 (R2 ) ≤ α1 (R2 ) ≤ 1/4"; `[DuczVarga2026]` Claim 1 | in print | no |
+
+So `α₁(ℝ²) ≤ α₁(F₁²) ≤ α_inv(F₁²) ≤ α_loc(F₁) = m₁(ℝ²) ≤ α₁(ℝ²)`: **every term equal, given MR(`F₁`)** — the directions are consistent,
+and each arrow is the one its reason gives. **The killing test, run backwards:** a proof of `α₁(ℝ²) > m₁(ℝ²)` gives, by L1 and L2,
+`α_inv(F₁²) ≥ α₁(F₁²) ≥ α₁(ℝ²) > m₁ = α_loc(F₁)` (L4), so an invariant random independent set of density above `α_loc(F₁)`, so (L3,
+unconditional form) an SP witness over `F₁`, so MR(`F₁`) is false. **Row 129's sentence is correct as stated.** (As with every killing
+test, what such a proof refutes is the conjunction MR(`F₁`) ∧ L2 ∧ L3's unconditional form ∧ L4; L2 and L4 carry no MR, and L3's
+unconditional form is J45's.)
+
+**B-AMEN — the link the advisor named softest — is not load-bearing here.** B-AMEN (FS103-B-AMEN) is the *equality* `α₁(F²) = α_inv(F²)`, and
+row 129 grades it "one mind". Its two halves are unequal:
+- **`α₁(F²) ≤ α_inv(F²)` (Følner) — used, as L2**, and it has **two** derivations (F's FRAC step 1 and B's §2.1), blind to each other.
+- **`α₁(F²) ≥ α_inv(F²)` (an invariant set meets a finite `G` in `δ|G|` points on average) — not used** by `α₁(ℝ²) = m₁(ℝ²)` or by the
+  killing test; it is used only for the field-level equality `α₁(F²) = α_loc(F)` (with the pullbacks `α_inv ≥ α_loc`), where the ℝ²
+  statement gets the same inequality from L5 instead. It is one mind (B) and one line: `E|I ∩ G| = Σ_{x∈G} P(x ∈ I) = δ|G|` with an
+  independent copy of `I` on each coset of `R`, so some realisation has `α(G) ≥ |I ∩ G| ≥ δ|G|`. Checked here (not blind): TRUE.
+- **B-CHIF** (`χ_f(ℝ²) ≤ 1/m₁`, one mind) is likewise not used by the killing test or by `α₁ = m₁`; it enters only row 129's
+  `χ_f(ℝ²) = 1/m₁`.
+
+**Verdict (d1): TRUE** — MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`, every link named with its direction; the only MR-carrying link is L3 (FRAC, two
+blind); the one-mind links of row 129 (B-AMEN's reverse half, B-CHIF) are off the chain the killing test uses. [checking reading, one mind,
+not blind]. **Correction owed (proposed for the close, not made):** row 129's grade line could say which half is used — "B-AMEN (its
+reverse half only) and B-CHIF one mind; the killing test and `α₁(ℝ²) = m₁(ℝ²)` use only the Følner half (two blind: F, B)".
+
+### 4.2 (d2) — the weakest statement about finite unit-distance graphs that proves `α₁(ℝ²) > m₁(ℝ²)`
+
+The best proved bounds, from the sources:
+- `m₁(ℝ²) ≤ 0.24699…`: `[AmbrusEtAl2023]` Theorem 1, "Any Lebesgue measurable, 1-avoiding planar set has upper density at most 0.2470",
+  with the computed value at the end of its proof (p. 19): "m1 (R2 ) ⩽ … = 0.24699 . . . < 0.2470".
+- `m₁(ℝ²) ≥ δ_Croft = 0.22936…` (MRVZ (14)); no better lower bound on `α₁(ℝ²)` is known than this one, through `m₁ ≤ α₁` (L5).
+- `α₁(ℝ²) < 1/4.0007 = 0.249956…`: `[DuczVarga2026]` Lemma 1, "χgf (G29 ) > 4.0007", and its next paragraph: "we can obtain finite
+  'blow-ups' of our graph G29 with independence ratio arbitrarily close to 1/χgf (G29 )".
+
+So `α₁(ℝ²) ∈ [0.22936…, 0.249956…)` and `m₁(ℝ²) ∈ [0.22936…, 0.24699…]` unconditionally. **The weakest statement that proves
+`α₁ > m₁` with these bounds:**
+
+> **(W) There is a constant `c > 0.24699…` such that every finite unit-distance graph `G` in the plane has `α(G) ≥ c·|G|`** —
+> equivalently (MRVZ Theorem 2, `χ_f,0(ℝ²) = 1/α₁(ℝ²)`), **every finite unit-distance graph has `χ_f(G) ≤ 1/c < 4.04876`**.
+
+`c` must lie in `(0.24699…, 0.249956…)`: the window is **0.00297 wide in ratio** (in `χ_f`: `sup_G χ_f(G)` would have to be proved below
+`4.04876`, while `[DuczVarga2026]` proves it above `4.0007`). A uniform lower bound on `α(G)/|G|` for **every** finite unit-distance graph is
+the whole content: nothing weaker (a family, a density statement about one graph) says anything about the infimum.
+
+**A form that needs no numerics:** (W′) **`χ_f,0(ℝ²) < χ_f(ℝ²)`** — the finitary fractional chromatic number strictly below the whole-plane
+one. With B-CHIF (`χ_f(ℝ²) ≤ 1/m₁`) and MRVZ Theorem 2, (W′) gives `1/α₁ < χ_f ≤ 1/m₁`, so `α₁ > m₁`. MRVZ §2 states exactly this as open:
+"It is clear that χf,0 (R2 ) ≤ χf (R2 ), but it is not known whether equality holds." So **MR(`F₁`) predicts the answer "equality" to a question
+in print, and a proof of "strict" refutes it** — through B-CHIF, the one one-mind link this form uses. **Neither of (W), (W′) implies the
+other** ((W′) gives `α₁ > m₁` without beating `0.24699…`; (W) gives `χ_f,0 < 4.0488` without comparing with `χ_f`, whose lower bound by
+`1/m₁` is not known for colourings by arbitrary sets); **each suffices**, and together they are the two shapes a refutation can take: beat a
+proved bound on `m₁`, or separate the finitary from the whole-plane number.
+
+### 4.3 (d3) — what in print or held comes near it
+
+- **Nothing in print or held proves (W) or (W′), or comes within a named margin.** The best proved lower bound on `α₁(ℝ²)` is
+  `δ_Croft = 0.22936…`, through `m₁ ≤ α₁` itself; (W) needs `0.24699…`: **0.0176 above the best proved lower bound**, and no technique for a
+  lower bound on `α(G)/|G|` over all finite unit-distance graphs other than averaging a measurable 1-avoiding set is known to me or appears in
+  the three papers read — and that technique gives `m₁`, never more. A refutation would need a new kind of argument: a non-measurable,
+  finitely supported fractional colouring of every finite graph beating every measurable one.
+- **The cheap form, the advisor's point: `α₁(ℝ²) ≥ 1/4` would have refuted MR, and it is false in print.** It is MRVZ's Conjecture 1 (verbatim:
+  "Conjecture 1. χf,0 (R2 ) = 4, and for all finite unit distance graphs G ⊆ R2 we have χf (G) < 4"; their (14) conjectures "α1 (R2 ) = 1/4"),
+  and `[AmbrusEtAl2023]` §4's Remark ("we venture to conjecture that χf (R2 ) = χgf (R2 ) = 4. This would imply that α1 (R2 ) = 1/4 and m1 (R2 )
+  ≤ 0.247 hold simultaneously, providing an interesting example of a natural infinite graph for which the measurable and the non-measurable
+  variants of a parameter have different values"). `[DuczVarga2026]` disproves it (Theorem 1). **So a reachable refutation of MR was on the
+  table in print in 2023–2025 and did not happen**: a met prediction, weak, because after June 2026 nobody expects `α₁ = 1/4`. The published
+  expectation `α₁ ≠ m₁` was heuristic — "Based on this numerical evidence" (Ambrus et al.; a numerical record `χgf = 3.9954` in the Moser
+  lattice) — and its stated basis is false in print.
+- **The prediction side, as a number.** MR(`F₁`) predicts `α₁(ℝ²) = m₁(ℝ²) ≤ 0.24699…`, i.e. finite unit-distance graphs (triangle-free ones
+  among them, over `F₁`, row 129) with `χ_f` up to `≥ 1/0.24699… = 4.04876 − o(1)`. The best proved is `[DuczVarga2026]`'s `χ_f > 4.0007`
+  (blow-ups of `G29`, triangle-full: its field holds `ζ₆`). **The prediction is unscored at a margin of at least 0.00297 in ratio
+  (`0.249956 − 0.246990`), 0.048 in `χ_f` (`4.0487 − 4.0007`)** — "at least", since `1/χgf(G29)` is not known exactly (Lemma 1's certificate
+  is "not claimed to be optimal") and `m₁` may be as low as `δ_Croft`.
+- **zbMATH API, one query set (WORKFLOW 3.2 item 8), 2026-09-26** (`data/fs105/fs105-w/zbmath/q1–q6.json`):
+
+  | query | hits | relevant |
+  |---|---|---|
+  | `ab:"independence ratio" & ab:"unit distance"` | 2 | MRVZ; DV — both held and read |
+  | `ab:"fractional chromatic number" & ab:"plane" & py:2022-2026` | 4 | MRVZ; DV; `[Ducz2026]` (held, read); Zbl 1535.05104, license-withheld in zbMATH, identified by Crossref from its DOI `10.1080/0025570X.2023.2176684` as V. Jungić, *Still Spinning: The Moser Spindle at Sixty*, Math. Mag. 2023 — title only, expository by its title, **not read** |
+  | `ab:"avoiding unit distance" \| ab:"avoiding distance 1" \| ab:"1-avoiding"` | 37 | `[KMOR2016]`, `[Bellitto2021]` (both in `BIBLIOGRAPHY.md`); the rest permutation patterns |
+  | `au:"Ducz" \| au:"Dúcz"` (the poser's complete listing) | 5 | the two held; *Improved bounds for the double cap conjecture* (Czifra, Dúcz, Matolcsi, Varga, Zsámboki, arXiv:2605.28709) and *On the maximal measure of a spherical set avoiding solutions to x + y + z = 0* (Dúcz, arXiv:2607.05083) — sphere problems by title, **titles only, not read**; *Domination and packing in graphs* (unrelated) |
+  | `ab:"unit distance graph" & ab:"independence number" & py:2020-2026` | 0 | — |
+  | `ab:"measurable" & ab:"independence ratio" & ab:"plane"` | 0 | — |
+
+  **Negative, and it measures these words (G21):** no citer or co-author work states a lower bound on `α₁(ℝ²)` above `m₁`, and none states
+  `α₁ = m₁`. The citation walk of `[DuczVarga2026]` (June 2026) is empty in zbMATH, as expected of a three-month-old preprint.
+
+**Verdicts (d2), (d3):** (d2) stated: (W), and (W′) through B-CHIF. (d3): **nothing near** — the refutation needs `0.0176` above the best proved
+lower bound on `α₁(ℝ²)` with no technique in sight; the cheap form is false in print; the prediction is unscored at `≥ 0.00297` in ratio.
+[reading of held papers + derivation of the window, one mind]
+
+### Would have searched here (stage 4)
+
+- (d3): would have searched for finite unit-distance graphs of small independence ratio (to score the prediction side); instead read the
+  best proved bound in `[DuczVarga2026]` and stated the margin. The ban holds.
