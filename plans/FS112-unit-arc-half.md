@@ -163,10 +163,231 @@ planes or finite witnesses; the milestone's object is a map of `ℝ²` read almo
 | G80 infinite rank | silent | (F) |
 | G81 the field is the plane | silent | it gives the answer's meaning given MR (a NO with FS-111 is `χ(ℝ²) = 7` given MR), not a tool for the work |
 | G82 stability; regular refutation | **bears** | its *Do*: "where the limit object is a map, look first for the printed regular theorem's own chain (FS-110: S–V's Cor. 1 and Woodall's step 3, made curved and almost everywhere)" — here, which steps of that chain survive unit arcs is the stub's first question; price a certificate at its feature's scale (at bounded `K`, `≥ 1/K`), never at `ε`'s. → proof side's stage 1 walks the chain step by step |
-| G51 (method, listed above) | — | — |
 
-**Count:** 20 bear or are falsifiable here (G13, G15, G17, G20, G21, G22, G24, G30, G46, G49, G50, G51, G60, G64, G67, G71, G72, G79, G82, and G81 only for
-the answer's meaning, marked silent); 62 silent, 57 of them by (F). The provisional bearings of the stub (G82, G79, G51, G21, G71, G13, G50) are all
+**Count:** 19 bear or are falsifiable here (G13, G15, G17, G20, G21, G22, G24, G30, G46, G49, G50, G51, G60, G64, G67, G71, G72, G79, G82); 63 silent
+(G81 among them, bearing only on the answer's meaning), most by (F). The provisional bearings of the stub (G82, G79, G51, G21, G71, G13, G50) are all
 confirmed; added: G15, G17, G20, G22, G24, G30, G46, G49, G60, G64, G67, G72.
 
 ## Stage 2a — SAVED
+
+## Stage 2b — SAVED: §G part 2 (rows 1–134; the method rules) and part 3 (the extraction)
+
+### §G part 2a — `LEDGER.md` rows (rows 131–134 in full; rows 1–130 by headline; (F) as in part 1)
+
+- r1 silent — circles of radii 1 and 1/√3 about one point, a graph; a map vertex's ring is another object
+- r2 silent — seam group (F)
+- r3 silent — coverage monotone in edges (F)
+- r4 bears — fan ⟺ coverage: the count at a centre (with G13), proof side stage 1
+- r5 silent — class geometry (F)
+- r6 silent — 120° identity (F)
+- r7 silent — greedy colouring
+- r8 silent — de Grey's balance
+- r9 silent — a two-circle compulsion (F)
+- r10 silent — one-pivot cap (F)
+- r11 silent — the strip automaton is a graph tube, not a geometric strip
+- r12 silent — tools (F)
+- r13 silent — negative knowledge (F)
+- r14 silent — pair gluing (F)
+- r15 silent (F)
+- r16 silent (F)
+- r17 silent — two circles meet in {point, mirror}: elementary geometry the bicycle uses, nothing more
+- r18 silent (F)
+- r19 silent (F)
+- r20 silent (F)
+- r21 silent (F)
+- r22 silent (F)
+- r23 silent (F)
+- r24 silent (F)
+- r25 silent (F)
+- r26 silent (F)
+- r27 silent (F)
+- r28 silent (F)
+- r29 silent (F)
+- r30 silent (F)
+- r31 silent — Act One in the kernel for graphs; its shape is G15's
+- r32 silent — hex-shell pigeonhole for graphs (F)
+- r33 bears — the hexagonal seven-colouring, a tight map (boundary-tight by force): the checkers' second positive control
+- r34 silent — cell family
+- r35 silent — cell family
+- r36 silent — cell family
+- r37 silent — cell family
+- r38 silent — cell cores
+- r39 silent — cell family
+- r40 silent — closed classes need seven (row 132 carries it)
+- r41 silent — limit lemma for graphs
+- r42 silent — arity floor (F)
+- r43 silent (F)
+- r44 silent — the spindle theorem (F)
+- r45 silent (F)
+- r46 silent (F)
+- r47 silent (F)
+- r48 silent (F)
+- r49 silent (F)
+- r50 silent (F)
+- r51 silent (F)
+- r52 silent (F)
+- r53 silent (F)
+- r54 silent (F)
+- r55 silent (F)
+- r56 silent (F)
+- r57 silent — Theorems A and B (F)
+- r58 silent (F)
+- r59 silent (F)
+- r60 silent (F)
+- r61 silent (F)
+- r62 silent (F)
+- r63 silent (F)
+- r64 silent (F)
+- r65 silent (F)
+- r66 silent — the fan gap (F)
+- r67 silent (F)
+- r68 silent (F)
+- r69 silent (F)
+- r70 silent (F)
+- r71 silent — fractional over a field (F)
+- r72 silent (F)
+- r73 silent (F)
+- r74 silent (F)
+- r75 silent (F)
+- r76 silent (F)
+- r77 silent — the theorem audit's method is G21's
+- r78 silent (F)
+- r79 silent — heights at three colours (F); G71 carries the index
+- r80 silent — lattice cells (G73)
+- r81 silent (F)
+- r82 silent (F)
+- r83 silent (F)
+- r84 silent (F)
+- r85 silent (F)
+- r86 silent (F)
+- r87 silent (F)
+- r88 silent (F)
+- r89 silent (F)
+- r90 silent (F)
+- r91 silent (F)
+- r92 silent (F)
+- r93 silent (F)
+- r94 silent (F)
+- r95 silent (F)
+- r96 silent (F)
+- r97 silent (F)
+- r98 silent (F)
+- r99 silent (F)
+- r100 silent (F)
+- r101 silent (F)
+- r102 silent (F)
+- r103 silent — chain theorem (F)
+- r104 silent (F)
+- r105 silent (F)
+- r106 silent — stripe lemma on the triangular lattice (F)
+- r107 silent — the bridge (F)
+- r108 silent (F)
+- r109 silent — the mixing selection (F)
+- r110 silent (F)
+- r111 silent (F)
+- r112 silent (F)
+- r113 silent (F)
+- r114 silent (F)
+- r115 silent (F)
+- r116 silent (F)
+- r117 silent (F)
+- r118 silent (F)
+- r119 silent (F)
+- r120 silent — MR (F)
+- r121 silent (F)
+- r122 silent (F)
+- r123 silent (F)
+- r124 silent (F)
+- r125 silent (F)
+- r126 silent (F)
+- r127 silent — kernel, conditional (F)
+- r128 bears for the answer's meaning only — a NO with FS-111's (B) gives χ_m⁰ = 7, hence χ(ℝ²) = 7 given MR (report language)
+- r129 bears — each class ≤ m₁(ℝ²) ≤ 0.2470, and one-class arguments stop below 4.37: the class-density check (G60) and the ban on per-class NO arguments (G24)
+- r130 bears — χ_CP = χ_m⁰ with no MR: a YES tight map is a χ_m⁰ six-colouring, so χ(ℝ²) ≤ 6 through link 2 (report language)
+- r131 bears — the stability equivalence; its no-gos (hole-counting at circles capped at O(ε); trichromatic-point arguments blind to partial colourings) bind any NO that is later made quantitative
+- r132 bears — the regular half: polygons, convex tilings, nice maps need seven; maps need six (Woodall, Townsend), the floor Q-full cannot go below; hole-filling fails exactly at bichromatic vertices of degree ≥ 4, and the index fails where a unit-arc interface faces a bowtie — the two places this milestone reopens
+- r133 bears — W-EQ-K turns a YES at bounded K into χ(ℝ²) ≤ 6 with no MR; W-TAN (close complementary pairs are tangent pairs or bowties, a GAP at cusps, closed by FS110-CUSP-K); W-POLY; R-SW's s³ swap price; HX-STALL
+- r134 bears — the Condition-5 chain whose survival is the stub's first question; its Not claimed clause is this milestone's object; its fragments (S1, T2, BB, MX, WC, A6-C2) are the construction side's starting kit
+
+**Rows count:** 8 bear (r4, r33, r129–r134; r128 for the answer's meaning only), 126 silent.
+
+### §G part 2b — the method rules (`CLAUDE.md` § The standard of evidence, § What compute helps, § Toolchain, § Building, § Searching, § The gate, § Make the gate fail; § Delegation)
+
+| rule | verdict | what it changes |
+|---|---|---|
+| no native evaluation in a headline | silent | no kernel claim is planned; the close's kernel decisions follow FS-110's ("the map argument in Lean", a stub) |
+| the artifact is the certificate plus the checker | **bears** | a YES or a fragment is committed as its formula plus an exact checker a reviewer reruns; never a search log |
+| the witness is independently re-derivable | **bears** | fragments are stated as constructions (centres, radii, the rule that fixed each), not coordinate lists alone |
+| read the final statement aloud | **bears** | Q-full against `[SokolovVoronov2025]` Question 2's words and `[Polymath2021]` p. 199's; both are quoted in the claim list |
+| report the hunt honestly | **bears** | a family that refuses is reported with its image (G21) |
+| write the certificate for the reviewer early | **bears** | per seam: "what must someone who trusts none of this check?" asked at the side's stage 1 |
+| order verification by marginal value | **bears** | the checkers run the discriminating exact checks (same-colour pairs whose range contains 1) before the slow float guards |
+| kernel leaves priced high; GPU is not SAT | silent | no kernel work; no solver |
+| the ban and "would have searched here" | **bears** | every brief carries the ban's in/out lists and the log |
+| symmetry break before SAT | silent | no SAT |
+| Python 3.14 `forkserver` | **bears** | any `tools/fs112_*` using multiprocessing passes the `fork` context or an initializer (none expected) |
+| two machines; physical cores | silent | exact checks of seconds |
+| `scripts/build.sh` only; `lake env lean` is not the gate | silent | no Lean is built |
+| RAM is the discriminator (`scripts/slot.py`) | **bears** | a check over ~2 GiB or ~2 min runs under the slot; none is expected |
+| checkpoint and resume (PROTECTED) | **bears** | agents' records save per stage and commit (standing rule 2); no single tool runs 15 minutes |
+| a blocking run is killable; kill by pid | silent | no long runs planned |
+| a pipe can kill the producer | **bears** | tools' exit statuses read directly in the briefs' check commands |
+| never edit a running script | silent | — |
+| generated modules; the kernel's cost model | silent | — |
+| `grep -E` is ugrep; `rg` hides `build/` | **bears** | counts of verdict lines in checker output by `grep -F` or Python, never an alternation under `grep -E` |
+| a failed `exact?` is not an absence | silent | — |
+| vacuity: a theorem over an empty domain | **bears** | every statement about a tight six-map is about a possible object; the claim list's header says so (FS-110's wording) |
+| every definition has an example | **bears** | each defined term in the claim list names an instance (the strip for the self-contact unit arc; T2 for the rhombus; A6-C2 for the doubly shadowed horn) or says none is held |
+| negative controls at every milestone | **bears** | each new tool plants a fault and watches it fire for its own reason (standing rule 7) |
+| a positive signal for what did not happen | **bears** | a checker prints the number of pairs it examined and the number it could not decide; "no refusal" with zero pairs examined is a failure |
+| a waiter's condition false at arming | silent | no waiters |
+| state the uninformative outcome and confirm it reachable; both outcomes reachable | **bears** | every registration in stage 5 names both outcomes and why each can occur |
+| pre-decide the response to your own gate failing | **bears** | the construction side writes, before its first fragment, what it does if the strip is refused (the checker is wrong, not the strip) |
+| replacing a broad instrument loses coverage | **bears** | new `tools/fs112_*` checkers state what the frozen FS-110 checkers see that they do not |
+| a number in a ruling carries its units and population | **bears** | `[Parts2021]`'s saving is two colours at `m = 6` in a multi-fold problem, one case in `m ≤ 2000`; it is not a saving at `m = 1` |
+| exactly one thing may differ between compared numbers | **bears** | the strip versus the plane differ in the region and in the closure rule at the strip's edges; neither is a six-colouring of the plane |
+| a red control is evidence only with its wrong-reason red named | **bears** | each plant's firing reason is stated before it runs |
+| a measured half and a derived half fail in opposite directions | **bears** | in an exact tile checker the pairs are derived (every tile pair's distance range, computed), so a missed pair makes an ACCEPT easy: **for a YES the ACCEPT is the suspect verdict** (FS-110's X17); a checker must count the tile pairs it examined against the pairs the map has |
+| a check reads the value the code ships | **bears** | tolerances and radii read from the tool's own definitions, not copies |
+| the failure path's formatting is part of the check | **bears** | verdict lines print exact values, not rounded ones |
+| bound a plant's effect on both sides | **bears** | plants assert the refused pair's distance range contains 1 and that the unplanted twin's does not |
+| replay policies over recorded decisions; cost on a failing run | silent | — |
+| a caveat stepped over | **bears** | every fragment's headline says "a local fragment, not a map" (FS-110's scope line) |
+| count the generator's free parameters against the problem's | **bears** | each formula family states its free parameters against the local configuration's degrees of freedom (arc centres, radii, contact points) |
+| a true explanation stops the search for a second | **bears** | a fragment refused for one reason is checked against every claim's hypotheses before it is used as a test case |
+| a mutation harness verifies its restore; mutate the constant | **bears** | plants restore and re-verify; one plant mutates a radius constant |
+| archiving a checker can break it (two versions by name) | **bears** | a new tool importing a frozen FS-110 checker asserts the imported module's path and digest |
+| enumerate the parameter first | **bears** | enumerate the kinds of unit-arc contact (by where the arc's centre lies) before screening fragments of any one kind |
+| a positive control proves only shapes its generator can represent | **bears** | the strip calibrates the self-contact kind only; an ACCEPT of the strip says nothing about the pair kind (§1.3) |
+| a one-sided filter's inapplicability | **bears** | a checker's "not applicable" (uncovered area, an arc it cannot parse) is never a pass |
+| scars, not foresight | **bears** | plants are routine, not argued |
+| delegation one level deep | **bears** | every brief says so, with the reason |
+
+### §G part 3 — the extraction: each *bears* as an instruction to a phase (carried into stage 5's phase table and the briefs)
+
+1. **The chain walk first (G82, r134, the stub).** The proof side's stage 1 takes the Condition-5 chain — NB-4, NB-5, W-MERGE (with N3-CONF, N3-DEG),
+   N4-SHADOW, N4-SHAVE, N4-STUCK, N4-FIN, N4-TERM, FS110-COR1-NOD2 with CB-LEMMA3 and CE5–CE6, FS110-CUSP-BASE — and gives each step one verdict with
+   unit arcs allowed: survives as written; survives off the arcs' centres with the exception named; fails, with the configuration. The first break is
+   the milestone's first result either way.
+2. **Count at the vertex, not the pair (G13, r4).** At a vertex that is a unit-arc centre, or lies on a unit arc, the proof side writes what its ring and
+   the rings of the arc's centres must cover before any pair statement (NB-4's exception is a coverage statement).
+3. **No per-class arguments (G24, G60, r129).** A NO never reads one class at a time; the checkers compute each class's density on a periodic candidate
+   and refuse above 0.2470.
+4. **Act One is kept (G15).** The claim list keeps C-ACT1; a side that proves seam kills states whether its route needs Act One or goes round it, as
+   the Condition-5 chain did.
+5. **Local fragments first, and expected (G17).** The construction side realises each unit-arc seam as a tight local fragment by formula; the
+   registration that every one is realisable is G17's test.
+6. **Curved with unit arcs, or nothing (G22).** No construction-side candidate without a boundary arc of radius 1 is built: row 134 refutes it.
+7. **Calibration before refusal (G20, G21, r33, the brief).** Every new exact checker ACCEPTs the strip (`[AxenovichEtAl2014]` Thm 4.2, rebuilt by
+   formula) and a tight seven-colouring fragment before any REJECT is believed, and names the contact kind each calibration covers (§1.3).
+8. **The index at the bowtie (G71, r132).** The proof side's winding stage tests "fails only at a swap" at a bowtie seam with unit arcs; a no-swap
+   defeat of the index is the killing test.
+9. **The flip (G79, G72).** §IQ asks what every tight map with a unit arc carries at the arc's centre; the proof side's first derivation after the
+   chain walk answers it or names why it cannot.
+10. **Classical tools named first, read at the opening (G46, G49, G50).** The side briefs list `[Woodall1973]` §3 (steps 2, 3, 5), S–V Props. 7–19 and
+    Cor. 1, `[Townsend2005]`, `[Thomassen1999]`, `[Coulson2004]` with their reading status, and the prior-art job, if any, reads what §PA leaves unread.
+11. **Staffing (G51).** A proof side against a construction side, a blind verifier per side, a competition advisor; retractions counted.
+12. **Registrations (G64, G21, the method rules).** Each states its population and both reachable outcomes; none reads "six skipped" as evidence.
+13. **Form (G67).** Every claim, killing test and brief instruction carries its trigger and its falsifier or what it forbids.
+
+## Stage 2b — SAVED
