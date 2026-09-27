@@ -7,7 +7,15 @@ scratchpad, `…/scratchpad/fs106-vb/`; nothing else in that scratchpad was open
 
 ## Theorems this phase proved
 
-*(filled at stage 5; one line per theorem, grade and address)*
+- Voronov's Lemma 2.2 without recolouring (nested fills) — [hand], one mind — §2a V-2.2.
+- The bicycle's arc identification from additivity of the path index — [hand], one mind — §2a V-1.2.
+- Circle-only matched-arc recolouring keeps `T₁(x)` proper (repairs Prop. 3.4's false disc claim) — [hand], one mind — §2a V-6.1 (iii).
+- C-CS-1 (read as "one use of the compactness lemma") and C-CS-2 — [hand], one mind — §2d.
+- S–V Prop. 12 by the colour-pair state machine; Lemma 1 replaces the band — [hand], one mind — §3a.
+- S–V Lemma 1 region-only (no boundary colours), given Condition 5 — [hand, sketch], one mind — §3b.
+- Hole-filling is valid at exact distance for map-type colourings — [hand, sketch], one mind — §3b SV-L4.
+- Townsend's lemma in the case `A° ⊇` a one-sided annulus at the unit circle (odd star polygons) — [hand], one mind — §3b TW-81.
+- I-D1, I-D2, I-D4 and D-NF's density statement — [hand], second mind (blind) — §4.
 
 ## Stage 1 — SAVED
 
@@ -207,3 +215,40 @@ Grade [hand], one mind. Exact distance throughout S–V (no band).*
 - Would have run a small geometric search for the Obs. 1 counter-configuration inside an actual proper map colouring; instead recorded the
   local configuration and graded Obs. 1 a GAP, not FALSE.
 - Would have numerically traced the three complementary curves of Lemma 3; instead graded the step a GAP with the parity core verified.
+
+## Stage 4 — SAVED (Phase H: second minds, blind)
+
+- **I-D1 — TRUE** [hand; this is the second mind]. Let `|x − y| = 1`, `e = y − x`, `y ∈ S̃_j`, `d̄_j(x) = θ > 0`. For `x′ ∈ B(x, r)` the circle
+  `S(x′, 1)` passes within `r` of `y`, so `σ{w : x′ + w ∈ B(y, 2r)} ≥ c·r`, and all such `w` lie in `W_r = {w : |w − e| ≤ 3r}`, `σ(W_r) ≤ C·r`.
+  By Fubini (translation in `x′` for fixed `w`), `∫_{B(x,r)} σ{w ∈ W_r : x′ + w ∈ B(y,2r) ∖ S_j} dx′ ≤ σ(W_r)·|B(y, 2r) ∖ S_j| = O(r)·o(r²)`.
+  Hence the monochromatic-edge measure `∫_{S_j ∩ B(x,r)} σ{w : x′ + w ∈ S_j} dx′ ≥ c·r·|S_j ∩ B(x, r)| − o(r³) ≥ c·(θ/2)π·r³ − o(r³) > 0`
+  along a sequence `r_n → 0` — contradicting properness at `Leb ⊗ σ`-a.e. edge. Uses: density 1 at `y` (only `|B(y,2r) ∖ S_j| = o(r²)`),
+  positive *upper* density at `x`, nothing else.
+- **I-D2 — TRUE.** `Σ_j |S_j ∩ B|/|B| = 1` (finitely many classes partition ℝ²), so some `d̄_j(x) ≥ 1/k`; if only one `j` had `d̄_j(x) > 0`, the
+  others' densities tend to 0 and `S_j` has density 1 at `x`, i.e. `x ∈ S̃_j`, not in `E`.
+- **I-D4 — TRUE.** `supp S_j` is closed; the supports cover ℝ² (every ball has positive measure, split among `k` classes), so `c` is defined
+  everywhere; `{c = j} = supp S_j ∖ ⋃_{i<j} supp S_i`. If `c(x) = c(y) = j` with `|x − y| = d ∈ (1 − ε, 1 + ε)`, then
+  `(S_j ∩ B(x,r)) × (S_j ∩ B(y,r))` has positive `Leb ⊗ Leb` measure and, for `2r < min(d − 1 + ε, 1 + ε − d)`, lies in the slack band — contradiction.
+- **D-NF's "the classes `S̃_j` avoid the distance 1 at every pair of their points" — TRUE**, a corollary of I-D1 (a point of `S̃_j` has
+  `d̄_j = 1 > 0`). Also checked: `S̃_j` is density-open (it differs from `S_j` by a null set, Lebesgue's density theorem), and the `S̃_j` are
+  pairwise disjoint.
+
+## Stage 5 — SAVED (write-up)
+
+**Summary of verdicts** (all [hand], one mind unless stated): V-1.1, V-1.2, V-1.3, V-6.1 **TRUE (repaired)**; V-2.1, V-P2.2 **TRUE**; V-2.2,
+V-4.1 **TRUE (repaired)**; SV-L1, SV-C3 **TRUE**; SV-C2 **TRUE (repaired)**; **SV-L3 GAP** (construction of the three complementary curves);
+**SV-L4 GAP** (the last step; repair sketched); **SV-1, SV-2 GAP** (inherit; SV-2 also Prop. 8; both also Obs. 1's WLOG); **TW-81: no proof
+printed** (one case of the lemma proved); C-CS-1 **TRUE** (with the reading of "equivalent"), C-CS-2 **TRUE**; I-D1, I-D2, I-D4, D-NF **TRUE**
+(second mind). Expectations scored: 14 of 16 TRUE-leaning registrations landed TRUE; SV-L3/SV-L4/SV-1/SV-2 landed GAP (registered 0.55–0.6).
+
+**Proposed edits (for the close; not made here):**
+- `CLAUDE.md` § The aim link 4: "polygonal colourings (`[SokolovVoronov2025]`)" and "maps need six (`[Townsend1981]` …)" — the S–V theorems
+  have printed GAPs (SV-L3, SV-L4, Obs. 1, Prop. 8) at one blind mind; `[Townsend1981]` prints no proof. `[Voronov2023]` Thms 1.1–1.3: TRUE
+  after local repairs, one blind mind.
+- `LEDGER.md` row 40 (C-ROW40, not assigned to me): V-1.1 TRUE discharges the Voronov half at [hand]; SV-2 GAP does not discharge the S–V half.
+- `BIBLIOGRAPHY.md`: `[Voronov2023]` "read in full, verified 2026-09-26 (FS106-VB)"; `[SokolovVoronov2025]` "read in full 2026-09-26
+  (FS106-VB): Lemma 3 and Lemma 4's last step unproved as printed"; `[Townsend1981]` "held: `library/papers/townsend-1981-…pdf`, read in full
+  (2 pp.); constant π/3; no proof printed" (the entry still says "not held").
+
+**Stage 6 (fenced records read, divergences) — NOT DONE**: budget reached at stage 5. Left for a successor: check I-D1/I-D2/I-D4 and I-CE
+quotations against `plans/FS103-M-derivation.md`, then read FS106-V's record and FS-106's other records and log divergences here.
