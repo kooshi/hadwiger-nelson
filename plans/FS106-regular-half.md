@@ -528,3 +528,12 @@ Per the counter-priors, these numbers are instruments, not caps: none shrinks a 
 - None in any stage: the gate was reading and database queries.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: the job briefs (drafts for the owner)
+
+`data/fs106/briefs/V106-verify-print.md` (FS106-V, wave 1, sighted), `VB106-blind-print.md` (FS106-VB, wave 1, blind, with Phase H),
+`TS106-structural.md` (FS106-TS, wave 2), `TQ106-quantitative.md` (FS106-TQ, wave 2), `B106-blind-second.md` (FS106-SB and FS106-QB, wave 3, blind).
+Each carries the no-children rule with its reason, the standing rules (rule 0 first), its record path, stages, budget and report path; the blind ones
+carry §5.2's fences by path.
+
+## Stage 6 — SAVED
