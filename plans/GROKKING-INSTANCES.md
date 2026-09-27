@@ -255,6 +255,18 @@ FS-107's slips (inventory items 2, 21; §R-close 1.0): the advisor brief's 'C-Q-
 
 FS-107's fence listings (items 17, 27): both competitors listed `data/fs107/reports/` at their first command and saw `FS107-P.md` by name, unopened; R also saw the directory names `fs107-a`, `fs107-p`. Disclosed at once; no content crossed. A listing of a fenced directory is a touch.
 
+*FS110-X, FS-110's close (FS110-C, `plans/FS110-tangency-seam.md` §R-close 4.5):*
+
+FS-110's run (FS110-C, §R-close 4.5): four rounds, two sides (N, N2, N3, N4 against Y, Y2, Y3, Y4), six blind verifiers (NB, YB, NB3, YB3, NB4, YB4) and three blind checks of the base (CB, CD, CC), advisors A, A2–A6 in succession (A2 replaced at the round-1 boundary above 450k, A3–A6 each at its line). No truth divergence between the sides in four rounds; every truth divergence came from a verifier (YB3-SAME, NB4 D2, YB's corner GAP, NB's N2-V4) or was in owner text (the round-2 frame fact; the polarity). Retractions: 8, all free (N 1, Y 2, N2 1, Y2 1, N3 1, Y3 1, N4 1, Y4 0; advisors 0). The routing effect twice: a side's message after its hand-back resumed the advisor as its child and took the advisor's hand-back (items 31, 37).
+
+*FS110-X at FS-110's close — the rule "quote statements verbatim in briefs" (FS110-C, `plans/FS110-tangency-seam.md` §R-close 4.5):*
+
+FS-110's owner slips (items 2, 23, 46, 63; §R-close 1.0): a paraphrase of V's C5 in quotation marks; the round-2 frame fact's inputs paraphrased wrongly; **two line-range cuts in quoted blocks** — NB's instance truncated N-X at part (d), `claims.md` §7.1 cut §6.2 mid-sentence — a new failure shape: a verbatim block that ends early reads as the whole statement; and the close brief's headline 'carries an a.e.-proper six-colouring' for A6-2.1's 'carries a six-colouring in which no two interior points …' (the sentence in full is `LEDGER.md` row 134's headline). Rule: quote by whole sentence and paragraph, and `diff` a quoted block against its source.
+
+*FS110-X, FS-110's close, under the fence rule (FS110-C, `plans/FS110-tangency-seam.md` §R-close 4.5):*
+
+FS-110's fence listings (items 18, 42, 46, 52, 55; Y4, NB4, YB4 fence logs): first-command `ls` of `data/fs110/reports/` and `briefs/` (N, Y, Y2, Y4), `git log -1` subjects (NB, A4, Y2, Y3), an `rg -l` returning a verifier's tool name (Y3), a grep over an advisor's copy of a fenced record (PA), and `ls` of the shared scratchpad root showing other jobs' file names (Y4, NB4). Names only, all disclosed; no content crossed.
+
 ## G54 — Tight or slack
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -314,6 +326,10 @@ Sixteenth, FS-106: the other kind — its headline (row 131) from a prior-art re
 
 Seventeenth, FS-107: through — the meeting point and R's reduction came through §IQ's candidate (b), the junction-type structure every tiling member carries, and W-TAN is candidate (b) read as a rule; W-EQ-K came from the generator-image rule and compactness, an extension of a known tool. Mixed, counted through because the milestone's product, FS-110's question, is candidate (b)'s object.
 
+*FS110-X, FS-110's close (FS110-C, `plans/FS110-tangency-seam.md` §R-close 3.3):*
+
+Eighteenth, FS-110 (§R-close 3.3): mixed, counted through — NB-4, the step that emptied the seam, answers §IQ's per-vertex question; the closure extends a known tool (Woodall's step 3, S–V's Cor. 1).
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -331,6 +347,10 @@ FS-106: TQ-EQ from an example invariant (the weak-* limit colouring every near-c
 *FS107-X, FS-107's close (FS107-C, `plans/FS107-stability.md` §R-close 3.3):*
 
 FS-107: SAT and W-EQ-K from example invariants (the open six-sighted hole set every saturated colouring carries; the tight map every bounded vanishing-holes family carries as its limit); CP, SW, OB′, W-POLY and HX-STALL counterexample invariants. The flip ran once and made the synthesis: W-TAN is C-T-TAN's no-go read as the rule every door-(A) solution carries, and it met R's CP at one object. No breakthrough of either kind.
+
+*FS110-X, FS-110's close (FS110-C, `plans/FS110-tangency-seam.md` §R-close 3.3):*
+
+FS-110: NB-4, NB-5, W-MERGE and the cone removal from example invariants (what every vertex, sector and stuck vertex carries); YB3-SAME, Y-BIKE-3C's corners and A6-C2's single horn counterexample invariants; one flip, N4's 'a stuck cone forces its antipodes stuck', made round 4.
 
 ## `CLAUDE.md` § Delegation — one level deep
 

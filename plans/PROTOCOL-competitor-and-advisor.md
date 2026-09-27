@@ -94,6 +94,10 @@ disagreement before anything is paid for, and count the retractions — zero mea
    **When a result rests on a computer-found input from the literature, audit the input as a fixed certificate before the ledger row**
    (FS-85's auditor walked Parts's nine trees from a by-eye transcription and proved his root case split by hand). The two blind
    verifiers found every divergence the milestone had — a published proof's gap, an overstated scope, a notation slip — none of truth.
+12. **No agent messages another after its own hand-back.** A message from a job that has handed back resumes its recipient as the sender's
+   child, and the recipient's next hand-back is delivered to that sender, not to the owner (FS-110 items 31, 37: N2's and Y2's messages resumed
+   A3, whose final report carrying the proof side's round-2 content reached Y2). An advisor sends its final report to 'main' by SendMessage
+   before its own hand-back; a side's last word to an advisor goes through the owner.
 
 ## 2. What the advisor actually did — the review (2026-09-22)
 
@@ -275,6 +279,19 @@ records `plans/FS89-S0A-gluing-verification.md`, `plans/FS89-S0B-band-set.md`, `
   No divergence of truth between the competitors; **all three came from the blind verifiers**, as at FS-106. Retractions R 2, W 1, A2 0 (one hunch
   killed), all free. **Lesson:** a construction against a proof locates the question more than it contests it; the verifier per side is where the
   contest happens — keep it, and brief the next round (FS-110) on the meeting point, not on either side's programme.
+
+**The tenth run: FS-110, the tangency seam (2026-09-27) — four rounds, a blind verifier per side, blind checks of the base.** Records: the plan
+`plans/FS110-tangency-seam.md` (§R-close), `plans/FS110-close-inventory.md`, `plans/FS110-derivation.md`; the proof side `plans/FS110-N-proof.md`,
+the construction side `plans/FS110-Y-construction.md`; the verifiers `plans/FS110-NB-verification.md`, `-NB3-`, `-NB4-`, `-YB-`, `-YB3-`, `-YB4-`;
+the base's checks `plans/FS110-CB-verification.md`, `-CD-`, `-CC-`, `-CE-`; the advisors' `plans/POROS-2026-09-27-fs110-tangency-seam.md`
+(planning) and `plans/POROS-2026-09-27-fs110-competition.md` (competition).
+- **The rounds' objects.** Round 1 the local calculus and the seams; round 2 Act One and (S1); round 3 W-3; round 4 W-4, the `d = 2` seam.
+- **The run** (FS110-C, §R-close 4.5): four rounds, two sides (N, N2, N3, N4 against Y, Y2, Y3, Y4), six blind verifiers (NB, YB, NB3, YB3,
+  NB4, YB4) and three blind checks of the base (CB, CD, CC), advisors A, A2–A6 in succession (A2 replaced at the round-1 boundary above 450k,
+  A3–A6 each at its line). No truth divergence between the sides in four rounds; every truth divergence came from a verifier (YB3-SAME, NB4 D2,
+  YB's corner GAP, NB's N2-V4) or was in owner text (the round-2 frame fact; the polarity). Retractions: 8, all free (N 1, Y 2, N2 1, Y2 1, N3 1,
+  Y3 1, N4 1, Y4 0; advisors 0). The routing effect twice: a side's message after its hand-back resumed the advisor as its child and took the
+  advisor's hand-back (items 31, 37) — §1 rule 12.
 
 **The next use** (G51's *Do*): FS-91's first question — a blind verifier given FS89-PA-B2's and PA-B3's statements (two minds reached the
 same widening from one lemma, so it is not yet evidence) — then FS-80's window-frequency certificate, or FS-76's rank-1 proof, routes two

@@ -72,3 +72,26 @@ grade clause as stated). CE's record `plans/FS110-CE-verification.md`, report `d
   named, one word fewer, content unchanged); row 132's clause now points: "(FS110-CB, FS110-CD; the closure's two routes in row 134)".
 - Gates at this stage: fact audit `--base 939f0928` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `check_architecture` exit 0 PASS; RK's
   mirror check exit 0 PASS; `bib_audit` exit 1 — the two FS-110 citations present at launch (stage 4).
+
+## Stage 4 — SAVED: `BIBLIOGRAPHY.md`, `plans/GROKKING-INSTANCES.md`, the protocol
+
+- **`BIBLIOGRAPHY.md`** (C's 4.3): (a) FS110-PA's four edits verbatim — `[SokolovVoronov2025]` (§9 and Conditions 5–6 re-read; the DM version;
+  citing works), `[AxenovichLiuSagdeev2025]` "Listing only" → "Opened (FS110-PA): …", `[Soifer2024]` ch. 25, `[Townsend2005]`; (b) merged with (a)'s
+  Soifer text (both say ch. 25 reprints Townsend's proof; (b) adds "and its gap (FS106-V3)"); (c) `[Woodall1973]` §3 re-read by FS110-NB3 and Y4;
+  (d) unheld: `[Coulson2004]`'s citing list "not run" added to row 139; Kruskal 2008 and Ágoston 2025 as rows of a new "FS-110's prior-art gate"
+  block (Ágoston's title unverified — FS110-P names no title and its raw records hold none); S–V's DM version and `[Townsend2005]` were already
+  recorded by (a) and row 139. **(e), inventory item 111 — both citations checked against their source records:** arXiv:1305.5229 is J. F. Alm,
+  J. Manske, *On Radial Colorings of Annuli* (v2, first posted 2013-05-22; the arXiv API record `data/fs110/fs110-p/alm.xml`), read status "abstract
+  read (FS110-P)", an unkeyed row; `[MartiniMontejanoOliveros2019]` is H. Martini, L. Montejano, D. Oliveros, *Bodies of constant width. An
+  introduction to convex geometry with applications*, Birkhäuser 2019, Zbl 1468.52001 (the zbMATH API record `data/fs110/fs110-p/spindle2.json`),
+  keyed (the plan cites the key), "Listing only". Neither is in `~/source/library/` or was in `BIBLIOGRAPHY.md`. Kruskal 2008 checked the same way
+  (Zbl 1139.05023, `boundaries.json`: Clyde P. Kruskal, JCSS 74(4) 598–627).
+- **`plans/GROKKING-INSTANCES.md`** (C's 4.5): §G51 — FS-110's run, the quote-verbatim instance, the fence instance, each under an
+  "*FS110-X, …*" line after FS-107's; §G72 — eighteenth; §G79 — FS-110. One change to C's text: the quote instance's last clause quoted A6-2.1's
+  full sentence, which row 134's headline also carries, and `--dupes` read 11; it now quotes the sentence's first words and points to row 134
+  (one home per fact).
+- **`plans/PROTOCOL-competitor-and-advisor.md`** (C's 4.6): §1 rule 12 ("No agent messages another after its own hand-back", verbatim); §3 "The
+  tenth run: FS-110" before "The next use", in the ninth run's format — records, the four rounds' objects, and 4.5's G51 text.
+- `CLOSED-QUESTIONS.md`: C drafted no row — nothing applied (left).
+- Gates after this stage: fact audit `--base 939f0928` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `bib_audit` exit 0 PASS (FAIL at launch);
+  `check_architecture` exit 0 PASS; RK's mirror check exit 0 PASS. `CLAUDE.md` 295,853 bytes.
