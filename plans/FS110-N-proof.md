@@ -713,11 +713,23 @@ calculus at the antipodes (contact types (in, out) where G-CONE has (out, out)) 
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
+| N4-SHADOW | the shadow at `v` (on the `+a` side, near `v`) of a tile at `N = v + n` lying beyond an arc tangent to `a` at `N` with centre `C` on the normal line is exactly the `N`-side of the circle through `v` centred at `C`; concentric curvature `f(λ) = λ/(1+λ)` going down, `f̃(υ) = υ/(1−υ)` going up | [hand, one mind; exact check C1–C2, `tools/fs110_n_shadow.py`] | stage N4-2, §2.1 |
+| N4-FLANK | a horn of `c` along `a` at `v` with flanks `g` (above), `h` (below) is shadowed by a flank colour only through out-type `g`-tiles at `S′` tangent to `a` (shadow below `σ_g`) and out-type `h`-tiles at `N` tangent to `a` (shadow above `σ_h`) | [hand, one mind] | §2.2 |
+| N4-SHAVE | the horn tip can be recoloured by its flanks (valid, Condition 5, `Φ(v)` down by one) unless `σ_h < σ_g` with both inside the horn (doubly shadowed); `g = h` never blocks | [hand, one mind] | §2.2 |
+| N4-RAY | two `c`-horns on one ray at `v` merge (the horns between them are `c`-clear near `v`) | [hand, one mind; N3 §2.3 (i) completed; the escape bound in the second-order model] | §2.3 |
+| N4-STUCK | at a vertex admitting no MERGE, MERGE-RAY or SHAVE, a colour `c` with two sectors has exactly two horns `±a`, the vertex has degree 4 (`g` above, `h` below), `P_cl(N) = {c, h, r}`, `P_cl(S′) = {c, g, r′}`, and `h` has two sectors at `N`, `g` two at `S′` | [hand, one mind] | §2.4 |
+| N4-PROP | in a terminal map a stuck vertex `P_0` forces stuck vertices `P_k = P_0 + kn` for all `k ∈ ℤ`, cone colours `a_k`, type `{a_{k−1}, a_k, a_{k+1}}` | [hand, one mind] | §2.5 |
+| N4-FIN | no bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`: upward at most `1/υ` steps when `υ > 0`, downward at most `1/\|λ\|` when `λ < 0` | [hand, one mind; exact check C3] | §2.6 |
+| N4-TERM | every valid map has a terminal valid modification (all vertices, whole plane; each point changed finitely often) | [hand, one mind] | §2.7 |
+| N4-CONE | **in a terminal valid map no colour has two sectors at any vertex: every vertex is cubic (sectors possibly cusp horns). G-CONE is closed.** | [hand, one mind, over NB-4 (two minds, one blind), W-MERGE (two, one blind), N3-DEG (one)] | §2.8 |
+| N4-RED | every tight six-map in `𝓜_K` under Condition 5 has a valid cubic modification on the whole plane; N3-RED's residue is G-d2 alone, and the base must hold for cubic maps whose sectors may be cusp horns | [hand, one mind, over FS106-V's repaired S–V Cor. 1] | §2.8 |
 
 ### N4: would-have-searched-here log
 
 | move I would have made by search | what I did instead |
 |---|---|
+| enumerate horn stacks at `v`, `N`, `S′` (curvatures, colours) to see which cones survive every local recolouring | derived the shadow rule (concentric circles), the stuck structure and the chain; checked the identities at named values (C1–C3) |
+| sample chains of curvatures along the normal line to find a long consistent one | proved N4-FIN by the reciprocal recursions `1/f̃(x) = 1/x − 1`, `1/f(x) = 1/x + 1` |
 
 ### N4: fence log
 
@@ -760,3 +772,174 @@ SV-L4 row (the `d = 2` residual, item (c)), SV-2 row, "A tool for SV-1's open st
 `plans/FS110-PA-prior-art.md` §S–V finding (l. 84–92). Woodall 1973 §3 not re-read this round (N3 quotes FS106-V3's reading of the cone).
 
 ## Stage N4-1 — SAVED
+
+## Stage N4-2 — SAVED: G-CONE closed — the shave, the stuck vertex, the chain along the normal line, a terminal map
+
+*Setting of this stage.* A **valid map**: a full a.e.-proper six-colouring by a locally finite map whose arcs are straight or circular with one-sided
+tangents, and the print's Condition 5 (no arc of radius exactly 1; N4-1). Every `𝓜_K` map is valid; every operation below keeps a map valid. WLOG every
+arc separates two different colours (an arc with one colour on both sides is deleted; the colouring is unchanged). NB-4 (`≤ 3` colours at every
+point; two minds, one blind; `[SokolovVoronov2025]` Lemma 2) holds for every valid map. **Tightness is never used.** At a vertex `v`: `s_c(v)` is the
+number of `c`-sectors, `Φ(v) = Σ_c (s_c(v) − 1)⁺`. Frame: `n` a unit vector, `a ⊥ n`, `P_k = v + kn` (`N = P_1`, `S′ = P_{−1}`); an arc tangent to
+`a` at `P_j` is a circle (or line) with centre `v + Cn` on the normal line, of **upward curvature** `1/(C − j)` at `P_j` (positive: bending toward
+`+n`). The **shadow** of a tile `T` is `Sh(T) = {z : ω(z) ∩ T ≠ ∅} = {z : dist(z, T) < 1 < sup_{p∈T} |z − p|}`; N-E0 says a tile never meets the
+shadow of a tile of its own colour.
+
+### 2.1 N4-SHADOW: the shadow of a tangent tile is a concentric circle [hand, one mind]
+
+*Let `T` be a tile with `N ∈ cl T`, `T ∩ B̄(v, 1) = ∅`, whose boundary near `N` on the `+a` side contains an arc `A` tangent to `a` at `N`, with
+`T` on the far side of `A` (away from `v`); let `v + Cn` be `A`'s centre (`C = ∞` if `A` is straight). Then for `z` in a small neighbourhood of `v` with
+`(z − v)·a > 0`, the part of `T` near `N` shadows `z` iff `z` lies strictly on the `N`-side of the circle `Σ(C)` through `v` centred at `v + Cn`.*
+
+*Proof.* Out-type forces `A`'s upward curvature at `N` above `−1` (the curvature of `ω(v)` there; `≠ −1` by Condition 5), so `C > 1` or `C < 0`
+(`C = 0` is an arc of radius 1: excluded). If `C > 1`, the far side of `A` is inside `A`'s circle (radius `C − 1`), `z` is outside it, and the distance
+from `z` to the far side is `|z − (v + Cn)| − (C − 1)`: it is `< 1` iff `|z − (v + Cn)| < C = |Σ(C)|`'s radius, i.e. `z` inside `Σ(C)`, which near `v` is the
+`N`-side. If `C < 0`, the far side is outside `A`'s circle (radius `1 − C`), `z` is inside, the distance is `(1 − C) − |z − (v + Cn)|`, `< 1` iff `z` is
+outside `Σ(C)` (radius `−C`): again the `N`-side. `C = ∞`: the distance is `1 − (z − v)·n`. In every case the nearest point lies on `A`'s circle on the ray
+from the centre through `z`, at positive `a`-coordinate (C1 checks this at named points), so on `A` itself, where `T` lies on the far side; and
+`sup |z − p| > 1` since `T` has points beyond `ω(v)`. ∎ The same holds reflected (`S′`, below) and shifted (`P_{j+1}` over `P_j`). **Curvature bookkeeping
+(C2):** an arc at `P_{k+1}` of upward curvature `λ` gives at `P_k` the concentric circle of curvature `f(λ) = λ/(1+λ)`; an arc at `P_{k−1}` of curvature
+`υ` gives at `P_k` curvature `f̃(υ) = υ/(1−υ)`; `f̃ = f⁻¹`; `1/f(x) = 1/x + 1`, `1/f̃(x) = 1/x − 1` (the centre stays put; the radius changes by 1).
+*A tile at `N` whose directions at `N` stay an angle `θ₀ > 0` away from `±a` shadows near `v` only points with `|z − S′| < 1`... reflected: only points
+inside `B(N, 1)`* — for `p − N = r e_φ` with such `φ`, `(p − N)·(z − N) < 0` for `z` near `v`, so `|z − p| > |z − N|`.
+
+### 2.2 N4-FLANK and N4-SHAVE [hand, one mind]
+
+*Setting.* `c` has a horn `H` along `+a` at `v`, between arcs of upward curvatures `κ_− < κ_+`, `−1 < κ_− < κ_+ < 1`; the tile directly above `H`
+has colour `g`, directly below `h`; `g, h ≠ c`.
+
+**N4-FLANK.** *For `k ∈ {g, h}`, the points of `H` near `v` in `Sh(C_k°)` are: for `g`, the points below `Σ(C)` for the out-type `g`-tiles at `S′`
+tangent to `a` on the `+a` side (their union: below the circle of largest curvature `σ_g`); for `h`, the points above `Σ(C)` for the out-type `h`-tiles
+at `N` tangent to `a` on the `+a` side (above the circle of least curvature `σ_h`); and `σ_g ≤ κ_+`, `σ_h ≥ κ_−`.*
+*Proof.* A `k`-tile whose shadow reaches points arbitrarily near `v` has `dist(v, T) ≤ 1 ≤ sup|v − p|`; equality on both sides fails (else `T` would
+cross `ω(v)`, against N-E1, `k ∈ P_cl(v)`), so `T` touches `ω(v)` at a contact `w` (N3-CONF: in- or out-type). `+a ∈ D_k(v)` (the flank sector has `+a`
+in its closure), so for `w ≠ N, S′` the direction `+a` is interior to `w`'s half-plane and N3-CLEAR clears a neighbourhood of `H`'s tip. At `N` and `S′`:
+in-type `g` at `N` or at `S′` would be Siamese with the flank sector (N-E2), which has points just above `κ_+ ∈ (−1, 1)`, outside both `B̄(N, 1)` and
+`B̄(S′, 1)`: impossible. Out-type `g` at `N` shadows an upward-closed set (N3-UP reflected) that must miss the flank sector, hence misses `H`. Out-type
+`g` at `S′`: by §2.1 its shadow near `v` is below a concentric circle if it is tangent to `+a` there, and inside `B(S′, 1)` (missing `H`, whose points
+satisfy `|z − S′| > 1`) otherwise; missing the flank sector gives `σ_g ≤ κ_+`. `h` is the mirror image. ∎
+
+**N4-SHAVE.** *If `g = h`, or `σ_g ≤ σ_h` (an absent shadow read as `σ_g = κ_−`, `σ_h = κ_+`), the tip `H ∩ B(v, ρ)` (small `ρ`) is recoloured: below
+the circle `Σ` of curvature `σ_h` by `h`, above it by `g` (all by `g` if `g = h`). The result is valid, `s_c(v)` drops by one, no sector is added at `v`,
+and the new points on `∂B(v, ρ)` are corners or a cubic vertex `{c, g, h}` of positive angles.* *Proof.* The lower part lies outside every `h`-shadow
+(N4-FLANK: those are above `σ_h`), the upper part outside every `g`-shadow (below `σ_g ≤ σ_h`); for `g = h`, `σ_g ≤ κ_−` and `σ_h ≥ κ_+` (the flank on the
+other side), so `H` is clear. New arcs: `Σ` (radius `|C_h| ≠ 1`, since `σ_h ∈ (−1, 1)`) and `∂B(v, ρ)` (radius `ρ < 1`); Condition 5 holds. ∎
+**Doubly shadowed:** `σ_h < σ_g` with `σ_h ∈ [κ_−, κ_+)`, `σ_g ∈ (κ_−, κ_+]`. Then every point of `H` between the two circles is in the shadows of `g`,
+of `h` and of every ring colour (ring tiles cross `ω(v)`, so a neighbourhood of `v` is in their shadows): no recolouring near `v` removes `c` there.
+
+### 2.3 N4-RAY: two `c`-horns on one ray merge [hand, one mind; N3 §2.3 (i) completed]
+
+*If `c` has two horns along `+a` at `v`, the region `M` between them (other colours' horns) is `c`-clear near `v`; recolouring `M ∩ B(v, r)` with `c`
+merges them.* *Proof.* Let `t ∈ M`, `|t − v| < r`, and `ω(p)` a unit circle through `t`. Follow `ω(p)` from `t`. It cannot stay in the stack of horns
+out to `∂B(v, ρ)` when `r ≪ ρ`: in the second-order model the stack is `κ_1x²/2 < y < κ_4x²/2` with `−1 < κ_1 < κ_4 < 1`, and a curve of curvature
+`±1` through a point at `x_t ≪ ρ` inside it leaves it before `x = ρ` (at `x = ρ` it is `≈ ±ρ²/2` off its tangent line, outside `[κ_1, κ_4]ρ²/2`
+unless its lowest or highest point lies at `x ≍ ρ`, where it is already below `κ_1x²/2` or above `κ_4x²/2`). It cannot leave `M` through `v` (a curve
+through `v` from inside the stack would be tangent to `a` with curvature `±1`, outside the stack near `v`). So it leaves `M` through a boundary arc of `M`
+at a point `q ≠ v`; there it crosses into the adjacent `c`-horn, because a circle and an arc of different curvature that are tangent at `q` do not
+cross there. So `ω(p)` meets a `c`-tile and `p` is not in one: `t` is clear. ∎ `Φ(v)` drops; new points are corners or cubic of distinct colours.
+
+### 2.4 N4-STUCK: the structure of a vertex no operation reduces [hand, one mind]
+
+*Let `v` be a vertex of a valid map at which none of MERGE (W-MERGE), MERGE-RAY, SHAVE applies, and let some colour `c` have `s_c(v) ≥ 2`. Then:*
+- *(i) `int D_c(v) = ∅` (no MERGE), so N3-DEG: out-type `c`-contacts at `N`, `S′`, all `c`-sectors horns along `±a` with curvatures in `(−1, 1)`;
+  one per ray (no MERGE-RAY); each doubly shadowed (no SHAVE), with flanks `g_±` above, `h_±` below, `g_± ≠ h_±`.*
+- *(ii) `g_+ = g_− =: g`, `h_+ = h_− =: h`, `P_cl(v) = {c, g, h}`, and `v` has degree 4: `H_+`, one `g`-sector filling the side `(z − v)·n > 0`, `H_−`,
+  one `h`-sector filling the other side.*
+- *(iii) `g`'s only contacts on `ω(v)` are out-type at `S′`; `h`'s only out-type at `N`; `c`'s out-type at `N` and `S′`.*
+- *(iv) `P_cl(N) = {c, h, r}` with `r` one colour outside `P_cl(v)`; every tile at `N` meeting `B̄(v, 1)` has colour `r`; and `h` has at least two sectors
+  at `N`, one tangent to `+a`, one to `−a`. Mirror: `P_cl(S′) = {c, g, r′}`, `g` has two sectors at `S′`.*
+
+*Proof.* (ii) Doubly shadowed gives an out-type `h_±`-tile at `N` and an out-type `g_±`-tile at `S′` (N4-FLANK), so by N3-CONF all `h_±`-sectors lie in
+`{d·n ≤ 0}` and all `g_±`-sectors in `{d·n ≥ 0}`. NB-4: `P_cl(v) = {c, g_+, h_+} = {c, g_−, h_−}`. If `g_− = h_+`, that colour has contacts of both kinds
+(out at `N`, out at `S′`), so its sectors are horns along `±a`; then `h_+ = g_−` has no sector of positive angle, `c` neither, and `g_+` would fill both
+open half-planes of directions, against `{d·n ≥ 0}`. So `g_− = g_+`, `h_− = h_+`. Every direction with `d·n > 0` lies in a sector of `g` (not `c`, not
+`h`); above `H_+` in the stack there is no `h` (it would be in `h`'s shadow, above `σ_h < κ_+`) and no second `c`; so all of it is `g`, one sector; the
+same below with `h`. (iii) `D_g(v)` contains the open half-plane `{d·n > 0}`, so each `g`-contact's half-plane is `{d·n ≥ 0}`: in-type at `N` (Siamese
+with the `g`-sector, which is not in `B̄(N, 1)`: impossible) or out-type at `S′`. `c`: `D_c(v)` is the line `±a`. (iv) A tile at `N` of colour `g`
+would be a `g`-contact at `N`: excluded by (iii). `h` and `c` at `N` are out-type only (iii). A tile at `N` meeting `B̄(v, 1)` is in-type or crosses `ω(v)`:
+its colour is outside `P_cl(v)` (N-E1). The two arcs of `ω(v)` leaving `N` lie in tiles at `N` (Condition 5: `Γ ∩ ω(v)` is finite), so some ring colour
+`r` is at `N`; with `c` and `h` (the tangent out-type `h`-tiles `Q_±` shadowing `H_±`), NB-4 gives `P_cl(N) = {c, h, r}`. Order the sectors at `N`
+counter-clockwise: the side `(z − N)·n < 0` and the slots of the `±a` stacks at or below `ω(v)` are `r`; `Q_+` sits in the `+a` stack, `Q_−` in the
+`−a` stack. Every `c`-sector at `N` lies in `{d·n ≥ 0}` (the horns `H_±` are an out-type `c`-contact of `N` at `v`), and one in the `+a` stack below
+`Q_+`'s lower arc would shadow `H_+` above `f(·) < σ_h < κ_+` (§2.1), against N-E0; likewise on `−a`. So going from `Q_+` to `Q_−` over the top one meets
+`c`, and going back under the bottom one meets `r`: `Q_+` and `Q_−` are different `h`-sectors. ∎
+
+### 2.5 N4-PROP: a stuck vertex forces a stuck chain along the normal line [hand, one mind]
+
+*Call a valid map **terminal** if no MERGE, MERGE-RAY or SHAVE applies at any vertex. In a terminal map, if `P_0 = v` is as in N4-STUCK (cone colour
+`a_0 = c`, `a_{−1} = g` above, `a_1 = h` below), then for every `k ∈ ℤ` the point `P_k` is a vertex as in N4-STUCK with cone colour `a_k`, the colour
+`a_{k−1}` filling its `+n` side, `a_{k+1}` its `−n` side, horns along `±a`.*
+*Proof (step `k = 0 → 1`; the rest is induction and the mirror).* By N4-STUCK (iv), `h` has two sectors at `N`; terminal gives no MERGE there, so
+`int D_h(N) = ∅` and N3-DEG applies at `N`. `v` is an out-type `h`-contact of `N` (the `h`-sector below `v` lies outside `B̄(N, 1)`), so the degenerate
+`D_h(N)`, a line inside `{d·n ≥ 0}`, is `±a`: the cone at `N` has the same axis. Terminal gives no MERGE-RAY and no SHAVE at `N`, so N4-STUCK holds at `N`
+with cone colour `h`; its `−n` side at `N` is the colour of the tiles at `N` meeting `B(v, 1)`, i.e. `r`, and its `+n` side is the remaining colour of
+`P_cl(N) = {c, h, r}`, i.e. `c`. So `a_1 = h` with `a_0 = c` above and `a_2 = r` below. ∎ (The types `{a_{k−1}, a_k, a_{k+1}}` have any four consecutive
+colours distinct, by N-E1 at `P_k` and the ring colour at `P_{k+1}`.)
+
+### 2.6 N4-FIN: the chain cannot be bi-infinite [hand, one mind; exact check C3]
+
+Let `λ_k < υ_k` be the upward curvatures at `P_k` of the lower and upper arcs of the `+a` horn of `a_k`; `−1 < λ_k < υ_k < 1` (N3-DEG). Two
+inequalities hold along the chain:
+- `λ_k ≤ f(λ_{k+1})`: the `a_{k+1}`-horn at `P_{k+1}` is out-type relative to `P_k` (its curvatures exceed `−1`, that of `ω(P_k)` there), so by §2.1 it
+  shadows at `P_k` everything above the circle of curvature `f(λ_{k+1})`; the `a_{k+1}`-sector on the `−n` side of `P_k` reaches up to the arc `λ_k`, and
+  N-E0 keeps it out of that shadow.
+- `f̃(υ_{k−1}) ≤ υ_k`: the mirror — the `a_{k−1}`-horn at `P_{k−1}` shadows at `P_k` everything below curvature `f̃(υ_{k−1})`; the `a_{k−1}`-sector on the
+  `+n` side of `P_k` reaches down to the arc `υ_k`.
+
+**N4-FIN.** *No sequence indexed by `ℤ` satisfies these.* If some `υ_m > 0`, then `υ_{m+1} ≥ f̃(υ_m) > 0` and `1/υ_{m+1} ≤ 1/υ_m − 1`; after more than
+`1/υ_m − 1` steps `υ > 1`: impossible. So every `υ_k ≤ 0`, hence every `λ_k < 0`, and then `λ_{k−1} ≤ f(λ_k) < 0` gives `1/λ_{k−1} ≥ 1/λ_k + 1`;
+after more than `−1/λ_m − 1` steps down `λ ≤ −1`: impossible. ∎ (Upward the chain has at most `⌈1/υ⌉` steps when `υ > 0`; downward at most `⌈1/|λ|⌉`
+when `λ < 0`; C3 runs the extremal recursions at named values.)
+
+### 2.7 N4-TERM: every valid map has a terminal modification [hand, one mind]
+
+Each operation at `v` (MERGE, MERGE-RAY, SHAVE) is supported in `B(v, ρ)`, with `ρ < 1` below a third of the distance from `v` to every other vertex
+of the current map (and below the operation's own clearance radius); it lowers `Φ(v)` by at least one, changes no sector at any other existing vertex,
+and creates only corners and cubic vertices with distinct colours (`Φ = 0`), which no operation ever touches (later supports shrink by a factor 3). So
+`v` is operated on at most `Φ_0(v)` times, whatever else happens. Enumerate the vertices of the original map `v_1, v_2, …`; at each stage apply an available
+operation at the least-index vertex that has one. Each point of the plane lies in the support of finitely many operations (local finiteness), so the
+colourings converge pointwise to a map `M*` that agrees on every bounded set with a finite stage — hence is valid, locally finite, circular or straight,
+Condition 5. `M*` is terminal: whether an operation is available at `v_i` depends on the map in `B(v_i, 3)` only (sectors at `v_i`, contacts on
+`ω(v_i)`, the tiles at `P_{±1}`); that ball is frozen after a finite stage `n_0`; if an operation were available at `v_i` in `M*`, it would be available at
+every stage after `n_0`; the vertices `v_1, …, v_{i−1}` are chosen only finitely often, so `v_i` would be chosen infinitely often — more than `Φ_0(v_i)`
+times. ∎
+
+### 2.8 The verdict on G-CONE, and what it does to N3-RED
+
+**N4-CONE.** *In a terminal valid map no colour has two sectors at any vertex; with NB-4, every vertex is cubic (three colours, one sector each; a sector
+may be a cusp horn) or a corner.* *Proof:* a vertex with a repeated colour is as in N4-STUCK; N4-PROP gives a chain over all of `ℤ`; N4-FIN forbids it. ∎
+
+**G-CONE: CLOSED (NO) [hand, one mind]**, in the form N3-RED needs: a hard Woodall-cone vertex may occur in a given map, but it is never an obstruction —
+N4-TERM removes every repeated colour on the whole plane. **N4-RED:** every tight six-map in `𝓜_K` under Condition 5 (indeed every valid map) has a valid
+modification `M*` that is cubic at every vertex and satisfies the print's Condition 5 and local finiteness (arcs may have radius below `1/K`; no step of S–V
+uses a radius bound). So `[SokolovVoronov2025]` Cor. 1 applies to `M*` in every disc of radius 3, and N3-RED's residue is **G-d2 alone** (reported possibly
+vacuous by FS110-CB, one mind). **Scope condition carried to the base, named:** `M*` may keep cusp horns at cubic vertices (a single horn whose flanks both
+shadow it); N3-RED's own hand-off had the same property. FS106-V's repaired Cor. 1 and CB's AE Cor. 1 must be read for cubic maps with cusp sectors
+(S–V's Prop. 9 side criterion counts boundary directions, which coincide at a cusp). *A partial remedy, sketch:* a single `c`-horn at a cubic vertex with
+`D_c(v)` a half-plane opens into a positive-angle sector by recolouring a thin wedge on the interior side (N3-CLEAR, N3-UP); only a single horn with
+out-type `c`-contacts at both `N` and `S′` cannot be opened this way.
+
+**Where six is spent:** NB-4 at `v` and at `N` (`P_cl = {c, g, h}`, `{c, h, r}`), and N-E1 (tiles at `N` meeting `B̄(v, 1)` carry ring colours).
+N4-SHADOW, N4-SHAVE's clearness and N4-FIN spend nothing (geometry of one circle family). *Seven-colour control:* the tight hexagonal seven-colouring is
+cubic with positive angles; no operation applies; N4 is silent, as required. *Townsend's ⅔π sector:* the shadow circle `Σ(C)` degenerates exactly at
+`C = 0`, an arc of radius 1 at `N` (C4) — the unit arc Condition 5 forbids, where Townsend's sector lives. **Killing tests of §4:** the strip, pinhole and
+Parts tests bind area arguments; N4 is not one. Killing test 3 (seven colours): above.
+
+**G-CONE and G-d2: one configuration? NO — one calculus, two configurations, two arguments [hand, one mind].** Both put a colour of a vertex at both
+antipodes of its unit circle, distance exactly 2 apart. The contact types at the antipodes classify them: **(out, out)** is G-CONE (`D_c(v)` a line, all
+`c`-sectors horns); **(in, out)** is G-d2's orientation (FS106-V's stretch: `R_i` in a closed half-plane, `Rʲ` toward `u`, `Rᵏ` away); **(in, in)** is
+impossible (every `c`-sector would lie in `B̄(N, 1) ∩ B̄(S′, 1) = {v}` near `v`, N3 §2.3). G-CONE is a singularity of the map and dies by surgery plus the
+chain; G-d2 sits at a non-degenerate cubic vertex (`D_i(u)` has interior), where nothing merges and nothing forces a repeat at the antipodes, so N4
+cannot touch it: it is a coincidence of S–V's count, and survives N4-TERM unchanged.
+
+**Registered (G21 instruments, scored at the close).**
+
+| id | prediction | probability |
+|---|---|---|
+| N4-P1 | a blind verifier finds N4-CONE TRUE, possibly with repairs at N4-RAY's escape bound or N4-TERM's limit | 0.75 |
+| N4-P2 | any hard cone fragment the construction side gives by formula admits a SHAVE at one of its horns, or has an antipode that is not a cone vertex | 0.9 |
+| N4-P3 | cusp horns at cubic vertices do not break FS106-V's / CB's Cor. 1 (the base extends to them) | 0.6 |
+
+**Scoring N3's G-CONE prediction early (for the close):** N3-P1 ("G-CONE closes: no tight six-map under Condition 5 has a hard Woodall-cone vertex",
+0.65) is met in the form N3-RED uses (hard cones are removable), not in the letter (N4 does not show hard cones absent from the original map).
+
+## Stage N4-2 — SAVED
