@@ -1,0 +1,30 @@
+PASS hex: a=2/5: 2a<1 True; 21a^2=84/25 > (1+2a)^2=81/25 True
+PASS circ: alpha=2/5: alpha mod 1 mid-third True; alpha*sqrt2 mid-third True; thirds lemma True
+PASS cosets: odd coset small element (577, -408); even coset (1154, -816); for {1,3} Lam = 2Z (must be 2Z) True
+PASS nonraj: atomic sigma^ at q=[12, 70, 408, 2378, 13860]: ['0.99147183', '0.99974826', '0.99999259', '0.99999978', '0.99999999'] (last > 0.9999: True); J0(2 pi 1000) = 0.00711748 (|.| < 0.01: True)
+ALL PASS
+script rc=0
+FAIL hex: a=3/8: 2a<1 True; 21a^2=189/64 > (1+2a)^2=49/16 False
+PASS circ: alpha=2/5: alpha mod 1 mid-third True; alpha*sqrt2 mid-third True; thirds lemma True
+PASS cosets: odd coset small element (577, -408); even coset (1154, -816); for {1,3} Lam = 2Z (must be 2Z) True
+PASS nonraj: atomic sigma^ at q=[12, 70, 408, 2378, 13860]: ['0.99147183', '0.99974826', '0.99999259', '0.99999978', '0.99999999'] (last > 0.9999: True); J0(2 pi 1000) = 0.00711748 (|.| < 0.01: True)
+plant hex: fired alone, as it must
+script rc (plant hex)=0
+PASS hex: a=2/5: 2a<1 True; 21a^2=84/25 > (1+2a)^2=81/25 True
+FAIL circ: alpha=1/2: alpha mod 1 mid-third True; alpha*sqrt2 mid-third False; thirds lemma True
+PASS cosets: odd coset small element (577, -408); even coset (1154, -816); for {1,3} Lam = 2Z (must be 2Z) True
+PASS nonraj: atomic sigma^ at q=[12, 70, 408, 2378, 13860]: ['0.99147183', '0.99974826', '0.99999259', '0.99999978', '0.99999999'] (last > 0.9999: True); J0(2 pi 1000) = 0.00711748 (|.| < 0.01: True)
+plant circ: fired alone, as it must
+script rc (plant circ)=0
+PASS hex: a=2/5: 2a<1 True; 21a^2=84/25 > (1+2a)^2=81/25 True
+PASS circ: alpha=2/5: alpha mod 1 mid-third True; alpha*sqrt2 mid-third True; thirds lemma True
+FAIL cosets: odd coset small element (577, -408); even coset (1154, -816); for {1,2} Lam = 1Z (must be 2Z) False
+PASS nonraj: atomic sigma^ at q=[12, 70, 408, 2378, 13860]: ['0.99147183', '0.99974826', '0.99999259', '0.99999978', '0.99999999'] (last > 0.9999: True); J0(2 pi 1000) = 0.00711748 (|.| < 0.01: True)
+plant cosets: fired alone, as it must
+script rc (plant cosets)=0
+PASS hex: a=2/5: 2a<1 True; 21a^2=84/25 > (1+2a)^2=81/25 True
+PASS circ: alpha=2/5: alpha mod 1 mid-third True; alpha*sqrt2 mid-third True; thirds lemma True
+PASS cosets: odd coset small element (577, -408); even coset (1154, -816); for {1,3} Lam = 2Z (must be 2Z) True
+FAIL nonraj: atomic sigma^ at q=[11, 71, 409, 2377, 13861]: ['0.031012274', '0.079250954', '0.072295613', '0.070652347', '0.070933047'] (last > 0.9999: False); J0(2 pi 1000) = 0.00711748 (|.| < 0.01: True)
+plant nonraj: fired alone, as it must
+script rc (plant nonraj)=0
