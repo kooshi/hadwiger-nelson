@@ -14,7 +14,7 @@ commit. Working directory `data/fs106/fs106-qb/`; tools `tools/fs106_qb_*.py`.*
 | QB-K | The unit-pair form `∫_B f(f ∗ σ)` is weak-* continuous on bounded sets of `L^∞` (the circle measure is Rajchman) | hand, one mind; standard | §2.3 |
 | QB-EQ | `χ_m⁰ ≤ 6 ⟺ χ_CP ≤ 6 ⟺ µ₆⁰ = 1 ⟺ lim µ₆(ε) = 1 ⟺` (e) periodic pixelated band-proper partial colourings with vanishing holes `⟺` (f) NC; no MR, no Voronov (row 130 for `χ_CP`); the same for every `k` | hand, one mind (+ row 130, two) | §2.4 |
 | QB-SUP | `µ₆⁰ = lim µ₆ = lim µ₆^tile = lim µ₆^per`, with `µ₆^per(ε) = µ₆(ε)` at each `ε`; `µ₆⁰` attained | hand, one mind | §2.6 |
-| QB-REM | C-Q-REM (i) with `η = 1/10`, `ε ≤ 1/2`; (ii) given a jointly measurable version (D-CP has none built in; one exists) | hand, one mind | §2.5 |
+| QB-REM | C-Q-REM (i) with `η = 1/10` for every `ε > 0` (for `ε > 1/2` vacuously, by FS106-TQ's argument; my stage-2 caveat "false for large `ε`" was wrong, §4.2); (ii) given a jointly measurable version (D-CP has none built in; one exists) | hand, one mind; with TQ two | §2.5, §4.2 |
 | QB-ATT | `µ₆(ε)` is attained by a stationary random family, and by almost every sample of it | hand, one mind | §2.7 |
 | QB-V11 | "`µ₆(ε) < 1` for every `ε > 0`" ⟺ V-1.1 (Euclidean, six colours) | hand, one mind | §2.7 |
 | QB-F / QB-EPS | Fill lemma; given `[Voronov2023]` Thm 1.3, every partial 6-colouring with `Leb ⊗ Leb`-null band pairs leaves lower density `≥ ε²/(6 + ε)² ≥ ε²/49` (`ε ≤ 1`) uncovered; unconditionally the statement implies V-1.1 at each `ε` | hand, one mind; conditional on V-1.3 (external) | §2.8 |
@@ -313,6 +313,54 @@ test: a proof of C-Q-STAB whose only use of the colouring is a finite or null se
 - correction owed — `BIBLIOGRAPHY.md` `[Parts2020c]` is held — §1.1
 - correction owed — the instance sheet's "`µ₆⁰` … in `claims.md`": it is not there — §1.1
 - prior-art debt — the compactness/Rajchman step in the `m₁` literature — §3.3
+
+## Stage 4 — SAVED: FS106-TQ's record read, divergences
+
+Read `plans/FS106-TQ-derivation.md` (stages 1–5, at `d174ab4b`) after my stage 3 was committed (`509df921`). Nothing else fenced was opened.
+
+### 4.1 Quotation check deferred from stage 1
+
+The sheet's four TQ statements match TQ's list of theorems word for word, **except that TQ-EPS2's quotation drops its grade bracket "[hand, one mind;
+C-CS-2]"** — the bracket that names its conditional input. The claim as quoted reads unconditional; as recorded it is conditional on C-CS-2 (V-1.3's band
+form). Standing rule 5's failure shape (a quotation that changes what a claim rests on), harmless here because the blind derivation found the
+dependency anyway (§2.8). `µ₆⁰` is defined in TQ's §3 exactly as in my §1.2.
+
+### 4.2 Divergences of truth
+
+| # | claim | TQ | QB (blind) | resolution |
+|---|---|---|---|---|
+| T1 | C-Q-REM (i) for large `ε` | TRUE for every `ε > 0`: for `ε > 1/2` no point is kept, since a disc of radius `≥ 1` holds unit pairs of measure `≥ |B|/3` and a class `(1 − η)`-full of it would carry `≥ (1/3 − 2η)|B|` of them | "false for large `ε` trivially (a kept point and kept points near it)" | **TQ is right; my caveat was wrong** — I assumed kept points exist at that scale without checking. The argument holds at my `η = 1/10` too (`1/3 − 1/5 > 0`). My verdict TRUE stands, now for every `ε > 0`. A slip of mine (G21's shape: a verdict's scope asserted without its quantifier checked) |
+| T2 | C-Q-LOCAL at `δ = δ₆` | **MISSTATED** ("at least" → "greater than"): "the construction needs `κ = 0`" | **GAP**, most likely TRUE | TQ's construction takes a translate of `U₃(0)` with hole fraction **at most the mean**; the claim needs only one translate, and the **minimum** over translates of `x ↦ |H ∩ U₃(x)|` is strictly below the mean unless that function is constant — then a small erosion keeps the hole fraction `≤ δ₆`. So MISSTATED is not established. The missing step: nonconstancy of `1_H ∗ 1_{U₃}` for Parts's void set `H` (it holds unless every dual-lattice frequency of `H` off the origin lies on a zero circle of `J₁(6π|k|)`). Unresolved; immaterial to the consequence, on which we agree. **Held for the owner** |
+
+No other divergence of truth. Every other verdict agrees: TQ-EQ, C-Q-EQ, TQ-SUP, TQ-HIT, C-Q-REM core and (ii), C-Q-COMP (i), (ii) (attainment
+unconditional, "`µ₆(ε) < 1`" conditional on a Voronov theorem), TQ-EPS2 (conditional on V-1.3's band form), C-Q-LOCAL for `δ > δ₆`, and the consequence
+in its sharpened form (TQ's L1 = my pixel lemma P).
+
+### 4.3 Divergences of route or constant (no truth at stake)
+
+| # | item | TQ | QB |
+|---|---|---|---|
+| R1 | C-Q-REM (i) constant | `η = 1/20`, threshold `1/(1 + 4π) = 0.0737` (chord bound `πε/2`) | `η = 1/10`, threshold `0.1100` for `ε ≤ 1/2` (chord bound `2 arcsin(ε/2) ≤ 1.0107ε`); exact check `tools/fs106_qb_rem_constants.py` |
+| R2 | TQ-EPS2 constant | `ε²/78`: tile (Lemma T), then HOLE-t inside `U₃(z)`; the uncovered disc counted only inside `U₃(z)` (cap factor `0.4645`) | `ε²/(6 + ε)² ≈ ε²/36`: the fill lemma F colours `U₃(z)` from positive-measure balls of the **whole-plane** family, so the hole ball lies inside `B(z, 3 + r)` whole and no cap is lost; no tiling needed. The ratio of the two constants is exactly `1/0.4645` |
+| R3 | TQ-HIT | strips at spacing `1/2`, density `4ε`; "effective" = contains a point `≥ ε/2` from the coloured set (HOLE-t) — a sharper notion than my "positive length" | spacing `2` suffices under **TQ's** notion too (a closed interval of length 2 contains an even integer, and that point of the circle lies on a centre line, `ε` from the complement): the cap is `ε`, not `4ε` |
+| R4 | (c) ⟹ (a) of TQ-EQ | weak (1,1) maximal inequality to centre; a random threshold `U` rounds the fuzzy limit | averaging at radius `δ^{−1/4}` to centre; a deterministic support selection `min{j : F_j > 0}` rounds it (no `U`) |
+| R5 | `µ₆(ε) ≤ µ₆⁰` | through tiles (Lemma T): a family with no band pair has no unit pair | Lemma B, continuity in the radius; it also proves D-SLACK's forms (a) and (b) equivalent — a statement TQ does not make |
+| R6 | NC ⟹ `µ₆⁰ = 1` | Lemma P on the square inscribed in `U_R` (short) | the compactness of (c) ⟹ (a) (longer; TQ's is better) |
+| R7 | `µ₆^per`, `µ₆^tile` | `µ₆^tile`: grid squares, no band pair at all; `µ₆^per`: the same, periodic; `µ₆^tile(ε) = µ₆^per(ε)` at each `ε` | `µ₆^per`: periodic, band-null; `µ₆^per(ε) = µ₆(ε)` at each `ε`. Same limits |
+| R8 | C-Q-REM (ii) | builds the jointly measurable modification by dyadic sampling and Borel–Cantelli; notes the uniform form fails (the zigzag colouring) | cites Doob's measurable-version theorem; did not state the uniform form's failure |
+
+### 4.4 Defects found in the TQ record
+
+- **Internal inconsistency:** §3.4 says "Stage 4 gives a third route … `µ₆(ε) ≤ 1 − (ε − o(1))²/144` (TQ-EPS2)", while §4.2 proves `ε²/78`. Both true
+  (`1/144 < 1/78`); the record should carry one constant. A correction owed.
+- §4.3's MISSTATED verdict at `δ = δ₆` rests on the average translate (T2 above).
+- §4.4's "density `4ε`" is not the cap; `ε` is (R3). The headline "`O(ε)`" is unaffected.
+
+### 4.5 Count of minds after this stage
+
+TQ-EQ, C-Q-EQ, TQ-SUP, C-Q-COMP (i) and attainment, C-Q-REM (i), (ii), TQ-HIT, the pixel/erosion lemma (P = L1): **two minds, this one blind**, [hand].
+TQ-EPS2 and "`µ₆(ε) < 1`": two minds, [hand], conditional on V-1.3's band form (graded by wave 1 at two minds, per TQ's record). C-Q-LOCAL for
+`δ > δ₆`: two minds, Parts's tiling [external]. The pointwise core: TQ's check was sighted, so this is its first blind derivation.
 
 ### "Would have searched here" log
 
