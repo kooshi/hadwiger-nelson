@@ -522,13 +522,20 @@ tile."
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
-| (filled stage by stage) | | | |
+| N3-CONF | at a point `v`, for a colour `c ∈ P_cl(v)`: every contact `w ∈ cl(C_c°) ∩ ω(v)` (finitely many, Condition 5) has all its `c`-tiles on one side of `ω(v)` (in-type or out-type), and every `c`-sector at `v` has its directions in `D_c(v) = ⋂_in {d·e_w ≥ 0} ∩ ⋂_out {d·e_w ≤ 0}` | [hand, one mind] | stage 2, §2.1 |
+| N3-CLEAR | for every compact set `Λ` of directions in `int D_c(v)` there is `ρ > 0` with `{v + rd : d ∈ Λ, 0 < r < ρ}` at distance `≠ 1` from every `c`-tile point | [hand, one mind] | §2.1 |
+| N3-UP | at a tangent contact (`e_w ⊥ a`), in-type at `v + n` and out-type at `v − n` are both upward closed near `v`: a point clear of them stays clear when moved in the `+n` direction (lens `\|p\|² ≤ 2p_y`, lune `p_y ≤ −1/2`) | [hand, one mind; exact check `tools/fs110_n_merge.py` C1–C2] | §2.1 |
+| W-MERGE | Woodall's step 3, almost everywhere, for curved arcs: if `int D_c(v) ≠ ∅`, any two non-adjacent `c`-sectors at `v` (positive angle or cusp horns) are joined by recolouring with `c` the sectors of the gap between them inside `D_c(v)`, within `B(v, ρ)`; the result is a full a.e.-proper colouring by a map with Condition 5, types only shrink, new vertices are cubic with distinct colours, and no other vertex's `D_c` changes | [hand, one mind] | §2.2 |
+| N3-DEG | `int D_c(v) = ∅` only in **Woodall's cone**: `c` has out-type contacts at both `v ± n` (`n ⊥ a`), and every `c`-sector at `v` is a cusp horn along `±a` with bounding curvatures in `(−1, 1)` (strict by Condition 5) | [hand, one mind] | §2.3 |
+| N3-P17 | under Condition 5 (and NB-4), no vertex with exactly three sectors has a purely rotating ring (six 60° arcs): the outward cone at a rotation point is bounded by an arc of `ω(σx)` lying in `Γ` | [hand, two derivations: `[SokolovVoronov2025]` Prop. 17 as repaired by FS106-V; this job through N2-ROT, N2-HEX and N-E2; exact geometry C5] | §2.4 |
+| N3-RED | a tight six-map in `𝓜_K` under Condition 5 has, in every disc of radius 3, a hard Woodall-cone vertex or (after W-MERGE) S–V's `d = 2` configuration — given FS106-V's repaired S–V Cor. 1 (cubic maps, Condition 5; one mind, a sketch at Lemma 3 for `√3 ≤ d < 2`) | [hand, one mind, over FS106-V's one mind] | §2.5 |
 
 ### N3: would-have-searched-here log
 
 | move I would have made by search | what I did instead |
 |---|---|
-| (none yet) | |
+| enumerate contact configurations (in/out types at points of `ω(v)`) to find which block a merge | derived the allowed cone `D_c(v)` and its degenerate case (N3-DEG) |
+| sample horn curvatures and circles numerically to see which gaps are shadowed | derived the upward-closedness (N3-UP) and the envelope (C4) exactly |
 
 ### N3: fence log
 
@@ -566,3 +573,120 @@ the S–V rows (SV-L3, SV-L4, Props. 14–19, Lemma 6, SV-1, SV-2), Townsend's (
 `d = 2` stretch. `plans/FS110-PA-prior-art.md` in full.
 
 ## Stage N3-1 — SAVED
+
+## Stage N3-2 — SAVED: the merge lemma, the cone, and the reduction of W-3 to two named steps
+
+*Frame at a point `v`: `a` a direction, `n ⊥ a`, `N = v + n`, `S′ = v − n`; local coordinates `x` along `a`, `y` along `n`. A cusp horn along
+`a` is `{κ₁x²/2 < y < κ₂x²/2, x > 0}` to second order, `κ₁ < κ₂` (N-TYPE). "Clear" (for colour `c`) means at distance `≠ 1` from every point of
+every `c`-tile. The map is a full a.e.-proper six-colouring in `𝓜_K` under Condition 5; tightness is never used in this stage.*
+
+### 2.1 Contacts, the allowed cone, clearance
+
+**N3-CONF.** `C_c° ∩ ω(v) = ∅` (N-E1), so `W_c(v) = cl(C_c°) ∩ ω(v) ⊆ Γ ∩ ω(v)`, finite by Condition 5. A `c`-tile `T′` at `w ∈ W_c(v)` misses
+`ω(v)` and is connected, so it lies in `B(v, 1)` (in-type) or outside `B̄(v, 1)` (out-type). *Both types at one `w` are impossible:* for a `c`-tile
+`X` at `v`, N-E2 gives `X ⊆ B̄(w, 1)` against the in-type tile and `X ∩ B(w, 1) = ∅` against the out-type tile, so `X ⊆ ω(w)`. So each contact has a
+type, and N-E2 puts every `c`-sector at `v` in `B̄(w, 1)` (in) or outside `B(w, 1)` (out): its directions satisfy `d·e_w ≥ 0` or `≤ 0`. ∎
+
+**N3-CLEAR.** `c`-tiles whose closures miss `ω(v)` have compact closures (diameter `≤ 1`) at distances from `v` bounded away from 1, so a
+neighbourhood of `v` is clear of them. For an in-type tile `T′` touching at `w`, `z = v + rd` with `d·e_w ≥ µ > 0`:
+`|z − p|² = |p − v|² − 2r d·(p − v) + r² < 1` for `p ∈ T′` near `w` once `r < µ/2`, and `|p − v| ≤ 1 − η` elsewhere on `cl T′`; out-type
+symmetric. Finitely many tiles meet a neighbourhood of `ω(v)`. ∎
+
+**N3-UP.** An in-type `c`-tile at `N` lies in the lens `B(v,1) ∩ B̄(N,1)`, where `|p|² ≤ 2p_y` (C1): its points with `p_y ≤ 1/4` are within
+`√(1/2) + r < 1` of any `z ∈ B(v, r)`, and for the rest `|z + te_y − p|² < |z − p|²` when `0 < t < 2(p_y − z_y)`. An out-type `c`-tile at `S′`
+lies in the lune `B̄(S′,1) ∖ B(v,1)`, where `p_y ≤ −1/2` (C2), so moving `z` in the `+y` direction increases every distance to it. So both are
+upward closed: a clear point stays clear when pushed toward `+n`. ∎ (These are exactly the two contact kinds that bound `D_c(v)` at `a` with its
+interior on the `+n` side.)
+
+### 2.2 W-MERGE (Woodall's step 3, almost everywhere, curved arcs)
+
+*Let `int D_c(v) ≠ ∅`, and `S₁, S₂` two `c`-sectors at `v` consecutive along the arc `D_c(v)` of directions (so not the same sector); let `G` be the
+union of the sectors strictly between them inside `D_c(v)`. Recolour `R = G ∩ B(v, ρ)` with `c`. For small `ρ` the result is a full a.e.-proper
+six-colouring by a map (new boundary arcs of radius `ρ < 1`, so Condition 5 and local finiteness hold); every old point's `P_cl` shrinks or is
+unchanged; the new points on `∂B(v, ρ)` are corners `{c, g}` or cubic vertices `{c, g_i, g_{i+1}}` of positive angles; `c` has one sector fewer at
+`v`; and for every other vertex `v′`, `D_c(v′)` is unchanged.*
+
+*Proof.* Directions of `G` lie in `D_c(v)` between those of `S₁` and `S₂`. Where an end of `cl G` is interior to `D_c(v)`, N3-CLEAR clears a
+neighbourhood of it. An end can lie on `∂D_c(v)` only if the adjacent `c`-sector is a cusp horn along the extreme direction `a`, and then the
+contacts bounding `D_c` at `a` are tangent ones at `N` or `S′` of the two kinds of N3-UP (interior of `D_c` on the `G` side): every point of `G`
+near `a` lies directly `+n`-above a point of that horn, which is a `c`-tile and so clear, hence clear by N3-UP; the other contacts are cleared
+there by N3-CLEAR, since `a` is interior to their half-planes. (A contact of the opposite kind at `a` would make `int D_c = ∅`.) So `R` is clear
+for `c`, and `R` has diameter `< 2ρ < 1`: the new colouring has no same-colour unit pair between tile points (N-E0), hence is a.e.-proper; other
+colours only lost points. For `v′`: the new colouring is a.e.-proper, so `R ∩ ω(v′) = ∅` when `c ∈ P_cl(v′)`, and `cl R ∩ ω(v′) ⊆ {v}`, already a
+contact of `c` at `v′` with the side the merged tile keeps (the `c`-tiles at `v` all lie on one side of `ω(v′)`, N3-CONF read at `v′`). ∎
+
+*Iteration.* In any bounded region, merge while some colour has two non-adjacent sectors at a vertex with `int D_c ≠ ∅`. Each step lowers
+`Σ_v Σ_c (#c-sectors at v − 1)` by one, creates no repeated colour at a new point, and changes no other `D_c`; it stops. Where it stops, every
+vertex either is cubic (each colour one sector; at most three colours, NB-4 / S–V Lemma 2) or holds a colour in Woodall's cone (§2.3).
+
+*Scope and a precision for A5's card 5.* `[SokolovVoronov2025]` Props. 7–8 (FS106-V: TRUE, two repairs, polygons) reduce a vertex's degree by filling
+the tip of a sector flanked by one colour. W-MERGE is that reduction for maps whose arcs are circular of radius `≠ 1` or straight, with a different
+proof (the allowed cone, not a triangle); it needs no tightness and holds whether or not the colouring is tight. It is also Townsend's simplification
+(c) filled, outside the cone, as FS106-V3 read Woodall's step 3 (l. 530–534): now with a proof in the a.e. map setting.
+
+### 2.3 N3-DEG: where merging can fail — Woodall's cone
+
+`D_c(v)` is an intersection of closed half-planes through `v`; `int D_c(v) = ∅` makes it a line or a ray (not `{v}`: `c ∈ P_cl(v)` has a sector).
+Then two contacts bound it from opposite sides at one line `±a`, i.e. at `N` and `S′`: (in at `N` or out at `S′`) and (out at `N` or in at `S′`).
+In and out at one point: impossible (N3-CONF). In at `N` and in at `S′`: every `c`-sector lies in `B̄(N,1) ∩ B̄(S′,1)`, whose only point near `v` is
+`v`: impossible. So **out at `N` and out at `S′`** — `c`-tiles outside `B(v, 1)` tangent to `ω(v)` at both `v ± n` — and every `c`-sector at `v` lies
+outside `B(N,1) ∪ B(S′,1)`, the double horn `|y| ≤ x²/2`: cusp horns along `±a` with `−1 ≤ κ₁ < κ₂ ≤ 1`, and **strictly** `−1 < κ₁`, `κ₂ < 1` by
+Condition 5 (an arc of curvature exactly `±1` tangent to `a` at `v` lies on `ω(N)` or `ω(S′)`). This is `[Woodall1973]` step 3's "cone" ("unless X
+and Y are completely contained within the “cone” outside two unit discs touching each other at P", as FS106-V3 quotes it), now derived as the only
+exception.
+
+*Inside the cone, partial [hand, one mind, a sketch]:* (i) two `c`-horns along the **same** ray `a`, with other colours' horns between them, merge:
+a unit circle through a point `t` of the middle horns either crosses the stack transversally or is tangent to `a` at curvature `±1`, outside the
+horns' `(−1, 1)`, and then passes above or below `v` and crosses a `c`-horn — so `t` is clear (the flank argument of S–V Prop. 7). (ii) A horn flanked
+on both sides by one colour `b` is shaved into `b` by the same argument. **What survives:** `c`-horns along both `+a` and `−a`, the two gaps between
+them half-planes (angle `π`, where Prop. 7's triangle does not exist), each shadowed near `v` by the out-type `c`-tile at `N` or `S′` (the circles
+`ω(p)`, `p ∈ T_±`, sweep the gap: `y = h + (x − X)²/2` for `p = N + (X, h)`). The `+a` horn's own circles force the tile at `N` above
+`y = 1 + κ₂X²/(2(1 − κ₂))` on `X > 0` (C4) — a constraint, not a contradiction.
+
+### 2.4 N3-P17: the purely rotating ring dies under Condition 5 — a correction to N2-HEX's closing remark
+
+N2-HEX (stage 4) proved that a purely rotating ring forces `u` regular (three sectors of 120°) and remarked "the pure rotating ring is locally
+consistent". **Under Condition 5 that remark is false** (it stands without Condition 5). *Proof, through this record's tools.* Let `x₁, x₂` be
+consecutive rotation points served by one sector of `u`, colour `g` (N2-HEX's count). By N2-ROT and NB-4, `P_cl(x₁) = {p, q, g}` and `g` fills the
+outward cone at `x₁`, bounded by the tangents of `ω(x₂)` and `ω(x₆)` at `±30°` (C5). The cone's `g`-tile is outer to `x₂`'s `g`-tile (N-E2: it has
+points outside `B̄(x₂, 1)`), and then **every** `g`-tile at `x₁` is (one Siamese and one outer would put `x₂`'s tile on `ω(x₁)`). So the sector across
+the `ω(x₂)`-tangent ray is not `g`, not `p` (its allowed directions are `[150°, 330°]`), not `r`: it is `q`, confined to `B̄(x₂, 1)`. The arc of `Γ`
+between them leaves `x₁` tangent to `ω(x₂)` with curvature `≠ 1`: bending into `B(x₂, 1)` it puts `g` points there; bending out (or straight) it puts
+`q` points outside `B̄(x₂, 1)`; a `q`-horn instead would need curvatures `> 1` and again bend the `g` side in. Contradiction in every case. ∎ This is
+`[SokolovVoronov2025]` Prop. 17 (FS106-V: "TRUE after two repairs"), re-derived; two derivations. It needs three sectors at `u` (N2-HEX's count);
+at a bowtie `u` it is open — but a bowtie with `int D_c ≠ ∅` is merged first (W-MERGE).
+
+### 2.5 N3-RED and the verdict on W-3
+
+**N3-RED.** Let a tight six-map in `𝓜_K` satisfy Condition 5, and let `U` be a disc of radius 3. Run W-MERGE at every vertex within distance 1 of
+`U`. If no vertex there is left in Woodall's cone, the result is a valid (full, a.e.-proper) six-colouring of `U` by a **cubic** map satisfying
+Condition 5 — exactly the hypothesis of `[SokolovVoronov2025]` Cor. 1 (`χ_{map+fa+cubic}`), which FS106-V found "stands repaired at the same grade
+with the same edge case" (one mind; the edge case: two same-multicolour points of Lemma 4 antipodal on `ω(u)`, `d = 2`; Lemma 3 at `√3 ≤ d < 2` a
+sketch; every step region-only, row 132). Its Lemma 4 is local to a disc of radius 3 ("all reasoning remains valid if we consider the interior of a
+circle of radius 3", p. 26). **So every disc of radius 3 of such a map contains a hard Woodall-cone vertex, or the merged map realises S–V's
+`d = 2` configuration there.** ∎ Neither windings, N2-TRANS nor N2-FLIP is used: they are consequences, and the reduction bypasses them.
+*Where six is spent:* S–V's count of multicolours (ten of `C(6,3)/2`, plus one) and Lemma 2; W-MERGE spends nothing. *Seven-colour control:* the
+tight hexagonal seven-colouring is cubic, satisfies Condition 5, and W-MERGE leaves it unchanged; S–V's count needs `C(7,3)/2`-type slack and does
+not fire, as required. *Townsend's ⅔π sector:* it lives on a unit arc, outside Condition 5.
+
+**Verdict on W-3 (does a winding map exist?): GAP, at two named steps; NO given both.**
+- **G-CONE:** a tight six-map under Condition 5 with a vertex `v` where a colour `c` has cusp horns along both `+a` and `−a`, `c`-tiles tangent to
+  `ω(v)` from outside at both `v ± n`, horn curvatures in `(−1, 1)`, and neither gap clear — not excluded. (Same-ray stacks and one-colour-flanked horns
+  are removable, §2.3.)
+- **G-d2:** S–V's own edge case for cubic maps (FS106-V, open since FS-106).
+- Grade of the NO given G-CONE and G-d2: [hand, one mind for W-MERGE and N3-DEG] over FS106-V's [hand, one mind] repair of S–V's cubic chain.
+- A NO would answer the Condition-5 half of S–V Question 2 almost everywhere at bounded `K` — partial, as the brief says.
+
+**What the construction side must do, read from this (a prediction, not a hint of route):** any winding map it builds has a hard Woodall cone in
+every disc of radius 3, or realises `d = 2` after merging.
+
+### 2.6 Registered (G21 instruments, scored at the close)
+
+| id | prediction | probability |
+|---|---|---|
+| N3-P1 | G-CONE closes: no tight six-map under Condition 5 has a hard Woodall-cone vertex | 0.65 |
+| N3-P2 | G-d2 closes for tight six-maps under Condition 5 | 0.6 |
+| N3-P3 | no winding map given by formula is produced this round | 0.95 |
+| N3-P4 | a blind verifier of W-MERGE finds it TRUE, possibly with a repair at the cusp-end clearance (N3-UP) | 0.75 |
+
+## Stage N3-2 — SAVED
