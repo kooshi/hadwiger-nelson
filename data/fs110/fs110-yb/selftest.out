@@ -1,0 +1,41 @@
+#### SELF-TEST
+== control VV: tiles=1 pairs=1 expected=1 count_ok=True rejects=1 contacts_at_1=0 -> REJECT
+       sq     sq c1 self     [0.000000, 1.131371] REJECT  (<1 by ['VV', 'self'], >1 by ['VV'])
+== control VS: tiles=2 pairs=3 expected=3 count_ok=True rejects=1 contacts_at_1=0 -> REJECT
+        A      A c1 self     [0.000000, 0.053852] 
+        A      B c1 straddle [0.900000, 1.246154] REJECT  (<1 by ['VS'], >1 by ['VS', 'VV'])
+        B      B c1 self     [0.000000, 0.941488] 
+== control VAfar: tiles=2 pairs=3 expected=3 count_ok=True rejects=1 contacts_at_1=0 -> REJECT
+        A      A c1 self     [0.000000, 0.111803] 
+        A      B c1 straddle [0.800000, 1.201388] REJECT  (<1 by ['VS', 'VV'], >1 by ['VAfar'])
+        B      B c1 self     [0.000000, 0.600000] 
+== control VAnear: tiles=2 pairs=3 expected=3 count_ok=True rejects=2 contacts_at_1=0 -> REJECT
+        A      A c1 self     [0.000000, 0.053852] 
+        A      B c1 straddle [0.980000, 1.900830] REJECT  (<1 by ['VAnear'], >1 by ['SA', 'VAnear', 'VS', 'VV'])
+        B      B c1 self     [0.000000, 3.300000] REJECT  (<1 by ['VAnear', 'VV', 'self'], >1 by ['VV'])
+== control AA: tiles=2 pairs=3 expected=3 count_ok=True rejects=3 contacts_at_1=0 -> REJECT
+        A      A c1 self     [0.000000, 1.200000] REJECT  (<1 by ['SA', 'VAnear', 'VV', 'self'], >1 by ['VV'])
+        A      B c1 straddle [0.900000, 1.712354] REJECT  (<1 by ['AA'], >1 by ['SA', 'VAnear', 'VV'])
+        B      B c1 self     [0.000000, 1.200000] REJECT  (<1 by ['SA', 'VAnear', 'VV', 'self'], >1 by ['VV'])
+== control SA: tiles=2 pairs=3 expected=3 count_ok=True rejects=1 contacts_at_1=0 -> REJECT
+        A      A c1 self     [0.000000, 0.981275] 
+        A      B c1 straddle [0.900000, 1.241910] REJECT  (<1 by ['SA'], >1 by ['VAnear', 'VS', 'VV'])
+        B      B c1 self     [0.000000, 0.346410] 
+control VV: designed pair REJECT, through its own candidate type: True -> ok
+control VS: designed pair REJECT, through its own candidate type: True -> ok
+control VAfar: designed pair REJECT, through its own candidate type: True -> ok
+control VAnear: designed pair REJECT, through its own candidate type: True -> ok
+control AA: designed pair REJECT, through its own candidate type: True -> ok
+control SA: designed pair REJECT, through its own candidate type: True -> ok
+hex7 R=1/2: ACCEPT pairs=196 contacts=49 (self diameters exactly 1) -> ok; class density 1/7 = 0.1429 <= 0.2470
+hex7 R=11/20: REJECT rejects=49 -> ok
+plant drop-VV: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant drop-VS: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant drop-VAfar: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant drop-VAnear: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant drop-AA: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant drop-SA: own control -> ACCEPT (fired: True); other controls unchanged: True
+plant arcs-as-full-circles on T2: REJECT (fired: True)
+plant lost-SELF-pairs: count_ok=False (assertion fired: True); hex7-11/20 rejects=0; control AA verdict=REJECT
+plant lost-CROSS-pairs: count_ok=False (assertion fired: True); hex7-11/20 rejects=49; control AA verdict=REJECT
+SELF-TEST PASS

@@ -83,3 +83,65 @@ record; that quotation is checked against the record at stage 4, after my verdic
 | Y2-LAT | TRUE for its candidate | 0.6 | the over-constraint may be a counting slip |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: my own exact checker, its controls and plants, and the four fragments rebuilt from their formulas
+
+### 2.1 The checker (`tools/fs110_yb_check.py`, written blind; digest `d672b5a6a3235987`)
+
+Tiles are closed regions bounded by segments and circular arcs with vertices in ℚ(√3), arithmetic exact (`Fraction` pairs `a + b√3`). For a pair
+of tiles the cross-distance range `[min, max]` has both ends on the boundaries, at a pair where each point is a piece end or satisfies the
+first-order condition on its piece. The complete candidate list: **VV** (end–end), **VS** (end–interior foot on a segment), **VA** (end–nearest and
+end–farthest point of an arc, the directions `±(p − C)`, kept only if on the arc), **SA** (segment interior–arc interior: `q = C ± r n̂`, `p` its
+foot), **AA** (arc interior–arc interior, both on the line of the centres, four sign choices). Segment–segment interior pairs are parallel and
+dominated by VS; concentric arc–arc interior pairs are dominated by VA (the overlap of the antipodal ranges ends at an arc end). Every candidate is a
+genuine pair of closure points, so `min` and `max` are the extremes over candidates, exactly. Values are squared distances in ℚ(√3) or
+`|√R² + k|` with `R², k ∈ ℚ(√3)`, compared with 1 exactly by squaring with sign guards. A pair REJECTs iff `min < 1 < max`; a contact is an end
+exactly 1. **Pairs are generated from the colour map** — every same-colour pair, each tile with itself — and the count is asserted equal to
+`Σ_c n_c(n_c + 1)/2`. For connected tiles "1 not interior" is exactly the Siamese-or-`≥ 1` rule for distinct tiles and diameter `≤ 1` for a tile
+with itself; the checker reports which (`siamese`, `far`, `self`).
+
+### 2.2 Controls and planted faults (`tools/fs110_yb_fragments.py selftest`; output `data/fs110/fs110-yb/selftest.out`) — SELF-TEST PASS
+
+| check | result |
+|---|---|
+| ACCEPT control: the tight hexagonal seven-colouring, circumradius `1/2`, a 7 × 7 patch | ACCEPT, 196 pairs = expected, 49 contacts (every self diameter exactly 1); class density `1/7 ≤ 0.2470` |
+| known-REJECT control: the same at circumradius `11/20` | REJECT, 49 rejecting self pairs (diameter `1.1`) |
+| six candidate-type controls (VV, VS, VAfar, VAnear, AA, SA), each a same-colour pair designed so that exactly one candidate type shows `1` interior | each REJECTs through its own type |
+| plants drop-VV, drop-VS, drop-VAfar, drop-VAnear, drop-AA, drop-SA | each flips its own control's pair to ACCEPT and changes no other control: fired for its own reason |
+| plant arcs-as-full-circles | T2 goes REJECT (the arc-range test is live) |
+| plant lost-self-pairs | the known-REJECT control's rejects fall to 0 (it would read ACCEPT) and **the count assertion fires** |
+| plant lost-cross-pairs | the count assertion fires |
+
+### 2.3 The fragments rebuilt from the instance block's formulas (`data/fs110/fs110-yb/fragments.out`)
+
+Readings where the formulas are silent (mine, stated so the side's can be compared at stage 4): straight sectors "truncated at `1/4`" read as disc
+sectors (arc of radius `1/4`), and checked again closed by chords; T2's and MX's arc-bounded tiles at `u` closed by segments from the arc ends
+(half-angle `α = 2 arctan(1/8)`, `cos α = 63/65`, `sin α = 16/65`) to apexes at distance `1/4` from `u` in the directions 60°, 180°, 270° (T2) or
+along the straight rays 60°, 240° (MX), and checked again with apexes at `1/5`; S1's `w`-tiles closed by the two segments to `(9/10)w`, `(11/10)w` as
+written; `v = R(u)` and `w′ = R(w)` built by the half-turn `z ↦ (1, 0) − z` with `(1 4)(2 5)(3 6)`; MX's `w′` quadrants as listed.
+
+| fragment | tiles | pairs (expected) | verdict | contacts at exactly 1 | variant |
+|---|---|---|---|---|---|
+| S1 | 11 | 18 (18) | **ACCEPT** | 4 | same with chord-closed sectors |
+| T2 | 14 | 24 (24) | **ACCEPT** | 8 | same with apexes at `1/5` |
+| BB | 16 | 30 (30) | **ACCEPT** | 8 | same with chord-closed sectors |
+| MX | 15 | 27 (27) | **ACCEPT** | 8 | same with apexes at `1/5` |
+
+Every contact is between a tile at `u` (or `v`) and a tile at `w` (or `w′`), at the vertex pair itself (`|u − w| = 1`); every other same-colour
+pair has 1 outside its range with margin. **The side's four fragment plants, rebuilt from their one-line descriptions, each REJECT at the pairs the
+side names:** T2 flip → `(u_1, wQ3)`, `(u_3, wQ1)`; T2 flat → `(u_1, wQ1)` with range `[0.9923, 1.3716]` (the side: `≈[0.992, 1.372]`); T2 six →
+`(v_3, wQ2)`; BB rot → `(u_2, wQ3)`, `(u_3, wQ1)`.
+
+**Map sanity** (`tools/fs110_yb_mapsanity.py`, float, not a verdict; output `data/fs110/fs110-yb/mapsanity.out`): no two tiles of any fragment
+overlap on a 260 × 260 sample, and circles of radius `0.01` about `u, v, w, w′` are covered, with colours `u: {1,2,3}`, `v: {4,5,6}`, and at `w, w′`:
+S1 `{2,3}`, `{2,3}` (two-colour edge points); T2 `{1,3,4,5}`, `{1,2,4,6}`; BB `{2,3,5,6}` both; MX `{2,3,4,5}`, `{2,3,4,6}` — as the formulas say.
+Its plants (a duplicated tile; a removed sector) fire.
+
+### 2.4 G21 audit of the ACCEPTs
+
+An ACCEPT here is the flattering verdict, and a derived-distance checker fails toward it (a lost pair, a lost candidate type, an arc read too
+short). Each of those failure modes has a plant that fired (§2.2). The fragments' verdicts are robust to the two closings I tried, and the contacts
+are exactly where the local calculus puts them (TS-U's facing/away wedges, T2's inner arc colour against the inner quadrant). **What the ACCEPTs do
+not show:** that any fragment extends to a map of the plane; they are local certificates at `u, v, w, w′` only, their truncation corners being
+artefacts, as the side's scope ("fragment level", "locally") says.
+## Stage 2 — SAVED

@@ -1,0 +1,225 @@
+#### FRAGMENTS
+== S1 (disc sectors): tiles=11 pairs=18 expected=18 count_ok=True rejects=0 contacts_at_1=4 -> ACCEPT
+     u_a1   u_a1 c1 self     [0.000000, 0.433013] 
+     u_a1   u_a2 c1 siamese  [0.000000, 0.500000] 
+     u_a2   u_a2 c1 self     [0.000000, 0.433013] 
+      u_b    u_b c2 self     [0.000000, 0.250000] 
+      u_b   w_in c2 siamese  [0.650000, 1.000000] contact
+      u_b wp_out c2 far      [1.000000, 1.350000] contact
+     w_in   w_in c2 self     [0.000000, 0.492308] 
+     w_in wp_out c2 far      [1.432603, 1.935236] 
+   wp_out wp_out c2 self     [0.000000, 0.492308] 
+      u_c    u_c c3 self     [0.000000, 0.250000] 
+      u_c  w_out c3 far      [1.000000, 1.350000] contact
+      u_c  wp_in c3 siamese  [0.650000, 1.000000] contact
+    w_out  w_out c3 self     [0.000000, 0.492308] 
+    w_out  wp_in c3 far      [1.432603, 1.935236] 
+    wp_in  wp_in c3 self     [0.000000, 0.492308] 
+      v_4    v_4 c4 self     [0.000000, 0.433013] 
+      v_5    v_5 c5 self     [0.000000, 0.433013] 
+      v_6    v_6 c6 self     [0.000000, 0.433013] 
+== S1 (chord-closed sectors): tiles=11 pairs=18 expected=18 count_ok=True rejects=0 contacts_at_1=4 -> ACCEPT
+     u_a1   u_a1 c1 self     [0.000000, 0.433013] 
+     u_a1   u_a2 c1 siamese  [0.000000, 0.500000] 
+     u_a2   u_a2 c1 self     [0.000000, 0.433013] 
+      u_b    u_b c2 self     [0.000000, 0.250000] 
+      u_b   w_in c2 siamese  [0.650000, 1.000000] contact
+      u_b wp_out c2 far      [1.000000, 1.350000] contact
+     w_in   w_in c2 self     [0.000000, 0.492308] 
+     w_in wp_out c2 far      [1.432603, 1.935236] 
+   wp_out wp_out c2 self     [0.000000, 0.492308] 
+      u_c    u_c c3 self     [0.000000, 0.250000] 
+      u_c  w_out c3 far      [1.000000, 1.350000] contact
+      u_c  wp_in c3 siamese  [0.650000, 1.000000] contact
+    w_out  w_out c3 self     [0.000000, 0.492308] 
+    w_out  wp_in c3 far      [1.432603, 1.935236] 
+    wp_in  wp_in c3 self     [0.000000, 0.492308] 
+      v_4    v_4 c4 self     [0.000000, 0.433013] 
+      v_5    v_5 c5 self     [0.000000, 0.433013] 
+      v_6    v_6 c6 self     [0.000000, 0.433013] 
+== T2 (apex 1/4): tiles=14 pairs=24 expected=24 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+      u_1    u_1 c1 self     [0.000000, 0.299448] 
+      u_1    wQ1 c1 far      [1.000000, 1.371629] contact
+      u_1   wpQ2 c1 far      [1.000000, 1.371629] contact
+      wQ1    wQ1 c1 self     [0.000000, 0.141421] 
+      wQ1   wpQ2 c1 far      [1.732051, 1.934637] 
+     wpQ2   wpQ2 c1 self     [0.000000, 0.141421] 
+      u_2    u_2 c2 self     [0.000000, 0.429669] 
+      u_2   wpQ4 c2 siamese  [0.651403, 1.000000] contact
+     wpQ4   wpQ4 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.492308] 
+      u_3    wQ3 c3 siamese  [0.614489, 1.000000] contact
+      wQ3    wQ3 c3 self     [0.000000, 0.141421] 
+      v_1    v_1 c4 self     [0.000000, 0.299448] 
+      v_1    wQ2 c4 far      [1.000000, 1.371629] contact
+      v_1   wpQ1 c4 far      [1.000000, 1.371629] contact
+      wQ2    wQ2 c4 self     [0.000000, 0.141421] 
+      wQ2   wpQ1 c4 far      [1.732051, 1.934637] 
+     wpQ1   wpQ1 c4 self     [0.000000, 0.141421] 
+      v_2    v_2 c5 self     [0.000000, 0.429669] 
+      v_2    wQ4 c5 siamese  [0.651403, 1.000000] contact
+      wQ4    wQ4 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.492308] 
+      v_3   wpQ3 c6 siamese  [0.614489, 1.000000] contact
+     wpQ3   wpQ3 c6 self     [0.000000, 0.141421] 
+== T2 (apex 1/5): tiles=14 pairs=24 expected=24 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+      u_1    u_1 c1 self     [0.000000, 0.299448] 
+      u_1    wQ1 c1 far      [1.000000, 1.371629] contact
+      u_1   wpQ2 c1 far      [1.000000, 1.371629] contact
+      wQ1    wQ1 c1 self     [0.000000, 0.141421] 
+      wQ1   wpQ2 c1 far      [1.732051, 1.934637] 
+     wpQ2   wpQ2 c1 self     [0.000000, 0.141421] 
+      u_2    u_2 c2 self     [0.000000, 0.429669] 
+      u_2   wpQ4 c2 siamese  [0.680660, 1.000000] contact
+     wpQ4   wpQ4 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.492308] 
+      u_3    wQ3 c3 siamese  [0.664406, 1.000000] contact
+      wQ3    wQ3 c3 self     [0.000000, 0.141421] 
+      v_1    v_1 c4 self     [0.000000, 0.299448] 
+      v_1    wQ2 c4 far      [1.000000, 1.371629] contact
+      v_1   wpQ1 c4 far      [1.000000, 1.371629] contact
+      wQ2    wQ2 c4 self     [0.000000, 0.141421] 
+      wQ2   wpQ1 c4 far      [1.732051, 1.934637] 
+     wpQ1   wpQ1 c4 self     [0.000000, 0.141421] 
+      v_2    v_2 c5 self     [0.000000, 0.429669] 
+      v_2    wQ4 c5 siamese  [0.680660, 1.000000] contact
+      wQ4    wQ4 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.492308] 
+      v_3   wpQ3 c6 siamese  [0.664406, 1.000000] contact
+     wpQ3   wpQ3 c6 self     [0.000000, 0.141421] 
+== BB (disc sectors): tiles=16 pairs=30 expected=30 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+     u_1a   u_1a c1 self     [0.000000, 0.433013] 
+     u_1a   u_1b c1 siamese  [0.000000, 0.500000] 
+     u_1b   u_1b c1 self     [0.000000, 0.433013] 
+      u_2    u_2 c2 self     [0.000000, 0.250000] 
+      u_2    wQ3 c2 siamese  [0.614173, 1.000000] contact
+      u_2   wpQ2 c2 far      [1.000000, 1.387086] contact
+      wQ3    wQ3 c2 self     [0.000000, 0.141421] 
+      wQ3   wpQ2 c2 far      [1.632051, 1.842935] 
+     wpQ2   wpQ2 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.250000] 
+      u_3    wQ1 c3 far      [1.000000, 1.387086] contact
+      u_3   wpQ4 c3 siamese  [0.614173, 1.000000] contact
+      wQ1    wQ1 c3 self     [0.000000, 0.141421] 
+      wQ1   wpQ4 c3 far      [1.632051, 1.842935] 
+     wpQ4   wpQ4 c3 self     [0.000000, 0.141421] 
+     v_1a   v_1a c4 self     [0.000000, 0.433013] 
+     v_1a   v_1b c4 siamese  [0.000000, 0.500000] 
+     v_1b   v_1b c4 self     [0.000000, 0.433013] 
+      v_2    v_2 c5 self     [0.000000, 0.250000] 
+      v_2    wQ2 c5 far      [1.000000, 1.387086] contact
+      v_2   wpQ3 c5 siamese  [0.614173, 1.000000] contact
+      wQ2    wQ2 c5 self     [0.000000, 0.141421] 
+      wQ2   wpQ3 c5 far      [1.632051, 1.842935] 
+     wpQ3   wpQ3 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.250000] 
+      v_3    wQ4 c6 siamese  [0.614173, 1.000000] contact
+      v_3   wpQ1 c6 far      [1.000000, 1.387086] contact
+      wQ4    wQ4 c6 self     [0.000000, 0.141421] 
+      wQ4   wpQ1 c6 far      [1.632051, 1.842935] 
+     wpQ1   wpQ1 c6 self     [0.000000, 0.141421] 
+== BB (chord-closed sectors): tiles=16 pairs=30 expected=30 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+     u_1a   u_1a c1 self     [0.000000, 0.433013] 
+     u_1a   u_1b c1 siamese  [0.000000, 0.500000] 
+     u_1b   u_1b c1 self     [0.000000, 0.433013] 
+      u_2    u_2 c2 self     [0.000000, 0.250000] 
+      u_2    wQ3 c2 siamese  [0.614489, 1.000000] contact
+      u_2   wpQ2 c2 far      [1.000000, 1.387086] contact
+      wQ3    wQ3 c2 self     [0.000000, 0.141421] 
+      wQ3   wpQ2 c2 far      [1.632051, 1.842935] 
+     wpQ2   wpQ2 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.250000] 
+      u_3    wQ1 c3 far      [1.000000, 1.387086] contact
+      u_3   wpQ4 c3 siamese  [0.614489, 1.000000] contact
+      wQ1    wQ1 c3 self     [0.000000, 0.141421] 
+      wQ1   wpQ4 c3 far      [1.632051, 1.842935] 
+     wpQ4   wpQ4 c3 self     [0.000000, 0.141421] 
+     v_1a   v_1a c4 self     [0.000000, 0.433013] 
+     v_1a   v_1b c4 siamese  [0.000000, 0.500000] 
+     v_1b   v_1b c4 self     [0.000000, 0.433013] 
+      v_2    v_2 c5 self     [0.000000, 0.250000] 
+      v_2    wQ2 c5 far      [1.000000, 1.387086] contact
+      v_2   wpQ3 c5 siamese  [0.614489, 1.000000] contact
+      wQ2    wQ2 c5 self     [0.000000, 0.141421] 
+      wQ2   wpQ3 c5 far      [1.632051, 1.842935] 
+     wpQ3   wpQ3 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.250000] 
+      v_3    wQ4 c6 siamese  [0.614489, 1.000000] contact
+      v_3   wpQ1 c6 far      [1.000000, 1.387086] contact
+      wQ4    wQ4 c6 self     [0.000000, 0.141421] 
+      wQ4   wpQ1 c6 far      [1.632051, 1.842935] 
+     wpQ1   wpQ1 c6 self     [0.000000, 0.141421] 
+== MX (apex 1/4): tiles=15 pairs=27 expected=27 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+     u_1a   u_1a c1 self     [0.000000, 0.329627] 
+     u_1a   u_1b c1 siamese  [0.000000, 0.500000] 
+     u_1b   u_1b c1 self     [0.000000, 0.373394] 
+      u_2    u_2 c2 self     [0.000000, 0.329627] 
+      u_2    wQ3 c2 siamese  [0.614489, 1.000000] contact
+      u_2   wpQ4 c2 far      [1.000000, 1.371629] contact
+      wQ3    wQ3 c2 self     [0.000000, 0.141421] 
+      wQ3   wpQ4 c2 far      [1.632051, 1.842935] 
+     wpQ4   wpQ4 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.373394] 
+      u_3    wQ1 c3 far      [1.000000, 1.387086] contact
+      u_3   wpQ2 c3 siamese  [0.689160, 1.000000] contact
+      wQ1    wQ1 c3 self     [0.000000, 0.141421] 
+      wQ1   wpQ2 c3 far      [1.632051, 1.842935] 
+     wpQ2   wpQ2 c3 self     [0.000000, 0.141421] 
+      v_1    v_1 c4 self     [0.000000, 0.299448] 
+      v_1    wQ2 c4 far      [1.000000, 1.371629] contact
+      v_1   wpQ3 c4 far      [1.000000, 1.371629] contact
+      wQ2    wQ2 c4 self     [0.000000, 0.141421] 
+      wQ2   wpQ3 c4 far      [1.732051, 1.934637] 
+     wpQ3   wpQ3 c4 self     [0.000000, 0.141421] 
+      v_2    v_2 c5 self     [0.000000, 0.429669] 
+      v_2    wQ4 c5 siamese  [0.651403, 1.000000] contact
+      wQ4    wQ4 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.492308] 
+      v_3   wpQ1 c6 siamese  [0.614489, 1.000000] contact
+     wpQ1   wpQ1 c6 self     [0.000000, 0.141421] 
+== MX (apex 1/5): tiles=15 pairs=27 expected=27 count_ok=True rejects=0 contacts_at_1=8 -> ACCEPT
+     u_1a   u_1a c1 self     [0.000000, 0.298715] 
+     u_1a   u_1b c1 siamese  [0.000000, 0.492308] 
+     u_1b   u_1b c1 self     [0.000000, 0.337411] 
+      u_2    u_2 c2 self     [0.000000, 0.298715] 
+      u_2    wQ3 c2 siamese  [0.664406, 1.000000] contact
+      u_2   wpQ4 c2 far      [1.000000, 1.371629] contact
+      wQ3    wQ3 c2 self     [0.000000, 0.141421] 
+      wQ3   wpQ4 c2 far      [1.632051, 1.842935] 
+     wpQ4   wpQ4 c2 self     [0.000000, 0.141421] 
+      u_3    u_3 c3 self     [0.000000, 0.337411] 
+      u_3    wQ1 c3 far      [1.000000, 1.337104] contact
+      u_3   wpQ2 c3 siamese  [0.691194, 1.000000] contact
+      wQ1    wQ1 c3 self     [0.000000, 0.141421] 
+      wQ1   wpQ2 c3 far      [1.632051, 1.842935] 
+     wpQ2   wpQ2 c3 self     [0.000000, 0.141421] 
+      v_1    v_1 c4 self     [0.000000, 0.299448] 
+      v_1    wQ2 c4 far      [1.000000, 1.371629] contact
+      v_1   wpQ3 c4 far      [1.000000, 1.371629] contact
+      wQ2    wQ2 c4 self     [0.000000, 0.141421] 
+      wQ2   wpQ3 c4 far      [1.732051, 1.934637] 
+     wpQ3   wpQ3 c4 self     [0.000000, 0.141421] 
+      v_2    v_2 c5 self     [0.000000, 0.429669] 
+      v_2    wQ4 c5 siamese  [0.680660, 1.000000] contact
+      wQ4    wQ4 c5 self     [0.000000, 0.141421] 
+      v_3    v_3 c6 self     [0.000000, 0.492308] 
+      v_3   wpQ1 c6 siamese  [0.664406, 1.000000] contact
+     wpQ1   wpQ1 c6 self     [0.000000, 0.141421] 
+#### PLANTED FAULTS ON THE FRAGMENTS (each must REJECT)
+== T2 flip (colours 1, 3 swapped at w): REJECT  rejecting pairs: ['(u_1,wQ3) [0.8586,1.2323]', '(u_3,wQ1) [0.7500,1.1414]']
+== T2 flat (arcs of omega(w) at u replaced by chords): REJECT  rejecting pairs: ['(u_1,wQ1) [0.9923,1.3716]', '(v_1,wpQ1) [0.9923,1.3716]']
+== T2 six (colour 6 in w's quadrant (90,180)): REJECT  rejecting pairs: ['(v_3,wQ2) [0.8161,1.3716]']
+== BB rot (u's bowtie turned 60 degrees): REJECT  rejecting pairs: ['(u_2,wQ3) [0.7600,1.1456]', '(u_3,wQ1) [0.9014,1.2744]']
+#### SUMMARY
+S1 (disc sectors): ACCEPT, pairs=18, contacts at 1=4
+S1 (chord-closed sectors): ACCEPT, pairs=18, contacts at 1=4
+T2 (apex 1/4): ACCEPT, pairs=24, contacts at 1=8
+T2 (apex 1/5): ACCEPT, pairs=24, contacts at 1=8
+BB (disc sectors): ACCEPT, pairs=30, contacts at 1=8
+BB (chord-closed sectors): ACCEPT, pairs=30, contacts at 1=8
+MX (apex 1/4): ACCEPT, pairs=27, contacts at 1=8
+MX (apex 1/5): ACCEPT, pairs=27, contacts at 1=8
+T2 flip (colours 1, 3 swapped at w): REJECT, pairs=24, contacts at 1=6
+T2 flat (arcs of omega(w) at u replaced by chords): REJECT, pairs=24, contacts at 1=6
+T2 six (colour 6 in w's quadrant (90,180)): REJECT, pairs=24, contacts at 1=7
+BB rot (u's bowtie turned 60 degrees): REJECT, pairs=30, contacts at 1=6
