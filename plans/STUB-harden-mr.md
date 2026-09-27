@@ -1,5 +1,16 @@
 # FS-105 — harden MR where the collapse uses it (stub)
 
+> **Closed 2026-09-26: Paid (hardening)** (record `plans/FS105-harden-mr.md`, §R-close first; `plans/FS105-derivation.md`; close inventory
+> `plans/FS105-close-inventory.md`). MR (`LEDGER.md` row 120) stands, its grade rewritten. The proof of EL2021 Thm 1.2 is in neither paper
+> the record named: EL2003 is an announcement whose §6 is an outline; Thm 1.2 follows from EL2021 Thm 1.3 by a deduction EL2021 never writes
+> (FS105-DED, [hand], two minds, one blind), with one forced reading ("virtually cyclic factor" means a non-trivial one). PE-2 sits inside
+> Thm 1.3's hypotheses at ℚ(√635087) and de Grey's field (FS105-PEH); a reading gap, not a mathematical one, at EL2021's cited leafwise-measure
+> machinery (`[10]`, `[11]`, `[5]`; the fetch declined for now by the owner). EF_F⁺ has a third derivation blind to the other two, at
+> ℚ(√635087), with EF_F⁰ (FS105-B-EFP). C-MR16: MR at de Grey's field walked at degree 16, one checking reading (FS105-MR16). Row 129's
+> killing test is correct as stated; a refutation must be (W) or (W′) (FS105-W-D2), and nothing in print comes near. **Left:** the cited
+> machinery's reading (`[11]` Prop. 6.4 first); MR off the totally real fields and at row 100's exception fields (FS-100's left items).
+> The text below is the stub as it stood when the milestone opened.
+
 > **Re-aimed at FS-103's close (2026-09-26).** Rows 121–130 now rest on MR (row 120), the collapse and the fractional equality included. Add:
 > **C-MR16** — MR at de Grey's field walked at degree 16 (PE-2's admissibility; EF_F⁺'s count `c·M^{1/16}`), unreached by both FS-103 verifiers;
 > and **row 129's finite-graph test** — any proof that `α₁(ℝ²) > m₁(ℝ²)` (a statement about finite unit-distance graphs) refutes MR at

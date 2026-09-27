@@ -540,3 +540,175 @@ seven records**, each replaced by a derivation, a fixed family or a reading.
 | FS-104 to rank 1 after FS-105 leaves the table | FS-102, the fallback write-up, now that MR is hardened | FS-104 was the stub recommended to follow; the write-up is Kooshi's fallback by his own words, and whether to take it now is his call | medium — Kooshi's choice |
 
 ### Stage 3 — SAVED
+
+### Stage 4 — SAVED (drafts for the front-page job FS105-X; the stub's banner; the inventory ticked)
+
+*Two scripts carry the exact drafts, each checking itself on copies (never on the target files):*
+- *`data/fs105/fs105-c/claude_md_drafts.py --check` — every `CLAUDE.md` pair applies exactly once and the ranked table renumbers (FS-105's
+  row out, 28 rows moved); **`CLAUDE.md` 296,232 → 296,382 bytes (+150), under the 300,000 budget**; `--self-test` refuses a planted pair.*
+- *`data/fs105/fs105-c/ledger_drafts.py --check` — every pair in `LEDGER.md`, `plans/FS100-derivation.md` and `plans/FS103-derivation.md`
+  applies exactly once; the nineteen new § B rows agree with `plans/FS105-derivation.md` under `tools/fs71_ledger_b_check.py`'s own parsers;
+  the edited FS100/FS103 entries still parse with every field; `--self-test` catches a planted row with no entry.*
+
+**4.1 `LEDGER.md` (exact pairs in `ledger_drafts.py`).**
+- **Row 120's grade, rewritten** (current state; no new row):
+  "[hand; PE-2 two derivations blind to each other (X02D, X02V), applying EL2021 Thm 1.2 by statement — announced as EL2003 Thm 1.1, whose
+  proof there is an outline (§6), it rests on EL2021 Thm 1.3 (external, published) and a deduction EL2021 never writes (FS105-DED, two minds,
+  one blind); its hypotheses read on the pieces at ℚ(√635087) (FS105-R) and at de Grey's field (FS105-R; FS105-W, separately); EL2021 read at
+  §§1, 2, 4 and the last step of Thm 4.1's proof in full, its cited leafwise-measure machinery unread — a reading gap, not a mathematical one;
+  EF_F⁺ three derivations blind to one another (X01D, X12B; FS105-B at ℚ(√635087), with EF_F⁰) and a checking reading (X01V, after its blind
+  GAP at the multiplier step, withdrawn for the premise FS105-B met blind); MR a composition, three minds; at degree 16 one checking walk
+  (FS105-W)]".
+- **Row 120's mechanism**: "`U_ℚ` alone gives `(4/π + o(1))M^{1/[F:ℚ]}` in `H_L`, and any positive exponent suffices — FS105-W-H, W-G"
+  (the EF-G (b) normalisation note, item 30).
+- **Row 120's prior-art cell**: Sataev "first, for the case of a semigroup holding the values of an integer polynomial — its abstract read";
+  "the positive-entropy input `[EinsiedlerLindenstrauss2022]` Thm 1.3, from which its Thm 1.2 follows (FS105-DED; announced as EL2003 Thm 1.1,
+  whose §6 is an outline)"; "EL2021 §§1, 2, 4 read in full (X24R; FS105-R)"; Sataev no longer "unheld"; "MR not found under its discipline's
+  names (five more zbMATH queries at FS-105; `[BekkaFrancini2022]` needs unipotent generation)"; the address and milestone cells gain
+  FS-105.
+- **Row 128**: "MR at degree 16 walked at FS-105, one checking reading (FS105-MR16)"; "Not claimed" loses "MR at degree 16 (FS-105)";
+  ℚ(√635087) stays the headline carrier (the owner, item 33).
+- **Row 129 — (W) and (W′) earn a sentence, not a row** (§R-close 3.8): after the killing test, "Such a proof must be (W) a bound
+  `α(G) ≥ c|G|` over every finite unit-distance graph with `c ∈ (0.24699…, 0.249956…)` — above `[AmbrusEtAl2023]`'s bound on `m₁`, below
+  `[DuczVarga2026]`'s on `α₁`, a window `0.00297` wide and `0.0176` above the best proved lower bound on `α₁` — or (W′)
+  `χ_f,0(ℝ²) < χ_f(ℝ²)`, through B-CHIF; its cheap form `α₁ ≥ 1/4` was reachable in print and is false (FS105-W-D1, W-D2)." Its grade:
+  "B-AMEN's reverse half and B-CHIF one mind, both off the killing test's chain and off `α₁(ℝ²) = m₁(ℝ²)`, which use only B-AMEN's Følner
+  half (two blind: F, B; FS105-W-D1)".
+- **§ B**: the nineteen FS105 rows (appended after FS103-M-Q4); FS100-EFP's grade cell "hand, three blind derivations (X01D, X12B; FS105-B at
+  ℚ(√635087)) + a checking reading"; FS100-PE2's "hand, two blind, on EL2021 Thm 1.2 = Thm 1.3 + FS105-DED; hypotheses read at ℚ(√635087),
+  `F_dG` (FS105-PEH)"; FS103-DG's "MR@16 walked (FS105-MR16, one reading)".
+- **`plans/FS100-derivation.md`**: FS100-PE2's and FS100-EFP's grade brackets and FS100-EFG (b)'s count, in current-state wording (the
+  script's `pe2`, `efp`, `efg`). **`plans/FS103-derivation.md`**: FS103-DG's grade ("MR at degree 16 walked at FS-105, FS105-MR16, one
+  checking reading").
+- **`data/fs105/claims.md` (a0)** (the owner's file; a one-line note, not a rewrite of the fixed list): *"Note at the close: EL2003 is held
+  since 2026-09-26 and read in full — an announcement whose §6 is an outline (FS105-R §1.3); (a0) was decided through Thm 1.3 (FS105-DED)."*
+
+**4.2 `CLAUDE.md` (exact pairs in `claude_md_drafts.py`; +150 bytes net).**
+- **"Last updated"**, replaced whole: *"Last updated: 2026-09-26 — **FS-105, harden MR**: **Paid (hardening)** — MR (row 120) stands, its grade
+  rewritten: `[EinsiedlerLindenstrauss2022]` Thm 1.2's proof is in neither paper cited for it (EL2003 is an announcement, its §6 an outline);
+  it follows from their Thm 1.3 by a deduction EL2021 never writes, now two minds, one blind; PE-2 sits inside Thm 1.3's hypotheses at
+  ℚ(√635087) and de Grey's field, a reading gap (not a mathematical one) at EL2021's cited machinery; EF_F⁺ has three derivations blind to one
+  another; MR at degree 16 walked; row 129's killing test correct as stated, with the two shapes a refutation must take (`plans/FS105-harden-mr.md`
+  §R-close). Before it, **FS-103, the collapse** (rows 128–130; `plans/FS103-collapse-cp-plane.md` §R-close), and FS-100 stage 5 with its
+  waves (rows 120–127). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s
+  closed list, and git."*
+- **Where the problem stands**, the lower-end paragraph: "(row 120: `[EinsiedlerLindenstrauss2022]` Thm 1.3 by statement, with a two-mind
+  deduction of its Thm 1.2, and `[EinsiedlerFish2010]`'s method transferred, three blind derivations)".
+- **Open milestones**: "**None is open.** FS-105, harden MR, is **closed** (row 120's grade; `plans/FS105-harden-mr.md` §R-close; the stub's
+  banner)."
+- **Paths forward**: FS-105's rank-1 row out; every later rank down one, so **FS-104 `χ_CP(ℝ²)` at six is rank 1** (the default; Kooshi's
+  choice); FS-100's row "MR hardened at FS-105 (row 120's grade)"; FS-102's row "MR's external input cited as EL2021 Thm 1.3 with FS-105's
+  deduction".
+- **G80**: body "positive entropy is Einsiedler–Lindenstrauss (their Thm 1.3) on each finitely generated piece, all of it at finite places
+  since `U` is isometric at every archimedean one" (§PA sweep item 2); *Do* "count the group's elements by height before calling it
+  ×2×3-hard — any positive exponent suffices, the degree entering constants only (FS-105)" (W §5.3).
+- **Corrections owed (items 19, 23, 30)**: G50's stale "its §2 on adelic solenoids is still unread where it may hold PE-2" → "its §2 was
+  read at FS-100 and holds no PE-2, and the proof of its Thm 1.2 is in neither paper cited for it (FS-105)"; the rest of items 19, 23, 30 are
+  `LEDGER.md`'s and `BIBLIOGRAPHY.md`'s (4.1, 4.3).
+- **G72**: "thirteen of fifteen", with "Fifteenth, FS-105, the other kind: a hardening, its products from reading and from re-deriving a known
+  proof." **G79**: "FS-105: its blind EF_F⁺ from the height count `U` has and no finitely generated subgroup has, while (W) and (W′),
+  counterexample invariants, located row 129's test without a theorem."
+- **No new grokking**: nothing FS-105 found earns one by G67's form; its recognitions go to G80's body and *Do*.
+
+**4.3 `BIBLIOGRAPHY.md`.**
+- **`[EinsiedlerLindenstrauss2003]`** (§ C, line 706; move to § A, since row 120's grade cites it): *"**Held; read in full** (FS105-R,
+  2026-09-26; D read §1, §2 to Prop. 2.1, §3's opening, §6), `library/pdf/EinsiedlerLindenstrauss2003-rigidity-zd-actions-tori-solenoids-era-9-99-110.pdf`,
+  md5 `430849cf7d710c42002d768fcaf73266`, 12 pp. An announcement: Thm 1.1 (= EL2021 Thm 1.2, verbatim but for "Let µ be an α-ergodic measure"
+  and "λ" for "m_X") with only "a sketch of how Theorem 1.1 is proved" (§6, "Outline of the proof of Theorem 1.1", its last step "not hard");
+  §§3–4 prove Thm 4.1 (EL2021's Thm 5.1) in full; §5 proves Thm 5.1 "essentially complete[ly]", Prop. 5.3 "We give no details here"; its [5]
+  ("in preparation") became EL2021. EL2021 p. 2's "already proven in the announcement [7]" overstates it (FS-105; row 120)."* And a § B library row
+  for the PDF.
+- **`[EinsiedlerLindenstrauss2022]`** (§ A line 348's read column; § B line 569): *"read: §§1, 2, 4 in full (X02D, X24R, FS105-R, FS105-D);
+  §7's Lemma 7.4, Cor. 7.6 and the proof of Thm 4.1 from Cor. 7.6 in full (FS105-R); §3.1–3.3, §5 (Thm 5.1), §6 and §7 (Thm 7.1, Lemma 7.2,
+  Prop. 7.5) at their statements; §§8–9 unread (not used by Thm 1.3's proof). Thm 1.2 is not proved in it: it is Thm 1.3 plus FS105-DED.
+  Misprints (harmless): Thm 7.1's "without cyclic factors"; `κ > 0` where Lemma 7.2 gives `≥ 0`."*
+- **`[Sataev1975]`** (§ C line 711; R.6 line 95): *"**Held** (Kooshi's upload, 2026-09-26; Math-Net.ru `rm3995`, the Moscow Mathematical
+  Society's session reports, item 3° on pp. 203–204), `library/pdf/Sataev1975-measures-invariant-polynomial-semigroups-circle-uspekhi-30-2-203-204.pdf`.
+  **Read in full by the owner** (a two-page abstract): Theorem 1 — for an integer polynomial `f` with `f(0) = 0` and `T_n z = z^{f(n)}`, every
+  finite positive measure on `S¹` invariant under every `T_n` is a combination of Lebesgue measure and `δ₁`; proof by Weyl equidistribution
+  (Hua Loo-Keng), unchecked. **Against `[EinsiedlerFish2010]` Thm 1.2** [the close's reading, one mind]: invariance under every `T_n` is
+  invariance under the multiplicative semigroup the values generate, which has polynomial growth, so Sataev's is the case of a semigroup
+  holding a polynomial's values, with a sharper conclusion (no ergodicity; the atom at 1); EF's covers every multiplicative semigroup of
+  polynomial growth — `[Huang2017]` §1's "independently discovered" fits the case, not the generality."* The R.6 row closes as a debt.
+- **`[LindWard1988]` / `[ChothiEverestWard1997]`** (R.6, line 718): *"Not held, unread — carried a second milestone (FS-105, W §5.3); its
+  load-bearing consequence, positive Haar entropy on the pieces, is derived (X02D §3.3; FS105-H, `≥ log 2`)."*
+- **New R.6 row — EL2021's cited machinery** (a reading debt, the owner's ruling, item 21): `[10]` M. Einsiedler, E. Lindenstrauss,
+  *Diagonal actions on locally homogeneous spaces*, Clay Math. Proc. 10 (2010); `[11]` M. Einsiedler, E. Lindenstrauss, *Joinings of higher
+  rank torus actions on homogeneous spaces*, Publ. Math. IHÉS 129 (2019); `[5]` M. Einsiedler, A. Katok, *Rigidity of measures — the high
+  entropy case and non-commuting foliations*, Israel J. Math. 148 (2005) 169–238 — *"row 120's (a9): EL2021 Thm 1.3's leafwise-measure
+  machinery; not held, unread; the fetch declined for now (FS-105); `[11]` Prop. 6.4 first, on which EL2021 Prop. 3.5's equality rests
+  (FS105-R); the first two on arXiv."* Keys by § D's rules (the front page's).
+- **`[BekkaFrancini2022]`**: no new row — the plan's `[BekkaFrancini2020]` is this held paper (§1 read twice, X03D, X24R); not re-read.
+- **Titles** (W §4.3, zbMATH, titles only, not read): V. Jungić, *Still Spinning: The Moser Spindle at Sixty*, Math. Mag. 96 (2023) — **already
+  owed at line 635 (FS-58 §PA)**: add its doi `10.1080/0025570X.2023.2176684` and Zbl 1535.05104 there, no new row; D. Czifra, Á. Dúcz,
+  M. Matolcsi, D. Varga, P. Zsámboki, *Improved bounds for the double cap conjecture*, arXiv:2605.28709; Á. Dúcz, *On the maximal measure of a
+  spherical set avoiding solutions to x + y + z = 0*, arXiv:2607.05083 — § C, sphere problems by their titles.
+- **Re-reads** (W §5.3): `[AmbrusEtAl2023]` Theorem 1 and p. 19's computed `0.24699…`, §4's Remark; `[DuczVarga2026]` Lemma 1 and the
+  blow-up paragraph; `[MatolcsiEtAl2025]` §2 — re-read 2026-09-26 (FS105-W).
+
+**4.4 `plans/FRONTIER-STUBS.md`.**
+- **Open milestones**: "**None is open.** FS-105, harden MR, is **closed** (2026-09-26; row 120's grade; `plans/FS105-harden-mr.md` §R-close;
+  its banner). Next: Kooshi's choice; the default is the top row."
+- **Ranked stubs**: FS-105's rank-1 row out; ranks 2–61 → 1–60; FS-104 at rank 1. A header note: *"At FS-105's close (2026-09-26, FS105-X):
+  FS-105 closed and left the table; every later rank moved up one, so FS-104 leads (the default; Kooshi's choice — FS-102, the fallback
+  write-up, is the alternative now that MR is hardened). Re-aimed: FS-100 (MR hardened; its left items unchanged), FS-102 (MR cited as EL2021
+  Thm 1.3 with FS105-DED; `[11]` Prop. 6.4 first if a write-up wants the full reading)."* FS-100's row: "MR's hardening moves to FS-105" →
+  "MR hardened at FS-105 (row 120's grade)".
+- **Closed list**, at its head: *"* **FS-105 harden MR** — `plans/STUB-harden-mr.md`. **Closed 2026-09-26** (record `plans/FS105-harden-mr.md`
+  §R-close; `plans/FS105-derivation.md`): **Paid (hardening)** — MR stands, its grade rewritten: EL2021 Thm 1.2 = Thm 1.3 plus a deduction
+  EL2021 never writes (two minds, one blind), EL2003's proof an outline; PE-2 within Thm 1.3's hypotheses at ℚ(√635087) and de Grey's field,
+  a reading gap at the cited machinery; EF_F⁺ three blind derivations; MR at degree 16 walked; row 129's test correct, its shapes (W), (W′).
+  Its successors: FS-104 (rank 1), FS-102, FS-100's left items."*
+
+**4.5 The FS-105 stub's banner** — written (`plans/STUB-harden-mr.md`, above the FS-103 re-aim banner).
+
+**4.6 `plans/GROKKING-INSTANCES.md` (new instances, verbatim with their source addresses).**
+- **§G51** — *"FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1; inventory items 12, 24, 28): **two covert channels open to every blind job of
+  FS-103 and FS-105.** (1) The session transcripts (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/`
+  — 717 files carrying X01D's and X12B's route — were fenced in no FS-103 blind brief (V1, V2, B, N) and not in FS-105's B105 as drafted; the
+  advisor found it before B's launch (A Stage 3). (2) The harness scratchpad is one directory shared by every subagent of the session, across
+  milestones (579 entries), so B's fence 'outside your own scratchpad' fenced nothing; the blind D found it in its stage 1 (D §1.5) and
+  overwrote two same-named files there. None of the blind jobs reported reading either; B confirmed 'none' (item 28), and FS-103's blind
+  grades stand (the close's ruling, 3.8). G51's own design lesson — 'isolate the scratchpad per agent' — had stood since 2026-09-09; the
+  briefs isolated the record, not the harness's directories. Also: no divergence of truth in four pairings (R–D on the deduction; R–W on
+  (a1)–(a8) at de Grey's field; B–X01D/X12B/X01V on EF_F⁺; A–R, a misattributed route); the free-window slips were the owner's paraphrase 'a
+  withdrawn checking reading' (item 7), R's scope tool passing a plant silently (item 20), B's constant on the equality boundary (item 27) and
+  W's inert split filter (item 31)."*
+- **§G50** — *"FS-105 (`plans/FS105-harden-mr.md` §PA.1, §R-close 3.1): **the proof 'used by statement' was in neither paper the record
+  named.** Row 120 said EL2021 Thm 1.2's proof was 'in EL2021 §§2–9, unread here'; EL2021 p. 2 attributes it to EL2003 ('already proven in
+  the announcement [7]'), and EL2003, fetched by Kooshi's upload, is an announcement whose §6 is 'Outline of the proof of Theorem 1.1'. The
+  theorem stands on EL2021 Thm 1.3 plus a deduction nobody had written. In the same milestone, twice more: the plan owed a new row to
+  `[BekkaFrancini2020]`, 'abstract only', a paper held as `[BekkaFrancini2022]` with §1 read twice; and W listed Jungić's *Still Spinning* as a
+  new title, owed since FS-58's §PA."*
+- **§G72** — *"Fifteenth, FS-105 (`plans/FS105-harden-mr.md` §R-close 3.3): the other kind. A hardening; its §IQ structural form (what every
+  invariant measure with zero entropy for one element carries, for a group with polynomially many elements of bounded height) was answered —
+  `T + A` at ℚ(√635087) (FS105-B), any positive growth exponent (FS105-W-G) — but the products came from reading (R, D) and from re-deriving a
+  known proof (B, W)."*
+- **§G79** — *"FS-105: B's EF_F⁺ from an example invariant of the acting group (the height count) against the measure's (zero local
+  dimension); FS105-DED from what every Thm 1.3 decomposition carries under total irreducibility; (W) and (W′), counterexample invariants —
+  the shapes a refutation must carry — located row 129's test and produced no theorem."*
+- **§ The standard of evidence** — *"FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1): asked of MR, 'what must someone who trusts none of
+  this actually check?' moved the external weight from EL2021 Thm 1.2, whose proof is nowhere in print, to Thm 1.3 plus ten lines."*
+
+**4.7 The two protocol-template fixes** (drafts; the front page writes them).
+- **`plans/PROTOCOL-competitor-and-advisor.md`, rule 1**, after its first sentence's instance: *"**Fence the harness's own directories by
+  name** (FS-105, 2026-09-26). The harness scratchpad (`/tmp/claude-1000/-home-kooshi-source-lean-dir/<session>/scratchpad/`) is one directory
+  for every subagent of the session, across milestones, so 'outside your own scratchpad' fences nothing; and the session transcripts
+  (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl` and `subagents/`) and `chats-bak/` hold every earlier agent's route. Every blind
+  brief fences all three by path, forbids `git log -p` on fenced paths, and gives the job its own subdirectory `scratchpad/<job id>/`, to
+  create, list and read files only there; a job that lists the shared root, or opens a file it did not create, logs it as a fence touch."*
+- **`plans/PROTOCOL-crunch.md`**: §6 item 6 (the brief's fences), after "the bodies of the fenced jobs' commits": *"; the session transcripts
+  (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/`; `git log -p` on fenced paths; and the shared
+  harness scratchpad outside the job's own subdirectory `scratchpad/<job id>/`, which the brief assigns"*; and the rules table, rule 10, the
+  same list, with the incident: *"FS-105: every FS-103 and FS-105 blind brief left the transcripts and the shared scratchpad open (the advisor
+  found the first before B105's launch, the blind D the second); no blind job reported reading them."*
+
+**4.8 Other stubs.** FS-101 unaffected (`hMR` states MR, whose statement did not move). FS-102: its row and stub gain "MR's external input
+cited as EL2021 Thm 1.3 with FS105-DED; a write-up that wants the full reading of Thm 1.3's machinery reads `[11]` Prop. 6.4 first". FS-100:
+its left items unchanged ("MR's complex-place case on an instance" now carries B's scope remark (ii), Lemma 0, as its named step).
+
+**4.9 The close inventory** — every item ticked in `plans/FS105-close-inventory.md` (the status column).
+
+**4.10 Would have searched here (this job, whole close):** nothing — reading, drafting and two self-checking scripts.
+
+### Stage 4 — SAVED
