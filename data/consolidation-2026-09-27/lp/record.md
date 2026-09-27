@@ -237,3 +237,58 @@ blind)"*) and row 134 (*"the `d = 2` closure by two routes (CD's Theorem D2; CE'
 ### Would have searched here
 
 Nothing (reading and comparison).
+
+## Stage 4 — SAVED
+
+### The references that could pre-empt
+
+**Read (two papers):**
+1. **`[Johnson2000surprises]`** — P. D. Johnson Jr., *Infinite graphs and the fractional chromatic number: some recent surprises*,
+   Geombinatorics IX(3) (January 2000) 135–144 — **already held** in the IX(3) issue (sheets 19–24), read in full, no fetch.
+2. **`[Johnson1996fcn]`** — P. D. Johnson Jr., *About two definitions of the fractional chromatic number*, Geombinatorics V(3) (January 1996)
+   99–108 — **fetched** (archive issue 19, `~/source/library/geombinatorics/geombinatorics-v05-n3-1996-01.pdf`), pp. 99–107 read.
+
+**Fetched, not read** (the budget line): Geombinatorics IX(2) (October 1999, archive issue 34,
+`~/source/library/geombinatorics/geombinatorics-v09-n2-1999-10.pdf`) for `[Zaks1999]`. One fetch, one login, with `pgrep -af "[g]eomb_fetch"`
+empty first (a bare `pgrep -f geomb_fetch.py` matched its own shell, the recorded self-match; the bracket form did not).
+
+**What they hold — the questions of row 129, posed first by Johnson, and one more question on `ℚ(√m)²`:**
+- `[Johnson1996fcn]` p. 103, Question 1: *"If χ_f(G) < ∞, is it necessarily the case that χ_f(G) = sup[χ_f(H): H is a finite subgraph of G]?
+  … If the answer is "no", then what about the case G = ℝ²?"*; Question 2 (p. 103), the de Bruijn–Erdős property (`sup` attained);
+  Question 3 (p. 104): *"Does χ_f have what might be called the Benda-Perles-Tarski property, that χ_f(ℝ²) = χ_f(𝒜²), where 𝒜² represents the
+  unit distance graph on the field of algebraic complex numbers?"*; Question 4 (p. 105): a non-bipartite `H` with `χ_f(H) < 2 + ε`;
+  Question 5 (p. 105): Fisher–Ullman's assertion *"a measurable, periodic independent set of ℝ² with density ρ generates a sequence of
+  fractional colorings of ℝ² the sum of whose weights converge to 1/ρ"* — *"we need to ask if that assertion at the end of [7] is true, and
+  to ask for a proof."*
+- `[Johnson2000surprises]` p. 135: *"the restrictions of those questions to geometric graphs of interest here, such as the unit distance
+  graph in the plane, are still open."* p. 143, Problems 3–5 (verbatim): *"Is it true that χ_f(ℝ², 1) = sup[χ_f(H); H is a finite subgraph
+  of (ℝ², 1)]? Is χ_f(ℝ², 1) = χ_f(𝒜², 1), where 𝒜² is the "algebraic plane", the field of algebraic complex numbers? Is it true that for
+  every ε > 0 there exists a non-bipartite finite subgraph H of (ℝ², 1) satisfying χ_f(H) < 2 + ε?"* And p. 141, Problem 2: *"For which
+  positive integers m ≡ 3 mod 4 is there an induced subgraph of (ℚ²(√m), 1) isomorphic to G_∞?"* (`G_∞`: a countable clique with every edge
+  subdivided twice; Levin's example, `χ_f(G_∞) = 3` while its finite subgraphs approach `1 + √2`).
+
+**Verdicts.** Nothing pre-empts a row of ours; three questions are answered by row 129, given MR:
+- **Q1 / Problem 3 — yes, given MR** (row 129's `χ_f,0(ℝ²) = χ_f(ℝ²)`), and Johnson's definition of `χ_f` for an infinite graph agrees with
+  `[MatolcsiEtAl2025]`'s: his Proposition (p. 102), proved on p. 106 by truncating a countable admissible weighting to finitely many sets.
+- **Q3 / Problem 4 — yes, given MR [derived, one mind]:** every finite subgraph of `(ℝ², 1)` is a subgraph of `(𝒜², 1)` (Benda–Perles's
+  Tarski argument, as `[Johnson2000]` §3 states it), so `χ_f,0(ℝ²) ≤ χ_f(𝒜²) ≤ χ_f(ℝ²)`; row 129 makes the ends equal.
+- **Q5 — FS103-B-CHIF** [hand, one mind; "likely folklore"] proves the assertion for any measurable 1-avoiding set (periodic ones included).
+- Q4 / Problem 5 — elementary (the regular `(2k+1)`-gon of unit side has `χ_f = 2 + 1/k`, induced), not ours. Q2 and Problem 2 — not answered.
+Written into `CLOSED-QUESTIONS.md` §3's fractional entry as earlier posings, with the grades above. **Not claimed:** anything unconditional; a
+row of `LEDGER.md` for the derived sandwich (a draft for the owner, if wanted).
+
+**Debts left, ranked by bearing:**
+1. `[Zaks1999]` (held since this stage, unread) — the four-colour compulsions of `ℚ⁴` (pairs at `√2` and 2 forced equal; odd integer
+   distances forbidden), the `ℚ⁴` shape of row 59's valuation law; read against `CLOSED-QUESTIONS.md` §1.3 before row 59 is written up.
+2. `[BohannonEtAl2001]` (`BIBLIOGRAPHY.md` § R.2 item 4; Geombinatorics X(4) (April 2001) 141–164; unheld) — Johnson's circle, six open
+   problems on planar distance graphs; low, since `[Johnson2006]` (July 2006) does not cite it on `ℚ(√m)²`.
+3. The reference lists of `[Johnson1996fcn]` and `[Johnson2000surprises]` (17 each; fractional graph theory — Fisher–Ullman 1992, Leader
+   1995, Levin, Scheinerman–Ullman) — not mined into `BIBLIOGRAPHY.md`. Fisher–Ullman, *The fractional chromatic number of the plane*,
+   Geombinatorics II (1992) 8–12, is the first of them to read (the source of Question 5's assertion and of `χ_f(ℝ²) ≥ 3.5`).
+4. `[Johnson1999more]` — *More on the fractional chromatic number*, Geombinatorics IX(1) (1999) 10–20, the first sequel (origins of the
+   definitions); `[Mann2001]`, `[Mann2003]`, `[AbramsJohnson2001]`, `[JohnsonLee2006]` — `ℚⁿ` and Babai numbers, none on a field plane by
+   Johnson's own account; lowest.
+
+### Would have searched here
+
+Nothing.
