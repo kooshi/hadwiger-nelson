@@ -1,6 +1,6 @@
 JOB FS112-PA — DONE   harness≈unknown (own≈190k)
 RESULT: FIRST: threads print the disk's skeleton + radius, not its rule ([11.34] Parts 2018-09-29: "a skeleton from five connected regular pentagons with unit edges", r=φ√((15+√5)/10)=√((25+9√5)/10); it is Gibbs's disk [07.49]; dual-graph rule [16.346]; figures not held). HOCK stated (2 comments); degree-4 sketch argued, and is GIBBS's [06.62] not de Grey's; 6-colour vertex argued (de Grey [08.17]+Gibbs [08.18], conditional on unproved [08.16]); constraint = definition (two senses). Only whole-plane 6-colouring claim: Sirgedas [06.70], withdrawn.
-RECORD: plans/FS112-PA-reading.md (+ data/fs112/fs112-pa/extracts.md, 185 verbatim extracts, generator-checked)   COMMITS: 4845c631 68b4353a fe0d398e a0685d5c baf3cec9 a66c89d8 4d5773af 24317d95 +report
+RECORD: plans/FS112-PA-reading.md (+ data/fs112/fs112-pa/extracts.md, 185 verbatim extracts, generator-checked)   COMMITS: 4845c631 68b4353a fe0d398e a0685d5c baf3cec9 a66c89d8 4d5773af 24317d95 037afce5
 INVENTORY:
 correction owed — degree-4 sketch is Philip Gibbs's (thread 6, 2018-06-14), not de Grey's: plan §PA row 3, brief, claims §2 framing — record Stage 1
 correction owed — C-V56's source is thread 8 [08.17] (2018-06-28), resting on de Grey's unproved Reuleaux-merge transformation [08.16] — Stages 1, 8
