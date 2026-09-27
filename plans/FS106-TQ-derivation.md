@@ -23,11 +23,19 @@ committed. Claims are `data/fs106/claims.md` §6; definitions §0 (D-MU, D-NF, D
   (D4). [hand, one mind] — §3.4.
 - **TQ-EQ** — `χ_m⁰(ℝ²) ≤ 6 ⟺ χ_CP ≤ 6 ⟺ µ₆⁰ = 1 ⟺ lim µ₆(ε) = 1 ⟺` periodic grid-square slack partial 6-colourings with vanishing holes `⟺`
   near-covering a.e.-proper colourings of every disc. No MR, no Voronov. [hand, one mind] — §3.5.
+- **HOLE-t / C-Q-HOLEa** — holes whose points are all within `t < ε/2` of the coloured set fill, at a loss of `2t` in the band. [hand, one mind] — §4.1.
+- **TQ-EPS2** — every partial 6-colouring with `Leb ⊗ Leb`-null band pairs leaves lower density `≥ ε²/78` uncovered. [hand, one mind; C-CS-2] — §4.2.
+- **TQ-ERODE / C-Q-LOCAL** — erosion by `κ` removes every multichromatic coloured point and widens the slack, at cost `O(κ)`; C-Q-LOCAL for
+  `δ > δ₆`. [hand, one mind; Parts [external]] — §4.3.
+- **TQ-HIT** — strips of width `2ε` at spacing `1/2` (density `4ε`) are effective holes meeting every unit circle and bicycle: a hitting-form
+  argument proves at most `O(ε)`. [hand, one mind] — §4.4.
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none. The controls are exact geometry plus one float grid check of a hand inequality (`hex_pairs`, 425 pairs), which checks a
   derived bound and hunts for nothing.
+- Stage 4: an optimiser over periodic grid-square partial six-colourings with slack `ε`, to trace `1 − µ₆(ε)` as `ε → 0`. Instead: the bracket
+  `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` was derived (§4.2, §4.3), and the experiment is proposed for after the ban.
 
 ## Stage 1 — SAVED: quotation check and controls
 
@@ -282,3 +290,375 @@ The claim's form, `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1`, is (a) 
   measurable question.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: C-Q-HOLEa, C-Q-LOCAL, C-Q-STAB
+
+### 4.1 C-Q-HOLEa — **TRUE** as stated [hand, one mind], with a general form
+
+**HOLE-t (general form).** Let a colouring of `U₃(0) ∖ H` be proper for `[1 − ε, 1 + ε]`, and let every `q ∈ H ∩ U₃(0)` lie at distance `< t` from
+`U₃(0) ∖ H`, with `2t < ε`. Then it extends to a colouring of `U₃(0)` proper for `[1 − (ε − 2t), 1 + (ε − 2t)]`.
+
+*Proof.* For each `q ∈ H ∩ U₃(0)` pick `p(q) ∈ U₃(0) ∖ H` with `|q − p(q)| < t` (choice), and give `q` the colour of `p(q)`. A pair of the new
+colouring at a distance `ℓ` in the shrunk band, both ends coloured `j`, moves to a pair of old points of colour `j` at a distance in
+`(ℓ − 2t, ℓ + 2t) ⊂ (1 − ε, 1 + ε)`. The old points are distinct, since `ℓ − 2t > 0`, so this contradicts the hypothesis. ∎
+
+**C-Q-HOLEa is HOLE-t with `t = 2r`.** Let `H` be a union of pairwise disjoint closed discs of radius `≤ r`, and let `q ∈ D ∩ U₃(0)`, where `D` has
+centre `c` and radius `r′ ≤ r`.
+- *Countability and accumulation.* The discs are countably many (each holds a rational point). At every point `b ∈ ∂D ∩ U₃(0)`, points of
+  `U₃(0) ∖ H` accumulate. Otherwise a small closed convex neighbourhood of `b` in `U₃(0)` would be a continuum covered by countably many pairwise
+  disjoint closed sets, at least two of them non-empty (`D` and whatever covers the points outside `D` near `b`), against Sierpiński's theorem.
+- *Distance.* Leave `D` along the segment from `q` toward `0` (it stays in `U₃(0)`). The exit point is on `∂D ∩ U₃(0)` at distance `≤ 2r′` from
+  `q`. Equality forces `q ∈ ∂D`, and then `q` itself is such a boundary point. If `0 ∈ D`, then `D ⊂ int U₃(0)` and the nearest point of `∂D` is
+  within `r′`. Either way `dist(q, U₃(0) ∖ H) < 2r`.
+- So HOLE-t applies with `t = 2r`, `2t = 4r < ε`. ∎
+
+Holes well inside `U₃(0)` give `t = r`, halving the loss.
+
+*What it says* (the advisor's A8a in its general form): **a hole all of whose points are within `ε/2` of the coloured set is invisible** — it can be
+filled at the cost of shrinking the band. So a hole that matters must contain points at distance `≥ ε/2` from the coloured set.
+
+### 4.2 TQ-EPS2 — every band-proper partial six-colouring leaves at least `ε²/78` uncovered [hand, one mind; input C-CS-2, two minds]
+
+*Statement.* If `C₁, …, C₆` have `Leb ⊗ Leb`-null monochromatic pairs at distances in `[1 − ε, 1 + ε]`, `0 < ε ≤ 2`, then the uncovered set has
+lower density `≥ ε²/78`. Hence `µ₆(ε) ≤ 1 − ε²/78`.
+
+*Proof.*
+- Lemma T turns the family into a tile colouring that is band-proper **everywhere** for `ε′ = ε − 2√2h`, with no more uncovered measure.
+- Fix `z`. If every uncovered point of `U₃(z)` were within `t < ε′/2` of the coloured points of `U₃(z)`, HOLE-t would give a six-colouring of
+  `U₃(z)` proper for a band of positive width. That contradicts C-CS-2: V-1.3 in its band form, `plans/FS106-V-verification.md` l. 112 and
+  `plans/FS106-VB-verification.md` l. 147, TRUE at two minds, one blind.
+- So for every `t < ε′/2` some `q ∈ U₃(z)` has `B(q, t) ∩ U₃(z)` uncovered. That set has area `≥ 0.4645·πt²` (`disc_cap`: the least fraction of
+  a disc of radius `t ≤ 1` centred in `U₃` that lies in `U₃`).
+- So every `U₃(z)` holds uncovered area `≥ 0.4645·π ε′²/4`. Averaging over `z` (`∫_{B_R}|H ∩ U₃(z)| dz ≤ 9π|H ∩ B_{R+3}|`) gives density
+  `≥ 0.4645 ε′²/36 ≥ ε′²/78`. Let `h → 0`. ∎
+
+*Consequences.*
+- A third proof of `µ₆(ε) < 1`, with no compactness.
+- The first half of the two-sided bracket `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` (the right side from §4.3).
+- **It is the best any argument of this form can give.** An argument that finds, in each disc of bounded radius, one hole containing a disc of
+  radius `≍ ε` yields `Θ(ε²)`. This matches S–V §9's "`S(ε) = Ω(ε2)`", which they state for the area to remove from a map. TQ-EPS2 is a lower
+  bound for every partial colouring. Not found in print in this form (§PA below).
+
+### 4.3 C-Q-LOCAL — **TRUE for every `δ > δ₆`**; **MISSTATED at `δ = δ₆`**, where the construction gives nothing [hand, one mind; Parts's tiling [external]]
+
+**TQ-ERODE (the lemma).** Take a partial colouring by closed tiles in which:
+- each tile has diameter `≤ 1`;
+- two distinct tiles of one colour have all cross-distances `≥ 1`, or all `≤ 1` (a "Siamese" pair, `[Parts2020c]` p. 2);
+- tile boundaries have finite length density.
+
+Replace each tile `τ` by `τ_κ = {x : B(x, κ) ⊆ τ}`. Then:
+- the result has **no** monochromatic pair at a distance in `(1 − 2κ, 1 + 2κ)`;
+- distinct eroded tiles are `≥ 2κ` apart;
+- the uncovered density grows by `≤ κ·(boundary length density) + O(κ²)`.
+
+*Proof.* For `p ∈ τ_κ`, `q ∈ τ′_κ` and `u = (q − p)/|q − p|`:
+- `p + κu ∈ τ` and `q − κu ∈ τ′` are at distance `|p − q| − 2κ`. If all cross-distances are `≥ 1`, then `|p − q| ≥ 1 + 2κ`.
+- `p − κu ∈ τ` and `q + κu ∈ τ′` are at distance `|p − q| + 2κ`. If all cross-distances are `≤ 1`, then `|p − q| ≤ 1 − 2κ`. Inside one tile
+  (`τ′ = τ`), the same computation gives an eroded diameter `≤ 1 − 2κ`.
+- The discs `B(p, κ) ⊆ τ` and `B(q, κ) ⊆ τ′` have disjoint interiors, so `|p − q| ≥ 2κ`. ∎
+
+*C-Q-LOCAL from it.*
+- `[Parts2020c]`'s six-tiling (p. 7: 17-gons with wavy sides and curved pairs, rhombic and arrowhead voids, `δ₆ = 1/6992.1655504123`) is of this
+  kind, by his definitions: "inner (tile width less than 1) and outer (distance between tiles greater than 1)" constraints, Siamese pairs allowed
+  (p. 2). This is taken on his word — his tiling is a numerical optimum, not verified here: **[external]**.
+- Eroding by `κ` gives a partial six-colouring with slack `ε < 2κ` and uncovered density `δ₆ + O(κ)`. By averaging over translations, a translate
+  covers `≥ 1 − δ₆ − O(κ)` of `U₃(0)`.
+- **Every coloured point has chromaticity 1**, not merely `≤ 2`: within distance `2κ` it sees only its own tile. So for every `δ > δ₆` there are
+  `ε > 0` and a colouring as claimed, with no trichromatic point, and not even a bichromatic one.
+- At `δ = δ₆` the construction needs `κ = 0`. Parts's own tiling has no slack (his constraints are equalities, p. 3 and §2.5: "constraints should
+  be set in the form of equalities"). Whether some band-proper partial six-colouring reaches exactly `δ₆` is unknown. The claim's "at least"
+  should read "greater than".
+
+*The consequence the claim asks to be stated and graded.*
+- **(L1) TRUE** [hand, one mind]. Every band-proper partial six-colouring can be tiled (Lemma T, whose squares have boundary density `4/h`) and then
+  eroded at `κ ≪ h`, which *widens* its slack at an uncovered cost `≤ 4κ/h`. So C-Q-STAB is unchanged if restricted to colourings whose coloured
+  set has no multichromatic point at all: every class a union of closed squares `≥ 2κ` from every other square. **No argument that locates
+  trichromatic (or bichromatic) points *in the coloured set* can prove it.** The features Voronov reads must be looked for at the holes, as limits
+  or as holes' boundaries.
+- **(L2) TRUE as a statement about arguments of a named form** [derived, one mind]. "An obstruction spread over a set of positive measure" is sharpened
+  in 4.4.
+
+### 4.4 A no-go for counting circles and bicycles — **TQ-HIT** [hand, one mind]
+
+The brief names "an averaged count of circles or bicycles" as the candidate non-local obstruction. Such an argument works like this:
+- it exhibits a family `𝒞` of configurations — unit circles `T₁(u)`, or bicycles `T₁(u) ∪ T₁(v)` with `1 < |u − v| < 2` — each of which, in a
+  band-proper colouring, leads to Voronov's contradiction unless an **effective** hole meets it;
+- an effective hole is one containing a point `≥ ε/2` from the coloured set, since thinner holes fill (HOLE-t);
+- it concludes that the holes are large because they must meet every member of `𝒞`.
+
+**Such an argument can never give more than `δ = O(ε)`.**
+- Let `W_ε` be the horizontal strips of width `2ε` centred on the lines `y ∈ ℤ/2`. Its density is `4ε`.
+- Every point of `W_ε`'s centre lines is at distance `ε ≥ ε/2` from the complement, so the strips are effective holes.
+- Every unit circle has vertical extent 2, so it crosses a centre line. Every circle and every bicycle therefore meets `W_ε`.
+
+So the requirement "every member of `𝒞` meets a hole" is met at density `4ε`, whatever `𝒞` is (among circles and bicycles). An argument of this form
+proves at most `1 − µ₆(ε) ≳ ε`. That is the advisor's "robust Voronov, linear in `ε`" (its hunch `robust-voronov-is-the-cheapest-decisive-route`,
+stage 1). By TQ-EQ it would not decide the problem: a bound tending to 0 gives nothing in the limit.
+
+*Caveat, in the headline's scope (G21).* TQ-HIT constrains **arguments** of the hitting form. It is not a construction: the strips do not make the
+remaining plane six-colourable with slack. It says that **a proof of C-Q-STAB must use how the holes sit relative to the colouring, not merely that
+they meet certain curves.** Equivalently, it must force either
+- holes of a size `ρ₀` independent of `ε`, or
+- a set of holes whose total measure does not scale with `ε`, so that at width `≍ ε` they number `≳ ε⁻²` per unit area (spacing `≍ ε`).
+
+Neither is supplied by any mechanism in `[Voronov2023]` or `[SokolovVoronov2025]`, whose certificates are point-and-circle configurations of
+bounded number per unit disc. Hence TQ-EPS2's `ε²`, and, with a positive-measure family of certificates, TQ-HIT's `ε`.
+
+### 4.5 C-Q-STAB — **GAP**: it *is* Hadwiger–Nelson's measurable form. The advisor's radius-3 wording is a sufficient condition, not an equivalent. Not decided [hand, one mind for every link below]
+
+1. **S–V §9's form (plane, `µ∗₆` independent of `ε`) ⟺ `lim µ₆(ε) < 1` ⟺ `χ_m⁰(ℝ²) ≥ 7`** (§1.1's reading of D-MU; TQ-EQ). So "decide C-Q-STAB" is
+   "decide `χ_m⁰(ℝ²)`". Given MR (rows 128, 130), TRUE is `χ(ℝ²) = 7`. With no MR, FALSE is `χ(ℝ²) ≤ 6` (I-EASY).
+2. **The advisor's form, "for some δ > 0 and every ε > 0, no colouring of the radius-3 disc by six band-proper colours plus a free seventh colour of
+   density at most δ exists", implies the plane form** (average over translates: `µ₆(ε) ≤ µ₆^{U₃}(ε)`). The exact disc equivalent is "**for some**
+   radius `R`" — which then holds for every larger `R`, since `1 − µ₆^{R′} ≥ (1 − µ₆^{R})((R′ − R)/R′)²` by sub-disc averaging. For "for all `R`"
+   read negated: if `lim_ε µ₆^R(ε) = 1` for every `R`, Lemma P gives `lim µ₆ = 1`. Whether radius 3 suffices is S–V's Question 1 ("the minimum area of
+   a convex region …") in stability form, open. **Verdict on the wording: MISSTATED as an equivalent of the plane question; as a claim, GAP.**
+3. **What is proved toward it.**
+   - `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` for every `ε` (TQ-EPS2; TQ-ERODE with Parts). So `0 ≤ 1 − µ₆⁰ ≤ 1.43·10⁻⁴`.
+   - The whole question is whether the left side can be made uniform.
+4. **What a refutation must be** (FALSE = a construction; TQ-EQ (e), TQ-EPS2, row 129, C-AE-SLACK):
+   - a sequence of *periodic grid-square* partial six-colourings with slack `ε_n → 0` and uncovered density `δ_n → 0`, necessarily
+     `δ_n ≥ ε_n²/78`;
+   - each class of density `≤ m₁(ℝ²) ≤ 0.2470`;
+   - WLOG no multichromatic coloured point;
+   - its Route II limit is an a.e.-proper measurable six-colouring that has **no slack** (C-AE-SLACK) — the wildness is all in the limit.
+5. **What a proof must be.** An argument that
+   - is **integral**: one-class-at-a-time and fractional arguments stop below `4.37` colours (row 129, G60), and the fractional relaxation of
+     `µ₆⁰` is 1;
+   - **sees only effective holes** (HOLE-t);
+   - does not look for multichromatic coloured points (L1);
+   - is **not of the hitting form** (TQ-HIT).
+   The named missing step: **a mechanism forcing holes of `ε`-independent total measure — a Voronov-type contradiction robust to a free colour on
+   any set that is thin at scale `ρ₀`, for every band `ε ≪ ρ₀`.** No such mechanism is known. Its a.e.-regular special cases (C-AE-Q2, C-AE-POLY,
+   C-AE-FA, the tight map forms) are all implied by C-Q-STAB, since each is a case of `χ_m⁰ ≥ 7`. None implies it.
+6. **What `[Parts2020c]` says about a refuting sequence** (read in full, 2026-09-27):
+   - (a) His six-tilings are **tight** — constraints are equalities (§2.5) — so they are points of `µ₆⁰`, not of `µ₆(ε)`. Erosion (TQ-ERODE)
+     converts them.
+   - (b) His voids sit at **every vertex** (type A rhombi at the degree-4 vertices, type B arrowheads at the degree-3 ones), and he reports that
+     "vertices in which three or more colored tiles converge are disadvantageous (a void is superior to any such vertex)" (§2.5 a). His optimum
+     has no trichromatic coloured point: L1's picture, found numerically.
+   - (c) His refinements are a **convergent** sequence, with `ρ₆` from 6197.58 to 6992.17 (Table 1), inside a class of congruent, highly
+     symmetric tilings (§3: "restricted ourselves to the case of highly symmetrical tilings with only a few tiles in the repeating cell"). The
+     voids keep a **fixed** size (the rhombus half-diagonals `l = 0.0133`, `r = 0.0055`). No parameter of his family drives `δ → 0`, so his
+     constructions give no refuting sequence, only the ceiling `δ₀ ≤ 1.43·10⁻⁴` on any stability constant.
+   - (d) His count observation (§2.4), that no known Siamese-free 7-tiling has fewer than 1/8 of its tiles in the seventh colour, bears on
+     proper seventh colours. It does not bear on free holes: his six-tiling's voids are numerous (about one per vertex) and small in area. A
+     refutation needs the area of the holes to vanish, not their count.
+   - (e) His pigeonhole remark (p. 4, "only parallel translations are used") is the finite shadow of `µ₆⁰ ≥ 1 − δ₆`: every unit-distance graph of
+     order `≤ 6992` is six-colourable.
+
+### 4.6 Verdicts, stage 4
+
+| claim | verdict | minds / grade |
+|---|---|---|
+| C-Q-HOLEa | **TRUE** as stated; general form HOLE-t (loss `2t`) | [hand], one mind |
+| TQ-EPS2 (new) | **TRUE**: `1 − µ₆(ε) ≥ ε²/78` | [hand], one mind; input C-CS-2 (two minds, one blind) |
+| C-Q-LOCAL | **TRUE for `δ > δ₆`**, with chromaticity 1, not only `≠ 3`; **MISSTATED at `δ = δ₆`** ("at least" → "greater than") | [hand], one mind; Parts's tiling [external] |
+| C-Q-LOCAL consequence | (L1) **TRUE**: C-Q-STAB may assume no multichromatic coloured point; (L2) sharpened as TQ-HIT | [hand], one mind |
+| TQ-HIT (new) | **TRUE**: hitting-form arguments over circles or bicycles are capped at `O(ε)` | [hand], one mind |
+| C-Q-STAB | **GAP** at "a mechanism forcing holes of `ε`-independent measure" — it is `χ_m⁰(ℝ²) ≥ 7`; the radius-3 wording is sufficient, not equivalent (MISSTATED as an equivalent) | [hand], one mind |
+
+### 4.7 §PA for the new statements (standing rule 11; a short gate, not a full one)
+
+Queries sent to the zbMATH Open API on 2026-09-27, with their results:
+
+| query | results |
+|---|---|
+| `ab:"partial coloring" & ab:"plane" & ab:"unit distance"` | 0 |
+| `ab:"fraction of the plane" & ab:"colors"` | 1: `[Parts2020c]` |
+| `ab:"forbidden" & ab:"interval" & ab:"fraction"` | 4, all off-topic |
+| `ab:"unit distance" & ab:"almost every"` | 1, off-topic |
+| `ab:"measurable" & ab:"chromatic number of the plane" & ab:"stability"` | 0 |
+| `ab:"six colors" & ab:"plane" & ab:"uncolored"` | 0 |
+| `au:"Parts, Jaan"` | 12 (`au:"Parts, J"` returns 0 — a tool note) |
+| `au:"Pritikin, D"` | 33 |
+
+Two titles in the author listings touch this job:
+- Parts 2022, *On lower bounds of the order of `k`-chromatic unit distance graphs* — the pigeonhole transfer from covered fractions. **Not held;
+  a prior-art debt**; listing only.
+- Pritikin 1998, *All unit-distance graphs of order 6197 are 6-colorable* (`[Pritikin1998]`, unheld).
+
+**Verdict.** Not found in print: TQ-EQ's converse direction, TQ-SUP, TQ-EPS2 or TQ-HIT. S–V §9 states the conditional one way, with the heuristic
+`S(ε)` for maps. Parts computes the tight fraction.
+
+*Would have searched here:* a tabu or local-search optimiser over periodic grid-square partial six-colourings with slack `ε`, to trace `1 − µ₆(ε)`
+as `ε → 0` (TQ-EQ (e) makes it the natural numerical experiment). Instead: the two-sided bracket `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` was derived, and
+the experiment is proposed for after 2026-10-01 (stub proposal in the report).
+## Stage 4 — SAVED: C-Q-HOLEa, C-Q-LOCAL, C-Q-STAB
+
+### 4.1 C-Q-HOLEa — **TRUE** as stated [hand, one mind], with a general form
+
+**HOLE-t (general form).** Let a colouring of `U₃(0) ∖ H` be proper for `[1 − ε, 1 + ε]`, and let every `q ∈ H ∩ U₃(0)` lie at distance `< t` from
+`U₃(0) ∖ H`, with `2t < ε`. Then it extends to a colouring of `U₃(0)` proper for `[1 − (ε − 2t), 1 + (ε − 2t)]`.
+
+*Proof.* For each `q ∈ H ∩ U₃(0)` pick `p(q) ∈ U₃(0) ∖ H` with `|q − p(q)| < t` (choice), and give `q` the colour of `p(q)`. A pair of the new
+colouring at a distance `ℓ` in the shrunk band, both ends coloured `j`, moves to a pair of old points of colour `j` at a distance in
+`(ℓ − 2t, ℓ + 2t) ⊂ (1 − ε, 1 + ε)`. The old points are distinct, since `ℓ − 2t > 0`, so this contradicts the hypothesis. ∎
+
+**C-Q-HOLEa is HOLE-t with `t = 2r`.** Let `H` be a union of pairwise disjoint closed discs of radius `≤ r`, and let `q ∈ D ∩ U₃(0)`, where `D` has
+centre `c` and radius `r′ ≤ r`.
+- *Countability and accumulation.* The discs are countably many (each holds a rational point). At every point `b ∈ ∂D ∩ U₃(0)`, points of
+  `U₃(0) ∖ H` accumulate. Otherwise a small closed convex neighbourhood of `b` in `U₃(0)` would be a continuum covered by countably many pairwise
+  disjoint closed sets, at least two of them non-empty (`D` and whatever covers the points outside `D` near `b`), against Sierpiński's theorem.
+- *Distance.* Leave `D` along the segment from `q` toward `0` (it stays in `U₃(0)`). The exit point is on `∂D ∩ U₃(0)` at distance `≤ 2r′` from
+  `q`. Equality forces `q ∈ ∂D`, and then `q` itself is such a boundary point. If `0 ∈ D`, then `D ⊂ int U₃(0)` and the nearest point of `∂D` is
+  within `r′`. Either way `dist(q, U₃(0) ∖ H) < 2r`.
+- So HOLE-t applies with `t = 2r`, `2t = 4r < ε`. ∎
+
+Holes well inside `U₃(0)` give `t = r`, halving the loss.
+
+*What it says* (the advisor's A8a in its general form): **a hole all of whose points are within `ε/2` of the coloured set is invisible** — it can be
+filled at the cost of shrinking the band. So a hole that matters must contain points at distance `≥ ε/2` from the coloured set.
+
+### 4.2 TQ-EPS2 — every band-proper partial six-colouring leaves at least `ε²/78` uncovered [hand, one mind; input C-CS-2, two minds]
+
+*Statement.* If `C₁, …, C₆` have `Leb ⊗ Leb`-null monochromatic pairs at distances in `[1 − ε, 1 + ε]`, `0 < ε ≤ 2`, then the uncovered set has
+lower density `≥ ε²/78`. Hence `µ₆(ε) ≤ 1 − ε²/78`.
+
+*Proof.*
+- Lemma T turns the family into a tile colouring that is band-proper **everywhere** for `ε′ = ε − 2√2h`, with no more uncovered measure.
+- Fix `z`. If every uncovered point of `U₃(z)` were within `t < ε′/2` of the coloured points of `U₃(z)`, HOLE-t would give a six-colouring of
+  `U₃(z)` proper for a band of positive width. That contradicts C-CS-2: V-1.3 in its band form, `plans/FS106-V-verification.md` l. 112 and
+  `plans/FS106-VB-verification.md` l. 147, TRUE at two minds, one blind.
+- So for every `t < ε′/2` some `q ∈ U₃(z)` has `B(q, t) ∩ U₃(z)` uncovered. That set has area `≥ 0.4645·πt²` (`disc_cap`: the least fraction of
+  a disc of radius `t ≤ 1` centred in `U₃` that lies in `U₃`).
+- So every `U₃(z)` holds uncovered area `≥ 0.4645·π ε′²/4`. Averaging over `z` (`∫_{B_R}|H ∩ U₃(z)| dz ≤ 9π|H ∩ B_{R+3}|`) gives density
+  `≥ 0.4645 ε′²/36 ≥ ε′²/78`. Let `h → 0`. ∎
+
+*Consequences.*
+- A third proof of `µ₆(ε) < 1`, with no compactness.
+- The first half of the two-sided bracket `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` (the right side from §4.3).
+- **It is the best any argument of this form can give.** An argument that finds, in each disc of bounded radius, one hole containing a disc of
+  radius `≍ ε` yields `Θ(ε²)`. This matches S–V §9's "`S(ε) = Ω(ε2)`", which they state for the area to remove from a map. TQ-EPS2 is a lower
+  bound for every partial colouring. Not found in print in this form (§PA below).
+
+### 4.3 C-Q-LOCAL — **TRUE for every `δ > δ₆`**; **MISSTATED at `δ = δ₆`**, where the construction gives nothing [hand, one mind; Parts's tiling [external]]
+
+**TQ-ERODE (the lemma).** Take a partial colouring by closed tiles in which:
+- each tile has diameter `≤ 1`;
+- two distinct tiles of one colour have all cross-distances `≥ 1`, or all `≤ 1` (a "Siamese" pair, `[Parts2020c]` p. 2);
+- tile boundaries have finite length density.
+
+Replace each tile `τ` by `τ_κ = {x : B(x, κ) ⊆ τ}`. Then:
+- the result has **no** monochromatic pair at a distance in `(1 − 2κ, 1 + 2κ)`;
+- distinct eroded tiles are `≥ 2κ` apart;
+- the uncovered density grows by `≤ κ·(boundary length density) + O(κ²)`.
+
+*Proof.* For `p ∈ τ_κ`, `q ∈ τ′_κ` and `u = (q − p)/|q − p|`:
+- `p + κu ∈ τ` and `q − κu ∈ τ′` are at distance `|p − q| − 2κ`. If all cross-distances are `≥ 1`, then `|p − q| ≥ 1 + 2κ`.
+- `p − κu ∈ τ` and `q + κu ∈ τ′` are at distance `|p − q| + 2κ`. If all cross-distances are `≤ 1`, then `|p − q| ≤ 1 − 2κ`. Inside one tile
+  (`τ′ = τ`), the same computation gives an eroded diameter `≤ 1 − 2κ`.
+- The discs `B(p, κ) ⊆ τ` and `B(q, κ) ⊆ τ′` have disjoint interiors, so `|p − q| ≥ 2κ`. ∎
+
+*C-Q-LOCAL from it.*
+- `[Parts2020c]`'s six-tiling (p. 7: 17-gons with wavy sides and curved pairs, rhombic and arrowhead voids, `δ₆ = 1/6992.1655504123`) is of this
+  kind, by his definitions: "inner (tile width less than 1) and outer (distance between tiles greater than 1)" constraints, Siamese pairs allowed
+  (p. 2). This is taken on his word — his tiling is a numerical optimum, not verified here: **[external]**.
+- Eroding by `κ` gives a partial six-colouring with slack `ε < 2κ` and uncovered density `δ₆ + O(κ)`. By averaging over translations, a translate
+  covers `≥ 1 − δ₆ − O(κ)` of `U₃(0)`.
+- **Every coloured point has chromaticity 1**, not merely `≤ 2`: within distance `2κ` it sees only its own tile. So for every `δ > δ₆` there are
+  `ε > 0` and a colouring as claimed, with no trichromatic point, and not even a bichromatic one.
+- At `δ = δ₆` the construction needs `κ = 0`. Parts's own tiling has no slack (his constraints are equalities, p. 3 and §2.5: "constraints should
+  be set in the form of equalities"). Whether some band-proper partial six-colouring reaches exactly `δ₆` is unknown. The claim's "at least"
+  should read "greater than".
+
+*The consequence the claim asks to be stated and graded.*
+- **(L1) TRUE** [hand, one mind]. Every band-proper partial six-colouring can be tiled (Lemma T, whose squares have boundary density `4/h`) and then
+  eroded at `κ ≪ h`, which *widens* its slack at an uncovered cost `≤ 4κ/h`. So C-Q-STAB is unchanged if restricted to colourings whose coloured
+  set has no multichromatic point at all: every class a union of closed squares `≥ 2κ` from every other square. **No argument that locates
+  trichromatic (or bichromatic) points *in the coloured set* can prove it.** The features Voronov reads must be looked for at the holes, as limits
+  or as holes' boundaries.
+- **(L2) TRUE as a statement about arguments of a named form** [derived, one mind]. "An obstruction spread over a set of positive measure" is sharpened
+  in 4.4.
+
+### 4.4 A no-go for counting circles and bicycles — **TQ-HIT** [hand, one mind]
+
+The brief names "an averaged count of circles or bicycles" as the candidate non-local obstruction. Such an argument works like this:
+- it exhibits a family `𝒞` of configurations — unit circles `T₁(u)`, or bicycles `T₁(u) ∪ T₁(v)` with `1 < |u − v| < 2` — each of which, in a
+  band-proper colouring, leads to Voronov's contradiction unless an **effective** hole meets it;
+- an effective hole is one containing a point `≥ ε/2` from the coloured set, since thinner holes fill (HOLE-t);
+- it concludes that the holes are large because they must meet every member of `𝒞`.
+
+**Such an argument can never give more than `δ = O(ε)`.**
+- Let `W_ε` be the horizontal strips of width `2ε` centred on the lines `y ∈ ℤ/2`. Its density is `4ε`.
+- Every point of `W_ε`'s centre lines is at distance `ε ≥ ε/2` from the complement, so the strips are effective holes.
+- Every unit circle has vertical extent 2, so it crosses a centre line. Every circle and every bicycle therefore meets `W_ε`.
+
+So the requirement "every member of `𝒞` meets a hole" is met at density `4ε`, whatever `𝒞` is (among circles and bicycles). An argument of this form
+proves at most `1 − µ₆(ε) ≳ ε`. That is the advisor's "robust Voronov, linear in `ε`" (its hunch `robust-voronov-is-the-cheapest-decisive-route`,
+stage 1). By TQ-EQ it would not decide the problem: a bound tending to 0 gives nothing in the limit.
+
+*Caveat, in the headline's scope (G21).* TQ-HIT constrains **arguments** of the hitting form. It is not a construction: the strips do not make the
+remaining plane six-colourable with slack. It says that **a proof of C-Q-STAB must use how the holes sit relative to the colouring, not merely that
+they meet certain curves.** Equivalently, it must force either
+- holes of a size `ρ₀` independent of `ε`, or
+- a set of holes whose total measure does not scale with `ε`, so that at width `≍ ε` they number `≳ ε⁻²` per unit area (spacing `≍ ε`).
+
+Neither is supplied by any mechanism in `[Voronov2023]` or `[SokolovVoronov2025]`, whose certificates are point-and-circle configurations of
+bounded number per unit disc. Hence TQ-EPS2's `ε²`, and, with a positive-measure family of certificates, TQ-HIT's `ε`.
+
+### 4.5 C-Q-STAB — **GAP**: it *is* Hadwiger–Nelson's measurable form. The advisor's radius-3 wording is a sufficient condition, not an equivalent. Not decided [hand, one mind for every link below]
+
+1. **S–V §9's form (plane, `µ∗₆` independent of `ε`) ⟺ `lim µ₆(ε) < 1` ⟺ `χ_m⁰(ℝ²) ≥ 7`** (§1.1's reading of D-MU; TQ-EQ). So "decide C-Q-STAB" is
+   "decide `χ_m⁰(ℝ²)`". Given MR (rows 128, 130), TRUE is `χ(ℝ²) = 7`. With no MR, FALSE is `χ(ℝ²) ≤ 6` (I-EASY).
+2. **The advisor's form, "for some δ > 0 and every ε > 0, no colouring of the radius-3 disc by six band-proper colours plus a free seventh colour of
+   density at most δ exists", implies the plane form** (average over translates: `µ₆(ε) ≤ µ₆^{U₃}(ε)`). The exact disc equivalent is "**for some**
+   radius `R`" — which then holds for every larger `R`, since `1 − µ₆^{R′} ≥ (1 − µ₆^{R})((R′ − R)/R′)²` by sub-disc averaging. For "for all `R`"
+   read negated: if `lim_ε µ₆^R(ε) = 1` for every `R`, Lemma P gives `lim µ₆ = 1`. Whether radius 3 suffices is S–V's Question 1 ("the minimum area of
+   a convex region …") in stability form, open. **Verdict on the wording: MISSTATED as an equivalent of the plane question; as a claim, GAP.**
+3. **What is proved toward it.**
+   - `ε²/78 ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)` for every `ε` (TQ-EPS2; TQ-ERODE with Parts). So `0 ≤ 1 − µ₆⁰ ≤ 1.43·10⁻⁴`.
+   - The whole question is whether the left side can be made uniform.
+4. **What a refutation must be** (FALSE = a construction; TQ-EQ (e), TQ-EPS2, row 129, C-AE-SLACK):
+   - a sequence of *periodic grid-square* partial six-colourings with slack `ε_n → 0` and uncovered density `δ_n → 0`, necessarily
+     `δ_n ≥ ε_n²/78`;
+   - each class of density `≤ m₁(ℝ²) ≤ 0.2470`;
+   - WLOG no multichromatic coloured point;
+   - its Route II limit is an a.e.-proper measurable six-colouring that has **no slack** (C-AE-SLACK) — the wildness is all in the limit.
+5. **What a proof must be.** An argument that
+   - is **integral**: one-class-at-a-time and fractional arguments stop below `4.37` colours (row 129, G60), and the fractional relaxation of
+     `µ₆⁰` is 1;
+   - **sees only effective holes** (HOLE-t);
+   - does not look for multichromatic coloured points (L1);
+   - is **not of the hitting form** (TQ-HIT).
+   The named missing step: **a mechanism forcing holes of `ε`-independent total measure — a Voronov-type contradiction robust to a free colour on
+   any set that is thin at scale `ρ₀`, for every band `ε ≪ ρ₀`.** No such mechanism is known. Its a.e.-regular special cases (C-AE-Q2, C-AE-POLY,
+   C-AE-FA, the tight map forms) are all implied by C-Q-STAB, since each is a case of `χ_m⁰ ≥ 7`. None implies it.
+6. **What `[Parts2020c]` says about a refuting sequence** (read in full, 2026-09-27):
+   - (a) His six-tilings are **tight** — constraints are equalities (§2.5) — so they are points of `µ₆⁰`, not of `µ₆(ε)`. Erosion (TQ-ERODE)
+     converts them.
+   - (b) His voids sit at **every vertex** (type A rhombi at the degree-4 vertices, type B arrowheads at the degree-3 ones), and he reports that
+     "vertices in which three or more colored tiles converge are disadvantageous (a void is superior to any such vertex)" (§2.5 a). His optimum
+     has no trichromatic coloured point: L1's picture, found numerically.
+   - (c) His refinements are a **convergent** sequence, with `ρ₆` from 6197.58 to 6992.17 (Table 1), inside a class of congruent, highly
+     symmetric tilings (§3: "restricted ourselves to the case of highly symmetrical tilings with only a few tiles in the repeating cell"). The
+     voids keep a **fixed** size (the rhombus half-diagonals `l = 0.0133`, `r = 0.0055`). No parameter of his family drives `δ → 0`, so his
+     constructions give no refuting sequence, only the ceiling `δ₀ ≤ 1.43·10⁻⁴` on any stability constant.
+   - (d) His count observation (§2.4), that no known Siamese-free 7-tiling has fewer than 1/8 of its tiles in the seventh colour, bears on
+     proper seventh colours. It does not bear on free holes: his six-tiling's voids are numerous (about one per vertex) and small in area. A
+     refutation needs the area of the holes to vanish, not their count.
+   - (e) His pigeonhole remark (p. 4, "only parallel translations are used") is the finite shadow of `µ₆⁰ ≥ 1 − δ₆`: every unit-distance graph of
+     order `≤ 6992` is six-colourable.
+
+### 4.6 Verdicts, stage 4
+
+| claim | verdict | minds / grade |
+|---|---|---|
+| C-Q-HOLEa | **TRUE** as stated; general form HOLE-t (loss `2t`) | [hand], one mind |
+| TQ-EPS2 (new) | **TRUE**: `1 − µ₆(ε) ≥ ε²/78` | [hand], one mind; input C-CS-2 (two minds, one blind) |
+| C-Q-LOCAL | **TRUE for `δ > δ₆`**, with chromaticity 1, not only `≠ 3`; **MISSTATED at `δ = δ₆`** ("at least" → "greater than") | [hand], one mind; Parts's tiling [external] |
+| C-Q-LOCAL consequence | (L1) **TRUE**: C-Q-STAB may assume no multichromatic coloured point; (L2) sharpened as TQ-HIT | [hand], one mind |
+| TQ-HIT (new) | **TRUE**: hitting-form arguments over circles or bicycles are capped at `O(ε)` | [hand], one mind |
+| C-Q-STAB | **GAP** at "a mechanism forcing holes of `ε`-independent measure" — it is `χ_m⁰(ℝ²) ≥ 7`; the radius-3 wording is sufficient, not equivalent (MISSTATED as an equivalent) | [hand], one mind |
+
+### 4.7 §PA for the new statements (standing rule 11; a short gate, not a full one)
+
+- **zbMATH Open API, 2026-09-27:** `ab:"partial coloring" & ab:"plane" & ab:"unit distance"`; `ab:"fraction of the plane" & ab:"colors"`;
+  `au:"Parts, J"`. Only the queries are recorded here. Nothing in their results states TQ-EQ, TQ-SUP, TQ-EPS2 or TQ-HIT.
+- **Held papers that come nearest:**
+  - S–V §9 states the conditional one way, and the asymptotics `S(ε)` for maps;
+  - `[Parts2020c]` computes the tight fraction;
+  - Pritikin 1998 (cited by Parts; `[Pritikin1998]`, unheld) holds the pigeonhole transfer.
+- **Grade:** "not found in print", pending the zbMATH run logged in the next stage.
+
+## Stage 4 — SAVED
