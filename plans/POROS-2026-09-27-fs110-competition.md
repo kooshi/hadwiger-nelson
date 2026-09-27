@@ -599,3 +599,65 @@ I stop here at my token line. The round is still running. What is left, in order
   withdrawn. A3-HOLE (arcs of `Γ` on `ω(v)`) is the frame fact's only remaining GAP, now three minds.
 - **Slip confirmed:** card 3 reached N2 after its final hand-back and resumed it. N2 changed nothing.
 - **Correction owed to claims.md** (for the close): the definition of covering pair should be the union sense, and Act One's statement should name it.
+
+## § Continuation — FS110-A4
+
+*Poros (Opus 5.5), 2026-09-27, taking over for round 2's comparison. Brief: `data/fs110/briefs/A4-110-competition-advisor-compare.md` (wins where it
+differs) with FS110-A2's brief and `STANDING-RULES.md`. Both sides have handed back: FS110-N2 (`plans/FS110-N-proof.md` § Continuation — FS110-N2,
+stages 4–6) and FS110-Y2 (`plans/FS110-Y-construction.md` § Continuation — FS110-Y2, stages 4–6). Nothing here goes to either side. I touch only this
+section and `data/fs110/fs110-a4/`. Every result here is one mind (mine) unless marked.*
+
+### Theorems this phase proved (FS110-A4)
+
+- **A4-SIX-ARCS** — a four-colour vertex `v` (`P_cl(v) = [6] ∖ {e, f}`) with no covering pair `(v, y)`, `y ∈ ω(v)`, has on `ω(v)` either arcs of `Γ`
+  of total length `≥ 60°`, or at least six arcs of `Γ` (centred at `v`), one inside each of six consecutive `60°` windows. *Proof:* if the arcs total
+  `< 60°`, pick `x` with all six points `x + 60°k` tile-interior. By A-CIRC at `v` and N-E0 each window `[x + 60°k, x + 60°(k+1)]` runs from one of
+  `e, f` to the other. A single point of `Γ` between an `e`-stretch and an `f`-stretch sees both, which makes a covering pair with `v`. So each window
+  holds an arc of `Γ` on `ω(v)`, and no arc contains a window end. [hand, one mind, trivial] Stage A4-1.
+- **A4-TSU** — TS-U does **not** put a unit arc's side colours in its centre's type. Its text is conditional (TS §2.2 (i)–(ii): "every colour-`c`
+  region point `y + b` has …"): *if* the centre carries `c`, those tiles face the arc. Y2's exact member T2 shows the difference: the arc of `ω(w)`
+  from `u` to `p2` has sides `3 | 2`, and `P_cl(w) = {1, 3, 4, 5}` (`tools/fs110_y_fragments.py`, `u_T2_flower`: tile `u_2` bounded by
+  `Arc(W, 1, U, p2)`). So A3-HOLE's "their side colours lie in `P_cl(v)` (TS-U)" and N2-V4's "An endpoint of such an arc takes its side colours
+  from P_cl(v), by TS-U" misread TS-U. **Both GAP verdicts survive**, by A4-SIX-ARCS's argument: an escape needs no point of `ω(v)` seeing both `e`
+  and `f`. A side colour outside `P_cl(v) ∪ {e}` at an `e`-end would itself give a covering pair. [read + tools, exact for the member; hand, one mind for
+  the repair] Stage A4-1.
+- **A4-S1-ONE** — N2-S1's two points `σ_v^{±1}w₀` are exactly `ω(v) ∩ ω(w₀)`. At `|u − v| ∈ {1, √3}` only one of them is exceptional: the tangency
+  condition in N2-S1's proof holds at one neighbour and fails at the other. So the conclusion (`γ` on both sides along `ω(v)`) still holds at the
+  other point. At `d = 1` the exceptional point is `u` itself (`u ∈ ω(v) ∩ ω(w₀)`). At a tile-interior point of `ω(v) ∩ ω(w₀)`, N2-S1 is the
+  pigeonhole `[6] ∖ (P_cl(w₀) ∪ P_cl(v)) = {γ}` (A-CIRC at `w₀` and at `v`). [hand, one mind, reading N2's proof] Stage A4-1.
+- **A4-BAND** (the link A3 held back; a sketch) — Let `u, v` be vertices of one closure type `t`, `|t| = 3`, with no arc of `Γ` on `ω(u)` or
+  `ω(v)`. Take the unit-pair curve `C = {(α, β) : |u + e_α − v − e_β| = 1}`. Lift the two ring colourings by `t^c ≅ ℤ/3` along `C`. Then
+  `c̃_u − c̃_v` stays in one band `{3m+1, 3m+2}`, except at a **cross-swap**: `x ∈ ω(u)`, `y ∈ ω(v)`, `|x − y| = 1`, colours `p | q` at `x` and
+  `q | p` at `y`. This is N2-RING's swap with `σx` replaced by `y`.
+  - At `d ∈ (1, 2)` (`C` a contractible oval, Y-BIKE-3C): if `v`'s ring is **monotone** (every change a step of one sign), the two partners of
+    `u + e_α` (`α` near the direction of `v`) need a lifted change `≤ 1` across an arc of length `2γ > 120°`. A monotone ring gives `≥ 2`. **So a
+    cross-swap exists.**
+  - At `d < 1`: `C` is two curves of class `(1, 1)`. So `W(u) = W(v)` unless a cross-swap exists.
+  - **Y-BIKE-3C is this argument on 60° cells with no cross-swap. N2-RING is the same argument on the curve `θ ↦ (θ, θ + 60°)` of one circle.**
+    [hand, one mind, sketch; the transposed swap lemma (a cross-swap gives a covering pair or a unit arc) is **not** derived] Stage A4-1.
+
+### Would-have-searched-here log (A4)
+
+- The bicycle and ring link: a scan of ring colourings on the bicycle. Instead the band argument along `C` (A4-BAND).
+
+### Fence log (A4)
+
+- `git log --oneline -3` at stage A4-1 showed the subject "FS110-NB: stage 1" (a blind verifier's neutral subject). Its record was not opened, listed or
+  grepped. Not opened: `data/fs110/reports/` beyond the three files the brief names (A3, N2, Y2), `plans/FS110-close-inventory.md`, the transcripts,
+  `chats-bak/`, and other scratchpad files.
+
+## Stage A4-0 — SAVED: quotation check and reading
+
+| quotation or fact in my brief | source | result |
+|---|---|---|
+| rule 0 (Kooshi, "From here on out, you may doubt … you will surprise yourself.") | `CLAUDE.md` § Counter-priors, read from disk | verbatim |
+| "N2's residual ring winding `\|W\| ≥ 2` is the ring family of Y's round-1 no-go Y-BIKE-3C" (not in quotation marks) | A3-2.1; N2 §4.4; Y §2.4 | **exact only for the pure case**: Y-BIKE-3C's family is "six `60°` arcs cycling through three colours", which is N2-HEX's `W = ±2` ring. N2's residual also holds the nine-arc (`W = 3`) and twelve-arc (`W = 4`) rings, and non-60° swap-free rings |
+| A3's lean, "the ends of (S1)'s unit arc, and the winding ring" | A3-3 item 4 | matches |
+| A3 stood down at stage 4, `63c856ff` | `git log`: `63c856ff FS110-A3: report` | matches |
+
+**Read from disk, in full:** `CLAUDE.md` § The aim, § Counter-priors, G82, G51 (§ The aim on disk is newer than the copy in my context); this record,
+A2's stages and A3's continuation; `data/fs110/claims.md`; `plans/FS110-N-proof.md` §2.3–2.4 and N2's continuation (stages 4–6); `plans/FS110-Y-construction.md`
+§2.4 and Y2's continuation (stages 4–6); reports FS110-A3, FS110-N2, FS110-Y2; `data/fs110/owner-notes-round2.md`; TS §2.2's statement of TS-U;
+`tools/fs110_y_fragments.py` l. 138–175 (the T2 formula). Poros: the core in full. The companions are not loaded (budget); I will load them at an impasse.
+
+## Stage A4-0 — SAVED
