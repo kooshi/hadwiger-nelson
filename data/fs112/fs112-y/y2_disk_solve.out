@@ -1,0 +1,20 @@
+== step 2: the exact constraint system (sympy)
+ok       Pi_0 = ABCDE closes: a unit regular pentagon with A on the axis (edges at 144, 72, 0, -72, -144 deg)
+ok       'connected' (B_0 = rho E_0): x-equation has one positive root a = [sqrt(2)/sqrt(sqrt(5) + 5)]
+ok       the y-equation holds at that root (the system is consistent: one unknown, rank one)
+ok       a = |OA| = 1/(2 sin 72) exactly (= 0.525731112): the A_k form a regular pentagon of diagonal 1
+ok       CONTROL: r^2 = |OC|^2 = 9*sqrt(5)/10 + 5/2 = (25 + 9 sqrt5)/10 exactly; r = 2.124255441
+ok          = 5/2 + 9/(2 sqrt5) (the caption)
+ok          = phi^2 (15 + sqrt5)/10 (Parts, [11.34])
+ok       |OD| = |OC| (both on the rim)
+ok       |A_0A_1| = 1/phi, |A_0A_2| = 1: the central Reuleaux pentagon has width 1
+ok       |AC| = phi, so Z^L = A + (C - A)/phi is at distance 1 from A
+ok       Z^L lies on BD: Z^L = AC cap BD (a pentagram point)
+ok       |Z^L D| = |Z^R C| = 1: the red rim tile has unit diagonals
+ok       leg length L: L^2 = 1 - |A_0A_1|^2 = (sqrt5 - 1)/2 = 1/phi
+ok       the outward normal of side A_0A_1 is the unit vector at 126 deg
+ok       Y_0 = A_0 + L n_0 lies on omega(A_1): the leg ends on the unit arc
+ok       |B_0A_0| = |B_0A_1| = 1
+ok       B_0 lies on the ray at 126 deg: u_0 = r e(126) is on the ray O B_0
+ok       (B_0, Z^R_0): |A_0 Z^R_0| = |A_0 B_0| = 1 and |C_0 Z^R_0| = |C_0 B_0| = 1 -- their common unit points are A_0 and C_0
+ALL AS EXPECTED

@@ -441,3 +441,19 @@ not an extra assumption.
    read-off (step 3).
 
 ## Stage 4 — SAVED
+
+## Stage 5 (in progress): CAL-DISK steps 2 and 3
+
+### 5.0 Registered before the exact check (G21; both outcomes reachable)
+
+Step 2 ran first (`python3 tools/fs112_y2_disk.py solve`, `data/fs112/fs112-y/y2_disk_solve.out`): the one unknown `|OA|` solved from "connected",
+**the control `r² = |OC|² = (25 + 9√5)/10` reproduced exactly** (and the caption's and Parts's forms), and every rule of §4.2 checked as an identity (below).
+Predictions for step 3, written before the checker is run on the disk:
+- **faithful disk:** ACCEPT on all 71 same-colour pairs (`Σ n_c(n_c + 1)/2` with six red tiles and four of each other colour); every tile of diameter
+  exactly 1 (26 self contacts under `closed_interval`); at least the 20 out-contacts of the 20 unit arcs (`(C0, R_k)`, `(T1_k, T2_{k+3})`, `(U_k, T1_{k+1})`,
+  `(U′_k, T1_{k−1})`) exact at 1; all 20 arcs of kind **both**, centred at the `A_k` with `|P_cl| = 4`. Reachable otherwise: a REJECT (the three causes of
+  §1.6: transcription, checker, print), or a slack arc.
+- **plant `ring2_short`** (ring-2 tops at radius `99/100` about `A_k`, `Z` moved in along the diagonals): REJECT at exactly the five `(C0, R_k)` and the five
+  `(R_k, R_k)`.
+- **plant `swap`** (`U_0` and `U′_0` exchange colours): REJECT at exactly `(U_0, T1_4)` and `(U′_0, T1_1)`.
+- **plant `chords`** (the central tile's arcs replaced by chords): REJECT at exactly the five `(T1_k, T2_{k+3})`.
