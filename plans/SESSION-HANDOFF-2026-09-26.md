@@ -14,6 +14,10 @@ place to start. Current state only; the history is in the documents it points to
      `[Polymath2021]` p. 199 poses FS-112's question. **NEXT: open FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`, rank 1; its
      banner carries four re-aims; re-register its "a YES by formula (0.03)" at the opening). Budgets in briefs are guidance only (Kooshi,
      2026-09-27: *"It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."*).
+  0a. **FS-112, the unit-arc half, OPENED 2026-09-27 21:09 UTC** (Kooshi: *"You're approved to continue."*): planner FS112-P and advisor FS112-A
+     launched together on `data/fs112/briefs/P112-planner.md`, `A112-advisor.md` (96ea0744); standing rules `data/fs112/briefs/STANDING-RULES.md`
+     (budgets are guidance). The planner writes `plans/FS112-unit-arc-half.md`, `data/fs112/claims.md`, the competition briefs, and opens
+     `plans/FS112-close-inventory.md` (then the owner is its only writer).
   0. **Status 2026-09-27 13:30 UTC:** **FS-106, FS-107 and FS-110 CLOSED** (rows 131–134); ranking pass done. Row 134: under S–V's Condition 5, no locally finite segment/circular-arc map (no arc of radius 1) has an a.e.-proper six-colouring — S–V Question 2's Condition-5 half answered YES (grade: inventory item 113). CLAUDE.md 295,846; all gates PASS. **No agent running.** Next milestone by ranking: FS-112 (the unit-arc half, `plans/STUB-unit-arc-half.md`) at rank 1, FS-111 (the cone scale) at 2 — Kooshi picks. Owed: CE1–CE7 derivation entries; CLOSED-QUESTIONS row for S–V Q2's Condition-5 half (Kooshi's call); 27 stub files' six-framed bearings.
   1. **FS106-V2 is running** (finishes the sighted check, aims at repairing Sokolov–Voronov). When it reports: log it; read its verdicts
      on SV-L3, SV-L4, Obs. 1, Prop. 8, SV-1, SV-2 and its repairs; **re-brief wave 2** (`data/fs106/briefs/TS106-structural.md`,
