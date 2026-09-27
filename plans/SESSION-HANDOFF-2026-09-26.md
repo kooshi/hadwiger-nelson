@@ -5,6 +5,11 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
+- **FS-105, harden MR — CLOSED 2026-09-27, 02:19 UTC by the clock** (close inventory `plans/FS105-close-inventory.md`; `plans/FS105-harden-mr.md` §R-close;
+  `plans/FS105-derivation.md`, 19 entries). MR stands, grade rewritten in row 120: EL2021 Thm 1.2 = Thm 1.3 + FS105-DED [two minds, one blind]
+  (EL2003 is an outline); PE-2 within hypotheses; EF_F⁺ three blind; C-MR16 one checking walk; row 129 test forms (W)/(W′). Covert channels
+  (transcripts, chats-bak/, the shared scratchpad) fixed in both protocol templates. Gates re-run by the owner: PASS; CLAUDE.md 296,382.
+  **Held for Kooshi:** rank 1 — FS-104 (default applied) or the FS-102 write-up. Open: FS-102 stub sentence, FS-100 "named step" note.
 - **FS-103, the collapse — CLOSED 2026-09-27, 00:33 UTC by the clock** (rows 128–130, G81; gates re-run by the owner: all PASS, CLAUDE.md 296,232). Was: **all derivation jobs done; the close is running** (job FS103-C, brief `data/fs103/briefs/C103-close-math.md`; then
   FS103-X, the front page, brief `data/fs103/briefs/X103-front-page.md`, launched by the owner when C reports). Work from the close inventory
   `plans/FS103-close-inventory.md` (items 1–78; owner the only writer except C's status ticks). Held at [hand], two blind minds each:
