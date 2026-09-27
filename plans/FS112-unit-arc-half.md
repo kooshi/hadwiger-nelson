@@ -62,7 +62,9 @@ pp. 186, 189 (same file, pdf pages 13–25), `[AxenovichEtAl2014]` §4 with Theo
    `[Parts2021]`'s wavy side centres it "at the nearest corner of the adjacent tile" of the same colour (the same kind); `[AxenovichEtAl2014]`'s strip
    centres it "at the opposite corner of the tile" — **the tile's own** corner, so the tile's own diameter is realised along the arc. A self-contact
    and a pair contact are different seams. The claim list names the three kinds (a definition, marked "(this list)") and asks each claim to say which
-   it concerns; the strip calibrates the self-contact kind and nothing in print, held, calibrates the pair kind by formula.
+   it concerns. *(Corrected at stage 4 on the advisor's reading: the strip is self-contact by its words and, by `[Polymath2021]` p. 194, uses the
+   tactic, so its pair contacts are read from its rebuild; FS-110's fragment S1 calibrates the pair kind locally. The claim list uses the advisor's
+   colour-level kinds: in-, out-, both, inert.)*
 2. **Polymath's question is about tilings "bounded by a closed curve"** (p. 191: "all colorings are tilings – that is, each point lies within a
    monochromatic region bounded by a closed curve"), and its hope is a *strengthening* of Thomassen (criterion (i) kept, (ii) eliminated). FS-112's
    Q-full keeps neither prohibition, so its NO is stronger than the hope within segment-and-arc maps and silent outside them, as the banner says.
@@ -444,9 +446,11 @@ Colours Needed to Nicely Colour a Sphere*, DCG, doi 10.1007/s00454-025-00736-3),
    side as starting points, not results:
    - **(a) The centre's wedge profile.** TS-U, read conditionally (A4-TSU): if the centre carries a side colour `c`, the `c`-tiles face the arc and
      the side cones are empty of both side colours. *Killing test:* a tight fragment whose unit-arc centre carries a side colour in a side cone.
-   - **(b) The arc budget of a four-colour vertex.** A4-SIX-ARCS: a four-colour vertex with no covering pair carries boundary unit arcs *centred at
-     itself* of total length `≥ 60°`, or at least six. So four-colour vertices are unit-arc centres, and the milestone's two live objects (NB-4's
-     exception and the unit arcs) may be one. *Killing test:* a tight four-colour vertex with fewer than six unit arcs centred at it and less than
+   - **(b) The arc budget of a four-colour vertex.** A4-SIX-ARCS: a four-colour vertex **"with no covering pair (v, y), y ∈ ω(v)"** carries boundary
+     unit arcs *centred at itself* of total length `≥ 60°`, or at least six; on the other branch the arcs sit on `ω(σ_v^{±1}y)`, centred at ring points
+     at distance 1 (NB §2.3). *(Corrected at stage 4: the first draft dropped A4-SIX-ARCS's hypothesis and wrote "four-colour vertices are unit-arc
+     centres" — a standing-rule-5 slip, caught by FS112-A.)* On the first branch, four-colour vertices are unit-arc centres, and NB-4's exception and the
+     unit arcs may be one object (the advisor's C-SEAMS-TWO). *Killing test:* a tight four-colour vertex with fewer than six unit arcs centred at it and less than
      `60°` of them (it would refute A4-SIX-ARCS, one mind).
    - **(c) Propagation with a monotone quantity.** As in N4-FIN, each unit arc's end vertex forces a further unit arc at a controlled position, and
      a bi-infinite chain contradicts a monotone quantity (curvature, turning angle, or the centre's facing wedge). *Killing test:* a closed cycle of
@@ -456,9 +460,42 @@ Colours Needed to Nicely Colour a Sphere*, DCG, doi 10.1007/s00454-025-00736-3),
 4. **Its route.** Derivation only. The construction side's fragments by formula check derived claims (a cycle of unit arcs, a four-colour centre);
    they never answer the structural form.
 5. **The open instances it would decide.** Y2-S1i's GAP (both side colours cusps at `u`); C-T2 (ii) (can a whole tight map use the double unit-arc
-   seam wherever it needs one); NB-4's exception (A4-SIX-ARCS); YB3-SAME (`W` across a same-type edge — whether a unit arc is what breaks it);
+   seam wherever it needs one); NB-4's exception (A4-SIX-ARCS); YB3-SAME (`W` across a same-type edge — *corrected at stage 4: a Condition-5 statement whose event has no unit arc,
+   so no bearing on Q-full; kept last, for one exact fragment*);
    FS-110 item 68 (Y3-SIX at bowties, the eight-arc aligned ring, a generic `|W| = 3` ring at one vertex); Y-BIKE-3C's corner GAP (A4-BAND's
    cross-swap); `[Polymath2021]` p. 199's hope (criterion (ii) eliminated); and, beside the milestone, whether the strip's self-contact pattern can
    close up in the plane.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the fixed claim list (`data/fs112/claims.md`) and the advisor's first advice
+
+**The claim list** (statements only; ids): §0 definitions, with **the four contact kinds at a unit arc's centre** (in-, out-, both, inert; "self" the
+same-tile case of in-contact) and `[Thomassen1999]`'s hypothesis verbatim; §1 **Q-full**, **Q-full_K**, the question in print twice (S–V Question 2;
+`[Polymath2021]` p. 199 with p. 191's class), **Q-rule** with the (S1)/(S2) dichotomy verbatim, **C-ACT1**; §2 the seams — (S1) with N2-S1, A4-S1-ONE,
+Y2-S1I and **C-S1-G**; T2 with Y-T2W and **C-T2 (ii)**; NB-4's exception with its general form (and its printed form, **MISSTATED-suspect**),
+A4-SIX-ARCS, **C-SEAMS-TWO**, **C-V4-K**, **C-V56** (with de Grey's 2018 six-colour-vertex sketch verbatim), **C-UA-SEAMS**; §3 the Condition-5 chain as
+**C-CHAIN-1 … C-CHAIN-18**, each statement verbatim from `plans/FS110-derivation.md` with its grade, row 134's grade clause verbatim, and one question
+per step (holds / holds off a named exception, by contact kind / fails, with the configuration; the circles each step reads named); §4 **C-SAME**
+(YB3-SAME, ranked last, no bearing on Q-full), **C-68a–c**, Y-BIKE-3C, YB-V5X, N2-SWAP, A3-HOLE; §5 shared constraints (W-EQ-K, W-TAN with CUSP-K, TS-U
+with A4-TSU, FS106-IND-X, K-DENS, K-INT, K-CHR4, maps need six); §6 the unit-arc centre: **C-UA-INC**, **C-UA-WEDGE**, **C-UA-BUDGET** (both branches),
+**C-UA-CHAIN**, **ARC-INERT** (narrowed, a GAP at isolated contact points), **C-GLOBAL**, **HOCK / C-HOCK**; §7 calibration: **CAL-STRIP** (rebuilt by
+formula from the printed rule), **CAL-DISK** (no positive until derived), **CAL-7**, **CAL-FRAGS**, the checker's order and its three REJECT causes,
+**CAL-PLANT**; §8 eight killing tests; §9 failure clauses; §10 not claimed.
+
+**The advisor's advice** (FS112-A, two messages; its record `plans/POROS-2026-09-27-fs112-unit-arc-half.md` §2), and my decisions:
+
+| # | advice | decision |
+|---|---|---|
+| 1 | the arc kinds: Polymath's tactic is self **and** pair; the strip's pair contacts are to be read, not assumed absent; FS-110's S1 already calibrates the pair kind locally (`u_b`–`w′_out` `[1, 1.35]`, verified in `plans/FS110-Y-construction.md` §4.5); use colour-level kinds (in-, out-, both, inert); list ARC-INERT | **adopted**; §1.3 corrected in place; ARC-INERT listed in its author's narrowed form (a GAP at isolated contact points), with the radius-2 concentric partner noted |
+| 2 | §IQ (b) dropped A4-SIX-ARCS's hypothesis; NB-4's printed exception has a circle through its own centre | **adopted**; both branches quoted in C-UA-BUDGET and §IQ; the printed form quoted and marked MISSTATED-suspect (checked: `plans/FS110-NB-verification.md` l. 164 reads "`ω(y_k)` … passes through `y_k`") — my slip, logged for the report |
+| 3 | YB3-SAME has no bearing on the answer (a Condition-5 statement; its event has no unit arc); rank it last | **adopted** |
+| 4 | a unit arc breaks Condition 5 on one circle only; the chain walk names the circles each step reads | **adopted** into C-CHAIN's question |
+| 5 | local or global: the strip and `[Polymath2021]`'s disk are local six-positives; every NO route must fail on them at a named step and name its global step | **adopted with one reservation**: the disk enters the killing tests only once rebuilt **by derivation** (the print gives no rule beyond "a unit-edge regular pentagon" and no coordinates; fitting the figure would be a search); C-GLOBAL and killing test 8 carry the rest |
+| 6 | no frozen checker can accept the strip (ℚ(√3,√5) needed); a number-field checker, run in the order fragments → CAL-7 → strip → disk; three REJECT causes; two independent rebuilds | **adopted** (§7 "The checker"); the owner's inventory item 3 already carries it |
+| 7 | the seams are two species (T2's seam points are four-colour vertices) | **adopted** as a claim, C-SEAMS-TWO |
+| 8 | register the stub's 0.03 with `[Parts2020c]` §3's own population, and a dial beside it | **adopted**; the population quotation verified on p. 38 ("Here we have restricted ourselves to the case of highly symmetrical tilings with only a few tiles in the repeating cell, and in the case of k = 6 to tilings in which all tiles are congruent"); the dial is registered in stage 5 with my own number |
+
+Fences (the advisor's request, adopted): the advisor's record is fenced by path from both sides and every blind verifier (stage 5's briefs).
+
+## Stage 4 — SAVED
