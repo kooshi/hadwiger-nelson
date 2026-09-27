@@ -7,11 +7,19 @@ unopened. Fence touches: none.*
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| VW-HX | For every `0 < ρ < R`, `ε > 0`, family HX is band-proper (null form) iff `7R² − 4Rρ + ρ² ≤ (1−ε)²` and `4R² + 2Rρ + ρ² ≥ (1+ε)²`; every other same-colour class is implied; `δ = (2π/(21√3))(ρ/R)²`, and the two conditions force `ρ/R > 1/2`, so `inf δ = π/(42√3)`, attained by no member | [hand + tools, exact in ℚ(√3)]; one mind here | §2a.2; `tools/fs107_vw_hx_derive.py`, `tools/fs107_vw_hx_check.py` |
+| VW-ERODE | A full a.e.-proper colouring by tiles with connected interiors, eroded by `r`, is band-proper at every `ε < 2r`; with `≤ K` arcs per unit disc its holes are `O(Kr)` and its complexity `≤ 2K` | [hand], one mind | §2b.1 ⟸ |
+| VW-CPT | Designs with `≤ K` circular arcs or segments meeting each unit disc, `ε_n, δ_n → 0`, have (after recentring and a subsequence) a Hausdorff limit that is a full a.e.-proper six-colouring by tiles with `≤ K` arcs per unit disc | [hand], one mind | §2b.1 ⟹ |
+| VW-PIN | A full a.e.-proper colouring whose contacts are uniformly isolated and linearly transversal becomes band-proper at slack `ε` after removing one disc of radius `2ε/c` per contact: holes `O(ε²)` | [hand], one mind | §2b.2 |
+| VW-POLY | Polygonal designs with `≤ K` segments per unit disc have hole density `≥ δ₀(K) > 0` at every slack, unless the limit is FS106-AE-POLY's `d = 2` configuration | [hand], one mind; over AE-POLY and VW-CPT | §2b.3 |
+| VW-TAN | In a full a.e.-proper six-colouring by a locally finite map with C¹ arcs having tangents at the vertices, two vertices at distance `< 2` with complementary three-element essential multicolours form a tangent pair or include a bowtie; off those and the collinear distance-2 configuration, the vertex types of size `≥ 3` of two adjacent tiles pairwise intersect | [derived], one mind; over C-T-TAN (one mind) | §2b.4 |
+| VW-GRID | An exact checker for periodic grid-square colourings (offsets classified in ℚ, colours compared exactly) certifies the rasterised hexagonal 7-colouring with one class blank (blank density `2513/17655`) and a rasterised HX member (`1414/17287`) band-proper; planted squares fire | [tools, exact]; controls | `tools/fs107_vw_grid_check.py` |
 
 ## Would have searched here
 
-*(one line per move; filled as they come)*
+See §2b.5 (three moves, each replaced by a derivation or declined).
 
 ## Stage 1 — SAVED
 
@@ -214,3 +222,23 @@ circle about `w₀`, or a bowtie. Beyond cones it also fails at cusps and at wea
 - Cusp counterexamples to W-TAN's first clause under (Tm): I would have searched for a local cusp configuration. Instead I named the step
   C-T-TAN does not cover, and derived no counterexample (GAP, not FALSE).
 - A better absorption than HX (a smaller stall): not my job. I searched nothing.
+
+## Stage 3 — SAVED: verdicts (written before opening W's record)
+
+| statement | verdict | minds (mine) | grade | the step or correction |
+|---|---|---|---|---|
+| **W-EQ-K** | **TRUE under reading (Cu)** (at most `K` arcs meet each unit disc; arcs circular or straight), with two corrections: ⟸ gives complexity `≤ 2K` (reflex corners add one arc each; `K` for convex tiles), and "tight" is automatic given V-1.3 and unused otherwise. **GAP under (Ct)** (per-tile count) at the compactness step, which there would be a regularity theorem for W's own claim | 1, blind to W | [hand] | §2b.1 |
+| **W-RATE** | **TRUE with its hypotheses made explicit**: `O(ε)` for tiles of bounded complexity (finite boundary length per unit area); `O(ε²)` for uniformly isolated, linearly transversal contacts. **MISSTATED as "a full tight colouring"** with no boundary regularity. The pinhole-test clause is a reading, and its pinholes sit at contacts, not junctions | 1 | [hand]; the last clause [reading] | §2b.2 |
+| **W-POLY** | **TRUE** over FS106-AE-POLY (bar `d = 2`) and W-EQ-K ⟹ under (Cu); GAP under (Ct) | 1 | [hand], over AE-POLY (two minds, one blind; SV-L3 a sketch) | §2b.3 |
+| **HX-STALL** | **TRUE, and stronger than stated**: the "iff" holds for every parameter, not only at checked members, because every other same-colour class is implied by pair 2. Two nits: the null band condition allows equality where W writes `>`; and `δ*_HX` is an infimum approached as `ε → 0` at `R = 2/√21`, `ρ = R/2`, attained by no member | 1, plus exact checks of four members with plants and faithful stubs, and a rasterised member | [hand + tools, exact] | §2a |
+| **W-TAN** | **First clause TRUE over C-T-TAN** for maps with C¹ arcs having tangents at the vertices, types read as essential multicolours; **GAP** for types read as closure multicolours at **cusp** vertices, and for general Jordan-boundary maps (non-cone and weak-* blow-ups). **Second clause MISSTATED**: two-element types (bichromatic vertices of degree `≥ 4`) can be disjoint from three- or four-element types without C-T-TAN saying anything, and the collinear distance-2 configuration is excluded. Corrected statement: VW-TAN | 1 | [derived], over C-T-TAN (one mind) | §2b.4 |
+
+**Registered expectations scored (§1.3).** HX-STALL: expected the named pairs to bind and the value to hold (P 0.8). **Met**, and more: no third
+pair binds anywhere; the norm-4 hexagon, which I flagged as the risk, is always slack by `3R(R − ρ)`. W-EQ-K: TRUE under (Cu), GAP under (Ct)
+(P 0.6), **met**. W-RATE: TRUE with explicit hypotheses, MISSTATED bare (P 0.7), **met**. W-POLY (P 0.7): **met**. W-TAN: GAP at cusps or
+two-colour vertices (P 0.5), **met on both halves**, plus the Jordan-boundary gap I had not registered.
+
+**Audit of the TRUEs at a FALSE's rate** (standing rule 4). The flattering result for W is HX's "iff for every parameter". I re-derived each class
+symbolically and checked it against the exact checker at five values of `t`. The norm-3 class equals pair 2 exactly at all five. The diameter claim
+holds symbolically over every hull pair. The stall uses only pair 1 and pair 2, both confirmed by planted members that fail for exactly that pair.
+None of the TRUEs moves the answer: HX stalls at 0.0432, and W-EQ-K/W-POLY are compactness around held theorems.
