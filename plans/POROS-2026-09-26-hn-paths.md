@@ -48,28 +48,9 @@ against them.
 
 ### 1.3 Hunches registered at the opening
 
-```markdown
-hunch: mr-is-the-formalization-bottleneck
-  claim: every route in the ledger that goes above five without a finite witness passes through MR (row 120), and MR's Lean cost is very high (years), so the cheapest formalizable path to any new headline avoids MR or reduces it to a statement provable from ergodic theory Mathlib already has
-  basis: prior
-  falsifier: a row among 128–130 whose conclusion does not use MR, or a form of MR the project needs that follows from Mathlib's existing ergodic theorems plus weeks of work
-  registered: 2026-09-26
-  status: open
-
-hunch: six-needs-a-joint-constraint
-  claim: no argument that bounds one colour class at a time (density, fractional, Hoffman-type) can give six; a proof of six on the collapsed problem must constrain several classes jointly (pair or triple correlations, a flag-algebra or SDP hierarchy, a Falconer-type density-point argument on a configuration)
-  basis: prior
-  falsifier: row 129 or a paper giving six (or a bound above 5 for the measurable chromatic number) from one-class information
-  registered: 2026-09-26
-  status: open
-
-hunch: the-finite-witness-route-is-cheapest-in-lean
-  claim: whatever the value, a finite six-chromatic unit-distance graph with an LRAT refutation is the cheapest route to a Lean-verified headline by an order of magnitude, if one exists at a size a solver can refute
-  basis: prior
-  falsifier: a finite witness priced (after the ban) at a size the kernel checker cannot absorb, or an analytic route whose Lean cost is priced below it
-  registered: 2026-09-26
-  status: open
-```
+Three hunches were registered here before any reading (commit `b96d82da`): `mr-is-the-formalization-bottleneck`,
+`six-needs-a-joint-constraint`, `the-finite-witness-route-is-cheapest-in-lean`. Their entries, with the same claims and dates and now scored,
+are in §3.5.
 
 ### 1.4 "Would have searched here" log
 
@@ -79,28 +60,13 @@ hunch: the-finite-witness-route-is-cheapest-in-lean
 
 ### 2.0 What I read, against what I expected (evidence inventory)
 
-- `LEDGER.md` rows 120–130, read in full; rows 100–119 by headline only (sampled, not read whole) — read against: "every headline above five
-  rests on MR" — surprised: **yes, in one place**: row 128's *load-bearing step* and row 130 (`χ_CP = χ_m⁰ = χ(A_σ)`) are stated **with no
-  MR**; MR enters only to remove the SP witness. So MR is needed for exactly one arrow, `χ(ℝ²) ≥ χ_m⁰(ℝ²)`.
-- The brief's three "where things stand" bullets, against rows 128–130 — read against: "the owner paraphrased" — surprised: no; each matches
-  its row (row 129 says `1/α_loc ≤ 4.36`; the brief's "below 4.37" is the same bound).
-- `plans/FRONTIER-STUBS.md` rows 1–10, first 1,800 characters each (sampled) — read against: "the table is about six and about fields" —
-  surprised: no; rows 2–4, 7–9 are the product-locality cluster (six at a field *below* the plane's number), not the plane's value.
-- `plans/STUB-cp-plane-six.md` (FS-104), whole — read against: "route (d), an MR-free invariant LP, is named" — surprised: **yes**: it is
-  named (`χ(ℝ²) ≥ χ_g(H)` "by amenability alone, no MR") and ranked **last**, behind three routes that each need MR.
-- FS-103 §R-close stage 3 (whole) and FS-105 §R-close 3.6 (the verdict) — read against: "MR's residual risk is one external theorem" —
-  surprised: no (EL2021 Thm 1.3 by statement, its `[11]` Prop. 6.4 unread).
-- `BIBLIOGRAPHY.md` rows for Falconer, Woodall, Townsend, Coulson, Pritikin — read against: "Falconer bounds `χ_m⁰`" — surprised: **yes**:
-  `[Falconer1981]` Thm 2 "bounds `χ_m`, not `χ_m⁰` (its Lemma 1 meets the null boundary in one point)". So Falconer's "+1" mechanism lives on
-  the null set that `χ_m⁰` ignores — the real reason the owner's null-set step matters (P0 below).
-- Mathlib at the project's pin (`.lake/packages/mathlib`, grepped by statement shape) — read against: "none of the analytic inputs exist" —
-  surprised: partly. **Present:** Prokhorov (`MeasureTheory/Measure/Prokhorov.lean`), Riesz–Markov–Kakutani, Følner sequences
-  (`MeasureTheory/Group/FoelnerFilter.lean`, definitions and means), the Lebesgue density theorem
-  (`ae_tendsto_measure_inter_div_of_measurableSet`), the mean ergodic theorem, Birkhoff sums, topological entropy, adele rings,
-  `PontryaginDual` (the definition). **Absent:** measure-theoretic (Kolmogorov–Sinai) entropy, leafwise/conditional measures along foliations,
-  Einsiedler–Lindenstrauss anything, Bochner's theorem, Bessel functions (the three "Bessel" hits are Bessel's inequality), invariant means /
-  amenability of solvable groups, Markov–Kakutani, Pontryagin duality as a theorem, Tarski's quantifier elimination. The project itself holds
-  de Bruijn–Erdős (`Proofs/HadwigerNelson/Bridge.lean`) and the LRAT checker (rung B).
+- `LEDGER.md` rows 120–130, read in full; rows 100–119 by headline only (sampled, not read whole) — read against: "every headline above five rests on MR" — surprised: yes; in one place: row 128's *load-bearing step* and row 130 (`χ_CP = χ_m⁰ = χ(A_σ)`) are stated **with no MR**; MR enters only to remove the SP witness. So MR is needed for exactly one arrow, `χ(ℝ²) ≥ χ_m⁰(ℝ²)`.
+- The brief's three "where things stand" bullets, against rows 128–130 — read against: "the owner paraphrased" — surprised: no; each matches its row (row 129 says `1/α_loc ≤ 4.36`; the brief's "below 4.37" is the same bound).
+- `plans/FRONTIER-STUBS.md` rows 1–10, first 1,800 characters each (sampled) — read against: "the table is about six and about fields" — surprised: no; rows 2–4, 7–9 are the product-locality cluster (six at a field *below* the plane's number), not the plane's value.
+- `plans/STUB-cp-plane-six.md` (FS-104), whole — read against: "route (d), an MR-free invariant LP, is named" — surprised: yes; it is named (`χ(ℝ²) ≥ χ_g(H)` "by amenability alone, no MR") and ranked **last**, behind three routes that each need MR.
+- FS-103 §R-close stage 3 (whole) and FS-105 §R-close 3.6 (the verdict) — read against: "MR's residual risk is one external theorem" — surprised: no; (EL2021 Thm 1.3 by statement, its `[11]` Prop. 6.4 unread).
+- `BIBLIOGRAPHY.md` rows for Falconer, Woodall, Townsend, Coulson, Pritikin — read against: "Falconer bounds `χ_m⁰`" — surprised: yes; `[Falconer1981]` Thm 2 "bounds `χ_m`, not `χ_m⁰` (its Lemma 1 meets the null boundary in one point)". So Falconer's "+1" mechanism lives on the null set that `χ_m⁰` ignores — the real reason the owner's null-set step matters (P0 below).
+- Mathlib at the project's pin (`.lake/packages/mathlib`, grepped by statement shape) — read against: "none of the analytic inputs exist" — surprised: yes; partly. **Present:** Prokhorov (`MeasureTheory/Measure/Prokhorov.lean`), Riesz–Markov–Kakutani, Følner sequences (`MeasureTheory/Group/FoelnerFilter.lean`, definitions and means), the Lebesgue density theorem (`ae_tendsto_measure_inter_div_of_measurableSet`), the mean ergodic theorem, Birkhoff sums, topological entropy, adele rings, `PontryaginDual` (the definition). **Absent:** measure-theoretic (Kolmogorov–Sinai) entropy, leafwise/conditional measures along foliations, Einsiedler–Lindenstrauss anything, Bochner's theorem, Bessel functions (the three "Bessel" hits are Bessel's inequality), invariant means / amenability of solvable groups, Markov–Kakutani, Pontryagin duality as a theorem, Tarski's quantifier elimination. The project itself holds de Bruijn–Erdős (`Proofs/HadwigerNelson/Bridge.lean`) and the LRAT checker (rung B).
 
 ### 2.1 One elementary fact the paths below use (derived here, [hand, one mind — mine]; needs a second)
 
@@ -241,3 +207,159 @@ is an automorphism) and a dyadic inert place realising `L(F)` (the same construc
 - P1's calibration: I would have run the invariant LP on small configurations in `K(√5)` to see whether `χ_g` reaches 5 below 509 points;
   instead I derived its upper bound by the field wall (fact 3) and its sandwich `χ(H) ≤ χ_g ≤ χ(ΓH)` (fact 2), which say where and why it can
   help, and left the calibration post-ban.
+
+*P3's exactness input is held and read here: `[DeCorteOliveiraVallentin2022]` Thm 5.1 (the completely-positive programme is exact for
+`α` on a compact transitive group; `BIBLIOGRAPHY.md` line 296). The plane is not compact, so the transfer to `UD(ℝ²) □ K_t` is a derivation
+owed, not a citation; `[GvozdenovicLaurent2008]` is in the bibliography as "listing only … not read".*
+
+## Stage 3 — SAVED (frame items, the comparison table, the order, cards and ledger)
+
+### 3.1 Frame items
+
+**(a) What the ledger opens that no stub names.**
+1. **The answer can be MR-free in every case; MR attaches to one path family.** By (E) every upper bound is a measurable colouring with no MR,
+   and every lower bound that is a certificate (a graph, or P1's invariant certificate) needs none. MR is needed only to carry an *analytic*
+   lower bound on `χ_m⁰` to `χ(ℝ²)`. Asymmetry by value: **seven** needs one lower bound (the hexagon is the upper, already in the kernel,
+   row 33); **five** needs one construction (the lower is rung B, in the kernel); **six** needs both a lower bound and a construction — two
+   open problems. No stub or plan I read states this planning fact. *Evidence:* derived (E, one mind); the rows' grades (read).
+2. **(E) as a cheap Lean slot:** `χ(ℝ²) ≤ χ_m⁰(ℝ²)` by Fubini over rigid motions and the project's de Bruijn–Erdős — days, not months; it
+   is half of the collapse's equality in the kernel, needs no MR, no CP colourings, no Tarski, and it is what any future measurable
+   construction (P4) consumes. FS-101's lane could take it next to row 127.
+3. **The invariant certificate's field wall** (P1 fact 3): a free theorem that says where route (d) can work before any LP runs.
+4. **The finite-perimeter question** (P4): geometric measure theory — Caccioppoli partitions, minimal clusters — is a discipline the ladder in
+   G30 has not entered; its standard handle on an arbitrary partition (perimeter, reduced boundary, a minimiser's regularity) is the
+   example invariant (G79) a map-type argument would need.
+
+**(b) Cheap on paper, ruinous to formalize** (each with the route that avoids it):
+
+| step | on paper | in Lean at the pin | avoided by |
+|---|---|---|---|
+| MR (row 120) | "EL2021 Thm 1.2, by statement" | KS entropy, leafwise measures, EL's entropy symmetry: none present; person-years | P1, P2 (lower), P4 (upper) — every certificate route; paid once only if P3/P0 are chosen (P5) |
+| `J₀`'s minimum `−0.40276` (rows 122, 129) and `m₁ < 1/4` (the only witness-free five) | one line; a published bound | no Bessel functions; certified interval bounds on an oscillatory integral | never needed by P1, P2, P4 |
+| "extend to the adelic completion, select over all stable places at once" (row 128) | a paragraph | adeles present; the solenoid's dual as a theorem, Bochner, spectral measures absent | not needed by P1, P2, P4 (row 128 only says *where* to look) |
+| amenability of the rigid motions | "solvable, hence amenable" | Følner sequences defined; no invariant means for solvable groups | P1's finite form: one Følner set of bounded boundary against a certificate's margin |
+| the bridge (row 107, Tarski's fragment) | "`χ(ℝ²)` is a max over number fields" | no quantifier elimination | **needed by no path here**: lower bounds transfer upward by inclusion, and (E) bounds `ℝ²` directly |
+
+**Is there a route that avoids MR, or pays for it once?** Both: P1/P2 + P4 avoid it outright; P5 pays it once for P0 and P3, and its price
+halves (very high → high) if Kooshi rules that EL2021 Thm 1.3 may enter as a named hypothesis, as row 127 already does for Bochner–Herglotz.
+
+**(c) Where the collapse makes a classical tool newly decisive — and where it only looks so.**
+- **Operator SDP bounds become bounds on HN (given MR):** `χ_CP = χ(A_σ)`, BDOV's operator chromatic number (row 130), so the
+  Bachoc–DeCorte–Oliveira–Vallentin family now bears on the plane's number itself. Decisive only at level ≥ 2 on the product graph
+  `UD(ℝ²) □ K_t` (P3): level one is Hoffman/`ϑ`, which reads 3.48 and rounds to 4.
+- **Falconer's boundary argument** becomes decisive only after the null-set step (P0): his Thm 2 uses properness on the null boundary, which
+  `χ_m⁰` ignores (`BIBLIOGRAPHY.md` line 169).
+- **Density LPs look newly decisive and are not**: row 129 proves them capped at 4.36 (one class at a time); the collapse makes the cap exact
+  rather than lifting it. Spending on a better `m₁` bound moves nothing toward six.
+- **Amenability** (Følner averaging) becomes decisive for *certificates* (P1), with no analysis and no MR — the cheapest classical tool the
+  collapse's picture points at.
+
+### 3.2 The comparison table
+
+| path | direction | what it would prove | Lean cost | P(answer + Lean, 1 yr) | first milestone | kill | search? | evidence |
+|---|---|---|---|---|---|---|---|---|
+| **P0** FS-104 via Falconer's null set (baseline) | below, six | `χ = χ_m` given MR; then six needs `χ_m ≥ 6` (open 45 yr) | very high (MR + collapse) | 0.005 | D1–D5, the boundary list-colouring | a non-2-list-colourable configuration forced in `E` | no (derivation) | chain derived (≥ 2 minds), D1–D5 one mind; six: none |
+| **P1** invariant certificate `χ_g(H; Φ)` | below, six or seven | `χ(ℝ²) ≥ 6` unconditionally | medium (low for crystallographic `Φ`) | 0.02 | second minds on (E) and facts 1–3; then (post-ban) calibration at five in `K(√5)` | no small `H` beats `χ(H)` at five, or a cap theorem | in-ban derivation; LP post-ban | facts derived (one mind); its bite: none; soft against (pure configurations never beat `m₁ < 1/4`) |
+| **P2** finite witness in a collapse field | below, six or seven | `χ(ℝ²) ≥ 6` unconditionally | low–medium (size-set) | 0.015 | post-ban aimed search, degree law first | every refusal ball priced beyond the machine | yes, post-ban | existence iff HN ≥ 6 (derived); size: none |
+| **P3** product-graph hierarchy + MR | below, six | `χ_m⁰ ≥ 6`, then HN via MR | very high (+ P5) | 0.005 | level-two shape at `k = 5`, can it pass 4.36 | every level equals a fractional bound | no; SDP post-ban | reduction classical (recalled); bite: none |
+| **P4** measurable six/five colouring | above, six or five | `χ(ℝ²) ≤ 6` (or `= 5`) unconditionally | medium (construction-dependent) | 0.005 | the no-go map at six; the finite-perimeter question | finite-perimeter ⟹ seven, and no fractal escape | no; construction post-ban | no-gos in print (partly read); existence: none |
+| **P5** MR lane (enabling) | — | MR in Lean, reused by P0, P3 | very high / high with named hypotheses | 0 alone | Kooshi's ruling (C1), then EF's pigeonhole at ℚ(√635087) | — | no | MR [hand, ≥ 2 minds, one external theorem by statement] |
+
+All paths together: about **0.05**, the top of my stage-1 expectation. The likeliest product of the next month on any path is not the answer but
+a no-go of a named format or the collapse's write-up — the advisor's FS-104 prior (≈ 0.03 for six) and mine agree.
+
+### 3.3 The recommended order (a decision in four parts)
+
+- **The choice.** (1) In-ban, now: a derivation job with a blind verifier on (E) and P1's facts 1–3, and the Lean slot for (E); P0's D1–D5
+  alongside only as the write-up's naming step. (2) Kooshi's ruling on named hypotheses (C1) before any spending on P5. (3) From 2026-10-01:
+  P1's calibration at five, then six in ℚ(√635087), `K(√7)` and de Grey's field, with P2 run from the same configurations. (4) P3's level-two
+  derivation only if P1's calibration shows invariance helps. (5) P4's no-go map as reading, whenever a slot is free.
+- **The alternative weighed.** The owner's order: FS-104 led by the null-set step (P0), its route (d) last.
+- **Why this one won.** Kooshi's bar makes Lean cost first-class; P0's path carries MR's very high cost and its first milestone names the value
+  without moving it, while P1 attacks the value directly with a certificate a stranger checks without MR, at medium Lean cost, and its first
+  milestone is a two-sided calibration against a certified positive (five). P0's first step stays in the plan, as a cheap write-up item.
+- **Confidence: medium.** The one fact that would change it: P1's calibration at five failing — no configuration where invariance beats the
+  plain chromatic number below a few hundred points. Then the certificate route is only a finite witness in costume, and the order falls back
+  to P2 (search) plus P5 (MR once) for an analytic attempt.
+- **Default if Kooshi says nothing:** the owner's FS-104 proceeds as planned; this record stands as the alternative, and (E) waits.
+
+**Where I differ from the owner:** I would move FS-104's route (d) from last to first, and move the null-set step from "the aim" to "the
+write-up's naming step". We agree on the picture (the collapse; six is `χ_m⁰`'s question given MR) and that success in a year is unlikely.
+
+### 3.4 Cards
+
+question: may-a-published-theorem-enter-lean-as-a-named-hypothesis
+  evidence: row 127 already states `BochnerHerglotz` and `InvariantMeasureOnClosed` as named hypotheses; row 120's external input is EL2021 Thm 1.3, used by statement; Mathlib at the pin has no KS entropy or leafwise measures (grep, stage 2.0)
+  expected: Kooshi's bar ("formalized in Lean before publishing") was stated without deciding this
+  ask: does a result count as formalized if a refereed published theorem (EL2021 Thm 1.3) appears in Lean as a named hypothesis, the rest kernel-checked?
+  if yes: MR's lane costs high, not very high; P0 and P3 stay live; the collapse write-up (FS-102) can be formalized conditionally now
+  if no: every MR-dependent headline is unpublishable for years; lead with P1, P2, P4 and formalize (E) first
+  answered by: Kooshi
+  cost: one ruling
+  rank: 1
+
+question: do-the-mr-free-facts-hold
+  evidence: this record §2.1 (E) and §2.2 P1 facts 1–3, each [hand, one mind]; fact 3's reflections and dyadic cases passed over (stage 2b note)
+  expected: all four hold; fact 3 needs the conjugation randomised
+  ask: are (E), `χ(ℝ²) ≥ χ_g(H; Φ)`, `χ(H) ≤ χ_g ≤ χ(ΓH)` and `χ_g(H; Φ) ≤ L(F)` correct as stated, with proofs a stranger accepts?
+  if they hold: P1 is a live MR-free route and (E) is a Lean slot; brief the calibration for 2026-10-01
+  if one fails: P1 or the MR-free planning fact falls; the owner's order stands unchanged
+  answered by: a fresh mind
+  cost: one derivation job and one blind verifier, in-ban, a few hours each
+  hunch: all hold; fact 3 is the one most likely to need a repair
+  falsifier: an `F`-isometry under which the random affine-frame colouring's law is not invariant
+  rank: 2
+
+### 3.5 Hunch ledger (scored at this stage)
+
+hunch: mr-is-the-formalization-bottleneck
+  claim: every route above five without a certificate passes through MR, and MR's Lean cost is very high
+  basis: prior
+  falsifier: a row among 128–130 whose conclusion needs no MR, or MR's needed form provable from Mathlib plus weeks
+  registered: 2026-09-26
+  status: confirmed in part (by: rows 128–130 carry "given MR" on every lower-bound headline; Mathlib grep finds no KS entropy or leafwise measures) — refined: MR is needed for one arrow only, `χ(ℝ²) ≥ χ_m⁰`, and (E) plus certificates avoid it (derived, one mind)
+
+hunch: six-needs-a-joint-constraint
+  claim: no one-class argument gives six; a proof of six must constrain several classes jointly
+  basis: prior
+  falsifier: row 129 or a paper giving six from one-class information
+  registered: 2026-09-26
+  status: confirmed (by: derivation — row 129, "that route never gives six", two minds)
+
+hunch: the-finite-witness-route-is-cheapest-in-lean
+  claim: a finite certificate is the cheapest route to a Lean-verified headline by an order of magnitude
+  basis: prior
+  falsifier: a witness priced beyond the kernel, or an analytic route priced below it
+  registered: 2026-09-26
+  status: open (refined: P1's invariant certificate is the same kind at a smaller size)
+
+hunch: invariance-helps-at-five
+  claim: some `H ⊂ K(√5)²` with `χ(H) = 4` has `χ_g(H; Φ) ≥ 5` at no more than 200 points
+  basis: analogy
+  falsifier: the post-ban LP finds none up to 200 points with `Φ` a crystallographic group plus the Heule rotation
+  registered: 2026-09-26
+  status: open (prior 0.25)
+
+hunch: finite-perimeter-colourings-need-seven
+  claim: an a.e.-proper measurable colouring of the plane whose classes have locally finite perimeter uses at least seven colours
+  basis: prior
+  falsifier: an a.e.-proper six-colouring with finite-perimeter classes, or a step of Townsend's map argument that needs more than finite perimeter
+  registered: 2026-09-26
+  status: open
+
+### 3.6 Theorems this phase proved
+
+- (E) `χ(ℝ²) ≤ χ_m⁰(ℝ²)`, by random rigid motions and de Bruijn–Erdős — [hand, one mind] — §2.1.
+- P1 fact 1, `χ(ℝ²) ≥ χ_g(H; Φ)` (finite Følner form) — [hand, one mind] — §2.2.
+- P1 fact 2, `χ(H) ≤ χ_g(H; Φ) ≤ χ(ΓH)` and `sup_H χ_g = χ(ℝ²)` — [hand, one mind] — §2.2.
+- P1 fact 3, `χ_g(H; Φ) ≤ L(F)` over `F` — [hand, one mind; reflections and the dyadic case to check] — §2.2, stage 2b note.
+
+None is claimed new: (E) and fact 1 are likely folklore (Tao's Polymath16 remark is fact 1's ancestor); no gate was run on them.
+
+### 3.7 Proposed `BIBLIOGRAPHY.md` edits (the close writes them)
+- `[GvozdenovicLaurent2008]`: add "PA1 P3 uses its `χ` ↔ `α(G □ K_t)` reduction (recalled); read §§1–3 before citing".
+- A row for de Laat–Vallentin's `k`-point hierarchy (Math. Program., 2015; recalled, not fetched) — P3.
+- `[Townsend2005]`, `[Coulson2004]`: P4's no-go map needs them read (Coulson held; Townsend on loan request).
+
+### Would have searched here (stage 3)
+- None. The comparison needed no computation beyond the Mathlib grep (a reading, not a search).
