@@ -1,5 +1,11 @@
 # FS-106 and FS-107 — the regularity wall, and its stability form: can vanishing holes save a colour? (stub; the program Kooshi adopted)
 
+> **Banner (FS107-C, 2026-09-27).** **FS-107 is closed** (`plans/FS107-stability.md` §R-close; `plans/FS107-derivation.md`; `LEDGER.md` row 133 as
+> drafted): both claims GAP; R's reduction (a forced complementary pair plus a cone-scale bound) and W's equivalence (vanishing holes at bounded
+> complexity ⟺ a tight six-map) meet at one question. Its successors: **FS-110, the tangency seam** (`plans/STUB-tangency-seam.md`; SWAP-PRICE folded
+> in), **FS-111, the cone scale** (`plans/STUB-reg-scale.md`), and C-VOID's thin-hole test folded into FS-109. The FS-107 section below is kept as it
+> was re-aimed at FS-106's close.
+
 > **Banner (FS106-C, 2026-09-27).** **FS-106 is closed** (`plans/FS106-regular-half.md` §R-close; `plans/FS106-derivation.md`; `LEDGER.md`
 > rows 131–132): the regular half verified and transferred almost everywhere bar named steps, and the measurable question restated exactly as
 > stability — with no MR, `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1` (row 131). **FS-107 is renamed "stability: can vanishing holes save a colour?"**
@@ -69,7 +75,7 @@ Voronov's circle-colouring method run on the normal form of link 5?
 step. Or some regular class admits an almost-everywhere-proper six-colouring the everywhere-proper theorems exclude: `χ(ℝ²) ≤ 6` with no
 MR, and FS-107 becomes its verification. Or a theorem in print fails on reading: a correction, with its consequence for the reduction.
 
-## FS-107 — stability: can vanishing holes save a colour? (second; the competitor protocol)
+## FS-107 — stability: can vanishing holes save a colour? (second; the competitor protocol) — CLOSED 2026-09-27
 
 *Renamed and re-aimed 2026-09-27 (the owner's ruling, item 77; the advisor's design, A2 = `plans/POROS-2026-09-27-fs106-close-and-fs107.md` §3).
 Minted 2026-09-26 as "regularity against pathology"; row 131 removed that frame: a refutation never needs a wild set (TQ §3.5: "A refutation
