@@ -352,3 +352,63 @@ advisor, **V** the blind verifiers, **CL** the claim list, **C** the close), **S
 (scored at the close); G51's design killing test (scored at the close).
 
 ## Stage 2b — SAVED
+
+## Stage 3 — SAVED: §PA (the prior-art gate) and §IQ (the invariant question)
+
+### §PA — searched 2026-09-27 by the planner (zbMATH Open API for discovery; OpenAlex citing lists; arXiv API; held PDFs by `pdftotext`; raw outputs in `data/fs110/fs110-p/*.json`)
+
+**The recognition sentence (G46), used as the query.** FS-110's object sits in three literatures: (i) **map colourings avoiding the unit distance**
+(Woodall 1973 → Townsend 1981 and his 1979 manuscript → Thomassen 1999 → Coulson 2004 → Sokolov–Voronov 2025); (ii) **the local geometry of sets
+at diameter or distance exactly 1** — two same-colour tiles of a tight map are a *Siamese* pair (all cross-distances `≤ 1`: their union has diameter
+`≤ 1`) or an *outer* pair (all `≥ 1`) (`[Parts2020c]` p. 2), so a tight pair is a set of diameter exactly 1 or a pair at distance exactly 1, and the
+tile boundaries there are envelopes of unit circles: **ball- (disc-) polygons and spindle convexity** (Bezdek, Lángi, Naszódi; `[MartiniMontejanoOliveros2019]`
+*Bodies of constant width*), Reuleaux polygons; (iii) **tangent cones of partitions** (the blow-up of a map vertex is a cone partition, and C-T-TAN
+classifies admissible cone pairs), the shape of Taylor-type singularity classification in geometric measure theory, and **local (matching) rules of
+tilings**, whose global consistency is in general undecidable (Wang, Berger) — so a NO needs an invariant, not an exhaustion of local cases.
+
+| # | question (WORKFLOW 3.2) | what was done | finding |
+|---|---|---|---|
+| 1 | the discipline's words | zbMATH: `ab:"unit distance" & (ab:map \| ab:tiling) & ab:colo*` (8 hits); `ab:"chromatic number of the plane" & (ab:boundar* \| ab:Jordan \| ab:regions)` (4); `ab:spindle & ab:convex` (19); vertex-type, circle-packing and tangent-cone vocabularies (0 or proceedings only) | (i): Parts 2020 and de Grey–Parts 2022 (held), Soifer's books, **Kruskal 2008**, *The chromatic number of the plane: the bounded case* (J. Comput. Syst. Sci. 74, 598–627; Zbl 1139.05023; summary withheld by licence; **unheld, title only**); (ii): the spindle-convexity literature exists and **never meets colourings** (no hit joins them); (iii): nothing joins tangent cones or vertex-type rules to distance-avoiding colourings |
+| 2 | two disciplines | (i) × (ii); (i) × (iii) | **PA-1 (a recognition, not prior art):** in a tight map every tight same-colour pair is either a set of diameter exactly 1 (Siamese) or two sets at distance exactly 1 (outer), so the tight boundary arcs are unit arcs or envelopes of unit circles — spindle convexity's objects. TS-U (a unit arc's side cones are empty of both its colours) is a statement about a ball-polygon's vertex. The planner hands this vocabulary to both sides; no theorem is imported |
+| 3 | the question, not only the method | `[SokolovVoronov2025]`'s questions read in the held PDF | **The question is in print.** S–V, Question 2, verbatim: "Is it true that 7 colors are needed to color a locally finite map in the plane if the boundaries can be arcs of unit circles and if trichromatic vertices of degree greater than 3 are allowed?" — and their Conditions 5 ("If any boundary intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden") and 6 ("There are no trichromatic vertices of degree greater than 3") are exactly the two failures of C-T-TAN at cone points (TS l. 258: "the tangent form of Prop. 2.2 names exactly S–V's Conditions 5 (tangency) and 6 (the bowtie)"). **FS-110's Q-full is Question 2 almost everywhere at bounded arc complexity, with cusps added** — cusps appear in neither condition. Woodall 1973's map question and Townsend's are its ancestors (row 132) |
+| 4 | outside arXiv | zbMATH author listings; Geombinatorics | Townsend: one zbMATH item (1981); `[Townsend2005]` (Geombinatorics XIV(4)) still unheld; Coulson: seven items, of which *Tilings and colourings of 3-space* (2003) and Payne–Coulson 2007 (a dense distance-1-excluding set in `ℝ³`) are 3-space, not the plane; **Soifer 2024, ch. "Chromatic Number of the Plane Meets Map Coloring: Townsend–Woodall's 5-Color Theorem"** (The Mathematical Coloring Book, 2nd ed., doi 10.1007/978-1-0716-3597-1_25) — **unheld**, the likeliest print statement of the map question's history |
+| 5 | the poser's citation graph | OpenAlex citing lists: `[Woodall1973]` (79), `[Townsend1981]` (5), `[Thomassen1999]` (7); S–V's citing list from FS-107 (one, a Ramsey listing) | Townsend's five: Thomassen 1999, Manta 2021, Chybowska-Sokół et al. 2023 (held as `[ChybowskaSokol2022]`), Soifer 2024 ch. 25, and **Alm–Manske 2013, *On radial colorings of annuli*** (arXiv:1305.5229; abstract read: "we consider radial colorings, which are 'nice' colorings, and completely determine the radial chromatic numbers of various annuli") — a local model for the band annulus about a close pair and for C-T-BIKE; **unheld, abstract only**. Thomassen's seven: Soifer's surveys, Manta, Sirgedas 2021 (spheres), **Ágoston 2025, *A lower bound on the number of colours needed to nicely colour a sphere*** (DCG; doi 10.1007/s00454-025-00736-3) — nice maps on spheres; **unheld, title only**. Woodall's 79: nothing new on maps beyond the above (the rest arithmetic, measurable, Borsuk) |
+| 6 | open every neighbouring citing work | Alm–Manske's abstract (arXiv API); the others title only | none of the three unheld items is read; each is a debt, below. No citing work found states a vertex-level rule of Q-rule's kind |
+| 7 | two databases | OpenAlex (FS-107's debt, now run for three posers) and zbMATH; Semantic Scholar rate-limited (429) | OpenAlex found Alm–Manske and Ágoston, which zbMATH's topical queries did not; `[Coulson2004]`'s citing list **not run** (OpenAlex search paused; a debt) |
+| 8 | full author listings in zbMATH, the question in their words | Coulson (7), Townsend (1); Woodall's, Voronov's and Parts's listings were run at FS-106 and FS-107 | nothing further on topic |
+
+**What the gate changes in the plan.** (a) The claim list quotes S–V's Question 2 and Conditions 5–6 verbatim, and states Q-full as Question 2 almost
+everywhere at bounded arc complexity with cusps added. (b) Both briefs carry PA-1's vocabulary (ball-polygons, spindle convexity, Reuleaux) as a
+reading room for the tight arcs, and the local-rule warning (§IQ). (c) The construction side reads Alm–Manske (if fetched) before building a bicycle
+model. (d) Novelty wording: "not found in print"; the question is S–V's.
+
+**Papers still needed (for the report):** Kruskal 2008 (J. Comput. Syst. Sci. 74, 598–627); Soifer 2024 ch. 25 (doi 10.1007/978-1-0716-3597-1_25);
+Alm–Manske 2013 (arXiv:1305.5229, free); Ágoston 2025 (DCG); `[Townsend2005]`; `[Coulson2004]`'s citing list (OpenAlex). **Proposed `BIBLIOGRAPHY.md`
+rows (listing only):** Kruskal 2008; Alm–Manske 2013 (abstract read, FS110-P); Ágoston 2025; `[MartiniMontejanoOliveros2019]` and Bezdek–Lángi–Naszódi
+(the spindle-convexity vocabulary; titles from zbMATH listings); Soifer 2024 ch. 25.
+
+### §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** Is there a full tight a.e.-proper six-colouring by a map in `𝓜_K` (Q-full)? Is there a map meeting Q-rule?
+2. **The structural form.** *What must every tight six-map carry at each vertex, read against every vertex within distance 2, that a global count can
+   see?* Posed in the most general class where it makes sense: locally finite maps whose boundaries are C¹ arcs with one-sided tangents at the vertices
+   (the cone class), any number of colours `k`, the six entering only through K-C6. It is about every solution, and it is W-TAN's flip taken one step
+   further: C-T-TAN's no-go says what a counterexample pair must avoid; the structural form asks what every *vertex* carries.
+3. **The invariant it forces — named here, not found in print.** The **blocking profile** of a vertex `u` at scale `s`: for each direction `θ` and
+   side `σ`, the depth `β_u(θ, σ)` of the band a unit circle about a point beyond `u` in direction `θ` is forced to cross in `u`'s colours (FS107-V
+   §4.3's quantity; CP is the statement that two complementary vertices blocking toward a common `w₀` force area `≍ ss′`). Its **unblocked set**
+   `U(u) = {θ : β_u(θ, σ) = 0 for some σ}` is, by C-T-TAN at cone points, a pair of directions at a tangent interface, an open set at a bowtie, and
+   (V-C5's sketch) empty at positive scale except for slivers. **The rule every solution carries:** for every close complementary pair `(u, v)`, each
+   of the two points `w₀` lies in a direction of `U(u) ∪ U(v)`. Beside it, the global invariants a count can use: (b) **Euler's formula on the torus**
+   for a periodic map (`V − E + F = 0` per period; the seam strip periodises any W-EQ-K map at cost `O(1/L)`, VW §4 item 2) with each vertex weighted
+   by its type; (c) K-DENS per class; (d) the index of density traces (G71), dead at bowties; (e) the **type graph** on the twenty triples, two triples
+   joined when they occur within distance `< 2`, which off seams must be an intersecting family (K-C6). **Warning from §PA (iii):** Q-rule is a
+   local-rule problem, and local rules can be consistent only aperiodically or undecidably in general; a NO should therefore come from a count
+   ((b), (c)) fed by the local rule, never from an exhaustion of vertex configurations.
+4. **Its route.** Derivation only: the proof side derives the blocking profile at each vertex kind of `𝓜_K` and a count; the construction side
+   derives, for each seam kind, what every realisation must carry (G79's flip, X13). Exact checks of seconds check a derived claim on a given formula.
+5. **The open instances it would decide.** Q-rule; Q-full at every `K`; S–V Question 2 almost everywhere for `𝓜_K` maps; V-C5's general claim;
+   W §2.5's seamless question (Act One); the four seams and the degree-`≥ 4` bichromatic vertices; FS-111's first lemma (the rule at every scale);
+   FS-108 item 2 (S–V Lemma 3's transplanted bicycle at `√3 ≤ d < 2`), shared with seam 4.
+
+## Stage 3 — SAVED
