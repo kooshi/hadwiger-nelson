@@ -529,3 +529,95 @@ keeps a "would have searched here" log.
 The fences (standing rule 13; protocol §1 rule 1 as amended at FS-107) are listed per brief.
 
 ## Stage 5 — SAVED
+
+## §R-close — FS-110's close (FS110-C, de Bruijn, Opus 5.5, 2026-09-27; brief `data/fs110/briefs/C110-close-math.md`)
+
+*Worked from `plans/FS110-close-inventory.md` (items 1–105 and the owner's messages on FS110-CC and FS110-CE). Stage 1, the reconciliation, is
+`data/fs110/fs110-c/reconciliation.md` (f544026b); stage 2, `plans/FS110-derivation.md` (42 entries; § B draft `data/fs110/fs110-c/ledger-b-draft.md`,
+`tools/fs71_ledger_b_check.py --strict` PASS on a scratch copy of `LEDGER.md` with the draft appended; the live checker fails until the front-page job
+writes the § B lines, 4701b13f).*
+
+### Stage 3 — SAVED: the re-reads, the scores and the verdict
+
+**3.0 The headline** (A6-2.1, verbatim; `plans/POROS-2026-09-27-fs110-competition.md` l. 1485–1486): *"Under Condition 5, no locally finite map of the plane
+whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at distance
+exactly 1."* So **the Condition-5 half of `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") is answered YES — seven colours are
+needed —** almost everywhere, for such maps. **Grade [hand]:** the chain (NB-4, NB-5, W-MERGE, N3-DEG, N4's cone removal) two minds, one blind; the base
+(S–V Cor. 1 a.e., no `d = 2` exception) two minds, both blind (CB, CD); the base at cubic vertices with a cusp sector two readings at D2's strip, D5 item 5
+and D1's (P′) (A6 sighted; FS110-CC, one mind on the cusp case), **under check at D4's bicycle and D5 items 1–4, 6 (FS110-CE, running)** — a step not yet
+read, not a GAP found. The residue that step must cover (doubly shadowed single-horn Woodall cones, NB4-CS, one mind) exists locally (A6-C2, exact). **At
+bounded `K`: dropped for the map statement** (A6-C1; NB4's TERM and SC use local finiteness only); `K` stays in FS-107's W-EQ-K, so the stability
+consequence — vanishing holes at bounded complexity cannot save a colour under Condition 5 — is at bounded `K`.
+
+**3.1 §G re-read.** *Paid:* G82 (the regular objects were the right ones: every product is a lemma about tight maps, and the headline is S–V's own
+corollary made robust); G79 (NB-4 from what every four-colour vertex carries — each colour squeezed into 60°; the cone closed by what every stuck vertex's
+chain carries — a curvature sequence FIN forbids); G51 (four rounds, no truth divergence between the sides, every truth divergence found by a verifier or
+an advisor); G21 (A-SIX first; "hard" named twice with two meanings, caught by A6; YB4's window ends, the test the side's plants could not make); X17
+(ACCEPT suspect: YB4 repaired its own checker's bias toward ACCEPT before any verdict); G50/G49 (FS110-PA read S–V for Condition 5 and found Lemma 2 is
+NB-4's four-colour half, and Soifer 2024 ch. 25 reprinting Townsend's gap). *Should have borne and was not used:* **X10/G50** — `[Woodall1973]` §3 was not
+read until round 3 (NB3, Y4), yet its step 3 is W-MERGE and its cone is the round-4 object; read at the opening, the merge route (N3's) would have been
+round 1's; **X14/G82** — no side stated a feature scale `s(K)`: under Condition 5 the question became combinatorial (types and curvatures), and G82's
+pricing never applied — the entry's *Do* should say so where the tight object is a map; **G13's coverage** read at `w₀` (X1) led to N-SEAM but the
+decisive count was at the vertex (NB-4), which no extraction named. *Falsifiable here:* G71's "fails only at a swap" survives in ring form (N2-RING: a
+swap-free ring winds `|W| ≥ 2`, two minds), untested at the bowtie seam, which Condition 5 removes (NB-5).
+
+**3.2 §PA sweep** (what the prior-art work taught about our own object). (i) The winding question W-3 was S–V Question 2's Condition-5 half in
+disguise (A5): the rounds reconstructed, curved and a.e., the chain S–V use under Condition 6 (Props. 7–8's degree reduction, Cor. 1) — the object was
+Woodall's and S–V's all along, and the vocabulary that would have found it at the opening is "Woodall's step 3" and "locally finite map, Condition 5".
+(ii) Condition 5 without Condition 6 is a question nobody asked (FS110-PA): a new question in print's own terms. (iii) The printed chain has two holes
+this milestone located and filled: S–V Lemma 3's Fig. 5 argument fails from `√3` (CB), and S–V's `d = 2` case does not arise (CD's D2). Promoted: (i) to
+G82's *Do* line (draft 4.5) and to the successor stubs' prior-art lines.
+
+**3.3 §IQ re-read, G72's count and G79's record.** §IQ's structural form ("what must every tight six-map carry at each vertex, read against every vertex
+within distance 2") produced NB-4 (the ring's 60° squeeze at a four-colour vertex) and N-SEAM/N-X; its named invariant, the blocking profile, was superseded
+under Condition 5 by NB-5 (no close pair at all). The headline's route is **Woodall's merge and S–V's corollary extended** (a known tool) plus one
+vertex invariant (NB-4) and one chain invariant (N4-FIN's curvature sequence). **G72's count: eighteenth, FS-110 — mixed, counted *through*:** NB-4, the
+step that emptied the seam, is §IQ's per-vertex question answered; the closure is a known tool extended. **G79's record:** NB-4, NB-5, W-MERGE and the N4
+chain from example invariants (what every vertex, every sector and every stuck vertex carries); the walls — YB3-SAME, Y-BIKE-3C's corners, A6-C2's single
+horn — are counterexample invariants (what a counterexample must carry), and the one flip (N4's pre-round: "a stuck cone forces its antipodes stuck") made
+the round-4 result. No breakthrough of the second kind.
+
+**3.4 Registered expectations, scored** (plan §5.3; E-numbers the planner's).
+
+| # | p | outcome |
+|---|---|---|
+| E1 A-EXACT confirmed by both sides | 0.85 | met (three minds) |
+| E2 SEAM-T1 closed at positive scale | 0.7 | met (FS110-A's sketch, both sides' stage 1) |
+| E3 T2 realised by formula | 0.4 | met at round 2 (fragment T2, two checkers) |
+| E4 C-BOW-K (i) TRUE | 0.6 | met (fragment BB) |
+| E4′ C-BOW-K (ii) decided | 0.25 | met under Condition 5 only (NB-5: no close pair), open without |
+| E5 SEAM-C reduces to SEAM-T | 0.6 | met (C-CUSP-K, three minds) |
+| E6 C-T-BIKE decided | 0.3 | not met (Y-BIKE-3C GAP at grid corners) |
+| E7 Act One proved | 0.45 | not met as posed; vacuous under Condition 5 given the headline |
+| E8 C-SEAMLIST extended by an unnamed kind | 0.25 | met at round 3: Woodall's cone (cusp horns with antipodal out-contacts), named by no list |
+| E9 Q-rule decided | 0.2 | met under Condition 5 (vacuous by NB-5), open without |
+| E10 Q-full YES | 0.03 | not met: NO under Condition 5; the unit-arc half open |
+| E11 a named obstruction | 0.8 | met |
+| E12 a blind verifier finds a divergence of truth | 0.35 | met: YB3-SAME (a side's theorem "`\|W\|` constant" a GAP), NB4 D2 (a headline dropping a hypothesis), YB's corner GAP, NB's N2-V4 step 2 |
+| E13 G71's "only at a swap" survives the bowtie seam | 0.8 | survives in ring form; untested at the bowtie (removed by NB-5) |
+
+*Competitors' and advisors' registrations.* Round 1: Y bet C-BOW-K (ii) GAP, N bet C-T2 (ii) FALSE — both untested three times (each bet against the
+other's escape), moot under Condition 5. Round 2: N2-P1 (0.8, the winding case not killed locally) survives for the generic ring (`W ≡ 3 (mod 6)`, Y3-GP)
+and is killed for the six-arc ring (Y3-SIX, N3-P17); N2-P2 (0.6, C-ACT1 without unit arcs) vacuously met given the headline; N2-P3 (0.7) untested (Y's
+fragments sit at `d ∈ {1, √3}`, N2-S1's exception). Round 3: pre-rounds met at degree-≥ 4 vertices for the first time — N3's confirmed (its falsifier (1)
+became G-CONE), Y3's bowtie clause retracted, its bichromatic clause answered by W-MERGE; N3-P1 (0.65) met in N3-RED's form, N3-P2 (0.6) met (G-d2 does
+not arise), N3-P3 (0.95) met, N3-P4 (0.75) met. Round 4: N4's pre-round confirmed on both fragments; Y4's first half moot, its second ("no local kill")
+confirmed; N4-P1 (0.75) met, N4-P2 (0.9) met (NB4 D7), N4-P3 (0.6, the base extends to cusp horns) met at two readings, D4/D5 under check. Advisors:
+FS110-A's cusp-reduces-to-tangent and double-unit-arc-escape hunches met; A2's "first proof-side GAP global" killed; A3's "two-coloured circle hardest" and
+"they will cross" killed; A4's bowtie-at-four-colour killed; A5's "cusps are the last escape" met (the residue is a cusp horn), its "one configuration"
+killed; A6's three hunches met (NB4's chain TRUE with local repairs; YB4 confirms the fragments; CB covers cusps at the steps read). Verifiers: NB4 11 of
+12 as registered; YB4 every outcome as registered, its discriminating tests its own additions (YB4 §4.5).
+
+**3.5 The verdict, in four parts.**
+- **The choice:** close FS-110 now with the headline at [hand], the base's cusp scope named "under check at D4 and D5 items 1–4, 6", the ledger row
+  graded when FS110-CE reports; the unit-arc half and W-3's winding GAP to stubs.
+- **Alternative weighed:** hold the close until CE reports, so the row lands at its final grade in one commit. It buys one fewer edit; it costs the
+  close's other work waiting on a reading whose outcome changes one clause of one row.
+- **Why this one:** the headline's truth does not wait on CE — only its grade does, and the owner asked for the grade to be set from CE's report before
+  the row is drafted in final form (draft 4.1 carries both forms).
+- **Confidence: high** that the chain holds (two minds, one blind, no truth divergence in four rounds); **medium-high** on the cusp scope — it changes if CE
+  names a step of D4 or D5 items 1–4, 6 that needs a positive angle at a cusp, and then the headline is a reduction to that step.
+
+**3.6 Would-have-searched-here lines** (from the records' logs, one each): N — enumerate three-colour ring colourings (derived the band argument); N3 —
+scan merge radii (derived `ρ` off finitely many values); N4 — scan chain curvatures (derived FIN's inequalities); Y2/Y4 — scan fragment parameters for an
+ACCEPT (derived each value first, checked once); YB3 — enumerate orientation labels (exhausted 1,920 by formula, not search); this close — none.
