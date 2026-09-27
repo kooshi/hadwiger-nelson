@@ -25,3 +25,93 @@ EL2021 does **not** prove its Thm 1.2 as stated — it attributes that proof to 
 | the copy at `~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf` | disk | **exists** (text extracted to my scratch for the skim; not committed) |
 
 *Would have searched here:* nothing at stage 1.
+
+## Stage 2 — SAVED (§G, part 1: the grokkings)
+
+## §G — the re-grokking (WORKFLOW 3.1), read from inside "does MR hold at ℚ(√635087) and at de Grey's field, by whose proof?"
+
+*B = bears (→ the phase or claim it changes); S = silent (why); F = falsifiable here (registered in §E). One line each, no batching.*
+
+| entry | verdict — reason → phase |
+|---|---|
+| G1 | B (scope) — a wall-broken field has no stable dyadic place, so it is not a row-100 exception; both fields are wall-broken → claims (a), (c) scope line |
+| G2 | S — construction grammar of finite witnesses |
+| G3 | S — radii/angles of witnesses |
+| G4 | S — shell inventory |
+| G5 | S — 1-sum anatomy |
+| G6 | S — hexagram containment |
+| G7 | S — type-M rotations are single elements of `U`; MR is about all of `U` |
+| G8 | S — a finitely generated direction group; MR's content is that `U` is not finitely generated |
+| G9 | S — four-colour compulsions |
+| G10 | S — criticality |
+| G11 | S — Moser-free witnesses |
+| G12 | S — quadrature law |
+| G13 | S — fans |
+| G14 | S — matchings |
+| G15 | S — pigeonhole × kill on finite graphs; row 129's test is a density statement, not a forcing one |
+| G16 | S — distance-2 pigeonhole |
+| G17 | S — carrier sizes |
+| G18 | S — CDCL composition (banned) |
+| G19 | S — 5-tight fabric |
+| G20 | S — brick colourings |
+| G21 | B — MR is the liked result carrying rows 121–130; every claim's acceptance test must be the exact hypothesis list, and each job writes its wrong-reason TRUE before deriving → all briefs, §E |
+| G22 | S — six-colouring shapes |
+| G23 | S — cell scale |
+| G24 | S — integrality gaps of relaxations; (d) is about densities, which G24 does not bound |
+| G25 | S — recursive forcing |
+| G26 | S — six-target reduction |
+| G27 | S — Galois flips of finite graphs |
+| G28 | S — fine tail |
+| G29 | S — cell family |
+| G30 | B — any finite-graph number offered in (d) is a candidate, never a refutation; a refutation of MR must be a proof → phase D's acceptance test |
+| G31 | S — compulsions of held objects |
+| G32 | S — two-distance dial |
+| G33 | S — descent growth |
+| G34 | S — in-field descent |
+| G35 | B (scope) — wall broken ⟺ every dyadic prime splits in `F(i)` ⟺ `1/2 ∈ ℤ[U]`; checked at both fields by PARI in seconds → phases A, C |
+| G36 | S — residue colouring on descent stages |
+| G37 | S — descent endgame |
+| G38 | S — linear thresholds |
+| G39 | S — critical sets |
+| G40 | S — absorption |
+| G41 | S — additive colourings |
+| G42 | S — additive rigidity |
+| G43 | B — de Grey's field is `ℚ(√3,√5,√7,√11)`, degree 16, `L` degree 32; the object of (c) → phase C |
+| G44 | S — finite-plane spectra |
+| G45 | S — lifting |
+| G46 | B — name MR in its discipline: measure rigidity for a non-finitely-generated abelian group of automorphisms of an `S`-adic solenoid (a number-field "×2×3" with a norm-one torus's rational points) → §PA.2's query words |
+| G47 | S — residue compulsions |
+| G48 | S — the conjecture's statement; MR's consumers are rows 121–130 (the blast radius, §R) |
+| G49 | B — the gate at the opening, zbMATH API, the posers' listings; X24R's gate already negative → §PA.2 runs only the two new questions |
+| G50 | B — EL2021 §§3, 5–9 a reading debt; **and a new instance: the proof of Thm 1.2 is not in EL2021 but in EL2003, unheld** — a title with a guess → phase A, the fetch request |
+| G51 | B — a blind third mind on EF_F⁺ while retraction is free; the reader and the walker run beside it → phase structure |
+| G52 | S — rotation screens |
+| G53 | S — counting compulsion |
+| G54 | S — tight/slack signs of finite planes (row 129's thickness lives there; MR does not) |
+| G55 | B (scope) — `R = O′` needs no ramified stable dyadic place (row 100); prime inversion is the input to the adelic model → claims (b), (c) |
+| G56 | S — window arithmetic |
+| G57 | S — cliques of window planes |
+| G58 | S — antipodal colourings |
+| G59 | S — the wall at six |
+| G60 | B — row 129's test lives here: `α₁(ℝ²) ≥ m₁(ℝ²)` always (averaging); MR makes it equality at ℚ(√635087); a refutation needs a proven gap → phase D |
+| G61 | S — three colours over quadratic fields |
+| G62 | S — bilayers |
+| G63 | S — transcendence |
+| G64 | S — value set of `L` |
+| G65 | S — SAT phase diagram (banned) |
+| G66 | S — residue towers |
+| G67 | B (method) — every job's record states its Do and its killing test; §G in this form |
+| G68 | S — quotient screens |
+| G69 | S — lattice rigidity |
+| G70 | S — √3-clean colourings |
+| G71 | S — heights at three colours |
+| G72 | B — §IQ for EF_F⁺ (derivation milestone); the count is scored at the close → §IQ |
+| G73 | S — cell-local certificates |
+| G74 | S — layers at three colours |
+| G75 | S — triangle identities |
+| G76 | B — MR's frame and its Do ("run Einsiedler–Fish's pigeonhole with the product formula before calling a measure question ×2×3-hard"); the demoted reading (infinite-place spectra) → claim (b)'s statement and the blind brief's setting |
+| G77 | S — character colourings |
+| G78 | S — rank one |
+| G79 | B — the blind derivation names the invariant it runs on (entropy against height growth) and the close scores example vs counterexample → §IQ, phase B |
+| G80 | B, F — the mechanism under test; its killing test is MR's failure at some real field; degree 16 is where the count `c·M^{1/n}` is thinnest → claims (b), (c), §E |
+| G81 | B — MR's newest consumers (rows 128–130); its killing test ties MR to `χ(F²) = χ(ℝ²)` at 6-thick fields → blast radius, phase D |
