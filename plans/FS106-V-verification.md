@@ -15,11 +15,18 @@ files: `data/fs106/fs106-v/`; the exact check `tools/fs106_v_quotes.py`.*
 - C-AE-CLOSED ⟺ no a.e.-proper measurable 6-colouring of `U₃(0)` with essentially closed classes; it implies the a.e. forms of S–V Thms 1–2 and
   Question 2 for null-boundary maps — [hand, one mind], §2.1.
 - Density points at distance 1 carry a positive measure of unit pairs — [hand, one mind], §2.1.
+- `[SokolovVoronov2025]` Lemma 1 has a region-only proof from Condition 5; its printed proof needs no Condition 5 but uses Observation 1 — [hand,
+  one mind], §3.1.
+- S–V Cor. 2, Cor. 3, Prop. 12 (repaired), Lemma 2 (confinement step proved), Props. 7–8 (repaired) — [hand, one mind], §3.1.
+- S–V Lemma 3's printed three-curve proof covers exactly `1 < ‖u₁ − u₂‖ < √3`; above `√3` the Fig. 5 relation graph is bipartite — [hand] for the
+  `√3` degeneration, [measured, float] for the pairings, §3.1; the full range repaired by a sketch (Voronov's bicycle on the curves) — [hand, one
+  mind, transversality not written].
 
 ## Would-have-searched-here log
 
 - Stage 1: none (reading and a quotation check).
 - Stage 2: none (hand verification).
+- Stage 3: none; a float geometry check of seconds (`data/fs106/fs106-v/sv_lemma3_triangle.py`) checked a derived claim, with a positive control.
 
 ## Stage 1 — SAVED: quotation check and reading plan
 
@@ -143,3 +150,59 @@ open-band distance; the band makes properness an open condition, which is why th
   pairs of the set — [hand, one mind], §2.1 (the same content as FS-103's D1, I-D1, from the other side).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED (partial): `[SokolovVoronov2025]`
+
+*Read in full (v1, 29 pages, including the Appendix and Figure 5, rendered from the PDF). Verified step by step: §§2–6.2 (Props. 1–13, Lemmas
+1–3, Corollaries 2–4). **Not yet verified line by line:** §7's Lemma 5, Props. 14–19, Lemma 6 and the Appendix proof of Lemma 4 (read, not
+re-derived) — the successor's first task (§3.3). Notation: "region-only" = the step uses only colours of points interior to regions, never the
+colour of a boundary point or vertex, so it holds verbatim for maps proper at every pair of region points (D-AEMAP).*
+
+### 3.1 Verdicts
+
+| claim | verdict | minds / grade | the steps, and what I repaired |
+|---|---|---|---|
+| **SV-L1** (Lemma 1) | **TRUE**; the printed proof is right given Observation 1; a second proof found | 1 / [hand] | Printed proof checked: with `x` coloured 1 and `y` coloured 2 (Obs. 1), the arc of `ω(x)` near `y` is colour 2, Prop. 1 empties the symmetric difference of the discs about `y₁, y₂` of colour 2, that open set is then colour 1 and contains points of `ω(y)`, against Prop. 3. **It never uses Condition 5** — Observation 1 (boundary colours taken from adjacent regions) does that work. **Second proof (mine), region-only, using Condition 5 instead:** for a region point `q` of colour 1 near `y`, `ω(q)` misses the colour-1 regions near `x`; letting `q → y` inside the colour-1 regions and then inside the colour-2 regions, `ω(y) ∩ U(x)` lies in the closed complement of both, i.e. **in the boundaries through `x`** — a unit arc on a boundary, excluded by Condition 5. So: Lemma 1 holds for everywhere-proper maps with Obs. 1 and no Condition 5, and for a.e.-proper maps with Condition 5; without both, the configuration left is exactly "each boundary through `x` contains an arc of `ω(y)`" — Townsend's unit-arc feature (stage 5). |
+| **SV-C2** (Corollary 2) | **TRUE** | 1 / [hand] | Prop. 9: `h_δ(α) = δ cos α + √(1 − δ² sin² α)` is the distance along the ray at which a point is exactly 1 from a point at distance `δ`, angle `α` (law of cosines); `h_δ` is decreasing in `α`, so points strictly between radius 1 and `h_δ` are on the "wrong side" of `u` and of two of the three boundary points, and Prop. 2 (twice, through the regions 4, 5 and 4, 6 along the boundaries from `u`) excludes 4, 5, 6. Prop. 10: `h_δ(v)` is continuous in `v`, so `A_δ`, `B_δ` are open; `v ∉ A ∪ B` forces `ω(v)` through one of `x₄₅(δ), x₄₆(δ), x₅₆(δ)` **for every `δ ∈ (0, δ₁)`** — infinitely many distinct points of `ω(v)` on three boundaries, against Condition 5 (the print says "must contain an arc … of positive length"; infinitely many points is what Condition 5 excludes, and suffices). Cor. 2 then by compactness of `ω`. Region-only. **Uses Condition 6** (three boundaries of the three types at `u`): at a degree-4 trichromatic vertex of pattern `4,5,4,6` there is no `5|6` boundary and Prop. 9's "two of three" fails in some directions — the bowtie. |
+| **SV-C3** (Corollary 3) | **TRUE** | 1 / [hand] | Two closed curves `γ(u, η)`, `γ(v, η)` (Prop. 11) within `η` of unit circles whose centres are `< 2` apart cross, and a crossing point would carry no colour. Prop. 11's construction is garbled in its parameters ("segments inclined at an angle θ" with `θ = o(η)`: a crossing of radial width `2η′` at angle `θ` needs angular room `2η′/θ`) — repaired by choosing `r± = 1 ± η′` after `θ`, crossing `ω` at a monochromatic point in an overlap of an inner and an outer 3-coloured sector (Cor. 2(a)), where the whole local annulus is 3-coloured; "contained within the union of regions coloured 1, 2, 3" must read "interior of the union of their closures" (Def. 5's wording). Region-only. |
+| **C-T-IND's source** (Prop. 12, Cor. 4) | **TRUE, three repairs** | 1 / [hand] | (i) `f(γ(0)) = c(γ(0))` is off by one against Def. 6's colouring of the line (integer `n` has colour `(n mod 3) + 1`); (ii) as written `f` sends bichromatic points to integers and interpolates linearly, which does not preserve colour — the object meant is the **lift**: bichromatic points to half-integers, `Ind` = lift difference; (iii) "`F(t′) ≡ 0` (mod 3) ⟹ `c(γ₁(t′)) = c(γ₂(t′))`" is only half the case: when a point is a boundary point its lift is a half-integer, and `F ∈ 3ℤ` then means a bichromatic pair of one multicolour at distance 1 (excluded by **Lemma 1**) or a boundary point with multicolour `{a, b}` at distance 1 from a colour-`a` region point (excluded by **Prop. 3**) — neither is cited. With the lift, finiteness of colour changes is not needed (near an accumulation point only two colours occur, since `{1,2,3}`-points are excluded near `ω(u)` by Cor. 3). |
+| **C-T-CHR4's source** (Lemma 2) | **TRUE, one step proved** | 1 / [hand] | Props. 5, 6 checked (the Prop. 5 sign: `s = (1 − ‖x′ − y‖²)/√3` to first order, so a point inside `ω(y)` near `x` meets `ω` on the far side of `y`, the colour-2 side). The hexagon of boundary points, the alternation `{3,4} / {5,6}`, the pigeonhole are right. **"the neighborhood of u colored in that color must lie in αi" is asserted; proved:** if the colour-3 region at `u` had points in a strict cone of the opposite half-plane accumulating at `u`, then with `v = u′ − u`, `q = p − xᵢ`, `‖u′ − p‖² − 1 = 2eᵢ·q + ‖q‖² − 2eᵢ·v − 2q·v + ‖v‖²` takes both signs on (region at `u`) × (region at `xᵢ`), a connected product, so a colour-3 pair at distance 1 exists. Four closed wedges of angle `π/3` then leave an open cone near `u` free of region points, which finitely many Jordan arcs cannot fill (invariance of domain). Region-only. Uses Conditions 3, 5. |
+| **Props. 7–8** (Theorem 2's reduction to degree 3) | **TRUE, two repairs** | 1 / [hand] | (i) Prop. 7's circle `ω(v)` through `x, y` bulges past `z` unless `x, y` are near `z` (sagitta `≈ s² sin²(β/2)/2` against height `≈ s cos(β/2)`): take them near `z`, which the statement allows. (ii) Prop. 8's "the triangle whose existence is guaranteed by Prop. 7" needs a sector flanked by one colour; at a vertex with pattern `1,2,3,1,2,3` there is none — use a **run** of consecutive sectors flanked by one colour `c`: with `k ≥ 2` occurrences of `c` the smallest run has angle `< π`; recolouring its tip lowers the degree and creates only corners and degree-3 T-junctions, so finitely many steps in the radius-`r` disc. Case 2 of Prop. 7 uses **Observation 1** (Prop. 4 gives `1 ∉` the multicolour of `u`; `u`'s own colour is then not 1 only by Obs. 1); a region-only version needs no Obs. 1 but must also recolour the old boundary segments inside the tip. |
+| **SV-L3** (Lemma 3) | **GAP in the proof as printed, for √3 ≤ ‖u₁ − u₂‖ < 2**; TRUE as printed (with a path repair) for `1 < ‖u₁ − u₂‖ < √3`; the full range **repaired by a sketch** | 1 / [hand] + [measured, float] | The proof takes three curves from one point `p` near an intersection `p₀` of `ω(u₁)`, `ω(u₂)`, ending at points of `ω(p)` (Fig. 5: two along `ω(u₁)` at `±60°`, one along `ω(u₂)`), pairwise complementary with a reversal. **(a) The contradiction is an odd-cycle sign argument, not Cor. 4:** each relation "`Xʳᵉᵛ ∼ Y`" forces `sign Ind X ≠ sign Ind Y` (indices nonzero since the ends are at distance 1); three curves pairwise so related is impossible. **(b) The figure's triangle exists only for `‖u₁ − u₂‖ < √3`.** At `√3` the two intersection points of the circles are at distance 1 (`2√(1 − d²/4) = 1`), so the `−60°` ends on the two circles coincide; beyond it the partner branch of the `ω(u₂)` curve reversed ends at the wrong `ω(u₁)` end, and the relation graph among all four `60°` arcs from `p₀` is the 4-cycle `A–B–C–D` — **bipartite, no contradiction** (tracked on the full circles, 20,000 steps, `d ∈ {1.05, …, 1.99}`, positive control: the printed triangle is consistent at `d = 1.5`; `data/fs106/fs106-v/sv_lemma3_triangle.py`, float, [measured]). **(c)** Even below `√3` the printed condition "`|ω(x) ∩ pq_j| = 1`" fails for `d` near 1 (the partner overshoots the `60°` arc, to `96°` at `d = 1.05`); the proof survives with partner **paths** and the lift's homotopy invariance. **Repair for the full range (sketch, one mind):** run Voronov's bicycle (Thm. 1.2's configuration) on the curves `γ(u₁, η)`, `γ(u₂, η)`: start at a point of `γ(u₁)` slightly nearer than 2 to `u₂` whose two partners on `γ(u₂)` lie in one monochromatic arc (choose the far point of `ω(u₂)` good and let `γ(u₂)` equal `ω(u₂)` there), follow the two partner branches to `x₁ ∈ γ(u₁) ∩ γ(u₂)`, and conclude with Prop. 12 as in V-1.2 (1)–(2) — the common start gives equal `F(0)`, the swept path is homotopic to the arc through `x₁`. The transversality of the partner crossings away from the start (tangent deviation `θ` against the crossing angle) is asserted, not written. |
+| **SV-L4** (Lemma 4) | **not yet verdicted — two named steps open, the rest unverified** | — | (a) "It is straightforward to verify that within a distance of at most 1 from any point, there exists a trichromatic point" — unproved in the print. Voronov's proof used the 3-valent tiling and the fills; for maps satisfying Condition 7 (so for polygons after Prop. 8) it goes through after fills (fills are valid for open regions, H3); **under Condition 6 alone, bichromatic vertices of degree ≥ 4 are allowed and the ring argument fails** (two regions of one colour touching `Q` can be separated at a vertex by a region of `Q`'s colour) — open. (b) The Appendix's last step ("on the boundary of the union of three regions … there is at least one more trichromatic point") needs 1-connected regions, i.e. Voronov's fills, which S–V never perform; repairable by fills (H3; fills preserve polygonality). (c) Lemma 5, Props. 14–19, Lemma 6: stage 3's remainder. |
+| **SV-1, SV-2** | **not yet verdicted** | — | Both rest on SV-L3 for the full range `(1, 2)` (Lemma 4's pair is not controlled below `√3`) and on SV-L4. SV-2 is free of step (a) (Prop. 8 gives degree 3 locally); SV-1 is not. |
+
+### 3.2 Where S–V use Conditions 3, 5, 6 and boundary colours (the map of hypotheses, part 2)
+
+| step | Cond. 3 | Cond. 5 | Cond. 6 | boundary/vertex colour | holds region-only (D-AEMAP)? |
+|---|---|---|---|---|---|
+| Obs. 1 (WLOG boundary colours from adjacent regions) | — | — | — | **is** the assumption; **not proved to be WLOG** (recolouring a boundary point conflicts only with boundary points at distance 1, finitely many under Cond. 5, but 2-lists need not be list-colourable) | moot |
+| Props. 1–4 | — | — | — | Prop. 2's and Prop. 3's conclusions concern a point's own colour | yes, read for region points |
+| **Lemma 1** | — | printed: no; mine: **yes** | — | printed: **yes** (Obs. 1 replaces Cond. 5) | yes under Cond. 5 (my proof); without Cond. 5 the unit-arc configuration remains |
+| Prop. 5 | local finiteness | **yes** ("the arc of ω(y) is not a boundary") | — | no | yes |
+| Prop. 6, Lemma 2 | **yes** (finitely many non-monochromatic points on `ω(x)`; finitely many regions at `u`) | **yes** | — | no | yes |
+| Props. 7–8 (polygons only) | **yes** (finite induction in a disc) | (polygons) | produces Cond. 7 locally | **yes** (segment colours; case 2 via Obs. 1) | with the region-only variant, yes |
+| Props. 9–10, Cor. 2 | at `u` (three boundaries) | **yes** (Prop. 10) | **yes** (three boundary types at `u`; the bowtie fails) | no | yes |
+| Prop. 11, Cor. 3 | — | via Cor. 2 | via Cor. 2 | no | yes |
+| Prop. 12, Cor. 4 | — | via Lemma 1 (repair iii) | — | no (the lift uses multicolours) | yes |
+| Prop. 13, Lemma 3 | — | Lemma 3's point choices ("no arc of ω(p) … can form a boundary") | the hypothesis "boundaries … extend from each point" | no | yes, with the repairs of §3.1 |
+| Lemma 4 (a), (b) | **yes** (finitely many fills in a disc) | — | (a) fails as argued when bichromatic vertices of degree ≥ 4 occur | fills recolour regions only | (a) open; (b) yes with fills |
+| Lemma 5, Props. 14–19, Lemma 6 | not yet mapped | Prop. 17 ends in Cond. 5 ("must form an arc of a circle of radius 1. A contradiction with Condition 5") | — | Lemma 5's two-clause "proper" for circle colourings mentions bichromatic points | not yet mapped |
+
+**The picture so far.** Every step of S–V verified here is region-only except Lemma 1's printed proof and Prop. 7, and both have region-only
+versions under the same conditions. Condition 5 enters at five named places (Lemma 1 in the region-only proof, Prop. 5, Prop. 6/Lemma 2,
+Prop. 10, Prop. 17); Condition 6 at one (the three boundary types at a trichromatic vertex, Props. 9–10). The a.e. form C-AE-FA therefore
+reduces, as far as §§2–6 go, to the print's own conditions; §7 and Lemma 4 (a) are where it is still undecided.
+
+### 3.3 Left for a successor (stage 3's remainder, then stages 5–6)
+
+1. §7: Lemma 5, Props. 14–19, Lemma 6, the Appendix proofs of Props. 18–19 and Lemma 4 — verify, map (Cond. 3/5/6, boundary colours), region-only?
+2. SV-L4 (a) under Condition 6 with bichromatic vertices of degree ≥ 4: prove or name the counterexample shape.
+3. SV-L3's repair: write the transversality step of the transplanted bicycle.
+4. Then verdicts on SV-L4, SV-1, SV-2.
+5. Stage 5: `[Townsend1981]` TW-81 (the note gives no proof: verdict "statement only"; check Townsend's counterexample to Woodall's assertion
+   against the scan — the constant is ⅔π); `[Woodall1973]`, `[Coulson2004]`, `[Thomassen1999]` (now held as text), `[Parts2020c]` (fetched);
+   `[Townsend2005]`, `[Pritikin1998]` on arrival — quote the main theorems into this record (TW-05, CO-04, WO-73, TH-99, PR-98, PA-20).
+6. Stage 6: divergences with FS106-VB once this record's verdict stage is complete.
+
+## Stage 3 — SAVED (partial)
