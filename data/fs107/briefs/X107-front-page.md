@@ -13,8 +13,8 @@ resuming;** continue at its first stage not marked SAVED.
 
 1. **FS107-C's drafts in `plans/FS107-stability.md` §R-close, exactly:**
    - the `LEDGER.md` changes (new rows, row 40's correction, any addendum) with their § B lines;
-   - the `CLAUDE.md` lines, in the version the owner chose — see the owner's ruling in the close inventory (`plans/FS107-close-inventory.md`,
-     the last "owner ruling" item on FS-107's name and link 5). If there is no ruling, apply C's recommended version and say so;
+   - the `CLAUDE.md` lines. Where C drafted alternatives, apply the version the owner's latest ruling in `plans/FS107-close-inventory.md`
+     names; if there is no ruling, apply C's recommendation and say so;
    - the `BIBLIOGRAPHY.md` and `CLOSED-QUESTIONS.md` rows;
    - the `plans/FRONTIER-STUBS.md` rows;
    - the `plans/GROKKING-INSTANCES.md` instances;
