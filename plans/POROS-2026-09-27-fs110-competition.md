@@ -1470,3 +1470,62 @@ hunch: cb-covers-cusps
 - NB4 and YB4 — read against: A6-1.8 — surprised: unread (fenced until their reports exist)
 
 ## Stage A6-1 — SAVED
+
+## Stage A6-2 — SAVED: the verdict as it stands before NB4 and YB4, the close, and a hand-over at my budget line (brief item 4)
+
+*Neither NB4 nor YB4 has reported; nothing of theirs is opened. My own count is near the brief's hand-back line, so item 3 is left to a successor
+(below).*
+
+**Erratum to A6-1 (line addresses in `plans/FS110-N-proof.md`; no verdict changes):** "Tightness is never used" is l. 782 (not 781); "(indeed every
+valid map)" l. 913 (not 916); "S–V's Prop. 9 side criterion …" l. 918 (not 921); "answered NO almost everywhere" l. 994 (not 995); N3-DEG "[one]" l. 995
+(not 1001).
+
+### A6-2.1 The milestone's headline, exactly, with its grade (as it stands; NB4 decides the chain's count)
+
+> **Under Condition 5, no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring
+> in which no two interior points of one colour are at distance exactly 1.** Every such colouring has a valid modification that is cubic at every
+> vertex (sectors possibly cusp horns) and still satisfies Condition 5 (N4-TERM, N4-CONE: hard Woodall cones are removed by MERGE, MERGE-RAY and
+> SHAVE, and a cone no operation removes forces a bi-infinite chain along its normal line, which curvature monotonicity forbids). Sokolov–Voronov's
+> Corollary 1, proved almost everywhere for curved cubic maps with no `d = 2` exception (FS110-CB, FS110-CD), then refutes the modification. **So the
+> Condition-5 half of `[SokolovVoronov2025]` Question 2 is answered yes (seven colours are needed), almost everywhere, for circular-arc maps**, and with
+> FS-107, vanishing holes at bounded complexity cannot save a colour under Condition 5.
+
+**Grade, link by link:** N4-SHAVE, N4-RAY, N4-STUCK, N4-PROP, N4-FIN, N4-TERM, N4-CONE [hand, one mind; FS110-NB4 blind, running]; W-MERGE, NB-4, N3-DEG
+[hand, two minds, one blind]; Cor. 1 AE with no `d = 2` exception [hand, two minds, both blind]; Cor. 1 AE for cusp sectors [hand, one blind mind (CB,
+which did not consider cusps) and one sighted reading (A6-1.5)]. **The headline carries the grade of its weakest link: [hand, one mind] now; [hand, two
+minds, one blind] if NB4 finds the chain TRUE and a second reading confirms A6-1.5.** It is a partial answer to a question in print, and it is not in
+print to our search (the prior-art gate's §PA row 3 and FS110-PA). Not claimed: the unit-arc half (Condition 5 dropped); boundaries that are not
+circular arcs or segments; unbounded complexity in the FS-107 sense (FS-111).
+
+### A6-2.2 What next (a decision in four parts, for the owner)
+
+- **The choice: close FS-110 when NB4 reports TRUE (with any local repairs), with the headline above at [hand, two minds, one blind]. Run two cheap
+  steps inside the close:** a second mind reading CB's D2 and D5 item 5 for zero-angle sectors (about an hour, A6-1.5), and card A6-C2's exact check
+  (minutes, under the ban: a fragment given by formula). If NB4 reports a GAP, run one targeted round on that step only.
+- **The alternatives weighed:**
+  - (a) *Close now, at one mind for the chain.* It saves waiting for a job already running, but it files an answer to a printed question below the
+    two-minds standard every earlier headline of FS-110 met.
+  - (b) *Round 5 on the unit-arc branch before closing* ((S1), T2, NB-4's exception, A4-SIX-ARCS: the other half of Question 2). It is the natural
+    next object, but it is a different question with three objects and no single invariant (A5-5.6), and it deserves its own stub and reframe rather
+    than a fifth round under a frame built for the `d = 2` seam.
+- **Why this one:** against (a), NB4's report costs nothing extra and moves the grade; against (b), FS-110's question (W-4) is answered, and the
+  two sides converged on truth without contact this round, which is the sign a frame is done (Poros's economic stop: two answers that changed no move).
+- **Confidence: medium-high.** Two facts would change it:
+  - NB4 finding a GAP at N4-STUCK (ii)–(iv), N4-PROP or N4-FIN: then one round on that step.
+  - The cusp reading finding a step of CB's that needs a positive angle, with A6-C2's fragment valid: then the base needs a cusp lemma (S–V
+    Props. 9–11 re-derived for coinciding tangents), and the headline is conditional on it until then.
+- **Default:** if the owner says nothing, FS-110 waits for NB4 and then closes with A6-2.1's headline at the grade NB4 gives it.
+
+### A6-2.3 Left for a successor advisor (brief item 3), from this SAVED record
+
+1. When `data/fs110/reports/FS110-NB4.md` exists: read NB4 against N4 (§2.1–2.8, N4-4) and against A6-1.8's hunch `nb4-finds-the-chain-true`; list
+   divergences, each checked against N4's text; give the count of minds for W-4's NO; ask NB4's report for card A6-C1 (bounded `K`).
+2. When `data/fs110/reports/FS110-YB4.md` exists: read YB4 against Y4 (§11.2–11.5) and against `yb4-confirms-the-fragments-…`; check whether YB4's
+   fragments, if any are new, are shaveable or truncated chains (A6-1.1's test, with `a6_shave_wc1h.py` as the template).
+3. Then confirm or revise A6-2.1's grade and A6-2.2's choice; score A6-1.8's three hunches.
+
+### A6-2.4 Evidence inventory
+
+- NB4 and YB4 — read against: A6-1.8 — surprised: unread (not yet reported; handed to a successor)
+
+## Stage A6-2 — SAVED
