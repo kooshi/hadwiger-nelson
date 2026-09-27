@@ -236,3 +236,16 @@ is soft (both tips recolour legally into `y` or `x`, given the window test). **S
 (ii) read with **essential** types the conclusion can fail: `y` sits in a zero-angle window at `N`, so `P_ess(N) = {1, r_N}` and
 `P_ess(S′) = {1, r_S}`, equal when the ring has one colour at `±n`; nothing forbids that locally. Moot if G-d2 reads closure types, and
 moot altogether given claims §8's second update (G-d2 does not arise; two blind minds).
+
+## Stage 3 — SAVED (verdicts committed before opening the side's record, tools and directory)
+
+| claim | my verdict | grade, minds |
+|---|---|---|
+| Y4-MU | **TRUE** (second order; "`λ = ∞` at a corner" is per side) | [hand + tools exact]; two minds, this one blind |
+| Y4-WC | **TRUE for the members; MISSTATED phrase** ("every curvature strictly inside `(−1, 1)`" → "every horn-bounding curvature …"); the contact tiles' extent is not fixed by the formula | [tools, exact, my checker] |
+| Y4-TIP | **TRUE** at second order; **precision**: at a double-horn cone the cone is lost only after one recolouring per horn | [hand]; two minds, this one blind |
+| Y4-HARD | **TRUE** (members ACCEPT; every tip recolouring REJECTs at the named pair, for the window reason, confirmed by moving the window colour out of `R_y`) | [tools, exact; reason hand]; blind |
+| Y4-D2 | **TRUE for closure types**; scope: tip-hard cones and the pair `(N, S′)`; fails for essential types if the ring has one colour at `±n` (moot: G-d2 does not arise) | [hand]; two minds, this one blind |
+
+Registered expectation scored: I gave 0.6 to "at least one divergence of truth or scope"; found: one misstated phrase and two scope
+precisions, no divergence of truth before reading the side.
