@@ -307,6 +307,7 @@ ALLOW: dict[str, str] = {
     "§§2–9": "row 120's grade 'its proof in EL2021 §§2–9, unread here', superseded at FS-105's close (FS105-C's §R-close 4.1): Thm 1.2's proof is EL2021 Thm 1.3 plus FS105-DED; plans/FS105-harden-mr.md keeps the old reading",
     "§4.1–4.3": "row 120's prior-art cell 'EL2021 §2 and §4.1–4.3 read (X24R)', widened to 'EL2021 §§1, 2, 4 read in full (X24R; FS105-R)' at FS-105's close (4.1)",
     "c·M^{1/[F:ℚ]}": "row 120's mechanism '`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`', sharpened to the exact constant `(4/π + o(1))M^{1/[F:ℚ]}` at FS-105's close (4.1; FS105-W-H)",
+    "29–61": "the paths-forward table's group rank, renumbered 28–60 when FS-105's row left the table at its close (§R-close 4.2; the 30–62 precedent)",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
@@ -390,6 +391,14 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     '25–27': ("plans/FRONTIER-STUBS.md", "the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else"),
     '0.195': ("plans/STUB-collapse-cp-plane.md", "FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it"),
     '2√103/104': ("plans/STUB-collapse-cp-plane.md", "FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it"),
+    # FS105-X, the front page of FS-105's close (2026-09-26; data/fs105/fs105-x/record.md): FS-105's rank-1 row left the table and
+    # FS-103's close history left the Last-updated line (FS105-C's §R-close 4.2); each token verified in its home on every run.
+    'plans/RERANK-2026-09-26.md': ("plans/FRONTIER-STUBS.md", "the Last-updated line's 'the paths forward re-ranked (R1–R4, plans/RERANK-2026-09-26.md)', cut when FS-105's close replaced the line (§R-close 4.2); plans/FRONTIER-STUBS.md's re-rank paragraphs cite the record"),
+    'RERANK': ("plans/FRONTIER-STUBS.md", "the same Last-updated clause (the record's name); plans/FRONTIER-STUBS.md cites plans/RERANK-2026-09-26.md"),
+    'plans/STUB-harden-mr.md': ("plans/FRONTIER-STUBS.md", "FS-105's rank-1 paths-forward row, which left the table at FS-105's close (§R-close 4.2, 4.4); the stub's path heads its entry in plans/FRONTIER-STUBS.md's closed list"),
+    '121–130': ("plans/STUB-harden-mr.md", "FS-105's rank-1 row's bearing 'rows 121–130 rest on MR (row 120), the table's weakest link', which left the table at FS-105's close (§R-close 4.2); the stub keeps it"),
+    '§§3': ("plans/STUB-harden-mr.md", "FS-105's rank-1 row's question 'Thm 1.2's proof (§§3, 5–9 unread)', answered at FS-105's close (row 120's grade); the stub keeps it"),
+    '5–9': ("plans/STUB-harden-mr.md", "the same row's '§§3, 5–9 unread'; the stub keeps it"),
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as

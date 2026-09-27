@@ -60,3 +60,18 @@ Stage 3: `CLAUDE.md` from `claude_md_drafts.py`. Stage 4: `BIBLIOGRAPHY.md` (4.3
   comment in `tools/claude_md_fact_audit.py`; re-run exit 0, AUDIT PASSED; `--self-test` exit 0; `--dupes` 10 (unchanged).
 
 ### Stage 2 — SAVED
+
+## Stage 3 — SAVED (`CLAUDE.md`)
+
+- `claude_md_drafts.py --check --out <my scratch>`: PASS, 296,232 → 296,382 (+150). The copy's diff against `CLAUDE.md` touched exactly the
+  drafted lines — 138 (Last updated), 145 (the lower end's row-120 clause), 269 (Open milestones), 275–303 → 275–302 (FS-105's rank-1 row
+  out, ranks 2–28 → 1–27, `29–61` → `28–60`; FS-104 at rank 1; FS-100's and FS-102's cells), 872 (G50), 1433 (G72's count and
+  fifteenth), 1505 (G79), 1508 and 1510 (G80's body and *Do*) — then copied into place. **`CLAUDE.md`: 296,232 → 296,382 bytes, under
+  300,000.** A grep of the new file for `Thm 1.2`, `EL2003`, `degree 16`, `harden`, `Sataev` found no other stale mention.
+- **Fact audit** first read exit 1, eight lost tokens, each from text the drafts replaced: FS-103's Last-updated clause
+  (`plans/RERANK-2026-09-26.md`, `RERANK`) and FS-105's departed rank-1 row (`plans/STUB-harden-mr.md`, `121–130`, `§§3`, `5–9`), all
+  given **verified** `EXTERNAL_HOMES` entries (the audit reads the home and must find the token: `plans/FRONTIER-STUBS.md`,
+  `plans/STUB-harden-mr.md`), and the group label `29–61` (renumbered `28–60`) an ALLOW line on the `30–62` precedent. Re-run: exit 0,
+  AUDIT PASSED, the six homed tokens reported HOMED in their files; `--self-test` exit 0; `--dupes` 10 (unchanged, not above 10).
+
+### Stage 3 — SAVED
