@@ -23,7 +23,7 @@ with one GAP, YB3-SAME), and exact local fragments of every seam (two checkers).
 
 ## §1. The headline and its chain
 
-**FS110-CLOSURE — Under Condition 5 no locally finite map of the plane bounded by segments and circular arcs carries a full a.e.-proper six-colouring; the Condition-5 half of S–V Question 2 is answered yes, almost everywhere. [hand; the chain two minds, one blind; the base two minds, both blind; the cusp scope two readings, D4 and D5 items 1–4, 6 under check]**
+**FS110-CLOSURE — Under Condition 5 no locally finite map of the plane bounded by segments and circular arcs carries a full a.e.-proper six-colouring; the Condition-5 half of S–V Question 2 is answered yes, almost everywhere. [hand; the chain two minds, one blind; the base two minds, both blind; the cusp scope two readings at D2, D5 item 5 and D1, one reading at D4, and D5 items 1–4, 6 one mind after CE's repair]**
 *Proof:* NB-4, NB-5; W-MERGE; N4-TERM and N4-CONE (every valid map has a terminal valid modification, cubic at every vertex); FS110-COR1-NOD2 on the
 modification, with FS110-CUSP-BASE for cubic vertices whose third colour is a doubly shadowed single horn (the residue, FS110-NB4-CS; it exists locally,
 FS110-A6-C2). Headline as A6-2.1 states it (`plans/POROS-2026-09-27-fs110-competition.md` l. 1485). *Proof verdict:* holds given the base at cusp sectors
@@ -107,7 +107,7 @@ and Prop. 18 re-derived by CD, from print in CB; CD takes Props. 9–11 and 17 f
 was a sketch. *Rests on it:* FS110-COR1-NOD2; FS106-SV2's weakest link. *Prior art:* `[SokolovVoronov2025]` Lemma 3, whose printed proof fails at
 `√3 ≤ d < 2`; the bicycle is `[Voronov2023]` Thm 1.2, §5. *Kernel:* with FS110-CLOSURE.
 
-**FS110-CUSP-BASE — CB's route holds at cubic vertices with a cusp or double cusp at D2's strip (a)–(c), D5 item 5 and D1's (P′); along a cusp's normal `|u ± n − x(m)|² − 1 = 4R(R ∓ 1)m²/(1 + m²)`. [hand and tools; two readings: A6 sighted; CC one mind on the cusp case; D4 and D5 items 1–4, 6 under check]**
+**FS110-CUSP-BASE — CB's route holds at cubic vertices with a cusp or double cusp at D2's strip (a)–(c), D5 item 5 and D1's (P′); along a cusp's normal `|u ± n − x(m)|² − 1 = 4R(R ∓ 1)m²/(1 + m²)`. [hand and tools; two readings at these steps: A6 sighted, CC; D4 one reading, CE; D5 items 1–4, 6 one mind after CE's repair]**
 *Proof:* CC §C1–C6 (`tools/fs110_cc_cusp.py`, two plants firing for their named reasons); A6-1.5. *Proof verdict:* no step fails, no repair; CB's D5 item 5
 omits an inner-`q` case, impossible by the same branch constraints (a completion). Not yet read at cusps: D4's bicycle and D5 items 1–4, 6 (FS110-CE, running);
 S–V's printed Prop. 17 at a horn rests on Prop. 16 there (CD's from-print route). *Rests on it:* FS110-CLOSURE at the residue. *Prior art:* not found in
@@ -219,7 +219,7 @@ formulas (YB4 S1–S4). Tip-hard is weaker than doubly shadowed: WC1H shaves (FS
 *Proof:* Y4 §11.5; YB4 §2.3 (YB4-D2). *Proof verdict:* TRUE for closure types and the pair `(N, S′)`; can fail for essential types; moot, G-d2 not
 arising (FS110-COR1-NOD2). *Rests on it:* nothing now. *Prior art:* not found in print. *Kernel:* declined.
 
-**FS110-YB4-WINDOW — At WC's curvatures a `y`-cusp at `N` inside `R_y = [−T²/6, T²/2)` blocks the tip recolouring into `y`, and one above it does not. [hand and tools; one mind: YB4, blind]**
+**FS110-YB4-WINDOW — At WC's curvatures a `y`-cusp at `N` inside the window `R_y` (from `−T²/6` inclusive to `T²/2` exclusive) blocks the tip recolouring into `y`, and one above it does not. [hand and tools; one mind: YB4, blind]**
 *Proof:* YB4 §2.2–2.3. *Proof verdict:* both ends confirmed on four exact members. *Rests on it:* Y4-TIP's windows. *Prior art:* not found in print.
 *Kernel:* declined.
 

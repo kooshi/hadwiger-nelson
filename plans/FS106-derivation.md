@@ -50,8 +50,8 @@ declined until a second mind (a sketch is not a kernel target).
 **FS106-SV2 — Polygonal colourings of the plane need seven colours (`[SokolovVoronov2025]` Thm 2), by the printed chain repaired: Prop. 7/8 region-only (Observation 1 not used); then fill every non-simply-connected region in the bounded disc; then Lemma 4 with its eleventh point on the outer frontier of u's {4,5,6}-component and the same-multicolour pair at distance in (1, 2); except one named edge case, two same-multicolour points antipodal on ω (d = 2). [hand; the chain two minds, one blind: the V line, SB; SV-L3's repair one mind, sketch]**
 *Proof:* V2 stage 3 (rows Prop. 8, SV-L4, SV-2); V3 stage 4 (Prop. 7/8 region-only at a run apex); SB §2.1 (A1–A12, blind); TS §3 (Prop. 7
 region-only, sighted); A2 §1b.1 (the order Prop. 8 → fills → Lemma 4; fills delete regions inside holes, create no vertex, keep degree ≤ 3 and
-polygonal boundaries; H3 keeps properness). *Proof verdict:* TRUE except `d = 2` (open; V3 reduced it to orientation constraints with no local
-contradiction). A12 — the eleventh point needs simply connected regions, which Prop. 8's recolouring can destroy — found by V (l. 172 (b)) and
+polygonal boundaries; H3 keeps properness). *Proof verdict:* TRUE; its `d = 2` exception is struck at FS-110's close (row 134: S–V Cor. 1 a.e. with no
+`d = 2` exception, FS110-CB and FS110-CD, both blind; FS110-CE's Antipodal Lemma), and SV-L3's sketched repair is now FS110-CB's full derivation. A12 — the eleventh point needs simply connected regions, which Prop. 8's recolouring can destroy — found by V (l. 172 (b)) and
 SB blind, closed by the fills. *Rests on it:* FS106-AE-POLY, FS106-AE-CONV, `CLAUDE.md` link 4. *Prior art:* the theorem is S–V's; the
 repairs not in print. *Kernel:* stub — FS-101, after `d = 2` and a second mind on SV-L3.
 
@@ -104,12 +104,12 @@ over V-1.3 as a named hypothesis (P §5.1 phase L).
 
 **FS106-AE-POLY — No polygonal six-colouring of the plane is almost-everywhere proper (open regions coloured, boundaries free), except possibly at the d = 2 edge case of FS106-SV2; hence SV-2 without Observation 1. [hand; two minds on the chain, one blind: TS (region-only), SB; the V line; SV-L3's repair one mind, sketch]**
 *Proof:* TS §3 row C-AE-POLY; SB §2.1 (the ★ steps A6, A9, A10 repaired; A4, A5, A11 with Cond. 5, which polygons satisfy); A2 §1b.1 (A12
-closed by fills). *Proof verdict:* TRUE except `d = 2`. *Rests on it:* FS106-AE-CONV; `CLAUDE.md` link 4; FS-107's constraint "the limit is
+closed by fills). *Proof verdict:* TRUE; the `d = 2` exception struck at FS-110's close (row 134). *Rests on it:* FS106-AE-CONV; `CLAUDE.md` link 4; FS-107's constraint "the limit is
 not polygonal". *Prior art:* the everywhere form is `[SokolovVoronov2025]` Thm 2; the a.e. form not found in print. *Kernel:* stub, with SV-2.
 
 **FS106-AE-CONV — No locally finite tiling of the plane by convex polygons, each tile's interior carrying one of six colours, has no two points of one colour's open set at distance 1: merge tiles by colour (no unit pair is created), fill the merged regions' holes, apply FS106-AE-POLY. So seven colours, against `[Coulson2004]`'s printed six (which also assumes an area bound). [hand; two minds on the reduction, one blind: TS, SB (GAP at A12, closed by the fill step, A2 §1b.3)]**
 *Proof:* TS §3 row C-AE-CONV; SB §2.2; A2 §1b.3 (merged regions may be annular; the fills make them simply connected, degree and polygonality
-kept, each region of diameter ≤ 1). *Proof verdict:* TRUE at FS106-AE-POLY's grade, with its two residuals. *Rests on it:* the correction to
+kept, each region of diameter ≤ 1). *Proof verdict:* TRUE at FS106-AE-POLY's grade (the `d = 2` residual struck at FS-110's close, row 134). *Rests on it:* the correction to
 `CLAUDE.md` link 4. *Prior art:* not found; a corollary of S–V Thm 2 applied to merged tilings, small. *Kernel:* declined (follows SV-2's port).
 
 **FS106-AE-NICE — "Let G be a connected graph in ℝ² whose faces are open topological discs of diameter < 1, each bounded by a cycle of G. If each face receives one of k colours so that any two distinct faces of one colour are at distance > 1 (points of G carry no colour), then k ≥ 7." Its a.e.-proper relaxation (no unit pair between same-coloured faces) is a GAP with C-AE-Q2. [hand; two readings: V3, TS (made before V3 committed)]**

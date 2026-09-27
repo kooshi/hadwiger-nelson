@@ -4,6 +4,8 @@
 §R-close 3.6). **Solver column: none** — reading, derivation and Lean. Written for a session with zero conversation memory: read `CLAUDE.md`
 § The aim and § Counter-priors first, then `LEDGER.md` rows 131–132 and `plans/FS106-derivation.md` §§1–2.*
 
+**Banner (the owner, at FS-110's close, 2026-09-27):** items 1 (S–V Thm 2's `d = 2` case: struck, row 134, by FS110-CB and FS110-CD blind and FS110-CE's Antipodal Lemma), 2 (Lemma 3 at `√3 ≤ d < 2`: FS110-CB's full derivation) and S–V Thm 1's fills (answered under Condition 5 with Condition 6 dropped: W-MERGE and N4's cone removal, row 134) are answered; what is left is Townsend's (c) in full and `[Townsend2005]` against the manuscript. The text below is the stub as minted.
+
 ## The question
 
 FS-106 verified the regular half of the program (row 132) and left five named residuals in print. Close each, by derivation, or find the
