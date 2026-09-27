@@ -39,7 +39,11 @@ Ledger row 57.
 > `tools/fischer1994_check.py`), exhibits the Moser spindle in `ℚ(√3,√11)²`, and concludes *"the chromatic number of this graph is 4"*.
 > **The equality `χ(ℚ(√3,√11)²) = 4` is his.** The question was not open when rows 2–7 below posed it, and none of `[Moorhouse2010]`,
 > `[Madore2015]`, `[CranstonRabern2015]`, `[ExooIsmailescu2019]`, Polymath16 or this project knew (the paper is in no citation
-> database and its title uses *planar geometric graph* for what every later poser calls the plane over a field — G49). **This
+> database and its title uses *planar geometric graph* for what every later poser calls the plane over a field — G49). **And it was
+> restated in print twice, in the two Geombinatorics surveys of this direction (read 2026-09-27):** `[Johnson2000]` p. 176, *"Since
+> (ℚ²(√3, √11), 1) contains copies of the Moser Spindle, it follows that χ(ℚ²(√3, √11), 1) = 4"*, and `[Johnson2006]` p. 214, *"Since
+> G(ℚ²(√3, √11), 1) contains the Moser spindle, it follows that χ(G(ℚ²(√3, √11), 1)) = 4"*, each citing `[Fischer1994]`. So rows 2–7
+> missed a 1994 proceedings paper and two surveys, the second the one `[Soifer2024]` ch. 11 sends its readers to. **This
 > project's contribution to §1.1 is therefore the kernel proof and a second colouring**: his is `ℤ/4`-valued, ours the residue map onto
 > `𝔽₄`, and they differ (his separates a distance-2 pair the residue map identifies; `CLAUDE.md` G41). The sentence "this is the one
 > result that has cleared the publication bar" is withdrawn: the trigger did not fire (`CLAUDE.md` § Publication).
@@ -50,7 +54,7 @@ an author. Row 1 predates the answer; rows 2–7 do not.
 
 | # | who, when | verbatim |
 |---|---|---|
-| 1 | **Benda & Perles**, circulated **1976**, published 2000; recorded in `[Soifer2024]` ch. 11 as **Open Problem 11.6** | *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic extension of `ℚ²`."* |
+| 1 | **Benda & Perles**, circulated **1976**, published 2000 (`[BendaPerles2000]` p. 126, Open Question (4); read from the source 2026-09-27); restated by `[Johnson2000]` p. 176 as Problem 4.4, *"Find the chromatic number of (ℚ²(√2), 1), and, in general, of (𝔽, 1), for any finite algebraic extension 𝔽 of ℚ²"*; recorded in `[Soifer2024]` ch. 11 as **Open Problem 11.6** | *"(4) Find the chromatic number of Q²(√2) and, in general, of any algebraic extension of Q²."* (p. 121 has its first form: *"But we have not thought of the chromatic number for, say G₁(Q²(√2)) or of other extension and we leave this as an open problem."*) |
 | 2 | **`[Moorhouse2010]`** §1 (unpublished draft, 3 March 2010) | *"We have not determined the exact value of `χ(K²)` in this case."* — having named `ℚ(√3,√11)` as the smallest number field whose plane holds a Moser spindle, and proved `χ ≥ 4` |
 | 3 | **`[Madore2015]`** Prop. 4.6 (arXiv:1509.07023) | proves `4 ≤ χ(ℚ(√3,√11)²) ≤ 5` and leaves the gap, which stood for eleven years |
 | 4 | **`[CranstonRabern2015]`** (Combinatorica) | *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`? What about its chromatic number?"* |
@@ -78,7 +82,7 @@ residue colouring; the exact value is `[Fischer1994]`'s.**
 opened, the 47 citations of `[ExooIsmailescu2019]` walked, two citation databases cross-checked. None found.
 
 **Status:** the manuscript is FS-20 (rank 1, `plans/STUB-theorem-B-writeup.md`), not yet written; it is
-blocked on FS-27 §2 and on obtaining `[Johnson2006]`. `[Fischer1990b]`, the one earlier paper on planes over multiquadratic fields, arrived and was read in full on 2026-09-16: it describes the unit-vector ring and the components, and states **no colouring result**, so it does not compete with this one. Kooshi released this result, and
+blocked on FS-27 §2 (`[Johnson2006]`, its other blocker, arrived and was read in full on 2026-09-27). `[Fischer1990b]`, the one earlier paper on planes over multiquadratic fields, arrived and was read in full on 2026-09-16: it describes the unit-vector ring and the components, and states **no colouring result**, so it does not compete with this one. Kooshi released this result, and
 only this one, from the write-up deferral.
 
 ---
@@ -94,15 +98,27 @@ homomorphism may be **partial**. Kernel-checked (`Proofs/HadwigerNelson/ResidueC
 > construction by hand: *"which the author has not found the courage to try to formulate under the
 > most general auspices."*
 
-**Our answer.** That formulation, kernel-checked.
+**Answered in print before it was posed** (found 2026-09-27, reading `[Johnson2006]`; checked in `[Fischer1990]` itself the same
+day). `[Fischer1990]` p. 181 defines an additive k-colouring as *"A group homomorphism v: C₀(F^d) → G to an additive group G of order k
+so that v(ξ) ≠ 0 whenever ‖ξ‖ = 1"*, `C₀(F^d)` the subgroup the unit vectors generate — for `d ≥ 3` not a ring — and his Theorem 1(i)
+(p. 183, *"If F^d has an additive k-coloring, then F^d can be k-colored"*) colours coset by coset: *"Since the connected components of
+F^d are translates of C₀(F^d), to k-color F^d it suffices to k-color C₀(F^d)."* `[Johnson2006]` p. 213 states the construction for every
+`G(S, D)`, `S` an additive subgroup of ℝⁿ and `D` any set of distances: *"An additive k-coloring of G(S, D) is a proper coloring
+achieved by finding a group homomorphism of ⟨S_D⟩ into some abelian group of order k so that each u ∈ S_D is mapped to a non-zero group
+element, which assures that G₀(S, D) is properly colored, and then copying the coloring on the other components of G(S, D), which are
+copies of G₀(S, D) associated with the cosets of ⟨S_D⟩ in S."* So the step Madore declined in 2015 was taken in 1990.
+
+**Our answer.** The formulation for an arbitrary graph drawn in an arbitrary abelian group — no metric, torsion allowed, any subgroup
+containing the edge differences — kernel-checked: a routine abstraction of Fischer's construction.
 
 **Prior art that constrains the claim.** His Prop. 3.2 *is* the valuation-subring form, so
-`colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours, and the unit argument is
-`[Fischer1990]` Thm 1. The general form — the step Madore declined — is ours. The delimitation is written into
-ledger row 57 and must survive into any manuscript. **Not proved:** that a number field with a
+`colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours; the coset construction out of a subgroup is `[Fischer1990]`
+Thm 1(i), in `[Johnson2006]`'s form for every `G(S, D)`. **Ours:** the metric-free, arbitrary-group statement and the kernel proof. The
+delimitation is written into ledger row 57 and must survive into any manuscript. **Not proved:** that a number field with a
 conjugation-fixed prime supplies the valuation subring with residue field of size `N(𝔭)` (`CLAUDE.md` G35).
 
-**Status:** the headline of FS-20's manuscript (§1.1); not yet written.
+**Status:** planned as the headline of FS-20's manuscript (§1.1); with the construction Fischer's, it can no longer be one (a draft for the
+owner, `data/consolidation-2026-09-27/lp/record.md`); not written.
 
 ---
 
@@ -253,10 +269,17 @@ record, 0); none addresses a field plane.
 
 ---
 
-### 1.7 The chromatic number of the plane over real quadratic fields — four for the whole family, five at `L = 5`
+### 1.7 The chromatic number of the plane over real quadratic fields — four for the whole family, five at `L = 5`; posed as open by Johnson in 2000 and 2006
 
-> **Benda–Perles, Open Problem 11.6** (`[Soifer2024]` ch. 11): *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic
-> extension of `ℚ²`."* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
+> **Benda–Perles**, Open Question (4) (`[BendaPerles2000]` p. 126; `[Soifer2024]` ch. 11's Open Problem 11.6): *"Find the chromatic number
+> of Q²(√2) and, in general, of any algebraic extension of Q²."*
+>
+> **Johnson, for the family by name, in 2000** (`[Johnson2000]` p. 176, under his Problem 4.4; read 2026-09-27): *"But the determination of
+> χ(ℚ²(√m), 1) for m ≡ 11 mod 12 (m positive, square-free) is still open. Fischer does show that if m ≡ 3 mod 8, then χ(ℚ²(√m), 1) ≤ 4, so,
+> those searching for a counterexample to the conjecture that χ(ℝ², 1) = 4 might start by looking at (ℚ²(√23), 1)."*
+>
+> **Johnson again, in 2006** (`[Johnson2006]` p. 214; read 2026-09-27): *"I think that the following is an open problem: does there exist a
+> positive integer m such that χ(G(ℚ²(√m), 1)) ≥ 4? The same question with "≥" replaced by ">" is very interesting, if the answer is yes!"* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
 > where `F` is a subfield of `ℝ`, of finite degree over `ℚ`."*
 >
 > **And for quadratic fields by name** — `[Moorhouse2010slides]` (found 2026-09-19, FS-61's gate; read in the PDF's text layer): *"We are
@@ -265,17 +288,23 @@ record, 0); none addresses a field plane.
 > value `χ(ℚ(√47)²) = 5` below (row 121, [hand]) answers that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
 > answer to the general one as far as finite witnesses reach.
 
-> **Pointer (FS-81's close, 2026-09-24) — this section is NOT rewritten as answered, by rule:** FS-81 certified the census's remaining 25
-> fields (`LEDGER.md` row 83, [cert + hand]; all 40 squarefree `d ≡ 11 (mod 12)` below 500 now need four) and proved at the field level,
-> by hand with two independent derivations, that every such `d` needs four (row 82: `χ(F²) ≥ 4` whenever `1/3 ∈ ℤ[U_F]` and `F²` is not
-> bipartite; `χ(ℚ(√167)²) ≥ 4` is row 79). The counts and statuses below are as of FS-61 and are superseded by rows 79, 82 and 83.
-> **Nothing here is recorded as closed until `[Johnson2000]` and `[Johnson2006]` are read** (`plans/FS81-quadratic-four-colours.md`
-> §PA.4); `[Fischer1990]` Thm 10(ii) and Ex. 4 hold the relation and conclude only the additive case.
+> **Recorded as answered, 2026-09-27.** This section was held open until `[Johnson2000]` and `[Johnson2006]` were read (the rule of
+> `plans/FS81-quadratic-four-colours.md` §PA.4). Both are read in full (the consolidation run's job LP, `data/consolidation-2026-09-27/lp/record.md`):
+> neither holds a lower bound above three for any real quadratic field — their quadratic results are `[Johnson1987]`'s and Fischer's — and
+> both pose the question as open, quoted above. **The answers, at their grades:** *Johnson 2006's "≥ 4"* — **yes, `m = 11`**, the lower
+> bound in the kernel (`LEDGER.md` row 73, `four_le_chromaticNumber_planeOver_eleven`; the upper bound 4 is `[Fischer1990]` Thm 10(i)), and
+> for every squarefree `m ≡ 11 (mod 12)` (row 82, [hand], two independent derivations; all forty below 500 also by certified finite
+> witnesses, rows 73 and 83). *Johnson 2006's ">"* — **yes, `m = 47`: `χ(ℚ(√47)²) = 5`** (row 121, [hand], through MR; in the kernel only
+> over named hypotheses, row 127), and five at every real quadratic field with `L = 5` (row 123). *Johnson 2000's family `m ≡ 11 (mod 12)`*
+> — **determined wherever `L ≤ 5`**: `χ = 4` where `L = 4`, `χ = 5` where `L = 5` (rows 82, 99, 123; `L ≥ 5` exactly at `m ≡ 47, 143, 167
+> (mod 168)`, G61), and **open where `L ≥ 6`** (ℚ(√167), ℚ(√1319), ℚ(√2351), …), where only `χ ≥ 5` is known (row 123; ℚ(√167) four in the
+> kernel, row 119). His suggested starting point, `ℚ(√23)`, has `χ = 4` (a certified finite witness, row 73; the upper bound is the plane
+> at 7, prior art). **Not claimed:** "first" — "not found in print" is the claim, with the gates named below; a kernel proof of any `≥ 5`.
 
 **Our answer, field by field.** Below four, the classification is prior art: `χ = 2` iff `d ≢ 3 (mod 4)` (`[Johnson1987]`,
 `[Fischer1990]` Thm 8) and `χ = 3` for `d ≡ 3, 7 (mod 12)` (`[Fischer1990]` Thm 9 and the sentence after it). So the only real quadratic
-fields whose plane **can** need four are the squarefree `d ≡ 11 (mod 12)` — forty of them below 500 — and this project has now
-certified a finite graph forcing four colours over **fourteen** of the forty:
+fields whose plane **can** need four are the squarefree `d ≡ 11 (mod 12)` — forty of them below 500 — and every one of them does (row 82,
+[hand]; all forty by certified finite witnesses, rows 73 and 83). FS-61's census, the first fourteen certified, as it stood before FS-81:
 
 | | fields | the matching upper bound, all prior art |
 |---|---|---|
@@ -318,12 +347,13 @@ also separates the two halves of the four-colour family: an additive 4-colouring
 theory, spectral graph theory; citation walks of `[Fischer1990]`, `[Johnson1987]`, `[BachocEtAl2014]`, `[MatolcsiEtAl2025]` in two
 databases — and found none; FS-61's §PA added zbMATH author listings and abstract searches in Fischer's own vocabulary, and found none
 either (it found `[Fischer1994]`, which is about `ℚ(√3,√11)` and is §1.1's problem, not this one);
-`[Fischer1990]`'s Example 4 on `ℚ(√167)` is about additive colourings only. **Unread and the likeliest places
-for a contrary claim:** `[Johnson2006]` (the compendium, which by `[Johnson2010]`'s own words discusses *"distance graphs
-`G(ℚ(√m)², D)` for square-free integers `m > 1`"* — exactly these planes) and `[Johnson2000]`, the 2000 status report. After
-`[Fischer1994]`, no claim of novelty in this lineage should go out unread.
+`[Fischer1990]`'s Example 4 on `ℚ(√167)` is about additive colourings only. **The two places likeliest to hold a contrary claim,
+`[Johnson2006]` (the compendium) and `[Johnson2000]` (the status report), were read in full on 2026-09-27:** their page on these planes
+(2006 pp. 212–214; 2000 p. 176) holds only `[Johnson1987]`'s two-colouring, Fischer's values 2 and 3, his additive results (no additive
+`k ≤ 6` at `m ≡ 23 (mod 24)`, none `k ≤ 10` at `m = 167`) and `[Fischer1994]`'s biquadratic value — with the caveat row 82 answers, *"But
+non-existence of an additive k-coloring does not imply the non-existence of a k-coloring"* (2006 p. 213).
 
-**The value, and its prior-art gate** (FS-100 stage 5, 2026-09-26; `LEDGER.md` rows 121, 123). *"Prior-art gate for the value (X24R, 2026-09-26, `plans/FS100-X24R-prior-art.md` §2.1): no printed value of `χ(ℚ(√47)²)` and no printed five-colour lower bound for any real field without √3 were found in zbMATH (author listings of Moorhouse, Soifer, Exoo, Ismailescu, Fischer, Johnson, Madore, Manturov, Zaks, Chilakamarri, Chow, Jungreis–Reid; abstract searches), arXiv, the Polymath16 threads (held text and the live eighteenth thread to 2026-09-24) or `[Soifer2024]` chs. 11 and 55; `[Johnson2000]` and `[Johnson2006]` remain unread."* Our value: `χ(ℚ(√47)²) = 5` (row 121), and `= 5` at ℚ(√143), ℚ(√311), ℚ(√335), every real quadratic `ℚ(√d)` with `L = 5` (row 123); `≥ 5` at ℚ(√167). By `[Moorhouse2010slides]`'s own criterion (*"If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`"*) these are the fields his slides left open, less the type-(B) ones (row 124). The section's rule stands: nothing recorded as closed until the two Johnson papers are read.
+**The value, and its prior-art gate** (FS-100 stage 5, 2026-09-26; `LEDGER.md` rows 121, 123). *"Prior-art gate for the value (X24R, 2026-09-26, `plans/FS100-X24R-prior-art.md` §2.1): no printed value of `χ(ℚ(√47)²)` and no printed five-colour lower bound for any real field without √3 were found in zbMATH (author listings of Moorhouse, Soifer, Exoo, Ismailescu, Fischer, Johnson, Madore, Manturov, Zaks, Chilakamarri, Chow, Jungreis–Reid; abstract searches), arXiv, the Polymath16 threads (held text and the live eighteenth thread to 2026-09-24) or `[Soifer2024]` chs. 11 and 55; `[Johnson2000]` and `[Johnson2006]` remain unread."* Our value: `χ(ℚ(√47)²) = 5` (row 121), and `= 5` at ℚ(√143), ℚ(√311), ℚ(√335), every real quadratic `ℚ(√d)` with `L = 5` (row 123); `≥ 5` at ℚ(√167). By `[Moorhouse2010slides]`'s own criterion (*"If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`"*) these are the fields his slides left open, less the type-(B) ones (row 124). The two Johnson papers are read (2026-09-27): not found in either, and both pose the question as open.
 
 **Status:** `ℚ(√11)`'s lower bound kernel-checked; the other twelve tools-certified (their kernel forms are FS-60); the upper bounds hand /
 prior art; the fives [hand], `χ(ℚ(√47)²) ≤ 5` in the kernel and its lower half there over named hypotheses (row 127). Not written up.
@@ -431,9 +461,13 @@ equivalently, when the 2-adic image of `F`'s square classes contains neither `[�
 - The quadratic case of the iff is exactly `[Fischer1990]` Theorem 8. The mechanism is also Woodall's `χ(ℚ²) = 2`
   (`[Woodall1973]`, second-hand), `[Moorhouse2010]` Theorem 7.1 (odd degree) and `[Madore2015]` Proposition 3.9
   (`ℚ(√2)²`). What is new, if anything, is the multiquadratic iff.
-- **Two works that could contain the multiquadratic iff are unread:** `[AxenovichEtAl2014]`, whose abstract names
-  "extensions of the rational plane" and which is not held, and `[Johnson2006]`, which discusses `ℚ(√m)²` and is not
-  held. Until both are read, no novelty is claimed.
+- **The two works that could contain the multiquadratic iff do not** (2026-09-27): `[Johnson2006]`, read in full, has no two-colour
+  result beyond `[Johnson1987]`'s quadratic one and Fischer's regular-polygon theorem (p. 214: *"if F is a subfield of ℝ, and
+  χ(G(F², 1)) = 2, then F² contains the vertices of no regular polygon except a square"*), nor do `[Johnson2000]` or `[BendaPerles2000]`;
+  `[AxenovichEtAl2014]` (held; §1–§2 read at FS-58's gate, §3–§4, on sets in convex position, strips and parallel lines, by their statements, 2026-09-27) has only a sufficient condition
+  for a different set — its Thm 2.3, *"χ(Z × Z(N₁, …, N_k), d) ≤ 2, if d ≢ 0 (mod 2) or if Nᵢ ≢ 3 (mod 4) for 1 ≤ i ≤ k"*, where
+  `Z(N₁, …, N_k)` is the ℤ-span of the `√Nᵢ`, a subset of `ℚ × ℝ` — and for `F²` a condition on the radicands is not enough (ℚ(√2,√6)
+  holds `√3`). So the multiquadratic iff is **not found in print**; "not found", never "first".
 - Nobody citing `[Krebs2022]` has answered the remark (OpenAlex and Semantic Scholar, 2026-09-11).
 
 **Status:** answered for a class of fields, as a hand theorem with its mechanism in the kernel. Not written up;
@@ -490,12 +524,14 @@ a union of `Λ`-cosets; nor Mixon's follow-up, that the ring has finitely many f
 count 9,120 (Hubai), the input (Parts), the stripes-from-no-triangle sketch (Gibbs), the renormalisation (Tao). **Ours:** the derivation
 on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-V6). **Not kernel-checked** (FS-87).
 
-### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate; the rule half fires** (Kooshi, 2026-09-26, `CLAUDE.md` § Publication): answered at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` at [hand], through MR (rows 120, 123), and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
+### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **the rule half fires** (Kooshi, 2026-09-26, `CLAUDE.md` § Publication): answered at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` at [hand], through MR (rows 120, 123), and for character colourings at every `k`; `[Johnson2000]` and `[Johnson2006]` read (2026-09-27), not found in either
 
 > **Fischer** (`[Fischer1990]` §1, 1990, held and read): *"This still begs the general question, however, whether some algebraic
-> criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* The close gate of
-> FS-91 (`plans/FS91-PA-close.md` stage 3) also names it as Benda–Perles's question (`[Johnson2000]`'s problem (1)) and `[Soifer2024]`'s
-> Open Problem 11.6 — both addresses from the gate, not re-read here.
+> criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* It is Benda–Perles's
+> Open Question (4) (`[BendaPerles2000]` p. 126, *"Find the chromatic number of Q²(√2) and, in general, of any algebraic extension of
+> Q²"*), restated as `[Johnson2000]`'s Problem 4.4 (p. 176, *"… of (𝔽, 1), for any finite algebraic extension 𝔽 of ℚ²"*) and recorded as
+> `[Soifer2024]`'s Open Problem 11.6 — each read in the source 2026-09-27. (FS-91's gate called it `[Johnson2000]`'s "problem (1)"; it is
+> his Problem 4.4.)
 
 **Our answer, at its exact scope** (`LEDGER.md` row 99; `plans/FS91-derivation.md` FS91-J02-T2, J02-T3, J09-J4; FS-91, hand, S1 by three
 derivations): for every real number field `F`, `χ(F²) ≤ 3` iff `L(F) ≤ 3`, and `χ(F²) = L(F)` whenever `L(F) ≤ 4`; a non-bipartite real
@@ -506,9 +542,9 @@ iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **
 answer through five; not found in print (X24R). **Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five) — the conjecture's
 open range; that every character colouring is local at one place (proved at three colours and at HD1's fields only; FS-92); the general
 subfield of ℝ (S1 extends to every algebraic `F` and every purely transcendental extension of one, with `L(F)` read over all stable
-valuation rings, row 99). **Why still a candidate:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
-`[Johnson2006]` — a status report and a compendium on exactly this question, both unread and waiting on Kooshi's fetch (`BIBLIOGRAPHY.md`
-§ R.4); no zbMATH gate on "no mixing" in the literature's words was run. **Not ours:** the question (Fischer; Benda–Perles); the real
+valuation rings, row 99). **Prior art, now read:** the gate found no answer in print, and the status report and the compendium on exactly this question,
+`[Johnson2000]` and `[Johnson2006]`, read in full on 2026-09-27, hold none beyond Johnson 1987 and Fischer 1990 and 1994 (the quadratic
+values 2 and 3, the biquadratic 4); no zbMATH gate on "no mixing" in the literature's words was run. **Not ours:** the question (Fischer; Benda–Perles); the real
 quadratic and `√3 ∈ F` cases (row 82; G55, GPT Astra); the additive case (`[Fischer1990]` Thm 9, which row 99 generalises). **Not
 kernel-checked** (FS-75), except row 123's composition, in the kernel over named hypotheses (row 127).
 
@@ -517,6 +553,45 @@ result could not be strengthened to give `Y = Â`"*) is not answered here — ro
 quantitative bounds is `[KravitzLeng2025]`'s for the half ring, not ours (row 98's `N_k` is non-effective); and `[Manners2015]` §5.5's
 assertion that "the appropriate results are false for the smaller set `{θ₅^r : r ≥ 0}`" — an assertion, not a posed question — is proved
 here in band form on `R_{{p}}` (row 102).
+
+### 2.7 The group the unit vectors of `𝔽ⁿ` generate — answered at `n = 2` for every real number field, at [hand]; open at `n = 3, 4`
+
+> **`[Johnson2000]`** §5, p. 177 (read 2026-09-27): *"One kind of problem that arises from these results in COMS is the problem of
+> characterizing the additive group A generated by the unit vectors in 𝔽ⁿ, where 𝔽 is a finite real algebraic extension of ℚ. In
+> particular, it would be nice to know whether or not A = 𝔽ⁿ, i.e., whether or not (𝔽ⁿ, 1) is connected."* … *"So far as I know, results
+> corresponding to these, with n = 2 replaced by n = 3 or 4, have not been obtained yet. Furthermore, the cases of algebraic extensions of
+> ℚ² other than of the form ℚ²(√N₁, …, √N_t) await scrutiny."* ("COMS" is `[BendaPerles2000]`, whose pp. 119–121 characterise `A` for `ℚ²`.)
+
+**Our answer at `n = 2`, at its exact scope** (`LEDGER.md` row 100, Lemma C′, [hand], three derivations; `CLAUDE.md` G55): for every real
+number field `F` with no ramified stable dyadic place, the group the unit vectors generate is the ring `R_F = O′` of elements of `F(i)`
+integral at every conjugation-stable prime — no Galois hypothesis; the exception fields (ℚ(√5), ℚ(√17), …) are outside Lemma C′. And `A ≠ F²`:
+`(F², 1)` has infinitely many components for every real number field, the exception fields included [derived: unit vectors are integral at every stable prime —
+`[Fischer1990]` Thm 1 and `[Madore2015]` Prop. 3.2's argument — and infinitely many primes of `F` are inert in `F(i)`, by Chebotarev].
+**Not answered:** `n = 3, 4`; the exception fields' `A`. **Prior art that constrains the claim:** the quadratic and multiquadratic cases
+are `[Fischer1990b]`'s (Johnson's "[7]"), `ℚ²`'s is `[BendaPerles2000]`'s (`H²` is the points `(a, b)/e` *"where e is a product of primes of
+the form 4k + 1"*, p. 120), prime inversion in general is GPT Astra's (G55); the general form of Lemma C′ not found in print (FS-91's gate),
+`[Shimura1964]` undecided. **Not kernel-checked** beyond prime inversion in valuation form (row 105). **Status:** not written up.
+
+### 2.8 Are seven colours needed for a locally finite map whose boundaries may be unit arcs? — **yes, as partial**: the Condition-5 half answered yes, almost everywhere, at [hand]; the unit-arc half open (Kooshi, 2026-09-27: *"Yes, as partial"*)
+
+> **`[SokolovVoronov2025]`**, Question 2 (arXiv:2502.01958 v1, §9 "Conclusion", p. 26; the held copy): *"Is it true that 7 colors are needed
+> to color a locally finite map in the plane if the boundaries can be arcs of unit circles and if trichromatic vertices of degree greater
+> than 3 are allowed?"* Their Condition 5 (p. 4): *"If any boundary intersects with a circle of unit radius at a finite set of points, we
+> say that arcs of unit curvature are forbidden."*
+
+**Our answer, at its exact scope** (`LEDGER.md` row 134, FS-110): **yes under Condition 5** — *"no locally finite map of the plane whose
+boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at
+distance exactly 1. So the Condition-5 half of `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") is answered yes,
+almost everywhere, for such maps"* (row 134, verbatim). Trichromatic vertices of degree greater than 3 are allowed, as the question asks;
+unit arcs are not. **Grade** (row 134's clause): *"[hand; the chain — NB-4, NB-5, W-MERGE and the cone removal — two minds, one blind (the N
+side; NB, A4, NB3, NB4); S–V Cor. 1 a.e. with no `d = 2` exception two minds, both blind (CB, CD), the `d = 2` closure by two routes (CD's
+Theorem D2; CE's Antipodal Lemma); the base at cusp sectors: D2, D5 item 5 and D1 two readings (A6, CC), D4 one reading (CE), D5 items 1–4,
+6 true after CE's local repair (R1–R4, the Antipodal Lemma) one mind, no step found failing that was not repaired; the residue lemma one mind
+(NB4); fragments tools, exact, two checkers]"*. **Not answered:** the unit-arc half — boundaries that are arcs of unit circles, Condition 5
+dropped (FS-112, `plans/STUB-unit-arc-half.md`; row 134's "Not claimed"); boundaries other than segments and circular arcs. **Prior art that
+constrains the claim:** Sokolov–Voronov prove seven under Condition 6 (their Thm 1, a GAP at Prop. 19's fills, row 132); Condition 5 without
+Condition 6 not found settled, stated or asked in print (FS-110's gate); the everywhere-proper steps are theirs and `[Woodall1973]`'s (row 134's
+prior-art clause). **Not kernel-checked.** **Status:** not written up.
 
 ## §3 — Adjacent and open
 
@@ -527,7 +602,7 @@ here in band form on `R_{{p}}` (row 102).
   `[Parts2020a]`'s 509 vertices. M62 is the search to beat it (paused for M63); M63 has reproduced Parts's
   reduction stage on every attested number, and M64 explained his overcompression obstruction (ledger
   row 62). Best object here: 559 vertices, census-certified.
-- **The smallest field whose plane needs five colours** — **answered at [hand], through MR** (rows 121, 123), and held here by §1.7's rule until `[Johnson2000]` and `[Johnson2006]` are read. `[ExooIsmailescu2019]`, right after the question of
+- **The smallest field whose plane needs five colours** — **answered at [hand], through MR** (rows 121, 123); `[Johnson2000]` and `[Johnson2006]`, which held it here by §1.7's rule, are read (2026-09-27) and hold no contrary claim. `[ExooIsmailescu2019]`, right after the question of
   §1.1 row 5: *"More generally, what is the smallest subfield of E2 that requires 5 colors?"* `ℚ(√3,√11)` does
   not (Theorem B). The fields known here to need exactly five are `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
   `ℚ(√3,√11,√23)` (ledger rows 47, 52–53; degree 8), and since FS-100 stage 5 ℚ(√3,√5) (degree 4) and every real quadratic field with
@@ -579,7 +654,12 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   proves hyperbolicity necessary; the reading found no theorem, remark or question of his about an isometric direction (its §3). The nearest posed question, §2.4's periodicity at
   four colours, is not answered by it: FS-89 is about character colourings of infinitely generated field planes, and §2.4 about every
   colouring of a finitely generated group.
-- *Closed by others, listed so it is not re-closed:* **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
+- *Closed by others, listed so it is not re-closed:* **Benda–Perles's Open Question (2)**, *"whether every finite subgraph of G₁(R²) (or of
+  G₁ (algebraic plane)) is embeddable into G₁(Q⁴)"* (`[BendaPerles2000]` p. 126; `[Johnson2000]` p. 175 as Problem 4.2, *"the question is
+  open, so far as I know"*) — **no**, since `[deGrey2018]`: `χ(ℚ⁴) = 4` (Benda–Perles) and a finite unit-distance graph needs five (rung B
+  of this repository, kernel-checked; the four-colouring of `ℚ⁴` is not). Their Question (1), every finite planar graph in `G₁(ℚ⁴)`, and (3),
+  `χ(ℚⁿ)` for `n ≥ 5`, stay open and untouched here.
+- **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
   more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no — its printed proof repaired at FS-106 except one edge case, `d = 2` (row 132).
 
 ---
