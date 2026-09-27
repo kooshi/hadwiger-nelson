@@ -1062,3 +1062,121 @@ Moves ≈ 5,000 bytes, pointers ≈ 400: the file lands near **299,300**, about 
 front page needs more room: G59's "Caveat, G21: … slower than no break at all." (≈ 300, an instance of G21) is the next candidate.
 
 ### Stage 4a — SAVED
+
+### Stage 4b — SAVED (drafts: `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`, the protocol's run record; files written directly)
+
+**4.5 `BIBLIOGRAPHY.md`** (rows and read statuses; from V3 stages 2–3, SB §3.3, QB §3.3, P §5.5, inventory items 6, 19, 20, 30–32, 56, 59).
+- **New `[Townsend1979ms]`** — S. P. Townsend, *Colouring the plane with no monochrome units*, the author's manuscript ("Copyright © 1979 Stephen
+  P Townsend"; a 7-page Word PDF created 2024-02-02, found by Kooshi via Google Scholar) — held,
+  `~/source/library/pdf/townsend-colouring-plane-no-monochrome-units-author-manuscript-1979-posted-2024.pdf`; **read in full** (FS106-V3,
+  2026-09-27; symbols from pages rendered at 110 dpi, pp. 3–6). Same title as `[Townsend2005]`; whether the texts agree is unchecked. Rests on it:
+  FS106-TW, FS106-AE-MAP6, row 132.
+- `[Townsend1981]` — **held** (`~/source/library/papers/townsend-1981-every-5-coloured-map-monochrome-unit-jcta-30-114-115.pdf`), read in full
+  (V, VB, V3): the theorem and a lemma (constant `π/3`), **no proof**; the `⅔π` counterexample to Woodall's step-4 assertion.
+- `[Townsend2005]` — unheld (Geombinatorics request sent 2026-09-27); the manuscript may differ from it.
+- `[Thomassen1999]` — **held** (text copy, `~/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt`), read in
+  full (V3; TS read Thm 1's proof once); OCR damage ("radius 2" read ½; "12k + 3") needs the page images.
+- `[Pritikin1998]` — **held** (`~/source/library/pdf/1-s2.0-S0095895698918196-main.pdf`), read in full (V3): the uncovered set is closed, density
+  ≈ `1.61·10⁻⁴`; his phrase is "\"nearly\" all", not "almost all".
+- `[Parts2020c]` — **held** (`~/source/library/pdf/arXiv-2010.12668-parts-what-percent-plane-5-6-colored.pdf`; the row's "not held" is wrong,
+  QB §1.1); read: abstract, §1, §§2.1–2.3 (QB), constructions recorded but not verified (V3).
+- `[Coulson2004]` — **read in full** (SB, 2026-09-27; figures not viewed): Thm 3.5 is six colours for tile-based colourings with areas bounded
+  below; 3.2–3.3 verified (V3). Its library row's "**not read**" and the "Held and not read" lists (ll. 416, 883) to update.
+- `[Woodall1973]` — §3 read (V3: Thms 5–6, steps 1–8, the closing remark); Thm 6's step 6 GAP (Townsend's counterexample), repaired by
+  Townsend's lemma; §§1–2 statements only. The library row's "**not read**" and the two "Held and not read" lists to update.
+- `[SokolovVoronov2025]` — re-read in full 2026-09-26/27 (P §§4–9; V, V2, VB, SB); printed defects and repairs: FS106-SVDEF; its §9's
+  "S(ε) = Ω(ε2)", unproved there, is the order of FS106-EPS2; the transplant, §9 and Question 2 held since FS-18 and drawn only at FS-106 (G50).
+- `[Voronov2023]` — read in full again (P, V, VB; §6 by SB): repairs FS106-V23; Lemma 6.1 states "all regions are 1-connected".
+- `[BendaPerles2000]` — **held** as an image scan with no text layer (`~/source/library/pdf/BendaPerles2000-colorings-of-metric-spaces-geombinatorics-9-3-113-126.pdf`),
+  identity checked by the owner from rendered pages; **not read**: its problem (4) is owed at the next prior-art pass on the field results.
+- `[deGreyParts2023]` — **held** (`~/source/library/pdf/arXiv-2303.14714-degrey-parts-lower-bounds.pdf`). **Correction:** inventory item 51 and TQ
+  §4.7 call "Parts 2022, *On lower bounds of the order of k-chromatic unit distance graphs*" unheld; it is this entry (a G50 instance: grep the
+  title before calling a paper unheld). No new row.
+- New, listing only: `[AmbrosioCasellesMasnouMorel2001]` — L. Ambrosio, V. Caselles, S. Masnou, J.-M. Morel, *Connected components of sets of
+  finite perimeter and applications to image processing*, J. Eur. Math. Soc. 3 (2001) 39–92 — recalled by FS106-A, not held, not read; for
+  FS-107's R-S route. P §5.5's new rows (Didin–Voronov arXiv:2607.19946; Cherkashin–Voronov 2024; Axenovich–Liu–Sagdeev arXiv:2512.15516;
+  Lukeš–Malý–Zajíček 1986; Wilczyński 2002) as listed there.
+
+**4.6 `CLOSED-QUESTIONS.md`.** **Nothing FS-106 did answers a posed question.** S–V's Question 2 is open (row 132: GAP at four steps). S–V §9's
+conditional is *restated*, not answered: its hypothesis, read uniformly in `ε`, is equivalent to `χ_m⁰(ℝ²) = 7` (row 131). Benda–Perles's
+problem (4) (their closing problems; Soifer's Open Problem 11.6) is untouched here; the field rows bear on it and §1.7, §2.6 hold them. One
+correction, in §3's "*Closed by others*" line on `d(6) = 1`: "`[SokolovVoronov2025]` answers no" → "`[SokolovVoronov2025]` answers no — its
+printed proof repaired at FS-106 except one edge case, `d = 2` (row 132)".
+
+**4.7 `plans/FRONTIER-STUBS.md`.**
+- *Open milestones:* replace the first paragraph with D-C7's text (FS-106 closed; next FS-107 under its new name).
+- *Ranked table:* FS-106 leaves (closed list). New rank 1: FS-107, re-aimed (the stub file carries the full text; its row: "**FS-107 stability:
+  can vanishing holes save a colour?** — `plans/STUB-regularity-wall.md` § FS-107 (minted 2026-09-26; renamed and re-aimed 2026-09-27 by the owner
+  after row 131)" | the question and design as in the stub's § FS-107 (R's and W's exact questions, A2 §3.3; the shared constraints and break
+  table, A2 §3.4–3.6) | "**Decisive both ways**: R gives `χ_m⁰ = 7`, so `χ(ℝ²) = 7` given MR; W gives `χ(ℝ²) ≤ 6` with no MR; a named
+  obstruction on either side is a result" | "unpriced (`CLAUDE.md` § Counter-priors, rule 1); three agents, the protocol's staffing" |
+  "minted 2026-09-26; renamed 2026-09-27" | "none in the ban; W's families are given by formula and checked exactly; FS-109 is its post-ban
+  dial"). Rank 2: FS-104 (old rank 3; its "FS-107's sub-question" wording kept). Rank 3: **FS-109 the hole dial** (new; `plans/STUB-hole-dial.md`;
+  solver column "post-ban: an optimiser over periodic grid tilings, from 2026-10-01"). Rank 4: **FS-108 the print residuals of the regular half**
+  (new; `plans/STUB-regular-half-residuals.md`; solver column "none"). Old ranks 4–62 become 5–63.
+- *Closed list, first entry:* "**FS-106 the regular half** — `plans/STUB-regularity-wall.md` § FS-106. **Closed 2026-09-27** (record
+  `plans/FS106-regular-half.md` §R-close; `plans/FS106-derivation.md`; close inventory `plans/FS106-close-inventory.md`; `LEDGER.md` rows 131–132,
+  row 40 corrected): **Paid (theorem and verification)** — `[Voronov2023]` verified (two minds, one blind); the regular classes almost
+  everywhere (slack, polygons and convex tilings bar `d = 2`, nice maps; maps-six modulo Woodall's fill; closed classes the tight question);
+  `χ_m⁰ ≥ 7 ⟺ lim µ₆(ε) < 1` with no MR (two minds, one blind), which re-aimed FS-107. Not landed: `d = 2`; S–V Thm 1; Question 2 (four named
+  steps); C-AE-CLOSED. Its successors: FS-107 (renamed), FS-108, FS-109."
+- The stub rows' provisional bearings for FS-107, FS-104, FS-62 and FS-67 gain G82 (the close's forward propagation, WORKFLOW step 9).
+- Inventory item 5 (six-framed bearings in rows 4–62; FS-104's stub body "Rank 2"): **declined here**, the reason: a re-rank of 59 rows is a
+  front-page or re-rank job's, not the mathematics close's; carried forward in the report.
+
+**4.8 `plans/GROKKING-INSTANCES.md`** (each verbatim with its source address; the front page files them under the entry named).
+- **§G50** — *FS106-C, FS-106's close (`plans/FS106-regular-half.md` §R-close 3.1):* "Four in one milestone. `[SokolovVoronov2025]`'s
+  exact-distance transplant, §9 and Question 2, held since FS-18, drawn only at FS-106's planning; `[Townsend1981]` cited in `CLAUDE.md` link 4
+  as a proof that maps need six while printing none; `[Coulson2004]`, held and unread, cited among map theorems while its theorem is tile-based;
+  `[Parts2020c]` listed "not held" while held, and `[deGreyParts2023]` called unheld (as "Parts 2022") while held under its arXiv id."
+- **§G21** — *FS106-C (§R-close 3.1):* "A list of exceptions measures the class it was derived in: the advisor's 'the tangent form fails only at
+  bowties and unit-curvature interfaces, and nowhere else' was derived for piecewise-smooth blow-ups; cusps, spiralling boundaries and weak-*
+  limits joined within a day (A2 §2.3 rule 2). And the flattering TRUE was the one missing a step: C-AE-CONV, TRUE at the deriver, GAP at the
+  blind verifier (A12), closed by fills."
+- **§ Make the gate fail, "exactly one thing may differ"** — *FS106-C:* "TQ §4.4 scored the advisor's 'robust Voronov, linear in ε' on uncovered
+  area over plane area; the hunch counted monochromatic band pairs per unit area, whose band has measure ≈ 4πε — two denominators, one credited
+  (A2 §2.2)."
+- **§G72** — *FS106-C (§R-close 3.3):* "Sixteenth, FS-106: the other kind — its headline (row 131) from a prior-art recognition (S–V §9) and row
+  130's weak-* compactness extended to the slack side; the structural form (what every a.e.-proper colouring carries on its circles) produced
+  TS's lemmas and the index no-go (row 132). And G72 at ranking time: with an equivalence on the table, the planner and the advisor still ranked a
+  special case (S–V's Question 2) first as 'the wall' (A2 §2.3 rule 1)."
+- **§G79** — *FS106-C (§R-close 3.3):* "FS-106: TQ-EQ from an example invariant (the weak-* limit colouring every near-covering family carries),
+  D1 and TS-T likewise; the walls from counterexample invariants — C5 and the swap (what W's limit must carry where the index fails), TQ-HIT, the
+  pixel lemma; the one flip, PD-EQ (the band-pair fraction every CP colouring drives to 0), located R's decisive quantity (one mind, sketch)."
+- **§ Delegation — one level deep** — *FS106-C (inventory items 48, 54):* "FS-106's: three of three agents that night quoted their own count as
+  the harness's and passed their hand-back lines unnoticed — FS106-TS 'harness≈280k' at 451k, FS106-TQ '≈255k' at 427k, FS106-V3 '≈295k' at 475k;
+  FS106-QB, under the corrected prompt, reported an estimate as the harness's ('≈205k' at 380k). Read the harness's count from the task
+  notification, never from the agent."
+- **§G51 (the standing rule "quote statements verbatim in briefs")** — *FS106-C (items 38, 40; §R-close 1.0 Q2):* "FS-106's three paraphrases in
+  quotation marks: the owner's re-brief glossed C-AE-CLOSED without 'measurable'; standing rule 3 quotes Kooshi as 'The intent of the ban is …',
+  a phrase not in his words; the quantitative brief's C-Q-STAB was longer than anything on disk; and the close brief's addition quotes TS as
+  'Prop. 12 holds wherever the curves exist' for TS's table row. Each was caught by the recipient's first-stage quotation check (standing rule
+  5), none reached a verdict."
+- **The moves M1–M9 of 4.4**, verbatim under their entries.
+
+**4.9 The protocol's run record** (`plans/PROTOCOL-competitor-and-advisor.md` §3, after the seventh run; the front page writes it).
+
+> **The eighth run: FS-106, the regular half (2026-09-26/27) — waves of sighted and blind minds, no competition proper.** Records: the plan
+> `plans/FS106-regular-half.md` (§R-close), `plans/FS106-close-inventory.md`, the records V (with V2, V3), VB, TS, TQ, SB, QB, the advisors'
+> `plans/POROS-2026-09-26-fs106-regular-half.md` and `plans/POROS-2026-09-27-fs106-close-and-fs107.md`.
+> - **Staffing.** Three waves at the three-agent cap: V (sighted) beside VB (blind) on the print; TS (structural) beside TQ (quantitative), blind
+>   to each other until their verdict stages; SB and QB blind on TS and TQ. Successor seats on the sighted line only (V → V2 → V3). One advisor per
+>   half (A, retired at ≈437k; A2 for the comparison and FS-107's design).
+> - **Budget anchors, from the harness** (own counts beside them where quoted): V ≈470k; VB ≈395k; V2 ≈350k; V3 475k (reported 295k); TS 451k
+>   (reported 280k); TQ 427k (reported 255k); QB 380k (reported 205k); A ≈437k; the planner ≈330k own. **Three of three wave-2 and wave-3 reports
+>   quoted their own count as the harness's** (inventory items 48, 54).
+> - **Incidents.** An advisor review sent in the same tool round as its first read of the claim list, with invented claim ids, retracted one
+>   message later (item 10). Four paraphrases in quotation marks across the briefs, each caught by the recipient's quotation check (items 38, 40;
+>   the close's Q2). One splice duplicated a stage for one commit (item 45).
+> - **Findings about the design.** The blind second minds carried the milestone's verification: every divergence of truth settled at the close
+>   came from a blind mind or from the sighted line against a blind one — A12 (V first, SB blind), [G4] and C-T-IND (SB), TQ-EPS2's constant and
+>   TQ-HIT's cap (QB), C-Q-LOCAL's endpoint (QB) — and none from the TS–TQ pairing, which converged without contact to one synthesis (TQ-SYN) instead
+>   of contesting. **Lesson:** two routes to one heart are a synthesis, not a competition; FS-107's split puts a construction against a proof, the
+>   shape where contest is possible (A2 §3.7). The retractions were free throughout (TS 0 of truth before SB, TQ 1 at the endpoint, QB 1, A 1, the
+>   owner 0 of truth).
+
+**4.10 Files written directly by this close** (standing permission in the brief): `data/fs106/claims.md` § Corrections at the close (appended);
+`plans/STUB-regularity-wall.md` (FS-106 closed; FS-107 renamed and re-aimed from A2 §3); new stubs `plans/STUB-regular-half-residuals.md`
+(FS-108) and `plans/STUB-hole-dial.md` (FS-109); the inventory's status cells.
+
+### Stage 4b — SAVED
