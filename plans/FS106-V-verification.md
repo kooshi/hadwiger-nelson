@@ -284,7 +284,15 @@ region points, boundaries and vertices carrying no colour (D-AEMAP); for maps wh
 
 ### Theorems this phase proved (V3)
 
-*(filled stage by stage)*
+*(each with its grade; the full lists are under each stage's "theorems proved")*
+- Lemma (L): a two-colour change point of a 2-coloured open set with no monochrome unit has its unit circle outside the set — [hand, one mind], stage 1.
+- Townsend's ⅓π lemma (`[Townsend1981]`'s lemma), his Theorem 2, and the Corollaries of his Theorems 3–4, region-only with no Condition 5 and no
+  null-boundary hypothesis — [hand, one mind; Thm 4's Corollary sketch], stage 1. His Theorem 5 as proved in the manuscript: GAP at simplification (c).
+- `[Thomassen1999]` Theorem 1 in the plane (the count repaired) and, for locally finite `G`, by V-1.3 in two lines; C-AE-NICE as proposed —
+  [hand, one mind], stage 2.
+- Woodall's step-4 lemma for arcs strictly longer than ⅔π, by (L); his step 6 repaired by the ⅓π lemma — [hand, one mind], stage 3.
+- S–V Prop. 7/8 region-only (the tip recolouring at a run apex), so SV-2 needs no Observation 1 and VB's configuration cannot occur there —
+  [hand, one mind], stage 4.
 
 ### Would-have-searched-here log (V3)
 
