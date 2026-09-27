@@ -22,7 +22,7 @@ the answer.
    map's topology intact (the advisor's recommended first target).
 2. The other regular classes almost everywhere: C-AE-FA, C-AE-POLY, C-AE-MAP6 (after `[Townsend2005]`'s proof is read by FS106-V), C-AE-NICE,
    C-AE-CONV.
-3. The transfer on the normal form: C-T-L1a, C-T-L1b, C-T-BIKE, C-T-TAN, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL. The invariant to look
+3. The transfer on the normal form: C-T-L1a, C-T-L1b, C-T-BIKE, C-T-TAN, C-T-TRIa, C-T-TRIb, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL. The invariant to look
    for is §IQ's: what an a.e.-proper colouring carries on its unit circles — an index for density traces (`K₃`'s height, `CLAUDE.md` G71) or a proof
    that none exists.
 

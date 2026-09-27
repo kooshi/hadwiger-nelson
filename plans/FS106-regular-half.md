@@ -458,8 +458,8 @@ gives `χ(ℝ²) ≤ 6` **with no MR** (I-EASY). A named step is the third outco
 |---|---|---|---|---|---|---|
 | **V** verify print, sighted | FS106-V (`V106-verify-print.md`) | V-1.1, V-1.2, V-1.3, V-2.1, V-2.2, V-P2.2, V-4.1, V-6.1; SV-1, SV-2, SV-L1, SV-C2, SV-C3, SV-L3, SV-L4; TW-81; CO-04, WO-73, and TW-05, TH-99, PR-98, PA-20 as they land; C-CS-1, C-CS-2; C-AE-SLACK, C-AE-CLOSED; C-ROW40 | 1 (sighted) | `plans/FS106-V-verification.md` | ~300k, hand back by 400k; stop when every §2–§3 claim and the two short §4 claims have a verdict or a named GAP | 1 |
 | **VB** verify print, blind; second mind on the held inputs | FS106-VB (`VB106-blind-print.md`) | the same §2–§3 claims from the PDFs and statements alone; **Phase H:** I-D1, I-D2, I-D4 and the density-point lemma of D-NF (second minds) | 1 (blind) | `plans/FS106-VB-verification.md` | as V | 1 |
-| **TS** the structural route: regular classes a.e., then the transfer | FS106-TS (`TS106-structural.md`) | C-AE-Q2 first (and C-AE-Q2-EV), then C-AE-FA, C-AE-POLY, C-AE-MAP6, C-AE-NICE, C-AE-CONV; then C-T-L1a, C-T-L1b, C-T-BIKE, C-T-TAN, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL | 1 | `plans/FS106-TS-derivation.md` | ~300k, hand back by 400k; stop at a saved stage; C-AE-Q2 gets a verdict or a named GAP before any C-T claim | 2 |
-| **TQ** the quantitative route | FS106-TQ (`TQ106-quantitative.md`) | C-Q-REM, C-Q-COMP, C-Q-EQ, then C-Q-STAB and C-Q-HOLE | 1 | `plans/FS106-TQ-derivation.md` | as TS; C-Q-EQ gets a verdict before C-Q-STAB | 2 |
+| **TS** the structural route: regular classes a.e., then the transfer | FS106-TS (`TS106-structural.md`) | C-AE-Q2 first (and C-AE-Q2-EV), then C-AE-FA, C-AE-POLY, C-AE-MAP6, C-AE-NICE, C-AE-CONV; then C-T-L1a, C-T-L1b, C-T-BIKE, C-T-TAN, C-T-TRIa, C-T-TRIb, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL | 1 | `plans/FS106-TS-derivation.md` | ~300k, hand back by 400k; stop at a saved stage; C-AE-Q2 gets a verdict or a named GAP before any C-T claim | 2 |
+| **TQ** the quantitative route | FS106-TQ (`TQ106-quantitative.md`) | C-Q-REM, C-Q-COMP, C-Q-EQ, then C-Q-HOLEa, C-Q-LOCAL, C-Q-STAB | 1 | `plans/FS106-TQ-derivation.md` | as TS; C-Q-EQ gets a verdict before C-Q-STAB | 2 |
 | **B** blind second minds on wave 2 | FS106-SB, FS106-QB (`B106-blind-second.md`, one brief, two instances) | every TS claim TS graded TRUE or FALSE (SB); every TQ claim (QB) | 1 each (blind) | `plans/FS106-SB-verification.md`, `plans/FS106-QB-verification.md` | ~250k each; stop when every assigned claim has a verdict | 3 |
 | **L** Lean slots (written, not built) | the close | C-CS-1 (compactness ⟹ band; row 41's limit lemma is the kernel neighbour); C-AE-SLACK over V-1.1 as a named hypothesis; C-Q-COMP after M1 enters FS-101 | — | the close's record | — | close |
 
@@ -500,14 +500,14 @@ verifiers get the PDFs and `data/fs106/claims.md`, never a list of where a hypot
 | E8 | C-T-L1a / C-T-L1b | TRUE 0.8 / TRUE 0.5 | cones touching at distance 1 carry no unit pair (the advisor's A4): the general case may admit a facing-away pair |
 | E9 | C-T-BIKE | TRUE, 0.7 | the two circles' unit graph has more cycles than one circle's; an odd cycle among them refutes 3 colours by arcs |
 | E10 | C-Q-REM / C-Q-COMP / C-Q-EQ | TRUE 0.85 / 0.85 / 0.8 | REM's constant or COMP's band-closedness may fail for a measurable (not CP) colouring; the equivalence needs both |
-| E11 | C-Q-STAB | decided in FS-106: TRUE 0.1, FALSE 0.1; GAP at C-Q-HOLE 0.8 | FALSE is a sequence of six-colourings with shrinking holes, a construction; TRUE is HN's measurable form given C-Q-EQ |
+| E11 | C-Q-STAB | decided in FS-106: TRUE 0.1, FALSE 0.1; GAP 0.8, at a non-local obstruction (C-Q-LOCAL) | FALSE is a sequence of six-colourings with shrinking holes, a construction; TRUE is HN's measurable form given C-Q-EQ |
 | E12 | the milestone | the closed-set step named (C-CS-1) and the heart reduced to C-AE-Q2 or C-Q-STAB, both handed to FS-107 | a TRUE on C-Q-STAB or a FALSE on C-AE-Q2 ends the question here |
 
 Per the counter-priors, these numbers are instruments, not caps: none shrinks a claim or stops a job.
 
 ### 5.4 Hand-over to FS-107 (drafted now, rewritten at the close)
 
-- **R's targets:** whichever of C-AE-Q2, C-T-L1b, C-T-ANN, C-T-IND, C-Q-HOLE is GAP — each a named step.
+- **R's targets:** whichever of C-AE-Q2, C-T-L1b, C-T-TRIb, C-T-ANN, C-T-IND, C-Q-STAB is GAP — each a named step.
 - **W's targets:** a six-colouring of a map whose boundaries include unit arcs (C-AE-Q2 FALSE); a sequence of six-colourings of `U₃(0)` with slack `ε → 0`
   and a free colour of density `→ 0` (C-Q-STAB FALSE; C-Q-COMP turns it into a CP six-colouring). Constraints held: each class of density `≤ m₁ ≤ 0.2470`
   (row 129); tight (C-AE-SLACK); non-polygonal unless C-AE-POLY fails; `[Parts2020c]`'s 99.985698 % and Didin–Voronov's dense classes as material.
@@ -537,3 +537,20 @@ Each carries the no-children rule with its reason, the standing rules (rule 0 fi
 carry §5.2's fences by path.
 
 ## Stage 6 — SAVED
+
+## Stage 6b — SAVED: the advisor's real review applied
+
+The advisor **retracted** its first review in full (sent before it had read the list; its claim ids and its "fences fine as written" were invented) — a
+slip recorded against FS106-A, logged by it to the owner. The four edits I made in §4.1 from that message (L1 split, the one-circle fact beside C-T-BIKE,
+`η` unprinted, the no-trichromatic-point route) coincide with its real review and stand. The real review (on the list at be4359b0/c5c55929), and what I did:
+
+| advice | decision |
+|---|---|
+| C-T-TRI MISSTATED: a cusp junction (two tangent boundaries, a horn `{0<x, x²<y<2x²}` of density 0 at its tip) in the band-proper hexagonal 7-colouring leaves every `|P(x)| ≤ 2`; V-2.2 is for any number of colours | split: **C-T-TRIa** (density form, `P`) and **C-T-TRIb** (support form, `P_supp`, Voronov's and S–V's closure notion). The counterexample stays in the advisor's record (fenced). **The cusp is the third exceptional configuration** beside the bowtie and the unit arc: density sees two colours where the closure sees three, and the kills need density while existence is topological — named for Phase T (TS brief item 3) |
+| C-Q-HOLE MISSTATED: excise a disc of radius `ρ ≪ ε` about every trichromatic point of a Parts-type partial colouring; the defect stays small and no trichromatic point is left | replaced by **C-Q-HOLEa** (holes of radius `r`, `4r < ε`, are fillable — invisible to the proof) and **C-Q-LOCAL** (the feature-local no-go and its consequence: C-Q-STAB needs an obstruction spread over positive measure). T-Q's route description changes from "stabilise Voronov" to "find a non-local obstruction" (TQ brief rewritten) |
+| C-T-L1: the second-order criterion; the borderline is S–V's Condition 5 | already split (L1a, L1b); the criterion stays in the advisor's record, fenced |
+| C-Q-REM: print "some absolute `η > 0`" | done |
+| C-AE-CLOSED is a special case of the tight question, not a corollary of the print | recorded here: its verdict is the first instance of link 5 in a class with Voronov's topology (closed sets), and FS106-V is told it is not expected to follow from Thm 1.3 by citation |
+| fences must name `data/fs106/fs106-a/` and the advisor's record by path | they do (§5.2, and each blind brief) |
+
+## Stage 6b — SAVED

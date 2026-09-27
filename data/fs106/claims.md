@@ -135,7 +135,10 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
   `P(x) = P(y) = {a, b}` are separated by `C²` curves, then the pair is impossible.
 - **C-T-L1b** (this list's wording; the general case). There are no `x, y` with `|x − y| = 1` and `P(x) = P(y)`, `|P(x)| = 2` (interfaces with corners,
   cones, or no regularity).
-- **C-T-TRI** (this list's wording; the a.e. form of V-2.2). Every closed disc of radius 1 contains a point `x` with `|P(x)| ≥ 3`.
+- **C-T-TRIa** (this list's wording; the a.e. form of V-2.2, density form). For every `k`, every closed disc of radius 1 contains a point `x` with
+  `|P(x)| ≥ 3`.
+- **C-T-TRIb** (this list's wording; support form). Write `P_supp(x) = {j : |S_j ∩ B(x, r)| > 0 for every r > 0}`. For every `k`, every closed disc of
+  radius 1 contains a point `x` with `|P_supp(x)| ≥ 3`.
 - **C-T-CHR4** (this list's wording; the a.e. form of S–V Lemma 2, p. 8: "Under Condition 5, no point in a valid 6-coloring can have chromaticity k ≥
   4."). With `k = 6`, no point has `|P(x)| ≥ 4`.
 - **C-T-ANN** (this list's wording; the a.e. form of SV-C2). If `k = 6` and `|P(u)| = 3`, then for every `η > 0` there is a Jordan curve around `u`, inside
@@ -170,9 +173,13 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
   fraction of the plane that can be correctly colored in 6 colors with forbidden interval [1− ε, 1 + ε], ε > 0 were established, it would follow
   definitively that χmap (R2 ) = 7."). Decide it; `[Parts2020c]`'s six-colour tiling of "more than 99.985698% of the Euclidean plane" bounds any `δ` from
   above.
-- **C-Q-HOLE** (this list's wording). V-2.2 and V-6.1 hold for a colouring of `U₃(0)` by six colours proper for `[1 − ε, 1 + ε]` on the complement of a
-  set of density at most `δ` (for some `δ > 0` independent of `ε`), with "trichromatic point" read in the complement. (A proof of C-Q-STAB that never locates a trichromatic point is
-  allowed; then say so and leave C-Q-HOLE open.)
+- **C-Q-HOLEa** (this list's wording). Let `r > 0` with `4r < ε`, let `H` be a union of pairwise disjoint closed discs of radius at most `r`, and let a
+  colouring of `U₃(0) ∖ H` by six colours be proper for `[1 − ε, 1 + ε]`. Then it extends to a colouring of `U₃(0)` proper for `[1 − (ε − 4r),
+  1 + (ε − 4r)]`.
+- **C-Q-LOCAL** (this list's wording). For every `δ` at least the uncoloured density of `[Parts2020c]`'s six-colour tiling there are `ε > 0` and a
+  colouring of a subset of `U₃(0)` of density at least `1 − δ` by six colours, proper for `[1 − ε, 1 + ε]`, in which no point of the coloured set has
+  chromaticity 3 (Def. 2.4, neighbourhoods read in the coloured set). Consequence to state and grade: no argument that locates trichromatic points
+  in the coloured set can prove C-Q-STAB; a proof of C-Q-STAB needs an obstruction spread over a set of positive measure.
 
 ## 7. Row 40
 
