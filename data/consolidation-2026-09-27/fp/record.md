@@ -187,3 +187,29 @@ Applied by `fp/apply_stage3.py` (every old string asserted once). No rank moved;
 | G8 | `plans/FRONTIER-STUBS.md` ranks 1, 4, 5, 17 | rank 1: the print re-aims in the question cell, `[Polymath2021]`'s question in the bearing cell; rank 4: X₆, `χa`, the tile-share dial; rank 5: four of five answered, `[Townsend2005]` the manuscript; rank 17: the Johnson papers read, not found |
 
 **Gates:** `python3 data/rerank-2026-09-27/rk_mirror_check.py` exit 0 (PASS); `python3 tools/bib_audit.py` exit 0.
+
+## Stage 4 — SAVED: `CLAUDE.md` and `WORKFLOW.md`
+
+Applied by `fp/apply_stage4.py` (old strings asserted once), then two layout fixes by hand: G81 kept on its one line (the script's line break
+would have left an unindented continuation inside a grokking), and link 2 re-wrapped at the list's three-space indent.
+
+**Budget: `CLAUDE.md` 295,835 → 296,956 bytes (+1,121; ceiling 300,000).** LV's set was +346; the rest is link 2 (GS and the choice reading),
+FS-112's row (print re-aims and `[Polymath2021]`'s question in its bearing), FS-109's row (X₆) and G81's ambiguity clause. Paid for by pointing:
+each addition names a row, a stub or `CLOSED-QUESTIONS.md` rather than retelling it; nothing was cut.
+
+| # | landed as drafted in the table | note |
+|---|---|---|
+| A1–A8 | LV's D-1 … D-7, verbatim | A7 changes G56's status tag: one reviewed ALLOW line in `tools/claude_md_fact_audit.py` (the audit reads a tag to its first `]`, so the key ends at "`[Madore2015]"; the reason says only the credit moved) |
+| A9 | link 2, merged and amended | "its argument is in print (`[GwynStavrianos2022]` Lemma 2, Thm 2, under an invariant mean; the Haar-average line unprinted, row 130), and choice enters at de Bruijn–Erdős alone (a reading, one mind; `[ShelahSoifer2003b]` p. 42 names that step)" |
+| A10 | FS-112's row | verbatim fragments "eliminate criterion (ii)", "(ii) the unit-radius tactic"; bearing names `[Polymath2021]`'s question beside S–V Question 2 |
+| A11 | FS-109's row | "a second dial, `[Soifer1994X6]`'s X₆" |
+| A12 | G81 | the Soifer–Shelah translate graphs, "(two readers: the consolidation run's LW3, FP)"; the status tag untouched |
+| B1 | `WORKFLOW.md` 3.2 item 8 | "it is in neither OpenAlex nor Semantic Scholar, and the two surveys that cite it and restate its value (`[Johnson2000]`, `[Johnson2006]`, in the same unindexed journal) are not in OpenAlex either, so **no database citation walk can arrive at it**" — nothing else in the file changed |
+
+**A change of decision since stage 1:** C7 (row 59's **Open:** clause on LV-T3) was declined as held for a second reader. The run record's item
+27 (LX stage 1, logged by the owner as done) gives LV-T3's three clauses a blind second derivation, TRUE — the condition LV set. So C7 is
+**applied**, with the grade: "(In `ℚ⁴` both directions hold: `[Zaks1999]` Lemma 1 with the quaternion residue of row 57's remark, LV-T3 —
+[hand], two minds, one blind: the consolidation run's LV and LX; `CLOSED-QUESTIONS.md` §3.)" The clause is about the law, not the corollary
+LX found mis-scoped (item 28, which the owner applies to `CLOSED-QUESTIONS.md` after FP).
+
+**Fact audit** (`--base cc0881df`): exit 0, AUDIT PASSED, LOST 0 in every class, no dangling pointer.

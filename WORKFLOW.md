@@ -107,8 +107,9 @@ advancement (Kooshi, 2026-09-22).
       vocabulary, in a reviews database** — added 2026-09-19, after FS-61's gate found `[Fischer1994]` (Congressus
       Numerantium 104), which proves this project's Theorem B's value thirty-two years before we proved it (read and verified
       2026-09-22). Every
-      earlier gate missed it, for three reasons items 1–7 do not reach: it is in neither OpenAlex nor Semantic Scholar and
-      nothing cites it, so **no citation walk can arrive at it** — pre-2000 conference proceedings mostly exist in no
+      earlier gate missed it, for three reasons items 1–7 do not reach: it is in neither OpenAlex nor Semantic Scholar, and
+      the two surveys that cite it and restate its value (`[Johnson2000]`, `[Johnson2006]`, in the same unindexed journal) are
+      not in OpenAlex either, so **no database citation walk can arrive at it** — pre-2000 conference proceedings mostly exist in no
       citation graph at all; its title, *A planar geometric graph of chromatic number four*, carries none of the question's
       words and reads in a listing as a planar-graphs paper; and we had read one paper by its author, ordered a second by
       interlibrary loan, and never once listed what else he wrote. Either of two queries finds it in seconds: his author

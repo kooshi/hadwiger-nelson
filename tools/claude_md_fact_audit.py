@@ -319,6 +319,8 @@ ALLOW: dict[str, str] = {
     "1–133": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–134 at FS-110's close (FS110-X; row 134 added; the 1–130 precedent)",
     "131–133": "item 31's row range in § Where the problem stands, extended to 131–134 at FS-110's close (FS110-X; FS110-C's §R-close 4.2 rewrites item 31 with row 134)",
     "G82:[hand, two minds, one blind (row 131); the reading one mind]": "G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)",
+    # FP, the consolidation run's front page (2026-09-27; data/consolidation-2026-09-27/fp/record.md): the bridge's credit moved to Benda-Perles.
+    "G56:[derived: exact spectra and the 83 certificate; the exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture's bold form and on FS-39's bridge, which is `[Madore2015]": "G56's status tag (the audit reads it to the first ']'), now '… FS-39's bridge, which is `[BendaPerles2000]` pp. 117–118 (Madore's ¶5.4) plus de Bruijn–Erdős]': the bridge is Benda–Perles's (1976), Madore's ¶5.4 a re-derivation crediting them in its fn. 5 (the consolidation run's LP and LV; draft D-6, owner item 24); only the credit moved, the grade did not",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
