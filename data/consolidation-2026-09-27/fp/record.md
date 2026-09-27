@@ -149,3 +149,25 @@ string was grepped and occurs once.*
 | G6 | FS-20 `plans/STUB-theorem-B-writeup.md` | LP's note with LV's last clause | LP, LV | apply |
 | G7 | FS-104 `plans/STUB-cp-plane-six.md` | banner: item (1) `[Johnson1994choice]` p. 125 (the full sentence) and its p. 124 question; item (3) `[Soifer2007]` p. 86, `[ShelahSoifer2003b]` p. 43; the Graham problem (D6) | LW3 § 4, the owner's ruling, LW § 3 | apply |
 | G8 | FRONTIER-STUBS rows 1, 4, 5, 17 | A10, A11, A8, A5 in full form | as above | apply |
+
+## Stage 2 — SAVED: `LEDGER.md`, `CLOSED-QUESTIONS.md`, `BIBLIOGRAPHY.md` (outside § G), the derivation file, `plans/GROKKING-INSTANCES.md`
+
+Applied by `fp/apply_stage2.py`, `fp/apply_stage2_cq.py` and `fp/apply_stage2_bib.py` (every old string asserted to occur once; every
+bibliography edit asserted to fall outside § G), then three one-line fixes by hand (Raiskii's title "(n + 1) parts" as printed in
+`[BrownDunfieldPerry1994]`'s [5]; the three guessed descriptions marked **[unverified]**, the file's own marker; § R.5's "two of these at
+once" made true after `[Parts2021]` left it).
+
+| # | where | what landed |
+|---|---|---|
+| C1 | `LEDGER.md` row 130, prior art | GS (the argument of N-EASY in print, Haar step unprinted, two readers); `[Polymath16wikiProb]`'s device and Lemmas 1–40 (the easy direction, `χ ≤ χ_CP`); the hard direction in neither; `[Johnson1994choice]` p. 125 (LW3) |
+| C2 | row 131, prior art | the refutation-to-six step as link 2's argument with Haar averages (holes filled, density ≤ twice the holes'); Kainen p. 35 with its reduction and "this row's question is its measurable form" |
+| C3 | row 132, prior art | six for every band `[BrownDunfieldPerry1994]` p. 113 (from Theorem 9's proof), Erdős 1985; Kainen's Thm 1 as Cor. 1.1's upper half, open band |
+| C4 | row 134, prior art | `[Polymath2021]` p. 199 ("(ii) the unit-radius tactic", verbatim fragment), row 134 the incomparable complementary case; `[Parts2021]` pp. 181–182 |
+| C5 | row 106, prior art | `[Polymath16wikiProb]` Theorem 20's seven cases, weaker hypothesis (LW3) |
+| C6 | `plans/FS103-derivation.md` FS103-M-EASY | *Prior art:* rewritten to GS + the wiki (header and grade untouched) |
+| D7, D5, D2, D1, D4 | `CLOSED-QUESTIONS.md` §3 | absoluteness entry: `[ShelahSoifer2003b]` p. 45, `[Soifer2007]` p. 86 verbatim, LW3's choice reading marked one mind; new entries: GS Conjecture 1 (answered at [hand] in Definition-13 form), Kainen (reduced, not answered), `[Polymath2021]` (complementary direction only; FS-112 would answer it), Erdős's band question (closed by others) |
+| F1 | `plans/GROKKING-INSTANCES.md` §G49 | the consolidation run's instance, LV's form ("2000 poses the family; 2006 asks …", per LV's correction 4) |
+| E1–E3, E5, E7–E9 | `BIBLIOGRAPHY.md` §§ R.5, A, B, C, D rules 0d/0e | copies and read cells of `[Soifer2019]`, `[Polymath2021]`, `[Mundinger2024]`, `[Parts2020c]` (+ § B), `[Parts2021]`/`[Parts2022]` (+ § B, off 0d's and 0e's lists and § R.5), `[Parts2023]`, `[deGreyParts2022]`, `[HoffmanSoifer1993]`, `[Johnson2018]` (Kuperberg's p. 90 question checked on the sheet), `[ShelahSoifer2003b]`, `[Soifer2007]`, `[SoiferShelah2004]`, `[Woodall1973]`; four listing-only § C rows (`[Soifer1992six]`, `[HoffmanSoifer1996]`, `[Soifer1994inf]`, `[Raiskii1970]`) |
+
+**Gates (each exit status read directly):** `python3 tools/bib_audit.py` exit 0; `python3 tools/fs71_ledger_b_check.py --strict` exit 0 (947
+rows, PASS); `python3 tools/claude_md_fact_audit.py --base cc0881df` exit 0 (LOST 0 in every class). `[Johnson1982]` untouched (LX's).
