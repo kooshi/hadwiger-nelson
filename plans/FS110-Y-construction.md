@@ -250,3 +250,145 @@ C-T2 (i) — a scan over the free ray angles at `u, v, w₀, w₀′`; instead t
    It rests on one necessary condition only: A-EXACT's `B_u(s) ∩ B_v(s) = ∅`, with `B_u` computed from the cone plus curvature at scale `s`.
 
 ## Stage 3 — SAVED
+
+## § Continuation — FS110-Y2
+
+*Job FS110-Y2 (de Bruijn, Opus 5.5), 2026-09-27. Brief: `data/fs110/briefs/Y2-110-construction-continued.md` with FS110-Y's brief and
+`data/fs110/briefs/STANDING-RULES.md`. Start-up snapshot `aad1d747`. Earlier verdicts above are FS110-Y's and are not rewritten; where I add to or
+disagree with one, I say so here. Working files `data/fs110/fs110-y/y2_*`; tool `tools/fs110_y_fragments.py` (imports `tools/fs110_y_check.py`,
+unedited).*
+
+### Theorems this phase proved (FS110-Y2)
+
+- **Y2-W4** — at a common unit point `w` of a covering pair `(u, v)`, `|u − v| ∈ (0, 2)`, with neither `ω(u)` nor `ω(v)` running along a
+  boundary into `w`: the four branches carry four distinct colours, two of `P(u)` (one facing `u`, one away) and two of `P(v)`; so
+  `|P_cl(w)| ≥ 4`, and every tile-interior point of `ω(w)` near `u` has the one colour `P(u) ∖ P_cl(w)` (near `v` likewise) — [hand, one mind], §4.3.
+- **Y2-W4e** — hence the partner of a strong escape at `w` (with no arc of Γ at `w`) must be `ω(w)`-monochromatic at its own vertex (both
+  directions of `ω(w)` in tiles of one colour, or along boundaries); and at a (2, 4) covering pair the bichromatic vertex must carry boundaries
+  along `ω(w)` in both directions — [hand, one mind], §4.3.
+- **Y2-S1** — the owner's (S1) is realisable locally: fragment `S1` (a bowtie centred on two boundary unit arcs through `w`, `w′`; a generic
+  trivalent partner; `w`, `w′` two-colour edge points), exact over ℚ(√3), all 18 same-colour pairs ACCEPT, tight — [tools, exact; the family
+  claim hand, one mind], §4.5.
+- **Y2-S1i** — every realisation of (S1) with `w` an edge point carries: the arc's sides are `u`'s facing and away colours at `w`; `u` is a strong
+  escape at `w`; the arc's ends on `ω(u)` are vertices meeting a colour of `P(v)` — [hand, one mind], §4.5.
+
+### Fence log (FS110-Y2)
+
+- **Touch 1 (disclosed):** my first command `ls data/fs110/briefs/ data/fs110/reports/` listed the file names in both directories (the other
+  briefs' and reports' names; no content opened). I then read `data/fs110/reports/FS110-Y.md`, which the continuation brief names (permitted there).
+- **Touch 2 (disclosed):** a `git log --oneline -1` after start-up showed one commit subject beyond the snapshot: "FS110-N2: stage 5" (the other
+  side's neutral subject; nothing else). I use only commit outputs for hashes from here on.
+- Nothing else fenced opened, listed or grepped.
+
+### Would-have-searched-here log (FS110-Y2)
+
+- Fragments: a scan over sector angles and arc lengths for an ACCEPT → the angles and sizes derived first (§4.3's facing/away wedges, 30° margins),
+  the parameters fixed once (`t = 1/8`, `ρ_u = 1/4`, `ρ_w = 1/10`) and checked; no second value tried.
+
+## Stage 4 — SAVED (FS110-Y2): card 1; the seam-point lemma Y2-W4; the frame facts checked; the (S1) fragment
+
+### 4.1 Read from disk, quotation check
+
+Read: both briefs, `STANDING-RULES.md`, `CLAUDE.md` § The aim and § Counter-priors (l. 74–137, **newer than the copy loaded into my context**:
+the aim's links 4–6 and the program paragraph now carry rows 131–133 and FS-110/111), FS110-Y's record in full and its report, `claims.md` in
+full, the plan's §G part 3 and §IQ (l. 328–413), `plans/FS106-TS-derivation.md` l. 1–40, §2.2 (l. 114–160), l. 250–280, `tools/fs110_y_check.py`.
+
+| quotation (continuation brief, owner notes, advisor cards) | source | result |
+|---|---|---|
+| Y's retractions "exactly five shapes", the "fat" row | this record, stage 3 item 1 | match |
+| C-TAN-POS, C-BOW-K (i)/(ii), C-T2 (i)/(ii), A-EXACT, A-CIRC, TS-U, C-T-TAN, C-T-BIKE | `claims.md` §1b, §2, §3; TS l. 15, l. 258 | match |
+| TS §5: "`|P(x)| ≥ 5` happens only on the null set `X_E`" | TS l. 271 | match |
+| A2-V56 ("every vertex has `|P_cl(v)| ≤ 4`" …) and card 1, verbatim from FS110-A2's message | the advisor's record (fenced) | **not checkable at source**; the message's text is what I work |
+| the owner's frame fact and its correction ("a four-colour vertex's circle meets at most two colours, and a switch point on it is a covering pair at distance 1 …") | the advisor's record (fenced), via the owner | not checkable at source |
+
+### 4.2 Card 1 (FS110-A2), resent to me verbatim
+
+FS110-Y's stage 3 answered all four points; I leave its verdicts as they are. Two additions, each a new statement, not a retraction:
+- *Point 1 (disjointness vs union):* Y2-W4 (§4.3) **uses disjointness**: its count "four distinct colours at `w`" needs `P(u) ∩ P(v) = ∅`; its parts
+  (a), (b), (d) need only the union.
+- *Point 4 (C-TAN-POS's scope):* Y's verdict rests on A-EXACT's disjointness at `w₀` alone. Y2-W4 adds a **stronger necessary condition from
+  A-CIRC at `w₀` itself**: it does not change "only by an escape or T2 at both", but it constrains the partner of an escape (Y2-W4e).
+
+### 4.3 Y2-W4 — what the seam point carries [hand, one mind]
+
+Setting: a full tight a.e.-proper six-colouring by a locally finite map with C¹ boundary arcs having one-sided tangents at vertices; `(u, v)` a
+covering pair of closure types, `d = |u − v| ∈ (0, 2)`; `w` a common unit point; `e_u = w − u`, `e_v = w − v`. **Hypothesis (no arc of Γ at `w`):**
+neither `ω(u)` nor `ω(v)` runs along a boundary on either side of `w`.
+
+(a) Each branch of `ω(u)` at `w` (tangent `±e_u^⊥`) has tile-interior points accumulating at `w`, lying in finitely many tiles, so some tile `τ`
+with `w ∈ cl τ` contains points of that branch; by A-CIRC at `u` its colour is outside `P(u)`, hence in `P(v)` (union). Likewise `ω(v)`'s
+branches carry colours of `P(u)`.
+
+(b) The two `ω(u)`-branch colours differ. Let `j` sit on the `+e_u^⊥` branch; `e_u^⊥·e_v ≠ 0` since `d ∈ (0, 2)`; say `> 0`. For any colour-`j` tile
+`σ` at `v`: A-EXACT's first clause and connectedness put the cross-distance range of `(τ, σ)` on one side of 1. With `p = v + a ∈ σ`,
+`q = w + b ∈ τ`: `|q − p|² = 1 + 2(b − a)·e_v + |b − a|²`, and `τ` holds points `b = t e_u^⊥ + O(t²)` with `b·e_v ≍ t > 0`; letting `b → 0` gives
+`|p − w| ≥ 1` for every `p ∈ σ` near `v`: **`σ` lies outside `D(w)`** (faces away). The colour `j′` on the `−e_u^⊥` branch has every tile at `v`
+inside `D(w)` (faces `w`). If `j = j′`, every colour-`j` tile at `v` lies in `ω(w)`: not a tile. So `j ≠ j′` — **cusp colours included** (a horn
+at `v` would have to lie on `ω(w)`). The same for `ω(v)`'s branches against `u`.
+
+(c) With `P(u) ∩ P(v) = ∅`, the four colours are distinct: **`|P_cl(w)| ≥ 4`**, two from each side, and one of each pair faces its vertex.
+
+(d) A-CIRC at `w`: tile-interior points of `ω(w)` near `u` lie in tiles at `u`, so their colours are in `P(u) ∖ P_cl(w)`, **at most one colour**
+`m_u(w)` (none when `|P(u)| = 2`). So near `u`, `ω(w)` runs in tiles of the single colour `m_u(w)` or along boundaries; near `v` likewise.
+
+**Y2-W4e (consequences).**
+- *Escape partner.* If `u` is a strong escape at `w` (a bowtie, `ω(w)` through its two `a`-sectors), then `m_u(w) = a` and `P_cl(w) ∩ P(u) =
+  P(u) ∖ {a}`; and **`v` must be `ω(w)`-monochromatic**: both directions `±e_v^⊥` at `v` in tiles of the single colour `m_v(w)`, or along
+  boundaries. A generic trivalent `v` (the two directions in two sectors of two colours) is excluded. This is sharper than C-TAN-POS's pair
+  analysis (FS110-Y §1.4), which lets the partner of an escape be anything.
+- *(2, 4) pairs (V5).* If `|P(u)| = 2`, then `m_u(w)` does not exist: `ω(w)` near `u` runs along boundaries **in both directions**, and so does
+  `ω(w′)`: a bichromatic degree-`≥ 4` vertex in a (2, 4) covering pair is the crossing point of two unit arcs, centred at `w` and `w′`.
+- *The exception is the hypothesis.* With an arc of Γ at `w` (a boundary along `ω(u)` or `ω(v)` through `w`), (a) fails on that branch and `w`
+  may carry fewer colours: this is the owner's (S1), §4.5.
+- Controls: fragment T2 (stage 5) has `P(w) = {1, 3, 4, 5}`, `m_u(w) = 2` (the arc through `u` is a boundary, so nothing is required) and
+  `m_v(w) = 6` (the `210°` direction at `v` lies in `v`'s colour-6 tile); both as (d) requires. The seven-colour control: a seventh colour at `w`
+  breaks "outside `P(u)` hence in `P(v)`" in (a); the lemma says nothing there, as it must.
+
+### 4.4 The frame facts, checked (card 2's question and the owner's note)
+
+- **A2-V56** ("every vertex has `|P_cl(v)| ≤ 4`"): **TRUE off `X_E`** (vertices `v` with `σ(ω(v) ∩ E) = 0`, i.e. no boundary arc of positive
+  length on `ω(v)`). It is TS §5's own result (TS l. 271: `|P(x)| ≥ 5` forces `σ(ω(x) ∩ E) ≥ 1/2`). **At a centre of arcs of Γ it is a GAP**: `|P(v)| = 5`
+  needs boundary arcs on `ω(v)` of total length at least half the circle, and nothing I hold excludes that (FS110-A3's card 2 is right that the
+  60° step needs two tile-interior points `60°` apart). [read + hand, one mind]
+- **The owner's combined step** (a switch point on a four-colour vertex's circle is a covering pair at distance 1): **GAP at two steps** [hand, one
+  mind]: (i) arcs of Γ on `ω(v)` can separate the two outside colours (card 2's point); (ii) **a switch point can be a vertex `x` carrying a third
+  colour `j ∈ P(v)`**: `ω(v)` passes from the `m`-sector straight into the `m′`-sector at `x`, with the `j`-sector beside it on one side of
+  `ω(v)`; then `P(x) ∩ P(v) = {j}` and `(v, x)` is not a covering pair. I find nothing that excludes (ii): A-CIRC at `v` holds (no interior point of
+  `ω(v)` is coloured `j`), the `j`-sectors at `v` and `x` can face each other consistently, and A-CIRC at `x` only asks that `ω(x)` avoid `j`
+  near `v`. So "Act One is open only for maps with at most three colours per vertex" is not yet earned.
+
+### 4.5 The (S1) fragment — a unit arc through `w₀` centred at a bowtie (the owner's first priority) [tools, exact; hand, one mind]
+
+**Formula** (d = 1; `u = 0`, `v = (1, 0)`, `w = e₆₀`, `w′ = e₃₀₀`; colours `a, b, c = 1, 2, 3`; `e_θ` the unit vector at `θ°`; `ρ = 1/4`;
+`t = 1/8`, the arc half-angle `2 arctan t ≈ 14.25°`):
+- `u`: bowtie, straight sectors truncated at `ρ`: `a` on `(300°, 60°)` and `(120°, 240°)`; `b` on `(60°, 120°)`; `c` on `(240°, 300°)`. The escape
+  lines at `w` (`150°/330°`) and at `w′` (`30°/210°`) lie in the `a`-sectors with margin `30°`.
+- `v`: **generic trivalent**, `4` on `(300°, 60°)`, `5` on `(60°, 180°)`, `6` on `(180°, 300°)` (no ray along any tangent that matters).
+- `w`: a boundary **arc of `ω(u)`** (centre `u`, radius 1) from `e_{60°−α}` to `e_{60°+α}`, `α = 2 arctan(1/8)`, endpoints in ℚ(√3); inner side
+  (toward `u`) colour `b`, outer side colour `c`, each tile closed by two segments to `(9/10)w` resp. `(11/10)w`. `w` is **a two-colour edge
+  point**, not a vertex.
+- `w′`: the mirror: an arc of `ω(u)` through `w′`, inner `c`, outer `b`.
+- Symmetry: the reflection `y ↦ −y` with colour permutation `(2 3)(5 6)`; group of order 2.
+
+**Exact check** (`tools/fs110_y_fragments.py --frag S1`): 11 tiles, all 18 same-colour pairs generated from the colour map (every tile against
+itself included): **ACCEPT**. Tight: four contacts at exactly 1 (`u_b`–`w_in` Siamese `[0.65, 1]`, `u_b`–`w′_out` outer `[1, 1.35]`, and the two `c`
+mirrors); the checker's `closed_interval` plant turns the fragment REJECT, which certifies the exact contacts. **Plant `s1_flat`** (the arc through
+`w` replaced by its chord path, so the interface is no longer an arc of `ω(u)`): REJECT at `(u_c, w_out)`, range `≈ [0.992, 1.35]` — the outer
+colour's tile now reaches inside `D(u)`, for its own reason. Float geometry guard: no overlaps, each flower covers a disc of radius `0.05`.
+
+**What every (S1) realisation carries (X13; Y2-S1i)** [hand, one mind], when `w` is an edge point of the arc:
+1. `ω(v)` crosses the arc transversally at `w`; its two branches lie on the two sides, carry `P(u)`-colours (A-CIRC at `v`), so **the arc's two
+   side colours are `u`'s facing and away colours at `w`** (Y2-W4 (b)), both in `P(u)`; TS-U at `u` agrees (inner facing, outer away, neither in
+   the side cones about `±e_u^⊥`).
+2. Every point near `w` has a colour of `P(u)`, so `B_u(s) ∩ B(w, c)` must be empty: **`u` is a strong escape at `w`**; with A-CIRC at `w`,
+   `ω(w)` near `u` runs in the third colour `a`, the bowtie's repeated one.
+3. **The partner `v` is free**: nothing at `w` involves `P(v)` (fragment S1's `v` is generic). The whole seam sits at `u`.
+4. The arc of Γ must end: past its ends, tile-interior points of `ω(u)` carry colours outside `P(u)` (A-CIRC at `u`), so **each end on `ω(u)` is a
+   vertex meeting a colour of `P(v)`**, at distance 1 from `u`, of type `⊇ {b, c, j}`.
+
+**What it answers.** A covering pair can be saved at both unit points with **no vertex at the seam point and no four-colour vertex anywhere in the
+fragment**; the fragment has at most four colours per vertex, and only at `u` (a bowtie, three colours). So the seam point `w₀` need not be a vertex:
+any argument that works at `w₀` as a vertex (Y-T2W, N-X, Y2-W4) sees nothing at (S1). A kill of (S1) has to act at `u` or at the arc's ends
+(item 4). C-BOW-K (i) in this form: **TRUE** (a strong escape with arcs of Γ, realised locally). C-BOW-K (ii): untouched.
+
+## Stage 4 — SAVED (FS110-Y2)

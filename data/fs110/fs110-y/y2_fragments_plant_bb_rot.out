@@ -1,0 +1,5 @@
+== fragment BB: 16 tiles, 30 same-colour pairs (self included): REJECT
+   colour 2  u_b    w_2    REJECT range ~[0.759997, 1.145644]
+   colour 3  u_c    w_0    REJECT range ~[0.901388, 1.274365]
+   REJECTED PAIRS: [('u_b', 'w_2'), ('u_c', 'w_0')]
+PLANT bb_rot YPLANT None SOME REJECT

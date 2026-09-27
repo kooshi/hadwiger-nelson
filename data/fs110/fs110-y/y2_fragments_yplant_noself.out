@@ -1,0 +1,5 @@
+== fragment S1: 11 tiles, 18 same-colour pairs (self included): ACCEPT
+== fragment T2: 14 tiles, 24 same-colour pairs (self included): ACCEPT
+== fragment BB: 16 tiles, 30 same-colour pairs (self included): ACCEPT
+== fragment MX: 15 tiles, 27 same-colour pairs (self included): ACCEPT
+PLANT None YPLANT noself ALL ACCEPT
