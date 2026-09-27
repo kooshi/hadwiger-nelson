@@ -13,6 +13,7 @@ from disk first). Grades are `CLAUDE.md` § Notation's. The fixed claim list is 
 - Stage 1: none (reading only).
 - Stage 2: none (reading only).
 - Stage 3: none; the gate is reading and database queries, no search for a finite witness.
+- Stages 4–5: none.
 
 ## Stage 1 — SAVED: quotation check, first-hand reading notes, §G part 1 (G1–G81)
 
@@ -443,3 +444,87 @@ commit d8a6ec5f) and what I did with each:
 - C-Q-HOLE: a route to C-Q-STAB with no trichromatic point is allowed. Adopted.
 - C-CS-1: "the only use of closedness" made the checkable half. Adopted.
 - Fences: `data/fs106/fs106-a/` by path in every blind brief. Adopted.
+
+## Stage 5 — SAVED: the plan (WORKFLOW 4)
+
+**Frame.** FS-106 is a derivation milestone. Its *No* half (the regular classes cannot save a colour; the method runs tight) gives `χ_m⁰(ℝ²) = 7`, hence
+`χ(ℝ²) = 7` **given MR** (row 120, rows 128–130). Its *Yes* half (an a.e.-proper six-colouring in some regular class, e.g. a map with unit-arc boundaries)
+gives `χ(ℝ²) ≤ 6` **with no MR** (I-EASY). A named step is the third outcome and FS-107's target. Staffing: at most three agents at once — the advisor
+(FS106-A, standing) and two workers; all Opus 5.5; no job spawns another.
+
+### 5.1 Phases
+
+| phase | job (brief) | claims | minds | record | budget / stop rule | wave |
+|---|---|---|---|---|---|---|
+| **V** verify print, sighted | FS106-V (`V106-verify-print.md`) | V-1.1, V-1.2, V-1.3, V-2.1, V-2.2, V-P2.2, V-4.1, V-6.1; SV-1, SV-2, SV-L1, SV-C2, SV-C3, SV-L3, SV-L4; TW-81; CO-04, WO-73, and TW-05, TH-99, PR-98, PA-20 as they land; C-CS-1, C-CS-2; C-AE-SLACK, C-AE-CLOSED; C-ROW40 | 1 (sighted) | `plans/FS106-V-verification.md` | ~300k, hand back by 400k; stop when every §2–§3 claim and the two short §4 claims have a verdict or a named GAP | 1 |
+| **VB** verify print, blind; second mind on the held inputs | FS106-VB (`VB106-blind-print.md`) | the same §2–§3 claims from the PDFs and statements alone; **Phase H:** I-D1, I-D2, I-D4 and the density-point lemma of D-NF (second minds) | 1 (blind) | `plans/FS106-VB-verification.md` | as V | 1 |
+| **TS** the structural route: regular classes a.e., then the transfer | FS106-TS (`TS106-structural.md`) | C-AE-Q2 first (and C-AE-Q2-EV), then C-AE-FA, C-AE-POLY, C-AE-MAP6, C-AE-NICE, C-AE-CONV; then C-T-L1a, C-T-L1b, C-T-BIKE, C-T-TAN, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL | 1 | `plans/FS106-TS-derivation.md` | ~300k, hand back by 400k; stop at a saved stage; C-AE-Q2 gets a verdict or a named GAP before any C-T claim | 2 |
+| **TQ** the quantitative route | FS106-TQ (`TQ106-quantitative.md`) | C-Q-REM, C-Q-COMP, C-Q-EQ, then C-Q-STAB and C-Q-HOLE | 1 | `plans/FS106-TQ-derivation.md` | as TS; C-Q-EQ gets a verdict before C-Q-STAB | 2 |
+| **B** blind second minds on wave 2 | FS106-SB, FS106-QB (`B106-blind-second.md`, one brief, two instances) | every TS claim TS graded TRUE or FALSE (SB); every TQ claim (QB) | 1 each (blind) | `plans/FS106-SB-verification.md`, `plans/FS106-QB-verification.md` | ~250k each; stop when every assigned claim has a verdict | 3 |
+| **L** Lean slots (written, not built) | the close | C-CS-1 (compactness ⟹ band; row 41's limit lemma is the kernel neighbour); C-AE-SLACK over V-1.1 as a named hypothesis; C-Q-COMP after M1 enters FS-101 | — | the close's record | — | close |
+
+**Order and the competitor.** Waves are sequential; within a wave the two workers are blind to each other's records until both have saved their
+verdict stage (V and VB; TS and TQ). TS and TQ are the competition inside FS-106: two routes to the heart, not two attempts at one claim. **Where a
+competitor proper would pay** (G51): on C-AE-Q2 and on C-Q-STAB — each decisive, each with a *Yes* that is a construction and a *No* that is a proof;
+that is FS-107's shape, so FS-106 names them as FS-107's first two contests rather than running them twice here. **Where the advisor stands:** it
+reads V and VB's records after both save, TS's and TQ's after each stage, and names where each would have to break the other.
+
+**Dependencies.** Wave 2 needs wave 1's verdicts on V-1.1 (TQ uses it as a black box; TS uses the proof's steps) and on SV-L1, SV-C2, SV-L3 (TS
+transplants them). If V or VB returns FALSE or GAP on V-1.1 or SV-2, wave 2 is re-briefed before launch (the planner's rule, the owner's call).
+Townsend 2005, Thomassen 1999 and Pritikin 1998 are read by FS106-V when they land; C-AE-MAP6's verdict waits for Townsend 2005.
+
+**Checkpoints and resume.** Every job saves by stage (standing rule 2); the record's last `Stage n — SAVED` is the checkpoint; the resume command is the
+job's brief with "you are resuming" — it reads its record and `git log -- <record>` and continues at the first unsaved stage. A kill redoes at most one
+stage. No job runs a process longer than two minutes (exact checks of seconds only; `tools/fs106_<job>_*.py`).
+
+### 5.2 Fences (blind jobs: VB, SB, QB)
+
+Standing rule 13's list (the session transcripts under `~/.claude/projects/-home-kooshi-source-lean-dir/`, memory included; `chats-bak/`; every file in
+the shared harness scratchpad the job did not create), and: this plan (`plans/FS106-regular-half.md` — its rationale lines say where the band is used);
+the advisor's record `plans/POROS-2026-09-26-fs106-regular-half.md` and `data/fs106/fs106-a/`; `data/fs106/fs106-p/`; every other FS-106 job's record
+and working directory until the blind job's verdict stage is committed; for any blind deriver of D1, REM or the normal form, `plans/FS103-M-derivation.md`,
+`plans/FS103-N-verification.md`, `plans/FS103-V1-verification.md`, `plans/FS103-V2-verification.md` and `plans/POROS-2026-09-26-hn-paths.md`. Blind print
+verifiers get the PDFs and `data/fs106/claims.md`, never a list of where a hypothesis is used.
+
+### 5.3 Registered expectations (instruments for G21, scored at the close; both outcomes reachable, and why)
+
+| # | claim | expectation | why the other outcome is reachable |
+|---|---|---|---|
+| E1 | V-1.1 (Voronov's proof) | TRUE, 0.8 | an unrefereed preprint; Lemma 2.2's limit of discrete colourings and Obs 2.2's recolouring are delicate |
+| E2 | SV-2 (polygons) | TRUE, 0.75 | S–V's Prop 8 (recolouring to degree 3) and Prop 17 are short; a published proof has failed before (Woodall, `[Townsend1981]`) |
+| E3 | C-CS-1 | TRUE, 0.9 | a second use of closedness hidden in "the same tools" of Thm 1.1's bounded form |
+| E4 | C-AE-SLACK | TRUE, 0.9 | form (a) versus (b) may split; D4 is one mind |
+| E5 | C-AE-CLOSED | TRUE, 0.55 | closed classes may touch at distance 1 on a null set of pairs and still realize no positive set; the a.e. form is weaker than Thm 1.3's hypothesis |
+| E6 | C-AE-Q2 | TRUE 0.5, FALSE 0.15, GAP 0.35 | FALSE is a six-coloured map with unit-arc boundaries — `χ(ℝ²) ≤ 6` with no MR; Townsend's unit-arc counterexample shows the feature is real |
+| E7 | C-AE-POLY | TRUE, 0.65 | S–V's Lemma 1 proof colours the two points; polygons have no unit arcs, but corners are C-T-L1b's case |
+| E8 | C-T-L1a / C-T-L1b | TRUE 0.8 / TRUE 0.5 | cones touching at distance 1 carry no unit pair (the advisor's A4): the general case may admit a facing-away pair |
+| E9 | C-T-BIKE | TRUE, 0.7 | the two circles' unit graph has more cycles than one circle's; an odd cycle among them refutes 3 colours by arcs |
+| E10 | C-Q-REM / C-Q-COMP / C-Q-EQ | TRUE 0.85 / 0.85 / 0.8 | REM's constant or COMP's band-closedness may fail for a measurable (not CP) colouring; the equivalence needs both |
+| E11 | C-Q-STAB | decided in FS-106: TRUE 0.1, FALSE 0.1; GAP at C-Q-HOLE 0.8 | FALSE is a sequence of six-colourings with shrinking holes, a construction; TRUE is HN's measurable form given C-Q-EQ |
+| E12 | the milestone | the closed-set step named (C-CS-1) and the heart reduced to C-AE-Q2 or C-Q-STAB, both handed to FS-107 | a TRUE on C-Q-STAB or a FALSE on C-AE-Q2 ends the question here |
+
+Per the counter-priors, these numbers are instruments, not caps: none shrinks a claim or stops a job.
+
+### 5.4 Hand-over to FS-107 (drafted now, rewritten at the close)
+
+- **R's targets:** whichever of C-AE-Q2, C-T-L1b, C-T-ANN, C-T-IND, C-Q-HOLE is GAP — each a named step.
+- **W's targets:** a six-colouring of a map whose boundaries include unit arcs (C-AE-Q2 FALSE); a sequence of six-colourings of `U₃(0)` with slack `ε → 0`
+  and a free colour of density `→ 0` (C-Q-STAB FALSE; C-Q-COMP turns it into a CP six-colouring). Constraints held: each class of density `≤ m₁ ≤ 0.2470`
+  (row 129); tight (C-AE-SLACK); non-polygonal unless C-AE-POLY fails; `[Parts2020c]`'s 99.985698 % and Didin–Voronov's dense classes as material.
+
+### 5.5 Proposed edits (for the close; I edit none of these files)
+
+- `BIBLIOGRAPHY.md`: `[SokolovVoronov2025]` read status — "§§4–9 read 2026-09-26 (FS106-P) for the exact-distance transplant, §9's `µ∗₆` and Question 2;
+  their bearing on link 5 drawn only now (G50)"; `[Townsend1981]` — held (`library/papers/townsend-1981-…pdf`), read in full, "states the theorem and a
+  lemma; no proof"; `[Voronov2023]` — "read in full again 2026-09-26 (FS106-P) for the proof's skeleton"; new rows: Didin–Voronov 2026 (arXiv:2607.19946,
+  not held), Cherkashin–Voronov 2024 (Zbl 1532.05064, not held), Axenovich–Liu–Sagdeev 2025 (arXiv:2512.15516, listing only), Lukeš–Malý–Zajíček 1986 and
+  Wilczyński 2002 (density topology; listing only).
+- `plans/GROKKING-INSTANCES.md` §G50: `[SokolovVoronov2025]` held and "read" at FS-18 for the cell family; its exact-distance transplant, §9 and Question 2
+  bear on link 5 and were not drawn until FS106-P.
+- `LEDGER.md` row 40: its condition, per C-ROW40's verdict.
+
+### 5.6 Would-have-searched-here log
+
+- None in any stage: the gate was reading and database queries.
+
+## Stage 5 — SAVED
