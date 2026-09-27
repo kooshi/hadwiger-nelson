@@ -690,3 +690,73 @@ every disc of radius 3, or realises `d = 2` after merging.
 | N3-P4 | a blind verifier of W-MERGE finds it TRUE, possibly with a repair at the cusp-end clearance (N3-UP) | 0.75 |
 
 ## Stage N3-2 — SAVED
+
+## § Continuation — FS110-N4
+
+*Job FS110-N4, de Bruijn (Opus 5.5), 2026-09-27. Briefs: `data/fs110/briefs/N4-110-round4.md` (wins where the two differ) and
+`data/fs110/briefs/N110-proof.md`, with `STANDING-RULES.md`. Round 4, the `d = 2` seam W-4 (`data/fs110/claims.md` §8 with its update). I continue this
+record and rewrite none of its verdicts. Object LIM unless marked. Working files `data/fs110/fs110-n/`; scratch `scratchpad/fs110-n4/` (the brief says
+`fs110-n3/`, a carried name; mine is a fresh session scratchpad).*
+
+### N4: the pre-round answer (sent to "main" before stage N4-1 was saved; retractions counted from here)
+
+"Expected failing step: "the cone survives every local reduction". I expect the construction side can build a Woodall-cone vertex that is hard in
+N3's sense (neither gap clear for a merge) — that is cheap — but not an irreducible one. I expect every cone vertex given by formula to lose its
+repeated colour by recolouring one horn tip near the vertex with a flank colour, unless both flank colours carry tangent horns at the antipodes
+v ± n; and then those antipodes must themselves be cone vertices, so the obstruction propagates along the normal line through v, where I expect it
+cannot close up. What would show me wrong: a fragment given by formula and checked exactly with a cone vertex v at which every point of both
+c-horn tips lies at unit distance from tiles of BOTH flank colours, while an antipode v ± n is not itself a cone vertex (its repeated colour
+mergeable), or the chain along the normal line closes at finite length. G-d2: no firm expectation yet. I expect it to sit in the same contact
+calculus at the antipodes (contact types (in, out) where G-CONE has (out, out)) but to need a different argument; I register nothing on it now."
+
+### N4: theorems this continuation proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+
+### N4: would-have-searched-here log
+
+| move I would have made by search | what I did instead |
+|---|---|
+
+### N4: fence log
+
+1. My first command, run before reading the brief, was `ls data/fs110/briefs/ data/fs110/reports/`: it printed the **file names** of every brief and
+   every report. Names only; no fenced file opened, read or grepped. (`data/fs110/reports/` is fenced by the original brief; round 4 names my report
+   path inside it, so I write `FS110-N4.md` there and open nothing else.)
+2. `git log --oneline -3` (run at the quotation check) printed three subjects **newer than the start-up snapshot**: `70ad1ea1` "FS-110: inventory",
+   `24974367` "FS-110: inventory time", `38bf7ef1` "Ranking pass brief; Kooshi's approvals logged". Subjects only; nothing opened.
+3. `git status --short` printed untracked **names** under `data/fs110/fs110-cd/`, `data/fs110/fs110-y/` (files `y4_cone_*.out`), `tools/fs110_cd_checks.py`,
+   `tools/fs110_y_cone.py`, and a modified `plans/FS110-CD-verification.md`. Names only; not opened. (The names say the construction side is working a
+   cone; nothing of its content reached me.)
+4. Read, not fenced: `plans/FS110-PA-prior-art.md` l. 84–92 (open to me by the brief); `plans/FS106-V-verification.md` l. 252, 256, 525–556 (FS-106's
+   record: SV-L4, SV-2, Woodall's step 3, the `d = 2` stretch); `[SokolovVoronov2025]` (held PDF; my extraction `scratchpad/fs110-n4/sv.txt`, §7, §8,
+   Appendix proof of Lemma 4).
+
+## Stage N4-1 — SAVED: quotation check, Condition 5, reading
+
+**Quotation check (standing rule 5).**
+
+| quotation in my brief | source | result |
+|---|---|---|
+| Condition 5, "If any boundary intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden." | `[SokolovVoronov2025]` p. 4 (my extraction l. 148–150) | verbatim; the print prefixes the label "(fa = “forbidden arcs”)" |
+| the claim list's gloss "no boundary arc of radius 1" | `data/fs110/claims.md` §7 ("Under Condition 5 (no boundary arc of radius 1)") | verbatim |
+| N3-DEG and N3-RED as quoted in claims §8 | this record, § Continuation — FS110-N3, theorem table | verbatim, both rows |
+| W-4 (brief, in bold, unquoted): "can a hard Woodall cone, or the `d = 2` configuration, occur in a tight six-map in `𝓜_K` under Condition 5?" | claims §8: "In a tight six-map in `𝓜_K` under Condition 5, can a hard Woodall-cone vertex (G-CONE), or S–V's `d = 2` configuration (G-d2), occur? Are the two one configuration, decided by one argument?" | the brief's is a paraphrase, same content; I work the claim list's |
+| "hunch: one" (brief, "the card in §8") | claims §8 | **not in §8 as filed**; §8 asks the question ("Are the two one configuration …?"); the phrase is not checkable (the card is the advisor's, fenced) |
+| CB's three theorem lines (claims §8 update) | `plans/FS110-CB-verification.md` | fenced; not checkable; used only as quoted |
+| "Condition 5 without Condition 6 unsettled, unstated and unasked in print" (brief, on FS110-PA) | `plans/FS110-PA-prior-art.md` l. 88–89: "S–V **state no result and ask no question about Condition 5 without Condition 6.** … the Condition-5-only case is its sub-case, unasked." | the brief's summary; matches in substance |
+| "search for a finite graph is out. It would be huge, not feasible." | `CLAUDE.md` § Publication | verbatim (checked by FS110-N) |
+
+**Which Condition 5 I use.** The print's form. In `𝓜_K` it coincides with the gloss (N3-1, this record: a unit circle meets a straight or circular
+arc of radius `≠ 1` in at most two points, and meets finitely many arcs). **The same proof covers every map I build below** (locally finite, arcs
+circular or straight): my modifications add circular arcs of radius `ρ < 1` or of radius `|C| ≠ 1` (§N4-2), never radius 1, so the print's
+Condition 5 holds for them. They may leave `𝓜_K` in one respect only — new arcs of small radius `ρ < 1/K` — which no statement below and no step
+of S–V's chain uses (S–V's hypotheses are Conditions 4–7; no radius bound).
+
+**Reading done for this round (G50, per section).** `[SokolovVoronov2025]`: Cor. 1 and Theorem 1 (§3), Lemma 3 (§6, statement and proof),
+Lemma 4 (§7 statement; Appendix proof), §7.1 (Props. 14–17, Lemma 5, Lemma 6 statements), §8, §9 — read first-hand. `plans/FS106-V-verification.md`:
+SV-L4 row (the `d = 2` residual, item (c)), SV-2 row, "A tool for SV-1's open step" (Woodall's step 3 and the cone), the `d = 2` stretch.
+`plans/FS110-PA-prior-art.md` §S–V finding (l. 84–92). Woodall 1973 §3 not re-read this round (N3 quotes FS106-V3's reading of the cone).
+
+## Stage N4-1 — SAVED
