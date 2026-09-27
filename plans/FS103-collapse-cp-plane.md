@@ -647,3 +647,131 @@ away (C-FMT (d)), a GAP in every record, reduced to a finite list-colouring ques
 parses 33 entries, failing only on their missing § B rows (`data/fs103/fs103-c/ledger-b-check.out`).
 
 ### Stage 1b — SAVED
+
+### Stage 3 — SAVED (§G re-read; §PA sweep; §IQ, G72, G79; expectations scored; conjecture sweep; the verdict; the search log)
+
+**3.1 §G re-read — which extractions paid.**
+
+| # | extraction | paid? |
+|---|---|---|
+| X1 | scope totally real | **paid, and over-narrow**: both verifiers found the stub's text MISSTATED; V2 widened past totally real (one mind), and V1's and the plan's reason for the narrowing (T-J39-3's "Not claimed") was a statement about a proof, not a falsehood (the advisor's slip, item 57) |
+| X2 | the load-bearing step named (T-J39-3's step 6) | **paid**: both derived it blind; the sealed sub-claims agreed |
+| X3 | the `k = 4` exercise as a mandatory control | **paid**: CTL-167-4, CTL-dG4 reproduced by both |
+| X4 | stopping controls K(√7)@6, K(√5)@5, ℚ(√167)@5 | **paid**: each stops at the named place, both |
+| X5 | thickness is `sup|ν̂|`, both signs | **paid**: V1's misread of row 110's Hoffman ratio as `λ*` (59) was caught under this line before any verdict; 71 is non-thick by a positive eigenvalue |
+| X6 | the format distinctions as a claim of their own | **paid most**: C-FMT became Phase 3; `χ_CP = χ_m⁰` (two minds) and the named (d) obstruction |
+| X7 | MR at degree 16 | **not paid**: C-MR16 unreached by both → FS-105 |
+| X8 | PARI-exact lists with residue degrees and plants | **paid**: three independent tools, plants fire |
+| X9 | `χ ≤ χ_CP` by de Bruijn–Erdős, no Tarski | **paid** |
+| X10 | S's exact form | **paid**: C-S (c) MISSTATED as registered |
+| X11 | the gate in five disciplines; Falconer | **paid**: Payne's "ambiguous chromatic number", BDOV's operator number, CTL-FRAC; Falconer read first-hand after Kooshi's upload |
+| X12 | nothing measured that could be read as support | **paid** |
+
+**Entries that bore and were missed** (each a new instance under WORKFLOW 3.1; drafted for `plans/GROKKING-INSTANCES.md` in stage 4):
+- **G60 and G24** — the plan read them only for E5 ("no bound on `χ_CP`"). Their sharper bearing — that row 123's own five might be G60's
+  fractional bound rounded up, so that its route could never give six — was drawn by the gate (CTL-FRAC) and proved by FS103-F (ROUND, two).
+  G60's Do already said "read the cap first … it can never prove more than five"; the plan did not turn it on the project's own theorem.
+- **G50** — `[DuczVarga2026]` (held; read in full at FS-56's §PA on 2026-09-16) had already disproved `[MatolcsiEtAl2025]` Conjecture 1; the gate
+  framed CTL-FRAC as "refuting a published conjecture", and the owner repeated it to Kooshi (items 38, 28). BDOV 2014 and Ambrus §4, held and
+  read at J26, bore on `χ_CP` and were not drawn until the gate.
+- **G54** — V1's stage-1 control read row 110's `0.199` (a Hoffman ratio) as `λ*` at 59; G54's "thickness is not the Hoffman sign" and X5 caught
+  it before any verdict (item 42) — the entry worked, the reading slipped.
+- **G66** — its chain `χ(F²) ≤ χ(ℚ_p²) ≤ χ_Bor ≤ χ_clopen` and "the measurable colourings between" bore on C-FMT's format question; the plan
+  cited G66 only for "every level". Minor.
+
+**3.2 §PA sweep — what the reading taught about the object** (WORKFLOW 9).
+1. **"Ambiguous chromatic number"** (`[Payne2009]`; Székely 1984): the literature's word for `χ ≠ χ_m`. Payne's ambiguous fields (ℚ, ℚ(√3)) are
+   exactly fields with a non-thick place carrying the colouring — the in-print twins of CTL-Q2 and CTL-K-4. **Given MR, ambiguity lives at the
+   non-thick places**: with none (`N₆ = ∅`) the plane over `F` is not ambiguous modulo null sets of edges. → the new grokking G81 (stage 4).
+2. **The finitary–measurable gap is a place's.** `[AmbrusEtAl2023]` §4 and `[MatolcsiEtAl2025]` expected `α₁(ℝ²) ≠ m₁(ℝ²)`; their graphs live in
+   the Moser lattice, where the dyadic places are tight and pin `1/4`. Given MR the gap disappears at any field whose places all lie below `m₁`
+   (FS103-F §3.3, two minds). → G60's update.
+3. **The landing problem is defined in print**: `χ(A_σ)` (`[BachocEtAl2014]`), the operator chromatic number of the circle's convolution
+   operator, equals `χ_CP = χ_m⁰` (two minds); its value is posed as open nowhere found. The posed problem next to it is Falconer's `χ_m`
+   (`[KechrisMarks2020]` Ex. 5.1: "the exact values … are unknown").
+4. **Falconer's null set is the (d) step's object**: `[Falconer1981]` Lemma 2's metrical boundary `E` is exactly where (d) must colour, and
+   Falconer's proof (a boundary point "belonging to two or more of the Sⱼ") meets it from the other side (M §1.2, D2). → FS-104's question 2.
+5. **Continuity in probability is the whole content of `χ_CP`** (Tao, Polymath16 2018: a finitely additive isometry-invariant random colouring
+   exists at every `k ≥ χ`); dropping it gives `χ`. And "remove measurability from Falconer" was tried on Polymath16 (domotorp, Mixon, Tao, May
+   2018) and not done — the CP format is the third route between them.
+6. **What is in print and known here**: `[Madore2015]` ¶5.4, `χ(ℝ²)` over the real algebraic numbers (G63); the collapse names a field.
+
+**3.3 §IQ re-read; G72's count; G79's record.**
+- §IQ item 2 said the stub's "the structural form is F1 itself" was wrong and posed the structural form: *is the passage from invariant random
+  colourings of `F²` to CP colourings of `ℝ²` a map from all solutions to all solutions?* It was answered in exactly that form, one class at a
+  time: the passage runs per class until one pigeonhole (V1, V2, CTL-FRAC), and per class it is a theorem about every invariant independent set
+  (FS103-F-FRAC, two). Item 3's named invariant — the fibre colour-measure vector and the averaged spectral measure — is what both blind
+  C-LB derivations carried (V1: the conditional-law process; V2: `m_j`). Item 5's instances: `F_dG` and ℚ(√635087) done given MR; `K(√7)` at
+  `k = 5` goes through (both verifiers' CTL-K7-6), so given MR `χ(K(√7)²) ≤ 5 ⟺ χ_CP(ℝ²) ≤ 5`; ℚ(√823415), ℚ(√1017623), ℚ(√1598231),
+  ℚ(√1971119) and `K(√5,√7,√247)` unchecked (declined below).
+- **G72's count: thirteen of fourteen.** FS-103 came through the structural question: FRAC answered CTL-FRAC, a question about every
+  invariant independent set that cannot be answered without the per-class spectral pairing; the collapse's derivations carried §IQ's named
+  invariant. M1 came from extending a known tool (weak-* compactness; BDOV's operator), which the count records as the other kind.
+- **G79's record: example invariants carried every result** — the fibre colour-measure vector (C-LB), the per-class spectral pairing every
+  invariant independent set carries (FRAC), the fractional colouring every measurable colouring induces (M1). The walls arrived as
+  counterexample invariants: the SP witness (MR removes it) and (d)'s named obstruction, a finite non-list-colourable configuration inside
+  Falconer's `E`; its flip (D2: every boundary point sees two colours of positive density) is an example invariant, and it reduced the wall to a
+  finite list problem. For G79: positive, a fourth run.
+
+**3.4 Expectations, scored once each.**
+
+| source | expectation | outcome |
+|---|---|---|
+| plan E1 | C-LB TRUE/TRUE 0.70; GAP 0.22; FALSE 0.03; MISSTATED 0.05 | **TRUE/TRUE** (the 0.70 branch) |
+| E2 | place lists confirm 0.95 | **confirmed** (two, and B a third) |
+| E3 | C-131 `< 1/5` 0.99 | **confirmed** (`0.168047`) |
+| E4 | C-MR16 TRUE at one mind 0.75 | **not tested** (unreached by both) |
+| E5 | no bound on `χ_CP` outside `[5, 7]` 0.97 | **confirmed** (the fractional values are `χ_f`, not `χ_CP`) |
+| E6 | C-FMT (a) TRUE 0.85; (c) TRUE 0.45 / GAP 0.50; (d) GAP 0.90 | (a) **TRUE**; (c) **GAP at the verifiers, TRUE at Phase 3 (two)** — both branches, the claim TRUE; (d) **GAP** |
+| E7 | C-S misstated somewhere 0.60 | **yes** ((c)) |
+| E8 | stub's scope MISSTATED 0.85; totally-real scope TRUE 0.70 | **both yes** (and wider at one mind) |
+| E9 | in print 0.05; `χ = χ_m` stated open in print 0.80 | not in print (**the 0.95 branch**); `χ = χ_m` **not** stated open as such — KM Ex. 5.1 says the values are unknown, Shelah–Soifer and Soifer 62.14 ask axiom-dependence, Payne names ambiguity (**the 0.80 lost**) |
+| E10 | every control behaves 0.85 | **yes** (V1's 59 misread fixed before any verdict) |
+| advisor | survives 0.85; GAP 0.10; FALSE 0.02; in print 0.03; MR@16 repair 0.15 | **survives**; MR@16 not tested |
+| advisor S1–S7 | 0.95, 0.93, 0.96, 0.85, 0.99, 0.99, 0.99 | S1 held (its "must narrow" part the advisor's own slip); S2 held — thin point (a), the measurable version, **proved** by V2; (b), one uniform choice, used by both; S3 held (weak approximation by rationality of the torus, both); S4 not tested; S5–S7 held |
+| advisor hunches | f1-composes; chi-cp-null-tolerant; null-tolerance-not-in-print; mr-degree-16; cs-family-not-finite; sealed-lines-texture | **confirmed; confirmed (two, M1); confirmed (the gate §2.2: not found as a question or either inequality); open; confirmed; not tested** |
+| stub | F1 survives (R1 0.70; advisor 0.80); gap at thick deletion (0.20; 0.12); in print (0.05; 0.08) | **survives**; no gap; not in print |
+| stub | an inequality between `χ_CP` and `χ_m` beyond `χ_CP ≤ χ_m` 0.50; `χ_CP = χ_m` 0.15 | the stub's baseline `χ_CP ≤ χ_m` was itself underived (item 7); now derived (two), with `χ_CP = χ_m⁰` beyond it (two) — the 0.50 branch in substance; `χ_CP = χ_m` **not** (d) |
+| planner | killing tests (a failing step at `k = 6`; a place of `F_dG` with `λ* ≥ 1/5`; in print; a derivation running on CTL-ABS) | **none fired** |
+| F, B | FRAC's new killing test for MR (any proof of `α₁(ℝ²) > m₁(ℝ²)`) | registered (item 60), not scored |
+
+**3.5 Sweep for unpursued conjectures** (the milestone's records grepped for "conjecture", "not claimed", "hunch"; each minted or declined).
+1. M §3.1's hunch (`P(x) = P(y) = {a, b}` impossible for adjacent boundary points) → **FS-104**, question 2's first step.
+2. M §3.3's reading (the chain in ZF + DC ⟹ `χ(ℝ²)` absolute; Soifer 62.14 at `n = 2`) → **FS-104**, item 3.
+3. F §3.5's "fractional collapse" stub (a blind check, then a gate under descriptive-combinatorics names) → the check is done (B); the gate goes
+   to **FS-104** as a prior-art debt, and "an extra-hard audit of MR" (F's held item 2) to **FS-105**.
+4. V2 §4.1's open question (a cleverer one-class selection keeping the density) → **declined: answered** — FRAC gives the per-class bound by a
+   different route (given MR), and the selection is not needed for it.
+5. The stub's four further `d` (823415, …, 1971119) and `K(√5,√7,√247)` as collapse fields → **declined**: the theorem is FS103-F1 for every
+   totally real field with `N₆ = ∅`; instances beyond ℚ(√635087) add nothing until MR is walked at their degree (FS-105 picks `F_dG`).
+6. The complex-place widening (FS103-CX, one mind) → **declined for now** (owner items 46, 54); FS-101's slot states totally real.
+7. The advisor's `sealed-lines-change-the-verdict-texture` → **declined** (untestable here: the lines were sealed by design).
+8. `χ_B` against `χ_m` (C-FMT (e), M §3.2) → **FS-104**, with (d).
+
+**3.6 The verdict, in four parts.**
+
+- **The choice.** FS-103 is **Paid (theorem)**, in this order: (1) **row 123's chain runs one colour class at a time**; the colour count enters
+  only at the pigeonhole on the densest class, so its bound is `⌈1/α_loc(F)⌉ ≤ 5` and **that route never gives six** [hand, two]; (2) its
+  per-class form is **the fractional local–global principle**, given MR(F): `α₁(F²) = max(m₁(ℝ²), sup_v r_v)`, so at ℚ(√635087), given MR
+  there, `α₁(ℝ²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.0487` — the first clause of `[DuczVarga2026]` Conjecture 1 and
+  `[MatolcsiEtAl2025]` §2's equality question, answered given MR [hand, two]; (3) **the collapse, given MR**: at every totally real number field
+  with every stable place 6-thick, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`, instances ℚ(√635087) and de Grey's field [hand, two blind]; its load-bearing
+  step holds with no MR [two blind + two held]; (4) **`χ_CP` is a measurable number**: with no MR, `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)` [hand,
+  two], so, given MR, Hadwiger–Nelson is the measurable chromatic number of the plane with null sets of edges ignored [hand, two]. **Not
+  landed:** Falconer's `χ_m` (the null-set step, C-FMT (d), a GAP reduced to a finite list-colouring question, one mind); MR at degree 16
+  (C-MR16); anything at six. Novelty: not found in print (FS103-G; F §3.6; N's debt unsearched).
+- **The alternative weighed.** Lead with the collapse — the milestone's own question and Kooshi's "wall which collapses HN to another known
+  open problem" — and put the fractional results after it; or state the collapse over every real number field (V2's widening).
+- **Why this one.** The brief's rule (B8): a finding that row 123's argument runs per class goes first, and it matters most for the target — it
+  says the project's strongest lower-bound machine, as built, cannot reach six, and says why (it is a density bound, rounded). The widening is
+  one mind; the headline fields are totally real (items 46, 54).
+- **Confidence: medium-high.** Every link except MR is two minds or more, and the controls stop where they must. **The one fact that would
+  change it:** a defect in MR (row 120: EL2021 Thm 1.2 by statement; its degree-16 walk unexercised). FRAC now makes MR testable by finite
+  graphs — any proof that `α₁(ℝ²) > m₁(ℝ²)` refutes MR at ℚ(√635087) — which is a reason to audit MR harder (FS-105), not a confirmation.
+
+**3.7 Would-have-searched lines, counted.** Planner 0; gate 0; advisor 0; V1 0; V2 1 (an SAT/finder for `λ*` at 27 — the exact spectrum instead);
+F 2 (a level-two relaxation certifying 31's ratio — moved to a field needing none; a search of ℚ(√635087)'s plane for a near-`m₁` graph —
+existence instead); B 0; M 1 (tight 5- and 6-colourings for a non-list-colourable boundary configuration — characterised instead, D1–D5); N 0;
+this job 0. **Four lines across ten records**, each replaced by a derivation or an exact computation.
+
+### Stage 3 — SAVED
