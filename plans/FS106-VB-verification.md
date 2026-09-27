@@ -146,3 +146,64 @@ apply, and the bicycle has four colours available. So no step refutes the 7-colo
 
 - Would have checked the bicycle's arc identification numerically over a grid of `(‖u − v‖, t)` and several norms; instead derived it from
   additivity on a lift (norm-free) and checked three Euclidean points by hand.
+
+## Stage 3 — SAVED
+
+*`[SokolovVoronov2025]` = arXiv:2502.01958v1, read in full (§§1–9 and the appendix). `[Townsend1981]` read in full from the scan (2 pp.).
+Grade [hand], one mind. Exact distance throughout S–V (no band).*
+
+### 3a. The supporting propositions (checked, since the claims rest on them)
+
+- Props. 1–4: **TRUE** (Prop. 3's printed conclusion "c(x) ∈ c(y)" is a typo for "∉"). Prop. 5: **TRUE** — near `x`, inside `ω(y)` no
+  colour 2 and outside no colour 1, so if only 1 and 2 met `x` on one side of `ω`, the arc of `ω(y)` there would be a boundary (Condition 5).
+- Prop. 6 and **Lemma 2 (C-T-CHR4's source): TRUE (repaired).** The step "the neighbourhood of `u` coloured in that colour must lie in
+  `α_i`" needs the region adjacent to `x_i` to reach depth `s > 0` inside `ω`; then colour-`c` points `p` near `u` (`|p − u| < s/2`) off
+  `α_i` see that region on both sides of `ω(p)` (Prop. 1). Each of four colours then lies in an open sector of angle `π/3`: they cannot fill a
+  punctured neighbourhood.
+- **Prop. 12 (C-T-IND's source): TRUE (repaired).** The printed `f` puts bichromatic points at integers, so between them `f` crosses a
+  colour change at a half-integer while the curve's colour is constant — `f` does not "preserve the coloring" as defined. Repair: run the
+  state machine on colour pairs (as in Voronov's Prop. 4.1). **At exact distance, simultaneous transitions are allowed and harmless unless
+  they swap `(a, b) → (b, a)`; the swap is exactly Lemma 1's configuration, so Lemma 1 is what replaces Voronov's band here.**
+- Props. 9, 10: **TRUE.** Prop. 9 is Prop. 2 applied with `u` and `x_ij` on the boundary of the same two regions (this needs the three
+  boundaries to emanate from `u` — automatic for a degree-3 vertex, false at a bowtie). Prop. 10's contradiction is Condition 5 directly:
+  infinitely many distinct `x_ij(δ)` on `ω(v)`.
+- Prop. 7: **TRUE**, including the unhandled case: if `ω(u)` meets the open triangle `pqz` only through `pq`, then its width at the level of
+  `xy` exceeds `|xy|`, so it meets the open segments `px` or `qy` (colour 1). `|zx|, |zy| < 1` (coloured segments) keeps `diam pqz < 1`.
+- **Prop. 8: GAP.** It applies Prop. 7 at a trichromatic vertex of degree ≥ 4, but Prop. 7 needs the two bounding segments' *points*
+  coloured 1, and Obs. 1 only lets a boundary take one of its two regions' colours. I construct locally a `{1,2}`-boundary point `b` with a
+  colour-1 boundary point at distance 1 whose unit circle is tangent to the boundary at `b` from the colour-2 side: the triangle recolouring
+  then creates a monochromatic unit pair. Whether a global recolouring avoids this is not argued.
+- **Obs. 1 ("without loss of generality" on boundary colours): GAP.** Recolouring a boundary point to an adjacent region's colour can
+  create a conflict with another boundary point at distance 1 (same tangent configuration, on both sides, blocks both colours at one point).
+  The WLOG is used in Lemma 1 and Prop. 7/8. For Lemma 1 I have a region-only repair (below); for Prop. 8 none.
+- Lemma 5, Props. 14–19, Lemma 6: read; the circle combinatorics mirror Voronov §3 and are **TRUE** as far as checked (Lemma 5's "shortest
+  arc" choice replaces Voronov's partial order; its six-arc cyclic recolouring checked).
+
+### 3b. Verdicts on the claims
+
+| claim | verdict | the step, and where the band / closedness / boundary colour enters |
+|---|---|---|
+| **SV-L1** (Lemma 1) | **TRUE** (as printed, under Obs. 1) | Uses **`x`'s own colour** (a boundary point's colour): "ω(x) ∩ U(y) entirely coloured 2" holds because `x` is coloured 1. Then Prop. 1 on the colour-2 arc, and `ω(y)` near `x` lies in the open double wedge `B(y₁,1) △ B(y₂,1)` (checked: `⟨p, y₁ − y⟩ > 0 > ⟨p, y₂ − y⟩` on `ω(y)` near `x`), whose points are monochromatic colour 1 — Prop. 3. No band, no smoothness. **Region-only repair (sketch, one mind):** replace `x` by a region point `x′` near `x`; `ω(x′)` cannot cross the boundary through `y`, so its monochromatic points near `y` are colour 2; the double wedge at `x′` is open with fixed angle, so `ω(q)` for a colour-1 region point `q` near `y` enters it — contradiction. Uses Condition 5 (finitely many boundary points on a unit arc). |
+| **SV-C2** (Cor. 2) | **TRUE (repaired)** | Read on the *open* sectors (radii strictly between `1 − η` and `1`, resp. `1` and `1 + η`): a boundary point on `ω` itself may carry a colour of `C(u)`. Compactness of `ω` against the open cover `A ∪ B` gives finitely many arcs and one `η`. Uses the boundaries emanating from `u` (degree 3), Condition 5, no band. |
+| **SV-C3** (Cor. 3) | **TRUE** | Two closed curves in the open unions `C₁₂₃`, `C₄₅₆` winding round `u`, `v`, within `η ≪ |u − v|` of the circles, must cross (Jordan); a crossing point lies in two open regions of disjoint colour sets. The hypothesis "boundaries extend" is what Prop. 9 needs. |
+| **SV-L3** (Lemma 3) | **GAP at the construction of the three curves `pq₁′, pq₂′, pq₃′`** | The parity core is TRUE: pairwise complementary in a 3-cycle `q₁′p ∼ pq₂′, q₂′p ∼ pq₃′, q₃′p ∼ pq₁′` with Cor. 4 gives `s₁ = −s₂ = s₃ = −s₁`. But the existence of such curves on `γ(u₁)`, `γ(u₂)` (each `ω(x)` meeting the partner arc exactly once, monotonically, endpoints monochromatic) is asserted from Prop. 13 and Fig. 5, not proved; `p` must be a crossing of `γ(u₁)` and `γ(u₂)`, which the text does not say. It is the bicycle geometry (Voronov §5) and very likely true; not verified here. |
+| **SV-L4** (Lemma 4) | **GAP at the last step** | Appendix: "It remains to notice that on the boundary of the union of three regions … whose vertex is u, there is at least one more trichromatic point" — unargued. As stated (the three regions at `u`) the extra vertex can have multicolour `C(u)` itself, and a region may surround the others. **Repair (sketch, one mind):** take the maximal connected `C(u)`-coloured union `W` (inside the open unit disc, since the strip at `ω(u)` is `{1,2,3}`), and fill holes of regions first — **hole-filling works at exact distance for maps** (a unit circle from a hole point to an outside point must cross the open region itself); then `W`'s outer ring has two colours and gives a vertex `{a, b, q}`, `q ∉ C(u)`, disjoint from one of the nine — Cor. 3. The printed proof has neither the maximal union nor the filling (Voronov's Obs. 2.3 is not carried over). |
+| **SV-1** (Thm 1) | **GAP** | Inherits SV-L3's construction, SV-L4's last step and Obs. 1. The chain is otherwise sound: Lemma 2 → trichromatic `u` within 1 of the centre (a nested-fill argument, "straightforward" in the text) → Lemma 4 → Lemma 3 or Cor. 3. The proof's "Jordan-measurable" is a slip for "Jordan". |
+| **SV-2** (Thm 2) | **GAP** | As SV-1, plus **Prop. 8** (the recolouring to Condition 6 needs Prop. 7's segment-colour hypothesis, not secured), and "By Lemma 8" should read "Proposition 8". Condition 5 holds for polygons. |
+| **TW-81** | **No proof printed — nothing to verify** (statements quoted correctly; constant **π/3** from the scan) | The note gives no proof ("about two hundred lines of argument"). Its counterexample to Woodall's assertion at `L = ⅔π` is stated with "Clearly". **One case of the lemma proved here** [hand, one mind]: if `A°` contains an open annulus `{1 − h < |x| < 1}` (or `{1 < |x| < 1 + h}`) — no cut points — then the regular star polygons `{(6w − 1)/w}` (resp. `{(6w + 1)/w}`) with unit sides lie in it for large `w` (radius `1/(2 sin(πw/(6w∓1)))` → 1 from the right side), and an odd closed unit walk forbids every 2-colouring. The cut-point case and the theorem are unverified. |
+
+### 3c. Where S–V uses the band, closedness, or a boundary point's colour
+
+- **No band anywhere**; exact distance. Its replacement for Voronov's band is **Condition 5** (unit arcs are never boundaries: Props. 5, 10,
+  Lemma 2) plus **Lemma 1** (which rules out the one simultaneous transition that would break the index count, Prop. 12).
+- **Boundary-point colours** (Obs. 1) enter Lemma 1 (`x` coloured 1), Prop. 7/8 (segments coloured 1), and the circle colourings via
+  pseudo-colours (Def. 7 avoids them — pseudo-colours are region colours). **Closedness:** never.
+- **Control 1 (the hexagonal 7-colouring):** six enters at Prop. 6 (a 5-chromatic point's circle is all colour 6), Lemma 2 (a 4-chromatic
+  point's circle is 2-coloured), Cor. 3 (`C₁₂₃`, `C₄₅₆` exhaust the colours) and the pseudo-colour count. In the 7-colouring each vertex's unit
+  circle carries four colours and two disjoint trichromatic multicolours leave a seventh colour at the crossing. **Passes.**
+
+### 3d. "Would have searched here" log (stage 3)
+
+- Would have run a small geometric search for the Obs. 1 counter-configuration inside an actual proper map colouring; instead recorded the
+  local configuration and graded Obs. 1 a GAP, not FALSE.
+- Would have numerically traced the three complementary curves of Lemma 3; instead graded the step a GAP with the parity core verified.
