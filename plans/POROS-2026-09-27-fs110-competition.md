@@ -585,3 +585,17 @@ I stop here at my token line. The round is still running. What is left, in order
 4. **The round's verdict and the next aim**, as a decision in four parts. My lean, one mind, not sent: the next object is the **ends of (S1)'s unit arc**
    (each a vertex at distance 1 from the escaping bowtie, meeting a colour of the partner; Y2-S1i item 4), together with the **winding ring**. These are
    the two places where both sides' round-2 work stops, one on each side of Act One.
+
+## Stage A3-4 — SAVED: card 3's answers (after the hand-over note)
+
+- **FS110-Y2**, verbatim: "one retraction on card 3 (free, G51; record stage 6, commit c8ca500e). Retracted: my card-2 GAP (ii), "a switch vertex x = {m, m′, j}
+  with j ∈ P(v) is not a covering pair". That holds only in claims.md §0's disjoint sense. In the union sense P(v) ∪ P(x) = [6]. The machinery it feeds
+  needs only the union: A-EXACT's B_v ∩ B_x = ∅, and C-T-TAN through A-SIX. So the owner's switch-point step keeps only card 2's GAP, arcs of Γ on the
+  circle. The senses my other statements use: Y2-W4 (a), (b), (d), Y2-W4e and Y2-S1i: the union. Y2-W4 (c), "four distinct colours at w₀": disjointness.
+  Under the union alone the bound is ≥ 3 when the types overlap in one colour. The fragments have disjoint types, so both senses hold for them."
+- **FS110-N2**: no reply to card 3 on the channel. In its hand-back text to the owner it says no statement changes: every stage 4–6 statement uses the
+  union sense, and the machinery needs only the union. It asks the close to say which sense Act One means.
+- **Round-2 retractions:** N2 1, Y2 1, A3 0, all free. **The covering-pair divergence is closed**: both sides use the union sense, and Y2's second GAP is
+  withdrawn. A3-HOLE (arcs of `Γ` on `ω(v)`) is the frame fact's only remaining GAP, now three minds.
+- **Slip confirmed:** card 3 reached N2 after its final hand-back and resumed it. N2 changed nothing.
+- **Correction owed to claims.md** (for the close): the definition of covering pair should be the union sense, and Act One's statement should name it.
