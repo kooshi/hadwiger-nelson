@@ -125,3 +125,92 @@ density `2513/17655 = 0.142339` (`1/7` only up to rasterisation, as noted in sta
 **Verdict material for HX-STALL:** TRUE, and stronger than stated (the "iff" holds for every parameter, the other pairs being implied). Two
 nits: the strict inequality (the null band condition allows equality), and "stop at … at `R = 2/√21`, `ρ = R/2`" is an infimum approached as
 `ε → 0`, attained by no member.
+
+## Stage 2b — SAVED: the four hand statements, derived before reading W
+
+### 2b.1 W-EQ-K (compactness at bounded complexity)
+
+**⟸.** Let a full a.e.-proper six-colouring be given by closed tiles with connected interiors. For two tiles `T, T′` of one colour (possibly
+`T = T′`), `{|x − y| : x ∈ T°, y ∈ T′°}` is connected (image of a connected set) and misses 1 (a unit pair between open sets carries positive
+`Leb ⊗ σ` measure), so on closures it is `⊆ [0, 1]` or `⊆ [1, ∞)`. Erode by `r`: `T_r = {x : B̄(x, r) ⊆ T}`. For `x ∈ T_r`, `y ∈ T′_r`, `d = |x − y|`,
+`u = (x − y)/d`: the points `x ± ru ∈ T`, `y ∓ ru ∈ T′` are at distance `d + 2r` and `|d − 2r|`, so `d ≤ 1 − 2r` in the first case and `d ≥ 1 + 2r`
+in the second (if `d < 2r` the two balls meet, giving distance 0 in the second case, impossible). **So the eroded colouring is band-proper at every
+`ε < 2r`.** Holes `⊆ N_r(∪∂T)`; a circular arc (or segment) of length `ℓ` has `|N_r| ≤ 2rℓ + πr²`, and arcs of tiles of diameter `≤ 1` have
+length `≤ π`. Under reading **(Cu)** (`≤ K` arcs meet each unit disc) the hole density is `≤ C·K·r`: **`δ(ε) = O(ε)` with constant `O(K)`** ✓.
+Correction: `T_r`'s boundary is the inner parallels of `T`'s arcs plus one arc of radius `r` at each reflex corner, so the eroded designs have
+complexity `≤ 2K`, not `≤ K` (exactly `K` for convex tiles). Tightness is not used.
+
+**⟹ under (Cu).** Designs `D_n` of complexity `≤ K`, slack `ε_n → 0`, hole upper density `δ_n → 0`. (1) *Recentre:* the weighted hole proportion
+`Σ_M 2^{−M}|H_n ∩ B(x, M)|/|B_M|` averages to `≤ δ_n + o(1)` over large boxes, so some `x_n` has `|H_n ∩ B(x_n, M)| ≤ 2^{M+1}δ_n|B_M|` for every
+`M`; translate `x_n` to 0. (2) *Compactness:* each `B(0, M)` meets `≤ C K M²` arcs of bounded length; circular arcs and segments in a compact region
+have Hausdorff limits among arcs, segments, circles and points (three points determine an arc); diagonalise over `M`. The limit set `Γ` is locally a
+finite union of arcs, so null, with finitely many complementary faces per bounded region. (3) *Colours:* a compact connected `K ⊂ U`, `U` a face of
+`ℝ² ∖ Γ`, eventually misses `Γ_n` and so lies in one face of `D_n` (a tile of some colour, or a hole); along a further subsequence each face has a
+constant status, and "hole" is impossible for a face of positive area by (1). (4) *a.e.-proper:* compact `K ⊂ U`, `K′ ⊂ U′` of one colour lie
+eventually in same-colour tiles at slack `ε_n`, so `|x − y| ≠ 1` on `K × K′`; every pair of `U × U′` lies in such a `K × K′`. (5) *Complexity:* a limit
+arc meeting an open unit disc is a limit of arcs meeting it, so `≤ K` (coinciding limits only lower the count). **So ⟹ holds under (Cu).**
+"Tight" in the conclusion is automatic given `[Voronov2023]` Thm 1.3 (FS106-AE-SLACK) and unused otherwise.
+
+**⟹ under (Ct)** (`≤ K` arcs per tile, no count per unit area): half-open grid squares have 4 arcs each, so "(Ct)-designs with `ε_n, δ_n → 0` exist"
+is W's claim itself (H-EQ), and ⟹ would turn `µ₆⁰ = 1` into a colouring by tiles of `≤ 4` arcs — a regularity theorem no compactness gives (the
+limit of ever-smaller tiles is a weak-* limit, row 131). **GAP at the compactness step under (Ct).** So the statement needs (Cu).
+
+**Periodicity.** If W's "designs" must be periodic, ⟸ needs a periodic tight colouring, or H-EQ's periodisation, which does not keep complexity
+bounded. Reading-dependent; W's record decides.
+
+### 2b.2 W-RATE
+
+- **`O(ε)`**: TRUE for a full tight colouring by tiles of complexity `≤ K` (2b.1 ⟸). **For a bare "full tight colouring" it is MISSTATED**: a
+  measurable (CP) six-colouring with no boundary regularity has no erosion bound. The needed hypothesis is finite boundary length (Minkowski
+  content) per unit area.
+- **`O(ε²)`**: fix the reading. *Contact*: a same-colour tile pair with `sup = 1` or `inf = 1`, at points `(x₀, y₀)`, `|x₀ − y₀| = 1`. *Transversal*:
+  `||x − y| − 1| ≥ c(|x − x₀| + |y − y₀|)` near the contact. *Isolated*: uniformly finitely many per unit area, with a uniform gap `η` from 1
+  elsewhere. Remove `B(x₀, ε/c)` from `T` (one disc per contact suffices). Remaining pairs near the contact deviate by `≥ ε`; pairs away from every
+  contact deviate by `≥ η > ε`. Holes: `π(ε/c)²` per contact, **`O(ε²)` per unit area**: TRUE under this reading. Transversality holds at a min-type
+  contact when the tangent cones at `x₀` and `y₀` lie strictly inside the facing half-planes. It fails at a smooth boundary point (`|x − y| − 1`
+  quadratic along the tangent): pinholes then need area `ε^{3/2}`, and arcs of contacts need `≍ ε` per unit length. "The floor's order": the floor
+  `ε²/(6+ε)²` (given V-1.3) is `Θ(ε²)` ✓.
+- **"R's pinhole test is the test against these"** is a reading, not a theorem. Note that W-RATE's pinholes sit at **contacts** (same-colour unit
+  pairs), where killing test 5 puts its discs "at each junction or at each of the argument's certificates". The two coincide only if contacts count
+  as certificates.
+
+### 2b.3 W-POLY
+
+Negate: some `K` admits polygonal designs with `δ_n → 0` at slacks `ε_n`. Replace `ε_n` by `min(ε_n, 1/n)`: slack is monotone, and
+`[1 − ε′, 1 + ε′] ⊆ [1 − ε, 1 + ε]`. 2b.1's ⟹ under (Cu) with segments: limits of segments are segments or points. It gives a full a.e.-proper
+six-colouring by polygons, `≤ K` segments per unit disc. Face closures have diameter `≤ 1`. Clean up to a map-type polygonal colouring (Conditions
+2–4, 8): merge same-colour faces across shared edges, delete degree-2 vertices. FS106-AE-POLY excludes this except in its `d = 2` edge case. So
+**`δ₀(K) > 0`, uniformly in `ε`, bar `d = 2`: TRUE**, over AE-POLY (two minds, one blind; SV-L3 a sketch) and 2b.1 ⟹ (Cu). Under (Ct) it inherits
+2b.1's GAP. Non-simply-connected faces are covered by AE-POLY's fill step.
+
+### 2b.4 W-TAN
+
+C-T-TAN (`plans/FS106-TS-derivation.md` l. 258, one mind) excludes `|P(u)| = |P(v)| = 3`, disjoint, `|u − v| < 2`, whenever for some `w₀` both slice
+supports `T_u, T_v` have positive length along strong blow-ups. For cone blow-ups the failures are an interface at `u` (or `v`) tangent to the unit
+circle about `w₀`, or a bowtie. Beyond cones it also fails at cusps and at weak-* blow-ups.
+
+- **First clause.** Suppose the map's boundaries are C¹ arcs with tangent directions at the vertices (circular arcs, W-EQ-K's limits). Then every
+  blow-up is a cone: strong, along every sequence. With types read as essential multicolours (Te), "complementary-type vertices at distance `< 2`"
+  is exactly C-T-TAN's hypothesis (K-C6: disjoint three-sets are complementary). Both `w₀` must be blocked, so each is a tangency at `u` or `v`, or
+  a bowtie. **TRUE over C-T-TAN.** Two cases are not covered:
+  - **(Tm)** types (the colours of the tiles whose closure contains the vertex) at a vertex with a **cusp** tile: its colour has density 0 there,
+    so `|P(u)| = 2` and C-T-TAN is silent. **GAP.**
+  - **general Jordan boundaries** (S–V's map type): spiralling or oscillating boundaries give non-cone or weak-* blow-ups, which is C-T-TAN's
+    exceptional set and AE-Q2's [G2]. **GAP.**
+- **Second clause.** Two vertices of adjacent tiles are within `|v − z| + |z − w| ≤ 2` of each other, `z` a shared point. Equality (both
+  diameters 1, collinear) is outside the first clause's `< 2` — AE-POLY's `d = 2` shape again. Three-element types then pairwise intersect.
+  A type of size `≥ 4` meets every three-set. **But a bichromatic vertex of degree `≥ 4` has a two-element type**, e.g. `{1, 2}`. It can be
+  disjoint from a three-set `{3, 4, 5}` or a four-set `{3, 4, 5, 6}` without either being a complementary three-set, and C-T-TAN says nothing
+  about such pairs. These vertices are live: row 132 names them as where hole-filling fails. **MISSTATED as "an intersecting family" of all
+  vertex types.** The corrected statement: off tangent pairs, bowties and the collinear distance-2 configuration, the three-element (and larger)
+  vertex types of two adjacent tiles pairwise intersect. For a trivalent map (Condition 7) every type has three elements, and the stated form holds
+  bar `d = 2`.
+- The domain (full tight six-colourings by curved locally finite maps) is not known to be non-empty. It is the open question (K-REG), so these
+  are statements about a possible object, not vacuous ones.
+
+### 2b.5 Would have searched here
+
+- The HX optimum: I would have swept `(R, ρ, ε)` numerically. Instead I derived it: pair 2 − pair 1 `= 6t − 3` (2a.2).
+- Cusp counterexamples to W-TAN's first clause under (Tm): I would have searched for a local cusp configuration. Instead I named the step
+  C-T-TAN does not cover, and derived no counterexample (GAP, not FALSE).
+- A better absorption than HX (a smaller stall): not my job. I searched nothing.
