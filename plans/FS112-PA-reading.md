@@ -78,6 +78,35 @@ fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11
      pointer for row 130 / link 2's attribution, owed to the owner (not this milestone's object).
 - **No six-colouring of the whole plane is claimed in thread 7.** Boris's SAT searches found none on a torus or a one-way-periodic square (`[07.77]`).
 
+## Stage 4 — SAVED (thread 8 read in full)
+
+- **Read:** thread 8, "More upper bounds", all 120 comments (June 24 – July 2, 2018), text only (figures and the linked files `philgibbs.uk/out*.txt`,
+  `notcol.txt` not held). 46 extracts, `spec_08.txt`. The opening post's summary is quoted verbatim at the head of § Thread 8 (checked against the held
+  file, as is the Thomassen statement quoted in Stage 3).
+- **What thread 8 holds on this milestone's object:**
+  1. **The six-colour-vertex sketch** (`[08.17]`, de Grey) with its **precondition, the transformation of `[08.16]`**: two same-colour tiles at a shared
+     vertex lying inside a Reuleaux triangle with a corner there are merged by recolouring that triangle near the vertex ("I can’t think of a way to stop
+     such a tiling from being transformed harmlessly"). The six-sector conclusion is then stated "unless I’m missing something really obvious"; Gibbs
+     reached the same disk (`[08.18]`); the next layer is a case analysis never done in the thread. De Grey's rule "quads and pentagons can have at most one
+     6-valent vertex, because such vertices must have an angle of exactly 60 degrees" (`[08.70]`) rests on it.
+  2. **Mixon's no-six-edge-neighbours argument** (`[08.14]`) — the unit-rhombus argument — and **de Grey's objection** (`[08.15]`): it fails for small
+     same-colour tiles inside each other's annulus of exclusion (Siamese pairs). The dual-valency statement is therefore argued only for tilings without
+     Siamese pairs.
+  3. **Gibbs's "constraint"** (`[08.39]`), quoted in the plan, sits in a thread of rules: de Grey's representation by valency sequences and pairs
+     `{v_i,v_j}`, `{v_i,e_j}` "that need to be 1 apart" (`[08.45]`, strengthened in `[08.63]`, `[08.65]`), curated on the Polymath wiki (`[08.67]`; the wiki
+     page is not held — a prior-art debt), and Gibbs's program's tile counts (just under 500, `[08.111]`). A constraint is a self in-contact in FS-112's
+     vocabulary (claims §0): an edge on the unit circle about a vertex of the same tile.
+  4. **HOCK again, as a question, with a counter-memory** (`[08.76]`, de Grey, June 30, 2018): "Am I right in saying that all edge in any tiling can be
+     harmlessly (i.e. without needing to change any tile’s colour to preserve the chromatic number) flowed into ones that are either straight or have
+     constant radius of curvature 1 ? Can we devise a tiling (of any chromatic number) in which that is not so?" — and "I recall my error regarding one of
+     my promising-looking tilings (see June 7th) – a radius of 2 could be used in places but it enlarged the exclusion set." **No reply in thread 8.**
+  5. **The strip's tiles in words** (`[08.12]`, Gibbs): tiles K and W, "The K tiles have two diagonals of length one in addition to the two forced by the
+     constraints. They also have a width of 0.5".
+  6. **"Siamese tiles"** first appears (`[08.120]`, de Grey, July 2, 2018), undefined in the thread ("map-based colourings, and indeed with ones that do
+     not have Siamese tiles"); the word recurs in threads 10, 12, 14, 15, 16, 17 (grep count). De Grey's record claim: "we’ve failed to 6-tile a disk
+     larger than about 4.5 across" (`[08.105]`).
+- **No six-colouring of the whole plane is claimed in thread 8.**
+
 ## Would have searched here
 
 - Solving de Grey's column (`[07.10]`) as a constraint system to confirm it is `[AxenovichEtAl2014]`'s strip: not done (a derivation for the sides;

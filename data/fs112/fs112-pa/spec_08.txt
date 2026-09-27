@@ -1,0 +1,50 @@
+## Thread 8 — "More upper bounds" (posted June 24, 2018; comments June 24 – July 2, 2018)
+
+> The opening post's summary, verbatim: "We can now 4-color the disk of radius 0.869 , 5-color the disk of radius 1.1 , and 6-color the disk of radius 1.85 , though it appears that a larger disk is 6-colorable ." and "There is ongoing work to improve Thomassen’s result so that the tiles need not be strictly smaller than 1 nor have distance strictly larger than 1."
+
+### Strips and the geometric check of combinatorial solutions
+@08.1 ¦ * ¦ * ¦ Boris's SAT run on Gibbs's edge-depleted triangular grid: a 6×10 grid colours, 6×11 and 7×7 do not ("If my results are correct") — a search, topological only.
+@08.6 ¦ * ¦ * ¦ Gibbs: mapping a SAT solution to a geometric tiling fails — a colour pattern round two diamonds forces unit-length "pink lines" that give the central tile diameter above one.
+@08.8 ¦ * ¦ * ¦ Gibbs turns Boris's strip into a geometric tiling (figure not held).
+@08.9 ¦ * ¦ * ¦ Gibbs: colours corrected; the strip extends outwards to a complete 7-colouring.
+@08.12 ¦ For the tiles, first a little good news ¦ It is only the sequence of W tiles that stops it working further. ¦ **Gibbs: the strip uses tiles K and W; "The K tiles have two diagonals of length one in addition to the two forced by the constraints. They also have a width of 0.5"** — the strip's tiles in words; tiles L, D, G, H removed (14 pentagon types left).
+@08.13 ¦ In particular, if you think you may be within computational reach ¦ steeply tighter as we move to more complex configurations of such tiles. ¦ De Grey: enumerate tilings with no two tiles inside each other's annulus of exclusion (no Siamese pair); such tiles are small, tightly bounded (tentative).
+
+### Vertices of high valency; the six-colour vertex
+@08.14 ¦ * ¦ * ¦ **Mixon's argument: no tile is edge-adjacent to six tiles in a 6-colouring** — two same-colour neighbours A, B give points `x_i, y_j` all at distance 1, a unit rhombus, contradicting `ε < 1`.
+@08.15 ¦ * ¦ * ¦ De Grey: Gibbs meant vertex valency of the tiling, not of the dual; Mixon's `|x_i − y_j| = 1` fails for small tiles inside each other's annulus of exclusion (his seven-colour heptagon example).
+@08.16 ¦ * ¦ * ¦ **De Grey: two same-colour tiles can share a vertex if both lie inside a Reuleaux triangle with a corner there; he proposes to recolour the Reuleaux triangle's intersection with a small disk** ("I can’t think of a way to stop such a tiling from being transformed harmlessly") — stated, not proved.
+@08.17 ¦ * ¦ with the details depending on how the tile boundaries emanate from ¦ **The six-colour-vertex sketch (de Grey)**: after that transformation, six tiles at a 6-valent vertex V "must jointly cover a disk of radius 1 centred on V", boundaries meeting its edge at a regular hexagon, each tile inside a Reuleaux triangle ("unless I’m missing something really obvious"; the comment is truncated in the held text).
+@08.18 ¦ * ¦ * ¦ Gibbs reached the same six-sector disk; the next layer has one, two or three tiles per sector, each case to be explored.
+@08.19 ¦ * ¦ * ¦ De Grey: symmetry suggests a human-manageable number of cases.
+@08.70 ¦ * ¦ * ¦ De Grey's rule: quads and pentagons have at most one 6-valent vertex, "because such vertices must have an angle of exactly 60 degrees".
+@08.71 ¦ * ¦ * ¦ De Grey: the angle is subtended by the neighbouring vertices.
+@08.76 ¦ For two vertices I agree it is non-trivial. ¦ it enlarged the exclusion set. ¦ De Grey on two-vertex tiles (valency rules), then **HOCK as a question**: can every edge be "harmlessly … flowed into ones that are either straight or have constant radius of curvature 1"? — with his own June 7 recollection that "a radius of 2 could be used in places but it enlarged the exclusion set".
+
+### Constraints: Gibbs's definition, de Grey's rules, Mixon's labels
+@08.24 ¦ In both cases, the constraints result from contradictory ¦ I think it should be a constraint that no edge receives multiple labels. ¦ Mixon: constraints are contradictory shape requirements; edge labels by the same-colour tile across a face say where a tile "balloons out".
+@08.27 ¦ * ¦ * ¦ De Grey states two prohibited configurations as distance equalities: "no five points A,B,C,D,E can have AC=AD=AE=BC=BD=BE" and "no four points A,B,C,D can have AC=AD=BC=BD>=AB>=CD".
+@08.28 ¦ Consider the following encoding ¦ It remains to analyze 4- and 5-sided tiles. ¦ Mixon's neighbourhood colour sequences (N1)–(N4); "Since a 3-sided tile can take the shape of a Reuleaux triangle", (N1)–(N4) appear to suffice for triangles (stated).
+@08.29 ¦ * ¦ * ¦ Gibbs's program: 18 three-sided, 46 four-sided, 43 five-sided tiles (provisional).
+@08.30 ¦ * ¦ * ¦ Gibbs's notation: bracketed numbers mark an edge constrained to distance one from a vertex; output at philgibbs.uk/out.txt (not held).
+@08.39 ¦ * ¦ * ¦ **Gibbs's "constraint"**: "a relationship between an edge and a vertex of the same tile that requires the edge to be an arc of unit radius centred on the vertex"; at most one per edge; a tile is not listed if a colouring needs not all its constraints.
+@08.42 ¦ * ¦ * ¦ De Grey: colourings forcing two consecutive vertices' neighbours to share a colour force the edge between them to length 1, "but do not say anything about fattening".
+@08.43 ¦ * ¦ * ¦ De Grey: a 3-valent vertex cannot be flanked by two length-1 edges (an edge-neighbour would exceed diameter 1).
+@08.44 ¦ * ¦ * ¦ Gibbs: diameter-exactly-one cases ignored by "playing safe" (allowing vertex-only same-colour contacts); any search solution to be hand-checked.
+@08.45 ¦ * ¦ * ¦ **De Grey's representation**: valency sequences `d_i ∈ {3,4,5,6}` and constraint sets `S` of pairs `{v_i,v_j}` or `{v_i,e_j}` ("a vertex and a midpoint of an edge, that need to be 1 apart"), with his first list of rules.
+@08.59 ¦ * ¦ * ¦ Gibbs: any two constraint lines must intersect, else the diameter exceeds one.
+@08.60 ¦ * ¦ * ¦ De Grey: that is his 4-cycle rule, since with `n ≤ 5` a 4-cycle of diagonals needs an edge.
+@08.63 ¦ * ¦ * ¦ De Grey's strengthened rule: "if d_i + d_j + min(|j-i|,n-|j-i|) >= 10, {v_i,v_j} must be in S".
+@08.65 ¦ * ¦ * ¦ De Grey: "if d_i > 8-n then d_i + n-8 of {v_i,e_j} are in S".
+@08.67 ¦ * ¦ * ¦ De Grey curates the rules on the Polymath wiki (the wiki page is not held; a prior-art debt).
+@08.73 ¦ * ¦ * ¦ Gibbs: one- and two-edged tiles of positive area exist because edges need not be straight.
+@08.75 ¦ * ¦ * ¦ Gibbs: a one-sided tile can be recoloured to its surrounding colour (the one-vertex case).
+@08.82 ¦ * ¦ * ¦ Mixon questions the convexity hypothesis in the wiki's constraint #4.
+@08.84 ¦ * ¦ * ¦ Mixon: implicit hypothesis BC, AD at most 1.
+@08.99 ¦ * ¦ Does anyone have any ideas for that? ¦ De Grey: next, a SAT encoding of covering "a so-far-unachieved area (say a disk of radius 3)" with the enumerated tiles.
+@08.105 ¦ The first step is to decide on a finite region ¦ we’ve failed to 6-tile a disk larger than about 4.5 across. ¦ De Grey: the record is a disk "about 4.5 across" (so radius about 2.25; the figure behind it is not identified in the held text).
+@08.111 ¦ * ¦ * ¦ De Grey: just under 500 tiles in Gibbs's list; pentagons all but lose 6-valent vertices.
+@08.120 ¦ We are for practical purposes working with map-based colourings ¦ When e=0, this reduces to the usual criterion. ¦ **De Grey names "Siamese tiles"** (first use in the held threads; not defined in thread 8) and proposes an "epsilon-proper" pixel criterion with bridging pixels.
+
+### Context
+@08.22 ¦ Now on to some conjectured conditions ¦ Just having it here for the sake of completeness. ¦ Hockertz's conjectured conditions for an optimal colouring: some or all tiles of diameter 1 with partial boundary; some tiles with an arc of boundary points each at distance 1 from a vertex of the same tile ("the arc curves we see in the constructions discussed and presented by Aubrey and Philip"); exclusively arc boundaries ("I severely doubt it").
