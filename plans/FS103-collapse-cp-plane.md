@@ -604,3 +604,13 @@ bound 600). "The only 4-quadratic field we've seen": not literal (K(√5,√247)
 containing it inherits `N₆ = ∅` (so `K(√5,√7,√247)` is a third collapse field).
 
 ### Stage 1 — SAVED
+
+### Stage 2 — SAVED (the derivation file `plans/FS103-derivation.md`)
+
+23 entries (§1 the collapse, 13; §2 the fractional shadow, 10), each with statement, grade, proof, proof verdict, what rests on it, prior art,
+kernel. §3 (FS103-M, FS103-N) is filed last. `tools/fs71_ledger_b_check.py` parses all 23 and fails only on their missing `LEDGER.md` § B rows
+(23 of 23 fails, none pre-existing; `data/fs103/fs103-c/ledger-b-check-stage2.out`) — the § B lines are drafted in stage 4 for FS103-X.
+FS103-B's corrections applied in the file: `ϑ` defined (FS103-F-TJ); DV's step 4 cites B-CHIF; F §3.4 item 2 recorded as a slip (FS103-F-FRAC's
+verdict); F's `ρ(F)` renamed `α_loc(F)` against MRVZ's Hall ratio `ρ(ℝ²)`.
+
+### Stage 2 — SAVED
