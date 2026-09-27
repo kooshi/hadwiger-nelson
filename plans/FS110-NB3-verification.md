@@ -217,3 +217,75 @@ merged cubic map, proved apart from its kills (Lemma 3, Cor. 3). C-SEAMLIST's re
 
 Verdicts committed at `859a6468` (stage 2). Only now do I open `plans/FS110-N-proof.md` (§ Continuation — FS110-N3), `data/fs110/fs110-n/` and
 `tools/fs110_n_*`. Every other fence stands (the earlier and concurrent verifiers' records, the plan, the advisors, the inventory, the reports).
+
+## Stage 4 — SAVED: divergences against FS110-N3 (read after stage 3), and proposed edits
+
+*Read: `plans/FS110-N-proof.md` § Continuation — FS110-N3 (l. 503–692) in full; `tools/fs110_n_merge.py` run clean (`plant 0 failing: none`) and
+under plants 1–5 (each fails exactly its own check). The instance's quoted theorem table matches the record **verbatim** (all seven rows, checked by
+string match).*
+
+### 4.1 Verdicts side by side
+
+| id | FS110-N3 | FS110-NB3 (blind) | agreement |
+|---|---|---|---|
+| N3-CONF | TRUE | TRUE | truth agrees; **route differs** (4.2 item 1) |
+| N3-CLEAR | TRUE | TRUE | agrees, same route |
+| N3-UP | TRUE, global over the tile (lens/lune containment) | TRUE, read locally; I flagged the lune | truth agrees; **my flag withdrawn** (4.2 item 2) |
+| W-MERGE | TRUE | TRUE with refinements (a) generic `ρ`, (b) holes | **divergence of truth at one proof step** (4.2 item 3); scope (item 4) |
+| N3-DEG | TRUE | TRUE | truth agrees; route differs (item 1) |
+| N3-P17 | TRUE, two derivations | TRUE, a third route | agrees; routes differ (item 5) |
+| N3-RED | TRUE as a reduction | TRUE as a reduction | agrees; **scope at the radius** (item 6) |
+| W-3 | GAP at G-CONE, G-d2; NO given both | the same, the NO also at SV-L3's sketch grade | agrees (the side's grade line already names the sketch) |
+
+### 4.2 Divergences, item by item
+
+1. **Route — N3-CONF's "both types at one contact" and N3-DEG's "in at both `v ± n`".** The side uses the Siamese dichotomy (N-E2): a `c`-tile `X`
+   at `v` has all its distances to a `c`-tile at `w` on one side of 1, so `X ⊆ B̄(w,1)` against an in-type tile and `X ∩ B(w,1) = ∅` against an out-type
+   tile; both force `X ⊆ ω(w)`, impossible; and two in-types at `v ± n` put `X` in `B̄(N,1) ∩ B̄(S′,1) = {v}`. Mine used a local curvature case analysis
+   (cusps along the tangent, `κ` against 1). Same truth. **Theirs is shorter and covers cusps with no case split; recommend it as the written proof.**
+2. **N3-UP — my error, withdrawn.** At stage 2 I read "lens `|p|² ≤ 2p_y`, lune `p_y ≤ −1/2`" as sets of moved points and called the lune not derivable;
+   they are the regions holding the **tiles**: the in-type tile at `N` lies in `B(v,1) ∩ B(N,1)` (the translation lemma at `N`), the out-type tile at
+   `S′` in `B(S′,1) ∖ B̄(v,1)`, where `p_y < −1/2`. With that, N3-UP is **global over the tile**, and my remark "the global reading would be false in
+   general" is also withdrawn. **One step to supply in their proof:** for a tile with no point at `p_y ≤ 1/4`, the clear state must be "all distances
+   `< 1`" (else pushing up could reach 1); this holds for `z` within the tile's depth below `ω(v)` of `v`, which "near `v`" provides. Route, not truth.
+3. **W-MERGE — the step "`cl R ∩ ω(v′) ⊆ {v}`" (their §2.2) is false for finitely many `ρ`.** `R ∩ ω(v′) = ∅` does follow (a.e.-proper + translation);
+   the closure statement does not: if a vertex `v′` with `c ∈ P_cl(v′)` has `|v′ − v| = 1 + ρ` (or `1 − ρ`) and the touching point of `ω(v′)` with
+   `∂B(v, ρ)` lies over `G`, `cl R` touches `ω(v′)` there — a **new out-type (or in-type) contact** of `c` at `v′`, which changes `D_c(v′)` and can empty
+   its interior; likewise `ω(v′)` through a new corner. **Repair (one line):** choose `ρ` off these finitely many values (finitely many vertices within
+   distance 2). With it, "no other vertex's `D_c` changes" holds and the iteration's invariant is sound. Severity: low; a divergence of truth at one step.
+4. **W-MERGE — holes (scope).** The side merges `S₁, S₂` "consecutive along `D_c(v)` (so not the same sector)"; they may be the **same tile**, or tiles
+   an earlier merge already joined, and then the merged tile encloses a region. The record does not treat it. Either S–V's Condition 2 is read to admit
+   a face with a hole (regions are "the connected components"), or Woodall's step-1 fill is applied; the fill is clear a.e. (§2.2 item 5). **Proposed:**
+   add one sentence to W-MERGE or to N3-RED's iteration. Also: the theorem line says "any two non-adjacent `c`-sectors", the proof takes consecutive
+   ones; iteration covers the rest — no divergence of truth.
+5. **N3-P17 — routes.** Side: N2-ROT, N2-HEX (`u` regular) and a local tangency argument at `x₁` (the boundary leaves `x₁` tangent to `ω(x₂)` with
+   curvature `≠ 1`). Mine: the two change points bracketing a boundary direction of `u` (each within 60° of it, C4), both outer cones of `u`'s third
+   colour, then FS106-V2's last step (`R ⊆ ext ω(x₂)`, so a unit arc lies in `Γ`). Mine needs neither N2-HEX nor S–V's Prop. 16. Three derivations of
+   the statement now exist (S–V/FS106-V2, FS110-N3, FS110-NB3), the last two independent; mine shares FS106-V2's final step.
+6. **N3-RED — the radius (scope).** The proof runs W-MERGE "at every vertex within distance 1 of `U`" and concludes a hard cone vertex **in** `U`; as
+   written it yields one within distance 1 of `U` (a disc of radius 4). S–V's argument in `U` uses cubicity only at centres inside `U` (`u` within 1 of
+   the centre, the `p_j` and Lemma 3's pairs within 2), so merging the vertices within `ρ` of `U` suffices and **recovers the stated radius 3**.
+   **Proposed:** replace "within distance 1 of `U`" by "within distance `ρ` of `U`", or restate the conclusion with radius 4.
+7. **Where six is spent; controls.** Agree: W-MERGE spends nothing; six is spent in S–V's multicolour count, Lemma 2 and Cor. 3. Both sides pass the
+   seven-colour controls and Townsend's sector the same way. Strip, pinhole and Parts tests do not apply (no area counted) — both silent/agree.
+8. **Inside the cone (the side's §2.3 sketch, not in its table).** (i) same-ray stacks merge by Woodall's own criterion, (ii) a horn flanked by one colour
+   is shaved (S–V Prop. 7's run form, which FS106-V3 proved region-only). I checked (i) in outline (a unit circle through a middle horn point is
+   transversal to the stack, or of curvature `±1` against horns in `(−1, 1)` and so passes above or below `v` through a `c`-horn): **agree, at sketch
+   grade**. This narrows G-CONE to `c`-horns along both `+a` and `−a` with out-type contacts at `N` and `S′` — the genuine Woodall cone.
+
+### 4.3 Scoring
+
+- **Mine (§1.3):** all seven TRUE as registered; W-MERGE's "scope remark" came out as a one-step repair (item 3) plus holes; my N3-UP flag was my
+  own misreading (item 2). The registrations were not blind priors (disclosed at stage 1).
+- **The side's N3-P4** ("a blind verifier of W-MERGE finds it TRUE, possibly with a repair at the cusp-end clearance (N3-UP)", 0.75): TRUE found; the
+  repair is at the generic-`ρ` step and holes, **not** at the cusp end, where I agree with the side's sandwich (my NB3-SAND is their argument).
+
+### 4.4 Proposed edits for the close (I edit nothing outside my files)
+
+- `plans/FS110-N-proof.md` §2.2: "for small `ρ`" → "for small `ρ` off finitely many values (no vertex `v′` with `c ∈ P_cl(v′)` at distance `1 ± ρ`
+  from `v`, and no `ω(v′)` through a new corner)"; add the hole sentence (fill, or Condition 2's faces).
+- §2.5: "within distance 1 of `U`" → "within distance `ρ` of `U`" (or radius 4 in the conclusion).
+- N3-UP's proof: add the depth sentence (item 2).
+- Grades after this verification: W-MERGE, N3-CONF, N3-CLEAR, N3-UP, N3-DEG, N3-RED **two minds, one blind** (with the repairs above); N3-P17 three
+  derivations (two independent of FS106-V2's route to the first half); A-CIRC for closure types (the side's N-E1, my translation lemma) two minds, one blind.
+- `BIBLIOGRAPHY.md` `[Woodall1973]`: step 3 read first-hand by FS110-NB3 (2026-09-27); steps 1–2 read; steps 4–8 read (FS110-NB3 did not check them).
