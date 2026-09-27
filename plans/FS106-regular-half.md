@@ -394,3 +394,38 @@ S–V §9 made measurable. The first derivation target moves to S–V's Question
    and, given MR, rung D.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the fixed claim list and the advisor's first advice
+
+**The list** is `data/fs106/claims.md` (statements only, for blind jobs): §0 definitions (Voronov's, S–V's Conditions 1–8, FS-103's D-M and D-CP,
+this list's D-NF, D-SLACK, D-AEMAP, D-MU); §1 held inputs (D1, D2, D4 one mind; M1 and N-EASY two); §2 the printed theorems to verify (V-1.1, V-1.2,
+V-1.3, V-2.1, V-2.2, V-P2.2, V-4.1, V-6.1; SV-1, SV-2, SV-L1, SV-C2, SV-C3, SV-L3, SV-L4; TW-81; TW-05, CO-04, WO-73, TH-99, PR-98, PA-20 on
+arrival); §3 the closed-set step (C-CS-1, C-CS-2); §4 the a.e. forms (C-AE-SLACK, C-AE-CLOSED, C-AE-POLY, C-AE-FA, C-AE-MAP6, C-AE-Q2 and
+C-AE-Q2-EV, C-AE-NICE, C-AE-CONV); §5 the transfer, structural route T-S (C-T-L1, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-BIKE, C-T-PIG, C-T-KILL,
+C-T-TAN); §6 the quantitative route T-Q (C-Q-REM, C-Q-COMP, C-Q-EQ, C-Q-STAB, C-Q-HOLE); §7 C-ROW40.
+
+**The rationale (never given to a blind job).** Each claim changes one hypothesis against its printed parent (§G part 2b's ladder). What each forbids:
+C-CS-1 names the closed-set step as "compactness ⟹ band" — a TRUE makes the heart question "band against no band"; C-AE-SLACK forbids an a.e. slack
+six-colouring; C-AE-Q2 FALSE is a six-colouring of a map with unit-arc boundaries, hence `χ(ℝ²) ≤ 6` with no MR (I-EASY); C-T-L1 is FS103-M's hunch in
+S–V's form; C-T-BIKE TRUE says Thm 1.2 has no exact-distance form on two circles alone, so density must enter (row 1's control); C-Q-EQ TRUE makes link 5
+exactly S–V §9's stability question; C-Q-STAB is then HN's measurable form; C-Q-HOLE is its named step. The controls every derivation runs: the tight
+hexagonal / brick 7-colouring (G20, row 33) must survive each a.e. claim at seven colours; `[Townsend1981]`'s unit-arc 2-coloured sector; a density-open
+class whose boundary is a fat Cantor set (a non-map shape, the "generator image" rule of § Make the gate fail).
+
+**The advisor's first advice** (FS106-A's message, 2026-09-26, after my §G bears list; its record `plans/POROS-2026-09-26-fs106-regular-half.md`,
+commit d8a6ec5f) and what I did with each:
+
+| advice | decision |
+|---|---|
+| REM: state in CP form; name "the origin is a.s. a density point of its class"; say which normal form (everywhere-avoiding) | adopted in C-Q-REM (CP form, `η < 1/48` its constant) |
+| COMP: band-properness is weak-* closed in spectral form; rounding keeps disjoint supports; `µ₆` monotone | adopted: C-Q-COMP (ii) and C-Q-EQ's "lim" |
+| T-Q: the equivalence moves the difficulty; name "Lemma 2.2 and Lemma 6.1 with holes" | adopted: C-Q-STAB in its wording, C-Q-HOLE |
+| name the closed-set step as "compactness ⟹ band"; register the tight bicycle as 3-colourable by arcs | adopted: C-CS-1, C-T-BIKE |
+| the tangent form of Prop 2.2 (bowtie, tangent interfaces) | adopted as C-T-TAN, quoted as its one-mind wording |
+| SV Lemma 1 a.e.: expect TRUE for C² interfaces; "do not take it as fails a.e. as written" | adopted, with a correction of my message: what fails as written is S–V's **proof** (it colours the two points); the **statement** C-T-L1 is open |
+| verify Townsend 2005 and Coulson 2004 before building on them | adopted: Phase V reads them first-hand; C-AE-MAP6 rests on no unread proof |
+| first derivation target: S–V Question 2 a.e. (C-AE-Q2), before the normal form; confidence medium | adopted as Phase R's first target; the normal form (T-S) runs beside it in the competitor slot (§6) — disagreement recorded: I keep T-Q live in parallel, because C-Q-EQ, if TRUE, makes it the whole question |
+| a.e. slack corollary: random motion + de Bruijn–Erdős needs every distance; repair by Prop 2.1 with a positive-measure colour per tile | adopted: C-AE-SLACK in both forms (a), (b); the route is the job's |
+| fences: the advisor's record and `data/fs106/fs106-a/`; my rationale; FS-103's records for a blind REM deriver; blind Voronov verifiers get the PDF and statements, never where the band is used | adopted in every blind brief |
+
+## Stage 4 — SAVED
