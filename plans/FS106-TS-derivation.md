@@ -12,9 +12,19 @@ subdirectory `…/scratchpad/fs106-ts/`.*
 
 *(one line each, grade and address; filled stage by stage)*
 
+- **TS-U**, the unit-arc lemma: a unit-arc boundary with colours `c | c′` puts `c` in the wedge facing it and `c′` in the wedge facing away at its
+  centre, and neither in the two side cones — [hand, one mind], §2.2.
+- **TS-L1**: S–V Lemma 1 for a.e.-proper maps with no Condition 5 and no Condition 6 — [hand, one mind], §2.3.
+- **TS-C**: a chain of same-colour regions whose closures meet has diameter `≤ 1` (any map, a.e.-proper) — [hand, one mind], §2.4.
+- **TS-T**: a point of chromaticity `≥ 3` within 1 of every point (any a.e.-proper map); with Conditions 5, 6 it is trichromatic, closing SV-L4 (a)
+  — [hand, one mind], §2.4.
+- **C5**: a local configuration satisfying Prop. 5's hypothesis and every pairwise constraint, where Prop. 5's conclusion fails (unit arcs
+  allowed) — [hand, one mind], §2.5.
+
 ## Would-have-searched-here log
 
 - Stage 1: none (a quotation check and the controls, by hand).
+- Stage 2: a search for a global 6-colouring extending C5, or realising [G3]'s cone; instead each stated as a local configuration and checked by hand.
 
 ## Stage 1 — SAVED: quotation check and the controls
 
@@ -65,3 +75,134 @@ The three source paths in the re-brief exist on disk. The claim ids the brief li
   boundaries says nothing about density-open classes; a claim in D-NF must survive a class whose topological boundary is fat.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: C-AE-Q2 and C-AE-Q2-EV
+
+*Setting: a map-type colouring (Conditions 2–4) with `k` colours, boundaries allowed to contain arcs of unit circles, vertices of any degree,
+**a.e.-proper** (D-AEMAP: no two points of open regions of one colour at distance 1; boundaries and vertices uncoloured). I read "partitioned into
+vertices, boundaries, and regions" (Condition 2) as: two boundaries meet only at vertices. "Region point" = a point of an open region. For a
+point `x`, `c(x)` is its multicolour (Definition 2) and a neighbourhood `U(x)` is taken so small that it meets only regions whose closure contains
+`x` (possible by Condition 3; S–V's own convention, p. 4). `ω(x)` is the unit circle about `x`.*
+
+### 2.1 The claim, its two forms, and what each would give
+
+- **C-AE-Q2 ⟹ C-AE-Q2-EV** (a colouring proper at every point is a.e.-proper), so a FALSE for Question 2 as posed is a FALSE for C-AE-Q2.
+- **Null boundaries.** If the boundaries are Lebesgue-null, colouring each boundary point by any adjacent region gives a measurable colouring
+  proper at `Leb ⊗ σ`-a.e. edge, so **a six-colour counterexample to C-AE-Q2 with null boundaries is `χ(ℝ²) ≤ 6` with no MR** (I-EASY). And
+  C-AE-CLOSED ⟹ C-AE-Q2 for null-boundary maps (FS106-V §2.1: the closures of the colour classes are six closed sets covering with a null set of
+  unit pairs). So C-AE-Q2 with null boundaries is a special case of C-AE-CLOSED with a map's topology added.
+- **Fat boundaries.** A Jordan arc may have positive area (Osgood). C-AE-Q2 as worded covers such maps, but there D-AEMAP leaves a set of
+  positive measure uncoloured, so a counterexample there says nothing about `χ(ℝ²)`. The HN-relevant form is the null-boundary one.
+
+### 2.2 Lemma TS-U (the unit-arc lemma: a unit arc on a boundary splits the neighbourhood of its centre into wedges)
+
+**Statement.** In an a.e.-proper map colouring, let a boundary contain an arc `A = {y + (cos θ, sin θ) : θ ∈ [θ₁, θ₂]}` of `ω(y)`, `θ₁ < θ₂`, with
+the region on its inner side (toward `y`) of colour `c` and on its outer side of colour `c′` (`c ≠ c′`, Condition 2). Then near `y`:
+(i) every colour-`c` region point `y + b` has `b·(cos θ, sin θ) ≥ −C|b|²` for all `θ ∈ [θ₁, θ₂]` (colour `c` lies in the wedge **facing** `A`,
+of angle `π − (θ₂ − θ₁)`);
+(ii) every colour-`c′` region point has `b·(cos θ, sin θ) ≤ C|b|²` for all `θ` (colour `c′` lies in the wedge facing **away**);
+(iii) the two open **side cones** `Σ± = {b : ±b·(cos θ₁, sin θ₁)^⊥ … }` — precisely, the directions strictly between `θ₁ + π/2` and `θ₂ + π/2`
+and strictly between `θ₁ − π/2` and `θ₂ − π/2`, each of angle `θ₂ − θ₁` — contain, near `y`, no region point of colour `c` or `c′`. In
+particular `c(y)` contains a colour other than `c, c′`.
+
+**Proof.** Shrink `[θ₁, θ₂]` so that no vertex lies on `A`; then along `A` the inner side is one region `R_in` of colour `c` containing a collar
+`{y + (1 − s)(cos θ, sin θ) : θ ∈ [θ₁, θ₂], 0 < s < s₀}` and the outer side a region `R_out` of colour `c′` with the collar `1 < r < 1 + s₀` (a
+point of a boundary arc that is not a vertex has exactly the two regions of its two sides near it). For small `b`, the circle `ω(y + b)` meets
+the ray from `y` in direction `θ` at radius `r = −b·n + √((b·n)² + 1 − |b|²) = 1 + b·(cos θ, sin θ) + O(|b|²)`, `n = −(cos θ, sin θ)`. If
+`y + b` is a region point of colour `c` with `b·(cos θ, sin θ) < −C|b|²` for some `θ ∈ [θ₁, θ₂]` (and `|b|` small against `s₀`), this radius
+lies in `(1 − s₀, 1)`, so `ω(y + b)` meets `R_in`: a unit pair in the open colour-`c` regions, excluded by D-AEMAP. That is (i); (ii) is the same
+with `R_out`. For (iii), a direction strictly between `θ₁ + π/2` and `θ₂ + π/2` has `b·(cos θ₁, sin θ₁) < 0 < b·(cos θ₂, sin θ₂)` with both
+of size `≥ κ|b|` on a closed sub-cone, so for `|b| < κ/C` such `b` violates (i) at `θ₁` and (ii) at `θ₂`; the other side cone likewise. The side
+cones are open, contain region points (boundaries are nowhere dense), and meet only regions whose closure contains `y`. ∎ [hand, one mind]
+
+**Controls.** K2 (Townsend's sector): the arc's centre `a` sits at the edge of the coloured set, so the side cones lie outside it — consistent.
+K1 has no unit-arc boundaries, but its point-touch is the degenerate case: the hexagon `H` at a vertex `u` touches `ω(u)` from inside at the
+opposite vertex, in a direction inside `H`'s own sector — the inner colour facing the touch, as (i) requires.
+
+### 2.3 Lemma TS-L1 (S–V Lemma 1 with no Condition 5 and no Condition 6, a.e.-proper)
+
+**Statement.** In an a.e.-proper map colouring, no two points `x, y` with `|x − y| = 1` have `c(x) = c(y) = {a, b}`. [hand, one mind]
+
+**Proof.** *Step 1* (FS106-V's region-only argument, §3.1, re-checked): for a colour-`a` region point `q` near `y`, `ω(q)` misses the open
+colour-`a` regions near `x`; since `y` is a limit of colour-`a` region points and those regions near `x` are open, `ω(y) ∩ U(x)` misses them, and
+likewise for `b`. So `ω(y) ∩ U(x)` lies in the boundary set. *Step 2*: the arc `ω(y) ∩ U(x)` is covered by finitely many boundaries (Condition
+3), so by Baire one of them contains a sub-arc `A` of `ω(y)`, with no vertex on it, inside `U(x)`. Its two sides carry two different colours,
+both in `c(x) = {a, b}`: so `{c, c′} = {a, b}`. By TS-U (iii) at the centre `y`, the side cones at `y` contain no region point of colour `a` or
+`b` — but every region meeting `U(y)` has colour in `c(y) = {a, b}`, and the side cones contain region points. Contradiction. ∎
+
+What changed against the print: S–V's proof needs Observation 1 (boundary colours); FS106-V's region-only proof needs Condition 5 at Step 2. Step
+2 here replaces Condition 5 by TS-U: **the unit-arc configuration that V left open ("each boundary through `x` contains an arc of `ω(y)`") is
+impossible for bichromatic pairs.** Consequence: S–V's Prop. 12 and Cor. 4 (the index, as FS106-V repaired it with Lemma 1 and Prop. 3) hold with
+no Condition 5 wherever their curves exist. **Control K1:** two points on `{i, j}`-edges lie on distinct `i`-hexagons (each hexagon has one
+`j`-neighbour), which are `≥ 1.32` apart — the lemma's conclusion holds there, as it must.
+
+### 2.4 Lemma TS-C (clusters have diameter at most 1) and Corollary TS-T (a point of chromaticity ≥ 3 within 1 of every point)
+
+**TS-C.** In an a.e.-proper map colouring, if `R₀, …, R_m` are regions of one colour with `cl R_{i−1} ∩ cl R_i ≠ ∅`, then
+`diam ⋃ cl R_i ≤ 1`. Hence every connected component of the union of the closures of one colour's regions (a **cluster**) has diameter `≤ 1`.
+[hand, one mind]
+
+**Proof.** Same-colour closures meet only at vertices (a non-vertex boundary point has two regions of different colours beside it), so pick
+touching vertices `t_i ∈ cl R_{i−1} ∩ cl R_i`, finitely many. Suppose `p ∈ R₀`, `q ∈ ⋃ cl R_i`, `|p − q| > 1`. Choose `p′ ∈ R₀` so close to `p`
+that `|p′ − q| > 1` and `|p′ − t_i| ≠ 1` for every `i` (avoid finitely many circles). `ω(p′)` misses every `R_i` (a.e.-properness), so
+`cl R_i ∖ ω(p′)` lies between `R_i` and `cl R_i` and is connected; consecutive ones share `t_i ∉ ω(p′)`; so `X = ⋃ cl R_i ∖ ω(p′)` is connected.
+But `X` is split by `ω(p′)` into its points inside (containing `p′`) and outside (containing `q`), both open in `X` and nonempty. Contradiction.
+A general pair `p, q` in the union is handled by approximating `p` from `R₀`. Components of the union are exactly chain classes (by local
+finiteness the union is closed, and two chain classes whose closures met would be one). ∎
+
+**TS-T.** For every point `x` there is a point of chromaticity `≥ 3` within distance 1 of `x`. [hand, one mind] *Proof:* Voronov's ring argument
+with R3's hull growth (FS106-V §2.1 V-2.2), run on clusters instead of regions: take the cluster `X ∋ x` (or of a region at `x`); walk the
+outer frontier of `X`; the outside sectors at a frontier vertex have colours `≠` `X`'s (a same-colour region touching `X` would be in `X`), and if
+all outside sectors along the frontier have one colour `c′`, then at each frontier vertex there is only one outside sector (two consecutive
+sectors of one colour would share a boundary), so the outside is a single region `R′` whose fill contains `X`; pass to `R′`'s cluster and
+repeat. Fills strictly grow and each has diameter `≤ 1` (TS-C), and finitely many regions lie within 1 of `x`, so the process stops at a
+frontier vertex where the outside colour changes: chromaticity `≥ 3`, within `diam ≤ 1` of `x`. ∎
+
+**This closes FS106-V2's open step in SV-L4 (a)** ("the same along chains of ≥ 3 regions") for every map, not only under Condition 6. Under
+Condition 5 (Lemma 2 caps chromaticity at 3) it gives a **trichromatic** point within 1 of every point, so SV-L4 (a) is TRUE under Conditions 5
+and 6 [hand, one mind]. Without Condition 5 it gives chromaticity `≥ 3` only. **Controls.** K1: clusters are single hexagons, of diameter
+exactly 1 — the bound `≤ 1` is attained, so it cannot be sharpened to `< 1` (the tight control earns its keep here); every point of K1 is within 1
+of a vertex. K3 is not a map (the lemma is about regions), so nothing is claimed there.
+
+### 2.5 The rest of SV-1's chain with Conditions 5 and 6 removed, step by step
+
+| step (S–V, as repaired by FS106-V/V2) | uses | status for C-AE-Q2 |
+|---|---|---|
+| Props. 1–4, Prop. 3 | region points only | hold |
+| Lemma 1 | Cond. 5 (V's proof) | **holds: TS-L1** |
+| Prop. 12, Cor. 4 (the index) | Lemma 1, Prop. 3 | hold wherever the curves exist |
+| Lemma 4 (a), a point of chromaticity ≥ 3 within 1 | Cond. 7 or the chain step | **holds: TS-T** (chromaticity `≥ 3`) |
+| **Prop. 5** (at two colour-change points `x, y` of `ω(u)` at distance 1, other colours on both sides of `ω`) | "the arc of `ω(y)` is not a boundary" | **fails at one of the two points** — configuration C5 below; its conclusion does hold at `y` (TS-U (iii): the side cones at `y` straddle `ω(u)`) |
+| **Prop. 6, Lemma 2** (chromaticity `≤ 3`) | Cond. 5 at three places (finitely many non-monochromatic points on `ω(x)`; Prop. 5; "arcs of circles cannot serve as boundaries" in the `x₂` step) | **GAP [G1]**. What survives: region points of `ω(u)` avoid `c(u)` (a region disc about a point of `ω(u)` sweeps a neighbourhood of `u` with unit circles). What is left: a 4-chromatic `u` whose `ω(u)` runs along boundaries. TS-U forbids the naive version — `ω(u)` a boundary circle with the inner colour at direction `θ` equal to `u`'s sector colour there — only in part: it passes TS-U (the side cones at `u` fall in the neighbouring sectors) and dies instead on the inner collar's own unit pairs (an inner collar of one colour on an arc longer than `π/3` holds a unit pair), which leaves a circle-colouring problem of Prop. 17's kind, not written |
+| **Props. 9–10, Cor. 2** (the deformed annulus in the complementary colours) | Cond. 6 (three boundary types at `u`), Cond. 5 (Prop. 10), tangent directions at `u` (V2, from Cond. 5) | **GAP [G2]**, three escapes: (a) the bowtie (a degree-4 trichromatic vertex `4,5,4,6`; Prop. 9's "two of three" fails in some directions — FS106-V); (b) Prop. 10's escape: a boundary through `u` contains an arc of `ω(v)`, `v ∈ ω(u)` (TS-U then forces the two colours of that boundary out of `v`'s side cones, which are tangent to `ω(u)` at `v`; it does not produce the curve); (c) without Cond. 5 a boundary may spiral into `u`, and the angles `α₄₅, α₄₆, α₅₆` that Prop. 9 uses need not exist |
+| Cor. 3; Lemma 3 (transplanted bicycle, V2) | the curves of Cor. 2; Lemma 3's point choices ("no arc of `ω(p)` can form a boundary") | inherit [G2]; the point choice also uses Cond. 5 |
+| Prop. 14/15 (the pseudo-colouring of `ω` is proper) | Prop. 5 | inherit [G1]'s configuration C5 |
+| **Prop. 17** (no six-arc cyclic colouring) | its last step is "a unit arc on a boundary, against Cond. 5" | **GAP [G3]**. TS-U applied to that arc (centre `x₂`) is **consistent** with the outer colour-4 cone `B(x₂)` at `x₂`: checked in coordinates (`u = 0`, `x₁ = (1, 0)`, `x₂ = (1/2, √3/2)`): the arc of `ω(x₂)` bounding `B(x₁)` spans directions `[300°, 300° + Δ]` from `x₂`, its away wedge is `[−90° + Δ, 90°]` relative to `x₂ − x₁`, and `B(x₂)` is `(30°, 90°)` there — inside the wedge. So TS-U does not finish Prop. 17; had the arc bent the other way it would have |
+| Prop. 19, Lemma 4's fills | fills (valid for open regions at exact distance: V, VB) | the fills hold; Cond. 6 is not a hypothesis here, but the degree-4 trichromatic vertices fills create fall into [G2] (a) |
+
+**Configuration C5 (Prop. 5 fails at `x` without Condition 5).** `u = 0`-free description: `x, y` on `ω(u)`, `|x − y| = 1`. Near `x`: colour 1
+on `int ω(y)`, colour 2 on `ext ω(y)` (the arc of `ω(y)` through `x` is the boundary; `ω(u)` crosses it transversally at `60°`). Near `y`, with
+`φ₀ < π/3` the half-angle of that arc as seen from `y`: colour 1 in the open wedge of directions within `π/2 − φ₀` of `x − y`, colour 2 in the
+opposite wedge, and two further colours in the two side cones. Checked: every pair of colour-1 (resp. colour-2) points from the two
+neighbourhoods is at distance `≠ 1` (TS-U's radius formula, with strict wedges); the half-neighbourhoods of `x` and `y` along `ω(u)` carry 1
+toward each other and 2 away, as Prop. 5's hypothesis asks (the tangent of `ω(u)` at `y` makes `30°` with `x − y`, inside the colour-1 wedge);
+and `x` is adjacent to colours 1 and 2 only. So Prop. 5 is not a local consequence of a.e.-properness once unit arcs are allowed; whether C5
+embeds in a global 6-colouring is exactly what [G1] asks. Its everywhere-proper form (Question 2 as posed) also passes: `x`'s own colour is 1 or
+2, `y`'s is one of the side-cone colours, and every point of the arc is at distance 1 from `y` and coloured 1 or 2.
+
+### 2.6 Verdicts
+
+| claim | verdict | minds / grade |
+|---|---|---|
+| **C-AE-Q2** | **GAP at three named steps**: [G1] chromaticity `≤ 3` (S–V Lemma 2) without Cond. 5 — the local configuration C5 shows its Prop. 5 input fails; [G2] the deformed annulus (Cor. 2) at a bowtie vertex, at a boundary through `u` lying on a unit circle about a point of `ω(u)`, and at spiralling boundaries; [G3] Prop. 17's last step (a colour cone bounded by a unit arc), which TS-U does not exclude. **No counterexample**: every configuration found is local. Proved on the way, with no Condition 5 or 6: TS-U, TS-L1, TS-C, TS-T | 1 / [hand] for TS-U, TS-L1, TS-C, TS-T; the GAPs by explicit local configuration (C5) or by the failed check ([G3]) |
+| **C-AE-Q2-EV** | **GAP at the same three steps**; the everywhere form adds boundary colours, and C5 accommodates them | 1 / [hand] |
+| SV-L4 (a) under Conditions 5, 6 (FS106-V2's open step) | **TRUE** (TS-C, TS-T, Lemma 2) | 1 / [hand] |
+
+**Registered expectation E6** (planner: TRUE 0.5, FALSE 0.15, GAP 0.35) — scored at the close; this job's verdict is GAP. **For FS-107:** [G1]–[G3]
+are W's openings with a map's topology intact — a six-colouring would have to use a unit-arc boundary at a colour-change point of the circle about
+a 4-chromatic point, or a unit-arc boundary through a trichromatic point, or a bowtie; TS-L1 and TS-C are constraints W cannot escape.
+
+**Would have searched here:** a search for a global 6-colouring extending C5, or a map realising [G3]'s cone; instead each was stated as a local
+configuration and checked by hand.
+
+## Stage 2 — SAVED
