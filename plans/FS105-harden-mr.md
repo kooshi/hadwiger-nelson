@@ -401,3 +401,142 @@ readers); nothing in print near (W). Kernel: every entry declined; FS-101's `hMR
 § B lines are drafted in stage 4.
 
 ### Stage 2 — SAVED
+
+### Stage 3 — SAVED (§G re-read; §PA sweep; §IQ, G72, G79; expectations scored; conjecture sweep; the verdict; the search log)
+
+**3.1 §G re-read — which extractions paid.**
+
+| extraction (plan §G) | paid? |
+|---|---|
+| G1, G35, G55, rows 63, 100, 105 — the scope by PARI at both fields | **paid**: both fields wall-broken, no stable dyadic place, `R = O′`, exact at `F₁` twice (R, B) and at `F_dG` twice (R, W) |
+| G21 — the exact hypothesis list; a wrong-reason TRUE written first | **paid most**: R's C0 wrong reason for (a0) ("no virtually cyclic factors" read so that it holds vacuously) and D's S3 are exactly the forced sense FS105-VC; W's named wrong reason for (c-b) (two height normalisations) was present in the records and harmless. The liked result (everything TRUE) was audited by two blind jobs (D, B) and one walk committed before it read the reader (W); the one place no one audited is named, (a9)'s cited machinery |
+| G30 — a refutation of MR must be a proof | **paid**: W wrote (d2) as statements to be proved, (W) and (W′), and logged the graph search it did not run |
+| G43 — de Grey's field, degree 16 | **paid** (claim (c)) |
+| G46, G49 — the discipline's names; the gate | **paid, negatively**: §PA.2's five zbMATH queries found nothing; the decisive fact came from reading EL2021 p. 2, a held page |
+| G50 — EL2021 §§3, 5–9 a debt; the proof of Thm 1.2 not in EL2021 | **paid most of all**: the planner's p. 2 reading, then Kooshi's upload of EL2003, showed the proof is in neither paper — EL2003's §6 is an outline — and moved MR's external input to Thm 1.3 plus a deduction |
+| G51 — a blind third mind while retraction is free | **paid**: B blind on EF_F⁺; the owner added D blind on the deduction (item 21), not in the plan; both covert channels found by agents, before (A) or during (D) the blind runs |
+| G60, G81, row 129 — the finite-graph test | **paid**: (d1)–(d3) |
+| G67, G72, G79 — the form; §IQ; the invariant named | **paid**: B's "The invariant the proof runs on" names it |
+| G76 — its *Do* (Einsiedler–Fish's pigeonhole with the product formula) as B's open outline | **paid** as accepted: B blind to the proofs, not the outline (B Stage 4) |
+| G80 (F) — C-MR16 | **paid**: the killing test did not fire; the *Do* sharpened (any positive exponent) |
+| rows 97, 118 — a finitely generated `Γ` must fail; admissibility | **paid**: B's control C-2; W's control `⟨(3+4i)/5, (5+12i)/13⟩` spans only `ℚ(i)` |
+| row 127 — `hMR` must match any corrected statement | **paid**: no statement correction, so `hMR` stands |
+| method: "what must someone who trusts none of this check?" | **paid most**: the sceptic's check moved from Thm 1.2 (whose proof is nowhere) to Thm 1.3 plus ten lines |
+| method: "exactly one thing may differ" | **paid**: W §2.0 put X01D's `M^{1/16}` and X12B's `M^{1/32}` under one normalisation (FS105-W-H) |
+
+**Entries that bore and were missed** (each drafted in stage 4 as a new instance):
+- **G51, twice.** Its design lesson — "isolate the scratchpad per agent; a shared temp directory is a covert channel" — stands in G51 and in
+  `plans/PROTOCOL-competitor-and-advisor.md` rule 1 since 2026-09-09. No FS-103 or FS-105 blind brief fenced the harness scratchpad (one
+  directory for every subagent of the session, 579 entries, D §1.5) or the session transcripts and `chats-bak/` (717 files carrying X01D's
+  and X12B's route, A Stage 3) by name. The advisor found the second before B's launch; D found the first during the runs.
+- **G50, three times.** (1) The plan's §PA.2 called `[BekkaFrancini2020]` "abstract only — not a reading" and owed it a new row; it is held
+  as `[BekkaFrancini2022]`, §1 read twice (R §1.1 caught it). (2) W listed V. Jungić, *Still Spinning* (Math. Mag. 2023) as a new title
+  owed; it has stood in `BIBLIOGRAPHY.md`'s owed-titles table since FS-58's §PA. (3) The Lind–Ward / Chothi–Everest–Ward entropy formula,
+  owed since FS-100, was carried a second milestone unread (its load-bearing consequence, positive Haar entropy, is derived: FS105-H).
+
+**3.2 §PA sweep — what the reading taught about the object** (WORKFLOW 9).
+1. **MR's external input is EL2021 Thm 1.3, not Thm 1.2**, and Thm 1.3's hypothesis has a forced sense: "no virtually cyclic factors" means
+   no non-trivial one (FS105-VC). Any write-up cites Thm 1.3 with FS105-DED (→ FS-102's stub).
+2. **Entropy and isometry split by place.** The pieces are isometric at every archimedean place, so every Lyapunov weight — all of the
+   positive entropy — is non-archimedean (R §3.2); the zero-entropy survivors sit on the archimedean isometric leaves, inside `E` (row 120).
+   One arithmetic fact, read twice: the archimedean places carry no entropy and all of `E`'s leaves. → one clause in G80's body.
+3. **The growth EF_F⁺ needs is any positive exponent** — `[EinsiedlerFish2010]` (1.1) with any `α > 0` — so the degree enters only
+   constants (FS105-W-G; B's scope remark). → G80's *Do*.
+4. **`[Sataev1975]` is the polynomial-value case** of `[EinsiedlerFish2010]` Thm 1.2 [the close's reading, one mind; from the owner's
+   reading of the abstract (item 9) and `[Huang2017]` §1, whose Theorem 1.5 credits both with one theorem]: invariance under every
+   `T_n z = z^{f(n)}` is invariance under the multiplicative semigroup the values generate, which has polynomial growth; Sataev concludes
+   more sharply (Lebesgue plus `δ₁`, no ergodicity); EF cover every multiplicative semigroup of polynomial growth. Sataev's proof (Weyl
+   equidistribution) unchecked.
+5. **Row 129's test has a printed form.** MR at ℚ(√635087) predicts "equality" to `[MatolcsiEtAl2025]` §2's open question
+   (`χ_f,0 = χ_f`), and its cheap refutation — MRVZ's Conjecture 1, `α₁ = 1/4` — was reachable in print in 2023–2025 and is false
+   (`[DuczVarga2026]`): a met prediction, weak. → row 129's sentence.
+
+**3.3 §IQ re-read; G72's count; G79's record.**
+- §IQ's structural form — *for a countable abelian `Σ` with at least `M^δ` elements of height `≤ M`, what does every `Σ`-invariant measure
+  with zero entropy for one element carry, place by place?* — was answered at ℚ(√635087) by B (the finite part is global, then every split
+  place dies: `T + A`) and in its degree-free form by B's scope remark and FS105-W-G (any `δ > 0`). Item 3's named invariant (entropy against
+  growth) is what B wrote ("an example invariant of the acting group … against the measure's invariant"). Item 5's instances: de Grey's
+  field decided (C-MR16, a reading grade); row 100's exception fields and fields with a complex place not attempted (B's scope (ii): off the
+  totally real fields Lemma 0 changes).
+- **G72's count: thirteen of fifteen.** FS-105 is recorded as the other kind: a hardening's products — the grade, the deduction, the shapes
+  (W) and (W′) — came from reading and from re-deriving a known proof; the structural form was answered but produced nothing a direct
+  re-derivation would not. Not a count against the method: FS-105 was a derivation milestone only in its blind job.
+- **G79's record, a fifth run (weakly positive):** B's result from an example invariant of the acting group (the height count `U` has and no
+  finitely generated `Γ` has) against the measure's (zero local dimension); FS105-DED from what every Thm 1.3 decomposition carries under
+  total irreducibility (each `G_j` finite or `X`); (W) and (W′) are counterexample invariants — the shape any refutation must carry — and
+  located the test without producing a theorem.
+
+**3.4 Expectations, scored once each.**
+
+| source | expectation | outcome |
+|---|---|---|
+| plan E1 | (a0) in under a page, no hypothesis PE-2 lacks, 0.80 | **met** (the one sense needed, FS105-VC, is the one PE-1′ already used) |
+| E2 | (a1)–(a8) hold, 0.85; GAP most likely at a4's undefined term | **met**; the named place was the one needing a forced reading, and it held |
+| E3 | (a9) nothing beyond the statement, 0.85; GAP 0.13 at §4.4's standing assumptions | **neither branch cleanly**: §4.4 checked in full, TRUE; a reading gap at the cited machinery, which E3 did not name |
+| E4 | (b) blind third closes, 0.75; GAP 0.20 at the multiplier step | **met**; B passed the multiplier step blind |
+| E5 | (c) walks through, 0.80 | **met** |
+| E6 | (d1) correct as stated, 0.90 | **met** |
+| E7 | (d3) nothing in print; expectation heuristic, 0.90 | **met** ("Based on this numerical evidence", `[AmbrusEtAl2023]`) |
+| E8 | MR survives with a gained mind and a reading, 0.60 | **met**: a second mind on the deduction, a third blind EF_F⁺, readings at both fields, a walk at 16 |
+| advisor, stage 1 | P(MR survives, no named gap) 0.62; PE-2 0.08, EF_F⁺ 0.25, degree 16 0.07, scope 0.05; P(B reports GAP) 0.40, P(real) 0.20 | **survives**; no step broke; B reported no GAP; scope tested only at the two fields |
+| advisor, stage 2 | 0.85; 0.04, 0.05, 0.03, 0.04; P(B GAP) 0.35, 0.6 of it at X01V's step | **survives**; B met X01V's step and passed it |
+| advisor's hunches | `ef-transfer-is-the-weak-step`; `x01v-withdrawal-is-selection`; `one-u-zero-entropy-overreach`; `uq-multipliers-not-admissible` | **killed** (B TRUE, blind); **half, now settled**: the closing argument is derivable blind (B), so the withdrawal was right though not independent; **killed** (B uses only `u*`'s entropy, W2 excluded); **true and moot** (W's control) |
+| R's C0 | all TRUE; (a9) lowest at 0.65 | all TRUE; (a9) the one left at a reading gap |
+| D's prior | TRUE 0.85 | **TRUE** |
+| B's C0 | EF_F⁺ 0.85, EF_F⁰ 0.90; failure likeliest at the lift bookkeeping | **TRUE, TRUE**; the named step held |
+| W's C0 | (c-a) 0.88 … (d3) 0.95 | all met (W §5.2) |
+| stub | first outcome (MR gains a mind and a reading) or a named gap | **the first** |
+| plan §R | the blast radius | **nothing fired**; row 120's grade corrected as §R foresaw |
+
+**3.5 Sweep for unpursued conjectures** (the FS-105 records grepped for "conjecture", "not claimed", "hunch", "open question").
+1. B's scope remark (i), EF_F⁺ at every totally real `F` with `R = O′` → **declined as a mint**: FS100-EFP already states it for every real
+   `F` with `R = O′` (X01D, X12B); B's remark is a third derivation's reach, and W-G walks it at 16.
+2. B's scope remark (ii), off the totally real fields → **FS-100's left item** "MR's complex-place case on an instance", unchanged; its
+   named step is Lemma 0 (a non-torsion `u` may expand only at an archimedean place).
+3. (W′) — `[MatolcsiEtAl2025]` §2's open question → **declined as a stub**: row 129 answers it given MR, and a refutation has no technique
+   in sight (W §4.3); recorded in row 129's sentence.
+4. R's EL2021 misprints (Thm 7.1 "without cyclic factors"; `κ > 0` against Lemma 7.2's `≥ 0`) → **recorded** in the `BIBLIOGRAPHY.md` row;
+   harmless.
+5. R's held item, `[10]`, `[11]`, `[5]` for (a9)'s reading gap → **declined for now** (the owner, item 21); carried as a reading debt in the
+   bibliography and named in FS-102's stub (a write-up that wants a full reading reads `[11]` Prop. 6.4 first, R's recommendation).
+6. MR at row 100's exception fields → FS-100's left items, unchanged.
+
+**3.6 The verdict, in four parts.**
+
+- **The choice.** FS-105 is **Paid (hardening)**: MR (row 120) stands, its grade rewritten. (1) **The proof of EL2021 Thm 1.2 that PE-2
+  uses is in neither paper the record named**: EL2003 is an announcement whose §6 is an outline; EL2021 proves Thm 1.3, and Thm 1.2 follows
+  by a deduction EL2021 never writes — now [hand], two minds, the second blind (FS105-DED), with one forced reading ("virtually cyclic
+  factor" means a non-trivial one). (2) **PE-2's use is inside Thm 1.3's hypotheses** at ℚ(√635087) (one reading) and at de Grey's field
+  (two separate readings); the reading gap at EL2021's cited leafwise-measure machinery is a reading gap, not a mathematical one, left by the
+  owner's ruling. (3) **EF_F⁺ has three derivations blind to one another** (FS105-B at ℚ(√635087)), with EF_F⁰, and the third met X01V's old
+  stall blind. (4) **MR at degree 16 walks through** — one checking reading; the degree enters constants only. (5) **Row 129's killing test
+  is correct as stated**, and a refutation of MR by finite graphs must take one of two shapes, (W) or (W′), with nothing in print within
+  `0.0176` of the first. **Not landed:** a full reading of EL2021's cited machinery (declined for now); MR off the totally real fields and at
+  row 100's exception fields (not in scope). Novelty: nothing claimed new beyond records; MR's form not found in print (§PA.2).
+- **The alternative weighed.** Label it "Paid (theorem)" on FS105-DED, FS105-W-G and FS105-W-D2; or "not landed" on (a9), since the reading
+  of Thm 1.3's proof is incomplete.
+- **Why this one.** The milestone's product is a grade: its theorems are a routine deduction, a walk and a reformulation of a test, none a
+  new fact about the objects. And (a9) is a reading gap declined by ruling, not a rung that failed: the claim it would check is a refereed
+  published theorem used by statement, as every cited theorem is.
+- **Confidence: medium-high.** Every link except Thm 1.3's own proof is now two minds or more at ℚ(√635087). **The one fact that would change
+  it:** a defect in EL2021 Thm 1.3's proof at the machinery nobody here read (`[11]` Prop. 6.4, on which Prop. 3.5's equality rests), or a
+  failing line in B's Step 4 found by a fourth reader.
+
+**3.7 Would-have-searched lines, counted.** Planner 0; advisor 0; R 0; D 0; B 3 (stage 1: a prime scan to `10⁵` → one exact loop to 2000;
+stage 2: the densest multiplier family → `(s+i)/(s−i)` with a one-line bound; a non-unit at a split prime above 3 → one `z ∈ 𝔔 ∖ σ𝔔`
+read off the ideal's basis); W 2 (stage 1: a search of `O_L` for a norm exactly divisible by a totally split prime → one family fixed in
+advance; stage 4: a search for finite graphs of small independence ratio → the best proved bound read); this job 0. **Five lines across
+seven records**, each replaced by a derivation, a fixed family or a reading.
+
+**3.8 Decisions settled at this close (four parts each).**
+
+| choice | alternative weighed | why this won | confidence |
+|---|---|---|---|
+| MR's grade rewritten in row 120; no new row | a row for the hardening (FS105-DED, B, C-MR16) | no new fact about the objects; one home per fact: MR's grade lives in row 120 | high |
+| (W) and (W′) as a sentence in row 129, with their margins | a row of their own | a reformulation of row 129's own test with its window, one mind, derived from held papers | high |
+| PE-2's hypothesis check stated as one reading at ℚ(√635087) and two at de Grey's field | the brief's "one mind" throughout | W committed its walk (`a0fee351`) before reading R, so the source counts two at `F_dG` | high |
+| FS-103's blind grades (V1, V2, B, N) stand despite the open channels | downgrade them to "blind by report" | none reported a touch; the standing rule counts a logged touch, and a retroactive downgrade needs evidence of reading | medium — if any of those runs is found to have read a transcript or a shared scratch file, its count drops |
+| label "Paid (hardening)" | "Paid (theorem)"; "not landed" on (a9) | 3.6 above | medium-high |
+| FS-104 to rank 1 after FS-105 leaves the table | FS-102, the fallback write-up, now that MR is hardened | FS-104 was the stub recommended to follow; the write-up is Kooshi's fallback by his own words, and whether to take it now is his call | medium — Kooshi's choice |
+
+### Stage 3 — SAVED
