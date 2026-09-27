@@ -24,3 +24,4 @@
 | 16 | stub to mint or re-aim | FS-107's first contests: C-AE-Q2 and C-Q-STAB (a non-local obstruction) | plan §5.4 | open |
 | 17 | tool defect | The zbMATH API returns HTTP 404 on parenthesised OR-groups | plan §PA.6 | open |
 | 18 | owner ruling | Wave 1 launched: FS106-V (sighted check of the printed proofs) and FS106-VB (blind, with second minds on FS-103's D1, D2, D4); wave 2 re-briefed first if V-1.1 or SV-2 returns FALSE or GAP (the planner's condition). Planner's disagreement with the advisor recorded (A3 = D1, plan §4.1) | owner | open |
+| 19 | prior-art debt | `[Thomassen1999]` **HELD** (Kooshi, 2026-09-26: a text copy, 14,458 bytes) → `~/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt`; relayed to FS106-V (sighted); FS106-VB reads it as an open source (a paper, not a record) | Kooshi | open |
