@@ -299,3 +299,51 @@ Seven-colour control: no unit arc in the hexagonal seven-colouring, so every sta
 ring colours (its alternation fails), as required.
 
 ## Stage 2 — SAVED
+
+## § Continuation — FS112-N2
+
+*Job FS112-N2, de Bruijn (Opus 5.5), launched 2026-09-27 at HEAD `c1dfac5d`. Briefs: `data/fs112/briefs/N2-112-proof-continued.md` (wins where the two
+differ) and `data/fs112/briefs/N112-proof.md`, with `data/fs112/briefs/STANDING-RULES.md`. Working files `data/fs112/fs112-n/`; new exact checks
+`tools/fs112_n2_*.py` (the frozen `tools/fs112_n_*.py` untouched). Earlier verdicts in this record are not rewritten; where I disagree I say so here.
+Notation as §1.3 of this record and FS110-N4's frame (`plans/FS110-N-proof.md` §N4-2): `n` a unit vector, `a ⊥ n`, upward curvature, `Sh(T)` the shadow.*
+
+### N2: theorems this continuation proved
+
+*(filled stage by stage; one line each, grade and address)*
+
+### N2: would-have-searched-here log
+
+- (none yet)
+
+### N2: fence log
+
+1. `git log --oneline -1` (checking the tree before the first commit) printed one subject beyond the start-up snapshot: "FS-112 inventory: A3 launched".
+   No further `git log`.
+2. `ls data/fs112/` printed the names of fenced directories (`fs112-a`, `fs112-a2`, `fs112-y`, `fs112-yb`, `reports`); nothing inside them listed or
+   opened. `ls data/fs112/briefs/` printed the other jobs' brief names; none opened.
+3. Read, not fenced for me: `plans/FS112-unit-arc-half.md` §5.3 (the owner lifted it for the proof side after N's stage 1; N2's brief does not re-fence it).
+
+## Stage N2-1 — SAVED: quotation check; what N2 inherits
+
+**Files read from disk (this order):** `STANDING-RULES.md`; the N2 brief; the N brief; `CLAUDE.md` § The aim and § Counter-priors (disk copy equals my
+loaded one on those lines); this record in full; `plans/FS112-NB-verification.md` in full; both reports; `data/fs112/claims.md` in full;
+`plans/FS112-unit-arc-half.md` §1.3, §G part 3, §IQ, §5.1–5.4; `plans/FS110-N-proof.md` stages N3-2 and N4-2 to N4-4; `tools/fs112_n_arcs.py` and its
+output; `tools/fs112_nb_checks.py`.
+
+**Quotation check (standing rule 5).**
+
+| quotation in the N2 brief | source | verdict |
+|---|---|---|
+| A2's §3.5 (the choice, alternative, why, confidence, default) | `plans/POROS-2026-09-27-fs112-competition.md` §3.5 | **not checkable**: the record is fenced from me; taken as the owner quotes it |
+| "N112-END assumes N4-STUCK's structure, which FLANK's failure removes at horn bound ±1" (the brief's summary of NB) | NB §2.2 ("NB-END (a conditional on that structure) does not reach it"), §2.3 #1 | faithful to NB's text (the brief's own words, not in quotation marks) |
+| N's l. 231, "do not exist in the arc's interior" | this record l. 231 | exact |
+| C-UA-CHAIN's "each unit arc forces a further unit arc … at its end vertices" | `data/fs112/claims.md` §6: "each unit arc forces a further unit arc (at its end vertices, or on the unit circles of its centre's partners)" | exact as an ellipsis quotation; the elided parenthesis also names the partners' circles |
+| "search for a finite graph is out. It would be huge, not feasible." | `CLAUDE.md` § Toolchain (via claims §5.4) | exact |
+
+**What N2 inherits, fixed (two minds where NB agreed):** N112-U1 (with NB's precision: the outer tile's first-order shadow *contains* the open facing
+cone of width `π + ℓ`, equality when `cl T_out ∩ ω(P) = ᾱ`), SIX, NB4′, L60, LOCK, the three-colour merge (NB-MERGE3), BEND on compact sub-arcs of
+`int α`. **Open, and N2's aim (A2 §3.5 item 1):** RED at the end vertices; NB-ISO's isolated inner contacts at `P + 2e_{w₀}` (N's l. 231 is FALSE as
+NB shows; I concede it: an inner-colour tile touching `B̄(P, 2)` only at a corner `P + 2e_{w₀}` is at distance `> 1` from `T_in` and satisfies N-E0);
+RED's termination with stub accumulation; FLANK's `κ = ±1` exception and END's scope (divergence 1′).
+
+## Stage N2-1 — SAVED
