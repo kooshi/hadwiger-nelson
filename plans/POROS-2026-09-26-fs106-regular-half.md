@@ -241,3 +241,66 @@ hunch: cusp-is-the-third-configuration
 **Theorems this stage proved** (one mind each, [hand]): A7 (the density form of V-2.2 fails, by cusp junctions); A8a (holes of radius < ε/2
 are invisible to Voronov's circle step); A8b (V-2.2 in the complement of a small defect fails; breaking Voronov's proof costs `O(ε²)` per
 unit area); A9 (the second-order test). A3 is withdrawn as new: it is D1.
+
+## Stage 4 — SAVED (wave 1: FS106-V against FS106-VB; stage 6 quote check)
+
+**Read.** `plans/FS106-VB-verification.md` in full (stages 1–5), and `plans/FS106-V-verification.md` §2.1–§3.3 (stages 1–3). V worked
+sighted; VB worked blind.
+
+**Agreements.** Each was reached independently; each is one mind per side.
+- Voronov: every claim is TRUE after local repairs, and the two found the same repairs.
+  - Lemma 2.2's limit is taken after the hole fills. The repair for both is the chain of nested hulls with no recolouring.
+  - Prop. 4.1's sign is reversed, and a swap must be excluded.
+  - The bicycle needs `α < ε/2`, and the arc identification needs an argument (homotopy or additivity).
+  - Lemma 6.1: "latter" should read "former", and the intermediate-value step needs writing out.
+  - Prop. 3.3: "equal to 1" should read "greater than 1".
+  - Prop. 3.4: recolour only the arcs.
+  - Obs. 2.2 holds with the open band.
+- C-CS-1 and C-CS-2 are TRUE: closedness is used once.
+- S–V: SV-L1, SV-C2 and SV-C3 are TRUE.
+  - Lemma 1's printed proof uses Obs. 1 (`x`'s own colour). Both give region-only proofs from Condition 5.
+  - Both find that Lemma 1 is what replaces the band in Prop. 12: it excludes the swap.
+  - Both place Condition 6 at Props. 9–10 (the bowtie).
+- TW-81: no proof is printed, and the constant is π/3.
+
+**Divergences.** Each is labelled as a real gap or a mismatch of statement or scope.
+1. **Prop. 8 and Obs. 1 (a real gap for SV-2 as printed).**
+   - VB grades it a GAP. The WLOG of Obs. 1 is unproved, and VB built a local counter-configuration.
+   - V grades it TRUE with two repairs. One repair is the runs of sectors, a second defect VB missed. V also notes that case 2 of Prop. 7
+     uses Obs. 1, and that a region-only variant must also recolour the old boundary segments inside the tip. That variant is unwritten.
+   - The gap closes once it is written: a region-only proof also proves the everywhere form.
+2. **SV-L4 (a real gap for SV-1; not for SV-2).**
+   - Both find the last step unargued, and both repair it by hole fills, which are valid at exact distance for maps.
+   - Only V finds step (a): "a trichromatic point within 1" fails as argued under Condition 6 alone, when bichromatic vertices of degree
+     ≥ 4 occur. VB accepted it as "straightforward".
+3. **Prop. 3.4 (a mismatch in diagnosis, same repair).** VB says the conclusion is false for the band. V says the hypothesis is unsatisfiable.
+   Both can hold at once.
+4. **V-1.2 (a mismatch of scope).** V's R8(iii): the theorem is stated for every 3-colouring, but the proof assumes finitely many bichromatic
+   points; V repairs it by discretizing each circle. VB verified only the use V-1.1 makes of it.
+5. **Row 40 (statement).** V: V-1.3 alone discharges row 40, because the cells are closed. VB: "the S–V half is not discharged". VB's
+   sentence is true, but V's reading makes it moot.
+
+**The two SV-L3 GAPs are one gap.** Both sit at the same step: the three-curve construction taken from Prop. 13 and Fig. 5.
+- VB: the construction is unproved.
+- V localizes it:
+  - below √3 the construction holds, repaired by paths;
+  - at √3 it degenerates [hand];
+  - beyond √3 the relation graph is a bipartite 4-cycle [measured, float], so the printed figure cannot exist there.
+- Both name the same repair route: Voronov's bicycle run on the curves `γ(u₁), γ(u₂)`. V sketched it; its transversality is unwritten.
+- The gap is load-bearing, because SV-L4's pair ranges over all of `(1, 2)`.
+
+**Quote check** (VB's stage 6 item, against `plans/FS103-M-derivation.md` §3.1):
+- I-D1 and I-D2 are verbatim.
+- I-D4 is verbatim, but its "…" drops the sentence defining `supp S_j`. VB used the source's meaning. I propose restoring that definition
+  inside the quotation.
+- D-SLACK uses the closed band where I-D4 uses the open one. This is harmless.
+- I-CE is verbatim against D5. I also checked it against the Currie–Eggleton PDF: the "H … χ(G)" inconsistency is in the paper.
+- D-NF's "held" sentence is the list's own wording (D1 at θ = 1), not a quotation. It is correct.
+- I-D1 now has a blind second mind (VB), so its grade can read two minds.
+
+**Hunches, read against wave 1 (not scored — neither record decides them):**
+- `ae-polygon-holds`: supported. V finds every S–V step region-only, or with a region-only version.
+- `tangent-2.2-names-SV-conditions`: supported. Condition 6 enters only at Props. 9–10. Without Condition 5, Lemma 1's leftover
+  configuration is V's "each boundary through `x` contains an arc of `ω(y)`", which is A9's borderline.
+- `bicycle-tight-is-3-colourable`: supported in basis. VB's control 3 finds that the step which dies without the band is the "no
+  simultaneous change" of Prop. 4.1.
