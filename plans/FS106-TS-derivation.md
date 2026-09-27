@@ -303,3 +303,14 @@ tables of §§2–4. Not read: `data/fs106/fs106-tq/`.*
 4. **I-D1 now has three checks**: FS103-M's D1, FS106-VB's blind second mind, TQ-CORE (sighted). Every D-NF step here rests on it.
 
 ## Stage 6 — SAVED
+
+## Proposed edits for the close (I edit none of these files)
+
+- `BIBLIOGRAPHY.md` `[Thomassen1999]`: "text held (`library/papers/Thomassen-1999-…txt`); pp. 849–852 read 2026-09-27 (FS106-TS): definitions, Theorem 1's
+  proof (clique step checked, 2-separator surgery read); Lemma 1's proof not re-derived". `[SokolovVoronov2025]`: Props. 1–10, Lemma 2 re-read for
+  the unit-arc steps (FS106-TS).
+- `plans/FS106-V-verification.md`'s open SV-L4 (a) step is closed by TS-C/TS-T (this record §2.4) — for the close's SV-1 line.
+- `plans/FS106-TQ-derivation.md` §4.5 item 5: add "with null boundaries" after C-AE-Q2 (stage 6 item 1).
+- FS-107's hand-over (plan §5.4): R's targets gain [G1] (C5), [G2], [G3], C-T-L1b's two steps, C-T-TRIb's hull step, C-T-BIKE; W's constraints gain
+  TS-L1, TS-C, TS-C′, TS-U (a six-colouring must respect them) and C-T-TAN's exceptional set (a wild six-colouring must put its disjoint-multicolour
+  pairs at tangent interfaces, bowties, cusps or weak-* blow-ups).
