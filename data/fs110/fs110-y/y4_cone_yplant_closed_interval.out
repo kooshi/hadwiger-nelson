@@ -1,0 +1,33 @@
+== fragment WC: 15 tiles, 30 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[1.000000, 1.120305]
+   colour 1  N1   h-   REJECT range ~[1.000000, 1.120305]
+   colour 1  S1   h+   REJECT range ~[1.000000, 1.120305]
+   colour 1  S1   h-   REJECT range ~[1.000000, 1.120305]
+   REJECTED PAIRS: [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+== fragment WC1: 14 tiles, 26 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[1.000000, 1.120305]
+   colour 1  S1   h+   REJECT range ~[1.000000, 1.120305]
+   REJECTED PAIRS: [('N1', 'h+'), ('S1', 'h+')]
+== fragment WCEQ: 15 tiles, 30 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[1.000000, 1.119657]
+   colour 1  N1   h-   REJECT range ~[1.000000, 1.119657]
+   colour 1  S1   h+   REJECT range ~[1.000000, 1.119657]
+   colour 1  S1   h-   REJECT range ~[1.000000, 1.119657]
+   REJECTED PAIRS: [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+== fragment WCH: 19 tiles, 40 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[1.000000, 1.120305]
+   colour 1  N1   h-   REJECT range ~[1.000000, 1.120305]
+   colour 1  S1   h+   REJECT range ~[1.000000, 1.120305]
+   colour 1  S1   h-   REJECT range ~[1.000000, 1.120305]
+   colour 2  v2   xS+  REJECT range ~[1.000000, 1.120481]
+   colour 2  v2   xS-  REJECT range ~[1.000000, 1.120481]
+   colour 3  v3   yN+  REJECT range ~[1.000000, 1.120481]
+   colour 3  v3   yN-  REJECT range ~[1.000000, 1.120481]
+   REJECTED PAIRS: [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-'), ('v2', 'xS+'), ('v2', 'xS-'), ('v3', 'yN+'), ('v3', 'yN-')]
+== fragment WC1H: 16 tiles, 30 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[1.000000, 1.120481]
+   colour 1  S1   h+   REJECT range ~[1.000000, 1.120481]
+   colour 2  v2   xS   REJECT range ~[1.000000, 1.216553]
+   colour 3  v3   yN   REJECT range ~[1.000000, 1.216553]
+   REJECTED PAIRS: [('N1', 'h+'), ('S1', 'h+'), ('v2', 'xS'), ('v3', 'yN')]
+PLANT None YPLANT closed_interval SOME REJECT

@@ -1,0 +1,5 @@
+== fragment WC1H: 16 tiles, 30 same-colour pairs (self included): REJECT
+   colour 2  v2   xS   REJECT range ~[0.943964, 1.216553]
+   colour 3  v3   yN   REJECT range ~[0.943964, 1.216553]
+   REJECTED PAIRS: [('v2', 'xS'), ('v3', 'yN')]
+PLANT wc1h_ylow YPLANT None SOME REJECT

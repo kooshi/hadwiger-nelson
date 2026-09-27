@@ -1,0 +1,5 @@
+== fragment WCEQ: 15 tiles, 30 same-colour pairs (self included): REJECT
+   colour 1  N1   h+   REJECT range ~[0.999167, 1.119657]
+   colour 1  N1   h-   REJECT range ~[0.999167, 1.119657]
+   REJECTED PAIRS: [('N1', 'h+'), ('N1', 'h-')]
+PLANT eq_steep YPLANT None SOME REJECT

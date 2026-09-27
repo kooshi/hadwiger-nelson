@@ -699,7 +699,21 @@ The print's: "If any boundary intersects with a circle of unit radius at a finit
 
 ### Theorems this phase proved (FS110-Y4)
 
-*(filled at each saved stage)*
+- **Y4-MU** — an out-type `c`-contact at `N = v + n` whose tile's boundary has curvature `λ > −1` there (away from `v`; `λ = ∞` at a corner)
+  forbids `c` near `v` exactly above `y = μ t²/2 + O(t³)`, `μ = λ/(1 + λ)`; so `c`-horns at `v` with bounding curvatures `κ₁ < κ₂` need
+  `−μ_S ≤ κ₁ < κ₂ ≤ μ_N` (one-sided, per side of `v`), with equality decided at the next order — [hand, one mind; sufficiency realised and
+  both directions planted, `tools/fs110_y_cone.py`], §11.2.
+- **Y4-WC** — N3-DEG's configuration is realisable locally under Condition 5 with every curvature strictly inside `(−1, 1)`, together with `v`'s
+  whole ring (nine pieces, `W = 3`): fragments `WC` (double horn, a trichromatic vertex of degree 4) and `WC1` (single horn, degree 3), ACCEPT,
+  tight; `WCEQ` realises the equality `κ = ±μ` with contact arcs — [tools, exact, for the members], §11.3.
+- **Y4-TIP** — a cone vertex loses its cone to a one-tile recolouring of a horn tip into `v`'s essential colour on either side unless that colour
+  reaches a zero-width window at the opposite contact (`R_y` at `N` for the colour `y` on `S′`'s side; `R_x` at `S′`); recolouring into a colour of
+  `v`'s ring is always blocked — [hand, one mind; checked on named fragments], §11.4.
+- **Y4-HARD** — tip-hard cones exist locally: fragments `WCH` (cusps of `y`, `x` at `N`, `S′`) and `WC1H` (`N`, `S′` ordinary trivalent vertices
+  `{1,3,4}`, `{1,2,5}`; only `v` degenerate) ACCEPT, tight, and every tip recolouring REJECTs for the derived reason — [tools, exact; derivation
+  hand, one mind], §11.4.
+- **Y4-D2** — at a tip-hard cone the two antipodal contacts `N`, `S′` never have the same closure type (`y ∈ P_cl(N) ∖ P_cl(S′)`); so G-CONE is
+  never an instance of the same-multicolour `d = 2` configuration G-d2 — [hand, one mind], §11.5.
 
 ### Fence log (FS110-Y4)
 
@@ -712,10 +726,123 @@ The print's: "If any boundary intersects with a circle of unit radius at a finit
 
 ### Would-have-searched-here log (FS110-Y4)
 
-- (none yet)
+- Fragment parameters (horn and out-tile curvatures, ring directions, window horns): a scan for an ACCEPT → each value derived first from
+  Y4-MU and the windows `R_x`, `R_y` with a stated margin, then checked once; no second value tried except where a slip is recorded (§11.3).
+- The recolouring moves: enumerating recolourings of the tiles about `v` → Y4-TIP's case split by the target colour.
 
 ## Stage 10 — SAVED (FS110-Y4): the pre-round answer; Condition 5
 
 The pre-round answer and the Condition-5 statement above, sent to "main" before this stage was saved. Retractions are counted from here on.
 
 ## Stage 10 — SAVED (FS110-Y4)
+
+## Stage 11 — SAVED (FS110-Y4): Y4-MU; the cone realised with its ring; soft and tip-hard cones; the contacts' types
+
+### 11.1 The terms, as I read them (N3's definitions are fenced)
+
+Coordinates `v = 0`, `a = (1, 0)`, `n = (0, 1)`, `N = v + n`, `S′ = v − n`, `c = 1`. **A `c`-horn along `+a`**: a zero-angle corner of a
+`c`-tile at `v` between two arcs tangent to `a`, `y = κ₁t²/2` below and `y = κ₂t²/2` above (`κ₁ < κ₂`). **An out-type contact at `N`**: a `c`-tile
+`τ` with `N ∈ cl τ`, lying outside `D(v)` near `N` (all cross-distances to `v`'s `c`-tiles `≥ 1`: outer, tight at `(v, N)`). **`D_c(v)`**: I do
+not hold N3's definition; I read `int D_c(v) = ∅` as "no direction at `v` admits a `c`-sector of positive angle", which is what Woodall's step 3
+(`[Woodall1973]` Thm 6, step 3, read here: "unless X and Y are completely contained within the "cone" outside two unit discs touching each other
+at P") excludes. **Hard**: N3-DEG's two bullets, in my brief's words; §11.4 separates *soft* cones (removable by one tile's recolouring) from
+*tip-hard* ones, and asks the owner which N3-RED counts.
+
+### 11.2 Y4-MU — what an out-type contact forbids [hand, one mind]
+
+Let `τ` be an out-type `c`-contact at `N` whose boundary on the side `t > 0` is an arc through `N` tangent to `a` with curvature `λ > −1`
+(positive: bending away from `v`), `τ` on the far side; a corner of `τ` at `N` with both rays strictly above the tangent line counts as `λ = ∞`.
+- *Sufficiency.* If `τ ∩ B(N, r₀) ⊆ D̄(N + n/λ, 1/λ)` (`λ > 0`), then by the triangle inequality every `z` outside the open disc of radius
+  `1 + 1/λ = 1/μ` about `N + n/λ` (tangent to the `a`-axis at `v`) has `dist(z, τ ∩ B(N, r₀)) ≥ 1`. At a corner the nearest point of `τ` to `z`
+  near `v` is `N` itself, so the allowed region is the exterior of `D(N)`: `μ = 1`.
+- *Necessity.* The curve at distance 1 from `Y = λT²/2` on `v`'s side is the parallel curve `y = μt²/2 + O(t³)`, `μ = λ/(1 + λ)` (radius
+  `1/λ + 1`). A point `z = (t, y)`, `t > 0`, above it is at distance `< 1` from interior points of `τ` near `N` and `> 1` from others; `int τ` is
+  connected, so `z` is at distance exactly 1 from an interior point of `τ`, and `z` is not an interior point of a `c`-tile (A-EXACT's first clause).
+- *Hence*, per side: a `c`-horn along `+a` needs `κ₂ ≤ μ(λ_N⁺)` and `κ₁ ≥ −μ(λ_S⁺)`; along `−a` the same with the contacts' other sides.
+  `μ < 1` for finite `λ` and `μ = 1` at a corner, so `κ₂ ≤ 1`, and `κ₂ = 1` needs a horn boundary of radius 1 (excluded by Condition 5): N3-DEG's
+  strict `(−1, 1)`, derived. `μ → −∞` as `λ → −1` (a unit arc of `ω(v)`). **Invariant (X13):** `μ(λ_N) + μ(λ_S) > 0` on each side carrying a
+  horn, so at least one of the two contacts is a strictly convex boundary point or a corner of its `c`-tile.
+
+### 11.3 The cone, realised with its ring [tools, exact, for the members; the formulas hand, one mind]
+
+`tools/fs110_y_cone.py` (imports `tools/fs110_y_check.py`, unedited; data rational). Every same-colour pair is generated from the colour map, each
+tile against itself included. Outputs `data/fs110/fs110-y/y4_cone_*.out`.
+
+| fragment | formula | symmetry | pairs | verdict |
+|---|---|---|---|---|
+| **WC** | `v`: horns `h±` (colour 1) between the circles of radius 2 about `(0, ±2)` (`κ₂ = 1/2`, `κ₁ = −1/2`), length `≈ 0.1`; colour 2 above, 3 below, in the box `[−1/10, 1/10]²`: closure type `{1,2,3}`, essential `{2,3}`, degree 4. `N`: colour-1 tile above the arc of radius `1/2` about `(0, 3/2)` (`λ = 2`, `μ = 2/3`). `S′`: its mirror. **`v`'s ring**: the band `9/10 ≤ r ≤ 11/10`, nine pieces cut at the directions `2 atan t`, `t = ±3/17, ±4/7, ±6/5, ±11/4` and `180°`, coloured `6,5,4,6,5,4,6,5,4` counter-clockwise from the piece about `0°` (`W = 3`); the piece about `90°` (colour 4) wraps `N`'s tile, the piece about `270°` (colour 5) wraps `S′`'s | `y ↦ −y` with `(2 3)(4 5)` | 30 | **ACCEPT**, tight (4 contacts at exactly 1) |
+| **WC1** | WC with `h−` removed, the `2\|3` boundary along `−a`: degree 3 | none | 26 | **ACCEPT**, tight |
+| **WCEQ** | horns between the circles of radius 3 about `(0, ±3)` (`κ = ±1/3`); contacts bounded by the arcs of radius 2 about `(0, ±3)` (`λ = 1/2`, `μ = 1/3`): **equality**; each horn arc and its contact's arc are concentric at distance exactly 1 (contact arcs) | `y ↦ −y` | 30 | **ACCEPT**, tight |
+
+`N` and `S′` are edge points of types `{1, 4}` and `{1, 5}`: different. No arc anywhere has radius 1 (radii 2, 3, 1/2, 9/10, 11/10); no vertex
+carries four colours; no two vertices within distance `< 2` have complementary types. Float geometry guard: no overlaps, discs of radius `0.05` about
+`v`, `N`, `S′` and the band `0.93 ≤ r ≤ 1.07` covered (4,917 samples each).
+
+**Planted faults, each REJECT for its own reason:** `wc_flat` (both contacts' arcs of radius 2 about `(0, ±3)`: `μ = 1/3 < 1/2`) → the four
+horn–contact pairs, minimum `0.99917`; `wc_fat` (`h+`'s upper boundary a segment of slope `1/10`: a colour-1 sector of positive angle) → `(N1,
+h+)` only; `wc_col2` (the ring piece at `90°` coloured 2) → `(r2, v2)` (A-CIRC at `v`); `eq_steep` (WCEQ's upper horn arcs of radius 2: `1/2 >
+1/3`) → the `N` side only. The checker's `closed_interval` plant REJECTs exactly the exact contacts (tightness certified); `noself` and
+`endpoints_only` cannot fire here (every diameter `< 1`; no extreme only at interior points), so they test nothing on these fragments; `cw_arcs`
+fires broadly. **A slip of mine, found by the checker:** WCEQ as first built kept `WC`'s lower horn arc (`κ₁ = −1/2`) against `μ_S = 1/3` and
+REJECTed at `(S1, h±)`, range from `0.99917` — the inequality of §11.2 on the `S′` side, for its own reason. Repaired by the derived lower arc
+(radius 3 about `(0, −3)`); no other value tried.
+
+### 11.4 Soft and tip-hard cones (Y4-TIP, Y4-HARD) [hand, one mind; tools, exact, on the named fragments]
+
+**The move.** Recolour the tip `Θ = h+ ∩ B(v, t₀)` into a colour `j`. It is legal iff no interior point of a `j`-tile lies at distance exactly 1
+from an interior point of `Θ`. Let `x`, `y` be `v`'s essential colours on `N`'s and `S′`'s sides.
+- *`j` in `v`'s ring.* `Θ ⊕ S¹` is `ω(v)` translated by at most `t₀` along `a`: a band about `ω(v)` meeting every ring tile's interior off `±n`.
+  **Blocked** for every colour the ring uses (all three in a three-colour ring).
+- *`j = x`.* A point `q` off the directions `±n` has `ω(q)` crossing the horn transversally, hence meeting `x`'s interior: not `x` (A-EXACT
+  against `v`'s `x`-tile; for `q ∈ B_v(s)` also by A-EXACT's second clause). Near `N`, `ω(q)` curves up through the tip into `x` (`κ₂ < 1`): not
+  `x`. Near `S′`, with `q = S′ + (T, Y)` (`Y` toward `v`), `ω(q)` curves down: it misses `x` iff `Y ≤ κ₂T²/(2(1 + κ₂))` and enters the tip iff
+  `Y > κ₁T²/(2(1 + κ₁))` (maximising `y(t) − boundary(t)` over `t`), with `T = O(t₀)`. So the recolouring is **blocked for every `t₀` iff
+  `x`-interior points accumulate at `S′` inside `R_x = {κ₁T²/(2(1 + κ₁)) < Y ≤ κ₂T²/(2(1 + κ₂))}`** (on each side carrying a horn).
+- *`j = y`.* The mirror: blocked for every `t₀` iff `y`-interior points accumulate at `N` inside `R_y = {κ₁T²/(2(1 − κ₁)) ≤ Y < κ₂T²/(2(1 −
+  κ₂))}` (`Y` away from `v`).
+- *Consistency.* `R_y` lies strictly between `ω(v)` (`Y = −T²/2`) and every admissible contact boundary (`Y = λT²/2` with `λ/(1 + λ) ≥ κ₂`, i.e.
+  `λ ≥ κ₂/(1 − κ₂)`); at the extreme the two coincide, which needs `λ = 1`, a unit arc, exactly when `κ₂ = 1/2`.
+
+**So N3-DEG's two bullets give *soft* cones:** in `WC` the tips recolour into 2 or 3 legally (tip tests ACCEPT) and into 4 not (REJECT against
+three ring pieces). **A *tip-hard* cone carries `y` at `N` and `x` at `S′`, each reaching a zero-width window tangent to `a`.** Both kinds are
+realised:
+
+| fragment | formula | pairs | verdict | tip → 2 | tip → 3 | tip → 4 |
+|---|---|---|---|---|---|---|
+| **WC** | §11.3 | 30 | ACCEPT | ACCEPT (soft) | ACCEPT (soft) | REJECT (ring) |
+| **WCH** | WC plus a double colour-3 horn at `N` in `R_y = [−T²/6, T²/2)` (boundaries: circle of radius 2 about `(0, 3)`, `Y ≈ T²/4`; radius 4 about `(0, −3)`, `Y ≈ −T²/8`), wrapped by the ring piece; its mirror in colour 2 at `S′`. `N`: `{1, 3, 4}`, `S′`: `{1, 2, 5}` | 40 | **ACCEPT**, tight | REJECT at `(tip, xS+)` | REJECT at `(tip, yN+)` | — |
+| **WC1H** | the single horn; at `N` the colour-1 contact is the sector `(60°, 180°)` (a corner toward `h+`: `μ = 1`), colour 3 the sector `(0°, 60°)` with its lower ray along `+a` (inside `R_y`), the ring piece below `y = 1`; `S′` the mirror with `(2 3)(4 5)`. **`N` and `S′` ordinary trivalent vertices, all sectors essential; only `v` degenerate** | 30 | **ACCEPT**, tight | REJECT at `(tip, xS)` | REJECT at `(tip, yN)` | REJECT (ring) |
+
+Plants: `wch_ywide` (the colour-3 horns' lower boundary at `Y ≈ −T²/4`, below `R_y`) → `(v3, yN±)`, `(v2, xS±)`; `wc1h_ylow` (colour 3 at `N`
+turned to reach `−30°`, below the tangent line) → `(v3, yN)`, `(v2, xS)`. Both for their own reason: colour `y` below `R_y` at `N` sees `v`'s
+`y`-tile at distance exactly 1.
+
+### 11.5 What every hard cone carries (X13; G79's flip), and W-4 on the construction side
+
+**Carried by every cone** (N3-DEG's bullets): the curvature sandwich of Y4-MU (one contact at least strictly convex or a corner); `ω(v)` near
+`N`, `S′` in colours outside `P_cl(v)`; `ω(N)` near `v` in `x` on both sides and `ω(S′)` in `y` (so `x ∉ P_cl(N)`, `y ∉ P_cl(S′)`); `v`'s ring a
+three-colouring of a band about `ω(v)` (A-EXACT's `B_v`), pinched to one-sided regions at `N`, `S′`. **Carried in addition by a tip-hard cone:**
+`y ∈ P_cl(N)` and `x ∈ P_cl(S′)`, each reaching its window; so `P_cl(N) ⊇ {c, y, r_N}`, `P_cl(S′) ⊇ {c, x, r_S}` (`r` the ring colour there),
+`= ` by NB-4.
+
+**Y4-D2** [hand, one mind]: at a tip-hard cone `y ∈ P_cl(N)` and `y ∉ P_cl(S′)`, so the antipodal contacts never share a closure type: **G-CONE
+is not an instance of G-d2**, and no bicycle at `d = 2` about `N`, `S′` arises (their circles avoid different colour sets). At a soft cone the
+contacts may be two-colour edge points (WC: `{1, 4}`, `{1, 5}`).
+
+**W-4, construction side — YES locally at G-CONE** [tools, exact, for five members; hand, one mind, for the families]: a vertex whose colour `c`
+occurs only as cusp horns along `±a` with bounding curvatures strictly inside `(−1, 1)`, with out-type `c`-contacts at `v ± n`, occurs in a tight
+local fragment under Condition 5, with its whole ring, at most three colours per vertex and no close covering pair; tip-hard as well (WCH, WC1H).
+**A local fragment is not a map.** What a NO at G-CONE must use is therefore non-local. The places named for a construction (and for the proof
+side's aim), each where the fragments stop:
+1. the horn tile beyond the contacts' reach (the horn is squeezed into the cusp between the two parallel circles only while `|t|` is below the
+   contacts' half-widths; the `c`-tile must fatten after that, all its cross-distances to both contacts `≥ 1`);
+2. `v`'s ring closing (here `W = 3`, nine pieces with slack) together with the rings of `N` and `S′`, which pass through `v`;
+3. at a tip-hard cone, the contacts' own sectors: `N` carries `y`, which the next cone condition along the `n`-axis may cascade (at `WCH`'s `N`,
+   colour 3 is itself a cusp with an out-type contact at `N − n = v` only).
+G-d2 is not worked here (CB's circle-only reduction is fenced from me).
+
+**Pre-round answer, scored on my side only** (the proof side's programme is fenced): (a) nothing I derived forces `N`, `S′` to share a type
+(Y4-D2 forbids it at tip-hard cones); (b) every REJECT in this stage is explained by Y4-MU, A-CIRC or the windows, including my own WCEQ slip;
+(c) the ring closes (nine pieces). None of the three "what would show me wrong" items fired here. Retractions this round: none.
+
+## Stage 11 — SAVED (FS110-Y4)

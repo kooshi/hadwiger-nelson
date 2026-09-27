@@ -1,0 +1,6 @@
+== fragment WC: 15 tiles, 30 same-colour pairs (self included): ACCEPT
+== fragment WC1: 14 tiles, 26 same-colour pairs (self included): ACCEPT
+== fragment WCEQ: 15 tiles, 30 same-colour pairs (self included): ACCEPT
+== fragment WCH: 19 tiles, 40 same-colour pairs (self included): ACCEPT
+== fragment WC1H: 16 tiles, 30 same-colour pairs (self included): ACCEPT
+PLANT None YPLANT endpoints_only ALL ACCEPT
