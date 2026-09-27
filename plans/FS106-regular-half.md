@@ -846,3 +846,219 @@ claimed" and filed (FS106-PDEQ) with FS-107 as its home; the `d = 2` case, Wooda
 - A2: a numerical trace of eroded Parts tilings → FS-107's registered post-ban dial.
 
 ### Stage 3 — SAVED
+
+### Stage 4a — SAVED (drafts for the front-page job FS106-X: `LEDGER.md` and `CLAUDE.md`)
+
+**4.0 Row or addendum for TQ-EQ (inventory items 70, 78) — my decision, in four parts.**
+- **The choice:** a new row, **131**, for the stability form (FS106-EQ with SUP, EPS2, HIT, PIX, REM, COMP, LOCAL, STAB), with G21's scope in its
+  headline ("it moves no value"; the novelty over row 130 is the slack side and the periodic form); PD-EQ in its "Not claimed".
+- **The alternative weighed:** A2's addendum to row 130 (A2 §1a.5, QB §3.2: "the novelty of TQ-EQ over row 130 is modest").
+- **Why the row wins:** the owner's ruling (item 77) puts TQ-EQ's form into `CLAUDE.md` link 5 and FS-107's name, so the program now cites it by
+  address, and one home per fact wants that address to be a row whose headline *is* the statement, not the tail of a row about `χ_CP = χ_m⁰`. The
+  row also holds content row 130 does not: the slack side (S–V §9's hypothesis ⟺ `χ_m⁰ = 7`), the periodic grid form W builds, the bracket
+  `ε²/(6+ε)² ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)`, and two no-gos for proofs (TQ-HIT, the pixel lemma), which Kooshi counts as results. G21 is met by the
+  headline's scope sentence, not by hiding the row.
+- **Confidence: medium.** It would change if Kooshi rules that a reformulation is always an addendum; then row 131's text moves under row 130
+  unchanged, and row 132 becomes 131.
+
+**4.1 `LEDGER.md` § A — two new rows (131, 132) and row 40's correction.**
+
+Row 131:
+
+> | 131 | **The measurable question is a stability question. With no MR and no Voronov, for every `k`: `χ_m⁰(ℝ²) ≤ k` ⟺ `χ_CP(ℝ²) ≤ k` ⟺ `µ_k⁰ = 1` ⟺ `lim_{ε→0} µ_k(ε) = 1` ⟺ for every `δ > 0` there are `ε > 0` and a periodic partial `k`-colouring by half-open grid squares with no monochromatic pair at any distance in `[1 − ε, 1 + ε]`, leaving density at most `δ` uncovered — `µ_k(ε)` the largest upper density of `k` disjoint measurable classes whose monochromatic pairs in that band are null, `µ_k⁰` the same with null unit pairs. At six, `χ_m⁰(ℝ²) ≥ 7` ⟺ `lim µ₆(ε) < 1`: `[SokolovVoronov2025]` §9's hypothesis, read uniformly in `ε`, is `χ_m⁰ = 7`, and a refutation needs no wild set — it is a sequence of periodic grid colourings with vanishing holes, the wildness only in the limit. The tight and slack suprema coincide (`µ₆⁰ = lim µ₆(ε) = lim µ₆^per(ε)`, `µ₆^per(ε) = µ₆(ε)`, all attained). The hole gap: `ε²/(6+ε)² ≤ 1 − µ₆(ε) ≤ δ₆ + O(ε)`, the lower bound given `[Voronov2023]` Thm 1.3, the upper from `[Parts2020c]`'s tiling (`δ₆ = 1.430172·10⁻⁴`); "`µ₆(ε) < 1` for every `ε`" ⟺ Thm 1.1. Two no-gos for proofs: an argument counting only holes met by unit circles or bicycles proves at most `1 − µ₆(ε) ≳ ε` (strips of width `2ε` at spacing 2 are effective holes meeting every circle), and a trichromatic-point argument cannot see partial colourings (erosion leaves every coloured point of chromaticity 1 at vanishing cost). It moves no value: every bound held vanishes with `ε`; its novelty over row 130 is the slack side and the periodic form** (FS-106; FS106-EQ, SUP, EPS2, HIT, PIX, REM, COMP, LOCAL, STAB). **[hand; EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind (TQ; QB), EQ by a different route at its hard direction; its first equivalence is row 130's; "`µ₆(ε) < 1` ∀`ε` ⟺ V-1.1" one mind (QB); LOCAL over Parts [external]]** Mechanism: the circle measure is Rajchman (row 130's weak-* step), so a limit of near-colourings is a colouring after support selection; Voronov's contradiction is feature-local, so a stability proof must count a defect spread over positive measure (G82). **Not claimed:** any value; PD-EQ, the same equivalence counted in band pairs (A2, one mind, sketch); C-Q-LOCAL at `δ = δ₆` (GAP, likely TRUE). **Prior art:** not found in print as an equivalence (FS-106's gate; `[Voronov2023]`'s five citing works); S–V §9 prints the conditional and the order `S(ε) = Ω(ε²)`, unproved there; the compactness step of the `m₁(ℝ²)` literature not searched (a debt). | `plans/FS106-derivation.md` §4; `plans/FS106-TQ-derivation.md` §§2–4; `plans/FS106-QB-verification.md` §2; `tools/fs106_qb_rem_constants.py` | FS-106 (2026-09-27) |
+
+Row 132:
+
+> | 132 | **The regular half, verified and transferred almost everywhere. `[Voronov2023]` Thms 1.1–1.3 are proved by the print after local repairs (Lemma 2.2's limit step; Prop. 3.4's hypothesis), and Thm 1.3 uses closedness once, as compactness giving a band. Almost everywhere (open classes coloured; boundaries and null sets free): a measurable colouring with slack needs seven, given Thm 1.3 (its supports are closed and avoid the band); polygonal colourings need seven, and so do locally finite tilings by convex polygons (against `[Coulson2004]`'s six), except at one edge case, two same-multicolour points antipodal on the circle (`d = 2`); nice maps need seven (`[Thomassen1999]`'s proof reads no boundary colour); maps need six modulo Townsend's simplification (c), which `[Woodall1973]`'s steps 2, 3, 5 fill (in outline); closed classes are the tight question itself — six open sets avoiding distance 1 with dense union and closures with null unit pairs; `[SokolovVoronov2025]` Question 2 is a GAP at four named steps, the index method failing where a unit-arc interface faces a bowtie (complementary curves swap, `|ΔInd| = 2`). In print: S–V Thm 2 holds after three repairs (Observation 1 avoided; fills before Lemma 4; the same-multicolour distance), its weakest link Lemma 3 at `√3 ≤ d < 2` (a transplanted bicycle, a sketch); S–V Thm 1 is a GAP at Prop. 19's fills under Condition 6; `[Townsend1981]` prints no proof; maps need six by `[Woodall1973]` Thm 6 with its step 6 repaired by Townsend's lemma, and by Townsend's 1979 manuscript with its step (c) filled by Woodall's** (FS-106; FS106-V23, CS, ROW40, SVL3, SV2, SV1, SVDEF, TW, WO, TH, PR, CO, AE-SLACK, AE-CLOSED, AE-POLY, AE-CONV, AE-NICE, AE-MAP6, AE-FA, AE-Q2, TS-U, TS-L1, TS-C, TS-T, DIAM, IND, IND-X, C5). **[hand; Voronov's theorems and the closed-set step two minds, one blind (V; VB); the polygon chain and the convex reduction two, one blind (the V line; SB), Lemma 3's repair one, a sketch; slack two (V; QB's fill lemma); nice maps two readings; maps-six, Townsend's manuscript and Woodall one mind, the fill in outline; TS-U, TS-L1, TS-C, TS-T, C5 and the no-swap bound two, one blind; the swap one mind with a checker]** Mechanism: every regular theorem reads colours only through open regions, except three printed steps, each replaced region-only; hole-filling (a one-coloured connected region avoiding distance 1 has diameter at most 1) is the map line's common tool, and it fails exactly at bichromatic vertices of degree ≥ 4. **Not claimed:** `d = 2`; S–V Thm 1; Question 2; C-AE-CLOSED; the published `[Townsend2005]` (unheld; the manuscript read is Townsend's 1979 text). **Prior art:** the everywhere-proper theorems are Voronov's, Sokolov–Voronov's, Woodall's, Townsend's, Thomassen's and Coulson's; no almost-everywhere form of any found in print (FS-106's gate); the repairs not in print. | `plans/FS106-derivation.md` §§1–3; `plans/FS106-V-verification.md`; `plans/FS106-VB-verification.md`; `plans/FS106-TS-derivation.md`; `plans/FS106-SB-verification.md`; `tools/fs106_sb_c5_check.py` | FS-106 (2026-09-27) |
+
+Row 40, in place — replace "The whole family is ≥ 7 at every scale **conditional on** `[Voronov2023]` Thm 1.1 and `[SokolovVoronov2025]` — external
+theorems, read here (2026-09-08) but not re-derived;" with:
+
+> The whole family is ≥ 7 at every scale by `[Voronov2023]` Thm 1.3 applied to the closed colour classes — its printed proof verified at FS-106 (two minds, one blind; local repairs, none changing its statement; an unrefereed preprint); `[SokolovVoronov2025]` and the band are not used (FS106-ROW40);
+
+**4.2 `LEDGER.md` § B — 45 lines** (after FS-105's block; ids match `plans/FS106-derivation.md`; kernel column from each entry).
+
+| id | milestone | the theorem, in one line | grade | proof | kernel |
+|---|---|---|---|---|---|
+| FS106-V23 | row 132 | `[Voronov2023]` Thms 1.1–1.3 proved by the print after local repairs | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-V23 | stub (FS-101) |
+| FS106-CS | row 132 | Thm 1.3 uses closedness once (compactness gives a band); Thm 1.3 ⟺ no band-proper six-colouring of `U₃(0)` | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-CS | stub (row 41's lemma) |
+| FS106-ROW40 | row 40 | the cell family's ≥ 7 needs only Thm 1.3 on closed classes | hand, one mind | `plans/FS106-derivation.md` FS106-ROW40 | declined |
+| FS106-SVL3 | row 132 | S–V Lemma 3's print covers `1 < d < √3`; the transplanted bicycle covers `1 ≤ d < 2` | hand; gap two minds, repair one (sketch) | `plans/FS106-derivation.md` FS106-SVL3 | declined |
+| FS106-SV2 | row 132 | polygonal colourings need seven: Prop. 7/8 region-only → fills → Lemma 4; except `d = 2` | hand, chain two minds, one blind | `plans/FS106-derivation.md` FS106-SV2 | stub (FS-101) |
+| FS106-SV1 | row 132 | S–V Thm 1 GAP at Prop. 19's fills under Condition 6 | hand, one mind | `plans/FS106-derivation.md` FS106-SV1 | declined |
+| FS106-SVDEF | row 132 | S–V's printed defects and repairs (Obs. 1, Prop. 16, Prop. 12's swap, the appendix) | hand, one mind each; A12 two, one blind | `plans/FS106-derivation.md` FS106-SVDEF | declined |
+| FS106-TW | row 132 | Townsend 1981: no proof, lemma TRUE; 1979 manuscript's Thm 5 GAP at (c), Woodall fills it | hand; one mind; fill in outline | `plans/FS106-derivation.md` FS106-TW | declined |
+| FS106-WO | row 132 | Woodall 1973 Thm 6 step 6 GAP, repaired by Townsend's ⅓π lemma | hand, one mind, outline | `plans/FS106-derivation.md` FS106-WO | declined |
+| FS106-TH | row 132 | Thomassen 1999 Thm 1 holds in the plane; for locally finite `G` by Thm 1.3 | hand, one mind + a partial reading | `plans/FS106-derivation.md` FS106-TH | declined |
+| FS106-PR | row 131 | Pritikin 1998's six-colouring of all but density ≈ 1.61·10⁻⁴ is correct | hand, one mind | `plans/FS106-derivation.md` FS106-PR | declined |
+| FS106-CO | row 132 | Coulson 2004's printed theorem is six, tile-based, with an area bound | hand + reading | `plans/FS106-derivation.md` FS106-CO | declined |
+| FS106-AE-SLACK | row 132 | a measurable colouring with slack needs seven, given Thm 1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-SLACK | stub (over V-1.3) |
+| FS106-AE-CLOSED | row 132 | closed classes a.e. ⟺ essentially closed a.e.-proper six-colourings of `U₃(0)`; open | hand, one mind | `plans/FS106-derivation.md` FS106-AE-CLOSED | declined |
+| FS106-AE-POLY | row 132 | polygonal six-colourings are never a.e.-proper, bar `d = 2` | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-POLY | stub (with SV-2) |
+| FS106-AE-CONV | row 132 | locally finite convex tilings need seven a.e. (merge, fill, polygons) | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-AE-CONV | declined |
+| FS106-AE-NICE | row 132 | nice colourings with boundaries uncoloured need seven | hand, two readings | `plans/FS106-derivation.md` FS106-AE-NICE | declined |
+| FS106-AE-MAP6 | row 132 | five-colourings of maps are never a.e.-proper, modulo Woodall's fill of Townsend's (c) | hand, one mind per link | `plans/FS106-derivation.md` FS106-AE-MAP6 | declined |
+| FS106-AE-FA | row 132 | S–V Thm 1 a.e. is a GAP exactly at SV-1's step | hand, one mind | `plans/FS106-derivation.md` FS106-AE-FA | declined |
+| FS106-AE-Q2 | row 132 | S–V Question 2 a.e. and as posed: GAP at [G1]–[G4] | hand, one mind per step | `plans/FS106-derivation.md` FS106-AE-Q2 | declined |
+| FS106-TS-U | row 132 | the unit-arc lemma (exact form) | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-U | declined |
+| FS106-TS-L1 | row 132 | S–V Lemma 1 a.e. with no Condition 5 or 6 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-L1 | declined |
+| FS106-TS-C | row 132 | chains of same-colour regions have diameter ≤ 1 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-C | declined |
+| FS106-TS-C2 | row 131 | a support piece with `H¹`-null zero-density points has diameter ≤ 1 | hand, one mind | `plans/FS106-derivation.md` FS106-TS-C2 | declined |
+| FS106-TS-T | row 132 | a point of chromaticity ≥ 3 within `1/√2 + ε` of every point | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-TS-T | declined |
+| FS106-DIAM | row 132 | connected sets avoiding distance 1 have diameter ≤ 1 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-DIAM | stub (a first leaf) |
+| FS106-L | row 132 | lemma (L): a change point's unit circle avoids the set | hand, one mind | `plans/FS106-derivation.md` FS106-L | declined |
+| FS106-C5 | row 132 | a local configuration refuting S–V Prop. 5 without Condition 5 | hand + measured, two minds, one blind | `plans/FS106-derivation.md` FS106-C5 | declined |
+| FS106-IND | row 132 | the index of a density trace, and the no-swap bound `|ΔInd| ≤ 1`; the "iff" FALSE | hand; bound two minds, one blind | `plans/FS106-derivation.md` FS106-IND | declined |
+| FS106-IND-X | row 132 | at a unit-arc interface facing a bowtie, complementary curves swap, `|ΔInd| = 2` | hand + measured, one mind | `plans/FS106-derivation.md` FS106-IND-X | declined |
+| FS106-TAN | row 131 | the tangent form of Prop. 2.2; fails at cones, cusps, weak-* limits | hand, one mind | `plans/FS106-derivation.md` FS106-TAN | declined |
+| FS106-L1 | row 131 | C-T-L1a TRUE; C-T-L1b TRUE map-like, GAP in general | hand, one mind | `plans/FS106-derivation.md` FS106-L1 | declined |
+| FS106-TRI | row 131 | C-T-TRIa FALSE (cusped hexagons); C-T-TRIb GAP | hand, two minds (FALSE) | `plans/FS106-derivation.md` FS106-TRI | declined |
+| FS106-BIKE | row 131 | the tight bicycle needs three colours; three by arcs open | hand, one mind | `plans/FS106-derivation.md` FS106-BIKE | declined |
+| FS106-CHR | row 131 | `|P(x)| ≥ 5` only on a null set | hand, one mind | `plans/FS106-derivation.md` FS106-CHR | declined |
+| FS106-EQ | row 131 | `χ_m⁰ ≤ k` ⟺ `lim µ_k(ε) = 1` ⟺ periodic grid slack near-colourings; no MR, no Voronov | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-EQ | stub (after row 130's M1) |
+| FS106-SUP | row 131 | tight and slack suprema coincide; `µ₆^per(ε) = µ₆(ε)`; attained | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-SUP | declined |
+| FS106-EPS2 | row 131 | `1 − µ₆(ε) ≥ ε²/(6+ε)²`, given Thm 1.3 | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-EPS2 | declined |
+| FS106-HIT | row 131 | hitting-form proofs are capped at `O(ε)` (strips, density `ε`) | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-HIT | declined |
+| FS106-PIX | row 131 | the pixel lemma: partial colourings can be made chromaticity 1 at vanishing cost | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-PIX | declined |
+| FS106-REM | row 131 | kept points of one colour avoid the band; `P(0 not kept) → 0` for CP colourings | hand, two minds, one blind | `plans/FS106-derivation.md` FS106-REM | declined |
+| FS106-COMP | row 131 | near-covers give colourings; "`µ₆(ε) < 1` ∀`ε`" ⟺ V-1.1 | hand; two minds (the equivalence one) | `plans/FS106-derivation.md` FS106-COMP | declined |
+| FS106-LOCAL | row 131 | band-proper chromaticity-1 colourings of density `> 1 − δ` for `δ > δ₆` | hand, two minds, one blind; Parts external | `plans/FS106-derivation.md` FS106-LOCAL | declined |
+| FS106-STAB | row 131 | C-Q-STAB is `χ_m⁰ ≥ 7` itself; its exact form "some `R`" | hand, one mind | `plans/FS106-derivation.md` FS106-STAB | declined |
+| FS106-SYN | row 131 | TS's gaps are regularity gaps, TQ's the hole gap; TQ-EQ trades one for the other | derived, one mind | `plans/FS106-derivation.md` FS106-SYN | declined |
+| FS106-PDEQ | row 131 | PD-EQ: `χ_m⁰ ≥ 7` ⟺ a uniform band-pair defect (sketch; not claimed) | hand, sketch, one mind | `plans/FS106-derivation.md` FS106-PDEQ | declined |
+
+**4.3 `CLAUDE.md` drafts, each in current-state wording** (the front page applies them in place; old text from `CLAUDE.md` at 304,245 bytes).
+
+*D-C1 — § The aim, link 4 (replaces "4. **Regular colourings need seven in print.** … and Thm 1.1 applies."):*
+
+<!--D-C1-->
+4. **Regular colourings need seven, verified and almost everywhere** (row 132). Closed colour classes need seven (`[Voronov2023]` Thm 1.3: six
+   closed sets covering a disc of radius 3 realize the unit distance; closedness enters once, as compactness giving a band), and so does any
+   colouring with slack (Thm 1.1) — proofs repaired locally, the paper an unrefereed preprint. Almost everywhere, boundaries free: slack needs
+   seven; polygons and locally finite convex tilings need seven bar one edge case (`d = 2`), `[SokolovVoronov2025]` repaired, its map theorem a
+   GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing
+   the other (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound.
+<!--/D-C1-->
+
+*D-C2 — § The aim, link 5 (the owner's ruling, item 77; replaces "5. **So, given MR, Hadwiger–Nelson is one question: …** … since 1950."):*
+
+<!--D-C2-->
+5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?** With no MR, `χ_m⁰(ℝ²) ≥ 7` iff six classes, each
+   free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as `ε → 0` (row 131;
+   `[SokolovVoronov2025]` §9's hypothesis). A refutation needs no wild set: it is a sequence of periodic grid-square colourings, wild only in the
+   limit, whose normal form FS-103 holds. Both answers decide the problem. *No* — Voronov's contradiction survives a free colour of vanishing
+   density — gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7` given MR. *Yes* — such a sequence, with six or five colours — gives `χ(ℝ²) ≤ 6`, or
+   `= 5`, **with no MR**: the first move of the upper bound since 1950.
+<!--/D-C2-->
+
+*D-C3 — § The aim, link 6 (replaces "6. **Its tools are Voronov's topology …** … along every optimal family."):*
+
+<!--D-C3-->
+6. **Its tools are Voronov's circle topology made robust, and the density topology** — the room after ergodic theory in G30's ladder. Two
+   proof shapes are closed (row 131): counting holes met by circles caps at `O(ε)`, and trichromatic points vanish from partial colourings; the
+   index of density traces fails where a unit-arc interface faces a bowtie (row 132). A reading, with its test: finite perimeter is
+   Lipschitz-in-probability, the quantitative form of the continuity every CP colouring has. Killing test: a CP colouring whose disagreement
+   `P(c(0) ≠ c(h))` is continuous but not `O(|h|)` along every optimal family.
+<!--/D-C3-->
+
+*D-C4 — § The aim, the program paragraph (replaces "**The program** (`plans/STUB-regularity-wall.md`): … the map argument."):*
+
+<!--D-C4-->
+**The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability: can vanishing
+holes save a colour?** — competitor R proves Voronov's contradiction survives a free colour of vanishing density, competitor W builds periodic
+grid-square slack six-colourings with vanishing holes, each checked exactly, an advisor between them (`plans/PROTOCOL-competitor-and-advisor.md`);
+**Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the collapse, the measurable chain, the map argument.
+<!--/D-C4-->
+
+*D-C5 — § Frontier, "Last updated" (replaces the whole italic paragraph beginning "*Last updated: 2026-09-26"):*
+
+<!--D-C5-->
+*Last updated: 2026-09-27 — **FS-106, the regular half, closed** (rows 131–132; `plans/FS106-regular-half.md` §R-close): the regular classes
+verified and transferred almost everywhere bar named steps, and the measurable question restated as stability, `χ_m⁰ ≥ 7 ⟺ lim µ₆(ε) < 1`;
+FS-107 renamed. Before it, **the reframe** (Kooshi, 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness
+search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+<!--/D-C5-->
+
+*D-C6 — "Where the problem stands", item 31 (replaces "31. **The regularity wall** … FS-106 is that verification."):*
+
+<!--D-C6-->
+31. **The regularity wall, verified; the question is stability** (§ The aim; rows 131–132; FS-107). Regular classes need seven almost
+   everywhere — slack, polygons and convex tilings (bar `d = 2`), nice maps — and maps six; closed classes are the tight question itself. With
+   no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131): given MR, Hadwiger–Nelson is whether vanishing holes can save a colour, and a refutation is
+   a sequence of periodic colourings, never a wild set. Bearing on the answer: none moved; the question restated exactly.
+<!--/D-C6-->
+
+*D-C7 — § Paths forward, "Open milestones" (replaces the paragraph beginning "**Open milestones, in order.**"):*
+
+<!--D-C7-->
+**Open milestones, in order.** **None is open.** FS-106, the regular half, is **closed** (rows 131–132; `plans/FS106-regular-half.md`
+§R-close). **Next: FS-107, stability: can vanishing holes save a colour?** (the owner's rename, 2026-09-27; `plans/STUB-regularity-wall.md`
+§ FS-107); the finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays
+paused behind it. Every earlier close: `plans/FRONTIER-STUBS.md`'s closed list.
+<!--/D-C7-->
+
+*D-C8 — § Paths forward, ranked rows 1–4 (replace rows 1–3; old rows 4–29 become 5–30, the tail "30–62" becomes "31–63"):*
+
+<!--D-C8-->
+| 1 | **FS-107 stability: can vanishing holes save a colour?** — `plans/STUB-regularity-wall.md` § FS-107 (renamed 2026-09-27; the competitor protocol) | link 5 in row 131's form. R: for some radius `R` and `δ₀ > 0`, every partial six-colouring of `U_R` with no monochromatic pair in the band leaves `δ₀|U_R|` uncovered, for every `ε` — Voronov robust to a free colour of vanishing density, counted non-locally; W: for every `δ`, a periodic grid-square six-colouring with a band and holes of density `≤ δ`, checked exactly; shared constraints and a break table (A2 §3) | decisive both ways: R gives `χ_m⁰ = 7`, so `χ(ℝ²) = 7` given MR; W gives `χ(ℝ²) ≤ 6` with no MR; a named obstruction on either side is a result |
+| 2 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? — row 131's question at five colours; its null-set step to Falconer's `χ_m` is FS-107's sub-question; standing here: `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14), the density family, `k`-point correlations (FS-80) | decisive: given MR it is rung D (row 128); success low, a named no-go the likely product |
+| 3 | **FS-109 the hole dial** — `plans/STUB-hole-dial.md` (post-ban) | trace `1 − µ₆^per(ε)` as `ε → 0` along eroded `[Parts2020c]` tilings and along W's families: flat near `10⁻⁴` is R's evidence, falling is W's | a dial on FS-107's question, informative both ways; decides nothing alone |
+| 4 | **FS-108 the print residuals of the regular half** — `plans/STUB-regular-half-residuals.md` | S–V Thm 2's `d = 2` edge case; a second mind on its Lemma 3 at `√3 ≤ d < 2`; S–V Thm 1's fills under Condition 6 by Woodall's step-3 merge, and his cone at six colours; Townsend's (c) filled in full; `[Townsend2005]` against the manuscript | none on the answer while it holds (row 131 makes regular classes constraints); a counterexample at `d = 2` is a polygonal six-colouring, `χ(ℝ²) ≤ 6` with no MR |
+<!--/D-C8-->
+
+*D-C9 — a new grokking, after G81 (the §PA sweep's first recognition):*
+
+<!--D-C9-->
+* **G82 — The measurable question is a stability question: a refutation is regular, and only its limit is wild. [hand, two minds, one blind
+  (row 131); the reading one mind]** A weak-* limit of near-colourings is a colouring (the circle measure is Rajchman), so `χ_m⁰ ≥ 7` is the
+  stability of a regular theorem: W's objects are periodic tilings checked exactly, and R must count a defect non-locally, Voronov's
+  contradiction being feature-local. *Do: when a question asks whether a class of colourings exists, ask whether its limit object is a weak-*
+  limit of regular near-solutions; if so, pose it as stability, build on the regular objects, and test a stability proof against strips and
+  erosion (row 131's no-gos) first. Nothing kills the equivalence; it forbids a construction needing a wild set. Killing test of the reading:
+  a feature-local proof of `lim µ₆(ε) < 1`.*
+<!--/D-C9-->
+
+*D-C10 — G71, one sentence appended before its "*Do:*" (the §PA sweep's second recognition):*
+
+<!--D-C10-->
+The index of a density trace (row 132) is this height on a curve; its bound between complementary curves fails only at a swap, which a
+unit-arc interface facing a bowtie forces: Condition 5 buys general position, not the height.
+<!--/D-C10-->
+
+*D-C11 — G72's count (replaces "**The count so far — thirteen of fifteen** … from reading and from re-deriving a known proof."):*
+
+<!--D-C11-->
+**The count so far — thirteen of sixteen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72;
+the latest, FS-106, the other kind: its headline from extending row 130's compactness, its structural form yielding lemmas and a no-go).
+<!--/D-C11-->
+
+*D-C12 — G79's record (replaces "Its record, milestone by milestone: `plans/GROKKING-INSTANCES.md` §G79. FS-103: … produced no theorem."):*
+
+<!--D-C12-->
+Its record, milestone by milestone: `plans/GROKKING-INSTANCES.md` §G79 (FS-106: the headline from an example invariant, the walls from
+counterexample invariants).
+<!--/D-C12-->
+
+
+**4.4 The byte budget.** `CLAUDE.md` is at 304,245; the 300,000 limit returns at this close. Drafts D-C1 to D-C12, measured against the text
+they replace: **−291 net** (the "Last updated" paragraph −569, G79's record −531 and G72's count −245 pay for G82 +895, G71's sentence +229 and
+links 5–6 +141). To land under the limit without cutting an intrinsic, the front page moves these **second and later instances** to
+`plans/GROKKING-INSTANCES.md` under their entries, verbatim with the source address, leaving a pointer where none exists (design (b)); each is
+bounded by the exact strings given, measured on the current file.
+
+| # | where | move the text from … up to (not including) … | bytes | keep |
+|---|---|---|---|---|
+| M1 | G51 | "**Its runs** (FS-73, FS-79" … "The standing rules they left:" | ≈ 1,000 | the standing-rules sentence (rules, intrinsic) and a pointer |
+| M2 | § Building, kill by PID | "**Seventh and eighth instances, 2026-09-16" … "**The rule in one line:" | 701 | the rule in one line |
+| M3 | § Building | "**Ninth instance, 2026-09-23 (FS-73)" … "\n\n**A pipe can kill" | 497 | — |
+| M4 | § Make the gate fail | "**Fourth instance (FS-79 phase 0)" … "\n\n**And the rule the one above" | 285 | — |
+| M5 | G21 | "**And a one-period census measures its period**" … "**FS-81's three**" | 599 | G21's Do carries "a control at the scale of the question" |
+| M6 | G49 | "**And a held blog text, not re-read" … "More instances: `plans/GROKKING-INSTANCES.md` §G49." | 444 | the Do's "grep the held Polymath16 threads" |
+| M7 | G65 | "**The four-colour band, measured once**" … "\n  *Killing test: a refusing ball" | 444 | — |
+| M8 | G50 | "**FS-100's:** EL2021" … "More instances: `plans/GROKKING-INSTANCES.md` §G50." | 416 | — |
+| M9 | § What compute actually helps | "**M2 measured it seven times more**" … "\n\n\| Work \| Right instrument \|" | 489 | the re-price rule and its first instance |
+
+Moves ≈ 5,000 bytes, pointers ≈ 400: the file lands near **299,300**, about 700 under the limit, with no rule, reason or killing test removed. If the
+front page needs more room: G59's "Caveat, G21: … slower than no break at all." (≈ 300, an instance of G21) is the next candidate.
+
+### Stage 4a — SAVED
