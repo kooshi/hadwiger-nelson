@@ -1,0 +1,6 @@
+== Z. O3's edge point X1 = (1/4, Y): points just above it, every colour tested exactly (a straddling tile of that colour = an interior point at distance 1)
+   X1 + (0, 1/100)   (direction 90): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T1); free: NONE
+   X1 + (1/100, 1/100)  (direction 45): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T1); free: NONE
+   X1 + (-1/100, 1/100) (direction 135): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T-2); free: NONE
+   X1 + (-1/100, 1/1000) (direction 174, OUTSIDE the cone (30, 165.52)): colours excluded ['P', 'G', 'B', 'M', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, O:T-2); free: ['R']
+   control: (1/2, Y + 1/100), above the middle of the top tile over V_1: colours excluded ['P', 'G', 'M', 'R'] (witness tiles P:U0, G:U1, M:T-1, R:T0); free: ['B', 'O']

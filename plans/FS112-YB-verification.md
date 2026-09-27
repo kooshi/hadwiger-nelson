@@ -123,3 +123,129 @@ plant lived only in the fragment driver, so it **could not reach** the strip dri
 **The three causes of a REJECT, told apart in advance** (the brief's discipline): a wrong rebuild shows as a map-consistency failure or a failed identity
 (the rule's two readings, the height); a wrong checker shows in the calibration (FS-110's fragments pair by pair, CAL-7, the plants); a wrong print would
 show as a REJECT with a consistent rebuild and a calibrated checker. None arose: the strip is ACCEPTED.
+
+## Stage 4 — SAVED: my verdicts on the instance's objects O1–O5 (the brief's step 3), committed before opening Y's record
+
+*Data: `data/fs112/fs112-yb/strip-objects.txt` (vertices, arcs, symmetries, covering pairs, O2, O3), `o45.txt` (wedges, budget, arc lock, chains,
+rings), `o3-edge.txt` (the edge test). Placing: midline `y = 0`, `P_j = (j/2, 0)`, top edge `Y = √3/2 + √15/4`. Colours P, G, B, M, R, O as stage 3.
+**A labelling slip in the instance file** (harmless, logged): it writes "midline vertices are `P_j = (j/2, 0)`, take `P_1 = (1/2, 0)`, `P_2 = (3/2, 0)`";
+by its own formula `(3/2, 0)` is `P_3`. I use the coordinates, and write `P_3` for `(3/2, 0)`.*
+
+### O1 — the strip: **ACCEPT** [tools, exact; one rebuild, mine; checker calibrated (stage 2)]
+
+- **Height** `√15/2 + √3` exactly; field `ℚ(√3, √5)`. **Period** `3/2`; the translation by `1/2` is a symmetry up to the colour permutation `(P G B)(M R O)`;
+  also `y ↦ −y` with `(P M)(G R)(B O)`, `x ↦ −x` with `(P B)(M O)`, `x ↦ 1/2 − x` with `(G B)(R O)`, the half-turn about `P_0` with `(P O)(G R)(B M)`; not
+  the translation by `1/4`, not the glide `y ↦ −y, x ↦ x + 1/4`.
+- **Vertices of one period** (`P_cl`, degree): midline `P_0 {P,B,M,O}`, `P_1 {P,G,M,R}`, `P_2 {G,B,R,O}` — **four colours, degree 4**, straight edges at
+  0°, 90°, 180°, 270°, four 90° sectors; valleys `V_0 {P,B,R}`, `V_1 {P,G,O}`, `V_2 {G,B,M}` — degree 3, three 120° sectors; apexes `A_0 {P,R,O}`,
+  `A_1 {G,M,O}`, `A_2 {B,M,R}` — degree 3 (the arch's sector 151.04°, the two top tiles 104.48° each); the mirror images `V′_m {G,M,O}, {B,M,R},
+  {P,R,O}`, `A′_j {G,B,M}, {P,B,R}, {P,G,O}`; edge points `(m/2 + 1/4, ±Y)`, two colours and one boundary piece: top `{R,O}, {M,O}, {M,R}`, bottom
+  `{G,B}, {P,B}, {P,G}`.
+- **Unit arcs**: all boundary arcs have radius 1; 12 per period, four centred at each midline vertex (on `ω(P_j)`, spanning `arccos(1/4) − π/3 ≈ 15.52°`
+  each). **Contact kind: every one is "both", with the self case** — its inner tile is the arch or inverted arch whose corner is the centre, and its
+  outer colour (a top or bottom tile) is carried at the centre by the inverted arch or arch on the other side. This is `[Polymath2021]` p. 194's tactic
+  exactly ("a tile T of color 1 can share a boundary segment E with a tile U of color 2 and also a point P with a tile V also of color 2, if E is drawn as
+  an arc of radius 1 centered on P": T the arch, U the top tile, V the inverted arch at P). No in-only, out-only or inert arc.
+- **Tight: yes, in the strongest form** — every one of the 36 same-colour pairs within reach (per period) touches at exactly 1: 12 self-pairs (diameter
+  exactly 1), 12 pairs of like tiles three columns apart (parallel segments at distance exactly 1), 12 out-contact pairs (a whole unit arc at distance
+  exactly 1 from a corner). No slack pair.
+- **Arc-closed** (C-ARC-END): every unit arc's two ends are trivalent vertices at heights `√3/2`, `√15/4` < Y, in the fully coloured strip.
+
+### O2 — the unit rhombus `P_1 = (1/2, 0)`, `W = (1, √3/2)`, `P_3 = (3/2, 0)`, `W′ = (1, −√3/2)` [tools, exact; one mind]
+
+`P_cl(P_1) = {P,G,M,R}`, `P_cl(P_3) = {P,B,M,O}` (four-colour, degree 4); `P_cl(W) = {G,B,M}`, `P_cl(W′) = {P,R,O}` (trivalent). All four sides and the
+diagonal `P_1P_3` are 1; `|WW′| = √3`. **`W, W′` are a complementary pair at distance `√3`.** `ω(P_1) ∩ ω(P_3) = {W, W′}` exactly (the instance's
+"`ω(P_1) ∩ ω(P_2)`"); the two closure types meet in `{P, M}`. **Unit arcs through `W`**: the arc of `ω(P_1)` from `W` to `A_1 = (3/4, √15/4)` and the arc of
+`ω(P_3)` from `W` to `A_2 = (5/4, √15/4)`; through `W′` their mirror images; **all four have both ends interior to the strip: arc-closed.** Colours near the
+seam points: `ω(W)` leaves `P_1` along 150° into `U0` (P) and 330° into `D1` (R), leaves `P_3` along 30° into `U3` (P) and 210° into `D2` (O); `ω(W′)` leaves
+`P_1` along 30° into `U1` (G) and 210° into `D0` (M), leaves `P_3` along 150° into `U2` (B) and 330° into `D3` (M) — each outside its centre's type (A-CIRC),
+and **the two circles' branches alternate** at `P_1` and at `P_3` (30° W′, 150° W, 210° W′, 330° W), as Y-T2W says. **So the strip realises T2 (C-T2 (i))
+exactly and arc-closed**, and a second T2 on a non-spindle unit rhombus: `A_j, A′_j` (complementary, distance `√15/2`) with `w₀, w₀′ = P_j, P_{j+1}`
+(`|w₀w₀′| = 1/2`). **C-SEAMS-TWO on the strip: TRUE for the seams it realises** — T2's seam points are four-colour vertices, each the centre of the unit
+arcs its pair emits (a four-colour unit-arc centre); N-X's conclusion holds at them (no unit arc passes *through* `P_j`; the types of `(W, W′)` are
+disjoint); no (S1) seam occurs in the strip.
+
+### O3 — the top edge: `V_0 = (0, √3/2)`, `A_1 = (3/4, √15/4)` [hand, one mind; exact identities; exact checks at named points]
+
+`P_cl(V_0) = {P,B,R}`, `P_cl(A_1) = {G,M,O}`: **complementary**, `|V_0A_1|² = (9 − 3√5)/4` (distance ≈ 0.75693). **Common unit points: `X_1 = (1/4, Y)`,
+exactly on the top edge** (the vertex where the top tiles `T0` (R) and `T1` (O) meet the edge; `P_cl(X_1) = {R, O}`), **and `P_1 = (1/2, 0)`** (`= V_0 + A_1 −
+X_1`; a four-colour midline vertex at which both `V_0` and `A_1` emit arcs of `ω(P_1)`: half of T2). **No colour can be given**: every point `Z = X_1 + εu`
+with `u` at an angle in the open cone `(30°, 165.52°)` (all above the edge) and `ε` small lies outside both `D(V_0, 1)` and `D(A_1, 1)`, so near `V_0` its
+unit circle runs at a small positive offset toward `X_1` and crosses the rays at 30° and 150° — through the sectors P, R, B — and near `A_1` crosses the
+rays at 90° and 194.48° — through M, O, G: interior points of all six colours at distance exactly 1. Exact confirmations: at `X_1 + (0, 1/100)`,
+`X_1 + (1/100, 1/100)`, `X_1 + (−1/100, 1/100)` every colour has a straddling tile (no colour free); control outside the cone, `X_1 + (−1/100, 1/1000)`
+(174°): R free, as derived; above the middle of a top tile, `(1/2, Y + 1/100)`: B and O free. **So the colouring cannot be continued into any open set above
+the edge at `X_1`** — nor, by the period-`1/2` symmetry, at any edge vertex, top or bottom. **Why, structurally** (exhaustive over one period): the strip's
+close complementary pairs are `(V, A)`-type (distance ≈ 0.75693; 12 per period), `(V_m, V′_m)` (√3; 3) and `(A_j, A′_j)` (√15/2; 3); each common unit point
+of each is either a midline four-colour vertex at which both members emit arcs of its unit circle, or **exactly an edge vertex** — the `(V, A)` pairs'
+second point. Every trivalent vertex's unit circle leaves the strip exactly between two edge vertices. **This names C-BEYOND's step for the strip: a NO
+route must read the plane at the strip's edge vertices**, the unsaved second common unit points of its close complementary pairs.
+
+### O4 — the strip against the unit-arc-centre claims
+
+| claim | verdict on the strip | grade, minds |
+|---|---|---|
+| **C-UA-INC** | Exactly one kind occurs: **both, with the self case**, at all 12 arcs per period. In-only, out-only and inert do not occur. For tight six-*maps* of the plane the question stays open: the strip shows "both (self)" is realisable in a tight arc-closed local positive, nothing more (C-BEYOND). | [tools, exact]; one |
+| **C-UA-WEDGE** | **MISSTATED.** As written ("the `c`-tiles at `P` face the arc") it is false for `c = s_out`: at every arc the outer colour's tile at the centre lies in the wedge facing **away** (e.g. the arc of `ω(P_1)` at directions [104.48°, 120°], sides P \| R: the R-tile at `P_1` is `D1`, at [270°, 360°], inside the away wedge [210°, 14.48°]). **Corrected**: "if `P` carries `s_in`, its tiles at `P` lie in the facing wedge `{d : d·e ≥ 0 for every arc direction e}`; if `P` carries `s_out`, its tiles lie in the away wedge `{d·e ≤ 0}`; neither side colour meets the two side cones" — **TRUE** (for `q = P + εd` in an `s_in`-tile with `d·e < 0` for some arc direction `e`, `ω(q)` passes inside the arc near `P + e`, into the inner tile; symmetrically for `s_out`) — TS-U read conditionally (A4-TSU). The strip satisfies the corrected form at all 12 arcs (exact angle comparisons); its killing test (a side colour in a side cone) does not fire. | corrected form [hand], one; the strip [tools, exact] |
+| **C-UA-BUDGET**, branch 1 (no covering pair `(v, y)`, `y ∈ ω(v)`) | **No instance on the strip** under the list's covering-pair sense (union all six, FS-110 §9 correction 1): every four-colour vertex `P_j` has covering partners at ring points, `P_{j±2}` (four-colour, types overlapping in two colours). Under the disjoint sense (NB §2.3's `P_cl(y) = {e, f}`) `P_j` has no partner, and branch 1 **holds**: four Γ-arcs on `ω(P_j)`, each of cosine `1/8 + 3√5/8 = cos(arccos(1/4) − π/3)` exactly, total **62.09° ≥ 60°**. | [tools, exact]; one |
+| **C-UA-BUDGET**, branch 2 (a covering pair at a ring point `y`) | **FALSE on the strip under the union sense**: `P_1`'s partners `y = P_3, P_{−1}` carry no Γ-arc of `ω(σ_v^{±1}y)` (`σ^{±1}P_3 = W, W′`); `P_1`'s unit arcs are centred at `P_1` itself. Under the disjoint sense: no instance. **Are the branches exclusive on the strip?** Their hypotheses are, by definition; their conclusions are not tied to them — the strip's four-colour vertices meet branch 2's hypothesis (union sense) with branch 1's conclusion (arcs centred at `v`, ≥ 60°). **Verdict: MISSTATED** — branch 2's conclusion is NB §2.3's derivation, which is for the disjoint case `P_cl(y) = {e, f}` and assumes no Γ-arc on `ω(v)`; union-sense partners with overlapping types force nothing at `y`. | [tools, exact]; one |
+| **C-UA-CHAIN** | First two clauses consistent on the strip: each unit arc's end vertices start further unit arcs, and the arcs lie in chains (no cycles). **Third clause: GAP at "a monotone quantity along a chain excludes bi-infinite chains"** — the strip carries two tight, periodic, bi-infinite chains of unit arcs, end to end (`… V_0 –ω(P_1)– A_0 –ω(P_0)– V_1 –ω(P_2)– A_1 –ω(P_1)– V_2 …` at heights `√3/2 … √15/4`, and its mirror); any such quantity must read beyond the strip (C-BEYOND). The killing test (a closed cycle) does not fire: no closed cycle of unit arcs occurs. | [tools, exact] + [hand]; one |
+| **ARC-INERT** | **Vacuous on the strip** (no inert arc). Its converse is exact on the strip: a "both" arc is **locked on both sides** — the arc of `ω(P_1)` between arch `U1` (G) and the top tile `T2` (M), bent inward to its chord, rejects exactly `(D0, T2)` (the out-contact at `P_1`); bent outward by a kink to distance 1.08992 from `P_1`, rejects exactly `(U1, U1)` (the self in-contact) — both predicted. In general, an in-contact locks outward bends and an out-contact locks inward bends [hand, one mind]. Consistent with ARC-INERT's reduction: the strip *is* the reduced object (unit arcs with a contact at the centre). | [tools, exact] + [hand]; one |
+
+### O5 — the strip against the Condition-5 chain (each step read with Condition 5 dropped; "contradicted" = the strip holds a tight valid local configuration violating the step's conclusion, inside the region the step's proof reads)
+
+The strip's unit arcs all lie on the circles `ω(P_j)` about the midline vertices; a circle about any other point meets them in finitely many points. So a step
+reading only circles about trivalent points meets Condition 5 on the strip; a step reading `ω(v)` at a midline vertex meets four unit arcs.
+
+| step | verdict on the strip | configuration |
+|---|---|---|
+| C-CHAIN-1 NB-4 | **CONTRADICTED** — four-colour vertices, the proof's region `B(v, 1 + ε)` inside the strip. Escape: Γ-arcs **on `ω(v)`** — the ring's colour changes run along unit arcs centred at `v`, where NB §2.3's premise "`c(θ + 60°) ≠ c(θ)`, so every change point `y` is a swap with `σ_v y` and `σ_v^{-1}y`" fails (at `P_1` the ring is B on (0°, 60°), a Γ-arc on [60°, 75.52°], O on (75.52°, 104.48°), …). The printed general form ("`ω(y_k)` … passes through `y_k`") is vacuous in that clause as written; read with `ω(v)` for `ω(y_k)`, the strip's `P_j` satisfies it (every σ-orbit of change points meets a Γ-arc of `ω(v)`). | `P_1`: `{P,G,M,R}`, degree 4, four arcs of `ω(P_1)`, 62.09° |
+| C-CHAIN-2 NB-5 | **CONTRADICTED** — close covering pairs inside the strip, their common unit points four-colour vertices (so the step fails exactly through NB-4). | `(W, W′)` at √3 with `P_1, P_3` (O2); `(A_j, A′_j)` at √15/2; the `(V, A)` pairs at 0.757 (one point on the edge) |
+| C-CHAIN-3 N3-CONF | **Holds in substance; its parenthetical "(finitely many, Condition 5)" fails** at the arc centres — the contacts of a colour on `ω(P_j)` include whole unit arcs. Every contact is in-type or out-type, and every sector lies in `D_c(P_j)` (at `P_1`: `D_G = [−14.48°, 90°] ⊇ [0°, 90°]`, `D_P = [90°, 194.48°] ⊇ [90°, 180°]`, `D_M = [165.52°, 270°] ⊇ [180°, 270°]`, `D_R = [270°, 14.48°] ⊇ [270°, 360°]` [hand, one mind]). | `P_j` |
+| C-CHAIN-4 W-MERGE | not contradicted — vacuous (no colour has two sectors at any vertex) | — |
+| C-CHAIN-5 N3-DEG | not contradicted — `int D_c(v) ≠ ∅` at every vertex for every `c ∈ P_cl(v)` (104.48° wide at `P_j`); no cusp | — |
+| C-CHAIN-6 N4-SHADOW | **Holds off the exception λ = −1, fails as written there**: for an arc tangent to `a` at `N` that is an arc of `ω(v)`, `f(λ) = λ/(1 + λ)` is undefined and "the circle through `v` concentric with that arc" degenerates to `{v}`; the shadow near `v` of the tile beyond it is the open cone of directions within 90° of the arc. | at `P_1`, the tile `T2` beyond the arc [60°, 75.52°]: shadow directions (−30°, 165.52°) |
+| C-CHAIN-7 N4-SHAVE | not contradicted — vacuous (no horn) | — |
+| C-CHAIN-8 N4-STUCK | not contradicted — vacuous (no two-sector colour) | — |
+| C-CHAIN-9 N4-FIN | not contradicted — an arithmetic statement on the open interval; unit arcs sit at its excluded endpoints λ = −1, υ = 1 (the poles of `f`, `f̃`) | — |
+| C-CHAIN-10 N4-TERM | **CONTRADICTED in its last clause** — the strip admits no merge, ray merge or shave, so it is its own terminal modification ("no colour has two sectors" holds), yet "every vertex is cubic" fails; that inference is NB-4's `|P_cl| ≤ 3`. | `P_j`, degree 4 |
+| C-CHAIN-11 NB4-CS | not contradicted — vacuous (no cusp horn) | — |
+| C-CHAIN-12 P17 | not contradicted — vacuous on the strip: no trivalent vertex's ring lies in it (each leaves between two edge vertices) | — |
+| C-CHAIN-13 COR1-NOD2 | not contradicted — global, and the strip is not cubic | — |
+| C-CHAIN-14 CB-LEMMA3 | **not contradicted, and consistent with O3**: the strip holds trivalent pairs with equal closure types at distances `3/2` and `√(9/4 + 3√5/4) ≈ 1.9817` — the configuration Lemma 3 forbids — whose unit circles carry no unit arc (Condition 5 holds on the circles the lemma reads); those circles leave the strip between edge vertices, exactly where the colouring cannot be continued. | `(V_0, V_3)` `{P,B,R}` at 3/2; `(V_0, A′_1)` `{P,B,R}` at 1.9817; etc. (listed in `o45.txt`) |
+| C-CHAIN-15 CE5 | not contradicted — on every trivalent ring the M-in points are vertices (midline and edge vertices), and no antipodal pair of them lies in the strip (for the apex rings the antipodes of the midline M-in points lie beyond it) | exact list in `o45.txt` |
+| C-CHAIN-16 CE6 | not contradicted — a statement about the reduction on cubic maps | — |
+| C-CHAIN-17 CUSP-BASE | not contradicted — vacuous (no cusp) | — |
+| C-CHAIN-18 FS110-CLOSURE | not contradicted — global; a strip is a local positive (C-BEYOND) | — |
+
+**Summary of O5.** The first failure in chain order is **C-CHAIN-1 (NB-4)**, at the four-colour midline vertices, through unit arcs on `ω(v)` itself; it
+carries NB-5 and N4-TERM's "cubic" clause with it; N4-SHADOW degenerates at λ = −1 (the same arcs seen from their centre); N3-CONF loses only its
+finiteness parenthetical. The cone steps (4–11) are vacuous on the strip (no two-sector colour, no horn), the base steps (12–17) are about cubic maps
+or rings the strip does not hold, and the headline is global.
+
+### Theorems this phase proved (stage 4 adds; stage 3's strip result first)
+
+| id | statement | grade | address |
+|---|---|---|---|
+| YB-STRIP | The strip rebuilt by formula from `[AxenovichEtAl2014]` p. 8's words (Figure 4 read for combinatorics) is a valid six-colouring of the strip of height `√15/2 + √3`; every same-colour pair within reach touches at exactly 1 | [tools, exact]; one rebuild | stage 3; `tools/fs112_yb_strip.py` |
+| YB-CONTACT | Every unit arc of the strip is "both", with the self case (`[Polymath2021]` p. 194's tactic) | [tools, exact] | O1; `tools/fs112_yb_objects.py` |
+| YB-T2 | The strip realises T2 exactly and arc-closed, on the spindle rhombus (`W, W′` at √3) and on a thin unit rhombus (`A_j, A′_j` at √15/2, `|w₀w₀′| = 1/2`) | [tools, exact] | O2 |
+| YB-SEAMS | Every close complementary pair of the strip has each common unit point either at a midline four-colour vertex where both members emit arcs of its unit circle, or exactly at an edge vertex | [tools, exact], exhaustive over one period | O3; `strip-objects.txt` |
+| YB-EDGE | The strip's colouring cannot be continued into any open set above an edge vertex: every point of the open cone (30°, 165.52°) at `X_1` is at distance exactly 1 from interior points of all six colours | [hand, one mind]; exact at three named points and two controls | O3; `o3-edge.txt` |
+| YB-WEDGE | C-UA-WEDGE corrected (inner colour facing, outer colour away, side cones free) is TRUE | [hand], one; the strip [tools, exact] | O4 |
+| YB-LOCK | In-contact locks outward bends of a unit arc, out-contact locks inward bends; a "both" arc cannot be bent either way | [hand], one; one arc [tools, exact] | O4; `o45.txt` |
+| YB-CHAIN | A tight valid six-coloured strip carries bi-infinite periodic chains of unit arcs | [tools, exact] | O4 |
+| YB-NB4 | Without Condition 5, NB-4 fails at a tight four-colour vertex whose ring carries four unit arcs centred at it (62.09° in all); NB-5 and N4-TERM's cubic clause fail with it | [tools, exact] + [hand]; one | O5 |
+
+### Would have searched here (stages 3–4)
+
+- Fit Figure 4's pixels for the tiles' positions → every coordinate derived from the printed rules; the figure read for rows, offsets and colours only.
+- Scan the arc radius for where the strip breaks → two named plant values (11/10, 9/10), their rejected pairs predicted by hand.
+- Sweep points above the edge to map the uncolourable region → the cone derived; four named points and a control checked exactly.
+- Enumerate colourings of the tile layout to see whether Figure 4's is forced → not done (a search); the figure's colouring checked exactly.
+- Search bendings of an arc that keep validity → the lock derived; the two named bends checked.
+
+### Proposed `BIBLIOGRAPHY.md` reading-status edits (the close writes them)
+
+`[AxenovichEtAl2014]`: p. 8 read (text), Figure 4 viewed for its combinatorics (FS112-YB, 2026-09-27), the strip rebuilt exactly and accepted by an exact
+checker. `[Polymath2021]`: pp. 194–195 and 197–200 read (FS112-YB).

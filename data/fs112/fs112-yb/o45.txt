@@ -1,0 +1,100 @@
+== W. C-UA-WEDGE on every unit arc of one period (exact)
+   arc about (0.00,0) [104.48,120.00] B|M: facing [30.00,194.48] away [210.00,14.48] side cones (194.48,210.00), (14.48,30.00); B(inner) [90.0,180.0] in facing wedge: True; M(outer) [270.0,0.0] in away wedge: True
+   arc about (0.00,0) [240.00,255.52] O|P: facing [165.52,330.00] away [345.52,150.00] side cones (330.00,345.52), (150.00,165.52); P(outer) [0.0,90.0] in away wedge: True; O(inner) [180.0,270.0] in facing wedge: True
+   arc about (0.00,0) [60.00,75.52] P|O: facing [345.52,150.00] away [165.52,330.00] side cones (150.00,165.52), (330.00,345.52); P(inner) [0.0,90.0] in facing wedge: True; O(outer) [180.0,270.0] in away wedge: True
+   arc about (0.50,0) [104.48,120.00] P|R: facing [30.00,194.48] away [210.00,14.48] side cones (194.48,210.00), (14.48,30.00); P(inner) [90.0,180.0] in facing wedge: True; R(outer) [270.0,0.0] in away wedge: True
+   arc about (0.50,0) [240.00,255.52] M|G: facing [165.52,330.00] away [345.52,150.00] side cones (330.00,345.52), (150.00,165.52); G(outer) [0.0,90.0] in away wedge: True; M(inner) [180.0,270.0] in facing wedge: True
+   arc about (0.00,0) [284.48,300.00] M|B: facing [210.00,14.48] away [30.00,194.48] side cones (14.48,30.00), (194.48,210.00); B(outer) [90.0,180.0] in away wedge: True; M(inner) [270.0,0.0] in facing wedge: True
+   arc about (0.50,0) [60.00,75.52] G|M: facing [345.52,150.00] away [165.52,330.00] side cones (150.00,165.52), (330.00,345.52); G(inner) [0.0,90.0] in facing wedge: True; M(outer) [180.0,270.0] in away wedge: True
+   arc about (1.00,0) [104.48,120.00] G|O: facing [30.00,194.48] away [210.00,14.48] side cones (194.48,210.00), (14.48,30.00); G(inner) [90.0,180.0] in facing wedge: True; O(outer) [270.0,0.0] in away wedge: True
+   arc about (1.00,0) [240.00,255.52] R|B: facing [165.52,330.00] away [345.52,150.00] side cones (330.00,345.52), (150.00,165.52); B(outer) [0.0,90.0] in away wedge: True; R(inner) [180.0,270.0] in facing wedge: True
+   arc about (0.50,0) [284.48,300.00] R|P: facing [210.00,14.48] away [30.00,194.48] side cones (14.48,30.00), (194.48,210.00); P(outer) [90.0,180.0] in away wedge: True; R(inner) [270.0,0.0] in facing wedge: True
+   arc about (1.00,0) [60.00,75.52] B|R: facing [345.52,150.00] away [165.52,330.00] side cones (150.00,165.52), (330.00,345.52); B(inner) [0.0,90.0] in facing wedge: True; R(outer) [180.0,270.0] in away wedge: True
+   arc about (1.00,0) [284.48,300.00] O|G: facing [210.00,14.48] away [30.00,194.48] side cones (14.48,30.00), (194.48,210.00); G(outer) [90.0,180.0] in away wedge: True; O(inner) [270.0,0.0] in facing wedge: True
+   corrected C-UA-WEDGE (inner colour facing, outer colour away, side cones free of both) at every arc: True
+== B. C-UA-BUDGET at the four-colour vertices (exact)
+   v = P_0 = (0.00, 0): P_cl = {P,B,M,O}, missing {G,R}; Gamma-arcs on omega(v): 4, each of cosine 1/8 + 3*sqrt5/8 = cos(arccos(1/4) - pi/3): True; total 62.0900 deg (>= 60: True)
+      ring point y = (-1.00,+0.0000) P_cl = {P,G,M,R}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (-0.50,-0.8660), (-0.50,+0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+      ring point y = (1.00,+0.0000) P_cl = {G,B,R,O}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (0.50,+0.8660), (0.50,-0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+   v = P_1 = (0.50, 0): P_cl = {P,G,M,R}, missing {B,O}; Gamma-arcs on omega(v): 4, each of cosine 1/8 + 3*sqrt5/8 = cos(arccos(1/4) - pi/3): True; total 62.0900 deg (>= 60: True)
+      ring point y = (-0.50,+0.0000) P_cl = {G,B,R,O}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (0.00,-0.8660), (0.00,+0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+      ring point y = (1.50,+0.0000) P_cl = {P,B,M,O}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (1.00,+0.8660), (1.00,-0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+   v = P_2 = (1.00, 0): P_cl = {G,B,R,O}, missing {P,M}; Gamma-arcs on omega(v): 4, each of cosine 1/8 + 3*sqrt5/8 = cos(arccos(1/4) - pi/3): True; total 62.0900 deg (>= 60: True)
+      ring point y = (0.00,+0.0000) P_cl = {P,B,M,O}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (0.50,-0.8660), (0.50,+0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+      ring point y = (2.00,+0.0000) P_cl = {P,G,M,R}: covering (union) True, P_cl(y) = the missing pair (disjoint) False; sigma^(+-1) y = (1.50,+0.8660), (1.50,-0.8660); Gamma-arcs of omega(sigma^(+-1) y) through y: 0
+== L. The arc between arch 1 (G) and the top tile over V_2 (M), centred at P_1 ('both'): bent both ways, checked exactly
+   kink point at distance 1.08992 from P_1 (outside the unit circle: True)
+   inward (the chord): the top tile T2 (M) comes within 1 of P_1, a corner of D0 (M): rejected pairs [('D0', 'T2')]; predicted [('D0', 'T2')]: as predicted
+   outward (a kink beyond the circle): arch U1 (G) reaches beyond 1 from its own corner P_1: rejected pairs [('U1', 'U1')]; predicted [('U1', 'U1')]: as predicted
+== C. Chains of unit arcs (end to end) in the strip
+   upper chain: (0.00,0.8660) [omega(0.5,0)] -> (0.25,0.9682) [omega(0.0,0)] -> (0.50,0.8660) [omega(1.0,0)] -> (0.75,0.9682) [omega(0.5,0)] -> (1.00,0.8660) [omega(1.5,0)] -> (1.25,0.9682) [omega(1.0,0)] -> (1.50,0.8660) [omega(2.0,0)] -> (1.75,0.9682) ...
+   each junction is a trivalent vertex (a valley V or an apex A) where two unit arcs about different centres meet at an angle; the chain is periodic (period 1/2 up to colour permutation), bi-infinite, and lies at heights sqrt3/2 .. sqrt15/4; its mirror runs below the midline
+== R. Rings of the trivalent vertices of one period (upper half; the lower half is the mirror image with (P M)(G R)(B O))
+   u = (0.00,0.8660) P_cl={P,B,R}: ring leaves the strip on the arc between the edge points x = 0.00 +- sqrt((1/16)) (angles 75.60..104.40 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:B 0.1:M 41.5:O 75.6:out 104.5:M 138.6:O 180.1:G 240.0:O 270.1:M 300.1:G
+   u = (0.50,0.8660) P_cl={P,G,O}: ring leaves the strip on the arc between the edge points x = 0.50 +- sqrt((1/16)) (angles 75.60..104.40 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:P 0.1:R 41.5:M 75.6:out 104.5:R 138.6:M 180.1:B 240.0:M 270.1:R 300.1:B
+   u = (1.00,0.8660) P_cl={G,B,M}: ring leaves the strip on the arc between the edge points x = 1.00 +- sqrt((1/16)) (angles 75.60..104.40 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:G 0.1:O 41.5:R 75.6:out 104.5:O 138.6:R 180.1:P 240.0:R 270.1:O 300.1:P
+   u = (0.25,0.9682) P_cl={P,R,O}: ring leaves the strip on the arc between the edge points x = 0.25 +- sqrt((1/4)) (angles 60.03..119.97 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:R 0.1:M 60.0:out 120.1:M 180.1:G 221.5:B 255.6:M 284.5:G 318.6:B
+   u = (0.75,0.9682) P_cl={G,M,O}: ring leaves the strip on the arc between the edge points x = 0.75 +- sqrt((1/4)) (angles 60.03..119.97 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:O 0.1:R 60.0:out 120.1:R 180.1:B 221.5:P 255.6:R 284.5:B 318.6:P
+   u = (1.25,0.9682) P_cl={B,M,R}: ring leaves the strip on the arc between the edge points x = 1.25 +- sqrt((1/4)) (angles 60.03..119.97 deg, float); ring colours inside (float-sampled, ccw from 0 deg): 0.0:M 0.1:O 60.0:out 120.1:O 180.1:P 221.5:G 255.6:O 284.5:P 318.6:G
+   M-in points on each ring (exact; tile-interior ring points are never M-in by A-CIRC) and their antipodes:
+      u = (0.00,0.8660) M = {P,B,R}: (-0.50,+0.000) via B; antipode (0.50,+1.732) in the strip, M-in: False; (-0.25,+1.834) via R; antipode (0.25,-0.102) in the strip, M-in: False; (0.50,+0.000) via P; antipode (-0.50,+1.732) in the strip, M-in: False; (0.25,+1.834) via R; antipode (-0.25,-0.102) in the strip, M-in: False
+      u = (0.50,0.8660) M = {P,G,O}: (0.00,+0.000) via P; antipode (1.00,+1.732) in the strip, M-in: False; (0.25,+1.834) via O; antipode (0.75,-0.102) in the strip, M-in: False; (1.00,+0.000) via G; antipode (0.00,+1.732) in the strip, M-in: False; (0.75,+1.834) via O; antipode (0.25,-0.102) in the strip, M-in: False
+      u = (1.00,0.8660) M = {G,B,M}: (0.50,+0.000) via G; antipode (1.50,+1.732) in the strip, M-in: False; (0.75,+1.834) via M; antipode (1.25,-0.102) in the strip, M-in: False; (1.50,+0.000) via B; antipode (0.50,+1.732) in the strip, M-in: False; (1.25,+1.834) via M; antipode (0.75,-0.102) in the strip, M-in: False
+      u = (0.25,0.9682) M = {P,R,O}: (0.00,+0.000) via P; antipode (0.50,+1.936) BEYOND the strip, M-in: False; (-0.25,+1.834) via R; antipode (0.75,+0.102) in the strip, M-in: False; (0.50,+0.000) via P; antipode (0.00,+1.936) BEYOND the strip, M-in: False; (0.75,+1.834) via O; antipode (-0.25,+0.102) in the strip, M-in: False
+      u = (0.75,0.9682) M = {G,M,O}: (0.50,+0.000) via G; antipode (1.00,+1.936) BEYOND the strip, M-in: False; (0.25,+1.834) via O; antipode (1.25,+0.102) in the strip, M-in: False; (1.00,+0.000) via G; antipode (0.50,+1.936) BEYOND the strip, M-in: False; (1.25,+1.834) via M; antipode (0.25,+0.102) in the strip, M-in: False
+      u = (1.25,0.9682) M = {B,M,R}: (1.00,+0.000) via B; antipode (1.50,+1.936) BEYOND the strip, M-in: False; (0.75,+1.834) via M; antipode (1.75,+0.102) in the strip, M-in: False; (1.50,+0.000) via B; antipode (1.00,+1.936) BEYOND the strip, M-in: False; (1.75,+1.834) via R; antipode (0.75,+0.102) in the strip, M-in: False
+   same-multicolour trivalent pairs at distance in (1, 2), a member in the period (exact distances):
+      (0.00,+0.8660) -- (-1.50,+0.8660) {P,B,R}  d^2 = (9/4) (~1.5000)
+      (0.00,+0.8660) -- (-0.75,-0.9682) {P,B,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.00,+0.8660) -- (0.75,-0.9682) {P,B,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.00,+0.8660) -- (1.50,+0.8660) {P,B,R}  d^2 = (9/4) (~1.5000)
+      (0.50,+0.8660) -- (-1.00,+0.8660) {P,G,O}  d^2 = (9/4) (~1.5000)
+      (0.50,+0.8660) -- (-0.25,-0.9682) {P,G,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.50,+0.8660) -- (1.25,-0.9682) {P,G,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.50,+0.8660) -- (2.00,+0.8660) {P,G,O}  d^2 = (9/4) (~1.5000)
+      (1.00,+0.8660) -- (-0.50,+0.8660) {G,B,M}  d^2 = (9/4) (~1.5000)
+      (1.00,+0.8660) -- (0.25,-0.9682) {G,B,M}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.00,+0.8660) -- (1.75,-0.9682) {G,B,M}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.00,+0.8660) -- (2.50,+0.8660) {G,B,M}  d^2 = (9/4) (~1.5000)
+      (0.25,+0.9682) -- (-1.25,+0.9682) {P,R,O}  d^2 = (9/4) (~1.5000)
+      (0.25,+0.9682) -- (-0.50,-0.8660) {P,R,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.25,+0.9682) -- (1.00,-0.8660) {P,R,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.25,+0.9682) -- (1.75,+0.9682) {P,R,O}  d^2 = (9/4) (~1.5000)
+      (0.75,+0.9682) -- (-0.75,+0.9682) {G,M,O}  d^2 = (9/4) (~1.5000)
+      (0.75,+0.9682) -- (0.00,-0.8660) {G,M,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.75,+0.9682) -- (1.50,-0.8660) {G,M,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.75,+0.9682) -- (2.25,+0.9682) {G,M,O}  d^2 = (9/4) (~1.5000)
+      (1.25,+0.9682) -- (-0.25,+0.9682) {B,M,R}  d^2 = (9/4) (~1.5000)
+      (1.25,+0.9682) -- (0.50,-0.8660) {B,M,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.25,+0.9682) -- (2.00,-0.8660) {B,M,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.25,+0.9682) -- (2.75,+0.9682) {B,M,R}  d^2 = (9/4) (~1.5000)
+      (0.00,-0.8660) -- (-1.50,-0.8660) {G,M,O}  d^2 = (9/4) (~1.5000)
+      (0.00,-0.8660) -- (-0.75,+0.9682) {G,M,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.00,-0.8660) -- (0.75,+0.9682) {G,M,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.00,-0.8660) -- (1.50,-0.8660) {G,M,O}  d^2 = (9/4) (~1.5000)
+      (0.50,-0.8660) -- (-1.00,-0.8660) {B,M,R}  d^2 = (9/4) (~1.5000)
+      (0.50,-0.8660) -- (-0.25,+0.9682) {B,M,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.50,-0.8660) -- (1.25,+0.9682) {B,M,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.50,-0.8660) -- (2.00,-0.8660) {B,M,R}  d^2 = (9/4) (~1.5000)
+      (1.00,-0.8660) -- (-0.50,-0.8660) {P,R,O}  d^2 = (9/4) (~1.5000)
+      (1.00,-0.8660) -- (0.25,+0.9682) {P,R,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.00,-0.8660) -- (1.75,+0.9682) {P,R,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.00,-0.8660) -- (2.50,-0.8660) {P,R,O}  d^2 = (9/4) (~1.5000)
+      (0.25,-0.9682) -- (-1.25,-0.9682) {G,B,M}  d^2 = (9/4) (~1.5000)
+      (0.25,-0.9682) -- (-0.50,+0.8660) {G,B,M}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.25,-0.9682) -- (1.00,+0.8660) {G,B,M}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.25,-0.9682) -- (1.75,-0.9682) {G,B,M}  d^2 = (9/4) (~1.5000)
+      (0.75,-0.9682) -- (-0.75,-0.9682) {P,B,R}  d^2 = (9/4) (~1.5000)
+      (0.75,-0.9682) -- (0.00,+0.8660) {P,B,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.75,-0.9682) -- (1.50,+0.8660) {P,B,R}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (0.75,-0.9682) -- (2.25,-0.9682) {P,B,R}  d^2 = (9/4) (~1.5000)
+      (1.25,-0.9682) -- (-0.25,-0.9682) {P,G,O}  d^2 = (9/4) (~1.5000)
+      (1.25,-0.9682) -- (0.50,+0.8660) {P,G,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.25,-0.9682) -- (2.00,+0.8660) {P,G,O}  d^2 = (9/4 + 3/4*sqrt(5)) (~1.9817)
+      (1.25,-0.9682) -- (2.75,-0.9682) {P,G,O}  d^2 = (9/4) (~1.5000)
+== Z. O3's edge point X1 = (1/4, Y): points just above it, every colour tested exactly (a straddling tile of that colour = an interior point at distance 1)
+   X1 + (0, 1/100)   (direction 90): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T1); free: NONE
+   X1 + (1/100, 1/100)  (direction 45): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T1); free: NONE
+   X1 + (-1/100, 1/100) (direction 135): colours excluded ['P', 'G', 'B', 'M', 'R', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, R:T0, O:T-2); free: NONE
+   X1 + (-1/100, 1/1000) (direction 174, OUTSIDE the cone (30, 165.52)): colours excluded ['P', 'G', 'B', 'M', 'O'] (witness tiles P:U0, G:U1, B:U-1, M:T-1, O:T-2); free: ['R']
+   control: (1/2, Y + 1/100), above the middle of the top tile over V_1: colours excluded ['P', 'G', 'M', 'R'] (witness tiles P:U0, G:U1, M:T-1, R:T0); free: ['B', 'O']
