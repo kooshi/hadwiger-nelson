@@ -1,0 +1,37 @@
+FOUND   Kooshi aim               CLAUDE.md
+FOUND   Kooshi ambition          CLAUDE.md
+FOUND   Kooshi finite graph      CLAUDE.md
+FOUND   Q-full                   STUB-unit-arc-half.md
+FOUND   C-CHAIN-1                FS110-derivation.md
+FOUND   C-CHAIN-2                FS110-derivation.md
+FOUND   C-CHAIN-3                FS110-derivation.md
+FOUND   C-CHAIN-4                FS110-derivation.md
+FOUND   C-CHAIN-5                FS110-derivation.md
+FOUND   C-CHAIN-6                FS110-derivation.md
+FOUND   C-CHAIN-7                FS110-derivation.md
+FOUND   C-CHAIN-8                FS110-derivation.md
+FOUND   C-CHAIN-9                FS110-derivation.md
+FOUND   C-CHAIN-10               FS110-derivation.md
+FOUND   C-CHAIN-11               FS110-derivation.md
+FOUND   C-CHAIN-12               FS110-derivation.md
+FOUND   C-CHAIN-13               FS110-derivation.md
+FOUND   C-CHAIN-14               FS110-derivation.md
+FOUND   C-CHAIN-15               FS110-derivation.md
+FOUND   C-CHAIN-16               FS110-derivation.md
+FOUND   C-CHAIN-17               FS110-derivation.md
+FOUND   C-CHAIN-18               FS110-derivation.md
+FOUND   CAL-STRIP rule 1         axenovich-2014-chromatic-number-subsets-euclidean-plane.pdf
+FOUND   CAL-STRIP rule 2         axenovich-2014-chromatic-number-subsets-euclidean-plane.pdf
+FOUND   CAL-DISK p.199           geombinatorics-v30-n4-2021-04.pdf
+FOUND   CAL-DISK pentagon        geombinatorics-v30-n4-2021-04.pdf
+FOUND   Polymath p.194 tactic    geombinatorics-v30-n4-2021-04.pdf
+FOUND   [07.10] strip rule       polymath16-threads-1-18-text.txt
+FOUND   [11.34] disk skeleton    polymath16-threads-1-18-text.txt
+FOUND   TS-U l.15                FS106-TS-derivation.md
+FOUND   Thomassen p.850          Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt
+FOUND   S-V Question 2           arXiv-2502.01958-maptype.pdf
+FOUND   S-V Corollary 3          arXiv-2502.01958-maptype.pdf
+OK      √15/2 + √3 ≈ 3.66854         computed 3.668542
+OK      √(5/2 + 9/(2√5)) ≈ 2.12426   computed 2.124255
+OK      (√15/2 + √3)/2 ≈ 1.834       computed 1.834271
+33 quotations, 0 not found or wrong
