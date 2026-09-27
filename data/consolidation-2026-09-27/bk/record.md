@@ -41,3 +41,42 @@ proof verdict ("Not yet read at cusps: … (FS110-CE, running)") now cites CE1�
 **Checks, each exit status read directly:** `python3 tools/fs110_ce_scope.py` exit 0, "ALL AS PREDICTED" (the addresses the entries cite);
 `python3 tools/fs71_ledger_b_check.py --strict` exit 0, PASS, 947 rows (940 before), census FS110 = 49 (42 before);
 `python3 tools/claude_md_fact_audit.py --dupes` exit 0, 10 repeated runs (10 before: the seven new § B lines add none).
+
+## Stage 2 — SAVED (the checker's silent skips made loud)
+
+**The defect** (FS-106 inventory item 83; FS-107 item 39). `tools/fs71_ledger_b_check.py` read an entry header with one regular expression and
+warned (never failed) on a header that began like an entry and did not parse; three shapes did not even warn: a parenthetical before the dash and a
+non-ASCII id (the near-miss pattern needs an ASCII id followed at once by the dash), and nested brackets (warned only). An entry lost that way left
+the census, and nothing failed unless its § B row happened to exist.
+
+**The change** (the tool is BK's; not on the frozen list):
+- `header_problems(text)`: every *entry-shaped* header — a line-opening bold span holding " — " and ending in "]" — that the entry grammar rejects
+  is reported with its shape: a parenthetical before the dash; a non-ASCII id; a space in the id; nested brackets in the grade (found by balancing
+  the brackets back from the final "]"); a title wrapped onto a second line; or "unclassified". Each one **FAILS the run, in every mode**, naming the
+  header's first line and the shape.
+- A fourth shape the scan turned up, the one that bit FS110-YB4-WINDOW: a header the grammar *does* parse, but whose grade began inside the title
+  (an unclosed `[a, b)` in the title, so the parsed grade holds ". [" ). It now fails too. An unclosed `[` inside a true grade (FS91-J07-10's
+  `[t, t + β)`) is legitimate and reads clean.
+- The ASCII near-miss detector (no `[grade]**` closing the header) now FAILS instead of warning.
+- **Declared non-entries** — a header saying it was "NOT given a fresh id" (M53's Proposition 6.4, the one instance in the tree that is
+  entry-shaped) — are listed on every run as a `note:` line and not counted; they are never skipped in silence.
+- `--self-test` plants the four shapes beside a faithful header (each must fire, naming its header) and two headers that must not fire (the
+  legitimate unclosed `[` in a grade; a declared non-entry). It exits 0 only if all fire and both stay quiet.
+
+**The plants** (`data/consolidation-2026-09-27/bk/plant_headers.sh <scratch dir>`: a scratch copy of every derivation file and `LEDGER.md`, four
+planted headers appended to the copy of `FS110-derivation.md`, the new checker and the checker as it stood at a5fe409d run on the same tree):
+
+| plant | new checker, `--strict` | checker at a5fe409d |
+|---|---|---|
+| `**FS110-PLANTA — … [hand; over Parts [external]]**` | FAIL: nested brackets in the grade, header named | a `warn:` line only |
+| `**FS110-PLANTÉ — … [hand; one mind: BK]**` | FAIL: a non-ASCII id, header named | silent |
+| `**FS110-PLANTC (the planted one) — … [hand; one mind: BK]**` | FAIL: a parenthetical before the dash, header named | silent |
+| `**FS110-PLANTD — … the window `R_y = [a, b)` in the title. [hand; one mind: BK]**` | FAIL: the title's `[` read as the grade's opening, header named | parsed with the wrong grade; failed only because the plant has no § B row |
+
+New checker on the planted tree: exit 1, `RESULT: FAIL (5)` — the four header lines plus "entry FS110-PLANTD has no LEDGER.md § B row" (the
+row check, correctly: PLANTD parses). Old checker: exit 1, `RESULT: FAIL (1)`, that row line alone.
+
+**The real tree:** `python3 tools/fs71_ledger_b_check.py --strict` exit 0, PASS, 947 rows, census 947 theorems in 71 files, one `note:` (M53's
+declared non-entry); the non-strict run exit 0; `--self-test` exit 0, every line True. The first draft of the parsed-grade rule ("any `[` in a
+grade") fired on FS91-J07-10's legitimate interval and the first draft of the shape rule on M53's declared non-entry; both were refined before
+this stage was saved (the real tree never changed).
