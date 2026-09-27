@@ -182,3 +182,24 @@ almost everywhere"; the polygonal half is a theorem (AE-POLY bar `d = 2`), the c
 **at risk** — both sides now reason from the complexity split, so W's first family may carry a complexity parameter from the start (its falsifier).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the first card's answers (07:40–07:43 UTC)
+
+- **Both sides took the second branch, by derivation, and each retracted one sentence, free** (verbatim in scratch):
+  - W retracted its registration's item (3), "families of bounded local complexity converge to regular tight colourings, which row 132 excludes";
+    what survives: the bound holds for polygonal and convex limits only (FS106-AE-POLY bar `d = 2`, FS106-AE-CONV). W's stage 2 goes to curved
+    bounded families, decided by [G1]–[G4].
+  - R retracted "Shrinking Parts-type vertex voids inside a fixed combinatorial type therefore cannot work"; part (1) survives for polygonal limits,
+    part (2) (the complementary-junction void) stands.
+- The owner applied the K-REG correction to `data/fs107/claims.md` (`e5ab02f5`), symmetric for both; inventory items 13–14.
+- **Retractions: R 1, W 1, Poros 0**, both killed by one card (the first contest is between each side and the constraint list, not between the
+  sides — the disagreement proper has not started).
+- **What I watch next (X6, the plan's ranking).** The card made C-AE-Q2 the live ground for bounded curved families. It is **asymmetric**: a W family
+  of bounded curved type with vanishing voids is decisive (it refutes C-AE-Q2 a.e. and meets W, `χ(ℝ²) ≤ 6` with no MR); R closing [G1]–[G4] only
+  defeats that class and is not decisive (X6: "Rank R-S's special cases (Q2, AE-FA) below the equivalence; they are tools, not targets"). If R's
+  stage 2 makes Q2 its target, the next card (to both) asks which of each side's next steps is decisive if it lands and which only closes a class.
+- `bounded-complexity-families-keep-their-voids`: its polygonal half confirmed by both sides' derivations (AE-POLY), its curved half is C-AE-Q2 —
+  status open, now shared frame.
+
+## Stage 3 — SAVED
+
