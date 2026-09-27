@@ -329,9 +329,9 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
 `[Fischer1990]`; `[Moorhouse2010]`; `[Manturov2012]`; `[Madore2015]`; the finite-field side (Medrano–Myers–
-Stark–Terras → Vinh → Schneider–Silva → Krebs → Lorenz–Zimmermann); `[Polymath16wiki]` — and all but `[Fischer1990]` (Thm 1(i), the coset construction) stop where
-Madore's Prop. 3.9 declines to formulate the general case. **Ours:** Theorem A's general form made metric-free (not found in
-print; `[Johnson1982]` unread); Theorem B's kernel proof and its 𝔽₄-valued residue colouring — **the value χ(K²) = 4 itself is `[Fischer1994]`'s** (1994, read and verified 2026-09-22; row 57, § Publication), which closed the five questions row 57 lists sixteen to thirty-one years before they were posed; every kernel certificate; and the rest of the claim, row by row with its unread-prior-art caveats, in `LEDGER.md` § The claim list. **Not ours:** every attribution, verbatim, in `LEDGER.md` § The claim list — read it before calling anything ours.
+Stark–Terras → Vinh → Schneider–Silva → Krebs → Lorenz–Zimmermann); `[Polymath16wiki]` — and Madore's Prop. 3.9 declines to formulate a general case two had printed:
+metric-free at cyclic targets (`[Johnson1982]`), with arbitrary ones (`[Fischer1990]` Thm 1(i); `[Johnson2006]` p. 213). **Ours:** Theorem A's
+kernel proof (its statement merges those two); Theorem B's kernel proof and its 𝔽₄-valued residue colouring — **the value χ(K²) = 4 itself is `[Fischer1994]`'s** (1994, read and verified 2026-09-22; row 57, § Publication), which closed the five questions row 57 lists sixteen to thirty-one years before they were posed; every kernel certificate; and the rest of the claim, row by row with its unread-prior-art caveats, in `LEDGER.md` § The claim list. **Not ours:** every attribution, verbatim, in `LEDGER.md` § The claim list — read it before calling anything ours.
 
 ### The novel-results ledger
 

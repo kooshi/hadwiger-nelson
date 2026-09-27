@@ -106,19 +106,20 @@ F^d are translates of C₀(F^d), to k-color F^d it suffices to k-color C₀(F^d)
 `G(S, D)`, `S` an additive subgroup of ℝⁿ and `D` any set of distances: *"An additive k-coloring of G(S, D) is a proper coloring
 achieved by finding a group homomorphism of ⟨S_D⟩ into some abelian group of order k so that each u ∈ S_D is mapped to a non-zero group
 element, which assures that G₀(S, D) is properly colored, and then copying the coloring on the other components of G(S, D), which are
-copies of G₀(S, D) associated with the cosets of ⟨S_D⟩ in S."* So the step Madore declined in 2015 was taken in 1990 — and its first
+copies of G₀(S, D) associated with the cosets of ⟨S_D⟩ in S."* So the step Madore declined in 2015 was taken in 1982 at cyclic targets (`[Johnson1982]` p. 220: *"Suppose S ⊆ G, and n > 1. If S is weakly n-free, then there is an S-alternating n-coloring of G. If n = 2, or if S is a singleton, the converse holds; the existence of an S-alternating n-coloring implies that S is weakly n-free."*, its proof colouring the subgroup `H` the set generates and *"Extend the coloring to all of G by coloring the co-sets of H similarly."*) and in 1990 at arbitrary ones — and its first
 instances are older still: `[BendaPerles2000]` (circulated 1976) two-colours `ℚ²` by the parity of the unit-vector group `H²` and extends it
 coset by coset, *"It can be extended to the whole Q² since the other connected components, being cosets of H², are isomorphic to it in the
 graph structure"* (p. 120), and `ℚ³` the same way (p. 121). (Second reading, 2026-09-27, the consolidation run's job LV.)
 
-**Our answer.** The formulation for an arbitrary graph drawn in an arbitrary abelian group — no metric, torsion allowed, any subgroup
-containing the edge differences — kernel-checked: a routine abstraction of Fischer's construction.
+**Our answer.** The kernel proof of the formulation for an arbitrary graph drawn in an arbitrary abelian group with an arbitrary finite
+abelian target — the one-line merge of `[Johnson1982]`'s metric-free setting with `[Fischer1990]`'s arbitrary target.
 
 **Prior art that constrains the claim.** His Prop. 3.2 *is* the valuation-subring form, so
 `colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours; the coset construction out of a subgroup is `[Fischer1990]`
-Thm 1(i), in `[Johnson2006]`'s form for every `G(S, D)`. **Ours:** the metric-free, arbitrary-group statement — not found in print as far as read; `[Johnson1982]`, *Coloring Abelian groups*
-(Discrete Math. 40 (1982) 219–223), which `[Johnson2006]` cites on the same page as its [10], is unread and is the paper likeliest to hold
-it (a debt: open access at the publisher, whose bot check refused a scripted fetch) — and the kernel proof. The
+Thm 1(i), in `[Johnson2006]`'s form for every `G(S, D)`. **Ours:** the kernel proof. The metric-free statement is in print in part: `[Johnson1982]` (read in full 2026-09-27, job LX; the owner
+checked p. 220) has it at the target `ℤ/n` with the homomorphism equal to 1 on the differences — Theorem A's two-colour case in full, with a
+converse Theorem A lacks, and for `n ≥ 3` only colourings onto the `n`-cycle, which colour no graph of chromatic number ≥ 4. The arbitrary
+target is `[Fischer1990]` Thm 1(i) and `[Johnson2006]` p. 213. Their merge is not found as one statement as far as read. The
 delimitation is written into ledger row 57 and must survive into any manuscript. **Not proved:** that a number field with a
 conjugation-fixed prime supplies the valuation subring with residue field of size `N(𝔭)` (`CLAUDE.md` G35).
 
@@ -664,6 +665,10 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   mind; "likely folklore"; `[MatolcsiEtAl2025]`'s bound (13) is the argument at Croft's set]. **Not answered:** his Question 2, whether
   the supremum is attained by a finite subgraph (*"Intuition screams, "No!", but it looks like an excellent geombinatorial problem to prove it."*, p. 103); his Question 4 / Problem 5 (a non-bipartite `H` with
   `χ_f(H) < 2 + ε`) is elementary — the regular `(2k+1)`-gon of unit side, `χ_f = 2 + 1/k` — and not ours.
+- *Closed by others, listed so it is not re-closed:* **Johnson's weakly 2-free set** (`[Johnson1982]` p. 222, Remark (ii)): a weakly 2-free
+  `S ⊆ (0, ∞)` with *"x² + y² = 1, x, y ≥ 0 implies x ∈ S or y ∈ S"* would four-colour the plane by the product of a two-colouring of the line;
+  *"However, the author does not know whether or not such an S exists."* — **no**, since `[deGrey2018]`: the product colouring would be a
+  proper four-colouring of `ℝ²` (rung B of this repository, kernel-checked; the consolidation run's LX).
 - **Which distances can a four-colouring of `ℚ⁴` forbid beside 1?** `[Johnson2006]` p. 212: *"But I believe the following is still open: For which d > 0
   does there exist a 4-coloring of ℚ⁴ which forbids both distances 1 and d?"* — after `[Zaks1999]`'s Lemmas 1–2 (every proper four-colouring of
   `G(ℚ⁴, 1)` is monochromatic on pairs at `√2` and at 2), with his guess *"So perhaps all the distances 4k+2 and √4k + 2, k = 1, 2, … cannot be
@@ -671,7 +676,7 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   consolidation run's job LV, 2026-09-27, LV-T3 in `data/consolidation-2026-09-27/lv/record.md`; job LX blind, `data/consolidation-2026-09-27/lx/record.md`
   stage 1): **for `d` realised in `ℚ⁴` (`d² ∈ ℚ`; for `d² ∉ ℚ` no pair is at distance `d` and a colouring exists trivially — LX's scope repair),
   exactly the `d` with `d² = p/q`, `p, q` odd — and then every proper four-colouring forbids `d`.** Read `ℚ⁴` as the rational quaternions, `|x|² = N(x)`; `O₂`, the
-  quaternions integral at 2, is the component of the origin (`[BendaPerles2000]`'s `[H⁴ : D] = 2`), `𝔓 = (1 + i)O₂` its maximal ideal, `O₂/𝔓 = 𝔽₄`
+  quaternions integral at 2, is the component of the origin (`[BendaPerles2000]` pp. 124–125's description of `H⁴`; their odd-denominator `D` has index 2 in it), `𝔓 = (1 + i)O₂` its maximal ideal, `O₂/𝔓 = 𝔽₄`
   (`LEDGER.md` row 57's quaternion remark). Left multiplication by `1 + i` carries `G(ℚ⁴, 1)` onto `G(ℚ⁴, √2)`, whose components are the cosets
   of `𝔓`; Zaks's Lemma 1 makes each monochromatic. So every proper four-colouring is, on each component, the residue colouring onto `𝔽₄` up to
   relabelling (the unit vectors cover `𝔽₄ˣ`, so the quotient is `K₄`): a pair is **forced equal iff `v₂(|x − y|²) ≥ 1`, forced different iff
