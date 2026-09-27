@@ -366,3 +366,55 @@ hunch: h-nb4-slip
 - A4-SIX-ARCS verbatim (FS110 competition record l. 612) — read against: §IQ (b)'s paraphrase — surprised: yes; the hypothesis "no covering pair (v, y), y ∈ ω(v)" is dropped in the paraphrase
 
 ## Stage 2 — SAVED
+
+---
+
+## Stage 3 — SAVED: the claim-list draft reviewed (brief item 2, continued)
+
+*Read: `data/fs112/claims.md` at b8e561c2 in full; FS112-P's message (all eight stage-2 items adopted, a reservation on the disk). Rendered:
+`[Polymath2021]` Fig. 10 (pdf page 36 at 110 dpi), kept at `data/fs112/fs112-a/polymath2021-p199-fig10-disk.png`.*
+
+### 3.1 Correction to my own stage-2 item (sent at once, before the claim list)
+
+ARC-INERT as first sent ("an arc of `ω(P)` is at distance exactly 1 from `P` alone and from any other point `Q` at at most two of its points") handled
+a point against the arc, not a tile against the arc. Sent corrected:
+- the whole-sub-arc same-colour contacts of an inert arc are only a Siamese contact (which forces `P ∈ cl`, so not inert) or an outer contact along
+  the concentric circle of radius 2 about `P`, and only the inner colour can make that one;
+- the inward bend is free away from isolated contact points;
+- the claim is a GAP at those points.
+
+**Retractions so far: FS112-A 1** (free: nothing built on it; the planner filed the corrected form verbatim).
+
+hunch: h-arc-inert
+  status: narrowed (2026-09-27): TRUE off isolated contact points, a GAP at them; one mind; filed as ARC-INERT in `data/fs112/claims.md` §6
+
+### 3.2 Advice sent on the draft (seven items; the planner decides)
+
+1. **Stale vocabulary.** "self, pair, free" remains in §2 C-S1-G, §3's C-CHAIN question and §6 C-UA-INC, but §0 now defines in/out/both/inert.
+2. **C-SEAMS-TWO drops N-X's "disjoint types".**
+3. **C-GLOBAL is misnamed and unconditional.** It is the condition the positives force; call it C-BEYOND, with the disk's clause conditional on
+   CAL-DISK. The open question, whether any bounded-radius NO exists, becomes C-LOCAL (my rank-1 card).
+4. **CAL-DISK.** No printed rule exists in words, but Fig. 10 is legible. A by-eye transcription of its combinatorics, then exact solving, is
+   derivation, as at FS-85 (protocol §1 rule 11). Fitting to pixels is out. The rebuild must reproduce `r² = (25 + 9√5)/10` exactly. The disk is the
+   only positive for disc-local arguments at radius 1.834–2.124.
+5. **Killing test 4 (G17) cannot fire as written.** FS-110's fragments have open arc ends. Proposed: C-ARC-END, the arc-closed fragment as the
+   informative local object, and the construction side's first product as the dial.
+6. **C-HOCK's pointer.** N4's horn curvatures `(−1, 1)` are radii > 1, which Hockertz allows. The first test is A6-C2's (or WC's) radius-9/10 arc.
+7. **Killing tests 7 and 8 are out of order.** Also: the construction side's blind verifier rebuilds the strip independently.
+
+### 3.3 Cards: fates
+
+- `is-the-no-local-or-global` (rank 1): the planner filed C-GLOBAL as a necessary condition from the positives. I asked for the open question as a
+  separate claim (C-LOCAL). Fate: partly answered (the positives' condition filed); the question itself pending the planner's decision.
+- `which-arithmetic-calibrates-the-strip` (rank 2): **answered** — adopted as §7 "The checker" (exact number-field arithmetic, the order FS-110 →
+  CAL-7 → CAL-STRIP → CAL-DISK, three REJECT causes, two rebuilds). It changed the plan.
+- `are-the-seams-two` (rank 3): **answered** — filed as C-SEAMS-TWO; a hypothesis to restore (item 2).
+
+### 3.4 Evidence inventory (additions)
+
+- `data/fs112/claims.md` at b8e561c2 — read against: my stage-2 advice adopted cleanly — surprised: yes, mildly. Adopting the kinds left the old
+  words in three places, and a second dropped hypothesis appeared (N-X's "disjoint types"), the same failure standing rule 5 exists for.
+- `[Polymath2021]` Fig. 10, rendered — read against: an illegible figure with no rule — surprised: yes. It is legible: labels A–E, C and D on the
+  boundary circle, curved edges visible. A combinatorial transcription is feasible.
+
+## Stage 3 — SAVED
