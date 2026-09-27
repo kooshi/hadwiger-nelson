@@ -295,3 +295,14 @@ at `F_dG` is committed before it reads R's record, so the two are separate minds
   the record placed in a paper that attributes it elsewhere.
 
 **Would have searched here:** nothing (bibliographic queries and one text extraction of a held PDF only).
+
+## Stage 9 — SAVED (§A, the advisor's points, and my decisions)
+
+The advisor's stage 1 (`plans/POROS-2026-09-26-fs105-harden-mr.md`, registered before my drafts) against §E: PE-2 break 0.08 (mine, E1–E3
+jointly, ≈ 0.15 — I weight the unwritten 1.3 ⟹ 1.2 deduction and §4.4's standing assumptions higher); EF_F⁺ 0.25 (E4: 0.25); degree 16 0.07
+(E5: 0.20 — mine is higher because nobody has written the growth the argument needs as an inequality); scope 0.05; joint survival 0.62 (E8:
+0.60). **Adopted:** its degree-16 failure shape (a `Γ` from `U_ℚ` alone is inadmissible) and its two EF_F⁺ risks go into the walker's stage 2,
+**not** into the blind brief (they would steer B); its row-129 sharpening — a proof in print that `α₁(ℝ²) ≥ 1/4` refutes MR, since
+`m₁(ℝ²) ≤ 0.2470` — goes into the walker's (d3). **Held:** no disagreement recorded yet; the advisor's reply to the claim list had not arrived
+when this stage was saved — the owner relays it, and a change it forces is made to the briefs before launch, not to the fixed claim list
+unless a hypothesis is missing.
