@@ -306,3 +306,88 @@ jointly, ≈ 0.15 — I weight the unwritten 1.3 ⟹ 1.2 deduction and §4.4's s
 `m₁(ℝ²) ≤ 0.2470` — goes into the walker's (d3). **Held:** no disagreement recorded yet; the advisor's reply to the claim list had not arrived
 when this stage was saved — the owner relays it, and a change it forces is made to the briefs before launch, not to the fixed claim list
 unless a hypothesis is missing.
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; job FS105-C, the close planner)
+
+*de Bruijn (Opus 5.5), 2026-09-26. Brief `data/fs105/briefs/C105-close-math.md` with `data/fs105/briefs/STANDING-RULES.md`; its template
+`data/fs103/briefs/C103-close-math.md`. Worked from `plans/FS105-close-inventory.md` (items 1–33). Drafts only: `CLAUDE.md`, `LEDGER.md`,
+`plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`, `plans/GROKKING-INSTANCES.md` and the two protocols are written by the front-page job FS105-X.
+Every number below is read from the record named beside it, never from the inventory. Records: R = `plans/FS105-R-reading.md`, D =
+`plans/FS105-D-deduction.md`, B = `plans/FS105-B-derivation.md`, W = `plans/FS105-W-walk.md`, A = `plans/POROS-2026-09-26-fs105-harden-mr.md`.*
+
+## Theorems this phase proved
+
+None new: a close. The close's own readings, each one mind and marked where used: the classification of B's result against X01V's stall
+(1.2); `[Sataev1975]` against `[EinsiedlerFish2010]` Thm 1.2 (4.4, from the owner's reading of the abstract and `[Huang2017]` §1).
+
+### Stage 1 — SAVED (quotation check; reconciliation)
+
+**1.0 Quotation check of the brief (standing rule 5).**
+
+| # | the brief says | source | result |
+|---|---|---|---|
+| Q1 | "EL2021 Thm 1.2 rests on EL2021 Thm 1.3 [external, published], plus the deduction 1.3 ⟹ 1.2 [hand, two minds: FS105-R; FS105-D blind]" | R §2.1, §4.1; D §2.1, §2.5 ("It gives Theorem 1.2 exactly the grade of Theorem 1.3: [external]"), Stage 3 ("two minds, reached blind") | matches |
+| Q2 | "EL2003 is an announcement, not a proof" | R §1.3 (EL2003 p. 102 "A sketch of how Theorem 1.1 is proved … is given in §6"; §6 "Outline of the proof of Theorem 1.1"); D §1.0 | matches (two readers quote it verbatim) |
+| Q3 | "PE-2's use is within the hypotheses [reading, one mind; the advisor's three items confirmed]" | R §4.1 (every (a)-item and (i)–(iii) TRUE, one mind); W §3.2–3.3 (PE-2 at `F_dG`, committed `a0fee351` before reading R) | **matches at ℚ(√635087); at de Grey's field it is two separate readings** (R; W). Stated so below |
+| Q4 | "EF_F⁺ has three blind derivations plus one checking reading; EF_F⁰ is TRUE" | B Stage 4 ("three derivations blind to one another (X01D, X12B, FS105-B) and one checking reading (X01V stage 4)"); B Stage 3 | matches; X01D and X12B are for every real `F` with `R = O′`, B's at ℚ(√635087) |
+| Q5 | "MR at degree 16 has a checking walk, one mind (C-MR16)" | W §5.1 ("a checking reading … one mind, not blind") | matches |
+| Q6 | "The reading gap at EL2021's cited leafwise-measure machinery is named as a reading gap, not a mathematical one" | R §3.2 ("GAP (reading, not mathematics) at the cited machinery") | matches |
+| Q7 | "(W) and (W′), with their margins" | W §4.2, §4.3 | matches |
+| Q8 | items 21, 33 (the owner's rulings), 12, 24 (the covert channels), "FS105-B confirmed 'none'" | inventory items 21, 33, 12, 24; item 28 ("answer: none"); B Stage 4 last paragraph | match |
+| Q9 | `CLAUDE.md` "is at 296,232" | `wc -c CLAUDE.md` at this job's start | matches |
+
+**1.1 Reconciliation — the fixed claim list (`data/fs105/claims.md`) and the advisor's items.** Minds: R (the reader, not blind; given the
+advisor's items (i)–(iii) as one-mind readings to verify), D (blind to R and to the advisor until its stage 2 was committed, `46550398`), B
+(blind to X01D, X12B, X01V, the advisor's record and every other FS-105 record until its stage 3, `85c2eb2e`; the route's outline open to
+it through row 120 and G76, as the plan accepted), W (not blind; its PE-2 walk at `F_dG` committed, `a0fee351`, before it read R), A (the
+advisor, not blind; a checking reading of X12B §2.2).
+
+| claim | field | verdict | minds; blindness | grade | divergence |
+|---|---|---|---|---|---|
+| (a0) provenance of EL2021 Thm 1.2 | both | **TRUE, re-grounded**: EL2003 is an announcement (its §6 an outline, its last step "not hard"), so not a proof; Thm 1.2 follows from EL2021 Thm 1.3 by a deduction EL2021 does not write (Haar uniqueness; each `G_j` finite or `X` by total irreducibility; Abramov–Rokhlin with the `log|G_j|` fibre bound; affinity; Abramov's power formula) | **two**: R §2.1; D §2.1, blind to R. A §2.2 sketched it too (one mind; R received its ingredients as item (iii), so not a third independent mind) | [hand] for the deduction; Thm 1.3 [external, published, ETDS 42 (2022)]; EL2003's status [reading, verbatim, two readers] | route only (D Stage 3's table: D's Case A needs neither Thm 1.3(3) nor the orbit argument; the lift of a factor seen from the two sides of duality). **None of truth** |
+| the forced sense: "no virtually cyclic factors" = no **non-trivial** algebraic factor (the trivial factor is virtually cyclic, so the literal reading makes Thm 1.3 vacuous) | — | **TRUE** | **three**: A §2.2 (i); R §2.2 (FS105-R-VC); D §2.3 S3, blind | [hand] | none; EL2021's own use (Lemma 7.4, p. 32) applies it to `Y_irred ≠ 0` (R) |
+| totally irreducible + not virtually cyclic ⟹ `d ≥ 2` and no non-trivial virtually cyclic factor | — | **TRUE** | **three**: A §2.2 (ii); R §2.1 step 1 (dual side); D-T1 §2.1 steps 0a–0d (primal side), blind | [hand] | route only |
+| (a1) solenoid; (a2) action; (a5) `d = 2`; (a7) one entropy notion | `F₁` | **TRUE** | one (R) | [hand] | — |
+| (a1), (a2), (a5), (a7) | `F_dG` | **TRUE** | two separate (R; W §3.1–3.3) | [hand, checking readings] | none (W §3.3's table) |
+| (a3) total irreducibility ⟺ admissibility (finiteness via Lemma F; no finite generation over ℤ) | both | **TRUE** | R, with X02D and X02V (three at `F₁`); W at `F_dG` a fourth reading, by the same two routes | [hand] | none |
+| (a4) not virtually cyclic, no non-trivial virtually cyclic factor — for `M̂`, every `α_Λ`, the adelic lift | both | **TRUE** | R (all three objects); W (`M̂` and `α_Λ`; the lift not checked) | [hand, one mind for the lift] | none; R's is wider |
+| (a6) ergodicity for all of `Γ ≅ ℤ²` | both | **TRUE**; neither route treats a push-forward of a `U`-ergodic measure as `Γ`-ergodic | R; W at `F_dG` | [hand] | none |
+| (a8) Lemma W at the field | both | **TRUE**; uniform proof, no enumeration of subfields | R (three minds with X02D, X02V); exact instances: `F₁` (R: `h = 965`, `p = 17`), `F_dG` (W: `p = 421`, all 373 proper subfields excluded by two exact routes) | [hand + tools exact] | none; the instances are complementary |
+| (a9) nothing else assumed by Thm 1.3's proof | both | **TRUE as far as read**; our pieces are semisimple, totally A-irreducible and isometric at every archimedean place, so every Lyapunov weight is non-archimedean, and the last step of Thm 4.1's proof writes the purely `p`-adic case (p. 34). **A reading gap, not a mathematical one**, at the cited machinery (`[10]` §7, `[11]` Prop. 6.4 and Lemma 5.2, `[5]` Thm 8.2, Prop. 6.2, Lemma 5.10, `[9]`, `[28]`, `[34]` Thm 3.7) and the unread proofs of Thm 7.1, Prop. 7.5 and §§5–6 | one (R); W's flag (sixteen isometric directions at `F_dG`) answered by R's reading | [reading] | none |
+| advisor (i) the passage from the pieces to `R̂` | both | **TRUE** by both routes; A's description is X02V's route (and X02D §3.3); X02D §3.2 needs no projective system but uses Haar's `Γ`-ergodicity | R §2.5 | [hand, one mind] | a correction of A's attribution, not of truth |
+| advisor (ii) `h_{m_{M̂}}(γ) > 0` for `γ ≠ 1`; `⟨u, w⟩ ≅ ℤ²` | both | **TRUE**; sharper: `h ≥ log 2` at totally real `F` (FS105-R-H: Mahler measure = `log|a₀|`, `γ` non-integral by Kronecker); **TRUE** | R §2.5; W agrees (positivity only) | [hand, one mind for the bound; on the Mahler-measure formula, textbook] | none |
+| advisor (iii) the non-trivial reading; Abramov–Rokhlin; no hyperbolicity | both | **TRUE; TRUE; TRUE as far as read** (EL2003 p. 100: "Notice that we do not assume any hyperbolicity in Theorem 1.1") | R; D (the first two, blind) | [hand + reading] | none |
+| **(b) EF_F⁺** | `F₁` | **TRUE** | B, blind — **three derivations blind to one another** (X01D, X12B: every real `F` with `R = O′`; B: ℚ(√635087)) **and one checking reading** (X01V stage 4); A's checking reading of X12B §2.2 besides | [hand]; arithmetic inputs [tools exact, plants fire] | route only (B Stage 4's table: model derived; divide first; one place made global; contraction `z/σz` with `z ∈ 𝔔 ∖ σ𝔔`, no class number). **None of truth** |
+| (b′) **EF_F⁰** ("`U`-ergodic, `h_μ(u) = 0` for every `u` ⟹ `μ(E) = 1`") | `F₁` | **TRUE**, a corollary of EF_F⁺ with `u* = (3+4i)/5`; ergodicity unused | B, blind | [hand] | — |
+| **(c) C-MR16** — MR(`F_dG`) by row 120's proof, every step at `[F:ℚ] = 16` | `F_dG` | **TRUE**: EF_F⁺ needs only `liminf log #V_M / log M > 0` (`K > 9` degree-free, chosen first; `β < 1/(nK)`); `U_ℚ` gives `(4/π + o(1))M^{1/16}` exactly (`H_L(q) = (den q)^{16}`); PE-2's hypotheses as (a) above | W, **one checking reading, not blind**; with R's hypothesis check at `F_dG` and the two-mind deduction (owner's ruling, item 33) | [hand, a checking reading; tools exact] | none; B's blind scope remark ("any `κ > 0` works") agrees, not claimed by B |
+| (d1) MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`; row 129's killing test | — | **TRUE as stated**; the only MR-carrying link is FRAC (L3, two blind); the test uses B-AMEN's Følner half (two blind: F, B), not its one-mind reverse half, and not B-CHIF | W, one checking reading | [checking reading] | none |
+| (d2) what a refutation needs | — | (W) `α(G) ≥ c|G|` for every finite unit-distance graph with `c ∈ (0.24699…, 0.249956…)` (`sup_G χ_f(G) < 4.04876`), or (W′) `χ_f,0(ℝ²) < χ_f(ℝ²)` (with B-CHIF); neither implies the other | W, one mind | [derived from held papers] | — |
+| (d3) anything near it | — | **nothing**: `0.0176` above the best proved lower bound `δ_Croft = 0.22936…` on `α₁(ℝ²)`; the cheap form `α₁ ≥ 1/4` false in print (`[DuczVarga2026]`); MR's prediction unscored at a margin `≥ 0.00297` in ratio (`0.249956 − 0.246990`); six zbMATH queries negative | W, one mind; A §2.3 had the cheap form first | [reading] | A's window "`(0.2470, 0.24996]`" closes its bracket where `[DuczVarga2026]` gives a strict `<`; W's `(0.24699…, 0.249956…)` is the exact one |
+
+**Arithmetic checked here** (seconds, by hand): `1/4.0007 = 0.249956…`; `1/0.24699 = 4.04875…`; `0.249956 − 0.246990 = 0.002966`;
+`0.24699 − 0.22936 = 0.01763`. All as W states.
+
+**1.2 The advisor's classification key, applied to B (A §2.1, held by the owner for the close, item 17)** [the close's reading, one mind].
+X01V's blind GAP sat at "Lemma 3.2's multiplier step … images `u′B` small at every place": it required every multiplier to keep the
+neighbourhood thin, found only `(log M)^k` such multipliers, and named a missing lemma UZ; X01V §4.2 named the wrong premise, "The adelic
+argument needs only that the *product* over all places of the error `z` be `< 1/C_Λ`." **B, blind to X01V, passed that step by exactly
+that premise** (B Step 4, (E2): "fat places are paid for by the multipliers' heights … the archimedean coordinate is bounded, never
+approximated, with `|q − q′|_∞` absorbed in `H(q − q′)`"), and by a bookkeeping of its own (divide first, one place made global), not X01D's
+or X12B's. **Classification: B is a TRUE that meets X01V's stall, not a TRUE that avoids it**, reached blind — the evidence the advisor's
+hunch `x01v-withdrawal-is-selection` asked for: the closing argument is derivable blind, so X01V's withdrawal was right, even though
+X01V's own stage 4 was not independent. B's own C0 had named a different step as the likeliest failure (the lift bookkeeping, Lemmas
+1a–1b); it held.
+
+**1.3 Divergences ruled.** None of truth in any pairing: R–D (the deduction), R–W (the (a)-items at `F_dG`), B–{X01D, X12B, X01V} (EF_F⁺),
+A–R (A's attribution of the passage-to-`R̂` description, corrected by R to X02V's route). **One divergence of count, ruled:** the brief's
+"PE-2's use … one mind" holds at ℚ(√635087); at de Grey's field R and W are two separate readings of (a1)–(a8) (W committed first). Both go
+into row 120's grade as stated.
+
+**1.4 The inventory's other results, reconciled.** Item 4 (the planner's finding) → (a0), re-grounded by R and D: the planner's route (i)
+"EL2003's proof" is closed, since EL2003 has none. Item 15 (A's P(MR survives) 0.85) → scored at stage 3. Item 26 (B's `κ > 0`) and W-G
+(any positive exponent) agree: the growth EF_F⁺ needs is polynomial, any exponent, the degree entering constants only. Item 33 (the owner's
+ruling on `F_dG`) → row 128 keeps ℚ(√635087) as the headline carrier and states `F_dG` as an instance with its walk's grade.
+
+**1.5 Would have searched here (this job, stage 1):** nothing.
+
+### Stage 1 — SAVED
