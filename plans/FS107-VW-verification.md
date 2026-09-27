@@ -242,3 +242,65 @@ two-colour vertices (P 0.5), **met on both halves**, plus the Jordan-boundary ga
 symbolically and checked it against the exact checker at five values of `t`. The norm-3 class equals pair 2 exactly at all five. The diameter claim
 holds symbolically over every hull pair. The stall uses only pair 1 and pair 2, both confirmed by planted members that fail for exactly that pair.
 None of the TRUEs moves the answer: HX stalls at 0.0432, and W-EQ-K/W-POLY are compactness around held theorems.
+
+## Stage 4 — SAVED: W's record read (after stage 3's commit `ef9e955a`); divergences
+
+**Quotation check, deferred from stage 1.** All five statements in the instance block match W's table
+(`plans/FS107-W-near-colourings.md` ll. 10–20) verbatim. The instance block's HX-STALL grade omits W's "prediction P-W3 won", which abbreviates
+it and does not change it.
+
+**W's given members, re-checked with my own reader and checker** (`tools/fs107_vw_member_check.py`; output
+`data/fs107/fs107-vw/members_check.out`, 11 s). My checker uses only the member files' data: its own Hermite reduction, strict and closed band
+forms, and its own exact slack. **All six agree with W's reports:**
+
+| member | W | mine |
+|---|---|---|
+| hex7 − one class, `h = 1/40` | ACCEPT, slack `1 − √1322/40`, `δ = 1/7` | ACCEPT, `1 − h√1322`, `1/7` |
+| HX `ρ = .30`, `h = 1/80` | ACCEPT, `h√6964 − 1`, `451/5460` | same |
+| HX `ρ = .28` | ACCEPT, 0.0259, `14/195` | same (`h√6736 − 1`) |
+| HX `ρ = .26` | ACCEPT, 0.0165, `49/780` | same (`h√6613 − 1`) |
+| HX `ρ = .24` | REJECT at `1/100`, slack 0.0007, `29/546` | same (`h√6409 − 1`) |
+| HX58 `ρ = .16` | REJECT | REJECT (464 offsets) |
+
+**Divergences of truth**
+
+1. **HX-STALL — none in truth; mine is stronger.** W checked "the design's other pairs … at members"; §2a.2 derives them for every parameter:
+   pair 2 implies all of them. W's route went through two lost predictions (P-W1: a first-order estimate; P-W2: the collinear corner instead of
+   the 120° one, with an interim stall of 0.0243 in W §3.1). Its final pairs (a) and (b′) are exactly my pair 1 and pair 2. The nit stands:
+   D-MU's null form allows equality where W writes `>`.
+2. **W-EQ-K ⟸ — two small steps W does not write, both closable:**
+   - W's ⟸ proof ends in a rasterised grid family, whose complexity is unbounded. The iff's left side is designs in `𝓜_K`, W's class: `≤ K`
+     arcs per tile, radius `≥ 1/K`, `≤ K` tiles per unit disc, periodic. Erosion leaves `𝓜_K` in two ways: reflex corners get arcs of radius
+     `κ → 0`, and convex arcs lose `κ` of radius. Cutting reflex corners by chords (inside the eroded set, so still band-proper) and taking
+     `K′ = 2K` restores a bounded class. **⟸ holds at complexity `O(K)`, not `K`.**
+   - The limit `M` of ⟹ need not be periodic, while `𝓜_K`'s designs are. Periodise by cutting a box of side `L` and removing a strip of width
+     `1 + ε` along its boundary: every cross-seam pair is then `> 1 + ε` apart, at cost `O(1/L)`. With `L ≥ 1/ε`, `δ(ε) = O(ε)` survives.
+   - ⟹ under W's `𝓜_K` agrees with my (Cu) derivation. Different route: W converges tiles in a compact parameter space and recentres by TQ §3.3's
+     maximal inequality; I converge arcs and faces and recentre by a weighted average. **Verdict unchanged: TRUE at W's reading with ⟸ at
+     `O(K)`.** My (Ct) GAP does not bear on W, whose class bounds tiles per unit disc.
+3. **W-RATE — my MISSTATED is against the table line only.** W §2.4 opens "Let `M` be a full tight colouring as in 2.2" (bounded complexity), so
+   the hypothesis I asked for is W's. The table line should carry it. W's tangent contacts (`O(ε^{3/2})`) and tight curves (`O(ε·length)`) agree
+   with my §2b.2. **TRUE**, the pinhole clause a reading.
+4. **W-TAN — one gap stands against W's own text.** W §2.5: "For a map every vertex is a cone point (strong blow-ups hold)". That is true for
+   `𝓜_K` tiles. But **a cusp is a cone point whose tile has angle 0**:
+   - its colour has density 0 at the vertex, so a vertex with three colours in the closure has `|P(u)| = 2`, and C-T-TAN does not apply;
+   - the cusp colour escapes C-T-TAN's pigeonhole at `w₀`, which needs "all six classes in `P(u) ∪ P(v)`";
+   - a cusp constrains that colour near `w₀` only on one side of a slab.
+   **GAP at cusp vertices** unless "type" is the essential multicolour. W's second clause includes the `d = 2` caveat, and its "one triple from
+   each complementary pair" reads types as triples, so my distance-2 point is W's too. The two-element types remain: bichromatic vertices of
+   degree `≥ 4`, whose types need not meet a three- or four-set. W's "intersecting family" assumes every vertex is trichromatic, which holds for
+   trivalent maps. The general-Jordan-boundary gap does not bear on W's scope (`𝓜_K`); it bears only on the table's "locally finite map".
+5. **W-POLY, W-HEX — agree.** W's exact `1/7` comes from a coset rasterisation; mine, by centres, gave `2513/17655`. Both are band-proper, and
+   the owner's "uncovered density `1/7`" is exact for W's construction.
+
+**Divergences of route only:** W's checker uses closed squares and integer arithmetic; mine uses half-open squares, Fractions and a Hermite
+torus. I added a continuous-design checker in ℚ(√3), which W did not have, and derived HX symbolically where W located pairs from checker
+diagnostics.
+
+**Proposed for the close (I edit none of these):**
+- In W's table: W-RATE and W-TAN carry "as in W-EQ-K (`𝓜_K`)".
+- W-TAN is restricted to trichromatic vertices with no cusp tile, off `d = 2`.
+- W-EQ-K reads "⟸ at complexity `O(K)`, periodised by a seam strip".
+- HX-STALL's parenthesis becomes "every other pair implied (FS107-VW §2a.2)", and its grade becomes two minds, one blind, with exact checks by
+  two independent checkers.
+- W-TAN at cusp vertices is a named step for W's door-(A) stub (i).
