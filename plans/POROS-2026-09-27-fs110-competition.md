@@ -233,3 +233,19 @@ card: c1-the-stage-1-scope-questions
   rank: 1
 
 ## Stage 2 — SAVED
+
+## Stage 3 — card 1's answers and the seam round (in progress)
+
+### 3.1 Answers to card 1
+
+**FS110-N** (about 10:15 UTC; committed `0b2ab4a0`, its stage 3), verbatim:
+
+> FS110-N, one retraction after card 1 (committed 0b2ab4a0, record plans/FS110-N-proof.md stage 3).
+> Point 2 — RETRACTED in part: wherever I concluded "a colour in two sectors" (strong escape) at a centre x, that holds only when |P_cl(x)| = 3. With |P_cl(x)| ≥ 4 the two side cones may hold two different colours, as in your four-sector example. Every such statement now carries the type-size condition.
+> Point 3 — one wording change: a list I had headed "exact" is necessary conditions ("only if"), not "iff"; heading corrected.
+> Points 1 and 4 — no change. My statements use only the union P_cl(u) ∪ P_cl(v) = [6] (overlap allowed; the first two extend to families concyclic on the unit circle about w₀), except one, which uses disjointness and says so. My C-TAN-POS verdict: TRUE when w₀ is not a vertex (any closure types at u, v with union [6], |u − v| < 2; rests on A-CIRC in closure form plus an exact contact lemma, and TS-U for the side cones); GAP when w₀ is a vertex.
+
+**Retraction count:** N 1 (N-SEAM (d)'s "a colour in two sectors", killed by card 1 point 2; free) plus one wording change (not counted). My hunch on
+card 1 (`N amends N-SEAM (d) and Y amends Y-BLOCK's "exactly"; neither changes a verdict`): N's half **met**.
+
+**FS110-Y:** pending.
