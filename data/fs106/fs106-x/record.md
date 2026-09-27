@@ -62,3 +62,16 @@ Would have searched here: nothing (an editing pass).
 - Gate: `tools/bib_audit.py` exit 0 ("every cited work resolves to a row or a recorded alias").
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED (`plans/FRONTIER-STUBS.md`)
+
+From §R-close 4.7: open-milestones paragraph ← D-C7's text (its bold lead dropped, the section heading already says it); ranked table: FS-106
+leaves, FS-107 rank 1 (C's cells; its question cell is D-C8 row 1's question plus C's pointer to the stub, the in-cell `δ₀|U_R|` escaped),
+FS-104 rank 2 (its lead "Re-ranked 2026-09-26 (RF1; 1 → 3) …" rewritten to current state, "FS-107's sub-question" kept), FS-109 rank 3 and
+FS-108 rank 4 (question and bearing cells from D-C8 rows 3–4; cost "unpriced"; solver columns as C gives them), old ranks 4–62 → 5–63
+(the tail "30–62" row inside CLAUDE.md is not in this file); a close note at the head of "Ranked stubs"; the closed list's first entry, verbatim.
+**Left:** "The stub rows' provisional bearings for FS-107, FS-104, FS-62 and FS-67 gain G82" — those lines live in the stub files, not in this
+file: `plans/STUB-regularity-wall.md` already has G82 (C wrote it); `plans/STUB-cp-plane-six.md`, `plans/STUB-six-is-not-a-value.md` and
+`plans/STUB-tight-product-colourings.md` do not, and are outside my touch list — for the owner.
+
+## Stage 4 — SAVED
