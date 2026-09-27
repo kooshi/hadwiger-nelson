@@ -7,7 +7,24 @@
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| L0 | an open set avoiding distance 1 at its pairs has `ω(p)` disjoint from it for every `p` in its closure | [hand, one mind; classical] | §2.0 |
+| L0′ | a connected subset of `cl O` through `a ∈ O` lies in the open ball `B(a,1)` | [hand, one mind] | §2.0 |
+| TS-L1 | S–V Lemma 1 for a.e.-proper map-type colourings, no Conditions 5, 6 | [hand, one mind] | §2.7 |
+| TS-C | a same-colour chain of regions touching in sequence has diameter ≤ 1 | [hand, one mind] | §2.4 |
+| TS-T | every point has a point of chromaticity ≥ 3 within `1/√2 + ε`; with ≤ 6 colours and Cond. 5 it is trichromatic, with Cond. 6 of degree 3 | [hand, one mind] | §2.5 |
+| TS-U | exact unit-arc lemma: `O_c ⊆ ⋂ D(p,1)`, `O_{c′} ∩ ⋃ D̄(p,1) = ∅` near the arc's centre; side cones carry neither | [hand, one mind] | §2.6 |
+| C5 | a local configuration satisfying S–V Prop. 5's hypothesis and every pair constraint where its conclusion fails (unit arc at `x`; bowtie or 4-chromatic `y`) | [hand, one mind] + check `tools/fs106_sb_c5_check.py` | §2.8 |
+| A-LEM2 | S–V Lemma 2 (no chromaticity ≥ 4) for a.e.-proper map-type 6-colourings with Cond. 5 | [hand, one mind] | §2.1 A5 |
+| A-P7 | S–V Prop. 7 (triangle recolouring) a.e., triangle legs `< 1/2` | [hand, one mind] | §2.1 A6 |
+| IND-A | under the a.e. reading the index is well defined; complementary curves with no swap satisfy `\|Ind γ₁ − Ind γ₂\| ≤ 1` (any continuous lifts) | [hand, one mind] | §2.3 (c) |
+| IND-X | the index bound fails at a swap across a unit-arc interface facing a bowtie: `\|Ind γ₁ − Ind γ₂\| = 2` locally | [hand, one mind] + check (I) | §2.3 (c) |
+| IND-iff | "index exists iff finitely many changes" is false under both readings (explicit traces) | [hand, one mind] | §2.3 (a) |
+| SWEEP | at a swap with `κ ≠ 0`, `S_a`, `S_b` lie on opposite sides of `ω(y)` near `x` and of `ω(x)` near `y` (off null sets) | [hand, one mind] | §2.3 (c) |
+| A10-GAP | S–V Prop. 12 as printed has a gap at swaps (closed by Lemma 1 under Cond. 5; fails without Conds. 5, 6) | [hand, one mind] | §2.1 A10, §2.3 |
+| A11-REP | S–V appendix's same-multicolour pair is at distance in `(1,2)` (continuity + Lemma 1) | [hand, one mind] | §2.1 A11 |
+| A12-GAP | S–V appendix's eleventh point needs simply connected regions; Prop. 8's recolouring can destroy it | [hand, one mind] | §2.1 A12 |
 
 ## Stage 1 — SAVED
 
@@ -266,3 +283,41 @@ local picture behind the swap in §2.3 (c). [hand, one mind; the float check is 
 
 - C-T-IND: would have searched random measurable traces for an index-bound violation. Instead: derived the swap mechanism and read it off C5's
   configuration.
+
+## Stage 3 — SAVED (the write-up; committed before anything fenced is opened)
+
+### 3.1 Verdicts
+
+| # | claim | verdict | grade, minds |
+|---|---|---|---|
+| 1 | C-AE-POLY | **TRUE relative to SV-2's printed chain**, every a.e.-specific step repaired. It **inherits one printed GAP**: A12, simple connectivity at the appendix's eleventh point after Prop. 8's recolouring | [hand, one mind] |
+| 2 | C-AE-CONV (statement fixed in §2.2) | **GAP at A12**: merged tile colours give annular regions routinely. TRUE for tile colourings with simply connected colour regions. Coulson's printed theorem is only 6 | [hand, one mind] |
+| 3 | C-T-IND (corrected form) | **MISSTATED.** The "iff" is FALSE under both readings of "lift". K3's no-index claim holds for three colours at the Cantor set, or under reading (B), and fails for two colours under (A). The bound is TRUE given no swap and needs no finiteness. **Swaps are not removed by C-T-L1b**: local counterexample, `\|ΔInd\| = 2` | [hand, one mind] |
+| 4 | TS-C | **TRUE** (only L0 used) | [hand, one mind] |
+| 5 | TS-T | **TRUE**, sharper (`1/√2 + ε`); Condition 6 is needed only for degree 3, not for trichromatic | [hand, one mind] |
+| 6 | TS-U | **TRUE** in the exact (disc-intersection) form | [hand, one mind] |
+| 7 | TS-L1 | **TRUE**, by countability of circles in a locally finite `B` | [hand, one mind] |
+| 8 | C5 | **TRUE**: configuration built and checked. It survives Condition 6 (4-chromatic `y`); Condition 5 alone kills it | [hand, one mind] + tool |
+
+### 3.2 What bears on the program
+
+- **The a.e. transfer of S–V is sound where it matters.** The three uses of colours at boundary points (Lemma 1, Prop. 7, Prop. 12 at a swap) are
+  replaced by L0 and a countability argument. The residual risk is in the printed chain (A12), not in "almost everywhere".
+- **For the measurable problem (FS-107): the index method breaks exactly at a unit-arc interface facing a bowtie or a 4-chromatic point.**
+  - C5 and the swap of §2.3 are the same local picture. It is consistent at every pair (checked), and the index difference 2 destroys Prop. 12's
+    conclusion there.
+  - Any proof of C-T-PIG ⟹ contradiction in normal form must exclude this configuration by a non-local argument, or choose curves avoiding it
+    (in a map, swaps are non-generic; in a measurable colouring, "generic" needs a definition).
+  - This agrees with the advisor's C-T-TAN wording ("fails exactly at the bowtie … and at interfaces tangent to the unit circle").
+
+### 3.3 Proposed edits (for the close; I edit none of these files)
+
+- `BIBLIOGRAPHY.md` `[Coulson2004]`: read status "**read in full (2026-09-27, FS106-SB)**". Main theorem Thm 3.5: at least 6 colours for convex
+  tilings with areas bounded below, boundaries coloured by an incident tile. The proof's figures are not in the text layer.
+- `BIBLIOGRAPHY.md` `[SokolovVoronov2025]`: add "re-read in full 2026-09-27 (FS106-SB)". Printed defects:
+  - "Lemma 8" in Thm 2's proof is Prop. 8;
+  - Lemma 2's last sentence ("cannot fit" should be "cannot cover");
+  - Prop. 12's swap gap (closed by Lemma 1);
+  - the appendix's same-multicolour distance (repaired as in `[Voronov2023]` Lemma 6.1);
+  - the appendix's colours "1, 2, 3" should be "4, 5, 6", and its implicit simple connectivity (A12).
+- `[Voronov2023]`: §6 (Lemma 6.1) read 2026-09-27; it states "all regions are 1-connected".
