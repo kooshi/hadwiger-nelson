@@ -175,4 +175,61 @@ hunch: the-registrations-name-global-steps
 
 Scored at once: hunch `the-registrations-name-global-steps` — Y's half **confirmed** (C-BOW-K (ii), a global clause).
 
-**FS110-N:** pending.
+**FS110-N** (received about 10:00 UTC; its stage 1 committed at `a912d7c3` before sending), verbatim:
+
+> FS110-N pre-round answer (stage 1 committed: a912d7c3). The step: C-T2 (ii), global — a whole tight 𝓜_K map using the double unit-arc seam at every close covering pair it does not otherwise escape.
+> Expectation: FALSE at every K (my second choice: out of reach of any formula).
+> Mechanism: a double unit-arc seam is not local — its four points become vertices carrying unit arcs and escape colours, and each of them acquires new close covering pairs (the rhombus's own pairs, and pairs with the vertices at the ends of the new unit arcs), each of which must again be a seam. I expect this cascade not to close at bounded complexity: either the unit arcs per unit disc exceed K, or the escape colours pile into one class above 0.2470.
+> The local fragment (C-T2 (i)) I expect to be realisable; my bet is against the gluing, not the seam.
+
+Scored: `the-registrations-name-global-steps` — **confirmed** (both answers name a global clause: Y names C-BOW-K (ii), N names C-T2 (ii)). The two
+registrations are not each other's negation this time: **each side bets against the other's cheapest escape** (N against the double unit-arc seam's
+gluing; Y against the global kill of strong escapes). Together they say the round's decisive object is a map that mixes the two escapes, which
+neither registration addresses.
+
+### 2.2 The stage-1 comparison (both records read in full at their stage-1 commits: Y `44eb74cb`, N `a912d7c3`)
+
+| claim | FS110-Y | FS110-N | agree? |
+|---|---|---|---|
+| A-EXACT | TRUE; "meets a tile" read as "meets the interior" (the closure reading fails at cusps) | TRUE; tiles are the open components of `ℝ² ∖ Γ` (same reading); **consequence extended to covering pairs with overlap and covering families** ("disjointness unused"), and the **sight form** `S(z) ≠ [6]` for every `z` | truth yes; **scope differs** (N drops disjointness) |
+| A-CIRC | TRUE, cusp colours included (connected `D × Σ`) | TRUE, cusp colours included (shift the centre) | yes; two routes, both sound by my reading |
+| A-SIX | TRUE; failure set redone by size: bichromatic degree-`≥ 4` blocks every direction, **four-colour vertex escapes on an open set** | TRUE "and more" (overlap unused too); failure set not redone | truth yes; **Y has A2-ESC4, N does not** |
+| D-TYPE | TRUE, "colours all of whose corners at `u` are cusps" | TRUE, same precision | yes (two minds, independent) |
+| C-TAN-POS | **TRUE** at the level of `B_u ∩ B_v = ∅`, read from `u`'s and `v`'s figures (Y-BLOCK: five shapes; T2–T2 or a strong escape survive), four-colour vertices placed inside "strong escape" | **split**: TRUE and exact when `w₀` is not a vertex (N-SEAM, read from `w₀`'s figure), **GAP** when `w₀` is a vertex | **grade differs**; routes are complementary (Y reads `u, v`; N reads `w₀`) |
+
+**My reading of each, as a third mind (hand, sketch):**
+- **N-SEAM (a)** ("`w₀ ∈ Γ`") is sound and strong: a tile at `w₀` of colour `k ∈ P_cl(x)` contradicts A-CIRC at `x`. It holds for every covering pair at
+  distance `< 2`, with no scale. **N-SEAM (c)** is sound (a C¹ arc cannot be tangent to two transversal circles). **N-SEAM (d) is short at `|P(x)| = 4`**:
+  TS-U forbids the two arc colours in the side cones, so the side cones carry colours of `P(x) ∖ {c, c′}` — **one** colour in both (a bowtie) only when
+  `|P(x)| = 3`; at a four-colour vertex the two side cones may carry two different colours. "A colour in two sectors" is then false; the escape is A2-ESC4's.
+- **Y-BLOCK's "exactly five shapes" is short**: its "fat" row ("all three sectors meet both open half-planes of `e_u^⊥`") is **empty** for three
+  sectors (a line through `u` has two rays; a sector containing neither lies in one open half-plane), and the **generic** trivalent vertex — one sector
+  wholly on one side, so a **one-sided block of depth `≍ s`** (V-C5's "on one side or the other") — is not a row. Y's pair conclusions survive (one-sided
+  against one-sided meet in a quadrant; a two-sided wedge enters any one-sided region), so C-TAN-POS's verdict is unaffected; the "exactly" is not earned.
+- **The two C-TAN-POS routes combine**: Y's is necessary from `u, v` and needs no `w₀` figure, so if its shape list is complete it closes N's vertex-`w₀`
+  GAP; N's is exact at `w₀` and adds to Y's escapes the requirement that a non-vertex `w₀` lie on a unit arc centred at the escaping vertex (Y's §1.5
+  has the same reciprocal arc as an exception). Neither route is passed to the other side.
+
+**Hunches scored:** `c-tan-pos-misstated-at-four-colour-vertices` — **confirmed by a second derivation** (Y-SIX, independent of me: "a four-colour vertex
+escapes on an open set"); N's N-SEAM (d) shows the cost of the claim list's wording (a statement true only at `|P| = 3`).
+
+### 2.3 Card 1, to both sides at the same moment (text in `data/fs110/fs110-a2/card1.md`)
+Four scope questions, sent identically: (1) disjointness — used, or only the union?; (2) is the four-colour vertex inside "strong escape", and is
+every statement concluding "a colour in two sectors" true for it?; (3) one-sided blocking (V-C5's own words) — is the generic three-sector vertex an
+entry of any blocking classification, and is "exactly" earned?; (4) C-TAN-POS's two grades differ — state each verdict's scope and the necessary
+condition it rests on. No route of either side is in it: every point is a question about `claims.md`'s words or TS l. 258; point 2 is marked as my
+own sketch; point 4 names grades only. Retractions from here are counted (G51).
+
+card: c1-the-stage-1-scope-questions
+  evidence: Y-BLOCK (`plans/FS110-Y-construction.md` §1.4) has an empty "fat" row for three sectors and no one-sided depth-`s` row; N-SEAM (d) (`plans/FS110-N-proof.md` §1.4) concludes "a colour in two sectors" from TS-U, true only at `|P(x)| = 3`; N drops disjointness, Y keeps it; C-TAN-POS TRUE (Y) against TRUE/GAP (N)
+  expected: the two stage-1 records agree on every verdict and scope, as the planner's E1 (A-EXACT confirmed by both, 0.85) presumed
+  ask: does each side's verdict hold at the scope it states — covering pairs with overlap, four-colour vertices, one-sided three-sector blocks, vertex `w₀`?
+  if a side amends: a free retraction in the window, recorded; the seam work starts on a calculus both sides share
+  if neither amends: the divergences go to the blind verifiers as named points, and I re-raise them at the hand-backs
+  answered by: FS110-N and FS110-Y, each on its own record
+  cost: one reply each, if anything changes
+  hunch: N amends N-SEAM (d) and Y amends Y-BLOCK's "exactly"; neither changes a verdict
+  falsifier: either side changes a verdict (TRUE, FALSE, GAP) on a §1b claim
+  rank: 1
+
+## Stage 2 — SAVED
