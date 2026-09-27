@@ -272,3 +272,107 @@ hand (the sector angles from the direction, `π/6`, `π/2`, `5π/6`).
 - Boundaries at a trichromatic vertex have tangent directions under Cond. 5 — [hand, one mind].
 - SV-L3 for `1 ≤ d < 2` by the transplanted bicycle — [hand, one mind, sketch: constants not computed].
 - SV-2 and Cor. 1 of S–V hold except for one named edge case — [hand, one mind, with the sketch above].
+
+## § Continuation — FS106-V3
+
+*Job FS106-V3 (de Bruijn), Opus 5.5, 2026-09-27. Brief `data/fs106/briefs/V3-106-verify-print-continued.md` with the standing rules (rule 0
+first: `CLAUDE.md` § The aim and § Counter-priors read from disk) and the briefs of FS106-V and FS106-V2 (both read). This section extends the
+record; no earlier verdict is rewritten, and a disagreement is recorded here. Resuming check: no V3 section existed. Working files:
+`data/fs106/fs106-v/`. "Region-only" and "a.e." as in §3: a step survives a.e. when it holds verbatim for maps that are proper only at pairs of
+region points, boundaries and vertices carrying no colour (D-AEMAP); for maps whose boundaries are Lebesgue-null that is the same as proper at
+`Leb ⊗ σ`-almost every unit pair (the unit pairs meeting a null boundary are null by Fubini).*
+
+### Theorems this phase proved (V3)
+
+*(filled stage by stage)*
+
+### Would-have-searched-here log (V3)
+
+- Stages 0–1: none (reading and hand verification).
+
+### V3 stage 0 — SAVED: quotation check of the V3 brief
+
+The brief quotes no source except the phrase "almost all the plane" (to be checked against `[Pritikin1998]` in stage 3) and the house strings
+(section heading, commit subject, addressee, final turn text). Its glosses checked: the Townsend manuscript exists at the path given (7 pp., a
+Word document, "Copyright © 1979 Stephen P Townsend", PDF created 2 Feb 2024); `[Townsend1981]` at the path given; Thomassen's text at the path
+given (OCR of the Monthly pages 850–853, with OCR damage noted in stage 2); V2's "the one open step of its repair" matches V2's SV-2 row
+("Residual: two `pⱼ` of one multicolour antipodal on `ω` (distance exactly 2)"). The claims TW-05 … PA-20, C-AE-MAP6 and C-AE-NICE are in
+`data/fs106/claims.md` §§2, 4 as the brief says.
+
+### V3 stage 1 — SAVED: Townsend's proof that maps need six (the 1979 manuscript), and TW-81
+
+*Read in full: `~/source/library/pdf/townsend-colouring-plane-no-monochrome-units-author-manuscript-1979-posted-2024.pdf`, all 7 pages; the
+symbols the text layer drops (∃, ≤, ∈, ∩, ∪, ε, δ, ℓ) read from the pages rendered at 110 dpi (pp. 3–6). **This is the author's 1979 manuscript,
+not the published `[Townsend2005]`** (Geombinatorics XIV(4) 184–193, not held); the two share a title, and whether their texts agree is
+unchecked. Nothing below is a verdict on `[Townsend2005]`.*
+
+**The statements, verbatim (manuscript).**
+- Definition 2: "Let A be any closed, bounded doubly connected set in E2 containing the unit circle. If the removal of any point in A renders A
+  simply connected then such a point is called a cut point of A. If A has no cut points its interior A0 is said to be a unit annulus. If A has
+  a finite number of cut points (which must occur on the unit circle) then A0 is said to be a finitely disconnected unit annulus."
+- Definition 3 (planar map): "A planar map is an ordered pair M(S,B) where S is a set of mutually disjoint bounded finitely connected open sets
+  (regions) in E2 and B is a set of simple closed curves (frontiers) in E2 satisfying (i) the union of the members of S and B forms a covering of
+  E2; (ii) a one-to-one function F:S→B such that b = F(s), s∈S, is the exterior boundary of s; (iii) the boundary of s∈S is the union of F(s) and
+  at most a finite number of other members of B, which are the interior boundaries of s." (No local finiteness.)
+- Definition 4: "An r-colouring of a planar map is a function Cr:E2→{c1,c2,…,cr} where Cr is constant over each region in S and where a boundary
+  point is given the colour of one of the regions in the closure of which it lies." — **boundary colours from adjacent regions are part of the
+  definition** (S–V's Observation 1 as a hypothesis, not a WLOG).
+- Theorem 1: "Let A0 be a finitely disconnected unit annulus (see Definition 2) for which the unit circle contained in its closure, A, has at
+  least one segment of length greater than ⅓π containing no cut points of A. Then any 2-colouring of A0 contains a monochrome unit."
+- Theorem 4: "If a 5-colouring of E2 contains three disjoint, differently coloured, bounded, open, connected, monochrome sets each having two or
+  more common boundary points with each of the other two, and all three having one common boundary point, then E2 contains a monochrome unit."
+- Theorem 5: "Every 5-coloured planar map contains a monochrome unit."
+
+**Verdicts, step by step.** `ω(p)` is the unit circle about `p`; "subtends" is Definition 1 (`T` = the union of the unit circles centred on `S`),
+so the set subtended by a curve `γ` is `γ + S¹ = {z : min_γ |z − ·| ≤ 1 ≤ max_γ |z − ·|}` for connected `γ`.
+
+| step | verdict | minds / grade | the argument, and what I repaired |
+|---|---|---|---|
+| **Simplifications (a)–(c)** (p. 3) | (a), (b) **TRUE**; **(c) GAP** | 1 / [hand] | (a) filling holes: a colour-`c` point `w` at distance 1 from a filled point `h` has `ω(w)` (diameter 2) leaving the filled hull (diameter `≤ 1`, else the region already has a monochrome unit), so it crosses the region itself — Voronov's fills (FS106-V, H3); region-only. (b) removing an edge between two same-coloured regions: an edge point at distance 1 from a colour-`c` region point `w` puts `ω(w′)`, `w′` near `w`, across the edge into one of the two regions; region-only. **(c)** recolours "an ε-neighbourhood whose closure contains v and whose intersection with each of the two regions is non-null" with the regions' colour `c`, "thus forming one new region": no argument that the new points avoid distance 1 from every colour-`c` point. The allowed set near `v` is the complement of the unit shadows of the colour-`c` regions; a colour-`c` region touching `ω(v)` at `w` from inside removes (to first order) the open half-plane `{(z − v)·(w − v) < 0}`, and a second touching at `2v − w` removes the other half, so the allowed set can pinch to curvilinear cusps at `v`, the two regions lying in opposite cusps with no open connected set joining them. I have not shown that this configuration occurs in a 5-colouring with no monochrome unit; the print does not exclude it. **(c) is what eliminates vertices at which two same-coloured regions touch — the bichromatic vertices of degree ≥ 4 on which FS106-V2 found `[SokolovVoronov2025]` Lemma 4 (a) open under Condition 6.** The same obstruction, reached independently in two papers. |
+| **Lemma** (bisection, p. 3) | **TRUE** | 1 / [hand] | Invariant: `xᵢ`, `yᵢ` differently coloured; the arc length halves, so `|x_{n+1} − y_{n+1}| ≤ ℓ/2ⁿ < ε`. Uses the colour of arbitrary points of `γ`. **Region-only replacement:** on a curve whose region points are dense (all but countably many circles about a point qualify: a Jordan arc contains nondegenerate arcs of at most countably many circles), the closures of the two colours' region points cover the arc and are both nonempty, so they meet at a point with region points of both colours arbitrarily close. |
+| **Theorem 1** (the ⅓π lemma) | **TRUE; the printed proof has two unargued steps, both supplied** | 1 / [hand] | Printed route: a bichromatic pair `x`, `y` within `ε` on a curve `γ₁ ∈ Γ`; arcs `α ⊂ ω(x) ∩ A0`, `β ⊂ ω(y) ∩ A0`; the sets `P′`, `Q′` they subtend "converge"; a point of `P′ ∩ Q′` is at unit distance from `α` (all of `y`'s colour) and from `β` (all of `x`'s colour), so needs a third colour. The reading of "P′∩Q′ must be coloured differently to both x and y" is this one. **Unargued (1):** the family `Γ` and the choice of `x` "unit distance from at most one cut point". **Unargued (2):** that `P′ ∩ Q′ ≠ ∅` for `|x − y|` small ("`P′→Q′`" gives closeness, not intersection). **Supplied, as one lemma — (L) in a 2-coloured open set `W` with no monochrome unit, no point `b` with both colours arbitrarily near has `ω(b) ∩ W ≠ ∅`:** take `x`, `y` near `b` of the two colours, `|x − y| = s`, and `q ∈ W ∩ ω(x)`; `a = q + tτ ∈ ω(x)` and `b′ = q + (y − x) + t′τ ∈ ω(y)` (`τ` the tangent at `q`, `|t|, |t′|, |t − t′| ≍ √s`) have `a − b′` within angle `O(√s)` of `τ`, so `ω(a) ∩ ω(b′)` has a point `z` with `|z − x| = O(√s)`, inside `W`; `z` is at unit distance from `a` (colour of `y`) and `b′` (colour of `x`). **Theorem 1 from (L):** a component of `A0` over the uncut segment (length `> π/3`) contains a unit pair, hence both colours, hence (connectedness) a point `b` of both colours, and those points form a continuum crossing the band; `ω(b)` meets the unit circle near `b` rotated by `±π/3` at angles that move with `b`, so for some `b` they avoid the finitely many cut points, and `ω(b)` then crosses `A0`, which has positive width off the cut points (one-sided width suffices). Contradiction with (L). **Region-only:** `x`, `y`, `a`, `b′`, `z` range over open sets, so they can be taken to be region points (generic centres avoid unit arcs on boundaries; regions are dense). No Condition 5 and no null-boundary hypothesis is used. |
+| **Theorem 2** | **TRUE; its annulus identified** | 1 / [hand] | "`|x−y| > 1`": a monochrome arc from `x` to `y` then contains two interior points at distance exactly 1 (continuity). "`|x−y| ≤ 1`": the printed "disconnected annulus with at most two cut points" is unargued; **it is `B(x,1) Δ B(y,1)`**: `ω(z)` separating `x` from `y` crosses both arcs at interior points, so the symmetric difference of the two unit discs lies in the intersection, is two-coloured, has unit circle `ω(x)` in its closure and exactly two cut points `ω(x) ∩ ω(y)`, splitting `ω(x)` into arcs of angular length `2 arccos(s/2) ≥ 2π/3` and `2π − 2 arccos(s/2) > π` for `s = |x − y| ≤ 1`. Theorem 1 applies. Region-only (the arcs run in the regions). |
+| **Theorem 3** and its Corollary (4 colours) | Theorem 3 **GAP in its stated generality; the Corollary TRUE** | 1 / [hand] | "Because the closure of E is a simply connected Jordan region, ∃ a simple arc γ … which, apart from its endpoints, lies in E" — the hypothesis is only "bounded, open connected monochrome sets"; a boundary point of a general open connected set need not be accessible. For map regions (Jordan frontiers) accessibility holds (Schoenflies), so the Corollary stands. Region-only. |
+| **Theorem 4** | **GAP at "P is either a unit annulus or a finitely disconnected unit annulus with at most three cut points" — false as a step for general sets; the Corollary (a map vertex of degree 3) repaired** | 1 / [hand, sketch for the repair] | Unargued in print. **Where `P` fails to be an annulus.** For `z = v + e(φ)` on `ω(v)`, curve `γᵢ` removes the inner side near `z` if `γᵢ ⊆ B̄(z,1)` and the outer side if `γᵢ ∩ B(z,1) = ∅`; a cut (or a gap) at `φ` needs one curve inside and another outside. For small curves spanning the directions `[aᵢ, bᵢ]` from `v`, the inside set is `(bᵢ − π/2, aᵢ + π/2)` and the outside set `[bᵢ + π/2, aᵢ + 3π/2]`. **For three sets that are thin petals from `v` joined by short arms to the shared points `a₁, a₂, a₃`** (allowed by the hypothesis), the spans' endpoints are the directions of the `aₖ`, and the six points `(direction of aₖ) ± π/2` are cut points; they are `π/3` apart exactly when the `aₖ` are `2π/3` apart as seen from `v`, and then **no segment longer than `π/3` is uncut: Theorem 1 does not apply** (the proof fails; the theorem in that generality is neither proved nor refuted here). With small curves that do not reach the shared points the gaps are worse (whole neighbourhoods of `ω(v)` excluded). **Repair for the Corollary (degree-3 map vertex, regions pairwise sharing an edge):** choose each `γᵢ` to run into `v` along both of its edges, hugging them at every scale, and through finitely many further points. A cut at `φ` then needs `Rᵢ ⊆ B̄(z,1)` and `Rⱼ ∩ B(z,1) = ∅` near `v`, hence **the common edge `eᵢⱼ` near `v` lies on `ω(z)`** — an edge that is an arc of a unit circle ending at `v`. Each edge lies on at most one unit circle, so there are at most three cut points, an uncut arc of length `≥ 2π/3 > π/3` remains, and Theorem 1 applies. (The straight-edged case checked in full: sectors `[aᵢ, bᵢ]` with hugging curves give inside and outside sets that never overlap.) **With Condition 5 there are no cut points at all.** Region-only: `P`'s points are at unit distance from region points of the three curves (the special points `v, aᵢ` excepted in print). |
+| **Theorem 5 (i)** | **GAP** | 1 / [hand] | "Let v be any vertex": that a vertex exists is not argued (Definition 3 has no local finiteness, and a map with no vertex is not excluded in print). "T20 and T30 … are unit annuli each rendered simply connected by at most one cut point": by Theorem 4's repair, at most one cut point each (one shared edge) — accepted at the repair's grade. The reading of "T1 = T2∪T3" (union, from the scan): `T1` is 4-coloured (only `c1` excluded). **"There is a vertex in T10 which must be of degree 3 or 4" rests on simplification (c)** (all regions at a vertex of `T10` have distinct colours from `{c2,…,c5}`); without (c) a vertex of pattern `c4, c5, c4, c5` is possible. The no-vertex case ("edges … which cut T1 … only possible if these edges separate regions coloured c4 and c5, except possibly those edges which contain the cut points of T2 and T3") is asserted: a cross-cut region of colour `c2` must avoid `T2`, which is a full band off one cut point — right in outline, unwritten. |
+| **Theorem 5 (ii)** | **GAP** | 1 / [hand] | "T = ∪Ti" (union, from the scan). The degree-4 vertex's four regions have four distinct colours only by (c). "every boundary point of a region in T0 is a boundary point of at most three regions" and the cross-cut argument ("some of which cut either both of T1 and T3 or both of T2 and T4 … the only colour common to both … is c5") are asserted. |
+| **Theorem 5 as a whole** | **GAP, named: simplification (c)** (with (i)'s vertex-existence and the unwritten cross-cut arguments as further unargued steps) | 1 / [hand] | The theorem is attributed to Woodall and is not in doubt here; this is a verdict on the manuscript's proof. |
+
+**Where the manuscript uses boundary colours and region topology, and what survives a.e.** (for FS106-TS's C-AE-MAP6).
+- **Boundary colour** is used (i) by Definition 4 itself, (ii) by the Lemma's bisection on arbitrary points of a curve, (iii) by simplification
+  (c) (it colours a neighbourhood containing boundary points), (iv) nowhere else: every curve `γᵢ` lies in one region "except possibly" the
+  named boundary points, and the proofs never read those points' colours. (ii) has the region-only replacement above.
+- **Region topology** is used throughout: Jordan frontiers (accessibility of boundary points, Theorems 3–4), vertex degrees (Theorem 4's
+  Corollary, Theorem 5), the structure of `P`, `T1`, `T` as bands around `ω(v)` with cut points (Theorems 1, 2, 4, 5), cross-cuts (Theorem 5).
+- **Survival a.e.:** Theorems 1–2, the Corollary of Theorem 3 and the Corollary of Theorem 4 (with its repair) are region-only and hold for
+  D-AEMAP maps, **with no Condition 5 and no null-boundary hypothesis** (only that regions are dense, which locally finite Jordan boundaries
+  give). Theorem 5's (i)–(ii) are map topology and do not read colours of boundary points; the one step whose validity is open, (c), is open in
+  both forms. **"Boundaries of measure 0" (C-AE-MAP6) is needed only to identify D-AEMAP-properness with `Leb ⊗ σ`-a.e. properness, not by any
+  step of the argument.** For a general measurable colouring (D-NF) none of the map structure exists; nothing here transfers without it.
+
+**TW-81, settled.** `[Townsend1981]`'s theorem ("Every 5-coloured map in the plane contains a monochrome unit.") is the manuscript's Theorem 5
+("Every 5-coloured planar map contains a monochrome unit."), and its lemma is the manuscript's Theorem 1 word for word apart from "(see
+Definition 2)" and "⅓π" for "π/3" (the constant read from the scan, stage 1 of FS106-V). The note prints no proof. **Verdict on TW-81:** the lemma
+**TRUE** (the manuscript's proof, two steps supplied, [hand, one mind]); the theorem **GAP as proved in the manuscript**, at simplification (c);
+TW-81 as a claim about the 1981 note is "statement only".
+
+**The ⅔π counterexample to Woodall, checked** (manuscript p. 2, the note p. 114). `R` = the closed annular sector `1 − h ≤ |x| ≤ 1`, angle in
+`[0, 2π/3]`; `a = (1, 0)`, `c = e(π/3)`, `b = e(2π/3)`; `e` = the arc of `ω(a)` through `c` inside `R`. Blue: `S` (the side of `e` containing
+`a`) and its boundary including `e`, minus `a`; red: `a`, `T` and `∂T ∖ e`. **No monochrome unit, verified:** blue lies in `B̄(a,1)`, and for
+`p = a + (−u, w)` (`u, w ≥ 0`, the local shape of `R` at `a`) and `q ∈ e`, `|p − q|² = 1 − 2(u|cos θ| + w sin θ) + u² + w² < 1` (`q − a = e(θ)`,
+`θ ∈ [2π/3, 2π/3 + O(h)]`); `S ⊆ B(q, 1)` for `q ∈ e` (for `q = c`: `r ≤ 2 cos(π/3 − φ)` on the sector, equality only at `a`). Red: `T` lies
+outside `B̄(a,1)`, and within the sector `[π/3, 2π/3]` two points of radii `r₁, r₂ ≤ 1` at angle `≤ π/3` are at distance `≤ 1`, with equality only
+for the pair `(c, b)`, and `c` is blue. So the counterexample is right, and **sharp at `2π/3`**. It uses a boundary that is a **unit arc** (`e`,
+excluded by S–V's Condition 5), and it survives region-only (`S` and `T` alone). It does not touch Theorem 1, whose `A` is doubly connected.
+
+### V3 stage 1 — theorems proved
+- Lemma (L): in a 2-coloured open set with no monochrome unit, a point with both colours arbitrarily near has its unit circle outside the set;
+  region-only for maps — [hand, one mind].
+- Townsend's Theorem 1 (the ⅓π lemma = `[Townsend1981]`'s lemma), Theorem 2 (with its annulus `B(x,1) Δ B(y,1)`), and the Corollaries of
+  Theorems 3 and 4, for everywhere-proper maps and for D-AEMAP maps with no Condition 5 and no null-boundary hypothesis — [hand, one mind; the
+  Corollary of Theorem 4 at sketch grade in the curve choice].
+- Townsend's Theorem 4 proof fails in its stated generality: three petal sets give six cut points `π/3` apart — [hand, one mind, sketch].
+- Townsend's simplification (c) is the manuscript's one substantive gap and is the bichromatic-vertex obstruction of S–V's Lemma 4 (a) —
+  [hand, one mind].
+
+### V3 stage 1 — SAVED
