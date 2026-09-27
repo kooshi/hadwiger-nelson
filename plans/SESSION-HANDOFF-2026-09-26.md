@@ -6,26 +6,14 @@ place to start. Current state only; the history is in the documents it points to
 ## 1. Where things stand
 
 - **OVERNIGHT PLAN (Kooshi approved the milestone; the owner runs it alone; one full report at the end):**
-  00. **NEXT RUN — the consolidation / bookkeeping / library run (Kooshi, 2026-09-27, after the FS-110 report; he compacts first).** Kooshi, verbatim:
-     *"Next I'll compact, then we'll do a consolidation / bookkeeping / library download and reading run, then the milestone you suggested unless
-     something comes up from the prior art. […] […] The archive is at `https://geombinatorics.uccs.edu/archive/index.php/home/issue/archive`.
-     […] I'm sure you can still use it effectively. I got Johnson 2006 at
-     `/home/kooshi/Downloads/62-Article Text-324-1-10-20200330.pdf` from `https://geombinatorics.uccs.edu/archive/index.php/home/article/view/62/198`.
-     The goal of the run will be all of the low urgency items, and full reads of any important papers we haven't read yet, folding in their info.
-     Additionally, this whole journal is one of the most rich authorities on what we've been looking for, perhaps with the exception of where the
-     domain landed, but look around the recent articles for anything that might be useful."*
-     - **Credentials rule (owner):** `.env` holds credentials; it is now git-ignored (1797700a). Use them only by sourcing into a script's
-       environment (`set -a; . ./.env; set +a` inside the command) and sending them only to `geombinatorics.uccs.edu`; never print, echo, log, commit
-       or put them in a brief — a brief gives the job a wrapper script. The session
-       expires in seconds: log in and fetch in one scripted session (cookie jar in scratch, deleted after). It is an OJS site (`index.php/home/…`).
-     - **Items (the low-urgency list, FS-110 report and inventories):** file Johnson 2006 into `~/source/library/` and read it in full (it gates
-       row 82/T4's novelty — `CLAUDE.md` item 14: "nothing is claimed new while `[Johnson2000]` and `[Johnson2006]` are unread"); fetch and read
-       Johnson 2000, `[Townsend2005]` (compare with the 1979 manuscript and Soifer ch. 25), Benda–Perles 2000's problem (4) (OCR); walk the Geombinatorics
-       archive's recent issues for anything bearing on the direction (regular/map colourings, measurable, stability, Sokolov–Voronov, Voronov,
-       Parts, Townsend); CE1–CE7 derivation entries (FS-110 item 115); 27 stub files' six-framed bearings (RK's list, `plans/RERANK-2026-09-27.md` §3);
-       `CLAUDE.md` § Where the problem stands items 28–30 and FRONTIER-STUBS' open-milestones column and ranking-rule sentence (RK); CLOSED-QUESTIONS
-       for S–V Question 2's Condition-5 half (Kooshi's call — ask); FS-106/107/110 inventories' remaining "open" items; BIBLIOGRAPHY read statuses.
-     - **Then:** FS-112, the unit-arc half (rank 1), unless the prior art changes it. Staffing ≤ 3 Opus agents; every brief carries the no-children rule.
+  00. **The consolidation and library run is DONE (2026-09-27 15:45–17:30 UTC; `plans/CONSOLIDATION-2026-09-27.md`, items 1–34 and its Close).**
+     Eight jobs (LP, LW, BK, LW2, LV, LW3, FP, LX), none running; gates PASS at the close; `CLAUDE.md` 296,992. The Geombinatorics archive is
+     reachable by `tools/geomb_fetch.sh` (Playwright, headless Chrome; jobs never read `.env`); 55+ issues in `~/source/library/geombinatorics/` with `CATALOGUE.md`. Headlines:
+     FS-113 (MR in full, in Lean) minted at rank 8 (Kooshi); Theorem A's *statement* is `[Johnson1982]` + `[Fischer1990]` (its kernel proof
+     ours); the bridge is Benda–Perles's; link 2's argument is `[GwynStavrianos2022]`'s; Kainen 1992's conjecture ⟺ `χ(ℝ²) = 7`;
+     `[Polymath2021]` p. 199 poses FS-112's question. **NEXT: open FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`, rank 1; its
+     banner carries four re-aims; re-register its "a YES by formula (0.03)" at the opening). Budgets in briefs are guidance only (Kooshi,
+     2026-09-27: *"It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."*).
   0. **Status 2026-09-27 13:30 UTC:** **FS-106, FS-107 and FS-110 CLOSED** (rows 131–134); ranking pass done. Row 134: under S–V's Condition 5, no locally finite segment/circular-arc map (no arc of radius 1) has an a.e.-proper six-colouring — S–V Question 2's Condition-5 half answered YES (grade: inventory item 113). CLAUDE.md 295,846; all gates PASS. **No agent running.** Next milestone by ranking: FS-112 (the unit-arc half, `plans/STUB-unit-arc-half.md`) at rank 1, FS-111 (the cone scale) at 2 — Kooshi picks. Owed: CE1–CE7 derivation entries; CLOSED-QUESTIONS row for S–V Q2's Condition-5 half (Kooshi's call); 27 stub files' six-framed bearings.
   1. **FS106-V2 is running** (finishes the sighted check, aims at repairing Sokolov–Voronov). When it reports: log it; read its verdicts
      on SV-L3, SV-L4, Obs. 1, Prop. 8, SV-1, SV-2 and its repairs; **re-brief wave 2** (`data/fs106/briefs/TS106-structural.md`,
