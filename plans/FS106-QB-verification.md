@@ -6,7 +6,21 @@ commit. Working directory `data/fs106/fs106-qb/`; tools `tools/fs106_qb_*.py`.*
 
 ## Theorems this phase proved
 
-*(filled at stage 3; one line per theorem, grade, address)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| QB-R | Kept points (balls of radii `ε/2`, `2ε` at least 9/10 full of one tight class) avoid every distance in `[1 − ε, 1 + ε]`, `0 < ε ≤ 1/2`; any `η < 0.1100` | hand, one mind; constants tools-exact | §2.1; `tools/fs106_qb_rem_constants.py` |
+| QB-CORE | A density point of a class that avoids distance 1 almost everywhere sees upper density 0 of that class at every point at distance 1 | hand, one mind | §2.1 |
+| QB-B | D-SLACK's forms (a) and (b) are equivalent; an `ε`-slack class is tight; `µ₆(ε) ≤ µ₆⁰`, `µ₆` monotone | hand, one mind | §2.2 |
+| QB-K | The unit-pair form `∫_B f(f ∗ σ)` is weak-* continuous on bounded sets of `L^∞` (the circle measure is Rajchman) | hand, one mind; standard | §2.3 |
+| QB-EQ | `χ_m⁰ ≤ 6 ⟺ χ_CP ≤ 6 ⟺ µ₆⁰ = 1 ⟺ lim µ₆(ε) = 1 ⟺` (e) periodic pixelated band-proper partial colourings with vanishing holes `⟺` (f) NC; no MR, no Voronov (row 130 for `χ_CP`); the same for every `k` | hand, one mind (+ row 130, two) | §2.4 |
+| QB-SUP | `µ₆⁰ = lim µ₆ = lim µ₆^tile = lim µ₆^per`, with `µ₆^per(ε) = µ₆(ε)` at each `ε`; `µ₆⁰` attained | hand, one mind | §2.6 |
+| QB-REM | C-Q-REM (i) with `η = 1/10`, `ε ≤ 1/2`; (ii) given a jointly measurable version (D-CP has none built in; one exists) | hand, one mind | §2.5 |
+| QB-ATT | `µ₆(ε)` is attained by a stationary random family, and by almost every sample of it | hand, one mind | §2.7 |
+| QB-V11 | "`µ₆(ε) < 1` for every `ε > 0`" ⟺ V-1.1 (Euclidean, six colours) | hand, one mind | §2.7 |
+| QB-F / QB-EPS | Fill lemma; given `[Voronov2023]` Thm 1.3, every partial 6-colouring with `Leb ⊗ Leb`-null band pairs leaves lower density `≥ ε²/(6 + ε)² ≥ ε²/49` (`ε ≤ 1`) uncovered; unconditionally the statement implies V-1.1 at each `ε` | hand, one mind; conditional on V-1.3 (external) | §2.8 |
+| QB-HIT | Strips of width `2ε` at spacing `s ≤ 2` meet every unit circle and bicycle in positive length; density `2ε/s`, as low as `ε`; hitting-form arguments prove at most that | hand, one mind | §2.9 |
+| QB-LOC | Parts's 6-tiling shrunk by `ε` is band-proper with every coloured point of chromaticity 1; C-Q-LOCAL for every `δ > δ₆` | hand, one mind; Parts's figures external | §2.10 |
+| QB-P | Pixel lemma: any band-proper partial 6-colouring of `U₃` becomes, at arbitrarily small cost in slack and coverage, one with chromaticity `≤ 2` (or 1) everywhere; so a trichromatic-point lemma for partial colourings already implies C-Q-STAB | hand, one mind | §2.10 |
 
 ## Stage 1 — SAVED
 
@@ -235,7 +249,8 @@ lattice) and **not checked**: a GAP at the endpoint only, immaterial to the cons
 **The consequence, sharpened. Pixel lemma P.** From any `ε`-band-proper partial 6-colouring of `U₃(0)` (measurable classes) with uncovered fraction `δ₀`, and any
 `h < ε/(2√2)`, `τ > 0`: pixelate (§2.6 (iii)) and delete an open square of side `τh` about every grid vertex. The result is `(ε − 2√2h)`-band-proper, uncovered
 fraction `≤ δ₀ + τ²`, and every coloured point has a neighbourhood meeting at most two cells — **chromaticity `≤ 2` everywhere** (deleting `O(τ)` along edges
-too gives chromaticity 1). Hence, for every `δ` (not only `δ ≥ δ₆`): a lemma "every `ε′`-band-proper partial 6-colouring of `U₃` with uncovered fraction `≤ δ` has
+too gives chromaticity 1). (Measurability costs nothing: for a band-proper colouring, `c″(x) = min{j : x ∈ cl C_j}` has closed-set-difference classes that avoid the
+open band and cover at least as much.) Hence, for every `δ` (not only `δ ≥ δ₆`): a lemma "every `ε′`-band-proper partial 6-colouring of `U₃` with uncovered fraction `≤ δ` has
 a trichromatic point in its coloured set", for all `ε′ > 0`, **already implies C-Q-STAB at every `δ′ < δ`**; and C-Q-STAB at `δ` makes that lemma vacuous. So a
 trichromatic-point step is not a reduction of C-Q-STAB: it carries its full strength. **Verdict on the consequence: TRUE in this sharpened form** [hand, one mind];
 as literally derived from C-Q-LOCAL alone it is a non-sequitur below `δ₆` (C-Q-STAB needs only some small `δ`, C-Q-LOCAL speaks of `δ ≥ δ₆`). "Needs an
@@ -251,6 +266,53 @@ test: a proof of C-Q-STAB whose only use of the colouring is a finite or null se
 - **Control 1** (constants): passed, plants refused (§2.1). **Control 2** (other `k`): the same proof gives `χ_m⁰ ≤ k ⟺ lim µ_k(ε) = 1` for every `k`; at `k = 7`
   the hexagonal colouring has slack, both sides true; at `k = 4`, `χ_m⁰ ≥ χ(ℝ²) ≥ 5` (I-EASY) gives `lim µ₄(ε) < 1`, consistent with Croft's `δ₄ ≈ 0.0825`.
   **Control 3** (analytic step): Lemma K uses the Rajchman property once, and the band version needs none. **Control 4** (six only through V-1.3): passed (§2.8).
+
+## Stage 3 — SAVED (the write-up, committed before anything fenced is opened)
+
+### 3.1 Verdicts
+
+| # | claim | verdict | minds | grade |
+|---|---|---|---|---|
+| 1 | **TQ-EQ**, above all "vanishing holes ⟹ colouring" | **TRUE**, all six equivalences, no MR, no Voronov; (a)⟺(b) is row 130 | one (this job) | [hand]; row 130 [hand, two] |
+| 1′ | **C-Q-EQ** | **TRUE** | one | [hand] |
+| 2 | **TQ-EPS2** | **TRUE conditional on `[Voronov2023]` Thm 1.3** (as printed), with the better constant `ε²/(6 + ε)²`; as an unconditional statement it implies V-1.1 at each `ε`, so it can have no better grade than a Voronov theorem | one | [hand] over [external, unrefereed] |
+| 3 | **TQ-SUP** | **TRUE** under §1.2's definitions (stronger: `µ₆^per(ε) = µ₆(ε)` at each `ε`; `µ₆⁰` attained) | one | [hand] |
+| 4 | **TQ-HIT** | **TRUE** as a limitation; the density `4ε` improves to `ε` (spacing 2) | one | [hand] |
+| 5 | **C-Q-REM** (i) | **TRUE**, `η = 1/10` for `0 < ε ≤ 1/2`; false for large `ε` trivially (read for small `ε`) | one | [hand; constants tools-exact] |
+| 5 | **C-Q-REM** pointwise core | **TRUE**, stronger (a.e.-avoidance suffices; upper density 0) | one | [hand] |
+| 5 | **C-Q-REM** (ii) | **TRUE**, given a jointly measurable version — which D-CP does not build in, but continuity in probability supplies | one | [hand] |
+| 6 | **C-Q-COMP** (i) | **TRUE** (upper density suffices) | one (+ row 130) | [hand] |
+| 6 | **C-Q-COMP** (ii) | attainment **TRUE**; "`µ₆(ε) < 1`" **TRUE conditional on V-1.1**, and equivalent to it over all `ε` | one | [hand]; conditional half over [external] |
+| 7 | **C-Q-LOCAL** | **TRUE for every `δ > δ₆`** (chromaticity 1, not only below 3); **GAP at the endpoint `δ = δ₆`** (needs a translate of `U₃` with hole fraction below the mean; unchecked); consequence: **TRUE in the sharpened form of the pixel lemma** — a trichromatic-point step carries C-Q-STAB's full strength at every `δ`; as derived from C-Q-LOCAL alone it is a non-sequitur below `δ₆`; "spread over positive measure" a [reading] | one | [hand]; the last clause [reading] |
+
+### 3.2 What the owner should know (G21)
+
+- TQ-EQ is true and is a **compactness restatement**: it moves no value. `lim µ₆(ε) < 1` needs a bound uniform in `ε`; every bound held vanishes with `ε`
+  (`ε²/(6 + ε)²` from V-1.3; `δ₆ + O(ε)` from Parts from above). The fallacy to watch for anywhere downstream: from "`µ₆(ε) < 1` for each `ε`" (= V-1.1) to
+  "`lim µ₆(ε) < 1`".
+- The analytic content is Lemma K (the Rajchman property of the circle) plus a support selection; row 130 already uses the same weak-* closure, so the novelty
+  of TQ-EQ over row 130 is modest: the slack side and the periodic/pixelated forms.
+- The trichromatic-point method of Voronov and Sokolov–Voronov **cannot see partial colourings at all**: the pixel lemma removes every point of chromaticity
+  `≥ 3` (even `≥ 2`) at arbitrarily small cost. Any proof of `lim µ₆ < 1` must use the colouring on a set of positive measure.
+
+### 3.3 Proposed edits (for the close; I edit none of these files)
+
+- `BIBLIOGRAPHY.md` l. 171 `[Parts2020c]`: "not held" → held at `library/pdf/arXiv-2010.12668-parts-what-percent-plane-5-6-colored.pdf`; read by this job:
+  abstract, §1 (definitions, constraints, pigeonhole), §2.1–2.3 in full; §2.4 onward and the figures not read.
+- `BIBLIOGRAPHY.md` `[SokolovVoronov2025]`: §9's "S(ε) = Ω(ε2 )" (unproved there) is the printed form of TQ-EPS2's order; add to the entry.
+- Prior-art debt: the weak-* compactness of distance-avoiding families with the circle's Fourier decay is standard in the `m₁(ℝ²)` literature (attainment of the
+  supremum density; `[BachocEtAl2014]`'s operator framework); a search for "fractional/partial colouring with vanishing holes ⟺ measurable colouring" was not
+  run (budget).
+
+### 3.4 Inventory items (for the report)
+
+- result — QB-EQ / QB-SUP: TQ-EQ and TQ-SUP TRUE, one blind mind — §2.4, §2.6
+- result — QB-EPS: TQ-EPS2 TRUE only conditional on V-1.3; constant `ε²/(6 + ε)²` — §2.8
+- result — QB-P: pixel lemma; trichromatic-point methods cannot prove C-Q-STAB — §2.10
+- result — QB-V11: "`µ₆(ε) < 1` ∀ε" ⟺ V-1.1 — §2.7
+- correction owed — `BIBLIOGRAPHY.md` `[Parts2020c]` is held — §1.1
+- correction owed — the instance sheet's "`µ₆⁰` … in `claims.md`": it is not there — §1.1
+- prior-art debt — the compactness/Rajchman step in the `m₁` literature — §3.3
 
 ### "Would have searched here" log
 
