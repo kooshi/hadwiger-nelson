@@ -179,7 +179,7 @@ in the cyclic `⟨γ_n⟩`: impossible. The same holds for `Γ_Λ` (still `≅ �
 two linearly independent Lyapunov weights — holds for our pieces by direct computation**, not only through the hypothesis: `Y_irred` is the
 whole lift (`L` is `Γ_Λ`-irreducible for every `Λ`, so Lemma 2.4's filtration is `0 < 𝔸_L/L`); the weights are `χ_v(a, b) = log|uᵃwᵇ|_v`;
 `u` is a unit at `𝔓, c(𝔓)` and `w` is a unit off `{𝔓, c(𝔓)}` (Lemma W), so `χ_𝔓(a, b) = b·log|w|_𝔓 ≠ 0` and, at a finite `v` with
-`|u|_v ≠ 1` (one exists: `u` is non-torsion with every archimedean absolute value 1, Kronecker), `χ_v(a, b) = a·log|u|_v`: independent.
+`|u|_v ≠ 1` (one exists: `u` is non-torsion with every archimedean absolute value 1 — at a totally real `F` — Kronecker), `χ_v(a, b) = a·log|u|_v`: independent.
 
 ### 2.4 (a6) Ergodicity at `F₁` and `F_dG`: TRUE [hand, one mind]
 
@@ -195,8 +195,8 @@ the push-forward of a `U`-ergodic measure as `Γ`-ergodic; X02V says so explicit
 formula in full). `Γ ≅ ℤ²` is torsion-free, so `γ ≠ 1` is non-torsion. Every `M` in either route contains `1` (X02D: `M₀ = ℤ[Γ]`; X02V:
 `M_j = ℤ[Γ]·{1, r₁, …}`), so `N = ℤ[γ, γ⁻¹] ⊆ M` and `N̂` is a `γ`-equivariant factor of `M̂`; `h_{m_M}(γ) ≥ h_{m_N}(γ)`. `N ≅ ℤ[x^{±1}]/(f)`
 with `f` the primitive minimal polynomial of `γ`, whose Haar entropy is the Mahler measure `m(f)` (Lind–Schmidt–Ward; for this cyclic case
-Yuzvinskii's formula) [external, textbook]. Every archimedean absolute value of `γ ∈ U` is 1 (conjugation of `L/F` is complex conjugation at
-every embedding over a real place of `F`), so `m(f) = log|a₀|`, `a₀` the leading coefficient; `γ` non-torsion with all conjugates of modulus 1
+Yuzvinskii's formula) [external, textbook]. At both our fields (totally real, 1.2) every archimedean absolute value of `γ ∈ U` is 1 (conjugation of `L/F` is
+complex conjugation at every embedding over a real place of `F`), so `m(f) = log|a₀|`, `a₀` the leading coefficient; `γ` non-torsion with all conjugates of modulus 1
 is not an algebraic integer (Kronecker), so `|a₀| ≥ 2` and **`h_{m_M}(γ) ≥ log 2`**. *Where it is used:* X02V's uniqueness step and X02D's
 second route (§3.3); X02D's first route (§3.1–3.2) does not use it.
 
