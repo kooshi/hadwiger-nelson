@@ -1,0 +1,8 @@
+plant = nolift
+alternating two-colour, 6 x 60     arcs= 6 valid=True W=+2 general=False Y3-GP=holds  MISMATCH (want W=+0 general=False)
+r0 r1 r2 twice, 6 x 60             arcs= 6 valid=True W=+2 general=False Y3-GP=holds  OK
+r0 r1 r2 thrice, 9 x 40            arcs= 9 valid=True W=+3 general=False Y3-GP=holds  OK
+generic, change points 41k (k<9)   arcs= 9 valid=True W=+3 general=True Y3-GP=holds  OK
+generic mirror, change points 41k  arcs= 9 valid=True W=+3 general=True Y3-GP=holds  MISMATCH (want W=-3 general=True)
+generic, 27 arcs, 40k/3 + k/1000   arcs=27 valid=True W=+9 general=True Y3-GP=holds  OK
+SOME MISMATCH

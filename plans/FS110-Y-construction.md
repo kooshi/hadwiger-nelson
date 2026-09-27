@@ -506,6 +506,8 @@ infinitely many wiggles, the print's form is the weaker hypothesis on the map; n
 
 ### Theorems this phase proved (FS110-Y3)
 
+- **Y3-RING** — `tools/fs110_y_ring.py`: Y3-GP checked exactly on six named rings (three aligned, three in general position, `W = 0, 2, 3, 3, −3, 9`),
+  two plants each firing for its own reason — [tools, exact], stage 9.
 - **Y3-C5** — in `𝓜_K`, the print's Condition 5 and "no boundary arc of radius 1" coincide — [hand, one mind, trivial], above.
 - **Y3-GP** — a ring (§7.1's) whose change points are never at angular distance `≡ 0 (mod 60°)` from one another winds `W ≡ 3 (mod 6)`; so
   `W ∈ {0, ±1, ±2}` needs two change points at distance 1, `√3` or 2 — [hand, one mind; `tools/fs110_y_ring.py` checks it on named rings], §8.2.
@@ -636,3 +638,29 @@ a winding map with every ring aligned, or a tight six-map in `𝓜_K` with a rin
 - A winding map: a scan over lattice-periodic curved designs for rings of `|W| ≥ 2` → the necessary list of §8.7, and no candidate.
 
 ## Stage 8 — SAVED (FS110-Y3)
+
+## Stage 9 — SAVED (FS110-Y3): the ring checker; hand-back
+
+`tools/fs110_y_ring.py` [tools, exact]: rings given by formula (change points in exact rational degrees), validity `c(θ) ≠ c(θ + 60°)` tested on every
+cell of the refined partition, `W` from the signed lift, general position, and Y3-GP's implication. Outputs `data/fs110/fs110-y/y3_ring_*.out`.
+
+| ring (formula) | valid | `W` | general | Y3-GP |
+|---|---|---|---|---|
+| alternating two colours, six `60°` arcs | yes | 0 | no | not applicable |
+| `r₀ r₁ r₂` twice, six `60°` arcs | yes | 2 | no | not applicable |
+| `r₀ r₁ r₂` three times, nine `40°` arcs | yes | 3 | no | not applicable |
+| change points `41°k`, `k < 9` | yes | 3 | yes | holds |
+| the same, colours reversed | yes | −3 | yes | holds |
+| change points `40°k/3 + k/1000`, `k < 27` | yes | 9 | yes | holds |
+
+**Plants.** `nogp` (Y3-GP applied without its general-position hypothesis) fires on exactly the two aligned rings with `W ≢ 3 (mod 6)` — the hypothesis
+is load-bearing. `nolift` (unsigned change count) fires on the alternating ring (`2` for `0`) and on the reversed ring (`+3` for `−3`); it cannot reach a
+ring whose steps all go one way (noted, G21). **A slip of mine, found by the checker:** the first formula for the `W = 9` ring (change points `13°k`)
+was invalid — its last arc is `22°`, so a `60°` window there spans three arcs and repeats a colour; the checker read `valid=False` and I replaced it by
+the derived near-uniform spacing `40°k/3 + k/1000` (no second value tried).
+
+**Left for a successor:** Y3-SIX at bowties (four sectors, step 4); the eight-arc aligned `|W| = 2` ring at degree 3 (Y3-SIX's argument uses unit
+distance between every pair of adjacent change points, which eight arcs do not give); whether the generic `|W| = 3` ring (nine or more arcs, no
+unit-distance change points) is realisable at a vertex at all — the construction side's next question, and the one a winding map must answer first.
+
+## Stage 9 — SAVED (FS110-Y3)
