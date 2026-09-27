@@ -308,6 +308,8 @@ ALLOW: dict[str, str] = {
     "§4.1–4.3": "row 120's prior-art cell 'EL2021 §2 and §4.1–4.3 read (X24R)', widened to 'EL2021 §§1, 2, 4 read in full (X24R; FS105-R)' at FS-105's close (4.1)",
     "c·M^{1/[F:ℚ]}": "row 120's mechanism '`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`', sharpened to the exact constant `(4/π + o(1))M^{1/[F:ℚ]}` at FS-105's close (4.1; FS105-W-H)",
     "29–61": "the paths-forward table's group rank, renumbered 28–60 when FS-105's row left the table at its close (§R-close 4.2; the 30–62 precedent)",
+    # RF1, the paths-forward mirror of the reframe (2026-09-26; data/reframe-2026-09-26/rf1-record.md): FS-106 and FS-107 minted at ranks 1-2.
+    "28–60": "the paths-forward table's group rank, renumbered 30–62 when FS-106 and FS-107 were minted at ranks 1–2 at the reframe (RF1; every rank from FS-104's on moved down two, so CLAUDE.md shows ranks 1–29 again, E1's design; the 29–61 precedent)",
 }
 
 # token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it

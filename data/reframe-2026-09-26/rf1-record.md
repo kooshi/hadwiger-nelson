@@ -65,3 +65,44 @@ in the ranked table; every FS-1 … FS-107 present in the ranked table or the cl
 | Update FRONTIER-STUBS's Open milestones "Next" and replace its stale "The target" sentence | leave both for the owner | the file holds current state only; its "The target" sentence cites a § The mission text that no longer exists, and "Next" should name the rows this job put on top | medium — if the owner reserved Open milestones for another job, revert those two sentences |
 | Keep R3's "(R3; x → y)" prefixes and not add "(RF1; y → y+2)" to 59 rows | re-prefix every row | one re-rank note says it once; 59 prefixes would retell it 59 times (one-home rule) | high |
 | Follow the brief (only the null-set step folds) over the stub's "FS-104 (absorbed …)" | banner FS-104 as absorbed | the brief is the owner's later and narrower word, and it says FS-104's other items stand | high |
+
+## Stage 3 — SAVED (`CLAUDE.md` § Paths forward mirror, the fact audit, the gates)
+
+**`CLAUDE.md` § Paths forward, ranked** — only the table and its intro sentence touched:
+- intro: "bearing on χ ≥ 6 stated honestly" → "bearing on the answer stated honestly" (the brief's permission); the column header likewise, to
+  match the intro and the authoritative file;
+- rows 1 FS-106 and 2 FS-107, short and pointing (the one-home rule: the question and the outcomes live in the stub and in
+  `plans/FRONTIER-STUBS.md`), worded so as to add no repeated ten-word run (the `--dupes` baseline was already 10);
+- FS-104 1 → 3, "(re-aimed, not demoted)", its null-set step (C-FMT (d)) a sub-question of FS-107, the rest standing; bearing unchanged;
+- ranks 2–27 → 4–29, the group row 28–60 → **30–62** — so `CLAUDE.md` again shows ranks 1–29, E1's design (rows ranked ≥ 30 live in
+  `plans/FRONTIER-STUBS.md` alone). No row's own text changed except FS-104's.
+
+**`tools/claude_md_fact_audit.py`** — one ALLOW line, under a comment naming this job: `"28–60"`, the group rank label, renumbered 30–62
+(the 29–61 precedent). No other token left the corpus, so no EXTERNAL_HOMES line was needed. **The plant:** the audit run before the line
+existed failed with exactly `FAIL: lost chunk token '28–60'` and nothing else (the line's own negative control).
+
+**Gates** (exit statuses read directly, logs in the session scratchpad):
+
+| gate | result |
+|---|---|
+| `python3 tools/claude_md_fact_audit.py --base 9ff8cc4a` | **AUDIT PASSED (0 failure(s))**, exit 0 |
+| `--dupes` | **10** repeated runs, 628 bytes — the identical list to the baseline's (a `diff` of the two outputs is empty) |
+| `python3 tools/fs71_ledger_b_check.py --strict` | **RESULT: PASS** (836 § B rows), exit 0 |
+| `python3 tools/bib_audit.py` | exit 0, "every cited work resolves to a row or a recorded alias" |
+| `python3 tools/check_architecture.py` | **RESULT: PASS**, exit 0 |
+| `CLAUDE.md` bytes | **304,245** (302,692 at `0774956e`; +1,553); the 300,000 budget is suspended for the reframe (Kooshi, relayed by the brief) |
+
+**A pre-existing tool defect, not a gate of this brief:** `python3 tools/claude_md_fact_audit.py --self-test` exits 1 — "BAD gate sentence
+broken: passed [wrong reason; wanted 'gate-report']" — on this job's tree **and on the untouched tree** (re-run with this job's edits
+stashed: exit 1, the same line). **Mechanism:** the plant replaces the *first* occurrence of "declared purchases", and since Kooshi's
+publication ruling was written into § Publication (`CLAUDE.md` line 162: "with no declared purchases") that first occurrence is no longer the
+gate sentence (line 1714), so the plant cannot fire. The repair is to plant on the gate sentence itself (e.g. through `GATE_RE`); it is not
+made here — the brief allows table lines only in that tool.
+
+### Decisions settled in this stage
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| Keep 29 explicit rows in `CLAUDE.md` (group row 30–62) | keep 27 explicit rows and push FS-98 and FS-76 into the group (28–62) | E1's design is ranks 1–29 in `CLAUDE.md`; the two closes that shrank it to 27 only had rows leave; the budget is suspended | high |
+| ALLOW (not EXTERNAL_HOMES) for "28–60" | EXTERNAL_HOMES pointing at this record | a superseded rank label has no home that must keep it; the 29–61 and 30–62 precedents are ALLOW | high |
+| Leave every other row's bearing text ("none on six" etc.) as written | rewrite 60 bearings against "the answer" | not in the brief; each row's bearing on six is a one-sided bearing on the answer and stays true; a rewrite is a close's job | high |
