@@ -11,6 +11,7 @@ from disk first). Grades are `CLAUDE.md` § Notation's. The fixed claim list is 
 ## Would-have-searched-here log
 
 - Stage 1: none (reading only).
+- Stage 2: none (reading only).
 
 ## Stage 1 — SAVED: quotation check, first-hand reading notes, §G part 1 (G1–G81)
 
@@ -144,3 +145,186 @@ colourings of `ℝ²` proper almost everywhere, their regular classes, and Voron
 - **G51 competitor and advisor — bears**: blind second minds on every derivation; the competition proper is FS-107; within FS-106 a competitor pays where two routes to the heart are live (C-T via S–V's exact-distance transplant, C-Q via stability) → Phase T staffing.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: §G part 2 (every row's mechanism; the method rules) and part 3 (the extraction)
+
+### §G part 2a — `LEDGER.md` rows 1–130 (§ A read from disk: every row's headline; rows 40, 41, 128–130 in full)
+
+- row 1 — bears (control): the two circles about a point 3-colour at exact distance — exact-distance circle systems do not force what Voronov's slack bicycle forces; the transfer must use density, not the exact graph alone → Phase T control.
+- row 2 — silent: seam arithmetic.
+- row 3 — bears weakly: coverage monotone — the fan form of D1 → Phase T wording.
+- row 4 — bears: fan ⟺ coverage is the form of 'the circle about x avoids P(x)' → Phase T (D1 as the fan).
+- row 5 — silent.
+- row 6 — silent.
+- row 7 — silent.
+- row 8 — silent.
+- row 9 — bears weakly: a compulsion on circles at exact distance — a model of what a circle-trace invariant looks like; no transfer.
+- row 10 — silent.
+- row 11 — silent: strip automaton.
+- row 12 — silent.
+- row 13 — silent.
+- row 14 — silent.
+- row 15 — silent.
+- row 16 — silent.
+- row 17 — bears weakly: circle–circle intersection trichotomy = Voronov's Property 1 in the Euclidean norm (kernel) → Lean note.
+- row 18 — silent.
+- row 19 — silent.
+- row 20 — silent.
+- row 21 — silent.
+- row 22 — silent.
+- row 23 — silent.
+- row 24 — silent.
+- row 25 — silent.
+- row 26 — silent.
+- row 27 — silent.
+- row 28 — silent.
+- row 29 — silent.
+- row 30 — silent (finite mechanism hunt).
+- row 31 — silent.
+- row 32 — bears weakly: hex-shell K₇ ({1,√3,2}) — a distance-set six-target; no measurable content.
+- row 33 — bears (control + Lean): the boundary-tight 7-colouring in the kernel — tight seven exists; every a.e. claim must leave it standing → controls; Lean home of seven's upper half.
+- row 34 — bears: coset colourings need 7 (floor via `[SokolovVoronov2025]`) — a regular class held in the kernel; its a.e. form is automatic (open cells) → Phase R note.
+- row 35 — bears: cell-constant colourings need 7 — the a.e. form (boundaries free) is the regular class 'cell-constant a.e.' → claim C-AE-CELL folded into C-AE-POLY.
+- row 36 — silent (scale).
+- row 37 — silent.
+- row 38 — silent.
+- row 39 — silent (finite cores).
+- row 40 — bears: the family's ≥ 7 is conditional on `[Voronov2023]` Thm 1.1 and `[SokolovVoronov2025]` — FS-106's verification discharges or corrects row 40's condition → Phase V output line for the close.
+- row 41 — bears: the limit lemma (bounded families within ε of 1 ⟹ χ ≥ k+1) is the kernel's form of the compactness step of Thm 1.3 → claim C-CS-1, Lean note.
+- row 42 — silent.
+- row 43 — silent.
+- row 44 — silent (finite dial).
+- row 45 — silent.
+- row 46 — silent.
+- row 47 — silent.
+- row 48 — silent.
+- row 49 — silent.
+- row 50 — silent.
+- row 51 — silent.
+- row 52 — silent.
+- row 53 — silent.
+- row 54 — silent.
+- row 55 — silent.
+- row 56 — silent.
+- row 57 — silent.
+- row 58 — silent (forcing gadgets).
+- row 59 — silent.
+- row 60 — silent.
+- row 61 — silent.
+- row 62 — silent.
+- row 63 — silent.
+- row 64 — silent.
+- row 65 — silent.
+- row 66 — silent (fan gap on finite planes).
+- row 67 — silent.
+- row 68 — silent.
+- row 69 — silent.
+- row 70 — silent.
+- row 71 — bears weakly: fractional blow-up caps at 4.36 — no density route to six (with row 129).
+- row 72 — silent.
+- row 73 — silent.
+- row 74 — silent.
+- row 75 — silent.
+- row 76 — silent.
+- row 77 — silent (audit).
+- row 78 — silent.
+- row 79 — bears: the height lift (three colours linear) is the index Voronov uses — row 79's mechanism in one dimension → §IQ.
+- row 80 — bears: four colours have no height — the method's index lives only on 3-coloured curves → §IQ note.
+- row 81 — silent.
+- row 82 — silent.
+- row 83 — silent.
+- row 84 — silent.
+- row 85 — silent.
+- row 86 — silent.
+- row 87 — silent.
+- row 88 — silent.
+- row 89 — silent.
+- row 90 — silent.
+- row 91 — silent.
+- row 92 — silent.
+- row 93 — silent.
+- row 94 — silent.
+- row 95 — silent.
+- row 96 — silent.
+- row 97 — silent.
+- row 98 — silent.
+- row 99 — silent.
+- row 100 — silent.
+- row 101 — silent.
+- row 102 — silent.
+- row 103 — silent.
+- row 104 — silent.
+- row 105 — silent.
+- row 106 — silent (the stripe lemma is triangle-lattice combinatorics).
+- row 107 — bears (frame): the bridge — χ(ℝ²) as a sup over fields — is how any a.e. theorem reaches χ(ℝ²) only through N-EASY and MR; nothing in phases.
+- row 108 — silent.
+- row 109 — bears weakly: the mixing selection's Borel/measurable format — descriptive-combinatorics vocabulary for §PA.
+- row 110 — silent.
+- row 111 — silent.
+- row 112 — silent.
+- row 113 — silent.
+- row 114 — silent.
+- row 115 — silent.
+- row 116 — silent.
+- row 117 — silent.
+- row 118 — silent.
+- row 119 — silent.
+- row 120 — bears (frame): MR is the only input the *No* direction needs beyond FS-106 → the plan's frame line.
+- row 121 — silent.
+- row 122 — silent.
+- row 123 — bears (frame): the five is per-class (row 129) → the six must be joint.
+- row 124 — silent.
+- row 125 — bears (frame): six at ℚ(√167) contains χ_CP ≥ 6 — FS-106's product feeds it.
+- row 126 — silent.
+- row 127 — bears (Lean lane): FS-101 is where any a.e. theorem is formalized → Lean note.
+- row 128 — bears (frame): given MR the plane's number is χ_CP = χ_m⁰ → the question is FS-106's.
+- row 129 — bears: one class at a time never gives six; the transfer must read the joint structure; W's per-class cap `m₁ ≤ 0.2470` → Phase T, FS-107.
+- row 130 — bears, centrally: M1 (weak-* limit of fractional colourings, properness surviving by Rajchman decay), D1–D5 (density lemma, boundary lists, slack ⟹ Borel, slack costs a colour), the null-set GAP — Phase H re-verifies D1–D4; M1's compactness is the tool of claim C-Q-COMP.
+
+### §G part 2b — the method rules (`CLAUDE.md` § Grokkings [method], § The standard of evidence, § Building, § The gate)
+
+- Standard of evidence, "the artifact is the certificate plus the checker" — bears: the claim list is what a stranger checks; no claim rests on a figure.
+- "Read the final statement aloud against the informal claim" — bears: every a.e. form is read against its everywhere form and against link 5, one hypothesis changed at a time (Phase R).
+- "Write the certificate for the reviewer early" — bears: the claim list is written before any derivation; each claim names what it forbids.
+- "Order a verification's steps by marginal evidential value" — bears: Phase V checks first the steps the transfer depends on (Thm 1.3's closed-set step; S–V Lemma 1, Props 9–11; Voronov Prop 4.1), the rest after.
+- "Report the hunt honestly" — bears: GAP and FALSE are results (standing rule 4).
+- Checkpointing (PROTECTED) — bears weakly: no long runs; each job saves by stage (standing rule 2), which is this milestone's checkpoint.
+- A blocking run is killable; kill by pid; pipes; running scripts; generated modules; the kernel's cost model — silent (no processes, no builds in FS-106).
+- The gate: "every theorem whose hypothesis is a structure ships a named inhabitant" — bears: every a.e. claim names a model of its hypotheses (the tight hexagonal 7-colouring; Townsend's unit-arc sector; a map with unit-arc boundaries) as its control.
+- "State the uninformative outcome and confirm it is REACHABLE" — bears: §6.3's expectations name both outcomes and why each can occur.
+- "A positive control proves an instrument finds things of the shape its generator can represent" — bears: a transfer argument checked only on polygonal or map-type examples says nothing about density-open classes; the controls include a non-map class (a fat-Cantor boundary).
+- "Do not mistake a one-sided filter for an inverted monotonicity" — bears: D4's support colouring is one-sided (slack ⟹ Borel); a tight colouring is outside its domain, not a counterexample to it.
+- "A TRUE explanation that fully accounts … will stop you looking for a second" — bears: when a step of Voronov's proof fails on density-open classes for one reason, check every other hypothesis it uses before naming the step.
+- "When two numbers are compared, exactly ONE thing may differ" — bears, as a design rule: the claim ladder changes one hypothesis per rung (interval → closed → map with coloured boundaries → map a.e. → polygonal a.e. → density-open).
+- "Count your generator's free parameters" — silent (no generator).
+- "Enumerate the parameter first" — silent.
+- "A measured half and a derived half fail in opposite directions" — silent (nothing measured).
+- G21, G30, G46, G49, G50, G67, G72, G79, G51 — walked in part 1.
+
+### §G part 3 — the extraction: each *bears* as an instruction to a phase
+
+| from | instruction | phase |
+|---|---|---|
+| G13, rows 3–4, 130 (D1) | state the measurable fan: at a point `x`, every colour of positive upper density is absent from the density points of `S(x, 1)` (D1); second mind on D1–D4 | H |
+| G15, G16 | transfer the pigeonhole (Lemma 6.1; S–V Lemma 4) and the kills (Thm 1.2 bicycle; Prop 2.2; S–V Cor 3, Lemma 3) as separate claims | T |
+| G17 | every a.e. claim in two forms: on `ℝ²` and on a disc of radius 3 | R, T |
+| G20, rows 33–35 | controls: the tight hexagonal / brick 7-colouring must survive every claim; a claim that refutes seven is misstated | all |
+| G21, standing rule 4 | the blind mind audits TRUE at FALSE's rate; the acceptance test's scope in the headline | all |
+| G22, G60, G24, rows 71, 129 | no route through one class's density; FS-107's W constraints carried forward | T, hand-over |
+| G29, row 41 | name Thm 1.3's closed-set step exactly; note the kernel's limit lemma as its Lean form | V, R, L |
+| G30, G46, G49, G50 | §PA in the discipline's words (density topology, approximately continuous functions, forbidden-interval colourings, map-type colourings, measurable chromatic number); S–V's exact-distance transplant and §9 are the nearest print | PA, T |
+| G48, G81, rows 107, 120, 125, 128 | frame only: FS-106's *No* needs MR (row 120) to reach `χ(ℝ²)`; its *Yes* needs nothing (N-EASY) | plan frame |
+| G64, G67 | claims worded so S and W never merge; each claim says what it forbids | claims |
+| G71, G73, rows 79–80 | the index is `K₃`'s height on a path; name the invariant a density-trace must carry to have one (claim C-T-IND) | IQ, T |
+| G72, G79 | §IQ: what every a.e.-proper colouring carries on its unit circles | IQ |
+| G51 | blind second mind per derivation; a competitor on the heart where two routes are live (structural and quantitative) | T staffing |
+| row 1 | control: exact-distance circle systems 3-colour; a transfer must use density, not the exact-distance graph on circles | T |
+| row 40 | the verification of `[Voronov2023]` and `[SokolovVoronov2025]` discharges or corrects row 40's condition — an item for the close | V |
+| row 127 | Lean lane FS-101 for every landed claim | L |
+
+**The test of the re-grokking (WORKFLOW 3.1 item 3).** It changed the plan: (1) G50 fired — `[SokolovVoronov2025]`'s exact-distance transplant,
+§9 remark and Question 2 re-aim Phase T from "invent a measurable replacement" to "read S–V's replacements against the normal form, and run its
+§9 route quantitatively"; (2) G71 names the invariant the index is, so §IQ is not open-ended; (3) G20 and row 1 supply controls; (4) row 40's
+condition becomes a close item.
+
+## Stage 2 — SAVED
