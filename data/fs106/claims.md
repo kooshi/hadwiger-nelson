@@ -39,7 +39,8 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
 - **D-NF, the normal form** (this list's wording, from `plans/FS103-M-derivation.md` §3.1 and `CLAUDE.md` § The aim link 5). For a measurable
   `f : ℝ² → [k]` proper at `Leb ⊗ σ`-almost every edge: `S_j = f⁻¹(j)`; `S̃_j` the points of density 1 of `S_j`; `E = ℝ² ∖ ⋃_j S̃_j` (Falconer's null
   set); `d̄_j(x) = limsup_{r→0} |S_j ∩ B(x, r)|/|B(x, r)|`; **`P(x) = {j : d̄_j(x) > 0}`**, the *essential multicolour*. The classes `S̃_j` are
-  *density-open* (every point of `S̃_j` is a density point of `S̃_j`).
+  *density-open* (every point of `S̃_j` is a density point of `S̃_j`). Held (FS-103: V1's density-point lemma, one mind, and I-D1): the classes `S̃_j`
+  avoid the distance 1 at every pair of their points.
 - **D-SLACK** (this list's wording). A measurable `f` has *slack `ε`* in form (a) if `(Leb ⊗ Leb){(x, y) : f(x) = f(y), 1 − ε ≤ |x − y| ≤ 1 + ε} = 0`;
   in form (b) if for every `d ∈ [1 − ε, 1 + ε]`, `(Leb ⊗ σ){(x, w) : f(x) = f(x + d w)} = 0`. *Tight*: slack for no `ε > 0` (`CLAUDE.md` link 5, "tight
   (no band avoided)"; not Hoffman's sense).
@@ -104,7 +105,7 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
 
 - **C-CS-1** (this list's wording). In `[Voronov2023]`'s proof of V-1.3 (p. 14), the closedness of the six sets is used at exactly one step, the
   passage to the limit pair `(x∗, y∗)`; that step is equivalent to: *a compact set that does not realize the distance 1 avoids every distance in some
-  interval `[1 − δ, 1 + δ]`, `δ > 0`.*
+  interval `[1 − δ, 1 + δ]`, `δ > 0`.* The checkable half: it is the **only** use of closedness in that proof.
 - **C-CS-2** (this list's wording). V-1.3 is equivalent to the statement: *for every `ε > 0`, no colouring of `U₃(0)` with 6 colours is proper (D-VPROP,
   restricted to pairs in `U₃(0)`) for `[1 − ε, 1 + ε]`.*
 
@@ -130,7 +131,10 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
 
 *All in the normal form D-NF for an a.e.-proper measurable `k`-colouring; "trichromatic" means `|P(u)| = 3`.*
 
-- **C-T-L1** (this list's wording; the a.e. form of SV-L1). There are no `x, y` with `|x − y| = 1` and `P(x) = P(y)`, `|P(x)| = 2`.
+- **C-T-L1a** (this list's wording; the a.e. form of SV-L1, smooth case). If near `x` and near `y`, `|x − y| = 1`, the classes of the two colours of
+  `P(x) = P(y) = {a, b}` are separated by `C²` curves, then the pair is impossible.
+- **C-T-L1b** (this list's wording; the general case). There are no `x, y` with `|x − y| = 1` and `P(x) = P(y)`, `|P(x)| = 2` (interfaces with corners,
+  cones, or no regularity).
 - **C-T-TRI** (this list's wording; the a.e. form of V-2.2). Every closed disc of radius 1 contains a point `x` with `|P(x)| ≥ 3`.
 - **C-T-CHR4** (this list's wording; the a.e. form of S–V Lemma 2, p. 8: "Under Condition 5, no point in a valid 6-coloring can have chromaticity k ≥
   4."). With `k = 6`, no point has `|P(x)| ≥ 4`.
@@ -141,6 +145,8 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
   satisfies `|Ind γ₁ − Ind γ₂| ≤ 1`.
 - **C-T-BIKE** (this list's wording). For `1 < |u − v| < 2` the graph on `T₁(u) ∪ T₁(v)` joining points at distance exactly 1 has a proper 3-colouring
   by finitely many arcs.
+  (A stated fact, not part of the claim: the graph on one Euclidean unit circle joining points at distance exactly 1 is a disjoint union of 6-cycles,
+  and it is properly 2-coloured by half-open arcs of angle π/3 in alternating colours.)
 - **C-T-PIG** (this list's wording; the a.e. form of V-6.1 and SV-L4). A 6-colouring in normal form has two trichromatic points with one essential
   multicolour at distance in `(1, 2)`, or two with disjoint essential multicolours at distance `< 2`.
 - **C-T-KILL** (this list's wording; the a.e. forms of V-P2.2, SV-C3 and SV-L3). Neither configuration of C-T-PIG occurs in a 6-colouring in normal form.
@@ -150,9 +156,11 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
 
 ## 6. The quantitative route (Phase T)
 
-- **C-Q-REM** (this list's wording). Fix `η ∈ (0, 1/48)`. For a CP `k`-colouring `c` of `ℝ²` in normal form, call `x` *kept at scale `ε`* if `c(x) = j` and
+- **C-Q-REM** (this list's wording). Fix a small constant `η > 0` (find it). For a CP `k`-colouring `c` of `ℝ²` in normal form, call `x` *kept at scale `ε`* if `c(x) = j` and
   `|B(x, ρ) ∩ S̃_j| ≥ (1 − η)|B(x, ρ)|` for both `ρ = ε/2` and `ρ = 2ε`. Then (i) almost surely no two kept points of one colour lie at a distance in
-  `[1 − ε, 1 + ε]`; (ii) `P(0 is not kept at scale ε) → 0` as `ε → 0`.
+  `[1 − ε, 1 + ε]`; (ii) `P(0 is not kept at scale ε) → 0` as `ε → 0` (a statement about the stationary colouring at the origin, not a uniform one on every disc for
+  one colouring). Give (i)'s pointwise core its own verdict line: *if `x` is a density point of a class `D` avoiding distance 1 at every pair, then every
+  point at distance 1 from `x` has density 0 in `D`.*
 - **C-Q-COMP** (this list's wording). (i) If for every `δ > 0` there are disjoint measurable `C₁, …, C₆ ⊆ ℝ²`, each with `Leb ⊗ σ`-null monochromatic unit
   pairs, whose union has lower density at least `1 − δ`, then `χ_CP(ℝ²) ≤ 6`. (ii) For each `ε > 0`, `µ₆(ε)` (D-MU) is attained by a stationary random
   family, and `µ₆(ε) < 1`.
@@ -163,7 +171,8 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
   definitively that χmap (R2 ) = 7."). Decide it; `[Parts2020c]`'s six-colour tiling of "more than 99.985698% of the Euclidean plane" bounds any `δ` from
   above.
 - **C-Q-HOLE** (this list's wording). V-2.2 and V-6.1 hold for a colouring of `U₃(0)` by six colours proper for `[1 − ε, 1 + ε]` on the complement of a
-  set of density at most `δ` (for some `δ > 0` independent of `ε`), with "trichromatic point" read in the complement.
+  set of density at most `δ` (for some `δ > 0` independent of `ε`), with "trichromatic point" read in the complement. (A proof of C-Q-STAB that never locates a trichromatic point is
+  allowed; then say so and leave C-Q-HOLE open.)
 
 ## 7. Row 40
 

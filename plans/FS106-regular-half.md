@@ -401,7 +401,7 @@ S–V §9 made measurable. The first derivation target moves to S–V's Question
 this list's D-NF, D-SLACK, D-AEMAP, D-MU); §1 held inputs (D1, D2, D4 one mind; M1 and N-EASY two); §2 the printed theorems to verify (V-1.1, V-1.2,
 V-1.3, V-2.1, V-2.2, V-P2.2, V-4.1, V-6.1; SV-1, SV-2, SV-L1, SV-C2, SV-C3, SV-L3, SV-L4; TW-81; TW-05, CO-04, WO-73, TH-99, PR-98, PA-20 on
 arrival); §3 the closed-set step (C-CS-1, C-CS-2); §4 the a.e. forms (C-AE-SLACK, C-AE-CLOSED, C-AE-POLY, C-AE-FA, C-AE-MAP6, C-AE-Q2 and
-C-AE-Q2-EV, C-AE-NICE, C-AE-CONV); §5 the transfer, structural route T-S (C-T-L1, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-BIKE, C-T-PIG, C-T-KILL,
+C-AE-Q2-EV, C-AE-NICE, C-AE-CONV); §5 the transfer, structural route T-S (C-T-L1a, C-T-L1b, C-T-TRI, C-T-CHR4, C-T-ANN, C-T-IND, C-T-BIKE, C-T-PIG, C-T-KILL,
 C-T-TAN); §6 the quantitative route T-Q (C-Q-REM, C-Q-COMP, C-Q-EQ, C-Q-STAB, C-Q-HOLE); §7 C-ROW40.
 
 **The rationale (never given to a blind job).** Each claim changes one hypothesis against its printed parent (§G part 2b's ladder). What each forbids:
@@ -429,3 +429,17 @@ commit d8a6ec5f) and what I did with each:
 | fences: the advisor's record and `data/fs106/fs106-a/`; my rationale; FS-103's records for a blind REM deriver; blind Voronov verifiers get the PDF and statements, never where the band is used | adopted in every blind brief |
 
 ## Stage 4 — SAVED
+
+### 4.1 The advisor's review of the list, and what I did (after stage 4's commit)
+
+- C-T-L1 split into **C-T-L1a** (C² interfaces; the advisor expects TRUE from its second-order form, which I keep out of the list) and **C-T-L1b** (corners,
+  cones, no regularity; open). Adopted.
+- C-T-BIKE: the 2-colouring of one unit circle by half-open 60° arcs stated as a fact beside the claim. Adopted. Which outcome matters: a 3-colouring by
+  arcs means the bicycle is no tight engine on circles alone; "none" would be the surprise.
+- C-Q-REM: the constant left for the job (`η` unprinted); (ii) stated at the origin of the stationary colouring; the pointwise core given its own verdict
+  line. Adopted. **Disagreement recorded:** the advisor calls that core (its A3) "a different statement" from FS103-M's D1; as I read them they are one
+  statement — D1 says a density point `y` of `S_j` and a point `x` with `d̄_j(x) > 0` are never at distance 1, which is A3 read from `y`'s side. The
+  verdict line in C-Q-REM costs nothing either way; Phase H's second mind on D1 settles it.
+- C-Q-HOLE: a route to C-Q-STAB with no trichromatic point is allowed. Adopted.
+- C-CS-1: "the only use of closedness" made the checkable half. Adopted.
+- Fences: `data/fs106/fs106-a/` by path in every blind brief. Adopted.
