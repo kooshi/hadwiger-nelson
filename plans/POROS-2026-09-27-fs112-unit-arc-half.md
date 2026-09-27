@@ -418,3 +418,52 @@ hunch: h-arc-inert
   boundary circle, curved edges visible. A combinatorial transcription is feasible.
 
 ## Stage 3 — SAVED
+
+---
+
+## Stage 4 — SAVED: stage 5 and the briefs reviewed; the hand-back
+
+*Read: `data/fs112/claims.md` at 7ec2b783 (the diff from b8e561c2); `plans/FS112-unit-arc-half.md` stage 5 in full; `data/fs112/briefs/N112-proof.md`
+(reading list, fences, contest). Every stage-3 item was adopted: the old words replaced, N-X's "disjoint types" restored, C-GLOBAL split into C-BEYOND
+and C-LOCAL, CAL-DISK's three-step rebuild (D5), C-ARC-END and killing test 4 rewritten, C-HOCK re-aimed at A6-C2, the tests reordered.*
+
+### 4.1 Last advice sent (four items; the planner decides)
+
+1. **Anchoring.** Both side briefs send the sides to stage 5 "(the phases and the registrations)". §5.3's E3 and E4 guess where the break sits.
+   - D3's value is two blind walks of the chain.
+   - Advice: fence §5.3 until each side's stage 1 is committed, or have A2 score the walks as primed alike.
+2. **Stale name.** "C-GLOBAL" remains in §5.1's P1 row and in E6.
+3. **C-LOCAL's compactness rider and E17** are unmarked hand claims. Advice: cite W-EQ-K's compactness step and grade it one mind; E17 should read
+   "within FS-112, an explicit R".
+   - **My slip, corrected before hand-back:** I first cited `plans/FS107-VW-verification.md` l. 70, which is VW's registration table. The verdict is
+     `plans/FS107-derivation.md` at W-EQ-K, verbatim: "Proof verdict: TRUE at W's class; under a per-tile count alone (VW's (Ct)) the compactness step
+     is a GAP that does not bear on `𝓜_K`".
+4. **P0** is well aimed: the disk's rule, if the threads print it, switches D5.
+
+**Retractions and slips this job: 2, both mine, both free.** ARC-INERT's first justification (§3.1); the VW registration row cited as a verdict (above).
+
+### 4.2 Cards and hunches at hand-back
+
+- `is-the-no-local-or-global` (rank 1): **answered in the plan's terms.** C-BEYOND (what the positives force) and C-LOCAL (an explicit bounded-radius
+  NO) are filed; E17 registers it. Fate: it changed the claim list.
+- `which-arithmetic-calibrates-the-strip` (rank 2): **answered, changed the plan** (§7 "The checker", D4).
+- `are-the-seams-two` (rank 3): **answered, changed the claim list** (C-SEAMS-TWO; E8 at 0.7).
+- Every hunch in §1.7 stays open, handed to the close for scoring: `h-loc`, `h-arc-cone`, `h-four-colour-crux`, `h-lattice`, `h-no-local-kill`,
+  `h-discharging`, `h-yb3-counter`, `h-dial`, `h-answer-no`, `h-seams-two`, and, narrowed, `h-arc-inert`, `h-nb4-slip`. The plan registers its own
+  numbers beside them (E2–E17); the two sets differ, notably E6 0.2 against my `h-dial` 0.3.
+
+### 4.3 What I expect the contest to show (for the competition advisor A2; this record is fenced from both sides)
+
+- Both walks put the first failure at C-CHAIN-1 (NB-4) and C-CHAIN-2 (NB-5), realised by T2's and S1's fragments. That is E1, and it is nearly free.
+- The informative divergence will be at C-CHAIN-5 (N3-DEG) and C-CHAIN-6 (N4-SHADOW), at unit-arc centres: arc cones, and the degenerate shadow when a
+  horn's flank is an arc of `ω(v)`.
+- The first global question, the one C-LOCAL asks, is the four-colour vertex's arc budget in its two branches (C-UA-BUDGET).
+
+### 4.4 Evidence inventory (additions)
+
+- `data/fs112/claims.md` at 7ec2b783 — read against: the stage-3 items adopted — surprised: no
+- `plans/FS112-unit-arc-half.md` stage 5 — read against: a plan the sides read without priors — surprised: yes; the sides are sent to the registrations,
+  which carry break-point guesses (item 1)
+- `plans/FS107-VW-verification.md` l. 64–72 — read against: a verdict table — surprised: yes; it is VW's §1.3 registration table, and my citation was wrong
+
+## Stage 4 — SAVED
