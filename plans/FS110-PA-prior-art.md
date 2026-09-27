@@ -100,7 +100,9 @@ chromaticity 4**, i.e. `|P_cl(x)| ≤ 3` everywhere (`P_cl` = the closure type =
 point" (A4-1.8, `plans/POROS-2026-09-27-fs110-competition.md` l. 771: "a strong escape at a four-colour seam point") means `|P_cl| = 4`, the
 round's one surviving escape is empty by S–V Lemma 2 at six colours, and Y2-W4's "no arc means four colours" would then refute the escape outright.
 If "four-colour" means something else (colours on the unit circle, `P_ess`, cusps outside Condition 3), the round is untouched. **Check the
-definition before registering round 3.**
+definition before registering round 3.** (Checked as far as A4's own claim goes: its falsifier reads "a seam point with at most three colours,
+or a four-colour seam point", l. 773, and its inputs include "a `(4, 2)` pair", l. 775 — the count is of the colours at the point, i.e. `|P_cl|`.
+What is not checked: whether FS-110's class (bounded `K`, cusps, a.e.) keeps every input of Lemma 2's proof — Props. 3–6 and Condition 3.)
 
 ## Stage 2 — SAVED
 
