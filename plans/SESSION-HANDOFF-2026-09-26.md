@@ -5,6 +5,13 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
+- **FS-106 (the regular half) is OPEN** — plan `plans/FS106-regular-half.md`, claims `data/fs106/claims.md`, briefs `data/fs106/briefs/`,
+  close inventory `plans/FS106-close-inventory.md` (items 1–27; owner sole writer). Wave 1 done: Voronov 2023 Thms 1.1–1.3 TRUE after repairs
+  (two minds, one blind); Sokolov–Voronov 2025 Lemmas 3, 4, Obs. 1, Prop. 8 GAP as printed → their Thms 1–2 (seven for maps with conditions,
+  for polygons) GAP; C-AE-SLACK TRUE; C-AE-CLOSED ⟺ the tight question for essentially closed classes. Running: FS106-V2 (finishes the
+  sighted check, aims at repairing S–V) and the advisor FS106-A (comparing V and VB). **Held:** wave 2 (FS106-TS structural, FS106-TQ
+  quantitative; then SB, QB blind) until V2 reports — re-brief it if S–V stays GAP. Papers: Townsend 1981, Thomassen 1999, Pritikin 1998
+  held; Townsend 2005 is not held.
 - **THE REFRAME (Kooshi, 2026-09-26):** aim = solve HN outright, formalize everything in Lean (no declared purchases), then publish;
   Lean is not a cost; time is not a concern; finite-graph search is out. Direction = **the regularity wall** (`CLAUDE.md` § The aim,
   § Counter-priors [PROTECTED]; stub `plans/STUB-regularity-wall.md`): next **FS-106 (the regular half)**, then **FS-107 (regularity vs
