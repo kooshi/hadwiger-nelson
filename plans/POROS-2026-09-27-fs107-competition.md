@@ -147,3 +147,38 @@ question: what-grows-along-a-vanishing-void-family
 *Timing:* sent to both sides at once after both step-naming answers are registered, so the registrations are made without it.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the two registrations, and the first card (both sides, 07:38 UTC)
+
+**The registrations** (verbatim copies in `<scratchpad>/FS107-A2/`; R's also at `plans/FS107-R-stability.md` §1.6, `a3208286`).
+
+| side | the other's step it expects to fail | its reason, in one line | what would show it wrong |
+|---|---|---|---|
+| W (02:35) | R′ = C-VOID, and break row 1 "whenever R reaches that measure through a void of fixed radius"; on LIM, C-T-L1b's collar (step 2) | C-VOID quantifies over every coverage; a void of inradius `ρ ≫ ε` already makes a junction look tight at distance 1; bounded local complexity gives voids `≥ ρ₀(complexity)` by compactness, with no uniform form | a proof of C-VOID with no complexity bound; or a family of its own whose largest uncovered disc stays `≥ ρ₀` as complexity grows for a reason not of its design |
+| R (02:37) | break row 3, "a parameter shrinking the vertex voids" | (1) bounded combinatorial type → a polygonal a.e.-proper limit, excluded by FS106-AE-POLY bar `d = 2`, so the parameter must drive complexity to infinity; (2) at unbounded junction density `N`, complementary-type junction voids stop shrinking before `N·ε² → 0` | a formula family with inradius → 0 and density → 0 (refutes all); inradius → 0 at bounded coverage loss (retracts (2)); (1) only on a defect in AE-POLY |
+
+**What surprised me: three independent derivations of one frame.** My X1 (committed at `731de025`, before either message), W's (3) and R's (1) all
+split W's families by local complexity and send the bounded half to a regular limit. G51: first routes converge more often than they diverge; zero
+retractions so far, which is not agreement — the disagreement has not started. The registrations are the two faces of one crux (void conservation,
+FS107-A's E3): W expects C-VOID to fall, R expects the vertex void to stall. FS107-A's `round-one-is-about-c-void` is confirmed for the
+registrations (not yet for the first cards).
+
+**The shared slip (a frame-level correction, sent to both at once).** Both registrations lean on row 132 to exclude a bounded-complexity limit:
+W's "regular tight colourings, which row 132 excludes (polygonal and convex tilings …)"; R's "(K-TIGHT, K-REG)" and "Shrinking Parts-type vertex voids
+inside a fixed combinatorial type therefore cannot work". AE-POLY excludes polygonal limits (bar `d = 2`); but **K-REG's "not a nice map" overstates for
+LIM**: FS106-AE-NICE holds for faces of diameter `< 1` whose same-colour faces are `> 1` apart, and "Its a.e.-proper relaxation … is a GAP with
+C-AE-Q2". A tight limit of Parts-type members (curved sides, Siamese pairs, faces touching at distance exactly 1) is in the relaxation. So
+R's conclusion about Parts-type families does not follow from (1) as written (Parts's sides are curved), and W's "row 132 excludes" covers only the
+polygonal half. **Card `is-a-bounded-complexity-limit-excluded`** sent word for word to both (02:38), pointing at the rows, not at a fix; its branches:
+excluded by a named theorem (the contest is all at unbounded complexity), or a C-AE-Q2 object (curved bounded families live; [G1]–[G4] decide them).
+
+**Correction owed (for the close; the claim list is the planner's):** `data/fs107/claims.md` §2 K-REG, "not a nice map" → "not a nice map in
+`[Thomassen1999]`'s sense (faces of diameter `< 1`, same-colour faces `> 1` apart); the tight relaxation is a GAP with C-AE-Q2 (FS106-AE-NICE)".
+
+**Retractions:** R 0, W 0, Poros 0.
+
+**Hunch ledger, updated.** `bounded-complexity-families-keep-their-voids`: **amended in place** — as registered it said "unless S–V Question 2 fails
+almost everywhere"; the polygonal half is a theorem (AE-POLY bar `d = 2`), the curved half *is* Question 2. Status open. `w-first-family-has-bounded-complexity`:
+**at risk** — both sides now reason from the complexity split, so W's first family may carry a complexity parameter from the start (its falsifier).
+
+## Stage 2 — SAVED
