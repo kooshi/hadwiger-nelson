@@ -315,6 +315,7 @@ ALLOW: dict[str, str] = {
     # FS107-X, the front page of FS-107's close (2026-09-27; data/fs107/fs107-x/record.md).
     "1–130": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–133 at FS-107's close (FS107-X; rows 131–133 had been added at FS-106's and FS-107's closes; the 1–127 precedent)",
     "30–63": "the paths-forward table's group rank, renumbered 30–64 at FS-107's close (§R-close 4.2): FS-107 left, FS-110 and FS-111 minted at ranks 1–2, FS-98 folded into the group (the 30–62 precedent)",
+    "30–64": "the paths-forward table's group rank, renumbered 30–65 at the 2026-09-27 consolidation run: FS-113 minted at rank 8, every rank from 8 on moved down one, FS-90 folded into the group (plans/CONSOLIDATION-2026-09-27.md; the 30–62 precedent)",
     "1–133": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–134 at FS-110's close (FS110-X; row 134 added; the 1–130 precedent)",
     "131–133": "item 31's row range in § Where the problem stands, extended to 131–134 at FS-110's close (FS110-X; FS110-C's §R-close 4.2 rewrites item 31 with row 134)",
     "G82:[hand, two minds, one blind (row 131); the reading one mind]": "G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)",
@@ -324,6 +325,7 @@ ALLOW: dict[str, str] = {
 # in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
 # authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
 EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+    'plans/STUB-sanctioned-search-fs86.md': ("plans/FRONTIER-STUBS.md", "FS-90's paths-forward row, ranked 30 once FS-113 was minted at rank 8 (the 2026-09-27 consolidation run), so it left CLAUDE.md's single rows for the group row; the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
     '[Chow1993]': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
     'U < 308.17': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
     'forces_of_tight': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
