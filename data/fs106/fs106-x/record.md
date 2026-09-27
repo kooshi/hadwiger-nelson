@@ -27,3 +27,16 @@ paths-forward mirror, the budget); 7 report.
 Would have searched here: nothing (an editing pass).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED (`LEDGER.md`)
+
+- Rows 131 and 132 inserted after row 130, verbatim from §R-close 4.1; row 40's clause replaced in place by 4.1's text.
+- § B: 46 lines appended after FS-105's block (4.2's table has 46 ids, FS106-V23 … FS106-PDEQ; "45" in C's prose is a miscount — the
+  derivation file also holds 46 once its FS106-LOCAL header parsed).
+- One formatting change, no words: the in-cell pipes of `|ΔInd| ≤ 1`, `|ΔInd| = 2` (twice) and `|P(x)| ≥ 5` escaped as `\|` so the table rows
+  keep their columns (FS-105's `\|G\|` is the precedent).
+- Gate: `tools/fs71_ledger_b_check.py --strict` first FAILED (FS106-LOCAL: no derivation entry) — the derivation header's grade nested
+  "[external]" inside its bracket; outside my touch list, asked the owner; the owner fixed it (3234df20, "over Parts (external)"). Re-run:
+  exit 0, RESULT: PASS, FS106=46.
+
+## Stage 2 — SAVED
