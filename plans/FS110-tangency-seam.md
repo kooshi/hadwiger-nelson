@@ -152,3 +152,203 @@ advisor, **V** the blind verifiers, **CL** the claim list, **C** the close), **S
 | G82 stability; feature scale, not band scale | **B → N, Y, CL** | at bounded complexity `K` the feature scale is bounded below (arcs of radius `≥ 1/K`, `≤ K` tiles per unit disc): FS-110 lives exactly where G82's second door ("features whose own scale is bounded below") is automatic. **X14:** N prices every seam at its feature's scale `s ≥ s(K)`, never at `ε`'s, and states `s(K)`; a seam priced only in the blow-up (scale → 0) is FS-111's, not FS-110's |
 
 ## Stage 2a — SAVED
+
+## Stage 2b — SAVED: §G part 2 (rows 1–133; the method rules) and part 3 (the extraction)
+
+### §G part 2a — `LEDGER.md` rows (§ A: rows 131–133 in full; rows 1–130 by headline)
+
+| row | verdict | reason, and the extraction |
+|---|---|---|
+| 1 | B (weak) → N, Y | a two-circle unit-distance graph is 3-colourable by an explicit strip construction: in-house precedent for C-T-BIKE's arc 3-colouring of `T₁(u) ∪ T₁(v)` |
+| 2 | B (weak) → N | the seam rotation's infinite order on two circles: the bicycle's arcs cannot close up periodically at generic `d`; noted for C-T-BIKE |
+| 3 | S | fan/coverage kernel lemmas on finite classes (G13 carries the bearing) |
+| 4 | S | fan/coverage kernel lemmas on finite classes (G13 carries the bearing) |
+| 5 | S | fan/coverage kernel lemmas on finite classes (G13 carries the bearing) |
+| 6 | S | 120° triangle identity on circles of radius `1/√3`; no vertex-type content |
+| 7 | S | finite graphs |
+| 8 | S | finite graphs |
+| 9 | B (weak) → N | a 120° compulsion on two circles: the circle-colouring vocabulary Voronov's Lemmas 5–6 use; noted |
+| 10 | S | finite graphs |
+| 11 | B (weak) → N | the strip automaton: a finite-state reading of circle colourings, a method precedent for C-T-BIKE by hand (never run as a search) |
+| 12 | S | [tools] on finite closures |
+| 13 | S | [tools] on finite closures |
+| 14 | S | two-circle gluing classification; finite |
+| 15 | S | [tools] on finite closures |
+| 16 | S | [tools] on finite closures |
+| 17 | S | gluing; finite |
+| 18 | S | seam-field closures, finite and arithmetic |
+| 19 | S | seam-field closures, finite and arithmetic |
+| 20 | S | seam-field closures, finite and arithmetic |
+| 21 | S | seam-field closures, finite and arithmetic |
+| 22 | S | seam-field closures, finite and arithmetic |
+| 23 | S | seam-field closures, finite and arithmetic |
+| 24 | S | seam-field closures, finite and arithmetic |
+| 25 | S | seam-field closures, finite and arithmetic |
+| 26 | S | finite witnesses and their anatomy |
+| 27 | S | finite witnesses and their anatomy |
+| 28 | S | finite witnesses and their anatomy |
+| 29 | S | finite witnesses and their anatomy |
+| 30 | S | finite witnesses and their anatomy |
+| 31 | S | finite carriers; the six-target as a finite-graph statement |
+| 32 | S | finite carriers; the six-target as a finite-graph statement |
+| 33 | B → both | the boundary-tight brick certificate and the seven-colouring on a torus: the seven-colour control object (X3) |
+| 34 | B (weak) → Y | coset colourings need seven (2, 5, 6 not Loeschian): Y's candidate cannot be a lattice-coset colouring of the triangular lattice |
+| 35 | S | cell family (closed, G29) |
+| 36 | S | cell family (closed, G29) |
+| 37 | S | cell family (closed, G29) |
+| 38 | S | cell family (closed, G29) |
+| 39 | S | cell family (closed, G29) |
+| 40 | S | cell family (closed, G29) |
+| 41 | S | the limit lemma is the finite-graph route to stability; Kooshi's ruling (finite-graph search out) leaves it unused |
+| 42 | S | compulsions and arithmetic of finite graphs and field planes |
+| 43 | S | compulsions and arithmetic of finite graphs and field planes |
+| 44 | S | compulsions and arithmetic of finite graphs and field planes |
+| 45 | S | compulsions and arithmetic of finite graphs and field planes |
+| 46 | S | compulsions and arithmetic of finite graphs and field planes |
+| 47 | S | compulsions and arithmetic of finite graphs and field planes |
+| 48 | S | compulsions and arithmetic of finite graphs and field planes |
+| 49 | S | compulsions and arithmetic of finite graphs and field planes |
+| 50 | S | compulsions and arithmetic of finite graphs and field planes |
+| 51 | S | compulsions and arithmetic of finite graphs and field planes |
+| 52 | S | compulsions and arithmetic of finite graphs and field planes |
+| 53 | S | compulsions and arithmetic of finite graphs and field planes |
+| 54 | S | compulsions and arithmetic of finite graphs and field planes |
+| 55 | S | compulsions and arithmetic of finite graphs and field planes |
+| 56 | S | compulsions and arithmetic of finite graphs and field planes |
+| 57 | S | compulsions and arithmetic of finite graphs and field planes |
+| 58 | S | compulsions and arithmetic of finite graphs and field planes |
+| 59 | S | compulsions and arithmetic of finite graphs and field planes |
+| 60 | S | compulsions and arithmetic of finite graphs and field planes |
+| 61 | S | compulsions and arithmetic of finite graphs and field planes |
+| 62 | S | compulsions and arithmetic of finite graphs and field planes |
+| 63 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 64 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 65 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 66 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 67 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 68 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 69 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 70 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 71 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 72 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 73 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 74 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 75 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 76 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 77 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 78 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 79 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 80 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 81 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 82 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 83 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 84 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 85 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 86 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 87 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 88 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 89 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 90 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 91 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 92 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 93 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 94 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 95 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 96 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 97 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 98 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 99 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 100 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 101 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 102 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 103 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 104 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 105 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 106 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 107 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 108 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 109 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 110 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 111 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 112 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 113 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 114 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 115 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 116 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 117 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 118 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 119 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 120 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 121 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 122 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 123 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 124 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 125 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 126 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 127 | S | arithmetic, lattices, residue planes, character and measure rigidity over number fields |
+| 128 | B → CL | given MR, `χ(ℝ²) = χ_m⁰(ℝ²)`: a NO is `χ(ℝ²) = 7` only jointly with FS-111 and only given MR; a YES needs no MR (CL states both) |
+| 129 | B → N | per-class arguments stop below 4.37 (K-INT): the NO reads vertex types |
+| 130 | B → CL | `χ_CP = χ_m⁰` with no MR: the object Q-full's YES lands in |
+| 131 | B → CL, N | stability as the question; K-FLOOR, K-HIT, K-PIX and the Rajchman step; a seam priced at `ε`'s scale is capped (K-HIT, K-AD) |
+| 132 | B → N, Y, CL | TS-U (unit arcs: side cones empty), TS-C (clusters of diameter ≤ 1), hole-filling failing at bichromatic vertices of degree ≥ 4, FS106-IND-X (the swap at a bowtie), V-C5's sibling TS-C5 ([G1]), Townsend's and Woodall's map theorems (maps need six), S–V Question 2 a GAP at [G1]–[G4]. **X15:** CL carries TS-U, TS-C and IND-X as shared constraints with their grades; bichromatic degree-≥4 vertices are a fifth live vertex kind beside the four seams (N and Y both address them) |
+| 133 | B → everything | the milestone's question (W-EQ-K, W-TAN, CP, RR, W-POLY, HX-STALL, V-C5); **X16:** the construction side's family members are eroded by VW-ERODE and checked by the held checkers; its full tight map is checked by a curved-map checker (the exact per-tile-pair distance range, below) |
+
+### §G part 2b — the method rules (`CLAUDE.md` § The standard of evidence, § What compute helps, § Toolchain, § Building, § Searching, § The gate, § Make the gate fail; § Delegation)
+
+| rule | verdict | reason, and the extraction |
+|---|---|---|
+| no native evaluation in a headline | S | no kernel headline in FS-110 (the Lean slot follows a landed half) |
+| the artifact is the certificate plus the checker | **B → Y** | a YES candidate ships as its formula plus an exact checker's output; nobody re-runs a search (there is none) |
+| the witness is independently re-derivable | **B → Y** | "state the construction, not only the coordinates": every candidate map is a formula with its symmetry group (X7), rebuildable by hand |
+| read the final statement aloud | **B → CL, V** | Q-rule is not Q-full; W-TAN's clauses are for essential types and trivalent maps; the verifiers read each verdict against the claim's words |
+| report the hunt honestly | B → both | a seam neither closed nor realised is a GAP at a named step |
+| write the certificate for the reviewer early | **B → N, Y** | ask of each seam verdict "what must someone who trusts none of this check?" at the stage it is drafted, not at the close (FS-107 M3: a theorem line that dropped its hypotheses) |
+| order a verification by marginal evidential value | B → V | the verifiers check the load-bearing step of each seam first |
+| kernel leaves price low once begun | S | no kernel phase |
+| GPU/SAT instruments | S | nothing to search |
+| the ban; Kooshi's finite-search ruling | **B → all** | the construction side's maps are given by formula and checked exactly in seconds; no tile-ring enumeration, no local-rule SAT, no optimiser |
+| checkpoint and resume (PROTECTED) | **B → all** | every job works in SAVED stages committed per stage; no long run is planned (every exact check is seconds) |
+| a blocking run is presumed killable (PROTECTED) | S | no long runs planned |
+| kill by pid; pipes; waiters | S | no background jobs planned; if one appears, pid and a success-path file |
+| slot.py above 2 GiB or 2 minutes | B → Y | the curved-map checker must stay under it or run in a slot |
+| § Searching (ugrep, `rg -uu`) | B → all | completeness questions use `rg -uu` or `grep -rP` |
+| every theorem over a structure ships an inhabitant (vacuity) | **B → CL** | the domain of tight six-maps is not known non-empty: CL marks every statement over it "about a possible object" (G30 mode 5), and a Lean form declares its vacuity status |
+| make the gate fail; plant faults | **B → Y** | Y's curved-map checker carries planted faults that fire for their own reason (standing rule 7), and a faithful stub beside each |
+| a positive signal for what did not happen | B → Y | the checker prints the offending tile pair and its exact distance range on REJECT, and the minimum margin on ACCEPT |
+| state the uninformative outcome and confirm it reachable | **B → registrations** | every expectation in §5.3 names both outcomes and why each is reachable |
+| exactly one thing differs between compared numbers | B → N, V | a seam's forced area (an area) is never compared with a hole *density* (FS-107 M2) |
+| a measured half and a derived half fail in opposite directions | **B → Y** | a curved-map checker whose distance ranges are **derived** (critical-point equations) errs by inventing or losing a pair: a lost pair makes a REJECT an ACCEPT, so there **ACCEPT is the suspect verdict**; a control with a known same-colour unit pair must REJECT |
+| a positive control proves only the generator's shape | **B → Y** | Y writes its generator's image first (FS-107's X9 paid most) and checks each target seam kind lies inside it |
+| count the generator's free parameters | **B → Y** | a seam realisation with fewer free parameters than the seam's constraints is a measure-zero slice; count before building |
+| a candidate failing one gate is checked against all | B → Y | a candidate that fails Q-rule at one seam is still read at every other before being set aside |
+| a one-sided filter: enumerate how to make it inapplicable | **B → N, Y** | Q-rule is a one-sided filter on Q-full: Y lists the ways to pass Q-rule and still fail the band (equal-type pairs, degree-≥4 bichromatic vertices, the `d = 2` configuration), N the ways a map could make C-T-TAN inapplicable (cusps, weak-* blow-ups — outside `𝓜_K` —, slivers) |
+| a caveat written and stepped over | B → all | each record's summary is re-read against its scope lines before commit |
+| delegation one level deep | **B → briefs** | every brief says it, with the reason |
+
+### §G part 3 — the extraction: each *bears* as an instruction to a phase (carried into stage 5's phase table and the briefs)
+
+| X | from | instruction | phase |
+|---|---|---|---|
+| X1 | G13 | state each seam's kill as a coverage failure at `w₀`; name the escaping colour | N |
+| X2 | G15 | Act One (a close complementary pair or a bicycle pair exists in every tight six-map of `𝓜_K`) proved apart from the kills | N |
+| X3 | G20, row 33 | the seven-colour control on every step (hexagonal seven-colouring K1; brick) | N, Y, V |
+| X4 | G21 | prove the exception list at a `𝓜_K` vertex complete, not item by item; a Q-rule YES is a candidate only | N, CL |
+| X5 | G22, W-POLY | curved candidates from the first line; unit arcs named | Y |
+| X6 | G24 | name the line where six is spent in each kill | N |
+| X7 | G27 | every candidate stated with its symmetry group | Y |
+| X8 | G30 | the next room is geometric measure theory and free-boundary geometry | §PA |
+| X9 | G46 | the seam question as a classification of admissible tangent-cone pairs; §PA in that vocabulary and in tilings' vertex-figure vocabulary | §PA, N |
+| X10 | G50 | read `[Coulson2004]`'s vertex analysis (and Townsend's manuscript at the vertex step) before relying on it | N, §PA |
+| X11 | G51 | contest seam by seam: N closes each, Y realises each; blind verifier per side | staffing |
+| X12 | G71, row 132 | at a bowtie the index method is dead: N's bowtie kill uses an area or prices the swap; Y's bowtie model shows the swap | N, Y |
+| X13 | G79 | Y writes the invariant every realisation of each seam carries (sliver, unit arc, zero angle); N kills that invariant | Y, N |
+| X14 | G82 | price every seam at its feature scale `s ≥ s(K)`, and state `s(K)` | N |
+| X15 | row 132 | bichromatic vertices of degree `≥ 4` are a fifth live vertex kind beside the four seams | N, Y, CL |
+| X16 | row 133 | Y's families eroded by VW-ERODE and checked by the held checkers; a full tight map checked by a curved-map checker | Y |
+| X17 | methods | ACCEPT is the suspect verdict of a derived-distance checker; planted faults and a known-REJECT control | Y |
+| X18 | methods | a one-sided filter: list the ways to pass Q-rule and fail Q-full, and the ways to make C-T-TAN inapplicable | N, Y |
+
+**Falsifiable here (registered in §5.3):** G21's completeness of the seam list (E2); G71's "only at a swap" (E5); G79's flip record and G72's count
+(scored at the close); G51's design killing test (scored at the close).
+
+## Stage 2b — SAVED
