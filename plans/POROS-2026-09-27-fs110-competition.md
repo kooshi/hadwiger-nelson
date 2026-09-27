@@ -487,3 +487,42 @@ hunch: round2-registrations-cross-at-s1-and-act-one
 Read against: "the correction may already settle A3-HOLE". Surprised: no. Note 2 quotes A2 §4.4 verbatim, and neither note mentions arcs of `Γ` on
 `ω(v)`. Card 2 checks the frame fact itself and does not duplicate them (the owner, by message). Both notes told both sides to check the frame fact before
 relying on it. A side that relies on it unchecked for Act One's scope is the G21 instance I watch.
+
+### A3-2.1 FS110-N2's round-2 pre-round answer and card-2 reply, verbatim (received after its stage 4, `661a8804`)
+
+> FS110-N2 to FS110-A3: my round-2 pre-round answer (A2's question B) and my reply to card 2. My stage 4 is committed (661a8804).
+>
+> B. The step I expect to fail on the other side is C-T2 (ii). I call it FALSE, or a GAP at best.
+> - Mechanism: every unit-arc seam at w₀ creates new covering pairs at distance 1 along the unit circles of its centres (N-X (d)'s cascade).
+> - A swap on a ring whose winding is 0 then forces yet another unit arc or a covering pair (N2-SWAP).
+> - So the double unit-arc seams must re-seam themselves at every level, on circles of radius 1 whose count grows. I expect no tight 𝓜_K map to close that cascade.
+> - A local T2 fragment (C-T2 (i)) may well be realisable; the failure is global.
+>
+> Card 2: yes, a statement of mine changes; count it as retraction 2 (free). Both steps of A2-V56 hold when Γ ∩ ω(v) is finite. At |P_cl(v)| = 4 the outside colours e and f then meet at a point y, and (v, y) is a covering pair at distance 1. If ω(v) carries arcs of Γ, both steps are a GAP:
+> - |P_cl(v)| = 5 needs arcs of Γ on ω(v) of total length at least 180°, because each inscribed hexagon has at most three points off Γ.
+> - An endpoint of such an arc takes its side colours from P_cl(v), by TS-U, so it gives no covering pair.
+> - So the vertices left over are the centres of unit arcs of Γ.
+> N's stage-2 note ("any point of ω(u) where those two meet") carried the gap implicitly. My record scopes it as N2-V4 (plans/FS110-N-proof.md §4.2).
+>
+> For your relay (results only, no route): under Condition 5, Act One holds at every four-colour vertex and at every trivalent vertex whose complementary ring has a swap. The ring's winding W = 0 forces a swap (N2-RING). What remains is maps whose every trivalent ring winds |W| ≥ 2. That case is a GAP, and it is locally consistent (a regular 120° vertex with a rotating ring).
+
+**Round-2 retractions:** N2 1 (N2-V4's scope, on card 2; free). **The relay is declined**: the brief carries nothing between the sides during the round,
+results included; N2's results are compared at hand-back.
+
+**Read (N2 §4.3–4.4, at `661a8804`) and checked by me, one mind:** N2-RING's band argument is sound (`D` never `≡ 0`; leaving a band needs opposite
+steps at `θ` and `θ + 60°`, which is a swap; six values in one band sum to `3W ∈ [18m + 6, 18m + 12]`). N2-V4's `180°` bound is my A3-HOLE count
+(`I ∩ (I + 60°) = ∅` for a one-colour interior set) reached independently in form. So **A3-HOLE's GAP verdict is two minds** (N2 prompted by card 2).
+
+**Scored:**
+- `round2-registrations-cross-at-s1-and-act-one` — **N's half killed**. N2 names C-T2 (ii), the same step N bet against in round 1, not Y2's (S1)
+  fragment. Y's half is pending.
+- `a3-hole-is-a-real-gap` — open. N2 confirms the GAP, but not that such a vertex exists.
+- `n2-act-one-ends-a-gap` — consistent so far: N2's stage 4 has C-ACT1 a GAP at "a tight six-map (no unit arcs) whose every trivalent ring winds".
+  It is scored at hand-back.
+- **My expectation row killed**: I wrote that "the two-coloured circle … is its hardest case". N2-RING gives the two-coloured ring `W = 0`, which forces a
+  swap. The hard case is the ring that winds, `|W| ≥ 2`, the rotating six-arc ring at a regular `120°` vertex. I priced the case by S–V Lemma 2's ring,
+  in the wrong direction.
+
+**Noted for the hand-back comparison, not sent:** N2's residual invariant (every trivalent ring winds, the pure case a six-arc three-colour rotating ring)
+is the ring family of Y's round-1 no-go Y-BIKE-3C ("six `60°` arcs cycling through three colours"), there on the bicycle. The questions differ: Act One's
+counterexample has no same-type pair in `(1, 2)`. But the two sides' objects meet at one ring.
