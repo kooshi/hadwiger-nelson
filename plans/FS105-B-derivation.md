@@ -103,3 +103,107 @@ and ergodicity) and concludes less (`μ(E) = 1`, `E ⊇ T + A`); it is a corolla
 | move I would have made by search | what I did instead |
 |---|---|
 | scan primes up to 10⁵ for all stable places of `L` | read the first four off one exact decomposition loop to 2000 (seconds); none is needed by the proof |
+
+---
+
+## Stage 2 — the derivation at `F₁` (core, Steps M1 and 0–5) — SAVED
+
+*Notation of §1.4. `σ` = the non-trivial automorphism of `L/F₁`. On `L` the normalised absolute values `|·|_w` (at a complex `w`,
+`|·|_w = |·|_ℂ²`) satisfy the product formula `∏_w |α|_w = 1` (`α ∈ L^×`). `H(α) = ∏_w max(1, |α|_w)`. Four facts, each one line:
+(h1) `H(αβ) ≤ H(α)H(β)`; (h2) `H(α⁻¹) = H(α)` (product formula); (h3) `H(α − β) ≤ 16·H(α)H(β)` (`16 = 4^{#complex places}`, from
+`|a − b|²_ℂ ≤ 4·max(1,|a|²)·max(1,|b|²)`, ultrametric elsewhere); (h4) **Liouville**: for `α ≠ 0` and any place `w₀`,
+`|α|_{w₀} = ∏_{w≠w₀} |α|_w⁻¹ ≥ H(α)⁻¹`.*
+
+### M1 proved (the model is used, so it is derived, not cited)
+
+Let `D := {ℓ ∈ L : ℓ ∈ 𝔡_v⁻¹ at every stable v}` (`𝔡` the different of `L/ℚ`), and `Φ(x)(r) = ψ_𝒮(xr)` as in §1.4.
+- **`D ⊆ ker Φ`:** for `ℓ ∈ D, r ∈ R`: `ψ_𝒮(ℓr) = ψ(ℓr)·∏_{v stable} ψ_v(ℓr)⁻¹ = 1·1` (global `ψ` is trivial on `L`; `ℓr ∈ 𝔡_v⁻¹`
+  at stable `v` because `r ∈ O_v` there, `R = O′`).
+- **`ker Φ ⊆ D`:** let `x ∈ ker Φ`. By strong approximation away from `∞`, `x = d + y` with `d ∈ D`, `y ∈ L_∞ × K_f`. For `r ∈ O_L ⊆ R`,
+  `ψ_v(y_v r) = 1` at every split `v` (`ψ_v` is trivial on `𝔡_v⁻¹ ⊇ O_v`), so `ψ_∞(y_∞ r) = 1` for all `r ∈ O_L`: `y_∞` lies in the
+  trace-dual lattice, `y_∞ = ℓ₀ ∈ 𝔡⁻¹ ⊆ D`. Then `y′ := y − ℓ₀ ∈ ker Φ` has `y′_∞ = 0`, so `r ↦ ∏_{v∈𝒮} ψ_v(y′_v r)` is a continuous
+  character of `𝔸_f^𝒮` trivial on `R`, which is dense in `𝔸_f^𝒮` (strong approximation away from `∞`); hence trivial, hence `y′ = 0`
+  (self-duality of `𝔸_f^𝒮`). So `x = d + ℓ₀ ∈ D`.
+- **Surjective, open:** `Φ(closure(B_∞) × K_f)` is compact and equals `Φ(𝔸)` (M4), so `Φ(𝔸)` is closed; its annihilator in `R` is 0
+  (`a ↦ ψ_∞(ar)` is non-trivial on `L_∞` for `r ≠ 0`); so `Φ(𝔸) = R̂`. Open by the open-mapping theorem (σ-compact LCA groups).
+- Consequences used below: `ker Φ = D ⊂ L`; `max(1,|d|_v) ≤ δ_v` for `d ∈ D` at stable `v`, `δ_v = 1` off the finitely many `v | 𝔡`;
+  `C_D := ∏_v δ_v`. M2–M4 as in §1.4.
+
+### Step 0 — the expanding place
+
+**Lemma 0.** For every `u ∈ U`: `|u|_w = 1` at every archimedean `w` and every stable `w`; `|u|_𝔓·|u|_{σ𝔓} = 1` at split `𝔓`. If `u` is
+non-torsion, some split `𝔓₀` has `|u|_{𝔓₀} > 1`.
+*Proof.* `|σx|_w = |x|_{σw}` and `uσ(u) = 1`. Archimedean `w` of `L` are complex over real places of `F₁` with `σ` = complex conjugation
+there (§1.3), so `|u|²_ℂ = uū = 1`; stable `w`: `|u|_w² = 1`; split: as stated. If `|u|_𝔓 ≤ 1` at every split `𝔓`, then (pairing `𝔓`
+with `σ𝔓`) `|u|_𝔓 = 1` everywhere finite, so `u ∈ O_L^×` with every complex conjugate of modulus 1: a root of unity (Kronecker). ∎
+
+Fix `u*` non-torsion with `h_μ(u*) = 0`, `𝔓₀` as in Lemma 0, `λ := log|u*|_{𝔓₀} > 0`, `S₀ := {𝔓 ∈ 𝒮 : v_𝔓(u*) ≠ 0}` (finite, `∋ 𝔓₀`),
+`c* := max_{𝔓∈S₀} |u*|_𝔓`. WLOG `μ(R̂) = 1`.
+
+### Step 1 — neighbourhoods, lift uniqueness, Bowen balls
+
+For `0 < ε < 1`: `Ñ(ε) := {x ∈ 𝔸 : |x_w|_ℂ < ε (w | ∞); |x_𝔓|_𝔓 ≤ ε (𝔓 ∈ S₀); x_𝔓 ∈ O_𝔓 (𝔓 ∈ 𝒮 ∖ S₀)}`, `N(ε) := Φ(Ñ(ε))` (open).
+
+**Lemma 1a.** There is `ε₁ ∈ (0, 1/2]` with `D ∩ (u*Ñ(ε) − Ñ(ε)) = D ∩ (Ñ(ε) − Ñ(ε)) = {0}` for all `ε ≤ ε₁`. In particular `Φ` is
+injective on `Ñ(ε)`.
+*Proof.* Both sets lie in `{|x_w| < 2ε at ∞; |x_𝔓| ≤ c* on S₀; x_𝔓 ∈ O_𝔓 off S₀}` (`u*` is a unit off `S₀`). Its elements of `D` lie in
+`𝔞 := {a ∈ L : v_𝔓(a) ≥ −m (𝔓 ∈ S₀), v_𝔓(a) ≥ 0 (𝔓 ∈ 𝒮 ∖ S₀), a ∈ 𝔡_v⁻¹ (v stable)}` with `N𝔓^m ≥ c*` — a fractional `O_L`-ideal,
+hence a lattice in `L_∞`. With `r_𝔞 := min{max_w|a|_ℂ : a ∈ 𝔞 ∖ 0} > 0` take `ε₁ := min(1/2, r_𝔞/4)`: then `max_w |d|_ℂ < 2ε ≤ r_𝔞/2`
+forces `d = 0`. ∎
+
+**Lemma 1b (Bowen balls are thin at `𝔓₀`).** Let `ε ≤ ε₁`, `n ≥ 1`, `z ∈ R̂` with `u*^i z ∈ N(ε)` for `0 ≤ i ≤ n−1`. Then the unique
+`z̃ ∈ Ñ(ε)` with `Φ(z̃) = z` has `u*^i z̃ ∈ Ñ(ε)` for `0 ≤ i ≤ n−1`, hence `|z̃_{𝔓₀}| ≤ ε·e^{−(n−1)λ}`.
+*Proof.* Induction on `i`. If `u*^i z̃ ∈ Ñ(ε)` and `u*^{i+1}z = Φ(ã)`, `ã ∈ Ñ(ε)`, then `u*^{i+1}z̃ − ã ∈ D ∩ (u*Ñ(ε) − Ñ(ε)) = {0}`
+(Lemma 1a, M2). Finally `e^{(n−1)λ}|z̃_{𝔓₀}| = |u*^{n−1}z̃_{𝔓₀}| ≤ ε`. ∎
+
+Set `W̃_n := {w ∈ Ñ(ε₁) : |w_{𝔓₀}| ≤ ε₁e^{−(n−1)λ}}`, `W_n := Φ(W̃_n)` (σ-compact image, Borel).
+
+### Step 2 — zero entropy gives zero dimension along `𝔓₀` (EF Lemma 3.1, transferred)
+
+**Lemma 2.** For every `β > 0` and `η > 0` there are a Borel `X′ ⊆ R̂` with `μ(X′) > 1 − η` and `N₁` such that for all `x ∈ X′` and
+`n ≥ N₁`: `μ(x + W_n) ≥ e^{−nβ}`.
+*Proof.* `ε := ε₁`, `ε′ := ε/2`: `Ñ(ε′) − Ñ(ε′) ⊆ Ñ(ε)` (strict `< 2ε′ = ε` at `∞`, ultrametric elsewhere). `R̂` is compact:
+`R̂ = ⋃_{k≤K} (y_k + N(ε′))`; `P_k := (y_k + N(ε′)) ∖ ⋃_{j<k}(y_j + N(ε′))` is a finite Borel partition `ξ` with
+`P_k − P_k ⊆ Φ(Ñ(ε′) − Ñ(ε′)) ⊆ N(ε)`. Let `ξ_n(x) := ⋂_{i<n} u*^{−i}ξ(u*^i x)`. If `y ∈ ξ_n(x)`, then
+`u*^i(y − x) ∈ P − P ⊆ N(ε)` for `i < n`, so `y − x ∈ W_n` (Lemma 1b): **`ξ_n(x) ⊆ x + W_n`**. `R̂` is compact metrisable (`R`
+countable), `u*` is an invertible `μ`-preserving homeomorphism, `H_μ(ξ) ≤ log K`. Non-ergodic Shannon–McMillan–Breiman (EF Thm 2.1):
+`−(1/n) log μ(ξ_n(x)) → h_{μ_x^E}(u*, ξ)` a.e., where `μ_x^E` is the `u*`-ergodic component; Jacobs: `∫ h_{μ_x^E}(u*) dμ = h_μ(u*) = 0`,
+so `0 ≤ h_{μ_x^E}(u*, ξ) ≤ h_{μ_x^E}(u*) = 0` a.e. Egorov on `g_N(x) := sup_{n≥N} −(1/n) log μ(ξ_n(x)) ↓ 0` a.e. gives `X′`, `N₁` with
+`g_{N₁} < β` on `X′`. ∎
+
+**Note (W2 check):** only `u*`'s entropy is used, and only here.
+
+### Step 3 — the multipliers (the one property of `U` no finitely generated subgroup has)
+
+`q_s := (s + i)/(s − i) ∈ U_ℚ ⊆ U` for `s ∈ ℤ_{≥1}` (norm one: `q_s·σ(q_s) = q_s·q̄_s = 1`); distinct for distinct `s`
+(`(s+i)(s′−i) = (s′+i)(s−i) ⟹ 2(s′ − s)i = 0`). `|q_s|_ℂ = 1`; at finite places of `ℚ(i)`, `max(1,|q_s|_v) > 1` only where
+`v(s − i) > v(s + i)`, so `H_{ℚ(i)}(q_s) ≤ N(s − i) = s² + 1`, and `H(q_s) = H_{ℚ(i)}(q_s)^{[L:ℚ(i)]} ≤ (s²+1)²` (normalised values:
+`∏_{w|v} max(1,|α|_w) = max(1,|α|_v)^{[L:ℚ(i)]}` for `α ∈ ℚ(i)`). So with **`κ := 1/4`** (in degree `d`, `κ = 1/(2d)`):
+`#{s : H(q_s) ≤ M} ≥ ⌊(M^{1/2} − 1)^{1/2}⌋ ≥ ½·M^κ` for `M ≥ M₀`. (`tools/fs105_b_heights.py` H1, H3.)
+For `Γ = ⟨γ⟩` finitely generated of rank `r` the same count is `≍ (log M)^r`: **this is where control C-2 must break the proof** (Step 4).
+
+### Step 4 — the pigeonhole (EF Lemma 3.2, first half, transferred)
+
+Fix `x ∈ X′` and a lift `x̃ ∈ B_∞ × K_f` (`|x̃_w|_ℂ ≤ B` at both complex places; M4). Let `n ≥ N₁`, `M(n)` the least `M ≥ M₀` with
+`½M^κ > e^{nβ}` (so `M(n) ≤ C_M e^{nβ/κ}`, `C_M` independent of `n` and `x`), `Q_n := {q_s : H(q_s) ≤ M(n)}`, `#Q_n > e^{nβ}`.
+Each `q ∈ Q_n` is a `μ`-preserving automorphism of `R̂`, so `μ(q(x + W_n)) = μ(x + W_n) ≥ e^{−nβ}`; `#Q_n·e^{−nβ} > 1 = μ(R̂)`, so
+**there are `q ≠ q′` in `Q_n` and `w, w′ ∈ W_n` with `q(x + w) = q′(x + w′)`.** Lift `w, w′` to `w̃, w̃′ ∈ W̃_n`; by M2 and M1,
+`d := q(x̃ + w̃) − q′(x̃ + w̃′) ∈ D`. Put **`ℓ_n := d/(q − q′) ∈ L`**. Then `x̃ − ℓ_n = (q′w̃′ − qw̃)/(q − q′)` at every place, and:
+- **(E1)** `|x̃_{𝔓₀} − ℓ_n|_{𝔓₀} ≤ max(|q|,|q′|)_{𝔓₀}·ε₁e^{−(n−1)λ}·|q − q′|_{𝔓₀}⁻¹ ≤ M·ε₁e^{−(n−1)λ}·16M² = 16ε₁e^{λ}·M³·e^{−nλ}`
+  (`|q|_{𝔓₀} ≤ H(q) ≤ M`; (h4) and (h3) for `q − q′`).
+- **(E2)** `H(ℓ_n) ≤ H(d)·H(q − q′) ≤ H(d)·16M²` ((h1), (h2)). And `d = (q − q′)x̃ + qw̃ − q′w̃′`: at each complex `w`,
+  `|d|_ℂ ≤ 2B + 2`; at split `𝔓` (all of `x̃_𝔓, w̃_𝔓, w̃′_𝔓 ∈ O_𝔓`), `|d|_𝔓 ≤ max(1,|q|_𝔓)·max(1,|q′|_𝔓)`; at stable `v`,
+  `max(1,|d|_v) ≤ δ_v`. So `H(d) ≤ (2B+2)⁴·C_D·H(q)H(q′) =: C_d·M²` and **`H(ℓ_n) ≤ 16C_d·M⁴`**.
+- The archimedean coordinate of `x̃` is only **bounded**, never approximated (W1 respected): `|q − q′|` may be tiny at `∞`, and that
+  smallness is paid for inside `H(q − q′)`, not assumed away.
+
+### Step 5 — stabilisation (EF Lemma 3.2, second half; the product formula is the Diophantine step)
+
+With `M = M(n)`: `|x̃_{𝔓₀} − ℓ_n| ≤ C₁e^{n(3β/κ − λ)}` and `H(ℓ_n) ≤ C₂e^{4nβ/κ}` (`C₁, C₂` independent of `n` and `x`). **Choose
+`β := κλ/12`** (fixed before Lemma 2 is invoked). If `ℓ_n ≠ ℓ_{n+1}`, (h4) and (h3) give
+`(16C₂²e^{4β/κ})⁻¹e^{−8nβ/κ} ≤ H(ℓ_n − ℓ_{n+1})⁻¹ ≤ |ℓ_n − ℓ_{n+1}|_{𝔓₀} ≤ C₁e^{n(3β/κ − λ)}`, i.e.
+`1 ≤ 16C₂²C₁e^{4β/κ}·e^{n(11β/κ − λ)} = C₃e^{−nλ/12}`, false for `n ≥ N₂`. So `ℓ_n = ℓ` for all `n ≥ max(N₁, N₂)`, and
+`|x̃_{𝔓₀} − ℓ| ≤ C₁e^{−nλ/4} → 0`: **`x̃_{𝔓₀} = ℓ ∈ L`** (the diagonal image).
+
+**Lemma 5 (one place is global).** `G := {x ∈ R̂ : x̃_{𝔓₀} ∈ L}` is well defined (a change of lift adds `d ∈ D ⊂ L`) and `μ(G) = 1`.
+*Proof.* Every `x ∈ X′` lies in `G`; `μ(X′) > 1 − η` with `η` arbitrary (and `G` Borel, Step 6). ∎
