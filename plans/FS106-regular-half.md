@@ -716,3 +716,133 @@ derive). "Two minds, one blind" means one derivation plus a blind one.
 **No divergence remains open.** Every open item is a named GAP (the list in Stage 3's verdict), not a disagreement between minds.
 
 ### Stage 1 — SAVED
+
+### Stage 2 — SAVED (the derivation file `plans/FS106-derivation.md`)
+
+45 entries (`b5177885`), in `plans/FS105-derivation.md`'s form; every entry parses under `tools/fs71_ledger_b_check.py`'s entry grammar with all
+five fields (checked with its own parser, in memory). Ids: §1 the printed theorems (V23, CS, ROW40, SVL3, SV2, SV1, SVDEF, TW, WO, TH, PR, CO); §2
+the a.e. forms (AE-SLACK, AE-CLOSED, AE-POLY, AE-CONV, AE-NICE, AE-MAP6, AE-FA, AE-Q2); §3 the structural lemmas (TS-U, TS-L1, TS-C, TS-C2 = TS-C′,
+TS-T, DIAM, L, C5, IND, IND-X, TAN, L1, TRI, BIKE, CHR); §4 the quantitative route (EQ, SUP, EPS2, HIT, PIX, REM, COMP, LOCAL, STAB, SYN, PDEQ, the
+last not claimed). Their § B lines are drafted in Stage 4.
+
+### Stage 2 — SAVED
+
+### Stage 3 — SAVED (§G re-read; §PA sweep; §IQ, G72, G79; expectations scored; conjecture sweep; the verdict; the search log)
+
+**3.1 §G re-read — which extractions paid, which entry should have borne and was not used.**
+
+| extraction (P §G part 3) | paid? | how |
+|---|---|---|
+| G13, D1 (the measurable fan) | **paid** | D1 now has four derivations (FS103-M; VB blind; TQ-CORE sighted; QB-CORE blind); C-Q-REM's kept point is D1 at two radii |
+| G15, G16 (transfer pigeonhole and kills separately) | **paid** | C-T-PIG and C-T-KILL got separate verdicts; the kill's disjoint half holds under C-T-TAN, the pigeonhole is a GAP — the split located the wall |
+| G17 (every claim on `ℝ²` and on a disc) | **paid** | C-Q-STAB's radius-3 wording is sufficient, the exact form "some `R`" (TQ §4.5); A2's R question is the disc form |
+| G20 (seven-colour controls) | **paid** | the cusped hexagonal 7-colouring killed C-T-TRIa (A7, TS); TS's control K1 names where "six" is spent; R's killing test 2 in FS-107 |
+| G21 (audit the flattering result blind) | **paid, three times** | QB blind on TQ-EQ, with "it moves no value"; the dropped grade bracket on TQ-EPS2 caught (QB §4.1); the flattering TRUE on C-AE-CONV (TS) was the one missing a step (SB's A12, then closed) |
+| G22, G24, G60 (no per-class density route; W's constraints) | **paid** | no density route registered; W's class-density constraint carried (A2 §3.4) |
+| G29, row 41 (name the closed-set step; its Lean form) | **half** | C-CS-1 named at two minds; the Lean slot (phase L) was never written — owed to FS-101 |
+| G30, G46, G49, G50 (§PA in the discipline's words; S–V's transplant) | **paid** | G50 fired at planning (S–V's transplant, §9 and Question 2, held since FS-18) and re-aimed Phase T |
+| G48, G81 (frame) | paid | FS-106's *No* needs MR; its *Yes* none (I-EASY) — carried into link 5's drafts |
+| G64, G67 (claim wording) | paid | no S/W merge anywhere |
+| G71, G73 (the index is `K₃`'s height) | **paid, and it predicted the failure's shape** | C-T-IND is exactly the height of a density trace; SB's reading (A) is "a continuous lift agreeing a.e."; the index bound fails only at a swap, where complementarity — not the height — breaks |
+| G72, G79 (§IQ) | see 3.3 | |
+| G51 (blind second minds) | **paid** | the blind minds produced every settled divergence of truth (A12 with V, [G4], C-T-IND, TQ-EPS2's constant, TQ-HIT's cap, C-Q-LOCAL's endpoint) |
+| row 1 (exact-distance circle systems 3-colour) | paid | C-T-BIKE: three colours are needed on the bicycle; whether three suffice by arcs stays open |
+| row 40 | **paid** | discharged by V-1.3 alone |
+| row 127 (Lean lane) | **not run** | no Lean slot written; owed |
+
+**Entries that should have borne and were not used (each a new instance under WORKFLOW 3.1):**
+1. **G72 at ranking time.** P and A ranked S–V's Question 2 first ("the wall in its regular form", A stage 1) when an equivalence (C-Q-EQ, both
+   minds' own) was on the table. A2 §2.3 rule 1: "once an equivalent form of the question is on the table, rank every special case below it."
+   G72's structural form was applied to the *question* and not to the *ranking of the claims*. Q2 was still productive (TS's lemmas), not the wall.
+2. **G21's quantifier, for lists of exceptions.** A's "the tangent form fails only at … and nowhere else" was derived for piecewise-smooth
+   blow-ups and read as a statement about all colourings; cusps, spirals and weak-* limits joined the list within a day (A2 §2.3 rule 2).
+3. **§ Make the gate fail, "exactly one thing may differ".** TQ §4.4 scored A's "robust Voronov, linear in ε" on uncovered area; A's hunch
+   counted monochromatic band pairs (A2 §2.2): two denominators, one credited. The rule was on the page.
+4. **G50, four times in one milestone:** `[SokolovVoronov2025]`'s transplant, §9 and Q2 (P); `[Townsend1981]` cited as a proof of "maps need
+   six" in `CLAUDE.md` link 4 while printing none; `[Coulson2004]` cited among map theorems while its theorem is tile-based (held, unread);
+   `[Parts2020c]` listed "not held" while held (QB §1.1).
+
+**3.2 §PA sweep — what did the milestone teach us about the object?** Each answer promoted (drafts in Stage 4).
+1. **The measurable question is a stability question, and its regular form is periodic.** TQ-EQ (e): a refutation of `χ_m⁰ ≥ 7` is a sequence of
+   periodic grid-square six-colourings with a band and vanishing holes; the wild set exists only in the limit. In the literature's words this is
+   the forbidden-interval line (`χ_{[1−ε,1+ε]}`, Exoo; Currie–Eggleton; Voronov) run in the "what percent of the plane" line (`[Pritikin1998]`,
+   `[Parts2020c]`): `1 − µ₆⁰` is the uncovered fraction of their tilings in the limit of vanishing slack, and TQ-SUP says the tight and slack
+   suprema coincide. **Promoted:** a grokking draft (G82, Stage 4) and FS-107's re-aim; the `m₁(ℝ²)` literature's compactness step as a prior-art
+   debt (item 66).
+2. **The index method is degree theory, and it dies where general position fails.** Voronov's index is the degree of a circle's 3-colouring
+   lifted to `K₃`'s cover (G71); the bound `|ΔInd| ≤ 1` needs no swap — two complementary curves changing colour at one instant — which is
+   non-generic in a map and **forced** at a unit-arc interface facing a bowtie (IND-X). Condition 5 is general position for unit circles.
+   **Promoted:** one sentence in G71 (Stage 4) and FS-107's R-S constraint [G4].
+3. **Hole-filling is the map line's common tool.** Voronov's Obs. 2.2, Townsend's simplification (a), V2's fills and A12's repair are one move:
+   a connected one-coloured region avoiding distance 1 has diameter ≤ 1, so its holes fill. Where the region is not connected through open
+   sets — a bichromatic vertex of degree ≥ 4 — the move fails (S–V's Prop. 19 under Cond. 6; Townsend's (c)), and Woodall's step-3 merge is
+   the repair tool, except at his "cone". **Promoted:** the Woodall-merge stub (item 57).
+4. **Maps, tiles and nice maps are three theorems with three hypotheses**, and the literature and `CLAUDE.md` link 4 had merged them: maps need
+   six (Woodall 1973, with Townsend's repair), tiles with an area bound need six (`[Coulson2004]`), nice maps need seven (`[Thomassen1999]`),
+   polygons need seven (`[SokolovVoronov2025]` Thm 2, repaired). **Promoted:** link 4's rewrite.
+
+**3.3 §IQ re-read, G72's count and G79's record.**
+- *Existence form* (P §IQ 1): is there a Lebesgue-measurable colouring of `ℝ²` with at most six colours, proper at almost every unit pair? Open.
+- *Structural form* (P §IQ 2): what every a.e.-proper measurable colouring carries on the unit circle about each point. Answered in part: the
+  measurable fan (D1, four derivations); the index of a density trace exists under reading (A) when a continuous lift exists, and its bound
+  holds absent a swap (FS106-IND); a swap is forced at a unit-arc interface facing a bowtie (FS106-IND-X). "Finding the index is the
+  milestone" (P §IQ 3): found, with the exact place it fails.
+- **Did the headline come through the structural question?** No. TQ-EQ came from the quantitative route: a recognition at the prior-art gate
+  (S–V §9, drawn at planning) and row 130's weak-* compactness extended to the slack side. The structural form produced TS's lemmas and the
+  index no-go. **G72's count: sixteenth, FS-106 — the other kind; the count reads thirteen of sixteen.**
+- **G79's record, FS-106:** TQ-EQ from an example invariant (the weak-* limit colouring every near-covering family carries); D1 and TS-T
+  (a trichromatic point within `1/√2 + ε` of every point) likewise; the walls arrived as counterexample invariants — C5 and IND-X (what W's limit
+  must carry at a failure of the index: a unit-arc interface facing a bowtie), TQ-HIT (what a hitting-form proof cannot exceed), the pixel lemma
+  (a counterexample to C-Q-STAB can have no multichromatic coloured point); the one flip made, A2's PD-EQ (the band-pair fraction every CP
+  colouring drives to 0), is an example invariant and located R's decisive quantity (one mind, sketch).
+
+**3.4 Expectations E1–E12 (P §5.3), scored.**
+
+| # | expectation | outcome | score |
+|---|---|---|---|
+| E1 | V-1.1 TRUE, 0.8 | TRUE after repairs (V, VB) | met |
+| E2 | SV-2 TRUE, 0.75 | GAP as printed; TRUE after repairs except `d = 2` | half: the theorem likely, the print not |
+| E3 | C-CS-1 TRUE, 0.9 | TRUE | met |
+| E4 | C-AE-SLACK TRUE, 0.9 | TRUE; forms (a), (b) agree | met |
+| E5 | C-AE-CLOSED TRUE, 0.55 | GAP: equivalent to the tight question for essentially closed classes | undecided |
+| E6 | C-AE-Q2 TRUE .5 / FALSE .15 / GAP .35 | GAP at four steps | the .35 branch |
+| E7 | C-AE-POLY TRUE, 0.65 | TRUE except `d = 2` | met, with a residual |
+| E8 | C-T-L1a TRUE .8 / C-T-L1b TRUE .5 | L1a TRUE; L1b TRUE for map-like classes, GAP in general | met / half |
+| E9 | C-T-BIKE TRUE, 0.7 | GAP (three colours needed; three by arcs open) | undecided |
+| E10 | C-Q-REM / COMP / EQ TRUE .85/.85/.8 | all TRUE, two minds, one blind | met |
+| E11 | C-Q-STAB GAP .8 | GAP: it is `χ_m⁰ ≥ 7` itself | met |
+| E12 | the closed-set step named, the heart reduced to C-AE-Q2 or C-Q-STAB, both handed to FS-107 | named; the heart is C-Q-STAB **by equivalence**, Q2 a special case | met, sharpened |
+
+Eight met, three half or undecided, none missed outright. The pattern (G21): the expectations that did not land TRUE were the ones about print
+holding as printed (E2) and about the method transferring (E5, E9); every expectation about a derivation of our own landed.
+
+**3.5 Conjecture sweep.** `grep -i "conjecture\|not claimed"` over the plan and the seven records: no unpursued conjecture; PD-EQ is "not
+claimed" and filed (FS106-PDEQ) with FS-107 as its home; the `d = 2` case, Woodall's merge and SV-1's fills are stubs (items 36, 57).
+
+**3.6 The verdict, in four parts.**
+- **The choice:** close FS-106 as *landed*. The regular half is verified in print with repairs, transferred almost everywhere except at named
+  steps, and the measurable question is restated exactly as a stability question (TQ-EQ, two minds, one blind). Nothing moves the answer.
+- **The alternative weighed:** keep FS-106 open to close its residuals first — SV-2's `d = 2` case, a second mind on SV-L3's transplanted
+  bicycle, Woodall's fill of Townsend's (c) walked in full, SV-1's fills under Condition 6.
+- **Why this one:** by TQ-EQ the regular classes are no longer the route. Each regular theorem is now a constraint on W's limit, not a path to
+  the answer, and FS-107 decides the problem either way. The residuals keep their value as the program's print record and move to stubs.
+- **Confidence: high** on the close. **Medium** that every residual is repairable: `d = 2` has no local contradiction found (V3). The fact that
+  would change the close: a counterexample at `d = 2` — a polygonal six-colouring. That would be `χ(ℝ²) ≤ 6` with no MR, and FS-107's W would
+  become its verification.
+
+**3.7 Would-have-searched log (the close and its jobs).** The close: none (reading and reconciliation). The jobs, collected:
+- TS: a global six-colouring extending C5, or a map realising [G3]'s cone → each stated as a local configuration and checked by hand.
+- TS: an arc-offset scan for C-T-BIKE → reduced to the forced set, left GAP.
+- TQ: an optimiser over periodic grid-square slack colourings, to trace `1 − µ₆(ε)` → the two-sided bracket derived; the trace proposed for
+  after 2026-10-01.
+- QB: SAT/MILP for a pixelated band-proper colouring → the pixel lemma.
+- QB: a Delsarte-type LP bound on `µ₆(ε)` → Lemma F by hand.
+- QB: Parts's tiling rebuilt numerically at `δ₆` → left as the named GAP.
+- SB: a solver for C5's local colourings → built by hand and checked by sampling.
+- SB: random traces for an index violation → the swap derived.
+- VB: a numerical grid check of the bicycle's arcs → additivity.
+- V2: a float check of Prop. 17's cone colours → by hand.
+- V3: a float search for VB's configuration → the closed-form crossing.
+- A2: a numerical trace of eroded Parts tilings → FS-107's registered post-ban dial.
+
+### Stage 3 — SAVED
