@@ -17,7 +17,9 @@ briefs stay unopened until Stage 3 is committed. Work files: `data/fs110/fs110-n
 | NB4-CH | the chain's curvatures satisfy FIN's inequalities by **validity** of the flanks alone (not by the blocking condition) | [hand, one mind] | §2.6 |
 | NB4-FN | FIN, with the step bounds `⌈1/υ⌉`, `⌈1/\|λ\|⌉`; strictness `λ_k < υ_k` is necessary (the constant `(0, 0)` otherwise) | [hand + exact, one mind; C2 and its plant] | §2.7 |
 | NB4-TM | a fair schedule of moves converges to a terminal valid map in `𝓜_{O(K)}` under Condition 5, each point changed at most finitely often (`Φ` never rises) | [hand, one mind] | §2.8 |
-| NB4-CS | adding SHAVE on single horns (horn count falls, `Φ` never rises) gives a terminal cubic map whose every cusp horn is doubly shadowed: the base need only cover those cusps | [hand, one mind; a proposal] | §2.9 |
+| NB4-CS | adding SHAVE on single horns (horn count falls, `Φ` never rises) gives a terminal cubic map whose every cusp horn is doubly shadowed; with N4's wedge-opening (sketch) the residue is the doubly-shadowed single-horn Woodall cone | [hand, one mind; a proposal] | §2.9, §4.1 D3 |
+| NB4-SC | straight cuts in SHAVE, MERGE, MERGE-RAY keep the modified map in `𝓜_{O(K)}` with the radius bound (dividing arcs have curvature in `(−1, 1)`) | [hand, one mind] | §4.1 D4 |
+| NB4-HEXa | N4-HEX (a): `A_1`, `A_2` are not both tile points | [hand, one mind; checked] | §4 |
 | NB4-WCH | in WCH, `v` is stuck in N4's sense (no MERGE, no MERGE-RAY, SHAVE blocked), `N` and `S′` are not (colour 4 has three sectors at `N`), and colour 1 cannot sit directly above `N`'s 3-horn | [tools, exact witnesses; the reading hand] | §2.10; C3 |
 | NB4-WC1H | in WC1H, `v` is cubic with a cusp (not a two-sector cone); `σ_h = σ_g = 0`, so SHAVE applies (split along `+a`), though both single-colour tip recolourings are refused | [tools, exact; hand] | §2.10; C4 |
 
@@ -256,3 +258,51 @@ it is TRUE for flanks of any shape — my expectation was too pessimistic) and W
 **Correction to §2.10 (found while re-reading, before opening anything):** `ω(N)` meets the ring band `0.9 ≤ |z| ≤ 1.1` where `|z|² = 2y`, i.e.
 `y ∈ [0.405, 0.605]`, at directions `26.7°–33.4°` and `146.6°–153.3°` from `v` (not `26.9°–37.3°`, `142.7°–153.1°`); both inside the colour-5
 pieces, so the conclusion (no colour-4 contact on `ω(N)`) stands.
+
+## Stage 4 — SAVED (after opening `plans/FS110-N-proof.md` § Continuation — FS110-N4, `tools/fs110_n_*`, `data/fs110/fs110-n/`)
+
+**Quotation check, completed.** The instance block's N4 table is verbatim to `plans/FS110-N-proof.md` l. 716–726 (`diff`, exit 0); N3-DEG and N3-RED
+in claims §8 are verbatim to l. 529, 531. N4's `tools/fs110_n_shadow.py` (sympy, exact) passes C1–C4 here, and its three plants fire (`wrongf`,
+`nearside`, `downward`).
+
+**Agreement, item by item.** SHADOW, FLANK, SHAVE, PROP, FIN, TERM (as a count of `Φ`-lowering moves), CONE and RED: same statements, same truth; N4's
+definitions (`D_c(v)` an intersection of closed half-planes; `Φ`; valid; terminal) coincide with mine (§1.2). N4 derives FIN's inequalities from
+validity (N-E0) too (its §2.6), as I did (§2.6). N4-FLANK's setting ("the tile directly above `H`") is already shape-free, which is why my expectation of
+a missing hypothesis lost. N4-HEX (a) checked here: `A_1 ∈ ω(u) ∩ ω(p_+)`, `A_2 ∈ ω(u) ∩ ω(p_−)`, `|A_1 − A_2| = 1`, and the only colour left is `γ`:
+TRUE; (b), (c) not examined (moot).
+
+### 4.1 Divergences
+
+| # | kind | where | N4 | this job | proposed edit for the close |
+|---|---|---|---|---|---|
+| D1 | **truth (sign)** | N4-4, and the instance block | "the Condition-5 half of `[SokolovVoronov2025]` Question 2 is answered **NO**" | S–V ask "Is it true that 7 colors are needed …?"; no six-map exists, so the answer in that half is **YES** | "… Question 2 is answered **YES — seven colours are needed** — almost everywhere, for locally finite maps with circular or straight arcs of bounded complexity: a partial answer" |
+| D2 | **MISSTATED (headline drops a hypothesis; FS-107's M3)** | N4-4 "**W-4: NO** [hand; N4 one mind, over its bases]"; instance block "W-4 is NO" | the cusp scope is named two paragraphs below, not in the headline | the headline must carry it | "**W-4: NO, given the base for cubic maps with cusp sectors** (FS110-CB/CD not yet read for them; N4-P3 at 0.6)" |
+| D3 | scope / precision | N4-TERM vs §2.8, N4-4 item 1 | TERM counts moves by "`Φ(v)` down by at least one"; §2.8 says the surviving cusps are "a single horn whose flanks both shadow it" — which presumes SHAVE on single horns, a move that does not lower `Φ` | count `Φ + #horns` (horns never increase: SHAVE, MERGE, MERGE-RAY and N4's wedge-opening create none); then SHAVE on single horns and the opening remedy both join the moves | state the residue exactly: **a single cusp horn at a cubic vertex survives only if it is doubly shadowed (`σ_h < σ_g`) and `D_c(v)` is the line `±a` (out-type `c`-contacts at both `N` and `S′`)** — a single-horn Woodall cone. The base need only cover that |
+| D4 | scope (repair) | N4-4 item 2 (no radius lower bound) | new arcs `∂B(v, ρ)` of radius `ρ < 1/K` may leave `𝓜_K` | cut with straight chords (a small convex polygon about `v`) in SHAVE, MERGE and MERGE-RAY; the dividing arc `Σ` has curvature in `(−1, 1)`, radius `> 1` | item 2 dissolves: `M* ∈ 𝓜_{K′}`, radius bound kept, `K′ = O(K)` [hand, one mind] |
+| D5 | route | N4-RAY | "the escape bound in the second-order model" | exact: every `c`-shadow near `v` is a finite union of one-sided circle regions through `v` (§2.1); for a component above `Γ` tangent to `a`, `H₂` below `Γ` puts the region between the horns below it; transversal `Γ` misses the stack | replace the second-order bound by this (§2.4 here) |
+| D6 | route | N4-STUCK (ii) | identifies `g_+ = g_−`, `h_+ = h_−` from the contact types (N3-CONF) | from no-MERGE for **every** colour at `v` (W-MERGE, N3-DEG) plus NB-4 | none; two routes to one statement |
+| D7 | control, new | FS110-Y4's WCH, WC1H (N4 was blind to them) | N4-P2: "any hard cone fragment … admits a SHAVE at one of its horns, or has an antipode that is not a cone vertex" | WCH: `v` stuck, SHAVE blocked (`σ_h = −1/3 < σ_g = 1/3`), and `N` is not a cone vertex (colour 4 has three sectors, `D_3(N)` a half-plane) — second disjunct; WC1H: `v` cubic with a cusp, SHAVE applies (`σ_h = σ_g = 0`) — first disjunct | N4-P2 **met** on both (scored by this job, one mind); the construction side's "tip-hard" (every single-colour tip recolouring refused) does not stop the two-colour split |
+
+**Registered N4 predictions, scored here:** N4-P1 (a blind verifier finds N4-CONE TRUE, possibly with repairs at RAY's escape bound or TERM's limit)
+**met** — TRUE, with RAY's bound replaced (D5) and TERM's count made precise (D3). N4-P2 **met** (D7). N4-P3 (the base extends to cusp horns) **open**,
+narrowed by D3 to single-horn Woodall cones that are doubly shadowed. My own: 11 of 12 as registered; FLANK's MISSTATED risk did not materialise.
+
+**Grades after this check:** N4-SHADOW, FLANK, SHAVE, RAY, STUCK, PROP, FIN, TERM, CONE, RED: [hand, two minds, one blind]; **N3-DEG now two minds, one
+blind** (re-derived here, §2.5); W-MERGE and NB-4 as before. W-4 NO: at that grade **given the base for cubic maps with cusp sectors**.
+
+### 4.2 Proposed ledger wording (for the close; not written by me)
+
+"Under Condition 5, every full a.e.-proper six-colouring by a locally finite map with circular or straight arcs has a valid modification that is
+cubic at every vertex (G-CONE closed: MERGE, MERGE-RAY, SHAVE, and the chain along the normal line that FIN forbids). With S–V Cor. 1 almost everywhere
+for curved cubic maps (FS110-CB, FS110-CD), and once that base is read for cubic vertices with a cusp sector (the residue: doubly-shadowed single-horn
+Woodall cones), no tight six-map in `𝓜_K` satisfies Condition 5: seven colours are needed — the Condition-5 half of `[SokolovVoronov2025]` Question 2
+answered **yes**, a.e., at bounded complexity. [hand; the reduction two minds, one blind (FS110-N4, FS110-NB4); the base two blind minds; the cusp
+scope owed.]" Prior art to cite beside it: `[SokolovVoronov2025]` Props. 7–8 (the polygonal reduction of a vertex's degree), of which W-MERGE and SHAVE
+are the curved-arc forms.
+
+### 4.3 Fence log
+- At start-up, one `ls` of the shared harness scratchpad root printed ten file **names** (`a0.txt`, `a1.txt`, `a2.out`, … `a4.txt`) of files this job
+  did not create. Names only; none opened. Disclosed.
+- After Stage 3: opened only `plans/FS110-N-proof.md` (N3 §2.1–§2.6 and all of § Continuation — FS110-N4), `tools/fs110_n_shadow.py` (run, and its
+  plants), the listing of `tools/fs110_n_*` and `data/fs110/fs110-n/` (empty). Nothing of the construction side, the other verifiers, the plan, the
+  advisors, the inventory, the reports or other briefs was opened; `git log` beyond my own commits not read.
