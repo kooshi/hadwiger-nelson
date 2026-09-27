@@ -1,5 +1,19 @@
 # FS-104 — the stationary chromatic number at six: is `χ_CP(ℝ²) ≥ 6`? (stub)
 
+> **Print addresses from the consolidation run (2026-09-27; job FP from the reading jobs LW and LW3, `data/consolidation-2026-09-27/reports/LW3.md`
+> §§ 1, 4; the quotations checked on the pages, `data/consolidation-2026-09-27/fp/record.md` stage 1).** **Item (1), the null-set step:** its compactness step is in print,
+> `[Johnson1994choice]` p. 125: *"The well-known DeBruijn-Erdös theorem on the chromatic number of an infinite graph holds for the choice
+> number. That is, if G is an infinite graph, k is a positive integer, and c(H) ≤ k for every finite subgraph H of G, then c(G) ≤ k."*
+> (proved there by Tychonoff), and the same paper asks, p. 124, *"Is the choice number of the planar unit distance graph finite?"* — a
+> posed question no row answers, recorded here, not in `CLOSED-QUESTIONS.md` (the owner's ruling, 2026-09-27). If print answers "infinite",
+> item (1) cannot close by a general list-colouring theorem and must use where the lists come from (FS103-M-D's hunch). **Check first**
+> whether it is answered (LW3 recalls, unread, an average-degree lower bound for choice numbers). **Item (3), the ZF + DC audit:**
+> `[Soifer2007]` p. 86 prints, with no proof, *"Chromatic Number of the Plane Theorem. In ZFS the chromatic number of the plane is 5, 6, or
+> 7."*; `[ShelahSoifer2003b]` p. 43 asserts *"DC is sufficient for Falconer's result [F]"* and p. 42 names de Bruijn–Erdős's use of
+> choice; that link 2 uses choice only there, its averaging needing only ZF + DC, is a reading at one mind (LW3). **The question as posed
+> in print:** *"The Ronald L. Graham New $1,000 Problem. Prove or disprove the existence of a 6-chromatic unit-distance graph."*
+> (`[Soifer2019]` p. 213) — by de Bruijn–Erdős it is `χ(ℝ²) ≥ 6`, and given MR (rows 128, 130) it is this stub's `χ_m⁰(ℝ²) ≥ 6`.
+
 > **Re-aimed at the reframe (2026-09-26, job RF1; `plans/FRONTIER-STUBS.md`'s re-rank note; `plans/STUB-regularity-wall.md`): rank 1 → 3,
 > below the program Kooshi adopted (`CLAUDE.md` § The aim) — FS-106, the regular half (rank 1), and FS-107, regularity against pathology
 > (rank 2). Re-aimed, not demoted.** Its **null-set step** — item (1) of the banner below, "colour the metrical boundary", C-FMT (d),

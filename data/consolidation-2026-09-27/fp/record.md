@@ -171,3 +171,19 @@ once" made true after `[Parts2021]` left it).
 
 **Gates (each exit status read directly):** `python3 tools/bib_audit.py` exit 0; `python3 tools/fs71_ledger_b_check.py --strict` exit 0 (947
 rows, PASS); `python3 tools/claude_md_fact_audit.py --base cc0881df` exit 0 (LOST 0 in every class). `[Johnson1982]` untouched (LX's).
+
+## Stage 3 — SAVED: the stubs and `plans/FRONTIER-STUBS.md`
+
+Applied by `fp/apply_stage3.py` (every old string asserted once). No rank moved; no prediction re-registered.
+
+| # | file | what landed |
+|---|---|---|
+| G1 | `plans/STUB-unit-arc-half.md` (FS-112) | a banner after the minting line with the four re-aims: the question posed in print (`[Polymath2021]` p. 199, verbatim fragments, LW2's scope); the strip as the one exact positive (Axenovich's words); `[Parts2021]` pp. 181–182 and `[Parts2020c]` §2.5 as measured priors, with the note that "a YES by formula (0.03)" is to be re-registered at the opening — **not re-registered**; Kainen's conjecture |
+| G2 | `plans/STUB-reg-scale.md` (FS-111) | "The one print prior" paragraph under "The room": `[Parts2020c]` §2.5 (a); `[BrownDunfieldPerry1994]` Thm 8 at no scale |
+| G3 | `plans/STUB-hole-dial.md` (FS-109) | a section "Folded in at the consolidation run: three dials from print": X₆ (pp. 140–141, verbatim), `[Mundinger2024]`'s interval, `χa` (p. 38, verbatim), `[Parts2020c]` §2.4 |
+| G5 | `plans/STUB-writeup-main-clause-five.md` (FS-102) | the "Blocking" line → "Was blocking, now met": the Johnson papers read, not found |
+| G6 | `plans/STUB-theorem-B-writeup.md` (FS-20) | a paragraph after the C3b banner: R2, R3 met; Theorem A's construction prior art; what is left, with `[Johnson1982]` (held, LX reading) |
+| G7 | `plans/STUB-cp-plane-six.md` (FS-104) | a banner: item (1) `[Johnson1994choice]` pp. 124–125 (the **full** p. 125 sentence, not LW3's elided one) and its open question; item (3) `[Soifer2007]` p. 86, `[ShelahSoifer2003b]` pp. 42–43, LW3's choice reading marked one mind; the Graham problem, `[Soifer2019]` p. 213 |
+| G8 | `plans/FRONTIER-STUBS.md` ranks 1, 4, 5, 17 | rank 1: the print re-aims in the question cell, `[Polymath2021]`'s question in the bearing cell; rank 4: X₆, `χa`, the tile-share dial; rank 5: four of five answered, `[Townsend2005]` the manuscript; rank 17: the Johnson papers read, not found |
+
+**Gates:** `python3 data/rerank-2026-09-27/rk_mirror_check.py` exit 0 (PASS); `python3 tools/bib_audit.py` exit 0.

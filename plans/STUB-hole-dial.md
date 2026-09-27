@@ -32,6 +32,10 @@ family given by formula and exact checks of its members, so it runs inside the b
 a polygonal family of bounded complexity keeps holes `≥ δ₀(K)` (bar `d = 2`), so `[MundingerEtAl2025]`'s cell designs at fixed resolution are bounded
 below; a falling curve needs curved tiles (FS-110) or growing complexity (FS-111). Provisional bearings added: G21, G82 as corrected, FS107-HX-STALL.
 
+## Folded in at the consolidation run: three dials from print
+
+*Added 2026-09-27 by job FP from the reading jobs LW, LW2 and LW3; the quotations checked on the pages (`data/consolidation-2026-09-27/fp/record.md` stage 1).* **X₆** (`[Soifer1994X6]`, 1994), p. 140: *"Find the 6-realizable set X6 of all positive numbers α such that there exists a 6-coloring of the plane of type (1,1,1,1,1,α)."*; p. 141: *"[√2 − 1, 1/√5] ⊆ X6"* and *"if 1 ∉ X6, then χ = 7 / if 1 ∈ X6, then χ ≤ 6"*. `[Mundinger2024]` extends the known part to `[0.354, 0.657]` with polytopal tiles, validity checked numerically. A second dial beside this one — how close to 1 the sixth colour's forbidden distance can be pushed — everywhere-proper, so it bears on the plane and not on row 131's measurable form. **The almost chromatic number** (`[HoffmanSoifer1993]`, 1993), p. 38: *"almost all (i.e., all but one) colors forbid the unit distance, and the remaining color forbids a distance"*, *"4 ≤ χa ≤ 6."*, *"And the problem is: find χa."* **`[Parts2020c]` §2.4's tile-share dial** (p. 37): *"We are unaware of any way to obtain a Siamese-free tiling with the relative proportion of tiles of some color being less than 1/8."* — a count beside this stub's area. No row answers X₆ or `χa`; they are recorded here rather than in `CLOSED-QUESTIONS.md`, which takes questions a row answers (the owner's ruling of 2026-09-27 on `[Johnson1994choice]`, applied to these).
+
 ## Provisional bearings
 
 G30 (a dial), G21 (a negative measures its enumeration), G65 (the solver's phase diagram, if a SAT encoding is used), G82.

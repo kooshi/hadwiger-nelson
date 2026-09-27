@@ -71,8 +71,9 @@ in row 99; `CLOSED-QUESTIONS.md` §2.6).
   triangle-free five-chromatic unit-distance graph in print is in ℝ³, de Grey 2026, Zbl 1581.05080)"*. MR is not found under its discipline's
   names; its nearest, `[LacaWarren2018]`'s "generalized Furstenberg conjecture", is the finitely generated case and open (row 120). EL2021 §2 and
   §4.1–§4.3 were read (X24R): *"So PE-2's step is not in EL2021, and neither is EF_F⁺."*
-- **Blocking, before any draft (G50):** `[Johnson2000]` and `[Johnson2006]` are unread — **Kooshi, acquiring** (`BIBLIOGRAPHY.md` § R.6).
-  Until they are read, novelty is "not found", never "first" (rows 121, 123).
+- **Was blocking, now met (G50):** `[Johnson2000]` and `[Johnson2006]` are read in full (2026-09-27, the consolidation run's job LP; a second
+  reading by LV): **not found in either** — they hold no value of `χ(F²)` at five and pose the four-colour question as open
+  (`CLOSED-QUESTIONS.md` §1.7; rows 121, 123). Novelty stays "not found in print", never "first".
 - **Owed beside them:** `[Sataev1975]` (the zero-entropy method's first form, unheld, unread); Johnson's nonlacunary theorem (`[JohnsonA1992]`,
   review only), whose shape PE-2 transposes; EL2021's proof (§§3, 5–9 unread), on which PE-2 rests by statement.
 - **The lesson this gate must not repeat:** FS-20's result was in print since 1994 in a proceedings volume no citation graph reaches

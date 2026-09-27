@@ -25,6 +25,8 @@ compactness methods of the distance-avoiding-sets literature: `[Bukh2008]`, Falc
 (FS-107 §PA row 8; inventory item 8): the prior-art gate reads them first. Name the object there: "near-minimisers of a band-avoidance functional",
 "regularity of optimal partitions" — never this project's words.
 
+**The one print prior** (the consolidation run, 2026-09-27; job FP from the reading jobs LW and LW2): `[Parts2020c]` §2.5 (p. 37), in the best 5- and 6-tilings found by numerical optimisation over symmetric tilings, *"a) vertices in which three or more colored tiles converge are disadvantageous (a void is superior to any such vertex)"* — the junctions this stub asks about are voids in the best designs known; a measured prior, never a cap (`CLAUDE.md` § Counter-priors). `[BrownDunfieldPerry1994]` Thm 8 (p. 111) argues topologically about how open regions meet, at no scale. Nothing read in the journal's archive gives a junction-scale bound or a family of unbounded complexity.
+
 ## Killing tests and registered expectations
 
 - RR's killing test (R §3.4): "a proof of R that uses neither a complementary pair nor a scale lower bound; or a W family with holes `→ 0` whose
