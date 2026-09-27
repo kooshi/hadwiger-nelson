@@ -554,3 +554,165 @@ slip recorded against FS106-A, logged by it to the owner. The four edits I made 
 | fences must name `data/fs106/fs106-a/` and the advisor's record by path | they do (§5.2, and each blind brief) |
 
 ## Stage 6b — SAVED
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; job FS106-C, the close planner)
+
+*de Bruijn (Opus 5.5), 2026-09-27. Brief `data/fs106/briefs/C106-close-math.md` with `data/fs106/briefs/STANDING-RULES.md`; its template
+`data/fs105/briefs/C105-close-math.md`. Worked from `plans/FS106-close-inventory.md` (items 1–77). Drafts only: `CLAUDE.md`, `LEDGER.md`,
+`plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md`, `plans/GROKKING-INSTANCES.md` and the protocols are written by the front-page
+job FS106-X. Every number below is read from the record named beside it, never from the inventory. Records: V = `plans/FS106-V-verification.md`
+(FS106-V, with § Continuation — FS106-V2 and — FS106-V3: one sighted line, three agents), VB = `plans/FS106-VB-verification.md` (blind),
+TS = `plans/FS106-TS-derivation.md`, TQ = `plans/FS106-TQ-derivation.md`, SB = `plans/FS106-SB-verification.md` (blind on TS),
+QB = `plans/FS106-QB-verification.md` (blind on TQ), A = `plans/POROS-2026-09-26-fs106-regular-half.md` (FS106-A), A2 =
+`plans/POROS-2026-09-27-fs106-close-and-fs107.md` (FS106-A2), P = this plan (FS106-P), claims = `data/fs106/claims.md`.*
+
+## Theorems this phase proved
+
+None new: a close. The close's own readings, one mind each and marked where used: C-AE-SLACK's plane form as a corollary of QB's Lemma F (1.1,
+row C-AE-SLACK); the diameter bound behind A2's fill check (1.3, D7).
+
+### Stage 1 — SAVED (quotation check; reconciliation)
+
+**1.0 Quotation check of the brief and of the owner's message (standing rule 5).**
+
+| # | the brief or message says | source | result |
+|---|---|---|---|
+| Q1 | A12: "it needs simply connected regions, which Prop. 8's recolouring can destroy" (owner's addition) | SB §2.1 row A12 ("needs simply connected regions"; "A7's recolouring can destroy it") | matches |
+| Q2 | TS's "Prop. 12 holds wherever the curves exist" (owner's addition, in quotation marks) | TS §2.5 table: "Prop. 12, Cor. 4 (the index) \| Lemma 1, Prop. 3 \| hold wherever the curves exist"; TS §2.3 l. 153: "… no Condition 5 wherever their curves exist" | **a paraphrase inside quotation marks** (drops "Cor. 4", changes the verb's number); harmless to the content, logged as a standing-rule-5 instance with items 38 and 40 |
+| Q3 | "[Coulson2004]'s printed theorem (six, with an area bound)" (not in quotation marks) | SB §2.2: Thm 3.5, "A tile based colouring with excluded distance D must employ at least 6 colours"; SB §3.3 (area bound) | matches |
+| Q4 | "`CLAUDE.md` is at 304,245 bytes" | `wc -c CLAUDE.md` at this job's start | matches |
+| Q5 | "Row 40's correction … its condition is `[Voronov2023]` Thm 1.3 alone" | V §2.1 row C-ROW40 ("contradicting **V-1.3 alone**"); A stage 4 ("Row 40: V-1.3 alone discharges it") | matches |
+| Q6 | the owner's ruling: FS-107 renamed "stability: can vanishing holes save a colour?"; link 5 in TQ-EQ's form; draft that version only | inventory item 77 | matches; the two-version draft of the brief is superseded |
+| Q7 | standing rule 3 quotes Kooshi as "The intent of the ban is to eliminate the crutch …" | `CLAUDE.md` § Toolchain: *"to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time"* | the known slip (item 38), still in the standing rules; not corrected by me (a brief file, the owner's) |
+
+**1.1 Reconciliation — every claim of `data/fs106/claims.md`.** Minds and blindness: V, V2, V3 are one sighted line (V2 and V3 read their
+predecessors); VB blind to V, V2, V3 and the plan; TS and TQ blind to each other until their verdict stages; SB blind to TS until its stage 3
+(`2c5fabef`); QB blind to TQ until its stage 3; A and A2 not blind (their checks are sighted readings, never counted as a mind unless they
+derive). "Two minds, one blind" means one derivation plus a blind one.
+
+*§0–§1, definitions and held inputs.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| D-NF's density statement (the classes `S̃_j` avoid distance 1) | TRUE | FS103-M; VB blind (second mind) | [hand, two minds, one blind] | none |
+| I-D1, I-D2, I-D4 | TRUE | FS103-M; VB blind | [hand, two minds, one blind] | A's quote check (item 29): I-D4's "…" drops the definition of `supp S_j` — restore it in claims.md; D-SLACK uses the closed band, I-D4 the open one (harmless). D1 also re-derived sighted by TQ (TQ-CORE) and blind by QB (QB-CORE) |
+
+*§2, the printed theorems (verdicts on the proofs as printed).*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| V-1.1, V-1.2, V-1.3, V-2.1, V-2.2, V-P2.2, V-4.1, V-6.1 (`[Voronov2023]`) | TRUE after local repairs (V's R1–R10: Lemma 2.2's limit step wrong as printed — the fills move colours; Prop. 3.4's hypothesis unsatisfiable, Lemma 6.1 uses it outside it; none changes a statement but Prop. 3.4's hypothesis) | V; VB blind (the same repairs reached independently: Lemma 2.2's limit after hole fills; Prop. 4.1's sign reversed with a swap excluded; the bicycle needs `α < ε/2`; VB: Prop. 3.4's disc claim false for the band, a circle-only repair) | [hand, two minds, one blind] over an unrefereed preprint | none of truth (A stage 4) |
+| SV-L1 | TRUE; region-only proofs from Cond. 5 (V; VB sketch); with no Cond. 5 or 6 as TS-L1 (below) | V; VB blind | [hand, two minds, one blind] | V: the printed proof uses Obs. 1 |
+| SV-C2, SV-C3 | TRUE | V; VB blind | [hand, two minds, one blind] | none |
+| SV-L3 | GAP as printed for `√3 ≤ d < 2` (Fig. 5's triangle bipartite there); repaired for `1 ≤ d < 2` by the transplanted bicycle | V ([hand] at `√3` + [measured, float] pairings) and VB blind (GAP: the three curves unproved) — **one gap** (A stage 4); repair V2 only | GAP as printed, two minds; **repair [hand, one mind, sketch: constants not computed]** — the weakest link of "polygons need seven" (A2 §1b.1) | settled: one gap, one repair |
+| SV-L4 | GAP as printed; repaired for polygons: (a) by Cond. 7 after Prop. 8 (V2) and under Cond. 6 by TS-T; (b) the eleventh point on the `{4,5,6}`-component of `u` (V2), needing simply connected regions — **A12, closed by fills** in the order Prop. 8 → fills → Lemma 4; (c) the same-multicolour pair at distance in `(1, 2)` by continuity + TS-L1 (SB A11-REP; V2), `d = 1` by the transplanted bicycle, **`d = 2` open** | V2 sighted; A12: V (l. 172 (b), "repairable by fills") and SB blind; TS-T: TS and SB blind | (a) [hand, two minds, one blind]; (b) [hand]: A12's gap two minds, one blind; the fill's order V2 + A2's check, H3 two minds, one blind; (c) `d = 2` open (V3 reduced it to orientation constraints) | A12 settled by A2 §1b.1 (the owner's addition, point 1): handled by fills; **the close writes the fill step into the chain** (Stage 4 drafts) |
+| SV-2 (polygons) | GAP as printed; **TRUE [hand] except the `d = 2` edge case**, weakest link SV-L3 for `√3 ≤ d < 2` (one mind, sketch); Obs. 1 not needed (region-only Props. 7/8) | chain: the V line sighted; SB blind relative to the printed chain; Prop. 7 region-only in three written versions (TS, V3 sighted; SB blind) | [hand, two minds on the chain, one blind; SV-L3's repair one mind, sketch] | VB's Obs. 1 / Prop. 8 GAP vs V2's TRUE: settled for V2 (V3's run-apex crossing, `ρ₋ ≈ s_b²/(2 sin β)`, A2 §1b.4), and TS's region-only route makes the a.e. form independent of it |
+| SV-1 | GAP at Prop. 19's fills under Cond. 6 (fills can create degree-4 trichromatic vertices) plus SV-2's residuals; SV-L4 (a) closed by TS-T | V2; TS | [hand, one mind for the GAP's location] | tool proposed: Woodall's step-3 merge (V3), except the cone case at six colours (item 57) |
+| TW-81 (`[Townsend1981]`) | the lemma TRUE (constant `π/3`; V3 in general, VB for a one-sided annulus); the theorem: **no proof printed** | V, VB blind, A, V3 on "no proof"; the lemma: V3 (general), VB blind (the one-sided case) | no proof: three readings; lemma [hand, one mind in general, two on the one-sided case] | V: the scan reads "fine detail", not "line detail" (P §1.1 Q7); Woodall's assertion is `⅔π`, Townsend's lemma `π/3` |
+| TW-05 (`[Townsend2005]`) | unheld; **Townsend's 1979 manuscript read instead** (its text may differ): ⅓π lemma TRUE (two steps supplied via lemma (L)), Thm 2 TRUE, Thm 4 GAP in its generality (petal sets), its Corollary repaired [sketch], **Thm 5 (maps need six) GAP at simplification (c)** — Woodall's steps 2, 3, 5 fill it | V3 | [hand, one mind]; the fill [hand, one mind, outline] (V3's own correction, item 58) | the manuscript's Definition 4 colours boundaries from adjacent regions — S–V's Obs. 1 as a hypothesis |
+| CO-04 (`[Coulson2004]`) | 3.2–3.3 TRUE, 3.4–3.5 unverified (figures, V3); printed theorem **six**, tile-based, area bound (SB read in full) | V3; SB | [hand, one mind] on 3.2–3.3; the statement read twice | TS read it as unread (TS "prior-art debt"); link 4 lists it among "maps need six" — a correction (A2 §1b.3; item 76) |
+| WO-73 (`[Woodall1973]`) | Thm 6 (maps need six): step 6 GAP (Townsend's `⅔π` counterexample), repaired by Townsend's ⅓π lemma; steps 1, 4, 6 checked, 2, 3, 5, 7 in outline, 8 not | V3 | [hand, one mind; outline at 2, 3, 5, 7] | V3's stage-3 overstatement corrected at its stage 4 (item 58) |
+| TH-99 (`[Thomassen1999]`) | TRUE in the plane (the count repaired) | V3 in full; TS read it once (the clique step checked, the 2-separator surgery read) before V3 committed | [hand, one mind + a partial independent reading] | OCR "radius 2" (= ½) and "12k + 3" need the page images (V3) |
+| PR-98 (`[Pritikin1998]`) | TRUE: the uncovered set is closed, density ≈ `1.61·10⁻⁴` | V3 | [hand, one mind] | his phrase is "\"nearly\" all", not "almost all" (V3) |
+| PA-20 (`[Parts2020c]`) | constructions recorded, not verified | V3; QB read §§1, 2.1–2.3 | [external] | `BIBLIOGRAPHY.md` still says "not held" (QB) |
+
+*§3, the closed-set step.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| C-CS-1 | TRUE: Thm 1.3 uses closedness once, as compactness giving a band | V; VB blind | [hand, two minds, one blind] | none |
+| C-CS-2 | TRUE | V; VB blind | [hand, two minds, one blind] | none |
+
+*§4, the almost-everywhere forms.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| C-AE-SLACK | TRUE given V-1.3, both forms, on `ℝ²` and `U₃(0)`; no random rigid motion needed (supports `supp S_j` are closed, cover, and realize no distance in the open band) | V; **the plane form also follows from QB's Lemma F** (a full slack colouring is a partial one with nothing uncovered, against `ε²/(6+ε)²`) — QB blind, the corollary the close's reading; TQ §4.2 sighted | [hand, two minds, one blind, given V-1.3] (the corollary: the close's reading, one mind) | forms (a) ⟺ (b): V's polar coordinates ((b) ⟹ (a)) and QB's Lemma B (both ways), two minds, one blind |
+| C-AE-CLOSED | **GAP — equivalent to an open question**: "no a.e.-proper measurable 6-colouring of `U₃(0)` with essentially closed classes"; cleanest form: can six open sets, each avoiding distance 1 at every pair, have dense union in `U₃(0)` and closures with null unit pairs? It implies the a.e. forms of S–V Thms 1–2 and of Question 2 for null-boundary maps | V | [hand, one mind] | the list's closed sets may touch at distance 1 on a null set of pairs (the closed-hexagon 7-colouring, A) |
+| C-AE-POLY | **TRUE [hand] except the `d = 2` edge case**, weakest link SV-L3 at `√3 ≤ d < 2` (one mind, sketch); A12 closed by fills | TS region-only (sighted, one); SB blind relative to the printed chain; the V line | [hand, two minds on the chain, one blind] | TS TRUE vs SB "inherits A12": settled by A2 §1b.1 (fills) |
+| C-AE-FA | GAP at Prop. 19's fills under Cond. 6, plus C-AE-POLY's residuals; SV-L4 (a) closed | TS; V2 | [hand, one mind] | none |
+| C-AE-MAP6 (five colours, a.e.) | reduced (TS) to Townsend's annulus lemma a.e.; that lemma, Townsend's Thms 1–2 and the Corollaries of Thms 3–4 are region-only (V3); **Thm 5's simplification (c) is the open step, filled by Woodall's steps 2, 3, 5 read in outline** — so TRUE modulo those steps; "boundaries of measure 0" is used by no step, only to identify D-AEMAP with `Leb ⊗ σ`-a.e. properness | TS (the reduction, blind to V3); V3 | [hand, one mind per link; Woodall's fill in outline] | none; E-less (no registered expectation) |
+| C-AE-Q2, C-AE-Q2-EV | **GAP at four named steps**, no counterexample: [G1] S–V Lemma 2 without Cond. 5 (local configuration C5 against its Prop. 5); [G2] Cor. 2's annulus at a bowtie, a unit-arc boundary through `u`, spiralling boundaries; [G3] Prop. 17's last step; **[G4] Prop. 12's swap exclusion**, failing at a unit-arc interface facing a bowtie or a 4-chromatic point | TS ([G1]–[G3]); SB ([G4], blind, with checker `tools/fs106_sb_c5_check.py` line (I)) | [hand; one mind per step] | TS §2.5 "hold wherever the curves exist" is FALSE without Conds. 5–6: settled for SB by A2 §1b.2 (the owner's addition, point 3) |
+| C-AE-NICE | TRUE: V3's wording — "Let `G` be a connected graph in `ℝ²` whose faces are open topological discs of diameter `< 1`, each bounded by a cycle of `G`. If each face receives one of `k` colours so that any two distinct faces of one colour are at distance `> 1` (points of `G` carry no colour), then `k ≥ 7`." Thomassen reads no boundary colour | V3; TS independently (its a.e. form is TH-99 itself) | [hand, two readings, neither blind by protocol but independent] | C-AE-NICE′ (no unit pair between faces): GAP with C-AE-Q2 (TS; V3 — follows from C-AE-CLOSED for null-boundary locally finite `G`) |
+| C-AE-CONV | **TRUE at C-AE-POLY's grade** for locally finite tilings by convex polygons, with the fill step written in: merge tiles by colour (no unit pair created), fill the annular merged regions, apply C-AE-POLY; seven, against `[Coulson2004]`'s printed six | TS; SB blind (GAP at A12) | [hand, two minds on the reduction, one blind] | TS TRUE vs SB GAP at A12: settled by A2 §1b.3 (the owner's addition, point 4) — A12 is closed by fills |
+
+*§5, the method transfer.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| C-T-L1a | TRUE (Jordan interfaces suffice) | TS | [hand, one mind] | — |
+| C-T-L1b | TRUE for locally map-like classes; GAP in general at two steps (the first-order stripe structure of strong blow-ups; graph interfaces killed at second order) | TS | [hand, one mind] | — |
+| C-T-TRIa | **FALSE**: the cusped hexagonal 7-colouring | A (A7); TS checked | [hand, two minds] | — |
+| C-T-TRIb | GAP at the hull step | TS | [hand, one mind] | — |
+| C-T-CHR4 | GAP; `|P(x)| ≥ 5` only on the null set `{x : σ(ω(x) ∩ E) > 0}` | TS | [hand, one mind] | — |
+| C-T-ANN | GAP | TS | [hand, one mind] | — |
+| C-T-IND | **MISSTATED.** Carried form (SB): under reading (A) (the lift agrees a.e.) `Ind` is well defined whenever a continuous lift exists, and complementary curves with **no swap** satisfy `|Ind γ₁ − Ind γ₂| ≤ 1` for any continuous lifts. The "iff finitely many changes" is FALSE under both readings; a swap with `|ΔInd| = 2` exists without Conds. 5–6 | the no-swap bound: TS (finitely many changes) and SB blind (any lifts) — two minds; the "iff" FALSE and the swap: SB, one mind + checker | [hand] | TS's "corrected form TRUE" vs SB: settled for SB by A2 §1b.2 (the owner's addition, point 2); TS's "K3 has no index" holds for a three-colour K3 or under reading (B) only |
+| C-T-BIKE | GAP; the bicycle needs three colours at every `d ∈ (1, 2)` (a triangle at `|x − v| = √3`) | TS | [hand, one mind] | A's hunch "3-colourable by arcs" open, not tested (the scan is banned) |
+| C-T-PIG | GAP | TS | [hand, one mind] | — |
+| C-T-KILL | the disjoint half TRUE under C-T-TAN; the same-multicolour half GAP | TS | [hand, one mind] | — |
+| C-T-TAN | TRUE in a precise strong-blow-up form; fails exactly at cone points (tangent interfaces, bowties), and also at cusps and weak-* limits | TS | [hand, one mind] | A's "nowhere else" killed (A2 §2.2) |
+
+*§6, the quantitative route.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| C-Q-REM | core TRUE; (i) TRUE for every `ε > 0` (TQ `η = 1/20`, any `η < 1/(1+4π)`; QB `η = 1/10`); (ii) TRUE in CP form (a jointly measurable modification exists); its uniform form FALSE (zigzag, TQ) | TQ; QB blind | [hand, two minds, one blind]; the uniform form's falsity one mind | QB's stage-2 "(i) false for large `ε`" was QB's slip (no point is kept for `ε > 1/2`), conceded (QB §4.2 T1) |
+| C-Q-COMP | (i) TRUE (upper density suffices); (ii) `µ₆(ε)` attained (stationary, and by a.e. sample) TRUE; "`µ₆(ε) < 1`" TRUE given V-1.3, and "for every `ε`" ⟺ V-1.1 (QB) | TQ; QB blind | [hand, two minds, one blind]; the ⟺ V-1.1 one mind (QB) | none |
+| C-Q-EQ (= TQ-EQ) | **TRUE, no MR, no Voronov**: `χ_m⁰ ≤ 6 ⟺ χ_CP ≤ 6 ⟺ µ₆⁰ = 1 ⟺ lim µ₆(ε) = 1 ⟺` periodic grid-square slack partial 6-colourings with vanishing holes; the same for every `k` (QB) | TQ; QB blind, by a different route at `(c) ⟹ (a)` (TQ: maximal inequality + random threshold; QB: averaging + support selection); one shared analytic input (the circle measure is Rajchman, QB Lemma K — which row 130 already uses) | [hand, two minds, one blind; (a) ⟺ (b) is row 130's] | G21 (QB §3.2): "a compactness restatement: it moves no value"; "the novelty of TQ-EQ over row 130 is modest: the slack side and the periodic/pixelated forms" |
+| C-Q-STAB | **GAP — it is `χ_m⁰ ≥ 7` itself**; the radius-3 wording is sufficient, not equivalent; the exact disc form is "for some radius `R`" | TQ; QB agrees (the fallacy to watch: from "`µ₆(ε) < 1` for each `ε`" to "`lim µ₆(ε) < 1`") | [hand, one mind] | — |
+| C-Q-HOLEa | TRUE; general form HOLE-t (holes within `t < ε/2` of the coloured set fill at a band loss of `2t`) | TQ; QB's Lemma F is a sibling fill lemma, blind | [hand, one mind on HOLE-t] | — |
+| C-Q-LOCAL | TRUE for every `δ > δ₆` (chromaticity 1); **GAP at `δ = δ₆`, likely TRUE** (the missing step: `1_H ∗ 1_{U₃}` non-constant); consequence TRUE in the sharpened pixel-lemma form (QB-P): a trichromatic-point step carries C-Q-STAB's full strength at every `δ` | TQ; QB blind; A2 at the endpoint | [hand, two minds for `δ > δ₆` over Parts [external]] | TQ "MISSTATED at `δ₆`" (average translate) vs QB GAP: settled for QB by A2 §1a.2 — keep "at least", verdict "TRUE for `δ > δ₆`; GAP at `δ = δ₆`"; inventory item 50's C-Q-LOCAL edit withdrawn (item 69) |
+
+*§7, row 40.*
+
+| claim | verdict | minds; blindness | grade | divergence and settlement |
+|---|---|---|---|---|
+| C-ROW40 | **DISCHARGED and corrected**: `tools/celllat.py`'s `G(p)` joins closed cells realizing distance 1, so a proper colouring's classes are six closed sets covering the plane, none realizing 1 — against V-1.3 alone; `[SokolovVoronov2025]` and the band are not needed | V; A agrees | row 40's condition becomes `[Voronov2023]` Thm 1.3 at [hand, two minds, one blind, after repairs; an unrefereed preprint] | none |
+
+**1.2 Lemmas and results outside the claim list.** Each with its minds; the derivation file (stage 2) holds the full entries.
+
+| id | statement (short) | minds; blindness | grade |
+|---|---|---|---|
+| TS-U | the unit-arc lemma: a unit-arc boundary `c \| c′` puts `c` in the wedge facing it, `c′` in the wedge facing away at its centre, neither in the side cones (SB's exact form: `O_c ⊆ ⋂ D(p,1)`, `O_{c′} ∩ ⋃ D̄(p,1) = ∅`) | TS; SB blind | [hand, two minds, one blind] |
+| TS-L1 | S–V Lemma 1 for a.e.-proper maps, no Cond. 5, no Cond. 6 | TS (Baire); SB blind (countability) | [hand, two minds, one blind] |
+| TS-C | a chain of same-colour regions whose closures meet has diameter `≤ 1` | TS; SB blind (L0′, a different route) | [hand, two minds, one blind] |
+| TS-C′ | a connected support piece with `H¹`-null zero-density points has diameter `≤ 1` | TS | [hand, one mind] |
+| TS-T | a point of chromaticity `≥ 3` within 1 of every point (SB: within `1/√2 + ε`; Cond. 5 alone makes it trichromatic, Cond. 6 degree 3) | TS; SB blind, sharper | [hand, two minds, one blind] |
+| the diameter lemma | a connected set with no two points at distance 1 has diameter `≤ 1` (V2); two same-colour regions with meeting closures have union of diameter `≤ 1` (V2) | V2; SB's L0/L0′ blind | [hand, two minds, one blind] |
+| lemma (L) | a two-colour change point of a 2-coloured open set with no monochrome unit has its unit circle outside the set | V3 | [hand, one mind] |
+| C5 | a local configuration satisfying S–V Prop. 5's hypothesis and every pair constraint, where its conclusion fails (unit arc at `x`; bowtie or 4-chromatic `y`); survives Cond. 6, killed by Cond. 5 | TS; SB blind + checker (three plants) | [hand, two minds, one blind] + [measured, float sampling] |
+| IND-X (the swap) | at a unit-arc interface facing a bowtie, complementary translate curves swap and `\|Ind γ₁ − Ind γ₂\| = 2` | SB; A2 re-ran the checker (exit 0, PASS) | [hand, one mind] + [measured] |
+| A-LEM2, A-P7, A10-GAP, A11-REP, A12-GAP, SWEEP, IND-A | S–V Lemma 2 a.e. with Cond. 5; Prop. 7 a.e. (legs `< 1/2`); Prop. 12's printed swap gap (closed by Lemma 1 under Cond. 5); the appendix's same-multicolour distance in `(1,2)`; A12; the sweep at a swap; the index well defined under (A) | SB (A12 also V) | [hand, one mind each; A12 two, one blind] |
+| TQ-SUP | `µ₆⁰ = lim µ₆(ε) = lim µ₆^tile(ε) = lim µ₆^per(ε)`; QB stronger: `µ₆^per(ε) = µ₆(ε)` at each `ε`, `µ₆⁰` attained | TQ; QB blind | [hand, two minds, one blind] |
+| TQ-EPS2 | every band-proper partial 6-colouring leaves lower density `≥ ε²/(6+ε)²` uncovered (QB's constant; TQ's `ε²/78`), **given V-1.3**; unconditionally it implies V-1.1 at each `ε` | TQ; QB blind | [hand, two minds, one blind, conditional on V-1.3] |
+| TQ-HIT | strips of width `2ε` at spacing 2 (density `ε`; TQ's `4ε` at spacing `1/2`) are effective holes meeting every unit circle and bicycle: a hitting-form argument proves at most `1 − µ₆(ε) ≳ ε` | TQ; QB blind (cap `ε`) | [hand, two minds, one blind] |
+| TQ-ERODE / QB-P (the pixel lemma) | erosion removes every multichromatic coloured point at cost `O(κ)`; a trichromatic-point method cannot see partial colourings | TQ; QB blind | [hand, two minds, one blind] |
+| TQ-P, TQ-T, HOLE-t | periodisation with gaps; Voronov's Prop. 2.1 for partial colourings; thin holes fill | TQ | [hand, one mind] |
+| QB-B, QB-K, QB-V11 | D-SLACK's forms equal; the unit-pair form is weak-* continuous (Rajchman); "`µ₆(ε) < 1` ∀ε" ⟺ V-1.1 | QB | [hand, one mind; QB-K standard] |
+| TQ-SYN | TS's open steps are regularity gaps and TQ's is the hole gap; TQ-EQ trades the first for the second | TQ | [derived, one mind] |
+| PD-EQ | `χ_m⁰ ≥ 7` ⟺ a lower bound, uniform as `ε → 0`, on the monochromatic fraction of band pairs of every measurable six-colouring | A2 | [hand, sketch, one mind] — the operator-norm step "I have not written in full" (A2 §2.2); **not claimed** |
+| VB's own | Voronov's Lemma 2.2 without recolouring (nested fills); the bicycle's arc identification by additivity; the circle-only matched-arc recolouring (Prop. 3.4's repair); Townsend's lemma for a one-sided annulus | VB | [hand, one mind each] |
+| V2's own | Prop. 17's last step; Lemma 5's nesting; Prop. 18's rotated arc; Props. 14–15's clauses; tangent directions at a trichromatic vertex under Cond. 5; Prop. 16 MISSTATED (TRUE with the hypothesis "the exterior of `ω` near `y` lies in `A(u)`") | V2 | [hand, one mind each] |
+| V3's own | Woodall's step-4 lemma for arcs `> ⅔π`; Woodall's step 6 repaired by the ⅓π lemma; Prop. 7/8 region-only at a run apex | V3 | [hand, one mind each] |
+| V's own | density points at distance 1 carry a positive measure of unit pairs; SV-L3's printed proof covers exactly `1 < d < √3` | V | [hand, one mind]; the float pairings [measured] |
+
+**1.3 Divergences, and how each was settled.**
+
+| # | where | the sides | settled by | outcome |
+|---|---|---|---|---|
+| D1 | SV-L3 | V: GAP for `√3 ≤ d < 2` (Fig. 5 bipartite); VB: GAP (three curves unproved) | A stage 4 | one gap; V2's repair, one mind, sketch |
+| D2 | Obs. 1 / Prop. 8 | VB: GAP with a local counter-configuration; V: TRUE with an unwritten region-only variant | V3 stage 4 (the configuration cannot occur at a run apex); TS's region-only route | V2 right; the a.e. form never needs Obs. 1 |
+| D3 | SV-L4 (a) | V: TRUE for cubic maps, open under Cond. 6 with bichromatic vertices of degree ≥ 4 (VB passed it) | TS-T (TS; SB blind) | closed |
+| D4 | TQ-EPS2's constant | TQ `ε²/78` (and `ε²/144` in its §3.4); QB `ε²/(6+ε)²` | A2 §1a.1 | QB's constant; TQ's §3.4 figure to go |
+| D5 | TQ-HIT's cap | TQ `4ε`; QB `ε` | A2 §1a.1 | `ε`; the no-go unchanged |
+| D6 | C-Q-LOCAL at `δ₆` | TQ MISSTATED; QB GAP likely TRUE | A2 §1a.2 | GAP, likely TRUE |
+| D7 | A12, C-AE-POLY, C-AE-CONV | SB: GAP at A12; TS: TRUE (not seeing A12); V (l. 172 (b)) had named it "repairable by fills" | A2 §1b.1, §1b.3 | **handled by fills**, in the order Prop. 8 → fills → Lemma 4. The close's check of the one step A2 relies on: the filled region `R` is connected, open, one-coloured and a.e.-proper, so by the diameter lemma `diam R ≤ 1`, hence its hull (the region with its holes) has diameter `≤ 1`, and H3 applies [the close's reading, one mind] |
+| D8 | C-T-IND | TS: "iff finitely many changes", corrected form TRUE; SB: the "iff" FALSE, the bound TRUE only given no swap, a swap with `\|ΔInd\| = 2` | A2 §1b.2 | SB's form carried; TS's withdrawn |
+| D9 | TS §2.5's Prop. 12 row | TS: "hold wherever the curves exist"; SB: FALSE without Conds. 5–6 | A2 §1b.2 | FALSE; C-AE-Q2 gains [G4] |
+| D10 | TQ §4.4's scoring of A's "robust Voronov" hunch | TQ scored it on uncovered area; A's hunch counted monochromatic band pairs | A2 §2.2 | a denominator mismatch; the pair form is not capped by TQ-HIT and is decisive (PD-EQ, one mind, sketch) |
+| D11 | C-Q-REM (i) for large `ε` | QB stage 2: false; TQ: vacuous (nothing kept) | QB §4.2 T1 (conceded) | TQ right |
+| D12 | Coulson | TS: unread, C-AE-CONV "stronger than Coulson's six"; SB: read — six, tile-based, area bound | A2 §1b.3 | link 4's "maps need six" list is wrong to include Coulson |
+
+**No divergence remains open.** Every open item is a named GAP (the list in Stage 3's verdict), not a disagreement between minds.
+
+### Stage 1 — SAVED
