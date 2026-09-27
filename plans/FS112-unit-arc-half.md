@@ -391,3 +391,74 @@ confirmed; added: G15, G17, G20, G22, G24, G30, G46, G49, G60, G64, G67, G72.
 13. **Form (G67).** Every claim, killing test and brief instruction carries its trigger and its falsifier or what it forbids.
 
 ## Stage 2b — SAVED
+
+## Stage 3 — SAVED: §PA (the prior-art gate) and §IQ (the invariant question)
+
+### §PA — searched 2026-09-27 by the planner (zbMATH Open API for discovery; OpenAlex citing lists; Semantic Scholar for one abstract, then rate-limited; full text of the 55 held Geombinatorics issues and the held Polymath16 threads by `pdftotext`/`grep`; raw outputs in `data/fs112/fs112-p/*.json`)
+
+**The recognition sentence (G46), used as the query.** FS-112's object is a planar map colouring in Woodall's, Townsend's and Thomassen's sense, with
+the one feature Thomassen's theorem excludes twice: a tile of diameter exactly 1 whose own diameter is realised along a boundary arc of radius 1
+(`[Thomassen1999]`'s faces have "diameter less than 1"), and two same-colour tiles at distance exactly 1 along such an arc (his colour classes are at
+"distance … greater than 1"). Polymath16's name for the second is "the unit-radius tactic" (`[Polymath2021]` p. 194), Parts's "wavy sides"
+(`[Parts2021]` p. 181), and in the 2018 threads "arcs of unit radius" and "Reuleaux arcs"; the first is the shape of `[AxenovichEtAl2014]`'s strip
+tiles and of what Philip Gibbs called a "constraint" (below). In the neighbouring discipline these are **sets of diameter exactly 1 and pairs at
+distance exactly 1**, whose boundaries are unit arcs — the ball-polygon (spindle-convexity) vocabulary FS-110 recorded as PA-1.
+
+| # | question (WORKFLOW 3.2) | what was done | finding |
+|---|---|---|---|
+| 1 | the discipline's words | zbMATH: `ab:"radius 1" & ab:colo* & ab:plane` (4 hits, none on topic); `ab:"unit circle" & (ab:map \| ab:tiling \| ab:tiles) & ab:colo*` (15; one on topic, `[SokolovVoronov2025]`); `ab:Siamese & ab:colo*` (3, none); `ab:"chromatic number of the plane" & (ab:tiling \| … \| ab:regions)` (7); `ab:strip & ab:"unit distance" & ab:colo*` (1); `ti:"chromatic number of the plane" & py:2019-2026` (11) | Nothing in the reviews database states, asks or answers a map-colouring question with unit arcs beyond `[SokolovVoronov2025]` Question 2 (held; FS-110's gate). **Kruskal 2008** (FS-110's debt: "title only"): abstract now read (Semantic Scholar record): two- and three-colourings of bounded regions ("a square is 2-colorable if and only the length of a side is =<2/5") — **silent for six-maps; the debt is retired**. `[Soifer2025]` (held, Zbl 1569.05108): its review names the X₆ confirmation (FS-109's), nothing on maps. `[Oostema2020]` (Coloring unit-distance strips using SAT; abstract read, OpenAlex): strips tiled by squares and hexagons, a search — no unit arcs, no bearing beyond the strip literature |
+| 2 | two disciplines | (i) planar map colourings × (ii) sets of diameter or distance exactly 1 (ball polygons, Reuleaux sets; FS-110's `reuleaux.json`, `spindle*.json` queries reused, not rerun) | **PA-2 (a recognition, not prior art): the three prints' unit arcs are the three ways a boundary arc can be forced onto a unit circle in a tight map** — a tile's own diameter (self kind: the strip; Gibbs's "constraint"), two same-colour tiles at distance exactly 1 (pair kind: Polymath's tactic, Parts's wavy sides), and a Siamese pair's union of diameter exactly 1 (Polymath's criterion (i)). Thomassen's hypotheses exclude all three (faces of diameter `< 1`, classes at distance `> 1`). No work joins (ii)'s theorems to colourings (FS-110's finding stands) |
+| 3 | the question, not only the method | the held Polymath16 threads (`~/source/library/notes/polymath16-threads-1-18-text.txt`, 300,535 words) grepped for "radius 1", "unit radius", "wavy", "arc(s) of radius", "curved", "circular arc", "Reuleaux" (83 hits; the tiling hits concentrated in threads 6–9, June–July 2018, and 16, the paper's writing) | **The question was worked, informally, in 2018.** Threads 6–9 searched for six-tilings with unit-arc boundaries; verbatim, Bernhard Hockertz: "One thing all of these efficient tilings have in common is that they have a boundary defined by straight lines or unit distance arcs. So far all possible tesselations that use some other kind of boundary can be reduced to one using only straight lines and unit radius arcs." and "The curvature of the boundary is limited to arcs with radius of unit distance or greater, because every arc with a radius that's smaller than 1 can be filled up to radius 1 without increasing the exclusion zone." Aubrey de Grey (ag24ag24), at a vertex of valency ≥ 4: "If B is a pentagon there must be another cell C touching B with the same colour as A. This necessitates an arc of radius one between B and C joining vertices W to U." and, at a six-colour vertex: "those six tiles must jointly cover a disk of radius 1 centred on V, and the boundaries between them must meet the edge of that disk at the vertices of a regular hexagon. Thus, each tile must lie entirely within the Reuleaux triangle defined by its vertices." Philip Gibbs: "The definition of a constraint I am using is that it is a relationship between an edge and a vertex of the same tile that requires the edge to be an arc of unit radius centred on the vertex." These are blog statements, everywhere-proper, unproved; `[Polymath2021]` p. 199 is their published residue ("It may be possible to eliminate criterion (ii) via an exhaustive computer search of all possibilities, but this has, as yet, remained beyond our reach"). **Read by grep only — a debt (G50)** |
+| 4 | outside arXiv | all 55 held Geombinatorics issues in full text (27 have no text layer: XXV(2)–XXIX(1) image scans and the XXX(2)–XXX(3) printouts — the search's blind spot, named) | 5 issues carry the phrases: `[Parts2020c]` (XXX(1)) and XXX(4) (`[Parts2021]`, `[Polymath2021]`), all read at stage 1; `[Parts2022]` (XXXI(4), p. 190): the band triangle argument ("there is a point A whose ε-neighbourhood contains three colors 1, 2, 3. On a circle of unit radius centered at point A, there is a point B whose ε-neighborhood contains two other colors 4, 5") — the band form of C-T-TAN's pigeonhole, which at `ε = 0` fails exactly where `B` sits on a unit arc; XXXII(2) and XXXV(3): off topic (a "wavy edges" hope for 7-chromatic bounds; unit-radius spheres). The image-scan issues are unsearched |
+| 5 | the poser's citation graph | OpenAlex: `[Thomassen1999]` (7 + 1), `[AxenovichEtAl2014]` (9), `[Coulson2004]` (5; FS-110's debt, now run), Kruskal 2008 (7); `[Polymath2021]` is in no citation index found (Geombinatorics is not indexed by OpenAlex; the Semantic Scholar search was rate-limited, 429) | Thomassen's: nothing new since FS-110 (Ágoston 2025 now read at abstract level: "We prove that with these restrictions, the chromatic number of any sphere with a large enough radius is at least 8" — nice colourings, silent on unit arcs). Axenovich's: strips and layers (Kanel-Belov et al., infinitesimal layers; Oostema 2020; Alm–Manske 2013); none a six-map. Coulson's: Manta 2021 (held), Alm–Manske, a 2009 Auburn thesis (A. Boronska, *The Chromatic Number of the Euclidean Plane*, title only), arXiv:1507.00025 (junk, `BIBLIOGRAPHY.md` l. 674), a 2014 planar-graph paper (off topic) |
+| 6 | open every neighbouring citing work | abstracts read for Kruskal 2008, Ágoston 2025, Oostema 2020; the Boronska thesis not opened | none states or answers the unit-arc question |
+| 7 | two databases | zbMATH and OpenAlex; Semantic Scholar once (Kruskal's abstract), then 429 | OpenAlex gave the citing lists zbMATH cannot; zbMATH gave Soifer 2025's review; neither indexes `[Polymath2021]`'s citers — a limit of both, not a zero |
+| 8 | full author listings in the question's vocabulary | the posers' listings were run at FS-106–FS-110 (Woodall, Townsend, Coulson, Voronov, Parts); the question's own words run here in every held Geombinatorics issue and every Polymath16 thread | nothing further |
+
+**What the gate changes in the plan.** (a) The claim list defines the three unit-arc kinds (PA-2) and quotes Polymath's p. 194 and p. 199 and
+Thomassen's hypothesis verbatim. (b) **A reading phase before the sides start**: Polymath16 threads 6–9 read in full for their six-tiling
+arguments (Hockertz's reduction to straight lines and unit arcs is an unproved claim about exactly this milestone's object; de Grey's degree-4 and
+six-colour-vertex arguments are everywhere-proper sketches of FS-110's NB-4 kind), with verbatim extracts filed for both sides — G50's rule,
+applied at the opening this time (FS-110 read Woodall §3 in round 3). (c) Both side briefs carry Thomassen's hypothesis verbatim, so that a side
+proving "no nice-type" statement knows it has proved Thomassen again. (d) Novelty wording: the question is Polymath16's (2018 threads, 2021 paper)
+and S–V's (Question 2); an answer is "not found in print".
+
+**Papers still needed (for the report):** none blocks the opening. Reading debts: Polymath16 threads 6–9 in full (held); `[Coulson2004]`'s figures
+(held, "figures not viewed"); the Boronska thesis (Auburn 2009, title only, `etd.auburn.edu/bitstream/10415/1844/1/Anna_Boronska.pdf`); the 27
+image-scan Geombinatorics issues (held, unsearchable without OCR). **Proposed `BIBLIOGRAPHY.md` rows:** Kruskal 2008 → "abstract read (FS112-P):
+two- and three-colourings of bounded regions; silent on six-maps"; Ágoston 2025 → title and authors verified (OpenAlex: *A Lower Bound on the Number of
+Colours Needed to Nicely Colour a Sphere*, DCG, doi 10.1007/s00454-025-00736-3), abstract read; `[Oostema2020]` (P. Oostema, R. Martins, M. J. H. Heule,
+*Coloring Unit-Distance Strips using SAT*, EPiC 73 (2020) 373–389, doi 10.29007/btmj; abstract read); Boronska 2009 (title only); Polymath16 threads
+6–9 → "grepped for unit arcs (FS112-P); unread in full".
+
+### §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** Is there a tight six-map with unit arcs — a locally finite map bounded by segments and circular arcs, arcs of radius 1
+   allowed, six-coloured with no two interior points of one colour at distance exactly 1 (Q-full)?
+2. **The structural form.** *For every tight six-map of that class and every boundary arc of radius 1 in it, what must hold at the arc's centre?* —
+   which colours the centre `P` carries (`P_cl(P)`), where the arc's two side colours sit in the wedges at `P`, and **whether each unit arc forces
+   another** (at its end vertices, or on the unit circles of `P`'s partners), so that unit arcs come in chains or cycles — the way a Woodall cone under
+   Condition 5 forced a stuck vertex at unit spacing along its normal line (N4-PROP). Posed for every tight map at once, by derivation; the class
+   is the widest where the question is defined (locally finite, curved, almost everywhere), with no complexity bound (row 134's chain used none).
+3. **The invariant it forces: none named in print or in this project.** Three candidates, each a reading with its killing test, handed to the proof
+   side as starting points, not results:
+   - **(a) The centre's wedge profile.** TS-U, read conditionally (A4-TSU): if the centre carries a side colour `c`, the `c`-tiles face the arc and
+     the side cones are empty of both side colours. *Killing test:* a tight fragment whose unit-arc centre carries a side colour in a side cone.
+   - **(b) The arc budget of a four-colour vertex.** A4-SIX-ARCS: a four-colour vertex with no covering pair carries boundary unit arcs *centred at
+     itself* of total length `≥ 60°`, or at least six. So four-colour vertices are unit-arc centres, and the milestone's two live objects (NB-4's
+     exception and the unit arcs) may be one. *Killing test:* a tight four-colour vertex with fewer than six unit arcs centred at it and less than
+     `60°` of them (it would refute A4-SIX-ARCS, one mind).
+   - **(c) Propagation with a monotone quantity.** As in N4-FIN, each unit arc's end vertex forces a further unit arc at a controlled position, and
+     a bi-infinite chain contradicts a monotone quantity (curvature, turning angle, or the centre's facing wedge). *Killing test:* a closed cycle of
+     unit arcs realised as a tight local fragment by formula (a cycle needs no infinite chain).
+   G79's flip, stated: row 134 read the invariant every four-colour vertex carries under Condition 5 (each colour squeezed into 60° of the ring);
+   the squeeze fails exactly where the ring meets a unit arc, so the question is what the squeeze becomes on the arcs — (b) is its first form.
+4. **Its route.** Derivation only. The construction side's fragments by formula check derived claims (a cycle of unit arcs, a four-colour centre);
+   they never answer the structural form.
+5. **The open instances it would decide.** Y2-S1i's GAP (both side colours cusps at `u`); C-T2 (ii) (can a whole tight map use the double unit-arc
+   seam wherever it needs one); NB-4's exception (A4-SIX-ARCS); YB3-SAME (`W` across a same-type edge — whether a unit arc is what breaks it);
+   FS-110 item 68 (Y3-SIX at bowties, the eight-arc aligned ring, a generic `|W| = 3` ring at one vertex); Y-BIKE-3C's corner GAP (A4-BAND's
+   cross-swap); `[Polymath2021]` p. 199's hope (criterion (ii) eliminated); and, beside the milestone, whether the strip's self-contact pattern can
+   close up in the plane.
+
+## Stage 3 — SAVED
