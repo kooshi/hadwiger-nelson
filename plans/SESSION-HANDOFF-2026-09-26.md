@@ -6,7 +6,7 @@ place to start. Current state only; the history is in the documents it points to
 ## 1. Where things stand
 
 - **OVERNIGHT PLAN (Kooshi approved the milestone; the owner runs it alone; one full report at the end):**
-  0. **Status 2026-09-27 06:00 UTC:** steps 1–2 under way — V2, TS, TQ reported (inventory items 33–54; nothing moves the answer; TQ-EQ: `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1`, periodic grid colourings suffice, one mind). Running 3/3: FS106-V3 (readings, V/V2 ↔ VB, SV-2 `d = 2`), FS106-SB (blind on TS; `data/fs106/briefs/SB106-instance.md`), FS106-QB (blind on TQ, TQ-EQ first; `QB106-instance.md`). Next: the fresh advisor when a slot frees (brief to write from `A106-advisor.md`), then the close.
+  0. **Status 2026-09-27 06:28 UTC:** waves 1–3 done (inventory items 33–74). TQ-EQ two minds (QB blind). SB: TS's lemmas two minds; divergences A12 (S–V eleventh point needs simply connected regions: SV-2 / C-AE-POLY / C-AE-CONV may carry a GAP) and C-T-IND. Running 2/3: FS106-A2 (stage 1b on A12 etc.; record `plans/POROS-2026-09-27-fs106-close-and-fs107.md`), FS106-C (the close, brief `data/fs106/briefs/C106-close-math.md`). Next: FS106-X, the front page (write its brief from `data/fs105/briefs/X105-front-page.md`; CLAUDE.md is 304,245 — the 300k limit returns at this close), then gates, then FS-107's opening (planner + fresh advisor; A2 §3 holds the design).
   1. **FS106-V2 is running** (finishes the sighted check, aims at repairing Sokolov–Voronov). When it reports: log it; read its verdicts
      on SV-L3, SV-L4, Obs. 1, Prop. 8, SV-1, SV-2 and its repairs; **re-brief wave 2** (`data/fs106/briefs/TS106-structural.md`,
      `TQ106-quantitative.md`) so each takes V2's repairs and the advisor's comparison (`plans/POROS-2026-09-26-fs106-regular-half.md`
