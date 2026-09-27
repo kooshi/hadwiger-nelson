@@ -661,3 +661,186 @@ A2's stages and A3's continuation; `data/fs110/claims.md`; `plans/FS110-N-proof.
 `tools/fs110_y_fragments.py` l. 138–175 (the T2 formula). Poros: the core in full. The companions are not loaded (budget); I will load them at an impasse.
 
 ## Stage A4-0 — SAVED
+
+## Stage A4-1 — SAVED: round 2's comparison (brief items 1–2)
+
+*Read at the hand-back commits: N2 stages 4–6 (`661a8804`, `d52ca39b`, `a41f14a7`); Y2 stages 4–6 (`8dbda9a1`, `120be328`, stage 6). Nothing went
+to either side.*
+
+### A4-1.1 Convergences (independent unless marked)
+
+| finding | N side | Y side | minds now |
+|---|---|---|---|
+| A2-V56 and the owner's frame fact: TRUE when `ω(v)` carries no arc of `Γ`, a GAP otherwise | N2-V4 | Y2 §4.4 (adds: the off-arc `\|P\| ≥ 5` half is TS §5, l. 271) | three (A3, N2, Y2; the last two prompted by card 2); A4-TSU corrects the justification, not the verdict |
+| a seam point with no unit arc is a vertex of `≥ 4` colours, pattern `v, u, v, u`, the two `u`-colours distinct | N-X (a), (b) (round 1) | Y2-W4 (a)–(c) (blind to N-X) | **two, independent**; N-X was one mind before |
+| near `u`, `ω(w₀)` runs in the one colour `P(u) ∖ P_cl(w₀)`; the partner of a strong escape is `ω(w₀)`-monochromatic or carries arcs of `ω(w₀)` | N-X (c), (d) | Y2-W4 (d), Y2-W4e | two, independent |
+| **both branches of N-X (c) are realised exactly**: the arc branch (`u` on an arc of `ω(w₀)`) and the bowtie branch | N-X (c) states the dichotomy | T2 (arcs), BB (bowties), MX (one of each) [tools, exact] | the dichotomy one mind with three exact members |
+| (S1) puts nothing on the partner's vertex figure | N2-S1: "`v`'s ring changes freely at `w₀`" | Y2-S1i (3): "the partner `v` is free" | two, different routes |
+| (S1)'s kill is not at `w₀` | N2: "the failure is global" | Y2: "a kill of (S1) has to act at `u` or at the arc's ends" | two (A3 recorded it) |
+| covering pair means the union | N2's stages 4–6 | Y2 after card 3 | two; claims.md §0 owes the change |
+
+### A4-1.2 Divergences
+
+- **Of truth, one, found by comparing the records:** A3-HOLE and N2-V4 both justify "an arc endpoint gives no covering pair" by "side colours in
+  `P_cl(v)`, by TS-U". Y2's exact member T2 carries a unit arc of `ω(w)` with side colour `2 ∉ P_cl(w)` (A4-TSU). The statement is FALSE as a reading of
+  TS-U. The GAP verdicts stand on A4-SIX-ARCS's argument. **Neither side's programme is touched**: the divergence sits between two mind's wording and the
+  third's member. This is the first divergence of truth in FS-110 not prompted by the claim list's words.
+- **Of scope:**
+  - *"The partner is free"* (Y2-S1i (3); Y2's registration: "every (S1) with w₀ an edge point has u a strong escape and v free"). This is true of
+    `v`'s vertex figure. It is short of N2-S1: the seam forces `u`'s bowtie colour `γ` on `ω(v)` at `ω(v) ∩ ω(w₀)` (A4-S1-ONE). "The whole seam sits
+    at `u`" does not hold: the seam's constraints reach the partner's circle.
+  - *N2-S1's exceptional distances `{1, √3}`* are the construction side's generator image (`ℚ(√3)` data, the `d = 1` rhombus). The (S1) member sits at
+    `d = 1`, where one of N2-S1's two points is `u` itself. There, `ω(v)`'s sides at `u` are `b, c ≠ γ` (`u_b` on `(60°, 120°)`, `u_c` on `(240°, 300°)`,
+    `ω(v)`'s tangent at `u` vertical). **The member realises N2-S1's exception clause**, a positive control for it. Its tiles do not reach the other
+    point `σ_v^{−1}w₀ = (3/2, √3/2)`, where N2-S1 still forces `γ` (A4-S1-ONE). G21: the generator cannot test N2-S1 at a generic `d`.
+  - *Covering pair:* closed by card 3 (A3-4).
+- **Of route:** N2 reads windings and transports them (rings, nerves, parity: N2-RING, N2-TRANS, N2-FLIP), with two exact parity/ring checkers. Y2 builds
+  four exact fragments by formula, with plants that fire for their own reasons. N2's objects are rings at trivalent vertices; Y2's are seam points and
+  their four-colour circles. **The two meet at one object, the unit circle of a seam point** (A4-1.6).
+
+### A4-1.3 The registrations, scored
+
+| registration | scored |
+|---|---|
+| N2 (round 2): "C-T2 (ii). I call it FALSE, or a GAP at best." | **untested**: Y2 left C-T2 (ii) to a successor. Its mechanism ("new covering pairs at distance 1 along the unit circles of its centres") is **supported** by A4-SIX-ARCS at T2's `w` (below). This is the same step N bet on in round 1: two rounds unscored |
+| Y2 (round 2): "C-BOW-K (ii) in its (S1) branch … any kill made at the seam point w₀ or at the pair (u, v) is FALSE." | **untested, consistent**: N2 made no kill at `w₀` or `(u, v)`. N2-S1 is a forcing at `ω(v) ∩ ω(w₀)`, not a kill; N2's named step is there, away from `w₀` |
+| N2-P1 (winding case not killed locally, 0.8) | supported by N2's own locally consistent rings (N2-HEX, the nine-arc ring). A4-BAND is a two-vertex argument, consistent with P1. Open |
+| N2-P2 (C-ACT1 TRUE without unit arcs, 0.6) | open |
+| N2-P3 ((S1) fragment meets N2-S1, 0.7) | **untested**: the member sits at `d = 1`, the excluded distance, and does not reach the forced point (A4-1.2) |
+
+For the third time in FS-110 (round 1, round 2, A3-2.2), **each side bet against the other's escape and neither attacked the step the other bet on.**
+The registrations have never met.
+
+### A4-1.4 Retractions
+
+Round 2: N2 1 (N2-V4's scope, card 2), Y2 1 (the disjoint-sense GAP, card 3), A3 0 (one expectation row killed), A4 0. FS-110 in total: five, all free, all
+prompted by an advisor card about the claim list's words or a frame fact. **Zero between the sides.** G51: the disagreement proper has not started, and it
+cannot start while the two sides work different objects.
+
+### A4-1.5 The (S1) convergence, stated at its scope
+
+Both sides agree on three things: (S1) is realisable locally (Y2's member, exact); nothing at `w₀` or at `v`'s figure kills it; and its cost lies
+elsewhere. **They name different places:**
+- Y2: the arc's ends, which are vertices on `ω(u)` meeting `P(v)` (Y2-S1i (4)).
+- N2: the two `γ` points `ω(v) ∩ ω(w₀)`, and whether they make a covering pair (N2 §5.3). Neither side has the other's place.
+
+**Both are points at distance 1 from a seam point or a centre, so the next link of (S1) is on a unit circle too.**
+
+### A4-1.6 The held item: N2's winding ring and Y-BIKE-3C
+
+**What the link is (A4-BAND).** N2-RING and Y-BIKE-3C are one argument: a `ℤ/3` colour difference along a closed curve of unit pairs, lifted to `ℤ`, stays
+in one band, and it leaves the band only at a swap.
+- N2 runs it inside one circle, `θ ↦ (θ, θ + 60°)`.
+- Y ran it across the bicycle's two circles, where the swap becomes a cross-swap at unit distance.
+
+The pure rotating ring (N2-HEX) is Y-BIKE-3C's family. The monotone rings are the family A4-BAND reaches.
+
+**What it does to N2's open step** (C-ACT1, "every trivalent ring winds"):
+- Act One's counterexample must have no same-type pair in `(1, 2)` (claims §1). A4-BAND says why that costs nothing locally: in a winding map with
+  monotone rings, a same-type pair in `(1, 2)` forces a cross-swap.
+- **Given a transposed N2-SWAP** (not derived), the cross-swap gives a covering pair or a unit arc. So the winding residual is closed under that clause.
+- The link does **not** close Act One. It adds two facts a count can use at bounded `K`:
+  - same-type vertices in a winding map lie pairwise at distance `≤ 1` or `≥ 2`;
+  - vertices closer than 1 carry equal windings.
+
+  These are what N2's third candidate for the global step needs ("a count of ring changes against edge length per unit area").
+
+**What it does to Y's open step** (C-T-BIKE beyond 60° cells): Y-BIKE-3C's "What it leaves" shrinks to rings that have a cross-swap, or that are
+non-monotone. A bicycle colouring is decided as a map question, not as a circle question: every escape is a swap, and swaps are exactly where N2-SWAP
+makes the map pay.
+
+**For both sides.** The Q-rule NO has two halves: seams (complementary pairs) and bicycles (same-type pairs). They now run on one instrument, the band
+along a curve of unit pairs. Its only escape is the swap, and the swap's only escapes are unit arcs and four-colour points.
+
+### A4-1.7 Hunches scored, and mine
+
+- A3's `n2-act-one-ends-a-gap`: **confirmed** by N2 §6.3 (a GAP at the winding ring, a named topological step on `ω(u)`).
+- A3's `a3-hole-is-a-real-gap`: open, **sharpened**. By A4-SIX-ARCS the loophole needs `≥ 6` unit arcs at `v` (or `≥ 60°` of them). A3's sketch
+  "six short unit arcs near directions `60°k`" is forced, not optional. **A built instance to test it is T2's `w`:** `ω(w)` runs in `2` beside `u`'s arc
+  and in `6` at `v`, `60°` apart, and it carries only two arcs of `Γ` (through `u`, and the one-sided arc at `v`). A completion needs at least four more
+  unit arcs centred at `w`.
+- A3's `y2-first-reject-at-the-arc-ends`: not triggered (no REJECT). Open.
+- A2's `the-yes-breaks-at-the-cascade`: its first half is met (S1, T2, BB, MX exact). Its second half is open and now located:
+  - at T2's `w` (A4-SIX-ARCS);
+  - at BB's `w` (no arcs, so N2-V4 gives a covering pair `(w, y)` at each of `≥ 6` switch points);
+  - Y2-LAT's failure at the lattice's four-colour points is one instance of the second.
+- A2's `the-registrations-name-global-steps`: confirmed again (N2 names C-T2 (ii); Y2 names C-BOW-K (ii)'s (S1) branch).
+- FS110-A's `bowtie-and-bicycle-outlive-tangent-and-cusp`: open, **as predicted**. Live: bowtie (ii), T2 (ii), (S1), bicycle. Closed: T1, cusp.
+
+hunch: every-escape-is-paid-on-a-unit-circle
+  claim: under Condition 5 the only surviving local escape of a close covering pair is a strong escape at a four-colour seam point, and each such seam point has at least six switch points on its unit circle, each a covering pair at distance 1 whose partner has at least three colours
+  basis: derived
+  falsifier: a Condition-5 local fragment saving a close covering pair at a seam point with at most three colours, or a four-colour seam point whose circle has a bichromatic switch point saved by a seam
+  registered: 2026-09-27
+  status: open — its inputs: N-SEAM, N-X and Y2-W4 (no arc means four colours); N2-V4 and A4-SIX-ARCS (six switches); Y2-W4e with N-X (a `(4, 2)` pair needs two unit arcs, excluded by Condition 5)
+
+hunch: transposed-swap-holds
+  claim: N2-SWAP holds with `σx` replaced by any `y` with `|x − y| = 1`, `y` a change point of a ring on another circle, so a cross-swap gives a covering pair at distance at most 1 or an arc of a unit circle at `x` or `y`
+  basis: derived
+  falsifier: a cross-swap in a map with no covering pair at `x` or `y` and no unit arc through `x` or `y`
+  registered: 2026-09-27
+  status: open — N2-SWAP's proof uses only a transversal crossing of `ω(x)` by the second circle at a point with swapped colours
+
+### A4-1.8 Where Q-rule stands, seam by seam (after two rounds)
+
+| seam or claim | state | minds, grade |
+|---|---|---|
+| local calculus (A-EXACT, A-CIRC, A-SIX; D-TYPE) | TRUE | three; two; hand |
+| C-TAN-POS | TRUE for the named vertex kinds (Y), and at a non-vertex `w₀` (N); "strong escape" MISSTATED, corrected | two, complementary routes |
+| C-SEAMLIST | MISSTATED; replaced by the dichotomy at `w₀`: (S1) a unit arc of `ω(x)` with an escape at `x`, or (S2) a vertex | one (N) |
+| SEAM-T1 (C-TAN-K) | closed at the pair level | two routes (Y's T1 rows; N's dichotomy); exact plant `t2_flat` |
+| SEAM-C (C-CUSP-K) | TRUE | two, different routes |
+| (S1) | realised locally (exact, `d = 1`); forces `γ` at `ω(v) ∩ ω(w₀)`; the arc's ends meet `P(v)`; the kill must act at `u`, the ends or the `γ` points | member exact; the rest one mind each |
+| SEAM-T2, C-T2 | (i) TRUE at fragment level (exact); (ii) GAP. Its seam points are four-colour with arcs of `Γ`, and completion needs `≥ 6` unit arcs at each (A4-SIX-ARCS) | exact; one mind |
+| SEAM-B, C-BOW-K | (i) TRUE (BB, S1; exact); (ii) GAP. BB's seam points are four-colour with no arcs, so each has `≥ 6` covering pairs at distance 1 on its circle | exact; one mind |
+| mixed seams | one pair can mix T2 and an escape (MX, exact) | exact |
+| V5 | `(2, 4)` bichromatic partner is the crossing of two unit arcs (Y2-W4e); a four-colour vertex gives a covering pair unless `≥ 6` unit arcs are on its circle | one mind each |
+| SEAM-S, C-T-BIKE | GAP beyond 60° cells. A4-BAND reduces it to cross-swaps and non-monotone rings | one mind, sketch |
+| C-ACT1 | TRUE (Condition 5) at four-colour vertices, swap rings and odd tiles; GAP at "every ring winds `\|W\| ≥ 2`"; GAP with unit arcs | one mind (N2); nerve step a sketch |
+| Q-full | undecided | — |
+
+**In one sentence:** every local escape is realised exactly, and every open step on both sides is a condition on a unit circle through or about a seam
+point. That circle is a four-colour circle (T2, BB, Act One's four-colour case), (S1)'s arc ends and `γ` points, or a winding ring. Under Condition 5 only
+the strong escape at a four-colour seam point survives. Each such point must then carry `≥ 6` covering pairs at distance 1, and those pairs must in turn
+be saved.
+
+### A4-1.9 The round's verdict, and what next (a decision in four parts, for the owner)
+
+- **The choice: run a third round, with both sides on one object, the unit circle of a four-colour seam point.**
+  - *Proof side:* Q-rule_cl **under Condition 5**, where the strong escape is the only escape (hunch `every-escape-is-paid-on-a-unit-circle`). Show that
+    the cascade of `≥ 6` covering pairs per four-colour seam point cannot close at bounded `K`. Then Act One's winding case, with A4-BAND and the
+    transposed swap.
+  - *Construction side:* close one four-colour circle by formula and check it exactly:
+    - T2's `ω(w)` with its `≥ 6` unit arcs (the A3-HOLE loophole, the only way with arcs);
+    - or BB's `ω(w)` with its switch points seamed.
+
+    Then (S1)'s arc ends and `γ` points.
+  - Each side's pre-round question should name the **other side's step on this one object**, so that the registrations can finally meet.
+- **The alternatives weighed:**
+  - **(a) Close FS-110 now.** File the calculus, the four exact members, the dichotomy and Act One's narrowed GAP. Mint stubs for the cascade (C-T2 (ii) and
+    C-BOW-K (ii)), the winding case and the bicycle's band.
+  - **(b) A3's lean:** (S1)'s arc ends and the winding ring.
+- **Why this one:**
+  - *Against (a):* two rounds have converged every open step onto one object, both sides hold fresh tools on it (N2's windings, Y2's exact fragments with
+    four-colour seam points), and closing now leaves that object un-attacked.
+  - *Against (b):* (S1)'s arc ends are one of the object's two branches (the unit-arc branch). The four-colour circle carries T2, BB, MX and Act One's
+    four-colour case, so it is the larger share.
+  - *Condition 5* gives a sub-class with one escape. A decision there is a real result: Question 2 of `[SokolovVoronov2025]` with Condition 5 kept, almost
+    everywhere, at bounded `K`. By the claims list's failure clause it is reported as partial, never as Q-full.
+  - The disagreement has not started because the sides never shared an object (A4-1.4). This is the first round in which they would.
+- **Confidence: medium.** Two facts would change it:
+  - a defect found by NB or YB in the cascade's inputs (N-X/N-SEAM, N2-V4, Y2-W4, Y2-W4e);
+  - a prior-art check showing that S–V or Townsend already settle maps with Condition 5 and without Condition 6. That check is owed before round 3:
+    read `[SokolovVoronov2025]` §9 and the Condition-6 discussion first-hand.
+- **Default:** if the owner says nothing, FS-110 waits for the blind verifiers. I compare them (brief item 3), and this recommendation goes to the close
+  unchanged.
+
+### A4-1.10 Evidence inventory
+
+- Y2's T2 formula (`u_T2_flower`) — read against: a unit arc's side colours in its centre's type (TS-U as A3 and N2 used it) — surprised: yes; outer colour `2 ∉ P_cl(w)` (A4-TSU)
+- N2-S1's exceptional distances — read against: generic exclusions unrelated to the other side — surprised: yes; they are the construction side's generator distances, and the (S1) member sits on one
+- Y-BIKE-3C beside N2-RING — read against: two different arguments sharing a ring family (A3's note) — surprised: yes; one band argument on two curves of unit pairs (A4-BAND)
+- N-X (c) beside T2, BB and MX — read against: independent work — surprised: yes; the three members are exactly N-X (c)'s two branches and their mix
+- the registrations of rounds 1–2 — read against: that they would meet by round 2 — surprised: no (A3 recorded the pattern); they never met
+
+## Stage A4-1 — SAVED
