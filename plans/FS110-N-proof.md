@@ -153,3 +153,111 @@ covering pairs as well. (N-SEAM makes the same point exactly: its (a) uses only 
 **D-TYPE: TRUE (N-TYPE). A-EXACT: TRUE (N-E0). A-CIRC: TRUE, cusp check passed (N-E1). A-SIX: TRUE (N-SIX).**
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: C-CUSP-K, C-SEAMLIST, and the vertex case of the seam point
+
+*All statements on LIM, exact, for one map: no blow-up and no uniform scale enters, so X14's `s(K)` does not bite here and none of this is FS-111's
+(failure clause 5). The scale enters only when a statement is carried to SEQ, which this stage does not do.*
+
+### 2.1 N-HORN: a cusp horn is seen like a ray [hand, one mind]
+
+*Setting:* `u` a vertex, `w₀` a unit point of `u`, `e = w₀ − u`. A cusp horn of colour `c` at `u` leaves `u` in direction `ψ` between two arcs with
+curvatures `κ₁ < κ₂` (measured toward `+e`; `κ₁ ≠ κ₂` in `𝓜_K`, N-TYPE). For `z` near `w₀` write `t = |z − u| − 1`; near `u`, `ω(z)` is the circle of
+curvature 1 bending toward `z` at distance `|t|` from `u` (R §3.2, Claim 1's ray–circle quadratic, exactly).
+- **(i) transversal horn** (`e_ψ · e ≠ 0`): every `ω(z)` with `sign t = sign(e_ψ · e)`, `|t|` small, crosses the direction `ψ` transversally at radius
+  `ρ ≍ |t|` (Claim 1's formula), where the horn has width `≍ (κ₂ − κ₁)ρ² > 0`; it enters the horn. So in R's blocking condition a horn counts as a
+  zero-length arc `I_c = {ψ}`, and Claim 1 (hence R-CP's Claim 2 and C-T-TAN's cone kill, in the sight form N-E0) holds with closure types.
+- **(ii) tangent horn** (`ψ ⊥ e`): in the frame `x = ` tangential coordinate, the horn is `κ₁x²/2 < y < κ₂x²/2` (`x > 0`, to second order) and
+  `ω(z)` is `y = t + x²/2` (tilt `α` adds `αx`). A `t > 0` circle enters the horn iff `κ₂ > 1` (at `x ≍ √(t/(κ₂ − 1))`, with tilt tolerance
+  `≍ (κ₂ − 1)·(horn length)`); a `t < 0` circle enters it iff `κ₁ < 1`. **Missed from both sides iff `κ₂ ≤ 1 ≤ κ₁`, which `κ₁ < κ₂` forbids.**
+- *Where six is not spent:* nowhere — N-HORN is geometry of one circle and one horn.
+
+### 2.2 C-CUSP-K: "in `𝓜_K`, no close pair of complementary closure types is saved by a cusp." **TRUE [hand, one mind].**
+
+Two routes, each sufficient:
+1. **Exact route (N-SEAM).** N-SEAM is stated with closure types and reads no angle or density: its conditions at `w₀` — `w₀ ∈ Γ`, each tile at `w₀`
+   on one side of `ω(u)` or `ω(v)`, and (at a non-vertex `w₀`) a unit arc with a strong escape at its centre — hold whether or not `u` or `v` carries a
+   cusp. A cusp at `u` or `v` enters only as one more tile whose contact with the tiles at `w₀` must hold (N-E2). So there is **no cusp exception** in the
+   exact survival conditions: a pair survives with a cusp only where it would survive by the same conditions without it.
+2. **Blocking route (C-T-TAN's own frame).** By N-HORN (i), a transversal horn blocks on its side exactly as a sector does; by N-HORN (ii), a tangent
+   horn is met from at least one side. So a cusp colour never escapes both sides of `w₀`, and a pair saved at `w₀` is saved by its other colours
+   (tangent interfaces or bowties). **The advisor's hunch** ("with closure types, a cusp vertex's blocking set near `w₀` is nonempty, so the cusp seam
+   reduces to the tangent seam") **is TRUE**, with "tangent" read as "tangent or bowtie"; its falsifier ("a cusp vertex with a blocking partner whose
+   blocking set near `w₀` is empty") is excluded by N-HORN (ii).
+
+*What this does to W-TAN's GAP at cusps* (VW stage 4 item 4): closed on the proof side — W-TAN's first clause, read with closure types and covering pairs,
+holds at cusp vertices; the escape VW named ("the cusp colour escapes C-T-TAN's pigeonhole at `w₀`") is an escape of the **density** argument only.
+The sight argument (N-E0) sees a horn, because a horn is an open set and a circle crossing it transversally meets it.
+
+### 2.3 C-SEAMLIST: **MISSTATED; corrected statement proved complete (not item by item) [hand, one mind].**
+
+*As stated* ("the ways C-T-TAN's hypothesis can fail … are exactly: a tangent interface (T1 or T2), a bowtie or strong escape, a cusp, a sliver, a type
+with fewer than three essential colours or with four (V5), and `d = 2`") it lists the failures of C-T-TAN's **density hypotheses**, several of which are
+not failures of the map's survival: cusps (§2.2), types of two or four essential colours (N-SIX: C-T-TAN and N-SEAM need only the union), and slivers
+(N-SEAM needs no margin, so a sliver is not an escape of its own). **Corrected statement (the exact list, at the seam point).** Let `u, v` be a covering
+pair (closure types, union `[6]`, any sizes, overlap allowed) in a map of `𝓜_K`, `|u − v| < 2`. The pair survives at a common unit point `w₀` only if
+`w₀ ∈ Γ` and one of:
+- **(S1) `w₀` is not a vertex:** the arc through `w₀` is an arc of `ω(x)` for one `x ∈ {u, v}`, both its side colours are `x`'s, and `x` has a further
+  colour of its type in both side cones — a unit-arc seam with a strong escape at its centre (N-SEAM (c)–(d));
+- **(S2) `w₀` is a vertex:** each tile at `w₀` lies on one side of `ω(x)` for every `x ∈ {u, v}` holding its colour (N-SEAM (b)); in particular each of
+  the four unit directions at `w₀` (the tangents of `ω(u)` and `ω(v)`) is either the start of an arc of `Γ` or lies in the interior of a tile whose
+  colour belongs only to the other point.
+And `|u − v| = 2` (the collinear configuration, `e_u ∥ e_v`) is separate. *Completeness* is by proof: (S1)/(S2) is the dichotomy "vertex or not" at
+`w₀`, and N-SEAM (a) excludes `w₀` in a tile. No item is added by enumeration (G21: the list is derived, not collected). *Killing test 12* ("a close
+complementary (or V5) pair … where C-T-TAN's conclusion fails and none of the listed failures occurs") now reads: a surviving covering pair whose
+seam point is in a tile — N-SEAM (a) forbids it.
+
+### 2.4 The vertex case, one sub-case decided (N-X) [hand, one mind]
+
+**N-X.** *In (S2), suppose none of the four unit directions at `w₀` starts an arc of `Γ` (no unit-arc seam at `w₀`), and the types are disjoint. Then:*
+- *(a) `w₀` carries at least four colours: at least two of `u`'s and two of `v`'s, in the pattern `v, u, v, u` around `w₀` (a tile of `v`'s colour
+  around each tangent of `ω(u)`, and of `u`'s around each tangent of `ω(v)`);*
+- *(b) the two `u`-colours `a, b` around the tangents of `ω(v)` lie on opposite sides of `ω(u)` and are distinct, and at `u` their tiles lie on opposite
+  sides of `ω(w₀)`; likewise for `v`;*
+- *(c) if exactly two of `u`'s colours are at `w₀`, then at `u` each tangent direction of `ω(w₀)` either starts an arc of `ω(w₀)` in `Γ` or lies inside
+  a tile of `u`'s third colour `a′`; if no arc of `ω(w₀)` leaves `u`, then `a′` owns two sectors at `u` straddling the tangent line of `ω(w₀)` — a strong
+  escape (a bowtie in `a′`) at `u`; likewise at `v` with its third colour `c′`;*
+- *(d) `ω(w₀)` meets tiles of at most the two colours outside `P_cl(w₀)`; with `|P_cl(w₀)| = 4` these are `a′` and `c′`, alternating along
+  `ω(w₀)` in arcs whose interior points `60°` apart differ (N-E0), and every point `y ∈ ω(w₀)` in the closure of both an `a′`-tile and a `c′`-tile makes
+  `(w₀, y)` a covering pair at distance 1 — the cascade.*
+
+*Proof.* (a) A tangent direction `r` of `ω(u)` at `w₀` interior to a tile `T`: `T` straddles `ω(u)` near `w₀`, so by N-SEAM (b) its colour is not `u`'s;
+it is `v`'s, and `T` lies on one side of `ω(v)`, so its sector ends at or before the two tangents of `ω(v)`. The four tangents alternate (`ω(u)`, `ω(v)`
+cross transversally), so the tiles around them alternate `v, u, v, u`. (b) The two `u`-colour tiles around the two tangents of `ω(v)` lie in opposite
+halves cut by `ω(u)`. If they had one colour `k`, then against `u`'s `k`-tile `T′` one would be Siamese (`T′ ⊆ B̄(w₀, 1)`) and the other outer
+(`T′ ∩ B(w₀, 1) = ∅`) — impossible for a non-empty open `T′` (N-E2). The sides at `u` are N-E2's symmetric half. (c) N-E1 at `w₀`: `ω(w₀)` meets no tile
+of a colour in `P_cl(w₀)`. Near `u`, `ω(w₀)` runs in the two tangent directions of `ω(w₀)` at `u`; each is either an arc of `ω(w₀)` in `Γ` or enters a
+tile (a boundary arc of curvature `≠ 1` along the direction lets `ω(w₀)` into one side), which must then be `a′`. With `a` on one side of `ω(w₀)` and `b`
+on the other (b), one `a′`-sector cannot hold both tangent directions (it would contain a closed half of the directions and leave `a` or `b` no room on
+its side), so `a′` owns two sectors, one about each tangent direction. (d) N-E1 at `w₀`, N-E0 on the circle, and `P_cl(w₀) ∪ P_cl(y) ⊇ [6]`. ∎
+
+*What N-X shows.* Without a unit arc at `w₀`, a surviving covering pair forces a **four-colour vertex** at `w₀` (the claim list's V5, second kind) and
+**bowties at both `u` and `v`** (or unit arcs of `ω(w₀)` at them), and it spawns new covering pairs `(w₀, y)` along `ω(w₀)` at distance exactly 1. So
+the advisor's warning "A four-colour vertex in a bowtie direction is an escape the stub does not list" is realised by the geometry, not only allowed by
+it: the X-vertex at `w₀` is where a pair without unit arcs must put its four-colour vertex. **Not derived:** the sub-cases of (S2) with some unit arcs at
+`w₀` (the double unit-arc seam T2 among them), and whether N-X's cascade closes at bounded `K`. Both are GAP here.
+
+### 2.5 Where each verdict spends six, and the controls
+
+| result | the line where six is spent | seven-colour control |
+|---|---|---|
+| N-E0 (sight) | `\|S(z)\| ≤ 5` | hexagonal seven-colouring: circles about tile points meet six classes; no contradiction, as required |
+| N-SEAM (a) | "every colour at `w₀` is `u`'s or `v`'s" | two disjoint triples miss the seventh colour; `w₀` may lie in its tile |
+| N-SEAM (c)–(d), N-X | through (a) | as (a); (c)–(d) is TS-U, whose control is Townsend's ⅔π sector (TS §2.2, K2) |
+| N-HORN, C-CUSP-K route 2 | nowhere (N-HORN is one circle and one horn); route 2 spends six through N-E0 | — |
+
+*Killing tests of §4 on these shapes.* None of these is an area argument, so the strip, pinhole and Parts tests (§4 items 4–5) do not apply; they bind
+only when a statement here is carried to SEQ and priced (N-SEAM (a) carried to SEQ would be R-CP's disc, whose tests FS-107 ran). Killing test 3 (the
+seven-colour control): table above. Killing test 12: §2.3. Killing test 9 (C-TAN-POS's falsifier, "a tight 𝓜_K map with a ring junction against a
+partner that blocks with margin"): N-SEAM says such a pair survives only through (S1) or (S2) at `w₀`; a ring junction with no unit arc at `w₀` must
+meet N-X — the falsifier, if it exists, has a four-colour vertex at `w₀` and bowties at both junctions.
+
+### 2.6 Not worked (left for the close and for a successor)
+
+C-TAN-K (T1) beyond what (S1)/(S2) say; C-T2 (i) and (ii); C-BOW-K (i) and (ii); C-V5-K; SEAM-S (the bicycle, C-T-BIKE, K-KILL's second half);
+C-ACT1 (Act One). **C-ACT1 is the step the NO most needs (X2: a list of kills with no Act One decides nothing)**, and none of the above touches it.
+One observation for it [hand, one mind]: for any vertex `u` with `|P_cl(u)| = 4`, `ω(u)` meets at most two colours (N-E1), and any point of `ω(u)` where
+those two meet makes a covering pair at distance 1 with `u`; so Act One holds in every tight six-map that has a four-colour vertex whose circle is not
+one colour off `Γ`. The trivalent case — three colours at every vertex — is untouched.
+
+## Stage 2 — SAVED
