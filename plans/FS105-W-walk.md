@@ -228,9 +228,26 @@ non-Haar parts, Kolmogorov extension. Nothing in either route reads the degree: 
   unread `S`-integer entropy formula only through the positivity of Haar entropy, which is derived (X02D §3.3). **It adds a reading, not a
   derivation;** row 120's "MR at degree 16 … its walk unexercised" (row 128) can become "walked (FS105-W, one checking reading)".
 
-### 3.3 The reader's record — read after this stage's commit
+### 3.3 The reader's record — read after this stage's commit (`plans/FS105-R-reading.md`, stages 1–4, commit `309f2c3f`)
 
-*(filled in below, after the commit.)*
+Read after `a0fee351` (this stage's first commit), so the two walks are separate minds on (a1)–(a8); the reader is blind to this record.
+
+| item | the reader | this walk | agreement |
+|---|---|---|---|
+| (a1), (a2), (a5), (a7) | TRUE at both fields | TRUE at `F_dG` | agree |
+| (a3) | TRUE; finiteness by Lemma F (no finite generation over ℤ), Krull route also correct | the same two routes | agree |
+| (a4) | TRUE for `M̂`, every `α_Λ` **and the adelic lift** (Lemma 4.2), with "factor" = non-trivial, forced (FS105-R-VC) | TRUE for `M̂` and `α_Λ`, the same reading; the lift not checked | agree; the reader's is wider (the lift) |
+| (a6) | TRUE; neither route treats a push-forward of a `U`-ergodic measure as `Γ`-ergodic | the same | agree |
+| (a8) | TRUE; uniform proof, no enumeration of subfields; an exact instance at `F₁` (`p = 17`, `h = 965`) | TRUE; the same proof; an exact instance at `F_dG` (`p = 421`) by two routes (divisors; `(τ(w)/w)¹² ≠ 1` for all 31 `τ`) | agree; the two instances are complementary (one per field) |
+| Haar entropy on the pieces | `h_{m_M}(γ) ≥ log 2` for every `γ ≠ 1` in `Γ` at totally real `F` (Mahler measure of the minimal polynomial; `γ` non-integral by Kronecker, leading coefficient `≥ 2`) — FS105-R-H | positivity only (Lemma H; X02D §3.3) | agree; the reader's bound is sharper and shorter |
+| Lemma 7.4 (two independent Lyapunov weights) | holds for the pieces directly: `χ_𝔓(a, b) = b·log\|w\|_𝔓`, `χ_v(a, b) = a·log\|u\|_v` | **A2's valuation matrix (rank 2 at the primes above 5 and 421) is exactly this check at `F_dG`**, made for a different reason | agree; an exact instance at `F_dG` |
+| (a9) | TRUE as far as read; a GAP of reading at EL2021's cited machinery; **our pieces are semisimple and isometric at every archimedean place, so every non-zero Lyapunov weight is non-archimedean**, and Thm 4.1's final step treats the purely `p`-adic case in full (p. 34) | flagged only: "if (a9) finds a hidden hypothesis, re-check against sixteen archimedean isometric directions" | **the reader's (a9) answers this walk's flag**: the sixteen isometric directions at `F_dG` contribute no Lyapunov weight, exactly as the two at `F₁`; nothing in the proof as read counts them |
+| (a0) | **EL2003 is not a proof of its Thm 1.1 (§6 is an outline); Thm 1.2 follows from EL2021 Thm 1.3 by FS105-R-D (one mind), which EL2021 does not write** | "EL2021 Thm 1.2 by statement" | **a divergence of grounding, not of truth**: this walk's grade line must change — see below |
+
+**Divergences of truth: none.** **One correction to this record, from the reader's (a0):** stage 3.2's "given EL2021 Thm 1.2 by statement"
+should read *"given EL2021 Thm 1.3 (its proof read at its skeleton by FS105-R, the cited leafwise machinery unread) and FS105-R-D, the
+deduction of Thm 1.2 from it (one mind)"*. C-MR16's walk is unaffected in substance: every hypothesis Thm 1.3 needs (d ≥ 2, no non-trivial
+virtually cyclic factor, α-invariant ergodic probability) is among (a1)–(a8), all TRUE at `F_dG` by both walks.
 
 ### 3.4 A tool defect in stage 2's G2, found at this stage (logged; the stage-2 numbers stand)
 
