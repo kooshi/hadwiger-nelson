@@ -392,3 +392,57 @@ any argument that works at `w₀` as a vertex (Y-T2W, N-X, Y2-W4) sees nothing a
 (item 4). C-BOW-K (i) in this form: **TRUE** (a strong escape with arcs of Γ, realised locally). C-BOW-K (ii): untouched.
 
 ## Stage 4 — SAVED (FS110-Y2)
+
+## Stage 5 — SAVED (FS110-Y2): the T2 rhombus, the double bowtie, the mixed pair — three fragments by formula, checked exactly
+
+All on the `d = 1` rhombus of §4.5, colours `P(u) = {1, 2, 3}`, `P(v) = {4, 5, 6}`, arcs with half-angle `2 arctan(1/8)`, straight rays at `u, v`
+truncated at `1/4`, quadrant squares of side `1/10` at `w, w′`. `R` is the half-turn about `(1/2, 0)` (`u ↔ v`, `w ↔ w′`), with the colour involution
+`(1 4)(2 5)(3 6)`. Tool: `tools/fs110_y_fragments.py`; outputs `data/fs110/fs110-y/y2_fragments_*.out`. **Every same-colour pair is generated
+from the colour map**, including each tile against itself.
+
+| fragment | formula | symmetry | pairs | verdict | planted faults (each REJECT for its own reason) |
+|---|---|---|---|---|---|
+| **T2** (C-T2 (i)) | `u` lies on a full arc of `ω(w)` (rays `150°, 330°`: inner `3`; outer `1` on the `150°` half, `2` on the `330°` half) plus a ray along `ω(w′)` at `210°` (inner `2`, outer `1`); `v = R(u)`; `w`: `(0°,90°) 1, (90°,180°) 4, (180°,270°) 3, (270°,360°) 5`; `w′ = R(w)` | `{1, R}` | 24 | **ACCEPT**, tight (8 contacts at exactly 1) | `t2_flip` (swap `1, 3` at `w`: facing colour put away) → `(u_1,w_2)`, `(u_3,w_0)`; `t2_flat` (the arcs of `ω(w)` at `u` replaced by chords: a T1 interface, curvature 0 against 1) → `(u_1, w_0)` range `≈[0.992, 1.372]`; `t2_six` (colour 6 at `w`: `v`'s 6-sector straddles `e_v^⊥`) → `(v_3, w_1)` |
+| **BB** (C-BOW-K (i)) | `u`: bowtie `1` on `(300°,60°)` and `(120°,240°)`, `2` on `(60°,120°)`, `3` on `(240°,300°)`, all straight; `v = R(u)`; `w`: `3, 5, 2, 6` by quadrant; `w′ = R(w)` | Klein four: `R` and `y ↦ −y` with `(2 3)(5 6)` | 30 | **ACCEPT**, tight | `bb_rot` (`u`'s bowtie turned `60°`: its repeated colour no longer holds the escape lines) → `(u_b, w_2)`, `(u_c, w_0)` |
+| **MX** (the mixed pair) | `u`: bowtie `1` on `(330°,60°)` and `(150°,240°)`, `2` on `(60°,150°)`, `3` on `(240°,330°)`, **lying on a full arc of `ω(w)`** (rays `150°, 330°` exact; `60°, 240°` straight): T2 at `w`, strong escape at `w′`; `v` = T2's `v`; `w`: `3, 4, 2, 5`; `w′`: `6, 3, 4, 2` | none | 27 | **ACCEPT**, tight | (the T2 and BB plants cover its two mechanisms) |
+
+The checker's `closed_interval` plant turns all four fragments (with S1) REJECT: each has contacts at exactly 1. Its `noself` and `endpoints_only`
+plants cannot fire here (every tile's diameter is below 1, and no extreme sits only at an interior point): unreachable, so they test nothing on
+these fragments (they were tested on FS110-Y's controls). Float geometry guard: no overlaps; each flower covers a disc of radius `0.05`.
+
+**Derivations behind the formulas** [hand, one mind]. Every sector was placed by §4.3's facing/away rule before any check: at `w`, a colour of `P(u)`
+whose tiles at `u` face `w` (inside `D(w)`) sits only in `{x·e_u ≤ 0}`, one that faces away only in `{x·e_u ≥ 0}`, a colour whose sector at `u`
+straddles `e_u^⊥` not at all; TS-U adds the side cones. In T2 this forces `w`'s four quadrants up to the choice `1` or `2` on the `30°` branch
+(taken `1`), and excludes `6` from `w` (the `t2_six` plant shows it). In BB the margins are `30°` everywhere, so the fragment is robust: it is
+entirely polygonal.
+
+**Verdicts.**
+- **C-T2 (i): TRUE at fragment level** [tools, exact, for the member; hand, one mind, for the derivation]: the double unit-arc seam is consistent at
+  `u, v, w₀, w₀′`. Its cascade inside the fragment closes: `w, w′` are four-colour vertices (`P(w) = {1, 3, 4, 5}`, `P(w′) = {1, 2, 4, 6}`), and every
+  other close pair among the four points has intersecting types. This answers FS110-Y's GAP at the formula fragment.
+- **C-BOW-K (i): TRUE** [tools, exact; hand, one mind]: a strong escape at a bowtie, in two forms: the double bowtie BB (both vertices escape at both
+  unit points), and (S1) (§4.5). Neither is a refutation of the NO, which must win at (ii).
+- **The mixed map (item 3 of my brief): a single pair can mix the two seams** [tools, exact]: MX saves `(u, v)` at `w` by T2 at both vertices and at
+  `w′` by `u`'s escape. Y2-W4e's constraint on an escape's partner is met by `v`'s full arc of `ω(w′)`.
+- **Y2-W4 (d) on the three fragments** (a control, not a proof): T2 has `m_u(w) = 2` (the arc through `u` is a boundary) and `m_v(w) = 6` (`v_3`
+  holds the `210°` direction); BB has `m_u = 1` and `m_v = 4`, each the bowtie's repeated colour; MX has `m_u = 1`, `m_v(w) = 6` and `m_v(w′) = 5`
+  (the full arc through `v`). All as required.
+
+**The invariant each carries (X13, G79's flip)** [hand, one mind]:
+- **T2:** `u, v` emit arcs of `ω(w)` and `ω(w′)`. `w, w′` are four-colour vertices, and **`ω(w)`'s tile-interior points are two-coloured by
+  `P(w)`'s complement**, with `c(x + 60°) ≠ c(x)` (TS §5, the four-colour case). Near `u` it runs along the arc or in `m_u(w)`.
+- **BB:** both vertices are bowties whose repeated colours hold both escape lines. `w, w′` are four-colour vertices whose circles are two-coloured
+  by the two repeated colours `{a, a′}`. On `ω(w)`, `u` (at `240°`) and `v` (at `300°`) sit `60°` apart, with `a ≠ a′`, as the alternation requires.
+- **(S1):** a bowtie centred on arcs of Γ. The seam point is an edge point and the partner is free. The arcs' ends are vertices meeting `P(v)`.
+- **The lattice warning (a measurement of one candidate, not of the question):** extending BB translation-invariantly over the unit triangular
+  lattice (all unit `A`–`B` pairs covering, `C`-points four-colour) fails at the `C`-points. Six neighbours put six unit circles through each
+  `C`-point, so its sectors alternate `{b, c}` and `{b′, c′}` in six `60°` sectors. Two of the three `{b, c}` sectors then share a colour, and that
+  colour lies in both the facing and the away half-plane of one `A`-neighbour. This names a cost for the global form (C-BOW-K (ii)): a seam point
+  with more than two covering pairs through it is over-constrained.
+
+**Left for a successor** (brief items not reached; budget):
+- C-T-BIKE beyond Y-BIKE-3C's family (item 4).
+- The global forms C-T2 (ii) and C-BOW-K (ii): how the arcs of Γ in (S1) end, and whether four-colour circles (T2, BB) close up.
+- The GAP in A2-V56 at centres of arcs of Γ (§4.4).
+
+## Stage 5 — SAVED (FS110-Y2)
