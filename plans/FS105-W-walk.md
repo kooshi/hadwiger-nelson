@@ -26,6 +26,14 @@ MR's records are open to this job. Claims (c) and (d) of `data/fs105/claims.md`.
 - **FS105-W-C (C-MR16's zero-entropy half)** — EF_F⁺ holds at `F_dG` by X01D's and X12B's proofs, every step walked at `[L:ℚ] = 32`;
   no step fails. [checking reading, one mind, not blind; adds a reading, not a derivation] §Stage 2.
 
+- **FS105-W-PE (C-MR16's positive-entropy half)** — PE-2 at `F_dG`: every hypothesis of EL2021 Thm 1.2's statement holds for `(M̂, ⟨u, w⟩)` at
+  degree 32 (solenoid of dimension 32; action; total irreducibility ⟺ admissibility, two routes; not virtually cyclic, no non-trivial
+  virtually cyclic factor; `d = 2`; ergodicity for all of `ℤ²`; one entropy notion); admissibility excluded against all 373 proper subfields of
+  `L` by two exact routes (S6 divisors; A1 `(τ(w)/w)¹² ≠ 1` for all 31 `τ ≠ 1`). [checking reading of X02D, X02V, one mind, not blind; tools
+  exact; EL2021 Thm 1.2 by statement] §Stage 3.
+- **FS105-W-MR16 (C-MR16)** — MR(`F_dG`) holds by row 120's proof, every step walked at `[F:ℚ] = 16`; no step fails; the degree enters
+  constants only. [checking reading, one mind, not blind; given EL2021 Thm 1.2 by statement] §Stage 3.2.
+
 ## Stage 1 — SAVED (quotation check; the setting at `F_dG`; C0)
 
 ### 1.1 Quotation check (standing rule 5)
@@ -176,3 +184,65 @@ both in `X` (X12B), and G1 pins the conversion `H = den^{16}` exactly.
 ### Would have searched here (stage 2)
 
 - none: every check was a complete enumeration of a finite set fixed in advance (`U_ℚ` to `den ≤ 101`; pairs to `den ≤ 13`).
+
+## Stage 3 — SAVED ((c) PE-2 at degree 16: (a1)–(a8) at `F_dG`) — written and committed **before** opening `plans/FS105-R-reading.md`
+
+*Read for this stage: `plans/FS100-X02D-derivation.md` §§2–3 (PE-1′, Lemma W, Lemma Γ, the passage to `U`, the second route);
+`plans/FS100-X02V-verification.md` §§2.2–2.3 (Lemma TI, Lemma W, Lemma H, PE-erg); EL2021 §3.2's opening (the entropy it means), via
+`pdftotext` in scratch. EL2021's Thms 1.2–1.3 as quoted in `data/fs105/claims.md` (a); their provenance (a0) and the proof's standing
+assumptions (a9) are the reader's, not walked here. A checking reading, not a blind mind.*
+
+### 3.1 The walk
+
+`Γ = ⟨u, w⟩` with `u` non-torsion in `U_{F_dG}` and `w` from Lemma W; `M ⊆ R` a finitely generated `ℤ[Γ]`-module with `ℚM = L`,
+`dim_ℚ L = 32`; `α: ℤ² → Aut(M̂)`, `n = (a, b) ↦` the dual of multiplication by `u^a w^b`.
+
+| item | what it needs at `F_dG` | the walk | verdict |
+|---|---|---|---|
+| **(a1) solenoid** | `M̂` compact, connected, `M ⊗ ℚ` finite-dimensional | `M` countable (compact dual), torsion-free (connected dual), `M ⊗ ℚ = ℚM = L ≅ ℚ³²`. EL2021's definition (claims (a), p. 2) asks exactly this; no dimension bound appears in Thm 1.2's statement | TRUE |
+| **(a2) action** | `ℤ² → Aut(M̂)` by continuous automorphisms | `γM ⊆ M` and `γ⁻¹ ∈ Γ`, so multiplication by `γ` is an automorphism of the discrete group `M`; its dual is a continuous automorphism; `Γ` abelian, so `n ↦ α^n` is a homomorphism | TRUE |
+| **(a3) total irreducibility ⟺ admissibility** | the criterion, with its finiteness step | ⇐: a non-zero `Γ′`-stable `N ⊆ M` spans a `ℚ(Γ′)`-subspace of `L`; `ℚ[Γ′]` is a finite-dimensional domain, so a field, `= L` by admissibility; so `ℚN = L`, `M/N` is torsion and finitely generated over `ℤ[Γ′]` (coset representatives of `Γ/Γ′`), hence killed by one integer `m` and a quotient of `M/mM`, finite by Lemma F (`\|M/mM\| ≤ m³²`) — X02D's route; X02V's route by Krull dimension one of `ℤ[Γ′]` reaches the same. Neither route reads the degree beyond `m³²`. ⇒ is only used for PE-1's counterexamples | TRUE (two routes, both degree-free) |
+| **admissibility itself, against the 373 proper subfields of `L`** | `ℚ(Γ′) = L` for every finite-index `Γ′` | `Gal(L/ℚ) ≅ (ℤ/2)⁵`, so `L` has 374 subfields (`1 + 31 + 155 + 155 + 31 + 1`), 373 of them proper. One argument excludes all: every proper subfield is fixed by a non-trivial `τ`, and `τ(w^k) = w^k` would need `τ(w)/w` to be a root of unity. **Exact, two routes:** S6 (divisors: every `τ ≠ 1` moves the 421-part of `div w`) and **A1** (`tools/fs105_w_admissible.py`: `(τ(w)/w)¹² ≠ 1` for all 31 `τ ≠ 1`, with `μ(L) = μ₁₂` from S8); plant `w := (2+i)/√5` → 15 of 31 fail (the `τ` fixing `ℚ(i)`) | TRUE |
+| **(a4) not virtually cyclic; no virtually cyclic factor** | faithfulness on every non-zero submodule | `α^m = α^{kn}` on `M̂` ⟺ `γ_m = γ_n^k` in `L` (both multiply the spanning `M`); `Γ ≅ ℤ²` (A2: valuation rank 2 at the primes above 5 and 421; S8 torsion) forbids a finite-index `Λ ⊆ ℤn`. A non-trivial factor `M̂/Y` (`Y` closed, `α`- or `α_Λ`-invariant, proper) has `Y` finite by (a3), so its dual `N = Y^⊥` has finite index, `ℚN = L`, and the same faithfulness holds. **Reading used:** "virtually cyclic factor" means a *non-trivial* one (the trivial factor `X/X` is virtually cyclic by the letter of p. 2's definition — the advisor's point (i)); with it, total irreducibility plus "not virtually cyclic" gives "no virtually cyclic factor" (the advisor's (ii), by connectedness) | TRUE (with the non-trivial reading; the term is not defined in EL2021 §1) |
+| **(a5) `d = 2`** | Thm 1.3's `d ≥ 2` | `Γ ≅ ℤ²` | TRUE |
+| **(a6) ergodicity** | every measure fed to Thm 1.2 is a `ℤ²`-invariant, `ℤ²`-ergodic probability | X02D feeds `ρ_k = (π_k)_*ρ` with `ρ` `Γ`-ergodic on `R̂` (a `Γ`-invariant set of `M̂_k` pulls back); X02V feeds the `Γ`-ergodic components `ν_η` of `τ_j`'s decomposition (never `τ_j` itself). The `ℤ²`-action **is** the `Γ`-action (`ℤ² ≅ Γ`), so ergodic for all of `ℤ²`, not a finite-index subgroup; normalised. Ergodic decomposition: `Γ` countable acting continuously on compact metrizable `M̂` | TRUE |
+| **(a7) entropy** | Thm 1.2's `h_µ(α^n)` and PE-2's limit use one notion | EL2021 §3.2 works with the measure-theoretic entropy of one automorphism `T` of `X` (leafwise-measure formulae for `h_µ(T)`); PE-2's `h_ρ(γ) = lim_k h_{ρ_k}(γ)` is Kolmogorov–Sinai's for an increasing generating sequence of `γ`-invariant factor σ-algebras (X02D T2; X02V (K)). Same notion; the degree does not enter | TRUE |
+| **(a8) Lemma W at `F_dG`** | every non-torsion `u ∈ U_{F_dG}` lies in an admissible `Γ` | a prime `p` totally split in `L` (the five symbols `(−1/p) = (3/p) = (5/p) = (7/p) = (11/p) = 1`; density `1/32` by Chebotarev; the least is 421, S5) with `u` a unit above `p`; `w = z/c(z)`, `(z) = 𝔓^h`. The divisor argument (X02D, X02V) needs only that the decomposition group of `𝔓` in `Gal(L/ℚ)` is trivial — true for totally split `p` at any degree. **Exhibited** with `(z)` not a power of `𝔓` but `v₄₂₁(Nz) = 1` (S6, A1), which suffices by the same argument. **Also:** Haar is `Γ`-ergodic (a character with a finite `Γ`-orbit is killed by some `γ − 1 ≠ 0`); Haar has positive `u`-entropy on each `M̂` (Lemma H; or X02D §3.3's derivation), since `u` expands a split finite place of `L` (Kronecker, `L` CM) where `M ⊇ ℤ[u^{±1}]` is unbounded | TRUE |
+
+**The passage from the pieces to `U`** (X02D §3.2, X02V §2.3; the claim list's (a) does not list it, the advisor asks for it): Γ-ergodic
+decomposition on `R̂`, `U` permuting the components (abelian), `U`-extremality — or the constant Haar weight up the chain, the consistent
+non-Haar parts, Kolmogorov extension. Nothing in either route reads the degree: `R` is countable, `M_k ↑ R` exists, and every textbook fact
+(ergodic decomposition, Jacobs, entropy of an inverse limit, Fourier uniqueness) is dimension-free. TRUE at `F_dG` on this reading.
+
+### 3.2 Verdict on (c)'s PE-2 part, and on (c) overall
+
+- **PE-2 at `F_dG`: TRUE**, given EL2021 Thm 1.2 **by statement** — every hypothesis the statement names holds for `(M̂, Γ)` at degree 32,
+  admissibility checked against all 373 proper subfields by two exact routes. [checking reading of two written derivations (X02D, X02V), one
+  mind, not blind; tools exact]. **What this walk does not reach:** whether Thm 1.2 is proved (a0) and whether its proof assumes anything its
+  statement omits (a9) — the reader's items. Neither depends on the degree as far as the statement shows; if (a9) finds a hidden
+  hypothesis, it must be re-checked against 32-dimensional pieces with **sixteen** archimedean (isometric) directions, against two at ℚ(√635087).
+- **C-MR16 — MR at `F_dG` walked at degree 16 — TRUE by the same proof** (EF_F⁺ at stage 2; PE-2 here; the composition FS100-MR (a) is
+  field-free: `τ = a·m + τ′`, `τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`). The degree enters only constants chosen before the scale
+  (stage 2) and the count of subfields that one totally split prime excludes at once (here). Grade: [hand — a checking reading of the held
+  derivations at degree 16, one mind, not blind; tools exact (S1–S8, G1–G3, A1–A3)], resting on EL2021 Thm 1.2 by statement and on the
+  unread `S`-integer entropy formula only through the positivity of Haar entropy, which is derived (X02D §3.3). **It adds a reading, not a
+  derivation;** row 120's "MR at degree 16 … its walk unexercised" (row 128) can become "walked (FS105-W, one checking reading)".
+
+### 3.3 The reader's record — read after this stage's commit
+
+*(filled in below, after the commit.)*
+
+### 3.4 A tool defect in stage 2's G2, found at this stage (logged; the stage-2 numbers stand)
+
+`tools/fs105_w_growth.py` as committed at stage 2 defined `ap(a, e) = …; c = 0;` on one line; in GP a function body runs to the end of the
+line, so `c = 0` became part of `ap`, `ap` returned 0, and **G2's split filter was inert**: it tested every prime dividing `ℓ`, split or not.
+Found when the same line in `tools/fs105_w_admissible.py` failed loudly (a division by `ap(c, z) = 0`). Fixed in both tools (one statement
+per line, and an assertion that the conjugation was found); G2 re-run with the working filter reads **the same 2,400 instances, 0 misses,
+minimum slack `2^{28}`** — because at `F_dG` every prime dividing these `ℓ` (above 2, 3, 5, 7, 11, 13 and small `p`) is split (the stable
+places start over 131, FS103-DG). **A control now guards the filter:** G4 — no prime of `L` above 131 is split (16 stable), all 32 above 421 are.
+The stage-2 inequality was never at risk (Lemma PF bounds `|ℓ|_P` at every finite place, stable or split), but the label "split" was
+unearned until G4. The plant outputs (`growth-plant-*.out`) predate G4 and target G1/G2 only; they fire as recorded.
+
+### Would have searched here (stage 3)
+
+- none: the admissibility checks are complete over the 31 non-trivial automorphisms; nothing enumerated beyond them.

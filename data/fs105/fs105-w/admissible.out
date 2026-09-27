@@ -1,0 +1,7 @@
+A1 31 0 1
+A2 2
+A3 15
+VERDICTS {'A1': True, 'A2': True, 'A3': True}
+PLANTED RUN A1: 31 15 1
+PLANT wpower: target A1 FIRED
+EXIT 0

@@ -10,6 +10,7 @@ Claims checked (plans/FS105-W-walk.md, stage 2):
   G2  X01D Step 5's division (Lemma PF for one element): for every pair q1 != q2 in U_Q with den <= D2 and every SPLIT prime P of L
       (c(P) != P) with v_P(q1 - q2) > 0:  |q1 - q2|_P * 4^([L:Q]/2) * H_L(q1) * H_L(q2) >= 1.  At F_dG the dyadic primes are split
       (the wall is broken), so the pair (1, -1), l = 2, puts the bound's archimedean constant to work there.
+  G4  A control on G2's split test: no prime of L above 131 is split (FS103-DG: stable), all 32 above 421 are (S5).
   G3  X12B Step 4's per-place bound |q1 - q2|_P >= (4 X^4)^(-[L:Q]) at every finite P (X = max den) holds, and the exponent it needs is
       at most [F:Q] = 16, not [L:Q] = 32 (X12B's constant is loose by a factor 2 in the exponent -- the same count in another normalisation).
 Plants (--plant NAME), each must turn its own check red:
@@ -41,14 +42,20 @@ Ly = subst(polcompositum(Fp, x^2+1)[1], x, y);
 nfL = nfinit([Ly, [2,3,5,7,11]]);
 rt(a) = { my(r = nfroots(nfL, x^2 - a)); Mod(lift(r[1]), Ly) };
 ii = rt(-1); s3 = rt(3); s5 = rt(5); s7 = rt(7); s11 = rt(11);
-auts = nfgaloisconj(nfL); ap(a, e) = Mod(subst(lift(e), y, a), Ly); c = 0;
+auts = nfgaloisconj(nfL);
+ap(a, e) = Mod(subst(lift(e), y, a), Ly);
+c = 0;
 { for (k = 1, #auts, my(a = auts[k]);
     if (ap(a, ii) == -ii && ap(a, s3) == s3 && ap(a, s5) == s5 && ap(a, s7) == s7 && ap(a, s11) == s11, c = a)); }
+if (c == 0, error("no conjugation found"));
 absP(P, v) = if (PLANT == "unnormalised", P.p^(-v / P.e), idealnorm(nfL, P)^(-v));
 HL(q) = { my(fa = idealfactor(nfL, q), H = 1);
   for (j = 1, #fa~, if (fa[j,2] < 0, H *= absP(fa[j,1], fa[j,2]))); H };
-issplit(P) = { my(pi = nfbasistoalg(nfL, P.gen[2]), cP = idealhnf(nfL, P.p, lift(ap(c, Mod(lift(pi), Ly)))));
-  cP != idealhnf(nfL, P) };
+SPL = Map();
+issplit(P) = { my(key = Str(idealhnf(nfL, P)), r);
+  if (mapisdefined(SPL, key, &r), return(r));
+  my(pi = nfbasistoalg(nfL, P.gen[2]), cP = idealhnf(nfL, P.p, lift(ap(c, Mod(lift(pi), Ly)))));
+  r = (cP != idealhnf(nfL, P)); mapput(SPL, key, r); r };
 Q = %QLIST%;
 qe(t) = (t[1] + t[2]*ii) / t[3];
 \\ G1
@@ -67,6 +74,8 @@ Q2 = select(t -> t[3] <= %D2%, Q); bad2 = 0; npl = 0; minslack = 10^1000; bad3 =
         if (issplit(P), npl++; s = ab * arch * H12; if (s < 1, bad2++); minslack = min(minslack, s)))))); }
 print("G2 ", #Q2, " ", npl, " ", bad2, " ", if (minslack < 10^999, log(minslack)/log(2), "none"));
 print("G3 ", bad3, " ", worst3);
+\\ G4: a positive control for the split test (FS103-DG: the places above 131 are stable; 421 is totally split, S5)
+print("G4 ", #select(P -> issplit(P), idealprimedec(nfL, 131)), " ", #idealprimedec(nfL, 131), " ", #select(P -> issplit(P), idealprimedec(nfL, 421)), " ", #idealprimedec(nfL, 421));
 '''
 
 def run(plant):
@@ -91,6 +100,8 @@ def verdicts(o, Q):
     v["G2"] = len(g2) == 4 and int(g2[1]) > 0 and g2[2] == "0"
     g3 = o.get("G3", [])
     v["G3"] = len(g3) == 2 and g3[0] == "0" and float(g3[1]) <= 16.0 + 1e-9
+    g4 = o.get("G4", [])
+    v["G4"] = len(g4) == 4 and g4[0] == "0" and int(g4[1]) > 0 and g4[2] == g4[3] == "32"
     return v
 
 def counts(Q):
