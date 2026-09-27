@@ -980,3 +980,28 @@ pair has a ring change point of `u` at `60°` from an antipode on each side.
 (in, out)) — 0.55.
 
 ## Stage N4-3 — SAVED
+
+## Stage N4-4 — SAVED: W-4 after the owner's second update to §8
+
+The owner's note (to me, verbatim): "Two blind minds, by different routes, find S–V Cor. 1 holds a.e. for curved cubic maps under Condition 5 with no
+d = 2 exception (same- and disjoint-multicolour). So G-d2 does not arise, and N3-RED's residue under Condition 5 is G-CONE alone. Spend no more on G-d2;
+W-4 for you is G-CONE." Stage N4-3 was written before the note arrived; N4-HEX stands as an independent partial constraint, now superseded as a route.
+
+**W-4: NO [hand; N4 one mind, over its bases].** Chain: a tight six-map in `𝓜_K` under Condition 5 is a valid map (N4-2); N4-TERM gives a valid
+modification `M*` on the whole plane, and N4-CONE makes every vertex of `M*` cubic or a corner; `M*` satisfies the print's Condition 5 and local
+finiteness, with circular or straight arcs; S–V Cor. 1 almost everywhere for curved cubic maps under Condition 5, no `d = 2` exception (FS110-CB,
+FS110-CD: two minds, both blind, as quoted in §8), then refutes `M*`. **So no tight six-map in `𝓜_K` satisfies Condition 5: the Condition-5 half of
+`[SokolovVoronov2025]` Question 2 is answered NO almost everywhere at bounded `K` — a partial answer**, at the grade of its weakest link: N4-TERM /
+N4-CONE [hand, one mind], NB-4 [two minds, one blind], W-MERGE [two, one blind], N3-DEG [one], N2-SWAP not used here.
+
+**Two scope conditions the base must be read for, named (not assumed):**
+1. **Cusp sectors at cubic vertices.** `M*` may keep a cusp horn at a cubic vertex (a single horn both of whose flank colours shadow it; §2.8, with the
+   opening remedy for the other cases). N3-RED's hand-off had the same property. Whether CB's and CD's Cor. 1 covers cubic vertices with a sector of angle 0
+   is a question for their records (fenced to me).
+2. **No radius lower bound.** `M*`'s new arcs have radii `ρ` below any `1/K` (as W-MERGE's did). S–V's hypotheses carry no radius bound; if CB's or CD's
+   AE form uses one (e.g. through `𝓜_K`'s compactness), N4-TERM must choose `ρ` per region, which it can only down to the clearance radius.
+
+**Not claimed:** that hard cones are absent from the original map (they are removable); anything outside Condition 5 (the unit-arc branch: (S1), T2,
+NB-4's exception, A4-SIX-ARCS); anything at unbounded `K` (FS-111).
+
+## Stage N4-4 — SAVED
