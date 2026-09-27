@@ -1,4 +1,11 @@
-# FS-106 and FS-107 — the regularity wall: can a tight, non-closed measurable colouring save a colour? (stub; the program Kooshi adopted)
+# FS-106 and FS-107 — the regularity wall, and its stability form: can vanishing holes save a colour? (stub; the program Kooshi adopted)
+
+> **Banner (FS106-C, 2026-09-27).** **FS-106 is closed** (`plans/FS106-regular-half.md` §R-close; `plans/FS106-derivation.md`; `LEDGER.md`
+> rows 131–132): the regular half verified and transferred almost everywhere bar named steps, and the measurable question restated exactly as
+> stability — with no MR, `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1` (row 131). **FS-107 is renamed "stability: can vanishing holes save a colour?"**
+> (the owner's ruling, 2026-09-27, `plans/FS106-close-inventory.md` item 77) and re-aimed below from the advisor's design
+> (`plans/POROS-2026-09-27-fs106-close-and-fs107.md` §3). The FS-106 section is kept as it was minted, under its own banner. Residuals: FS-108
+> (`plans/STUB-regular-half-residuals.md`); the post-ban dial: FS-109 (`plans/STUB-hole-dial.md`).
 
 *Minted 2026-09-26 by the product owner (the top-level session), from its own reading after FS-103 and FS-105 and Kooshi's rulings the same
 evening. Ranks 1–2 in `plans/FRONTIER-STUBS.md`. **Solver column: none** — reading, derivation and Lean; no finite-witness search (Kooshi:
@@ -21,19 +28,23 @@ evening. Ranks 1–2 in `plans/FRONTIER-STUBS.md`. **Solver column: none** — r
    colours — ℚ(√635087), de Grey's field (rows 128, 130) [hand, two minds each].
 2. `χ(ℝ²) ≤ χ_m⁰(ℝ²)` with no MR (random rigid motion + de Bruijn–Erdős) [hand, two minds: FS103-N N-EASY; PA1 (E)].
 3. Row 129: one colour class at a time never gives six.
-4. Regular classes need seven in print: closed classes (`[Voronov2023]` Thm 1.3), band-avoiding colourings (Thm 1.1, every `ε > 0`),
-   nice maps (`[Thomassen1999]`), polygons (`[SokolovVoronov2025]`); maps need six (`[Townsend1981]`, `[Townsend2005]`, `[Coulson2004]`).
-   Hence an almost-everywhere-proper colouring with slack needs seven (random rigid motion + Thm 1.1). **Unverified here in every
-   almost-everywhere form; `[Voronov2023]` is an unrefereed preprint; Thomassen and Townsend are unheld.** FS103-M's D5 cited
+4. Regular classes need seven, verified at FS-106 and almost everywhere (row 132): closed classes (`[Voronov2023]` Thm 1.3, closedness
+   entering once as compactness giving a band) and band-avoiding colourings (Thm 1.1), the proofs repaired locally (two minds, one blind; an
+   unrefereed preprint); almost everywhere, slack needs seven (the supports avoid the band), polygons and locally finite convex tilings need
+   seven bar one edge case (`d = 2`), nice maps need seven; maps need six by `[Woodall1973]` Thm 6 and Townsend's 1979 manuscript, each
+   repairing the other (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound. FS103-M's D5 cited
    `[CurrieEggleton2016]`'s six for slack colourings; Voronov's seven supersedes it (a G50 instance: held, its bearing not drawn).
-5. **The question:** can a colouring that is Lebesgue-measurable, proper at almost every unit pair, **tight** (no band avoided) and **not
-   closed** save a colour that closed ones cannot? Normal form, held: classes `D_j` density-open, avoiding distance 1 at every point, covering
-   the plane off a null set `E`, every point of `E` seeing at least two colours of positive upper density (FS-103: V1's density-point lemma,
-   FS103-M's D1–D5).
-6. **Both answers decide Hadwiger–Nelson.** No → `χ_m⁰ = 7` → given MR, `χ(ℝ²) = 7`. Yes (a tight wild colouring with five or six colours)
-   → `χ(ℝ²) ≤ 6` or `= 5`, with no MR.
+5. **The question, in its stability form (row 131):** with no MR, `χ_m⁰(ℝ²) ≥ 7` iff six classes free of monochromatic pairs at distances in
+   `[1−ε, 1+ε]` cannot cover the plane up to holes of vanishing density as `ε → 0` (`lim µ₆(ε) < 1`; `[SokolovVoronov2025]` §9's hypothesis).
+   A refutation is a sequence of periodic grid-square colourings with vanishing holes; the wild set exists only in the limit, whose normal form
+   is held (density-open classes avoiding distance 1 at every point, covering off a null set `E`, every point of `E` seeing two colours of
+   positive upper density; FS-103's V1 and FS103-M's D1–D5).
+6. **Both answers decide Hadwiger–Nelson.** No (Voronov's contradiction survives a free colour of vanishing density) → `χ_m⁰ = 7` → given
+   MR, `χ(ℝ²) = 7`. Yes (such a sequence, with five or six colours) → `χ(ℝ²) ≤ 6` or `= 5`, with no MR.
 
-## FS-106 — the regular half (first)
+## FS-106 — the regular half (first) — CLOSED 2026-09-27
+
+*Banner: closed; its record `plans/FS106-regular-half.md` §R-close; the text below is the stub as minted.*
 
 **Question.** Exactly which regular classes of colourings need seven (or six) when properness is only required almost everywhere, and does
 Voronov's circle-colouring method run on the normal form of link 5?
@@ -58,27 +69,49 @@ Voronov's circle-colouring method run on the normal form of link 5?
 step. Or some regular class admits an almost-everywhere-proper six-colouring the everywhere-proper theorems exclude: `χ(ℝ²) ≤ 6` with no
 MR, and FS-107 becomes its verification. Or a theorem in print fails on reading: a correction, with its consequence for the reduction.
 
-## FS-107 — regularity against pathology (second; the competitor protocol)
+## FS-107 — stability: can vanishing holes save a colour? (second; the competitor protocol)
 
-Two competitors and an advisor (`plans/PROTOCOL-competitor-and-advisor.md`, with its 2026-09-26 fence fix: transcripts, `chats-bak/`,
-and the shared scratchpad fenced by name).
-- **Competitor R (regularity):** wildness cannot save a colour. Candidate routes:
-  - Voronov's argument run on density-open classes (FS-106 item 3);
-  - an excision: show that the wild part of an optimal colouring can be removed;
-  - a Lipschitz-in-probability bound for some optimal CP colouring (finite perimeter), then De Giorgi;
-  - the pointwise identity `1_{D_j}·(1_{D_j} * σ) = 0` with the half-derivative smoothing of circle averages: the colour at `x` is a
-    zero of the smoother vector `(1_{D_j} * σ)(x)`.
-- **Competitor W (pathology):** build a tight, wild, almost-everywhere-proper five- or six-colouring. The constraints it must meet, held:
-  - each class density at most `m₁(ℝ²) ≤ 0.2470`, so at least `1 − (k−1)·0.2470`;
-  - tight everywhere, since slack needs seven (link 4);
-  - not closed, not a nice map, not polygonal.
+*Renamed and re-aimed 2026-09-27 (the owner's ruling, item 77; the advisor's design, A2 = `plans/POROS-2026-09-27-fs106-close-and-fs107.md` §3).
+Minted 2026-09-26 as "regularity against pathology"; row 131 removed that frame: a refutation never needs a wild set (TQ §3.5: "A refutation
+never needs a wild set. By (e) it is a sequence of *periodic polygonal colourings with slack*, whose uncovered density tends to 0; the wildness
+exists only in the limit that Route II takes."). The contest is stability, not regularity.*
 
-  Candidate material: fat Cantor sets, self-similar and random constructions, Pritikin's six-colouring of almost all the plane
-  (`[Pritikin1998]`, unheld).
-- **The advisor** reads both and names where each would have to break the other.
+**Two competitors and an advisor** (`plans/PROTOCOL-competitor-and-advisor.md`, §1 as it stands, with the fence rule 13: transcripts,
+`chats-bak/`, the shared scratchpad by path). Each brief names its object — **the sequence** (periodic grid-square partial six-colourings with
+slack `ε_n → 0` and holes `δ_n → 0`; its only gap is the hole gap) or **the limit** (a tight a.e.-proper six-colouring in the normal form; there
+FS-106's structural gaps are the content) — and labels the other record's material "applies to the limit object" or "to the sequence object".
 
-**Outcomes:** a regularity theorem (seven, given MR); a wild colouring (at most six, with no MR); or a named obstruction on each side,
-itself a result: *"All novel knowledge is a success."*
+- **Competitor R (stability).** Prove C-Q-STAB in its exact disc form (TQ §4.5 item 2, "for some radius `R`"): for some `R` and `δ₀ > 0` and
+  every `ε > 0`, every partial six-colouring of `U_R(0)` with no monochromatic pair at distance in `[1 − ε, 1 + ε]` leaves at least `δ₀|U_R|`
+  uncovered. With row 131 this is `χ_m⁰(ℝ²) ≥ 7`, and given MR `χ(ℝ²) = 7`. The mechanism R must supply, TQ §4.5 item 5 verbatim: *"a mechanism
+  forcing holes of `ε`-independent total measure — a Voronov-type contradiction robust to a free colour on any set that is thin at scale `ρ₀`,
+  for every band `ε ≪ ρ₀`."* (TQ never defines "thin at a scale `ρ₀`", A2 §0; the disc form above is the exact question.) Routes: (R-Q) on the
+  sequence object; (R-S) on the limit object, through FS-106's named steps — C-AE-Q2's [G1]–[G4] (the no-swap lemma first: the index method
+  dies at a unit-arc interface facing a bowtie, row 132), C-T-L1b's two steps, C-T-TRIb's hull step, C-T-BIKE. The pair form (PD-EQ, A2 §2.2, a
+  sketch: a band-pair defect uniform in `ε`) is the decisive quantity a stability proof may count.
+- **Competitor W (near-colourings).** Row 131's (e), TQ-EQ verbatim: *"for every `δ > 0` there are `ε > 0` and a **periodic** partial
+  6-colouring by half-open grid squares, with no monochromatic pair at any distance in `[1 − ε, 1 + ε]`, leaving density `≤ δ` uncovered"* — or
+  equivalently `µ₆⁰ = 1`; tight polygonal tilings in `[Parts2020c]`'s framework with voids tending to 0 suffice (TQ-SUP). Success gives
+  `χ_m⁰ ≤ 6` and `χ(ℝ²) ≤ 6` **with no MR**; it rests on the easy direction of row 131. W's families are given by formula, with rational data,
+  and checked exactly (allowed under the ban: a check of a given object).
+- **The advisor** reads both, holds the shared constraints and the break table, and asks each side before round 1 to name the step of the
+  other's programme it expects to fail (G51: zero retractions means the disagreement has not started).
+
+**Shared constraints** (A2 §3.4; every one held, both sides get the list verbatim; row 131's constants carried): the floor
+`1 − µ₆(ε) ≥ ε²/(6+ε)²` (given V-1.3; A2's table has TQ's weaker `ε²/78`); the ceiling `1 − µ₆⁰ ≤ δ₆ = 1.430172·10⁻⁴`, `1 − µ₆(ε) ≤ δ₆ + O(ε)`;
+each class of density `≤ m₁(ℝ²) ≤ 0.2470`; one-class-at-a-time arguments stop below 4.37 (row 129); thin holes fill (HOLE-t); no multichromatic
+coloured point, WLOG (the pixel lemma); not hitting form (strips of density `ε`, TQ-HIT with QB's cap); the limit is tight (C-AE-SLACK), not
+polygonal bar `d = 2`, not a nice map; islands of one colour have diameter `≤ 1 − ε` (TS-C, TS-C′); the limit's exceptional set (C-T-TAN's
+cones, cusps, weak-* limits); the ban to 2026-10-01.
+
+**Killing tests** (A2 §3.5). R's: the Parts calibration (an argument forcing more than `δ₆ + O(ε)` of holes on eroded Parts tilings is wrong);
+the seven-colour control (it must fail on the slack hexagonal 7-colouring and name where "six" is spent); the strip test (if every step survives
+TQ-HIT's strips, it is hitting form, capped at `O(ε)`); normalisation (uncovered area over plane area, never pairs over band). W's: the exact
+check (a monochromatic pair of squares whose distance interval meets the band refutes a member); the floor; the class density; a driving
+parameter that sends `δ → 0` (Parts's own family has none). **The joint dial** is FS-109 (post-ban). **The break table** is A2 §3.6.
+
+**Outcomes:** R's theorem (seven, given MR); W's sequence (at most six, with no MR); or a named obstruction on each side, itself a result:
+*"All novel knowledge is a success."* A rung for R, not decisive: improve the floor's `ε²` toward `ε`, the most a hitting-form argument can give.
 
 ## Lean (throughout, never a cost)
 
@@ -87,6 +120,8 @@ MR in full (`[EinsiedlerLindenstrauss2022]` Thm 1.3 and the deduction FS105-DED;
 final form.
 
 ## Provisional bearings (replaced by the re-grokking at the opening)
+
+For FS-107, added at FS-106's close: G82 (stability; row 131), G71 with its index sentence (row 132), G21 (lists of exceptions measure their class), G51 (a construction against a proof is where contest is possible).
 
 G30 (the discipline ladder: geometric measure theory and circle topology are the next room), G46 (recognize the classical theory:
 Voronov's method is the nearest technology), G79 (the example invariant every tight colouring carries), G72 (the structural form: a

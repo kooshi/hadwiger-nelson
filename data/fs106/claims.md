@@ -185,3 +185,34 @@ repaired. Nothing is held unless §1 lists it with a grade. FALSE and GAP are re
 
 - **C-ROW40** (this list's wording). `LEDGER.md` row 40's "conditional on `[Voronov2023]` Thm 1.1 and `[SokolovVoronov2025]`" is discharged by Phase V's
   verdicts on V-1.1 and SV-2, or corrected by them.
+
+## Corrections at the close (FS106-C, 2026-09-27; the list above is left as it was fixed)
+
+*Each correction with its source. The verdicts themselves are in `plans/FS106-regular-half.md` §R-close stage 1 and `plans/FS106-derivation.md`.*
+
+- **I-D4:** the quotation's "…" drops the definition of `supp S_j`; restore it from `plans/FS103-M-derivation.md` §3.1, D4 (FS106-A stage 4,
+  inventory item 29). D-SLACK uses the closed band, I-D4 the open one (harmless).
+- **`µ₆⁰` is not defined in this list** (QB §1.1): it is the supremum of the upper density of `C₁ ∪ ⋯ ∪ C₆` over disjoint measurable classes whose
+  unit pairs are `Leb ⊗ σ`-null (TQ §3; QB §1.2); `µ_k(ε)`, `µ_k⁰` likewise for `k` classes.
+- **C-Q-REM:** the constant found is any `η < 1/(1 + 4π)` (TQ; `η = 1/20` used), `η = 1/10` in QB's form — not `1/48` (TQ §2.2).
+- **C-Q-STAB:** the advisor's radius-3 wording is sufficient for `χ_m⁰ ≥ 7`, not equivalent; the exact equivalent is the same statement "for some
+  radius `R`" (TQ §4.5 item 2). The long wording attributed to the advisor is not on disk; its record holds only "six band-proper colours plus a
+  free seventh of density ≤ δ" (TQ §1.1; inventory item 40).
+- **C-Q-LOCAL:** keep "at least". Verdict: TRUE for `δ > δ₆`; GAP at `δ = δ₆`, likely TRUE (the missing step: `1_H ∗ 1_{U₃}` non-constant) —
+  A2 §1a.2; inventory item 50's "at least" → "greater than" is withdrawn (item 69).
+- **TQ-EPS2** (not a claim of this list): carry `ε²/(6 + ε)²` (QB §2.8), conditional on V-1.3; TQ's `ε²/78` stands as weaker, its §3.4 "`ε²/144`" is
+  an internal inconsistency.
+- **TQ-HIT** (not a claim of this list): the cap is `ε` (strips at spacing 2), not `4ε` (QB §2.9; A2 §1a.1).
+- **C-T-IND:** MISSTATED as corrected by TS. Carried form (SB §2.3, A2 §1b.2): under reading (A) (a continuous lift agreeing with the trace almost
+  everywhere) the index is well defined whenever a lift exists, and complementary curves with no swap satisfy `|Ind γ₁ − Ind γ₂| ≤ 1`; "an index
+  exists iff the traces change colour finitely often" is FALSE under both readings; a swap with `|ΔInd| = 2` exists without Conditions 5–6.
+- **C-AE-Q2:** its GAP has a fourth named step, [G4], Prop. 12's swap exclusion (SB §4.1 T1); TS §2.5's row "Prop. 12, Cor. 4 … hold wherever the
+  curves exist" is FALSE without Conditions 5–6 (A2 §1b.2).
+- **C-AE-CONV** (stated by SB §2.2 and TS §3): for locally finite tilings by convex polygons; the reduction needs the fill step (merged regions
+  may be annular), after which it is TRUE at C-AE-POLY's grade. `[Coulson2004]`'s printed theorem is six, tile-based, with an area bound.
+- **C-AE-NICE** (stated by V3 stage 2): "Let `G` be a connected graph in `ℝ²` whose faces are open topological discs of diameter `< 1`, each bounded
+  by a cycle of `G`. If each face receives one of `k` colours so that any two distinct faces of one colour are at distance `> 1` (points of `G`
+  carry no colour), then `k ≥ 7`."
+- **SV-2's repaired chain** (A2 §1b.1): Prop. 8, then fill every non-simply-connected region in the bounded disc, then Lemma 4 — the fill step is
+  part of the chain, closing A12.
+- **P §1.1 Q7:** Townsend's scan reads "fine detail", not "line detail"; his lemma's constant is `π/3`, Woodall's assertion `⅔π` (V §1.1).
