@@ -397,7 +397,7 @@ def main():
     return S, rows, bad
 
 
-if __name__ == "__main__" and "--plants" not in sys.argv:
+if __name__ == "__main__" and "--plants" not in sys.argv and "--yplants" not in sys.argv:
     main()
 
 
@@ -449,3 +449,28 @@ if __name__ == "__main__" and "--plants" in sys.argv:
     r = run_plants()
     print("STRIP PLANTS", "ALL AS PREDICTED" if r else "SOME MISMATCH")
     sys.exit(0 if r else 1)
+
+
+# ------------------------------------------------------------------ step 4: Y's two strip plants rebuilt from their words (plans/FS112-Y-construction.md
+# §2.2: "`flat` (shared arcs -> chords)", "`swap` (the colours of C_j, j = 1, 2 mod 3, exchanged)") and put through THIS checker
+class FlatStrip(Strip):
+    def tile(self, kind, j):
+        return [K.Seg(p.S, p.E) if p.kind == "A" else p for p in Strip.tile(self, kind, j)]
+
+
+class SwapStrip(Strip):
+    def colour(self, kind, j):
+        c = Strip.colour(self, kind, j)
+        if kind == "T" and j % 3 in (1, 2):
+            c = {"O": "M", "M": "O"}[c]
+        return c
+
+
+def run_y_plants():
+    for label, S in [("Y's plant flat (every arc -> its chord)", FlatStrip()), ("Y's plant swap (top tiles over V_1, V_2 exchange colours)", SwapStrip())]:
+        rows, bad, gmin = check_strip(S)
+        print(f"   {label}: {len(rows)} orbit pairs; REJECT {len(bad)} orbit pairs: {sorted(bad)}")
+
+
+if __name__ == "__main__" and "--yplants" in sys.argv:
+    run_y_plants()

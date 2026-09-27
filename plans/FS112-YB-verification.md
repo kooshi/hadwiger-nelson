@@ -6,11 +6,11 @@ Y's; every object is rebuilt from its defining words; my verdicts are committed 
 
 ## Theorems this phase proved
 
-*(filled stage by stage; one line each, with grade and address)*
+The table is in stage 4 (YB-STRIP, YB-CONTACT, YB-T2, YB-SEAMS, YB-EDGE, YB-WEDGE, YB-LOCK, YB-CHAIN, YB-NB4); stage 5 adds none (a comparison).
 
 ## Would have searched here (standing rule 3)
 
-*(one line per move I would have made by search, and what I did instead)*
+The log is in stage 4 (five lines). Stages 1, 2 and 5: none (reading, a checker built from a derivation, a comparison).
 
 ## Fence log
 
@@ -249,3 +249,33 @@ or rings the strip does not hold, and the headline is global.
 
 `[AxenovichEtAl2014]`: p. 8 read (text), Figure 4 viewed for its combinatorics (FS112-YB, 2026-09-27), the strip rebuilt exactly and accepted by an exact
 checker. `[Polymath2021]`: pp. 194–195 and 197–200 read (FS112-YB).
+
+## Stage 5 — SAVED: Y's record and tools read (the brief's step 4); every divergence, with both addresses
+
+*Read after stage 4 was committed (`adaa1f36`): `plans/FS112-Y-construction.md` in full, `tools/fs112_y_check.py` (header and structure),
+`tools/fs112_y_calibrate.py` (structure), `data/fs112/fs112-y/calibrate_strip.out`, `calibrate_plants.out`. Y's strip calibration re-run at today's HEAD
+(`python3 tools/fs112_y_calibrate.py strip plants`): identical output. Y's two strip plants I had not run, rebuilt from their words and put through my
+checker (`data/fs112/fs112-yb/y-plants-through-yb.txt`).*
+
+**The headline: no object and no verdict differs.** The two rebuilds are the same strip (same geometry; the same colouring under the label map
+P, G, B, M, R, O ↔ Y's 1, 2, 3, 4, 5, 6: arches `A_j` = 1, 2, 3; inverted arches `B_j` = 4, 5, 6; top tiles `C_j` = 5, 6, 4; bottom tiles `D_j` = 2, 3, 1),
+both ACCEPTed by independent exact checkers — **CAL-STRIP calibrated in the robust form the claim list §7 asks for.** Every closure type Y reports
+(`P_1 {1,2,4,5}`, `(3/2, 0) {1,3,4,6}`, `W {2,3,4}`, `V₀ {1,3,5}`, `A₁ {2,4,6}`, `W′ {1,5,6}`) equals mine; Y's ring of `P_1` ("`3 | Γ | 6 | Γ | 3 | 6 | Γ | 3 | Γ | 6`")
+equals mine (B, Γ, O, Γ, B, O, Γ, B, Γ, O).
+
+| # | divergence | Y's address | mine | kind |
+|---|---|---|---|---|
+| D1 | **Label slip**: Y writes `P_j = (x_j, 0)`, `x_j = j/2`, then calls `(3/2, 0)` "`P_2`" (T2's second seam point); the instance file inherits it. By the formula it is `P_3`. Coordinates are explicit, so no object changes. | §1.3 item 4; §2.2; Y112-T2-SQRT3 | stage 4 header | slip, harmless |
+| D2 | **Reading of the rule**: Y fixes the top edge by "distance 1" from the **valley** to the top corners; I checked both readings of "the point of intersection of circular arcs" (valley and apex) and they give the same `Y` exactly. Same object; the rule is unambiguous. | §1.3 | stage 3 | reading, same object |
+| D3 | **CAL-7's object**: Y calibrated on the tight **hexagonal** seven-colouring (side 1/2; controls side 11/20 and the index-4 colouring — FS110-Y's frozen controls); the claim list's CAL-7 is "row 33's boundary-tight **brick** colouring (G20)". Mine is the brick (`4/5 × 3/5`, shear `2/5`, `(i + 3j) mod 7`), ACCEPT, with two plants. Both tight seven-colourings; only the brick is the named object. | §2.1 row 2; `tools/fs112_y_calibrate.py` `hexs()` | stage 2; `tools/fs112_yb_calib.py` `cal_7()` | calibration object differs from the claim list |
+| D4 | **Checker model**: Y keeps FS110-Y's MAP HYPOTHESIS (distinct tiles touch only at shared endpoints), guarded by a float partition sample (4,896 samples, 0 overlaps, 0 holes); mine replaces it by an exact meeting test and, on the strip, an exact map-consistency check (every piece shared by exactly two tiles or on the edge; every chain closed). **The exact check confirms, on the strip, the hypothesis Y's verdict assumed.** | `tools/fs112_y_check.py` header | `tools/fs112_yb_check.py`; `fs112_yb_strip.py` `consistency()` | model; verdicts agree |
+| D5 | **Pairs counted**: Y 60 ordered pairs (first in one period, horizontal gap ≤ 1); mine 90 orbit pairs examined, 36 within reach (minimum ≤ 1). **The same population**: 60 = 12 self-pairs + 2 × 24. No pair within reach was examined by one checker and not the other. Completeness: Y by "a window twice as wide adds none"; mine by an exact gap bound (19/4). | §2.1 row 3; `calibrate_strip.out` | stage 3 | count convention |
+| D6 | **Arcs counted**: Y "22 unit arcs read in columns −1…4"; mine 12 per period, four per column (so 24 in six columns). Every one "both" in both. The count 22 is not reconciled (probably a window-edge effect); verdict-neutral. | §2.2 | stage 4 O1 | unreconciled count, verdict-neutral |
+| D7 | **Plants**: `tall` run by both, same six self-pairs. Y's `flat` and `swap`, rebuilt from their words through my checker: **the same rejected pairs** (`flat`: my 12 out-contact orbit pairs = Y's 24 ordered; `swap`: `(D0, T1)`, `(D2, T2)` = Y's `(B0, C1)`, `(B2, C2)`). My `rho11`, `rho9`, `colswap` were not run by Y; Y's `cw_arcs` and `endpoints_only` on the strip not by me. | §2.2; `calibrate_plants.out` | stage 3; `y-plants-through-yb.txt` | cross-check agrees |
+| D8 | **Close complementary pairs found by one side only**: I also find `(A_j, A′_j)` at `√15/2` (three per period), saved by T2 at `P_j, P_{j+1}` on a **thin** unit rhombus (`|w₀w₀′| = 1/2`) — T2 is not only "the spindle's rhombus" — and the overlapping covering pairs `(P_j, P_{j+1})` at 1/2. Y lists `(W, W′)`, `(V₀, A₁)` and `(P_1, (3/2, 0))`. | §1.3 item 5 | stage 4 O2, O3; `strip-objects.txt` | a finding one side has |
+| D9 | **Y112-EDGE**: the same pair and point; Y's no-colour step [hand, one mind]; mine the same argument blind, plus the exact open cone (30°, 165.52°), three exact named points and a control outside the cone (R free, as derived). **The no-colour step is now two minds, one blind.** | §1.5, Y112-EDGE | stage 4 O3; `o3-edge.txt` | agreement, second mind |
+| D10 | **The chain walk**: on every step the strip decides, the verdicts agree — NB-4 (c) at `P_1`; NB-5 (c) at `(W, W′)`; N3-CONF holds with "finite" relaxed; N4-SHADOW degenerate at λ = −1 with the same cone; N4-TERM's "cubic" (c). Where the strip is silent, Y gives general verdicts off named exceptions (steps 4–8, 11–17, the `κ = ±1` GAPs, W1–W5), which my instance does not ask; I record "vacuous / not contradicted" there. The headline: Y "(c): its proof does not transfer", mine "not contradicted (global)" — different questions, consistent. | §1.4, §2.3 | stage 4 O5 | framing only |
+| D11 | **O4's claims**: the same verdicts where both give one — C-UA-WEDGE MISSTATED for the outer colour; C-UA-BUDGET's second branch fails at `P_1`; the strip's bi-infinite periodic chain; C-UA-INC "both" only. Mine adds: the corrected WEDGE verified at all 12 arcs; BUDGET's diagnosis (union versus disjoint covering sense; branch 1 holds at 62.09° under the disjoint sense); ARC-INERT vacuous on the strip, with the arc lock (two exact bends). | §2.5 item 4 | stage 4 O4 | agreement; mine adds |
+| D12 | **Examined by Y only**: W1's corrected NB-4 (α)(β)(γ) (not in my instance; my data confirm the strip satisfies (α) in every orbit); W4's reading of the base's circles (my arc list confirms the arcs at `V₀`, `A₁` are centred on their unit circles); W2, W3 retractions (off the strip). **Examined by me only**: exact M-in points and antipodes on every trivalent ring (C-CHAIN-15); same-type trivalent pairs also at `√(9/4 + 3√5/4) ≈ 1.9817` (C-CHAIN-14). | §2.3 | stage 4 O5 | coverage |
+
+**The fence discipline held**: nothing of Y's was opened before `adaa1f36`; the only touch is the start-up listing of directory names (fence log).

@@ -1,0 +1,2 @@
+   Y's plant flat (every arc -> its chord): 90 orbit pairs; REJECT 12 orbit pairs: [('B0', 'U-2'), ('B0', 'U1'), ('B1', 'U-1'), ('B1', 'U2'), ('D0', 'T-1'), ('D0', 'T2'), ('T0', 'D-2'), ('T0', 'D1'), ('T1', 'D-1'), ('T1', 'D2'), ('U0', 'B-1'), ('U0', 'B2')]
+   Y's plant swap (top tiles over V_1, V_2 exchange colours): 90 orbit pairs; REJECT 2 orbit pairs: [('D0', 'T1'), ('D2', 'T2')]
