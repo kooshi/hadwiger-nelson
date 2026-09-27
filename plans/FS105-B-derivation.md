@@ -284,3 +284,33 @@ finitely generated subgroup lacks — against the **measure's invariant**: zero 
 |---|---|
 | search the multiplier family for the densest set of bounded height | the explicit family `(s+i)/(s−i)` with a one-line height bound |
 | search for a `u ∈ U` non-unit at a split prime above 3 | one `z ∈ 𝔔 ∖ σ𝔔` read off the ideal's basis |
+
+---
+
+## Stage 3 — the write-up (committed before anything fenced was opened) — SAVED
+
+| claim | verdict | grade | minds (this job) |
+|---|---|---|---|
+| **EF_F⁺ at `F₁ = ℚ(√635087)`** (`claims.md` (b), verbatim there) | **TRUE** | [hand]; its arithmetic inputs [tools exact] (`tools/fs105_b_setting.py`, `tools/fs105_b_heights.py`, every plant firing) | one, blind to X01D, X12B, X01V |
+| **EF_F⁰ at `F₁`** ("`U`-ergodic, `h_μ(u) = 0` for every `u` ⟹ `μ(E) = 1`") | **TRUE** — a corollary of the above with `u* = (3+4i)/5`; ergodicity unused | [hand] | one, blind |
+
+- **The proof in one paragraph.** Model `R̂ = 𝔸_𝒮/D` (split places and `∞`; `ker Φ = D ⊂ L`, derived). A non-torsion `u*` expands at a
+  split place `𝔓₀` (Kronecker). Zero entropy of `u*` alone gives, by Shannon–McMillan–Breiman, `μ(x + W_n) ≥ e^{−nβ}` for Bowen
+  neighbourhoods `W_n` that are thin (`e^{−nλ}`) at `𝔓₀` and merely bounded elsewhere, including at `∞`. The rational unit vectors
+  `(s+i)/(s−i)` give `≥ ½M^{1/4}` automorphisms of height `≤ M`; the pigeonhole makes two translates collide, and the collision is a global
+  `ℓ_n ∈ L` with `|x̃_{𝔓₀} − ℓ_n| ≤ C₁e^{−3nλ/4}` and `H(ℓ_n) ≤ C₂e^{nλ/3}`; Liouville at `𝔓₀` freezes `ℓ_n`, so the `𝔓₀`-coordinate is
+  global. Then each other split place is killed by a contraction `z/σz ∈ U`: a finite measure invariant under a contraction of `L_𝔔` sits
+  at 0. What is left is `T + A`.
+- **Hardest step:** Lemmas 1a–1b — making the entropy of a `u*` that is neutral at `∞` and at infinitely many split places speak about
+  one coordinate that exists only modulo `D`, which is dense in `L_{𝔓₀}`. The lift is unique on a small neighbourhood because `D`
+  meets a bounded set in a lattice point only; that is what makes the Bowen ball thin at `𝔓₀`. It was the step C0 named; it holds.
+- **C0 scored:** registered 0.85 TRUE (EF_F⁺), 0.90 (EF_F⁰); both TRUE. Wrong-reason line: W1 excluded (the archimedean coordinate is
+  bounded and never approximated; C-1 passes); W2 excluded (only `u*`'s entropy, only in Lemma 2); W3 excluded (Lemma 5's `G` is
+  lift-independent because `D ⊂ L`); W4 checked exactly (H1–H4, with a boundary slip of my own in H3's constant, fixed).
+- **Scope remarks (not claimed, for the owner):** (i) nothing in Steps 0–6 reads `[F:ℚ] = 2` except `κ = 1/(2d)`; any `κ > 0` works,
+  so the argument runs verbatim at every **totally real** `F` with `R = O′` — at `F_dG` (degree 16) with `κ = 1/32`, which bears on
+  claim (c)'s "whatever size of that count the zero-entropy argument needs": **any positive power**. (ii) Off the totally real fields
+  Lemma 0 changes (a non-torsion `u` may expand only at an archimedean place); not examined. (iii) Step 6 (one global place ⟹ `T + A`)
+  is a stand-alone lemma that uses only `U`-invariance, not entropy.
+- **Proposed for the close (not written by me):** `LEDGER.md` row 120's grade line — "EF_F⁺ … a third derivation blind to the others
+  (FS105-B), TRUE at ℚ(√635087)", with FS105-B's divergences from stage 4; `LEDGER.md` § B: FS105-B-M1, -L5, -L6, -EFP, -EF0.
