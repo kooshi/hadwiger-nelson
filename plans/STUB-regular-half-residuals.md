@@ -6,6 +6,16 @@
 
 **Banner (the owner, at FS-110's close, 2026-09-27):** items 1 (S–V Thm 2's `d = 2` case: struck, row 134, by FS110-CB and FS110-CD blind and FS110-CE's Antipodal Lemma), 2 (Lemma 3 at `√3 ≤ d < 2`: FS110-CB's full derivation) and S–V Thm 1's fills (answered under Condition 5 with Condition 6 dropped: W-MERGE and N4's cone removal, row 134) are answered; what is left is Townsend's (c) in full and `[Townsend2005]` against the manuscript. The text below is the stub as minted.
 
+**Banner (job LP of the consolidation run, 2026-09-27): item 5 is answered.** `[Townsend2005]` (held: `~/source/library/geombinatorics/geombinatorics-v14-n4-2005-04.pdf`,
+pp. 184–193; reading note `~/source/library/notes/townsend-2005-reading.md`) is the 1979 manuscript word for word in every definition, theorem
+and proof — the differences are the affiliation, three sentences of abstract (*"This paper was written in 1979 but never published."*), `π/3`
+for `⅓π`, and one garbled glyph — and its simplification (c) (p. 187) is the manuscript's sentence, again with no argument. So FS106-V3's GAP
+at (c) stands in print, and FS106-TW's fill (Woodall's steps 2, 3, 5, in outline) is still the only one. `[Soifer2024]` ch. 25 is a different
+text, Townsend's 2007 exposition (p. 255): (c) the same sentence (p. 257), but Theorem 5 re-argued — (i) at a vertex of degree 5, two cases
+by the angle at `v`, the cut points located; (ii) with *"at most two cut points"* and a `π/2` arc remark (pp. 264–267) — still resting on (c)
+for distinct colours at a vertex. **Left:** item 4, and with it a reading of the 2007 Theorem 5 against FS106-V3's other flagged steps
+(vertex existence; the cross-cut arguments), which it partly writes out. `data/consolidation-2026-09-27/lp/record.md` stage 3.
+
 ## The question
 
 FS-106 verified the regular half of the program (row 132) and left five named residuals in print. Close each, by derivation, or find the
@@ -22,7 +32,7 @@ counterexample it would take.
    bichromatic vertices of degree ≥ 4, **except Woodall's "cone"** (the two regions inside the cusps between two unit discs tangent at the
    vertex), which his step 5 excludes at five colours and nothing excludes at six.
 4. **Townsend's simplification (c) filled in full** (FS106-TW, FS106-AE-MAP6): Woodall's steps 2, 3, 5, 7 were checked in outline only, step 8 not.
-5. **`[Townsend2005]` against the 1979 manuscript** (unheld; Geombinatorics request sent 2026-09-27).
+5. **`[Townsend2005]` against the 1979 manuscript** — answered (the banner above): the same text; (c) unargued in both.
 
 ## Bearing on the answer
 

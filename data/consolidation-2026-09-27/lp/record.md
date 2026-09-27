@@ -185,3 +185,55 @@ pp. 307–311), `[Isbell / HDK1964]`, `[Johnson1996fcn]`, and the § C rows `[Fr
 `[ChangKeisler1973]`, `[ErdosEtAl1973]`, `[Sierpinski1964]`. § B: the two issue files; `[BendaPerles2000]`'s single-paper scan marked read.
 Rules 0d and 0e updated. `python3 tools/bib_audit.py`: exit 1, **for one key not mine** — `[GwynStavrianos2022]`, first seen in
 `data/consolidation-2026-09-27/lw/record.md` (job LW's); every key this job added resolves.
+
+## Stage 3 — SAVED
+
+### `[Townsend2005]` read in full, compared with `[Townsend1979ms]` and `[Soifer2024]` ch. 25
+
+`~/source/library/geombinatorics/geombinatorics-v14-n4-2005-04.pdf`, sheets 5–9 = pp. 184–193 (and Soifer's featured essay, *On Stephen P.
+Townsend's 1979 proof*, pp. 181–183), rendered at 150 dpi; compared line by line with the manuscript's and the book's text layers. Reading
+note with every difference: `~/source/library/notes/townsend-2005-reading.md`.
+
+**Is the printed text the manuscript's? Yes — word for word in every definition, theorem and proof.** The differences: the affiliation;
+the abstract (*"(known) result"* becomes *"proposition"*, and p. 184 adds *"An earlier attempt at a proof exists in the literature, but this
+is shown to be flawed. This paper was written in 1979 but never published."* and the 1981 note's citation); `π/3`, `2π/3` for `⅓π`, `⅔π`; one
+garbled glyph in Theorem 5 (ii), p. 192, where the manuscript has "γi" (the printed glyph uncertain); and the Lemma's stopping rule, legible in
+print where the manuscript's text layer drops symbols (p. 188: *"The algorithm terminates in not more than n cycles, where ε2ⁿ > L."*).
+
+**Does its simplification (c) close FS106-V3's gap? No.** p. 187, verbatim: *"(c) For each vertex v which is a boundary point of two
+non-adjacent regions of the same colour, choose ε>0 sufficiently small and describe an ε-neighbourhood whose closure contains v and whose
+intersection with each of the two regions is non-null, colouring this ε-neighbourhood the same colour as the two regions, and thus forming
+one new region incorporating the original two and the ε-neighbourhood."* — the manuscript's sentence, with no argument that the new points
+avoid distance 1 from the colour's other points. FS106-V3's GAP (the allowed set near `v` can pinch to cusps) stands in print; FS106-TW's
+fill (`[Woodall1973]` steps 2, 3, 5, in outline) is still the only one. **(c) is not argued differently, so no [hand] check was owed.**
+
+**`[Soifer2024]` ch. 25 is a third text, not a reprint** (p. 255: *"presented below exposition of the proof has been written by Professor
+Townsend especially for this book in 2007"*). Its (c) (p. 257) is the same sentence (*"(see Fig. 25.3)"* added); its Theorem 25.7 re-argues
+the manuscript's Theorem 5 — (i) *"Let v be any vertex in a 5-colored planar map and assume that it has degree 5"*, two cases by the angle
+at `v`, the cut points of `T₂`, `T₃` located; (ii) *"at most two cut points"* and a `π/2`-arc remark (pp. 264–267) — and still takes the
+distinct colours at a vertex from (c) (p. 266: *"since T1⁰ is 4-colored, this vertex is at most of degree 4"*). FS110-PA's "reprints it" is
+corrected in `BIBLIOGRAPHY.md`. Whether the 2007 text writes out FS106-V3's other flagged steps (vertex existence; the cross-cut arguments)
+is left to FS-108 (partly: the no-vertex and cross-cut arguments are longer there; vertex existence is still assumed — *"Let v be any
+vertex"*).
+
+**Written:** `plans/STUB-regular-half-residuals.md` — a banner (item 5 answered; what is left) and item 5's line. `BIBLIOGRAPHY.md` —
+`[Coulson2004]` / `[Townsend2005]` (copy, read status), `[Townsend1979ms]` (the texts agree), `[Soifer2024]` (ch. 25's status corrected),
+§ R.5 and rule 0d (`[Townsend2005]` out), § B (the issue file), and a § C row for Soifer's essay, `[Soifer2005Townsend]`.
+`python3 tools/bib_audit.py`: exit 0.
+
+**Draft for the owner — the ranking row** (`plans/FRONTIER-STUBS.md` and its `CLAUDE.md` mirror, rank 5; neither file is this job's):
+- now: *"three of five items answered at FS-110 (row 134); left: Townsend's (c) in full; `[Townsend2005]`"* |
+  *"link 4's print holes, now Townsend's only: none on the answer (row 131)"*
+- proposed question cell: *"four of five items answered (row 134; `[Townsend2005]` is the 1979 manuscript word for word, (c) unargued there
+  too); left: Townsend's (c) in full, with `[Soifer2024]` ch. 25's 2007 re-argument of his Theorem 5"* — bearing cell unchanged.
+- **byte cost in `CLAUDE.md`:** the mirror cell `three of five items answered at FS-110 (row 134); left: Townsend's (c) in full; \`[Townsend2005]\``
+  becomes `four of five answered (row 134; \`[Townsend2005]\` is the manuscript, (c) unargued); left: Townsend's (c) in full` — **+14 bytes**
+  (a count in stage 5's drafts, measured there).
+
+**Also stage 3 (the owner's second addition):** `CLOSED-QUESTIONS.md` §3's `d(6) = 1` entry — *"repaired at FS-106 except one edge case,
+`d = 2`"* replaced by the edge case closed at FS-110, quoting row 132 (*"(the `d = 2` edge case does not arise: FS-110's CB and CD, both
+blind)"*) and row 134 (*"the `d = 2` closure by two routes (CD's Theorem D2; CE's Antipodal Lemma)"*); BK's draft D1 checked against row 132.
+
+### Would have searched here
+
+Nothing (reading and comparison).

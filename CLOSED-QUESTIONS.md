@@ -660,7 +660,9 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   of this repository, kernel-checked; the four-colouring of `ℚ⁴` is not). Their Question (1), every finite planar graph in `G₁(ℚ⁴)`, and (3),
   `χ(ℚⁿ)` for `n ≥ 5`, stay open and untouched here.
 - **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
-  more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no — its printed proof repaired at FS-106 except one edge case, `d = 2` (row 132).
+  more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no — its printed proof repaired at FS-106, and its one edge case, `d = 2`, closed at FS-110: row 132, *"(the
+  `d = 2` edge case does not arise: FS-110's CB and CD, both blind)"*, by two routes (row 134: *"the `d = 2` closure by two routes (CD's Theorem
+  D2; CE's Antipodal Lemma)"*).
 
 ---
 
