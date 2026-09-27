@@ -10,7 +10,7 @@
 | N-E0 | A-EXACT, sight form: `S(z) ∌ colour(z)` for `z` in a tile, `{z : j ∈ S(z)}` open, so `S(z) ≠ [6]` for every `z ∈ ℝ²`; the consequence holds for every family of vertices whose closure types have union `[6]` (disjointness unused) | [hand, trivial; two minds with FS110-A] | stage 1, §1.4 |
 | N-E1 | A-CIRC, closure form: `u ∈ cl(T)`, `T` of colour `j` ⟹ `ω(u) ∩ C_j° = ∅`; holds for a cusp colour | [hand, trivial; two minds, different route from FS110-A's] | §1.4 |
 | N-E2 | contact lemma: two same-colour tiles touching `u`, `u′` with `\|u − u′\| = 1` are Siamese (`T ⊆ B̄(u′,1)`, `T′ ⊆ B̄(u,1)`) or outer (`T ∩ B(u′,1) = ∅ = T′ ∩ B(u,1)`) — exact, whole tiles | [hand, one mind] | §1.4 |
-| N-SEAM | seam-point lemma: for `P_cl(u) ∪ P_cl(v) = [6]`, `\|u − v\| < 2`, each common unit point `w₀` lies on `Γ`; every tile at `w₀` lies on one side of `ω(x)` for each `x ∈ {u, v}` holding its colour; if `w₀` is not a vertex, the arc through it is an arc of `ω(x)` for one `x`, both side colours are `x`'s, and `x` has a colour of its type in both side cones (TS-U) | [hand, one mind] | §1.4 |
+| N-SEAM | seam-point lemma: for `P_cl(u) ∪ P_cl(v) = [6]`, `\|u − v\| < 2`, each common unit point `w₀` lies on `Γ`; every tile at `w₀` lies on one side of `ω(x)` for each `x ∈ {u, v}` holding its colour; if `w₀` is not a vertex, the arc through it is an arc of `ω(x)` for one `x`, both side colours are `x`'s, and colours of `x`'s type other than those two fill both side cones (TS-U) — one colour in two sectors (a strong escape) when `\|P_cl(x)\| = 3`, possibly two colours when `\|P_cl(x)\| ≥ 4` (corrected stage 3) | [hand, one mind] | §1.4 |
 | N-TYPE | D-TYPE: `P_ess(u)` = colours owning a sector of positive angle at `u`, `P_cl(u)` = colours owning a sector; they differ iff some colour's sectors at `u` are all cusps | [hand, one mind] | §1.4 |
 | N-SIX | A-SIX: C-T-TAN's proof uses the types only through "all six classes are in `P(u) ∪ P(v)`" — sizes and disjointness unused | [read + hand; two minds with FS110-A] | §1.4 |
 
@@ -106,8 +106,9 @@ exact — whole tiles, not blow-ups — and it is symmetric in the two points.
 - *(c) if `w₀` is not a vertex (it is interior to one arc `A` of `Γ`), then both tiles at `w₀` have colours in `P_cl(x)` for one `x ∈ {u, v}`, lie on
   opposite sides of `ω(x)`, and `A` coincides with `ω(x)` near `w₀`: **a unit-arc seam centred at `x`**.*
 - *(d) in case (c), by TS-U at `x` (row 132: two minds, one blind), neither side colour of `A` lies in `x`'s two side cones (open cones of angle equal to
-  `A`'s angular length seen from `x`, about the two directions tangent to `ω(w₀)` at `x`); so `x`'s type has a further colour in **both** side cones — a
-  colour in two sectors straddling the tangent line at `x` with margin: the claim list's **strong escape**.*
+  `A`'s angular length seen from `x`, about the two directions tangent to `ω(w₀)` at `x`); so colours of `x`'s type other than the two side colours fill
+  **both** side cones. When `|P_cl(x)| = 3` that is one colour in two sectors straddling the tangent line at `x` with margin — the claim list's **strong
+  escape**; when `|P_cl(x)| ≥ 4` the two side cones may hold two different colours (corrected at stage 3, after A2's card 1, point 2: a retraction).*
 
 *Proof.* (a) If `w₀` lay in a tile of colour `k`, then `k ∈ P_cl(x)` for some `x ∈ {u, v}` (six is spent here: the pair covers the palette), and
 `w₀ ∈ ω(x) ∩ C_k°`, against N-E1 at `x`. (b) N-E2 with `u′ = w₀`. (c) Let `T₁, T₂` be the tiles on the two sides of `A` at `w₀`. If `T₁`'s colour is `u`'s
@@ -143,8 +144,10 @@ covering pairs as well. (N-SEAM makes the same point exactly: its (a) uses only 
 
 **C-TAN-POS: "at positive scale a complementary pair survives at w₀ only by a strong escape on one side or a double unit-arc seam". Verdict: split.**
 - **Case `w₀` not a vertex: TRUE, sharper and exact [hand, one mind; N-SEAM (c)–(d)].** The pair survives only if `w₀` lies on a unit arc of `Γ`
-  centred at `u` or `v`, and that centre has a strong escape (a colour of its type in both side cones). The strong escape comes **with** a unit arc at
-  `w₀`; no scale enters.
+  centred at `u` or `v`, and that centre's other colours fill both side cones — a strong escape when the centre's type has three colours, possibly two
+  distinct colours when it has four or more (corrected at stage 3). The escape comes **with** a unit arc at `w₀`; no scale enters. *Scope:* any closure
+  types at `u`, `v` with union `[6]` (overlap allowed), `|u − v| < 2`, `w₀` a non-vertex; it rests on N-E1 and N-E2 (necessary conditions), and on TS-U
+  for the side cones.
 - **Case `w₀` a vertex: GAP**, at the step "the tiles at `w₀`, each on one side of `ω(u)` or `ω(v)` (N-SEAM (b)), force a double unit-arc seam". What is
   held: at `w₀`, each of the four unit directions (the tangents of `ω(u)` and `ω(v)`) is either an arc of `Γ` along that unit circle or interior to a
   tile carrying a colour of the other point only. Not yet derived: which such vertex figures are consistent with the matching contacts at `u` and `v`.
@@ -194,11 +197,12 @@ The sight argument (N-E0) sees a horn, because a horn is an open set and a circl
 *As stated* ("the ways C-T-TAN's hypothesis can fail … are exactly: a tangent interface (T1 or T2), a bowtie or strong escape, a cusp, a sliver, a type
 with fewer than three essential colours or with four (V5), and `d = 2`") it lists the failures of C-T-TAN's **density hypotheses**, several of which are
 not failures of the map's survival: cusps (§2.2), types of two or four essential colours (N-SIX: C-T-TAN and N-SEAM need only the union), and slivers
-(N-SEAM needs no margin, so a sliver is not an escape of its own). **Corrected statement (the exact list, at the seam point).** Let `u, v` be a covering
+(N-SEAM needs no margin, so a sliver is not an escape of its own). **Corrected statement (the necessary list, at the seam point; "only if", not "iff").** Let `u, v` be a covering
 pair (closure types, union `[6]`, any sizes, overlap allowed) in a map of `𝓜_K`, `|u − v| < 2`. The pair survives at a common unit point `w₀` only if
 `w₀ ∈ Γ` and one of:
-- **(S1) `w₀` is not a vertex:** the arc through `w₀` is an arc of `ω(x)` for one `x ∈ {u, v}`, both its side colours are `x`'s, and `x` has a further
-  colour of its type in both side cones — a unit-arc seam with a strong escape at its centre (N-SEAM (c)–(d));
+- **(S1) `w₀` is not a vertex:** the arc through `w₀` is an arc of `ω(x)` for one `x ∈ {u, v}`, both its side colours are `x`'s, and `x`'s other
+  colours fill both side cones (one colour in two sectors when `|P_cl(x)| = 3`; possibly two colours when `≥ 4`) — a unit-arc seam with an escape at
+  its centre (N-SEAM (c)–(d));
 - **(S2) `w₀` is a vertex:** each tile at `w₀` lies on one side of `ω(x)` for every `x ∈ {u, v}` holding its colour (N-SEAM (b)); in particular each of
   the four unit directions at `w₀` (the tangents of `ω(u)` and `ω(v)`) is either the start of an arc of `Γ` or lies in the interior of a tile whose
   colour belongs only to the other point.
@@ -214,7 +218,7 @@ seam point is in a tile — N-SEAM (a) forbids it.
   around each tangent of `ω(u)`, and of `u`'s around each tangent of `ω(v)`);*
 - *(b) the two `u`-colours `a, b` around the tangents of `ω(v)` lie on opposite sides of `ω(u)` and are distinct, and at `u` their tiles lie on opposite
   sides of `ω(w₀)`; likewise for `v`;*
-- *(c) if exactly two of `u`'s colours are at `w₀`, then at `u` each tangent direction of `ω(w₀)` either starts an arc of `ω(w₀)` in `Γ` or lies inside
+- *(c) if `|P_cl(u)| = 3` and exactly two of `u`'s colours are at `w₀`, then at `u` each tangent direction of `ω(w₀)` either starts an arc of `ω(w₀)` in `Γ` or lies inside
   a tile of `u`'s third colour `a′`; if no arc of `ω(w₀)` leaves `u`, then `a′` owns two sectors at `u` straddling the tangent line of `ω(w₀)` — a strong
   escape (a bowtie in `a′`) at `u`; likewise at `v` with its third colour `c′`;*
 - *(d) `ω(w₀)` meets tiles of at most the two colours outside `P_cl(w₀)`; with `|P_cl(w₀)| = 4` these are `a′` and `c′`, alternating along
@@ -261,3 +265,13 @@ those two meet makes a covering pair at distance 1 with `u`; so Act One holds in
 one colour off `Γ`. The trivalent case — three colours at every vertex — is untouched.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: retraction after A2's card 1 (free; counted)
+
+**Retraction 1 (A2 card 1, point 2).** N-SEAM (d), C-TAN-POS's non-vertex case, (S1) and N-X (c) concluded "a colour in two sectors" (a strong escape)
+at the centre `x`. That holds only when `|P_cl(x)| = 3`: TS-U empties the side cones of the two arc colours, and the side cones are then filled by `x`'s
+remaining colours — one colour if one remains, possibly two different colours if `|P_cl(x)| ≥ 4` (A2's example: four sectors of four colours, each below
+180°). Corrected in place above; every statement now carries the type-size condition. **Card 1, point 3:** §2.3's heading said "the exact list"; the list
+is necessary conditions ("only if"), and the heading now says so. **Points 1 and 4, no change:** N-E0, N-SEAM (a)–(c), N-HORN and C-CUSP-K use only the
+union `P_cl(u) ∪ P_cl(v) = [6]` (overlap allowed; N-E0 and N-SEAM (a) extend to covering families concyclic on `ω(w₀)`); N-X uses disjointness and says
+so. C-TAN-POS's scope line is in its verdict above.
