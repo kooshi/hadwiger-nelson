@@ -271,6 +271,14 @@ unedited).*
   claim hand, one mind], §4.5.
 - **Y2-S1i** — every realisation of (S1) with `w` an edge point carries: the arc's sides are `u`'s facing and away colours at `w`; `u` is a strong
   escape at `w`; the arc's ends on `ω(u)` are vertices meeting a colour of `P(v)` — [hand, one mind], §4.5.
+- **Y2-T2F** — C-T2 (i) TRUE at fragment level: fragment `T2` (the `d = 1` rhombus, `u`, `v` on unit arcs of `ω(w)`, `ω(w′)`; `w`, `w′`
+  four-colour), all 24 same-colour pairs ACCEPT, tight — [tools, exact; derivation hand, one mind], stage 5.
+- **Y2-BB** — C-BOW-K (i) TRUE in its double form: fragment `BB` (two straight bowties escaping at both unit points, `30°` margins), 30 pairs
+  ACCEPT, tight — [tools, exact; hand, one mind], stage 5.
+- **Y2-MX** — one pair can mix the seams: fragment `MX` (T2 at `w`, a bowtie's escape at `w′`), 27 pairs ACCEPT, tight — [tools, exact], stage 5.
+- **Y2-LAT** — the translation-invariant triangular-lattice extension of `BB` fails at its four-colour points: six covering pairs through one point
+  over-constrain it — [hand, one mind; one candidate, not the question], stage 5.
+- *Retracted at stage 6:* §4.4's GAP (ii) in the owner's switch-point step (card 3: it holds only in the disjoint sense).
 
 ### Fence log (FS110-Y2)
 
@@ -446,3 +454,20 @@ entirely polygonal.
 - The GAP in A2-V56 at centres of arcs of Γ (§4.4).
 
 ## Stage 5 — SAVED (FS110-Y2)
+
+## Stage 6 — SAVED (FS110-Y2): card 3 (FS110-A3, "which covering pair?") — one free retraction
+
+**Retracted: §4.4's GAP (ii)** in the owner's switch-point step. I set the switch vertex `x = {m, m′, j}`, `j ∈ P(v)`, aside as "not a covering
+pair" because `P(x) ∩ P(v) = {j}`. That is true only in `claims.md` §0's disjoint sense. In the union sense, `P(v) ∪ P(x) = [6]`. The machinery a
+covering pair feeds needs only the union: A-EXACT's `B_v ∩ B_x = ∅` (a point in both would need a colour outside the union), and C-T-TAN through
+A-SIX ("all six classes are in `P(u) ∪ P(v)`"). **So a switch point at such a vertex is still a covering pair at distance 1 for every purpose the
+frame fact serves.** The owner's combined step keeps **one** GAP, card 2's: arcs of Γ on `ω(v)` separating the two outside colours. [hand, one mind]
+
+**Which sense each of my round-2 statements uses** (card 3's question):
+- Y2-W4 (a), (b), (d): the union. (a) needs "outside `P(u)` implies in `P(v)`". (b) needs only the colour's tiles at one vertex. (d) needs
+  `|P_cl(w) ∩ P(u)| ≥ 2`, which (b) gives in the union sense: two distinct colours outside `P(v)`, hence in `P(u)`.
+- Y2-W4 (c) ("four distinct colours"): **disjointness**, as §4.2 says. Under the union alone, `|P_cl(w)| ≥ 3` when the types overlap in one colour.
+- Y2-W4e and Y2-S1i: the union. The escape-partner rule runs through (d). "`u` must escape at `w`" runs through A-EXACT's `B_u` alone.
+- Fragments S1, T2, BB, MX: disjoint types (`{1,2,3}`, `{4,5,6}`), so both senses hold.
+
+## Stage 6 — SAVED (FS110-Y2)
