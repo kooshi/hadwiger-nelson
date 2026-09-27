@@ -40,7 +40,7 @@ list does not restate them; its §9 corrections are applied here.*
 - **`[Thomassen1999]`'s hypothesis** (p. 850, verbatim): "we assume that each face (i.e., arcwise connected component of S\G) has diameter less than 1,
   is homeomorphic to a disc, and is bounded by a cycle in G. Now a nice coloring of S obtained from G is a coloring such that each color class is the union
   of faces (and part of their boundaries) such that the distance between any two of these faces is greater than 1." *(this list)* It excludes the
-  self incidence (diameter `< 1`) and the pair incidence (distance `> 1`).
+  self case of in-contact (diameter `< 1`) and out-contact (distance `> 1`).
 
 ## 1. The questions
 
@@ -231,8 +231,7 @@ has committed its stage 1** (two blind walks are worth two samples only if they 
   4. The symmetric tiles have width 1/2, with the rounded boundary being a circular arc of radius 1 centered at the opposite corner of the tile. The tiles
   used in the top and bottom rows are determined by the distance 1 between the point of intersection of circular arcs and the opposite corner of a tile."
   *(this list)* Rebuilt **by formula from these words** (no coordinates are printed; the figure is not a source of numbers), its height checked to be exactly
-  `√15/2 + √3`, and accepted by each new exact checker as a valid six-colouring **of the strip**. It calibrates the **self** incidence; which other incidences
-  it has is found in the rebuild and stated. `[Polymath2021]` p. 197 cites it ("we have not improved the bound of √3 + √15/2 ≈ 3.668542 that was previously [8]
+  `√15/2 + √3`, and accepted by each new exact checker as a valid six-colouring **of the strip**. It calibrates **self in-contact** by its words; its other contact kinds (§0) are read off the rebuild and stated. `[Polymath2021]` p. 194 cites it ("we have not improved the bound of √3 + √15/2 ≈ 3.668542 that was previously [8]
   demonstrated by the tiling shown in Fig. 6").
 - **CAL-DISK** (`[Polymath2021]` p. 199, verbatim): "For k = 6, our best result is the disk shown in Fig. 10, whose radius is" — the radical is garbled in
   the text layer; the caption reads, on the page image, "A 6-tiling of a disk of radius √(5/2 + 9/(2√5))" — "(The relative simplicity of the expression for
