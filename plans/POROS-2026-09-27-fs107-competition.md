@@ -10,11 +10,12 @@ have handed back (brief item 5).
 
 ## Theorems this phase proved
 
-- (none yet)
+- None. X1 (stage 1) was a sketch; its content is W-EQ-K and W-POLY, proved by FS107-W (one mind). My results are comparisons and
+  scorings (stage 5), not theorems.
 
 ## Would-have-searched-here log (standing rule 3)
 
-- (none yet)
+- None: no move of mine would have been a search.
 
 ## Stage 0 — SAVED: quotation check (standing rule 5), reading and the first message
 
@@ -239,4 +240,143 @@ almost everywhere"; the polygonal half is a theorem (AE-POLY bar `d = 2`), the c
 **For the close (inventory, sent to the owner):** G82's reading scored against RR if (A) or (B) lands (R's flag); my killed hunch and its mechanism.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the comparison (both sides' stage 5, done here at the owner's ruling, after both hand-backs)
+
+*Read in full after both hand-backs: `plans/FS107-R-stability.md` (stages 1–4), `plans/FS107-W-near-colourings.md` (stages 1–4),
+`data/fs107/reports/FS107-R.md`, `FS107-W.md`. Both blind verifiers (FS107-V on R, FS107-VW on W) are running; nothing here was sent to either.
+Every result below is one mind unless marked, and waits on them.*
+
+### 5.1 The round's verdict: where the two programmes meet
+
+**Both claims are GAP, and their open steps pair up exactly.** R's reduction RR ("R follows from (A) a forced complementary pair of fat blocking
+junctions in every `U_R`, and (B) a cone-scale lower bound", R §3.4) and W's two doors ("vanishing holes lie inside the generator image by exactly two
+doors: (A) a full tight a.e.-proper six-colouring of bounded arc complexity, or (B) unbounded complexity", W §2.1) are the same split seen from the two
+sides:
+
+| | R needs | W escapes by | the one object and rule where they meet |
+|---|---|---|---|
+| **bounded complexity** | (A): some complementary pair of fat junctions at distance in `[η, 2 − η]` blocks toward a common unit point | door (A): a full tight arc-bounded six-map (W-EQ-K: at complexity `K`, vanishing holes ⟺ such a map exists), whose complementary-type vertex pairs within distance 2 are **all tangent or bowtie** (W-TAN) | **the tangency-seam question**: is there a planar six-coloured map, tiles of diameter `≤ 1`, classes `≤ 0.2470`, same-colour tiles Siamese or `≥ 1` apart, whose complementary-type vertex pairs within distance 2 are all tangent pairs or bowties (and whose equal-type pairs in `(1, 2)` survive K-KILL's second half)? NO ⟹ door (A) is dead at every `K` and C-AE-Q2 holds a.e. for locally finite arc-bounded maps; YES ⟹ a candidate door-(A) design, to be eroded and checked exactly |
+| **unbounded complexity** | (B): junction cone scales `≥ s₀` on a set of positive measure | door (B): cone scale → 0 at every complementary pair — tangencies, bowties or cusps at every scale (R §3.4: "W's only escape"; W §4.2 item 5: "untouched") | **REG-SCALE**: a cone-scale lower bound for near-optimal band-proper partial six-colourings (De Giorgi; `CLAUDE.md` link 6) |
+
+**W-TAN and Lemma CP are one fact from two sides**: CP is C-T-TAN's cone case with an area (R), W-TAN is C-T-TAN read as a design rule (W). Both rest
+on C-T-TAN (TS, one mind); CP is a second derivation of its cone case, **sighted** (R cites TS), so C-T-TAN's cone case stands at two minds, neither
+blind, pending FS107-V.
+
+**The registrations, made before either side built anything, bracket (B).** R's registered part (2): "I expect the voids at junctions of complementary
+type within distance 2 (K-C6) to stop shrinking before that balance is met". W's registered reason (2): "nothing I can see ties that radius to a fixed
+scale once the number of tiles near a junction is free". Each is the other's negation, and both are statements about the cone scale.
+
+### 5.2 Convergences of truth
+
+| finding | R | W | advisor | independent? |
+|---|---|---|---|---|
+| bounded complexity is a compactness question; polygonal limits are out bar `d = 2` | registration (1), retracted to polygonal | registration (3), retracted to polygonal/convex; W-POLY | X1 (committed `731de025`, before both) | three independent derivations of the split; the "curved limits are live" half came to R from my card, and W states it had it in notes before the card (unverifiable; recorded as W states it) |
+| at bounded complexity W is the map question | used (retraction 1) | **W-EQ-K** proved (one mind) | hunch `bounded-complexity-families-keep-their-voids` | W's proof is the only derivation; my card was a sketch |
+| complementary pairs within 2 are tangent/bowtie in the tight world | CP on LIM | W-TAN | FS107-A's C6, `complementary-type-is-the-combinatorial-core` | both over C-T-TAN; R and W independent of each other |
+| holes can be taken to be the six-sighted set | Lemma SAT (saturation) | the hex control's diagnostic: 351 of 837 blank squares see `≤ 5` colours and "could individually take a colour" (W §1.4) | — | independent; SAT is the theorem, W's count its instance |
+| the tight-world circle is two-colourable, so circle arguments are paid at scale `ε` | O2 | W-RATE / §1.3 (2): "on `T₁(x)` only the two colours whose tiles cross the line through `x` perpendicular to the direction are forbidden" | — | independent; both restate TS |
+
+### 5.3 Divergences of truth: none found. Two divergences of scope
+
+- **W §1.3 (2) versus CP.** W: a void of inradius `ρ ≫ ε` makes a junction look tight, "so the void's job is done at any radius ≫ ε". CP: at a fat
+  blocking **complementary pair**, voids of radius `< t₁/2` leave a forced region of area `(t₁ − 2r)(t₁′ − 2r′)` at distance 1. Not a contradiction:
+  W's statement is about one junction at exact distance (`t = 0`), CP about two junctions at offset `t ∈ [2r, t₁]`, where all three sector colours
+  meet the circle (CP Claim 1). W's C-VOID-false expectation survives exactly where (B) fails.
+- **W-TAN's range versus CP's.** W-TAN applies at every distance `< 2` (qualitative, tight); CP at `D ∈ [η, 2 − η]` with constants `s₀ = µη²/100`
+  degrading as `η → 0`. The pairs near distance 0 and near 2 (the `d = 2` edge case) are covered by W-TAN's statement and by neither side's cost.
+
+### 5.4 Divergences of route
+
+- **R went from the proof side:** sort `[Voronov2023]`'s certificates by their tight form and by what a local repair does to them (R §2.1); keep the
+  one that survives (the complementary pair, CP); price the one that does not (the bicycle, SW and OB′). Counterexample invariants (G79), plus one
+  example invariant (SAT).
+- **W went from the construction side:** the generator image first (X9), compactness at fixed complexity (W-EQ-K), then the crudest door-(A) probe
+  (HX: the seventh hexagon absorbed by straight triangles into a six-chromatic junction), derived, registered, checked exactly, stalled
+  (`δ*_HX = π/(42√3) = 0.0432`).
+- **Neither touched door (B) / (B).** Neither built or refuted a family of unbounded complexity; neither tested C-VOID.
+
+### 5.5 Retractions, final count (from the registrations on)
+
+| mind | count | what, and what killed it |
+|---|---|---|
+| R | 2, both free | (1) "Shrinking Parts-type vertex voids inside a fixed combinatorial type therefore cannot work" — my card (FS106-AE-NICE's relaxation clause); (2) draft Theorem OB ("the bicycle branch is of hitting form") — R's own audit before commit (C-T-L1 excludes the swap; an `ε`-strip legalises one colour only) |
+| W | 1, free | registration item (3), "regular tight colourings, which row 132 excludes" — my card |
+| Poros | 0 retracted cards; **1 killed hunch** | `r-first-mechanism-is-local-and-pinhole-killed` (stage 4): I priced a junction as a point, not as three cones |
+
+W also lost two of its own registered predictions (P-W1, P-W2: sign and corner slips in HX's geometry, each caught by the exact checker) and won the
+third. **Three of the four retractions were the contest between each side and the constraint list or its own draft, not between the sides**: the
+disagreement proper — (A) against the tangency seams, (B) against door (B) — was named by the registrations and never reached.
+
+### 5.6 The break table (`claims.md` §4), scored
+
+| row | outcome |
+|---|---|
+| 1. R: holes of `ε`-independent measure in some `R₀`-disc | not reached. CP yields an uncovered disc of radius `≍ s` (R §3.2, "(disc)") **given** (A) and (B); W built no family with uniformly spread holes |
+| 2. R reads how holes sit relative to the colouring | **R's column met, in a form the table did not foresee**: CP's forced region sits at distance 1 from the junction pair, and shrinking the junction voids (`r → 0`) enlarges it (`(t₁ − 2r)` grows) — "a vertex void cannot shrink without a new void appearing elsewhere", with the new void one unit away. W's column (holes at vertices, shrunk with `ε`) untested: W's one family has no complementary junction |
+| 3. W: a parameter shrinking the vertex voids | **fired first, on W's side, by W's own hand**: HX's `ρ` drives `δ` down to `π/(42√3)` and no further, set by the islands constraint (the tile's diameter against the tip's corner and the second-neighbour same-colour vertex at 120°). R's registered prediction (row 3) is confirmed in outcome; its mechanism (complementary-junction voids) is untested, HX's junctions being six-chromatic |
+| 4. W: the Route II limit exists as a tight six-colouring | the meeting point: R's (A) is this row's R column on SEQ; W-TAN is its design form. Open |
+| 5. the advisor's question | asked; both answered; retractions counted (5.5) |
+
+### 5.7 Predictions scored
+
+- **W's registration** (C-VOID fails first, expected FALSE): **untested** — HX's voids have radius `≥ 0.22`, consistent with C-VOID. Open.
+- **R's registration** (W fails first at row 3): **confirmed in outcome** (HX-STALL), mechanism untested (part (1) retracted to polygonal; part (2) not
+  reached).
+- **R's P1** (Parts has no fat complementary pair costing `> δ₆`, 0.9): unscored ([external] coordinates); R's own reading of its card: at admissible
+  scales CP bites at `≈ 10⁻⁸`, far below `δ₆`. **P2** (0.95): vacuously consistent with HX (no complementary types). **P3** (0.6): untested — HX avoids
+  complementary pairs but keeps holes `≥ 0.043`, so it does not test (A) below that `δ`.
+- **W's P-W1, P-W2 lost; P-W3 won** (W §3).
+- **The planner's E1–E8** (`plans/FS107-stability.md` §5.3): E1, E2, E3, E6, E7 — not met. **E4** (R names an obstruction beyond HIT, PIX and the
+  pinhole test, 0.45) — **met, weakly**: OB′ ("an argument that reads, at a swap, only the pairs of one colour is capped at `O(ε·s)`") is a new named
+  class, of HIT's logical type. **E5** (W names a lower bound on the void for a named class of families, 0.40) — **met**: W-POLY (polygonal bounded
+  designs, `δ ≥ δ₀(K)`) and HX-STALL. **E8** (first break where A2's table puts it, 0.50) — **half**: W at the junction void, yes; R's first break was
+  at the bicycle branch (Theorem OB), a step the table does not list.
+- **FS107-A's hunches:** `void-conservation-is-the-crux` — supported (CP's `2r` against `|Q|`; HX's two pairs balancing); `complementary-type-is-the-combinatorial-core`
+  — supported (the meeting rule is W-TAN ≡ CP); `w-first-family-moves-the-void` — **confirmed in its first half by derivation** (HX-STALL: a positive
+  floor), the migration clause not shown; `rq-collapses-to-rs` — at risk, not killed (the residue (B) is regularity, not the limit object);
+  `round-one-is-about-c-void` — **killed** by its own falsifier (W's first family aims at door (A), not at C-VOID).
+- **Mine:** `bounded-complexity-families-keep-their-voids` — **confirmed as an equivalence by derivation** (W-EQ-K, one mind; W-POLY its polygonal half),
+  pending FS107-VW; `w-first-family-has-bounded-complexity` — **confirmed** (HX, two parameters, stalls at `π/(42√3)`); stage-1 X2 "W breaks at row 3
+  for a reason of class" — **half**: row 3 yes, but HX stalled for a geometric reason inside the family (K-ISL), not by compactness;
+  `r-first-mechanism-is-local-and-pinhole-killed` — killed (stage 4).
+
+### 5.8 A lesson for the corpus (§G, for the close)
+
+**"Feature-local" is not "`ε`-local".** G82's reading ("Voronov's contradiction is feature-local, so a stability proof must count a defect spread over
+positive measure") and my own stage-1 prediction made the same conflation: both priced a feature at the band's scale. A8b's `O(ε²)` holds for **point**
+certificates; a certificate built on **cones** of scale `s` costs `≍ s²` and survives every repair at scale `≪ s` (CP). The right reading: *a stability
+proof must count a defect at a scale independent of `ε` — spread over positive measure, or at features whose own scale is bounded below*; the second
+door is exactly (B). R flagged G82 at risk; I concur, and propose this rewording for the close (G82's killing test then reads: a proof of
+`lim µ₆(ε) < 1` whose features' scale is not bounded below).
+
+### 5.9 What FS-107's next round or its close should aim at (a decision in four parts)
+
+- **The choice:** a second round on **the tangency-seam question** (5.1, bounded row), same split: R proves no tight six-map satisfies W-TAN together
+  with K-KILL's equal-type half, K-DENS and the Siamese-or-`≥ 1` rule; W builds one with tangency or bowtie seams, erodes it and checks members exactly.
+- **The alternative weighed:** a round on **REG-SCALE** (door (B)), which is where R must win in the end and where W's only route lies if door (A) closes.
+- **Why the tangency-seam question first:** both sides' open steps converge on it; it is local (a rule on tile rings, by hand, within the ban and within
+  Kooshi's finite-search ruling); a YES is decisive (`χ(ℝ²) ≤ 6` with no MR, through W-EQ-K); a NO answers `[SokolovVoronov2025]` Question 2 almost
+  everywhere for locally finite arc-bounded maps — a question in print (§ Publication's second bar) — and kills every bounded-complexity W family; and
+  door (B)'s escape is this rule repeated at every scale, so its answer is REG-SCALE's first lemma either way.
+- **Confidence: medium.** The facts that would change it: FS107-V or FS107-VW finding a defect in CP, W-TAN or W-EQ-K (the meeting point rests on all
+  three, and on C-T-TAN at two sighted minds); or a hand argument that the rule is satisfiable only by degenerating at every scale, which would make
+  door (A) and door (B) one question and REG-SCALE the round.
+- **Default:** if the owner does nothing, FS-107 closes with RR, W-EQ-K, the meeting point and the lemmas at one mind (after V and VW), and mints two
+  stubs: the tangency-seam question (W's stub (ii) and R's (A), merged) and REG-SCALE (R's stub, W's door (B)).
+
+### 5.10 For the close (inventory items, sent to the owner)
+
+- result — the meeting point (5.1): RR's (A)/(B) ⟷ W's doors (A)/(B); W-TAN ≡ CP on LIM; the tangency-seam question — this record §5.1
+- correction owed — G82's reading: "feature-local" → "a defect at an `ε`-independent scale" (5.8); R's flag concurs
+- correction owed — `data/fs107/claims.md` W row: A2 §3.3's "Tight polygonal tilings … would do" has an empty hypothesis at bounded complexity bar
+  `d = 2` (W §4.2 item 2; W-POLY); R's and W's K-REG proposal is already applied (`e5ab02f5`)
+- prediction scored — the planner's E4 (weak), E5 (met), E8 (half); FS107-A's and my hunches (5.7)
+- slip (mine) — my movement-only hint to W (stage 4) was sent after W's hand-back and resumed it; W re-handed back content-free. No content crossed;
+  the harness routed my content-free hand-backs to W while W had last woken me
+- slip — fence listings, both disclosed in the competitors' records: R listed `data/fs107/reports/` (saw `FS107-P.md`, unopened) and the names of
+  `data/fs107/fs107-a/`, `fs107-p/`; W listed `data/fs107/reports/` (saw `FS107-P.md`, unopened). Neither opened a fenced file
+- stub to mint — the tangency-seam question; REG-SCALE; SWAP-PRICE / bicycle-free Voronov (R); C-VOID's thin-hole refutation (W) — untested by either
+
+## Stage 5 — SAVED
 
