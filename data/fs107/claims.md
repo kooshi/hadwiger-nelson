@@ -25,6 +25,10 @@ your grade. FALSE and GAP are results, as valuable as TRUE (standing rule 4).*
 - **Hitting-form argument** (QB §1.2): "an argument whose only use of the uncovered set `H` is that `H` meets every unit circle `T₁(u)` and every
   bicycle `T₁(u) ∪ T₁(v)`, `1 < |u − v| < 2`, in a set of positive length".
 - **Effective hole** (TQ §4.4): "an effective hole is one containing a point `≥ ε/2` from the coloured set, since thinner holes fill (HOLE-t)".
+- **D-JUNC, a junction of a SEQ member** (this list's wording, after FS107-A's second message): by K-PIX every coloured point of a member may have
+  chromaticity 1, so junctions live at the holes. For a member with cell side `h`, a *junction* is a connected component `J` of the uncovered set, and its
+  *type* is the set of colours having a cell within distance `r_J = h` of `J`; a member file states `h`. "Complementary types" and "equal types" (K-C6,
+  K-KILL) are read on these.
 - D-CP, D-NF, D-SLACK ("*Tight*: slack for no `ε > 0`"), D-VMC (multicolour, chromaticity): `data/fs106/claims.md` §0, verbatim there. "Tight" here
   is D-SLACK's, never Hoffman's (`CLAUDE.md` G54).
 
@@ -44,9 +48,11 @@ your grade. FALSE and GAP are results, as valuable as TRUE (standing rule 4).*
   - R-S's reading (TQ §5.2): "**Hadwiger–Nelson's measurable form is "Voronov's argument on regular colourings, robust to a free colour of vanishing
     density".**"
 - **R′ — C-VOID, an intermediate claim for R** (FS107-A's card to the planner, 2026-09-27, verbatim): "some ρ₀, R₀ > 0 such that for every ε every
-  band-proper partial six-colouring leaves a fully uncovered ρ₀-disc inside every R₀-disc". Object: both. *This list's note:* C-VOID ⟹ C-Q-STAB, **not
-  conversely** (holes of measure bounded below may be many small ones); a W family whose largest uncovered disc has inradius → 0 at coverage bounded
-  away from 1 refutes C-VOID and decides nothing. Status: open.
+  band-proper partial six-colouring leaves a fully uncovered ρ₀-disc inside every R₀-disc". Its exact form (FS107-A, second message, verbatim):
+  "There are ρ₀, R₀ > 0 such that for every ε > 0 every band-proper partial six-colouring of ℝ² has, inside every disc of radius R₀, a disc of radius ρ₀
+  whose uncovered part has full measure." Object: both. *This list's note:* C-VOID ⟹ C-Q-STAB, **not conversely** (holes of measure bounded below may
+  be many small ones); a family whose largest such disc has radius → 0 refutes C-VOID whatever its coverage, and decides nothing unless its coverage → 1,
+  which is W's claim itself. Status: open.
 - **R″ — the rung** (A2 §3.7): "improve TQ-EPS2's `ε²` to `ε`, where hitting-form arguments are allowed and TQ-HIT's strips show `ε` is the most they can
   give." Not decisive.
 - **W — TQ-EQ (e)** (TQ §3.5, verbatim): "for every `δ > 0` there are `ε > 0` and a **periodic** partial 6-colouring by half-open grid squares, with no
@@ -83,8 +89,10 @@ your grade. FALSE and GAP are results, as valuable as TRUE (standing rule 4).*
 - **K-AD, a reading** (R's arguments): "an argument whose only use of the holes is "an effective hole within `Cε` of every anchor of a set `A`" certifies at
   most `≍ N(A ∩ Q, ε)·ε²` of hole area per unit square `Q` (`N` the `ε`-covering number): `ε²` for finitely many anchors per unit area (A8b, TQ-EPS2), `ε`
   for curves of anchors (TQ-HIT), `Θ(1)` only for anchors of positive measure — or for holes of an `ε`-independent size `ρ₀`." **[derived, one mind; credit
-  TQ §4.4]** — *this list's grade: a [reading]*, killing test (this list's wording): an argument whose anchors form a null set of dimension `< 2` that
-  certifies hole area bounded below uniformly in `ε`.
+  TQ §4.4]** — *this list's grades, split at the advisor's suggestion:* (a) the no-go for arguments of the **named form** is **[hand, one mind]**, of
+  K-HIT's logical type (it constrains arguments, not colourings); (b) the sentence that `Θ(1)` comes **only** from anchors of positive measure or holes of
+  `ε`-independent size — R has exactly two doors — is a **[reading]**, killing test (this list's wording): an argument whose anchors form a null set of
+  dimension `< 2` that certifies hole area bounded below uniformly in `ε`.
 - **K-KILL** (LIM; TS §5 row C-T-KILL, verbatim): "**split: the disjoint-multicolour half TRUE under C-T-TAN's hypotheses; the same-multicolour half GAP**"
   — "Same multicolour at distance in `(1, 2)`: Lemma 3's transplanted bicycle needs C-T-ANN's curves and C-T-IND's finiteness." [hand, one mind]
 - **K-CHR4** (LIM; TS §5 row C-T-CHR4, verbatim): "**GAP** — proved for `|P(x)| ≥ 5` off a null set; `|P(x)| = 4` open". *This list's note:* four-colour
@@ -107,7 +115,10 @@ your grade. FALSE and GAP are results, as valuable as TRUE (standing rule 4).*
 1. "**Exact check.** Every member of W's family, at given `(ε, δ)`, is a finite periodic tile colouring with rational data. Its falsifier is a
    monochromatic pair of squares whose distance interval `[min, max]` meets `[1 − ε, 1 + ε]`. The check is exact and seconds long, and it checks a given
    object, so it is allowed under the ban." *This list's note (§PA, PA-2):* the interval is each tile pair's exact distance range over the torus's
-   periodic images; a corner-circle construction (`[MundingerEtAl2025]` App. B) may be only sufficient.
+   periodic images; a corner-circle construction (`[MundingerEtAl2025]` App. B) may be only sufficient. And (FS107-A, verbatim): "W's exact check
+   certifies MEMBERS. W's claim is about a family indexed by a parameter; band-properness for every parameter value is a derivation, and the checked
+   members are controls (G21: a check measures its instances)."
+
 2. "**Floor.** The family's claimed `δ(ε)` never falls below `ε²/78`." (The close's floor: `ε²/(6+ε)²`, given V-1.3.)
 3. "**Class density.** Each class's density is at most 0.2470."
 4. "**A driving parameter.** The family has an explicit parameter that drives `δ → 0`. TQ §4.5 item 6 (c): Parts's own family has none; its voids keep

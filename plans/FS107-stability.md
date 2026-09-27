@@ -18,7 +18,8 @@ None. This is a planning job: it states claims and derives none of R's or W's ma
 
 ## Would-have-searched-here log (standing rule 3)
 
-- (none yet)
+- §PA: an OpenAlex cross-check of the citing lists (not a search for a witness; skipped for budget, named as a debt in §PA row 7).
+- Planning: none — the planner derives no mathematics; W's route is fixed to formula-and-check in its brief.
 
 ## Stage 1 — SAVED: quotation check (standing rule 5) and the files opened
 
@@ -431,3 +432,87 @@ added); §4 the break table verbatim with its row-2 annotation; §5 R-S's named 
 
 No disagreement so far; the one amendment is the grade of AD (the advisor wrote "[derived, one mind]"; the list carries it as a reading — recorded
 here as a disagreement of grade, mine governing).
+
+**The advisor's review of the list (FS107-A, second message) and my decisions:** (1) K-AD split — (a) the no-go for the named form [hand, one mind],
+(b) the two-doors sentence [reading] — **adopted**, which settles the grade disagreement above by splitting it; (2) "junction type" undefined on SEQ —
+**adopted** as D-JUNC (`r_J = h`, stated in each member file); (3) W's check certifies members, the family is a derivation — **adopted** in W's killing
+test 1 and W's brief; (4) a known positive for W's checker (the slack hexagonal 7-colouring minus one class, `δ = 1/7`, rasterized; a planted pair
+rejected) — **adopted** as W's stage-1 control, Parts as the optional second; (5) C-VOID's exact form beside the card, and the note corrected ("refutes
+C-VOID whatever its coverage") — **adopted**; (6) the §PA findings as shared prior art — **adopted** in the SHARED brief. No disagreement left.
+
+## Stage 5 — SAVED: the plan (WORKFLOW 4) and the briefs
+
+### 5.1 Phases
+
+| phase | who | object | budget (harness) | stop rule | checkpoint and resume |
+|---|---|---|---|---|---|
+| P0 launch | owner | — | — | R, W and the competition advisor launched together (three agents) | briefs in `data/fs107/briefs/` |
+| R | FS107-R (`R107-stability.md` + SHARED) | SEQ or LIM, per lemma | ~400k, replace before 500k | stages 1–5 of its brief; a held result stops it at stage 4 | its record `plans/FS107-R-stability.md`, a SAVED heading per stage; resume at the first stage not SAVED |
+| W | FS107-W (`W107-near-colourings.md` + SHARED) | SEQ | ~400k, replace before 500k | stages 1–5; the checker's plant must fire before any member is checked | `plans/FS107-W-near-colourings.md`, member files in `data/fs107/fs107-w/`; same resume rule |
+| A | FS107-A continuing or FS107-A2 (`A107b-advisor-competition.md`) | both | ~400k | at both hand-backs | its record; competition notes in its scratch until hand-back |
+| V | FS107-V (`V107-blind-verifier.md`) | the first finished side | ~300k | its stage 3 verdicts committed, then stage 4 | `plans/FS107-V-verification.md` |
+| D | FS-109, the joint dial (post-ban, owner's to schedule) | SEQ | — | — | `plans/STUB-hole-dial.md` |
+| close | a close planner | — | — | WORKFLOW 9 from `plans/FS107-close-inventory.md` | — |
+
+**What a kill redoes:** one stage of one agent (every stage is committed). No phase runs a computation over two minutes except W's and V's exact
+checks, which run under `scripts/slot.py` when they exceed 2 GiB or 2 minutes and checkpoint per member.
+
+### 5.2 Decisions (four parts each)
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| A2's split: R stability, W near-colourings, one advisor, a blind verifier on the first finished side | (B) TS's split — R closes [G1]–[G3], W builds a six-coloured map with unit arcs | both outcomes of the split decide the problem (R given MR; W with no MR), and W's objects are checkable; (B)'s W is strictly narrower and its R not decisive (A2 §3.7) | high |
+| One SHARED brief both competitors read, plus a short role brief each | two self-contained briefs | "identical mathematics" is then true by construction and checkable by diff; the role briefs differ only in the question, the object, the stages and the fence | high |
+| Competitors' records in `plans/` and `data/fs107/fs107-{r,w}/`, committed per stage, fenced by path with a grep-exclusion rule | records in each side's scratch until hand-back (protocol §1 rule 1's "never in `plans/`") | standing rule 2's per-stage commits make a crash cost one stage; the owner already ruled the same shape for the advisor's record (inventory item 4); the residual risk is an accidental grep, which the SHARED fence names | **medium** — the owner may prefer scratch-until-hand-back; the fact that would change it is a fence touch in the first round |
+| W's known positive: the slack hexagonal 7-colouring minus one class | Parts's eroded tiling as the only control | the hexagonal positive is exact, rational after rasterization and has a known answer; Parts's data are external and reconstructed | high |
+| The blind verifier takes the finished side's slot | a fourth agent | the cap is three agents, all Opus 5.5 (Kooshi) | high |
+| No persona preambles (protocol §1 rule 2's option) | a preamble per competitor | a default, not a decision: the option is the owner's | — (default taken) |
+
+### 5.3 Registered expectations (instruments for G21, scored at the close; per the counter-priors, never caps)
+
+| # | outcome | probability | both sides reachable, and why |
+|---|---|---|---|
+| E1 | R proves C-Q-STAB (claim R), at one mind, held | 0.10 | reachable: no theorem forbids a non-local count; its negation is reachable too (W's family) |
+| E2 | R proves C-VOID (R′) | 0.05 | C-VOID is stronger than R; refutable by a shrinking-inradius family |
+| E3 | W builds a family meeting claim W, at one mind, held | 0.07 | reachable: nothing proven excludes vanishing holes (the floor tends to 0); its negation is R |
+| E4 | R names an obstruction beyond HIT, PIX and the pinhole test — a theorem that a named class of arguments cannot give stability | 0.45 | the no-go shape has fired three times at FS-106; it could fail to fire if R's first route meets no class-level wall |
+| E5 | W names an obstruction — a lower bound on the void for a named class of families | 0.40 | the break table's row 3 names it; it fails if W's families shrink their voids |
+| E6 | a W family refutes C-VOID (hole inradius → 0 at bounded coverage loss), deciding nothing | 0.30 | Parts-type voids at junctions may cusp or migrate; it fails if every family keeps a void of fixed size |
+| E7 | R″: a lower bound of order `ε` on `1 − µ₆(ε)` | 0.20 | hitting form is allowed there; K-AD (b) predicts it needs curves of anchors |
+| E8 | the first break happens where A2's table puts it: R at the anchor step, W at the junction void (FS107-A's stage-1 expectation) | 0.50 | the break table's rows 2–3 |
+
+**Falsifiable here** (from §G): G82's reading dies by a feature-local proof of `lim µ₆(ε) < 1` (0.02); K-AD (b), by an argument with null anchors of
+dimension `< 2` certifying hole area bounded below (0.05); the conjecture's bold form `χ(ℝ²) = 7` (G48) dies with no MR by E3.
+
+### 5.4 The ban, the dial and the Lean slot
+
+- **Until 2026-10-01:** W derives families by formula and checks given members exactly; R derives. Nothing else runs.
+- **The joint dial after the ban (FS-109; A2 §3.5, TQ §5.4):** it needs (a) `[Parts2020c]`'s tiling reconstructed as exact data (his figures are
+  [external]), (b) an exact area routine for eroded tiles with curved sides, (c) for `µ₆^per(ε)` itself, a continuous local optimiser over the
+  parameters of a **fixed combinatorial type** at each `ε`, checkpointed per `ε` — a measurement that generates (G30), never a decider, and never a
+  search for a finite graph, which Kooshi's ruling keeps out beyond the ban.
+- **Lean (row 127; never a cost):** whichever half lands is formalized under FS-101 after row 130's M1 and FS106-EQ enter the kernel, with no declared
+  purchases. Named here, not run in FS-107.
+
+### 5.5 Carry-over from FS-106's close (`plans/FS106-close-inventory.md`)
+
+- items 5/82 — the ranking rows keep six-framed bearings (the owner's message says rows 5–63; item 5 says rows 4–62): a ranking pass the owner
+  schedules, not this plan's;
+- items 36, 57 — FS-108 (`plans/STUB-regular-half-residuals.md`): SV-1's fills under Condition 6, SV-2's `d = 2`, Woodall's merge;
+- item 59 — `[Townsend2005]` unheld (requested);
+- item 66 — the compactness/Rajchman step's prior art: **partly paid by §PA** (DOV 2022 Lemma 6.2, one class, periodic approximation); the Rajchman
+  step itself not found in print; Bukh 2008 and Falconer–Marstrand 1986 unheld;
+- item 83 — `tools/fs71_ledger_b_check.py`'s nested-bracket grammar (a tool defect, open).
+
+### 5.6 Proposed edits for the close (I edit none of these files)
+
+- `BIBLIOGRAPHY.md`: `[MundingerEtAl2025]` held (`~/source/library/pdf/arXiv-2501.18527-mundinger-neural-discovery-colored-planes.pdf`), read: §1
+  "Variant 1", §4.1 with Table 1, App. B's pipeline paragraph; `[DeCorteOliveiraVallentin2022]` §6.1 (Lemmas 6.1–6.2) read; listing rows for Croft–Falconer
+  1981 (Zbl 0494.52008), Hoffman–Soifer 1993 (Geombinatorics 3(2)), Falconer–Marstrand 1986 (Zbl 0599.28008).
+- `LEDGER.md` row 131's prior-art clause: FS106-SUP's "`µ₆^per(ε) = µ₆(ε)`" has its one-class form in `[DeCorteOliveiraVallentin2022]` Lemma 6.2.
+- `plans/FRONTIER-STUBS.md`: FS-107's row points to this plan.
+
+### 5.7 Briefs drafted (for the owner to launch)
+
+`data/fs107/briefs/SHARED-107-competition.md` (both competitors, identical), `R107-stability.md`, `W107-near-colourings.md`,
+`A107b-advisor-competition.md` (the competition-phase advisor's hand-over), `V107-blind-verifier.md` (instance block for the owner).
