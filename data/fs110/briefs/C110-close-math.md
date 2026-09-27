@@ -54,8 +54,13 @@ of this brief; read rule 0 first.** Read these from disk:
 ## Stages (save after each)
 
 1. **Reconciliation:** every claim and lemma, with its verdict, its minds and their blindness, every divergence and how it was settled. Save.
-2. **`plans/FS110-derivation.md`** (new), in `plans/FS106-derivation.md`'s entry form. **Never nest brackets inside a grade** (FS-106 inventory
-   item 83). Save.
+2. **`plans/FS110-derivation.md`** (new), in `plans/FS107-derivation.md`'s entry form. Save. The ledger checker
+   `tools/fs71_ledger_b_check.py` skips three header shapes silently (FS-106 item 83; FS-107 item 39), so every header must:
+   - use an ASCII id;
+   - put no parenthetical before the dash;
+   - nest no brackets inside a grade.
+
+   Run the checker's `--strict` on your draft before you save.
 3. **§R-close** in `plans/FS110-tangency-seam.md`. Save. It covers:
    - the §G re-read;
    - the §PA sweep;
