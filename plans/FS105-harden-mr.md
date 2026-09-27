@@ -264,3 +264,34 @@ with T-B1 and FS-103's collapse drop to "given MR, now open" — **corrected bef
 (`L ≤ 4`), row 127's unconditional `χ(ℚ(√47)²) ≤ 5` and its conditional theorem (MR is a named hypothesis there, `hMR`), row 130 (no MR),
 row 122 (no-gos), the chain route over `K` (G55). Row 120's grade text is owed one correction in any outcome: "its proof in EL2021 §§2–9"
 → the provenance A settles (§PA.1).
+
+## Stage 7 — SAVED (the job briefs, drafted for the owner)
+
+`data/fs105/briefs/R105-reader.md` (FS105-R, phase A, claim (a)); `data/fs105/briefs/B105-blind-efp.md` (FS105-B, phase B, claim (b), fenced
+as FS-103's V1: the three proofs, every `plans/FS100-*`, the ×2×3 crunch's and the consolidation's directories, `data/fs100/`, `data/fs103/`,
+the FS-105 records and briefs but its own; a grep rule on `EF_F⁺`, `EFP`, `Lemma PF`, `3.1′`, `3.2′`, `X12B`; `LEDGER.md` and `BIBLIOGRAPHY.md`
+open — checked: they name the method, never the steps); `data/fs105/briefs/W105-walker.md` (FS105-W, phase C, claims (c) then (d); its PE-2 walk
+at `F_dG` is committed before it reads R's record, so the two are separate minds on (a) at degree 16).
+
+**Decisions, four parts each.**
+
+| choice | alternative weighed | why this won | confidence |
+|---|---|---|---|
+| (d) goes to the walker, after (c) | a fourth job, or the reader | three agents at once is the cap; (d) is reading plus a short chain, and the walker already holds FS-103's records; the reader's a9 is the long item | medium — if (c) runs long, (d) is reported unreached and needs its own job |
+| accept the unfenceable route hint in B (row 120, G76, G80 name EF's pigeonhole, rational multipliers, product formula) | rewrite claim (b) without the method, or fence `CLAUDE.md` | `CLAUDE.md` is in every agent's context; the three earlier minds had the same hint; blindness is to the proofs, and B is told the proof must be its own with every quantifier explicit | high |
+| B's instance is ℚ(√635087), not ℚ(√47) | ℚ(√47), MR's first consumer | FS-103's collapse is the headline now resting on MR, and its checkable instance is ℚ(√635087) (the stub) | high |
+| name EL2003 for Kooshi to fetch | ask the reader to rely on Thm 1.3 alone | EL2021 attributes Thm 1.2's proof to EL2003 and cites it four times in §4; the reader may close a0 without it, but the fetch is one browser save | high |
+
+## Stage 8 — SAVED (proposals for the close; the "would have searched here" log)
+
+**Proposed edits (the close writes them; I edit none of these files):**
+- `LEDGER.md` row 120's grade: "EL2021 Thm 1.2 by statement (external, in print; its proof in EL2021 §§2–9, unread here)" → "EL2021 Thm 1.2 by
+  statement (external, in print; EL2021 attributes its proof to EL2003, unheld, and proves the more general Thm 1.3 in §§4–7; the deduction
+  and §§3, 5–9 are FS-105's reader's)", or the reader's corrected wording.
+- `BIBLIOGRAPHY.md` `[EinsiedlerLindenstrauss2003]` (line 706): add "EL2021 p. 2 cites it as the proof of its Thm 1.2 and §4 cites its Thm 4.1,
+  Lem. 4.2 and §4 (FS105-P, 2026-09-26)". New row owed after a reading: `[BekkaFrancini2020]`, *Characters of algebraic groups over number
+  fields*, arXiv:2002.07497 (abstract only, FS105-P).
+- `CLAUDE.md` G50's instances file (`plans/GROKKING-INSTANCES.md` §G50): the provenance of Thm 1.2 — a result "used by statement" whose proof
+  the record placed in a paper that attributes it elsewhere.
+
+**Would have searched here:** nothing (bibliographic queries and one text extraction of a held PDF only).
