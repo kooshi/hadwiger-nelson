@@ -320,3 +320,64 @@ behaves as the crudest probe should.
 stall was derived (3.3) and the members placed by the derivation.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the verdict on W, and the obstructions my families met
+
+### 4.1 Verdict
+
+**Claim W (TQ §3.5 (e)): GAP — not landed.** No family of mine meets it; none is held under the hold rule. Minds: one. Nothing here moves the
+answer: `χ(ℝ²) ≤ 6` is not shown, and neither is `χ(ℝ²) ≤ 5` (no five-colour member was built; the two stay apart, G64).
+
+### 4.2 What W's ground now looks like (the obstructions, each at its grade)
+
+1. **Bounded complexity is the map question (W-EQ-K, [hand, one mind]).** A family whose designs have bounded arc complexity makes its holes vanish
+   iff a full tight a.e.-proper six-colouring by such tiles exists — S–V's map question in its a.e. form (FS106-AE-NICE's relaxation, C-AE-Q2),
+   whose deciding steps are FS106-AE-Q2's [G1]–[G4]. The advisor's card `is-a-bounded-complexity-limit-excluded` reached the same branch
+   independently (its hunch registered before my answer).
+2. **Polygonal designs are out at bounded complexity (W-POLY), bar `d = 2`.** So **A2 §3.3's route "Tight polygonal tilings in `[Parts2020c]`'s
+   framework with voids tending to 0 would do" is an implication whose hypothesis is empty for polygonal tilings of bounded complexity**, except in
+   AE-POLY's `d = 2` edge case — a wording correction owed to the claim list, not a false statement. Parts's framework is live only because it is
+   curved (wavy sides, curved pairs).
+3. **What a door-(A) design must look like (W-TAN, W-RATE).** Curved, tight, with a tangency or a bowtie paid at every complementary-type vertex pair
+   within distance 2 — never one intersecting family everywhere (the global star family breaks K-DENS). If it exists with isolated transversal
+   contacts, its eroded family meets the floor's order `ε²`: the pinhole scenario, and precisely what R's killing test 5 tests.
+4. **The crudest door-(A) probe stalls at a named place (HX-STALL, [hand, one mind; checked]).** Absorbing the seventh class by straight triangles
+   into a six-chromatic junction leaves holes of density at least `π/(42√3) = 0.0432`: the tile's diameter (sliver corner to opposite vertex)
+   balances the tip's corner against the second-neighbour same-colour vertex at 120°. That is 300 times the Parts ceiling `δ₆`: the crude probe
+   says nothing about the true stability constant; its value is the method (derive the stall, register, place members, check exactly), which ran
+   three predictions: two lost, one won.
+5. **Door (B), unbounded complexity, is untouched.** No held theorem constrains it (G82: the refutation's limit is wild), and no family of mine
+   entered it.
+
+### 4.3 My registered expectation about R, re-read
+
+I registered that C-VOID (R′) fails first, and expect it FALSE. Nothing here tests it: every HX member has one void per period of radius
+`≥ 0.22`, which is consistent with C-VOID and refutes nothing. I keep the registration and its evidence clause as sent, with the one retraction
+(item (3), bounded-complexity limits) already counted.
+
+### 4.4 Is the challenge subtly the wrong challenge?
+
+Partly, in one place. W as posed (a periodic grid-square family) is right, and TQ-EQ makes it exactly `χ_m⁰ ≤ 6`. But **W's natural first target is
+not "a family": at bounded complexity it is one object, a full tight curved six-map** (W-EQ-K), and a family is then free (erosion). The useful
+statement of W's next round is therefore "construct a full tight arc-bounded six-colouring, or prove none exists at bounded complexity" — the
+AE-Q2 question — with door (B) as a separate, harder target. Stated so, R and W meet on the same object (AE-Q2's [G1]–[G4]) at bounded complexity.
+
+### 4.5 Proposals for the close (I edit none of these files)
+
+- **Claim list:** add W-EQ-K, W-POLY, W-RATE, W-TAN, HX-STALL as held results at their grades; annotate the A2 §3.3 quotation under W with 4.2
+  item 2; annotate K-REG with the advisor's card (bounded curved limits are live).
+- **`LEDGER.md` § B:** one line each for W-EQ-K, W-POLY, W-RATE, W-TAN, HX-STALL (hand, one mind), W-CHK and W-HEX (tools, exact).
+- **Stubs:** (i) *door (A)*, "a full tight arc-bounded six-colouring, or a proof none exists at bounded complexity" — R and W together, through
+  AE-Q2's [G1]–[G4]; (ii) *the no-tangency intersecting rule* (W-TAN): does any planar six-coloured map with tiles of diameter `≤ 1`, class
+  densities `≤ 0.2470` and Siamese-or-`≥ 1` same-colour pairs have intersecting vertex types on every pair of adjacent tiles? — by hand, a local
+  rule on tile rings; (iii) *C-VOID's refutation* by a thin-hole family (coverage free), which would kill R′ without deciding anything.
+- **`BIBLIOGRAPHY.md`:** no change from me. *Reading status, honestly:* I opened none of the papers' PDFs in this job; `[Parts2020c]`'s tiling and
+  its numbers reach me only through TQ §4.3–4.5's reading, and FS106-AE-* through `plans/FS106-derivation.md`.
+- **Tools:** `tools/fs107_w_check.py` (exact checker; `--self-test` with six controls; three planted checker faults caught) and
+  `tools/fs107_w_members.py` (the hex control and family HX, by formula) are ready for FS-109's dial: they certify any periodic grid member.
+
+### 4.6 Stage 5 (after hand-back only)
+
+Not done: reading R's record for divergences is owed after hand-back, per the brief; I have not opened it.
+
+## Stage 4 — SAVED
