@@ -16,6 +16,8 @@ disk (current state only; one home per fact; **the 300,000-byte budget**; WORKFL
    - the `BIBLIOGRAPHY.md` and `CLOSED-QUESTIONS.md` rows;
    - the `plans/FRONTIER-STUBS.md` rows;
    - the `plans/GROKKING-INSTANCES.md` instances.
+   - the fence-template fix in `plans/PROTOCOL-competitor-and-advisor.md` and `plans/PROTOCOL-crunch.md` (session transcripts, `chats-bak/`,
+     the shared harness scratchpad).
 
    Where a draft is missing, apply nothing in its place, and list it as left.
 2. Mirror the ranking change in `CLAUDE.md`'s paths-forward table, from `plans/FRONTIER-STUBS.md`.
