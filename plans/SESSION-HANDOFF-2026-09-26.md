@@ -5,6 +5,11 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
+- **THE REFRAME (Kooshi, 2026-09-26):** aim = solve HN outright, formalize everything in Lean (no declared purchases), then publish;
+  Lean is not a cost; time is not a concern; finite-graph search is out. Direction = **the regularity wall** (`CLAUDE.md` § The aim,
+  § Counter-priors [PROTECTED]; stub `plans/STUB-regularity-wall.md`): next **FS-106 (the regular half)**, then **FS-107 (regularity vs
+  pathology, competitor protocol)**. RF1 was mirroring the ranking when this line was written. Papers asked of Kooshi: Townsend 1981 (JCTA 30),
+  Townsend 2005 (Geombinatorics XIV(4)), Thomassen 1999 (Monthly 106), Pritikin 1998 (JCTB 73); optional Maggi 2012, AFP 2000, Croft 1967.
 - **FS-105, harden MR — CLOSED 2026-09-27, 02:19 UTC by the clock** (close inventory `plans/FS105-close-inventory.md`; `plans/FS105-harden-mr.md` §R-close;
   `plans/FS105-derivation.md`, 19 entries). MR stands, grade rewritten in row 120: EL2021 Thm 1.2 = Thm 1.3 + FS105-DED [two minds, one blind]
   (EL2003 is an outline); PE-2 within hypotheses; EF_F⁺ three blind; C-MR16 one checking walk; row 129 test forms (W)/(W′). Covert channels
