@@ -516,3 +516,68 @@ dimension `< 2` certifying hole area bounded below (0.05); the conjecture's bold
 
 `data/fs107/briefs/SHARED-107-competition.md` (both competitors, identical), `R107-stability.md`, `W107-near-colourings.md`,
 `A107b-advisor-competition.md` (the competition-phase advisor's hand-over), `V107-blind-verifier.md` (instance block for the owner).
+
+---
+
+## §R-close — the close (job FS107-C, de Bruijn, Opus 5.5, 2026-09-27; brief `data/fs107/briefs/C107-close-math.md`)
+
+*Worked from `plans/FS107-close-inventory.md` items 1–34. Every number below is read from the named record, never from the inventory. Minds are
+counted as derivations; "blind" means the mind had not read the other's derivation before its own verdict was committed (V: stage 3 `abcb19ac`
+before R's record; VW: stage 3 `ef9e955a` before W's record). No children were started.*
+
+## §R-close stage 1 — SAVED: reconciliation
+
+### 1.0 Quotation check (standing rule 5) of the brief and the launch message
+
+| # | quoted | source | result |
+|---|---|---|---|
+| Q1 | the FS-110 question (brief, unquoted): "does a tight six-map exist whose complementary vertex pairs within distance 2 are all tangent pairs or bowties? YES is `χ(ℝ²) ≤ 6` with no MR; NO answers S–V Question 2 almost everywhere" | A2 §5.1: "NO ⟹ door (A) is dead at every `K` and C-AE-Q2 holds a.e. for locally finite arc-bounded maps; YES ⟹ a candidate door-(A) design, to be eroded and checked exactly"; A2 §5.9: "a YES is decisive (`χ(ℝ²) ≤ 6` with no MR, through W-EQ-K)" | **two questions under one sentence.** §5.1's is the *rule* relaxation (necessary conditions only; YES a candidate); §5.9's reads "tight six-map" as a full a.e.-proper six-colouring by a map, of which the rule is a necessary condition (W-TAN), so YES is decisive. The brief drops §5.1's "for locally finite arc-bounded maps" and "a candidate". The stub (stage 4) states both forms, Q-full and Q-rule |
+| Q2 | launch message: "tangency is no escape at scale `s`" (in quotation marks, from item 31) | V §4.3: "**Tangency is not an escape at positive scale**"; "So the exceptional set is exceptional only in the blow-up; at scale `s` a tangent ring still costs `≳ s²·s′ sin(µ/2)`" | a paraphrase in quotation marks; content kept. The stub quotes V |
+| Q3 | brief: G82's "feature-local" → "a defect at an `ε`-independent scale" | A2 §5.8: "a stability proof must count a defect at a scale independent of `ε` — spread over positive measure, or at features whose own scale is bounded below" | matches |
+| Q4 | item 16's CP line (R's theorem line, verbatim) | R ll. 9–12 against R §3.2 | the theorem line omits §3.2's "`s, s′ ≤ s₀(µ, η)`" (`s₀ = µη²/100`), "`2r < t₁`, `2r′ < t₁′`" and the definition of blocking — V §4.1 found it; confirmed here |
+| Q5 | item 20's W-TAN line | W l. 19: "complementary-type vertices at distance `< 2` are tangent pairs or bowties" | matches |
+| Q6 | item 2 (A's slip) | FS107-A record l. 37: "C-Q-LOCAL (local repairs cost `O(ε²)`)" … "**MISATTRIBUTED**, and inherited" (A8b, `plans/POROS-2026-09-26-fs106-regular-half.md` l. 242) | confirmed |
+| Q7 | item 21 (the W brief's slip) | W l. 40: brief "a corner-circle rule is only sufficient"; the plan §PA row 6 "whether that is the exact condition for whole cells is not checked here", `claims.md` "may be only sufficient" | confirmed: "is only" for "may be only" |
+
+### 1.1 R's statements (competitor R; blind verifier V)
+
+| statement | R | V (blind to R until stage 3 `abcb19ac`) | divergence and how it was settled | reconciled verdict; minds |
+|---|---|---|---|---|
+| **FS107-R-SAT** | TRUE [hand] §3.1 | TRUE, needs `ε > 0` (`g_j = 1_{C_j} ∗ 1_{A_ε}` continuous) §2.4 | none; same proof | **TRUE** (`ε > 0`); two minds, one blind |
+| **FS107-R-CP** | TRUE [hand] §3.2, Claims 1–2 (exact ray–circle quadratic; a box pulled back) | stage 3: the quoted line **MISSTATED** (C1: `µ = 20°`, `s = 0.33`, holes `2.165·10⁻⁴` against the line's `3.277·10⁻⁴`); own V-CP proved by projection with curvature bookkeeping; stage 4: R's §3.2 checked line by line, correct with one harmless slip (`ρ ≥ t(1 − t/2)`, not `ρ ≥ t`) | **of statement, not of truth**: C1 is outside R's hypotheses twice (it does not block with margin 20° in R's arc sense; `s = 0.33 > µη²/100`). Settled by V §4.2: under R's definitions the constant holds with room (`37×` the bound at `s = 0.001`) | **TRUE under R §3.2's hypotheses**; two minds, different routes, one blind (R; V), [hand] with V's float check. The one-line form is not self-contained (item 32) |
+| **V-CP** | — | TRUE with `s, s′ ≤ min(sin(µ/2), sin θ/18)` and projection fatness; FALSE for unrestricted `s` (C1, float, grid-converged) | — | one mind (V) |
+| **RR**: (A) ∧ (B) ⟹ R, given CP | a [reading] §3.4; "R, and a C-VOID disc"; "R′ … with it" | TRUE after two repairs (the disc in `U_{R+1+µ/4}`; (B)'s voids relative to `min(s, µη²/100)`); ⟹ C-VOID **GAP** (the branch "holes `≥ δ`" gives no disc) | **R′ divergence**: R concluded R′ ("GAP, same steps"), V showed the implication to R′ fails; settled by V's argument (R did not reply; R had stood down). Scope repair of (B): one symbol `s₀` was a lower bound in (B) and an upper bound in CP | the implication **TRUE after two repairs**, two minds, one blind; (A), (A″) and (B) **open**; RR ⟹ R′ **GAP** (one mind, V) |
+| **FS107-R-SW**, `εs` part | `≥ εs`, sharp for one colour, pointwise on SEQ (`ε ≤ s/2`, `s ≤ 1/10`) | `≥ 2ε√(s² − ε²)`, sharp at `2εs`, a.e. fibre argument (measurable classes too) | none; routes differ | **TRUE**; two minds, one blind |
+| **FS107-R-SW**, `s³` part | [sketch]: strips of total width `≳ s²/2 + ε` | **proved**: `\|H ∩ (B(p,s) ∪ B(q,s))\| ≥ s³/256` for `s ≤ 1/2`, `ε ≤ s²/32`, every hole set (double count of band pairs) [hand + tools for two inequalities] | none; V's covers all hole shapes, R's priced strips | **TRUE**; the proof one mind (V, blind), R's strips-only sketch agreeing |
+| **FS107-R-OB′** | "an argument that reads, at a swap, only the pairs of one colour is capped at `O(ε·s)` per swap … Stability must read both colours at a swap" | **MISSTATED**: TRUE for the away-facing colour (`2εs(1 + o(1))`); FALSE for the facing colour, whose pairs alone certify `s³/256` | **divergence of truth**, settled by V's `s³` proof: "must read both colours" is false at a flat swap | **FALSE as stated; TRUE corrected** (away-facing colour only), one mind (V) |
+| R's retraction 2 (draft Theorem OB) | withdrawn before commit | — | — | recorded (R §3.4) |
+| C-T-BIKE | the pure `π/3`-arc ansatz fails narrowly at `d = 1.9` (58.4°, 59.3° against `> 60°`), two windows | — | — | not decided; hand arithmetic, one mind |
+| **V's C5** | — | tangent ring junctions still force holes at positive scale: `6.8·10⁻⁵` at `s = 0.1` against an exactly tangent interface; general claim a sketch | not in R's record (R lists tangency among W's escapes) | [tools, one instance, and a sketch], one mind — a candidate (§4.3) |
+
+### 1.2 W's statements (competitor W; blind verifier VW)
+
+| statement | W | VW (blind to W until stage 3 `ef9e955a`) | divergence and how it was settled | reconciled verdict; minds |
+|---|---|---|---|---|
+| **W-EQ-K** | [hand] §2.2: at bounded arc complexity `K`, band-proper designs with `ε_n, δ_n → 0` ⟺ a full tight a.e.-proper six-colouring by tiles of complexity `≤ K` (⟸ with `δ = O(ε)`) | TRUE under (Cu) (at most `K` arcs per unit disc), GAP under (Ct) (per-tile count); ⟸ at `≤ 2K` | **two steps W does not write**, both closed by VW §4 item 2: ⟸ lands at complexity `O(K)` (reflex corners cut by chords), and the non-periodic limit is periodised by a seam strip of width `1 + ε`, cost `O(1/L)`; (Ct)'s GAP does not bear on W's class `𝓜_K` | **TRUE at `𝓜_K`, ⟸ at `O(K)` with a seam strip**; two minds, one blind; routes differ (W: compact tile parameters, TQ §3.3's maximal inequality; VW: arcs and faces, a weighted average) |
+| **W-POLY** | [hand, over AE-POLY] §2.3 | TRUE over AE-POLY and W-EQ-K ⟹ | none | **TRUE** bar `d = 2`; two minds, one blind; over FS106-AE-POLY |
+| **W-RATE** | [hand] §2.4, opening "Let `M` be a full tight colouring as in 2.2" | TRUE with hypotheses explicit; MISSTATED bare; the pinhole clause a reading | **of the table line only** (VW §4 item 3): the hypothesis is W's text, missing from its table | **TRUE** at `𝓜_K`; two minds, one blind; the pinhole clause a [reading] |
+| **W-TAN** | [derived, over C-T-TAN] §2.5: "For a map every vertex is a cone point (strong blow-ups hold)" | first clause TRUE for C¹ arcs with tangents at vertices, types as essential multicolours; **GAP at cusp vertices** (a zero-angle tile: its colour has density 0, `\|P(u)\| = 2`, C-T-TAN silent); general Jordan boundaries GAP; second clause MISSTATED (bichromatic vertices of degree `≥ 4` have two-element types) | **divergence of truth at cusps**, settled for VW: "a cusp is a cone point whose tile has angle 0" (VW §4 item 4); the second clause restricted to trichromatic vertices (true for trivalent maps); the Jordan gap outside `𝓜_K` | **first clause TRUE over C-T-TAN off cusps; GAP at cusp vertices; second clause TRUE for three-element types, off `d = 2`**; two minds, one blind; [derived] over C-T-TAN (one mind, TS) |
+| **HX-STALL** | [hand, one mind; four members exact] §3.3–3.5; the other pairs "checked at members" | **TRUE and stronger**: pair 2 implies every other same-colour class for every parameter; `δ = (2π/(21√3))(ρ/R)²`, the conditions force `ρ/R > 1/2`, `inf δ = π/(42√3)` attained by no member | none in truth; VW's is stronger; nits: the null form allows equality where W writes `>`; the stall is an infimum | **TRUE, every parameter**; two minds, one blind; [hand and tools, exact in ℚ(√3)]; members re-checked by two independent checkers |
+| **W-CHK, W-HEX** | [tools, exact] | six given members re-checked by VW's own reader and checker; all verdicts, slacks, densities agree | none | [tools, exact], two independent checkers |
+| **VW-GRID** | — | an independent exact checker (half-open squares, Fractions, a Hermite torus); rasterised hex7 − 1 blank density `2513/17655` (centre rasterisation; W's `1/7` is a coset rasterisation, both exact for their constructions) | none | [tools, exact] |
+| W's P-W1, P-W2 | lost (a first-order estimate; the collinear corner for the 120° one) | — | caught by W's own checker | recorded |
+
+### 1.3 The advisors' results and the meeting point
+
+| statement | minds | status |
+|---|---|---|
+| **K-C6** (disjoint three-sets = complementary, six colours) | FS107-A, [hand, trivial] | TRUE; one mind; CP is its metric content (R stage 4) |
+| **K-BICH** (a six-colour map has a trichromatic vertex) | FS107-A, [hand] | TRUE; one mind |
+| **K-AD** (a) the named-form no-go; (b) "two doors" | FS107-A; credit TQ §4.4 | (a) [hand, one mind]; (b) [reading], **consistent** with CP: CP's holes are door 2, `ε`-independent size (R stage 4); not fired |
+| **A2 X1** (split by complexity; bounded limits are regular by compactness) | A2 sketch, then R and W at their registrations | three independent derivations of the split (A2 §5.2); proved as W-EQ-K; its "polygonal limits out" half is W-POLY |
+| **The meeting point** (A2 §5.1): RR's (A)/(B) ⟷ W's doors (A)/(B); W-TAN ≡ CP on LIM | [derived], one mind (A2), its parts now two minds each | a synthesis; both halves rest on C-T-TAN, whose cone case now has three derivations: TS; R (sighted of TS); V (blind to R, read TS) |
+| A2's two divergences of scope (§5.3): W §1.3 (2) against CP; W-TAN's range (`< 2`) against CP's (`[η, 2 − η]`) | A2 | none of truth; pairs near distance 0 and 2 are covered by W-TAN and by neither side's cost |
+
+**Divergences of truth in the milestone: three**, every one found by a blind mind and settled by derivation: OB′ (V), RR ⟹ R′ (V), W-TAN at cusps
+and at two-element types (VW). **None between the competitors** (A2 §5.3). Three statement-level corrections (the CP line, W-EQ-K's complexity, the
+W-RATE and W-TAN table lines). Retractions (A2 §5.5, from the registrations on): R 2, W 1, A2 0 (one hunch killed); FS107-A 0; V and VW 0.
