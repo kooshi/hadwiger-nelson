@@ -505,8 +505,12 @@ class PairResult:
 
 
 def pair_verdict(T1, T2, self_pair=False):
-    cs = [c for p in T1 for q in T2 for c in cands(p, q)]
     r = PairResult()
+    if self_pair and PLANT == "noself":             # planted: the tile-with-itself pair is never examined (reaches every driver)
+        r.verdict, r.lo_class, r.hi_class, r.lo, r.hi, r.contacts, r.ncand, r.touch, r.lo_c, r.hi_c = \
+            "ACCEPT", -1, -1, 0.0, 0.0, [], 0, True, None, None
+        return r
+    cs = [c for p in T1 for q in T2 for c in cands(p, q)]
     r.ncand = len(cs)
     cls = [cmp1(c) for c in cs]
     if self_pair:
@@ -545,8 +549,6 @@ def check_fragment(T, pairs=None):
     expect = sum(k * (k + 1) // 2 for k in counts.values())
     rows, bad = [], []
     for a, b in pairs:
-        if a == b and PLANT == "noself":
-            continue
         r = pair_verdict(T[a][1], T[b][1], self_pair=(a == b))
         rows.append((a, b, T[a][0], r))
         if r.verdict == "REJECT":

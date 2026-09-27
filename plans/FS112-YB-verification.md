@@ -88,3 +88,38 @@ brick seven-colouring, cells `4/5 × 3/5`, shear `2/5`, colour `(i + 3j) mod 7`)
 `|i|, |j| ≤ 4` ACCEPT, three exact contacts at 1 (its diagonal, and the cells `(±1, ±2)` corner to corner); every cell beyond the window is at gap
 `≥ 8/5`, dismissed exactly. Plants beside it: colour `(i + 2j) mod 7` REJECTs at offsets `(∓2, ±1)` (the vector `−2 + ζ₆` of norm 3 in the kernel, as
 the Lean module's docstring predicts); cells `81/100 × 3/5` REJECT on the self-pair (diagonal above 1); `closed_interval` REJECTs CAL-7 (it is tight).
+
+## Stage 3 — SAVED: the strip rebuilt from the printed words (brief step 2; instance O1–O3's objects built)
+
+**The rebuild** (`tools/fs112_yb_strip.py`; every coordinate derived, none from the figure). Midline `y = 0`, midline vertices `P_j = (j/2, 0)`.
+**Arch `j`** (columns `[j/2, (j+1)/2]`): corners `P_j, P_{j+1}`; each rounded side is "a circular arc of radius 1 centered at the opposite corner of the
+tile", so the straight side `x = j/2` meets the circle about `P_{j+1}` at `V_j = (j/2, √3/2)`, and the two arcs meet at the apex `A_j = (j/2 + 1/4, √15/4)`
+("the point of intersection of circular arcs"); arch `j` = `{j/2 ≤ x ≤ (j+1)/2, y ≥ 0} ∩ D(P_j, 1) ∩ D(P_{j+1}, 1)`. **Inverted arch `j`**: its mirror
+image. **Top tile over the valley `V_m`**: bounded below by the two arcs through `V_m`, between `A_{m−1}` and `A_m`, vertical sides up to `y = Y`; the rule
+"the distance 1 between the point of intersection of circular arcs and the opposite corner of a tile" gives `|A_{m−1} − (m/2 + 1/4, Y)| = 1`, so
+`Y = √15/4 + √3/2`. **Both readings of "the point of intersection of circular arcs"** — the apex `A` (two arcs of one arch) and the valley `V_m` (arcs of
+two arches) — give the same `Y` (checked exactly); the rule is unambiguous. **Bottom tile**: the mirror image. **Height `2Y = √15/2 + √3` exactly.**
+Colours (Figure 4, read): arch `j` → `P, G, B` (`j mod 3`); inverted arch `j` → `M, R, O`; top tile over `V_m` → `R, O, M` (`m ≡ 0, 1, 2`); bottom tile
+under `V′_m` → `G, B, P`. Field: `ℚ(√3, √5)` (the arches' sides `√3/2`, the apex `√15/4`: FS112-A's reading confirmed).
+
+**Map consistency** (exact): in a period (12 tiles) every boundary piece is shared by exactly two tiles or lies on the edge `y = ±Y`; every tile's
+boundary is one closed chain. Float guard: the twelve tile areas sum to `5.502813721` = period × height.
+
+**The exact check: ACCEPT** (`data/fs112/fs112-yb/strip-check.txt`). Pairs up to the period `3/2`: 90 same-colour orbit pairs examined exactly (the 12
+tiles of a period, each with itself and every same-colour tile of columns `−9 … 11`); every same-colour tile beyond is `x`-separated by `≥ 19/4`, so its
+minimum distance exceeds 1 (dismissed exactly). **Of the 90, 36 are within reach (minimum ≤ 1), and all 36 touch at exactly 1**: the 12 self-pairs have
+diameter exactly 1; the 12 pairs of like tiles three columns apart meet along parallel segments at distance exactly 1; the 12 **out-contact pairs** (a
+top tile against the inverted arch whose corner is the centre of its arc; mirror: a bottom tile against an arch) have every point of the arc at distance
+exactly 1 from the corner. **No slack pair within reach.**
+
+**CAL-PLANT on the strip** (`strip-plants.txt`; each rejected set predicted by hand before the run): arcs of radius `11/10` about the opposite corner →
+exactly the six arch self-pairs (diameter 11/10); radius `9/10` → exactly the twelve out-contact pairs (a corner to the whole arc at 9/10) plus the six
+top/bottom self-pairs (valley to far corner `√1.027`); edges raised by `1/100` → exactly the six top/bottom self-pairs; arch 0 recoloured G → exactly
+`(U0, U1)` (touching), `(U0, B0)` (0.968) and `(U0, U−2)` (1/2); the checker's `closed_interval` plant → exactly the 36 pairs within reach; `noself` on the
+radius-`11/10` plant → nothing (the diameter fault invisible). **Two harness defects found by the plants, both fixed before the verdicts:** my colour-swap
+prediction named the orbit `(U1, U3)`, the checker's canonical representative is `(U0, U−2)` (the same orbit, a naming slip of mine); and the `noself`
+plant lived only in the fragment driver, so it **could not reach** the strip driver — moved into the pair verdict, where every driver meets it.
+
+**The three causes of a REJECT, told apart in advance** (the brief's discipline): a wrong rebuild shows as a map-consistency failure or a failed identity
+(the rule's two readings, the height); a wrong checker shows in the calibration (FS-110's fragments pair by pair, CAL-7, the plants); a wrong print would
+show as a REJECT with a consistent rebuild and a calibrated checker. None arose: the strip is ACCEPTED.

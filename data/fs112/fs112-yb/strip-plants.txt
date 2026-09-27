@@ -1,0 +1,8 @@
+  ok       strip plant None    : 90 pairs, rejected []
+  ok       strip plant rho11   : 90 pairs, rejected [('D0', 'D0'), ('D1', 'D1'), ('D2', 'D2'), ('U0', 'U0'), ('U1', 'U1'), ('U2', 'U2')]
+  ok       strip plant rho9    : 90 pairs, rejected [('B0', 'B0'), ('B0', 'U-2'), ('B0', 'U1'), ('B1', 'B1'), ('B1', 'U-1'), ('B1', 'U2'), ('B2', 'B2'), ('D0', 'T-1'), ('D0', 'T2'), ('T0', 'D-2'), ('T0', 'D1'), ('T0', 'T0'), ('T1', 'D-1'), ('T1', 'D2'), ('T1', 'T1'), ('T2', 'T2'), ('U0', 'B-1'), ('U0', 'B2')]
+  ok       strip plant tall    : 90 pairs, rejected [('B0', 'B0'), ('B1', 'B1'), ('B2', 'B2'), ('T0', 'T0'), ('T1', 'T1'), ('T2', 'T2')]
+  ok       strip plant colswap : 97 pairs, rejected [('U0', 'B0'), ('U0', 'U-2'), ('U0', 'U1')]
+  ok       checker plant closed_interval on the faithful strip: rejects 36 pairs = every pair within reach (predicted: all 36, each touching at exactly 1)
+  ok       checker plant noself on plant rho11: rejects [] (predicted: nothing -- the diameter fault is invisible)
+STRIP PLANTS ALL AS PREDICTED
