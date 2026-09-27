@@ -96,6 +96,57 @@ edits; fixed by stage 3's `BIBLIOGRAPHY.md` rows. **`CLAUDE.md`: 296,759 → 296
 
 ## Stage 2 — SAVED
 
+## Stage 3 — `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md`
+
+**`plans/FRONTIER-STUBS.md` (4.5, C17 in the rows' own words, ruling 1).**
+- Open milestones: the draft's sentence ("**None is open.** FS-103, the collapse, is **closed** (2026-09-26; rows 128–130; …; its banner).
+  Next: Kooshi's choice; the default is the top row.") heads the section, FS-84's paragraph below it as drafted. That paragraph's
+  "**Next: FS-103, the collapse** (…, rank 1; Kooshi, 2026-09-26: *"Set things up, …"*)." was stale once FS-103 closed and the draft is
+  silent on it: rewritten to "FS-103, the collapse (`plans/STUB-collapse-cp-plane.md`), was then chosen as the milestone (Kooshi's quote,
+  verbatim) and is closed (above; the closed list)" — current state, the quote kept.
+- Ranked stubs: the draft's re-rank note heads the section, with one change for ruling 1 — "no order changed" → "and FS-105 (harden MR)
+  moved above FS-104 — the owner's default on the close's held item 1 (rows 121–130 all rest on MR, and row 129 makes MR testable on finite
+  graphs; Kooshi may reverse it; `plans/FS103-collapse-cp-plane.md` §R-close 4.9)". The rest verbatim.
+- Table: FS-103's row out (its text is the stub's, `plans/STUB-collapse-cp-plane.md`); ranks 2–62 → 1–61; FS-105 and FS-104 swapped
+  (1 FS-105, 2 FS-104). In-row edits mirroring C17 in the rows' longer words: FS-104 (question and bearing, C17's words), FS-105 ("MR at
+  degree 16 (de Grey's field, unreached at FS-103); row 129's finite-graph test of MR"; "rows 121–130 rest on MR"), FS-62 ("given MR, S ⟹
+  `χ(ℝ²) ≠ 6` (row 128), and row 128 states S's exact form over totally real fields — finitely many residue sizes, infinitely many local
+  planes, not a finite family (the advisor's "a finite family of CP product statements" was MISSTATED, FS103-S)"), FS-67, FS-59, FS-49 and
+  FS-39 (the long "FS-103's F1 (a candidate composition, …)" → "MR and row 128"), FS-102 (C17's words), FS-101 (the named-hypothesis
+  sentence and C17's "Next:" edit), and FS-63's "FS-103's gate runs" → "ran" (current state; not in C17). No "FS-103's F1" left in the table.
+- Closed list: the draft's FS-103 entry first, verbatim.
+- **Mirror check** (script): `CLAUDE.md` ranks 1–28 name the same stubs as `plans/FRONTIER-STUBS.md` ranks 1–28, and `CLAUDE.md`'s
+  "29–61" list is `plans/FRONTIER-STUBS.md`'s ranks 29–61 in order (33 entries; 0 mismatches).
+
+**`BIBLIOGRAPHY.md` (4.3, with the details from the addresses it names).**
+- § A `[Falconer1981]` rewritten: held (`library/papers/falconer-1981-…-jcta-31-184-189.pdf`, Kooshi's upload), **read in full,
+  first-hand** (FS103-M, FS103-N); Zbl 0469.05021, doi; Thm 2 bounds `χ_m`, not `χ_m⁰`; Lemma 2's null set `E` is FS-104's question 2;
+  Lemma 3 one small translation (Soifer 2005's exposition differs).
+- § A new rows: `[ShelahSoifer2003]` (held `library/pdf/…`, read in full, FS103-G), `[SoiferShelah2004]`, `[ShelahSoifer2003b]`,
+  `[Soifer2005]`, `[Soifer2007]` (titles and authors checked against the zbMATH Open API by Zbl number, 2026-09-26 — the gate's §3.3 gave
+  no title for 1057.03036: *Axiom of choice and chromatic number: examples on the plane*), `[Szekely1984]` (promoted from § C: the § C row
+  removed, the promotion logged in § C's "Promoted into § A" list), `[Cohn1972]` (cited by statement, unread).
+- Read-status appends (last column): `[MatolcsiEtAl2025]`, `[AmbrusEtAl2023]`, `[DuczVarga2026]`, `[BachocEtAl2014]` (with N's §3.2
+  opening), `[Payne2009]` (role: ambiguous chromatic number, G81), `[Madore2015]`, `[KechrisMarks2020]` (with N's naming note),
+  `[CurrieEggleton2016]`, `[Croft1967]` (§ C row).
+- § B: three held-file lines (Falconer, Shelah–Soifer, Marks); `[Marks2023ICM]` added to "Held and not read" (keyword-scanned only) —
+  rule 0b's three places agree.
+- § C: a new block for FS-103's gate: `[CroftFalconer1981]`, `[Marks2023ICM]`, `[DidinVoronov2026]`, Croft 1982, Doob 1953 (the draft's);
+  Zapletal 2025, Johnson–Rodger (from the gate's §3.3 / §2.5, which the draft names as its address); **and three arXiv listings the draft
+  omitted and `bib_audit.py` requires**: Brandt et al. arXiv:2111.03683 (gate q36, abstract read), Poór–Shelah arXiv:2302.10141 (gate §1.3,
+  listing), arXiv:1401.7183 (F §3.5–3.6, search listing only) — each with the record's own verdict.
+- Not applied (no draft; the gate proposes it): `[Johnson2000]`'s "review read (FS103-G)" — left.
+
+**`CLOSED-QUESTIONS.md` (4.4):** the two bullets in §3, verbatim from the draft, before the "*Checked, and not listed*" bullet; the draft's
+location prefixes ("§3 (adjacent and open) —", "§3, answered at [hand] given MR —") dropped, the second kept as the bullet's status
+("— **answered at [hand], given MR.**").
+
+**Gates (read directly, exit statuses):** fact audit `--base 2dee443c` exit 0, **AUDIT PASSED (0 failure(s))**, 32 HOMED lines; `--dupes`
+**10**; `fs71_ledger_b_check.py --strict` exit 0, PASS; `bib_audit.py` exit 0, "every cited work resolves to a row or a recorded alias"
+(0 arXiv ids, 0 keys unresolved); `check_architecture.py` exit 0, PASS. **`CLAUDE.md` 296,232 bytes** (unchanged by this stage).
+
+## Stage 3 — SAVED
+
 ## Would-have-searched-here log
 
 Nothing: a filing job.
