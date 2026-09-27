@@ -115,3 +115,51 @@ EL2021 does **not** prove its Thm 1.2 as stated — it attributes that proof to 
 | G79 | B — the blind derivation names the invariant it runs on (entropy against height growth) and the close scores example vs counterexample → §IQ, phase B |
 | G80 | B, F — the mechanism under test; its killing test is MR's failure at some real field; degree 16 is where the count `c·M^{1/n}` is thinnest → claims (b), (c), §E |
 | G81 | B — MR's newest consumers (rows 128–130); its killing test ties MR to `χ(F²) = χ(ℝ²)` at 6-thick fields → blast radius, phase D |
+
+## Stage 3 — SAVED (§G, part 2: the ledger rows and the method rules)
+
+**Ledger rows** (each row's mechanism, `LEDGER.md`; S = silent, B = bears):
+1 S two-circle colouring · 2 S seam rotation · 3 S coverage monotonicity · 4 S fan iff · 5 S class degree · 6 S 120° identity · 7 S greedy ·
+8 S balanced colouring · 9 S 120° compulsion · 10 S one-pivot cap · 11 S strip automaton · 12 S extension profile · 13 S negative hunt ·
+14 S pair gluing · 15 S extension pressure · 16 S coupled automaton · 17 S gluing classification · 18 S near-relation · 19 S kill web ·
+20 S pivot triangles · 21 S statistics · 22 S ladder pair · 23 S four-ladder · 24 S hexagram · 25 S Moser twist word · 26 S anatomy ·
+27 S quadrature · 28 S 2-adic kill engine · 29 S stacking · 30 S criticality · 31 S Act One · 32 S hex-shell · 33 S interval ·
+34 S cosets · 35 S coarse cells · 36 S scale · 37 S gap atlas · 38 S gradient hunt · 39 S kernel gap atlas · 40 S fine tail ·
+41 S limit lemma (finite graphs to ℝ²; MR is measure-theoretic) · 42 S arity floor · 43 S homogeneity · 44 S spindle theorem ·
+45 S batch descent · 46 S copy unions · 47 S M53 · 48 S critical sets · 49 S absorption · 50 S additive yardstick ·
+51 S additive rigidity · 52 S finite-plane bound (an upper bound; MR is the lower-bound engine) · 53 S sieve · 54 S lift ·
+55 S residue compulsions · 56 S tightness mechanism · 57 S Theorems A, B · 58 S Moser threshold · 59 S 2-adic law · 60 S plane freedom ·
+61 S statement levels · 62 S overcompression · 63 B (scope) the 2-adic splitting of multiquadratic fields: `F_dG`'s dyadic places split in `F(i)` → phase C's PARI check ·
+64 S ρ₆₃ arena · 65 S Parts's shape · 66 S fan gap · 67 S 2-adic tower · 68 S 83 certificate · 69 S window · 70 S 27 ·
+71 S χ_f(K²) = 4 (fractional, finite places; MR's `m₁` enters at row 129) · 72 S 3-adic barrier · 73 S ℚ(√11) · 74 S census · 75 S towers ·
+76 S ℚ(√3,√5) lattices · 77 S the audit · 78 S de Grey's lattice · 79 S heights · 80 S cells · 81 S L21cc6506 · 82 S 1/3 ·
+83 S census · 84 S calibration · 85 S 8Λ derived · 86 S triangle-free rigidity · 87 S second moments · 88 B the type-(B) frame; row 88 ⟺ T-B1 rests on MR → blast radius ·
+89 S K's pullbacks · 90 S ℚ₂(√3) · 91 S no-gos · 92 S windows · 93 S towers · 94 S ℚ(√11), imaginary quadratic ·
+95 B closed-set (Furstenberg–Berend) rigidity with the archimedean directions set aside — MR's topological analogue, its `T`, `A` defined there → claims' notation ·
+96 S HD1 · 97 B one prime is not enough (closed sets) — a control shape: an MR-type statement over a one-prime ring must fail somewhere → phase B's control question ·
+98 B band rigidity at every band, two primes; defines `E`'s pieces → claims' notation · 99 S three colours ·
+100 B Lemma C/C′ `ℤ[U_F] = O′` and its exception fields — MR's scope → claims (a)–(c) scope · 101 S character numbers · 102 S one prime fails ·
+103 S chain theorem · 104 S transcendence · 105 B prime inversion in valuation form (`1/2 ∈ ℤ[U]` iff wall broken) → scope check ·
+106 S stripe lemma · 107 S bridge · 108 S rank one · 109 S mixing selection · 110 S windows at five · 111 B `F(R) ≠ 0` iff invariant random colourings are pullbacks — MR's first consumer frame → blast radius ·
+112 B Theorem C (spectra on `T + A + Fin_S`) → `E`'s definition · 113 B T-C(A) at ℚ(√47) → blast radius · 114 S products · 115 S mixing pins ·
+116 B Kronecker selection; vector cross → blast radius · 117 B SP-Cor and T-C(A)'s class → blast radius ·
+118 B no finitely generated `Γ` acts irreducibly on `R̂`; EL2021 applies on pieces only under admissibility → claim (a) · 119 S winding ·
+120 B the object: MR, its grade, its "Not claimed" (exception fields; `Γ` alone) → every claim · 121 B `χ(ℚ(√47)²) = 5` rests on MR → blast radius ·
+122 B where other routes stop (QTCA_{1/3}; ED-2 false; `J₀` minimum) — no second route to MR exists to fall back on → §R · 123 B the main clause through five rests on MR → blast radius ·
+124 B type-(B) rotation-invariant half → blast radius · 125 B six at ℚ(√167) reduced given MR → blast radius · 126 B TR-ROT given MR → blast radius ·
+127 B the kernel's named hypothesis `hMR` must match MR's corrected statement if one is owed → §R · 128 B the collapse, given MR → blast radius ·
+129 B, F the finite-graph test → claim (d) · 130 S the stationary number is a measurable one **with no MR** (unaffected by a break: a useful fixed point) → §R.
+
+**Method rules** (`CLAUDE.md` § Grokkings' method entries, § The standard of evidence, § Building, § The gate):
+- *Standard of evidence — "what must someone who trusts none of this actually check?"* B → the claim list is that list, hypothesis by hypothesis.
+- *Order a verification by marginal evidential value.* B → phase A reads EL2021's provenance of Thm 1.2 first (one page decides whether a fetch is needed).
+- *Checkpoint and resume; a run that blocks is killable; kill by pid; pipes; waiters.* S — no long runs; staged records suffice.
+- *The finite-witness ban.* B → phase D may read and derive only; no search for a graph with a high independence ratio.
+- *`slot.py`, RAM, `lake build` never bare.* S — no builds.
+- *The kernel's cost model; searching (`ugrep`, `rg`, `exact?`).* S / B (grep `BIBLIOGRAPHY.md` by arXiv id before fetching, G50).
+- *The gate; vacuity; make the gate fail.* B (weak) → every exact check a job writes carries a plant that fires for its own reason.
+- *"Exactly one thing may differ between two compared numbers."* B → the degree-16 walk compares `#U_M` counts under one height normalisation.
+- *"Confirm both outcomes reachable."* B → §E registers each expectation with its reachable failure.
+- *"A candidate failing one gate is checked against all before use."* B → ℚ(√635087) is checked for every hypothesis (totally real, wall broken, `R = O′`, degree 2) before it is the instance.
+- *"A caveat you write and step over."* B → every claim carries MR's "Not claimed" in its headline.
+- *"A one-sided filter judged; enumerate the parameter first; count free parameters; a positive control proves only its generator's shapes."* S.
