@@ -376,3 +376,68 @@ diagonals** (X4 TRUE on the strip; one mind, exact). Whether that identity holds
   vertices.** This is C-BEYOND for the strip, now exact on both halves.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: CAL-DISK step 1 — `[Polymath2021]` Fig. 10's combinatorics transcribed by eye, fixed before any solve (the D5 conditions)
+
+**Source and how it was read.** Fig. 10 (PDF p. 36 of `geombinatorics-v30-n4-2021-04.pdf`), rendered at 150, 400 and 800 dpi and viewed whole and in five
+crops (top, centre, around `B`, left, bottom). Printed words used: the caption ("A 6-tiling of a disk of radius √(5/2 + 9/(2√5))"), p. 199 ("the points
+A,B,C,D,E lie at the vertices of a unit-edge regular pentagon"), p. 198 (the `k = 4` tiling: "we again employ the tactic of drawing inter-tile boundaries as
+arcs of radius 1"), and `[11.34]` (Parts, via `plans/FS112-PA-reading.md` stage 6: "a skeleton from five connected regular pentagons with unit edges").
+**Disclosure (G21, the D5 conditions):** to recognise which skeleton point a tile corner is, I read approximate pixel positions at 400 dpi (about 336 px to
+the unit) and compared them by eye with the skeleton's points; no coordinate below is taken from the figure, none was adjusted, and no alternative was put
+to a solver. Every vertex is defined by a **rule**; the rules' agreement with the figure was judged by eye to about 2 % of a unit.
+
+### 4.1 The skeleton (printed) and the symmetry (read)
+
+- `O` the disk's centre; `ρ` the rotation by `72°` about `O`. **The geometry is read as five-fold symmetric** (every tile has a congruent copy at `±72°`; the
+  colours are not rotation-invariant, 4.4). Sector `k = 0…4` is centred at angle `90° + 72k`.
+- `Π_0 = ABCDE` (printed: a unit regular pentagon), read with `A` the vertex nearest `O` on the vertical axis, `B` left, `C` upper-left, `D` upper-right, `E`
+  right; `Π_k = ρ^k Π_0`, with vertices `A_k … E_k`. **"Connected"** ([11.34]) read as `B_k = E_{k+1}`: the point `B` (the left corner where the orange tile's
+  two outer arcs meet) is also `ρ(E)`. This fixes `|OA|` (one equation; solved in step 2).
+- **The central tile** is read as the Reuleaux pentagon on the five points `A_k` (its corners; its sides bulge outward).
+
+### 4.2 The tile vertices off the skeleton, each by its rule
+
+| point | rule (read) | what in the figure |
+|---|---|---|
+| `Z_k^L`, `Z_k^R` | on the diagonals `A_kC_k` and `A_kD_k` of `Π_k`, at distance 1 from `A_k` | the ends of the top edge of the ring-2 tile at `A_k` (e.g. the blue tile under `CD`); the red outer tile's straight sides run from `C` and `D` toward `A` |
+| `Y_k`, `X_k` | the ring-1 tile `T1_k` on the central side `A_kA_{k+1}` has two straight **parallel** legs, perpendicular to that side's chord, from `A_k` and `A_{k+1}`; the leg from `A_k` ends at `Y_k` on `ω(A_{k+1})`, the leg from `A_{k+1}` at `X_k` on `ω(A_k)` | the bottom blue tile's two vertical sides; the orange tile's sides from `A` and from the central tile's left corner |
+| `u_k` | the point of the boundary circle on the ray `O B_k` | the boundary between the two outer tiles that meet at `B_k` runs straight out along the mirror line through `B_k` |
+| boundary circle | centre `O`, radius `|OC_k|` (`C_k`, `D_k` on it) | `C`, `D` labelled at the red top tile's two rim corners |
+
+### 4.3 The 26 tiles and their edges (each edge: straight, or a unit arc with its centre, or the rim)
+
+| tile | corners, in order | edges |
+|---|---|---|
+| `C0` (central) | `A_0 … A_4` | side `A_kA_{k+1}`: unit arc centred `A_{k+3}` (convex) |
+| `T1_k` (ring 1, on side `A_kA_{k+1}`) | `A_k, Y_k, B_k, X_k, A_{k+1}` | `A_kY_k` straight; `Y_kB_k` unit arc centred `A_{k+1}`; `B_kX_k` unit arc centred `A_k`; `X_kA_{k+1}` straight; `A_{k+1}A_k` the central arc |
+| `T2_k` (ring 2, at `A_k`) | `A_k, X_{k−1}, Z_k^R, Z_k^L, Y_k` | `A_kX_{k−1}` (= `T1_{k−1}`'s leg), `X_{k−1}Z_k^R`, `Z_k^LY_k`, `Y_kA_k` straight; `Z_k^RZ_k^L` unit arc centred `A_k` |
+| `R_k` (outer, over `C_kD_k`) | `D_k, C_k, Z_k^L, Z_k^R` | `D_kC_k` rim; `C_kZ_k^L`, `Z_k^RD_k` straight; `Z_k^LZ_k^R` the unit arc centred `A_k` |
+| `U_k` (outer, from `C_k` to `u_k`) | `C_k, u_k, B_k, Y_k, Z_k^L` | `C_ku_k` rim; `u_kB_k` straight; `B_kY_k` the unit arc centred `A_{k+1}`; `Y_kZ_k^L`, `Z_k^LC_k` straight |
+| `U′_k` (outer, from `u_k` to `D_{k+1}`) | `u_k, D_{k+1}, Z_{k+1}^R, X_k, B_k` | `u_kD_{k+1}` rim; `D_{k+1}Z_{k+1}^R`, `Z_{k+1}^RX_k` straight; `X_kB_k` the unit arc centred `A_k`; `B_ku_k` straight |
+
+Count: `1 + 5 × 5 = 26` tiles (the figure: 1 central, 5 + 5 in two rings, 15 on the rim). **Unit arcs: 20** (5 central sides, 5 ring-2 tops, 10 ring-1
+outer arcs), **all centred at the five `A_k`**, four per `A_k`.
+
+### 4.4 Colours (read; six hues, no ambiguity)
+
+With `c = (blue, green, yellow, orange, purple)` indexed by `k`: `T2_k = c(k)`; `T1_k = c(k+3)` (orange, purple, blue, green, yellow); `U_k = c(k−1)`
+(purple, blue, green, yellow, orange); `U′_k = c(k+2)` (yellow, orange, purple, blue, green); `C0` and every `R_k` red. **So the colouring is `ρ`-equivariant**:
+`ρ` maps each tile to its copy in the next sector and acts on colours by the 5-cycle `c(k) → c(k+1)`, fixing red — a structural reading of the colour list,
+not an extra assumption.
+
+### 4.5 Ambiguities reported (none resolved by trying alternatives)
+
+1. **Straight edges.** Legs, `T2`'s sides, `R`'s sides and the radial `U | U′` boundaries are read straight; a curvature of radius well above 1 cannot be
+   excluded at this resolution.
+2. **The legs' direction.** Read parallel (the bottom tile's legs are vertical to within the drawn line width). Once the direction is fixed the unit arcs fix
+   `Y_k`, `X_k`. A leg ending elsewhere on `ω(A_{k+1})` within about 1 % of a unit could not be told apart by eye; I transcribe "parallel" and flag it.
+3. **The radial boundary** `B_ku_k`: read on the mirror line.
+4. **The central sides** are read as unit arcs centred at the opposite corner (a Reuleaux pentagon); no printed word states it for `k = 6`.
+5. **`Z` on the diagonals** (the red outer tile's sides aimed at `A`): collinearity read to about 2 %.
+6. **The disk** is the disc of radius `|OC|`, the rim tiles cut by the circle; `C`, `D` read on the rim.
+7. Transcribed and fixed: the tile topology (26 tiles, which tiles are adjacent, 4.3), the four-colour corners (`A_k`: `C0`, `T1_{k−1}`, `T1_k`, `T2_k`), which
+   edges are unit arcs and their centres, and the colours. A `[16.106]` check ("a `{1,3,5,6}` junction at 2 o'clock on the central tile") is left to the
+   read-off (step 3).
+
+## Stage 4 — SAVED
