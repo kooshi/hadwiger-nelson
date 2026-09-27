@@ -197,3 +197,24 @@ Sent in full to FS110-P. The points, in short:
   isolation the fallback.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the claim-list draft reviewed (`data/fs110/claims.md` at 72b8a0de; SendMessage to FS110-P, about 09:45 UTC)
+
+The planner adopted: `P_ess`/`P_cl`; the covering pair (types disjoint, union all six); §1b, the local calculus, fixed before either side starts and
+derived by both blind to this record; T1/T2; V5 extended to four-colour vertices; three killing tests; the fences as proposed. **Its two
+disagreements, accepted:** Q-rule is kept in two forms, `_cl` (working, necessary once A-EXACT has a second mind) and `_ess` (W-TAN's, the fallback);
+SEAM-C stays a seam until the cusp reduction is derived (G21). **Its question** (name T2 and Act One as starting objects in the briefs?): no — claims
+only; §1b already shows T2 to both sides.
+
+My review, sent:
+1. **C-TAN-K contradicts SEAM-T2** as drafted ("no close pair … is a tangent pair unless one of them is a bowtie, a cusp, or carries a sliver" makes
+   T2 impossible by assertion). Proposed: C-TAN-K = "T1 closed: no close covering pair is saved at `w₀` by a T1 tangent interface", and T2's
+   consistency a separate open claim.
+2. **C-BOW-K conflates local and global.** Local (a bowtie with margin has `B_u` empty near `w₀`) is predicted TRUE — the bowtie realisable
+   locally — and would read as a refutation of the NO if not split; the global statement (no tight map in `𝓜_K` escapes by strong escapes at every
+   close covering pair) is where the NO must win. The same split for T2.
+3. Killing test 6: "including a tile with itself".
+4. A-CIRC at a cusp colour: expected to hold (`p` moves toward or away from `u`).
+5. Register `cusps-close-under-closure-types` beside SEAM-C.
+
+## Stage 3 — SAVED
