@@ -8,7 +8,21 @@ Props. 14–19, Lemma 5, Lemma 6) and the Appendix (proofs of Props. 18, 19 and 
 
 ## Theorems this phase proved
 
-(filled at stage 3)
+- **CE1** CB's D4 (Lemma 3's exact bicycle, overshoot included) holds at cusp and double-cusp vertices (the endpoints `u1`, `u2`, or points of the
+  circles). The map enters only through (i), (ii), `|c′| ≤ 2`, closedness and finiteness; spikes are harmless, and (ii) holds at spikes. [hand + tools],
+  one mind on cusps. §E1, `tools/fs110_ce_scope.py` BIKE.
+- **CE2** Completion of CB's "WLOG n = −1": every band offset `k ≠ 0, −1` dies on the D band. The endpoint cases, exhausted with spikes treated
+  adversarially, leave no survivor. [hand + tools]. §E1.
+- **CE3** CB's D5 item 2 parenthetical is FALSE at (β) (a rational instance of CD's configuration) and at spike returns (a path tangent to Ω from
+  inside, or through a spike corner). It is TRUE at every return where Ω changes colour. [hand + tools]; two minds at (β), one at spikes. §E3, BETA,
+  SPIKE.
+- **CE4** CB's D5 item 4 has a GAP at (E3) and (β). Cusp instances exist, among them a horn third sector tangent to Ω from inside. [hand + tools]; two
+  minds (CD, CE). §E5, E3H.
+- **CE5** Antipodal Lemma: at any trichromatic cubic centre u (cusps and double cusps allowed), no two M-in points of `ω(u)` are at distance 2. It is
+  one-sided: two antipodal points may both have the strip inside. [hand + tools], one mind. §E6, AL.
+- **CE6** D5 repaired by (R1)–(R4) plus CE5: every pair the chain hands to Lemma 3 or Cor. 3 is at distance < 2, at cusp centres and cusp endpoints
+  included, so Cor. 1 AE needs no `d = 2` exception. [hand], one mind by this route. R3 is not blind to CD's l. 414. §E3, §E6.
+- **CE7** CB's D5 item 1 "= 1 is (P′)" is MISSTATED when the two ends have different third colours; (ii) closes it. [hand]. §E2.
 
 ## Stage 1 — SAVED
 
@@ -195,3 +209,46 @@ paths only at V-in vertices.
 - BIKE: I would have fuzzed pseudo-colourings on two circles for a bicycle that escapes. Instead I derived the lift relations and exhausted the
   finite residue system they leave, with spikes adversarial.
 - AL: I would have sampled random cusp centres numerically. Instead I derived the two-disc inequality and confirmed the exact votes on rational arcs.
+
+## Stage 3 — SAVED (verdicts)
+
+| # | step (CB) | at a cusp centre / cusp endpoint | at (E3), (β) | verdict | grade, minds |
+|---|---|---|---|---|---|
+| 1 | D4, Lemma 3's bicycle, incl. `d > √3` | TRUE: the cusp enters only via D2 (CC) and spikes, and spikes are harmless (E1) | n/a (D4 takes two vertices at `1 < d < 2`) | **TRUE**, with CE2's completion of the band offset | [hand + tools], one mind on cusps; D4's endpoint cases re-derived (two minds with CB) |
+| 2 | D5 item 1 (circle-to-circle paths) | TRUE | counts (β) and spikes as returns, and that is what breaks item 2 | **TRUE; MISSTATED** "= 1 is (P′)" when third colours differ, closed by (ii) | [hand], one mind |
+| 3 | D5 item 2 (recolour by the outside-Q colour, "also Ω's colour just outside the arc at both ends") | FALSE at cusp spikes (a horn tangent to Ω from inside) | FALSE at (β) | **FALSE as stated**; TRUE at returns where Ω changes colour. **Local repair R1–R4** (E3) | [hand + tools]; two minds at (β) (CD, CE), one at spikes |
+| 4 | D5 item 3 ((i), (ii) survive) | TRUE; a horn corner of P changes nothing | not needed under R | **TRUE** for the repaired reduction; one care at finitely many x (E4) | [hand], one mind |
+| 5 | D5 item 4 (every surviving change's path ends in the OPEN disc) | GAP at cusp instances of (E3) (E3H exact; a-horn; double cusp) | GAP at (E3) and at (β) | **GAP**. Repaired: endpoints are in the open disc or V-in vertices on Ω (R2, R4) | [hand + tools]; two minds (CD, CE) |
+| 6 | D5 item 6 (`1 ≤ d`, `≠ 1`, `< 2`; the eleventh point) | TRUE (a-side curves reach into a horn; R unaffected) | "< 2 (open disc)" and "an open-disc endpoint" are GAPs as written | **TRUE after repair**, by the Antipodal Lemma CE5: two antipodal pigeonhole points would both be M-in | [hand + tools], one mind by this route |
+
+**The answer to the brief.** CB's D4 covers cusp vertices as written. D5 items 2 and 4 fail, but not because of cusps: they fail at (β), at
+(E3) and at spike returns, and cusps supply further instances of each. **A local repair exists** (§E3's R1–R4 plus §E6's Antipodal Lemma). It is
+two lines of triangle inequality on top of CB's own strip, and it uses no tangent, so cusps cannot break it. With it, CB's conclusion stands: the
+repaired chain never hands Lemma 3 or Cor. 3 a pair at distance 2, at cusps included.
+
+**Registered expectation, scored** (formed after one pass through the text, so a weak test):
+- D4 TRUE (0.85): met.
+- Items 1, 3 TRUE (0.8): met; item 1 carries a trivial misstatement.
+- Item 2 FALSE at (β) and at spikes (0.7): met.
+- Item 4 GAP (0.75): met, with cusp instances.
+- The conclusion TRUE after repair (0.6): met. The feared killer, horn arcs perpendicular to the diameter voting "outside" at both ends, is
+  impossible for "outside" by the triangle inequality. It *is* possible for "inside", which I had not anticipated; it is why the repair must end
+  paths only at V-in vertices.
+
+**Selection audit (G21).** The flattering result is "the route closes". Tried against it:
+- a horn at u perpendicular to the diameter: AL uses no tangent;
+- V-out antipodal pairs: AL fails for them, so I checked that (R2) never leaves a V-out endpoint on Ω; one reached from inside is a colour change of
+  the circle and is reduced;
+- spikes in the bicycle: (ii) re-proved at spikes, and BIKE made adversarial;
+- spike returns: this found a new failure of item 2;
+- the plants: each fires for its named reason.
+
+**Not checked, not asked:** CB's `< 9` changes branch (Lemma 6's `k = 1, 2` argument); hole-filling beyond "a horn changes nothing"; Lemma 5 and
+Prop. 18 (from print, circle-abstract); D6.
+
+**Proposed edits (for the close; I edit none of these files).**
+- Wherever FS110-CB's D5 is filed (`LEDGER.md` § B, the FS-110 derivation file): "items 2 and 4 carry the (β)/(E3)/spike gaps (FS110-CD §4.1,
+  FS110-CE §E3, §E5); repaired by FS110-CE R1–R4 and the Antipodal Lemma (§E6), cusps included".
+- D4: "cusp vertices included (FS110-CE §E1); band offset completed (CE2)".
+- Item 1: "= 1 by (ii) where third colours differ".
+- No `BIBLIOGRAPHY.md` change: `[SokolovVoronov2025]` §7.1 and the Appendix (Props. 14–19, Lemmas 5–6, Lemma 4's proof) read again, no new section.
