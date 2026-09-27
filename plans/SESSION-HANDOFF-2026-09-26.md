@@ -5,7 +5,7 @@ place to start. Current state only; the history is in the documents it points to
 
 ## 1. Where things stand
 
-- **FS-103, the collapse — CLOSED 2026-09-26 ~22:40** (rows 128–130, G81; gates re-run by the owner: all PASS, CLAUDE.md 296,232). Was: **all derivation jobs done; the close is running** (job FS103-C, brief `data/fs103/briefs/C103-close-math.md`; then
+- **FS-103, the collapse — CLOSED 2026-09-27, 00:33 UTC by the clock** (rows 128–130, G81; gates re-run by the owner: all PASS, CLAUDE.md 296,232). Was: **all derivation jobs done; the close is running** (job FS103-C, brief `data/fs103/briefs/C103-close-math.md`; then
   FS103-X, the front page, brief `data/fs103/briefs/X103-front-page.md`, launched by the owner when C reports). Work from the close inventory
   `plans/FS103-close-inventory.md` (items 1–78; owner the only writer except C's status ticks). Held at [hand], two blind minds each:
   (1) C-LB, no MR needed; (2) given MR, `χ(ℝ²) = χ_CP(ℝ²) = χ(ℚ(√635087)²) = χ(F_dG²)` (totally real; complex places one mind);
