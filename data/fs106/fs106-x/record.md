@@ -75,3 +75,15 @@ file: `plans/STUB-regularity-wall.md` already has G82 (C wrote it); `plans/STUB-
 `plans/STUB-tight-product-colourings.md` do not, and are outside my touch list — for the owner.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED (`plans/GROKKING-INSTANCES.md` instances; the protocol's run record)
+
+- Seven instances from §R-close 4.8, each verbatim under its section with a heading naming FS106-C and its source address: §G50, §G21, § Make
+  the gate fail ("exactly one thing may differ"), §G72 (sixteenth), §G79, § Delegation, §G51 (quote verbatim). The moves M1–M9 go with
+  `CLAUDE.md` in stage 6, so the fact audit sees each move's two ends in one commit.
+- `plans/PROTOCOL-competitor-and-advisor.md` §3: the eighth run (4.9), verbatim, after the seventh run and before "The next use".
+- Gate: `tools/claude_md_fact_audit.py --base 6d3d5072` exits 1 with one failure, "dangling pointer: G82 is cited and no such entry exists":
+  LEDGER row 131 (committed at stage 2) cites G82, which stage 6 mints (D-C9). **My slip:** stage 2 was committed after the § B check alone;
+  the fact audit should have run then. Not caused by this stage's edits; cleared by stage 6.
+
+## Stage 5 — SAVED

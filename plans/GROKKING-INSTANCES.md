@@ -32,6 +32,10 @@ told twice.*
 
 **FOURTH INSTANCE — a SPEEDUP is a positive count over a population (M51, 2026-08-27).** The WO-1 close reported "~250× per core" for the Rust engine's SOLVER-FREE tiers against Python's peel path, with the caveat in the next sentence that the solver tail was unmeasured and would dominate. The scope did not survive: later summaries said "asks are milliseconds now", the WO-5 cost model then anchored the shrink on WO-2's 2.6 ms refutation median (slack rung instances), and the shrink's asks — boundary instances by construction, "does this kill set still kill with one point removed" — ran at 1–7 s, ~1000× the anchor, missing P2 by ~80×. Neither measurement was wrong; the population was dropped from the headline twice. A speedup claim names its population and its regime in the sentence that carries the number. **A reversal worth recording (2026-09-09, P6).** A general lemma (`div_mem_normOne`) was designed, measured against its only possible consumer, found not to earn its place, and **cut** — with the cut written into the module's docstring so nobody re-derived the negative. One question later it came back with a consumer, because the *scope claim* being made ("the law is general") was read back against what had actually been proved (only the difference-keyed half was; the distance-keyed half, which is the form the ledger states, was not). The cut was right on the evidence available and wrong on the evidence one question later. **What surfaced the question was not a better instinct but a written claim being checked against a written theorem** — which is the same discipline as this grokking, applied to a positive rather than to a negative.
 
+*FS106-X, FS-106's close (FS106-C, `plans/FS106-regular-half.md` §R-close 3.1; A2 §2.3 rule 2):*
+
+A list of exceptions measures the class it was derived in: the advisor's 'the tangent form fails only at bowties and unit-curvature interfaces, and nowhere else' was derived for piecewise-smooth blow-ups; cusps, spiralling boundaries and weak-* limits joined within a day (A2 §2.3 rule 2). And the flattering TRUE was the one missing a step: C-AE-CONV, TRUE at the deriver, GAP at the blind verifier (A12), closed by fills.
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -180,6 +184,10 @@ FS-103's: `[DuczVarga2026]`, held and read in full at FS-56's §PA (2026-09-16),
 
 FS-105 (`plans/FS105-harden-mr.md` §PA.1, §R-close 3.1): **the proof 'used by statement' was in neither paper the record named.** Row 120 said EL2021 Thm 1.2's proof was 'in EL2021 §§2–9, unread here'; EL2021 p. 2 attributes it to EL2003 ('already proven in the announcement [7]'), and EL2003, fetched by Kooshi's upload, is an announcement whose §6 is 'Outline of the proof of Theorem 1.1'. The theorem stands on EL2021 Thm 1.3 plus a deduction nobody had written. In the same milestone, twice more: the plan owed a new row to `[BekkaFrancini2020]`, 'abstract only', a paper held as `[BekkaFrancini2022]` with §1 read twice; and W listed Jungić's *Still Spinning* as a new title, owed since FS-58's §PA.
 
+*FS106-X, FS-106's close (FS106-C, `plans/FS106-regular-half.md` §R-close 3.1):*
+
+Four in one milestone. `[SokolovVoronov2025]`'s exact-distance transplant, §9 and Question 2, held since FS-18, drawn only at FS-106's planning; `[Townsend1981]` cited in `CLAUDE.md` link 4 as a proof that maps need six while printing none; `[Coulson2004]`, held and unread, cited among map theorems while its theorem is tile-based; `[Parts2020c]` listed "not held" while held, and `[deGreyParts2023]` called unheld (as "Parts 2022") while held under its arXiv id.
+
 ## G51 — A competitor and an advisor beat one mind
 
 *F1: G51 as at `c5e55f12^`.*
@@ -207,6 +215,10 @@ FS-103 (two blind verifiers, an advisor comparing them, two blind checks of one-
 *FS105-X, FS-105's close (§R-close 4.6):*
 
 FS-105 (`plans/FS105-harden-mr.md` §R-close 3.1; inventory items 12, 24, 28): **two covert channels open to every blind job of FS-103 and FS-105.** (1) The session transcripts (`~/.claude/projects/-home-kooshi-source-lean-dir/*.jsonl`, `subagents/`) and `chats-bak/` — 717 files carrying X01D's and X12B's route — were fenced in no FS-103 blind brief (V1, V2, B, N) and not in FS-105's B105 as drafted; the advisor found it before B's launch (A Stage 3). (2) The harness scratchpad is one directory shared by every subagent of the session, across milestones (579 entries), so B's fence 'outside your own scratchpad' fenced nothing; the blind D found it in its stage 1 (D §1.5) and overwrote two same-named files there. None of the blind jobs reported reading either; B confirmed 'none' (item 28), and FS-103's blind grades stand (the close's ruling, 3.8). G51's own design lesson — 'isolate the scratchpad per agent' — had stood since 2026-09-09; the briefs isolated the record, not the harness's directories. Also: no divergence of truth in four pairings (R–D on the deduction; R–W on (a1)–(a8) at de Grey's field; B–X01D/X12B/X01V on EF_F⁺; A–R, a misattributed route); the free-window slips were the owner's paraphrase 'a withdrawn checking reading' (item 7), R's scope tool passing a plant silently (item 20), B's constant on the equality boundary (item 27) and W's inert split filter (item 31).
+
+*FS106-X, FS-106's close, under the standing rule "quote statements verbatim in briefs" (FS106-C; inventory items 38, 40; `plans/FS106-regular-half.md` §R-close 1.0 Q2):*
+
+FS-106's three paraphrases in quotation marks: the owner's re-brief glossed C-AE-CLOSED without 'measurable'; standing rule 3 quotes Kooshi as 'The intent of the ban is …', a phrase not in his words; the quantitative brief's C-Q-STAB was longer than anything on disk; and the close brief's addition quotes TS as 'Prop. 12 holds wherever the curves exist' for TS's table row. Each was caught by the recipient's first-stage quotation check (standing rule 5), none reached a verdict.
 
 ## G54 — Tight or slack
 
@@ -253,6 +265,10 @@ Fourteenth, FS-103 (`plans/FS103-collapse-cp-plane.md` §R-close 3.3) — throug
 
 Fifteenth, FS-105 (`plans/FS105-harden-mr.md` §R-close 3.3): the other kind. A hardening; its §IQ structural form (what every invariant measure with zero entropy for one element carries, for a group with polynomially many elements of bounded height) was answered — `T + A` at ℚ(√635087) (FS105-B), any positive growth exponent (FS105-W-G) — but the products came from reading (R, D) and from re-deriving a known proof (B, W).
 
+*FS106-X, FS-106's close (FS106-C, `plans/FS106-regular-half.md` §R-close 3.3):*
+
+Sixteenth, FS-106: the other kind — its headline (row 131) from a prior-art recognition (S–V §9) and row 130's weak-* compactness extended to the slack side; the structural form (what every a.e.-proper colouring carries on its circles) produced TS's lemmas and the index no-go (row 132). And G72 at ranking time: with an equivalence on the table, the planner and the advisor still ranked a special case (S–V's Question 2) first as 'the wall' (A2 §2.3 rule 1).
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -263,11 +279,19 @@ First test: the wanted-poster sessions J37–J39, which set counterexample invar
 
 FS-105: B's EF_F⁺ from an example invariant of the acting group (the height count) against the measure's (zero local dimension); FS105-DED from what every Thm 1.3 decomposition carries under total irreducibility; (W) and (W′), counterexample invariants — the shapes a refutation must carry — located row 129's test and produced no theorem.
 
+*FS106-X, FS-106's close (FS106-C, `plans/FS106-regular-half.md` §R-close 3.3):*
+
+FS-106: TQ-EQ from an example invariant (the weak-* limit colouring every near-covering family carries), D1 and TS-T likewise; the walls from counterexample invariants — C5 and the swap (what W's limit must carry where the index fails), TQ-HIT, the pixel lemma; the one flip, PD-EQ (the band-pair fraction every CP colouring drives to 0), located R's decisive quantity (one mind, sketch).
+
 ## `CLAUDE.md` § Delegation — one level deep
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
 
 **FS-103's:** the planner (≈497k against a 450k line), the gate reader (≈454k against ~200k sizing) and the advisor (≈317k at its stage 3 against 300k) ran past their hand-back lines (inventory items 13, 22, 29).
+
+*FS106-X, FS-106's close (FS106-C; `plans/FS106-close-inventory.md` items 48, 54):*
+
+FS-106's: three of three agents that night quoted their own count as the harness's and passed their hand-back lines unnoticed — FS106-TS 'harness≈280k' at 451k, FS106-TQ '≈255k' at 427k, FS106-V3 '≈295k' at 475k; FS106-QB, under the corrected prompt, reported an estimate as the harness's ('≈205k' at 380k). Read the harness's count from the task notification, never from the agent.
 
 ## `CLAUDE.md` § Building — Kill by PID or process group
 
@@ -344,3 +368,8 @@ The replay also showed the adaptive policy slightly worse than the best fixed on
 *F1, from “A positive control proves an instrument …”, cut in `fc2775f2` (2026-09-13), after “…and the answer lived outside it.”:*
 
 Third instance in one milestone of a decisive zero from a generator that could not represent its target, every one with its positive control passing.
+
+*FS106-X, FS-106's close, under "exactly one thing may differ" (FS106-C, `plans/FS106-regular-half.md` §R-close 4.8; A2 §2.2):*
+
+TQ §4.4 scored the advisor's 'robust Voronov, linear in ε' on uncovered area over plane area; the hunch counted monochromatic band pairs per unit area, whose band has measure ≈ 4πε — two denominators, one credited (A2 §2.2).
+

@@ -233,6 +233,25 @@ records `plans/FS89-S0A-gluing-verification.md`, `plans/FS89-S0B-band-set.md`, `
   planner applied their verdicts: three primary sources read in a day changed the novelty wording, one grokking's reason (G55) and one
   bibliography row's statement, and moved no theorem.
 
+**The eighth run: FS-106, the regular half (2026-09-26/27) — waves of sighted and blind minds, no competition proper.** Records: the plan
+`plans/FS106-regular-half.md` (§R-close), `plans/FS106-close-inventory.md`, the records V (with V2, V3), VB, TS, TQ, SB, QB, the advisors'
+`plans/POROS-2026-09-26-fs106-regular-half.md` and `plans/POROS-2026-09-27-fs106-close-and-fs107.md`.
+- **Staffing.** Three waves at the three-agent cap: V (sighted) beside VB (blind) on the print; TS (structural) beside TQ (quantitative), blind
+  to each other until their verdict stages; SB and QB blind on TS and TQ. Successor seats on the sighted line only (V → V2 → V3). One advisor per
+  half (A, retired at ≈437k; A2 for the comparison and FS-107's design).
+- **Budget anchors, from the harness** (own counts beside them where quoted): V ≈470k; VB ≈395k; V2 ≈350k; V3 475k (reported 295k); TS 451k
+  (reported 280k); TQ 427k (reported 255k); QB 380k (reported 205k); A ≈437k; the planner ≈330k own. **Three of three wave-2 and wave-3 reports
+  quoted their own count as the harness's** (inventory items 48, 54).
+- **Incidents.** An advisor review sent in the same tool round as its first read of the claim list, with invented claim ids, retracted one
+  message later (item 10). Four paraphrases in quotation marks across the briefs, each caught by the recipient's quotation check (items 38, 40;
+  the close's Q2). One splice duplicated a stage for one commit (item 45).
+- **Findings about the design.** The blind second minds carried the milestone's verification: every divergence of truth settled at the close
+  came from a blind mind or from the sighted line against a blind one — A12 (V first, SB blind), [G4] and C-T-IND (SB), TQ-EPS2's constant and
+  TQ-HIT's cap (QB), C-Q-LOCAL's endpoint (QB) — and none from the TS–TQ pairing, which converged without contact to one synthesis (TQ-SYN) instead
+  of contesting. **Lesson:** two routes to one heart are a synthesis, not a competition; FS-107's split puts a construction against a proof, the
+  shape where contest is possible (A2 §3.7). The retractions were free throughout (TS 0 of truth before SB, TQ 1 at the endpoint, QB 1, A 1, the
+  owner 0 of truth).
+
 **The next use** (G51's *Do*): FS-91's first question — a blind verifier given FS89-PA-B2's and PA-B3's statements (two minds reached the
 same widening from one lemma, so it is not yet evidence) — then FS-80's window-frequency certificate, or FS-76's rank-1 proof, routes two
 minds could take apart. Run a competition with §1 as it now stands, rules 1 and 11 included; a milestone whose plan arrives with a one-mind
