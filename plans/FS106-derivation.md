@@ -228,7 +228,7 @@ easy direction. *Prior art:* its pointwise core is FS103-M's D1. *Kernel:* decli
 *Proof:* TQ §3.3 (two routes, one deterministic, using only row 130's M1 Step 2); QB §2.7. *Proof verdict:* TRUE. *Rests on it:* FS106-EQ.
 *Prior art:* none. *Kernel:* declined.
 
-**FS106-LOCAL — For every δ > δ₆ (the uncovered density of `[Parts2020c]`'s six-colour tiling) there are ε > 0 and a band-proper colouring of a subset of U₃(0) of density ≥ 1 − δ in which every coloured point has chromaticity 1; at δ = δ₆ it is a GAP, likely TRUE (the missing step: 1_H ∗ 1_{U₃} is non-constant). [hand; two minds, one blind: TQ, QB; over Parts [external]; the endpoint A2's sketch]**
+**FS106-LOCAL — For every δ > δ₆ (the uncovered density of `[Parts2020c]`'s six-colour tiling) there are ε > 0 and a band-proper colouring of a subset of U₃(0) of density ≥ 1 − δ in which every coloured point has chromaticity 1; at δ = δ₆ it is a GAP, likely TRUE (the missing step: 1_H ∗ 1_{U₃} is non-constant). [hand; two minds, one blind: TQ, QB; over Parts (external); the endpoint A2's sketch]**
 *Proof:* TQ §4.3; QB §2.10; A2 §1a.2. *Proof verdict:* TRUE for `δ > δ₆`; TQ's "MISSTATED at `δ₆`" withdrawn. *Rests on it:* FS106-PIX's
 calibration; FS-107's ceiling constraint. *Prior art:* the tiling is Parts's. *Kernel:* declined.
 
