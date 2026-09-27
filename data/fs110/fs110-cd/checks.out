@@ -1,0 +1,27 @@
+== A: geometry (exact)
+ok   A1 discs of radius 1 with centres 2 apart meet only at the midpoint
+ok   A1-plant: centres 1.9 apart -> a common point off the midpoint exists (plant fires)
+ok   A2 cusp points u + t e_perp are at squared distance 1 + t^2 from q and from 2u - q
+ok   A3 separation: b, b' at -25, +20 deg around x are split by omega(sigma^{+-1} x)
+ok   A3 separation at the extreme b at -59 deg
+ok   A3-plant: a 40-degree partner (not unit distance) need not separate (plant fires)
+ok   A4 E3 configuration satisfies its local constraints: {'u_wedge_in_Bbar(b,1)': True, 'b_wedge_inside': True, 'e_ac_outward': True, 'tangent_90_in_c': True, 'tangent_270_in_a': True, 'two_edges_within_90': True}
+ok   A4-plant: a 200-degree i-wedge at u violates Lemma H (plant fires for that reason)
+== B: circle colourings (exact rational degrees)
+ok   B cyclic 9-arc colouring is proper and cyclic
+ok   B Prop. 18 on the 9-arc colouring: {(1, 3): True, (2, 3): True, (1, 2): True}
+ok   B cyclic 12-arc colouring is proper and cyclic
+ok   B Prop. 18 on the 12-arc colouring: {(1, 3): True, (2, 3): True, (1, 2): True}
+ok   B cyclic 30-arc colouring is proper and cyclic
+ok   B Prop. 18 on the 30-arc colouring: {(1, 3): True, (2, 3): True, (1, 2): True}
+ok   B-control: the uniform 15-arc cyclic colouring is improper (60 deg = 2.5 arcs): mono-mono: arc 0 (colour 1) rotated by 60 meets arc 3 (colour 1)
+ok   B the six-arc hexagon colouring is proper as a circle colouring (Prop. 17 is what excludes it)
+ok   B Prop. 18 fails on six arcs (so k >= 3 is needed)
+ok   B inserted 2-degree arc at 50: proper, not cyclic
+ok   B Lemma 5 on the inserted example -> ['simple recolour of arc at 50 (len 2) 1->2']
+ok   B-plant: arc inserted at 59 is improper for the mono-mono reason: mono-mono: arc 0 (colour 1) rotated by 60 meets arc 2 (colour 1)
+ok   B chain example (six 2-degree arcs at 70 + 60k): proper, not cyclic
+ok   B Lemma 5 takes the six-arc chain: ['six-arc chain recolour from arc at 10 (len 2)']
+ok   B-plant: unequal chain lengths are improper (the derived equal-length step): mono-mono: arc 11 (colour 1) rotated by 60 meets arc 13 (colour 1)
+== summary
+all checks passed; all plants fired for their own reason
