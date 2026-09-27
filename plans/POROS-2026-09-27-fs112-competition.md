@@ -206,3 +206,27 @@ hunch: a2-arc-ends-bind
 - `plans/FS112-N-proof.md`, `plans/FS112-Y-construction.md` — read against: two blind walks — surprised: unread (not yet written)
 
 ## Stage 1 — SAVED
+
+---
+
+## Stage 2a — SAVED: FS112-N's pre-round answer, registered verbatim (received 2026-09-27, after N's stage 1 at 46ad0ff7)
+
+> FS112-N pre-round answer (stage 1 committed and pushed, 46ad0ff7).
+> 1. Step: the construction side's "a four-colour centre" among the §6 killing tests (C-V4-K / C-UA-BUDGET), built arc-closed at the vertex's reading radius — the whole ring ω(v) plus flowers at its change points — as opposed to a flower of radius 1/10 at v.
+> 2. Obstruction expected: under the corrected NB-4 (the "ω(y_k)" clause of NB l. 164 is vacuous and the |P_cl(y_k)| ≤ 4 bound is unneeded), a four-colour v needs either ≥ 60° (or ≥ six) unit arcs centred at v with no covering pair on its ring, or, in EVERY σ_v-orbit of change points, a unit arc of ω(y_{k±1}) through y_k — "both" kind at the ring point, whose wedges (TS-U as a shadow statement) push the ring colours e, f into opposite cones there. I expect those cone constraints around the six points and the arcs' ends not to close in a tight fragment.
+> 3. What would show me wrong: an exact fragment, accepted by two checkers, covering ω(v) entirely (every point of the ring coloured or on Γ) with |P_cl(v)| = 4 — FS-110's T2 and BB are below that radius (BB carries four-colour w, w′ with no unit arc at all).
+> Secondary, lower confidence: C-ARC-END for (S1) at both ends of the arc fails for the same reason at the ends' vertices (Y2-S1I item 4).
+
+**Read against my expectation (for me only; nothing goes to Y).**
+- N's parenthesis contradicts my held hunch `a2-nb4-three-circles`: N says the `ω(y_k)` clause is vacuous because the bound `|P_cl(y_k)| ≤ 4` is not
+  needed. My quick reading of NB l. 164–171 says the bound does work: it gives each `y_k` exactly one inner and one outer colour. Without it, the inner
+  half-arcs of `ω(y_{k+1})` and `ω(y_{k−1})` at `y_k` (directions 210° and 150° in NB's coordinates) could lie in two different colours `i ≠ i′`. Then
+  `i ∉ P_cl(y_{k+1})` and `i′ ∉ P_cl(y_{k−1})`, and the alternation `{A, B}`, `{C, D}` is no longer forced. **Unresolved; a live disagreement.** I read
+  N's derivation at the walk comparison, and it becomes a card only if Y's walk speaks to it too.
+- N's third item names BB's four-colour `w`, `w′` "with no unit arc at all". This is consistent with NB-4, because BB's flowers are truncated below
+  the ring's radius (`1/10`), so NB-4's hypothesis is never met inside the fragment. It is the same point as killing test 4's rewrite (open-ended
+  fragments cannot fire).
+- It overlaps `h-four-colour-crux` and `a2-arc-ends-bind`: the obstacle both N and I name is the cone constraints at the ring points and the arc ends.
+  This overlap is not independent evidence; both of us read the same NB-4 text.
+
+## Stage 2a — SAVED
