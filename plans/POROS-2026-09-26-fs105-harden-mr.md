@@ -164,3 +164,18 @@ does not share, or EL2021 §§4–7 using a hypothesis Thm 1.3's statement omits
 ### Would have searched here (stage 2)
 
 - none: every check was a reading of held records and one held paper.
+
+## Stage 3 — SAVED: advice sent to the owner ("main"), then stand-by
+
+The planner handed back before my claim-list reply reached it. The owner asked for the advice directly, so it went to `"main"` (12 lines)
+after I read `data/fs105/briefs/B105-blind-efp.md` §"Blind — the fences" and grepped `W105-walker.md`. In summary:
+1. **Leak in B105:** the session transcripts are unfenced — `chats-bak/` and `~/.claude/projects/-home-kooshi-source-lean-dir/` (717 files carry
+   the route: "Lemma 3.1′", "wandering shell", "UZ", …). Fence them, `/tmp/claude-1000/` other than B's own scratchpad, and `git log -p` on
+   fenced paths. Add grep-trigger words "Lemma Z", "UZ", "wandering shell", "local injectivity", "two-scale", "ℓ₁e₂".
+2. Ask B for EF_F⁺ and EF_F⁰ both; MR needs only EF_F⁰ given PE-2.
+3. The owner holds a classification key for the close, not for B: X01V's stall location and its resolution (§2.1 above).
+4. Claims (a): add the passage (constant Haar weight, projective `ν`, `U`-invariance), Haar entropy > 0 on each piece, `⟨u,w⟩` torsion-free;
+   in (a0)/(a4), "virtually cyclic factor" as non-trivial, and Abramov–Rokhlin in Thm 1.3 ⟹ 1.2.
+5. W105 (d): B-AMEN is (d1)'s one-mind link; the cheap form is already met in print (G29, ratio < 1/4).
+
+Stand-by: the owner may relay the jobs' records for comparison; resume at a new stage 4.
