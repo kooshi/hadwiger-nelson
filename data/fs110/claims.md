@@ -200,3 +200,35 @@ Prop. 5 fails (`plans/FS106-TS-derivation.md` l. 200). Never write a bare "C5".
 ## 6. Not claimed (for reference)
 
 W-TAN at cusps; C-VOID (FS-109); (A), (A″), (B) of RR; FS107-V's general C5 claim (one instance and a sketch); any value of `χ(ℝ²)`.
+
+
+## 7. Round 3 (the owner's addendum, 2026-09-27; the two sides' records and the verifiers' carry the proofs)
+
+**Round 2's product, as the round-3 frame.**
+- **NB-4:** under Condition 5, no vertex of a tight six-map in `𝓜_K` has four colours.
+- **NB-5:** so under Condition 5 no tight six-map has a close covering pair.
+
+Both are [hand], two minds, one of them blind: FS110-NB derived them, and FS110-A4 checked them step by step. A4's precision on NB-5: it needs no
+disjointness, because the branch colours at the seam point lie outside `u`'s type and outside `v`'s type, which are two disjoint sets.
+
+**The round-3 question**, quoted verbatim from the competition advisor's record (`plans/POROS-2026-09-27-fs110-competition.md` § A4-2.3; the grades are
+A4's):
+
+
+**Under Condition 5 (no boundary arc of radius 1), the tangency seam is closed.** A tight six-map in `𝓜_K` has:
+- no four-colour vertex (NB-4) and no close covering pair (NB-5), hence no swap (N2-SWAP) and no odd tile (N2-FLIP);
+- rings that all wind, `|W| ≥ 2`, consistently along edges (N2-TRANS);
+- no same-type monotone pair in `(1, 2)`, given A4-BAND and a transposed swap.
+
+So **Q-full under Condition 5 is one question: does a winding map exist?** W-POLY adds that such a map is not polygonal (bar `d = 2`), so it needs
+curved arcs of radius `≠ 1`. [NB-4/NB-5: two minds, one blind; the rest one mind each, as stated.] **Outside Condition 5** the live objects are:
+- (S1) and T2;
+
+**W-3 (the winding question).** Does a winding map exist? A winding map is a tight six-map in `𝓜_K` satisfying Condition 5, in which:
+- every trivalent vertex's ring winds `|W| ≥ 2`, consistently along edges (N2-TRANS);
+- every tile has an even count (N2-FLIP);
+- there are no four-colour vertices (NB-4).
+- **YES** (a winding map, given by formula and checked exactly) is a full tight six-map, so `χ(ℝ²) ≤ 6` with no MR (W-EQ-K).
+- **NO** decides the Condition-5 half of `[SokolovVoronov2025]` Question 2 almost everywhere, at bounded `K`: a partial answer, and reported as one.
+
+The unit-arc branch ((S1), T2, NB-4's exception, A4-SIX-ARCS) is not round 3's object.
