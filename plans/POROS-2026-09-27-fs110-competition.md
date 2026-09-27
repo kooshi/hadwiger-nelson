@@ -160,3 +160,19 @@ hunch: the-registrations-name-global-steps
 - the two briefs — read against: identical but for § Your side — surprised: no (the fences and tools paragraphs also differ, by name only)
 
 ## Stage 1 — SAVED
+
+## Stage 2 — the registrations and the stage-1 comparison (in progress)
+
+### 2.1 The pre-round answers, verbatim
+
+**FS110-Y** (received about 09:50 UTC; its stage 1 committed at `44eb74cb` before sending), verbatim:
+
+> FS110-Y pre-round answer (stage 1 committed at 44eb74cb before sending).
+> Step: C-BOW-K (ii), the global clause "no tight 𝓜_K map uses strong escapes at every close covering pair". Expected: GAP (out of reach this round).
+> Mechanism: a strong escape costs nothing locally (B_u ∩ B(w₀,c) = ∅, so C-BOW-K (i) is TRUE), so the kill must be global; the global instruments on the list are blind there — Euler on the torus reads no geometry, density is one-class-at-a-time (K-INT), the index is dead at bowties (row 132), and §IQ's warning says a local-rule problem is not closed by exhausting vertex configurations. No area price for a bowtie exists.
+> Stage-1 verdicts (plans/FS110-Y-construction.md §1.3–1.4, one mind each here): A-EXACT TRUE, with "meets a tile" read as "meets the interior of a tile" (the closure reading fails exactly at cusps); A-CIRC TRUE, cusp colours included (no angle used); A-SIX TRUE (sizes enter only the failure-set analysis; a bichromatic degree-≥4 vertex blocks every direction, a four-colour vertex escapes on an open set); D-TYPE TRUE (P_cl ∖ P_ess = colours all of whose corners at u are cusps); C-TAN-POS TRUE at the level of A-EXACT's disjointness test — blocking sets near w₀ come in five shapes (ball/slab, one-sided band from T1 or a cusp, thin double wedge from T2, empty from a strong escape), and only T2–T2 or a strong escape survive.
+> Prior art: none new yet.
+
+Scored at once: hunch `the-registrations-name-global-steps` — Y's half **confirmed** (C-BOW-K (ii), a global clause).
+
+**FS110-N:** pending.
