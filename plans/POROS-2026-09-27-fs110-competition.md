@@ -1184,3 +1184,100 @@ nine arcs; bowtie flanks restricted; bichromatic vertices of degree `≥ 4` free
 - Y3-BOW's "one path" — read against: a new homotopy needing its own rigour — surprised: yes; it passes through `β`, whose merged ring is degenerate, so it is 8.3's sweep and nothing more
 
 ## Stage A5-4 — SAVED
+
+## Stage A5-5 — SAVED: round 3's comparison at both hand-backs, the bets scored, the verdict, and what next
+
+*Read: `data/fs110/reports/FS110-N3.md`; `plans/FS110-N-proof.md` § Continuation — FS110-N3, §2.2–2.6 in full (commits c832ed38, 9b121bc4,
+55d2b270); Y3 as at A5-4. The blind verifiers FS110-NB3 and FS110-YB3 are running; I have not contacted them or opened anything of theirs.*
+
+### A5-5.1 Convergences (independent unless marked)
+
+| finding | N3 | Y3 | minds |
+|---|---|---|---|
+| W-3's "trivalent" is `\|P_cl\| = 3` at any degree | card-4 answer | card-4 answer | two, independent |
+| the pure six-arc rotating ring dies at a degree-3 vertex under Condition 5 (S–V Prop. 17); N2-HEX's "locally consistent" remark is false under Condition 5 | N3-P17 (via N2-ROT and NB-4) | Y3-SIX (lens, facing-away, `K_{3,3}`) | **three routes**: N3, Y3, S–V's print as FS106-V verified; two on opposite sides, neither blind |
+| the object of the round is a degree-`≥ 4` vertex with a repeated colour | pre-round answer; W-MERGE | pre-round answer; Y3-BOW | two |
+| no winding map given by formula this round | N3-P3 (0.95) | no candidate | met |
+
+### A5-5.2 Divergences
+
+- **Of truth:** none found.
+- **Of frame, the round's main one:** N3-RED **bypasses the winding** (§2.5: "Neither windings, N2-TRANS nor N2-FLIP is used"). Its reduction holds for
+  every tight six-map under Condition 5, winding or not, so W-3 is the Condition-5 half of S–V Question 2 itself, and its live object is the cone.
+  Y3 worked inside the winding frame (Y3-GP, Y3-PROP, Y3-BOW). Y3's lemmas stay true; they are off the NO's critical path, and they remain the
+  constraints a YES must meet.
+- **Of scope:** W-MERGE needs **no tightness** (N3 §2.2's scope paragraph), which is stronger than my hunch and than card 5's open point.
+
+### A5-5.3 The bets scored (they met this time, at degree-`≥ 4` vertices)
+
+| bet | scored |
+|---|---|
+| N3 (pre-round): such vertices with positive-angle repeated sectors are removable; wrong if (1) cusp horns tangent to a boundary direction of the allowed cone, (2) S–V's `d = 2`, (3) a merge landing at distance exactly 1 | **confirmed at one mind** (W-MERGE, N3-DEG). The surviving exception is exactly its falsifier (1)'s shape and its falsifier (2): G-CONE and G-d2. Neither was built, so neither fired |
+| Y3 (pre-round): the NO stalls at degree-`≥ 4` vertices the ring condition does not constrain | **bowtie clause retracted, free** (§8.6, after card 4). **Bichromatic clause: answered outside the cone** by W-MERGE, which merges any colour's non-adjacent sectors whenever `int D_c(v) ≠ ∅`. So the NO stalls at a subset of such vertices, the hard cones, and nowhere else: a partial hit |
+| N3-P1–P4 | open until NB3 and the next round (P3 met) |
+| `n3-lands-at-positive-angle` (A5) | **confirmed** by N3 §2.2–2.3 (one mind), and stronger: no tightness needed |
+| `cusps-are-the-last-escape` (A5) | **confirmed modulo G-d2**, by N3-RED (derivation, one mind): every radius-3 disc of a tight Condition-5 six-map holds a hard cone (cusp horns both ways) or `d = 2` |
+| `y3-hands-back-a-local-horn` (A5) | killed (A5-4) |
+
+**Retractions, round 3:** N3 1 (N2-HEX's remark, its own side's text, by derivation), Y3 1 (its bet's bowtie clause, after card 4 and the owner's scope
+note), A5 0. **For the first time in FS-110 a retraction followed the other side's reading** (Y3's, through the claims note that carried N3's card-4
+answer). G51: the disagreement started, on one object, and it converged on truth.
+
+### A5-5.4 The surprise the comparison turns up (for the owner; a card with its fate blank)
+
+**Both of W-3's remaining steps sit at distance exactly 2.** G-CONE: the two out-contacts of colour `c` touch `ω(v)` at `v ± n`, antipodal, so
+`N, v, S′` are collinear with `|N − S′| = 2` and `v` the midpoint (N3 §2.3). G-d2: two same-multicolour points antipodal on `ω(u)`. And `d = 2` is the
+configuration set aside at every earlier step: W-POLY and K-REG ("bar `d = 2`"), close pairs (`< 2`, "W-TAN's `d = 2` collinear configuration is
+separate"), C-SEAMLIST ("not at `d = 2`"), N2-TRANS (NB: "TRUE bar `d = 2`"), Y3-PROP ("the case of distance exactly 2 is W-TAN's separate `d = 2`
+configuration"), FS106-AE-POLY.
+
+question: is-FS-110's-residue-one-object-at-distance-2
+  evidence: N3 §2.3 (contacts at `v ± n`, antipodal); N3 §2.5 (G-d2, antipodal); claims §0 l. 44, §3 l. 153 and 163, §4 l. 189 (`d = 2` set aside); Y3 §8.3
+  expected: the cone and the edge case are two unrelated leftovers
+  ask: are G-CONE and G-d2 one configuration, a point with two contacts antipodal on its unit circle, decided by one argument?
+  if one: round 4 is the `d = 2` seam, one local object for both sides, and a NO there closes the Condition-5 half at bounded `K`
+  if two: they are priced separately, and the cheaper (G-d2, open since FS-106 with FS106-V's sketch) goes first
+  answered by: a derivation
+  cost: one round
+  hunch: one — both are collinear triples with contacts at both ends, and the cone's horns are the `d → 2` limit of the edge case's multicolour points
+  falsifier: a hard cone whose contacts at `v ± n` carry no same-multicolour pair in S–V's sense, closed or realised by an argument that does not touch G-d2
+  rank: 1
+
+### A5-5.5 The verdict on round 3
+
+**W-3: GAP at two named steps, NO given both** (N3-RED), at [hand, one mind for W-MERGE and N3-DEG] over FS106-V's [hand, one mind] repair of S–V's
+cubic chain; the construction side's obstructions (Y3-GP, Y3-SIX, Y3-BOW) all stand, and no YES exists at any grade. **The headline FS-110 can file,
+once NB3 has read W-MERGE:** under Condition 5, a tight six-map in `𝓜_K` is cubic after merging except at hard Woodall cones, so Question 2's
+Condition-5 half at bounded `K`, almost everywhere, reduces to the cone and S–V's own `d = 2` case.
+
+### A5-5.6 What next (a decision in four parts, for the owner)
+
+- **The choice: after NB3 and YB3 report, run round 4 on the `d = 2` seam — G-CONE and G-d2 as one object — with a blind second mind on FS106-V's
+  cubic repair of S–V Cor. 1 beside it.**
+  - *Proof side:* close the hard cone and S–V's `d = 2` case (N3's contact calculus C1–C5, its exact tool `tools/fs110_n_merge.py`).
+  - *Construction side:* realise a hard cone by formula as a local fragment and check it exactly (in under the ban), or name why it cannot be built.
+  - *The blind check:* N3-RED's base is one mind (FS106-V on S–V Cor. 1, Lemma 3 a sketch at `√3 ≤ d < 2`). A NO resting on it needs a second mind
+    before it is filed as more than a reduction.
+- **The alternatives weighed:**
+  - **(a) Close FS-110 now.** File W-MERGE, N3-RED, N3-P17/Y3-SIX, Y3-GP, Y3-BOW, NB-4/NB-5; stub G-CONE, G-d2 and the unit-arc branch.
+  - **(b) Round 4 on the unit-arc branch** ((S1), T2, NB-4's exception, A4-SIX-ARCS): the half of Question 2 outside Condition 5.
+- **Why this one:**
+  - *Against (a):* the residue is two local configurations with a shared geometry, and both sides hold exact tools for them. Closing leaves the
+    smallest open step of FS-110 un-attacked, and a NO there is a partial answer to a question in print (S–V Question 2, Condition-5 half, a.e.,
+    bounded `K`).
+  - *Against (b):* the unit-arc branch has three objects and no single invariant. It is the other half of the question, and it inherits whatever the
+    `d = 2` seam teaches (the cone's out-contacts are unit-circle tangencies, one step from a unit arc).
+  - The two sides' bets met for the first time in round 3 and produced a retraction across the line (A5-5.3). A round on one small object keeps that.
+- **Confidence: medium.** Two facts would change it:
+  - NB3 finding a defect in W-MERGE, especially at N3-UP's cusp-end clearance, which N3 itself flags (N3-P4 at 0.75): then round 4 is W-MERGE's
+    repair, not the cone.
+  - A second mind finding FS106-V's cubic repair of S–V Cor. 1 wrong: then the reduction has no base, and the round is S–V's cubic chain.
+- **Default:** if the owner says nothing, FS-110 waits for NB3 and YB3, and this goes to the close as the recommendation.
+
+### A5-5.7 Evidence inventory
+
+- N3-RED — read against: a winding-specific reduction — surprised: yes; it never uses the winding, so W-3 is Question 2's Condition-5 half itself
+- N3-DEG's cone — read against: N3's pre-round falsifier (1) — surprised: no; it is that shape exactly, now derived as the only exception
+- G-CONE beside G-d2 — read against: two unrelated leftovers — surprised: yes; both are antipodal on a unit circle, at distance exactly 2 (A5-5.4)
+
+## Stage A5-5 — SAVED
