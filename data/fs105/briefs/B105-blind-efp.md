@@ -24,6 +24,9 @@ coincide with theirs, the proof must be yours.**
 
 **Your auto-memory is overridden here.** Do not read `plans/SESSION-HANDOFF-2026-09-26.md` or any memory file under
 `~/.claude/projects/-home-kooshi-source-lean-dir/memory/` (in particular not `crunch-mode-2026-09-26-x2x3.md` or `crunch-mode-2026-09-25.md`).
+**Nor the session transcripts** (owner's addition, from the advisor: 717 files there carry the route): nothing under
+`~/.claude/projects/-home-kooshi-source-lean-dir/` at all (every `*.jsonl`, `subagents/`, `memory/`), nothing under `chats-bak/` in the
+repository, nothing under `/tmp/claude-1000/` outside your own scratchpad; and never `git log -p`, `git show` or `git diff` on a fenced path.
 
 **Do not open, until your stage 3 is committed:**
 - **the three existing proofs and everything around them:** `plans/FS100-X01D-derivation.md`, `plans/FS100-X01V-verification.md`,
@@ -38,7 +41,8 @@ coincide with theirs, the proof must be yours.**
 - the bodies and diffs of commits whose subjects start "X01D", "X01V", "X12B", "X09C", "X24R", "X10F", "C2", "C3", "FS103", "FS105-P", "FS105-A",
   "FS105-R", "FS105-W" (subjects are shown by the harness; do not read bodies).
 
-**Grep rule:** if a grep shows you a line containing `EF_F⁺`, `EFP`, `Lemma PF`, `3.1′`, `3.2′` or `X12B` in a file not open to you by the lists
+**Grep rule:** if a grep shows you a line containing `EF_F⁺`, `EFP`, `Lemma PF`, `3.1′`, `3.2′`, `X12B`, `Lemma Z`, `UZ`,
+`wandering shell`, `local injectivity`, `two-scale` or `ℓ₁e₂` in a file not open to you by the lists
 above, do not open that file. **Open:** `CLAUDE.md`; `LEDGER.md` (rows state results; a row naming a fenced record is not the record);
 `BIBLIOGRAPHY.md`; `~/source/library/` — above all **`[EinsiedlerFish2010]`**
 (`~/source/library/pdf/EinsiedlerFish2010-rigidity-measures-multiplicative-semigroup-polynomial-growth.pdf`, the method's source); the band-rigidity
@@ -48,7 +52,8 @@ You never contact the other FS-105 jobs, the planner or the advisor (a covert ch
 
 ## Your claim (from `data/fs105/claims.md` (b))
 
-EF_F⁺ at `F = ℚ(√635087)`, verbatim there. **Before stage 2's derivation**, write in your record: the setting at this field from your own PARI
+EF_F⁺ at `F = ℚ(√635087)`, verbatim there. **And a second, weaker statement** (owner's addition): **EF_F⁰** — *"`U`-ergodic, `h_μ(u) = 0` for every
+`u` ⟹ `μ(E) = 1`"* (the advisor's wording) — derive it too and give it its own verdict: a GAP in the strong form alone is not a GAP in this one. **Before stage 2's derivation**, write in your record: the setting at this field from your own PARI
 (seconds) — `L = F(i)`, its places, the split and inert primes, the archimedean places, `R = ℤ[U]` and whether `R = O′` (no stable dyadic place);
 your model of `R̂`; the statement in your own words; **your wrong-reason line** (what a TRUE for a wrong reason would look like) and **your
 control** (a case where you know the answer, e.g. `F = ℚ`, where the statement should reduce to a circle-type theorem you can state, or a

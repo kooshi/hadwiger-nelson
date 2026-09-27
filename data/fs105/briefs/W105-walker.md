@@ -34,7 +34,10 @@ rate of one they dislike (`CLAUDE.md` G21).
 3. **(c) PE-2 at degree 16**, written **before** you open `plans/FS105-R-reading.md` (the reader's, on the same items; commit this stage first so
    the two are separate minds): (a1)–(a8) of the claim list at `F_dG` — Lemma W's totally split prime, admissibility against the proper
    subfields of `L`, the pieces `M̂`. Then read the reader's record, if committed, and note agreements and divergences. Save.
-4. **(d) Row 129's test.** (d1) the chain MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`, every inequality's direction named, from `LEDGER.md` row 129 and
+4. **(d) Row 129's test.** (d1) the chain MR(`F₁`) ⟹ `α₁(ℝ²) = m₁(ℝ²)`, every inequality's direction named — **including B-AMEN**
+   (finitary `α₁(F²)` = the supremum density of invariant random independent sets, by amenability; one mind, FS103-B), which the advisor names
+   (d1)'s softest link, not MR; note that the cheap form of the test is met in print (`[DuczVarga2026]`'s graph has ratio below 1/4) and a
+   refutation would need `α₁(ℝ²) ∈ (0.2470, 0.24996]` proved — from `LEDGER.md` row 129 and
    `plans/FS103-derivation.md` §2 (and its sources there); (d2) the weakest statement about finite unit-distance graphs that would prove
    `α₁(ℝ²) > m₁(ℝ²)`, given the best proved bounds (read them in `[AmbrusEtAl2023]`, `[MatolcsiEtAl2025]`, `[DuczVarga2026]`, held — grep
    `BIBLIOGRAPHY.md`); (d3) whether anything in print or held proves it or comes within a named margin — in
