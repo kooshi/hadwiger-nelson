@@ -27,6 +27,11 @@ subdirectory `…/scratchpad/fs106-ts/`.*
 - **C-T-TAN** in a precise D-NF form (strong blow-ups along a common sequence; slice supports of positive length at both ends), with its failure
   set at cone points = tangent interfaces and bowties — [hand, one mind], §4.
 - The bicycle `T₁(u) ∪ T₁(v)` needs three colours at every `d ∈ (1, 2)` (a triangle at `|x − v| = √3`) — [hand, one mind], §4.
+- **C-T-TRIa** FALSE as stated (the cusped hexagonal 7-colouring; the advisor's example, checked) — [hand, two minds], §5.
+- **TS-C′**: a connected piece of one class's support whose zero-density points are `H¹`-null has diameter `≤ 1` — [hand, one mind], §5.
+- `|P(x)| ≥ 5` only on the null set `{x : σ(ω(x) ∩ E) > 0}` (six colours) — [hand, one mind], §5.
+- **C-T-IND** corrected: an index exists iff the traces change colour finitely often; K3 gives traces with no index on an open family of curves;
+  with finitely many changes and C-T-L1 at the swaps, `|Ind γ₁ − Ind γ₂| ≤ 1` — [hand, one mind], §5.
 - **C5**: a local configuration satisfying Prop. 5's hypothesis and every pairwise constraint, where Prop. 5's conclusion fails (unit arcs
   allowed) — [hand, one mind], §2.5.
 
@@ -34,6 +39,7 @@ subdirectory `…/scratchpad/fs106-ts/`.*
 
 - Stage 1: none (a quotation check and the controls, by hand).
 - Stage 3: none.
+- Stage 5: none.
 - Stage 4: C-T-BIKE — a scan over the arc offset for a 3-colouring; instead reduced to the forced set `F`, left GAP.
 - Stage 2: a search for a global 6-colouring extending C5, or realising [G3]'s cone; instead each stated as a local configuration and checked by hand.
 
@@ -255,3 +261,19 @@ transfers to classes that are locally the sides of arcs.*
 `F` was written and the claim left GAP.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the rest of §5 (C-T-TRIa, C-T-TRIb, C-T-CHR4, C-T-ANN, C-T-IND, C-T-PIG, C-T-KILL)
+
+| claim | verdict | minds / grade | the argument |
+|---|---|---|---|
+| **C-T-TRIa** ("for every `k`", density form) | **FALSE as stated** | 2 (the advisor's example, FS106-A, recorded in `plans/FS106-regular-half.md` stage 6b; checked here) / [hand] | Take the hexagonal 7-colouring with slack (diameter `< 1`) and at every vertex replace the third hexagon's corner by a horn `{0 < s, s² < t < 2s²}` (in coordinates along the other two hexagons' common edge) ending at the vertex, the other two absorbing the removed corner. The horn has area `≍ r³` in `B(vertex, r)`, so density 0 at the vertex: every point has `|P(x)| ≤ 2`, while the colouring stays band-proper (the change is a small perturbation of each hexagon; diameters stay `< 1`, same-colour gaps `> 1`). The claim is untouched at `k = 6`, where no example exists to test it. The support form (TRIb) is the one to carry. |
+| **C-T-TRIb** (support form) | **GAP**; one tool proved, the step named | 1 / [hand] | **Proved — TS-C′ (TS-C for supports):** if `K ⊆ supp S_i` is connected and the points of `K` where `S_i` has upper density 0 form a set `Z₀` with `H¹(Z₀) = 0`, then `diam K ≤ 1`. *Proof:* if `p, q ∈ K`, `|p − q| > 1`, pick `p′ ∈ S̃_i` near `p` with `ω(p′) ∩ Z₀ = ∅` — possible for a.e. `p′`, since `Z₀ + S¹` is a Lipschitz image of the `H²`-null set `Z₀ × S¹`, hence null; by I-D1 `ω(p′)` also misses every point of `K` of positive upper density, so it misses `K`; then `K ∪ [p′, p]` is connected, misses `ω(p′)`, and holds `p′` inside and `q` outside — contradiction. ∎ This is TS-C with "touching vertex" replaced by "zero-density point" and genericity by Fubini. **The named step:** TS-T's hull growth on supports — the outer frontier of a component of `{x : P_supp(x) = {j}}` is connected and lies in one `supp S_j ∩ supp S_i`, and the ring of `i` around it must be a connected piece of `supp S_i` to which TS-C′ applies. K3 shows where it breaks: `A`'s support is connected across `K × ℝ`, on which `A` has density 0 almost everywhere (`H¹(Z₀) = ∞`). |
+| **C-T-CHR4** (`k = 6`: no `|P(x)| ≥ 4`) | **GAP** — proved for `|P(x)| ≥ 5` off a null set; `|P(x)| = 4` open | 1 / [hand] | By I-D1, `ω(x) ∩ S̃_j = ∅` for `j ∈ P(x)`, and `S̃_j` has no two points at distance 1 (D-NF), so `σ(ω(x) ∩ S̃_j) ≤ 1/2` for each `j`. If `|P(x)| ≥ 5`, at most one class is left for `ω(x)`, so `σ(ω(x) ∩ E) ≥ 1/2`; if `|P(x)| = 6`, `ω(x) ⊆ E`. By Fubini (`E` null), `X_E = {x : σ(ω(x) ∩ E) > 0}` is null. **So `|P(x)| ≥ 5` happens only on the null set `X_E`.** For `|P(x)| = 4` off `X_E`, `ω(x)` is `σ`-a.e. split between two classes with no two points `π/3` apart — alternating arcs, which is consistent: the circle alone does not refute it. S–V's Lemma 2 gets its contradiction from Prop. 5 (the neighbourhoods of the colour-change points), and that step is [G1]'s gap already for maps without Condition 5 (configuration C5). |
+| **C-T-ANN** | **GAP**, inherits [G2] | 1 / [hand] | S–V's Cor. 2 fails as argued for maps at the bowtie, at a unit-arc boundary through `u`, and at spiralling boundaries (stage 2); in D-NF there are no curves to start from. No density route attempted. |
+| **C-T-IND** | **MISSTATED; corrected form TRUE** | 1 / [hand] | **As stated it cannot hold in general:** an integer index read from density classes along a curve is the lift to `K₃`'s universal cover, and it exists only when the trace changes colour finitely often on compact pieces; K3's classes give traces with infinitely many changes along **every** curve crossing the fat edge (each gap of the Cantor set is an `A`-interval, the Cantor set itself a.e. `B`), and nearby curves are no better, so no approximation defines one. So "no index exists" is proved for traces of that shape. **Corrected statement:** for two curves of C-T-ANN's kind with complementary parametrisation whose density traces have finitely many essential colour changes, `Ind` (the lift difference) satisfies `|Ind γ₁ − Ind γ₂| ≤ 1` whenever C-T-L1 holds at the simultaneous changes. Proof: FS106-V's repaired Prop. 12 (the state machine on colour pairs; the swap is exactly a bichromatic unit pair of one multicolour, excluded by C-T-L1; the other simultaneous changes decompose). So the index needs a **finiteness hypothesis on the traces** — the substitute §IQ asked for is "finitely many essential changes", and whether a tight 6-colouring can be forced to have it near a trichromatic point is the question K3 poses to FS-107. |
+| **C-T-PIG** | **GAP**, inherits C-T-TRIb (a trichromatic point to start from) and C-T-ANN (the circle colourings of Lemmas 5–6) | 1 / [hand] | — |
+| **C-T-KILL** | **split: the disjoint-multicolour half TRUE under C-T-TAN's hypotheses; the same-multicolour half GAP** | 1 / [hand] | Disjoint multicolours at distance `< 2`: excluded by C-T-TAN whenever the blow-ups at the two points converge strongly along a common sequence and their slice supports have positive length (so not at tangent interfaces, bowties, cusps or weak-* limits). Same multicolour at distance in `(1, 2)`: Lemma 3's transplanted bicycle needs C-T-ANN's curves and C-T-IND's finiteness. |
+
+**Would have searched here:** none.
+
+## Stage 5 — SAVED
