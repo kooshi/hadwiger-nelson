@@ -502,3 +502,105 @@ are now each verifier's own, so E10 is scored on the sealed controls at stage 4.
 X21D/X21V/X22D/X22V/X23V; M3's mixing-selection proof and row 109; the stubs, the re-rank, the handoffs, this plan, the advisor's and the
 gate's records, the other verifier), an explicit override of `MEMORY.md`'s pointer to the handoff, a grep rule on neutral tokens, stage 3
 committed before anything fenced is opened, the sealed half scored at stage 4. Both derive C-LB blind. I launch neither.
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; job FS103-C, the close planner)
+
+*de Bruijn (Opus 5.5), 2026-09-26. Brief `data/fs103/briefs/C103-close-math.md` with `data/fs103/briefs/STANDING-RULES.md`. Worked from
+`plans/FS103-close-inventory.md` (items 1–73). Drafts only: `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`,
+`CLOSED-QUESTIONS.md`, `plans/GROKKING-INSTANCES.md` are written by the front-page job FS103-X. Every number below is read from the record
+named beside it, never from the inventory. FS103-N (the blind check of FS103-M's M1) was running at launch; M1, M1′, M1″, Q4 are one mind
+until its verdict is relayed.*
+
+### Stage 1 — SAVED (quotation check; reconciliation)
+
+**1.0 Quotation check of the brief (standing rule 5).**
+
+| # | the brief says | source | result |
+|---|---|---|---|
+| B1 | novelty "not found in print" | `data/fs103/reports/FS103-G.md` ("Not found in print: the collapse F1, χ(ℝ²)=χ_m, =χ_B, =χ_CP, or a named number field attaining χ(ℝ²)"); `plans/FS103-G-prior-art.md` §2.1 | matches |
+| B2 | "C-LB is TRUE by V1 and V2, each blind to the other and to J39's and J48's proofs" | V1 §Stage 3 (committed `d1864bd8` before any fenced file); V2 §Stage 3 (`e5d65927`), its fence log §1.1 (row 109's *statement* printed by a grep; inventory item 34, the owner's ruling "blindness intact") | matches, with V2's logged exposure stated |
+| B3 | "totally real at two minds, since the complex-place widening is V2's alone (inventory items 46, 54)" | V1 §Stage 3 ("complex places untreated"); V2 §4.2–§4.3 ("claimed … One mind"); advisor stage 4 divergence 1 | matches |
+| B4 | "De Grey's field rests on row 120 as stated; C-MR16 is unreached" | V1 §Stage 3 ("unreached"); V2 §Stage 3 ("NOT REACHED") | matches |
+| B5 | "C-LB with no MR (both verifiers) … with the SP-witness alternative" | V1-LB ("no MR"); V2-LB ("(B) or …") | matches |
+| B6 | FRAC, TJ, ROUND, DV, TF, 47 "TRUE at two minds, DV/TF/47 given MR" | `plans/FS103-B-verification.md` Stage 4 "Agreement" | matches (FRAC is itself "given MR(F)"; B's report: "FRAC TRUE given MR") — the brief's shorthand omits FRAC's own MR; every row below carries it |
+| B7 | DV answers "the first clause of `[DuczVarga2026]` Conjecture 1 and `[MatolcsiEtAl2025]` §2's equality question" | F §3.0, §3.3; B's report, held item | matches |
+| B8 | "If FS103-F found that row 123's argument runs per class … that finding goes first" | F's report ("row 123's chain runs ONE CLASS AT A TIME"); FS103-F-ROUND | **fires**: it goes first in the verdict (stage 3) |
+| B9 | "C-FMT (d) is a gap in every record (item 56)" | V1 §Stage 3; V2 §Stage 3; advisor stage 4 item 4; M §3.1 ("GAP") | matches |
+
+**1.1 Reconciliation — the fixed claim list (`data/fs103/claims.md`).** V1 = `plans/FS103-V1-verification.md`, V2 =
+`plans/FS103-V2-verification.md`, A = the advisor's comparison (`plans/POROS-2026-09-26-fs103-collapse.md` stage 4). Blindness: V1 and V2
+blind to each other and to J39's and J48's proofs through their stage 3 (B2); A read both after their stage 3.
+
+| claim | V1 | V2 | A (comparison) | ruling (the close) |
+|---|---|---|---|---|
+| **C-LB** | TRUE `k = 4, 5, 6` (every `k ≥ 2`), no MR, totally real | TRUE every `k ≥ 2`, no MR, every real number field with `N_k = ∅` | agree; routes the same in shape, differ at the carried object (V1 the `Δ_k`-valued conditional law, V2 `c′ = min supp p`) | **TRUE, [hand], two blind (V1, V2)** + the two held (J39, J48): four derivations; for **totally real** `F`. Complex places: one mind (V2) |
+| C-F1-GEN (stub text) | MISSTATED ("totally real"; `N₆ = ∅`) | MISSTATED ("real field"; `k` unnamed) | — | **MISSTATED**, two |
+| C-F1-GEN (proposed scope) | TRUE given MR | TRUE given MR, widened to every real number field | scope divergence = statement mismatch; V1's reason for excluding complex places wrong, V2's L4 right | **TRUE given MR(F) for totally real `F` with `N₆(F) = ∅`**, two blind; `N₆ = ∅` already excludes row 100's exception (a ramified stable dyadic place has `λ* = 1`; V2 §4.3, V1 §4.4); every real number field with `N₆ = ∅`: one mind (V2), not claimed (owner items 46, 54) |
+| C-CPUP | TRUE | TRUE | agree | **TRUE**, two |
+| C-635-PL | TRUE (bound 1000, two code bases) | TRUE (bound 1000, two paths, three plants) | agree | **TRUE [tools exact]**, two (B-635 a third, bound 2000) |
+| C-635-THK | TRUE, `≤ 0.1952` (Weil) | TRUE, exact `0.192617` | agree | **TRUE**; the number is `0.192617` exact (the stub's `0.1952` is Weil's bound — correction, inventory item 33) |
+| C-635-F1 | TRUE given MR | TRUE given MR | agree | **TRUE given MR(ℚ(√635087)), [hand], two blind** — the headline |
+| C-635-TF | TRUE given C-635-F1 | TRUE given C-635-F1 and `χ(ℝ²) ≥ 6` | agree | **TRUE**, two |
+| C-dG-PL | TRUE (bound 600: 131, 479) | TRUE (bound 600: 131, 479; 3, 5, 7, 11 `e = f = 2`; dyadic split) | agree | **TRUE [tools exact]**, two |
+| C-131 | TRUE `0.168047` | TRUE `0.168047` | agree | **TRUE**, two |
+| C-dG-THK | TRUE | TRUE, `sup λ* = 0.168047` | agree | **TRUE**, two |
+| C-MR16 | unreached | not reached | — | **unreached** → FS-105 |
+| C-dG-F1 | TRUE given MR(`F_dG`) | TRUE given MR(`F_dG`) | agree | **TRUE given MR(`F_dG`)**, two blind; MR at degree 16 rests on row 120's statement as written, its walk unexercised (FS-105) |
+| C-S (a) | TRUE | TRUE | agree | **TRUE**, two |
+| C-S (b) | TRUE for S_nf, totally real, given MR | TRUE given MR, every real number field | agree | **TRUE given MR for S_nf over totally real fields**, two; every real number field one mind (V2) |
+| C-S (c) | MISSTATED (finitely many residue fields, infinitely many local planes) | GAP at "finitely many local types" (infinite as stated) | agree in substance; the advisor's registered hunch confirmed | **MISSTATED**: "a finite family" is false at full depth, two minds. Exact form: finitely many residue sizes (the window and its neighbours below 101, dyadic `U_Q` of small norm), infinitely many local planes (`[F_v : ℚ_p]` unbounded) |
+| C-S (d) | answered: Q-const for transcendental subfields; complex places untreated | GAP at Q-const | agree | **GAP at Q-const** (G63's open question), two |
+| C-FMT (a) | TRUE | TRUE (V2-MV proved) | agree | **TRUE**, two |
+| C-FMT (b) | TRUE | TRUE | agree | **TRUE**, two |
+| C-FMT (c) | GAP (Følner limit not continuous in probability) | GAP (same) | a gap in the route (pointwise limit), not the claim; A-E5's weak-* route | route GAP two; **claim: see M1 (FS103-M, one mind; FS103-N pending)** |
+| C-FMT (d) | GAP (the null set of non-density points; density-point lemma proved) | GAP | real gap, all three | **GAP**, every record (M §3.1 sharpens it: D1–D5) |
+| C-FMT (e) | relations stated | relations stated | — | `χ ≤ χ_CP`, `χ_m⁰ ≤ χ_CP`, `χ_m⁰ ≤ χ_m ≤ χ_B ≤ 7`, `χ_m⁰ ≥ 5`: two; `χ_B` vs `χ_m` GAP (M §3.2) |
+| C-CPM | GAP w/o MR; TRUE through C-635-F1 | the same | route gap | **TRUE given MR** (through C-635-F1), two; with no MR: M1″, one mind pending FS103-N |
+
+**Controls (sealed half), scored by both at stage 4** (V1 §4.3, V2 §4.2 §C): CTL-167-4, CTL-dG4, CTL-K-4, CTL-K7-6 (`λ*(Γ₈₃) = 0.210818`
+exact; the claim list's `0.217` is Weil), CTL-K5-5, CTL-167-5 (59 at `0.248626 < 1/4`, margin `0.0014`), CTL-ABS (`χ = 2 < 3 = χ_CP`; both
+chains stop at the parity character, `λ* = 1`), CTL-Q2: **all agree, two minds.** CTL-FRAC: V1 and V2 blind to each other locate the second
+class at one step, the selection's covering pigeonhole `max_j m_j(x) ≥ 1/k > θ` (V1 §4.3; V2 §4.1, §4.1′); the advisor: "the same
+inequality" (A stage 4 divergence 2). **Two minds.**
+
+**Divergences of truth: none.** Divergences of statement, each ruled above: the complex-place scope (V1 vs V2; ruled a statement mismatch,
+one mind for the widening); C-S (c)'s label (MISSTATED vs GAP; same content); V2's dispute of sealed line C-F1-GEN (3) (V2 right on
+substance, one mind — the line guarded a merge "⟸" the chain never uses; A agrees). Route divergences (not truth): V2 proves the jointly
+measurable version and writes the law of `m_j` (sealed line (viii)), which the held proofs P (J39) and B (J48) state without proof (inventory
+item 50: a completeness note on rows 109/125's inputs, not a defect); V1 carries the fractional process, not a colouring; row 100's exception:
+C-LB needs none (BC's Lemma C′; `N_k = ∅` excludes it anyway), MR needs `R = O′`.
+
+**1.2 Reconciliation — FS103-F and its blind check FS103-B** (`plans/FS103-F-fractional-shadow.md`; `plans/FS103-B-verification.md`; B blind to
+F's record until `f457e527`).
+
+| claim | F | B | ruling |
+|---|---|---|---|
+| **per class** (does row 123's chain run one class at a time?) | yes: the count enters only at X25B-T's pigeonhole on the densest class | FRAC derived with "the count of classes never appears" (B §2.1) | **yes, two minds** — first in the verdict (B8) |
+| FS103-F-FRAC | TRUE given MR(F) | TRUE given MR(F) | **TRUE given MR(F), [hand], two** (F; B blind); unconditional clause (density `> ρ(F)` ⟹ SP witness) two |
+| FS103-F-TJ | TRUE | TRUE, with `ϑ = λ*/(1+λ*)` | **TRUE**, two; statement correction: define `ϑ` (B §2.2) |
+| FS103-F-ROUND | TRUE | TRUE | **TRUE**, two: row 123's bound is `⌈1/ρ(F)⌉`, `1/ρ ≤ 4.35987`; the route never gives six |
+| FS103-F-DV | TRUE given MR(ℚ(√635087)) | TRUE given MR(ℚ(√635087)) | **TRUE given MR(ℚ(√635087))**, two; F's step 4 had a small gap (a continuum of translates is not a fractional colouring) closed by B-CHIF — cite it (B Stage 4 item 2) |
+| FS103-F-TF | TRUE given MR | TRUE given MR | **TRUE given MR(ℚ(√635087))**, two |
+| FS103-F-47 | TRUE given MR(ℚ(√47)) | TRUE given MR(ℚ(√47)); 23's exact ratio `0.249077` needs no certificate | **TRUE given MR(ℚ(√47))**, two; `χ_f ≥ 4.0000439` (31 binds) |
+| B-AMEN | — | `α₁(F²) = α_inv(F²)` every real field, no MR | **one mind (B)**; refutes F §3.4 item 2's "false in general" (a slip in F, no claim affected) |
+| B-CHIF | — | `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` (finitely many sets) | one mind (B); "likely folklore" (B) |
+| FS103-F-PL / B-635 | stable places of ℚ(√635087), max ratio `0.16330` (103) | same list by two PARI routes, bound 2000 | **tools exact, two** |
+
+Divergences of truth: B's three corrections to F (F §3.4 item 2 false; DV step 4's small gap closed by B-CHIF; TJ's `ϑ` undefined) and the
+notation clash `ρ(F)` (F, an independence ratio) against MRVZ's `ρ(ℝ²) = 1/α₁` (a Hall ratio) — all applied in the derivation file; none
+changes a verdict. **The whole weight is MR's** (B's grade proposal): nothing in either derivation adds evidence for MR, and F §3.5's killing
+test (a proof of `α₁(ℝ²) > m₁(ℝ²)` refutes MR at ℚ(√635087)) is right (B).
+
+**1.3 Reconciliation — FS103-M and its blind check FS103-N.** *Pending FS103-N's verdict; filled at the end of this job (standing order of the
+brief).* FS103-M (one mind, not blind): M1, M1′, M1″, M1.1–M1.2, NR (with V2's route GAP: two), A-E3′, D1–D5, Q4 (`plans/FS103-M-derivation.md`
+"Theorems this phase proved"). Until the verdict: **candidates**, one mind each; nothing states "HN = `χ_m⁰` given MR" as held (owner item 68).
+
+**1.4 The advisor's own theorems** (one mind each, unreviewed except as below): A-E3 (`χ(Cay(ℝ, {±1, ±√2})) = 2 < 3 = χ_CP`) — **checked by
+V1 and V2** at stage 4 (CTL-ABS), so two minds more; A-E5 (`χ_CP = χ_m⁰`, a sketch) — the route FS103-M wrote out as M1, M1′.
+
+**1.5 Kooshi's observation (inventory items 2, 16).** "De Grey's home field": confirmed (V1, V2: `F_dG`'s first stable places over 131 and 479,
+bound 600). "The only 4-quadratic field we've seen": not literal (K(√5,√247), row 63's two rank-4 fields); what is distinctive, at two minds
+(V1, V2 place lists) and one (P103-R1): `F_dG` is the only field on record with no stable place below 131, and every totally real field
+containing it inherits `N₆ = ∅` (so `K(√5,√7,√247)` is a third collapse field).
+
+### Stage 1 — SAVED
