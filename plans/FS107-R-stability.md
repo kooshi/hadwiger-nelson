@@ -5,13 +5,21 @@
 
 ## Theorems this phase proved
 
-*(filled stage by stage; one line each: statement, grade, minds, address)*
-
-- none yet (stage 1 is set-up).
+- **FS107-R-SAT** (on both): for a saturated band-proper partial six-colouring, the uncovered set is a.e. the **open** set
+  `{z : \|A_ε(z) ∩ C_j\| > 0 for all six j}`. [hand, one mind] §3.1
+- **FS107-R-CP** (on both; on LIM the cone case of TS's C-T-TAN, quantified): two fat junctions of complementary types at distance in `[η, 2 − η]`,
+  blocking toward a point `w` at distance 1 from both, force `\|H ∩ B(w, µ/4)\| ≥ (t₁ − 2r)(t₁′ − 2r′)`, with `t₁ = s·sin(µ/2)/3`. The bound is
+  independent of `ε`, moved only `O(ρs)` by any repair inside radius `ρ` of the junctions, and yields an uncovered disc. [hand, one mind] §3.2
+- **FS107-R-SW** (on SEQ): a same-multicolour unit pair at flat boundaries of scale `s` costs `≥ εs` of holes, sharp for one colour; the other colour's
+  facing half-discs cost `≳ s³` [sketch]. [hand, one mind] §3.3
+- **FS107-R-OB′** (about arguments): an argument that reads only one colour's pairs at a swap is capped at `O(εs)` per swap (hitting form). [hand,
+  one mind] §3.4
 
 ## Would-have-searched-here log (standing rule 3)
 
-- (none yet)
+- C-T-BIKE: an offset scan over `(φ, ψ)` for TS's shared-colour arc ansatz. Instead I worked two windows by hand at `d = 1.9` and stopped (§3.6).
+- Lemma CP's constants: a numerical optimisation of `µ, s₀` against Parts's tiling. Instead the constants are stated, not optimised, and P1 is
+  registered for an exact check on given coordinates.
 
 ## Fence log (SHARED § Fences; standing rule 13)
 
@@ -323,3 +331,37 @@ Given (A) and (B), Lemma CP gives `\|H ∩ U_{R+1}\| ≥ (s₀ sin(µ/2)/6)²`: 
   tight 2-colourings of a circle are `E ∪ (E′ + 60°) ∪ …` for any `E ⊂ [0, 60°)`, and I did not use that freedom). I stopped rather than scan.
 
 ## Stage 3 — SAVED
+
+---
+
+## Stage 4 — SAVED: verdicts
+
+| claim | verdict | minds / grade | the named step |
+|---|---|---|---|
+| **R** (C-Q-STAB, disc form) | **GAP** | 1 / [hand] for the CP link; the reduction RR a [reading] | (A) or (A″): Lemma 6.1 branch (i) priced at a positive power of the cone scale, or re-routed to end in a complementary pair; and (B) a cone-scale lower bound on a set of positive measure. Given both, Lemma CP gives R (§3.4) |
+| **R′** (C-VOID) | **GAP**, same steps | 1 / [reading] | CP's region contains a disc of radius `≍ s`, so (A) and (B) give R′ as well |
+| **R″** (order `ε`) | **GAP, not reached** | 1 | SW gives `≥ εs` per regular swap. Forcing a regular swap, or any priced certificate, into every `U_R` is (A) and (B) again |
+| C-T-TAN / K-TAN (§2, LIM) | **TRUE** in the cone form, now with an explicit area on both objects | 1 / [hand] (FS107-R-CP; credit TS) | — |
+| K-KILL's same-multicolour half (LIM) | **GAP**; its SEQ price found | 1 / [hand] + [sketch] | the swap's two-colour cost (`≥ εs` proved; `≳ s³` sketched) |
+| C-T-BIKE (§5) | **not decided** | 1 / hand arithmetic | the pure `π/3`-arc shared-colour ansatz fails narrowly at `d = 1.9` (two windows); the general tight 2-colouring `E ∪ (E′ + 60°) ∪ …` not used |
+| K-C6 | consistent: CP is its metric content | 1 | — |
+| G82's reading (killing test "a feature-local proof of `lim µ₆(ε) < 1`") | **at risk from my own route**: (A) + (B) would be such a proof, feature-local at the junction pair, yet repair-robust | 1 / [reading] | the close should score G82 against RR if either (A) or (B) lands |
+| K-AD (b) | consistent: CP's holes are door 2 (`ε`-independent size) | 1 | — |
+
+**Retractions: 2, both free.** (1) §2.0, on the advisor's card. (2) §3.4, a self-audit before commit: Theorem OB's "branch (i) is of hitting form".
+**Example or counterexample invariant (X19, G79):** SAT is an example invariant (every saturated solution carries the open six-sighted hole set). CP
+and SW are counterexample invariants: what a hole-free family must avoid. The reduction RR came through §IQ's structural question ("what does every
+band-proper partial six-colouring carry?"), candidate (b), junction types.
+
+**Proposed edits for the close (I edit none of these files):**
+- `LEDGER.md` § B: four lines, FS107-R-SAT, -CP, -SW, -OB′.
+- `data/fs107/claims.md` K-REG: bounded-complexity limits are excluded only when polygonal (FS106-AE-POLY, bar `d = 2`); curved bounded families are
+  C-AE-Q2 objects (the advisor is flagging it).
+- `plans/FRONTIER-STUBS.md`: two sub-questions of FS-107 as stubs — **REG-SCALE** (a cone-scale lower bound for near-optimal band-proper partial
+  colourings, De Giorgi's vocabulary) and **SWAP-PRICE / bicycle-free Voronov** ((A″) or (A)).
+- `BIBLIOGRAPHY.md` `[Voronov2023]`: "§§2–6 re-read in full (FS107-R, 2026-09-27)".
+
+**Left for a successor:** stage 5 (read W's record after hand-back; record divergences); the swap's `s³` sketch written as a proof; the deformed
+annulus priced on SEQ (TS [G2]); P1 checked on Parts's coordinates.
+
+## Stage 4 — SAVED
