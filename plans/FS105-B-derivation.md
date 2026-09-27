@@ -347,3 +347,7 @@ and constant, is mine.
 
 **Count of minds for EF_F⁺ at `F₁` after this job:** three derivations blind to one another (X01D, X12B, FS105-B) and one checking reading
 (X01V stage 4). Grade [hand].
+
+**Scratchpad fence (owner's clarification, received after stage 4):** in the shared harness scratchpad I created and opened only my own
+two files, `ef.txt` (pdftotext of `[EinsiedlerFish2010]`) and `st.gp` (the stable-prime loop of §1.3), written directly at the scratchpad's
+top level. I never listed, grepped or opened any other file there. No slip to log.
