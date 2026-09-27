@@ -223,6 +223,8 @@ A4's):
 So **Q-full under Condition 5 is one question: does a winding map exist?** W-POLY adds that such a map is not polygonal (bar `d = 2`), so it needs
 curved arcs of radius `≠ 1`. [NB-4/NB-5: two minds, one blind; the rest one mind each, as stated.] **Outside Condition 5** the live objects are:
 - (S1) and T2;
+- NB-4's exception (arcs of `ω(y_k)` through the change points);
+- A4-SIX-ARCS's `≥ 6` unit arcs at a four-colour vertex.
 
 **W-3 (the winding question).** Does a winding map exist? A winding map is a tight six-map in `𝓜_K` satisfying Condition 5, in which:
 - every trivalent vertex's ring winds `|W| ≥ 2`, consistently along edges (N2-TRANS);
