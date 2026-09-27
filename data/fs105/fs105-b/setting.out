@@ -1,0 +1,29 @@
+S1 squarefree: 1  factor: Mat([635087, 1])  real roots of x^2-d: 2
+S2 primes of L above 2 at d=635087 (e, f, stable): [(2, 1, False), (2, 1, False)]
+S2 no stable dyadic place: True
+S2-plant d=3 (e, f, stable): [(2, 2, True)]
+S2-plant fires (stable dyadic place present at Q(sqrt3)): True
+S3 [norm one, |u|=1 at all arch, unit at all stable P in its support, some split P in support]
+   u1 = (3+4i)/5          : [1, 1, 1, 1]
+   u2 = z/sigma(z), z=1+i+sqrt d: [1, 1, 1, 1]
+   plant 2+i (not in U)   : [0, 0, 1, 1]
+S3-plant fires: True
+S4 p, #primes of L above p, e, f, stable-vector:
+    2 2 2 1 [0, 0]
+    3 2 1 2 [0, 0]
+    5 2 1 2 [0, 0]
+    7 2 1 2 [0, 0]
+    11 2 1 2 [0, 0]
+    13 2 1 2 [0, 0]
+    17 4 1 1 [0, 0, 0, 0]
+    19 2 1 2 [0, 0]
+    23 2 1 2 [0, 0]
+    29 4 1 1 [0, 0, 0, 0]
+    31 2 1 2 [0, 0]
+    37 2 1 2 [0, 0]
+    41 2 1 2 [0, 0]
+    43 2 1 2 [0, 0]
+    47 2 1 2 [0, 0]
+    53 2 1 2 [0, 0]
+    59 2 1 2 [0, 0]
+ALL CHECKS PASS AND PLANTS FIRE
