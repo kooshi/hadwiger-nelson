@@ -321,3 +321,44 @@ local picture behind the swap in §2.3 (c). [hand, one mind; the float check is 
   - the appendix's same-multicolour distance (repaired as in `[Voronov2023]` Lemma 6.1);
   - the appendix's colours "1, 2, 3" should be "4, 5, 6", and its implicit simple connectivity (A12).
 - `[Voronov2023]`: §6 (Lemma 6.1) read 2026-09-27; it states "all regions are 1-connected".
+
+## Stage 4 — SAVED (the TS record read, after stage 3's commit `2c5fabef`; divergences)
+
+Read: `plans/FS106-TS-derivation.md` only (its theorem list, §§2.2–2.6, §3's table, §5's C-T-IND row). Nothing else fenced was opened.
+
+### 4.1 Divergences of truth
+
+| # | claim | TS | SB | who is right, as far as I can tell |
+|---|---|---|---|---|
+| T1 | C-T-IND (c), and TS §2.3's consequence "S–V's Prop. 12 and Cor. 4 … hold with no Condition 5 wherever their curves exist" | TRUE: "the swap is exactly a bichromatic unit pair of one multicolour, excluded by C-T-L1" | **FALSE locally.** In TS's own configuration C5, with **one** extra colour in both side cones at `y` (a bowtie, so Def. 5 holds with `M = {1,2,3}`), the translate curves through `x` and `y` are complementary and never share a colour. They swap at `(x, y)`, where `P(x) = {1,2}` and `P(y) = {1,2,3}`, and `\|Ind γ₁ − Ind γ₂\| = 2` (`tools/fs106_sb_c5_check.py` (I)). | SB. The swap is at a unit-arc interface facing a bowtie (or a 4-chromatic point), which TS-L1 and C-T-L1b do not cover. Prop. 12 needs Condition 5 or 6, or a lemma excluding this configuration. **This bears on C-AE-Q2's chain**: TS's table lists Prop. 12 as "hold wherever the curves exist". |
+| T2 | C-T-IND (a) "an index exists iff the traces change colour finitely often" | TRUE | **FALSE under both readings.** Reading (A), lift agrees a.e.: TS's K3 trace (`A` on the gaps, `B` a.e. on a fat Cantor set) **has** an index, the lift being pinned at `1/2 + 3m` on the Cantor set (§2.3 (a)). Reading (B), all but finitely many points: a constant trace with infinitely many curve points in `E` has none | Definition-dependent; TS does not fix the reading. Under (B), TS's K3 verdict holds and the "if" fails; under (A), the "only if" fails. |
+| T3 | C-T-IND (b) "K3 gives traces with no index" | TRUE | TRUE for three colours at the Cantor set, or under (B); FALSE for TS's two-class K3 under (A) | as T2 |
+| T4 | C-AE-CONV | TRUE at C-AE-POLY's grade | **GAP at A12.** Merged tile colours give non-simply-connected regions routinely, and S–V's eleventh-point step needs simply connected regions (`[Voronov2023]` states "all regions are 1-connected") | Unsettled. If A12 is a real gap, TS's reduction inherits it at once; if some other step closes A12, TS is right. TS also records Coulson as unread; I read it (printed theorem: 6, with an area bound). |
+
+### 4.2 Divergences of named gaps (C-AE-POLY)
+
+| # | TS names | SB names | assessment |
+|---|---|---|---|
+| G1 | the `d = 2` edge case: two `p_j` of one multicolour antipodal on `ω` (FS106-V3) | **missed.** My A11 took `\|p_j − p_k\| < 2` from "inside the unit disc". But a `p_j` whose third colour lies in `c(u)` can sit on `ω(u)`, the colour-`i` region touching `ω(u)` from outside, which (M) allows. | TS/V3 right; my A11 repair gives only "`> 1`". |
+| G2 | — | **A12**: simple connectivity at the appendix's eleventh point, which Prop. 8's recolouring can destroy | not in TS's record; the owner should check whether V2/V3 handle it |
+| G3 | "SV-L3's transplanted bicycle at V2's sketch grade" | Lemma 3 taken as printed and colour-independent | same step, both at less than full grade |
+
+### 4.3 Divergences of route (same truth)
+
+| claim | TS route | SB route |
+|---|---|---|
+| TS-L1 | Baire gives an arc of `ω(y)` inside one boundary near `x`; TS-U's side cones at `y` then carry neither `a` nor `b` | uncountably many `z ∈ B` near `x`, each putting an arc of `ω(z)` into the finitely many boundary arcs near `y`; the arcs have disjoint interiors, so there are at most countably many |
+| TS-C | a point `p′` avoiding finitely many circles; the union of closures minus `ω(p′)` is connected | L0′ (a connected subset of `cl O` lies in `B(a,1)`); no local finiteness, no choice of `p′` |
+| TS-T | Voronov's hull growth on clusters; stops by finiteness | Lebesgue's covering theorem on a square of side `s ∈ (1, √2]`. **Sharper: within `1/√2 + ε`.** Condition 5 alone gives "trichromatic"; Condition 6 gives degree 3. TS states "with Conditions 5, 6 it is trichromatic", which mine implies |
+| TS-U | first order with `O(\|b\|²)` slack, via the radius formula | exact: `O_c ⊆ ⋂_{p∈A} D(p,1)`, `O_{c′} ∩ ⋃ D̄(p,1) = ∅`, via L0′ along collar rays |
+| C5 | wedges within `π/2 − φ₀` of `x − y`, "two further colours" in the side cones | explicit sectors with margins, a sampling check with three plants; **either** one colour (bowtie) **or** two in the side cones, so C5 survives Condition 6 |
+| C-AE-POLY | V2's repaired chain read region-only; Prop. 7 region-only (the same sagitta argument) | S–V's chain walked with ★ at boundary-colour uses; the same Prop. 7 repair. **Agreement:** both find that the Prop. 12 swap needs Lemma 1, and both close it with TS-L1 **in the map setting with Condition 5**. T1 is about dropping Condition 5 |
+
+### 4.4 Scoring my stage-1 expectations
+
+| claim | expected | got |
+|---|---|---|
+| C-AE-POLY | TRUE, medium | TRUE relative to the printed chain, plus a gap in the printed chain (A12) I did not expect, and one (G1) I missed |
+| C-AE-CONV | TRUE, medium-low | GAP (A12); the low confidence was earned by the thing I flagged ("merged tiles need not be polygons in S–V's sense") |
+| C-T-IND | mixed, medium | mixed: MISSTATED, with a counterexample to the swap step I did not expect |
+| TS-C, TS-T, TS-U, TS-L1, C5 | TRUE | TRUE; C5 needed the extra side-cone colour(s), as registered |
