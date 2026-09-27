@@ -409,3 +409,25 @@ question is new as posed (not found in print), its quantity old.
 4. **Its route.** Derivation only; W's exact checks verify a given member, never search.
 5. **The open instances it would decide.** `χ_m⁰(ℝ²) ≥ 7` (row 131); given MR, `χ(ℝ²) = 7` (row 128); S–V's Question 1 in stability form (the
    least disc radius); C-AE-CLOSED; C-AE-Q2 and AE-FA (special cases); FS-104's `χ_CP(ℝ²) ≥ 6` at `k = 5` by the same invariant with five colours.
+
+## Stage 4 — SAVED: the fixed claim list (`data/fs107/claims.md`) and the advisor's first advice
+
+**The list.** §0 definitions (quoted); §1 H-EQ (held), **R** (C-Q-STAB, exact disc form), **R′** (C-VOID, sufficient only), **R″** (the `ε²` → `ε`
+rung), **W** (TQ-EQ (e)); §2 the twelve shared constraints of A2 §3.4 verbatim, each with its object and the close's statement and grade (four rows
+changed: K-FLOOR, K-CEIL, K-PIX, K-HIT), plus K-C6, K-BICH, K-AD (a reading), K-KILL, K-CHR4; §3 the killing tests (A2's eight, the pinhole test
+added); §4 the break table verbatim with its row-2 annotation; §5 R-S's named steps on LIM; §6 held GAPs, not assigned. Quotations spot-checked by
+`grep -F` against the sources (14 of 14 found).
+
+**The advisor's advice (FS107-A, two messages, 2026-09-27) and my decisions.**
+
+| # | advice | decision | why |
+|---|---|---|---|
+| 1 | A2's break row 2 and the advisor brief misattribute `O(ε²)` to C-Q-LOCAL; it is A8b | **adopted** — row quoted verbatim, annotated | a quotation is kept verbatim; its source corrected beside it (standing rule 5) |
+| 2 | fences for R, W, V by path: transcripts, `chats-bak/`, scratchpad files not created, the advisor's record and `data/fs107/fs107-a/`, the other side's scratch, the close inventory, `git log` | **adopted** (also the owner's ruling, inventory item 4) | protocol §1 rule 1 |
+| 3 | a pinhole test for R (A8b's form); AD as the law behind the three no-go tests | **adopted**: pinhole as R's killing test 5; AD as K-AD, **graded a [reading]** with a killing test of my wording | AD is derived at one mind by interpolating TQ §4.4's dichotomy; its universal quantifier over "arguments" makes it a reading, like FS106-HIT's scope |
+| 4 | shared facts C6, BICH; C-T-KILL's split and C-T-CHR4's GAP beside C-T-TAN | **adopted** as K-C6, K-BICH, K-KILL, K-CHR4 | trivial and one mind, but they turn LIM's exceptional set into junction types W's checker can read |
+| 5 | W's checker also prints the junction types present, the least distance between complementary types, and between equal types in `(1, 2)` | **adopted** into W's brief | a check of a given object; it feeds the break table's rows 3–4 |
+| 6 | name C-VOID as R's intermediate claim | **adopted** as R′, **with the note that it is sufficient only** and that a W family with vanishing hole inradius at bounded coverage refutes C-VOID and decides nothing | both outcomes reachable; it gives R a local-in-anchor target and W a non-decisive rung |
+
+No disagreement so far; the one amendment is the grade of AD (the advisor wrote "[derived, one mind]"; the list carries it as a reading — recorded
+here as a disagreement of grade, mine governing).
