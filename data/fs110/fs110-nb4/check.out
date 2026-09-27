@@ -1,0 +1,29 @@
+PASS C1a curvature of shadow circle, lam>0
+PASS C1b curvature of shadow circle, -1<lam<0
+PASS C1c max_x [Y-(x-T)^2/2-lam x^2/2] = Y - f T^2/2 -- argmax x = T/(lambda + 1)
+PASS C1d min_x [Y+(x-T)^2/2-ups x^2/2] = Y - f~ T^2/2 -- argmin x = -T/(upsilon - 1)
+PASS C1e in-type shadow curvature k/(k-1) > 1 for k > 1
+PASS C2a 1/f = 1/lam + 1, 1/f~ = 1/ups - 1, f(f~(u)) = u, f, f~ increasing
+PASS C2b FIN: no admissible start survives (strict) -- survivors=0
+PASS C2c FIN: exit within the stated bound 1/ups (up) or 1/|lam| (down) -- max excess=0
+PASS C3 WCH p in horn T=1/100
+PASS C3 WCH 3-witness T=1/100
+PASS C3 WCH 2-witness T=1/100
+PASS C3 WCH p in horn T=1/1000
+PASS C3 WCH 3-witness T=1/1000
+PASS C3 WCH 2-witness T=1/1000
+PASS C3 WCH: q = N+(1/100, 4e-5) lies between N's 3-horn and N's colour-1 disc (colour 4 there)
+PASS C3 WCH: colour 1 at q would see v's colour-1 horn at distance exactly 1 (FIN's first upward step) -- z = (0.02, 9.00012500625039e-05)
+PASS C4 WC1H N 3-sector in y > 1
+PASS C4 WC1H S' 2-sector in y < -1
+PASS C4 WC1H tip->2 refused at T=1/100: omega(p) meets S''s 2-sector
+PASS C4 WC1H tip->3 refused at T=1/100: omega(p) meets N's 3-sector
+PASS C4 WC1H after SHAVE at T=1/100: p_up (colour 2) has y > 0, p_low (colour 3) has y < 0
+PASS C4 WC1H tip->2 refused at T=1/1000: omega(p) meets S''s 2-sector
+PASS C4 WC1H tip->3 refused at T=1/1000: omega(p) meets N's 3-sector
+PASS C4 WC1H after SHAVE at T=1/1000: p_up (colour 2) has y > 0, p_low (colour 3) has y < 0
+---- plants (each must fire for its own reason)
+PASS PLANT C2 (lambda = upsilon allowed) produces the constant survivor (0,0) -- survivors=[(Fraction(0, 1), Fraction(0, 1))]
+PASS PLANT C3 (N's 3-horn raised above v's horn): the 3-witness fails, the 2-witness still holds
+PASS PLANT C4 (N's 3-sector reaches -30 deg): the half-plane check y > 1 fails
+SUMMARY: 0 failures []
