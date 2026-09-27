@@ -310,3 +310,50 @@ worded; C7 consistent. The one link that could make Q4 false and that this job d
 - **Prior-art debt:** "an a.e.-proper measurable colouring of an amenable group with a Rajchman edge measure yields a stationary colouring
   continuous in probability" not searched (invariant random colourings; factor-of-i.i.d. and ergodic-theory literatures). BDOV do not state
   `χ(A_σ) = χ_m⁰`.
+
+## Stage 4 — SAVED (after reading `plans/FS103-M-derivation.md`)
+
+Read in full after stage 3's commit `245dfbf1`: `plans/FS103-M-derivation.md` (its Theorems list, §1.2, §2, §3.2–3.5). Nothing else fenced
+was opened.
+
+### 4.1 Divergences of truth — none on any claim; one on the claim file's wording
+
+| claim | FS103-M | FS103-N (blind) | divergence |
+|---|---|---|---|
+| M1, ℝ² | TRUE | TRUE | none |
+| M1, general form | stated with "`T ⊂ ℝⁿ` compact and symmetric, `σ` a probability measure with **`supp σ = T`**, symmetric, with `σ̂(ξ) → 0`" (§2.2) | TRUE with `T ⊆ supp σ` (finite `σ`, any support); FALSE without it (N-SUPP) | **none against the source.** The claim file's trimmed wording ("general form for Rajchman edge measures on `ℝⁿ`") **dropped the support hypothesis**, and without it the statement is false (N-SUPP: `T = ±[1, 2] ∪ {±3}`). An owner trim, reported as a slip (standing rule 5) |
+| M1′, M1″ | TRUE | TRUE | none |
+| M1.1 | TRUE | TRUE | none |
+| M1.2 | "false for `σ` on `{±e₁}` (C3)" — existential | TRUE as existential; GAP only if universal | none: the source's "not otherwise" is the existential |
+| A-E3′ | TRUE (invariance under `2ℤ + 2√2ℤ`) | TRUE (invariance under the larger `Λ ∋ 1 ± √2`) | none |
+| Q4 | TRUE given MR; "weakest link M1, one mind" | TRUE given MR and L1 | **emphasis only**: with this check M1 stands at two minds (one blind), so by count the weakest links are now MR (row 120) and the collapse, both [hand]. And Q4's **strength lives in the collapse**: the half `χ(ℝ²) ≤ χ_m⁰(ℝ²)` needs no MR (N-EASY). So FS103-M's "`χ(ℝ²) ≥ 6` iff every measurable 5-colouring has a positive-measure set of monochromatic unit pairs" has its ⟹ half **unconditional**; only ⟸ needs MR |
+| Falconer's format | Theorem 2 bounds `χ_m`; single pairs; "moot for the value five" | the same (§2.8) | none |
+
+### 4.2 Divergences of route — the same route in outline, reached independently; the steps differ
+
+- **The shape agrees end to end:** Følner limit of translates in the weak-* space of `Δ_k`-valued `L^∞` functions; the edge functional's
+  weak-* continuity from `σ̂ → 0`; a version defined at every point; one shared threshold; continuity carrying almost-every `w` to every
+  `w`. My sketch formed at stage 1 before any fenced file was open (record §1.2's sequencing note); FS103-M says its route is the advisor's
+  A-E5. **So the route has two minds, one of them blind.**
+- **The Rajchman step:** FS103-M uses pointwise decay of `ĥ_m` with dominated convergence below `R` and the tail above; I use compactness
+  (Hilbert–Schmidt approximants of the multiplier between cut-offs). Equivalent.
+- **The version:** FS103-M's `G̃(x)` is an `L¹(μ)` limit of mollifications at each point (no joint measurability claimed); mine is the
+  Lebesgue-point version, jointly Borel with `G(τ_t g, x) = G(g, x + t)` exactly — so this route also yields a jointly measurable CP
+  colouring, C-FMT (a)'s conclusion, as a by-product.
+- **Order of the last two steps:** FS103-M carries every `w` on the fractional process (`φ(w) = E⟨G̃(0), G̃(w)⟩`) and then rounds; I round
+  first and carry every `w` on `q(w) = P(c(0) = c(w))`. Equivalent.
+- **Controls:** the same hexagonal parameter `s = 2/5` and Pell denominators, chosen independently; FS103-M's non-Rajchman control sits in
+  `ℝ²` (`{±e₁}`), mine in `ℝ` (`{±1}`). Mine added C1b (a positive control whose Følner limit is genuinely fractional), C2′, C5 and N-SUPP.
+- **C-FMT (a), (b):** FS103-M cites V1, V2; I re-derived them for `ℝⁿ` (N-FMTa: dyadic discretisation + Borel–Cantelli).
+
+### 4.3 Items FS103-M's record lacks
+
+- N-SUPP (the support hypothesis is necessary), and the owner slip that dropped it from the claim file.
+- N-EASY: which half of Q4's "iff" needs MR.
+- The Kechris–Marks naming clash (their `χ⁰_µ` removes null sets of **vertices**; on the connected `UD(ℝ²)` it equals `χ_B`); FS103-M cites
+  their Example 5.1, not their §3 definitions.
+
+### 4.4 Count of minds after this job
+
+M1 (ℝ² and the general form with `supp σ = T`), M1′, M1″, M1.1, M1.2, A-E3′: **two minds, one blind** (FS103-M; FS103-N). Q4: a composition,
+[hand], given MR (row 120) and the collapse (held, two blind).
