@@ -1,0 +1,5 @@
+known positive: hex7 blank: torus 535x66 (Lambda' HNF), map singular values [1.0001  0.99704], bad offsets 4116, violations 0 -> PASS; blank density 0.142339 (exact 2513/17655)
+  planted square (0, 0) coloured 1: violations 1322, at the plant True -> FIRES; faithful stub (unplanted) passed above
+HX member R=.4365 rho=.30: torus 34574x1 (Lambda' HNF), map singular values [1.00191 1.00032], bad offsets 2844, violations 0 -> PASS; blank density 0.081796 (exact 1414/17287)
+  planted square (0, 0) coloured 1: violations 900, at the plant True -> FIRES; faithful stub (unplanted) passed above
+ALL AS EXPECTED

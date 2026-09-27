@@ -1,0 +1,25 @@
+D1: hull-vertex pairs of H0 u Q0 against pair 1 = 7R^2 - 4R rho + rho^2, for t = rho/R in (0,1)
+  every pair <= pair 1 on t in [0,1]: True ; pair 1 itself is hull pair (5, 7)
+D2/D3: exact min distances over classes, at R = 1, as t varies (checker, exact in Q(sqrt3))
+  site norm  3 pair2 : min(T0, H) = 2.000000R; min(Q, H) at t=.01,.25,.5,.75,.86: [2.005019, 2.136001, 2.291288, 2.462214, 2.541574]; >= pair2 True; == pair2 True
+  site norm  4 (C)   : min(T0, H) = 2.598076R; min(Q, H) at t=.01,.25,.5,.75,.86: [2.598076, 2.598076, 2.598076, 2.610077, 2.622899]; >= pair2 True; == pair2 None
+  site norm  7       : min(T0, H) = 3.000000R; min(Q, H) at t=.01,.25,.5,.75,.86: [3.0, 3.0, 3.0, 3.0, 3.0]; >= pair2 True; == pair2 None
+  site norm  9       : min(T0, H) = 3.464102R; min(Q, H) at t=.01,.25,.5,.75,.86: [3.464102, 3.464102, 3.464102, 3.464102, 3.464102]; >= pair2 True; == pair2 None
+  site norm 12       : min(T0, H) = 4.000000R; min(Q, H) at t=.01,.25,.5,.75,.86: [4.0, 4.0, 4.0, 4.0, 4.0]; >= pair2 True; == pair2 None
+  site norm 13       : min(T0, H) = 5.291503R; min(Q, H) at t=.01,.25,.5,.75,.86: [5.299066, 5.482928, 5.678908, 5.878988, 5.968216]; >= pair2 True; == pair2 None
+  site norm 13       : min(T0, H) = 4.358899R; min(Q, H) at t=.01,.25,.5,.75,.86: [4.358899, 4.358899, 4.358899, 4.358899, 4.358899]; >= pair2 True; == pair2 None
+  site norm 16       : min(T0, H) = 6.062178R; min(Q, H) at t=.01,.25,.5,.75,.86: [6.062178, 6.062178, 6.062178, 6.067331, 6.072858]; >= pair2 True; == pair2 None
+  site norm 19       : min(T0, H) = 6.557439R; min(Q, H) at t=.01,.25,.5,.75,.86: [6.563543, 6.712861, 6.873864, 7.040064, 7.114745]; >= pair2 True; == pair2 None
+  site norm 19       : min(T0, H) = 6.244998R; min(Q, H) at t=.01,.25,.5,.75,.86: [6.244998, 6.244998, 6.244998, 6.244998, 6.244998]; >= pair2 True; == pair2 None
+  site norm 21       : min(T0, H) = 7.000000R; min(Q, H) at t=.01,.25,.5,.75,.86: [7.001436, 7.040064, 7.088723, 7.145803, 7.173535]; >= pair2 True; == pair2 None
+  site norm 25       : min(T0, H) = 6.928203R; min(Q, H) at t=.01,.25,.5,.75,.86: [6.928203, 6.928203, 6.928203, 6.928203, 6.928203]; >= pair2 True; == pair2 None
+  site norm 27       : min(T0, H) = 7.549834R; min(Q, H) at t=.01,.25,.5,.75,.86: [7.549834, 7.549834, 7.549834, 7.549834, 7.549834]; >= pair2 True; == pair2 None
+  site norm 28       : min(T0, H) = 7.211103R; min(Q, H) at t=.01,.25,.5,.75,.86: [7.211103, 7.211103, 7.211103, 7.211103, 7.211103]; >= pair2 True; == pair2 None
+  site norm 31       : min(T0, H) = 7.937254R; min(Q, H) at t=.01,.25,.5,.75,.86: [7.937254, 7.937254, 7.937254, 7.937254, 7.937254]; >= pair2 True; == pair2 None
+  site norm 31       : min(T0, H) = 7.810250R; min(Q, H) at t=.01,.25,.5,.75,.86: [7.81025, 7.81025, 7.81025, 7.81025, 7.81025]; >= pair2 True; == pair2 None
+  H-H min over L7 = 2.645751R (sqrt7 = 2.645751); T-T min = 3.605551R (sqrt13 = 3.605551)
+  (C) - pair2 (rho >= R/2) = 3*R*(R - rho); (C) - pair2 (rho <= R/2) = (11*R**2 - 8*R*rho - 4*rho**2)/4 (>= 27/4 - 21/4 > 0); H-H - pair2 = (R - rho)*(3*R + rho); T-T - pair2 = 9*R**2 - 2*R*rho - rho**2
+D4: the stall
+  pair2 - pair1 (in R^2 units) = 6*t - 3  -> needs t >= 1/2 (since pair2 >= (1+e)^2 > (1-e)^2 >= pair1)
+  at t = 1/2, eps = 0: R = [2*sqrt(21)/21]; delta* = (2 pi/(21 sqrt3)) t^2 = sqrt(3)*pi/126 = 0.043186; pi/(42 sqrt3) = 0.043186
+ALL HOLD
