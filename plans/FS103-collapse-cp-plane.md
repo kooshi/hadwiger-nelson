@@ -614,3 +614,36 @@ FS103-B's corrections applied in the file: `ϑ` defined (FS103-F-TJ); DV's step 
 verdict); F's `ρ(F)` renamed `α_loc(F)` against MRVZ's Hall ratio `ρ(ℝ²)`.
 
 ### Stage 2 — SAVED
+
+### Stage 1b — SAVED (FS103-N's verdict relayed by the owner; §1.3 filled; derivation file §3 filed)
+
+**1.3 Reconciliation — FS103-M and its blind check FS103-N** (`plans/FS103-M-derivation.md`; `plans/FS103-N-verification.md`, blind to M's record
+until `245dfbf1`; report `data/fs103/reports/FS103-N.md`).
+
+| claim (`data/fs103/claims-m2.md`) | M | N | ruling |
+|---|---|---|---|
+| M1 (C-FMT (c)) `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)` | TRUE | TRUE (N-M1), same route outline | **TRUE, [hand], two** — C-FMT (c) and C-CPM move from GAP (route) to TRUE |
+| M1's general form (Rajchman edge measures on `ℝⁿ`) | stated with `supp σ = T` in M's source | TRUE with `T ⊆ supp σ`; **FALSE without** (N-SUPP: `T = ±[1,2] ∪ {±3}`, `σ` Lebesgue on `±[1,2]`, `χ_m⁰ ≤ 3 < 4 ≤ χ_CP`) | **TRUE with the support hypothesis**, two; the claims-m2 trim that dropped it is an **owner slip** (N's held item) |
+| M1′ `χ_CP = χ_m⁰ = χ(A_σ)` | TRUE | TRUE (N-OP: `A_σ`-independent iff `(Leb × σ)`-null monochromatic pairs) | **TRUE, two**; BDOV do not state `χ(A_σ) = χ_m⁰` |
+| M1″ (C-CPM, no MR) `χ_CP ≤ χ_m ≤ χ_B` | TRUE | TRUE | **TRUE, two** — the stub's "`χ_CP ≤ χ_m`" now has its derivation (inventory item 7) |
+| M1.1, M1.2 | TRUE | TRUE ("not otherwise" read existentially) | **TRUE, two** |
+| A-E3′ `χ_m⁰(Cay(ℝ, {±1, ±√2})) = 3` | TRUE | TRUE (N-AE3: also `χ_m = χ_B = 3`) | **TRUE, two** |
+| Q4 (given MR) `χ(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)` | TRUE | TRUE given MR and the held collapse | **TRUE given MR, two**; N-EASY (below) shows its strength is the collapse |
+| N-EASY `χ(ℝ²) ≤ χ_m⁰(ℝ²)`, no MR, no CP | — | TRUE (random rigid motion, Fubini, de Bruijn–Erdős) | one mind (N), classical in shape; also through M1 at two |
+| NR (the pointwise Følner route fails) | sketch | not in N's list | M, with V2's route GAP at the same step |
+| D1–D5 (C-FMT (d) reduced) | GAP reduced to a finite list-colouring problem on Falconer's `E` | not in N's list | **one mind (M)**; (d) stays GAP in every record |
+
+Divergences of truth: none (N's report). N's corrections, each carried into the drafts: `[Falconer1981]` held and read in full, it bounds `χ_m`
+not `χ_m⁰`; `[BachocEtAl2014]` §2.5–2.6, §3.1 read; `[KechrisMarks2020]` §3 definitions and Ex. 5.1 read; **naming** — Kechris–Marks' `χ⁰_µ`
+(invariant conull vertex sets) is not this project's `χ_m⁰` (null sets of edges): rename in any write-up. Prior-art debt (N): "a.e.-proper
+measurable colouring + Rajchman edge measure ⟹ stationary CP colouring" not searched. **Owner slips** (N's held item, the owner's relay): the
+claims-m2 trim dropped M1's support hypothesis (false as written); N's brief pointed to "A-E3 in the claims", which no open file held.
+
+**What the reconciliation now holds** (to be stated in the verdict): with no MR, `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)`, two
+minds; given MR, `χ(ℝ²)` equals all of the first three and `χ(ℚ(√635087)²)`, two minds (two blind for the collapse). Falconer's `χ_m` is one step
+away (C-FMT (d)), a GAP in every record, reduced to a finite list-colouring question on a null set at one mind.
+
+`plans/FS103-derivation.md` §3 filed (10 entries: FS103-M1, -M1b, -M1c, -M-FREE, -M-NR, -M-NSUPP, -M-AE3, -M-EASY, -M-D, -M-Q4); the checker
+parses 33 entries, failing only on their missing § B rows (`data/fs103/fs103-c/ledger-b-check.out`).
+
+### Stage 1b — SAVED

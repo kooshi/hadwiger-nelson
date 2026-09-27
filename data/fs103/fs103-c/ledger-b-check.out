@@ -1,0 +1,36 @@
+FAIL: entry FS103-635 has no LEDGER.md § B row
+FAIL: entry FS103-635TF has no LEDGER.md § B row
+FAIL: entry FS103-B-AMEN has no LEDGER.md § B row
+FAIL: entry FS103-B-CHIF has no LEDGER.md § B row
+FAIL: entry FS103-CPUP has no LEDGER.md § B row
+FAIL: entry FS103-CTL has no LEDGER.md § B row
+FAIL: entry FS103-CX has no LEDGER.md § B row
+FAIL: entry FS103-DG has no LEDGER.md § B row
+FAIL: entry FS103-F-47 has no LEDGER.md § B row
+FAIL: entry FS103-F-DV has no LEDGER.md § B row
+FAIL: entry FS103-F-EXT has no LEDGER.md § B row
+FAIL: entry FS103-F-FRAC has no LEDGER.md § B row
+FAIL: entry FS103-F-PL has no LEDGER.md § B row
+FAIL: entry FS103-F-ROUND has no LEDGER.md § B row
+FAIL: entry FS103-F-SI has no LEDGER.md § B row
+FAIL: entry FS103-F-TF has no LEDGER.md § B row
+FAIL: entry FS103-F-TJ has no LEDGER.md § B row
+FAIL: entry FS103-F1 has no LEDGER.md § B row
+FAIL: entry FS103-FMT has no LEDGER.md § B row
+FAIL: entry FS103-LB has no LEDGER.md § B row
+FAIL: entry FS103-M-AE3 has no LEDGER.md § B row
+FAIL: entry FS103-M-D has no LEDGER.md § B row
+FAIL: entry FS103-M-EASY has no LEDGER.md § B row
+FAIL: entry FS103-M-FREE has no LEDGER.md § B row
+FAIL: entry FS103-M-NR has no LEDGER.md § B row
+FAIL: entry FS103-M-NSUPP has no LEDGER.md § B row
+FAIL: entry FS103-M-Q4 has no LEDGER.md § B row
+FAIL: entry FS103-M1 has no LEDGER.md § B row
+FAIL: entry FS103-M1b has no LEDGER.md § B row
+FAIL: entry FS103-M1c has no LEDGER.md § B row
+FAIL: entry FS103-R1 has no LEDGER.md § B row
+FAIL: entry FS103-S has no LEDGER.md § B row
+FAIL: entry FS103-SEL has no LEDGER.md § B row
+census: 817 theorems in 67 derivation files: ASTRA-2026-09-14=10, FS100=63, FS103=33, FS25=4, FS32=2, FS36=2, FS38=7, FS39=1, FS50=6, FS53=4, FS54=11, FS56=7, FS58=9, FS61=5, FS62=6, FS66=18, FS67=20, FS70=11, FS73=45, FS75=7, FS79=49, FS81=25, FS85=39, FS86=68, FS89=64, FS91=73, M18=1, M2=12, M3=46, M31=1, M32=1, M35=1, M36=1, M39=1, M40=5, M41=1, M43=2, M45=1, M48=1, M49=3, M50=2, M51=1, M52=2, M53=14, M54=4, M55=7, M56=7, M57=9, M58=3, M59=6, M60=3, M61=5, M62=4, M63=3, M63C=3, M63D=7, M63G=5, M63H2=11, M63H3=9, M63H4=4, M64=3, MASCOT=11, Q8=2, R52=4, R57=1, R59=2, R88=19
+LEDGER § B rows: 784 | placeholders: 0
+RESULT: FAIL (33)

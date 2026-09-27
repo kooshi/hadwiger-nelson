@@ -29,7 +29,9 @@ finitary independence ratio of `F²` is `max(m₁(ℝ²), sup_v r_v)` (FS103-F-F
 — the first clause of `[DuczVarga2026]` Conjecture 1 — and `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.04876` (FS103-F-DV, two minds). **The collapse
 holds, given MR**: at every totally real field with every stable place 6-thick, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`, with ℚ(√635087) and de Grey's
 field as instances (FS103-F1, two blind); its load-bearing step needs no MR (FS103-LB, two blind + two held). The colour count enters that step
-at the same pigeonhole (two blind). Where `χ_CP` sits against the measurable numbers is §3 (one mind, FS103-N pending).
+at the same pigeonhole (two blind). **And `χ_CP` is a measurable number**: with no MR, `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)`, the measurable chromatic
+number with null sets of edges ignored, `[BachocEtAl2014]`'s operator chromatic number (FS103-M1b, two minds) — so, given MR, Hadwiger–Nelson
+is that number (FS103-M-Q4, two minds). Falconer's `χ_m` (proper at every edge) is one step further, the null-set step, still a GAP (FS103-M-D).
 
 ## §1. The collapse (the fixed claim list, `data/fs103/claims.md`)
 
@@ -87,18 +89,45 @@ header's reason).*
 
 ## §3. Where `χ_CP(ℝ²)` sits (FS103-M; its blind check FS103-N)
 
-*Filed at the end of this job, when FS103-N's verdict is relayed (the brief's order). Until then the entries of this section are FS103-M's, one
-mind each, candidates.*
+*M = `plans/FS103-M-derivation.md` (one mind, not blind; A-E5's route written out); N = `plans/FS103-N-verification.md` (blind to M's record
+until its stage 3, commit `245dfbf1`; claims `data/fs103/claims-m2.md`, statements copied by the owner). "Two minds" below = M and N, same route
+outline, no divergence of truth (N's report). The owner's trim of M1's general form dropped "`T ⊆ supp σ`" and was false as written (N-SUPP) —
+an owner slip, not M's. **Naming:** `[KechrisMarks2020]`'s `χ⁰_µ` (invariant conull vertex sets) is **not** this project's `χ_m⁰` (null sets of
+edges) — rename before any write-up (N §3.3). Every entry: **Kernel:** declined (measure theory on `L^∞(ℝ², Δ_k)` with weak-* compactness and
+Fourier decay of the circle measure is within Mathlib's reach only piecemeal; a candidate for FS-101 after the collapse's own slot — the owner's
+call).*
+
+**FS103-M1 — `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`: a measurable `k`-colouring proper at almost every edge gives a CP `k`-colouring (the invariant measures on its translates' weak-* orbit closure in `L^∞(ℝ², Δ_k)` are continuous in probability for free; properness passes to the limit because `σ̂ = J₀ → 0`; one random threshold rounds `Δ_k` to `[k]`). General form: for a finite Rajchman `σ` on `ℝⁿ` and symmetric `T ⊆ supp σ`, `χ_CP(Cay(ℝⁿ, T)) ≤ χ_m⁰(ℝⁿ, σ)` — false without `T ⊆ supp σ` (FS103-M-NSUPP). [hand, two (M; N blind)]** *Proof:* M §2.2; N §2.1 (N-M1). *Proof verdict:* TRUE for ℝ², both; the general form TRUE with the support hypothesis (N). *Rests on it:* FS103-M1b, -M1c, -Q4; the C-FMT (c) and C-CPM verdicts (GAP → TRUE). *Prior art:* the gate (FS103-G §2.2): not found; `[BachocEtAl2014]` prints `χ(A) ≤ χ_m` for operators respecting `G`, not this; "a.e.-proper measurable colouring + Rajchman edge measure ⟹ stationary CP colouring" not searched (N) — a debt. *Kernel:* declined.
+
+**FS103-M1b — `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)`, with no MR: `[BachocEtAl2014]`'s operator chromatic number of the circle's convolution operator is the measurable chromatic number with null sets of edges ignored (a set is `A_σ`-independent iff `(Leb × σ){(x, w) : x, x + w ∈ I} = 0`). [hand, two (M; N-OP, N-FMTa blind), with FS103-FMT's `χ_m⁰ ≤ χ_CP` two blind]** *Proof:* M §2.2–§2.3; N §2.4. *Proof verdict:* TRUE, both; BDOV do not state `χ(A_σ) = χ_m⁰` (N). *Rests on it:* FS103-M-Q4; the collapse's landing problem. *Prior art:* BDOV define `χ(A_σ)` (§2.4, (9)) and bound it spectrally; its value is not posed as open in print (FS103-G §2.2). *Kernel:* declined.
+
+**FS103-M1c — With no MR: `χ(ℝ²) ≤ χ_CP(ℝ²) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)` (C-CPM). [hand, two (M; N)]** *Proof:* M §2.2 (FS103-M1 with `χ_m⁰ ≤ χ_m`). *Proof verdict:* TRUE, both. *Rests on it:* the stub's "`χ_CP ≤ χ_m`" (now derived; inventory item 7). *Prior art:* the header's. *Kernel:* declined.
+
+**FS103-M-FREE — Continuity in probability is free for translation-invariant measures on `Δ_k`-valued `L^∞(ℝⁿ)` (the Lebesgue-point version is stationary, jointly Borel and continuous in `L¹(P)`); properness survives weak-* limits when the edge measure is Rajchman, and not in general (`σ = (δ₁ + δ₋₁)/2` on `ℝ`: everywhere-proper 2-colourings tend to `(1/2, 1/2)`). [hand, two (M1.1, M1.2; N-M1.1, N-M1.2 — "not otherwise" read existentially)]** *Proof:* M §2.2; N §2.2–§2.3; `tools/fs103_m_controls.py` (C1–C4, plants fire). *Proof verdict:* TRUE, both. *Rests on it:* FS103-M1. *Prior art:* the header's. *Kernel:* declined.
+
+**FS103-M-NR — The verifiers' route fails: a Følner limit of random translates taken pointwise in `[k]^{ℝ²}` (product topology) need not be continuous in probability — a proper Borel 7-colouring (a zigzag hexagonal colouring) has a discontinuous limit. [hand, sketch; M, with V2's route GAP at the same step]** *Proof:* M §2.4. *Proof verdict:* not re-derived by N; V1 and V2 each stopped there. *Rests on it:* the C-FMT (c) ruling (a gap of the route, not of the claim). *Prior art:* none. *Kernel:* declined.
+
+**FS103-M-NSUPP — (N-SUPP) Without `T ⊆ supp σ` the general form of FS103-M1 is false: `T = ±[1, 2] ∪ {±3}`, `σ` Lebesgue on `±[1, 2]`, has `χ_m⁰ ≤ 3 < 4 ≤ χ_CP`. [hand, one mind (N)]** *Proof:* N §2.1. *Proof verdict:* not re-checked. *Rests on it:* FS103-M1's stated hypothesis. *Prior art:* none. *Kernel:* declined.
+
+**FS103-M-AE3 — On `Cay(ℝ, {±1, ±√2})`: `χ = 2`, `χ_CP = 3`, `χ_m⁰ = χ_m = χ_B = 3` (the arithmetic-free control: measurable and CP numbers agree where both exceed `χ`). [hand + tools exact, two (M's A-E3′; N-AE3), over A-E3 (three minds)]** *Proof:* M §2.1; N §2.6. *Proof verdict:* TRUE, both. *Rests on it:* FS103-CTL. *Prior art:* Shelah–Soifer's line example (`s − t − √2 ∈ ℚ`) is its ZF shadow. *Kernel:* declined.
+
+**FS103-M-EASY — (N-EASY) With no MR and no CP: `χ(ℝ²) ≤ χ_m⁰(ℝ²)` (a random rigid motion, Fubini, de Bruijn–Erdős); so "if `χ(ℝ²) ≥ 6`, every measurable 5-colouring of the plane has a positive-measure set of monochromatic unit pairs" is unconditional. [hand, one mind (N); classical in shape; also follows from FS103-CPUP and FS103-M1, two minds]** *Proof:* N §2.7 (C6). *Proof verdict:* not re-checked; the same inequality holds through FS103-M1 at two minds. *Rests on it:* FS103-M-Q4's direction "≤". *Prior art:* classical in shape (Falconer-type averaging); not searched as stated. *Kernel:* declined.
+
+**FS103-M-D — The null-set step (C-FMT (d), `χ_m⁰ = χ_m`) reduced, still a GAP: (D1) a point of positive upper density of a class is never at distance 1 from a density point of the same class; (D2) every point of Falconer's null set `E` (the metrical boundaries) has at least two colours of positive upper density; (D3) `χ_m(ℝ²) ≤ k` iff some a.e.-proper measurable `k`-colouring has a boundary (a null `D ⊇ E`) list-colourable from lists of size `≥ 2` — a question about finite configurations, no measurability needed; (D4) a colouring with slack gives a Borel colouring proper on an annulus, so `χ_B ≤ χ^{sl}`; (D5) `χ^{sl}(ℝ²) ≥ 6` (`[CurrieEggleton2016]` Thm 1), so if `χ_m⁰ = 5` the five colours are tight. [hand, one mind (M); D5 + external, read]** *Proof:* M §3.1. *Proof verdict:* not in N's claim list; one mind. *Rests on it:* FS-104's question 2 ("colour the metrical boundary"); the named obstruction (a finite non-list-colourable configuration inside `E`). *Prior art:* `[Falconer1981]` Lemma 2 (the null set `E`); `[CurrieEggleton2016]` Thm 1; Croft 1982 (unheld). *Kernel:* declined.
+
+**FS103-M-Q4 — Given MR(ℚ(√635087)): `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ) = χ(ℚ(√635087)²)` — Hadwiger–Nelson is the measurable chromatic number of the plane with null sets of edges ignored; `χ(ℝ²) ≤ k` iff the plane has a measurable `k`-colouring in which almost every unit pair is bichromatic; `χ(ℝ²) ≥ 6` iff every measurable 5-colouring has a positive-measure set of monochromatic unit pairs. [hand, two (M; N), a composition: FS103-F1 (two blind), FS103-M1 or FS103-M-EASY with FS103-FMT, MR (row 120's grade)]** *Proof:* M §3.3; N §3.1. *Proof verdict:* TRUE given MR, both; its strength is the collapse (N-EASY gives `χ ≤ χ_m⁰` without it). *Rests on it:* row 130; FS-102's possible lead. *Prior art:* not found in print (FS103-G §2.1–§2.2); nearest: `[Payne2009]`'s "ambiguous chromatic number", `[KechrisMarks2020]` Ex. 5.1 ("the exact values of χ(U), χµ(U), χB(U) are unknown"). **Not claimed:** `χ(ℝ²) = χ_m(ℝ²)` (Falconer's number; C-FMT (d)); `χ_B`; any value. *Kernel:* declined.
 
 ## §G. Stated and not proved (no truth claims; not entries)
 
 - **C-MR16** — MR at `F_dG` by row 120's derivation walked at degree 16 (PE-2's admissibility; EF_F⁺'s count `c·M^{1/16}`): unreached by both
   verifiers → FS-105.
-- **The advisor's A-E5** (`χ_CP = χ_m⁰` by a weak-* orbit closure; a sketch): written out by FS103-M as M1, M1′ (§3).
+- **The advisor's A-E5** (`χ_CP = χ_m⁰` by a weak-* orbit closure; a sketch): written out by FS103-M as M1, M1′ and checked blind by FS103-N (§3).
+- **M's hunch** (M §3.1): two adjacent points of `E` cannot have `P(x) = P(y) = {a, b}` — killing test: an a.e.-proper colouring with such a pair → FS-104.
+- **M's reading** (M §3.3): if the chain (MR, the load-bearing step, M1) and question 2 are provable in ZF + DC, the plane's chromatic number is absolute between ZFC and ZF + DC + LM (Soifer's Open AC Problem 62.14 at `n = 2`) — killing test: a step needing more than DC → FS-104.
 - **C-S (d)** — S over every subfield of ℝ: Q-const (G63).
 - **B's DV proposal for `f(n)`**: Erdős's `f(n)` asymptotics `f(n)/n → m₁`, given MR — contained in FS103-F-DV.
 
 ## §K. Kernel decisions, summarised
 
-stub: FS-101 (Phase 4, held for Kooshi) — FS103-LB (as a named hypothesis), FS103-F1, FS103-CPUP, FS103-635, FS103-DG. Declined (no Haar theory on
+stub: FS-101 (Phase 4, held for Kooshi) — FS103-LB (as a named hypothesis), FS103-F1, FS103-CPUP, FS103-635, FS103-DG. Phase 3 (§3): declined now, a candidate after the collapse's slot (the owner's call). Declined (no Haar theory on
 duals of non-finitely-generated rings; tools-exact lists checked by PARI with plants) — every other entry.
