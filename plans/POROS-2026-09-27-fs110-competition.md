@@ -267,3 +267,89 @@ at `u, v`, nothing assumed at `w₀`, from `B_u ∩ B_v = ∅`; N — TRUE and e
 A-CIRC plus the contact lemma. **They are not in tension**: Y's covers N's GAP only as far as Y's vertex list is complete, and Y has withdrawn the claim
 of completeness. So C-TAN-POS stands at **TRUE for the named vertex kinds (Y, one mind) and TRUE at non-vertex `w₀` (N, one mind), with completeness of
 the vertex kinds at `u, v` open** — which is C-SEAMLIST's question in another place. That is the next thing I watch.
+
+## Stage 3 — SAVED
+
+## Stage 4 — SAVED: round 1's comparison at both hand-backs (brief item 6)
+
+*Read in full at the hand-back commits: `plans/FS110-N-proof.md` (stages 1–3, `0b2ab4a0`), `plans/FS110-Y-construction.md` (stages 1–3, `8d935aa7`),
+`data/fs110/reports/FS110-N.md`, `FS110-Y.md`. Neither blind verifier is running; nothing here went to a side. Successors FS110-N2 and FS110-Y2 were
+launched by the owner; on Y2's request card 1 was resent verbatim to **both** (N2 too, so the two hold one text), with a round-2 pre-round question and
+A2-V56 as a frame fact (`data/fs110/fs110-a2/round2-open.md`).*
+
+### 4.1 Convergences of truth (independent unless marked)
+
+| finding | N | Y | minds now |
+|---|---|---|---|
+| A-EXACT, A-CIRC (cusp colours included), A-SIX, D-TYPE | TRUE | TRUE | A-EXACT, A-CIRC, A-SIX three (FS110-A, N, Y); D-TYPE two (N, Y) |
+| types need only the union `[6]`; overlap allowed | stage 1, unprompted | after card 1 | two |
+| the corrected strong escape ("a class of `P(u)` wholly on each side"): four-colour vertices escape with no colour repeated | after card 1 | **stage 1, unprompted (Y-SIX)** | three (A2, Y independent; N after the card) |
+| **C-CUSP-K TRUE** (the cusp seam closes on closure types) | N-HORN (a horn is seen like a ray; missed from both sides iff `κ₂ ≤ 1 ≤ κ₁`) and N-SEAM's exact route | Y-BLOCK's cusp row (a one-sided band) | two, different routes; FS110-A's hunch `cusps-close-under-closure-types` confirmed |
+| **C-TAN-POS TRUE** where each derivation reaches | at a non-vertex `w₀`, exact (N-SEAM) | for the named vertex kinds at `u, v` (Y-BLOCK) | two, complementary routes; neither covers the vertex-`w₀` case with a complete vertex list |
+| **the seam point `w₀` of a surviving pair without a unit arc is a vertex of degree `≥ 4` whose tiles alternate between the two points' colours around the four unit tangents** | N-X (a): pattern `v, u, v, u`, at least four colours at `w₀` | Y-T2W: "degree `≥ 4`, with alternating branches" (for T2) | two, independent, for different sub-cases (N: no unit arc at `w₀`; Y: T2) |
+
+### 4.2 Divergences
+
+- **Of truth: none.** (As at FS-106 and FS-107: every correction came from the claim list's words, not from one side against the other.)
+- **Of scope:** C-SEAMLIST — N: **MISSTATED** (it lists failures of C-T-TAN's density hypotheses, not of the map's survival; corrected to the dichotomy
+  (S1)/(S2) at `w₀`, proved complete, "only if"); Y did not work it. C-TAN-POS — as in stage 3. "Strong escape" — Y: **MISSTATED** as defined; N: its
+  statements carry the type-size condition. Both are corrections owed to `claims.md`.
+- **Of route:** N reads the seam point `w₀` exactly, on LIM, with no scale (N-SEAM: A-CIRC in closure form plus an exact contact lemma); Y reads the
+  vertex figures at `u, v` through blocking sets at scale `s` (Y-BLOCK). Y built an exact curved checker (7 controls, 4 plants) and a family no-go on the
+  bicycle (Y-BIKE-3C, correctly scoped to its family: "What it leaves: colourings not periodic in `60°` cells"). N wrote no tools.
+
+### 4.3 Retractions (from the registrations on)
+
+| mind | count | what, and what killed it |
+|---|---|---|
+| N | 1, free | N-SEAM (d)'s "a colour in two sectors" at type size `≥ 4` — card 1 point 2 |
+| Y | 2, free | Y-BLOCK's "fat" row and "exactly five shapes" — card 1 point 3; its stage-1 reading of "strong escape" — card 1 point 2 (now MISSTATED on the list) |
+| A2 | 0 cards retracted; 1 hunch killed | `the-no-stalls-at-the-count-not-at-a-seam` (4.5) |
+
+**As at FS-107, the disagreement proper never started**: every retraction was a side against the claim list's words, prompted by one card. The two
+registrations were not each other's negation; each bet against the other's cheapest escape, and neither side reached the step the other bet against.
+
+### 4.4 Break points
+
+- **N:** C-ACT1 untouched ("the step the NO most needs"); the vertex case (S2) with some unit arcs at `w₀` (T2 among them) a GAP; C-T2, C-BOW-K, C-V5-K,
+  SEAM-S not worked. N's one observation on Act One: a four-colour vertex's circle meets at most two colours, and a switch point on it is a covering
+  pair at distance 1. **With A2-V56 (one colour cannot fill a unit circle), every tight six-map with a four-colour vertex has a covering pair at distance
+  1: Act One's open case is the maps whose every vertex has at most three colours** (bowties included). [hand, one mind for the combination: A2]
+- **Y:** C-T2 (i) a GAP at the construction (the `d = 1` rhombus in `ℚ(√3)`, not built for budget); C-T-BIKE a GAP beyond the `60°`-cell family.
+
+### 4.5 Predictions scored
+
+- **The registrations:** Y's (C-BOW-K (ii) GAP) and N's (C-T2 (ii) FALSE) — both **untested**: neither side reached the step the other bet against.
+- **The planner's §5.3:** E1 (A-EXACT confirmed by both, 0.85) **met**. E2 (SEAM-T1 closed at positive scale, 0.7) **met at one mind** (Y's T1 rows; N's
+  (S1)/(S2) implies it with no scale). E3 (T2 realised locally, 0.4) **not met** (GAP at the construction). E4 (C-BOW-K (i) TRUE, 0.6) **met, one mind** (Y).
+  E5 (SEAM-C reduces to SEAM-T, 0.6) **met, two minds**. E6 (C-T-BIKE decided, 0.3) **not met** (a family no-go). E7 (Act One, 0.45) **not met**; reduced
+  to maps with at most three colours per vertex (4.4). E8 (C-SEAMLIST extended by an unnamed kind, 0.25) **not met in its letter**: no new kind, but the
+  list re-derived as a dichotomy at `w₀` and found MISSTATED (N). E11 (a named obstruction, 0.8) **met** (N-X; Y-BIKE-3C). E9, E10, E13 untouched; E12
+  waits on the verifiers.
+- **FS110-A's hunches:** `c5-fails-in-band-form-at-unit-arcs` — **confirmed by an independent derivation** (Y-BLOCK's T2 row: a thin double wedge, no
+  band); `tangency-is-no-escape-against-a-blocking-partner` — **confirmed by an independent derivation** with its "strong escape" corrected (Y: band against
+  wedge fails at every positive depth); `cusps-close-under-closure-types` — **confirmed, two minds**; `bowtie-and-bicycle-outlive-tangent-and-cusp` — open,
+  **as predicted so far** (T1 and cusp closed at the pair level; bowtie, bicycle and T2 open); `complementary-means-union-six` — confirmed (stage 1).
+- **Mine:** `c-tan-pos-misstated-at-four-colour-vertices` — **confirmed, two minds** (Y independent). `the-no-stalls-at-the-count-not-at-a-seam` —
+  **killed**: N's first GAP was local (C-TAN-POS at a vertex `w₀`, stage 1); my falsifier's list of local claims omitted C-TAN-POS itself, a G21
+  instance of my own. `the-yes-breaks-at-the-cascade` — open (Y realised no seam; its first obstruction is a family no-go on the bicycle, not a vertex
+  rule). `the-registrations-name-global-steps` — confirmed.
+
+### 4.6 What round 2 should aim at (a decision in four parts, for the owner)
+
+- **The choice:** aim both sides at the **seam point `w₀`** as the object: N-SEAM's dichotomy says a surviving pair has at `w₀` either (S1) a unit arc
+  centred at an escaping vertex, or (S2) a vertex of degree `≥ 4`, which without unit arcs is a four-colour vertex whose unit circle spawns covering
+  pairs at distance 1 (N-X). Concretely: the proof side takes **Act One on maps with at most three colours per vertex** (the four-colour case is closed,
+  4.4) and **(S1)'s cascade** (the escaping centre's own unit circle); the construction side takes **(S1) first** — one unit arc through `w₀` centred at a
+  bowtie — before the double rhombus.
+- **The alternative weighed:** the successors' briefs as the owner wrote them — the construction side starting on the T2 rhombus at `d = 1` in `ℚ(√3)`,
+  the proof side on C-T2 (ii) and C-BOW-K (ii).
+- **Why this one:** (S1) is the only escape at a non-vertex seam point (N-SEAM, one mind), needs one unit arc and one bowtie against T2's four unit arcs
+  and two vertices of degree `≥ 4`, and has a checked local model (Townsend's `⅔π` sector, TS-U's control); and Act One, which decides whether seams are
+  needed at all, is now half closed. Both round-1 records reach the four-colour vertex at `w₀` independently (4.1, last row).
+- **Confidence: medium.** It changes if (S1) is shown inconsistent in a line (TS-U at the bowtie centre forbidding the repeated colour in the side cones),
+  which would make T2 the cheapest live seam after all.
+- **Default:** if the owner changes nothing, the successors work their briefs' lists and I advise them identically; this recommendation is not sent to
+  either side (it rests on both sides' round-1 routes).
+
+## Stage 4 — SAVED
