@@ -507,6 +507,17 @@ infinitely many wiggles, the print's form is the weaker hypothesis on the map; n
 ### Theorems this phase proved (FS110-Y3)
 
 - **Y3-C5** — in `𝓜_K`, the print's Condition 5 and "no boundary arc of radius 1" coincide — [hand, one mind, trivial], above.
+- **Y3-GP** — a ring (§7.1's) whose change points are never at angular distance `≡ 0 (mod 60°)` from one another winds `W ≡ 3 (mod 6)`; so
+  `W ∈ {0, ±1, ±2}` needs two change points at distance 1, `√3` or 2 — [hand, one mind; `tools/fs110_y_ring.py` checks it on named rings], §8.2.
+- **Y3-PROP** — N2-TRANS rederived from NB-4 and NB-5 at both ends of the edge, at every vertex with `|P_cl| = 3` (bowties included) and through
+  bichromatic vertices on edges of one colour pair; `|W|` is one constant on a connected map — [hand, one mind; N2-TRANS's second derivation], §8.3.
+- **Y3-FLIP** — a tile with all boundary vertices of type `{a, b_{i−1}, b_i}` returns the ring orientation with sign `(−1)^k`, `k` the same-type steps
+  — [hand, one mind, derived before §7.1 arrived; agrees with N2-FLIP's statement], §8.3.
+- **Y3-BOW** — at a bowtie `(a, b, a, c)`, tile `b`'s flanking vertices `{a, b, x}`, `{a, b, y}` (next trichromatic vertices along its two `b|a` edges)
+  satisfy `x = y` or `c ∈ {x, y}` in a winding map, else `W = 0`; so the bowtie counts as one merged neighbour of tile `b`, a same-type step iff
+  `x = y` — the count extended to bowtie-flanked tiles — [hand, one mind], §8.4.
+- **Y3-SIX** — no vertex of degree 3 with three essential sectors has a ring of exactly six arcs (the aligned `|W| = 2` ring), in a tight six-map in
+  `𝓜_K` under Condition 5 with NB-4 and NB-5 — [hand, one mind; the distances exact], §8.5.
 
 ### Fence log (FS110-Y3)
 
@@ -527,3 +538,101 @@ The pre-round answer and the Condition-5 statement above, sent to "main" at 10:4
 swap"): `claims.md` §7 names them, and every source that defines them is fenced for me. Retractions are counted from here on.
 
 ## Stage 7 — SAVED (FS110-Y3)
+
+## Stage 8 — SAVED (FS110-Y3): the winding frame rederived; Y3-GP, Y3-BOW, Y3-SIX
+
+### 8.1 Reconciliation with `claims.md` §7.1 (read from disk after commit `dacc10e3`)
+
+My first-principles reading (sent to "main" at stage 7) and §7.1 **agree** on the ring (`ω(u)°` coloured by `t^c`), on `W` (the lift's turn count
+over 3), on N2-TRANS (the third colour of `u′` replaced by that of `u`) and on the count `k` with parity `(−1)^k` (Y3-FLIP was derived before §7.1
+arrived; its bookkeeping is §7.1's). **Differences:** (i) N2-TRANS's hypothesis is "an Act-One-free map without unit arcs"; mine is NB-4 and NB-5 at
+both ends of the edge, which is what the homotopy uses (the list of bad types below). (ii) I work, as card 4 asks and N3 answered, with "trivalent"
+read as `|P_cl(u)| = 3` at any degree. (iii) §7.1's swap point I do not use.
+
+### 8.2 Y3-GP — the winding of a ring in general position [hand, one mind]
+
+Ring colours `ℤ/3`, lift `h` (`±1` at each change point), `D(θ) = h(θ + 60°) − h(θ)`, defined off change points and their `−60°` translates. `D ≢ 0
+(mod 3)` there (N-E0). **General position:** no two change points at angular distance `≡ 0 (mod 60°)`. Then `D` changes by `±1` at one event at a
+time, so it stays in one window `{3m + 1, 3m + 2}`. At the six points `θ + 60°k` the values `D_k` sum to `3W`. When `θ + 60°k` crosses a change point,
+`D_k` and `D_{k−1}` move by `∓1` and `±1`: the number `n₂ = #{k : D_k = 3m + 2}` is invariant, and `n₂ ∈ {0, 6}` is impossible (the first event would
+push a `D` to `3m` or `3m + 3`; every ring has change points, its arcs being `≤ 60°`). Closure `Σ D_k ≡ 0 (mod 3)` gives `n₂ ≡ 0 (mod 3)`, so
+`n₂ = 3` and **`3W = 18m + 6 + n₂ = 18m + 9`: `W = 6m + 3`.** Hence `|W| ≥ 3` for every ring in general position, and `W ∈ {0, ±1, ±2}` needs two
+change points of `ω(u)` at distance 1, `√3` or 2. Controls: the alternating two-colour ring (six arcs of `60°`, `W = 0`) and the ring `4,5,6,4,5,6`
+of six `60°` arcs (`W = 2`) are both aligned; nine arcs of `40°` give `W = 3`. **Consequence for W-3:** "`|W| ≥ 2`" is automatic at a ring in general
+position; it constrains only aligned rings.
+
+### 8.3 Y3-PROP and Y3-FLIP — N2-TRANS and the count, rederived [hand, one mind; a second derivation of N2-TRANS's statement]
+
+Along an edge with colours `{a, b}` from `u = {a, b, c}` to `u′ = {a, b, d}`, every circle `ω(z)`, `z` on the edge, has its tile-interior points
+coloured in `[6] ∖ {a, b}` (A-CIRC at `z`). Merge `c ~ d`; the three classes are `[cd]` and the two others `e, f`. The colouring of the swept region
+maps continuously to `|K₃|` off points whose closure type meets all three classes, i.e. of type `{c, e, f}` (complementary to `u′`) or `{d, e, f}`
+(complementary to `u`) — NB-4 excludes the four-sets. Every swept point is within distance `≤ 2` of both `u` and `u′` (the edge lies in a tile of
+diameter `≤ 1`), so NB-5 excludes both types (the case of distance exactly 2 is W-TAN's separate `d = 2` configuration). The rings `ω(u)`, `ω(u′)` are
+homotopic in the good set: `W(u)` on `(d, e, f)` equals `W(u′)` on `(c, e, f)`. The argument never uses the degree of `u` or `u′`, so it holds at
+bowties, and along a path of edges of one colour pair through bichromatic vertices. On a connected map `|W|` is therefore one constant. Y3-FLIP is
+§7.1's bookkeeping, found independently (the two outside labels leapfrog; the ring's parity is `(−1)^k`).
+
+### 8.4 Y3-BOW — extending the count to a tile flanked by a bowtie's repeated colour [hand, one mind]
+
+Bowtie `β = (a, b, a, c)`; tile `B` of colour `b` meets `β` between the two `a`-sectors, along two `b|a` edges; `v = {a, b, x}` and `v′ = {a, b, y}` the
+next trichromatic vertices along them. **One path:** every circle about a point of the two edges avoids `{a, b}`; merging `x ~ y` and applying 8.3's
+argument (bad types `{c, y, ·}`, `{c, x, ·}` complementary to `v`, `v′`; the path lies in `cl B`, diameter `≤ 1`) gives `W(v)` on `(c, y, z) = W(v′)` on
+`(c, x, z)`, the map `y ↦ x`. **Two steps:** N2-TRANS from `v` to `β` then from `β` to `v′` gives the map `c ↦ x, y ↦ c`. The two differ by the
+transposition `(x c)` of the target unless `x = y` (both identity) or `c ∈ {x, y}` (both `y ↦ c` or both `c ↦ x`). **If `x, y, c` are distinct, both
+homotopies are valid and disagree, so `W(v′) = −W(v′) = 0`**: a winding map has `x = y` or `c ∈ {x, y}` at every bowtie flank. In count terms: merge the
+bowtie's two `a`-neighbours of `B` into one (as at a bichromatic vertex); the merged step is same-type iff `x = y`, and the parity rule `(−1)^k` then
+holds for `B`. Controls: at a bichromatic vertex on a `b|a` edge the same one-path argument is 8.3's; at a trivalent corner the two edges have different
+colour pairs and no single merge exists, so no extra constraint arises there.
+
+### 8.5 Y3-SIX — no ring of exactly six arcs at a vertex of degree 3 [hand, one mind]
+
+`u = 0` of type `{1, 2, 3}`, three essential sectors; ring of exactly six arcs. Each arc is `≤ 60°` (A-EXACT's first clause), so all are exactly `60°`;
+by Y3-GP's closure the colours run `r₀ r₁ r₂ r₀ r₁ r₂` (`W = ±2`; a two-colour ring winds 0). Put the change points at `p_θ = e_θ`, `θ = 0°, 60°, …, 300°`.
+1. **Lens.** Every tile of colour `r` whose closure contains `p_θ` and which carries the arc `(θ, θ + 60°)` lies in `D̄(p_{θ+60°})` (diameter `≤ 1`;
+   Siamese for a second such tile). So at `p_θ` the two arc colours are confined to `D̄(p_{θ−60°})`, `D̄(p_{θ+60°})`, and the **outward wedge** of
+   directions `(θ − 30°, θ + 30°)` lies outside both: it carries a third colour `j(θ)`, so `p_θ` is a vertex of type `{r_prev, r, j(θ)}` (NB-4), and
+   `j(θ) ∈ {1, 2, 3}` (NB-5: `{r₀, r₁, r₂}` is complementary to `u` at distance 1).
+2. **Facing away.** The `j(θ)`-tile at `u` and the one in the outward wedge at `p_θ` are distinct (a tile joining them crosses `ω(u)`, against A-CIRC
+   at `u`); their cross-distance near `(u, p_θ)` is `1 + 2e_θ·(v − w) + …` with `e_θ·v > 0` on the wedge, so they are outer, and **`S_{j(θ)} ⊂ [θ + 90°,
+   θ + 270°]`**. Antipodal change points give `j(θ) ≠ j(θ + 180°)` (else `S_j` has angle 0).
+3. **Adjacent change points differ.** `ω(p_{60°})` passes through `p₀` along `30°/210°`. Its branch at `30°` lies in a tile at `p₀`, of colour in
+   `P_cl(p₀) ∖ P_cl(p_{60°}) ⊆ {r_prev, j(0°)} ∖ {j(60°)}` (A-CIRC at `p_{60°}`; a boundary along the branch is a unit arc, excluded by Condition 5).
+   Colour `r_prev` is impossible: such a tile lies in `D̄(p_{300°})` (step 1), while `|p₀ + s e_{30°} − p_{300°}|² = |e_{60°} + s e_{30°}|² = 1 + √3 s + s²
+   > 1`. So the branch is in the outward `j(0°)`-tile and **`j(0°) ≠ j(60°)`**; by rotation, `j(θ) ≠ j(θ + 60°)` for every `θ`.
+4. **No room.** The six change points with "adjacent or antipodal ⟹ different" form `K_{3,3}` (odd differences), whose colour classes lie within
+   `{0°, 120°, 240°}` or `{60°, 180°, 300°}`. A class of two change points `120°` apart confines its sector to a `60°` wedge (step 2); a class of three is
+   empty. So the three sectors total at most `3 × 60° = 180° < 360°`. **Contradiction.** ∎
+
+The inputs: A-EXACT's first clause, A-CIRC, tile diameter `≤ 1`, Siamese-or-outer, Condition 5 (step 3), NB-4 and NB-5 (step 1). **Scope:** degree 3
+with three essential sectors. At a bowtie the sector count changes (four sectors, one colour twice) and step 4 is open. **What it kills:** the aligned
+`|W| = 2` world with six-arc rings — the rigid "triangular lattice" picture, in which every trivalent vertex's six unit neighbours are its change
+points (types `2Λ`-periodic, the stars of `K₄`) — dies at every vertex, not only globally.
+
+### 8.6 A free retraction, counted (the pre-round answer)
+
+My pre-round answer said a winding map could carry its count "through degree-`≥ 4` vertices whose rings need not wind". **Withdrawn for trichromatic
+ones:** by Y3-PROP a bowtie's ring is joined by N2-TRANS to its neighbours' rings, so it carries the same `|W|` (and N3's reading of card 4 puts it
+under the ring condition anyway); Y3-BOW adds a constraint at bowtie flanks. **Standing for bichromatic ones:** their rings are four-coloured, carry no
+`W`, and are free in the count. The question "what would show me wrong" now asks for a lemma on bichromatic degree-`≥ 4` vertices only, and for a kill of
+bowtie pairs without S–V Lemma 3's extension hypothesis.
+
+### 8.7 W-3 on the construction side: no YES; what a winding map must now carry (X13, G79's flip)
+
+No winding map is proposed: I hold no formula whose rings, tiles and distances meet the list below, and none was searched for. What every winding map
+must carry, from rounds 1–3:
+- **every ring with `|P_cl| = 3`** (any degree) winds one global `|W|` (Y3-PROP); **`|W| ≥ 3` (odd, `≡ 3 mod 6`) unless some ring is aligned** (Y3-GP);
+  so a ring has at least nine arcs (`|W| = 3`) or at least eight with a unit-distance pair of change points (`|W| = 2`);
+- **no degree-3 ring of exactly six arcs** (Y3-SIX): the smallest aligned ring is dead;
+- every tile even (N2-FLIP), extended at bowtie flanks with `x = y` or `c ∈ {x, y}` (Y3-BOW);
+- no four-colour vertex (NB-4), no close covering pair (NB-5), no boundary arc of radius 1 (Condition 5), not polygonal (W-POLY, bar `d = 2`).
+**The obstruction my constructions meet** [a reading, one mind]: the rigid designs available by formula — lattice-periodic, aligned rings, change
+points at unit distance, the only kind I can check exactly with tight contacts — are exactly the aligned rings Y3-GP and Y3-SIX constrain; the generic
+`|W| = 3` ring has nine or more arcs whose change points are nowhere at unit distance, so its tight contacts must come from elsewhere. **Killing test:**
+a winding map with every ring aligned, or a tight six-map in `𝓜_K` with a ring of eight aligned arcs at a degree-3 vertex.
+
+### Would-have-searched-here (added)
+
+- Y3-SIX step 4: enumerate the `3⁶` assignments of third colours to the six change points → the `K_{3,3}` independent-set argument.
+- A winding map: a scan over lattice-periodic curved designs for rings of `|W| ≥ 2` → the necessary list of §8.7, and no candidate.
+
+## Stage 8 — SAVED (FS110-Y3)
