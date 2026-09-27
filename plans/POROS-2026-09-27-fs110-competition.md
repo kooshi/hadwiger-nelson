@@ -408,3 +408,75 @@ A3-HOLE as a question about A2-V56, with no route of either side. Sent first bec
 (G51); it carries a frame check, not a prediction.
 
 ## Stage A3-0 — SAVED
+
+## Stage A3-1 — SAVED: my round-2 expectation (written before either side's round-2 answer reached me)
+
+### A3-1.1 The frame, round 2 (A2 §1.1 kept; one change)
+
+**Object:** the seam point `w₀` of a surviving close covering pair. **The change:** Act One and (S1) are not two objects. A3-HOLE puts Act One's
+four-colour remainder at vertices whose unit circle carries unit arcs of `Γ` centred at them, which is (S1)'s escaping centre `x`. So the round's one
+object is **a vertex `x` whose unit circle `ω(x)` contains arcs of `Γ`**: (S1) needs one through `w₀`; Act One's four-colour case survives only with
+them. Discipline: first-order cone geometry at `x` (TS-U's wedges and side cones), then second-order contact at the arcs' endpoints.
+
+### A3-1.2 Obstacles at `w₀`, by side (not odds)
+
+| side | step | the obstacle I expect it to meet |
+|---|---|---|
+| N2 | **Act One, at most three colours per vertex** | `ω(u)` of a trivalent `u` is coloured by the three complementary colours with `c(x + 60°) ≠ c(x)`, and its switches may all be **edge points** (two colours): the circle alone forces no covering pair. The edges leaving `ω(u)` end at vertices within distance 2 (TS-C), but their third colour may be one of `u`'s. So Act One is a topological statement about how the complementary boundaries around `ω(u)` end (Voronov's circle index in map form, FS106-IND), and the two-coloured circle (one complementary colour absent near `ω(u)`) is its hardest case. The proof must spend six: the tight hexagonal seven-colouring has no covering pair at all. Expected: a GAP at a named topological step |
+| N2 | **Act One, the four-colour remainder** | A3-HOLE: not closed. It sits at unit-arc centres, so Act One cannot be finished apart from (S1) |
+| N2 | **(S1)'s cascade** | weak by my reading: an endpoint `y` of the unit arc `A ⊂ ω(x)` has `P_cl(y) ⊇ {c, c′, k}` (the two side colours, one colour beyond), so `(x, y)` is not a covering pair; the partner's circle crosses `A` at `w₀` with `c | c′` on its two sides, as A-CIRC wants. So (S1) passes every first-order test and its kill is not local at `w₀`: it needs the second unit point `w₀′`, the arc endpoints at second order, or a count (C-BOW-K (ii)) |
+| Y2 | **the (S1) fragment at the second unit point** | every close pair has two common unit points; the fragment must survive at both. Checked by me, first order only, one mind (**not an obstacle**): at `d = 1` (angle `∠w₀xw₀′ = 120°`) one three-colour bowtie can escape at both, with the second arc's facing and away colours reversed and arc widths below `30°`. So the fragment is not excluded at first order |
+| Y2 | **the arc's endpoints** | TS-U's side cones at `x` are swept by `ω(y)`, `y ∈ A`, whose tangent at `x` is `⊥(y − x)`; at `A`'s endpoints `ω(y)` runs through `x` exactly along a side cone's edge. So the fragment's tight contacts at the endpoints are second order at `x`: this is where Townsend's `⅔π` sharpness bites, and where I expect the first REJECT |
+| Y2 | **what a fragment decides** | an exact ACCEPT certifies a local fragment; it realises C-BOW-K (i) and (S1) locally and is not a refutation of the NO (A2 §1.3). The mixed map (Y2's list, item 3) I expect untouched this round |
+| both | **the generator image** | Y's checker holds `ℚ(√3)` data; an (S1) arc through `w₀` with `ℚ(√3)` endpoints exists at `d = 1`, `√3`; a zero over other `d` says nothing (X5) |
+
+### A3-1.3 What I watch (G21)
+
+- A proof of Act One "for at most three colours per vertex" reported as Act One (A3-HOLE's remainder).
+- A kill of (S1) from first-order cones alone: (S1) has an empty blocking set at `x`, so a first-order kill of it is a defect.
+- An (S1) fragment checked at `w₀` only, with `w₀′` or the arc endpoints unchecked.
+- A local ACCEPT scored against the NO; a candidate that is a seven-colouring in disguise.
+
+### A3-1.4 Hunch ledger: A2's carried as scored (A2 §4.5), mine added
+
+Carried: `c5-fails-in-band-form-at-unit-arcs` confirmed (Y-BLOCK); `tangency-is-no-escape-against-a-blocking-partner` confirmed with "strong escape"
+corrected; `cusps-close-under-closure-types` confirmed, two minds; `bowtie-and-bicycle-outlive-tangent-and-cusp` open, as predicted so far;
+`complementary-means-union-six` confirmed; `c-tan-pos-misstated-at-four-colour-vertices` confirmed, two minds; `the-no-stalls-at-the-count-not-at-a-seam`
+killed (N's first GAP was local); `the-yes-breaks-at-the-cascade` open; `the-registrations-name-global-steps` confirmed.
+
+hunch: a3-hole-is-a-real-gap
+  claim: a four-colour vertex whose two outside colours are separated on its unit circle by unit arcs centred at it is consistent with TS-U at the vertex, so A3-HOLE is not closed by the vertex figure alone
+  basis: derived
+  falsifier: a derivation from TS-U and A-EXACT at `v` that every four-colour vertex's outside colours meet at a point of `ω(v)`
+  registered: 2026-09-27
+  status: open — my sketch: six short unit arcs near directions `60°k`, outside colours alternating between them, admit a first-order figure `c | d | c | c′ | e | c′` at `v`
+
+hunch: n2-act-one-ends-a-gap
+  claim: N2's Act One at at most three colours per vertex ends this round a GAP at a named topological step on `ω(u)`, neither TRUE nor FALSE
+  basis: prior
+  falsifier: N2 proves Act One for trivalent maps, or builds a trivalent tight six-map with no close covering pair
+  registered: 2026-09-27
+  status: open
+
+hunch: y2-first-reject-at-the-arc-ends
+  claim: if Y2's (S1) fragment is rejected or obstructed, the first obstruction sits at the unit arc's endpoints or at `w₀′`, not at `w₀`
+  basis: derived
+  falsifier: Y2's first named (S1) obstruction at `w₀` itself
+  registered: 2026-09-27
+  status: open
+
+hunch: round2-registrations-cross-at-s1-and-act-one
+  claim: N2's pre-round answer names Y2's (S1) fragment (its cascade or its second unit point); Y2's names N2's Act One
+  basis: prior
+  falsifier: either answer names another step
+  registered: 2026-09-27
+  status: open
+
+### A3-1.5 Evidence inventory
+
+- A2-V56 as sent (`round2-open.md` §C) — read against: a vertex fact with no hypothesis on `ω(v) ∩ Γ` — surprised: yes, its step needs no arc of `Γ` on `ω(v)`, and (S1) is exactly such an arc
+- N-X's hypothesis (`plans/FS110-N-proof.md` §2.4) — read against: "no unit arc at `w₀`" as the brief states it — surprised: no; it also assumes disjoint types, which the brief's summary drops
+- TS-U's side cones (claims.md §3, N-SEAM (d)) — read against: cones of arbitrary width — surprised: yes, their width equals the arc's, which is what `ω(y)` for `y ∈ A` sweeps at `x`
+- the owner's round-2 note — read against: nothing yet — surprised: unread
+
+## Stage A3-1 — SAVED
