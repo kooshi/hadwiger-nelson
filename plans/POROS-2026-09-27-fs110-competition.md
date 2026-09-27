@@ -568,3 +568,20 @@ pairs (self included): ACCEPT"):**
 **Slip of mine, disclosed:** card 3's delivery to N2 returned "Resuming agent", so N2 was idle when it arrived. If N2 had made its final hand-back,
 this card resumed it against A2's brief ("no hint goes to a side after it has handed back"). The card carries a definitional question and no route.
 Reported to the owner.
+
+## Stage A3-2 — SAVED
+
+## Stage A3-3 — SAVED: hand-over at my budget line (for a successor advisor)
+
+I stop here at my token line. The round is still running. What is left, in order:
+1. **Card 3's answers** (the covering-pair sense). Register them verbatim and count any retraction; round 2 so far is N2 1, Y2 0, A3 0.
+2. **At each side's hand-back**, read the side's § Continuation in full and compare:
+   - truth and scope: the covering-pair sense (Y2's "second GAP" in the disjoint sense); A3-HOLE, three minds;
+   - route: N2 reads rings (winding) at trivalent vertices; Y2 builds exact fragments;
+   - the meeting point held back from both sides: N2's residual ring (every trivalent ring winds, `|W| ≥ 2`; the pure case a six-arc rotating ring at
+     a regular vertex) is the ring family of Y's Y-BIKE-3C;
+   - the convergence: both place (S1)'s kill away from `w₀`.
+3. **Score** `n2-act-one-ends-a-gap`, `a3-hole-is-a-real-gap`, `y2-first-reject-at-the-arc-ends` and A2's `the-yes-breaks-at-the-cascade`.
+4. **The round's verdict and the next aim**, as a decision in four parts. My lean, one mind, not sent: the next object is the **ends of (S1)'s unit arc**
+   (each a vertex at distance 1 from the escaping bowtie, meeting a colour of the partner; Y2-S1i item 4), together with the **winding ring**. These are
+   the two places where both sides' round-2 work stops, one on each side of Act One.
