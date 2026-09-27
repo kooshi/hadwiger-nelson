@@ -317,3 +317,7 @@ If the circle-only reduction holds, **G-d2 does not arise**. Then N3-RED's resid
 every disc of radius 3. CB asks for a second mind on its reduction before FS106-SV2's `d = 2` exception is withdrawn, and that second mind is running.
 Until then, treat G-d2 as "possibly vacuous, one mind". CB also notes that FS106-SV2's chain admits a **disjoint** pair at exactly 2 besides the
 same-multicolour one.
+
+**Second update to §8 (the owner; filed during round 4).** A second blind mind (FS110-CD) confirms, by a different route, that S–V Cor. 1 holds almost
+everywhere for curved cubic maps under Condition 5 **with no `d = 2` exception**, for same-multicolour and disjoint-multicolour pairs alike. The claim now
+stands at two minds, both blind (FS110-CB, FS110-CD). **G-d2 does not arise.** Under Condition 5, N3-RED's residue is G-CONE alone.
