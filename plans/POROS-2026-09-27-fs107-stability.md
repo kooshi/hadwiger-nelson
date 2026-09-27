@@ -155,3 +155,16 @@ hunch: complementary-type-is-the-combinatorial-core
   scratch until the owner says otherwise.
 
 ## Stage 1 — SAVED
+
+## Stage 1b — SAVED: a correction to E2 from TS §4–§5 (read after stage 1 was committed)
+
+- **E2's W-orient was incomplete.** TS's C-T-KILL has two halves: complementary multicolours at distance `< 2` (C-T-TAN, TRUE under its
+  strong-blow-up hypotheses) and **equal** multicolours at distance in `(1, 2)` (S–V Lemma 3's transplanted bicycle; GAP on the limit object,
+  TRUE for polygons after FS-106's repairs). So a W family built from regular junctions must satisfy, for junction pairs at distance in
+  `(1, 2)`: types intersecting and unequal; at distance `≤ 1`: types not complementary. Both are exact checks of a given tiling.
+- TS's C-T-TRIa counterexample (a horn at every vertex of the slack hexagonal 7-colouring) confirms E2's W-cusp reading: cusps remove
+  *density*-trichromatic points at no cost, and the support form (C-T-TRIb) is the one both sides must carry.
+- C-T-CHR4 (no point of four support colours, `k = 6`) is a GAP at `|P(x)| = 4`. A W family may use four-colour junctions; the claim list
+  should say so.
+
+## Stage 1b — SAVED
