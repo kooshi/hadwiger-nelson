@@ -15,6 +15,14 @@ committed. Claims are `data/fs106/claims.md` §6; definitions §0 (D-MU, D-NF, D
   every a.e.-proper measurable (partial) colouring. [hand, one mind] — §2.2.
 - **TQ-REM-ii** — for a CP colouring (jointly measurable modification, stationary moments), `P(0 not kept at ε) → 0`; bounded-region form for
   every measurable `f`; the uniform form fails on the zigzag colouring. [hand, one mind] — §2.3.
+- **TQ-P, TQ-T** — periodisation with gaps 2; Prop. 2.1 for partial colourings (grid squares, band shrunk by `2√2 h`). [hand, one mind] — §3.1.
+- **TQ-SUP** — `µ₆⁰ = lim µ₆(ε) = lim µ₆^tile(ε) = lim µ₆^per(ε)`: the tight and slack suprema coincide. [hand, one mind] — §3.2.
+- **TQ-COMP-i** — coverage `→ 1` by a.e.-proper partial 6-colourings (upper density suffices) gives `χ_m⁰ ≤ 6` and `χ_CP ≤ 6`; two routes, one
+  deterministic (weak-* local limit, maximal inequality, one-threshold rounding) using only M1's Step 2. [hand, one mind each] — §3.3.
+- **TQ-COMP-ii** — `µ₆(ε)` is attained by a stationary random family and by a deterministic one; `µ₆(ε) < 1` given V-1.3 (C-AE-SLACK) or V-1.1
+  (D4). [hand, one mind] — §3.4.
+- **TQ-EQ** — `χ_m⁰(ℝ²) ≤ 6 ⟺ χ_CP ≤ 6 ⟺ µ₆⁰ = 1 ⟺ lim µ₆(ε) = 1 ⟺` periodic grid-square slack partial 6-colourings with vanishing holes `⟺`
+  near-covering a.e.-proper colourings of every disc. No MR, no Voronov. [hand, one mind] — §3.5.
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -145,3 +153,132 @@ enough for the equivalence in §3, which never needs uniformity.
 | C-Q-REM (ii) | **TRUE** as stated (CP form); (ii′) bounded-region form TRUE for every measurable `f`; (ii″) uniform form FALSE (C2) | [hand], one mind |
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C-Q-COMP and C-Q-EQ
+
+Four suprema, each over families of disjoint measurable `C₁, …, C₆ ⊆ ℝ²`, of the upper density of `C₁ ∪ ⋯ ∪ C₆`:
+- `µ₆(ε)` — D-MU: `Leb ⊗ Leb`-null monochromatic pairs at distances in `[1 − ε, 1 + ε]`;
+- `µ₆^tile(ε)` — each `C_j` a union of half-open grid squares, with **no** monochromatic pair at a distance in `[1 − ε, 1 + ε]`;
+- `µ₆^per(ε)` — the same, periodic;
+- `µ₆⁰` — a.e.-proper at the unit distance only: `(Leb ⊗ σ)`-null monochromatic unit pairs (no band).
+
+Each of the first three is non-increasing in `ε`.
+
+### 3.1 Two lemmas
+
+- **Lemma P (periodisation).** Let a partial colouring of a square `Q_R` of side `R` be band-proper inside `Q_R` for `ε < 1` (everywhere, or
+  `Leb ⊗ Leb`-null, or `Leb ⊗ σ`-null at distance 1). Its copies on the lattice `(R + 2)ℤ²` form a periodic partial colouring of the plane of the
+  same kind. Its density is `|covered ∩ Q_R|/(R + 2)²`. *Proof:* two points in different copies are at distance `≥ 2 > 1 + ε`. ∎
+- **Lemma T (tiles; Voronov's Prop. 2.1 for partial colourings).** Let a family have `Leb ⊗ Leb`-null monochromatic pairs in `[1 − ε, 1 + ε]`,
+  and let `2√2 h < ε`. Colour each half-open grid square `τ` of side `h` by the least `j` with `|C_j ∩ τ| > 0`, and leave it blank if there is
+  none. The result has **no** monochromatic pair at a distance in `[1 − ε′, 1 + ε′]`, `ε′ = ε − 2√2 h`, and it covers `⋃ C_j` up to a null set.
+  *Proof.* Suppose `τ, τ′` are coloured `j` and hold a pair at a distance in the shrunk band. Every pair of `τ × τ′` is then at a distance in
+  `[1 − ε, 1 + ε]`, and `(C_j ∩ τ) × (C_j ∩ τ′)` has positive measure: a contradiction. The points of `C_j` lying in blank squares form a null
+  set. ∎
+
+### 3.2 The tight and the slack suprema coincide — **TQ-SUP: `µ₆⁰ = lim_{ε→0} µ₆(ε) = lim_{ε→0} µ₆^tile(ε) = lim_{ε→0} µ₆^per(ε)`** [hand, one mind]
+
+- `µ₆^per ≤ µ₆^tile ≤ µ₆`: the classes only widen.
+- `µ₆(ε) ≤ µ₆^tile(ε − 2√2 h)`: Lemma T. So the limits of `µ₆` and `µ₆^tile` agree.
+- `µ₆^tile(ε) ≤ µ₆^per(ε)`: restrict a tile colouring to a box of side `R` (a multiple of `h`), where its coverage is at least its upper density
+  minus `o(1)` along a sequence of boxes, then apply Lemma P with a gap rounded up to a multiple of `h`.
+- `µ₆^tile(ε) ≤ µ₆⁰`: a colouring with no monochromatic pair in the band has none at distance 1.
+- `µ₆⁰ ≤ lim_{ε→0} µ₆^tile(ε)`: take an a.e.-proper partial 6-colouring of upper density `d`, and boxes `Q_{R_i}` whose coverage tends to `d`.
+  For a fixed box, TQ-REM-i makes the kept set at scale `ε` band-proper everywhere, and the bounded form (ii′) makes its measure in `Q_R` tend to
+  the coverage of `Q_R` as `ε → 0`. Lemma P turns it into a periodic family of density `≥ |kept ∩ Q_R|/(R + 2)²`; Lemma T (at a mesh
+  `h ≪ ε`) makes it tiled. Let `ε → 0`, then `R = R_i → ∞`. ∎
+
+So S–V §9's quantity has four equal readings. The stability limit is the same number whether the colourings are tight and measurable, slack and
+measurable, slack and polygonal, or slack, polygonal and periodic. The order of limits is safe because every function of `ε` above is monotone.
+
+### 3.3 C-Q-COMP (i) — **TRUE**, by two routes [hand, one mind each]; true with *upper* density too
+
+*Statement (claims §6):* "If for every `δ > 0` there are disjoint measurable `C₁, …, C₆ ⊆ ℝ²`, each with `Leb ⊗ σ`-null monochromatic unit pairs,
+whose union has lower density at least `1 − δ`, then `χ_CP(ℝ²) ≤ 6`."
+
+**Route I (stationary; M1 with holes).**
+- Work in `M′ = {g ∈ L^∞(ℝ², ℝ⁶) : g_j ≥ 0, Σ_j g_j ≤ 1}`, weak-* compact and metrisable. Let `F_δ = (1_{C_j})_j`.
+- As in `plans/FS103-M-derivation.md` §2.2 Step 1, the laws of `τ_Z F_δ`, `Z` uniform on `[−m, m]²`, have translation-invariant limits `μ_δ`.
+- `Ψ(g) = ∫_Q Σ_j g_j` is weak-* continuous, and `∫Ψ dμ_δ ≥ 1 − δ` (take the `m`'s along which the density is approached).
+- Step 2 of M1 (decay of `σ̂ = J₀`) shows that `Φ(g) = ∫_Q ⟨g, g ⋆ σ⟩` is weak-* continuous. Each `Φ ∘ τ_t` (`t ∈ ℤ²`) vanishes on the orbit of
+  `F_δ`, so `μ_δ` is carried by the closed set `K = {g : Φ(τ_t g) = 0 ∀ t ∈ ℤ²}`.
+- A limit `μ` of the `μ_δ` is invariant and carried by `K`, with `∫Ψ dμ = 1`. Since `Ψ ≤ 1`, invariance gives `Σ_j g_j = 1` a.e., `μ`-a.s. So `μ`
+  is carried by M1's `M`, and Steps 3–5 of M1 give a CP 6-colouring.
+
+**Route II (deterministic; no stationarity, no continuity in probability).**
+- Let `u` be the uncovered indicator of a family of upper density `≥ 1 − δ`, and `B = B(0, M)` a large disc with `∫_B u ≤ 2δ|B|`.
+- By the weak (1,1) maximal inequality (constant 9 in the plane), the points `z ∈ B(0, M/2)` with `sup_{r ≤ M/2} ⨍_{B(z, r)} u > √δ` have measure
+  `≤ 18√δ |B| < |B(0, M/2)|` once `δ` is small. Centre the family at a good `z`.
+- Along `δ_n → 0` with `M_n → ∞`, the centred families `g_n` have a weak-* limit `g` in `M′`. Then `∫_{B_r}(1 − Σ g_j) = lim ∫_{B_r}(1 − Σ g_{n,j}) = 0`
+  for every `r`, so `Σ_j g_j = 1` a.e.
+- By M1's Step 2 on each unit square, `⟨g(x), g(x + w)⟩ = 0` for `Leb ⊗ σ`-a.e. `(x, w)`.
+- **One threshold rounds it deterministically.** Put `c_U(x) = min{j : Σ_{i≤j} g_i(x) > U}`. Then `c_U(x) = c_U(y) = j` forces `U` into two
+  intervals of lengths `g_j(x)` and `g_j(y)`, one of which is empty when `g_j(x)g_j(y) = 0`. So `∫₀¹ (Leb ⊗ σ){c_U(x) = c_U(x + w)} dU = 0`, and
+  for almost every `U` the map `c_U` is a measurable 6-colouring proper at a.e. unit pair: `χ_m⁰(ℝ²) ≤ 6`, hence `χ_CP(ℝ²) ≤ 6` by M1.
+
+Route II uses only M1's Step 2 (the compactness of the localised circle convolution). **Its conclusion `χ_m⁰ ≤ 6` is reached without M1's orbit
+closure or continuity in probability.** Both routes need upper density only. Neither route uses Voronov, MR, or the value 6.
+
+### 3.4 C-Q-COMP (ii) — **TRUE**: attainment [hand, one mind, no Voronov]; `µ₆(ε) < 1` [hand, one mind, given V-1.3]
+
+*Statement (claims §6):* "For each `ε > 0`, `µ₆(ε)` (D-MU) is attained by a stationary random family, and `µ₆(ε) < 1`."
+
+*Attainment.* Run Route I with `ν_ε`, the normalised Lebesgue measure on the closed annulus `{1 − ε ≤ |w| ≤ 1 + ε}`, in place of `σ`.
+- `ν_ε` is absolutely continuous, so `ν̂_ε → 0` by Riemann–Lebesgue, and `Φ_ε(g) = ∫_Q ⟨g, g ⋆ ν_ε⟩` is weak-* continuous (Step 2 verbatim).
+- The family maximises: `∫Ψ dμ ≥ µ₆(ε)`.
+- Steps 3–4 of M1 hold for any invariant measure on `M′`. They give `φ(w) = E⟨G̃(0), G̃(w)⟩` continuous with `∫φ dν_ε = 0`, so `φ = 0` on the whole
+  closed annulus.
+- Round by `U`, leaving `x` blank when `U ≥ Σ_j G̃_j(x)`. The result is a stationary random partial colouring with `P(c(x) = c(y) ≠ blank) = 0`
+  for **every** pair at a distance in `[1 − ε, 1 + ε]`, and `P(c(0) ≠ blank) = ∫Ψ dμ ≥ µ₆(ε)`.
+- A jointly measurable modification (§2.3 step 1) has realisations with `Leb ⊗ Leb`-null band pairs (Fubini).
+- By reverse Fatou, `E limsup_R (coverage of Q_R)/R² ≥ µ₆(ε)`, so some realisation attains it: `µ₆(ε)` is a maximum, over deterministic families
+  as well.
+
+*`µ₆(ε) < 1`.* If it were 1, the attaining stationary family would have `P(blank) = 0`. Its realisations are then measurable 6-colourings of the
+plane (the null blank set coloured arbitrarily) with slack `ε` in form (a). That contradicts C-AE-SLACK (`plans/FS106-V-verification.md` l. 113,
+TRUE given V-1.3, one mind). The same holds without attainment, by D4 (`c = min{j : x ∈ supp S_j}` is proper everywhere on the open band) and
+V-1.1 at `ε/2`. Stage 4 gives a third route, quantitative and with no compactness: `µ₆(ε) ≤ 1 − (ε − o(1))²/144` (TQ-EPS2).
+
+### 3.5 C-Q-EQ — **TRUE** [hand, one mind; inputs TQ-REM-i (one mind) and M1's Step 2 (two derivations); no MR, no Voronov]
+
+**Theorem TQ-EQ.** The following are equivalent:
+- (a) `χ_m⁰(ℝ²) ≤ 6`;
+- (b) `χ_CP(ℝ²) ≤ 6`;
+- (c) `µ₆⁰ = 1`;
+- (d) `lim_{ε→0} µ₆(ε) = 1`, the negation of S–V §9's `µ∗₆ < 1`;
+- (e) for every `δ > 0` there are `ε > 0` and a **periodic** partial 6-colouring by half-open grid squares, with no monochromatic pair at any
+  distance in `[1 − ε, 1 + ε]`, leaving density `≤ δ` uncovered;
+- (f) for every `R` and every `δ > 0` there is an a.e.-proper measurable partial 6-colouring of the disc `U_R(0)` (pairs inside it) leaving at
+  most `δ|U_R|` uncovered.
+
+*Proof.*
+- (a) ⟺ (b): M1 and C-FMT (b), row 130.
+- (a) ⇒ (f): restriction.
+- (f) ⇒ (c): Lemma P on the square inscribed in `U_R`.
+- (c) ⟺ (d) ⟺ (e): TQ-SUP.
+- (c) ⇒ (a): C-Q-COMP (i), Route II.
+
+The claim's form, `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1`, is (a) ⟺ (d) negated. ∎
+
+*Controls.*
+- **C1 at seven colours.** The theorem holds verbatim with 7 for 6. The slack hexagonal colouring gives `µ₇(ε) = 1` for small `ε`, consistent with
+  `χ_m⁰ ≤ 7`. At six the tight hexagons give only `µ₆⁰ ≥ 6/7` (delete a colour), and nothing in the proof turns that into a six-colouring.
+- **FS103-M's C3** (`Cay(ℝ², {±e₁})`, `σ̂ = cos ξ₁`, no decay). Route II's centring can land where the limit is the constant `(1/2, 1/2)`, and
+  properness is lost. So the Rajchman step is used, as in M1. It is the step that fails there, not the equivalence: `χ_m⁰ = 2` there anyway.
+- **C3 (Parts).** `µ₆⁰ ≥ 1 − δ₆ = 0.99985698…`, so by TQ-SUP `lim µ₆(ε) ≥ 0.99985698`. Eroding his tiles by `κ` (§4.3) gives the same bound
+  directly at each `ε = 2κ`.
+
+*What it does and does not do (the G21 audit asked for).* **It moves the difficulty and removes none of it.**
+- It decides nothing: (d) is exactly as open as (a).
+- What it buys:
+  1. S–V §9's conditional, as printed, concludes `χ_map = 7`. Its hypothesis is in fact **equivalent** to `χ_m⁰(ℝ²) = 7`, hence given MR (rows
+     128, 130) to `χ(ℝ²) = 7`. And its failure gives `χ(ℝ²) ≤ 6` **with no MR** (I-EASY).
+  2. **The wild/regular dichotomy of link 5 dissolves at the level of single objects.** A refutation never needs a wild set. By (e) it is a
+     sequence of *periodic polygonal colourings with slack*, whose uncovered density tends to 0; the wildness exists only in the limit that
+     Route II takes. A proof, dually, may assume slack `ε > 0` and grid-square classes, at the price of holes.
+  3. The stability limit is one number with four readings (TQ-SUP), so `[Parts2020c]`'s tight constructions and S–V's slack question measure the
+     same thing.
+- The flattering reading — "the problem is now a quantitative question, hence easier" — is not supported. The quantitative question is the
+  measurable question.
+
+## Stage 3 — SAVED
