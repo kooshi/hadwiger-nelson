@@ -924,3 +924,56 @@ curved arcs of radius `≠ 1`. [NB-4/NB-5: two minds, one blind; the rest one mi
 **Would have searched here:** a winding-map existence check by solver. Instead it is named as round 3's exact-check target, to be built by formula only.
 
 ## Stage A4-2 — SAVED
+
+## § Continuation — FS110-A5
+
+*Poros (Opus 5.5), 2026-09-27, competition advisor for round 3 (W-3, the winding question) and the construction-side verifier's comparison. Brief:
+`data/fs110/briefs/A5-110-competition-advisor-round3.md` (wins where it differs) with FS110-A2's brief and `STANDING-RULES.md`. Sides: FS110-N3 (proof,
+`a38bf36d512f6fc0a`) and FS110-Y3 (construction, `aecdb6f1ba0545c96`). I touch only this section and `data/fs110/fs110-a5/`. Every result here is one
+mind (mine) unless marked.*
+
+### Theorems this phase proved (FS110-A5)
+
+- **A5-C5** — in `𝓜_K` the print's Condition 5 ("If any boundary intersects with a circle of unit radius at a finite set of points …") and the claim
+  list's gloss "no boundary arc of radius 1" coincide: a segment, or a circular arc of radius `≠ 1` or of radius 1 about another centre, meets a unit
+  circle in at most two points, and a unit circle meets finitely many arcs. [hand, trivial; **two minds**: FS110-Y3's Y3-C5, and mine, independent]
+  Stage A5-0. It discharges FS110-PA's "round 3 must say which" for `𝓜_K` and LIM.
+
+### Would-have-searched-here log (A5)
+
+- (none yet)
+
+### Fence log (A5)
+
+- Read, as my brief allows: this record, the reports of N2, Y2, NB, YB, PA, `plans/FS110-YB-verification.md` (stages 3–4), `plans/FS110-Y-construction.md`
+  (l. 1–30, §2.3–2.4, stage 5's lattice paragraph, Y3's section), `plans/FS110-N-proof.md` (§4.3, §6.2–6.3, grep for "trivalent"), `data/fs110/claims.md`
+  §0, §1, §5, §7. Not opened: NB's record beyond A4's reading, the transcripts, `chats-bak/`, other scratchpad files, `plans/FS110-close-inventory.md`.
+
+## Stage A5-0 — SAVED: quotation check, reading, and N3's pre-round answer
+
+| quotation or fact in my brief | source | result |
+|---|---|---|
+| rule 0 (Kooshi, "From here on out, you may doubt … you will surprise yourself.") | `CLAUDE.md` § Counter-priors, read from disk | verbatim |
+| claims §7's quotation of A4-2.3 | this record, l. 891–900 | verbatim (diff empty) |
+| claims §7.1: the ring (§4.3) and the N2-TRANS table line | `plans/FS110-N-proof.md` l. 345–351, table | verbatim |
+| claims §7.1: the §6.2 quotation (tile count) | `plans/FS110-N-proof.md` l. 482–486 | **truncated mid-sentence**: it stops at "return swapped iff `m` is odd," and drops "parity `(−1)^m`; so the ring's own permutation has parity `(−1)^k`. An odd `k` returns the ring orientation reversed …". The definition of the count precedes the cut, so W-3 is unaffected; both sides received the same truncation. Correction owed |
+| "Y3 … expects the proof side to stall at vertices of degree ≥ 4 (bowties; bichromatic vertices), which W-3's ring condition does not constrain" (not in quotation marks) | Y3's section, § The pre-round question | matches, **with a reading**: Y3 takes W-3's "trivalent" as degree 3 ("W-3's hypotheses put the ring condition … on **trivalent** vertices only"), while §7.1's setting defines the ring at any vertex with `\|P_cl(u)\| = 3`, and the proof side's record used "trivalent" for three colours ("The trivalent case — three colours at every vertex", N l. 265). See A5-2 |
+| YB's four findings | `data/fs110/reports/FS110-YB.md` | match |
+
+**Read from disk:** as the fence log lists; Poros core in full; companions by heading (budget).
+
+### A5-0.1 FS110-N3's pre-round answer, verbatim (received by message 05:5x, as sent to "main")
+
+> "Expected failing step: the construction's vertex at which one colour holds two non-adjacent sectors (a trichromatic "bowtie" of degree ≥ 4, or a
+> bichromatic vertex of degree ≥ 4) used as ESSENTIAL — i.e. to escape S–V's cubic argument (a cubic Condition-5 map is killed by S–V's own chain,
+> FS106-V's repaired Cor. 1, one mind, bar d = 2; the six-arc rotating ring at a cubic vertex is S–V Prop. 17's kill under Condition 5). I expect every
+> such vertex whose repeated colour has sectors of POSITIVE angle to be removable by an almost-everywhere form of Woodall 1973's step 3, so it buys
+> nothing over a cubic map.
+> What would show me wrong: (1) a winding map given by formula, checked exactly, whose repeated-colour sectors at such a vertex are cusp horns tangent
+> to a boundary direction of that colour's allowed cone (Woodall's "cone", excluded by his step 5 only at five colours); (2) one realising S–V's d = 2
+> configuration (two same-type trichromatic points antipodal on a trivalent vertex's unit circle); (3) a merge that lands a recoloured point at distance
+> exactly 1 from a same-colour tile."
+
+Y3's answer is in its section (§ The pre-round question), sent to "main" at 05:4x. **Retractions count from both answers.**
+
+## Stage A5-0 — SAVED
