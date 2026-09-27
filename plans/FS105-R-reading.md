@@ -7,7 +7,15 @@ three additions (the advisor's, adopted by the owner; one-mind readings to verif
 
 ## Theorems this phase proved
 
-*(filled at stage 4; one line per theorem, its grade and its address)*
+| theorem | grade | address |
+|---|---|---|
+| FS105-R-D: EL2021 Thm 1.3 ⟹ EL2021 Thm 1.2 (totally irreducible + not virtually cyclic ⟹ Thm 1.3's hypotheses; each `G_j` finite or `X`; Abramov–Rokhlin over a finite-to-one factor) | [hand, one mind] | §2.1 |
+| FS105-R-VC: under the literal reading of p. 2 the trivial factor is virtually cyclic, so Thm 1.3's hypothesis must mean *non-trivial* factors | [hand, one mind] | §2.2 |
+| FS105-R-L2.1: "no (non-trivial) virtually cyclic factors" passes from `α` to `α_Λ` and to the adelic lift of Lemma 4.2 | [hand, one mind] | §2.1 |
+| FS105-R-H: for `F` totally real, `γ ∈ U_F` non-torsion and `ℤ[γ^{±1}] ⊆ M`: `h_{m_{M̂}}(γ) ≥ log 2` | [hand, one mind, on the Mahler-measure entropy formula (textbook)] | §2.5 (ii-a) |
+| FS105-R-7.4: EL2021 Lemma 7.4's conclusion (two independent Lyapunov weights) holds for the pieces directly | [hand, one mind] | §2.3 |
+| FS105-R-S: scope facts at ℚ(√635087) and ℚ(√3,√5,√7,√11) (wall broken, totally real, degrees); a Lemma W instance at ℚ(√635087) | [tools exact, plants fire] | §1.2; `tools/fs105_r_scope.py` |
+| (reading, not a theorem) EL2003 does not prove its Thm 1.1: §6 is an outline | [reading; verbatim quotation] | §1.3 |
 
 ## Stage 1 — SAVED (quotation check; scope facts; C0)
 
@@ -287,3 +295,74 @@ bound (EL2021's Thm 5.1) in full.
 | move I would have made by search | what I did instead |
 |---|---|
 | none (reading only) | — |
+
+## Stage 4 — SAVED (the write-up)
+
+### 4.1 Verdicts (each at `F₁ = ℚ(√635087)` and at `F_dG`; the same at both, since nothing but Lemma W's existence depends on the field)
+
+| item | verdict | grade; minds | C0 |
+|---|---|---|---|
+| (a0) provenance | **TRUE, re-grounded**: EL2003 is **not** a proof (its §6 is an outline); Thm 1.2 follows from EL2021 Thm 1.3 by FS105-R-D, which EL2021 does not write | [hand, one mind] + [reading] | 0.75 |
+| (a1) solenoid | **TRUE** | [hand, one mind] | 0.97 |
+| (a2) action | **TRUE** | [hand, one mind] | 0.97 |
+| (a3) TI ⟺ admissible | **TRUE** (finiteness via Lemma F, no finite generation over ℤ needed) | [hand; three minds now: X02D, X02V, this] | 0.92 |
+| (a4) not v.c.; no v.c. factors | **TRUE**, for `M̂`, every `α_Λ`, and the adelic lift; with "factor" = non-trivial factor (forced) | [hand, one mind] | 0.85 |
+| (a5) `d = 2` | **TRUE** | — | 0.99 |
+| (a6) ergodicity | **TRUE** (whole `Γ`; neither route treats a push-forward of a `U`-ergodic measure as `Γ`-ergodic) | [hand, one mind] | 0.9 |
+| (a7) entropy | **TRUE** (Kolmogorov–Sinai of the single automorphism on both sides) | [hand, one mind] | 0.9 |
+| (a8) Lemma W at the field | **TRUE** (uniform proof; exact instance at `F₁`) | [hand, three minds with X02D, X02V; tools exact at `F₁`] | 0.93 |
+| (a9) nothing else assumed | **TRUE as far as read; GAP (of reading, not of mathematics) at EL2021's cited machinery** ([10] §7, [11] Prop. 6.4, Lemma 5.2, [5] Prop. 6.2, Lemma 5.10, Thm 8.2, [9], [28], [34] Thm 3.7) and at the unread proofs of Thm 7.1, Prop. 7.5 and §§5–6 | [reading, one mind] | 0.65 |
+| advisor (i) passage to `R̂` | **TRUE** by both routes; the advisor's description is X02V's route (and X02D §3.3); X02D §3.2 needs no projective system but does use Haar's `Γ`-ergodicity | [hand, one mind] | 0.9 |
+| advisor (ii) `h_m(γ) > 0`; `⟨u,w⟩ ≅ ℤ²` | **TRUE** (`≥ log 2` at totally real `F`, FS105-R-H); **TRUE** | [hand, one mind] | 0.95 |
+| advisor (iii) non-trivial reading; Abramov–Rokhlin; no hyperbolicity | **TRUE; TRUE; TRUE as far as read** (EL2003 p. 100 says so, and the final step of Thm 4.1's proof treats the purely `p`-adic case in full) | [hand + reading, one mind] | 0.85 |
+
+**Scored C0** (G21's audit): nothing fell; the one item I priced lowest, (a9), is also the one I could not close by reading. No wrong-reason
+TRUE was reached: (a0) did not rest on "already proven in [7]" (that claim is false as a description of EL2003); (a3)'s finiteness did not
+assume finite generation over ℤ; (a4) was checked on the lift, not only on `M̂`; (a8) did not enumerate subfields.
+
+**What this does to MR.** PE-2's use of Thm 1.2 is inside its hypotheses at both fields, and Thm 1.2 rests on EL2021 Thm 1.3's proof plus
+FS105-R-D — not on EL2003. The weakest link is no longer a hypothesis check but EL2021's own proof, read here at its skeleton (§§1, 2, 4 in
+full; the final step of §7 in full; statements elsewhere). **The paper we need for a full reading is none beyond EL2021 itself plus its
+[10] and [11]** (both on arXiv: [10] = Einsiedler–Lindenstrauss, *Diagonal actions on locally homogeneous spaces*, Clay Math. Proc. 10 (2010);
+[11] = Einsiedler–Lindenstrauss, *Joinings of higher rank torus actions on homogeneous spaces*, Publ. Math. IHÉS 129 (2019)) and [5]
+(Einsiedler–Katok, *Rigidity of measures — the high entropy case and non-commuting foliations*, Israel J. Math. 148 (2005)). **EL2003 is not
+the paper we need** — it is an announcement with an outlined proof.
+
+### 4.2 Proposed corrections (for the close; I edit none of these files)
+
+- **`LEDGER.md` row 120's grade** and **`plans/FS100-derivation.md` FS100-PE2's grade**, replace "EL2021 Thm 1.2 by statement (external, in print;
+  its proof in EL2021 §§2–9, unread here)" by: *"EL2021 Thm 1.2 by statement — announced as EL2003 Thm 1.1, whose proof there is an outline;
+  proved as a consequence of EL2021 Thm 1.3 (§4.3 and §§4.4–7) by a deduction EL2021 does not write (FS105-R-D: Abramov–Rokhlin over a
+  finite-to-one factor); its hypotheses checked on the pieces at ℚ(√635087) and de Grey's field (FS105-R); EL2021 read at §§1, 2, 4 and the end
+  of §7 in full, §§3, 5–6 at the statements; its cited leafwise-measure machinery ([10], [11], [5]) unread"*.
+- **Row 120's prior-art cell**: "the positive-entropy input `[EinsiedlerLindenstrauss2022]` Thm 1.2 (EL2003 Thm 1.1)" — add "(EL2003's proof an
+  outline, §6; EL2021 proves Thm 1.3, from which Thm 1.2 follows, FS105-R-D)".
+- **`data/fs105/claims.md` (a0)**: "EL2003 … unheld" is stale (held since 2026-09-26).
+
+### 4.3 Proposed `BIBLIOGRAPHY.md` rows (for the close)
+
+- **`[EinsiedlerLindenstrauss2003]`** (line 706): replace "Author's summary only … Not held" by *"**Held; read in full** (FS105-R, 2026-09-26),
+  `library/pdf/EinsiedlerLindenstrauss2003-rigidity-zd-actions-tori-solenoids-era-9-99-110.pdf`, md5 `430849cf7d710c42002d768fcaf73266`. An
+  announcement: Thm 1.1 (= EL2021 Thm 1.2) with only "a sketch of how Theorem 1.1 is proved" (§6, "Outline", its last step "not hard");
+  §§3–4 prove Thm 4.1 (the entropy-contribution bound, EL2021 Thm 5.1) in full; §5 proves Thm 5.1 (entropy proportionality) "essentially
+  complete[ly]", Prop. 5.3 without details. Its [5] ("in preparation") became EL2021"*; and a library-table row for the PDF.
+- **`[EinsiedlerLindenstrauss2022]`** (line 569): reading status → *"§§1, 2, 4 in full; §7's Lemma 7.4, Cor. 7.6 and the proof of Thm 4.1 from
+  Cor. 7.6 in full; §3 (§3.2, Props. 3.4–3.5 statements), §5 (Thm 5.1 statement), §6 (statements), §7 (Thm 7.1, Lemma 7.2, Prop. 7.5 statements)
+  (FS105-R); §§8–9 unread (not used by Thm 1.3's proof)"*.
+- **`[Sataev1975]`** (lines 95, 711): now held (`library/pdf/Sataev1975-*.pdf`, item 3° pp. 203–204) — unread by me (attribution only, not in my
+  scope).
+- **`[BekkaFrancini2022]`**: the brief's `[BekkaFrancini2020]` is this paper (arXiv:2002.07497), held and filed; **no new row**. Its §1 was read by
+  X03D and X24R; **I did not read it** (budget; see 4.5).
+- Held-by-nobody, named for a full reading of EL2021's proof: `[10]` EL 2010 (Clay Math. Proc. 10), `[11]` EL 2019 (Publ. IHÉS 129), `[5]`
+  Einsiedler–Katok 2005 (Israel J. Math. 148) — not fetched (budget); arXiv for [10], [11].
+
+### 4.4 Would-have-searched-here log (stages 1–4)
+
+| move I would have made by search | what I did instead |
+|---|---|
+| none — the job was reading and derivation; PARI of seconds only | — |
+
+### 4.5 Unreached (stop rule, 220k harness tokens)
+
+- `[BekkaFrancini2022]` §1 — not read by me (held; read twice before).
+- EL2021 §3's, §5's, §6's and §7's proofs beyond what 3.1 lists, and its references [5], [10], [11] — the reading GAP of (a9).
