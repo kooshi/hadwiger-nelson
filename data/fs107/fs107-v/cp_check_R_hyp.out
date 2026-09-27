@@ -1,0 +1,11 @@
+R's definitions: blocking = every arc meets the arc of half-width 90-mu about theta; s <= mu*eta^2/100
+[R-hyp mu=20 s=0.001] d=1.4142 s=0.001 r=1e-06 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0000,0.0004) len 0.0004;  v (0.0000,0.0004) len 0.0004;  s*sin(mu/2) = 0.0002
+   R's bound (t1-2r)^2 = 3.123e-09  (t1 = 0.0001);  forced area in B(w, 0.0004) at grids (801, 1601): 1.153e-07, 1.153e-07
+and the same R-blocking ring far outside R's scale bound (s = 0.3, 0.45):
+[R-block mu=20 s=0.30] d=1.4142 s=0.3 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0002,0.1075) len 0.1073;  v (0.0002,0.1075) len 0.1073;  s*sin(mu/2) = 0.0521
+   R's bound (t1-2r)^2 = 2.678e-04  (t1 = 0.0174);  forced area in B(w, 0.0873) at grids (601, 1201): 3.554e-03, 3.553e-03
+[R-block mu=20 s=0.45] d=1.4142 s=0.45 r=0.0005 mu=20deg  sin(theta)=1.000
+   linear common projection: u (0.0002,0.1613) len 0.1611;  v (0.0002,0.1613) len 0.1611;  s*sin(mu/2) = 0.0781
+   R's bound (t1-2r)^2 = 6.274e-04  (t1 = 0.0260);  forced area in B(w, 0.0873) at grids (601, 1201): 3.754e-03, 3.753e-03

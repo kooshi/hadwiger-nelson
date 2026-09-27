@@ -242,3 +242,62 @@ door to R by itself.
 **Predictions scored** (§1.3): CP — the "MISSTATED at the constants" branch fired (registered 0.25), but through the curvature
 window, not the location condition I had in mind; implication — TRUE after repair (registered 0.7) ✓; SAT ✓; SW `εs` ✓; SW `s³` ✓
 (0.65); OB′ — MISSTATED (0.5) ✓.
+
+## Stage 4 — SAVED: R's record read; divergences
+
+Read after stage 3 was committed (`abcb19ac`): `plans/FS107-R-stability.md` in full (38,667 bytes). Nothing else fenced was opened.
+
+### 4.1 Quotation check against the source (standing rule 5, completed)
+
+The instance block's five statements are verbatim from R's "Theorems this phase proved" and §3.4. **But R's theorem line for CP is a
+compression of §3.2's Claim 2, and drops two of its hypotheses:** "`s, s′ ≤ s₀(µ, η)`" with "`s₀ = µη²/100`" (and Claim 1's
+"`s ≤ sin(µ/2)`", implied by it), and "`2r < t₁`, `2r′ < t₁′`". The terms the instance block said were in the claim list are R's own,
+defined in §3.2: a fat junction is three arcs `I_a, I_b, I_c` with truncated cones `K(x, I_j; r, s) ⊆ C_j`; it "blocks direction `θ` on
+side `σ` with margin `µ`" if **each `I_j` meets the open arc of half-width `π/2 − µ` about `θ`** (or `θ + π`).
+
+### 4.2 Divergences, item by item
+
+| item | R | V | divergence of truth | divergence of route |
+|---|---|---|---|---|
+| 1 CP | TRUE [hand, one mind]: Claim 1 solves the ray–circle quadratic exactly, so no linearisation; Claim 2 pulls a box back by `(|z − x| − 1, |z − x′| − 1)` | V-CP: linear projection plus explicit curvature and direction errors; stage 3 called the **quoted line** MISSTATED, with a counterexample C1 | **None on R's §3.2 lemma.** I checked Claims 1–2 line by line: correct, with one harmless slip (the denominator bound is `2 + 2t`, not `2 + t`, so `ρ ≥ t(1 − t/2)`, not `ρ ≥ t`; only `ρ > r` is used). **C1 is outside R's hypotheses twice:** its 20° cone (80°–100°) does not meet the arc of half-width 70° about `θ`, so it does not block with margin 20° in R's sense, and `s = 0.33` exceeds `µη²/100`. Under R's definitions the constant holds with room even far outside R's scale bound (`data/fs107/fs107-v/cp_check_R_hyp.out`: at `µ = 20°`, forced area `3.55·10⁻³` against R's `2.68·10⁻⁴` at `s = 0.3`; `37×` the bound at `s = 0.001` inside R's hypotheses). **Reconciled verdict: FS107-R-CP TRUE with §3.2's hypotheses — two minds, different routes, [hand] + [tools]. The quoted one-line form is not self-contained: it needs §3.2's definition of blocking and its scale bound. C1 shows the line is false if "blocking" is read as a projection condition and `s` is left free.** | R's arc-margin blocking is stronger per `µ` than my projection blocking, which is why R's chord proof needs no curvature bookkeeping. |
+| 1′ killing tests | P1: "no complementary pair of fat junctions … with `(t₁ − 2r)(t₁′ − 2r′) > δ₆`" | test 1 at the level of constants | **R's P1 compares an area with a density** (killing test 4's own content). `(t₁ − 2r)(t₁′ − 2r′)` is an absolute area; `δ₆` is a fraction of the plane. The comparison is with the Parts void that must contain the forced region: from `[Parts2020c]` §2.3's parameters the void area is `S∆ ≈ 6.6·10⁻⁵` per repeating cell of area `xy ≈ 0.461` (`6.6·10⁻⁵/0.461 = 1.43·10⁻⁴ = δ₆`, a check), so a forced region must be `≲ 6.6·10⁻⁵`, not `≲ 1.43·10⁻⁴`. The prediction's direction is unchanged. | tests 2–5 agree (R §2.2, V §2.1). |
+| 2 (A) ∧ (B) ⟹ R | "Given (A) and (B), Lemma CP gives `|H ∩ U_{R+1}| ≥ (s₀ sin(µ/2)/6)²`: R, and a C-VOID disc"; R, "and R′ with it" | TRUE after repairs | **Confirmed, sharpened by §3.2:** (B)'s `s₀` is a *lower* bound on the scale while CP's `s₀(µ, η) = µη²/100` is an *upper* bound — one symbol, two bounds. Truncating the cones to `s* = min(s, µη²/100)` keeps fatness, but (B)'s voids `r ≤ s sin(µ/2)/12` do not give `2r < t₁` at `s*`: (B) must bound the voids relative to `min(s, µη²/100)`. The disc is in `U_{R+1+µ/4}`. **R′ (C-VOID) does not follow**: in the branch "holes `≥ δ` in `U_R`" no disc is produced (R's stage 4 gives R′ as "GAP, same steps", which assumes it does). | none |
+| 3 SAT | TRUE; also existence of saturated families (Zorn along a countable cofinal sequence) | TRUE | none (the existence remark is standard and correct) | same proof |
+| 4a SW, `εs` | lower bound on SEQ from pairs on one line (pointwise band-properness), `ε ≤ s/2`, `s ≤ 1/10`, half-segments of length `s/2` | a.e. fibre argument, sharp constant `2εs` for half-discs of radius `s` | none | R's proof is pointwise (SEQ only); mine holds for measurable classes too |
+| 4b SW, `s³` | "Separating them needs strips of total width `≳ s²/2 + ε`" — [sketch], strips only | a proof for **every** hole set: `≥ s³/256` for `s ≤ 1/2`, `ε ≤ s²/32` | none; **R's sketch is now a proof** (two minds) | R priced strips; the double count covers all shapes |
+| 5 OB′ | "an argument that reads, at a swap, only the pairs of one colour is capped at `O(ε·s)` per swap (Lemma SW is sharp for one colour) … **Stability must read both colours at a swap**" | MISSTATED | **Yes.** The cap holds for the away-facing colour; the facing colour's pairs **alone** certify `s³/256` (4b's proof reads nothing else), so "must read both colours" is false at a flat swap: reading the facing colour suffices. Corrected OB′: *an argument that reads at a flat swap only the away-facing colour's pairs is capped at `2εs(1 + o(1))`, of hitting form.* | — |
+
+### 4.3 One finding for R's programme that R's record does not have
+
+**Tangency is not an escape at positive scale** [tools, one instance (C5), with a sketch; one mind]. R's §3.4 lists tangency among W's
+escapes from a forced complementary pair (with cusps, bowties and scale → 0), following C-T-TAN's exceptional set. At a fixed scale
+`s`, a ring junction (three colours filling `B(x, s) ∖ B(x, r)`) with an interface exactly along `e_u^⊥` still forces a band of depth
+`≍ s²/2` on the inner side: for `ρ ∈ (−s²/2, 0)` the unit circle about `z` bends into the front half at radius `√(2|ρ|) ≤ s` and meets the
+front colour, while its back part meets the other two. C5: forced area `6.8·10⁻⁵` at `s = 0.1` against an interface exactly tangent
+(linear blocking length 0). So the exceptional set is exceptional only in the blow-up; at scale `s` a tangent ring still costs
+`≳ s²·s′ sin(µ/2)`. *Sketch of the general claim:* every ring junction blocks every direction, on one side or the other, at depth
+`≳ min(s·(angular margin), s²/2)`, unless a colour is a sliver near `θ ± 90°`. *Killing test:* a ring junction and a direction `θ` with no
+forced band on either side. If it holds, (A)'s "blocking" is automatic for ring junctions and the escapes left to W are cusps,
+bowties and scale → 0 (or slivers).
+
+### 4.4 Theorems this phase proved
+
+- **V-CP** (on both): with `s, s′ ≤ min(sin(µ/2), sin θ/18)` and fatness read as "each colour's cone projects onto `(r, s sin(µ/2))`",
+  `|H ∩ B(w, µ/4)| ≥ (s sin(µ/2)/4 − r)(s′ sin(µ/2)/4 − r′)` for every `ε ≥ 0`, with an uncovered disc, stable to `O(ρs)` under
+  repairs. [hand, one mind] §2.2. Its failure for unrestricted `s` in that reading: C1 [tools, float, grid-converged; on-axis closed form].
+- **FS107-R-CP** under R's §3.2 hypotheses: TRUE [hand, second mind, different route; tools] §4.2.
+- **(A) ∧ (B) ⟹ R**: TRUE after two repairs (disc radius; voids relative to `min(s, µη²/100)`); ⟹ C-VOID: GAP. [hand] §2.3, §4.2.
+- **FS107-R-SAT**: TRUE [hand, second mind] §2.4.
+- **FS107-R-SW**: `≥ 2ε√(s² − ε²)` for the away-facing colour, sharp at `2εs` [hand]; **`≥ s³/256` for the facing colour, every
+  `ε ≤ s²/32`, `s ≤ 1/2`, every hole set** [hand + tools for two inequalities] §2.5 — R's sketch proved.
+- **FS107-R-OB′ corrected**: the `O(εs)` cap holds for the away-facing colour only; the facing colour alone certifies `s³/256`. [hand] §2.6.
+- Observation: tangent ring junctions still force holes at positive scale [tools, one instance + sketch] §4.3.
+
+### 4.5 Proposed edits for the close (I edit none of these files)
+
+- `LEDGER.md` § B, FS107-R-CP: state it with "`s, s′ ≤ µη²/100`, `2r < t₁`" and "blocking = each colour's arc meets the arc of half-width
+  `π/2 − µ` about `θ`"; grade two minds.
+- FS107-R-SW: "`≥ εs`; the facing colour `≥ s³/256` (V's proof)", two minds; FS107-R-OB′ as corrected in §4.2.
+- R's reduction RR: (B) with voids relative to `min(s, µη²/100)`; the disc in `U_{R+1+µ/4}`; R′ removed from its conclusion.
+- R's P1: compare with the Parts void area (`≈ 6.6·10⁻⁵` per cell), not with `δ₆`.
+- `BIBLIOGRAPHY.md` `[Parts2020c]`: "§2.3 parameters used to compute the void area per cell (FS107-V, 2026-09-27)".
