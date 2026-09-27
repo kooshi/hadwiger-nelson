@@ -105,3 +105,66 @@ No paraphrase found that empties a claim. One attribution note: claim R's text i
 > FS106-AE-POLY.
 
 ## Stage 1 — SAVED
+
+---
+
+## Stage 2 — SAVED: the argument's shape, tested first (X1); where its pigeonhole lives (X2); integrality (X4)
+
+### 2.0 Retraction 1 (free, counted by the advisor; card "is-a-bounded-complexity-limit-excluded")
+
+From §1.6 part (1) I retract "Shrinking Parts-type vertex voids inside a fixed combinatorial type therefore cannot work." FS106-AE-NICE
+(`plans/FS106-derivation.md` l. 115) needs faces "of diameter < 1" and same-colour faces "at distance > 1"; a tight limit of slack members has
+same-colour faces at distance `≥ 1` or Siamese pairs, which is the relaxation l. 117 leaves a GAP with C-AE-Q2. Parts's tiles have curved sides, so a
+bounded-type family of that kind has a C-AE-Q2 limit, not an excluded one. **What survives:** families whose limit is a locally finite *polygonal* map
+are out (FS106-AE-POLY, bar `d = 2`); curved bounded families are live, decided by FS106-AE-Q2's [G1]–[G4]. Part (2) stands.
+
+### 2.1 The shape: sort Voronov's certificates by their tight form, and keep only the ones that survive it
+
+By O1 (§1.5) a proof of R must hold in the tight world too. So I sort the certificates `[Voronov2023]`'s proof ends in by what happens to each at exact
+distance, and by what a *local repair* (a change of the colouring inside discs of radius `ρ` about boundedly many points per unit area — A8b's
+kind) does to it on SEQ:
+
+| certificate (where Voronov uses it) | tight form | on SEQ: what breaks it, and its cost per certificate |
+|---|---|---|
+| **circle**: `T₁(x)` about a trichromatic `x` needs three colours (Props. 3.1–3.3) | **escapable**: at exact distance a unit circle is 2-colourable (alternating half-open arcs of `π/3`; TS, C-AE-MAP6 row) | a free colour on six arcs of angle `2η`, `η > ε/√3`, at the arc ends: with arcs `[kπ/3 + η, (k+1)π/3 − η]` alternating two colours, pairs inside one arc have angle `≤ π/3 − 2η` (chord below the band) and pairs in arcs `k, k + 2` angle `≥ π/3 + 2η` (chord above it). Cost `≍ ε²` per junction (checked by hand here, one mind) |
+| **bicycle** on a same-type pair `u, v`, `1 < \|u − v\| < 2` (Thm 1.2; Lemma 6.1 **branch (i)**) | **escapable as a graph**: the index's only band step is to exclude a simultaneous swap (TS, C-T-BIKE (ii)). In a planar tight colouring the swap is a same-multicolour bichromatic unit pair, excluded at Jordan interfaces (TS's C-T-L1 / C-T-L1a) | a swap made legal on SEQ: Lemma SW (§3.3) prices it at `≥ ε·s` when the two boundaries are regular at scale `s` (the tangent configuration), and at `≍ s²` otherwise. A repair that makes the colouring irregular near the two swap points at scale `≍ ε` pays `≍ ε²` ([reading], §3.4) |
+| **complementary pair**: two trichromatic points with disjoint multicolours `< 2 + 2ε` apart (Prop. 2.2; ends Lemma 6.1 **branch (ii)**) | **false** at fat junctions (TS's C-T-TAN, stated on LIM) | Lemma CP (§3.2): uncovered area `≥ (cs − 2r)(cs′ − 2r′)` near each point at distance 1 from both, with `s, s′` the cone scales and `r, r′` the void radii. **A repair inside `B(x, ρ) ∪ B(x′, ρ)` moves this by `O(ρ·s)` only** (it changes `r` to `ρ`): no local repair breaks it |
+
+**The argument's shape (R-Q, on SEQ; the limit steps on LIM):** run `[Voronov2023]` Lemma 6.1 on a SEQ member, with junctions (D-JUNC) in place of
+trichromatic points. Branch (ii) ends at a complementary pair and costs `≍ s²` by Lemma CP, where `s` is the cone scale. Branch (i) ends at a bicycle,
+which costs `ε·s` at best. **So the `ε`-independent content of Voronov's proof sits entirely in branch (ii) and in the cone scale `s`.** A stability
+proof along this shape needs (a) every branch to end at a complementary pair, and (b) a lower bound on `s` over a set of positive measure. (b) is a
+**regularity estimate** in De Giorgi's sense: the scale down to which the classes look like cones or half-planes. That is link 6 of § The aim, made
+concrete (§3.4).
+
+### 2.2 The five killing tests, run on the shape before any proof is written (X1)
+
+| test | Lemma CP (branch (ii)'s certificate) | the bicycle (branch (i)) | verdict |
+|---|---|---|---|
+| 1 Parts calibration | a true lemma cannot over-force. Its prediction for `[Parts2020c]`: no fat complementary pair within `(η, 2 − η)` at cone scale `s` with `c²s² > δ₆`, which fits Parts's report that "vertices in which three or more colored tiles converge are disadvantageous" (TQ §4.5(6)(b)). Checkable on his tiling after the ban (it is [external]) | Parts's voids at every vertex are the local repairs of the circle and bicycle rows | passes; a prediction registered (P1, §3.5) |
+| 2 seven-colour control | the forced region `Q` sees all of `T ∪ T′`, and `\|T ∪ T′\| = 6` is every colour. With seven, `Q` takes the seventh: **six is spent at `3 + 3 = 6`** | six is spent at "the circle about a type-`{a,b,c}` junction uses the other three", and the bicycle needs four `> 3` | passes: the step is named |
+| 3 strip test | holes replaced by `W_ε`: `Q` is a 2-dimensional region of area `≍ s²` at distance 1 from both junctions, and `W_ε` does not contain it | a strip of width `2ε` along the boundary at a swap point is exactly Lemma SW's price, so the bicycle **survives** strips | CP: **not** of hitting form. Bicycle: of hitting form, **capped at `O(ε)`** |
+| 4 normalisation | the bound is `\|Q\|`, an area | the bound is an area | passes |
+| 5 pinhole test | one `ε`-disc at each junction, or at the point `w` of `Q`, leaves `Q ∖ B(w, ε)` coloured and forbidden six times: a contradiction. So the step **does not** survive pinholes | a pinhole at a swap point does not separate the two colour-`a` half-discs (Lemma SW), but a repair that degrades both boundaries at scale `ε` does | CP: **not** capped at `ε²`. Bicycle: capped at `ε²` against a repair at scale `ε` |
+
+### 2.3 Where the pigeonhole lives (X2), and why the free colour cannot absorb it
+
+- **Where.** In the **junction types at the holes**: by K-PIX every junction is a component of the uncovered set (D-JUNC), and Voronov's
+  pigeonhole is Lemma 6.1's count of types in `U₁(x)` — the 10 types `{a,b,c}, {d,e,p}, {d,f,p}, {e,f,p}`, then one more. It is **not** in the limit,
+  and not averaged.
+- **Carrier.** Bounded: the junction `x`, its circle, the inner junctions, and the region `Q` at distance 1 from two of them, all inside `U₃`
+  (G17: a sub-rung compulsion with a small carrier).
+- **Why the free colour cannot absorb branch (ii).** The forced set `Q` is 2-dimensional, of area `≍ ss′`, and sits at distance `≈ 1` from both
+  junctions. Absorbing it means leaving `Q` uncovered, which is the counted cost. The one alternative is to change the colouring near the junctions
+  at scale `s` itself — cusps, bowties, a tangent interface: K-TAN's exceptional set — which lowers the cone scale. So the free colour can absorb only
+  by degrading regularity at the junction's own scale, never by a small void (G40's "spare colour" is the hole, and here the hole is the bill).
+- **Branch (i) is absorbed** at `ε·s` (strip) or `ε²` (local degradation): the bicycle is where Voronov's six stops being robust.
+
+### 2.4 Integrality (X4) and rank (X6)
+
+- Six enters at `|T ∪ T′| = 6` (CP) and at "the other three colours" (circle, bicycle). A one-class or fractional argument cannot see either: CP
+  needs the six classes to be **disjoint** and to fill cones about two junctions at once (K-INT is respected).
+- On SEQ a Voronov index along grid-transverse traces has finitely many changes, so FS106-IND's finiteness hypothesis is automatic (A2 §3.2).
+  Q2 and AE-FA are not used.
+
+## Stage 2 — SAVED
