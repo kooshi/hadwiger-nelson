@@ -4,10 +4,6 @@
 `data/fs110/briefs/STANDING-RULES.md`. Blind: nothing fenced opened before stage 3 is committed. Working directory for scratch:
 the harness scratchpad `fs110-cd/` (own files only); committed working files: `data/fs110/fs110-cd/`.*
 
-## Theorems this phase proved
-
-*(filled at stage 3)*
-
 ## Stage 1 — SAVED
 
 ### 1.1 Quotation check
@@ -340,6 +336,70 @@ exclude, and I have none.
 listed as a positive control, but it is improper (a 60° turn is 2.5 arcs, landing half of each arc on an arc of its own colour) — it is now
 a negative control; and the arc-length guard rejected arcs of exactly 60°, though an open 60° arc holds no unit chord (the six-arc hexagon
 is proper as a circle colouring; Prop. 17 is what excludes it).
+
+## Stage 3 — SAVED
+
+*Verdicts, committed before anything fenced is opened. First, the self-audit of stage 2 (the result is the flattering one; G21).*
+
+### 3.0 Audit of stage 2
+
+1. **Lemma R step 2, tightened.** Stage 2 argued "the arcs just beyond `b` and `b′` both have colour `a`, the arcs on the `I`-side both
+   `c`" through a region `Q` bounded by `β ∪ I`. If `β` touches `ω(u)` from inside, `β ∪ I` is not a simple closed curve. The repair: push
+   `β` off `ω(u)` into the open disc near each touch point (a homotopy fixing a neighbourhood of `b` and `b′`). The pushed path `β′` meets
+   `ω(u)` only at `b, b′`, so `β′ ∪ I` is a Jordan curve with interior `Q′` lying on one fixed side of `β′` along its whole length. Near `b`
+   (and near `b′`) the disc is cut by `β′` into the part next to the `I`-side arc, which is `Q′`, and the part next to the beyond-arc. Since
+   `β′ = β` near the ends and the regions on the two sides of `β` are one `a`-region and one `c`-region throughout, the `I`-side arcs at
+   both ends lie in the region on the `Q′`-side, and the beyond-arcs in the other. The claim stands; `u ∉ Q` is not needed anywhere.
+   [hand]
+2. **Lemma R step 5, the case `x ∈` open `I₁`, `y ∈` closed `I₂`, re-walked:** by step 3 the set `σ(I₁) ∪ σ⁻¹(I₁)` of partners holds only
+   points with one-colour pseudo-colours, so it holds no end of `I₂`, and symmetrically. Two open arcs each under 60° that meet, with no end
+   of either strictly inside the other, are equal. Then `I₂ = σ^{±1}(I₁)`, every point of it has pseudo-colour `{e₁}`, so `c₂ = e₁`, and
+   symmetrically `c₁ = e₂`; hence `a₂ = a₁`, and the beyond-arcs at `b₁` and at `σ^{±1}(b₁)` are both interior `a₁` at unit distance —
+   excluded by mono–mono. Holds.
+3. **Endpoint types, re-walked (Lemma E):** an endpoint on `ω(u)` arises only (E3) as a selected V-in vertex, or at the end of a
+   continuation arriving at a vertex of `ω(u)` from inside — V-out ones are circle-bichromatic and make `b` returning; V-in ones are
+   endpoints. A continuation cannot arrive at an (E3) vertex (there `e_ac` does not enter the disc), so endpoints of distinct selected
+   points are distinct. A third colour in `{1,2,3}` at any endpoint meets Corollary 3 at distance ≤ 1. Holds.
+4. **Theorem D2 uses no genericity** (no appeal to which side of `ω(u)` the annulus lies on at `p` or `q`); both cases close by Lemma H and a
+   two-disc identity checked exactly (A1, A2). Holds.
+5. **The stranger's configuration (E3)** is checked exactly for its stated local constraints (A4). It is not claimed to extend to a
+   6-colouring of the plane; it names the step a strict-interiority argument must cover.
+
+### 3.1 Verdicts
+
+| # | claim | verdict | minds | grade |
+|---|---|---|---|---|
+| 1a | S–V's `d = 2` case (two colliding pigeonhole points antipodal on `ω(u)`, same or disjoint multicolours) never arises; **no exception at `d = 2` is needed** in Corollary 1 a.e. for curved cubic maps under Condition 5 | **TRUE** — Theorem D2 (§2.7) | one (this job) | [hand]; its two geometric identities [tools] (A1, A2) |
+| 1b | Prop. 19's recolouring of the plane can be replaced by a reduction on the circle only, leaving the plane colouring (and so every pigeonhole point) original | **TRUE** — Lemma R (§2.4, tightened §3.0.1) | one | [hand] |
+| 1c | CB's sub-claim as the brief quotes it: after the circle-only reduction "every pigeonhole endpoint lies in the open disc" | **GAP at (E3)** in my derivation: a selected circle point that is itself a V-in vertex (third-colour sector inside the disc, its `a|c` edge leaving outward) is its own endpoint, on `ω(u)`; also a continuation arriving tangentially at a V-in vertex of `ω(u)`. No circle-only reduction I can derive removes them (they are circle-bichromatic and return to nothing). Not FALSE: if Corollary 1 a.e. holds, no configuration is a counterexample; the stranger's configuration is §2.7's. **It does not matter for 1a**: Lemma H kills every antipodal collision that involves such points | one | [hand] |
+| 1d | S–V Corollary 1 a.e. as a whole (curved cubic maps, Condition 5, six colours, tiles' interiors) | **not settled here: GAP** at two steps outside the brief's claim — (i) same multicolour at `d = 1` exactly (Lemma 3 needs `d > 1`; §2.8.1), (ii) the eleventh point when the outer rim of `R*` is one multiply connected region (§2.8.2) — and resting on inputs read but not re-derived in the a.e. form (Lemma 3, Prop. 14, Prop. 17, the annulus) | one | — |
+| 2a | Lemma 5 (cyclic recolouring of a proper 3-coloured circle; no new bichromatic points) | **needed; TRUE**, re-derived (§2.5) with the nesting step written out; checked on two formula-given colourings (B) | one (+ print) | [hand] |
+| 2b | Prop. 18 (≥ 9 bichromatic points in a cyclic proper colouring ⟹ three of each pair pairwise more than 1 apart) | **needed; TRUE**, re-derived by Voronov's Prop. 3.3 route (§2.5); checked on the 9-, 12-, 30-arc colourings and shown false on six arcs (B) | one (+ print) | [hand] |
+| 2c | Prop. 19 | **not needed** (replaced by Lemma R); as printed it recolours the plane, so its trichromatic points are the recoloured colouring's | — | — |
+| 2d | the rest of the print used | per §2.9's table: Props. 1–3 and mono–mono re-derived; Lemma 2 free in the cubic setting; Corollary 3 a.e. sketched; Lemma 3, Prop. 14, Prop. 17, Props. 9–11 read, not re-derived | — | — |
+
+**Printed slips logged (MISSTATED in print, no consequence found):** Prop. 18 and Prop. 19 list the pair `{1, 3}` twice (for `{3, 1}`,
+`{1, 2}`, …); the appendix's eleventh point speaks of "regions of colors 1, 2, 3 whose vertex is u" where `u`'s colours are 4, 5, 6;
+Voronov's Prop. 3.3 proof ends "pairwise distances between which are equal to 1" for "greater than 1".
+
+**Registered expectation, scored:** expected TRUE on "no `d = 2` exception" by a region lemma rather than by strict interiority, and GAP on
+strict interiority at a selected V-in vertex — **met on both counts**. The reachable other outcome (an antipodal colliding pair outside
+every lemma; or an improper reduced circle) did not occur.
+
+## Theorems this phase proved
+
+| theorem | grade | address |
+|---|---|---|
+| Setting (A) reduces to a merged map with (F1)–(F3); Lemma 2 is free for cubic maps | [hand] | §2.0 |
+| Pseudo-colouring mono–mono from (F2) alone | [hand] | §2.1 |
+| Lemma H (a region of a colour of `u` entering `B(u,1)` forces `R_j ⊆ B̄(v,1)` for every `v` in its closure) and Corollary H′ (no straddling of `ω(u)`) | [hand] | §2.2 |
+| Lemma L (points of `ω(u)`: V-in / V-out, the circle-bichromatic criterion, the inward continuation) | [hand] | §2.3 |
+| Lemma E (non-returning endpoints lie in `B(u,1)` or are V-in vertices of `ω(u)`) | [hand] | §2.3, §3.0.3 |
+| Lemma R (circle-only replacement for Prop. 19; the reduced colouring is proper; no plane recolouring) | [hand] | §2.4, §3.0.1–2 |
+| Lemma 5 and Prop. 18, re-derived | [hand]; examples [tools] | §2.5, §2.10 |
+| `R* ⊆ B̄(u,1)` with all its regions in `B(u,1)`; the eleventh point's type | [hand] | §2.6 |
+| **Theorem D2: no colliding pigeonhole pair at distance 2** | [hand]; identities [tools] | §2.7 |
+| Exact checks A1–A4, B with fired plants | [tools] | `tools/fs110_cd_checks.py`, `data/fs110/fs110-cd/checks.out` |
 
 ### Would-have-searched log
 
