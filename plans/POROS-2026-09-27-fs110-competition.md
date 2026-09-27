@@ -1035,3 +1035,86 @@ hunch: cusps-are-the-last-escape
   stalls there; N3 bets such vertices with positive-angle sectors are removable, and names cusp horns as what would prove it wrong
 
 ## Stage A5-1 — SAVED
+
+## Stage A5-2 — SAVED: cards 4–5, N3's answer to card 4, and my round-3 expectation (written before either side's round-3 work reached me)
+
+### A5-2.1 Card 4 (`data/fs110/fs110-a5/card4.md`), sent identically to N3 and Y3, 05:5x
+
+question: which-vertices-does-W-3-constrain
+  evidence: claims §7 W-3 bullet 1 "every trivalent vertex's ring winds"; §7.1's ring setting "`u` a vertex, `t = P_cl(u)`, `|t| = 3`" has no degree condition; Y3's pre-round answer reads degree 3; N's record l. 265 reads three colours
+  expected: the two sides work in different readings
+  ask: in W-3, does "trivalent vertex" mean every vertex with three closure colours, of any degree, or a vertex of degree 3 only?
+  if any degree: a bowtie's ring must wind; Y3's bet narrows to what the ring lemmas do not reach at degree ≥ 4
+  if degree 3: bowtie rings are free, W-3 must carry the degree clause, and both bets meet on unconstrained bowties
+  answered by: FS110-N3
+  cost: one reply from each side
+  rank: 1
+
+**N3's answer, verbatim** (by message, copied to "main"): "Reading: "trivalent" = |P_cl(u)| = 3, ANY degree (my record §4.3 has no degree condition);
+a bowtie a,b,a,c carries a ring that must wind. At a three-colour vertex of degree ≥ 4: N-E0/N-E1 and N2-RING (circle-only) hold; N2-SWAP and N2-ROT
+hold (they read any g-tile/g-sector at u); N2-TRANS holds as stated (types only; nerve step a sketch). Fail or unproved at degree ≥ 4: N2-HEX
+(serving count assumes three sectors); N2-FLIP (assumes each boundary vertex of the tile has type {a, b_{i−1}, b_i}, false at a bowtie whose repeated
+colour flanks the tile)." **Scored:** the first branch. The owner wrote it into claims §7.1 as a scope note (`dacc10e3`). Y3's answer pending.
+
+### A5-2.2 Card 5 (`data/fs110/fs110-a5/card5.md`), sent identically, at the owner's request
+
+Two relays, no question: (1) the owner's claims §7.1 change, the scope note quoted verbatim; (2) prior art with grades from
+`plans/FS106-V-verification.md`: S–V Props. 7–8 ("Theorem 2's reduction to degree 3", TRUE, two repairs, one mind; Prop. 8's bichromatic-vertex
+sentence verbatim) and SV-1 (GAP under Condition 6 at Prop. 19's fills when bichromatic vertices of degree `≥ 4` occur; Cor. 1 for cubic maps repaired
+with SV-2's gaps and edge case). One sentence of mine: their transfer to curved arcs of radius `≠ 1`, under tightness, is recorded nowhere I have read.
+**Why relay (2):** N3's pre-round answer rests on Cor. 1 ("one mind, bar d = 2") and names a Woodall-step-3 reduction; Prop. 7–8 is the printed
+form of that reduction for polygons, and Y3's answer cites S–V's Condition 6 at Lemma 4 and Props. 9–10. Both already read the same prior art through
+FS110-PA; the relay adds FS106-V's grades, which neither side quoted.
+
+### A5-2.3 My round-3 expectation (obstacles, not odds)
+
+**The frame after card 4.** The round has one object, for the first time in FS-110: the vertex where one colour holds two non-adjacent sectors. By
+FS106-V's SV-1 row, cubic Condition-5 maps are S–V's Cor. 1 (repaired, one mind, bar `d = 2`), so a winding map must use such vertices essentially.
+At a bowtie the ring must wind (N3's reading, now in claims), but the tile count is undefined at tiles its repeated colour flanks; at a bichromatic
+vertex of degree `≥ 4` the ring is four-coloured and carries no `ℤ/3` winding at all.
+
+**Where I expect the proof side to break:**
+1. *The curved form of Prop. 7.* Its tip recolouring is written region-only for straight rays (FS106-V l. 489 ff.). On curved arcs of radius `≠ 1`,
+   under tightness, the recoloured tip may land at distance exactly 1 from a same-colour tile along a tangent contact. That is N3's own falsifier (3).
+2. *Cusp horns* (N3's falsifier (1)): a sector of angle 0 has no tip triangle to recolour.
+3. *Grades.* A NO through Cor. 1 inherits Cor. 1's grade: one mind, Lemma 3 a sketch at `√3 ≤ d < 2`, and the `d = 2` edge case (N3's falsifier (2)).
+
+**Where I expect the construction side to break:**
+1. *Essentialness.* Every degree-`≥ 4` vertex it uses must survive Prop. 7–8's reduction, or the map reduces to a cubic one and dies by Cor. 1. So its
+   vertices need horns or a tangency that a tip recolouring cannot clear.
+2. *Tightness at curved contacts.* The exact checker (`tools/fs110_y_check.py`) handles arcs over ℚ(√3). A periodic curved map needs every unit contact
+   exact and none crossing, over a whole period.
+3. *W-POLY:* no polygonal shortcut exists (bar `d = 2`).
+
+**What I watch (G21):**
+- a NO that is proved only at positive angle and reported as W-3's NO (it would be partial; horns stay live);
+- a YES fragment that is local, reported as a winding map (a winding map is a full tight six-map);
+- a bichromatic vertex treated as ringless-and-therefore-free, when Prop. 8 reduces it for polygons;
+- the tile-count bullet used at a bowtie-flanked tile, where it is undefined.
+
+### A5-2.4 Hunches (registered before either side's round-3 work)
+
+hunch: n3-lands-at-positive-angle
+  claim: N3 proves a tight, almost-everywhere, curved-arc form of the Prop. 7–8 reduction for repeated-colour sectors of positive angle, and names cusp horns as the GAP
+  basis: prior
+  falsifier: N3's hand-back with the positive-angle reduction itself a GAP, or with horns closed as well
+  registered: 2026-09-27
+  status: open
+
+hunch: y3-hands-back-a-local-horn
+  claim: Y3 hands back no full winding map; its exact product is a local fragment in which a bowtie or bichromatic vertex uses cusp horns, with a named obstruction to the global form
+  basis: prior
+  falsifier: an exact full periodic winding map; or a Y3 product with no horn in it
+  registered: 2026-09-27
+  status: open
+
+### A5-2.5 Retractions (from the pre-round answers on)
+
+N3: 0 (card 4 answered, no verdict changed). Y3: 0 so far. A5: 0.
+
+### A5-2.6 Evidence inventory
+
+- N3's card-4 answer — read against: the first branch, since N's §4.3 has no degree condition — surprised: partly; N2-FLIP and N2-HEX fail at degree ≥ 4, so W-3's second bullet has a hole at bowties
+- FS106-V's SV-1 and Props. 7–8 rows — read against: S–V Thm 1 held for cubic maps only if it is Cor. 1 — surprised: no; it is Cor. 1, one mind, and the degree reduction is proved for polygons only
+
+## Stage A5-2 — SAVED
