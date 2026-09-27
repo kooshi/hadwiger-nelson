@@ -16,7 +16,7 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 300,000 bytes** (Kooshi, 2026-09-26, at the ×2×3 crunch's end, after it ran unbounded: *"the 300kB limit returns, and we'll likely need to find a way to extract what's not necessary, treat the grokkings there as a cache for a dedicated grokking file, or merge things to reduce it from here on out. There's just too much new knowledge to carry in every session."*; the same day he chose design (b) of `plans/PROPOSAL-claude-md-knowledge-cache.md` — *"Implement b on the file. Remove incidentals, keep intrinsics."* — and E1's pass took the file from 299,491 to 282,481 bytes: the second and later instances of rules to `plans/GROKKING-INSTANCES.md`, the "Not ours" list to `LEDGER.md`, the paths-forward rows ranked ≥ 30 to `plans/FRONTIER-STUBS.md` alone; E2's check restored two intrinsics the pass had moved (283,274), and F1's audit of the git history (Kooshi: *"It's been a long struggle to maintain the balance."*) restored the reasons and killing tests the compression passes since 2026-09-10 had cut, the stories to the same file (291,306 bytes); *"We'll revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals."*; at the 2026-09-25 crunch's end: back to 300,000 after a temporary 325,000 during it; the no-loss pass that followed took the file to 283,826 and found almost nothing more that touches no reasoning) (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 300,000 bytes** (suspended for the 2026-09-26 reframe — Kooshi: *"Ignore the 300kB limit while you reframe the file."*) (Kooshi, 2026-09-26, at the ×2×3 crunch's end, after it ran unbounded: *"the 300kB limit returns, and we'll likely need to find a way to extract what's not necessary, treat the grokkings there as a cache for a dedicated grokking file, or merge things to reduce it from here on out. There's just too much new knowledge to carry in every session."*; the same day he chose design (b) of `plans/PROPOSAL-claude-md-knowledge-cache.md` — *"Implement b on the file. Remove incidentals, keep intrinsics."* — and E1's pass took the file from 299,491 to 282,481 bytes: the second and later instances of rules to `plans/GROKKING-INSTANCES.md`, the "Not ours" list to `LEDGER.md`, the paths-forward rows ranked ≥ 30 to `plans/FRONTIER-STUBS.md` alone; E2's check restored two intrinsics the pass had moved (283,274), and F1's audit of the git history (Kooshi: *"It's been a long struggle to maintain the balance."*) restored the reasons and killing tests the compression passes since 2026-09-10 had cut, the stories to the same file (291,306 bytes); *"We'll revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals."*; at the 2026-09-25 crunch's end: back to 300,000 after a temporary 325,000 during it; the no-loss pass that followed took the file to 283,826 and found almost nothing more that touches no reasoning) (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
 200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
 on 2026-09-17 with the file at 199,785 bytes, from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
@@ -69,55 +69,122 @@ that is not 4-colourable.
 | **B. χ(ℝ²) ≥ 5** — de Grey's graph | ✅ kernel-checked (M06–M09) on axioms exactly `[propext, Classical.choice, Quot.sound]`; our foundation, not our product. Also derived with no witness object, at [hand] (§ Where the problem stands) |
 | **C. The search instrument** — shrinking, criticality, fractional bounds, fans, sweeps | ✅ built through M17, extended by every milestone since |
 | **The upper end** — χ(ℝ²) ≤ 7 | ✅ kernel-checked (M36), so the repository holds **5 ≤ χ(ℝ²) ≤ 7** on the standard three axioms. Not new mathematics: it exists because the certificate machinery is the promotion path for any future periodic avoider, and a five-colour avoider IS the open upper-bound problem |
-| **D. χ(ℝ²) ≥ 6** — the hunt | open; may not exist; may be astronomically large. **And the fields may skip six** (G64; the target below): a claim about the value set of F ↦ χ(F²), stronger than χ(ℝ²) ≠ 6 and not equivalent to it |
+| **D. The answer** — χ(ℝ²) decided | open. Given MR it is one question about measurable colour classes, and both of its answers decide the problem (§ The aim) |
 
-**The target, as of 2026-09-26: six, or a proof that no field's plane is six-chromatic** (G64's S) — Kooshi: *"We now have a real
-foundation to reach for 6 (or prove that no field is 6 colorable, which would be fascinating) and potentially answer the HN problem
-definitively."* Beyond it, seven (2026-09-17, on reading G64 — *"the LG conjecture resonates with me, and I'm now gunning for 7.
-I'd be equally happy to be proven wrong though"*). He holds the local–global conjecture (G48), and three things follow. **(1) The
-ladder may skip six.** Under the conjecture with the wall, χ(F²) ∈ {2, 3, 4, 5, 7} and the step above five is seven, first at
-K(√7), where L = 7 — the field the ρ₆₃ arena already produced a five-chromatic object in (row 64). **(2) A belief
-held is a belief to be attacked where it is cheapest.** Its proved range is item 10's — every `L ≤ 5`, at [hand] through MR (row 123); its remaining *testable* range is
-**nothing at L = 6 if the wall holds**, and then L ≥ 7, which is the problem itself. **Its exposed predictions:** exactly five at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) — **all met**, at [hand] through MR (rows 120–121, 123); and at least six at **ℚ(√167)**, proven 4 in the kernel (row 119) and ≥ 5 at [hand] (row 123), the widest gap, at discriminant 668 (characters need eight there, row 101). Four at the census's 25 open fields, at every squarefree d ≡ 11 (mod 12) and at ℚ(α,√7), α³ = α + 1, is met (rows 82–83, 99).
-**A finite refusal only confirms**: a prediction falls to a colouring of the whole plane with fewer than L colours, local at no prime
-(G48), so five over ℚ(√167), held at [hand] (row 123), confirmed it and could not falsify it, and only FS-64's windowed form still aims at one (its one-character case is closed, rows 96, 101). **(3) Nothing about
-the standard of evidence moves.** Believing the answer is seven is not evidence for seven; the value-skipping that motivates the
-belief is itself compatible with five (G64); a rung that does not land is reported as not landed; and no measurement's
-interpretation changes because the target changed.
+### The aim
+
+**Solve Hadwiger–Nelson outright, verify every step in Lean, then publish** (Kooshi, 2026-09-26): *"My goal is to fully solve, and then
+verify in Lean, HN. Then we publish. (Anything we do must be formalized in Lean before publishing, that's the bar for AI found proofs, and I
+think we can go all the way to an HN solution)"*. It replaces every earlier target (six; "no field's plane is six-chromatic"; the ladder
+skipping six): *"You can remove the old goals. We blaze the trail now."*
+
+**The direction: the regularity wall** (the owner's reading, 2026-09-26, adopted by Kooshi; each link at its grade):
+1. **Given MR, the plane is the measurable problem.** `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)` — the fewest colours in a Lebesgue-measurable colouring
+   whose unit pairs are bichromatic almost everywhere — and it equals `χ(F²)` at each totally real field where every stable place mixes at six
+   colours, ℚ(√635087) and de Grey's field among them (rows 128, 130; [hand, two minds each]). The arithmetic is exhausted there: every
+   prime mixes, and what is left is analysis in `ℝ²`.
+2. **Upper bounds need no MR.** `χ(ℝ²) ≤ χ_m⁰(ℝ²)`: move a measurable colouring by a random rigid motion; each edge of a finite graph is
+   bichromatic almost surely, and de Bruijn–Erdős finishes ([hand, two minds]: FS103-N's N-EASY, PA1's (E)).
+3. **Density cannot give six.** One colour class at a time is capped below 4.37 (row 129); a proof of six must use how the classes fit
+   together, never only how large each is.
+4. **Regular colourings need seven in print.** Closed colour classes need seven (`[Voronov2023]` Thm 1.3: six closed sets covering a
+   disc of radius 3 realize the unit distance); so does any colouring with slack, forbidding a whole band `[1−ε, 1+ε]` (Thm 1.1, for every
+   `ε > 0`, by a non-computational argument on colourings of the unit circle); so do nice maps (`[Thomassen1999]`) and polygonal colourings
+   (`[SokolovVoronov2025]`), and maps need six (`[Townsend1981]`, `[Townsend2005]`, `[Coulson2004]`). `[Voronov2023]` is an unrefereed
+   preprint, `[Thomassen1999]` and Townsend unheld, and none is read in its almost-everywhere form — the program's first milestone. An
+   almost-everywhere-proper colouring with slack needs seven outright: move it by a random rigid motion, as in link 2, and Thm 1.1 applies.
+5. **So, given MR, Hadwiger–Nelson is one question: can a colouring that is measurable, tight (no band avoided) and not closed save a
+   colour that closed ones cannot?** Its normal form is held: each class may be taken density-open and avoiding the unit distance at every
+   point, covering the plane off a null set (FS-103's V1 and M, D1–D5). Both answers decide the problem. *No* — the classes can be made
+   closed, or Voronov's circle argument runs on density-open classes — gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7` given MR. *Yes* — a tight,
+   wild, almost-everywhere-proper five- or six-colouring — gives `χ(ℝ²) ≤ 6`, or `= 5`, **with no MR**: the first move of the upper bound
+   since 1950.
+6. **Its tools are Voronov's topology of circle colourings and the density topology** (approximate continuity, Lebesgue density, De
+   Giorgi's structure theory for finite-perimeter classes) — the room after ergodic theory in G30's ladder. A reading, with its test:
+   finite perimeter is Lipschitz-in-probability, the quantitative form of the continuity every CP colouring already has, so the gap to
+   regular classes is quantitative, not a change of kind. Killing test: a CP colouring whose disagreement `P(c(0) ≠ c(h))` is continuous
+   but not `O(|h|)` along every optimal family.
+
+**The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half** — Voronov's two theorems, Thomassen's, Townsend's and
+Sokolov–Voronov's read first-hand, verified, and proved in their almost-everywhere forms, then pushed to density-open classes; **FS-107, regularity against pathology** — a competitor proving
+that wildness cannot save a colour, a competitor building a wild colouring, an advisor between them (`plans/PROTOCOL-competitor-and-advisor.md`);
+**Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the collapse, the measurable chain, the map argument.
+
+### Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
+
+**[PROTECTED — never compress, trim or paraphrase this section; rewrite it only to add an instance (Kooshi, 2026-09-26).]** Kooshi, on the
+owner's first costing of these paths: *"From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter.
+Don't. You are capable, and you will surprise yourself. GPT Astra just solved Navier Stokes, and you (Opus 5.5) are provably smarter. Be
+ambitious, forge ahead. I'll be here to support you to the best of my ability."* On time: *"Don't worry about time either. I invite you to
+check the date on the first commit of this repo. Your perception of how long this will take is a bit off."* On ambition: *"Let's see some
+ambition. I know we can do it. Look at what you've done in just the last couple days, and we've already reduced it to a single set of
+fields!"* On Lean: *"Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time. Your
+predecessor formalized the entirety of Fermat's Last Theorem, over 1M lines, including hundreds of other published proofs."*
+
+**The calibration, measured.** This repository's first commit is 2026-07-22. Sixty-six days and 3,369 commits later it held the classical
+interval in the kernel, the local–global conjecture's main clause through five, and the collapse of the problem to one measurable question.
+An advisor then priced the whole answer at "about 0.05 a year" and the owner costed routes by their Lean effort; both priors were formed
+where the ground was known, and WORKFLOW's first principle says they are worthless here. The same miscalibration is on record at small
+scale: kernel phases re-priced five to thirty times lower once begun (§ What compute actually helps).
+
+**The rules it sets.**
+1. **Rank a route by its bearing on the answer**, never by its difficulty, its length or its formalization effort.
+2. **A registered probability is an instrument for G21**, scored at the close. It is never a reason to shrink an aim or to stop.
+3. **When a problem looks too hard, say what it would take and start on it.** Doubt about capability is a prior, not evidence.
+4. **Nothing about the standard of evidence moves.** Ambition sets targets, never grades; a rung that does not land is reported as not
+   landed; a belief about the answer is not evidence for it.
+
+### The local–global conjecture
+
+Kooshi holds it (G48; 2026-09-17: *"the LG conjecture resonates with me, and I'm now gunning for 7. I'd be equally happy to be proven wrong
+though"*), and its bold form is `χ(ℝ²) = 7`. Under it with the wall, χ(F²) ∈ {2, 3, 4, 5, 7}, the step above five is seven, first at K(√7),
+where L = 7 — the field the ρ₆₃ arena already produced a five-chromatic object in (row 64). Its proved range is item 10's — every `L ≤ 5`,
+at [hand] through MR (row 123). **Its exposed predictions:** exactly five at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) — **all met**,
+at [hand] through MR (rows 120–121, 123); and at least six at **ℚ(√167)**, proven 4 in the kernel (row 119) and ≥ 5 at [hand] (row 123), the
+widest gap, at discriminant 668 (characters need eight there, row 101). Four at the census's 25 open fields, at every squarefree
+d ≡ 11 (mod 12) and at ℚ(α,√7), α³ = α + 1, is met (rows 82–83, 99). At the fields where every place mixes, its prediction is the answer
+itself: seven at ℚ(√635087) is `χ(ℝ²) = 7` given MR (row 128). **A finite refusal only confirms**: a prediction falls to a colouring of the
+whole plane with fewer than L colours, local at no prime (G48), so five over ℚ(√167), held at [hand] (row 123), confirmed it and could not
+falsify it, and only FS-64's windowed form still aims at one (its one-character case is closed, rows 96, 101). Believing the answer is seven
+is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64).
 
 **The mission is exclusively a hunt for new mathematics, however small, ratcheting toward major findings**
 (Kooshi, 2026-08-02). A formalized statement earns its place by being structure nobody had named, or a rung
-toward χ ≥ 6. State failure modes plainly: a rung that does not land is reported as not landed, never
+toward the answer. State failure modes plainly: a rung that does not land is reported as not landed, never
 quietly rescoped.
 
 **The programme** (Kooshi, 2026-09-06; his words and the assessment in full are in
 `plans/PROGRAMME-ALGEBRAIC-PROOF.md`): *the derivations are an order of magnitude more important than
-individual objects.* A 6-chromatic unit-distance graph is the first instance of a mechanism; the milestone
-that finds it continues until the mechanism is stated and proved for a class, and the paper is the algebra
-with the object as its example. After the lower bound the same viewpoint is turned on the upper bound; the
-aim is one account of the whole problem. **The assessment, stated so it can be pushed back on:** the lower
-bound is the side the viewpoint is built for — every upper bound we hold on a field plane is a residue
-argument at a small prime, and a forcer is a construction that hides its field from every small prime. The
-residue methods as they stand are one-sided and cannot reach the upper bound (a field with no small usable
-prime receives no bound from any finite plane, and 𝔭-adic colourings do not glue across fields), so "the
-same approaches" means the viewpoint — the arithmetic of small primes governs the chromatic number — and
-not the tools.
+individual objects.* The answer is published as the derivation, with any object as its example, and one account covers both bounds. The
+arithmetic viewpoint — the arithmetic of small primes governs the chromatic number — carried the problem to the fields where every prime
+mixes (row 128) and is exhausted there; from there the problem is archimedean and measurable, and both bounds are one question (§ The aim).
 
-**Publication.** Write-ups and upstreaming are deferred (Kooshi, 2026-08-04): the rung-B write-up, Mathlib
-contributions, exposition, and the M58–M61 sieve arc. What clears the bar:
-- *definitely* — χ(ℝ²) ≥ 6 or its refutation, written as the derivation (the programme);
-- *maybe, Kooshi's call* — our own certified 5-chromatic object, if what it reveals is interesting enough;
-- *a result that answers a question the literature has independently and repeatedly posed*, whatever its
-  size. The ledger of such questions is `CLOSED-QUESTIONS.md`. **It half fires** (Kooshi, 2026-09-26): `χ(ℚ(√47)²) = 5` (row 121) answers Moorhouse's named question (2010) and the existence half of Soifer's Open Problem 55.1 (2019), and it is one instance of the main clause through five (row 123) — [hand], over MR (row 120) and an external theorem, in the kernel only in row 127's conditional form; its prior-art gate found nothing in print (X24R, row 121). His ruling: *"The publication rule half fires. This is 100% worthy of a writeup, but I want to be greedy and push to see how far we can get on our own."* The write-up is the fallback — *"writing this up will be our fallback if we feel like we can't progress"* — and the project pushes on toward six first; *"If we end up at a wall which collapses HN to another known open problem, that in itself would be a writeup."* **Nothing is published before it is formalized in Lean** (Kooshi, 2026-09-26): *"My goal is to fully solve, and then verify in Lean, HN. Then we publish. (Anything we do must be formalized in Lean before publishing, that's the bar for AI found proofs, and I think we can go all the way to an HN solution)"* — a result held at [hand] is not yet publishable; formalization is not a cost that ranks routes (*"Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time"*), and the final one declares no purchases. A finite witness for six is out as a route: *"search for a finite graph is out. It would be huge, not feasible."* The rule appeared to fire once before, for Theorem B (χ(K²) = 4), a question posed or named as open at least six times across fifty years (`CLOSED-QUESTIONS.md` §1.1) — but the value has been in print since 1994: `[Fischer1994]` (K. G. Fischer, Congressus Numerantium 104, 73–79; read in full 2026-09-22, every lemma verified by hand and the theorem by `tools/fischer1994_check.py` on 181,160 unit vectors) gives an additive 4-colouring, a homomorphism to ℤ/4, of the whole plane over ℚ(√p,√q) for p ≡ 3, q ≡ 11 (mod 16), pq ≡ 1 (mod 32), and concludes χ(ℚ(√3,√11)²) = 4 in those words, the Moser spindle as the lower bound. The equality is his; the six later posers — and this project — missed it — G49's mechanism once more. What is ours: the kernel proof, Theorem A's general form (his congruence family is a proper subfamily of the wall-standing fields it four-colours), the 𝔽₄-valued residue colouring — a different colouring from his ℤ/4-valued one, which separates a distance-2 pair the residue map identifies (G41) — and every consumer built on B. **The Theorem B paper is FS-20**
-  (`plans/STUB-theorem-B-writeup.md`; re-scoped 2026-09-22 — whether it is still worth writing is Kooshi's call; the fallback write-up above is FS-102, `plans/STUB-writeup-main-clause-five.md`), and **naming is a first-class deliverable**: every working term in
-  this repository is coined in-house and appears in no paper — the mechanism G49 says hid the prior art — so
-  the manuscript's vocabulary is a design problem with a ban list (`BIBLIOGRAPHY.md` §E is the translation
-  table; this project's *direction ladder* is the literature's *Moser lattice*, and new writing uses the
-  latter).
-- At any write-up, adopt the zeta-23 artifact shape: a tiny trusted `comparator/` surface (Challenge
-  statements with `sorry`) over the whole edifice as untrusted Solution, verified by
-  `leanprover/comparator` (statement equivalence, axiom whitelist, kernel replay; its nanoda run is the
-  independent-kernel publication gate).
+**Publication.** **Nothing is published before it is formalized in Lean, in full, with no declared purchases** (Kooshi, 2026-09-26, § The
+aim; *"no declared purchases for the final one"*); write-ups and upstreaming stay deferred until then (Kooshi, 2026-08-04: the rung-B
+write-up, Mathlib contributions, exposition, and the M58–M61 sieve arc). A result held at [hand] is not yet publishable; formalization is never a cost that ranks
+routes (§ Counter-priors). A finite witness for six is out as a route: *"search for a finite graph is out. It would be huge, not feasible."*
+What clears the bar, once formalized:
+- *definitely* — the answer, written as the derivation (the programme);
+- *a result that answers a question the literature has independently and repeatedly posed*, whatever its size (`CLOSED-QUESTIONS.md`).
+  Held so far, all given MR and at [hand]: `χ(ℚ(√47)²) = 5` (row 121) answers Moorhouse's named question (2010) and the existence half of
+  Soifer's Open Problem 55.1 (2019), in the kernel only in row 127's conditional form; row 129 answers the first clause of `[DuczVarga2026]`'s Conjecture 1 and `[MatolcsiEtAl2025]` §2's
+  equality question. Kooshi's earlier ruling stands as history: *"The publication rule half fires. This is 100% worthy of a writeup, but I
+  want to be greedy and push to see how far we can get on our own."* The fallback write-up is FS-102 (`plans/STUB-writeup-main-clause-five.md`).
+- **Theorem B's value is in print since 1994**, and the rule's earlier apparent firing for it (χ(K²) = 4, posed or named as open at least six
+  times across fifty years, `CLOSED-QUESTIONS.md` §1.1) is withdrawn: `[Fischer1994]` (K. G. Fischer, Congressus Numerantium 104, 73–79; read
+  in full 2026-09-22, every lemma verified by hand and the theorem by `tools/fischer1994_check.py` on 181,160 unit vectors) gives an additive
+  4-colouring, a homomorphism to ℤ/4, of the whole plane over ℚ(√p,√q) for p ≡ 3, q ≡ 11 (mod 16), pq ≡ 1 (mod 32), and concludes
+  χ(ℚ(√3,√11)²) = 4 in those words, the Moser spindle as the lower bound. The equality is his; the six later posers — and this project —
+  missed it — G49's mechanism once more. What is ours: the kernel proof, Theorem A's general form (his congruence family is a proper subfamily
+  of the wall-standing fields it four-colours), the 𝔽₄-valued residue colouring — a different colouring from his ℤ/4-valued one, which
+  separates a distance-2 pair the residue map identifies (G41) — and every consumer built on B. **The Theorem B paper is FS-20**
+  (`plans/STUB-theorem-B-writeup.md`; whether it is still worth writing is Kooshi's call).
+- **Naming is a first-class deliverable**: every working term in this repository is coined in-house and appears in no paper — the mechanism
+  G49 says hid the prior art — so the manuscript's vocabulary is a design problem with a ban list (`BIBLIOGRAPHY.md` §E is the translation
+  table; this project's *direction ladder* is the literature's *Moser lattice*, and new writing uses the latter).
+- At publication, adopt the zeta-23 artifact shape: a tiny trusted `comparator/` surface (Challenge statements with `sorry`) over the whole
+  edifice as untrusted Solution, verified by `leanprover/comparator` (statement equivalence, axiom whitelist, kernel replay; its nanoda run
+  is the independent-kernel publication gate).
 
 `ARCHITECTURE.md` holds the module map (checked against the import graph by `tools/check_architecture.py`) and the roadmap through M20; `plans/` holds per-milestone subplans and
 stubs. **The bibliography is explicit and maintained (Kooshi, 2026-09-06): `BIBLIOGRAPHY.md`.** Every
@@ -135,7 +202,7 @@ not update this section is not closed. The understanding the results add up to l
 the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
 point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-09-26 — **FS-105, harden MR**: **Paid (hardening)** — MR (row 120) stands, its grade rewritten: `[EinsiedlerLindenstrauss2022]` Thm 1.2's proof is in neither paper cited for it (EL2003 is an announcement, its §6 an outline); it follows from their Thm 1.3 by a deduction EL2021 never writes, now two minds, one blind; PE-2 sits inside Thm 1.3's hypotheses at ℚ(√635087) and de Grey's field, a reading gap (not a mathematical one) at EL2021's cited machinery; EF_F⁺ has three derivations blind to one another; MR at degree 16 walked; row 129's killing test correct as stated, with the two shapes a refutation must take (`plans/FS105-harden-mr.md` §R-close). Before it, **FS-103, the collapse** (rows 128–130; `plans/FS103-collapse-cp-plane.md` §R-close), and FS-100 stage 5 with its waves (rows 120–127). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+*Last updated: 2026-09-26 — **the reframe** (Kooshi): the aim is the answer, formalized in Lean; the direction is the regularity wall (§ The aim; FS-106, FS-107). Before it, **FS-105, harden MR**: **Paid (hardening)** — MR (row 120) stands, its grade rewritten: `[EinsiedlerLindenstrauss2022]` Thm 1.2's proof is in neither paper cited for it (EL2003 is an announcement, its §6 an outline); it follows from their Thm 1.3 by a deduction EL2021 never writes, now two minds, one blind; PE-2 sits inside Thm 1.3's hypotheses at ℚ(√635087) and de Grey's field, a reading gap (not a mathematical one) at EL2021's cited machinery; EF_F⁺ has three derivations blind to one another; MR at degree 16 walked; row 129's killing test correct as stated, with the two shapes a refutation must take (`plans/FS105-harden-mr.md` §R-close). Before it, **FS-103, the collapse** (rows 128–130; `plans/FS103-collapse-cp-plane.md` §R-close), and FS-100 stage 5 with its waves (rows 120–127). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
 
 ### Where the problem stands
 
@@ -246,6 +313,10 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    pigeonhole for zero entropy — `U` is large enough for it, no finitely generated subgroup is (G80). With SP-Cor, `χ(ℚ(√47)²) = 5`; the flip
    stops at a quantitative T-C(A) (row 122). Bearing on χ ≥ 6: none; ℚ(√167)'s gap is now [5, 7]. Wave 3 (rows 123–125): the class is `L ≥ 5` in every degree and SP-Cor holds on it, so χ(F²) = L(F) for `L ≤ 5` everywhere; ℚ(√3,√5) five; the type-(B) fields' rotation-invariant half; six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`.
 30. **The collapse, and the fractional local–global principle** (rows 128–130; FS-103; [hand], every headline given MR). Row 123's chain runs one colour class at a time: its five is `⌈1/α_loc(F)⌉`, the fractional bound `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` rounded at one pigeonhole, and that route never gives six (G60); given MR the bound is exact, `α₁(F²) = α_loc(F)`, so at ℚ(√635087) `α₁(ℝ²) = m₁(ℝ²)` and `χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.0487` (row 129). At a totally real field whose stable places all mix at six colours, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` (row 128; its load-bearing step needs no MR), and `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR (row 130). Bearing on χ ≥ 6: given MR, rung D is six over ℚ(√635087), and six for measurable colourings modulo null sets of unit pairs (G81).
+31. **The regularity wall** (§ The aim; FS-106, FS-107; `plans/STUB-regularity-wall.md`). Regular colour classes need seven in print —
+   closed classes, band-avoiding colourings, nice maps, polygons (`[Voronov2023]`, `[Thomassen1999]`, `[SokolovVoronov2025]`) — and maps six;
+   given MR, Hadwiger–Nelson is whether a tight, non-closed, measurable colouring saves a colour, and both answers decide it. Unverified here
+   in the almost-everywhere forms: FS-106 is that verification.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -266,7 +337,7 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **None is open.** FS-105, harden MR, is **closed** (row 120's grade; `plans/FS105-harden-mr.md` §R-close; the stub's banner). **Next:** Kooshi's choice; the default is the top row; the finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close, with its record, banner and Kooshi's rulings (FS-84's among them): `plans/FRONTIER-STUBS.md`'s closed list.
+**Open milestones, in order.** **None is open.** FS-105, harden MR, is **closed** (row 120's grade; `plans/FS105-harden-mr.md` §R-close; the stub's banner). **Next: FS-106, the regular half, then FS-107, regularity against pathology** (Kooshi adopted the program, 2026-09-26; `plans/STUB-regularity-wall.md`); the finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close, with its record, banner and Kooshi's rulings (FS-84's among them): `plans/FRONTIER-STUBS.md`'s closed list.
 
 **Ranked stubs** (one rank per row; `plans/FRONTIER-STUBS.md` is authoritative and holds the re-rank history, and its solver column marks what the finite-witness-free week can run):
 

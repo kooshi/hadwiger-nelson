@@ -606,8 +606,12 @@ def audit(old: str, new: str, *, table=None, allow=None, homes=None, moves: str 
     say(f"PROTECTED regions: {len(po)} before ({', '.join(str(len(p.encode())) for p in po)} bytes), {len(pn)} after")
     if len(po) < 2:
         fails.append(f"found only {len(po)} PROTECTED regions in the OLD version (expected 2): the check is blind")
-    if po != pn:
+    # every old region must survive byte-identical; a NEW region (Kooshi may protect new text, 2026-09-26) is allowed and reported
+    if any(p not in pn for p in po):
         fails.append("a PROTECTED region is not byte-identical")
+    added = [p for p in pn if p not in po]
+    if added:
+        say(f"PROTECTED regions added: {len(added)} ({', '.join(p.split(chr(10))[0][:60] for p in added)})")
     # gate sentence
     go, gn = GATE_RE.search(re.sub(r"\s+", " ", old)), GATE_RE.search(re.sub(r"\s+", " ", new))
     if not gn:
