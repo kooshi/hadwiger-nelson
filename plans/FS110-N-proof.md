@@ -275,3 +275,128 @@ remaining colours — one colour if one remains, possibly two different colours 
 is necessary conditions ("only if"), and the heading now says so. **Points 1 and 4, no change:** N-E0, N-SEAM (a)–(c), N-HORN and C-CUSP-K use only the
 union `P_cl(u) ∪ P_cl(v) = [6]` (overlap allowed; N-E0 and N-SEAM (a) extend to covering families concyclic on `ω(w₀)`); N-X uses disjointness and says
 so. C-TAN-POS's scope line is in its verdict above.
+
+## § Continuation — FS110-N2
+
+*Job FS110-N2, de Bruijn (Opus 5.5), 2026-09-27. Briefs: `data/fs110/briefs/N2-110-proof-continued.md` (wins where the two differ) and
+`data/fs110/briefs/N110-proof.md`, with `STANDING-RULES.md`. I continue FS110-N's record here and rewrite none of its verdicts. Object LIM unless marked.
+**Unit-arc proviso**, used throughout: "`ω(p)` carries no arc of `Γ`" means `Γ ∩ ω(p)` is finite; in `𝓜_K` S–V's Condition 5 ("If any boundary
+intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden") is the same as: no arc of `Γ` has
+radius exactly 1.*
+
+### N2: theorems this continuation proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| N2-V4 | a vertex `v` with `ω(v)` carrying no arc of `Γ` has `\|P_cl(v)\| ≤ 4`, and at `\|P_cl(v)\| = 4` some `y ∈ ω(v)` makes `(v, y)` a covering pair at distance 1; with arcs of `Γ` on `ω(v)` both steps are a GAP | [hand, trivial; A2-V56 and N's stage-2 note, checked here; the proviso mine, reached independently of A3's card 2] | stage 4, §4.2 |
+| N2-RING | ring winding: at a vertex `u`, `\|P_cl(u)\| = 3`, `ω(u)` carrying no arc of `Γ`, the ring colouring by `P_cl(u)^c` has a winding number `W(u)`; if it has no swap point then `\|W(u)\| ≥ 2`; so `W(u) = 0` ⟹ a swap | [hand, one mind; exact check on five named rings, `tools/fs110_n_ring.py`] | §4.3 |
+| N2-SWAP | at a swap point `x ∈ ω(u)`: a covering pair at distance 1 (`(u, x)`, or `(x, y)` with `y ∈ ω(x)`), unless `Γ` carries an arc of `ω(σx)` at `x` or an arc of `ω(x)` | [hand, one mind] | §4.3 |
+| N2-ACT1-W0 | Act One holds in every tight six-map having a vertex of four colours or a trivalent vertex with a swap (in particular with `W = 0`), bar the named unit arcs; under Condition 5 unconditionally | [hand, one mind] | §4.4 |
+| N2-ROT | at a ring change point with pattern (A+, A−) one colour `g ∈ P_cl(u)` fills the outward 60° cone at `x`, and `u`'s `g`-sector lies in the closed half-plane away from `x`; with (B+, B−) the inward cone and the half-plane toward `x`; no other pattern forces a colour at `x` | [hand, one mind; table checked on named rings] | §4.3 |
+| N2-HEX | a purely rotating ring (six 60° arcs, `W = ±2`) forces `u` regular: three sectors of exactly 120°, each facing away from two consecutive rotation points | [hand, one mind] | §4.4 |
+
+### N2: would-have-searched-here log
+
+| move I would have made by search | what I did instead |
+|---|---|
+| enumerate ring colourings of `ω(u)` by three colours with the 60° rule, to see which are swap-free | derived the band argument (N2-RING); checked five rings given by formula |
+| enumerate sector-angle triples at `u` against a rotating ring | derived the serving count (window `180° − α`) by hand (N2-HEX) |
+
+### N2: fence log
+
+1. Start-up `git log --oneline -3`: subjects `aad1d747`, `31c74057`, `380e3d17` — the snapshot's own; nothing beyond it opened.
+2. I read `data/fs110/reports/FS110-N.md` (my brief names it: "its report is `data/fs110/reports/FS110-N.md`") and no other file in `data/fs110/reports/`;
+   I did not list the directory.
+3. A tool-output file was written by the harness under `~/.claude/projects/…/tool-results/` when I printed N's record; I did not open it and read the
+   record from `plans/` instead. No fenced path opened, listed or grepped.
+
+## Stage 4 — SAVED: card 1, the four-colour frame fact, and Act One on rings
+
+### 4.1 Card 1 (A2), resent to me verbatim
+
+FS110-N's stage 3 answered all four points (retraction 1 on point 2; heading fixed on point 3; points 1 and 4 unchanged). I checked each against N's
+statements and add one precision, which is also my answer to A3's card 2: **N's stage-2 observation** ("for any vertex `u` with `|P_cl(u)| = 4`, `ω(u)`
+meets at most two colours (N-E1), and any point of `ω(u)` where those two meet makes a covering pair at distance 1") **needs "where those two meet" to
+exist, which fails when arcs of `Γ` on `ω(u)` separate them** — scoped in N2-V4 below (a precision, not a change of verdict; counted as retraction 2,
+free).
+
+### 4.2 N2-V4: the four-colour frame fact, checked
+
+*Statement (A2-V56, verbatim):* "In a full tight a.e.-proper map, every vertex has |P_cl(v)| ≤ 4." *Its step:* "One colour cannot fill a unit circle,
+because two of its points 60° apart are at distance 1 (A-EXACT)." *The owner's combination (the advisor's record, verbatim as relayed):* "every tight
+six-map with a four-colour vertex has a covering pair at distance 1".
+
+**Verdict: TRUE when `ω(v)` carries no arc of `Γ`; GAP otherwise [hand, trivial].** If `Γ ∩ ω(v)` is finite, `ω(v)° = ω(v) ∖ Γ` is cofinite in the
+circle, so it holds pairs 60° apart; by N-E1 its colours avoid `P_cl(v)`, and by N-E0 two points 60° apart differ, so `ω(v)°` carries at least two
+colours outside `P_cl(v)`: `|P_cl(v)| ≤ 4`. At `|P_cl(v)| = 4` the two outside colours `e, f` both occur on `ω(v)°`, which is a finite union of open arcs
+separated by points; walking round, some separating point `y` has an `e`-arc on one side and an `f`-arc on the other, so `P_cl(y) ⊇ {e, f}` and
+`P_cl(v) ∪ P_cl(y) = [6]`, `|v − y| = 1`. *Where it fails:* if `ω(v)` carries arcs of `Γ` (unit arcs centred at `v`), an `e`-arc and an `f`-arc may be
+separated only by such arcs; an endpoint `y` of one has `P_cl(y)` = the adjacent outside colour plus the arc's two side colours, which lie in `P_cl(v)`
+by TS-U — no covering pair. And `|P_cl(v)| = 5` needs `ω(v)°` to hold no two points 60° apart, i.e. arcs of `Γ` on `ω(v)` of total length at least half
+the circle (each hexagon inscribed in `ω(v)` has at most three points in `ω(v)°`, alternate ones). **So the frame fact holds with the proviso, and the
+vertices it leaves are centres of unit arcs of `Γ`** — the (S1) kind, centred at `v`. *Six is spent* at "the two outside colours `e, f`": with seven
+colours a four-colour vertex leaves three outside colours and `(v, y)` covers six of seven.
+
+### 4.3 The ring of a trivalent vertex
+
+*Setting.* `u` a vertex, `t = P_cl(u)`, `|t| = 3`, `ω(u)` carrying no arc of `Γ`. By N-E1, `ω(u)°` is coloured by `t^c`; by N-E0, `c(θ) ≠ c(θ + 60°)`.
+Identify `t^c` with `ℤ/3`; lift `c` to `c̃` along the circle, changing by `+1` or `−1` at each colour change (a point of `Γ ∩ ω(u)` with the same colour on
+both sides changes nothing). `W(u) = (c̃(θ + 360°) − c̃(θ))/3 ∈ ℤ` (its sign depends on the identification). `σ` is the rotation by `+60°` about `u`;
+`c(x±)` are the colours just after and just before `x` in the positive sense. A **swap point** is a change point `x` with `c(σx−) = c(x+)` and
+`c(σx+) = c(x−)` (or the same with `σ⁻¹`).
+
+**N2-RING. [hand, one mind.]** *If `ω(u)` has no swap point then `|W(u)| ≥ 2`; hence `W(u) = 0` forces a swap point.* *Proof.* `D(θ) = c̃(θ+60°) − c̃(θ)` is
+locally constant and never `≡ 0 (mod 3)` (N-E0). It jumps only where `θ` or `θ + 60°` is a change, by `Δ(θ+60°) − Δ(θ) ∈ {0, ±1, ±2}` (`Δ` the step
+there). To leave a band `{3m+1, 3m+2}` it must jump over `3m` or `3m+3`, i.e. by `−2` from `3m+1` or `+2` from `3m+2`; that needs `Δ(θ) = ±1`,
+`Δ(θ+60°) = ∓1`, and then `c(θ+60°−) = c(θ−) + D ≡ c(θ+)` and `c(θ+60°+) = c(θ−)` — a swap. With no swap, `D` keeps one band and
+`3W = Σ_{k=0}^{5} D(θ + 60k°) ∈ [18m + 6, 18m + 12]`, so `W ∈ [6m+2, 6m+4]`, never in `{−1, 0, 1}`. ∎ A two-coloured ring (S–V Lemma 2's ring) has
+`W = 0`, so it always has swaps.
+
+**N2-SWAP. [hand, one mind.]** *Let `x` be a swap point, `p = c(x−)`, `q = c(x+)`, `r` the third colour of `t^c`. Then (i) `Γ` carries an arc of `ω(σx)` at
+`x`, or (ii) `r ∈ P_cl(x)` and `(u, x)` is a covering pair at distance 1, or (iii) `P_cl(x) = {p, q, g_in, g_out}` with `g_in ≠ g_out` in `t`, and then
+N2-V4 at `x` gives a covering pair at distance 1 unless `ω(x)` carries an arc of `Γ`.* *Proof.* The `p`-tile at `σx` holding the arc just after `σx` has
+points at distance `> 1` from `x`, so by N-E2 every `p`-tile at `x` is outer to it: `S ∩ B(σx, 1) = ∅`. The `q`-tile at `σx` holding the arc just before
+`σx` has points at distance `< 1` from `x`, so every `q`-tile at `x` is Siamese: `S ⊆ B̄(σx, 1)`. At `x`, `ω(σx)` has two tangent directions, `τ_in`
+into `B(u, 1)` and `τ_out` out of it (they make 60° with `ω(u)`'s tangent). Suppose no arc of `ω(σx)` leaves `x` along `τ`. If `τ` is interior to a
+sector, that tile has points on both sides of `ω(σx)`; if `τ` is a boundary ray, the arcs leaving along `τ` have curvatures `≠ 1` against `ω(σx)` (in
+`𝓜_K` a circular arc tangent to `ω(σx)` with curvature 1 on the same side coincides with it), and the sector (full or cusp horn) that holds the
+curvature-1 slot between them straddles `ω(σx)`. Either way a tile at `x` straddles `ω(σx)` near `τ`, so its colour is neither `p` nor `q`. If it is `r`,
+(ii). Otherwise it is in `t`, so by N-E1 at `u` its tile misses `ω(u)`: the straddler at `τ_in` lies in `B(u, 1)`, the one at `τ_out` outside `B̄(u, 1)`.
+One colour `g` at both is impossible: against a `g`-tile `T_g` at `u`, N-E2 for `(u, x)` makes `T_g ⊆ B̄(x, 1)` (inner straddler, Siamese) and
+`T_g ∩ B(x, 1) = ∅` (outer straddler, outer), so `T_g ⊆ ω(x)`, absurd. So `g_in ≠ g_out`, (iii). ∎ *Where six is spent:* "`r ∈ P_cl(x)` ⟹ covering",
+and in N2-V4. *Seven-colour control:* in the tight hexagonal seven-colouring the ring of a vertex sees four colours, so `W` is not defined and the
+lemma is silent, as required. *Townsend's ⅔π sector:* the exception (i) is a unit arc of `ω(σx)` separating `p` (outer) from `q` (Siamese) — S–V
+Prop. 5's own exception ("Since the arc of ω(y) is not a boundary"), which Townsend's sector realises.
+
+**N2-ROT (the neighbour table). [hand, one mind.]** At a change point `x` (`p` before, `q` after), write (A+) for `c(σx−) = q`, (B+) for `c(σx+) = p`,
+(A−) for `c(σ⁻¹x+) = p`, (B−) for `c(σ⁻¹x−) = q`. By N-E2 as above: (A+) puts every `q`-tile at `x` in `B̄(σx, 1)` (directions `[30°, 210°]` from the
+outward radial at `x`, counterclockwise positive); (B+) puts every `p`-tile outside `B(σx, 1)` (`[210°, 390°]`); (A−) puts `p` in `B̄(σ⁻¹x, 1)`
+(`[150°, 330°]`); (B−) puts `q` outside `B(σ⁻¹x, 1)` (`[−30°, 150°]`); no `r`-tile is at `x` (else (ii)). Hence: (A+, B+) or (A−, B−) is a swap
+(N2-SWAP); **(A+, A−)** leaves the **outward cone** `(−30°, 30°)` to a colour `g ∉ {p, q, r}`, so `g ∈ t`, its tile outside `B̄(u, 1)`, and by N-E2
+`u`'s `g`-sector lies in the closed half-plane away from `x`; **(B+, B−)** leaves the **inward cone** `(150°, 210°)`, `g ∈ t` inside `B(u, 1)`, `u`'s
+`g`-sector in the closed half-plane toward `x`; every other pattern forces nothing at `x` (each colour's allowed set leaves no open gap). A single
+change (`σ^{±1}x` inside `r`-tiles) is free. `tools/fs110_n_ring.py` reproduces the table on the named rings: the rotating ring's six changes are all
+(A+, A−); the twelve-arc ring's (`W = 4`) all (B+, B−); the nine-arc ring's (`W = 3`) all free.
+
+### 4.4 Act One: what is proved, and the GAP
+
+**N2-ACT1-W0. [hand, one mind.]** *A tight six-map has a close covering pair (at distance 1) if it has (a) a vertex with four colours whose circle carries
+no arc of `Γ` (N2-V4), or (b) a vertex with three colours whose circle carries no arc of `Γ` and whose ring has a swap point — in particular a ring with
+`W = 0` (N2-RING) — unless `Γ` carries the unit arc N2-SWAP (i) or (iii) names.* Under Condition 5 (no arc of radius 1 in `Γ`) the proviso is empty.
+**So an Act-One counterexample with no unit arcs has: every vertex of at most three colours (bichromatic vertices of degree `≥ 4` allowed), and every
+trivalent ring swap-free, hence winding `|W| ≥ 2`, its changes free or rotation points.** That is the **example invariant** (G79) every such map must
+carry at every trivalent vertex: *the complementary ring winds at least twice.*
+
+**N2-HEX. [hand, one mind.]** *A purely rotating ring (`W = ±2`, six arcs of 60°) forces `u` regular.* Every change `x_k` is (A+, A−), so some sector of
+`u` fits in the closed half-plane away from `x_k`, for each `k`. A sector of angle `α` centred at `β` fits away from `x_k` iff `|β − (dir x_k + 180°)| ≤
+90° − α/2`: it serves at most `⌊(180° − α)/60°⌋ + 1` of the six points, none if `α > 180°`. The three sectors are contiguous with angles summing to 360°;
+the only way to serve all six is `(120°, 120°, 120°)`, each sector centred exactly between the antipodes of two consecutive `x_k` (the other counts that
+reach six, `(60°, 120°, 180°)` and `(60°, 60°, 240°)`, fail contiguity: checked by hand, §4.4 of my working). This is the hexagonal tiling's vertex;
+the pure rotating ring is locally consistent (the hexagonal picture: consecutive outward straddlers at `x_k, x_{k+1}` are outer to each other, checked).
+
+**C-ACT1: GAP**, at the step **"a tight six-map (no unit arcs) whose every trivalent ring winds"**. Proved: Act One at four-colour vertices and at every
+ring with a swap. Not proved: rings with `|W| ≥ 2` — locally consistent (the rotating ring with a regular `u`; the nine-arc ring with free changes), so
+the kill is not local at one vertex: it must read how windings of adjacent vertices fit (two vertices on one edge share two colours, and their rings
+live in triples that share one colour). Unit-arc maps are the second branch (the swap's exceptions are the T2/S1 seams' unit arcs).
+
+## Stage 4 — SAVED
