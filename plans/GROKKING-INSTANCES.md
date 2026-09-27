@@ -172,6 +172,10 @@ Its discoverer declined the credit for depth and named this instead, which is wh
 
 The paper had been in our bibliography, its row naming the theorem, for two weeks (G50).
 
+*FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+FS-103's: `[DuczVarga2026]`, held and read in full at FS-56's §PA (2026-09-16), had disproved `[MatolcsiEtAl2025]` Conjecture 1 in June 2026; the gate framed CTL-FRAC as "refuting a published conjecture", and the owner repeated it to Kooshi (`plans/FS103-close-inventory.md` items 38, 28). BDOV 2014 and Ambrus et al. §4, held and read at J26, bore on `χ_CP` and were not drawn until the gate; zbMATH's `ab:` missed BDOV (summary withheld).
+
 ## G51 — A competitor and an advisor beat one mind
 
 *F1: G51 as at `c5e55f12^`.*
@@ -192,11 +196,27 @@ The paper had been in our bibliography, its row naming the theorem, for two week
 
 Its author declined the credit and named the sequencing: having been wrong twice that evening on the same kind of step made the third one cheap to see.
 
+*FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+FS-103 (two blind verifiers, an advisor comparing them, two blind checks of one-mind derivations): no divergence of truth in four pairings; the free-window retractions were the advisor's endorsement of "totally real" for the wrong reason, V1's "the exception is needed", V1's 59 misread, and F's §3.4 item 2 (by B). The owner's trims of verbatim claims cost twice: claims-m2 dropped M1's hypothesis `T ⊆ supp σ` (false as written, found by N as N-SUPP) and N's brief pointed at "A-E3 in the claims", which no open file held.
+
+## G54 — Tight or slack
+
+*FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+FS-103's V1 read row 110's `0.199` at 59 — a Hoffman ratio — as `λ*` in a stage-1 control; the plan's X5 line ("thickness is `sup|ν̂|`, both signs, not Hoffman's sign") caught it before any verdict (`plans/FS103-V1-verification.md` §Stage 3 correction 4).
+
 ## G58 — The antipodal conjecture
 
 *F1, from G58, cut in `d0df4f82` (2026-09-21, “trim ahead of FS-66's close”), after “…rather than on a full cube-and-conquer.”:*
 
 **Attempted 2026-09-16 […] 8) as a decision, and it returned NOTHING — every refusal was free and every informative row undecided.** The `(2,2,2,2)` rows fall to the fixed-colour argument in 0 s, the identity rows fall in 0 s to a single edge (some `z` is adjacent to `−z`, so `c(z) = c(−z)` is immediate), and the rows with a τ fixing several colours — the only ones that could carry a colouring — were undecided at 3,000,000 conflicts after 170–483 s. A test whose informative outcome was never shown to be reachable, which is this file's own rule broken by its author within the hour.
+
+## G60 — Fractional colourings reach fields the residue method cannot
+
+*FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+FS-103's §G read G60 and G24 only for "no bound on `χ_CP`"; their sharper bearing — that row 123's own five is G60's fractional bound rounded, so its route cannot give six — was drawn by the gate (CTL-FRAC) and proved by FS103-F (row 129) (`plans/FS103-collapse-cp-plane.md` §R-close 3.1).
 
 ## G64 — Six may be a value no field attains
 
@@ -212,6 +232,26 @@ FS-73 (the instance); FS-79
   (`plans/FS79-invariant-question.md` §R-close.3) — the class-level results (four no-gos of named formats, the rank-1 criterion, row 80)
   through the structural question, by derivation; the instance result (`L21cc6506` loose, row 81) from an exact computation, an extension
   of FS-73's `Θ` tree, aimed at a derived claim by the advisor's question; the *Do*'s last sentence missed once (the new tool not aimed at phase 0's survivors the day it landed; run the next day as P3b); FS-81 (`plans/FS81-quadratic-four-colours.md` §R-close.3) — the class theorem (row 82): classify `Θ₃(F)` for every `F ⊆ ℝ`, the recognition arriving with the question; the census's certificates (row 83) derived from its finite shadow, then certified; stage D (row 84) a calibration; FS-85 (§R-close.4) — rows 85, 86 answer S1 and S2, row 87's no-gos the same questions; the plan-phase advisor's split, target-moving results apart from no-gos, **Kooshi declined: "yes", no-gos count** (2026-09-24); FS-86 (§R-close) — S1 asked of every four-colouring and answered by derivation, the invariant locality at the tight place (rows 88–92); the pinning operator §IQ hoped for neither found nor excluded; FS-89 — §IQ posed Berend's MT/ID property modulo the isometric direction, and row 95 is that property; FS-91 — the class theorem via the peel on the value-set profile, and no mixing at `k = 3` with it; band rigidity at every band by extending a known tool; M2 — its one derivation, the bridge (J17): a ring hom into `ℝ_alg` is Artin–Lang, with a classical answer; the kernel ports outside the count; M3 — both questions through the structural form, Q2's invariant found (the fibre's classes above the mixing threshold), Q1's not (FW rules out every Kempe invariant). Tenth, row 88 — Q-μ's invariant (spectral type) found and decisive on `T + A + Fin_S`, Q-tr's not. Eleventh, FS-67 — the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found. Twelfth, FS-100 — §IQ's named invariant, the orbit closure of `Θ(U)`, refuted both uniform selection claims and reduced the corrected one to one density step; the class identification by extending a known tool; layer 2's invariant not found.
+
+*FS103-X, from G72, after “…are in `plans/GROKKING-INSTANCES.md` §G72.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+Thirteenth, FS-100 stage 5 — the headline (row 120) from recognition at the prior-art gate and two known tools extended, §IQ's named invariant (entropy) right but written after the recognition; the structural form produced the consumer statements and the example invariant (row 122); its wave 3 transferred by extending held tools field by field (row 123).
+
+*FS103-X, a new instance, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+Fourteenth, FS-103 (`plans/FS103-collapse-cp-plane.md` §R-close 3.3) — through the structural question: CTL-FRAC ("does the argument run one class at a time?") is a question about every invariant independent set, and FRAC answered it (row 129); both blind C-LB derivations carried §IQ's named invariant, the fibre colour-measure vector; the measurable equality (row 130) came from extending a known tool (weak-* compactness; BDOV's operator).
+
+## G79 — A wall arrives as a counterexample's invariant
+
+*FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+First test: the wanted-poster sessions J37–J39, which set counterexample invariants side by side; FS-100's result came from an example's (the cross of an actual four-colouring of ℚ², row 116); so did FS-75's kernel port (the winding every three-colouring carries, row 119); FS-100 stage 5: the headline from an example invariant of the acting group (entropy against growth); the colouring flip GAP'd at QTCA_{1/3} (row 122); FS-100 wave 3: the class theorem and SP-Cor in every degree from an example invariant (the independence-ratio profile every colour class obeys, place by place); the no-gos (B-3, C-4, TR-ROT) from counterexample invariants; wave 3b: TR-ROT's closure on `E` from an example invariant (the rotation-averaged spectrum every translation-invariant colouring measure carries), its flip, a counterexample invariant, only an equivalence (row 126).
+
+## `CLAUDE.md` § Delegation — one level deep
+
+*FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
+
+**FS-103's:** the planner (≈497k against a 450k line), the gate reader (≈454k against ~200k sizing) and the advisor (≈317k at its stage 3 against 300k) ran past their hand-back lines (inventory items 13, 22, 29).
 
 ## `CLAUDE.md` § Building — Kill by PID or process group
 
