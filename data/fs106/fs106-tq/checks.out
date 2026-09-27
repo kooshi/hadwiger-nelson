@@ -1,0 +1,9 @@
+PASS  rem_constant: eta=1/20: (1-eta)/4 - pi*eta = 0.080420367 (>0 needed); threshold eta < 1/(1+4pi) = 0.073711682
+PASS  rem_chord: min over grid of arc/(2 eps) = 1.010721 (>= 1 needed; ball radius 2 eps)
+PASS  core_constant: theta=1/100, eta=0.000397887: theta/16 - pi*eta/4 = 0.000312500 (>0 needed)
+PASS  hex_tight: s=1/2: diameter 1 (<=1 needed, =1 is tight: True); same-colour gap (sqrt21-2)s = 1.2912878 (>1 needed)
+PASS  hex_pairs: eps=0.05: 425 grid pairs at distance >= 1-eps; 0 with no point within 0.067 of a vertex
+PASS  hex_nonkept: outside fraction >= 2/27 > eta = 1/20 needed
+PASS  disc_cap: min |B(q,t) cap U_3| / (pi t^2) = 0.464533 over q in U_3, t in (0,1] (>= 0.25 needed)
+PASS  parts: delta6 = 0.0001430172087, coverage 0.999856982791 (> 0.99985698 needed); straight-sided rho at his parameters = 6985.234616 (Table 1: 6985.378399)
+ALL PASS

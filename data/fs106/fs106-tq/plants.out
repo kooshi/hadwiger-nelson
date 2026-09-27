@@ -1,0 +1,8 @@
+plant rem_constant exit=0 :: FAIL  rem_constant: eta=1/10: (1-eta)/4 - pi*eta = -0.089159265 (>0 needed); threshold eta < 1/(1+4pi) = 0.073711682 PLANT rem_constant: fired alone, as required 
+plant rem_chord exit=0 :: FAIL  rem_chord: min over grid of arc/(2 eps) = 0.000000 (>= 1 needed; ball radius 1 eps) PLANT rem_chord: fired alone, as required 
+plant core_constant exit=0 :: FAIL  core_constant: theta=1/100, eta=0.00159155: theta/16 - pi*eta/4 = -0.000625000 (>0 needed) PLANT core_constant: fired alone, as required 
+plant hex_tight exit=0 :: FAIL  hex_tight: s=11/20: diameter 11/10 (<=1 needed, =1 is tight: False); same-colour gap (sqrt21-2)s = 1.4204166 (>1 needed) PLANT hex_tight: fired alone, as required 
+plant hex_pairs exit=0 :: FAIL  hex_pairs: eps=0.05: 425 grid pairs at distance >= 1-eps; 154 with no point within 0.020 of a vertex PLANT hex_pairs: fired alone, as required 
+plant hex_nonkept exit=0 :: FAIL  hex_nonkept: outside fraction >= 2/27 > eta = 1/10 needed PLANT hex_nonkept: fired alone, as required 
+plant disc_cap exit=0 :: FAIL  disc_cap: min |B(q,t) cap U_3| / (pi t^2) = 0.464533 over q in U_3, t in (0,1] (>= 0.5 needed) PLANT disc_cap: fired alone, as required 
+plant parts exit=0 :: FAIL  parts: delta6 = 0.0001613533204, coverage 0.999838646680 (> 0.99985698 needed); straight-sided rho at his parameters = 6985.234616 (Table 1: 6985.378399) PLANT parts: fired alone, as required 
