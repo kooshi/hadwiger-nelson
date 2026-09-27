@@ -117,8 +117,8 @@ fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11
      style design, as it was described here: Polymath16, seventh thread: Upper bounds One should use the same infinite design without round boundaries. It
      gives the width $\sqrt3 (1+\sqrt5/2) \approx 3.668$ ." That is `√3 + √15/2`, `[AxenovichEtAl2014]` Thm 4.2's number; with Gibbs's "a strip of
      width 3.7 in thread 7" (`[09.15]`) and the thread-7 identity (Stage 3), **the thread's strip and the 2014 print's strip have the same height**. The
-     threads never cite `[AxenovichEtAl2014]` (grep: no "Axenovich" in threads 1–18? — checked in Stage 7). Whether they are the same tiling is for the
-     sides' rebuild (CAL-STRIP).
+     threads never cite `[AxenovichEtAl2014]` (grep of all eighteen threads for "Axenovich": 0 hits, Stage 6). Whether they are the same tiling is for
+     the sides' rebuild (CAL-STRIP).
   2. **Curved boundaries are needed past about 2×2** (`[09.73]`, de Grey): "the only way to cover more than about a 2×2 area is by using unscaleable
      tilings with curves as boundaries" — stated, from the pixel searches' failures.
   3. **Gibbs's enumeration state** (`[09.28]`): 78 / 313 / 563 tile types by the constraint level; the search for a six-tiling of the plane was planned
@@ -182,7 +182,7 @@ figures viewed, 2026-09-27):
   at distance `D` on `C`.
 - **No figure shows a curved boundary, let alone a unit arc**: Coulson's scheme is convex polygonal tiles with area bounded below (§2, p. 192, verbatim:
   "Let us consider a colouring of Euclidean 2-space using polygonal tiles that are convex, (vertices having interior angles strictly less than π), locally
-  finite and all with area greater than some lower bound l."). A boundary lying along `C` itself — a unit arc about `T` — is outside his hypotheses and
+  finite and all with area greater than some lower bound l." — quoted from the page image; the text layer reads "n" for π and "I" for l). A boundary lying along `C` itself — a unit arc about `T` — is outside his hypotheses and
   outside his figures; Fig. 5(a)'s acute angle is where it would enter. (A reading of the figure, not a derivation.)
 
 **`[Soifer2024]`, located by the text layer** (`pdftotext -layout`, grep for "Thomassen", "nice colo(u)ring", "circular arc", "unit arc", "radius 1",
@@ -199,6 +199,78 @@ figures viewed, 2026-09-27):
   ("Coloring Maps", ch. 19–22) is the four-colour history. Ch. 54 (pp. 693–697; read in full at FS-70) cites `[Polymath2021]` as "[Poly] … all related to
   circular disks and inﬁnite strips in the plane" and discusses only its 5-chromatic strip graph. Ch. 64 (p. 767) records `[Pritikin1998]`'s 6198 and
   Parts's 6993 ("a tiling of more than 99.985698% of the Euclidean plane with 6 colors"). Ch. 25 (Townsend) was read by FS110-PA and job LP.
+
+## Stage 8 — SAVED (the print claims graded; the constructions; whole-plane claims; reading status; bibliography rows)
+
+### The print claims of claim list §2 and §6: the exchange around each, and a grade
+
+Grades: *stated* (no argument), *argued* (a sketch), *proved*. Not derived or repaired here.
+
+| claim | who, where | the exchange around it | grade and reason |
+|---|---|---|---|
+| **HOCK**, sentence 1: "So far all possible tesselations that use some other kind of boundary can be reduced to one using only straight lines and unit radius arcs." | Hockertz, thread 6, June 8, 2018 (`[06.31]`) | offered as "one of the puzzle pieces for a proof that can take us from JB regions to lattice-sublattice coloring schemes"; no reply in thread 6 | **stated** — an empirical remark about the tilings in his SketchUp catalogue ("So far"), with no argument |
+| **HOCK**, sentence 2: "The curvature of the boundary is limited to arcs with radius of unit distance or greater, because every arc with a radius that’s smaller than 1 can be filled up to radius 1 without increasing the exclusion zone." | Hockertz, thread 6, June 13, 2018 (`[06.91]`), five days later | the whole justification is "This can be shown even without an actual tile, two perpendicular lines are sufficient. I’ll be adding this in a formalized way to my paper eventually." The paper (`[06.48]`'s dropbox manuscript "Exclusion zones in infinite graphs") is not held. Re-asked by de Grey as an open question, June 30, 2018 (`[08.76]`: "Can we devise a tiling (of any chromatic number) in which that is not so?"), with his own recollection that a radius-2 edge was usable but enlarged the exclusion set; no answer. Contested in May 2020 **for hole-minimising six-colourings only** (`[16.39]`–`[16.51]`): radius-0.5 arcs beat radius-1 arcs for area (de Grey's 0.64 against 0.62), Hockertz restating HOCK ("99.9% sure") and then conceding the objective differs | **stated** — a claimed result with a one-sentence pointer to a proof and no sketch; which side of the arc the tile lies on is not said; in the one setting the threads test it (hole area), it is false as an optimisation statement, and nothing is said of full colourings after that |
+| **The degree-4 sketch** ("If B is a pentagon there must be another cell C touching B with the same colour as A. This necessitates an arc of radius one between B and C joining vertices W to U.") | **Philip Gibbs** (not de Grey), thread 6, June 14, 2018 (`[06.62]`) | its hypothesis is Gibbs's own ("if the cells are large they will have to have at most five sides each touching cells of different colours. If we assume that this is the situation"); its figure is not held; the constraint count follows (`[06.64]`: "up to 8 geometric constraints" against "six degrees of freedom" per three vertices, "coincident constraints" needed); the enumeration it seeds claims "there is no 6-colouring of the plane using pentagonal tiles of diameter one where each tile has exactly two vertices of valency 4" (`[07.31]`, "I won’t write up all the details now") and one more tile type (`[07.33]`) | **argued** — a sketch under an assumed hypothesis (all cells large pentagons), one step read off a figure not held; the downstream elimination is argued, details unwritten |
+| de Grey's own statements about vertices of degree ≥ 4 | de Grey, thread 8, June 28, 2018 (`[08.15]`–`[08.16]`); thread 9, July 3, 2018 (`[09.21]`) | "Clearly the valency of vertices in a k-colour tiling can’t go above k" withdrawn by him in the next comment ("Clearly that is not clear at all"), then restored after a transformation he cannot rule out ("I can’t think of a way to stop such a tiling from being transformed harmlessly"); `[09.21]`: "at most valency-2 of a 4- or 5-valent vertex can be 1" | `[08.16]` **argued** (conditional on an unproved transformation); `[09.21]` **stated** |
+| **The six-colour-vertex sketch** (C-V56, verbatim in claims §2) | de Grey, **thread 8**, June 28, 2018 (`[08.17]`) | precondition: the `[08.16]` transformation (Siamese tiles at a shared vertex merged); the key step ("those six tiles must jointly cover a disk of radius 1 centred on V") is asserted "unless I’m missing something really obvious"; the comment is cut off in the held text; Gibbs independently: "I also concluded that you get a circle divided into six tiles around the vertex and meeting at a hexagon, but what next?" (`[08.18]`); the next layer's case analysis is never done; de Grey's rule "quads and pentagons can have at most one 6-valent vertex, because such vertices must have an angle of exactly 60 degrees" (`[08.70]`) rests on it | **argued** — two informal minds reached the same six-sector picture; conditional on an unproved transformation; the covering step has no argument in the held text |
+| **Gibbs's "constraint"** ("The definition of a constraint I am using is that it is a relationship between an edge and a vertex of the same tile that requires the edge to be an arc of unit radius centred on the vertex.") | Gibbs, thread 8, June 29, 2018 (`[08.39]`) | **a definition, not a claim**. Gibbs used the word in two senses: June 14, 2018 "a constraint being two vertices which must be unit distance apart" (`[06.64]`, vertex–vertex) and June 29 the edge–vertex sense above; de Grey's representation carries both, as pairs `{v_i,v_j}` and `{v_i,e_j}` (`[08.45]`). The claims around it — "There can be at most one of these per edge" (stated), "any two constraint lines must intersect. If they don’t you get a diameter greater than one" (`[08.59]`, argued in one line), de Grey's rules 1–9 (`[08.45]`–`[08.65]`, `[08.99]`–`[08.101]`, stated, some argued in a line) — were implemented in Gibbs's program, whose outputs are not held | definition; the attached rules **stated** or **argued in a line**; none **proved** |
+
+### The constructions (brief's third bullet)
+
+- **The disk (CAL-DISK).** The threads **print its skeleton and its radius, not its construction rule.** It is "Philip’s disk" (`[11.1]`), posted by
+  Gibbs on June 17, 2018 (`[07.49]`, "I think it is possible to get beyond a radius of 2 with something like this"), improved by de Grey with five-fold
+  symmetry ("at multiples of 72 degrees rotated", `[07.50]`); Parts, September 29, 2018 (`[11.34]`): "a skeleton from five connected regular pentagons
+  with unit edges (dotted lines)" and "Minimum radius of 6-flower is $r=\frac{1+\sqrt5}{2} \sqrt{\frac{15+\sqrt5}{10}} \approx 2.12426$", equal to
+  `√((25+9√5)/10)` (Stage 6's identity). In words only: ten small seventh-colour tiles extend it and "come in Siamese pairs" (`[16.91]`); a `{1,3,5,6}`
+  junction "at 2 o’clock on the central tile of the main disc" (`[16.106]`); its dual graph has "quads on the interior, and triangles on the exterior",
+  "Arrows in the dual graph correspond to curved edges in the tile graph. Each quad in the dual graph “emits” four arrows" (`[16.346]`); an 11-tile
+  sub-design (`[17.181]`). **Which edges are unit arcs and where each is centred is not in the held text** (every figure is absent), so the plan's by-eye
+  transcription stays needed — but it now has a printed skeleton (five unit regular pentagons) and a dual-graph rule to be checked against.
+- **The strip (CAL-STRIP).** The rule in words (`[07.10]`, de Grey, June 16, 2018): "The curved lines are arcs at constant radius 1 from the opposite
+  corner, so each vertex down the middle mandates four such curved edges, but they interdigitate without problems"; its tiles "have a width of 0.5" with
+  "two diagonals of length one in addition to the two forced by the constraints" (`[08.12]`, Gibbs); width `√3(1+√5/2) ≈ 3.668` (`[09.100]`, Parts) =
+  `[AxenovichEtAl2014]`'s `√15/2 + √3`; disk cut from it of radius `√(7+√45)/2 ≈ 1.85123` (`[07.45]`–`[07.48]`); why it cannot be extended, in the dual
+  graph (`[16.347]`). **The threads never cite `[AxenovichEtAl2014]`**; Pritikin's tiling is their named source.
+
+### Anything claimed as a six-colouring of the whole plane
+
+| claim | where | what was found wrong |
+|---|---|---|
+| Tom Sirgedas, "Here’s a possible simple tiling of the plane." and "Here’s another attempt, with computer help." | thread 6, June 13–14, 2018 (`[06.70]`, `[06.72]`) | Gibbs: "you broke the cardinal rule three times here The alternating colours leads to the red-green-red-green pentagon diagram" (the convexity conflict, `[06.71]`); Sirgedas: "I just realized I broke the same rule again!" (`[06.73]`) |
+
+Nothing else in threads 6–9 and 16 is claimed as a six-colouring of the whole plane. Near misses, each said to be partial: Pritikin's "almost-6-colouring"
+with small regions ignored (`[06.20]`); Parts's six-colouring with holes (`[09.66]`) and its 2020 optimisation (`[16.1]`–`[16.135]`); Gibbs's and Boris's
+combinatorial grids (`[06.53]`, `[08.1]`), which fail geometrically (`[08.6]`); Pálvölgyi's "there is a chance that CNP<=6" (`[16.253]`) is said of a
+sphere's seven-tiling.
+
+### Reading status (G50)
+
+| source | status |
+|---|---|
+| Polymath16 threads 6, 7, 8, 9, 16 (`[Polymath16threads]`; held text, one line per thread) | **read in full, text only** (2026-09-27, FS112-PA): 109 + 106 + 120 + 105 + 350 comments; every posted figure, the linked files (`philgibbs.uk/out*.txt`, `out*.csv`, `notcol.txt`), Google-drive/imgur/dropbox pictures and the dropbox draft `stripdisk.pdf` are **not held** |
+| threads 10, 11, 12, 14, 15, 17 | **targeted**: comments `[10.59]`, `[11.1]`, `[11.33]`–`[11.35]`, `[12.16]`–`[12.19]`, `[12.34]`, `[14.160]`, `[15.1]`, `[15.19]`, `[15.161]`, `[17.5]`, `[17.7]`, `[17.61]`, `[17.90]`, `[17.181]`, `[17.219]`, `[17.232]`, `[17.282]`, `[17.341]` read whole; the threads **unread** |
+| threads 1–5, 13, 18 | grep hits for the object's words (`[01.2]`, `[01.12]`, `[01.54]`, `[01.101]`, `[01.102]`, `[03.6]`, `[04.10]`, `[04.46]`, `[04.106]`, `[05.4]`, `[05.37]`, `[05.38]`, `[13.108]`, `[13.110]`, `[18.67]`) **unread** |
+| `[Coulson2004]` | all five figures viewed (2026-09-27, this job); text read earlier (FS106-SB) |
+| `[Soifer2024]` | ch. 18 (pp. 179–182) **read in full**, text; the full text grepped for the object's words (no unit-arc map colouring anywhere); ch. 64 p. 767's Pritikin–Parts paragraph read |
+
+### Proposed `BIBLIOGRAPHY.md` edits (the close writes them)
+
+1. `[Polymath16threads]`, reading column, add: "threads 6–9 and 16 read in full, text only (FS112-PA, 2026-09-27; figures and linked files not held);
+   targeted comments of threads 10–12, 14, 15, 17 read (list in `plans/FS112-PA-reading.md` Stage 8); extracts `data/fs112/fs112-pa/extracts.md`".
+   Role column, add: "the 2018–2021 informal work on FS-112's question: HOCK (`[06.31]`, `[06.91]`), Gibbs's degree-4 sketch (`[06.62]`) and constraint
+   (`[08.39]`), de Grey's six-colour-vertex sketch (`[08.17]`), the strip's rule (`[07.10]`) and width (`[09.100]`), the disk's skeleton and radius
+   (`[11.34]`), Siamese defined (`[10.59]`)".
+2. `[Coulson2004]`: "read in full (figures not viewed)" → "read in full; figures viewed (FS112-PA, 2026-09-27): polygonal only, no curved boundary".
+3. `[Soifer2024]`, reading column, add: "ch. 18 (pp. 179–182) read in full (FS112-PA, 2026-09-27): its rendering of Thomassen's hypothesis as a
+   restrictive clause differs from `[Thomassen1999]` p. 850; condition (iii)'s constant misprinted against the proof".
+4. **New rows, unheld (debts):** `[Hockertz2018ms]` B. Hockertz, *Exclusion zones in infinite graphs*, manuscript (dropbox link in thread 6, June 10,
+   2018), the promised formalisation of HOCK — unheld, unread; `[Sirgedas-group]` T. Sirgedas and others, Google group `hadwiger-nelson-problem`
+   (2019–2021), holding the near-proof that no non-Siamese six-tiling exists (`[16.317]`) and the sphere work — unheld, unread; the Polymath16 wiki's
+   tile-rule page curated by de Grey, June 29, 2018 (`[08.67]`) — unheld (check `[Polymath16wiki]`'s scope first).
+
+### Theorems this phase proved (repeated at the close of the record)
+
+None. Two identities of seconds were checked by hand against quoted radii (Stages 3 and 6); they check quotations, they are not results.
 
 ## Would have searched here
 
