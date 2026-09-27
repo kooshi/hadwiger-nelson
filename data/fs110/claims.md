@@ -321,3 +321,17 @@ same-multicolour one.
 **Second update to §8 (the owner; filed during round 4).** A second blind mind (FS110-CD) confirms, by a different route, that S–V Cor. 1 holds almost
 everywhere for curved cubic maps under Condition 5 **with no `d = 2` exception**, for same-multicolour and disjoint-multicolour pairs alike. The claim now
 stands at two minds, both blind (FS110-CB, FS110-CD). **G-d2 does not arise.** Under Condition 5, N3-RED's residue is G-CONE alone.
+
+## 9. Corrections at the close (FS110-C, 2026-09-27; the sections above are left as the rounds read them)
+
+1. §0 "covering pair": the union of the closure types is all six; disjointness is an extra hypothesis where a lemma needs it (N-X does; C-T-TAN and NB-5
+   do not) — items 35, 45; NB D1; A4.
+2. §1b "strong escape": "a class of `P(u)` wholly on each side" (four distinct colours escape with none repeated) — item 16; A2-ESC4.
+3. A-EXACT: "meets the interior of a tile" — item 16 (Y).
+4. C-SEAMLIST: MISSTATED; replaced by the (S1)/(S2) dichotomy at the seam point — item 21.
+5. §0's Siamese quotation is at `plans/FS106-TQ-derivation.md` l. 348 — items 45, 58.
+6. §7 W-3: "trivalent" means `|P_cl(u)| = 3` at any degree (card 4); "consistently along edges" and "every tile has an even count" are theorems only on
+   edges whose ends differ in third colour (YB3-SAME) — items 61, 77.
+7. §8: the Condition-5 half of S–V Question 2 is answered **yes** (seven colours needed); "W-4: NO" is the no to a six-map, given the base at cubic
+   vertices with a cusp sector — items 97, 104; "hard" cone means doubly shadowed (N4), not tip-hard (Y4) — item 102.
+8. "at bounded `K`": not used by the chain or the base; it enters only FS-107's W-EQ-K (A6-C1) — item 97.

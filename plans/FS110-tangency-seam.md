@@ -621,3 +621,89 @@ killed; A6's three hunches met (NB4's chain TRUE with local repairs; YB4 confirm
 **3.6 Would-have-searched-here lines** (from the records' logs, one each): N — enumerate three-colour ring colourings (derived the band argument); N3 —
 scan merge radii (derived `ρ` off finitely many values); N4 — scan chain curvatures (derived FIN's inequalities); Y2/Y4 — scan fragment parameters for an
 ACCEPT (derived each value first, checked once); YB3 — enumerate orientation labels (exhausted 1,920 by formula, not search); this close — none.
+
+### Stage 4 — SAVED: the drafts (the front-page job FS110-X applies them; nothing here is written into its target file)
+
+**4.1 `LEDGER.md` row 134** (one row; the owner's expectation overruled in one respect, with the reason: round 3 showed the NO does not pass through
+W-3 — N3-RED uses no windings (A5) — so the winding lemmas N2-RING, N2-SWAP, N2-TRANS, N2-FLIP go to § B under row 134 as the apparatus off the
+headline's path, not into the row's chain). **Form A, if FS110-CE finds D4 and D5 items 1–4, 6 hold at cusps** (grade clause as shown); **Form B, if CE
+names a step that needs a positive angle**: replace the bold grade clause by "a reduction to CB's step `<named>` at cubic vertices with a cusp sector".
+
+| 134 | **Under Condition 5 the regular half holds for curved maps: no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at distance exactly 1. So the Condition-5 half of `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") is answered yes, almost everywhere, for such maps; with row 133's W-EQ-K, under Condition 5 vanishing holes at bounded complexity cannot save a colour. The chain: under Condition 5 no vertex has four colours and no close complementary pair exists (NB-4, NB-5), which closes the tangency seam; Woodall's merge, almost everywhere for curved arcs, removes every two-sector colour outside Woodall's cone (W-MERGE, N3-DEG); a shave, a ray merge and a propagation lemma remove the cone, a cone no move removes forcing a bi-infinite chain along its normal line that curvature monotonicity forbids (the shadow map `λ/(1 + λ)`, derived four times); the terminal map is cubic, and S–V Cor. 1, almost everywhere for curved cubic maps with no `d = 2` exception, refutes it. No step uses the complexity bound. Beside it: exact local fragments of every seam (S1, T2, BB, MX; Woodall cones and tip-hard cones), none a map; a winding apparatus for Act One whose transport fails across same-type edges (YB3-SAME, a GAP off the headline's path). It moves no value** (FS-110; FS110-CLOSURE, NB-4, NB-5, W-MERGE, N3-DEG, N4-SHADOW, N4-SHAVE, N4-STUCK, N4-FIN, N4-TERM, NB4-CS, COR1-NOD2, CB-LEMMA3, CUSP-BASE, P17, CALC, N-X, FRAGS, Y4-CONES and the rest of § B). **[hand; NB-4, NB-5, W-MERGE and the cone removal two minds, one blind (the N side; NB, A4, NB3, NB4); the base with no `d = 2` exception two minds, both blind (CB, CD); the base at cusp sectors two readings at D2, D5 item 5 and D1 (A6; CC), D4 and D5 items 1–4, 6 FORM-A: two readings (CE) / FORM-B: a reduction; the residue lemma one mind (NB4); fragments tools, exact, two checkers]** Mechanism: under Condition 5 a colour at a vertex is squeezed into 60° of the vertex's unit circle, so four colours cannot meet, and every seam needs a close pair that cannot form; what is left is Woodall's degree reduction, which the curved, almost-everywhere setting blocks only at cusp horns with antipodal tangent contacts, and those propagate along a line with monotone curvature until they cannot. **Not claimed:** the unit-arc half of Question 2 (Condition 5 dropped: (S1), T2, NB-4's exception; FS-112); boundaries other than segments and circular arcs; unbounded complexity in FS-107's sense (FS-111); W-3's winding frame (YB3-SAME). **Prior art:** not found in print (FS-110's gate; FS110-PA: Condition 5 without Condition 6 is not settled, stated or asked); S–V prove seven under Condition 6 (their Thm 1, a GAP at Prop. 19's fills, row 132); NB-4's four-colour half is S–V Lemma 2; W-MERGE and the shave are curved, almost-everywhere forms of S–V Props. 7–8 and `[Woodall1973]` step 3, whose cone this is; S–V Lemma 3's printed proof fails from `√3` (CB). | `plans/FS110-derivation.md`; `plans/FS110-N-proof.md` § Continuation — FS110-N3, N4; `plans/FS110-NB-verification.md`; `plans/FS110-NB3-verification.md`; `plans/FS110-NB4-verification.md`; `plans/FS110-CB-verification.md`; `plans/FS110-CD-verification.md`; `plans/FS110-CC-verification.md`; `plans/FS110-Y-construction.md`; `tools/fs110_n_shadow.py`, `tools/fs110_nb4_check.py`, `tools/fs110_cb_geometry.py`, `tools/fs110_cd_checks.py`, `tools/fs110_cc_cusp.py`, `tools/fs110_y_fragments.py`, `tools/fs110_yb_fragments.py`, `tools/fs110_y_cone.py`, `tools/fs110_yb4_check.py` | FS-110 (2026-09-27) |
+
+**§ B:** the 42 lines of `data/fs110/fs110-c/ledger-b-draft.md`, under a heading "FS-110 (row 134)", after FS-107's; when CE lands, FS110-CLOSURE's and
+FS110-CUSP-BASE's grade cells take Form A or B.
+
+**Row 132's correction** (FS-110 items 81, 89, 90; replace in place, current state only):
+- In the bold text, "except at one edge case, two same-multicolour points antipodal on the circle (`d = 2`)" → "(the `d = 2` edge case does not arise:
+  FS-110's CB and CD, both blind)"; "S–V Thm 2 holds after three repairs (…), its weakest link Lemma 3 at `√3 ≤ d < 2` (a transplanted bicycle, a
+  sketch)" → "S–V Thm 2 holds after three repairs (…); its Lemma 3 at `√3 ≤ d < 2` by Voronov's bicycle on the pseudo-coloured circles (FS110-CB-LEMMA3;
+  the printed Fig. 5 argument fails from `√3`)".
+- In the grade: "the polygon chain and the convex reduction two, one blind (the V line; SB), Lemma 3's repair one, a sketch" → "the polygon chain and
+  the convex reduction two, one blind (the V line; SB), with no `d = 2` exception two, both blind (FS110-CB, FS110-CD); Lemma 3's repair two, one blind
+  (FS106-V's sketch; FS110-CB's derivation)".
+- **Not claimed:** strike "`d = 2`;". § B: FS106-SV2, FS106-AE-POLY, FS106-AE-CONV lose "bar `d = 2`" (their `plans/FS106-derivation.md` entries gain one
+  line: "the `d = 2` exception struck at FS-110's close — FS110-COR1-NOD2").
+- `CLAUDE.md` § The aim link 4: "polygons and locally finite convex tilings need seven bar one edge case (`d = 2`)" → "polygons and locally finite
+  convex tilings need seven"; and "(bar `d = 2`)" in item 31.
+
+**4.2 `CLAUDE.md`** (295,695 bytes; drafts net about −200 bytes: item 31 and the aim's program line shrink, the paths-forward row 1 is replaced).
+- *Last updated:* "*Last updated: 2026-09-27 — **FS-110, the tangency seam, closed** (row 134; `plans/FS110-tangency-seam.md` §R-close): under
+  Condition 5 no curved map six-colours the plane almost everywhere — S–V Question 2's Condition-5 half answered yes. Before it, **FS-107** (row 133),
+  **FS-106** (rows 131–132) and **the reframe** (Kooshi, 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search
+  runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*"
+- *Open milestones:* "**None is open.** FS-110, the tangency seam, is **closed** (row 134; `plans/FS110-tangency-seam.md` §R-close). **Next: FS-112,
+  the unit-arc half** (`plans/STUB-unit-arc-half.md`), or FS-111 (Kooshi picks); the finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** …"
+  (rest unchanged).
+- *Paths forward, rows 1–2* (FS-110's row removed; FS-111 stays rank 2):
+  `| 1 | **FS-112 the unit-arc half** — `plans/STUB-unit-arc-half.md` (FS-110's successor) | does a tight six-map exist once unit arcs are allowed? Every close complementary pair then sits on a unit arc ((S1), the T2 rhombus, NB-4's four-colour exception; row 134), each realised locally and exactly; W-3's winding transport fails across same-type edges (YB3-SAME) | decisive both ways at bounded complexity: YES gives `χ(ℝ²) ≤ 6` with no MR; NO answers `[SokolovVoronov2025]` Question 2 a.e. for circular-arc maps and closes door (A) |`
+- *Where the problem stands, item 31:* "31. **The regularity wall, verified; the question is stability, and its Condition-5 half is closed** (§ The aim;
+  rows 131–134; FS-111, FS-112). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+  classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+  exists (row 133): under Condition 5 none does (row 134); with unit arcs, open. Past it, whether junctions keep a cone scale. Bearing on the answer:
+  none moved; half of door (A) closed."
+- *§ The aim, link 5's program line:* "**FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half**; **FS-111,
+  the cone scale** …".
+- *G82's Do line gains* (the §PA sweep's promotion, one clause): "… price each certificate at its feature's scale, never at `ε`'s — and where the limit
+  object is a map, look first for the printed regular theorem's own chain (FS-110: S–V's Cor. 1 and Woodall's step 3, made curved and almost everywhere)."
+- *Corrections owed:* none further in `CLAUDE.md` (the polarity slip never reached it).
+
+**4.3 `BIBLIOGRAPHY.md`.** (a) FS110-PA's four proposed edits, verbatim from `plans/FS110-PA-prior-art.md` stages 3–4 (rows 128, 848, 150, 139 of the
+bibliography); (b) `[Soifer2024]` ch. 25: "read (FS110-PA stage 4): reprints Townsend's proof with simplification (c) and its gap (FS106-V3)";
+(c) `[Woodall1973]` §3: "read 2026-09-27 (FS110-NB3, FS110-Y4): step 3 is W-MERGE's everywhere-proper form; the cone is round 4's object";
+(d) unheld, per item 8: Kruskal 2008; Alm–Manske 2013 (abstract only); Ágoston 2025; `[Townsend2005]`; S–V's journal version (Discrete Math., Dec 2026);
+`[Coulson2004]`'s citing list not run; (e) the two citations failing `tools/bib_audit.py`: arXiv:1305.5229 (`data/fs110/reports/FS110-P.md`) and
+`[MartiniMontejanoOliveros2019]` (`plans/FS110-tangency-seam.md`) — each gets an entry with its read status "title only, cited by FS110-P" or the
+citation is unkeyed; the front-page job checks both against the source before choosing.
+
+**4.4 `plans/FRONTIER-STUBS.md`.** FS-110 to the closed list: "FS-110 the tangency seam — closed 2026-09-27 (row 134): under Condition 5 no curved
+map six-colours the plane a.e.; successor FS-112". New rank 1 FS-112 (the row of 4.2); FS-111 rank 2 unchanged, its question line gains "`K` enters
+the answer only here and in W-EQ-K (row 134's scope)"; the solver column for FS-112: in-ban (derivation and exact fragments by formula).
+`plans/STUB-tangency-seam.md` gains a closed banner (written by this close); `plans/STUB-unit-arc-half.md` minted by this close.
+
+**4.5 `plans/GROKKING-INSTANCES.md`** (new instances; the entries in `CLAUDE.md` keep their pointers).
+- *§G51:* "FS-110's run (FS110-C, §R-close 4.5): four rounds, two sides (N, N2, N3, N4 against Y, Y2, Y3, Y4), six blind verifiers (NB, YB, NB3, YB3,
+  NB4, YB4) and three blind checks of the base (CB, CD, CC), advisors A, A2–A6 in succession (A2 replaced at the round-1 boundary above 450k, A3–A6 each at
+  its line). No truth divergence between the sides in four rounds; every truth divergence came from a verifier (YB3-SAME, NB4 D2, YB's corner GAP,
+  NB's N2-V4) or was in owner text (the round-2 frame fact; the polarity). Retractions: 8, all free (N 1, Y 2, N2 1, Y2 1, N3 1, Y3 1, N4 1, Y4 0; advisors
+  0). The routing effect twice: a side's message after its hand-back resumed the advisor as its child and took the advisor's hand-back (items 31, 37)."
+- *§G72:* "Eighteenth, FS-110 (§R-close 3.3): mixed, counted through — NB-4, the step that emptied the seam, answers §IQ's per-vertex question; the
+  closure extends a known tool (Woodall's step 3, S–V's Cor. 1)."
+- *§G79:* "FS-110: NB-4, NB-5, W-MERGE and the cone removal from example invariants (what every vertex, sector and stuck vertex carries); YB3-SAME,
+  Y-BIKE-3C's corners and A6-C2's single horn counterexample invariants; one flip, N4's 'a stuck cone forces its antipodes stuck', made round 4."
+- *"Quote statements verbatim in briefs":* "FS-110's owner slips (items 2, 23, 46, 63; §R-close 1.0): a paraphrase of V's C5 in quotation marks; the
+  round-2 frame fact's inputs paraphrased wrongly; **two line-range cuts in quoted blocks** — NB's instance truncated N-X at part (d), `claims.md` §7.1
+  cut §6.2 mid-sentence — a new failure shape: a verbatim block that ends early reads as the whole statement; and the close brief's headline 'carries an
+  a.e.-proper six-colouring' for A6-2.1's 'carries a six-colouring in which no two interior points of one colour are at distance exactly 1'. Rule: quote
+  by whole sentence and paragraph, and `diff` a quoted block against its source."
+- *Fence rule:* "FS-110's fence listings (items 18, 42, 46, 52, 55; Y4, NB4, YB4 fence logs): first-command `ls` of `data/fs110/reports/` and `briefs/`
+  (N, Y, Y2, Y4), `git log -1` subjects (NB, A4, Y2, Y3), an `rg -l` returning a verifier's tool name (Y3), a grep over an advisor's copy of a fenced
+  record (PA), and `ls` of the shared scratchpad root showing other jobs' file names (Y4, NB4). Names only, all disclosed; no content crossed."
+
+**4.6 Protocol amendment** (`plans/PROTOCOL-competitor-and-advisor.md`, standing rules): "**No agent messages another after its own hand-back.** A
+message from a job that has handed back resumes its recipient as the sender's child, and the recipient's next hand-back is delivered to that sender, not
+to the owner (FS-110 items 31, 37: N2's and Y2's messages resumed A3, whose final report carrying the proof side's round-2 content reached Y2). An
+advisor sends its final report to 'main' by SendMessage before its own hand-back; a side's last word to an advisor goes through the owner." And in §3,
+FS-110's run record (4.5's G51 text, with the four rounds' objects: the local calculus and the seams; Act One and (S1); W-3; W-4, the `d = 2` seam).
+
+**4.7 `data/fs110/claims.md` corrections** — appended as §9 by this close (items 16, 21, 26, 35, 45, 58, 61, 77, 97, 102).
