@@ -248,4 +248,22 @@ card: c1-the-stage-1-scope-questions
 **Retraction count:** N 1 (N-SEAM (d)'s "a colour in two sectors", killed by card 1 point 2; free) plus one wording change (not counted). My hunch on
 card 1 (`N amends N-SEAM (d) and Y amends Y-BLOCK's "exactly"; neither changes a verdict`): N's half **met**.
 
-**FS110-Y:** pending.
+**FS110-Y** (about 10:20 UTC; recorded at `8d935aa7`, its stage 3), verbatim:
+
+> FS110-Y retractions after card 1 (recorded at 8d935aa7, plans/FS110-Y-construction.md stage 3).
+> R1 (your point 3, checked): my §1.4 "fat" row ("contains the whole ball") is empty for trivalent vertices. The generic trivalent vertex blocks a one-sided band of depth ≍ s·margin; a two-sided ball arises only at degree ≥ 4 with no escape. "Exactly five shapes" withdrawn: completeness not claimed. C-TAN-POS verdict unchanged (band vs band fails: ζ ↦ (ζ·e_u, ζ·e_v) is a linear iso, so two half-open bands meet near w₀; band vs thin wedge fails).
+> R2 (your point 2, checked): "strong escape" as defined in claims.md is MISSTATED — the four-distinct-colour vertex escapes on an open set with no colour repeated. Corrected: "two sectors straddling every line of tilt < µ from the tangent line, with at least one colour of P(u) wholly on each side"; my table row replaced.
+> Point 1: all my statements use only the union covering six, so they hold for overlapping pairs; for families of ≥ 3 points A-EXACT still gives ⋂B = ∅, but the pair argument does not transfer (three one-sided bands through w₀ can have empty intersection).
+> Point 4, scope: at u, v — trivalent (generic, T1, T2), bowtie, four-colour, cusp vertices of 𝓜_K, and bichromatic degree ≥ 4 against a four-set; nothing assumed at w₀; rests only on A-EXACT's B_u ∩ B_v = ∅.
+> Also new since stage 1 (stage 2, cb156b1c): an exact curved checker with controls; the T2 picture at w₀ (degree ≥ 4, alternating branches); Y-BIKE-3C, a no-go for six-arc three-cycle colourings of the bicycle at every d ∈ (1,2).
+
+**Retraction count after card 1:** N 1; Y 2 (R1, "exactly five shapes"; R2, its stage-1 reading of "strong escape" replaced by a MISSTATED verdict on
+the claim list's definition with a corrected statement); A2 0. All free. My card-1 hunch: **met** (N amended N-SEAM (d), Y amended Y-BLOCK; no §1b
+verdict changed — C-TAN-POS stays TRUE (Y) and TRUE/GAP (N)). **Both sides now hold the same corrected strong escape** (a class of `P(u)` wholly on each
+side), reached independently from one question.
+
+**The scope of C-TAN-POS after card 1 (the two verdicts, set side by side):** Y — TRUE for every covering pair (overlap allowed) of the named vertex kinds
+at `u, v`, nothing assumed at `w₀`, from `B_u ∩ B_v = ∅`; N — TRUE and exact at a non-vertex `w₀` for any closure types, GAP at a vertex `w₀`, from
+A-CIRC plus the contact lemma. **They are not in tension**: Y's covers N's GAP only as far as Y's vertex list is complete, and Y has withdrawn the claim
+of completeness. So C-TAN-POS stands at **TRUE for the named vertex kinds (Y, one mind) and TRUE at non-vertex `w₀` (N, one mind), with completeness of
+the vertex kinds at `u, v` open** — which is C-SEAMLIST's question in another place. That is the next thing I watch.
