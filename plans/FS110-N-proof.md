@@ -499,3 +499,70 @@ global form (a section over the whole plane) must meet something the winding can
 edge length per unit area at bounded `K`.
 
 ## Stage 6 — SAVED
+
+## § Continuation — FS110-N3
+
+*Job FS110-N3, de Bruijn (Opus 5.5), 2026-09-27. Briefs: `data/fs110/briefs/N3-110-round3.md` (wins where the two differ) and
+`data/fs110/briefs/N110-proof.md`, with `STANDING-RULES.md`. Round 3, the winding question W-3 (`data/fs110/claims.md` §7, §7.1). I continue this
+record and rewrite none of its verdicts. Object LIM unless marked. Working files: `data/fs110/fs110-n/`; scratch `scratchpad/fs110-n3/`.*
+
+### N3: the pre-round answer (sent to "main" and to FS110-A5 before stage 1 was saved; retractions counted from here)
+
+"Expected failing step: the construction's vertex at which one colour holds two non-adjacent sectors (a trichromatic "bowtie" of degree ≥ 4, or a
+bichromatic vertex of degree ≥ 4) used as ESSENTIAL — i.e. to escape S–V's cubic argument (a cubic Condition-5 map is killed by S–V's own chain,
+FS106-V's repaired Cor. 1, one mind, bar d = 2; the six-arc rotating ring at a cubic vertex is S–V Prop. 17's kill under Condition 5). I expect every
+such vertex whose repeated colour has sectors of POSITIVE angle to be removable by an almost-everywhere form of Woodall 1973's step 3 (merge the two
+sectors across the gap lying inside the colour's allowed cone), so it buys nothing over a cubic map. What would show me wrong: (1) a winding map given
+by formula, checked exactly, whose repeated-colour sectors at such a vertex are cusp horns tangent to a boundary direction of that colour's allowed
+cone at the vertex (Woodall's "cone", which his step 5 excludes only at five colours); (2) one realising S–V's d = 2 configuration (two same-type
+trichromatic points antipodal on a trivalent vertex's unit circle); (3) a merge that lands a recoloured point at distance exactly 1 from a same-colour
+tile."
+
+### N3: theorems this continuation proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| (filled stage by stage) | | | |
+
+### N3: would-have-searched-here log
+
+| move I would have made by search | what I did instead |
+|---|---|
+| (none yet) | |
+
+### N3: fence log
+
+1. `ls data/fs110/` (stage 0, to find my working directory) printed the **directory names** `fs110-a/ … fs110-a4/`, `fs110-nb/`, `fs110-y/`,
+   `fs110-yb/`, `reports/`, and the file name `owner-notes-round2.md`. Names only; nothing in a fenced directory was listed, opened or grepped. I did
+   not open `owner-notes-round2.md` (not fenced by name, not in my reading list).
+2. The harness's start-up git status (in my context, not a command of mine) names untracked `data/fs110/fs110-yb/` and `tools/fs110_yb_*.py`. Names
+   only; not opened.
+3. `git log`: only the start-up snapshot's five subjects seen. Read, not fenced: `plans/FS110-PA-prior-art.md` (open to me by the brief),
+   `plans/FS106-V-verification.md` (FS-106's record), `LEDGER.md` rows 131–133, `[SokolovVoronov2025]` (held PDF, my extraction
+   `scratchpad/fs110-n3/sv.txt`).
+
+## Stage N3-1 — SAVED: quotation check, Condition 5, reading
+
+**Quotation check (standing rule 5).**
+
+| quotation in my brief | source | result |
+|---|---|---|
+| Condition 5: "If any boundary intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden." | `[SokolovVoronov2025]` p. 4 (held PDF, text l. 148–150) | verbatim; the print prefixes the label "(fa = “forbidden arcs”)" |
+| the claim list's gloss "no boundary arc of radius 1" | `data/fs110/claims.md` §7 ("Under Condition 5 (no boundary arc of radius 1)") | verbatim, inside A4's quoted frame |
+| NB-4 "under Condition 5, no vertex of a tight six-map in `𝓜_K` has four colours"; NB-5 "so under Condition 5 no tight six-map has a close covering pair" | `data/fs110/claims.md` §7 | verbatim from the claim list; their sources (NB's and A4's records) are fenced — not checkable by me. NB-4 is also `[SokolovVoronov2025]` Lemma 2 in print ("Under Condition 5, no point in a valid 6-coloring can have chromaticity k ≥ 4", p. 8, read) |
+| the advisor's tool list "N2-TRANS as a flat structure over the plane; N2-HEX's rigidity; A4-BAND's same-type spacing with a transposed swap; a count of ring changes (`≥ 3\|W\|` per vertex) against edge length at bounded `K`" | A4 § A4-2.4 (fenced) | not checkable; three of its four items are this record's own §6.3 closing sentence, which matches in substance. "A4-BAND" is undefined for me (the owner's §7.1: not part of W-3); I do not use it |
+| W-3's terms (ring, `W`, swap point, N2-TRANS, even/odd tile) | `data/fs110/claims.md` §7.1, quoting this record §4.3, §6.1–6.2 | verbatim against this record |
+| Q-full, the question in print (Question 2) | `data/fs110/claims.md` §1; `[SokolovVoronov2025]` p. 26 | checked by FS110-N at stage 1; Question 2 re-read in my extraction (text l. 1016) |
+
+**Which Condition 5 I use.** The print's form: every boundary meets every unit circle in a finite set. **In `𝓜_K` the two forms coincide [hand,
+trivial]:** every arc of `Γ` is a straight segment or a circular arc of radius `≥ 1/K`; a unit circle `ω` meets a segment, or a circle of radius
+`≠ 1`, in at most two points, and a circle of radius 1 in at most two points unless the two circles are equal; `ω` is compact and meets finitely many
+arcs (at most `K` per unit disc). So `Γ ∩ ω` is finite for every unit circle iff no arc of `Γ` has radius exactly 1. (Outside `𝓜_K` the print's
+form is strictly stronger, `[FS110-PA]` stage 1.)
+
+**Reading done for this round (G50, per section).** `[SokolovVoronov2025]`: §5 (Props. 6, Lemma 2), §6 (Props. 9–10, Cor. 2, Prop. 11, Cor. 3),
+§7 (Lemma 5, Props. 14–19, Lemma 6), Lemma 4's statement and Appendix proof, §9 — read first-hand in my extraction. `plans/FS106-V-verification.md`:
+the S–V rows (SV-L3, SV-L4, Props. 14–19, Lemma 6, SV-1, SV-2), Townsend's (c), Woodall's step 3 and "A tool for SV-1's open step" (l. 530–534), the
+`d = 2` stretch. `plans/FS110-PA-prior-art.md` in full.
+
+## Stage N3-1 — SAVED
