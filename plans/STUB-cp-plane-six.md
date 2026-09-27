@@ -1,5 +1,14 @@
 # FS-104 — the stationary chromatic number at six: is `χ_CP(ℝ²) ≥ 6`? (stub)
 
+> **Re-aimed at the reframe (2026-09-26, job RF1; `plans/FRONTIER-STUBS.md`'s re-rank note; `plans/STUB-regularity-wall.md`): rank 1 → 3,
+> below the program Kooshi adopted (`CLAUDE.md` § The aim) — FS-106, the regular half (rank 1), and FS-107, regularity against pathology
+> (rank 2). Re-aimed, not demoted.** Its **null-set step** — item (1) of the banner below, "colour the metrical boundary", C-FMT (d),
+> `χ_m⁰ = χ_m` (`plans/FS103-derivation.md` FS103-M-D) — **folds into FS-107 as one of its sub-questions** (the regularity-wall stub: "the
+> null-set step is one sub-question of FS-107"). **Its other items stand here:** (2) `χ_B` against `χ_m`, (3) the ZF + DC audit, (4) the
+> prior-art debts; the density family, Falconer's mechanism in CP form, `k`-point correlation constraints, `χ_g(H)` (post-ban) and the mirror
+> (routes (0)–(d) below). The text below is the stub as it stood before the reframe: its "Rank 2" line is as minted, and its "Bearing on
+> χ ≥ 6" is read, since the reframe, as a bearing on the answer (`CLAUDE.md` § Counter-priors, rule 1).
+
 > **Re-aimed at FS-103's close (2026-09-26; `plans/FS103-collapse-cp-plane.md` §R-close).** `χ_CP(ℝ²) = χ_m⁰(ℝ²) = χ(A_σ)` with no MR (row 130,
 > two minds), and given MR it is `χ(ℝ²)` (rows 128, 130). So the question is now: **is the plane's measurable chromatic number, null sets of
 > unit pairs ignored, at least six?** In order: (1) **colour the metrical boundary** — `χ_m⁰ = χ_m` iff some a.e.-proper colouring's null set
