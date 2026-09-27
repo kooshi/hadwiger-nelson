@@ -216,3 +216,51 @@ generated case, open). **Negative: MR's form not found in print.**
 4. **Route.** Derivation only; exact arithmetic of seconds may check counts (e.g. `#U_ℚ ∩ U_M`).
 5. **The open instances it would decide.** MR at row 100's exception fields (ℚ(√5), ℚ(√17), ℚ(α) — the adelic model there); MR at a
    field with a complex place (EF-G (a) false there, row 120); de Grey's field (claim (c)); not the finitely generated case (Laca–Warren's).
+
+## Stage 6 — SAVED (the phases, the expectations, the blast radius)
+
+## §P — the phases (at most three agents at once; all in-ban: reading, derivation, PARI of seconds)
+
+| phase | job (brief) | claims | budget; stop rule | record; checkpoint | runs |
+|---|---|---|---|---|---|
+| A | **FS105-R, the reader** (`data/fs105/briefs/R105-reader.md`), not blind | (a) a0–a9 at `F₁` and `F_dG`; the Bekka–Francini §1 reading (low priority) | 250k harness; at 220k finish the current item, save, report | `plans/FS105-R-reading.md`; `data/fs105/fs105-r/` | at once |
+| B | **FS105-B, the blind third derivation** (`data/fs105/briefs/B105-blind-efp.md`) | (b) | 250k; at 220k the same | `plans/FS105-B-derivation.md`; `data/fs105/fs105-b/`; `tools/fs105_b_*.py` | at once, beside A |
+| C | **FS105-W, the degree-16 walker and the finite-graph test** (`data/fs105/briefs/W105-walker.md`), not blind | (c), then (d) | 220k; at 190k the same | `plans/FS105-W-walk.md`; `data/fs105/fs105-w/`; `tools/fs105_w_*.py` | at once, beside A and B |
+| D | the owner's reconciliation, then the close (WORKFLOW 9) | all | — | `plans/FS105-harden-mr.md` §R-close | after A–C |
+
+*Order inside each job, cheapest decisive step first.* A: a0 (does Thm 1.3 give Thm 1.2 in a page? — decides whether EL2003 is needed), then
+a3/a4/a6 (the hypotheses PE-2 could miss), then §§3, 5–9 for a9. B: stage 1 fixes the setting at `F₁` (PARI), then the derivation. C: the scope
+facts at `F_dG` (PARI), then EF_F⁺'s count and what it must beat, then (a)'s items at degree 16 (reading A's record only after C's stage 2 is
+committed, so the two are not one mind), then (d).
+
+*Checkpoints.* No run exceeds minutes; the staged records are the checkpoints (standing rule 2); a killed job resumes at its first unsaved
+stage. *Kill redoes:* at most one stage.
+
+**Paper for Kooshi to fetch (his offer):** **EL2003** — M. Einsiedler, E. Lindenstrauss, *Rigidity properties of ℤ^d-actions on tori and
+solenoids*, Electron. Res. Announc. Amer. Math. Soc. 9 (2003) 99–110, doi 10.1090/S1079-6762-03-00117-3 (open access at ams.org; the AMS
+serves scripts a bot check). **Why:** EL2021 cites it as the proof of Thm 1.2 (p. 2, "already proven in the announcement [7]") and four times in
+§4 (its Thm 4.1, Lem. 4.2, §4); PE-2 applies Thm 1.2. Save as `~/source/library/pdf/EinsiedlerLindenstrauss2003-rigidity-zd-actions-tori-solenoids.pdf`.
+Not needed but helpful to A: `[10]` EL, *Diagonal actions on locally homogeneous spaces* (Clay Math. Proc. 10, 2010; Einsiedler's ETH page)
+and `[5]` Einsiedler–Katok, *Rigidity of measures — the high entropy case and non-commuting foliations*, Israel J. Math. 148 (2005) 169–238 —
+A fetches what it can by script and names what it could not.
+
+## §E — expectations (registered before any job runs; both outcomes reachable for each)
+
+| # | expectation | p | the other outcome, and how it would show |
+|---|---|---|---|
+| E1 | (a0) Thm 1.2 follows from EL2021 Thm 1.3 in under a page, with no hypothesis PE-2 lacks | 0.80 | GAP 0.17: the deduction needs a fact about `G_j` or factors EL2021 does not give → EL2003 decides; FALSE 0.03 |
+| E2 | (a1)–(a8) hold at both fields as X02D/X02V wrote them | 0.85 | GAP 0.12, most likely at a4's "no virtually cyclic factors" (undefined term) or a3's finiteness step; FALSE 0.03 |
+| E3 | (a9) the proof in §§3, 5–9 uses nothing beyond the statement that the pieces `M̂` fail | 0.85 | GAP 0.13: a standing assumption of §4.4 (e.g. on adelic subgroups) not checked on `M̂`; FALSE 0.02 |
+| E4 | (b) the blind third derivation closes at `F₁` | 0.75 | GAP 0.20 at a named step (the prior: the multiplier step, where X01V's blind pass stopped); FALSE 0.05 with a measure |
+| E5 | (c) C-MR16 walks through at degree 16 (any fixed polynomial growth suffices) | 0.80 | GAP 0.17 at a step whose constant grows with the degree past what the argument absorbs; FALSE 0.03 |
+| E6 | (d1) row 129's implication is correct as stated | 0.90 | a link runs the other way (0.10) → row 129's killing test is misstated, a correction |
+| E7 | (d3) nothing in print or held proves `α₁(ℝ²) > m₁(ℝ²)` or comes within a named margin; the published expectation is heuristic | 0.90 | a proof in print (0.05) → MR is refuted at `F₁`; a held bound pair near crossing (0.05) → a live test |
+| E8 | overall: MR survives FS-105 with a gained mind and a reading | 0.60 | a named GAP carried by at least one claim 0.35; FALSE 0.05 |
+
+## §R — the blast radius (for the reconciliation; nothing is corrected before a job reports)
+
+If MR breaks at a named step (GAP or FALSE): rows 121, 123 (its `L = 5` part), 124–126, 128, 129 (the given-MR parts), 88's equivalence
+with T-B1 and FS-103's collapse drop to "given MR, now open" — **corrected before anything else is built** (the brief). Unaffected: row 99
+(`L ≤ 4`), row 127's unconditional `χ(ℚ(√47)²) ≤ 5` and its conditional theorem (MR is a named hypothesis there, `hMR`), row 130 (no MR),
+row 122 (no-gos), the chain route over `K` (G55). Row 120's grade text is owed one correction in any outcome: "its proof in EL2021 §§2–9"
+→ the provenance A settles (§PA.1).
