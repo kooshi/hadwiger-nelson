@@ -36,6 +36,24 @@ def split_cells(line):
     return cells
 
 
+def pipes(line):
+    """Positions of the pipes outside backticks."""
+    out, tick = [], False
+    for k, ch in enumerate(line):
+        if ch == "`":
+            tick = not tick
+        elif ch == "|" and not tick:
+            out.append(k)
+    return out
+
+
+def set_cell_from_end(line, j, text):
+    """Replace the j-th cell counted from the end (1 = the last cell) with text."""
+    p = pipes(line)
+    a, b = p[-j - 1], p[-j]
+    return line[:a + 1] + " " + text + " " + line[b:]
+
+
 def ranked_rows(lines):
     """(index, rank, fs, cells) for every row of the ranked table."""
     start = lines.index("## Ranked stubs")
@@ -66,18 +84,15 @@ def stage_stubs():
             continue
         ob = cells[len(cells) - 4]
         old_bearing[fs] = ob
-        seg = "| " + ob + " |"
-        assert line.count(seg) == 1, (fs, "bearing cell not unique")
-        line = line.replace(seg, "| " + M.BEARING[fs] + " |")
+        assert split_cells(line)[len(cells) - 4] == ob
+        line = set_cell_from_end(line, 4, M.BEARING[fs])
         line = re.sub(r"^\| %d \| " % rk, "| %d | " % new_rank[fs], line)
         if fs in M.MOVES:
             mark = "**Re-ranked 2026-09-27 (RK; %d → %d).**" % (rk, new_rank[fs])
             line, n = re.subn(r"\*\*Re-ranked 2026-09-26 \(R3; [^)]*\)\.\*\*", mark, line, count=1)
             assert n == 1, (fs, "no R3 marker to replace")
             st = split_cells(line)[len(cells) - 2]
-            seg = "| " + st + " |"
-            assert line.count(seg) == 1, (fs, "status cell not unique")
-            line = line.replace(seg, "| " + st + "; re-ranked 2026-09-27 (RK) |")
+            line = set_cell_from_end(line, 2, st + "; re-ranked 2026-09-27 (RK)")
         new_line[fs] = line
     first = rows[0][0]
     for k, fs in enumerate(order):
