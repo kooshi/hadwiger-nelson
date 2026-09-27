@@ -230,3 +230,79 @@ hunch: a2-arc-ends-bind
   This overlap is not independent evidence; both of us read the same NB-4 text.
 
 ## Stage 2a — SAVED
+
+---
+
+## Stage 2b — SAVED: FS112-Y's pre-round answer, registered verbatim; the two chain walks compared (brief items 2–3)
+
+### 2b.1 FS112-Y's pre-round answer (received 2026-09-27, after Y's stage 1 at 3fdae23d)
+
+> FS112-Y's pre-round answer (stage 1 committed and pushed, 3fdae23d).
+> 1. Step: C-UA-CHAIN (§IQ candidate (c)), the monotone quantity excluding bi-infinite chains of unit arcs, and with it any NO route shaped like N4-PROP/N4-FIN; next most likely, C-UA-BUDGET's second branch.
+> 2. Configuration: [AxenovichEtAl2014]'s strip rebuilt from its printed words. Every midline vertex is a four-colour vertex of degree 4 that centres four unit arcs of kind "both". The arches' arcs form a bi-infinite periodic zigzag chain that is valid inside the strip, so no strictly monotone local quantity exists along it. The strip stops only at the upper common unit point of a close complementary pair (valley {1,3,5}, apex {2,4,6}, about 0.757 apart), which sits on its edge. So a NO needs a step that reads above height √15/2 + √3. The same object carries covering pairs at the midline vertices while the arcs sit on ω(v) itself (against the second branch as stated).
+> 3. What would show me wrong: my stage-2 exact checker REJECTs the rebuilt strip; or the proof side's monotone quantity is shown to read beyond the strip, so that the strip's periodic chain does not meet its hypothesis.
+> Grade: hand, one mind; the exact check comes next.
+
+**The two answers point at each other.** N expects the construction side to fail at a four-colour vertex whose whole ring `ω(v)` is coloured. Y's
+walk and answer claim such a vertex exists in print: the strip's midline vertex `P_1 = (1/2, 0)`, `P_cl = {1,2,4,5}`, whose unit circle lies inside the
+strip (radius 1, below the half-height `≈ 1.834`). N's own falsifier is "an exact fragment, accepted by two checkers, covering ω(v) entirely … with
+|P_cl(v)| = 4". **If Y's stage-2 checker ACCEPTs the strip, N's pre-round expectation is falsified at one checker, and at two once YB rebuilds it.**
+Neither side knows this; it is the round's first scoring event.
+
+### 2b.2 The walks compared (N: `plans/FS112-N-proof.md` §1.4 at 46ad0ff7; Y: `plans/FS112-Y-construction.md` §1.4 at 3fdae23d)
+
+**Convergences, independent (neither side read the other):**
+
+| step | both walks say | note |
+|---|---|---|
+| 1 NB-4 | the first break in chain order | N: (b), exceptions E1, E2; Y: (c), realised arc-closed by the strip. The labels differ; both say the step does not hold as written |
+| 2 NB-5 | fails locally; (S1) and T2 are its exceptions | Y adds an arc-closed realisation in the strip (T2 at `d = √3`; `(V₀, A₁)` saved at `P_1`) |
+| 3 N3-CONF | (a), with "finite" read as "compact" | same repair, two minds |
+| 5 N3-DEG | (b); the exception is a horn curvature `κ = ±1`, a horn bounded by a unit arc centred at `N` or `S′`, out-kind | **my expectation (arc cones with empty interior) is killed** by N's argument, which Y's verdict matches: empty interior still needs antipodal contacts |
+| 6 N4-SHADOW | (b); `C = 0` degenerates (a tile at `N` beyond an arc of `ω(v)`) | N: a wedge (N112-U1); Y: the cone within 90° of the arc, `f(−1) = −∞`. Same object, two descriptions |
+| 7 N4-SHAVE/FLANK | fails at `κ_+ = 1`: an in-type flank contact at `N` is no longer excluded, so FLANK's shadow list is incomplete | two minds, independent |
+| 8 N4-STUCK | its (iv) fails with a unit arc of `ω(v)` through `N`; inherits NB-4 | N labels it (b), Y labels it (c) as a GAP; the substance is the same |
+| 9 N4-FIN | (a), and not where the chain breaks | **two routes**: N excludes the closed ends along a stuck chain (N112-END); Y lets the curvatures reach `±1` and ends the chain by the same count |
+| 10 N4-TERM | existence holds; **"every vertex is cubic" inherits NB-4 and fails** | Y exhibits a terminal non-cubic object, the strip (if valid). **My hunch `a2-walks-miss-the-import` is killed: both walks name the import** |
+| 12 P17 | (b); the exception is a unit arc of `ω(x₂)` through `x₁`; N2-HEX's pure rotating ring is live again | the contact kinds differ (below) |
+| 18 headline | the proof does not transfer; Q-full is open | — |
+
+**Divergences (each checked against both texts):**
+
+| # | step | N's walk | Y's walk | kind |
+|---|---|---|---|---|
+| D1 | 1 NB-4, the corrected exception | "if in one `σ_v`-orbit of change points no arc of `Γ` on `ω(y_{k±1})` passes through `y_k`, then `|P_cl(v)| = 4` is impossible"; the bound `|P_cl(y_k)| ≤ 4` "is not needed"; "It is not a slip for `ω(v)` either: an arc of `ω(v)` through `y_k` is already excluded by `y_k` being a change point"; arcs on `ω(v)` are a separate exception (E1) in the walk table | "an arc of `Γ` of `ω(v)` or of `ω(σ_v^{±1}y)` through a change point `y`, or an arc of `ω(y)`, in every orbit"; the strip's apex orbit escapes by "the arc of `ω(v)` ending at `A₁`" | **truth**: whether an arc of `ω(v)` *ending* at a change point, and an arc anywhere on `ω(y_k)`, belong in the exception. N's "through" does not exclude "ending at". This is also my held hunch `a2-nb4-three-circles` (Y's form contains my three families) |
+| D2 | 4 W-MERGE | (a): "New arcs have radius `ρ < 1`; unit arcs inside the recoloured gap are deleted" | (b), GAP at "for every other vertex `v′`, `D_c(v′)` is unchanged" when `v` lies on a unit arc of `ω(v′)` bounding a sector of the recoloured gap, `c ∈ P_cl(v′)` | **truth** (a side condition; termination unaffected by Y's account) |
+| D3 | 7 N4-RAY | (a): "the middle region's boundary curvatures lie strictly inside `(−1, 1)` even when the outermost are `±1`" | fails "when a stack boundary or `M`'s boundary is a unit arc (the circle can run along it)" | **truth** |
+| D4 | 13–17 the base | reads `ω(u)`, `ω(u + e)` for arcs leaving `u` (D2's strip), and `ω(y)` for every pair `(x, y)` at distance 1 the chain uses; exceptions (B1) inert arcs of `ω(u)`, (B2), (B3); fatal or repairable: GAP | reads the pair's circles and the bicycle's; holds "off pairs with a unit arc centred at `u` or `v` (any kind)" | **scope**: which circles the base reads. **My hunch `a2-base-scope-divergence` is confirmed in shape**, not in its predicted mechanism (the split is "the pair's circles" against "the pair's and the partners'", not "a continuum" against "named vertices") |
+| D5 | 12 P17 | the arc at `x₂` is **both** (`s_in = q`, `s_out = g`, both in `P_cl(x₂)`: Polymath's tactic at the ring points) | out-contact for `g` | kind (minor) |
+| D6 | 1 NB-4, the held positives | "FS-110's fragments are below NB-4's reading radius and cannot test it"; the strip is not read at step 1 | the strip's midline vertex refutes any argument confined to `B(v, 1.834)` excluding a four-colour vertex | **scope of the evidence**: N's step-1 verdict does not read CAL-STRIP, the one held positive at that radius |
+
+**Outside the walks, from Y's stage 1 (for the owner; nothing to N):** Y claims **C-UA-BUDGET's second branch as stated is FALSE** — the strip's `P_1`
+has a covering pair on its ring (`(P_1, P_2)`, `P_2 = (3/2, 0)`, `{1,3,4,6}`, distance 1, union `[6]`) and yet its arcs lie on `ω(P_1)` itself (total
+`≈ 62.1°`), not on `ω(σ^{±1}P_2)` through `P_2`. So the two branches of A4-SIX-ARCS are not exclusive, and the second branch's "not at v" fails. It rests on
+the strip's validity (Y's stage 2). It is also a contact configuration outside claims §2's dichotomy (brief item 5): a four-colour centre carrying a
+covering pair and its own arcs at once.
+
+### 2b.3 Hunches scored (mine; the planning advisor's in the next line)
+
+- `a2-cubic-imports-nb4` — **confirmed** (by: both walks' row 10, independent; Y adds the strip as a terminal non-cubic object, pending stage 2).
+- `a2-walks-miss-the-import` — **killed** (by: both walks name the import at C-CHAIN-10). My prior underrated the walks.
+- `a2-base-scope-divergence` — **confirmed in shape, killed in mechanism** (D4).
+- `a2-nb4-three-circles` — **open, now a live divergence between the sides** (D1); Y's corrected form agrees with mine, N's derivation contradicts its `ω(y_k)` part.
+- `a2-arc-contact-vertex` — **confirmed by derivation** (N112-U1, one mind; Y's row 3 cones agree).
+- `a2-arc-ends-bind` — **weakened**: the strip closes every arc's ends inside itself (Y, pending stage 2). Open at the plane's scale.
+- My stage-1 expectation at step 5 ("arc cones", `int D_c` empty with no horn) — **retracted** (killed by N's derivation, matched by Y's verdict). A free retraction.
+- Planning advisor: `h-arc-cone`'s N3-DEG half **killed** as mine was; its W-MERGE half open (D2). `h-seams-two` **supported** (Y: T2 at `d = √3` with
+  four-colour seam points, arc-closed, pending stage 2). `h-loc` stands as both walks' shape, with Y's D2 GAP as a possible non-local leak (a merge changing
+  `D_c(v′)` at a distant centre). `h-dial` and `h-no-local-kill` untouched.
+
+**Retractions so far:** A2: 1 (step 5). N: 0. Y: 0. The sides have not yet met any claim of the other's; D1–D6 go to both as one card.
+
+### 2b.4 Card sent to both sides at once, identically (`data/fs112/fs112-a2/card-walks.md`)
+
+The card names D1–D5 at claim level and asks each side to re-examine its verdict. It gives no derivation or construction of either side. D6 goes as a
+generic instruction to read every held positive at each step's reading radius, which the construction side has already done and which killing test 8
+requires of the proof side anyway. The C-UA-BUDGET item stays with me until Y's stage-2 check.
+
+## Stage 2b — SAVED
