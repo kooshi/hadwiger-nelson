@@ -75,3 +75,38 @@ Stage 3: `CLAUDE.md` from `claude_md_drafts.py`. Stage 4: `BIBLIOGRAPHY.md` (4.3
   AUDIT PASSED, the six homed tokens reported HOMED in their files; `--self-test` exit 0; `--dupes` 10 (unchanged, not above 10).
 
 ### Stage 3 — SAVED
+
+## Stage 4 — SAVED (`BIBLIOGRAPHY.md`; `plans/FRONTIER-STUBS.md`)
+
+**`BIBLIOGRAPHY.md`** by `data/fs105/fs105-x/bib_edits.py` (14 exact pairs, each required once; `--check` PASS, `--self-test` refuses a
+plant; 455,266 → 459,970 bytes). C's §R-close 4.3 texts verbatim; where the file needed a cell C did not draft, the addition is minimal and
+named here:
+- `[EinsiedlerLindenstrauss2003]` moved from § C to § A (after EL2022) with C's read text in the read column and the path, md5
+  (`430849cf…`, re-computed here: matches) and page count in the copy column; its "what rests" cell, not drafted, reads "row 120's grade
+  (FS-105): the announcement EL2021 p. 2 cites for its Thm 1.2's proof, which it gives only in outline". A § B line for the PDF (drafted).
+- `[EinsiedlerLindenstrauss2022]`: § A read column = C's text, **followed by the old column's facts C's text does not supersede** (§2
+  set-up only; Lemma 4.2; the copies' provenance: md5, `0c61c274`, X10F's removal); § B line = C's text.
+- `[Sataev1975]`: § C verdict = C's text; R.6 row's state "**closed** (FS-105): held and read (§ C)" (C: "The R.6 row closes as a debt").
+  **RULE addition:** a § B line for its PDF (`BIBLIOGRAPHY.md` § D rule 0b: a read status lives in § A/§ C and the file's § B line).
+- `[LindWard1988]` / `[ChothiEverestWard1997]`: C's text as the R.6 row's state (C's "(R.6, line 718)" read as the R.6 debt, whose
+  detail row is § C line 718, left unchanged).
+- New R.6 row, EL2021's `[10]`, `[11]`, `[5]`: keys `[EinsiedlerLindenstrauss2010]`, `[EinsiedlerLindenstrauss2019]`,
+  `[EinsiedlerKatok2005]` (author-year, the file's convention); C's text split into the "rests" and "state" cells. **RULE addition:** three
+  § C rows (titles, "not held, unread"), because a key cited in R.6 must resolve (`tools/bib_audit.py`); no arXiv ids written (none
+  verified; "on arXiv" only, as C wrote).
+- Jungić's line 635: doi and Zbl added, no new row (drafted). The two sphere titles: one § C row (drafted: "§ C, sphere problems by their
+  titles"). Re-reads (W §5.3): appended to the § A read columns of `[AmbrusEtAl2023]`, `[DuczVarga2026]`, `[MatolcsiEtAl2025]`, the FS103
+  precedent (§ A only; § B status unchanged).
+- **RULE addition:** § A′ alias `[BekkaFrancini2020]` → `[BekkaFrancini2022]` (C: "the plan's `[BekkaFrancini2020]` is this held paper";
+  C drafted no new row, and bib_audit read the arXiv-year key as unlogged). `tools/bib_audit.py`: exit 0, "every cited work resolves".
+
+**`plans/FRONTIER-STUBS.md`** by `data/fs105/fs105-x/frontier_edits.py` (5 pairs + the renumbering; `--check` PASS, `--self-test`
+refuses a plant; 123,055 → 123,592): Open milestones (C's text); the header note above FS-103's (C's text); FS-105's rank-1 row out, ranks
+2–61 → 1–60 (60 rows moved, checked); FS-100's "MR's hardening moves to FS-105." → "MR hardened at FS-105 (row 120's grade)."; FS-102's row
+gains 4.8's sentence ("EL2021's" added before `[11]` so the numeral names its paper); the closed list's head entry (C's text). **The
+mirror:** `CLAUDE.md` ranks 1–27 and the `28–60` group checked against this table by script — 27 of 27 and 33 of 33 agree.
+
+**Gates:** fact audit exit 0 (the seven HOMED tokens found in `plans/FRONTIER-STUBS.md` and `plans/STUB-harden-mr.md` after the edit);
+`bib_audit.py` exit 0.
+
+### Stage 4 — SAVED
