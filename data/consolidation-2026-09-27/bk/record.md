@@ -191,3 +191,25 @@ Every item whose status cell read "open" in the three inventories, checked again
 - **D4 — FS-60's ranked row** says "moves 13 field values from the checker's word to the kernel's"; the stub's old bearing said "six", and its §1
   and §3 list five lower-bound witnesses and six upper halves. The stub's new bearing names no number; the row's 13 is worth a recount.
 - **D5 — the brief's "26 stub files"**: `plans/RERANK-2026-09-27.md` § 3 lists 27 files (28 locations); all were done.
+
+## Stage 6 — SAVED (gates)
+
+Run on the tree after stage 5 (3f766ed9; the working tree also held job LP's uncommitted `CLOSED-QUESTIONS.md`, which no gate reads), each exit
+status read directly:
+
+| gate | exit | result |
+|---|---|---|
+| `python3 tools/claude_md_fact_audit.py --base a5fe409d` | 0 | AUDIT PASSED (0 failure(s)); LOST 0 in all ten classes, homed outside 0; no dangling pointer |
+| `python3 tools/claude_md_fact_audit.py --dupes` | 0 | 10 repeated runs, 628 bytes — unchanged from launch (the limit is "not above 10") |
+| `python3 tools/fs71_ledger_b_check.py --strict` | 0 | PASS; 947 entries, 947 § B rows; one `note:` (M53's declared non-entry) |
+| `python3 tools/fs71_ledger_b_check.py --self-test` | 0 | every plant fires naming its header; the legitimate grade bracket and the declared non-entry stay quiet |
+| `python3 tools/bib_audit.py` | 0 | every cited work resolves |
+| `python3 tools/check_architecture.py` | 0 | PASS |
+| `python3 data/rerank-2026-09-27/rk_mirror_check.py` | 0 | PASS (64 ranked stubs) |
+
+**ALLOW lines.** The audit prints its standing tables on every run (229 allowances, 109 external homes, 3 gate-count transitions); BK added none
+and changed none. To say which of them this run leaned on, the audit was re-run in Python with **both tables empty** (`audit(old, new, allow={},
+homes={})`, base a5fe409d): **0 failures — no ALLOW line and no external home bears on the diff since launch.** Positive control: the same
+empty-table audit from base 939f0928 (before FS-110's close) returns 4 failures (first: "lost code token '(1, 2)'"), so the empty-table run can fire.
+
+**`CLAUDE.md`:** 295,846 bytes at launch, 295,825 at the end (−21).
