@@ -261,6 +261,16 @@ Around a tile of colour `a` with neighbours `b_0, …, b_{m−1}` (boundary vert
 label from colour `b_{i+1}` to `b_{i−1}`. Extend the labels to all five colours of `[6] ∖ {a}` (the two colours `b_{i−1}, b_i` outside the ring
 carry labels 4, 5): each step is the transposition `(b_{i−1} b_{i+1})` of labels, trivial exactly at a same-type step (`b_{i−1} = b_{i+1}`). After a full
 turn the total parity is `(−1)^{m−k}` (`k` same-type steps); the two outside labels leapfrog one index per step and return swapped iff `m` is odd,
+parity `(−1)^m`; so the ring's own permutation has parity `(−1)^k`. **An odd `k` returns the ring orientation reversed, so `W(v_0) = −W(v_0) = 0`,
+against `|W| ≥ 2`: such a tile forces a swap, hence Act One** (N2-RING, N2-SWAP). `tools/fs110_n_face.py` checks the parity on five named faces
+(planted fault: overwriting a fixed slot; it fires on four of the five, and cannot reach the hexagon `2, 3, 4, 2, 3, 4`, whose steps all move one
+slot — noted, G21).
+
 
 **Terms that are not part of W-3's definition.** "A4-BAND", "same-type monotone pair" and "transposed swap" appear only in the advisor's framing sentence
 quoted in §7 ("given A4-BAND and a transposed swap"), where they carry one mind and a sketch. W-3 as stated above does not use them.
+
+**Scope note, added after card 4** (the owner's addendum, sent to both sides). A5's card 4 asked both sides the question, and N3 has answered it: in W-3,
+"trivalent" means `|P_cl(u)| = 3` at any degree, so a bowtie's ring must wind as well. N2-FLIP's bookkeeping, and so the "even count" bullet, is
+established only at tiles whose boundary vertices each have type `{a, b_{i−1}, b_i}`. At a tile flanked by a bowtie's repeated colour, W-3's
+second bullet is undefined until either side extends it. Y3's answer to card 4 is pending.
