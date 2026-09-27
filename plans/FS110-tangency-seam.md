@@ -442,5 +442,90 @@ c728acef):
     dropped once already).
 - **Route hints withheld from the briefs:** Y's first object (the printed index's failure configuration built into the double unit-arc rhombus) and N's
   first steps (Act One and the bicycle). The advisor offers both as hints; they stay in its fenced record.
+- **The advisor's review of the draft (its second message), adopted in full:** C-TAN-K as drafted asserted T2 impossible while §2 listed T2 as live —
+  restated as "T1 closed", with C-T2 a separate local and global question; C-BOW-K split into a local claim (predicted TRUE: the bowtie is realisable
+  locally, which is **not** a refutation of the NO) and a global one (where the NO must win); killing test 6 includes a tile with itself; the advisor's
+  hunch that cusps close under closure types registered beside SEAM-C. The advisor accepted both of this plan's disagreements and handed back
+  (`data/fs110/reports/FS110-A.md`).
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the plan (WORKFLOW 4) and the briefs
+
+### 5.1 Phases (at most three agents at once, all Opus 5.5; one level deep)
+
+| phase | jobs (records) | what | budget (harness) | stop rule | checkpoint and resume |
+|---|---|---|---|---|---|
+| **P1 contest** | **FS110-N**, the proof side (`plans/FS110-N-proof.md`, `data/fs110/fs110-n/`); **FS110-Y**, the construction side (`plans/FS110-Y-construction.md`, `data/fs110/fs110-y/`); **FS110-A2**, a fresh competition advisor (`plans/POROS-2026-09-27-fs110-competition.md`, `data/fs110/fs110-a2/`) | **Stage 1 (both sides, blind):** the quotation check; §1b's local calculus (A-EXACT, A-CIRC, A-SIX, C-TAN-POS, D-TYPE) derived independently; the answer to A2's pre-round question (which step of the other side's programme it expects to fail). A2 compares the two stage-1 verdicts before round 1, so any disagreement about types is paid in the free window. **Then, seam by seam in an order each side chooses:** N closes each seam (a kill at feature scale `s ≥ s(K)`, X14; the escaping colour named, X1; six's line named, X6), and proves Act One (X2) and C-SEAMLIST's completeness (X4). Y realises each seam in a tight local fragment given by formula (the invariant each realisation carries named, X13; the generator image and its parameter count first, X5, X17), then attempts a global candidate, checked exactly | N, Y ≈ 400k each; A2 ≈ 250k | a side hands back when every seam has a verdict (TRUE, FALSE, GAP at a named step), or at its budget with its record SAVED | per-stage SAVED sections committed and pushed; a resumed job continues at the first unsaved stage |
+| **P2 verification** | **FS110-NB** (blind on N; `plans/FS110-NB-verification.md`), **FS110-YB** (blind on Y; `plans/FS110-YB-verification.md`), launched into N's and Y's slots at their hand-backs; A2 stays for the comparison | each derives the other side's claimed verdicts from their statements alone, commits its own verdicts, then reads the record and lists divergences; YB rebuilds every candidate from its formula with its own exact checker | ≈ 300k each | verdicts committed before the record is opened | as P1 |
+| **P3 close** | FS110-C (the owner briefs it) | from `plans/FS110-close-inventory.md`: the derivation file `plans/FS110-derivation.md`, the ledger row, the stubs, the §G re-read | — | — | — |
+
+**Exact checks** (in at all times; each seconds long): Y's curved-map checker `tools/fs110_y_check.py`. For each same-colour tile pair of a map given
+by formula (arcs with centres and radii in a named number field), it computes the exact minimum and maximum cross-distance and REJECTs when 1 is
+interior (killing test 6). Planted faults, a known-REJECT control and the tight hexagonal seven-colouring as an ACCEPT control come first (X17:
+ACCEPT is the suspect verdict of a derived-distance checker). Held checkers for eroded members: `tools/fs107_w_check.py`,
+`tools/fs107_vw_grid_check.py`, `tools/fs107_vw_hx_check.py`. N's exact checks of band-depth identities go in `tools/fs110_n_*.py`.
+
+### 5.2 Decisions (four parts each)
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **D1** Staffing: a proof side against a construction side, contested seam by seam, with a fresh competition advisor and a blind verifier per side at hand-back | a seam split: one agent on tangent and cusp (local cone geometry), one on bowtie and bicycle (circle topology), each deciding its seams both ways | the NO needs Act One, which crosses seams, and each seam is decisive only when attacked from both sides. FS-107's lesson: "the verifier per side is where the contest happens … brief the next round (FS-110) on the meeting point" (protocol §3). A seam split is two routes to two hearts, with no contest (FS-85's lesson) | medium — if the local calculus at stage 1 shows Y can realise nothing locally (every seam closes in a line), a seam split for the survivors is better |
+| **D2** The local calculus is fixed in the claim list and derived by both sides at stage 1 | each side builds its own calculus as it needs it | a disagreement about types found mid-contest costs full price (G51's cost window); the advisor's advice | high |
+| **D3** Q-rule's working form reads closure types and covering pairs; its necessity waits for A-EXACT's second mind; Q-rule_ess is the fallback | essential types only (W-TAN's two-mind form) | closure types cover cusps by construction, and the gate keeps the grade honest | medium — if A-EXACT fails at a non-transversal contact, Q-rule_ess governs |
+| **D4** The briefs give the seam list and let each side order it; no starting objects | name T2 for Y and Act One plus the bicycle for N (the advisor's route hints) | independent orders make the two sides' first findings independent evidence; the hints stay in the advisor's fenced record | medium — the advisor agrees ("claims only, as your default says … §1b already puts T2 in front of both sides as a claim") |
+| **D5** No Lean phase inside FS-110; W-EQ-K and FS107-R-CP stay FS-101 stubs, and whichever half lands is formalised with no declared purchases (the stub) | formalise the local calculus now | formalisation is not a cost (counter-priors), but A-EXACT alone anchors nothing, and the landed half fixes what is worth the kernel | medium |
+| **D6** The blind verifiers launch at hand-back, not during the contest | protocol §1 rule 11: a verifier on a finished result while the contest runs | the three-agent cap: N, Y and A2 fill it | high |
+
+### 5.3 Registered expectations (instruments for G21, scored at the close; never caps)
+
+| # | outcome | p | the uninformative outcome, and why both are reachable |
+|---|---|---|---|
+| E1 | A-EXACT confirmed by both sides at stage 1 | 0.85 | reachable failure: a side finds boundary contacts where the open-tile step fails (a tile touching `ω(z)` only tangentially) |
+| E2 | SEAM-T1 closed at positive scale (one mind or more) | 0.7 | failure: a κ ≠ 1 interface with no forced band (V-C5's killing test fires off unit arcs) |
+| E3 | SEAM-T2 (double unit-arc rhombus) realised in a tight local fragment by formula | 0.4 | closed 0.3; GAP 0.3 — Townsend's ⅔π sector shows one-sided unit-arc seams exist, so realisation is reachable; the rhombus's cascade (its `w₀` must be vertices) makes a kill reachable |
+| E4 | C-BOW-K (i), the bowtie's local escape, TRUE | 0.6 | FALSE reachable (a bowtie whose tilt margin is eaten by curvature at scale `s`); a TRUE is not a refutation of the NO |
+| E4′ | C-BOW-K (ii), the global bowtie claim, decided either way | 0.25 | its NO needs an area, a priced swap or a forced non-escaping partner; its YES needs a whole map |
+| E5 | SEAM-C reduces to SEAM-T under closure types (derived, one mind or more) | 0.6 | failure: a cusp whose horn escapes every crossing circle's band (a horn tangent to `ω(w₀)`) |
+| E6 | C-T-BIKE decided (a formula 3-colouring or a proof none exists) | 0.3 | R's hand arithmetic missed by `1.6°` with one ansatz, so both are live |
+| E7 | Act One (C-ACT1) proved | 0.45 | failure: a seamless map meeting K-DENS and Siamese-or-`≥ 1` |
+| E8 | C-SEAMLIST extended by a failure kind no list names | 0.25 | the list was extended once at FS-107 (cusps) and once here (four-colour vertices) |
+| E9 | Q-rule decided at one mind or more | 0.2 | — |
+| E10 | Q-full YES | 0.03 | a YES is `χ(ℝ²) ≤ 6` with no MR; registered so that hope does not become a grade |
+| E11 | a named obstruction on either side (a seam closed, or a seam realised) | 0.8 | — |
+| E12 | a blind verifier finds a divergence of truth | 0.35 | FS-106 and FS-107: every divergence came from blind verifiers, none of truth |
+| E13 | G71's "fails only at a swap" survives the bowtie seam | 0.8 | a bowtie that defeats the index without a swap refutes it |
+
+### 5.4 The ban, and Kooshi's ruling beyond it
+
+The ban on finite-witness search runs to 2026-10-01; beyond it, "search for a finite graph is out". Y's maps are given by formula and checked exactly
+in seconds; no tile-ring enumeration, local-rule SAT, optimiser, or scan over parameters (a named value is checked, a range is derived). Every job
+keeps a "would have searched here" log.
+
+### 5.5 Carry-over (not this milestone's work; for the owner and the close)
+
+- Rows 6–64 of the ranking in `plans/FRONTIER-STUBS.md` keep six-framed bearings; the owner schedules a ranking pass.
+- `tools/fs71_ledger_b_check.py` silently skips a derivation header in three cases:
+  - a nested bracket inside a grade;
+  - a non-ASCII id;
+  - a parenthetical before the dash.
+
+  Every derivation header in `plans/FS110-derivation.md` must avoid all three (the close brief says so). The checker's silence is a tool defect for
+  the owner, who owns it.
+- FS-107's debt carried: OpenAlex was not run for `[Coulson2004]`'s citers (its search was paused, §PA row 7).
+
+### 5.6 Proposed edits for the close (I edit none of these files)
+
+- `BIBLIOGRAPHY.md`: listing rows for Kruskal 2008, Alm–Manske 2013 (abstract read, FS110-P), Ágoston 2025, Soifer 2024 ch. 25, the
+  spindle-convexity vocabulary (`[MartiniMontejanoOliveros2019]`, a proposed key; Bezdek–Lángi–Naszódi); `[SokolovVoronov2025]`: "Question 2 and
+  Conditions 5–7 quoted (FS110-P)".
+- `CLAUDE.md` G46's instances (to `plans/GROKKING-INSTANCES.md`): a tight map's same-colour pairs are sets of diameter exactly 1 or at distance exactly 1,
+  the objects of spindle convexity (§PA row 2).
+
+### 5.7 Briefs drafted (for the owner to launch)
+
+`data/fs110/briefs/N110-proof.md` (FS110-N), `Y110-construction.md` (FS110-Y), `A2-110-competition-advisor.md` (FS110-A2),
+`NB110-verify-proof.md` (FS110-NB), `YB110-verify-construction.md` (FS110-YB). Each points to `STANDING-RULES.md` as part of it.
+The fences (standing rule 13; protocol §1 rule 1 as amended at FS-107) are listed per brief.
+
+## Stage 5 — SAVED

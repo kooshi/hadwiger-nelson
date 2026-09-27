@@ -97,18 +97,25 @@ Prop. 5 fails (`plans/FS106-TS-derivation.md` l. 200). Never write a bare "C5".
   `6.8·10⁻⁵` at `s = 0.1` against an exactly tangent interface. Sketch of the general claim: "every ring junction blocks every direction, on one side or
   the other, at depth `≳ min(s·(angular margin), s²/2)`, unless a colour is a sliver near `θ ± 90°`"." **[tools, one instance, and a sketch; one
   mind: V]**. Killing test (V §4.3): "a ring junction and a direction `θ` with no forced band on either side." Object: SEQ.
-  - **C-TAN-K** *(this list; the LIM form to be decided)*: in a full tight a.e.-proper six-colouring by a map of `𝓜_K`, no close pair of vertices of
-    complementary essential types is a tangent pair unless one of them is a bowtie, a cusp, or carries a sliver. Status: open.
+  - **C-TAN-K, T1 closed** (FS110-A's restatement, verbatim): "in 𝓜_K no close covering pair is saved at a common unit point w₀ by a T1 tangent
+    interface (one-sided, or κ ≠ 1)." Status: open. Object: LIM.
+  - **C-T2**, the double unit-arc seam, split (after FS110-A): **(i) local** — *(this list)* is a double unit-arc seam consistent at `u, v, w₀, w₀′` (its
+    cascade: `w₀, w₀′` are vertices whose own close pairs must also be seams) in a tight local fragment? **(ii) global** — can a whole tight `𝓜_K` map use
+    it at every close covering pair it does not otherwise escape? Status: open.
 - **SEAM-B, bowties** (`plans/FS106-derivation.md` l. 129, FS106-AE-Q2, verbatim in part): "[G2] Cor. 2's annulus at a bowtie, at a unit-arc boundary
   through u, at spiralling boundaries"; "[G4] Prop. 12's swap exclusion (FS106-IND-X)" — **[hand; one mind per step]**. FS106-IND-X (l. 172):
   "At a unit-arc interface facing a bowtie (or a 4-chromatic point) — configuration C5 with a colour in the side cones at y — complementary translate
   curves swap and |Ind γ₁ − Ind γ₂| = 2; the swap needs a unit-arc interface whenever the curves cross non-tangentially." **[hand + measured; one mind:
-  SB; the checker re-run by A2]** (its "configuration C5" is TS-C5). *(this list)* **C-BOW-K**: in `𝓜_K`, no close pair of complementary essential
-  types is saved by a bowtie. Status: open.
+  SB; the checker re-run by A2]** (its "configuration C5" is TS-C5). **C-BOW-K**, split (FS110-A, verbatim): **(i) local** — "a bowtie with margin µ has
+  B_u ∩ B(w₀, c) = ∅ for tilts < µ" (the advisor predicts TRUE: the bowtie is then realisable locally; a TRUE here is not a refutation of the NO);
+  **(ii) global** — "no tight 𝓜_K map uses strong escapes at every close covering pair" — "This is where the NO must win: by area, by a priced swap, or by
+  forcing a non-escaping partner." Status: both open.
 - **SEAM-C, cusps** (`plans/FS107-derivation.md`, FS107-W-TAN, verbatim in part): "At a cusp vertex (a tile of angle 0), with types read as closure
   multicolours, it is a GAP." VW §4 item 4: "the cusp colour escapes C-T-TAN's pigeonhole at `w₀`, which needs "all six classes in `P(u) ∪ P(v)`"; a
   cusp constrains that colour near `w₀` only on one side of a slab." *(this list)* **C-CUSP-K**: in `𝓜_K`, no close pair of complementary closure
-  types is saved by a cusp. Status: open.
+  types is saved by a cusp. Status: open. The advisor's hunch, registered beside it (`plans/POROS-2026-09-27-fs110-tangency-seam.md` §1.7, verbatim):
+  "with closure types, a cusp vertex's blocking set near `w₀` is nonempty, so the cusp seam reduces to the tangent seam"; falsifier: "a cusp vertex with
+  a blocking partner whose blocking set near `w₀` is empty".
 - **SEAM-S, the same-type half (SWAP-PRICE, the bicycle)**:
   - K-KILL's second half (`plans/FS106-TS-derivation.md` l. 275, verbatim): "Same multicolour at distance in `(1, 2)`: Lemma 3's transplanted bicycle
     needs C-T-ANN's curves and C-T-IND's finiteness." **GAP** [hand, one mind].
@@ -169,7 +176,8 @@ Prop. 5 fails (`plans/FS106-TS-derivation.md` l. 200). Never write a bare "C5".
    argument forces more than `δ₆ + O(ε)` of holes there, it is wrong."
 5. **Strip and pinhole tests** (`data/fs107/claims.md` §3, R's tests 3 and 5), for every area argument.
 6. **The exact check** (`data/fs107/claims.md` §3, W's test 1): "Its falsifier is a monochromatic pair of squares whose distance interval `[min, max]`
-   meets `[1 − ε, 1 + ε]`." *(this list)* For a full tight map: a same-colour tile pair whose exact cross-distance range has 1 in its interior. "W's
+   meets `[1 − ε, 1 + ε]`." *(this list)* For a full tight map: a same-colour tile pair — **including a tile with itself (diameter `≤ 1`)**, FS110-A —
+   whose exact cross-distance range has 1 in its interior (for open connected tiles, the same as "contains 1"). "W's
    exact check certifies MEMBERS" (FS107-A, `data/fs107/claims.md` §3).
 7. **Class density** (W's test 3): "Each class's density is at most 0.2470."
 8. **G71's** (`CLAUDE.md` G71): the index bound "fails only at a swap"; *(this list)* a bowtie seam that defeats the index without a swap refutes it.
