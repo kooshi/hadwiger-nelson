@@ -722,6 +722,7 @@ calculus at the antipodes (contact types (in, out) where G-CONE has (out, out)) 
 | N4-FIN | no bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`: upward at most `1/υ` steps when `υ > 0`, downward at most `1/\|λ\|` when `λ < 0` | [hand, one mind; exact check C3] | §2.6 |
 | N4-TERM | every valid map has a terminal valid modification (all vertices, whole plane; each point changed finitely often) | [hand, one mind] | §2.7 |
 | N4-CONE | **in a terminal valid map no colour has two sectors at any vertex: every vertex is cubic (sectors possibly cusp horns). G-CONE is closed.** | [hand, one mind, over NB-4 (two minds, one blind), W-MERGE (two, one blind), N3-DEG (one)] | §2.8 |
+| N4-HEX | in S–V's `d = 2` configuration (antipodes `p_±` of a trivalent `u`, one type `{α, β, i}`): of `σp_+, σ²p_+` (and of `σ⁻¹p_+, σ⁻²p_+`) not both are tile points; if both antipodes are ring change points, all four are, the antipodes change the same way, and each side carries pattern R or R′; R–R dies (N2-HEX, N3-P17), R′–R′ dies ((in, in)); mixed and non-change antipodes undecided | [hand, one mind; over N2-SWAP, NB-5] | stage N4-3 |
 | N4-RED | every tight six-map in `𝓜_K` under Condition 5 has a valid cubic modification on the whole plane; N3-RED's residue is G-d2 alone, and the base must hold for cubic maps whose sectors may be cusp horns | [hand, one mind, over FS106-V's repaired S–V Cor. 1] | §2.8 |
 
 ### N4: would-have-searched-here log
@@ -943,3 +944,39 @@ cannot touch it: it is a coincidence of S–V's count, and survives N4-TERM unch
 0.65) is met in the form N3-RED uses (hard cones are removable), not in the letter (N4 does not show hard cones absent from the original map).
 
 ## Stage N4-2 — SAVED
+
+## Stage N4-3 — SAVED: G-d2, a partial constraint; one correction to stage N4-2
+
+**Correction (free; counted as retraction 1 of round 4).** §2.1's closing sentence is garbled ("shadows near `v` only points with `|z − S′| < 1`...
+reflected: only points inside `B(N, 1)`"). It should read: *a tile at `N` whose directions at `N` stay an angle `θ₀ > 0` away from `±a` shadows near `v`
+only points inside `B(N, 1)`* (the proof as written: `|z − p| > |z − N|`). N4-FLANK uses exactly this (and its mirror at `S′`); no verdict changes.
+
+*Setting (FS106-V's stretch, this record's ring terms §4.3).* `u` a vertex with `P_cl(u) = {4, 5, 6}`, `ω(u)` carrying no arc of `Γ` (Condition 5);
+`p_+ = u + e`, `p_− = u − e` with `P_cl(p_±) = {α, β, i}`, `{α, β, γ} = {1, 2, 3}` the ring colours, `i ∈ {4, 5, 6}`. `σ` is the rotation by `60°` about
+`u`; `A_1 = σp_+`, `A_2 = σ²p_+ = σ⁻¹p_−`, `B_1 = σ⁻¹p_+`, `B_2 = σ⁻²p_+ = σp_−`. Ring colours `c(x±)` just after/before `x` (tile points).
+
+**N4-HEX. [hand, one mind; over N2-SWAP (one mind) and NB-5 (two, one blind).]**
+- *(a) `A_1` and `A_2` are not both tile points; nor `B_1` and `B_2`.* A tile point of `ω(u) ∩ ω(p_+)` has a colour outside `{4, 5, 6} ∪ {α, β, i}`
+  (N-E1 at `u` and at `p_+`), i.e. `γ`; so does one of `ω(u) ∩ ω(p_−)`; `|A_1 − A_2| = 1`, so two tile points would be a `γ`-pair at unit distance (N-E0).
+  *Six is spent* in "the only colour left is `γ`"; with seven colours two are left and (a) fails, as required.
+- *(b) If both antipodes are ring change points, say `(c(p_+−), c(p_+ +)) = (α, β)`: then `(c(p_−−), c(p_− +)) = (α, β)` as well, all four of `A_1, A_2,
+  B_1, B_2` are change points, and each side reads one of two patterns: **R** `A_1 = (β, γ)`, `A_2 = (γ, α)` or **R′** `A_1 = (γ, α)`, `A_2 = (β, γ)` (and
+  mirror on the `B` side).* Proof: a finite case table over the 60° rule (`c(x±) ≠ c(σx±)` at tile points), the tile-point rule (a tile point of `A_1`
+  or `A_2` is `γ` on both sides) and "no swap" (a swap forces a covering pair at distance 1 under Condition 5, N2-SWAP, against NB-5). Every branch
+  with a tile point among `A_1, A_2` ends in a swap with `p_+` or `p_−`; the orientation `(β, α)` at `p_−` leaves no admissible pair `(A_1, A_2)`; with
+  `(α, β)` at `p_−` exactly R and R′ survive.
+- *(c) R on both sides is dead*: every hexagon point is then `(A+, A−)` in N2-ROT's table — a rotating hexagon, which N2-HEX pins to a regular `u` and
+  N3-P17 (two derivations, one of them `[SokolovVoronov2025]` Prop. 17 as repaired) kills under Condition 5. *R′ on both sides is dead*: every point is
+  `(B+, B−)`, so N2-ROT puts the inward cone at `p_±` in a colour of `u`'s type, necessarily `i`, in-type at both antipodes — the impossible **(in, in)**
+  (§2.8).
+- **Undecided (the named GAP of G-d2 on this route):** the mixed patterns (R on one side, R′ on the other: `p_+` reads `(A+, B−)`, `p_−` reads
+  `(B+, A−)`, which N2-ROT leaves free), and antipodes that are not ring change points (a colour of `{α, β}` present at `p_±` only on one side of `ω(u)`).
+
+**Verdict on G-d2 in this job: GAP**, at the mixed patterns and the non-change antipodes. N4 neither shows it vacuous nor needs it vacuous; CB's reduction
+(blind second mind running) is the route that may make it not arise. N4-HEX is offered to that check as an independent constraint: any surviving `d = 2`
+pair has a ring change point of `u` at `60°` from an antipode on each side.
+
+**Registered.** N4-P4: the mixed patterns of N4-HEX die by N2-ROT's side conditions at `A_1, A_2` together with the `i`-sector orientation (FS106-V's
+(in, out)) — 0.55.
+
+## Stage N4-3 — SAVED
