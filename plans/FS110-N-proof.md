@@ -295,6 +295,8 @@ radius exactly 1.*
 | N2-ROT | at a ring change point with pattern (A+, A−) one colour `g ∈ P_cl(u)` fills the outward 60° cone at `x`, and `u`'s `g`-sector lies in the closed half-plane away from `x`; with (B+, B−) the inward cone and the half-plane toward `x`; no other pattern forces a colour at `x` | [hand, one mind; table checked on named rings] | §4.3 |
 | N2-HEX | a purely rotating ring (six 60° arcs, `W = ±2`) forces `u` regular: three sectors of exactly 120°, each facing away from two consecutive rotation points | [hand, one mind] | §4.4 |
 | N2-S1 | at a non-vertex seam point `w₀` on a unit arc of `ω(u)` (the (S1) seam), with `(u, v)` a disjoint (3,3) covering pair, `\|u − v\| ∉ {1, √3}`, and `ω(v)` free of `Γ`-arcs at `σ_v^{±1}w₀`: `v`'s ring changes freely at `w₀`, and both hexagon neighbours `σ_v^{±1}w₀` carry `u`'s bowtie colour `γ` on both sides along `ω(v)` | [hand, one mind; the exceptional distances located numerically, §5.1] | stage 5, §5.1 |
+| N2-TRANS | along an edge `uu′` (common colours `a, b`) of an Act-One-free map without unit arcs, `W(u)` on the ring oriented `(d, e, f)` equals `W(u′)` on `(c, e, f)` — `u′`'s third colour `d` replaced by `u`'s third colour `c` | [hand, one mind, a sketch at the nerve step] | stage 6, §6.1 |
+| N2-FLIP | around a tile the transported ring orientation returns reversed iff an odd number of consecutive boundary vertices share a type; such a tile forces `W = 0`, hence Act One (N2-RING, N2-SWAP), under Condition 5 | [hand, one mind; parity checked on five named faces, `tools/fs110_n_face.py`] | §6.2 |
 
 ### N2: would-have-searched-here log
 
@@ -456,3 +458,44 @@ crossing of two seam arcs. **Verdict: GAP** at every pattern but N-X's (which N 
 | N2-P3 | a local fragment realising (S1) with N2-S1's `γ` points exists (the construction side's (S1) fragment will meet N2-S1) | 0.7 |
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: the winding is transported along edges (Act One's GAP, sharpened)
+
+*Standing assumption of this stage (for contradiction):* a tight six-map in `𝓜_K` with no arc of radius 1 in `Γ` (Condition 5) and **no close covering pair**
+(Act One fails). By N2-V4 and N2-RING/SWAP: every vertex has at most three colours, every trivalent ring is swap-free, `|W| ≥ 2`.
+
+### 6.1 N2-TRANS [hand, one mind; the nerve step a sketch]
+
+Let `u, u′` be trivalent vertices joined by an edge `e` of `Γ` between an `a`-tile and a `b`-tile: `t(u) = {a, b, c}`, `t(u′) = {a, b, d}`. For `z` on `e`,
+`P_cl(z) ⊇ {a, b}`, so by N-E1 every point of `ω(z)` in a tile has a colour in `{c, d, e, f}`. The map `(s, θ) ↦ z_s + e_θ` pulls the colouring back to a
+cylinder whose ends are the rings of `u` and `u′`. Three colours meet at a point of the cylinder only over a vertex of `Γ` with those colours in its
+type; such a vertex lies within distance `≤ 1 + |z_s − u| ≤ 2` of `u` and of `u′` (both in the closure of the `a`-tile, diameter `≤ 1`), so off the
+`d = 2` configuration its type meets `t(u)` and `t(u′)`: being inside `{c, d, e, f}`, it contains `c` and `d`. So the nerve of the pulled-back colouring
+lies in `X` = the complete graph on `{c, d, e, f}` with the two faces `cde`, `cdf` (no four-colour vertices, N2-V4). The two ring loops are homotopic in
+the cylinder, hence homologous in `X`, where `[def] = [cef] − [cdf] + [cde] ≡ [cef]` (exact identity of 1-cycles, written out in §6.1 of my working:
+`ce + ec = 0`, `−df = fd`). Hence **`W(u)` read on `(d, e, f)` equals `W(u′)` read on `(c, e, f)`.** Same-type edges (`c = d`) transport the
+orientation unchanged. *Six is spent* at "a band vertex's type contains `c` and `d`": with seven colours the band has five colours and the faces do
+not pin `H₁`.
+
+### 6.2 N2-FLIP: odd tiles kill the winding [hand, one mind]
+
+Around a tile of colour `a` with neighbours `b_0, …, b_{m−1}` (boundary vertices `v_i` of type `{a, b_{i−1}, b_i}`, all trivalent), N2-TRANS moves a
+label from colour `b_{i+1}` to `b_{i−1}`. Extend the labels to all five colours of `[6] ∖ {a}` (the two colours `b_{i−1}, b_i` outside the ring
+carry labels 4, 5): each step is the transposition `(b_{i−1} b_{i+1})` of labels, trivial exactly at a same-type step (`b_{i−1} = b_{i+1}`). After a full
+turn the total parity is `(−1)^{m−k}` (`k` same-type steps); the two outside labels leapfrog one index per step and return swapped iff `m` is odd,
+parity `(−1)^m`; so the ring's own permutation has parity `(−1)^k`. **An odd `k` returns the ring orientation reversed, so `W(v_0) = −W(v_0) = 0`,
+against `|W| ≥ 2`: such a tile forces a swap, hence Act One** (N2-RING, N2-SWAP). `tools/fs110_n_face.py` checks the parity on five named faces
+(planted fault: overwriting a fixed slot; it fires on four of the five, and cannot reach the hexagon `2, 3, 4, 2, 3, 4`, whose steps all move one
+slot — noted, G21).
+
+### 6.3 C-ACT1 after stage 6: GAP, the step narrowed
+
+**Proved (Condition 5, one mind):** Act One holds in every tight six-map having a four-colour vertex, a trivalent ring with a swap (in particular
+`W = 0`), or a tile with an odd number of same-type boundary steps (all boundary vertices trivalent). **The GAP:** maps in which every vertex has
+at most three colours, every tile has an even number of same-type steps (the generic case: neighbours of distinct colours give `k = 0`), and the
+winding `|W| ≥ 2` is carried consistently along every edge by N2-TRANS. The next move, for the successor: N2-TRANS is a flat structure on the map; its
+global form (a section over the whole plane) must meet something the winding cannot carry — candidates are the bichromatic vertices of degree
+`≥ 4` (where the ring has four colours and no winding), N2-HEX's rigidity at rotation points, and a count of ring changes (`≥ 3|W|` per vertex) against
+edge length per unit area at bounded `K`.
+
+## Stage 6 — SAVED
