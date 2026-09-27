@@ -94,3 +94,130 @@ clean prior.
 | move I would have made by search | what I did instead |
 |---|---|
 | none at stage 1 | — |
+
+## Stage 2 — SAVED ((a0): the deduction; (a3), (a4), (a6) at both fields; the advisor's (i), (ii) and the deduction half of (iii))
+
+*EL2021 passages used here, read at this stage from the PDF: §1 (pp. 1–5, in full), §2 (pp. 5–9, in full), §4 (pp. 14–18, in full), and
+§7's Lemma 7.4 with its proof (p. 32) — the one place the proof of Thm 4.1 uses "no virtually cyclic factors". Reading status per section:
+stage 3's table.*
+
+### 2.1 (a0) Provenance — the deduction of Thm 1.2 from Thm 1.3, every step against Thm 1.3's statement [hand, one mind]
+
+**EL2003 does not prove it** (1.3 above): its §6 is an outline and its last step is "not hard". EL2021 proves Thm 1.3 (§4.3 from Thm 4.1,
+§§4.4–7 for Thm 4.1) and never writes Thm 1.2's proof. The deduction:
+
+*Given:* `α` a totally irreducible, not virtually cyclic `ℤ^d`-action by automorphisms of a solenoid `X`; `µ` an `α`-invariant, `α`-ergodic
+probability measure.
+
+1. **Thm 1.3's hypotheses.** (a) `d ≥ 2`: a `ℤ¹`-action is virtually cyclic (take `n = 1`, `Λ = ℤ`, `k = m`), and so is a `ℤ⁰`-action; so
+   "not virtually cyclic" forces `d ≥ 2`. (b) "No virtually cyclic factors", read as **no non-trivial algebraic factor on which the induced
+   action is virtually cyclic** (Lemma 2.2 below says why this is the only reading under which Thm 1.3 is not vacuous). A non-trivial
+   algebraic factor is `X → X/X′` with `X′ ⊊ X` closed and `α`-invariant; total irreducibility (with `Λ = ℤ^d`) makes `X′` finite, so the
+   factor's dual `X′^⊥` has finite index in `X̂`. An automorphism of the torsion-free `X̂` is determined by its restriction to a
+   finite-index subgroup (`k(f(x) − g(x)) = 0` forces `f(x) = g(x)`), so `α^m = α^{kn}` on `X/X′` iff on `X`: the factor is virtually cyclic
+   iff `α` is. Not the case. (c) `µ` is an `α`-invariant, ergodic probability. **All of Thm 1.3's hypotheses hold.**
+2. **Thm 1.3's conclusion**, verbatim: "there exists a subgroup Λ ⊆ Zd of finite index and a decomposition µ = (1/J)(µ1 + . . . + µJ) of µ
+   into mutually singular measures" with (1) "µj is αΛ-ergodic", (2) "an αΛ-invariant closed subgroup Gj such that µj is invariant under
+   translation with elements in Gj", (3) "For n ∈ Zd αn∗ µj = µk for some k … and αn(Gj) = Gk", (4) "The measure µj induces a measure on the
+   factor X/Gj with hµj(αn X/Gj) = 0 for any n ∈ Λ."
+3. **Each `G_j` is finite or `X`.** `G_j` is closed and `α_Λ`-invariant with `Λ` of finite index; total irreducibility (its definition
+   quantifies over every finite-index `Λ`) forbids a proper infinite one.
+4. **Case some `G_j = X`.** Then `µ_j` is a translation-invariant probability on the compact group `X`, so `µ_j = m_X`. By (3) every `µ_k` in
+   the `ℤ^d`-orbit of `j` is `α^n_* m_X = m_X` (a continuous automorphism preserves Haar measure), and mutual singularity makes the orbit
+   `{j}`. Then `µ = (1/J)m_X + (1 − 1/J)µ″` with `µ″ = (J − 1)^{−1} Σ_{k≠j} µ_k`, `α`-invariant (its index set is a union of orbits, by (3));
+   ergodicity of `µ` (extremality among `α`-invariant probabilities) with `J > 1` would give `m_X = µ″`, contradicting `µ″ ⊥ m_X`. So
+   `J = 1` and **`µ = m_X`**.
+5. **Case every `G_j` finite.** Fix `n ∈ Λ`; `µ_j` is `α^n`-invariant by (1). The factor map `π_j : X → X/G_j` has fibres `x + G_j` of
+   `|G_j|` points, so for every finite partition `P` the conditional entropy `H_{µ_j}(⋁_{i<N} α^{−in}P | π_j^{−1}𝔅)` is at most `log |G_j|`
+   (the conditional measures live on fibres), uniformly in `N`; so `h_{µ_j}(α^n | X/G_j) = 0`, and by the **Abramov–Rokhlin** addition
+   formula `h_{µ_j}(α^n) = h_{µ_j}(α^n_{X/G_j}) + 0 = 0` by (4). Entropy is affine on `α^n`-invariant measures, so `h_µ(α^n) = 0` for
+   `n ∈ Λ`. For any `n ∈ ℤ^d`, `kn ∈ Λ` with `k = [ℤ^d : Λ]`, and `h_µ(α^{kn}) = k·h_µ(α^n)` (Abramov), so **`h_µ(α^n) = 0` for all `n`**.
+
+Steps 4–5 are exactly Thm 1.2's dichotomy. ∎ **(a0): TRUE**, in the form "EL2021 Thm 1.2 is a consequence of EL2021 Thm 1.3 by a ten-line
+deduction EL2021 does not write, using Abramov–Rokhlin; EL2003 is not needed and is not a proof" — **provided** Thm 1.3's proof (§4.3,
+§§4.4–7) holds for the actions used, which is (a9), stage 3. *Wrong-reason check (C0):* I did not rely on "already proven in [7]", and step
+1(b) uses the non-trivial reading only, whose necessity is 2.2's (iii).
+
+**Lemma 2.1 (the hypothesis passes to `α_Λ` and to the adelic lift)** [hand; for general `α`, one mind]. EL2021 applies Thm 4.1 to the
+restriction `α_Λ` (§4.3) and Thm 1.3 to the adelic lift on `X_m = 𝔸^m/ℚ^m` (Lemma 4.2), and states the hypothesis "no virtually cyclic
+factors" only for `α` on `X`; neither transfer is written. Both hold: (i) if `α_Λ` has a non-trivial virtually cyclic factor `X/X′`, then
+`X″ = ⋂_{n ∈ ℤ^d/Λ} α^n X′` is closed and `α`-invariant, `X/X″` embeds in `∏_n X/α^nX′`, on each of which `α_Λ` satisfies the same relations
+`α^m = α^{kn₀}` (conjugate by the commuting `α^n`), so `X/X″` is a non-trivial virtually cyclic factor of `α` (the definition needs only a
+finite-index `Λ`). (ii) A factor of the lift is dual to an invariant subgroup `W ⊆ ℚ^m`; `W ∩ X̂` spans `ℚW` (as `ℤ^m ⊆ X̂` in §4.1's
+normalisation) and is invariant, and virtual cyclicity depends only on `ℚW`; so a non-trivial virtually cyclic factor of the lift gives one
+of `α`. **For our pieces both are immediate anyway** (2.3).
+
+### 2.2 The advisor's (iii), deduction half — verdicts [hand, one mind]
+
+- **"Virtually cyclic factor" must be read as a non-trivial factor: TRUE.** The trivial factor `X/X` is a point, the induced action is the
+  identity, and `α^m = id = α^{0·n}` for every `m`: virtually cyclic by the letter of p. 2 (with `n = 0`, or any `n` and `k = 0`). Under the
+  literal reading **no action satisfies Thm 1.3's hypothesis** and Thm 1.3 is vacuous. EL2021's own use (Lemma 7.4, p. 32: "X has a factor
+  isomorphic to Yirred … contradicts our standing assumption that X has no virtually cyclic factors") applies it to `Y_irred ≠ 0`, i.e.
+  non-trivial factors. So the reading is forced, and it is the one PE-1′ (X02D §2.2) already used.
+- **The deduction needs Abramov–Rokhlin (a finite-to-one extension adds no entropy): TRUE** — step 5; nothing else from outside (steps 3–4 use
+  only the definitions, Haar uniqueness and extremality).
+- *The hyperbolicity half of (iii)* is (a9)'s, stage 3.
+
+### 2.3 (a3) and (a4) at `F₁` and `F_dG` [hand, one mind, checking X02D §2.2 and X02V §2.2 line by line]
+
+**(a3) TI ⟺ admissibility: TRUE at both fields.** Checked: (⇐) a closed `Γ′`-invariant `Y` (`α^n Y ⊆ Y` for `n` in the group `Λ` gives
+equality) has `N = Y^⊥` a `ℤ[Γ′]`-submodule of `M`; `N ≠ 0` gives `ℚN` a `ℚ[Γ′]`-subspace, and `ℚ[Γ′] = ℚ(Γ′)` (a finite-dimensional
+ℚ-subalgebra of a field is a field) `= L` by admissibility, so `ℚN = L`; `M` is finitely generated over `ℤ[Γ′]` (coset representatives);
+**the finiteness step:** `M/N` is finitely generated over `ℤ[Γ′]` and each generator has an integer multiple in `N`, so one `m ≥ 1` kills
+`M/N`, which is then a quotient of `M/mM`, finite by Lemma F (`|A/mA| ≤ m^{rk A}` for torsion-free `A` of finite rank; X02D's proof checked:
+the division by the largest common power of `p` is legitimate because `A` is torsion-free). **`M` is not finitely generated over ℤ, and
+Lemma F does not need it** — the C0 wrong-reason is avoided. X02V's alternative (Krull dimension one of `ℤ[Γ′]`, so `ℤ[Γ′]/kℤ[Γ′]` is
+Artinian with finite residue fields) is also correct. (⇒) `N = ℤ[Γ′]x` has `ℚN = L′x` of dimension `[L′:ℚ] < [L:ℚ]`, so `N^⊥` is proper
+(`N ≠ 0`), infinite (`M/N` has positive rank), closed and `Γ′`-invariant. **Field-dependence:** none — the criterion uses only that `L` is a
+field and `ℚM = L`; at `F₁` (`[L:ℚ] = 4`) and `F_dG` (32) alike. The field enters only through the existence of admissible `Γ` (Lemma W, (a8),
+stage 3).
+
+**(a4) not virtually cyclic, and no (non-trivial) virtually cyclic factors: TRUE at both fields, for `M̂`, for `α_Λ` (every finite-index
+`Λ`), and for the adelic lift.** Every non-zero `Γ`-invariant subgroup `W` of `L` (the dual of any non-trivial factor of `M̂`, or of the lift
+`𝔸_L/L`) carries the faithful action `x ↦ γx`; `α^m = α^{kn}` on it forces `γ_m = γ_n^k` in the field, so a finite-index `Λ ≅ ℤ²` would embed
+in the cyclic `⟨γ_n⟩`: impossible. The same holds for `Γ_Λ` (still `≅ ℤ²`, still admissible). **And Lemma 7.4's conclusion — `Y_irred` has
+two linearly independent Lyapunov weights — holds for our pieces by direct computation**, not only through the hypothesis: `Y_irred` is the
+whole lift (`L` is `Γ_Λ`-irreducible for every `Λ`, so Lemma 2.4's filtration is `0 < 𝔸_L/L`); the weights are `χ_v(a, b) = log|uᵃwᵇ|_v`;
+`u` is a unit at `𝔓, c(𝔓)` and `w` is a unit off `{𝔓, c(𝔓)}` (Lemma W), so `χ_𝔓(a, b) = b·log|w|_𝔓 ≠ 0` and, at a finite `v` with
+`|u|_v ≠ 1` (one exists: `u` is non-torsion with every archimedean absolute value 1, Kronecker), `χ_v(a, b) = a·log|u|_v`: independent.
+
+### 2.4 (a6) Ergodicity at `F₁` and `F_dG`: TRUE [hand, one mind]
+
+Every measure PE-2 hands to Thm 1.2 is a probability, `Γ`-invariant and `Γ`-ergodic for the whole `Γ ≅ ℤ²` (`(a, b) ↦ uᵃwᵇ`), never only for a
+finite-index subgroup: X02D route (§3.1–3.2) — `ρ` is a `Γ`-ergodic component of `ν` on `R̂` (ergodic decomposition for the countable `Γ` on
+the compact metrizable `R̂`), and `ρ_k = (π_k)_*ρ` is `Γ`-ergodic because a `Γ`-invariant Borel set of `M̂_k` pulls back to one of `R̂`; X02V
+route (§2.3) — the `ν_η` are the `Γ`-ergodic components of `τ_j` on `M̂_j` itself. **The C0 wrong reason does not occur:** neither route treats
+the push-forward of a `U`-ergodic measure as `Γ`-ergodic; X02V says so explicitly ("but not in general `Γ`-ergodic"). Field-independent.
+
+### 2.5 The advisor's (i) and (ii) — verdicts [hand, one mind]
+
+**(ii-a) `h_{m_{M̂}}(γ) > 0` for every `γ ≠ 1` in `Γ`, on every piece: TRUE** (a proof shorter than X02V's Lemma H, and not needing Yuzvinskii's
+formula in full). `Γ ≅ ℤ²` is torsion-free, so `γ ≠ 1` is non-torsion. Every `M` in either route contains `1` (X02D: `M₀ = ℤ[Γ]`; X02V:
+`M_j = ℤ[Γ]·{1, r₁, …}`), so `N = ℤ[γ, γ⁻¹] ⊆ M` and `N̂` is a `γ`-equivariant factor of `M̂`; `h_{m_M}(γ) ≥ h_{m_N}(γ)`. `N ≅ ℤ[x^{±1}]/(f)`
+with `f` the primitive minimal polynomial of `γ`, whose Haar entropy is the Mahler measure `m(f)` (Lind–Schmidt–Ward; for this cyclic case
+Yuzvinskii's formula) [external, textbook]. Every archimedean absolute value of `γ ∈ U` is 1 (conjugation of `L/F` is complex conjugation at
+every embedding over a real place of `F`), so `m(f) = log|a₀|`, `a₀` the leading coefficient; `γ` non-torsion with all conjugates of modulus 1
+is not an algebraic integer (Kronecker), so `|a₀| ≥ 2` and **`h_{m_M}(γ) ≥ log 2`**. *Where it is used:* X02V's uniqueness step and X02D's
+second route (§3.3); X02D's first route (§3.1–3.2) does not use it.
+
+**(ii-b) `⟨u, w⟩ ≅ ℤ²`, torsion-free: TRUE.** Lemma W's relation argument: `uᵃwᵇ = 1` gives, at `𝔓` (where `u` is a unit by the choice of
+`p`), `bh = 0`, so `b = 0`, then `uᵃ = 1` and `a = 0` (`u` non-torsion). A group on two generators with no non-trivial relation is free abelian
+of rank 2 — torsion-free, though `U` itself has torsion (`±1`, and `±i` where they have norm one).
+
+**(i) The passage from the pieces to `R̂`: TRUE, by either route; the advisor's description fits X02V's route (and X02D §3.3), not X02D's
+main route.** *X02V route:* `τ_j = c_j m_j + ρ_j`; the Haar weight is unique given `h_{m_j}(u) > 0` ((ii-a)); **constant in `j`** because
+`(π_{j,j+1})_*m_{j+1} = m_j` and zero entropy passes to factors, so the pushed decomposition is one of the same kind; the zero-entropy parts
+form a projective system in the sense needed — `τ − c·m` pushes to `ρ_j ≥ 0` on every `M̂_j`, hence is `≥ 0` on the generating algebra
+`⋃_j π_j^{−1}𝔅(M̂_j)`, hence a positive measure (a finite signed measure non-negative on a generating algebra is non-negative, by
+approximating its Hahn negative set); it is `U`-invariant as `τ` and `m` are. "Haar is `Γ`-ergodic" is **not used** on this route (the
+uniqueness is by entropy). *X02D route (§3.2):* no projective system at all — `ν`'s `Γ`-ergodic decomposition is taken on `R̂`, `U`
+permutes its components (commutation, and uniqueness of the decomposition), and here **Haar's `Γ`-ergodicity is used** (X02D's proof:
+a character with a finite `Γ`-orbit is fixed by some `γ ≠ 1`, and `γr = r` forces `r = 0` in a field — checked). Both routes need T1–T4
+(ergodic decomposition, the increasing-σ-algebra entropy limit, Jacobs, Fourier uniqueness) [textbook], and T3 in the form X02V states
+(for any decomposition into invariant measures, via uniqueness of ergodic decompositions) — checked.
+
+### 2.6 Would-have-searched-here log (stage 2)
+
+| move I would have made by search | what I did instead |
+|---|---|
+| none | — |
