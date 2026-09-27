@@ -347,3 +347,24 @@ NB shows; I concede it: an inner-colour tile touching `B̄(P, 2)` only at a corn
 RED's termination with stub accumulation; FLANK's `κ = ±1` exception and END's scope (divergence 1′).
 
 ## Stage N2-1 — SAVED
+
+## Stage N2-2 — SAVED: the tool first — red plants at R2, END and L60 (divergence 15)
+
+`tools/fs112_n2_checks.py` (new; `tools/fs112_n_arcs.py` untouched). Every check returns a verdict **and a reason code**; a plant must turn **exactly its
+own** check red **with its own reason**, and the self-test calls anything else a DEFECT. Outputs committed in `data/fs112/fs112-n/n2-checks*.out`.
+
+| check | derived claim (record address) | green reason (faithful) | plant | red reason under the plant |
+|---|---|---|---|---|
+| R2OUT | N112-LOCK, outer colour at `Q = P + 2e_w`: `T_out` straddles `ω(Q)` near `w`, so N-E2 forbids **any** `s_out` tile at `Q` (NB's route) | STRADDLE (`0.99998…`, `1.00018…`) | `r2_inner`: `T_in`'s points in place of `T_out`'s | NO_STRADDLE (both `> 1`): the inner colour **can** sit at `Q`, outside |
+| R2IN | N112-LOCK, inner colour near `Q`: a point `Y ∈ B(P, 2)` near `Q` is shadowed by `T_in` | STRADDLE | `r2in_outside`: `Y` beyond radius 2 | UNSHADOWED, by the exact bound `\|Y\| − 1 > 1` |
+| END | N112-END's contradiction: with `λ_{k+1} = −1` a point of the `−n` half-plane `5.7°` below `+a` is shadowed by the `a_{k+1}`-horn (U1's facing cone) | STRADDLE (`1.00206`, `0.99810`) | `end_half`: `λ_{k+1} = −1/2`, same `z` | UNSHADOWED, by the exact bound `R − \|z − c\| > 1` (`z` below the shadow circle of curvature `f(−1/2) = −1`) |
+| L60 | N112-L60: at `ℓ = 60°` the outer tile's end points are `1 + ε` apart (TS-C broken) | DIAM_OVER (`10201/10000`) | `l60_fifty`: `ℓ = 50°` | DIAM_OK |
+
+**Self-test:** four plants FIRE, faithful run PASS, exit 0 (`n2-checks-selftest.out`). **The DEFECT path is reachable, seen:** the first draft's END
+witness `z = (1/10, −1/100)` lay at `β = 5.7°` below `+a` but `\|z\| = 0.1`, where the `11°` arc point is not near enough; the faithful run read END red
+and the self-test named three plants DEFECT (they reddened END as well). Fixed by the scale (`\|z\| = 1/100`), not by loosening the assertion. A second
+draft's R2 points `(1 ± t, s)` left the claimed side of `α`; the side assertion caught it before any verdict.
+*Scope of END's check:* it certifies the contradiction **given** N4-STUCK's structure at `P_k` (the `a_{k+1}`-sector filling the `−n` half-plane);
+divergence 1′ (FLANK) is about whether that structure holds, and is stage N2-4's.
+
+## Stage N2-2 — SAVED

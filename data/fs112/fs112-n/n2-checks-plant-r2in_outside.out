@@ -1,0 +1,4 @@
+R2OUT: GREEN STRADDLE    |p1-Q|^2 = 0.9999800001, |p2-Q|^2 = 1.0001799971
+R2IN : RED   UNSHADOWED  |Y|^2 = 400040001/100000000 > 4: all of B(P,1) farther than 1
+END  : GREEN STRADDLE    lam = -1: arc points at squared distance 1.0020610 and 0.99810100 from z
+L60  : GREEN DIAM_OVER   l = pi/3: squared distance 10201/10000 > 1

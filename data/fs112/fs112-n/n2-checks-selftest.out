@@ -1,0 +1,5 @@
+plant r2_inner     : red ['R2OUT'], reason NO_STRADDLE -> FIRES
+plant r2in_outside : red ['R2IN'], reason UNSHADOWED -> FIRES
+plant end_half     : red ['END'], reason UNSHADOWED -> FIRES
+plant l60_fifty    : red ['L60'], reason DIAM_OK -> FIRES
+faithful run: red [] -> PASS

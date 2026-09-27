@@ -1,0 +1,4 @@
+R2OUT: GREEN STRADDLE    |p1-Q|^2 = 0.9999800001, |p2-Q|^2 = 1.0001799971
+R2IN : GREEN STRADDLE    |p1-Y|^2 = 0.9998200081, |p2-Y|^2 = 1.0006198801
+END  : RED   UNSHADOWED  lam = -1/2: every horn point at distance >= R - |z - c| = 1.0009500 > 1
+L60  : GREEN DIAM_OVER   l = pi/3: squared distance 10201/10000 > 1
