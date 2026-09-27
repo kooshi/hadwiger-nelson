@@ -1,0 +1,126 @@
+### tools/fs110_yb3_ring.py
+mode: faithful
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  0 (registered   0) W mod 6=0 g-values=[-1, 1] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W= -3 (registered  -3) W mod 6=3 g-values=[-2, -1] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 g-values=[4, 5] m=[3]
+X1-known-reject              valid=False (must be False)
+RESULT: ALL PASS
+EXIT(tools/fs110_yb3_ring.py)=0
+### tools/fs110_yb3_perm.py
+mode: faithful
+FLIP tile 0 neighbours [1, 2, 3]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 4, 5]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [2, 3, 4, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 1, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 5 neighbours [1, 2, 1, 3, 1, 4]: same-type steps k=3, orientation returned reversed; (−1)^k predicts reversed
+FLIP tile 3 neighbours [0, 1, 0, 1, 0, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+BOW: 1920 assignments; inconsistent (W forced 0) at 720; mismatches with 'x≠y ∧ c∉{x,y}': 0
+RESULT: ALL PASS
+EXIT(tools/fs110_yb3_perm.py)=0
+### tools/fs110_yb3_six.py
+mode: faithful; spacing 60°
+(e) interval triples checked: 4699
+(f) tight configuration served sets: [[240, 300], [0, 60], [120, 180]]
+RESULT: ALL PASS
+EXIT(tools/fs110_yb3_six.py)=0
+### tools/fs110_yb3_ring.py --plant A
+mode: PLANT A
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  0 (registered   0) W mod 6=0 g-values=[-1, 1] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W= -3 (registered  -3) W mod 6=3 g-values=[-2, -1] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 g-values=[4, 5] m=[3]
+X1-known-reject              valid=True (must be False)
+FAIL: X1-known-reject: known-REJECT ring accepted
+PLANT A CAUGHT for its own reason
+EXIT(tools/fs110_yb3_ring.py --plant A)=0
+### tools/fs110_yb3_ring.py --plant B
+mode: PLANT B
+R1-aligned-six-two-colour    arcs= 6 valid=True GP=False W=  3 (registered   0) W mod 6=3 g-values=[1, 2] m=[3]
+R2-aligned-six-arc           arcs= 6 valid=True GP=False W=  2 (registered   2) W mod 6=2 g-values=[1] m=[0]
+R3-aligned-nine-arc          arcs= 9 valid=True GP=False W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R4-gp-nine-arc               arcs= 9 valid=True GP=True W=  3 (registered   3) W mod 6=3 g-values=[1, 2] m=[3]
+R5-gp-nine-arc-reversed      arcs= 9 valid=True GP=True W=  6 (registered  -3) W mod 6=0 g-values=[2, 4] m=[3]
+R6-gp-27-arc                 arcs=27 valid=True GP=True W=  9 (registered   9) W mod 6=3 g-values=[4, 5] m=[3]
+X1-known-reject              valid=False (must be False)
+FAIL: R1-aligned-six-two-colour: W=3 ≠ registered 0
+FAIL: R5-gp-nine-arc-reversed: W=6 ≠ registered -3
+FAIL: R5-gp-nine-arc-reversed: GP ring with W ≢ 3 (mod 6)  <-- Y3-GP refuted
+FAIL: R5-gp-nine-arc-reversed: g outside two consecutive nonzero-mod-3 values
+PLANT B CAUGHT for its own reason
+EXIT(tools/fs110_yb3_ring.py --plant B)=0
+### tools/fs110_yb3_perm.py --plant S
+mode: PLANT S
+FLIP tile 0 neighbours [1, 2, 3]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 4, 5]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [2, 3, 4, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 1, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 5 neighbours [1, 2, 1, 3, 1, 4]: same-type steps k=3, orientation returned same; (−1)^k predicts reversed
+FLIP tile 3 neighbours [0, 1, 0, 1, 0, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+BOW: 1920 assignments; inconsistent (W forced 0) at 1920; mismatches with 'x≠y ∧ c∉{x,y}': 1200
+FAIL: FLIP mismatch on 5,[1, 2, 1, 3, 1, 4]
+FAIL: BOW table mismatch, e.g. ((0, 1, 2, 2, 2), True, False)
+FAIL: BOW: one outcome unreached
+PLANT S CAUGHT for its own reason
+EXIT(tools/fs110_yb3_perm.py --plant S)=0
+### tools/fs110_yb3_perm.py --plant R
+mode: PLANT R
+FLIP tile 0 neighbours [1, 2, 3]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 4, 5]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [2, 3, 4, 2, 3, 4]: same-type steps k=0, orientation returned reversed; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 1, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 5 neighbours [1, 2, 1, 3, 1, 4]: same-type steps k=3, orientation returned same; (−1)^k predicts reversed
+FLIP tile 3 neighbours [0, 1, 0, 1, 0, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+BOW: 1920 assignments; inconsistent (W forced 0) at 480; mismatches with 'x≠y ∧ c∉{x,y}': 480
+FAIL: FLIP mismatch on 0,[2, 3, 4, 2, 3, 4]
+FAIL: FLIP mismatch on 5,[1, 2, 1, 3, 1, 4]
+FAIL: BOW table mismatch, e.g. ((0, 1, 2, 3, 4), False, True)
+PLANT R CAUGHT for its own reason
+EXIT(tools/fs110_yb3_perm.py --plant R)=0
+### tools/fs110_yb3_perm.py --plant D
+mode: PLANT D
+FLIP tile 0 neighbours [1, 2, 3]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 4, 5]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [2, 3, 4, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 1, 2, 3]: same-type steps k=2, orientation returned same; (−1)^k predicts same
+FLIP tile 0 neighbours [1, 2, 3, 1, 2, 3, 4]: same-type steps k=0, orientation returned same; (−1)^k predicts same
+FLIP tile 5 neighbours [1, 2, 1, 3, 1, 4]: same-type steps k=3, orientation returned reversed; (−1)^k predicts reversed
+FLIP tile 3 neighbours [0, 1, 0, 1, 0, 2]: same-type steps k=4, orientation returned same; (−1)^k predicts same
+BOW: 1920 assignments; inconsistent (W forced 0) at 1200; mismatches with 'x≠y ∧ c∉{x,y}': 1920
+FAIL: BOW table mismatch, e.g. ((0, 1, 2, 2, 2), True, False)
+PLANT D CAUGHT for its own reason
+EXIT(tools/fs110_yb3_perm.py --plant D)=0
+### tools/fs110_yb3_six.py --plant P1
+mode: PLANT P1; spacing 72°
+(e) interval triples checked: 4699
+(f) tight configuration served sets: [[240, 300], [0, 60], [120, 180]]
+FAIL: (a) k=0: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+FAIL: (a) k=1: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+FAIL: (a) k=2: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+FAIL: (a) k=3: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+FAIL: (a) k=4: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+FAIL: (a) k=5: |z_k − z_(k+1)|² = 5/2 - sqrt(5)/2
+PLANT P1 CAUGHT for its own reason
+EXIT(tools/fs110_yb3_six.py --plant P1)=0
+### tools/fs110_yb3_six.py --plant P2
+mode: PLANT P2; spacing 60°
+(e) interval triples checked: 8597
+(f) tight configuration served sets: [[240, 300], [0, 60], [120, 180]]
+FAIL: (e) proper assignment exists for served sets [[0, 1, 2], [3, 4, 5], [0, 1, 4, 5]]: (0, 2, 0, 1, 2, 1)
+PLANT P2 CAUGHT for its own reason
+EXIT(tools/fs110_yb3_six.py --plant P2)=0
