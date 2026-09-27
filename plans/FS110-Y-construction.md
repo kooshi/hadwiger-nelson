@@ -471,3 +471,59 @@ frame fact serves.** The owner's combined step keeps **one** GAP, card 2's: arcs
 - Fragments S1, T2, BB, MX: disjoint types (`{1,2,3}`, `{4,5,6}`), so both senses hold.
 
 ## Stage 6 — SAVED (FS110-Y2)
+
+## § Continuation — FS110-Y3
+
+*Job FS110-Y3 (de Bruijn, Opus 5.5), 2026-09-27, round 3 (the winding question W-3). Brief: `data/fs110/briefs/Y3-110-round3.md` (wins where they
+differ) with `data/fs110/briefs/Y110-construction.md` and `data/fs110/briefs/STANDING-RULES.md`. Start-up snapshot `2d4c49f8`. Earlier verdicts above
+are FS110-Y's and FS110-Y2's and are not rewritten. Working files `data/fs110/fs110-y/y3_*`; tools `tools/fs110_y_*.py`; scratch
+`scratchpad/fs110-y3/`.*
+
+### The pre-round question (answered before my first saved stage; sent to "main" word for word)
+
+*"Before your first saved stage of round 3, name the step of the proof side's programme on W-3 that you expect to fail, and say what would show you
+wrong."* (my brief, § Your task)
+
+I do not hold the proof side's programme on W-3 (fenced); I answer against `claims.md` §7's list. **The step I expect to fail is the passage from the
+local winding data to a global contradiction, at the vertices that data does not constrain:** the trichromatic vertices of degree `≥ 4` (bowties
+`a, b, a, c`, which Condition 5 allows and S–V's Condition 6 forbids) and the bichromatic vertices of degree `≥ 4`. W-3's hypotheses put the ring
+condition (`|W| ≥ 2`, consistent along edges) on **trivalent** vertices only. In print, Condition 6 enters S–V's Theorem 1 exactly there (Lemma 4,
+Props. 9–10, Cor. 2; `plans/FS110-PA-prior-art.md` stage 2 item 5), and their Lemma 3 (the bicycle kill) assumes "the boundaries between each pair of
+colors in their multicolor extend from each of them" (S–V p. 17, via FS110-PA stage 2 item 4), which a bowtie `a, b, a, c` fails (no `b|c` boundary).
+So I expect a winding map, if one exists, to carry its global count through degree-`≥ 4` vertices whose rings need not wind, and a NO to stall at
+pricing them. **What would show me wrong:** a lemma, under Condition 5 in `𝓜_K`, that every trichromatic and every bichromatic vertex of degree `≥ 4`
+is absent from a winding map or carries a ring of `|W| ≥ 2` with the consistent sign (so the count closes over all vertices); or a kill of bowtie
+same-type pairs in `(1, 2)` that does not use Lemma 3's extension hypothesis.
+
+### Which Condition 5 I use
+
+The print's: "If any boundary intersects with a circle of unit radius at a finite set of points, we say that arcs of unit curvature are forbidden."
+(`[SokolovVoronov2025]` p. 4, quoted in `claims.md` §1). **In `𝓜_K` it coincides with the claim list's gloss "no boundary arc of radius 1"**
+[hand, one mind, trivial]: a boundary is a finite union of straight or circular arcs (at most `K` per tile, at most `K` tiles per unit disc, so a unit
+circle, being compact, meets finitely many arcs); a segment meets a circle in at most two points, and a circular arc meets a unit circle in at most two
+points unless it lies on it, i.e. has radius 1 and that centre. The same holds for LIM with the same arc bounds. (Beyond `𝓜_K`, e.g. for arcs with
+infinitely many wiggles, the print's form is the weaker hypothesis on the map; nothing here uses that case.)
+
+### Theorems this phase proved (FS110-Y3)
+
+- **Y3-C5** — in `𝓜_K`, the print's Condition 5 and "no boundary arc of radius 1" coincide — [hand, one mind, trivial], above.
+
+### Fence log (FS110-Y3)
+
+- **Touch 1 (10:4x UTC, disclosed):** an `rg -l` for the round-2 labels "N2-TRANS|N2-FLIP|N2-SWAP", with the fenced paths excluded, returned the
+  **file name** `tools/fs110_nb_ring.py` (the blind verifier NB's tool, which my exclusion list missed: it named `tools/fs110_n_*` only). No content
+  was printed or opened. I treat the verifier's tools as fenced from here on.
+- **Touch 2 (10:42 UTC, disclosed):** a `git log --oneline -1` printed one commit subject beyond the start-up snapshot: "FS110-YB: stage 2" (the
+  construction side's blind verifier's neutral subject; nothing else). I take hashes from commit outputs only from here on.
+
+### Would-have-searched-here log (FS110-Y3)
+
+- (none yet)
+
+## Stage 7 — SAVED (FS110-Y3): the pre-round answer, Condition 5, the definitions requested
+
+The pre-round answer and the Condition-5 statement above, sent to "main" at 10:4x UTC with a request for the round-2 definitions W-3 is stated in
+("ring", `W`, N2-TRANS's "consistently along edges", N2-FLIP's "count"/"even", N2-SWAP's "swap", A4-BAND, "same-type monotone pair", "transposed
+swap"): `claims.md` §7 names them, and every source that defines them is fenced for me. Retractions are counted from here on.
+
+## Stage 7 — SAVED (FS110-Y3)
