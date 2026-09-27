@@ -12,6 +12,7 @@ from disk first). Grades are `CLAUDE.md` § Notation's. The fixed claim list is 
 
 - Stage 1: none (reading only).
 - Stage 2: none (reading only).
+- Stage 3: none; the gate is reading and database queries, no search for a finite witness.
 
 ## Stage 1 — SAVED: quotation check, first-hand reading notes, §G part 1 (G1–G81)
 
@@ -328,3 +329,68 @@ colourings of `ℝ²` proper almost everywhere, their regular classes, and Voron
 condition becomes a close item.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: §PA (the prior-art gate) and §IQ (the invariant question)
+
+### §PA — searched 2026-09-26 by the planner (zbMATH Open API for discovery and reviews; Semantic Scholar and OpenAlex citing lists; arXiv abstract pages)
+
+**PA.1 `[Voronov2023]`'s citation graph.** Its references (read, p. 15–16) hold no measurable form: the forbidden-interval line (Exoo; Currie–Eggleton;
+Chybowska-Sokół et al.; Parts 2023), maps (Woodall; Townsend 2005; Thomassen), infinitesimal layers (Kanel-Belov–Voronov–Cherkashin 2018; 3-dimensional
+slices, arXiv:2208.02230). **Citing works** — Semantic Scholar: five (arXiv:2512.15516 Axenovich–Liu–Sagdeev, *Ramsey problems for graphs in Euclidean
+spaces and Cartesian powers*; `[SokolovVoronov2025]`; arXiv:2404.11454, canonical geometric Ramsey; arXiv:2302.09972, max-norm triangles;
+arXiv:2208.02230); OpenAlex: one (arXiv:2302.09972). The two databases disagree on the list (G49's rule: identifiers compared, not counts); **no citing
+work holds a measurable or almost-everywhere form of the method.** The Voronov author listing (zbMATH, 17 records 2015–2026) adds **arXiv:2607.19946,
+Didin–Voronov, *The chromatic number of Euclidean space with dense color classes*** (22 July 2026): "12 dense colors suffice to color ℝ²" — a pathology-side
+item for FS-107 (dense classes; measurability unstated in the abstract), not held. And Cherkashin–Voronov 2024, *On the chromatic number of 2-dimensional
+spheres* (Zbl 1532.05064), not held.
+**PA.2 `[SokolovVoronov2025]`'s references** (read): Woodall 1973, Townsend 2005, Coulson 2004, Falconer 1981, Manta 2021, Parts 2020 (*What percent …*,
+the `1/6997` in §9), Voronov 2023, Chybowska-Sokół et al., Exoo, de Grey, Exoo–Ismailescu, Soifer. **Its §9 is the nearest print to this milestone's
+heart** (Stage 1 §1.2): the deleted area `S(ε)` and the conditional "µ∗₆ < 1 ⟹ χmap = 7". Citing works: one (arXiv:2512.15516).
+**PA.3 The map line, first-hand status.** `[Townsend1981]` read: a statement, a counterexample to Woodall's lemma built from a unit-radius arc, a
+replacement lemma, no proof. `[Townsend2005]` (Zbl 1506.05079; zbMATH holds no review) unheld — Kooshi fetching. `[Coulson2004]` held, unread; zbMATH's
+review: "if convex polygons are used as a colouring base at least 6 colours are necessary". `[Thomassen1999]` (Zbl 0986.05041, review withheld) unheld.
+`[Pritikin1998]` (Zbl 0920.05027) unheld. `[Woodall1973]` held, unread.
+**PA.4 The fraction line (new to this project's reading).** `[Parts2020c]` (arXiv:2010.12668, in `BIBLIOGRAPHY.md`, not held): "a tiling of more than
+99.985698% of the Euclidean plane with six colors" and "any unit-distance graph of order at most 6992 … can be properly 6-colored". This is the best
+known lower bound on the six-colourable fraction; a stable-Voronov theorem (claim C-Q-STAB) must leave that much room. Fetchable from arXiv.
+`[Mundinger2024]` (arXiv:2501.18527; held key) — "two novel six-colorings" for the off-diagonal variant; bears on FS-107's W, not here.
+**PA.5 Measurable and almost-everywhere colourings.** zbMATH `ab:"measurable chromatic number"`: 17 records — Falconer's line and its descendants
+(Székely 1983; Székely–Wormald 1989; Bachoc–Nebe–Oliveira–Vallentin 2009; Oliveira–Vallentin 2010; Bachoc–Passuello–Thiery 2015; Bogolubsky–Raigorodskii
+2015; Malen 2015 on spheres; `[Payne2009]`; the descriptive line: Miller 2008, Conley–Miller 2016, Bernshteyn 2019, Weilacher 2022, Higgins–Spaas–Tenenbaum
+2026). All bound densities or treat Borel graphs; **none takes a regularity theorem (closed, map, polygon, interval) to its almost-everywhere form.**
+`ab:"density topology"`: 243 records (Tall 1976; Lukeš–Malý–Zajíček 1986, *Fine topology methods in real analysis and potential theory*; Wilczyński 2002,
+*Density topologies*; Ciesielski–Wilczyński 1995, *Density continuous transformations on ℝ²*; Filipczak–Wilczyński 2010, *Strict density topology of
+the plane*) — the handbooks for Phase T's density-open classes; none meets a colouring question. `ab:"monochrome unit" | ab:"monochromatic unit"`:
+4 records, none measurable. FS103-G's gate (Falconer, Croft, Payne, BDOV, Kechris–Marks) is not re-run; its negatives stand.
+**PA.6 Verdict.** Not found in print: an almost-everywhere form of any of the regular-class theorems; a measurable or density-topology form of Voronov's
+method; the equivalence of link 5 with S–V §9's stability question. **Found in print and not drawn before:** S–V's exact-distance transplant, its §9
+and its Question 2 (G50). Queries, all run 2026-09-26: `au:"Voronov, V" & py:2015-2026`; `au:"Townsend, S"`; `au:"Coulson, D"`; `au:"Thomassen, C" &
+ti:"Nelson"`; `au:"Pritikin, D"`; `ab:"measurable chromatic number"`; `ab:"density topology"`; `ti:"forbidden" & ti:"interval" & ab:"plane"`;
+`ab:"monochrome unit" | ab:"monochromatic unit"`; `ti:"colouring the plane"`; `ti:"coloring the plane"`; `ab:"nice coloring"`; `ab:"map-type"`; the
+`an:` reviews of Zbl 1506.05079, 1081.05022, 0458.05032, 0920.05027. OR-groups in parentheses return HTTP 404 from the API (a tool note).
+**PA.7 Fetches owed** (by the reading job or Kooshi): `[Townsend2005]`, `[Thomassen1999]`, `[Pritikin1998]` (Kooshi, in flight); `[Parts2020c]`
+(arXiv:2010.12668); Didin–Voronov (arXiv:2607.19946); Cherkashin–Voronov 2024; Lukeš–Malý–Zajíček 1986 §§ on the density topology (library).
+**PA.8 What the gate changed.** Phase T's two routes are print-anchored: T-S reads S–V's exact-distance replacements against the normal form; T-Q is
+S–V §9 made measurable. The first derivation target moves to S–V's Question 2 in its a.e. form (the advisor's order, adopted in §6).
+
+### §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **Existence form.** Is there a Lebesgue-measurable colouring of `ℝ²` with at most six colours, proper at almost every unit pair?
+2. **Structural form.** *For every almost-everywhere-proper measurable `k`-colouring of `ℝ²`, what does it carry on the unit circle about each point, as a
+   function of the colours of positive density at that point, that Voronov's argument reads from a closed colouring?* Posed for `Cay(ℝ², S¹)` with any
+   norm's circle (Voronov's generality), no field, no arithmetic.
+3. **The invariant it forces.** Two candidates, one held and one not.
+   - *Held (one mind, FS103-M's D1; the measurable fan):* the essential multicolour `P(x)` (colours of positive upper density at `x`) is absent from the
+     density points of `S(x, 1)`.
+   - *Not known — finding it is the milestone:* an **index** for the trace of a density-open 3-colouring along a curve — `K₃`'s height (G71), which
+     Voronov (Def 4.2) and S–V (Def 6) read from finitely many bichromatic points. A density trace can switch colour on a Cantor set; the index needs a
+     substitute for finiteness (a bounded-variation or approximate-continuity condition on almost every circle), or a proof that none exists.
+   - The advisor's tangent form (Poros, A4, one mind): at a boundary point the unit relation linearises to "same projection onto `e`", and Prop 2.2
+     survives iff the projected colour sets meet in positive length; it fails exactly at a four-way (bowtie) vertex and at interfaces tangent to a unit
+     circle — S–V's Conditions 6 and 5.
+4. **Route.** Derivation only (the ban; and a search could only check a derived statement).
+5. **Open instances it would decide.** S–V Question 2 (maps with unit-arc boundaries and high-degree trichromatic vertices); the a.e. forms of
+   Thomassen's, Townsend's, Coulson's and S–V's theorems; S–V §9's `µ∗₆ < 1`; FS103-M's null-set step (C-FMT (d)) and its hunch; Falconer's `χ_m(ℝ²) ≥ 6`;
+   and, given MR, rung D.
+
+## Stage 3 — SAVED
