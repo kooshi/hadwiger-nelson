@@ -1,0 +1,51 @@
+## Thread 6 — "Wrestling with infinite graphs" (posted May 29, 2018; comments May 30 – June 16, 2018)
+
+### The tilings, the unit arcs and the diameter-1 construction
+@06.20 ¦ The next one you should do is Pritikin’s ¦ exclusion number is 19. ¦ Pritikin's "almost-6-colouring" of the plane is six-colourable only with its small regions ignored (not a six-colouring of the whole plane).
+@06.26 ¦ I now believe that the edges ¦ slightly greater than 1. ¦ In de Grey's pentagonal tiling the edges at the degree-4 vertex can be arcs of radius 1 to their far end without the pentagons exceeding diameter 1.
+@06.27 ¦ I’ve seen countless examples of using tiles ¦ except the hexagon tesselation. ¦ The catalogued efficient tilings use tiles of diameter exactly 1 made to fit by half-open boundaries.
+@06.27 ¦ Yet I’ve never actually seen concrete proof ¦ or if there really is none. ¦ Hockertz: no proof is known to him that diameter-1 constructions beat smaller tiles.
+@06.30 ¦ * ¦ convey the appropriate curvatures. ¦ De Grey's second complex tiling (three tile types, curved edges); its exclusion numbers average 81/5 (its colour count is not stated in the comment; the figure is not held).
+@06.31 ¦ On another note I think we also have one ¦ unit radius arcs. ¦ **HOCK's first sentence**, with its context: offered as "one of the puzzle pieces" towards "lattice-sublattice coloring schemes"; no argument given.
+@06.32 ¦ Hm, actually on staring at this tiling ¦ a hair closer than 1 to both the entirely-convex tile and the one below it. ¦ De Grey finds a defect in his own 81/5 tiling (corners a hair closer than 1).
+@06.32 ¦ So it is increasingly seeming that ¦ needs seven colours may be within reach. ¦ De Grey: the uniform pentagonal tiling (exclusion sets of 16) is special; a proof that tile-based colourings need seven "may be within reach".
+@06.33 ¦ With this conflict I think the exclusion set sizes ¦ clearly the arcs win over straight boundaries here. ¦ Hockertz: in the 81/5 tiling, replacing the Reuleaux-triangle arcs by straight sides adds conflicts; "the arcs win".
+@06.34 ¦ * ¦ If not there may be no point trying to find a good geometry. ¦ Gibbs proposes a topological-first attack on six-colourings by pentagons (valency 3 or 4, average 10/3), with the "red-vertex-green-edge-red-vertex-green" pattern forbidden.
+@06.35 ¦ * ¦ * ¦ Gibbs: the forbidden pattern fails "however you position or curve the edges" (stated, no argument in the held text; the figure is absent).
+@06.36 ¦ Looking at your second picture ¦ so no valid coloring as you said. ¦ Hockertz on Gibbs's attempt: a straight edge forces two recolourings, a Reuleaux arc one.
+@06.36 ¦ It’d also be interesting to try and see some regular pentagons with Reuleaux arcs. ¦ * ¦ Hockertz suggests regular pentagons with Reuleaux arcs.
+@06.41 ¦ Yes, the red-green-red-green thing you mention ¦ can easily be shown never to be 6-colourable. ¦ De Grey names the pattern the "convexity conflict"; hexagons are not excluded if some colour uses small tiles whose nearest same-colour pairs lie inside a unit circle.
+@06.42 ¦ * ¦ * ¦ De Grey: two same-colour tiles within a unit circle (a Siamese pair in FS-110's vocabulary) cannot always be merged by a stripe; example of four small tiles.
+@06.45 ¦ The topological structure of the colouring ¦ These are tight constraints. ¦ Gibbs's dual-graph formulation: valency-5 dual vertices, quadrilaterals four-coloured, the forbidden structure excluded.
+@06.52 ¦ That hunch is based on the observation ¦ I don’t know a way to get the width above 4. ¦ **De Grey: six-tilings of patches of arbitrary diameter and width "almost 4"** from four columns of Pritikin's tiling with the diamonds removed and short edges fattened (a strip construction in words).
+@06.52 ¦ One variation that may make this easier ¦ “close, small tiles” problem I mentioned yesterday). ¦ De Grey: in the dual graph with point-contact edges added, average total degree ≥ 6 and black degree ≤ 5.
+@06.53 ¦ * ¦ than expected. ¦ Gibbs finds topological (dual-graph) solutions on grids up to 6 by 6, geometry not yet checked.
+@06.56 ¦ I searched for periodic solutions of this type ¦ Perhaps we should set some records for that. ¦ Gibbs: no periodic solution found; large rectangles may be six-colourable; proposes records for the largest six-colourable rectangle.
+@06.58 ¦ * ¦ * ¦ Gibbs: "4 out of 5 edges need to be arcs", each giving two unit-distance pairs — constraints outnumber freedoms (withdrawn next comment).
+@06.59 ¦ * ¦ * ¦ Gibbs withdraws the count ("confusing vertices with those on the dual graph").
+@06.62 ¦ I think it will be difficult to rule out all cellular 6-colourings. ¦ This is what needs to be investigated further. ¦ **The degree-4 sketch (Philip Gibbs, not de Grey)**: large cells have ≤ 5 sides, so vertices of valency ≥ 4 occur; at such a vertex a same-colour cell C forces "an arc of radius one between B and C"; constraints may outnumber freedoms.
+@06.64 ¦ If it is assumed that all cells are pentagons ¦ seems very close still. ¦ Gibbs's constraint count for all-pentagon tilings: per three vertices six freedoms against up to eight unit-distance constraints; coincident constraints needed.
+@06.65 ¦ * ¦ giving a proof by contradiction. ¦ De Grey: enumerate prohibited patches; his pentagonal tiling has a nine-tile patch with two colourings and an uncolourable neighbour.
+@06.66 ¦ We can rule out sizes close to ¦ go just a bit below diameter 1. ¦ Hockertz: the efficient tilings rely on diameter exactly 1 with partial boundaries; below 1 exclusion zones reach past adjacent tiles.
+@06.67 ¦ In particular, every pentagonal cell will have ¦ I am assuming the latter. ¦ Gibbs: in his construction every pentagon has a valency-4 vertex, so cells are small or of diameter exactly one (assumed).
+@06.67 ¦ I understand that Woodall, Townsend and Coulson ¦ I realise you have probably already looked at that. ¦ Gibbs asks whether the Woodall–Townsend–Coulson six-colour arguments reach small cells.
+@06.68 ¦ * ¦ * ¦ Gibbs: one base topology drawn with its unit constraints ("pink line") is already geometrically impossible (figure not held).
+@06.69 ¦ We can start with some reasonable set of assumptions ¦ valency three of four. ¦ Gibbs's working assumptions for a hand enumeration: pentagons of diameter one, valencies three or four.
+@06.91 ¦ * ¦ * ¦ **HOCK's second sentence**, with context: a claimed "result" on boundary curvature; the only justification given is "This can be shown even without an actual tile, two perpendicular lines are sufficient"; formalisation promised for his paper.
+@06.104 ¦ The set of points at unit distance from some point in a tile T ¦ it can indeed be achieved if we allow seven colours. ¦ De Grey's "annulus of exclusion": two same-colour tiles each inside the other's annulus (a Siamese pair) survive a merge only in two topological cases.
+@06.105 ¦ * ¦ * ¦ Pálvölgyi: a seven-colouring with a non-mergeable close same-colour pair exists (Hockertz's case 1), "a sliver of hope to find a 6-coloring"; case 2 open.
+@06.106 ¦ It might be profitable to deform the Pritikin structure ¦ with five colours? ¦ De Grey: enlarge Pritikin's diamonds to the lens of unit-diameter circles 2/3 apart and ask for a five-colouring of the rest.
+@06.107 ¦ The thing I don’t see working ¦ bringing us to 7 colors. ¦ Hockertz: six mutually close tiles plus the diamond colour force seven.
+@06.108 ¦ What we essentially do with the diameter 1 constructions ¦ So this is why a bit of scaling down cannot ever help us. ¦ Hockertz: diameter-1 constructions "partially break connection to the second layer", so a small scale-down never helps (stated).
+@06.108 ¦ Right, Coulson explicitly stated in his paper ¦ with preset lines/arcs of certain lengths from which we can make valid cells. ¦ Hockertz quotes `[Coulson2004]`'s area hypothesis; small cells stay open.
+@06.109 ¦ * ¦ I am not sure if there might be too many options. ¦ Gibbs posts the single-tile cases by vertex valencies with their unit-length constraints (figure not held).
+
+### Context for HOCK: Hockertz's Jordan-region claim
+@06.21 ¦ This is why I’m extremely sure that map-type colorings ¦ are unavoidable. ¦ Hockertz's "JB region" claim: map-type colourings are unavoidable (argued by his n-ball expansion; unpublished manuscript linked in [06.48]).
+@06.48 ¦ The bulk of my work throughout the past 6 months ¦ taking Townsend’s and Coulson’s work into account ¦ Hockertz claims a proof that Jordan regions are unavoidable, hence CNP ≥ 6 via Townsend; manuscript link (dropbox, not held).
+
+### Claimed six-colourings of the whole plane
+@06.70 ¦ * ¦ * ¦ Tom Sirgedas offers "a possible simple tiling of the plane" (figure not held).
+@06.71 ¦ * ¦ * ¦ Gibbs: it breaks the convexity rule three times.
+@06.72 ¦ * ¦ * ¦ Sirgedas: a second, computer-aided attempt.
+@06.73 ¦ * ¦ * ¦ Sirgedas withdraws it: the same rule broken again.

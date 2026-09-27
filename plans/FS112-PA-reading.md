@@ -31,6 +31,23 @@ row 3) take from the sources this job reads, checked against the held text:
 Splitter check: the count of ` says: ` headers per thread equals the count of comments split (109, 106, 120, 105, 350 for threads 6, 7, 8, 9, 16) after one
 fix (an author name in quotation marks, `"Boris"`, thread 7, June 17, 2018 at 11:30 pm, was first merged into the comment before it).
 
+## Stage 2 — SAVED (thread 6 read in full)
+
+- **Read:** thread 6, "Wrestling with infinite graphs", all 109 comments (May 30 – June 16, 2018), text only; the held file has no images, so every
+  posted figure (de Grey's tilings, Gibbs's cell diagrams, Hockertz's SketchUp previews, Sirgedas's attempts) is unread. 44 extracts in
+  `data/fs112/fs112-pa/extracts.md` § Thread 6, generated from `spec_06.txt` by `make_extracts.py` (every quotation cut from the held file by comment and
+  phrase and checked verbatim; `--self-test` plants a phrase from another comment, a one-word alteration and an altered body, and all three are refused
+  for their own reason while the faithful twin passes).
+- **What thread 6 holds on this milestone's object** (pointers; the grades are Stage 7's): HOCK's two sentences, five days apart, with no argument beyond
+  "two perpendicular lines are sufficient" (`[06.31]`, `[06.91]`); the degree-4 sketch, **Gibbs's** (`[06.62]`), with his pentagon constraint count
+  (`[06.64]`) and the forbidden "red-green-red-green" pattern that de Grey names the **convexity conflict** (`[06.34]`, `[06.41]`); de Grey's
+  **width-almost-4 six-coloured strip in words**, four Pritikin columns with the diamonds removed (`[06.52]`) — a strip construction older than
+  nothing in print this project holds, and wider than `[AxenovichEtAl2014]`'s `√15/2 + √3 ≈ 3.6685` if "almost 4" is above it (not checked: no
+  coordinates); Siamese pairs in de Grey's words (`[06.41]`, `[06.42]`, `[06.104]`); the only claimed six-colouring of the plane, Sirgedas's, withdrawn
+  (`[06.70]`–`[06.73]`).
+- **A correction owed** (logged in Stage 1): the degree-4 sketch is Gibbs's, not de Grey's.
+
 ## Would have searched here
 
-(none yet)
+- Fitting coordinates to de Grey's width-"almost 4" strip (`[06.52]`) to compare it with `√15/2 + √3`: not done (a figure fit is a search, and no
+  figure is held); the words are extracted instead.
