@@ -1144,3 +1144,43 @@ it, since the pre-round answer named no verdict that the reading reverses; if Y3
 lemmas (N2-TRANS three ways; the six-arc ring twice). I compare at the hand-backs.
 
 ## Stage A5-3 — SAVED
+
+## Stage A5-4 — SAVED: FS110-Y3's hand-back read (N3 still running; nothing goes to N3)
+
+*Read: `data/fs110/reports/FS110-Y3.md`; `plans/FS110-Y-construction.md` stages 8–9 in full (commits 10090bc7, 67adfb7c, a85b94ee).*
+
+**Y3's product: no YES, and every result a NO-direction obstruction** [hand, one mind each]: Y3-GP, Y3-PROP, Y3-FLIP, Y3-BOW, Y3-SIX, and the ring
+checker `tools/fs110_y_ring.py` [tools, exact] with two plants. One free retraction (its pre-round bet's bowtie clause, §8.6); the bichromatic clause
+stands.
+
+**My checks (sighted, one mind each):**
+- **Y3-GP TRUE**, every step re-derived. `D(θ) = h(θ + 60°) − h(θ)` cannot reach a multiple of 3 (N-E0), so it stays in one window `{3m + 1, 3m + 2}`
+  for all `θ`; in general position each event moves one `D_k` up and its neighbour down, so `n₂` is invariant and `n₂ ∈ {0, 6}` admits no event;
+  `3W = 18m + 6 + n₂ ≡ 0 (mod 3)` gives `n₂ = 3`, `W = 6m + 3`. **Consequence:** W-3's "`|W| ≥ 2`" is automatic in general position; `|W| = 2`
+  needs change points at distance 1, `√3` or 2. [two minds now: Y3 and mine]
+- **Y3-BOW reduces to 8.3's homotopy — my reading, for the owner's held question.** The one path (tile `B`'s two `b|a` edges) passes through the
+  bowtie `β` itself. With `x, y, c` distinct the merge is `x ~ y`, and `β`'s ring (colours `x, y, z`) maps onto the two classes `[xy], z`: a map into
+  one edge of `K₃`, degree 0. So if 8.3's sweep is valid (no bad type on any circle, by NB-4 and NB-5, `β`'s circle included), `W = 0` follows at
+  `β`'s circle directly, without comparing two routes. When `c ∈ {x, y}` or `x = y`, `β`'s ring meets all three classes and nothing degenerates.
+  **So Y3-BOW needs exactly N2-TRANS's nerve step and nothing more**; the blind check of that step (NB graded it a sketch) covers both. [hand, one mind]
+- **Y3-SIX** (no six-arc ring at a degree-3 vertex): not re-derived. It is S–V Prop. 17's content, which N3's pre-round answer cites, and it completes
+  N2-HEX (N2-HEX forces three `120°` sectors; Y3-SIX's step 4 caps them at `180°` in total). Three routes to one kill, none blind.
+- **Y3-PROP** ("`|W|` one global constant on a connected map") is N2-TRANS chained along edges through bichromatic vertices; its extra content is the
+  connectivity, stated, not proved in detail.
+
+**Hunches scored.**
+- `y3-hands-back-a-local-horn`: **killed**. Y3 built no fragment at all this round; its product is derivation. The falsifier "a Y3 product with no
+  horn in it" fired. Kept in the ledger.
+- `cusps-are-the-last-escape`: open. Y3 names a different next question (whether a generic `|W| = 3` ring is realisable at one vertex), not horns.
+
+**What the round has become (to be scored against N3 at its hand-back):** for the second round running the construction side produced obstructions,
+and this round they are on the proof side's own object (rings, windings, the count). The two sides now hold **overlapping lemmas**: N2-TRANS
+(N2, NB blind, Y3-PROP), the tile parity (N2-FLIP, Y3-FLIP independent), the six-arc kill (S–V Prop. 17, Y3-SIX, N2-HEX's half). Y3's residue for a
+YES: every ring winds one `|W| ≥ 2`; `|W| = 2` only on aligned rings of at least eight arcs (six are dead at degree 3); otherwise `|W| ≥ 3` with at least
+nine arcs; bowtie flanks restricted; bichromatic vertices of degree `≥ 4` free.
+
+**Evidence inventory.**
+- Y3's hand-back — read against: `y3-hands-back-a-local-horn` — surprised: yes; no fragment at all; the construction side derived the proof side's calculus further
+- Y3-BOW's "one path" — read against: a new homotopy needing its own rigour — surprised: yes; it passes through `β`, whose merged ring is degenerate, so it is 8.3's sweep and nothing more
+
+## Stage A5-4 — SAVED
