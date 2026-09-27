@@ -1,0 +1,13 @@
+H1 H_L(q_s), s=1..12: [(1, 1), (2, 25), (3, 25), (4, 289), (5, 169), (6, 1369), (7, 625), (8, 4225), (9, 1681), (10, 10201), (11, 3721), (12, 21025)]
+H1 H_L(q_s) <= (s^2+1)^2 for all: True | P1 plant (bound (s^2+1)^1) fires: True
+H2 P0: N(P0) = 25, |u*|_P0 = N(P0)^1 with u* = q_2 = (2+i)/(2-i)
+H2 Liouville and (h3) on 21 differences q_s - q_t: True
+H2 P2 plant (no archimedean factor, a = 17^3) breaks Liouville: True | true H restores it: True
+H3 M=1e4: #U_Q family with (s^2+1)^2 <= M: 9  (~M^(1/4)=10);  #<q_2> with H<=M: 5
+H3 M=1e8: #U_Q family with (s^2+1)^2 <= M: 99  (~M^(1/4)=100);  #<q_2> with H<=M: 11
+H3 M=1e16: #U_Q family with (s^2+1)^2 <= M: 9999  (~M^(1/4)=10000);  #<q_2> with H<=M: 23
+H3 at n=400: need #Q > e^(n beta) = 4.462e+11; family gives >= 5.306e+11 (pass=True); cyclic gives 69.8 (fails=True)
+H4 beta=kappa*lambda/12: 3b/k-l=-3/4, 11b/k-l=-1/12 (<0: True); plant beta=kappa*lambda/5: 11b/k-l=6/5 (violates: True)
+H5 split prime Q above 3 (Q != sigma Q: True); u = z/sigma z: norm one True, v_Q(u) = 1, v_sigmaQ(u) = -1 -> True
+H5 P5 plant z = 3 gives v_Q = 0 (fires: True)
+ALL CHECKS PASS AND PLANTS FIRE

@@ -6,7 +6,14 @@ brief's fence list opened before then.*
 
 ## Theorems this phase proved
 
-*(filled at stages 2–3; one line each, grade, address)*
+- **FS105-B-M1** — `R̂ ≅ 𝔸_𝒮/D` equivariantly, `ker Φ = D = {ℓ ∈ L : ℓ ∈ 𝔡_v⁻¹ at stable v}`, `T = Φ(L)`, `A = Φ(L_∞)` (any real `F`
+  with `R = O′`). [hand, one mind] §Stage 2 M1.
+- **FS105-B-L0** — non-torsion `u ∈ U_F` (`F` totally real) has a split place with `|u| > 1`. [hand] Lemma 0.
+- **FS105-B-L1b/L2** — Bowen balls of `u*` are thin at `𝔓₀`; `h_μ(u*) = 0` ⟹ `μ(x + W_n) ≥ e^{−nβ}` on large sets. [hand] Lemmas 1b, 2.
+- **FS105-B-L5** — `μ`-a.e. `x` has its `𝔓₀`-coordinate in `L`. [hand] Steps 3–5.
+- **FS105-B-L6** — a `U`-invariant finite measure on `T + Y_{𝔓₀}` lives on `T + A`. [hand] Lemmas 6a–6b.
+- **FS105-B-EFP** — **EF_F⁺ at `F₁ = ℚ(√635087)`: TRUE.** [hand, one mind blind] Step 6 Theorem.
+- **FS105-B-EF0** — **EF_F⁰ at `F₁`: TRUE** (corollary; ergodicity unused). [hand, one mind blind] Corollary.
 
 ---
 
@@ -106,7 +113,7 @@ and ergodicity) and concludes less (`μ(E) = 1`, `E ⊇ T + A`); it is a corolla
 
 ---
 
-## Stage 2 — the derivation at `F₁` (core, Steps M1 and 0–5) — SAVED
+## Stage 2 — the derivation at `F₁` (core Steps M1, 0–5; then Step 6, corollary, controls) — SAVED
 
 *Notation of §1.4. `σ` = the non-trivial automorphism of `L/F₁`. On `L` the normalised absolute values `|·|_w` (at a complex `w`,
 `|·|_w = |·|_ℂ²`) satisfy the product formula `∏_w |α|_w = 1` (`α ∈ L^×`). `H(α) = ∏_w max(1, |α|_w)`. Four facts, each one line:
@@ -203,7 +210,77 @@ With `M = M(n)`: `|x̃_{𝔓₀} − ℓ_n| ≤ C₁e^{n(3β/κ − λ)}` and `H
 `β := κλ/12`** (fixed before Lemma 2 is invoked). If `ℓ_n ≠ ℓ_{n+1}`, (h4) and (h3) give
 `(16C₂²e^{4β/κ})⁻¹e^{−8nβ/κ} ≤ H(ℓ_n − ℓ_{n+1})⁻¹ ≤ |ℓ_n − ℓ_{n+1}|_{𝔓₀} ≤ C₁e^{n(3β/κ − λ)}`, i.e.
 `1 ≤ 16C₂²C₁e^{4β/κ}·e^{n(11β/κ − λ)} = C₃e^{−nλ/12}`, false for `n ≥ N₂`. So `ℓ_n = ℓ` for all `n ≥ max(N₁, N₂)`, and
-`|x̃_{𝔓₀} − ℓ| ≤ C₁e^{−nλ/4} → 0`: **`x̃_{𝔓₀} = ℓ ∈ L`** (the diagonal image).
+`|x̃_{𝔓₀} − ℓ| ≤ C₁e^{−3nλ/4} → 0`: **`x̃_{𝔓₀} = ℓ ∈ L`** (the diagonal image).
 
 **Lemma 5 (one place is global).** `G := {x ∈ R̂ : x̃_{𝔓₀} ∈ L}` is well defined (a change of lift adds `d ∈ D ⊂ L`) and `μ(G) = 1`.
 *Proof.* Every `x ∈ X′` lies in `G`; `μ(X′) > 1 − η` with `η` arbitrary (and `G` Borel, Step 6). ∎
+
+### Step 6 — from one global place to `T + A` (not in EF: the circle has one place)
+
+**Lemma 6a.** Let `𝔸^{(𝔓₀)} := {y ∈ 𝔸 : y_{𝔓₀} = 0}` (a closed subgroup). `Ψ : (L/D) × 𝔸^{(𝔓₀)} → R̂`, `Ψ(ℓ + D, y) := Φ(ℓ + y)`, is a
+continuous injective `U`-equivariant map with image `G`. Hence `G` is Borel and `π_Y := pr₂ ∘ Ψ⁻¹ : G → 𝔸^{(𝔓₀)}` is Borel and
+`U`-equivariant.
+*Proof.* Well defined (`D ⊆ ker Φ`). Image: `x ∈ G`, `x̃_{𝔓₀} = ℓ`, `y := x̃ − ℓ`. Injective: `ℓ − ℓ′ + y − y′ = d ∈ D` read at `𝔓₀`
+gives `ℓ − ℓ′ = d` in `L_{𝔓₀}`, all three global, so `ℓ − ℓ′ = d` in `L`, `y = y′`, `ℓ ≡ ℓ′ (mod D)`. Lusin–Souslin (the domain is
+Polish: `L/D` countable discrete). Equivariance: `u·Φ(ℓ + y) = Φ(uℓ + uy)`, `uL = L`, `uD = D`, `u𝔸^{(𝔓₀)} = 𝔸^{(𝔓₀)}`. ∎
+
+**Lemma 6b.** For every split `𝔔 ≠ 𝔓₀` there is `u ∈ U` with `|u|_𝔔 ≠ 1`; and a finite measure on `L_𝔔` invariant under `t ↦ ut`
+with `|u|_𝔔 ≠ 1` is a multiple of `δ₀`.
+*Proof.* `𝔔 ≠ σ𝔔` are distinct maximal ideals, so some `z ∈ O_L` has `z ∈ 𝔔 ∖ σ𝔔`; `u := z/σ(z)` has `uσ(u) = 1` and
+`v_𝔔(u) = v_𝔔(z) − v_{σ𝔔}(z) = v_𝔔(z) ≥ 1` (no class number needed; `tools/fs105_b_heights.py` H5 exhibits one at a split prime above
+3, which no rational unit vector reaches). Replace `u` by `u⁻¹` so `ρ := |u|_𝔔 < 1`. The shells `A_k := {ρ^{k+1} < |t| ≤ ρ^k}` (`k ∈ ℤ`)
+partition `L_𝔔 ∖ {0}` and `uA_k = A_{k+1}`; invariance gives all `ν(A_k)` equal, and `Σ_k ν(A_k) < ∞`. ∎
+
+**Theorem (EF_F⁺ at `F₁`).** `μ(R̂ ∖ (T + A)) = 0`.
+*Proof.* `ν := (π_Y)_*(μ|_G)` is a finite `U`-invariant Borel measure on `𝔸^{(𝔓₀)}` (`μ(G) = 1`, `uG = G`). For each split `𝔔 ≠ 𝔓₀`,
+push `ν` to `L_𝔔` (continuous, equivariant) and apply Lemma 6b: `ν(y_𝔔 ≠ 0) = 0`. `𝒮` is countable, so `ν`-a.e. `y` has every finite
+coordinate zero, i.e. `y ∈ L_∞`. Hence `μ`-a.e. `x ∈ G` is `Φ(ℓ) + Φ(y) ∈ T + A` (M3). ∎
+
+**Where each hypothesis is used.** `R = O′`: M1 (the model and `ker Φ = D ⊂ L`). `F₁` totally real: Lemma 0 and Step 4 (`|q| = 1` at
+`∞`). `u*` non-torsion: Lemma 0 (`λ > 0`). `h_μ(u*) = 0`: Lemma 2 only. `U`-invariance: Step 4 (the multipliers `q_s`) and Step 6 (the
+contractions `z/σz`). **Polynomial growth of `U` by height: Step 4 only** (control C-2). Ergodicity: nowhere.
+
+### Corollary — EF_F⁰ at `F₁`
+
+**EF_F⁰ ("`U`-ergodic, `h_μ(u) = 0` for every `u` ⟹ `μ(E) = 1`").** `u₁ = (3+4i)/5 ∈ U` is non-torsion (it is a non-unit at a split
+prime above 5; `tools/fs105_b_setting.py` S3), so the theorem with `u* := u₁` gives `μ(T + A) = 1`, and `T + A ⊆ E` (the `S = ∅` term).
+Ergodicity and the entropy of every `u ≠ u₁` are unused. Its truth therefore stands or falls with the theorem's proof, but it needs
+strictly less of it: **any** single non-torsion `u` of zero entropy, and its conclusion `E` is weaker than `T + A`.
+
+### Controls, run
+
+- **C-1 (`F = ℚ`).** Every step runs verbatim with `L = ℚ(i)`, `𝒮` = the places above `p ≡ 1 (mod 4)`, `R = ℤ[i][1/p : p ≡ 1 (4)]`,
+  `κ = 1/2` (`d = 1`), and concludes `μ(T + A) = 1`, `A ≅ ℂ` — never finite support: Step 4 bounds `x̃_∞` (by `B`) and never approximates
+  it, and Step 6 kills only finite coordinates. The rotation-invariant circle measures in `A` are `U_ℚ`-invariant, zero-entropy,
+  non-atomic, and lie in `T + A`: consistent, and they show the conclusion cannot be sharpened to `T`. **Passes (W1 excluded).**
+- **C-2 (`Γ = ⟨u*⟩`).** The proof breaks exactly at Step 4: `#{k : H(u*^k) ≤ M} ≍ log M`, so `#Q > e^{nβ}` needs `M ≈ exp(e^{nβ})`, and
+  then (E1)'s `M³e^{−nλ}` diverges. H3 measures it: at `n = 400`, the requirement is `4.46·10¹¹` multipliers; the `U_ℚ` family supplies
+  `5.3·10¹¹` at `M = 32e^{nβ/κ}`, the cyclic group `69.8`. The same holds for every finitely generated `Γ` (`(log M)^rank`), consistent
+  with ×2×3 being open. **Passes: the growth of `U` is used at one named step.**
+
+### Exact checks (`tools/fs105_b_heights.py`, output `data/fs105/fs105-b/heights.out`; `tools/fs105_b_setting.py`, `setting.out`)
+
+| check | result | plant, and why it fires |
+|---|---|---|
+| H1 `H(q_s) ≤ (s²+1)²`, `s ≤ 12` (e.g. `H(q_2) = 25`, `H(q_{12}) = 21025 = 145²`) | pass | P1 the `ℚ(i)`-height bound `(s²+1)` fails (the `[L:ℚ(i)] = 2` exponent) — fires |
+| H2 Liouville at `𝔓₀` (`N𝔓₀ = 25`, `|q_2|_{𝔓₀} = 25`) and (h3), 21 differences `q_s − q_t` | pass | P2 dropping the archimedean factor breaks Liouville for `17³` at a prime above 17 — fires |
+| H3 growth: `#{s : (s²+1)² ≤ 10¹⁶} = 9999` vs `#{k : H(q_2^k) ≤ 10¹⁶} = 23` | pass | the cyclic group fails Step 4's requirement — fires |
+| H4 `β = κλ/12`: exponents `−3/4·λ`, `−1/12·λ` | pass | P4 `β = κλ/5` gives `+6/5·λ` — fires |
+| H5 split `𝔔 | 3`: `u = z/σz ∈ U`, `v_𝔔(u) = 1` | pass | P5 `z = 3 ∈ 𝔔 ∩ σ𝔔` gives `v_𝔔 = 0` — fires |
+
+**Tool slip, mine:** H3's first run failed because I took `M(n) = 16e^{nβ/κ}`, which meets `½M^{1/4} > e^{nβ}` with equality, not
+strictly; `C_M > 16` is what Step 4 states. Fixed to 32; not a proof defect.
+
+### The invariant the proof runs on (G72, G79)
+
+An **example invariant of the acting group**: `U` has at least `½M^{1/(2d)}` elements of height `≤ M` — a counting property every
+finitely generated subgroup lacks — against the **measure's invariant**: zero local dimension along one expanding place of `u*`
+(Shannon–McMillan–Breiman). The product formula (Liouville at one place) turns their collision into a global point; the contractions
+`z/σz`, one per split place, spread "global at one place" to "global at every finite place". Nothing about colourings enters.
+
+### Stage-2 "would have searched here" log
+
+| move | instead |
+|---|---|
+| search the multiplier family for the densest set of bounded height | the explicit family `(s+i)/(s−i)` with a one-line height bound |
+| search for a `u ∈ U` non-unit at a split prime above 3 | one `z ∈ 𝔔 ∖ σ𝔔` read off the ideal's basis |
