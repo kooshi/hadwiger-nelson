@@ -359,3 +359,53 @@ about a search instrument (out under the ban and, for finite graphs, beyond it).
 **The test of the re-grokking (WORKFLOW 3.1 item 3): it changed the plan.** X1 puts the strip-and-erosion test before any R write-up (the
 design had it as a killing test after); X2 makes "where does the pigeonhole live" R's first question; X8–X9 fix W's checker shape and its
 generator-image statement before any member exists; X6 ranks R-S's steps below the equivalence.
+
+## Stage 3 — SAVED: §PA (the prior-art gate) and §IQ (the invariant question)
+
+### §PA — searched 2026-09-27 by the planner (zbMATH Open API for discovery; Semantic Scholar citing lists; arXiv API abstracts; held PDFs by `pdftotext`)
+
+**The recognition sentence (G46), used as the query.** FS-107's object lives in three literatures that cite one another thinly: (i) **almost
+colourings** — "how much of the plane needs to be removed before the remainder can be colored with six colors" (Croft 1967 for one colour;
+`[Pritikin1998]`; `[Parts2020c]`; `[MundingerEtAl2025]` "Variant 1"); (ii) **chromatic numbers with a forbidden distance interval** (`[Exoo2005]`,
+`[CurrieEggleton2016]`, `[ChybowskaSokol2022]`, `[Parts2023]`, `[Voronov2023]`, `[SokolovVoronov2025]`); (iii) **densities of measurable sets
+avoiding distances**, harmonic analysis and GMT (`[Falconer1981]`, `[Bukh2008]`, `[OliveiraVallentin2010]`, `[BachocEtAl2014]`, `[KMOR2016]`,
+`[DeCorteOliveiraVallentin2022]`, `[AmbrusEtAl2023]`). `µ₆(ε)` is (i)'s quantity in (ii)'s setting; row 131's weak-* step is (iii)'s tool.
+
+| # | question (WORKFLOW 3.2) | what was done | finding |
+|---|---|---|---|
+| 1 | the discipline's words | the three vocabularies above; zbMATH `ab:avoiding & ab:distance & ab:density & cc:52C10`, `ab:forbidden interval & ab:plane & ab:color*` | (iii) returns Bukh 2007/2008, Bachoc–Passuello–Thiery 2015, KMOR 2016, DOV 2022; (ii) returns only S–V among on-topic items (the rest are proceedings volumes) |
+| 2 | two disciplines | (i)×(ii) and (ii)×(iii) | **PA-1:** `[DeCorteOliveiraVallentin2022]` §6.1 Lemma 6.2, held, read (§6.1 in full): "If D ⊆ (0, ∞) is bounded, then lim sup_{L→∞} α_vol(G(Rⁿ/LZⁿ, D))/vol(Rⁿ/LZⁿ) = α_δ̄(G(Rⁿ, D))" — periodic sets approximate the independence density, for every bounded `D`, the band included; "very similar to the proof" for sphere packings. **This is the one-class form of FS106-SUP's "`µ₆^per(ε) = µ₆(ε)` at each `ε`"**, in print since 2018 (arXiv) — a re-attribution for the close (credit: DOV for one class; the six-class form and the tight–slack equality `µ₆⁰ = lim µ₆(ε)` not found). Its Lemma 6.1 ("`G(Rⁿ/LZⁿ, D)` is locally independent for every `L > 2 sup D`", `D` closed and bounded) is W's torus in their words (G68) |
+| 3 | the question, not only the method | Pritikin, Parts, Mundinger's "Variant 1", S–V §9 re-read through FS-106's records | **The quantitative question is posed in print** (`[Parts2020c]`'s title; `[MundingerEtAl2025]` §1: "A natural question concerns how much of the plane needs to be removed before the remainder can be colored with six colors"); S–V §9 poses one direction as a conditional. **Whether the removed fraction can tend to 0 with the slack — "`µ₆(ε) → 1`?" or its dual `µ₆⁰ = 1` — is not found posed**, nor its equivalence with `χ_m⁰` (row 131's gate agrees) |
+| 4 | outside arXiv | zbMATH author listings; Geombinatorics | Croft 1967 (*Eureka* 30) is in no index (the density `0.22936`, one colour); Hoffman–Soifer 1993, "Almost chromatic number of the plane" (Geombinatorics 3(2)), is by `[MundingerEtAl2025]`'s text the off-diagonal variant (a sixth colour at another distance), not holes — **title only, unheld**; `[Townsend2005]` unheld (FS-106 item 59) |
+| 5 | the poser's citation graph | Semantic Scholar citing lists of `[Voronov2023]`, `[SokolovVoronov2025]`, `[Parts2020c]`, `[Parts2023]` | Voronov: the five FS-106 found (S–V; 2512.15516; 2404.11454; 2302.09972; 2208.02230), none with a stability form; S–V: one (2512.15516, Ramsey, listing only); **Parts2020c: four — S–V, `[MundingerEtAl2025]`, `[Mundinger2024]`, `[ChybowskaSokol2022]`**; Parts2023: Voronov |
+| 6 | open every neighbouring citing work | **`[MundingerEtAl2025]` fetched** (`~/source/library/pdf/arXiv-2501.18527-mundinger-neural-discovery-colored-planes.pdf`); read §1's "Variant 1" paragraph, §4.1 with Table 1, App. B's pipeline paragraph | **PA-2:** machine-found, "rigorously verified" periodic almost six-colourings of the plane, piecewise constant on sub-parallelogram cells, removing **0.04 %** (numerics 0.03 %; Parts 0.02 %); five colours 3.74 %. These are W's object class at a fixed `δ ≈ 4·10⁻⁴` (closed cells with no unit pair are band-proper for some `ε > 0` by compactness) — **with no driving parameter and no `ε → 0` question**. Their cell constraint is built from "the cells that intersect with unit circles at the corners of c_base" — whether that is the exact condition for whole cells is not checked here (G21): W's checker must use each cell pair's exact distance interval. A search pipeline (neural, then a minimum edge cover): out under the ban and never W's route |
+| 7 | two databases | Semantic Scholar only | **not run in OpenAlex** — a debt, named (G49's "one database's zero") |
+| 8 | full author listings, the question in their words, zbMATH | Voronov (15 items), Parts (12), Pritikin (34), Croft (30) | Voronov: nothing new on topic beyond `[DidinVoronov2026]` (dense colour classes, 12 colours; known) and S–V; Parts: `[Parts2022]` ("in a certain sense, the chromatic number of the plane is exactly 7": `χ(d) = 7` in the first island, a wide band — not stability), `[Parts2021]` multi-fold; Pritikin: only 1998 on topic; Croft: Croft–Falconer 1981, *On maximal Euclidean sets avoiding certain distance configurations* (Zbl 0494.52008) — **unheld**, one-class densities; `[Bukh2008]`'s review names Falconer–Marstrand 1986 and Furstenberg–Katznelson–Weiss 1990 — compactness methods for distance-avoiding sets, **unheld** |
+
+**What the gate changes in the plan.** (a) W's checker: exact cell-pair distance intervals, stated as the point where `[MundingerEtAl2025]`'s
+corner-circle construction may be only sufficient (X8 sharpened). (b) The close gets a re-attribution for FS106-SUP's periodic half
+(DOV Lemma 6.2, one class). (c) R's brief names the (iii) literature's compactness tools (Bukh; Falconer–Marstrand; FKW) as the discipline where a
+non-local count might already live — reading, not a route. (d) The quantitative question is in print, the vanishing question is not: FS-107's
+question is new as posed (not found in print), its quantity old.
+
+**Papers still needed (for the report):** `[Bukh2008]` (GAFA 18, 668–697); Croft–Falconer 1981 (Zbl 0494.52008); Falconer–Marstrand 1986 (Bull. LMS
+18, 471–474); Croft 1967 (*Eureka* 30); Hoffman–Soifer 1993 (Geombinatorics 3(2)); `[Townsend2005]`. **Proposed `BIBLIOGRAPHY.md` edits:**
+`[MundingerEtAl2025]` → held at the path above, read: §1 Variant 1, §4.1 Table 1, App. B (pipeline paragraph) (FS107-P); `[DeCorteOliveiraVallentin2022]`
+→ add "§6.1 (Lemmas 6.1–6.2) read (FS107-P)" and the re-attribution; new listing rows for Croft–Falconer 1981 and Hoffman–Soifer 1993.
+
+### §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** R: is there a proof that every band-proper partial six-colouring of some disc `U_R` leaves `δ₀|U_R|` uncovered? W: is
+   there a periodic grid-square family with slack whose holes vanish?
+2. **The structural form.** *What does every band-proper partial six-colouring carry, uniformly in `ε`, that ties its uncovered measure to its
+   geometry?* — about every such colouring, with the arithmetic already gone (row 128), in the most general class: measurable partial `k`-colourings
+   of `ℝ²` with a band, `k` a parameter (at `k = 7` the invariant must be trivial, the hexagonal control).
+3. **The invariant it forces.** None known — finding it is the milestone. FS-106 says what it cannot be: not a hitting count (FS106-HIT: capped at
+   `ε`), not a coloured point feature (FS106-PIX), not one class's density (row 129: capped below 4.37), not anything a spare colour absorbs at
+   a local repair (A8b: `O(ε²)`). **Candidates named, none a route:** (a) PD-EQ's pair fraction `p_f(ε)` — an example invariant every CP colouring
+   drives to 0 (A2 §2.2, sketch); (b) the junction-type structure every tiling member carries — which multicolours meet at its vertices and how
+   close complementary types sit (C-T-TAN, the advisor's C6), readable exactly on SEQ; (c) the void at a junction — C-VOID's `ρ₀` (the advisor's
+   card; claim list); (d) the index of density traces along complementary curves (FS106-IND), exact on SEQ where no swap occurs.
+4. **Its route.** Derivation only; W's exact checks verify a given member, never search.
+5. **The open instances it would decide.** `χ_m⁰(ℝ²) ≥ 7` (row 131); given MR, `χ(ℝ²) = 7` (row 128); S–V's Question 1 in stability form (the
+   least disc radius); C-AE-CLOSED; C-AE-Q2 and AE-FA (special cases); FS-104's `χ_CP(ℝ²) ≥ 6` at `k = 5` by the same invariant with five colours.
