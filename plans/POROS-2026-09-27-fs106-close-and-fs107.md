@@ -74,6 +74,100 @@
   `β ∈ (0, π)`.
 - TS's stage-3 region-only Prop. 7 is a second written version, sighted (it saw V2's assertion, not V3's text). SB is the first blind mind on it.
 
+## Stage 1a — SAVED: TQ against QB (blind)
+
+*Read after QB's report existed (`data/fs106/reports/FS106-QB.md`): `plans/FS106-QB-verification.md` §§2.3–2.4, 2.8–2.11, 3.1–3.2 and 4.1–4.5;
+TQ §4.3 re-read. SB's record is still fenced.*
+
+### 1a.1 Agreement and divergence, claim by claim
+
+| claim | truth | route | settled by |
+|---|---|---|---|
+| **TQ-EQ** | agree: TRUE, no MR, no Voronov | differ at `(c) ⟹ (a)`. TQ: a weak (1,1) maximal inequality to centre, and a random threshold `U` to round. QB: averaging at radius `δ^{−1/4}` to centre, and support selection `min{j : F_j > 0}` to round | both valid. The one analytic input is the same in both (the circle measure is Rajchman: weak-* continuity of `∫_B f(f ∗ σ)`, QB Lemma K). I re-derived it at stage 0 as a compact-operator fact |
+| TQ-SUP | agree: TRUE | QB proves more: `µ₆^per(ε) = µ₆(ε)` at each `ε`, and `µ₆⁰` is attained | both |
+| **TQ-EPS2** | agree: TRUE, **conditional on V-1.3** (TQ's grade bracket names C-CS-2; the sheet's quotation dropped the bracket, QB §4.1) | constant: TQ `ε²/78`, QB `ε²/(6 + ε)²` | **QB's constant is right and better.** Checked below |
+| **TQ-HIT** | agree: TRUE as a limit on hitting-form arguments | cap: TQ `4ε`, QB `ε` | **QB is right.** Checked below. The headline `O(ε)` is unchanged |
+| C-Q-REM (i), (ii), core | agree: TRUE | TQ `η = 1/20`, QB `η = 1/10` | QB's caveat "false for large `ε`" was QB's slip; QB conceded (T1): TQ's "no point is kept for `ε > 1/2`" holds |
+| C-Q-COMP (i), (ii) | agree: TRUE. "`µ₆(ε) < 1`" is conditional on a Voronov theorem, and equivalent to V-1.1 over all `ε` | — | — |
+| C-Q-LOCAL, `δ > δ₆` | agree: TRUE (chromaticity 1) | — | Parts [external] |
+| **C-Q-LOCAL, `δ = δ₆`** | **diverge**: TQ says MISSTATED, QB says GAP (likely TRUE) | — | **QB is right that MISSTATED is not established.** See 1a.2 |
+| L1 = pixel lemma P | agree: TRUE | QB sharpens it: a trichromatic-point step carries C-Q-STAB's full strength at every `δ` | QB's form is the one to carry |
+
+**TQ-EPS2, QB's constant, checked.**
+- Lemma F: if every `x ∈ U₃(z)` has `|B(x, r) ∖ H| > 0` with `r < ε/2`, then `c′(x) = min{j : |C_j ∩ B(x, r)| > 0}` colours `U₃(z)`. It is
+  proper for `[1 − (ε − 2r), 1 + (ε − 2r)]` at every pair, because all cross pairs of the two `r`-balls lie in the band.
+- The hypothesis holds when `|H ∩ B(z, 3 + r)| < πr²`.
+- The closures of `c′`'s classes are closed, cover `cl U₃(z)`, and realise no unit distance (the band is open around 1). That contradicts V-1.3.
+- Hence every disc `B(z, 3 + r)` holds at least `πr²` of the uncovered set, and averaging gives lower density `≥ (r/(3 + r))² → ε²/(6 + ε)²`.
+- It is better than TQ's `ε²/78` because no tiling step and no disc-cap factor (0.4645) are needed. **QB's form should replace TQ's in the
+  ledger.**
+
+**TQ-HIT's cap, checked.**
+- Centre lines on `y ∈ 2ℤ`: every unit circle's `y`-range `[b − 1, b + 1]` is closed and of length 2, so it contains an even integer.
+- At a tangency the touching point lies on a centre line, `ε` from the complement, so it is effective in TQ's own sense (a point `≥ ε/2` from the
+  coloured set).
+- The density is `2ε/2 = ε`. At half-width exactly `ε/2` (the borderline HOLE-t leaves effective) it is `ε/2`.
+- The constant is immaterial to the no-go.
+
+### 1a.2 C-Q-LOCAL at `δ = δ₆`: the verdict
+
+**QB is right that MISSTATED is not established.**
+- The claim is existential: some `ε > 0` and some colouring of a subset of `U₃(0)`, with density `≥ 1 − δ₆`.
+- TQ's "needs `κ = 0`" reads the hole fraction of the **average** translate. The claim may use the **best** translate.
+- `φ(x) = |H ∩ U₃(x)|/|U₃|` is continuous and periodic with mean `δ₆`. If it is non-constant, some translate has `φ < δ₆` by a margin `η₀`, and an
+  erosion with `O(κ) < η₀` keeps coverage `≥ 1 − δ₆`: TRUE.
+- Even a constant `φ` would not make the claim MISSTATED, since other colourings could reach `δ₆`. MISSTATED needs a proof that none does, and
+  TQ has none.
+
+**Grade:** GAP at the endpoint, likely TRUE. The missing step is QB's: the non-constancy of `1_H ∗ 1_{U₃}`, which fails only if every
+dual-lattice Fourier coefficient of `H` off the origin sits on a zero circle of `J₁(6π|k|)`.
+
+A sketch of why that fails [hand, sketch, one mind; it needs Parts's exact geometry, which is external and numerical]:
+- along a ray `m·k₁` of the dual lattice, for `|m k₁| ≲ 3`, the coefficients are close to `Σ_v a_v e^{−2πi m k₁·x_v}` (voids of area `a_v > 0`);
+- a sum with positive grouped weights cannot vanish at the many consecutive `m` (Vandermonde) that the Bessel zeros, whose ratios are not
+  integer, leave uncovered.
+
+**Consequence: none.** Both sides agree on the consequence (the pixel lemma). **Recommended wording for `data/fs106/claims.md`:** keep "at
+least"; grade it "TRUE for `δ > δ₆`; GAP at `δ = δ₆` (TRUE if `1_H ∗ 1_{U₃}` is non-constant)". This replaces TQ's close item 50 ("at least" →
+"greater than").
+
+### 1a.3 My stage-1 expectation, scored (QB half)
+
+| expectation | outcome |
+|---|---|
+| TQ-EQ TRUE, 0.85; the divergence a route one at `(c) ⟹ (a)` | met: TRUE, route divergence at exactly that step |
+| a definitional flag | met: QB found `µ₆⁰` undefined in `claims.md`, and the dropped grade bracket |
+| TQ-EPS2 TRUE, 0.75, constant may differ, input C-CS-2 | met: the constant differs, and the input is named |
+| TQ-SUP TRUE, 0.8 | met, with a stronger form |
+| TQ-HIT: a scope point | **missed**: QB found a constant point (`ε`, not `4ε`), no scope point |
+| C-Q-REM TRUE with other constants | met (`η = 1/10`) |
+| C-Q-COMP TRUE, 0.85 | met |
+| C-Q-LOCAL TRUE for `δ > δ₆`, 0.7 | met; the endpoint divergence was not foreseen |
+
+### 1a.4 Count of minds, the TQ half
+
+| result | minds | grade and input |
+|---|---|---|
+| **TQ-EQ** | **2**: TQ; QB blind, by a different route at `(c) ⟹ (a)` | [hand]. `(a) ⟺ (b)` rests on row 130 [hand, two]. My stage-0 check is a sighted reading, not counted |
+| TQ-SUP | 2 (QB blind, stronger form) | [hand] |
+| TQ-EPS2 | 2, **conditional on V-1.3** (V and VB, two minds, one blind, after repairs) | [hand]. The constant to carry is QB's `ε²/(6 + ε)²` |
+| TQ-HIT | 2 | [hand]. The cap to carry is `ε` (QB) |
+| C-Q-REM, C-Q-COMP (i) and attainment, L1 / pixel lemma | 2 each | [hand] |
+| C-Q-LOCAL `δ > δ₆` | 2 | [hand] over Parts [external] |
+| C-Q-LOCAL `δ = δ₆` | GAP | QB's missing step, my sketch |
+
+### 1a.5 For the close
+
+- **Correction owed:** TQ §3.4's `ε²/144` against §4.2's `ε²/78` (QB §4.4). Carry QB's `ε²/(6 + ε)²` instead.
+- **Correction owed:** TQ §4.4's "density `4ε`" → "`ε`".
+- **Correction owed:** close item 50's C-Q-LOCAL edit is withdrawn; use the wording in 1a.2.
+- **Ledger shape (a recommendation, G21):** QB §3.2: "the novelty of TQ-EQ over row 130 is modest: the slack side and the periodic/pixelated
+  forms". Record TQ-EQ as an **addendum to row 130**, not a new headline row. Its value is the reformulation (S–V §9's hypothesis is equivalent to
+  `χ_m⁰ ≥ 7`) and W's regular target, not a new bound.
+- **Stage 3 stands.** Its condition, "if QB confirms TQ-EQ", is met at two minds. W's reward rests on the easy direction:
+  - TQ reaches it by Lemma T and Route II;
+  - QB reaches it by Lemma B, Lemma K and Lemma S.
+
 ## Stage 2 — SAVED: the predecessor's expectation and hunches, scored
 
 Sources for "what landed": close inventory items 21, 24, 28, 33, 39, 41–44, 46, 49, 55, with the records they cite. "One mind" means the
