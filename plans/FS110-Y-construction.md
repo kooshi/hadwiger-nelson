@@ -19,6 +19,11 @@ Claim list: `data/fs110/claims.md` (quoted, never paraphrased). Blind to the pro
 - **Y-BLOCK** — the blocking set `B_u(s) ∩ B(w₀, c)` of a trivalent or bowtie `𝓜_K` vertex has exactly five shapes (slab, one-sided band of depth
   `≍ |1 − κ|s²/2` or `≍ s·|τ·e_u|`, thin double wedge of angle `≍ s` about the tangent line of `ω(u)` at `w₀`, empty); hence C-TAN-POS TRUE at the
   level of A-EXACT's disjointness test — [hand, one mind], §1.4.
+- **Y-CHK** — `tools/fs110_y_check.py`: exact min/max cross-distance for tiles bounded by segments and circular arcs over ℚ(√3), seven controls
+  (three curved), four planted faults each firing for its own reason — [tools, exact], §2.2.
+- **Y-T2W** — a pair saved at `w₀` by T2 makes `w₀` a vertex of degree `≥ 4` whose branches of `ω(u)`, `ω(v)` alternate, with `P(u)`-colours at
+  `w₀` in Siamese contact with `u` (inner arc colour) or outer contact (outer colour) — [hand, one mind], §2.3.
+- **Y-BIKE-3C** — no six-arc three-cycle colouring of each circle colours the bicycle, at any `d ∈ (1, 2)` — [hand, one mind], §2.4.
 
 ## Fence log (standing rule 13)
 
@@ -29,7 +34,8 @@ Claim list: `data/fs110/claims.md` (quoted, never paraphrased). Blind to the pro
 
 ## Would-have-searched-here log (standing rule 3)
 
-- (none yet)
+- C-T-BIKE: a scan over offsets and cell patterns → the band-section argument (§2.4).
+- C-T2 (i): a scan over the free ray angles of the four rhombus vertices → the derived constraints (§2.3).
 
 ## Stage 1 — SAVED: quotation check; the local calculus of §1b
 
@@ -149,3 +155,74 @@ A pair `(u, v)` saved at both unit points by T2 carries the **spindle's rhombus 
 - So T2 cascades: `w₀`, `w₀′` are vertices with mixed types at distance `√(4 − d²)` from each other, and their own close pairs must be seams.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the generator image; the exact checker and its controls; T2 at `w₀`; one bicycle no-go
+
+### 2.1 The generator image (X5, X17 — written before any candidate)
+
+My candidates are **tiles bounded by segments and circular arcs whose endpoints, centres and radii lie in ℚ(√3)**, same-colour pairs listed by
+the builder, checked by `tools/fs110_y_check.py`. **What the image cannot represent** (so a zero from it says nothing there): arcs whose data leave
+ℚ(√3) — among T2 rhombi `u w₀ v w₀′` it holds exactly those with all four vertices in ℚ(√3), e.g. `d = |u − v| = 1` (two equilateral triangles)
+and `d = √3` (`|w₀ − w₀′| = 1`), not a generic `d`; non-circular boundaries; infinitely many tiles. **Parameter count for C-T2 (i) at a fixed
+rhombus**: each of `u, v` is a vertex with two unit-arc rays fixed by T2 (at `w₀` and `w₀′`) and at least one free ray (one angle); `w₀, w₀′` are
+vertices of degree `≥ 4` (§2.3) with at least four free ray angles each; the constraints are the tight same-colour contacts across the four unit
+pairs `u w₀, w₀ v, v w₀′, w₀′ u` and the Siamese/outer alternative for every same-colour pair within the fragment. The count is not closed here.
+
+### 2.2 The checker — `tools/fs110_y_check.py` [tools, exact]
+
+Q(√3) arithmetic with exact sign; every candidate distance is `|√A + B|`, `A, B ∈ ℚ(√3)`, compared with 1 exactly. The candidate list holds
+every critical pair (endpoint–endpoint, endpoint–primitive foot or radial point, segment–arc common normals through the centre, arc–arc pairs on
+the line of centres, concentric/same-arc radial pairs), each with its direction condition checked, so min and max over candidates are the true
+extremes. **Stated hypothesis (the map hypothesis):** boundaries of distinct tiles meet only at listed endpoints; then two tiles touch iff they
+share an endpoint. REJECT iff `min < 1 < max` (a tile against itself: iff its diameter exceeds 1).
+
+| control | want | clean | `noself` | `endpoints_only` | `closed_interval` | `cw_arcs` |
+|---|---|---|---|---|---|---|
+| tight hexagonal 7-colouring, side 1/2 (diameter exactly 1) | ACCEPT | ACCEPT | · | · | **REJECT** | · |
+| hexagonal 7-colouring, side 11/20 (diameter 1.1) | REJECT | REJECT | **ACCEPT** | · | · | · |
+| index-4 hexagonal 4-colouring (same colour `√3` apart) | REJECT | REJECT | · | · | · | · |
+| Reuleaux triangle of width 1 (curved, diameter exactly 1) | ACCEPT | ACCEPT | · | · | **REJECT** | **REJECT** |
+| minor circular segment on a unit chord | ACCEPT | ACCEPT | · | · | **REJECT** | **REJECT** |
+| major circular segment (diameter `2/√3` at interior antipodes) | REJECT | REJECT | **ACCEPT** | **ACCEPT** | · | **ACCEPT** |
+| two Reuleaux triangles with gap exactly 1 (arc–arc minimum on the line of centres) | ACCEPT | ACCEPT | · | · | **REJECT** | **REJECT** |
+
+("·" = unchanged.) Each plant fires for its own reason: `noself` loses exactly the two self-pair REJECTs; `endpoints_only` loses exactly the
+REJECT whose maximum sits at interior points (X17's suspect ACCEPT, seen); `closed_interval` turns every exactly-tight ACCEPT into a REJECT;
+`cw_arcs` swaps minor and major arcs. Outputs: `data/fs110/fs110-y/check_controls_*.out`. A defect found by reading before the first run and
+repaired: the concentric/same-arc branch had the same- and opposite-direction values swapped and lacked negated directions. The checker certifies
+members; a family's claim is a derivation.
+
+### 2.3 C-T2 (i), the double unit-arc seam, at `w₀` — what a realisation must carry [hand, one mind]
+
+Beyond §1.5, derived from A-CIRC, TS-U and A-EXACT (P(u) = {1,2,3}, P(v) = {4,5,6}):
+- **`w₀` has degree `≥ 4`, with alternating branches.** Near `w₀` the curves `ω(u)` (along `±e_u^⊥`) and `ω(v)` (along `±e_v^⊥`) cross at angle
+  `ψ`. Interior points of `ω(u)` carry colours of `{4,5,6}` and of `ω(v)` colours of `{1,2,3}` (A-CIRC), so no tile contains interior points of
+  both, and each of the four sectors between consecutive branches holds a boundary ray from `w₀` — unless a branch is itself a boundary (a unit arc
+  centred at `u` or `v` through `w₀`, the reciprocal arc).
+- **A colour of `P(u)` present at `w₀` is a Siamese contact across the unit pair `u w₀`.** Its sector at `u` and its sector at `w₀` are at
+  distance exactly 1 at the closure points; cross-distances straddling 1 are excluded (A-EXACT), so to first order either both face each other
+  (Siamese: all `≤ 1`) or both face away (outer: all `≥ 1`), with curvature conditions on rays along `e_u^⊥`. TS-U fixes which: `u`'s inner arc
+  colour `a` appears at `w₀` only facing `u` (Siamese), the outer colour `b` only facing away (outer).
+- **`u`'s third colour `c₃`** (not on the `ω(w₀)` arc) can appear near `w₀` only if its sector at `u` lies in a closed half-plane of `e_u^⊥`, and
+  then only on one side.
+- So the fragment is a **local rule on four vertices of degree `≥ 3, 3, ≥ 4, ≥ 4`** with every unit pair of the rhombus a tight contact. I find no
+  contradiction; the named next step is a formula fragment at `d = 1` (all four vertices in ℚ(√3): `u = 0`, `v = (1, 0)`, `w₀ = (1/2, √3/2)`,
+  `w₀′ = (1/2, −√3/2)`), each vertex a finite fan of sectors truncated by segments with ℚ(√3) endpoints, checked by §2.2. **Not built** (budget).
+  C-T2 (i): **GAP at that construction**; C-T2 (ii) untouched.
+
+### 2.4 C-T-BIKE — a no-go for one generator family [hand, one mind]
+
+**Y-BIKE-3C.** For no `d ∈ (1, 2)` is the bicycle `T₁(u) ∪ T₁(v)` properly coloured by colouring each circle with six `60°` arcs cycling through
+three colours (any offsets, either orientation, any colour permutation). *Proof.* With the colours as `ℤ/3`, the colour of a point of `T₁(u)` at
+angle `α` is `⌊(α − φ)/60°⌋ + k` and of `T₁(v)` at angle `β` is `±⌊(β − ψ)/60°⌋ + k′`. The cross pairs form a closed curve `C` in the `(α, β)`
+torus that does not wind (its projections are the two facing arcs). The forbidden cells (equal colours) are diagonal stripes of slope `±1`, and each
+component of the allowed region, lifted, is a band whose section at fixed `α` is one half-open interval of exactly `120°` in `β`. `C` lies in one
+component. At `α = 0` (the point `x = u + (1, 0)`, always in the facing arc) the two partners of `x` on `T₁(v)` lie at `β = 180° ± γ`,
+`γ = arccos((d − 1)/2) > 60°` for `d < 2`: `2γ > 120°` apart on one lift of `C`. Contradiction. ∎ This is the mechanism of R's "fails narrowly"
+(FS107-R §3.6, a different family: each circle two-coloured): at `d = 1.9`, `2γ = 126.6°` against `120°`. **What it leaves:** colourings not
+periodic in `60°` cells on either circle — R's `E ∪ (E′ + 60°) ∪ …` freedom and colourings using three colours unevenly. Killing test 10 stays open.
+
+*Would have searched here (added):* C-T-BIKE — a scan over the offsets and cell patterns; instead the stripe/band section argument above.
+C-T2 (i) — a scan over the free ray angles at `u, v, w₀, w₀′`; instead the constraints of §2.3.
+
+## Stage 2 — SAVED
