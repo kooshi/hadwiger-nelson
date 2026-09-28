@@ -15,7 +15,7 @@ continue at its first stage not marked SAVED.
    - the `LEDGER.md` changes (rows 135+, any correction to row 134 or its § B line) with their § B lines;
    - the `CLAUDE.md` lines. Where C drafted alternatives, apply the version the owner's latest ruling in `plans/FS112-close-inventory.md` names; if there
      is no ruling, apply C's recommendation and say so;
-   - a new grokking, only if C drafted one and the inventory records no ruling against it;
+   - G83 (D7): the owner ruled to apply it (inventory item 65);
    - the `BIBLIOGRAPHY.md` and `CLOSED-QUESTIONS.md` rows;
    - the `plans/FRONTIER-STUBS.md` rows (FS-112 to the closed list; FS-114 and FS-115 at ranks 1–2; FS-111 re-aimed);
    - the `plans/GROKKING-INSTANCES.md` instances;
@@ -52,6 +52,7 @@ Never commit a stage whose gate failed on your own edits.
   - `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`;
   - `plans/PROTOCOL-competitor-and-advisor.md` (the amendment and the §3 run record);
   - `tools/claude_md_fact_audit.py` (reviewed table lines only);
+  - `plans/FS110-derivation.md`: only the two corrections in §R-close 4.8 (FS110-NB-4's general form at l. 42, read as FS112-NB4P; FS110-CE5's note);
   - your record, `data/fs112/fs112-x/`.
 - **No subagents, forks or workflows.** Delegation is one level deep (`CLAUDE.md` § Delegation): staffing is Kooshi's budget decision, and the owner can
   only review work it knows about.
