@@ -1,0 +1,2792 @@
+{
+ "meta": {
+  "title": "Proof Atlas",
+  "built": "2026-09-27",
+  "job": "VIZ-ATLAS",
+  "statuses": {
+   "kernel": "kernel — checked by Lean's kernel",
+   "cert": "certificate — an exact object accepted by exact checkers",
+   "hand-2b": "hand, two minds, one blind",
+   "hand-2": "hand, two minds",
+   "hand-1": "hand, one mind",
+   "reading": "reading — believed, with a killing test",
+   "external": "external — claimed in print, not re-checked here",
+   "gap": "GAP / open — a missing step"
+  }
+ },
+ "nodes": [
+  {
+   "id": "A7",
+   "label": "χ(ℝ²) = 7",
+   "role": "answer",
+   "plain": "The answer 7: the plane needs exactly 7 colours. Decided only when both halves hold — a lower bound of 7 and an upper bound of 7.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "## The mission"
+   },
+   "grade": "χ(ℝ²) decided | open",
+   "theta": 0,
+   "r": 62,
+   "sector": "centre",
+   "tier": 0,
+   "answer": 7,
+   "status": "gap",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 72",
+   "also": []
+  },
+  {
+   "id": "A6",
+   "label": "χ(ℝ²) = 6",
+   "role": "answer",
+   "plain": "The answer 6: the plane needs exactly 6 colours. Decided only when both halves hold — a lower bound of 6 and an upper bound of 6.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "## The mission"
+   },
+   "grade": "χ(ℝ²) decided | open",
+   "theta": 120,
+   "r": 62,
+   "sector": "centre",
+   "tier": 0,
+   "answer": 6,
+   "status": "gap",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 72",
+   "also": []
+  },
+  {
+   "id": "A5",
+   "label": "χ(ℝ²) = 5",
+   "role": "answer",
+   "plain": "The answer 5: the plane needs exactly 5 colours. Decided only when both halves hold — a lower bound of 5 and an upper bound of 5.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "## The mission"
+   },
+   "grade": "χ(ℝ²) decided | open",
+   "theta": 240,
+   "r": 62,
+   "sector": "centre",
+   "tier": 0,
+   "answer": 5,
+   "status": "gap",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 72",
+   "also": []
+  },
+  {
+   "id": "LB5",
+   "label": "χ(ℝ²) ≥ 5",
+   "role": "bound",
+   "plain": "Five colours are needed. Held in the kernel: de Grey's graph cannot be four-coloured.",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean",
+    "decl": "chromaticNumber_plane_interval"
+   },
+   "quote": "5 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean",
+    "decl": "chromaticNumber_plane_interval"
+   },
+   "grade": "@lean",
+   "theta": 260,
+   "r": 140,
+   "sector": "five",
+   "tier": 0,
+   "answer": 5,
+   "also": [
+    {
+     "src": {
+      "file": "LEDGER.md",
+      "row": "33"
+     },
+     "quote": "chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7",
+     "address": "LEDGER.md row 33, line 77"
+    }
+   ],
+   "status": "kernel",
+   "line": 36,
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval), line 36",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval)"
+  },
+  {
+   "id": "UB7",
+   "label": "χ(ℝ²) ≤ 7",
+   "role": "bound",
+   "plain": "Seven colours always suffice. Held in the kernel: a brick colouring of the plane by seven colours.",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean",
+    "decl": "chromaticNumber_plane_interval"
+   },
+   "quote": "(unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean",
+    "decl": "chromaticNumber_plane_interval"
+   },
+   "grade": "@lean",
+   "theta": 344,
+   "r": 140,
+   "sector": "seven",
+   "tier": 0,
+   "answer": 7,
+   "also": [
+    {
+     "src": {
+      "file": "LEDGER.md",
+      "row": "33"
+     },
+     "quote": "chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7",
+     "address": "LEDGER.md row 33, line 77"
+    }
+   ],
+   "status": "kernel",
+   "line": 37,
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval), line 37",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval)"
+  },
+  {
+   "id": "LB7",
+   "label": "χ(ℝ²) ≥ 7",
+   "role": "conclusion",
+   "plain": "Seven colours are needed. Reached by the regularity wall: given measure rigidity, the plane's number is its measurable number, and the measurable number is seven if vanishing holes cannot save a colour.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "the exact value inside it remains open",
+   "theta": 16,
+   "r": 140,
+   "sector": "seven",
+   "tier": 0,
+   "answer": 7,
+   "status": "gap",
+   "line": 102,
+   "address": "CLAUDE.md § The aim, line 102",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
+   "also": []
+  },
+  {
+   "id": "LB6",
+   "label": "χ(ℝ²) ≥ 6",
+   "role": "conclusion",
+   "plain": "Six colours are needed — the $1,000 question Soifer prints as Graham's.",
+   "src": {
+    "file": "plans/STUB-cp-plane-six.md"
+   },
+   "quote": "The Ronald L. Graham New $1,000 Problem. Prove or disprove the existence of a 6-chromatic unit-distance graph.",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "the exact value inside it remains open",
+   "theta": 100,
+   "r": 140,
+   "sector": "six-low",
+   "tier": 0,
+   "answer": 6,
+   "status": "gap",
+   "line": 14,
+   "address": "plans/STUB-cp-plane-six.md, line 14",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
+   "also": []
+  },
+  {
+   "id": "UB6",
+   "label": "χ(ℝ²) ≤ 6",
+   "role": "conclusion",
+   "plain": "Six colours suffice: the first move of the upper bound since 1950, and it would need no measure rigidity.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "the exact value inside it remains open",
+   "theta": 140,
+   "r": 140,
+   "sector": "six-up",
+   "tier": 0,
+   "answer": 6,
+   "status": "gap",
+   "line": 102,
+   "address": "CLAUDE.md § The aim, line 102",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
+   "also": []
+  },
+  {
+   "id": "UB5",
+   "label": "χ(ℝ²) ≤ 5",
+   "role": "conclusion",
+   "plain": "Five colours suffice — the answer five, with no measure rigidity.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "the exact value inside it remains open",
+   "theta": 220,
+   "r": 140,
+   "sector": "five",
+   "tier": 0,
+   "answer": 5,
+   "status": "gap",
+   "line": 102,
+   "address": "CLAUDE.md § The aim, line 102",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
+   "also": []
+  },
+  {
+   "id": "DEGREY",
+   "label": "de Grey's graph",
+   "role": "held",
+   "plain": "De Grey's 1581-vertex unit-distance graph cannot be four-coloured; its geometry is exact and its refutation an LRAT certificate the kernel replays (M06–M09).",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "quote": "the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "@lean",
+   "theta": 250,
+   "r": 222,
+   "sector": "five",
+   "tier": 2,
+   "lean": {
+    "file": "Proofs/HadwigerNelson/Instances/DeGrey/Bound.lean",
+    "decl": "chromaticNumber_plane_ge_five"
+   },
+   "status": "kernel",
+   "line": 12,
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 12",
+   "grade_address": "Proofs/HadwigerNelson/Instances/DeGrey/Bound.lean (chromaticNumber_plane_ge_five)",
+   "also": []
+  },
+  {
+   "id": "SEVEN",
+   "label": "the seven-colouring",
+   "role": "held",
+   "plain": "A brick colouring of the plane by seven colours, checked by one kernel `decide` (M36). Classical; ours is the certificate.",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "quote": "the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "grade": "@lean",
+   "theta": 338,
+   "r": 222,
+   "sector": "seven",
+   "tier": 2,
+   "lean": {
+    "file": "Proofs/HadwigerNelson/Instances/Seven.lean",
+    "decl": "chromaticNumber_plane_le_seven"
+   },
+   "also": [
+    {
+     "src": {
+      "file": "LEDGER.md",
+      "row": "33"
+     },
+     "quote": "The colouring is classical; ours is the certificate.",
+     "address": "LEDGER.md row 33, line 77"
+    }
+   ],
+   "status": "kernel",
+   "line": 15,
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 15",
+   "grade_address": "Proofs/HadwigerNelson/Instances/Seven.lean (chromaticNumber_plane_le_seven)"
+  },
+  {
+   "id": "EL",
+   "label": "Einsiedler–Lindenstrauss",
+   "role": "external",
+   "plain": "A published rigidity theorem for commuting automorphisms of solenoids (positive entropy). Measure rigidity uses it by statement; its cited machinery is unread here.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "120"
+   },
+   "quote": "the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3, from which its Thm 1.2 follows",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "120"
+   },
+   "grade": "EL2021 Thm 1.3 (external, published)",
+   "theta": 294,
+   "r": 490,
+   "sector": "engine",
+   "tier": 2,
+   "status": "external",
+   "line": 165,
+   "address": "LEDGER.md row 120, line 165",
+   "grade_address": "LEDGER.md row 120, line 165",
+   "also": []
+  },
+  {
+   "id": "MR",
+   "label": "measure rigidity (MR)",
+   "role": "held",
+   "plain": "Every measure on the dual of the unit-vector ring that the unit-vector group preserves, and that gives no mass to the archimedean part, is a multiple of Haar measure. The hinge of every result above four at a field, and of the collapse.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "120"
+   },
+   "quote": "every U_F-invariant finite positive measure on R̂ with τ(E) = 0 is a multiple of Haar measure (MR(F))",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "120"
+   },
+   "grade": "PE-2 two derivations blind to each other (X02D, X02V)",
+   "theta": 302,
+   "r": 410,
+   "sector": "engine",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 165,
+   "address": "LEDGER.md row 120, line 165",
+   "grade_address": "LEDGER.md row 120, line 165",
+   "also": []
+  },
+  {
+   "id": "R128",
+   "label": "the collapse",
+   "role": "held",
+   "plain": "Given MR, at a totally real field whose every stable place mixes at six colours (ℚ(√635087), de Grey's field), the field's plane, the real plane and the stationary random colourings all need the same number of colours.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "128"
+   },
+   "quote": "The collapse: given MR, the plane's number is a field's.",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "128"
+   },
+   "grade": "the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2)",
+   "theta": 314,
+   "r": 330,
+   "sector": "engine",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 173,
+   "address": "LEDGER.md row 128, line 173",
+   "grade_address": "LEDGER.md row 128, line 173",
+   "also": []
+  },
+  {
+   "id": "R130",
+   "label": "χ_CP = χ_m⁰",
+   "role": "held",
+   "plain": "With no MR, the stationary number equals the measurable number: the fewest colours of a measurable colouring proper at almost every unit pair. Given MR, that is Hadwiger–Nelson itself.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "130"
+   },
+   "quote": "Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "130"
+   },
+   "grade": "M1, M1b, M1c, M-FREE, M-AE3 and M-Q4 two derivations (FS103-M; FS103-N blind to M's record)",
+   "theta": 326,
+   "r": 262,
+   "sector": "engine",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 175,
+   "address": "LEDGER.md row 130, line 175",
+   "grade_address": "LEDGER.md row 130, line 175",
+   "also": []
+  },
+  {
+   "id": "R121",
+   "label": "χ(ℚ(√47)²) = 5",
+   "role": "held",
+   "plain": "The plane over ℚ(√47) needs exactly five colours — the cheapest exposed five of the local–global conjecture, with no finite graph exhibited. Answers Moorhouse's named question (2010).",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "121"
+   },
+   "quote": "χ(ℚ(√47)²) = 5: the local–global conjecture's cheapest exposed five-clause is met",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "121"
+   },
+   "grade": "the headline rule met (every half two blind minds, SP-Cor checked blind)",
+   "theta": 272,
+   "r": 300,
+   "sector": "five",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 166,
+   "address": "LEDGER.md row 121, line 166",
+   "grade_address": "LEDGER.md row 121, line 166",
+   "also": []
+  },
+  {
+   "id": "SUB",
+   "label": "a subfield's plane",
+   "role": "held",
+   "plain": "The plane over any real subfield is a subgraph of the plane, so it needs no more colours: a field that needs five makes the plane need five.",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Bridge.lean",
+    "decl": "chromaticNumber_planeOver_le_plane"
+   },
+   "quote": "The plane over any real subfield needs at most as many colours as the plane.",
+   "grade_src": {
+    "file": "Proofs/HadwigerNelson/Bridge.lean",
+    "decl": "chromaticNumber_planeOver_le_plane"
+   },
+   "grade": "@lean",
+   "theta": 268,
+   "r": 215,
+   "sector": "five",
+   "tier": 2,
+   "lean": {
+    "file": "Proofs/HadwigerNelson/Bridge.lean",
+    "decl": "chromaticNumber_planeOver_le_plane"
+   },
+   "also": [
+    {
+     "src": {
+      "file": "CLAUDE.md",
+      "section": "### Where the problem stands"
+     },
+     "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
+     "address": "CLAUDE.md § Where the problem stands, line 218"
+    }
+   ],
+   "status": "kernel",
+   "line": 187,
+   "address": "Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane), line 187",
+   "grade_address": "Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane)"
+  },
+  {
+   "id": "R123",
+   "label": "main clause through five",
+   "role": "held",
+   "plain": "The local–global conjecture holds whenever its local bound is at most five: every real number field's plane needs min(L(F), 5) colours, and exactly L(F) when L(F) ≤ 5.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "123"
+   },
+   "quote": "for every real number field F, χ(F²) ≥ min(L(F), 5), so χ(F²) = L(F) whenever L(F) ≤ 5",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "123"
+   },
+   "grade": "CLS three derivations — X23D and X26B blind to each other in full",
+   "theta": 286,
+   "r": 330,
+   "sector": "lg",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 168,
+   "address": "LEDGER.md row 123, line 168",
+   "grade_address": "LEDGER.md row 123, line 168",
+   "also": []
+  },
+  {
+   "id": "R99",
+   "label": "L ≤ 4: three and four",
+   "role": "held",
+   "plain": "Three and four colours obey the local–global conjecture over every real number field.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "99"
+   },
+   "quote": "χ(F²) = L(F) whenever L(F) ≤ 4",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "99"
+   },
+   "grade": "S1 three derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three",
+   "theta": 280,
+   "r": 410,
+   "sector": "lg",
+   "tier": 2,
+   "status": "hand-2",
+   "line": 144,
+   "address": "LEDGER.md row 99, line 144",
+   "grade_address": "LEDGER.md row 99, line 144",
+   "also": []
+  },
+  {
+   "id": "R52",
+   "label": "the residue bound",
+   "role": "held",
+   "plain": "A usable prime's finite plane colours the whole field's plane: χ(F²) ≤ χ(Γ_q). The upper half of the local–global conjecture; prior art (Moorhouse 2010, Manturov 2012, Madore 2015).",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "52"
+   },
+   "quote": "has χ(F²) ≤ χ(Γ_q)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "52"
+   },
+   "grade": "[hand + tools]",
+   "theta": 266,
+   "r": 410,
+   "sector": "lg",
+   "tier": 2,
+   "status": "hand-1",
+   "line": 96,
+   "address": "LEDGER.md row 52, line 96",
+   "grade_address": "LEDGER.md row 52, line 96",
+   "also": []
+  },
+  {
+   "id": "LG",
+   "label": "local–global conjecture",
+   "role": "belief",
+   "plain": "χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7. Kooshi holds it. A belief, drawn so it can be seen and never counted: no route's distance includes it.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The local–global conjecture"
+   },
+   "quote": "and its bold form is χ(ℝ²) = 7",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "## Notation"
+   },
+   "grade": "The conjecture (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7.",
+   "theta": 254,
+   "r": 410,
+   "sector": "lg",
+   "tier": 2,
+   "status": "reading",
+   "line": 144,
+   "address": "CLAUDE.md § The local–global conjecture, line 144",
+   "grade_address": "CLAUDE.md § Notation, line 47",
+   "also": []
+  },
+  {
+   "id": "R127",
+   "label": "main clause in Lean (conditional)",
+   "role": "lean-held",
+   "plain": "The main clause through five, in the kernel, over named hypotheses (MR among them); χ(ℚ(√47)²) ≤ 5 unconditionally. The composition is the kernel's; every link it names stays [hand].",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "127"
+   },
+   "quote": "The main clause through five in the kernel, conditional on named hypotheses",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "127"
+   },
+   "grade": "[kernel; standard three axioms, no native purchase; the lower halves conditional on named propositions, not vacuous domains]",
+   "theta": 280,
+   "r": 490,
+   "sector": "lean",
+   "tier": 2,
+   "status": "kernel",
+   "line": 172,
+   "address": "LEDGER.md row 127, line 172",
+   "grade_address": "LEDGER.md row 127, line 172",
+   "also": []
+  },
+  {
+   "id": "FS101",
+   "label": "FS-101: the named hypotheses",
+   "role": "lean",
+   "plain": "Discharge row 127's named hypotheses one at a time: Markov–Kakutani, the residue bound's valuation subring, Herglotz–Bochner.",
+   "src": {
+    "file": "plans/STUB-main-clause-five-kernel.md"
+   },
+   "quote": "Next: InvariantMeasureOnClosed as Markov–Kakutani (~100–200k), then the upper half hUpper via row 57's gap (~40–80k), then Herglotz–Bochner (weeks)",
+   "grade_src": {
+    "file": "plans/STUB-main-clause-five-kernel.md"
+   },
+   "grade": "FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)",
+   "theta": 270,
+   "r": 560,
+   "sector": "lean",
+   "tier": 2,
+   "status": "gap",
+   "line": 25,
+   "address": "plans/STUB-main-clause-five-kernel.md, line 25",
+   "grade_address": "plans/STUB-main-clause-five-kernel.md, line 1",
+   "also": []
+  },
+  {
+   "id": "FS113",
+   "label": "FS-113: MR in Lean",
+   "role": "lean",
+   "plain": "Measure rigidity in full in Lean, with no declared purchase — needed to publish every result through MR, and the answer seven through the collapse.",
+   "src": {
+    "file": "plans/STUB-mr-in-lean.md"
+   },
+   "quote": "as a theorem in Proofs/, on the standard three axioms, with no declared purchase",
+   "grade_src": {
+    "file": "plans/STUB-mr-in-lean.md"
+   },
+   "grade": "FS-113 — measure rigidity for the unit-vector group, in full, in Lean (stub)",
+   "theta": 306,
+   "r": 490,
+   "sector": "lean",
+   "tier": 2,
+   "status": "gap",
+   "line": 12,
+   "address": "plans/STUB-mr-in-lean.md, line 12",
+   "grade_address": "plans/STUB-mr-in-lean.md, line 1",
+   "also": []
+  },
+  {
+   "id": "LEANWALL",
+   "label": "Lean: the wall's chain",
+   "role": "lean",
+   "plain": "The collapse, the measurable chain and the map argument, in Lean — the regularity wall's own formalization, owed before seven could be published.",
+   "src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "quote": "MR in full ([EinsiedlerLindenstrauss2022] Thm 1.3 and the deduction FS105-DED; [EinsiedlerFish2010]'s transfer), the collapse (row 128), the measurable chain (row 130, link 2), and whichever half of FS-107 lands.",
+   "grade_src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "grade": "FS-106 and FS-107 — the regularity wall, and its stability form: can vanishing holes save a colour? (stub; the program Kooshi adopted)",
+   "theta": 322,
+   "r": 560,
+   "sector": "lean",
+   "tier": 2,
+   "status": "gap",
+   "line": 124,
+   "address": "plans/STUB-regularity-wall.md, line 124",
+   "grade_address": "plans/STUB-regularity-wall.md, line 1",
+   "also": []
+  },
+  {
+   "id": "R131",
+   "label": "stability: the question",
+   "role": "held",
+   "plain": "With no MR: the measurable number is at least seven exactly when six classes, each free of one-colour pairs at distances near 1, cannot cover the plane up to holes that vanish as the band narrows. At every k the same equivalence holds for k colours.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "At six, χ_m⁰(ℝ²) ≥ 7 ⟺ lim µ₆(ε) < 1",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "grade": "EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind",
+   "theta": 0,
+   "r": 300,
+   "sector": "seven",
+   "tier": 1,
+   "also": [
+    {
+     "src": {
+      "file": "LEDGER.md",
+      "row": "131"
+     },
+     "quote": "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1",
+     "address": "LEDGER.md row 131, line 176"
+    }
+   ],
+   "status": "hand-2b",
+   "line": 176,
+   "address": "LEDGER.md row 131, line 176",
+   "grade_address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "id": "NG131",
+   "label": "hole-counting capped",
+   "role": "nogo",
+   "plain": "Two proof shapes are closed: counting only the holes that unit circles meet proves at most holes of order ε, and trichromatic-point arguments cannot see partial colourings.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "an argument counting only holes met by unit circles or bicycles proves at most 1 − µ₆(ε) ≳ ε",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "grade": "EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind",
+   "theta": 44,
+   "r": 222,
+   "sector": "seven",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 176,
+   "address": "LEDGER.md row 131, line 176",
+   "grade_address": "LEDGER.md row 131, line 176",
+   "also": []
+  },
+  {
+   "id": "R132",
+   "label": "regular classes need seven",
+   "role": "nogo",
+   "plain": "Almost everywhere: colourings with slack, polygons, locally finite convex tilings and nice maps all need seven (Voronov 2023 and Sokolov–Voronov 2025, repaired). So neither a YES nor a five can be regular.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "quote": "The regular half, verified and transferred almost everywhere.",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "grade": "Voronov's theorems and the closed-set step two minds, one blind (V; VB)",
+   "theta": 348,
+   "r": 450,
+   "sector": "seven",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 177,
+   "address": "LEDGER.md row 132, line 177",
+   "grade_address": "LEDGER.md row 132, line 177",
+   "also": []
+  },
+  {
+   "id": "MAPS6",
+   "label": "maps need six",
+   "role": "nogo",
+   "plain": "Any map colouring needs six colours (Woodall 1973, Townsend's manuscript, each repairing the other): a five-colouring of the plane cannot be a map.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "quote": "maps need six modulo Townsend's simplification (c), which [Woodall1973]'s steps 2, 3, 5 fill (in outline)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "grade": "maps-six, Townsend's manuscript and Woodall one mind, the fill in outline",
+   "theta": 204,
+   "r": 300,
+   "sector": "five",
+   "tier": 2,
+   "status": "hand-1",
+   "line": 177,
+   "address": "LEDGER.md row 132, line 177",
+   "grade_address": "LEDGER.md row 132, line 177",
+   "also": []
+  },
+  {
+   "id": "RR",
+   "label": "R's reduction: (A) + (B)",
+   "role": "held",
+   "plain": "Given the quantified cone lemma, seven follows from (A) a forced pair of fat junctions in every disc of every near-colouring and (B) a lower bound on their cone scale.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "grade": "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+   "theta": 22,
+   "r": 300,
+   "sector": "seven",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 178,
+   "address": "LEDGER.md row 133, line 178",
+   "grade_address": "LEDGER.md row 133, line 178",
+   "also": []
+  },
+  {
+   "id": "WEQK",
+   "label": "W's equivalence",
+   "role": "held",
+   "plain": "At bounded complexity, near-colourings with vanishing holes exist exactly when a tight six-map exists: a six-colouring by a map, proper almost everywhere. So door (A) at bounded complexity is one question about maps.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "grade": "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+   "theta": 46,
+   "r": 300,
+   "sector": "seven",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 178,
+   "address": "LEDGER.md row 133, line 178",
+   "grade_address": "LEDGER.md row 133, line 178",
+   "also": []
+  },
+  {
+   "id": "WPOLY",
+   "label": "polygons keep holes",
+   "role": "nogo",
+   "plain": "Polygonal designs of bounded complexity keep holes bounded below: a YES cannot be polygonal.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "grade": "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+   "theta": 120,
+   "r": 262,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 178,
+   "address": "LEDGER.md row 133, line 178",
+   "grade_address": "LEDGER.md row 133, line 178",
+   "also": []
+  },
+  {
+   "id": "R134",
+   "label": "Condition 5: no six-map",
+   "role": "held",
+   "plain": "Under Condition 5 (no boundary arc of radius 1), no map by segments and circular arcs six-colours the plane almost everywhere — Sokolov–Voronov's Question 2, its Condition-5 half, answered yes.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "134"
+   },
+   "quote": "no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at distance exactly 1",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "134"
+   },
+   "grade": "the chain — NB-4, NB-5, W-MERGE and the cone removal — two minds, one blind",
+   "theta": 6,
+   "r": 450,
+   "sector": "seven",
+   "tier": 1,
+   "status": "hand-2b",
+   "line": 179,
+   "address": "LEDGER.md row 134, line 179",
+   "grade_address": "LEDGER.md row 134, line 179",
+   "also": []
+  },
+  {
+   "id": "TSMNO",
+   "label": "no tight six-map (door A)",
+   "role": "conclusion",
+   "plain": "At bounded complexity, no tight six-map exists: under Condition 5 none does; with unit arcs, open. This is door (A) in its bounded-complexity form.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs, open.",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "grade": "with unit arcs, open.",
+   "theta": 24,
+   "r": 375,
+   "sector": "seven",
+   "tier": 1,
+   "status": "gap",
+   "line": 325,
+   "address": "CLAUDE.md § Where the problem stands, line 325",
+   "grade_address": "CLAUDE.md § Where the problem stands, line 326",
+   "also": []
+  },
+  {
+   "id": "M7",
+   "label": "χ_m⁰(ℝ²) ≥ 7",
+   "role": "conclusion",
+   "plain": "Vanishing holes cannot save a colour: Voronov's contradiction survives a free colour of vanishing density. Given MR, this is χ(ℝ²) = 7.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "No — Voronov's contradiction survives a free colour of vanishing density — gives χ_m⁰(ℝ²) = 7",
+   "grade_src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "grade": "both claims GAP",
+   "theta": 20,
+   "r": 222,
+   "sector": "seven",
+   "tier": 1,
+   "status": "gap",
+   "line": 101,
+   "address": "CLAUDE.md § The aim, line 101",
+   "grade_address": "plans/STUB-regularity-wall.md, line 4",
+   "also": []
+  },
+  {
+   "id": "FS111",
+   "label": "(B) the cone scale",
+   "role": "step",
+   "plain": "Door (B): do near-optimal band-proper six-colourings keep their junctions fat at a scale bounded below? De Giorgi's room — the same question as (A) at unbounded complexity (FS-111).",
+   "src": {
+    "file": "plans/STUB-reg-scale.md"
+   },
+   "quote": "(B) those junctions are fat at a scale s ≥ s₀ — on a set of positive measure — with voids small relative to min(s, µη²/100)",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "2"
+   },
+   "grade": "door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a set of positive measure?",
+   "theta": 66,
+   "r": 262,
+   "sector": "seven",
+   "tier": 1,
+   "registered": {
+    "p": 0.15,
+    "src": {
+     "file": "plans/STUB-reg-scale.md"
+    },
+    "quote": "a cone-scale bound for near-optimal colourings at one mind, 0.15",
+    "population": "the minting session's registration for FS-111: a cone-scale bound at one mind, within the milestone",
+    "address": "plans/STUB-reg-scale.md, line 35"
+   },
+   "status": "gap",
+   "line": 12,
+   "address": "plans/STUB-reg-scale.md, line 12",
+   "grade_address": "CLAUDE.md § Paths forward, ranked item 2, line 357",
+   "also": []
+  },
+  {
+   "id": "N3BASE",
+   "label": "N3-BASE",
+   "role": "held",
+   "plain": "With unit arcs, the base argument refutes a map near a three-colour vertex unless a vertex of four colours, or with a repeated colour, lies within distance 2.",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "row": "N3-BASE"
+   },
+   "quote": "the base refutes a valid map near a cubic trichromatic u unless B̄(u, 2) holds a vertex of ≥ 4 colours or a repeated colour",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "60"
+   },
+   "grade": "every N3 statement TRUE — two minds, one blind",
+   "theta": 8,
+   "r": 600,
+   "sector": "seven",
+   "tier": 2,
+   "closing": true,
+   "status": "hand-2b",
+   "line": 607,
+   "address": "plans/FS112-N-proof.md item N3-BASE, line 607",
+   "grade_address": "plans/FS112-close-inventory.md item 60, line 69",
+   "also": []
+  },
+  {
+   "id": "N3DENSE3",
+   "label": "N3-DENSE3",
+   "role": "held",
+   "plain": "In every valid map, every closed disc of radius 3 holds a vertex of four or more colours or a vertex with a repeated colour. So the unit-arc half is a question about four-colour vertices.",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "row": "N3-DENSE3"
+   },
+   "quote": "every closed disc of radius 3 of a valid map holds a vertex of ≥ 4 colours or a repeated colour",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "60"
+   },
+   "grade": "every N3 statement TRUE — two minds, one blind",
+   "theta": 24,
+   "r": 600,
+   "sector": "seven",
+   "tier": 2,
+   "closing": true,
+   "status": "hand-2b",
+   "line": 608,
+   "address": "plans/FS112-N-proof.md item N3-DENSE3, line 608",
+   "grade_address": "plans/FS112-close-inventory.md item 60, line 69",
+   "also": []
+  },
+  {
+   "id": "N3PER",
+   "label": "N3-PER",
+   "role": "held",
+   "plain": "A doubly periodic valid map has a periodic terminal modification — so a periodic map has no stuck ray.",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "row": "N3-PER"
+   },
+   "quote": "a doubly periodic valid map has a periodic terminal modification (so finitely many arc classes)",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "60"
+   },
+   "grade": "every N3 statement TRUE — two minds, one blind",
+   "theta": 42,
+   "r": 600,
+   "sector": "seven",
+   "tier": 2,
+   "closing": true,
+   "status": "hand-2b",
+   "line": 600,
+   "address": "plans/FS112-N-proof.md item N3-PER, line 600",
+   "grade_address": "plans/FS112-close-inventory.md item 60, line 69",
+   "also": []
+  },
+  {
+   "id": "N3END",
+   "label": "N3-END",
+   "role": "held",
+   "plain": "A stuck chain's end is anchored at a four-colour vertex with a repeated colour one step beyond it.",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "row": "N3-END"
+   },
+   "quote": "a stuck chain's end with horn bound −1 has a four-colour, repeated-colour vertex one step beyond",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "60"
+   },
+   "grade": "every N3 statement TRUE — two minds, one blind",
+   "theta": 56,
+   "r": 600,
+   "sector": "seven",
+   "tier": 2,
+   "closing": true,
+   "status": "hand-2b",
+   "line": 609,
+   "address": "plans/FS112-N-proof.md item N3-END, line 609",
+   "grade_address": "plans/FS112-close-inventory.md item 60, line 69",
+   "also": []
+  },
+  {
+   "id": "Y3END",
+   "label": "Y3-END-NEEDS",
+   "role": "held",
+   "plain": "The construction side's round 3: a stuck chain cannot end at a unit arc while its end vertex has three colours — blocking both moves there needs a seventh colour. Under blind verification tonight (FS112-YB3).",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "56"
+   },
+   "quote": "Y3-END-NEEDS [hand, one mind]: N needs ≥ 3 colours (then MERGE at N), ≥ 5 to block it (then SHAVE at N), and blocking both needs a seventh colour",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "56"
+   },
+   "grade": "Y3-END-NEEDS [hand, one mind]",
+   "theta": 70,
+   "r": 590,
+   "sector": "seven",
+   "tier": 2,
+   "verifying": true,
+   "closing": true,
+   "status": "hand-1",
+   "line": 65,
+   "address": "plans/FS112-close-inventory.md item 56, line 65",
+   "grade_address": "plans/FS112-close-inventory.md item 56, line 65",
+   "also": []
+  },
+  {
+   "id": "GSTEP",
+   "label": "the global step",
+   "role": "step",
+   "plain": "Exclude every map whose four-colour or repeated-colour vertices come within 3 of every point — N3-DENSE3 says every valid map is such a map. The next milestone (FS-114).",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "59"
+   },
+   "quote": "the global step — exclude maps whose vertices of ≥ 4 colours or a repeated colour come within 3 of every point",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "59"
+   },
+   "grade": "point two milestones at the two gaps",
+   "theta": 30,
+   "r": 525,
+   "sector": "seven",
+   "tier": 1,
+   "closing": true,
+   "status": "gap",
+   "line": 68,
+   "address": "plans/FS112-close-inventory.md item 59, line 68",
+   "grade_address": "plans/FS112-close-inventory.md item 59, line 68",
+   "also": []
+  },
+  {
+   "id": "SRAY",
+   "label": "the stuck ray",
+   "role": "step",
+   "plain": "Can a one-sided infinite chain of stuck vertices live in a map that is not periodic? Periodic maps have none (N3-PER); the aperiodic case is open (GAP N3-ALPH). The next milestone (FS-115).",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "section": "## Stage N3-4 — SAVED: R2"
+   },
+   "quote": "GAP (b′), named: whether a stuck ray can live in a valid map of the plane — a whole-line object; for periodic maps it cannot (N3-PER, N3-LEN).",
+   "grade_src": {
+    "file": "plans/FS112-N-proof.md",
+    "section": "## Stage N3-4 — SAVED: R2"
+   },
+   "grade": "GAP (b′), named",
+   "theta": 50,
+   "r": 525,
+   "sector": "seven",
+   "tier": 1,
+   "also": [
+    {
+     "src": {
+      "file": "plans/FS112-N-proof.md",
+      "section": "## Stage N3-2 — SAVED: R1"
+     },
+     "quote": "Named GAP N3-ALPH.",
+     "address": "plans/FS112-N-proof.md § Stage N3-2 — SAVED: R1, line 699"
+    }
+   ],
+   "closing": true,
+   "status": "gap",
+   "line": 880,
+   "address": "plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 880",
+   "grade_address": "plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 880"
+  },
+  {
+   "id": "UANO",
+   "label": "unit-arc half: NO",
+   "role": "step",
+   "plain": "The two gaps composed into a NO: no tight six-map even with unit arcs. How they compose is being derived at FS-112's close (for periodic maps, perhaps the global step alone).",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "63"
+   },
+   "quote": "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "63"
+   },
+   "grade": "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
+   "theta": 40,
+   "r": 450,
+   "sector": "seven",
+   "tier": 1,
+   "also": [
+    {
+     "src": {
+      "file": "plans/FS112-N-proof.md",
+      "section": "## Stage N3-3 — SAVED"
+     },
+     "quote": "So a YES of Q-full is a map whose four-colour (or repeated-colour) vertices come within 3 of every point, and a NO is the exclusion of such maps",
+     "address": "plans/FS112-N-proof.md § Stage N3-3 — SAVED, line 817"
+    }
+   ],
+   "closing": true,
+   "status": "gap",
+   "line": 72,
+   "address": "plans/FS112-close-inventory.md item 63, line 72",
+   "grade_address": "plans/FS112-close-inventory.md item 63, line 72"
+  },
+  {
+   "id": "FS104",
+   "label": "χ_CP(ℝ²) ≥ 6",
+   "role": "question",
+   "plain": "Is the stationary (equivalently the measurable) chromatic number at least six? Given MR it is rung D: χ(ℝ²) ≥ 6. No held result gives it, and no one-point density bound can (FS-104).",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "3"
+   },
+   "quote": "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "3"
+   },
+   "grade": "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?",
+   "theta": 86,
+   "r": 222,
+   "sector": "six-low",
+   "tier": 1,
+   "words": {
+    "src": {
+     "file": "CLAUDE.md",
+     "section": "### Paths forward, ranked",
+     "row": "3"
+    },
+    "quote": "success low, a named no-go the likely product",
+    "address": "CLAUDE.md § Paths forward, ranked item 3, line 358"
+   },
+   "status": "gap",
+   "line": 358,
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 358",
+   "grade_address": "CLAUDE.md § Paths forward, ranked item 3, line 358",
+   "also": []
+  },
+  {
+   "id": "R129",
+   "label": "density cannot give six",
+   "role": "nogo",
+   "plain": "One colour class at a time is capped below 4.37: the bound that gave five is a fractional bound rounded up, and that route never gives six. A proof of six must use how the classes fit together.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "129"
+   },
+   "quote": "1/α_loc ≤ 4.36: that route never gives six",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "129"
+   },
+   "grade": "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
+   "theta": 112,
+   "r": 215,
+   "sector": "six-low",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 174,
+   "address": "LEDGER.md row 129, line 174",
+   "grade_address": "LEDGER.md row 129, line 174",
+   "also": []
+  },
+  {
+   "id": "FS80",
+   "label": "window-frequency certificate",
+   "role": "question",
+   "plain": "An averaged certificate at five colours on the real plane — the integrality shape a six certificate must take (FS-80).",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "7"
+   },
+   "quote": "averaged certificates at five colours on the real plane (FS-104's route (c))",
+   "grade_src": {
+    "file": "plans/STUB-window-frequency-certificate.md"
+   },
+   "grade": "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)",
+   "theta": 78,
+   "r": 300,
+   "sector": "six-low",
+   "tier": 2,
+   "words": {
+    "src": {
+     "file": "CLAUDE.md",
+     "section": "### Paths forward, ranked",
+     "row": "7"
+    },
+    "quote": "soft as to success",
+    "address": "CLAUDE.md § Paths forward, ranked item 7, line 362"
+   },
+   "status": "gap",
+   "line": 362,
+   "address": "CLAUDE.md § Paths forward, ranked item 7, line 362",
+   "grade_address": "plans/STUB-window-frequency-certificate.md, line 1",
+   "also": []
+  },
+  {
+   "id": "R125",
+   "label": "ℚ(√167) at six = plane + PL",
+   "role": "held",
+   "plain": "Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product locality at 23 and 43 — a reduction, not a bound.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "grade": "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)",
+   "theta": 94,
+   "r": 375,
+   "sector": "six-low",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 170,
+   "address": "LEDGER.md row 125, line 170",
+   "grade_address": "LEDGER.md row 125, line 170",
+   "also": []
+  },
+  {
+   "id": "PL",
+   "label": "PL∃(23, 43)",
+   "role": "question",
+   "plain": "Product locality at the places 23 and 43: the direction missing from χ_CP(ℝ²) ≥ 6 to six at ℚ(√167) (FS-96, FS-67).",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "grade": "Not claimed: anything about six.",
+   "theta": 108,
+   "r": 300,
+   "sector": "six-low",
+   "tier": 2,
+   "status": "gap",
+   "line": 170,
+   "address": "LEDGER.md row 125, line 170",
+   "grade_address": "LEDGER.md row 125, line 170",
+   "also": []
+  },
+  {
+   "id": "FS59",
+   "label": "χ(ℚ(√167)²) ≥ 6",
+   "role": "conclusion",
+   "plain": "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the kernel). Through the plane only: never cheaper than FS-104 (FS-59).",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "12"
+   },
+   "quote": "given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "12"
+   },
+   "grade": "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)",
+   "theta": 100,
+   "r": 300,
+   "sector": "six-low",
+   "tier": 2,
+   "status": "gap",
+   "line": 367,
+   "address": "CLAUDE.md § Paths forward, ranked item 12, line 367",
+   "grade_address": "CLAUDE.md § Paths forward, ranked item 12, line 367",
+   "also": []
+  },
+  {
+   "id": "R119",
+   "label": "χ(ℚ(√167)²) ≥ 4, kernel",
+   "role": "held",
+   "plain": "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of the widest gap.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "119"
+   },
+   "quote": "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "119"
+   },
+   "grade": "[kernel; standard three axioms, no native purchase]",
+   "theta": 100,
+   "r": 450,
+   "sector": "six-low",
+   "tier": 2,
+   "status": "kernel",
+   "line": 164,
+   "address": "LEDGER.md row 119, line 164",
+   "grade_address": "LEDGER.md row 119, line 164",
+   "also": []
+  },
+  {
+   "id": "LINK2",
+   "label": "upper bounds need no MR",
+   "role": "held",
+   "plain": "A measurable colouring proper at almost every unit pair, moved by a random rigid motion, colours every finite graph properly almost surely; de Bruijn–Erdős finishes. So χ(ℝ²) ≤ χ_m⁰(ℝ²) with no MR. Its argument is in print (Gwyn–Stavrianos 2022) under an invariant mean.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Upper bounds need no MR. χ(ℝ²) ≤ χ_m⁰(ℝ²): move a measurable colouring by a random rigid motion",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "grade": "[hand, two minds]: FS103-N's N-EASY, PA1's (E)",
+   "theta": 180,
+   "r": 178,
+   "sector": "six-up",
+   "tier": 1,
+   "note": "LEDGER.md row 130's grade bracket lists N-EASY at one mind; § The aim adds PA1's (E) as the second.",
+   "status": "hand-2",
+   "line": 86,
+   "address": "CLAUDE.md § The aim, line 86",
+   "grade_address": "CLAUDE.md § The aim, line 87",
+   "also": []
+  },
+  {
+   "id": "HOLES6",
+   "label": "vanishing holes save a colour",
+   "role": "conclusion",
+   "plain": "Six classes cover the plane up to holes of density tending to 0 as the band narrows: lim µ₆(ε) = 1. A refutation of seven needs no wild set — a sequence of periodic grid colourings, wild only in the limit.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "a refutation needs no wild set — it is a sequence of periodic grid colourings with vanishing holes, the wildness only in the limit",
+   "grade_src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "grade": "both claims GAP",
+   "theta": 152,
+   "r": 222,
+   "sector": "six-up",
+   "tier": 1,
+   "status": "gap",
+   "line": 176,
+   "address": "LEDGER.md row 131, line 176",
+   "grade_address": "plans/STUB-regularity-wall.md, line 4",
+   "also": []
+  },
+  {
+   "id": "TSMYES",
+   "label": "a tight six-map (YES)",
+   "role": "step",
+   "plain": "A map by segments and circular arcs, unit arcs allowed, six-coloured with no two interior points of one colour at distance exactly 1. At bounded complexity it gives χ(ℝ²) ≤ 6 with no MR.",
+   "src": {
+    "file": "plans/STUB-unit-arc-half.md"
+   },
+   "quote": "With FS-107's W-EQ-K (row 133) a YES at bounded complexity gives χ(ℝ²) ≤ 6 with no MR",
+   "grade_src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "1"
+   },
+   "grade": "does a tight six-map exist once unit arcs are allowed?",
+   "theta": 138,
+   "r": 300,
+   "sector": "six-up",
+   "tier": 1,
+   "registered": {
+    "p": 0.03,
+    "src": {
+     "file": "plans/FS112-unit-arc-half.md",
+     "row": "E5"
+    },
+    "quote": "the stub's \"a YES by formula (0.03)\", re-registered at 0.03 with its population stated",
+    "population": "within FS-112: a full tight six-map of the plane given by formula and accepted exactly, among asymmetric curved maps with unit-arc seams and four-colour vertices",
+    "address": "plans/FS112-unit-arc-half.md item E5, line 549"
+   },
+   "status": "gap",
+   "line": 17,
+   "address": "plans/STUB-unit-arc-half.md, line 17",
+   "grade_address": "CLAUDE.md § Paths forward, ranked item 1, line 356",
+   "also": []
+  },
+  {
+   "id": "UNB",
+   "label": "unbounded complexity (door B's negation)",
+   "role": "question",
+   "plain": "A family of near-colourings of unbounded complexity whose holes vanish while their junction scales shrink to 0 — W's claim itself, if FS-111 fails.",
+   "src": {
+    "file": "plans/STUB-reg-scale.md"
+   },
+   "quote": "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.",
+   "grade_src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "grade": "both claims GAP",
+   "theta": 164,
+   "r": 300,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "gap",
+   "line": 41,
+   "address": "plans/STUB-reg-scale.md, line 41",
+   "grade_address": "plans/STUB-regularity-wall.md, line 4",
+   "also": []
+  },
+  {
+   "id": "STRIP",
+   "label": "the six-coloured strip",
+   "role": "positive",
+   "plain": "Axenovich et al. 2014, Thm 4.2: a tight six-coloured strip of height √15/2 + √3 ≈ 3.668, its tiles bounded by unit arcs. Rebuilt twice blind and accepted by two exact checkers (FS-112).",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "33"
+   },
+   "quote": "CAL-STRIP robust — two blind rebuilds from the printed words, two exact checkers, the same object and verdict",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "33"
+   },
+   "grade": "two exact checkers, the same object and verdict",
+   "theta": 128,
+   "r": 375,
+   "sector": "six-up",
+   "tier": 2,
+   "also": [
+    {
+     "src": {
+      "file": "plans/STUB-unit-arc-half.md"
+     },
+     "quote": "One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured strip of height √15/2 + √3 (≈ 3.668)",
+     "address": "plans/STUB-unit-arc-half.md, line 10"
+    }
+   ],
+   "status": "cert",
+   "line": 42,
+   "address": "plans/FS112-close-inventory.md item 33, line 42",
+   "grade_address": "plans/FS112-close-inventory.md item 33, line 42"
+  },
+  {
+   "id": "DISK",
+   "label": "the six-tiled disk",
+   "role": "positive",
+   "plain": "Polymath16's six-tiled disk (Fig. 10), transcribed and rebuilt exactly; its largest vertex-centred disc has radius φ, attained.",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "quote": "CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece), two exact checkers ACCEPT 71/71",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "grade": "two exact checkers ACCEPT 71/71",
+   "theta": 144,
+   "r": 375,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "cert",
+   "line": 62,
+   "address": "plans/FS112-close-inventory.md item 53, line 62",
+   "grade_address": "plans/FS112-close-inventory.md item 53, line 62",
+   "also": []
+  },
+  {
+   "id": "STOP",
+   "label": "both stop at a pinned corner",
+   "role": "nogo",
+   "plain": "The strip and the disk stop for the same reason: at the unsaved second seam of a complementary three-colour pair — a 'pinned corner'.",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "quote": "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "grade": "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
+   "theta": 130,
+   "r": 450,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "hand-2b",
+   "line": 62,
+   "address": "plans/FS112-close-inventory.md item 53, line 62",
+   "grade_address": "plans/FS112-close-inventory.md item 53, line 62",
+   "also": []
+  },
+  {
+   "id": "Y3STOP",
+   "label": "pinned corners hold",
+   "role": "nogo",
+   "plain": "Round 3: both ways past the pinned corners close as derived obstructions, with no escape. Under blind verification tonight (FS112-YB3).",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "56"
+   },
+   "quote": "both pinned-corner GAPs close as derived obstructions, no escape",
+   "grade_src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "56"
+   },
+   "grade": "[exact + hand]",
+   "theta": 146,
+   "r": 450,
+   "sector": "six-up",
+   "tier": 2,
+   "verifying": true,
+   "closing": true,
+   "status": "hand-1",
+   "line": 65,
+   "address": "plans/FS112-close-inventory.md item 56, line 65",
+   "grade_address": "plans/FS112-close-inventory.md item 56, line 65",
+   "also": []
+  },
+  {
+   "id": "PARTS",
+   "label": "Parts's six-tiling",
+   "role": "positive",
+   "plain": "The best printed six-tiling leaves holes of density 1.43·10⁻⁴ — small, but it has no parameter that drives them to 0.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)",
+   "grade_src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "grade": "LOCAL over Parts [external]",
+   "theta": 168,
+   "r": 375,
+   "sector": "six-up",
+   "tier": 2,
+   "status": "external",
+   "line": 176,
+   "address": "LEDGER.md row 131, line 176",
+   "grade_address": "LEDGER.md row 131, line 176",
+   "also": []
+  },
+  {
+   "id": "FS44",
+   "label": "a CP five-colouring",
+   "role": "question",
+   "plain": "The shape of a stationary five-colouring of the plane — row 131 at five colours: lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "6"
+   },
+   "quote": "the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)",
+   "grade_src": {
+    "file": "plans/STUB-fifth-colour-structure.md"
+   },
+   "grade": "FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)",
+   "theta": 218,
+   "r": 222,
+   "sector": "five",
+   "tier": 1,
+   "words": {
+    "src": {
+     "file": "CLAUDE.md",
+     "section": "### Paths forward, ranked",
+     "row": "6"
+    },
+    "quote": "soft as to truth (the bold form predicts no)",
+    "address": "CLAUDE.md § Paths forward, ranked item 6, line 361"
+   },
+   "status": "gap",
+   "line": 361,
+   "address": "CLAUDE.md § Paths forward, ranked item 6, line 361",
+   "grade_address": "plans/STUB-fifth-colour-structure.md, line 1",
+   "also": []
+  }
+ ],
+ "edges": [
+  {
+   "source": "LB7",
+   "target": "A7",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "UB7",
+   "target": "A7",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "LB6",
+   "target": "A6",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "UB6",
+   "target": "A6",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "LB5",
+   "target": "A5",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "UB5",
+   "target": "A5",
+   "kind": "half",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "χ(ℝ²) ∈ {5, 6, 7}",
+   "address": "CLAUDE.md § Where the problem stands, line 216"
+  },
+  {
+   "source": "DEGREY",
+   "target": "LB5",
+   "kind": "rests",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "quote": "the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph",
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 12"
+  },
+  {
+   "source": "SEVEN",
+   "target": "UB7",
+   "kind": "rests",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
+   },
+   "quote": "the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring",
+   "address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 15"
+  },
+  {
+   "source": "EL",
+   "target": "MR",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "120"
+   },
+   "quote": "the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3",
+   "address": "LEDGER.md row 120, line 165"
+  },
+  {
+   "source": "MR",
+   "target": "R128",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "128"
+   },
+   "quote": "The collapse: given MR, the plane's number is a field's.",
+   "address": "LEDGER.md row 128, line 173"
+  },
+  {
+   "source": "MR",
+   "target": "R121",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "121"
+   },
+   "quote": "MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at S = ∅ gives ≥ 5",
+   "address": "LEDGER.md row 121, line 166"
+  },
+  {
+   "source": "MR",
+   "target": "R123",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "123"
+   },
+   "quote": "With MR (row 120) that gives five",
+   "address": "LEDGER.md row 123, line 168"
+  },
+  {
+   "source": "MR",
+   "target": "R125",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "Given MR: χ(ℚ(√167)²) ≤ 5 ⟺ Y = UD(ℝ²) × G₂₃ × G₄₃ has a cut-and-project five-colouring",
+   "bus": true,
+   "address": "LEDGER.md row 125, line 170"
+  },
+  {
+   "source": "R128",
+   "target": "LB7",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR",
+   "address": "CLAUDE.md § The aim, line 102"
+  },
+  {
+   "source": "R130",
+   "target": "LB7",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "130"
+   },
+   "quote": "Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)",
+   "address": "LEDGER.md row 130, line 175"
+  },
+  {
+   "source": "M7",
+   "target": "LB7",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR",
+   "address": "CLAUDE.md § The aim, line 102"
+  },
+  {
+   "source": "R128",
+   "target": "LB6",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "3"
+   },
+   "quote": "decisive: given MR it is rung D (row 128)",
+   "bus": true,
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 358"
+  },
+  {
+   "source": "R130",
+   "target": "R131",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "its first equivalence is row 130's",
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "R121",
+   "target": "LB5",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
+   "address": "CLAUDE.md § Where the problem stands, line 218"
+  },
+  {
+   "source": "SUB",
+   "target": "LB5",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
+   "address": "CLAUDE.md § Where the problem stands, line 218"
+  },
+  {
+   "source": "R99",
+   "target": "R123",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "123"
+   },
+   "quote": "below five it is row 99",
+   "address": "LEDGER.md row 123, line 168"
+  },
+  {
+   "source": "R52",
+   "target": "R123",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "123"
+   },
+   "quote": "the upper half is the residue map at the place realising L(F) (row 52)",
+   "address": "LEDGER.md row 123, line 168"
+  },
+  {
+   "source": "LG",
+   "target": "A7",
+   "kind": "predicts",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The local–global conjecture"
+   },
+   "quote": "and its bold form is χ(ℝ²) = 7",
+   "address": "CLAUDE.md § The local–global conjecture, line 144"
+  },
+  {
+   "source": "R127",
+   "target": "R123",
+   "kind": "formalizes",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "127"
+   },
+   "quote": "min(L(F), 5) ≤ χ(F²) for every real number field (SpectralChain.min_localBound_five_le_chromaticNumber)",
+   "address": "LEDGER.md row 127, line 172"
+  },
+  {
+   "source": "FS101",
+   "target": "R127",
+   "kind": "formalizes",
+   "src": {
+    "file": "plans/STUB-main-clause-five-kernel.md"
+   },
+   "quote": "Status: first slot done (X11K3, 2026-09-26; LEDGER.md row 127",
+   "address": "plans/STUB-main-clause-five-kernel.md, line 19"
+  },
+  {
+   "source": "FS113",
+   "target": "MR",
+   "kind": "formalizes",
+   "src": {
+    "file": "plans/STUB-mr-in-lean.md"
+   },
+   "quote": "MR(F) as LEDGER.md row 120 states it",
+   "address": "plans/STUB-mr-in-lean.md, line 11"
+  },
+  {
+   "source": "LEANWALL",
+   "target": "R128",
+   "kind": "formalizes",
+   "src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "quote": "the collapse (row 128), the measurable chain (row 130, link 2)",
+   "address": "plans/STUB-regularity-wall.md, line 124"
+  },
+  {
+   "source": "LEANWALL",
+   "target": "R131",
+   "kind": "formalizes",
+   "src": {
+    "file": "plans/STUB-regularity-wall.md"
+   },
+   "quote": "the collapse (row 128), the measurable chain (row 130, link 2)",
+   "address": "plans/STUB-regularity-wall.md, line 124"
+  },
+  {
+   "source": "R131",
+   "target": "RR",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form)",
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "RR",
+   "target": "M7",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)",
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "TSMNO",
+   "target": "M7",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "2"
+   },
+   "quote": "decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)",
+   "address": "CLAUDE.md § Paths forward, ranked item 2, line 357"
+  },
+  {
+   "source": "WEQK",
+   "target": "M7",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "So stability at six is two questions: does a tight six-map with only tangent, bowtie or cusp seams exist",
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "FS111",
+   "target": "M7",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "2"
+   },
+   "quote": "decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)",
+   "address": "CLAUDE.md § Paths forward, ranked item 2, line 357"
+  },
+  {
+   "source": "NG131",
+   "target": "M7",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "Two no-gos for proofs: an argument counting only holes met by unit circles or bicycles proves at most 1 − µ₆(ε) ≳ ε",
+   "label": "hole-counting proofs cannot reach it",
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "R134",
+   "target": "TSMNO",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "under Condition 5 none does (row 134); with unit arcs, open.",
+   "address": "CLAUDE.md § Where the problem stands, line 326"
+  },
+  {
+   "source": "UANO",
+   "target": "TSMNO",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Where the problem stands"
+   },
+   "quote": "under Condition 5 none does (row 134); with unit arcs, open.",
+   "address": "CLAUDE.md § Where the problem stands, line 326"
+  },
+  {
+   "source": "R132",
+   "target": "R134",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "134"
+   },
+   "quote": "S–V Cor. 1, almost everywhere for curved cubic maps with no d = 2 exception, refutes it",
+   "address": "LEDGER.md row 134, line 179"
+  },
+  {
+   "source": "R134",
+   "target": "N3BASE",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "row": "N3-BASE"
+   },
+   "quote": "hand, one mind, over row 134's base",
+   "address": "plans/FS112-N-proof.md item N3-BASE, line 607"
+  },
+  {
+   "source": "N3BASE",
+   "target": "N3DENSE3",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "section": "## Stage N3-3 — SAVED: (a)"
+   },
+   "quote": "N3-DENSE3 [hand, one mind, over N3-BASE, NB2-DISC1 (two minds) and N2-TOWARD (two)]",
+   "address": "plans/FS112-N-proof.md § Stage N3-3 — SAVED: (a), line 811"
+  },
+  {
+   "source": "N3DENSE3",
+   "target": "GSTEP",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "60"
+   },
+   "quote": "so milestone (1) takes DENSE3's form (item 59)",
+   "address": "plans/FS112-close-inventory.md item 60, line 69"
+  },
+  {
+   "source": "GSTEP",
+   "target": "UANO",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "63"
+   },
+   "quote": "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
+   "address": "plans/FS112-close-inventory.md item 63, line 72"
+  },
+  {
+   "source": "SRAY",
+   "target": "UANO",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "63"
+   },
+   "quote": "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
+   "address": "plans/FS112-close-inventory.md item 63, line 72"
+  },
+  {
+   "source": "N3PER",
+   "target": "SRAY",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-N-proof.md",
+    "section": "## Stage N3-4 — SAVED: R2"
+   },
+   "quote": "for periodic maps it cannot (N3-PER, N3-LEN)",
+   "label": "closes the periodic case",
+   "address": "plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 881"
+  },
+  {
+   "source": "N3END",
+   "target": "SRAY",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "59"
+   },
+   "quote": "with Y3-END-NEEDS and N3-END as its candidate route",
+   "label": "candidate route",
+   "address": "plans/FS112-close-inventory.md item 59, line 68"
+  },
+  {
+   "source": "Y3END",
+   "target": "SRAY",
+   "kind": "rests",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "59"
+   },
+   "quote": "with Y3-END-NEEDS and N3-END as its candidate route",
+   "label": "candidate route",
+   "address": "plans/FS112-close-inventory.md item 59, line 68"
+  },
+  {
+   "source": "FS104",
+   "target": "LB6",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "3"
+   },
+   "quote": "decisive: given MR it is rung D (row 128)",
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 358"
+  },
+  {
+   "source": "FS80",
+   "target": "FS104",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "7"
+   },
+   "quote": "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR",
+   "address": "CLAUDE.md § Paths forward, ranked item 7, line 362"
+  },
+  {
+   "source": "R129",
+   "target": "LB6",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "129"
+   },
+   "quote": "1/α_loc ≤ 4.36: that route never gives six",
+   "label": "one class at a time never gives six",
+   "address": "LEDGER.md row 129, line 174"
+  },
+  {
+   "source": "R125",
+   "target": "FS59",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
+   "address": "LEDGER.md row 125, line 170"
+  },
+  {
+   "source": "FS104",
+   "target": "FS59",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
+   "address": "LEDGER.md row 125, line 170"
+  },
+  {
+   "source": "PL",
+   "target": "FS59",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "125"
+   },
+   "quote": "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6",
+   "address": "LEDGER.md row 125, line 170"
+  },
+  {
+   "source": "FS59",
+   "target": "LB6",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "12"
+   },
+   "quote": "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104",
+   "address": "CLAUDE.md § Paths forward, ranked item 12, line 367"
+  },
+  {
+   "source": "SUB",
+   "target": "LB6",
+   "kind": "rests",
+   "src": {
+    "file": "Proofs/HadwigerNelson/Bridge.lean",
+    "decl": "chromaticNumber_planeOver_le_plane"
+   },
+   "quote": "The plane over any real subfield needs at most as many colours as the plane.",
+   "faint": true,
+   "bus": true,
+   "address": "Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane), line 187"
+  },
+  {
+   "source": "R119",
+   "target": "FS59",
+   "kind": "context",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "119"
+   },
+   "quote": "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six predicted; G59)",
+   "label": "the gap's kernel floor",
+   "address": "LEDGER.md row 119, line 164"
+  },
+  {
+   "source": "LINK2",
+   "target": "UB6",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Upper bounds need no MR.",
+   "address": "CLAUDE.md § The aim, line 86"
+  },
+  {
+   "source": "LINK2",
+   "target": "UB5",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Upper bounds need no MR.",
+   "address": "CLAUDE.md § The aim, line 86"
+  },
+  {
+   "source": "R131",
+   "target": "UB6",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1",
+   "bus": true,
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "R131",
+   "target": "UB5",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1",
+   "bus": true,
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "HOLES6",
+   "target": "UB6",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "The step from a refutation to χ(ℝ²) ≤ 6 is link 2's argument",
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "TSMYES",
+   "target": "HOLES6",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists",
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "WEQK",
+   "target": "HOLES6",
+   "kind": "rests",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists",
+   "bus": true,
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "UNB",
+   "target": "HOLES6",
+   "kind": "rests",
+   "src": {
+    "file": "plans/STUB-reg-scale.md"
+   },
+   "quote": "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.",
+   "address": "plans/STUB-reg-scale.md, line 41"
+  },
+  {
+   "source": "STRIP",
+   "target": "TSMYES",
+   "kind": "partial",
+   "src": {
+    "file": "plans/STUB-unit-arc-half.md"
+   },
+   "quote": "One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured strip of height √15/2 + √3 (≈ 3.668)",
+   "label": "a tight fragment, not the plane",
+   "address": "plans/STUB-unit-arc-half.md, line 10"
+  },
+  {
+   "source": "DISK",
+   "target": "TSMYES",
+   "kind": "partial",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "quote": "CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece)",
+   "label": "a tight fragment, not the plane",
+   "address": "plans/FS112-close-inventory.md item 53, line 62"
+  },
+  {
+   "source": "PARTS",
+   "target": "HOLES6",
+   "kind": "partial",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "131"
+   },
+   "quote": "the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)",
+   "label": "small holes, not vanishing",
+   "address": "LEDGER.md row 131, line 176"
+  },
+  {
+   "source": "STOP",
+   "target": "TSMYES",
+   "kind": "blocks",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "53"
+   },
+   "quote": "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
+   "label": "the held positives stop at a pinned corner",
+   "address": "plans/FS112-close-inventory.md item 53, line 62"
+  },
+  {
+   "source": "Y3STOP",
+   "target": "TSMYES",
+   "kind": "blocks",
+   "src": {
+    "file": "plans/FS112-close-inventory.md",
+    "row": "56"
+   },
+   "quote": "both pinned-corner GAPs close as derived obstructions, no escape",
+   "label": "no way past the pinned corners (under verification)",
+   "address": "plans/FS112-close-inventory.md item 56, line 65"
+  },
+  {
+   "source": "WPOLY",
+   "target": "TSMYES",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "133"
+   },
+   "quote": "polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)",
+   "label": "a YES cannot be polygonal",
+   "address": "LEDGER.md row 133, line 178"
+  },
+  {
+   "source": "R134",
+   "target": "TSMYES",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "134"
+   },
+   "quote": "no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring",
+   "label": "a YES must use unit arcs",
+   "bus": true,
+   "address": "LEDGER.md row 134, line 179"
+  },
+  {
+   "source": "R132",
+   "target": "TSMYES",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "quote": "polygonal colourings need seven, and so do locally finite tilings by convex polygons",
+   "label": "a YES cannot be regular",
+   "bus": true,
+   "faint": true,
+   "address": "LEDGER.md row 132, line 177"
+  },
+  {
+   "source": "FS44",
+   "target": "UB5",
+   "kind": "rests",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Paths forward, ranked",
+    "row": "6"
+   },
+   "quote": "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)",
+   "address": "CLAUDE.md § Paths forward, ranked item 6, line 361"
+  },
+  {
+   "source": "MAPS6",
+   "target": "FS44",
+   "kind": "blocks",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "132"
+   },
+   "quote": "maps need six modulo Townsend's simplification (c)",
+   "label": "a five cannot be a map",
+   "address": "LEDGER.md row 132, line 177"
+  },
+  {
+   "source": "R132",
+   "target": "FS44",
+   "kind": "blocks",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The aim"
+   },
+   "quote": "Regular colourings need seven, verified and almost everywhere",
+   "label": "a five cannot be regular",
+   "bus": true,
+   "faint": true,
+   "address": "CLAUDE.md § The aim, line 92"
+  }
+ ],
+ "routes": [
+  {
+   "id": "interval",
+   "name": "The classical interval, in the kernel",
+   "answer": "5–7",
+   "half": "both",
+   "links": [
+    "DEGREY",
+    "SEVEN",
+    "LB5",
+    "UB7"
+   ],
+   "reaches": [
+    "LB5",
+    "UB7"
+   ],
+   "about": "Both ends of 5 ≤ χ(ℝ²) ≤ 7, checked by Lean's kernel on the standard three axioms (row 33). Not new mathematics: the ground every route stands on."
+  },
+  {
+   "id": "alg5",
+   "name": "Five, algebraically, through measure rigidity",
+   "answer": 5,
+   "half": "lower",
+   "links": [
+    "EL",
+    "MR",
+    "R121",
+    "SUB"
+   ],
+   "reaches": [
+    "LB5"
+   ],
+   "about": "χ(ℚ(√47)²) = 5 gives χ(ℝ²) ≥ 5 with no witness object (rows 120–121). A second proof of a held bound — it moves no value, and its publication waits on MR in Lean."
+  },
+  {
+   "id": "wall7",
+   "name": "The regularity wall, toward seven",
+   "answer": 7,
+   "half": "lower",
+   "links": [
+    "EL",
+    "MR",
+    "R128",
+    "R130",
+    "R131",
+    "RR",
+    "WEQK",
+    "R132",
+    "R134",
+    "N3BASE",
+    "N3DENSE3",
+    "N3PER",
+    "GSTEP",
+    "SRAY",
+    "UANO",
+    "FS111",
+    "SEVEN",
+    "UB7"
+   ],
+   "reaches": [
+    "LB7",
+    "UB7"
+   ],
+   "about": "Given MR the plane's number is its measurable number (rows 128, 130); that is seven iff vanishing holes cannot save a colour (row 131); R's reduction splits it into door (A), a tight six-map's non-existence, and door (B), the cone scale. Door (A) under Condition 5 is closed (row 134); with unit arcs FS-112 reduced it to two gaps, the global step and the stuck ray."
+  },
+  {
+   "id": "yes6",
+   "name": "The YES side: a tight six-map",
+   "answer": 6,
+   "half": "upper",
+   "links": [
+    "LINK2",
+    "R131",
+    "WEQK",
+    "TSMYES"
+   ],
+   "reaches": [
+    "UB6"
+   ],
+   "about": "A tight six-map at bounded complexity gives vanishing holes (W-EQ-K), hence χ(ℝ²) ≤ 6 with no MR. The held positives (the strip, the disk) are tight fragments that stop at a pinned corner."
+  },
+  {
+   "id": "yes6b",
+   "name": "The YES side at unbounded complexity",
+   "answer": 6,
+   "half": "upper",
+   "links": [
+    "LINK2",
+    "R131",
+    "UNB"
+   ],
+   "reaches": [
+    "UB6"
+   ],
+   "about": "A family of near-colourings whose holes vanish while their junctions shrink — door (B)'s negation, W's claim itself."
+  },
+  {
+   "id": "cp6",
+   "name": "Six from below: χ_CP(ℝ²) ≥ 6",
+   "answer": 6,
+   "half": "lower",
+   "links": [
+    "EL",
+    "MR",
+    "R128",
+    "FS104"
+   ],
+   "reaches": [
+    "LB6"
+   ],
+   "about": "Given MR, χ(ℝ²) ≥ 6 is χ_CP(ℝ²) ≥ 6 (FS-104). One colour class at a time can never give it (row 129)."
+  },
+  {
+   "id": "win6",
+   "name": "Six from below by an averaged certificate",
+   "answer": 6,
+   "half": "lower",
+   "links": [
+    "EL",
+    "MR",
+    "R128",
+    "FS80"
+   ],
+   "reaches": [
+    "LB6"
+   ],
+   "about": "A window-frequency certificate at five colours on the real plane would give χ_CP(ℝ²) ≥ 6 (FS-80)."
+  },
+  {
+   "id": "q167",
+   "name": "Six from below through ℚ(√167)",
+   "answer": 6,
+   "half": "lower",
+   "links": [
+    "EL",
+    "MR",
+    "R125",
+    "FS104",
+    "PL",
+    "SUB"
+   ],
+   "reaches": [
+    "LB6"
+   ],
+   "about": "Six at ℚ(√167) gives χ(ℝ²) ≥ 6 with no MR, but given MR it contains χ_CP(ℝ²) ≥ 6 as a conjunct (row 125): never cheaper than FS-104."
+  },
+  {
+   "id": "five",
+   "name": "Exactly five: a stationary five-colouring",
+   "answer": 5,
+   "half": "upper",
+   "links": [
+    "LINK2",
+    "R131",
+    "FS44"
+   ],
+   "reaches": [
+    "UB5"
+   ],
+   "about": "Row 131 at five colours: a CP five-colouring of the plane gives χ(ℝ²) = 5 with no MR (FS-44). It cannot be regular or a map."
+  }
+ ],
+ "credence": [
+  {
+   "status": "kernel",
+   "p": 1.0,
+   "why": "Checked by Lean's kernel: zero bits. Distance to publication counts it as done.",
+   "src": null,
+   "quote": null
+  },
+  {
+   "status": "cert",
+   "p": 0.99,
+   "why": "An exact object accepted by exact checkers; here each was rebuilt twice, blind.",
+   "src": null,
+   "quote": null
+  },
+  {
+   "status": "hand-2b",
+   "p": 0.95,
+   "why": "A hand proof checked by a second mind that did not see the first. The theorem audit found one hand proof wrong among 184, and grades under-stated four times for every over-statement — the measured record is better than this default.",
+   "src": {
+    "file": "LEDGER.md",
+    "row": "77"
+   },
+   "quote": "184 hand, 23 derived, 31 tools, 2 cert",
+   "address": "LEDGER.md row 77, line 122"
+  },
+  {
+   "status": "hand-2",
+   "p": 0.9,
+   "why": "A hand proof checked by a second mind that saw it. Lower than blind: blind verifiers still find a divergence of truth in about 0.4 of milestones (FS-112's registration, from FS-110's rate).",
+   "src": {
+    "file": "plans/FS112-unit-arc-half.md",
+    "row": "E16"
+   },
+   "quote": "a blind verifier finds a divergence of truth",
+   "address": "plans/FS112-unit-arc-half.md item E16, line 561"
+  },
+  {
+   "status": "hand-1",
+   "p": 0.8,
+   "why": "One mind. Includes round-3 claims under blind verification tonight.",
+   "src": null,
+   "quote": null
+  },
+  {
+   "status": "external",
+   "p": 0.9,
+   "why": "Claimed in print and not re-checked here (Einsiedler–Lindenstrauss's Thm 1.3; Parts's tiling).",
+   "src": null,
+   "quote": null
+  },
+  {
+   "status": "reading",
+   "p": 0.5,
+   "why": "Believed, with a killing test. The local–global conjecture is drawn but counted in no route.",
+   "src": null,
+   "quote": null
+  },
+  {
+   "status": "gap-step",
+   "p": 0.3,
+   "why": "A missing step that a reduction has named. Anchor: FS-112 registered a NO of its whole question within one phase at 0.3.",
+   "src": {
+    "file": "plans/FS112-unit-arc-half.md",
+    "row": "E14"
+   },
+   "quote": "a NO of Q-full at one mind with every GAP named, within P1",
+   "address": "plans/FS112-unit-arc-half.md item E14, line 558"
+  },
+  {
+   "status": "gap-question",
+   "p": 0.1,
+   "why": "An open question not yet reduced to named steps (FS-104, FS-80, FS-44, PL, door B's negation). Lower than a named step because it hides steps nobody has counted. A stated default; no source prices it.",
+   "src": null,
+   "quote": null
+  }
+ ],
+ "notes": [
+  {
+   "id": "instrument",
+   "text": "A credence is an instrument, registered so it can be scored at the close — never a reason to shrink an aim or to stop.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Counter-priors — read before pricing anything"
+   },
+   "quote": "A registered probability is an instrument for G21, scored at the close. It is never a reason to shrink an aim or to stop.",
+   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 136"
+  },
+  {
+   "id": "belief",
+   "text": "A belief about the answer is not evidence for it. The conjecture's bold form predicts seven; the page draws it and counts it in no route.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The local–global conjecture"
+   },
+   "quote": "Believing the answer is seven is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64).",
+   "address": "CLAUDE.md § The local–global conjecture, line 152"
+  },
+  {
+   "id": "rank",
+   "text": "Routes are ranked by bearing on the answer, never by difficulty, length or formalization effort.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### Counter-priors — read before pricing anything"
+   },
+   "quote": "Rank a route by its bearing on the answer, never by its difficulty, its length or its formalization effort.",
+   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 135"
+  },
+  {
+   "id": "publish",
+   "text": "Nothing is published before it is formalized in Lean, in full, with no declared purchases.",
+   "src": {
+    "file": "CLAUDE.md",
+    "section": "### The local–global conjecture"
+   },
+   "quote": "Nothing is published before it is formalized in Lean, in full, with no declared purchases",
+   "address": "CLAUDE.md § The local–global conjecture, line 166"
+  }
+ ]
+}

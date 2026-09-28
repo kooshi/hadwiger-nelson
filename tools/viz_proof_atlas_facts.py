@@ -1,0 +1,535 @@
+#!/usr/bin/env python3
+"""Write the Proof Atlas's fact table, data/viz/proof-atlas/facts.json (job VIZ-ATLAS, 2026-09-27).
+
+Every node and edge is hand-authored here with a verbatim quote and the address it was read from; the grade shown on the page is the
+source's own words (`grade`), folded to a page status by `viz_proof_atlas_common.fold` — this file never types a status the source's
+words do not fold to (the builder recomputes it; `tools/viz_proof_atlas_check.py` re-reads every quote from its source).
+
+  python3 tools/viz_proof_atlas_facts.py        # writes the table and prints a layout lint (label overlaps), then run the checker
+"""
+import json, math, pathlib, sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from viz_proof_atlas_common import fold, locate, address_str, norm, text  # noqa: E402
+
+OUT = ROOT / "data/viz/proof-atlas/facts.json"
+
+# ---------------------------------------------------------------- source addresses used more than once
+L = lambda n: {"file": "LEDGER.md", "row": str(n)}                                            # noqa: E731
+AIM = {"file": "CLAUDE.md", "section": "### The aim"}
+STANDS = {"file": "CLAUDE.md", "section": "### Where the problem stands"}
+MISSION = {"file": "CLAUDE.md", "section": "## The mission"}
+NOTATION = {"file": "CLAUDE.md", "section": "## Notation"}
+LGC = {"file": "CLAUDE.md", "section": "### The local–global conjecture"}
+PRIORS = {"file": "CLAUDE.md", "section": "### Counter-priors — read before pricing anything"}
+PF = lambda n: {"file": "CLAUDE.md", "section": "### Paths forward, ranked", "row": str(n)}  # noqa: E731
+INTERVAL = {"file": "Proofs/HadwigerNelson/Instances/Interval.lean"}
+INV = lambda n: {"file": "plans/FS112-close-inventory.md", "row": str(n)}                    # noqa: E731
+NTAB = lambda k: {"file": "plans/FS112-N-proof.md", "row": k}                                # noqa: E731
+PLAN112 = lambda k: {"file": "plans/FS112-unit-arc-half.md", "row": k}                       # noqa: E731
+STUB = lambda f: {"file": f"plans/{f}"}                                                      # noqa: E731
+OPEN_WORDS = (INTERVAL, "the exact value inside it remains open")   # the bound is not held: the kernel's own docstring says so
+BOTH_GAP = (STUB("STUB-regularity-wall.md"), "both claims GAP")      # FS-107's close: R's claim and W's claim, each a GAP
+N3_TRUE = (INV(60), "every N3 statement TRUE — two minds, one blind")
+
+NODES, EDGES = [], []
+
+
+def N(id, label, role, plain, src, quote, grade=None, *, at, sector, tier=2, **kw):
+    """One node. `grade` is (address, verbatim words) — default: the quote's own address; '@lean' for a kernel declaration."""
+    g_src, g_words = grade if isinstance(grade, tuple) else (src, grade)
+    NODES.append(dict(id=id, label=label, role=role, plain=plain, src=src, quote=quote, grade_src=g_src, grade=g_words,
+                      theta=at[0], r=at[1], sector=sector, tier=tier, **kw))
+
+
+def E(a, b, kind, src, quote, **kw):
+    EDGES.append(dict(source=a, target=b, kind=kind, src=src, quote=quote, **kw))
+
+
+# ================================================================ the goal: three destinations, six half-answers
+for aid, v, th in (("A7", 7, 0), ("A6", 6, 120), ("A5", 5, 240)):
+    N(aid, f"χ(ℝ²) = {v}", "answer", f"The answer {v}: the plane needs exactly {v} colours. Decided only when both halves hold — "
+      f"a lower bound of {v} and an upper bound of {v}.", STANDS, "χ(ℝ²) ∈ {5, 6, 7}", (MISSION, "χ(ℝ²) decided | open"),
+      at=(th, 62), sector="centre", tier=0, answer=v)
+
+N("LB5", "χ(ℝ²) ≥ 5", "bound", "Five colours are needed. Held in the kernel: de Grey's graph cannot be four-coloured.",
+  {"file": "Proofs/HadwigerNelson/Instances/Interval.lean", "decl": "chromaticNumber_plane_interval"},
+  "5 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber", "@lean", at=(260, 140), sector="five", tier=0, answer=5,
+  also=[(L(33), "chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7")])
+N("UB7", "χ(ℝ²) ≤ 7", "bound", "Seven colours always suffice. Held in the kernel: a brick colouring of the plane by seven colours.",
+  {"file": "Proofs/HadwigerNelson/Instances/Interval.lean", "decl": "chromaticNumber_plane_interval"},
+  "(unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7", "@lean", at=(344, 140), sector="seven", tier=0, answer=7,
+  also=[(L(33), "chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7")])
+N("LB7", "χ(ℝ²) ≥ 7", "conclusion", "Seven colours are needed. Reached by the regularity wall: given measure rigidity, the plane's number "
+  "is its measurable number, and the measurable number is seven if vanishing holes cannot save a colour.", AIM,
+  "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR", OPEN_WORDS, at=(16, 140), sector="seven", tier=0, answer=7)
+N("LB6", "χ(ℝ²) ≥ 6", "conclusion", "Six colours are needed — the $1,000 question Soifer prints as Graham's.", STUB("STUB-cp-plane-six.md"),
+  "The Ronald L. Graham New $1,000 Problem. Prove or disprove the existence of a 6-chromatic unit-distance graph.", OPEN_WORDS,
+  at=(100, 140), sector="six-low", tier=0, answer=6)
+N("UB6", "χ(ℝ²) ≤ 6", "conclusion", "Six colours suffice: the first move of the upper bound since 1950, and it would need no measure "
+  "rigidity.", AIM, "Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR", OPEN_WORDS,
+  at=(140, 140), sector="six-up", tier=0, answer=6)
+N("UB5", "χ(ℝ²) ≤ 5", "conclusion", "Five colours suffice — the answer five, with no measure rigidity.", AIM,
+  "Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR", OPEN_WORDS,
+  at=(220, 140), sector="five", tier=0, answer=5)
+
+# ================================================================ the classical interval (kernel)
+N("DEGREY", "de Grey's graph", "held", "De Grey's 1581-vertex unit-distance graph cannot be four-coloured; its geometry is exact and its "
+  "refutation an LRAT certificate the kernel replays (M06–M09).", INTERVAL,
+  "the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph", "@lean", at=(250, 222), sector="five",
+  lean={"file": "Proofs/HadwigerNelson/Instances/DeGrey/Bound.lean", "decl": "chromaticNumber_plane_ge_five"})
+N("SEVEN", "the seven-colouring", "held", "A brick colouring of the plane by seven colours, checked by one kernel `decide` (M36). "
+  "Classical; ours is the certificate.", INTERVAL, "the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring",
+  "@lean", at=(338, 222), sector="seven",
+  lean={"file": "Proofs/HadwigerNelson/Instances/Seven.lean", "decl": "chromaticNumber_plane_le_seven"},
+  also=[(L(33), "The colouring is classical; ours is the certificate.")])
+
+# ================================================================ the measure-rigidity engine (upper left)
+N("EL", "Einsiedler–Lindenstrauss", "external", "A published rigidity theorem for commuting automorphisms of solenoids (positive "
+  "entropy). Measure rigidity uses it by statement; its cited machinery is unread here.", L(120),
+  "the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3, from which its Thm 1.2 follows",
+  "EL2021 Thm 1.3 (external, published)", at=(294, 490), sector="engine")
+N("MR", "measure rigidity (MR)", "held", "Every measure on the dual of the unit-vector ring that the unit-vector group preserves, and that "
+  "gives no mass to the archimedean part, is a multiple of Haar measure. The hinge of every result above four at a field, and of the "
+  "collapse.", L(120), "every U_F-invariant finite positive measure on R̂ with τ(E) = 0 is a multiple of Haar measure (MR(F))",
+  "PE-2 two derivations blind to each other (X02D, X02V)", at=(302, 410), sector="engine", tier=1)
+N("R128", "the collapse", "held", "Given MR, at a totally real field whose every stable place mixes at six colours (ℚ(√635087), de "
+  "Grey's field), the field's plane, the real plane and the stationary random colourings all need the same number of colours.",
+  L(128), "The collapse: given MR, the plane's number is a field's.",
+  "the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2)", at=(314, 330), sector="engine",
+  tier=1)
+N("R130", "χ_CP = χ_m⁰", "held", "With no MR, the stationary number equals the measurable number: the fewest colours of a measurable "
+  "colouring proper at almost every unit pair. Given MR, that is Hadwiger–Nelson itself.", L(130), "Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)",
+  "M1, M1b, M1c, M-FREE, M-AE3 and M-Q4 two derivations (FS103-M; FS103-N blind to M's record)", at=(326, 262), sector="engine",
+  tier=1)
+
+# ================================================================ the algebraic lower bound and the local–global structure (left)
+N("R121", "χ(ℚ(√47)²) = 5", "held", "The plane over ℚ(√47) needs exactly five colours — the cheapest exposed five of the local–global "
+  "conjecture, with no finite graph exhibited. Answers Moorhouse's named question (2010).", L(121),
+  "χ(ℚ(√47)²) = 5: the local–global conjecture's cheapest exposed five-clause is met",
+  "the headline rule met (every half two blind minds, SP-Cor checked blind)", at=(272, 300), sector="five", tier=1)
+N("SUB", "a subfield's plane", "held", "The plane over any real subfield is a subgraph of the plane, so it needs no more colours: a field "
+  "that needs five makes the plane need five.", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
+  "The plane over any real subfield needs at most as many colours as the plane.", "@lean", at=(268, 215), sector="five",
+  lean={"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
+  also=[(STANDS, "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5")])
+N("R123", "main clause through five", "held", "The local–global conjecture holds whenever its local bound is at most five: every real "
+  "number field's plane needs min(L(F), 5) colours, and exactly L(F) when L(F) ≤ 5.", L(123),
+  "for every real number field F, χ(F²) ≥ min(L(F), 5), so χ(F²) = L(F) whenever L(F) ≤ 5",
+  "CLS three derivations — X23D and X26B blind to each other in full", at=(286, 330), sector="lg")
+N("R99", "L ≤ 4: three and four", "held", "Three and four colours obey the local–global conjecture over every real number field.", L(99),
+  "χ(F²) = L(F) whenever L(F) ≤ 4", "S1 three derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three",
+  at=(280, 410), sector="lg")
+N("R52", "the residue bound", "held", "A usable prime's finite plane colours the whole field's plane: χ(F²) ≤ χ(Γ_q). The upper half of "
+  "the local–global conjecture; prior art (Moorhouse 2010, Manturov 2012, Madore 2015).", L(52), "has χ(F²) ≤ χ(Γ_q)", "[hand + tools]",
+  at=(266, 410), sector="lg")
+N("LG", "local–global conjecture", "belief", "χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7. Kooshi holds it. A belief, "
+  "drawn so it can be seen and never counted: no route's distance includes it.", LGC, "and its bold form is χ(ℝ²) = 7",
+  (NOTATION, "The conjecture (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7."),
+  at=(254, 410), sector="lg")
+N("R127", "main clause in Lean (conditional)", "lean-held", "The main clause through five, in the kernel, over named hypotheses "
+  "(MR among them); χ(ℚ(√47)²) ≤ 5 unconditionally. The composition is the kernel's; every link it names stays [hand].", L(127),
+  "The main clause through five in the kernel, conditional on named hypotheses",
+  "[kernel; standard three axioms, no native purchase; the lower halves conditional on named propositions, not vacuous domains]",
+  at=(280, 490), sector="lean")
+N("FS101", "FS-101: the named hypotheses", "lean", "Discharge row 127's named hypotheses one at a time: Markov–Kakutani, the residue "
+  "bound's valuation subring, Herglotz–Bochner.", STUB("STUB-main-clause-five-kernel.md"),
+  "Next: InvariantMeasureOnClosed as Markov–Kakutani (~100–200k), then the upper half hUpper via row 57's gap (~40–80k), then "
+  "Herglotz–Bochner (weeks)", (STUB("STUB-main-clause-five-kernel.md"),
+  "FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)"), at=(270, 560), sector="lean")
+N("FS113", "FS-113: MR in Lean", "lean", "Measure rigidity in full in Lean, with no declared purchase — needed to publish every result "
+  "through MR, and the answer seven through the collapse.", STUB("STUB-mr-in-lean.md"),
+  "as a theorem in Proofs/, on the standard three axioms, with no declared purchase",
+  (STUB("STUB-mr-in-lean.md"), "FS-113 — measure rigidity for the unit-vector group, in full, in Lean (stub)"),
+  at=(306, 490), sector="lean")
+N("LEANWALL", "Lean: the wall's chain", "lean", "The collapse, the measurable chain and the map argument, in Lean — the regularity "
+  "wall's own formalization, owed before seven could be published.", STUB("STUB-regularity-wall.md"),
+  "MR in full ([EinsiedlerLindenstrauss2022] Thm 1.3 and the deduction FS105-DED; [EinsiedlerFish2010]'s transfer), the collapse "
+  "(row 128), the measurable chain (row 130, link 2), and whichever half of FS-107 lands.",
+  (STUB("STUB-regularity-wall.md"), "FS-106 and FS-107 — the regularity wall, and its stability form: can vanishing holes save a "
+   "colour? (stub; the program Kooshi adopted)"), at=(322, 560), sector="lean")
+
+# ================================================================ toward seven: the regularity wall (top)
+N("R131", "stability: the question", "held", "With no MR: the measurable number is at least seven exactly when six classes, each free of "
+  "one-colour pairs at distances near 1, cannot cover the plane up to holes that vanish as the band narrows. At every k the same "
+  "equivalence holds for k colours.", L(131), "At six, χ_m⁰(ℝ²) ≥ 7 ⟺ lim µ₆(ε) < 1",
+  "EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind", at=(0, 300), sector="seven", tier=1,
+  also=[(L(131), "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1")])
+N("NG131", "hole-counting capped", "nogo", "Two proof shapes are closed: counting only the holes that unit circles meet proves at most "
+  "holes of order ε, and trichromatic-point arguments cannot see partial colourings.", L(131),
+  "an argument counting only holes met by unit circles or bicycles proves at most 1 − µ₆(ε) ≳ ε",
+  "EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind", at=(44, 222), sector="seven")
+N("R132", "regular classes need seven", "nogo", "Almost everywhere: colourings with slack, polygons, locally finite convex tilings and nice "
+  "maps all need seven (Voronov 2023 and Sokolov–Voronov 2025, repaired). So neither a YES nor a five can be regular.", L(132),
+  "The regular half, verified and transferred almost everywhere.",
+  "Voronov's theorems and the closed-set step two minds, one blind (V; VB)", at=(348, 450), sector="seven")
+N("MAPS6", "maps need six", "nogo", "Any map colouring needs six colours (Woodall 1973, Townsend's manuscript, each repairing the other): "
+  "a five-colouring of the plane cannot be a map.", L(132),
+  "maps need six modulo Townsend's simplification (c), which [Woodall1973]'s steps 2, 3, 5 fill (in outline)",
+  "maps-six, Townsend's manuscript and Woodall one mind, the fill in outline", at=(204, 300), sector="five")
+N("RR", "R's reduction: (A) + (B)", "held", "Given the quantified cone lemma, seven follows from (A) a forced pair of fat junctions in "
+  "every disc of every near-colouring and (B) a lower bound on their cone scale.", L(133),
+  "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)",
+  "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+  at=(22, 300), sector="seven")
+N("WEQK", "W's equivalence", "held", "At bounded complexity, near-colourings with vanishing holes exist exactly when a tight six-map "
+  "exists: a six-colouring by a map, proper almost everywhere. So door (A) at bounded complexity is one question about maps.", L(133),
+  "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of "
+  "complexity ≤ K exists", "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+  at=(46, 300), sector="seven", tier=1)
+N("WPOLY", "polygons keep holes", "nogo", "Polygonal designs of bounded complexity keep holes bounded below: a YES cannot be polygonal.",
+  L(133), "polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)",
+  "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
+  at=(120, 262), sector="six-up")
+N("R134", "Condition 5: no six-map", "held", "Under Condition 5 (no boundary arc of radius 1), no map by segments and circular arcs "
+  "six-colours the plane almost everywhere — Sokolov–Voronov's Question 2, its Condition-5 half, answered yes.", L(134),
+  "no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which "
+  "no two interior points of one colour are at distance exactly 1", "the chain — NB-4, NB-5, W-MERGE and the cone removal — two minds, one blind",
+  at=(6, 450), sector="seven", tier=1)
+N("TSMNO", "no tight six-map (door A)", "conclusion", "At bounded complexity, no tight six-map exists: under Condition 5 none does; with "
+  "unit arcs, open. This is door (A) in its bounded-complexity form.", STANDS,
+  "At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs, open.",
+  "with unit arcs, open.", at=(24, 375), sector="seven", tier=1)
+N("M7", "χ_m⁰(ℝ²) ≥ 7", "conclusion", "Vanishing holes cannot save a colour: Voronov's contradiction survives a free colour of vanishing "
+  "density. Given MR, this is χ(ℝ²) = 7.", AIM,
+  "No — Voronov's contradiction survives a free colour of vanishing density — gives χ_m⁰(ℝ²) = 7", BOTH_GAP, at=(20, 222),
+  sector="seven", tier=1)
+N("FS111", "(B) the cone scale", "step", "Door (B): do near-optimal band-proper six-colourings keep their junctions fat at a scale bounded "
+  "below? De Giorgi's room — the same question as (A) at unbounded complexity (FS-111).", STUB("STUB-reg-scale.md"),
+  "(B) those junctions are fat at a scale s ≥ s₀ — on a set of positive measure — with voids small relative to min(s, µη²/100)",
+  (PF(2), "door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a set of positive measure?"),
+  at=(66, 262), sector="seven", tier=1,
+  registered=dict(p=0.15, src=STUB("STUB-reg-scale.md"), quote="a cone-scale bound for near-optimal colourings at one mind, 0.15",
+                  population="the minting session's registration for FS-111: a cone-scale bound at one mind, within the milestone"))
+
+# ---- FS-112, the unit-arc half: closing tonight
+FS112 = dict(closing=True)
+N("N3BASE", "N3-BASE", "held", "With unit arcs, the base argument refutes a map near a three-colour vertex unless a vertex of four "
+  "colours, or with a repeated colour, lies within distance 2.", NTAB("N3-BASE"),
+  "the base refutes a valid map near a cubic trichromatic u unless B̄(u, 2) holds a vertex of ≥ 4 colours or a repeated colour",
+  N3_TRUE, at=(8, 600), sector="seven", **FS112)
+N("N3DENSE3", "N3-DENSE3", "held", "In every valid map, every closed disc of radius 3 holds a vertex of four or more colours or a vertex "
+  "with a repeated colour. So the unit-arc half is a question about four-colour vertices.", NTAB("N3-DENSE3"),
+  "every closed disc of radius 3 of a valid map holds a vertex of ≥ 4 colours or a repeated colour", N3_TRUE, at=(24, 600),
+  sector="seven", **FS112)
+N("N3PER", "N3-PER", "held", "A doubly periodic valid map has a periodic terminal modification — so a periodic map has no stuck ray.",
+  NTAB("N3-PER"), "a doubly periodic valid map has a periodic terminal modification (so finitely many arc classes)", N3_TRUE,
+  at=(42, 600), sector="seven", **FS112)
+N("N3END", "N3-END", "held", "A stuck chain's end is anchored at a four-colour vertex with a repeated colour one step beyond it.",
+  NTAB("N3-END"), "a stuck chain's end with horn bound −1 has a four-colour, repeated-colour vertex one step beyond", N3_TRUE,
+  at=(56, 600), sector="seven", **FS112)
+N("Y3END", "Y3-END-NEEDS", "held", "The construction side's round 3: a stuck chain cannot end at a unit arc while its end vertex has three "
+  "colours — blocking both moves there needs a seventh colour. Under blind verification tonight (FS112-YB3).", INV(56),
+  "Y3-END-NEEDS [hand, one mind]: N needs ≥ 3 colours (then MERGE at N), ≥ 5 to block it (then SHAVE at N), and blocking both needs a "
+  "seventh colour", (INV(56), "Y3-END-NEEDS [hand, one mind]"), at=(70, 590), sector="seven", verifying=True, **FS112)
+N("GSTEP", "the global step", "step", "Exclude every map whose four-colour or repeated-colour vertices come within 3 of every point — "
+  "N3-DENSE3 says every valid map is such a map. The next milestone (FS-114).", INV(59),
+  "the global step — exclude maps whose vertices of ≥ 4 colours or a repeated colour come within 3 of every point",
+  (INV(59), "point two milestones at the two gaps"), at=(30, 525), sector="seven", tier=1, **FS112)
+N("SRAY", "the stuck ray", "step", "Can a one-sided infinite chain of stuck vertices live in a map that is not periodic? Periodic maps "
+  "have none (N3-PER); the aperiodic case is open (GAP N3-ALPH). The next milestone (FS-115).",
+  {"file": "plans/FS112-N-proof.md", "section": "## Stage N3-4 — SAVED: R2"},
+  "GAP (b′), named: whether a stuck ray can live in a valid map of the plane — a whole-line object; for periodic maps it cannot "
+  "(N3-PER, N3-LEN).", "GAP (b′), named", at=(50, 525), sector="seven", tier=1,
+  also=[({"file": "plans/FS112-N-proof.md", "section": "## Stage N3-2 — SAVED: R1"}, "Named GAP N3-ALPH.")], **FS112)
+N("UANO", "unit-arc half: NO", "step", "The two gaps composed into a NO: no tight six-map even with unit arcs. How they compose is being "
+  "derived at FS-112's close (for periodic maps, perhaps the global step alone).", INV(63),
+  "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
+  (INV(63), "derives how the two gaps compose into a NO (periodic maps: the global step alone?)"), at=(40, 450), sector="seven",
+  tier=1, also=[({"file": "plans/FS112-N-proof.md", "section": "## Stage N3-3 — SAVED"},
+                 "So a YES of Q-full is a map whose four-colour (or repeated-colour) vertices come within 3 of every point, and a NO is the "
+                 "exclusion of such maps")], **FS112)
+
+# ================================================================ toward six from below (right)
+N("FS104", "χ_CP(ℝ²) ≥ 6", "question", "Is the stationary (equivalently the measurable) chromatic number at least six? Given MR it is "
+  "rung D: χ(ℝ²) ≥ 6. No held result gives it, and no one-point density bound can (FS-104).", PF(3),
+  "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?", (PF(3), "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?"), at=(86, 222), sector="six-low",
+  tier=1, words=(PF(3), "success low, a named no-go the likely product"))
+N("R129", "density cannot give six", "nogo", "One colour class at a time is capped below 4.37: the bound that gave five is a fractional "
+  "bound rounded up, and that route never gives six. A proof of six must use how the classes fit together.", L(129),
+  "1/α_loc ≤ 4.36: that route never gives six", "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
+  at=(112, 215), sector="six-low")
+N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
+  "shape a six certificate must take (FS-80).", PF(7), "averaged certificates at five colours on the real plane (FS-104's route (c))",
+  (STUB("STUB-window-frequency-certificate.md"), "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)"),
+  at=(78, 300), sector="six-low", words=(PF(7), "soft as to success"))
+N("R125", "ℚ(√167) at six = plane + PL", "held", "Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product "
+  "locality at 23 and 43 — a reduction, not a bound.", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
+  "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)", at=(94, 375), sector="six-low")
+N("PL", "PL∃(23, 43)", "question", "Product locality at the places 23 and 43: the direction missing from χ_CP(ℝ²) ≥ 6 to six at "
+  "ℚ(√167) (FS-96, FS-67).", L(125),
+  "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6", (L(125), "Not claimed: anything about six."),
+  at=(108, 300), sector="six-low")
+N("FS59", "χ(ℚ(√167)²) ≥ 6", "conclusion", "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the "
+  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", PF(12),
+  "given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)",
+  (PF(12), "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)"),
+  at=(100, 300), sector="six-low")
+N("R119", "χ(ℚ(√167)²) ≥ 4, kernel", "held", "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of "
+  "the widest gap.", L(119), "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
+  "[kernel; standard three axioms, no native purchase]", at=(100, 450), sector="six-low")
+
+# ================================================================ the YES side: at most six, with no MR (bottom)
+N("LINK2", "upper bounds need no MR", "held", "A measurable colouring proper at almost every unit pair, moved by a random rigid motion, "
+  "colours every finite graph properly almost surely; de Bruijn–Erdős finishes. So χ(ℝ²) ≤ χ_m⁰(ℝ²) with no MR. Its argument is in print "
+  "(Gwyn–Stavrianos 2022) under an invariant mean.", AIM,
+  "Upper bounds need no MR. χ(ℝ²) ≤ χ_m⁰(ℝ²): move a measurable colouring by a random rigid motion",
+  "[hand, two minds]: FS103-N's N-EASY, PA1's (E)", at=(180, 178), sector="six-up", tier=1,
+  note="LEDGER.md row 130's grade bracket lists N-EASY at one mind; § The aim adds PA1's (E) as the second.")
+N("HOLES6", "vanishing holes save a colour", "conclusion", "Six classes cover the plane up to holes of density tending to 0 as the band "
+  "narrows: lim µ₆(ε) = 1. A refutation of seven needs no wild set — a sequence of periodic grid colourings, wild only in the limit.",
+  L(131), "a refutation needs no wild set — it is a sequence of periodic grid colourings with vanishing holes, the wildness only in the limit",
+  BOTH_GAP, at=(152, 222), sector="six-up", tier=1)
+N("TSMYES", "a tight six-map (YES)", "step", "A map by segments and circular arcs, unit arcs allowed, six-coloured with no two interior "
+  "points of one colour at distance exactly 1. At bounded complexity it gives χ(ℝ²) ≤ 6 with no MR.", STUB("STUB-unit-arc-half.md"),
+  "With FS-107's W-EQ-K (row 133) a YES at bounded complexity gives χ(ℝ²) ≤ 6 with no MR",
+  (PF(1), "does a tight six-map exist once unit arcs are allowed?"), at=(138, 300), sector="six-up", tier=1,
+  registered=dict(p=0.03, src=PLAN112("E5"), quote="the stub's \"a YES by formula (0.03)\", re-registered at 0.03 with its population stated",
+                  population="within FS-112: a full tight six-map of the plane given by formula and accepted exactly, among asymmetric "
+                             "curved maps with unit-arc seams and four-colour vertices"))
+N("UNB", "unbounded complexity (door B's negation)", "question", "A family of near-colourings of unbounded complexity whose holes vanish "
+  "while their junction scales shrink to 0 — W's claim itself, if FS-111 fails.", STUB("STUB-reg-scale.md"),
+  "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.", BOTH_GAP, at=(164, 300), sector="six-up")
+N("STRIP", "the six-coloured strip", "positive", "Axenovich et al. 2014, Thm 4.2: a tight six-coloured strip of height √15/2 + √3 ≈ 3.668, "
+  "its tiles bounded by unit arcs. Rebuilt twice blind and accepted by two exact checkers (FS-112).", INV(33),
+  "CAL-STRIP robust — two blind rebuilds from the printed words, two exact checkers, the same object and verdict",
+  (INV(33), "two exact checkers, the same object and verdict"), at=(128, 375), sector="six-up",
+  also=[(STUB("STUB-unit-arc-half.md"), "One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured strip of height "
+         "√15/2 + √3 (≈ 3.668)")])
+N("DISK", "the six-tiled disk", "positive", "Polymath16's six-tiled disk (Fig. 10), transcribed and rebuilt exactly; its largest "
+  "vertex-centred disc has radius φ, attained.", INV(53),
+  "CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece), two exact checkers ACCEPT 71/71",
+  (INV(53), "two exact checkers ACCEPT 71/71"), at=(144, 375), sector="six-up")
+N("STOP", "both stop at a pinned corner", "nogo", "The strip and the disk stop for the same reason: at the unsaved second seam of a "
+  "complementary three-colour pair — a 'pinned corner'.", INV(53), "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
+  (INV(53), "O2: the two positives stop for the same reason — TRUE (two minds, one blind)"), at=(130, 450), sector="six-up")
+N("Y3STOP", "pinned corners hold", "nogo", "Round 3: both ways past the pinned corners close as derived obstructions, with no escape. "
+  "Under blind verification tonight (FS112-YB3).", INV(56), "both pinned-corner GAPs close as derived obstructions, no escape",
+  (INV(56), "[exact + hand]"), at=(146, 450), sector="six-up", verifying=True, **FS112)
+N("PARTS", "Parts's six-tiling", "positive", "The best printed six-tiling leaves holes of density 1.43·10⁻⁴ — small, but it has no "
+  "parameter that drives them to 0.", L(131), "the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)",
+  (L(131), "LOCAL over Parts [external]"), at=(168, 375), sector="six-up")
+
+# ================================================================ toward exactly five (lower left)
+N("FS44", "a CP five-colouring", "question", "The shape of a stationary five-colouring of the plane — row 131 at five colours: "
+  "lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).", PF(6),
+  "the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)",
+  (STUB("STUB-fifth-colour-structure.md"), "FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open "
+   "field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)"), at=(218, 222), sector="five", tier=1,
+  words=(PF(6), "soft as to truth (the bold form predicts no)"))
+
+# ================================================================ edges (premise → conclusion)
+for b, a in (("LB7", "A7"), ("UB7", "A7"), ("LB6", "A6"), ("UB6", "A6"), ("LB5", "A5"), ("UB5", "A5")):
+    E(b, a, "half", STANDS, "χ(ℝ²) ∈ {5, 6, 7}")
+E("DEGREY", "LB5", "rests", INTERVAL, "the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph")
+E("SEVEN", "UB7", "rests", INTERVAL, "the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring")
+# the engine
+E("EL", "MR", "rests", L(120), "the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3")
+E("MR", "R128", "rests", L(128), "The collapse: given MR, the plane's number is a field's.")
+E("MR", "R121", "rests", L(121), "MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at S = ∅ gives ≥ 5")
+E("MR", "R123", "rests", L(123), "With MR (row 120) that gives five")
+E("MR", "R125", "rests", L(125), "Given MR: χ(ℚ(√167)²) ≤ 5 ⟺ Y = UD(ℝ²) × G₂₃ × G₄₃ has a cut-and-project five-colouring", bus=True)
+E("R128", "LB7", "rests", AIM, "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR")
+E("R130", "LB7", "rests", L(130), "Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)")
+E("M7", "LB7", "rests", AIM, "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR")
+E("R128", "LB6", "rests", PF(3), "decisive: given MR it is rung D (row 128)", bus=True)
+E("R130", "R131", "rests", L(131), "its first equivalence is row 130's")
+# the algebraic lower bound and the local–global structure
+E("R121", "LB5", "rests", STANDS, "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5")
+E("SUB", "LB5", "rests", STANDS, "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5")
+E("R99", "R123", "rests", L(123), "below five it is row 99")
+E("R52", "R123", "rests", L(123), "the upper half is the residue map at the place realising L(F) (row 52)")
+E("LG", "A7", "predicts", LGC, "and its bold form is χ(ℝ²) = 7")
+E("R127", "R123", "formalizes", L(127), "min(L(F), 5) ≤ χ(F²) for every real number field (SpectralChain.min_localBound_five_le_chromaticNumber)")
+E("FS101", "R127", "formalizes", STUB("STUB-main-clause-five-kernel.md"), "Status: first slot done (X11K3, 2026-09-26; LEDGER.md row 127")
+E("FS113", "MR", "formalizes", STUB("STUB-mr-in-lean.md"), "MR(F) as LEDGER.md row 120 states it")
+E("LEANWALL", "R128", "formalizes", STUB("STUB-regularity-wall.md"), "the collapse (row 128), the measurable chain (row 130, link 2)")
+E("LEANWALL", "R131", "formalizes", STUB("STUB-regularity-wall.md"), "the collapse (row 128), the measurable chain (row 130, link 2)")
+# toward seven
+E("R131", "RR", "rests", L(133), "χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form)")
+E("RR", "M7", "rests", L(133), "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)")
+E("TSMNO", "M7", "rests", PF(2), "decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and "
+  "FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)")
+E("WEQK", "M7", "rests", L(133), "So stability at six is two questions: does a tight six-map with only tangent, bowtie or cusp seams exist")
+E("FS111", "M7", "rests", PF(2), "decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and "
+  "FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)")
+E("NG131", "M7", "blocks", L(131), "Two no-gos for proofs: an argument counting only holes met by unit circles or bicycles proves at most "
+  "1 − µ₆(ε) ≳ ε", label="hole-counting proofs cannot reach it")
+E("R134", "TSMNO", "rests", STANDS, "under Condition 5 none does (row 134); with unit arcs, open.")
+E("UANO", "TSMNO", "rests", STANDS, "under Condition 5 none does (row 134); with unit arcs, open.")
+E("R132", "R134", "rests", L(134), "S–V Cor. 1, almost everywhere for curved cubic maps with no d = 2 exception, refutes it")
+E("R134", "N3BASE", "rests", NTAB("N3-BASE"), "hand, one mind, over row 134's base")
+E("N3BASE", "N3DENSE3", "rests", {"file": "plans/FS112-N-proof.md", "section": "## Stage N3-3 — SAVED: (a)"},
+  "N3-DENSE3 [hand, one mind, over N3-BASE, NB2-DISC1 (two minds) and N2-TOWARD (two)]")
+E("N3DENSE3", "GSTEP", "rests", INV(60), "so milestone (1) takes DENSE3's form (item 59)")
+E("GSTEP", "UANO", "rests", INV(63), "derives how the two gaps compose into a NO (periodic maps: the global step alone?)")
+E("SRAY", "UANO", "rests", INV(63), "derives how the two gaps compose into a NO (periodic maps: the global step alone?)")
+E("N3PER", "SRAY", "rests", {"file": "plans/FS112-N-proof.md", "section": "## Stage N3-4 — SAVED: R2"},
+  "for periodic maps it cannot (N3-PER, N3-LEN)", label="closes the periodic case")
+E("N3END", "SRAY", "rests", INV(59), "with Y3-END-NEEDS and N3-END as its candidate route", label="candidate route")
+E("Y3END", "SRAY", "rests", INV(59), "with Y3-END-NEEDS and N3-END as its candidate route", label="candidate route")
+# toward six from below
+E("FS104", "LB6", "rests", PF(3), "decisive: given MR it is rung D (row 128)")
+E("FS80", "FS104", "rests", PF(7), "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR")
+E("R129", "LB6", "blocks", L(129), "1/α_loc ≤ 4.36: that route never gives six", label="one class at a time never gives six")
+E("R125", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
+E("FS104", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
+E("PL", "FS59", "rests", L(125), "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6")
+E("FS59", "LB6", "rests", PF(12), "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104")
+E("SUB", "LB6", "rests", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
+  "The plane over any real subfield needs at most as many colours as the plane.", faint=True, bus=True)
+E("R119", "FS59", "context", L(119), "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six "
+  "predicted; G59)", label="the gap's kernel floor")
+# the YES side
+E("LINK2", "UB6", "rests", AIM, "Upper bounds need no MR.")
+E("LINK2", "UB5", "rests", AIM, "Upper bounds need no MR.")
+E("R131", "UB6", "rests", L(131), "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1", bus=True)
+E("R131", "UB5", "rests", L(131), "χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1", bus=True)
+E("HOLES6", "UB6", "rests", L(131), "The step from a refutation to χ(ℝ²) ≤ 6 is link 2's argument")
+E("TSMYES", "HOLES6", "rests", L(133), "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight "
+  "a.e.-proper six-colouring by a map of complexity ≤ K exists")
+E("WEQK", "HOLES6", "rests", L(133), "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight "
+  "a.e.-proper six-colouring by a map of complexity ≤ K exists", bus=True)
+E("UNB", "HOLES6", "rests", STUB("STUB-reg-scale.md"), "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.")
+E("STRIP", "TSMYES", "partial", STUB("STUB-unit-arc-half.md"), "One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured "
+  "strip of height √15/2 + √3 (≈ 3.668)", label="a tight fragment, not the plane")
+E("DISK", "TSMYES", "partial", INV(53), "CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece)",
+  label="a tight fragment, not the plane")
+E("PARTS", "HOLES6", "partial", L(131), "the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)", label="small holes, not vanishing")
+E("STOP", "TSMYES", "blocks", INV(53), "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
+  label="the held positives stop at a pinned corner")
+E("Y3STOP", "TSMYES", "blocks", INV(56), "both pinned-corner GAPs close as derived obstructions, no escape",
+  label="no way past the pinned corners (under verification)")
+E("WPOLY", "TSMYES", "blocks", L(133), "polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)",
+  label="a YES cannot be polygonal")
+E("R134", "TSMYES", "blocks", L(134), "no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, "
+  "carries a six-colouring", label="a YES must use unit arcs", bus=True)
+E("R132", "TSMYES", "blocks", L(132), "polygonal colourings need seven, and so do locally finite tilings by convex polygons",
+  label="a YES cannot be regular", bus=True, faint=True)
+# toward exactly five
+E("FS44", "UB5", "rests", PF(6), "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)")
+E("MAPS6", "FS44", "blocks", L(132), "maps need six modulo Townsend's simplification (c)", label="a five cannot be a map")
+E("R132", "FS44", "blocks", AIM, "Regular colourings need seven, verified and almost everywhere", label="a five cannot be regular",
+  bus=True, faint=True)
+
+# ================================================================ routes: a route is the set of links whose credences multiply
+ROUTES = [
+    dict(id="interval", name="The classical interval, in the kernel", answer="5–7", half="both",
+         links=["DEGREY", "SEVEN", "LB5", "UB7"], reaches=["LB5", "UB7"],
+         about="Both ends of 5 ≤ χ(ℝ²) ≤ 7, checked by Lean's kernel on the standard three axioms (row 33). Not new mathematics: the ground "
+               "every route stands on."),
+    dict(id="alg5", name="Five, algebraically, through measure rigidity", answer=5, half="lower",
+         links=["EL", "MR", "R121", "SUB"], reaches=["LB5"],
+         about="χ(ℚ(√47)²) = 5 gives χ(ℝ²) ≥ 5 with no witness object (rows 120–121). A second proof of a held bound — it moves no value, "
+               "and its publication waits on MR in Lean."),
+    dict(id="wall7", name="The regularity wall, toward seven", answer=7, half="lower",
+         links=["EL", "MR", "R128", "R130", "R131", "RR", "WEQK", "R132", "R134", "N3BASE", "N3DENSE3", "N3PER", "GSTEP", "SRAY", "UANO",
+                "FS111", "SEVEN", "UB7"],
+         reaches=["LB7", "UB7"],
+         about="Given MR the plane's number is its measurable number (rows 128, 130); that is seven iff vanishing holes cannot save a colour "
+               "(row 131); R's reduction splits it into door (A), a tight six-map's non-existence, and door (B), the cone scale. Door (A) "
+               "under Condition 5 is closed (row 134); with unit arcs FS-112 reduced it to two gaps, the global step and the stuck ray."),
+    dict(id="yes6", name="The YES side: a tight six-map", answer=6, half="upper",
+         links=["LINK2", "R131", "WEQK", "TSMYES"], reaches=["UB6"],
+         about="A tight six-map at bounded complexity gives vanishing holes (W-EQ-K), hence χ(ℝ²) ≤ 6 with no MR. The held positives "
+               "(the strip, the disk) are tight fragments that stop at a pinned corner."),
+    dict(id="yes6b", name="The YES side at unbounded complexity", answer=6, half="upper",
+         links=["LINK2", "R131", "UNB"], reaches=["UB6"],
+         about="A family of near-colourings whose holes vanish while their junctions shrink — door (B)'s negation, W's claim itself."),
+    dict(id="cp6", name="Six from below: χ_CP(ℝ²) ≥ 6", answer=6, half="lower",
+         links=["EL", "MR", "R128", "FS104"], reaches=["LB6"],
+         about="Given MR, χ(ℝ²) ≥ 6 is χ_CP(ℝ²) ≥ 6 (FS-104). One colour class at a time can never give it (row 129)."),
+    dict(id="win6", name="Six from below by an averaged certificate", answer=6, half="lower",
+         links=["EL", "MR", "R128", "FS80"], reaches=["LB6"],
+         about="A window-frequency certificate at five colours on the real plane would give χ_CP(ℝ²) ≥ 6 (FS-80)."),
+    dict(id="q167", name="Six from below through ℚ(√167)", answer=6, half="lower",
+         links=["EL", "MR", "R125", "FS104", "PL", "SUB"], reaches=["LB6"],
+         about="Six at ℚ(√167) gives χ(ℝ²) ≥ 6 with no MR, but given MR it contains χ_CP(ℝ²) ≥ 6 as a conjunct (row 125): never cheaper "
+               "than FS-104."),
+    dict(id="five", name="Exactly five: a stationary five-colouring", answer=5, half="upper",
+         links=["LINK2", "R131", "FS44"], reaches=["UB5"],
+         about="Row 131 at five colours: a CP five-colouring of the plane gives χ(ℝ²) = 5 with no MR (FS-44). It cannot be regular or a map."),
+]
+
+# ================================================================ the credence table: an instrument, never evidence
+CREDENCE = [
+    dict(status="kernel", p=1.0, why="Checked by Lean's kernel: zero bits. Distance to publication counts it as done.", src=None, quote=None),
+    dict(status="cert", p=0.99, why="An exact object accepted by exact checkers; here each was rebuilt twice, blind.", src=None, quote=None),
+    dict(status="hand-2b", p=0.95, why="A hand proof checked by a second mind that did not see the first. The theorem audit found one hand proof "
+         "wrong among 184, and grades under-stated four times for every over-statement — the measured record is better than this default.",
+         src=L(77), quote="184 hand, 23 derived, 31 tools, 2 cert"),
+    dict(status="hand-2", p=0.90, why="A hand proof checked by a second mind that saw it. Lower than blind: blind verifiers still find a "
+         "divergence of truth in about 0.4 of milestones (FS-112's registration, from FS-110's rate).",
+         src=PLAN112("E16"), quote="a blind verifier finds a divergence of truth"),
+    dict(status="hand-1", p=0.80, why="One mind. Includes round-3 claims under blind verification tonight.", src=None, quote=None),
+    dict(status="external", p=0.90, why="Claimed in print and not re-checked here (Einsiedler–Lindenstrauss's Thm 1.3; Parts's tiling).",
+         src=None, quote=None),
+    dict(status="reading", p=0.50, why="Believed, with a killing test. The local–global conjecture is drawn but counted in no route.",
+         src=None, quote=None),
+    dict(status="gap-step", p=0.30, why="A missing step that a reduction has named. Anchor: FS-112 registered a NO of its whole question "
+         "within one phase at 0.3.", src=PLAN112("E14"), quote="a NO of Q-full at one mind with every GAP named, within P1"),
+    dict(status="gap-question", p=0.10, why="An open question not yet reduced to named steps (FS-104, FS-80, FS-44, PL, door B's negation). "
+         "Lower than a named step because it hides steps nobody has counted. A stated default; no source prices it.", src=None, quote=None),
+]
+
+NOTES = [
+    dict(id="instrument", text="A credence is an instrument, registered so it can be scored at the close — never a reason to shrink an aim or to stop.",
+         src=PRIORS, quote="A registered probability is an instrument for G21, scored at the close. It is never a reason to shrink an aim or to stop."),
+    dict(id="belief", text="A belief about the answer is not evidence for it. The conjecture's bold form predicts seven; the page draws it and counts it in no route.",
+         src=LGC, quote="Believing the answer is seven is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64)."),
+    dict(id="rank", text="Routes are ranked by bearing on the answer, never by difficulty, length or formalization effort.",
+         src=PRIORS, quote="Rank a route by its bearing on the answer, never by its difficulty, its length or its formalization effort."),
+    dict(id="publish", text="Nothing is published before it is formalized in Lean, in full, with no declared purchases.",
+         src={"file": "CLAUDE.md", "section": "### The local–global conjecture"},
+         quote="Nothing is published before it is formalized in Lean, in full, with no declared purchases"),
+]
+
+
+def build():
+    for n in NODES:
+        n["status"] = fold(n["grade"])
+        n["line"] = locate(n["src"], n["quote"])
+        n["address"] = address_str(n["src"], n["line"])
+        n["grade_address"] = address_str(n["grade_src"], locate(n["grade_src"], n["grade"]) if n["grade"] != "@lean" else None) \
+            if n["grade"] != "@lean" else address_str(n.get("lean", n["src"]))
+        if n.get("registered"):
+            reg = n["registered"]; reg["address"] = address_str(reg["src"], locate(reg["src"], reg["quote"]))
+        if n.get("words"):
+            wsrc, wq = n["words"]; n["words"] = dict(src=wsrc, quote=wq, address=address_str(wsrc, locate(wsrc, wq)))
+        n["also"] = [dict(src=s, quote=q, address=address_str(s, locate(s, q))) for s, q in n.get("also", [])]
+    for e in EDGES:
+        e["address"] = address_str(e["src"], locate(e["src"], e["quote"]))
+    for c in CREDENCE:
+        if c["src"]:
+            c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
+    for t in NOTES:
+        t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-27", job="VIZ-ATLAS",
+                           statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
+                 nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(json.dumps(facts, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"wrote {OUT.relative_to(ROOT)}: {len(NODES)} nodes, {len(EDGES)} edges, {len(ROUTES)} routes")
+    lint()
+
+
+def lint():
+    """Approximate label boxes (the page's label font, 11 units, ~6.1 units a character) and report overlaps; a layout aid, not a check."""
+    boxes = []
+    for n in NODES:
+        th = math.radians(n["theta"]); x, y = n["r"] * math.sin(th), -n["r"] * math.cos(th)
+        w = 6.1 * len(n["label"]); boxes.append((n["id"], x - w / 2, y + 12, x + w / 2, y + 26, x, y))
+    bad = 0
+    for i in range(len(boxes)):
+        for j in range(i + 1, len(boxes)):
+            a, b = boxes[i], boxes[j]
+            if a[1] < b[3] and b[1] < a[3] and a[2] < b[4] and b[2] < a[4]:
+                bad += 1; print(f"  label overlap: {a[0]} / {b[0]}")
+            if math.hypot(a[5] - b[5], a[6] - b[6]) < 26:
+                bad += 1; print(f"  node overlap: {a[0]} / {b[0]}")
+    print(f"layout lint: {bad} overlaps")
+
+
+if __name__ == "__main__":
+    build()
