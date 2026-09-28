@@ -36,3 +36,16 @@ applied first.
 **1.4 Gates at launch** (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `fs71_ledger_b_check.py --strict`
 exit 1, FAIL (56) — the 56 FS-112 derivation entries without § B lines, expected; `bib_audit.py` exit 1 — `[Oostema2020]` cited in the plan and
 undefined, expected (C's 4.3 adds it); `check_architecture.py` exit 0; `rk_mirror_check.py` exit 0.
+
+## Stage 2 — SAVED: `LEDGER.md`
+
+- **Rows 135–136** inserted after row 134, C's §R-close 4.1 text as it stands after C2's stage 1b (row 136's grade clause from FS112-YB3's
+  verdicts; row 135 with FS112-C-HORNEND and FS112-BOWTIE), applied by `data/fs112/fs112-x/apply_ledger.py` (every replacement asserted once).
+- **Row 134's corrections** (4.1): its Not-claimed clause now reads "the unit-arc half of Question 2 (Condition 5 dropped: reduced at FS-112, rows
+  135–136; FS-114, FS-115)"; § B line FS110-NB-4 gains "; without Condition 5 its general form is FS112-NB4P (NB4′)".
+- **§ B:** the 56 lines of `data/fs112/fs112-c/ledger-b-draft.md` appended after FS-110's (one table, no heading, the FS110-X precedent).
+- **One change to C's text, for the dupes gate:** with C2's stage-1b wording, `--dupes` read 11 — the run "at a single vertex bounded by unit arcs
+  on both [sides]" told in row 135's bold text and again in row 136's Not claimed (C's preview of 10 predates stage 1b). Row 136's clause now points:
+  "Y3-END-NEEDS as Y3 stated it (FALSE at the one-vertex end, FS112-BOWTIE; its corrected form is row 135's)" — the same content, one home.
+- Gates (exit status read directly): `--strict` exit 0 PASS (1,003 § B rows; FAIL (56) at launch); fact audit `--base e08a33f6` exit 0 PASS;
+  `--dupes` 10; `check_architecture` exit 0; `bib_audit` exit 1, the one pre-existing `[Oostema2020]` failure (stage 4 adds its row).
