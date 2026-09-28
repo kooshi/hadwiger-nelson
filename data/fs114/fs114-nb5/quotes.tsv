@@ -1,0 +1,20 @@
+From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.	CLAUDE.md
+A proven theorem about why its impossible is also valid. All novel knowledge is a success	CLAUDE.md
+to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time	CLAUDE.md
+search for a finite graph is out. It would be huge, not feasible.	CLAUDE.md
+It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.	plans/CONSOLIDATION-2026-09-27.md
+with the lune rings free of `Γ`	plans/FS114-N4-proof.md
+A unit arc with constant sides has angular length below 60°	plans/FS112-derivation.md
+a unit arc with constant sides has `ℓ ≤ 60°`	plans/FS114-L60-audit.md
+In a valid map, a close complementary pair of cubic trichromatic vertices `u, u′` (disjoint multicolours, `d < 2`) sits on a unit rhombus `u, q₊, u′, q₋` whose other corners are vertices of at least four colours, each a leaving centre of both `u` and `u′`, a unit arc of each leaving centre's circle being both-kind there: T2 is forced at both common unit points.	plans/FS112-derivation.md
+**(Q)** an arc whose centre carries both side colours and at least four colours; **(R2)** an arc whose centre carries the outer side colour and not the inner, with an inner-colour tile along the radius-2 circle over the whole arc.	plans/FS112-derivation.md
+Every valid map has a valid modification by W-MERGE and whole-arc bends, creating no unit arc, in which every unit arc is (Q) or (R2); the procedure terminates with no stubs.	plans/FS112-derivation.md
+`s_out ∉ P_cl(P)` ⟹ the whole unit arc, end vertices included, bends toward `P` (no stub)	plans/FS112-N-proof.md
+`s_in ∉ P_cl(P)` and no `s_in` tile touching `R₂(α)` (ends included) ⟹ the whole arc bends away; the end vertex's only blocker is R2 at the end	plans/FS112-N-proof.md
+isolated R2 contacts (and ends of R2 sub-arcs) are cleared by a tangent bend; only R2 along an arc blocks (NB-ISO closed)	plans/FS112-N-proof.md
+No valid fragment (non-Siamese, simple) on the closed disc of radius `√3` about `p` holds a Reuleaux bowtie whose lune rings are free of `Γ`	data/fs114/briefs/ROUND4-card.md
+**The degenerate member does not exist at radius `√3`**	plans/FS114-N4-proof.md
+**The general member does not exist at radius `√3`** (both lune rings `Γ`-free)	plans/FS114-N4-proof.md
+In DR (general member, minimal ring pattern) the two same-colour ring tiles at the change points `y′, y″` (distance 1) would realise distance 1 along the tangent rays `±τ` unless blocked	plans/FS114-N3-proof.md
+Two distinct tiles of one colour at vertices `u, w` with `|u − w| = 1` have their cones in the closed half-planes facing away from each other	plans/FS114-N3-proof.md
+a unit arc with constant sides has angular length at most 60°, not below; at 60° both side tiles lie in the lens of its ends	data/fs114/briefs/ROUND4-card.md
