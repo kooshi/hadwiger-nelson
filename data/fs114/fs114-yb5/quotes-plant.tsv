@@ -1,0 +1,4 @@
+# plants: an altered word must read MISSING; its faithful twin FOUND
+PLANT-SR0	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are able, and you will surprise yourself.
+PLANT-L60EQ	plans/FS114-L60-audit.md	at `ℓ = 60°` **both** side tiles lie in the lens `B̄(A, 1) ∩ B̄(B, 1)`: `T_in ⊆ Reul(P, A, B)`, `T_out ⊆ Reul(A, B, C) ∖ B(P, 1)`
+TWIN-L60EQ	plans/FS114-L60-audit.md	at `ℓ = 60°` **both** side tiles lie in the lens `B̄(A, 1) ∩ B̄(B, 1)`: `T_in ⊆ Reul(P, A, B)`, `T_out ⊆ Reul(A, B, C) ∖ B̄(P, 1)`

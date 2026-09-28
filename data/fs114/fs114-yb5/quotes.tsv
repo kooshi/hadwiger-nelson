@@ -1,0 +1,25 @@
+# FS114-YB5 quotation check: id <TAB> source <TAB> quotation (as it stands in my brief, the standing rules, or the records I lean on)
+SR0	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.
+SR3a	CLAUDE.md	to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time
+SR3b	CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.
+SR4	CLAUDE.md	A proven theorem about why its impossible is also valid. All novel knowledge is a success
+SR10	plans/CONSOLIDATION-2026-09-27.md	It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.
+E1-Y5	plans/FS114-Y5-construction.md	E1 (an edge at `p` of length exactly `60°`)
+E2-Y5	plans/FS114-Y5-construction.md	E2 (a blade's counter-clockwise side a unit arc centred at its clockwise edge end)
+E2-Y5b	plans/FS114-Y5-construction.md	**E2:** a blade `t_{j+2}` whose side `M_{j+1}` is an arc of `ω(w_{j+1})`.
+SIMPLE	plans/FS114-Y4-construction.md	every tile an open disc whose closure meets each other tile's closure in a connected set or not at all, and does not meet itself
+SIAMESE	data/fs114/claims.md	tiles that lie entirely within each other’s annulus of exclusion
+L60-LE	plans/FS114-L60-audit.md	a unit arc with constant sides has `ℓ ≤ 60°` (its ends lie in the closure of one tile)
+L60-EQ	plans/FS114-L60-audit.md	at `ℓ = 60°` **both** side tiles lie in the lens `B̄(A, 1) ∩ B̄(B, 1)`: `T_in ⊆ Reul(P, A, B)`, `T_out ⊆ Reul(A, B, C) ∖ B̄(P, 1)`, `C = A + B − P`; at each end their sectors lie in the two corner cones (120° and 60°), which fill exactly the closed half-plane facing the other end, so each end is a vertex carrying a third tile
+Y5-MU	plans/FS114-Y5-construction.md	for a blade `t_{j+1}` whose clockwise edge `j` is shorter than 60°: every 5/6 tile bordering its counter-clockwise side `M_j` (from `q_j` to `w_{j+1}`) is one tile `μ_j`, and every 5/6 tile bordering the inside part of its clockwise side `L_j` is one tile of the other colour; so `w_{j+1} ∈ cl μ_j`
+Y5-ALT	plans/FS114-Y5-construction.md	consecutive pocket colours differ, `m_j ≠ m_{j+1}`, unless `t_{j+2}`'s side `M_{j+1}` is a unit arc centred at `w_{j+1}` (exception E2)
+Y5-POCKET	plans/FS114-Y5-construction.md	outside E2 the tile bordering `t_{j+1}`'s side `M_j` also borders the whole inside part of `t_{j+2}`'s side `L_{j+1}` (`μ_j = Λ_{j+1}`)
+Y5-CASE	plans/FS114-Y5-construction.md	at each centre `q_k`, outside E1 and E2: either (B) `α_k = 60°` and `μ_{k−1} ∋ q_k`, or (A) `t_{k+1}` borders the ring clockwise from `q_k` for `λ_k ∈ [α_k − 60°, 60°]`, the outside tile there has colour `k − 1`, and `α_{k−1} + α_k ≤ 180°`; so every cone is at most `120°`
+Y5-PXKILL	plans/FS114-Y5-construction.md	no non-Siamese simple valid fragment containing a neighbourhood of `B̄(p, 1)` holds a pinwheel of the family `P_x` (`60° < x < 120°`), outside E2: `T_k` and `O_{k+1}`, both of colour `k`, border the pocket tile `μ_k` along `ω(v_{k+1})` from `q_k` and along `ω(q_k)` from `v_{k+1}`, both outward, and come within `√(1 − 2tt′) < 1`
+Y5-PINALL	plans/FS114-Y5-construction.md	**no non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about `p` holds a pinwheel at `p`**, except possibly under E1 (an edge at `p` of length exactly `60°`) or E2 (a blade's counter-clockwise side a unit arc centred at its clockwise edge end)
+YB4-TACTIC	data/fs114/briefs/YB4-114-instance.md	a **tactic edge** at `p` is a whole unit arc on `ω(q)`, `|p − q| = 1`, with inner tile `x` (`q ∈ cl x`) and a tile of the outer tile's colour touching `x` at `q` alone
+Y4-SIDES	plans/FS114-Y4-construction.md	the tile `X1` along its side `p q1` at `q1` and the tile `X2` along its side `p q2` at `q2` (both outside `t1`) are distinct and of **different colours**, Siamese pairs allowed
+Y4-W	plans/FS114-Y4-construction.md	In a non-Siamese simple Reuleaux bowtie the tile along `t1`'s outer side at `q1` and the one at `q2` are **one tile `W`, of colour 3** (the colour of `t3`)
+YB3-D2T	plans/FS114-YB3-verification.md	`q1, q4 ∉ cl t2`, `q2, q3 ∉ cl t4`; 2 absent at `q1`, `q4` and 4 at `q2`, `q3` (non-Siamese)
+Y4-DIAG	plans/FS114-Y4-construction.md	each `q_i` has exactly five colours with the sliver forced and `X1` starting at exactly `60°`
+R4-K1PIN	data/fs114/briefs/ROUND4-card.md	**K1-PIN**: the pinwheel (each tile inner for one edge), the `(2, 1, 1, 0)` patterns, and three tactic edges in general. None walked yet.
