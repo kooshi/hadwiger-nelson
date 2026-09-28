@@ -291,3 +291,13 @@ fail only when a (Q) arc starts at `y + 60°` or ends at `y − 60°`, or holds 
 (Q) arc of length exactly `60°` or a (Q) arc ending `60°` from a tactic centre* (p = 0.4).
 
 ## Stage 3 — SAVED
+
+## Proposed for the close (I edit none of these files)
+
+- `data/fs114/claims.md` / the derivation file: **K1 on (Q)-free rings** — excluded at radius `1 + ε` except OC (N7-3T); **K1-OPENCAP / OC** — GAP, forced
+  structure N7-OCTB, route to `√3` in §3.3; **K1-QRING** (every pattern with (Q) arcs, the pinwheel's E1, E2 included) — GAP at N7-HUBQ's hypothesis. Name
+  **N7-HUB** (six four-colour vertices on the unit circle of a (Q)-free four-colour vertex) and **N7-QOPP**, **N7-FLANK** beside N4-LENS, N5-SIGHT and N6-WIN as
+  tools of the local route.
+- Note for C114-LOCAL-F: N7-HUB says a four-colour vertex whose ring carries no (Q) arc has six four-colour vertices at distance 1 in a regular hexagon — a
+  propagation statement a local exclusion might iterate. Not pursued here.
+- A blind check of N7-3T should take first N7-HUB (b) (the tip) and the `+++`, `b = a + 1` step, then N7-QOPP.
