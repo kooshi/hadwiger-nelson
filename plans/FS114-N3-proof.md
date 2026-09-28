@@ -252,8 +252,8 @@ clause (K2′). Route T's kill is **GAP at K1′ ∧ K2′ ∧ GAP-μ** for the 
 
 **GAP-μ (brief step 3).** What the count needs is the tile identity (N2-ABS) with repeated contacts: a tile `z` meeting `x` twice lies in no (A) or (B) slot
 as N114-RD defines them ("touching `x` at `q` alone"). Derived here, for the record only: in the non-Siamese class a pocket (the region enclosed by two
-tiles meeting twice) lies in the convex hull of their union, of diameter `≤ 2`, so by N2-GROW's packing it holds at most `6·(2·1 + 1)² = 54` tiles, and a
-hole at most five (N2-MU). No payment rule for `μ` is derived: **GAP-μ stands as stated**. With CV-EXISTS it matters only to route T.
+tiles meeting twice) lies in the convex hull of their union, of diameter `≤ 2`, hence in a disc of radius `2/√3` (Jung), so by N2-GROW's packing it meets at
+most `⌊6(4/√3 + 1)²⌋ = 65` tiles, and a hole at most five (N2-MU). No payment rule for `μ` is derived: **GAP-μ stands as stated**. With CV-EXISTS it matters only to route T.
 
 **SIAM-KILL (brief step 4).** FS114-CV and FS114-CVB (two minds, blind to each other) give CV-EXISTS for every valid map, Siamese or not, so **C114-LOCAL-F
 alone is the unit-arc NO**; the Siamese class needs no count and no separate kill — it needs C114-LOCAL-F's radius. What an argument there must read (the
