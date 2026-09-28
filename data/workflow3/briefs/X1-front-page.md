@@ -153,3 +153,19 @@ Each ruling is the coordinator's, and these are the only words it adds beyond th
   → "So one local statement about one such vertex suffices for the unit-arc NO". Re-quote LOCALF from the corrected row 137. The
   atlas README's step 6 (the DESIGN.md stage record) is not in the manifest: skip it, and list it in your report as owed. High.
 - **The "49 lines" heading in FS-114's drafts** (46 in the file): noted as FS114-C's slip; file the 46.
+
+## Amendment 2 — 2026-09-28 23:09 UTC, from the coordinator: rulings on the atlas (X1's stage-5 questions)
+
+Each proposal uses only its sources' own words, and each is ruled as proposed unless said otherwise. The no-agents rule stands
+(`plans/STANDING-RULES.md` rule 1). Touches unchanged.
+
+- **A1, A2** (nodes FS111 and MEET with no grade): as proposed — FS111 graded from its stub's title line (a gap, GSTEP's form); MEET from
+  FS111-C1-UNIF's grade, "hand; two minds: P; V0, blind". A draft that cannot fold is FS111-C's slip, logged.
+- **B** (GSTEP's and TSMYES's "scored" registrations): drop both, as D9 drops FS111's. Their scoring stands in the close records.
+- **C** (N3BASE's note): the whole note becomes the draft's new sentence.
+- **D** (FOURC, SRAY, CHAINB): drop SRAY's words line, leave the three texts, and list "bearing reduced to the density form (row 137)" in
+  your report as owed to the atlas keeper.
+- **E1–E6** (quotes the filing moved): re-quote each as proposed; remove R134's verifying ring (FS-114 inventory item 15 calls it stale).
+- **F** (layout): move only the new nodes, by the lint, and say where each went.
+- **The F9-shaped phrase in `plans/STUB-reg-scale.md` § Bearing**: apply F9's substitution there too — "seven is the map NO made uniform in
+  the complexity bound" → "seven is the NO's hole bound made uniform in the complexity bound".
