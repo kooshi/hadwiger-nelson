@@ -110,7 +110,7 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 
 **The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
 Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
-complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half**;
+complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136); **FS-114, the global step**; **FS-115, the stuck ray**;
 **FS-111, the cone scale** — the same at unbounded complexity; **Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the
 collapse, the measurable chain, the map argument.
 
@@ -206,10 +206,11 @@ not update this section is not closed. The understanding the results add up to l
 the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
 point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-09-27 — **FS-110, the tangency seam, closed** (row 134; `plans/FS110-tangency-seam.md` §R-close): under
-Condition 5 no curved map six-colours the plane almost everywhere — S–V Question 2's Condition-5 half answered yes. Before it, **FS-107** (row 133),
-**FS-106** (rows 131–132) and **the reframe** (Kooshi, 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search
-runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+*Last updated: 2026-09-27 — **FS-112, the unit-arc half, closed undecided** (rows 135–136; `plans/FS112-unit-arc-half.md` §R-close): the NO
+reduced to four-colour and repeated-colour vertices (row 135), the YES stalled where the printed positives stop (row 136); its gaps are FS-114 and
+FS-115. Before it, **FS-110** (row 134), **FS-107** (row 133) and **the reframe** (Kooshi,
+2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain).
+Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
 
 ### Where the problem stands
 
@@ -320,11 +321,12 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    pigeonhole for zero entropy — `U` is large enough for it, no finitely generated subgroup is (G80). With SP-Cor, `χ(ℚ(√47)²) = 5`; the flip
    stops at a quantitative T-C(A) (row 122). Bearing on the answer: MR is link 1's hypothesis (row 128; in Lean, FS-113); the fives none; ℚ(√167)'s gap is now [5, 7]. Wave 3 (rows 123–125): the class is `L ≥ 5` in every degree and SP-Cor holds on it, so χ(F²) = L(F) for `L ≤ 5` everywhere; ℚ(√3,√5) five; the type-(B) fields' rotation-invariant half; six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`.
 30. **The collapse, and the fractional local–global principle** (rows 128–130; FS-103; [hand], every headline given MR). Row 123's chain runs one colour class at a time: its five is `⌈1/α_loc(F)⌉`, the fractional bound `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` rounded at one pigeonhole, and that route never gives six (G60); given MR the bound is exact, `α₁(F²) = α_loc(F)`, so at ℚ(√635087) `α₁(ℝ²) = m₁(ℝ²)` and `χ_f(ℝ²) = 1/m₁(ℝ²) ≥ 4.0487` (row 129). At a totally real field whose stable places all mix at six colours, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` (row 128; its load-bearing step needs no MR), and `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR (row 130). Bearing on the answer: link 1 — given MR, rung D is the value at ℚ(√635087) and of `χ_m⁰(ℝ²)` (G81).
-31. **The regularity wall, verified; the question is stability, and its Condition-5 half is closed** (§ The aim;
-   rows 131–134; FS-111, FS-112). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+31. **The regularity wall, verified; the question is stability; at bounded complexity, four-colour vertices** (§ The aim; rows 131–136;
+   FS-114, FS-115, FS-111). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
    classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
-   exists (row 133): under Condition 5 none does (row 134); with unit arcs, open. Past it, whether junctions keep a cone scale. Bearing on the answer:
-   none moved; half of door (A) closed.
+   exists (row 133): under Condition 5 none does (row 134); with unit arcs each would have a vertex of four colours or a repeated colour within 3 of
+   every point, and both printed positives stop where a second four-colour vertex is missing (rows 135–136). Past it, whether junctions keep a cone scale.
+   Bearing on the answer: none moved; half of door (A) closed, the other half reduced.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -335,7 +337,7 @@ kernel proof (its statement merges those two); Theorem B's kernel proof and its 
 
 ### The novel-results ledger
 
-**Rows 1–134 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
+**Rows 1–136 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
 address in `Proofs/` or `tools/` and its milestone. **Row numbers are stable identifiers cited across `plans/` and this file: never
 renumber, never reuse.** The file is not loaded here by design — results are looked up by row, understanding is reasoned from — and
 it is read in full at the reframe (step 3.1) and extended at the close (step 9).
@@ -595,7 +597,7 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   milestone, row 79): ℚ(√167)'s `L3e1c94c6` read as having no periodic three-colouring because the search stopped at `N = 20` —
   its least period is 23 — and the survivor `Ld14c588b` colours linearly with period index 1,080, past `N ≤ 30` and circular
   `N ≤ 120`. **Read a solver's colouring before searching its periods:** one Fourier transform of FS-61's 1.47 M-point colouring
-  showed a single character of amplitude 0.74 that named the period 23 at once. **FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; the second and third, and the rest: `plans/GROKKING-INSTANCES.md` §G21. *Do: when a search, sweep or census returns a zero — or a count, a speedup, an elimination — ask first whether the acceptance test is the exact
+  showed a single character of amplitude 0.74 that named the period 23 at once. FS-81's three, and the rest: `plans/GROKKING-INSTANCES.md` §G21. *Do: when a search, sweep or census returns a zero — or a count, a speedup, an elimination — ask first whether the acceptance test is the exact
   condition or only a sufficient one, and put the answer and the enumeration's bounds (its period cap, radius or generator image) into the
   headline sentence; before believing a new instrument's zero, point it at a known positive at the scale of the question; check the
   written artifact, not the in-memory list behind it; and audit a result you like at the rate you audit one you do not. Killing test:
@@ -1509,7 +1511,7 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   finding one is the milestone. When a new exact decision procedure lands, point it at the open-instance list the same day. Killing test:
   across derivation milestones, count the results that came through the structural question against those that came from searches or
   extensions of a known tool. If the structural question keeps producing nothing a direct attack would not, the method is ceremony.*
-  **The count so far — fourteen of seventeen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-107, through: the meeting point from candidate (b), junction types).
+  **The count so far — sixteen of nineteen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-112, through: §IQ's per-centre question gave the reduction to four-colour vertices).
 * **G73 — Four colours, cell by cell: the colour complex gives a four-colouring of a lattice graph nothing to certify with, one
   cell at a time. [hand, two independent derivations (de Bruijn, Coxeter) read by Poros, with exact rank checks (row 80); one
   reading]** Read `K₄` through the cells of `Cay(Λ, S)` and every local invariant a certificate could use is empty or blind.
@@ -1600,6 +1602,14 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   no-gos) first, and price each certificate at its feature's scale, never at `ε`'s — and where the limit object is a map, look first for the printed regular
   theorem's own chain (FS-110: S–V's Cor. 1 and Woodall's step 3, made curved and almost everywhere). Nothing kills the equivalence; it forbids a construction needing a
   wild set. Killing test of the reading: a proof of `lim µ₆(ε) < 1` whose features' scale is not bounded below.*
+* **G83 — With unit arcs, the tight question lives at four-colour vertices. [hand, two minds, one blind (rows 135–136); the reading one mind]**
+  The unit-radius tactic survives reduction only at vertices of four or more colours; the base refutes a map around any cubic trichromatic vertex
+  lacking a four-colour or repeated-colour vertex within 2; a close complementary pair sits on a unit rhombus with four-colour corners — and both printed
+  positives stop exactly where a pair's second corner is missing. *Reading:* the unit-arc half is a placement problem for four-colour vertices, a
+  discrete one (Sirgedas's quads); killing test: FS-114 decided by an argument that reads no such vertex. *Do: when a tight-map question admits unit
+  arcs, list its four-colour and repeated-colour vertices first and read each close complementary pair's two rhombus corners — a construction that
+  saves one has found its stop. Nothing kills the theorems but a defect in row 134's base; they forbid a valid map with unit arcs having a disc of
+  radius 3 with no such vertex.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58) — one attempt failing is a fact about the

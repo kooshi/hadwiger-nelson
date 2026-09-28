@@ -49,3 +49,22 @@ undefined, expected (C's 4.3 adds it); `check_architecture.py` exit 0; `rk_mirro
   "Y3-END-NEEDS as Y3 stated it (FALSE at the one-vertex end, FS112-BOWTIE; its corrected form is row 135's)" — the same content, one home.
 - Gates (exit status read directly): `--strict` exit 0 PASS (1,003 § B rows; FAIL (56) at launch); fact audit `--base e08a33f6` exit 0 PASS;
   `--dupes` 10; `check_architecture` exit 0; `bib_audit` exit 1, the one pre-existing `[Oostema2020]` failure (stage 4 adds its row).
+
+## Stage 3 — SAVED: `CLAUDE.md` (all but D2 and D5), `plans/GROKKING-INSTANCES.md` §G21, the audit's reviewed lines
+
+- **`CLAUDE.md`**, C's §R-close 4.2 as drafted, applied by `data/fs112/fs112-x/apply_claude.py` (the (old, new) pairs read from C's
+  `data/fs112/fs112-c/drafts.py`, each new text checked line by line against §R-close 4.2 before writing; every replacement asserted once): **D1** Last
+  updated; **D3** § The aim's program line; **D4** item 31; **D6** G72's count (sixteen of nineteen); **D7** G83 before G51 (inventory item 65); **D8**
+  G21's FS-81 instance moved out. Also the ledger pointer "Rows 1–134" → "Rows 1–136" (the FS110-X precedent; C drafted none). **Held for the last
+  stage** (brief 1b): D2 (Open milestones; its "Next:" names tonight's milestones, NIGHT-A's decision) and D5 (paths forward).
+  **Bytes: 296,992 → 298,118** (+1,126; C measured +1,174 for all eight drafts, D2 and D5 carrying the other +48).
+- **`plans/GROKKING-INSTANCES.md` §G21** (§R-close 4.6), before "## G30": D8's moved text verbatim (checked against the text D8 removed), headed
+  "*FS112-X, moved from G21 at FS-112's close …, after “…named the period 23 at once.”:*", and FS-112's own G21 instance (E1's acceptance test),
+  by `data/fs112/fs112-x/apply_gi_g21.py`. The rest of 4.6 is stage 4's.
+- **`tools/claude_md_fact_audit.py`, reviewed ALLOW lines** (2 lost tokens, each reviewed): "1–134" — the ledger's row range in the pointer, now
+  1–136 (the 1–133 precedent); "131–134" — item 31's row range, now 131–136 (C's D4). A third loss, "83–84", came back when D8's text reached
+  §G21 (the audit reads the three files), so it needs no line. C forecast "30–65" too; it is D5's and comes with the last stage.
+- **Left (no draft):** the Grokkings header still reads "G1–G81 are stable identifiers" (G82 and G83 exist); C drafted no change, so none is made —
+  a correction owed for the owner.
+- Gates (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `check_architecture` exit 0;
+  `rk_mirror_check` exit 0 (table untouched); `bib_audit` exit 1, the pre-existing `[Oostema2020]` only.

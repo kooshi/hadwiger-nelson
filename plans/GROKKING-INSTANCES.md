@@ -44,6 +44,14 @@ A list of exceptions measures the class it was derived in: the advisor's 'the ta
 
 A theorem line is a quotation surface: FS107-R's 'Theorems this phase proved' line for its cone lemma compressed §3.2's Claim 2 and dropped the scale bound, the void bound and the definition of blocking, and the blind verifier's MISSTATED was earned by the line, not the lemma (FS107-V §4.1). And a list of exceptions measures its class: FS106-TAN listed C-T-TAN's failures as cones, cusps and weak-* blow-ups; FS107-W's W-TAN took 'every vertex a cone point' and missed that a cusp is a cone of angle 0 at which the multicolour drops to two (FS107-VW §4 item 4).
 
+*FS112-X, moved from G21 at FS-112's close (`plans/FS112-unit-arc-half.md` §R-close 4.2), after “…named the period 23 at once.”:*
+
+**FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; the second and third, and the rest: `plans/GROKKING-INSTANCES.md` §G21.
+
+*FS112-X, FS-112's close (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 3.1 and 4.6):*
+
+FS-112 (§R-close 3.1): E1 registered (0.9) that NB-4 and NB-5 fail 'realised by FS-110's own fragments'; the planning advisor, A2 and NB (stage 1) read T2's truncated four-colour vertex as a counterexample to a step that reads a whole unit circle, and N caught it with the all-straight fragment BB, four-coloured at a flower of radius 1/10 — a reading radius applied to positives (C-BEYOND) and not to counterexamples.
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
