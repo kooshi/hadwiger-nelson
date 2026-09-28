@@ -22,6 +22,11 @@ continue at its first stage not marked SAVED.
    - the `plans/PROTOCOL-competitor-and-advisor.md` amendment and its §3 run record, if C drafted them.
 
    Where a draft is missing, apply nothing in its place, and list it as left.
+1a. **FS112-C2's stage-1b updates** are part of the drafts (`data/fs112/reports/FS112-C2.md`; §R-close 3.0–3.6, 4.1, 4.5–4.7): apply the versions in
+   §R-close as they stand now, and C2's § Building instance draft.
+1b. **The ranking of FS-114, FS-115 and FS-111 waits for the owner's message.** Kooshi deferred tonight's choice to a Poros advisor (NIGHT-A; inventory
+   item 70), whose ranking may differ from C's draft. Apply everything else first; do the ranking and its mirror in your last stage, after the owner's
+   message naming NIGHT-A's ruling. If you reach that stage with no message, report and wait.
 2. **Mirror the ranking change** into `CLAUDE.md`'s paths-forward table from `plans/FRONTIER-STUBS.md`, and run
    `python3 data/rerank-2026-09-27/rk_mirror_check.py` (PASS).
 3. **The budget.** `CLAUDE.md` is at 296,992 bytes against its 300,000 limit. Keep it **under 300,000**, and report the count before and after. To make
