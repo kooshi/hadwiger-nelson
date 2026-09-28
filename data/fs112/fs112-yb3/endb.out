@@ -1,0 +1,14 @@
+== Y3-END-B rebuilt (faithful): ACCEPT  pairs examined 44 / present 44
+   pairs touching 1 exactly (min = 1 or max = 1): (H0+,U1), (H0-,U1), (H1+,L0), (H1+,U2), (H1-,L0), (H1-,U2), (H2+,L1), (H2+,T), (H2-,L1), (H2-,T), (H3+,L2), (H3+,U4), (H3-,L2), (H3-,U4)
+-- colours at N (tiles whose boundary holds N, exact): [1, 3, 4, 5, 6]
+-- no MERGE at N: D_4(N) from the 4-contacts on the unit circle about N
+   contacts of colour 4 on the unit circle about N (0.00000, 3.00000): L2 out at (0.00000, 2.00000); U4 out at (0.00000, 4.00000)
+-- E still stuck (out-type 3 at N and P_1; E's horn doubly shadowed at named points)
+   contacts of colour 3 on the unit circle about E (0.00000, 2.00000): L1 out at (0.00000, 1.00000); T out at (0.00000, 3.00000)
+   E-horn point (0.05000, 2.00100): colour 2 blocked by H1+; colour 4 blocked by H3+
+   E-horn point (0.10000, 2.00250): colour 2 blocked by H1+; colour 4 blocked by H3+
+-- N's +a 4-horn: are its flank colours (5 above, 1 below) blocked at named points of its tip?
+   N-horn point (0.05000, 3.00025): colour 5 blocked by NOTHING; colour 1 blocked by NOTHING
+   N-horn point (0.10000, 3.00100): colour 5 blocked by NOTHING; colour 1 blocked by NOTHING
+== Y3-END-B with the +a 4-horn's tip SHAVED by its lower flank (colour 1): ACCEPT  pairs examined 46 / present 46
+== Y3-END-B with the +a 4-horn's tip SHAVED by its upper flank (colour 5): ACCEPT  pairs examined 49 / present 49

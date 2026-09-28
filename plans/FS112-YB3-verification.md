@@ -118,3 +118,27 @@ half-angle `α` (`sin α = 5/13`): near `E` it is E's whole `+n` side, and it is
 | plant `q_swap` (`Q+` coloured 5) | REJECT at exactly `(Q+,U1)` | `(H0±, Q+)` (they are ≥ 1.9 apart) |
 | plant `h_is_g` (H coloured 1) | REJECT at exactly `(G,H)` | — |
 | plant `no_cn` (the top tile at `N` coloured 3) | ACCEPT (validity unchanged); 2-contacts on `ω(E)`: CS alone — `D_2(E)` a half-plane, E no longer stuck | a REJECT (then the plant tests validity, not stuckness) |
+
+### 2.4 Results (`tools/fs112_yb3_frags.py enda|endb|bowtie|plants|coverage`; outputs `data/fs112/fs112-yb3/{enda,endb,bowtie,plants,coverage}.out`)
+
+**Every registered prediction met, with one reporting defect of mine found and fixed** (below). Pairs examined = pairs present in every run
+(the colour map's same-colour pairs, a tile with itself included; the suspect verdict is ACCEPT, claim list §9).
+
+| object | exact verdict | read off |
+|---|---|---|
+| **Y3-END-A rebuilt** | **ACCEPT, 39 / 39 pairs** | tight pairs exactly the 12 registered (`closed_interval` REJECTs those 12 and no other): the chain's contacts at exactly 1. Colours: `P_0` {2,5,6}, `P_1` {2,3,5}, `E` {2,3,4}, `N` {1,3,4} (exact). **E stuck**: 3-contacts on `ω(E)` exactly `L1` out at `P_1` and `T` out at `N` (so `D_3(E)` is the line); **P_1 stuck**: 2-contacts on `ω(P_1)` exactly `L0` out at `P_0`, `U2` out at `E`; one horn per ray; at six named horn points both flank colours blocked — E's by `H1±` (colour 2, from `P_1`) and `W±` (colour 4, from `N`), P_1's by `H0±` (5) and `H2±` (3). **MERGE of 4 at N**: the only 4-contact on `ω(N)` is `L2` out at `E` (so `D_4(N)` is the half-plane `d·n ≥ 0`); the merged fragment (T's tip within height 1/5 recoloured 4) **ACCEPTs, 43 / 43**, and after it 3's only contact on `ω(E)` is `L1` (E then unstuck). **Arc-closed**: the unit arcs (E's horns' upper arcs, on `ω(N)`) end at `E` and at `V_2± = (±5/13, 27/13)`, each an interior vertex (`V_2+`: `U2`, `H2+`, `Q+`) with its neighbourhood fully coloured (float guard: 0 holes, 0 overlaps in discs of radius 0.02) |
+| **Y3-END-B rebuilt** | **ACCEPT, 44 / 44 pairs** | tight pairs: END-A's chain contacts plus `(H3±, L2)` and `(H3±, U4)`. Colours at `N` exactly {1,3,4,5,6}. **No MERGE at N**: the 4-contacts on `ω(N)` are `L2` out at `E` and `U4` out at `N + n` (the line), and 1, 3, 5, 6 have one sector each. E still stuck (3 out at `N` and `P_1`; its horn doubly shadowed, colour 4 now from `H3+`). **SHAVE available**: at named points of N's +a horn tip, neither flank colour (5 above, 1 below) is blocked by any tile; the fragment with the tip (within `x ≤ 30/113`) recoloured by the lower flank 1 **ACCEPTs, 46 / 46**, and by the upper flank 5 **ACCEPTs, 49 / 49** |
+| **BOWTIE** (mine) | **ACCEPT, 21 / 21 pairs** | tight pairs exactly the six registered (`(G,G)`, `(H,H)` — diameter exactly 1; the horns against `CN`, `CS`). Colours: `E` {1,2,3}, `N` {1,2,4,5}, `S` {2,3,4,5}. **E stuck**: 2-contacts on `ω(E)` exactly `CN` out at `N`, `CS` out at `S` (the line); one horn per ray; at five named horn points colour 1 blocked by `G` and colour 3 by `H`; the 1-contact is `G` **in-type** at `N`, the 3-contact `H` in-type at `S`. **No 3-tile holds `N`**. `N` and `S`: four colours, one sector each, no horn — no MERGE, MERGE-RAY or SHAVE applies there. Every unit arc's end (`G_R`, `G_L`, `H_R`, `H_L`) interior, neighbourhood fully coloured (float guard: 0 holes, 0 overlaps) |
+
+**Plants, each beside its faithful twin (which ACCEPTs), each firing for its registered reason and at exactly the registered pairs:** `chord2` →
+`(H2+,T)`, `(H2−,T)`; `p1_fat` → `(H1+,U2)`, `(H1−,U2)`; `q_swap` → `(Q+,U1)`; `h_is_g` → `(G,H)`; `no_cn` → ACCEPT (validity unchanged) with 2's
+only contact on `ω(E)` then `CS` (E no longer stuck: the stuckness report sees the missing contact); `closed_interval` on BOWTIE → the six tight pairs.
+
+**Defects of mine, found by the run, fixed before any verdict was drawn:** (1) the contact report first printed contact points only at piece
+endpoints, so the tangency of `L1`'s top edge with `ω(E)` at `P_1` (an interior point of the edge) showed no point — now every foot and radial point
+at distance exactly 1 is printed; (2) the "colours at `N`" report of END-B first read {3,4,5,6}, missing `L3`, because `N` is interior to `L3`'s top
+edge — a registered prediction ({1,3,4,5,6}) failed **for a wrong reason of the report**, now decided by the pieces' exact `contains`; (3) the float
+coverage guard at 96 segments per arc showed 1–3 "holes" at unit-arc ends, every one within 2.2·10⁻⁶ of a unit circle (a chord–arc sliver between
+two tiles subdividing one arc differently) and gone at 2,000 segments: an artefact of the guard, disclosed; the guard now uses 2,000.
+
+## Stage 2 — SAVED

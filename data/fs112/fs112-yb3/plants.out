@@ -1,0 +1,16 @@
+#### plants on Y3-END-A (predicted in the record before the run)
+== END-A faithful twin: ACCEPT  pairs examined 39 / present 39
+== plant chord2 (E's unit arcs -> chords): REJECT  pairs examined 39 / present 39
+   rejected: (H2+,T), (H2-,T)
+== plant p1_fat (P_1's horns' upper arcs of curvature 427/550 > 1/2): REJECT  pairs examined 39 / present 39
+   rejected: (H1+,U2), (H1-,U2)
+== plant q_swap (Q+ coloured 5): REJECT  pairs examined 40 / present 40
+   rejected: (Q+,U1)
+#### plants on BOWTIE
+== BOWTIE faithful twin: ACCEPT  pairs examined 21 / present 21
+== plant h_is_g (H given G's colour 1): REJECT  pairs examined 22 / present 22
+   rejected: (G,H)
+== plant no_cn (the top tile at N coloured 3: c no longer at N): ACCEPT  pairs examined 19 / present 19
+   contacts of colour 2 on the unit circle about E (plant no_cn) (0.00000, 0.00000): CS out at (0.00000, -1.00000)
+== BOWTIE under the checker plant closed_interval: REJECT  pairs examined 21 / present 21  [checker plant closed_interval]
+   rejected: (C+,CN), (C+,CS), (C-,CN), (C-,CS), (G,G), (H,H)

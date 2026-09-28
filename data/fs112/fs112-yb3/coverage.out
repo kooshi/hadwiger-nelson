@@ -1,0 +1,20 @@
+#### float coverage guard (samples on 8 circles x 72 directions about each named point)
+   coverage guard END-A at P_0 (0.0000, 0.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at P_1 (0.0000, 1.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at E (0.0000, 2.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at N (0.0000, 3.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at V_2+ (0.3846, 2.0769), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at V_2- (-0.3846, 2.0769), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A at (5/13, 2) (0.3846, 2.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-A merged at N (0.0000, 3.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-B at P_1 (0.0000, 1.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-B at E (0.0000, 2.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-B at N (0.0000, 3.0000), radius 0.02: 576 samples, holes 0, overlaps 0
+   coverage guard END-B at N+n (top half only is claimed) (0.0000, 4.0000), radius 0.02: 576 samples, holes 288, overlaps 0
+   coverage guard BOWTIE at E (0.0000, 0.0000), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at N (0.0000, 1.0000), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at S (0.0000, -1.0000), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at G_R (0.3846, 0.0769), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at G_L (-0.3846, 0.0769), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at H_R (0.3846, -0.0769), radius 0.01: 576 samples, holes 0, overlaps 0
+   coverage guard BOWTIE at H_L (-0.3846, -0.0769), radius 0.01: 576 samples, holes 0, overlaps 0

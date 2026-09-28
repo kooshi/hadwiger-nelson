@@ -41,6 +41,15 @@ def fp(p):
     return f"({float(p[0]):.5f}, {float(p[1]):.5f})"
 
 
+def fps(xs):
+    seen = []
+    for X in xs:
+        t = fp(X)
+        if t not in seen:
+            seen.append(t)
+    return ",".join(seen)
+
+
 def poly(*v):
     return [Seg(v[i], v[(i + 1) % len(v)]) for i in range(len(v))]
 
@@ -90,19 +99,41 @@ def blocked(z, tiles, colour, exclude=()):
     return out
 
 
+def _touch_points(v, pc):
+    """the points of the piece pc at distance exactly 1 from v, among its extreme candidates (vertex, segment foot, arc radial point)."""
+    out = []
+    for X in pc.ends():
+        if K.n2(K.vsub(X, v)) == q(1):
+            out.append(X)
+    if pc.kind == "S":
+        d = K.vsub(pc.Q, pc.P)
+        t = K.dot(K.vsub(v, pc.P), d)
+        if t.sign() > 0 and t < K.n2(d):
+            F = K.vadd(pc.P, K.vmul(t / K.n2(d), d))
+            if K.n2(K.vsub(F, v)) == q(1):
+                out.append(F)
+    else:
+        w = K.vsub(v, pc.C)
+        if not K.is0v(w):
+            for sg in (1, -1):
+                ww = K.vmul(sg, w)
+                A_, B_ = K.n2(w), (-pc.rho if sg == 1 else pc.rho)
+                if pc.has_dir(ww) and not K.lt1(A_, B_) and not K.gt1(A_, B_):
+                    fw = (float(ww[0]), float(ww[1]))
+                    nrm = math.hypot(*fw)
+                    out.append((float(pc.C[0]) + float(pc.rho) * fw[0] / nrm, float(pc.C[1]) + float(pc.rho) * fw[1] / nrm))
+    return out
+
+
 def contacts_on_circle(v, tiles, colour):
     """tiles of `colour` whose distance from v has min = 1 (out-type: the tile outside the open unit disc, touching it) or max = 1
-    (in-type), with the exact contact vertices at distance 1."""
+    (in-type), or min < 1 < max (crosses), with the points of their boundary pieces at distance exactly 1 from v."""
     res = []
     for nm, (c, ps) in sorted(tiles.items()):
         if c != colour:
             continue
         mn, mx = point_vs_tile(v, ps)
-        touch = []
-        for pc in ps:
-            for X in pc.ends():
-                if K.n2(K.vsub(X, v)) == q(1):
-                    touch.append(X)
+        touch = [X for pc in ps for X in _touch_points(v, pc)]
         if mn == "=" and mx == ">":
             res.append((nm, "out", touch))
         elif mx == "=" and mn == "<":
@@ -283,10 +314,15 @@ def bowtie(plant=None):
 
 
 # ============================================================ drivers
+def colours_at(v, tiles):
+    """colours of the tiles whose boundary holds v (an endpoint, or a point of a segment or an arc) -- exact."""
+    return sorted({c for nm, (c, ps) in tiles.items() if any(pc.contains(v) for pc in ps)})
+
+
 def report_contacts(v, tiles, colour, label):
     cs = contacts_on_circle(v, tiles, colour)
     print(f"   contacts of colour {colour} on the unit circle about {label} {fp(v)}: " +
-          ("; ".join(f"{nm} {kind} at " + ",".join(fp(X) for X in xs) for nm, kind, xs in cs) if cs else "none"))
+          ("; ".join(f"{nm} {kind} at " + fps(xs) for nm, kind, xs in cs) if cs else "none"))
     return cs
 
 
@@ -307,6 +343,8 @@ def run_enda():
     check(t, "Y3-END-A rebuilt (faithful)", show_tight=True)
     check(t, "Y3-END-A under the checker plant closed_interval (tightness visible)", plant="closed_interval")
     Nn, E, P1, P0 = P(0, 3), P(0, 2), P(0, 1), P(0, 0)
+    for v, lab in ((P0, "P_0"), (P1, "P_1"), (E, "E"), (Nn, "N")):
+        print(f"-- colours at {lab} {fp(v)} (exact): {colours_at(v, t)}")
     print("-- stuck at E (cone colour 3 = a_2): D_3(E) needs out-type 3-contacts at N and at P_1")
     report_contacts(E, t, 3, "E")
     print("-- stuck at P_1 (cone colour 2 = a_1): D_2(P_1) needs out-type 2-contacts at E and at P_0")
@@ -329,8 +367,7 @@ def run_endb():
     t = end_b()
     check(t, "Y3-END-B rebuilt (faithful)", show_tight=True)
     Nn, E, N1 = P(0, 3), P(0, 2), P(0, 4)
-    print("-- colours at N (tiles whose closure holds N):",
-          sorted({c for nm, (c, ps) in t.items() if any(K.veq(X, Nn) for pc in ps for X in pc.ends())}))
+    print("-- colours at N (tiles whose boundary holds N, exact):", colours_at(Nn, t))
     print("-- no MERGE at N: D_4(N) from the 4-contacts on the unit circle about N")
     report_contacts(Nn, t, 4, "N")
     print("-- E still stuck (out-type 3 at N and P_1; E's horn doubly shadowed at named points)")
@@ -347,8 +384,7 @@ def run_bowtie():
     check(t, "BOWTIE (faithful)", show_tight=True)
     E, Nn, S = P(0, 0), P(0, 1), P(0, -1)
     for v, lab in ((E, "E"), (Nn, "N"), (S, "S")):
-        cols = sorted({c for nm, (c, ps) in t.items() if any(K.veq(X, v) for pc in ps for X in pc.ends())
-                       or any(pc.kind == "A" and pc.contains(v) for pc in ps)})
+        cols = colours_at(v, t)
         print(f"-- colours whose tiles' closures hold {lab} {fp(v)}: {cols}")
     print("-- E stuck: D_2(E) (c = 2) from the 2-contacts on the unit circle about E")
     report_contacts(E, t, 2, "E")
@@ -358,8 +394,8 @@ def run_bowtie():
     pts = [P(Fr(1, 20), 0), P(Fr(1, 10), Fr(1, 400)), P(Fr(1, 5), Fr(-1, 100)), P(Fr(-1, 10), 0), P(Fr(1, 3), Fr(1, 20))]
     ok = shadow_points(t, pts, (1, 3), "E-horn")
     print(f"   E doubly shadowed at every named point: {ok}")
-    print("-- h = 3 at N? 3-tiles whose closure holds N:", [nm for nm, (c, ps) in t.items() if c == 3 and
-                                                      any(K.veq(X, Nn) for pc in ps for X in pc.ends())])
+    print("-- h = 3 at N? 3-tiles whose boundary holds N:", [nm for nm, (c, ps) in t.items() if c == 3 and
+                                                        any(pc.contains(Nn) for pc in ps)])
 
 
 def run_plants():
@@ -387,3 +423,90 @@ if __name__ == "__main__":
         run_bowtie()
     if "plants" in which or "all" in which:
         run_plants()
+
+
+# ============================================================ float coverage guard (a sanity check, never a verdict)
+def _piece_poly(pc, nseg=2000):   # 96 left chord-arc slivers of width ~2e-6 at arc ends (disclosed)
+    if pc.kind == "S":
+        return [(float(pc.P[0]), float(pc.P[1])), (float(pc.Q[0]), float(pc.Q[1]))]
+    cx, cy, r = float(pc.C[0]), float(pc.C[1]), float(pc.rho)
+    a0 = math.atan2(float(pc.S[1]) - cy, float(pc.S[0]) - cx)
+    a1 = math.atan2(float(pc.E[1]) - cy, float(pc.E[0]) - cx)
+    while a1 <= a0:
+        a1 += 2 * math.pi
+    return [(cx + r * math.cos(a0 + (a1 - a0) * i / nseg), cy + r * math.sin(a0 + (a1 - a0) * i / nseg)) for i in range(nseg + 1)]
+
+
+def _tile_loop(ps):
+    """chain the pieces into one closed polyline (float); raises if they do not close."""
+    polys = [_piece_poly(pc) for pc in ps]
+    loop = list(polys[0])
+    used = {0}
+    close = lambda a, b: abs(a[0] - b[0]) + abs(a[1] - b[1]) < 1e-9
+    while len(used) < len(polys):
+        for i, pl in enumerate(polys):
+            if i in used:
+                continue
+            if close(pl[0], loop[-1]):
+                loop += pl[1:]
+            elif close(pl[-1], loop[-1]):
+                loop += list(reversed(pl))[1:]
+            else:
+                continue
+            used.add(i)
+            break
+        else:
+            raise ValueError("pieces do not chain")
+    if not close(loop[0], loop[-1]):
+        raise ValueError("loop not closed")
+    return loop
+
+
+def _inside(pt, loop):
+    x, y = pt
+    c = False
+    for (x1, y1), (x2, y2) in zip(loop, loop[1:]):
+        if (y1 > y) != (y2 > y):
+            if x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+                c = not c
+    return c
+
+
+def coverage(tiles, centres, r, label):
+    loops = {nm: _tile_loop(ps) for nm, (c, ps) in tiles.items()}
+    bad = 0
+    tot = 0
+    for (cx, cy), lab in centres:
+        holes = over = 0
+        for i in range(1, 9):
+            rr = r * i / 8
+            for j in range(72):
+                a = 2 * math.pi * (j + 0.5) / 72
+                pt = (cx + rr * math.cos(a), cy + rr * math.sin(a))
+                n = sum(_inside(pt, lp) for lp in loops.values())
+                tot += 1
+                holes += n == 0
+                over += n > 1
+        bad += holes + over
+        print(f"   coverage guard {label} at {lab} ({cx:.4f}, {cy:.4f}), radius {r}: {8 * 72} samples, holes {holes}, overlaps {over}")
+    return bad
+
+
+def run_coverage():
+    print("#### float coverage guard (samples on 8 circles x 72 directions about each named point)")
+    ta = end_a()
+    cA = [((0, 0), "P_0"), ((0, 1), "P_1"), ((0, 2), "E"), ((0, 3), "N"), ((5 / 13, 27 / 13), "V_2+"), ((-5 / 13, 27 / 13), "V_2-"),
+          ((5 / 13, 2), "(5/13, 2)")]
+    coverage(ta, cA, 0.02, "END-A")
+    tm = end_a(merged=True)
+    coverage(tm, [((0, 3), "N")], 0.02, "END-A merged")
+    tb = end_b()
+    coverage(tb, [((0, 1), "P_1"), ((0, 2), "E"), ((0, 3), "N"), ((0, 4), "N+n (top half only is claimed)")], 0.02, "END-B")
+    tw = bowtie()
+    s, c = 5 / 13, 12 / 13
+    coverage(tw, [((0, 0), "E"), ((0, 1), "N"), ((0, -1), "S"), ((s, 1 - c), "G_R"), ((-s, 1 - c), "G_L"), ((s, -1 + c), "H_R"),
+                  ((-s, -1 + c), "H_L")], 0.01, "BOWTIE")
+
+
+if __name__ == "__main__" and "coverage" in sys.argv[1:]:
+    run_coverage()
