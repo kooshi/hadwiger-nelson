@@ -406,3 +406,14 @@ already, and step 4 applies; the one-horn case — outside the setting, named. *
   doubly bounded fragment to test C-ENDS; instead the sketch's step 3 excludes it when all four arcs are unit arcs, and the rest is named as residue.
 
 ## Stage 1b — SAVED
+
+### FS112-C2 stage log
+
+- **Stage 2 — SAVED** (0aa280da): `plans/FS112-derivation.md` — the Y3 entries' grades set, Y3-END-NEEDS restated, FS112-BOWTIE, FS112-C-HORNEND and
+  FS112-C-DOUBLE filed (56 entries), C-ENDS repaired with its residue, C-COMPOSE's and C-PARTNERS's grades, N3-END's and END's verdicts, eight errata rows
+  (`data/fs112/fs112-c2/deriv_edit.py`); the § B draft's lines (56); `tools/fs71_ledger_b_check.py --strict` PASS on a scratch copy, 1,003 theorems
+  (`data/fs112/fs112-c2/ledger-strict.out`; its `--self-test` fires, `ledger-selftest.out`).
+- **Stage 3 — SAVED**: §R-close — 3.0, 3.1 (extraction 11), 3.3 (§IQ (c), G79), 3.4 (E16, N3-P5, YB3), 3.5, 3.6, 4.1 (rows 135–136, FORM-1B set, § B), 4.3,
+  4.5 (FS-115's row), 4.6 (G51, G79, § Building), 4.7 (rule 14), all inside §R-close (`data/fs112/fs112-c2/rclose_edit.py` asserts it); `data/fs112/claims.md`
+  §11 item 20. **The CLAUDE.md drafts (4.2) are unchanged**: no stage-1b finding needs a front-page line, so their measured bytes stand (G83 applied by
+  the owner's ruling, item 65).

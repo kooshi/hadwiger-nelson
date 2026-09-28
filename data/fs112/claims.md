@@ -335,3 +335,11 @@ wrong, the corrected statement is here; the text above is not rewritten.*
     strip); 8 met — every NO step named reads beyond the strip only where its conclusion holds (FS112-N3-BASE, FS112-N3-DENSE3).
 19. **The global statement FS-112 leaves:** every valid map has a vertex of at least four colours or a repeated colour within 3 of every point
     [hand; two minds, one blind] — FS112-N3-DENSE3; how its two open steps compose — FS112-C-COMPOSE [one mind: FS112-C].
+20. **The chain's end at a unit arc (C-CHAIN-8/9 with unit arcs; FS112-Y3's card R, R2), added at stage 1b (FS112-C2, 2026-09-27).** Y3-END-NEEDS as
+    stated — "So a stuck chain cannot end at a unit arc in a terminal map while `E` has three colours" — is **FALSE**: FS112-BOWTIE, an exact valid fragment
+    (21 / 21 pairs), is a three-colour stuck vertex between two unit circles, shadowed by in-type radius-1 sectors at both neighbours, locally terminal
+    [tools, exact; one fragment: YB3]. **Corrected** [hand; the levels two minds, one blind: Y3; YB3; the scope one mind: YB3]: if both horns of a stuck
+    vertex of a terminal map are bounded by unit arcs of `ω(E + n)` and neither by a unit arc of `ω(E − n)` — every end of a chain of two or more vertices
+    — a seventh colour is needed; so a horn bound `±1` on both horns occurs only at a one-vertex chain (FS112-C-HORNEND, one mind), which, when all four
+    horn arcs are unit arcs, sits between two (Q) centres of at least four colours (FS112-C-DOUBLE, one mind, a sketch). BOWTIE is FS112-N3-END's second
+    disjunct, the doubly bounded one-vertex chain — FS112-Y3-END-NEEDS, FS112-BOWTIE.
