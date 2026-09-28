@@ -1,0 +1,46 @@
+== count
+FAIL A = E' - V4 + 3V6 + U (NB-ARCS, exact): -3*V3/2 - 3*V4 - 9*V5/2 - 6*V6
+FAIL 2N = 2V4 - 6V6 - 2U (N2-ENDS): 3*V3 + 6*V4 + 9*V5 + 12*V6
+PASS p5(3) > 0: 3
+PASS p6(3) = 2(d-3)(d-5): 0
+PASS d^2 - 7.5d + 15 = d/2 - [d=4] + 3[d=6] at d=3: 3/2 vs 3/2
+PASS p5(4) > 0: 4
+PASS p6(4) = 2(d-3)(d-5): -2
+PASS d^2 - 7.5d + 15 = d/2 - [d=4] + 3[d=6] at d=4: 1 vs 1
+PASS p5(5) > 0: 9
+PASS p6(5) = 2(d-3)(d-5): 0
+PASS d^2 - 7.5d + 15 = d/2 - [d=4] + 3[d=6] at d=5: 5/2 vs 5/2
+PASS p5(6) > 0: 18
+PASS p6(6) = 2(d-3)(d-5): 6
+PASS d^2 - 7.5d + 15 = d/2 - [d=4] + 3[d=6] at d=6: 6 vs 6
+== crown
+PASS chord(59 deg) <= 1 iff gap <= 60 or >= 300: 0.98484712
+PASS chord(60 deg) <= 1 iff gap <= 60 or >= 300: 1.0000000
+PASS chord(61 deg) <= 1 iff gap <= 60 or >= 300: 1.0150767
+PASS chord(299 deg) <= 1 iff gap <= 60 or >= 300: 1.0150767
+PASS chord(300 deg) <= 1 iff gap <= 60 or >= 300: 1.0000000
+PASS chord(301 deg) <= 1 iff gap <= 60 or >= 300: 0.98484712
+PASS d=3: d gaps of <= 60 deg cannot close 360: 180
+PASS d=4: d gaps of <= 60 deg cannot close 360: 240
+PASS d=5: d gaps of <= 60 deg cannot close 360: 300
+PASS one long gap: sectors confined to 240 deg < 360
+== strip
+PASS strip column violates N2-ENDS (residual > 0): residual 6 per column
+== beta
+PASS |w0 w1| = 1
+PASS |w1 w2| = 1
+PASS |w2 w3| = 1
+PASS |w3 w4| = 1
+PASS diagonal w0 w2 >= 1: 1.4142136
+PASS diagonal w1 w3 >= 1: 1.4142136
+PASS |v a1| = 1 (the five diagonals of t_1): 1.000000000
+PASS |v b1| = 1 (the five diagonals of t_1): 1.000000000
+PASS |w0 a1| = 1 (the five diagonals of t_1): 1.000000000
+PASS |w1 b1| = 1 (the five diagonals of t_1): 1.000000000
+PASS |w0 w1| = 1 (the five diagonals of t_1): 1.000000000
+PASS |a1 b1| <= 1 (the sides of t_1): 0.8228756555
+PASS |w1 a1| <= 1 (the sides of t_1): 0.4208614314
+PASS |w0 b1| <= 1 (the sides of t_1): 0.4208614314
+PASS |v w1| <= 1 (the sides of t_1): 0.7071067812
+PASS |v w0| <= 1 (the sides of t_1): 0.7071067812
+RESULT FAILED: A = E' - V4 + 3V6 + U (NB-ARCS, exact); 2N = 2V4 - 6V6 - 2U (N2-ENDS)

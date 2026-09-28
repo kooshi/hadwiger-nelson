@@ -24,6 +24,19 @@ tiles the components of `ℝ² ∖ Γ` (adjacent tiles of one colour merged), `P
 | N114-COMPACT | C114-COMPACT: TRUE at every `K`; a radius uniform in `K` exists iff C-LOCAL holds, and then (with FS112-N3-DENSE3) at radius `R + 3` | [hand, one mind] | §1.4 (1) |
 | N114-VOR | `[Voronov2023]` Thm 1.3 applied to a valid map's closed colour classes: every open disc of radius 3 holds a same-colour unit contact (a tile of diameter exactly 1, or two same-colour tiles at distance exactly 1) — true and no contradiction; C114-VOR fails at C-CS-1's step (c) | [hand, one mind, over V-1.3 at FS106-V's grade] | §1.4 (2) |
 | N114-THOM | C114-THOM-TOP: Lemma 1 holds (graph theory); the rainbow step becomes N114-RD; "`M − x` is connected" is a GAP at tiles with holes or pinch points, repairable in the non-Siamese case by Thomassen's own area count, not with Siamese pairs | [hand, one mind; the repair a sketch] | §1.4 (3) |
+| N2-ABS | **Second mind on NB-ABSENT / NB-COUNT.** On a non-Siamese valid map with `μ = 0`, the tiles meeting `x` at a vertex alone are exactly the (A) partners (`A_x` of them) plus the tiles of colours absent from `x` and its edge-neighbours, at most 3 per absent colour; so `3 s(x) + Σ_{v∈∂x}(d(v) − 3) ≤ 3(k − 1) + A_x` | [hand; two minds, one blind: NB; N2 sighted] | §N2-2.1 |
+| N2-FIVE | C114-FIVE-COUNT: **TRUE** — no non-Siamese valid five-colour map is cellular on a torus with `μ = 0` (`Σ_v p_5(d) ≤ 0` with `p_5 = 3, 4, 9` at `d = 3, 4, 5`). My stage-1 "GAP at (B)" is withdrawn | [hand; two minds, one blind: NB; N2; tools exact] | §N2-2.1; `tools/fs114_n2_count.py count` |
+| N2-SLACK | At six colours, exactly `A = E′ − V₄ + 3V₆ + U`, `U = Σ_x (3a(x) − B_x) ≥ 0` the unused absent-colour capacity | [hand; tools exact] | §N2-2.2 |
+| N2-ENDS | **The count in edge-end form.** With `n(p)` the non-tactic edges at `p`: `Σ_{d=3} n + Σ_{d=4} (n − 2) + Σ_{d=5} n + Σ_{d=6} (n + 6) + 2U = 0`; every tactic edge's end `p` lies at distance exactly 1 from its centre `q ∈ F`, both in the closure of its inner tile | [hand; tools exact] | §N2-2.2 |
+| N2-VCAP | The per-vertex (A) cap `e(q) ≤ d(d − 3)` is attained at degree 4 by the strip's midline vertices, and `Σ_q d(d−3) ≥ E′ − V₄ + 3V₆` is edge-rainbow restated: **no per-vertex supply bound can be the kill** | [hand] | §N2-2.3 |
+| N2-DIAM | A tile's inner tactic arcs total at most 180° (its diameter segments are pairwise non-parallel); equality for Reuleaux polygons | [hand] | §N2-2.3 |
+| N2-KILL | The torus NO (non-Siamese, `μ = 0`) follows from **K1** (a degree-4 vertex has at most two tactic edges) and **K2** (no map realises N2-ENDS's extreme: every cubic and degree-5 vertex fully tactic, `n = 2` at every degree-4 vertex, `V₆ = 0`, `U = 0`). Both positives satisfy K1 (strip `n = 4`, disk `n = 2`) and violate the extreme | [hand; K1, K2 open] | §N2-2.3 |
+| N2-CROWN | At a vertex `v` of degree `d`, if every edge at `v` ends on `ω(v)`, then `d ≥ 6` (equality only with consecutive ends 60° apart) | [hand; tools exact arithmetic] | §N2-2.4; `… crown` |
+| N2-PENT | C114-REDBLOCK's "no pentagons": in a non-Siamese six-map where every tile has five edge-neighbours, the five tiles at a degree-5 vertex never lie in five different blocks of the missing colour | [hand, one mind] | §N2-2.4 |
+| N2-QUAD | Same class, degree-4 vertex in four different blocks: forced to the all-β configuration (or its mirror) — a unit rhombus of degree-4 vertices about `v`, each tile an equidiagonal pentagon — which passes every local check made; "no quadrilateral" is a **GAP** | [hand; tools exact on the square instance] | §N2-2.4; `… beta` |
+| N2-ENC3 | C114-ENCLOSED3: **GAP**. Insertion lemma: a tiny tile of a colour missing from `B̄(u, 1)` placed at a cubic vertex `u` of a non-Siamese valid map leaves it non-Siamese and valid, with an enclosed three-neighbour tile; so ENCLOSED3 implies COVER-3 (every colour meets `B̄(u, 1)` at every cubic vertex), and no argument reading only the tile and its neighbours proves it | [hand, one mind] | §N2-2.5 |
+| N2-SIAM | Route T as a count is **blind to Siamese vertices**: at a vertex with repeated colours the demand `(d − 2)(d − 3)` is paid by (S) repeats at no cost, and `d` is unbounded; the count reaches the non-Siamese case only | [hand, one mind] | §N2-2.6 |
+| N2-MU | `μ > 0` lowers demand by `μ` and is not charged by the count: GAP-μ. In the non-Siamese class a hole holds at most five tiles (one per colour but the tile's) | [hand, one mind] | §N2-2.6 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -33,6 +46,10 @@ tiles the components of `ℝ² ∖ Γ` (adjacent tiles of one colour merged), `P
 | enumerate degree-5 tile graphs (Sirgedas's searcher) to see whether the count closes | the Euler identity N114-EULER in closed form, checked exactly on five torus maps given by formula |
 | search for a (B)-type fragment | a formula (hexagon of diameter 1, two half-planes), checked by the projection inequality by hand |
 | scan disc radii for a Mohar-type discharging | the Følner accounting in words (§1.4 (1), (5)) |
+| (N2) search torus maps for a counterexample to the six-colour room | the count made exact (N2-SLACK, N2-ENDS) and checked as symbolic identities |
+| (N2) enumerate configurations at a degree-4 vertex with three or four tactic edges | stated the kill K1 as a claim, checked it on the two held positives by reading their data |
+| (N2) search for a fragment realising a red-block quadrilateral | a case analysis to the all-β configuration, its metric claims checked exactly on one named instance (the square) |
+| (N2) search for an enclosed three-neighbour tile | the insertion lemma, by hand |
 
 ## Fence log (standing rule 13; brief § Fences)
 
@@ -43,6 +60,11 @@ tiles the components of `ℝ² ∖ Γ` (adjacent tiles of one colour merged), `P
 4. **Priming, not a fence touch:** the brief sent me to the plan's stage 5b, which names the registrations **E18** (the non-Siamese case decided at one
    mind, p 0.25) and **E19** (Sirgedas's red-block statements hold, p 0.6), and "E14 corrected". I read 5b before committing stage 1; §5.3 itself unread.
 5. BASE-V's notice (the owner, mid-stage): no step of the base failed; FS112-N3-BASE and FS112-N3-DENSE3 keep their grades. Its record is now unfenced; not
+6. (N2, start-up) `ls data/fs114/` listed the directory names `fs114-nb`, `fs114-y`, `reports` (contents not listed); the harness's start-up git
+   status showed the untracked names `data/fs114/fs114-nb/`, `tools/fs114_nb_count.py`, `tools/fs114_nb_quotes.py`. Names only.
+7. (N2) The owner unfenced FS114-NB's record mid-stage; I read its header, §1.2, §2.2–2.4 (not its tools' code). Every use is marked "NB" below. I read
+   `plans/FS111-V0-verification.md` §2.3, §2.4 items 1–3, §2.7, §2.8 and `data/fs111/claims.md` §2 (both unfenced by the brief), nothing else of FS-111.
+8. (N2) The construction side's files stay unread (`plans/FS114-Y-construction.md`, `data/fs114/fs114-y/`, `tools/fs114_y_*`).
    read (nothing of stage 1 rests on the base beyond DENSE3 as filed).
 
 ## Stage 1 — SAVED: reading, the quotation check, card 2 by derivation, the route
@@ -211,3 +233,202 @@ edge vertices (the pinned corner), not derived here. **Disk:** the same, at the 
 FS112-U1's wedges, A4SIX, SIX and tile diameter `≤ 1`; then N114-FIVE's (B) step at five colours (the positive control) before any six-colour claim;
 C114-REDBLOCK and C114-ENCLOSED3 by derivation; `μ` (pockets) and Siamese (S) repeats in the count. **Stage 3:** discharging at bounded `K` (Mohar Thm 3.1)
 and the question of an area-normalised charge.
+
+## Continuation — FS114-N2
+
+*Job FS114-N2, de Bruijn (Opus 5.5), continuing FS114-N from its SAVED stage 1 at HEAD `1a57616d`. Brief `data/fs114/briefs/N2-114-proof-continuation.md`
+with FS114-N's brief and `STANDING-RULES.md` (rule 0 first). Working files `data/fs114/fs114-n2/`; exact checks `tools/fs114_n2_*.py`. Notation as stage 1,
+with: a **tactic edge** is an edge of the map (between vertices of degree ≥ 3) that supplies an (A) repeat — a whole unit arc on `ω(q)`, its inner tile `x`
+with `q ∈ cl x`, and a tile of the outer tile's colour touching `x` at `q` alone (NB-A1: each edge supplies at most one); `n(p)` is the number of non-tactic
+edges at a vertex `p`; `s(x)` the edges of `x`, `a(x) = k − 1 − s(x)` its absent colours, `B_x` its vertex-neighbours of absent colour. Grades: § Notation.*
+
+## Stage N2-2 — SAVED: the five-colour control closed; the six-colour count made exact; the kill located; the red blocks; Siamese pairs and `μ`
+
+### N2-2.0 Reading and the quotation check
+
+Read from disk: the claim list in full; the plan's §G part 3, §IQ, 5.0–5.3 (5.3 now open) and 5b; `plans/FS112-derivation.md` §§1–3 (U1, SIX, A4SIX,
+NB4P, N3-NOBOTH, N3-COR3, N3-BASE, N3-DENSE3, C-ENDS); the Google-group thread `Z50mmulkXCQ` lines 1375–2200 (the metagraph and red-block posts, first
+occurrences; the quoted copies skipped); the strip's and the disk's rebuilt data (`plans/FS112-Y-construction.md` §1.3, §2.2, §4.1–4.4); and, once the owner
+unfenced them, FS114-NB's §1.2 and §2.2–2.4 and FS111-V0's §2.3–2.4, §2.7–2.8. `tools/fs114_n2_quotes.py`: **12 of 12 FOUND** (`quotes.out`) — the brief's one
+quotation (FS114-N's closing lines), standing rule 10's, FS111-C1-PW and FS111-V0's note on it, five of Sirgedas's red-block sentences, two of NB's, one of
+the disk's. Plant (one word changed) NOT FOUND beside its faithful twin FOUND (`quotes-plant.out`).
+
+### N2-2.1 The five-colour control closes (NB's step, second-minded) — and what I withdraw
+
+**N2-ABS [hand; two minds, one blind: NB; N2 sighted].** Non-Siamese, `μ = 0`. Every tile `z ∈ N[x]` touching `x` at a vertex `v` alone has one of two kinds.
+(i) Its colour is carried by an edge-neighbour `y` of `x`: `{y, z}` is far (non-Siamese) and `y` holds an arc, so by N114-RD it is (A) with centre `v` and
+`x` inner — the edge `x|y` is tactic, and (NB-A1) each tactic edge has exactly one partner, so there are exactly `A_x` such `z`. (ii) Its colour is absent
+from `x` and its edge-neighbours: all tiles of that colour in `N[x]` touch `x` at vertices alone and are pairwise far, so all their contact points are pairwise
+at distance exactly 1 (N114-RD's cross-distance step) — at most three (no four points in the plane are pairwise at distance 1). Hence the identity
+`Σ_{v∈∂x} (d(v) − 3) = A_x + B_x` with `B_x ≤ 3a(x)`, which with `s(x) ≤ k − 1` (edge-rainbow) is NB's tile inequality `3 s(x) + Σ_{v∈∂x}(d(v) − 3) ≤ 3(k−1) + A_x`.
+Summed with `Σ_x A_x = A ≤ E′`, `2E′ = Σ_v d`, `F = E′ − V′`: `Σ_v p_k(d(v)) ≤ 0`, `p_k(d) = 2d² + (2 − 3k)d + 6k − 6` — re-derived here, and checked as a
+polynomial identity (`tools/fs114_n2_count.py count`: `p_5(3), p_5(4), p_5(5) = 3, 4, 9`; `p_6 = 2(d − 3)(d − 5)`). **N2-FIVE: C114-FIVE-COUNT is TRUE** on
+cellular torus maps with `μ = 0`, two minds; where six's room enters: `p_6(4) = −2`, the degree-4 vertices, and nowhere else.
+
+**What I withdraw from stage 1, each at NB's grade (one mind, blind), conceded sighted — so no concession below is a third mind:**
+- N114-FIVE's "C114-FIVE-COUNT is a GAP at (B)", and the route verdict's reversal condition ("a derivation that (B) repeats cannot be bounded even at five
+  colours"): answered the other way — (B) is bounded by the absent colours (NB D1).
+- C114-DUAL-COUNT "MISSTATED as emits": under its hypothesis (five edge-neighbours per tile) no colour is absent, so there is no (B) and every quad's four
+  repeats are (A): **TRUE, at least 80 %, exactly 80 % when no vertex has degree 5 or 6** (NB D2).
+- C114-THOM-TOP's pinch clause: at a pinch vertex the pocket's tile and an outside tile both contain the vertex, so they are adjacent in `M` — FALSE as I
+  stated it; `M − x` disconnects only at a hole (NB D3). NB's colour-free repair (local finiteness in place of Thomassen's counting condition) I have not
+  re-derived; the owner has it as NB's reading, a third mind owed.
+- N114-COMPACT at one fixed `K` (NB D5): "at most `K` tiles per unit disc" is not preserved under limits; TRUE quantified over all `K`.
+- N114-VOR (NB D6): Voronov's disc is closed, and a close same-colour pair with `diam(T ∪ T′) = 1` is a third case. N114-EULER's `μ` counts self-meetings
+  (D7). N114-RB's (B) is "not excluded by the pair's geometry", never "realised" (D8). A repeat is counted as excess, not as a colour (D9).
+- N114-RD's reading radius: `1 + 1/√3` about the tile's Jung centre (NB), sharper than my 2.
+
+### N2-2.2 The six-colour count, exact to the edge (torus, non-Siamese, `μ = 0`)
+
+**N2-SLACK [hand; tools exact].** Summing N2-ABS's identity over tiles: `Σ_v d(d − 3) = A + Σ_x B_x = A + 3Σ_x a(x) − U`, with `Σ_x a(x) = 5F − 2E′` and
+`U = Σ_x (3a(x) − B_x) ≥ 0`. With `F = E′ − V′` this is `A = Σ_v (d² − 7.5d + 15) + U`, and per vertex `d² − 7.5d + 15 = d/2 − [d = 4] + 3[d = 6]` (checked at
+`d = 3…6`; non-Siamese forces `d ≤ 6`), so **`A = E′ − V₄ + 3V₆ + U` exactly** — NB-ARCS with its slack named: the only slack in the count is unused
+absent-colour capacity.
+
+**N2-ENDS [hand; tools exact].** The non-tactic edges number `N = E′ − A = V₄ − 3V₆ − U`, and `Σ_p n(p) = 2N`, so
+`Σ_{d(p)=3} n(p) + Σ_{d(p)=4} (n(p) − 2) + Σ_{d(p)=5} n(p) + Σ_{d(p)=6} (n(p) + 6) + 2U = 0`. **Every end of a tactic edge lies at distance exactly 1 from the
+edge's centre `q ∈ F`, and both lie in the closure of its inner tile** (the edge is a whole arc of `ω(q)`; `q ∈ cl x` for the inner tile `x`), so a tactic edge
+at a vertex `p` names a four-colour vertex at distance exactly 1 from `p` sharing a tile with it (C-PARTNERS' "unit rhombus" corners are of this kind).
+*Reading the identity:* the charge `n` (cubic), `n − 2` (degree 4), `n` (degree 5), `n + 6` (degree 6), plus `2U`, sums to zero. **It is negative at exactly one
+vertex type: a degree-4 vertex with three or four tactic edges.** Everything else must be paid for by those.
+*Controls* (`tools/fs114_n2_count.py strip`, and the rebuilt data read by hand): **the strip** — midline vertices `n = 4` (four straight edges), valleys and
+apexes `n = 1` (one straight side each): residual `+6` per column. Its local pattern, straight edges at the four-colour and cubic vertices, is what the torus
+count forbids: the strip cannot be the local structure of a torus map anywhere near its average. **The disk** — corners `A_k`: `n = 2` (the two straight
+legs `A_kX_{k−1}`, `A_kY_k`; the two central arcs at `A_k` are tactic, centred `A_{k+2}`, `A_{k+3}`, partners the ring-2 tiles `T2_{k+2}`, `T2_{k+3}`), charge 0;
+`B_k`: `n = 1`; `X_k, Y_k, Z_k^{L,R}`: `n = 2`. Both positives carry positive charge at their cubic vertices, consistent with neither extending. **Hexagonal
+seven-colouring:** the count is at `k = 7`, outside this identity; at `k = 6` it fails edge-rainbow — six is spent at `s(x) ≤ 5`, as NB found.
+
+### N2-2.3 The kill, located (the stage-1 target answered)
+
+**N2-VCAP [hand]. No per-vertex supply bound can be the kill.** The (A) supply at a four-colour vertex `q` of degree `d` is at most `d(d − 3)` (one emission per
+ordered pair of a tile at `q` and a tile at `q` meeting it there alone). At degree 4 the cap is **attained** by the strip's midline vertices: each of the four
+arches at `P_j` emits one arc of `ω(P_j)` (FS112-Y §1.3 item 2: four arcs of kind both, each the tactic). And the capped count is edge-rainbow restated:
+`Σ_q d(d − 3)V_d ≥ E′ − V₄ + 3V₆ ⟺ V₃ ≤ 2V₄ + 5V₅ + 8V₆ ⟺ 2E′ ≤ 5F`. So U1's wedges, A4SIX, SIX and diameter `≤ 1` bound the supply at a vertex by what the
+strip already realises, and the count's slack survives every per-vertex supply bound. The kill must be on the edge side, where N2-ENDS puts it.
+
+**N2-DIAM [hand; classical in kind (Hopf–Pannwitz; the arcs of a Reuleaux polygon sum to π)].** The inner tactic arcs of one tile total at most 180°: each is
+swept by diameter segments `[q, a]`, `a` on the arc; two distinct diameter segments of a planar set of diameter 1 are never parallel (if `q′ = q + t`,
+`a′ = a + t`, `t ≠ 0`, one of `|a′ − q|`, `|a − q′|` exceeds 1), so the fans' direction sets, taken modulo π, are disjoint up to endpoints. *Use:* a cap per
+tile, but the count needs no arc length, so it does not bite by itself.
+
+**N2-KILL — the torus NO reduced to two statements [hand; K1, K2 open].**
+- **K1** *(a claim)*: a vertex of degree 4 in a non-Siamese valid map has at most two tactic edges (`n(p) ≥ 2`).
+- **K2** *(a claim)*: no non-Siamese valid six-map, cellular on a torus with `μ = 0`, has every cubic and every degree-5 vertex fully tactic, `n = 2` at every
+  degree-4 vertex, no degree-6 vertex and `U = 0`.
+K1 makes every charge of N2-ENDS non-negative, so the identity forces each to zero: that is K2's object; K2 excludes it. **So K1 ∧ K2 ⟹ no non-Siamese valid
+six-map is cellular on a torus with `μ = 0`.** *The extreme's shape (derived):* its non-tactic edges join degree-4 vertices to degree-4 vertices, two at
+each, so they form disjoint closed curves through the four-colour vertices (the strip's midline is one, straightened); every other edge is a unit arc centred
+at a four-colour vertex at distance 1 from both its ends; and `U = 0` makes every tile with an absent colour carry it on three vertex-neighbours at the corners
+of a unit equilateral triangle in its closure — the tile lies in that triangle's Reuleaux triangle, and a second absent colour must use the same three corners
+(a Reuleaux triangle of width 1 contains exactly one unit equilateral triangle: if `T′ ⊂ R` then `R ⊂ Reuleaux(T′)`, of equal area), so those corners have
+degree at least 5. *Controls:* both positives satisfy K1 (strip `n = 4`, disk `n = 2`) and violate the extreme (cubic charge `+1`, `+2`). *Killing test of
+the route:* a local fragment by formula with a degree-4 vertex carrying three tactic edges refutes K1, and then the kill must be found among the vertex
+types N2-ENDS charges positively, jointly. **Which vertices it reads (G83):** K1 reads one four-colour vertex and its unit partners (radius 2 about it); K2
+reads the whole torus.
+
+### N2-2.4 A crown lemma, and C114-REDBLOCK
+
+**N2-CROWN [hand; tools exact arithmetic].** *At a vertex `v` of degree `d` with tiles `t_1 … t_d` in cyclic order, let `w_i` be the far end of the edge `e_i`
+shared by `t_i` and `t_{i+1}`. If every `w_i` lies on `ω(v)`, then `d ≥ 6`, with equality only when consecutive ends are 60° apart.* *Proof.* `w_{i−1}, w_i ∈ cl t_i`
+and `diam t_i ≤ 1` give `|w_{i−1} − w_i| ≤ 1`. The edges lie in `B̄(v, 1)` (each in the closure of a tile containing `v`) and meet only at `v`, so the `w_i` sit on
+`ω(v)` in the edges' cyclic order; the positive gaps `g_i` from `w_{i−1}` to `w_i` sum to 360°, and a chord `≤ 1` means `g_i ≤ 60°` or `g_i ≥ 300°`. If every
+`g_i ≤ 60°`, then `60d ≥ 360`. If one `g_i ≥ 300°`, all `w_j` lie in an arc of 60°; `t_j ⊂ B̄(w_j, 1)` with `v ∈ ω(w_j)`, so `t_j`'s sector at `v` lies within 90° of
+the direction of `w_j`, and all sectors lie in a range of `60° + 180° = 240°`, yet they cover every direction. ∎ *Reads* `B̄(v, 1)`. *Control:* the regular
+hexagon of unit triangles about `v` (six tiles of diameter 1) meets it with equality — `crown6`'s plant, which claims `d = 6` excluded, fails as it must.
+
+**C114-REDBLOCK — Sirgedas's statements, each for non-Siamese valid six-maps with `μ = 0` and five edge-neighbours per tile (the claim list's class).**
+In this class every tile's closed edge-neighbourhood is rainbow of size six, so every non-red tile has exactly one red edge-neighbour.
+1. **"Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red blocks" — TRUE [hand, one mind].** ("Define a red "block" as a red
+   tile and its neighbors."): each non-red tile lies in the block of its one red edge-neighbour, and two red tiles have no common edge-neighbour (it would
+   carry two red edge-neighbours — Siamese).
+2. **The metagraph is planar — TRUE, by a route other than his [hand, one mind].** His proof ("No! Proof: connect one diagonal via 2 tiles (tiles are
+   vertices in the image above). The other diagonal can't be formed, because the diagonals must cross at a vertex, making two red vertices too close
+   together.") is not re-derived. Instead: each block is a star in the edge-adjacency dual `D`, hence connected, and the blocks partition `D`'s vertices; two red
+   tiles at "tile distance" 3 are exactly two blocks joined by an edge of `D` (distance 2 would be a common edge-neighbour, excluded by 1; a `D`-edge from
+   `R`'s block to `R′`'s is a path `R–a–b–R′`). So the metagraph is `D` with every block contracted — a minor of a planar graph. Its faces are the map vertices
+   whose surrounding tiles, read cyclically, pass through at least three blocks.
+3. **"Also this graph can't have pentagons." — TRUE [hand, one mind] (N2-PENT).** A pentagonal face is a vertex `v` whose tiles span five blocks; a red tile at
+   `v` would put three consecutive tiles in one block, so `v` has degree 5, five non-red colours, as he says ("A pentagon in the red metagraph means that the
+   boundaries of the 5 red blocks share a common point. So, exactly 5 tiles meet at this common point, using all 5 non-red colors."). Each `t_i` meets
+   `t_{i+2}`, `t_{i+3}` at `v` alone; their colours are carried by edge-neighbours of `t_i`, so (N114-RD) `t_i` has two tactic arcs on `ω(v)` with outer colours
+   `c_{i+2}, c_{i+3}`; its five edges are `e_{i−1}`, `e_i`, those two arcs and its red edge. At `w_i`, the tiles are `t_i, t_{i+1}, u¹, …, u^m`. If `m ≥ 2`, `u¹`
+   meets `t_i` at `w_i` alone, so `t_i` has a tactic edge centred at `w_i` of `u¹`'s colour; its arcs are centred at `v`, so it is the red edge and `u¹` is red;
+   symmetrically `u^m` is red; two red tiles at `w_i` — Siamese. So `w_i` is cubic, and its third tile is a common far neighbour of `t_i`, `t_{i+1}`: red (then
+   `r_i = r_{i+1}`) or of colour `c_{i+3}` (then it lies across `t_i`'s arc on `ω(v)`, so `w_i ∈ ω(v)`). Five different blocks put every `w_i` on `ω(v)`, and
+   N2-CROWN refuses `d = 5`. ∎ His own proof ("The 5 rigid EDs have length 1, but then the "pentagon" will have at least one "edge" with length > 1.") reads
+   as the crown's gap step, not re-derived from his words.
+4. **"Similarly the metagraph can't have a quadrilateral." — GAP [hand, one mind] (N2-QUAD).** Quadrilateral faces are vertices of degree 4, 5 or 6 whose tiles
+   span four blocks. **Degree 4, four blocks, walked:** with colours `c_1 … c_4` at `v` and yellow, red absent, each `t_i` has far edges to `y_i` (colour
+   `c_{i+2}`, a tactic arc on `ω(v)`), `r_i`, `o_i`. At `w_i` there are no middle tiles (a middle colour `c_{i+2}` or `c_{i+3}` would need an arc of `t_i` or `t_{i+1}`
+   centred at `w_i` where its only edge of that colour is centred at `v`), so `w_i` is (α) cubic with a shared yellow tile, or has degree 4 as (β)
+   `t_i, t_{i+1}, r_{i+1}, o_i` or (γ) `t_i, t_{i+1}, o_{i+1}, r_i`, with the corresponding red and yellow edges tactic centred at `w_i`. `t_i`'s three far edges begin
+   and end with different neighbours, which allows only the transitions β→{α, β}, α→γ, γ→γ around the 4-cycle: **all four `w_i` are β (or all γ, the mirror).**
+   Then `t_i`'s far boundary is `w_i` —(`o_i`, arc of `ω(w_{i−1})`)— `a_i` —(`y_i`, arc of `ω(v)`)— `b_i` —(`r_i`, arc of `ω(w_i)`)— `w_{i−1}`: the pentagon
+   `v, w_i, a_i, b_i, w_{i−1}` has all five diagonals equal to 1, and `w_1 … w_4` form a unit rhombus about `v`; the far pairs `r_i, r_{i+2}` and `o_i, o_{i+2}` need
+   both diagonals `≥ 1` (angle in `[60°, 120°]`). **This configuration passes every local check I made** — `tools/fs114_n2_count.py beta` on the square instance,
+   exact: unit sides, diagonals `√2`, `t_1`'s five diagonals exactly 1 and five sides `≤ 1` (`a_1, b_1` at `±24.3°` about `t_1`'s axis); by hand at the square: the
+   ring rule (red on `(45°, 65.7°) + 90°ℤ` and yellow on `(24.3°, 45°) + 90°ℤ` each miss their 60° translates) and NB4P's exception (the change point at 45° has
+   its 60° orbit point 105° inside the arc `[65.7°, 114.3°]`). Not checked: the outer tiles' own five-neighbour structure. Degree 5 and 6 quadrilaterals not
+   walked. So "no quadrilateral" is **not** a consequence of the structure within `B̄(v, 2)` that I checked. The `thin` plant (a rhombus of angle 40°) fails at
+   the far pair, as it must.
+5. **"So, the red metagraph must have only triangles." — GAP**, resting on 4. **E19 (p 0.6) is not met at this stage**: 1–3 TRUE, 4–5 GAP.
+
+### N2-2.5 C114-ENCLOSED3 — GAP, with an insertion lemma
+
+"So, a valid tiling can't have an enclosed vertex with 3 neighbors." (a tile with three edge-neighbours). **Insertion lemma [hand, one mind]:** let `u` be a cubic
+vertex of a non-Siamese valid map and `f` a colour whose closed class misses `B̄(u, 1)`, so every `f`-point is at distance `> 1 + δ` from `u` for some `δ > 0`.
+Cut a triangle `x` of colour `f` from the three corners at `u` inside `B(u, δ/2)`: every `f`-point is at distance `> 1` from every point of `x` (validity, and `x` far
+from every `f`-tile: non-Siamese); the three old tiles only shrink; the new vertices are cubic; the map stays locally finite, bounded by segments and arcs. `x`
+is an enclosed tile with three edge-neighbours. ∎ **So ENCLOSED3 implies COVER-3** — *every colour meets `B̄(u, 1)` at every cubic vertex `u` of every non-Siamese
+valid map* — **and no argument that reads only a tile and its neighbours proves it**: its truth depends on what the colours do at distance 1. COVER-3 is not
+derived (at a cubic vertex the ring `ω(u)` off `Γ` carries only the three colours absent at `u`; COVER-3 asks that none of them is missing from the disc). The
+search that found ENCLOSED3 is no input (the claim list, §8).
+
+### N2-2.6 Siamese pairs and `μ` in the count
+
+**N2-SIAM [hand, one mind]. Route T as a count is blind to Siamese vertices.** The demand at `x` is `deg_M(x) − 5` in every valid map, but with Siamese pairs
+the supply gains (S) repeats that the count cannot bound: at a vertex of degree `d` whose colours repeat (the vertices of `R`, where `d` is no longer `≤ 6`), each
+tile's `d − 3` vertex-neighbours there may all repeat colours of tiles touching it, at no cost in arcs or absent colours. So the count decides only the
+non-Siamese case — de Grey's `[16.317]` target — and the Siamese case needs another kill: FS112-N3-DENSE3's `R` half, NB's reading too. Edge-rainbow fails with
+them as well (two close edge-neighbours of one colour).
+
+**N2-MU [hand, one mind].** `μ > 0` lowers the demand by `μ` (N114-EULER, NB's `μ` with self-meetings) and nothing in the count charges it: **GAP-μ**. What is
+derived: in the non-Siamese class a hole of a tile `x` holds at most five tiles — the hole lies in the convex hull of `x`, of diameter `≤ 1`, so two tiles of one
+colour inside are close, and a tile of `x`'s colour inside is close to `x`. Pockets between two tiles lie in a set of diameter `≤ 2`, with no such bound. On a
+torus, `μ` from wrapping round disappears in a finite cover (NB); plane `μ` does not.
+
+### N2-2.7 Verdicts of this stage, scope, and the registrations it bears on
+
+| claim | verdict | grade, minds |
+|---|---|---|
+| C114-FIVE-COUNT | **TRUE** (torus, `μ = 0`); six's room is the degree-4 vertices, `p_6(4) = −2` | [hand; two minds, one blind: NB; N2] |
+| C114-DUAL-COUNT | **TRUE**, at least 80 %, exactly 80 % with no vertex of degree 5 or 6 (stage 1's MISSTATED withdrawn) | NB's; N2 concedes, sighted |
+| C114-BUDGET | **the types are named**: the Euler-fixed charge (N2-ENDS) is `n`, `n − 2`, `n`, `n + 6` at degrees 3–6 plus `2U`; **negative only at a degree-4 vertex with three or four tactic edges** | [hand; tools exact] |
+| C114-REDBLOCK | partition TRUE; planarity TRUE (a contracted minor); no pentagons TRUE; no quadrilaterals GAP (all-β survives); only triangles GAP | [hand, one mind] |
+| C114-ENCLOSED3 | **GAP**: implies COVER-3 by the insertion lemma; not provable from a tile and its neighbours | [hand, one mind] |
+| C114-THOM-TOP | stage 1's pinch clause FALSE (NB D3), withdrawn; NB's colour-free repair not re-derived here | NB's; third mind owed |
+| C114-CURV, C114-SKELETON | not worked this stage | — |
+
+**Scope (the owner's note).** Everything in this stage is on **doubly periodic maps** — a torus map, finitely many arcs per period, so of bounded complexity
+automatically — and the count uses **no complexity bound**, only finiteness of the period. A torus NO by K1 ∧ K2 would be E4's result ("a NO for doubly
+periodic maps"), non-Siamese and `μ = 0` only: it is **neither Q-full's NO nor Q-full_K's**. The local lemmas (N2-ABS, N2-CROWN, N2-PENT, the insertion lemma,
+N2-DIAM) read discs of radius at most 2 and use no complexity bound.
+
+**Registrations (plan §5.3; read after stage 1's commit).** E6 (C114-RAINBOW TRUE as stated): not met, both minds MISSTATED. E14 (the decisive argument reads
+`F ∪ R`): holds for everything here — every repeat outside (S) is anchored at a four-colour vertex, and the count's one negative charge is at degree-4
+vertices. E18 (the non-Siamese case decided at one mind): not met at this stage; it is reduced to K1 ∧ K2 on the torus, with GAP-μ beside them. E19: not met
+(N2-2.4, 5).
+
+### N2-2.8 Proposed for the close (I edit none of these files)
+
+- `data/fs114/claims.md` verdicts as N2-2.7; the corrections to stage 1 as N2-2.1.
+- Stub or claim to mint: **K1** ("a degree-4 vertex of a non-Siamese valid map has at most two tactic edges") — the one local statement that makes every charge
+  of the torus count non-negative; its killing test is a fragment by formula with three tactic edges at a degree-4 vertex, the construction side's kind of
+  object. **COVER-3** as the local statement ENCLOSED3 needs.
+- Grokking material for the close (G83's body): with unit arcs the count's only negative charge sits at degree-4 four-colour vertices carrying three or four
+  unit arcs of the tactic; the strip, whose four-colour vertices carry none, is the local pattern a torus count forbids.
+
+## Stage N2-2 — SAVED
+
+**Left for stage N2-3 (aperiodic maps):** discharging at bounded `K` (`[Mohar2002]` Thm 3.1) and what the count needs beyond it; the question of an
+area-normalised charge; GS-D's verdict at its grade, with Q-full or Q-full_K named.
