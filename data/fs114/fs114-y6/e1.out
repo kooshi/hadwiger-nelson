@@ -1,0 +1,23 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0
+calibration first (FS114-YB3's controls, unedited):
+brick (row 33; cells 4/5 x 3/5, shear 2/5, colour (i + 3j) mod 7): same-colour pairs the object has with a first tile among the representatives: 11; examined: 11; rejected []; tight at 1: 3; VERDICT ACCEPT
+   plant beside it: rejected [('b-1,-2', 'b0,0'), ('b0,0', 'b0,0'), ('b0,0', 'b1,2')]; predicted [('b-1,-2', 'b0,0'), ('b0,0', 'b0,0'), ('b0,0', 'b1,2')]: AS PREDICTED
+hexagonal seven-colouring (side 1/2): same-colour pairs the object has with a first tile among the representatives: 7; examined: 7; rejected []; tight at 1: 1; VERDICT ACCEPT
+   plant beside it: rejected [('h0,0', 'h0,0')]; predicted [('h0,0', 'h0,0')]: AS PREDICTED
+the strip (FS112-YB2's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 82; examined: 82; rejected []; tight at 1: 54; VERDICT ACCEPT
+the disk (FS112-YB2's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 71; examined: 71; rejected []; tight at 1: 46; VERDICT ACCEPT
+FS112-BOWTIE (FS112-YB3's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 21; examined: 21; rejected []; tight at 1: 6; VERDICT ACCEPT
+   plant beside it: rejected [('G', 'H')]; predicted [('G', 'H')]: AS PREDICTED
+CALIBRATION PASSED
+E1 checks:
+  A  |q2 + e(tau) - q4|^2 = 9/5 > 1: TRUE (registered TRUE) as registered
+  B  |q4 + e(306.87)/100 - q1|^2 = 1.019956 > 1: TRUE (registered TRUE) as registered
+  C1 wedge [330,0] at q1 vs probe at q4: min < 1: TRUE (registered TRUE) as registered
+  C2 control: wedge [30,60] at q1 vs the probe: min < 1: FALSE (registered FALSE) as registered
+  D1 wedge [90,120] at q4 vs probe at q1: min < 1: TRUE (registered TRUE) as registered
+  D2 control: wedge [300,330] at q4 vs the probe: min < 1: FALSE (registered FALSE) as registered
+  E1 |q3 + (99/100)e(60+tau) - q1|^2 = 1.178500 > 1: TRUE (registered TRUE) as registered
+  E2 control |e(120)/100 - q1|^2 = 0.990100 < 1: TRUE (registered TRUE) as registered
+  F1 straddle verdict: REJECT (registered REJECT) as registered
+  F2 control: second sliver along the arc from v2 into the disc: ACCEPT (registered ACCEPT) as registered
+ALL AS REGISTERED
