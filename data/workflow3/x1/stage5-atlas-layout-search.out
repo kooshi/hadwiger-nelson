@@ -1,0 +1,13 @@
+total overlaps before: 27
+CVEXISTS: (20, 560) -> (14, 570)  overlaps involving it: 0
+LOCALF: (22, 525) -> (26, 465)  overlaps involving it: 0
+BOWSQ3: (34, 575) -> (34, 575)  overlaps involving it: 0
+PINW: (48, 575) -> (49, 555)  overlaps involving it: 0
+ROUTET: (62, 560) -> (61, 525)  overlaps involving it: 0
+CAPSTRIP: (119, 440) -> (123, 465)  overlaps involving it: 0
+FS111: (64, 262) -> (65, 262)  overlaps involving it: 0
+MEET: (38, 240) -> (41, 230)  overlaps involving it: 0
+FS121: (52, 250) -> (57, 270)  overlaps involving it: 0
+FS120: (70, 280) -> (65, 330)  overlaps involving it: 0
+FS122: (28, 250) -> (29, 275)  overlaps involving it: 0
+total overlaps after: 0

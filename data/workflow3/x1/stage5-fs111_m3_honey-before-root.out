@@ -1,0 +1,17 @@
+FS111-M3 exact checks of the honeycomb class HC (tools/fs111_m3_honey.py)
+H1 faithful: 12 triangles, 18 segments, 7 discs; minimum distances {'TT': 2.0, 'TS': 2.645751, 'SS': 1.732051, 'DT': 2.0, 'DS': 1.732051}; failures 0 -> PASS
+H2 faithful: f(0) = 0 exactly (f increasing: hand) -> PASS
+H3 faithful: Q in B(v,1) u B(e,1); worst vertex distance to its centre 0.619657 -> PASS
+H4 faithful: gap polynomial bounds -> PASS
+H5 faithful: exterior-ball constants 425/1280 < 2/5, 425/512 < 1 -> PASS
+H7 faithful: 731 exact grid points within 5/2 of a face centre; free 0; interior-and-excluded 0 -> PASS
+
+Plants (each must fail exactly its named checks):
+  side19: H1 fails 30 (flank!=1), H2 fails 1, H7 free 30 (e.g. [(-2.1651, -1.25), (-2.1651, 1.25)]) -> FIRED
+  closer: H1 failure kinds ['DS<sqrt3-1/2', 'DT<3/2', 'SS<sqrt3', 'TT<2', 'flank!=1'], H7 interior-and-excluded 18 -> FIRED
+  eps1/2: H4 with g = (1/2) sum phi_J -> FIRED ["phi'", 'phi', "phi''-form"]
+  R2: H5 with exterior radius 2 (sagitta constant 1/4 < 425/1280) -> FIRED
+  nosigma: H3 without B(e,1) -> FIRED ['Q-not-covered']
+
+ALL PASS
+15.03 s

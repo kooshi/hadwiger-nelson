@@ -1,0 +1,22 @@
+ok    .claude/output-styles/keryx.md: identity = keryx (35,050 bytes), workflow 13,153 bytes
+ok    .claude/agents/poros.md: identity = poros (35,665 bytes), workflow 7,435 bytes
+ok    .claude/agents/ephodos.md: identity = ephodos (49,873 bytes), workflow 19,733 bytes
+ok    .claude/agents/ephodos-verifier.md: identity = ephodos (49,873 bytes), workflow 4,611 bytes
+ok    .claude/agents/debruijn.md: identity = debruijn (24,949 bytes), workflow 22,671 bytes
+IDENTITIES: PASS
+ok    .claude/output-styles/keryx.md: identity = keryx (35,050 bytes), workflow 13,153 bytes
+ok    .claude/agents/poros.md: identity = poros (35,665 bytes), workflow 7,435 bytes
+FAIL  .claude/agents/ephodos.md: the identity differs from .claude/skills/ephodos/SKILL.md at its line 18: 'A derivation has two parts, a sentence and an argument, and the one cut is betwe' against 'A derivation has two parts, a sentence and an argument, and the one cut is betwe'
+ok    .claude/agents/ephodos-verifier.md: identity = ephodos (49,873 bytes), workflow 4,611 bytes
+ok    .claude/agents/debruijn.md: identity = debruijn (24,949 bytes), workflow 22,671 bytes
+IDENTITIES: FAIL
+FAIL  .claude/output-styles/keryx.md: no '# … in lean-dir — the workflow' heading after the identity
+ok    .claude/agents/poros.md: identity = poros (35,665 bytes), workflow 7,435 bytes
+ok    .claude/agents/ephodos.md: identity = ephodos (49,873 bytes), workflow 19,733 bytes
+ok    .claude/agents/ephodos-verifier.md: identity = ephodos (49,873 bytes), workflow 4,611 bytes
+ok    .claude/agents/debruijn.md: identity = debruijn (24,949 bytes), workflow 22,671 bytes
+IDENTITIES: FAIL
+PASS  self-test: faithful copy passes
+PASS  self-test: a one-character drift in the identity fails
+PASS  self-test: a missing workflow heading fails
+SELF-TEST PASSED

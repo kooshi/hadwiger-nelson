@@ -1,0 +1,9 @@
+FS111-M2: DISCK7's body K (tools/fs111_m2_disck7.py)
+[K (faithful): h = 1/2 + sin(3t)^3/200] rho = 1/2 + delta*(54 s - 80 s^3); exact range over s in [-1,1]: [37/100, 63/100] ~ [0.3700, 0.6300]
+   -> K (faithful): h = 1/2 + sin(3t)^3/200: expected failures none, got none: PASS
+   -> plant: h = 1/2 + sin(3t)^2/200: expected failures ['CW'], got ['CW']: PASS
+[plant: h = 1/2 + sin(3t)^3/30] rho = 1/2 + delta*(54 s - 80 s^3); exact range over s in [-1,1]: [-11/30, 41/30] ~ [-0.3667, 1.3667]
+   -> plant: h = 1/2 + sin(3t)^3/30: expected failures ['CONV', 'HEX', 'RAD'], got ['CONV', 'HEX', 'RAD']: PASS
+[plant: h = 1/2 (a circle)] rho = 1/2 + delta*(54 s - 80 s^3); exact range over s in [-1,1]: [1/2, 1/2] ~ [0.5000, 0.5000]
+   -> plant: h = 1/2 (a circle): expected failures ['NONC'], got ['NONC']: PASS
+ALL PASS

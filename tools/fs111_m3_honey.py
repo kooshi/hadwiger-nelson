@@ -39,9 +39,10 @@ Output: data/fs111/fs111-m3/honey.out (also printed).
 """
 from fractions import Fraction as Fr
 import itertools
+import pathlib
 import sys
 
-OUT = "data/fs111/fs111-m3/honey.out"
+OUT = str(pathlib.Path(__file__).resolve().parents[1] / "data/fs111/fs111-m3/honey.out")  # resolved from this file, so any working directory works
 LOG = []
 
 

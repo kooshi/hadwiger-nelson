@@ -52,6 +52,18 @@ A theorem line is a quotation surface: FS107-R's 'Theorems this phase proved' li
 
 FS-112 (§R-close 3.1): E1 registered (0.9) that NB-4 and NB-5 fail 'realised by FS-110's own fragments'; the planning advisor, A2 and NB (stage 1) read T2's truncated four-colour vertex as a counterexample to a step that reads a whole unit circle, and N caught it with the all-straight fragment BB, four-coloured at a flower of radius 1/10 — a reading radius applied to positives (C-BEYOND) and not to counterexamples.
 
+*FS114-C, FS-114's close (`plans/FS114-C-close.md` stage 4.1):*
+
+FS-114: FS112-L60 ("below 60°") stood on two minds, one blind, and a tool, and was false at exactly 60° — the frozen tools' plant sat at 50°, and their check computed a pair the equality tile never contains; the proof side found it by meeting the tile the bound excludes, the Reuleaux cap over a 60° arc (`plans/FS114-N4-proof.md` §2.6), and the audit found that both printed proofs break at the boundary, by different steps (`plans/FS114-L60-audit.md` §1.3). **A boundary claim needs a plant at the boundary, not only on each side of it.**
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111, 2026-09-27: W-P1 ("no saturated a.e.-proper 7-colouring exists", 0.65) was registered from recolourings of polygonal tilings; R7, all arcs and no flat edge, met every necessary condition W listed and was in print since 2018 — outside the generator's image (`plans/FS111-VMW-verification.md` §2.2 D1, §2.5).*
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111, 2026-09-28: `tools/fs111_m2_disck7.py` checked a hexagon rotated 30° from its record's lattice and passed; at the record's own lattice the bodies leave a tiling vertex uncovered (`plans/FS111-VM2-verification.md` §2.3 D1, §2.6).*
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -73,6 +85,10 @@ FS-112 (§R-close 3.1): E1 registered (0.9) that NB-4 and NB-5 fail 'realised by
 **A FOURTH FAILURE MODE, from the prior-art check of 2026-09-08 (G49): a derivation can be correct, independent, hard-won — and second.** The derivation-first column's 8-for-8 record is a record of claims that were TRUE, not of claims that were NEW, and nothing in this discipline distinguishes them without a search. Four milestones of correct derivation reconstructed a 2010 draft's §§1, 3, 4, 6, 8 and 10. *The rule this adds: […] it had been running unchallenged. A derivation's novelty is a MEASUREMENT — a literature search — and it belongs at the milestone's opening, where it can still change the work.*
 
 **THE STRENGTHENING (Kooshi, 2026-09-06, on the finite-plane pivot — his reading of the whole record as a ladder of disciplines, each hop forced by a wall that turned out to be a theorem in the next room):** *graph theory* (the problem, the Moser spindle) → *computational combinatorics / SAT* (the wall: hand refutation dies at ~20 vertices; de Grey, Heule, Polymath16) → *formal verification* (the wall: SAT certificates are opaque bitstreams; Lean's kernel — this project's entry point) → *Euclidean geometry* (the wall: the graphs are not abstract — rotation groups, spindle angles, the 1/√3 circle; M1–M20) → *algebraic number theory* (the wall: "why do all 5-chromatic graphs contain √5 or √7?" — a question about the coordinates' field, not the graph; M20–M24) → *p-adic / local algebra* (the wall: "what makes K = ℚ(√3,√11) special?" — how 2 factors when i is adjoined: ramification, inertia, residue fields; Theorem B — the steepest hop, where CS-flavoured discrete mathematics has almost no overlap) → *additive combinatorics* (the wall: "why does the residue method go blind between 4 and 7?" — it only uses homomorphisms, linear maps; the Cayley-graph reframing, M56) → *finite field geometry* (the wall: "is linearity the only thing the finite picture can do?" — no: the reduction lands in an actual finite Euclidean plane whose chromatic number is non-linear and sees 5; Vinh 2005 studied the objects, nobody had connected them to the field descent). Suggested and not yet entered: *algebraic topology* (Borsuk–Ulam, box complexes — the one lower-bound technique sharp at every integer; FS-9) and *commutative algebra* (Nullstellensatz certificates — polynomial infeasibility proofs sensitive to integrality; FS-10). […] *Rule this adds: when a measured wall resists derivation in the discipline it was found in, name the discipline the wall's statement naturally lives in and look for the theorem there before building another instrument here.*
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111: the plan's extraction X9 read G40's non-absorption as a scale bound `s₀(δ)` depending on the hole size; B-NONABS, so stated, is FALSE by a scaling fragment, and the content wanted is a bound independent of `δ` (`plans/FS111-W-wild.md` §3.3; `plans/FS111-C-close.md` §4.1).*
 
 ### The tally, re-sorted 2026-09-26 (job G2)
 
@@ -291,6 +307,14 @@ FS-112's slips (items 11, 32, 34, 62; N3 stage N3-1): the planner's §IQ (b) dro
 
 FS-112's fence listings (items 19, 33, 45, 51, 56, 60; each record's fence log): start-up `ls` of `data/fs112/`, `briefs/` and `reports/` printing fenced names (N, Y, YB, Y2, Y3, YB2, N2, N3, NB3); one `git log -1` subject (N, N2); a heading listing that printed §5.3's heading line (N), N2-DENSE's grade tag (NB2) and N3's heading line (NB3); the owner's launch message pointing A2 at two fenced files (item 19). Names only, all disclosed; no content crossed.
 
+*FS114-C, FS-114's close (stage 2 §2.1):*
+
+FS-114: six rounds of a proof side against a construction side, fenced from each other, with routes never relayed mid-round (inventory items 50, 57, 87); three blind convergences — the proof side's escape DR was the construction side's bowtie; both sides reached `√3` by different routes; the proof side's residual (R-V) had the construction side's escape E2's shape and was excluded by RSTOPALL, blind to NB5's own kill — each a second derivation a relay would have spent; and a divergence of truth in every round, 21 in all, each settled for the second mind or by a third (C114-THOM-TOP, 2–1).
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111: three divergences of truth (C-HULL's "so"; a saturated seven-colouring; DISCK7's orientation), each caught by a blind verifier before anything was filed; eleven retractions across nine minds, all inside the cost window (`plans/FS111-C-close.md` §2.2–§2.3).*
+
 ## G54 — Tight or slack
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -320,6 +344,12 @@ A fresh instance of this file's own rule: the probe's design confirmed that a si
 *FS106-X, moved from G65 at FS-106's close (`plans/FS106-regular-half.md` §R-close 4.4, M7), after “…he shell's degree gain, at the shell's size.*”:*
 
 **The four-colour band, measured once** (FS-81, row 84; one lattice, one encoding, one wall): on de Grey's lattice with the certified forcing graph X_A, refusals stay undecided at `d_ball` 8.3–14.7, first decide at 16.6 (463 s quiet) and take 55 s at 18.4 — so the law's four-colour aim is about 18.4, where a triangle-free survivor over ℚ(√47) needs ≥ 1,284 times the control's points; the three-colour numbers above do not transfer.
+
+## G67 — A grokking is grokked by its form
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111: G54 was walked "silent" by its title at the opening, while its body names fall colourings — the object of rounds 2–4, which M2 found by its own gate. §G ran once, before the object changed from tight colourings to maximal covers; nothing re-read the corpus from inside the new object (`plans/FS111-C-close.md` §4.1).*
 
 ## G72 — The invariant question
 
@@ -358,6 +388,14 @@ Eighteenth, FS-110 (§R-close 3.3): mixed, counted through — NB-4, the step th
 
 Nineteenth, FS-112 (§R-close 3.3): mixed, counted through — the reduction to four-colour vertices (N2-RED, NOBOTH, COR3) answers §IQ's per-centre question; the global statement (DENSE3) extends a known tool, row 134's base.
 
+*FS114-C, FS-114's close (stage 4.2):*
+
+Twentieth, FS-114: through — §IQ's per-vertex datum is route T's charge (FS114-N2-ENDS), which located six's room at degree-4 four-colour vertices with three or four tactic edges and set rounds 2–6's targets; FS114-CV-EXISTS came from re-deriving the composition's chain end.
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*Twenty-first, FS-111: through the structural question — §IQ's "what every tight colouring carries at every essential boundary point" produced the contact structure, the shadow identity and the integer radii; card 1 came through a question about every sequence (`plans/FS111-C-close.md` §4.2).*
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -383,6 +421,14 @@ FS-110: NB-4, NB-5, W-MERGE and the cone removal from example invariants (what e
 *FS112-X, FS-112's close (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 3.3):*
 
 FS-112: U1, NB4P, N2-RED, NOBOTH, COR3 and DENSE3 from example invariants (what every unit-arc centre, four-colour vertex, unit arc, close complementary pair and valid map carries); the stuck ray, Y3-END-NEEDS, the pinned corner and BUDGET2 counterexample invariants. Two flips: the chain's end read as what every end carries (N3-END), and the pinned corner read as what every valid map carries at both corners (C-PARTNERS). A wall broken by an example: Y3-END-NEEDS (what a terminal chain end must carry) fell to FS112-BOWTIE, which its blind verifier built by asking what configuration its own derivation's exception names.
+
+*FS114-C, FS-114's close (stage 4.2):*
+
+FS-114: the headline (every valid map carries a four-colour vertex) and the count (every map's charge sums to zero) from example invariants; the six rounds' kills from counterexample invariants — what an escape at a deficient vertex must carry (DR, the Γ-ring bowtie, the pinwheel, E1, E2, OC), each then killed; the flip ran late: the example invariant at the same vertex — what every four-colour vertex's ring carries (N6-RING60, N7-HUB) — arrived in rounds 5–6 and is FS-116's lead. No breakthrough of the second kind.
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111: the headline from example invariants (the contact structure; R7), the walls from counterexample invariants (HC_K, M3-IRREG, M4-CUT, DECO-B, W-NEG) (`plans/FS111-C-close.md` §4.2).*
 
 ## `CLAUDE.md` § Delegation — one level deep
 
@@ -510,3 +556,7 @@ that had already been killed and replaced** — its condition could never become
 *FS107-X, FS-107's close, under "exactly one thing may differ" (FS107-C, `plans/FS107-stability.md` §R-close 3.1, M2):*
 
 FS107-R's prediction P1 compared `(t₁ − 2r)(t₁′ − 2r′)`, an absolute area, with `δ₆`, a fraction of the plane; the blind verifier caught it and named the right comparison, the Parts void area `≈ 6.6·10⁻⁵` per cell of area `≈ 0.461` (FS107-V §4.2).
+
+*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
+
+*FS-111's close, 2026-09-28: `tools/fs111_m3_honey.py` and `tools/fs111_m4_rungs.py` print "ALL PASS" and then exit 1 from any directory but the root, because their output path is root-relative — a pass that reads as a failure; an exit status must not depend on the working directory (`plans/FS111-C-close.md` § Stage 3).*

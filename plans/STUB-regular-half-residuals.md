@@ -40,6 +40,8 @@ None while the residuals hold: by row 131 the regular classes are constraints on
 `d = 2` would be a polygonal six-colouring of the plane: `χ(ℝ²) ≤ 6` with no MR**, and FS-107's W would become its verification. The residuals
 are also the print record the answer's derivation cites, and each is a Lean target for FS-101 once closed.
 
+*At FS-111's close:* FS111-M2-REDUCE-C and FS-121's five-colour section rest on FS106-AE-MAP6, so Townsend's (c) now carries a regularity route too.
+
 ## Outcomes, each reachable
 
 `d = 2` closed (polygons need seven, unconditionally at [hand]) or a polygonal six-colouring; Lemma 3 at two minds or a refutation of the

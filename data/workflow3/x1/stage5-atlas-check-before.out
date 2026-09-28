@@ -1,0 +1,24 @@
+FAIL R134: second quote not found at CLAUDE.md § Paths forward, ranked: "beside BASE-V's blind re-derivation of row 134's print steps"
+FAIL TSMNO: quote not found at CLAUDE.md § Where the problem stands: 'At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 '
+FAIL FS111: grade words not found at CLAUDE.md § Paths forward, ranked item 2: 'door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a s'
+FAIL N3BASE: grade words not found at LEDGER.md row FS112-N3-BASE: "hand; two minds: N3; NB3, blind; over row 134's base unre-derived"
+FAIL N3DENSE3: second quote not found at CLAUDE.md G83: 'With unit arcs, the tight question lives at four-colour vertices.'
+FAIL SRAY: verbal registration not found at CLAUDE.md § Paths forward, ranked item 4: "it moves to 2 the day FS-114's plan commits to that form"
+FAIL HORNEND: second quote not found at LEDGER.md row FS112-C-DOUBLE: 'hand; one mind: FS112-C2, a sketch'
+FAIL MEET: quote not found at CLAUDE.md § Paths forward, ranked item 2: "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7 (so χ(ℝ²) = 7 given MR) — but that compos"
+FAIL FS80: quote not found at CLAUDE.md § Paths forward, ranked item 8: "averaged certificates at five colours on the real plane (FS-104's route (c))"
+FAIL FS59: quote not found at CLAUDE.md § Paths forward, ranked item 13: 'given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)'
+FAIL UNB: quote not found at plans/STUB-reg-scale.md: "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR."
+FAIL FS44: quote not found at CLAUDE.md § Paths forward, ranked item 7: 'the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)'
+FAIL edge MEET→M7: quote not found at CLAUDE.md § Paths forward, ranked item 2: "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7 (so χ(ℝ²) = 7 given MR)"
+FAIL edge TSMNO→MEET: quote not found at CLAUDE.md § Paths forward, ranked item 2: "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7"
+FAIL edge FS111→MEET: quote not found at CLAUDE.md § Paths forward, ranked item 2: "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7"
+FAIL edge WEQK→MEET: quote not found at LEDGER.md row 133: 'So stability at six is two questions'
+FAIL edge UANO→TSMNO: quote not found at CLAUDE.md § Where the problem stands: 'with unit arcs each would have a vertex of four colours or a repeated colour within 3 of e'
+FAIL edge R134→N3BASE: quote not found at LEDGER.md row FS112-N3-BASE: "over row 134's base unre-derived"
+FAIL edge BOWTIE→TSMYES: quote not found at CLAUDE.md § Paths forward, ranked item 4: 'its fragments (the pencil, BOWTIE) are local positives a YES could use'
+FAIL edge FS80→FS104: quote not found at CLAUDE.md § Paths forward, ranked item 8: 'a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR'
+FAIL edge FS59→LB6: quote not found at CLAUDE.md § Paths forward, ranked item 13: 'through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104'
+FAIL edge UNB→HOLES6: quote not found at plans/STUB-reg-scale.md: "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR."
+FAIL edge FS44→UB5: quote not found at CLAUDE.md § Paths forward, ranked item 7: 'decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)'
+checked 169, failed 23, errors 0

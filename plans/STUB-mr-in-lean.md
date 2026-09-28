@@ -53,3 +53,5 @@ plan's guess (`CLAUDE.md` § What compute actually helps: kernel phases re-price
 G80 (infinite rank is the resource; the height count is the hypothesis), G81 (where every place mixes, the field is the plane — the consumer), G76
 (the measure half of four-colour rigidity), G21 (a reading gap is named, never smoothed over); rows 120, 127, 128, 130; FS-101 (its consumer),
 FS-105 (its hardening, closed), FS-100 (its origin).
+
+*At FS-111's close:* FS-111's route-M lemmas (FS111-C1-UNIF, V0-RESCALE, C-FILL, C-HULL, M-SATC, M-PINCH, M-C11, M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) are queued behind the measurable chain: their objects are not in `Proofs/`.

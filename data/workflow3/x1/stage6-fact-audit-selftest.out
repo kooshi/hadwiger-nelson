@@ -1,0 +1,16 @@
+  ok   faithful copy: passed
+  ok   one number deleted (0.00297): fired -- lost code token '0.00297'
+  ok   one bibliography key deleted ([AbiadEtAl2025]): fired -- lost bib token '[AbiadEtAl2025]'
+  ok   one PROTECTED byte changed: fired -- a PROTECTED region is not byte-identical
+  ok   gate sentence broken: fired -- the gate-report sentence no longer matches scripts/gate_report.py's regex
+  ok   heading renamed: fired -- heading disappeared (other files cite sections by name): '### The aim'
+  ok   a pointer to a row that does not exist: fired -- dangling pointer: row 968 is cited and no such entry exists
+  ok   re-spelling WITHOUT a normalisation entry: fired -- lost chunk token 'ρ₆₃'
+  ok   the same re-spelling WITH its entry: passed
+  ok   a block moved to the instances file, verbatim (partner): passed
+  ok   the same move with 3469129 deleted from the instances copy: fired -- lost num token '3469129'
+  ok   the same move with the instances file NOT joined: fired -- lost code token '$!'
+  ok   3469129 dropped from the corpus, its external home holding it (partner): passed
+  ok   3469129 dropped, its external home lacking it: fired -- external home /tmp/tmpe6ak26zp/home.md lacks num token '3469129'
+  ok   a block left in both files raises --dupes: 17 -> 18
+SELF-TEST PASSED

@@ -1,0 +1,8 @@
+control (faithful copies): PASS
+plant duplicate rank label:                      fired: CLAUDE.md's single-row rank labels are not 1..29, one each, in order: ['1', '2', '3', '4', '5', '6', '7', '8',
+plant stubs swapped at ranks 5 and 6:            fired: CLAUDE.md row 5 (labelled 5) shows FS-115; FRONTIER-STUBS rank 5 is FS-120
+plant group row reordered:                       fired: CLAUDE.md's group row differs from FRONTIER-STUBS ranks 30–69 (missing [], extra [], order differs)
+plant group row missing a stub:                  fired: CLAUDE.md's group row differs from FRONTIER-STUBS ranks 30–69 (missing ['FS-5'], extra [], order same)
+plant stale group label:                         fired: CLAUDE.md's group row is labelled '30–63'; FRONTIER-STUBS runs to 69, so it should read '30–69'
+plant FRONTIER-STUBS rank gap:                   fired: FRONTIER-STUBS ranks are not 1..69 in order: [1, 2, 3, 4, 5, 6, 70, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 
+SELF-TEST PASS

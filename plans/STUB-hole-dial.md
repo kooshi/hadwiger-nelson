@@ -39,3 +39,5 @@ below; a falling curve needs curved tiles (FS-110) or growing complexity (FS-111
 ## Provisional bearings
 
 G30 (a dial), G21 (a negative measures its enumeration), G65 (the solver's phase diagram, if a SAT encoding is used), G82.
+
+*At FS-111's close:* FS111-C1-UNIF: `δ₀(K)`, the least hole density at complexity `≤ K`, is a second dial — along complexity, where this stub's reads along slack; seven is its uniform positivity.

@@ -36,7 +36,7 @@ GSTUB = STUB("STUB-global-step.md")
 RSTUB = STUB("STUB-stuck-ray.md")
 NIGHT = STUB("POROS-2026-09-27-night-aim.md")
 NOT_THE_NO = (L(135), "Not claimed: the NO")
-BASEV = ({"file": "CLAUDE.md", "section": "### Paths forward, ranked"}, "beside BASE-V's blind re-derivation of row 134's print steps")
+BASEV = ({"file": "CLAUDE.md", "section": "### Paths forward, ranked"}, "with BASE-V beside them (row 134's base re-derived but for Lemma 4 at cusps)")
 
 NODES, EDGES = [], []
 
@@ -196,40 +196,37 @@ N("R134", "Condition 5: no six-map", "held", "Under Condition 5 (no boundary arc
   "six-colours the plane almost everywhere — Sokolov–Voronov's Question 2, its Condition-5 half, answered yes.", L(134),
   "no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which "
   "no two interior points of one colour are at distance exactly 1", "the chain — NB-4, NB-5, W-MERGE and the cone removal — two minds, one blind",
-  at=(4, 450), sector="seven", tier=1, verifying="its base steps under blind re-derivation (BASE-V)", also=[BASEV],
+  at=(4, 450), sector="seven", tier=1, also=[BASEV],
   posed=[dict(question="Sokolov–Voronov's Question 2, its Condition-5 half (\"Is it true that 7 colors are needed …?\")", state="answered",
               src=L(134), quote="So the Condition-5 half of [SokolovVoronov2025] Question 2 (\"Is it true that 7 colors are needed …?\") is "
               "answered yes")])
 N("TSMNO", "no tight six-map (door A)", "conclusion", "At bounded complexity, no tight six-map exists. Under Condition 5 none does (row "
   "134); with unit arcs, FS-112 reduced it to one statement, the global step (FS-114), still open. This is door (A).", STANDS,
-  "At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs each would have a "
-  "vertex of four colours or a repeated colour within 3 of every point", NOT_THE_NO, at=(22, 375), sector="seven", tier=1)
+  "At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs every one has a "
+  "vertex of at least four colours (rows 135, 137)", NOT_THE_NO, at=(22, 375), sector="seven", tier=1)
 N("M7", "χ_m⁰(ℝ²) ≥ 7", "conclusion", "Vanishing holes cannot save a colour: Voronov's contradiction survives a free colour of vanishing "
   "density. Given MR, this is χ(ℝ²) = 7.", AIM,
   "No — Voronov's contradiction survives a free colour of vanishing density — gives χ_m⁰(ℝ²) = 7", BOTH_GAP, at=(18, 222),
   sector="seven", tier=1)
-N("FS111", "(B) the cone scale", "step", "Door (B): do near-optimal band-proper six-colourings keep their junctions fat at a scale bounded "
-  "below? De Giorgi's room — the same question as (A) at unbounded complexity (FS-111).", STUB("STUB-reg-scale.md"),
-  "(B) those junctions are fat at a scale s ≥ s₀ — on a set of positive measure — with voids small relative to min(s, µη²/100)",
-  (PF(2), "door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a set of positive measure?"),
-  at=(64, 262), sector="seven", tier=1,
-  note="With FS-114's NO it would give seven, but that composition is held only as a one-mind reading (the doors meet, FS107-MEET).",
-  registered=dict(p=0.15, src=STUB("STUB-reg-scale.md"), quote="a cone-scale bound for near-optimal colourings at one mind, 0.15",
-                  population="the minting session's registration for FS-111: a cone-scale bound at one mind, within the milestone"))
+N("FS111", "(B) the cone scale — closed", "step", "Door (B), closed undecided at FS-111. Card 1, at two minds: the two doors are two routes, not "
+  "halves; seven is the NO's hole bound made uniform in the complexity bound. Successors: the pinch at a junction (FS-120), the map step (FS-121), the "
+  "forced pair (FS-122).", STUB("STUB-reg-scale.md"), "Not decisive jointly with FS-114's NO, as this stub once read.",
+  (STUB("STUB-reg-scale.md"), "FS-111 — the cone scale (REG-SCALE): do near-optimal band-proper six-colourings keep their junctions fat? (stub)"), at=(65, 262),
+  sector="seven", tier=1)
 
 # ---- FS-112, the unit-arc half: closed undecided (rows 135–136); its gaps are FS-114 (the NO, the global step) and FS-115 (the stuck ray)
 N("N3BASE", "N3-BASE", "held", "With unit arcs, row 134's base still refutes a map near any three-colour vertex whose closed disc of radius 2 "
   "holds no vertex of four colours and none with a repeated colour.", B("FS112-N3-BASE"),
   "row 134's base refutes a valid map near a cubic trichromatic u whose closed 2-disc has no four-colour or repeated-colour vertex",
-  "hand; two minds: N3; NB3, blind; over row 134's base unre-derived", at=(4, 600), sector="seven",
-  also=[(L(135), "over row 134's base at its grade, unre-derived here — S–V Lemma 5, Prop. 18, Lemma 6's < 9 branch and CUSP-BASE — where a "
-         "common error of both walks would sit")],
-  note="Its base — row 134's print steps — is being re-derived blind tonight (BASE-V); row 134's grade stands as printed until it reports.")
+  "hand; two minds: N3; NB3, blind; over row 134's base, re-derived by BASE-V but for Lemma 4 at cusps", at=(4, 600), sector="seven",
+  also=[(L(135), "over row 134's base, re-derived by BASE-V at FS-114 but for Lemma 4 at cusps (CUSP-BASE's D5 items 1–4, 6, one mind), where a "
+         "common error would now sit")],
+  note="BASE-V re-derived row 134's print steps blind: every step but Lemma 4 at cusps upgraded.")
 N("N3DENSE3", "N3-DENSE3", "held", "In every six-map with unit arcs, every closed disc of radius 3 holds a vertex of four or more colours or a "
   "vertex with a repeated colour. So the unit-arc half is a question about four-colour vertices: the NO is exactly the exclusion of such maps.",
   B("FS112-N3-DENSE3"), "in every valid map each closed disc of radius 3 contains a vertex of four colours or one with a repeated colour",
   "hand; two minds: N3; NB3, blind; over N3-BASE and DISC1", at=(20, 600), sector="seven",
-  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at four-colour vertices.")],
+  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")],
   posed=[dict(question="Sokolov–Voronov's Question 2, with unit arcs (\"Is it true that 7 colors are needed …?\")", state="reduced",
               src=L(135), quote="So S–V's Question 2 with unit arcs is reduced, not answered")])
 N("COMPOSE", "the composition", "held", "FS-112's close: excluding the maps N3-DENSE3 describes is the NO for every map, periodic or not, with no "
@@ -237,12 +234,11 @@ N("COMPOSE", "the composition", "held", "FS-112's close: excluding the maps N3-D
   "the global step in DENSE3's form is the NO for all maps", "hand; one mind: FS112-C", at=(38, 545), sector="seven")
 N("GSTEP", "the global step (NO)", "question", "Exclude every six-map with unit arcs — equivalently, every one whose four-colour or repeated-colour "
   "vertices come within 3 of every point. This is the whole remaining unit-arc question, not a small lemma: FS-112 restated the NO with the "
-  "invariant every counterexample carries, and did not split it into smaller steps (FS-114, rank 1).", {"file": "plans/STUB-global-step.md",
+  "invariant every counterexample carries, and did not split it into smaller steps (FS-114, rank 1). FS-114 closed undecided: the global step is now the local exclusion (LOCALF).", {"file": "plans/STUB-global-step.md",
   "section": "## The question, in plain language"},
   "The global step in this form is the NO itself, for every valid map, periodic or not, with no step about stuck rays (FS112-C-COMPOSE, one mind).",
   (GSTUB, "FS-114 — the unit-arc question (its central statement, the global step): can a six-map with unit arcs have a vertex of four colours "
    "or a repeated colour within 3 of every point? (stub)"), at=(22, 525), sector="seven", tier=1,
-  words=(GSTUB, "the global step decided (NO or YES) at one mind within FS-114 | 0.2"),
   note="FS-114's stub registers 0.2 for the global step being decided at all, in either direction, within FS-114. That is a different event from "
        "this NO holding, so the page does not use it: the NO is priced like every other whole open question (the open-question default), so the "
        "bits do not make it look smaller than it is.")
@@ -259,8 +255,7 @@ N("SRAY", "(b′) the stuck ray", "step", "Can a one-sided infinite chain of stu
   "In a valid map with unit arcs, reduced to a terminal modification, can a stuck chain be infinite in one direction?",
   (L(135), "Not claimed: the NO; FS-114's global step; (b′); (b″)"), at=(58, 530), sector="seven",
   registered=dict(p=0.35, src=RSTUB, quote="(b′) excluded at one mind within FS-115 | 0.35",
-                  population="within FS-115: the stuck ray excluded, at one mind"),
-  words=(PF(4), "it moves to 2 the day FS-114's plan commits to that form"))
+                  population="within FS-115: the stuck ray excluded, at one mind"))
 N("CHAINB", "(b″) chains bounded", "step", "Is the length of finite stuck chains bounded uniformly over a map? Long chains are arithmetically "
   "free: a map with infinitely many arc radii can carry chains of every length. Named at FS-112's close (FS-115).", RSTUB,
   "Is the length of finite stuck chains bounded — uniformly over the map — or can a valid map carry finite chains of every length?",
@@ -284,21 +279,67 @@ N("HORNEND", "C-HORNEND, C-DOUBLE", "held", "A stuck vertex whose two horns are 
   "a stuck vertex of a terminal map with both horns bounded by unit arcs on one side has a unit-arc bound on the other side too and is a "
   "one-vertex chain", "hand; one mind: FS112-C2", at=(75, 600), sector="seven",
   also=[(B("FS112-C-DOUBLE"), "a stuck vertex with all four horn arcs unit arcs has in-type flank tiles at both neighbours, both (Q) centres "
-         "with ≥ 4 colours"), (B("FS112-C-DOUBLE"), "hand; one mind: FS112-C2, a sketch")],
-  note="Its companion C-DOUBLE (second quote above, one mind, a sketch): when all four horn arcs are unit arcs, both neighbours are four-colour "
+         "with ≥ 4 colours"), (B("FS112-C-DOUBLE"), "hand; two minds: FS112-C2, a sketch; FS114-CV, blind")],
+  note="Its companion C-DOUBLE (second quote above, two minds: FS112-C2, a sketch; FS114-CV, blind): when all four horn arcs are unit arcs, both neighbours are four-colour "
        "vertices, so the bowtie end sits within 1 of a four-colour vertex.")
 N("BOWTIE", "the bowtie", "positive", "An exact local fragment: a three-colour stuck vertex between two unit circles, locally terminal. It "
   "refutes Y3-END-NEEDS as first stated, and is a local positive a YES could use; whether it lives in a whole six-map is FS-115's question (c).",
   B("FS112-BOWTIE"), "an exact valid fragment: a three-colour stuck vertex between two unit circles, in-type sectors at both neighbours, locally "
   "terminal", "tools, exact; one fragment: YB3; one checker", at=(75, 450), sector="seven")
-N("MEET", "the doors meet", "reading-link", "FS-114's NO (door A, at every complexity bound) plus FS-111's cone scale (door B) giving seven. Held "
-  "only as a one-mind reading: FS-107's synthesis says R's two conditions are W's two doors. The night advisor's first question tests it, and "
-  "expects a third statement to be needed — the NO bounds holes at each complexity with no uniformity.", PF(2),
-  "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7 (so χ(ℝ²) = 7 given MR) — but that composition is a one-mind reading",
-  (PF(2), "that composition is a one-mind reading"), at=(38, 240), sector="seven", tier=1,
-  also=[(L(133), "the meeting one mind (A2)"),
-        (NIGHT, "Does FS-114's NO at every complexity bound plus FS-111's cone-scale bound give seven, or is a third statement needed"),
-        (NIGHT, "hunch: a third statement is needed — the NO bounds holes by δ(K) with no uniformity in K, and (B) presupposes (A)'s junctions exist")])
+# ---- FS-114, the unit-arc question: closed undecided (rows 137–138); successors FS-116 (the local exclusion) and FS-117 (route T's count)
+LSTUB = STUB("STUB-local-exclusion.md")
+TSTUB = STUB("STUB-route-t-count.md")
+N("CVEXISTS", "CV-EXISTS", "held", "Every six-map with unit arcs has a vertex of at least four colours, in the map itself. So one local statement "
+  "about one such vertex suffices for the unit-arc NO, Siamese pairs included, with no step about stuck rays.", B("FS114-CV-EXISTS"),
+  "every valid map with unit arcs has a vertex of at least four colours, in the map itself",
+  "hand; two minds, blind to each other: CV; CVB, by different routes; over FS112-N3-DENSE3, N2-TERM, N4-FIN", at=(14, 570), sector="seven",
+  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")])
+N("LOCALF", "the local exclusion (NO)", "question", "Exclude every six-map fragment on a disc of explicit radius about a four-colour vertex. With "
+  "CV-EXISTS it gives the whole unit-arc NO; the capped strip puts the radius above φ²/√2 ≈ 1.8512 (FS-116, the successor).", L(137),
+  "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists",
+  (L(137), "the NO; an explicit radius (C114-LOCAL-F, FS-116)"), at=(26, 465), sector="seven", tier=1)
+N("BOWSQ3", "the bowtie dies at √3", "nogo", "Two width-1 Reuleaux triangles corner to corner at a four-colour vertex fit a disc of radius "
+  "3√3/5 exactly and no disc of radius √3: two independent derivations.", B("FS114-Y4-RSTOPALL"),
+  "no non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of `B̄(p, 1)` and of `r = q1 + q2`",
+  "hand; three minds: Y4; YB3, blind; the proof side (N4, N5, NB5) blind to both, its last step one mind", at=(34, 575), sector="seven")
+N("PINW", "the pinwheel dies at 1 + ε", "nogo", "Four unit-arc edges turning one way at a four-colour vertex die within 1 + ε of it, but for "
+  "two named exceptions (an edge exactly 60° long; a blade's side a unit arc about its own edge's end).", B("FS114-Y5-PINALL"),
+  "except under E1 (an edge of exactly 60°) or E2 (a blade's counter-clockwise side a unit arc about its clockwise edge end)",
+  "hand; two minds: Y5; YB4, blind; tools exact at named values", at=(49, 555), sector="seven")
+N("ROUTET", "route T, the count", "held", "Euler's formula on the map graph: a charge summing to zero, negative only where four-colour vertices "
+  "carry three or four unit-arc edges; it reaches the non-Siamese part only (FS-117).", B("FS114-N2-ENDS"),
+  "negative only at a degree-4 vertex with at least three tactic edges",
+  "hand; one mind: N2; tools exact; its inequality form two minds (NB-ARCS, blind)", at=(61, 525), sector="seven",
+  words=(TSTUB, "K2′ derived under K1 at one mind (0.35)"))
+N("CAPSTRIP", "the capped strip", "positive", "The strip with each top tile capped by a unit arc holds every disc of radius below φ²/√2 about a "
+  "four-colour vertex, and no extension does better.", B("FS114-Y-DIAL"),
+  "the capped strip is a valid fragment holding every closed disc of radius below `φ²/√2 ≈ 1.8512` about a midline four-colour vertex",
+  "tools, exact; two minds: Y; YB, blind", at=(123, 465), sector="six-up")
+E("N3DENSE3", "CVEXISTS", "rests", B("FS114-CV-EXISTS"), "over FS112-N3-DENSE3, N2-TERM, N4-FIN")
+E("CVEXISTS", "LOCALF", "rests", L(137), "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists")
+E("LOCALF", "UANO", "rests", L(137), "So one local statement suffices for S–V's Question 2 with unit arcs")
+E("BOWSQ3", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
+E("PINW", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
+E("ROUTET", "BOWSQ3", "context", B("FS114-N2-ENDS"), "negative only at a degree-4 vertex with at least three tactic edges", label="where six has room")
+E("CAPSTRIP", "LOCALF", "blocks", B("FS114-Y-DIAL"), "no extension does better", label="R > φ²/√2")
+N("MEET", "the doors are two routes", "reading-link", "Card 1, answered at two minds (one blind): FS-114's NO plus the cone scale gives seven only "
+  "through a third statement — the map step on route M, the forced pair at every complexity on route R — and each is the answer restated.",
+  {"file": "plans/FS111-derivation.md"}, "1 − lim_{ε→0} µ₆(ε) = inf_K δ₀(K); hence χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0",
+  (B("FS111-C1-UNIF"), "hand; two minds: P; V0, blind"), at=(41, 230),
+  sector="seven", tier=1, also=[(L(133), "So stability at six has two routes, each needing a third statement")])
+# ---- FS-111's successors (D9): the map step (FS-121), the pinch at a junction (FS-120), the forced pair (FS-122)
+N("FS121", "the map step", "step", "Route M's third statement: a tight colouring replaced by a map (five colours) or a segment-and-arc map (six). "
+  "At its top it is the answer restated; its smaller rungs are NO-PAR and interface-maximal six-colourings.", STUB("STUB-map-step.md"),
+  "the map step: can a tight colouring of the plane be replaced by a map", (STUB("STUB-map-step.md"),
+  "Decisive at its top, and at its top the answer restated."), at=(57, 270), sector="seven", tier=1)
+N("FS120", "the pinch at a junction", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
+  "absorbed where the ladder ends?", STUB("STUB-pinch-at-junction.md"),
+  "the pinch at a junction: can a pinch in a measurable fall colouring of the plane be removed locally", (STUB("STUB-pinch-at-junction.md"),
+  "None alone; it is a colour-generic rung of route M, smaller than the answer."), at=(65, 330), sector="seven")
+N("FS122", "the forced pair", "step", "Route R's third statement: a close complementary pair of fat junctions in every near-colouring; "
+  "equivalent to seven (FS111-W-NEG), so its smaller statements are B-RR and a robust junction count.", STUB("STUB-forced-pair.md"),
+  "the forced pair at every complexity (route R's third statement)", (STUB("STUB-forced-pair.md"), "Decisive, and the answer restated:"),
+  at=(29, 275), sector="seven")
 
 # ================================================================ toward six from below (right)
 N("FS104", "χ_CP(ℝ²) ≥ 6", "question", "Is the stationary (equivalently the measurable) chromatic number at least six? Two-sided: a "
@@ -314,9 +355,9 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
               "at [hand]", state="answered", src=LGC, quote="row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
-  "shape a six certificate must take (FS-80).", PF(8), "averaged certificates at five colours on the real plane (FS-104's route (c))",
+  "shape a six certificate must take (FS-80).", PF(11), "averaged certificates at five colours on the real plane (FS-104's route (c))",
   (STUB("STUB-window-frequency-certificate.md"), "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)"),
-  at=(80, 320), sector="six-low", words=(PF(8), "soft as to success"))
+  at=(80, 320), sector="six-low", words=(PF(11), "soft as to success"))
 N("R125", "ℚ(√167) at six = plane + PL", "held", "Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product "
   "locality at 23 and 43 — a reduction, not a bound.", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
   "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)", at=(92, 390), sector="six-low")
@@ -325,9 +366,9 @@ N("PL", "PL∃(23, 43)", "question", "Product locality at the places 23 and 43: 
   "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6", (L(125), "Not claimed: anything about six."),
   at=(106, 390), sector="six-low")
 N("FS59", "χ(ℚ(√167)²) ≥ 6", "conclusion", "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the "
-  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", PF(13),
+  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", PF(16),
   "given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)",
-  (PF(13), "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)"),
+  (PF(16), "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)"),
   at=(100, 300), sector="six-low")
 N("R119", "χ(ℚ(√167)²) ≥ 4, kernel", "held", "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of "
   "the widest gap.", L(119), "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
@@ -346,14 +387,12 @@ N("HOLES6", "vanishing holes save a colour", "conclusion", "Six classes cover th
   BOTH_GAP, at=(148, 215), sector="six-up", tier=1)
 N("TSMYES", "a tight six-map (YES)", "step", "FS-114's other answer: a map by segments and circular arcs, unit arcs allowed, "
   "six-coloured with no two interior points of one colour at distance exactly 1. At bounded complexity it gives χ(ℝ²) ≤ 6 with no MR. By "
-  "row 135 it must hold a four-colour or repeated-colour vertex within 3 of every point.", GSTUB,
+  "row 135 it must hold a four-colour or repeated-colour vertex within 3 of every point and, by row 137, a vertex of at least four colours.", GSTUB,
   "A YES gives χ(ℝ²) ≤ 6 with no MR", (GSTUB, "FS-114 — the unit-arc question (its central statement, the global step): can a six-map with "
-  "unit arcs have a vertex of four colours or a repeated colour within 3 of every point? (stub)"), at=(128, 325), sector="six-up", tier=1,
-  registered=dict(p=0.03, src=GSTUB, quote="a YES by formula | 0.03",
-                  population="within FS-114: a full valid six-map given by formula and checked exactly"))
+  "unit arcs have a vertex of four colours or a repeated colour within 3 of every point? (stub)"), at=(128, 325), sector="six-up", tier=1)
 N("UNB", "unbounded complexity", "question", "A family of near-colourings of unbounded complexity whose holes vanish "
   "while their junction scales shrink to 0 — W's claim itself, if FS-111 fails.", STUB("STUB-reg-scale.md"),
-  "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.", BOTH_GAP, at=(162, 300), sector="six-up")
+  "A family refuting (B) with holes → 0 is still W's claim itself: χ(ℝ²) ≤ 6 with no MR.", BOTH_GAP, at=(162, 300), sector="six-up")
 N("STRIP", "the six-coloured strip", "positive", "Axenovich et al. 2014, Thm 4.2: a tight six-coloured strip of height √15/2 + √3 ≈ 3.668, "
   "its unit arcs all centred at four-colour vertices. Rebuilt three times from its words, accepted by three exact checkers (FS-112).",
   B("FS112-CAL-STRIP"), "Axenovich et al.'s strip, rebuilt from its words, is a valid six-colouring of height √15/2 + √3, tight; every unit arc "
@@ -384,11 +423,11 @@ N("PARTS", "Parts's six-tiling", "positive", "The best printed six-tiling leaves
 
 # ================================================================ toward exactly five (lower left)
 N("FS44", "a CP five-colouring", "question", "The shape of a stationary five-colouring of the plane — row 131 at five colours: "
-  "lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).", PF(7),
+  "lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).", PF(10),
   "the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)",
   (STUB("STUB-fifth-colour-structure.md"), "FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open "
    "field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)"), at=(216, 245), sector="five", tier=1,
-  words=(PF(7), "soft as to truth (the bold form predicts no)"))
+  words=(PF(10), "soft as to truth (the bold form predicts no)"))
 
 # ================================================================ edges (premise → conclusion)
 for b, a in (("LB7", "A7"), ("UB7", "A7"), ("LB6", "A6"), ("UB6", "A6"), ("LB5", "A5"), ("UB5", "A5")):
@@ -420,17 +459,18 @@ E("LEANWALL", "R131", "formalizes", STUB("STUB-regularity-wall.md"), "the collap
 # toward seven
 E("R131", "RR", "rests", L(133), "χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form)")
 E("RR", "M7", "rests", L(133), "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)")
-E("MEET", "M7", "rests", PF(2), "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7 (so χ(ℝ²) = 7 given MR)",
-  label="a one-mind reading")
-E("TSMNO", "MEET", "rests", PF(2), "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7", label="door (A)")
-E("FS111", "MEET", "rests", PF(2), "with FS-114's NO it is the route to χ_m⁰(ℝ²) = 7", label="door (B)")
-E("WEQK", "MEET", "rests", L(133), "So stability at six is two questions")
+E("TSMNO", "FS121", "rests", STUB("STUB-map-step.md"), "The frame (FS-111's card 1, two minds, one blind).", label="route M")
+E("FS120", "FS121", "rests", STUB("STUB-map-step.md"), "FS-120's rung", label="its finiteness rung")
+E("FS121", "M7", "rests", {"file": "plans/FS111-derivation.md"}, "given Q-NO, REG-A₆ ⟺ χ_m⁰(ℝ²) ≥ 7", label="the answer restated")
+E("RR", "FS122", "rests", STUB("STUB-forced-pair.md"), "FS-107's reduction", label="route R")
+E("FS122", "M7", "rests", {"file": "plans/FS111-derivation.md"}, "A-ALL, read with its δ", label="the answer restated")
+E("FS111", "MEET", "rests", {"file": "plans/FS111-derivation.md"}, "hence χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0", label="card 1")
 E("NG131", "M7", "blocks", L(131), "Two no-gos for proofs: an argument counting only holes met by unit circles or bicycles proves at most "
   "1 − µ₆(ε) ≳ ε", label="hole-counting proofs cannot reach it")
 E("R134", "TSMNO", "rests", STANDS, "under Condition 5 none does (row 134)")
-E("UANO", "TSMNO", "rests", STANDS, "with unit arcs each would have a vertex of four colours or a repeated colour within 3 of every point")
+E("UANO", "TSMNO", "rests", STANDS, "with unit arcs every one has a vertex of at least four colours (rows 135, 137)")
 E("R132", "R134", "rests", L(134), "S–V Cor. 1, almost everywhere for curved cubic maps with no d = 2 exception, refutes it")
-E("R134", "N3BASE", "rests", B("FS112-N3-BASE"), "over row 134's base unre-derived")
+E("R134", "N3BASE", "rests", B("FS112-N3-BASE"), "over row 134's base, re-derived by BASE-V but for Lemma 4 at cusps")
 E("N3BASE", "N3DENSE3", "rests", B("FS112-N3-DENSE3"), "over N3-BASE and DISC1")
 E("N3DENSE3", "GSTEP", "rests", L(135), "So S–V's Question 2 with unit arcs is reduced, not answered: its NO is exactly the exclusion of such maps.")
 E("N3DENSE3", "COMPOSE", "rests", B("FS112-C-COMPOSE"), "the global step in DENSE3's form is the NO for all maps")
@@ -451,17 +491,17 @@ E("Y3END", "SRAY", "partial", RSTUB, "That covers every end of a chain of two or
 E("HORNEND", "SRAY", "partial", RSTUB, "a horn bound ±1 on both horns of a stuck vertex of a terminal map occurs only at a one-vertex chain "
   "bounded by unit arcs on both sides", label="a lemma toward it")
 E("BOWTIE", "Y3END", "context", B("FS112-Y3-END-NEEDS"), "FALSE as stated (BOWTIE)", label="refutes it as first stated")
-E("BOWTIE", "TSMYES", "partial", PF(4), "its fragments (the pencil, BOWTIE) are local positives a YES could use",
+E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "6"}, "its fragments (the pencil, BOWTIE) are local positives a YES could use",
   label="a local fragment, not a map")
 # toward six from below
 E("FS104", "LB6", "rests", PF(3), "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)", label="its YES, given MR")
 E("FS104", "FS44", "context", PF(3), "a NO (a CP five-colouring) gives χ(ℝ²) = 5 with no MR", label="its NO is this")
-E("FS80", "FS104", "rests", PF(8), "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR")
+E("FS80", "FS104", "rests", PF(11), "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR")
 E("R129", "LB6", "blocks", L(129), "1/α_loc ≤ 4.36: that route never gives six", label="one class at a time never gives six")
 E("R125", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("FS104", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("PL", "FS59", "rests", L(125), "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6")
-E("FS59", "LB6", "rests", PF(13), "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104")
+E("FS59", "LB6", "rests", PF(16), "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104")
 E("SUB", "LB6", "rests", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
   "The plane over any real subfield needs at most as many colours as the plane.", faint=True, bus=True)
 E("R119", "FS59", "context", L(119), "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six "
@@ -476,7 +516,7 @@ E("TSMYES", "HOLES6", "rests", L(133), "at bounded arc complexity K, band-proper
   "a.e.-proper six-colouring by a map of complexity ≤ K exists")
 E("WEQK", "HOLES6", "rests", L(133), "at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight "
   "a.e.-proper six-colouring by a map of complexity ≤ K exists", bus=True)
-E("UNB", "HOLES6", "rests", STUB("STUB-reg-scale.md"), "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.")
+E("UNB", "HOLES6", "rests", STUB("STUB-reg-scale.md"), "A family refuting (B) with holes → 0 is still W's claim itself: χ(ℝ²) ≤ 6 with no MR.")
 E("STRIP", "TSMYES", "partial", STUB("STUB-unit-arc-half.md"), "One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured "
   "strip of height √15/2 + √3 (≈ 3.668)", label="a tight fragment, not the plane")
 E("DISK", "TSMYES", "partial", B("FS112-CAL-DISK"), "20 unit arcs, all both-kind at four-colour corners",
@@ -494,7 +534,7 @@ E("R134", "TSMYES", "blocks", L(134), "no locally finite map of the plane whose 
 E("R132", "TSMYES", "blocks", L(132), "polygonal colourings need seven, and so do locally finite tilings by convex polygons",
   label="a YES cannot be regular", bus=True, faint=True)
 # toward exactly five
-E("FS44", "UB5", "rests", PF(7), "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)")
+E("FS44", "UB5", "rests", PF(10), "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)")
 E("MAPS6", "FS44", "blocks", L(132), "maps need six modulo Townsend's simplification (c)", label="a five cannot be a map")
 E("R132", "FS44", "blocks", AIM, "Regular colourings need seven, verified and almost everywhere", label="a five cannot be regular",
   bus=True, faint=True)
@@ -511,13 +551,12 @@ ROUTES = [
                "and its publication waits on MR in Lean."),
     dict(id="wall7", name="The regularity wall, toward seven", answer=7, half="lower",
          links=["EL", "MR", "R128", "R130", "R131", "RR", "WEQK", "MEET", "R132", "R134", "N3BASE", "N3DENSE3", "COMPOSE", "GSTEP",
-                "FS111", "SEVEN", "UB7"],
+                "FS111", "FS121", "FS120", "FS122", "SEVEN", "UB7"],
          reaches=["LB7", "UB7"],
          about="Given MR the plane's number is its measurable number (rows 128, 130); that is seven iff vanishing holes cannot save a colour "
                "(row 131). R's reduction splits it into door (A), no tight six-map, and door (B), the cone scale (FS-111). Door (A) is closed "
-               "under Condition 5 (row 134); with unit arcs FS-112 reduced it to one statement, the global step (FS-114) — the whole remaining "
-               "unit-arc question, not a small lemma — and its close showed that statement is the NO with no stuck-ray step. That the two doors "
-               "together give seven is held only as a one-mind reading (FS107-MEET), which the night advisor's first question tests."),
+               "under Condition 5 (row 134); with unit arcs FS-112 reduced it to one statement, the global step (FS-114). "
+               "Card 1 (FS-111, two minds) found the two doors are two routes, not halves: FS-114's NO reaches seven only through the map step (FS-121), or route R's forced pair (FS-122) with the NO idle — and each third statement is the answer restated; route M's rungs hold down to the pinch at a junction (FS-120)."),
     dict(id="yes6", name="The YES side: a tight six-map", answer=6, half="upper",
          links=["LINK2", "R131", "WEQK", "TSMYES"], reaches=["UB6"],
          about="A tight six-map at bounded complexity gives vanishing holes (W-EQ-K), hence χ(ℝ²) ≤ 6 with no MR. The held positives "
@@ -600,7 +639,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-27", job="VIZ-ATLAS-2", as_of="FS-112's close",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-28", job="X1", as_of="FS-114's and FS-111's closes",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)

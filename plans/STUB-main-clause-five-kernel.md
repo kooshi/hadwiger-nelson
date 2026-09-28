@@ -58,4 +58,4 @@ time, and bears none on the answer.
 
 **Provisional bearings** (WORKFLOW 3.1 item 5): G48 (the proved range is the target), G55 (the chain theorem's ring form, row 103, a kernel
 precedent), G63 (the valuation-subring lemma's two instances), G64 (row 57's gap is the kernel's), G54 and G56 (CLS's table), G67, G72 (a kernel
-port has no §IQ), § What compute actually helps (grep Mathlib by the statement's shape at the skeleton; M2's and FS-75's re-price rule).
+port has no §IQ), § What compute actually helps (grep Mathlib by the statement's shape at the skeleton; M2's and FS-75's re-price rule). *At FS-111's close:* FS-111's route-M lemmas (FS111-C1-UNIF, V0-RESCALE, C-FILL, C-HULL, M-SATC, M-PINCH, M-C11, M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) are queued behind the measurable chain: their objects are not in `Proofs/`.

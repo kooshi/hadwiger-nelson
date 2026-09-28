@@ -1,0 +1,251 @@
+entry lint
+  warn  example-dirty.md:795: 'control: fenced-and-unchecked' sits inside a code fence and is not checked — write entries and controls unfenced
+  FAIL  example-dirty.md:594: '**verification:** odd-square' opens a block the gate cannot read — write 'derivation:', 'control:', 'verification:' or 'invention:' in lower case at column 0, then one token of a name
+  claim base: minds 1
+  claim base: prior art known
+  FAIL  example-dirty.md:37 (verdict-not-in-vocabulary): verdict 'done' is not derived | stalls at: <step> | gap: <step> | refuted: <counterexample>
+  FAIL  example-dirty.md:49 (bare-argument): argument 'clearly' is a bare conclusion, not an address
+  claim bare-argument: minds 1
+  claim bare-argument: prior art known
+  FAIL  example-dirty.md:61 (argument-nowhere): argument names § 'The missing section', and this file has no such heading — a conclusion with no chain
+  claim argument-nowhere: minds 1
+  claim argument-nowhere: prior art known
+  FAIL  example-dirty.md:73 (rider): statement carries a scope rider ('more generally') — a second claim; give it its own entry
+  claim rider: minds 1
+  claim rider: prior art known
+  FAIL  example-dirty.md:85 (converse-owed): the statement is two-way ('if and only if') and converse is 'owed' — the sentence conveys a converse the entry does not carry; derive it or state one way
+  claim converse-owed: minds 1
+  claim converse-owed: prior art known
+  FAIL  example-dirty.md:98 (uses-only-repeats): uses only: repeats the statement — read it off the argument
+  claim uses-only-repeats: minds 1
+  claim uses-only-repeats: prior art known
+  FAIL  example-dirty.md:110 (not-claimed-missing): no not claimed: — a derived entry carries every field
+  claim not-claimed-missing: minds 1
+  claim not-claimed-missing: prior art known
+  FAIL  example-dirty.md:121 (vacuous-model): model 'none' — a statement no object satisfies carries nothing
+  claim vacuous-model: minds 1
+  claim vacuous-model: prior art known
+  FAIL  example-dirty.md:133 (off-ladder): grade 'proved' is not on the ladder (hand | derived from | computed over | certified by | kernel | measured)
+  claim off-ladder: minds 1
+  claim off-ladder: prior art known
+  FAIL  example-dirty.md:145 (measured-called-derived): grade measured with verdict derived — a measurement is a candidate; only a derivation concludes
+  claim measured-called-derived: minds 1
+  claim measured-called-derived: prior art known
+  FAIL  example-dirty.md:157 (unfenced-second-mind): minds 2 with no 'blind to:' — a second mind is a claim about what it saw
+  claim unfenced-second-mind: minds 2
+  claim unfenced-second-mind: prior art known
+  claim new-without-search: minds 1
+  FAIL  example-dirty.md:169 (new-without-search): prior art new with 0 counted queries — 'new' is a claim about a search: name two, each "query" (hits)
+  claim new-without-search: prior art new
+  claim known-without-source: minds 1
+  FAIL  example-dirty.md:181 (known-without-source): prior art known names no source
+  claim known-without-source: prior art known
+  claim handoff-without-reason: minds 1
+  claim handoff-without-reason: prior art known
+  FAIL  example-dirty.md:193 (handoff-without-reason): handoff none with no reason
+  claim base: minds 1
+  claim base: prior art known
+  FAIL  example-dirty.md:234 (comma-iff-no-converse): the statement is two-way ('if, and only if') and converse is 'absent' — the sentence conveys a converse the entry does not carry; derive it or state one way
+  claim comma-iff-no-converse: minds 1
+  claim comma-iff-no-converse: prior art known
+  FAIL  example-dirty.md:246 (exactly-the-no-converse): the statement is two-way ('exactly the') and converse is 'absent' — the sentence conveys a converse the entry does not carry; derive it or state one way
+  claim exactly-the-no-converse: minds 1
+  claim exactly-the-no-converse: prior art known
+  FAIL  example-dirty.md:263 (derived-from-a-stall): derived from 'stalled-lemma', whose verdict is 'stalls at: no argument covers every even integer' — the weakest input governs, and it carries nothing yet
+  claim derived-from-a-stall: minds 1
+  claim derived-from-a-stall: prior art known
+  warn  example-dirty.md:275 (possible-two-way): 'the only' may be two-way — give the converse an address, or write converse: one-way — <reason>
+  claim possible-two-way: minds 1
+  claim possible-two-way: prior art known
+  claim odd-square: minds 1
+  claim odd-square: prior art known
+  claim overclaimed: minds 2 — blind to: the argument; method: residues mod 2, a different model family
+  claim overclaimed: prior art known
+  claim refuted-by-a-verification: minds 1
+  claim refuted-by-a-verification: prior art known
+  FAIL  example-dirty.md:205 (base): a second entry with this name in the same file
+  entries: 25  derived: 22  stalled, gapped or refuted: 3
+verification lint
+  claim verification base: given: the statement only
+  claim verification base: committed 2026-09-28
+  claim verification base: predicted derived (0.99); verdict derived — met
+  claim verification base: counterexamples none — every pair of even integers below 100
+  claim verification base: minds 1 — the author's own check, filed as an example
+  FAIL  example-dirty.md:287 (verification off-ladder): verdict 'agrees' is not derived | stalls at: <step> | gap: <step> | refuted: <counterexample>
+  claim verification off-ladder: given: the statement only
+  claim verification off-ladder: committed 2026-09-28
+  claim verification off-ladder: counterexamples none — every prime below 1000
+  claim verification off-ladder: minds 1 — the same route as the entry
+  FAIL  example-dirty.md:319 (verification odd-square): no given: — a second mind is a claim about what it was given before it committed, the statement at least
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  FAIL  example-dirty.md:333 (verification odd-square): no predicted: — register the verdict you expect and its probability before deriving
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  FAIL  example-dirty.md:347 (verification odd-square): predicted 'derived' is not "<verdict> — <probability>" with the verdict from the entry vocabulary
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:362 (verification odd-square): no attack: — a verification that attacks no statement has checked only steps
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:376 (verification odd-square): divergence 'the argument' is classed 'agree', not truth | route | wording
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:391 (verification odd-square): divergence 'the case k odd' is of truth and its resolution is 'unresolved' — one of the two is wrong: say which, or send it to a third independent mind and say so
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: thin truth: 2 — the conclusion is silent on even squares
+  claim verification odd-square: refutation: 3 — the lemma that k(k + 1) is even
+  FAIL  example-dirty.md:406 (verification odd-square): a refutation of the statement as meant, beside the verdict 'derived'
+  claim verification odd-square: minds 1 — an example
+  claim verification refuted-claim: given: the statement only
+  claim verification refuted-claim: committed 2026-09-28
+  claim verification refuted-claim: predicted refuted (0.99); verdict refuted — met
+  FAIL  example-dirty.md:421 (verification refuted-claim): counterexample 'refutation: 9' is not "<refutation | monster | thin truth>: <object> — <where it is local>" — a counterexample with no place in the argument cannot be answered
+  claim verification refuted-claim: minds 1 — an example
+  claim verification refuted-claim: given: the statement only
+  claim verification refuted-claim: committed 2026-09-28
+  claim verification refuted-claim: predicted refuted (0.99); verdict refuted — met
+  claim verification refuted-claim: thin truth: 3 — prime, as claimed, and the claim says nothing of why
+  FAIL  example-dirty.md:436 (verification refuted-claim): verdict refuted with no refutation or monster located
+  claim verification refuted-claim: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  warn  example-dirty.md:451 (verification odd-square): divergences 'none — the first derivation not yet read' — until the comparison finds something, the disagreement has not started
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict gap — missed
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 2 — blind to: the entry's argument; method: residues mod 8, the same model
+  claim verification odd-square: given: the statement only
+  FAIL  example-dirty.md:520 (verification odd-square): committed '' carries no date or commit — when the verdict was committed is the record of what could not yet have been seen
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification overclaimed: given: the statement only
+  claim verification overclaimed: committed 2026-09-28
+  claim verification overclaimed: predicted derived (0.99); verdict derived — met
+  claim verification overclaimed: counterexamples none — every pair below 1000
+  claim verification overclaimed: minds 1 — the same route as the entry
+  claim verification odd-square: given: the statement, the entry's argument, and its verdict
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  FAIL  example-dirty.md:549 (verification odd-square): minds 2, blind to 'nothing' — a mind that saw everything is a checking reading, one mind
+  claim verification odd-square: minds 2 — blind to: nothing; method: residues mod 8
+  claim verification odd-square: given: the statement and the entry's sketch
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  warn  example-dirty.md:564 (verification odd-square): minds 2, and given: names the sketch — a checking reading counts one
+  claim verification odd-square: minds 2 — blind to: the entry's proof; method: residues mod 8, the same model
+  claim verification refuted-by-a-verification: given: the statement only
+  claim verification refuted-by-a-verification: committed 2026-09-28
+  claim verification refuted-by-a-verification: predicted refuted (0.9); verdict refuted — met
+  claim verification refuted-by-a-verification: refutation: n = 40 — the lemma the argument hid, that forty checked values carry every value
+  claim verification refuted-by-a-verification: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  warn  example-dirty.md:601 (verification odd-square): the divergence table at '§ A divergence table with no rows' has no rows — until the comparison finds something, the disagreement has not started
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:616 (verification odd-square): divergences at '§ A divergence table with no class column' holds no table with a class column (truth | route | wording)
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  warn  example-dirty.md:631 (verification odd-square): divergence 'the case k odd' is of truth and waits on a third mind — the entry stands below its claim until it returns
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification refuted-claim: given: the statement only
+  claim verification refuted-claim: committed 2026-09-28
+  claim verification refuted-claim: predicted refuted (0.99); verdict refuted — met
+  FAIL  example-dirty.md:646 (verification refuted-claim): verdict refuted with counterexamples none
+  claim verification refuted-claim: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  FAIL  example-dirty.md:661 (verification odd-square): grade 'verified' is not on the ladder (hand | derived from | computed over | certified by | kernel | measured)
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:676 (verification odd-square): no method: — say how this route differed from the first, or that it could not know
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:690 (verification odd-square): no divergences: — the comparison with the first derivation, or none — <reason>
+  claim verification odd-square: counterexamples none — every odd integer below 1000
+  claim verification odd-square: minds 1 — an example
+  claim verification odd-square: given: the statement only
+  claim verification odd-square: committed 2026-09-28
+  claim verification odd-square: predicted derived (0.95); verdict derived — met
+  FAIL  example-dirty.md:704 (verification odd-square): counterexamples none with no search named
+  claim verification odd-square: minds 1 — an example
+  warn  odd-square: the entry says derived and a verification says gap — a divergence of truth: demote the entry, or let a third independent mind decide
+  warn  odd-square: a verification counts 2 minds and the entry says 1 — carry the count to the entry's minds: line
+  FAIL  overclaimed: the entry says 2 minds and the verifications of it here count at most 1 — the conveyed exceeds the carried; lower the entry, or pass the verification that counts 2
+  FAIL  refuted-by-a-verification: the entry says derived and a verification refutes it (n = 40) — demote the entry to refuted, and everything derived from it with it
+  verifications: 27  predictions met: 23 of 24 (Brier 0.040)  divergences: truth 2, route 20, wording 0  counterexamples: refutation 2, monster 0, thin truth 2
+quotes
+  FAIL  base: statement at example-dirty.md:24 differs from example-dirty.md:12 at character 20: 'the sum of two even integers is even' against 'the sum of two even numbers is even'
+  statements named in more than one place: 6
+controls
+  FAIL  example-dirty.md:217 (output-mismatch): run printed '1' (exit 0) where the entry says '0'
+  FAIL  example-dirty.md:223 (cannot-fire): the fault run also printed '0' — the control cannot fire, so its pass says nothing
+  FAIL  example-dirty.md:229 (no-fault): no fault — a control that cannot be re-run, or cannot fire, is a self-test
+  FAIL  example-dirty.md:788 (fault-crashes): the fault run exited 1 ("NameError: name 'undefined_name' is not defined") — a fault that does not run has not tested the control
+  controls: 4  fired on their faults: 0
+invention lint
+  FAIL  example-dirty.md:719 (invention licence-unaddressed): licence 'clearly' is not an address — point to where it is written
+  claim invention licence-unaddressed: old premise planted: none — an example
+  claim invention licence-unaddressed: not graded — the record fails
+  FAIL  example-dirty.md:731 (invention revises-unlisted): revises 'the whole is greater than the part', which the premises at '§ Premises of the invention examples' do not list — revise a premise that was sorted
+  claim invention revises-unlisted: old premise planted: none — an example
+  claim invention revises-unlisted: not graded — the record fails
+  FAIL  example-dirty.md:743 (invention recovery-stalled): recovery names 'stalled-lemma', not a derived entry in these files — a receipt is an entry that carries it
+  claim invention recovery-stalled: old premise planted: none — an example
+  claim invention recovery-stalled: not graded — the record fails; recovery unread
+  FAIL  example-dirty.md:755 (invention planted-cannot-fire): old premise planted names 'cannot-fire', which did not fire on its fault — the old premise planted back changed nothing it printed
+  claim invention planted-cannot-fire: not graded — the record fails
+  FAIL  example-dirty.md:767 (invention model-missing): no model: — a made description names every receipt, or says none — <reason>
+  claim invention model-missing: old premise planted: none — an example
+  claim invention model-missing: not graded — the record fails; model unread
+  claim invention honest-conjecture: old premise planted: none — an example
+  warn  invention honest-conjecture: revises 'the sum of two odd integers is odd' — a conjecture: no model. Grade it as one, and say so in the headline
+  inventions: 6  secured: 0  conjectures: 1  not graded: 5
+GATE: FAIL (49 failures, 9 warnings)

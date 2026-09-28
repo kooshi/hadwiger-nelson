@@ -31,11 +31,11 @@ A radius must exceed `φ²/√2 ≈ 1.8512`: the capped strip holds every smalle
 
 ## Bearing on the answer
 
-**Decisive at every complexity.** An explicit `R` with FS114-CV-EXISTS is the unit-arc NO for every valid map, periodic or not, Siamese pairs included,
+**Decisive at every complexity.** An explicit `R`, uniform in the complexity, with FS114-CV-EXISTS gives the unit-arc NO for every valid map, periodic or not, Siamese pairs included,
 with no ray step and no density: it answers `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") **yes** for its unit-arc half,
 almost everywhere, for locally finite segment-and-arc maps, answers `[Polymath2021]` p. 199's hope for such tilings, closes door (A) of row 133 at every
 complexity bound, and answers the upper side of Mixon's thread-7 question ("What is the radius of the largest disk in $\mathbb{R}^2$ that can be
-6-colored?") for maps with unit arcs; with FS-111's door (B) (as FS-111's close leaves it) it is the map route to `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7`
+6-colored?") for maps with unit arcs; with FS-121's map step (route M; FS111-C-SEVEN-M, two minds) it gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7`
 given MR. A YES — a valid map of the plane — gives `χ(ℝ²) ≤ 6` with no MR. A local exclusion for one configuration only (as FS-114 filed) is a piece,
 not the answer; a NO for non-Siamese maps only is FS-117's, not this stub's.
 

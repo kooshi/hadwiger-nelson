@@ -26,10 +26,11 @@ Plants (each must make exactly its named check fail; the faithful run must pass 
   sq4    SQ9 replaced by squares coloured (i mod 4, j mod 4)  -> K4
 Output: data/fs111/fs111-m4/rungs.out (also printed). Exit 0 iff all as expected.
 """
+import pathlib
 import sys
 import sympy as sp
 
-OUT = "data/fs111/fs111-m4/rungs.out"
+OUT = str(pathlib.Path(__file__).resolve().parents[1] / "data/fs111/fs111-m4/rungs.out")  # resolved from this file, so any working directory works
 LOG = []
 r3 = sp.sqrt(3)
 HALF = sp.Rational(1, 2)

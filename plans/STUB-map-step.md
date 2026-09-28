@@ -54,7 +54,7 @@ are genuinely smaller.
 failure is a tight six-colouring, `χ_m⁰(ℝ²) ≤ 6`, so `χ(ℝ²) ≤ 6` with no MR (link 2). At five: the map step with AE-MAP6 is `χ_m⁰(ℝ²) ≥ 6`, so
 `χ(ℝ²) ≥ 6` given MR — FS-104's statement by another route; its failure is `χ(ℝ²) = 5` with no MR. Each top rung is equivalent to its conclusion given its
 NO, so this stub's progress is measured by its **smaller rungs**: NO-PAR (a new NO, genuinely smaller than seven: a NO for a class of maps), interface
-maximality, MUA-REG-P, and FS-120's finiteness rung. Rank it by the NO it would add, not by the equivalence.
+maximality, MUA-REG-P, and FS-120's finiteness rung. Rank it by the NO it would add, not by the equivalence. The same equivalence holds of FS-116's NO given this stub's top rung: route M's two halves are each necessary for seven and each equivalent to it given the other (R1, F2).
 
 ## Registered expectations (instruments, never caps)
 
