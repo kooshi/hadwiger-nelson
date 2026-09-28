@@ -1,0 +1,2354 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "name": "Borodin, O. V."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "broersma.hajo-j"
+      ],
+      "name": "Broersma, H."
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "glebov.aleksei-nikolaevich"
+      ],
+      "name": "Glebov, A. N."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "van-den-heuvel.jan"
+      ],
+      "name": "van den Heuvel, J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": "M.V.Belolipetsky (Novosibirsk)"
+     },
+     "text": "The weight of a precomplete star of a vertex \\(v\\) of a plane map \\(G\\) is the sum of the degrees of the vertices of \\(G\\) adjacent to \\(v\\) except the vertex having the maximal degree among them. It is shown that if a plane triangulation does not contain any sufficiently long chains of vertices of degree 4 then it contains a bounded weight precomplete star of a vertex of degree at most 5. The authors propose to use this result in forthcoming papers to obtain the best possible upper bounds for the 2-distance degree and 2-distance chromatic number of an arbitrary planar graph.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 1682229,
+   "identifier": "0977.05036",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "Russian"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "15-39",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1560-7542",
+        "type": "print"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 81803,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Russian Academy of Sciences - RAS (Rossi\u012dskaya Akademiya Nauk - RAN), Siberian Branch (Sibirskoe Otdelenie), Sobolev Insitute of Mathematics (Institut Matematiki Im. S. L. Soboleva), Novosibirsk",
+      "series_id": 2405,
+      "short_title": "Diskretn. Anal. Issled. Oper., Ser. 1",
+      "title": "Diskretny\u012d Analiz i Issledovanie Operatsi\u012d. Seriya 1",
+      "volume": "8",
+      "year": "2001"
+     }
+    ],
+    "source": "Diskretn. Anal. Issled. Oper., Ser. 1 8, No. 2, 15-39 (2001)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The structure of the planar triangulations in terms of bundles and stars"
+   },
+   "year": "2001",
+   "zbmath_url": "https://zbmath.org/1682229"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "didimo.walter"
+      ],
+      "name": "Didimo, Walter"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "patrignani.maurizio"
+      ],
+      "name": "Patrignani, Maurizio"
+     }
+    ]
+   },
+   "database": "Zbl",
+   "datestamp": "2013-02-20T16:20:47Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 6137645,
+   "identifier": "1258.68009",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/978-3-642-36763-2",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/978-3-642-36763-2"
+    }
+   ],
+   "msc": [
+    {
+     "code": "68-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to computer science"
+    },
+    {
+     "code": "68R10",
+     "scheme": "msc2020",
+     "text": "Graph theory (including graph drawing) in computer science"
+    },
+    {
+     "code": "68U05",
+     "scheme": "msc2020",
+     "text": "Computer graphics; computational geometry (digital and algorithmic aspects)"
+    },
+    {
+     "code": "00B25",
+     "scheme": "msc2020",
+     "text": "Proceedings of conferences of miscellaneous specific interest"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 6137645,
+      "isbn": [
+       {
+        "number": "978-3-642-36762-5",
+        "type": "pbk"
+       }
+      ],
+      "publisher": "Berlin: Springer",
+      "year": "2013"
+     }
+    ],
+    "pages": "xv, 582~p.",
+    "series": [
+     {
+      "acronym": "LNCS",
+      "issn": [
+       {
+        "number": "0302-9743",
+        "type": "print"
+       },
+       {
+        "number": "1611-3349",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 392561,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Cham",
+      "series_id": 4014,
+      "short_title": "Lect. Notes Comput. Sci.",
+      "title": "Lecture Notes in Computer Science",
+      "volume": "7704",
+      "year": "2013"
+     }
+    ],
+    "source": "Lecture Notes in Computer Science 7704. Berlin: Springer (ISBN 978-3-642-36762-5/pbk). xv, 582~p. (2013)."
+   },
+   "states": [
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Graph drawing. 20th international symposium, GD 2012, Redmond, WA, USA, September 19--21, 2012. Revised selected papers"
+   },
+   "year": "2013",
+   "zbmath_url": "https://zbmath.org/6137645"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2013-01-31T15:08:16Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 6133113,
+   "identifier": "1257.05001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "www.dmtcs.org/dmtcs-ojs/index.php/proceedings/issue/view/126/showToc.html",
+     "type": "https",
+     "url": "https://www.dmtcs.org/dmtcs-ojs/index.php/proceedings/issue/view/126/showToc.html"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to combinatorics"
+    },
+    {
+     "code": "05B35",
+     "scheme": "msc2020",
+     "text": "Combinatorial aspects of matroids and geometric lattices"
+    },
+    {
+     "code": "05Exx",
+     "scheme": "msc2020",
+     "text": "Algebraic combinatorics"
+    },
+    {
+     "code": "00B25",
+     "scheme": "msc2020",
+     "text": "Proceedings of conferences of miscellaneous specific interest"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 6133113,
+      "isbn": [],
+      "publisher": "Nancy: The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS)",
+      "year": "2012"
+     }
+    ],
+    "pages": "991~p., electronic only",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [],
+      "issue": null,
+      "issue_id": 418299,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS), Nancy",
+      "series_id": 7931,
+      "short_title": "Discrete Math. Theor. Comput. Sci., Proc.",
+      "title": "Discrete Mathematics \\& Theoretical Computer Science. Proceedings",
+      "volume": null,
+      "year": "2012"
+     }
+    ],
+    "source": "Discrete Mathematics and Theoretical Computer Science. Proceedings. Nancy: The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS). 991~p., electronic only, open access (2012)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Proceedings of the 24th international conference on formal power series and algebraic combinatorics, FPSAC 2012, Nagoya, Japan, July 30--August 3, 2012"
+   },
+   "year": "2012",
+   "zbmath_url": "https://zbmath.org/6133113"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "ilbira.sabahattin"
+      ],
+      "name": "Ilbira, Sabahattin"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "korkmaz.mustafa"
+      ],
+      "name": "Korkmaz, Mustafa"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2020-05-19T16:14:25Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "gaster.jonah",
+      "reviewer_id": "18122",
+      "name": "Jonah Gaster",
+      "sign": "Jonah Gaster (Milwaukee)"
+     },
+     "text": "In this paper, the authors extend a previous result of Aramayona-Leininger about the simplicial structure of the curve complex of an orientable surface [\\textit{J. Aramayona} and \\textit{C. J. Leininger}, J. Topol. Anal. 5, No. 2, 183--203 (2013; Zbl 1277.57017)] to the nonorientable case. Ilbira-Korkmaz's result is as follows: if \\(S_{g,n}\\) is the nonorientable surface of genus \\(g\\) with \\(n\\) holes, then there is a finite subcomplex of its curve complex that is rigid when \\(g+n\\ne 4\\). The proof is moreover explicit and constructive, locating a specified rigid set in each of these cases. The paper is written in a pleasant style, with nicely labelled pictures that helpfully guide the reader through the constructions and arguments.\n\n\nThe \\textit{curve complex} \\(\\mathcal{C}(S)\\) of a surface \\(S\\), introduced by \\textit{W. J. Harvey} [Ann. Math. Stud. 97, 245--251 (1981; Zbl 0461.30036)], is a simplicial complex whose vertices are isotopy classes of simple closed curves embedded on the surface, and with simplices that span vertices representing curves that can be realized pairwise disjointly. The curve complex has grown to become an indispensable tool for analyzing the geometry and structure of mapping class groups, Teichm\u00fcller spaces, and hyperbolic 3-manifolds [\\textit{B. H. Bowditch}, Invent. Math. 171, No. 2, 281--300 (2008; Zbl 1185.57011); \\textit{J. F. Brock} et al., Ann. Math. (2) 176, No. 1, 1--149 (2012; Zbl 1253.57009); \\textit{J. L. Harer}, Invent. Math. 84, 157--176 (1986; Zbl 0592.57009); \\textit{H. A. Masur} and \\textit{Y. N. Minsky}, ibid. 138, No. 1, 103--149 (1999; Zbl 0941.32012); \\textit{K. Rafi}, Geom. Funct. Anal. 17, No. 3, 936--959 (2007; Zbl 1129.30031)]. Most germane to the subject of this paper, Ivanov showed that when \\(S\\) is orientable, apart from some low-complexity exceptions that can be computed explicitly, the automorphism group of \\(\\mathcal{C}(S)\\) is isomorphic to \\(\\mathrm{Mod}(S)\\), the mapping class group of \\(S\\) [\\textit{N. V. Ivanov}, Int. Math. Res. Not. 1997, No. 14, 651--666 (1997; Zbl 0890.57018)]. The second author extended this to the nonorientable case in a joint work with \\textit{F. Atalan} [Groups Geom. Dyn. 8, No. 1, 39--68 (2014; Zbl 1306.57013)].\n\n\nA map between simplicial complexes is \\textit{locally injective} when its restriction to the star of a vertex is injective; equivalently, the map induces a graph homomorphism on the \\(1\\)-skeleton. A subcomplex \\(Y\\subset X\\) is \\textit{rigid} if any locally injective map \\(Y\\to X\\) is given by the restriction of a global automorphism of \\(X\\) to the subcomplex \\(Y\\). Shackleton showed that the entire complex \\(\\mathcal{C}(S)\\) is rigid [\\textit{K. J. Shackleton}, Pac. J. Math. 230, No. 1, 217--232 (2007; Zbl 1165.57017)] (cf. [\\textit{E. Irmak} and \\textit{J. D. McCarthy}, Turk. J. Math. 34, No. 3, 339--354 (2010; Zbl 1206.57018); \\textit{E. Irmak}, Algebr. Geom. Topol. 9, No. 4, 2055--2077 (2009; Zbl 1203.57008)]). Subsequently, in response to a question of Lars Louder, Aramayona-Leininger produced finite rigid subcomplexes of \\(\\mathcal{C}(S)\\) [\\textit{J. Aramayona} and \\textit{C. J. Leininger}, loc. cit.]. \nThis is somewhat surprising as \\(\\mathcal{C}(S)\\) is locally-infinite, and one has the feeling that there is plenty of room inside \\(\\mathcal{C}(S)\\) to move finite subcomplexes around without inducing the rigid action on \\(\\mathcal{C}(S)\\) specified by a mapping class.\n\n\nAramayona-Leininger's rigid subcomplexes are quite attractive. For instance, in response to [loc. cit., Question 2], Birman-Broaddus-Menasco showed that, when the surface \\(S\\) has genus zero, the rigid subcomplexes of Aramayona-Leininger generate the homology of \\(\\mathcal{C}(S)\\) as a module over \\(\\mathrm{Mod}(S)\\) [\\textit{J. Birman} et al., J. Topol. Anal. 7, No. 1, 47--71 (2015; Zbl 1308.57009)]. Later, Gaster-Greene-Vlamis used Aramayona-Leininger's rigid set to produce lower bounds for the chromatic number of \\(\\mathcal{C}(S)\\) [\\textit{J. Gaster} et al., Forum Math. Sigma 6, Paper No. e17, 42 p. (2018; Zbl 1405.57008)].\n\n\nIn the wake of Aramayona-Leininger's work, a flurry of different examples of rigid subcomplexes for \\(\\mathcal{C}(S)\\), and some of its close relatives (notably the pants complex and the arc complex), were produced [\\textit{J. Aramayona} and \\textit{C. J. Leininger}, Pac. J. Math. 282, No. 2, 257--283 (2016; Zbl 1342.57015); \\textit{E. Irmak}, ``Exhausting curve complexes by finite rigid sets on nonorientable surfaces'', Preprint, \\url{arXiv:1906.09913}; \\textit{R. Maungchang}, Topology Appl. 237, 37--52 (2018; Zbl 1387.57034); \\textit{J. Hern\u00e1ndez Hern\u00e1ndez} et al., ``Finite rigid subgraphs of pants graphs'', Preprint, \\url{arXiv:1907.12734}; \\textit{E. Shinkle}, ``Finite rigid sets in arc complexes'', Preprint, \\url{arXiv:1909.08762}; \\textit{B. Szepietowski}, ``A note on the curve complex of the 3-holed projective plane'' Preprint, \\url{arXiv:1907.09042}]. The present work naturally fits into this context, exploring rigidity in \\(\\mathcal{C}(S)\\) in the nonorientable setting.  \n\n\nThere are some subtle features of the curve complex in the nonorientable setting that may be unfamiliar to readers who have not encountered it before. For instance, in contrast to the orientable setting, the curve complex of a nonorientable surface is not pure -- there are maximal simplices of different dimensions. Such differences are exploited in the present work, and are helpfully explained clearly and concisely in an introductory section.\n\n\nThere are two natural next steps suggested by this paper, and subsequently both have been investigated by other authors. First, in analogy with Aramayona-Leininger's construction of an exhaustion of \\(\\mathcal{C}(S)\\) by finite rigid sets in the orientable setting, Irmak constructed such an exhaustion in the nonorientable setting when \\(g+n\\ne 4\\) [\\textit{J. Hern\u00e1ndez Hern\u00e1ndez} et al., loc. cit.]. Second, Szepietowski has constructed an exhaustion by finite rigid sets for the nonorientable surface with \\(g=1\\) and \\(n=3\\) [\\textit{B. Szepietowski}, loc. cit.]. This means that the remaining cases for which rigid sets have yet to be explicitly written down are \\((g,n)\\in\\{(2,2),(3,1),(4,0)\\}\\) in the nonorientable setting. (Note that the case \\((g,n)=(0,4)\\) is in fact the orientable four-holed sphere, whose curve graph is either totally disconnected or the Farey graph, depending on the choices one makes for how to define the curve complex in low-complexity; rigidity for either is not hard to work out.)\n\n\nAll of these investigations of combinatorial rigidity in simplicial complexes associated to surfaces are fascinating, and there are other related questions that can be explored. For instance, what are the rigid subcomplexes of \\(\\mathcal{C}(S)\\) (or the arc complex, pants complex, etc.)? Given a subcomplex, how can one tell whether it is rigid? Which finite subcomplexes have rigid expansions that exhaust \\(\\mathcal{C}(S)\\) [\\textit{J. Aramayona} and \\textit{C. J. Leininger}, loc. cit.; \\textit{J. Hern\u00e1ndez Hern\u00e1ndez}, Glasg. Math. J. 61, No. 1, 195--230 (2019; Zbl 1481.57035)]?",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 7202096,
+   "identifier": "1445.57007",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s10711-019-00478-6",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s10711-019-00478-6"
+    },
+    {
+     "identifier": "1810.07964",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1810.07964"
+    }
+   ],
+   "msc": [
+    {
+     "code": "57K20",
+     "scheme": "msc2020",
+     "text": "2-dimensional topology (including mapping class groups of surfaces, Teichm\u00fcller theory, curve complexes, etc.)"
+    },
+    {
+     "code": "57M50",
+     "scheme": "msc2020",
+     "text": "General geometric structures on low-dimensional manifolds"
+    },
+    {
+     "code": "20F65",
+     "scheme": "msc2020",
+     "text": "Geometric group theory"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.1142/S1793525313500076",
+     "position": "1",
+     "text": "Aramayona, J.; Leininger, CJ, Finite rigid sets in curve complexes, J. Topol. Anal., 05, 183-203 (2013)",
+     "zbmath": {
+      "author_codes": [
+       "leininger.christopher-j",
+       "aramayona.javier"
+      ],
+      "document_id": 6182153,
+      "msc": [
+       "57M99",
+       "20F65",
+       "20F34"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6520,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": "10.2140/pjm.2016.282.257",
+     "position": "2",
+     "text": "Aramayona, J.; Leininger, CJ, Exhausting curve complexes by finite rigid sets, Pac. J. Math., 282, 257-283 (2016)",
+     "zbmath": {
+      "author_codes": [
+       "leininger.christopher-j",
+       "aramayona.javier"
+      ],
+      "document_id": 6562425,
+      "msc": [
+       "57M99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "10.4171/GGD/216",
+     "position": "3",
+     "text": "Atalan, F.; Korkmaz, M., Automorphisms of curve complexes on nonorientable surfaces, Groups Geom. Dyn., 8, 39-68 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "atalan.ferihe",
+       "korkmaz.mustafa"
+      ],
+      "document_id": 6305382,
+      "msc": [
+       "57M60",
+       "20F38",
+       "30F60",
+       "57N05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4953,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "10.1007/s10711-005-9022-3",
+     "position": "4",
+     "text": "Behrstock, J.; Margalit, D., Curve complexes and finite index subgroups of mapping class groups, Geom. Dedic., 118, 71-85 (2006)",
+     "zbmath": {
+      "author_codes": [
+       "behrstock.jason-a",
+       "margalit.dan"
+      ],
+      "document_id": 5046839,
+      "msc": [
+       "57M99",
+       "20F38"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "2006"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Fathi, A., Laudenbach, F., Poenaru, V.: Travaux de Thurston sur les Aurfaces, Seminaire Orsay, Asterisque. Soc. Math. France, Paris, pp. 66-67 (1979)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": 3630641,
+      "msc": [
+       "00B15",
+       "58-06"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3762,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Harvey, W.J.: Boundary structure of the modular group. In: I. Kra, I. and Maskit, B. (eds.), Riemann Surfaces and Related Topics: Proceedings of the 1978 Stony Brook Conference, Annals of Mathematics, vol. 97, Princeton University Press, Princeton, 245-251 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "harvey.william-james"
+      ],
+      "document_id": 3721247,
+      "msc": [
+       "30F35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "10.1017/S0017089518000174",
+     "position": "7",
+     "text": "Hern\u00e1ndez Hern\u00e1ndez, J., Exhaustion of the curve graph via rigid expansions, Glasg. Math. J., 61, 195-230 (2019)",
+     "zbmath": {
+      "author_codes": [
+       "hernandez-hernandez.jesus"
+      ],
+      "document_id": 6988392,
+      "msc": [
+       "57M50",
+       "20F65",
+       "57M07",
+       "57K20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 436,
+      "year": "2019"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Ilb\u0131ra, S.: Finite rigid sets on curve complexes of non-orientable surfaces. Ph.D.Thesis, Middle East Technical University, Ankara, Turkey (2017)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2140/agt.2014.14.1153",
+     "position": "9",
+     "text": "Irmak, E., On simplicial maps of the complexes of curves of nonorientable surfaces, Algebraic Geom. Topol., 14, 1153-1180 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "irmak.elmas"
+      ],
+      "document_id": 6272622,
+      "msc": [
+       "57M99",
+       "20F38"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2808,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Irmak, E., Superinjective simplicial maps of the complexes of curves on nonorientable surfaces, Turk. J. Math., 36, 407-421 (2012)",
+     "zbmath": {
+      "author_codes": [
+       "irmak.elmas"
+      ],
+      "document_id": 6099766,
+      "msc": [
+       "32G15",
+       "20F38",
+       "30F10",
+       "57M99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2020,
+      "year": "2012"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Irmak, E.: Exhausting curve complexes by finite superrigid sets on nonorientable surfaces. arXiv:1903.04926",
+     "zbmath": {
+      "author_codes": [
+       "irmak.elmas"
+      ],
+      "document_id": 7472611,
+      "msc": [
+       "57K20",
+       "57M60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 425,
+      "year": "2021"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Irmak, E.: Exhausting curve complexes by finite rigid sets on nonorientable surfaces. arXiv:1906.09913",
+     "zbmath": {
+      "author_codes": [
+       "irmak.elmas"
+      ],
+      "document_id": 7472611,
+      "msc": [
+       "57K20",
+       "57M60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 425,
+      "year": "2021"
+     }
+    },
+    {
+     "doi": "10.1155/S1073792897000433",
+     "position": "13",
+     "text": "Ivanov, NV, Automorphisms of complexes of curves and of Teichm\u00fcller spaces, Int. Math. Res. Not., 1997, 14, 651-666 (1997)",
+     "zbmath": {
+      "author_codes": [
+       "ivanov.nikolai-v"
+      ],
+      "document_id": 1089297,
+      "msc": [
+       "57N05",
+       "32G15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1388,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": "10.1016/S0166-8641(97)00278-2",
+     "position": "14",
+     "text": "Korkmaz, M., Automorphisms of complexes of curves on punctured spheres and on punctured tori, Topol. Appl., 95, 85-111 (1999)",
+     "zbmath": {
+      "author_codes": [
+       "korkmaz.mustafa"
+      ],
+      "document_id": 1317243,
+      "msc": [
+       "57M99",
+       "30F99",
+       "57N05",
+       "57M60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 800,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": "10.1023/A:1014289127999",
+     "position": "15",
+     "text": "Korkmaz, M., Mapping class groups of nonorientable surfaces, Geom. Dedic., 89, 109-133 (2002)",
+     "zbmath": {
+      "author_codes": [
+       "korkmaz.mustafa"
+      ],
+      "document_id": 1747812,
+      "msc": [
+       "57M99",
+       "57N05",
+       "20F38",
+       "57M05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": "10.1016/S0040-9383(99)00008-7",
+     "position": "16",
+     "text": "Luo, F., Automorphisms of the complex of curves, Topology, 39, 283-298 (2000)",
+     "zbmath": {
+      "author_codes": [
+       "luo.feng"
+      ],
+      "document_id": 1384249,
+      "msc": [
+       "32G15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 742,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Maungchang, R.: Curves on surfaces. Ph.D. Thesis, University of Illinois at Champaign-Urbana, Urbana (2013)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1112/jlms/s2-25.1.171",
+     "position": "18",
+     "text": "Scharlemann, M., The complex of curves on non orientable surfaces, J. Lond. Math. Soc., 25, 171-184 (1982)",
+     "zbmath": {
+      "author_codes": [
+       "scharlemann.martin-g"
+      ],
+      "document_id": 3753691,
+      "msc": [
+       "57N05",
+       "57M99",
+       "57R30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 500,
+      "year": "1982"
+     }
+    },
+    {
+     "doi": "10.2140/pjm.2007.230.217",
+     "position": "19",
+     "text": "Shackleton, K., Combinatorial rigidity in curve complexes and mapping class groups, Pac. J. Math., 230, 217-232 (2007)",
+     "zbmath": {
+      "author_codes": [
+       "shackleton.kenneth-j"
+      ],
+      "document_id": 5366215,
+      "msc": [
+       "57M50",
+       "20F38"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "2007"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "83-103",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0046-5755",
+        "type": "print"
+       },
+       {
+        "number": "1572-9168",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 449346,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer Netherlands, Dordrecht",
+      "series_id": 434,
+      "short_title": "Geom. Dedicata",
+      "title": "Geometriae Dedicata",
+      "volume": "206",
+      "year": "2020"
+     }
+    ],
+    "source": "Geom. Dedicata 206, 83-103 (2020)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Finite rigid sets in curve complexes of nonorientable surfaces"
+   },
+   "year": "2020",
+   "zbmath_url": "https://zbmath.org/7202096"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "mulzer.wolfgang-johann-heinrich"
+      ],
+      "name": "Mulzer, Wolfgang"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "phillips.jeff-m"
+      ],
+      "name": "Phillips, Jeff M."
+     }
+    ]
+   },
+   "database": "Zbl",
+   "datestamp": "2024-09-09T22:58:32Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 7909450,
+   "identifier": "1545.68021",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+   ],
+   "links": [
+    {
+     "identifier": "10.4230/LIPIcs.SoCG.2024.0",
+     "type": "doi",
+     "url": "https://doi.org/10.4230/LIPIcs.SoCG.2024.0"
+    },
+    {
+     "identifier": "drops.dagstuhl.de/storage/00lipics/lipics-vol293-socg2024/LIPIcs.SoCG.2024/LIPIcs.SoCG.2024.pdf",
+     "type": "https",
+     "url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol293-socg2024/LIPIcs.SoCG.2024/LIPIcs.SoCG.2024.pdf"
+    }
+   ],
+   "msc": [
+    {
+     "code": "68-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to computer science"
+    },
+    {
+     "code": "68U05",
+     "scheme": "msc2020",
+     "text": "Computer graphics; computational geometry (digital and algorithmic aspects)"
+    },
+    {
+     "code": "00B25",
+     "scheme": "msc2020",
+     "text": "Proceedings of conferences of miscellaneous specific interest"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "0:vii Practical Software for Triangulating and Simplifying 4-Manifolds Rhuaidi Antonio Burke . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29:1-29:23 Effective Computation of the Heegaard Genus of 3-Manifolds Benjamin A. Burton and Finn Thompson . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30:1-30:16",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Geometric Matching and Bottleneck Problems Sergio Cabello, Siu-Wing Cheng, Otfried Cheong, and Christian Knauer . . . . . . . . . 31:1-31:15 SCARST: Schnyder Compact and Regularity Sensitive Triangulation Data Structure Luca Castelli Aleardi and Olivier Devillers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32:1-32:19",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Semialgebraic Range Stabbing, Ray Shooting, and Intersection Counting in the Plane Timothy M. Chan, Pingan Cheng, and Da Wei Zheng . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33:1-33:15",
+     "zbmath": {
+      "author_codes": [
+       "zheng.dawei.2",
+       "cheng.pingan",
+       "chan.timothy-m-y"
+      ],
+      "document_id": 8125644,
+      "msc": [
+       "68U05",
+       "68P05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Convex Polygon Containment: Improving Quadratic to Near Linear Time Timothy M. Chan and Isaac M. Hair . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34:1-34:15",
+     "zbmath": {
+      "author_codes": [
+       "hair.isaac-m",
+       "chan.timothy-m-y"
+      ],
+      "document_id": 8125645,
+      "msc": [
+       "68U05",
+       "52B55",
+       "68W40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Enclosing Points with Geometric Objects Timothy M. Chan, Qizheng He, and Jie Xue . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35:1-35:15",
+     "zbmath": {
+      "author_codes": [
+       "he.qizheng",
+       "chan.timothy-m-y",
+       "xue.jie.1"
+      ],
+      "document_id": 8125646,
+      "msc": [
+       "68U05",
+       "68W25",
+       "90C27"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Dynamic Geometric Connectivity in the Plane with Constant Query Time Timothy M. Chan and Zhengcheng Huang . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36:1-36:13 Optimal Euclidean Tree Covers Hsien-Chih Chang, Jonathan Conroy, Hung Le, Lazar Milenkovi\u0107, Shay Solomon, and Cuong Than . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37:1-37:15",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Computing Diameter+2 in Truly-Subquadratic Time for Unit-Disk Graphs Hsien-Chih Chang, Jie Gao, and Hung Le . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38:1-38:14 Nearly Orthogonal Sets over Finite Fields Dror Chawin and Ishay Haviv . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39:1-39:11 Optimal Algorithm for the Planar Two-Center Problem Kyungjin Cho, Eunjin Oh, Haitao Wang, and Jie Xue . . . . . . . . . . . . . . . . . . . . . . . . . . . 40:1-40:15 GPU Algorithm for Enumerating PL Spheres of Picard Number 4: Application to Toric Topology Suyoung Choi, Hyeontae Jang, and Mathieu Vall\u00e9e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41:1-41:15",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Fast Approximations and Coresets for (k, \u2113)-Median Under Dynamic Time Warping Jacobus Conradi, Benedikt Kolbe, Ioannis Psarros, and Dennis Rohde . . . . . . . . . . . . 42:1-42:17",
+     "zbmath": {
+      "author_codes": [
+       "rohde.dennis",
+       "kolbe.benedikt",
+       "psarros.ioannis",
+       "conradi.jacobus"
+      ],
+      "document_id": 8125653,
+      "msc": [
+       "68U05",
+       "68W25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "An Improved Lower Bound on the Number of Pseudoline Arrangements Fernando Cort\u00e9s K\u00fchnast, Justin Dallant, Stefan Felsner, and Manfred Scheucher . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43:1-43:18 Stability and Approximations for Decorated Reeb Spaces Justin Curry, Washington Mio, Tom Needham, Osman Berat Okutan, and Florian Russold . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44:1-44:17",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Sweeping Arrangements of Non-Piercing Regions in the Plane Suryendu Dalal, Rahul Gangopadhyay, Rajiv Raman, and Saurabh Ray . . . . . . . . . . . 45:1-45:15 S o C G 2 0 2 4 0:viii Contents Saturation Results Around the Erd\u0151s-Szekeres Problem G\u00e1bor Dam\u00e1sdi, Zichao Dong, Manfred Scheucher, and Ji Zeng . . . . . . . . . . . . . . . . . . 46:1-46:14",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Robustly Guarding Polygons Rathish Das, Omrit Filtser, Matthew J. Katz, and Joseph S.B. Mitchell . . . . . . . . . . 47:1-47:17",
+     "zbmath": {
+      "author_codes": [
+       "das.rathish",
+       "filtser.omrit",
+       "katz.matthew-j",
+       "mitchell.joseph-s-b"
+      ],
+      "document_id": 8125658,
+      "msc": [
+       "68U05",
+       "68W25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Hopf Arborescent Links, Minor Theory, and Decidability of the Genus Defect Pierre Dehornoy, Corentin Lunel, and Arnaud de Mesmay . . . . . . . . . . . . . . . . . . . . . . . 48:1-48:18",
+     "zbmath": {
+      "author_codes": [
+       "de-mesmay.arnaud",
+       "lunel.corentin",
+       "dehornoy.pierre"
+      ],
+      "document_id": 8125659,
+      "msc": [
+       "57K10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Computing Zigzag Vineyard Efficiently Including Expansions and Contractions Tamal K. Dey and Tao Hou . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49:1-49:15",
+     "zbmath": {
+      "author_codes": [
+       "hou.tao",
+       "dey.tamal-krishna"
+      ],
+      "document_id": 8125660,
+      "msc": [
+       "55N31",
+       "55-08"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Cup Product Persistence and Its Efficient Computation Tamal K. Dey and Abhishek Rathod . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50:1-50:15 Efficient Algorithms for Complexes of Persistence Modules with Applications Tamal K. Dey, Florian Russold, and Shreyas N. Samaga . . . . . . . . . . . . . . . . . . . . . . . . . 51:1-51:18",
+     "zbmath": {
+      "author_codes": [
+       "russold.florian",
+       "samaga.shreyas-n",
+       "dey.tamal-krishna"
+      ],
+      "document_id": 8125662,
+      "msc": [
+       "55N31",
+       "55-08"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Colorful Intersections and Tverberg Partitions Michael Gene Dobbins, Andreas F. Holmsen, and Dohyeon Lee . . . . . . . . . . . . . . . . . . . 52:1-52:13",
+     "zbmath": {
+      "author_codes": [
+       "holmsen.andreas-f",
+       "dobbins.michael-gene",
+       "lee.dohyeon"
+      ],
+      "document_id": 8125663,
+      "msc": [
+       "52A35",
+       "57Q70"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Maximum Betti Numbers of \u010cech Complexes Herbert Edelsbrunner and J\u00e1nos Pach . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53:1-53:14",
+     "zbmath": {
+      "author_codes": [
+       "edelsbrunner.herbert",
+       "pach.janos"
+      ],
+      "document_id": 8125664,
+      "msc": [
+       "52C45",
+       "55U10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "An Improved Bound on Sums of Square Roots via the Subspace Theorem Friedrich Eisenbrand, Matthieu Haeberle, and Neta Singer . . . . . . . . . . . . . . . . . . . . . . . 54:1-54:8 Dimensionality of Hamming Metrics and Rademacher Type Alexandros Eskenazis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55:1-55:13",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "Light, Reliable Spanners Arnold Filtser, Yuval Gitlitz, and Ofer Neiman . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56:1-56:15",
+     "zbmath": {
+      "author_codes": [
+       "gitlitz.yuval",
+       "neiman.ofer",
+       "filtser.arnold"
+      ],
+      "document_id": 8125667,
+      "msc": [
+       "68U05",
+       "68R10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Multicut Problems in Embedded Graphs: The Dependency of Complexity on the Demand Pattern Jacob Focke, Florian H\u00f6rsch, Shaohua Li, and D\u00e1niel Marx . . . . . . . . . . . . . . . . . . . . . . 57:1-57:15",
+     "zbmath": {
+      "author_codes": [
+       "marx.daniel",
+       "horsch.florian",
+       "li.shaohua",
+       "focke.jacob"
+      ],
+      "document_id": 8125668,
+      "msc": [
+       "68U05",
+       "05C10",
+       "68Q27",
+       "68R10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "A Structure Theorem for Pseudo-Segments and Its Applications Jacob Fox, J\u00e1nos Pach, and Andrew Suk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59:1-59:14",
+     "zbmath": {
+      "author_codes": [
+       "suk.andrew",
+       "fox.jacob",
+       "pach.janos"
+      ],
+      "document_id": 8125670,
+      "msc": [
+       "05C10",
+       "05C62",
+       "68U05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Near Optimal Locality Sensitive Orderings in Euclidean Space Zhimeng Gao and Sariel Har-Peled . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60:1-60:14 Approximating the Maximum Independent Set of Convex Polygons with a Bounded Number of Directions Fabrizio Grandoni, Edin Husi\u0107, Mathieu Mari, and Antoine Tinguely . . . . . . . . . . . . 61:1-61:16",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "22",
+     "text": "Approximating Multiplicatively Weighted Voronoi Diagrams: Efficient Construction with Linear Size Joachim Gudmundsson, Martin P. Seybold, and Sampson Wong . . . . . . . . . . . . . . . . . . 62:1-62:14",
+     "zbmath": {
+      "author_codes": [
+       "wong.sampson",
+       "seybold.martin-p",
+       "gudmundsson.joachim"
+      ],
+      "document_id": 8125673,
+      "msc": [
+       "68U05",
+       "68P05",
+       "68W25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "Faster Fr\u00e9chet Distance Approximation Through Truncated Smoothing Thijs van der Horst and Tim Ophelders . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63:1-63:15",
+     "zbmath": {
+      "author_codes": [
+       "van-der-horst.thijs",
+       "ophelders.tim"
+      ],
+      "document_id": 8125674,
+      "msc": [
+       "68U05",
+       "68W25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "24",
+     "text": "Contents 0:ix Moderate Dimension Reduction for k-Center Clustering Shaofeng H.-C. Jiang, Robert Krauthgamer, and Shay Sapir . . . . . . . . . . . . . . . . . . . . . . 64:1-64:16",
+     "zbmath": {
+      "author_codes": [
+       "sapir.shay",
+       "krauthgamer.robert",
+       "jiang.shaofeng-h-c"
+      ],
+      "document_id": 8125675,
+      "msc": [
+       "68U05",
+       "68Q87",
+       "68R12",
+       "68W25",
+       "68W27"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "On the Parameterized Complexity of Motion Planning for Rectangular Robots Iyad Kanj and Salman Parsa . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65:1-65:15",
+     "zbmath": {
+      "author_codes": [
+       "kanj.iyad-a",
+       "parsa.salman"
+      ],
+      "document_id": 8125676,
+      "msc": [
+       "68T40",
+       "68Q27",
+       "68U05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "26",
+     "text": "Zarankiewicz's Problem via \u03f5-t-Nets Chaya Keller and Shakhar Smorodinsky . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66:1-66:15",
+     "zbmath": {
+      "author_codes": [
+       "smorodinsky.shakhar",
+       "keller.chaya"
+      ],
+      "document_id": 8125677,
+      "msc": [
+       "68U05",
+       "05C62"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "27",
+     "text": "Separator Theorem and Algorithms for Planar Hyperbolic Graphs S\u00e1ndor Kisfaludi-Bak, Jana Masa\u0159\u00edkov\u00e1, Erik Jan van Leeuwen, Bartosz Walczak, and Karol W\u0119grzycki . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67:1-67:17",
+     "zbmath": {
+      "author_codes": [
+       "wegrzycki.karol",
+       "walczak.bartosz",
+       "van-leeuwen.erik-jan",
+       "masarikova.jana",
+       "kisfaludi-bak.sandor"
+      ],
+      "document_id": 8125678,
+      "msc": [
+       "05C10",
+       "05C05",
+       "05C85",
+       "68Q25",
+       "68W25",
+       "90C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "A Quadtree, a Steiner Spanner, and Approximate Nearest Neighbours in Hyperbolic Space S\u00e1ndor Kisfaludi-Bak and Geert van Wordragen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68:1-68:15",
+     "zbmath": {
+      "author_codes": [
+       "van-wordragen.geert",
+       "kisfaludi-bak.sandor"
+      ],
+      "document_id": 8125679,
+      "msc": [
+       "68U05",
+       "51M09",
+       "68P05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "The Medial Axis of Any Closed Bounded Set Is Lipschitz Stable with Respect to the Hausdorff Distance Under Ambient Diffeomorphisms Hana Dal Poz Kou\u0159imsk\u00e1, Andr\u00e9 Lieutier, and Mathijs Wintraecken . . . . . . . . . . . . . 69:1-69:18",
+     "zbmath": {
+      "author_codes": [
+       "lieutier.andre",
+       "kourimska.hana-dal-poz",
+       "wintraecken.mathijs-hubertus-maria-johannes"
+      ],
+      "document_id": 8125680,
+      "msc": [
+       "58D05",
+       "58C07",
+       "57S05",
+       "54E35",
+       "51K05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "30",
+     "text": "Strange Random Topology of the Circle Uzu Lim . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70:1-70:17",
+     "zbmath": {
+      "author_codes": [
+       "lim.uzu"
+      ],
+      "document_id": 8125681,
+      "msc": [
+       "55N31",
+       "60D05",
+       "05E45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "31",
+     "text": "Beyond Chromatic Threshold via (p, q)-Theorem, and Blow-Up Phenomenon Hong Liu, Chong Shangguan, Jozef Skokan, and Zixiang Xu . . . . . . . . . . . . . . . . . . . . . 71:1-71:15",
+     "zbmath": {
+      "author_codes": [
+       "liu.hong.1",
+       "shangguan.chong",
+       "skokan.jozef",
+       "xu.zixiang"
+      ],
+      "document_id": 8125682,
+      "msc": [
+       "05C15",
+       "05C35",
+       "05C42",
+       "52A35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "A 1.9999-Approximation Algorithm for Vertex Cover on String Graphs Daniel Lokshtanov, Fahad Panolan, Saket Saurabh, Jie Xue, and Meirav Zehavi . . 72:1-72:11",
+     "zbmath": {
+      "author_codes": [
+       "lokshtanov.daniel",
+       "zehavi.meirav",
+       "panolan.fahad",
+       "saurabh.saket",
+       "xue.jie.1"
+      ],
+      "document_id": 8125683,
+      "msc": [
+       "68R10",
+       "05C62",
+       "05C70",
+       "05C85",
+       "68W25",
+       "90C35",
+       "90C59"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "33",
+     "text": "Demystifying Latschev's Theorem: Manifold Reconstruction from Noisy Data Sushovan Majhi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73:1-73:16",
+     "zbmath": {
+      "author_codes": [
+       "majhi.sushovan"
+      ],
+      "document_id": 8125684,
+      "msc": [
+       "53C20",
+       "55N31",
+       "55P10",
+       "68U05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "34",
+     "text": "Polychromatic Colorings of Geometric Hypergraphs via Shallow Hitting Sets Tim Planken and Torsten Ueckerdt . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74:1-74:14",
+     "zbmath": {
+      "author_codes": [
+       "ueckerdt.torsten",
+       "planken.tim"
+      ],
+      "document_id": 8125685,
+      "msc": [
+       "68U05",
+       "05C15",
+       "05C65",
+       "52C15",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "35",
+     "text": "Morse Theory for the k-NN Distance Function Yohai Reani and Omer Bobrowski . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75:1-75:16",
+     "zbmath": {
+      "author_codes": [
+       "bobrowski.omer",
+       "reani.yohai"
+      ],
+      "document_id": 8125686,
+      "msc": [
+       "57Q70",
+       "60D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "36",
+     "text": "Grid Peeling of Parabolas G\u00fcnter Rote, Moritz R\u00fcber, and Morteza Saghafian . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76:1-76:18",
+     "zbmath": {
+      "author_codes": [
+       "ruber.moritz",
+       "rote.gunter",
+       "saghafian.morteza"
+      ],
+      "document_id": 8125687,
+      "msc": [
+       "68U05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "37",
+     "text": "A Topological Version of Schaefer's Dichotomy Theorem Patrick Schnider and Simon Weber . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77:1-77:16",
+     "zbmath": {
+      "author_codes": [
+       "weber.simon",
+       "schnider.patrick"
+      ],
+      "document_id": 8125688,
+      "msc": [
+       "68R07",
+       "68U03",
+       "68U05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": null,
+     "position": "38",
+     "text": "Pach's Animal Problem Within the Bounding Box Martin Tancer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78:1-78:18 Algorithms for Halfplane Coverage and Related Problems Haitao Wang and Jie Xue . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79:1-79:15",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "39",
+     "text": "Faster Approximation Scheme for Euclidean k-TSP Ernest van Wijland and Hang Zhou . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81:1-81:12 Space Complexity of Euclidean Clustering Xiaoyi Zhu, Yuxiang Tian, Lingxiao Huang, and Zengfeng Huang . . . . . . . . . . . . . . . . 82:1-82:16 S o C G 2 0 2 4 0:x Contents CG Challenge Computing Maximum Polygonal Packings in Convex Polygons Using Best-Fit, Genetic Algorithms and ILPs Alkan Atak, Kevin Buchin, Mart Hagedoorn, Jona Heinrichs, Karsten Hogreve, Guangping Li, and Patrick Pawelczyk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83:1-83:9 Shadoks Approach to Knapsack Polygonal Packing Guilherme D. da Fonseca and Yan Gerard . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84:1-84:9 Priority-Driven Nesting of Irregular Polygonal Shapes Within a Convex Polygonal Container Based on a Hierarchical Integer Grid Martin Held . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85:1-85:6 A General Heuristic Approach for Maximum Polygon Packing Canhui Luo, Zhouxing Su, and Zhipeng L\u00fc . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 86:1-86:9 Media Expositions The Ultimate Frontier: An Optimality Construction for Homotopy Inference Dominique Attali, Hana Dal Poz Kou\u0159imsk\u00e1, Christopher Fillmore, Ishika Ghosh, Andr\u00e9 Lieutier, Elizabeth Stephenson, and Mathijs Wintraecken . . . . . . . . . . . . . . . . . . 87:1-87:6 Computational Geometry Concept Videos: A Dual-Use Project in Education and Outreach Marjolein Maarten L\u00f6ffler, and Carola Wenk . . . . . . . . . . . . . . . . . . . . . . . . 88:1-88:4 Optimal In-Place Compaction of Sliding Cubes Irina Kostitsyna, Tim Ophelders, Irene Parada, Tom Peters, Willem Sonke, and Bettina Speckmann . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89:1-89:4",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "40",
+     "text": "Visualizing Lucas's Hamiltonian Paths Through the Associahedron 1-Skeleton Kacey Thien-Huu La, Jose E. Arbelo, and Christopher J. Tralie . . . . . . . . . . . . . . . . . . 90:1-90:6 Image Triangulation Using the Sobel Operator for Vertex Selection Olivia X. Laske and Lori Ziegelmeier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91:1-91:7 Ipelets for the Convex Polygonal Geometry Nithin Parepally, Ainesh Chatterjee, Auguste H. Gezalyan, Hongyang Du, Sukrit Mangla, Kenny Wu, Sarah Hwang, and David M. Mount . . . . . . . . . . . . . . . . . . 92:1-92:7 Conference Organization SoCG Program Committee Peyman Afshani (Aarhus University, Denmark)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "41",
+     "text": "Hee-Kap Ahn (Pohang University of Science and Technology, South Korea)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "42",
+     "text": "Boris Aronov (New York University, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "43",
+     "text": "Gill Barequet (Technion -Israel Inst. of Technology, Israel)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "44",
+     "text": "Karl Bringmann (Universit\u00e4t des Saarlandes, Germany) Maike Buchin (Ruhr-Universit\u00e4t Bochum, Germany) Tamal Dey (Purdue University, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "45",
+     "text": "Sariel Har-Peled (University of Illinois, Urbana-Champaign, USA) Meng He (Dalhousie University, Canada)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "46",
+     "text": "Michael Hoffmann (Eidgen\u00f6ssische Technische Hochschule Z\u00fcrich, Switzerland)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "47",
+     "text": "Clement Maria (INRIA, France)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "48",
+     "text": "Wolfgang Mulzer (co-chair; Freie Universit\u00e4t Berlin, Germany)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "49",
+     "text": "Steve Oudot (INRIA, France)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "50",
+     "text": "D\u00f6m\u00f6t\u00f6r P\u00e0lv\u00f6lgyi (E\u00f6tv\u00f6s Lor\u00e1nd University, Hungary)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "51",
+     "text": "Evanthia Papadopoulou (Universit\u00e0 della Svizzera italiana, Switzerland)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "52",
+     "text": "Jeff M. Phillips (co-chair; University of Utah, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "53",
+     "text": "Melanie Schmidt (Heinrich Heine University D\u00fcsseldorf, Germany)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "54",
+     "text": "Rodrigo Silveira (Universitat Polit\u00e8cnica de Catalunya, Spain)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "55",
+     "text": "Andrew Suk (University of California, San Diego, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "56",
+     "text": "Martin Tancer (Univerzita Karlova, Czech Republic) Yufei Tao (The Chinese University of Hong Kong, China)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "57",
+     "text": "Csaba D. T\u00f3th (California State University Northridge, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "58",
+     "text": "SoCG Proceedings Chair Philipp Kindermann (Universit\u00e4t Trier)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "59",
+     "text": "40th International Symposium on Computational Geometry (SoCG 2024). Editors: Wolfgang Mulzer and Jeff M. Phillips Leibniz International Proceedings in Informatics Schloss Dagstuhl -Leibniz-Zentrum f\u00fcr Informatik, Dagstuhl Publishing, Germany Media Exposure Committee Kevin Buchin (TU Dortmund, Germany)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "60",
+     "text": "Siu-Wing Cheng (HKUST -Kowloon, Hong Kong)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "61",
+     "text": "Barbara Giunti (University of Albany, USA)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "62",
+     "text": "Alexander McCleary (Ohio State University, USA) Abhishek Rathod (Ben Gurion University, Israel) Raghavendra (co-chair; University of Utah, USA) Anastasios Stefanou (University of Bremen, Germany)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "63",
+     "text": "Bei",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "64",
+     "text": "S\u00e1ndor Fekete (TU Braunschweig, DE)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "65",
+     "text": "Joe Mitchell (Stony Brook University, US)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [
+     {
+      "book_id": 7909450,
+      "isbn": [
+       {
+        "number": "978-3-95977-316-4",
+        "type": "print"
+       }
+      ],
+      "publisher": "Wadern: Schloss Dagstuhl -- Leibniz Zentrum f\u00fcr Informatik",
+      "year": "2024"
+     }
+    ],
+    "pages": "xxii, 92 articles, not consecutively paged, electronic only",
+    "series": [
+     {
+      "acronym": "LIPIcs",
+      "issn": [
+       {
+        "number": "1868-8969",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 517819,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Schloss Dagstuhl -- Leibniz-Zentrum f\u00fcr Informatik, Wadern",
+      "series_id": 7315,
+      "short_title": "LIPIcs -- Leibniz Int. Proc. Inform.",
+      "title": "LIPIcs -- Leibniz International Proceedings in Informatics",
+      "volume": "293",
+      "year": "2024"
+     }
+    ],
+    "source": "LIPIcs -- Leibniz International Proceedings in Informatics 293. Wadern: Schloss Dagstuhl -- Leibniz Zentrum f\u00fcr Informatik (ISBN 978-3-95977-316-4). xxii, 92 articles, not consecutively paged, electronic only, open access (2024)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "40th international symposium on computational geometry, SoCG 2024, Athens, Greece, June 11--14, 2024"
+   },
+   "year": "2024",
+   "zbmath_url": "https://zbmath.org/7909450"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "marquez.alberto"
+      ],
+      "name": "M\u00e1rquez, Alberto"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "nesetril.jaroslav"
+      ],
+      "name": "Ne\u0161et\u0159il, Jarik"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "serra.oriol"
+      ],
+      "name": "Serra, Oriol"
+     }
+    ]
+   },
+   "database": "Zbl",
+   "datestamp": "2008-06-03T08:18:23Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "The articles of this volume will be announced individually. The preceding conference (3, 2005) has been reviewed (see Zbl 1124.05300, Zbl 1132.05302).\n\nIndexed articles:\n\n\\textit{Matou\u0161ek, Ji\u0159\u00ed; P\u0159\u00edv\u011btiv\u00fd, Ale\u0161}, Large monochromatic components in two-colored grids, 3-9 [Zbl 1341.05082]\n\n\\textit{Haas, W.; Quistorff, J.}, On mixed codes with covering radius 1 and minimum distance 2. (Extended abstract), 11-15 [Zbl 1341.05019]\n\n\\textit{Kr\u00e1l', Daniel; M\u00e1\u010dajov\u00e1, Edita; P\u00f3r, Attila; Sereni, Jean-S\u00e9bastien}, Characterization of affine Steiner triple systems and Hall triple systems, 17-21 [Zbl 1341.05014]\n\n\\textit{Kr\u00e1l', Daniel; M\u00e1\u010dajov\u00e1, Edita; P\u00f3r, Attila; Sereni, Jean-S\u00e9bastien}, Edge-colorings of cubic graphs with elements of point-transitive Steiner triple systems, 23-27 [Zbl 1341.05015]\n\n\\textit{K\u00fchn, Daniela; Cooley, Oliver; Fountoulakis, Nikolaos; Osthus, Deryk}, Ramsey numbers of sparse hypergraphs, 29-33 [Zbl 1341.05156]\n\n\\textit{Osthus, Deryk; K\u00fchn, Daniela}, A minimum degree condition forcing a digraph to be \\(k\\)-linked, 35-39 [Zbl 1341.05103]\n\n\\textit{Loh, Po-Shen; Sudakov, Benny}, Constrained Ramsey numbers, 41-45 [Zbl 1341.05157]\n\n\\textit{Ishigami, Yoshiyasu}, Linear Ramsey numbers for bounded-degree hypergrahps, 47-51 [Zbl 1341.05155]\n\n\\textit{Fox, Jacob; Sudakov, Benny}, Induced Ramsey-type theorems, 53-58 [Zbl 1341.05154]\n\n\\textit{Kung, Joseph P. S.; de Mier, Anna; Sun, Xinyu; Yan, Catherine}, Lattice paths with periodic boundaries, 59-63 [Zbl 1341.05134]\n\n\\textit{Bukh, Boris}, Measurable sets with excluded distances, 65-71 [Zbl 1236.52015]\n\n\\textit{Frein, Yannick; L\u00e9v\u00eaque, Benjamin; Seb\u0151, Andr\u00e1s}, Optimizing diversity, 73-77 [Zbl 1341.05131]\n\n\\textit{Zaragoza Mart\u00ednez, Francisco Javier}, Feasibility of the mixed postman problem with restrictions on the edges, 79-83 [Zbl 1341.05242]\n\n\\textit{Pelsmajer, Michael J.; Schaefer, Marcus; \u0160tefankovi\u010d, Daniel}, Removing even crossings on surfaces, 85-90 [Zbl 1341.05175]\n\n\\textit{Kochol, Martin; Krivo\u0148\u00e1kov\u00e1, Nad'a; Smejov\u00e1, Silvia; \u0160rankov\u00e1, Katar\u00edna}, Approximation of 3-edge-coloring of cubic graphs, 91-95 [Zbl 1341.05079]\n\n\\textit{Shabanov, D. A.}, On some extremal properties of hypergraph colorings, 97-100 [Zbl 1341.05090]\n\n\\textit{Schaefer, Marcus; Sedgwick, Eric; \u0160tefankovi\u010d, Daniel}, Folding and spiralling: The word view, 101-105 [Zbl 1341.05246]\n\n\\textit{Matou\u0161ek, Ji\u0159\u00ed; \u0160kovro\u0148, Petr}, Removing degeneracy may require unbounded dimension increase, 107-113 [Zbl 1341.05244]\n\n\\textit{Linial, Nathan; Matou\u0161ek, Ji\u0159\u00ed; Sheffet, Or; Tardos, G\u00e1bor}, Graph coloring with no large monochromatic components, 115-122 [Zbl 1341.05080]\n\n\\textit{Alaeiyan, Mehdi; Ghasemi, Mohsen}, Normal Cayley digraphs on minimal non-Abelian groups, 123-127 [Zbl 1341.05115]\n\n\\textit{Esperet, Louis; Ochem, Pascal}, On circle graphs with girth at least five, 129-133 [Zbl 1341.05072]\n\n\\textit{Grynkiewicz, David; Lev, Vsevolod F.; Serra, Oriol}, The connectivity of addition Cayley graphs, 135-139 [Zbl 1259.05098]\n\n\\textit{Fountoulakis, N.; K\u00fchn, D.; Osthus, D.}, The order of the largest complete minor in a random graph, 141-146 [Zbl 1341.05228]\n\n\\textit{Artigas, Danilo; Dourado, Mitre C.; Szwarcfiter, Jayme L.}, Convex partitions of graphs, 147-151 [Zbl 1341.05198]\n\n\\textit{Raigorodskii, A. M.}, On Ramsey type problems in combinatorial geometry, 153-157 [Zbl 1341.05247]\n\n\\textit{Ivanov, L. L.}, On the chromatic numbers of \\(\\mathbb R^2\\) and \\(\\mathbb R^3\\) with intervals of forbidden distances, 159-162 [Zbl 1341.05052]\n\n\\textit{Kuhpfahl, Jens; Wagler, Annegret K.; Wagner, Christian}, Circular-imperfection of triangle-free graphs, 163-167 [Zbl 1341.05093]\n\n\\textit{Orlovich, Yury L.; Gordon, Valery S.; Potts, Chris N.; Strusevich, Vitaly A.}, On Hamilton cycles in locally connected graphs with vertex degree constraints, 169-173 [Zbl 1341.05143]\n\n\\textit{Koshelev, V. A.}, On the Erd\u0151s-Szekeres problem in combinatorial geometry, 175-177 [Zbl 1341.51006]\n\n\\textit{Abajo, E.; Di\u00e1nez, A.}, Size of graphs with high girth, 179-183 [Zbl 1341.05047]\n\n\\textit{Ball, Simeon}, Functions over finite fields that determine few directions, 185-188 [Zbl 1341.05003]\n\n\\textit{Aichholzer, Oswin; Garc\u00eda, Jes\u00fas; Orden, David; Ramos, Pedro}, New results on lower bounds for the number of (\\(\\leqslant k\\))-facets. (Extended abstract), 189-193 [Zbl 1341.05022]\n\n\\textit{Ochem, Pascal; Pinlou, Alexandre}, Oriented vertex and arc colorings of partial 2-trees, 195-199 [Zbl 1341.05087]\n\n\\textit{Skums, P. V.; Tyshkevich, R. I.}, Bipartite operator decomposition of graphs and the reconstruction conjecture, 201-205 [Zbl 1341.05170]\n\n\\textit{L\u00e9v\u00eaque, Benjamin; Lin, David Y.; Maffray, Fr\u00e9d\u00e9ric; Trotignon, Nicolas}, Detecting induced subgraphs, 207-211 [Zbl 1341.05169]\n\n\\textit{Hefetz, Dan; Krivelevich, Michael; Stojakovi\u0107, Milo\u0161; Szab\u00f3, Tibor}, Fast winning strategies in positional games, 213-217 [Zbl 1341.05159]\n\n\\textit{Gitler, Isidoro; Hlin\u011bn\u00fd, Petr; Lea\u00f1os, Jesus; Salazar, Gelasio}, The crossing number of a projective graph is quadratic in the face-width, 219-223 [Zbl 1341.05040]\n\n\\textit{Albenque, Marie}, Bijective combinatorics of positive braids, 225-229 [Zbl 1228.05058]\n\n\\textit{Aguil\u00f3-Gost, Francesc}, Sets of gaps in sequences of Frobenius' problems with 3 elements, 231-236 [Zbl 1341.05096]\n\n\\textit{Bre\u0161ar, Bo\u0161tjan; Klav\u017ear, Sandi; Rall, Douglas F.}, On the packing chromatic number of Cartesian products, hexagonal lattice, and trees, 237-241 [Zbl 1341.05064]\n\n\\textit{Mansilla, S\u00f2nia P.}, An infinite family of sharply two-arc transitive digraphs, 243-247 [Zbl 1341.05102]\n\n\\textit{Piguet, Diana; Stein, Maya}, An approximate version of the Loebl-Koml\u00f3s-S\u00f3s conjecture, 249-253 [Zbl 1341.05033]\n\n\\textit{Strehl, Volker}, Fibonacci polynomials: compositions and cyclic products, 255-259 [Zbl 1341.05130]\n\n\\textit{Comas, Marc; Serna, Maria}, Vertex fusion under diameter constraints, 261-265 [Zbl 1341.05048]\n\n\\textit{Comellas, F.; Dalf\u00f3, C.; Fiol, M. A.; Mitjana, M.}, A spectral study of the Manhattan networks, 267-271 [Zbl 1341.05151]\n\n\\textit{Jel\u00ednek, V\u00edt; Klazar, Martin}, Generalizations of Khovanski\u012d's theorem on growth of sumsets in abelian semigroups. (Extended abstract), 273-276 [Zbl 1341.05004]\n\n\\textit{Beaudou, Laurent; Gravier, Sylvain; Meslem, Kahina}, Isometric embeddings of subdivided complete graphs in the hypercube, 277-281 [Zbl 1341.05163]\n\n\\textit{Fusy, \u00c9ric; Poulalhon, Dominique; Schaeffer, Gilles}, Bijective counting of plane bipolar orientations, 283-287 [Zbl 1341.05039]\n\n\\textit{Broersma, Hajo; Paulusma, Daniel; Yoshimoto, Kiyoshi}, On components of 2-factors in claw-free graphs, 289-293 [Zbl 1341.05030]\n\n\\textit{Kyn\u010dl, Jan}, Enumeration of simple complete topological graphs, 295-299 [Zbl 1341.05126]\n\n\\textit{Haas, Wolfgang}, On the general excess bound for binary codes with covering radius one, 301-305 [Zbl 1341.94032]\n\n\\textit{Matou\u0161ek, Ji\u0159\u00ed; \u0160\u00e1mal, Robert}, Induced trees in triangle-free graphs, 307-313 [Zbl 1341.05026]\n\n\\textit{Chandran, L. Sunil; Francis, Mathew C.; Sivadasan, Naveen}, On the cubicity of interval graphs, 315-319 [Zbl 1341.05221]\n\n\\textit{Wolfovitz, Guy}, Bounds on the number of maximal sum-free sets, 321-325 [Zbl 1341.05010]\n\n\\textit{King, Andrew D.; Reed, Bruce}, Asymptotics of the chromatic number for quasi-line graphs, 327-331 [Zbl 1341.05078]\n\n\\textit{Fiol, M. A.; Garriga, E.}, Spectral and geometric properties of \\(k\\)-walk-regular graphs, 333-337 [Zbl 1341.05136]\n\n\\textit{Hernando, C.; Mora, M.; Pelayo, I. M.; Seara, C.; Wood, D. R.}, Extremal graph theory for metric dimension and diameter, 339-343 [Zbl 1341.05132]\n\n\\textit{Fink, Ji\u0159\u00ed}, Matching graphs of hypercubes and complete bipartite graphs, 345-351 [Zbl 1341.05206]\n\n\\textit{Peterin, Iztok}, Game chromatic number of Cartesian product graphs, 353-357 [Zbl 1341.05088]\n\n\\textit{Doerr, Benjamin}, Partial colorings of unimodular hypergraphs, 359-363 [Zbl 1341.05070]\n\n\\textit{Gioan, Emeric; Vergnas, Michel Las}, Fully optimal bases and the active bijection in graphs, hyperplane arrangements, and oriented matroids, 365-371 [Zbl 1341.05023]\n\n\\textit{Kun, G\u00e1bor; Ne\u0161et\u0159il, Jaroslav}, NP for combinatorialists, 373-381 [Zbl 1341.05100]\n\n\\textit{Dalf\u00f3, C.; Comellas, F.; Fiol, M. A.}, The multidimensional Manhattan network, 383-387 [Zbl 1341.05099]\n\n\\textit{Foniok, Jan; Ne\u0161et\u0159il, Jaroslav; Tardif, Claude}, On finite maximal antichains in the homomorphism order, 389-396 [Zbl 1341.05167]\n\n\\textit{Chataigner, F.; Mani\u0107, G.; Wakabayashi, Y.; Yuster, R.}, Approximation algorithms and hardness results for the clique packing problem, 397-401 [Zbl 1341.05204]\n\n\\textit{Sali, Attila; Sz\u00e9kely, L\u00e1szl\u00f3}, SPT\\((q,k,n)\\)-codes, 403-409 [Zbl 1341.94029]\n\n\\textit{Kang, Ross J.; McDiarmid, Colin J. H.}, The \\(t\\)-improper chromatic number of random graphs, 411-417 [Zbl 1341.05077]\n\n\\textit{Addario-Berry, Louigi; Kang, Ross J.}, Acyclic dominating partitions, 419-425 [Zbl 1341.05058]\n\n\\textit{Matou\u0161ek, Ji\u0159\u00ed; P\u0159\u00edv\u011btiv\u00fd, Ale\u0161; \u0160kovro\u0148, Petr}, How many points can be reconstructed from \\(k\\) projections?, 427-434 [Zbl 1341.05245]\n\n\\textit{Hegde, Rajneesh; Jain, Kamal}, The hardness of approximating poset dimension., 435-443 [Zbl 1341.06002]\n\n\\textit{Tang, Minh}, Generating functions and the solutions of full history recurrence equations, 445-449 [Zbl 1341.05009]\n\n\\textit{P\u00eacher, Arnaud; Zhu, Xuding}, Claw-free circular-perfect graphs, 451-455 [Zbl 1341.05094]\n\n\\textit{\u010cern\u00fd, Jakub}, Coloring circle graphs, 457-461 [Zbl 1341.05057]\n\n\\textit{Bonsma, Paul; Cereceda, Luis; van den Heuvel, Jan; Johnson, Matthew}, Finding paths between graph colourings: Computational complexity and possible distances, 463-469 [Zbl 1341.05063]\n\n\\textit{Dvo\u0159\u00e1k, Tom\u00e1\u0161; Gregor, Petr}, Hamiltonian fault-tolerance of hypercubes, 471-477 [Zbl 1341.05142]\n\n\\textit{Barajas, J.; Serra, O.}, Regular chromatic number and the lonely runner problem, 479-483 [Zbl 1215.05052]\n\n\\textit{B\u00f6ttcher, Julia; Schacht, Mathias; Taraz, Anusch}, Embedding spanning subgraphs of small bandwidth, 485-489 [Zbl 1341.05165]\n\n\\textit{Wiener, G\u00e1bor}, Edge multiplicity and other trace functions, 491-495 [Zbl 1341.05182]\n\n\\textit{K\u00e4ppeli, Claudia; Scheder, Dominik}, Partial satisfaction of \\(k\\)-satisfiable formulas, 497-501 [Zbl 1341.68063]\n\n\\textit{Falc\u00f3n, R. M.}, Study of critical sets in Latin squares by using the autotopism group, 503-507 [Zbl 1341.05018]\n\n\\textit{Cooper, Joshua; Doerr, Benjamin; Friedrich, Tobias; Spencer, Joel}, Deterministic random walks on regular trees, 509-513 [Zbl 1341.05233]\n\n\\textit{Havet, Fr\u00e9d\u00e9ric; van den Heuvel, Jan; McDiarmid, Colin; Reed, Bruce}, List colouring squares of planar graphs, 515-519 [Zbl 1341.05073]\n\n\\textit{Gim\u00e9nez, Omer; Noy, Marc; Ru\u00e9, Juan Jos\u00e9}, Graph classes with given 3-connected components: Asymptotic counting and critical phenomena, 521-529 [Zbl 1341.05138]\n\n\\textit{Garc\u00eda, Alfredo; Hurtado, Ferran; Huemer, Clemens; Tejel, Javier; Valtr, Pavel}, On embedding triconnected cubic graphs on point sets, 531-538 [Zbl 1341.05137]\n\n\\textit{Garijo, D.; Ne\u0161et\u0159il, J.; Revuelta, M. P.}, Homomorphisms and polynomial invariants of graphs, 539-545 [Zbl 1341.05128]\n\n\\textit{Hebbinghaus, Nils}, Discrepancy of sums of two arithmetic progressions, 547-551 [Zbl 1235.11076]\n\n\\textit{Lefmann, Hanno}, Generalizations of Heilbronn's triangle problem, 553-557 [Zbl 1341.05180]\n\n\\textit{C\u00e1mara, M.; Llad\u00f3, A.; Moragas, J.}, On a H\u00e4ggkvist's conjecture with the polynomial method, 559-563 [Zbl 1341.05202]\n\n\\textit{Arkin, Esther M.; Mitchell, Joseph S. B.; Polishchuk, Valentin}, Two new classes of Hamiltonian graphs. (Extended abstract), 565-569 [Zbl 1341.05140]\n\n\\textit{Sawada, Joe; Wong, Dennis Chi-Him}, A fast algorithm to generate Beckett-Gray codes. (Extended abstract), 571-577 [Zbl 1341.94028]\n\n\\textit{Ne\u0161et\u0159il, Jaroslav; Nigussie, Yared}, Finite duality for some minor closed classes, 579-585 [Zbl 1341.05235]",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5281986,
+   "identifier": "1137.05002",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "www.sciencedirect.com/science/journal/15710653",
+     "type": "http",
+     "url": "http://www.sciencedirect.com/science/journal/15710653"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to combinatorics"
+    },
+    {
+     "code": "68-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to computer science"
+    },
+    {
+     "code": "00B25",
+     "scheme": "msc2020",
+     "text": "Proceedings of conferences of miscellaneous specific interest"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 5281986,
+      "isbn": [],
+      "publisher": "Amsterdam: Elsevier",
+      "year": "2007"
+     }
+    ],
+    "pages": "586~p., electronic only",
+    "series": [
+     {
+      "acronym": "ENDM",
+      "issn": [
+       {
+        "number": "1571-0653",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 382360,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier, Amsterdam",
+      "series_id": 6892,
+      "short_title": "Electron. Notes Discrete Math.",
+      "title": "Electronic Notes in Discrete Mathematics",
+      "volume": "29",
+      "year": "2007"
+     }
+    ],
+    "source": "Electronic Notes in Discrete Mathematics 29. Amsterdam: Elsevier. 586~p., electronic only (2007)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Proceedings of the 4th European conference on combinatorics, graph theory and applications, EuroComb'07, Seville, Spain, September 11--15, 2007"
+   },
+   "year": "2007",
+   "zbmath_url": "https://zbmath.org/5281986"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2016-02-01T13:34:54Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 6537960,
+   "identifier": "1333.05004",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "dmtcs.episciences.org/volume/view/id/285",
+     "type": "http",
+     "url": "http://dmtcs.episciences.org/volume/view/id/285"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to combinatorics"
+    },
+    {
+     "code": "05Exx",
+     "scheme": "msc2020",
+     "text": "Algebraic combinatorics"
+    },
+    {
+     "code": "00B25",
+     "scheme": "msc2020",
+     "text": "Proceedings of conferences of miscellaneous specific interest"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 6537960,
+      "isbn": [],
+      "publisher": "Nancy: The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS)",
+      "year": "2015"
+     }
+    ],
+    "pages": "1006~p., electronic only",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [],
+      "issue": null,
+      "issue_id": 418303,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS), Nancy",
+      "series_id": 7931,
+      "short_title": "Discrete Math. Theor. Comput. Sci., Proc.",
+      "title": "Discrete Mathematics \\& Theoretical Computer Science. Proceedings",
+      "volume": null,
+      "year": "2015"
+     }
+    ],
+    "source": "Discrete Mathematics and Theoretical Computer Science. Proceedings. Nancy: The Association. Discrete Mathematics \\& Theoretical Computer Science (DMTCS). 1006~p., electronic only, open access (2015)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Proceedings of the 27th international conference on formal power series and algebraic combinatorics, FPSAC 2015, Daejeon, South Korea, July 6--10, 2015"
+   },
+   "year": "2015",
+   "zbmath_url": "https://zbmath.org/6537960"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 7,
+  "nr_request_results": 7,
+  "query_execution_time_in_seconds": 0.2630808353424072,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:57:01Z"
+ }
+}

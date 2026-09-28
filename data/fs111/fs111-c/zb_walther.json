@@ -1,0 +1,345 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "walther.gunther"
+      ],
+      "name": "Walther, Guenther"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "martinez-legaz.juan-enrique",
+      "reviewer_id": "5244",
+      "name": "Juan-Enrique Mart\u00ednez-Legaz",
+      "sign": "Juan-E.Mart\u00ednez-Legaz (Barcelona)"
+     },
+     "text": "Let \\(A\\) and \\(C\\) be convex and compact subsets of \\(\\mathbb{R}^d\\). One says that \\(C\\) rolls freely in \\(A\\) if for each boundary point \\(a\\in \\partial A\\) and each rotation \\(\\rho\\) there exists \\(x\\in\\mathbb{R}^d\\) such that \\(a\\in x+\\rho (C) \\subset A\\). If \\(A\\) is only closed, one requires in addition that \\((A^c+(-1)C)^c\\) be path-connected, where \\(^c\\) and \\(+\\) denote complement and Minkowski addition, respectively, and \\((-1)C:= \\{-c:c\\in C\\}\\).\n\n\nThe main result in this paper states that a ball of radius \\(r\\) rolls freely inside a nonempty, compact and path-connected set \\(S\\) and inside the \\(S^c\\), the closure of \\(\\overline{S^c}\\), for all \\(0\\leq r\\leq r_0\\) if and only if \\(S\\) and \\(\\overline{S^c}\\) are intersections of complements of open balls with radius \\(r_0\\) and \\(S\\) has a nonempty interior. Another equivalent condition is \\(S\\) to belong to the regular model of \\textit{J. Serra} [Image analysis and mathematical morphology. Academic Press (1982; Zbl 0565.92001)]. Applications to the analysis and smoothing of images are discussed.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 1271910,
+   "identifier": "0933.52003",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1002/(SICI)1099-1476(19990310)22:4<301::AID-MMA42>3.0.CO;2-M",
+     "type": "doi",
+     "url": "https://doi.org/10.1002/(SICI)1099-1476(19990310)22:4<301::AID-MMA42>3.0.CO;2-M"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52A01",
+     "scheme": "msc2020",
+     "text": "Axiomatic and generalized convexity"
+    },
+    {
+     "code": "68U10",
+     "scheme": "msc2020",
+     "text": "Computing methodologies for image processing"
+    },
+    {
+     "code": "52A05",
+     "scheme": "msc2020",
+     "text": "Convex sets without dimension restrictions (aspects of convex geometry)"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "and , Differential Geometry: Manifolds, Curves and Surfaces, Springer, New York, 1988.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Kreis und Kugel, Chelsea, New York, 1949.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1090/memo/0405",
+     "position": "3",
+     "text": "Brooks, Memoirs Amer. Math. Soc. 80 (1989)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Delgado, J. Differential Geom. 14 pp 489-- (1984)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Firey, Mathematika 26 pp 106-- (1979)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Goodey, Mathematika 29 pp 249-- (1982)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Koutroufiotis, Arch. Math. 23 pp 655-- (1972)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1016/B978-0-444-89596-7.50006-7",
+     "position": "8",
+     "text": "'Characterizations of convex sets', in: ( and , eds.), Handbook of Convex Geometry, Vol. A, pp. 19-41, Elsevier, Amsterdam, 1993.",
+     "zbmath": {
+      "author_codes": [
+       "mani-levitska.peter"
+      ],
+      "document_id": 480226,
+      "msc": [
+       "52Axx",
+       "52-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1993"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Random Sets and Integral Geometry, Wiley, New York, 1975.",
+     "zbmath": {
+      "author_codes": [
+       "matheron.georges"
+      ],
+      "document_id": 3502485,
+      "msc": [
+       "60D05",
+       "60-02",
+       "60B05",
+       "52A20",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 9212,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Perkal, Colloq. Math. IV pp 1-- (1956)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1017/CBO9780511526282",
+     "position": "11",
+     "text": "Convex Bodies: The Brunn-Minkowski Theory, Cambridge University Press, Cambridge, 1993.",
+     "zbmath": {
+      "author_codes": [
+       "schneider.rolf-g"
+      ],
+      "document_id": 236540,
+      "msc": [
+       "52-02",
+       "52A20",
+       "52A39",
+       "52A40",
+       "52A22",
+       "33C55"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3879,
+      "year": "1993"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Sternberg, Comput. Vision, Graphics, and Image Process. 35 pp 333-- (1986)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Image Analysis and Mathematical Morphology, Vol. 1, Academic Press, San Diego, 1982.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Weil, Adv. Appl. Probab. 14 pp 582-- (1982)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "301-316",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0170-4214",
+        "type": "print"
+       },
+       {
+        "number": "1099-1476",
+        "type": "electronic"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 55013,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Wiley (Wiley-Blackwell), Chichester",
+      "series_id": 154,
+      "short_title": "Math. Methods Appl. Sci.",
+      "title": "Mathematical Methods in the Applied Sciences",
+      "volume": "22",
+      "year": "1999"
+     }
+    ],
+    "source": "Math. Methods Appl. Sci. 22, No. 4, 301-316 (1999)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On a generalization of Blaschke's rolling theorem and the smoothing of surfaces"
+   },
+   "year": "1999",
+   "zbmath_url": "https://zbmath.org/1271910"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.0619199275970459,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:56:41Z"
+ }
+}

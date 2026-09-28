@@ -1,0 +1,717 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, Herbert"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3146500,
+   "identifier": "0089.38402",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.2307/1993504",
+     "type": "doi",
+     "url": "https://doi.org/10.2307/1993504"
+    }
+   ],
+   "msc": [],
+   "references": [
+    {
+     "doi": "10.2307/2371450",
+     "position": "1",
+     "text": "Carl B. Allendoerfer, The Euler number of a Riemann manifold, Amer. J. Math. 62 (1940), 243 -- 248.",
+     "zbmath": {
+      "author_codes": [
+       "allendoerfer.carl-b"
+      ],
+      "document_id": 3039416,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1940"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Carl B. Allendoerfer and Andr\u00e9 Weil, The Gauss-Bonnet theorem for Riemannian polyhedra, Trans. Amer. Math. Soc. 53 (1943), 101 -- 129.",
+     "zbmath": {
+      "author_codes": [
+       "allendoerfer.carl-b",
+       "weil.andre"
+      ],
+      "document_id": 3098391,
+      "msc": [
+       "53-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1943"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Blaschke BL. Vorlesungen \u00fcber Integralgeometrie, Leipzig and Berlin, Teubner, 1936-1937.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Bonnesen and W. Fenchel BF. Theorie der konvexen K\u00f6rper, Erg. d. Math. vol. 3 (1934) pp. 1-172.",
+     "zbmath": {
+      "author_codes": [
+       "fenchel.werner",
+       "bonnesen.t"
+      ],
+      "document_id": 3011213,
+      "msc": [
+       "52-02",
+       "52A20",
+       "52A39",
+       "52A40",
+       "52Bxx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3884,
+      "year": "1934"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "N. Bourbaki, \u00c9l\u00e9ments de math\u00e9matique. VII. Premi\u00e8re partie: Les structures fondamentales de l'analyse. Livre II: Alg\u00e8bre. Chapitre III: Alg\u00e8bre multilin\u00e9aire, Actualit\u00e9s Sci. Ind., no. 1044, Hermann et Cie., Paris, 1948 (French).",
+     "zbmath": {
+      "author_codes": [
+       "bourbaki.nicolas"
+      ],
+      "document_id": 3059659,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1948"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Int\u00e9gration, Actualit\u00e9s Sci. Ind. no. 1175, 1952.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "\u00c9. Cartan CA. Le\u00e7ons sur la g\u00e9om\u00e9trie des espaces de Riemann, Paris, Gauthier-Villars, 1946.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Lamberto Cesari, Surface area, Annals of Mathematics Studies, no. 35, Princeton University Press, Princeton, N. J., 1956.",
+     "zbmath": {
+      "author_codes": [
+       "cesari.lamberto"
+      ],
+      "document_id": 4119106,
+      "msc": [
+       "53A05",
+       "51M25",
+       "49Q20",
+       "26B15",
+       "49Q15",
+       "28A75",
+       "53-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": "10.2307/1969203",
+     "position": "9",
+     "text": "Shiing-shen Chern, On the curvatura integra in a Riemannian manifold, Ann. of Math. (2) 46 (1945), 674 -- 684.",
+     "zbmath": {
+      "author_codes": [
+       "chern.shiing-shen"
+      ],
+      "document_id": 3098393,
+      "msc": [
+       "53C20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1945"
+     }
+    },
+    {
+     "doi": "10.2307/2372080",
+     "position": "10",
+     "text": "Shiing-shen Chern, On the kinematic formula in the Euclidean space of \\? dimensions, Amer. J. Math. 74 (1952), 227 -- 236.",
+     "zbmath": {
+      "author_codes": [
+       "chern.shiing-shen"
+      ],
+      "document_id": 3071561,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1952"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "La g\u00e9om\u00e9trie des sousvari\u00e9t\u00e9s d'un espace euclidien \u00e0 plusieurs dimensions, L'Ens. Math. vol. 40 (1955) pp. 26-46.",
+     "zbmath": {
+      "author_codes": [
+       "chern.shiing-shen"
+      ],
+      "document_id": 3109023,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3506,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": "10.2307/2372684",
+     "position": "12",
+     "text": "Shiing-shen Chern and Richard K. Lashof, On the total curvature of immersed manifolds, Amer. J. Math. 79 (1957), 306 -- 318.",
+     "zbmath": {
+      "author_codes": [
+       "chern.shiing-shen",
+       "lashof.richard-k"
+      ],
+      "document_id": 3127974,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1957"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Maurice R. Demers and Herbert Federer, On Lebesgue area. II, Trans. Amer. Math. Soc. 90 (1959), 499 -- 522.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert",
+       "demers.maurice-r"
+      ],
+      "document_id": 3140637,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1959"
+     }
+    },
+    {
+     "doi": "10.1007/BF02412838",
+     "position": "14",
+     "text": "Ennio De Giorgi, Su una teoria generale della misura (\\?-1)-dimensionale in uno spazio ad \\? dimensioni, Ann. Mat. Pura Appl. (4) 36 (1954), 191 -- 213 (Italian).",
+     "zbmath": {
+      "author_codes": [
+       "de-giorgi.ennio"
+      ],
+      "document_id": 3088199,
+      "msc": [
+       "28-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 315,
+      "year": "1954"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Herbert Federer, Surface area. I, Trans. Amer. Math. Soc. 55 (1944), 420 -- 437.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3096442,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1944"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Herbert Federer, Surface area. II, Trans. Amer. Math. Soc. 55 (1944), 438 -- 456.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3096442,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1944"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Herbert Federer, Coincidence functions and their integrals, Trans. Amer. Math. Soc. 59 (1946), 441 -- 466.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3096443,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1946"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "Herbert Federer, The (\\?,\\?) rectifiable subsets of \\?-space, Trans. Amer. Soc. 62 (1947), 114 -- 192.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3049637,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1947"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Herbert Federer, Dimension and measure, Trans. Amer. Math. Soc. 62 (1947), 536 -- 547.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3049639,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1947"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "Herbert Federer, Measure and area, Bull. Amer. Math. Soc. 58 (1952), 306 -- 378.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3072228,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3397,
+      "year": "1952"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Herbert Federer, Some integralgeometric theorems, Trans. Amer. Math. Soc. 77 (1954), 238 -- 261.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3093089,
+      "msc": [
+       "52-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1954"
+     }
+    },
+    {
+     "doi": "10.2307/1969917",
+     "position": "22",
+     "text": "Herbert Federer, On Lebesgue area, Ann. of Math. (2) 61 (1955), 289 -- 353.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3110317,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "An introduction to differential geometry, Mimeographed lecture notes, Brown University, 1948.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1112/jlms/s1-15.1.15",
+     "position": "24",
+     "text": "W. Fenchel, On total curvatures of Riemannian manifolds: I, J. London Math. Soc. 15 (1940), 15 -- 22.",
+     "zbmath": {
+      "author_codes": [
+       "fenchel.werner"
+      ],
+      "document_id": 3041930,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3410,
+      "year": "1940"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "Werner Fenchel, On the differential geometry of closed space curves, Bull. Amer. Math. Soc. 57 (1951), 44 -- 54.",
+     "zbmath": {
+      "author_codes": [
+       "fenchel.werner"
+      ],
+      "document_id": 3065518,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3397,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "26",
+     "text": "Harley Flanders, Development of an extended exterior differential calculus, Trans. Amer. Math. Soc. 75 (1953), 311 -- 326.",
+     "zbmath": {
+      "author_codes": [
+       "flanders.harley"
+      ],
+      "document_id": 3083176,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1953"
+     }
+    },
+    {
+     "doi": null,
+     "position": "27",
+     "text": "Harley Flanders, Methods in affine connection theory, Pacific J. Math. 5 (1955), 391 -- 431.",
+     "zbmath": {
+      "author_codes": [
+       "flanders.harley"
+      ],
+      "document_id": 3112439,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "H. Hadwiger, Vorlesungen \u00fcber Inhalt, Oberfl\u00e4che und Isoperimetrie, Springer-Verlag, Berlin-G\u00f6ttingen-Heidelberg, 1957 (German).",
+     "zbmath": {
+      "author_codes": [
+       "hadwiger.hugo"
+      ],
+      "document_id": 3128853,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3921,
+      "year": "1957"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "Witold Hurewicz and Henry Wallman, Dimension Theory, Princeton Mathematical Series, v. 4, Princeton University Press, Princeton, N. J., 1941.",
+     "zbmath": {
+      "author_codes": [
+       "hurewicz.witold",
+       "wallman.henry"
+      ],
+      "document_id": 3098534,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 4201,
+      "year": "1941"
+     }
+    },
+    {
+     "doi": "10.2307/1969274",
+     "position": "30",
+     "text": "Lynn H. Loomis, The intrinsic measure theory of Riemannian and Euclidean metric spaces, Ann. of Math. (2) 45 (1944), 367 -- 374.",
+     "zbmath": {
+      "author_codes": [
+       "loomis.lynn-harold"
+      ],
+      "document_id": 3096397,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1944"
+     }
+    },
+    {
+     "doi": "10.2307/1969028",
+     "position": "31",
+     "text": "Lynn H. Loomis, Abstract congruence and the uniqueness of Haar measure, Ann. of Math. (2) 46 (1945), 348 -- 355.",
+     "zbmath": {
+      "author_codes": [
+       "loomis.lynn-harold"
+      ],
+      "document_id": 3096398,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1945"
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "Marston Morse, The calculus of variations in the large, American Mathematical Society Colloquium Publications, vol. 18, American Mathematical Society, Providence, RI, 1996. Reprint of the 1932 original.",
+     "zbmath": {
+      "author_codes": [
+       "morse.marston"
+      ],
+      "document_id": 3016238,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3824,
+      "year": "1934"
+     }
+    },
+    {
+     "doi": "10.2307/1969467",
+     "position": "33",
+     "text": "J. W. Milnor, On the total curvature of knots, Ann. of Math. (2) 52 (1950), 248 -- 257.",
+     "zbmath": {
+      "author_codes": [
+       "milnor.john-w"
+      ],
+      "document_id": 3057227,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1950"
+     }
+    },
+    {
+     "doi": null,
+     "position": "34",
+     "text": "Rad\u00f3 R. Length and area, Amer. Math. Soc. Colloquium Publications, vol. 30, 1948, 572 pp.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "35",
+     "text": "Saks S. Theory of the integral, Monografie Matematyczne, vol. 7, Warsaw, 1937.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "36",
+     "text": "A. Santal\u00f3 SA. \u00dcber das kinematische Mass im Raum, Actualit\u00e9s Sci. Ind. no. 357, 1936.",
+     "zbmath": {
+      "author_codes": [
+       "santalo.luis-antonio"
+      ],
+      "document_id": 2527809,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 0,
+      "year": "1936"
+     }
+    },
+    {
+     "doi": "10.2307/2371513",
+     "position": "37",
+     "text": "Hermann Weyl, On the Volume of Tubes, Amer. J. Math. 61 (1939), no. 2, 461 -- 472.",
+     "zbmath": {
+      "author_codes": [
+       "weyl.hermann"
+      ],
+      "document_id": 3034874,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1939"
+     }
+    },
+    {
+     "doi": null,
+     "position": "38",
+     "text": "Hassler Whitney, On totally differentiable and smooth functions, Pacific J. Math. 1 (1951), 143 -- 159.",
+     "zbmath": {
+      "author_codes": [
+       "whitney.hassler"
+      ],
+      "document_id": 3065989,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "39",
+     "text": "Hassler Whitney, Geometric integration theory, Princeton University Press, Princeton, N. J., 1957.",
+     "zbmath": {
+      "author_codes": [
+       "whitney.hassler"
+      ],
+      "document_id": 3136785,
+      "msc": [
+       "28A75",
+       "49Q15",
+       "28-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4201,
+      "year": "1957"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "418-491",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9947",
+        "type": "print"
+       },
+       {
+        "number": "1088-6850",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 132368,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "American Mathematical Society (AMS), Providence, RI",
+      "series_id": 744,
+      "short_title": "Trans. Am. Math. Soc.",
+      "title": "Transactions of the American Mathematical Society",
+      "volume": "93",
+      "year": "1959"
+     }
+    ],
+    "source": "Trans. Am. Math. Soc. 93, 418-491 (1959)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Curvature measures"
+   },
+   "year": "1959",
+   "zbmath_url": "https://zbmath.org/3146500"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.06640386581420898,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:58:10Z"
+ }
+}

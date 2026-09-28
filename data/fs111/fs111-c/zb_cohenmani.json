@@ -1,0 +1,135 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "cohen.alex"
+      ],
+      "name": "Cohen, A."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "mani.nitya"
+      ],
+      "name": "Mani, N."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2025-10-09T12:19:22Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 8103764,
+   "identifier": null,
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s10474-025-01556-w",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s10474-025-01556-w"
+    },
+    {
+     "identifier": "2407.05071",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2407.05071"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C35",
+     "scheme": "msc2020",
+     "text": "Arrangements of points, flats, hyperplanes (aspects of discrete geometry)"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "473-497",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0236-5294",
+        "type": "print"
+       },
+       {
+        "number": "1588-2632",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 534287,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer Netherlands, Dordrecht; Akad\u00e9miai Kiad\u00f3, Budapest",
+      "series_id": 963,
+      "short_title": "Acta Math. Hung.",
+      "title": "Acta Mathematica Hungarica",
+      "volume": "176",
+      "year": "2025"
+     }
+    ],
+    "source": "Acta Math. Hung. 176, No. 2, 473-497 (2025)"
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Clustering in typical unit-distance avoiding sets"
+   },
+   "year": "2025",
+   "zbmath_url": "https://zbmath.org/8103764"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.06844472885131836,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:57:23Z"
+ }
+}

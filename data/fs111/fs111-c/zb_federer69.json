@@ -1,0 +1,2302 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, Herbert"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": "1965",
+      "name": "L. C. Young",
+      "sign": "L. C. Young (Madison)"
+     },
+     "text": "A first impression, that this is not a book but a monument, may need correcting: the 700 page volume is best described as a trilogy with applications, where each of the three, highly condensed and highly polished, main parts might correspond (at the very least) to a semester's lectures, but deserves to be studied much longer, and where the applications may direct the work of a lifetime. \n\nThe first part, which assumes only familiarity with point sets, comprises an up-to-date terse version of Grassmann algebra followed by an introduction to measure and integration, which takes us right into contemporary research and unsolved problems; this very necessary foundation is already of the utmost value to a serious student of analysis. \n\nThe second part, starting about p. 200, studies the structure of sets of finite \\(k\\)-measure in \\(n\\)-space, and includes the author's extension of the Besicovitch theory; it ends with some properties of highly differentiable functions and varieties. \n\nThis in its turn is all groundwork for the third part, which starts after p. 340 with a long chapter on homological integration, presumably the principal purpose of the book. There are points of contact with \\textit{H. Whitney}'s pioneering ``Geometric Integration Theory''. Princeton: Princeton University Press (1957; Zbl 0083.28204), but the differences, both in the aims and in the techniques, make it abundantly clear that this portion of mathematics has not stood still for twelve years. Many of the researches reported on arose from collaboration with W. H. Fleming in studying normal and integral currents, and they lead to general forms of the Gauss-Green theorem. A related topic is that of distributions whose first derivatives are vector-measures and comprises an account of researches originating also with de Giorgi, Krickeberg, Pauc, Goffman and others. \n\nFinally the applications refer principally to the Problem of Plateau and to the regularity of solutions for certain partial differential equations, of interest in the calculus of variations. This final chapter is in the spirit of the very general definitions of Reifenberg, and it is also strongly influenced by the work of Almgren on a slightly modified form of the reviewer's generalized varieties. \n\nThe bibliography lists more than 250 books and papers by more than 170 authors.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 3280855,
+   "identifier": "0176.00801",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "49-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to calculus of variations and optimal control"
+    },
+    {
+     "code": "49Q15",
+     "scheme": "msc2020",
+     "text": "Geometric measure and integration theory, integral and normal currents in optimization"
+    },
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "58A15",
+     "scheme": "msc2020",
+     "text": "Exterior differential systems (Cartan theory)"
+    },
+    {
+     "code": "58A25",
+     "scheme": "msc2020",
+     "text": "Currents in global analysis"
+    },
+    {
+     "code": "49Q20",
+     "scheme": "msc2020",
+     "text": "Variational problems in a geometric measure-theoretic setting"
+    },
+    {
+     "code": "58C35",
+     "scheme": "msc2020",
+     "text": "Integration on manifolds; measures on manifolds"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 3280855,
+      "isbn": [],
+      "publisher": null,
+      "year": "1969"
+     }
+    ],
+    "pages": null,
+    "series": [
+     {
+      "acronym": "GL",
+      "issn": [
+       {
+        "number": "0072-7830",
+        "type": "print"
+       },
+       {
+        "number": "2196-9701",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 419682,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Cham",
+      "series_id": 3921,
+      "short_title": "Grundlehren Math. Wiss.",
+      "title": "Grundlehren der Mathematischen Wissenschaften",
+      "volume": "153",
+      "year": "1969"
+     }
+    ],
+    "source": "Die Grundlehren der mathematischen Wissenschaften in Einzeldarstellungen. 153. Berlin-Heidelberg-New York: Springer-Verlag. xiv, 676 p. (1969)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Geometric measure theory"
+   },
+   "year": "1969",
+   "zbmath_url": "https://zbmath.org/3280855"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, Herbert"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3608705,
+   "identifier": "0392.49021",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1090/S0002-9904-1978-14462-0",
+     "type": "doi",
+     "url": "https://doi.org/10.1090/S0002-9904-1978-14462-0"
+    }
+   ],
+   "msc": [
+    {
+     "code": "49Q15",
+     "scheme": "msc2020",
+     "text": "Geometric measure and integration theory, integral and normal currents in optimization"
+    },
+    {
+     "code": "49Q20",
+     "scheme": "msc2020",
+     "text": "Variational problems in a geometric measure-theoretic setting"
+    },
+    {
+     "code": "26A45",
+     "scheme": "msc2020",
+     "text": "Functions of bounded variation, generalizations"
+    },
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "49Q99",
+     "scheme": "msc2020",
+     "text": "Manifolds and measure-geometric topics"
+    },
+    {
+     "code": "58A15",
+     "scheme": "msc2020",
+     "text": "Exterior differential systems (Cartan theory)"
+    },
+    {
+     "code": "49Q05",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces and optimization"
+    },
+    {
+     "code": "53C65",
+     "scheme": "msc2020",
+     "text": "Integral geometry"
+    },
+    {
+     "code": "49-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to calculus of variations and optimal control"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.2307/1970868",
+     "position": "1",
+     "text": "William K. Allard, On the first variation of a varifold, Ann. of Math. (2) 95 (1972), 417 -- 491.",
+     "zbmath": {
+      "author_codes": [
+       "allard.william-k"
+      ],
+      "document_id": 3398373,
+      "msc": [
+       "49Q20",
+       "49Q15",
+       "28A75",
+       "49Q05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "10.2307/1970934",
+     "position": "2",
+     "text": "William K. Allard, On the first variation of a varifold: boundary behavior, Ann. of Math. (2) 101 (1975), 418 -- 446.",
+     "zbmath": {
+      "author_codes": [
+       "allard.william-k"
+      ],
+      "document_id": 3500586,
+      "msc": [
+       "49Q20",
+       "49Q15",
+       "28A75",
+       "49Q05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.1007/BF01425476",
+     "position": "3",
+     "text": "W. K. Allard and F. J. Almgren Jr., The structure of stationary one dimensional varifolds with positive density, Invent. Math. 34 (1976), no. 2, 83 -- 97.",
+     "zbmath": {
+      "author_codes": [
+       "allard.william-k",
+       "almgren.frederick-j-jun"
+      ],
+      "document_id": 3530549,
+      "msc": [
+       "49Q20",
+       "53C20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 465,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "10.1090/memo/0165",
+     "position": "4",
+     "text": "F. J. Almgren Jr., Existence and regularity almost everywhere of solutions to elliptic variational problems with constraints, Mem. Amer. Math. Soc. 4 (1976), no. 165, viii+199.",
+     "zbmath": {
+      "author_codes": [
+       "almgren.frederick-j-jun"
+      ],
+      "document_id": 3512889,
+      "msc": [
+       "49Q15",
+       "49J99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 584,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "F. J. Almgren, Jr., R. Schoen and L. Simon, Regularity and singularity estimates on hypersurfaces minimizing parametric elliptic variational integrals, Acta Math, (to appear).",
+     "zbmath": {
+      "author_codes": [
+       "simon.leon-m",
+       "schoen.richard-m",
+       "almgren.frederick-j-jun"
+      ],
+      "document_id": 3600684,
+      "msc": [
+       "49Q05",
+       "35D10",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 282,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": "10.2307/1970922",
+     "position": "6",
+     "text": "Frederick J. Almgren Jr. and William P. Thurston, Examples of unknotted curves which bound only surfaces of high genus within their convex hulls, Ann. of Math. (2) 105 (1977), no. 3, 527 -- 538.",
+     "zbmath": {
+      "author_codes": [
+       "thurston.william-p",
+       "almgren.frederick-j-jun"
+      ],
+      "document_id": 3549780,
+      "msc": [
+       "53A05",
+       "57M99",
+       "49Q05",
+       "49Q20",
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Thomas Bagby and William P. Ziemer, Pointwise differentiability and absolute continuity, Trans. Amer. Math. Soc. 191 (1974), 129 -- 148.",
+     "zbmath": {
+      "author_codes": [
+       "bagby.thomas",
+       "ziemer.william-p"
+      ],
+      "document_id": 3462240,
+      "msc": [
+       "26B05",
+       "46E35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1974"
+     }
+    },
+    {
+     "doi": "10.1007/BF01404309",
+     "position": "8",
+     "text": "E. Bombieri, E. De Giorgi, and E. Giusti, Minimal cones and the Bernstein problem, Invent. Math. 7 (1969), 243 -- 268.",
+     "zbmath": {
+      "author_codes": [
+       "bombieri.enrico",
+       "de-giorgi.ennio",
+       "giusti.enrico"
+      ],
+      "document_id": 3291839,
+      "msc": [
+       "53-XX",
+       "49-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 465,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": "10.1007/BF01418640",
+     "position": "9",
+     "text": "E. Bombieri and E. Giusti, Harnack's inequality for elliptic differential equations on minimal surfaces, Invent. Math. 15 (1972), 24 -- 46.",
+     "zbmath": {
+      "author_codes": [
+       "bombieri.enrico",
+       "giusti.enrico"
+      ],
+      "document_id": 3360588,
+      "msc": [
+       "35B40",
+       "35J20",
+       "26D10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 465,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "K. E. Brakke, The motion of a surface by its mean curvature, Princeton Ph. D. Thesis, 1975.",
+     "zbmath": {
+      "author_codes": [
+       "brakke.kenneth-a"
+      ],
+      "document_id": 3600756,
+      "msc": [
+       "53C70",
+       "53-02",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4082,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "John E. Brothers, A characterization of integral currents, Trans. Amer. Math. Soc. 150 (1970), 301 -- 325.",
+     "zbmath": {
+      "author_codes": [
+       "brothers.john-e"
+      ],
+      "document_id": 3319667,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": "10.2307/2373388",
+     "position": "12",
+     "text": "John E. Brothers, Stokes' theorem. II, Amer. J. Math. 93 (1971), 479 -- 484.",
+     "zbmath": {
+      "author_codes": [
+       "brothers.john-e"
+      ],
+      "document_id": 3351942,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1977.26.26083",
+     "position": "13",
+     "text": "John E. Brothers, Existence and structure of tangent cones at the boundary of an area minimizing integral current, Indiana Univ. Math. J. 26 (1977), no. 6, 1027 -- 1044.",
+     "zbmath": {
+      "author_codes": [
+       "brothers.john-e"
+      ],
+      "document_id": 3582799,
+      "msc": [
+       "49Q20",
+       "53A10",
+       "58A25",
+       "49Q05",
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "John E. Brothers, The structure of solutions to Plateau's problem in the \\?-sphere, J. Differential Geometry 11 (1976), no. 3, 387 -- 400.",
+     "zbmath": {
+      "author_codes": [
+       "brothers.john-e"
+      ],
+      "document_id": 3561995,
+      "msc": [
+       "49Q05",
+       "49Q15",
+       "58A25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 485,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "10.1112/plms/s3-20.2.222",
+     "position": "15",
+     "text": "Roy O. Davies, Increasing sequences of sets and Hausdorff measure, Proc. London Math. Soc. (3) 20 (1970), 222 -- 236.",
+     "zbmath": {
+      "author_codes": [
+       "davies.roy-o"
+      ],
+      "document_id": 3297965,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 628,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": "10.1112/blms/1.1.47",
+     "position": "16",
+     "text": "Roy O. Davies and C. A. Rogers, The problem of subsets of finite positive measure, Bull. London Math. Soc. 1 (1969), 47 -- 54.",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "davies.roy-o"
+      ],
+      "document_id": 3297314,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 369,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "E. De Giorgi, F. Colombini, and L. C. Piccinini, Frontiere orientate di misura minima e questioni collegate, Scuola Normale Superiore, Pisa, 1972 (Italian).",
+     "zbmath": {
+      "author_codes": [
+       "colombini.ferruccio",
+       "piccinini.livio-clemente",
+       "de-giorgi.ennio"
+      ],
+      "document_id": 3464394,
+      "msc": [
+       "49Q15",
+       "49Q20",
+       "49-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": null,
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Lawrence R. Ernst, A proof that \\cal\\?&sup2; and \\cal\\?&sup2; are distinct measures, Trans. Amer. Math. Soc. 191 (1974), 363 -- 372.",
+     "zbmath": {
+      "author_codes": [
+       "ernst.lawrence-r"
+      ],
+      "document_id": 3453954,
+      "msc": [
+       "28A75",
+       "28A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1974"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "Lawrence R. Ernst, \\? measure of Cartesian product sets, Proc. Amer. Math. Soc. 49 (1975), 199 -- 202.",
+     "zbmath": {
+      "author_codes": [
+       "ernst.lawrence-r"
+      ],
+      "document_id": 3469122,
+      "msc": [
+       "28A75",
+       "28A35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Lawrence R. Ernst, \\? measure of Cartesian product sets. II, Trans. Amer. Math. Soc. 222 (1976), 211 -- 220.",
+     "zbmath": {
+      "author_codes": [
+       "ernst.lawrence-r"
+      ],
+      "document_id": 3515790,
+      "msc": [
+       "28A75",
+       "28A35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "22",
+     "text": "Lawrence R. Ernst and Gerald Freilich, A Hausdorff measure inequality, Trans. Amer. Math. Soc. 219 (1976), 361 -- 368.",
+     "zbmath": {
+      "author_codes": [
+       "ernst.lawrence-r",
+       "freilich.gerald"
+      ],
+      "document_id": 3525446,
+      "msc": [
+       "28A75",
+       "28A35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "Herbert Federer, Geometric measure theory, Die Grundlehren der mathematischen Wissenschaften, Band 153, Springer-Verlag New York Inc., New York, 1969.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3280855,
+      "msc": [
+       "49-01",
+       "49Q15",
+       "28A75",
+       "58A15",
+       "58A25",
+       "49Q20",
+       "58C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3921,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": "10.2307/1970603",
+     "position": "24",
+     "text": "Herbert Federer, On spherical summation of the Fourier transform of a distribution whose partial derivatives are representable by integration, Ann. of Math. (2) 91 (1970), 136 -- 143.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3298077,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "Herbert Federer, The singular sets of area minimizing rectifiable currents with codimension one and of area minimizing flat chains modulo two with arbitrary codimension, Bull. Amer. Math. Soc. 76 (1970), 767 -- 771.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3309325,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3397,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1971.21.21029",
+     "position": "26",
+     "text": "Herbert Federer, Slices and potentials, Indiana Univ. Math. J. 21 (1971/72), 373 -- 382.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3405100,
+      "msc": [
+       "49Q15",
+       "31B15",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1974.24.24031",
+     "position": "27",
+     "text": "Herbert Federer, Real flat chains, cochains and variational problems, Indiana Univ. Math. J. 24 (1974/75), 351 -- 407.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3454427,
+      "msc": [
+       "49Q15",
+       "28A75",
+       "53C65",
+       "58A25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1974"
+     }
+    },
+    {
+     "doi": "10.1007/BF00251600",
+     "position": "28",
+     "text": "Herbert Federer, A minimizing property of extremal submanifolds, Arch. Rational Mech. Anal. 59 (1975), no. 3, 207 -- 217.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3517858,
+      "msc": [
+       "49Q15",
+       "49Q05",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 37,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1972.22.22013",
+     "position": "29",
+     "text": "Herbert Federer and William P. Ziemer, The Lebesgue set of a function whose distribution derivatives are \\?-th power summable, Indiana Univ. Math. J. 22 (1972/73), 139 -- 158.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert",
+       "ziemer.william-p"
+      ],
+      "document_id": 3377595,
+      "msc": [
+       "28A75",
+       "26B15",
+       "31B15",
+       "46F99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "30",
+     "text": "A. T. Fomenko, Minimal compacta in Riemannian manifolds and Reifenberg's conjecture, Math. USSR Izv. 6 (1972), 1037-1066.",
+     "zbmath": {
+      "author_codes": [
+       "fomenko.anatolii-t"
+      ],
+      "document_id": 3442738,
+      "msc": [
+       "49Q05",
+       "49Q15",
+       "53C40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 578,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": null,
+     "position": "31",
+     "text": "A. T. Fomenko, The multidimensional Plateau problem in Riemannian manifolds, Mat. Sb. (N.S.) 89(131) (1972), 475 -- 519, 534 (Russian).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "Ronald Gariepy, Current valued measures and Ge\u00f6cze area, Trans. Amer. Math. Soc. 166 (1972), 133 -- 146.",
+     "zbmath": {
+      "author_codes": [
+       "gariepy.ronald-f"
+      ],
+      "document_id": 3372352,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "33",
+     "text": "Ronald Gariepy, Ge\u00f6cze area and a convergence property, Proc. Amer. Math. Soc. 34 (1972), 469 -- 474.",
+     "zbmath": {
+      "author_codes": [
+       "gariepy.ronald-f"
+      ],
+      "document_id": 3409695,
+      "msc": [
+       "28A75",
+       "26B15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "34",
+     "text": "Ronald Gariepy, Geometric properties of Sobolev mappings, Pacific J. Math. 47 (1973), 427 -- 433.",
+     "zbmath": {
+      "author_codes": [
+       "gariepy.ronald-f"
+      ],
+      "document_id": 3422676,
+      "msc": [
+       "26B15",
+       "28A75",
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": "10.1007/BF02923230",
+     "position": "35",
+     "text": "Enrico Giusti, Superfici cartesiane di area minima, Rend. Sem. Mat. Fis. Milano 40 (1970), 135 -- 153 (Italian, with English summary).",
+     "zbmath": {
+      "author_codes": [
+       "giusti.enrico"
+      ],
+      "document_id": 3348928,
+      "msc": [
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 661,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": null,
+     "position": "36",
+     "text": "Casper Goffman, An example in surface area, J. Math. Mech. 19 (1969/1970), 321 -- 326.",
+     "zbmath": {
+      "author_codes": [
+       "goffman.casper"
+      ],
+      "document_id": 3313529,
+      "msc": [
+       "28Axx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3411,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": "10.2307/1970629",
+     "position": "37",
+     "text": "Casper Goffman and William P. Ziemer, Higher dimensional mappings for which the area formula holds, Ann. of Math. (2) 92 (1970), 482 -- 488.",
+     "zbmath": {
+      "author_codes": [
+       "goffman.casper",
+       "ziemer.william-p"
+      ],
+      "document_id": 3324012,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": "10.1007/BF02392214",
+     "position": "38",
+     "text": "Robert M. Hardt, Slicing and intersection theory for chains associated with real analytic varieties, Acta Math. 129 (1972), 75 -- 136.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3370691,
+      "msc": [
+       "32C05",
+       "32C30",
+       "32C99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 282,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "39",
+     "text": "Robert M. Hardt, Slicing and intersection theory for chains modulo \\? associated with real analytic varieties, Trans. Amer. Math. Soc. 183 (1973), 327 -- 340.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3421105,
+      "msc": [
+       "28A75",
+       "32B20",
+       "32C05",
+       "32C30",
+       "14A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": null,
+     "position": "40",
+     "text": "Robert M. Hardt, Homology theory for real analytic and semianalytic sets, Ann. Scuola Norm. Sup. Pisa Cl. Sci. (4) 2 (1975), no. 1, 107 -- 148.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3484386,
+      "msc": [
+       "32B20",
+       "32C05",
+       "55N35",
+       "55N45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 321,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "41",
+     "text": "Robert M. Hardt, Topological properties of subanalytic sets, Trans. Amer. Math. Soc. 211 (1975), 57 -- 70.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3474046,
+      "msc": [
+       "32B20",
+       "32C30",
+       "55N35",
+       "55N45",
+       "57N60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1977.26.26004",
+     "position": "42",
+     "text": "Robert M. Hardt, Uniqueness of nonparametric area minimizing currents, Indiana Univ. Math. J. 26 (1977), no. 1, 65 -- 71.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3521099,
+      "msc": [
+       "49Q20",
+       "49Q15",
+       "49Q05",
+       "35J25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": "10.1080/03605307708820058",
+     "position": "43",
+     "text": "Robert M. Hardt, On boundary regularity for integral currents or flat chains modulo two minimizing the integral of an elliptic integrand, Comm. Partial Differential Equations 2 (1977), no. 12, 1163 -- 1232.",
+     "zbmath": {
+      "author_codes": [
+       "hardt.robert-m"
+      ],
+      "document_id": 3599057,
+      "msc": [
+       "49Q20",
+       "49Q15",
+       "58A25",
+       "49Q05",
+       "35J35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1566,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "44",
+     "text": "Reese Harvey, Holomorphic chains and their boundaries, Several complex variables (Proc. Sympos. Pure Math., Vol. XXX, Part 1, Williams Coll., Williamstown, Mass., 1975) Amer. Math. Soc., Providence, R. I., 1977, pp. 309 -- 382.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF01425557",
+     "position": "45",
+     "text": "R. Harvey and B. Lawson, Extending minimal varieties, Invent. Math. 28 (1975), 209 -- 226.",
+     "zbmath": {
+      "author_codes": [
+       "harvey.reese",
+       "lawson.h-blaine-jun"
+      ],
+      "document_id": 3495236,
+      "msc": [
+       "49Q20",
+       "49Q05",
+       "28A75",
+       "53A10",
+       "35J20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 465,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.2307/1971032",
+     "position": "46",
+     "text": "F. Reese Harvey and H. Blaine Lawson Jr., On boundaries of complex analytic varieties. I, Ann. of Math. (2) 102 (1975), no. 2, 223 -- 290.",
+     "zbmath": {
+      "author_codes": [
+       "harvey.reese",
+       "lawson.h-blaine-jun"
+      ],
+      "document_id": 3496546,
+      "msc": [
+       "32E10",
+       "32E30",
+       "49Q05",
+       "57R99",
+       "32C25",
+       "32D15",
+       "49Q15",
+       "32C30",
+       "58A25",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.2307/1971062",
+     "position": "47",
+     "text": "Reese Harvey and Bernard Shiffman, A characterization of holomorphic chains, Ann. of Math. (2) 99 (1974), 553 -- 587.",
+     "zbmath": {
+      "author_codes": [
+       "harvey.reese",
+       "shiffman.bernard"
+      ],
+      "document_id": 3450599,
+      "msc": [
+       "32C30",
+       "58A25",
+       "53C65",
+       "32D15",
+       "32J99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1974"
+     }
+    },
+    {
+     "doi": null,
+     "position": "48",
+     "text": "S. Kar, The \\((\\varphi , 1)\\) rectifiable subsets of Euclidean space, Indiana Ph.D. Thesis, 1975.",
+     "zbmath": {
+      "author_codes": [
+       "kar.samir"
+      ],
+      "document_id": 3585755,
+      "msc": [
+       "28A75",
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "49",
+     "text": "R. Kaufman and P. Mattila, Hausdorff dimension and exceptional sets of linear transformations, Ann. Acad. Sci. Fenn. Ser. A I Math. 1 (1975), no. 2, 387 -- 392.",
+     "zbmath": {
+      "author_codes": [
+       "kaufman.robert-p",
+       "mattila.pertti"
+      ],
+      "document_id": 3542725,
+      "msc": [
+       "28A75",
+       "28C10",
+       "11J99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 308,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.1007/BF02392053",
+     "position": "50",
+     "text": "James R. King, The currents defined by analytic varieties, Acta Math. 127 (1971), no. 3-4, 185 -- 220.",
+     "zbmath": {
+      "author_codes": [
+       "king.james-r"
+      ],
+      "document_id": 3355472,
+      "msc": [
+       "32C30",
+       "32A25",
+       "32A27"
+      ],
+      "prefix": "Zbl",
+      "series_id": 282,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1977.26.26030",
+     "position": "51",
+     "text": "Robert V. Kohn, An example concerning approximate differentiation, Indiana Univ. Math. J. 26 (1977), no. 2, 393 -- 397.",
+     "zbmath": {
+      "author_codes": [
+       "kohn.robert-v"
+      ],
+      "document_id": 3544295,
+      "msc": [
+       "26A24",
+       "26A15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "52",
+     "text": "H. Blaine Lawson Jr., The equivariant Plateau problem and interior regularity, Trans. Amer. Math. Soc. 173 (1972), 231 -- 249.",
+     "zbmath": {
+      "author_codes": [
+       "lawson.h-blaine-jun"
+      ],
+      "document_id": 3439565,
+      "msc": [
+       "49Q20",
+       "49Q15",
+       "35D10",
+       "28A75",
+       "58A25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "10.7146/math.scand.a-11562",
+     "position": "53",
+     "text": "H. Blaine Lawson Jr., The stable homology of a flat torus, Math. Scand. 36 (1975), 49 -- 73. Collection of articles dedicated to Werner Fenchel on his 70th birthday.",
+     "zbmath": {
+      "author_codes": [
+       "lawson.h-blaine-jun"
+      ],
+      "document_id": 3540056,
+      "msc": [
+       "53C65",
+       "53C55",
+       "49Q05",
+       "57R95"
+      ],
+      "prefix": "Zbl",
+      "series_id": 572,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "54",
+     "text": "H. B. Lawson, Jr. and R. Osserman, Nonexistence, nonuniqueness and irregularity of solutions to the minimal surface system, Acta Math, (to appear).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2307/1970913",
+     "position": "55",
+     "text": "H. Blaine Lawson Jr. and James Simons, On stable currents and their application to global problems in real and complex geometry, Ann. of Math. (2) 98 (1973), 427 -- 450.",
+     "zbmath": {
+      "author_codes": [
+       "simons.james",
+       "lawson.h-blaine-jun"
+      ],
+      "document_id": 3444412,
+      "msc": [
+       "53C99",
+       "53C40",
+       "58A25",
+       "49Q05",
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": null,
+     "position": "56",
+     "text": "Pertti Mattila, Hausdorff \\? regular and rectifiable sets in \\?-space, Trans. Amer. Math. Soc. 205 (1975), 263 -- 274.",
+     "zbmath": {
+      "author_codes": [
+       "mattila.pertti"
+      ],
+      "document_id": 3430988,
+      "msc": [
+       "28A75",
+       "28A10",
+       "28A05",
+       "28A15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "57",
+     "text": "Pertti Mattila, Hausdorff dimension, orthogonal projections and intersections with planes, Ann. Acad. Sci. Fenn. Ser. A I Math. 1 (1975), no. 2, 227 -- 244.",
+     "zbmath": {
+      "author_codes": [
+       "mattila.pertti"
+      ],
+      "document_id": 3542724,
+      "msc": [
+       "28C10",
+       "31C15",
+       "28A75",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 308,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": "10.2307/2374028",
+     "position": "58",
+     "text": "Norman G. Meyers and William P. Ziemer, Integral inequalities of Poincar\u00e9 and Wirtinger type for BV functions, Amer. J. Math. 99 (1977), no. 6, 1345 -- 1360.",
+     "zbmath": {
+      "author_codes": [
+       "meyers.norman-g",
+       "ziemer.william-p"
+      ],
+      "document_id": 3647557,
+      "msc": [
+       "46E35",
+       "26D10",
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "59",
+     "text": "M. Miranda, Un principio di massimo forte per le frontiere minimali e una sua applicazione alla risoluzione del problema al contorno per l'equazione delle superfici di area minima, Rend. Sem. Mat. Univ. Padova 45 (1971), 355 -- 366 (Italian).",
+     "zbmath": {
+      "author_codes": [
+       "miranda.mario"
+      ],
+      "document_id": 3419876,
+      "msc": [
+       "49Q05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 662,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": null,
+     "position": "60",
+     "text": "Frank Morgan, A smooth curve in \\?\\(^{4}\\) bounding a continuum of area minimizing surfaces, Duke Math. J. 43 (1976), no. 4, 867 -- 870.",
+     "zbmath": {
+      "author_codes": [
+       "morgan.frank"
+      ],
+      "document_id": 3529048,
+      "msc": [
+       "53A10",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "61",
+     "text": "F. Morgan, Almost every smooth curve in R3 bounds a unique area minimizing surface, Princeton Ph.D. Thesis, 1977.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "62",
+     "text": "Johannes C. C. Nitsche, Vorlesungen \u00fcber Minimalfl\u00e4chen, Springer-Verlag, Berlin-New York, 1975 (German). Die Grundlehren der mathematischen Wissenschaften, Band 199.",
+     "zbmath": {
+      "author_codes": [
+       "nitsche.johannes"
+      ],
+      "document_id": 3500634,
+      "msc": [
+       "53A10",
+       "53-02",
+       "49Q05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3921,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "63",
+     "text": "Robert Osserman, Minimal varieties, Bull. Amer. Math. Soc. 75 (1969), 1092 -- 1120.",
+     "zbmath": {
+      "author_codes": [
+       "osserman.robert"
+      ],
+      "document_id": 3301191,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3397,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": null,
+     "position": "64",
+     "text": "Harold Parks, Some new constructions and estimates in the problem of least area, Trans. Amer. Math. Soc. 248 (1979), no. 2, 311 -- 346.",
+     "zbmath": {
+      "author_codes": [
+       "parks.harold-r"
+      ],
+      "document_id": 3624329,
+      "msc": [
+       "49Q20",
+       "49M30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1977.26.26050",
+     "position": "65",
+     "text": "Harold R. Parks, A method for computing non-parametric area minimizing surfaces over \\?-dimensional domains, together with a priori error estimates, Indiana Univ. Math. J. 26 (1977), no. 4, 625 -- 643.",
+     "zbmath": {
+      "author_codes": [
+       "parks.harold-r"
+      ],
+      "document_id": 3563799,
+      "msc": [
+       "49Q05",
+       "49M05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "66",
+     "text": "Harold Parks, Explicit determination of area minimizing hypersurfacess, Duke Math. J. 44 (1977), no. 3, 519 -- 534.",
+     "zbmath": {
+      "author_codes": [
+       "parks.harold-r"
+      ],
+      "document_id": 3599058,
+      "msc": [
+       "49Q20",
+       "65N99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": "10.2307/2373825",
+     "position": "67",
+     "text": "Sandra O. Paur, Stokes' theorem for integral currents modulo \\?, Amer. J. Math. 99 (1977), no. 2, 379 -- 388.",
+     "zbmath": {
+      "author_codes": [
+       "paur.sandra-o"
+      ],
+      "document_id": 3599056,
+      "msc": [
+       "49Q15",
+       "58A25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "68",
+     "text": "S. O. Paur, An estimate of the density at the boundary of an integral current modulo v",
+     "zbmath": {
+      "author_codes": [
+       "paur.sandra-o"
+      ],
+      "document_id": 3574561,
+      "msc": [
+       "53C65",
+       "26B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "69",
+     "text": "Jon T. Pitts, Existence and regularity of minimal surfaces on Riemannian manifolds, Bull. Amer. Math. Soc. 82 (1976), no. 3, 503 -- 504.",
+     "zbmath": {
+      "author_codes": [
+       "pitts.jon-t"
+      ],
+      "document_id": 3516190,
+      "msc": [
+       "49Q05",
+       "49Q15",
+       "49Q20",
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3397,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "70",
+     "text": "C. A. Rogers, Hausdorff measures, Cambridge University Press, London-New York, 1970.",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose"
+      ],
+      "document_id": 3324894,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": null,
+     "position": "71",
+     "text": "Ettore Santi, Sul problema al contorno per l'equazione delle superfici di area minima su domini limitati qualunque, Ann. Univ. Ferrara Sez. VII (N.S.) 17 (1972), 13 -- 26 (Italian, with English summary).",
+     "zbmath": {
+      "author_codes": [
+       "santi.ettore"
+      ],
+      "document_id": 3384891,
+      "msc": [
+       "53A05",
+       "53A10",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 326,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "72",
+     "text": "V. Scheffer, Regularity and irregularity of solutions to nonlinear second order elliptic systems of partial differential equations and inequalities, Princeton Ph.D. Thesis, 1974.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "73",
+     "text": "Bernard Shiffman, Applications of geometric measure theory to value distribution theory for meromorphic maps, Value distribution theory (Proc. Tulane Univ. Program, Tulane Univ., New Orleans, La., 1972 -- 1973) Dekker, New York, 1974, pp. 63 -- 95.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2307/1970947",
+     "position": "74",
+     "text": "Leon Simon, Boundary regularity for solutions of the non-parametric least area problem, Ann. of Math. (2) 103 (1976), no. 3, 429 -- 455.",
+     "zbmath": {
+      "author_codes": [
+       "simon.leon-m"
+      ],
+      "document_id": 3524303,
+      "msc": [
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "75",
+     "text": "K. Steffen, Isoperimetrische Ungleichungen und das Plateausche Problem, Sonderforschungsbereich 40 (1973), Theoretische Mathematik, Universit\u00e4t Bonn.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF01392299",
+     "position": "76",
+     "text": "Jean E. Taylor, Regularity of the singular sets of two-dimensional area-minimizing flat chains modulo 3 in \\?&sup3;, Invent. Math. 22 (1973), 119 -- 159.",
+     "zbmath": {
+      "author_codes": [
+       "taylor.jean-ellen"
+      ],
+      "document_id": 3437958,
+      "msc": [
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 465,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": "10.2307/1970950",
+     "position": "77",
+     "text": "Jean E. Taylor, The structure of singularities in soap-bubble-like and soap-film-like minimal surfaces, Ann. of Math. (2) 103 (1976), no. 3, 489 -- 539. , https://doi.org/10.2307/1970949 Jean E. Taylor, The structure of singularities in solutions to ellipsoidal variational problems with constraints in \\?&sup3;, Ann. of Math. (2) 103 (1976), no. 3, 541 -- 546.",
+     "zbmath": {
+      "author_codes": [
+       "taylor.jean-ellen"
+      ],
+      "document_id": 3524305,
+      "msc": [
+       "49Q20",
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "10.2307/1970950",
+     "position": "78",
+     "text": "Jean E. Taylor, The structure of singularities in soap-bubble-like and soap-film-like minimal surfaces, Ann. of Math. (2) 103 (1976), no. 3, 489 -- 539. , https://doi.org/10.2307/1970949 Jean E. Taylor, The structure of singularities in solutions to ellipsoidal variational problems with constraints in \\?&sup3;, Ann. of Math. (2) 103 (1976), no. 3, 541 -- 546.",
+     "zbmath": {
+      "author_codes": [
+       "taylor.jean-ellen"
+      ],
+      "document_id": 3524305,
+      "msc": [
+       "49Q20",
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "10.1080/03605307708820033",
+     "position": "79",
+     "text": "Jean E. Taylor, Boundary regularity for solutions to various capillarity and free boundary problems, Comm. Partial Differential Equations 2 (1977), no. 4, 323 -- 357.",
+     "zbmath": {
+      "author_codes": [
+       "taylor.jean-ellen"
+      ],
+      "document_id": 3556532,
+      "msc": [
+       "35B99",
+       "35Q99",
+       "76A99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1566,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": null,
+     "position": "80",
+     "text": "A. I. Volpert, The space BV and quasilinear equations, Math. USSR Sbornik 2 (1967), 225-267.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "81",
+     "text": "William P. Ziemer, Change of variables for absolutely continuous functions, Duke Math. J. 36 (1969), 171 -- 178.",
+     "zbmath": {
+      "author_codes": [
+       "ziemer.william-p"
+      ],
+      "document_id": 3282783,
+      "msc": [
+       "28-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": null,
+     "position": "82",
+     "text": "William P. Ziemer, Extremal length as a capacity, Michigan Math. J. 17 (1970), 117 -- 128.",
+     "zbmath": {
+      "author_codes": [
+       "ziemer.william-p"
+      ],
+      "document_id": 3292209,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 592,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": null,
+     "position": "83",
+     "text": "William P. Ziemer, Slices of maps and Lebesgue area, Trans. Amer. Math. Soc. 164 (1972), 139 -- 151.",
+     "zbmath": {
+      "author_codes": [
+       "ziemer.william-p"
+      ],
+      "document_id": 3332645,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "84",
+     "text": "William P. Ziemer, Some remarks on harmonic measure in space, Pacific J. Math. 55 (1974), 629 -- 637.",
+     "zbmath": {
+      "author_codes": [
+       "ziemer.william-p"
+      ],
+      "document_id": 3505368,
+      "msc": [
+       "31B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1974"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "291-338",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9904",
+        "type": "print"
+       },
+       {
+        "number": "1936-881X",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 142767,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "American Mathematical Society (AMS), Providence, RI",
+      "series_id": 3397,
+      "short_title": "Bull. Am. Math. Soc.",
+      "title": "Bulletin of the American Mathematical Society",
+      "volume": "84",
+      "year": "1978"
+     }
+    ],
+    "source": "Bull. Am. Math. Soc. 84, 291-338 (1978)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Colloquium lectures on geometric measure theory"
+   },
+   "year": "1978",
+   "zbmath_url": "https://zbmath.org/3608705"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, Herbert"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3238050,
+   "identifier": "0147.31502",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1090/S0002-9904-1966-11567-7",
+     "type": "doi",
+     "url": "https://doi.org/10.1090/S0002-9904-1966-11567-7"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "49Q15",
+     "scheme": "msc2020",
+     "text": "Geometric measure and integration theory, integral and normal currents in optimization"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "John E. Brothers, Integral geometry in homogeneous spaces, Trans. Amer. Math. Soc. 124 (1966), 480 -- 517.",
+     "zbmath": {
+      "author_codes": [
+       "brothers.john-e"
+      ],
+      "document_id": 3266331,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1966"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Herbert Federer, Curvature measures, Trans. Amer. Math. Soc. 93 (1959), 418 -- 491.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3146500,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1959"
+     }
+    },
+    {
+     "doi": "10.2307/1968544",
+     "position": "3",
+     "text": "Anthony P. Morse, The behavior of a function on its critical set, Ann. of Math. (2) 40 (1939), no. 1, 62 -- 70.",
+     "zbmath": {
+      "author_codes": [
+       "morse.anthony-perry"
+      ],
+      "document_id": 3031722,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1939"
+     }
+    },
+    {
+     "doi": "10.2307/2373229",
+     "position": "4",
+     "text": "Arthur Sard, Hausdorff measure of critical images on Banach manifolds, Amer. J. Math. 87 (1965), 158 -- 174.",
+     "zbmath": {
+      "author_codes": [
+       "sard.arthur"
+      ],
+      "document_id": 3223505,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 300,
+      "year": "1965"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "719",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9904",
+        "type": "print"
+       },
+       {
+        "number": "1936-881X",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 134843,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "American Mathematical Society (AMS), Providence, RI",
+      "series_id": 3397,
+      "short_title": "Bull. Am. Math. Soc.",
+      "title": "Bulletin of the American Mathematical Society",
+      "volume": "72",
+      "year": "1966"
+     }
+    ],
+    "source": "Bull. Am. Math. Soc. 72, 719 (1966)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Two theorems in geometric measure theory"
+   },
+   "year": "1966",
+   "zbmath_url": "https://zbmath.org/3238050"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, Herbert"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "See the reviews of the original edition (1969) in Zbl 0176.00801 and of the Russian translation (1987) in Zbl 0634.49001.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 844032,
+   "identifier": "0874.49001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "49-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to calculus of variations and optimal control"
+    },
+    {
+     "code": "49Q15",
+     "scheme": "msc2020",
+     "text": "Geometric measure and integration theory, integral and normal currents in optimization"
+    },
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "58A15",
+     "scheme": "msc2020",
+     "text": "Exterior differential systems (Cartan theory)"
+    },
+    {
+     "code": "58A25",
+     "scheme": "msc2020",
+     "text": "Currents in global analysis"
+    },
+    {
+     "code": "49Q20",
+     "scheme": "msc2020",
+     "text": "Variational problems in a geometric measure-theoretic setting"
+    },
+    {
+     "code": "58C35",
+     "scheme": "msc2020",
+     "text": "Integration on manifolds; measures on manifolds"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 844032,
+      "isbn": [
+       {
+        "number": "3-540-60656-4",
+        "type": "print"
+       }
+      ],
+      "publisher": "Berlin: Springer-Verlag",
+      "year": "1996"
+     }
+    ],
+    "pages": "xvi, 680~p.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1431-0821",
+        "type": "print"
+       },
+       {
+        "number": "2512-5257",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 420612,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Berlin",
+      "series_id": 9398,
+      "short_title": "Class. Math.",
+      "title": "Classics in Mathematics",
+      "volume": null,
+      "year": "1996"
+     }
+    ],
+    "source": "Classics in Mathematics. Berlin: Springer-Verlag. xvi, 680 p. (1996)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": "Repr. of the 1969 ed.",
+    "original": null,
+    "subtitle": null,
+    "title": "Geometric measure theory."
+   },
+   "year": "1996",
+   "zbmath_url": "https://zbmath.org/844032"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "federer.herbert"
+      ],
+      "name": "Federer, H."
+     }
+    ],
+    "author_references": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "ivanov.l-d"
+      ],
+      "name": "Ivanov, L. D."
+     },
+     {
+      "aliases": [
+       "fomenko.anatoly-t"
+      ],
+      "checked": "1",
+      "codes": [
+       "fomenko.anatolii-t"
+      ],
+      "name": "Fomenko, A. T."
+     }
+    ],
+    "editors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "vitushkin.a-g"
+      ],
+      "name": "Vitushkin, A. G."
+     }
+    ]
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "papaghiuc.neculai",
+      "reviewer_id": "3290",
+      "name": "Neculai Papaghiuc",
+      "sign": "Neculai Papaghiuc (Ia\u015fi)"
+     },
+     "text": "This volume is the Russian translation of the well known English original which appeared in 1969, see the review in Zbl 0176.00801, completed by two expository articles. The first one (12 p.) ``Variations of sets and entropy'' by \\textit{L. D. Ivanov}, contains results concerning two important metric characteristics of the sets which are related to the content of the book and some additional applied topics. The second one (34 p.) ``Topological properties of the multidimensional extremals of the volume functional and of the Dirichlet's functional by \\textit{A. T. Fomenko}, contains a detailed account of the so-called Plateau problem. \n\n\nSince its appearance the book of the author remained a reference book for mature mathematicians and a valuable textbook for serious students. It can be divided into three parts. \n\n\nThe first part, of about 200 p., contains a systematic account of Grassmann (exterior) algebra (Chapter 1), followed by a highly condensed introduction to measure and integration (Chapter 2). \n\n\nThe second part, of about 140 p., contains basic facts of integration with respect to \\(m\\)-dimensional measures in \\(n\\)-dimensional Euclidean spaces \\((m<n)\\) with particular emphasis on tangential and rectifiability properties of sets and the transformation formulae by Lipschitzian maps. This part includes the author's extension of the Besicovitch theory. \n\n\nThe last part, of about 360 p., starts with a long chapter on homological integration, involving the functorial properties of differential forms and currents. This chapter has some points of contact with \\textit{H. Whitney}'s pioneering ``Geometric integration theory.'' Princeton, N. J.: Princeton University Press(1957; Zbl 0083.28204), in using Lipschitzian maps and the notion of mass but that book is directed to cohomology while the present one to homology. The principal objects of investigation are the normal, rectifiable and integral currents, the flat chains and the integral flat chains. One of the main results is the Compactness Theorem which gives the existence of minimizing currents. Many of the researches of this type arose in trying to find the most natural and general form of the Gauss-Green theorem. The final chapter is devoted to applications of the integral currents to the calculus of variations. Almost all considerations are directed to the study of the regularity of the minimizing current. \n\n\nThe own bibliography of the book (consisting of more than 250 books and papers by more than 170 authors) was completed by 22 + 66 references in appendices.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 4032465,
+   "identifier": "0634.49001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "Russian"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "49-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to calculus of variations and optimal control"
+    },
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "49Q15",
+     "scheme": "msc2020",
+     "text": "Geometric measure and integration theory, integral and normal currents in optimization"
+    },
+    {
+     "code": "49Q99",
+     "scheme": "msc2020",
+     "text": "Manifolds and measure-geometric topics"
+    },
+    {
+     "code": "58A15",
+     "scheme": "msc2020",
+     "text": "Exterior differential systems (Cartan theory)"
+    },
+    {
+     "code": "58A25",
+     "scheme": "msc2020",
+     "text": "Currents in global analysis"
+    },
+    {
+     "code": "58C35",
+     "scheme": "msc2020",
+     "text": "Integration on manifolds; measures on manifolds"
+    },
+    {
+     "code": "49Q20",
+     "scheme": "msc2020",
+     "text": "Variational problems in a geometric measure-theoretic setting"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 4032465,
+      "isbn": [],
+      "publisher": null,
+      "year": "1987"
+     }
+    ],
+    "pages": null,
+    "series": [],
+    "source": "Moskva: ``Nauka''. Glavnaya Redaktsiya Fiziko-Matematichesko\u012d Literatury. 760 p. R. 7.80 (1987)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": "\u0413\u0435\u043e\u043c\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0442\u0435\u043e\u0440\u0438\u044f \u043c\u0435\u0440\u044b",
+    "subtitle": null,
+    "title": "Geometric measure theory.  Translated from the English by S. P. Ba\u012dborodov, L. D. Ivanov and V. V. Trofimov. Translation edited by A. G. Vitushkin. With complements by L. D. Ivanov and A. T. Fomenko"
+   },
+   "year": "1987",
+   "zbmath_url": "https://zbmath.org/4032465"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 5,
+  "nr_request_results": 5,
+  "query_execution_time_in_seconds": 0.1787726879119873,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:58:15Z"
+ }
+}

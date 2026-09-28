@@ -1,0 +1,1575 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "rataj.jan"
+      ],
+      "name": "Rataj, Jan"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "zajicek.ludek"
+      ],
+      "name": "Zaj\u00ed\u010dek, Lud\u011bk"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2017-09-22T13:58:42Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "grad.sorin-mihai",
+      "reviewer_id": "15038",
+      "name": "Sorin-Mihai Grad",
+      "sign": "Sorin-Mihai Grad (Chemnitz)"
+     },
+     "text": "Complete characterizations of compact sets with positive reach (i.e., proximally \\(C^1\\) sets) in the plane and of one-dimensional sets with positive reach in \\(\\mathbb{R}^d\\) are provided, after the literature in the field is thoroughly reviewed. Then, the sets of positive reach in \\(\\mathbb{R}^d\\) are investigated and the authors show, for instance, that the boundaries of such sets can be locally covered by finitely many semiconcave hypersurfaces, a corresponding result being provided also when the dimensions of the sets in discussion lies between \\(0\\) and \\(d\\). Earlier results from the literature are improved or corrected, too, while some of the newly shown statements are illustrated by examples.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 6778812,
+   "identifier": "1375.26026",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1002/mana.201600237",
+     "type": "doi",
+     "url": "https://doi.org/10.1002/mana.201600237"
+    },
+    {
+     "identifier": "1604.08841",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1604.08841"
+    }
+   ],
+   "msc": [
+    {
+     "code": "26B25",
+     "scheme": "msc2020",
+     "text": "Convexity of real functions of several variables, generalizations"
+    },
+    {
+     "code": "52A30",
+     "scheme": "msc2020",
+     "text": "Variants of convex sets (star-shaped, (\\(m, n\\))-convex, etc.)"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Alberti, G., On the structure of singular sets of convex functions, Calc. Var. Partial Differential Equations, 2, 17-27, 1994",
+     "zbmath": {
+      "author_codes": [
+       "alberti.giovanni"
+      ],
+      "document_id": 509951,
+      "msc": [
+       "26B25",
+       "49Q15",
+       "52A20",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1897,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Alberti, G.; Ambrosio, L.; Cannarsa, P., On the singularities of convex functions, Manuscripta Math., 76, 421-435, 1992",
+     "zbmath": {
+      "author_codes": [
+       "cannarsa.piermarco",
+       "ambrosio.luigi",
+       "alberti.giovanni"
+      ],
+      "document_id": 219912,
+      "msc": [
+       "49J52",
+       "26B25",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 547,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Aronszajn, N., Differentiability of Lipschitzian mappings between Banach spaces, Studia Math., 57, 147-190, 1976",
+     "zbmath": {
+      "author_codes": [
+       "aronszajn.nachman"
+      ],
+      "document_id": 3533540,
+      "msc": [
+       "46G05",
+       "46B15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 209,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Bangert, V., Sets with positive reach, Arch. Math. (Basel), 38, 54-57, 1982",
+     "zbmath": {
+      "author_codes": [
+       "bangert.victor"
+      ],
+      "document_id": 3709148,
+      "msc": [
+       "53B20",
+       "58A99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 336,
+      "year": "1982"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Burago, D.; Burago, Y.; Ivanov, S., A Course in Metric Geometry, Amer. Math. Soc., 2001",
+     "zbmath": {
+      "author_codes": [
+       "burago.dmitri",
+       "ivanov.sergei-vladimirovich",
+       "burago.yurii-dmitrievich"
+      ],
+      "document_id": 1626771,
+      "msc": [
+       "51K05",
+       "51-01"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3915,
+      "year": "2001"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Clarke, F., Optimization and Nonsmooth Analysis, 1990, SIAM: Philadelphia",
+     "zbmath": {
+      "author_codes": [
+       "clarke.francis-h"
+      ],
+      "document_id": 46303,
+      "msc": [
+       "49-01",
+       "49J15",
+       "49J52",
+       "49K15",
+       "26A24",
+       "26B05",
+       "49L99",
+       "49L20",
+       "93B05",
+       "93B03",
+       "90C25",
+       "90C30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3811,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Colesanti, A.; Pucci, C., Qualitative and quantitative results for sets of singular points of convex bodies, Forum Math., 9, 103-125, 1997",
+     "zbmath": {
+      "author_codes": [
+       "pucci.carlo",
+       "colesanti.andrea"
+      ],
+      "document_id": 977952,
+      "msc": [
+       "52A15",
+       "52A39"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1254,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Colombo, G.; Thibault, L.; D. Y. Gao (ed.); D. Motreanu (ed.), Prox\u2010regular sets and applications, Handbook of Nonconvex Analysis and Applications, 99-182, 2010, International Press: Boston",
+     "zbmath": {
+      "author_codes": [
+       "thibault.lionel",
+       "colombo.giovanni"
+      ],
+      "document_id": 5880471,
+      "msc": [
+       "49-02",
+       "49J52",
+       "49J53",
+       "58C05",
+       "34G25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Crasta, G.; Fragala, I., On the characterization of some classes of proximally smooth sets, ESAIM Control Optim. Calc. Var., 22, 710-727, 2016",
+     "zbmath": {
+      "author_codes": [
+       "fragala.ilaria",
+       "crasta.graziano"
+      ],
+      "document_id": 6608666,
+      "msc": [
+       "26B25",
+       "26B05",
+       "53A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2308,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Colesanti, A.; Hug, D., Hessian measures of semi\u2010convex functions and applications to support measures of convex bodies, Manuscripta Math., 101, 209-238, 2000",
+     "zbmath": {
+      "author_codes": [
+       "hug.daniel",
+       "colesanti.andrea"
+      ],
+      "document_id": 1423147,
+      "msc": [
+       "52A20",
+       "26B25",
+       "53C65",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 547,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Cannarsa, P.; Sinestrari, C., Semiconcave Functions, Hamilton-Jacobi Equations, and Optimal Control, Progress in Nonlinear Differential Equations and their Applications 58, 2004, Birkh\u00e4user: Boston",
+     "zbmath": {
+      "author_codes": [
+       "cannarsa.piermarco",
+       "sinestrari.carlo"
+      ],
+      "document_id": 2129788,
+      "msc": [
+       "49-02",
+       "49K20",
+       "49L25",
+       "26B25",
+       "35F20",
+       "49L20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 8911,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Dalphin, J., Some characterizations of a uniform ball property, Congres SMAI 2013, ESAIM Proc. Surveys 45, 437-446, 2014, EDP Sci.: Les Ulis",
+     "zbmath": {
+      "author_codes": [
+       "dalphin.jeremy"
+      ],
+      "document_id": 6537132,
+      "msc": [
+       "49Q10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 8625,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Dieudonn\u00e9, J., Foundations of Modern Analysis, Pure and Applied Mathematics 10\u2010I, 1969, Academic Press: New York and London",
+     "zbmath": {
+      "author_codes": [
+       "dieudonne.jean"
+      ],
+      "document_id": 3280851,
+      "msc": [
+       "26-01"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Duda, J., Curves with finite turn, Czechoslovak Math. J., 58, 133, 23-49, 2008",
+     "zbmath": {
+      "author_codes": [
+       "duda.jakub"
+      ],
+      "document_id": 5551492,
+      "msc": [
+       "46T99",
+       "53A04",
+       "58B99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 402,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Duda, J.; Zaj\u00ed\u010dek, L., Semiconvex functions: representations as suprema of smooth functions and extensions, J. Convex Analysis, 16, 239-260, 2009",
+     "zbmath": {
+      "author_codes": [
+       "duda.jakub",
+       "zajicek.ludek"
+      ],
+      "document_id": 5586187,
+      "msc": [
+       "49J52",
+       "26B25",
+       "46T99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2073,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Duda, J.; Zaj\u00ed\u010dek, L., On vector\u2010valued curves that allow a \\(C^{1 , \\alpha}\\)\u2010parametrization, Acta Math. Hung., 127, 85-111, 2010",
+     "zbmath": {
+      "author_codes": [
+       "zajicek.ludek",
+       "duda.jakub"
+      ],
+      "document_id": 5881179,
+      "msc": [
+       "26E20",
+       "26A51",
+       "53A04"
+      ],
+      "prefix": "Zbl",
+      "series_id": 963,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Eggleston, H. G., Notes on Minkowski geometry (I): Relations between the circumradius, diameter, inradius and minimal width of a convex set, J. London Math. Soc., 33, 76-81, 1958",
+     "zbmath": {
+      "author_codes": [
+       "eggleston.h-g"
+      ],
+      "document_id": 3134746,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3410,
+      "year": "1958"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "Federer, H., Curvature measures, Trans. Amer. Math. Soc., 93, 418-491, 1959",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3146500,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1959"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Fu, J. H. G., Tubular neighborhoods in Euclidean spaces, Duke Math. J., 52, 1025-1046, 1985",
+     "zbmath": {
+      "author_codes": [
+       "fu.joseph-howland-guthrie"
+      ],
+      "document_id": 3951443,
+      "msc": [
+       "52A20",
+       "26B25",
+       "28A75",
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "H\u00e1jek, P.; Johanis, M., Smooth Analysis in Banach Spaces, de Gruyter Series in Nonlinear Analysis and Applications 19, 2014, De Gruyter: Berlin",
+     "zbmath": {
+      "author_codes": [
+       "hajek.petr.1",
+       "johanis.michal"
+      ],
+      "document_id": 6193417,
+      "msc": [
+       "46-02",
+       "46B03",
+       "46G05",
+       "46T20",
+       "46G25",
+       "26E15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3847,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Hatcher, A., Algebraic Topology, 2002, Cambridge Univ. Press: Cambridge",
+     "zbmath": {
+      "author_codes": [
+       "hatcher.allen-e"
+      ],
+      "document_id": 2103273,
+      "msc": [
+       "55-01",
+       "55Nxx",
+       "55Pxx",
+       "55Qxx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": null,
+     "position": "22",
+     "text": "Hug, D., Generalized curvature measures and singularities of sets with positive reach, Forum Math., 10, 699-728, 1998",
+     "zbmath": {
+      "author_codes": [
+       "hug.daniel"
+      ],
+      "document_id": 1227252,
+      "msc": [
+       "52A20",
+       "53C65",
+       "49Q15",
+       "52A22",
+       "28A50"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1254,
+      "year": "1998"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "Hug, D.; Rataj, J.; Weil, W., A product integral representation of mixed volumes of two convex bodies, Adv. Geom., 13, 633-662, 2013",
+     "zbmath": {
+      "author_codes": [
+       "hug.daniel",
+       "rataj.jan",
+       "weil.wolfgang"
+      ],
+      "document_id": 6229237,
+      "msc": [
+       "52A20",
+       "52A22",
+       "52A39",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2778,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "24",
+     "text": "Johanis, M., A quantitative version of the converse Taylor theorem: \\(C^{k , \\omega}\\)\u2010smoothness, Colloq. Math., 136, 57-64, 2014",
+     "zbmath": {
+      "author_codes": [
+       "johanis.michal"
+      ],
+      "document_id": 6330472,
+      "msc": [
+       "46G05",
+       "46T20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 388,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "Lytchak, A., Almost convex subsets, Geom. Dedicata, 115, 201-218, 2005",
+     "zbmath": {
+      "author_codes": [
+       "lytchak.alexander"
+      ],
+      "document_id": 2235503,
+      "msc": [
+       "53C20",
+       "52A99",
+       "53C45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "26",
+     "text": "Milnor, J. W., Topology from the Differentiable Viewpoint, 1997, Princeton: New Jersey",
+     "zbmath": {
+      "author_codes": [
+       "milnor.john-w"
+      ],
+      "document_id": 3221041,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1965"
+     }
+    },
+    {
+     "doi": null,
+     "position": "27",
+     "text": "Pokorn\u00fd, D.; Rataj, J., Normal cycles and curvature measures of sets with d.c. boundary, Adv. Math., 248, 963-985, 2013",
+     "zbmath": {
+      "author_codes": [
+       "pokorny.dusan",
+       "rataj.jan"
+      ],
+      "document_id": 6264541,
+      "msc": [
+       "58A25",
+       "26B25",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 290,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "Rataj, J., Determination of spherical area measures by means of dilation volumes, Math. Nachr., 235, 143-162, 2002",
+     "zbmath": {
+      "author_codes": [
+       "rataj.jan"
+      ],
+      "document_id": 1749358,
+      "msc": [
+       "52A22",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 561,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "Reshetnyak, Yu. G., On a generalization of convex surfaces (Russian), Mat. Sb. N.S., 40, 82, 381-398, 1956",
+     "zbmath": {
+      "author_codes": [
+       "reshetnyak.yuri-g"
+      ],
+      "document_id": 3120542,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 550,
+      "year": "1956"
+     }
+    },
+    {
+     "doi": null,
+     "position": "30",
+     "text": "Schneider, R.; J. T\u00f6lke (ed.); J. M. Wills (ed.), Boundary structure and curvature of convex bodies, Contributions to Geometry, 13-59, 1979, Birkh\u00e4user: Basel\u2010Boston",
+     "zbmath": {
+      "author_codes": [
+       "schneider.rolf-g"
+      ],
+      "document_id": 3665742,
+      "msc": [
+       "52A20",
+       "52A40",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": null,
+     "position": "31",
+     "text": "Scholtes, S., On hypersurfaces of positive reach, alternating Steiner formulae and Hadwigers Problem, 2013",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "Vesel\u00fd, L.; Zaj\u00ed\u010dek, L., Delta\u2010convex mappings between Banach spaces and applications, Dissertationes Math. (Rozprawy Mat.), 289, 52, 1989",
+     "zbmath": {
+      "author_codes": [
+       "zajicek.ludek",
+       "vesely.libor"
+      ],
+      "document_id": 4122621,
+      "msc": [
+       "46G05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 409,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": null,
+     "position": "33",
+     "text": "Zaj\u00ed\u010dek, L., On the differentiation of convex functions in finite and infinite dimensional spaces, Czechoslovak Math. J., 29, 340-348, 1979",
+     "zbmath": {
+      "author_codes": [
+       "zajicek.ludek"
+      ],
+      "document_id": 3669285,
+      "msc": [
+       "46A55",
+       "46G05",
+       "52A05",
+       "26B25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 402,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": null,
+     "position": "34",
+     "text": "Zaj\u00ed\u010dek, L., On Lipschitz and D.C. surfaces of finite codimension in a Banach space, Czechoslovak Math. J., 58, 849-864, 2008",
+     "zbmath": {
+      "author_codes": [
+       "zajicek.ludek"
+      ],
+      "document_id": 5551544,
+      "msc": [
+       "46T05",
+       "58C20",
+       "47H05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 402,
+      "year": "2008"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "1806-1829",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0025-584X",
+        "type": "print"
+       },
+       {
+        "number": "1522-2616",
+        "type": "electronic"
+       }
+      ],
+      "issue": "11-12",
+      "issue_id": 369370,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Wiley (Wiley-VCH), Weinheim",
+      "series_id": 561,
+      "short_title": "Math. Nachr.",
+      "title": "Mathematische Nachrichten",
+      "volume": "290",
+      "year": "2017"
+     }
+    ],
+    "source": "Math. Nachr. 290, No. 11-12, 1806-1829 (2017)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the structure of sets with positive reach"
+   },
+   "year": "2017",
+   "zbmath_url": "https://zbmath.org/6778812"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "rataj.jan"
+      ],
+      "name": "Rataj, Jan"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "zajicek.ludek"
+      ],
+      "name": "Zaj\u00ed\u010dek, Lud\u011bk"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2026-05-08T08:16:29Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "nikolaev.igor-g",
+      "reviewer_id": "10106",
+      "name": "Igor G. Nikolaev",
+      "sign": "Igor G. Nikolaev (Urbana)"
+     },
+     "text": "The definition of a set with positive reach employs a familiar property of convex sets. Namely, a set \\(A\\subseteq\\mathbb{R}^{d}\\) is said to have positive reach if, for some \\(\\varepsilon>0\\), every point \\(x\\in\\mathbb{R}^{d}\\) satisfying \\(\\operatorname{dist}\\left(x,A\\right)<\\varepsilon\\) has\na nearest point \\(a\\in A\\); that is, \n\\[\n\\left\\vert x-a\\right\\vert =\\operatorname{dist}\\left(  x,A\\right)  .\n\\]\nIn [Math. Nachr. 297, No. 3, 932--942 (2024; Zbl 1536.53083)], \\textit{A. Lytchak} described the local structure of \\(k\\)-dimensional sets with positive reach  in \\(\\mathbb{R}^{d}\\), where \\(k\\leq d\\), at points where the tangent cone of \\(A\\) is \\(k\\)-dimensional. The authors' main result provides a complete characterization of the local structure of two-dimensional sets \\(A\\) in \\(\\mathbb{R}^{d}\\) with positive reach for \\(d\\geq3\\). The proof uses Lytchak's results from [loc. cit.] and the authors' previous results. As a corollary, the authors prove that for every two-dimensional set with positive reach \\(A\\subseteq\\mathbb{R}^{d}\\), \\(d\\geq3\\), and every \\(a\\in A\\), there exists a compact set \\(B\\subseteq\\mathbb{R}^{2}\\) with positive reach and \\(0\\in B\\), together with a bi-Lipschitz mapping \\(\\psi:B\\rightarrow A^{\\ast}\\), where \\(A^{\\ast}\\) is a neighborhood of \\(a\\) in \\(A\\).\n\nThis corollary gives a positive answers to Question 1.7 in [loc. cit.].",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 8197294,
+   "identifier": null,
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.aim.2026.110952",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.aim.2026.110952"
+    },
+    {
+     "identifier": "2512.17606",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2512.17606"
+    }
+   ],
+   "msc": [
+    {
+     "code": "53C20",
+     "scheme": "msc2020",
+     "text": "Global Riemannian geometry, including pinching"
+    },
+    {
+     "code": "52A30",
+     "scheme": "msc2020",
+     "text": "Variants of convex sets (star-shaped, (\\(m, n\\))-convex, etc.)"
+    },
+    {
+     "code": "39B62",
+     "scheme": "msc2020",
+     "text": "Functional inequalities, including subadditivity, convexity, etc."
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bangert.victor"
+      ],
+      "document_id": 3709148,
+      "msc": [
+       "53B20",
+       "58A99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 336,
+      "year": "1982"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "boissonnat.jean-daniel",
+       "chazal.frederic",
+       "michel.bertrand"
+      ],
+      "document_id": 7597770,
+      "msc": [
+       "55N31",
+       "62R40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "cannarsa.piermarco",
+       "sinestrari.carlo"
+      ],
+      "document_id": 2129788,
+      "msc": [
+       "49-02",
+       "49K20",
+       "49L25",
+       "26B25",
+       "35F20",
+       "49L20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 8911,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "casado.javier",
+       "santos-rodriguez.jaime",
+       "cuerno.manuel"
+      ],
+      "document_id": 7931696,
+      "msc": [
+       "49Q20",
+       "28A33",
+       "30L15",
+       "49Q22",
+       "53C21",
+       "55N31"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1392,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "thibault.lionel",
+       "colombo.giovanni"
+      ],
+      "document_id": 5880471,
+      "msc": [
+       "49-02",
+       "49J52",
+       "49J53",
+       "58C05",
+       "34G25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3280855,
+      "msc": [
+       "49-01",
+       "49Q15",
+       "28A75",
+       "58A15",
+       "58A25",
+       "49Q20",
+       "58C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3921,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "federer.herbert"
+      ],
+      "document_id": 3146500,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1959"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "fu.joseph-howland-guthrie"
+      ],
+      "document_id": 3951443,
+      "msc": [
+       "52A20",
+       "26B25",
+       "28A75",
+       "49Q15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "johansen.soren-glud",
+       "gill.richard-d"
+      ],
+      "document_id": 4184571,
+      "msc": [
+       "60J27",
+       "60J99",
+       "62G05",
+       "60H20",
+       "45D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 319,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "glaeser.georges"
+      ],
+      "document_id": 3149314,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 123,
+      "year": "1958"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "hajek.petr.1",
+       "johanis.michal"
+      ],
+      "document_id": 6193417,
+      "msc": [
+       "46-02",
+       "46B03",
+       "46G05",
+       "46T20",
+       "46G25",
+       "26E15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3847,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "hormander.lars"
+      ],
+      "document_id": 3517600,
+      "msc": [
+       "35J25",
+       "31A25",
+       "31B20",
+       "35J60",
+       "35B45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 37,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "hug.daniel",
+       "rataj.jan",
+       "weil.wolfgang"
+      ],
+      "document_id": 6229237,
+      "msc": [
+       "52A20",
+       "52A22",
+       "52A39",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2778,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lopushanski.mariana-s",
+       "ivanov.grigory-m",
+       "ivanov.grigorii-e"
+      ],
+      "document_id": 7965976,
+      "msc": [
+       "49J52",
+       "49J27",
+       "49J53"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6827,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "johanis.michal",
+       "krystof.vaclav",
+       "zajicek.ludek"
+      ],
+      "document_id": 7782576,
+      "msc": [
+       "46T20",
+       "26B05",
+       "26B25",
+       "46B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 132,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "kapovitch.vitali",
+       "lytchak.alexander"
+      ],
+      "document_id": 7634621,
+      "msc": [
+       "53C23",
+       "53C20",
+       "53C21"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2395,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lee.john-m"
+      ],
+      "document_id": 6034615,
+      "msc": [
+       "53-01",
+       "53-02",
+       "58-02",
+       "57-02",
+       "53Cxx",
+       "57Rxx",
+       "58Axx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3917,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lytchak.alexander"
+      ],
+      "document_id": 2235503,
+      "msc": [
+       "53C20",
+       "52A99",
+       "53C45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lytchak.alexander"
+      ],
+      "document_id": 7820027,
+      "msc": [
+       "53C20",
+       "52A30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 561,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "macnerney.j-s"
+      ],
+      "document_id": 3113789,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 488,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "morris.ian-d"
+      ],
+      "document_id": 5817905,
+      "msc": [
+       "15A42",
+       "15A18",
+       "37H15",
+       "65F15",
+       "37M25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 290,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "rataj.jan"
+      ],
+      "document_id": 1749358,
+      "msc": [
+       "52A22",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 561,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "zahle.martina",
+       "rataj.jan"
+      ],
+      "document_id": 7057027,
+      "msc": [
+       "28-02",
+       "53-02",
+       "52-02",
+       "28A75",
+       "28A80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 9103,
+      "year": "2019"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "zajicek.ludek",
+       "rataj.jan"
+      ],
+      "document_id": 6778812,
+      "msc": [
+       "26B25",
+       "52A30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 561,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "reshetnyak.yuri-g"
+      ],
+      "document_id": 3120542,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 550,
+      "year": "1956"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "rockafellar.ralph-tyrrell"
+      ],
+      "document_id": 3307135,
+      "msc": [
+       "90-02",
+       "49-02",
+       "90C25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4201,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "thibault.lionel"
+      ],
+      "document_id": 7502906,
+      "msc": [
+       "49-01",
+       "49J52",
+       "49J27",
+       "90C25",
+       "49J45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2023"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "thibault.lionel"
+      ],
+      "document_id": 7502906,
+      "msc": [
+       "49-01",
+       "49J52",
+       "49J27",
+       "90C25",
+       "49J45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2023"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "vial.jean-philippe"
+      ],
+      "document_id": 3835767,
+      "msc": [
+       "90C30",
+       "26B25",
+       "52A01",
+       "49M37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 563,
+      "year": "1983"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "wells.john-c"
+      ],
+      "document_id": 3535371,
+      "msc": [
+       "37C75",
+       "47H99",
+       "58C15",
+       "37D99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "whitney.hassler"
+      ],
+      "document_id": 3136785,
+      "msc": [
+       "28A75",
+       "49Q15",
+       "28-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4201,
+      "year": "1957"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "Article ID 110952, 46 p.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0001-8708",
+        "type": "print"
+       },
+       {
+        "number": "1090-2082",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 542217,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (Academic Press), San Diego, CA",
+      "series_id": 290,
+      "short_title": "Adv. Math.",
+      "title": "Advances in Mathematics",
+      "volume": "495",
+      "year": "2026"
+     }
+    ],
+    "source": "Adv. Math. 495, Article ID 110952, 46 p. (2026)"
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "A characterization of the local structure of two-dimensional sets with positive reach"
+   },
+   "year": "2026",
+   "zbmath_url": "https://zbmath.org/8197294"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 2,
+  "nr_request_results": 2,
+  "query_execution_time_in_seconds": 0.11452054977416992,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:58:22Z"
+ }
+}

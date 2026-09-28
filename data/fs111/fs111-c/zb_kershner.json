@@ -1,0 +1,218 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "kershner.richard-b"
+      ],
+      "name": "Kershner, Richard"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3033918,
+   "identifier": "0021.11401",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.2307/2371320",
+     "type": "doi",
+     "url": "https://doi.org/10.2307/2371320"
+    }
+   ],
+   "msc": [],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "665-671",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9327",
+        "type": "print"
+       },
+       {
+        "number": "1080-6377",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 128678,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Johns Hopkins University Press, Baltimore, MD",
+      "series_id": 300,
+      "short_title": "Am. J. Math.",
+      "title": "American Journal of Mathematics",
+      "volume": "61",
+      "year": "1939"
+     }
+    ],
+    "source": "Am. J. Math. 61, 665-671 (1939)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The number of circles covering a set"
+   },
+   "year": "1939",
+   "zbmath_url": "https://zbmath.org/3033918"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "kershner.richard-b"
+      ],
+      "name": "Kershner, R."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "JFM",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "German",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": "Feigl, G., Prof. (Breslau)"
+     },
+     "text": "Ankn\u00fcpfend an die ``beste'' Art, eine gegebene ebene Punktmenge mit Kreisen von vorgeschriebenem Radius zu \u00fcberdecken, beweist Verf. den folgenden Satz: Es sei \\(M\\) eine beschr\u00e4nkte ebene Punktmenge, \\(\\bar M\\) ihre abgeschlossene H\u00fclle, \\(\\mu(\\bar M)\\) das Ma\u00df von \\(\\bar M\\) und \\(N(\\varepsilon)\\) die kleinste Anzahl von Kreisen des Radius \\(\\varepsilon\\), die \\(M\\) \u00fcberdecken. Dann gilt f\u00fcr die Summe der Fl\u00e4cheninhalte dieser Kreise die folgende Formel: \n\\[\n \\lim\\limits_{\\varepsilon\\to0} \\pi\\varepsilon^2N(\\varepsilon) = \\frac19 2\\pi\\sqrt3\\mu(\\bar M). \\tag{*} \n\\]\n Der Beweis von (*) st\u00fctzt sich auf sechs Hilfss\u00e4tze, von denen die beiden letzten auch an sich von Interesse sind: Ist \\(\\varrho\\) ein Rechteck mit dem Inhalt \\(R\\) und dem Durchmesser \\(p\\) und \\(N(\\varepsilon)\\) die kleinste Anzahl von Kreisen des Radius \\(\\varepsilon\\), die \\(\\varrho\\) \u00fcberdecken, so gilt: \n\\[\n \\dfrac19 2\\pi\\sqrt3 (R-2\\pi\\varepsilon^2)< \\pi\\varepsilon^2N(\\varepsilon) < \\dfrac19 2\\pi\\sqrt3 (R+2p\\varepsilon+16\\varepsilon^2). \n\\]",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 2510214,
+   "identifier": "65.0197.03",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.2307/2371320",
+     "type": "doi",
+     "url": "https://doi.org/10.2307/2371320"
+    },
+    {
+     "identifier": "A248897",
+     "type": "oeis",
+     "url": "https://oeis.org/A248897"
+    }
+   ],
+   "msc": [],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "665-671",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9327",
+        "type": "print"
+       },
+       {
+        "number": "1080-6377",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 128678,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Johns Hopkins University Press, Baltimore, MD",
+      "series_id": 300,
+      "short_title": "Am. J. Math.",
+      "title": "American Journal of Mathematics",
+      "volume": "61",
+      "year": "1939"
+     }
+    ],
+    "source": "Amer. J. Math. 61, 665-671 (1939)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The number of circles covering a set."
+   },
+   "year": "1939",
+   "zbmath_url": "https://zbmath.org/2510214"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 2,
+  "nr_request_results": 2,
+  "query_execution_time_in_seconds": 0.07127809524536133,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:57:40Z"
+ }
+}

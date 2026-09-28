@@ -154,3 +154,15 @@ prediction E7, "K-AD (b) predicts it needs curves of anchors" (`plans/FS107-stab
 **FS106-SUP's periodic half, one class:** `[DeCorteOliveiraVallentin2022]` §6.1 Lemma 6.2 — "If D ⊆ (0, ∞) is bounded, then lim sup_{L→∞}
 α_vol(G(Rⁿ/LZⁿ, D))/vol(Rⁿ/LZⁿ) = α_δ̄(G(Rⁿ, D))" — is the one-class form of "`µ₆^per(ε) = µ₆(ε)`", in print since 2018 (arXiv); the six-class form and
 the tight–slack equality not found (plan §PA row 2). Its Lemma 6.1 is W's torus in their words.
+
+## §5. Errata (appended by later closes; the text above stands as written)
+
+**Erratum, 2026-09-28 — FS-111's close (job FS111-C), to FS107-HX-STALL's reading of HX's junctions.** Source: `plans/FS111-W-wild.md` §3.4
+(FS111-W-HX-PAIRS [tools, float with margins; the junction types exact; one mind]), filed in `plans/FS111-derivation.md` § FS111-W-HX-PAIRS; inventory
+`plans/FS111-close-inventory.md` item 21. **HX-STALL's statement above is unchanged and correct** (the band-properness conditions, the hole density,
+the stall `π/(42√3)`). What is corrected is the gloss in its source record, `plans/FS107-W-near-colourings.md` (the junction paragraph after the stall
+check, ll. 313–315): *"no complementary three-element types exist (K-C6 vacuous)"*. That counts only hole components. Under FS107-R-CP's definition HX
+carries complementary pairs of fat junctions at distance `√7·R`, blocking toward points that lie inside its voids; so HX is not a family avoiding
+complementary pairs (the kind R-P3 expected), and FS107-R-CP locates HX's holes without sizing them (its bound at HX's parameters is about `10⁻¹¹`,
+against the stall `0.0432`; the size is K-ISL's, as this file says). Nothing in this file rested on the gloss: HX-STALL's *Rests on it* line names E5,
+the break table and K-ISL only.

@@ -1,0 +1,14 @@
+{
+ "result": null,
+ "status": {
+  "execution": "Entry not found!...",
+  "execution_bool": false,
+  "internal_code": "successful access. No results found.",
+  "last_id": null,
+  "nr_total_results": null,
+  "nr_request_results": null,
+  "query_execution_time_in_seconds": 1.430511474609375e-06,
+  "status_code": 404,
+  "time_stamp": "2026-09-28 23:57:14.414300"
+ }
+}

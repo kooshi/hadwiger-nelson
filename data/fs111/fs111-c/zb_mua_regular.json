@@ -1,0 +1,112 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "donnelly.john-b"
+      ],
+      "name": "Donnelly, John"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2019-02-18T16:21:47Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: The Hadwiger-Nelson problem asks for the minimum number of colors required to color the plane such that if two points are unit distance apart from each other, then those points have different colors \\textit{H. T. Croft} et al. [Unsolved problems in geometry. New York etc.: Springer-Verlag (1991; Zbl 0748.52001)]. It has been shown that the chromatic number of the Euclidean plane is 5, 6, or 7 (see [H. T. Croft, loc. cit.] and [\\textit{A. De Grey}, ``The chromatic number of the plane is at least 5'', Preprint, \\url{arXiv:1804.02385}]). Versions of this problem for the hyperbolic plane are investigated in [\\textit{E. De Corte} and \\textit{K. Golubev}, ``Lower bounds for the measurable chromatic number of the hyperbolic plane'', Preprint, \\url{arXiv:1708.01081}] and [\\textit{H. Parlier} and \\textit{C. Petit}, ``Chromatic numbers for the hyperbolic plane and discrete analogs'', Preprint, \\url{arXiv:1701.08648}]. In this paper, we answer this question for the Taxicab plane. In particular, we show that the minimum number of colors necessary to color the Taxicab plane such that no two points unit distance apart have the same color is four. We do this by tiling the plane using taxicab circles, all of which have radius \\(r=1/2\\). All the points in the interior of a given circle are colored using the same color. However, the interiors of adjacent circles are colored using different colors, and the boundary of each circle is colored using all four of the colors. This is done in such a way that points on opposite sides of a circle are colored using different colors.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 7024787,
+   "identifier": "1407.05233",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "05D10",
+     "scheme": "msc2020",
+     "text": "Ramsey theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "77-82",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1065-7371",
+        "type": "print"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 417650,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "University of Colorado and Center for Excellence in Mathematical Education, Colorado Springs, CO",
+      "series_id": 2138,
+      "short_title": "Geombinatorics",
+      "title": "Geombinatorics",
+      "volume": "28",
+      "year": "2018"
+     }
+    ],
+    "source": "Geombinatorics 28, No. 2, 77-82 (2018)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The chromatic number of the taxicab plane"
+   },
+   "year": "2018",
+   "zbmath_url": "https://zbmath.org/7024787"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.0656290054321289,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:56:08Z"
+ }
+}

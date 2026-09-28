@@ -1,0 +1,2116 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "name": "Raigorodskii, A. M."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2009-01-26T10:05:19Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "zamorzaeva.elizaveta",
+      "reviewer_id": "7995",
+      "name": "Elizaveta Zamorzaeva",
+      "sign": "Elizaveta Zamorzaeva (Chi\u015fin\u0103u)"
+     },
+     "text": "In 1933 K.~Borsuk posed the question: Is it true that every bounded set in \\(\\mathbb{R}^{n}\\) admits a partition into \\(n+1\\) parts of smaller diameter? The problem attracted many researchers, among them were prominent mathematicians. Numerous methods and results arose when making attempts to solve the problem. The hypothesis (conjecture) was proved for \\(n=2\\), 3 and for some special classes of sets. In 1993 counterexamples (for rather large dimensions \\(n\\)) were constructed answering the question negative.\n\nThe paper under review surveys numerous general approaches to solving Borsuk's problem, involving several other classical problems. Many interesting results that have some connection with Borsuk's problem are discussed.\n\nBelow the contents of the article are given:\n\nIntroduction\n\n1. Notation and various versions of problem formulation\n\n2. Universal covers\n\n3. Universal covering systems\n\n4. Truncations of an octahedron\n\n5. Spherical u.c.s. in dimension 3\n\n6. Sets of constant width\n\n7. Covering the sets by balls\n\n8. Special classes of sets\n\n9. Counterexamples to Borsuk's hypothesis\n\n10. Borsuk's, Gr\u00fcnbaum's, and the Nelson--Erd\u00f6s--Hadwiger problems for lattice polyhedra and graphs\n\n11. Chromatic numbers of finite geometric graphs and the relation between the Borsuk and Nelson--Erd\u00f6s--Hadwiger problems\n\nReferences\n\nThe bibliography includes 123 sources.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5497397,
+   "identifier": "1165.52001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     "Russian original"
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s10958-008-9196-y",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s10958-008-9196-y"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52-02",
+     "scheme": "msc2020",
+     "text": "Research exposition (monographs, survey articles) pertaining to convex and discrete geometry"
+    },
+    {
+     "code": "52C22",
+     "scheme": "msc2020",
+     "text": "Tilings in \\(n\\) dimensions (aspects of discrete geometry)"
+    },
+    {
+     "code": "05B40",
+     "scheme": "msc2020",
+     "text": "Combinatorial aspects of packing and covering"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "V. G. Boltyanskii, ''The problem on illuminating the boundary of a convex body,'' Izv. Mold. Filiala AN SSSR, 76, No. 10, 77--84 (1960).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "V. G. Boltyanskii and I. Ts. Gokhberg, Theorems and Problems of Combinatorial Geometry [in Russian], Nauka, Moscow (1965).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "E. D. Gluskin, ''Extremal properties of orthogonal parallelepipeds and their application to the geometry of Banach spaces,'' Mat. Sb., 136, No. 1, 85--96 (1988).",
+     "zbmath": {
+      "author_codes": [
+       "gluskin.efim-d"
+      ],
+      "document_id": 4058317,
+      "msc": [
+       "52A40",
+       "28A75",
+       "49Q15",
+       "52A20",
+       "52Bxx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 550,
+      "year": "1988"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "L. Danzer, B. Gr\u00fcnbaum, and V. Clee, Helly's Theorem [Russian transl.], Mir, Moscow (1968).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "R. Diestel', Theory of Graphs [in Russian], Izd. Inst. Mat., Novosibirsk (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "G. A. Kabatyanskii and V. I. Levenshtein, ''Estimates for Packings on a Sphere and in a Space,'' Probl. Pered. Inform., 14, 1--17 (1978).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "A. B. Katok and B. Khassel'blat, Introduction to the Modern Theory of Dynamical Systems [in Russsian], Faktorial, Moscow (1999).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "G. Conway and N. Slohen, Packings of Balls, a Lattice and a Group [Russian transl.], Mir, Moscow (1990).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "I. P. Kornfel'd, Ya. G. Sinai, and S. V. Fomin, Ergodic Theory [in Russian], Nauka, Moscow (1980).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "N. N. Kuzyurin, ''An asymptotic study of the covering problem,'' Probl. Kibern., No. 37, 19--56 (1980).",
+     "zbmath": {
+      "author_codes": [
+       "kuzyurin.nikolai-nikolaevich"
+      ],
+      "document_id": 3726376,
+      "msc": [
+       "05B40",
+       "05A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 7933,
+      "year": "1980"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "V. K. Leont'ev, ''Upper estimates of the {\\(\\alpha\\)}-depth of (0, 1)-matrices,'' Mat. Zam., 15, No. 3, 421--429 (1974).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "L. A. Lyusternik and L. G. Shnirel'man, Topological Methods in Variational Problems [in Russian], Moscow (1930).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "V. V. Makeev, ''Universal covers and projections of bodies of constant width,'' Ukr. Geom. Sb., bf32, 84--88 (1989).",
+     "zbmath": {
+      "author_codes": [
+       "makeev.vladimir-vladimirovich"
+      ],
+      "document_id": 4161560,
+      "msc": [
+       "51F99",
+       "52A35",
+       "51M20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1925,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "V. V. Makeev, ''Affine-inscribed and affine-circumscribed polygons and polyhedra,'' Zap. Nauchn. Sem. POMI, 231, 286--298 (1996).",
+     "zbmath": {
+      "author_codes": [
+       "makeev.vladimir-vladimirovich"
+      ],
+      "document_id": 1103451,
+      "msc": [
+       "52B11",
+       "52A20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1955,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "V. V. Makeev, ''On affine images of a rhombododecahedron circumscribed around a three-dimensional convex body,'' Zap. Nauchn. Sem. POMI, 246, 191--195 (1997).",
+     "zbmath": {
+      "author_codes": [
+       "makeev.vladimir-vladimirovich"
+      ],
+      "document_id": 1193407,
+      "msc": [
+       "52A15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1955,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "E. I. Nechiporuk, ''On topological principles of self-correction,'' Probl. Kibern., No. 21, 5--103 (1969).",
+     "zbmath": {
+      "author_codes": [
+       "nechiporuk.e-i"
+      ],
+      "document_id": 3311395,
+      "msc": [
+       "94C11"
+      ],
+      "prefix": "Zbl",
+      "series_id": 7933,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "A. M. Raigorodskii, ''On dimension in Borsuk's problem,'' Usp. Mat. Nauk, 52, No. 6, 181--182 (1997).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1262007,
+      "msc": [
+       "52A37",
+       "52A20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "A. M. Raigorodskii, ''On one estimate in Borsuk's problem,'' Usp. Mat. Nauk, 54, No. 2, 185--186 (1999).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1384845,
+      "msc": [
+       "52C22",
+       "05A18"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "A. M. Raigorodskii, ''Systems of general representatives,'' Fund. Prikl. Mat., 5, No. 3, 851--860 (1999)",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1567877,
+      "msc": [
+       "05A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2266,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "A. M. Raigorodskii, ''On a chromatic number of a space,'' Usp. Mat. Nauk, 55, No. 2, 147--148 (2000).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1535387,
+      "msc": [
+       "05C15",
+       "51M99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "A. M. Raigorodskii, ''Borsuk's problem for (0, 1)-polyhedra and cross-polytopes,'' Dokl. Ross. Akad. Nauk, 371, 600--603 (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "22",
+     "text": "A. M. Raigorodskii, ''Borsuk's problem and chromatic numbers of certain metric spaces,'' Usp. Mat. Nauk, 56, No. 1, 107--146 (2001).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1732413,
+      "msc": [
+       "54E35",
+       "05C15",
+       "51D20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2001"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "A. M. Raigorodskii, ''Borsuk's problem for (0, 1)-polyhedra and cross-polytopes,'' Dokl. Ross. Akad. Nauk, 384, 593--597 (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "24",
+     "text": "A. M. Raigorodskii, ''On one problem of an optimal covering of sets by balls,'' Chebyshev. Sb., 3, No. 2(4), 100--106 (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "A. M. Raigorodskii, ''Borsuk's and Hadwiger's problems and systems of vectors with bans on inner products,'' Usp. Mat. Nauk, 57, No. 3, 159--160 (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "26",
+     "text": "A. M. Raigorodskii, ''Borsuk's problem for integer polyhedra,'' Mat. Sb., 193, No. 10, 139--160 (2002).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "27",
+     "text": "A. M. Raigorodskii, ''On lower estimates for Borsuk's and Hadwiger's numbers,'' Usp. Mat. Nauk, 59, No. 3, 177--178 (2003).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "A. M. Raigorodskii, ''Borsuk's, Gr\u00fcnbaum, and Hadwiger's problems for certain classes of polyhedra and graphs,'' Dokl. Ross. Akad. Nauk, 388, No. 6, 738--742 (2003).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "A. M. Raigorodskii, ''The Erd\u00f6s-Hadwiger problem and chromatic numbers of finite geometric graphs,'' Dokl. Ross. Akad. Nauk, 392, No. 3, 313--317 (2003).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 5202916,
+      "msc": [
+       "05C15",
+       "05D05",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2267,
+      "year": "2003"
+     }
+    },
+    {
+     "doi": null,
+     "position": "30",
+     "text": "A. M. Raigorodskii, ''Borsuk's and Gr\u00fcnbaum problems for lattice polyhedra,'' Izv. Ross. Akad. Nauk, 69, No. 3, 96--121 (2004).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "31",
+     "text": "A. M. Raigorodskii, ''On the chromatic number of the space with the metric l q,'' Usp. Mat. Nauk, 59, No. 5, 161--162 (2004).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 2170120,
+      "msc": [
+       "05C15",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "A. M. Raigorodskii, ''On chromatic numbers of metric spaces.'' Chebyshev. Sb., 5, No. 1(9), 175--185 (2004).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "33",
+     "text": "A. M. Raigorodskii, ''On relationship between the Borsuk and Nelson-Erd\u00f6s-Hadwiger problems,'' Usp. Mat. Nauk, 60 (2005)",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 5268225,
+      "msc": [
+       "05D05",
+       "52C10",
+       "52A37",
+       "05C15",
+       "05C12",
+       "05A18"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "34",
+     "text": "A. M. Raigorodskii, ''The Erd\u00f6s-Hadwiger problem and chromatic numbers of finite geometric graphs,'' Mat. Sb., 196, No. 1 (2005).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 2210552,
+      "msc": [
+       "05C15",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2175,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "35",
+     "text": "A. M. Raigorodskii, ''Chromatic numbers of metric spaces,'' in: Proc. Inst. Math. of the National Academy of Sciences, Belarus (2005).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 2210552,
+      "msc": [
+       "05C15",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2175,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "36",
+     "text": "A. M. Raigorodskii, ''On Borsuk and Erd\u00f6s-Hadwiger's numbers,'' Mat. Zametki (2005).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 5268225,
+      "msc": [
+       "05D05",
+       "52C10",
+       "52A37",
+       "05C15",
+       "05C12",
+       "05A18"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "37",
+     "text": "A. M. Raigorodskii and Yu. A. Kalnishkan, ''On Borsuk's problem in \\(\\mathbb{R}\\)3,'' Mat. Zametki, 74, No. 1, 149--151 (2003).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "38",
+     "text": "A. M. Raigorodskii and A. A. Chernov, ''Borsuk's problem for certain classes of polyhedra,'' Chebyshev. Sb., 5, No. 2(10), 98--103 (2004).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "39",
+     "text": "A. S. Riesling, ''Borsuk's problem in three-dimensional spaces of constant curvature,'' Ukr. Geom. Sb., 11, 78--83 (1971).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "40",
+     "text": "K. Rogers, Packings and Coverings [Russian transl.], Mir, Noscow (1968).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "41",
+     "text": "A. A. Sapozhenko, ''On complexity of disjunctive normal forms obtained by using the gradient algorithm,'' Diskr. Anal., Novosibirsk, No. 21, 62--71 (1972).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "42",
+     "text": "V. E. Tarakanov, Combinatorial Problems and (0, 1)-Matrices [in Russian], Nauka, Moscow (1985).",
+     "zbmath": {
+      "author_codes": [
+       "tarakanov.v-e"
+      ],
+      "document_id": 4043856,
+      "msc": [
+       "05B20",
+       "05C35",
+       "05A15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": null,
+     "position": "43",
+     "text": "H. Hadwiger and H. Debrunner, Combinatorial Geometry of a Plane [Russian transl.], Nauka, Moscow (1965).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "44",
+     "text": "F. Harari, Theory of Graphs [Russian transl.], Mir, Moscow (1973).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1006/jcta.1996.0092",
+     "position": "45",
+     "text": "R. Ahlswede and L. H. Khachatrian, ''The complete nontrivial-intersection theorem for systems of finite sets,'' J. Combin. Theor. Ser. A, 76, 121--138 (1997).",
+     "zbmath": {
+      "author_codes": [
+       "ahlswede.rudolf",
+       "khachatrian.levon-h"
+      ],
+      "document_id": 934995,
+      "msc": [
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1996"
+     }
+    },
+    {
+     "doi": "10.1006/eujc.1995.0092",
+     "position": "46",
+     "text": "R. Ahlswede, L. H. Khachatrian, ''The complete intersection theorem for systems of finite sets,'' Eur. J. Combin., 18, 125--136 (1997).",
+     "zbmath": {
+      "author_codes": [
+       "khachatrian.levon-h",
+       "ahlswede.rudolf"
+      ],
+      "document_id": 986975,
+      "msc": [
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "47",
+     "text": "M. Aigner and G. M. Ziegler, Proofs from THE BOOK, Springer-Verlag Berlin (1998).",
+     "zbmath": {
+      "author_codes": [
+       "ziegler.gunter-m",
+       "aigner.martin.1"
+      ],
+      "document_id": 1188564,
+      "msc": [
+       "00A05",
+       "11-01",
+       "05-01",
+       "52-01",
+       "26-01"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1998"
+     }
+    },
+    {
+     "doi": "10.1016/0097-3165(91)90058-O",
+     "position": "48",
+     "text": "N. Alon, L. Babai, and H. Suzuki, ''Multilinear polynomials and Frankl-Ray-Chaudhuri-Wilson type intersection theorems,'' J. Combin. Theor. Ser. A, 58, 165--180 (1991).",
+     "zbmath": {
+      "author_codes": [
+       "suzuki.hiroshi",
+       "alon.noga",
+       "babai.laszlo"
+      ],
+      "document_id": 26016,
+      "msc": [
+       "05A20",
+       "11B39",
+       "06A12",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1991"
+     }
+    },
+    {
+     "doi": null,
+     "position": "49",
+     "text": "N. Alon and J. Spencer, The Probabilistic Method, Wiley-Interscience Ser. in Discr. Math. and Optimization (2000).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "50",
+     "text": "L. Babai and P. Frankl, Linear Algebra Methods in Combinatorics, Part 1, Department of Computer Science, The University of Chicago, Preliminary version 2, September 1992.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "51",
+     "text": "M. Benda and M. Perles, ''Colorings of metric space,'' Geombinatorics, 9, 113--126 (2000).",
+     "zbmath": {
+      "author_codes": [
+       "perles.micha-a"
+      ],
+      "document_id": 1406330,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": "10.1007/BF02122551",
+     "position": "52",
+     "text": "B. Bollob\u00e1s, ''The chromatic number of random graphs,'' Combinatorica, 8, 49--56 (1988).",
+     "zbmath": {
+      "author_codes": [
+       "bollobas.bela"
+      ],
+      "document_id": 4089577,
+      "msc": [
+       "05C15",
+       "05C80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1988"
+     }
+    },
+    {
+     "doi": null,
+     "position": "53",
+     "text": "B. Bollob\u00e1s, Random Graphs, Cambridge Univ. Press, Second Edition (2001).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "54",
+     "text": "V. G. Boltyanski, H. Martini and P. S. Soltan, Excursions into Combinatorial Geometry, Berlin-Heidelberg: Universitext, Springer-Verlag (1997).",
+     "zbmath": {
+      "author_codes": [
+       "martini.horst",
+       "boltyanskij.vladimir-grigorevich",
+       "soltan.petru"
+      ],
+      "document_id": 967669,
+      "msc": [
+       "52-01",
+       "52A30",
+       "52-02",
+       "52A35",
+       "52A37",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 9073,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "55",
+     "text": "K. Borsuk, ''\u00dcber die Zerlegung einer Euklidischen n-dimensionalen Vollkugel in n Mengen,'' Verh. Internat Math. Kongr., Z\u00fcrich, 2, 192 (1932).",
+     "zbmath": {
+      "author_codes": [
+       "borsuk.karol"
+      ],
+      "document_id": 2551023,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 0,
+      "year": "1932"
+     }
+    },
+    {
+     "doi": null,
+     "position": "56",
+     "text": "K. Borsuk, ''Drei S\u00e4tze \u00fcber die n-dimensionale euklidische Sph\u00e4re,'' Fundam. Math., 20, 177--190 (1933).",
+     "zbmath": {
+      "author_codes": [
+       "borsuk.karol"
+      ],
+      "document_id": 2544343,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 425,
+      "year": "1933"
+     }
+    },
+    {
+     "doi": null,
+     "position": "57",
+     "text": "J. Bourgain and J. Lindenstrauss, ''On covering a set in \\(\\mathbb{R}\\)d by balls of the same diameter,'' in: Geometric Aspects of Functional Analysis (J. Lindenstrauss and V. Milman, eds.), Lecture Notes in Math., 1469, Berlin: Springer-Verlag (1991), pp. 138--144.",
+     "zbmath": {
+      "author_codes": [
+       "bourgain.jean",
+       "lindenstrauss.joram"
+      ],
+      "document_id": 177380,
+      "msc": [
+       "46B20",
+       "46B07"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1991"
+     }
+    },
+    {
+     "doi": null,
+     "position": "58",
+     "text": "L. Danzer, ''On the kth diameter in E d and a problem of Gr\u00fcnbaum,'' Proc. Colloquium on Convexity, Copenhagen, (1965), p. 41.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "59",
+     "text": "N. G. de Bruijn and P. Erd\u00f6s, ''A colour problem for infinite graphs and a problem in the theory of relations,'' Proc. Koninkl. Nederl. Acad. Wet., Ser. A, 54, No. 5, 371--373 (1951).",
+     "zbmath": {
+      "author_codes": [
+       "de-bruijn.nicolaas-govert",
+       "erdos.pal"
+      ],
+      "document_id": 3068973,
+      "msc": [
+       "05C15",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6644,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": "10.1112/plms/s3-36.2.369",
+     "position": "60",
+     "text": "M. Deza, P. Erd\u00f6s, and P. Frankl, ''Intersection properties of systems of finite sets,'' Proc. London Math. Soc., 36, 369--384 (1978).",
+     "zbmath": {
+      "author_codes": [
+       "deza.michel-marie",
+       "frankl.peter",
+       "erdos.pal"
+      ],
+      "document_id": 3632483,
+      "msc": [
+       "05A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 628,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "61",
+     "text": "M. Deza, P. Erd\u00f6s, and N. M. Singhi, ''Combinatorial problems on subsets and their intersections,'' Adv. Math., Suppl. Stud., 1, 259--265 (1978).",
+     "zbmath": {
+      "author_codes": [
+       "singhi.navin-madhavprasad",
+       "erdos.pal",
+       "deza.michel-marie"
+      ],
+      "document_id": 3675897,
+      "msc": [
+       "05A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": "10.1137/0604042",
+     "position": "62",
+     "text": "M. Deza and P. Frankl, ''Erd\u00f6s-Ko-Rado theorem: 22 years later,'' SIAM J. Alg. Disc. Methods, 4, 419--431 (1983).",
+     "zbmath": {
+      "author_codes": [
+       "deza.michel-marie",
+       "frankl.peter"
+      ],
+      "document_id": 3833969,
+      "msc": [
+       "05A05",
+       "05C65",
+       "05-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 917,
+      "year": "1983"
+     }
+    },
+    {
+     "doi": "10.1112/jlms/s1-30.1.11",
+     "position": "63",
+     "text": "H. G. Eggleston, ''Covering a three-dimensional set with sets of smaller diameter,'' J. London Math. Soc., 30, 11--24 (1955).",
+     "zbmath": {
+      "author_codes": [
+       "eggleston.h-g"
+      ],
+      "document_id": 3110713,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3410,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": null,
+     "position": "64",
+     "text": "H. G. Eggleston, Convexity, Cambridge Univ. Press (1958).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2307/2305092",
+     "position": "65",
+     "text": "P. Erd\u00f6s, ''On sets of distances of n points,'' Am. Math. Mon., 53, 248--250 (1946).",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3098164,
+      "msc": [
+       "51-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1946"
+     }
+    },
+    {
+     "doi": null,
+     "position": "66",
+     "text": "P. Erd\u00f6s, ''My Scottish Book Problems,'' in: The Scottish Book, Mathematics from the Scottish Caf\u00e9 (R. D. Mauldin ed.), Birkh\u00e4user (1981), pp.35--43.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "67",
+     "text": "P. Erd\u00f6s, Chao Ko and R. Rado, ''Intersection theorems for systems of finite sets,'' J. Math. Oxford, 12(48) (1961).",
+     "zbmath": {
+      "author_codes": [
+       "rado.richard",
+       "erdos.pal",
+       "ke.zhao"
+      ],
+      "document_id": 3162924,
+      "msc": [
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 649,
+      "year": "1961"
+     }
+    },
+    {
+     "doi": null,
+     "position": "68",
+     "text": "P. Frankl, ''The Erd\u00f6s-Ko-Rado theorem is true for n = ckt,'' Combinatorics, Coll. Math. Soc. J. Bolyai 18, 365--375 (1978).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "69",
+     "text": "P. Frankl, ''Extremal problems and coverings of the space,'' Eur. J. Combin., 1, 101--106 (1980).",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter"
+      ],
+      "document_id": 3724490,
+      "msc": [
+       "05C15",
+       "05C35",
+       "05C65",
+       "05A05",
+       "05C70"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "1980"
+     }
+    },
+    {
+     "doi": "10.1007/BF02579457",
+     "position": "70",
+     "text": "P. Frankl and R. M. Wilson, ''Intersection theorems with geometric consequences,'' Combinatorica, 1, 357--368 (1981).",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter",
+       "wilson.richard-m"
+      ],
+      "document_id": 3784938,
+      "msc": [
+       "05C65",
+       "05A05",
+       "05C15",
+       "05C35",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "71",
+     "text": "Z. F\u00fcredi, ''Tur\u00e1n's type problems,'' in: Surveys in Combinatorics, Proc. of the 13th British Combinatorics Conference (A. D. Keedwell, ed.). Cambridge Univ. Press, London Math. Soc. Lecture Note Series, 166 (1991), pp. 253--300.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "72",
+     "text": "D. Gale, ''On inscribing n-dimensional sets in a regular n-simplex,'' Proc. Am. Math. Soc., 4, 222--225 (1953).",
+     "zbmath": {
+      "author_codes": [
+       "gale.david"
+      ],
+      "document_id": 3081096,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "1953"
+     }
+    },
+    {
+     "doi": null,
+     "position": "73",
+     "text": "J. Grey und B. Weissbach, Ein weiteres Gegenbeispiel zur Borsukschen Vermutung, Univ. Magdeburg, Fakult\u00e4t f\u00fcr Mathematik, Preprint 25 (1997).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "74",
+     "text": "P. M. Gruber and C. G. Lekkerkerker, Geometry of Numbers, North-Holland, Amsterdam (1987).",
+     "zbmath": {
+      "author_codes": [
+       "gruber.peter-manfred",
+       "lekkerkerker.cornelis-gerrit"
+      ],
+      "document_id": 3987367,
+      "msc": [
+       "11Hxx",
+       "11-02",
+       "52C07",
+       "11Jxx",
+       "52A20",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4161,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": "10.1017/S0305004100032849",
+     "position": "75",
+     "text": "B. Gr\u00fcnbaum, ''A simple proof of Borsuk's conjecture in three dimensions,'' Proc. Cambridge Philos. Soc., 53, 776--778 (1957).",
+     "zbmath": {
+      "author_codes": [
+       "grunbaum.branko"
+      ],
+      "document_id": 3122841,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3325,
+      "year": "1957"
+     }
+    },
+    {
+     "doi": null,
+     "position": "76",
+     "text": "B. Gr\u00fcnbaum, ''Borsuk's problem and related questions,'' Proc. Symp. Pure Math., 7, 271--284 (1963).",
+     "zbmath": {
+      "author_codes": [
+       "grunbaum.branko"
+      ],
+      "document_id": 3243107,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1963"
+     }
+    },
+    {
+     "doi": "10.1007/BF02568103",
+     "position": "77",
+     "text": "H. Hadwiger, ''\u00dcberdeckung einer Menge durch Mengen kleineren Durchmessers,'' Commun. Math. Helv., 18, 73--75 (1945/46); Mitteilung betreffend meine Note: ''\u00dcberdeckung einer Menge durch Mengen kleineren Durchmessers,'' Commun. Math. Helv., 19, 72--73 (1946/47).",
+     "zbmath": {
+      "author_codes": [
+       "hadwiger.hugo"
+      ],
+      "document_id": 3104657,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 389,
+      "year": "1945"
+     }
+    },
+    {
+     "doi": null,
+     "position": "78",
+     "text": "H. Hadwiger, ''Ungel\u00f6ste Probleme No. 20,'' Elem. Math., 12, 121 (1957).",
+     "zbmath": {
+      "author_codes": [
+       "hadwiger.hugo"
+      ],
+      "document_id": 3131567,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 1573,
+      "year": "1957"
+     }
+    },
+    {
+     "doi": null,
+     "position": "79",
+     "text": "H. Hadwiger, ''Ungel\u00f6ste Probleme No. 38,'' Elem. Math., 15, 130--131 (1960).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "80",
+     "text": "H. Hadwiger, ''Ungel\u00f6ste Probleme No. 40,'' Elem. Math., 16, 103--104 (1961).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF00147549",
+     "position": "81",
+     "text": "H. C. Hansen, ''Small universal covers for sets of unit diameter,'' Geom. Dedicata, 42, 205--213 (1992).",
+     "zbmath": {
+      "author_codes": [
+       "hansen.hans-christian"
+      ],
+      "document_id": 57583,
+      "msc": [
+       "52C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": "10.1007/BF01696777",
+     "position": "82",
+     "text": "E. Helly, ''\u00dcber Systeme abgeschlossener Mengen mit gemeinschaftlichen Punkten,'' Monatsh. Math., 37, 281--302 (1930).",
+     "zbmath": {
+      "author_codes": [
+       "helly.eduard"
+      ],
+      "document_id": 2564309,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 3416,
+      "year": "1930"
+     }
+    },
+    {
+     "doi": null,
+     "position": "83",
+     "text": "E. Helly, ''On a collection of convex bodies with common points,'' Russ. Math. Surv., 2, No. 2 (1936).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "84",
+     "text": "A. Heppes, ''T\u00e9rbeli ponthalmazok feloszt\u00e1sa kisebb \u00e1tm\u00e9r\u00f6j\u00fc r\u00e9szhalmazok \u00f6sszeg\u00e9re,'' A magyar tudom\u00e1nyos akad\u00e9mia, 7, 413--416 (1957).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF02028200",
+     "position": "85",
+     "text": "A. Heppes and P. R\u00e9v\u00e9sz, ''Zum Borsukschen Zerteilungsproblem,'' Acta Math. Acad. Sci. Hung., 7, 159--162 (1956).",
+     "zbmath": {
+      "author_codes": [
+       "heppes.aladar",
+       "revesz.pal"
+      ],
+      "document_id": 3122840,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 13,
+      "year": "1956"
+     }
+    },
+    {
+     "doi": "10.1016/S0012-365X(01)00202-3",
+     "position": "86",
+     "text": "A. Hinrichs, ''Spherical codes and Borsuk's conjecture,'' Discr. Math., 243, 253--256 (2002).",
+     "zbmath": {
+      "author_codes": [
+       "hinrichs.aicke"
+      ],
+      "document_id": 1718959,
+      "msc": [
+       "52A20",
+       "52C17",
+       "05B35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": null,
+     "position": "87",
+     "text": "A. Hinrichs and Ch. Richter, ''New sets with large Borsuk numbers,'' (2002) http://www.minet.uni-jena.de/hinrichs/paper/18/borsuk.pdf",
+     "zbmath": {
+      "author_codes": [
+       "hinrichs.aicke",
+       "richter.christian"
+      ],
+      "document_id": 1974989,
+      "msc": [
+       "52C17",
+       "52A20",
+       "52A37",
+       "05B35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "2003"
+     }
+    },
+    {
+     "doi": "10.1515/crll.1901.123.241",
+     "position": "88",
+     "text": "H. W. E. Jung, ''\u00dcber die kleinste Kugel, die eine r\u00e4umliche Figur einschliesst,'' J. Reine Angew. Math., 123, 241--257 (1901).",
+     "zbmath": {
+      "author_codes": [
+       "jung.heinrich-wilhelm-ewald"
+      ],
+      "document_id": 2662563,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 520,
+      "year": "1901"
+     }
+    },
+    {
+     "doi": "10.1090/S0273-0979-1993-00398-7",
+     "position": "89",
+     "text": "J. Kahn and G. Kalai, ''A counterexample to Borsuk's conjecture,'' Bull. Am. Math. Soc. (New Ser.), 29, No. 1, 60--62 (1993).",
+     "zbmath": {
+      "author_codes": [
+       "kahn.jeff-d",
+       "kalai.gil"
+      ],
+      "document_id": 431304,
+      "msc": [
+       "52A20",
+       "05D05",
+       "52A37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1661,
+      "year": "1993"
+     }
+    },
+    {
+     "doi": "10.1016/j.tcs.2004.02.010",
+     "position": "90",
+     "text": "J-H. Kang and Z. F\u00fcredi, ''Distance graphs on \\(\\mathbb{Z}\\)n with l 1-norm,'' Theor. Comput. Sci., 319, No. 1--3, 357--366 (2004).",
+     "zbmath": {
+      "author_codes": [
+       "kang.jeong-hyun",
+       "furedi.zoltan"
+      ],
+      "document_id": 2085495,
+      "msc": [
+       "05C15",
+       "05C12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 735,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "91",
+     "text": "G. Katona, T. Nemetz, and M. Simonovitz, ''On a graph problem of Turan'' [in Hungarian], Mat. Lapok, 15, 228--238 (1964).",
+     "zbmath": {
+      "author_codes": [
+       "simonovits.miklos",
+       "nemetz.tibor-o-h",
+       "katona.gyula-o-h"
+      ],
+      "document_id": 3224335,
+      "msc": [
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 549,
+      "year": "1964"
+     }
+    },
+    {
+     "doi": "10.1007/BF01898877",
+     "position": "92",
+     "text": "P. Katzarowa-Karanowa, ''\u00dcber ein euklidisch-geometrisches Problem von B. Gr\u00fcnbaum,'' Arch. Math., 18, 663--672 (1967).",
+     "zbmath": {
+      "author_codes": [
+       "katzarowa-karanowa.p"
+      ],
+      "document_id": 3245117,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 336,
+      "year": "1967"
+     }
+    },
+    {
+     "doi": null,
+     "position": "93",
+     "text": "D. Larman, ''Open problem 6. Convexity and Graph theory,'' (M. Rozenfeld and J. Zaks eds.), Ann. Discr. Math., 20, North-Holland, Amsterdam and New York (1984), p. 336.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF02566096",
+     "position": "94",
+     "text": "D. G. Larman, ''A note on the realization of distances within sets in Euclidean space,'' Comment. Math. Helv., 53, 529--535 (1978).",
+     "zbmath": {
+      "author_codes": [
+       "larman.david-g"
+      ],
+      "document_id": 3635024,
+      "msc": [
+       "52A37",
+       "05B30",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 389,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300004903",
+     "position": "95",
+     "text": "D. G. Larman and C. A. Rogers, ''The realization of distances within sets in Euclidean space,'' Mathematika, 19, 1--24 (1972).",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "larman.david-g"
+      ],
+      "document_id": 3389061,
+      "msc": [
+       "05B99",
+       "51M99",
+       "05B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": null,
+     "position": "96",
+     "text": "M. Lassak, ''An estimate concerning Borsuk's partition problem,'' Bull. Acad. Pol. Sci. Ser. Math., 30, 449--451 (1982).",
+     "zbmath": {
+      "author_codes": [
+       "lassak.marek"
+      ],
+      "document_id": 3812415,
+      "msc": [
+       "52C17",
+       "52A37",
+       "52A20",
+       "05B40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1664,
+      "year": "1982"
+     }
+    },
+    {
+     "doi": "10.1007/BF01900515",
+     "position": "97",
+     "text": "H. Lenz, ''Zur Zerlegung von Punktmengen in solche kleineren Durchmessers,'' Arch. Math., 6, No. 5, 413--416 (1955).",
+     "zbmath": {
+      "author_codes": [
+       "lenz.hanfried"
+      ],
+      "document_id": 3110714,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 336,
+      "year": "1955"
+     }
+    },
+    {
+     "doi": "10.1007/BF01900521",
+     "position": "98",
+     "text": "H. Lenz, ''\u00dcber die Bedeckung ebener Punktmengen durch solche kleineren Durchmessers,'' Arch. Math., 4, 34--40 (1956).",
+     "zbmath": {
+      "author_codes": [
+       "lenz.hanfried"
+      ],
+      "document_id": 3122170,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 336,
+      "year": "1956"
+     }
+    },
+    {
+     "doi": "10.1016/0095-8956(88)90053-6",
+     "position": "99",
+     "text": "N. Linial, R. Meshulam, and M. Tarsi, ''Matroidal bijections between graphs,'' J. Combin. Theor. Ser. B, 45, No. 1, 31--44 (1988).",
+     "zbmath": {
+      "author_codes": [
+       "linial.nathan",
+       "meshulam.roy",
+       "tarsi.michael"
+      ],
+      "document_id": 4193739,
+      "msc": [
+       "05C99",
+       "05B99",
+       "05B35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 480,
+      "year": "1988"
+     }
+    },
+    {
+     "doi": "10.1007/s000100050074",
+     "position": "100",
+     "text": "H. Martini and V. Soltan, ''Combinatorial problems on the illumination of convex bodies,'' Aequationes Math., 57, 121--152 (1999).",
+     "zbmath": {
+      "author_codes": [
+       "martini.horst",
+       "soltan.valeriu"
+      ],
+      "document_id": 1320493,
+      "msc": [
+       "52A37",
+       "52A40",
+       "52-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1543,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "101",
+     "text": "A. Nilli, ''On Borsuk's problem,'' Contemp. Math., 178, 209--210 (1994).",
+     "zbmath": {
+      "author_codes": [
+       "alon.noga"
+      ],
+      "document_id": 718861,
+      "msc": [
+       "52A20",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": null,
+     "position": "102",
+     "text": "J. P\u00e1l, ''\u00dcber ein elementares Variationsproblem,'' Danske Videnskab. Selskab., Math.-Fys. Meddel, 3, No. 2 (1920).",
+     "zbmath": {
+      "author_codes": [
+       "pal.j-f"
+      ],
+      "document_id": 2607759,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 0,
+      "year": "1920"
+     }
+    },
+    {
+     "doi": "10.1016/0012-365X(92)90319-B",
+     "position": "103",
+     "text": "C. Payan, ''On the chromatic number of cube like graphs,'' Discr. Math., 103, 271--277 (1992).",
+     "zbmath": {
+      "author_codes": [
+       "payan.charles"
+      ],
+      "document_id": 69890,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": null,
+     "position": "104",
+     "text": "J. Petersen, F\u00e4rbung von Borsuk-Graphen in niedriger Dimension, Diplomarbeit, TU Berlin (1998).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "105",
+     "text": "O. Pikhurko, ''Borsuk's conjecture fails in dimensions 321 and 322,'' e-print: arXiv: math.CO/0202112, 2002.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF02986745",
+     "position": "106",
+     "text": "A. M. Raigorodskii, ''The Borsuk partition problem: the seventieth anniversary,'' Mathematical Intelligencer, 26, No. 4, 4--12 (2004).",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 2170562,
+      "msc": [
+       "52A20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 264,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": "10.2307/1969393",
+     "position": "107",
+     "text": "R. Rankin, ''On the closest packing of spheres in n dimensions,'' Ann. Math., 48, 1062--1081 (1947).",
+     "zbmath": {
+      "author_codes": [
+       "rankin.robert-alexander"
+      ],
+      "document_id": 3046272,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1947"
+     }
+    },
+    {
+     "doi": null,
+     "position": "108",
+     "text": "D. K. Ray-Chaudhuri and R. M. Wilson, ''On t-designs,'' Osaka J. Math., 12, 735--744 (1975).",
+     "zbmath": {
+      "author_codes": [
+       "ray-chaudhuri.dijen-k",
+       "wilson.richard-m"
+      ],
+      "document_id": 3532974,
+      "msc": [
+       "05B30",
+       "05B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 613,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "109",
+     "text": "F. Reuleaux, Lehrbuch der Kinematik I. Vieweg, Braunschweig (1875).",
+     "zbmath": {
+      "author_codes": [
+       "reuleaux.franz"
+      ],
+      "document_id": 2715959,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 0,
+      "year": "1875"
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300004083",
+     "position": "110",
+     "text": "C. A. Rogers, ''Covering a sphere with spheres,'' Mathematika, 10, 157--164 (1963).",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose"
+      ],
+      "document_id": 3254638,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1963"
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300008445",
+     "position": "111",
+     "text": "C. A. Rogers, ''Symmetrical sets of constant width and their partitions,'' Mathematika, 18, 105--111 (1971).",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose"
+      ],
+      "document_id": 3360902,
+      "msc": [
+       "52C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1971"
+     }
+    },
+    {
+     "doi": null,
+     "position": "112",
+     "text": "C. A. Rogers, ''Some problems in the geometry of convex bodies. The Geometric Vein,'' in: The Coxeter Festschrift (C. Davis, B. Gr\u00fcnbaum, and F. A. Sherk, eds.), Springer-Verlag, New York (1981), pp. 279--284.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "113",
+     "text": "F. Schiller, Zur Berechnung und Absch\u00e4tzung von F\u00e4rbungszahlen und der -Funktion von Graphen, Diplomarbeit, TU Berlin (1999).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "114",
+     "text": "J. Schopp, ''Die Abdeckung ebener Bereiche mit konstanten Durchmessern durch drei Kreise von kleinerem Durchmesser,'' Vortrag, gehalten auf der Geometrie-Tegen in Tihany (Ungarn) (1965).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300015175",
+     "position": "115",
+     "text": "O. Schramm, ''Illuminating sets of constant width,'' Mathematika, 35, 180--189 (1988).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "116",
+     "text": "A. Soifer, ''Chromatic number of the plane: a historical essay,'' Geombinatorics, 13--15 (1991).",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 865987,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "1991"
+     }
+    },
+    {
+     "doi": null,
+     "position": "117",
+     "text": "A. Soifer, Mathematical Coloring Book, Center for Excellence in Mathematical Education (1997).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "118",
+     "text": "P. Tur\u00e1n, ''Egy grafelmeletiszelsoertek feladatrol,'' Mat. Fiz. Lapok, 48, 436--452 (1941).",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "119",
+     "text": "B. Weissbach, ''Polyhedral covers,'' Collect. Math. Soc. J. Bolyai, 48 (Intuitive Geometry), North-Holland, Amsterdam et al. (1987), pp. 639--646.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "120",
+     "text": "B. Weissbach, ''Sets with large Borsuk number,'' Beitr. Alg. Geom., 41, 417--423 (2000).",
+     "zbmath": {
+      "author_codes": [
+       "weissbach.bernulf"
+      ],
+      "document_id": 1505614,
+      "msc": [
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 269,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": "10.1007/BF02579226",
+     "position": "121",
+     "text": "R. M. Wilson, ''The exact bound in the Erd\u00f6s-Ko-Rado theorem,'' Combinatorica, 4, 247--257 (1984).",
+     "zbmath": {
+      "author_codes": [
+       "wilson.richard-m"
+      ],
+      "document_id": 3885946,
+      "msc": [
+       "05C35",
+       "05C65",
+       "05A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1984"
+     }
+    },
+    {
+     "doi": null,
+     "position": "122",
+     "text": "G. M. Ziegler, ''Lectures on 0/1-polytopes,'' in: Polytopes-Combinatorics and Computation (G. Kalai and G. M. Ziegler, eds.), DMV, seminar 29, Birkh\u00e4user, Basel (2000), pp. 1--44.",
+     "zbmath": {
+      "author_codes": [
+       "ziegler.gunter-m"
+      ],
+      "document_id": 1538119,
+      "msc": [
+       "52B12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": "10.1007/3-540-45506-X_12",
+     "position": "123",
+     "text": "G. M. Ziegler, ''Coloring Hamming graphs, optimal binary codes, and the 0/1-Borsuk problem in low dimensions,'' Lect. Notes Comput. Sci., 2122, 159--171 (2001).",
+     "zbmath": {
+      "author_codes": [
+       "ziegler.gunter-m"
+      ],
+      "document_id": 1775058,
+      "msc": [
+       "52C99",
+       "05C15",
+       "94B99",
+       "52-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2001"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "604-623",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1072-3374",
+        "type": "print"
+       },
+       {
+        "number": "1573-8795",
+        "type": "electronic"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 234985,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer US, New York, NY",
+      "series_id": 1955,
+      "short_title": "J. Math. Sci., New York",
+      "title": "Journal of Mathematical Sciences (New York)",
+      "volume": "154",
+      "year": "2008"
+     }
+    ],
+    "source": "J. Math. Sci., New York 154, No. 4, 604-623 (2008); translation from Sovrem. Mat., Fundam. Napravl. 23, 147-164 (2007)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Around Borsuk's hypothesis"
+   },
+   "year": "2008",
+   "zbmath_url": "https://zbmath.org/5497397"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.11080050468444824,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T21:56:46Z"
+ }
+}
