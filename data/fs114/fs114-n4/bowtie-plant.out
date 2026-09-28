@@ -1,0 +1,30 @@
+FAIL geo: |q1 - top| = 1
+OK   geo: |q1 - P90| = 1
+OK   geo: |e(90) + e(30) - P90| = 0 (P90 = e(90) + e(30))
+OK   geo: |q1 - q2| = 1
+OK   geo: q1 + q4 = 0
+OK   geo: |q1 - q3|^2 = 3
+OK   own: e(120) . (p - q1) = 0 and e(120) . (p - q4) = 0
+OK   own: |x|^2 < 1
+OK   own: |x - q2|^2 > 1 (outside t1)
+OK   own: |x - q4|^2 > 1 (outside t3)
+OK   own: x within 30 deg of e(90) seen from p
+OK   arc: phi=105: |y|^2 > 1
+OK   arc: phi=105: |y - top|^2 < 1
+OK   arc: phi=120: |y|^2 > 1
+OK   arc: phi=120: |y - top|^2 < 1
+OK   arc: phi=135: |y|^2 > 1
+OK   arc: phi=135: |y - top|^2 < 1
+FAIL horn: |z - top|^2 > 1
+FAIL horn: |z' - q1|^2 > 1
+OK   horn: direction of z' from top strictly inside (60, 120)
+FAIL horn: |z - z'| = 1
+FAIL cones: q1 - top is e(-30)
+FAIL cones: q3 - top is e(210)
+OK   cones: e(240), e(60) orthogonal to e(-30); e(300), e(120) orthogonal to e(210)
+OK   cones: t1 cone at p is [300, 60]: e(60) . (p - q2) = 0, e(300) . (p - q1) = 0
+OK   l60: |w| > 1
+OK   l60: w in B(A,1), B(B,1), B(C,1)
+OK   l60: |(11/10)A - B| > 1
+OK   l60: |A - C| = |B - C| = |A - B| = 1
+RESULT 6 FAIL
