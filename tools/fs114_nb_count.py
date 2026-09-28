@@ -78,7 +78,7 @@ def euler_data(m, n, edges, mu_mode='excess'):
     E, darts, out, faces, face_of, tail, rev = torus_map(m, n, edges)
     V, Ecount, F = len(out), len(E), len(faces)
     deg = {v: len(ds) for v, ds in out.items()}
-    degM, mu, mu_alt = [], [], []
+    degM, mu, mu_alt, mu_pair = [], [], [], []
     for f, orb in enumerate(faces):
         L = []
         for d in orb:  # corner of f at tail(d)
@@ -95,7 +95,8 @@ def euler_data(m, n, edges, mu_mode='excess'):
         for g in L:
             cnt[g] = cnt.get(g, 0) + 1
         mu_alt.append(sum(1 for g, c in cnt.items() if g != f and c > 1))
-    return dict(V=V, E=Ecount, F=F, deg=deg, degM=degM, mu=mu, mu_alt=mu_alt)
+        mu_pair.append(sum(c - 1 for g, c in cnt.items() if g != f))
+    return dict(V=V, E=Ecount, F=F, deg=deg, degM=degM, mu=mu, mu_alt=mu_alt, mu_pair=mu_pair)
 
 
 ALL = lambda i, j: True
@@ -114,7 +115,7 @@ def check_euler(plant=None):
     for name, m, n, edges in MAPS:
         D = euler_data(m, n, edges)
         chi = D['V'] - D['E'] + D['F']
-        mu = sum(D['mu_alt']) if plant == 'mu_alt' else (0 if plant == 'drop_mu' else sum(D['mu']))
+        mu = {'mu_alt': sum(D['mu_alt']), 'mu_pair': sum(D['mu_pair']), 'drop_mu': 0}.get(plant, sum(D['mu']))
         seven = 6 if plant == 'seven_six' else 7
         rows = []
         for k in (5, 6, 7):
@@ -125,11 +126,11 @@ def check_euler(plant=None):
         bad += not ok
         degs = sorted(set(D['deg'].values()))
         print(f"{'OK ' if ok else 'BAD'} {name:10s} {m}x{n}: V={D['V']} E={D['E']} F={D['F']} chi={chi} degrees={degs} "
-              f"mu={sum(D['mu'])} mu_alt={sum(D['mu_alt'])} identity(k=5,6,7)={rows}")
+              f"mu={sum(D['mu'])} mu_alt={sum(D['mu_alt'])} mu_pair={sum(D['mu_pair'])} identity(k=5,6,7)={rows}")
     return bad
 
 
-def check_algebra():
+def check_algebra(cap=2):
     bad = 0
     # N114-EULER reduces to Euler: sum_v [d(d-2) - (d-2)(d-3)] = 3 sum_v (d-2) = 6F  (sum d = 2E, E = V + F)
     for d in range(2, 12):
@@ -155,6 +156,9 @@ def check_algebra():
             bad += (need - Ep) < 3 * V6 - V4
             full_ok = need <= Ep + 2 * (5 * F - 2 * Ep)
             bad += full_ok != (V4 >= 3 * V6)
+        # stage 2, NB-ARCS: at k = 6 the (A) supply the count forces is need - 2 sum_x a(x) = E' - V4 + 3 V6, an identity
+        if F > 0:
+            bad += (F + 2 * V4 + 6 * V5 + 12 * V6) - cap * (5 * F - 2 * Ep) != Ep - V4 + 3 * V6
     return bad
 
 
@@ -163,6 +167,8 @@ if __name__ == '__main__':
     if '--plant' in sys.argv:
         plant = sys.argv[sys.argv.index('--plant') + 1]
     b1 = check_euler(plant)
-    b2 = check_algebra() if plant is None else 0
+    b2 = check_algebra() if plant is None else (check_algebra(cap=3) if plant == 'absent3' else 0)
+    if plant == 'absent3':
+        b1 = 0
     print(f'EULER maps failing: {b1}; algebra failures: {b2}')
     sys.exit(1 if (b1 or b2) else 0)

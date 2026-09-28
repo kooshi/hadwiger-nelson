@@ -5,7 +5,8 @@
 `data/fs114/briefs/STANDING-RULES.md`. Touches only this file, `data/fs114/fs114-nb/`, `tools/fs114_nb_*.py`. Grades are `CLAUDE.md` § Notation's;
 "minds" counts independent derivations. Every verdict in stage 1 is derived from the statements alone, before the side's record was opened.*
 
-**Status:** Stage 1 — SAVED (blind verdicts on all ten statements, the controls, the positive control).
+**Status:** Stage 1 — SAVED (blind verdicts on all ten statements, the controls, the positive control). Stage 2 — SAVED (the side's record read;
+divergences listed; five change a verdict).
 
 ## Theorems this phase proved
 
@@ -22,6 +23,7 @@
 | NB-DUAL | Sirgedas's 80%: unit-arc edges `≥ Σ_v d(d−3) = 2F + 2V₅ + 6V₆` of `E′ = 2.5F`; with absent colours `Σ_v (d−3) = (F + Σa)/2` | [hand] | 1 | §1.2 item 9 |
 | NB-VOR | A valid map's closed classes realise distance 1 in every closed disc of radius 3 (three cases); Voronov's argument cannot refute a valid map: the band is what closedness buys | [hand] | 1 | §1.2 item 6 |
 | NB-TOP | Thomassen's topological steps hold for every valid map in the plane after one colour-free repair (holes as 1-separators with finite interiors); "`M − x` connected" holds at a pinch point | [hand] | 1 | §1.2 item 7 |
+| NB-ARCS | (stage 2) On a non-Siamese valid six-map cellular on a torus with `μ = 0`, at most `V₄ − 3V₆` edges fail to be tactic arcs: `A ≥ E′ − V₄ + 3V₆` (the count's demand minus the absent colours' capacity, an identity) | [hand; tools exact] | 1 | §2.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -280,3 +282,57 @@ without niceness's distance `> 1`.
 meet the tile inequality with equality. The hexagonal seven-colouring passes every statement and names where six is spent: edge-rainbow `deg_D ≤ k − 1`.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the side's record against my verdicts
+
+*Read after stage 1's commit (`85849798`): `plans/FS114-N-proof.md` in full (stage 1, its only stage at this HEAD), `tools/fs114_n_count.py` and
+`tools/fs114_n_quotes.py` (read; the count tool re-run, identical, `data/fs114/fs114-nb/side-count-rerun.out`; its plant re-run, fires as described), and
+the plan's §5.3 (the registrations). Addresses: "N §x" is `plans/FS114-N-proof.md`, "NB §x" this record.*
+
+### 2.1 Quotation check of the instance against the side's record
+
+The ten statements in `data/fs114/briefs/NB114-instance.md` match N's "Theorems this phase proved" table word for word, except: (i) the instance's term
+"A **repeat at `x`** is a pair `y ≠ z` of tiles of one colour in `N[x]`" against N's header "a **repeat** at `x` is a colour carried by two members of
+`N[x]`" — see D9; (ii) the instance calls anchoring "FS-112's statement"; N §1.3 derives it ("Two facts used throughout (derived here)"). Neither changes a
+statement I judged.
+
+### 2.2 Divergences (each with both addresses)
+
+| # | item | the side (N) | mine (NB) | kind | changes a verdict? |
+|---|---|---|---|---|---|
+| D1 | **C114-FIVE-COUNT** (the positive control) | "C114-FIVE-COUNT is a GAP at (B)"; "the count yields five impossible only once (B) repeats are bounded below `F + V₄ + 4V₅`" (N theorems table, N114-FIVE; N §1.4 (4); N §1.5) | **TRUE**: a (B) repeat's colour is absent from `x`'s edge-neighbourhood (a present colour's second tile is an (A) partner at the arc's unique centre, and two of them would touch), an absent colour carries at most 3 tiles (pairwise unit contacts), so (B) excess `≤ 2Σa = 4F − 4V′` against `≥ F + V₄ + 4V₅`: impossible (NB §1.2 item 3, NB-ABSENT) | **truth** | **yes** — GAP → TRUE; the control passes, and N's stated reversal condition ("a derivation that (B) repeats cannot be bounded even at five colours") is answered the other way |
+| D2 | **C114-DUAL-COUNT** | "MISSTATED as "emits" (each of a quad's four repeats is (A) or (B); demand `2n` exact)" (N §1.5) | **TRUE** as "at least 80%, equal iff no vertex of degree 5 or 6": with five edge-neighbours at six colours no colour is absent, so no (B) repeat exists and every quad's four repeats are (A) — "emits" is exact (NB §1.2 item 9) | **truth** | **yes** — MISSTATED → TRUE |
+| D3 | **C114-THOM-TOP**, pinch clause | "`M − x` is connected" fails at "a pinch point (its boundary visits a vertex twice): the tiles in the pocket form a component of `M − x`" (N §1.4 (3) (b)) | **FALSE at a pinch point**: the pocket's tile at the pinch vertex `v` and an outside tile at `v` both contain `v` in their closures, so they are `M`-adjacent; the face is an open disc with one boundary walk and `D₁(x)` is connected. Fails only at a hole (a boundary component disjoint from the outer one) (NB §1.2 item 7) | **truth** (one clause) | **yes** (with D4) |
+| D4 | **C114-THOM-TOP**, the repair | "repairs it when pockets hold boundedly many faces … in a non-Siamese map … at most 12 per colour, 72 in all … with Siamese pairs the count is unbounded and (ii) fails"; verdict "GAP at "`M − x` connected"" (N §1.4 (3); N §1.5) | **TRUE with a colour-free repair**: in the plane every use of Thomassen's (ii) (the 6k bounds: ext's existence and uniqueness, maximal 2-separators, the diameter contradictions) needs only that a bounded region holds finitely many tiles — local finiteness; holes are 1-separators with finite interiors. The topological steps hold for every valid map, Siamese or not; Thomassen's route fails on valid maps only at the rainbow step (NB §1.2 item 7) | **truth** | **yes** — GAP → TRUE (E5 scored differently by the two minds) |
+| D5 | **N114-COMPACT** at one `K` | "The limit is locally finite with complexity `≤ K` (the bounds are closed conditions)" (N §1.4 (1)) | "≤ `K` tiles per unit disc" is **not** closed: a tile may pinch into several faces in the limit; TRUE with `O(K²)` on the map side, or with complexity counted as arcs per unit disc (VW-CPT; `plans/FS107-derivation.md` W-EQ-K's verdict names the same per-tile GAP); TRUE as stated quantified over all `K` (NB §1.2 item 5) | scope (a complexity bound read as closed) | **yes** at a fixed `K` (TRUE → TRUE with `K′ = O(K²)`); no for the family |
+| D6 | **N114-VOR** | TRUE as stated: "every open disc of radius 3 holds a same-colour unit contact (a tile of diameter exactly 1, or two same-colour tiles at distance exactly 1)" (N §1.4 (2)) | **MISSTATED**: Voronov's `U₃(0)` is the closed disc ("Denote by Ur (x) closed unit disc of radius r centered at x."), and the list omits a close same-colour pair with `diam(T ∪ T′) = 1` realised across it (NB §1.2 item 6) | scope + wording | **yes** (TRUE → MISSTATED); C114-VOR's verdict (fails at the band / C-CS-1's step (c)) agrees |
+| D7 | **N114-EULER**'s `μ` | "`μ ≥ 0` counting repeated contacts between one pair of faces (0 when faces meet at most once)"; checked only on five maps with `μ = 0` (N theorems table; N §1.4 (5); `tools/fs114_n_count.py`) | exact with `μ_f` = excess meetings **including a face's meetings with itself**; the pair-multiplicity reading fails on exactly the 5 of my 17 maps where a face meets itself, the "distinct neighbours met twice" reading on 7 (`tools/fs114_nb_count.py`, plants `mu_pair`, `mu_alt`) | scope (definition of `μ`) | no — every use is at `μ = 0`, where all readings agree |
+| D8 | **C114-RAINBOW**'s (B) | "realised locally by formula (a regular hexagon of diameter 1, half-planes beyond two opposite corners)"; "Exact by hand; a fragment, not a map." (N114-RB) | MISSTATED, agreed. N's "fragment" exhibits only the far pair `{y, z}` across a diameter-1 hexagon; no tile at `p` or `q` between `x` and `y`, no other neighbour of `x`, no colouring is given, so it is not a valid fragment on a disc. (A regular hexagon with six edge-neighbours is itself impossible at six non-Siamese colours, edge-rainbow — its neighbours must wrap corners.) What is shown is "(B) is not excluded by the pair's geometry"; its realisation is open, as NB §1.2 item 9 says | grade | no (the verdict stands on "not excluded") |
+| D9 | "repeat" | a colour carried by two members of `N[x]` (N header) | the pigeonhole "each face needs at least `deg_M − (k − 1)` repeats" holds for pairs or excess, **not for colours** (a colour with three members absorbs two excess — in the non-Siamese class exactly a (B) triangle); N's counts are right read as excess (NB §1.2 item 3) | wording | no |
+| D10 | uniform radius, `R + 3` | "A radius `R` admitting no valid fragment of any complexity is C-LOCAL's radius"; DENSE3 "local, radius 3" at [hand] (N §1.4 (1)) | agreed in substance; the uniform radius exceeds a NO's step radius by the chain of offsets (N's own `R + 3` is the instance); DENSE3's reading radius is `1 + r_b`, `r_b` the base's, not re-derived by either mind — [reading] for that line; `R + 3` holds for `r_b ≤ R + 2` (NB §1.2 item 5) | grade | no |
+| D11 | anchoring | "four colours, or a colour repeated — `q ∈ F ∪ R`" (N §1.3) | TRUE; needs "repeated" to count adjacent sectors unless adjacent same-colour tiles are merged — N's header merges them, so the readings coincide (NB §1.2 item 0) | wording | no |
+| D12 | **N114-CUBIC**'s proof | via N114-RD's anchoring (N §1.4 (5)) | via Euler and edge-rainbow alone (NB §1.2 item 8); same verdict | route | no |
+
+**Agreed, verdict and scope:** N114-FAR, N114-RD (my reading radius `1 + 1/√3` about `x`'s Jung centre sharpens N's `2`), C114-EDGE-RAINBOW, N114-FIVE's three
+clauses (N's "(A) ≤ E" is argued per arc; the per-edge form needs that the whole of `cl x ∩ cl y` lies on `ω(q)`, which N's RD proof contains: "every point of
+`cl y ∩ cl x` is at distance exactly 1 from every point of `cl z ∩ cl x`"), N114-ROOM (I sharpen it, D1's step), N114-CUBIC, C114-VOR's failing step.
+
+### 2.3 What D1 does to route T (a derived consequence, one mind)
+
+With NB-ABSENT in the count, the six-colour inequality is exact to the edge. Summing `3 deg_D(x) + Σ_{v∈∂x}(d(v) − 3) ≤ 15 + A_x` gives, identically,
+**`A ≥ E′ − V₄ + 3V₆`** (NB-ARCS; `tools/fs114_nb_count.py` checks `need − 2Σa = E′ − V₄ + 3V₆` as an identity, the plant `absent3` breaks it). So on a
+non-Siamese valid six-map cellular on a torus with `μ = 0`, **every edge but at most `V₄ − 3V₆` is a tactic arc** — a whole unit arc, `x` inner, centred at a
+four-colour vertex where a tile of the outer colour touches `x` alone — and `V₄ < 3V₆` is excluded outright. N's reading "The kills must be geometric — how many
+(A) arcs, of what length, a four-colour vertex of degree 4 can centre … an upper bound is the missing object" (N §1.4 (5)) is right, and the count now says
+exactly how much the kill must remove: more than `V₄ − 3V₆` edges' worth of tactic arcs. Sirgedas's 80% is the case `V₅ = V₆ = 0`, `a ≡ 0`
+(`A ≥ E′ − F/2 = 4E′/5`). Where the plane beyond the strip is spent: the strip's arches meet their tile inequality with equality, its edge tiles do not close
+up — the count is a closed-surface statement and the strip, a cylinder with boundary, is outside it.
+
+### 2.4 The registrations I bear on (plan §5.3, now open to me)
+
+- **E5** (C114-THOM-TOP TRUE, p 0.7): N says GAP, I say TRUE with a colour-free repair (D3, D4) — the two minds disagree; the close decides.
+- **E6** (C114-RAINBOW TRUE as stated, p 0.5): not met — both minds MISSTATED.
+- **E15** (a blind verifier finds a divergence of truth, p 0.6): **met** — D1–D4 (and D6's scope).
+- **E14** (G83's reading survives): both minds' route reads `F ∪ R` (every non-Siamese repeat anchored there; the count's demand paid at four-colour vertices).
+
+## Stage 2 — SAVED

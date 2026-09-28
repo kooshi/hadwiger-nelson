@@ -1,0 +1,8 @@
+square grid 8x8: V=64 E=128 F=64 d=[4] s=[4] deg_M=[8] E0=True E1=True E2=True (128 = 128) multiplicities=0 | k=6: deficit 192 = 3 F, deficit/E = 3/2 | k=5: deficit 256 = 4 F, deficit/E = 2
+   Sirgedas's five-colour case: k=5 deficit/E = 2 (his '200%')
+honeycomb (bricks) 8x8: V=64 E=96 F=32 d=[3] s=[6] deg_M=[6] E0=True E1=True E2=True (0 = 0) multiplicities=0 | k=6: deficit 32 = 1 F, deficit/E = 1/3 | k=5: deficit 64 = 2 F, deficit/E = 2/3
+triangular 8x8: V=64 E=192 F=128 d=[6] s=[3] deg_M=[12] E0=True E1=True E2=True (768 = 768) multiplicities=0 | k=6: deficit 896 = 7 F, deficit/E = 14/3 | k=5: deficit 1024 = 8 F, deficit/E = 16/3
+square + alternate diagonals 8x8: V=64 E=160 F=96 d=[4, 6] s=[3, 4] deg_M=[10, 12] E0=True E1=True E2=True (448 = 448) multiplicities=0 | k=6: deficit 544 = 17/3 F, deficit/E = 17/5 | k=5: deficit 640 = 20/3 F, deficit/E = 4
+prismatic pentagonal 6x4: V=72 E=120 F=48 d=[3, 4] s=[5] deg_M=[7] E0=True E1=True E2=True (48 = 48) multiplicities=0 | k=6: deficit 96 = 2 F, deficit/E = 4/5 | k=5: deficit 144 = 3 F, deficit/E = 6/5
+   Sirgedas's case: V3 = 48 (F = 48), V4 = 24 (F/2 = 24); k=6 deficit/E = 4/5 (his '80%')
+ALL IDENTITIES HOLD
