@@ -4,7 +4,7 @@
 rules `data/fs112/briefs/STANDING-RULES.md`. Touches only this file, `data/base-v/`, `tools/base_v_*.py`. Grades are `CLAUDE.md` § Notation's;
 "minds" counts independent derivations.*
 
-**Status:** Stage 1a — SAVED (statements 1–3, blind). Stage 1b — SAVED (statement 4, blind). Stage 2 (comparison) below when saved.
+**Status:** Stage 1a — SAVED (statements 1–3, blind). Stage 1b — SAVED (statement 4, blind). Stage 2 — SAVED (comparison, fences lifted).
 
 ## Theorems this phase proved
 
@@ -19,6 +19,7 @@ rules `data/fs112/briefs/STANDING-RULES.md`. Touches only this file, `data/base-
 | BV-ND | NoDouble: two points `x₀ ∈ ω(u₁)`, `y₀ ∈ ω(u₂)` at distance 1 cannot both switch between the same pair {α, β} in opposite senses along the unit-distance linkage, when at each the two sectors traversed are adjacent (plain point, cubic vertex, degree-4 bichromatic vertex); **holds with unit arcs**, at cusps | [hand; exact identities] | 1 | §1b.2 |
 | BV-L3 | Lemma 3, a.e., curved, cusps and double cusps at `u₁, u₂`: no two points with the same multicolour at distance in (1, 2) whose unit circles carry proper finite circle colourings in the complementary triple; route: the unit-distance four-bar linkage and the band lemma, no angle at `u₁, u₂` used | [hand; exact identities] | 1 | §1b.3 |
 | BV-C3 | Corollary 3 at cusp and double-cusp vertices, under Condition 5 (the two {complement}-strips cross near an intersection point) | [hand] | 1 | §1b.4 |
+| BV-ND1 | (stage 2) BV-ND under the 60° rotation of one circle: two switch points of `ω(u)` at distance 1 with the same pair, switching in opposite senses, are impossible at plain or cubic points; with unit arcs, no strip used. So BV-H1's input (ii) holds under H with no Condition 5 | [hand] | 1 (not blind to CB's (ii)) | §2.3 |
 
 ## Stage 1a — SAVED (statements 1–3, blind)
 
@@ -255,6 +256,134 @@ not close. A second-circle route looks promising: a vertex `{1, 2, 4}` near `ω(
 `{5, 6}`-points pairwise `> 1` apart; an endpoint `{4, 5, 6}` in `(1, 2)` from `u` is (a). But it needs the endpoint positions, which is Prop. 19(b)'s
 content. **So Lemma 4 at cusps: GAP at Prop. 19(b) and the final selection, as far as this blind stage goes.** Stage 2 reads the Appendix and asks
 whether its steps use anything a horn breaks.
+
+## Stage 2 — SAVED (the comparison; fences lifted after ea14826c)
+
+### 2.0 What I read, in order (03:59 UTC (next day) onward)
+
+The PDF's printed proofs: Lemma 5, Props 16–17, Lemma 6 (§7.1), §8–9, the Appendix (Props 18–19, Lemma 4), §6.1 (Props 12–13, Lemma 3, Corollary 4).
+Then `plans/FS110-CD-verification.md` §2 (Stage 2); `plans/FS112-NB3-verification.md` §1.4 (N3-FAIL, N3-I/II, N3-BASE) and §2.3; `plans/FS110-N-proof.md`
+N2-ROT, N2-HEX; `plans/FS110-NB3-verification.md` §2.4 and item 5; `plans/FS110-derivation.md` (CB-LEMMA3, CUSP-BASE, CE1–CE7);
+`plans/FS110-CB-verification.md` D1–D6; `plans/FS110-CC-verification.md` C4–C6; `plans/FS110-CE-verification.md` E1. Not read:
+`plans/FS112-N-proof.md`, `plans/FS112-unit-arc-half.md` (beyond grep hits), the transcripts, `chats-bak/`.
+
+**Quotations deferred at 1a.0, now checked:** Prop. 17's last step ("Finally, similar to the proof of Proposition 15, we conclude that the boundary between colors 4 and
+2 in the neighborhood of x1 must form an arc of a circle of radius 1. A contradiction with Condition 5.") verbatim ✓; NB3 §2.3 verbatim ✓; H is the
+negation of NB3's N3-BASE clause ("unless `B̄(u, 2)` holds a vertex of `≥ 4` colours or a repeated colour") and of `plans/FS112-derivation.md`'s
+FS112-N3-BASE hypothesis ✓.
+
+### 2.1 Statement 1 — Lemma 5
+
+| mind | route | verdict | address |
+|---|---|---|---|
+| BASE-V (blind) | running maximum of the height lift; pairs of kept points proved unchanged | TRUE | §1a.2 |
+| CD (blind) | S–V's route: shortest backtrack arc, the six-arc chain, simultaneous recolouring; the nesting step written out by bi–bi | TRUE | FS110-CD §2.5 |
+| print | S–V's route; its nesting sentence is garbled but its reason is (ii) at `σ(s)` | TRUE as argued | PDF §7.1 |
+
+**Divergence: none in verdict; routes independent.** The print's recolourings are merges only, so its "remain unchanged" is the strong reading (same position, same
+pair), as BV-L5 and CD both state. **A slip of mine, withdrawn:** on first reading the printed proof (stage 2) I took "at least as short as x1 y1 and therefore
+coincides with the arc x2 y2" as unjustified when the colour-2 arc through `w₁` is flanked by 1 and 3. CD's nesting step closes that case: its flanking colour 1
+would make `x₂` a `{1, 2}`-point at distance 1 from the `{1, 2}`-point `x₁`, against (ii). The print's garbled sentence says exactly this. No correction is owed to the print.
+
+### 2.2 Statement 2 — Prop. 18
+
+| mind | route | verdict | address |
+|---|---|---|---|
+| BASE-V (blind) | band lemma: index gap `k + 1` among the `{a, a+1}`-boundaries | TRUE | §1a.3 |
+| CD (blind) | Voronov's Prop. 3.3: consecutive gaps are all `< 60°` or all `> 60°` (gap propagation through `(σv, σw)`) | TRUE | FS110-CD §2.5 |
+| print | the same propagation, as a sketch | TRUE; one step loose | PDF Appendix |
+
+**Divergence: none in verdict.** The print's sentence "the points q1′, q2′ obtained by a clockwise rotation by π/3 have colors 1, 2" is false as a statement about
+the two points when `D` is constant on `(q₁, q₂)` (the rotated arc is one colour; e.g. `12 × 30°`). The propagation still holds, as CD writes: the one-colour
+case puts a `{1, 2}`-point at `σw` or `σv`. CD's text is the exact form. BV-C6 (cyclic proper colourings have `n ≡ 6, 9, 12 mod 18` bichromatic points) is
+stated by none of the others and is used by no one; it is a by-product.
+
+### 2.3 Statement 3 — Lemma 6 and the `< 9` branch
+
+The `< 9 → hexagon` reduction is circle-abstract and nearly trivial (every arc is `≤ 60°`, so `n ≥ 6`, and `n = 6` forces six 60° arcs); Lemma 6's printed
+proof uses it unstated. **The hexagon's exclusion (Prop. 17) is not circle-abstract:** it reads the plane at the six points and at `u`.
+
+| mind | setting | route | the step that closes | address |
+|---|---|---|---|---|
+| print | Cond. 5 | sector angles, Prop. 16, the equal-angle case | a 4|2 unit arc (Cond. 5) | PDF Prop. 17 |
+| CB | Cond. 5, cubic | branch constraints by (P′), consecutive cone colours differ by (P), polar condition at `u`, count | the count | FS110-CB D5 item 5 |
+| CC | CB's at a horn/cusp | CB's route at cusps; no hexagon vertex is a cusp; CB's unwritten inner-`q` case closes | the count | FS110-CC C4–C5 |
+| FS110-N3 | Cond. 5 | N2-ROT, N2-HEX (`u` regular), then tangency at `x₁` | curvature `≠ 1` (Cond. 5) | FS110-N-proof §2.4 |
+| FS110-NB3 | Cond. 5 | bracketing pair, both cones one colour | a unit arc in `Γ` (Cond. 5) | FS110-NB3 §2.4 |
+| FS112 (N3, NB3) | unit arcs + H | N3-P17's route | the curvature step fails only at a both-centre `x₂`, excluded by NB3-NOBOTH | FS112-N3-BASE step 10; FS112-ROTHEX |
+| **BASE-V (blind)** | unit arcs + H | H makes each cone one colour; **consecutive cones differ by the direct translate pair** (`x_k + st`, `x_{k+1} + st`, exactly 1 apart); polar condition; count | the count | §1a.4 BV-HEX |
+
+**Findings.**
+1. **BV-HEX is CB's D5 item 5 in substance** (independent: I had not read CB), with one difference. CB's branch constraints come from (P′), whose proof uses
+   Condition 5. BV-HEX's step 1 uses connectedness of tiles and needs no Condition 5; H supplies what (P′) supplied, one colour per cone.
+2. **The regular configuration dies without Condition 5, without H and without NB3-NOBOTH.** In N2-HEX's `(120°, 120°, 120°)` case exactly one sector of `u` faces
+   away from each `x_k`, so each cone is one colour with no H. Consecutive rotation points share a sector, and BV-HEX step 4's translate pair kills that
+   directly. FS110-N3's curvature step, FS110-NB3's unit-arc step and the print's last step are never reached. **What replaces the print's last step with unit
+   arcs is step 4's translate pair, not a unit-arc argument.**
+3. **A correction owed to NB3 §2.3's parenthetical** ("circle-abstract, from (i), (ii) and finiteness — CB and CE took them from print"). It is right for
+   Lemma 5 and Prop. 18 (CB D5 item 5: "read and accepted"). It is not right for the `< 9` branch: its plane half is not circle-abstract, and CB **re-derived** it
+   (D5 item 5, under Condition 5). The residue NB3 names is therefore smaller than stated.
+
+**Verdict: TRUE** in FS-112's setting under H, given the pseudo-colouring inputs. Minds on the unit-arc `< 9` branch: FS112's (N3, NB3; through NB3-NOBOTH) and
+BASE-V (blind; no NOBOTH). These are two routes.
+
+**BV-ND1 (stage 2, derived after reading CB).** BV-ND specialises to one circle under the 60° rotation (`μ = e·λτ(x₀) ≠ 0`: the tangent–chord angle is 30°).
+So a same-pair, opposite-sense switch at `x₀` and `σx₀` is impossible at plain or cubic points, with unit arcs and without the strip. That is exactly the (ii)
+that BV-H1 and BV-L3 consume. It is a strip-free second route for the part of NB3-II that the band lemma uses.
+
+### 2.4 Statement 4 — the cusp items
+
+**Lemma 3.**
+
+| mind | route | cusps | address |
+|---|---|---|---|
+| print | three complementary curves at `p₀` (Fig. 5), Prop. 12's index | — | fails for `√3 ≤ d < 2` (CB D3) |
+| CB (blind) | Voronov's bicycle on the two pseudo-coloured circles; endpoint case analysis with the overshoot for `d > √3` | not examined | FS110-CB D4 |
+| CE | CB's D4 read at cusps; spikes harmless; "WLOG n = −1" completed | TRUE, one mind | FS110-CE E1, CE2 |
+| **BASE-V (blind)** | the same bicycle as one loop `Φ`; closes on `c₀ = h₁(P) − h₂(P) ∈ 3ℤ` at a generic intersection point, so **no overshoot case and no endpoint table**; the ±2 step by BV-ND (no strip) instead of (ii) | irrelevant by construction | §1b.2–1b.3 |
+
+**Divergence: none in verdict.** Two small differences:
+- The overshoot for `d > √3` never arises in the loop form: the lift on the proper arc `Y` is single-valued, so where `y` turns is immaterial.
+- Prop. 12's printed proof glosses exactly the simultaneous switch ("F(t′) ≡ 0 … contradicts … different colours" at bichromatic points). CB fills it with (ii) through the strip; BV-ND fills it without the strip.
+
+**Lemma 3 at cusps: TRUE**, now CB + CE + BASE-V: three readings, two blind (CB, BASE-V), one on cusps specifically (CE). BASE-V's needs no cusp examination at all.
+
+**Corollary 3 at cusps: TRUE**, CB D2 + CC C1–C3 + BASE-V 1b.4. BV-C3 needs only the two local strips at one intersection point.
+
+**Lemma 4 at cusps: my blind GAP stands; I add no mind.**
+- The project's route is CB's D5: a circle-only reduction replacing Prop. 19's plane fill; endpoints in the open disc or V-in vertices on the circle; the 10 + 1
+  count; the eleventh point after hole-filling. It is repaired at cusps by CE (R1–R4, the Antipodal Lemma), with CD's Lemma R and Theorem D2 beside it.
+- **The printed Lemma 4 proof has the gap I would have named:** "If the multicolors of two points p_j coincide, we immediately get the desired one" gives no
+  distance in (1, 2). Both points are in the unit disc, so it could be `≤ 1`.
+- CB D5 item 6 supplies `|p − p′| ≥ 1` (the `a`-side curves), `≠ 1` ((P′), or (ii) per CE7) and `< 2` (open disc, or the Antipodal Lemma for V-in vertices).
+  This is known and repaired; no new correction.
+
+### 2.5 What row 134 and N3-BASE must be regraded for
+
+| item | before | after this job | change |
+|---|---|---|---|
+| Lemma 5 | CD one mind (blind); CB, CE from print | **two minds, both blind** (CD; BASE-V), different routes | upgrade |
+| Prop. 18 | CD one mind (blind); CB, CE from print | **two minds, both blind** (CD; BASE-V), different routes | upgrade |
+| `< 9` branch, Condition 5 (row 134) | print; CB D5; CC at cusps; FS110-N3; FS110-NB3 | + BASE-V (applies: row 134's merged base is cubic, so the cones are one colour) | + one blind mind |
+| `< 9` branch, unit arcs + H (N3-BASE step 10) | FS112's N3-P17 route through NB3-NOBOTH | + BV-HEX, needing no NOBOTH and no Condition 5 | second route |
+| Lemma 3 at cusps (CUSP-BASE's D4) | CB + CE (one mind on cusps) | + BASE-V (blind; cusp-free by construction) | + one blind mind |
+| Cor. 3 at cusps | CB D2 + CC | + BASE-V (Condition 5) | + one mind |
+| CUSP-BASE's D5 items 1–4, 6 (Lemma 4's machinery at cusps) | one mind after CE's repair | unchanged | none |
+| the strip, finiteness, `c′ ≠ ∅` with unit arcs (N3-BASE steps 2–4) | N3, NB3 | not re-derived here; BV-ND1 gives (ii)'s band-lemma form strip-free under H | partial second route for (ii) |
+
+**No downgrade.** Nothing I derived contradicts row 134's or N3-BASE's statements. The common-error residue NB3 named shrinks as follows:
+- Lemma 5, Prop. 18 and the `< 9` branch now have independent blind derivations.
+- Lemma 3 at cusps has a blind derivation that does not look at `u₁`, `u₂`.
+- What remains at one mind is **CUSP-BASE's D5 items 1–4, 6** (CE) and, with unit arcs, **N112-U1 and N2-TOWARD** (not read by me).
+
+### 2.6 Proposed edits (for the close; I edit none of these files)
+
+1. `plans/FS112-NB3-verification.md` §2.3 (and wherever row 134's grade clause repeats it): split the parenthetical. "Lemma 5 and Prop. 18 (circle-abstract, from (i),
+   (ii) and finiteness — CB and CE took them from print; CD and BASE-V derived them blind)" and "Lemma 6's `< 9` branch (not circle-abstract at Prop. 17:
+   CB D5 item 5, CC, FS110-N3, FS110-NB3 under Condition 5; FS112's route and BV-HEX with unit arcs)".
+2. `plans/FS110-derivation.md` FS110-CUSP-BASE header and CE1: add BASE-V's BV-L3 as a blind second reading of D4 at cusps.
+3. `plans/FS112-derivation.md` FS112-ROTHEX: note BV-HEX's route, which does not need NB3-NOBOTH at P17.
+4. `LEDGER.md` § B: one line each for BV-H1, BV-L5, BV-C6, BV-P18, BV-HEX, BV-ND, BV-ND1, BV-L3, BV-C3 pointing here.
 
 ### Would-have-searched-here log
 
