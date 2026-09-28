@@ -11,11 +11,27 @@ plan (stage 6) follow in WORKFLOW's order.
 
 ## Theorems this phase proved
 
-*(one line per theorem, its grade and its address; filled as stages land)*
+*(one line per theorem, its grade and its address; one mind each, the planner's; the blind second mind is phase 0)*
+
+- **FS111-C1-UNIF** — `1 − lim_{ε→0} µ₆(ε) = inf_K δ₀(K)`; so `χ_m⁰(ℝ²) ≥ 7` ⟺ `inf_K δ₀(K) > 0` — [hand, one mind]; stage 2 §2.2, with stage 3b's
+  correction (the equality's rasterisation step; the equivalence needs only H-EQ).
+- **FS111-C1-PW** — Q-NO ⟹ `δ₀(K) > 0` for every `K` — [derived, one mind; over W-EQ-K, row 134, FS-114's NO]; stage 2 §2.3.
+- **FS111-C1-GAP** — Q-NO ∧ (B), in each of three readings, gives seven only with a third statement — [derived, one mind]; stage 2 §2.4.
+- **FS111-C1-FALS** — card 1's falsifier does not follow from (B) in any reading — [derived, one mind]; stage 2 §2.4.
+- **FS111-C1-ROUTES** — route R (CP + A-ALL + (B), map NO idle) and route M (Q-NO + REG, cone scale as REG-J) — [derived, one mind]; stage 2 §2.5.
+- **FS111-C-HULL** — a path-connected piece of a class lies wholly inside or wholly outside the unit disc about every point of the class's essential
+  closure — [hand, one mind]; stage 5; `data/fs111/claims.md` §3.
+- **FS111-C-FILL** — a fill with a colour free at a point keeps a.e.-properness — [hand, one mind]; stage 5.
+- **FS111-C-SIX-M / C-SEVEN-M / C-REG-EQ** — REG-I₅ with FS106-AE-MAP6 gives `χ_m⁰(ℝ²) ≥ 6`; REG-A₆ with Q-NO gives `χ_m⁰(ℝ²) ≥ 7`; given the NOs each is
+  equivalent to its conclusion — [derived, one mind, two-line compositions]; stage 5.
 
 ## Would-have-searched-here log (standing rule 3)
 
-*(one line per move that would have been a search, and what was done instead)*
+- Card 1: a numerical study of `δ₀(K)` along `K` (optimised designs of growing complexity) to see whether it tends to 0 → instead derived that seven is
+  exactly its uniform positivity (C1-UNIF); the dial is FS-109's, post-ban.
+- §PA: an ILP or local search for large tight six-coloured regions to look for junction accumulation → instead the regularity literature was read and the
+  contact structure derived as a claim (C-SAT-T) for competitor M, its negation for competitor W by formula.
+- Controls: rasterising a tight seven-colouring to check fill-saturation numerically → instead named as W's and M's first exact check by formula.
 
 ## Stage 1 — SAVED: quotation check (standing rule 5), files opened, the record's frame
 
@@ -473,3 +489,99 @@ the continuity of `y ↦ |x − y|` on a path-connected set, whose image is an i
 distance 1 only inside `A_η(x)`, where `S_j` is null; pairs inside the disc are shorter than 1 for `η ≤ 1`). C-SIX-M and C-SEVEN-M are two-line
 compositions (a tight colouring exists iff `χ_m⁰ ≤ k`; REG gives a map one; the NO excludes it). C-REG-EQ is the same composition read backwards (if
 `χ_m⁰ ≥ k + 1` there is no tight `k`-colouring, and REG holds vacuously).
+
+## Stage 6 — SAVED: the plan (WORKFLOW 4) — phases, decisions, registrations, staffing, briefs, stub drafts, proposed edits
+
+### 6.1 Phases (each aimed by §G's extraction X1–X18 and §PA; derivation only; no job runs anything over two minutes, so no checkpoint files are needed — every job saves its record per stage, and a kill redoes at most one stage)
+
+| phase | job | what it does | claims (`data/fs111/claims.md`) | aimed by | budget (guidance) | stop rule |
+|---|---|---|---|---|---|---|
+| **0** | **FS111-V0**, blind verifier of card 1 | re-derives the composition question from the claim list alone, blind to stages 2 and 5 of this plan until its verdicts are committed; then reads them and reconciles | §2 (C1-UNIF, C1-PW, C1-GAP, C1-FALS, C1-ROUTES); §3's ARG claims C-SEVEN-M, C-SIX-M, C-REG-EQ; C-HULL, C-FILL | card 1's "expected: a derivation, at two minds"; X4, X17 | ~200k | every claim verdicted; the front-page correction then rests on two minds |
+| **M1** | **FS111-M**, competitor, the regularity side | the contact structure of tight colourings: C-SAT-T, C-HULL-REG, REG-B_k, REG-J_k (the cone scale on the limit), every claim for every `k`, each inhabited at `k = 7` by a tight seven-colouring given by formula, checked exactly | §3 lower rungs; PER as a reading | X8, X12, X13, X14, X5, X6; PA-2, PA-3, PA-5 | ~400k | each rung TRUE, FALSE or GAP-at-a-named-step, at its grade; stop at the first rung that is FALSE and name what it kills |
+| **M2** | FS111-M, continued (only if M1 lands C-SAT-T and C-HULL-REG) | REG-I_k — from the contact structure to a map-type colouring; at `k = 5` it is C-SIX-M's missing half (FS-104's statement given MR) | REG-I_k, REG-J_k, PER | X15, X16, X2 | ~400k | REG-I_k at its grade, or the step it stops at |
+| **W1** | **FS111-W**, competitor, the wild side | the rungs attacked: tight colourings (seven colours, by formula) or six-coloured tight fragments (by formula) where C-SAT-T, C-HULL-REG, REG-B or REG-J fails in its universal form; for route R, a family by formula with holes shrinking and no complementary pair at any scale (R-P3); every object checked exactly | §3 rungs (negations); §4 A-ALL, R-P3 | X3, X4, X17; G79's flip | ~400k | a named obstruction, or the rung proved by failing to build one (say which) |
+| **V-M, V-W** | blind verifiers after each side hands back | the house pattern (FS-107, FS-112): blind to the side's record until their stage-3 verdicts are committed | each side's claims | G51 | ~250k each | verdicts |
+| **M3** (post-milestone unless M2 lands) | — | REG-A₆ or NO-C2 (Q-NO extended to `C²` boundaries through row 134's shadow map, X16) | REG-A₆, NO-C2 | X16 | — | stub (6.5) |
+
+**Order.** Phase 0 first — it is short and the front page's correction waits on it. Then M1 and W1 together, as FS-114's phases free slots (FS-114 takes
+free slots first, `plans/POROS-2026-09-27-night-aim.md` §1). No advisor is planned (the slots are full); if a slot frees with no FS-114 phase waiting, a
+competition advisor (Poros) for M1/W1 is the first call (G51's cost window).
+
+**What every job does first (X3, X4, the vacuity rule):** name each claim's object (SEQ, LIM, MAP, ARG), its complexity class and its boundary class in
+its headline; point every structural claim at a tight seven-colouring and at the strip and the disk before believing it at six.
+
+### 6.2 Decisions (four parts each)
+
+| decision | alternative weighed | why this one | confidence (and what would change it) |
+|---|---|---|---|
+| **Route M first, route R second** | the stub's own question, (B) on the sequence (route R) | card 1: route R needs A-ALL, which R's own registration expects false (P3, 0.6), and the map NO's proof at bounded complexity went through no complementary pair at all (row 134: under Condition 5 "no close complementary pair exists (NB-5)"); route M reuses FS-114's NO and, at five colours, a held NO | **medium** — V0 finding C1-GAP false, or a derivation of A-ALL, would reverse it |
+| **REG is posed for every `k`, with `k = 5` named** | six colours only | C-SIX-M: at five colours the map NO is held (FS106-AE-MAP6), so REG-I₅ is FS-104's statement given MR; and the vacuity rule needs `k = 7` inhabitants anyway | **high** |
+| **A competitor pair (M, W) after a blind verifier (V0)** | one worker on route M | the rungs can be FALSE on real seven-colour objects, which a construction side can build; G51's cost window; the equivalence C-REG-EQ makes a one-sided search for a proof the natural place for motivated error | **medium** — if slots stay full, M alone with V-M after |
+| **No Lean phase in FS-111** | formalise C-HULL and C-FILL now | their objects (D-NF, essential closures) are not in `Proofs/`; the claims are two-line derivations best formalised with the measurable chain (FS-101, FS-113's lane) | **high** |
+| **FS-111 keeps its name; its question becomes "the cone scale and the regularity step"** | rename it "the regularity step" | the stub's (B) is a rung (REG-J) of route M and a premise of route R; the owner decides the name | **medium** — held for the owner |
+
+### 6.3 Registrations (instruments for G21, scored at the close; never caps — `CLAUDE.md` § Counter-priors rule 2)
+
+| # | expectation | population | p | both outcomes reachable |
+|---|---|---|---|---|
+| E1 | V0 confirms C1-GAP (a third statement is needed) | the three readings of (B) (claim list §2) | 0.85 | yes: a derivation of Q-NO ∧ (B) ⟹ seven would refute it |
+| E2 | V0: C1-UNIF TRUE as an equivalence; as an equality after stage 3b's rasterisation step | — | 0.9; 0.8 | yes: a colouring class outside every `𝓜_K`'s reach, or a slack shift that does not vanish in the limit |
+| E3 | C-SAT-T: TRUE / GAP / FALSE | tight a.e.-proper `k`-colourings, `k ≥ 7` inhabited | 0.35 / 0.5 / 0.15 | yes: FALSE by a tight seven-colouring whose fills never saturate or lose a colour class |
+| E4 | C-HULL-REG TRUE given C-SAT-T | same | 0.5 | yes: a saturated colouring whose bound boundary is not a Lipschitz graph near a bichromatic point |
+| E5 | REG-B_k or REG-J_k proved for every `k`, one mind | same | 0.2 | yes: W's obstruction |
+| E6 | REG-I₅ (so `χ_m⁰(ℝ²) ≥ 6`) within FS-111 | — | 0.05 | yes: M2 lands it, or names the step |
+| E7 | W names an obstruction to a rung (a tight object by formula refuting its universal form, or a class of arguments shown capped) | the rungs of §3 | 0.4 | yes: W proves the rung by failing, or builds the object |
+| E8 | R-P3 decided by W (a family by formula avoiding complementary pairs at every scale, holes → 0) | route R | 0.1 | yes |
+| E9 | the milestone's product is a named obstruction or a GAP at a named step | — | 0.85 | — |
+| G82 | a route-M proof by compactness scores G82's reading "not applicable" (§G) | — | — | registered in §G |
+
+*Calibration note (counter-priors, measured):* FS-107's registrations below 0.3 did not land and its three near one half did; these numbers are the same
+instrument, not a forecast of what is possible.
+
+### 6.4 Staffing (at most three agents at once, all Opus 5.5, one level deep)
+
+FS-114's planner and BASE-V hold two slots now; this job holds the third until it hands back. Then: **FS111-V0** (slot 3). As FS-114's phases permit:
+**FS111-M** and **FS111-W** together (two slots), then **V-M** and **V-W**. Every brief carries the no-children rule with its reason, the standing rules,
+the fences of a blind job (standing rule 13) and the "would have searched here" log.
+
+### 6.5 Stub drafts (for the close to mint; nothing minted here — `plans/` stubs are outside this job's files)
+
+- `data/fs111/fs111-p/STUB-DRAFT-map-step.md` — **REG-I and REG-A, the map step**: from a tight colouring with the contact structure to a map-type colouring
+  (at five colours, with FS106-AE-MAP6, `χ_m⁰(ℝ²) ≥ 6`), and to a segment-and-arc map (at six, with Q-NO, seven); or NO-C2.
+- `data/fs111/fs111-p/STUB-DRAFT-forced-pair.md` — **A-ALL, the forced pair at every complexity** (route R's third statement), with R-P3's registration.
+
+### 6.6 Proposed edits for the close (I edit none of these files)
+
+- **`CLAUDE.md` § Paths forward row 2** (bearing), replace "with FS-114's NO it is the route to `χ_m⁰(ℝ²) = 7` … until its first question … is answered" by:
+  "with FS-114's NO **and the regularity step** (route M: the tight limit is a segment-and-arc map), or with **the forced pair at every complexity** in
+  place of the NO (route R), it gives `χ_m⁰(ℝ²) = 7`; card 1 answered: a third statement is needed (FS111-C1-GAP; one mind until phase 0). At five
+  colours the regularity step with the held "maps need six" gives `χ_m⁰(ℝ²) ≥ 6` (C-SIX-M)." And **row 3 (FS-104)**'s question gains: "regularity at five
+  colours (REG-I₅ with FS106-AE-MAP6, FS-111's C-SIX-M)".
+- **`CLAUDE.md` § The aim**, the programme line: "FS-111, the cone scale — the same at unbounded complexity" → "FS-111, the cone scale and the regularity
+  step — route M's rungs at unbounded complexity (card 1: the doors are two routes, each needing a third piece)".
+- **`LEDGER.md` row 133**: "So stability at six is two questions" → "So stability at six is two routes, each with a third piece: route R, (A) at every
+  complexity with (B); route M, the map NO with the regularity step (FS-111's card 1)".
+- **`LEDGER.md` rows 130 and 131** (PA-1): row 131's "the Rajchman step not found in print" → "the Rajchman step is in print for one class (Bourgain 1986
+  and `[Bukh2008]`, as Cohen–Mani 2024 §2.3 attribute it; its Fourier form is Cohen–Mani Lemma 2.4, with an `ℓ∞` counterexample, Remark 2.5; the support
+  selection is `[Bukh2008]` Lemma 12); its `k`-class CP form not found"; row 130's "the Rajchman step not searched (N) — a debt" likewise.
+- **`plans/STUB-reg-scale.md` § Bearing** and **`plans/STUB-global-step.md` § Bearing** ("with FS-111's door (B) it gives `χ_m⁰(ℝ²) = 7`"): the same
+  correction as row 2.
+- **`plans/STUB-cp-plane-six.md`** (FS-104): add the regularity route (C-SIX-M).
+- **The Proof Atlas** (memory `proof-atlas-keep-current`): route `wall7` draws FS-114 + FS-111 as a held composition; redraw as two routes, each with its
+  third piece.
+- **`BIBLIOGRAPHY.md`** (new rows, reading status per section as in §PA): `[Bukh2008]` → held at `~/source/library/pdf/arXiv-math0703856-bukh-measurable-sets-excluded-distances.pdf`,
+  arXiv:math/0703856v2, Zbl 1169.52005, read §1, §3 framing, §4 (Defs. 9–10, Thm 11, Lemma 12); **[CohenMani2025]** A. Cohen, N. Mani, *Clustering in
+  typical unit-distance avoiding sets*, arXiv:2407.05071; Acta Math. Hungar. 176 (2025) 473–497 — held, read §1, §2.3, §5 (first page);
+  **[RatajZajicek2025]** J. Rataj, L. Zajíček, *A characterization of the local structure of two-dimensional sets with positive reach*, arXiv:2512.17606 —
+  held, read abstract and §1; **[RatajZajicek2017]** *On the structure of sets with positive reach*, arXiv:1604.08841 — held, read abstract and Thm 6.4's
+  statement; `[FalconerMarstrand1986]` → review read (Zbl 0599.28008); **[FKW1990]** Furstenberg–Katznelson–Weiss, *Ergodic theory and configurations in
+  sets of positive density*, Zbl 0738.28013 — review read, not held; **[Bourgain1986]** *A Szemerédi type theorem for sets of positive density in `ℝ^k`*,
+  Isr. J. Math. 54 (1986) 307–316, Zbl 0609.10043 — review read, not held; **[Morgan1994]** *Soap bubbles in `ℝ²` and in surfaces*, Pacific J. Math. 165
+  (1994) 347–361, Zbl 0820.53002 — review read, not held (scripted fetch refused).
+
+### 6.7 Briefs drafted (for the owner to launch; each carries the standing rules, the no-children rule with its reason, the fences, the log)
+
+- `data/fs111/briefs/V0-111-card1-verify.md` — **FS111-V0**, phase 0, blind to stages 2 and 5 until its verdicts are committed (~200k).
+- `data/fs111/briefs/M-111-regularity.md` — **FS111-M**, competitor, route M's rungs for every `k`, `k = 7` inhabitants (~400k).
+- `data/fs111/briefs/W-111-wild.md` — **FS111-W**, competitor, the rungs' negations and route R's A-ALL by formula (~400k).
+- The blind verifiers V-M and V-W: to be drafted when M and W hand back, from FS-112's `NB112-verify-proof.md` and `YB112-verify-construction.md`.
