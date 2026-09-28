@@ -1,0 +1,18 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== (a) the chain's end, N completed by colours 1 (below), 3 (top), 4 (two wedges)
+   [a] tiles 18; same-colour pairs examined 43 of 43 present; VERDICT ACCEPT; REJECT []
+ok       (a) ACCEPT on 43/43 pairs
+   closed_interval: exact contacts at 1: [('G0', 'U1'), ('G1', 'H0+'), ('G1', 'H0-'), ('G1', 'U2'), ('G2', 'H1+'), ('G2', 'H1-'), ('H1+', 'U-1'), ('H1-', 'U-1'), ('H2+', 'T3'), ('H2+', 'U0'), ('H2-', 'T3'), ('H2-', 'U0'), ('U1', 'W4L'), ('U1', 'W4R')]; self pairs of diameter exactly 1: []
+   P_cl(E) = [2, 3, 4]; P_cl(N) = [1, 3, 4]; P_cl(P_1) = [1, 2, 3]; P_cl(V_2) = [2, 3, 5]
+ok       (a) E carries the chain's three colours {2, 3, 4}: a_1 above, a_2 in the horns, a_3 below
+ok       (a) the unit arcs of omega(N) end at V_2 = (0.124514, 2.007782) in a fully coloured neighbourhood (colours 2, 3, 5 meet there): arc-closed
+   point (0.05, 2.001) of the horn H2+ (outside B(N,1): True): free colours with H2+ ignored: [3, 5, 6]
+ok       (a) the horn tip at E is shadowed by both flank colours (2 from H1 below, 4 from N above): no SHAVE at E
+   point (0.1, 2.0025) of the horn H2+ (outside B(N,1): True): free colours with H2+ ignored: [3, 5, 6]
+ok       (a) the horn tip at E is shadowed by both flank colours (2 from H1 below, 4 from N above): no SHAVE at E
+ok       (a) colour 3 touches omega(E) from outside at N (T3) and at P_1 (U0) and nowhere enters B(E,1): D_3(E) is the line, no MERGE at E
+   free colours at points of T3 near N (T3 ignored): [[1, 3, 4, 6], [1, 3, 4, 6], [1, 3, 4, 6]]
+ok       (a) colour 4 is free across colour 3's sector at N: the two 4-sectors can be joined (MERGE at N: D_4(N) has interior)
+   float partition guard on [-0.3, 0.3] x [-0.45, 3.2] (outside the cone and the box counts as a hole): 3508 samples, 0 overlaps
+ok       (a) no overlaps (float guard)
+ALL AS EXPECTED

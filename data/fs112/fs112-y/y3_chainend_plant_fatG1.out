@@ -1,0 +1,5 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== (a) the chain's end, N completed by colours 1 (below), 3 (top), 4 (two wedges)  [PLANT fatG1]
+   [a] tiles 18; same-colour pairs examined 43 of 43 present; VERDICT REJECT; REJECT [('G1', 'H0+'), ('G1', 'H0-')]
+ok       plant fatG1: REJECT exactly at (G1, H0+), (G1, H0-)
+ALL AS EXPECTED

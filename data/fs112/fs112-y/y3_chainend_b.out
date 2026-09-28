@@ -1,0 +1,20 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== (b) the chain's end, N completed as a five-colour vertex
+   [b] tiles 19; same-colour pairs examined 47 of 47 present; VERDICT ACCEPT; REJECT []
+ok       (b) ACCEPT on 47/47 pairs
+   closed_interval: exact contacts at 1: [('G0', 'U1'), ('G1', 'H0+'), ('G1', 'H0-'), ('G1', 'U2'), ('G2', 'H1+'), ('G2', 'H1-'), ('H1+', 'U-1'), ('H1-', 'U-1'), ('H2+', 'T3'), ('H2+', 'U0'), ('H2-', 'T3'), ('H2-', 'U0'), ('HN+', 'Top4'), ('HN+', 'U1'), ('HN-', 'Top4'), ('HN-', 'U1')]
+ok       (b) P_cl(N) = [1, 3, 4, 5, 6]: five colours
+   P_cl(E) = [2, 3, 4]; P_cl(N) = [1, 3, 4, 5, 6]; P_cl(P_1) = [1, 2, 3]; P_cl(V_2) = [2, 3]
+ok       (b) E carries the chain's three colours {2, 3, 4}: a_1 above, a_2 in the horns, a_3 below
+   point (0.05, 2.001) of the horn H2+ (outside B(N,1): True): free colours with H2+ ignored: [3, 6]
+ok       (b) the horn tip at E is shadowed by both flank colours (2 from H1 below, 4 from N above): no SHAVE at E
+   point (0.1, 2.0025) of the horn H2+ (outside B(N,1): True): free colours with H2+ ignored: [3, 6]
+ok       (b) the horn tip at E is shadowed by both flank colours (2 from H1 below, 4 from N above): no SHAVE at E
+ok       (b) colour 3 touches omega(E) from outside at N (T3) and at P_1 (U0) and nowhere enters B(E,1): D_3(E) is the line, no MERGE at E
+ok       (b) colour 4 touches omega(N) from outside at E (U1) and at (0, 4) (Top4): D_4(N) is the line +-a, no MERGE of the 4-horns at N
+   point (0.05, 3.0001) of the 4-horn at N: free colours with HN+ ignored: [1, 4, 5, 6]
+ok       (b) the 4-horn's tip at N is free for its lower flank 1 (and its upper flank 5): SHAVE at N is available
+   point (0.1, 3.0005) of the 4-horn at N: free colours with HN+ ignored: [1, 4, 5, 6]
+ok       (b) the 4-horn's tip at N is free for its lower flank 1 (and its upper flank 5): SHAVE at N is available
+ok       (b) float partition guard near N: 3570 samples, 0 overlaps
+ALL AS EXPECTED

@@ -1,0 +1,5 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== (a) the chain's end, N completed by colours 1 (below), 3 (top), 4 (two wedges)  [PLANT wide3]
+   [a] tiles 18; same-colour pairs examined 43 of 43 present; VERDICT REJECT; REJECT [('H2+', 'T3'), ('H2-', 'T3')]
+ok       plant wide3: REJECT exactly at (H2+, T3), (H2-, T3) -- colour 3 inside the pinch
+ALL AS EXPECTED

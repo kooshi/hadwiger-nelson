@@ -1,0 +1,5 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== (b) the chain's end, N completed as a five-colour vertex  [PLANT top4low]
+   [b] tiles 19; same-colour pairs examined 47 of 47 present; VERDICT REJECT; REJECT [('HN+', 'Top4'), ('HN-', 'Top4')]
+ok       plant top4low: REJECT exactly at (HN+, Top4), (HN-, Top4)
+ALL AS EXPECTED
