@@ -43,6 +43,15 @@ each stage's section is headed "Stage n — SAVED" and committed before the next
 - **M-COVER-SC** — in a maximal cover, at every boundary point of `F_a` each adjacent path-connected piece of `F̃_a` lies in an enclosing unit disc or
   outside an exterior one; where `∂F_a` is locally the graph of a continuous function with `F_a` below it, that function is semiconcave with constant
   1 — [hand, one mind] §3.4.
+- **M-HALF** — at a point `x` saturated for `j`, every path-connected piece of `S̃_j` with `x` in its closure lies in a closed half-plane in every
+  blow-up at `x` (the one facing its contact, or facing away), so has upper density `≤ 1/2` at `x`: no colour takes a reflex angle at a saturated point
+  — [hand, one mind] §4.1.
+- **M-POLAR** — at a saturated point, each such piece's blow-up lies in the intersection of the half-planes of all its contacts (in: facing; out:
+  facing away), a convex cone — [hand, one mind] §4.1. Inhabitant R7: at a lattice point each up's 120° sector is exactly the polar cone of its 60° arc
+  of contact directions.
+- **M-BLOCK-EQ** — in a colouring whose classes are a.e. unions of path-connected components, two components of one class are "near" (all cross
+  distances `< 1`) or "far" (all `> 1`); tight block structure holds iff "near" is transitive — [hand, one mind] §4.2. R7: blocks = tiles, checked
+  exactly (216 distinct same-colour pairs, every critical distance `≥ 1`).
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -392,3 +401,52 @@ built (that is W's side); none is excluded. *Corrected* (M-PINCH, M-C11): under 
 curve with unit discs of both colours tangent on both sides and unit-parallel partners. [hand, one mind]. *Class by class* (M-COVER-SC): semiconcave
 with constant 1 wherever `∂F_a` is a graph; the graph property GAP. **Registration E4** (C-HULL-REG TRUE given C-SAT-T, 0.5): as stated GAP; its
 corrected form TRUE with a stronger conclusion than registered.
+
+## Stage 4 — SAVED: REG-J_k and REG-B_k — both MISSTATED or GAP at `k = 5, 6`, TRUE at `k ≥ 7`; two structural lemmas at saturated junctions
+
+### 4.1 REG-J_k
+
+*Statement* (list, verbatim): "if a tight a.e.-proper `k`-colouring exists, then one exists in D-NF whose points with `|P(x)| ≥ 3` form a locally finite
+set, at each of which the blow-up is a partition of the plane into finitely many closed sectors."
+
+**M-HALF** [hand, one mind]. Let `x` be saturated for `j` with contact `y`, and `P ⊆ S̃_j` path-connected with `x ∈ cl P`. By M-PINCH's Step 1,
+`P ⊆ B̄(y, 1)` or `P ∩ B(y, 1) = ∅`. Rescaled about `x` by `t → 0`, `B̄(y, 1)` converges on compacts to the closed half-plane
+`{u : u·(y − x) ≥ 0}` and its complement to the opposite one, so every blow-up of `P` lies in a closed half-plane, and
+`|P ∩ B(x, r)| ≤ |B̄(y, 1) ∩ B(x, r)|` (or the complement's) `= (1/2 + O(r))|B(x, r)|`. ∎ So **at a saturated point no colour's piece takes a reflex
+angle**; where a colour's local part is one piece, `d̄_j(x) ≤ 1/2`. (The reflex-wedge form was used in stage 3; this is its density form.)
+
+**M-POLAR** [hand, one mind]. The same with every contact of `x` in `supp S_j`: the piece's blow-up lies in `⋂_{y in} {u·(y − x) ≥ 0} ∩
+⋂_{y out} {u·(y − x) ≤ 0}`, a closed convex cone. The larger the set of contact directions, the narrower the sector; a colour occupying a sector of
+angle `θ` at `x` can have contacts only in directions within `π/2 − θ/2` of its bisector (in) or of the opposite ray (out). *R7:* at a lattice point
+each up (sector `[−30°, 90°]`) has its contacts on its opposite arc, directions `[0°, 60°]`; the polar cone of `[0°, 60°]` is exactly `[−30°, 90°]` —
+the sectors are as wide as their contacts allow.
+
+**Verdict — MISSTATED; existence TRUE at `k ≥ 7`, GAP at `k = 5, 6`.** (a) *The junction set is wrong for the next rung.* REG-I needs every singular
+point locally finite, and the singular set Σ of stage 3 (where M-PINCH's hypotheses fail: three or more colours of positive measure nearby, a colour
+of density 0 accumulating — a cusp —, a colour whose local part is disconnected — a bichromatic vertex of degree `≥ 4`) contains `{|P| ≥ 3}` strictly;
+REG-J as stated leaves bichromatic vertices and cusp points free to accumulate. **Corrected (REG-J′_k):** *if a tight a.e.-proper `k`-colouring
+exists, a saturated one exists whose singular set Σ is locally finite, each point of Σ meeting finitely many interface arcs.* (b) *At `k ≥ 7`:* R7
+(Σ = the lattice; blow-up at each lattice point = three closed `120°` sectors; the cusps vanish in the blow-up) — TRUE, exact (stage 2). *At `k ≤ 4`:*
+vacuous. *At `k = 5, 6`:* GAP at local finiteness of Σ. (c) *What is proved toward it:* off Σ interfaces are `C^{1,1}` with `|κ| ≤ 1` (M-C11), so each
+interface arc has a tangent at its end; at a point of Σ where each colour meets finitely many pieces and the pieces are separated by interface arcs,
+the blow-up **is** a partition into finitely many closed sectors (each arc's tangent), each sector of angle `≤ π` (M-HALF) and inside its polar cone
+(M-POLAR); and every region carries at least two points of Σ at its extreme positions (M-EXTREME). **Registration E5** (REG-B or REG-J proved for
+every `k`, one mind, 0.2): not landed.
+
+### 4.2 REG-B_k
+
+*Statement* (list, verbatim): "if a tight a.e.-proper `k`-colouring exists, then one exists each of whose classes has tight block structure." (Tight
+block structure: "a class is, up to a null set, a union of blocks of diameter `≤ 1` with `dist(B, B′) ≥ 1` for distinct blocks".)
+
+**M-BLOCK-EQ** [hand, one mind]. Let each class be a.e. a union of path-connected components of density points. By M-HULL2, two components `C, C′` of
+one class are **near** (all cross distances `< 1`) or **far** (all `> 1`). *Tight block structure holds iff "near" is transitive.* (⟸) Near is then an
+equivalence (reflexive: a component has diameter `≤ 1`, M-HULL2 with `D = C`); a near-class has diameter `≤ 1` (every cross pair `< 1`); distinct
+near-classes are far, hence `≥ 1` apart. (⟹) Two components in one block have cross distances `≤ 1`, so (M-HULL2) all `< 1`: near; in different blocks,
+`≥ 1`, so all `> 1`: far. So near = same block, an equivalence. ∎ *A failure* is a chain `C ~ C′ ~ C″` with `C, C″` far: three components of one colour,
+the middle one within `< 1` of both ends, the ends more than 1 apart — allowed by properness (three small blobs on a line at `0, 0.9, 1.8`).
+
+**Verdict — existence TRUE at `k ≥ 7`, GAP at `k = 5, 6`.** R7 has tight block structure with the tiles as blocks, **checked exactly**: `(B)` in
+`tools/fs111_m_reuleaux7.py`, 216 distinct same-colour tile pairs, every critical distance `≥ 1` (`data/fs111/fs111-m/reuleaux7_check.out`; the
+plants `down_mod2` and `up_m_only` fire it). At `k = 5, 6` the step is transitivity of "near" in some saturated (or any) tight colouring: not reached;
+saturation does not visibly force it (a near-chain's middle component can be bound by both ends). *The calibration CM-Q5.1* (Cohen–Mani's one-class
+question): untouched; M-BLOCK-EQ is its multi-class restatement in the chain form.

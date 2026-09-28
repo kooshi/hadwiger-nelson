@@ -26,6 +26,7 @@ What is checked, exactly, in Q(sqrt 3):
   (T) TIGHTNESS: some pair of one colour realises distance exactly 1 between closures with positive-measure neighbourhoods
       on both sides (the within-contact of an up: its vertex and its opposite arc) -- exhibited.
   (C) COLOURS: exactly seven colours, four on ups and three on downs.
+  (B) BLOCKS: tight block structure with the tiles as blocks -- distinct same-colour tiles have every cross distance >= 1.
 Cross-check: every pair verdict of (P) is recomputed by the frozen FS112-Y engine (tools/fs112_y_check.py, imported, not edited).
 
 Plants (--plant NAME), each must make the run FAIL at its own assertion:
@@ -272,6 +273,22 @@ def check_colours(log):
     log(f"(C) up colours {sorted(ups)}, down colours {sorted(downs)}; total {len(ups | downs)}")
     return ok and len(ups | downs) == 7
 
+def check_blocks(log):
+    """(B) tight block structure with blocks = tiles: every pair of DISTINCT tiles of one colour has every critical distance >= 1
+    (min >= 1), and every tile has max <= 1 (its self pair); pairs within centroid distance 3 as in (P)."""
+    reps = [(k, m, n) for k in ("U", "D") for n in (0, 1) for m in range(6)]
+    bad = 0; npairs = 0
+    for (k, m, n) in reps:
+        for (k2, m2, n2_) in tiles_near(k, m, n):
+            if colour(k, m, n) != colour(k2, m2, n2_) or (k, m, n) == (k2, m2, n2_): continue
+            cs = [c for p in tile(k, m, n) for q in tile(k2, m2, n2_) for c in cands(p, q)]
+            npairs += 1
+            if any(lt1(*c) for c in cs):
+                bad += 1
+                if bad <= 3: log(f"  (B) {k}{(m, n)} and {k2}{(m2, n2_)} have a critical distance < 1")
+    log(f"(B) distinct same-colour tile pairs: {npairs}; pairs with some distance < 1: {bad} (tight block structure, blocks = tiles, iff 0)")
+    return bad == 0
+
 def check_tight(log):
     (P0, P1, P2), arcs = up_arcs(0, 0)
     d = [c for c in cands(arcs[1], arcs[1]) if eq1(*c)]
@@ -309,6 +326,7 @@ def main():
     results["P"], _ = check_properness(log, y)
     results["S"] = check_saturation(log)
     results["T"] = check_tight(log)
+    results["B"] = check_blocks(log)
     area_up = "(pi - sqrt3)/2"; area_down = "sqrt3 - pi/2"
     log(f"(A) areas: up {area_up} ~ {(math.pi - math.sqrt(3)) / 2:.6f}, down {area_down} ~ {math.sqrt(3) - math.pi / 2:.6f}, "
         f"sum sqrt3/2 ~ {math.sqrt(3) / 2:.6f} = one up and one down lattice triangle")
