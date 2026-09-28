@@ -60,3 +60,23 @@ every fragment I build that holds a disc of radius `R` about a vertex of at leas
 1.8512` (FS114-Y-DIAL, two minds) moves it. K1's fragment holds a four-colour vertex `p`, so its radius about `p` is read on that dial too.
 
 ## Stage 1a — SAVED
+
+## Stage 1b (in progress): K1's killing test — registered before the first run (G21; both outcomes reachable)
+
+**The second shared result** (the owner's message during stage 1b): FS114-CVB, blind, confirms CV-EXISTS (now two minds, blind to each other), needing
+neither CV-HD nor C-ENDS; so C114-LOCAL-F alone is the unit-arc NO, Siamese or not, at two minds. Also, 2–1: in C114-THOM-TOP `M − x` stays connected at
+a pinch point and breaks at a hole (`plans/FS114-CVB-verification.md`, open). Where it bears: as 1a.3 — every fragment here is read on C114-LOCAL-F's dial.
+
+**The object** (`tools/fs114_y2_k1.py`, its docstring the rule in words): **the Reuleaux bowtie** — a vertex `p` where two Reuleaux triangles of width 1,
+`t1 = (p, q1, q2)` and `t3 = (p, q4, q3)` (`q1 = e(30°)`, `q2 = e(−30°)`, `q3 = e(210°)`, `q4 = e(150°)`), meet corner to corner, with `t2` above and
+`t4` below; all four edges at `p` are unit arcs about `q1…q4`. Twenty tiles, every point in `ℚ(√3)`, the design `D2`-symmetric with the colour maps
+`(1 3)(5 6)` and `(2 4)(5 6)`. How each shape was derived (no search): §1b.1, written after the run.
+
+**Registered predictions** (before the first run):
+- faithful: **ACCEPT** on every same-colour pair; **no distinct same-colour pair at minimum below 1** (non-Siamese); every non-rim piece shared by exactly
+  two tiles; the rim at distance at least `R0 = 3√3/5 ≈ 1.039` from `p`; `p` a degree-4 vertex of colours 1–4 whose four edges are unit arcs about
+  `q1…q4`; each `q_i` a vertex of at least four colours (five: `t_in`, `W`, `T`, `V`, `L`); each `T_i` of the outer tile's colour, meeting the closed unit
+  disc about `p` only at `q_i`. **Reachable otherwise:** a REJECT (the derivation of §1b.1 wrong at a named pair), a distinct pair at minimum below 1, a
+  piece unmatched, a `T_i` touching its inner tile elsewhere.
+- plant `v5` (`V` coloured 5, images by the colour maps): **REJECT exactly** `(L1,V)`, `(L4,V'')`, `(L2,V')`, `(L3,V''')`.
+- plant `wide_t1` (the `T1 | W` edge leaves `q1` at 300° instead of 330°, all four images): **REJECT exactly** `(t4,T1)`, `(t4,T4)`, `(t2,T2)`, `(t2,T3)`.
