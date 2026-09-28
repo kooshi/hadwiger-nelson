@@ -26,6 +26,13 @@ named K1-PIN120 in the round-4 record list. It does not mean one specific member
 | **FS114-Y5-PIN120-60** | no non-Siamese simple valid fragment containing a neighbourhood of `B̄(p, 1)` holds a pinwheel at `p` in which the tile across the outer edge of a 120° tile has a 60° cone — the alternating member `(120°, 60°, 120°, 60°)` included; radius `1 + ε` | [hand; one mind; tools exact at named values] | §2.2–2.3; `tools/fs114_y5_pin.py` |
 | FS114-Y5-D90 | the four-fold 90° pinwheel with maximal Reuleaux blades admits no fragment containing a neighbourhood of `B̄(p, 1)` (one design) | [hand; one mind] | §2.3 |
 | FS114-Y5-CHK | the inequalities PIN120-60 rests on, at named points with germ wedges: 31 of 31 as registered, a plant flipping the "both" block | [tools, exact at named values] | §2.4; `data/fs114/fs114-y5/pin.out` |
+| FS114-Y5-MU | for a blade `t_{j+1}` whose clockwise edge `j` is shorter than 60°: every 5/6 tile bordering its counter-clockwise side `M_j` (from `q_j` to `w_{j+1}`) is one tile `μ_j`, and every 5/6 tile bordering the inside part of its clockwise side `L_j` is one tile of the other colour; so `w_{j+1} ∈ cl μ_j` | [hand; one mind] | §3.1 |
+| FS114-Y5-ALT | consecutive pocket colours differ, `m_j ≠ m_{j+1}`, unless `t_{j+2}`'s side `M_{j+1}` is a unit arc centred at `w_{j+1}` (exception E2) | [hand; one mind] | §3.1 |
+| FS114-Y5-POCKET | outside E2 the tile bordering `t_{j+1}`'s side `M_j` also borders the whole inside part of `t_{j+2}`'s side `L_{j+1}` (`μ_j = Λ_{j+1}`) | [hand; one mind] | §3.1 |
+| **FS114-Y5-CASE** | at each centre `q_k`, outside E1 and E2: either (B) `α_k = 60°` and `μ_{k−1} ∋ q_k`, or (A) `t_{k+1}` borders the ring clockwise from `q_k` for `λ_k ∈ [α_k − 60°, 60°]`, the outside tile there has colour `k − 1`, and `α_{k−1} + α_k ≤ 180°`; so every cone is at most `120°` | [hand; one mind] | §3.2 |
+| **FS114-Y5-REDUCE** | outside E1 and E2, every pinwheel at radius `1 + ε` has cones `(x, 180° − x, x, 180° − x)` with `60° < x < 120°` (the family `P_x`) | [hand; one mind, over PIN120-60] | §3.3 |
+| **FS114-Y5-PIN120** | K1-PIN120 is closed at radius `1 + ε`: no member exists unless E2 holds at the blade two past the 120° tile | [hand; one mind, over PIN120-60] | §3.3 |
+| FS114-Y5-PX | in `P_x` (outside E2): `λ_k = α_k − 60°`, `v_{k+1} = e(φ_k + 60°)`, each `q_k` is a degree-4 vertex with exactly the tiles `O_k` (colour `k − 1`), `T_k` (`k`), `μ_k` (`m_k`), `t_{k+1}`; `μ_k` crosses the ring at `q_k`; `T_k`'s sector lies in `[φ_k − 90° + β_k, φ_k + 30°]`; the pocket colours alternate | [hand; one mind] | §3.4 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -229,3 +236,111 @@ example `(120°, 90°, 60°, 90°)` and `(120°, 80°, 80°, 80°)`.
 The general pinwheel (no 120° cone) is untouched.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: every pinwheel at radius `1 + ε` is `(x, 180° − x, x, 180° − x)`; K1-PIN120 is closed
+
+*Setting (hand; one mind): a non-Siamese, simple valid fragment containing a neighbourhood of `B̄(p, 1)`, with a pinwheel at `p` in the header's notation.
+Every tile's closure has diameter at most 1. The blade `t_{j+1}` has two edges at `p`:
+- edge `j`, its **clockwise edge**, along `ω(q_j)`, of length `β_j` at `q_j`, ending at `w_j`;
+- edge `j + 1`, its **counter-clockwise edge**, ending at `w_{j+1}`.
+
+Traversed with its interior on the left, its boundary is:
+- edge `j` (`p → w_j`);
+- the side `L_j` (`w_j → q_j`), which arrives at `q_j` from the ring's clockwise side;
+- the side `M_j` (`q_j → w_{j+1}`), which leaves `q_j` on the inner-gap side;
+- edge `j + 1` (`w_{j+1} → p`).
+
+FS112-U1 (inner colour `j + 1 ∈ P_cl(p)`, whose sector at `p` must face the arc) puts every ring contact of `t_{j+1}` clockwise of `q_j`. So `M_j` runs
+inside the disc and is bordered by 5/6 tiles; `L_j` is an inside part, bordered by 5/6 tiles, followed by a ring part `[v_j, q_j]` (`v_j = e(φ_j − λ_j)`,
+`λ_j ≥ 0`), bordered by outside tiles.
+
+The four blades meet at `p` and reach the ring. So they cut the disc into four **pockets**: `Π_{j+1}` lies between `t_{j+1}`'s `M_j` and `t_{j+2}`'s
+`L_{j+1}`, over the ring arc from `q_j` counter-clockwise. A simple map's tiles are open discs, so no tile lies on both sides of a blade. `μ_j` is `q_j`'s
+inner-gap tile adjacent to `t_{j+1}` (it exists: GAPS gives the inner gap width at least `β_j > 0`), and `m_j` is its colour.
+
+**The two exceptions.**
+- **E1:** an edge at `p` of length exactly `60°`. By L60-EQ its outer tile then lies in the Reuleaux cap of the edge's ends, whose sector at `p` forces
+  that tile's cone to be `60°`, and the edge ends at the tile's inner centre.
+- **E2:** a blade `t_{j+2}` whose side `M_{j+1}` is an arc of `ω(w_{j+1})`.*
+
+### 3.1 FS114-Y5-MU, -ALT, -POCKET [hand; one mind each]
+
+**MU.** Edge `j` is shorter than `60°`, so `w_j` is inside the open disc and `L_j` has an inside part, bordered by some 5/6 tile.
+- By RAINBOW that tile's colour is not `m_j`: the only `m_j`-neighbour is `μ_j`, which is on the other side.
+- So every inside-`L_j` neighbour is one tile `Λ_j` of colour `m̄_j`.
+- Then no `M_j`-neighbour has colour `m̄_j`, so all of them are `μ_j`. Hence `μ_j` borders `M_j` to its end: **`w_{j+1} ∈ cl μ_j`**. ∎
+
+**ALT.**
+- `μ_j` and `μ_{j+1}` are distinct: they lie in different pockets.
+- `w_{j+1} ∈ cl μ_j`, and `μ_{j+1}` borders the arc `M_{j+1} ⊂ cl t_{j+2}`.
+- Every point of `M_{j+1}` is within 1 of `w_{j+1}`, because `t_{j+2}`'s diameter is at most 1. The distance is exactly 1 at every point only when
+  `M_{j+1} ⊂ ω(w_{j+1})`, which is E2.
+- Otherwise the two tiles have points closer than 1, so **`m_j ≠ m_{j+1}`**. ∎
+
+**POCKET.** At `w_{j+1}` the tiles are `t_{j+1}`, `t_{j+2}`, and pocket tiles, at most one of each colour 5, 6. The pocket tile next to `t_{j+1}` is `μ_j`,
+and the one next to `t_{j+2}` is `Λ_{j+1}`, of colour `m̄_{j+1}`. If they differed, then `m_j ≠ m̄_{j+1}`, i.e. `m_j = m_{j+1}`, which contradicts ALT.
+So **`μ_j = Λ_{j+1}`**: one tile borders `t_{j+1}`'s `M_j` and the whole inside part of `t_{j+2}`'s `L_{j+1}`. ∎
+
+### 3.2 FS114-Y5-CASE — at each centre `q_k`, one of two cases [hand; one mind]
+
+Let `k = j + 1`.
+- **(B) `t_{k+1}` does not reach the ring's clockwise tangent at `q_k`.** The inside tile `h` between them borders `t_{k+1}`'s `L_k`, so `h = Λ_k = μ_{k−1}`
+  (POCKET). Then `μ_{k−1} ∋ q_{k−1}, q_k`, and the diameter bound gives **`α_k = 60°`**.
+- **(A) `t_{k+1}` borders the ring clockwise from `q_k`** on `[v_k, q_k]`, `λ_k > 0`. Then `μ_{k−1} ∋ v_k` and `μ_{k−1} ∋ q_{k−1}`, so `α_k − λ_k ≤ 60°`.
+  Also `t_{k+1} ∋ q_k, v_k`, so `λ_k ≤ 60°`; hence **`α_k ≤ 120°`**.
+  - `t_{k+1}` already has both 5/6 colours as neighbours (`μ_k`, `μ_{k−1}`). So the outside tiles along its ring contact carry colours 1–4 other than
+    `k + 1`.
+  - Just outside the ring at angle `φ_k − ε`, the tiles at `p` block `k + 1`, `k + 2` (`α_{k+1} < 180°`) and `k`.
+  - They block `k − 1` exactly when `α_{k−1} + α_k > 180°`: `t_{k−1}`'s clockwise boundary direction is `φ_k + 270° − α_{k−1} − α_k`. At equality its
+    boundary is the edge along `ω(−q_k)`, curving away, so the tangent case is free.
+  - So the outside tile there has **colour `k − 1`, and `α_{k−1} + α_k ≤ 180°`**. ∎
+
+### 3.3 FS114-Y5-REDUCE and FS114-Y5-PIN120 [hand; one mind]
+
+**REDUCE.** CASE gives four conditions: for each `k`, `α_k = 60°` or `α_{k−1} + α_k ≤ 180°`. Every `α_k ∈ [60°, 120°]` and `Σ α_k = 360°`.
+- **No `60°` cone.** Then summing `α_{k−1} + α_k ≤ 180°` over `k` gives `720° ≤ 720°`. So every sum is exactly `180°`: the cones are
+  `(x, 180° − x, x, 180° − x)`.
+- **One `60°` cone**, cones `(60°, a, b, c)`. If `b, c > 60°`: `a + b ≤ 180°` and `b + c ≤ 180°`, so `c ≥ 120°`, and then `b ≤ 60°`: impossible. If `b = 60°`:
+  `a = c = 120°`, the alternating member, excluded by PIN120-60. If `c = 60°`: `a = b = 120°`, but `b > 60°` needs `a + b ≤ 180°`.
+- **Two adjacent `60°` cones:** the other two sum to `240°`, so both are `120°`, and `a + b ≤ 180°` fails as above.
+
+So, **outside E1 and E2, the only pinwheels at radius `1 + ε` are `P_x = (x, 180° − x, x, 180° − x)` with `60° < x < 120°`.** The 90° four-fold member is
+`P_90`. E1 cannot occur in `P_x`, since it forces a `60°` cone.
+
+**PIN120.** Let `t_k` have `α_k = 120°`, with `t_{k+1}` across its outer edge `k`. Apply CASE at `q_{k+1}` (blade `t_{k+2}`, pocket `μ_k`).
+- **Case (A):** `α_k + α_{k+1} ≤ 180°`, so `α_{k+1} = 60°`. If edge `k + 1` has length `60°`, E1 gives `α_{k+1} = 60°` directly.
+- **Case (B):** `h = Λ_{k+1}`. If `h = μ_k`, then `α_{k+1} = 60°`. If `h ≠ μ_k`, then `m_k = m_{k+1}`, and ALT puts us in E2 at `t_{k+2}`.
+
+So `α_{k+1} = 60°` unless E2 holds at `t_{k+2}`, and PIN120-60 excludes `α_{k+1} = 60°`. **K1-PIN120 is closed at radius `1 + ε`, except under E2 at
+the blade two past the 120° tile.** E1 needs no exception here.
+- **Class covered:** every pinwheel with a `120°` cone (K1-PIN120), and via REDUCE every pinwheel outside `P_x`, E1 and E2.
+- **Radius** `1 + ε`: it reads neighbourhoods of the four centres, of the edge ends, of the ring arcs near the centres, and the tiles inside the disc.
+- **Where six is spent:** RAINBOW's "both 5/6 colours used" (MU, CASE (A)): a seventh colour would give each blade a third free neighbour colour.
+
+### 3.4 FS114-Y5-PX — the forced shape of `P_x` near the ring [hand; one mind]
+
+In `P_x` (no cone is `60°`, so case (A) holds at every `q_k`), outside E2:
+1. **`O_k` and `λ_k`.** The outside tile along `t_{k+1}`'s ring contact has colour `k − 1`. Colour `k + 2` is blocked on the whole arc, because
+   `α_k + α_{k+1} = 180°`. By RAINBOW it is one tile `O_k`, so `O_k ∋ v_k, q_k`. `O_k` and `T_{k−1}` (colour `k − 1`, at `q_{k−1}`) are distinct, since
+   `|q_{k−1} − q_k| > 1`. So `|q_{k−1} − v_k| ≥ 1`, i.e. `λ_k ≤ α_k − 60°`. With CASE (A), **`λ_k = α_k − 60°`, `v_k = e(φ_{k−1} + 60°)`, and
+   `|q_{k−1} − v_k| = 1`**: `μ_{k−1} ⊂ B̄(q_{k−1}, 1) ∩ B̄(v_k, 1)`.
+2. **`T_k`** avoids `B(v_{k+1}, 1)` (`O_{k+1} ∋ v_{k+1}`, `|q_k − v_{k+1}| = 1`), so **`T_k ⊂ [φ_k − 90° + β_k, φ_k + 30°]`**.
+3. **`μ_k` crosses the ring at `q_k`.** The outside directions `(φ_k + 30°, φ_k + 90°)` at `q_k` must be covered. The candidate colours:
+   - `k − 1` is `O_k` again (a second sector: not simple);
+   - `k` is `T_k`, which lies below `φ_k + 30°`;
+   - `k + 1` is `t_{k+1}`, inside;
+   - `k + 2` is blocked by `t_{k+2}`;
+   - `m̄_k` would be within 1 of `v_k ∈ cl μ_{k−1}`, since `|q_k − v_k| = 2 sin((α_k − 60°)/2) < 1`.
+
+   So **`μ_k` covers them**, and `q_k` has exactly the four tiles `O_k`, `T_k`, `μ_k`, `t_{k+1}`, of four colours.
+4. **The pocket colours alternate** (ALT): `m_1 = m_3 ≠ m_2 = m_4`. So `μ_k` and `μ_{k+2}` share a colour and must be at least 1 apart. With equal edge
+   lengths `β` in `P_90` this needs `|w_{k+1} − w_{k+3}| = 4 sin(β/2) ≥ 1`, i.e. `β ≥ 28.96°`. Blade diameter needs adjacent edge ends at most 1 apart:
+   `2√2 sin(β/2) ≤ 1`, i.e. `β ≤ 41.41°`, with E2 at equality.
+
+**Where it bears.**
+- K1 in the pinwheel case, read at radius `1 + ε`, reduces to one one-parameter family `P_x` and the two named exceptions. Every other pinwheel, K1-PIN120
+  included, is excluded at the smallest radius a fragment has.
+- The forced shape (3.4) is the construction target: `P_x` near the ring is rigid up to the edge lengths and the shapes of the pockets, caps and wedges.
+- **Next:** build `P_90` by formula at radius `1 + ε`, check it exactly, and push its radius.
+
+## Stage 3 — SAVED
