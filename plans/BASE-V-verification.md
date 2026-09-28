@@ -4,7 +4,7 @@
 rules `data/fs112/briefs/STANDING-RULES.md`. Touches only this file, `data/base-v/`, `tools/base_v_*.py`. Grades are `CLAUDE.md` § Notation's;
 "minds" counts independent derivations.*
 
-**Status:** Stage 1a — SAVED (statements 1–3, blind). Stage 1b (statement 4, blind) and stage 2 (comparison) below when saved.
+**Status:** Stage 1a — SAVED (statements 1–3, blind). Stage 1b — SAVED (statement 4, blind). Stage 2 (comparison) below when saved.
 
 ## Theorems this phase proved
 
@@ -16,6 +16,9 @@ rules `data/fs112/briefs/STANDING-RULES.md`. Touches only this file, `data/base-
 | BV-P18 | Prop. 18 (cyclic, proper, `n = 3m ≥ 9`): for each pair, the boundaries `P_j, P_{j+k+1}, P_{j+2k+2}` of that pair are pairwise more than 1 apart | [hand; tools check] | 1 | §1a.3 |
 | BV-HEX | Lemma 6's `< 9` branch under H: the regular hexagon of kept points cannot occur at a cubic trichromatic `u` in a valid map (unit arcs allowed) when `x_1, …, x_6` are cubic; no Condition 5, no strip `A(u)`, no unit-arc step | [hand; exact identities by sympy] | 1 | §1a.4 |
 | BV-L6 | Lemma 6, given the inputs (i), (ii) and finiteness for the pseudo-colouring of `ω(u)` and H at the six hexagon points | [hand] | 1 | §1a.4 |
+| BV-ND | NoDouble: two points `x₀ ∈ ω(u₁)`, `y₀ ∈ ω(u₂)` at distance 1 cannot both switch between the same pair {α, β} in opposite senses along the unit-distance linkage, when at each the two sectors traversed are adjacent (plain point, cubic vertex, degree-4 bichromatic vertex); **holds with unit arcs**, at cusps | [hand; exact identities] | 1 | §1b.2 |
+| BV-L3 | Lemma 3, a.e., curved, cusps and double cusps at `u₁, u₂`: no two points with the same multicolour at distance in (1, 2) whose unit circles carry proper finite circle colourings in the complementary triple; route: the unit-distance four-bar linkage and the band lemma, no angle at `u₁, u₂` used | [hand; exact identities] | 1 | §1b.3 |
+| BV-C3 | Corollary 3 at cusp and double-cusp vertices, under Condition 5 (the two {complement}-strips cross near an intersection point) | [hand] | 1 | §1b.4 |
 
 ## Stage 1a — SAVED (statements 1–3, blind)
 
@@ -156,6 +159,103 @@ one between two colours of {1, 2, 3} would give a whole arc of two-element pseud
 Prop. 5) uses "Since the arc of ω(y) is not a boundary" and the strip; and (i). These belong to the steps the brief lists as N112-U1 and N2-TOWARD; I
 have not read them.
 
+## Stage 1b — SAVED (statement 4, blind)
+
+### 1b.1 Reading log (still blind)
+
+Read nothing new of the paper for 1b. The printed proofs of Lemma 3 (§6.1, Props 12–13, Fig. 5), of Lemma 4 and Props 18–19 (Appendix), and §5
+remain unread; no fence touched.
+
+### 1b.2 BV-ND — the NoDouble lemma
+
+**Setting.** `u₁, u₂` with `1 < t = |u₁ − u₂| < 2`; `f₁, f₂` the pseudo-colourings of `ω(u₁)`, `ω(u₂)` in a common triple {1, 2, 3}. The **linkage**
+`Φ = {(x, y) ∈ ω(u₁) × ω(u₂) : |x − y| = 1}`. A **double event** is `(x₀, y₀) ∈ Φ` at which, as the linkage moves, `f₁` switches `α → β` at `x₀` and
+`f₂` switches `β → α` at `y₀` at the same instant (the height difference `g = h₁(x) − h₂(y)` then jumps by ±2).
+
+**Statement.** No double event exists when, at `x₀` and at `y₀`, the α-sector and the β-sector the circle passes between are adjacent (share an edge):
+true at plain points, cubic vertices, and degree-4 bichromatic vertices. **Condition 5 is not used.**
+
+**Proof.** Let `e = x₀ − y₀`, `τᵢ` the unit tangent of `ω(uᵢ)`, velocities `λ₁τ₁`, `λ₂τ₂` (`λᵢ ≠ 0`: at a turning point nothing switches), and
+`μ := e·λ₁τ₁ = e·λ₂τ₂` (differentiate `|x − y| = 1`).
+1. `μ ≠ 0`: `μ = 0` forces `τ₁ ⊥ e` and `τ₂ ⊥ e`, i.e. `x₀ − u₁ = s₁e`, `y₀ − u₂ = s₂e`, so `u₁ − u₂ = (1 − s₁ + s₂)e` has length 1 or 3, not in (1, 2).
+2. Say `μ < 0`. The α-sector `S_α(x₀)` holds the back half-tangent `−λ₁τ₁`, with `e·(−λ₁τ₁) > 0`; so it has points `q` with `|q − y₀| > 1` near `x₀`.
+   For α-sectors `S_α(x₀)`, `S_α(y₀)` (connected, open) the distances of interior pairs form an interval avoiding 1 (a.e.-properness), so they are
+   **all > 1**. The β-sector `S_β(x₀)` holds `λ₁τ₁` with `e·λ₁τ₁ < 0`, so its pairs with `S_β(y₀)` are **all < 1**. (`μ > 0`: swap α, β.)
+3. Letting the partner point tend to its vertex: `S_α(y₀) ⊂ ℝ² \ D(x₀, 1)`, `S_β(y₀) ⊂ D̄(x₀, 1)`, and symmetrically at `x₀` with `y₀`. The α|β edge
+   at `y₀` lies in `cl S_α ∩ cl S_β ⊂ ω(x₀)`, and the α|β edge at `x₀` lies in `ω(y₀)`: **two unit arcs, each centred at the other point.** Under
+   Condition 5 this is already the contradiction.
+4. **With unit arcs allowed**, the two edges leave `x₀` and `y₀` tangentially (`⊥ e`), in directions `σ₁τ`, `σ₂τ` (at a plain point both directions are
+   available). With `y₀ = 0`, `x₀ = (1, 0)`, edge points `a(θ) = (cos θ, sin θ)` and `b(φ) = (1 − cos φ, sin φ)`: `|a(s) − b(s)|² = (2 cos s − 1)² < 1`
+   and `|a(s) − b(−s)|² = (2 cos s − 1)² + 4 sin² s > 1` for small `s > 0`. If `σ₁ = σ₂`, α-points just off the two edges are at distance `< 1`,
+   contradicting "all > 1"; if `σ₁ = −σ₂`, β-points just off the edges are at distance `> 1`, contradicting "all < 1". (Points just on the α-side of
+   an α|β edge lie in `S_α`, a horn included: two distinct tangent arcs separate at order `s²`.) ∎
+
+Exact identities: `tools/base_v_linkage.py` (K3, K4). **Cusps are irrelevant** (step 4 needs only one edge direction per point). **Where the hypothesis
+bites:** a bichromatic vertex of degree ≥ 6 can be crossed between two non-adjacent sectors; H excludes every vertex of degree ≥ 4 in `B̄(u₁, 2)`
+(each has four colours or a repeated colour), and the linkage's `x₀, y₀` lie in `B̄(u₁, 2)` (`|y − u₁| ≤ 2` on `Φ`).
+
+### 1b.3 BV-L3 — Lemma 3 by the unit-distance linkage
+
+**Statement derived.** Let `u₁, u₂` have the same multicolour {4, 5, 6} and `1 < t < 2`. Suppose the pseudo-colourings `f₁, f₂` of `ω(u₁)`, `ω(u₂)`
+are finite proper circle colourings in {1, 2, 3} whose generic points are interior points of tiles of their pseudo-colour, and the double-event points
+satisfy BV-ND's adjacency. Then a.e.-properness fails. Hence Lemma 3, wherever the print supplies those inputs.
+
+**Proof.**
+1. **The linkage is one loop, and neither circle is swept.** `y` ranges over `Y = {y ∈ ω(u₂) : |y − u₁| ≤ 2}`, a proper arc (the far point of
+   `ω(u₂)` is at distance `t + 1 > 2`); over interior `y` there are two `x`, merging at the ends of `Y`; so `Φ` is a circle. Likewise `x` ranges over a
+   proper arc. The height lifts `h₁`, `h₂` are single-valued functions of position there (K1).
+2. **At an intersection point** `P ∈ ω(u₁) ∩ ω(u₂)` (generic, in a tile `T`): `f₁(P) = f₂(P) = colour(T)`, so `c₀ := h₁(P) − h₂(P) ∈ 3ℤ`. The two
+   linkage partners of `x = P` are `y = R_{u₂}^{±60°}P` (K2): configurations `A`, `B` of `Φ`.
+3. **Band.** Orient `ω(u₂)` so `W₂ > 0`; by BV-H1, `D₂ ≥ 1`. So `g_A = c₀ − D₂(P) ≤ c₀ − 1` and `g_B = c₀ + D₂(R^{−60°}P) ≥ c₀ + 1`: along `Φ`
+   from `A` to `B`, `y` sweeps the 120° arc through `P` (step 1), and `x` leaves `P` and returns (net zero).
+4. **No way through `c₀`.** At a generic pair `f₁(x) ≠ f₂(y)` (two interior points of one colour at distance 1), so `g ≢ 0 (mod 3)` on open sets; a
+   ±1 jump cannot pass `c₀`; a ±2 jump across `c₀` is exactly a double event (the same computation as (ii) in BV-H1). BV-ND excludes it. ∎
+   Non-generic `P`: take `x*` near `P` on `ω(u₁)` and `Q` near `P` on `ω(u₂)`, both in the tile `T` beside the boundary through `P`, generic; then
+   `g` at `(x*, y*₊)` is `≤ c₀* − 1` or `≡ 0` (itself a violation), and symmetrically at `(x*, y*₋)`.
+
+**What it uses.** Same multicolour enters once: both circles are coloured in the one triple {1, 2, 3}, so `f₁(x) ≠ f₂(y)` is a real constraint (with a
+seventh colour the complement has four colours and there is no band, which is why the hexagonal 7-colouring has same-multicolour vertices at distance
+≈ 1.83). `1 < t` enters in steps 1 and BV-ND.1; `t < 2` in step 2. **Nothing about the angles or cusps at `u₁`, `u₂` is used**: cusp and double-cusp
+vertices are covered verbatim. The hypothesis "boundaries extend from each" enters only through the inputs (the strips). Condition 5 enters **only**
+through the inputs: the strip existence (Props 9–10), finiteness, and the properness of `f₁, f₂` (Props 14–15).
+
+**The inputs at cusps, under Condition 5** (re-derived for the cusp question, from the print's statements, whose proofs I read):
+- Prop. 9 holds a.e.: its engine, Prop. 2, holds for interior points `z` (the unit circle about a point near `z` crosses the α-side of the α|β curve
+  unless that curve lies on a unit circle); nothing uses the sector angles, so a horn (`x₄₅(δ) ≈ x₄₆(δ)`) is harmless.
+- Prop. 10 at a cusp: `v ∉ Int A ∪ Int B` forces `h_δ(v) = 1` for every small `δ` (as `A_δ`, `B_δ` are open), so an edge at `u` meets `ω(u + v)` in
+  infinitely many points accumulating at `u`, hence is a unit arc: Condition 5. The argument never uses that the three `x_{ij}` are apart.
+- At a double cusp (`θ = (0, 0, 360°)`) colour 6 straddles every normal and is excluded near all of `ω(u)`; horns 4, 5 are confined to the inner side on
+  the half toward the cusp direction and the outer side on the other half, consistent with the strip on the opposite side.
+
+**Unit arcs under H.** BV-ND holds with unit arcs. H makes every vertex of `B̄(u₁, 2)` cubic, which is BV-ND's adjacency. **Not replaced by H:** the
+strip. With unit arcs, Prop. 10 fails exactly at the points `y ∈ ω(u)` that centre a unit-arc edge at `u` (at most one per edge), and the finiteness
+of `f` fails if `ω(u)` carries a boundary arc between two colours of {1, 2, 3}. Those are inputs of the kind the brief assigns to N112-U1 and
+N2-TOWARD. I have not derived them.
+
+### 1b.4 BV-C3 — Corollary 3 at cusps (Condition 5)
+
+`u₁` {4, 5, 6}, `u₂` {1, 2, 3}, `t < 2`. At an intersection point `P` the two strips (one-sided bands of width `η`, coloured {1, 2, 3} beside `ω(u₁)` and
+{4, 5, 6} beside `ω(u₂)`) cross in a small curvilinear quadrilateral, since the circles cross transversally for `0 < t < 2`. Its interior must be
+coloured from `{1, 2, 3} ∩ {4, 5, 6} = ∅`. Only the strips near `P` are needed (not the closed curves of Prop. 11), and the strips exist at cusps
+(1b.3). **Verdict: TRUE** at cusp and double-cusp vertices, under Condition 5 [hand; 1 mind]. With unit arcs, a strip may pinch at `P` if `P` centres a
+unit-arc edge at `u₁` or `u₂`; the other intersection point `P′` then serves unless it pinches too. That case is not closed here.
+
+### 1b.5 Lemma 4 at cusps — what I derived, and the GAP
+
+Derived: (a) at a cusp or double-cusp `u`, the pseudo-colouring route to Lemma 6 is unchanged (BV-H1, BV-L5, BV-P18 are circle-abstract; BV-HEX's count
+closes with horns); (b) the strips exist at cusps (1b.3); (c) the two refuters Lemma 4 feeds, Lemma 3 and Corollary 3, hold at cusps (BV-L3, BV-C3).
+(d) Two facts I would use: a tile has diameter `≤ 1`, and the common boundary of two tiles of colours `a`, `b` has diameter `≤ 1` (Prop. 1 a.e.). So from
+each of Lemma 6's three `{a, b}`-points `x_i` (pairwise `> 1` apart) the `a|b` boundaries are distinct, and their endpoint vertices `{a, b, c}` lie
+within 1 of `x_i`. If `c` is the third colour of {1, 2, 3} and the endpoint is within `< 2` of `u`, Corollary 3's case is reached.
+
+**GAP (mine, blind):** I did not derive Prop. 19(b) ("the bichromatic boundaries extending from their point on the circle end at a tricolor point
+inside the circle"), nor the final step of Lemma 4 that turns the nine endpoint vertices `{a, a+1, c}`, `c ∈ {4, 5, 6}`, into either a
+same-multicolour pair at distance in (1, 2) or a disjoint pair within 2. The pigeonhole I tried (nine vertices, nine possible multicolours) does
+not close. A second-circle route looks promising: a vertex `{1, 2, 4}` near `ω(u)` has complement {3, 5, 6}; Lemma 6 on its own circle gives three
+`{5, 6}`-points pairwise `> 1` apart; an endpoint `{4, 5, 6}` in `(1, 2)` from `u` is (a). But it needs the endpoint positions, which is Prop. 19(b)'s
+content. **So Lemma 4 at cusps: GAP at Prop. 19(b) and the final selection, as far as this blind stage goes.** Stage 2 reads the Appendix and asks
+whether its steps use anything a horn breaks.
+
 ### Would-have-searched-here log
 
 | move I would have made by search | what I did instead |
@@ -163,3 +263,5 @@ have not read them.
 | random property test of Lemma 5 / Prop. 18 over generated circle colourings | hand proofs BV-H1, BV-L5, BV-P18; exact check on 14 colourings given by formula, plus 4 plants |
 | numeric sampling of placements of the hexagon's cone colours around `u` | the counting argument BV-HEX step 6 (a closed-form bound) |
 | floating-point test of the cone/ray geometry | exact sympy identities (`tools/base_v_hexagon.py`) |
+| numeric search for a double event on sampled circle colourings (to test BV-ND) | the first-order motion + exact disc-inclusion proof, and the closed-form edge distances (K4) |
+| a search for the Lemma 4 configuration (nine endpoint vertices) on sampled maps | named the GAP (1b.5) instead |
