@@ -1,0 +1,10 @@
+   first-order cone at the strip's edge vertex X_1 (outward: up):
+      B       blocked in every direction
+      G       blocked in every direction
+      M       blocked in every direction
+      O       blocked iff +(u.d) > 0 [u at 180.000 deg] or +(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 284.478 deg] or -(u.d) > 0 [u at 300.000 deg] or -(u.d) > 0 [u at 284.478 deg] or -(u.d) > 0 [u at 300.000 deg]
+      P       blocked in every direction
+      R       blocked iff -(u.d) > 0 [u at 255.522 deg] or -(u.d) > 0 [u at 240.000 deg] or -(u.d) > 0 [u at 255.522 deg] or -(u.d) > 0 [u at 240.000 deg] or +(u.d) > 0 [u at 0.000 deg] or +(u.d) > 0 [u at 0.000 deg]
+      directions (   0.0000,   14.4775) deg, width  14.4775: available: O
+      directions (  14.4775,  165.5225) deg, width 151.0450: COLOURLESS
+      directions ( 165.5225,  180.0000) deg, width  14.4775: available: R

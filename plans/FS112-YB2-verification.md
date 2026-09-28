@@ -7,7 +7,7 @@ O1–O5 are committed (step 3) before I open Y2's section, tools or outputs. Eve
 
 ## Theorems this phase proved
 
-(filled at each stage; one line per theorem, its grade and its address)
+The table is at the end of stage 5 (YB2-CHK, YB2-STRIP3, YB2-DISK, YB2-ARCS, YB2-PAIRS, YB2-RIM, YB2-EDGE, YB2-Q, YB2-SAME, YB2-MOVE, YB2-FORCE, YB2-DISC).
 
 ## Would have searched here (standing rule 3)
 
@@ -16,6 +16,10 @@ O1–O5 are committed (step 3) before I open Y2's section, tools or outputs. Eve
   blue; inverted arches marble, red, orange; top tiles orange, marble, red in the valleys; bottom tiles blue, purple, green), every length from the words.
 - Stage 4, the disk: I would have fitted Fig. 10's pixels for `X_k`, `U_k`, `F_k`; instead two derived bounds at the four-colour vertex are met with
   equality and the rim boundary is radial by the mirror reading (stage 3 §3.5–3.6), and the checker judges that one member.
+- Stage 5, O1's rim: I would have sampled rim points to map where no colour is available; instead a derivation (a rim tile's own colour stays
+  available on its open rim arc, proved exactly by the critical points of the distance) left the 15 rim vertices, each classified exactly.
+- Stage 5, O2's outside points: found by the exhaustive list of the object's own close complementary pairs (30 vertices, a finite feature list of a
+  given object, not a search for an object).
 
 ## Fence log (standing rule 13; brief § Fences; instance)
 
@@ -256,3 +260,153 @@ radial rim boundaries is valid). What the ACCEPT covers: that one member of a fa
 the figure's own coordinates, which I never read.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: my verdicts on O1–O5 (the brief's step 3), committed before I open Y2's section, tools or outputs
+
+*Tools: `tools/fs112_yb2_analysis.py` (exact, at named points; no scan). Outputs: `data/fs112/fs112-yb2/o1-o2.out`, `cone-disk.out`, `cone-strip.out`,
+`strip-o2-o4.out`, `o3-o5.out`. **Method at a point `z`** (hand, one mind; each application exact): for every tile the exact minimum and maximum of
+`|z − q|` against 1. A colour is **strictly blocked** at `z` if one of its tiles has `min < 1 < max` — then at every point near `z`. A tile with `max = 1`
+(it lies in the closed unit disc about `z`) touching `ω(z)` at a contact `V` blocks `z + εd` for small `ε` iff `(V − z)·d < 0`; with `min = 1`, iff
+`(V − z)·d > 0` (near `V`, `ω(z + εd)` is the tangent line at `V` shifted by `ε(V − z)·d`). The colourless directions are the open arcs where every colour
+is blocked; boundary directions (a contact perpendicular to `d`) are second order and not decided. Test directions inside each arc are checked exactly.*
+
+### O1 — the six-coloured disk [tools, exact; one rebuild, mine; readings P, W, M of stage 3]
+
+- **Radius** `r = √((25 + 9√5)/10) ≈ 2.1242554`, reproduced exactly (the control; stage 4), `= √(5/2 + 9/(2√5))` (the caption) `= φ√((15 + √5)/10)` (`[11.34]`).
+- **Valid** (stage 4): 71 of 71 same-colour pairs ACCEPT; every tile has diameter exactly 1; the 20 unit arcs' out-contacts are the only other
+  distance-1 contacts.
+- **Vertices (45)** — every colour set exact (`o1-o2.out`): the five `A_k` at radius `a = √((5 − √5)/10) ≈ 0.5257` carry **four colours** (`Z`, `P_{k−1}`,
+  `W_k`, `P_k`; `A_0`: red, yellow, blue, orange — de Grey's `{1,3,5,6}` junction, `[16.106]`); 25 interior vertices carry three (`X_k`, `U_k`, `U′_k`,
+  `Y_k = X′_{k+1}`, `B_k` as transcribed, at radii 1.2503, 1.5088, 1.5088, 1.2503, 1.3764); the 15 rim vertices `C_k`, `D_k`, `F_k` carry two.
+- **Unit arcs (20), all kind `both`, self case, all arc-closed:** four centred at each `A_k` — `Z`'s far edge `A_{k+2}A_{k+3}` (inner `Z`, outer
+  `P_{k+2}`), the wedge's far edge `U_kU′_k` (inner `W_k`, outer `R_k`), the arches' arcs `Y_kB_k` and `X_{k−1}B_{k−1}` (inner the arch, outer `T_{k+1}`,
+  `S_{k−1}`). In each, the inner tile has the centre as a corner (self in-contact: the tile's diameter realised along the arc) and the outer colour is one of
+  the centre's four (out-contact) — `[Polymath2021]` p. 194's tactic, at every arc. Spans: `Z`'s and the wedges' 36°, the arches' `arccos(…)` ≈ 20.17°.
+  Every arc's two ends are interior vertices of the disk (`|end| < r`, exact): **C-ARC-END realised arc-closed at every unit arc.**
+- **Close complementary pairs (20)** — exhaustive over the 30 interior vertices (types disjoint, union all six, distance < 2). **Every one contains a red
+  three-colour vertex** (`U_k` or `U′_k`; five non-red colours make no two disjoint non-red triples — E-pairs met) **and every one has a four-colour
+  vertex `A_j` as a common unit point** (T2's half: both members emit unit arcs of `ω(A_j)`). Their other common points:
+  - `(U′_k, B_k)` at distance `2 sin 36° ≈ 1.1756` → **`C_k`, on the rim**; `(U_k, B_{k−1})` → **`D_k`, on the rim** (10 pairs);
+  - `(X_k, U′_{k+1})` (common point `A_{k+1}`) and `(U_k, Y_k)` (common point `A_k`), each at distance ≈ 0.9416 → **one point `Q_k` outside the disk**, on the
+    ray of `B_k` and `F_k`, at `|Q_k|² ≈ 4.6765503` (the root of `25x⁴ − 50x³ − 265x² − 250x + 121`), 0.0383 beyond the rim; `Q_k` is at distance
+    exactly 1 from the four vertices `X_k, U_k, Y_k, U′_{k+1}` (10 pairs, two per `Q_k`).
+- **The rim: the points near which no colour can be given just outside are exactly the ten vertices `C_k`, `D_k`.**
+  - *Open rim arcs* (exact, `rim_open_arcs`): for each of the 15 rim tiles, every interior point of its rim arc is at distance < 1 from all of the tile
+    (every critical candidate with an interior rim point is < 1, and the tile's diameter is 1), and every other tile of its colour is at distance > 1 from
+    the closed rim arc; so **the rim tile's own colour is available just outside every interior point of its rim arc.**
+  - `F_k`: violet and yellow (at `F_0`) are never blocked — **available** in every outward direction.
+  - **`C_0`** (exact contacts, `cone-disk.out`): blue (`W_0`), green (`T_0`), orange (`P_0`), yellow (`T_1`) strictly blocked — `ω(C_0)` crosses those
+    tiles; red has `max = 1` at `R_0`, touching at `D_0` and `U′_0`; violet has `max = 1` at `S_0`, touching at `B_0`. With `U′_0 − C_0 = e(−36°)`,
+    `B_0 − C_0 = e(252°)`, `D_0 − C_0 = e(0°)` (exact): **the colourless outward directions are the open cone (54°, 162°), of width exactly 108° = 3π/5**
+    (`= 180° − ∠U′_0 C_0 B_0`, the angle being 72°, `(U′_0 − C_0)·(B_0 − C_0) = cos 72°` exactly); red is available in (13.61°, 54°) (toward the top of
+    `R_0`), violet in (162°, 193.61°). **`D_0`**: the mirror, colourless (18°, 126°), 108°; red available in (126°, 166.39°), green in (346.39°, 18°).
+  - E-rim met; the "only them" part, not predicted, is a result.
+
+### O2 — the stopping points of both positives [tools, exact; the comparison hand, one mind]
+
+- **The strip** (my rebuild; `strip-o2-o4.out`, `cone-strip.out`): its close complementary pairs with a four-colour common point are the `(V, A)` pairs
+  (other point: **an edge vertex**, e.g. `X_1 = (1/4, Y)` for `(V_0, A_1)`), `(W, W′)` at `√3` and `(A_j, A′_j)` at `√15/2` (both common points
+  four-colour midline vertices, inside; no other point) — as YB found. **At `X_1` (exact):** `X_1` is at distance exactly 1 from four vertices, `V_0`, `A_1`,
+  `V_1`, `A_{−1}`; purple, green, blue and marble are **strictly** blocked (arches 0, 1, −1 and the top tiles `T_{−1}`, `T_2` cross `ω(X_1)`); red has
+  `max = 1` at `T_0` (touching at `V_0`, `A_{−1}`) and `min = 1` at `T_3` (its corner `(5/4, Y)`); orange `max = 1` at `T_1` (at `V_1`, `A_1`) and
+  `min = 1` at `T_{−2}` (its corner `(−3/4, Y)`). **Colourless: the open cone (arcsin(1/4), 180° − arcsin(1/4)) = (14.48°, 165.52°), width
+  180° − 2·arcsin(1/4) ≈ 151.045°**, symmetric about the vertical; orange available in (0°, 14.48°), red in (165.52°, 180°).
+- **The disk**: the other points are `C_k`, `D_k` on the rim (colourless cones of 108°, O1) and `Q_k` outside. **At `Q_0`** (exact): blue, green, orange,
+  red strictly blocked; violet `max = 1` at `S_0` (touching at `X_0`, `U_0`), yellow `max = 1` at `T_1` (at `Y_0`, `U′_1`). **`Q_0` itself can take violet or
+  yellow** (neither is blocked at the point), but **every point `Q_0 + εd` with `d` in (54°, 198°) — width 144°, containing the outward radial 126° — is
+  colourless**; violet is available in (254.17°, 54°) and yellow in (198°, 357.83°). So an extension of the disk beyond `F_k` is stopped at `Q_k`, 0.0383
+  beyond the rim, in the outward cone.
+- **Do the two positives stop for the same reason? Yes** [hand, one mind; the ingredients exact]: each stops at the **second common unit point of a close
+  complementary pair saved at a four-colour unit-arc centre**, lying on the object's boundary (strip: `X`; disk: `C_k`, `D_k`), and the mechanism is
+  identical — **four colours are strictly blocked** there (their tiles are crossed by the unit circle about the point) and **the two tiles meeting at the
+  point each realise their diameter from it** (`max = 1`: strip `T_0`, `T_1`; disk `R_0`, `S_0`), so their colours continue only in the half-planes
+  pointing away from their far contacts, and the outward cone between the two perpendiculars is colourless. The differences: the strip's boundary tiles
+  are also blocked sideways (`min = 1` at the next same-colour top tiles, exactly 1 along the edge) and its cone is wider (151.045° against 108°); the
+  disk has a second kind of stopping point off its boundary (`Q_k`, radius ≈ 2.16253), the strip none.
+
+### O3 — the move at `C_k` and `D_k` [tools, exact; hand for the first-order reading]
+
+At `C_0` the only straight side of an adjacent tile (`R_0`, `S_0`) that is a chord of `ω(C_0)` is **`D_0U′_0`** (the side between red `R_0` and green `T_0`;
+`|C_0D_0| = |C_0U′_0| = 1`); the mirror at `D_0` is **`C_0U_0`** (between `R_0` and violet `S_0`). The move bends `D_kU′_k` into the arc of `ω(C_k)` through
+its ends (bulging away from `C_k`, into `T_k`) and `C_kU_k` into the arc of `ω(D_k)` (into `S_k`), in all five sectors: red gains two lenses per sector.
+
+**Valid: yes** (`o3-o5.out`, exact): the ten new arcs meet every other piece only at their shared ends (circle–circle and circle–line second
+intersections tested exactly); the map stays consistent (70 pieces); **71 of 71 same-colour pairs ACCEPT**, 46 exact contacts at 1 — the same count: the
+new arcs add no out-contact. `R_k` keeps diameter exactly 1 (two points of the two lenses, at angles `α`, `β` along them, are at distance² `3 + 2cos(α + β)
+− 2cos α − 2cos β ≤ 1`, with equality only at an end — hand, and the checker agrees).
+
+**Kinds of the new unit arcs** (exact): the arc of `ω(C_k)` (inner `R_k`, red; outer `T_k`) and the arc of `ω(D_k)` (inner `R_k`; outer `S_k`) are of kind
+**in, self case — not out**: the centre is a rim vertex carrying only red and the colour of `S_k` (resp. `T_k`), and the outer colour is the third one.
+Each new arc has one end on the rim (`D_k`, resp. `C_k`), so these ten are **not arc-closed**.
+
+**Colours at the rim point, and the colourless set, before and after** (`cone-disk.out`, exact contacts; first order):
+
+| point | before the move | after the move |
+|---|---|---|
+| `C_0` | red available on (13.61°, 54°); **colourless (54°, 162°), 108° = 3π/5**; violet available on (162°, 193.61°) | red on (13.61°, 54°); **colourless (54°, 90°), 36° = π/5**; **green now available on (90°, 193.61°)** (with violet on (162°, 193.61°)) |
+| `D_0` | green on (346.39°, 18°); **colourless (18°, 126°), 108°**; red on (126°, 166.39°) | **violet now available on (346.39°, 90°)** (with green on (346.39°, 18°)); **colourless (90°, 126°), 36°**; red on (126°, 166.39°) |
+
+Why green appears at `C_0`: before the move `ω(C_0)` crossed `T_0` along the chord's bulge (strict block); after it, `T_0`'s boundary **is** that arc of
+`ω(C_0)`, so `T_0` lies outside the open unit disc about `C_0` and blocks only the directions with `d·(D_0 − C_0) > 0` or `d·(U′_0 − C_0) > 0`, i.e.
+(234°, 90°). What remains at `C_0` is bounded by red's contact at `U′_0` (54° = 324° + 90°) and green's new contact at `D_0` (90°). **A colourless
+set remains, of width exactly 36°, at each of the ten rim vertices.**
+
+### O4 — the strip's forced sectors at `V_0` and `A_1` [hand, one mind; the directions exact]
+
+Near `V_0 = (0, √3/2)` the unit circle of a point `V_0 + tw` passes near the four-colour midline vertices `P_{±1}` (both at distance exactly 1) along the
+tangent line of `ω(V_0)` shifted by `t(P − V_0)·w`; it therefore crosses the sectors of `P` on the side of that line, and a colour met there is forbidden at
+`V_0 + tw`. `P_1 − V_0` points at 300°, `P_{−1} − V_0` at 240° (exact); the four lines cut the directions at `V_0` at 30°, 150°, 210°, 330°:
+
+| directions at `V_0` | `P_1` allows | `P_{−1}` allows | forced |
+|---|---|---|---|
+| (330°, 30°) | purple, blue, orange | purple, red, marble | **purple** (arch 0) |
+| (30°, 150°) | red, blue, orange | purple, red, marble | **red** (the top tile `T_0`) |
+| (150°, 210°) | red, blue, orange | purple, blue, marble | **blue** (arch −1) |
+| (210°, 330°) | purple, blue, orange | purple, blue, marble | **free: purple or blue** (120° of directions, below `V_0`, where the two arches meet along `x = 0`) |
+
+At `A_1 = (3/4, √15/4)` with `P_1 − A_1` at 255.52° and `P_2 − A_1` at 284.48° (lines at 14.48°, 165.52°, 194.48°, 345.52°): **(345.52°, 14.48°) forced
+marble**; **(165.52°, 194.48°) forced orange**; **(194.48°, 345.52°) forced green** (arch 1); **(14.48°, 165.52°) free: marble or orange** (151.04°, the top
+tiles `T_2`, `T_1` meeting along `x = 3/4`). The strip's own colouring meets every forced region and splits each free region at 270° and 90°.
+
+**Can a change confined to those free directions, or to the neighbourhoods of `V_0` and `A_1`, make a colour available at `X_1`? No.** At `X_1` the
+colourless cone is (14.48°, 165.52°) (O2). In it: purple, green, blue and marble are strictly blocked **by tiles crossing `ω(X_1)` far from `V_0` and `A_1`**
+(arch 0 near its apex, arch 1 near the middle of its arc — nearest point 0.982 from `X_1` —, arch −1, and the top tile `T_2`, which has a point at distance
+1/2 (`(3/4, Y)`) and one at `√7/2` (`A_2`), exact) — no change near `V_0`, `A_1` can touch them; red is blocked through `V_0` in directions `d` with
+`(V_0 − X_1)·d < 0`, i.e. (−14.48°, 165.52°) ⊇ the cone — and red at `V_0` in (30°, 150°) is **forced**, so it stays; orange likewise through `A_1`
+(`(A_1 − X_1)·d < 0` on (30°, 210°), orange **forced** at `A_1` on (165.52°, 194.48°) ⊂ that half-plane) and through `V_1` on (14.48°, 30°], where the
+change is not confined. The free arc at `V_0` (210°–330°) lies wholly outside the half-plane that `X_1`'s cone reads at `V_0`; the free arc at `A_1`
+meets it but only marble and orange live there, and both are blocked by other means. (The lens of arch 1 inside `ω(X_1)` runs from `V_1` to `A_1`; its middle is ≈ 0.135 from `A_1`, so the claim holds for neighbourhoods of radius below that; larger regions are outside O4's question.) **So the strip's stop at `X_1` is not an artefact of the sectors
+at `V_0`, `A_1`: four of the six colours are lost to tiles no local change at `V_0` or `A_1` reaches.**
+
+### O5 — the largest vertex-centred disc [tools, exact; the bound hand, one mind]
+
+- **Inside O1:** the largest closed disc centred at a vertex has radius **`r − a = √((25 + 9√5)/10) − √((5 − √5)/10) ≈ 1.5985243`**, centred at any
+  `A_k` (the `A_k` are the vertices nearest the centre: `|A_k|² = a² = (5 − √5)/10` is the least `|vertex|²`, exact).
+- **A valid extension holds a larger one** (exact): grow `R_0` over its rim arc to the arc of the circle `(A_0, φ)` from `D_0` to `C_0` (`|A_0C_0| =
+  |A_0D_0| = φ`, exact); the circles `(A_0, φ)` and `(O, r)` meet exactly at `C_0`, `D_0`, so the new object contains the closed disc `B(A_0, φ)`; **71 of 71
+  pairs ACCEPT**, `R_0` keeping diameter exactly 1 (its new arc is a 36° arc of radius φ with chord `2φ sin 18° = 1`). **`φ ≈ 1.6180340 > r − a`.**
+- **No valid extension of O1 holds a larger closed disc centred at a vertex of O1** [hand, one mind; the cones exact]: a closed disc about `A_k` of radius
+  `> φ` contains a neighbourhood of `C_k`, hence an open set of the colourless cone (54°, 162°) at `C_k`; almost every point of it would be an interior
+  point of a tile, and each is at distance exactly 1 from interior points of all six colours of O1 — a monochromatic unit pair. About any other vertex of
+  O1 the bound is its distance to the nearest `C_j`/`D_j`, **at most 1** (the list in `o3-o5.out`: after the five `A_k` at φ, the apexes `B_k` at exactly
+  1, all others less). So **the answer is φ, attained, at the `A_k`**; the O3 move leaves a 36° colourless cone at `C_k`, so the same bound holds for the
+  moved disk. (The outside stopping points `Q_k` are farther: `|A_0 − Q_0| ≈ 1.7645`.)
+
+### Theorems this phase proved (stages 2–5)
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| YB2-CHK | an exact curved-tile checker over towers of square roots (signs by recursion; exact meeting, no map hypothesis) agrees pair by pair with the frozen FS-110 checker on 1,663 pairs and with YB's checker on YB's strip and its plants; seven checker plants each flip exactly their predicted controls | tools, exact | stage 2; `tools/fs112_yb2_check.py`, `tools/fs112_yb2_calib.py` |
+| YB2-STRIP3 | a third rebuild of `[AxenovichEtAl2014]`'s strip (words + Fig. 4's colour pattern) is valid; height `√15/2 + √3` exact; 90 orbit pairs, 36 exact contacts | tools, exact; one rebuild | 4.1 |
+| YB2-DISK | the disk rebuilt from its by-eye transcription (bounds 126°, 108° met with equality; rim sides radial) is a valid six-colouring of the closed disc of radius `√((25 + 9√5)/10)`, the printed radius reproduced exactly; every tile has diameter exactly 1 | tools, exact; one rebuild; readings P, W, M | 4.2 |
+| YB2-ARCS | its 20 unit arcs, four at each four-colour vertex `A_k`, are all of kind both (self case) and arc-closed | tools, exact | O1 |
+| YB2-PAIRS | its 20 close complementary pairs each contain `U_k` or `U′_k` and have an `A_j` as a common unit point; the other point is `C_k`/`D_k` on the rim (10) or `Q_k` outside, `|Q_k|²` the root ≈ 4.6766 of `25x⁴ − 50x³ − 265x² − 250x + 121` (10, two per point) | tools, exact | O1 |
+| YB2-RIM | the rim points of the disk near which no colour can be given just outside are exactly the ten `C_k`, `D_k`, each with an open colourless cone of width exactly 108° | hand (first-order rule, one mind) + tools, exact | O1 |
+| YB2-EDGE | the strip's edge vertex `X_1` has the colourless cone (arcsin 1/4, 180° − arcsin 1/4), width ≈ 151.045°; four colours strictly blocked; YB's (30°, 165.52°) is a proper sub-cone | hand + tools, exact | O2 |
+| YB2-Q | at `Q_k` violet and yellow (at `Q_0`) remain available at the point itself, and the cone (54°, 198°), 144°, is colourless | hand + tools, exact | O2 |
+| YB2-SAME | the strip and the disk stop for the same reason: the second common unit point of a close complementary pair saved at a four-colour unit-arc centre lies on the boundary, four colours are crossed there and the two boundary tiles realise their diameters from it | hand, one mind | O2 |
+| YB2-MOVE | O3's move (ten chords bent to unit arcs about `C_k`, `D_k`) keeps the disk valid; the new arcs are of kind in (self), not arc-closed; the colourless cone at each `C_k`, `D_k` shrinks from 108° to 36° | tools, exact + hand | O3 |
+| YB2-FORCE | at the strip's `V_0` and `A_1` the neighbouring four-colour midline vertices force one colour on three arcs of directions and leave two colours free on one (120° at `V_0`, 151.04° at `A_1`); no change confined to those free arcs, or to neighbourhoods of `V_0`, `A_1` of radius below ≈ 0.13, makes a colour available at `X_1` | hand, one mind; the directions exact | O4 |
+| YB2-DISC | the largest closed vertex-centred disc inside O1 has radius `r − a`; a valid extension holds one of radius φ about `A_0` (exact), and none larger about a vertex of O1 | tools, exact + hand, one mind | O5 |
+
+## Stage 5 — SAVED (step 3 complete: every O1–O5 verdict above is committed before Y2's section, tools or outputs are opened)

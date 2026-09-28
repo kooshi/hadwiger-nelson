@@ -1,0 +1,68 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 1
+   first-order cone at the disk's rim vertex C_0 (outward: radial):
+      blue    blocked in every direction
+      green   blocked in every direction
+      orange  blocked in every direction
+      red     blocked iff -(u.d) > 0 [u at 0.000 deg] or -(u.d) > 0 [u at 0.000 deg] or -(u.d) > 0 [u at 324.000 deg] or -(u.d) > 0 [u at 324.000 deg]
+      violet  blocked iff -(u.d) > 0 [u at 252.000 deg] or -(u.d) > 0 [u at 252.000 deg]
+      yellow  blocked in every direction
+      directions (  13.6138,   54.0000) deg, width  40.3862: available: red
+      directions (  54.0000,  162.0000) deg, width 108.0000: COLOURLESS
+      directions ( 162.0000,  193.6138) deg, width  31.6138: available: violet
+   first-order cone at the disk's rim vertex D_0 (outward: radial):
+      blue    blocked in every direction
+      green   blocked iff -(u.d) > 0 [u at 288.000 deg] or -(u.d) > 0 [u at 288.000 deg]
+      orange  blocked in every direction
+      red     blocked iff -(u.d) > 0 [u at 216.000 deg] or -(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 216.000 deg]
+      violet  blocked in every direction
+      yellow  blocked in every direction
+      directions (  18.0000,  126.0000) deg, width 108.0000: COLOURLESS
+      directions ( 126.0000,  166.3862) deg, width  40.3862: available: red
+      directions ( 346.3862,   18.0000) deg, width  31.6138: available: green
+   first-order cone at the disk's rim vertex F_0 (outward: radial):
+      blue    blocked in every direction
+      green   blocked in every direction
+      orange  blocked in every direction
+      red     blocked in every direction
+      violet  never blocked
+      yellow  never blocked
+      directions (  36.0000,  216.0000) deg, width 180.0000: available: violet, yellow
+   Q_0 on the ray of B_0: True;  |Q_0|^2 > r^2: True;  |Q_0|^2 ~ 4.676550266
+      |Q_0 - X_0| = 1: True
+      |Q_0 - U_0| = 1: True
+      |Q_0 - Y_0| = 1: True
+      |Q_0 - U'_1| = 1: True
+   first-order cone at the outside point Q_0 (all directions):
+      blue    blocked in every direction
+      green   blocked in every direction
+      orange  blocked in every direction
+      red     blocked in every direction
+      violet  blocked iff -(u.d) > 0 [u at 324.000 deg] or -(u.d) > 0 [u at 324.000 deg] or -(u.d) > 0 [u at 344.173 deg] or -(u.d) > 0 [u at 344.173 deg]
+      yellow  blocked iff -(u.d) > 0 [u at 267.827 deg] or -(u.d) > 0 [u at 267.827 deg] or -(u.d) > 0 [u at 288.000 deg] or -(u.d) > 0 [u at 288.000 deg]
+      directions (  18.0000,   54.0000) deg, width  36.0000: available: violet
+      directions (  54.0000,  198.0000) deg, width 144.0000: COLOURLESS
+      directions ( 198.0000,  254.1727) deg, width  56.1727: available: yellow
+      directions ( 254.1727,  357.8273) deg, width 103.6546: available: violet, yellow
+      directions ( 357.8273,   18.0000) deg, width  20.1727: available: violet
+   first-order cone at the MOVED disk's rim vertex C_0 (outward: radial):
+      blue    blocked in every direction
+      green   blocked iff +(u.d) > 0 [u at 324.000 deg] or +(u.d) > 0 [u at 0.000 deg] or +(u.d) > 0 [u at 324.000 deg] or +(u.d) > 0 [u at 0.000 deg] or +(u.d) > 0 [u at 324.000 deg] or +(u.d) > 0 [u at 0.000 deg]
+      orange  blocked in every direction
+      red     blocked iff -(u.d) > 0 [u at 0.000 deg] or -(u.d) > 0 [u at 324.000 deg] or -(u.d) > 0 [u at 0.000 deg] or -(u.d) > 0 [u at 324.000 deg] or -(u.d) > 0 [u at 0.000 deg] or -(u.d) > 0 [u at 324.000 deg]
+      violet  blocked iff -(u.d) > 0 [u at 252.000 deg] or -(u.d) > 0 [u at 252.000 deg]
+      yellow  blocked in every direction
+      directions (  13.6138,   54.0000) deg, width  40.3862: available: red
+      directions (  54.0000,   90.0000) deg, width  36.0000: COLOURLESS
+      directions (  90.0000,  162.0000) deg, width  72.0000: available: green
+      directions ( 162.0000,  193.6138) deg, width  31.6138: available: violet, green
+   first-order cone at the MOVED disk's rim vertex D_0 (outward: radial):
+      blue    blocked in every direction
+      green   blocked iff -(u.d) > 0 [u at 288.000 deg] or -(u.d) > 0 [u at 288.000 deg]
+      orange  blocked in every direction
+      red     blocked iff -(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 216.000 deg] or -(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 216.000 deg] or -(u.d) > 0 [u at 180.000 deg] or -(u.d) > 0 [u at 216.000 deg]
+      violet  blocked iff +(u.d) > 0 [u at 216.000 deg] or +(u.d) > 0 [u at 180.000 deg] or +(u.d) > 0 [u at 216.000 deg] or +(u.d) > 0 [u at 180.000 deg] or +(u.d) > 0 [u at 216.000 deg] or +(u.d) > 0 [u at 180.000 deg]
+      yellow  blocked in every direction
+      directions (  18.0000,   90.0000) deg, width  72.0000: available: violet
+      directions (  90.0000,  126.0000) deg, width  36.0000: COLOURLESS
+      directions ( 126.0000,  166.3862) deg, width  40.3862: available: red
+      directions ( 346.3862,   18.0000) deg, width  31.6138: available: violet, green
