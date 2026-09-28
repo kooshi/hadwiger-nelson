@@ -17,6 +17,10 @@ about a possible object: the class of valid maps is not known to be non-empty.*
 | FS114-Y-STRIPRIGID | Every valid colouring of the strip's geometry is `[AxenovichEtAl2014]`'s, up to a permutation of the six colours | [hand over exact relations; one mind] | §2.2 |
 | FS114-Y-DISKRIGID | Every valid colouring of the disk's geometry (`[Polymath2021]` Fig. 10, its 26 tiles) is the printed one up to a permutation of the six colours: the central tile and the five ring-1 tiles pairwise straddle distance 1, and each other tile, in a fixed order, then has exactly one colour left; so FS114-Y-PENT holds under **every** colouring: **no valid map contains the disk's geometry** near any `B_k` | [tools, exact relations; the chain of deductions asserted exact, each with one outcome; hand; one mind] | §2.2; `tools/fs114_y_conflicts.py disk` |
 | FS114-Y-K6 | A design screen, about every valid map: if two cubic vertices `u`, `u′` at distance `< 2` have six incident tiles that pairwise straddle distance 1, they are complementary under every colouring, and each common unit point of `ω(u)`, `ω(u′)` must be a leaving centre of both (FS112-N3-COR3) — a geometry failing that is not part of any valid map, whatever its colours | [hand; one mind, over COR3] | §2.3 |
+| FS114-Y-EDGE | C114-EDGE-RAINBOW TRUE: in a valid map, two faces of one colour that each share a boundary arc of positive length with a face `x` (either may be `x`) are Siamese; so a face with six or more edge-neighbours forces a Siamese pair (Sirgedas's "Degree 6 isn't possible with only 6 colors", for non-Siamese maps) | [hand; one mind] | §3.2 |
+| FS114-Y-RAINBOW | C114-RAINBOW MISSTATED; corrected: two faces `T₁`, `T₂` of one colour meeting `cl x` are Siamese, or touch `cl x` at the two ends `p`, `q` of a diameter of `x` (`\|p − q\| = 1 = diam x`) and either (i) one shares a boundary arc with `x`, which then lies on the unit circle about the other's contact point (the tactic), or (ii) both touch `x` only at single points, vertices of at least four colours; in (ii) a unit arc is centred at `p` or `q`, or `(p, q)` is a covering pair — and then NB4P (four colours) or FS112-SIX (five or six) puts unit arcs on `ω(p)` or on circles about its ring points | [hand; one mind] | §3.1 |
+| FS114-Y-REDBLOCK1 | C114-REDBLOCK's first clause TRUE: in a non-Siamese valid map in which every tile has five edge-neighbours, the red tiles' closed edge-neighbourhoods partition the tiles | [hand; one mind] | §3.2 |
+| FS114-Y-DUALCOUNT | C114-DUAL-COUNT TRUE as stated (doubly periodic, non-Siamese, five edge-neighbours per tile): `n/2` quads, each emitting four distinct unit-arc edges, `2n` of `5n/2` edges; with `f₄` tiles of four edge-neighbours, `(n + f₄)/2` of excess vertex degree and at least `2n − 2f₄` unit-arc edges when only cubic vertices and quads occur | [hand; one mind] | §3.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -28,6 +32,9 @@ about a possible object: the class of valid maps is not known to be non-empty.*
   (b) Other colourings of the strip's and the disk's geometries — I would have enumerated colourings; instead the exact conflict relations were
   read and the colourings derived by hand (a clique, then a fixed chain of forced steps, each asserted to have one outcome). (c) Torus designs —
   I would have searched periodic tilings; instead each family is killed by a local, colour-free derived obstruction, or its budget derived.
+- Stage 3: (a) ENCLOSED3 — I would have searched insertions of small tiles; instead the one condition for an insertion (a colour free with margin
+  at a cubic vertex) was read exactly at the strip's twelve cubic vertices of a period. (b) The index at BOWTIE — I would have scanned curve
+  pairs; instead FS106-IND-X's hypothesis was read off BOWTIE's formula.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -246,3 +253,95 @@ valid map (FS114-Y-DISKRIGID with PENT), and every route to a fourth colour at i
 so a larger non-Siamese fragment needs a new skeleton, not an extension of the disk.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the killing tests
+
+### 3.1 §IQ's candidates (a)–(c)
+
+**(a) C114-RAINBOW** (the rainbow deficit; killing test: "a valid local fragment by formula with a face of map-degree at least 7 whose closed
+neighbourhood repeats a colour with neither a Siamese pair nor a unit arc"). **MISSTATED; corrected as FS114-Y-RAINBOW** [hand; one mind].
+*Derivation.* Let `T₁ ≠ T₂` have one colour and meet `cl x` at `p`, `q`. The interior cross distances of `T₁`, `T₂` fill an interval avoiding 1
+(N-E0); if they are below 1 the pair is Siamese. Otherwise every cross distance is at least 1, while `|p − q| ≤ diam x ≤ 1`: so `|p − q| = 1 = diam x`,
+`x ⊂ B̄(p, 1) ∩ B̄(q, 1)`, `T₁ ∩ B(q, 1) = ∅`, `T₂ ∩ B(p, 1) = ∅`. (i) If `T₁` shares a boundary arc with `x` near `p`, every point of that arc is a limit
+of points of `x` (within 1 of `q`) and of `T₁` (at least 1 from `q`): the arc lies on `ω(q)` — the tactic, with `T₂` touching `x` at `q` only (two
+positive-length arcs cannot both be at distance exactly 1 from each other point to point: FS114-Y-EDGE). (ii) Otherwise both touch `x` only at
+single points, `p` and `q`, where `x` and the same-colour face are non-adjacent sectors; in a non-Siamese map the two sectors between them at `p`
+carry two further colours, so `p` (and `q`) has at least four colours. Near `q`, `x` lies inside `B̄(p, 1)` and `T₂` outside it, so `ω(p)` leaves `q`
+through the sectors between them: either it runs along a boundary there (a unit arc centred at `p`), or those sectors' colours avoid `P_cl(p)` (N-E1),
+and then `P_cl(p) ∪ P_cl(q)` is all six: a covering pair at distance 1, where NB4P (exactly four colours) or FS112-SIX (five or six) puts arcs of
+`Γ` on `ω(p)` or on unit circles about its ring points. **So the killing test as posed cannot fire in the strong sense** (a repeat always costs a
+Siamese pair or a unit arc within distance 2 of the face), **but the arc need not separate the two faces**: case (ii) is the third option the claim
+omits. Not built: a fragment realising (ii). In both printed positives every repeat is case (i) (the strip: `x = U_0`, `T_0` and `D_1` share red
+across the arc of `ω(P_1)`; `T_1` and `D_{−1}` across `ω(P_0)`).
+
+**(b) C114-SKELETON** (killing test: a valid fragment whose four-colour vertices violate a rule the skeleton asserts). **Did not fire on any held
+fragment.** Every four-colour vertex whose unit circle lies inside a held fragment emits four unit arcs centred at it (the strip's midline
+vertices, 62.09°; the disk's corners, 112.35°; the capped strip adds none); every close complementary pair whose rhombus lies inside a held
+fragment is a rhombus completion with four-colour corners (FS112-Y3-R3, N3-P1 met). The positives break the skeleton's rules only at their edges —
+which is exactly what FS114-Y-STRIPK6 and FS114-Y-PENT turn into obstructions. A caution for the proof side, derived: the cap arcs of §2.1 are unit
+arcs centred at **cubic** vertices (the valleys), of kind in only; so "arrows" are not emitted by quads alone in fragments — in a map N3-NOBOTH
+forbids them only when both-kind.
+
+**(c) C114-BUDGET** (killing test: a four-colour vertex carrying arcs below the budget a charge rule assumes). **Did not fire.** The held
+four-colour vertices with whole rings inside a fragment carry 62.09° (strip) and 112.35° (disk), four arcs each, above FS112-A4SIX's 60°.
+FS112-BOWTIE's four-colour neighbours `N`, `S` carry one centred unit arc of 45.24° each, but their unit circles leave the fragment, so A4SIX's
+hypothesis cannot be read there: **no held fragment tests the budget at a four-colour vertex below 60°**, and building one is the test's open form.
+
+### 3.2 §8's claims
+
+- **C114-EDGE-RAINBOW: TRUE** (FS114-Y-EDGE) [hand; one mind]. If `T₁ ≠ T₂` share one colour and arcs `α₁`, `α₂` of positive length with `x` and are
+  not Siamese, every `p ∈ α₁`, `q ∈ α₂` has `1 ≤ |p − q| ≤ diam x ≤ 1`, so `α₂ ⊂ ω(p) ∩ ω(p′)` for two points `p ≠ p′` of `α₁`: at most two points.
+  If `T₂ = x`, `T₁` and `x` are adjacent across an arc, so their cross distances reach 0 and all are below 1: Siamese. ∎ **No refuting fragment can
+  exist.** Corollary: a face with six or more edge-neighbours has a Siamese pair among them and itself.
+- **C114-DUAL-COUNT: TRUE as stated** (FS114-Y-DUALCOUNT) [hand; one mind]; derivation §2.3 F3. **With tiles of four edge-neighbours** (`f₄` of
+  them, the rest five, only cubic vertices and quads): `2E = 5n − f₄`, so `Σ_v (d_v − 3) = 3n − E = (n + f₄)/2` quads — Sirgedas's "it creates
+  another quad" is exactly `f₄/2` more — while a quad emits an arc only for the tiles around it that have five edge-neighbours, so the unit-arc edges
+  number at least `4Q − 4f₄ = 2n − 2f₄`, against `E = (5n − f₄)/2` edges. **With Siamese pairs** the rainbow step fails (FS114-Y-EDGE is the only
+  source of an emitted arc) and no count replaces it here.
+- **C114-REDBLOCK:** first clause **TRUE** (FS114-Y-REDBLOCK1) [hand; one mind]: each tile's closed edge-neighbourhood has six tiles, rainbow by
+  FS114-Y-EDGE, so exactly one red; so every non-red tile has exactly one red edge-neighbour and no two red tiles are edge-adjacent, and the blocks
+  (a red tile with its five neighbours) partition the tiles. "Also this graph can't have pentagons": **GAP** at the post's step "The 5 rigid EDs
+  have length 1, but then the "pentagon" will have at least one "edge" with length > 1." What is derived at a pentagon's common point `p` (five
+  tiles, one per block, five colours): `ω(p)` meets only red open tiles (N-E1), the red tiles meeting it take arcs of angular width at most 60°
+  pairwise at least 60° apart, and unit arcs centred at `p` total at least 180° (FS112-SIX) — no contradiction at that level. The quadrilateral clause
+  ("a bit sloppy(?)", in the post's words): **GAP** at its step "the combined red/orange region will have width > 1 and this region can't actually be
+  two-colored". "The red metagraph must have only triangles": **GAP**, resting on both.
+- **C114-ENCLOSED3: GAP** (not derived, not refuted). Derived route to a local refutation [hand; one mind]: at a cubic trichromatic vertex `v`
+  of a valid fragment, if some colour `d` is **free with margin** (every `d`-tile at distance strictly below 1 or strictly above 1 from all of it
+  near `v`), a small enough triangular tile of colour `d` can be inserted at `v`, giving a valid fragment with an enclosed tile of exactly three
+  edge-neighbours. **On the strip no cubic vertex has such a colour**: at each of its twelve cubic vertices of a period, each of the three
+  complementary colours has a tile straddling distance 1 from the vertex (`tools/fs114_y_insert.py`, `data/fs114/fs114-y/insert.out`, exact;
+  control: every colour is free with margin at `(1/2, 7/2)`). So the strip gives no local counterexample; the disk was not read (budget).
+
+### 3.3 G71's E12 at FS112-BOWTIE's seam (the plan's E16)
+
+**BOWTIE satisfies FS106-IND-X's hypothesis exactly, read from its formula** [hand; one mind, over IND-X's one]: the boundary at `E` between `G`
+(colour 1) and the horns (colour 2) is the arc of `ω(N)` of angular width `2 arcsin(5/13) ≈ 45.24°`; `N` has four colours; the arc's side cones at
+`N` (width 45.24°, about 0° and 180°, FS112-U1) hold colour 4 (`XR`, directions `[292.6°, 45°]`) and colour 5 (`XL`, `[135°, 247.4°]`), while the
+inner colour 1 lies in the facing cone and the outer colour 2 (`CN`, `[45°, 135°]`) in the away cone. That is IND-X's configuration C5 "with a
+colour in the side cones at y", where IND-X (one mind, SB, with a checker) makes complementary translate curves swap with `|ΔInd| = 2`. **Not built
+here:** the explicit pair of curves on BOWTIE and its index trace. So E16 ("G71's index survives the bowtie seam with unit arcs", 0.75) reads
+**not met at IND-X's grade**, pending that explicit check — a GAP, handed on.
+
+### 3.4 Where the construction side stands (for the owner)
+
+- **Scored registrations:** E10 (the pentagon admits the third arc, 0.3) — **not met**, a derived obstruction (FS114-Y-PENT). E11 (the dial
+  beyond 1.834, 0.25) — **met**, to `φ²/√2`. E12 (a YES by formula, 0.03) — not met. E16 — see §3.3.
+- **What a YES now must avoid, as statements about every valid map:** any six tiles in the strip's valley–apex configuration (FS114-Y-STRIPK6);
+  the disk's centre (DISKRIGID with PENT); any close cubic pair failing the K6 screen; any cubic vertex whose close partners do not pairwise share a
+  leaving centre (PAIRSHARE). Both printed positives fail these inside their own radii, so a YES needs a new skeleton, not an extension.
+- **Left for a successor:** (1) the disk's cubic vertices read for a colour free with margin (ENCLOSED3's local form); (2) the explicit curve pair at
+  BOWTIE's seam (E16); (3) a fragment realising FS114-Y-RAINBOW's case (ii); (4) a four-colour vertex with its whole ring inside a fragment and under
+  60° of centred arcs (the budget's test); (5) a candidate skeleton meeting the K6 screen and PAIRSHARE at every close pair — the first design a
+  torus attempt could start from.
+
+**Proposed edits for the close** (I edit none of these files): `LEDGER.md` — the theorems of this record at their grades, and row 136's "Not
+claimed: … any region larger than print" kept (nothing larger built, but the dial's vertex-centred radius moves to `φ²/√2`); `plans/FS112-derivation.md`
+errata — Y3 §4.2 item 4's "the completion `A_0 + A_1 − B_0` lies inside the central tile" is exactly the corner `A_3`; FS112-Y3-T2-BUDGET's "Not
+claimed … other colouring of the strip's geometry" answered (none, FS114-Y-STRIPRIGID); `data/fs114/claims.md` — C114-RAINBOW's corrected form.
+`BIBLIOGRAPHY.md` rows: `[Mohar2002]` — held (`~/source/library/pdf/Mohar-2002-light-structures-infinite-planar.pdf`), abstract, §§1–2 and §3's
+opening read; Ágoston 2025 — its arXiv version is arXiv:2404.14398v2, held (`~/source/library/pdf/arXiv-2404.14398-agoston-nicely-colour-sphere.pdf`),
+§1, §2's outline and §2.1's opening read; `[Sirgedas2021]` — pp. 1–11 and 13 read (rendered images), its "stitch" a seven-colour device; the group
+thread `Z50mmulkXCQ` read in full.
+
+## Stage 3 — SAVED
