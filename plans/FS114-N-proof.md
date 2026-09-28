@@ -37,6 +37,11 @@ tiles the components of `ℝ² ∖ Γ` (adjacent tiles of one colour merged), `P
 | N2-ENC3 | C114-ENCLOSED3: **GAP**. Insertion lemma: a tiny tile of a colour missing from `B̄(u, 1)` placed at a cubic vertex `u` of a non-Siamese valid map leaves it non-Siamese and valid, with an enclosed three-neighbour tile; so ENCLOSED3 implies COVER-3 (every colour meets `B̄(u, 1)` at every cubic vertex), and no argument reading only the tile and its neighbours proves it | [hand, one mind] | §N2-2.5 |
 | N2-SIAM | Route T as a count is **blind to Siamese vertices**: at a vertex with repeated colours the demand `(d − 2)(d − 3)` is paid by (S) repeats at no cost, and `d` is unbounded; the count reaches the non-Siamese case only | [hand, one mind] | §N2-2.6 |
 | N2-MU | `μ > 0` lowers demand by `μ` and is not charged by the count: GAP-μ. In the non-Siamese class a hole holds at most five tiles (one per colour but the tile's) | [hand, one mind] | §N2-2.6 |
+| N2-GROW | In a non-Siamese valid map at most `6(2R + 1)²` tiles meet a disc of radius `R` (same-colour tiles are unit-separated); at least `4R²` do | [hand, one mind] | §N2-3 |
+| N2-AVG | For simple non-Siamese valid maps of the plane (any complexity) the tile identities and Euler hold on discs up to `O(R)`: **no simple non-Siamese valid five-colour map of the plane exists** (N2-FIVE-PLANE); at six colours N2-ENDS's charge has density zero, and K1 ∧ K2-loc exclude the class | [hand, one mind] | §N2-3 |
+| N2-REFINE | A tile whose colour pair `(a, b)` keeps `b` more than `1 + δ` away can be cut into any `a, b` map: with Siamese pairs no density bound exists | [hand, one mind] | §N2-3 |
+| N2-CURV | C114-CURV: TRUE at every `K` with `R₀(K) = O(K²)` for simple maps; a uniform radius (Lemma 1 made local) is a reading | [hand, one mind] | §N2-3 |
+| N2-GSD | **GS-D: GAP** at K1, K2-loc, GAP-μ and the Siamese class; with the first three closed, route T gives the NO for every non-Siamese valid map with no complexity bound (Q-full's class, non-Siamese part), not Q-full | [hand, one mind] | §N2-3.1 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -432,3 +437,79 @@ vertices. E18 (the non-Siamese case decided at one mind): not met at this stage;
 
 **Left for stage N2-3 (aperiodic maps):** discharging at bounded `K` (`[Mohar2002]` Thm 3.1) and what the count needs beyond it; the question of an
 area-normalised charge; GS-D's verdict at its grade, with Q-full or Q-full_K named.
+
+## Stage N2-3 — SAVED: aperiodic maps — the count averages with no complexity bound in the non-Siamese class; GS-D's verdict
+
+*Read for this stage: `[Mohar2002]` (the author's preprint, held) §3 — the charge set-up, the definitions of impact range, flow value and smoothness, Theorem
+3.1 and its proof through (7); stage 1 had read §§1–2. The class **simple**: every tile an open disc whose closure meets each other tile's closure in a
+connected set or not at all, and does not meet itself — the plane form of `μ = 0`.*
+
+**N2-GROW [hand, one mind]. In a non-Siamese valid map the tile density is bounded with no complexity bound.** Two tiles of one colour are far (N114-FAR's
+dichotomy with Siamese excluded), so points chosen one in each tile meeting `B(c, R)` are pairwise at least 1 apart: discs of radius ½ about them are disjoint
+inside `B(c, R + ½)`, so at most `(2R + 1)²` tiles of each colour meet `B(c, R)`, **at most `6(2R + 1)²` in all**. Conversely every tile has area at most `π/4`
+(diameter `≤ 1`, the isodiametric inequality), so at least `4R²` tiles meet `B(c, R)`. In the simple class every tile has `2 ≤ s(x) ≤ 5` edges and every vertex
+degree `≤ 6`, so vertices and edges obey the same two bounds up to constants. *Reads:* one disc. *What it replaces:* the complexity bound's third clause ("at
+most `K` tiles per unit disc") is a theorem in the non-Siamese class; the other two (arcs per tile, radii `≥ 1/K`) never enter the count, which reads only
+`s(x)`, `d(v)` and colours.
+
+**N2-AVG [hand, one mind]. The torus count holds on average in the plane.** For a simple non-Siamese valid map, sum N2-ABS's exact tile identity
+`3s(x) + Σ_{v∈∂x}(d(v) − 3) = 3(k − 1) + A_x − u_x` over the tiles meeting `B(c, R − 2)` (their neighbourhoods `N[x]` lie in `B(c, R)`), and apply Euler's formula
+to the finite plane map they form. Every discrepancy from the torus computation sits at a vertex, edge or hole of the union within distance 3 of `∂B(c, R)`,
+each bounded (degrees `≤ 6`, `s ≤ 5`), and there are `O(R)` of them by N2-GROW applied to the annulus. So:
+- at **five colours**, `Σ_{v ∈ B(c, R)} p_5(d(v)) ≤ C·R` with `p_5 ≥ 3`, against at least `4(R − 3)²/3` vertices (`V ≥ F/3`: each tile has at least two vertices,
+  each vertex lies on at most six tiles) — **false for large `R`: no simple non-Siamese valid five-colour map of the plane exists, aperiodic or not, of any
+  complexity** (N2-FIVE-PLANE; the positive control, now in the plane);
+- at **six colours**, `|Σ_{v ∈ B(c, R)} c(v) + 2Σ_x u_x| ≤ C·R` with `c(v)` N2-ENDS's vertex charge: its density is zero on every simple non-Siamese valid six-map.
+Hence **K1 ∧ K2-loc ⟹ no simple non-Siamese valid six-map of the plane exists**, where **K2-loc** *(a claim)* asks for a radius `R₀` such that, under K1, every
+disc of radius `R₀` holds a vertex of positive charge or a tile with unused absent-colour capacity (`u_x > 0`) — a local, uniform form of K2 (then the sum
+over `B(c, R)` is at least `c′R²/R₀²`). K1 and K2-loc read discs of radius 2 and `R₀`.
+
+**Mohar's Theorem 3.1 — where it is needed.** Its (a) — a planar graph with smooth, bounded-range discharging leaving every vertex outside a finite set a
+final charge `≥ ε` "has exponential growth" — is the tool when growth is unknown. In the non-Siamese class growth is quadratic by N2-GROW, and Euclidean discs
+are Følner sets with no complexity bound, so the theorem is not needed. **Stage 1's question of an area-normalised charge is answered:** in the non-Siamese
+class the packing bound normalises by area for free; in the Siamese class no normalisation from the count's objects exists, by the next lemma.
+
+**N2-REFINE [hand, one mind]. With Siamese pairs there is no density bound.** If a tile `T` of colour `a` has a colour `b` whose class lies at distance `> 1 + δ`
+from `T`, then `T` may be cut into any finite map of the colours `a`, `b` (segments only): every same-colour pair inside `T` is close (all distances inside `T` are
+`< 1`, `T` open of diameter `≤ 1`), new `b`-tiles are far from the old ones, and new `a`-tiles are subsets of `T`. The map stays valid, with as many tiles per
+unit disc as wished, all new pairs Siamese. So Q-full and Q-full_K differ, as far as density goes, only in the Siamese class — the class route T cannot reach
+(N2-SIAM).
+
+**C114-CURV — TRUE at every `K`, `R₀(K) = O(K²)`, for simple maps [hand, one mind].** By N114-EULER at `k = 7` with `μ = 0`, `Σ_f (deg_M(f) − 6) = Σ_v (d − 2)(d − 3)
+≥ 0` on a torus; on a disc it holds up to boundary terms of size `O(K²R)` (at most `K` tiles per unit disc, vertex degrees at most `O(K)`), while a disc where every
+face has map degree at most 5 contributes at least `4(R − 2)²` to the deficit. So some face of map degree `≥ 6` lies in every disc of radius `C·K²`. A radius
+uniform in `K` is Thomassen's Lemma 1 made local (stage 1's item (3): an `M`-ball of radius 4 about a face of largest degree), **not re-walked here: a reading**.
+E7 ("C114-CURV's radius depends on `K`", p 0.7) is left to the close: this derivation's radius depends on `K`; whether a uniform one exists is open here.
+
+### N2-3.1 GS-D's verdict
+
+**GS-D — GAP [hand, one mind for the reduction].** Route T, the count, reduces GS-D (no valid map exists) to four named steps:
+1. **K1** — a degree-4 vertex of a non-Siamese valid map has at most two tactic edges (local, radius 2);
+2. **K2-loc** — under K1, the zero-charge extreme is excluded at a uniform radius `R₀` (local);
+3. **GAP-μ** — simple is assumed: pockets (two tiles meeting twice) and holes (at most five tiles each, non-Siamese) are not charged by the count;
+4. **the Siamese class** — maps with a repeated colour at a vertex, or with close same-colour tiles that do not touch — which the count cannot see (N2-SIAM) and
+   where no density bound holds (N2-REFINE): **FS112-N3-DENSE3's `R` half needs another kill.**
+With 1–3 closed, route T gives **the NO for every non-Siamese valid map — Q-full's class restricted to non-Siamese maps, with no complexity bound used**
+(N2-GROW supplies the density a bound would); not Q-full_K only. It does not give Q-full: the Siamese class is outside it. **For FS-111's scope note: route T,
+completed, would feed seven only together with a separate NO for the Siamese class.** Stage 3 uses no complexity bound anywhere except C114-CURV's radius.
+
+**Controls.** The strip and the disk satisfy K1 and carry positive charge (N2-2.2), so the route's kills are not refuted by them; the count is a closed-surface or
+plane-average statement, and both positives are fragments — where the plane beyond them is spent is the density of N2-ENDS's charge, which must vanish on
+average and is `+6` per column on the strip. The hexagonal seven-colouring: at `k = 7` the identity changes (`p_7(3) = −3`), and at `k = 6` it fails edge-rainbow.
+Swaps (G71): the route uses no winding or index. `F ∪ R` (G83): K1 reads a four-colour vertex and its unit partners; the Siamese step is `R` itself.
+
+**Registrations** (plan §5.3). E3 (GS-D decided): not met. E4 (a NO for doubly periodic maps): not met — reduced to K1 ∧ K2 (N2-KILL), non-Siamese and simple
+only. E18 (the non-Siamese case decided): not met — reduced to K1 ∧ K2-loc with GAP-μ, **at Q-full level for that case**. E17 (a named obstruction or GAP as
+the product): met.
+
+### N2-3.2 Proposed for the close (I edit none of these files)
+
+- Verdicts: GS-D GAP at the four steps above; C114-CURV TRUE at every `K` with `R₀(K) = O(K²)` (simple maps), uniform radius a reading.
+- Stubs or claims to mint: **K1**, **K2-loc** (route T's two local kills, non-Siamese); **SIAM-KILL** — a NO for valid maps with Siamese pairs, the half of GS-D
+  that no count reaches; **COVER-3** (ENCLOSED3's local content). For FS-111: route T's reach is the non-Siamese class at every complexity.
+- `BIBLIOGRAPHY.md`, `[Mohar2002]`: §3 now read through Theorem 3.1's proof step (7); §§4–6 unread. The packing argument of N2-GROW is classical.
+
+## Stage N2-3 — SAVED
+
+**What is left, for a successor:** K1 (a derivation, or a fragment by formula refuting it — the construction side's kind of object); K2 and K2-loc; GAP-μ; the
+Siamese class. C114-SKELETON not worked. NB's colour-free repair of Thomassen's topology, a third mind owed. C114-REDBLOCK's quadrilateral at degrees 5 and 6.
