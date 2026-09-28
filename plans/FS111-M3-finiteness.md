@@ -46,6 +46,11 @@ before the next begins. Notation: M2's (`plans/FS111-M2-regularity.md` §1.4–�
 - Stage 1: would have searched (a colourer or optimiser over pixel sets) for a periodic MUA set containing a Cantor pinch → instead designed one by
   hand from the structure of the configuration (§1.5: the lens band must be cut off by its own shadow, which needs its length to be exactly 1), and
   evaluated the hand-given candidate's free region once in floats to see its shape (an evaluation of one formula, not a search; no parameter varied).
+- Stage 2: would have sampled HC_K numerically for free points → instead proved the covering (B1–B2, Lemma NL) and checked its finitely many exact
+  inequalities in `ℚ(√3)` (`tools/fs111_m3_honey.py`); the grid check H7 is a control on the flat skeleton, not the proof.
+- Stage 3: would have searched for a fall colouring of HC_K's complement (to test the cascade) → did not; named the obstruction (M3-CASCADE) and left the
+  partition case open.
+- Stage 4: would have searched pixel sets for an irregular maximal set → instead took the fat Cantor set into HC's band and derived M3-IRREG.
 
 ## Fence log (standing rule 13)
 
@@ -53,6 +58,8 @@ before the next begins. Notation: M2's (`plans/FS111-M2-regularity.md` §1.4–�
   the round-3 brief fences only FS-114's files, transcripts, `chats-bak/`, other scratchpads, the close inventory and other briefs); `git log` printed
   FS-114 commit subjects ("FS-114: the Reuleaux bowtie family closed …", "FS114-N6: stage 4", "FS114-Y5: stage 2"): subjects only, nothing of
   FS-114 opened. No transcript, `chats-bak/` file, foreign scratchpad file, close inventory or other brief was opened.
+- Stages 2–4: later `git push` output printed only commit ranges; nothing fenced opened. Opened: `~/source/library/pdf/arXiv-math0703856-bukh-…pdf`
+  (§4 via pdftotext in my own scratchpad subdirectory `fs111-m3/`).
 
 ## Stage 1 — SAVED: quotation check; M2-PINCH-C's hypothesis is vacuous; the completion's design
 
