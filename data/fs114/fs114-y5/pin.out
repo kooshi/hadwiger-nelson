@@ -1,0 +1,33 @@
+plant: None
+A1 |p + e(210)/100 - r|^2 > 1: TRUE (registered TRUE) as registered
+A2 probe S0 vs t_B-wedge: REJECT (registered REJECT) as registered
+A3 probe S0 vs t_C-wedge: REJECT (registered REJECT) as registered
+A3 probe S0 vs t_D-wedge: REJECT (registered REJECT) as registered
+A4 probe S0 vs t_A-wedge (control): ACCEPT (registered ACCEPT) as registered
+A2 probe S_a vs t_B-wedge: REJECT (registered REJECT) as registered
+A3 probe S_a vs t_C-wedge: REJECT (registered REJECT) as registered
+A3 probe S_a vs t_D-wedge: REJECT (registered REJECT) as registered
+A4 probe S_a vs t_A-wedge (control): ACCEPT (registered ACCEPT) as registered
+A2 probe S_b vs t_B-wedge: REJECT (registered REJECT) as registered
+A3 probe S_b vs t_C-wedge: REJECT (registered REJECT) as registered
+A3 probe S_b vs t_D-wedge: REJECT (registered REJECT) as registered
+A4 probe S_b vs t_A-wedge (control): ACCEPT (registered ACCEPT) as registered
+B1 G-wedge vs I_c-wedge: REJECT (registered REJECT) as registered
+B2 wedge [300,330] at q_b vs I_c-wedge (control): ACCEPT (registered ACCEPT) as registered
+B3 probe S0 vs G-wedge: REJECT (registered REJECT) as registered
+B3 probe S_pa vs G-wedge: REJECT (registered REJECT) as registered
+B3 probe S_pab vs G-wedge: REJECT (registered REJECT) as registered
+B3 probe S_b vs G-wedge: REJECT (registered REJECT) as registered
+B4 away-only wedge vs probe S_pa (control): ACCEPT (registered ACCEPT) as registered
+C1 O_b-wedge vs probe S_pa: REJECT (registered REJECT) as registered
+C2 O_b-wedge vs probe S0: REJECT (registered REJECT) as registered
+C3 O_b-wedge vs probe S_b (control): ACCEPT (registered ACCEPT) as registered
+C4 alpha_A = 90: t_A-wedge [120,210] vs probe at q_b's gap: REJECT (registered REJECT) as registered
+C5 alpha_A = 60: t_A-wedge [150,210] vs the same probe (control): ACCEPT (registered ACCEPT) as registered
+D1 I_a-wedge vs probe S0: REJECT (registered REJECT) as registered
+D2 I_a-wedge vs probe S_pa (control): ACCEPT (registered ACCEPT) as registered
+E1 f(d,0) < 1 < f(d,2/100): TRUE (registered TRUE) as registered
+F1 beta 30/30: |w_b - w_c|^2 = 0.267949 < 1: TRUE (registered TRUE) as registered
+F2 beta 53.13/53.13: |w_b - w_c|^2 = 0.800000 < 1: TRUE (registered TRUE) as registered
+F3 beta 53.13/16.26: |w_b - w_c|^2 = 0.501436 < 1: TRUE (registered TRUE) as registered
+ALL AS REGISTERED
