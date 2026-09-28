@@ -1,0 +1,16 @@
+== 2. CAL-7: row 33's brick seven-colouring and the variants its Lean module records
+  ok       sevenBrick c=3, 4/5 x 3/5, shear 2/5       want ACCEPT got ACCEPT   pairs 17; exact contacts at 1: [('0,0', '-1,-2'), ('0,0', '0,0'), ('0,0', '1,2')]; beyond-window gap^2 >= 4.000
+  ok       closed_interval on sevenBrick (tight)      want REJECT got REJECT [('0,0', '-1,-2'), ('0,0', '0,0'), ('0,0', '1,2')]  pairs 17; exact contacts at 1: [('0,0', '-1,-2'), ('0,0', '0,0'), ('0,0', '1,2')]; beyond-window gap^2 >= 4.000
+  ok       h = 1/2 (Lean: check false)                want REJECT got REJECT [('0,0', '-1,-2'), ('0,0', '1,2')]  pairs 17; exact contacts at 1: [('0,0', '-2,3'), ('0,0', '2,-3')]; beyond-window gap^2 >= 4.000
+  ok       w = 1, shear 1/2 (Lean: check false)       want REJECT got REJECT [('0,0', '0,0')]  pairs 17; exact contacts at 1: []; beyond-window gap^2 >= 6.250
+  ok       c = 2 (Lean: check false)                  want REJECT got REJECT [('0,0', '-2,1'), ('0,0', '2,-1')]  pairs 17; exact contacts at 1: [('0,0', '0,0')]; beyond-window gap^2 >= 4.000
+  ok       c = 4 (Lean: check false)                  want REJECT got REJECT [('0,0', '-1,2'), ('0,0', '1,-2')]  pairs 17; exact contacts at 1: [('0,0', '0,0')]; beyond-window gap^2 >= 4.000
+  ok       c = 6 (Lean: check false)                  want REJECT got REJECT [('0,0', '-1,-1'), ('0,0', '1,1')]  pairs 19; exact contacts at 1: [('0,0', '0,0')]; beyond-window gap^2 >= 4.000
+  ok       shear 0 (Lean: check false)                want REJECT got REJECT [('0,0', '-1,-2'), ('0,0', '1,2')]  pairs 17; exact contacts at 1: [('0,0', '0,0')]; beyond-window gap^2 >= 9.000
+  ok       c = 5, shear 2/5 (Lean: check true)        want ACCEPT got ACCEPT   pairs 17; exact contacts at 1: [('0,0', '-3,2'), ('0,0', '0,0'), ('0,0', '3,-2')]; beyond-window gap^2 >= 4.000
+  ok       c = 5, shear 4/15 (Lean: check true)       want ACCEPT got ACCEPT   pairs 17; exact contacts at 1: [('0,0', '0,0')]; beyond-window gap^2 >= 7.111
+   the frozen checker's hexagonal and curved controls, converted:
+  ok       hex7 tight (side 1/2)                      want ACCEPT got ACCEPT  pairs 7
+  ok       hex7 side 11/20 (diameter 1.1)             want REJECT got REJECT  pairs 7
+  ok       hex4 (index-4 sublattice)                  want REJECT got REJECT  pairs 13
+CALIBRATION: ALL AGREE

@@ -11,7 +11,7 @@ O1–O5 are committed (step 3) before I open Y2's section, tools or outputs. Eve
 
 ## Would have searched here (standing rule 3)
 
-(one line per move I would have made by search, and what I did instead)
+- Stage 2: none (a checker built from a derivation, calibrated on held objects).
 
 ## Fence log (standing rule 13; brief § Fences; instance)
 
@@ -56,3 +56,46 @@ printed `r = φ·√((15+√5)/10)` and with the caption is checked exactly at s
 YB's own labels that point is `A_1`, and in Y's round-1 labels `A₁` too (both `(3/4, √15/4)`): consistent.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: my exact checker over towers of square roots, calibrated (brief step 1; instance: strip first, then plants)
+
+**The checker** `tools/fs112_yb2_check.py` (written without reading Y's, Y2's or YB's checker logic). *Arithmetic:* a `Tower` is
+`Q(√d₁)(√d₂)…(√d_n)`, each `d_k` a positive element of the level below; an element of level `k` is a pair `(a, b)` = `a + b√d_k`. Sums and products are
+identities in the square roots; **the sign is exact by recursion** — `sign(a + b√d)` from `sign a`, `sign b` and `sign(a² − b²d)` — a statement about
+real numbers that stays correct even if a radicand is a square lower down; inversion raises (never guesses) if a conjugate norm vanishes at a nonzero
+element. Towers are built per object (`Q(√3)` for FS-110's fragments; `Q(√3)(√5)` for the strip; up to five levels for YB's radius plants; the disk's
+at stage 4). *Verdict:* for a same-colour tile pair (a tile with itself included) REJECT iff `m < 1 < M`, `m`, `M` the exact minimum and maximum
+cross-distance; each is decided against 1 exactly (`<`, `=`, `>`), with float values printed beside. *Completeness:* the candidate list holds every pair
+of points that can realise an extreme (endpoint–endpoint; endpoint to a segment's foot; endpoint to an arc's radial points; segment–arc pairs along the
+normal through the arc's centre; arc–arc pairs on the line of centres, radial and antipodal pairs for concentric arcs), each checked to be realised, each
+of the form `|√A + B|` compared with 1 exactly. **No map hypothesis:** whether two tiles meet is decided exactly (incident endpoints, segment crossings,
+segment–circle and circle–circle intersection points written `a + b√Δ` and tested on both pieces).
+
+**Self-test** (`--selftest`, `data/fs112/fs112-yb2/selftest.out`): ten exact controls — a Reuleaux triangle of width 1 (ACCEPT), two at gap exactly 1
+(ACCEPT), squares of diagonal 0.99 and 1.06, two squares at gap 9/10, two unit caps whose nearest pair is interior to both arcs, a cap facing a bar
+(nearest pair interior to arc and bar), two long bars crossing, a thin crescent crossed by a bar **only at its arcs**, and two crescents crossing **only
+arc to arc**. **Seven checker plants, each flipping exactly the controls predicted and no other:** `noself` (the 1.06 square), `endpoints_only` (both
+interior-pair controls), `no_interior` (the same two), `no_meet` (the three crossing controls — each built so that every critical candidate is at least
+1.13 while the tiles cross, so only the exact meeting test can see them), `closed_interval` (the two tight Reuleaux controls: tightness visible),
+`cw_arcs` (both Reuleaux controls turn REJECT; the caps, the cap–bar and the crescent–bar turn ACCEPT; the two crescents stay REJECT because their
+complementary circles still meet near `(2.0, −1.51)`). **Two slips of mine, both caught before any verdict was used:** my first cap–bar control had bar
+corners 0.924 from the arc, so `no_interior` could not have flipped it (the plant's failure mode unreachable — rebuilt with the bar `|y| ≤ 7/10`), and
+my first arc-crossing controls also crossed at a straight chord (a segment test, not the curved one — rebuilt as crescents); and I registered **no**
+flips for `cw_arcs` by omission, the first run showed flips, and I derived the set above by hand before reading which controls had flipped.
+
+**Calibration** (`tools/fs112_yb2_calib.py`; outputs `calib-frag.out`, `calib-cal7.out`, `calib-strip.out`):
+
+| # | object | pairs | verdict | against |
+|---|---|---|---|---|
+| 1 | FS-110's S1, T2, BB, MX, WC, WC1, WCEQ, WCH, WC1H; the builders' planted faults `s1_flat`, `t2_flip`, `t2_flat`, `t2_six`, `bb_rot`; the eight tip tests; A6-C2 and its ten runs; every fragment under `closed_interval` in both checkers — built by the frozen builders (imported, unedited), converted exactly | **1,663 pairs**, each also run through the frozen checker in the same process | **every verdict agrees pair by pair** (89 REJECTs on both sides, the same pairs) | `tools/fs110_y_check.py` |
+| 2 | **CAL-7, the claim list's object**: row 33's brick (`4/5 × 3/5`, shear `2/5`, colour `(i + 3j) mod 7`), cell `(0,0)` against itself and every same-colour cell with `|i|, |j| ≤ 5`, the rest dismissed by an exact gap bound (`≥ min(hR, R(w − s))`, squared ≥ 4) | 17 | **ACCEPT**; exact contacts at 1: the cell's own diagonal and the cells `(±1, ±2)` | `Seven.lean`'s docstring |
+| 2′ | the variants `Seven.lean` records: `h = 1/2`, `w = 1`, `c = 2, 4, 6`, shear 0 (Lean `check false`); `c = 5` at shears 2/5 and 4/15 (Lean `check true`); `closed_interval` on the brick; and the frozen checker's hexagonal controls | 17–19 each | REJECT, REJECT, REJECT ×3, REJECT; ACCEPT ×2; REJECT (tight); hex7 ACCEPT, hex7 at side 11/20 REJECT, hex4 REJECT | each as recorded |
+| 3 | **YB's strip object** (`tools/fs112_yb_strip.py`, run in-process, never edited), converted exactly into `Q(√3)(√5)` | **90 orbit pairs** (YB's own list) | **ACCEPT, every pair agreeing with YB's checker**; my exact contacts at 1: **36**, the number YB reports | `tools/fs112_yb_check.py` |
+| 3′ | YB's four strip plants (arc radius 11/10, 9/10, edges raised 1/100, a colour swap) and `closed_interval` in both checkers, each in the tower of the primes it uses (up to `Q(√2, √3, √7, √13, √23)`) | 90–97 each | the same rejected pairs as YB's checker in every case (6, 18, 6, 3; 36 under `closed_interval`) | YB's checker |
+
+**The instance's requirement is met**: the checker reproduces YB's verdict on YB's own strip object, pair by pair; and it reproduces the frozen FS-110
+checker's verdicts pair by pair on 1,663 pairs, including every REJECT. **The suspect verdict is ACCEPT** (claim list §9): every ACCEPT above prints pairs
+examined against pairs present, and the plants show which kinds of pair the ACCEPTs rest on (interior pairs, crossings, self-pairs, tight contacts).
+
+## Stage 2 — SAVED
+

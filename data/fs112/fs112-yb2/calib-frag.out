@@ -1,0 +1,63 @@
+== 1a. FS110-Y2's fragments (tools/fs110_y_fragments.py)
+  agree    S1                                           pairs 18/18  mine ACCEPT  frozen ACCEPT
+  agree    T2                                           pairs 24/24  mine ACCEPT  frozen ACCEPT
+  agree    BB                                           pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    MX                                           pairs 27/27  mine ACCEPT  frozen ACCEPT
+  agree    S1 under builder plant s1_flat               pairs 18/18  mine REJECT [('u_c', 'w_out')]  frozen REJECT [('u_c', 'w_out')]
+  agree    T2 under builder plant s1_flat               pairs 24/24  mine ACCEPT  frozen ACCEPT
+  agree    BB under builder plant s1_flat               pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    MX under builder plant s1_flat               pairs 27/27  mine ACCEPT  frozen ACCEPT
+  agree    S1 under builder plant t2_flip               pairs 18/18  mine ACCEPT  frozen ACCEPT
+  agree    T2 under builder plant t2_flip               pairs 24/24  mine REJECT [('W_0', 'v_3'), ('W_2', 'v_1'), ('u_1', 'w_2'), ('u_3', 'w_0')]  frozen REJECT [('W_0', 'v_3'), ('W_2', 'v_1'), ('u_1', 'w_2'), ('u_3', 'w_0')]
+  agree    BB under builder plant t2_flip               pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    MX under builder plant t2_flip               pairs 27/27  mine ACCEPT  frozen ACCEPT
+  agree    S1 under builder plant t2_flat               pairs 18/18  mine ACCEPT  frozen ACCEPT
+  agree    T2 under builder plant t2_flat               pairs 24/24  mine REJECT [('W_0', 'v_1'), ('u_1', 'w_0')]  frozen REJECT [('W_0', 'v_1'), ('u_1', 'w_0')]
+  agree    BB under builder plant t2_flat               pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    MX under builder plant t2_flat               pairs 27/27  mine REJECT [('W_2', 'v_1')]  frozen REJECT [('W_2', 'v_1')]
+  agree    S1 under builder plant t2_six                pairs 18/18  mine ACCEPT  frozen ACCEPT
+  agree    T2 under builder plant t2_six                pairs 24/24  mine REJECT [('W_1', 'u_3'), ('v_3', 'w_1')]  frozen REJECT [('W_1', 'u_3'), ('v_3', 'w_1')]
+  agree    BB under builder plant t2_six                pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    MX under builder plant t2_six                pairs 27/27  mine ACCEPT  frozen ACCEPT
+  agree    S1 under builder plant bb_rot                pairs 18/18  mine ACCEPT  frozen ACCEPT
+  agree    T2 under builder plant bb_rot                pairs 24/24  mine ACCEPT  frozen ACCEPT
+  agree    BB under builder plant bb_rot                pairs 30/30  mine REJECT [('u_b', 'w_2'), ('u_c', 'w_0')]  frozen REJECT [('u_b', 'w_2'), ('u_c', 'w_0')]
+  agree    MX under builder plant bb_rot                pairs 27/27  mine ACCEPT  frozen ACCEPT
+== 1b. FS110-Y4's cone fragments and tip tests (tools/fs110_y_cone.py)
+  agree    WC                                           pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    WC1                                          pairs 26/26  mine ACCEPT  frozen ACCEPT
+  agree    WCEQ                                         pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    WCH                                          pairs 40/40  mine ACCEPT  frozen ACCEPT
+  agree    WC1H                                         pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    WC  tip->2 (frozen record: ACCEPT)           pairs 32/32  mine ACCEPT  frozen ACCEPT
+  agree    WC  tip->3 (frozen record: ACCEPT)           pairs 32/32  mine ACCEPT  frozen ACCEPT
+  agree    WC  tip->4 (frozen record: REJECT)           pairs 34/34  mine REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]  frozen REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+  agree    WCH tip->2 (frozen record: REJECT)           pairs 44/44  mine REJECT [('tip', 'xS+')]  frozen REJECT [('tip', 'xS+')]
+  agree    WCH tip->3 (frozen record: REJECT)           pairs 44/44  mine REJECT [('tip', 'yN+')]  frozen REJECT [('tip', 'yN+')]
+  agree    WC1H tip->2 (frozen record: REJECT)          pairs 33/33  mine REJECT [('tip', 'xS')]  frozen REJECT [('tip', 'xS')]
+  agree    WC1H tip->3 (frozen record: REJECT)          pairs 33/33  mine REJECT [('tip', 'yN')]  frozen REJECT [('tip', 'yN')]
+  agree    WC1H tip->4 (frozen record: REJECT)          pairs 34/34  mine REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]  frozen REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+== 1c. FS110-A6's card A6-C2 and its runs (data/fs110/fs110-a6/a6_c2_single_horn.py)
+  agree    A6-C2                                        pairs 30/30  mine ACCEPT  frozen ACCEPT
+  agree    A6-C2 tip -> 2                               pairs 33/33  mine REJECT [('tip', 'xS')]  frozen REJECT [('tip', 'xS')]
+  agree    A6-C2 tip -> 3                               pairs 33/33  mine REJECT [('tip', 'yN')]  frozen REJECT [('tip', 'yN')]
+  agree    A6-C2 tip -> 4                               pairs 34/34  mine REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]  frozen REJECT [('r2', 'tip'), ('r5', 'tip'), ('r8', 'tip')]
+  agree    A6-C2 tip -> 5                               pairs 34/34  mine REJECT [('r1', 'tip'), ('r4', 'tip'), ('r7', 'tip')]  frozen REJECT [('r1', 'tip'), ('r4', 'tip'), ('r7', 'tip')]
+  agree    A6-C2 tip -> 6                               pairs 34/34  mine REJECT [('r0', 'tip'), ('r3', 'tip'), ('r6', 'tip')]  frozen REJECT [('r0', 'tip'), ('r3', 'tip'), ('r6', 'tip')]
+  agree    A6-C2 split y = 0                            pairs 36/36  mine REJECT [('tipL', 'yN'), ('tipU', 'xS')]  frozen REJECT [('tipL', 'yN'), ('tipU', 'xS')]
+  agree    A6-C2 split below Sigma(-1/3)                pairs 36/36  mine REJECT [('tipU', 'xS')]  frozen REJECT [('tipU', 'xS')]
+  agree    A6-C2 split above Sigma(+1/3)                pairs 36/36  mine REJECT [('tipL', 'yN')]  frozen REJECT [('tipL', 'yN')]
+  agree    control: WC1H split y = 0                    pairs 36/36  mine ACCEPT  frozen ACCEPT
+  agree    A6-C2 plant deep                             pairs 30/30  mine REJECT [('v2', 'xS'), ('v3', 'yN')]  frozen REJECT [('v2', 'xS'), ('v3', 'yN')]
+== 1d. both checkers under closed_interval (every exact contact at 1 becomes a REJECT: the fragments are tight)
+  agree    S1 closed_interval                           pairs 18/18  mine REJECT [('u_b', "w'_out"), ('u_b', 'w_in'), ('u_c', "w'_in"), ('u_c', 'w_out')]  frozen REJECT [('u_b', "w'_out"), ('u_b', 'w_in'), ('u_c', "w'_in"), ('u_c', 'w_out')]
+  agree    T2 closed_interval                           pairs 24/24  mine REJECT [('W_0', 'v_1'), ('W_1', 'u_1'), ('W_2', 'v_3'), ('W_3', 'u_2'), ('u_1', 'w_0'), ('u_3', 'w_2'), ('v_1', 'w_1'), ('v_2', 'w_3')]  frozen REJECT [('W_0', 'v_1'), ('W_1', 'u_1'), ('W_2', 'v_3'), ('W_3', 'u_2'), ('u_1', 'w_0'), ('u_3', 'w_2'), ('v_1', 'w_1'), ('v_2', 'w_3')]
+  agree    BB closed_interval                           pairs 30/30  mine REJECT [('W_0', 'v_c'), ('W_1', 'u_b'), ('W_2', 'v_b'), ('W_3', 'u_c'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_b', 'w_1'), ('v_c', 'w_3')]  frozen REJECT [('W_0', 'v_c'), ('W_1', 'u_b'), ('W_2', 'v_b'), ('W_3', 'u_c'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_b', 'w_1'), ('v_c', 'w_3')]
+  agree    MX closed_interval                           pairs 27/27  mine REJECT [('W_0', 'v_3'), ('W_1', 'u_c'), ('W_2', 'v_1'), ('W_3', 'u_b'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_1', 'w_1'), ('v_2', 'w_3')]  frozen REJECT [('W_0', 'v_3'), ('W_1', 'u_c'), ('W_2', 'v_1'), ('W_3', 'u_b'), ('u_b', 'w_2'), ('u_c', 'w_0'), ('v_1', 'w_1'), ('v_2', 'w_3')]
+  agree    WC closed_interval                           pairs 30/30  mine REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]  frozen REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+  agree    WC1 closed_interval                          pairs 26/26  mine REJECT [('N1', 'h+'), ('S1', 'h+')]  frozen REJECT [('N1', 'h+'), ('S1', 'h+')]
+  agree    WCEQ closed_interval                         pairs 30/30  mine REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]  frozen REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-')]
+  agree    WCH closed_interval                          pairs 40/40  mine REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-'), ('v2', 'xS+'), ('v2', 'xS-'), ('v3', 'yN+'), ('v3', 'yN-')]  frozen REJECT [('N1', 'h+'), ('N1', 'h-'), ('S1', 'h+'), ('S1', 'h-'), ('v2', 'xS+'), ('v2', 'xS-'), ('v3', 'yN+'), ('v3', 'yN-')]
+  agree    WC1H closed_interval                         pairs 30/30  mine REJECT [('N1', 'h+'), ('S1', 'h+'), ('v2', 'xS'), ('v3', 'yN')]  frozen REJECT [('N1', 'h+'), ('S1', 'h+'), ('v2', 'xS'), ('v3', 'yN')]
+== fragments: 1663 pairs compared, 89 REJECT verdicts on my side, ALL AGREE
+CALIBRATION: ALL AGREE
