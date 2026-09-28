@@ -421,3 +421,41 @@ rhombus lies in the open strip and refutes N3-P4 as registered (the `(V, A)` pai
 | Y3 §1.4 item 3; YB3 §3.5 | the finite alphabet applied to "the map" | the premise is on `M*`: FS112-N3-PER for doubly periodic maps, GAP N3-ALPH otherwise | FS112-Y3-R1 |
 | `plans/FS112-N-proof.md` N3-P5, l. 904 | falsifier "no arc at `P_{−2}`, refutes N3-END" | omits N3-END's own second disjunct: the doubly bounded one-vertex chain has no arc at `P_{−2}` and is allowed | FS112-N3-END |
 | `data/fs112/fs112-c/reconciliation.md` §1.6, (L4) and item 5 | C-ENDS's horn-bound clause from N3-END's first disjunct only; "Y3-END-NEEDS, if YB3 confirms it, removes horn-bound-`±1` ends from terminal maps" | the second disjunct repaired by FS112-C-DOUBLE; item 5 as corrected in §1.9 | FS112-C-ENDS, FS112-C-COMPOSE |
+
+## Errata and regrades appended at FS-114's close (2026-09-28, FS114-C)
+
+*The entries above stand as filed. These dated notes correct or regrade them, each with its source; where a note and an entry differ, the note governs.
+Filed by the close job of FS-114 (`plans/FS114-C-close.md` stage 3; FS-114's own theorems are `plans/FS114-derivation.md`).*
+
+1. **FS112-L60 — erratum: FALSE at exactly 60° as stated.** "Below 60°" fails at equality: the Reuleaux cap region is an outer tile along a whole 60° arc of
+   `ω(P)` with constant sides. **Corrected** (FS114-L60-LE; two minds, FS114-N4 and FS114-L60, the second not blind): *a unit arc with constant sides has
+   angular length `ℓ ≤ 60°`; at `ℓ = 60°` both side tiles lie in the lens of the arc's ends — the inner in `Reul(P, A, B)`, the outer in the Reuleaux cap
+   `Reul(A, B, C) ∖ B̄(P, 1)` — and each end is a vertex carrying a third tile*; equality is realised by a fragment by formula. The second clause ("along it
+   neither side colour recurs 60° apart") holds read at interior points (NB's reading) for every `ℓ`, and is false at equality read at the ends. Both
+   printed proofs break at 60°, by different steps. **Dependants:** FS112-N2-RED and FS112-N3-COR3, and through COR3 FS112-N3-BASE, FS112-N3-DENSE3 and
+   FS114-CV-EXISTS, need no strict bound (FS114-L60-WALK, one mind): unaffected. False at equality, with nothing resting on them: NB's C-UA-CHAIN aside
+   ("α alone, < 60° … at most one point of an orbit"), NB's row 9 "both TRUE", `plans/FS112-N-proof.md` l. 284 ("each < 60°"); the frames "(0°, 60°)" in
+   NB3-NOBOTH and CVB-L0 read "(0°, 60°]". The frozen tools `tools/fs112_n_arcs.py` and `tools/fs112_n2_checks.py` computed a pair (`10201/10000`) the
+   equality tile never contains, with their plant at 50°. *Sources:* `plans/FS114-N4-proof.md` §2.6; `plans/FS114-L60-audit.md` §§1.3, 2, 3.4;
+   `plans/FS114-close-inventory.md` items 67, 74, 75.
+2. **FS112-C-ENDS — erratum: its residue is empty.** Delete "except possibly beside a one-vertex chain bounded by unit arcs on both sides but not on all
+   four horn arcs, at a bound on an (R2) arc — a residue not walked". **Corrected:** *In a terminal valid map, the point of the normal line one step beyond
+   each finite end of a stuck chain has at least four colours.* Grade: [hand; two minds, blind to each other: FS114-CV (CV-ENDS), FS114-CVB (CVB-ENDS)];
+   the proof's stop "an arc of `ω(v)` through `N`" never occurs (CV-L0). *Sources:* `plans/FS114-CV-verification.md` §§1.4–1.5, 2.4;
+   `plans/FS114-CVB-verification.md` §1.8; inventory item 46.
+3. **FS112-C-DOUBLE and FS112-C-PARTNERS — regrade (upgrade):** two minds, FS112-C (with FS112-C2 for C-DOUBLE) and FS114-CV, blind to the FS112-C
+   assembly; C-PARTNERS is a corollary of FS112-N3-COR3 (CV-PART). *Source:* `plans/FS114-CV-verification.md` §1.5, §2.4.
+4. **FS112-C-COMPOSE — regrade and a note:** (1)–(3) TRUE at two minds (FS112-C; FS114-CV, blind); (2)'s radius `|K| + 2` needs NB3-LEN's `2|K| − 3`; (3)
+   is GS-4's density form and is **not needed for the NO**: every valid map has a vertex of at least four colours (FS114-CV-EXISTS, two minds blind to each
+   other), so C114-LOCAL-F alone is the NO, Siamese or not, and FS-115's (b′) and (b″) bear only on the density form. *Source:* CV §1.5; CVB §1.4.
+5. **FS112-N3-BASE — regrade (upgrades only), from BASE-V.** Its clause "over row 134's base at its grade, unre-derived here" now reads: row 134's base
+   re-derived by BASE-V — S–V Lemma 5 and Prop. 18 two minds, both blind (with FS110-CD); Lemma 6's `< 9` branch TRUE under H with unit arcs (BV-HEX, one
+   mind; needs neither Condition 5 nor NB3-NOBOTH); Lemma 3 and Cor. 3 at cusps TRUE (BV-L3, BV-C3); **Lemma 4 at cusps not landed**: CUSP-BASE's D5
+   items 1–4 and 6 stay at CE's one mind, and they are now the residue both walks share. NB3 §2.3's parenthetical (the `< 9` branch as circle-abstract)
+   does not hold — BV-HEX reads the map — and CB re-derived Prop. 17; the print's Prop. 18 sketch has one false sentence (FS110-CD's text is exact).
+   *Sources:* `plans/BASE-V-verification.md` §§1–2, 2.5–2.6; inventory items 11, 12, 14.
+6. **FS112-Y3-T2-BUDGET — its "Not claimed" answered:** the strip's geometry has no other valid colouring (FS114-Y-STRIPRIGID; two minds, one blind);
+   and `plans/FS112-Y3-construction.md` §4.2 item 4's `A_0 + A_1 − B_0` is exactly the corner `A_3` (FS114-Y-PENT). *Sources:*
+   `plans/FS114-Y-construction.md` §1.3, §2.2; inventory item 26.
+7. **Row 135's "Not claimed" line** — "a chain end at a unit arc bounding one horn only" — is walked: at a stuck vertex of `M*` the four horn-arc
+   conditions are equivalent (FS114-CV-HD, two minds). *Source:* CV §2.4.

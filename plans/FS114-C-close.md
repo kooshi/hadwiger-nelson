@@ -184,8 +184,10 @@ fixed `K`, N114-RB's (B) "realised", C114-DUAL-COUNT "as stated" (Y), Y-ROUTES' 
 N4-OPP (NB4), Y3-FOUR's "not forced" (YB2, YB3), FS112-L60 at 60° (N4, L60); round 4 — N5-RV's "not excluded" (NB5; RSTOPALL); round 5 — N6-WIN, N6-COV,
 N6-MTP's route, N6's (Q)-start claim (NB6), Y5-PX's `λ`, PIN120-60's and PIN120's no-exception claims (YB4); round 6 — Y6-E1CAP's `λ_3`, E2RED's survivor
 list, HALF (YB5). **Every one was settled for the second mind**, by its derivation, by a third mind (CVB on THOM-TOP) or by the first side withdrawing;
-none left open. **Direction:** of the 22, twenty lowered a claim; none raised one (G21's selection: the flattering direction is where the defects sat —
-NB5-RVKILL, which flatters the NO, is the one kill filed on a single mind's last step, with RSTOPALL beside it).
+none left open. **Direction:** of the 21 listed, seventeen lowered a claim (a scope, a clause, a proof step) and four raised one, each a verifier
+deriving more than its side had — C114-FIVE-COUNT, THOM-TOP's pinch clause, (R-V) excluded, E2's survivors cut to S6 — and all four flatter the NO. Their
+audit (G21): FIVE-COUNT confirmed by N2 (sighted), THOM-TOP by a third mind (CVB), (R-V) by RSTOPALL (blind, a different route); **E2's cut to S6 stands
+on YB5 alone**, and is filed at one mind. *(Corrected at stage 3: first written "of the 22, twenty lowered a claim; none raised one", a miscount.)*
 
 ### 2.5 Item 119 (1): is N7's reading R-E2 the construction side's E2?
 
@@ -235,3 +237,24 @@ explicit `R` landed for Mixon's thread-7 question's upper side. The five-colour 
 in the non-Siamese simple class by counting, a known value, not an answer.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the derivation file, and the FS-112 errata
+
+- **`plans/FS114-derivation.md`**: 46 entries (43 derived, 3 stalled or gapped: FS114-ROUTE-T, FS114-K1, FS114-GSD), ids qualified and "Rests on it:" as
+  prose (the brief's Amendment 1). Grouped entries quote each member's statement from its record's table with the member's id. Gate:
+  `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS114-derivation.md` — **PASS, 0 failures, 0 warnings** (output
+  `data/fs114/fs114-c/gate-derivation.out`). Two gate findings on the first run, fixed: N4-LENS's "(likewise `v`)" read as a rider (left out of the quoted
+  statement and explained in prose: the mirror under `u ↔ v`); L60-EQ's "exactly the closed half-plane" read as two-way (its reverse inclusion is argued in
+  the same section, given as the converse address). One warning ("the only" in E2RED) answered with a one-way reason.
+- **Kernel decisions** (`handoff:`): four entries go to de Bruijn **deferred with D6** (Kooshi's held decision on a Lean skeleton of Q-full's statement):
+  FS114-CV-EXISTS, FS114-N2-ENDS, FS114-Y4-RSTOPALL, and (by the brief's standing) any K1 piece once filed; every other entry is `none — <reason>` (a
+  relay-result, a statement about one printed object, a reduction, or superseded). No entry is handed to the kernel now: the class Q-full is not yet
+  fixed in Lean (the plan's D6), and publication waits on the NO.
+- **`plans/FS112-derivation.md`**: a dated section appended, "Errata and regrades appended at FS-114's close", seven notes — FS112-L60's erratum (the
+  brief's item 67/74); C-ENDS's residue deleted; C-DOUBLE, C-PARTNERS and C-COMPOSE regraded to two minds; N3-BASE's regrade from BASE-V (upgrades only,
+  Lemma 4 at cusps still one mind); Y3-T2-BUDGET's not-claimed answered; row 135's not-claimed line walked. The entries above it are untouched.
+- **Not filed as entries, with the reason:** the tools-only quotation checks (every job's `*-QT`); FS114-Y6-HELD (a float survey, aiming only); N3-DR0
+  (its conclusion is FS114-N4-D's, its proof a GAP — in FS114-N3-DR's not-claimed line); N6-MTP (its route a GAP; its conclusion is FS114-N2-AVG's, with
+  NB6-FOLNER as the second mind); YB2-EMPTY13 (an instance of FS114-Y4-LUNE); the FS-112 confirmations (in the errata section, where the entries live).
+
+## Stage 3 — SAVED
