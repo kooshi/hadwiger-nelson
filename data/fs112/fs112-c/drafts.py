@@ -49,8 +49,8 @@ D.append(("""**The count so far — fourteen of seventeen** (each derivation clo
 """**The count so far — sixteen of nineteen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-112, through: §IQ's per-centre question gave the reduction to four-colour vertices)."""))
 # D7 G83, inserted before G51
 G83 = """* **G83 — With unit arcs, the tight question lives at four-colour vertices. [hand, two minds, one blind (rows 135–136); the reading one mind]**
-  The unit-radius tactic survives reduction only at vertices of four or more colours; the base refutes a map near any trichromatic vertex with no
-  four-colour or repeated-colour vertex within 2; a close complementary pair sits on a unit rhombus with four-colour corners — and both printed
+  The unit-radius tactic survives reduction only at vertices of four or more colours; the base refutes a map around any cubic trichromatic vertex
+  lacking a four-colour or repeated-colour vertex within 2; a close complementary pair sits on a unit rhombus with four-colour corners — and both printed
   positives stop exactly where a pair's second corner is missing. *Reading:* the unit-arc half is a placement problem for four-colour vertices, a
   discrete one (Sirgedas's quads); killing test: FS-114 decided by an argument that reads no such vertex. *Do: when a tight-map question admits unit
   arcs, list its four-colour and repeated-colour vertices first and read each close complementary pair's two rhombus corners — a construction that
