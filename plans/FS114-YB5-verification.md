@@ -94,3 +94,170 @@ records); I work them as `YB4-114-instance.md` states them, and read **non-Siame
   inner for both its edges is the "two-edge tile"; HALF takes it to be a width-1 Reuleaux triangle.
 
 ## Stage 1a — SAVED
+
+## Stage 1b — SAVED: my derivations of the seven statements (blind: no FS114-Y6 file opened)
+
+*Every step is mine, [hand; one mind]. Setting: a non-Siamese (closures of distinct same-coloured tiles at distance at least 1), simple valid
+fragment containing a neighbourhood of `B̄(p, 1)`, with a pinwheel at `p` in 1a.3's notation, E1 at edge 1 (frame `φ_1 = 0°`: `q_1 = e(0°)`,
+`w_1 = e(300°)`, `C = e(240°)`) where said. Tools, as FS114-YB4 used them (its 1b preamble) and I re-derive them where they carry weight:*
+- **Diameter.** A tile's closure has diameter at most 1; `u ∈ cl Z` gives `Z ⊂ B̄(u, 1)`; an open tile disjoint from `B(u, 1)` misses `B̄(u, 1)`.
+- **Pointing.** A colour `c ∈ {1…4}` is blocked near the ring point `e(θ)` (both sides) unless its tile there is `t_c`, whenever `t_c`'s open sector at `p`
+  has a direction within `90°` of `θ`; near a point `v` with `|v − u| = 1`, a tile at `u` with a direction `ψ`, `cos(ψ − arg(v − u)) > 0`, has points within
+  `< 1` of every point near `v` (UPDOWN).
+- **REGION, REG60, U1** (Y5 §2.1; YB4 1b item 2; FS112-U1): `t_{j+1} ⊂ B̄(p, 1) ∩ B̄(q_j, 1) ∖ B(q_{j+1}, 1)`; every cone `≥ 60°`; at `q_k` the inner tile lies
+  in the cone facing edge `k` (`[φ_k + 90° + ℓ_k, φ_k + 270°]`), `T_k` in the cone facing away (`[φ_k + 270° + ℓ_k, φ_k + 90°]`), the two side cones hold
+  neither. **Every cone is below `180°`**: at `α_{j+1} = 180°`, `q_{j+1} = −q_j` and the points `q_{j+1} + e(φ_j + s)` of edge `j + 1` (`0 < s ≤ ℓ_{j+1}`) are
+  `√(5 − 4cos s) > 1` from `q_j ∈ cl t_{j+1}`.
+- **RAINBOW, MU, ALT, POCKET, CASE** as FS114-YB4 verdicted them (its §2.5): MU at `t_{j+1}` needs edges `j` and `j + 1` below `60°`; ALT(`μ_j`, `μ_{j+1}`)
+  fails only under E2 at `t_{j+2}`; **SEP** (YB4): no tile borders both `M_k` and `L_k`'s inside part.
+
+### 1. FS114-Y6-E1FORM — **TRUE** [hand; mine]
+
+Edge 1 is an arc of `ω(q_1)` of length `60°` with constant sides (inner `t_2`, outer `t_1`), from `A = p` to `B = w_1`. **L60-EQ** (P = `q_1`):
+`t_2 ⊆ Reul(q_1, p, w_1)` and `t_1 ⊆ Reul(p, w_1, p + w_1 − q_1) ∖ B̄(q_1, 1)`, with `p + w_1 − q_1 = e(240°) = e(φ_1 − 120°)`; both ends lie in both
+closures. The cap's corner cone at `p` is `[210°, 330°] ∩ [270°, 90°]ᶜ = [210°, 270°]` (the Reuleaux corner cone, cut by `ω(q_1)`'s tangent), so
+`t_1`'s sector `[θ_4, 270°]` gives `θ_4 ≥ 210°`, i.e. `α_1 ≤ 60°`; REG60 (`q_4 ∈ cl t_1`, `t_1 ∩ B(q_1, 1) = ∅`) gives `α_1 ≥ 60°`. So **`α_1 = 60°`,
+`q_4 = e(300°) = w_1`**, `t_1 ⊆ Reul(p, q_4, e(φ_1 − 120°)) ∖ B(q_1, 1)`, `t_2 ⊆ Reul(p, q_4, q_1)`, `q_4 ∈ cl t_2`. **`α_2 < 120°`:** `Reul(p, q_4, q_1)`'s
+corner cone at `p` is `[270°, 30°]`, so `α_2 ≤ 120°`; at `α_2 = 120°` edge 2 leaves `p` at `30°` along `ω(q_2)`, `q_2 = e(120°) = −q_4`, and its points
+`q_2 + e(300° + s)` are `√(5 − 4cos s) > 1` from `q_4 ∈ cl t_2`: diameter. ∎
+
+### 2. FS114-Y6-E1Q3 — **TRUE** (and "no E2 at `t_3`" is not used) [hand; mine]
+
+CASE at `q_3` reads MU at `t_3` (edges 2, 3) and at `t_4` (edges 3, 4), POCKET at `w_3` (ALT(`μ_2`, `μ_3`): no E2 at `t_4`), and in (A) the Pointing
+block of colour `k + 2 = 1` at `q_3` by `t_1`, which needs `α_4 < 180°` (true: every cone is below `180°`); edge 1 enters none of them. So CASE holds at
+`q_3`: (B) `α_3 = 60°`, and then `α_4 = 240° − α_2 > 120°` (E1FORM); or (A) `α_2 + α_3 ≤ 180°`, so `α_4 = 300° − α_2 − α_3 ≥ 120°`. ∎ E2 at `t_3` breaks
+ALT(`μ_1`, `μ_2`), which CASE at `q_3` does not read; the statement's hypothesis is stronger than its proof needs.
+
+### 3. FS114-Y6-E1OMEGA — **TRUE**, reading "just above `270°`" as the tile at `q_4` just outside the ring, clockwise of `q_4` [hand; mine]
+
+*Reading:* in a frame with `q_4 = e(0°)` (`φ_4 = 0°`) the ring's clockwise tangent at `q_4` is `270°`, and "just above `270°`" is CASE's tile `Z` at `q_4`
+(just outside the ring, just past its clockwise tangent); in my frame (`q_4 = e(300°)`) that direction is `210°⁺`. Stage 2 checks the frame.
+Let `Ω` be that tile. Its colour is not:
+- 1 (`t_1` is at `q_4`; one tile per colour at a vertex) nor 2 (`t_2 ∋ q_4`, E1FORM);
+- 4: `210°⁺` lies in edge 4's side cone `(210°, 210° + ℓ_4)` at `q_4`, which holds neither `t_1` nor `T_4` (U1), and `T_4` is the colour-4 tile at `q_4`;
+- 3: `t_3`'s sector at `p` starts at `270° + α_2 < 390°` (E1FORM), a direction within `90°` of `300°` (Pointing at `q_4`);
+- `m_3`: MU at `t_4` (edges 3, 4 below `60°`) gives `w_4 ∈ cl μ_3`, and `|q_4 + s·e(210° + δ) − w_4|² = 1 + s² − 2s·sin(ℓ_4 − δ) < 1`
+  (`w_4 = q_4 + e(120° + ℓ_4)`); `Ω ≠ μ_3` since `μ_3 ∋ q_3` and `|q_3 − q_4| = 2sin(α_4/2) > 1`.
+So **`c(Ω) = m̄_3`**, and `m̄_3 = m_2` by ALT(`μ_2`, `μ_3`) (no E2 at `t_4`). ∎ **One more fact used below:** `Ω` has points `q_4 + s·e(210° + δ)`,
+at squared distance `1 + s² + √3·s + O(sδ) > 1` from `q_1`, so **`q_1 ∉ cl Ω`**.
+
+### 4. FS114-Y6-E1CAP — **TRUE but for one clause: `λ_3 = α_3 − 60°` is a GAP (the wrap)** [hand; mine]
+
+Hypotheses as E1Q3's (E1 at edge 1 only; no E2 at `t_3`, `t_4`); `μ_1` is the inner-gap tile at `q_1` adjacent to `t_2` (GAPS).
+1. **Colours near the ring arc `(300°, 360°)`, outside.** 1, 2, 3 are blocked (Pointing: `t_1`'s `270°⁻`, `t_2`, and `t_3`'s start `270° + α_2 < 390°` are
+   within `90°`); 4, 5, 6 are free. Every point near that arc (and every interior point of `Reul(p, q_4, q_1)`) is within `< 1` of both `q_4` and `q_1`,
+   so an outside or inside tile there of colour 4 is `T_4`, of colour `m_2` is `Ω`, of colour `m_1` is `μ_1` (non-Siamese).
+2. **The tile `Z_1` at `q_1` just outside the ring, clockwise** (direction `270°⁺`, edge 1's side cone at `q_1`): not 1 (`T_1` is in the away cone
+   `[330°, 90°]`), not 2, not 3 (Pointing), not `m_1` (`μ_1`'s one sector at `q_1` is in the inner gap, `t_2` on one side and `T_1` on the other);
+   so `c(Z_1) ∈ {4, m̄_1}`. Its points `q_1 + s·e(270° + δ)` are within `< 1` of `q_4` (`|e(60°) + s·e(270° + δ)|² = 1 + s² + 2s·cos(210° + δ)`).
+3. **Case (i): `L_1` has an inside part.** It is bordered by a 5/6 tile `Π ≠ μ_1` (SEP), so `c(Π) = m̄_1` (RAINBOW), so every 5/6 neighbour along
+   `M_1` is `μ_1` and `w_2 ∈ cl μ_1` (MU's argument); ALT(`μ_1`, `μ_2`) (no E2 at `t_3`) gives `m_1 ≠ m_2`, so `m̄_1 = m_2`. Then `Z_1` of colour `m_2`
+   would be `Ω` (step 1), but `q_1 ∉ cl Ω` (item 3): so **`Z_1 = T_4`, `T_4 ∋ q_1`**. Let `γ_T ⊂ T_4 ∪ {q_4, q_1}` and `δ ⊂ t_2 ∪ {q_1, q_4}` be paths
+   from `q_4` to `q_1`, and `Γ = γ_T ∪ δ` (a Jordan curve; `T_4 ∩ B̄(p, 1) = ∅`, `t_2 ⊂ B(p, 1)`, so `Γ` meets the ring only at `q_4`, `q_1`). In the cyclic
+   order of tiles at `q_4` the ring arc's germ lies between `T_4` and `t_2` on the side away from `t_1`, and `Ω` on the side of `t_1`: so `Ω` lies outside
+   the component of `ℝ² ∖ Γ` holding the open ring arc and the region `R_0` between `L_1` and the ring. `Π` has points in `R_0 ⊂ int Reul(p, q_4, q_1)`,
+   within `< 1` of `q_4`, and colour `m_2`: `Π = Ω`, which is outside. **Contradiction: case (i) is empty.**
+4. **Case (ii): `L_1` is the ring arc from `q_4` to `q_1`** — `t_2` borders the whole arc (the statement's first clause). If a 5/6 tile `ν ≠ μ_1` borders
+   `M_1` (colour `m̄_1`), RAINBOW leaves colour 4 as the only outside colour along the arc: every outside tile there is `T_4`, so `T_4` borders the
+   whole arc and `T_4 ∋ q_1`. If `μ_1` borders all of `M_1`, then as in case (i) `m̄_1 = m_2`, `Z_1 = T_4 ∋ q_1`, and with `Γ` as above every outside
+   tile along the arc lies inside `Γ`, where `Ω` and `μ_1` (its germ at `q_1` lies between `T_4` and `t_2` on the far side) are not: colour 4, so `T_4`.
+   (An outside `μ_1` along the arc would meet `cl t_2` in a set joining `M_1` to the ring, forcing a second sector at `q_1`: SEP's argument.)
+5. **The cap.** `T_4 ∋ q_4, q_1`, so `T_4 ⊂ B̄(q_4, 1) ∩ B̄(q_1, 1)`; `T_4 ∩ B(p, 1) = ∅` (colour 4 against `t_4 ∋ p`, `T_4 ≠ t_4`); and
+   `B̄(q_4, 1) ∩ B̄(q_1, 1) ∖ B(p, 1) ⊆ B̄(q_4 + q_1, 1)` (FS114-L60 §1.3 (ii)): **`T_4 ⊂ Reul(q_4, q_1, q_1 + q_4) ∖ B(p, 1)`**. The ring arc from `q_4`
+   to `q_1` is a unit arc of `60°` about `p` with constant sides (`t_2` in, `T_4` out): **a second 60° arc**, L60-EQ's equality case again.
+6. **`α_4 = 120°`.** `t_4 ∩ B(q_1, 1) = ∅` (against `T_4 ∋ q_1`) and `t_4 ∩ B(q_4, 1) = ∅` (REGION), so `t_4`'s sector at `p` avoids `(270°, 90°) ∪ (210°, 30°)`:
+   it lies in `[90°, 210°]`, so `θ_3 ≥ 90°`, `φ_3 ≥ 180°`, `α_4 ≤ 120°`; with E1Q3, **`α_4 = 120°`, `φ_3 = 180° = φ_1 + 180°`, `α_2 + α_3 = 180°`**.
+7. **CASE at `q_3` is (A)**: (B) would give `α_3 = 60°`, `α_2 = 120°`, against E1FORM. CASE (A) gives `λ_3 ≥ α_3 − 60°` and the outside tile at `q_3`
+   of colour 2, bordering `t_4`'s ring contact down to `e(φ_2 + 60°)`. **`λ_3 = α_3 − 60°` is not derived**: between `r_3` and `e(φ_2 + 60°)` the
+   pocket tile `μ_2` may wrap round `t_4`'s ring corner and border the contact from outside (FS114-YB4-WRAP), and nothing here excludes it — **GAP**.
+∎ (clauses 1–6 and CASE (A)); the `λ_3` clause GAP.
+
+### 5. FS114-Y6-E1K1 — **TRUE**; its first "unless" condition is implied by its second [hand; mine]
+
+Hypotheses: E1Q3's, `μ_1` borders all of `M_1`, `α_2 > 60°`. PXKILL at `k = 1` needs: (a) CASE (A) at `q_2` — POCKET at `w_2` holds (ALT(`μ_1`, `μ_2`),
+`w_2 ∈ cl μ_1`), (B) needs `α_2 = 60°`, and the Pointing block of colour 4 at `q_2` holds (`t_4`'s sector `[90°, 210°]`); so the tile `O_2` at `q_2` has
+colour 1 and borders `t_3`'s contact to `v_2 = e(60°) ∈ cl O_2 ∩ cl μ_1`; (b) `O_2 ≠ T_1` (`|q_1 − q_2| = 2sin(α_2/2) > 1`), so `T_1 ∩ B(v_2, 1) = ∅`
+and `T_1 ⊂ [330°, 30°]` at `q_1`; (c) the tile at `q_1` adjacent to `T_1`'s counter-clockwise end is `μ_1`; (d) at `v_2` the sectors as in PXKILL, where
+colour `m_2` is excluded by `μ_2 ∋ q_2` (`|v_2 − q_2| = 2sin((α_2 − 60°)/2) < 1`; `μ_2 ∌ v_2` since `μ_2 ∋ v_3 = e(φ_2 + 60°)`, `|v_2 − v_3| > 1`, CASE (A)
+at `q_3`, item 4); (e) the two arcs, second order (FS114-YB4-2ND). Only (c) can fail: at `q_1` between `T_1` and `μ_1` (directions `(30°, 90°)`) colours
+1 (`T_1`), 2, 3 (Pointing), 4 (`T_4` holds `(270°, 330°)`; a second sector) are excluded, `m_1` is `μ_1`; **colour `m_2` is not excluded** (`Ω`'s points
+near `q_4` are more than 1 away: `|e(60°) + s·e(ψ)| > 1` for `ψ ∈ (30°, 90°)`). So the kill runs **unless a tile `X` of colour `m_2` sits at `q_1` between
+`T_1` and `μ_1`**. **`X` forces `T_4` to fill the cap's corner** `[330°, 30°]` at `q_4`: if `T_4` starts at `a > 330°`, the tile before it at `q_4` has a
+direction in `(330°, a)`, within `< 1` of `q_1`; its colour is `m_2` (then it is `Ω`, within `< 1` of `X`, `X ≠ Ω` since `q_1 ∉ cl Ω`: excluded) or `m_1`
+(then it is `μ_1`, so `μ_1 ⊂ B̄(q_4, 1) ∩ B̄(q_1, 1)` with germs on both sides of the cross-cut `γ_T ⊂ T_4` of that lens: excluded); 1, 2, 3, 4 are taken or
+blocked. ∎ So the statement's "unless … and …" is exactly "unless `X` exists".
+
+### 6. FS114-Y6-E2RED — **the chain TRUE; the survivor set, as I derive it, is one family**, and **"all with `t_{c+1}` short of the tangent" is a GAP (a wrap of `Λ_c`)** [hand; mine]
+
+E2 at `t_{c+1}`: `M_c ⊂ ω(w_c)`; no E1. ALT's proof fails only for the pair (`μ_{c−1}`, `μ_c`) (its E2 is at `t_{(c−1)+2}`). ALT(`μ_{c−1}`, `μ_c`) is read by
+POCKET at `w_c` only, POCKET at `w_c` by CASE at `q_c` only; MU, RAINBOW, SEP, REGION, U1 and the other ALTs read no E2. **At `q_c`:** (B) (`λ_c = 0`) loses
+its conclusion `α_c = 60°` (the inside tile there is `Λ_c`, which need not be `μ_{c−1}`); (A) (`λ_c > 0`) loses `α_c − λ_c ≤ 60°` but keeps
+`α_{c−1} + α_c ≤ 180°` **provided the outside tile `Z` at `q_c` is not `Λ_c` itself**: `Z` is not `c + 1`, `c` (side cone), `m_c` (`μ_c`'s one sector),
+`c + 2` (Pointing, cones below `180°`), and not `m̄_c` unless `Z = Λ_c` (`Λ_c ∋ r_c`, within `< 1`). Without POCKET, **`Λ_c` may wrap round `r_c` all the
+way to `q_c`** — then `λ_c > 0`, `Z = Λ_c`, and neither (A)'s pair sum nor (B)'s `α_c = 60°` follows (outside E2 this wrap gives `μ_{c−1} ∋ q_{c−1}, q_c`, so
+`α_c = 60°`, FS114-YB4 §2.2 row 6; here `Λ_c ≠ μ_{c−1}`). I find nothing excluding it. With (A) at `q_c`: all four centres give their conditions, REDUCE
+applies (`α_c ≤ 180° − α_{c−1} ≤ 120°`), and PXKILL at `k = c + 1` reads CASE at `q_{c+1}`, `q_{c+2}`, ALT(`μ_c`, `μ_{c+1}`), ALT(`μ_{c+1}`, `μ_{c+2}`) and
+`v_{c+1} ∈ cl μ_c` (POCKET at `w_{c+1}`), none broken: `P_x` excluded ✓. (Precision: it does read `μ_c`, the pocket on `t_{c+1}`'s counter-clockwise side;
+it reads nothing on its clockwise side, where E2 breaks.)
+**The survivors** (no constraint at `q_c`; `c = 1`, cones `(α_1, α_2, α_3, α_4)`, `α_2 … α_4 ∈ [60°, 120°]`, `α_1 < 180°`, each of `q_2, q_3, q_4` giving
+`α_k = 60°` or `α_{k−1} + α_k ≤ 180°`), enumerated by which of `α_2, α_3, α_4` are `60°`:
+- F0 `(180° − b, b, c, 180° − c)`, `b, c ∈ (60°, 120°)`, `b + c ≤ 180°` (no `60°` cone) — **killed by PXKILL at `k = 2`**: it needs only CASE (A) at `q_2`, `q_3`,
+  `60° < α_3`, `α_2 < 120°`, and colour 1 blocked on the arc `(φ_2, φ_3)` (it is, since `α_3 + α_4 = 180°`), not the whole `P_x` shape;
+- F1 `(300° − c − d, 60°, c, d)`, F3 `(240° − d, 60°, 60°, d)`, F4 `(240° − c, 60°, c, 60°)` — every one has **`α_2 = 60°`: E2 at a 60° blade, which needs E1**
+  (YB5-E2-60 below): **excluded**;
+- **F2 `(180° − b, b, 60°, 120°)`, `b ∈ (60°, 120°)`** — the one survivor family: in indices from `c`, `α_c = 180° − b`, `α_{c+1} = b`, `α_{c+2} = 60°`,
+  `α_{c+3} = 120°`. It is exactly Y5-PIN120's exception (E2 at the blade two past the `120°` tile).
+(`α_3 = α_4 = 60°`, `α_4 = 60°` alone and all three `60°` are empty.) Whether Y6's S1–S6 are these, or F0, F1, F3, F4 unexcluded, is stage 2's question.
+
+**YB5-E2-60** [hand; mine]. *E2 at a blade `t_{c+1}` of cone `60°` holds only with E1 at edge `c` or edge `c + 1`.* `|q_c − q_{c+1}| = 1`, so REGION puts
+`t_{c+1}` in the crescent `B̄(p, 1) ∩ B̄(q_c, 1) ∖ B(q_{c+1}, 1) ⊂ Reul(p, q_c, r)`, `r = e(φ_c − 60°)` (Y5 §2.2 step 10; YB4 walked it). In a width-1
+Reuleaux triangle two points are exactly 1 apart only if one is a corner. E2 puts every point of the arc `M_c` (positive length unless E1 at edge `c + 1`)
+at distance exactly 1 from `w_c`, all in `cl t_{c+1}`: so `w_c ∈ {p, q_c, r}`; `w_c ≠ p, q_c`, and `w_c = r` is `ℓ_c = 60°`, E1 at edge `c`. ∎
+
+### 7. FS114-Y6-HALF — **TRUE outside two boundary subcases; "unchanged" is a GAP there (and D2T's first clause is FALSE in one)** [hand; mine]
+
+Frame (Y4's): `t_1 = Reul(p, q1, q2)`, `q1 = e(30°)`, `q2 = e(−30°)`; its sides `S1` (arc of `ω(q2)`, `p → q1`) and `S2` (arc of `ω(q1)`, `p → q2`) are tactic,
+`t_1` inner for both; `(2, 1, 1, 0)` counter-clockwise: `t_2` (sector `[60°, θ_2]`) outer for `S1` (so `T2`, colour 2, at `q2`, and `t_2 ∩ B(q2, 1) = ∅`) and
+inner for its counter-clockwise edge, centre `q_{23} = e(θ_2 − 90°)`; `t_3` inner for its counter-clockwise edge, centre `q_{34} = e(θ_3 − 90°)`; `t_4`
+(sector `[θ_3, 300°]`) outer for both its edges (`T1`, colour 4, at `q1`). The mirror pattern is the reflection. REG60's argument gives `θ_2 ≥ 120°`
+(`q_{23} ∈ cl t_2`, `|q_{23} − q2| ≥ 1`), `θ_3 ≥ θ_2 + 60°`; `t_4`'s cone `300° − θ_3` has no lower bound of that kind (it is inner for no edge).
+- **SIDES clause 1** reads only `t_1` and the tiles along its two sides at its corners: **unchanged, TRUE**.
+- **D2T.** `q1 ∈ cl t_2` needs `t_2 ⊂ B̄(q1, 1)`, i.e. `θ_2 ≤ 120°`: so `q1 ∉ cl t_2` **iff `t_2`'s cone exceeds `60°`**; at `θ_2 = 120°`, `q_{23} = q1` and
+  `q1 ∈ cl t_2` is **forced** (inner centre): D2T's first clause is **FALSE** in that subcase, and colour 2 is present at `q1`. (In the bowtie `t_2`'s cone is
+  also `60°`, but its counter-clockwise edge is an arc of `ω(q3)` with `t_2` outer, which curves away and keeps `t_2`'s points `s·e(120° − δ)`, `s > 2 sin δ`,
+  more than 1 from `q1`: YB3-D2T; here the edge is an arc of `ω(q1)` with `t_2` inner, and curves the other way.) `q2 ∈ cl t_4` needs `t_4 ⊂ B̄(q2, 1)`: excluded
+  when `θ_3 < 240°` (a direction of `t_4` in `(θ_3, 240°)`) and at `θ_3 = 240°` (`q_{34} = e(150°)`, `t_4` outer, its points `s·e(240° + δ)`, `s > 2 sin δ`,
+  more than 1 from `q2`); **not excluded when `t_4`'s cone is below `60°`**. With `q1 ∉ cl t_2`, `q2 ∉ cl t_4`, UPDOWN gives "2 absent at `q1`, 4 absent at
+  `q2`" (`t_2` has `60°⁺`, `t_4` has `300°⁻`).
+- **SIDES clause 2.** `X1 ≠ t_3, t_4` and `X2 ≠ t_2, t_3` always (diameter and REGION); `X1 = t_2` iff `t_2` borders all of `S1` (E1 on `S1`, possible only when
+  `t_2`'s cone is `60°`), `X2 = t_4` iff `t_4` borders all of `S2` (E1 on `S2`, only when `t_4`'s cone is at most `60°`). Outside those, `X1, X2` have points
+  within `< 1` of `p` and are not tiles at `p`: `{c(X1), c(X2)} = {5, 6}` **TRUE**.
+- **W.** YB3-W's steps 1–4 run unchanged when `{c(X1), c(X2)} = {5, 6}` (`t_2` has `60°⁺` and `t_4` has `300°⁻`, which is all the Pointing they use; "simple"
+  separates `W1` from `X1` across `T1`): **one tile `W` of colour 3, the colour of `t_3`, the tile opposite `t_1`** — **TRUE** there. In the subcase `t_4`'s cone
+  below `60°`, `t_3` has directions in `(240°, θ_3)`, within `90°` of the arc point `e(−30° + κ)`, so colour 3 is blocked near `q2` and W's conclusion
+  cannot hold as stated.
+- **"The stop at `√3` is not inherited"** — a reading about a proof, **TRUE as such**: FS114-Y4-DIAG's steps 1–3 (the colours at `top`, the forced sliver `V`
+  at `q1`, `X1` starting at `60°`) read `X4` along the second Reuleaux triangle's side and that triangle's pointing at `top`; without it no step forces the
+  sliver, and the germ condition at `r` (Y3-R with YB2-RPREC) then leaves more than one colour. It is not a claim that the pattern extends past `√3`.
+
+So: **SIDES, D2T and W hold unchanged whenever `t_2`'s cone exceeds `60°` and `t_4`'s is at least `60°`**; the two boundary subcases (`t_2`'s cone exactly
+`60°`, where D2T's first clause is false; `t_4`'s cone below `60°`) are not covered by the "unchanged" proofs — **GAP** unless excluded elsewhere.
+
+### Summary of stage 1b
+
+| # | statement | my verdict | what the proof uses that the words omit |
+|---|---|---|---|
+| 1 | E1FORM | **TRUE** | L60-EQ; REG60; simple not used |
+| 2 | E1Q3 | **TRUE** (no E2 at `t_3` not used) | every cone below `180°` (edge curvature) |
+| 3 | E1OMEGA | **TRUE**, "just above `270°`" read as CASE's `Z` at `q_4` | edges 3, 4 below `60°`; no E2 at `t_4`; simple |
+| 4 | E1CAP | **TRUE** but `λ_3 = α_3 − 60°`: **GAP** (the wrap of `μ_2`) | a Jordan curve through `T_4` and `t_2`; no E2 at `t_3`, `t_4` |
+| 5 | E1K1 | **TRUE**; "`T_4` fills the corner" is implied by "a tile of colour `m_2` at `q_1`" | ALT(`μ_1`, `μ_2`); CASE (A) at `q_3` |
+| 6 | E2RED | chain **TRUE**; survivors by my derivation: **F2 alone**; "all with `t_{c+1}` short of the tangent": **GAP** (a full wrap of `Λ_c`) | YB5-E2-60; PXKILL at `k = c + 1` on F0 |
+| 7 | HALF | **TRUE** when `t_2`'s cone `> 60°` and `t_4`'s `≥ 60°`; **GAP** at the two boundary subcases (D2T's first clause FALSE at `t_2 = 60°`) | — |
+
+**Residues** (the instance's question, answered from my side before reading Y6): the E1 chain misses exactly (i) `α_2 = 60°` (then PIN120-60's step 2 is YB4's
+GAP: `(60°, 60°, 120°, 120°)`), (ii) `M_1` bordered by two tiles (`μ_1` and a `ν` of colour `m̄_1`, where `m_1 = m_2`), (iii) a tile of colour `m_2` at `q_1`
+between `T_1` and `μ_1`, and, outside the kill, (iv) the wrap of `μ_2` at `q_3` (E1CAP's `λ_3`); plus E1 at two or more edges, and E1 with E2. E2's chain misses F2
+and, inside it, the full wrap of `Λ_c` at `q_c`.
+
+## Stage 1b — SAVED
