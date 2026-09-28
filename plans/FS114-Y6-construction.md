@@ -347,3 +347,13 @@ in place of the second Reuleaux triangle.
 bowtie stops at `√3` (RSTOPALL), but the Reuleaux `(2, 1, 1, 0)` is not shown to stop there.
 
 ## Stage 4 — SAVED
+
+## Proposed for the close (standing rule 7: I edit none of these files)
+
+- `LEDGER.md` § B and FS-114's derivation file: FS114-Y6-E1FORM, -E1Q3, -E1OMEGA, -E1CAP, -E1K1, -E2RED, -HALF (hand, one mind each); -E1CHK (tools); -HELD
+  (float survey; aiming, not a result about maps beyond the held objects).
+- `plans/FRONTIER-STUBS.md`, FS-114's row: K1's pinwheel case is now the three E1 residues (E1-Z, E1-60, E1-ν), E1 at edges `{1, 2}` and `{1, 4}`,
+  E1 with E2, and E2's families S1–S6; the `(2, 1, 1, 0)` Reuleaux case is a half-bowtie not shown to stop at `√3`.
+- A second mind, blind, first on FS114-Y6-E1CAP (§2.4 steps 2–6: the case split on `M_1`, `Y = T_4`, the no-`H` step) and on E2RED's claim that
+  PXKILL at `k = c + 1` reads no pocket beside `t_{c+1}`.
+- No bibliography rows: nothing new was read.
