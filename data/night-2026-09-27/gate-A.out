@@ -1,0 +1,8 @@
+card lint
+  cards: 3  no-question exits: 0
+  the ask: Does FS-114's NO at every complexity bound plus FS-111's cone-scale bound give seven, or is a third statement needed — R's (A) at unbounded complexity, a hole bound uniform in K, or a NO for the boundaries a limit produces?  [line 101]
+hunch ledger
+  hunches: 5  open: 5  confirmed: 0  killed: 0
+evidence inventory
+  items: 18  surprised: 8  unread: 0
+GATE: PASS (0 failures, 0 warnings)
