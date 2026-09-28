@@ -1,0 +1,4 @@
+z = X_1 + e(10.001 deg)/100: colours free at z (no tile of the colour straddles distance 1): ['O']
+z = X_1 + e(20.016 deg)/100: colours free at z (no tile of the colour straddles distance 1): NONE
+z = X_1 + e(159.984 deg)/100: colours free at z (no tile of the colour straddles distance 1): NONE
+z = X_1 + e(169.999 deg)/100: colours free at z (no tile of the colour straddles distance 1): ['R']

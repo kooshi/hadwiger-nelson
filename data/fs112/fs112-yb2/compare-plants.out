@@ -1,0 +1,6 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== Y2's disk plants through my checker (Y2's registered predictions, plans/FS112-Y-construction.md §5.0: chords -> the five (T1_k, T2_{k+3}); swap -> (T1_4, U_0), (T1_1, U'_0); ring2_short -> the five (C0, R_k) and the five (R_k, R_k))
+   Y2 plant none (faithful): my checker ACCEPT on 71/71 pairs, rejected []
+   Y2 plant chords      : my checker REJECT on 71/71 pairs, rejected [('P0', 'W3'), ('P1', 'W4'), ('P2', 'W0'), ('P3', 'W1'), ('P4', 'W2')]
+   Y2 plant swap        : my checker REJECT on 71/71 pairs, rejected [('P1', 'T1'), ('P4', 'S0')]
+   Y2 plant ring2_short : my checker REJECT on 71/71 pairs, rejected [('R0', 'R0'), ('R0', 'Z'), ('R1', 'R1'), ('R1', 'Z'), ('R2', 'R2'), ('R2', 'Z'), ('R3', 'R3'), ('R3', 'Z'), ('R4', 'R4'), ('R4', 'Z')]

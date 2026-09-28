@@ -28,6 +28,8 @@ The table is at the end of stage 5 (YB2-CHK, YB2-STRIP3, YB2-DISK, YB2-ARCS, YB2
   `Y112-construction.md` not yet, and `STANDING-RULES.md`).
 - `plans/FS112-Y-construction.md`: I read lines 1–266 only (round 1, open to me), having located the fenced heading "§ Continuation — FS112-Y2" at
   l. 267 by a `grep -n "Continuation"` that printed that one heading line and nothing of its section.
+- Step 4 (stage 6), after `d231d771`: Y2's section (ll. 267–650), `tools/fs112_y2_disk.py` (builder and plants, imported), `y2_dial_pin.out`,
+  `y2_disk_readoff.out` read; FS112-Y3's files not opened.
 - Owner's message during stage 1 (fence addition, effective at once): FS112-Y3's `plans/FS112-Y3-construction.md`, `tools/fs112_y3_*.py` and
   `data/fs112/fs112-y/y3_*` are fenced until my step 3 is committed; after it, read only if step 4 needs them. Logged; nothing of them touched.
 
@@ -410,3 +412,60 @@ at `V_0`, `A_1`: four of the six colours are lost to tiles no local change at `V
 | YB2-DISC | the largest closed vertex-centred disc inside O1 has radius `r − a`; a valid extension holds one of radius φ about `A_0` (exact), and none larger about a vertex of O1 | tools, exact + hand, one mind | O5 |
 
 ## Stage 5 — SAVED (step 3 complete: every O1–O5 verdict above is committed before Y2's section, tools or outputs are opened)
+
+## Stage 6 — SAVED: Y2's section, tools and outputs read (the brief's step 4); every divergence, with both addresses
+
+*Read after stage 5 was committed (`d231d771`): `plans/FS112-Y-construction.md` § Continuation — FS112-Y2 (ll. 267–650) in full; `tools/fs112_y2_disk.py`
+(the `field`, `Disk` builder and plant switches; run and imported, never edited); `data/fs112/fs112-y/y2_dial_pin.out`, `y2_disk_readoff.out`. Not
+read: Y2's other tools' logic, `y2_house*`, `y2_dial_move*` beyond the record's quotation of them; FS112-Y3's files (fenced; step 4 did not need them).
+New tools of this stage: `tools/fs112_yb2_compare.py` (Y2's object against mine; Y2's plants through my checker), `tools/fs112_yb2_edgecheck.py` (the
+strip's stop point at finite offsets, in Y2's terms). Outputs: `compare-objects.out`, `compare-plants.out`, `edgecheck.out`.*
+
+**The headline: the disk — two blind rebuilds, one object, two checkers, one verdict.** Y2's disk and mine are **identical**: the four radicands
+equal, and **26 of 26 tiles have the same colour and every piece the same as a point set** (`compare-objects.out`), reached by different readings
+(Y2 put `Z^L_k` on the pentagon's diagonal `A_kC_k` and made the legs parallel by reading the figure; I derived the bounds 108° and 126° at the
+four-colour vertex and met them with equality — the same points). Both ACCEPT 71 of 71 pairs with 26 self contacts and 20 out-contacts, 25 slack pairs.
+**CAL-DISK now stands in the robust form claim list §7 asks for** — two independent rebuilds, two exact checkers — at the grade [tools, exact; two
+rebuilds, one blind], with readings P, W, M (mine) and Y2's 4.5 items 1–6 (theirs) as the shared reading assumptions: the print pins none of them.
+
+| # | divergence | Y2's address | mine | kind |
+|---|---|---|---|---|
+| D1 | **The strip's colourless wedge at its stop point is wider than Y2 (and YB) state.** Y2-PIN: "an outward wedge carries no colour (strip `(30°, 165.52°)`" — YB's cone — "each of `Q`'s two tiles contains a point at distance exactly 1 from `Q` (strip: `V_0`, `A_1`)". **Each has two**: the top tile `C_0` (red) touches `ω(Q)` at `V_0` **and `A_{−1}`**, the top tile `C_1` (orange) at `A_1` **and `V_1`**; and the next same-colour top tiles `C_3`, `C_{−2}` touch it at their corners `(1/4 ± 1, Y)` from outside. With all contacts the colourless set is **the symmetric cone (arcsin(1/4), 180° − arcsin(1/4)) = (14.48°, 165.52°), width ≈ 151.045°** (the strip's mirror `x ↦ 1/2 − x` fixes `Q` and swaps red and orange, so the true cone must be symmetric; (30°, 165.52°) is not). **Confirmed in Y2's own terms, exactly** (`edgecheck.out`): at `Q + e(20.0°)/100` no colour is free; at `Q + e(10.0°)/100` orange is free, at `170.0°` red — Y2 and YB tested only 30°–150°. Every tested direction agrees; the stated wedge is a proper sub-cone. **Correction owed** to Y2-PIN's wedge and to YB-EDGE's cone (both true as sufficient statements, neither the colourless set), and to the widths compared: **151.045° against the disk's 108°**, not 135.52°. | §6.1, Y2-PIN; YB's record O3 | O2 (YB2-EDGE); `cone-strip.out`, `edgecheck.out` | a verdict differs (the set); a correction owed |
+| D2 | **Where the rim stops, completeness.** Y2 tests `C_0 + e(θ)/100` at θ = 36°, 54°, …, 162° and one control beyond `u_0`, and concludes "the rim cannot be passed at `C_k` (nor … `D_k`)". I prove the complete list: **the colourless rim points are exactly the ten `C_k`, `D_k`** — every open rim arc keeps its tile's colour available (exact, all 15 arcs) and the five `F_k` (Y2's `u_k`) keep violet and yellow (Y2's `P`, `Yw`, matching its control); at `C_0` the exact first-order cone (54°, 162°), 108° = 3π/5, equals Y2's tested directions' pattern (`R` free at 36°, none 54°–162°, `P` at 180°). | §5.3 (f) | O1 (YB2-RIM); `o1-o2.out`, `cone-disk.out` | coverage: the "only them" is mine |
+| D3 | **O5's attainment.** Y2-DISK-R bounds the vertex-centred discs of any extension by φ ("the point `C_0 + e(108°)/100` … has no colour") and the inside value `r − |OA|` ≈ 1.5985 — the same numbers as mine. **Mine adds that φ is attained**: `R_0` grown to the arc of the circle `(A_0, φ)` over its rim arc is valid (71/71 ACCEPT) and holds the closed disc `B(A_0, φ)`; and for the upper bound I use the open colourless cone (a positive-measure set of points each at distance exactly 1 from interior points of all six colours), which is what an almost-everywhere-valid extension forbids — Y2's single point is the cone's sample (its straddles are open, so the two readings agree). | §5.3 (g), Y2-DISK-R | O5 (YB2-DISC) | coverage: attainment mine |
+| D4 | **The strip's stop point is the second common point of two complementary pairs, the disk's rim stop of one.** `Q = X_1` is at distance exactly 1 from four vertices: `(V_0, A_1)` **and `(V_1, A_{−1})`** (both complementary, both at ≈ 0.757, both with a four-colour first common point); `C_k` is on the circles of `(U′_k, B_k)` only (Y2's `(B_0, Z^R_0)`), which is why the strip's cone has four boundary contacts and the disk's two. The disk's outside points `Q_k` (Y2's `w*`) are, like the strip's `X`, shared by two pairs — Y2 and I both find `w*` at distance 1 from four vertices. | §6.1, §5.3 (d) | O2 | a finding one side has (the strip half) |
+| D5 | **Close pairs listed.** Y2 lists close **covering** pairs of every overlap (`(A_0, A_1)`, `(A_0, X_3)`, `(A_0, B_2)`, `(A_0, y)`) and finds (S1) on the disk and C-UA-BUDGET's second branch false in the disjoint sense; I list the **complementary** pairs only (the instance's O1), all 20, with the same two second points (`C_k`/`D_k`, `w*` = my `Q_k`, `|w*|² = 4.676550266` both; I add its minimal polynomial `25x⁴ − 50x³ − 265x² − 250x + 121`). | §5.3 (d), (e) | O1 (YB2-PAIRS) | coverage; agreement where both look |
+| D6 | **The outside point `Q_k`'s colours.** Y2: "along the mirror lines the colouring may pass the rim (at `u_0`, `P`, `Yw` are free) but not past `w*`". Mine, exact: at `Q_0` itself violet and yellow are **not** blocked (each only touches `ω(Q_0)` from inside at two vertices); the colourless set near `Q_0` is the cone (54°, 198°), 144°, containing the outward radial 126° — so Y2's "not past `w*`" holds in the outward cone, while `Q_0` as a single point can still be coloured. | §5.3 (f) | O2 (YB2-Q) | agreement, sharpened |
+| D7 | **The move (O3).** Same move (the chords `D_kZ^R_k`, `C_kZ^L_k` of `ω(C_k)`, `ω(D_k)` bent to their unit arcs, lenses to `R_k`), same verdicts: valid (71/71), ten new arcs of kind **in** (self), colourless wedge 108° → 36° = (54°, 90°) at `C_0`, (90°, 126°) at `D_0`, green free at `C_0` from 90°, violet at `D_0` up to 90°. Mine adds: the ten new arcs are **not arc-closed** (one end on the rim each). Y2 adds: the second move's GAP (6.4) and Y2-SLACK (the `R_k | U_k` boundary not locked). | §6.2–6.4, 6.6 | O3 (YB2-MOVE) | agreement; coverage both ways |
+| D8 | **The forced sectors (O4).** The same four arcs at `V_0` and at `A_1`, the same forced colours and free pairs (Y's colours 1, 3, 5 and 2, 4, 6 = my purple, blue, red and green, marble, orange). Y2 concludes the same **No**. Mine adds the radius to which "confined to the neighbourhoods" is meant (below ≈ 0.135: the lens of arch 1 inside `ω(Q)` runs from `V_1` to `A_1`) and that the free arc at `V_0` lies wholly outside the half-plane `Q`'s cone reads there. | §6.5, Y2-FORCE | O4 (YB2-FORCE) | agreement |
+| D9 | **Unit arcs, kinds, arc-closedness, vertices, `[16.106]`.** Identical: 20 arcs, all both, four per `A_k`, total 112.35° on `ω(A_0)`; every end interior; the five `A_k` four-colour, `A_4` carrying `{R, G, Yw, P}`. | §5.3 (a)–(c), (h) | O1 | agreement |
+| D10 | **Plants on the disk.** Y2's three disk plants (`ring2_short`, `swap`, `chords`), rebuilt by Y2's builder and run through **my** checker: **every plant rejects exactly the pairs Y2 registered in §5.0 and its own checker found** — `chords`: the five `(T1_k, T2_{k+3})` (my `(P_k, W_{k+3})`); `swap`: `(T1_4, U_0)`, `(T1_1, U′_0)` (my `(P_4, S_0)`, `(P_1, T_1)`); `ring2_short`: the five `(C0, R_k)` and the five `(R_k, R_k)`; the faithful twin ACCEPTs (71/71 each). | §5.0, §5.2 | `compare-plants.out` | cross-check |
+| D11 | **Examined by one side only.** Y2 only: Y2-NB4 (the corrected NB-4), Y2-X4 ((S2)-with-arcs on the strip), Y2-D3/D4S/D6 (house-keeping on the strip and brick), Y2-DISK-S1, Y2-BUDGET2, Y2-SLACK, the second move's GAP, Y2-X2. Mine only: the complete rim classification (D2), the strip's exact cone (D1), the O5 attainment (D3), the checker's calibration on FS-110's fragments pair by pair (1,663 pairs) and on YB's strip and plants pair by pair. | Y2's table | stages 2, 5 | coverage |
+
+**Pairs one checker examined and the other did not:** none on the disk — both examine the 71 pairs the colour map generates (six red tiles, four
+of each other colour, each tile with itself). On the strip, Y2's round-1 population (60 ordered pairs, horizontal gap ≤ 1) and mine (90 orbit pairs,
+36 within reach) are the same pairs within reach (as YB found for Y's).
+
+**Grades after the comparison.** YB2-DISK becomes **[tools, exact; two rebuilds, one blind (mine), two checkers]** (the readings shared, stated);
+YB2-ARCS, YB2-PAIRS (the second points), YB2-MOVE and YB2-FORCE **two minds, one blind**; YB2-RIM's completeness, YB2-EDGE and YB2-DISC's
+attainment **one mind** (mine).
+
+## Stage 6 — SAVED
+
+## Stage 7 — SAVED: hand-back notes
+
+**Erratum to my stage 5** (O1, unit arcs): "the arches' `arccos(…)` ≈ 20.17°" should read **`72° − arctan(√φ)` ≈ 20.17°** (the direction of `X_0 − A_1`
+is `36° + arctan(√φ)`, exact from `|A_0A_1| = 1/φ` and the perpendicular leg `1/√φ`). No verdict rests on it.
+
+**Proposed `BIBLIOGRAPHY.md` reading-status edits (the close writes them):** `[Polymath2021]`: pp. 194, 197–200 read (text); Fig. 10 viewed at 300 and 600
+dpi for its combinatorics and its caption's radical read on the page image (FS112-YB2, 2026-09-27); the disk rebuilt exactly from it, independently of
+FS112-Y2, and the two rebuilds found identical. `[AxenovichEtAl2014]`: p. 8 read (text), Fig. 4 viewed at 400 dpi for its colour pattern (FS112-YB2).
+
+**Proposed corrections (the close decides):** Y2-PIN's strip wedge and YB-EDGE's cone, as the colourless set, → `(arcsin(1/4), 180° − arcsin(1/4))`,
+width ≈ 151.045° (D1); the comparison "strip 135.52° against disk 108°" → "151.045° against 108°".
+
+**Left open (not this job's):** the second move at `C_k` (Y2's 6.4 GAP) — after the move the 36° cone at `C_0` is bounded by red's contact at `U′_0`
+(54°) and green's new contact at `D_0` (90°), both exact; whether the triangle Y2 names can be blue is untouched by me. Whether the disk's colourless
+cones at `C_k`, `D_k` can be closed at all by changes confined near the rim is O3's question one step further and is not decided here.
+
+## Stage 7 — SAVED
