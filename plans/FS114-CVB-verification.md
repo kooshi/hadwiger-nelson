@@ -8,13 +8,13 @@ record existed at start (06:07 UTC). Stage 1 is written before any fenced file (
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
-| FS114-CVB-EXISTS | Every valid map has a vertex of at least four colours, in the map itself; the proof passes through `M*`, where with no such vertex every stuck chain would be bi-infinite; it uses neither CV-HD nor FS112-C-ENDS, no ray step and no residue | [hand; one mind: CVB, blind to CV] | stage 1 §1.4 |
-| FS114-CVB-L0 | In `M*` a stuck vertex centres no unit arc, so `Γ ∩ ω(E)` is finite | [hand; one mind: CVB] | §1.5 |
-| FS114-CVB-HD | In `M*`, for a stuck `E`: `υ± = 1` with no in-type lower-flank tile at `E − n` is impossible; hence `G_N ⇔ H_S ⇔ υ± = 1 ⇔ λ± = −1` | [hand; one mind: CVB, blind to CV, sighted on Y3-END-NEEDS's levels; the `G_N` branch's MERGE made explicit] | §1.6 |
-| FS114-CVB-CLASS | A stuck vertex of `M*` is a bowtie (the four conditions; both neighbours both-kind (Q) centres; a one-vertex chain) or has `g` twice at `E − n` and `h` twice at `E + n` | [hand; one mind: CVB]; BOWTIE control consistent | §1.7 |
-| FS114-CVB-ENDS | FS112-C-ENDS with no residue: one step beyond every finite end of a stuck chain of `M*` lies a vertex of at least four colours | [hand; one mind: CVB] | §1.8 |
-| FS114-CVB-PINCH | In the map graph of a locally finite plane map, `M − x` is connected at a pinched tile and disconnected at a holed one; holes are locally consistent with validity | [hand; one mind: CVB] | §1.9 |
-| FS114-CVB-THOM | `[Thomassen1999]`'s steps other than the rainbow step hold for every valid map, Siamese pairs allowed: fill holes, read facial cycles as boundary walks, and replace the count in `int(R)` by local finiteness (finite against infinite); the reduced map graph `H` then has a vertex of degree `≥ 6` | [hand; one mind: CVB; the 2-separator criterion at pinches a sketch] | §1.9 |
+| FS114-CVB-EXISTS | Every valid map has a vertex of at least four colours, in the map itself; the proof passes through `M*`, where with no such vertex every stuck chain would be bi-infinite; it uses neither CV-HD nor FS112-C-ENDS, no ray step and no residue | [hand; one mind: CVB, blind to CV; with FS114-CV's, **two minds**, blind to each other (§2.2 A-1)] | stage 1 §1.4 |
+| FS114-CVB-L0 | In `M*` a stuck vertex centres no unit arc, so `Γ ∩ ω(E)` is finite | [hand; one mind: CVB; two with FS114-CV's CV-L0] | §1.5 |
+| FS114-CVB-HD | In `M*`, for a stuck `E`: `υ± = 1` with no in-type lower-flank tile at `E − n` is impossible; hence `G_N ⇔ H_S ⇔ υ± = 1 ⇔ λ± = −1` | [hand; one mind: CVB, blind to CV, sighted on Y3-END-NEEDS's levels; the `G_N` branch's MERGE made explicit; two with FS114-CV's CV-HD, different routes] | §1.6 |
+| FS114-CVB-CLASS | A stuck vertex of `M*` is a bowtie (the four conditions; both neighbours both-kind (Q) centres; a one-vertex chain) or has `g` twice at `E − n` and `h` twice at `E + n` | [hand; one mind: CVB; two with FS114-CV's]; BOWTIE control consistent | §1.7 |
+| FS114-CVB-ENDS | FS112-C-ENDS with no residue: one step beyond every finite end of a stuck chain of `M*` lies a vertex of at least four colours | [hand; one mind: CVB; two with FS114-CV's] | §1.8 |
+| FS114-CVB-PINCH | In the map graph of a locally finite plane map, `M − x` is connected at a pinched tile and disconnected at a holed one; holes are locally consistent with validity | [hand; one mind: CVB; the pinch and hole clauses three minds with NB and N2 (sighted)] | §1.9, §2.3 |
+| FS114-CVB-THOM | `[Thomassen1999]`'s steps other than the rainbow step hold for every valid map, Siamese pairs allowed: fill holes, read facial cycles as boundary walks, and replace the count in `int(R)` by local finiteness (finite against infinite); the reduced map graph `H` then has a vertex of degree `≥ 6` | [hand; one mind: CVB; the colour-free repair two minds with NB, both blind; the 2-separator criterion at pinches a sketch, one mind] | §1.9, §2.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -32,6 +32,10 @@ record existed at start (06:07 UTC). Stage 1 is written before any fenced file (
 3. **git log.** At start `git log --oneline -8` printed three subjects older than the start-up snapshot's five (`04ab71e9 FS114-N2: report`,
    `27b969b6 FS114-N2: stage 3`, `9e135bee FS-114 inventory: construction verifier's result`); subjects only, nothing newer than the snapshot, no `-p`.
 4. Nothing else fenced was touched: no transcript, no `chats-bak/`, no `data/fs112/fs112-c*/`, no other FS-114 record, brief or report, no FS-111 file.
+5. **Stage 2 (after `e9f8104c`), as the brief allows:** `plans/FS114-CV-verification.md` in full; in `plans/FS114-N-proof.md` the heading list, §1.4 (3), and —
+   found by `grep` for "THOM", "pinch", "hole" — its theorem-table rows N114-THOM and N2-MU and stage N2-2's lines on C114-THOM-TOP (its withdrawal, N2-MU, the
+   N2-2.7 row), a little beyond "§1.4 (3)" but all on the same claim; in `plans/FS114-NB-verification.md` the heading list, §1.2 item 7 and the whole §2.2 table
+   (D1–D12; D3–D4 are the ones used). Not opened: `data/fs114/fs114-cv/`, `data/fs114/fs114-n*/`, their tools.
 
 ## Stage 1 — SAVED: quotation check; blind verdicts on A1–A5 and B1–B2
 
@@ -258,3 +262,70 @@ exactly 1); WLOG every edge separates two tiles of different colours (an arc wit
 | CVB-P5 | at least one of them makes the repair depend on non-Siamese maps, against §1.9's "every valid map" | 0.5 |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: FS114-CV's record (part A), FS114-N §1.4 (3) and FS114-NB §2.2 D3–D4 (part B) read after stage 1 (`e9f8104c`); divergences
+
+*Read after stage 1 was committed and pushed: `plans/FS114-CV-verification.md` in full; `plans/FS114-N-proof.md` §1.4 (3), the N2 lines on C114-THOM-TOP
+(stage N2-2's withdrawals, N2-MU, the N2-2.7 table row); `plans/FS114-NB-verification.md` §1.2 item 7 and §2.2 (D1–D12, D3–D4 in full). Nothing else fenced
+opened (not `data/fs114/fs114-cv/`, not CV's, N's or NB's tools).*
+
+### 2.1 Quotation check, completed
+
+`tools/fs114_cvb_quotes.py --file data/fs114/fs114-cvb/quotes-stage2.tsv` → `quotes-stage2.out`: **14 of 15 FOUND**; the one MISSING row is the brief's A4
+written without Markdown: FS114-CV's table prints "FS112-C-ENDS holds **with no residue**: …", and the row with the bold markers is FOUND — the text is
+identical. A1, A2, A3, A5 exact. The brief's A5 input list ("over FS112-N3-DENSE3, N2-TERM, N4-FIN, and N3-DEG, W-MERGE and N4-RAY under unit arcs") is a
+faithful paraphrase of CV's theorem-table cell "over DENSE3 (two), N2-TERM (two), N4-FIN (two), N3-DEG/W-MERGE/N4-RAY under unit arcs (two)"; the quotations
+of N and NB used in §2.3 are exact.
+
+### 2.2 Part A — FS114-CV against my stage 1
+
+| # | item | FS114-CV (`plans/FS114-CV-verification.md`) | FS114-CVB (this record) | kind | verdict change? |
+|---|---|---|---|---|---|
+| A-1 | **CV-EXISTS**, truth and route | TRUE; "Take `M*` … If `F(M*) = ∅` … `¬G_N`, `¬H_S`, and CV-P makes both neighbours carry a repeated colour with three colours: stuck. The chain is bi-infinite … N4-FIN forbids the chain" (§1.5); "CV-EXISTS was derived without CV-HD, from CV-P and CV-L4 alone" (§1.7 (e)) | TRUE by the same skeleton (§1.4): no four-colour vertex ⇒ every unit arc (R2) ⇒ FLANK's exceptions (`G_N`, `H_S`: both-kind centres) absent ⇒ N4-STUCK (iii)–(iv) ⇒ bi-infinite ⇒ N4-FIN; neither CV-HD nor C-ENDS | agreement, blind both ways | no. **Two minds, both blind to each other** (CV; CVB) |
+| A-2 | CV-EXISTS's grade line | theorem table: "over DENSE3 (two), N2-TERM (two), N4-FIN (two), N3-DEG/W-MERGE/N4-RAY under unit arcs (two)"; §1.5 adds N4-SHADOW and N112-U1 | the proof also rests on the stuck-vertex lemmas — CV's own CV-FLANK, CV-P, CV-L4 (one mind each in CV) or, in mine, FS112-FLANK's exception list, N2-TERM item 1 and N4-PROP's step re-run — and on U1 and N4-SHADOW | grade (presentation) | no; file it "over DENSE3, N2-TERM, U1, N4-SHADOW, N4-FIN, N3-DEG, W-MERGE, N4-RAY (two minds each) and CV-L0, CV-FLANK, CV-P, CV-L4 (two minds each: CV; CVB)" |
+| A-3 | "in the map itself, no modification needed" | the proof takes `M*`; the phrase means the conclusion is for `M` ("so a vertex of `≥ 4` colours of `M*` has `≥ 4` colours in the original map") | the same; the phrase reads as if the proof needed no modification | wording | no; propose "every valid map itself has a vertex of at least four colours (proved through its terminal modification)" |
+| A-4 | **CV-L0** | a unit arc of `ω(E)` is (Q) or (R2); U1's cone of angle `< π` holds neither `g`, `h` nor `c`'s `±a` | the same argument (§1.5), with L60 for `ℓ < 60°` | agreement | no; **two minds** |
+| A-5 | **CV-HD**, truth | TRUE; one chain, steps 1–12: `|R| = 3` and N3-CONF (in- and out-type at `M` exclusive) force `x+ = x−` or `y+ = y−`; `x+ = x−` merges (step 8); `y` one sector filling `N`'s lower half-plane, "whence `¬G_N`" (step 9); at `M = N + n` the upper flanks of `y`'s horns are both `g`, two `g`-sectors, W-MERGE (step 12) | TRUE; two branches: `G_N` — ring colours `r₊ ≠ r₋` (W-MERGE through the bottom), upper flanks `x₁ ≠ x₂` of `h`'s sectors, seven colours at `N` itself; `¬G_N` — FS112-Y3-END-NEEDS as corrected (a seventh colour at `N + n`), with its shadow-source list at `N` (contact arcs of `ω(N)`) and `y ≠ g` re-derived | agreement in truth; routes differ (CV's is self-contained and blind; mine sighted on YB3 for its second branch) | no. **Two minds** (CV blind; CVB blind to CV) |
+| A-6 | CV-HD's `G_N` case | dies at step 9: `y+ = y−` is forced by the count, and a `g`-sector at the bottom would split `y` | dies at `N`: `r₊ ≠ r₋` (the same MERGE), then `x₁`, `x₂` make seven | agreement; the same mechanism (a colour split by the in-type `g`) | no |
+| A-7 | CV-HD step 3's wording | "`Y±`'s lower arcs have curvature `> −1` …, so the tile just below each is outside `B̄(E, 1)` near `N`" | the tile just below `Y+` may be the ring tile containing the arc of `ω(E)` leaving `N` (it crosses `ω(E)`); its colour is still outside `{c, g, h}` by N-E1 (my §1.6 (a)) | wording of a step | no; step 4's `x±, y± ∈ R` stands |
+| A-8 | **CV-U** ("if one horn of a stuck `E` has upper bound `1`, `E + n` is not stuck") | via `c`'s pinch at `N`: `c` at a stuck `N` would need two opposite directions or a half-plane | via CV-L0 applied at `N`: `N` centres that unit arc, and a stuck vertex centres none (§1.6's last line, §1.8) | route | no; **two minds** |
+| A-9 | **CV-L4** (`G_N` ⇒ `N` a both-centre with `≥ 4` colours) | re-derived: each side cone at a both-centre holds a third colour; three colours would make `N` stuck, against the side colours' cones | cited: a both-kind arc is not (R2), so (Q) in `M*` (N2-TERM item 1), four colours by (Q)'s definition | route | no; **two minds** |
+| A-10 | **CV-CLASS**, **CV-ENDS** | TRUE; C-ENDS's residue "empty", sub-cases (a) one horn above and one below — no in-type tile, CV-P both ways, CV-U; (b), (c) — CV-HD (stage 2 #1) | TRUE; the same three sub-cases (§1.8, as written at stage 1) | agreement | no. **Two minds** each |
+| A-11 | CV-FLANK's contact arcs | computed for arcs of `ω(E)` (before CV-L0) and carried to `N` (step 5) | at `E` none exist (CV-L0); at `N` my §1.6 (b) | agreement | no |
+| A-12 | where six is spent in CV-EXISTS | not stated separately (§1.6 lists CV-HD's steps 7, 11 and says CV-P, CV-U, CV-L0, CV-L4 count no colours) | only in DENSE3 (row 134's base); the hexagonal seven-colouring fails the argument there | agreement (mine explicit) | no |
+
+**Registrations scored.** CVB-P1 (0.6, "CV's CV-EXISTS routes through CV-HD or CV-ENDS"): **missed** — CV derived it from CV-P and CV-L4, as I did; both minds
+found the short route independently. CVB-P2 (0.5, "`G_N ∧ ¬H_S` explicit"): **met** (step 9, §1.7 (c)). CVB-P3 (0.5, "inputs listed without U1 or without
+FS112-FLANK"): **met** in the theorem table (no U1, no N4-SHADOW; FLANK re-derived as CV-FLANK and not cited); §1.5's cell lists U1 and N4-SHADOW.
+
+### 2.3 Part B — FS114-N §1.4 (3) and FS114-NB §2.2 D3–D4 against my stage 1
+
+| # | clause | FS114-N (`plans/FS114-N-proof.md`) | FS114-NB (`plans/FS114-NB-verification.md`) | FS114-CVB (§1.9, blind) | kind | the verdict, three minds |
+|---|---|---|---|---|---|---|
+| B-1 | `M − x` at a **pinch** | stage 1 §1.4 (3) (b): "fails at a tile with a hole or a pinch point (its boundary visits a vertex twice): the tiles in the pocket form a component of `M − x`"; withdrawn at N2 (stage N2-2's list: "FALSE as I stated it; `M − x` disconnects only at a hole (NB D3)") | D3: "the pocket's tile at the pinch vertex `v` and an outside tile at `v` both contain `v` in their closures, so they are `M`-adjacent" | connected: a bay's tiles meet the other gap's tiles at `p`; local connectivity holds with the pass convention | truth | **`M − x` is connected at a pinch** — NB and CVB blind, N2 conceding sighted; N's stage-1 clause FALSE |
+| B-2 | `M − x` at a **hole** | fails (stage 1) | fails ("TRUE that it fails") | fails; an explicit valid local fragment (annulus around a disc) | agreement | **fails at a hole**, three minds |
+| B-3 | **the repair** | stage 1: by Thomassen's count "in a **non-Siamese** map … at most 12 per colour, 72 in all … **with Siamese pairs the count is unbounded** and (ii) fails"; N2: "NB's colour-free repair (local finiteness in place of Thomassen's counting condition) I have not re-derived" | D4: "The topological steps hold for every valid map, Siamese or not; Thomassen's route fails on valid maps only at the rainbow step"; holes: "treat `x` as a 1-separator, excise the finite inner components, paste them back at the end" | every valid map, Siamese allowed; the count replaced by local finiteness and every diameter bound by "`M` is finite"; holes **filled** first | truth (N against NB, CVB) | **colour-free, every valid map** — NB and CVB blind; N's non-Siamese restriction not needed (true of the count, not of the repair) |
+| B-4 | holes: excise or fill | excise as 1-separators, paste back | — | fill (`x̂ = x ∪` holes), then Thomassen verbatim; "one of the edges xu or xv is crucial" then holds as written | route | no; both work (with excision, a hole-only drop in `D₁(x)` still leaves `x`'s component finite, so the contradiction stands) |
+| B-5 | the 2-separator criterion at pinches | not addressed | "consecutive faces along it meet, so `D₁(x)` is connected" (pinch = one boundary walk) | sketch: at a pinch of `y` whose bay is `A`, `y` still appears twice in `x`'s sequence, separated by `A`'s vertex contacts at the pinch; every tile at a vertex listed at each pass, vertex-only repeats dropped | scope (mine adds) | no; one mind, a sketch |
+
+**The third mind's verdict on C114-THOM-TOP.** `[Thomassen1999]`'s Lemma 1 is graph theory and TRUE; applied to the reduced graph `H`, never to `M`. His
+topological steps hold for the map graph of every valid map, Siamese pairs allowed, once holes are filled (or excised) and the count is read as local
+finiteness; "`M − x` is connected" holds at pinches and fails only at holes. So `H` has a tile of `H`-degree at least 6 in every valid map, and Thomassen's
+route stops at the rainbow step alone — C114-RAINBOW's question. **Split decided 2–1** (NB, CVB against N's stage 1; N2 already withdrew the pinch clause).
+Registrations: CVB-P4 (0.4, one of them reads the pinch as disconnecting): **met** (N stage 1). CVB-P5 (0.5, one makes the repair depend on non-Siamese
+maps): **met** (N stage 1).
+
+### 2.4 Proposed edits (for the close; I edit none of these files)
+
+- FS-114's derivation file: CV-EXISTS, CV-L0, CV-HD, CV-CLASS, CV-ENDS, and CV-U, CV-L4, CV-P, CV-FLANK at **two minds** (FS114-CV; FS114-CVB), CV-EXISTS's
+  grade line as A-2 above; CV-HD with both routes named (CV's one chain; CVB's two branches, the second over Y3-END-NEEDS as corrected); CV-EXISTS's
+  statement reworded as A-3.
+- `data/fs114/claims.md` verdicts: C114-EXISTS-F and GS-1 TRUE with no residue, **two minds** (blind to each other); C114-THOM-TOP: Lemma 1 TRUE; topological
+  steps TRUE for every valid map with the named repair; "`M − x` connected" TRUE at pinches, FALSE at holes — three minds for the pinch and hole clauses
+  (NB, CVB blind; N2 sighted), two for the colour-free repair (NB, CVB).
+- `plans/FS112-derivation.md` / `LEDGER.md` row 135 (the close's call): the arc-through-`N` stop of C-ENDS never occurs at a stuck vertex (CV-L0, two minds),
+  so its one-mind link leaves C-ENDS's grade; C-HORNEND and C-DOUBLE follow from CV-HD (two minds).
+- `BIBLIOGRAPHY.md` `[Thomassen1999]`: the page images are still owed; the reading status stands ("read in full", OCR), with this job's use: pp. 851–853,
+  the topological steps, re-derived for pinched and holed faces.
+
+## Stage 2 — SAVED

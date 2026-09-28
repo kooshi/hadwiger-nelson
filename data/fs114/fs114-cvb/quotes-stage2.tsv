@@ -1,0 +1,15 @@
+A1 CV-L0 (brief)	plans/FS114-CV-verification.md	in a terminal valid map `M*` a stuck vertex centres no unit arc, so `Γ ∩ ω(E)` is finite
+A2 CV-HD (brief)	plans/FS114-CV-verification.md	in `M*`, for a stuck `E`: both upper bounds `1` and no in-type lower-flank tile at `E − n` is impossible; hence `G_N ⇔ H_S ⇔ υ± = 1 ⇔ λ± = −1`
+A3 CV-CLASS (brief)	plans/FS114-CV-verification.md	a stuck vertex of `M*` is a bowtie (CV-HD's four equivalent conditions; both neighbours both-centres with `≥ 4` colours; a one-vertex chain) or has `g` twice at `E − n` and `h` twice at `E + n` (each neighbour stuck or with `≥ 4` colours and a repeated colour)
+A4 CV-ENDS (brief, no Markdown)	plans/FS114-CV-verification.md	FS112-C-ENDS holds with no residue: the point one step beyond every finite end of a stuck chain has at least four colours
+A4 CV-ENDS (with the record's bold markers)	plans/FS114-CV-verification.md	FS112-C-ENDS holds **with no residue**: the point one step beyond every finite end of a stuck chain has at least four colours
+A5 CV-EXISTS (brief)	plans/FS114-CV-verification.md	every valid map has a vertex of at least four colours — in the map itself, no modification needed, no residue, no ray step
+A5 inputs (brief paraphrase checked)	plans/FS114-CV-verification.md	over DENSE3 (two), N2-TERM (two), N4-FIN (two), N3-DEG/W-MERGE/N4-RAY under unit arcs (two)
+CV step 3 wording (divergence c)	plans/FS114-CV-verification.md	so the tile just below each is outside `B̄(E, 1)` near `N`
+CV sec 1.7 (e)	plans/FS114-CV-verification.md	CV-EXISTS was derived without CV-HD, from CV-P and CV-L4 alone
+N stage 1 (3)(b)	plans/FS114-N-proof.md	fails at a tile with a hole or a pinch point (its boundary visits a vertex twice): the tiles in the pocket form a component of `M − x`
+N stage 1 (3) non-Siamese	plans/FS114-N-proof.md	with Siamese pairs the count is unbounded
+N2 withdrawal	plans/FS114-N-proof.md	FALSE as I stated it; `M − x` disconnects only at a hole (NB D3)
+NB D3	plans/FS114-NB-verification.md	the pocket's tile at the pinch vertex `v` and an outside tile at `v` both contain `v` in their closures, so they are `M`-adjacent
+NB D4	plans/FS114-NB-verification.md	The topological steps hold for every valid map, Siamese or not; Thomassen's route fails on valid maps only at the rainbow step
+NB item 7 repair	plans/FS114-NB-verification.md	treat `x` as a 1-separator, excise the finite inner components, paste them back at the end
