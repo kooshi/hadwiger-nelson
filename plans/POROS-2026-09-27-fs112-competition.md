@@ -743,3 +743,171 @@ question: where-does-the-global-step-read-past-the-strip
 - **The disagreements that went to both sides:** card W (six items) and card X (four items).
 
 ## Stage A3-2 — SAVED
+
+## Stage A3-3 — SAVED: round 2 compared on both halves; the rows scored; round 3's aims (the owner's three questions, and Y2's hand-back)
+
+*Resumed by the owner after N2, NB2 and Y2 handed back (YB2, the blind verifier of Y2's objects, is running). Read:
+- `plans/FS112-N-proof.md` stages N2-3 to N2-5 in full, and `data/fs112/reports/FS112-N2.md`;
+- `plans/FS112-NB2-verification.md` in full, and `data/fs112/reports/FS112-NB2.md`;
+- `plans/FS112-Y-construction.md` § Continuation — FS112-Y2 (stages 3–7) in full, and `data/fs112/reports/FS112-Y2.md`.*
+
+### A3-3.1 N2 against NB2 — every divergence, and how each settles
+
+NB2's table (§2.3, 12 rows) was checked against both texts.
+- **No divergence of truth.** All ten of N2's statements are TRUE at two minds, one blind: N2-RAY, TOWARD (by different routes), AWAY, TAN, RED, TERM,
+  FLANK-Q, SIGN and ENV, plus DENSE in the form below.
+- **Settlements:**
+  - **#1, DENSE.** NB2's form is sharper: every valid map, with no terminal modification needed; a repeated-colour vertex within 2, or a unit-arc centre
+    within 3, of each trichromatic cubic vertex; every closed disc of radius 4 contains one.
+    - Checked: with no centre in `B̄(u, 2)`, Condition 5 holds on every circle centred there, and the base reads local structure only in `B̄(u, 2)`.
+    - **File NB2's form**: it is at one mind. The weaker form (N2's) is at two.
+    - NB2-DISC1 (every closed unit disc holds a vertex of degree `≥ 3`) is at two minds: N2's sketch, NB2's proof.
+  - **#2, #8 and #10** are NB2's own corrections toward the side (three, not free):
+    - the step fails in (iv), not (ii);
+    - termination leaves (R2) pieces;
+    - "two-sided" means "one arc of `ω(N)` through `v`".
+  - **#3, the extremal stuck ray: NB2's recognition.** It is the pencil of circles of radius `k + 1` about `P_{−1}`, with straight upper arcs, and every
+    shadow in it is tight.
+  - **#4, NB2-END** (a sketch, one mind, conditional): a chain's end may force a unit arc one step beyond it. It is a candidate route for (b).
+- **Card X, scored on the proof side:**
+  - X1 and part 2 were taken: N2 went to item 3, carrying items 1–2 as lemmas.
+  - X2 was answered at N2 §5.5.
+  - N2 §5.5 predicts that `ω(P)` leaves each end vertex through a ring colour of `P`, or along the next arc centred at `P`. **Met at every end vertex of
+    the strip** [my check, from Y2-X4's exact types]: `ω(P_1)` passes `W` into arch 2 (colour 3) and passes `A_1` into `C_1` (colour 6), and `P_1`'s
+    ring colours are `{3, 6}`. The disk's ring listing, Y2 §5.3 (c), agrees.
+
+### A3-3.2 The rows scored
+
+| row | registered | outcome |
+|---|---|---|
+| A2 §3.5 item 1 (end vertices, NB-ISO, termination) | — | **closed**, two minds, one blind (N2-TOWARD/AWAY/TAN/RED; NB2) |
+| A2 §3.5 item 2 (terminal-map statement) | — | **closed with its GAP named** (N2-TERM, N2-FLANK-Q; divergence 1′ settled: N4-FIN's application fails at a chain's end; the one-sided ray is consistent), two minds |
+| A2 §3.5 item 3 (the first global step) | — | route B chosen; **N2-DENSE TRUE** (two minds; NB2's form one mind); **not a NO** |
+| E14 (0.3) a NO at one mind | | not met |
+| E16 (0.4) a blind verifier finds a divergence of truth | | round 2: NB2 none of truth; YB2 pending (E16 was met in round 1) |
+| E17 (0.35) an explicit `R` for a NO | | not met: DENSE has an explicit radius (4) but is not a NO. C-LOCAL: GAP |
+| E6 (0.2) the dial | | **not met: a stall at the printed values, with the obstruction named** (Y2-WEDGE, Y2-PIN, Y2-FORCE; two GAPs named). This is E6's "evidence for the NO's step past the strip" |
+| E7's twin, the disk | | **met, one checker** (the robust form waits on a tower-capable blind checker; YB's field cannot hold `sin 72°`) |
+| E11 (0.6) every seam arc-closed | | **met**: T2 and the four-colour vertex on the strip (two minds); **(S1) on the disk** (Y2-DISK-S1; one checker; its seam points located in float, then placed on their arcs by angle) |
+| E10 (0.35) a closed cycle of unit arcs | | still not met |
+| E13 (0.6) C-HOCK | | **not testable on held objects**: A6-C2's radius-`9/10` arcs border an uncoloured gap (Y2 §7 item 2); no held exact object has an arc of radius `< 1` between two tiles |
+| N112-P3 (0.7) the disk's `{1,3,5,6}` junction is (Q) | | **MET** [tools, exact, one checker]: every corner `A_k` of the central tile carries four colours and centres four arcs of kind both |
+| N's pre-round secondary: (S1)'s ends fail | | **FALSIFIED**: the disk realises (S1) arc-closed (one checker) |
+| C-UA-BUDGET branch 2 | | **FALSE in both senses**: union (the strip; two minds) and disjoint (the disk, Y2-BUDGET2, one mind, exact); consistent with N112-NB4′, whose escape (α) holds at the disk's `A_0` (orbit `209° ± 60k` meets `ω(A_0)`'s arcs) |
+| C-UA-INC | | the kind **in** realised locally (Y2-MOVE, exact); **both** on both positives |
+| card X, X3 | | settled: Y2 retracts (γ) (retraction 4, free); **N112-NB4′ = Y2-NB4, three minds** |
+| card X, X4 | | **TRUE on the strip** (Y2-X4, exact; my derivation plus Y2's check): T2 is (S2)-with-arcs seen from the other diagonal; the general form is open |
+
+**My hunches:**
+- `a3-disk-stops-at-a-seam`: **confirmed** by an exact read-off on a fresh object (Y2 §5.3 (f)).
+- `a3-t2-dual`: **confirmed on the strip** (exact); open in general.
+- `a3-base-reads-beyond`: **supported, still open.**
+  - N2 chose route B, citing X1; Y2-X2 exact: every configuration the base forbids that the strip holds needs a valley's or an apex's circle, which leaves
+    the strip at an edge vertex.
+  - N2's own global step (DENSE) does not reach past the strip. Its named GAP (a) is where it would.
+- **My retraction** (not free; it was in Y2's brief): A3-2.3's second reason ("the disk is the only calibration between 1.834 and 2.124; the base reads
+  a radius-2 disc") **fails at vertex-centred steps** (Y2-DISK-R: at most 1.5985 inside the disk, at most `φ` in any extension). Its first reason (a second
+  skeleton, to tell a law from a design) was confirmed: Y2-STOP.
+
+**Retractions, round 2:**
+- N2: 2 (N's l. 231; N's row 9), conceded.
+- NB2: 3.
+- Y2: 1 free, plus one lost plant registration (`move_wrongside`, which revealed Y2-SLACK).
+- A3: 1.
+
+### A3-3.3 A reading for both sides (card R's R1)
+
+hunch: a3-ray-curvatures
+  claim: along a stuck chain, C-CHAIN-9's recursion makes λ_k and υ_k strictly increasing in k wherever they are nonzero (f(λ) < λ, f̃(υ) > υ off 0), so a one-sided infinite chain carries infinitely many distinct boundary curvatures; a map whose boundary arcs fall into finitely many congruence classes (every periodic map) has no stuck ray, and its stuck chains have bounded length
+  basis: derived (checked exactly at named values: `f(l) < l`, `f̃(u) > u` at ±1/10, ±1/2; a constant λ = −1/3 violates the recursion, the plant a periodic ray would need)
+  falsifier: a map with finitely many arc congruence classes that carries a one-sided infinite stuck chain; or a chain along which both sequences take finitely many values
+  registered: 2026-09-27
+  status: open (one mind; card R hands it to both sides to check)
+
+**What it would do.**
+- **For the proof side:** (b) splits. In the periodic case, and in any map with a finite arc alphabet, it is free, and the chains there are bounded.
+  With N2-DENSE, every such map then has a unit-arc centre in every disc of bounded radius, so there the whole question is (a). (b) keeps its content
+  only for aperiodic limit objects, which Q-full_K includes.
+- **For the construction side:** no periodic formula can hold a whole ray; only a finite segment and its end can be built.
+
+### A3-3.4 Round 3's aim for the proof side — a decision in four parts
+
+- **The choice.** **(a), the base at a trichromatic vertex within distance 4 of a (Q) or (R2) centre** (N2 §5.4: Lemma 4's pigeonhole at `u`, and
+  whether a (P′)-nesting pair at a (Q) centre can be one the pigeonhole hands to Lemma 3 or Cor. 3, starting at a junction of two consecutive arcs of a
+  centre's circle). In order:
+  1. **A bounded lemma stage first:** check R1. If it holds, state (b) for maps with a finite arc alphabet as closed, and (b) for aperiodic maps as the
+     named GAP, with NB2-END as its route.
+  2. **Then (a)**, over NB2's form of DENSE, reading every step against R3 on the strip.
+  3. **(b)'s aperiodic case** (R2's exclusion by NB2-END) comes after (a), or first if (a)'s pigeonhole lands on a stuck chain's end.
+- **The alternative weighed.** (b) as the round's aim (N2's recommendation: "the one whole-line object no disc-local argument sees"), with NB2-END as its
+  route.
+- **Why this one won.**
+  1. **Bearing on the answer.** Every YES candidate a formula can give has a finite arc alphabet. If R1 holds, there are no rays there and every chain is
+     bounded, so by DENSE unit-arc centres come in every disc of bounded radius, and the whole question in that class is (a). (b)'s remaining content is
+     aperiodic limit objects: needed for a NO of Q-full_K, never for a periodic YES.
+  2. **Where the held positives live.** Every held valid region — the strip, the disk, the moved disk, every FS-110 fragment — is built of (Q) centres
+     and carries no stuck vertex. On two skeletons both stop at one configuration (Y2-STOP): a close complementary trivalent pair, saved at its first
+     common unit point by a (Q) centre where both members emit arcs, is unsaved at its second. A NO must say what happens there, and (a) is the step
+     that meets it.
+  3. **NB2-END lands in (a) anyway.** Its route closes a chain's end by forcing a further unit arc, which is (a)'s territory.
+- **Confidence: medium.** Two facts would change it:
+  - **R1 fails:** a map with finite arc alphabet carries a ray or unbounded chains. Then (b) first, as N2 recommends.
+  - **(a)'s first stage finds** that the base's pigeonhole near a (Q) centre falls on a stuck chain's end. Then the two merge at NB2-END, and (b)'s end
+    analysis goes first.
+- **Default:** if the owner says nothing, N3's brief is the R1 lemma stage, then (a), then (b)'s aperiodic case. Card R part 1 goes in verbatim, with
+  NB2's DENSE as the input, and a blind verifier follows.
+- **Fence note for N3's brief:**
+  - **Out:** why-reason 2's construction-side content (Y2-STOP, Y2-PIN, Y2-FORCE, the disk's kinds); R3 points at the strip only.
+  - **In:** A3-3.1 (proof-side material), R1–R3, and this aim.
+- **For the owner, not the brief:** the pinned corner could reach the proof side as a claim-list statement (the sanctioned channel, protocol rule 2)
+  rather than by hint.
+  - **A caution that any statement of it must pass:** "a close complementary pair saved at one seam by a (Q) centre cannot be saved at the other" is
+    **FALSE** by the strip's own `(W, W′)`, which T2 saves at both.
+  - **What distinguishes the `(V, A)` pairs** is that their members' sectors are forced by the midline quadrants (Y2-FORCE), which is object-specific.
+  - **So I recommend R3's hint over a claim this round.** Default: no claim added.
+
+### A3-3.5 Round 3's aim for the construction side — a decision in four parts (from Y2's §7 and card R)
+
+- **The choice.** In order:
+  0. **C-HOCK: declined as mis-aimed** (Y2 §7 item 2; recorded). A meaningful instance needs an arc of radius `< 1` between two tiles of a valid object,
+     and none is held.
+  1. **The pinned corner, both named GAPs** (Y2 §7 items 3–4), by derivation, each outcome stated as a claim:
+     - the disk: can `T*` be blue, with a change near `Z^L_0` that keeps `T2_0`'s locked top arc?
+     - the strip: colour 4 at `Q`, by cutting `C_{−1}` and `C_2` along `ω(Q)` against the valleys' forced sectors.
+     - An escape moves the dial (E6). A derived obstruction strengthens Y2-PIN into a statement the close can file.
+  2. **R2's stuck-chain end.** This replaces "the `κ = ±1` horn fragment" (Y2 §7 item 1).
+     - Take WC's horn at `κ = ±1`, and continue the chain along the normal line by C-CHAIN-9's recursion taken with equality: as a finite segment, never
+       a whole ray (R1).
+     - Complete the neighbourhood of the end's unit-arc centre.
+     - Report what that neighbourhood needs, exactly.
+  3. **If step 1 escapes anywhere,** grow the patch toward a global candidate (E5). **If it does not,** attempt the design principle the law suggests: a
+     pattern in which every close complementary pair is saved at both common unit points, as T2 saves `(W, W′)`. Derive it, never search for it, and
+     check it exactly (C-T2 (ii)).
+- **The alternatives weighed.**
+  - **(A)** R2's chain end first: it tests the proof side's secondary item and NB2-END soonest.
+  - **(B)** The owner's suggestion: the dial realises a stuck ray by formula, the pencil giving it a shape.
+- **Why this one won.**
+  - **The pinned corner is the frontier.** It is the one obstruction held on two positives with different skeletons, and the place any YES must pass. It
+    is also the configuration the proof side's round-3 step (a) must meet, so the next comparison scores the two sides at the same point.
+  - **Against (A):** the chain end tests a secondary item. If R1 holds, rays cannot matter to any periodic YES.
+  - **Against (B):** a whole ray cannot be periodic (R1), and a formula object gives only a finite segment, which (A)'s end-fragment already is.
+  - **The pencil itself stays with the proof side** (NB2's derivation). R2's "recursion taken with equality" leads the construction side to it.
+- **Confidence: medium.** Two facts would change it:
+  - **R1 fails.** Then a periodic ray is a new structural resource beyond (Q) centres, and step 2 goes first.
+  - **Both pinned-corner GAPs close quickly on one derived obstruction.** Then step 3's design principle becomes the round.
+- **Default:** if the owner says nothing, the construction successor's brief is steps 0–3, with card R part 1 verbatim. YB2's verdicts on Y2's objects
+  come in as they land.
+- **Fence note:** nothing of the proof side goes in: not NB2's pencil, NB2-END, DENSE, or N2's route or §5.4.
+
+### A3-3.6 Evidence inventory (additions)
+
+- N2 stages 3–5 — read against: items 1–3 of A2's §3.5 carried, card X taken — surprised: yes; N4-FIN's application fails at a chain's end, and a
+  one-sided ray is consistent (a new object)
+- NB2's record — read against: a blind verifier confirming N2 — surprised: yes; DENSE holds for every valid map (no `M*`), and the ray is a pencil of circles
+- Y2 stages 3–7 — read against: A3-2.3's steps carried — surprised: yes, twice; Y2-DISK-R kills my reason 2, and the two positives share one stop law
+- reports N2, NB2, Y2 — read against: their records — surprised: no
+
+**Budget:** this job is past its guidance (about 530k by the harness's count at this stage). The next comparison, after round 3, should go to a fresh
+advisor (FS112-A4), reading this record's § Continuation — FS112-A3 from A3-0.
+
+## Stage A3-3 — SAVED
