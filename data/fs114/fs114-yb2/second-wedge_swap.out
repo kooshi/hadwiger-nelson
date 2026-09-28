@@ -1,0 +1,49 @@
+slot: admitted python3: mem 3 GiB (hard cap), cpus 0
+  T1|T1: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  T1|T1_xy: FS114-YB reject=False min_eq1=False; float min 2.000000000 max 2.200000
+  T1|X_x: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.879703
+  T1|X_y: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.864615
+  T1_x|T1_x: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  T1_x|T1_y: FS114-YB reject=False min_eq1=False; float min 2.000000000 max 2.200000
+  T1_x|X: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.879703
+  T1_x|X_xy: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.864615
+  T1_xy|T1_xy: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  T1_xy|X_x: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.864615
+  T1_xy|X_y: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.879703
+  T1_y|T1_y: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  T1_y|X: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.864615
+  T1_y|X_xy: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.879703
+  Tbot|Tbot: FS114-YB reject=False max_eq1=False; float max 0.108389281
+  Tbot|Z_xy: FS114-YB reject=True min_eq1=False; float min 0.990024938 max 1.139620
+  Tbot|Z_y: FS114-YB reject=True min_eq1=False; float min 0.990024938 max 1.139620
+  Tbot|t2: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.084597
+  Ttop|Ttop: FS114-YB reject=False max_eq1=False; float max 0.108389281
+  Ttop|Z: FS114-YB reject=True min_eq1=False; float min 0.990024938 max 1.139620
+  Ttop|Z_x: FS114-YB reject=True min_eq1=False; float min 0.990024938 max 1.139620
+  Ttop|t4: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.084597
+  V|V: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  V|t3: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.100000
+  V'|V': FS114-YB reject=False max_eq1=True; float max 1.000000000
+  V'|t1: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.100000
+  X|X: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  X|X_xy: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.200000
+  X_x|X_x: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  X_x|X_y: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 2.200000
+  X_xy|X_xy: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  X_y|X_y: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  Z|Z: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  Z|Z_x: FS114-YB reject=False min_eq1=False; float min 1.732050808 max 1.905256
+  Z|t4: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.831808
+  Z_x|Z_x: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  Z_x|t4: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.831808
+  Z_xy|Z_xy: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  Z_xy|Z_y: FS114-YB reject=False min_eq1=False; float min 1.732050808 max 1.905256
+  Z_xy|t2: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.831808
+  Z_y|Z_y: FS114-YB reject=False max_eq1=False; float max 0.100000000
+  Z_y|t2: FS114-YB reject=False min_eq1=True; float min 1.000000000 max 1.831808
+  t1|t1: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  t2|t2: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  t3|t3: FS114-YB reject=False max_eq1=True; float max 1.000000000
+  t4|t4: FS114-YB reject=False max_eq1=True; float max 1.000000000
+FS114-YB's checker (unedited): 46 same-colour pairs examined; rejected [('Tbot', 'Z_xy'), ('Tbot', 'Z_y'), ('Ttop', 'Z'), ('Ttop', 'Z_x')]; min < 1 at distinct pairs [('Tbot', 'Z_xy'), ('Tbot', 'Z_y'), ('Ttop', 'Z'), ('Ttop', 'Z_x')]
+float guard: least sampled distance between distinct same-colour tiles 0.990024938; greatest sampled tile diameter 1.000000000

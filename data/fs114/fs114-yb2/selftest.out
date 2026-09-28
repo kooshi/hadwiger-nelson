@@ -1,0 +1,36 @@
+arithmetic
+  [ok] 1.732 < sqrt3 < 1.7321: True (expected True)
+  [ok] sqrt3^2 = 3: True (expected True)
+  [ok] (1 + sqrt3) * inv = 1: True (expected True)
+  [ok] sqrt(2+sqrt3)^2 = 2 + sqrt3: True (expected True)
+  [ok] sqrt(2+sqrt3) = (sqrt3 + 1)/sqrt2 < 1.9319: True (expected True)
+  [ok] sqrt(2+sqrt3) > 1.9318: True (expected True)
+  [ok] sign(3 - 2 sqrt(2+sqrt3)) < 0: -1 (expected -1)
+  [ok] cmp |sqrt(4) - 3| vs 1 (=1): 0 (expected 0)
+  [ok] cmp |sqrt(3) + 0| vs 1 (>1): 1 (expected 1)
+  [ok] cmp |sqrt(3) - 1| vs 1 (<1): -1 (expected -1)
+  [ok] cmp |sqrt(0) - 3/2| vs 1 (>1): 1 (expected 1)
+controls (verdict of every same-colour pair)
+  [ok] reuleaux: rejected pairs of 1: [] (expected [])
+  [ok] rect 3/5x4/5: rejected pairs of 1: [] (expected [])
+  [ok] rect 3/5x81/100: rejected pairs of 1: [('R', 'R')] (expected [('R', 'R')])
+  [ok] squares gap 1: rejected pairs of 3: [] (expected [])
+  [ok] squares gap 9/10: rejected pairs of 3: [('a', 'b')] (expected [('a', 'b')])
+  [ok] crossing bars: rejected pairs of 3: [('a', 'a'), ('a', 'b'), ('b', 'b')] (expected [('a', 'a'), ('a', 'b'), ('b', 'b')])
+  [ok] cap over bar: rejected pairs of 3: [('bar', 'bar'), ('bar', 'cap')] (expected [('bar', 'bar'), ('bar', 'cap')])
+  [ok] cap over cap: rejected pairs of 3: [('a', 'b')] (expected [('a', 'b')])
+points
+  [ok] centroid inside the Reuleaux triangle: True (expected True)
+  [ok] (1/2, -1/10) inside the lower bulge: True (expected True)
+  [ok] (1/2, -14/100) outside the lower bulge: False (expected False)
+  [ok] (1/2, 0.9) outside: False (expected False)
+  [ok] (3/2, 1/2) straddled by the triangle: (-1, 1) (expected (-1, 1))
+  [ok] (0, -1) straddled (the corner's cone is [-30, 90]): (-1, 1) (expected (-1, 1))
+  [ok] (-1, 0) at min exactly 1 (normal cone of the corner): 0 (expected 0)
+plants
+  plant noself: flips ['cap over bar', 'crossing bars', 'rect 3/5x81/100'] (predicted ['cap over bar', 'crossing bars', 'rect 3/5x81/100']) ok
+  plant closed: flips ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux', 'squares gap 1'] (predicted ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux', 'squares gap 1']) ok
+  plant nocross: flips ['crossing bars'] (predicted ['crossing bars']) ok
+  plant endsonly: flips ['cap over bar', 'cap over cap'] (predicted ['cap over bar', 'cap over cap']) ok
+  plant nointerior: flips ['cap over bar', 'cap over cap'] (predicted ['cap over bar', 'cap over cap']) ok
+SELFTEST PASSED

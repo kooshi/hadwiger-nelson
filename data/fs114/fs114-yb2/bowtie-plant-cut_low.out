@@ -1,0 +1,61 @@
+tiles: 20; colours: 1:["V'", 't1'], 2:['T1_xy', 'T1_y', 'Tbot', 't2'], 3:['V', 't3'], 4:['T1', 'T1_x', 'Ttop', 't4'], 5:['X', 'X_xy', 'Z_x', 'Z_y'], 6:['X_x', 'X_y', 'Z', 'Z_xy']
+map consistency: OK; outer pieces 22 (all segments: True)
+float guard: every tile counter-clockwise with positive area: True; sum of areas 3.623021074
+outer boundary: min distance from p against 3 sqrt3/5: all >
+  at p: tiles ['t1', 't2', 't3', 't4'], colours [1, 2, 3, 4]
+  at q1: tiles ['T1', 'V', 'X', 'Z', 't1'], colours [1, 3, 4, 5, 6]
+  at q2: tiles ['T1_y', 'V', 'X_y', 'Z_y', 't1'], colours [1, 2, 3, 5, 6]
+  at qC: tiles ['T1_x', "V'", 'X_x', 'Z_x', 't3'], colours [1, 3, 4, 5, 6]
+  at qD: tiles ['T1_xy', "V'", 'X_xy', 'Z_xy', 't3'], colours [1, 2, 3, 5, 6]
+  at top: tiles ['Ttop', 'X', 'X_x', 't2'], colours [2, 4, 5, 6]
+  at bot: tiles ['Tbot', 'X_xy', 'X_y', 't4'], colours [2, 4, 5, 6]
+  T1|T1: min <1  max <1  (57 candidates) ACCEPT
+  T1|T1_x: min >1  max >1  (36 candidates) ACCEPT
+  T1|Ttop: min =1  max >1  (38 candidates) ACCEPT
+  T1|t4: min =1  max >1  (76 candidates) ACCEPT
+  T1_x|T1_x: min <1  max <1  (57 candidates) ACCEPT
+  T1_x|Ttop: min =1  max >1  (38 candidates) ACCEPT
+  T1_x|t4: min =1  max >1  (76 candidates) ACCEPT
+  T1_xy|T1_xy: min <1  max <1  (57 candidates) ACCEPT
+  T1_xy|T1_y: min >1  max >1  (36 candidates) ACCEPT
+  T1_xy|Tbot: min =1  max >1  (38 candidates) ACCEPT
+  T1_xy|t2: min =1  max >1  (76 candidates) ACCEPT
+  T1_y|T1_y: min <1  max <1  (57 candidates) ACCEPT
+  T1_y|Tbot: min =1  max >1  (38 candidates) ACCEPT
+  T1_y|t2: min =1  max >1  (76 candidates) ACCEPT
+  Tbot|Tbot: min <1  max <1  (66 candidates) ACCEPT
+  Tbot|t2: min =1  max >1  (76 candidates) ACCEPT
+  Ttop|Ttop: min <1  max <1  (66 candidates) ACCEPT
+  Ttop|t4: min =1  max >1  (76 candidates) ACCEPT
+  V|V: min <1  max =1  (153 candidates) ACCEPT
+  V|t3: min =1  max >1  (137 candidates) ACCEPT
+  V'|V': min <1  max =1  (153 candidates) ACCEPT
+  V'|t1: min =1  max >1  (137 candidates) ACCEPT
+  X|X: min <1  max =1  (286 candidates) ACCEPT
+  X|X_xy: min <1  max >1  (232 candidates) REJECT
+  X|Z_x: min =1  max >1  (89 candidates) ACCEPT
+  X|Z_y: min =1  max >1  (88 candidates) ACCEPT
+  X_x|X_x: min <1  max =1  (286 candidates) ACCEPT
+  X_x|X_y: min <1  max >1  (232 candidates) REJECT
+  X_x|Z: min =1  max >1  (89 candidates) ACCEPT
+  X_x|Z_xy: min =1  max >1  (88 candidates) ACCEPT
+  X_xy|X_xy: min <1  max =1  (286 candidates) ACCEPT
+  X_xy|Z_x: min =1  max >1  (88 candidates) ACCEPT
+  X_xy|Z_y: min =1  max >1  (89 candidates) ACCEPT
+  X_y|X_y: min <1  max =1  (286 candidates) ACCEPT
+  X_y|Z: min =1  max >1  (88 candidates) ACCEPT
+  X_y|Z_xy: min =1  max >1  (89 candidates) ACCEPT
+  Z|Z: min <1  max <1  (57 candidates) ACCEPT
+  Z|Z_xy: min >1  max >1  (36 candidates) ACCEPT
+  Z_x|Z_x: min <1  max <1  (57 candidates) ACCEPT
+  Z_x|Z_y: min >1  max >1  (36 candidates) ACCEPT
+  Z_xy|Z_xy: min <1  max <1  (57 candidates) ACCEPT
+  Z_y|Z_y: min <1  max <1  (57 candidates) ACCEPT
+  t1|t1: min <1  max =1  (175 candidates) ACCEPT
+  t2|t2: min <1  max =1  (214 candidates) ACCEPT
+  t3|t3: min <1  max =1  (175 candidates) ACCEPT
+  t4|t4: min <1  max =1  (214 candidates) ACCEPT
+same-colour pairs the object has: 46; examined exactly: 46; rejected: [('X', 'X_xy'), ('X_x', 'X_y')]; non-Siamese failures: [('X', 'X_xy'), ('X_x', 'X_y')]
+tight at 1: 30: [('T1', 'Ttop', 'min=1'), ('T1', 't4', 'min=1'), ('T1_x', 'Ttop', 'min=1'), ('T1_x', 't4', 'min=1'), ('T1_xy', 'Tbot', 'min=1'), ('T1_xy', 't2', 'min=1'), ('T1_y', 'Tbot', 'min=1'), ('T1_y', 't2', 'min=1'), ('Tbot', 't2', 'min=1'), ('Ttop', 't4', 'min=1'), ('V', 'V', 'max=1'), ('V', 't3', 'min=1'), ("V'", "V'", 'max=1'), ("V'", 't1', 'min=1'), ('X', 'X', 'max=1'), ('X', 'Z_x', 'min=1'), ('X', 'Z_y', 'min=1'), ('X_x', 'X_x', 'max=1'), ('X_x', 'Z', 'min=1'), ('X_x', 'Z_xy', 'min=1'), ('X_xy', 'X_xy', 'max=1'), ('X_xy', 'Z_x', 'min=1'), ('X_xy', 'Z_y', 'min=1'), ('X_y', 'X_y', 'max=1'), ('X_y', 'Z', 'min=1'), ('X_y', 'Z_xy', 'min=1'), ('t1', 't1', 'max=1'), ('t2', 't2', 'max=1'), ('t3', 't3', 'max=1'), ('t4', 't4', 'max=1')]
+VERDICT: REJECT
+PLANT cut_low: rejected [('X', 'X_xy'), ('X_x', 'X_y')]; predicted [('X', 'X_xy'), ('X_x', 'X_y')]: AS PREDICTED
