@@ -1,0 +1,2 @@
+SIMPLE_PLANT	plans/FS114-Y4-construction.md	every tile an open disc whose closure meets each other tile's closure in a convex set or not at all, and does not meet itself
+L60_PLANT	plans/FS112-derivation.md	a unit arc with constant sides has angular length at most 60°
