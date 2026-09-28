@@ -1,0 +1,39 @@
+OK 	BASE	KAPPA: |e(0) - e(60)| = 1 (ring points 60 deg apart are at distance 1)
+OK 	BASE	KAPPA (c): inner points 60 deg + eta apart straddle 1 (eta = 1/20): sign 1
+OK 	BASE	KAPPA (c): inner points 60 deg + eta apart straddle 1 (eta = -1/20): sign -1
+OK 	BASE	WIN: window points e(1) and e(-1) + 60 deg - 2: chord of 58 deg < 1
+OK 	BASE	WIN: V0 and V1 points e(-1) and e(61): chord of 62 deg > 1
+OK 	GAP60	P60: |q_j - q_{j+1}| = 1 (alpha_{j+1} = 60)
+OK 	BASE	P60: |q_j - w0| = 1 (w0 = q_j - 60 deg on the ring)
+OK 	BASE	P60: |p - q_j| = 1
+OK 	BASE	P60: w0 - q_j = e(-30)
+OK 	BASE	P60: direction 255 at q_j faces w0 (U cannot hold it)
+OK 	BASE	P60: direction 270 at q_j faces w0 (U cannot hold it)
+OK 	BASE	P60: direction 285 at q_j faces w0 (U cannot hold it)
+OK 	BASE	P60: direction 180 at q_j does not face w0 (U may hold it)
+OK 	BASE	P60: direction 225 at q_j does not face w0 (U may hold it)
+OK 	BASE	P60: direction 240 at q_j does not face w0 (U may hold it)
+OK 	GAP60	P60: q_{j+1} - q_j = e(210)
+OK 	GAP60	P60: direction 255 at q_j faces q_{j+1} (t_{j+1} cannot hold it)
+OK 	GAP60	P60: direction 270 at q_j faces q_{j+1} (t_{j+1} cannot hold it)
+OK 	GAP60	P60: direction 285 at q_j faces q_{j+1} (t_{j+1} cannot hold it)
+OK 	BASE	P60: direction 300 at q_j is p-facing (t_{j+1} may hold it)
+OK 	BASE	P60: direction 330 at q_j is p-facing (t_{j+1} may hold it)
+OK 	BASE	P60: direction 345 at q_j is p-facing (t_{j+1} may hold it)
+OK 	BASE	P60: q_j + r e(255) lies in B(p, 1)
+OK 	BASE	P60: q_j + r e(270) lies in B(p, 1)
+OK 	BASE	P60: q_j + r e(285) lies in B(p, 1)
+OK 	GAP60	P60: the side's tangent at q_j is perpendicular to q_j - q_{j+1} (direction 300)
+OK 	GAP60	P60: |q_j - q_{j+2}|^2 >= 3 at alpha_{j+2} = 60
+OK 	GAP60	P60: |q_j - q_{j+2}|^2 >= 3 at alpha_{j+2} = 120
+OK 	GAP60	P60: |q_j - q_{j+2}|^2 >= 3 at alpha_{j+2} = 180
+OK 	GAP60	P60: the side's midpoint q_{j+1} + e(0) is on omega(q_{j+1}) between p and q_j, inside B(w0, 1)
+OK 	GAP60	P60: p and q_j are the two points of omega(w0) meeting omega(q_{j+1})
+OK 	GAP60	P60: the side's midpoint lies outside closed B(q_{j+2}, 1) at alpha_{j+2} = 60
+OK 	GAP60	P60: the side's midpoint lies outside closed B(q_{j+2}, 1) at alpha_{j+2} = 120
+OK 	BASE	OPP: the omega(q_j) branch at p, point q_j + e(255), has direction in (120, 180) from p
+OK 	BASE	PIN180: r e(181) (r = 1/10) lies outside closed B(q_j, 1)
+OK 	BASE	PIN180: r e(185) (r = 1/10) lies outside closed B(q_j, 1)
+OK 	BASE	QE1: |u - q_j| = 1 and |u - p| = 1 at u = e(phi_j + 60)
+OK 	BASE	QE1: the radii at u meet at 60 degrees (transversal crossing)
+SUMMARY: 38 lines; BASE failures 0; GAP60 failures 0 of 13; plant=off
