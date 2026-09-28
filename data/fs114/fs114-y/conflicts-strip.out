@@ -1,0 +1,18 @@
+== strip
+   U0 conflicts with: U-2 U-1 U1 U2 D-2 D-1 D0 D1 D2 T-2 T-1 T0 T1 T2 T3 B0 B1
+   D0 conflicts with: U-2 U-1 U0 U1 U2 D-2 D-1 D1 D2 T0 T1 B-2 B-1 B0 B1 B2 B3
+   T0 conflicts with: U-3 U-2 U-1 U0 U1 U2 D-1 D0 T-2 T-1 T1 T2
+   B0 conflicts with: U-1 U0 D-3 D-2 D-1 D0 D1 D2 B-2 B-1 B1 B2
+   x-gap from column 0 to columns +-6: 2.250
+ok       U0: the conflict set used by the derivation (got ['B0', 'B1', 'D-1', 'D-2', 'D0', 'D1', 'D2', 'T-1', 'T-2', 'T0', 'T1', 'T2', 'T3', 'U-1', 'U-2', 'U1', 'U2'])
+ok       D0: the conflict set used by the derivation (got ['B-1', 'B-2', 'B0', 'B1', 'B2', 'B3', 'D-1', 'D-2', 'D1', 'D2', 'T0', 'T1', 'U-1', 'U-2', 'U0', 'U1', 'U2'])
+ok       T0: the conflict set used by the derivation (got ['D-1', 'D0', 'T-1', 'T-2', 'T1', 'T2', 'U-1', 'U-2', 'U-3', 'U0', 'U1', 'U2'])
+ok       B0: the conflict set used by the derivation (got ['B-1', 'B-2', 'B1', 'B2', 'D-1', 'D-2', 'D-3', 'D0', 'D1', 'D2', 'U-1', 'U0'])
+ok       every tile beyond columns +-5 is more than 1 away from column 0
+ok       T0 is tight (min = 1) with D-2 and D1: it may share their colour
+ok       U0 may share a colour with U3 and D3
+ok       the printed colouring separates every conflict pair (control)
+ok       K6: the six tiles at the valley V_0 (U-1, U0, T0) and at the apex of U1 (U1, T1, T2) pairwise conflict -- the two vertices are complementary in EVERY valid colouring of the strip's geometry
+ok       every conflict the uniqueness derivation uses holds exactly
+ALL AS REGISTERED
+exit 0

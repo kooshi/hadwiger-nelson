@@ -1,0 +1,8 @@
+== strip  [PLANT shrink]
+   U0 conflicts with: U-4 U-3 U3 U4 D-4 D-3 D-2 D2 D3 D4 T-4 T-3 T-2 T-1 T2 T3 T4 T5 B-3 B-2 B-1 B0 B1 B2 B3 B4
+   D0 conflicts with: U-4 U-3 U-2 U2 U3 U4 D-4 D-3 D3 D4 T-3 T-2 T-1 T0 T1 T2 T3 T4 B-4 B-3 B-2 B-1 B2 B3 B4 B5
+   T0 conflicts with: U-5 U-4 U-3 U-2 U1 U2 U3 U4 D-4 D-3 D-2 D-1 D0 D1 D2 D3 T-4 T-3 T3 T4 B-2 B-1 B0 B1 B2
+   B0 conflicts with: U-4 U-3 U-2 U-1 U0 U1 U2 U3 D-5 D-4 D-3 D-2 D1 D2 D3 D4 T-2 T-1 T0 T1 T2 B-4 B-3 B3 B4
+   x-gap from column 0 to columns +-6: 1.125
+ALL AS REGISTERED
+exit 0

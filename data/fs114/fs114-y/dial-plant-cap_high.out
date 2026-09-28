@@ -1,0 +1,11 @@
+capped strip: orbit pairs examined 90 (each same-colour orbit pair with a tile in columns 0..2, the other in [-9, 11]); REJECT [('T0', 'T0'), ('B0', 'B0'), ('T1', 'T1'), ('B1', 'B1'), ('T2', 'T2'), ('B2', 'B2')]; exact contacts at 1: 30; x-gap beyond the window 4.750 (exact > 1: True)
+   self-pair T0: REJECT min<1 max>1 ~[0.000000, 1.050000]
+   self-pair B0: REJECT min<1 max>1 ~[0.000000, 1.050000]
+   self-pair T1: REJECT min<1 max>1 ~[0.000000, 1.050000]
+   self-pair B1: REJECT min<1 max>1 ~[0.000000, 1.050000]
+   self-pair T2: REJECT min<1 max>1 ~[0.000000, 1.050000]
+   self-pair B2: REJECT min<1 max>1 ~[0.000000, 1.050000]
+ok       PLANT cap_high: REJECT at exactly the six capped self-pairs (got [('B0', 'B0'), ('B1', 'B1'), ('B2', 'B2'), ('T0', 'T0'), ('T1', 'T1'), ('T2', 'T2')])
+VERDICT: REJECT
+ALL AS REGISTERED
+exit 0

@@ -12,12 +12,22 @@ about a possible object: the class of valid maps is not known to be non-empty.*
 | FS114-Y-PAIRSHARE | In a valid map, any two close complementary cubic trichromatic partners `u′`, `u″` of a cubic trichromatic vertex `u` have a common unit point with `u` in common: `(ω(u) ∩ ω(u′)) ∩ (ω(u) ∩ ω(u″)) ≠ ∅` | [hand; one mind, over FS112-N3-COR3 (two minds, one blind)] | §1.3 |
 | FS114-Y-PENT | On `[Polymath2021]` Fig. 10's disk (FS112-CAL-DISK) `B_k`'s two close complementary partners `Z^R_k`, `Z^L_{k+1}` meet `ω(B_k)` at four distinct points `A_k, C_k, A_{k+1}, D_{k+1}`; so no valid map agrees with the disk near `B_k, Z^R_k, Z^L_{k+1}`, and no third unit-arc boundary at `B_k` (nor any choice of arcs) repairs it — C114-PENT's first question answered **no**. The completion `A_k + A_{k+1} − B_k` is the central corner `A_{k+3}` | [hand + tools, exact; one mind] | §1.3; `tools/fs114_y_pent.py pent` |
 | FS114-Y-ROUTES | On the moved disk (FS112-MOVE) the blue and orange routes to a fourth colour at `C_0` fail with the rest of the disk unchanged: the only blue straddler of `ω(C_0 + e(72°)/100)` is `T2_0`, the only orange one `T1_0`, and at named exact points of `T2_0 ∩ B(C_0,1)` and `T1_0 ∩ B(C_0,1)` the free set with the cut tile ignored is exactly its own colour | [tools, exact at named points; one mind] | §1.3; `tools/fs114_y_pent.py routes` |
+| FS114-Y-DIAL | The strip with each top (bottom) tile capped by the unit arc about its own valley between its two top corners is a valid fragment, and it holds the closed disc `B̄(P_j, R)` about every midline four-colour vertex for every `R` with `R² < (7 + 3√5)/4 = φ⁴/2` (`R < φ²/√2 ≈ 1.85123`); no valid extension of the strip holds that disc at `R ≥ φ²/√2` (the disc then holds the stop point `Q`) — C114-DIAL met, marginally, above `≈ 1.834` | [tools, exact: 90 orbit pairs ACCEPT, plant fires at exactly the six capped self-pairs; the disc containment an exact identity, hand; the bound over extensions over FS112-EDGE; one mind] | §2.1; `tools/fs114_y_dial.py` |
+| FS114-Y-STRIPK6 | In the strip's geometry the six tiles at a valley `V_m` (the arches `U_{m−1}`, `U_m` and the top tile `T_m`) and at the apex of `U_{m+1}` (`U_{m+1}`, `T_{m+1}`, `T_{m+2}`) pairwise straddle distance 1, so the two vertices are complementary under **every** colouring; `V_m`'s three boundary curves lie on `ω(P_{m−1})`, `ω(P_{m+1})` and a segment, none on `ω(Q_m)`, `Q_m` the pair's second common unit point; so by FS112-N3-COR3 **no valid map contains these six tiles, under any colouring** | [tools, exact relations; hand; one mind, over COR3's two] | §2.2; `tools/fs114_y_conflicts.py strip` |
+| FS114-Y-STRIPRIGID | Every valid colouring of the strip's geometry is `[AxenovichEtAl2014]`'s, up to a permutation of the six colours | [hand over exact relations; one mind] | §2.2 |
+| FS114-Y-DISKRIGID | Every valid colouring of the disk's geometry (`[Polymath2021]` Fig. 10, its 26 tiles) is the printed one up to a permutation of the six colours: the central tile and the five ring-1 tiles pairwise straddle distance 1, and each other tile, in a fixed order, then has exactly one colour left; so FS114-Y-PENT holds under **every** colouring: **no valid map contains the disk's geometry** near any `B_k` | [tools, exact relations; the chain of deductions asserted exact, each with one outcome; hand; one mind] | §2.2; `tools/fs114_y_conflicts.py disk` |
+| FS114-Y-K6 | A design screen, about every valid map: if two cubic vertices `u`, `u′` at distance `< 2` have six incident tiles that pairwise straddle distance 1, they are complementary under every colouring, and each common unit point of `ω(u)`, `ω(u′)` must be a leaving centre of both (FS112-N3-COR3) — a geometry failing that is not part of any valid map, whatever its colours | [hand; one mind, over COR3] | §2.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: (a) C114-PENT's third arc — I would have scanned the third centre over `ω(B_0)`; instead the two centres the partners need were derived
   (`C_0` and `D_1`) and counted. (b) The routes at `C_0` — I would have searched recolourings of the region near `C_0`; instead the one region each
   route must vacate was derived (the part of the one straddling tile inside `B(C_0, 1)`) and read at named exact points.
+- Stage 2: (a) the dial — I would have searched cap shapes and radii; instead the cap is the one arc the stop point's colourless cone allows
+  (its lower edge is the tangent of `ω(V_m)` at `Q`, FS112-EDGE), and the radius is the exact identity `1/4 + √3 Y = (7 + 3√5)/4`.
+  (b) Other colourings of the strip's and the disk's geometries — I would have enumerated colourings; instead the exact conflict relations were
+  read and the colourings derived by hand (a clique, then a fixed chain of forced steps, each asserted to have one outcome). (c) Torus designs —
+  I would have searched periodic tilings; instead each family is killed by a local, colour-free derived obstruction, or its budget derived.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -27,7 +37,8 @@ about a possible object: the class of valid maps is not known to be non-empty.*
    `fb9509fa FS111-P: stage 3a`, `9b9f0e47 FS114-P: stage 5b`) — subjects only, all the planner's or FS-111's; no fenced record read.
 3. The harness saved the output of one of my own reads (a `sed` of `plans/FS112-derivation.md`, over its size limit) to a file under
    `~/.claude/projects/-home-kooshi-source-lean-dir/…/tool-results/`. I did not open it; I re-read the file directly in pieces.
-4. `[Mohar2002]` and Ágoston's paper were already in `~/source/library/pdf/`, written at 23:10 tonight by another session (not a fenced path); I read
+4. `git status` after my stage-1 commit listed an untracked `data/fs114/briefs/NB114-instance.md` (a fenced brief) by name only; not opened.
+5. `[Mohar2002]` and Ágoston's paper were already in `~/source/library/pdf/`, written at 23:10 tonight by another session (not a fenced path); I read
    those copies and fetched nothing.
 
 ## Stage 1 — SAVED: reading, the quotation check, calibration, and C114-PENT derived
@@ -145,3 +156,93 @@ trichromatic vertex's complementary partners pairwise share a leaving centre. St
 dial on the strip, whose stop is at its edge.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the dial, the rigidity of both printed geometries, the torus families, the non-Siamese form
+
+*The owner's scope note (received during stage 2): a YES is one valid map of the whole plane, locally finite, possibly with complexity growing
+without bound; a family of maps is not a YES; each verdict names the class its objects lie in.*
+
+### 2.1 C114-DIAL — met, marginally: the capped strip holds every disc about a four-colour vertex of radius below `φ²/√2 ≈ 1.85123`
+
+**Derived first.** At the strip's stop point `Q = (1/4, Y)`, `Y = √3/2 + √15/4`, the colourless set is the open cone
+`(arcsin ¼, 180° − arcsin ¼)` (FS112-EDGE). Its lower edge `arcsin ¼ ≈ 14.48°` is exactly the tangent at `Q` of the unit circle about the valley
+`V_1 = (1/2, √3/2)`, on which both top corners of the top tile `T_1` lie (`|V_1 − Q|² = 1/16 + 15/16`). So `T_1` can be extended upward by the
+**cap** bounded by the arc of `ω(V_1)` between its top corners: every cap point is within 1 of every point of `T_1` (the valley is `T_1`'s corner,
+and moving along the arc from a corner decreases the distance to the far apex), and the cap's `x`-range is `T_1`'s, so it stays an exact 1 or more
+from the other tiles of its colour. The disc: a point `z` of `B̄(P_1, R)` with `y ≥ Y` has `|z − V_1|² = |z − P_1|² − √3 y + 3/4 ≤ R² − √3 Y + 3/4`,
+and `1/4 + √3 Y = (7 + 3√5)/4 = |P_1 − Q|² = Y² + 1/16` (exact); so for `R² < (7 + 3√5)/4` the part of the disc above the strip lies strictly inside
+the cap (and strictly inside `x ∈ (1/4, 3/4)`), and the closed disc lies in the interior of the capped strip. `(7 + 3√5)/4 = φ⁴/2`.
+
+**Checked exactly** (`tools/fs114_y_dial.py`, `data/fs114/fs114-y/dial.out`): the capped strip, every top and bottom tile capped, ACCEPTs — **90 orbit
+pairs** (each same-colour orbit pair with a tile in one period and the other in columns −9…11), every tile beyond dismissed by an exact `x`-gap
+4.75; 36 exact contacts at 1; each capped tile has diameter exactly 1 (self-pair maximum `= 1`); no Siamese pair (no distinct same-colour pair
+has maximum `≤ 1`). The identities `1/4 + √3 Y = (7 + 3√5)/4`, `|P_1 − Q|² = (7 + 3√5)/4`, `Y² + 1/16 = (7 + 3√5)/4` hold exactly, and `R = 1.85`
+and `1.851` lie below the bound, `1.852` above. **Plant** `cap_high` (every cap lifted by 1/20): REJECT at exactly the six capped self-pairs of the
+period, registered before the run (`dial-plant-cap_high.out`).
+
+**The bound over extensions.** Any valid extension of the strip (its tiles kept) holding `B̄(P_1, R)` with `R² ≥ (7 + 3√5)/4` holds `Q` in its
+open domain, hence a neighbourhood of `Q`, which meets the colourless cone of FS112-EDGE (adding tiles only blocks more colours). So over
+extensions of the strip the dial about a four-colour vertex is exactly the open interval up to `φ²/√2`, not attained (FS112-DISC's `φ` for the
+disk is attained). **Class:** a fragment (the strip band plus caps: an open set of the plane, not the plane), periodic in one direction, bounded
+complexity (at most six boundary pieces per tile), no Siamese pair. **E11** (0.25): met.
+
+### 2.2 The printed geometries are rigid, and neither is part of any valid map under any colouring
+
+**Method** (no colouring enumerated). `tools/fs114_y_conflicts.py` reads, exactly, for each pair of tiles of a geometry whether their cross distances
+straddle 1 (`conflict`: never one colour), or not (`tight`, `siamese`, `far`). Controls: the printed colouring separates every conflict pair; plant
+`shrink` (the geometry scaled by 1/2) changes the table (`conflicts-strip-plant-shrink.out`) — the table is read from the shapes, not the colours.
+The derivations below use only the relations the tool asserts.
+
+**The strip** (FS112-YB2's rebuild; `U` arches up, `D` arches down, `T` top tiles over the valleys `V_m`, `B` bottom tiles). Exact
+(`conflicts-strip.out`): `U_0` conflicts with `U_{±1}`, `U_{±2}`, `D_{−2…2}`, `T_{−2…3}`, `B_0`, `B_1`; `T_0` with `T_{±1}`, `T_{±2}`, `U_{−3…2}`,
+`D_{−1}`, `D_0`, and is tight with `D_{−2}`, `D_1`; `U_0` may share a colour with `U_{±3}`, `D_{±3}`; tiles six columns away are more than 1 away.
+(My hand premises said `T_m` meets four arches; the exact table says six — corrected before any derivation used it.)
+- **FS114-Y-STRIPK6.** The six tiles `U_{m−1}, U_m, U_{m+1}, T_m, T_{m+1}, T_{m+2}` pairwise conflict (asserted exactly for `m = 0`; the strip is
+  invariant under `x ↦ x + 1/2` column by column), so in **every** valid colouring the valley `V_m` (tiles `U_{m−1}, U_m, T_m`) and the apex of
+  `U_{m+1}` (tiles `U_{m+1}, T_{m+1}, T_{m+2}`) are complementary cubic trichromatic vertices at distance `√(9 − 3√5)/2 ≈ 0.757`. Their common
+  unit points are `P_{m+1}` and `Q_m = (m/2 + 1/4, Y)`; FS112-N3-COR3 needs `Q_m` to be a leaving centre of `V_m`; the three boundary curves at `V_m`
+  are arcs of `ω(P_{m−1})`, `ω(P_{m+1})` and a vertical segment. So **no valid map contains these six tiles**, whatever their colours and whatever
+  else it holds. [tools, exact relations; hand; one mind, over COR3's two]
+- **FS114-Y-STRIPRIGID** (the whole colouring). Any three consecutive top tiles `T_m, T_{m+1}, T_{m+2}` are pairwise distinct and each avoids the
+  colours of `U_{m−1…m+2}` (four consecutive arches, at least three colours, as `U` conflicts at offsets 1 and 2); so those four arches use exactly
+  three colours, `U_{m−1} = U_{m+2}` for every `m`: the arch row is 3-periodic on three colours `A`, the top row 3-periodic on the other three `B`.
+  `D_j` conflicts with `U_{j−2…j+2}` (all of `A`), so the down row is 3-periodic on `B`; `T_m` avoids `D_{m−1}`, `D_m`, so `T_m` is `D_{m+1}`'s
+  colour; by the mirror `y ↦ −y` the bottom row is `U_{m+1}`'s. Unique up to permuting the six colours. [hand over exact relations; one mind]
+  This answers FS112-Y3-T2-BUDGET's "Not claimed: that no other colouring of the strip's geometry (a row with more than three colours) avoids
+  complementary `(V, A)` pairs": **none does.**
+
+**The disk** (FS112-YB2's rebuild; `Z` central, `P_k` ring 1 on the side `A_kA_{k+1}`, `W_k` ring 2 at `A_k`, `R_k`, `S_k`, `T_k` rim; 325 pairs;
+`conflicts-disk.out`, 22 minutes under `scripts/slot.py`).
+- **FS114-Y-DISKRIGID.** `Z` and the five `P_k` pairwise conflict — six colour classes, named by them. Then, in the fixed order `W_0…W_4`,
+  `R_0…R_4`, `S_0…S_4`, `T_0…T_4`, each tile's conflicts with tiles already classed leave **exactly one** class (asserted for each of the twenty):
+  `W_k` takes `P_{k+2}`'s, `R_k` takes `Z`'s, `S_k` takes `P_{k+1}`'s, `T_k` takes `P_{k+3}`'s. The forced partition is exactly the printed one
+  (control). So the disk's geometry has one valid colouring up to permutation, and `B_0` (`P_0, S_0, T_1`) is complementary to `Z^R_0`
+  (`W_0, R_0, T_0`) and to `Z^L_1` (`W_1, R_1, S_1`) under every colouring (asserted). With FS114-Y-PENT (the four common unit points `A_0, C_0,
+  A_1, D_1`): **no valid map contains the disk's geometry near `B_k`**, under any colouring. [tools, exact relations; hand; one mind] (The disk is
+  not a clique argument: `T_0` and `T_1` may share a colour; the rigidity comes from the chain.)
+
+### 2.3 C114-TORUS — three families, and the screen they leave
+
+**The screen (FS114-Y-K6, about every valid map).** Two cubic vertices `u`, `u′` at distance `< 2` whose six incident tiles pairwise straddle
+distance 1 are complementary under every colouring, so each common unit point of `ω(u)`, `ω(u′)` must be a leaving centre of both (COR3); a geometry
+failing that is part of no valid map, under any colouring. It is colour-free and local (it reads the six tiles), so it screens a design before any
+colouring is chosen — and with FS114-Y-PAIRSHARE (partners pairwise share a centre) it is the design rule a YES must meet at every close pair.
+
+| family (class) | free parameters vs the configuration's | verdict |
+|---|---|---|
+| **F1** — every map, periodic or not, of any complexity, containing six consecutive-column tiles of the strip around a valley and the apex beside it | the rest of the map: unbounded; the obstruction reads six tiles | **excluded** (FS114-Y-STRIPK6): no member is valid. So no doubly periodic design contains a row of `[AxenovichEtAl2014]`'s arches, however the rows are stacked, shifted or recoloured |
+| **F2** — every map containing the disk's tiles near some `B_k` (`P_k, S_k, T_{k+1}`, the tiles at `Z^R_k`, `Z^L_{k+1}`, and those the rigidity chain reads) | the rest: unbounded | **excluded** (FS114-Y-DISKRIGID with FS114-Y-PENT): no member is valid; no periodic design contains the disk's centre |
+| **F3** — doubly periodic valid maps with no Siamese pair in which every tile has exactly five edge-neighbours (Sirgedas's class, `[16.346]`, `Z50mmulkXCQ`) | not a formula family: its members are the torus maps of that combinatorial type | **budget derived, not decided.** Per tile (`n` tiles): the dual is 5-regular, the map's vertices are the dual's faces; on the torus `V − E + F = 0` gives `Σ_v (d_v − 3) = 3n − E = n/2`; with only cubic vertices and quads, `n/2` quads. Each quad `w` emits one unit arc centred at `w` per tile around it (the tile opposite a tile `t` at `w` carries the colour of an edge-neighbour of `t`, the pair is non-Siamese, so their contacts with `t` are the ends of a diameter of `t` and the shared edge lies on `ω(w)` — FS114-Y-EDGE below); distinct quads' arcs are distinct edges (two unit circles share at most two points), so at least `2n` of the `5n/2` edges are unit arcs (Sirgedas's 80%), and `4n` of the `5n` vertex–edge incidences are unit-arc ends. No contradiction follows at this level; the pair screen (FS114-Y-K6, PAIRSHARE) is the constraint no count has used yet |
+
+**No torus member was built**: every candidate I could write by formula contains F1's or F2's configuration, and I have no F3 design; stated as a
+stop, not a verdict on the torus. **E4** (a NO for doubly periodic maps at one mind, 0.3) is the proof side's to score.
+
+### 2.4 C114-SIRGEDAS-FORM — not landed
+
+Both held positives are non-Siamese: the disk (radius `√((25 + 9√5)/10) ≈ 2.1246`) has no distinct same-colour pair with maximum distance `≤ 1`
+among its 45 distinct pairs (`cal-disk.out`), and neither has the capped strip (§2.1). So the non-Siamese record stays the disk's `≈ 2.1246`
+(`[Polymath2021]`'s, not ours). I built no fragment beyond it. **The stops, as statements about every valid map:** the disk's geometry is part of no
+valid map (FS114-Y-DISKRIGID with PENT), and every route to a fourth colour at its rim corner fails one ring deeper (FS114-Y-ROUTES, FS112-Y3-PIN) —
+so a larger non-Siamese fragment needs a new skeleton, not an extension of the disk.
+
+## Stage 2 — SAVED

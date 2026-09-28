@@ -1,0 +1,54 @@
+== disk
+   P0  (orange) conflicts 15: P1 P2 P3 P4 R0 R1 S0 S1 T0 T1 W0 W1 W2 W4 Z   | may share: R2:f R3:f R4:f S2:f S3:f S4:t T2:t T3:f T4:f W3:t
+   P1  (violet) conflicts 15: P0 P2 P3 P4 R1 R2 S1 S2 T1 T2 W0 W1 W2 W3 Z   | may share: R0:f R3:f R4:f S0:t S3:f S4:f T0:f T3:t T4:f W4:t
+   P2  (blue  ) conflicts 15: P0 P1 P3 P4 R2 R3 S2 S3 T2 T3 W1 W2 W3 W4 Z   | may share: R0:f R1:f R4:f S0:f S1:t S4:f T0:f T1:f T4:t W0:t
+   P3  (green ) conflicts 15: P0 P1 P2 P4 R3 R4 S3 S4 T3 T4 W0 W2 W3 W4 Z   | may share: R0:f R1:f R2:f S0:f S1:f S2:t T0:t T1:f T2:f W1:t
+   P4  (yellow) conflicts 15: P0 P1 P2 P3 R0 R4 S0 S4 T0 T4 W0 W1 W3 W4 Z   | may share: R1:f R2:f R3:f S1:f S2:f S3:t T1:t T2:f T3:f W2:t
+   R0  (red   ) conflicts  9: P0 P4 S0 S4 T0 T1 W0 W1 W4   | may share: P1:f P2:f P3:f R1:f R2:f R3:f R4:f S1:f S2:f S3:f T2:f T3:f T4:f W2:f W3:f Z:t
+   R1  (red   ) conflicts  9: P0 P1 S0 S1 T1 T2 W0 W1 W2   | may share: P2:f P3:f P4:f R0:f R2:f R3:f R4:f S2:f S3:f S4:f T0:f T3:f T4:f W3:f W4:f Z:t
+   R2  (red   ) conflicts  9: P1 P2 S1 S2 T2 T3 W1 W2 W3   | may share: P0:f P3:f P4:f R0:f R1:f R3:f R4:f S0:f S3:f S4:f T0:f T1:f T4:f W0:f W4:f Z:t
+   R3  (red   ) conflicts  9: P2 P3 S2 S3 T3 T4 W2 W3 W4   | may share: P0:f P1:f P4:f R0:f R1:f R2:f R4:f S0:f S1:f S4:f T0:f T1:f T2:f W0:f W1:f Z:t
+   R4  (red   ) conflicts  9: P3 P4 S3 S4 T0 T4 W0 W3 W4   | may share: P0:f P1:f P2:f R0:f R1:f R2:f R3:f S0:f S1:f S2:f T1:f T2:f T3:f W1:f W2:f Z:t
+   S0  (violet) conflicts  9: P0 P4 R0 R1 T0 T1 W0 W1 Z   | may share: P1:t P2:f P3:f R2:f R3:f R4:f S1:f S2:f S3:f S4:f T2:f T3:f T4:f W2:f W3:f W4:f
+   S1  (blue  ) conflicts  9: P0 P1 R1 R2 T1 T2 W1 W2 Z   | may share: P2:t P3:f P4:f R0:f R3:f R4:f S0:f S2:f S3:f S4:f T0:f T3:f T4:f W0:f W3:f W4:f
+   S2  (green ) conflicts  9: P1 P2 R2 R3 T2 T3 W2 W3 Z   | may share: P0:f P3:t P4:f R0:f R1:f R4:f S0:f S1:f S3:f S4:f T0:f T1:f T4:f W0:f W1:f W4:f
+   S3  (yellow) conflicts  9: P2 P3 R3 R4 T3 T4 W3 W4 Z   | may share: P0:f P1:f P4:t R0:f R1:f R2:f S0:f S1:f S2:f S4:f T0:f T1:f T2:f W0:f W1:f W2:f
+   S4  (orange) conflicts  9: P3 P4 R0 R4 T0 T4 W0 W4 Z   | may share: P0:t P1:f P2:f R1:f R2:f R3:f S0:f S1:f S2:f S3:f T1:f T2:f T3:f W1:f W2:f W3:f
+   T0  (green ) conflicts  9: P0 P4 R0 R4 S0 S4 W0 W4 Z   | may share: P1:f P2:f P3:t R1:f R2:f R3:f S1:f S2:f S3:f T1:f T2:f T3:f T4:f W1:f W2:f W3:f
+   T1  (yellow) conflicts  9: P0 P1 R0 R1 S0 S1 W0 W1 Z   | may share: P2:f P3:f P4:t R2:f R3:f R4:f S2:f S3:f S4:f T0:f T2:f T3:f T4:f W2:f W3:f W4:f
+   T2  (orange) conflicts  9: P1 P2 R1 R2 S1 S2 W1 W2 Z   | may share: P0:t P3:f P4:f R0:f R3:f R4:f S0:f S3:f S4:f T0:f T1:f T3:f T4:f W0:f W3:f W4:f
+   T3  (violet) conflicts  9: P2 P3 R2 R3 S2 S3 W2 W3 Z   | may share: P0:f P1:t P4:f R0:f R1:f R4:f S0:f S1:f S4:f T0:f T1:f T2:f T4:f W0:f W1:f W4:f
+   T4  (blue  ) conflicts  9: P3 P4 R3 R4 S3 S4 W3 W4 Z   | may share: P0:f P1:f P2:t R0:f R1:f R2:f S0:f S1:f S2:f T0:f T1:f T2:f T3:f W0:f W1:f W2:f
+   W0  (blue  ) conflicts 14: P0 P1 P3 P4 R0 R1 R4 S0 S4 T0 T1 W1 W4 Z   | may share: P2:t R2:f R3:f S1:f S2:f S3:f T2:f T3:f T4:f W2:t W3:t
+   W1  (green ) conflicts 14: P0 P1 P2 P4 R0 R1 R2 S0 S1 T1 T2 W0 W2 Z   | may share: P3:t R3:f R4:f S2:f S3:f S4:f T0:f T3:f T4:f W3:t W4:t
+   W2  (yellow) conflicts 14: P0 P1 P2 P3 R1 R2 R3 S1 S2 T2 T3 W1 W3 Z   | may share: P4:t R0:f R4:f S0:f S3:f S4:f T0:f T1:f T4:f W0:t W4:t
+   W3  (orange) conflicts 14: P1 P2 P3 P4 R2 R3 R4 S2 S3 T3 T4 W2 W4 Z   | may share: P0:t R0:f R1:f S0:f S1:f S4:f T0:f T1:f T2:f W0:t W1:t
+   W4  (violet) conflicts 14: P0 P2 P3 P4 R0 R3 R4 S3 S4 T0 T4 W0 W3 Z   | may share: P1:t R1:f R2:f S0:f S1:f S2:f T1:f T2:f T3:f W1:t W2:t
+   Z   (red   ) conflicts 20: P0 P1 P2 P3 P4 S0 S1 S2 S3 S4 T0 T1 T2 T3 T4 W0 W1 W2 W3 W4   | may share: R0:t R1:t R2:t R3:t R4:t
+ok       the printed colouring separates every conflict pair (control)
+ok       K6: the central tile and the five ring-1 tiles pairwise conflict -- six colour classes, named by them
+   W0: forbidden classes [0, 1, 2, 4, 5] -> class [3]
+   W1: forbidden classes [0, 1, 2, 3, 5] -> class [4]
+   W2: forbidden classes [0, 1, 2, 3, 4] -> class [5]
+   W3: forbidden classes [0, 2, 3, 4, 5] -> class [1]
+   W4: forbidden classes [0, 1, 3, 4, 5] -> class [2]
+   R0: forbidden classes [1, 2, 3, 4, 5] -> class [0]
+   R1: forbidden classes [1, 2, 3, 4, 5] -> class [0]
+   R2: forbidden classes [1, 2, 3, 4, 5] -> class [0]
+   R3: forbidden classes [1, 2, 3, 4, 5] -> class [0]
+   R4: forbidden classes [1, 2, 3, 4, 5] -> class [0]
+   S0: forbidden classes [0, 1, 3, 4, 5] -> class [2]
+   S1: forbidden classes [0, 1, 2, 4, 5] -> class [3]
+   S2: forbidden classes [0, 1, 2, 3, 5] -> class [4]
+   S3: forbidden classes [0, 1, 2, 3, 4] -> class [5]
+   S4: forbidden classes [0, 2, 3, 4, 5] -> class [1]
+   T0: forbidden classes [0, 1, 2, 3, 5] -> class [4]
+   T1: forbidden classes [0, 1, 2, 3, 4] -> class [5]
+   T2: forbidden classes [0, 2, 3, 4, 5] -> class [1]
+   T3: forbidden classes [0, 1, 3, 4, 5] -> class [2]
+   T4: forbidden classes [0, 1, 2, 4, 5] -> class [3]
+ok       each of W_k, R_k, S_k, T_k (in that order) has exactly one class left: the colouring is unique up to permutation
+ok       the forced classes are exactly the printed colour classes (control)
+ok       B_0 is complementary to Z^R_0 and to Z^L_1 in every valid colouring of the disk's geometry
+ALL AS REGISTERED
+exit 0

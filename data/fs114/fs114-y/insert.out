@@ -1,0 +1,17 @@
+== the strip: cubic trichromatic vertices of one period (valleys V_m, apexes of U_j, and their mirrors)
+   valley V_0 (0.00000, 0.86603) colours ['B', 'P', 'R']; complementary colours: G: U-2(min<1,max>1) U1(min<1,max>1); M: D0(min<1,max>1) T-1(min<1,max>1) T2(min<1,max>1); O: D-1(min<1,max>1) T-2(min<1,max>1) T1(min<1,max>1)
+   apex of arch 0 (0.25000, 0.96825) colours ['O', 'P', 'R']; complementary colours: B: U-1(min<1,max>1) U2(min<1,max>1); G: U-2(min<1,max>1) U1(min<1,max>1); M: D0(min<1,max>1) T-1(min<1,max>1) T2(min<1,max>1)
+   valley V_0' (0.00000, -0.86603) colours ['G', 'M', 'O']; complementary colours: B: B-2(min<1,max>1) B1(min<1,max>1) U-1(min<1,max>1); P: B-1(min<1,max>1) B2(min<1,max>1) U0(min<1,max>1); R: D-2(min<1,max>1) D1(min<1,max>1)
+   apex of arch 0' (0.25000, -0.96825) colours ['B', 'G', 'M']; complementary colours: O: D-1(min<1,max>1) D2(min<1,max>1); P: B-1(min<1,max>1) B2(min<1,max>1) U0(min<1,max>1); R: D-2(min<1,max>1) D1(min<1,max>1)
+   valley V_1 (0.50000, 0.86603) colours ['G', 'O', 'P']; complementary colours: B: U-1(min<1,max>1) U2(min<1,max>1); M: D0(min<1,max>1) T-1(min<1,max>1) T2(min<1,max>1); R: D1(min<1,max>1) T0(min<1,max>1) T3(min<1,max>1)
+   apex of arch 1 (0.75000, 0.96825) colours ['G', 'M', 'O']; complementary colours: B: U-1(min<1,max>1) U2(min<1,max>1); P: U0(min<1,max>1) U3(min<1,max>1); R: D1(min<1,max>1) T0(min<1,max>1) T3(min<1,max>1)
+   valley V_1' (0.50000, -0.86603) colours ['B', 'M', 'R']; complementary colours: G: B0(min<1,max>1) B3(min<1,max>1) U1(min<1,max>1); O: D-1(min<1,max>1) D2(min<1,max>1); P: B-1(min<1,max>1) B2(min<1,max>1) U0(min<1,max>1)
+   apex of arch 1' (0.75000, -0.96825) colours ['B', 'P', 'R']; complementary colours: G: B0(min<1,max>1) B3(min<1,max>1) U1(min<1,max>1); M: D0(min<1,max>1) D3(min<1,max>1); O: D-1(min<1,max>1) D2(min<1,max>1)
+   valley V_2 (1.00000, 0.86603) colours ['B', 'G', 'M']; complementary colours: O: D2(min<1,max>1) T1(min<1,max>1) T4(min<1,max>1); P: U0(min<1,max>1) U3(min<1,max>1); R: D1(min<1,max>1) T0(min<1,max>1) T3(min<1,max>1)
+   apex of arch 2 (1.25000, 0.96825) colours ['B', 'M', 'R']; complementary colours: G: U1(min<1,max>1) U4(min<1,max>1); O: D2(min<1,max>1) T1(min<1,max>1) T4(min<1,max>1); P: U0(min<1,max>1) U3(min<1,max>1)
+   valley V_2' (1.00000, -0.86603) colours ['O', 'P', 'R']; complementary colours: B: B1(min<1,max>1) B4(min<1,max>1) U2(min<1,max>1); G: B0(min<1,max>1) B3(min<1,max>1) U1(min<1,max>1); M: D0(min<1,max>1) D3(min<1,max>1)
+   apex of arch 2' (1.25000, -0.96825) colours ['G', 'O', 'P']; complementary colours: B: B1(min<1,max>1) B4(min<1,max>1) U2(min<1,max>1); M: D0(min<1,max>1) D3(min<1,max>1); R: D1(min<1,max>1) D4(min<1,max>1)
+   cubic trichromatic vertices of one period with a colour free with margin: 0
+   control point (0.50000, 3.50000) colours []; complementary colours: B: FREE with margin; G: FREE with margin; M: FREE with margin; O: FREE with margin; P: FREE with margin; R: FREE with margin
+ok       control: every colour is free with margin at (1/2, 7/2)
+ALL AS REGISTERED

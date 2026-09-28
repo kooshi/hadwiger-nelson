@@ -1,0 +1,19 @@
+capped strip: orbit pairs examined 90 (each same-colour orbit pair with a tile in columns 0..2, the other in [-9, 11]); REJECT none; exact contacts at 1: 36; x-gap beyond the window 4.750 (exact > 1: True)
+   self-pair T0: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   self-pair B0: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   self-pair T1: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   self-pair B1: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   self-pair T2: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   self-pair B2: ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+ok       the capped strip ACCEPTs
+VERDICT: ACCEPT
+ok       1/4 + sqrt3 Y = (7 + 3 sqrt5)/4 exactly
+ok       |P_1 - Q|^2 = (7 + 3 sqrt5)/4: the critical radius is the distance to the stop point Q
+ok       Y^2 + 1/16 = (7 + 3 sqrt5)/4 (so R^2 < it gives R^2 - Y^2 < 1/16: the cap's x-range stays inside (1/4, 3/4))
+   R = 1.8500: R^2 = 3.422500 < (7 + 3 sqrt5)/4 = 3.427051: True
+ok       the closed disc of radius 37/20 about P_1 lies in the interior of the capped strip
+   R = 1.8510: R^2 = 3.426201 < (7 + 3 sqrt5)/4 = 3.427051: True
+ok       the closed disc of radius 1851/1000 about P_1 lies in the interior of the capped strip
+ok       R = 1.852 is beyond the critical radius (the disc reaches Q's colourless cone)
+ALL AS REGISTERED
+exit 0
