@@ -1,0 +1,11 @@
+note: M53-derivation.md: declared non-entry (header says 'not given … id'), not counted: **Proposition 6.4 (multiquadratic wall criterion), original and corrected — NOT given a fresh id; = 
+self-test: an unclosed `[` inside a true grade and a declared non-entry read clean: True
+self-test: a faithful header reads clean: True
+self-test: plant 'nested brackets' fires naming its header: True (nested brackets in the grade (use parentheses inside a grade))
+self-test: plant 'non-ASCII' fires naming its header: True (a non-ASCII id (ids are `[A-Za-z0-9-]` only))
+self-test: plant 'parenthetical' fires naming its header: True (a parenthetical before the dash (the id must stand alone before ` — `))
+self-test: plant 'a `[` in the title' fires naming its header: True (an unclosed `[` in the title was read as the grade's opening (write the interval in words))
+FAIL: entry FS99-T1 has no LEDGER.md § B row
+FAIL: LEDGER.md § B row FS98-T7 has no derivation entry
+FAIL: entry ASTRA-2026-09-14-T1 lacks *Kernel:*
+self-test: planted 3 faults, 3 failures reported (expected ≥ 3); unplanted id check clean

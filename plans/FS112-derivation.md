@@ -3,7 +3,7 @@
 *Filed by the close planner FS112-C (de Bruijn, Opus 5.5), 2026-09-27, from the records `plans/FS112-N-proof.md` (the proof side: FS112-N, then
 § Continuation — FS112-N2, FS112-N3), `plans/FS112-Y-construction.md` (the construction side: FS112-Y, then § Continuation — FS112-Y2) and
 `plans/FS112-Y3-construction.md` (FS112-Y3; the sides blind to each other throughout), the blind verifiers `plans/FS112-NB-verification.md`,
-`FS112-NB2-`, `FS112-NB3-`, `FS112-YB-`, `FS112-YB2-verification.md` (and `FS112-YB3-verification.md`, folded in at stage 1b when it reports), the reading
+`FS112-NB2-`, `FS112-NB3-`, `FS112-YB-`, `FS112-YB2-`, `FS112-YB3-verification.md` (YB3 folded in at stage 1b by FS112-C2, reconciliation §1.8–1.10), the reading
 job `plans/FS112-PA-reading.md` with `data/fs112/fs112-pa/extracts.md`, and the advisors `plans/POROS-2026-09-27-fs112-unit-arc-half.md` (FS112-A) and
 `plans/POROS-2026-09-27-fs112-competition.md` (A2, A3). Reconciliation: `data/fs112/fs112-c/reconciliation.md`. Notation: `data/fs112/claims.md` §0
 (`Γ`, `P_cl`, `ω(x)`, the contact kinds in-, out-, both, inert), `plans/FS112-N-proof.md` §1.3 (N-E0, N-E1, N-E2) and FS-110's N4 frame (`n`, `a ⊥ n`,
@@ -25,7 +25,10 @@ maps that four-colour form needs the stuck ray excluded **and** finite stuck cha
 obstruction**: both printed positives — `[AxenovichEtAl2014]`'s strip and `[Polymath2021]`'s disk, rebuilt exactly and blind, every arc of kind both at
 a four-colour vertex — stop at the same point, the unsaved second common unit point of a close complementary pair (the pinned corner), which is where
 FS112-N3-COR3 says a valid map needs a second four-colour vertex; the tactic's own move shrinks the bare wedge there and does not close it. Nothing
-moves a value; nothing answers a posed question.
+moves a value; nothing answers a posed question. Round 3's last verifier refuted Y3-END-NEEDS as stated with an exact, locally terminal stuck vertex
+between two unit circles (FS112-BOWTIE) — the proof side's doubly bounded one-vertex chain, built blind; corrected, a horn bound of exactly `±1` on both
+horns of a terminal map's stuck vertex occurs only at a one-vertex chain (FS112-C-HORNEND), and the composition is unchanged but for one residue of
+FS112-C-ENDS.
 
 ## §1. The proof side, rounds 1–2: the walk, the unit-arc calculus and the reduction
 
@@ -96,8 +99,9 @@ repeated colour: at a cubic centre no both-kind arc exists (FS112-N3-NOBOTH). An
 FS112-N2-FLANK-Q, FS112-N2-RAY. *Prior art:* FS110-N4-SHADOW's flank list is the object. *Kernel:* stub — with FS-114.
 
 **FS112-END — In a stuck chain whose vertices all carry N4-STUCK's structure, the horn curvatures cannot reach `λ_{k+1} = −1` or `υ_{k−1} = 1`. [hand; two minds, one blind: N; NB]**
-*Proof:* N §1.4 row 9 (N112-END); NB-END. *Proof verdict:* TRUE with its scope: it reaches only chains with N4-STUCK's structure at the centre `P_k`, which
-a chain's end lacks (FS112-N2-RAY). *Rests on it:* FS112-N3-CHAINS. *Prior art:* not found in print. *Kernel:* stub — with FS-114.
+*Proof:* N §1.4 row 9 (N112-END); NB-END; its `λ` half re-derived blind at a chain's end by FS112-YB3 (§3.1 Step 2′), and used by NB3's N3-END item 1.
+*Proof verdict:* TRUE with its scope: it reaches only chains with N4-STUCK's structure at the centre `P_k`, which
+a chain's end lacks (FS112-N2-RAY). *Rests on it:* FS112-N3-CHAINS; FS112-C-HORNEND (the one-vertex conclusion); the corrected FS112-Y3-END-NEEDS's scope. *Prior art:* not found in print. *Kernel:* stub — with FS-114.
 
 **FS112-N2-FLANK-Q — Every horn bound of exactly `±1` sits on a (Q) arc — FLANK's in-type exception, and then both horns' upper arcs form one arc of `ω(N)` through `v` — or on an (R2) arc, whose inner-colour tile along the radius-2 circle is FLANK's out-type tile at the far antipode. [hand; two minds, one blind: N2; NB2, sighted on the one-arc clause]**
 *Proof:* N2 stage N2-4; NB2-FLANKQ, §2.3 #10. *Proof verdict:* TRUE. *Rests on it:* FS112-N2-TERM, FS112-N3-END. *Prior art:* not found in print. *Kernel:*
@@ -179,7 +183,10 @@ FS112-C-COMPOSE; **FS-114's global step is its converse question**. *Prior art:*
 *Proof:* N3 stage N3-4 items 1–4 (N2-FLANK-Q, N3-DEG, U1's side cone, SHAVE's flanks); NB3-END (its item 4: `z ≠ y` by N-E2 twice). *Proof verdict:* TRUE as
 the table states it; N3's body's first alternative ("both horns lie between `ω(P_{−1})` and `ω(P_1)`, … in-type `h` at `P_{−1}`") is MISSTATED as a case
 description and corrected as above (NB3 §2.2 #2); its item 3's "(else SHAVE)" needs the N-E2 step (#3). It makes NB2-END unconditional. Y3-END-NEEDS
-continues past its item 4 (FS112-Y3-END-NEEDS). *Rests on it:* FS112-C-ENDS. *Prior art:* not found in print. *Kernel:* stub — with FS-114.
+continues past its item 4 (FS112-Y3-END-NEEDS). Its second disjunct, the doubly bounded one-vertex chain, is realised locally and exactly by
+FS112-BOWTIE in N3's first description (in-type tiles at both neighbours, which NB3 judged underived here); FS112-C-DOUBLE derives that structure at one
+mind when all four horn arcs are unit arcs. With FS112-C-HORNEND its first disjunct has no terminal instance at an end both of whose horns are bounded by
+unit arcs. *Rests on it:* FS112-C-ENDS. *Prior art:* not found in print. *Kernel:* stub — with FS-114.
 
 **FS112-ROTHEX — FS-110's ring lemmas N2-ROT and N2-HEX survive unit arcs under the base's hypothesis; P17's only unit-arc exception is a both-centre `x₂`; N2-ROT's "no `r`-tile at `x`" rests on FS112-N3-COR3. [hand; one mind: NB3, the named check]**
 *Proof:* NB3 §1.4 N3-BASE step 10, §2.2 #7 (`plans/FS110-N-proof.md` l. 374, 393). *Proof verdict:* TRUE; N3 took the lemmas on FS110-P17's route unwalked.
@@ -187,30 +194,52 @@ continues past its item 4 (FS112-Y3-END-NEEDS). *Rests on it:* FS112-C-ENDS. *Pr
 
 ## §3. The close's compositions (FS112-C)
 
-**FS112-C-ENDS — In a terminal valid map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours. [hand; one mind: FS112-C, an assembly; its links two minds, one blind, but the arc-through-N count one mind: NB]**
+**FS112-C-ENDS — In a terminal valid map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours, except possibly beside a one-vertex chain bounded by unit arcs on both sides but not on all four horn arcs, at a bound on an (R2) arc — a residue not walked. [hand; one mind: FS112-C, an assembly, repaired by FS112-C2; its links two minds, one blind, but the arc-through-N count one mind: NB, and FS112-C-DOUBLE one mind]**
 *Proof:* a chain stops where N4-STUCK (iii)–(iv) fail at the next point `N` (N2 stage N2-4): an in-type flank tile at `N` makes `N` a (Q) centre, at least
 four colours (FS112-N2-FLANK-Q, FS112-N2-RED); an arc of `ω(v)` through `N` forces `|P_cl(N)| ≥ 4` (NB §2.3 #10, one mind); an NB4P exception at `N` has
-four; at a horn bound `±1`, FS112-N3-END puts four colours at the centre one step beyond. Where (iii) holds the antipode carries a double sector, so in
-`M*` it is stuck or has four colours (FS112-N2-TERM item 2), and the chain continues. `data/fs112/fs112-c/reconciliation.md` §1.6 (L4). *Proof verdict:* TRUE
-at one mind; the exhaustiveness of N2's exception list for (iii)–(iv) is N2's (NB2 checked N2-TERM, not the list separately). *Rests on it:*
+four; at a horn bound `±1`, FS112-N3-END puts four colours at the centre one step beyond — **its first disjunct only**: at its second, the doubly bounded
+one-vertex chain, N3-END says nothing of the neighbours' colours (the assembly's slip, made visible by FS112-BOWTIE; repaired by FS112-C2): there a bound on
+an in-type flank tile makes the neighbour a (Q) centre (the first case above), and with all four horn arcs unit arcs FS112-C-DOUBLE makes both neighbours
+(Q). Where (iii) holds the antipode carries a double sector, so in
+`M*` it is stuck or has four colours (FS112-N2-TERM item 2), and the chain continues. `data/fs112/fs112-c/reconciliation.md` §1.6 (L4), §1.9.
+*Proof verdict:* TRUE at one mind outside the residue in the statement; the exhaustiveness of N2's exception list for (iii)–(iv) is N2's (NB2 checked N2-TERM, not the list separately). *Rests on it:*
 FS112-C-COMPOSE. *Prior art:* not found in print. *Kernel:* stub — with FS-114.
 
-**FS112-C-COMPOSE — The two gaps compose as follows: (1) since every valid map has `F ∪ R` within 3 of every point, excluding such maps is the NO for every valid map, periodic or not, with no ray step; (2) for a doubly periodic map, the terminal modification's four-colour vertices meet every closed disc of radius `|K| + 2`, `K` its finite curvature set, so the NO reduces to the four-colour form with no ray step and no third step; (3) for aperiodic maps the four-colour form needs both the stuck ray excluded (b′) and a uniform bound on the length of finite stuck chains, a third GAP, (b″). [hand; one mind: FS112-C; its links two minds, one blind]**
+**FS112-C-COMPOSE — The two gaps compose as follows: (1) since every valid map has `F ∪ R` within 3 of every point, excluding such maps is the NO for every valid map, periodic or not, with no ray step; (2) for a doubly periodic map, the terminal modification's four-colour vertices meet every closed disc of radius `|K| + 2`, `K` its finite curvature set, so the NO reduces to the four-colour form with no ray step and no third step; (3) for aperiodic maps the four-colour form needs both the stuck ray excluded (b′) and a uniform bound on the length of finite stuck chains, a third GAP, (b″). [hand; one mind: FS112-C; its links two minds, one blind, but FS112-C-ENDS, on which item 2 rests, one mind]**
 *Proof:* `data/fs112/fs112-c/reconciliation.md` §1.6, over FS112-N3-DENSE3 (L1), FS112-N2-TERM (L2, L3), FS112-C-ENDS (L4), FS112-N3-PER and FS112-N3-CHAINS (L5):
 in (2) a stuck vertex lies on a finite chain of at most `2|K| − 3` vertices whose ends each have a four-colour vertex one step beyond, so it is within
 `|K| − 1` of one. For (3): the recursion admits finite chains of every length `L` (from one end `λ_k ≥ −1/(k+1)`, from the other `υ_k ≤ 1/(L − k + 1)`,
 always compatible; Y3-END-A realises the pencil for `L = 3`), each needing about `L` distinct curvatures, so a map with infinitely many arc radii can
 carry them and its four-colour vertices need not be relatively dense even with no ray; N3-LEN bounds lengths only for a finite alphabet, and N3-ALPH is
 open there. A Hausdorff limit at bounded `K` (W-EQ-K's) would convert long chains into a ray only if terminality and the stuck structure pass to limits,
-which no record derives. *Proof verdict:* TRUE at one mind; (b″) named, not bridged. *Rests on it:* the stubs FS-114 and FS-115 (their bearing lines).
+which no record derives. **No step uses FS112-Y3-END-NEEDS** (only the reconciliation's forecast, §1.6 item 5, did; corrected in §1.9): item 2 inherits
+FS112-C-ENDS's residue; with FS112-C-HORNEND, (b′) and (b″) concern chains of two or more vertices, whose ends lie at NB4P exceptions, at an arc of the
+end vertex's circle through the next point, or at a unit arc bounding one horn only (not walked); the one-vertex bowtie (FS112-BOWTIE) adds nothing to
+(b′), (b″) or item 2's radius. *Proof verdict:* TRUE at one mind; (b″) named, not bridged. *Rests on it:* the stubs FS-114 and FS-115 (their bearing lines).
 *Prior art:* not found in print. *Kernel:* stub — with FS-114.
 
-**FS112-C-PARTNERS — In a valid map, every close complementary cubic trichromatic partner of a cubic trichromatic vertex `u` is the fourth corner `w_i + w_j − u` of a unit rhombus on two of `u`'s leaving centres, so `u` has at most three such partners. [hand; one mind: FS112-C; over FS112-N3-COR3, two minds, one blind, and the count of leaving centres, N3 stage N3-3's frame and Y3 §4.2 item 1]**
+**FS112-C-PARTNERS — In a valid map, every close complementary cubic trichromatic partner of a cubic trichromatic vertex `u` is the fourth corner `w_i + w_j − u` of a unit rhombus on two of `u`'s leaving centres, so `u` has at most three such partners. [hand; one mind: FS112-C; over FS112-N3-COR3, two minds, one blind, and the count of leaving centres, N3 stage N3-3's frame, Y3 §4.2 item 1 and YB3 §3.6]**
 *Proof:* by FS112-N3-COR3 both common unit points of such a pair are leaving centres of `u`; a boundary curve leaving `u` lies on at most one unit circle,
 so `u` has at most three leaving centres, and two common unit points of `ω(u)`, `ω(u′)` determine `u′ = q₊ + q₋ − u`. `data/fs112/fs112-c/reconciliation.md`
 §1.5. *Proof verdict:* TRUE at one mind. It makes Y3's design condition (FS112-Y3-T2-BUDGET) a theorem about every valid map; the strip's printed
 colouring violates it at its `(V, A)` pairs, which is why the strip cannot be a map. *Rests on it:* FS-114's reading list. *Prior art:* not found in
 print. *Kernel:* stub — with FS-114.
+
+**FS112-C-HORNEND — In a terminal valid map, a stuck vertex `E` both of whose horns are bounded by unit arcs of `ω(E + n)` has a horn bounded by a unit arc of `ω(E − n)` too, and is a one-vertex chain; likewise with `n` reversed. [hand; one mind: FS112-C2, an assembly over FS112-Y3-END-NEEDS as corrected and FS112-END]**
+*Proof:* if neither horn's lower arc is a unit arc of `ω(E − n)`, FS112-Y3-END-NEEDS as corrected needs a seventh colour; so some lower arc is one. A unit
+arc of `ω(E ± n)` bounding a horn of `E` makes `E ± n` not stuck (FS112-END; FS112-YB3 Step 2′; NB3's N3-END item 1), so the chain is `{E}`; the mirror is
+the same argument with `n` reversed. `data/fs112/fs112-c/reconciliation.md` §1.9. *Proof verdict:* TRUE at one mind; its hypothesis is Y3-END-NEEDS's
+setting — **a unit arc bounding one horn only of a side (an (R2) arc) is not walked**. *Rests on it:* FS112-C-COMPOSE's narrowing of (b′) and (b″); FS-115's
+question. *Prior art:* not found in print. *Kernel:* stub — with FS-115.
+
+**FS112-C-DOUBLE — In a terminal valid map, a stuck vertex `E` all four of whose horn arcs are unit arcs, of `ω(E + n)` above and `ω(E − n)` below, carries an in-type tile of its upper flank colour at `E + n` and of its lower flank colour at `E − n`, and both are (Q) centres with at least four colours. [hand; one mind: FS112-C2, a sketch over FS112-Y3-END-NEEDS's levels with n reversed and FS112-N2-TERM]**
+*Proof:* `data/fs112/fs112-c/reconciliation.md` §1.9: any `g` at `N = E + n` is in-type (an out-type one contradicts `g` filling `E`'s `+n` side); if `g` is
+absent at `N`, both horns take their `g`-shadows from out-type tiles at `S = E − n` tangent to `±a`, two sectors of `g` at `S` with `c` in the pinch below —
+Y3-END-NEEDS's level 2 at `S` with `g` in `h`'s role — and its levels then need a seventh colour at `S − n`; so `g` is at `N`, in-type, the arcs of `ω(N)`
+bounding the horns carry both side colours at their centre, are not (R2), hence (Q) in `M*`. Likewise at `S`. *Proof verdict:* TRUE at one mind, a sketch; the
+mixed source case (one horn's `g`-shadow from each side) is covered; a unit arc bounding one horn only of a side is outside it. It is N3's first description
+of the one-vertex chain (`plans/FS112-N-proof.md` N3-END, "the in-type `g` at `P_1` and `h` at `P_{−1}`"), which NB3 judged underived by N3-END's own proof, and
+FS112-BOWTIE realises it. *Rests on it:* FS112-C-ENDS's repair. *Prior art:* not found in print. *Kernel:* stub — with FS-115.
 
 **FS112-SEAMS-TWO — C-SEAMS-TWO corrected: at a close covering pair of a valid map (union sense) the seam point either lies in the closure of a unit arc centred at `u` or `v` — (S1), or (S2) with arcs, the centre of three or more colours — or is a vertex of at least four colours, NB-4's exception at `w₀`, of which T2 is an instance; up to FS112-N2-RED the unit arcs are one species, a (Q) centre, plus (R2). [hand; the unconditional form one mind: NB; its corollary up to reduction two minds, one blind, over FS112-N2-RED]**
 *Proof:* NB-SEAM2, NB §1.6; N §2.3 (the corollary, then over N112-RED's GAP, now closed by FS112-N2-RED). *Proof verdict:* TRUE; filed as the owner ruled
@@ -295,36 +324,59 @@ Y calibrated CAL-7 on the hexagonal seven-colouring, the claim list named row 33
 against YB's (Y2-D3). YB's field cannot hold `sin 72°`, hence YB2's tower checker. *Rests on it:* every exact verdict of §4. *Prior art:* the frozen FS-110
 checkers. *Kernel:* declined — instruments.
 
-**FS112-Y3-PIN — Both pinned-corner GAPs close as derived obstructions: the strip's stop cannot be passed by cutting `C_{−1}` and `C_2` along `ω(Q)` (at 15 named points of both tiles on and beside the cut the only free colour is 4, and the outer part holds the valley's forced 4-sector); on the disk no change near `Z^L_0` lets the triangle `T*` be blue — the blocker is `T2_0`'s corner `Y_0`, whose distance to `q2 = Z^L_0 − (1, 0)` is below 1, and the leg `Y_0A_0` is the perpendicular bisector of `C_0` and `q2`. [tools, exact at named points + hand; one mind: Y3]**
-*Proof:* Y3 §2.1–2.3 (Y3-STRIPCUT, Y3-DISK-T*, Y3-LEG; `tools/fs112_y3_pin.py`). *Proof verdict:* TRUE at one mind; Y2 §6.4's blocker corrected from
-`Z^L_0`'s sector to `Y_0` (recorded, not rewritten). **Grade pending FS112-YB3** (stage 1b). Y2-PIN strengthened: each named local move forces a change
-one ring further out. *Rests on it:* FS-114's handle. *Prior art:* not found in print. *Kernel:* declined.
+**FS112-Y3-PIN — Both pinned-corner GAPs close as derived obstructions: the strip's stop cannot be passed by cutting `C_{−1}` and `C_2` along `ω(Q)` (at 15 named points of both tiles on and beside the cut the only free colour is 4, and the outer part holds the valley's forced 4-sector); on the disk no change near `Z^L_0` lets the triangle `T*` be blue — the blocker is `T2_0`'s corner `Y_0`, whose distance to `q2 = Z^L_0 − (1, 0)` is below 1, and the leg `Y_0A_0` is the perpendicular bisector of `C_0` and `q2`. [tools, exact at named points + hand; two minds, one blind: Y3; YB3]**
+*Proof:* Y3 §2.1–2.3 (Y3-STRIPCUT, Y3-DISK-T*, Y3-LEG; `tools/fs112_y3_pin.py`); FS112-YB3 §3.3, 3.4, 3.8 (`tools/fs112_yb3_pins.py`: 22 exact points at the
+cut; Y3's seven disk points colour-free in a second, in-disk object). *Proof verdict:* TRUE, two minds, one blind; Y2 §6.4's blocker corrected from
+`Z^L_0`'s sector to `Y_0` (recorded, not rewritten). Precisions (YB3 D5–D7): the cut's list of tiles to change is `C_{−1}`'s side — a midline arch, `C_{−3}`
+or `C_1` — and `C_2`'s is its mirror, a midline arch, `C_0` or `C_4`; the colour-free part of the region `T2_0` must vacate is a proper sub-region (one mind,
+YB3: violet admissible near `Z^L_0` and `Y_0`, orange near `K`); `|q2 − Y_0|` ≈ 0.9036, its square ≈ 0.8165. Y2-PIN strengthened: each named local move
+forces a change one ring further out. *Rests on it:* FS-114's handle. *Prior art:* not found in print. *Kernel:* declined.
 
-**FS112-Y3-END-AB — A finite stuck chain `P_0, P_1, E` with C-CHAIN-9's recursion taken with equality from the end — upper arcs the circles of radii 3, 2, 1 about `N = P_3`, lower boundaries straight — is realised exactly over ℚ with `N` completed two ways: least (`N` three colours, one repeated; a MERGE available at `N`) and five-coloured (no MERGE; a SHAVE available). [tools, exact; one mind: Y3; plants fire]**
-*Proof:* Y3 §3.1–3.2 (`tools/fs112_y3_chainend.py`; 43 of 43 and 47 of 47 pairs). *Proof verdict:* TRUE at one checker; neither completion is terminal at
-`N`. **Grade pending FS112-YB3.** *Rests on it:* FS112-Y3-END-NEEDS (its levels 1–2). *Prior art:* not found in print. *Kernel:* declined.
+**FS112-Y3-END-AB — A finite stuck chain `P_0, P_1, E` with C-CHAIN-9's recursion taken with equality from the end — upper arcs the circles of radii 3, 2, 1 about `N = P_3`, lower boundaries straight — is realised exactly over ℚ with `N` completed two ways: least (`N` three colours, one repeated; a MERGE available at `N`) and five-coloured (no MERGE; a SHAVE available). [tools, exact; two rebuilds, one blind: Y3; YB3; plants fire in both]**
+*Proof:* Y3 §3.1–3.2 (`tools/fs112_y3_chainend.py`; 43 of 43 and 47 of 47 pairs); FS112-YB3 §2.2–2.4, 3.2 (`tools/fs112_yb3_frags.py enda endb`; 39 of 39
+and 44 of 44, the MERGE at `N` built and checked, 43 of 43, both SHAVEs built and checked, 46 of 46 and 49 of 49). *Proof verdict:* TRUE; two members of one
+family (colours, horn ends, closing tiles, END-B's concentric centre differ); neither completion is terminal at `N`. END-B's open arc ends need unit arcs
+centred at `N` of total length at least 180° (FS112-SIX at `N`, YB3 §3.1 Step 3 (b)); END-B carries ≈ 14.3° in Y3's and ≈ 45.2° in YB3's, so Y3's remedy
+(a shorter arc of `H1`) is necessary, not sufficient. *Rests on it:* FS112-Y3-END-NEEDS (its levels 1–2). *Prior art:* not found in print. *Kernel:* declined.
 
-**FS112-Y3-END-NEEDS — To keep the chain's end `E` stuck and its unit-arc centre `N` terminal: `N` needs at least three colours (then a MERGE at `N`), at least five to block it (then a SHAVE at `N`), and blocking both needs a seventh colour — so no stuck chain of a terminal map ends at a unit arc while `E` has three colours; exceptions named: a four-colour `E`, contact arcs accumulating at `N`, the operations' own validity. [hand; one mind: Y3; levels 1–2 realised exactly]**
-*Proof:* Y3 §3.3. *Proof verdict:* one mind; **grade pending FS112-YB3.** Its levels 1–2 agree with FS112-N3-END's items 1–3 (frames matched,
-`reconciliation.md` §1.5), sharpened to five colours at `N`; its level 3 goes past N3-END's item 4 to a contradiction. Two scope points for the verifier:
-its setting excludes FLANK's in-type exception at `N`, where the count still closes if the lower flank is then the inner colour, which Y3 does not say;
-and its corollary "a periodic terminal map has no stuck chain at all unless an end vertex is a four-colour vertex" omits chains whose next point is an NB4P
-exception without a horn bound `±1`. *Rests on it:* if confirmed, it removes horn-bound-`±1` ends from terminal maps and narrows FS-115. *Prior art:* not
-found in print. *Kernel:* stub — with FS-115, if confirmed.
+**FS112-Y3-END-NEEDS — Corrected: if both horns of a stuck vertex `E` of a terminal valid map, `P_cl(E) = {g, c, h}`, are bounded by unit arcs of `ω(N)`, `N = E + n`, and neither by a unit arc of `ω(E − n)` — in particular at the end of every stuck chain of at least two vertices — then keeping `E` stuck and `N` terminal needs five colours at `N` against its MERGE and a seventh colour at `N + n` against its SHAVE, so no such end exists; as Y3 stated it, for every three-colour end at a unit arc, it is FALSE, by FS112-BOWTIE. [hand; the levels two minds, one blind: Y3; YB3; the shadow-source list, its exception and the step y ≠ g one mind: YB3; the chain case through FS112-END, two minds, one blind]**
+*Proof:* Y3 §3.3; FS112-YB3 §3.1 (Steps 1–4, 2′), §4 D1–D2. Y3's first requirement ("No SHAVE at `E` needs `h` shadowing the horn from above: FLANK's list,
+re-read with unit arcs, leaves only `h`-tiles at `N` tangent to `±a` from above") misses one source: an in-type `h`-tile at `E − n`, possible exactly when
+`E`'s lower arcs are unit arcs of `ω(E − n)`, shadows the whole horn (YB3 Step 2, an "iff"). Steps 3–4 use only Step 2's conclusion, so the statement holds
+whenever neither lower arc is a unit arc; a chain of two or more vertices forces that (Step 2′ = FS112-END). Step 4's "no shadow from `E`" for `N`'s lower
+flank `y` needs `y ≠ g`, which Y3 assumed and YB3 proved (Step 3 (a)); YB3 also shows `P_cl(N) = {c, h, x₁, x₂, y}` exactly (YB3-N5, one mind), which settles
+the close's first scope point: FLANK's in-type exception at `N` does not occur at such an end. `data/fs112/fs112-c/reconciliation.md` §1.8. *Proof verdict:*
+**TRUE as corrected; FALSE as Y3 stated it**, by FS112-BOWTIE, a one-vertex chain bounded by unit arcs on both sides. Its levels 1–2 agree with FS112-N3-END's
+items 1–3 (frames matched), sharpened to five colours at `N`; its level 3 goes past N3-END's item 4 to a contradiction. Precisions, named: both horns' upper
+arcs are unit arcs in the setting (a unit arc bounding one horn only is not walked); Y3's corollary about periodic maps is corrected in the reconciliation
+§1.9 (ends at NB4P exceptions, at an arc of the end vertex's circle, at a one-horn unit arc, and one-vertex bowties). *Rests on it:* FS112-C-HORNEND; the
+narrowing of FS-115. *Prior art:* not found in print. *Kernel:* stub — with FS-115.
 
-**FS112-Y3-R1 — Along any sequence obeying C-CHAIN-9's inequalities `λ` and `υ` are non-decreasing, two consecutive terms equal only at 0; a chain infinite upward has every `λ_k < 0`, downward every `υ_k > 0`, so a one-sided chain has infinitely many horn radii; a doubly periodic map has no one-sided chain, and its chains have at most `3V + 3` vertices. [hand; one mind: Y3; arithmetic]**
+**FS112-BOWTIE — An exact valid local fragment realises a one-vertex stuck chain bounded by unit arcs on both sides: `E = (0, 0)` with three colours, its two horns of colour 2 between `ω(E + n)` and `ω(E − n)`, shadowed by in-type radius-1 sectors of colours 1 and 3 at `E + n` and `E − n`; both neighbours four-coloured, one sector per colour, neither stuck, no MERGE, MERGE-RAY or SHAVE applicable at `E`, `E ± n`; every unit arc's end interior with its neighbourhood coloured. [tools, exact; one fragment: YB3; one checker, YB2's tower checker; stuckness exact at the antipodes and at named points]**
+*Proof:* FS112-YB3 §2.2, 2.4, 3.1 (`tools/fs112_yb3_frags.py bowtie`, 21 of 21 same-colour pairs ACCEPT, over ℚ; `closed_interval` rejects exactly the six
+tight pairs; the plants `h_is_g`, `no_cn` fire for their reasons); re-run by FS112-C2, identical (`data/fs112/fs112-c2/bowtie-rerun.out`). *Proof verdict:*
+TRUE locally; a fragment, not a map. It refutes Y3-END-NEEDS as Y3 stated it, and it is FS112-N3-END's second disjunct — N3's first description of it, with
+the in-type tiles at both neighbours — built by the construction side's verifier fenced from every proof-side record. Its name is YB3's; "bowtie" in
+FS-106/FS-107's words (W-TAN) is any vertex with one colour in two opposite sectors, every stuck vertex being one. *Rests on it:* FS112-C-DOUBLE's reading;
+FS-115's question (whether it lives in a valid map). *Prior art:* the in-type self-contact is `[Polymath2021]` p. 194's tactic; the fragment not found in
+print. *Kernel:* declined — an exact fragment; FS-115 may promote it.
+
+**FS112-Y3-R1 — Along any sequence obeying C-CHAIN-9's inequalities `λ` and `υ` are non-decreasing, two consecutive terms equal only at 0; a chain infinite upward has every `λ_k < 0`, downward every `υ_k > 0`, so a one-sided chain has infinitely many horn radii; a doubly periodic map has no one-sided chain, and its chains have at most `3V + 3` vertices. [hand; two minds, one blind: Y3; YB3; arithmetic]**
 *Proof:* Y3 §1.4. *Proof verdict:* TRUE for doubly periodic maps (through FS112-N3-PER, since chains live in the terminal modification); Y3's "a map with
 finitely many arc radii" in general carries the premise N3 corrected — the finiteness must hold in `M*`, GAP N3-ALPH. The same arithmetic as
-FS112-N3-CHAINS, independently (a second mind for STEP, not blind to card R's reading). **Grade pending FS112-YB3.** *Rests on it:* nothing beyond
+FS112-N3-CHAINS, independently (a second mind for STEP, not blind to card R's reading). FS112-YB3 (§3.5) confirms it blind and sharpens the bound to
+`2V`; it applies the finite alphabet to "a map" as Y3 does, so the premise's correction to `M*` stays the proof side's. *Rests on it:* nothing beyond
 FS112-N3-CHAINS. *Prior art:* not found in print. *Kernel:* declined — subsumed by FS112-N3-CHAINS.
 
-**FS112-Y3-R3 — At both held positives every close complementary pair of vertices is saved at one common unit point by half of T2, at both exactly when it is a rhombus completion (T2 twice), and its unsaved second point is where the positive stops; the disk's `(A_0, y)` pairs are saved at both by (S1). [a reading of exact results held; one mind: Y3]**
-*Proof:* Y3 §4.1 (over YB-SEAMS, Y2 §5.3 (d), YB2-PAIRS). *Proof verdict:* TRUE as a reading; **grade pending FS112-YB3.** It meets N3-P1 for pairs whose
+**FS112-Y3-R3 — At both held positives every close complementary pair of vertices is saved at one common unit point by half of T2, at both exactly when it is a rhombus completion (T2 twice), and its unsaved second point is where the positive stops; the disk's `(A_0, y)` pairs are saved at both by (S1). [tools, exact; two minds, one blind: Y3, a reading of exact results; YB3, an exact recount]**
+*Proof:* Y3 §4.1 (over YB-SEAMS, Y2 §5.3 (d), YB2-PAIRS); FS112-YB3 §3.7 (`tools/fs112_yb3_r3.py`: every close complementary vertex pair of YB2's rebuilds,
+24 on the strip with a member in one period, 20 on the disk, both common unit points and the completion tested). *Proof verdict:* TRUE; the `(A_0, y)`
+(S1) clause rests on Y2's seam points, placed in floating point, not re-checked. It meets N3-P1 for pairs whose
 rhombus lies in the open strip and refutes N3-P4 as registered (the `(V, A)` pairs are not mirror pairs). *Rests on it:* FS112-C-PARTNERS's reading.
 *Prior art:* not found in print. *Kernel:* declined.
 
-**FS112-Y3-T2-BUDGET — If a close complementary pair `(u, v)` with `u` trivalent is saved by T2 at both common unit points, then `v = w_i + w_j − u` for two of the at most three centres `w_i` of unit arcs `u` emits; so a trivalent vertex has at most three such partners, at determined places, and the strip's printed colouring cannot meet the pattern. [hand; one mind: Y3]**
-*Proof:* Y3 §4.2. *Proof verdict:* TRUE at one mind; **grade pending FS112-YB3.** With FS112-N3-COR3 it becomes a statement about every valid map
+**FS112-Y3-T2-BUDGET — If a close complementary pair `(u, v)` with `u` trivalent is saved by T2 at both common unit points, then `v = w_i + w_j − u` for two of the at most three centres `w_i` of unit arcs `u` emits; so a trivalent vertex has at most three such partners, at determined places, and the strip's printed colouring cannot meet the pattern. [hand; two minds, one blind: Y3; YB3; the strip clause tools, exact]**
+*Proof:* Y3 §4.2; FS112-YB3 §3.6 (the strip's 18 listed `(V, A)` pairs complementary at ≈ 0.7569, none a completion). *Proof verdict:* TRUE, two minds. With FS112-N3-COR3 it becomes a statement about every valid map
 (FS112-C-PARTNERS). *Rests on it:* FS112-C-PARTNERS. *Prior art:* not found in print. *Kernel:* declined — a design condition, promoted by C-PARTNERS.
 
 ## §5. Re-attribution (prior art, not ours)
@@ -361,3 +413,11 @@ rhombus lies in the open strip and refutes N3-P4 as registered (the `(V, A)` pai
 | A3-2.3, second reason | the disk calibrates radius-2 steps | fails at vertex-centred steps (A3's retraction) | FS112-DISC |
 | `plans/FS112-unit-arc-half.md` §PA row 3, l. 413, 422, 517 | the degree-4 sketch "de Grey's" | Philip Gibbs's (`[06.62]`) | §5 |
 | `data/fs112/claims.md` §2, T2 | "(the spindle's rhombus)" | also a thin unit rhombus at `√15/2` | FS112-STRIP-SEAMS |
+| `plans/FS112-Y3-construction.md` §3.3 and its table, Y3-END-NEEDS | "leaves only `h`-tiles at `N` tangent to `±a`"; "So a stuck chain cannot end at a unit arc in a terminal map while `E` has three colours" | an in-type `h` at `E − n` when the lower arcs are unit arcs; TRUE only when neither lower arc is one (every chain of two or more vertices); FALSE at a one-vertex chain bounded on both sides | FS112-Y3-END-NEEDS, FS112-BOWTIE |
+| Y3 §3.3 item 4 | "a periodic terminal map has no stuck chain at all unless an end vertex is a four-colour vertex" | ends also at NB4P exceptions, at an arc of the end vertex's circle, at a one-horn unit arc, and one-vertex bowties | reconciliation §1.9; FS112-Y3-END-NEEDS |
+| Y3 §2.1 (Y3-STRIPCUT) | "The same at `C_2`", the list `C_{−3}` or `C_1` | at `C_2` the mirror list: a midline arch, `C_0` or `C_4` | FS112-Y3-PIN |
+| Y3 §2.2 item 2 | "`\|q2 − Y_0\|² < 1` (float 0.9036)" | 0.9036 is `\|q2 − Y_0\|`; its square is ≈ 0.8165 | FS112-Y3-PIN |
+| Y3 §3.2, END-B | "closing it needs `H1`'s arc to end at a smaller angle than `E`'s" | necessary, not sufficient: unit arcs centred at `N` must total at least 180° | FS112-Y3-END-AB |
+| Y3 §1.4 item 3; YB3 §3.5 | the finite alphabet applied to "the map" | the premise is on `M*`: FS112-N3-PER for doubly periodic maps, GAP N3-ALPH otherwise | FS112-Y3-R1 |
+| `plans/FS112-N-proof.md` N3-P5, l. 904 | falsifier "no arc at `P_{−2}`, refutes N3-END" | omits N3-END's own second disjunct: the doubly bounded one-vertex chain has no arc at `P_{−2}` and is allowed | FS112-N3-END |
+| `data/fs112/fs112-c/reconciliation.md` §1.6, (L4) and item 5 | C-ENDS's horn-bound clause from N3-END's first disjunct only; "Y3-END-NEEDS, if YB3 confirms it, removes horn-bound-`±1` ends from terminal maps" | the second disjunct repaired by FS112-C-DOUBLE; item 5 as corrected in §1.9 | FS112-C-ENDS, FS112-C-COMPOSE |
