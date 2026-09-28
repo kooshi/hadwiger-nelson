@@ -12,6 +12,10 @@ O1–O5 are committed (step 3) before I open Y2's section, tools or outputs. Eve
 ## Would have searched here (standing rule 3)
 
 - Stage 2: none (a checker built from a derivation, calibrated on held objects).
+- Stage 4, the strip's colours: I would have fitted `[AxenovichEtAl2014]` Fig. 4; instead I read its colour pattern only (arches purple, light green,
+  blue; inverted arches marble, red, orange; top tiles orange, marble, red in the valleys; bottom tiles blue, purple, green), every length from the words.
+- Stage 4, the disk: I would have fitted Fig. 10's pixels for `X_k`, `U_k`, `F_k`; instead two derived bounds at the four-colour vertex are met with
+  equality and the rim boundary is radial by the mirror reading (stage 3 §3.5–3.6), and the checker judges that one member.
 
 ## Fence log (standing rule 13; brief § Fences; instance)
 
@@ -213,3 +217,42 @@ radial (reading M); (iii) nothing else: the combinatorics (tiles, colours, junct
 
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: my strip (brief step 2) and the disk (instance O1, first half), rebuilt by formula and checked exactly
+
+### 4.1 The strip, my rebuild (`tools/fs112_yb2_objects.py strip`, output `data/fs112/fs112-yb2/strip-mine.out`) [tools, exact; one rebuild]
+
+Geometry from the printed words (width 1/2; each rounded side an arc of radius 1 about the opposite corner, so the straight side stops at height `√3/2`
+and the apex is `(j/2 + 1/4, √15/4)`; the top row fixed by "the distance 1 between the point of intersection of circular arcs and the opposite corner",
+`Y = √15/4 + √3/2`); colours from `[AxenovichEtAl2014]` Fig. 4 viewed at 400 dpi, pattern only. **Height `2Y = √15/2 + √3` exactly. ACCEPT: 90 orbit
+pairs (the 12 tiles of a period, each with itself and every same-colour tile of columns −9…11), every tile beyond dismissed by an exact `x`-gap of
+19/4; 36 exact contacts at 1** — the same object and the same counts as YB's (checked pair by pair at stage 2) and as Y's round-1 report (60 ordered
+pairs = 12 self + 2 × 24). Three independent rebuilds, two of them blind to the others, one object.
+
+### 4.2 The disk (`tools/fs112_yb2_objects.py disk`, output `data/fs112/fs112-yb2/disk-check.out`, 4 min on one core under `scripts/slot.py`)
+
+**The formula** (from the stage-3 transcription): `Z` the Reuleaux pentagon of width 1 on `A_k = a·e(90° + 72k)`, `a = R₅/φ = √((5 − √5)/10)`; the unit
+regular pentagon `A_0 B_0 C_0 D_0 E` with `B_0 = A_0 + e(144°)`, `C_0 = B_0 + e(72°)`, `D_0 = C_0 + (1, 0)`, `E = B_4`; `X_0 = A_0 + s·e(126°)`,
+`s = √(1/φ)` (the arch's straight side parallel to its axis, the bound 126° met with equality; then `|X_0 − A_1|² = s² + 1/φ² = 1`); `X′_0 = Y_4 =
+A_0 + s·e(54°)`; `U_0 = A_0 + e(108°)`, `U′_0 = A_0 + e(72°)` (the bound 108° met with equality); `F_0 = r·e(126°)` (radial); everything turned by
+`72k`. Tower `Q(√5)(√(10 + 2√5))(√(1/φ))(√r²)`: `r` generates degree 8 over `Q` (`r²` is not a square in `Q(√5)`, norm `11/5`, nor `r²(10 + 2√5) =
+34 + 14√5`, norm 176), and `√(1/φ)` is new over `Q(√5, √(10 + 2√5))` (`1/φ` has norm −1; `(10 + 2√5)/φ = 4√5` has norm −80).
+
+**Exact identities, 78 of 78** (`disk_identities`): **`r² = (25 + 9√5)/10` — the built-in control — equal exactly to the caption's `5/2 + 9/(2√5)` and to
+`[11.34]`'s `φ²(15 + √5)/10`**; `|A_k A_{k+2}| = 1`; `|A_k B_k| = |A_{k+1} B_k| = 1`; the pentagon's edges `|B_k C_k| = |C_k D_k| = |D_k B_{k−1}| = 1`
+and diagonal `|A_k C_k| = φ`; `|X_k A_{k+1}| = |Y_k A_k| = |U_k A_k| = |U′_k A_k| = 1`; `C_k, D_k, F_k` on the rim; each arch's straight side parallel to
+its axis. **Map consistency (exact): 70 pieces, 55 shared by exactly two tiles and 15 rim arcs** (Euler: 45 − 70 + 27 = 2); float area guard: the 26
+tile areas sum to 14.1763122 against `πr²` = 14.1763149 (the gap is the polyline's).
+
+**The exact check: ACCEPT — 71 of 71 same-colour pairs examined (21 red among `Z, R_0…R_4`; 10 for each of the five other colours among `W_k,
+P_{k+2}, S_{k+1}, T_{k−1}`), a tile with itself included; none has 1 interior to its range.** 46 pairs touch at exactly 1: **every tile has diameter
+exactly 1** (26 self-pairs), and 20 cross pairs are at minimum distance exactly 1 — for each non-red colour the arch `P_{k+2}` against `W_k` (across
+`Z`'s arc about `A_k`), against `S_{k+1}` and against `T_{k−1}` (across the arches' arcs), and red `Z` against each `R_k` (across the wedge's far arc).
+**Those 20 contacts are the 20 unit arcs' out-contacts**; no other same-colour pair is closer than `√5 − 1 ≈ 1.236` (adjacent `R_k`) or 1.3657 (`W`
+against the rim tiles of its colour).
+
+**Scored (stage 3 §3.7):** **E-r met** (the radius reproduced exactly, three printed forms); **E-valid met** (the member with both bounds at equality and
+radial rim boundaries is valid). What the ACCEPT covers: that one member of a family the print does not pin down (readings P, W, M); what it does not:
+the figure's own coordinates, which I never read.
+
+## Stage 4 — SAVED

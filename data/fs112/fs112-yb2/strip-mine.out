@@ -1,0 +1,3 @@
+strip: height 2Y = sqrt15/2 + sqrt3 exactly: True
+strip: orbit pairs examined 90; REJECT none; exact contacts at 1: 36; x-gap beyond the window 4.750 (exact > 1: True)
+VERDICT: ACCEPT
