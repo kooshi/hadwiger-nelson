@@ -1,0 +1,10 @@
+OK   D0 |q1-top|=|q1-q2|=|R*-q1|=|R*-top|=1, |R*|^2=3
+OK   D1 |e(phi)+e(-psi)-1|^2 = 1 - 2 phi psi + O(3)
+OK   D2 q1+t e(180): in B(p,1), outside B(q2,1), |x-R*|>1
+OK   D3 q1+t e(300+z): outside B(p,1), |y-R*|>1
+OK   D4a t1-point inside t1; w outside B(q1,1)
+OK   D4b |w-x|<1 (the exclusion itself)
+OK   D4c the witness w(alpha) lies inside B(top,1)
+OK   D5 R*+e(210-g): on omega(R*); outside B(q1,1), B(q3,1), B(p,1); inside B(top,1)
+OK   D6 lens corners p, R*
+SUMMARY: 9 of 9 OK; plant=off; failing=[]
