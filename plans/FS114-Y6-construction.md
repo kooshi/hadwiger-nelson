@@ -31,9 +31,10 @@ The blade `t_{j+1}`'s sides: `L_j` (from `w_j` to `q_j`), `M_j` (from `q_j` to `
   each; instead the colours at `q_4`, `q_1` and `w_4` were derived from UPDOWN, RAINBOW and N-E1 one colour at a time until the cap `T_4` was forced;
   the exact check was run once, on named wedges, probes and slivers.
 - Stage 3: I would have tried E2 pinwheels at several cone sequences; instead the weakened REDUCE was solved by hand into the families S1–S6.
-  **Disclosed, borderline under the ban's "no scan over a parameter":** I then checked that hand split against the inequalities at every cone sequence
-  on a 5° grid (seconds, exact integers; 155 sequences, all in S1–S6 or `P_x`, none other). It verifies a derived case split and finds no object;
-  nothing rests on it, and it is not kept as a tool. Held for the owner's ruling.
+  **Disclosed ban touch (the owner's ruling, 2026-09-28):** I then checked that hand split against the inequalities at every cone sequence on a
+  5° grid (seconds, exact integers). The owner ruled it a scan over a parameter, hence a ban touch; it is **not evidence**, nothing rests on it, and
+  no tool was kept. Would have scanned; derived instead: the completeness of S1–S6 is the hand case split of §3.2 alone — the conditions are linear in
+  the cones, and the eight cases on which of `α_1`, `α_3`, `α_4` equal `60°` each have the solution set derived there.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -262,7 +263,7 @@ Y5's lemmas, one by one:
   - `α_3, α_4`: S4, with `(120°, 120°, 60°, 60°)` removed.
   - All three: S5.
 
-  (A disclosed grid check agrees; see the log.)
+  The eight cases exhaust the conditions, and each case's set is derived by hand. The grid check in the log is a ban touch and carries no weight.
 
 ### 3.3 Where it bears
 
