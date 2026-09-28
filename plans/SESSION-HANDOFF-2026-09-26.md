@@ -14,6 +14,13 @@ place to start. Current state only; the history is in the documents it points to
      `[Polymath2021]` p. 199 poses FS-112's question. **NEXT: open FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`, rank 1; its
      banner carries four re-aims; re-register its "a YES by formula (0.03)" at the opening). Budgets in briefs are guidance only (Kooshi,
      2026-09-27: *"It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."*).
+  0-morning. **STATE AT 2026-09-28 ~08:30 (read first after a compaction).** FS-112 CLOSED (a9410925). FS-114 (the unit-arc question) and FS-111
+     (the cone scale and the regularity step) OPEN, worked in rounds overnight; **every result, ruling and slip is in `plans/FS114-close-inventory.md`
+     (items 1–119) and `plans/FS111-close-inventory.md` (items 1–37)**; the owner job log has the agent ids. Headline: every valid unit-arc map has a
+     four-colour vertex (two minds) — the NO is C114-LOCAL-F; route T's count reduces non-Siamese maps to K1; the Reuleaux bowtie excluded at √3 and
+     the pinwheel at 1+ε (both sides, blind-verified) outside E1/E2; N7-3T leaves OC and (Q)-rings. FS-111: card 1 two minds (seven ⟺ uniform NO);
+     R7 saturated; REDUCE-C an equivalence; HC_K; the cascade ends at the singular set. Morning report given to Kooshi 08:05. Running at this
+     note: FS114-YB5 (E1CAP blind). Next: a blind check of N7-HUB; then round 7 (OC, (Q)-rings, E1/E2). Rules learned: `memory/owner-briefing-hygiene.md`.
   0a. **THE NIGHT OF 2026-09-27 (Kooshi deferred the choice to a Poros agent, inventory item 70; NIGHT-A decided, `plans/POROS-2026-09-27-night-aim.md`).**
      - **FS-112 is CLOSING, UNDECIDED:** close planner C + C2 done (`plans/FS112-derivation.md`, 56 entries; §R-close drafts; stubs FS-114
        `plans/STUB-global-step.md`, FS-115 `plans/STUB-stuck-ray.md`); **FS112-X (front page) running** (brief `data/fs112/briefs/X112-front-page.md`;
