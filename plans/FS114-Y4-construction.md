@@ -21,6 +21,9 @@ top lune's ring `(30°, 150°)` changes colour once, at `top`"; a ring **free of
 | FS114-Y4-UPDOWN | If `|u − v| = 1`, a tile at `u` with a direction `ψ` at `u` with `cos(ψ − arg(v − u)) > 0` has points within `< 1` of `v`, hence of every tile at `v`: in a non-Siamese map its colour is absent at `v` unless it is that tile | [hand; one mind; the straddle computation of Y3 §2] | §2.2 |
 | FS114-Y4-W | In a non-Siamese simple Reuleaux bowtie the tile along `t1`'s outer side at `q1` and the one at `q2` are **one tile `W`, of colour 3** (the colour of `t3`); `W ⊂ B̄(q1, 1) ∩ B̄(q2, 1)`, so its sector is inside `[300°, 360°]` at `q1` and `[0°, 60°]` at `q2`, pointing toward `r` at both. Likewise `t3`'s outer tile is one tile of colour 1 | [hand; one mind] | §2.2 |
 | FS114-Y4-E2X | In the class with `x ↦ −x` acting as `(1 3)(5 6)` (no `y`-symmetry assumed; FS114-Y3-D2 steps 1–4 hold), **E2 is impossible**: `λ > 60°` makes the sliver between `T1` and `L` colour 3 (colour 6 would straddle `σ_x(L) ∋ top`), and then `W` has colour 6 = `c(X2)` and cannot reach `q2`, contradicting FS114-Y4-W | [hand; one mind] | §2.3 |
+| **FS114-Y4-LUNE** | In a non-Siamese simple valid map with a Reuleaux bowtie at `p`, the two side tiles of each lune differ in colour: `c(X1) ≠ c(X4)`, `c(X2) ≠ c(X3)`; with SIDES the pattern is diagonal (`c(X1) = c(X3)`, `c(X2) = c(X4)`). Proof: a same-colour lune puts two frontier arcs, from the points where `t2` meets `X1` on `S1` and `X4` on `S4`, inside `cl t2` at mutual distance exactly 1 — infinitely many points on two circles | [hand; one mind; YB2-EMPTY13 is its symmetric instance] | §3.1 |
+| **FS114-Y4-DIAG** | In a diagonal bowtie containing neighbourhoods of `top` and `bot`: `top` carries `X1`, `N` (4), `X4`; each `q_i` has exactly five colours with the sliver forced and `X1` starting at exactly `60°`; so the ring of `q1` above `r` forces E1 (`T2 ⊂ [240°, 300°]`), and then `bot`'s sector `(240°, 300°)` has no colour: **no neighbourhood of `r`** | [hand; one mind, over FS112-U1, FS114-Y3-R and YB2-RPREC] | §3.2 |
+| **FS114-Y4-RSTOPALL** | **No non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of the closed unit disc about `p` and of `r`**: RSTOP extends to every Reuleaux bowtie, symmetric or not, Γ-free or ΓRING; none holds a closed disc of radius `√3` about `p`. E1, E2 and E0 are all excluded | [hand; one mind] | §3.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -135,3 +138,80 @@ of colour `c̄(L)`: so `c(V) ≠ c̄(L)`, `c(V) = 3`, `c(W) = c̄(L)`. By FS114-
 `x`-symmetry of this kind**, and FS114-Y4-D2ALL leaves no `y`-symmetry either (E1 in the `x`-symmetric class is not decided here).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: every Reuleaux bowtie is diagonal, and no diagonal bowtie reaches `r`
+
+*Setting as stage 2 (non-Siamese, simple, R-T; a valid fragment containing a neighbourhood of the closed unit disc about `p`, so of `top`, `bot`,
+`q1 … q4` and both lunes). `U` is the top lune, the region of `B(p, 1)` above `t1 ∪ t3`, bounded by `S1` (`t1`'s side `p q1`, the arc `q2 + e(θ)`,
+`θ ∈ [90°, 150°]`), the ring arc of `ω(p)` from `q1` to `q4`, and `S4` (`t3`'s side `p q4`, `q3 + e(θ)`, `θ ∈ [30°, 90°]`). This stage answers my
+brief's item 1 in its second form: E1 and E2 are both impossible, and so is the third escape a four-colour `q1` would give (E0).*
+
+### 3.1 FS114-Y4-LUNE — the two side tiles of a lune differ in colour [hand; one mind]
+
+**Statement.** `c(X1) ≠ c(X4)`, and likewise `c(X2) ≠ c(X3)`. With FS114-Y4-SIDES the pattern is **diagonal**: `c(X1) = c(X3) = a`,
+`c(X2) = c(X4) = ā`, `{a, ā} = {5, 6}` — the pattern of FS114-Y2-BOWTIE and YB2's bowtie, which Y2's record took as a design step.
+
+**Proof.** Suppose `c(X1) = c(X4) = a`; by SIDES `c(X2) = c(X3) = ā`.
+1. *Which tiles meet `U` near `S1`.* Colours 1, 3, 4 are excluded from `int U ⊂ B(p, 1)` (non-Siamese against `t1`, `t3`, `t4`, which have `p` in
+   their closures); colour 2 only as `t2`. An `a`-tile meeting `int U` meets `B(q1, 1)` or `B(q4, 1)` (their union covers `int U`: a point of `U` outside
+   both has polar angle above and below `90°` at once, YB2 §6), so it is `X1` or `X4`; and `X4 ⊂ B̄(q4, 1)` misses `S1` except at `p`
+   (`|q2 + e(θ) − q4|² = 5 + 4cos(θ + 30°) ≥ 1`, equality only at `p`), and `X4 ∌ p`. An `ā`-tile cannot come near `S1` away from `q1`: at a point `z` just
+   outside `ω(q2)` in the direction `θ ∈ (90°, 150°]` from `q2`, the tile `X2` (colour `ā`, sector at `q2` starting at `180°`, bordering `S2` which leaves
+   `q2` at `180°` and curves up) has points `q2 + ρe(ψ)` with `cos(θ − ψ) > 0`, so it straddles `z` (Y3 §2's computation) — and `X2 ⊂ B̄(q2, 1)` itself
+   misses `U`. **So `S1 ∖ {q1}` is bordered on the `U` side by `t2` and `X1` alone**, `t2` from `p` (the tactic edge) and `X1` at `q1`; in a simple map each
+   meets `cl t1` in a connected set, so they meet at one point `c1 ∈ S1`, and `c1 ≠ q1` (`t2 ∌ q1`, by its diameter). Likewise `c4 ∈ S4`, `c4 ≠ q4`.
+2. *The two frontiers.* In a small half-disc `D⁺ = D(c1, s₀) ∩ U` only `t2` and `X1` occur (item 1, with `s₀` small against `X2`'s germ and the angle
+   of `c1` above `90°`). For each `s ∈ (0, s₀)` the semicircle of radius `s` about `c1` in `U` runs from a point of `S1` in `cl t2` to a point of `S1` in
+   `cl X1`; it is connected and covered by the two closed sets, so it holds a point `u_s ∈ cl t2 ∩ cl X1`. Likewise `v_s ∈ cl t2 ∩ cl X4` at distance `s`
+   from `c4`.
+3. *The contradiction.* `X1`, `X4` are distinct tiles of one colour, so `|u_s − v_t| ≥ 1` (non-Siamese: minimum distance at least 1); `u_s`, `v_t ∈ cl t2`,
+   whose diameter is at most 1 (TS-C), so `|u_s − v_t| ≤ 1`. Hence `|u_s − v_t| = 1` for all `s, t`: the infinitely many points `u_s` lie on `ω(v_t)`
+   and `ω(v_{t′})` for two distinct points, which meet in at most two points. ∎
+
+*Where it bears.* YB2-EMPTY13 (the `(1 3)` class is empty) is the symmetric instance; LUNE needs no symmetry, no `top` and no radius beyond a
+neighbourhood of the closed lune and of `q1 … q4`. It is a statement about every non-Siamese simple valid map: **wherever two width-1 Reuleaux triangles
+meet corner to corner at a degree-4 vertex with those germs, the four side tiles are coloured diagonally.**
+
+### 3.2 FS114-Y4-DIAG — a diagonal bowtie has five colours at each `q_i`, `λ = 60°`, and no neighbourhood of `r` [hand; one mind]
+
+Diagonal: `c(X1) = a`, `c(X4) = ā`.
+1. **`top`.** Its sectors: `(0°, 60°)` inside `B(q1, 1)` only; `(60°, 120°)` outside `B(p, 1)`, `B(q1, 1)`, `B(q4, 1)`; `(120°, 180°)` inside `B(q4, 1)`
+   only. Near `top`: 1 and 3 are blocked (`t1`, `t3` point at `top` from `p`); 2 is blocked outside `B(p, 1)` (`t2`); `a` outside `B(q1, 1)` (`X1` has the
+   direction `180°⁻` at `q1`, within 90° of `150°`); `ā` outside `B(q4, 1)` (`X4` has `0°⁺` at `q4`, within 90° of `30°`). So **`(60°, 120°)` is colour 4**,
+   a tile `N` (not `T1 ⊂ B̄(q1, 1)`, not `T4`, not `t4 ⊂ B̄(p, 1)`), and `N ∩ B(q1, 1) = ∅` (non-Siamese against `T1 ∋ q1`). **`(0°, 60°)` is `X1`**: 4 there
+   would be `N`; `ā` is blocked; `a` inside `B(q1, 1)` is `X1` only (UPDOWN). Likewise `(120°, 180°)` is `X4`.
+2. **The `X1 | N` edge** leaves `top` at `60°` and lies on `ω(q1)` (`cl X1 ⊂ B̄(q1, 1)`, `N` outside `B(q1, 1)`), a unit arc about `q1` of length `ℓ > 0`,
+   directions `[150° − ℓ, 150°]`. FS112-U1: `T1`'s sector at `q1` lies in `[240°, 60° − ℓ]`. `X1 ∋ top` has diameter at most 1, so `X1 ⊂ B̄(top, 1)`: its
+   sector at `q1` lies in `[60°, 240°]`, starting at `λ ≥ 60°`.
+3. **Five colours at `q1`.** The gap `(60° − ℓ, 60°)` at `q1` needs a tile `V` whose colour is not 1, 3 (`W`, FS114-Y4-W, `⊂ [300°, 360°]`), 4, `a`, 2
+   (absent): so `c(V) = ā`, and `q1` has exactly the tiles `t1, W, T1, V, X1`. If `λ > 60°`, `V` has directions in `(60°, λ)`, and
+   `|q1 + ρe(ψ) − top|² = 1 + 2ρcos(ψ − 330°) + ρ² < 1` there: `V` is within `< 1` of `top ∈ cl X4`, the same colour `ā`. So **`λ = 60°`** (the sliver is
+   forced, and E2's candidate never starts after `60°`).
+4. **The ring of `q1` just above `r`.** FS114-Y3-R (TRUE as a necessary condition, YB2) with YB2-RPREC: a colour on or just outside the ring point
+   `q1 + e(330° + δ)` must be absent at `q1` or have its `q1`-tile starting strictly after `60°`. Here `t1`, `W`, `T1`, `V` point within 90° of `330° + δ`,
+   and `X1`, tangent at `60°` inside `B̄(top, 1)`, has points `q1 + ρe(60° + g(ρ))`, `g → 0`, with
+   `|z − q1 − ρe(ψ)|² = (1 + ε)² − 2(1 + ε)ρ sin(δ − g) + ρ² < 1` for `z = q1 + (1 + ε)e(330° + δ)`, `ε ≪ ρδ` — it straddles too (YB2's exact check at
+   `ε = 1.15°`, `5.71°` is an instance). So the colour is 2, and (ii) forces **E1: `T2 ⊂ [240°, 300°]`** (its cone is `[240°, 60° − β₂]`).
+5. **`bot`.** Its sector `(240°, 300°)` lies outside `B(p, 1)`, `B(q2, 1)`, `B(q3, 1)`. There 1, 3, 4 are blocked (`t1`, `t3`, `t4` point at `bot` from `p`);
+   2 is blocked (`T2 ⊂ [240°, 300°]` has directions within 90° of `210°`, the direction from `q2` to `bot`); `c(X2) = ā` is blocked (`X2` has `180°⁺` at `q2`);
+   `c(X3) = a` is blocked (`X3` has `360°⁻` at `q3`, within 90° of `330°`). **No colour is left.** ∎
+
+### 3.3 FS114-Y4-RSTOPALL — the Reuleaux bowtie never reaches `r` [hand; one mind]
+
+**No non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about `p` and a neighbourhood of `r` holds a Reuleaux bowtie
+at `p`** (LUNE: diagonal; DIAG: then no `r`). By the bowtie's own symmetries the same holds at `−r = q3 + q4` and, with `t2` and `t4` in the roles of the
+Reuleaux triangles' outer tiles, nowhere else is needed. **So no Reuleaux bowtie fragment holds a closed disc of radius `√3` about `p`**, whatever its
+lune rings carry: this answers my brief's item 1 in its second form (E1 and E2 impossible — and E0, which four colours at `q1` would give, is excluded
+by DIAG step 3's forced five), and item 2 at radius `√3` (the bowtie with a lune ring carrying arcs of `ω(p)` stops there too — K1-ΓRING at `√3`), and
+it re-derives the proof side's N4-BOWTIE (Γ-free rings, radius `√3`) by another route. It does **not** decide K1: the pinwheel, the `(2, 1, 1, 0)`
+patterns and non-Reuleaux lenses are untouched, and the bound is `√3`, not a smaller radius.
+
+**What it uses.** Non-Siamese (one tile per colour at a vertex; distinct same-colour tiles at least 1 apart); simple (SIDES' and W's `X1 ≠ W1`, LUNE's
+single switch point — the non-simple case is not covered); R-T only through the colours it puts at the centres (4 at `q1`, 2 at `q2`, the cones of `T1`,
+`T2`); FS112-U1 (two minds), FS114-Y3-R with YB2-RPREC (two minds), TS-C. No symmetry, no radius beyond `√3`, no count.
+
+**Audit (G21), the steps a second mind should try first:** LUNE item 1 (that nothing but `t2` and `X1` borders `S1`: the `ā` block near `S1` needs `X2`'s
+germ to reach below the direction `θ + 90°`, which holds because `S2` curves up from `q2`); DIAG step 1 (the colour list at `top`'s sector `(60°, 120°)`);
+DIAG step 4 (the tangent case of `X1` at `60°`); DIAG step 5 (the colour list at `bot`'s `(240°, 300°)`).
+
+## Stage 3 — SAVED
