@@ -1,0 +1,14 @@
+# FS114-YB2 quotation check: id, source, quotation (as it stands in my brief, the standing rules, or the claim list)
+SR0	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.
+SR3a	CLAUDE.md	to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time
+SR3b	CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.
+SR4	CLAUDE.md	A proven theorem about why its impossible is also valid. All novel knowledge is a success
+SR10	plans/CONSOLIDATION-2026-09-27.md	It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.
+VALID	plans/FS112-derivation.md	A map is **valid** when it is a locally finite map of the plane bounded by segments and circular arcs, **arcs of radius 1 allowed** (Condition 5 dropped), carrying a six-colouring in which no two interior points of one colour are at distance exactly 1.
+SIAM	data/fs112/fs112-pa/extracts.md	tiles that lie entirely within each other’s annulus of exclusion
+U1	plans/FS112-derivation.md	At a unit arc `α ⊂ ω(P)` of angular length `ℓ`, an inner side colour in `P_cl(P)` has its sectors at `P` in the closed cone of width `π − ℓ` facing `α`, an outer one in the closed cone facing away; both side cones hold neither; the outer tile's first-order shadow near `P` contains the open facing cone of width `π + ℓ`.
+SIX	plans/FS112-derivation.md	A vertex with five colours has unit arcs centred at it of total length at least 180°; with six, its whole unit circle lies in `Γ`, every arc of kind both.
+A4SIX	plans/FS112-derivation.md	A four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred at it of total length at least 60°, or at least six, one in each of six consecutive 60° windows (C-UA-BUDGET, branch 1).
+R2K1	data/fs114/briefs/ROUND2-card.md	**K1**: a degree-4 vertex of a non-Siamese valid map has at most two tactic edges.
+DENSE3	plans/FS112-derivation.md	Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.
+Q2	data/fs114/claims.md	Is it true that 7 colors are needed to color a locally finite map in the plane if the boundaries can be arcs of unit circles and if trichromatic vertices of degree greater than 3 are allowed?
