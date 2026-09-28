@@ -414,3 +414,279 @@ statement the answer restated; its successors FS-120–FS-122. Its closed banner
 FS-114's close writes (FS-114, FS-115, FS-104 and others) are drafted in §D8 for the coordinator to file.
 
 **New keys the stubs and the derivation file cite:** `[Walther1999]`, `[Kershner1939]` (and those the brief lists) — rows drafted in §D5.
+
+## Drafts for the front page
+
+*Stage 6. Each draft is written to be filed as it stands. Row numbers are placeholders `‹R111-a›`–`‹R111-c›` for the coordinator to number after
+FS-114's rows. "Two minds, one blind" follows § Stage 2's blindness rules.*
+
+### D1. `LEDGER.md`
+
+**§ A, three rows** (row text, then the addresses cell, then the milestone cell):
+
+| ‹R111-a› | **Stability at six: the doors are two routes, not halves, and each route's third statement is the answer restated. Seven, `χ_m⁰(ℝ²) ≥ 7`, is the map NO made uniform in the complexity bound: `1 − lim µ₆(ε) = inf_K δ₀(K)`, `δ₀(K)` the least hole density band-proper designs of complexity `≤ K` approach, so a hole bound uniform in `K` is seven itself (FS111-C1-UNIF); row 134 with FS-114's NO bounds holes at each `K` and only there (C1-PW). So FS-114's NO plus the cone scale gives seven only through a third statement (C1-GAP, corrected): on route M — the NO with the map step, the tight limit made a segment-and-arc map — it is REG-A₆, equivalent to seven given the NO (C-REG-EQ); on route R — FS107-R-CP with (A) at every complexity and (B), the NO idle — it is A-ALL, equivalent to seven outright (W-NEG); in sequence form it is F′ (V0-BRIDGE). A tight `k`-colouring exists iff `χ_m⁰(ℝ²) ≤ k` (V0-RESCALE). No wild object refutes an existence rung: each holds at `k ≥ 7` and fails at `k ≤ 6` only if `χ_m⁰(ℝ²) ≤ k` (W-NEG). A cone-scale bound does not bound complexity (V0-WIGGLE, V0-WIG7); B-NONABS is FALSE as written; HX carries complementary blocking pairs whose unit points lie in its voids (FS-107's "K-C6 vacuous" corrected by erratum). It moves no value** (FS-111; FS111-C1-UNIF, C1-PW, C1-GAP, C1-FALS, C1-ROUTES, C-SEVEN-M, C-SIX-M, C-REG-EQ, V0-RESCALE, V0-CLEAN, V0-CLOSE, V0-WIGGLE, V0-WIG7, V0-FLIT, V0-BRIDGE, W-NEG, W-B-NONABS, W-HX-PAIRS, W-SEA-PACK). **[hand; C1-UNIF, C1-PW, C1-ROUTES, C-SEVEN-M, C-SIX-M, C-REG-EQ, C1-FALS and W-NEG two minds, one blind (P and V0; W and VMW); C1-GAP as corrected, the V0 lemmas, B-NONABS's refutation, HX-PAIRS and SEA-PACK one mind]** Mechanism: the complexity bound filters all of H-EQ's grid colourings, so a statement at each `K` is pointwise and seven is its uniformity; notching raises complexity at no cost, so no statement about junctions bounds complexity. **Not claimed:** that Q-NO ∧ (B) fails to give seven (a non-implication no argument here establishes); any third statement; any value. **Prior art:** `[Voronov2023]` Prop. 2.1 regularises at positive slack and its §1 calls the measurable problem "substantially more difficult"; the equivalence along complexity and the two-route reading not found in print (FS-111's gate, `plans/FS111-cone-scale.md` § Stage 4). | `plans/FS111-derivation.md` (card 1; round 1); `plans/FS111-cone-scale.md` §2; `plans/FS111-V0-verification.md`; `plans/FS111-W-wild.md` §1.4, §3; `plans/FS111-VMW-verification.md` §1.9; `tools/fs111_v0_hex.py` | FS-111 (2026-09-28) |
+
+| ‹R111-b› | **Route M's rungs: saturation pins interfaces between unit circles, maximal covers are free, and at five the map step is a reformulation. In a saturated colouring every two-colour interface point (H1, H2) lies on a unit arc whose centre carries both colours or on a `C^{1,1}` curve with `\|κ\| ≤ 1` between two tangent unit discs; (in, in) is impossible and no partner density is needed (FS111-M-PINCH, M-C11); on saturated maps without cusps there is no bend and no colour repeated at a vertex. De Grey's Reuleaux 4 + 3 seven-colouring (R7) is saturated in the strongest sense and a maximal cover; square and hexagonal nine-colourings are saturated. Every a.e.-proper colouring lies below a maximal cover (Zorn), whose classes are maximal unit-avoiding sets; a regular one is a fixed point of its own unit shadow, `int F = ℝ² ∖ (F + S¹)`, carved by its own unit circles, semiconcave, of finite perimeter (M2-FIX, M2-HULLC); a regular maximal partition is a measurable fall colouring and saturated, and selecting from a cover is a choice of whole components, blocked by a lens (DISC7). At five, a maximal cover with regular classes whose boundaries form a locally finite plane graph gives `χ_m⁰(ℝ²) ≥ 6` through the held "maps need six" (M2-REDUCE-C) — and that statement is equivalent to `χ_m⁰(ℝ²) ≥ 6` (VM2-EQ5): a reformulation, not a step toward six. At six, off a locally finite singular set, saturated interfaces have integer radii (M2-INTRAD), so the map step needs that set's local finiteness and no large-radius accumulation — FS-115's stuck ray. Universal forms fail: tight block structure at seven (DECO-B, two objects); arcs on covers (a constant-width seven-cover, DISCK7, in the corrected orientation). It moves no value** (FS-111; FS111-C-FILL, C-HULL, V0-ID1, M-SATC, M-SLACKFREE, M-R7, VMW-R7-MAX, VMW-R7-PPLUS, M-R7-FORCE, M-DEADLOCK, M-PINCH, M-C11, W-NOBEND, W-NOREP, W-HULLREG-MAPS, M-EXTREME, M-COVER-SC, M-HALF, M-POLAR, M-HULL2, M-BLOCK-EQ, M-REDUCE-I, W-SQ9, W-HEX9, W-KB-DIR, W-LADDER, W-HEXSAT, W-FILL-FREE, W-HEX7-RIGID, W-DECO-B, M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-DISC7, M2-HULLC, M2-EXTREME-C, M2-SELCOMP, M2-NOSEL, M2-REDUCE-C, VM2-EQ5, M2-INTRAD, M2-REDUCE-A, M2-DISCK7, M2-KERSHNER, VM2-STRIP-MID; C-HULL-SO and M2-DISCK7-AS-PLACED refuted; C-SAT-T-HONEST, REG-JP-C5, REG-A6 GAP). **[hand + tools exact; M-PINCH and M-C11 three minds (M; W, blind to M; VMW, blind); C-FILL, C-HULL, M-R7, M-HULL2, M-BLOCK-EQ, M-REDUCE-I, W-NOBEND, W-SQ9, W-HEX9, W-DECO-B, M2-INT, M2-FIX, M2-DISC7, M2-HULLC, M2-SELCOMP, M2-NOSEL, M2-REDUCE-C, VM2-EQ5, M2-REDUCE-A and M2-DISCK7 corrected two minds, one blind; M2-INTRAD two on its core, its finiteness step one (VM2); the rest one mind]** Mechanism: a contact partner at distance exactly 1 puts a unit disc on each side of a saturated boundary; maximality is the same fact written as a set identity. **Not claimed:** honest saturation at five or six (GAP); the singular set's local finiteness at five or six; the map step; a NO for self-parallel boundaries (NO-PAR); any value. **Prior art:** R7 is `[Polymath16threads]` thread 4 (de Grey, 5 May 2018), its saturation named informally in thread 12 (Hockertz, 2019); the rolling-ball step is classical (`[Walther1999]`, listing only); maximal unit-avoiding sets and measurable fall colourings of the plane not found in print (zbMATH, seven queries, `plans/FS111-C-close.md` § Stage 3); the one-class block-structure question is Cohen–Mani's open Question 5.1 (`[CohenMani2025]` §5), unanswered here. | `plans/FS111-derivation.md` (round 1; round 2; the named gaps); `plans/FS111-M-regularity.md`; `plans/FS111-W-wild.md` §1.5, §2; `plans/FS111-VMW-verification.md`; `plans/FS111-M2-regularity.md`; `plans/FS111-VM2-verification.md`; `tools/fs111_m_reuleaux7.py`, `tools/fs111_w_check.py`, `tools/fs111_w_blocks.py`, `tools/fs111_vmw_decow.py`, `tools/fs111_vm2_disc7.py`, `tools/fs111_vm2_intrad.py` | FS-111 (2026-09-28) |
+
+| ‹R111-c› | **The finiteness rung: a maximal class is as wild as its bands' zero sets, and in a fall colouring a pinch climbs a short ladder toward a junction. A regular maximal unit-avoiding set can have infinitely many interior components in a bounded set (HC_K: unit triangles on a honeycomb of edge `2 + √3/3`, bands of length 1 vanishing on a Cantor set, discs of radius `1/2` at the face centres; exact in ℚ(√3), FS111-M3-HC), and with a fat Cantor set every maximal completion is irregular (M3-IRREG); a small move of one class removes the pinch (M3-MOVE). In a regular maximal partition the pinch passes to both neighbouring classes one unit away on the same set (M4-LADDER); the ladder of unit parallels is ordinary for at most `1/(2c)` rungs up and, given unit discs rolling from below, `≲ w²/(8h)` down (M4-CUT); a pinch-removing move runs along it with every class forced and no spare colour at any `k`, ending where the ladder stops — at a junction, a class with disconnected local parts, or an irregular class; whether it is absorbed there is open (GAP; FS-120). It moves no value** (FS-111; FS111-M3-VAC, M3-HC, M3-FIN-U, M3-D3, M3-MOVE, M3-COVER, M3-CASCADE, M3-IRREG, M3-FIXCONV, M3-BAND, M4-LADDER, M4-CUT, M4-HC, M4-MOVE; MUA-FIN-L GAP). **[hand + tools exact; one mind each (M3; M4), no verifier; M4-CUT's downward half conditional]** Mechanism: a flat side facing its own class across 2 needs material at distance exactly 1 — a band whose thickness maximality does not fix. **Not claimed:** a partition with a pinched class (none built); MUA-FIN-L; that every maximal cover can be made regular. **Prior art:** fall colourings (Dunbar et al. 2000, finite graphs); closing and opening by discs (Matheron, Serra; unread); the objects and the ladder not found in print. | `plans/FS111-derivation.md` (rounds 3–4; the named gaps); `plans/FS111-M3-finiteness.md`; `plans/FS111-M4-cascade.md`; `tools/fs111_m3_honey.py`, `tools/fs111_m4_rungs.py` | FS-111 (2026-09-28) |
+
+**Corrections to existing rows:**
+- **Row 130**, in its **Prior art**: *"the Rajchman step not searched (N) — a debt"* → *"the Rajchman step is in print for one class: `[Bukh2008]` Lemma 12 (support selection) and Cohen–Mani's Lemma 2.4 with its `ℓ∞` counterexample, Remark 2.5 (`[CohenMani2025]` §2.3, crediting Bourgain 1986 and Bukh); its `k`-class form not found (FS-111's gate)"*.
+- **Row 131**, in its **Prior art**: *"the Rajchman step not found in print"* → *"the Rajchman step is in print for one class (`[Bukh2008]` Lemma 12; `[CohenMani2025]` Lemma 2.4 and Remark 2.5, crediting `[Bourgain1986]`); its `k`-class form not found"*.
+- **Row 133**: *"So stability at six is two questions: does a tight six-map with only tangent, bowtie or cusp seams exist (FS-110; …), and do near-optimal colourings keep a cone scale (FS-111)."* → *"So stability at six has two routes, each needing a third statement (row ‹R111-a›): route M, the map NO (FS-110's question, then FS-114's) with the map step; route R, (A) at every complexity with (B), the map NO idle."* (the parenthesis on FS-110's YES and NO kept as it stands).
+- **Row 136**, one clause for its **Not claimed**: *"saturation — the strip is tight but not saturated on its midline (FS111-VM2-STRIP-MID, exact)"*.
+
+**§ B, one line per entry of `plans/FS111-derivation.md`** (the table's columns: id | row | the theorem, in one line | grade | proof | kernel):
+
+| FS111-C1-UNIF | ‹R111-a› | `1 − lim µ₆(ε) = inf_K δ₀(K)`; seven iff `inf_K δ₀(K) > 0` | hand; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C1-UNIF | queued (FS-113) |
+| FS111-V0-CLEAN | ‹R111-a› | W-EQ-K's limit tiling cleans to an S–V map-type segment-and-arc colouring | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-CLEAN | declined |
+| FS111-V0-CLOSE | ‹R111-a› | in a D-AEMAP-proper map a closure point of a colour-`j` region is never at distance 1 from an open colour-`j` point | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-CLOSE | declined |
+| FS111-C1-PW | ‹R111-a› | Q-NO ⟹ `δ₀(K) > 0` for every `K` | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C1-PW | declined |
+| FS111-V0-WIGGLE | ‹R111-a› | notching raises a band-proper design's complexity without bound at fixed slack and cones, `O(α²)` in holes | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-WIGGLE | declined |
+| FS111-V0-WIG7 | ‹R111-a› | a tight seven-colouring with fat junctions and arbitrary smooth interfaces | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-WIG7 | declined |
+| FS111-V0-FLIT | ‹R111-a› | the card's falsifier as written holds iff no hole-vanishing family keeps cone scale `≥ s₀` | derived; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-FLIT | declined |
+| FS111-C1-FALS | ‹R111-a› | "cone scale `≥ s₀` ⟹ bounded complexity" false on the sequence; "fat junctions ⟹ arcs" false on tight seven-colourings | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C1-FALS | declined |
+| FS111-V0-BRIDGE | ‹R111-a› | Q-NO ∧ B_fam ∧ F′ ⟹ seven ⟹ F′ | derived; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-BRIDGE | declined |
+| FS111-C1-GAP | ‹R111-a› | for each reading of (B) a `T_r` with Q-NO ∧ (B) ∧ `T_r` ⟹ seven ⟹ `T_r`; the composition is open (corrected) | derived; one mind: V0 (the location two) | `plans/FS111-derivation.md` FS111-C1-GAP | declined |
+| FS111-V0-RESCALE | ‹R111-a› | a tight a.e.-proper `k`-colouring exists iff `χ_m⁰(ℝ²) ≤ k` | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-RESCALE | queued (FS-113) |
+| FS111-C-SEVEN-M | ‹R111-a› | Q-NO ∧ REG-A₆ ⟹ `χ_m⁰(ℝ²) ≥ 7` | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C-SEVEN-M | declined |
+| FS111-C-SIX-M | ‹R111-a› | AE-MAP6 ∧ REG-I₅ ⟹ `χ_m⁰(ℝ²) ≥ 6` | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C-SIX-M | declined |
+| FS111-C-REG-EQ | ‹R111-a› | given the NO at `k`, REG's top rung at `k` is equivalent to the answer at `k` | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C-REG-EQ | declined |
+| FS111-C1-ROUTES | ‹R111-a› | route R (CP + A-ALL + B-RR, the NO idle) and route M (the NO + REG-A₆); the front page's composition misses a piece of each | derived; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C1-ROUTES | declined |
+| FS111-C-FILL | ‹R111-b› | a fill with a colour free at a point keeps a.e.-properness | hand; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C-FILL | queued (FS-113) |
+| FS111-C-HULL | ‹R111-b› | a path-connected piece of a class lies at distances all `< 1` or all `> 1` from each point of the class's essential closure | hand; two minds: P; V0, blind | `plans/FS111-derivation.md` FS111-C-HULL | queued (FS-113) |
+| FS111-C-HULL-SO | ‹R111-b› | C-HULL's sup/dist form for non-compact pieces — refuted by the hexagonal seven-colouring at a vertex | refuted; exact; one mind: V0 | `plans/FS111-derivation.md` FS111-C-HULL-SO | declined |
+| FS111-V0-ID1 | ‹R111-b› | I-D1 for every a.e.-proper measurable colouring | hand; one mind: V0 | `plans/FS111-derivation.md` FS111-V0-ID1 | queued (FS-113) |
+| FS111-M-SATC | ‹R111-b› | every a.e.-proper colouring lies below a maximal admissible cover; `ℝ² = int F_j ∪ (F_j + S¹)` | hand; one mind: M | `plans/FS111-derivation.md` FS111-M-SATC | queued (FS-113) |
+| FS111-M-SLACKFREE | ‹R111-b› | slack makes every point free; a saturated colouring is tight | hand; one mind: M | `plans/FS111-derivation.md` FS111-M-SLACKFREE | declined |
+| FS111-M-R7 | ‹R111-b› | de Grey's Reuleaux 4 + 3 seven-colouring is a.e.-proper, tight and saturated | tools, exact in ℚ(√3); two minds: M; VMW, blind | `plans/FS111-derivation.md` FS111-M-R7 | on demand |
+| FS111-VMW-R7-MAX | ‹R111-b› | R7 admits no fill of any colour at any point; a maximal cover with disjoint classes | hand; one mind: VMW | `plans/FS111-derivation.md` FS111-VMW-R7-MAX | declined |
+| FS111-VMW-R7-PPLUS | ‹R111-b› | R7 is not saturated with positive-density partners (a named point) | tools, exact at one point, 69 sampled; one mind: VMW | `plans/FS111-derivation.md` FS111-VMW-R7-PPLUS | declined |
+| FS111-M-R7-FORCE | ‹R111-b› | on the up/down Reuleaux tiling saturation forces the down classes onto cosets; 4 + 3 minimal | hand; one mind: M | `plans/FS111-derivation.md` FS111-M-R7-FORCE | declined |
+| FS111-M-DEADLOCK | ‹R111-b› | the hexagonal seven-colouring cannot be saturated by local modification at an edge midpoint | hand; one mind: M | `plans/FS111-derivation.md` FS111-M-DEADLOCK | declined |
+| FS111-M-PINCH | ‹R111-b› | a saturated two-colour interface point is on a unit arc of kind both or between two tangent unit discs; (in, in) impossible | derived; three minds: M; W, blind to M; VMW, blind | `plans/FS111-derivation.md` FS111-M-PINCH | queued (FS-113) |
+| FS111-M-C11 | ‹R111-b› | such interfaces are `C^{1,1}` with `\|κ\| ≤ 1` and unit-parallel partners | derived; three minds: M; W; VMW | `plans/FS111-derivation.md` FS111-M-C11 | queued (FS-113) |
+| FS111-W-NOBEND | ‹R111-b› | no bend; curvature at most 1 | derived; two minds: W; VMW, blind | `plans/FS111-derivation.md` FS111-W-NOBEND | declined |
+| FS111-W-NOREP | ‹R111-b› | on saturated maps without cusps no colour occupies two sectors at a vertex | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-NOREP | declined |
+| FS111-W-HULLREG-MAPS | ‹R111-b› | C-HULL-REG holds on saturated maps without cusps | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-HULLREG-MAPS | declined |
+| FS111-M-EXTREME | ‹R111-b› | every region of an honest saturated colouring has two singular points on its minimal enclosing circle | derived; one mind: M | `plans/FS111-derivation.md` FS111-M-EXTREME | declined |
+| FS111-M-COVER-SC | ‹R111-b› | a maximal cover's boundary pieces lie in enclosing or outside exterior unit discs; semiconcave with constant 1 | derived; one mind: M | `plans/FS111-derivation.md` FS111-M-COVER-SC | declined |
+| FS111-M-HALF | ‹R111-b› | no colour takes a reflex angle at a saturated point | derived; one mind: M | `plans/FS111-derivation.md` FS111-M-HALF | declined |
+| FS111-M-POLAR | ‹R111-b› | at a saturated point each piece's blow-up lies in its contacts' polar cone | derived; one mind: M | `plans/FS111-derivation.md` FS111-M-POLAR | declined |
+| FS111-M-HULL2 | ‹R111-b› | two path-connected pieces of one class are near (all `< 1`) or far (all `> 1`) | derived; two minds: M; VMW, blind | `plans/FS111-derivation.md` FS111-M-HULL2 | declined |
+| FS111-M-BLOCK-EQ | ‹R111-b› | tight block structure iff "near" is transitive | derived; two minds: M; VMW, blind | `plans/FS111-derivation.md` FS111-M-BLOCK-EQ | declined |
+| FS111-M-REDUCE-I | ‹R111-b› | REG-I_k ⟸ honest saturation ∧ REG-J′_k (finitely many arcs at each point of Σ) | derived; two minds: M; VMW, blind | `plans/FS111-derivation.md` FS111-M-REDUCE-I | declined |
+| FS111-W-NEG | ‹R111-a› | existence rungs TRUE at `k ≥ 7`, their failure at `k ≤ 6` is `χ_m⁰ ≤ k`; A-ALL iff seven | derived; two minds: W; VMW, blind | `plans/FS111-derivation.md` FS111-W-NEG | declined |
+| FS111-W-SQ9 | ‹R111-b› | squares of side `1/2` coloured mod 3 × mod 3: a saturated tight nine-colouring | tools, exact; two minds: W; VMW, blind | `plans/FS111-derivation.md` FS111-W-SQ9 | declined |
+| FS111-W-HEX9 | ‹R111-b› | hexagons of width `1/2` coloured by `Λ′/3Λ′`: a saturated tight nine-colouring | tools, exact; two minds: W; VMW, blind | `plans/FS111-derivation.md` FS111-W-HEX9 | declined |
+| FS111-W-KB-DIR | ‹R111-b› | at the centre of a unit arc of kind both the inner colour's sector points toward the arc | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-KB-DIR | declined |
+| FS111-W-LADDER | ‹R111-b› | a flat edge of a saturated map carries interfaces at every unit translate, `β_{k+1} = τ_{k−1}` | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-LADDER | declined |
+| FS111-W-HEXSAT | ‹R111-b› | hexagonal tilings are saturable only at width `1/m`; nine at `1/2`; hex7 and brick7 not recolourable to saturated | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-HEXSAT | declined |
+| FS111-W-FILL-FREE | ‹R111-b› | a fill never creates a contact for the filled colour | derived; one mind: W | `plans/FS111-derivation.md` FS111-W-FILL-FREE | declined |
+| FS111-W-HEX7-RIGID | ‹R111-b› | no local modification of the hexagonal seven-colouring creates a junction or island | hand, sampled exact check; one mind: W | `plans/FS111-derivation.md` FS111-W-HEX7-RIGID | declined |
+| FS111-W-DECO-B | ‹R111-b› | a tight seven-colouring no class of which has tight block structure | tools, exact; two minds: W; VMW, blind, two objects | `plans/FS111-derivation.md` FS111-W-DECO-B | declined |
+| FS111-W-B-NONABS | ‹R111-a› | B-NONABS (a `δ`-dependent cone-scale bound) — refuted by a scaling fragment | refuted; one mind: W | `plans/FS111-derivation.md` FS111-W-B-NONABS | declined |
+| FS111-W-HX-PAIRS | ‹R111-a› | HX carries complementary blocking pairs whose unit points lie in its voids | tools, float with margins; one mind: W | `plans/FS111-derivation.md` FS111-W-HX-PAIRS | declined |
+| FS111-W-SEA-PACK | ‹R111-a› | the sea–island design admits no size with single-hexagon sea pieces | hand; one mind: W | `plans/FS111-derivation.md` FS111-W-SEA-PACK | declined |
+| FS111-M2-COV | ‹R111-b› | a maximal cover is `k` maximal unit-avoiding sets covering the plane | hand; one mind: M2 | `plans/FS111-derivation.md` FS111-M2-COV | queued (FS-113) |
+| FS111-M2-ZERO | ‹R111-b› | `A` is maximal unit-avoiding iff `A = {φ_A = 0}` a.e. | hand; one mind: M2 | `plans/FS111-derivation.md` FS111-M2-ZERO | queued (FS-113) |
+| FS111-M2-INT | ‹R111-b› | `int Ã` has no point at distance 1 from `cl Ã` | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-INT | queued (FS-113) |
+| FS111-M2-FIX | ‹R111-b› | a regular MUA set satisfies `int F = ℝ² ∖ (F + S¹)` | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-FIX | queued (FS-113) |
+| FS111-M2-DISC7 | ‹R111-b› | hex7's circumscribed discs: a maximal seven-cover with lenses at Kershner's density | tools, exact; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-DISC7 | declined |
+| FS111-M2-HULLC | ‹R111-b› | regular maximal classes are carved by their own unit circles, semiconcave, of finite perimeter; semiconvexity fails | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-HULLC | queued (FS-113) |
+| FS111-M2-EXTREME-C | ‹R111-b› | M-EXTREME is false on maximal covers (DISC7) | derived; one mind: M2 | `plans/FS111-derivation.md` FS111-M2-EXTREME-C | declined |
+| FS111-M2-SELCOMP | ‹R111-b› | saturated selections from a cover are whole-component choices; a regular maximal partition is saturated | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-SELCOMP | declined |
+| FS111-M2-NOSEL | ‹R111-b› | DISC7 has no saturated selection (the lens) | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-NOSEL | declined |
+| FS111-M2-REDUCE-C | ‹R111-b› | a regular locally finite maximal `k`-cover gives REG-I_k; at five, with AE-MAP6, `χ_m⁰ ≥ 6` | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-REDUCE-C | queued (FS-113, FS-108) |
+| FS111-VM2-EQ5 | ‹R111-b› | given AE-MAP6, that cover statement at five holds iff `χ_m⁰(ℝ²) ≥ 6` (a reformulation) | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-VM2-EQ5 | declined |
+| FS111-M2-INTRAD | ‹R111-b› | off a locally finite Σ saturated interfaces have integer radii of curvature | derived; two minds on (i)–(ii): M2; VM2, blind; (iii) one: VM2 | `plans/FS111-derivation.md` FS111-M2-INTRAD | queued (FS-113) |
+| FS111-M2-REDUCE-A | ‹R111-b› | REG-A_k ⟸ REG-J′_k ∧ ¬LRA | derived; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-REDUCE-A | declined |
+| FS111-M2-DISCK7 | ‹R111-b› | a non-circular constant-width seven-cover (corrected orientation): the cover form of REG-A is false at seven | tools, exact; two minds: M2; VM2, blind | `plans/FS111-derivation.md` FS111-M2-DISCK7 | declined |
+| FS111-M2-DISCK7-AS-PLACED | ‹R111-b› | DISCK7 at M2's record's lattice — refuted: not a cover | refuted; exact; one mind: VM2 | `plans/FS111-derivation.md` FS111-M2-DISCK7-AS-PLACED | declined |
+| FS111-M2-KERSHNER | ‹R111-b› | no admissible five-cover by unions of discs of radius `1/2` | hand, over Kershner 1939; one mind: M2 | `plans/FS111-derivation.md` FS111-M2-KERSHNER | declined |
+| FS111-VM2-STRIP-MID | ‹R111-b› | row 136's strip is not saturated on its midline | tools, exact; one mind: VM2 | `plans/FS111-derivation.md` FS111-VM2-STRIP-MID | declined |
+| FS111-M3-VAC | ‹R111-c› | M2-PINCH-C's hypothesis is unsatisfiable | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-VAC | declined |
+| FS111-M3-HC | ‹R111-c› | the honeycomb class HC is a regular MUA set for every admissible gap function | tools, exact; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-HC | declined |
+| FS111-M3-FIN-U | ‹R111-c› | some regular MUA set has infinitely many interior components in a bounded set (HC_K) | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-FIN-U | declined |
+| FS111-M3-D3 | ‹R111-c› | HC_K satisfies MUA-FIN in M2's words and fails it with the endpoints clause | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-D3 | declined |
+| FS111-M3-MOVE | ‹R111-c› | arbitrarily small single-class moves remove HC-type pinches | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-MOVE | declined |
+| FS111-M3-COVER | ‹R111-c› | in a maximal cover the move survives iff the lost sliver is covered | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-COVER | declined |
+| FS111-M3-CASCADE | ‹R111-c› | in a maximal partition every gaining class loses its old material at distance 1 | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-CASCADE | declined |
+| FS111-M3-IRREG | ‹R111-c› | with a fat Cantor band every maximal completion is irregular | hand; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-IRREG | declined |
+| FS111-M3-FIXCONV | ‹R111-c› | the converse of the shadow identity fails | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-FIXCONV | declined |
+| FS111-M3-BAND | ‹R111-c› | a flat side needs its class at distance exactly 1 over its middle half; bands of length `≤ 1` | derived; one mind: M3 | `plans/FS111-derivation.md` FS111-M3-BAND | declined |
+| FS111-M4-LADDER | ‹R111-c› | in a saturated partition a pinched layer pinches both neighbouring classes one unit away on the same set | derived; one mind: M4 | `plans/FS111-derivation.md` FS111-M4-LADDER | stub (FS-120) |
+| FS111-M4-CUT | ‹R111-c› | an ordinary ladder has `≤ 1/(2c)` rungs up and, given rolling from below, `≲ w²/(8h)` down | derived; one mind: M4 | `plans/FS111-derivation.md` FS111-M4-CUT | stub (FS-120) |
+| FS111-M4-HC | ‹R111-c› | HC_K fits no regular maximal partition with an ordinary ladder through three rungs | tools, exact; one mind: M4 | `plans/FS111-derivation.md` FS111-M4-HC | declined |
+| FS111-M4-MOVE | ‹R111-c› | a pinch-removing move cascades along the ladder with forced classes, no spare colour at any `k` | derived; one mind: M4 | `plans/FS111-derivation.md` FS111-M4-MOVE | stub (FS-120) |
+| FS111-C-SAT-T-HONEST | ‹R111-b› | honest saturation at five and six — GAP from a maximal cover to an honest colouring | GAP; two minds on its location: M; VMW, blind | `plans/FS111-derivation.md` FS111-C-SAT-T-HONEST | stub (FS-121) |
+| FS111-REG-JP-C5 | ‹R111-b› | a regular locally finite maximal five-cover from a tight five-colouring — GAP at MUA-REG-P and MUA-FIN | GAP; the answer restated given AE-MAP6 | `plans/FS111-derivation.md` FS111-REG-JP-C5 | stub (FS-121) |
+| FS111-MUA-FIN-L | ‹R111-c› | a pinch in a regular maximal partition removed locally — GAP at the singular set | GAP; one mind: M4 | `plans/FS111-derivation.md` FS111-MUA-FIN-L | stub (FS-120) |
+| FS111-REG-A6 | ‹R111-b› | the map step at six — GAP at honest saturation, REG-J′₆ and ¬LRA, or MUA-FIN and NO-PAR | GAP; the answer restated given FS-114's NO | `plans/FS111-derivation.md` FS111-REG-A6 | stub (FS-121) |
+
+**The census check (the brief's instruction, TB1 done at `95efed69`):** `tools/fs71_ledger_b_check.py --strict` on a scratch tree (the checker, the
+gate, `LEDGER.md`, every `plans/*-derivation.md` except FS-114's, whose § B lines are FS-114's close's to file): **without** the lines above,
+`RESULT: FAIL (85)` — one per FS-111 entry, so the check can fire; **with** them, **exit 0, `RESULT: PASS`** (1,088 § B rows, 0 placeholders).
+
+### D2. `CLAUDE.md`
+
+**My clauses for the four shared units** (each written to stand at FS114-C's marker `‹FS-111›`):
+1. *"Last updated" line:* **FS-111, the cone scale and the regularity step, closed undecided** (rows ‹R111-a›–‹R111-c›): the doors are two routes, each third statement the answer restated
+2. *Open-milestones line:* FS-111 closed (rows ‹R111-a›–‹R111-c›); its successors FS-120, FS-121 and FS-122 (`plans/STUB-pinch-at-junction.md`, `plans/STUB-map-step.md`, `plans/STUB-forced-pair.md`) await Poros's rank
+3. *§ The aim, the programme line* — replacing "**FS-111, the cone scale** — the same at unbounded complexity": **FS-111, the cone scale and the regularity step — closed** (rows ‹R111-a›–‹R111-c›); its successors **FS-120, the pinch at a junction**, **FS-121, the map step**, **FS-122, the forced pair**
+4. *"Where the problem stands" item 31* — replacing "Past it, whether junctions keep a cone scale.": The doors are two routes, not halves (row ‹R111-a›, two minds): seven is the map NO made uniform in the complexity bound, so FS-114's NO reaches it only through the map step — or through route R's forced pair, where the NO is idle — and each is the answer restated; route M's rungs hold down to the pinch at a junction (rows ‹R111-b›–‹R111-c›; FS-120–FS-122).
+
+**Corrections owed elsewhere in `CLAUDE.md` (input to Poros's re-rank; its table, not mine):**
+- **§ Paths forward, rank-2 row (FS-111)**: closed. Proposed rows for its successors, bearing cells as Poros may cut them:
+  - **FS-121 the map step** — `plans/STUB-map-step.md` | can a tight colouring be replaced by a map (five colours) or a segment-and-arc map (six)? First: NO-PAR, and interface-maximal six-colourings | decisive at its top and there the answer restated (FS111-C-REG-EQ; at five FS111-VM2-EQ5): with FS-114's NO, seven; a failure is a tight colouring, `χ(ℝ²) ≤ 6` (at five, `= 5`) with no MR; progress is its smaller rungs — NO-PAR a genuinely new NO |
+  - **FS-120 the pinch at a junction** — `plans/STUB-pinch-at-junction.md` | in a measurable fall colouring, is a pinch's cascade absorbed where its ladder ends? | none alone; a colour-generic rung both of FS-121's top rungs need |
+  - **FS-122 the forced pair** — `plans/STUB-forced-pair.md` | route R: a close complementary pair of fat junctions in every near-colouring; its smaller statements B-RR and a robust Lemma 6.1 count | decisive and the answer restated (A-ALL ⟺ seven, FS111-W-NEG); with CP and B-RR, seven with no map NO |
+- **Rank-2 row's old bearing** ("with FS-114's NO it is the route to `χ_m⁰(ℝ²) = 7` … until its first question … is answered"): the question is answered; the sentence goes with the row. V0's merged text for any line that keeps the thought: *"with FS-114's NO it gives `χ_m⁰(ℝ²) = 7` only with a third statement — the map step, or R's (A) at every complexity (then FS-114's NO is idle); a hole bound uniform in the complexity is seven itself (FS111-C1-UNIF; two minds, one blind)."*
+- **Rank-3 row (FS-104)**, its question cell gains: "the regularity route at five: FS-121's cover statement, which given AE-MAP6 is equivalent to its YES (FS111-VM2-EQ5) — a reformulation, not a shortcut". (Inventory item 8's held item 3: FS-104 is not re-ranked on C-SIX-M; C-SIX-M is superseded by REDUCE-C, which is an equivalence.)
+- **Net bytes** (measured below, §D10): my four clauses plus G84 and G85.
+
+### D3. `data/fs111/claims.md` (the frozen list; corrections for the coordinator)
+
+- **§0, "Band-proper at slack `ε`"**: its source is `data/fs107/claims.md` §1, ll. 58–59, not §0 SEQ (V0 §1.2; the planner's stage 2 §2.1 has the same slip).
+- **§1, Row 130**: "(this list's reading of the definition D-M)" → "(FS111-V0-RESCALE, a theorem: rescale by `1 ± ε*`)".
+- **§2, FS111-C1-GAP**: MISSTATED → the corrected statement of `plans/FS111-derivation.md` § FS111-C1-GAP (for each reading a `T_r`; the composition open).
+- **§2, FS111-C1-FALS**: MISSTATED → the corrected statement (§ FS111-C1-FALS), with FS111-V0-FLIT (the literal falsifier ⟺ `𝓕_{s₀} = ∅`).
+- **§3, C-HULL**: the "so" clause FALSE (FS111-C-HULL-SO) → the corrected form (§ FS111-C-HULL).
+- **§3, C-SAT-T**: two readings — cover form TRUE (FS111-M-SATC); honest existence form TRUE at `k ≥ 7` (R7), vacuous at `k ≤ 4`, GAP at `k = 5, 6`; W's "GAP at `k = 7, 8`" corrected; quote it always with "for every `j ∈ P(x)`"; a regular maximal partition is saturated (FS111-M2-SELCOMP (d)).
+- **§3, C-HULL-REG**: MISSTATED — GAP as stated at (H1), (H2); its common form is FS111-M-PINCH/M-C11 (no partner density); TRUE on saturated maps without cusps (FS111-W-HULLREG-MAPS); on covers semiconcave, not semiconvex (FS111-M2-HULLC).
+- **§3, REG-J_k**: MISSTATED → **REG-J′_k**: a saturated colouring whose singular set Σ is locally finite, **each point of Σ meeting finitely many interface arcs** (the clause two briefs dropped); its cover form REG-J′-C_k with MUA-REG and MUA-FIN ("finitely many Jordan arcs in each bounded set, **meeting only at endpoints**").
+- **§3, REG-B_k**: existence form TRUE **at `k ≥ 7`**; universal form FALSE at `k = 7` (FS111-W-DECO-B).
+- **§3, REG-A_k**: the cover form FALSE at seven (FS111-M2-DISCK7, corrected orientation); REG-CHAIN TRUE under honest saturation and REG-J′, "or at Σ" (FS111-M2-INTRAD); NO-C11 unneeded on the honest route; NO-PAR proposed for the cover route.
+- **§3, new lines**: MUA-FIN-U FALSE (FS111-M3-FIN-U); M2-PINCH-C as stated vacuous (FS111-M3-VAC), corrected TRUE; MUA-REG-U FALSE (FS111-M3-IRREG); M2-FIX's converse FALSE (FS111-M3-FIXCONV); MUA-FIN-P — one class TRUE, covers iff the sliver is covered, partitions GAP at the cascade; MUA-FIN-L in partitions — GAP at the singular set (FS111-MUA-FIN-L).
+- **§4, B-NONABS**: MISSTATED — FALSE as written (FS111-W-B-NONABS); corrected form B-RR. **A-ALL**: equivalent to seven (FS111-W-NEG). **R-P3**: as written a registration on the answer (a bet on six); W's P3′ is its re-registration.
+- **The vacuity rule** gains: "an inhabitant at `k = 7` makes an existence rung trivially true there (FS111-W-NEG); it tests only universal forms and procedures".
+
+### D4. `CLAUDE.md` § Grokkings — G84 and G85, and instances for `plans/GROKKING-INSTANCES.md`
+
+**G84** (merging FS111-M's draft, supported by VMW with "no partner density needed" and R7; M2's replacement draft; M3's G84′; M4's ladder draft —
+rulings 25 and 35):
+
+* **G84 — Contact is the regularity mechanism: a saturated or maximal class is carved by unit circles about its own points. [hand; the pinch lemma three minds, the shadow identity two, bands and ladders one]** In a saturated colouring a two-colour interface point lies on a unit arc whose centre carries both colours, or on a `C^{1,1}` curve with `|κ| ≤ 1` between two tangent unit discs — no partner density needed; de Grey's Reuleaux 4 + 3 seven-colouring is the inhabitant (row ‹R111-b›). A maximal class is a fixed point of its unit shadow, `int F = ℝ² ∖ (F + S¹)`; maximal covers are free (Zorn), maximal partitions are measurable fall colourings, saturated. Maximality leaves bands free: a flat side facing its class across 2 needs material at distance 1 whose thickness may vanish on any closed set, and in a partition such a pinch climbs a short ladder of unit parallels to a junction (row ‹R111-c›). *Do: when a regularity question about a tight colouring arises, pass to a maximal cover and read each boundary point's contacts first; spend effort on the singular set and on blocks facing across 2 — draw the ladder, find where it ends; never ask a selection from a cover to be saturated unless the cover is a partition. Killing test: a saturated colouring with a two-colour, locally connected interface point that is not `C^{1,1}`; or a maximal partition whose ladder outlasts FS111-M4-CUT's bound.*
+
+**G85** (FS111-M2's draft):
+
+* **G85 — Saturated interfaces have integer radii. [hand; two minds on the core, one on finiteness]** Off a singular set that is locally finite with finitely many arcs at each point, the unit parallel of a saturated interface is an interface, so radii fall by exactly 1 toward the centre and stop at 1 — row 134's shadow map on saturated colourings: interfaces are segments and arcs of integer radius (row ‹R111-b›). What escapes is radii → ∞, FS-115's stuck ray. *Do: before asking whether a saturated colouring can bend, walk its unit parallels toward the centre; a chain that cannot end at a unit arc or at the singular set cannot exist. Killing test: a saturated colouring with a locally finite singular set and an interface of non-integer radius.*
+
+**Instances for `plans/GROKKING-INSTANCES.md`** (each verbatim-ready, with its source):
+- **§G21 (the generator image):** *FS-111, 2026-09-27: W-P1 ("no saturated a.e.-proper 7-colouring exists", 0.65) was registered from recolourings of polygonal tilings; R7, all arcs and no flat edge, met every necessary condition W listed and was in print since 2018 — outside the generator's image (`plans/FS111-VMW-verification.md` §2.2 D1, §2.5).*
+- **§G21 (a check must build the object the record specifies):** *FS-111, 2026-09-28: `tools/fs111_m2_disck7.py` checked a hexagon rotated 30° from its record's lattice and passed; at the record's own lattice the bodies leave a tiling vertex uncovered (`plans/FS111-VM2-verification.md` §2.3 D1, §2.6).*
+- **§ Make the gate fail:** *FS-111's close, 2026-09-28: `tools/fs111_m3_honey.py` and `tools/fs111_m4_rungs.py` print "ALL PASS" and then exit 1 from any directory but the root, because their output path is root-relative — a pass that reads as a failure; an exit status must not depend on the working directory (`plans/FS111-C-close.md` § Stage 3).*
+- **§G30 (failure mode 2, a quantifier that does not match):** *FS-111: the plan's extraction X9 read G40's non-absorption as a scale bound `s₀(δ)` depending on the hole size; B-NONABS, so stated, is FALSE by a scaling fragment, and the content wanted is a bound independent of `δ` (`plans/FS111-W-wild.md` §3.3; `plans/FS111-C-close.md` §4.1).*
+- **§G67:** *FS-111: G54 was walked "silent" by its title at the opening, while its body names fall colourings — the object of rounds 2–4, which M2 found by its own gate. §G ran once, before the object changed from tight colourings to maximal covers; nothing re-read the corpus from inside the new object (`plans/FS111-C-close.md` §4.1).*
+- **§G72:** *FS-111: through the structural question — §IQ's "what every tight colouring carries at every essential boundary point" produced the contact structure, the shadow identity and the integer radii; card 1 came through a question about every sequence (`plans/FS111-C-close.md` §4.2).*
+- **§G79:** *FS-111: the headline from example invariants (the contact structure; R7), the walls from counterexample invariants (HC_K, M3-IRREG, M4-CUT, DECO-B, W-NEG) (`plans/FS111-C-close.md` §4.2).*
+- **§G51:** *FS-111: three divergences of truth (C-HULL's "so"; a saturated seven-colouring; DISCK7's orientation), each caught by a blind verifier before anything was filed; eleven retractions across nine minds, all inside the cost window (`plans/FS111-C-close.md` §2.2–§2.3).*
+
+### D5. `BIBLIOGRAPHY.md` (rows at their true read status)
+
+§ A (five columns: key | work | role | copy | read):
+- **Amend `[Bukh2008]`**: add "arXiv:math/0703856v2; Zbl 1169.52005" to the work; role add "**FS-111:** Lemma 12 (support selection under weak-* limits) is the one-class form of rows 130–131's Rajchman step; the Supersaturation lemma is a one-class stability theorem (`plans/FS111-cone-scale.md` § Stage 4, PA-1, PA-3)"; copy `~/source/library/pdf/arXiv-math0703856-bukh-measurable-sets-excluded-distances.pdf`; read "§1 in full; §3's framing (the zooming-out operator, Lemma 3, the seven conditions of a supersaturable property, the Supersaturation lemma's statement); §4 Definitions 9–10, Theorem 11, Lemma 12 with its proof (FS111-P); §4 to the supersaturation lemma's statement (FS111-M3); §2, §5, §§6–8 not read".
+- `| **[CohenMani2025]** | A. Cohen, N. Mani, *Clustering in typical unit-distance avoiding sets*, Acta Math. Hungar. 176 (2025) 473–497; arXiv:2407.05071 | Lemma 2.4 and Remark 2.5 are the one-class Rajchman step (rows 130–131's correction); §5's **Question 5.1** (*"Does there exist a set A with block structure and δ(A) = m 1 ?"*) is the one-class form of FS-111's REG-B, posed and open (FS-121's calibration); OpenAlex 2026-09-28: one citing work, title only | `~/source/library/pdf/arXiv-2407.05071-cohen-mani-clustering-unit-distance-avoiding-sets.pdf` | §1 in full; §2.3 (Lemma 2.4, Remark 2.5, Lemma 2.6's statement); §5 first page; §§3–4 not read |`
+- `| **[RatajZajicek2017]** | J. Rataj, L. Zajíček, *On the structure of sets with positive reach*, Math. Nachr. (2017); arXiv:1604.08841; Zbl 1375.26026 | the planar semiconcave description of positive-reach boundaries, the frame of C-HULL-REG (FS-111 §PA, PA-5) | `~/source/library/pdf/arXiv-1604.08841-rataj-zajicek-structure-positive-reach.pdf` | abstract; §2 Def. 2.1 and eq. (2); §6 Lemmas 6.1–6.2, Def. 6.3, Theorem 6.4's statement and the first part of its proof (FS111-P, FS111-M) |`
+- `| **[RatajZajicek2025]** | J. Rataj, L. Zajíček, *A characterization of the local structure of two-dimensional sets with positive reach*, arXiv:2512.17606 (zbMATH lists it 2026) | its §1 remark: planar positive reach gives the semiconcave/semiconvex description C-HULL-REG names | `~/source/library/pdf/arXiv-2512.17606-rataj-zajicek-local-structure-2d-positive-reach.pdf` | abstract; §1 to Definition 1.2 (Theorems F and L; the planar remark) |`
+- **Amend `[Polymath16threads]`**: role add "**FS-111:** thread 4 (ag24ag24 = de Grey, 5 May 2018, 4:37 pm) is the Reuleaux 4 + 3 seven-colouring R7; thread 12 (Hockertz, 24 March and 14 April 2019) names its '100% exclusion rate' — its saturation, informally (FS111-M §2.4; VMW §2.5)".
+
+§ C (titles seen; two columns: key and citation | verdict):
+- `| **[Bourgain1986]** *A Szemerédi type theorem for sets of positive density in ℝ^k* (J. Bourgain; Israel J. Math. 54 (1986) 307–316; Zbl 0609.10043) | **Review read** (zbMATH), not held: large distances in sets of positive density; the one-class compactness step Cohen–Mani credit to it (FS-111 §PA) |`
+- `| **[FKW1990]** *Ergodic theory and configurations in sets of positive density* (H. Furstenberg, Y. Katznelson, B. Weiss; Zbl 0738.28013) | **Review read**, not held: all large distances; silent on regularity at a scale (FS-111 §PA) |`
+- `| **[Morgan1994]** *Soap bubbles in ℝ² and in surfaces* (F. Morgan; Pacific J. Math. 165 (1994) 347–361; Zbl 0820.53002) | **Review read**, not held (scripted fetch refused): minimising planar clusters are constant-curvature arcs meeting in threes at 120° — the variational paradigm's regularity, a shape and not a theorem for FS-111 (PA-6) |`
+- `| **[Walther1999]** *On a generalization of Blaschke's rolling theorem and the smoothing of surfaces* (G. Walther; Zbl 0933.52003) | **Listing only** (zbMATH, 2026-09-28), not held, unread: the two-sided rolling-ball step (`C^{1,1}`, curvature ≤ 1) that FS111-M-C11 and W-C11 use as classical — a debt |`
+- `| **[Kershner1939]** *The number of circles covering a set* (R. Kershner; Amer. J. Math. 61 (1939) 665–671; Zbl 0021.11401) | **Listing only**, not held: the thinnest covering density `2π/(3√3)` (FS111-M2-DISC7, M2-KERSHNER) |`
+- `| **[Federer1959]** *Curvature measures* (H. Federer; Trans. Amer. Math. Soc. 93 (1959) 418–491; Zbl 0089.38402) | **Listing only**, not held: reach of parallel bodies, cited by FS111-M2 as classical |`
+- `| **[Federer1969]** *Geometric measure theory* (H. Federer; Springer 1969; Zbl 0176.00801) | **Listing only**, not held: §4.5.11's finite-perimeter criterion, cited by FS111-M2-HULLC and M2-SELCOMP as classical — a debt |`
+
+### D6. `CLOSED-QUESTIONS.md` — declined
+
+Nothing FS-111 holds answers a question the literature posed. Cohen–Mani's Question 5.1 (one class, block structure at the extremal density) is posed
+and open, and FS-111 neither answers nor bears on its answer (M-BLOCK-EQ is its multi-class chain form; OpenAlex shows one citing work, by title). The
+reverse of the printed hierarchy "χmes ≤ χmap" (S–V §1; `[Voronov2023]` §1) at five colours is FS111-VM2-EQ5's equivalence — a reformulation of
+`χ_m⁰(ℝ²) ≥ 6`, not an answer. `[SokolovVoronov2025]` Question 2 stays FS-114's. No note is filed.
+
+### D7. The closed banner for `plans/STUB-reg-scale.md` (the coordinator files it at the top)
+
+> **CLOSED 2026-09-28 — undecided** (rows ‹R111-a›–‹R111-c›; `plans/FS111-derivation.md`; `plans/FS111-C-close.md`). Its question became "the cone
+> scale and the regularity step" (inventory item 12). Card 1, at two minds: the doors are two routes, not halves, and each route's third statement is
+> the answer restated; route M's rungs hold down to the pinch at a junction. Successors: FS-120 (`plans/STUB-pinch-at-junction.md`), FS-121
+> (`plans/STUB-map-step.md`), FS-122 (`plans/STUB-forced-pair.md`).
+
+### D8. Bearing lines for the stubs FS-114's close writes (drafted for the coordinator)
+
+- **`plans/STUB-global-step.md` (FS-114), § Bearing:** replace "with FS-111's door (B) it gives `χ_m⁰(ℝ²) = 7`" by: *"with the map step (FS-121: the tight limit made a segment-and-arc map) it gives `χ_m⁰(ℝ²) = 7`; the NO alone bounds holes at each complexity bound only (FS111-C1-PW), and seven is that bound made uniform (FS111-C1-UNIF) — the composition with FS-111's cone scale needs a third statement (FS111-C1-GAP)."*
+- **`plans/STUB-stuck-ray.md` (FS-115), provisional bearings:** add *"FS111-M2-INTRAD (two minds on its core): off a locally finite singular set saturated interfaces have integer radii, so the map step at six needs only no large-radius accumulation — which is this stub's stuck ray in another form (FS111-M2-REDUCE-A); FS-121 shares it."*
+- **`plans/STUB-cp-plane-six.md` (FS-104), bearing:** add *"the regularity route at five — a maximal five-cover with regular classes and a locally finite boundary graph gives `χ_m⁰(ℝ²) ≥ 6` through AE-MAP6 (FS111-M2-REDUCE-C, two minds) — is equivalent to this stub's YES given AE-MAP6 (FS111-VM2-EQ5): a reformulation, carried in FS-121."*
+- **`plans/STUB-regular-half-residuals.md` (FS-108), bearing:** add *"FS111-M2-REDUCE-C and FS-121's five-colour section rest on FS106-AE-MAP6, so Townsend's (c) now carries a regularity route too."*
+- **`plans/STUB-hole-dial.md` (FS-109), provisional bearings:** add *"FS111-C1-UNIF: `δ₀(K)`, the least hole density at complexity `≤ K`, is a second dial — along complexity, where this stub's reads along slack; seven is its uniform positivity."*
+- **`plans/STUB-mr-in-lean.md` (FS-113) and `plans/STUB-main-clause-five-kernel.md` (FS-101):** add *"FS-111's route-M lemmas (FS111-C1-UNIF, V0-RESCALE, C-FILL, C-HULL, M-SATC, M-PINCH, M-C11, M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) are queued behind the measurable chain: their objects are not in `Proofs/`."*
+- **Any stub a new grokking bears on:** G84 bears on FS-114 (a valid six-map's boundaries are saturated interfaces — pinned between unit circles) and FS-115; G85 on FS-115 — both are in the lines above.
+
+### D9. The Proof Atlas (`tools/viz_proof_atlas_facts.py`; the coordinator applies after the filing, then runs the checker and the build)
+
+*Every quote below is from a file this close wrote or from a filed text above; the atlas checker re-verifies each against its source. `at=` positions
+are placeholders near FS111's.*
+
+```python
+# replace node FS111 (its registered= block scored "not landed", plans/FS111-C-close.md §4.5; drop it)
+N("FS111", "(B) the cone scale — closed", "step", "Door (B), closed undecided at FS-111. Card 1, at two minds: the two doors are two routes, not "
+  "halves; seven is the map NO made uniform in the complexity bound. Successors: the pinch at a junction (FS-120), the map step (FS-121), the "
+  "forced pair (FS-122).", STUB("STUB-reg-scale.md"), "Not decisive jointly with FS-114's NO, as this stub once read.", at=(64, 262),
+  sector="seven", tier=1)
+# replace node MEET
+N("MEET", "the doors are two routes", "reading-link", "Card 1, answered at two minds (one blind): FS-114's NO plus the cone scale gives seven only "
+  "through a third statement — the map step on route M, the forced pair at every complexity on route R — and each is the answer restated.",
+  {"file": "plans/FS111-derivation.md"}, "1 − lim_{ε→0} µ₆(ε) = inf_K δ₀(K); hence χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0", at=(38, 240),
+  sector="seven", tier=1, also=[(L(133), "So stability at six has two routes, each needing a third statement")])
+# new nodes
+N("FS121", "the map step", "step", "Route M's third statement: a tight colouring replaced by a map (five colours) or a segment-and-arc map (six). "
+  "At its top it is the answer restated; its smaller rungs are NO-PAR and interface-maximal six-colourings.", STUB("STUB-map-step.md"),
+  "the map step: can a tight colouring of the plane be replaced by a map", (STUB("STUB-map-step.md"),
+  "Decisive at its top, and at its top the answer restated."), at=(52, 250), sector="seven", tier=1)
+N("FS120", "the pinch at a junction", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
+  "absorbed where the ladder ends?", STUB("STUB-pinch-at-junction.md"),
+  "the pinch at a junction: can a pinch in a measurable fall colouring of the plane be removed locally", (STUB("STUB-pinch-at-junction.md"),
+  "None alone; it is a colour-generic rung of route M, smaller than the answer."), at=(70, 280), sector="seven")
+N("FS122", "the forced pair", "step", "Route R's third statement: a close complementary pair of fat junctions in every near-colouring; "
+  "equivalent to seven (FS111-W-NEG), so its smaller statements are B-RR and a robust junction count.", STUB("STUB-forced-pair.md"),
+  "the forced pair at every complexity (route R's third statement)", (STUB("STUB-forced-pair.md"), "Decisive, and the answer restated:"),
+  at=(28, 250), sector="seven")
+# edges: delete E("MEET","M7",…), E("TSMNO","MEET",…), E("FS111","MEET",…), E("WEQK","MEET",…); add
+E("TSMNO", "FS121", "rests", STUB("STUB-map-step.md"), "The frame (FS-111's card 1, two minds, one blind).", label="route M")
+E("FS120", "FS121", "rests", STUB("STUB-map-step.md"), "FS-120's rung", label="its finiteness rung")
+E("FS121", "M7", "rests", {"file": "plans/FS111-derivation.md"}, "given Q-NO, REG-A₆ ⟺ χ_m⁰(ℝ²) ≥ 7", label="the answer restated")
+E("RR", "FS122", "rests", STUB("STUB-forced-pair.md"), "FS-107's reduction", label="route R")
+E("FS122", "M7", "rests", {"file": "plans/FS111-derivation.md"}, "A-ALL, read with its δ", label="the answer restated")
+E("FS111", "MEET", "rests", {"file": "plans/FS111-derivation.md"}, "hence χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0", label="card 1")
+# route wall7: links — replace "MEET", "FS111" by "MEET", "FS111", "FS121", "FS120", "FS122"; the last two sentences of `about` →
+#   "… the global step (FS-114). Card 1 (FS-111, two minds) found the two doors are two routes, not halves: FS-114's NO reaches seven only
+#    through the map step (FS-121), or route R's forced pair (FS-122) with the NO idle — and each third statement is the answer restated;
+#    route M's rungs hold down to the pinch at a junction (FS-120)."
+```
+
+### D10. `CLAUDE.md` bytes
+
+My four clauses (1,014 → 936 bytes after the last cut), G84 (1,432) and G85 (764), less the two phrases they replace (108): **net ≈ +3,040 bytes**
+against the brief's target of about 3,000 (the file at 288,911 of 300,000). The rank-2 and rank-3 text in §D2 is Poros's to cut, and replaces a row.
+
+## Stage 6 — SAVED: the drafts (above), the ticks finalized, the report
+
+### 6.1 Findings about Workflow 3.0, from this close (for the coordinator's test drive)
+
+1. **The lane file does not say how a verifier's re-derivation is filed.** "Enter every theorem … as an entry" read literally files V0-C1-UNIF beside
+   C1-UNIF. I counted each re-derivation in its entry's `minds:` and filed a verifier's own new lemmas (V0-RESCALE, VM2-EQ5, VMW-R7-MAX, …) as entries.
+   A sentence in § The close job would fix it.
+2. **Scale.** Nine jobs proved 85 statements; in the new grammar (eleven fields, a "Rests on it" paragraph, controls) the derivation file is about
+   110 kB. The old one-paragraph shape was a third of that. Nothing was lost, but a close's budget should be priced from the theorem count.
+3. **The grammar has no field for "what rests on it"** — TB1 found it; Amendment 1 fixed the form in prose. A field upstream would be exact.
+4. **"Prior art: new" wants two counted queries per entry**, and a close's queries are the milestone's, run at the grain of an object class. The grammar
+   cannot say "measured at the class, not the step"; I wrote that once in the file's header and used `partly:` where a source is known.
+5. **Controls:** the gate requires a fault command that exits 0, so a tool that exits 1 on a planted fault needs `; echo $?`; and a tool with a
+   root-relative output path cannot serve as a control from `plans/` (FS111-M3's and M4's). The lane file is silent on both.
+6. **§G is read once.** When a milestone's object changes between rounds (here from tight colourings to maximal covers), nothing re-reads the
+   corpus from inside the new object; G54's body bore on rounds 2–4 unread (§4.1). A re-read at each round's brief would have caught it.
+7. **What worked:** the brief's fixed numbers (rows as placeholders, G84–G85, FS-120–FS-122) and the `‹FS-111›` markers for shared `CLAUDE.md` units made
+   two concurrent closes collision-free; the census checker on a scratch tree gave a clean before/after; the brief's inventory items pointed at the
+   right records (two small misaddresses: items 34/33 and item 21's file, §1.3 and § Stage 3).

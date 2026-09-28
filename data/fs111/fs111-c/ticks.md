@@ -1,6 +1,6 @@
 # FS-111 close — proposed ticks for `plans/FS111-close-inventory.md` (FS111-C; the coordinator applies them at the filing)
 
-*Stage 1 wrote these as proposals with planned destinations; stage 6 replaced each destination by its final address. "Record" is
+*Stage 1 wrote these as proposals; stage 6 checked each destination against the record as filed (final). "Record" is
 `plans/FS111-C-close.md`; "derivation" is `plans/FS111-derivation.md`; "Drafts" is the record's `## Drafts for the front page`.*
 
 | # | kind | tick | where |
@@ -8,11 +8,11 @@
 | 1 | result | done | derivation: C1-UNIF, C1-PW, C1-GAP (corrected), C1-FALS (corrected), C1-ROUTES, C-SEVEN-M, C-SIX-M, C-REG-EQ, C-FILL, C-HULL; record § Stage 2 §2.1 |
 | 2 | correction owed | done (drafted) | Drafts §D2 (CLAUDE.md units, the rank-2 row text for Poros), §D1 (row 133), §D9 (the atlas: wall7, MEET); `plans/STUB-reg-scale.md` § Bearing on the answer (written); the `plans/STUB-global-step.md` line drafted for FS-114's close (§D8) |
 | 3 | correction owed | done (drafted) | Drafts §D1 (rows 130–131) |
-| 4 | prior-art debt | done in part | Drafts §D5 (bibliography rows, read status per section); §D6 (`CLOSED-QUESTIONS.md`: Q5.1 posed and open, nothing here answers it); record § Stage 4 §4.3 (OpenAlex: see there) |
+| 4 | prior-art debt | done in part | Drafts §D5 (bibliography rows at their read status); §D6 (`CLOSED-QUESTIONS.md`: declined — Q5.1 posed and open, nothing here answers it); OpenAlex cross-check run (record §4.3: one citing work, title only); FM86, FKW90, Bourgain86, Morgan94, Walther99, Brown72, Fu85 still unfetched — nothing filed rests on them |
 | 5 | stub to mint | done | `plans/STUB-pinch-at-junction.md` (FS-120), `plans/STUB-map-step.md` (FS-121), `plans/STUB-forced-pair.md` (FS-122); record § Stage 5 |
 | 6 | slip | done | record § Stage 2 §2.5 (slips counted) |
 | 7 | tool defect | done | fixed by FS111-P before use; nothing owed |
-| 8 | owner ruling | done | held item 3 (FS-104 re-rank given C-SIX-M) revisited: Drafts §D8 (input to Poros) |
+| 8 | owner ruling | done | held item 3 (FS-104 re-rank given C-SIX-M) revisited: not re-ranked — C-SIX-M is superseded by REDUCE-C, an equivalence (Drafts §D2, the rank-3 input to Poros) |
 | 9 | owner ruling | done | recorded; §G's grouped rows noted in record § Stage 4 §4.1 |
 | 10 | result | done | derivation: V0-RESCALE, V0-CLOSE, V0-CLEAN, V0-WIGGLE, V0-WIG7, V0-FLIT, V0-BRIDGE, V0-HULL-CX; record § Stage 2 |
 | 11 | correction owed | done (drafted) | Drafts §D3 (claims.md C1-GAP, C1-FALS, C-HULL, the band-proper address); §D2 (rank-2 row) |
