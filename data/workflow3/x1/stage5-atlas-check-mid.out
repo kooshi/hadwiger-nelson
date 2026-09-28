@@ -1,0 +1,10 @@
+FAIL R134: second quote not found at CLAUDE.md § Paths forward, ranked: "beside BASE-V's blind re-derivation of row 134's print steps"
+FAIL TSMNO: quote not found at CLAUDE.md § Where the problem stands: 'At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 '
+FAIL N3DENSE3: second quote not found at CLAUDE.md G83: 'With unit arcs, the tight question lives at four-colour vertices.'
+FAIL SRAY: verbal registration not found at CLAUDE.md § Paths forward, ranked item 4: "it moves to 2 the day FS-114's plan commits to that form"
+FAIL HORNEND: second quote not found at LEDGER.md row FS112-C-DOUBLE: 'hand; one mind: FS112-C2, a sketch'
+FAIL UNB: quote not found at plans/STUB-reg-scale.md: "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR."
+FAIL edge UANO→TSMNO: quote not found at CLAUDE.md § Where the problem stands: 'with unit arcs each would have a vertex of four colours or a repeated colour within 3 of e'
+FAIL edge BOWTIE→TSMYES: quote not found at CLAUDE.md § Paths forward, ranked item 4: 'its fragments (the pencil, BOWTIE) are local positives a YES could use'
+FAIL edge UNB→HOLES6: quote not found at plans/STUB-reg-scale.md: "A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR."
+checked 187, failed 9, errors 0

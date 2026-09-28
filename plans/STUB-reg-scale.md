@@ -43,7 +43,7 @@ compactness methods of the distance-avoiding-sets literature: `[Bukh2008]`, Falc
 ## Bearing on the answer
 
 *Rewritten 2026-09-28 at FS-111's close (FS111-C; `plans/FS111-derivation.md`).* **Not decisive jointly with FS-114's NO, as this stub once read.** FS-111's
-card 1, at two minds (one blind): seven is the map NO made uniform in the complexity bound (FS111-C1-UNIF); the map NO bounds holes at each bound only
+card 1, at two minds (one blind): seven is the NO's hole bound made uniform in the complexity bound (FS111-C1-UNIF); the map NO bounds holes at each bound only
 (FS111-C1-PW); so FS-114's NO plus a cone-scale bound gives seven only with a third statement (FS111-C1-GAP, corrected by FS111-V0). The two doors are two
 routes, not halves (FS111-C1-ROUTES): **route M** — FS-114's NO with the map step (the tight limit made a segment-and-arc map), the cone scale entering as
 the map step's first rung; **route R** — FS107-R-CP with (A) at every complexity and (B), FS-114's NO idle. Each third statement is the answer restated:

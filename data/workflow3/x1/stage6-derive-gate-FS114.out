@@ -1,0 +1,93 @@
+entry lint
+  claim FS114-CV-EXISTS: minds 2 — blind to: each other (FS114-CV blind to the FS112-C assembly; FS114-CVB blind to FS114-CV's record until its stage 1 was committed); method: CV through CV-HD and the closure of C-ENDS's residue; CVB with no four-colour vertex every stuck chain of `M*` is bi-infinite, which N4-FIN forbids — neither CV-HD nor C-ENDS
+  claim FS114-CV-EXISTS: prior art new, 4 counted queries
+  claim FS114-CV-HD: minds 2 — blind to: each other's records at stage 1 (CVB sighted on Y3-END-NEEDS's levels, an FS-112 input); method: CV one chain through the flank shadows; CVB two branches, the `G_N` branch's merge made explicit
+  claim FS114-CV-HD: prior art new, 2 counted queries
+  claim FS114-CVB-THOM: minds 3 — blind to: each other's records (NB and CVB blind; FS114-N's stage 1 against, on the pinch clause); method: NB by treating holes as 1-separators with finite interiors; CVB by filling holes and reading boundary walks; the colour-free repair two minds, both blind
+  claim FS114-CVB-THOM: prior art partly, 1 counted queries
+  claim FS114-N114-RD: minds 2 — blind to: NB derived its NB-RD before opening FS114-N's record; method: NB reads the radius `1 + 1/√3` about the tile's centre; the corrected RAINBOW trichotomy (YB, blind to both: "Siamese, or the unit-radius tactic …, or both meet `cl x` only in finite sets at mutual distance exactly 1") is the same statement read on contact sets
+  claim FS114-N114-RD: prior art partly
+  claim FS114-Y-EDGE: minds 4 — blind to: FS114-N and FS114-Y blind to each other; NB and YB blind to their sides' records; method: four derivations of one short argument; FS114-Y5-RAINBOW its non-Siamese form, re-derived blind by YB4
+  claim FS114-Y-EDGE: prior art partly
+  claim FS114-N114-EULER: minds 2 — blind to: NB derived NB-EULER before opening FS114-N's record; method: NB checked it exactly on 17 torus maps by formula (`tools/fs114_nb_count.py`), N on five (`tools/fs114_n_count.py`)
+  claim FS114-N114-EULER: prior art partly, 2 counted queries
+  claim FS114-N2-FIVE: minds 2 — blind to: NB derived NB-ABSENT and NB-COUNT before opening FS114-N's record; FS114-N2 re-derived them sighted; method: NB's excess count per absent colour, N2's slot accounting
+  claim FS114-N2-FIVE: prior art partly
+  claim FS114-N114-ROOM: minds 2 — blind to: NB derived NB-COUNT before opening FS114-N's record; method: NB by the quadratic `Σ_v [2d² + (2 − 3k)d + 6k − 6] ≤ 0`
+  claim FS114-N114-ROOM: prior art partly
+  claim FS114-N114-CUBIC: minds 2 — blind to: NB derived NB-CUBIC before opening FS114-N's record; method: NB by Euler and edge-rainbow alone
+  claim FS114-N114-CUBIC: prior art partly
+  claim FS114-NB-DUAL: minds 2 — blind to: NB and YB each blind to its side's record; method: NB by vertex degrees; YB by emitted arcs, `2n + 2p₅ + 6p₆` distinct unit arcs of kind both, the opposite tile never the emitting neighbour (YB §1c item 9)
+  claim FS114-NB-DUAL: prior art partly
+  claim FS114-N2-ENDS: minds 1
+  claim FS114-N2-ENDS: prior art new, 2 counted queries
+  claim FS114-N3-JOINT: minds 1
+  claim FS114-N3-JOINT: prior art partly
+  claim FS114-N2-AVG: minds 2 — blind to: NB6 derived NB6-FOLNER blind to FS114-N2's record ("for a valid map of bounded complexity whose tiles are open discs, pinch points allowed, route T's aperiodic averaging step closes by Euler's formula on large discs"); method: NB6 by boundary `O(R)` and a local surplus `≥ cR²`; the five-colour corollary is N2's alone, one mind
+  claim FS114-N2-AVG: prior art partly
+  claim FS114-N114-COMPACT: minds 2 — blind to: NB derived its verdict before opening FS114-N's record; method: NB over all `K` at once, reading the fixed-`K` defect
+  claim FS114-N114-COMPACT: prior art partly
+  claim FS114-N114-VOR: minds 2 — blind to: NB derived NB-VOR before opening FS114-N's record; method: NB in three cases on the closed disc (N's wording missed a close-pair case: NB, accepted by N2)
+  claim FS114-N114-VOR: prior art known
+  claim FS114-Y-REDBLOCK1: minds 2 — blind to: YB derived it before opening FS114-Y's record; method: YB by one red tile per neighbourhood; N2-PENT one mind
+  claim FS114-Y-REDBLOCK1: prior art partly
+  claim FS114-N2-LEMMAS: minds 1
+  claim FS114-N2-LEMMAS: prior art partly
+  claim FS114-N2-ENC3: minds 1
+  claim FS114-N2-ENC3: prior art partly
+  claim FS114-Y-ROUTES: minds 2 — blind to: YB derived it before opening FS114-Y's record; method: YB's own checker at its own points, then the side's 18 reproduced exactly
+  claim FS114-Y-ROUTES: prior art partly
+  claim FS114-N3-LOCAL: minds 1 — N3-FACE's substance is FS114-Y4-UPDOWN, derived blind on the other side and re-derived blind by YB3; the others have no blind second mind (no verifier ran on FS114-N3, inventory item 57)
+  claim FS114-N3-LOCAL: prior art new, 2 counted queries
+  claim FS114-N3-DR: minds 1 — DR's shape was built blind on the other side (FS114-Y2-BOWTIE) and N3-DR1 re-derived blind by NB5 in N5's setting
+  claim FS114-N3-DR: prior art new, 2 counted queries
+  claim FS114-Y2-BOWTIE: minds 2 — blind to: YB2 built its own 20-tile D2-symmetric fragment before opening FS114-Y2's record; method: YB2's checker over towers of square roots and FS114-YB's, two checkers on an independent object
+  claim FS114-Y2-BOWTIE: prior art new, 2 counted queries
+  claim FS114-N4-D: minds 2 — blind to: NB4 derived N4-D and the reduction of N4-G before opening FS114-N4's record, and checked N4-G's kill step sighted (inventory item 83); method: NB4's N4-D ends at `R* = q1 + top` (no colour for the tile outside `ω(q1)` there), a different last step from N4's diameter `|P90 − P90′| = √3`
+  claim FS114-N4-D: prior art new, 2 counted queries
+  claim FS114-N4-LEMMAS: minds 2 — blind to: NB4 derived N4-OWN, N4-LENS, N4-FIVE and N4-TOP before opening FS114-N4's record; method: NB4-OWN by E1 at the corner, using only the four edge circles and degree 4 at `p`; N4-ARC and N4-A4NB one mind
+  claim FS114-N4-LEMMAS: prior art new, 2 counted queries
+  claim FS114-N5-GRING: minds 2 — blind to: NB5 derived N5-UP, -DEG, -R0, -ΓRING, -BEND, -KAPPA, -XBAR, -SIGHT, -BENDG, -W, -DR1 before opening FS114-N5's record; method: NB5-R0 by a different route (`C ∋ q2` makes `z4` start at `≤ 0°`); **the last step, NB5-RVKILL, is one mind**, and FS114-Y4-RSTOPALL excludes (R-V) independently, blind to both
+  claim FS114-N5-GRING: prior art new, 2 counted queries
+  claim FS114-Y4-LUNE: minds 2 — blind to: YB3 derived all four before opening FS114-Y4's record; method: different routes at LUNE's frontier and at W's colour steps; LUNE holds without "simple" (YB3); SIDES checked exactly at named points (`tools/fs114_y4_sides.py`)
+  claim FS114-Y4-LUNE: prior art new, 2 counted queries
+  claim FS114-Y4-RSTOPALL: minds 3 — blind to: YB3 derived it before opening FS114-Y4's record; the proof side (FS114-N4, FS114-N5, FS114-NB5) derived the same conclusion blind to the construction side; method: YB3 by its own LUNE and DIAG routes; the proof side by sector orders, a lens N4-LENS empties and a diameter (N4-D, N4-G), the up-tile (N5-DEG, N5-R0) and NB5-RVKILL's tangency at `top`, whose last step is one mind
+  claim FS114-Y4-RSTOPALL: prior art new, 2 counted queries
+  claim FS114-Y3-RSTOP: minds 2 — blind to: YB2 derived RSTOP, R and D2 before opening FS114-Y3's record; method: YB2 made the germ condition explicit (the stop is the cone `(−60°, 60°)` at `r`) and checked five exact points; Y3's tool 11 of 11 at a named ring point (`tools/fs114_y3_rstop.py`)
+  claim FS114-Y3-RSTOP: prior art new, 2 counted queries
+  claim FS114-N6-NOQ: minds 2 — blind to: NB6 derived NOQ, RING60, KAPPA, CENT, PIN, P60′, ADJ, QOUT, QE1, PIN180 before opening FS114-N6's record; method: NB6-NOQ by RING60, N3-FLANK and its own pinwheel lemma NB6-P60 (the kill the cone `(240°, 300°)` at `q_j`), needing no PIN180
+  claim FS114-N6-NOQ: prior art new, 2 counted queries
+  claim FS114-Y5-PINALL: minds 2 — blind to: YB4 derived the twelve statements before opening FS114-Y5's record; method: YB4-2ND finds PXKILL's contradiction only at second order, from the arcs' curvature; its exact `ℚ(√3)` checker 53 of 53 as registered; the side's checks 31 of 31 and 11 of 11
+  claim FS114-Y5-PINALL: prior art new, 2 counted queries
+  claim FS114-Y6-E1CAP: minds 2 — blind to: YB5 derived E1FORM, E1Q3, E1OMEGA, E1CAP, E1K1 before opening FS114-Y6's record; method: YB5-CAP2, a Jordan-curve route to the whole arc; the side's checks 10 of 10 at named values (`tools/fs114_y6_e1.py`)
+  claim FS114-Y6-E1CAP: prior art new, 2 counted queries
+  claim FS114-Y6-E2RED: minds 1 — the chain from E2 to S1–S6 is two minds (FS114-Y6; YB5 blind), the cut from S1–S6 to S6 is YB5's alone
+  claim FS114-Y6-E2RED: prior art new, 2 counted queries
+  claim FS114-Y6-HALF: minds 2 — blind to: YB5 derived the corrected form before opening FS114-Y6's record; method: YB5 found the two boundary subcases FS114-Y6's statement missed
+  claim FS114-Y6-HALF: prior art new, 2 counted queries
+  claim FS114-N7-3T: minds 1 — filed at one mind as the brief rules (inventory item 118); a blind check of N7-HUB (b) and the `+++ b = a + 1` step is the successor's first job
+  claim FS114-N7-3T: prior art new, 2 counted queries
+  claim FS114-N7-QOPP: minds 1
+  claim FS114-N7-QOPP: prior art new, 2 counted queries
+  claim FS114-Y-DIAL: minds 2 — blind to: YB rebuilt the capped strip and checked it with its own exact checker before opening FS114-Y's record; method: YB's checker over towers of square roots, the rebuild identical tile for tile; the plant fires at exactly the six capped self-pairs
+  claim FS114-Y-DIAL: prior art partly
+  claim FS114-Y-PENT: minds 2 — blind to: YB derived PENT and DISKRIGID before opening FS114-Y's record; method: YB by its own exact straddle table (325 pairs) and a different deduction order for DISKRIGID; the owner's instance dropped DISKRIGID's chain clause (a slip, inventory item 39), which YB restored
+  claim FS114-Y-PENT: prior art partly
+  claim FS114-Y-STRIPK6: minds 2 — blind to: YB derived both before opening FS114-Y's record; method: different routes (YB's straddle table and its own deduction)
+  claim FS114-Y-STRIPK6: prior art partly
+  claim FS114-Y-PAIRSHARE: minds 2 — blind to: YB derived both before opening FS114-Y's record; method: YB over COR3 by its own case split
+  claim FS114-Y-PAIRSHARE: prior art partly
+  claim FS114-Y2-GAPS: minds 2 — blind to: YB2 derived it before opening FS114-Y2's record; method: YB2 over FS112-U1 directly
+  claim FS114-Y2-GAPS: prior art new, 2 counted queries
+  claim FS114-L60-LE: minds 2 — blind to: nothing of the other's frame for the bound (FS114-L60 was briefed with FS114-N4's record open; N4 found it first) — blind to: the FS112-N and FS112-NB proofs' conclusions at the boundary, which both break at 60° by different steps (L60-PROOFS); method: N4 by the Reuleaux cap tile; L60 by the lens and the corner cones, with a fragment; the inner clause and the ends one mind
+  claim FS114-L60-LE: prior art new, 2 counted queries
+  claim FS114-L60-WALK: minds 1
+  claim FS114-L60-WALK: prior art new, 2 counted queries
+  claim FS114-BV-HEX: minds 1 — BASE-V, blind to FS-110's and FS-112's walks of these steps; BV-HEX is CB D5 item 5 in substance (FS-110), with H in place of Condition 5, by a different route
+  claim FS114-BV-HEX: prior art partly
+  entries: 46  derived: 43  stalled, gapped or refuted: 3
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: PASS (0 failures, 0 warnings)

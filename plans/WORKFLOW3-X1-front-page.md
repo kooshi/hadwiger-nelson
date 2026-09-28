@@ -11,7 +11,7 @@ None: this is a filing job. It proves nothing.
 
 ## Would-have-searched-here log (standing rule 5)
 
-- Stage 1: none — reading and exact text checks only.
+- Stages 1–5: none. The one scan run (stage 5) placed atlas labels by the lint's overlap count — page layout, not a search for a mathematical object.
 
 ## Fence log (standing rule 8)
 
@@ -165,3 +165,55 @@ them; no word changed).
 defined nor aliased: 0" (before the filing: exit 1, 8 arXiv ids and 17 keys, all FS-114's and FS-111's); `--self-test` exit 0, "3 controls, ALL FIRED".
 `python3 data/rerank-2026-09-27/rk_mirror_check.py` → **exit 0**, "checked 69 ranked stubs; CLAUDE.md single rows 29, group row 30–69", "RESULT: PASS";
 `--self-test` exit 0, "SELF-TEST PASS" (every plant fired). Outputs `data/workflow3/x1/stage4-*.out`.
+
+### 1.6 The coordinator's rulings on the atlas (Amendment 2, 23:09 UTC, on `main`)
+
+A1 FS111 graded from its stub's title line; A2 MEET from FS111-C1-UNIF's grade; B GSTEP's and TSMYES's scored registrations dropped; C N3BASE's whole
+note = the draft's sentence; D SRAY's words dropped, the three texts left, "bearing reduced to the density form (row 137)" owed to the atlas keeper;
+E1–E6 re-quoted as proposed and R134's verifying ring removed; F only the drafted nodes moved; F9's substitution also in `plans/STUB-reg-scale.md`
+§ Bearing.
+
+### 1.7 Amendment 3 (23:15 UTC, on `main`)
+
+The atlas self-test's plant "wrong registered p (0.03 → 0.3)" on TSMYES (dropped by ruling B) repointed at SRAY's registered block, "(0.35 → 0.5)";
+standing rule 7 lifted for that line only. My 18:08 run of `tools/viz_proof_atlas_facts.py` in the main tree (it rewrote main's
+`data/viz/proof-atlas/facts.json`, line numbers only), restored by `git checkout` at 18:09, logged as a disclosed slip.
+
+## Stage 5 — SAVED: items 9–11
+
+**Item 9, the inventories** (`data/workflow3/x1/file_inventories.py`): every item of each ticks file applied as "<tick> (<close job>, `<ticks file>`)",
+FS-112's form ("done (FS112-C, ticks.md)"); item 4 of FS-114's, whose status carried a detail, keeps it with the tick after "; ". FS-114: 122 proposed
+ticks (items 1–122, incl. the coordinator's 121–122) and items 123–126 given their where; FS-111: 39 (items 1–39, incl. 38–39) and items 40–43 given
+their where (40, 123: the prefixed ids and the census at stage 2; 41, 124: TB1 §2.2 and the census re-run; 42, 125: filed at this close, stages 2–5;
+43, 126: filed at this close with F1, F9, F3, F2, F6). Every item of both inventories now reads done, declined or carried with its where.
+
+**Item 10, the Proof Atlas** (`file_atlas.py`, `file_atlas2.py`, `file_atlas_layout.py`, `atlas_layout_search.py`):
+- Filed: FS-114's block (CVEXISTS, LOCALF, BOWSQ3, PINW, ROUTET, CAPSTRIP and seven edges) with F1 (LOCALF's text; LOCALF's quote and the edge
+  CVEXISTS→LOCALF re-quoted from the corrected row 137: "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least
+  four colours within which no such map fragment exists"; the edge LOCALF→UANO: "So one local statement suffices for S–V's Question 2 with unit arcs")
+  and Q9 (CVEXISTS's text); FS-114's node edits (GSTEP's text, N3BASE's note and quotes, TSMYES's text); D9 (FS111 and MEET replaced, F9 in FS111's
+  text; FS121, FS120, FS122; four edges deleted, six added; route wall7's links and its last two sentences, the text before "the global step (FS-114)"
+  kept); Amendment 2's A1, A2, B, C, D, E1–E6; the re-rank's renumbering PF(8)→PF(11), PF(13)→PF(16), PF(7)→PF(10).
+- **Layout:** the drafted positions gave 27 lint overlaps; a nearest-first scan over θ ± 30°, r ± 160 inside each node's sector (a label-placement scan,
+  not a finite-witness search) moved ten drafted nodes to the nearest overlap-free place: CVEXISTS (20, 560) → (14, 570), LOCALF (22, 525) → (26, 465),
+  PINW (48, 575) → (49, 555), ROUTET (62, 560) → (61, 525), CAPSTRIP (119, 440) → (123, 465), FS111 (64, 262) → (65, 262), MEET (38, 240) → (41, 230),
+  FS121 (52, 250) → (57, 270), FS120 (70, 280) → (65, 330), FS122 (28, 250) → (29, 275); BOWSQ3 stays at (34, 575). No existing node moved.
+- **Results:** `python3 tools/viz_proof_atlas_facts.py` exit 0, "77 nodes, 93 edges, 9 routes", "layout lint: 0 overlaps"; `tools/viz_proof_atlas_check.py`
+  exit 0, **"checked 187, failed 0, errors 0"** (before any atlas edit, on the filed tree: 169 checked, 23 failed; on `main`: 2 failed, UNB); `--self-test`
+  exit 0, "SELF-TEST PASSED", **all 8 plants "FIRED once"** and the fence control (after Amendment 3's repointed plant); `tools/viz_proof_atlas_contrast.py`
+  "palette review: 0 failed", its `--self-test` PASSED; `visualizations/proof-atlas/build.py` exit 0, "wrote visualizations/proof-atlas/index.html,
+  164,733 bytes". Headless screenshots (google-chrome, a scratch profile, network refused) in light and dark render; the page header still reads
+  "2026-09-27, AFTER FS-112'S CLOSE" (the facts writer's meta) — asked of the coordinator.
+- **Owed to the atlas keeper:** the README's step 6 (a DESIGN.md stage record), skipped by ruling; FOURC, SRAY, CHAINB's "bearing reduced to the
+  density form (row 137)" (Amendment 2, D). Keryx republishes the page.
+
+**Item 11, the three tool repairs** (standing rule 7 lifted for these by the brief): `tools/fs111_m3_honey.py` and `tools/fs111_m4_rungs.py` now resolve
+`OUT` from the file's own location (`import pathlib`; `OUT = str(pathlib.Path(__file__).resolve().parents[1] / "<the same relative path>")`), nothing else
+changed. **Before:** from the root exit 0 ("ALL PASS"; "ALL AS EXPECTED"); from `plans/` exit 1, `FileNotFoundError: … 'data/fs111/fs111-m3/honey.out'`
+(and `…/rungs.out`) after printing the pass. **After:** exit 0 from the root and from `plans/`, the outputs written at the root path (mtimes 18:04:56,
+18:04:58) and byte-identical to the committed ones (git shows no change). `tools/fs111_m2_disck7.py` gains one comment line under the shebang: "# NOTE (X1,
+2026-09-28): its HEX check builds a hexagon rotated 30° from its record's lattice; tools/fs111_vm2_disc7.py holds both orientations."; it still exits 0
+("ALL PASS"). Outputs `data/workflow3/x1/stage5-fs111_*-{before,after}-{root,plans}.out`.
+
+**Also this stage:** F9's substitution in `plans/STUB-reg-scale.md` § Bearing (Amendment 2). **Slip, disclosed (§1.7):** one run of the facts writer in the
+main tree, restored.

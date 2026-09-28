@@ -202,7 +202,7 @@ def self_test(d):
     plant("missing file", lambda dd: node(dd, "R129").update(src={"file": "plans/NO-SUCH-FILE.md"}), "R129", "ERROR")
     plant("quote not in source", lambda dd: node(dd, "R134").update(quote=node(dd, "R134")["quote"].replace("none of radius 1", "none of radius 2")),
           "R134", "FAIL")
-    plant("wrong registered p (0.03 → 0.3)", lambda dd: node(dd, "TSMYES")["registered"].update(p=0.3), "TSMYES", "FAIL")
+    plant("wrong registered p (0.35 → 0.5)", lambda dd: node(dd, "SRAY")["registered"].update(p=0.5), "SRAY", "FAIL")
     plant("fenced address", lambda dd: node(dd, "SRAY").update(src={"file": "plans/BASE-V-verification.md"}), "SRAY", "FAIL")
     plant("a reduced question marked answered", lambda dd: node(dd, "N3DENSE3")["posed"][0].update(state="answered"), "N3DENSE3", "FAIL")
     plant("route link that is no node", lambda dd: dd["routes"][2]["links"].append("NOSUCHNODE"), "route wall7", "FAIL")

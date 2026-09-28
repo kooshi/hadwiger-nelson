@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# NOTE (X1, 2026-09-28): its HEX check builds a hexagon rotated 30° from its record's lattice; tools/fs111_vm2_disc7.py holds both orientations.
 """FS111-M2: the body K of DISCK7 — exact / symbolic checks (sympy + Fractions).
 
 K is the convex body with support function h(t) = 1/2 + delta * sin(3t)^3, delta = 1/200.
