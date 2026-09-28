@@ -30,6 +30,19 @@ each stage's section is headed "Stage n — SAVED" and committed before the next
 - **M-DEADLOCK** — in the tight hexagonal seven-colouring of circumradius `1/2` (and in V0-WIG7), no a.e.-proper colouring that agrees with it off
   `B(x, ρ)`, `x` an edge midpoint, `ρ < 1 − √13/4`, has a contact point for either of the edge's two colours inside `B(x, ρ)`: local fills cannot
   saturate it — [hand, one mind] §2.5.
+- **M-PINCH** — at a saturated point `x` of an honest a.e.-proper colouring with a neighbourhood `N` in which only two colours `a, b` have positive
+  measure and each is a.e. one path-connected set of density points (H1, H2): either `N` is split by one unit circle `T₁(y)` (`a` inside, `b` outside,
+  or the reverse; `y` a contact of both colours), or two open unit discs tangent at `x` from opposite sides lie a.e. in `S_a` and in `S_b` — the
+  "(in, in)" case is impossible — [hand, one mind] §3.1. No thickness of the partner is needed.
+- **M-C11** — if M-PINCH's hypotheses hold at every essential boundary point in `N`, then `∂_e S_a ∩ N′` (`N′ ⋐ N`) is a `C^{1,1}` curve with curvature in
+  `[−1, 1]`, semiconcave and semiconvex; a single unit arc if any of its points is of the split type — [hand, one mind; the rolling-ball step is
+  classical] §3.2.
+- **M-EXTREME** — every component `R` of an open class of a saturated honest colouring has at least two points on its minimal enclosing circle, and
+  none of them is a point where M-PINCH's conclusion holds for `R`'s colour: each is a cusp of `R` or a point where (H1) or (H2) fails — [hand, one
+  mind] §3.3. Inhabitant R7: the three vertices of every up and the three cusps of every down.
+- **M-COVER-SC** — in a maximal cover, at every boundary point of `F_a` each adjacent path-connected piece of `F̃_a` lies in an enclosing unit disc or
+  outside an exterior one; where `∂F_a` is locally the graph of a continuous function with `F_a` below it, that function is semiconcave with constant
+  1 — [hand, one mind] §3.4.
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -275,3 +288,107 @@ vertex zones), so it bears on C-HULL-REG only through C-HULL-REG's hypothesis �
 problem; a selection from a regular cover is regular (its boundaries lie in `⋃ ∂F_j`). The honest form is what C-HULL-REG's statement presupposes
 (it speaks of `∂_e S_a` at points with `P(x) = {a, b}`), so stage 3 works both: the honest colouring where it is saturated, and each cover class.
 **Registration E3** (TRUE / GAP / FALSE at 0.35 / 0.5 / 0.15): GAP for the honest form at `k = 5, 6`, TRUE for the cover form.
+
+## Stage 3 — SAVED: C-HULL-REG — MISSTATED; TRUE and much stronger under two named hypotheses (the pinching lemma), GAP as stated
+
+*Setting.* An honest colouring `g` (a measurable `k`-colouring, a.e.-proper, in D-NF). A point `x ∈ ∂_e S_j` is **saturated for `j`** if it is a
+`j`-contact point (§2.1: equivalently not `j`-free). **(H1)** at `x`: a ball `N = B(x, ρ)` in which `S_c` is null for `c ∉ {a, b}`. **(H2)** at `x`:
+in `N`, `S_a` and `S_b` are each a.e. equal to a path-connected set of density points, `P_a ⊆ S̃_a`, `P_b ⊆ S̃_b`, with `x ∈ cl P_a ∩ cl P_b`.
+
+### 3.1 M-PINCH — the pinching lemma [hand, one mind]
+
+*Statement.* If (H1), (H2) hold at `x` and `x` is saturated for `a` and for `b`, with contacts `y_a ∈ supp S_a`, `y_b ∈ supp S_b` (`|x − y_a| =
+|x − y_b| = 1`), then exactly one of:
+- **(split)** `y_a = y_b =: y`, and either `S_a ∩ N = B(y, 1) ∩ N` and `S_b ∩ N = N ∖ B̄(y, 1)` up to null sets, or the same with `a` and `b` exchanged;
+- **(tangent)** `y_b − x = −(y_a − x)`, and `B(y_a, 1) ∩ N ⊆ S_b`, `B(y_b, 1) ∩ N ⊆ S_a` up to null sets: two open unit discs tangent at `x` from
+  opposite sides, each inside the colour whose contact is the *other* disc's centre.
+
+*Proof.* **Step 1 (one side of each contact circle).** Take `q_n ∈ S̃_a`, `q_n → y_a` (`supp S_a = cl S̃_a`). M-HULL1 with the path-connected
+`P_a ⊆ S̃_a` and the point `q_n ∈ S̃_a ⊆ A*_a` gives, for each `n`, `P_a ⊆ B(q_n, 1)` or `P_a ∩ B̄(q_n, 1) = ∅`. Pass to a subsequence of one type:
+"in", `P_a ⊆ B̄(y_a, 1)`; "out", `P_a ∩ B(y_a, 1) = ∅` (a point `w` with `|w − y_a| < 1` is in `B(q_n, 1)` for large `n`). Likewise `P_b` with `y_b`.
+No path-connected piece at the partner is used: the partner may be a cusp, a thin horn or dust. **Step 2 (cases).** `S_a ∪ S_b ⊇ N` a.e. by (H1).
+*(in, in):* `N ⊆ B̄(y_a, 1) ∪ B̄(y_b, 1)` a.e., with `x` on both circles. If `y_a − x ≠ −(y_b − x)`, the open cone of directions `u` with
+`u·(y_a − x) < 0` and `u·(y_b − x) < 0` is non-empty and `x + tu` (small `t > 0`) lies outside both discs, a set of positive measure; if the discs are
+tangent at `x` from opposite sides (or equal), the region between the circles has positive measure in every ball about `x`. Impossible.
+*(in, out):* `B(y_b, 1) ∩ N ⊆ S_a ⊆ B̄(y_a, 1)` a.e., so the open set `B(y_b, 1) ∩ N` lies in the closed disc `B̄(y_a, 1)`; two unit circles through
+`x` with `y_a ≠ y_b` leave an open cone of directions inside the first disc and outside the second, so `y_a = y_b = y`; then `S_a ∩ N ⊆ B̄(y, 1)` and
+`S_b ∩ N ∩ B(y, 1) = ∅`, which with (H1) is (split). *(out, in):* the same, exchanged. *(out, out):* `B(y_a, 1) ∩ N ⊆ S_b` and `B(y_b, 1) ∩ N ⊆ S_a`
+a.e.; the two open discs meet `N` in disjoint sets (an open set of measure 0 is empty), and both circles pass through `x`: they are tangent at `x`
+from opposite sides, `y_b − x = −(y_a − x)`. ∎
+
+*What the two cases are.* (split) is a **unit arc of kind both** (row 135's term): its centre `y` carries both side colours. (tangent) is the
+**parallel-partner** case (V0 §2.4 item 7(iv)): `y_a = x + ν_b` is a point of `supp S_a` across the `b`-side at distance exactly 1, and M-HULL1 with
+`P_a` shows the `a`-material near `y_a` lies at distance `> 1` from `P_a`, i.e. beyond the unit-parallel curve of `∂_e S_a ∩ N`; likewise for `b`.
+
+### 3.2 M-C11 — saturated two-colour interfaces are `C^{1,1}` with `|κ| ≤ 1` [hand, one mind; the rolling-ball step classical]
+
+*Statement.* If every point of `∂_e S_a ∩ N` satisfies M-PINCH's hypotheses (with the same `N`, `P_a`, `P_b`), then for `N′ = B(x, ρ/4)`:
+(i) at every `x′ ∈ ∂_e S_a ∩ N′` there are open unit discs `D^a(x′) ⊆ S_a`, `D^b(x′) ⊆ S_b` (within `N`, up to null sets) tangent at `x′` from opposite
+sides; (ii) `∂_e S_a ∩ N′` is a `C^{1,1}` curve with curvature in `[−1, 1]` a.e. — a Lipschitz graph over its tangent at `x`, both semiconcave and
+semiconvex (Rataj–Zajíček 2017, eq. (2): `C^{1,1}` ⟺ both); (iii) if one point of it is of type (split), all of `∂_e S_a ∩ N` is one arc of `T₁(y)`.
+*Proof.* (i) is M-PINCH at `x′` (the (split) case gives both discs: `B(y, 1) ∩ N` on one side, `B(2x′ − y, 1) ∩ N ⊆ N ∖ B̄(y, 1)` on the other).
+(iii) (split) at one point already fixes `S_a ∩ N` and `S_b ∩ N` as the two sides of `T₁(y)`. (ii) Every `x″ ∈ ∂_e S_a ∩ N′` lies outside both open
+discs at `x′` (it has positive density for each colour, while `D^a(x′)` is a.e. in `S_a` and `D^b(x′)` a.e. in `S_b`), so
+`|⟨x″ − x′, n(x′)⟩| ≤ |x″ − x′|²/2` with `n(x′)` the common normal. A closed set whose boundary points all admit two tangent open unit discs, one on
+each side, is a domain with the two-sided rolling-ball property of radius 1, whose boundary is `C^{1,1}` with normal 1-Lipschitz — Blaschke's rolling
+theorem in its two-sided form (the planar argument: the two inequalities at `x′` and `x″` bound the angle between `n(x′)` and `n(x″)` by
+`O(|x′ − x″|)`, and the double-horn constraint makes each normal line near `x` meet the boundary once). [external for the classical step: Walther 1999
+and the "two-sided supporting spheres" literature, not read here — a debt, §P] ∎
+
+*What it does to arbitrary interfaces.* V0-WIG7's wiggled edges are **not saturated** (away from the vertex zones they are free for both colours:
+§1.4, §2.5), so they do not bear on C-HULL-REG's statement — but they show its hypothesis is load-bearing: **saturation is exactly what removes
+them.** Under (H1), (H2), a saturated interface is a unit arc splitting its neighbourhood, or a `C^{1,1}` curve with `|κ| ≤ 1` carrying unit discs of
+both colours on both sides and parallel partners at distance 1 on both sides. A wiggle of curvature `> 1` is excluded outright; a gentle wiggle
+survives only with a unit-parallel partner curve of the far colour on each side, which is itself an interface with its own partners — a **chain of
+unit-parallel curves**, whose curvature is transported by row 134's shadow map `λ ↦ λ/(1 + λ)` (X16). Whether chains force straight segments or
+end at unit arcs is the next rung (proposed stub, §P): it is REG-A off the junction set.
+
+### 3.3 M-EXTREME — every region has at least two singular points on its minimal enclosing circle [hand, one mind]
+
+*Statement.* Let `g` be saturated and honest with classes a.e. open, and `R` a component of the open class of colour `c`. `diam R ≤ 1` (M-HULL2), so its
+minimal enclosing circle `∂B(o, r)` has `r ≤ 1/√3 < 1` (Jung) and meets `cl R` in at least two points. At each such `p`, M-PINCH's conclusion fails for
+`R`'s side: either `d̄_c(p) = 0` (`R` is a cusp at `p`) or (H1) or (H2) fails at `p`.
+*Proof.* Suppose `d̄_c(p) > 0` and (H1), (H2) hold at `p`, with `c` and some `d`. `p` is saturated. `P_c ∪ R` is a path-connected subset of the open
+class (they share the positive-measure set `R ∩ N`), so `P_c ⊆ R`. M-PINCH gives an open unit disc tangent at `p` with `D ∩ N ⊆ S_c`, a.e. inside
+`P_c ⊆ R ⊆ B(o, r)`. The interface is `C^1` at `p` (two tangent discs) and `R ⊆ B(o, r)`, so the tangent at `p` is the circle's and `D` lies on `o`'s
+side: `D` is internally tangent to `B(o, r)` at `p` with radius `1 > r`, so it contains points near `p` outside `B̄(o, r)` — a positive-measure set in
+`S_c ∩ N ⊆ R`, outside `R`'s enclosing disc. ∎
+*Reading.* Voronov's Lemma 2.2 (a trichromatic point in every unit disc) has a saturated sharpening: every region carries at least two singular points,
+at its extreme positions, and every closed unit disc about any point contains a region's singular points. The singular set Σ (cusps, points of three
+or more colours, points where a colour's local part is disconnected — bichromatic vertices of degree `≥ 4`) is where REG-J must work (stage 4).
+*Inhabitant at `k = 7`:* R7 — each up's minimal circle is its circumcircle, meeting it at its three vertices (lattice points, `|P| = 3`); each down's
+meets it at its three cusps (`d̄ = 0`).
+
+### 3.4 M-COVER-SC — the class-by-class form, for maximal covers [hand, one mind]
+
+In a maximal cover (M-SATC) every `x ∈ ∂F_a` has a contact `y ∈ F_a`, and M-PINCH's Step 1 (which uses only M-HULL1) gives, for each path-connected
+piece `P` of `F̃_a` near `x` with `x ∈ cl P`: `P ⊆ B̄(y, 1)` or `P ∩ B(y, 1) = ∅`. So each boundary point admits, per adjacent piece, an **enclosing**
+or an **exterior** unit disc — one-sided only (the other side of `F_a` is covered by several classes, so Step 2 does not run). If `∂F_a` is locally
+the graph of a continuous `u` with `F_a` below, both cases touch `u` from above at `x` by a function of second derivative `≤ 1` (the enclosing disc's
+upper arc, `−1`; the exterior disc's lower arc, `+1`), so `u − s²/2` is concave: **`u` is semiconcave with constant 1** — the planar
+positive-reach structure of Rataj–Zajíček (2017, Theorem 6.4, type `T¹`; the hypograph of a semiconcave function has positive reach). The graph
+property itself is not proved here: GAP.
+
+### 3.5 Controls
+
+- **R7** (`k = 7`): every interface is of type (split): the up inside `B(v, 1)`, the down outside, `v` the arc's centre, carrying both colours (checked
+  exactly in stage 2, (S)); the lattice points are singular (three ups meet); M-C11's conclusion (unit arcs) holds on every arc.
+- **The strip** (row 136; `tools/fs112_y_check.py` `strip()`, read, not run for this): its vertical segments `x = x_{j+1}` (`x_j = j/2`) between `A_j`
+  and `A_{j+1}` are of type (tangent): `A_j`'s colour recurs at `A_{j+3}`, whose left edge is `x = x_{j+1} + 1`, and `A_{j+1}`'s at `A_{j−2}`, whose
+  right edge is `x = x_{j+1} − 1`, both over the same heights — straight parallel partners at distance 1 on both sides; its unit arcs are of type
+  (split), kind both (row 136). Consistent with M-PINCH (read by hand from the checker's formula; one mind).
+- **The disk** (row 136): every unit arc of kind both centred at a four-colour vertex — the (split) type; its non-arc interfaces not examined here.
+- **The hexagonal colouring and V0-WIG7** (`k = 7`): not saturated (M-DEADLOCK); M-PINCH says nothing there, and they show the saturation hypothesis
+  cannot be dropped from any regularity statement.
+
+### 3.6 Verdict on C-HULL-REG
+
+**MISSTATED.** *As stated* ("every `x` with `P(x) = {a, b}` has a neighbourhood in which `∂_e S_a` is the graph of a Lipschitz function, locally
+semiconcave or semiconvex"): **GAP at (H1) and (H2)** — `P(x) = {a, b}` does not exclude (H1)'s failure (a third colour of density 0 at `x`, e.g. a
+cusp touching an interface point, which makes `∂_e S_b` near `x` a union of the interface and the cusp's sides, not one graph) nor (H2)'s (several
+`a`-components meeting at `x`: a bichromatic vertex of degree `≥ 4`, an X-shaped `∂_e S_a`, not a graph). No saturated colouring realising either was
+built (that is W's side); none is excluded. *Corrected* (M-PINCH, M-C11): under (H1) and (H2) at every essential boundary point of `N`, `∂_e S_a` near
+`x` is a `C^{1,1}` curve with `|κ| ≤ 1` — semiconcave **and** semiconvex — which is either one unit arc of kind both splitting the neighbourhood, or a
+curve with unit discs of both colours tangent on both sides and unit-parallel partners. [hand, one mind]. *Class by class* (M-COVER-SC): semiconcave
+with constant 1 wherever `∂F_a` is a graph; the graph property GAP. **Registration E4** (C-HULL-REG TRUE given C-SAT-T, 0.5): as stated GAP; its
+corrected form TRUE with a stronger conclusion than registered.
