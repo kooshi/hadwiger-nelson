@@ -498,3 +498,109 @@ which stage 2 had read by its §11 verdict alone — G50's rule, the note that "
   positive side while its argument stays unheld.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the plan (WORKFLOW 4) — the form, the phases, the decisions, the registrations
+
+### 5.0 The first decision: the form of the global step (four parts)
+
+- **The choice.** Attack the global step in **DENSE3's form (GS-D): the NO itself**, with FS112-N3-DENSE3 (two minds, one blind) as the held property
+  of every counterexample. The anchor of a local route is left to the proof: four-colour and repeated-colour vertices together (C114-LOCAL-FR, which
+  needs nothing further), or four-colour vertices alone (C114-LOCAL-F with C114-EXISTS-F, NIGHT-A §6's one-mind step, second-minded by CV). The
+  four-colour form (GS-4) is used **only for doubly periodic maps**, where FS112-C-COMPOSE (2) makes it the NO with no ray step. **The four-colour form is
+  not chosen for aperiodic maps, so FS-115 does not open on FS-114's account.**
+- **Alternatives weighed.** (a) GS-4 for every map: it would let a proof ignore repeated-colour vertices, at the price of FS-115's (b′) and (b″) — two
+  further GAPs about rays and long chains, the kind of non-local structure a local route exists to avoid. (b) GS-1 alone (NIGHT-A §6): one four-colour
+  vertex plus a local exclusion about it. It is the sharpest target, but it rests on FS112-C-ENDS (one mind, with a named residue).
+- **Why GS-D won.** It needs only two-mind inputs, and it contains GS-1 as a sub-route: choosing GS-D gives up nothing GS-1 offers, while GS-4 for
+  aperiodic maps adds two GAPs that no route to the NO needs (FS112-C-COMPOSE (1)). Route T (Thomassen's count, §PA (b)) reads no four-colour vertex
+  at all and does not use row 134's base, so it is untouched by the choice and by any failure BASE-V might find.
+- **Confidence: medium-high.** What would change it: the proof side finds that repeated-colour vertices on long stuck chains resist every local
+  exclusion while four-colour vertices do not, and C-ENDS's residue cannot be closed. Then (b′) and (b″) become the bottleneck, FS-115 opens, and the owner
+  hears so at once.
+
+### 5.1 Phases (at most three agents at once across tonight's jobs, all Opus 5.5; one level deep; FS-114 takes each slot that frees, NIGHT-A §1)
+
+| phase | job | what | reads first | produces | guidance |
+|---|---|---|---|---|---|
+| **R0** (conditional) | FS114-R0 | **If BASE-V reports a failing step, the repair runs first**: re-derive the failing step in FS-112's setting or name what replaces it; regrade row 134 and every FS-112 entry resting on FS112-N3-BASE (DENSE3 among them) before N builds on them. The owner briefs it from BASE-V's report | BASE-V's record (after it reports) | the repair, or the step named as a GAP with what rests on it | 300k |
+| **N**, round 1 | FS114-N | the proof side. **Stage 1: card 2, by derivation** — C114-COMPACT's use (can the radius be explicit, uniform in `K`?), C114-VOR (the step closedness buys in `[Voronov2023]` Thm 1.3), C114-THOM-TOP (Thomassen's Lemma 1 and topology on valid maps' map graphs; faces that touch themselves or are not discs); a verdict on the route (local, anchored at `F ∪ R` or `F`; or the count), every step stating its reading radius. **Stage 2: the route, torus first** (G68) — C114-RAINBOW, C114-CURV, C114-BUDGET for route T, or C114-LOCAL-FR / -F for the local route, on doubly periodic maps. **Stage 3: aperiodic maps** — averaging (`[Mohar2002]`'s discharging for subexponential growth) or the local exclusion's uniformity; GS-D's verdict at its grade, or its GAP named | `data/fs114/claims.md`; this plan's §G part 3, §PA, §IQ, 5.0–5.2 (not 5.3 until its stage 1 is committed); `[Thomassen1999]` (held text, 4 pages); `plans/FS106-V-verification.md` §2.1 and V3 stage 2 (Voronov's and Thomassen's proofs as verified); FS-112's derivation file; `[Mohar2002]` and Ágoston 2025, fetched at stage 1 | `plans/FS114-N-proof.md`; `tools/fs114_n_*.py` | 400k |
+| **Y**, round 1 | FS114-Y | the construction side. **Stage 1:** calibrate (FS-112's exact checkers run, never edited, on the strip, the disk, FS112-BOWTIE, the brick and the hexagonal seven-colouring; any new checker in `tools/fs114_y_*.py` accepts all five first); read FS-112's rebuild data (G46); **C114-PENT derived before anything is built**. **Stage 2:** C114-DIAL (a valid fragment about a four-colour vertex beyond `≈ 1.834`, or a derived obstruction at a named radius); C114-TORUS (a doubly periodic design by formula from FS112-C-PARTNERS' budget, or each member's failure with its parameter count); C114-SIRGEDAS-FORM. **Stage 3:** §IQ's killing tests (a)–(c) on every fragment held; G71's E12 at FS112-BOWTIE's seam; every stop sent to the owner as a statement about every valid map (G79) | `data/fs114/claims.md`; §G part 3, §PA, §IQ, 5.0–5.2; FS-112's construction records and tools (`plans/FS112-Y-construction.md`, `-Y3-`, `-YB2-`; `tools/fs112_yb2_*`, `tools/fs112_yb3_frags.py`); `[Polymath2021]` pp. 190–201; `[Sirgedas2021]` (render; its stitch of unit arcs) | `plans/FS114-Y-construction.md`; `tools/fs114_y_*.py` | 400k |
+| **CV** | FS114-CV | blind second minds on the composition: FS112-C-ENDS **with its residue** (close it, or name the configuration it misses), FS112-C-COMPOSE, FS112-C-PARTNERS, and C114-EXISTS-F (NIGHT-A §6); derived from the links' statements, fenced from the assembly | `data/fs114/claims.md` §§0, 2, 3; the link records (`plans/FS112-N-proof.md` N2-4 and N3-4; `plans/FS112-NB-verification.md` §2.3 #10; `plans/FS112-YB3-verification.md` §3) | `plans/FS114-CV-verification.md` | 250k |
+| **NB, YB** | FS114-NB, FS114-YB | blind verifiers, each launched at its side's hand-back; instance files (the owner's) list the claim ids with the side's verdicts withheld | as their briefs | `plans/FS114-NB-verification.md`, `-YB-` | 300k each |
+| **A** (optional) | FS114-A | a competition advisor — **only if a slot would otherwise idle while both sides run**; else the owner compares the round at its end (protocol rule 14) | both sides' records, per the protocol | `plans/POROS-2026-09-27-fs114-competition.md` | 350k |
+| **round 2** | — | planned by the owner at round 1's boundary, aimed at the sides' meeting point (a plan addendum, as FS-112 did) | — | — | — |
+| **close** | FS114-C | WORKFLOW 9 from the close inventory | — | — | — |
+
+**Launch order** (the slots FS-114 receives, first to last): R0 if BASE-V fails; **N**; **Y**; **CV**; NB at N's hand-back; YB at Y's hand-back; A only
+into an idle slot. N goes first because card 2 is a question about the shape of a proof, and a NO is the likelier answer; Y goes second because its
+fragments are the controls every local step of N must fail on (C-BEYOND), and the two meet at the radius dial.
+
+**Checkpoints** (the PROTECTED rule): every job saves stage by stage in its record (standing rule 2); a killed job's relaunch redoes at most one stage.
+No exact check planned here runs long; any that would exceed 15 minutes writes its state after each named member it checks and records its resume
+command in the record before it starts.
+
+### 5.2 Decisions (four parts each; 5.0 is D1)
+
+| # | choice | alternative weighed | why this one | confidence (and what would change it) |
+|---|---|---|---|---|
+| D2 | one proof side, with card 2 as its stage 1 | two proof competitors, one local, one counting | the protocol's lesson (§3: "two routes to one heart are a synthesis, not a competition"); the construction side's fragments bound any local route from below, so proof against construction meets at the radius dial | medium — if N's stage 1 finds both routes live and independent, round 2 gives each its own side |
+| D3 | no reading job before the contest | a reading job P0, as at FS-112 | the held reading is short (Thomassen, 4 pages; Voronov's and Thomassen's proofs already verified at FS-106 with records), the rest is two fetchable papers, and tonight's slots are shared with FS-111 and BASE-V | medium — if N's or Y's stage-1 reading passes about 100k tokens, the owner adds P0 in round 2 |
+| D4 | CV as its own blind job | N re-derives FS112-C-ENDS inside its stage 2 | a second mind must be blind to FS112-C's and FS112-C2's assembly, and N would read it as input; C-ENDS gates GS-1 only, so CV runs beside the contest, not before it | high |
+| D5 | the registrations (5.3) fenced from both sides and their verifiers until each has committed its stage 1 | let them read 5.3 and score the walks as primed alike | FS-112's owner ruling (its inventory item 10): the first measurement (card 2's verdict) is worth two samples only if neither is primed | high — **held for the owner** as a ruling to confirm |
+| D6 | no Lean lane in this milestone | a phase K: the statement of Q-full in Lean (segment-and-arc maps, almost-everywhere validity), `sorry` at every leaf, vacuity DECLARED | the statement is still moving (C114-THOM-TOP asks whether faces must be discs; C114-COMPACT whether the class is closed under limits); a skeleton is written once the class is fixed. Not a cost argument (§ Counter-priors) | medium — **held for the owner**: if Kooshi wants the statement in Lean now, K runs into the first idle slot, a skeleton only |
+| D7 | Y runs FS-112's exact checkers as they are, and writes wrappers (periodic pairs for a torus map) in `tools/fs114_y_*.py` | a new checker from scratch | FS-112's three checkers are calibrated on the strip, the disk and FS-110's fragments at two or three rebuilds; a wrapper inherits that calibration and must re-earn it on the torus (a planted periodic pair) | medium — if no FS-112 checker handles the arithmetic a torus design needs, Y writes a new one and calibrates it on all five controls first |
+| D8 | the choice of route is N's, at stage 1, by derivation | the planner picks local or count now | the brief: "Do not derive the global step yourself; the jobs do." The planner's evidence (PA-A: every printed regular NO local with an explicit radius; G17 for global) is registered (E1), not imposed | high |
+
+### 5.3 Registered expectations (instruments for G21, scored at the close; never caps — § Counter-priors rule 2; each with its population and both outcomes reachable) — **fenced from N, Y, NB, YB and CV until each has committed its stage 1** (D5)
+
+| # | expectation | p | population | both outcomes reachable |
+|---|---|---|---|---|
+| E1 | card 2: N's stage-1 verdict chooses a **local** route (an explicit-radius exclusion anchored at `F ∪ R` or `F`) over a plane-wide count | 0.55 | N's stage-1 verdict | yes — either route is N's to choose, by derivation (PA-A for local; G17 and NIGHT-A's hunch for global) |
+| E2 | an **explicit** radius is derived for some local exclusion (C114-LOCAL-FR or -F TRUE with `R` named) within FS-114 | 0.15 | N's and NB's verdicts on C114-LOCAL-FR, -F | yes — a derivation with `R`, or GAP |
+| E3 | GS-D decided (NO or YES) at one mind within FS-114 | 0.2 | the milestone's verdict | yes — a NO by derivation, or a valid map by formula checked exactly |
+| E4 | a NO for doubly periodic maps at one mind | 0.3 | N's stage-2 verdict | yes — derivation, or a periodic valid map by formula (C114-TORUS) |
+| E5 | C114-THOM-TOP TRUE (Lemma 1 and the topological steps hold for every valid map's map graph, self-touching and non-disc faces handled) | 0.7 | N's and NB's verdicts | yes — a valid fragment by formula whose map graph breaks a step (a face touching itself at a vertex is the first candidate) |
+| E6 | C114-RAINBOW TRUE as stated | 0.5 | N's and NB's verdicts | yes — MISSTATED or FALSE with a fragment repeating a colour around a face with neither a Siamese pair nor a unit arc |
+| E7 | C114-CURV's radius depends on `K` (no uniform `R₀`) | 0.7 | N's verdict | yes — a uniform `R₀`, or a family of maps whose degree-≤5 regions grow with `K` |
+| E8 | CV confirms FS112-C-ENDS, C-COMPOSE and C-PARTNERS | 0.8 | CV's verdicts | yes — a counterexample configuration refutes one |
+| E9 | CV closes C-ENDS's residue, so C114-EXISTS-F holds at two minds | 0.55 | CV's verdict | yes — the residue closed, or a configuration it misses named |
+| E10 | C114-PENT: the pentagon skeleton admits the third unit-arc boundary | 0.3 | Y's and YB's verdicts | yes — a valid extension by formula, or a derived obstruction at a named point |
+| E11 | C114-DIAL: a valid fragment about a four-colour vertex beyond `≈ 1.834`, by formula | 0.25 | Y's objects, checked exactly | yes — an exact fragment, or a derived obstruction at a named radius |
+| E12 | a YES by formula (a valid map of the plane) | 0.03 | Y's objects | yes — the checker and a formula; a NO by derivation |
+| E13 | C114-SKELETON: a discrete form of the local structure at four-colour vertices, derived | 0.4 | N's or Y's derivation | yes — derived, or shown to lose information a NO needs |
+| E14 | G83's reading survives: the decisive argument of the milestone reads vertices of `F ∪ R` | 0.8 | the close's reading of the milestone's best argument | yes — an argument reading no such vertex (route T could be one) |
+| E15 | a blind verifier (NB, YB or CV) finds a divergence of truth | 0.6 | the round's verifiers | yes (FS-112: one in every round) |
+| E16 | G71's index survives the bowtie seam with unit arcs (E12 at FS-112, untested) | 0.75 | Y's test at FS112-BOWTIE's seam | yes — a swap forced with `\|ΔInd\| = 2` refutes it |
+| E17 | a named obstruction or GAP as the product | 0.85 | the milestone | — |
+
+### 5.4 The ban, and Kooshi's ruling beyond it
+
+To 2026-10-01 no finite-witness search of any kind (standing rule 3); beyond it, "search for a finite graph is out." For this milestone: candidate maps
+and fragments are **given by formula** and checked exactly in seconds; no program enumerates maps, colourings, tile graphs, dual graphs, vertex types or
+parameters. Sirgedas's and Gibbs's 2020 exhaustive search of non-Siamese tilings (§PA row 3) is the kind of method the ruling excludes; its statement is
+a claim the sides may attack by derivation. Every brief carries the "would have searched here" log.
+
+### 5.5 Carry-over (not this milestone's work; for the owner and the close)
+
+- **FS-115 stays unopened** (5.0); its stub's line "it moves to 2 the day FS-114's plan commits to that form" did not fire. Its (b′), (b″) and bowtie end
+  (c) keep their bearing only through GS-4 for aperiodic maps and C-ENDS's residue (CV).
+- **FS-111** is unaffected by the form; its card 1 (does the map NO at every complexity bound plus a cone-scale bound give seven) reads FS-114's NO in
+  whatever form lands — at every `K`, which C114-COMPACT's uniformity question bears on.
+- **Kernel decisions**: 40 of FS-112's derivation entries read "Kernel: stub — with FS-114". They move with D6 to the milestone that lands the NO.
+
+### 5.6 Proposed edits for the close (I edit none of these files)
+
+- `BIBLIOGRAPHY.md`: the rows listed at §PA ("Proposed `BIBLIOGRAPHY.md` rows"), and `[Oostema2020]`'s last page confirmed as 389 at the publisher
+  (the owner's item 79).
+- `CLOSED-QUESTIONS.md`: nothing now; if an explicit `R` lands, Mixon's thread-7 question ("What is the radius of the largest disk in $\mathbb{R}^2$ that
+  can be 6-colored?") gets its upper side for maps with unit arcs.
+- `plans/STUB-stuck-ray.md`: its bearing line gains "FS-114's plan chose DENSE3's form (2026-09-27); FS-115 bears through the four-colour form for
+  aperiodic maps and through FS112-C-ENDS's residue".
+- `CLAUDE.md` G83's *Do* could name route T's vertex-free candidate as its killing test's likeliest instance — at the close, if route T lands.
+
+### 5.7 Briefs (stage 6)
+
+Drafted at stage 6 for the owner to launch: `data/fs114/briefs/N114-proof.md`, `Y114-construction.md`, `CV114-composition.md`,
+`NB114-verify-proof.md`, `YB114-verify-construction.md`, and `A114-advisor.md` (optional). R0's brief is the owner's, from BASE-V's report.
+
+## Stage 5 — SAVED
