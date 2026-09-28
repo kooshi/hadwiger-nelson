@@ -1,0 +1,4 @@
+EXACT  claims§0-valid-Q-R2-Mstar-F-R  [header]
+EXACT  claims§0-MK  [all]
+faithful run: PASS (2/2)
+plant 'alter_last_char' on claims§0-valid-Q-R2-Mstar-F-R: FIRES for its own row only
