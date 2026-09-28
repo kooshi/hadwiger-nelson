@@ -379,3 +379,33 @@ and used `T*` as a blocker only, not as a tile checked against every blue tile.
 - **Y3-END-NEEDS:** two minds for its steps 1 and 3–4 and for the chain case. **Its first requirement and its conclusion are FALSE as stated**, by
   BOWTIE: [tools, exact; one fragment, mine].
 - **One mind (mine):** YB3-N5 (`y ≠ g`; the 180° budget), and D3's consequence for END-B.
+
+## Stage 4 — SAVED
+
+## Stage 5 — SAVED: hand-back notes
+
+**Slips of mine.**
+1. The first disk run (`pins.py disk`) went past two minutes without a slot (standing rule 8). I stopped it by its process group (27 MB, nothing
+   written, confirmed gone by pid) and re-ran it under `scripts/slot.py`, as I did every later run.
+2. Reporting defects in my tools, each found by a run and fixed before any verdict rested on it:
+   - contact points at tangencies interior to a piece were not printed;
+   - "colours at a vertex" first tested piece endpoints only (END-B's `N` read {3,4,5,6});
+   - my point routine built its constants in its own base tower (an "unrelated towers" error on the disk);
+   - `W_0`'s orientation sign was wrong (caught before the run);
+   - the float coverage guard left chord–arc slivers at 96 segments per arc.
+3. Fence touches: the start-up listings (names only) and one `git log` line beyond the start-up snapshot (fence log 1–3).
+
+**Proposed edits for the close (I edit none of these files).**
+- `plans/FS112-derivation.md` / `LEDGER.md`: YB3-BOWTIE and YB3-NEEDS as the corrected Y3-END-NEEDS (TRUE for chains of two or more vertices;
+  the one-vertex bowtie end realised exactly); YB3-N5; the grades after the comparison (stage 4).
+- Y3's record: D5's precision (STRIPCUT's other side), D7's label, D3's sufficiency.
+- `BIBLIOGRAPHY.md`: no new reading. `[AxenovichEtAl2014]` p. 8 and `[Polymath2021]` pp. 194, 197–200 were re-read (text layer) by FS112-YB3.
+
+**Stubs.**
+- **The stuck-ray question (the proof side's):** its case list must include the one-vertex end. A stuck vertex whose horns lie between
+  `ω(E + n)` and `ω(E − n)`, shadowed by in-type radius-1 sectors at both antipodes, with neither neighbour stuck (BOWTIE). Whether a tight map
+  of the plane can carry it is open. A first question: can every stuck vertex of a terminal map be read as a bowtie?
+- **A test for a successor, in ban:** complete BOWTIE's neighbourhood of `ω(N)`. `N` has four colours, and its ring must satisfy the corrected
+  NB-4 (Y2-NB4): the arc of `G` on `ω(N)` spans 45.2°, so the ring's change points must fall in one orbit that meets it.
+
+## Stage 5 — SAVED
