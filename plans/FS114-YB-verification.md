@@ -7,11 +7,23 @@ they are, never edited. Stage 1 (my verdicts) is committed before I open `plans/
 
 ## Theorems this phase proved
 
-(Filled at the end of stage 1; one line per theorem, grade and address.)
+The full tables are at the end of stage 1c (thirteen lines) and of stage 2 (two lines). In one line each:
+- YB114-CHK [tools] — an exact segment-and-arc checker over towers of square roots; five plants fire as predicted; five held objects accepted (1b).
+- YB114-CAP [tools, exact; second mind, blind] — the capped strip is valid and holds `B̄(P_j, R)` for every `R < φ²/√2`, attained only at the edge vertices (1c §1).
+- YB114-EDGE-SPOT [tools, exact] — FS112-EDGE's cone at `Q_0` confirmed at 13 exact points (1c §1).
+- YB114-PENT [tools, exact + hand over COR3; second mind] — PENT, every clause; C114-PENT's first question: no (1c §2).
+- YB114-ROUTES [tools, exact; second mind] — ROUTES at named points; its region-wide reading false at 3 of 11 points (1c §3).
+- YB114-STRIPK6, YB114-STRIPRIGID, YB114-DISKRIGID [tools + hand; second mind, different routes] (1c §§4–6); YB114-LOCAL: the nine tiles at `B_k` do not force complementarity (1c §6).
+- YB114-PAIRSHARE, YB114-K6 [hand over COR3; second mind] (1c §§7–8).
+- YB114-DUAL [hand] — C114-DUAL-COUNT corrected: `2n + 2p₅ + 6p₆` distinct emitted unit arcs of kind both; the opposite tile is never the emitting edge-neighbour (1c §9).
+- YB114-RB3 [hand + tools, exact] — C114-RAINBOW corrected (trichotomy); its third case realised on an exact valid fragment (1c §10).
+- YB114-ERB, YB114-RB1 [hand; second mind] — C114-EDGE-RAINBOW; C114-REDBLOCK's first clause (1c §11).
+- YB114-SAME, YB114-THEIRPTS [tools, exact] — the rebuilds equal the side's objects; the side's 18 ROUTES points reproduce exactly (2).
 
 ## Would have searched here (standing rule 3)
 
-- (stage 1) none yet.
+- Stage 1: the four entries at the end of stage 1c.
+- Stage 2: none (the side's objects compared by their builders; their named points rebuilt by their formulas).
 
 ## Fence log (standing rule 13; brief § Rules)
 
@@ -19,7 +31,10 @@ they are, never edited. Stage 1 (my verdicts) is committed before I open `plans/
   listed the brief **file names** (among them fenced briefs); nothing in any fenced directory was listed, opened or grepped, and no fenced brief was
   opened. The start-up `git status` (harness snapshot) showed the untracked names `data/fs114/fs114-nb/`, `tools/fs114_nb_count.py`,
   `tools/fs114_nb_quotes.py` — names only, not opened.
-- `git log --oneline -5` at start-up (the snapshot's own five subjects); no further `git log`.
+- `git log --oneline -5` at start-up (the snapshot's own five subjects); no further `git log`, no `git log -p`.
+- Stage 2 (after `8ac5aa39`): FS114-Y's record, tools and `routes.out` opened as listed in stage 2's header; plan §5.3 read. Nothing of the proof
+  side (`plans/FS114-N-proof.md`, `data/fs114/fs114-n*`, `tools/fs114_n*`), of CV, of FS-111, of the close inventory or of `data/fs114/reports/` other
+  than my own report file was opened, listed or grepped; BASE-V's record was not needed and not opened.
 
 ## Stage 1a — SAVED: reading; the quotation check
 
