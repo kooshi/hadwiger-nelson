@@ -6,6 +6,8 @@ Each quote and source is normalised the same way (whitespace collapsed,
 '**' removed) and the quote must occur as a substring of the source.
 --plant alters the first quote (one word changed) and adds its faithful twin,
 so a run must show exactly one NOT FOUND (the plant) and the twin FOUND.
+--loose ignores case, all whitespace, backticks and asterisks (a second, weaker pass;
+a quotation found only loosely differs from its source in those respects alone).
 Exit status 0 iff every non-plant quote is FOUND (and, under --plant, the
 plant is NOT FOUND and the twin FOUND).
 """
@@ -13,14 +15,20 @@ import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
+LOOSE = False
+
 def norm(s: str) -> str:
     s = s.replace("**", "")
+    if LOOSE:  # --loose: case, all whitespace, backticks and asterisks ignored
+        return re.sub(r"[\s`*]+", "", s).lower()
     return re.sub(r"\s+", " ", s).strip()
 
 def main() -> int:
     args = sys.argv[1:]
+    global LOOSE
     plant = "--plant" in args
-    args = [a for a in args if a != "--plant"]
+    LOOSE = "--loose" in args
+    args = [a for a in args if a not in ("--plant", "--loose")]
     tsv = pathlib.Path(args[0])
     rows = []
     for ln in tsv.read_text().splitlines():

@@ -17,6 +17,7 @@ Stage 1 is blind: every verdict is derived from the nine statements in the insta
 | NB4-FIVE | N4-FIVE: TRUE — five colours `{1, 3, 4, X, X̄}` at a corner iff its lune ring is degenerate, else exactly `{1, 3, 4, X}` | [hand, one mind] | §1b.2 |
 | NB4-TOP | N4-TOP: TRUE — `W` (colour 4) with cone exactly `[60°, 120°]` at `top`, bordered along `ω(q1)`, `ω(q3)`; `L2` reaches `top`; `top` degree 4, `{2, 4, 5, 6}` | [hand, one mind] | §1b.2 |
 | NB4-GRED | N4-G's general member reduced: corners four-coloured; `T3` (colour 3) spans `t1`'s cap from `q1` to `q2` and `T1′` spans `t3`'s cap when both lunes are general; the change-point blockers force two cases up to the mirror; `U₂ ∌ R_s = y′ + y″` outside one sub-case | [hand, one mind] | §1c.1 |
+| NB4-G2 | N4-G after stage 2: **TRUE** — N4's kill (its §5.1 item 3: `z4` holds `P90` so its cone at `q1` starts at exactly `0°`, yet it holds `q1 + (1 − ε)e(90° + α)`, which forces the start above `α`) checked by hand and its tool re-run; with it N4-BOWTIE TRUE | [hand, two minds: N4; NB4 blind on the reduction and forced structure, sighted on the kill] | §2.2 |
 | NB4-G | N4-G: **GAP in my blind derivation** — the general member is not excluded by me within `B̄(p, √3)`: N4-D's `R*` argument does not transfer (colours 1 and 3 stay free at `R_s`) | [hand, one mind] | §1c.1 |
 | NB4-DR0 | N4-DR0: TRUE — N3-DR0's conclusion holds at `√3` (NB4-D); its step 1 fails (it excludes the ring colour at the corner from a cone of the ring tile at the midpoint that is not forced, and its conclusion "`z_a` follows `T_D` directly" is false: a tile sits between them); five colours at the corners | [hand, one mind] | §1c.2 |
 | NB4-D | N4-D: TRUE — the degenerate member dies at `R* = q1 + top`, `|R*| = √3`: no colour for the lens sector at `R*` (case `c(T_cap) = 3`) or for the tile outside `ω(q1)` at `R*` (case `c(S) = 3`) | [hand, one mind; its metric facts tools exact] | §1b.2; `tools/fs114_nb4_check.py` |
@@ -238,3 +239,65 @@ not applicable: none of the nine claims is a counting claim.
   recorded as the killing test of N4-G.
 
 ## Stage 1c — SAVED (end of the blind stage)
+
+## Stage 2 — SAVED: N4's record read; divergences; verdicts after reading
+
+### 2.1 Read (after stage 1's commit `cef41236`)
+
+`plans/FS114-N4-proof.md` in full (header, theorem table, logs, stages 1–5); `tools/fs114_n4_gexcl.py` (witness points), and the outputs of
+`tools/fs114_n4_{gexcl,dexcl,bowtie}.py` re-run by me: all three `RESULT OK`; `fs114_n4_gexcl.py --plant` fails exactly its `region` and `diam` lines, as N4's record says.
+
+### 2.2 The quotation check of the instance against N4's record (standing rule 5)
+
+`tools/fs114_nb4_quotes.py data/fs114/fs114-nb4/quotes-n4.tsv` (13 sentences of the nine statements): strict 1 of 13 FOUND; with the new `--loose` pass
+(case, whitespace, backticks, asterisks ignored) 6 of 13 (`quotes-n4.out`, `quotes-n4-loose.out`). The seven others, compared by hand with N4's theorem
+table: **N4-BOWTIE**'s "It is the union of the next two" is the owner's own gloss (true of N4's §5.2); **N4-G**, **N4-FIVE**, **N4-LENS**, **N4-OPP** differ in
+punctuation only ("(both lune rings `Γ`-free)" → ", both …"; "exactly four `{…}`" → "four, `{…}`"; "; a colour" → ", and a colour"; "`ω(q)`, `|p − q| = 1`" →
+"with `|p − q| = 1`"); **N4-TOP** drops N4's clause on the ring tiles (`T_R ⊂ B̄(q1,1) ∩ B̄(top,1)`, `T_L ⊂ …`) and reads "with cone exactly" — a weaker quotation,
+nothing added; **N4-DR0** condenses N4's corrected row faithfully (N4 filed it "FALSE as stated" at its stage 2 and withdrew that at stage 3; the instance
+quotes the corrected form). **No paraphrase changes a claim's content or my verdict.**
+
+### 2.3 Divergences from my stage-1 verdicts (each with both addresses)
+
+| # | claim | kind | mine (stage 1) | N4 | changes a verdict? |
+|---|---|---|---|---|---|
+| 1 | N4-D | route | §1b.2 item 4: in order (O2) the tile beside `ω(q1)` outside at `R*` has no colour (4 excluded by E1 at `R*`: `W` holds points of `ω(R*)` near `top`) | §3.1 items 4–6: the outer side of that arc is `W` along its whole length, so `P90 ∈ cl W`; by the mirror `P90′ ∈ cl W`, `|P90 − P90′| = √3` | no — both TRUE; the kill of (O1) is the same (my item 3 = N4's item 3); mine needs no mirror step |
+| 2 | N4-G | truth of my verdict | §1c.1: GAP at "exclude cases (i), (iii) within `B̄(p, √3)`"; my item 5 is N4's N4-GP90 (reached blind) | §5.1: TRUE; item 3 is the step I lacked | **yes: GAP → TRUE** (checked below) |
+| 3 | N4-BOWTIE | follows 2 | GAP at N4-G | TRUE over N4-D, N4-G | **yes: GAP → TRUE** |
+| 4 | N4-OPP | truth (scope) | §1b.2: MISSTATED — an edge leaving `p` in exactly the opposite direction and curving toward `q` with curvature `> 1` captures the branch; corrected form given | §4.1: TRUE, "the tile … whose sector contains the directions just to `q`'s side of `θ + 180°`" (a first-order sector) | no — I keep MISSTATED for the general statement; both agree in the bowtie (N4-OWN) |
+| 5 | N4-LENS | wording | TRUE non-Siamese, FALSE without | TRUE; the record's header scopes every statement non-Siamese | no |
+| 6 | N4-TOP | route | colour 1 at `top` excluded by FACE against `t1` at `q1` | … against `t1` at `p` | no — both valid |
+| 7 | N4-FIVE | reading | "not forced" is a corner-local reading; vacuous at `√3` once N4-G holds | "No." (the card's question) | no |
+| 8 | N4-DR0 | none | TRUE on every clause | TRUE (corrected at its stage 3) | no |
+| 9 | grades | grade | — | every row one mind | OWN, LENS, FIVE, TOP, D, DR0: now **two minds, one blind**; G, BOWTIE: two minds, blind on the reduction and structure, **sighted on the kill**; OPP: disagreement (MISSTATED) |
+| 10 | scope | none | non-Siamese, simple, tactic partners, no complexity bound; N4-G needs the bottom ring `Γ`-free (the cap tile) | the same (§3.1 *Reads*, §5.1 item 1) | no |
+
+### 2.4 The check of N4-G's kill (sighted)
+
+N4 §5.1: suppose `t2` reaches `y′`. (1) Both lunes general, so one colour-3 tile `C` spans `t1`'s cap (FACE, or N4-LENS on `B(q1,1) ∩ B(q2,1)` — my §1c.1 item 1),
+`C ⊂ B̄(q2, 1)`, and `z4`'s cone at `q1` starts at `≤ 0°`. (2) Near `P90` the lens part `Δ` meets only `z4`: `t1, C, U1` (N4-TANG), `U2` (`|P90 − y″| > 1`) miss a
+neighbourhood of `P90`; colour-2 tiles other than `t2` miss `B(y′, 1) ∋ P90` (`|P90 − y′|² = 4 − 2√3 cos(s − 60°) < 1`); `t2 ⊂ B̄(p,1)`; every colour is covered
+by N4-LENS at `q1` (1, 3, 4, X) and at `top` (X̄, `top` interior to `U2`). So `P90 ∈ cl z4`, `z4 ⊂ B̄(P90, 1)`, and its cone at `q1` starts at exactly `0°`. (3) `z4`
+holds `w_α = q1 + (1 − ε)e(90° + α)` for small `α > 0` and `ε ≪ α` (in `Δ`, direction from `P90` just past `180°`), so `z4 ⊂ B̄(w_α, 1)`, whose half-plane at
+`q1` is `{v·e(90° + α) ≥ 0}`: the cone must start at `≥ α` — against `0°`. (N4's tool uses one point `v` at `5°`; the argument needs only the cone's start, and
+survives a cusp `z4`.) The mirror kills `t2` at `y″` (`|P90′ − y″| < 1`, the cap tile `T1′ ⊂ B̄(q4, 1)`), against N3-DR1 (my §1c.1 item 2, re-derived blind).
+**Verdict: TRUE.** The step I missed at stage 1: I had `z4 ∋ R*` with its cone starting at `0°` and pursued the `T3 | z4` edge instead of `z4`'s own points past `R*`.
+
+### 2.5 Verdicts after stage 2
+
+| claim | verdict | grade (minds) | radius read |
+|---|---|---|---|
+| N4-BOWTIE | TRUE | hand; two (N4; NB4, the G kill sighted) | `√3` |
+| N4-D | TRUE | hand; two, one blind (NB4), different last steps | `√3` (`R* = P90`) |
+| N4-G | TRUE | hand; two (N4; NB4 blind to item 2, sighted on item 3) | `√3` (`P90`, `P90′`) |
+| N4-FIVE | TRUE | hand; two, one blind | `1 + ε` |
+| N4-OWN | TRUE | hand; two, one blind | `ε` and the corner |
+| N4-LENS | TRUE (non-Siamese) | hand; two, one blind | the lens |
+| N4-TOP | TRUE | hand; two, one blind | `1 + ε` |
+| N4-OPP | **MISSTATED**; corrected form §1b.2 | hand; one (NB4) against N4 | `ε` |
+| N4-DR0 | TRUE | hand; two, one blind | `√3` (conclusion), `1 + ε` (the failing step) |
+
+**Not changed by reading N4:** N4-OPP. **Not in my claim list but read:** N4-L60 (FS112-L60 FALSE at exactly 60°, the Reuleaux cap) — N4-D and N4-G do not use
+L60 in either form (checked: no step cites an arc-length bound), so the audit of L60 does not touch this verdict.
+
+## Stage 2 — SAVED

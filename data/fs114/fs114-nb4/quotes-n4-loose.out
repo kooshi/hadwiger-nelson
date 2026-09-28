@@ -1,0 +1,14 @@
+FOUND	[real]	plans/FS114-N4-proof.md	no valid fragment (non-Siamese, simple class) on the closed disc of ra
+NOT FOUND	[real]	plans/FS114-N4-proof.md	It is the union of the next two
+FOUND	[real]	plans/FS114-N4-proof.md	the degenerate member does not exist at radius `√3`
+FOUND	[real]	plans/FS114-N4-proof.md	No valid fragment on the closed disc of radius `√3` about `p` holds th
+NOT FOUND	[real]	plans/FS114-N4-proof.md	the general member does not exist at radius `√3`, both lune rings `Γ`-
+FOUND	[real]	plans/FS114-N4-proof.md	five colours at a Reuleaux corner are not forced by the bowtie alone
+NOT FOUND	[real]	plans/FS114-N4-proof.md	With the lune rings free of `Γ`, a corner carries five colours iff its
+FOUND	[real]	plans/FS114-N4-proof.md	a Reuleaux corner of the bowtie never carries the colour of the lune i
+NOT FOUND	[real]	plans/FS114-N4-proof.md	if `|u − v| = 1`, a tile meeting the open lens `B(u, 1) ∩ B(v, 1)` wit
+NOT FOUND	[real]	plans/FS114-N4-proof.md	in the degenerate member (one change point, at the lune's ring midpoin
+FOUND	[real]	plans/FS114-N4-proof.md	The lune tile reaches `top`, a degree-4 vertex of four colours `{2, 4,
+NOT FOUND	[real]	plans/FS114-N4-proof.md	if an edge at `p` lies on `ω(q)` with `|p − q| = 1`, the other branch 
+NOT FOUND	[real]	plans/FS114-N4-proof.md	N3-DR0's conclusion (the degenerate member does not exist) holds at ra
+SUMMARY: 6 of 13 real quotations FOUND; plant=off
