@@ -24,6 +24,9 @@ N3-FLANK, N3-PAIR, N3-ODD. All statements are for **non-Siamese** valid maps (no
 | N4-L60 | **FS112-L60 is FALSE at exactly 60°**: the Reuleaux cap region `Reul(A, B, C) ∖ B̄(P, 1)` (diameter `≤ 1`) is an outer tile along a whole 60° arc of `ω(P)` with constant sides, and the bowtie's cap tile (N3's `T_top`) is one; its proof's step "T_out contains points (1+ε)e beside each end direction" fails there. Corrected: at most 60°, with equality only when the outer tile lies in `B̄(A,1) ∩ B̄(B,1)` | [hand, one mind; tools exact] | §2.6; `… l60` |
 | N4-TANG | In the degenerate member the ring tile `T_R` borders `t1` along `t1`'s arc on `ω(q2)` at `q1`, so it has points outside `B̄(P90, 1)`: `T_R` does not reach `P90` (`ω(q2)` and `ω(P90)` are tangent at `q1` from opposite sides) | [hand, one mind; tools exact at a named point] | §3.1; `tools/fs114_n4_dexcl.py` tang |
 | **N4-D** | **The degenerate member does not exist at radius `√3`**: no valid fragment on the closed disc of radius `√3` about `p` holds the Reuleaux bowtie with a lune whose ring is free of `Γ` and changes colour once. `q1`'s colour-3 tile must reach `P90`, which forces the far lune's colour-4 tile `W` at `top` along the whole arc of `ω(q1)` from `top` to `P90`; by the mirror it reaches `P90′ = q3 + e(90°)` too, and `|P90 − P90′| = √3` | [hand, one mind; tools exact at named values] | §3.1; `… dexcl` |
+| N4-OPP | (N4-OWN's general form) If an edge at `p` lies on `ω(q)`, `|p − q| = 1`, the other branch of `ω(q)` through `p` enters the tile at `p` on `q`'s side of the opposite direction, whose colour is then absent at `q` — unless that branch runs along `Γ` | [hand, one mind] | §4.1 |
+| N4-GP90 | In the general member: the ring tile `U1` at `q1` misses `P90` (N4-TANG's argument), and if the lune tile reaches the change point `y′` nearer `q1`, the partner `z4` reaches `P90` (the lens `B(q1,1) ∩ B(top,1)` leaves it nothing else) and the cap tile's cone at `q1` is exactly `[300°, 0°]`; mirror at `q3` | [hand, one mind] | §4.2 |
+| N4-K1 | K1's status after this job: excluded for the Reuleaux bowtie with a degenerate `Γ`-free lune (N4-D, radius `√3`); **GAP** at the general bowtie, at lune rings carrying arcs of `ω(p)`, at non-Reuleaux lenses, and at the pinwheel, the `(2, 1, 1, 0)` patterns and three tactic edges (not walked at radius 2) | [hand, one mind] | §4.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -236,3 +239,56 @@ lune).
 **Would-have-searched here.** A fragment by formula with (O2) at both corners, to see how far it goes: not built — the derivation reaches the obstruction first.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the general member, a general lemma, and K1's status at radius 2
+
+### 4.1 N4-OWN in general
+
+**N4-OPP [hand, one mind].** *Let an edge `e` at `p` lie on `ω(q)`, `|p − q| = 1`, leaving `p` in direction `θ`. The other branch of `ω(q)` at `p` leaves in
+direction `θ + 180°` and curves toward `q`; unless it runs along `Γ`, it enters the interior of the tile at `p` whose sector contains the directions just to
+`q`'s side of `θ + 180°`, and that tile's colour is absent at `q`* (N-E1 at `q`). ∎ In the bowtie it is N4-OWN (`q4 = −q1`: the branch of `ω(q1)` runs along
+`t2`'s side of the `t2 | t3` edge). At a degree-4 vertex with four tactic edges it gives four colour absences at the four centres, one per edge; in the
+pinwheel (`++++`) the opposite tile is never the edge's own outer tile (N3-SEC (i): no sector exceeds 180°), so there it excludes no partner by itself.
+*Reads:* `p`, `q`.
+
+### 4.2 The general member (two change points), what is forced, and where it stops
+
+*Setting G:* the top lune's ring changes colour at `y′ = e(s)` and `y″ = e(s + 60°)`, `s ∈ (30°, 90°)`, with tiles `U1` (colour `X`, `∋ q1`), `U2` (`X̄`),
+`U3` (`X`, `∋ q3`). By N4-D (and its mirror across the horizontal axis) **every `Γ`-free lune of a Reuleaux bowtie in a valid map is of this kind.**
+Carried and re-derived in this frame:
+- *Corners* (N4-FIVE): `q1` has degree 4 and colours `{1, 3, 4, X}` in the order `t1 | Y3 | z4 | U1`; `U1` borders `t1` along `ω(q2)` (the sliver argument of
+  N4-TOP item 4, with `X̄` excluded because `U2` comes within distance `< 1` of `q1`). Mirror at `q3`: `t3 | Y1 | z4′ | U3`.
+- *The caps* (N3's `T_top`, re-derived): with the bottom lune also general, the tiles on `t1`'s cap at `q1` and at `q2` both have colour 3; two distinct ones would
+  be far, putting the one at `q1` in the cone `[0°, 180°]` (N3-FACE), while it starts at `300°`. So **one colour-3 tile touches `q1` and `q2`**, inside
+  `B̄(q1, 1) ∩ B̄(q2, 1)` and outside `B(p, 1)` — the Reuleaux cap region. Whether it borders the whole cap (the equality case of N4-L60) or leaves an enclosed
+  middle tile of colour `X̄` is open (such a tile must touch the cap at angles `θ ∈ [60° − s_b, s − 60°]`, `s_b` the bottom lune's `s`).
+- *N3-DR1 in this frame:* `t2` reaches the ring at `y′` or at `y″`; `z4` reaches `y′` or `z4′` reaches `y″`.
+
+**N4-GP90 [hand, one mind].** *`U1` misses `P90`* (N4-TANG verbatim: `U1` borders `t1` along `ω(q2)` at `q1`). *If `t2` reaches `y′`, then `z4` reaches `P90`
+and the cap tile's cone at `q1` is `[300°, 0°]`.* In the lens `B(q1, 1) ∩ B(top, 1)` (`top` is interior to `U2` here, so `P_cl(top) = {X̄}`), N4-LENS leaves near
+`P90`, outside `B̄(p, 1)`: `q1`'s tiles (`t1` no, the cap tile no — it lies in `B̄(q2, 1)`, 2 away from `P90` —, `U1` no, `z4`), `U2` (no: `|P90 − y″| > 1`), and
+colour-2 tiles other than `t2`. Those are far from `t2`, hence miss `B(y′, 1)` when `t2` reaches `y′`, and `P90 ∈ B(y′, 1)` for `s ∈ (30°, 90°)`. So `z4`
+reaches `P90`; then `z4 ⊂ B̄(P90, 1)` puts its cone at `q1` in `[0°, 180°]`, and the cap tile ends at `0°`. ∎ Mirror: if `t2` reaches `y″`, `z4′` reaches
+`P90′`. *Reads:* `q1`, `top`, `y′`, `y″`, `P90`.
+
+**Where it stops.** N4-D's kill needed one tile forced to reach both `P90` and `P90′`; in G the tiles forced there are the two partners `z4` and `z4′`, which are
+different tiles and may do so. What remains to decide G at radius 2 is the placement of `z4` (inside `B̄(q1, 1) ∩ B̄(P90, 1)`, outside `B(p, 1) ∪ B(q3, 1)`)
+against the ring of the four-colour vertex N3-DR2 puts at `y′` or `y″`, and the far arcs of `ω(q1)` (colours 2 and `X̄` only). **Not decided here.**
+N3's registration (a fragment realising the general member on `B̄(p, 1 + ε)`, p = 0.7) is untouched; its radius-2 form is the open question.
+
+### 4.3 K1 at radius 2: the status
+
+| pattern at a degree-4 vertex (N3-SEC; the card's GAPS shapes) | status after this job |
+|---|---|
+| `+−+−`, two opposite Reuleaux lenses, a lune whose ring is `Γ`-free with one change point | **excluded at radius `√3`** (N4-D) |
+| `+−+−`, Reuleaux lenses, both lunes general (G) | GAP: forced structure §4.2; passes every check made |
+| `+−+−`, Reuleaux lenses, a lune ring carrying an arc of `ω(p)` (N3-FLANK's other branch) | not walked (scope of stages 2–4) |
+| `+−+−`, a lens with `γ < 60°` (non-Reuleaux) | not walked |
+| `++++` (the pinwheel), `+++−` and `++−−` (the `(2, 1, 1, 0)` patterns), three tactic edges | not walked at radius 2; N4-OPP gives one colour absence per tactic edge |
+
+So **K1 remains a GAP**; its one closed case is the card's design. Route T's kill therefore still needs the joint payment (N3-JOINT). What N4 adds to it: at a
+bowtie vertex with `Γ`-free lunes the four Reuleaux corners are degree-4 four-colour vertices (N4-FIVE with N4-D), each carrying at least one tactic edge (the
+cap: inner `t1`, centre `p`, partner `t3`); whether a corner carries three or more (and is itself deficient) is not derived. N3-PAY's assumption that the
+continuation ends are cubic is not re-derived here.
+
+## Stage 4 — SAVED
