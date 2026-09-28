@@ -1,0 +1,28 @@
+FOUND     rule 0: Kooshi
+FOUND     rule 10: Kooshi
+FOUND     card K1 (N2-GSD)
+FOUND     card K1 (N2-KILL)
+FOUND     card K2-loc (N2-GSD)
+FOUND     card GAP-mu (N2-GSD)
+FOUND     card negative charge (N2-ENDS)
+FOUND     card N2-ENDS charges
+FOUND     card N2-ENDS partner
+FOUND     card N2-DIAM
+FOUND     card extreme shape
+FOUND     card N2-SLACK
+FOUND     card N2-VCAP
+FOUND     card N114-RD
+FOUND     card NB reading radius
+FOUND     card N2-SIAM
+FOUND     card N2-REFINE
+FOUND     tactic edge definition
+FOUND     NB-A1
+FOUND     FS112-NB4P
+FOUND     FS112-U1
+FOUND     FS112-A4SIX
+FOUND     FS112-N3-COR3
+FOUND     FS112-SIX
+FOUND     C114-LOCAL-F
+FOUND     CV-EXISTS (owner message)
+FOUND     GS-D
+RESULT OK
