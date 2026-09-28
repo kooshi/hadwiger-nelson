@@ -1,0 +1,3 @@
+R7 faithful: flagged pairs 0
+R7 planted (<3e1,e2>): flagged pairs 22; e.g. [('D', 'D', 0.3463, 1.7559), ('D', 'D', 0.2748, 1.763)]
+float cross-check agrees with the exact engine (faithful clean, plant flagged)

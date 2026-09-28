@@ -1,0 +1,34 @@
+[HEX7] 72 exact boundary sample points on 1 tiles
+    reading (L): points free for their own tile's colour: 60
+      e.g. H0,0<0> at (-0.433013, 0.204545)
+      e.g. H0,0<0> at (-0.433013, 0.159091)
+      e.g. H0,0<0> at (-0.433013, 0.113636)
+    reading (B): points free for some colour: 60
+      e.g. H0,0<0> at (-0.433013, 0.204545): free colours [0, 6]
+      e.g. H0,0<0> at (-0.433013, 0.159091): free colours [0, 6]
+      e.g. H0,0<0> at (-0.433013, 0.113636): free colours [0, 6]
+      e.g. H0,0<0> at (-0.433013, 0.068182): free colours [0, 6]
+    reading (A): interior point centre H0,0 (0.000000, 0.000000) (colour 0): free colours []
+[R7] 150 exact boundary sample points on 2 tiles
+    reading (L): points free for their own tile's colour: 0
+    reading (B): points free for some colour: 0
+    reading (A): interior point centroid R0,0 (0.500000, 0.288675) (colour ('R', 0, 0)): free colours []
+    reading (A): interior point centroid D0,0 (1.000000, 0.577350) (colour ('D', 0)): free colours []
+[R8-PLANT (down by 2Lambda)] 75 exact boundary sample points on 1 tiles
+    reading (L): points free for their own tile's colour: 69
+      e.g. D0,0<('D', 0, 0)> at (0.998751, 0.049969)
+      e.g. D0,0<('D', 0, 0)> at (0.995012, 0.099751)
+      e.g. D0,0<('D', 0, 0)> at (0.988813, 0.149161)
+    reading (B): points free for some colour: 69
+      e.g. D0,0<('D', 0, 0)> at (0.998751, 0.049969): free colours [('D', 0, 0)]
+      e.g. D0,0<('D', 0, 0)> at (0.995012, 0.099751): free colours [('D', 0, 0)]
+      e.g. D0,0<('D', 0, 0)> at (0.988813, 0.149161): free colours [('D', 0, 0)]
+      e.g. D0,0<('D', 0, 0)> at (0.980198, 0.198020): free colours [('D', 0, 0)]
+[SQ9] 48 exact boundary sample points on 1 tiles
+    reading (L): points free for their own tile's colour: 0
+    reading (B): points free for some colour: 0
+    reading (A): interior point centre S0,0 (0.250000, 0.250000) (colour (0, 0)): free colours []
+[HEX9] 72 exact boundary sample points on 1 tiles
+    reading (L): points free for their own tile's colour: 0
+    reading (B): points free for some colour: 0
+    reading (A): interior point centre X0,0 (0.000000, 0.000000) (colour (0, 0)): free colours []

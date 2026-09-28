@@ -1,0 +1,84 @@
+[HEX7] pairs improper: 0; tight contacts: 3
+    tight H0,0<0> H0,0<0>: dmax = 1
+    tight H1,0<1> H1,0<1>: dmax = 1
+    tight H0,1<3> H0,1<3>: dmax = 1
+[HEX7] uncertified boundary pieces: 6
+    UNCERTIFIED H0,0<0> Seg(-0.433013, 0.250000)->(-0.433013, -0.250000)
+    UNCERTIFIED H0,0<0> Seg(-0.433013, -0.250000)->(0.000000, -0.500000)
+    UNCERTIFIED H0,0<0> Seg(0.000000, -0.500000)->(0.433013, -0.250000)
+    UNCERTIFIED H0,0<0> Seg(0.433013, -0.250000)->(0.433013, 0.250000)
+    UNCERTIFIED H0,0<0> Seg(0.433013, 0.250000)->(0.000000, 0.500000)
+    UNCERTIFIED H0,0<0> Seg(0.000000, 0.500000)->(-0.433013, 0.250000)
+    HEX7 edge midpoint (-0.433013, 0.000000): free colours [0, 6]; vertex (-0.433013, 0.250000): free colours []
+    HEX7 edge midpoint (-0.216506, -0.375000): free colours [0, 4]; vertex (-0.433013, -0.250000): free colours []
+    HEX7 edge midpoint (0.216506, -0.375000): free colours [0, 5]; vertex (0.000000, -0.500000): free colours []
+    HEX7 edge midpoint (0.433013, 0.000000): free colours [0, 1]; vertex (0.433013, -0.250000): free colours []
+    HEX7 edge midpoint (0.216506, 0.375000): free colours [0, 3]; vertex (0.433013, 0.250000): free colours []
+    HEX7 edge midpoint (-0.216506, 0.375000): free colours [0, 2]; vertex (0.000000, 0.500000): free colours []
+[HEX7] calibration PASSED: proper, tight, not saturated (every edge midpoint free for its own colour; vertices not free)
+[R7] pairs improper: 0; tight contacts: 49
+    tight R0,0<('R', 0, 0)> R-2,0<('R', 0, 0)>: dmin = 1
+    tight R0,0<('R', 0, 0)> R-2,2<('R', 0, 0)>: dmin = 1
+    tight R0,0<('R', 0, 0)> R0,-2<('R', 0, 0)>: dmin = 1
+    tight R0,0<('R', 0, 0)> R0,0<('R', 0, 0)>: dmax = 1
+    cert R0,0<('R', 0, 0)> Arc[c=(0.500000, 0.866025)](0.000000, 0.000000)->(1.000000, 0.000000): arc centre (0.500000, 0.866025) lies in closed R0,0
+    cert R0,0<('R', 0, 0)> Arc[c=(0.000000, 0.000000)](1.000000, 0.000000)->(0.500000, 0.866025): arc centre (0.000000, 0.000000) lies in closed R0,0
+    cert R0,0<('R', 0, 0)> Arc[c=(1.000000, 0.000000)](0.500000, 0.866025)->(0.000000, 0.000000): arc centre (1.000000, 0.000000) lies in closed R0,0
+    cert R0,1<('R', 0, 1)> Arc[c=(1.000000, 1.732051)](0.500000, 0.866025)->(1.500000, 0.866025): arc centre (1.000000, 1.732051) lies in closed R0,1
+    cert R0,1<('R', 0, 1)> Arc[c=(0.500000, 0.866025)](1.500000, 0.866025)->(1.000000, 1.732051): arc centre (0.500000, 0.866025) lies in closed R0,1
+    cert R0,1<('R', 0, 1)> Arc[c=(1.500000, 0.866025)](1.000000, 1.732051)->(0.500000, 0.866025): arc centre (1.500000, 0.866025) lies in closed R0,1
+    cert R1,0<('R', 1, 0)> Arc[c=(1.500000, 0.866025)](1.000000, 0.000000)->(2.000000, 0.000000): arc centre (1.500000, 0.866025) lies in closed R1,0
+    cert R1,0<('R', 1, 0)> Arc[c=(1.000000, 0.000000)](2.000000, 0.000000)->(1.500000, 0.866025): arc centre (1.000000, 0.000000) lies in closed R1,0
+    cert R1,0<('R', 1, 0)> Arc[c=(2.000000, 0.000000)](1.500000, 0.866025)->(1.000000, 0.000000): arc centre (2.000000, 0.000000) lies in closed R1,0
+    cert R1,1<('R', 1, 1)> Arc[c=(2.000000, 1.732051)](1.500000, 0.866025)->(2.500000, 0.866025): arc centre (2.000000, 1.732051) lies in closed R1,1
+    cert R1,1<('R', 1, 1)> Arc[c=(1.500000, 0.866025)](2.500000, 0.866025)->(2.000000, 1.732051): arc centre (1.500000, 0.866025) lies in closed R1,1
+    cert R1,1<('R', 1, 1)> Arc[c=(2.500000, 0.866025)](2.000000, 1.732051)->(1.500000, 0.866025): arc centre (2.500000, 0.866025) lies in closed R1,1
+    cert D0,0<('D', 0)> Arc[c=(0.000000, 0.000000)](1.000000, 0.000000)->(0.500000, 0.866025): arc centre (0.000000, 0.000000) lies in closed D-1,-1
+    cert D0,0<('D', 0)> Arc[c=(1.000000, 1.732051)](0.500000, 0.866025)->(1.500000, 0.866025): arc centre (1.000000, 1.732051) lies in closed D-1,2
+    cert D0,0<('D', 0)> Arc[c=(2.000000, 0.000000)](1.500000, 0.866025)->(1.000000, 0.000000): arc centre (2.000000, 0.000000) lies in closed D2,-1
+    cert D1,0<('D', 1)> Arc[c=(1.000000, 0.000000)](2.000000, 0.000000)->(1.500000, 0.866025): arc centre (1.000000, 0.000000) lies in closed D0,-1
+    cert D1,0<('D', 1)> Arc[c=(2.000000, 1.732051)](1.500000, 0.866025)->(2.500000, 0.866025): arc centre (2.000000, 1.732051) lies in closed D0,2
+    cert D1,0<('D', 1)> Arc[c=(3.000000, 0.000000)](2.500000, 0.866025)->(2.000000, 0.000000): arc centre (3.000000, 0.000000) lies in closed D3,-1
+    cert D2,0<('D', 2)> Arc[c=(2.000000, 0.000000)](3.000000, 0.000000)->(2.500000, 0.866025): arc centre (2.000000, 0.000000) lies in closed D1,-1
+    cert D2,0<('D', 2)> Arc[c=(3.000000, 1.732051)](2.500000, 0.866025)->(3.500000, 0.866025): arc centre (3.000000, 1.732051) lies in closed D1,2
+    cert D2,0<('D', 2)> Arc[c=(4.000000, 0.000000)](3.500000, 0.866025)->(3.000000, 0.000000): arc centre (4.000000, 0.000000) lies in closed D4,-1
+[R7] uncertified boundary pieces: 0
+[R7] PASSED: a.e.-proper, tight, every boundary arc certified non-free for its own colour
+[R7-P1 (down by <3e1,e2>)] pairs improper: 2; tight contacts: 3
+    IMPROPER D0,0<('D', 0)> D0,-1<('D', 0)>: 1 in (dmin, dmax)
+    IMPROPER D0,0<('D', 0)> D0,1<('D', 0)>: 1 in (dmin, dmax)
+    tight D0,0<('D', 0)> D0,-2<('D', 0)>: dmin = 1
+    tight D0,0<('D', 0)> D0,0<('D', 0)>: dmax = 1
+    tight D0,0<('D', 0)> D0,2<('D', 0)>: dmin = 1
+[R7-P2 (up by <4e1,e2>)] pairs improper: 2; tight contacts: 3
+    IMPROPER R0,0<('R', 0, 0)> R0,-1<('R', 0, 0)>: 1 in (dmin, dmax)
+    IMPROPER R0,0<('R', 0, 0)> R0,1<('R', 0, 0)>: 1 in (dmin, dmax)
+    tight R0,0<('R', 0, 0)> R0,-2<('R', 0, 0)>: dmin = 1
+    tight R0,0<('R', 0, 0)> R0,0<('R', 0, 0)>: dmax = 1
+    tight R0,0<('R', 0, 0)> R0,2<('R', 0, 0)>: dmin = 1
+[CERT-P] down arc Arc[c=(0.000000, 0.000000)](1.000000, 0.000000)->(0.500000, 0.866025) of D0,0<('D', 0)>: same-colour tiles holding its centre: ["D-1,-1<('D', 0)>"]
+[CERT-P] with the holder removed from the tiling, certificate = None
+[plants] R7-P1, R7-P2, CERT-P fired, each for its own reason; faithful twins passed
+[SQ9] pairs improper: 0; tight contacts: 4
+    tight S0,0<(0, 0)> S-3,0<(0, 0)>: dmin = 1
+    tight S0,0<(0, 0)> S0,-3<(0, 0)>: dmin = 1
+    tight S0,0<(0, 0)> S0,3<(0, 0)>: dmin = 1
+    tight S0,0<(0, 0)> S3,0<(0, 0)>: dmin = 1
+    cert S0,0<(0, 0)> Seg(0.000000, 0.000000)->(0.500000, 0.000000): unit translate by (0.000000, -1.000000) lies in closed S0,-3
+    cert S0,0<(0, 0)> Seg(0.500000, 0.000000)->(0.500000, 0.500000): unit translate by (1.000000, 0.000000) lies in closed S3,0
+    cert S0,0<(0, 0)> Seg(0.500000, 0.500000)->(0.000000, 0.500000): unit translate by (0.000000, 1.000000) lies in closed S0,3
+    cert S0,0<(0, 0)> Seg(0.000000, 0.500000)->(0.000000, 0.000000): unit translate by (-1.000000, 0.000000) lies in closed S-3,0
+[SQ9] uncertified boundary pieces: 0
+[HEX9] pairs improper: 0; tight contacts: 6
+    tight X0,0<(0, 0)> X-3,0<(0, 0)>: dmin = 1
+    tight X0,0<(0, 0)> X-3,3<(0, 0)>: dmin = 1
+    tight X0,0<(0, 0)> X0,-3<(0, 0)>: dmin = 1
+    tight X0,0<(0, 0)> X0,3<(0, 0)>: dmin = 1
+    cert X0,0<(0, 0)> Seg(0.000000, 0.288675)->(-0.250000, 0.144338): unit translate by (-0.500000, 0.866025) lies in closed X-3,3
+    cert X0,0<(0, 0)> Seg(-0.250000, 0.144338)->(-0.250000, -0.144338): unit translate by (-1.000000, 0.000000) lies in closed X-3,0
+    cert X0,0<(0, 0)> Seg(-0.250000, -0.144338)->(0.000000, -0.288675): unit translate by (-0.500000, -0.866025) lies in closed X0,-3
+    cert X0,0<(0, 0)> Seg(0.000000, -0.288675)->(0.250000, -0.144338): unit translate by (0.500000, -0.866025) lies in closed X3,-3
+    cert X0,0<(0, 0)> Seg(0.250000, -0.144338)->(0.250000, 0.144338): unit translate by (1.000000, 0.000000) lies in closed X3,0
+    cert X0,0<(0, 0)> Seg(0.250000, 0.144338)->(0.000000, 0.288675): unit translate by (0.500000, 0.866025) lies in closed X0,3
+[HEX9] uncertified boundary pieces: 0
+[SQ9, HEX9] PASSED: a.e.-proper, tight, every boundary piece certified non-free (literal reading)

@@ -1,0 +1,11 @@
+[DECO] squares checked: 14; improper pairs: 0; contacts at exactly 1: 0
+[DECO] hexagon H0,0 against its colour: improper 0, tight [('H0,0<0>', 'H0,0<0>', 'dmax = 1')]
+[DECO] colour 4: E-4,0<4>~H-3,0<4> (dmax<1: True), H-3,0<4>~W-2,0<4> (dmax<1: True), E-4,0<4> apart W-2,0<4> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 5: E-3,0<5>~H-2,0<5> (dmax<1: True), H-2,0<5>~W-1,0<5> (dmax<1: True), E-3,0<5> apart W-1,0<5> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 6: E-2,0<6>~H-1,0<6> (dmax<1: True), H-1,0<6>~W0,0<6> (dmax<1: True), E-2,0<6> apart W0,0<6> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 0: E-1,0<0>~H0,0<0> (dmax<1: True), H0,0<0>~W1,0<0> (dmax<1: True), E-1,0<0> apart W1,0<0> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 1: E0,0<1>~H1,0<1> (dmax<1: True), H1,0<1>~W2,0<1> (dmax<1: True), E0,0<1> apart W2,0<1> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 2: E1,0<2>~H2,0<2> (dmax<1: True), H2,0<2>~W3,0<2> (dmax<1: True), E1,0<2> apart W3,0<2> (dmin>1: True) -> no tight block structure: True
+[DECO] colour 3: E2,0<3>~H3,0<3> (dmax<1: True), H3,0<3>~W4,0<3> (dmax<1: True), E2,0<3> apart W4,0<3> (dmin>1: True) -> no tight block structure: True
+[DECO-PLANT offsets 6/100-7/100] improper pairs for E0,0: [('E0,0<1>', 'W2,0<1>', '1 in (dmin, dmax)')]
+[DECO] PASSED: a.e.-proper, tight, no class has tight block structure; plant fired on the E-W pair
