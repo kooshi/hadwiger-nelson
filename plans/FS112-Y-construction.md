@@ -626,3 +626,25 @@ tile that is locked by a both-kind arc (6.4) or by forced sectors (6.5). **This 
 beyond it — the strip's `Q` (height `√15/2 + √3`) and the disk's `C_k` (radius `r`) are where such a step lives.
 
 ## Stage 6 — SAVED
+
+## Stage 7 — SAVED: hand-back notes (what is left, proposed edits)
+
+**Left for a successor (A3-2.3's steps 3–4 and the two GAPs above), in the order I would take them:**
+1. **The `κ = ±1` horn fragment** (A3 step 3): WC (`tools/fs110_y_cone.py`) with horn+'s upper boundary on `ω(N)` — the circle centred `N = (0, 1)`, radius 1,
+   through `v` — replacing the radius-2 arc; the out-tile at `N` must then sit beyond that arc (kind **out** at `N`). Not started.
+2. **C-HOCK on A6-C2 is mis-aimed as stated** (one mind, read off the builder): A6-C2's only arcs of radius `< 1` are the ring band's inner arcs (radius
+   `9/10` about `v`), and they border the fragment's **uncoloured** gap (`v`'s flower is a box of half-size `1/10`; nothing is coloured between radius `0.14`
+   and `0.9`). Filling one to radius 1 through the same ends only grows a ring piece into empty space, so an ACCEPT would say nothing about HOCK's claim for
+   maps. A meaningful instance needs an arc of radius `< 1` between two tiles of a valid object; none of the held exact objects has one (the strip and the
+   disk have only unit arcs and, for the disk, the rim). The `move_semicircle` plant (6.6) is an *invalid* object that filling to radius 1 repairs — the
+   converse direction, not HOCK.
+3. **The second move at `C_0`** (6.4): whether any change near `Z^L_0` that keeps `T2_0`'s top arc lets the triangle `T*` be blue.
+4. **The strip's colour 4 at `Q`** (6.5): cutting `C_{−1}` and `C_2` along `ω(Q)`.
+5. **A blind rebuild of CAL-DISK** (A3's default) needs a tower-capable checker: FS112-YB's field cannot hold `sin 72°`.
+
+**Proposed `BIBLIOGRAPHY.md` reading-status edits (the close writes them):** `[Polymath2021]`: p. 199 read (text) and Fig. 10 viewed at 150/400/800 dpi
+for its combinatorics (FS112-Y2, 2026-09-27); the disk rebuilt exactly from it and accepted by an exact checker; pp. 197–198 read.
+
+**Retractions this continuation:** 1 (retraction 4: Y112-NB4-MIS's (γ), §3.2). **Slips of mine:** the plant `move_wrongside` registered with a wrong reason
+(6.6); the `move_semicircle` prediction written in the tool's docstring rather than in 6.0 before its run (6.6); the start-up listing of the briefs directory
+(fence log 1).
