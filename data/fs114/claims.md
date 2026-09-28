@@ -193,3 +193,22 @@ sharing an edge with it, and a "polygon" or "quad" a map vertex where that many 
 - **C114-FIVE-COUNT** (Sirgedas, `J_Tw1_hUxQI`, 2020-01-21, verbatim): "so 200% of the edges are curved, so a 5-coloring is impossible." *(this list)* The
   positive control of any counting route: it must yield that non-Siamese valid five-colour maps do not exist (a known value, row 132), and name the step
   where six's room enters.
+
+## 9. Corrections at the close (FS114-C, 2026-09-28; `plans/FS114-C-close.md`)
+
+- **C114-RAINBOW: MISSTATED** (four minds). Corrected: "Siamese, or the unit-radius tactic (one face shares a unit arc of `ω(q)` with `x`, the other meets
+  `cl x` only at `q`), or both meet `cl x` only in finite sets at mutual distance exactly 1" (FS114-YB §1c item 10; = FS114-N114-RD read on contact sets).
+- **C114-DUAL-COUNT: MISSTATED.** Corrected (FS114-NB-DUAL, two minds, both blind): at least `2F + 2V₅ + 6V₆` of the `2.5F` edges are unit arcs — at least
+  80 %, exactly `2n` iff no vertex has degree 5 or 6. FS114-Y's "TRUE as stated" an over-grade.
+- **C114-FIVE-COUNT: TRUE** (FS114-N2-FIVE, two minds). **C114-EDGE-RAINBOW: TRUE** (four minds). **C114-THOM-TOP: TRUE with a colour-free repair**
+  (three minds, 2–1). **C114-VOR:** fails at C-CS-1 (c) (two minds). **C114-COMPACT: TRUE for every `K`**; not at a fixed `K` read as "≤ `K` tiles per unit
+  disc" (two minds). **C114-CURV: TRUE at each `K`**, `R₀ = O(K²)`; a uniform radius a reading. **C114-REDBLOCK:** first clause and "no pentagons" TRUE;
+  "no quadrilateral" GAP; "only triangles" undecided. **C114-ENCLOSED3: GAP** (it implies COVER-3). **C114-PENT: no** (two minds); its second question
+  answered at named points (FS114-Y-ROUTES). **C114-DIAL: met** (FS114-Y-DIAL). **C114-TORUS:** F1, F2 excluded; F3 undecided. **C114-SIRGEDAS-FORM:** not
+  landed; its gloss "no Siamese pair (every vertex of `R(M)` absent)" is one-way — no Siamese pair implies no vertex of `R(M)`, not conversely (FS114-YB).
+- **C114-EXISTS-F: TRUE, with no residue** (FS114-CV-EXISTS, two minds blind to each other). **GS-1:** delete "outside FS112-C-ENDS's named residue" and
+  "the terminal modification" (every valid map itself has the vertex). **C114-LOCAL-F: GAP** — and its lower bound "`√15/4 + √3/2 ≈ 1.834`" → "`φ²/√2 ≈
+  1.8512`" (FS114-Y-DIAL, two minds). **C114-LOCAL-FR:** not needed (C114-LOCAL-F alone suffices). **GS-D:** stalls at C114-LOCAL-F.
+- **Route T:** K1 GAP (at the named cases of FS114-K1); K2-loc moot (its content is K2′); GAP-μ stands; SIAM-KILL subsumed by C114-LOCAL-F. **C114-SKELETON:**
+  not derived. **C114-BUDGET:** route T's charge (FS114-N2-ENDS) is non-negative at every vertex type but a degree-4 vertex with at least three tactic
+  edges — named.

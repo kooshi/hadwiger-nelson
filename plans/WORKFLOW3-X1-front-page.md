@@ -142,3 +142,26 @@ row 137 retells row 135's map definition; row 139 and FS111-W-HX-PAIRS, row 141 
 -M2-DISCK7 share runs (a row and its § B index line, or two § B lines' grade cells); row 138 and G83 share "two tiles of one colour forced along two unit
 circles to come within"; FS112-L60's corrected line and FS114-L60-LE share "a unit arc with constant sides is at most 60°". Filed as drafted; the
 retellings are the lanes' to trim, not mine.
+
+## Stage 4 — SAVED: items 4–8
+
+Script: `data/workflow3/x1/file_stage4.py` (its output `stage4-file.out`), run on the untouched targets (a first run was reverted with `git checkout`
+and re-run after two formatting fixes: Poros's re-rank paragraph and open-milestones text joined to one line each, the form of every paragraph around
+them; no word changed).
+
+| item | target | filed | source | merges / rulings |
+|---|---|---|---|---|
+| 4 | `plans/GROKKING-INSTANCES.md` | FS-114's four (§G21, §G51, §G72, §G79), each its italic header line, a blank line, its body; FS-111's eight (§G21 ×2, §G30, §G51, §G67, §G72, §G79, § Make the gate fail), each under the header "*FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*", the italic paragraph as it stands; the new section "## G67 — A grokking is grokked by its form" between G65 and G72 | FS-114 § `plans/GROKKING-INSTANCES.md`; FS-111 §D4 "Instances" | Amendment 1 Q7 ("Twenty-first, FS-111:"). Placement: each at its section's end, FS-114's before FS-111's; the §G30 one at the end of the section proper, before its "### The tally" subsection; FS-114's §G79 "after FS-110's" lands after FS-112's, which already follows FS-110's |
+| 5 | `BIBLIOGRAPHY.md` | § A: FS-114's six rows (`[AxenovichLiuSagdeev2025]` not added, Q6 (a)), then FS-111's three; § A′: `[AHNR2018]` in backtick form (Q6 (e)); § C: FS-111's seven at the table's end; edits: `[Thomassen1999]` read + "; page images not held, OCR only (FS114-CVB)"; `[Polymath16threads]` role + " **FS-114:** …" + ". **FS-111:** …"; `[Bukh2008]` work + "; arXiv:math/0703856v2; Zbl 1169.52005", role + ". **FS-111:** …", copy and read replaced; `[Sirgedas2021]` read = "read: pp. 1–11 and 13 (FS114-Y); its stitch is a seven-colour device"; the group row "**Held, unread**" → "**Held, partly read**" + ". **FS-114:** " + the draft's text | FS-114 § `BIBLIOGRAPHY.md`; FS-111 §D5 | Q6 (a)–(e). `[Oostema2020]`'s edit is a **no-op**: its § C row already reads "373–389" |
+| 6a | `data/fs114/claims.md` | "## 9. Corrections at the close (FS114-C, 2026-09-28; `plans/FS114-C-close.md`)" + the draft's bullets | FS-114 § `data/fs114/claims.md` | F1 pair 9 read as its parenthesis: "(C114-LOCAL-F alone is the NO)" → "(C114-LOCAL-F alone suffices)" (the draft's line carries bold, so F1's old string, which has none, matches only in its parenthesis); Q8 |
+| 6b | `data/fs111/claims.md` | "## 6. Corrections at the close (FS111-C, 2026-09-28; `plans/FS111-C-close.md` §D3)" + D3's bullets | FS-111 §D3 | Q8 |
+| 7a | `plans/STUB-global-step.md` | the closed banner under the title; D8's bearing (Q3: words moved, none added); "(C114-LOCAL-F) is the whole NO" → "(C114-LOCAL-F) suffices for the whole NO" (Q9) | FS-114 § the closed banner; FS-111 §D8 bullet 1 | F1 pair 8; Q3; Q9 |
+| 7b | `plans/STUB-reg-scale.md` | D7's banner under the title | FS-111 §D7 | ruling 3 |
+| 7c | FS-115, FS-104, FS-108, FS-109, FS-113, FS-101 stubs | "*At FS-111's close:* <D8's text>": inline at the end of the **Provisional bearings** paragraph (FS-115, FS-101); a new last paragraph of "## Bearing on χ ≥ 6" (FS-104), "## Bearing on the answer" (FS-108), "## Provisional bearings" (FS-109, FS-113). D8's last bullet ("Any stub a new grokking bears on") files nothing: it says both are in the lines above | FS-111 §D8 | Q4 |
+| 7d | `plans/STUB-local-exclusion.md`, `plans/STUB-map-step.md` | F3's two replacements; F2's sentence after "Rank it by the NO it would add, not by the equivalence." | Poros § Draft re-rank item 6 | F3, F2 |
+| 8 | `plans/FRONTIER-STUBS.md` | block 1, the re-rank paragraph, first under "## Ranked stubs"; block 2, the 69 rows under the unchanged header (Poros's header asserted equal to the file's; rows = `data/workflow3/r1/ranked-table.md` = the record's table); block 3, "**None is open.** …(§ Toolchain)." replaced; block 4, the two closed-list lines at its head (one line each); block 5, FS-115's banner under its title (`plans/STUB-stuck-ray.md`) | Poros § Draft re-rank blocks 1–5 | ruling 3 (in blocks 3–4) |
+
+**Gates at this stage:** `python3 tools/bib_audit.py` → **exit 0**, "arXiv ids cited but NOT in the bibliography: 0", "bracketed keys cited but neither
+defined nor aliased: 0" (before the filing: exit 1, 8 arXiv ids and 17 keys, all FS-114's and FS-111's); `--self-test` exit 0, "3 controls, ALL FIRED".
+`python3 data/rerank-2026-09-27/rk_mirror_check.py` → **exit 0**, "checked 69 ranked stubs; CLAUDE.md single rows 29, group row 30–69", "RESULT: PASS";
+`--self-test` exit 0, "SELF-TEST PASS" (every plant fired). Outputs `data/workflow3/x1/stage4-*.out`.

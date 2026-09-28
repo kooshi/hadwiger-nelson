@@ -1,5 +1,10 @@
 # FS-111 — the cone scale (REG-SCALE): do near-optimal band-proper six-colourings keep their junctions fat? (stub)
 
+> **CLOSED 2026-09-28 — undecided** (rows 139–141; `plans/FS111-derivation.md`; `plans/FS111-C-close.md`). Its question became "the cone
+> scale and the regularity step" (inventory item 12). Card 1, at two minds: the doors are two routes, not halves, and each route's third statement is
+> the answer restated; route M's rungs hold down to the pinch at a junction. Successors: FS-120 (`plans/STUB-pinch-at-junction.md`), FS-121
+> (`plans/STUB-map-step.md`), FS-122 (`plans/STUB-forced-pair.md`).
+
 *Minted 2026-09-27 by the close planner FS107-C at FS-107's close (`plans/FS107-close-inventory.md` items 16, 18, 25, 28; `plans/FS107-R-stability.md`
 §3.4 and §4; `plans/POROS-2026-09-27-fs107-competition.md` §5.1, §5.9). **Solver column: none** — derivation and reading. Written for a session with
 zero conversation memory: read `CLAUDE.md` § The aim (links 5–6) and § Counter-priors first, then `LEDGER.md` rows 131–133, `plans/FS107-derivation.md`

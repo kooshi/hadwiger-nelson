@@ -1,5 +1,7 @@
 # FS-115 — the stuck ray: can a one-sided chain of stuck vertices live in a six-map with unit arcs, are finite chains bounded, and does the one-vertex bowtie end live in one? (stub)
 
+> **Re-aimed 2026-09-28 (R1), rank 4 → 6.** FS114-CV-EXISTS removed the ray step from the NO; this stub's live bearing is as a rung of FS-121, through ¬LRA, if FS111-C's one-mind reading that LRA is this ray holds.
+
 *Minted 2026-09-27 by the close planner FS112-C at FS-112's close, on Kooshi's ruling (`plans/FS112-close-inventory.md` item 59: *"point two
 milestones at the two gaps, so we can focus on them specifically. They seem to require more research and careful exploration, and may be more
 complicated than they appear."*), rank 2, above FS-111; its sibling is FS-114, the global step (`plans/STUB-global-step.md`), and this stub's bearing
@@ -10,7 +12,7 @@ session with no memory of FS-112: read `CLAUDE.md` § The aim and § Counter-pri
 
 **Provisional bearings** (WORKFLOW 3.1 replaces them at the opening): G79 (the chain's end, flipped from a wall into an anchor at FS-112), G72, G82,
 G21 (a local fragment is not a map; a finite chain is not a ray), G30 (the next discipline: dynamics of a parabolic map), G51, G17, G71 (the index at a
-bowtie seam; FS-112's E12 untested); rows 133–136; stubs FS-114, FS-111. *At FS-114's close:* G83 (rewritten), rows 137–138; stubs FS-116, FS-117.
+bowtie seam; FS-112's E12 untested); rows 133–136; stubs FS-114, FS-111. *At FS-114's close:* G83 (rewritten), rows 137–138; stubs FS-116, FS-117. *At FS-111's close:* FS111-M2-INTRAD (two minds on its core): off a locally finite singular set saturated interfaces have integer radii, so the map step at six needs only no large-radius accumulation — which is this stub's stuck ray in another form (FS111-M2-REDUCE-A); FS-121 shares it.
 
 ## The question, in plain language
 

@@ -134,3 +134,19 @@ inhabitant at `k = 7` (a tight seven-colouring given by formula) or say that it 
   holds or fails on a tight seven-colouring in a named way, and every NO says where six is spent.
 - **The strip and the disk** (row 136, verbatim: "valid six-colourings, tight, every unit arc of kind both and centred at a four-colour vertex"): valid
   tight six-coloured fragments; every local claim of §3 must hold on them.
+
+## 6. Corrections at the close (FS111-C, 2026-09-28; `plans/FS111-C-close.md` §D3)
+
+- **§0, "Band-proper at slack `ε`"**: its source is `data/fs107/claims.md` §1, ll. 58–59, not §0 SEQ (V0 §1.2; the planner's stage 2 §2.1 has the same slip).
+- **§1, Row 130**: "(this list's reading of the definition D-M)" → "(FS111-V0-RESCALE, a theorem: rescale by `1 ± ε*`)".
+- **§2, FS111-C1-GAP**: MISSTATED → the corrected statement of `plans/FS111-derivation.md` § FS111-C1-GAP (for each reading a `T_r`; the composition open).
+- **§2, FS111-C1-FALS**: MISSTATED → the corrected statement (§ FS111-C1-FALS), with FS111-V0-FLIT (the literal falsifier ⟺ `𝓕_{s₀} = ∅`).
+- **§3, C-HULL**: the "so" clause FALSE (FS111-C-HULL-SO) → the corrected form (§ FS111-C-HULL).
+- **§3, C-SAT-T**: two readings — cover form TRUE (FS111-M-SATC); honest existence form TRUE at `k ≥ 7` (R7), vacuous at `k ≤ 4`, GAP at `k = 5, 6`; W's "GAP at `k = 7, 8`" corrected; quote it always with "for every `j ∈ P(x)`"; a regular maximal partition is saturated (FS111-M2-SELCOMP (d)).
+- **§3, C-HULL-REG**: MISSTATED — GAP as stated at (H1), (H2); its common form is FS111-M-PINCH/M-C11 (no partner density); TRUE on saturated maps without cusps (FS111-W-HULLREG-MAPS); on covers semiconcave, not semiconvex (FS111-M2-HULLC).
+- **§3, REG-J_k**: MISSTATED → **REG-J′_k**: a saturated colouring whose singular set Σ is locally finite, **each point of Σ meeting finitely many interface arcs** (the clause two briefs dropped); its cover form REG-J′-C_k with MUA-REG and MUA-FIN ("finitely many Jordan arcs in each bounded set, **meeting only at endpoints**").
+- **§3, REG-B_k**: existence form TRUE **at `k ≥ 7`**; universal form FALSE at `k = 7` (FS111-W-DECO-B).
+- **§3, REG-A_k**: the cover form FALSE at seven (FS111-M2-DISCK7, corrected orientation); REG-CHAIN TRUE under honest saturation and REG-J′, "or at Σ" (FS111-M2-INTRAD); NO-C11 unneeded on the honest route; NO-PAR proposed for the cover route.
+- **§3, new lines**: MUA-FIN-U FALSE (FS111-M3-FIN-U); M2-PINCH-C as stated vacuous (FS111-M3-VAC), corrected TRUE; MUA-REG-U FALSE (FS111-M3-IRREG); M2-FIX's converse FALSE (FS111-M3-FIXCONV); MUA-FIN-P — one class TRUE, covers iff the sliver is covered, partitions GAP at the cascade; MUA-FIN-L in partitions — GAP at the singular set (FS111-MUA-FIN-L).
+- **§4, B-NONABS**: MISSTATED — FALSE as written (FS111-W-B-NONABS); corrected form B-RR. **A-ALL**: equivalent to seven (FS111-W-NEG). **R-P3**: as written a registration on the answer (a bet on six); W's P3′ is its re-registration.
+- **The vacuity rule** gains: "an inhabitant at `k = 7` makes an existence rung trivially true there (FS111-W-NEG); it tests only universal forms and procedures".

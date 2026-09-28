@@ -1,5 +1,9 @@
 # FS-114 — the unit-arc question (its central statement, the global step): can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every point? (stub)
 
+> **CLOSED 2026-09-28 — undecided** (FS-114; `plans/FS114-C-close.md`; `LEDGER.md` rows 137–138). Every valid map has a vertex of at least four
+> colours, so one local statement, C114-LOCAL-F (an explicit radius about such a vertex, uniform in the complexity), suffices for the NO. Successors: FS-116, the local exclusion
+> (`plans/STUB-local-exclusion.md`), and FS-117, route T's count (`plans/STUB-route-t-count.md`). This stub stays as the record of the question as posed.
+
 *Minted 2026-09-27 by the close planner FS112-C at FS-112's close, on Kooshi's ruling (`plans/FS112-close-inventory.md` item 59: *"When round 3
 finishes, let's close this milestone, and point two milestones at the two gaps, so we can focus on them specifically. They seem to require more
 research and careful exploration, and may be more complicated than they appear."*), rank 1, above FS-111; its sibling is FS-115, the stuck ray
@@ -34,14 +38,14 @@ two steps beside it (no stuck ray; finite stuck chains of bounded length). Choos
 
 **Decisive both ways at bounded complexity.** A NO answers `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") **yes** for
 its unit-arc half, almost everywhere, for locally finite segment-and-arc maps, answers `[Polymath2021]` p. 199's hope ("to strengthen the seminal result
-of Thomassen", eliminating "(ii) the unit-radius tactic") for such tilings, and closes door (A) of row 133; with FS-111's door (B) it gives
-`χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR (rows 128, 131). A YES gives `χ(ℝ²) ≤ 6` with no MR (row 131's periodic form through W-EQ-K; a YES with five
+of Thomassen", eliminating "(ii) the unit-radius tactic") for such tilings, and closes door (A) of row 133; with the map step (FS-121: the tight
+limit made a segment-and-arc map) it gives `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR (rows 128, 131); the NO alone bounds holes at each complexity bound only (FS111-C1-PW), and seven is that bound made uniform (FS111-C1-UNIF) — the composition with FS-111's cone scale needs a third statement (FS111-C1-GAP). A YES gives `χ(ℝ²) ≤ 6` with no MR (row 131's periodic form through W-EQ-K; a YES with five
 colours would be `χ(ℝ²) ≤ 5`, a different outcome). A NO for doubly periodic maps only is a result, not the question: W-EQ-K's limit objects need not
 be periodic — but it kills every YES given by formula.
 
 **At FS-114's close (2026-09-28, FS114-C): undecided.** The NO is reduced to one local statement: every valid map has a vertex of at least four
 colours (FS114-CV-EXISTS, two minds blind to each other), so an explicit radius about such a vertex within which no valid fragment exists
-(C114-LOCAL-F) is the whole NO, Siamese pairs included — `LEDGER.md` rows 137–138 (drafted), `plans/FS114-derivation.md`. The successors are **FS-116**
+(C114-LOCAL-F) suffices for the whole NO, Siamese pairs included — `LEDGER.md` rows 137–138 (drafted), `plans/FS114-derivation.md`. The successors are **FS-116**
 (`plans/STUB-local-exclusion.md`: C114-LOCAL-F, opening with round 7's queue) and **FS-117** (`plans/STUB-route-t-count.md`: the count, the non-Siamese
 part only).
 

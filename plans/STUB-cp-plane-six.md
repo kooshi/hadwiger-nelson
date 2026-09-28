@@ -93,3 +93,5 @@ Derived-decisive if FS-103's F1 holds (it is rung D); success per milestone very
 `χ_CP` to `χ_m`, is the likely product.
 
 *Would have searched here:* nothing for (0)–(c); (d) is a finite LP and waits for 2026-10-01.
+
+*At FS-111's close:* the regularity route at five — a maximal five-cover with regular classes and a locally finite boundary graph gives `χ_m⁰(ℝ²) ≥ 6` through AE-MAP6 (FS111-M2-REDUCE-C, two minds) — is equivalent to this stub's YES given AE-MAP6 (FS111-VM2-EQ5): a reformulation, carried in FS-121.
