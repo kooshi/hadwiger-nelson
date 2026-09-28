@@ -18,7 +18,7 @@ before the next begins. Notation: M2's (`plans/FS111-M2-regularity.md` §1.4–�
 - **M3-HC** — the honeycomb class HC (equilateral triangles of side 1 at the vertices of a honeycomb of edge `2 + √3/3`, pointing at the face centres;
   on each edge a band of length 1 at distance 1 from both facing sides, of thickness `ℓ − 1 ∈ [0, g]` vanishing exactly on a closed null
   `Z ∋ ±1/2`; discs of radius `1/2` at the face centres) is a **regular maximal unit-avoiding set** for every such `Z`, satisfying M2-FIX; with `Z` the
-  Cantor set (HC_K) each band has one component per gap: **infinitely many components of the interior in every bounded set of diameter `≥ 5`** —
+  Cantor set (HC_K) each band has one component per gap: **infinitely many components of the interior in every disc of radius 3 about a face centre** —
   [hand + tools exact (`tools/fs111_m3_honey.py`, six checks, five plants), one mind] §2.1–§2.5. The object is by formula and has no colour count.
 - **M3-FIN-U** — MUA-FIN-U is **FALSE** (HC_K); M2-PINCH-C, corrected to "some regular MUA set contains a Cantor pinch", is **TRUE** (HC_K) — [hand +
   tools exact, one mind] §2.6.
@@ -300,3 +300,86 @@ MUA set with finitely many components per bounded set, of four shapes (triangles
 *Would kill it:* a point of the plane outside `A` on no unit circle about HC (a defect in B1, B2 or Lemma NL), or two points of `A` at distance 1 (a
 defect in §2.3). *Controls:* R7's ups (Reuleaux triangles of width 1) are the same mechanism with no flat side, hence no band; SQ9's squares have flat sides
 of length `1/2` facing flat sides at distance exactly 1 (W's ladder), where no band is needed because the facing square excludes the gap directly.
+
+## Stage 2 — SAVED
+
+## Stage 3 — SAVED: MUA-FIN-P — the move exists class by class; in a cover it costs the sliver; in a partition it cascades
+
+### 3.1 What MUA-FIN-P can mean, and the honesty rule
+
+MUA-FIN-P (verbatim): "every regular maximal cover can be modified, keeping it a maximal cover, into one satisfying MUA-FIN", with D3's clause.
+- **Existence reading** ("modified" unrestricted: any maximal `k`-cover is a modification of any other). Then MUA-FIN-P_k says: *if a regular maximal
+  `k`-cover exists, one satisfying MUA-FIN + D3 exists.* TRUE at `k ≥ 7` (R7, with `k − 7` further classes translates of one of R7's; DISC7), vacuous at
+  `k ≤ 4`. **At `k = 5` it is not smaller than the answer**: with M2-REDUCE-C and FS106-AE-MAP6 it says exactly "no regular maximal five-cover exists",
+  which with MUA-REG₅ is `χ_m⁰(ℝ²) ≥ 6` [derived, one mind]. So in this reading MUA-FIN-P₅ is the answer modulo MUA-REG, and the brief's honesty rule
+  applies to it.
+- **Local reading** (the colour-generic rung): **MUA-FIN-L** — *every regular maximal cover can be changed on a locally finite family of bounded sets,
+  staying a maximal cover, into one satisfying MUA-FIN + D3.* A proof must be a construction at every `k`; a counterexample at any `k` (seven included)
+  kills the local route. This record works this reading.
+
+### 3.2 M3-HC′ and M3-MOVE — the move, one class at a time [hand, one mind]
+
+**M3-HC′.** *M3-HC holds for every `g ≥ 0` on `[−1/2, 1/2]` with closed null zero set `Z ∋ ±1/2` satisfying (G1): `g ≤ dist(·, Z)²/4`,
+`|g′| ≤ dist(·, Z)/2`, `|g′| ≤ 1/8`, `g′` `1/2`-Lipschitz, `g ≤ 1/64`.* Stage 2's proof uses `g` only through these (§2.2 G2–G3, §2.3's band step, Lemma
+NL's constants). ∎
+
+**M3-MOVE.** *Let `g_K` be HC_K's gap function and `g₀(s) = (1/4)(1/4 − s²)²` (HC₀'s). For `0 < τ ≤ 1` put `g_τ = (1 − τ) g_K + τ g₀`. Then:*
+1. *`g_τ` satisfies (G1) (the bounds are convex conditions; `dist(·, {±1/2}) ≥ dist(·, Z)`), with zero set `{±1/2}`; so `HC(g_τ)` is a regular MUA set
+   whose every band is **one** component: **MUA-FIN with D3 holds** (in a bounded set: finitely many arcs — triangle sides, `U`'s three curves, circles,
+   and per band a segment and a graph meeting only at their two common endpoints).*
+2. *`g_K ≤ g₀`* (on a gap `J` of width `w ≤ 1/3`: `g_K ≤ (w²/4) dist(·, Z)² ≤ dist♯²/36 < dist♯²/16 ≤ g₀`, `dist♯ = dist(·, {±1/2})`), *so
+   `g_K ≤ g_τ` and the move only removes material from the up triangles: it loses `L_τ = ⋃ U(g_K) ∖ U(g_τ)` (a thin sliver along every up side,
+   `0 < |L_τ ∩ cell| ≤ 3τ ∫(g₀ − g_K) ds`) and gains the band thickening `⋃ Λ(g_τ) ∖ Λ(g_K)`.*
+3. *`HC(g_τ) → HC_K` as `τ → 0`, in `L¹_loc` and in the Hausdorff metric on every bounded set.*
+
+**So pinches of HC type are removable by arbitrarily small moves of the class alone, and — read the other way — the pinched regular MUA set HC_K is a
+limit of locally finite ones: local finiteness is not closed under limits** (neither in `L¹_loc` nor in Hausdorff distance). [hand, one mind; over M3-HC]
+
+### 3.3 In a cover: the move costs the sliver; in a partition it cascades
+
+**M3-COVER** [hand, one mind]. *Let `(F_1, …, F_k)` be a regular maximal cover with `F_j = HC_K` (up to a rigid motion). Replacing `F_j` by `HC(g_τ)`
+gives a regular maximal cover iff `L_τ ⊆ ⋃_{b ≠ j} F_b` a.e.* *Proof.* Each class stays a regular MUA set (M3-MOVE); the union loses at most `L_τ`, and
+loses exactly `L_τ ∖ ⋃_{b≠j} F_b`. ∎ *So the colour count does not enter where the other classes already overlap the up triangles' sides.*
+
+**M3-CASCADE** [hand, one mind]. *Let `(F_b)` be a regular maximal **partition** (pairwise null overlaps; a measurable fall colouring, M2-SELCOMP (d)) and
+`(F′_b)` a maximal cover with `F′_j ⊊ F_j ∪ …` losing a set `R_j = F_j ∖ F′_j` of positive measure. Then some `b ≠ j` has `G_b = F′_b ∖ F_b` of positive
+measure, and every such `b` loses at least `F_b ∩ (int G̃_b + S¹)` — its old material at distance exactly 1 from the density points of what it gains —
+which is of positive measure; and the same holds for every class that gains what `b` lost.* *Proof.* `R_j` is covered by `⋃_{b ≠ j} F′_b` a.e. and by no
+old `F_b` (partition), so some `G_b` is non-null. `F′_b` has null unit pairs, so it contains no positive-measure part of `F_b ∩ (G̃_b + S¹)`; that part is
+non-null because `F_b` is maximal and `G_b ∩ F_b = ∅`: `φ_{F_b} > 0` a.e. on `G_b` (M2-ZERO), i.e. `F_b`-material sits at distance 1 from a.e. point of
+`G_b`. ∎
+
+*Reading of the obstruction for the HC move.* In a partition the sliver `L_τ` lies against the up triangle's side, inside class `j`'s exclusive
+territory; the class `b` that takes it must shed its own material at distance 1 from the sliver. The sliver's unit shadow reaches down to the band's top
+(`≈ 1 + g`) — so if `b` is the class that owns the thin layer just above the band, the cascade closes in one step (it sheds exactly the layer that the
+band's thickening takes back, and the exchange is local); if not, it propagates. Whether some partition forces propagation is **not decided here**: I have
+no regular maximal partition with an HC-type class (would-have-searched: a fall colouring of HC_K's complement by `k − 1` classes).
+
+**Where the colour count enters** [reading, one mind]. A spare class could take `L_τ` whole: `L_τ` is a union of thin strips along the up sides, each of
+length 1 thinning to 0 at its ends (a unit-free set, by §2.3's band step), laid out on three families of parallel lines. A maximal unit-avoiding set
+containing one family is a translate of an HC-type set whose bands sit on those strips (a translate by the band-to-side offset of one edge orientation);
+three spare classes would absorb the three families. **Not constructed** (the containment `Λ′ ⊇ L_τ − offset` needs a band thicker than the sliver, which
+M3-HC′'s bounds allow only with a finer estimate of `ℓ` than (G3) gives). *Would kill the reading:* a regular maximal partition with an HC_K class
+whose pinches can be removed locally with no class added.
+
+### 3.4 Bukh's zooming-out as a smoothing move (read: `[Bukh2008]` §4 to the supersaturation lemma's statement, Lemma 12's statement; proofs not read)
+
+`Z_δ(ε)A = {x : |Q(x, δ) ∩ A| > ε|Q(x, δ)|}` (verbatim definition, §4) is a smoothing: at scale `δ` it erases HC_K's lenses (their thickness is `≤ dist²/4 ≪
+δ`), so the zoomed set has no pinch. But the zooming-out lemma controls `I_P(Z_δ(ε)A)` only up to `h_P(ε, δ)R^d` (property VII: "`I_P(A) ≥ g_P(ε)I_P(Z_δ
+(ε)A) − h_P(ε, δ)R^d`"), so a unit-avoiding `A` zooms to a set with few, not zero, unit pairs — a near-colouring in row 131's sense — and the zoomed set is
+not maximal (the erased band's region becomes free). Lemma 12 then returns to exact avoidance only in the weak-* limit, whose support M3-MOVE (3) shows
+may pinch again. **So zooming-out is row 131's stability move, not an exact smoothing; it does not serve MUA-FIN-L** [reading, one mind].
+
+### 3.5 Verdict on MUA-FIN-P
+
+| form | verdict | grade, minds |
+|---|---|---|
+| existence reading, `k ≥ 7` | TRUE (R7, DISC7) | [hand + exact], two minds (VMW, VM2) |
+| existence reading, `k = 5` | equivalent to "no regular maximal five-cover" (with REDUCE-C, AE-MAP6); with MUA-REG₅, to `χ_m⁰ ≥ 6` — not a smaller statement | [derived], one mind |
+| **one class, HC type** | **TRUE**: every HC-type pinch is removed by an arbitrarily small move of the class alone (M3-MOVE) | [hand + tools exact], one mind |
+| **MUA-FIN-L, in a cover** | the HC move keeps the cover maximal iff the lost sliver is covered by the other classes (M3-COVER); the colour count does not enter there | [hand], one mind |
+| **MUA-FIN-L, in a partition** | **GAP**: the named obstruction is the cascade (M3-CASCADE) — the absorbing class sheds its material at distance 1 from the sliver; closes in one step iff that class owns the layer above the band; no partition with an HC-type class is exhibited | [hand], one mind |
+| spare colour | a reading: three spare classes (HC translates) would absorb the slivers — **not constructed** | [reading], one mind |
+
+*Inhabitant at `k = 7`:* the existence form is inhabited by R7 and DISC7 (already locally finite); **no maximal seven-cover with a pinched class is
+exhibited** — M3-MOVE and M3-CASCADE are single-class and partition statements whose only pinched inhabitant is HC_K itself (no colour count).
