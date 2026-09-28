@@ -1,0 +1,90 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== the brick (row 33): cell (0,0) against every same-colour cell with |i|, |j| <= 5
+brick: ACCEPT -- orbit pairs in the window: 17; examined exactly 3; dismissed by an exact bounding-box gap >= 1: 14; tight at 1: 1 maxima, 2 minima; 0.0 s
+brick plant (mine): cells 1/2 wide, the cosets (-3,1), (3,-1) at distance 0.6: REJECT -- orbit pairs in the window: 17; examined exactly 5; dismissed by an exact bounding-box gap >= 1: 12; tight at 1: 0 maxima, 2 minima; 0.0 s
+   REJECT b0,0|b-3,1 (128 cands)
+   REJECT b0,0|b3,-1 (128 cands)
+== the hexagonal seven-colouring, side 1/2: hexagon (0,0) against every same-colour hexagon of the window
+hex7: ACCEPT -- orbit pairs in the window: 11; examined exactly 3; dismissed by an exact bounding-box gap >= 1: 8; tight at 1: 1 maxima, 0 minima; 0.0 s
+hex7 plant: side 11/20 (diameter 11/10): REJECT -- orbit pairs in the window: 11; examined exactly 3; dismissed by an exact bounding-box gap >= 1: 8; tight at 1: 0 maxima, 0 minima; 0.0 s
+   REJECT h0,0|h0,0 (288 cands)
+== the strip (rebuilt by rule)
+strip: ACCEPT -- orbit pairs in the window: 90; examined exactly 24; dismissed by an exact bounding-box gap >= 1: 66; tight at 1: 12 maxima, 12 minima; 0.5 s
+   map consistency on the base period (pieces of the base tiles matched in the window): 54 of 60 base pieces shared with a window tile in the opposite direction; the rest lie on y = +-Y
+   float guard: the 12 base tiles' areas sum to 5.502813721; period x height = 5.502813721
+strip [plant swap_U0_U1]: REJECT -- orbit pairs in the window: 100; examined exactly 27; dismissed by an exact bounding-box gap >= 1: 73; tight at 1: 12 maxima, 11 minima; 0.6 s
+   REJECT U0|U-2 (200 cands)
+   REJECT U0|B0 (212 cands)
+   REJECT U0|U1 (208 cands; touch)
+== the disk (rebuilt by rule, Y2's labels)
+   identities: 87 of 87 exact
+   map consistency: 0 pieces unmatched off the rim; 15 rim pieces; pieces 125
+   float guard: 26 tile areas sum to 14.176314892; pi r^2 = 14.176314892
+disk: ACCEPT -- same-colour pairs the object has: 71 (a tile with itself included); examined exactly 52; dismissed by an exact bounding-box gap >= 1: 19; tight at 1: 26 maxima, 20 minima; 10.2 s
+disk under the checker plant closed_interval (tight contacts shown as REJECT): REJECT -- same-colour pairs the object has: 71 (a tile with itself included); examined exactly 52; dismissed by an exact bounding-box gap >= 1: 19; tight at 1: 26 maxima, 20 minima; 10.2 s
+   REJECT C0|C0 (275 cands; max=1)
+   REJECT C0|R_0 (188 cands; min=1)
+   REJECT C0|R_1 (188 cands; min=1)
+   REJECT C0|R_2 (188 cands; min=1)
+   REJECT C0|R_3 (188 cands; min=1)
+   REJECT C0|R_4 (188 cands; min=1)
+   REJECT T1_0|T1_0 (247 cands; max=1)
+   REJECT T1_0|T2_3 (217 cands; min=1)
+   REJECT T1_0|U_4 (208 cands; min=1)
+   REJECT T1_0|U'_1 (208 cands; min=1)
+   REJECT T1_1|T1_1 (247 cands; max=1)
+   REJECT T1_1|T2_4 (217 cands; min=1)
+   REJECT T1_1|U_0 (208 cands; min=1)
+   REJECT T1_1|U'_2 (208 cands; min=1)
+   REJECT T1_2|T1_2 (247 cands; max=1)
+   REJECT T1_2|T2_0 (217 cands; min=1)
+   REJECT T1_2|U_1 (208 cands; min=1)
+   REJECT T1_2|U'_3 (208 cands; min=1)
+   REJECT T1_3|T1_3 (247 cands; max=1)
+   REJECT T1_3|T2_1 (217 cands; min=1)
+   REJECT T1_3|U_2 (208 cands; min=1)
+   REJECT T1_3|U'_4 (208 cands; min=1)
+   REJECT T1_4|T1_4 (247 cands; max=1)
+   REJECT T1_4|T2_2 (217 cands; min=1)
+   REJECT T1_4|U_3 (208 cands; min=1)
+   REJECT T1_4|U'_0 (208 cands; min=1)
+   REJECT T2_0|T2_0 (229 cands; max=1)
+   REJECT T2_1|T2_1 (229 cands; max=1)
+   REJECT T2_2|T2_2 (229 cands; max=1)
+   REJECT T2_3|T2_3 (229 cands; max=1)
+   REJECT T2_4|T2_4 (229 cands; max=1)
+   REJECT R_0|R_0 (172 cands; max=1)
+   REJECT R_1|R_1 (172 cands; max=1)
+   REJECT R_2|R_2 (172 cands; max=1)
+   REJECT R_3|R_3 (172 cands; max=1)
+   REJECT R_4|R_4 (172 cands; max=1)
+   REJECT U_0|U_0 (242 cands; max=1)
+   REJECT U_1|U_1 (242 cands; max=1)
+   REJECT U_2|U_2 (242 cands; max=1)
+   REJECT U_3|U_3 (242 cands; max=1)
+   REJECT U_4|U_4 (242 cands; max=1)
+   REJECT U'_0|U'_0 (242 cands; max=1)
+   REJECT U'_1|U'_1 (242 cands; max=1)
+   REJECT U'_2|U'_2 (242 cands; max=1)
+   REJECT U'_3|U'_3 (242 cands; max=1)
+   REJECT U'_4|U'_4 (242 cands; max=1)
+disk plant swap: REJECT -- same-colour pairs the object has: 71 (a tile with itself included); examined exactly 51; dismissed by an exact bounding-box gap >= 1: 20; tight at 1: 26 maxima, 18 minima; 10.0 s
+   REJECT T1_1|U'_0 (214 cands)
+   REJECT T1_4|U_0 (214 cands)
+disk plant chords: REJECT -- same-colour pairs the object has: 71 (a tile with itself included); examined exactly 52; dismissed by an exact bounding-box gap >= 1: 19; tight at 1: 26 maxima, 15 minima; 10.0 s
+   REJECT T1_0|T2_3 (213 cands)
+   REJECT T1_1|T2_4 (213 cands)
+   REJECT T1_2|T2_0 (213 cands)
+   REJECT T1_3|T2_1 (213 cands)
+   REJECT T1_4|T2_2 (213 cands)
+== FS112-BOWTIE (FS112-YB3's builder, converted exactly)
+BOWTIE: ACCEPT -- same-colour pairs the object has: 21 (a tile with itself included); examined exactly 18; dismissed by an exact bounding-box gap >= 1: 3; tight at 1: 2 maxima, 4 minima; 0.0 s
+BOWTIE under closed_interval: REJECT -- same-colour pairs the object has: 21 (a tile with itself included); examined exactly 18; dismissed by an exact bounding-box gap >= 1: 3; tight at 1: 2 maxima, 4 minima; 0.0 s
+   REJECT G|G (93 cands; max=1)
+   REJECT H|H (93 cands; max=1)
+   REJECT C+|CN (86 cands; min=1)
+   REJECT C+|CS (86 cands; min=1)
+   REJECT C-|CN (86 cands; min=1)
+   REJECT C-|CS (86 cands; min=1)
+BOWTIE plant h_is_g (H given G's colour 1): REJECT -- same-colour pairs the object has: 22 (a tile with itself included); examined exactly 19; dismissed by an exact bounding-box gap >= 1: 3; tight at 1: 2 maxima, 4 minima; 0.0 s
+   REJECT G|H (93 cands; touch)

@@ -1,0 +1,11 @@
+== FS114-Y2 K1 fragment -- PLANT wide_t1: 20 tiles
+validity (every same-colour pair, a tile with itself included): REJECT -- same-colour pairs the object has: 46 (a tile with itself included); examined exactly 40; dismissed by an exact bounding-box gap >= 1: 6; tight at 1: 10 maxima, 12 minima; 0.5 s
+   REJECT t1|W' (188 cands)
+   REJECT t3|W (188 cands)
+   REJECT t2|T2 (150 cands)
+   REJECT t2|T3 (150 cands)
+   REJECT t4|T1 (150 cands)
+   REJECT t4|T4 (150 cands)
+non-Siamese: distinct same-colour pairs with min < 1: [('t1', "W'"), ('t3', 'W'), ('t2', 'T2'), ('t2', 'T3'), ('t4', 'T1'), ('t4', 'T4')]; distinct pairs with max exactly 1: none
+   tight minima (distinct pairs at minimum exactly 1): (L1,V''), (L1,V'), (L4,V), (L4,V'''), (L2,V), (L2,V'''), (L3,V''), (L3,V'), (T1,N), (T4,N), (T2,N'), (T3,N')
+   tight maxima (tiles of diameter exactly 1): t1, t3, t2, t4, L1, L4, L2, L3, W, W'
