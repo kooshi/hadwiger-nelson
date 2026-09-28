@@ -1,0 +1,5 @@
+== C114-PENT part 2: the blue and orange routes to a fourth colour at C_0, on the moved disk (exact at named points)
+   control: free at C_0 + e(126)/100: []; at C_0 + e(72)/100: []
+ok       PLANT unmoved: green is NOT free at C_0 + e(126)/100 on the unmoved disk (the move is what frees it)
+ALL AS REGISTERED
+plant exit 0

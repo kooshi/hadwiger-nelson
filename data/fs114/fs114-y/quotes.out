@@ -1,0 +1,31 @@
+FOUND   CLAUDE.md                                     My goal is to fully solve, and then verify in Lean, HN. Then we publish.
+FOUND   CLAUDE.md                                     Let's see some ambition. I know we can do it.
+FOUND   CLAUDE.md                                     search for a finite graph is out. It would be huge, not feasible.
+FOUND   claims.md                                     Is it true that 7 colors are needed to color a locally finite map in the plane if the boun
+FOUND   sv.txt                                        Is it true that 7 colors are needed to color a locally finite map in the plane if the boun
+FOUND   CLAUDE.md                                     From here on out, you may doubt your ability to tackle the difficulty of the problems we e
+FOUND   CLAUDE.md                                     to eliminate the crutch of feeling like we're accomplishing something by asking uncomputab
+FOUND   CLAUDE.md                                     A proven theorem about why its impossible is also valid. All novel knowledge is a success
+FOUND   CONSOLIDATION-2026-09-27.md                   It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is n
+FOUND   FS112-derivation.md                           Every closed disc of radius 3 of every valid map holds a vertex of at least four colours o
+FOUND   FS112-derivation.md                           In a valid map, every close complementary cubic trichromatic partner of a cubic trichromat
+FOUND   STUB-global-step.md                           on the disk's pentagon skeleton, can the trivalent `B_k` (two unit-arc boundaries, centres
+FOUND   STUB-global-step.md                           And the disk's blue and orange routes to a fourth colour at `C_0`, never analysed (Y3 §4.4
+FOUND   FS112-derivation.md                           Every valid map has a valid modification by W-MERGE and whole-arc bends, creating no unit 
+FOUND   FS112-derivation.md                           The centre of a both-kind unit arc is a vertex with at least four colours or a repeated co
+FOUND   FS112-derivation.md                           A vertex with five colours has unit arcs centred at it of total length at least 180°; with
+FOUND   Z50mmulkXCQ.txt                               Degree 6 isn't possible with only 6 colors.
+FOUND   Z50mmulkXCQ.txt                               1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges).
+FOUND   Z50mmulkXCQ.txt                               Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red blocks
+FOUND   Z50mmulkXCQ.txt                               Also this graph can't have pentagons.
+FOUND   Z50mmulkXCQ.txt                               Similarly the metagraph can't have a quadrilateral. (Well, I'm pretty certain, but the pro
+FOUND   Z50mmulkXCQ.txt                               So, the red metagraph must have only triangles.
+FOUND   J_Tw1_hUxQI.txt                               Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I think i
+FOUND   J_Tw1_hUxQI.txt                               So, a valid tiling can't have an enclosed vertex with 3 neighbors.
+FOUND   J_Tw1_hUxQI.txt                               so 200% of the edges are curved, so a 5-coloring is impossible.
+FOUND   Z50mmulkXCQ.txt                               Note that the emitted curved edges must all be unique (the curve lies on a unit radius cir
+FOUND   Z50mmulkXCQ.txt                               Cover rule: For a degree-5 6-colored graph, every vertex must "cover" each color. (e.g. ea
+FOUND   Z50mmulkXCQ.txt                               The 5 rigid EDs have length 1, but then the "pentagon" will have at least one "edge" with 
+28 of 28 FOUND
+self-test: faithful FOUND=True; planted word MISSING=True; wrong source MISSING=True
+SELF-TEST PASS

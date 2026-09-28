@@ -1,0 +1,31 @@
+== C114-PENT part 2: the blue and orange routes to a fourth colour at C_0, on the moved disk (exact at named points)
+   control: free at C_0 + e(126)/100: ['G']; at C_0 + e(72)/100: []
+ok       control: green free at C_0 + e(126)/100 (known positive), nothing free at C_0 + e(72)/100 (known wedge)
+   C_0 + e(54)/100: straddlers R: R_0; Bl: T2_0; G: Up_4; Yw: Up_0; O: T1_0; P: U_0
+   C_0 + e(72)/100: straddlers R: R_0; Bl: T2_0; G: Up_4; Yw: Up_0; O: T1_0; P: U_0
+   C_0 + e(90)/100: straddlers R: R_0; Bl: T2_0; G: -; Yw: Up_0; O: T1_0; P: U_0
+ok       at C_0 + e(72)/100 the only blue straddler is T2_0 and the only orange one T1_0
+-- BLUE route: points of T2_0 inside B(C_0, 1), T2_0 ignored
+   [in ['T2_0']] A_0 + (1 - s) e(90), s = 0.020 (0.00000, 1.50573): |z - C_0|^2 = 0.5623 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0,U_4; P: U_0
+   [in ['T2_0']] A_0 + (1 - s) e(104), s = 0.020 (-0.15142, 1.48175): |z - C_0|^2 = 0.4612 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0; P: U_0
+   [in ['T2_0']] Z^L_0 + s (A_0 - Z^L_0), s = 0.020 (-0.30284, 1.45777): |z - C_0|^2 = 0.4071 (inside); free ['Bl', 'P']; blockers R: C0,R_0; G: T2_1,Up_4; Yw: Up_0,T1_4; O: T1_0
+   [in ['T2_0']] A_0 + (1 - s) e(90), s = 0.050 (0.00000, 1.47573): |z - C_0|^2 = 0.5967 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0,U_4; P: U_0
+   [in ['T2_0']] A_0 + (1 - s) e(104), s = 0.050 (-0.14678, 1.45248): |z - C_0|^2 = 0.4994 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0; P: U_0
+   [in ['T2_0']] Z^L_0 + s (A_0 - Z^L_0), s = 0.050 (-0.29357, 1.42923): |z - C_0|^2 = 0.4463 (inside); free ['Bl', 'P']; blockers R: C0,R_0; G: T2_1,Up_4; Yw: Up_0,T1_4; O: T1_0
+   [in ['T2_0']] A_0 + (1 - s) e(90), s = 0.100 (0.00000, 1.42573): |z - C_0|^2 = 0.6581 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0,U_4; P: U_0
+   [in ['T2_0']] A_0 + (1 - s) e(104), s = 0.100 (-0.13906, 1.40371): |z - C_0|^2 = 0.5670 (inside); free ['Bl']; blockers R: C0; G: Up_4; Yw: Up_0,T1_4; O: T1_0,U_4; P: U_0
+   [in ['T2_0']] Z^L_0 + s (A_0 - Z^L_0), s = 0.100 (-0.27812, 1.38168): |z - C_0|^2 = 0.5156 (inside); free ['Bl']; blockers R: C0,R_0; G: T2_1,Up_4; Yw: Up_0,T1_4; O: T1_0; P: U_0
+ok       BLUE route: some named point of T2_0 inside B(C_0, 1) has free set within {Bl} -- the part cannot be recoloured with the rest of the moved disk unchanged
+-- ORANGE route: points of T1_0 inside B(C_0, 1), T1_0 ignored
+   [in ['T1_0', 'R_4', 'U_4']] B_0 + s e(0), s = 0.020 (-0.78902, 1.11352): |z - C_0|^2 = 0.9880 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(342))/2, s = 0.020 (-0.78951, 1.11043): |z - C_0|^2 = 0.9942 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(18))/2, s = 0.020 (-0.78951, 1.11661): |z - C_0|^2 = 0.9825 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0', 'R_4', 'U_4']] B_0 + s e(0), s = 0.050 (-0.75902, 1.11352): |z - C_0|^2 = 0.9716 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(342))/2, s = 0.050 (-0.76024, 1.10579): |z - C_0|^2 = 0.9870 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(18))/2, s = 0.050 (-0.76024, 1.12124): |z - C_0|^2 = 0.9576 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0', 'R_4', 'U_4']] B_0 + s e(0), s = 0.100 (-0.70902, 1.11352): |z - C_0|^2 = 0.9482 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(342))/2, s = 0.100 (-0.71146, 1.09807): |z - C_0|^2 = 0.9789 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+   [in ['T1_0']] B_0 + s (e(0) + e(18))/2, s = 0.100 (-0.71146, 1.12897): |z - C_0|^2 = 0.9201 (inside); free ['O']; blockers R: C0,R_0,R_1; Bl: T2_0; G: T2_1; Yw: Up_0,T1_4; P: T1_1
+ok       ORANGE route: some named point of T1_0 inside B(C_0, 1) has free set within {O}
+ALL AS REGISTERED
+routes exit 0

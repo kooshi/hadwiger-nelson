@@ -1,0 +1,19 @@
+== C114-PENT, the four-centre obstruction, on FS112-Y2's disk (exact)
+   P_cl(B_0) = ['O', 'P', 'Yw']
+   P_cl(Z^R_0) = ['Bl', 'G', 'R']
+   P_cl(Z^L_1) = ['Bl', 'G', 'R']
+ok       B_0 is trichromatic {O, P, Yw} (tiles T1_0, U_0, Up_0)
+ok       Z^R_0 and Z^L_1 are trichromatic {Bl, G, R}: both complementary to B_0
+ok       |B_0 - Z^R_0|^2 = 1.381966 < 4 (a close pair)
+ok       |B_0 - Z^L_1|^2 = 1.381966 < 4 (a close pair)
+ok       omega(B_0) cap omega(Z^R_0) = {A_0, C_0} (both at distance 1 from both; distinct)
+ok       PLANT wrongpts: the claim {A_1, C_0} is REFUSED (C_0 is not 1 from Z^L_1)
+ok       the common unit points of B_0's two partners are 4 distinct points: A_0, C_0, A_1, D_1 -- FS112-N3-COR3 makes each a leaving centre of B_0; a cubic vertex has at most 3: OBSTRUCTION
+   B_0's leaving centres in the disk: (-0.50000, 0.16246), (0.00000, 0.52573)
+ok       B_0's leaving centres in the disk are A_0 and A_1
+ok       the completion A_0 + A_1 - B_0 is exactly the corner A_3 of the central tile (four colours)
+ok       the third centre Z^R_0 needs is C_0, the one Z^L_1 needs is D_1: two, not one
+ok       Z^R_0 = A_1 + w - B_0 has |w - B_0|^2 = 2.38197 != 1: no such centre
+   twin partner A_1 + C_0 - B_0 = (-0.19098, 1.11352), |twin - B_0|^2 = 0.38197
+ok       TWIN: omega(B_0) cap omega(twin) = {A_1, C_0}; union with {A_0, C_0} has 3 points -- no obstruction (the count fires only when the partners' centres are four)
+ALL AS REGISTERED

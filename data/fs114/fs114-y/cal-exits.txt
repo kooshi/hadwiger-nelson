@@ -1,0 +1,5 @@
+selftest exit 0
+cal7 exit 0
+strip exit 0
+bowtie exit 0
+disk exit 0

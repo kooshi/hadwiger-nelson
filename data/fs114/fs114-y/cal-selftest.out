@@ -1,0 +1,11 @@
+ok       Reuleaux triangle, width 1 (self)                              faithful ACCEPT predicted-under-plant ACCEPT got ACCEPT | T/T ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+ok       two Reuleaux, gap exactly 1                                    faithful ACCEPT predicted-under-plant ACCEPT got ACCEPT | T/T ACCEPT min<1 max=1 ~[0.000000, 1.000000]; T/U ACCEPT min=1 max>1 ~[1.000000, 3.000000]; U/U ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+ok       square 7/10 (diagonal 0.99)                                    faithful ACCEPT predicted-under-plant ACCEPT got ACCEPT | S/S ACCEPT min<1 max<1 ~[0.000000, 0.989949]
+ok       square 3/4 (diagonal 1.06)                                     faithful REJECT predicted-under-plant REJECT got REJECT | S/S REJECT min<1 max>1 ~[0.000000, 1.060660]
+ok       two squares 1/2, gap 9/10                                      faithful REJECT predicted-under-plant REJECT got REJECT | S/S ACCEPT min<1 max<1 ~[0.000000, 0.707107]; S/U REJECT min<1 max>1 ~[0.900000, 1.964688]; U/U ACCEPT min<1 max<1 ~[0.000000, 0.707107]
+ok       two unit caps, nearest pair interior to both arcs              faithful REJECT predicted-under-plant REJECT got REJECT | L/R REJECT min<1 max>1 ~[0.900000, 1.474688]
+ok       a cap facing a bar, nearest pair interior to arc and bar       faithful REJECT predicted-under-plant REJECT got REJECT | L/B REJECT min<1 max>1 ~[0.900000, 1.584344]
+ok       two long bars crossing (cross pair only)                       faithful REJECT predicted-under-plant REJECT got REJECT | X/Y REJECT min<1 max>1 ~[0.000000, 2.135462]
+ok       a crescent crossed by a long bar at its arcs (cross pair only) faithful REJECT predicted-under-plant REJECT got REJECT | X/Y REJECT min<1 max>1 ~[0.000000, 2.714719]
+ok       two crescents crossing arc to arc (cross pair only)            faithful REJECT predicted-under-plant REJECT got REJECT | X/Y REJECT min<1 max>1 ~[0.000000, 2.254256]
+PLANT None ALL AS PREDICTED
