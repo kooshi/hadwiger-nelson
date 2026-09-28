@@ -34,8 +34,15 @@ FS-114's files fenced). Working files: `data/fs111/fs111-w/`; exact checks: `too
   form FALSE at `k = 7`). [tools, exact: `tools/fs111_w_blocks.py`] §2.6.
 - **C-HULL-REG TRUE on saturated maps without cusps** (C11 + NOBEND + NOREP). [hand, one mind] §2.6.
 
+- **B-NONABS FALSE as written** (the fragment `F_{s,ε}`); corrected form = B-RR. [hand, one mind] §3.3.
+- **FS111-W-HX-PAIRS** — HX carries complementary pairs of fat junctions (CP's definition) whose common unit points lie in its voids.
+  [tools, float with margins; types exact; `tools/fs111_w_hx_pairs.py`] §3.4.
+- **FS111-W-SEA-PACK** — the sea–island design on the hexagonal tiling (no complementary pair at any scale) admits no size with single-hexagon sea
+  pieces. [hand, one mind] §3.5.
+
 ## Would-have-searched-here log (standing rule 3)
 
+- Stage 3: (a) a design search for complementary-free six-colourings → SEA-PACK; (b) optimising the fragment's colouring → the two-annulus rule.
 - Stage 2: (a) local search for saturated 7-/8-colourings over periodic polygonal tilings → derived LADDER and HEXSAT; (b) a finder for tight
   seven-colourings with accumulating junctions → exact freeness probe of hex7 and HEX7-RIGID; (c) a scan over island shapes → the island
   obstruction (§2.7).
@@ -220,7 +227,7 @@ pairwise distinct colours. In particular a saturated map has no bichromatic vert
 
 So in both cases `A′` lies in the closed half-plane on `A`'s side of `r`'s tangent at `x`. By the same argument at `A`'s other edge `r′`, `A′` lies in the
 intersection of the two closed half-planes, which is `A` itself when `A` is convex and a subset of `A` when it is not; `A′` has interior directions
-outside `A`: contradiction. ∎ *(Correction before this stage's commit was read by anyone: the first draft closed case (ii) by putting `y`'s piece, `A`
+outside `A`: contradiction. ∎ *(Correction made after stage 2's first commit, `b6e1daa0`: that draft closed case (ii) by putting `y`'s piece, `A`
 and `A′` in one block, which a.e.-properness does not give — "within distance `< 1`" is not transitive. The direct computation above replaces it, and
 it yields a small fact of its own, **FS111-W-KB-DIR**: at the centre of a unit arc of kind both, the inner colour's sector points toward the arc.)*
 
@@ -302,3 +309,78 @@ probed hex7's free colours exactly and derived HEX7-RIGID; (c) a scan over islan
 obstruction (§2.7).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: route R (A-ALL, B-NONABS, R-P3), and where my family stalls
+
+### 3.1 A-ALL and B-RR — not refutable without six  [hand, one mind: FS111-W-NEG (iv)]
+
+A-ALL's negation gives, for every `R` and `δ`, band-proper partial six-colourings with holes `< δ` in `U_R`; periodising the inscribed square
+(§1.4) gives `lim_{ε→0} µ₆(ε) = 1`, i.e. `χ_m⁰(ℝ²) ≤ 6`. Conversely seven makes A-ALL and B-RR vacuous for large `R` and small `δ`. **Verdict on
+A-ALL: GAP — open, and no wild object can decide it short of a six-colouring.** Its content is the non-vacuous case: if near-colourings exist at
+every scale, they carry the pair.
+
+### 3.2 R-P3 read against FS111-W-NEG  [derived, one mind]
+
+P3's first clause, "(A) is FALSE as a universal statement", **entails `χ_m⁰(ℝ²) ≤ 6`** (§3.1); its second clause, "a W-type construction avoids
+complementary pairs at every scale", with holes `→ 0` as (A)'s hypothesis requires, is a hole-vanishing family, which is `χ_m⁰(ℝ²) ≤ 6` again. So
+P3 at 0.6 is, as written, a registration of at least 0.6 that the six-colour side is true, and the plan's E8 ("R-P3 decided by W … (0.1)") is a
+probability that W proves `χ_m⁰(ℝ²) ≤ 6`. *Proposed re-registration for the close (I edit nothing):* P3′ — "Voronov's case analysis admits no
+re-routing whose every branch ends at a complementary pair of fat junctions" — a statement about arguments, decidable without the answer.
+
+### 3.3 B-NONABS — MISSTATED; FALSE as written by a scaling fragment  [hand, one mind]
+
+*Statement* (verbatim, `data/fs111/claims.md` §4): "at a close complementary pair of junctions blocking toward a common unit point, a band-proper
+partial six-colouring with holes `< δ` near the forced point has the junctions' cone scale `≥ s₀(δ) > 0`."
+
+*The fragment `F_{s,ε}`* (by formula). `x = (−1/2, 0)`, `x′ = (1/2, 0)`, `w = (0, √3/2)` (at distance 1 from both). At `x`, colours 1, 2, 3 on the
+cones `{x + ρe_ψ : ψ ∈ I_j, 0 < ρ ≤ s}` with `I_1 = [20°, 40°]`, `I_2 = [50°, 70°]`, `I_3 = [80°, 100°]`; at `x′`, colours 4, 5, 6 on
+`I_4 = [80°, 100°]`, `I_5 = [110°, 130°]`, `I_6 = [140°, 160°]`. Each arc meets the open arc of half-width `90° − µ` about the direction to `w` (60° from
+`x`, 120° from `x′`) for `µ ≤ 20°`: the pair is complementary, at distance 1, blocking toward `w`, at scale `s`. In `B(w, 1/10)` colour `z` with 1 if
+`||z − x| − 1| > ε + s`, else with 4 if `||z − x′| − 1| > ε + s`, else leave it uncovered; leave the rest of the plane uncovered. *Band-proper at slack
+`ε`:* a point coloured 1 near `w` is out of band with every point of `x`'s cones (they lie within `s` of `x`); a point coloured 4 is out of band with
+`x′`'s cones; points near `w` are within `1/5 < 1 − ε` of one another; cones of one colour have diameter `≤ 2s < 1 − ε`. *Holes near `w`:* the
+intersection of two annuli of width `2(ε + s)` crossing at 60° near `w`, area `≤ (8/√3)(ε + s)² (1 + o(1))`. So for every `δ > 0` and every `s₀ > 0`
+the member with `s, ε` small has holes `< δ` near the forced point and cone scale `s < s₀`: B-NONABS is FALSE for every choice of `s₀(δ)`.
+
+*Corrected statement:* the content wanted (G40's non-absorption) is a lower bound `s ≥ s₀` **independent of `δ`** on the pairs that near-optimal
+colourings of large discs carry — which is B-RR, not W-refutable (§3.1). The fragment is consistent with FS107-R-CP (its holes are `≍ s²`, CP's bound
+`(s sin(µ/2)/3)²`): small holes force small scale, never the reverse.
+
+### 3.4 HX carries complementary blocking pairs, and its voids sit on their forced points  [tools, float with margins; types exact; one mind]
+
+FS107-W §3.6 recorded for family HX: "HX's one junction per period is six-chromatic (type all six colours), so no complementary three-element types
+exist (K-C6 vacuous)". That counted as junctions only the uncovered components (FS107-W's checker, D-JUNC). Under FS107-R-CP's definition — the one
+(A), A-ALL and CP use — a fat junction is any point with three colours' cones about it, nothing assumed inside the void; **every vertex of the
+seven-colouring that HX leaves untouched is one**, with three 120° sectors. `tools/fs111_w_hx_pairs.py` (output `data/fs111/fs111-w/hx_pairs.out`):
+- at HX's stall (`R = 2/√21`, `ρ = R/2`) the untouched vertices form complementary pairs (disjoint colour-0-free types; 24 in the sampled region) at
+  distance `√7R ≈ 1.1547`, and **both** common unit points of every such pair lie in a colour-0 hexagon at `0.4205R` from its centre — **inside HX's
+  void** (`0.5R`); at FS107-W's winning members (`R = 0.433`, `ρ/R = 0.554`) at `0.3982R`, inside again;
+- each vertex blocks the direction to its unit point with margin up to 5.6° (the angle to the nearest edge-normal is 5.63° or 16.16°);
+- in the tight seven-colouring itself (`R = 1/2`) the same pairs' unit points lie at `0.7913R` in colour-0 hexagons, and one of the two vertices is
+  within 0.52° of tangent — the seventh colour is exactly what covers the points the pairs would force;
+- plant: absorbing colour 3 instead places the unit points in colour-3 hexagons (the computation reads the absorbed colour).
+
+*What it means.* (A)'s conclusion holds on every member of HX: each disc of radius about 2 contains a complementary pair of fat junctions at distance
+in `[η, 2 − η]` (`η ≈ 0.85`) blocking toward a common unit point, and that point lies in a void. HX is not the "W-type construction avoiding
+complementary pairs" R-P3 expects, and FS107-W's "K-C6 vacuous" is a statement about hole components only (a correction owed to its record's
+wording and to any summary that repeats it). CP's quantitative bound at these parameters (`µ ≈ 5°`, `s₀ = µη²/100 ≈ 6·10⁻⁴`) is about `10⁻¹¹` — so CP
+locates HX's holes and does not size them; the size is K-ISL's, as FS-107 found.
+
+### 3.5 My complementary-free family, and where it stalls  [hand, one mind]
+
+*The design (intersecting junction types by construction).* In the hexagonal tiling take the three classes `X, Y, Z` of the proper 3-colouring of
+hexagons (each vertex meets one of each). Give `X` the island colours 4, 5, 6 and `Y ∪ Z` the sea colours 1, 2, 3. Every vertex then has type
+{island, sea, sea}: any two types share a sea colour, so **no complementary pair exists at any scale** (K-C6), and islands never touch.
+
+*It stalls before any hole is placed — at the sea's packing (SEA-PACK).* Some sea colour covers at least `2/9` of the hexagons. If its pieces are
+single hexagons of width `w` (distance between parallel edges; circumradius `w/√3`), two of them must be at gap `≥ 1`, so their centres are at least
+`1 + w` apart, and a point set with that separation has density at most `2/(√3(1 + w)²)`; the colour's density of centres is `4/(9√3 w²)`. So
+`2(1 + w)² ≤ 9w²`, i.e. `w ≥ √2/(3 − √2) ≈ 0.892`, while diameter `≤ 1` needs `w ≤ √3/2 ≈ 0.866`. **No size works.** The sea colours must therefore
+be carried by blocks of several hexagons or by other shapes; I did not build those (a design search, which the ban excludes, and which W-NEG says can
+succeed with holes `→ 0` only if `χ_m⁰(ℝ²) ≤ 6`). *Where it stalls, named:* SEA-PACK, a packing constraint on the three sea colours, one step before
+HX's K-ISL; HX stalls at the islands' diameter, mine at the sea's spacing.
+
+*Would-have-searched here, stage 3:* (a) a local search over sea blocks and island shapes for a complementary-free design with small holes → the
+packing bound SEA-PACK instead; (b) a numerical optimisation of the fragment `F_{s,ε}`'s colouring near `w` → the two-annulus rule, derived.
+
+## Stage 3 — SAVED
