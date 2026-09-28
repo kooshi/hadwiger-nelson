@@ -1,0 +1,11 @@
+RAY ok: k=0..60, lambda_k=-1/(k+1) equality, lambda_0=-1, downward step at k=0 is a pole
+plant RAY fired for its own reason: pole: lambda_-1 = -1/0 (the ray cannot be extended to k = -1)
+R2 ok: f(-1/2) = -1 (the radius-2 tile's shadow is the unit circle itself)
+plant R2 fired for its own reason: R2 shadow: f(-1/3) = -1/2 != -1
+SIGN ok: |2e_0 - e_theta|^2 = 5 - 4cos theta >= 1, equality only at theta = 0
+plant SIGN fired for its own reason: sign change: point at radius 19/10 is <1 from theta in [0] and >1 from theta in [pi/6, pi/3, pi/4]
+INTYPE ok: T_out point at (s,y)=(1/10,-1/250) has |p-Q_A|^2=31813/31250 > 1
+plant INTYPE fired for its own reason: point (1/10,3/500) is inside the closed unit disc about Q_A (|p-Q|^2 = 249509/250000)
+ENV ok: toward b=1/7 th=-1/20: err=2.35e-05; away b=1/7 th=-1/20: err=3.04e-05; toward b=-1/5 th=1/25: err=4.28e-05; away b=-1/5 th=1/25: err=6.46e-05; minimisation identities hold
+plant ENV fired for its own reason: ENV away expansion error 0.02850478878826968818889600636270363144690 exceeds third-order scale 0.00302000000000000 (b=1/7, th=-1/20, s=1/500)
+ALL CHECKS PASS
