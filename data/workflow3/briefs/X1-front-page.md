@@ -178,3 +178,9 @@ mutates, so the self-test crashes. **Repoint that one plant at SRAY's registered
 once. Standing rule 7's "never edit another job's tools" is lifted for that line only. Alternative weighed: leave it and report the tool
 defect — lost because a control that cannot run is a check nobody has seen fail (`CLAUDE.md` § Make the gate fail). Confidence high.
 Your 18:08 run in the main tree, restored at 18:09, is logged as your disclosed slip; the coordinator saw main's status clean.
+
+## Amendment 4 — 2026-09-28 23:17 UTC, from the coordinator: the atlas header
+
+Update the facts writer's meta as proposed — built="2026-09-28", job="X1", as_of="FS-114's and FS-111's closes" — and rebuild. A page
+published with yesterday's "after FS-112's close" would state something false about itself. Alternative weighed: list it as owed — lost
+because the republish follows at once. Confidence high.
