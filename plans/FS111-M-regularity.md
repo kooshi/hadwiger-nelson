@@ -31,7 +31,7 @@ each stage's section is headed "Stage n — SAVED" and committed before the next
   `B(x, ρ)`, `x` an edge midpoint, `ρ < 1 − √13/4`, has a contact point for either of the edge's two colours inside `B(x, ρ)`: local fills cannot
   saturate it — [hand, one mind] §2.5.
 - **M-PINCH** — at a saturated point `x` of an honest a.e.-proper colouring with a neighbourhood `N` in which only two colours `a, b` have positive
-  measure and each is a.e. one path-connected set of density points (H1, H2): either `N` is split by one unit circle `T₁(y)` (`a` inside, `b` outside,
+  measure and each is a.e. one connected open set of density points (H1, H2): either `N` is split by one unit circle `T₁(y)` (`a` inside, `b` outside,
   or the reverse; `y` a contact of both colours), or two open unit discs tangent at `x` from opposite sides lie a.e. in `S_a` and in `S_b` — the
   "(in, in)" case is impossible — [hand, one mind] §3.1. No thickness of the partner is needed.
 - **M-C11** — if M-PINCH's hypotheses hold at every essential boundary point in `N`, then `∂_e S_a ∩ N′` (`N′ ⋐ N`) is a `C^{1,1}` curve with curvature in
@@ -307,7 +307,9 @@ problem; a selection from a regular cover is regular (its boundaries lie in `⋃
 
 *Setting.* An honest colouring `g` (a measurable `k`-colouring, a.e.-proper, in D-NF). A point `x ∈ ∂_e S_j` is **saturated for `j`** if it is a
 `j`-contact point (§2.1: equivalently not `j`-free). **(H1)** at `x`: a ball `N = B(x, ρ)` in which `S_c` is null for `c ∉ {a, b}`. **(H2)** at `x`:
-in `N`, `S_a` and `S_b` are each a.e. equal to a path-connected set of density points, `P_a ⊆ S̃_a`, `P_b ⊆ S̃_b`, with `x ∈ cl P_a ∩ cl P_b`.
+in `N`, `S_a` and `S_b` are each a.e. equal to a connected open set of density points, `P_a ⊆ S̃_a`, `P_b ⊆ S̃_b`, with `x ∈ cl P_a ∩ cl P_b`
+(open and connected, hence path-connected; openness is what lets stage 3.3 place a disc inside a component — corrected at stage 5 from
+"path-connected", which leaves that step open: a path in `S̃_c` may pass through points outside the class's interior).
 
 ### 3.1 M-PINCH — the pinching lemma [hand, one mind]
 
@@ -362,9 +364,9 @@ end at unit arcs is the next rung (proposed stub, §P): it is REG-A off the junc
 *Statement.* Let `g` be saturated and honest with classes a.e. open, and `R` a component of the open class of colour `c`. `diam R ≤ 1` (M-HULL2), so its
 minimal enclosing circle `∂B(o, r)` has `r ≤ 1/√3 < 1` (Jung) and meets `cl R` in at least two points. At each such `p`, M-PINCH's conclusion fails for
 `R`'s side: either `d̄_c(p) = 0` (`R` is a cusp at `p`) or (H1) or (H2) fails at `p`.
-*Proof.* Suppose `d̄_c(p) > 0` and (H1), (H2) hold at `p`, with `c` and some `d`. `p` is saturated. `P_c ∪ R` is a path-connected subset of the open
-class (they share the positive-measure set `R ∩ N`), so `P_c ⊆ R`. M-PINCH gives an open unit disc tangent at `p` with `D ∩ N ⊆ S_c`, a.e. inside
-`P_c ⊆ R ⊆ B(o, r)`. The interface is `C^1` at `p` (two tangent discs) and `R ⊆ B(o, r)`, so the tangent at `p` is the circle's and `D` lies on `o`'s
+*Proof.* Suppose `d̄_c(p) > 0` and (H1), (H2) hold at `p`, with `c` and some `d`. `p` is saturated. `P_c` and `R` are open, connected, and meet (`R ∩ N`
+is open, non-empty, and a.e. inside `S_c ∩ N ⊆ P_c`), so `P_c ⊆ R`. M-PINCH gives an open unit disc tangent at `p` with `D ∩ N ⊆ S_c` a.e.; `D ∩ N` is
+open and connected and meets `P_c`, so `D ∩ N ⊆ R ⊆ B(o, r)`. The interface is `C^1` at `p` (two tangent discs) and `R ⊆ B(o, r)`, so the tangent at `p` is the circle's and `D` lies on `o`'s
 side: `D` is internally tangent to `B(o, r)` at `p` with radius `1 > r`, so it contains points near `p` outside `B̄(o, r)` — a positive-measure set in
 `S_c ∩ N ⊆ R`, outside `R`'s enclosing disc. ∎
 *Reading.* Voronov's Lemma 2.2 (a trichromatic point in every unit disc) has a saturated sharpening: every region carries at least two singular points,
