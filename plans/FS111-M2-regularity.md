@@ -244,10 +244,10 @@ only finitely many components of the classes' interiors, and `⋃_j ∂F_j` is, 
 
 **M2-PINCH-C — a class can pinch along a Cantor set** [hand, one mind; conditional]. Let `g : ℝ → [0, ∞)` be `C^∞` with `|g″| ≤ 1/2`, zero set exactly
 a Cantor set `Z ⊂ (−1/8, 1/8)` (a smooth function can have any closed zero set). Put `P = [−1/4, 1/4] × [−1/2, 0]` and
-`P′ = {(s, t) : |s| ≤ 1/4, 2 + g(s) ≤ t ≤ 5/2}`. *If* a regular MUA set `F` contains `P ∪ P′` and no other point of `F` lies within `11/10` of the strip
-`W = [−1/8, 1/8] × [9/10, 11/10]`, then `int F ∩ W` has infinitely many components, accumulating at every point of `Z × {1}`.
+`P′ = {(s, t) : |s| ≤ 1/4, 2 + g(s) ≤ t ≤ 5/2}`. *If* a regular MUA set `F` contains `P ∪ P′` and every point of `F` within `11/10` of the strip `W = [−1/8, 1/8] × [9/10, 11/10]` lies in
+`P ∪ P′ ∪ W`, then `int F ∩ W` has infinitely many components, accumulating at every point of `Z × {1}`.
 *Proof.* For `z ∈ W`, (iv) gives `z ∈ int F` iff `T₁(z)` misses `P` and `P′` iff `d_P(z) > 1` and `d_{P′}(z) > 1` (the far alternatives fail:
-`D_P(z), D_{P′}(z) ≥ 3/2`). `d_P(z) > 1` iff `t > 1`. `d_{P′}(z) > 1` iff `z` lies below the lower unit parallel of `P′`'s bottom, a curve
+`D_P(z), D_{P′}(z) ≥ 7/5`; and a unit circle about a point of `W` misses `W`, whose diameter is below 1). `d_P(z) > 1` iff `t > 1`. `d_{P′}(z) > 1` iff `z` lies below the lower unit parallel of `P′`'s bottom, a curve
 `t = ℓ(s)` with `ℓ ≥ 1` and `ℓ(s) = 1` iff `s ∈ Z` (a point `(s, 1)` has distance `≥ 1` from `P′`, with equality only at `(s, 2)` with `g(s) = 0`, where
 `g′(s) = 0`). So `int F ∩ W = {1 < t < ℓ(s)}`, one thin lens over each gap of `Z` and nothing over `Z`. ∎
 *Consistency (why this is a reading of FALSE and not a curiosity).* The configuration satisfies M2-FIX locally: `P`'s interior has diameter `< 1` and
