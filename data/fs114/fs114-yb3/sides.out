@@ -1,0 +1,4 @@
+SIDES at cos e = 4/5: z1, z2 on omega(q2), omega(q1): True; |z1 - z2|^2 = 9/25 exactly: True; |z1| < 1: True
+exact zero tests used: 3
+ALL PASSED
+exit 0

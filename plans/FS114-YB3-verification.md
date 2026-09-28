@@ -29,6 +29,7 @@ distance below 1 and maximum above 1 carry interior points at distance exactly 1
 | 1b | enumerate colourings of the tiles at `top`, `q1`, `bot` to see which survive | derived each tile's colour from the tiles at `p`, `q_i` that point at the vertex (UPDOWN), one colour at a time |
 | 1b | try fillings of a same-colour lune until one failed a checker | derived the contradiction from the two `t2`-frontiers (every cross pair at distance exactly 1) |
 | 1b | probe points around `r` for a free colour | derived the straddler of each colour at the ring of `q1` just above `r` |
+| 1c | build same-colour-lune fillings and asymmetric bowties by formula and run the checker on each | none built: the derivations decide the statements; the checker reads one held object (and its plants) against the structure the derivations say is forced |
 
 ## Fence log (standing rule 13; the template's and the instance's fences)
 
@@ -133,7 +134,8 @@ Let `W₁` be the tile along `t1`'s outer side (the arc of `ω(p)` from `q1` to 
    `[300° + β, 120°]`, FS114-Y2-GAPS / FS112-U1), so `W₁ = X1` would be one tile meeting `q1` in two sectors, which "simple" forbids; two distinct tiles at
    `q1` have distinct colours.
 3. `c(W₁) ≠ ā`: `W₁` points at `q2` (direction `300°⁺` against `270°`), so it would be `X2`, which holds points outside `B̄(q1, 1)`: diameter.
-4. So **`c(W₁) = 3`**, and by the mirror argument at `q2` (`t2` excluded by `60°⁻`… against `q1`'s side, the same four steps) `c(W₂) = 3`; `W₁` points at
+4. So **`c(W₁) = 3`**, and by the mirror argument at `q2` (the arc point `e(−30° + κ)`: `t2` at `60°` gives `cos(90° − κ) > 0`, `t4` at `300°` gives
+   `cos(30° + κ) > 0`; steps 2–3 with `X2`, `X1` exchanged) `c(W₂) = 3`; `W₁` points at
    `q2`, so `W₁` is the 3-tile at `q2`: **`W₁ = W₂ = W`**. Diameter: `W ⊂ B̄(q1, 1) ∩ B̄(q2, 1)`, so at `q1` its directions satisfy `cos(φ − 270°) > 0`, and
    starting at `300°` (one sector): `⊂ [300°, 360°]`; at `q2`, `⊂ [0°, 60°]`; every such direction is within `< 90°` of `330°` resp. `30°` (toward `r`).
 5. **`t3`'s outer tile**: at `q4` the colours `3` (`t3`), `4` (`T4`), `c(X4)`, and the outer tile's colour is not 2 (`t2` direction `120°` at the arc
@@ -239,3 +241,74 @@ colours at `q1` and `q4`, with `top`) is **never met**: its class is empty, and 
 | 8 | FS114-Y4-E2X | **TRUE** | hand; one mind | non-Siamese, simple |
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: my checker, its calibration, and the held bowtie read against the derived structure
+
+### 1c.1 The checker `tools/fs114_yb3_check.py` (written for this job; a different method from FS114-YB2's on purpose)
+
+*Numbers:* each is an exact sympy expression paired with a rigorous `mpmath` interval (400 bits). A sign is read from the interval when it excludes 0;
+otherwise the expression's minimal polynomial over ℚ decides it (`x` means exactly 0; anything else raises `Undecided`, loudly). *Verdict* for two
+tiles of one colour (a tile with itself included): **REJECT iff min < 1 < max**, from the complete list of critical pairs of `|x − y|²` on piece × piece
+(endpoints; an endpoint against a segment's foot or the two points of an arc's circle on the line through its centre; a segment's foot of an arc's
+centre against the arc's two points on that normal; two arcs on their line of centres, concentric included) plus exact crossing tests; each candidate
+is `|√D + k|`, compared with 1 exactly. Non-Siamese test for distinct tiles: min ≥ 1. *Sectors* at a vertex are read from the tangents of the pieces
+meeting there (boundaries counter-clockwise). FS-112's and FS114-YB2's builders are imported only to convert their held objects (tower numbers →
+exact expressions, `tools/fs114_yb3_run.py`).
+
+**Self-test** (`python3 tools/fs114_yb3_run.py selftest`, `data/fs114/fs114-yb3/selftest.out`, exit 0): eight arithmetic checks (nested radicals, ties at
+1, a value `10⁻²⁰⁰` the interval must see); eight controls, each verdict predicted before the run (a width-1 Reuleaux triangle, a rectangle of diagonal
+exactly 1 and one above, squares at gap exactly 1 and `9/10`, crossing bars, a unit cap over a bar and a cap over a cap whose nearest pairs are interior);
+**six checker plants, each flipping exactly the controls predicted**: `noself`, `closed` (≤), `nocross`, `endsonly`, `nointerior`, `tieup` (a tie the
+interval cannot see read as "above 1" with no exact test). *Slip, mine:* `tieup` first lived in the general sign routine and broke the arc
+constructor's own exactness assertion (a crash, not a verdict); it now acts only on the distance comparison, where it was meant to.
+
+### 1c.2 Calibration (`python3 tools/fs114_yb3_run.py calib`, `calib.out`, under `scripts/slot.py --mem 4 --cpus 1`, exit 0)
+
+| object | built from | same-colour pairs the object has / examined exactly | verdict | tight at 1 | plant beside the faithful twin → rejected pairs (predicted before the run) |
+|---|---|---|---|---|---|
+| brick (row 33) | its rule in words: cells `4/5 × 3/5`, shear `2/5`, colour `(i + 3j) mod 7`; cell (0,0) against `|i|, |j| ≤ 4` | 11 / 11 | **ACCEPT** | 3 | cells `9/10` wide → exactly `(b0,0)` with itself, `(b1,2)`, `(b−1,−2)` |
+| hexagonal 7-colouring | its rule: side `1/2`, centres `q·a₁ + r·a₂`, colour `(q + 3r) mod 7` | 7 / 7 | **ACCEPT** | 1 (the diameter) | side `11/20` → exactly the hexagon with itself |
+| the strip | FS112-YB2's builder, unedited; columns 0–2 against −4…6 | 82 / 82 | **ACCEPT** | 54 | — |
+| the disk | FS112-YB2's builder, unedited | 71 / 71 | **ACCEPT** | 46 | — |
+| FS112-BOWTIE | FS112-YB3's builder, unedited | 21 / 21 | **ACCEPT** | 6 | `h_is_g` → exactly `(G, H)` |
+
+The tight counts agree with FS114-YB2's on the strip (54), the disk (46) and FS112-BOWTIE (6), by a different arithmetic.
+
+### 1c.3 The held Reuleaux bowtie, read by my checker against the structure my derivations say is forced (`bowtie.out`, exit 0)
+
+*Object:* FS114-YB2's rebuild of FS114-Y2-BOWTIE (its builder `tools/fs114_yb2_run.py`, open to me, imported unedited; converted exactly). It is a
+diagonal bowtie (`X` 5 at `q1`, `X_x` 6 at `q4`, `X_y` 6 at `q2`, `X_xy` 5 at `q3`) holding neighbourhoods of `top` and `bot`, so every forced item of
+YB3-DIAG and YB3-W must hold on it; a failure would refute my derivation, not the object.
+- **My checker: ACCEPT**, 46 same-colour pairs the object has, 46 examined, no distinct pair with min below 1 (non-Siamese), 32 tight at 1 (FS114-YB2's
+  count, again by a different arithmetic).
+- **The forced structure, all 13 items hold:** `q1` carries exactly five tiles of five colours, 2 absent, in the order `t1 (1) [180°, 300°]`, `W = V (3)
+  [300°, 0°]`, `T1 (4) [0°, 30°]`, sliver `Z (6) [30°, 60°]`, `X1 = X (5) [60°, 180°]`; `X1` leaves `q1` at exactly `60°`; `W` is one tile at `q1` and `q2`,
+  inside `[300°, 360°]` and `[0°, 60°]`; `top` carries colours `{2, 4, 5, 6}` with `X1`, a colour-4 tile and `X4`; the `X1 | N` edge is one unit arc of `ω(q1)`
+  (directions `[144.28°, 150°]` from `q1`, `ℓ = 5.72°`) and `T1` lies in its facing-away cone; the sliver ends exactly at `60°`; the `X2 | N′` edge is one unit
+  arc of `ω(q2)`, `T2 = T1_y (2) [330°, 0°]` lies in its facing-away cone (so it starts after `300°`) and points toward `r` — the step that closes E1.
+- **Plants beside the faithful twin, predicted before the run:** `sides` (`X_y`, the tile along `S2` at `q2`, given `X1`'s colour 5) → **exactly**
+  `(X, X_y)` (SIDES clause 1's straddle), `(X_xy, X_y)` (both at `bot`), `(X_y, Z_y)` (both at `q2`); `wcol` (`W` given `X1`'s colour) → **exactly** `(V, X)`
+  and `(V, Z_y)` (both at a vertex of `W`); the pair `(V, X_xy)` stays accepted at min exactly 1 (`q2` against `B_xy` and `bot`), as predicted.
+
+### 1c.4 SIDES at a named angle (`sides.out`, exit 0)
+
+At `cos ε = 4/5`, `sin ε = 3/5`: `z₁ = q2 + (−3/5, 4/5)` and `z₂ = q1 + (−3/5, −4/5)` lie on `ω(q2)` and `ω(q1)`; `|z₁ − z₂|² = 9/25` exactly
+(`= (2cos ε − 1)²`); `|z₁| < 1`.
+
+### Theorems this phase proved (stage 1)
+
+| id | statement (one line) | grade, minds | address |
+|---|---|---|---|
+| YB3-UPDOWN | FS114-Y4-UPDOWN, TRUE | hand; one mind (mine) | 1b |
+| YB3-D2T | `q1, q4 ∉ cl t2`, `q2, q3 ∉ cl t4`; so 2 is absent at `q1`, `q4` and 4 at `q2`, `q3` in a non-Siamese Reuleaux bowtie | hand; mine | 1b |
+| YB3-SIDES | FS114-Y4-SIDES, TRUE (clause 1 in every valid map, clause 2 non-Siamese) | hand + exact at a named angle; mine | 1b, 1c.4 |
+| YB3-W | FS114-Y4-W, TRUE; "simple" used once (`W₁ ≠ X1`), and without it the step fails | hand; mine | 1b |
+| YB3-LUNE | FS114-Y4-LUNE, TRUE, needing neither "simple" nor the ring; the sketch's implicit step is `X2` pointing at every point of `S1` | hand; mine | 1b |
+| YB3-DIAG | FS114-Y4-DIAG, TRUE (non-Siamese, simple — not in its words); the cusp `T2 = {300°}` is closed through the `X2 | N′` arc | hand; mine; the forced structure holds on the held bowtie (13 of 13) | 1b, 1c.3 |
+| YB3-RSTOPALL | FS114-Y4-RSTOPALL, TRUE as to its headline; "E0" undefined in my brief | hand; mine, over YB3-LUNE, -DIAG, -SIDES, -W | 1b |
+| YB3-D2ALL | FS114-Y4-D2ALL, TRUE; YB3-LUNE empties the `(1 3)` class without `top` | hand; mine | 1b |
+| YB3-E2X | FS114-Y4-E2X, TRUE; a case of YB3-DIAG step 6 | hand; mine | 1b |
+| YB3-FIVE | with a neighbourhood of `top` (and the closed upper lune, `q2`, `q3`), `q1` and `q4` have exactly five colours: FS114-Y3-FOUR's class is empty | hand; mine | 1b |
+| YB3-CHK | an exact checker by intervals and minimal polynomials, six plants firing as predicted, accepting the brick, the hexagonal 7-colouring, the strip, the disk and FS112-BOWTIE | tools | 1c.1–1c.2; `tools/fs114_yb3_check.py`, `tools/fs114_yb3_run.py` |
+
+## Stage 1c — SAVED

@@ -1,0 +1,21 @@
+held bowtie: 20 tiles; same-colour pairs it has 46; examined 46; rejected []; distinct pairs with min < 1 (non-Siamese failures) []; tight at 1: 32
+  plant sides: rejected [('X', 'X_y'), ('X_xy', 'X_y'), ('X_y', 'Z_y')]; predicted [('X', 'X_y'), ('X_xy', 'X_y'), ('X_y', 'Z_y')]: AS PREDICTED
+  plant wcol: rejected [('V', 'X'), ('V', 'Z_y')]; predicted [('V', 'X'), ('V', 'Z_y')]: AS PREDICTED
+  at q1 (counter-clockwise from 180 deg): t1(1) [180.00, 300.00], V(3) [300.00, 0.00], T1(4) [0.00, 30.00], Z(6) [30.00, 60.00], X(5) [60.00, 180.00]
+  [ok] q1 has exactly five tiles of five distinct colours, 2 absent
+  [ok] order t1(1), W(3), T1(4), sliver(b), X1(a) with {a, b} = {5, 6}
+  [ok] X1 (X) leaves q1 at exactly 60 deg and ends at 180 deg
+  [ok] W (colour 3) at q1 lies in [300, 360] (starts at 300, ends at or before 360)
+  [ok] the colour-3 tile at q2 is the same tile, within [0, 60] there
+  [ok] top carries X1, a colour-4 tile N and X4 (colours at top [2, 4, 5, 6])
+  [ok] the X1 | N edge is a unit arc of omega(q1) (one arc of N about q1)
+  [ok] T1's whole sector at q1 lies in U1's facing-away cone of that arc (both ends of T1's sector, both ends of the arc)
+  [ok] the sliver ends exactly where X1 starts (60 deg), and has no direction beyond 60 deg
+  [ok] the X2 | N' edge is a unit arc of omega(q2)
+  [ok] T2's sector at q2 lies in the facing-away cone of the X2 | N' arc (so it starts after 300 deg)
+  [ok] T2 points toward r: both ends of its sector within < 90 deg of 30 deg
+  T2 at q2: [330.00, 0.00] deg; the X1 | N arc about q1: [144.28, 150.00] deg; T1 at q1: [0.00, 30.00] deg
+BOWTIE PASSED
+exact zero tests used: 15644
+ALL PASSED
+exit 0

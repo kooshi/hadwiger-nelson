@@ -1,0 +1,29 @@
+arithmetic (interval + exact zero test)
+  [ok] sqrt3^2 - 3 = 0: 0 (expected 0)
+  [ok] sqrt(2+sqrt3) - (sqrt6+sqrt2)/2 = 0: 0 (expected 0)
+  [ok] sqrt(2+sqrt3) < 1.9319: -1 (expected -1)
+  [ok] 3 - 2 sqrt(2+sqrt3) < 0: -1 (expected -1)
+  [ok] |sqrt4 - 3| vs 1: equal: 0 (expected 0)
+  [ok] |sqrt3| vs 1: above: 1 (expected 1)
+  [ok] |sqrt3 - 1| vs 1: below: -1 (expected -1)
+  [ok] 1e-200 read as positive (interval sees it): 1 (expected 1)
+controls
+  [ok] reuleaux: rejected [] of 1 pairs (predicted []); tight [('R', 'R')]
+  [ok] rect 3/5x4/5: rejected [] of 1 pairs (predicted []); tight [('R', 'R')]
+  [ok] rect 3/5x81/100: rejected [('R', 'R')] of 1 pairs (predicted [('R', 'R')]); tight []
+  [ok] squares gap 1: rejected [] of 3 pairs (predicted []); tight [('a', 'b')]
+  [ok] squares gap 9/10: rejected [('a', 'b')] of 3 pairs (predicted [('a', 'b')]); tight [('a', 'b')]
+  [ok] crossing bars: rejected [('a', 'a'), ('a', 'b'), ('b', 'b')] of 3 pairs (predicted [('a', 'a'), ('a', 'b'), ('b', 'b')]); tight []
+  [ok] cap over bar: rejected [('bar', 'bar'), ('bar', 'cap')] of 3 pairs (predicted [('bar', 'bar'), ('bar', 'cap')]); tight [('bar', 'cap'), ('cap', 'cap')]
+  [ok] cap over cap: rejected [('a', 'b')] of 3 pairs (predicted [('a', 'b')]); tight [('a', 'a'), ('b', 'b')]
+checker plants
+  [ok] plant noself: flips ['cap over bar', 'crossing bars', 'rect 3/5x81/100'] (predicted ['cap over bar', 'crossing bars', 'rect 3/5x81/100'])
+  [ok] plant closed: flips ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux', 'squares gap 1'] (predicted ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux', 'squares gap 1'])
+  [ok] plant nocross: flips ['crossing bars'] (predicted ['crossing bars'])
+  [ok] plant endsonly: flips ['cap over bar', 'cap over cap'] (predicted ['cap over bar', 'cap over cap'])
+  [ok] plant nointerior: flips ['cap over bar', 'cap over cap'] (predicted ['cap over bar', 'cap over cap'])
+  [ok] plant tieup: flips ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux'] (predicted ['cap over bar', 'cap over cap', 'rect 3/5x4/5', 'reuleaux'])
+SELF-TEST PASSED
+exact zero tests used: 9460
+ALL PASSED
+exit 0
