@@ -1,104 +1,82 @@
-# Session handoff — 2026-09-28, Workflow 3.0 merged; the test drive is next
+# Session handoff — 2026-09-28 evening: FS-114 and FS-111 closed; a fresh session opens the next milestone
 
-*Written by the top-level session at ~21:00 UTC, 2026-09-28, before Kooshi compacts it. For whoever reads it next with no memory of
-the day, most likely this session after its compaction. Current state only. The FS-114 and FS-111 detail stays in their close
-inventories and in `plans/SESSION-HANDOFF-2026-09-26.md` item "0-morning"; this file does not retell it.*
+*Rewritten ~23:00 UTC, 2026-09-28, by the session that ran Workflow 3.0's first test drive (the closes of FS-114 and FS-111), for a
+completely fresh session with no memory of today. Current state only. This morning's version of this file (the refactor's merge, the
+test-drive choice) is in git.*
 
-## 1. Read first
+## 1. Read first — who you are, and whether it loaded
 
-1. **Who you are.** You are the top-level session, and since today its identity is **Keryx**, the coordinator. Check your system
-   prompt for the heading `# Keryx in lean-dir — the workflow`.
-   - **If it is there**, the output style loaded (`.claude/output-styles/keryx.md`, selected in `.claude/settings.json`). Your
-     identity and your workflow are in force.
-   - **If it is not**, this session started before the style existed. Claude Code reads style files only at startup, so a
-     compaction alone does not load it. Read `.claude/output-styles/keryx.md` in full now, work from it, and tell Kooshi that a fresh
-     session is needed for the style to load itself.
-2. **Check the agent types.** The Agent tool's list of agent types must include `poros`, `ephodos`, `ephodos-verifier` and
-   `debruijn`. If it lists only the old ones (`ferrous-engineer`, `general-purpose`, …), this session loaded its agent list before the
-   files existed. Then the test drive needs a fresh session. Do not fake it by giving a general-purpose agent an identity file:
-   that is the setup Kooshi replaced today.
-3. **Then report to Kooshi.** His words at the handoff: *"Next, I'll compact, and you can take it for a test drive on the next
-   milestone. Hopefully, after compaction, you get all the fresh files too. Give me a report when you load in."* Say:
-   - what loaded (the style, the agent types, CLAUDE.md without the WORKFLOW import);
-   - the state of FS-114 and FS-111 (§3);
-   - the test-drive choice (§4), with your recommendation.
+1. **Check your system prompt for the heading `# Keryx in lean-dir — the workflow`.** If it is there, you are Keryx, the coordinator,
+   and your identity and workflow are `.claude/output-styles/keryx.md` (selected by `outputStyle` in `.claude/settings.json`).
+   - **If it is not there**, tell Kooshi at once. The session that wrote this note never had the style loaded: it started before the
+     style existed, and a custom output style cannot be selected mid-session from a remote terminal ("Custom output styles can't be
+     selected over Remote Control or from a relayed message"). A headless probe this morning saw a fresh session load it from the settings
+     file with no manual step; an interactive start has not been seen yet. Kooshi can also select it in the session itself with
+     `/output-style keryx`. Until it loads, read `.claude/output-styles/keryx.md` in full and work from it.
+2. **Check the Agent tool's types**: `poros`, `ephodos`, `ephodos-verifier`, `debruijn` must be listed. They were, in the last session.
+3. **Kooshi's instruction for you**, verbatim (2026-09-28 ~21:35 UTC): *"Understood. Let's close up, then hand off to a completely fresh
+   session with a note to check for keryx and be watchful of the new workflow in comparison to the old."*
 
-## 2. What changed today (all merged: `main` = `64a47e97`, pushed; branch `keryx-pipeline` merged, worktree removed)
+## 2. Be watchful: the new workflow against the old
 
-Kooshi, in order, verbatim:
-- *"The main agent will be the herald. Efodos, Poros, and de Bruijn will be agent files instead of ad-hoc general purpose agents. Each
-  will have their own non-overlapping workflow with their own loop, exercising their own skills, which will also be imported to
-  `.claude`. This will clean up and hopefully improve our flow. Anything which is duplicated by the agent IDs or skills can be removed
-  from our workflow files."*
-- *"The new standard top level workflow will be Poros, asking the question, then Efodos answering it, then de Bruijn formalizing it.
-  These can all be pipelined, so 3 agents will be running, with Poros scouting ahead, Efodos blazing the trail, and de Bruijn paving
-  irmt behind them, all quite independent. Efodos cab still have multiple stages, and will have verification versions of itself running
-  after new theorems, also possibly in parallel to it."*
-- *"Yes, move all duplicated workflow steps, and generally split the whole workflow into the separate agent files. The workflow
-  sections should go beneath the verbatim identities if they can't be in separate files loaded with @."*
-- *"The main branch should be silent. Those milestones landed within the past few hours."*
+Workflow 3.0 (merged 2026-09-28, `64a47e97`): Keryx coordinates from the output style; Poros (ask), Ephodos (derive), `ephodos-verifier`
+(blind second mind) and de Bruijn (formalize) are agent files, each its identity verbatim with its lane's workflow beneath
+(`CLAUDE.md` § The pipeline). Its first test drive was the two closes. **Read `plans/WORKFLOW3-test-drive.md` in full**: the instruments
+registered before the first brief, every friction as it arose (F1–F12 and after), and the comparison with Workflow 2.0 at its end.
 
-The result, as it stands on `main`:
+What to watch at the next opening, which is the first under the new workflow from a clean start:
+- **The lane files have pending edits** (the "candidate edit" column of the test-drive file). None was filed during the drive, so the
+  evidence was judged against one version of the files. Kooshi decides which to file; see § 5.
+- **§G is read once per milestone.** When a milestone's object changes between rounds, nothing re-reads the corpus (F9 (6)): re-read it
+  at each round's brief if the object moved.
+- **Running counts in shared entries** (G72's) are summed by Keryx at the filing, never incremented by each lane (F11).
+- **Scripts quote; people paraphrase.** Every statement in a brief is copied by a script, definitions too (F8's item 2): the previous
+  coordinator's paraphrases dropped clauses six times in FS-114 alone.
+- **Read the clock before writing a time.** The last session wrote times from memory four times and was wrong by up to 20 minutes (F6):
+  generate every logged time with `date` inside the command that writes it.
 
-| mind | the one file it loads (identity verbatim, then its lean-dir workflow) |
-|---|---|
-| Keryx, the top-level session | `.claude/output-styles/keryx.md` |
-| Poros, ask, scouts ahead | `.claude/agents/poros.md` |
-| Ephodos, derive, blazes the trail | `.claude/agents/ephodos.md` |
-| Ephodos, a blind second mind | `.claude/agents/ephodos-verifier.md` (also preloads `ephodos-verification`) |
-| de Bruijn, formalize, paves behind | `.claude/agents/debruijn.md` (also holds the Lean-only sections moved out of `CLAUDE.md`) |
+## 3. The state of the science
 
-- **Identities.** They are imported unchanged from `~/source/agent-forge` (commit `6b47dbd`) into `.claude/skills/`.
-  - `python3 scripts/identities.py check` holds each copy to its skill; `sync` re-copies after an update; `--self-test` plants two
-    faults.
-  - The four core skills are hidden from the model's skill list (`skillOverrides`), so no mind loads a second identity.
-- **CLAUDE.md** no longer imports `WORKFLOW.md`, and holds a shared map (§ The pipeline). `WORKFLOW.md` is an index loaded by no one.
-  `DEBRUIJN.md` is deleted.
-- **The rules every brief shares** are `plans/STANDING-RULES.md`. It passes Keryx's brief gate, and a copy without rule 1 fails it.
-- **Head-count**: three agents at once, one per lane, plus Ephodos verifiers in parallel; a competition or a crunch needs Kooshi's
-  word (`CLAUDE.md` § Delegation, and Keryx's § Staffing).
-- **Probes run today:** 6 one-turn headless runs on the cheapest model, plus one cold-read reviewer earlier.
-  - `@` imports do not expand in agent files or output styles.
-  - A fresh session on the branch saw Keryx's workflow heading.
-  - A `poros` agent run with the style off saw only its own identity.
-  - `claude --agent <lane>` as a main session also gets Keryx's style, unless `--settings '{"outputStyle":"default"}'` is passed
-    (`WORKFLOW.md` says so).
-
-## 3. The state of the science (read the sources; this is only a pointer)
-
-- **FS-114 (the unit-arc question) and FS-111 (the cone scale) are OPEN.** Their jobs all finished this morning; the last, FS114-YB5,
-  reported at 09:02. **Neither has a close**: `CLAUDE.md` § Frontier still reads "Last updated: 2026-09-27 — FS-112 … closed".
-- Every result, ruling and slip is in `plans/FS114-close-inventory.md` (items 1–120) and `plans/FS111-close-inventory.md` (items 1–37).
-  The morning state and the next steps planned then are `plans/SESSION-HANDOFF-2026-09-26.md` item "0-morning": a blind check of
-  N7-HUB, then round 7 (OC, (Q)-rings, E1/E2). Items 118–120 of FS-114's inventory hold the held items (N7's reading R-E2, YB5's GAPs).
-- **A file to rescue at FS-111's close:** `data/fs111/fs111-w/{blocks,hex7_free,hx_pairs}.out` are untracked outputs of job FS111-W,
-  written 02:06–02:38. They are small, and later jobs noticed their names but never committed them. Check the FS111-W record
-  (`plans/FS111-W-wild.md`) for citations; commit or decline them with a reason.
+- **FS-114 (the unit-arc question) and FS-111 (the cone scale) are CLOSED, undecided**, filed in one closing commit, `de616ed9`:
+  `LEDGER.md` rows 137–141, `CLAUDE.md` § Frontier, `plans/FRONTIER-STUBS.md` re-ranked by Poros
+  (`plans/POROS-2026-09-28-close-reread.md`). The close records are `plans/FS114-C-close.md` and `plans/FS111-C-close.md`; the derivation
+  files `plans/FS114-derivation.md` (46 entries) and `plans/FS111-derivation.md` (85), both in the Ephodos entry grammar.
+- **Next, by Poros's re-rank: FS-116, the local exclusion** (`plans/STUB-local-exclusion.md`), **alone**, opening with Poros's card 1
+  (`plans/POROS-2026-09-28-close-reread.md` §2.4: does FS-114's straddle kill survive an ε-band uniformly in the complexity?) and round 7's
+  queue. **FS-121, the map step** (`plans/STUB-map-step.md`) is route M's other half and a second slot only if Kooshi staffs one — his
+  call, not yet made; the default is FS-116 alone.
+- The opening follows Keryx's workflow § A milestone, end to end: Poros's question card in the stub (step 1) if the stub lacks one, then
+  the inventory, then Ephodos's opening job.
 - **The search ban runs to 2026-10-01** (`CLAUDE.md` § Toolchain).
 
-## 4. The test drive — the choice to put to Kooshi
+## 4. Rules easy to miss
 
-| option | what it exercises | recommendation |
-|---|---|---|
-| **A. Close FS-114 and FS-111 under the new close path** | An Ephodos close job per milestone (the derivation file, stubs, drafts of the front page), then a Poros re-read and draft re-rank, then Keryx filing verbatim in one closing commit. The FS111-W rescue. Then Poros poses the next milestone's question from the re-ranked frontier. | **Recommended**, medium-high: the closes are owed anyway, they exercise the most new machinery, and a close is where the old workflow's gaps (drafts no lane wrote) showed |
-| B. Continue FS-114's round 7 first | Ephodos derivation jobs and blind verifiers on a frozen claim list; the new fences | If Kooshi judges FS-114 not landed |
-| C. Open the next ranked milestone now, leaving the closes for later | Poros scouting, the Ephodos opening (the reframe), freezing a claim list | Only if Kooshi wants the opening path tested first; it leaves two milestones unfiled |
+- Brief by agent type, with the brief on disk in the keryx skill's header form, gated with
+  `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`; `plans/STANDING-RULES.md` is part of every brief.
+- Only Keryx launches agents; nothing about an open milestone goes into the auto-memory; commit subjects stay neutral once blind jobs run.
+- You coordinate and do not author: lanes draft, Keryx files verbatim. A large filing goes to a front-page job on its own branch and
+  worktree, squashed into one closing commit (the shape used today, F10).
+- Push freely to origin; never force-push. Budgets in briefs are guidance; replace an agent past about 500k tokens by the harness's count
+  (agents' own counts ran at 53–67 % of it today).
 
-Whatever runs, **register as instruments before the first brief** (scored at the test drive's close):
-- whether a lane agent had to ask a question its file should have answered;
-- whether any brief failed Keryx's gate;
-- whether `derive_gate.py`'s path rule (addresses from the record's own folder) bit anyone;
-- whether a verifier's fence held.
+## 5. Open items for Kooshi (from today's report)
 
-Every friction goes in the inventory, as a candidate edit to the lane's file.
+- Whether FS-121 opens beside FS-116 (staffing).
+- Which of the test drive's candidate edits to the lane files to file (`plans/WORKFLOW3-test-drive.md`).
+- D6: whether to write the unit-arc question's statement in Lean now (FS-114 inventory item 6; four kernel handoffs wait on it).
+- For agent-forge (upstream identities): `derive_gate.py` silently folds an unknown indented key into the field above it (F5); the entry
+  grammar has no "rests on" field and no `model:` form for a class not known to be non-empty (F8); `brief_gate.py`'s body-path check
+  ignores directory prefixes in `touches:` (F3); its standing-rules check passes any paragraph that mentions spawning, "no" and a reason.
+- An owed cleanup: `plans/FRONTIER-STUBS.md` says it holds current state only, yet § Ranked stubs opens with nineteen dated re-rank
+  paragraphs; moving them to git is the next re-rank's to do unless Kooshi rules otherwise.
 
-## 5. Rules in force that are easy to miss after a compaction
+## 6. The closing commit, and what is owed
 
-- Brief by agent type (`subagent_type: "ephodos"`, and so on), with the brief on disk in the `keryx` skill's header form, gated with
-  `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`. Name `plans/STANDING-RULES.md` in every brief.
-- Nothing about an open milestone goes into the auto-memory: its index reaches every agent at launch, blind ones included.
-- You coordinate and do not author. Lanes draft; you file verbatim.
-- Push freely to origin; never force-push.
-- Commit subjects stay neutral from the first blind job on.
-- Check `date` before logging any time.
-- Budgets in briefs are guidance; replace an agent past about 500k tokens by the harness's count.
+- **`de616ed9`** — the front-page job X1's branch `close-2026-09-28`, merged `--no-ff` (its stage commits stay reachable; the branch is on
+  origin). Gates re-run by the coordinator on the branch: the census, the bibliography audit, identities, the atlas checker, the re-rank
+  mirror, the gate counts; `CLAUDE.md` 293,055 bytes. The fact audit's twelve flags against FS-112's close are explained in
+  `plans/WORKFLOW3-X1-front-page.md` § Stage 3.
+- **The Proof Atlas** is republished (artifact 7zzeXoXvTLHzqf4mTQujzx, version 4). Owed to its keeper: README step 6 (the DESIGN.md stage
+  record); FOURC, SRAY and CHAINB's bearing "reduced to the density form (row 137)"; route wall7's chain beyond FS-120–FS-122.
+- **Both close inventories** are ticked to their last item (FS-114 1–127, FS-111 1–44).
+- **The test drive's scores and its comparison with Workflow 2.0** are the last sections of `plans/WORKFLOW3-test-drive.md`.

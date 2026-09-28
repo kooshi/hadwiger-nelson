@@ -47,8 +47,65 @@ Each is scored at the test drive's close with its evidence address. The probabil
 | F10 | 17:28 | Keryx (staffing) | **The front-page lane has no named identity**: Keryx's workflow step 7 says "when the filing is large, brief an agent as the front-page lane" without saying which. The filing here is large (five rows, 134 § B lines, eight `CLAUDE.md` units, three grokkings, two bibliographies' rows, a re-rank, the atlas, the audits), so a de Bruijn agent was briefed (X1), under Keryx's verbatim rule, working on a branch in its own worktree so the filing lands as one closing commit. The brief names every merge Keryx ruled (five), so any other word is a question to "main" | `data/workflow3/briefs/X1-front-page.md` | `keryx.md` step 7: name the front-page lane's identity and its branch-and-squash shape |
 | F11 | 17:44 | Poros (R1) | **The re-read caught what both closes' drafts overstated** — F1 ("the NO is exactly" where the derivation file says "suffices") and F9 ("seven is the map NO made uniform") — before either reached the front page. This is the boundary re-read doing its job, and it came from the ask lane reading the derive lane's drafts; no rule says who repairs a close's draft after the close job has handed back, so Keryx ruled the re-reader's phrase fixes filed. **And a parallel-close collision the fixed numbers missed:** both closes incremented G72's running count from the same base (F6). Also: `plans/FRONTIER-STUBS.md` claims current state only yet carries eighteen dated re-rank paragraphs | `plans/POROS-2026-09-28-close-reread.md` § Draft re-rank item 6, F7 | `keryx.md` step 7: a close's drafts are corrected by the boundary re-read's findings before filing; running counts in shared entries are summed by Keryx at the filing, not incremented by each close |
 | F12 | 17:53 | de Bruijn (X1) | **The front-page lane asked nine questions before filing a word it was not given** (the designed behaviour): a running count's wording (G72), a parenthesis a replacement sentence had no slot for (row 133), a swap that broke punctuation, "add" lines with no slot in six stubs, a column form, five bibliography collisions (a key already defined, a no-op edit, a stale "unread"), instance headers, headings, and F1's conflation in two texts F1 missed. **I6 so far:** the coordinator's own words in the filing — one G72 line, "partly read", "Twenty-first, FS-111:", "row" ×3 in a column, and two F1-pattern substitutions; each ruled in the brief's Amendment 1. Also a close-job slip: FS-114's § B draft heading said 49 lines for 46 | X1's message to "main"; `data/workflow3/briefs/X1-front-page.md` Amendment 1 | `ephodos.md` § The close job: drafts name their exact slot (the section and the words they replace or follow), and bibliography drafts check the key against every section first |
+| F13 | 18:23 | de Bruijn (X1); Keryx | **X1 DONE** (cfae8fb8 … 02b27603 on `close-2026-09-28`, merged `--no-ff` as the closing commit `de616ed9`; harness 576k). Twelve questions in all, every answer a ruling on disk (the brief's amendments 1–4). Found in filing: FS111-C's atlas nodes FS111 and MEET had no grade words and crashed the facts writer; dropping two scored registrations broke the atlas checker's own self-test plant (repointed, Amendment 3); the page header lives in `visualizations/proof-atlas/page.tmpl.html`, not in the facts meta Amendment 4 named — **the coordinator's slip**, and X1 edited the template line within the ruling's purpose. Owed to the atlas keeper: README step 6 (the DESIGN.md stage record); FOURC, SRAY and CHAINB's "bearing reduced to the density form"; route wall7's chain beyond D9's three nodes. The coordinator's receipt: re-ran the census, bibliography, identities, atlas checker, mirror check and gate counts on the branch (all pass; `CLAUDE.md` 293,055 bytes); checked row 137's F1 text, Poros's open unit and the G72 line verbatim; read the atlas's full facts diff against the live page before republishing (version 4) | `plans/WORKFLOW3-X1-front-page.md`; `data/workflow3/reports/X1.md` | `keryx.md` step 7: the atlas's facts and page template are filed by the front-page lane after the rows, with the header in the template |
 
-## The comparison with Workflow 2.0 (written at the test drive's close)
+## The instruments, scored (2026-09-28, at the test drive's close)
 
-*To be written from the instruments and the frictions above: what the split into lane files changed, what it cost, and what the fresh
-session should watch.*
+| # | registered | outcome | evidence |
+|---|---|---|---|
+| I1 | a lane agent asks what its file should have answered, p 0.6 | **met** — the front-page lane asked twelve questions, most of which a close job's drafts should have answered by naming their exact slots (F12); the close jobs and Poros asked none | F12, F13 |
+| I2 | a brief fails the gate on its first run, p 0.7 | **met** — three briefs and one amendment failed first (C114, TB1, X1 before Poros's record existed, amendment 1's bare `derive_gate.py`); C111 and R1 passed first | F3; this file's history |
+| I3 | the `derive_gate.py` path rule bites, p 0.4 | **met** — FS-111's close: a tool with a root-relative output path cannot serve as a control from `plans/` | F9 (5) |
+| I4 | a fence fails | **not applicable** — no blind job ran; the fence machinery is untested by this drive | — |
+| I5 | no front-page draft missing, p 0.6 | **not met** — the atlas bearing edits FS-114's close assigned to Poros were in no lane's brief, and fell to the atlas keeper as owed | F13 |
+| I6 | Keryx authors at most a few merge lines, p 0.7 | **met, narrowly** — about a dozen short phrases, each a ruling on disk (a G72 line, "partly read", "Twenty-first", a column's "row", four F1/F9-pattern substitutions, a heading parenthesis, two punctuation marks, the atlas header's date); no sentence of substance | X1's brief, amendments 1–4 |
+| I7 | the derivation files pass `derive_gate.py all`, p 0.6 | **met** — FS-114's 46 entries (0/0), FS-111's 85 (0 failures, 1 warning) | F8, F9 |
+| I8 | FS-114's close needs a successor p 0.5, FS-111's p 0.2 | **not met** — neither needed one; both ran past their hand-back lines by the harness's count (596k, 587k) while estimating 400k and 310k | F8, F9 |
+
+## The comparison with Workflow 2.0
+
+*Kooshi asked the fresh session to be watchful of the new workflow against the old. This is what the first drive showed. It exercised
+the close path only: the opening (Poros's card, Ephodos's reframe, a frozen claim list, a blind verifier behind a fence) has not run.*
+
+**What the split changed, for the better.**
+- **Two closes ran at once without a collision** in any file, because the briefs fixed every number in advance (rows, grokkings, stub
+  numbers) and gave each shared front-page unit one drafter with a marker for the other (F1, F9 (7)). Under Workflow 2.0 closes ran one at a
+  time, each a close-math job (the product owner's identity) and then a front-page job.
+- **The boundary re-read caught two overstatements before they reached the front page** (F11): FS-114's "the NO is exactly" and FS-111's
+  "seven is the map NO made uniform". Workflow 2.0's close had no step between the close's drafts and the filing; FS-112's ranking went
+  to the front-page job by message.
+- **No statement was paraphrased in a brief.** Every quotation was copied by script and gated; under the old workflow the owner's
+  summaries dropped or widened a clause six times in FS-114 alone (F8's item 2).
+- **The coordinator authored almost nothing it filed**, and every word it did add is a ruling on disk (I6), because the front-page lane
+  stopped and asked at each gap instead of guessing (F12).
+- **Each mind loaded its own identity as its system prompt**, and the lane files carried the procedure: the close jobs worked from their
+  lane file with a short brief, not from a workflow file every agent loaded.
+
+**What it cost, or where it was thin.**
+- **The refactor missed three joints**: the ledger's census checker could not read the new derivation grammar (F2, fixed by TB1); the
+  close job's lane file assumes one close at a time and gives shared files to "the close job" (F1); the atlas edits between lanes fell to
+  no one (I5).
+- **Unnamed lanes**: no identity for the front-page lane (F10) or for project tooling (F4); de Bruijn served both.
+- **The new entry grammar is heavier**: about three times the bytes of the old one-paragraph entries (F9 (2)), with no field for "rests
+  on it" and no `model:` form for a class that may be empty (F5, F8), and `derive_gate.py` folds unknown keys silently (F5).
+- **Agents' budgets**: every job ran 320k–600k by the harness's count while estimating 53–67 % of it; the closes passed their lines.
+  Five agents closed two milestones and fixed a tool, against three for FS-112's one close under Workflow 2.0.
+- **The coordinator's own slips**: times written without reading the clock (F6, four times), and a ruling that named the wrong file for
+  the atlas header (F13). Neither is new; both are the fluent relay the Keryx identity names.
+
+**The candidate edits to the lane files, pending Kooshi** (none filed during the drive, so it was judged against one version):
+- `ephodos.md` § The close job: one § B line per entry, gaps included; verifier re-derivations counted in `minds:` and a verifier's new
+  lemmas filed as entries; regrades of an earlier close beside errata; a grouping rule; every draft names its exact slot; bibliography
+  drafts check the key in every section; how two closes in flight share the front page; the atlas facts drafted, never written, by a
+  close (F1, F8, F9, F12).
+- `ephodos.md`: a derivation job re-reads §G when the milestone's object changes (F9 (6)); the controls' exit convention (F9 (5)).
+- `keryx.md` step 7: the front-page lane's identity and its branch-and-merge shape (F10, F13); a close's drafts are corrected by the
+  boundary re-read's findings before filing, and running counts are summed at the filing (F11); price a close from its theorem count (F9).
+- `CLAUDE.md` § The pipeline: the lane that owns `tools/` infrastructure (F4).
+- Upstream, for agent-forge: `derive_gate.py`'s silent fold (F5); a `rests on:` field and a `model:` form for a class not known to be
+  non-empty (F8); `brief_gate.py`'s directory prefixes in `touches:` (F3), and its spawn-rule regex, which any paragraph mentioning
+  spawning, "no" and a reason satisfies.
+
+**What the fresh session should watch**: the opening path, which this drive did not run — Poros's card, Ephodos's reframe and its
+§G, the frozen claim list, and above all a blind verifier behind a fence (I4 untested); and whether the pending lane-file edits are
+filed before that opening.
