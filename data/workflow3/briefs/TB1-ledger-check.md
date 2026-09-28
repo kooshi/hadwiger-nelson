@@ -47,7 +47,7 @@ checker when it files their § B lines.
   the same id rule the older grammar uses (a qualified id such as `FS114-N7-3T` stands; a bare one inherits the prefix). Under `--strict`,
   a new-grammar entry must carry the fields that grammar makes mandatory; name the mapping from the old five fields in your record.
 - **No regression.** On today's tree, before any close has written a file, the run reads exactly as it does now. The coordinator's
-  baseline, taken 2026-09-28 21:55 UTC: `python3 tools/fs71_ledger_b_check.py --strict` exits 0 with "census: 1003 theorems in 72
+  baseline, taken 2026-09-28 at about 21:41 UTC (the brief first said 16:55, a slip of the coordinator's, corrected 16:50): `python3 tools/fs71_ledger_b_check.py --strict` exits 0 with "census: 1003 theorems in 72
   derivation files" and "LEDGER § B rows: 1003 | placeholders: 0". Show your run beside it.
 - **Controls that fire.** The existing `--self-test` still passes. Extend it with new-grammar plants, each seen to fire once and for its
   own reason: a new-grammar entry with no § B row; a § B row whose new-grammar entry is missing; a new-grammar entry lacking a mandatory

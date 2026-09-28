@@ -149,3 +149,18 @@ own framing now looks wrong — the question posed badly, a grade the records do
 If you reach your hand-back line mid-way, stop at a saved stage and say what is left; a successor continues from there.
 
 Thank you.
+
+## Amendment 1 — 2026-09-28 22:49 UTC, from the coordinator (the id rule and "rests on it", found by job TB1)
+
+Two format rules for `plans/FS114-derivation.md`, from TB1, the job teaching the ledger's census checker the new grammar. Both
+are the coordinator's instructions, relayed; TB1's record (`plans/WORKFLOW3-TB1-ledger-check.md`) will hold the evidence.
+1. **Qualify every entry id in its header**: write `derivation: FS114-N7-3T`-style ids, never a bare `N7-3T`. The census takes any
+   id that contains a hyphen exactly as written, so a bare hyphenated name would be counted without its prefix, and its § B line,
+   keyed `FS114-…`, would fail from both sides. A name with no hyphen inherits the prefix, but qualify those too, for one rule.
+2. **Write "what rests on it" as prose under each block, never as an indented field line.** The new grammar has no such field, and
+   `.claude/skills/ephodos/scripts/derive_gate.py` reads an indented line with an unknown key as the continuation of the field above it, silently (TB1 tested it:
+   a `rests on it:` line under `handoff:` became part of the handoff). Open the paragraph with "Rests on it:"; the extended checker
+   will look for those words in the prose between an entry's block and the next `derivation:` header or heading.
+
+The no-agents rule stands unchanged: you start no agent of your own (`plans/STANDING-RULES.md` rule 1, with its reasons). Your touches
+are unchanged.
