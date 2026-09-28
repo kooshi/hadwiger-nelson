@@ -22,6 +22,7 @@ The blade `t_{j+1}`'s sides: `L_j` (from `w_j` to `q_j`), `M_j` (from `q_j` to `
 | FS114-Y6-E1OMEGA | the tile `Ω` at `q_4` holding the directions just above `270°` has colour `m̄_3 = m_2`, and `Ω ≠ μ_3` | [hand; one mind] | §2.3 |
 | **FS114-Y6-E1CAP** | **E1 forces a second 60° arc**: `t_2` borders the whole ring arc from `q_4` to `q_1`; the tactic tile `T_4` borders all of it from outside, contains `q_1` and lies in the Reuleaux cap `Reul(q_4, q_1, q_1 + q_4) ∖ B(p, 1)`; `α_4 = 120°` exactly (`φ_3 = φ_1 + 180°`), `α_2 + α_3 = 180°`, CASE (A) at `q_3` with `λ_3 = α_3 − 60°` | [hand; one mind; tools exact at named values] | §2.4; `tools/fs114_y6_e1.py` |
 | FS114-Y6-E1K1 | in E1 with `μ_1` bordering all of `M_1` and `α_2 > 60°`, the P_x kill of FS114-Y5-PXKILL runs at `k = 1` (`T_1` against `O_2`, colour 1) unless `T_4` fills the cap's corner at `q_4` and a tile of colour `m_2` sits at `q_1` between `T_1` and `μ_1` | [hand; one mind; tools exact at named values] | §2.5 |
+| **FS114-Y6-E2RED** | E2 at one blade `t_{c+1}` (no E1) breaks only ALT(`μ_{c−1}`, `μ_c`), hence only POCKET at `w_c` and CASE at `q_c`, and there only case (B)'s `α_c = 60°` and (A)'s `α_c − λ_c ≤ 60°`; (A) at `q_c` still gives `α_{c−1} + α_c ≤ 180°` and so leads to `P_x`; `P_x` is still excluded (Y5-PXKILL at `k = c + 1` reads no pocket beside `t_{c+1}`); the survivors are the cone sequences S1–S6 of §3.2, all with `t_{c+1}` short of the ring's clockwise tangent at `q_c` | [hand; one mind, over Y5's lemmas] | §3 |
 | FS114-Y6-E1CHK | the inequalities §2.1–2.5 rest on, at named points: 10 of 10 as registered (after one re-registration of two controls, misses named); a plant reversing one arc flips the straddle | [tools, exact at named values] | §2.6; `data/fs114/fs114-y6/e1.out` |
 
 ## Would-have-searched-here log (standing rule 3)
@@ -29,6 +30,10 @@ The blade `t_{j+1}`'s sides: `L_j` (from `w_j` to `q_j`), `M_j` (from `q_j` to `
 - Stage 2: I would have laid out E1 pinwheels (the cap, a Reuleaux-shaped `t_2`, the four centres) at several cone sequences and run the checker on
   each; instead the colours at `q_4`, `q_1` and `w_4` were derived from UPDOWN, RAINBOW and N-E1 one colour at a time until the cap `T_4` was forced;
   the exact check was run once, on named wedges, probes and slivers.
+- Stage 3: I would have tried E2 pinwheels at several cone sequences; instead the weakened REDUCE was solved by hand into the families S1–S6.
+  **Disclosed, borderline under the ban's "no scan over a parameter":** I then checked that hand split against the inequalities at every cone sequence
+  on a 5° grid (seconds, exact integers; 155 sequences, all in S1–S6 or `P_x`, none other). It verifies a derived case split and finds no object;
+  nothing rests on it, and it is not kept as a tool. Held for the owner's ruling.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -206,3 +211,72 @@ ends and centre — the tactic tile at the edge's end becomes the Reuleaux cap o
 must meet this shape; a construction must realise it.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: E2 weakens one inequality of REDUCE; `P_x` stays excluded; six cone families survive
+
+*Setting: as Y5 §3, a non-Siamese simple valid fragment containing a neighbourhood of `B̄(p, 1)` with a pinwheel at `p`, **no E1**, and **E2 at exactly
+one blade** `t_{c+1}`: its side `M_c` lies on `ω(w_c)`. Take `c = 2` (E2 at `t_3`).*
+
+### 3.1 What E2 breaks [hand; one mind]
+
+Y5's lemmas, one by one:
+- **MU** reads no E2 (RAINBOW and the edge lengths only): it holds at every blade.
+- **ALT(`μ_j`, `μ_{j+1}`)** fails exactly when E2 holds at `t_{j+2}`. So only **ALT(`μ_1`, `μ_2`)** is lost, and only when `m_1 = m_2`. Then `μ_1 ∋ w_2`,
+  and `μ_2` borders the unit arc `M_2 ⊂ ω(w_2)` from outside. This is the tactic again: `w_2` carries `t_2`, `μ_1` (`m`), `Λ_2` (`m̄`), `t_3`, four
+  colours, and `M_2` is a unit arc centred at `w_2`.
+- **POCKET at `w_2`** (`μ_1 = Λ_2`) is lost with it. The other three POCKETs hold.
+- **CASE at `q_2`** (blade `t_3`):
+  - Case (A) keeps its colour clause, which needs only `t_3`'s two 5/6 neighbours `μ_2` (`m_2`, on `M_2`) and `Λ_2` (`m̄_2`, on `L_2`, by MU). So the
+    outside tile `O_2` has colour 1, and `α_1 + α_2 ≤ 180°`.
+  - Case (A) loses `α_2 − λ_2 ≤ 60°`, which needed `μ_1 = Λ_2 ∋ v_2`. The upper pin `λ_2 ≤ α_2 − 60°` stays (`O_2 ≠ T_1`).
+  - **Case (B′)** (`t_3` short of the ring's clockwise tangent at `q_2`): `h = Λ_2 ∋ q_2, w_2`, and `|q_2 − w_2| = 1` always, so **no angle
+    constraint**.
+- **CASE at `q_1`, `q_3`, `q_4`**, **PIN120-60** (§2.2 of Y5 uses no ALT) and **PIN120's CASE at `q_{k+1}`** are unchanged away from `q_2`.
+
+### 3.2 REDUCE with `q_2` weakened [hand; one mind]
+
+- **(A) at `q_2`.** Every inequality of Y5's REDUCE is present (`α_1 + α_2 ≤ 180°` stands; `α_2 ≤ 120°` follows from it). So the cones are `P_x`,
+  `60° < x < 120°`, the 60° cases falling as in Y5 §3.3.
+  - **`P_x` is still excluded.** Y5-PXKILL at `k` reads POCKET at `w_k`, `w_{k+1}`, `w_{k+2}` (the pins `λ_k`, `λ_{k+1}`, and "not `μ_{k+1}`: it contains
+    `v_{k+2}`"), that is, no E2 at `t_{k+1}`, `t_{k+2}`, `t_{k+3}`. With E2 at `t_3` alone, **`k = 3`** reads blades `t_4`, `t_1`, `t_2`.
+  - Its colour steps are Y5 §3.4's at `q_3` and `q_4` (CASE (A) at both, `α_3 + α_4 = 180°`). ∎
+- **(B′) at `q_2`.** The other centres give, for `k = 1, 3, 4`: `α_k = 60°`, or `α_{k−1} + α_k ≤ 180°` with `α_k ≤ 120°`. With PIN120-60, which
+  excludes a 120° tile followed by a 60° cone, the solutions are:
+
+| family | cones `(α_1, α_2, α_3, α_4)` | range |
+|---|---|---|
+| S1 | `(a, b, 180° − b, 180° − a)` | `60° < a, b < 120°`, **`a + b > 180°`** (`a + b = 180°` is `P_x`) |
+| S2 | `(a, 300° − a − d, 60°, d)` | `60° < a, d ≤ 120°`, `a + d < 180°` (so `α_2 ∈ (120°, 180°)`) |
+| S3 | `(60°, 240° − d, 60°, d)` | `60° < d < 120°` |
+| S4 | `(a, 240° − a, 60°, 60°)` | `60° < a < 120°` |
+| S5 | `(60°, 180°, 60°, 60°)` | — |
+| S6 | `(120°, b, 180° − b, 60°)` | `60° < b < 120°` |
+
+  Proof: the three conditions at `k = 1, 3, 4`, cased on which of `α_1`, `α_3`, `α_4` equal `60°`.
+  - None: two sums are forced to `180°`, and the third gives `a + b ≥ 180°`.
+  - `α_1` alone: impossible (`α_3 ≤ 60°`).
+  - `α_3` alone: S2.
+  - `α_4` alone: S6 (`α_1 = 120°`).
+  - `α_1, α_3`: S3, with `(60°, 120°, 60°, 120°)` removed by PIN120-60.
+  - `α_1, α_4`: impossible.
+  - `α_3, α_4`: S4, with `(120°, 120°, 60°, 60°)` removed.
+  - All three: S5.
+
+  (A disclosed grid check agrees; see the log.)
+
+### 3.3 Where it bears
+
+- **E2 reduces to case (B′) at one centre.** The blade with E2 stops short of the ring's clockwise tangent at the centre before it, and the pocket tile
+  `Λ_2` there spans `q_2` and `w_2`. The six families S1–S6 are what a construction through E2 must choose from, and what a proof must kill.
+- **Every family has a centre where Y5-PXKILL could be tried.**
+  - S1 has CASE (A) at `q_1`, `q_3`, `q_4`, but not `P_x`'s equalities (`α_3 + α_4 = 360° − a − b < 180°`). Y5 §3.4's step "colour `k + 2` blocked on the
+    whole arc" needs rechecking there.
+  - S2–S5 carry a wide blade `t_2` (cone above `120°`) whose counter-clockwise neighbour has a 60° cone. No held lemma bounds `α_2` there, because
+    `q_2` is the weakened centre.
+  - S6 carries a 120° tile `t_1` whose outer neighbour `t_2` is not 60°. PIN120's exception is exactly this: E2 at `t_3`.
+- **Not treated:** E2 at two or more blades; E2 with E1 (§2.7).
+- **Where six is spent:** the four colours at `w_2` (`2, m, m̄, 3`), and CASE (A)'s colour clause.
+- **G79 reading:** E2 is the unit-radius tactic nested one level in. The blade's far side is a unit arc about its own edge end, and the pocket tiles on
+  either side of that blade share a colour at distance exactly 1.
+
+## Stage 3 — SAVED
