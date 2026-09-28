@@ -9,7 +9,17 @@ is not known to be non-empty. Stage 1 (my verdicts) is committed before I open `
 
 ## Theorems this phase proved
 
-*(Filled at the end of stage 1b and after stage 2.)*
+The full table is at the end of stage 1c; stage 2's verdicts after comparison are §2.5.
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| YB4 verdicts on FS114-Y5's twelve statements | RAINBOW, REGION, ALT, POCKET, CASE, REDUCE, PXKILL TRUE; MU TRUE with scope (edge `j + 1` below 60°); PX TRUE but its `λ` clause a GAP; PIN120-60 and PIN120 TRUE outside E1 (no-exception claims GAP at named E1 subcases; PIN120-60's alternating member TRUE with no exception); PINALL TRUE outside E1 and E2 | hand; mine, blind; with Y5 two minds, one blind | stage 1b; §2.5 |
+| YB4-SEP | in a simple map no tile borders both `M_k` and `L_k^in`, nor both `M_k` and `M_{k+1}` (one sector at `q_k`, `T_k` between) | hand; mine | stage 1b |
+| YB4-REG60 | every cone of a non-Siamese pinwheel is at least 60°; `λ_k ≤ 60°` | hand; mine | stage 1b |
+| YB4-WRAP | `μ_{k−1}` may border `t_{k+1}`'s ring contact from outside between `r_k` and `e(φ_{k−1} + 60°)`; nothing in the chain excludes it; it breaks PX's `λ` clause and CASE (A)'s written proof, not their uses | hand; mine | stage 1b items 6, 9; §2.2 |
+| YB4-2ND | PXKILL's contradiction is second order: `|A − B|² = 1 + 2(1 − cos s)(1 − cos s′) − 2 sin s sin s′` on the arcs, `> 1` along straight rays | hand + tools exact | stage 1b item 10; 1c |
+| YB4-P120GAP | PIN120-60's step 2 holds only at `α_D = 120°`; PIN120's CASE at `q_{k+1}` needs `M_{k+1}` non-empty (fails at E1 on edge `k + 2`) | hand; mine | §2.2 rows 8, 12 |
+| YB4-CHK | an exact `ℚ(√3)` named-point checker: 53 of 53 as registered, four plants each flipping exactly its predicted set | tools | 1c |
 
 ## Would have searched here (standing rule 3)
 
@@ -280,3 +290,93 @@ on-arc point as well as the interior one.
 | YB4-CHK | an exact `ℚ(√3)` named-point checker: 53 of 53 as registered, four plants each flipping exactly its predicted set | tools | 1c.2 |
 
 ## Stage 1c — SAVED
+
+## Stage 2 — SAVED: FS114-Y5's record read and compared (opened only after stage 1's commit `3f3f4b08`)
+
+### 2.1 The quotation check, completed; the side's checks re-run
+
+- **The twelve statements: 12 of 12 FOUND** verbatim in `plans/FS114-Y5-construction.md`'s theorem table (`quotes-stage2.tsv`, `quotes-stage2.out`, exit 0,
+  FS114-YB's tool unedited).
+- `tools/fs114_y5_px.py` and `tools/fs114_y5_pin.py`, re-run unedited under `scripts/slot.py`: **ALL AS REGISTERED**, outputs identical to the committed
+  `data/fs114/fs114-y5/px.out`, `pin.out` (`y5-px-rerun.out`, `y5-pin-rerun.out`).
+- **Label map** (the side's → mine): `α_{j+1}` = cone of `t_{j+1}` (identical); the side's `β_j` = my `ℓ_j` (edge `j`'s length), so PX's `β_k` is `ℓ_k`, as I
+  read it; **the side's `v_j = e(φ_j − λ_j)` is my `r_j`** (the ring end of `t_{j+1}`'s clockwise contact), and PX's "`v_{k+1} = e(φ_k + 60°)`" is the claim
+  `r_{k+1} = e(φ_k + 60°)`, equivalent to its `λ`-clause; PIN120-60's `t_B, t_C, t_D, t_A`, `q_a, q_b, q_c`, `r` are my `t_1, t_2, t_3, t_4`, `q_4, q_1, q_2`,
+  `e(30°)`, rotated by `−30°`; `t, t′` in PXKILL are the two arcs' angles (`|e(t) − 1 + e(−t′)|`, my `s, s′`).
+
+### 2.2 The two derivations compared
+
+| # | statement | the side's route (address) | mine (address) | divergence |
+|---|---|---|---|---|
+| 1 | RAINBOW | two shared arcs in `cl x`, a circle meets a circle twice (§2.1) | the same (1b item 1) | none |
+| 2 | REGION | diameter; `T_{j+1} ≠ t_{j+1}` (§2.1) | the same, plus REG60 (1b item 2) | none |
+| 3 | MU | RAINBOW, "the only `m_j`-neighbour is `μ_j`, which is on the other side" (§3.1) | RAINBOW + (SEP) (1b item 3) | **scope**: both need `M_j` non-degenerate and `w_{j+1}` inside the disc — the side's E1 characterisation (§3 preamble: E1 at edge `j + 1` forces `α_{j+1} = 60°` and `w_{j+1} = q_j`, verified) shows these fail exactly at E1 on edge `j + 1`, which MU's words do not exclude; "simple" is in §3's setting, not in the statement |
+| 4 | ALT | "`μ_j`, `μ_{j+1}` lie in different pockets … no tile lies on both sides of a blade" (§3 preamble, §3.1) | (SEP): one sector at `q_{j+1}`, with `T_{j+1}` between (1b preamble) | **reason**: "tiles are open discs, so no tile lies on both sides of a blade" does not by itself stop a tile going round a blade's ring end outside the disc (the wrap below does exactly that at `r_k`); the conclusion holds by one-sector at `q_{j+1}` |
+| 5 | POCKET | at `w_{j+1}`: `μ_j` vs `Λ_{j+1}`, ALT (§3.1) | the same (1b item 5) | none |
+| 6 | CASE | (B) "`t_{k+1}` does not reach the ring tangent"; (A) `α_k − λ_k ≤ 60°`, `λ_k ≤ 60°`, so `α_k ≤ 120°` directly; "`t_{k+1}` already has both 5/6 colours as neighbours, so the outside tiles along its ring contact carry colours 1–4" (§3.2) | (B) "`μ_{k−1} ∋ q_k`"; the colour of the tile at `q_k` excluded colour by colour; cones ≤ 120° by a longer route (1b item 6) | **truth of a proof step, not of the statement**: RAINBOW forbids a *second* 5/6 tile of a used colour, not `μ_{k−1}` itself — it may border `t_{k+1}`'s contact from outside (the wrap, YB4-WRAP). If the wrap reaches `q_k`, the side's (A) wrongly assigns colour `k − 1` there, but then `μ_{k−1} ∋ q_{k−1}, q_k`, so `α_k = 60°` and (B)'s words hold; if it stops short, the tile at `q_k` has colour `k − 1`. **CASE's disjunction is TRUE**; the side's `α_k ≤ 120°` route is simpler than mine and correct |
+| 7 | REDUCE | case split on the number of 60° cones (§3.3) | the four pair sums total 720° (1b item 7) | none; two routes |
+| 8 | PIN120-60 | the three circles at `r = q_a + q_b`; `G` at `q_b`, `K` at `r`, `I_a` at `q_a`, RAINBOW on `t_B`, `t_C`; `|w_b − w_c| < 1` in `Reul(p, q_b, r)` (§2.2) | CASE at the 120° tile's outer centre; the PXKILL pair at a 60° centre in case (A) (1b item 8) | **the side closes my open subcase**: its route never splits the 60° centres into (A)/(B), and I checked it step by step (2.3): the alternating member is excluded **with no exception** (E1 at edges `a`, `b`, `c` is impossible there; E2 is never used). **GAP in the side's no-exception claim for the non-alternating members**: step 2's "`t_D ∌ q_b`" is argued from `q_d = −q_b`, true only when `α_D = 120°` (the alternating member); for `α_D < 120°` edge `d` enters `B(q_b, 1)` at first order (`cos(α_D − 30°) > 0`) and the reason fails. `t_D ∋ q_b` is exactly E1 on edge `c` (`w_c = q_b`); then the inner gap at `q_b` may hold `t_D`, `G` need not exist, and step 5 loses its exclusion of colour `g` for `O_b`. **Outside E1 the statement is TRUE** (two routes) |
+| 9 | PX | §3.4 items 1–4 | 1b item 9 | **`λ_k = α_k − 60°` (and so "`v_{k+1} = e(φ_k + 60°)`" in the side's notation) — GAP, confirmed at the side's step**: §3.4 item 1's "By RAINBOW it is one tile `O_k`, so `O_k ∋ v_k, q_k`" rests on CASE (A)'s over-claim; under a wrap `O_k` borders only `[e(φ_{k−1} + 60°), q_k]` and `λ_k > α_k − 60°`. The other clauses TRUE by both routes; **`β_k` is `ℓ_k`** |
+| 10 | PXKILL | the sectors at `v_{k+1}`; the arcs; "`|e(t) − 1 + e(−t′)| = √(1 − 2tt′ + O(3))`"; "equivalently RAINBOW on `μ_k`" (§4.1) | the same pair; exact form `1 + 2(1 − cos s)(1 − cos s′) − 2 sin s sin s′`; both wrap cases (1b item 10) | **none of truth**: read with `v_{k+1}` the junction `e(φ_k + 60°)` of `O_{k+1}` and `μ_k`, the side's §4.1 holds under a wrap too (its sectors `(330°, 30°)` = `μ_k`, `(30°, 150°)` = `O_{k+1}` are unchanged; only the inside sector is `t_{k+2}` instead of `μ_k`). The error term is `O(4)`, not merely `O(3)`. The side's own remark — RAINBOW on `μ_k` — is the cleanest proof, and explains why the conflict is second order (the arcs are exactly the equality case RAINBOW's two-circle argument handles) |
+| 11 | PINALL | REDUCE, PIN120-60, PXKILL (§4.3) | the same chain (1b item 11) | **none**: with the side's PIN120-60 my open subcase is closed; TRUE outside E1 and E2 |
+| 12 | PIN120 | CASE at `q_{k+1}` (§3.3), E1 at edge `k + 1` handled | via REDUCE (1b item 12) | **GAP in "E1 needs no exception"**: CASE at `q_{k+1}` needs `μ_{k+1}`, which does not exist when edge `k + 2` has length 60° (E1 there forces `α_{k+2} = 60°`, `w_{k+2} = q_{k+1}`, so `M_{k+1}` is empty); then a 5/6 tile can take the clockwise outside place at `q_{k+1}` and `α_k + α_{k+1} ≤ 180°` is not derived. For `60° < α_{k+1} < 120°` CASE at `q_k` closes that subcase instead (it needs edges `k − 1, k, k + 1` below 60°, true since their outer tiles' cones exceed 60°), at the price of E2 at `t_{k+1}` rather than `t_{k+2}`; `α_{k+1} = 120°` gives `(120°, 120°, 60°, 60°)` with E1 on the second 120° tile's far edge — exactly the item-8 gap. **Outside E1 and E2 the statement is TRUE** |
+
+### 2.3 The side's PIN120-60, walked (the alternating member; the step that closes my open subcase)
+
+Every step checked against my own facts (1b); the numbering is the side's.
+1. `t_B ∌ r` (a Reuleaux corner cone `[270°, 30°]` against the sector `[210°, 330°]`): TRUE — **and it shows E1 on edge `b` is impossible** (`w_b = r`).
+2. The inner gap at `q_b` holds 5/6 tiles only: TRUE **for `α_D = 120°`** (edge `d`'s points `q_d + e(60° + τ)`, `q_d = −q_b`, satisfy `|· − q_b|² = 5 − 4cos τ > 1`, so
+   `t_D ∋ q_b` would give `t_D` diameter above 1); see 2.2 row 8 for `α_D < 120°`.
+3. `G`: the tiles pointing toward `q_c` (directions `(150°, 270°)`) share one colour, since `c(I_c)` is excluded there. **Precision:** "every inner-gap tile
+   at `q_b` has points closer than 1 to `q_c`" is false for a tile in `(270°, s_C)` if `s_C > 270°`; such a tile of colour `ḡ` points toward `r` and equals `K`,
+   which is impossible (`K ⊄ B̄(q_b, 1)`), so the inner gap is `G` alone, as step 9 uses. The conclusion stands; its written reason is incomplete.
+4. `K` (colour `ḡ`) at `r` in `S_pa`: TRUE. 5. `t_C` reaches `330°`; `O_b` has colour `A`, allowed only when `α_A ≤ 60°`: TRUE (`A`'s blocking by `t_A` is my
+   Pointing fact).
+6. `S0 ⊂ K`; `I_a` has colour `g`: TRUE. 7. `t_B` reaches the ring tangent at `q_a` (the `ḡ` tile there and `K` straddle:
+   `|(1 − δ)e(ψ) − (1 + δ′)e(ψ + 60°)|² = 1 − δ + δ′ + δ² + δ′² + δδ′`, exact); `v ≠ q_d` (a Reuleaux `(p, q_a, q_d)` would push edge `b` out at first order):
+   TRUE — **so E1 on edge `a` is impossible** too (`w_a = q_d`).
+8. RAINBOW on `t_B` ⇒ `w_b ∈ cl I_a` (needs `L`'s inside part of positive length: `ℓ_a < 60°` by step 7): TRUE. 9. RAINBOW on `t_C` ⇒ `w_c ∈ cl G`
+   (`w_c ≠ q_b` by step 2): TRUE. 10. `|w_b − w_c| < 1` in `Reul(p, q_b, r)`, two `g`-tiles within 1: TRUE (the side's check F1–F3 at named edge lengths).
+**In my notation:** `I_a = μ_4`, `G = μ_1`, `m_4 = m_1`: the side's route forces equal consecutive pocket colours at the 60° blade, which ALT turns into E2 on
+that blade (`M_1 ⊂ ω(w_1)`), and step 10 is the proof that E2 cannot hold at a 60° blade (`|w_1 − w_2| < 1`). **That is why the alternating member needs
+no (A)/(B) split and no E2 exception.**
+
+### 2.4 The family that failed (template item 3): `P_x`
+
+`P_x` is a derived normal form, not a constructed family: the side built no pinwheel at any radius (§4.3), so there is no search image to recount.
+Its free parameters as the chain leaves them: `x ∈ (60°, 120°)`, the four edge lengths `ℓ_k ∈ (0°, 60°)`, the pockets' and caps' shapes, and (mine) the
+wrap/no-wrap choice at each `r_k`. **The kill uses none of them** beyond `60° < x < 120°` (which gives `|q_k − q_{k+1}| > 1` and `|v_{k+1} − q_{k+1}| < 1`):
+every member fails for one reason, RAINBOW on `μ_k` with `T_k` and `O_{k+1}` as its two colour-`k` edge-neighbours — **the reason the side gave**, re-derived.
+
+### 2.5 Verdicts after the comparison
+
+| # | statement | verdict | minds |
+|---|---|---|---|
+| 1 | RAINBOW | **TRUE** | two, one blind (Y5; YB4) |
+| 2 | REGION | **TRUE** | two, one blind |
+| 3 | MU | **TRUE** in a simple map when edge `j + 1` is also below 60° (not E1 there); as worded, its last clause and `μ_j` are undefined at E1 on edge `j + 1` | two, one blind |
+| 4 | ALT | **TRUE** (simple); the side's reason for `μ_j ≠ μ_{j+1}` is incomplete, one-sector at `q_{j+1}` supplies it | two, one blind |
+| 5 | POCKET | **TRUE** | two, one blind |
+| 6 | CASE | **TRUE** as stated (a disjunction); the side's (A) over-claims the colours along the whole contact (the wrap) | two, one blind |
+| 7 | REDUCE | **TRUE** (over PIN120-60) | two, one blind, two routes |
+| 8 | PIN120-60 | **TRUE outside E1**; the alternating member **TRUE with no exception**; **GAP at step 2** for non-alternating members with E1 on edge `c` (`t_D ∋ q_b`, `α_D < 120°`) | two, one blind (the alternating member: the side's route, walked by me) |
+| 9 | PX | **TRUE except `λ_k = α_k − 60°` (with "`v_{k+1} = e(φ_k + 60°)`" in the side's notation): GAP** — the wrap is not excluded by the chain | two, one blind; the gap mine |
+| 10 | PXKILL | **TRUE** (both wrap cases) | two, one blind; exact by two checkers of different arithmetic |
+| 11 | PINALL | **TRUE outside E1 and E2**; E1 and E2 are exactly the cases the chain misses (MU and CASE need every edge below 60°; ALT, POCKET and PXKILL's colour exclusion need no E2); nothing else is used but "non-Siamese" and "simple", both in its words | two, one blind |
+| 12 | PIN120 | **TRUE outside E1 and E2**; its "E1 needs no exception" is a **GAP** at E1 on edge `k + 2` (and, through PIN120-60, on the configuration `(120°, 120°, 60°, 60°)`) | two, one blind; the gap mine |
+
+**Audit of the result I would want true (PINALL).** Two derivations, one blind, meet at the same chain with different routes at CASE, REDUCE and
+PIN120-60; the only step of the side's I found wrong (CASE (A)'s colour claim along the whole contact) carries no weight in PINALL; the second-order kill is
+confirmed exactly by two arithmetics (the side's through FS114-YB's checker; mine in `ℚ(√3)`), with a first-order control that must fail and does.
+
+### 2.6 Proposed edits for the close (standing rule 7: I edit none of these files)
+
+- `LEDGER.md` § B and FS-114's derivation file: FS114-Y5-RAINBOW, -REGION, -POCKET, -REDUCE, -PXKILL, -PINALL at two minds, one blind; -MU with its scope
+  (edge `j + 1` below 60°); -CASE with the wrap noted; -PX with its `λ` clause marked GAP; -PIN120-60 and -PIN120 **"outside E1"**, their no-exception claims
+  GAP at the named E1 subcases; YB4-SEP, -REG60, -WRAP, -2ND, -CHK.
+- `CLAUDE.md` G83's body (if the close adds the pinwheel): "a non-Siamese simple pinwheel at radius `1 + ε` exists only under E1 or E2 (two minds, one
+  blind)", not "no pinwheel".
+- `plans/FRONTIER-STUBS.md`, FS-114's row: K1's pinwheel case reduces to E1 and E2; the no-exception claims of PIN120-60 and PIN120 each leave one E1 subcase.
+- No bibliography rows: nothing new was read.
+
+## Stage 2 — SAVED
