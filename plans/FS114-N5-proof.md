@@ -27,7 +27,7 @@ never touches itself). **FS112-L60 is used only in its corrected form, "at most 
 | **N5-R0** | The residual with no `X̄` at either corner has corners `t1 | C | z4 | U1` and `t3 | C′ | z4′ | U3` (degree 4, `C` of colour 3, `C′` of colour 1); **if `C ∋ q2` and `C′ ∋ q4` it does not exist at radius `√3`** (`t2 ∌ top`; `T` touches the ring on both sides of `top`, so misses `P90`, `P90′`; then N4-G's diameter kill at whichever side `t2` reaches, and N5-DR1 if it reaches neither) | [hand, one mind; tools exact at named points] | §2.4 |
 | **N5-ΓRING** | **K1-ΓRING reduced**: a Reuleaux bowtie whose lune rings carry arcs of `ω(p)` (non-Siamese, simple class) does not exist on the closed disc of radius 2 about `p` unless a lune is in the residual **(R-V)** of N5-XBAR (one corner carries both absent colours; a (Q) arc `t2 | z4` ends at the lune's ring midpoint): every lune is degenerate (N4-D), general (N4-G), or (R0) (N5-R0), and every pair of lunes not involving (R-V) dies | [hand, one mind, over N4-D, N4-G at N4's grade (one mind each)] | §2.5 |
 | N5-SIGHT | (N3-FACE in the form N5-UP uses, for any configuration) If `|u − v| = 1` and a tile `T` at `u` has a cone not contained in the closed half-plane facing `v`, then `T`'s colour is carried at `v` by no tile meeting `B(u, 1)` | [hand, one mind] | §3.1 |
-| **N5-RV** | (R-V) walked to `P90` (one corner, `q1`, carrying `X̄`; `C′ ∋ q4` at the other): `V1 ∌ P90`; `q1`'s cap tile is `V1`, its cone runs from 300° past 0°, and `q1 = t1 | V1 | (W3) | z4 | U1`; `P90` carries only colours 1, 3 and 4, the half-plane `(0°, 180°)` at `P90` only 1 and 3; `T ∋ P90′`. **Not excluded: K1-ΓRING is GAP at (R-V)** | [hand, one mind] | §3.2 |
+| **N5-RV** | (R-V) walked to `P90` (one corner, `q1`, carrying `X̄`; `C′ ∋ q4` at the other): `V1 ∌ P90`; `q1`'s cap tile is `V1`, its cone contains `[300°, 0°]`, and `q1 = t1 | V1 | (W3) | z4 | U1`; `P90` carries only colours 1, 3 and 4, the half-plane `(0°, 180°)` at `P90` only 1 and 3; `T ∋ P90′`. **Not excluded: K1-ΓRING is GAP at (R-V)** | [hand, one mind] | §3.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -221,10 +221,10 @@ the degenerate member's `W` (colour 4 at `top`) exists. *Reads:* `u`, `v`.
    cone). If `V1 ∋ P90`, `X̄ ∈ P_cl(P90)` and N-E1 at `P90` forbids that.
 4. *The sector `(300°, 360°)` at `P90`* (inside `B(q1, 1)`, outside `B̄(top, 1)`) holds a tile of a colour of `P_cl(q1)` only if it is `q1`'s tile of that colour
    reaching `P90` — `t1`, `U1`, `z4` (cone at `P90` in `[180°, 300°]`), `V1` (item 3) cannot — or a colour absent at `q1`: 2 is excluded, so **colour 3**.
-5. *The cap tile is `V1`.* `ω(P90)` passes through `q1` horizontally, curving up; near `q1` it enters the tile at `q1` holding the direction `0°+`. That tile is `V1`
-   or colour 3 (the colours in `[300°, 60°]` at `q1`); colour 3 would put it on `ω(P90)` while `P90` carries 3 (item 4): N-E1. So `V1` holds the direction `0°+`, and
-   since the cap tile is `V1` or colour 3 and one tile per colour sits at `q1`, **`q1 = t1 | V1 | (W3) | z4 | U1`**: `V1` from 300° past 0°, then possibly a
-   colour-3 tile `W3`, then `z4`, then `U1`.
+5. *The cap tile is `V1`.* The cap tile (the tile after `t1` at 300°) has colour 3 or `X̄`. If it were `q1`'s colour-3 tile `W3`, then — 3 being in `P_cl(q1)` —
+   the colour-3 tile filling the sector `(300°, 360°)` at `P90` (item 4) would be `W3` (a colour-3 tile meeting `B(q1, 1)` is `W3`), so `W3 ⊂ B̄(P90, 1)` and its
+   cone at `q1` would lie in `[0°, 180°]`, against its start at 300°. So the cap tile is `V1`, and **`q1 = t1 | V1 | (W3) | z4 | U1`**. `V1`'s cone contains
+   `[300°, 0°]`: a `W3` after it reaches `P90` (as just said) and so starts at 0° or later; with no `W3`, `z4` starts at 60° or later.
 6. *If `W3` exists* it fills the sector `(300°, 360°)` at `P90` (item 4, one colour-3 tile per vertex), bounded at 0° by an arc of `ω(q1)` (N-E1 at `q1`), and
    `W3 ⊂ B̄(q1, 1) ∩ B̄(P90, 1)`. If not, that sector is a colour-3 tile absent at `q1`.
 *Reads:* the closed disc of radius `√3` about `p` (the points `q1, q3, q4, top, P90, P90′`).
