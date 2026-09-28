@@ -28,12 +28,16 @@ never touches itself). **FS112-L60 is used only in its corrected form, "at most 
 | **N5-ΓRING** | **K1-ΓRING reduced**: a Reuleaux bowtie whose lune rings carry arcs of `ω(p)` (non-Siamese, simple class) does not exist on the closed disc of radius 2 about `p` unless a lune is in the residual **(R-V)** of N5-XBAR (one corner carries both absent colours; a (Q) arc `t2 | z4` ends at the lune's ring midpoint): every lune is degenerate (N4-D), general (N4-G), or (R0) (N5-R0), and every pair of lunes not involving (R-V) dies | [hand, one mind, over N4-D, N4-G at N4's grade (one mind each)] | §2.5 |
 | N5-SIGHT | (N3-FACE in the form N5-UP uses, for any configuration) If `|u − v| = 1` and a tile `T` at `u` has a cone not contained in the closed half-plane facing `v`, then `T`'s colour is carried at `v` by no tile meeting `B(u, 1)` | [hand, one mind] | §3.1 |
 | **N5-RV** | (R-V) walked to `P90` (one corner, `q1`, carrying `X̄`; `C′ ∋ q4` at the other): `V1 ∌ P90`; `q1`'s cap tile is `V1`, its cone contains `[300°, 0°]`, and `q1 = t1 | V1 | (W3) | z4 | U1`; `P90` carries only colours 1, 3 and 4, the half-plane `(0°, 180°)` at `P90` only 1 and 3; `T ∋ P90′`. **Not excluded: K1-ΓRING is GAP at (R-V)** | [hand, one mind] | §3.2 |
+| N5-BENDG | N5-BEND's reduction holds at every degree-4 vertex `p` (it reads only the colours at `p`): a Γ-arc of `ω(p)` survives the bends only if its outer colour is carried at `p`, and then its inner colour is carried at `p` or has R2 support | [hand, one mind, over N2-TOWARD, N2-AWAY, N2-TAN] | §4.1 |
+| N5-PIN0 | The pinwheel at radius `1 + ε`: centres `q_j = p + e(θ_j + 90°)`, cones `α_j ∈ [60°, 180°]`; `t_j ⊂ B̄(p, 1) ∩ B̄(q_{j−1}, 1) ∖ B(q_j, 1)`, its ring contacts within 60° of `q_{j−1}` and at least 60° from `q_j`; `P_cl(q_{j−1}) ∋ c_j, c_{j−1}`, `∌ c_{j+1}` unless `α_j ∈ {60°, 180°}`, `∌ c_{j+2}` when `α_j + α_{j+1} < 180°`; tiles at `q_{j−1}` pointing away from `p` avoid `c_j` (and `c_{j+1}` if `α_j < 180°`). **No contradiction at this radius** | [hand, one mind] | §4.2 |
+| N5-K1 | K1 after this job: the Reuleaux bowtie excluded at radius `√3` with `Γ`-free rings (N4) and at radius 2 with rings carrying arcs of `ω(p)` **except (R-V)**; **GAP** at (R-V), at non-Reuleaux lenses, the pinwheel, the `(2, 1, 1, 0)` patterns and three tactic edges (radius `1 + ε` structure only) | [hand, one mind] | §4.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
 | move I would have made by search | what I did instead |
 |---|---|
 | enumerate ring patterns of a lune with Γ-arcs (side colours, positions) | reduced them by FS112's bends to two arc types, and read the alternation `κ(θ + 60°) ≠ κ(θ)` by hand (N5-KAPPA, N5-ONE) |
+| enumerate sector patterns and centre colour sets at a degree-4 vertex with three or four tactic edges | the centre tables by N3-HALF and N5-SIGHT, by hand, for the pinwheel (N5-PIN0); the rest named, not searched |
 | scan which tile can cover the direction straight out at `top` | one lemma, N5-UP, from N3-FACE at the two unit distances `q1–top`, `q3–top` |
 
 ## Fence log (standing rule 13; brief § Fences)
@@ -240,3 +244,72 @@ p = 0.4.
 at the named reads instead.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: K1-PIN at radius `1 + ε`, K1's status, and what the routes need
+
+### 4.1 N5-BENDG — the bends at any degree-4 vertex
+
+N5-BEND used nothing of the bowtie but the colours at `p`: FS112-N2-TOWARD removes a Γ-arc of `ω(p)` whose outer colour is absent at `p`, N2-AWAY (with N2-TAN) one
+whose inner colour is absent at `p` and has no R2 support along an arc. So **at every degree-4 vertex, after the bends, every Γ-arc of its ring has its outer colour
+at `p`**, and its inner colour at `p` too ((Q), both-kind) or R2-supported. For the K1-PIN shapes this removes every ring arc of an absent outer colour at once, as
+it did for the bowtie; the bends read a neighbourhood of `B̄(p, 2)`.
+
+### 4.2 K1-PIN — the pinwheel at radius `1 + ε` (N5-PIN0)
+
+*Pattern `++++` (N3-SEC): `t_j` has cone `[θ_{j−1}, θ_j]` of width `α_j`, is inner to `e_{j−1}` (centre `q_{j−1} = p + e(θ_{j−1} + 90°)`) and outer to `e_j` (centre
+`q_j`); the partner of `e_j` is `z_j`, of colour `c_j`, at `q_j`.*
+1. `α_j ∈ [60°, 180°]` (N3-SEC (i), (ii)); consecutive centres are at least 1 apart, exactly 1 when `α_j = 60°`.
+2. `t_j ⊂ B̄(p, 1) ∩ B̄(q_{j−1}, 1)` (inner) and `t_j ∩ B(q_j, 1) = ∅` (far from `z_j`): its ring contacts lie within 60° of `q_{j−1}` and at least 60° from `q_j`.
+3. **Centre colours.** `P_cl(q_{j−1}) ∋ c_j` (`t_j`), `c_{j−1}` (`z_{j−1}`); by N3-HALF (b) it omits `c_{j+1}` unless `α_j ∈ {60°, 180°}` (`t_{j+1} ⊂ B̄(q_j, 1)` holds
+   `q_{j−1}` only at `α_j = 60°`), and omits `c_{j+2}` when `α_j + α_{j+1} < 180°` (then `t_{j+2}`'s cone meets the half-plane facing `q_{j−1}`, and `t_{j+2} ⊂ B̄(q_{j+1}, 1)`
+   misses `q_{j−1}`, `|q_{j−1} − q_{j+1}| ≥ √3`). With `q_{j−1}` a four-colour vertex (anchoring), its other two colours are among `c_{j+2}`, 5, 6.
+4. By N5-SIGHT at `(q_{j−1}; p)`, a tile at `q_{j−1}` pointing away from `p` avoids `c_j` (and `c_{j+1}` if `α_j < 180°`) — the partner `z_{j−1}` (`c_{j−1}`) is one.
+5. **Where the bowtie machine applies.** When `α_j = 120°`, the ring point `u = e(φ_{j−1} + 60°)` is at distance 1 from `p`, `q_{j−1}` and `q_j` — the bowtie's `top`.
+   N5-SIGHT then constrains the tile straight out at `u` from three sides at once (colours at `p` meeting `B(u, 1)`: `c_j`, `c_{j+1}`, and `c_{j+2}` if `α_{j+1} < 120°`,
+   `c_{j−1}` if `α_{j−1} > 120°`; the ring tiles at `q_{j−1}`, `q_j` toward `u`), exactly N5-UP's situation. At `α_j ≠ 120°` no ring point is unit-distant from two
+   centres, and the machine needs a different third point.
+*Reads:* the closed disc of radius `1 + ε` about `p`. **No contradiction derived**; the pinwheel's walk at radius 2 is the next round's, with N5-SIGHT and N4-LENS as
+the tools and the case `α_j = 120°` first (it is the only one where the up-tile argument applies unchanged).
+
+**Not walked:** non-Reuleaux lenses (`+−+−`, `γ < 60°`; N3-HALF gives `c4 ∉ P_cl(a)`, `c2 ∉ P_cl(b)` at the lens's two centres, which are less than 1 apart), the
+`(2, 1, 1, 0)` patterns and three tactic edges in general.
+
+### 4.3 N5-K1 — K1's status after this job
+
+| degree-4 pattern with three or four tactic edges | status |
+|---|---|
+| `+−+−` Reuleaux bowtie, `Γ`-free lune rings | **excluded at `√3`** (N4-BOWTIE: N4-D, N4-G; one mind; a blind check, NB4, running) |
+| `+−+−` Reuleaux bowtie, lune rings with arcs of `ω(p)` | **reduced** (N5-BEND, N5-UP, N5-DEG, N5-W, N5-R0): excluded at radius 2 unless a lune is **(R-V)**; (R-V) walked to `P90` (N5-RV) — **GAP** |
+| `+−+−` non-Reuleaux lenses (`γ < 60°`) | GAP — not walked |
+| `++++` pinwheel | GAP — structure at `1 + ε` (N5-PIN0); the up-tile machine applies where a cone is 120° |
+| `+++−`, `++−−` (`(2, 1, 1, 0)`) | GAP — not walked |
+| three tactic edges | GAP — not walked |
+
+So **K1 does not land at a uniform radius this round.** What it would take: the (R-V) walk past `P90` (the colour-1/colour-3 pair at `P90`, the cap region with `V1` in
+it), and for each other shape the same machine — fix the centre colours (N3-HALF, N4-OPP, N5-SIGHT), find a point at unit distance from two or three vertices whose
+colours the lens lemmas empty (N4-LENS), and end on a diameter.
+
+### 4.4 What the routes need (brief item 3, stated although K1 has not landed)
+
+- **Route T (the torus NO, non-Siamese, `μ = 0`).** With K1 at a uniform radius: **K2** — no map realises N2-ENDS's extreme (every cubic and degree-5 vertex fully
+  tactic, `n = 2` at every degree-4 vertex, `V₆ = 0`, `U = 0`), whose shape is on the round-2 card (non-tactic edges in closed curves through the four-colour vertices;
+  absent-colour tiles inside Reuleaux triangles with corners of degree at least 5); and **GAP-μ** (pockets and holes, which the count does not charge). Without K1,
+  N3-JOINT's joint payment in place of K1 ∧ K2. Route T never reaches the Siamese class.
+- **C114-LOCAL-F (the whole NO, by CV-EXISTS).** K1 is a statement about one vertex type: degree 4 with three or four tactic edges. LOCAL-F needs **every**
+  four-colour vertex of every valid map excluded at one explicit radius: degree 4 with at most two tactic edges (the strip's midline vertices are such, and survive
+  to `φ²/√2 ≈ 1.8512` by FS114-Y-DIAL, so the radius exceeds that), degree 5 and 6, vertices with a repeated colour (the Siamese class, where N4-LENS weakens:
+  a colour repeated at a vertex empties nothing), and the vertices of four or more colours with no tactic edge at all. K1's local exclusions are the first pieces of that
+  list, not its bulk.
+
+### 4.5 Proposed for the close (I edit none of these files)
+
+- `data/fs114/claims.md` / the derivation file: K1-ΓRING — reduced to (R-V) (N5-ΓRING, N5-RV), GAP there; K1-PIN — GAP, N5-PIN0 the radius-`1 + ε` structure.
+- Name **N5-SIGHT** beside N4-LENS as a tool of the local route (N3-FACE read at a target point), with the recorded slip (a vertex's tile meets `B(u, 1)` only if
+  its cone meets the half-plane facing `u`).
+- Stub or claim to mint: **K1-RV** (the (R-V) lune at radius 2; the construction side's E2 in shape), **K1-PIN120** (the pinwheel with a 120° cone, where N5-UP's machine
+  applies unchanged).
+- Registrations of this record: (R-V) dies within radius 2, p = 0.4 (§3.2). N4's registration (the Reuleaux bowtie with a lune ring carrying an arc of `ω(p)` is
+  excluded by the same three moves at radius at most 2, p = 0.6): **scored partly** — excluded except (R-V), which the three moves (sector orders, an emptied
+  lens, a diameter) have not closed; the reduction needed two more tools (FS112's bends, N5-UP).
+
+## Stage 4 — SAVED
