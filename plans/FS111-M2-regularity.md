@@ -43,6 +43,14 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
 - **M2-REDUCE-C** — if some maximal `k`-cover has regular classes whose boundaries form a locally finite plane graph (REG-J′-C_k), then REG-I_k; at
   `k = 5`, with FS106-AE-MAP6, `χ_m⁰(ℝ²) ≥ 6`, hence `χ(ℝ²) ≥ 6` given MR — with **no** honest saturation: the selection is the free colouring of the
   arrangement's faces, and the colour count enters only at FS106-AE-MAP6 — [derived, one mind; over FS106-AE-MAP6's grade] §3.2.
+- **M2-INTRAD** — in an honest saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point (REG-J′),
+  the unit parallel of every (tangent) interface arc is again an interface arc, so radii of curvature drop by exactly 1 toward the centre and must stop at
+  1: every interface is locally a finite chain of segments and circular arcs of **integer** radius — REG-CHAIN in a strong form — [hand, one mind] §4.1.
+  Controls: R7, the strip, SQ9, HEX9.
+- **M2-REDUCE-A** — REG-A_k ⟸ honest C-SAT-T_k ∧ REG-J′_k; at six with Q-NO, `χ_m⁰(ℝ²) ≥ 7` — [derived, one mind] §4.1.
+- **M2-DISCK7** — translates of a smooth non-circular body of constant width 1 (support `1/2 + sin³(3θ)/200`) at hex7's colour lattices form a regular
+  maximal seven-cover with a locally finite arrangement: the cover form of REG-A is FALSE at seven, and on the cover route the NO at six must cover
+  self-parallel curved boundaries (NO-PAR) — [hand + tools exact (sympy + rationals, three plants), one mind] §4.2.
 - **M2-KERSHNER** — no admissible five-cover has classes that are unions of discs of radius `1/2`: such a class has density at most `π/(8√3)`, and five
   of them fall below `2π/(3√3)` — [hand over Kershner 1939 and Fejes Tóth's packing bound, external] §1.6.
 
@@ -53,6 +61,8 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
   objective) → instead derived the local form of the shadow identity (M2-HULLC (iv)) and wrote a Cantor pinch down by formula (M2-PINCH-C), leaving its
   global completion as the named killing test.
 - Stage 3: none (the lens is exhibited by formula, DISC7; no selection was searched for).
+- Stage 4: would have searched for a saturated six-colouring or an interface of radius 2 → derived the radius descent (M2-INTRAD) instead; the
+  curved maximal cover DISCK7 was written by formula (a support function), not found.
 
 ## Fence log (standing rule 13)
 
@@ -380,3 +390,89 @@ block) but with a propagation question at distance 1.
   reach of the complement of a parallel body), cited as classical, not read here — debts; Kershner 1939 (thinnest covering of the plane by equal
   discs, `2π/√27`) and the hexagonal packing bound for equal discs, cited as classical (M2-KERSHNER); Dunbar et al. 2000 (fall colourings, already held
   under FS-67) now also for M2-ZERO's reading.
+
+## Stage 4 — SAVED: the six-colour top rung — REG-CHAIN proved in a strong form on the honest route; the cover route needs a larger NO
+
+### 4.1 M2-INTRAD — saturated interfaces have integer radii [hand, one mind]
+
+*Setting.* `f` an honest a.e.-proper colouring in D-NF, saturated (C-SAT-T's conclusion). **Σ** as in round 1 (§3.3, §4.1 there): the essential
+boundary points at which M-PINCH's hypotheses (H1), (H2) fail, together with every point of `supp S_j` at which `S_j` has density 0 (cusps). **REG-J′**
+(with its clause, §1.2 item 6): Σ locally finite, finitely many interface arcs at each of its points; then (M-REDUCE-I's proof) every bounded set meets
+finitely many interface arcs, each `C^{1,1}` off Σ (M-C11).
+
+*Statement.* Under REG-J′, every interface arc is, near each of its points, a finite `C¹` concatenation of **segments and circular arcs of integer
+radius `n ≥ 1`**; the arcs of radius 1 are unit arcs of kind both or unit arcs centred at a point of Σ, and an arc of radius `n ≥ 2` is concentric with a
+chain of `n − 1` parallel interface arcs ending at a unit arc.
+
+*Proof.* (1) *Partners are interfaces.* On an open subarc `J` of type (tangent) (between `a` and `b`, `ν` the unit normal into `b`), M-PINCH puts the
+`a`-contact of `x` at `x + ν(x)` and the `b`-contact at `x − ν(x)`. So the unit parallels `J^± = {x ± ν(x)}` lie in `supp S_a`, resp. `supp S_b`, and miss
+`S̃_a`, resp. `S̃_b` (I-D1: `d̄_a(x) > 0`). At a point `y ∈ J^+ ∖ Σ`, `S_a` has positive upper density (Σ contains the cusps) and `y ∉ S̃_a`, so `y` is an
+interface point where (H1), (H2) hold; with `P_a` the `a`-part near `y`, `J^+ ⊆ cl P_a ∖ P_a = ∂P_a`, which is one `C^{1,1}` curve with `|κ| ≤ 1` (M-C11):
+**the unit parallel of a (tangent) arc is again an interface arc**, on both sides.
+(2) *Radius descent.* Parametrise `J` by arclength, `κ(s)` its curvature toward the side of its centre of curvature, `ρ = 1/κ`. The parallel at distance 1
+toward the centre is `γ + ν′` with speed `(1 − κ)` and radius `ρ − 1` (the shadow map in radius form; row 134's `λ ↦ λ/(1 + λ)` read toward the centre).
+By (1) it is an interface with radius `≥ 1` wherever it is regular and off Σ, so a (tangent) point has `ρ ≥ 2` unless `ρ = 1` exactly (then the parallel
+toward the centre collapses to a point). Iterate: the chain of parallels toward the centre has radii `ρ, ρ − 1, …` and continues through (tangent)
+points; it stops only at a point of type (split), which forces the whole local interface to be one unit arc (M-C11 (iii)) — radius exactly 1 — or at a
+(tangent) point of radius exactly 1, whose partner toward the centre is a single point `z`, which lies in Σ (the partner colour near `z` avoids the unit
+discs about every point of the arc, an angle larger than `π`, so it is a sector: a corner), or at Σ. The normals along which the chain meets Σ form a
+null set of `s` (Σ is locally finite; a positive-measure set of normals through one point `p` makes the arc a circle about `p`, which is covered by the
+same count). So **`ρ(s) ∈ {1, 2, 3, …} ∪ {∞}` for almost every `s`**.
+(3) *Piecewise circular.* Let `E_n = {s : ρ(s) = n}` and, for a terminal centre `p` (a centre of a unit arc of kind both, or a point of Σ — finitely
+many near `J` under REG-J′), `E_{n,p}` the part of `E_n` whose chain ends at a unit arc centred at `p`; there `γ(s) + nν′(s) = p`. Put
+`f(s) = |γ(s) − p|² − n²`: `f = f′ = 0` on `E_{n,p}`, and near it `f″ = 2(1 − nκ(s)(1 + o(1)))`, which is `> 0` on `E_0` and on `E_k` for `k > n`.
+For `n = 1`, `|κ| ≤ 1` makes `f` convex near `E_{1,p}`, so `E_{1,p}` is locally an interval (a convex function vanishing with its derivative at two
+points vanishes between them). Inductively, `f″ < 0` only on `⋃_{k<n} E_k`, locally finitely many intervals; on each complementary interval `f` is convex
+and `E_{n,p}` meets it in an interval. So every `E_n` is locally a finite union of intervals, and so is `E_0`, the rest. ∎
+
+*Controls.* R7: every interface a unit arc of kind both (`n = 1`). The strip (row 136): unit arcs of kind both and segments (`n = 1, ∞`). SQ9, HEX9:
+segments (the ladder, `n = ∞`). None exhibits `n ≥ 2`; a radius-2 arc would sit concentric with a unit arc of kind both. *Would kill it:* a saturated
+colouring with locally finite Σ and an interface arc of non-integer radius (a defect in M-PINCH's (tangent) partners or in the descent).
+
+**M2-REDUCE-A** [derived, one mind]. *REG-A_k ⟸ C-SAT-T_k (honest, existence) ∧ REG-J′_k.* M-REDUCE-I's construction gives a map-type colouring whose
+boundaries are the interface arcs; by M2-INTRAD they are finite chains of segments and circular arcs: a segment-and-arc map, a.e.-proper. **At six,
+with Q-NO (row 134 with FS-114's NO): honest saturation at six and REG-J′₆ give `χ_m⁰(ℝ²) ≥ 7`** (C-SEVEN-M), so `χ(ℝ²) = 7` given MR. REG-CHAIN
+is proved in the strong form (every chain ends at a unit arc or at Σ, and the radii are integers); NO-C11 is not needed on this route.
+
+### 4.2 M2-DISCK7 — on covers, class boundaries need not be arcs [hand + exact, one mind]
+
+*The object.* `K` is the convex body with support function `h(θ) = 1/2 + sin³(3θ)/200`. **DISCK7:** class `a` is the union of the translates of `K`
+centred at hex7's colour-`a` centres (§1.6). Checked (`tools/fs111_m2_disck7.py`, sympy + exact rationals, output `data/fs111/fs111-m2/disck7.out`, exit 0):
+`h(θ) + h(θ + π) = 1` (constant width 1); radius of curvature `h + h″ = 1/2 + (54s − 80s³)/200`, `s = sin 3θ`, with exact range `[37/100, 63/100]` —
+positive and **not constant**, so `∂K` is smooth, strictly convex and not a circle; `K` contains the regular hexagon of circumradius `1/2` (an exact
+sufficient inequality at `u = 11/20 > π/6`); `K` lies within `0.51` of its centre and contains the disc of radius `0.495`; so copies in one class are
+more than 1 apart (`√21/2 − 1.02 > 1`), every point is within `√7/2 − 0.495 < 1` of a copy, and each centre is exclusive (`√3/2 > 0.51`). Plants fire
+for their own reasons: `sin²` (not constant width), `δ = 1/30` (not convex; the containment and radius bounds fail with it), `δ = 0` (a circle).
+*Consequences, by hand.* A set of constant width 1 is its own spindle hull, so each copy's interior misses its own unit shadow, and a point outside
+every copy of class `a` has `dist < 1 ≤ dmax` to the nearest: each class is MUA and regular, the seven cover the plane (`K ⊇` hexagon), and two
+translates of a strictly convex curve cross at most twice, so the arrangement is locally finite: **DISCK7 satisfies REG-J′-C₇, and its class boundaries
+have non-constant curvature** — the cover form of REG-A ("maximal classes are bounded by segments and circular arcs") is **FALSE at seven**. Through
+M2-REDUCE-C it is a map-type a.e.-proper seven-colouring with smooth non-circular boundaries. The mechanism is M2-HULLC (iv)'s far level: a
+constant-width body is its own far parallel (`ρ(θ) + ρ(θ + π) = 1`), a chain closing in two steps — the involution `ρ ↦ 1 − ρ` that honest saturation
+excludes ((in, in) is impossible, and (in, out) forces a unit arc).
+
+### 4.3 The top rung, as it stands
+
+| route | what it needs at six | status |
+|---|---|---|
+| **honest** (round 1, completed here) | honest saturation (C-SAT-T₆) ∧ REG-J′₆, then Q-NO | REG-A₆ ⟸ these two (M2-REDUCE-A, with M2-INTRAD); **but** honest saturation cannot be reached by selecting from a maximal cover (M2-NOSEL), so it needs a global re-choice of the cover — a measurable fall six-colouring, or at least an interface-maximal one (M2-SELCOMP (a)). GAP there |
+| **cover** (this round) | REG-J′-C₆ (free saturation; MUA-REG, MUA-FIN), then a NO for maps whose boundaries are unit parallels, outer and far, of their own classes' components (**NO-PAR**, proposed) | Q-NO does not suffice: DISCK7 shows maximal classes with non-circular boundaries at seven. GAP at MUA-FIN and at NO-PAR |
+
+*The trade, in one line:* **covers give saturation for free and lose circularity; honest saturation gives circularity (integer radii) and cannot be had by
+selection.** Given FS-114's NO, the answer at six is decided by either "some tight six-colouring is interface-maximal with locally finite Σ" (honest) or
+"some maximal six-cover is locally finite, and NO-PAR" (cover). *Would have searched here:* for a saturated six-colouring, or a chain of radius 2 — did not;
+the object side is W's and, by W-NEG, would be `χ_m⁰ ≤ 6`.
+
+### 4.4 Proposed for the close, added (I edit none of these files)
+
+- **`LEDGER.md`:** M2-INTRAD and M2-REDUCE-A [hand/derived, one mind] — REG-CHAIN in a strong form; M2-DISCK7 [hand + exact]. "It moves no value."
+- **`data/fs111/claims.md`:** REG-A — the cover form FALSE at seven (DISCK7); REG-CHAIN — TRUE under honest saturation and REG-J′, with integer radii
+  (M2-INTRAD); NO-C11 — not needed on the honest route; **NO-PAR** proposed for the cover route.
+- **Stub to mint:** *interface-maximal six-colourings* — does some tight six-colouring admit a modification that is saturated (equivalently, no class
+  extends across an interface) with locally finite Σ? Its seven-colour inhabitant is R7, its known obstruction the lens (M2-NOSEL). Provisional bearings:
+  G54 (fall colourings; gap-free), G82, G83.
+- **A second grokking draft (G85), in G67's form:** *Saturated interfaces have integer radii. [hand, one mind]* Off a locally finite singular set, the unit
+  parallel of a saturated interface is again an interface, so radii of curvature fall by exactly 1 toward the centre and the fall must stop at 1: every
+  interface is a chain of segments and circular arcs of integer radius. *Do: before asking whether a hypothetical saturated colouring has curved
+  interfaces, read the chain of unit parallels toward the centre; if it cannot end at a unit arc or at a singular point, the arc cannot exist. Killing
+  test: a saturated colouring with locally finite Σ and an interface of non-integer radius.*
