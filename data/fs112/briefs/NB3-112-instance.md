@@ -15,7 +15,7 @@ file is part of it and overrides it where they differ. Filled in by the owner on
 
 ## Why this one matters
 
-The side's own words: its main result *"is one mind and flatters the NO side — a blind second mind on its table … before anything rests on N3-DENSE3"*. It
+The side's own words (`data/fs112/reports/FS112-N3.md` l. 13): *"N3-BASE is one mind and flattering to the NO side — a blind second mind (NB3) on its table, with the ring lemmas N2-ROT/N2-HEX under P17 (not walked by me) as its named check, is the priority before anything rests on N3-DENSE3."* It
 reduces the unit-arc half, at the base, to vertices of four or more colours or a repeated colour. **Audit it at the rate of a result you would like to be
 false** (standing rule 4; `CLAUDE.md` G21). **The named check the side asks for:** the ring lemmas N2-ROT and N2-HEX (from round 2; in `plans/FS112-N-proof.md`
 § Continuation — FS112-N2, open to you) that the Prop. 17 step uses, which the side did not walk.
