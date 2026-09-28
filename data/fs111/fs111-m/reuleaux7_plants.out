@@ -1,0 +1,5 @@
+plant down_mod2: exit 1 ; RESULT: FAIL  engine=ok C=FAIL P=FAIL S=ok T=ok
+plant down_2lambda: exit 1 ; RESULT: FAIL  engine=ok C=FAIL P=ok S=FAIL T=ok
+plant up_m_only: exit 1 ; RESULT: FAIL  engine=ok C=FAIL P=FAIL S=ok T=ok
+plant endpoints: exit 1 ; RESULT: FAIL  engine=FAIL C=ok P=ok S=ok T=ok
+plant centre_shift: exit 1 ; RESULT: FAIL  engine=ok C=ok P=ok S=FAIL T=ok

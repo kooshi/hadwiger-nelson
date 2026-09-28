@@ -1,0 +1,8 @@
+FS111-M R7 check, plant = None
+  engine self-test: U(0,0)/U(1,1) REJECT (expect REJECT, the violation interior), U(0,0)/U(1,0) REJECT (expect REJECT), U(0,0)/U(2,0) ACCEPT with a distance-1 pair True (expect ACCEPT, True)
+(C) up colours [0, 1, 2, 3], down colours [4, 5, 6]; total 7
+(P) same-colour pairs examined: 240 (12 representatives x 2 kinds, partners within centroid distance 3); REJECT: 0; pairs realising distance exactly 1: 168; engine disagreements: 0
+(S) arcs examined: 36 (12 up representatives x 3 arcs, i.e. every arc up to the period); vertices examined: 36; failures: 0
+(T) within-contact of U(0,0): its vertex P0 and its opposite arc (centred at P0) are at distance exactly 1: yes; the up's diameter is 1 (self pair ACCEPT, max = 1)
+(A) areas: up (pi - sqrt3)/2 ~ 0.704771, down sqrt3 - pi/2 ~ 0.161254, sum sqrt3/2 ~ 0.866025 = one up and one down lattice triangle
+RESULT: PASS  engine=ok C=ok P=ok S=ok T=ok

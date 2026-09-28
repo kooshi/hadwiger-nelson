@@ -14,10 +14,31 @@ each stage's section is headed "Stage n — SAVED" and committed before the next
   V0; two with V0's] §1.4.
 - **M-HULL1** (C-HULL's first clause re-derived) and **M-HULL2** (two path-connected pieces of one class have all cross distances `< 1` or all `> 1`)
   — [hand; one mind here] §1.5. C-HULL's "so" clause FALSE (V0's counterexample, re-checked) §1.5.
+- **M-SATC** — every a.e.-proper `k`-colouring lies below a maximal admissible cover (Zorn), and every maximal cover's supports satisfy
+  `ℝ² = int F_j ∪ (F_j + S¹)`: every point not interior to `F_j` is at distance exactly 1 from `F_j`; a selection from it is an a.e.-proper
+  `k`-colouring — [hand, one mind] §2.2. Inhabitant at `k = 7`: R7's up classes (maximal, §2.4).
+- **M-SLACKFREE** — if a colouring has slack `ε` in form (a), every point of `A*_j` is `j`-free; so a saturated colouring is tight — [hand, one mind]
+  §2.3.
+- **M-R7** — the Reuleaux seven-colouring (Reuleaux triangles of width 1 on the up triangles of the unit triangular lattice, coloured by the four
+  cosets of `2Λ`; the cusped down triangles coloured by the three cosets of `M = ⟨(0, √3), (3/2, √3/2)⟩`) is a.e.-proper, tight and **saturated**
+  (every essential boundary point is a contact point for each of its colours); every boundary is a unit arc centred at a lattice point carrying
+  both its side colours — [tools, exact in `ℚ(√3)`, two distance engines agreeing (`tools/fs111_m_reuleaux7.py` and the frozen FS112-Y engine), five
+  plants each failing at its own assertion; one mind] §2.4. The object is `[Polymath16threads]`'s (thread 4, de Grey, 5 May 2018).
+- **M-R7-FORCE** — on the up/down Reuleaux tiling, saturation of the arcs' down sides forces every down colour class to be a union of cosets of `M`;
+  four colours on the ups and three on the downs are each the minimum (a `K₄` among ups at distances 1 and `√3`; three mutually touching downs) —
+  [hand, one mind] §2.4.
+- **M-DEADLOCK** — in the tight hexagonal seven-colouring of circumradius `1/2` (and in V0-WIG7), no a.e.-proper colouring that agrees with it off
+  `B(x, ρ)`, `x` an edge midpoint, `ρ < 1 − √13/4`, has a contact point for either of the edge's two colours inside `B(x, ρ)`: local fills cannot
+  saturate it — [hand, one mind] §2.5.
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none.
+- Stage 2: would have run a local-search colourer for a saturated seven-colouring (every boundary point bound on both sides) on a pixel grid →
+  instead derived the contact types a saturated interface admits and read the up/down Reuleaux tiling's colouring off them (the down colours are
+  forced onto the cosets of `M`, §2.4), then checked the object exactly (`tools/fs111_m_reuleaux7.py`) and found it in print.
+- Stage 2: would have searched fill orders on the hexagonal colouring for one that saturates it → instead proved that no modification near an
+  edge can (M-DEADLOCK, §2.5).
 
 ## Fence log (standing rule 13)
 
@@ -124,3 +145,133 @@ M-HULL2 read pairwise (a tile pair is accepted iff 1 is not interior to its cros
 - C-SAT-T is worked in the list's wording ("modified"), with "by fills" decided separately (stage 2).
 - REG-J's junction set must contain bichromatic vertices of degree `≥ 4` (stage 4).
 - M-HULL2, not C-HULL's "so", is the form carried forward.
+
+## Stage 2 — SAVED: C-SAT-T — the cover form TRUE, the honest form GAP at `k = 5, 6`, inhabited at `k = 7` (the Reuleaux seven-colouring)
+
+### 2.1 What is asked, in two readings
+
+The list (verbatim, §1.2): "every tight a.e.-proper `k`-colouring can be modified, keeping it a.e.-proper with `k` colours, into one in D-NF in which
+no `x ∈ ∂_e S_j` is `j`-free, for every `j`; so every essential boundary point is a `j`-contact point for every `j ∈ P(x)`." With "modified" unrestricted
+this is the **existence form**: *if a tight a.e.-proper `k`-colouring exists, a saturated one exists* — which is all route M uses (REG in its existence
+form, stage 2 §2.5 of the plan). The brief's "by fills" is a **process form**. Two facts first:
+
+- *The "so" clause is an equivalence, not a consequence:* for any colouring, `x` is not `j`-free ⟺ `T₁(x) ∩ supp S_j ≠ ∅` ⟺ `x` is a `j`-contact point
+  (`supp S_j = cl S̃_j` is closed and `T₁(x)` compact: if they are disjoint they are at positive distance `2η`, and `A_η(x) ∩ S_j` is null; if `y` is in
+  both, `A_η(x) ⊇ B(y, η)` meets `S_j` in positive measure for every `η`). So "saturated" means: **every essential boundary point is at distance exactly
+  1 from the support of each colour of its essential multicolour.**
+- *Fills are not monotone.* A fill with `j` enlarges `S_j` and shrinks the others; shrinking a class frees points for it. No functional of the class
+  measures increases under every fill (`Σ|S_j|` is constant on a torus, and a fill moves measure between classes in either direction). R-SAT's
+  Zorn argument (`plans/FS107-derivation.md` §1) uses that adding points to a partial colouring is monotone; for full colourings the honest analogue
+  has no such order. What does have one is the cover (2.2).
+
+### 2.2 M-SATC — the cover form of saturation, **TRUE** [hand, one mind]
+
+*Definitions (this record's).* An **admissible cover** is a `k`-tuple `A = (A_1, …, A_k)` of measurable sets with `⋃ A_j = ℝ²` up to a null set and
+each `A_j` with `(Leb ⊗ σ)`-null unit pairs (the classes may overlap). `A ≤ B` iff `A_j ⊆ B_j` a.e. for every `j`. `F_j = supp A_j` (closed).
+
+**Statement.** (i) Every a.e.-proper `k`-colouring's classes form an admissible cover lying below a maximal one. (ii) If `A` is maximal, then for every
+`j`: `ℝ² = int F_j ∪ (F_j + S¹)`, where `F_j + S¹ = {x : T₁(x) ∩ F_j ≠ ∅}`; so every point of `∂F_j`, and every point outside `F_j`, is at distance
+exactly 1 from `F_j`. (iii) Any measurable selection `g(x) ∈ {j : x ∈ A_j}` is an a.e.-proper `k`-colouring with `S_j^g ⊆ A_j`, and its class
+boundaries lie in `⋃_j ∂F_j` up to a null set when these boundaries are null.
+
+*Proof.* (i) Zorn. Let `(A^α)` be a chain. Put `μ(A) = Σ_j Σ_n 2^{−n} |A_j ∩ B(0, n)|/|B(0, n)|`, monotone along the chain, and pick `α_1 ≤ α_2 ≤ ⋯`
+with `μ(A^{α_m}) → sup_α μ(A^α)`; set `E_j = ⋃_m A_j^{α_m}`. For any `α` either `α ≤ α_m` for some `m`, or `A^α ≥ A^{α_m}` for all `m` and
+`μ(A^α) ≤ μ(E)`, whence `A^α = E` a.e.; so `E` bounds the chain. `E` is admissible: a unit pair `(x, x + w)` in `E_j × E_j` lies in
+`A_j^{α_m} × A_j^{α_m}` for some `m` (monotone union), so the pairs of `E_j` are a countable union of null sets; the cover property is inherited.
+(ii) Let `x ∉ F_j + S¹`. `F_j ≠ ∅` (else `A_j` is null and adding `B(x, 1/3)` to it is admissible, contradicting maximality). `T₁(x)` is compact and
+`F_j` closed, so `dist(T₁(x), F_j) = 2η > 0`, `η ≤ 1/2` wlog, and `A_j ∩ A_η(x)` is null. C-FILL's computation (§1.4, which uses only this) shows
+`A_j ∪ B(x, η/2)` has null unit pairs; by maximality `|B(x, η/2) ∖ A_j| = 0`, so `B(x, η/2) ⊆ F_j` and `x ∈ int F_j`. (iii) `S_j^g ⊆ A_j` inherits null
+pairs; the cover property gives a full colouring. ∎
+
+*What it says.* In a maximal cover **each class is saturated on its own**: `F_j` is a maximal unit-avoiding set in the density sense (every point
+it does not contain in its interior is excluded by it). The honest colouring's "gap" (2.5) is absorbed by overlaps: where two colours are both free,
+both covers contain the region. A **selection** is honest but may lose saturation: its class `S_j^g ⊆ A_j` is smaller, so its contact set
+`supp S_j^g + S¹` is smaller than `F_j + S¹`.
+
+*Inhabitant at `k = 7`:* R7 (2.4). Its up classes are already maximal: a point `z` outside an up `T` of colour `a` with `dist(z, T) < 1` has
+`maxdist(z, T) ≥ dist(z, T) + 1` (the support line of `T` at the nearest point `p` and the opposite support line are 1 apart, `T` having constant
+width 1), so some point of `T` is at distance exactly 1; and every point of the plane is within `2/√3 − (1 − 1/√3) < 1` of some up of colour `a`
+(`2Λ` has covering radius `2/√3` from the ups' centroids, and each up contains the disc of radius `1 − 1/√3` about its centroid). Whether R7's down
+classes are maximal is not decided here (not needed).
+
+### 2.3 M-SLACKFREE — a colouring with slack has no contact points; so saturated colourings are tight [hand, one mind]
+
+*Statement.* If `f` has slack `ε > 0` in form (a) (D-SLACK), then every `x ∈ A*_j` is `j`-free, for every `j`. Hence a colouring with at least one
+essential boundary point that is saturated is tight.
+*Proof.* Let `x ∈ A*_j` and `η, r > 0` with `η + r < ε`. `|S_j ∩ B(x, r)| > 0` (`d̄_j(x) > 0`). If `|S_j ∩ A_η(x)| > 0`, every pair in
+`(S_j ∩ B(x, r)) × (S_j ∩ A_η(x))` has distance in `[1 − η − r, 1 + η + r] ⊆ [1 − ε, 1 + ε]`, a set of positive `Leb ⊗ Leb` measure: contradiction. ∎
+*Reading.* Saturation is tightness made pointwise: slack frees every boundary point, saturation binds every one.
+
+### 2.4 M-R7 and M-R7-FORCE — the Reuleaux seven-colouring, the `k = 7` inhabitant [tools exact + hand, one mind; the object prior art]
+
+**The object** (by formula; `Λ = ℤ(1, 0) + ℤ(1/2, √3/2)`, `λ(m, n) = m(1, 0) + n(1/2, √3/2)`). Up tile `U(m, n)`: the Reuleaux triangle of width 1 on
+`λ + {(0, 0), (1, 0), (1/2, √3/2)}`, each side the unit arc centred at the opposite vertex. Down tile `D(m, n)`: the down triangle
+`λ + {(1, 0), (1/2, √3/2), (3/2, √3/2)}` less the bulges of `U(m, n)`, `U(m + 1, n)`, `U(m, n + 1)` — a curvilinear triangle with three cusps. Colours:
+`U(m, n) ↦ 2(m mod 2) + (n mod 2)` (the four cosets of `2Λ`); `D(m, n) ↦ 4 + ((m − n) mod 3)` (the three cosets of `M`). Areas `(π − √3)/2` and
+`√3 − π/2`, summing to `√3/2`.
+
+**Checked exactly** (`tools/fs111_m_reuleaux7.py`, arithmetic in `ℚ(√3)`; output `data/fs111/fs111-m/reuleaux7_check.out`, plants
+`data/fs111/fs111-m/reuleaux7_plants.out`):
+- (P) a.e.-properness: every same-colour tile pair (a tile with itself included) whose centroids are within 3, first tile over the 12 representatives of
+  the period lattice `{m, n even, m ≡ n (mod 3)}` of each kind: **240 pairs, 0 rejected, 168 realising distance exactly 1**; the frozen FS112-Y engine
+  (`tools/fs112_y_check.py`, imported, not edited) gives the same verdict on all 240 (0 disagreements). Pairs farther apart are `> 3 − 2/√3 > 1`.
+- (S) saturation: every arc (36 up to the period) is centred at a lattice point where both its side colours occur (its up as a vertex, a down of its
+  other colour as a cusp); every lattice point is bound for each of its three up colours by that up's opposite arc. Essential boundary points are
+  exactly arc points (`P = {up colour, down colour}`) and lattice points (`P` = the three up colours; the three cusps have density 0).
+- (T) tight: the within-contacts of every up (vertex to opposite arc). (C) seven colours, four on ups, three on downs.
+- Plants: `down_mod2` fails (P) and (C); `down_2lambda` (a **proper, tight, unsaturated** eight-colouring) fails (S) alone besides (C); `up_m_only`
+  fails (P); `endpoints` (the engine without interior critical pairs) fails the engine's own positive control (the pair `U(0, 0)`, `U(1, 1)`, improper
+  only at interior points, is accepted); `centre_shift` fails (S). Each fires for its own reason.
+
+**M-R7-FORCE** [hand, one mind]. *Why these colours.* At an arc point `x` between `U` (colour `a`) and `D` (colour `b`), the arc is centred at `U`'s
+opposite vertex `v`; `a` is bound at `x` by `v`. `b` is bound only if `v ∈ supp(b)`, and properness at `v` forces the `b`-material at `v` into the
+directions at angle `≥ 90°` from every direction of the arc (else a `b`-point near `v` and a `b`-point just outside the arc are exactly 1 apart):
+of the three cusps at `v` only the backward one qualifies, which for `U(0, 0)`'s arc opposite `(0, 0)` is `D(m, n) − (3/2, √3/2)`. By `D`'s threefold
+symmetry, `c(D) = c(D + μ)` for `μ ∈ {(3/2, √3/2), (0, √3), (3/2, −√3/2)}`, which generate `M` (index 3 in `Λ`). So saturation forces the downs
+onto `M`-cosets, and three colours are also the minimum for downs (three downs share each lattice point pairwise). The ups need four: `0`, `(1, 0)`,
+`(1/2, √3/2)`, `(3/2, √3/2)` are pairwise at distance 1 or `√3`, and ups at those offsets touch or have 1 interior to their distance range (the
+engine's positive control `U(0,0)/U(1,1)`). So on this tiling, seven colours and this colouring (up to the ups' choice and relabelling) are what
+saturation and properness leave.
+
+**What R7 is, in the programme's vocabulary.** A locally finite segment-and-arc map, all of whose boundaries are **unit arcs of kind both**, each
+centred at a lattice point whose closure multicolour has six colours (three ups, three cusps) and whose essential multicolour has three. Its
+interfaces are all of the "(in, out)" type of stage 3: a unit arc splitting its neighbourhood, the up inside, the down outside, one centre binding
+both colours.
+
+**Prior art.** The tiling and its 4 + 3 colouring are `[Polymath16threads]` thread 4, Aubrey de Grey (ag24ag24), 5 May 2018, 4:37 pm, verbatim:
+*"the triangular grid needs eight colours, but if all the triangles in one of the orientations are “fattened” into Reuleaux triangles then they still
+need only four colours but the other (concave) triangles now only need three."* Thread 12 (Bernhard Hockertz, 24 March 2019) calls it *"the 7-color
+Reuleaux triangle tesselation"*, and (14 April 2019) *"the Reuleaux tiling whose 100% exclusion rate still fascinates me"* — the saturation property,
+named informally. zbMATH (`ab:"Reuleaux" & (ab:"chromatic number" | ab:"coloring" | ab:"colouring") & ab:"plane"`: 0; `ti:"Reuleaux" &
+(ab:"unit distance" | ab:"chromatic")`: 1 hit, on Borsuk's problem; `ab:"Reuleaux triangles" & ab:"tiling"`: 1 proceedings volume) finds no printed
+paper. **Ours:** the exact check, the saturation reading (M-R7-FORCE: saturation forces the down colouring), its role as the vacuity rule's
+inhabitant. A `BIBLIOGRAPHY.md` note is proposed at §P (stage 5).
+
+### 2.5 M-DEADLOCK — the hexagonal colouring cannot be saturated locally [hand, one mind]
+
+*Statement.* Let `f` be the tight hexagonal seven-colouring of circumradius `1/2`, `x` the midpoint of an edge between hexagons `H` (colour `a`) and
+`H′` (colour `b`), `0 < ρ < 1 − √13/4 ≈ 0.0986`. If `g` is a.e.-proper and `g = f` off `B(x, ρ)`, then no point of `B(x, ρ)` is an `a`-contact or a
+`b`-contact point of `g`. The same holds for V0-WIG7 with its wiggles vanishing near the edge's ends and `ρ` below the same bound minus the wiggle
+amplitude.
+*Proof.* A point `y ∈ supp S_a^g` at distance 1 from `z ∈ B(x, ρ)`: if `y ∈ B̄(x, ρ)`, `|z − y| < 2ρ < 1`; otherwise a neighbourhood of `y` avoids
+`B(x, ρ)` or `y ∈ ∂B(x, ρ)` (then `|z − y| < 2ρ`), so `y ∈ supp S_a^f`, i.e. `y ∈ cl H` or `y` in another hexagon of colour `a`. The latter are more
+than `1.29` from `x`, hence more than `1.29 − ρ > 1` from `z`; the former have `|z − y| ≤ |x − y| + ρ ≤ √13/4 + ρ < 1` (the farthest points of `H`
+from `x` are its two far vertices, at `√13/4`). The same for `b` with `H′`. ∎
+*What it says.* Every interface of this colouring sits in a "gap": `a` becomes bound only if the interface is pushed at least `0.1022` into `H′`
+(where `H`'s far vertices reach distance 1), `b` only if pushed `0.1022` into `H`; no position binds both. Saturating it needs a global
+rearrangement (R7 is combinatorially different: triangles, not hexagons). This is why the honest form cannot be proved by fills applied interface by
+interface, and why R-SAT's order has no honest analogue. **V0-WIG7 is not saturated** (its wiggled edges are free for both colours away from the
+vertex zones), so it bears on C-HULL-REG only through C-HULL-REG's hypothesis — which is exactly what must remove it (stage 3's pinching lemma).
+
+### 2.6 Verdict on C-SAT-T
+
+| form | verdict | grade, minds |
+|---|---|---|
+| cover form (M-SATC, proposed as the rung REG uses) | **TRUE** for every `k` | [hand], one mind; inhabitant R7 |
+| honest existence form ("if a tight a.e.-proper `k`-colouring exists, a saturated one exists"; the list's "modified") | **TRUE at `k ≥ 7`** (R7, with `k − 7` colours unused); **vacuous at `k ≤ 4`** (`χ_m⁰(ℝ²) ≥ χ(ℝ²) ≥ 5`, I-EASY); **GAP at `k = 5, 6`**, at the step *from a maximal cover to an honest colouring whose interfaces lie where both colours are bound* (a selection loses contacts; M-DEADLOCK shows the repair is not local) | [hand + tools], one mind |
+| process form ("by fills", the brief) | not decided; M-DEADLOCK: no fill order confined near an interface saturates the hexagonal colouring | [hand], one mind |
+
+**MISSTATED as the rung REG needs:** route M needs saturation only to regularise, and the cover form delivers each class's saturation with no gap
+problem; a selection from a regular cover is regular (its boundaries lie in `⋃ ∂F_j`). The honest form is what C-HULL-REG's statement presupposes
+(it speaks of `∂_e S_a` at points with `P(x) = {a, b}`), so stage 3 works both: the honest colouring where it is saturated, and each cover class.
+**Registration E3** (TRUE / GAP / FALSE at 0.35 / 0.5 / 0.15): GAP for the honest form at `k = 5, 6`, TRUE for the cover form.
