@@ -1,0 +1,31 @@
+OK   |q1 - top| = 1
+OK   |q3 - top| = 1
+OK   |p - top| = 1
+OK   |P90 - q1| = 1 and |P90 - top| = 1
+OK   |P90 - P90'| = sqrt(3)
+OK   q1 - top = e(-30)
+OK   q3 - top = e(210)
+OK   e(90).(q1 - top) > 0 is false (90 not facing q1 strictly): value
+OK   e(90).(q3 - top) < 0
+OK   |e(45) - top| < 1
+OK   |e(45) - q1| < 1
+OK   |e(60) - top| < 1
+OK   |e(60) - q1| < 1
+OK   |e(75) - top| < 1
+OK   |e(75) - q1| < 1
+OK   |e(95) - q1| > 1
+OK   |e(95) - P90| > 1
+OK   |e(85) - P90'| > 1
+OK   sign(|P90 - e(30)|^2 - 1) = 0
+OK   sign(|P90 - e(45)|^2 - 1) = -1
+OK   sign(|P90 - e(75)|^2 - 1) = -1
+OK   sign(|P90 - e(90)|^2 - 1) = 0
+OK   sign(|P90 - e(120)|^2 - 1) = 1
+OK   |q1 + e(130)/10 - top| < 1
+OK   |q1 + e(150)/10 - top| < 1
+OK   |q1 + e(170)/10 - top| < 1
+OK   |P90 - q2| = 2
+OK   |e(80) - P90| < 1
+OK   top + e(30)/100 in B(q1,1) minus B(p,1): True
+OK   top + e(90)/100 in B(q1,1) minus B(p,1): False
+RESULT OK
