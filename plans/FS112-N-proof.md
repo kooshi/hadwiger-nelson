@@ -580,3 +580,53 @@ should start. Separately, **the stuck ray** (N2-RAY) must be excluded or realise
 in-ban, but its free parameters were not derived) — named as a GAP instead.
 
 ## Stage N2-5 — SAVED
+
+## § Continuation — FS112-N3
+
+*Job FS112-N3, de Bruijn (Opus 5.5), launched 2026-09-27 at HEAD `4609152f`. Briefs: `data/fs112/briefs/N3-112-proof-round3.md` (wins where they differ),
+`data/fs112/briefs/N2-112-proof-continued.md`, `data/fs112/briefs/N112-proof.md`, with `data/fs112/briefs/STANDING-RULES.md`. Working files
+`data/fs112/fs112-n/`; new exact checks `tools/fs112_n3_*.py` (earlier tools run, never edited). Earlier verdicts in this record are not rewritten; where I
+disagree I say so here. Notation as §1.3 and N2's frame; `M*` a terminal valid modification (N2-TERM / NB2-TERM); a **chain** is N4-PROP's sequence
+`P_k = v + kn` of stuck vertices with `λ_k < υ_k` the upward curvatures at `P_k` of the lower and upper arcs of the `+a` horn of `a_k`; `f(λ) = λ/(1+λ)`,
+`f̃(υ) = υ/(1−υ)`.*
+
+### N3: theorems this continuation proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+
+### N3: would-have-searched-here log
+
+### N3: fence log
+
+1. `ls data/fs112/fs112-n/ data/fs112/reports/` (checking whether my record's working files existed) printed the **names** of the reports directory's
+   files, fenced ones among them (`FS112-A3.md`, `FS112-A.md`, `FS112-P.md`, `FS112-PA.md`, `FS112-Y2.md`, `FS112-YB.md`, `FS112-Y.md`); none was opened.
+2. `ls data/fs112/briefs/` and one `wc -c data/fs112/briefs/*` printed the other jobs' brief **names and byte counts**; none was opened.
+3. Card R's source (`data/fs112/fs112-a3/card-R.md`) and A3's record (`plans/POROS-2026-09-27-fs112-competition.md`) are fenced: not opened.
+4. `git log --oneline -3` printed three subjects, all inside the start-up snapshot. No further `git log`.
+
+## Stage N3-1 — SAVED: quotation check; what N3 inherits
+
+**Files read from disk (this order):** `STANDING-RULES.md`; the N, N2 and N3 briefs; `CLAUDE.md` § The aim and § Counter-priors (disk; link 2 now carries
+two printed sources, nothing here rests on it); this record in full; N2's and NB2's reports; `plans/FS112-NB2-verification.md` in full;
+`data/fs112/claims.md` rows C-CHAIN-6 to 9; `plans/FS110-N-proof.md` stages N3-2 and N4-2 to N4-4 (the frame, SHADOW, FLANK, SHAVE, RAY, STUCK, PROP, FIN,
+TERM, CONE).
+
+**Quotation check (standing rule 5).**
+
+| quotation in the N3 brief | source | verdict |
+|---|---|---|
+| card R part 1, "verbatim from `data/fs112/fs112-a3/card-R.md`" | fenced from me | **not checkable**; taken as the owner quotes it |
+| inside R1: C-CHAIN-9's recursion "`λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`" | `data/fs112/claims.md` l. 142 (FS110-N4-FIN) | exact (`grep -F`) |
+| A3-3.4 (choice, alternative, why, confidence, default) | `plans/POROS-2026-09-27-fs112-competition.md` §A3-3.4 | **not checkable** (fenced); one reason withheld by the advisor, as the brief says |
+| inside A3-3.4: N2's recommendation "the one whole-line object no disc-local argument sees" | `data/fs112/reports/FS112-N2.md` | exact |
+| the brief's gloss of NB2's DENSE (not in quotation marks) | `data/fs112/reports/FS112-NB2.md`, `plans/FS112-NB2-verification.md` NB2-DENSE | faithful |
+| the brief's gloss of NB2-END: "(a sketch, one mind): a chain's end may force a unit arc one step beyond it" | NB2's report: "NB2-END (sketch, one mind, **conditional**): a chain's end may force a unit arc one step beyond it" | **drops "conditional"** — and NB2's own divergences 2 and 4 say its premise ("two `g`-sectors at `P_{−1}`") is exactly what FLANK's exception can remove. Carried into stage N3-4 |
+| Kooshi's four standing-rule quotations; "My goal is to fully solve …"; "Let's see some ambition …"; "search for a finite graph is out …"; "It's ok if jobs overrun a bit …" | `CLAUDE.md`; `plans/CONSOLIDATION-2026-09-27.md` | exact (two across a line break) |
+
+**What N3 inherits (grades as filed by the two verifiers).** Two minds, one blind: N112-U1, SIX, NB4′, L60, LOCK, the three-colour merge; N2-SIGN, ENV,
+TOWARD (different routes), AWAY, TAN, RED, TERM, FLANK-Q, RAY. N2-DENSE in NB2's form (the owner's ruling): *in every valid map each trichromatic cubic
+vertex has a repeated-colour vertex within 2 or a unit-arc centre within 3; every closed disc of radius 4 holds one* [NB2, one mind for this form; N2's
+weaker form two minds]. Open and mine: R1 (card R), then (a) the base near a (Q)/(R2) centre, then (b)'s aperiodic case with R2 (card R) and NB2-END.
+
+## Stage N3-1 — SAVED
