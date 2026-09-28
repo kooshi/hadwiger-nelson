@@ -307,3 +307,74 @@ the docstring before the first run. **Run 2: 31 of 31 as registered:**
 confirm the inequalities at named values; the proofs are stage 1b's derivations.
 
 ## Stage 1c — SAVED
+
+## Stage 2 — SAVED: FS114-Y6's record read and compared (opened only after stage 1's commit `ffdd1cdf`)
+
+### 2.1 The quotation check, completed; the side's check re-run
+
+- **The seven statements: 7 of 7 FOUND** verbatim in `plans/FS114-Y6-construction.md`'s theorem table (`quotes-stage2.tsv`, `quotes-stage2.out`, exit 0,
+  FS114-YB's tool unedited).
+- `tools/fs114_y6_e1.py`, re-run unedited under `scripts/slot.py` (faithful and `--plant`): **outputs identical** to the committed `e1.out` and
+  `e1-plant.out` but for the slot's admission line (`y6-e1-rerun.out`, `y6-e1-plant-rerun.out`). Replication, not independence.
+- **Label map** (the side's → mine): the side's frame is `q_4 = e(0°)`, `q_1 = e(60°)` — mine rotated by `+60°`; so the side's "directions just above
+  `270°`" at `q_4` are my `210°⁺`, **my stage-1 reading of E1OMEGA was right** (edge 4's side cone, just outside the ring clockwise). The side's `Y` (at `q_1`,
+  just above `330°`) is my `Z_1`; its `K⁺` is my `Reul(q_4, q_1, q_1 + q_4) ∖ B(p, 1)`; its cases (a)/(b) on `M_1` are my case (ii)'s two branches; its `Z` (E1K1) is
+  my `X`. **E2:** the side takes `c = 2` (E2 at `t_3`), I took `c = 1`; my cones `(α_1, α_2, α_3, α_4)` are its `(α_2, α_3, α_4, α_1)`. So my F0 is its **S1**,
+  F1 its **S2**, F4 its **S3**, F3 its **S4**, F2 its **S6**; its **S5** `(60°, 180°, 60°, 60°)` is my excluded all-three-`60°` case with a `180°` cone.
+- **Ban touch (the side's, disclosed in its log, ruled by the owner):** a 5° grid check of the E2 case split; nothing rests on it, and nothing of mine does.
+
+### 2.2 The two derivations compared
+
+| # | statement | the side's route (address) | mine (address) | divergence |
+|---|---|---|---|---|
+| 1 | E1FORM | L60-EQ, the cap's corner cone, `α_1 ≥ 60°`; `α_2 < 120°` by edge 2 against `q_4` (§2.1) | the same (1b item 1) | **none**; two routes agree letter for letter |
+| 2 | E1Q3 | MU, ALT, POCKET read nothing of edge 1; the colour-1 block needs `φ_3 > 180°`, by `|q_3 − w_4| > 1` (§2.2) | the same, the colour-1 block by YB5-CONE180 (1b item 2) | **none of truth**; the side's proof text also asserts `λ_3 = α_3 − 60°` in (A) (not in E1Q3's statement): the wrap GAP (row 4) |
+| 3 | E1OMEGA | `Ω` points at `w_4 ∈ cl μ_3`; if `Ω ∋ w_4` then `Ω ≠ μ_3` since `q_3, q_4 ∈ cl μ_3` would give `α_4 ≤ 60°` (§2.3) | `Ω` within `< 1` of `w_4`; `Ω ≠ μ_3` since `|q_3 − q_4| > 1` (1b item 3) | **none**; the same inequality, two phrasings |
+| 4 | E1CAP | `Y` (my `Z_1`) is `T_4` in both cases on `M_1`; `α_4 = 120°` from `4 ∈ P_cl(q_1)`; the whole arc from `cl T_4 ∩ cl t_2` connected (simple) and meeting both ends (§2.4 steps 1–6) | the same `Z_1` step; the whole arc by a Jordan curve through `T_4` and `t_2` (case (i) empty) (1b item 4) | **route** at the whole-arc step: the side's is shorter (the contact of an inside and an outside tile lies on `ω(p)`, and a connected subset of the arc meeting both ends is the arc); both valid. **Truth: `λ_3 = α_3 − 60°` is a GAP** — the side pins it by `O_3 ≠ T_2` (§2.2), which bounds the part of the contact `O_3` borders, not the contact: the pocket tile `μ_2` may wrap round `t_4`'s ring corner (FS114-YB4-WRAP). The side's step 7 (at `q_1`: `T_4` exactly `[330°, 30°]`, `T_1` from `30°`, `T_4 \| T_1` a both-kind arc of `ω(q_4)`) is not in the statement; I re-derived it (the only other candidate in `q_1`'s outer gap has colour `m̄_1 = m_2` and points at `q_4`, so it is `Ω`, which misses `q_1`): **TRUE** in case (a) |
+| 5 | E1K1 | PXKILL at `k = 1`; "if `T_4`'s sector starts after `30°`, the tile before it points at `q_1`, is not `μ_1`, so has colour `m_2`: no `Z`" (§2.5) | the same kill; "is not `μ_1`" by the cross-cut `γ_T ⊂ T_4` of the lens `B̄(q_4, 1) ∩ B̄(q_1, 1)` (1b item 5) | **reason incomplete, statement unaffected**: the side's "is not `μ_1`" is unargued at this step (its step-6 reason — `μ_1` bordering `L_1` — does not apply to a tile on the far side of `T_4`); my lens cross-cut supplies it. Both records read the exception as "a tile `Z` of colour `m_2` at `q_1`", the corner condition implied |
+| 6 | E2RED | what E2 breaks (§3.1); (A) keeps its colour clause because `t_{c+1}`'s two 5/6 neighbours are `μ_c` and `Λ_c`; REDUCE with `q_c` weakened gives S1–S6 (§3.2) | the same breaks; survivors F2 alone (1b item 6) | **(i) truth, the survivor list:** S1 (my F0) is **killed by PXKILL at `k = c + 1`** — the side left it "needs rechecking" (§3.3); its colour step holds (colour `k − 1` blocked on the arc since `α_{k+1} + α_{k+2} = 180°`; colour `k` free on it since `a + b > 180°`), and its other inputs (CASE (A) at `q_{c+1}`, `q_{c+2}`; POCKET at `w_{c+1}`, `w_{c+2}`, `w_{c+3}`, which the side's own §3.2 lists as all it reads) hold. **S2, S3, S4, S5 have `α_{c+1} = 60°`: E2 at a 60° blade, which needs E1 (YB5-E2-60)** — empty; S5 also has a `180°` cone (YB5-CONE180). **Only S6 survives** — Y5-PIN120's exception. "The survivors are S1–S6" is TRUE as a containment, not as a list of survivors. **(ii) truth, "all with `t_{c+1}` short of the tangent": GAP** — the side's (A) colour clause rests on RAINBOW, which forbids a *second* 5/6 tile, not `Λ_c` itself wrapping round `r_c` to `q_c`; that full wrap imposes no cone condition (the cone list is unchanged) but has `λ_c > 0`. **(iii) wording:** "PXKILL at `k = c + 1` reads no pocket beside `t_{c+1}`" — it reads POCKET at `w_{c+1}` (`μ_c`, the pocket on `t_{c+1}`'s counter-clockwise side); it reads none on its clockwise side, where E2 breaks POCKET. The side's own §3.2 says it correctly |
+| 7 | HALF | "They read only `t_1`, its two tactic tiles and the sectors at `p` of the tiles beside it. Every tile at `p` has a cone of at least `60°`, so `t_2`'s sector contains the directions near `120°` and `t_4`'s those near `270°`, which is all D2T uses." (§4.2) | TRUE when `t_2`'s cone `> 60°` and `t_4`'s `≥ 60°`; GAP at the boundary subcases (1b item 7) | **truth:** (a) "every tile at `p` has a cone of at least `60°`" is REG60's, which holds for tiles **inner** for an edge; `t_4` is inner for none, and nothing held bounds its cone below; (b) D2T does not use only first-order directions: its step (`s·e(120° − δ)` with `s > 2 sin δ` inside the tile) needs the edge at `120°` to curve **away** from `q1`. At `t_2`'s cone exactly `60°` the edge is an arc of `ω(q1)` with `t_2` inner, the curvature flips (my H1a/H1b), and **`q1 ∈ cl t_2` is forced** — D2T's first clause is FALSE there. At `t_4`'s cone below `60°`, `q2 ∈ cl t_4` is not excluded, and (a new step, below) the configuration with `{c(X1), c(X2)} = {5, 6}` is **empty**: `W`'s tile at `q2` has no colour. "The stop at `√3` is not inherited": both records read it as a statement about the proof's reach — agree |
+
+### 2.3 One step added at stage 2: HALF's second boundary subcase [hand; mine]
+
+**YB5-HALF4.** *In a Reuleaux `(2, 1, 1, 0)` pattern (1b item 7's frame), if `t_4`'s cone is below `60°` then `X1 = t_2` or `X2 = t_4`* — so SIDES' clause 2 fails, or
+no such fragment exists. *Proof.* Suppose `X1, X2` are 5/6 tiles. `t_3`'s sector reaches `θ_3 > 240°`, so `t_3` has directions within `90°` of `330°`: colour
+3 is blocked near `q2` (my H4) and `t_3 ∌ q2`. The tile `W2` at `q2` just outside the ring arc (direction `60°⁻`): not 1 (`t_1`), not 2 (`t_2` has `60°⁺`, within `90°`
+of `−30° + κ`), not 3 (blocked), not 4 (`t_4` has `300°⁻`), not `c(X1)` (it points at `q1`, so it would be `X1`, which has points more than 1 from `q2`), not
+`c(X2)` (`X2` is at `q2` in another sector, `t_1` and `T2` between). No colour. ∎ With `X2 = t_4` (E1 on `S2`) the tile `W` has the 5/6 colour `c̄(X1)`, not 3.
+
+### 2.4 Verdicts after the comparison
+
+| # | statement | verdict | minds |
+|---|---|---|---|
+| 1 | E1FORM | **TRUE** | two, one blind (Y6; YB5) |
+| 2 | E1Q3 | **TRUE** (its "no E2 at `t_3`" is not used) | two, one blind |
+| 3 | E1OMEGA | **TRUE** | two, one blind |
+| 4 | E1CAP | **TRUE except `λ_3 = α_3 − 60°`: GAP** (the wrap of `μ_2` round `t_4`'s ring corner, FS114-YB4-WRAP, not excluded by either record); every other clause TRUE by two routes at the whole-arc step | two, one blind; the GAP mine |
+| 5 | E1K1 | **TRUE**; its "and `T_4` fills the corner" is implied by the other condition (both records); the side's "is not `μ_1`" step completed by the lens cross-cut | two, one blind |
+| 6 | E2RED | **TRUE** as to what E2 breaks and the exclusion of `P_x`; **"the survivors are S1–S6": TRUE as a containment, sharpened to S6 alone** (S1 by PXKILL at `k = c + 1`; S2–S5 by YB5-E2-60; S5 also by YB5-CONE180); **"all with `t_{c+1}` short of the ring's clockwise tangent at `q_c`": GAP** (a full wrap of `Λ_c`) | the chain two minds, one blind; the sharpening and both GAPs one mind (mine) |
+| 7 | HALF | **MISSTATED**: TRUE with the hypothesis "`t_2`'s cone exceeds `60°` and `t_4`'s is at least `60°`"; at `t_2`'s cone `60°` D2T's first clause is FALSE; at `t_4`'s below `60°` the configuration with SIDES' clause 2 is empty (YB5-HALF4); the side's justification ("every tile at `p` has a cone of at least `60°`"; "the directions near `120°` … is all D2T uses") does not hold for `t_4` and misses D2T's curvature step | two, one blind, for the corrected statement; the correction mine |
+
+**Are the residues Y6 names exactly what its chain misses?** **E1:** E1-Z, E1-60, E1-ν match my (iii), (i), (ii) exactly, and both records list E1 at two
+edges and E1 with E2 as untreated; **one more**, outside the kill: the wrap at `q_3` (E1CAP's `λ_3`), which the side treats as derived. **E2:** the chain misses
+**S6 alone**, not S1–S6; and inside S6 (and in every E2 case) the full wrap of `Λ_c` at `q_c`, which the side's "(B′) only" does not name.
+
+### 2.5 A family that failed (template item 3)
+
+No family was constructed this round (Y6 built nothing; its "would-have-searched" log says so). S1–S6 are derived normal forms, not a search image: their free
+parameters are the cones (one or two per family) and, unconstrained by either derivation, the edge lengths and pocket shapes. **The reasons each fails, where
+it fails:** S1 by one reason for every member (PXKILL at `k = c + 1`: `T_{c+1}` and `O_{c+2}` straddle beside `μ_{c+1}`), S2–S5 by one reason for every member
+(YB5-E2-60), neither the side's; S6 fails for no reason either record has.
+
+### 2.6 Proposed edits for the close (standing rule 7: I edit none of these files)
+
+- `LEDGER.md` § B and FS-114's derivation file: FS114-Y6-E1FORM, -E1Q3, -E1OMEGA, -E1K1 at **two minds, one blind** (Y6; YB5); -E1CAP likewise **with
+  `λ_3 = α_3 − 60°` marked GAP** (the wrap); -E2RED with its survivor list **sharpened to S6** and "short of the tangent" marked GAP; -HALF **corrected** to
+  "when `t_2`'s cone exceeds `60°` and `t_4`'s is at least `60°`"; YB5-E2-60, YB5-CONE180, YB5-CAP2, YB5-F0 (= S1's kill), YB5-HALF4, YB5-CHK.
+- `plans/FRONTIER-STUBS.md`, FS-114's row: the pinwheel's residues are E1-Z, E1-60, E1-ν (plus E1 at edges `{1, 2}`, `{1, 4}`, E1 with E2) and, under E2, the one
+  family S6 `(120°, b, 180° − b, 60°)` (E2 at the blade two past the `120°` tile, Y5-PIN120's exception); the wrap at a (A)-centre is a standing GAP of the
+  chain (YB4-WRAP), now in E1CAP's `λ_3` and in E2's "short of the tangent" too.
+- FS114-Y4-SIDES / YB3-D2T / Y4-W as used for the Reuleaux `(2, 1, 1, 0)`: cite them with the cone hypothesis.
+- No bibliography rows: nothing new was read.
+
+## Stage 2 — SAVED
