@@ -1,0 +1,12 @@
+slot: admitted python3: mem 4 GiB (hard cap), cpus 0
+brick (row 33; cells 4/5 x 3/5, shear 2/5, colour (i + 3j) mod 7): same-colour pairs the object has with a first tile among the representatives: 11; examined: 11; rejected []; tight at 1: 3; VERDICT ACCEPT
+   plant beside it: rejected [('b-1,-2', 'b0,0'), ('b0,0', 'b0,0'), ('b0,0', 'b1,2')]; predicted [('b-1,-2', 'b0,0'), ('b0,0', 'b0,0'), ('b0,0', 'b1,2')]: AS PREDICTED
+hexagonal seven-colouring (side 1/2): same-colour pairs the object has with a first tile among the representatives: 7; examined: 7; rejected []; tight at 1: 1; VERDICT ACCEPT
+   plant beside it: rejected [('h0,0', 'h0,0')]; predicted [('h0,0', 'h0,0')]: AS PREDICTED
+the strip (FS112-YB2's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 82; examined: 82; rejected []; tight at 1: 54; VERDICT ACCEPT
+the disk (FS112-YB2's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 71; examined: 71; rejected []; tight at 1: 46; VERDICT ACCEPT
+FS112-BOWTIE (FS112-YB3's builder, unedited): same-colour pairs the object has with a first tile among the representatives: 21; examined: 21; rejected []; tight at 1: 6; VERDICT ACCEPT
+   plant beside it: rejected [('G', 'H')]; predicted [('G', 'H')]: AS PREDICTED
+CALIBRATION PASSED
+exact zero tests used: 17688
+ALL PASSED

@@ -9,12 +9,23 @@ is not known to be non-empty. Stage 1 (my verdicts) is committed before I open `
 
 ## Theorems this phase proved
 
-*(Filled at the end of stage 1c; stage 2's verdicts after comparison are §2.)*
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| YB5 verdicts on FS114-Y6's seven statements (stage 1, blind) | E1FORM, E1Q3, E1OMEGA, E1K1 TRUE; E1CAP TRUE but its `λ_3 = α_3 − 60°` a GAP (the wrap); E2RED's chain TRUE, survivors by my derivation one family F2, "all short of the tangent" a GAP (a full wrap of `Λ_c`); HALF TRUE when `t_2`'s cone `> 60°` and `t_4`'s `≥ 60°`, a GAP at the two boundary subcases (D2T's first clause FALSE at `t_2 = 60°`) | hand; mine, blind | stage 1b |
+| YB5-E2-60 | E2 at a blade of cone `60°` holds only with E1 at one of its two edges (a width-1 Reuleaux triangle has diameter pairs only through a corner) | hand; mine | 1b item 6 |
+| YB5-CAP2 | in E1 at edge 1 (edges 2–4 below `60°`, no E2 at `t_3`, `t_4`), `L_1` has no inside part: the case with one is emptied by a Jordan curve through `T_4` and `t_2` | hand; mine | 1b item 4 |
+| YB5-F0 | with E2 at `t_{c+1}` and nothing at `q_c`, the cone family `(180° − b, b, c, 180° − c)`, `b + c ≤ 180°`, is killed by PXKILL at `k = c + 1` | hand; mine | 1b item 6 |
+| YB5-CONE180 | every cone of a pinwheel is below `180°` (at `180°` edge `j + 1` leaves `B̄(q_j, 1)`) | hand; mine | 1b preamble |
+| YB5-CHK | an exact `ℚ(√3)` named-point checker: 31 of 31 as registered, four plants each failing exactly its predicted check | tools | 1c.2 |
 
 ## Would have searched here (standing rule 3)
 
 | stage | move I would have made by search | what I did instead |
 |---|---|---|
+| 1b | enumerate colour assignments at `q_4`, `q_1`, `v_2` in E1 to see which survive | derived each colour's exclusion from the tile at `p` or at a centre that points at the vertex, one colour at a time |
+| 1b | enumerate cone quadruples under E2 | derived the four disjunctions and enumerated the cases by which cones equal `60°` (seven cases, by hand) |
+| 1b | build an E1 fragment by formula to see where the chain breaks | none built: the residues are named in the derivation |
+| 1c | scan probe radii near the Pointing boundaries | registered one probe per check; the one that sat on a boundary is recorded (run 1) |
 
 ## Fence log (standing rule 13; the template's and the instance's fences)
 
@@ -261,3 +272,38 @@ between `T_1` and `μ_1`, and, outside the kill, (iv) the wrap of `μ_2` at `q_3
 and, inside it, the full wrap of `Λ_c` at `q_c`.
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: my exact checks, their calibration, and the plants
+
+### 1c.1 Calibration of the object checker this round leans on (`yb3-calib-rerun.out`, exit 0)
+
+FS114-YB3's checker, **run unedited** (`python3 tools/fs114_yb3_run.py calib` under `scripts/slot.py --mem 4 --cpus 1`): brick **ACCEPT** 11/11 pairs
+examined, hexagonal seven-colouring 7/7, the strip 82/82, the disk 71/71, FS112-BOWTIE 21/21; each plant beside its faithful twin rejected exactly the
+predicted pairs; CALIBRATION PASSED. **No object is given by formula in my instance** (the seven statements are theorems about every valid map), so no
+rebuild is checked by it; the template's "rebuild it from its stated rule" has nothing to act on this round.
+
+### 1c.2 My named-point checker `tools/fs114_yb5_check.py` (`check.out`, exit 0; first run `check-run1.out`)
+
+*Method:* exact arithmetic in `ℚ(√3)` (`a + b√3`, Fractions, the sign decided by `a²` against `3b²`), directions as `e(30k°)` times rational
+Pythagorean rotations (`5.72°`, `11.42°`, `36.87°`); every verdict is a squared distance against 1, printed `<1`, `=1` or `>1`; predictions registered in
+the docstring before the first run. **Run 2: 31 of 31 as registered:**
+- controls: the brick's cell diagonal, the side-`1/2` hexagon's diameter and the Reuleaux width, each `=1`;
+- E1FORM: points of the cap's corner cone at `p` outside `B(q_1, 1)` (F1a, F1b), a direction past `ω(q_1)`'s tangent inside it (F1c), one past the Reuleaux
+  corner outside `B̄(q_4, 1)` (F1d); at `α_2 = 120°` edge 2's point `> 1` from `q_4` (F2);
+- E1OMEGA: `Z` within `< 1` of `w_4` (O1) and of `t_3`'s point (O2), `> 1` from `q_1` (O3);
+- E1CAP: `Z_1` within `< 1` of `q_4` (K1); a point of the lens outside the ring inside `B̄(q_1 + q_4, 1)` (K2a–c); `t_4`'s directions `84.28°` and `215.72°`
+  inside `B(q_1, 1)`, `B(q_4, 1)` (K3a, K3b), and `150°` outside both (K3c, control);
+- E1K1: a point at `q_1` in direction `60°` more than 1 from `q_4` and from `Ω`'s point (X1a, X1b: colour `m_2` not blocked there); the corner direction
+  `335.72°` at `q_4` within `< 1` of `q_1` (X2); `|v_2 − q_2| < 1`, `|v_2 − v_3| > 1` at `α_2 = 90°` (X3a, X3b);
+- YB5-E2-60: two non-corner boundary points of a width-1 Reuleaux triangle `< 1` apart (R1), a corner against the opposite arc `=1` (R2);
+- HALF: at `t_2`'s cone `60°` the point `(1/4)e(114.28°)` is outside `B̄(q1, 1)` and outside `B̄(q3, 1)` — the curvature flip between the two patterns (H1a,
+  H1b); at `θ_3 = 240°` `t_4`'s point `(1/4)e(245.72°)` is `> 1` from `q2` (H2); at `θ_3 > 240°` a point of `t_4` is `< 1` from `q2` (H3); `t_3`'s point
+  `(1/10)e(245.72°)` is `< 1` from `W`'s point near `q2` (H4).
+**Plants, each failing exactly its predicted check for its own reason** (`check-plant-*.out`, exit 0): `ell0` (w4 at `Z`'s own angle, distance²
+`1 + s²`) fails O1; `q4wrong` (`α_1 = 71.42°`) fails K1; `near` (`s = 1/20 < 2 sin 5.72°`) fails H1a; `side` (`t_4`'s direction on the wrong side of edge
+4's tangent) fails K3b.
+**Run 1, recorded (`check-run1.out`): 30 of 31, mine, not the statements':** H4's probe `(101/100)e(335.72°)` sat exactly `90°` from `t_3`'s direction
+`245.72°` (the boundary of the Pointing window), so it read `>1`; run 2's probe (a direction of `W` at `q2`) was registered before the run. The checks
+confirm the inequalities at named values; the proofs are stage 1b's derivations.
+
+## Stage 1c — SAVED
