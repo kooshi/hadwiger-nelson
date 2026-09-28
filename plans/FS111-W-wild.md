@@ -22,6 +22,7 @@ FS-114's files fenced). Working files: `data/fs111/fs111-w/`; exact checks: `too
   outer) or on a unit arc of kind both. [hand, one mind; the `C^{1,1}` step a standard fact about the uniform ball condition] Stage 2 §2.2.
 - **FS111-W-NOBEND**, **FS111-W-CURV** — corollaries of C11: no bend; curvature `≤ 1`. [hand, one mind] §2.2.
 - **FS111-W-NOREP** — at a cone vertex of a saturated colouring no colour occupies two sectors. [hand, one mind] §2.3.
+- **FS111-W-KB-DIR** — at the centre of a unit arc of kind both, the inner colour's sector points toward the arc. [hand, one mind] §2.3.
 - **FS111-W-LADDER** — a flat edge of a saturated map carries interfaces at every unit translate along its normal, with the colour rule
   `β_{k+1} = τ_{k−1}`. [hand, one mind] §2.4.
 - **FS111-W-HEXSAT** — a regular hexagonal tiling is saturable only at width `1/m`; at width `1/2` exactly nine colours; no recolouring of hex7's
@@ -203,15 +204,25 @@ sectors between them have positive angle, each sector is one colour, and H2 hold
 pairwise distinct colours. In particular a saturated map has no bichromatic vertex of degree `≥ 4` and no vertex with a repeated colour.
 
 *Proof.* Let sectors `A, A′` have colour `a`, and `r` an edge of `A` with unit normal `n` at `x` pointing out of `A`. For `p ∈ r` near `x`, C11 at
-`p`: in case (i), `a`'s contact is `y_a(p) = p + n(p)` and (C-HULL at `p`) the `a`-piece at `y_a(p)` lies outside `B̄(p, 1)` — if it lay inside, the
-fat `a`-regions near `p` (on the `−n` side) and near `y_a(p)` (on the `−n` side of it) would contain pairs at every distance near 1, a violation. As
-`p` runs over a subarc of `r`, the points `y_a(p)` sweep an arc near `x + n` with a set of positive measure of `a`-density points just beyond it.
-If `A′` contains a direction `δ` with `δ · n > 0`, the unit circles about those points cut `A′` near `x` in arcs of positive length, a set of
-monochromatic unit pairs of positive `Leb ⊗ σ` measure: violation. In case (ii), `r` is a unit arc of kind both centred at `y ≈ x − n`, and the
-`a`-piece at `y` is within distance `< 1` of `A`, so `y`'s piece, `A` and `A′` (which touches `A` at `x`) lie in one block, whose diameter is at most
-1; hence `A′ ⊂ B̄(y, 1)`, which near `x` is the closed half-plane on `A`'s side of `r`'s tangent. Either way `A′` lies in that closed half-plane; by
-the same argument at `A`'s other edge `r′`, `A′` lies in the intersection of the two closed half-planes, which is `A` itself when `A` is convex and a
-subset of `A` when it is not. `A′` has interior directions outside `A`: contradiction. ∎
+`p` gives one of two cases.
+- *Case (i).* `a`'s contact is `y_a(p) = p + n(p)`, and (C-HULL at `p`) the `a`-piece `Q′` at `y_a(p)` lies outside `B̄(p, 1)`: were it inside,
+  C11 at `y_a(p)` gives `Q′` an interior unit disc tangent at `y_a(p)`, i.e. `Q′ ⊃ B(p, 1)` near `y_a(p)`, and the points `y_a − εn + √ε·w`
+  (`w ⊥ n`) of `Q′` and `p − (ε/2)n` of `A` are at distance `1 + O(ε^{3/2})`, varying through 1 — a positive measure of monochromatic unit pairs.
+  So as `p` runs over a subarc of `r`, the points `y_a(p)` sweep the parallel curve near `x + n` with `a` on its far side, fat along its length.
+  If `A′` contains a direction `d′` with `d′ · n > 0`, then for `δ = ρd′ ∈ A′` the distance `|y_a(p) − δ|` is `≈ 1 − ρ d′·n < 1` at `p = x` and
+  exceeds 1 once `|p − x| > √(2ρ d′·n)`: the unit circles about the `a`-points beyond the curve cut `A′` in arcs of positive length — a violation.
+- *Case (ii).* `r` is a unit arc of kind both centred at `y ≈ x − n`, `a` inside; H-DEN gives `a` a sector `Q` at `y`. *First, `Q` points toward
+  the arc:* for `q = y + εm ∈ Q` and `a′ = p − tu + ℓw ∈ A` inside the disc (`u = p − y`, `|a′ − y|² = 1 − η`, `η > 0`),
+  `|q − a′|² = 1 − η + ε² − 2ε(1 − t)(m·u) − 2εℓ(m·w)`, which takes the value 1 on a set of positive measure as soon as `m·u < 0` for some `m ∈ Q`
+  and `u` in the arc's span; so `m·u > 0` on `Q`. *Then:* for `δ = ρd′ ∈ A′` with `d′·n > 0` and `q = y + εm ∈ Q` (`m·n > 0`),
+  `|q − δ|² = 1 − 2ε(m·n) + 2ρ(d′·n) + O(ε² + ρ²)`, and the two first-order terms have opposite signs: 1 is taken on a set of positive measure — a
+  violation.
+
+So in both cases `A′` lies in the closed half-plane on `A`'s side of `r`'s tangent at `x`. By the same argument at `A`'s other edge `r′`, `A′` lies in the
+intersection of the two closed half-planes, which is `A` itself when `A` is convex and a subset of `A` when it is not; `A′` has interior directions
+outside `A`: contradiction. ∎ *(Correction before this stage's commit was read by anyone: the first draft closed case (ii) by putting `y`'s piece, `A`
+and `A′` in one block, which a.e.-properness does not give — "within distance `< 1`" is not transitive. The direct computation above replaces it, and
+it yields a small fact of its own, **FS111-W-KB-DIR**: at the centre of a unit arc of kind both, the inner colour's sector points toward the arc.)*
 
 ### 2.4 FS111-W-LADDER — a flat edge of a saturated map carries a ladder of interfaces at unit spacing  [hand, one mind]
 
@@ -255,7 +266,7 @@ also removes it.
 
 | claim | verdict | grade, minds | evidence |
 |---|---|---|---|
-| **C-SAT-T** | **TRUE at `k ≥ 9`; GAP at `k = 7, 8`** — as written (modification unrestricted) it is TRUE at `k` iff a saturated a.e.-proper `k`-colouring exists; SQ9 and HEX9 give `k ≥ 9`; at `k = 7, 8` none is known, and any would have to have `C^{1,1}` interfaces of curvature `≤ 1` (C11), no bend, rainbow vertices (NOREP), flat edges only in unit ladders with `β_{k+1} = τ_{k−1}` (LADDER), and unit arcs only of kind both; the two tight seven-colourings held (hex7, brick7) cannot be recoloured into one (HEXSAT (2)). At `k ≤ 6` its negation implies `χ_m⁰(ℝ²) ≤ k` (W-NEG) | [tools, exact] for `k ≥ 9`; [hand, one mind] for the structure | §1.5, §2.2–§2.4 |
+| **C-SAT-T** | **TRUE at `k ≥ 9`; GAP at `k = 7, 8`** — as written (modification unrestricted) it is TRUE at `k` iff a saturated a.e.-proper `k`-colouring exists; SQ9 and HEX9 give `k ≥ 9`; at `k = 7, 8` none is known, and any would have to have `C^{1,1}` interfaces of curvature `≤ 1` (C11), no bend, rainbow vertices (NOREP), flat edges only in unit ladders with `β_{k+1} = τ_{k−1}` (LADDER), and unit arcs only of kind both, the inner colour pointing toward the arc (KB-DIR); the two tight seven-colourings held (hex7, brick7) cannot be recoloured into one (HEXSAT (2)). At `k ≤ 6` its negation implies `χ_m⁰(ℝ²) ≤ k` (W-NEG) | [tools, exact] for `k ≥ 9`; [hand, one mind] for the structure | §1.5, §2.2–§2.4 |
 | C-SAT-T, the **fill reading** (the brief's "fills never saturate") | **TRUE in the weak sense, and it is the reason saturation is a limit**: FS111-W-FILL-FREE — after a fill on `B(x, η/2)` at a `j`-free `x` (`A_η(x) ∩ S̃_j` null), every new `j`-boundary point `y` is `j`-free (`A_{η/2}(y) ⊂ A_η(x)`); so no finite sequence of fills creates a contact for the filled colour, and fills are not monotone (the colours removed may become free at the new boundary). Starting from hex7 no fill sequence can reach a saturated colouring with hex7's edges (HEXSAT (2)) | [hand, one mind] | §2.4 |
 | **C-HULL-REG** | **TRUE at every bichromatic point with H2 and H-DEN; so TRUE on every saturated map without cusps** (a map's bichromatic points are edge-interior points and bends; NOBEND removes bends, NOREP removes repeated colours, C11 gives a `C^{1,1}` graph, semiconcave and semiconvex). It can fail only at a bichromatic point where H2 fails: a comb or accumulation of components, or a third colour accumulating with density 0. *The named kind it survives:* every saturated map without cusps (G21) | [hand, one mind] | §2.2–§2.3; SQ9, HEX9 as inhabitants |
 | **REG-B_k**, existence form | TRUE at `k ≥ 7` (hex7), not W-refutable at `k ≤ 6` (W-NEG) | [hand] | §1.4 |
@@ -265,17 +276,18 @@ also removes it.
 | REG-I_k, REG-A_k | existence forms TRUE at `k ≥ 7`, not W-refutable at `k ≤ 6` (W-NEG); their universal forms fail at `k = 7` by V0-WIG7 (non-arc smooth interfaces), which I do not re-derive | [hand] | §1.4 |
 | PER, NO-C2 | not W-refutable (W-NEG: their failure is a six-colouring). *A bearing for M:* if route M passes through saturation, the NO it needs is for `C^{1,1}` interfaces of curvature `≤ 1` with rainbow vertices and kind-both unit arcs (C11, NOREP) — a class neither contained in NO-C2's (`C²`) nor containing it, and much smaller than NO-C2's in its curvature | [derived] | §2.2 |
 
-### 2.7 Where C-HULL-REG could still fail: the island obstruction (a reading, with its test)
+### 2.7 Where C-HULL-REG could still fail: small pieces and their rings (a reading, with its test)
 
-A bichromatic point `x` violating H2 through a third colour `c` accumulating at density 0 needs small `c`-pieces near `x`, each saturated. A
-`c`-piece `Q` of diameter `< 1` has no inner contact except within a block of diameter exactly 1, and its outer contacts lie on the outer parallel
-curve `∂N₁(Q)` at distance 1. If `Q`'s boundary is smooth, its outer-contact points form a closed curve of diameter `≥ 2` whose `c`-pieces are
-chained at mutual distance `< 1`, i.e. one block of diameter `≥ 2`: impossible. So a small piece must be polygonal with corners (its facing
-partners break at the corner arcs, of chord `2 sin(θ/2)` for an exterior angle `θ`, which must be `≥ 1`: at most six sides), and its partners
-are facing edges at distance exactly 1 — themselves small where the pieces near `x` differ in position by less than their size, so the
-accumulation propagates to the points at distance 1 along the ladders (§2.4). *Reading:* **a saturated colouring with a bichromatic point where a
-third colour accumulates is a web of accumulation points closed under the ladder translations, and none exists.** *Killing test:* such a web
-given by formula (a self-similar or lattice-periodic saturated colouring with accumulating polygonal islands). [reading, one mind]
+A bichromatic point `x` violating H2 through a third colour `c` accumulating at density 0 needs small `c`-pieces near `x`, each saturated. By the
+tangency in C11's proof, every boundary point `p` of a small `c`-piece `Q` has a `c`-contact `y(p) = p ± n(p)` with a `c`-piece tangent to `T₁(p)` at
+`y(p)`: *outer* (beyond distance 1) or *inner* (within, `Q ⊂ B(y, 1)`, so that piece stays within distance `≤ 1` of all of `Q`). So `Q` is ringed, at
+distance ≈ 1 in every normal direction of its boundary, by `c`-pieces tangent to its unit parallel curves; by NOREP two ring pieces cannot touch at a
+cone point, so a ring covering a smooth `Q`'s whole parallel curve is one `c`-piece of diameter `≥ 2` unless inner and outer arcs alternate. As the
+small pieces accumulate at `x`, their rings — all near the unit circle about `x` — must be tangent to every one of them at the right depth, which
+forces `c`-boundaries at many depths near that circle: the accumulation propagates to distance 1. *Reading:* **no saturated colouring has a
+bichromatic point where a third colour accumulates.** *Killing test:* a saturated colouring given by formula with such a point (a web of
+accumulation points closed under the unit translations along the rings). [reading, one mind; the first draft's "a smooth small piece is impossible"
+is withdrawn — it chained pieces through a transitivity a.e.-properness does not give]
 
 ### 2.8 Registered (instruments for G21, scored at the close)
 
