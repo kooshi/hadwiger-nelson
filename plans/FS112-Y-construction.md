@@ -534,3 +534,15 @@ steps; its first (a second positive with a different skeleton, read beside the s
 carries `{R, G, Yw, P}` — consistent with the words (the thread's colour numbering is not held).
 
 ## Stage 5 — SAVED
+
+## Stage 6 (in progress): the dial (A3-2.3 step 2)
+
+### 6.0 Registered before the move is checked (G21)
+
+The pinned-corner reading ran first (`python3 tools/fs112_y2_dial.py pin`, `data/fs112/fs112-y/y2_dial_pin.out`; results in 6.1). **The move** (derived in
+6.2): in every sector, `R_k`'s straight sides `Z^R_kD_k` and `C_kZ^L_k` are replaced by the unit arcs of `ω(C_k)` and `ω(D_k)` through the same ends, the
+lenses going to `R_k`. Predictions:
+- the moved disk ACCEPTs (71 pairs); its ten new arcs are all of kind **in** (self in-contact only: no tile beyond the rim carries their outer colours yet);
+- at `C_0 + e(θ)/100`: `R` free at 18°, 36°; `G` free at 90°, 108°, …, 180°; `P` free at 180°; **no colour at 54°, 72°** (the wedge `(54°, 90°)` stays);
+- at `D_0 + e(θ)/100` (the mirror, with `U_0` and `U′_4` exchanging roles): `G` and `P` at 0°; `P` at 18°…90°; **no colour at 108°, 126°**; `R` at 144°, 162°;
+- plant `move_wrongside` (the left arcs about the reflection of `D_k` in the chord, bulging into `R_k`): REJECT at exactly the five `(U_k, U_k)`.

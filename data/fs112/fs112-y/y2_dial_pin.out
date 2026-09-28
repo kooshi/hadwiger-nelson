@@ -1,0 +1,15 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== the pinned-corner reading at the two stop points (exact)
+-- strip, Q = (1/4, top) [the pair (V_0, A_1)]: tiles straddling distance 1 at the stop point itself (colour blocked in a whole neighbourhood of it)
+   A-1(3) straddles; A0(1) straddles; A1(2) straddles; C-1(4) straddles; C0(5) AT the point; C1(6) AT the point; C2(4) straddles
+   colours of the tiles at the point: [5, 6]; colours blocked at the point itself by a straddling tile: [1, 2, 3, 4]
+   free colours at Q + e(theta)/100 outside the object: 0: -; 30: NONE; 60: NONE; 90: NONE; 120: NONE; 150: NONE; 180: -
+ok       strip: Q's own colours {5, 6}; every other colour straddles at Q; no colour at the named directions strictly inside (30, 165.52) deg
+ok       strip: the pinned partners V_0 (colour 5 at it) and A_1 (colour 6 at it) are at distance exactly 1 from Q
+-- disk, C_0 [the pair (B_0, Z^R_0)]: tiles straddling distance 1 at the stop point itself (colour blocked in a whole neighbourhood of it)
+   R_0(R) AT the point; T1_0(O) straddles; T2_0(Bl) straddles; U_0(P) AT the point; Up_0(Yw) straddles; Up_4(G) straddles
+   colours of the tiles at the point: ['P', 'R']; colours blocked at the point itself by a straddling tile: ['Bl', 'G', 'O', 'Yw']
+   free colours at Q + e(theta)/100 outside the object: 18: ['R']; 36: ['R']; 54: NONE; 72: NONE; 90: NONE; 108: NONE; 126: NONE; 144: NONE; 162: NONE; 180: ['P']
+ok       disk: C_0's own colours {R, P}
+ok       disk: at distance exactly 1 from C_0: Z^R_0 (in R_0), B_0 (in U_0) and D_0 (a corner of U'_4)
+ALL AS EXPECTED
