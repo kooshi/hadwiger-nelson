@@ -210,3 +210,53 @@ CB's "`= 1` is (P′)" reaches this conclusion without the step that the third c
 the complement of `M`" (a 3-set). *Seven colours:* the complement has four colours and the step fails, as it must.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the verdict; proposals for the close
+
+### 3.1 The verdict
+
+**FS112-N3-DENSE3 and FS114-CV-EXISTS are intact.** No step on the path N3-COR3 → N3-BASE → N3-DENSE3 → CV-EXISTS (with FS112-N2-RED and N2-TERM under it) uses
+the strict bound; every citation of "`< 60°`" there uses `0 < ℓ ≤ 60°` or only `0 < ℓ < 180°`, and the equality case passes each step (§2.1). **No
+configuration escapes**; the owner was therefore not messaged before this stage. The equality case is not new ground for FS-114: it is the Reuleaux bowtie's
+cap (N3-DR (ii); N4 §4.2), where the stated L60 would have forced a middle tile that the corrected statement does not. [hand, one mind; tools exact at named
+values: ENV60, COR3 at 55–60°, and stage 1's checks]
+
+**What is false, and where nothing rests on it:** FS112-L60 as stated (at exactly 60°; N4, confirmed); its second clause in N's ends reading (at exactly 60°);
+NB's C-UA-CHAIN aside "(and `α` alone, `< 60°` by NB-L60, covers at most one point of an orbit)" (at exactly 60°, both halves); the two printed proofs of
+"`< 60°`" (at exactly 60°, by different steps).
+
+### 3.2 Selection audit (G21)
+
+The result closes the door the owner hoped closed, so it was pushed against at the rate of one that opens it:
+1. **Implicit uses.** Searched the named records for the strict bound under other names — "at most one point of an orbit", "ends … less than 1 apart",
+   "chord" (`grep`, §2): found NB's aside (row 15, false at equality, no dependant) and CB D5 item 1's `< 60°` arc (row 3, not L60's; completed as L60-D5).
+2. **The equality case's own new features, each against the steps that could read it:** a 60° arc of `ω(w)` leaving a cubic `u` ends on `ω(u)` at
+   `σ_u^{±1}(w)` (COR3, FAIL: no step reads that point); both side tiles hold both ends, 1 apart (N3-P′ at the ends: the pair cannot have one multicolour —
+   consistent with N3-P′, checked by hand); the lens's far corner `C` (N2-ENV's near-tile clause: exact at four named lens points, ENV60).
+3. **The one check whose range excluded equality** — NB3's COR3 cone model (arcs 5°–50°) — re-run at 55°, 59°, 60°, green.
+4. **Not done:** a blind second mind on the walk; N2-ENV's formula checked at 60° only at named points against `C`, not over all of `∂I`.
+
+### 3.3 Registered (G21 instruments, for the close to score)
+
+| id | prediction | p | both outcomes reachable |
+|---|---|---|---|
+| L60-P1 | a blind second mind given the corrected FS112-L60 and the chain (N2-RED, COR3, BASE, DENSE3, CV-EXISTS) finds no step that needs `ℓ < 60°` | 0.85 | a step using the strict bound under another name, or the equality case breaking a step, refutes it |
+| L60-P2 | a blind second mind confirms L60-EQ's inner clause (`T_in ⊆ Reul(P, A, B)` at 60°) and L60-2's split | 0.9 | a 60° arc whose inner tile leaves `Reul(P, A, B)`, or a side-colour tile at `w ± 60°` for interior `w` |
+
+### 3.4 Proposed for the close (I edit none of these files)
+
+- **`plans/FS112-derivation.md` FS112-L60** (l. 66–68), replace the statement by §1.3's proposed text; *Proof verdict:* "FALSE at exactly 60° as first stated
+  (FS114-N4-L60); both printed proofs break there by different steps (FS114-L60 L60-PROOFS); TRUE as corrected"; *Rests on it:* "nothing needs the strict bound —
+  FS112-N2-BENDS, FS112-N2-RED, FS112-N3-NOBOTH, FS112-N3-COR3 and FS114-CV-L0 cite it and use only `0 < ℓ ≤ 60°` (FS114-L60 §2)"; the second clause in NB's reading.
+- **`LEDGER.md` l. 1144** (FS112-L60's § B row): "a unit arc with constant sides is shorter than 60°" → "a unit arc with constant sides spans at most 60°; at 60°
+  both side tiles lie in the lens of its ends (FS114-N4, FS114-L60)".
+- **`plans/STUB-global-step.md` l. 47:** "A unit arc is shorter than 60° (FS112-L60)." → "A unit arc with constant sides spans at most 60°, and at exactly 60°
+  its side tiles lie in the Reuleaux triangle and the Reuleaux cap on its ends (FS112-L60, corrected)."
+- **FS-114's derivation file:** L60-LE (with FS114-N4-L60, two minds), L60-EQ, L60-REAL, L60-2, L60-PROOFS, L60-WALK, L60-D5, as filed in this record's table.
+- **FS-112's derivation file, notes:** NB's C-UA-CHAIN aside is false at exactly 60° (no dependant); NB divergence row 9's "both TRUE" holds for NB's reading only;
+  the frames "`ℓ ∈ (0°, 60°)`" (NB3-NOBOTH) and "`0 < ℓ < 60°`" (CVB-L0) read `(0°, 60°]`.
+- **`plans/GROKKING-INSTANCES.md` §G21**, one instance: two minds' proofs of "`< 60°`" broke at the same boundary by different steps, and each tool checked a step's
+  arithmetic (a pair at `10201/10000`; a crossing slope) and never the premise that put the pair in the tile; the only plant sat at 50°, below the boundary it
+  was to test. *Its lesson in one line:* a claim with a boundary gets a plant **at** the boundary, not only one on each side of it.
+
+## Stage 3 — SAVED
