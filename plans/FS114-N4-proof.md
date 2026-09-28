@@ -37,6 +37,7 @@ N3-FLANK, N3-PAIR, N3-ODD. All statements are for **non-Siamese** valid maps (no
 | enumerate sector orders at a Reuleaux corner of the bowtie | derived them: colours excluded one by one (N4-OWN, N3-FACE, N4-HORN), leaving the two orders (O1), (O2) |
 | scan the lune ring's change-point patterns | the dichotomy N4-FIVE by N-E0 on the 120° lune arc (constant on `(30°, 90°)` or not) |
 | check L60 numerically on random arcs | one named counterexample by formula (the Reuleaux cap), checked exactly |
+| build a fragment by formula for the general member (two change points) and push it outward | derived the tile forced near `P90` (N4-GP90, N4-G) and its diameter contradiction; checked at named values only |
 
 ## Fence log (standing rule 13; brief § Fences)
 
