@@ -11,11 +11,25 @@ instance file alone, before `plans/FS114-N5-proof.md` is opened.*
 | id | statement (one line) | grade | where |
 |---|---|---|---|
 | NB5-QT | Every quotation my brief, instance and standing rules rely on whose source is open to me at stage 1 is verbatim: 20 of 20 FOUND; plant fires | [tools] | §1a.2; `tools/fs114_nb5_quotes.py` |
+| NB5-OUT4 | In the Reuleaux bowtie every ring arc of outer colour 4 has outer tile `z4` (then in `(30°, 90°]`) or `z4′` (`[90°, 150°)`) | [hand, one mind] | §1b.0 |
+| NB5-SIGHT | N5-SIGHT: TRUE in the non-Siamese class | [hand, one mind] | §1b.1 |
+| NB5-UP, -DEG, -W | N5-UP, N5-DEG, N5-W: TRUE | [hand, one mind; DEG over N4-D, two minds] | §1b.2, 1b.3, 1c.6 |
+| NB5-R0 | N5-R0: TRUE — with `C ∋ q2`, `C′ ∋ q4`, `z4` and `z4′` bound no ring arc, so the ring is `Γ`-free, general, and N4-G kills it | [hand, one mind; over N4-G, two minds] | §1b.4 |
+| NB5-RVKILL | **(R-V) does not exist on `B̄(p, √3)`**: `T ⊂ B̄(P90′, 1)`, `z4 ⊂ B̄(q1, 1)`, and the direction `60°` at `top` between the externally tangent `ω(q1)`, `ω(P90′)` has no colour; no hypothesis on the bottom lune | [hand, one mind; tools exact at named points] | §1b.5; `tools/fs114_nb5_check.py` G, C, T, D5 |
+| NB5-BOWTIE | **The Reuleaux bowtie (non-Siamese, simple) with any lune rings does not exist on `B̄(p, √3)`** (after the bends): K1-ΓRING closed in that scope, over NB5-RVKILL, N5-DEG, N5-R0, N4-D, N4-G | [hand, one mind] | §1b.5 |
+| NB5-GRING | N5-ΓRING: TRUE as stated (the reduction), at `√3` | [hand, one mind] | §1b.5 |
+| NB5-BEND, -BENDG | N5-BEND: TRUE, its length bound derived for (R2) arcs only (GAP if read for (Q) arcs); N5-BENDG: TRUE | [hand, one mind; over N2-TOWARD, -AWAY, -TAN] | §1c.1, 1c.5 |
+| NB5-KAPPA, -XBAR, -DR1 | N5-KAPPA (in the interior sense of "60° apart"), N5-XBAR, N5-DR1: TRUE | [hand, one mind] | §1c.2, 1c.3, 1c.7 |
+| NB5-RV | N5-RV: structural clauses TRUE, `q1 = t1 | V1 | z4 | U1` (no `W3`: E1 at `q1` against the colour-3 tile at `P90`); **"Not excluded" FALSE** (NB5-RVKILL) | [hand, one mind] | §1c.4 |
+| NB5-PIN0 | N5-PIN0: structural clauses TRUE; "no contradiction at `1 + ε`" not established | [hand, one mind] | §1c.8 |
 
 ## Would-have-searched-here log (standing rule 3)
 
 | move I would have made by search | what I did instead |
 |---|---|
+| a formula fragment for (R-V) at `1 + ε`, pushed outward | derived the kill at `√3` (§1b.5) |
+| a scan of the (Q) arc's end `a` for a length bound | recorded as not derived (§1c.1) |
+| enumerate the tiles at `top`, `q1`, `P90` | colour-by-colour exclusion by hand (§1b.5, §1c.4) |
 
 ## Fence log (standing rule 13; template and instance § Fences)
 
@@ -154,3 +168,119 @@ exhaustion at `top`, which is the kill) and item 5's colour-1 step (`C′ ∌ P9
 is inside `B(P90′, 1)` and the kill evaporates (`check-plant.out`), as it must.* The mirror: (R-V) at `q3` dies at `P90` by the same argument.
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: blind derivations, part 2 (N5-BEND, -KAPPA, -XBAR, -RV, -BENDG, -W, -DR1, -PIN0); the stage-1 table
+
+### 1c.1 N5-BEND — TRUE, with one scope reading [hand, one mind, over FS112-N2-TOWARD, N2-AWAY, N2-TAN (two minds each)]
+
+*Derivation.* A ring arc of the top lune has inner colour in `{2, 5, 6}` and outer in `{4, 5, 6}` (U1-RING). Outer 5 or 6 is absent at `p`: N2-TOWARD
+bends it toward `p`, ends included, into its inner tile's sectors. Outer 4 with inner 5 or 6 and no inner-colour tile along the radius-2 circle: N2-AWAY
+bends it away; isolated radius-2 contacts are cleared by N2-TAN. What is left: outer 4 with inner `t2` (the centre carries 2, 4 and four colours: **(Q)**),
+or outer 4 with inner absent and a witness along an arc of the radius-2 circle (**(R2)**). *Kept:* the lenses lie at the ring, inside the arc's side tiles'
+sectors at its ends, with corner angle chosen small; the four tactic edges are arcs of `ω(q_i)` leaving `p`, the caps are arcs of `ω(p)` outside the lune
+rings, and the partners keep their points at the corners (a bend at an arc ending at `q1` recolours a small corner lens only, and `t2 ∌ q1` by OWN). The
+bends add no colour at `p` or at any `q_i` except, possibly, the second absent colour at a corner (a toward bend of an arc ending there) — which is why the
+ring colours must be read after the bends. *Length:* for an (R2) arc the witness is one tile (two inner-colour tiles along one connected witness arc would
+be close), its closure holds `2e(θ)` across the arc, so `4 sin(ℓ/2) ≤ 1`, `ℓ ≤ 2 arcsin(1/4) ≈ 28.955°` (tools B1). **For (Q) arcs I derive no such bound**:
+a (Q) arc has outer tile `z4` (OUT4) and lies in `(30°, 90°]`, and FS112-L60 (corrected, "at most 60°") is all I have. So I read the statement's "each of
+angular length at most `2 arcsin(1/4)`" as applying to the (R2) arcs; read as applying to (Q) arcs too, it is a GAP in my derivation. *Reads:* a
+neighbourhood of `B̄(p, 2)` (the witness circle), as stated.
+
+### 1c.2 N5-KAPPA — TRUE [hand, one mind]
+
+*Derivation.* (i) `κ(θ + 60°) ≠ κ(θ)`: both off `Γ` — E0 on the ring; one on an (R2) arc with inner colour `c`, the other interior to a `c`-tile — the inner
+tile's points `(1 − ε)e(θ)` and that tile's points `(1 ± η)e(θ + 60°)` are at distances on both sides of 1: E0; both on (R2) arcs — excluded by (ii).
+(ii) Every surviving arc has outer colour 4; two arcs whose 60°-rotations overlap in an interval give outer points `(1 + a)e(θ)`, `(1 + b)e(θ + 60° + γ)`,
+`γ < 0`, at distance `< 1`, and the same tiles hold pairs at distance `> 1`: E0 (tools K1). The statement's "never 60° apart" is true in this interior
+sense; arcs meeting 60° apart only at an end point are not excluded by this argument (tools K2). (iii) An arc containing `top` in its interior would have
+its outer tile `z4` or `z4′` (OUT4), which confine it to `θ ≤ 90°` or `θ ≥ 90°`. (iv) N5-ONE: a constant-`κ` stretch is one tile (ring tiles and (R2) inner
+tiles of one colour within angular distance `< 60°` are close, hence equal), so NB4-RING's argument runs verbatim: at most one change in `(30°, 90°)`. ∎
+*Reads:* `B̄(p, 1 + ε)` and the outer tiles.
+
+### 1c.3 N5-XBAR — TRUE [hand, one mind]
+
+*Derivation.* Residual, `V1` of colour `X̄` at `q1`. `V1 ∩ B(top, 1) = ∅` is N5-UP. `κ ≠ X̄` on `(30°, 90°)`: an `X̄` ring tile or (R2) inner tile there is
+within `< 1` of `q1`, so it is `V1`, which would then meet `B(top, 1)`. `κ(150° − δ) = X` (the ring at `q3` is in `U3`; a (Q) arc cannot end at `q3`, OWN),
+so `κ(90° − δ) ≠ X`, hence undefined: a (Q) arc covers `(90° − δ₀, 90°)`, ends at `top` (N5-KAPPA (iii)), outer `z4` (OUT4). `z4 ∋ q1, top` gives
+`z4 ⊂ B̄(q1, 1) ∩ B̄(top, 1)`; its cone at `q1` lies in `[60°, 240°]` (facing `top`) and `[300°, 120°]` (FACE against `t4`): `[60°, 120°]`. *Just after 90°*: an
+arc there would have outer tile `z4′`, at `top` beside `z4` — close; so the ring is off `Γ` there, in an `X̄` tile (an `X` tile there would be close to `U1`'s
+ring points near `30°`), which is `T` (one `X̄` tile at `top`). *At most one corner:* at both, (Q) arcs with outer `z4` and `z4′` would both end at `top`. ∎
+*Reads:* `B̄(p, 1 + ε)` and `B̄(top, 1)`.
+
+### 1c.4 N5-RV — structural clauses TRUE (one sharpened); "Not excluded" FALSE in my derivation [hand, one mind]
+
+*Derivation of the clauses* (R-V at `q1`; the order at `q1` needs no bottom-lune hypothesis):
+- *`V1 ∌ P90`*: E1 at `P90`. `T`'s cone at `top` contains `[60°, 180°]` (§1b.5 item 4 and XBAR), so its interior crosses `ω(P90)`, whose tangent at `top` is
+  `120°`: `X̄ ∉ P_cl(P90)`.
+- *`P90` carries only 1, 3, 4*: E1 at `P90` also removes `X` (`U1`'s interior at `q1` holds `ω(P90)`'s branch leaving `q1` at `180°`) and 2 (`t2`'s cone at `top`
+  is `[β, 360°]` with `β ≤ 300°`, since an `X`-tile there lies in `[240°, 300°]` and `T` in `[60°, 240°]`; it holds `ω(P90)`'s branch leaving `top` at `300°`).
+- *The half-plane `(0°, 180°)` at `P90` only 1, 3*: a colour-4 tile at `P90` other than `z4` is close to `z4`, which holds `top + s·e(30°)` (interior of its
+  cone `[0°, 60°]` at `top`) at distance `1 − s` from `P90`; `z4 ⊂ B̄(q1, 1) ∩ B̄(top, 1)` has its cone at `P90` in `[180°, 300°]`.
+- *`q1`'s cap tile is `V1`, cone containing `[300°, 0°]`, `q1 = t1 | V1 | (W3) | z4 | U1`*: the sector `(300°, 360°)` at `P90` can hold only colour 3 (a
+  colour-1 tile at `P90` faces away from `t1` at `q1`: `[0°, 180°]`; colour 4 as above), so a colour-3 tile `C3` sits at `P90` with cone `⊇ [300°, 360°]`; its
+  interior then holds `ω(q1)`'s branch leaving `P90` at `0°`, so by E1 at `q1`, **`3 ∉ P_cl(q1)`**: `W3` does not exist. The direction `0°+` at `q1` carries
+  `ω(P90)`'s branch; not `3`, so it is in `V1`. With `V1 ⊂` outside `B(top, 1)` (cone in `[240°, 60°]`) and `z4`'s cone in `[60°, 120°]`: **`q1 = t1 | V1 | z4 |
+  U1`, degree 4, `V1`'s cone exactly `[300°, 60°]`, and the `V1 | z4` edge runs along `ω(top)` from `q1`.** The statement's optional `(W3)` is therefore empty
+  (a sharpening, not a disagreement of truth).
+- *`T ∋ P90′`*: §1b.5 item 5 (no hypothesis on the bottom lune needed; the statement's "`C′ ∋ q4`" is not used).
+- **"Not excluded: K1-ΓRING is GAP at (R-V)" — FALSE in my derivation**: (R-V) dies at `B̄(p, √3)` by §1b.5 items 2–6 (the direction `60°` at `top` lies
+  between two externally tangent unit circles, `ω(q1) ⊇ ∂`-side of `z4` and `ω(P90′)` bounding `T`, and no colour is left for it). **The brief's question
+  answered:** yes, (R-V) is excluded within radius 2 — at `√3` — and the step is the colour exhaustion at `top` in direction `60°`, after `T ⊂ B̄(P90′, 1)`.
+
+### 1c.5 N5-BENDG — TRUE [hand, one mind]
+
+It is N2-RED's classification restricted to arcs centred at one vertex: N2-TOWARD removes every arc whose outer colour is absent at the centre, N2-AWAY and
+N2-TAN every arc whose inner colour is absent there and lacks radius-2 support along an arc. Nothing in it uses degree 4 (it reads `P_cl(p)` and the
+radius-2 circle). "Survives … only if" is exactly what the lemmas give; the converse (that such arcs cannot be removed by other moves) is not claimed.
+
+### 1c.6 N5-W — TRUE [hand, one mind]
+
+`colour(T) = 4`: N5-UP makes `z4, z4′` miss `B(top, 1)`; by OUT4 no arc survives the bends; with `X = X′` NB4-RING leaves only the general member. ∎
+
+### 1c.7 N5-DR1 — TRUE [hand, one mind; N3-DR1 re-derived with (R2) arcs]
+
+The `X`-stretch `(30°, s)` is one tile `U1 ∋ q1` (§1c.2 (iv)), the stretch `(s + 60°, 150°)` one tile `U3 ∋ q3`; far (diameter), so FACE puts their
+cones at `y′`, `y″` on opposite sides of `n = y″ − y′`. The `X̄`-stretch tile lies in `B̄(y′, 1) ∩ B̄(y″, 1)` and misses `y′ ± tτ`, `y″ ± tτ`
+(`τ = e(s + 30°)`). At a change point that is an edge point, N3-PAIR puts the edge on the other change point's circle, so the `X` tile holds both tangent
+rays; at an (R2) end the outer `z4` / `z4′` is present. Unblocked, `y′ ± tτ ∈ U1` and `y″ ± tτ ∈ U3` are `X` points at distance 1. Outside, colours 1, 3
+are excluded at `y′, y″` (FACE against `t1`, `t3` at `p`), 2 by `t2 ⊂ B̄(p, 1)`, and a colour-4 tile at `y′` is `z4` (within `< 1` of `q1`); inside, only `t2`.
+So `t2` reaches `y′` or `y″`, and `z4` reaches `y′` or `z4′` reaches `y″`. ∎
+
+### 1c.8 N5-PIN0 — every structural clause TRUE; "No contradiction at this radius" not established [hand, one mind]
+
+With `e_j` between `t_j` and `t_{j+1}`, inner `t_{j+1}`, centre `q_j = p + e(θ_j + 90°)` (N3-HALF (a) puts the centre on the inner side). `α_j ∈ [60°, 180°]`:
+N3-SEC. `t_j ⊂ B̄(p, 1) ∩ B̄(q_{j−1}, 1) ∖ B(q_j, 1)`: diameter, and far from the partner at `q_j`; hence its ring contacts. `c_j, c_{j−1} ∈ P_cl(q_{j−1})`:
+`t_j` and the partner. `c_{j+1} ∉`: N3-HALF (b) (`t_{j+1}`'s cone meets the open half-plane facing `q_{j−1}` unless `α_j = 180°`, and `t_{j+1} ∋ q_{j−1}`
+needs `|q_j − q_{j−1}| ≤ 1`, i.e. `α_j = 60°`). `c_{j+2} ∉` when `α_j + α_{j+1} < 180°`: the same, `|q_{j+1} − q_{j−1}| ≥ √3` (tools P1). The last clause is
+SIGHT at `(q_{j−1}, p)`. "No contradiction" is a claim of existence at `1 + ε`; I derived none and built no fragment: consistent, not established.
+
+### 1c.9 Radii read, the controls, six
+
+| claim | verdict (stage 1) | radius it reads (derived) |
+|---|---|---|
+| N5-UP | TRUE | `B̄(top, 1)` and the tiles at `p, q1, q3` (within `B̄(p, 2)`) |
+| N5-DEG | TRUE | `√3` (N4-D), the bends run on a `√3` fragment |
+| N5-R0 | TRUE (route differs) | `√3` (N4-G's `P90, P90′`) and `q2, q4` |
+| N5-ΓRING | TRUE; my derivation also excludes (R-V) | `√3` (stated 2) |
+| N5-BEND | TRUE, the length bound for (R2) only | a neighbourhood of `B̄(p, 2)` |
+| N5-KAPPA | TRUE ("60° apart" in the interior sense) | `B̄(p, 1 + ε)` |
+| N5-XBAR | TRUE | `B̄(p, 1 + ε) ∪ B̄(top, 1)` |
+| N5-RV | clauses TRUE (no `W3`); "Not excluded" **FALSE** | `√3` (`P90`, `P90′`) |
+| N5-SIGHT | TRUE (non-Siamese) | `B̄(u, 1)` |
+| N5-BENDG | TRUE | the centre's ring and its radius-2 circle |
+| N5-W | TRUE | `B̄(top, 1)` |
+| N5-DR1 | TRUE | `B̄(p, 1 + ε)` |
+| N5-PIN0 | clauses TRUE; "no contradiction" not established | `1 + ε` |
+
+**Controls.** The strip and the disk hold no Reuleaux bowtie (their four-colour vertices carry arcs centred at them, not tactic edges forming two Reuleaux
+triangles; NB4 §1c.3 checked the same), so every kill above fails on them at its hypothesis and none is refuted by them; N5-SIGHT and N5-KAPPA's E0 steps
+hold on both (they are true statements about every non-Siamese valid map). **Six is spent** at colour exhaustions: `top`'s outward tile (N5-UP), the
+direction `60°` at `top` in (R-V), the sector `(300°, 360°)` at `P90`, and N4-D's and N4-G's steps; with a seventh colour each has a colour left.
+**C114-FIVE-COUNT:** not applicable — no claim is a counting claim.
+
+### 1c.10 Would-have-searched log (added)
+
+- A formula fragment for (R-V) at radius `1 + ε`, to see whether it survives to `√3` → not built; the derivation reached the kill (§1b.5).
+- A scan of the (Q) arc's end `a` for a length bound → not done; the bound is recorded as not derived (§1c.1).
+
+## Stage 1c — SAVED (end of the blind stage)
