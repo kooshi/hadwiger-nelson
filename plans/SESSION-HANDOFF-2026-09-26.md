@@ -1,4 +1,7 @@
-# Session handoff — 2026-09-26 (READ THIS FIRST after compaction)
+# Session handoff — 2026-09-26
+
+> **Read `plans/SESSION-HANDOFF-2026-09-28.md` first** (Workflow 3.0, merged 2026-09-28). This file stays the source for FS-114's and
+> FS-111's state (item "0-morning") and for the nights before.
 
 *Written by the product owner (the top-level session) before compaction. Supersedes `plans/SESSION-HANDOFF-2026-09-25-crunch.md` §8 as the
 place to start. Current state only; the history is in the documents it points to and in git.*
