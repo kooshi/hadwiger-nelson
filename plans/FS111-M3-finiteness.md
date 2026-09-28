@@ -139,3 +139,151 @@ the component intervals `J = (a_J, b_J)` of `[−1/2, 1/2] ∖ Z`. In every edge
 *Float view (evaluation of the formula, not a search).* The segment skeleton (bands as segments, `g = 0`) evaluated on a `261 × 261` grid over
 `[−2.6, 2.6]²` about a face centre: 0 points free (neither interior nor on a unit circle about a block); the only "interior and excluded" readings are
 grid points on triangle sides at distance exactly 1 from their bands (boundary artefacts). No parameter was varied.
+
+## Stage 1 — SAVED
+
+## Stage 2 — SAVED: M3-HC — the honeycomb class is a regular MUA set; with a Cantor band it has infinitely many components (MUA-FIN-U FALSE)
+
+### 2.1 Statement
+
+**M3-HC** [hand + tools exact, one mind]. *Let `Z ⊆ [−1/2, 1/2]` be closed and null with `±1/2 ∈ Z`, and HC the set of §1.6. Then HC is a regular MUA
+set: `A = int HC = ⋃ int T_down ∪ ⋃ int U ∪ ⋃_e Λ_e ∪ ⋃ B(O, 1/2)` has no two points at distance 1, `φ_A > 0` almost everywhere off `A`, and
+`HC = supp A`, `|∂HC| = 0`; M2-FIX holds: `int HC = ℝ² ∖ (HC + S¹)`. The components of `Λ_e` are exactly `{(s, t) : s ∈ J, 1 < t < ℓ(s)}`, one for
+each component interval `J` of `(−1/2, 1/2) ∖ Z`.* In particular **HC_K** (`Z` the middle-thirds Cantor set) has infinitely many components of its
+interior in every ball of radius 3 about a face centre — **MUA-FIN-U is FALSE**.
+
+### 2.2 The function `g` and the band
+
+**(G1)** On a gap `J = (a, b)`, `w = b − a ≤ 1`, `x = s − a`, `y = b − s`: `g = x²y²/4`, `g′ = xy(y − x)/2`, `g″ = (x² − 4xy + y²)/2`. So (checked
+symbolically, H4) `0 ≤ g(s) ≤ dist(s, Z)²/4`, `|g′(s)| ≤ dist(s, Z)/2`, `|g″| ≤ 1/2`, `g ≤ 1/64 =: G`, `|g′| ≤ 1/8`. With `g(z) = g′(z) = 0` on `Z` and
+the bound `|g′| ≤ dist(·, Z)/2`, `g′` is continuous on `[−1/2, 1/2]` and `1/2`-Lipschitz across gaps (for `s < z < s′`, `z ∈ Z`: `|g′(s′) − g′(s)| ≤
+(s′ − z)/2 + (z − s)/2`). So `g(s) ≥ g(σ) + g′(σ)(s − σ) − (s − σ)²/4` for all `s, σ ∈ [−1/2, 1/2]`.
+
+**(G2) The three slivers of an up triangle are disjoint and miss the other sides' curves.** A point of side `e`'s sliver, `(s, 2 + τ)` with
+`0 ≤ τ < g(s) ≤ (1/2 − |s|)²/4`, is at distance `≥ (1/2 − |s|)(√3/2 − (1/2 − |s|)/8) ≥ 0.8 (1/2 − |s|)` from the line of the adjacent side at the near
+corner, while that side's sliver near the foot of the perpendicular (within `0.51 (1/2 − |s|)` of the corner) is at most `0.07 (1/2 − |s|)²` thick. So
+`U = T_up ∖ (three disjoint open slivers)`, `U = cl int U`, the graph `{(s, 2 + g(s)) : |s| ≤ 1/2}` lies in `U`, and `U ⊆ {|s| ≤ 1/2, t ≥ 2 + g(s)}` in
+each of its edge frames.
+
+**(G3) The band.** For `|s| ≤ 1/2` and `t < 2`, `d_U(s, t)` is continuous and strictly decreasing in `t` (every `u ∈ U` has `u_t ≥ 2`), so
+`{d_U > 1} ∩ {|s| ≤ 1/2, t < 2} = {t < ℓ(s)}` with `ℓ` continuous; `1 ≤ ℓ(s) ≤ 1 + g(s)` (`(s, 2 + g(s)) ∈ U`), and `ℓ(s) = 1` iff `g(s) = 0` iff
+`s ∈ Z` (`u_t − √(1 − (s − u_s)²) ≥ 1` with equality iff `u = (s, 2)`). Hence `Λ_e = {|s| < 1/2, 1 < t < ℓ(s)}` is open; over each gap `J` it is
+connected (vertical fibres are intervals over a connected base) and different gaps are separated by empty fibres: **its components are the gaps**. Its
+closure is `{|s| ≤ 1/2, 1 ≤ t ≤ ℓ(s)}` and contains `σ_e` (`Z` has empty interior). Its boundary is the segment `σ_e` and the graph of `ℓ`: two Jordan
+arcs meeting exactly on `Z × {1}`.
+
+### 2.3 Unit-avoiding: no two points of `A` at distance 1
+
+- **Blocks are far apart** (H1, exact on a patch; the skeleton is periodic): two triangles `≥ 2`; a triangle and a segment it does not flank
+  `≥ √7`; two segments `≥ √3`; a disc and a triangle `≥ 3/2`; a disc and a segment `≥ √3 − 1/2`; a triangle and each segment it flanks: exactly 1.
+  `Λ_e` lies within `G = 1/64` of `σ_e`, so a band is more than `√7 − G > 1` from every non-flanking triangle and more than 1 from every other band and
+  disc. Against its flanking triangles: `Λ_e ⊆ {t > 1}` and `T_down ⊆ {t ≤ 0}` (distance `> 1`); `d_U > 1` on `Λ_e` (G3).
+- **Inside each block:** triangles, `U ⊆ T_up` and discs have diameter 1, attained only at boundary pairs, so interior pairs are at distance `< 1`.
+  **The band:** for `(s₁, t₁), (s₂, t₂) ∈ Λ_e`, `s₁ < s₂`, put `u₁ = s₁ + 1/2`, `u₂ = 1/2 − s₂`. Then `(s₂ − s₁)² < (1 − u₁ − u₂)²` and
+  `|t₂ − t₁| < max_i (ℓ(s_i) − 1) ≤ max_i g(s_i) ≤ max_i dist(s_i, Z)²/4`, whose square is `< max(u₁, u₂)⁴ ≤ u₁ + u₂`
+  (`±1/2 ∈ Z`); and `1 − (1 − u₁ − u₂)² ≥ u₁ + u₂` (as `u₁ + u₂ ≤ 1`). So `|z₁ − z₂| < 1`. **The band has diameter `≤ 1` because it thins to 0
+  quadratically at both ends** — §1.5's fact 2.
+
+So no two points of `A` are at distance 1; since `HC = cl A` (every block is the closure of its interior) and `A` is open, no point of `A` is at distance 1
+from a point of `HC` (a pair `p ∈ A`, `q ∈ HC` at distance 1 perturbs to a pair in `A`): `A ∩ (HC + S¹) = ∅`.
+
+### 2.4 Maximality: every point outside `A` is on a unit circle about HC, and almost every one about `A`
+
+*Exclusion sets.* For a block `B` put `E_B = {d_B ≤ 1 ≤ D_B}` and `E°_B = {d_B < 1 < D_B}`. For `B` a triangle, `U` or a disc (closures of connected open
+sets with the same `d`, `D`), `z ∈ E°_B ⟹ T₁(z) ∩ int B ≠ ∅` (the distance from `z` takes every value in `(d_B, D_B)` on `int B`). For a segment:
+`E_{σ} = (σ + B̄₁) ∖ V_e`, where **`V_e = B(e₋, 1) ∩ B(e₊, 1)`, the open vesica of `σ_e`'s endpoints** (`D_σ < 1` iff `z ∈ V_e`); and
+`z ∈ E°_σ ∖ N_e ⟹ T₁(z) ∩ Λ_e ≠ ∅`, with `N_e = (Z × {1} + S¹) ∪ T₁(e₋) ∪ T₁(e₊)` in the frame of `e` — *proof:* `d_σ(z) < 1` makes `T₁(z)` a
+secant of `σ`'s line, meeting it at two points of which one lies in `σ` (connectedness); off `N_e` that point is `(s′, 1)` with `|s′| < 1/2`, `s′ ∉ Z`,
+and the secant crosses into `t > 1`, where near `(s′, 1)` it lies below `ℓ` (continuity, `ℓ(s′) > 1`): a point of `Λ_e`. `N_e` is null (`Z` is null and
+`(c, θ) ↦ (c + cos θ, 1 + sin θ)` is Lipschitz).
+
+**B1 — the sausage cover (flat skeleton).** `ℝ² = ⋃_T (T + B̄₁) ∪ ⋃_e (σ_e + B̄₁) ∪ ⋃_O B̄(O, 3/2)`, `T` over the flat triangles. *Proof.* The skeleton
+has the honeycomb's full symmetry (a rotation by 60° about `O` carries a triangle pointing at `O` to the next one), so it suffices to cover the
+fundamental triangle `Δ = O C M` (`O = (0, 0)`, `C = (L, 0)`, `M` the midpoint of the edge at angle 30°). Let `v = (2, 0)` (the vertex of `T_C` at `O`),
+`e = √3 u(30°)` (the inner end of `σ` on the 30° ray), and `τ(z) = ⟨z − v, u(30°)⟩` (position along `T_C`'s side from `v`). `M` projects to `τ = 1/2`
+and `CM ⊥ u(30°)`, so `Δ ⊆ {τ ≤ 1/2}`. (i) Points of `Δ` below the side's line lie in `T_C` (they are on `C`'s side of all three side lines). (ii) Points
+of `Δ` above it with `0 ≤ τ ≤ 1/2` lie between the side's line and the 30° ray, which are parallel at distance 1, and project into the side: within 1 of
+`T_C`. (iii) `Δ ∩ {τ ≤ 0}` is the triangle `O v e`; its part with `|z| ≥ 3/2` lies in the quadrilateral `Q = conv{(3/2, 0), v, e, (3/2)u(30°)}`, and
+**`Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`** (H3, exact: split by the perpendicular bisector of `v, e`, every vertex of each half within `0.62` of its centre; without
+`B̄(e, 1)` the vertex `(3/2)u(30°)` is `1.026` from `v` — the plant `nosigma`). ∎
+
+**B2 — the classification.** Let `z ∉ A`. In an edge frame write `z = (s, t)`; `f(s) = 1 + √3/2 − √(1 − (1/2 + |s|)²) − √(1 − s²)`.
+
+**(C0) `f ≥ 0` on `[−1/2, 1/2]`, zero only at `s = 0`** [hand; `f(0) = 0` exact, H2]: both square roots decrease in `|s|`, so `f` increases in `|s|`,
+and `f(0) = √3/2 − √(3/4) = 0`. *Meaning:* the vesica's lower boundary `t = 1 − √(1 − (1/2 + |s|)²)` lies on or above `t = √(1 − s²) − √3/2`, where
+the down triangle's apex `(0, −√3/2)` starts to exclude (`D ≥ 1`); by the mirror, the vesica's upper boundary lies on or below the up apex's zone. The
+two touch at one point, `(0, 1 − √3/2)` (and its mirror): **the apex excludes the band's vesica exactly, tight at one point.**
+
+By B1, `z` lies in one of:
+1. **`B̄(O, 3/2)`:** `z ∉ A` forces `|z − O| ≥ 1/2`: `z ∈ E_{disc}`.
+2. **`σ_e + B̄₁` off `V_e`:** `z ∈ E_σ`, and `σ_e ⊆ cl Λ_e ⊆ HC`.
+3. **`V_e`** (`V_e ⊆ {|s| < 1/2, 1 − √3/2 ≤ t ≤ 1 + √3/2}`): if `t < 1`, `d_{T_down}(z) = t ≤ 1` and `D_{T_down}(z) ≥ |z − (0, −√3/2)| ≥ 1` by (C0):
+   `z ∈ E_{T_down}`. If `t = 1`: `d_{T_down} = 1`, `z ∈ E_{T_down}`. If `1 < t < ℓ(s)`: `z ∈ Λ_e ⊆ A` — excluded by hypothesis. If `t ≥ ℓ(s)`: `d_U ≤ 1`
+   (G3) and `D_U = D_{T_up} ≥ |z − (0, 2 + √3/2)| ≥ 1` by (C0)'s mirror (`U` has `T_up`'s vertices and lies in their convex hull, so `D_U = D_{T_up}`):
+   `z ∈ E_U`.
+4. **`T + B̄₁` for a flat triangle `T`, `z ∉ int T`, `D_T(z) < 1`** (`z` in the bulge `Reuleaux(T) ∖ T` across a side `e`): in `e`'s frame the bulge of
+   `T_down` is `{t > 0, s² + (t + √3/2)² < 1} ⊆ {|s| < 1/2, 0 < t ≤ 1 − √3/2}`, within 1 of `σ_e`, and off `V_e` by (C0): case 2. The same by the mirror
+   for `T_up`'s flat bulge (`1 + √3/2 ≤ t < 2`).
+5. **`T + B̄₁`, `z ∉ int T`, `D_T(z) ≥ 1`:** for `T = T_down`, `z ∈ E_T`. For `T = T_up`: `D_U = D_T ≥ 1`; if `z`'s nearest point of `T_up` is a vertex (a
+   vertex of `U`), `d_U = d_T ≤ 1`: `z ∈ E_U`; if it lies on side `e` (then `|s| ≤ 1/2` and `d_T = 2 − t ≤ 1`, so `1 ≤ t ≤ 2`): `t = 1` gives case 3's
+   `E_{T_down}`; `1 < t < ℓ(s)` gives `z ∈ A`; `ℓ(s) ≤ t < 2` gives `d_U ≤ 1`, `z ∈ E_U`; `t = 2` with `g(s) = 0` gives `z ∈ ∂U` with `d_σ = 1`, `D_σ ≥ 1`:
+   `z ∈ E_σ`; `t = 2` with `g(s) > 0` is case 6.
+6. **`z ∈ T_up ∖ int U`, in the sliver of side `e`** (`2 ≤ t ≤ 2 + g(s)`, `g(s) > 0`): **Lemma NL** below gives a point of `cl Λ_e` on `T₁(z)`, and a
+   point of `Λ_e` when `2 < t < 2 + g(s)`.
+
+So every `z ∉ A` lies in some `E_B` (`B` a block, or `σ_e ⊆ HC`) or on a unit circle through `cl Λ_e`: **`ℝ² ∖ A ⊆ HC + S¹`**. With §2.3, M2-FIX holds.
+*Almost every `z ∉ HC`:* in cases 1–5 the inequalities are strict off the level sets `{|z − O| = 1/2, 3/2}`, `{d_B = 1}`, `{D_B = 1}` (null: distance
+functions have `|∇| = 1` a.e. off their sets, so each level set is null, and locally finitely many occur), off `N_e`, and off the one-point
+tangencies of (C0); then `T₁(z)` meets `A` (by the `E°` facts above), in an open arc. In case 6 with `t > 2` it meets `Λ_e`. So `φ_A > 0` a.e. off `A`,
+and `A` is MUA by M2-ZERO; `HC = cl A = supp A`, `|∂HC| = 0` (segments, circles, and graphs of continuous functions, locally finitely many):
+**regular**. ∎
+
+**Lemma NL (the sliver is excluded through the band)** [hand, one mind; constants H4, H5]. *In an edge frame let `z = (s, t)`, `|s| < 1/2`,
+`2 < t < 2 + g(s)`. Then `T₁(z) ∩ Λ_e ≠ ∅`; for `t = 2 + g(s) > 2` (a point of `∂U`), `T₁(z) ∩ cl Λ_e ≠ ∅`.* *Proof.* `δ = d_U(z) ≤ 2 + g(s) − t <
+g(s) ≤ (1/2 − |s|)²/4`, while the other sides of `U` are `≥ 0.8(1/2 − |s|) − (1/2 − |s|)² > δ` away (as in G2); so the nearest point `u* = (σ, 2 + g(σ))`
+lies on the bottom graph, `|σ| < 1/2`, and `z = u* + δν` with `ν = (g′(σ), −1)/√(1 + g′(σ)²)`, the downward unit normal. Put `p = u* + (1 + δ)ν`, so
+`|p − z| = 1`.
+- *`p_t > 1`:* `t > 2` gives `2 + g(σ) > 2 + δ/√(1 + g′²)`, so `p_t = 2 + g(σ) − (1 + δ)/√(1 + g′²) > 2 − 1/√(1 + g′²) ≥ 1`. And `p_t < 2`.
+- *`|p_s| < 1/2`:* `|p_s − σ| ≤ (1 + δ)|g′(σ)| ≤ (65/64)(1/2)(1/2 − |σ|) < 1/2 − |σ|` (G1, `±1/2 ∈ Z`).
+- *`d_U(p) > 1`, by an exterior disc of radius `R = 5/4`:* let `c = u* + Rν`. For `w` in the open disc `B(c, R)`, write `w − u* = x m + y n` (`m` the unit
+  tangent, `n = −ν`); then `y < −R + √(R² − x²) ≤ −x²/(2R) = −(2/5)x²` and `y ≥ −2R`. The vertical line through `w` meets the tangent line
+  `ℒ(s) = 2 + g(σ) + g′(σ)(s − σ)` at height `ℒ(w_s) = w_t + λ`, `λ = −y/⟨e₂, n⟩ ≥ −y ≥ max((2/5)x², |y|)`; and `h = w_s − σ` has `|h| ≤ |x| + |y||g′| ≤
+  |x| + |y|/8`, so `h²/4 ≤ (5/16)x² + (5/256)y²` (`(a + b)² ≤ (5/4)a² + 5b²`). By H5, `max((2/5)x², |y|) > (5/16)x² + (5/256)y²` for `|x|, |y| ≤ 5/2`,
+  `(x, y) ≠ 0`. So `w_t < ℒ(w_s) − h²/4 ≤ 2 + g(w_s)` (G1) whenever `|w_s| ≤ 1/2`: `B(c, R)` misses `{|s| ≤ 1/2, t ≥ 2 + g(s)} ⊇ U` (G2). Since
+  `1 + δ < R` and the discs `B(p, 1 + δ)` and `B(c, R)` are internally tangent at `u*`, `B̄(p, 1) ⊆ B(p, 1 + δ) ⊆ B(c, R)`, so `d_U(p) > 1`.
+
+With G3, `p ∈ Λ_e`. For `z ∈ ∂U` (`δ = 0`), `p = u* + ν` has `d_U(p) = 1`, `p_t ≥ 1`: `p ∈ cl Λ_e`. ∎
+
+### 2.5 The exact check, `tools/fs111_m3_honey.py`
+
+Arithmetic in `ℚ(√3)` (a class `Q3`, signs decided by comparing squares; no floats in a verdict). Output `data/fs111/fs111-m3/honey.out`, exit 0:
+- **H1** (block distances, a patch of 12 triangles, 18 segments, 7 discs within 6 of a face centre): minima triangle–triangle 2, triangle–segment
+  (non-flanking) `√7 ≈ 2.6458`, segment–segment `√3`, disc-centre–triangle 2, disc-centre–segment `√3`; every flanking triangle–segment pair at distance
+  exactly 1. **PASS.**
+- **H2** `f(0) = 0` exactly. **H3** `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)` (worst vertex `0.6197` from its centre). **H4** the gap polynomial's identities and bounds
+  (sympy). **H5** the constants `425/1280 < 2/5`, `425/512 < 1`. **All PASS.**
+- **H7** (a control, not the proof): the flat skeleton with the bands as segments at 731 exact grid points within `5/2` of a face centre: none free,
+  none interior and on a unit circle about the skeleton. **PASS.**
+- **Plants, each firing:** `side19` (triangles of side `19/20`): H1 (flanking distance `≠ 1`), H2 (`f(0) < 0`), H7 (30 free points, on the segments —
+  the gap exceeds 2 and the band's region is free); `closer` (`L − 1/10`): H1 (triangles within 2, segments within 1 of their flankers), H7 (interior
+  points on unit circles); `nosigma`: H3; `eps1/2` (`g` doubled): H4; `R2` (exterior radius 2): H5.
+
+### 2.6 What M3-HC decides
+
+| rung | verdict | grade, minds |
+|---|---|---|
+| **M2-PINCH-C** as stated | **vacuously TRUE** (M3-VAC: its hypothesis is unsatisfiable) — MISSTATED | [hand], one mind |
+| **M2-PINCH-C** corrected ("some regular MUA set contains a Cantor pinch") | **TRUE**: HC_K, in every band (two blocks at distance 2, flat side against a graph touching its unit parallel exactly on the Cantor set, the band in `int F`) | [hand + tools exact], one mind |
+| **MUA-FIN-U** ("every regular MUA set has locally finitely many components") | **FALSE**: HC_K | [hand + tools exact], one mind |
+| **MUA-FIN** in M2's words (a finite union of Jordan arcs per bounded set) | **holds for HC_K** — each band's boundary is two arcs | [hand] |
+| **MUA-FIN with D3's clause** (arcs meeting only at endpoints) | **fails for HC_K** — the two arcs of each band meet on `Z × {1}`, infinitely often. VM2's D3 is the clause that makes the difference, and it is what M2-REDUCE-C uses | [hand], one mind |
+
+*What it says.* Local finiteness is not a consequence of maximality one class at a time: a maximal unit-avoiding set can carry, inside every period,
+infinitely many components of its interior, pinched on a Cantor set, and it is regular. The mechanism is §1.5's: a flat side of length 1 forces a band
+at distance 1, the band cuts itself off at length exactly 1, and the band's thickness is the gap's excess over 2 — free to vanish on any closed null
+set. **Any closed null `Z` works**, countable included (`Z = {0, ±1/2} ∪ {±1/2^n}` gives components accumulating at points). HC₀ (no pinch) is a regular
+MUA set with finitely many components per bounded set, of four shapes (triangles, curved triangles, bands, discs).
+
+*Would kill it:* a point of the plane outside `A` on no unit circle about HC (a defect in B1, B2 or Lemma NL), or two points of `A` at distance 1 (a
+defect in §2.3). *Controls:* R7's ups (Reuleaux triangles of width 1) are the same mechanism with no flat side, hence no band; SQ9's squares have flat sides
+of length `1/2` facing flat sides at distance exactly 1 (W's ladder), where no band is needed because the facing square excludes the gap directly.
