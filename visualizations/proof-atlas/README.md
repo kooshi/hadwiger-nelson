@@ -2,15 +2,15 @@
 
 Published artifact (private until shared): **https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx** (Version 1, 2026-09-27).
 
-An explorable map of the logic of the Hadwiger–Nelson hunt, built for Kooshi by job VIZ-ATLAS on 2026-09-27. The three possible answers,
-`χ(ℝ²) = 5, 6, 7`, sit at the centre, each ringed by its two halves; every key theorem, missing step and no-go lies outward in the sector of the
-answer it serves, so a route reads as a path inward. Solidity is the grade (solid is kernel, hollow red with a question mark is missing,
-octagons are no-gos with a blocked edge). Click any mark for its card: the statement in plain words and in the source's words, the grade as the
-source writes it, the source address, and what it rests on and what rests on it. The Routes tab gives each route's distance to its answer in
-**bits** (the sum of `−log₂ p` over its links) and its distance to publication (links not yet in Lean); the Credences tab lets you move every
-credence and watch the distances recompute. The design, the alternatives it was chosen against, and the distance measure are in `DESIGN.md`.
-
-Published artifact: not yet (the owner publishes `index.html`).
+An explorable map of the logic of the Hadwiger–Nelson hunt, built for Kooshi by job VIZ-ATLAS on 2026-09-27; its theme control and dark palette
+by VIZ-ATLAS-2. The three possible answers, `χ(ℝ²) = 5, 6, 7`, sit at the centre, each ringed by its two halves; every key theorem, missing step
+and no-go lies outward in the sector of the answer it serves, so a route reads as a path inward. Solidity is the grade (solid is kernel, hollow
+red with a question mark is missing, octagons are no-gos with a blocked edge). Click any mark for its card: the statement in plain words and in
+the source's words, the grade as the source writes it, the source address, and what it rests on and what rests on it. The Routes tab gives each
+route's distance to its answer in **bits** (the sum of `−log₂ p` over its links) and its distance to publication (links not yet in Lean); the
+Credences tab lets you move every credence and watch the distances recompute. The Theme control at the top right picks System (the viewer's or
+the device's setting), Light or Dark, and remembers the choice in this browser. The design, the alternatives it was chosen against, the distance
+measure and the palette review are in `DESIGN.md`.
 
 ## Files
 
@@ -18,12 +18,13 @@ Published artifact: not yet (the owner publishes `index.html`).
 |---|---|
 | `DESIGN.md` | the frame and two alternatives, the encodings, the grade fold, the distance measure and its defaults, the scope, stage records |
 | `page.tmpl.html` | the page, with a `/*FACTS*/null` marker |
-| `build.py` | runs the checker, refuses on any failure, inlines the facts → `index.html` |
+| `build.py` | runs the checker and the palette review, checks the two dark token blocks agree, refuses on any failure, inlines the facts → `index.html` |
 | `index.html` | the built page, the file to publish |
 | `../../data/viz/proof-atlas/facts.json` | the one table every mark is drawn from: statement, verbatim quote, address, the source's grade words, registered probabilities |
 | `../../tools/viz_proof_atlas_facts.py` | writes the table from hand-authored entries; prints a label-overlap lint for the layout |
 | `../../tools/viz_proof_atlas_check.py` | re-reads every quote and grade from its address; `--self-test` plants seven faults, each must fire exactly once |
 | `../../tools/viz_proof_atlas_common.py` | normalisation, the grade fold, source addressing, and the fence (files never opened) |
+| `../../tools/viz_proof_atlas_contrast.py` | the palette review at both themes: contrast of text and marks, separation of the hues that meet; `--self-test` plants a pale text token and a confusable pair |
 
 ## Build, check, publish
 
@@ -31,6 +32,8 @@ Published artifact: not yet (the owner publishes `index.html`).
 python3 tools/viz_proof_atlas_facts.py
 python3 tools/viz_proof_atlas_check.py              # "checked 151, failed 0, errors 0" on 2026-09-27
 python3 tools/viz_proof_atlas_check.py --self-test  # "SELF-TEST PASSED"
+python3 tools/viz_proof_atlas_contrast.py           # "palette review: 0 failed"
+python3 tools/viz_proof_atlas_contrast.py --self-test
 python3 visualizations/proof-atlas/build.py
 ```
 

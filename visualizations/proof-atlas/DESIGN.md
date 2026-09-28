@@ -127,3 +127,61 @@ route, answer or mark they join is followed; long "blocks", "predicts" and "form
 None. The job built an instrument; its only computation is the surprisal sum.
 
 **Would have searched here:** none. Nothing here is a search.
+
+## VIZ-ATLAS-2, stage 1 — SAVED: the theme control and the dark palette
+
+*Brief: `data/viz/proof-atlas/brief-2.md` (commit 1c51a103). Kooshi: "Can you have the agent update it to have a dark mode please?" The page
+already carried dark tokens that followed the viewer's system setting; he did not see them.*
+
+**The control.** A three-way switch at the top right of the page, beside the eyebrow: System, Light, Dark. Light and Dark stamp `data-theme` on
+the root element; System hands the page back to whatever the viewer's host stamped there at load (the artifact viewer stamps `data-theme` on an
+explicit choice of its own and nothing on "system"), or to the device's `prefers-color-scheme` when it stamped nothing. The choice is remembered
+per viewer in `localStorage` under `proof-atlas:theme`, every read and write in try/catch. It is applied by a small script placed before any
+markup, so the page never paints the other theme first. A `MutationObserver` keeps an explicit page choice on top when the host re-stamps the
+root later, capped at ten re-applications so a host that fights back cannot loop.
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| a segmented System / Light / Dark switch in the masthead | a single sun/moon toggle cycling light and dark | a two-state toggle cannot give the page back to the viewer's own setting, and "System" is what most viewers want | high |
+| System restores the host's stamp, not "no attribute" | System always removes `data-theme` | removing it would override a viewer who chose Dark in the claude.ai viewer itself | medium: if the viewer never stamps the root, the two are the same |
+| apply before the markup, in its own early script | wire it inside the main script at the end of the page | the main script runs after the whole page is parsed, so a Dark viewer would first see the light page | high |
+
+**The dark palette, reviewed as its own design.** The dark ground stays a deep slate-teal (`#0f1618`, panel `#151f22`), the night version of the
+light theme's cool survey paper; the text stays chalk (`#dde7e4`). What changed is the set of hues, placed around the LCh circle so the marks
+that meet on the map stay apart by hue where dark ground forbids separating them by lightness: no-go a raspberry rose (h 2°, `#d7678a`), a
+missing step vermilion (38°, `#fe7d63`), five amber (70°, `#e8a65d`), a belief straw-gold (96°, `#ebd563`), six sea-green (172°, `#68caae`),
+the selection ring cyan (222°, `#4cceea`), seven cornflower (274°, `#7aaaf0`), in print orchid (312°, `#b498cb`). In version 1 the selection
+ring and the seven hue were one colour in dark (CIELAB distance 12: a selected seven-hued mark showed no ring), and seven and in print were 13
+apart. The brick hub's opacity rises from .16 to .20 in dark, where tints over a near-black lose their colour: its seven tints now span
+distances 6 to 25 (version 1: 3 to 18), so the kernel's seven-colouring reads behind the answers instead of as a grey mottle.
+
+The light palette kept its look, with three corrections the same review found: in print moves from slate to plum (`#7b5a87`; it was 16 from
+seven), a belief from olive-gold to a yellower gold (`#8d7c08`; 28 from five, was 22), and the label halo from the ground colour to the
+panel colour, so a dark label on the light map is knocked out in white rather than ringed in grey. In both themes the route bars' held
+segments gained opacity (one mind .26 → .38, two minds .38 → .50, one blind .50 → .66; missing .70 → .80, an open question 1), and the side
+panel's scrollbar is thin and quiet (the dark scheme's default thumb is a bright bar).
+
+**The numbers** (`python3 tools/viz_proof_atlas_contrast.py` prints them all). Gated: every text token and answer hue at ≥ 4.5 on ground and
+panel (the lowest: light muted 4.81 on the ground; in dark, muted 6.21 on the panel); every mark hue at ≥ 3.0 on the panel (lowest: light belief 3.99); every
+pair that meets on the map at CIELAB distance ≥ 20 (lowest: light seven/in print 23, dark 25). Version 1's palette fails three of these pairs
+(light seven/in print 16; dark seven/selection 12, seven/in print 13). Reported, not gated: the solidity ladder (lightness 16, 26, 50, 69, 85,
+98 in light; 91, 84, 63, 44, 28, 11 in dark: the same steps mirrored); the hatch's mean tone (between two minds and one mind in both themes);
+the route-bar segments against their track, weakest for a light one-mind segment (2.15), which carries at most a third of a bit and whose
+grade is repeated in the route's link table.
+
+**Controls.** `build.py` now refuses when the two dark token blocks differ or declare a token the light palette lacks (planted: `--nogo` changed
+in one dark block, and a dark-only token; each refused with its name, and the page was not rewritten), and when the palette review fails.
+`tools/viz_proof_atlas_contrast.py --self-test`: the faithful palette passes; a pale light text token (muted `#9aa6a7`) and the dark selection
+ring moved onto the seven hue each fire exactly once.
+
+**The one look.** One headless Firefox screenshot per theme (1440 px wide, network cut by `unshare -rn`, fonts fell back offline), each through
+a copy of the page in the publish skeleton; the dark one stamps `data-theme="dark"` as the viewer does, so it also exercised System following
+the host. Both themes read as designed: the rose no-go octagons and vermilion missing steps are distinct at a glance in dark, the hub's bricks
+read as seven colours, and the labels hold on every wedge. One defect: in dark the side panel's scrollbar thumb was a bright bar the height of
+the panel. **The one pass of edits:** a thin scrollbar coloured from the rule token, in both themes. Not re-looked.
+
+## Theorems this phase proved
+
+None. The stage is a control and a palette; its only computations are contrast ratios and colour distances.
+
+**Would have searched here:** none. Nothing here is a search.
