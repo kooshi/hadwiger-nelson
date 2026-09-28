@@ -1,7 +1,7 @@
 # FS-112 close inventory — the close planner's ticks (FS112-C; the owner applies them to `plans/FS112-close-inventory.md`)
 
 *One row per inventory item 1–63. "done" names where; "declined" gives the reason; "owner" marks an item that was the owner's own act and needs no
-close action. Numbers are read from each item's source, never from the inventory. Items 64+ (YB3's report) are ticked at stage 1b.*
+close action. Numbers are read from each item's source, never from the inventory. Items 64–69 ticked at stage 1b by FS112-C2.*
 
 | item | status | reason / where done |
 |---|---|---|
@@ -68,3 +68,9 @@ close action. Numbers are read from each item's source, never from the inventory
 | 61 | done | errata `plans/FS112-derivation.md` §6 (N3-END's first alternative and item 3; N3-LEN's bound; Prop. 17's row); the instance pointer → item 62 |
 | 62 | done | NB3's retraction counted (reconciliation §1.4); the owner's mis-pointer logged §R-close 4.6 |
 | 63 | owner | — |
+| 64 | done | FS112-C's own result; its stage-1b placeholder (row 136's `FORM-1B`) set by FS112-C2: §R-close 4.1; reconciliation §1.8 |
+| 65 | owner | ruling applied by the owner (G83; §R-close 4.8's corrections to FS112-X); no stage-1b change to the CLAUDE.md drafts (reconciliation stage log) |
+| 66 | owner | with Kooshi; FS-115's bearing section left as minted, one sentence added for the bowtie end (c), which moves neither form (`plans/STUB-stuck-ray.md`) |
+| 67 | done | YB3 folded in: reconciliation §1.8 (every claim, D1–D10); grades set in `plans/FS112-derivation.md` (FS112-Y3-PIN, -END-AB, -R1, -R3, -T2-BUDGET two minds, one blind; -END-NEEDS restated); FS112-BOWTIE filed; FS112-C-HORNEND, FS112-C-DOUBLE derived (one mind); § B draft 56 lines, `--strict` PASS (1,003); rows 135–136 and §R-close 3.0–3.6, 4.1, 4.3, 4.5–4.7; claims §11 item 20 |
+| 68 | done | Y3-END-NEEDS restricted (derivation entry and errata §6; claims §11 item 20); STRIPCUT's `C_2` list, the 0.9036 label, END-B's ≥ 180° (errata §6, FS112-Y3-PIN, FS112-Y3-END-AB); FS112-C-COMPOSE item 5 corrected (reconciliation §1.9; the entry's verdict: no step uses END-NEEDS; C-ENDS's N3-END slip repaired); FS-115's stub carries the bowtie end (c) and the corrected route; FS-114's stub checked — no line rested on END-NEEDS, its C-ENDS line updated |
+| 69 | done | YB3's slips logged: reconciliation §1.11; the slot slip (Y3's too) drafted as a § Building instance, §R-close 4.6 |

@@ -6,7 +6,7 @@ research and careful exploration, and may be more complicated than they appear."
 (`plans/STUB-stuck-ray.md`). **Solver column: in-ban** — derivation, reading, and exact checks of objects given by formula; after 2026-10-01 still no
 finite-witness search (Kooshi: *"search for a finite graph is out. It would be huge, not feasible."*). Written for a session with no memory of
 FS-112: read `CLAUDE.md` § The aim and § Counter-priors first, then `LEDGER.md` rows 131–136, `plans/FS112-derivation.md` (§§1–4 in full),
-`plans/FS112-unit-arc-half.md` §R-close, and `data/fs112/fs112-c/reconciliation.md` §§1.5–1.6.*
+`plans/FS112-unit-arc-half.md` §R-close, and `data/fs112/fs112-c/reconciliation.md` §§1.5–1.6 and 1.8–1.9.*
 
 **Provisional bearings** (WORKFLOW 3.1 replaces them at the opening): G83 if minted at FS-112's close (four-colour vertices), G82, G79, G72, G13,
 G15, G21, G22, G24 and G60 (no argument one class at a time), G46, G49, G50, G51, G17; rows 131–136; stubs FS-115, FS-111.
@@ -58,7 +58,9 @@ be periodic — but it kills every YES given by formula.
   leaving centres (FS112-C-PARTNERS, one mind: the close, over N3-COR3 and Y3's count).
 - **The composition** (FS112-C-COMPOSE, one mind): the repeated-colour vertices of a terminal map that are far from four-colour vertices lie on
   **stuck chains** — degree-4 vertices at unit spacing along a line (FS112-N2-TERM) — and the point one step beyond each finite end of a chain has at
-  least four colours (FS112-C-ENDS, one mind). Trading repeated colours for four colours is FS-115's business.
+  least four colours (FS112-C-ENDS, one mind; at a single vertex bounded by unit arcs on both sides — FS112-BOWTIE's kind — through FS112-C-DOUBLE, one
+  mind, with one residue named in FS-115's stub). No line of this stub rests on FS112-Y3-END-NEEDS. Trading repeated colours for four colours is FS-115's
+  business.
 
 ## The held objects, and where each stops
 
@@ -85,7 +87,8 @@ be periodic — but it kills every YES given by formula.
    completion of their unit-arc centres. Y3's first test, not run: on the disk's pentagon skeleton, can the trivalent `B_k` (two unit-arc boundaries,
    centres `A_k`, `A_{k+1}`) be given a third unit-arc boundary whose completions are exactly their complementary partners (`B_0`'s current partners
    `Z^R_0`, `Z^L_1` are not completions)? And the disk's blue and orange routes to a fourth colour at `C_0`, never analysed (Y3 §4.4 (ii)).
-4. **A second derivation of row 134's base steps** that N3-BASE inherits (above), and second minds on FS112-C-ENDS, C-COMPOSE and C-PARTNERS.
+4. **A second derivation of row 134's base steps** that N3-BASE inherits (above), and second minds on FS112-C-ENDS (with its stage-1b repair),
+   C-COMPOSE and C-PARTNERS.
 5. **C-HOCK**: whether boundary arcs of radius below 1 can always be filled to radius 1 (Hockertz, `[Polymath16threads]` `[06.91]`, stated only). No held
    valid object has such an arc between two tiles, so it has no instance; the opposite direction (unit arcs bent off radius 1) is FS112-N2-RED.
 

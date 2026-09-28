@@ -417,3 +417,8 @@ already, and step 4 applies; the one-horn case — outside the setting, named. *
   4.5 (FS-115's row), 4.6 (G51, G79, § Building), 4.7 (rule 14), all inside §R-close (`data/fs112/fs112-c2/rclose_edit.py` asserts it); `data/fs112/claims.md`
   §11 item 20. **The CLAUDE.md drafts (4.2) are unchanged**: no stage-1b finding needs a front-page line, so their measured bytes stand (G83 applied by
   the owner's ruling, item 65).
+- **Stage 4 — SAVED**: `plans/STUB-stuck-ray.md` (FS-115: title and question gain (c), the bowtie end, and the unwalked one-horn ends; the end analysis
+  restated at its corrected scope with FS112-C-HORNEND and FS112-C-DOUBLE; BOWTIE among the held objects; open items 4–5; three registrations replace the
+  decided one; one bearing sentence for (c) — the bearing itself left to Kooshi, item 66); `plans/STUB-global-step.md` (FS-114: no line rested on
+  Y3-END-NEEDS; its C-ENDS line and open item 4 updated); `data/fs112/fs112-c/ticks.md` items 64–69 (`data/fs112/fs112-c2/stub_edit.py`); the report
+  `data/fs112/reports/FS112-C2.md`.
