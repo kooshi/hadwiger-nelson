@@ -217,7 +217,7 @@ with `x ∈ cl U`.
   about all its points — a convex set whose boundary curves by at least 1) or **far** from it (outside the union of the closed unit discs about its
   points), and `∂F ∩ B(x, r) ⊆ ⋃_i (∂H_i ∪ {d_{K_i} = 1})`: **the class boundary near `x` lies on finitely many "far levels" `{D_{K_i} = 1}` (convex
   arcs, the class inside) and "near levels" `{d_{K_i} = 1}` (outer unit parallels, the class outside)**. This is round 1's REG-CHAIN structure (unit-
-  parallel curves) found inside one class: every boundary arc of a maximal class is a unit parallel (outer, or far) of another part of the same class.
+  parallel curves) found inside one class: every boundary arc of a maximal class is a unit parallel (outer, or far) of a part of the same class — its own component included (DISC7, R7).
 - **(v) two-sided on the pinch set.** Where `∂F_a` and `∂F_b` of two classes coincide along an arc and, near a point `x` of it, only `a` and `b` carry
   measure (`N ⊆ A_a ∪ A_b` a.e.) with `A_a ∩ N` and `A_b ∩ N` each a.e. one connected open set with `x` in both closures, round 1's M-PINCH and M-C11
   hold verbatim: `C^{1,1}`, `|κ| ≤ 1`, a unit arc of kind both or two tangent unit discs (the overlap change in (out, out) is in §2.2).
