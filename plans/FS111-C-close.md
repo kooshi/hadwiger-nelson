@@ -668,7 +668,7 @@ E("FS111", "MEET", "rests", {"file": "plans/FS111-derivation.md"}, "hence χ_m�
 
 ### D10. `CLAUDE.md` bytes
 
-My four clauses (1,014 → 936 bytes after the last cut), G84 (1,432) and G85 (764), less the two phrases they replace (108): **net ≈ +3,040 bytes**
+My four clauses (1,014 → 953 bytes after the last cut), G84 (1,432) and G85 (764), less the two phrases they replace (108): **net ≈ +3,040 bytes**
 against the brief's target of about 3,000 (the file at 288,911 of 300,000). The rank-2 and rank-3 text in §D2 is Poros's to cut, and replaces a row.
 
 ## Stage 6 — SAVED: the drafts (above), the ticks finalized, the report
