@@ -1,0 +1,30 @@
+unmutated: self-test exit 0 (expected 0)
+drop model: from the derived list: self-test exit 1 (expected 1); the case 'lacking model: (field loop)' reads False: True; 3 case(s) red
+the new-grammar parser reads nothing: self-test exit 1 (expected 1); the case 'faithful entry alone' reads False: True; 25 case(s) red
+the rests-on prose never found: self-test exit 1 (expected 1); the case 'faithful entry alone' reads False: True; 25 case(s) red
+the rests-on check reads the block too: self-test exit 1 (expected 1); the case 'indented inside the block' reads False: True; 1 case(s) red
+converse never required: self-test exit 1 (expected 1); the case 'two-way derived statement' reads False: True; 1 case(s) red
+the id rule stops inheriting the prefix: self-test exit 1 (expected 1); the case 'inherits the prefix' reads False: True; 1 case(s) red
+control: blocks counted as entries: self-test exit 1 (expected 1); the case 'faithful entry alone' reads False: True; 25 case(s) red
+unreadable headers not failed: self-test exit 1 (expected 1); the case 'cannot read' reads False: True; 1 case(s) red
+new-grammar duplicates kept in silence: self-test exit 1 (expected 1); the case 'defined twice in the new grammar' reads False: True; 1 case(s) red
+both-grammar clash kept in silence: self-test exit 1 (expected 1); the case 'defined in both grammars' reads False: True; 1 case(s) red
+the hint never printed: self-test exit 1 (expected 1); the case 'hyphenated bare name' reads False: True; 1 case(s) red
+strict ignored for new-grammar fields: self-test exit 1 (expected 1); the case 'lacking model:, --strict' reads False: True; 14 case(s) red
+end to end (--strict): exit 0 (expected 0)
+  census: 2 theorems in 1 derivation files: FS99=2
+    of which in the new grammar (`derivation:` blocks): 2 in 1 files: FS99=2
+  LEDGER § B rows: 2 | placeholders: 0
+  RESULT: PASS
+end to end (plain): exit 0 (expected 0)
+  census: 2 theorems in 1 derivation files: FS99=2
+    of which in the new grammar (`derivation:` blocks): 2 in 1 files: FS99=2
+  LEDGER § B rows: 2 | placeholders: 0
+  RESULT: PASS
+end to end, the § B row for FS99-N8 removed: exit 1 (expected 1)
+  FAIL: entry FS99-N8 has no LEDGER.md § B row
+  census: 2 theorems in 1 derivation files: FS99=2
+    of which in the new grammar (`derivation:` blocks): 2 in 1 files: FS99=2
+  LEDGER § B rows: 1 | placeholders: 0
+  RESULT: FAIL (1)
+MUTATION HARNESS: PASS

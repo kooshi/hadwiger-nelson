@@ -90,3 +90,122 @@ file and neither a header the gate reads: each has more than one token after the
 **Two weaknesses in the existing self-test**, to be tightened in stage 2 without loosening anything: its verdict ignores the
 "unplanted id check clean" line it prints (`clean` is not in the returned conjunction), and its census plants pass on `n >= 3`, a
 one-sided bound that cannot see a plant firing too much.
+
+## Stage 2 — SAVED
+
+### 2.1 The change (`tools/fs71_ledger_b_check.py`)
+
+- **How the grammars are told apart: per entry, not per file.** Every derivation file is read by both parsers and the results are
+  merged (`read_file`, which `load()` now calls). A file may hold both grammars. An id defined twice fails, whether within the older
+  grammar (a new check; the dict used to keep one of the two in silence, and today's tree has no case), within the new one, or across
+  the two.
+- **The new grammar is read with the gate's own parser.** `.claude/skills/ephodos/scripts/derive_gate.py` is imported, and its
+  `strip_fences`, `blocks`, `HEAD`, `HEAD_LOOSE`, `unread_heads` and `STRICT` are used as they stand. So the census reads exactly what
+  the gate reads. If the gate cannot be imported, the run prints a FAIL and exits 2; it never falls back to the older grammar alone.
+- **What counts, and what is noted.** Each `derivation:` block is one entry. A `control:` block is not. A `verification:` or
+  `invention:` block, or a `derivation:` header inside a code fence, is not counted but is printed as a `note:` line. A header the gate
+  cannot read (for example a capital letter, bold, or a trailing note) FAILS the run, as a malformed older header does.
+- **The census line is unchanged.** One extra line, "of which in the new grammar (`derivation:` blocks): …", prints only when
+  new-grammar entries exist. So today's output is byte-identical.
+
+### 2.2 The field mapping, the id rule and the "rests on" check (the address the closes' evidence cites)
+
+**The id rule** (`full_id`, one function for both grammars, unchanged from the older code): a name containing a hyphen stands as
+written; a bare name inherits the file's prefix. So `derivation: N8` in `FS99-derivation.md` is counted as `FS99-N8`, while
+`derivation: N7-3T` is counted as `N7-3T`. When an unmatched entry `X` and an unmatched § B row `<prefix>-X` both exist, the run prints
+both FAILs and then a `hint:` telling the writer to qualify the header.
+
+**What `--strict` requires of a new-grammar entry.** This is what the gate makes mandatory, checked for presence and a non-empty value.
+The gate itself lints the values.
+- `statement:`, `argument:` and `verdict:` always.
+- With verdict exactly `derived`, also `uses only:`, `not claimed:`, `grade:`, `minds:`, `model:`, `prior art:` and `handoff:`.
+- `converse:` as well, when the statement is strictly two-way (the gate's `STRICT` words).
+- **Prose naming what rests on it.** The run looks for the words "rests on" in the text between the entry's block and the next
+  `derivation:` header or markdown heading. A paragraph opening "Rests on it: …" satisfies it. If "rests on" appears only inside the
+  block, as an indented line the gate folds into the field above it, the FAIL says so.
+
+Without `--strict`, each of these is a `warn:` line, as the older fields' absences are.
+
+**The mapping from the old five fields:** *Proof:* → `argument:`; *Proof verdict:* → `verdict:` (with `minds:`); *Prior art:* →
+`prior art:`; *Kernel:* → `handoff:`; *Rests on it:* → no field, so the prose check above.
+
+**The finding on *Rests on it*** (the brief's question). The new grammar has no field for it. The lane file asks for it "in prose"
+and fixes no marker. The gate silently folds an indented `rests on it:` line into the field above it (tested, §1.3). So the census
+cannot read this obligation exactly. What it now does is the nearest honest reading: it requires the lane file's own words, "rests
+on", in the prose under each entry. **The right fix is outside this checker, in `.claude/agents/ephodos.md` § The close job**, which
+Keryx writes. Draft for Keryx, to replace the bullet "Under each entry, in prose, write what rests on it.":
+
+> - Under each entry, after its block's blank line, a prose paragraph opening "Rests on it:" names what rests on it (the census,
+>   `tools/fs71_ledger_b_check.py --strict`, requires the words "rests on" there; an indented `rests on it:` line inside the block
+>   is not a field of the grammar, and the gate folds it silently into the field above it).
+
+A field in the grammar itself (for example `rests on:`) would be the exact fix. But the grammar is the identity's upstream skill,
+copied verbatim from `~/source/agent-forge` and held to it by `scripts/identities.py check`, so that is Kooshi's call and not
+something to draft here.
+
+### 2.3 The regression run, beside the baseline
+
+| run | baseline (stage 1, `1a2d6020`, 16:44) | after the change (`673b400b` + this change, 16:53) |
+|---|---|---|
+| `--strict` | exit 0; "census: 1003 theorems in 72 derivation files"; "LEDGER § B rows: 1003 \| placeholders: 0"; PASS | **byte-identical** (`diff` empty): exit 0, the same three lines |
+| plain | exit 0; PASS | **byte-identical** |
+| `--self-test` | exit 0 | exit 0, 31 cases true, 0 false |
+
+Files: `data/workflow3/tb1/{baseline,after}-{strict,plain}.txt`, `after-selftest.txt`.
+
+### 2.4 The extended self-test
+
+**The existing test, tightened without loosening anything.** Its census plants now pass only on exactly the expected count (`n ==
+expect`, where it was `n >= 3`). The "unplanted id check clean" line it prints now counts in its verdict. Both still pass on today's
+tree.
+
+**The new-grammar plants** (`self_test_new`). Each one runs alone beside the faithful entry `FS99-N0` (with a control block), through
+the same `read_file` → `parse_ledger_b` → `check` path the real run takes. Every line printed must fullmatch exactly one expected
+pattern, and every pattern must match exactly one line. So each plant is seen to fire, to fire once, and for its own reason, and a
+stray line anywhere turns the case red.
+- **The four the brief names:**
+  - a new-grammar entry with no § B row;
+  - a § B row whose entry is missing;
+  - an entry lacking `model:`, in both modes: FAIL under `--strict`, and a `warn:` with zero failures without it;
+  - the faithful entry alone, which must print nothing.
+- **Beside them:**
+  - no "rests on" prose;
+  - `rests on it:` indented inside the block;
+  - a header the gate cannot read;
+  - a hyphenated bare name beside a prefixed row, where the hint must print;
+  - a bare name without a hyphen, which must pass;
+  - `verification:`, `control:` and a fenced `derivation:`, which must produce notes only;
+  - an id twice in the new grammar;
+  - an id in both grammars;
+  - a stalled entry with only statement, argument and verdict, which must pass;
+  - a derived "if and only if" with no `converse:`;
+  - a field loop that drops each field of **the gate's own list** (`FIELDS["derivation"]`, converse aside) one at a time.
+- **The gate as the second judge.** On the cases that carry a gate expectation, the self-test runs the gate
+  (`derive_gate.py entries`) on the planted file:
+  - The faithful file passes it (exit 0), so the plant is the new grammar and not my reading of it.
+  - Every missing-field plant fails it (exit 1), so "mandatory" is the gate's word, field by field.
+  - The stalled entry passes it.
+  - Both "rests on" plants pass it, which is exactly why the census must check them itself.
+
+**The negative controls** (`data/workflow3/tb1/mutate.py`, output `mutate-run.txt`, exit 0). Twelve mutations of the checker are
+compiled in memory under the real path, so nothing on disk changes and nothing needs restoring. Each must turn the self-test red and
+fail the case it breaks, and all twelve do. The unmutated source is green. Then an end-to-end run of `load()`/`main()` over a scratch
+tree holding one new-grammar derivation file, with the shipped gate:
+- `--strict` and plain both exit 0 and print "of which in the new grammar (`derivation:` blocks): 2 in 1 files: FS99=2";
+- with one § B row removed, the run exits 1, naming that entry.
+
+**One defect the harness found in my own control, fixed.** The field loop first iterated over the checker's own constant
+(`NEW_ALWAYS + NEW_DERIVED`). The mutation "drop `model:` from the derived list" therefore removed the model case along with the model
+requirement. The self-test still went red, but only through the explicit `model:` case, so the loop was blind to it. It now iterates
+over the gate's list, and the mutation turns the loop's own model case red. This is `CLAUDE.md` § Make the gate fail's "a check must
+read the value the code SHIPS, never a copy of it", met from the other side: a control must not read its expectations from the code
+it tests.
+
+### 2.5 What the self-test does not see
+
+- It checks that fields are present, not their values; the gate lints the values.
+- The "rests on" check is a word match. It cannot tell a sentence that names what rests on the entry from one that merely uses the
+  words.
+- The region the check reads ends at the next `derivation:` header or heading. So a file that gathers every entry's "rests on" prose
+  in one later section would fail every entry. That is the right verdict under the lane file's "under each entry", but a reader should
+  know where the region ends.

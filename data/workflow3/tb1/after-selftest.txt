@@ -1,0 +1,37 @@
+note: M53-derivation.md: declared non-entry (header says 'not given … id'), not counted: **Proposition 6.4 (multiquadratic wall criterion), original and corrected — NOT given a fresh id; = 
+self-test: an unclosed `[` inside a true grade and a declared non-entry read clean: True
+self-test: a faithful header reads clean: True
+self-test: plant 'nested brackets' fires naming its header: True (nested brackets in the grade (use parentheses inside a grade))
+self-test: plant 'non-ASCII' fires naming its header: True (a non-ASCII id (ids are `[A-Za-z0-9-]` only))
+self-test: plant 'parenthetical' fires naming its header: True (a parenthetical before the dash (the id must stand alone before ` — `))
+self-test: plant 'a `[` in the title' fires naming its header: True (an unclosed `[` in the title was read as the grade's opening (write the interval in words))
+FAIL: entry FS99-T1 has no LEDGER.md § B row
+FAIL: LEDGER.md § B row FS98-T7 has no derivation entry
+FAIL: entry ASTRA-2026-09-14-T1 lacks *Kernel:*
+self-test: planted 3 faults, 3 failures reported (expected 3); unplanted id check clean
+self-test (new grammar): faithful entry alone (must pass): reads clean: True; gate exit 0 (expected 0)
+self-test (new grammar): an entry with no § B row: fires as planted: True
+self-test (new grammar): a § B row whose entry is missing: fires as planted: True
+self-test (new grammar): an entry lacking model:, --strict: fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): the same, without --strict (a warning, no failure): fires as planted: True
+self-test (new grammar): an entry with no prose naming what rests on it: fires as planted: True; gate exit 0 (expected 0)
+self-test (new grammar): `rests on it:` indented inside the block (the gate folds it; must fail here): fires as planted: True; gate exit 0 (expected 0)
+self-test (new grammar): a header the gate cannot read: fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): a hyphenated bare name beside a prefixed row (fails from both sides, with a hint): fires as planted: True
+self-test (new grammar): a bare name without a hyphen inherits the prefix (must pass): reads clean: True
+self-test (new grammar): control:, verification: and a fenced derivation: are not entries (notes only): fires as planted: True
+self-test (new grammar): an id defined twice in the new grammar: fires as planted: True
+self-test (new grammar): an id defined in both grammars: fires as planted: True
+self-test (new grammar): a stalled entry needs only statement, argument, verdict (must pass): reads clean: True; gate exit 0 (expected 0)
+self-test (new grammar): a two-way derived statement with no converse:: fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking statement: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking uses only: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking not claimed: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking argument: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking verdict: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking grade: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking minds: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking model: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking prior art: (field loop): fires as planted: True; gate exit 1 (expected 1)
+self-test (new grammar): an entry lacking handoff: (field loop): fires as planted: True; gate exit 1 (expected 1)
+exit=0
