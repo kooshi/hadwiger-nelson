@@ -309,3 +309,13 @@ intensities, with no boundary term.*
   random valid map. For FS-114's maps the stationarity comes from the hull, at bounded complexity.
 
 ## Stage 5 — SAVED
+
+## Proposed for the close (I edit none of these files)
+
+- `data/fs114/claims.md` / the derivation file: **K1-PIN** — excluded at radius `1 + ε` unless the ring carries (Q) arcs (N6-NOQ); GAP at the (Q)-pinwheel, with
+  N6-QOUT and N6-QE1 as its constraints. **Non-Reuleaux lenses** — need a (Q) arc (N6-CENT). **`(2, 1, 1, 0)` and three tactic edges** — (Q)-free cones in `60°ℤ`,
+  GAP. Name **N6-WIN** (the ring's window lemma) beside N4-LENS and N5-SIGHT as a tool of the local route.
+- Stubs or claims to mint: **K1-PINQ** (the pinwheel whose ring carries (Q) arcs; registered: dies within `√3`, p = 0.5); **K1-OPENCAP** (`+−+−` whose lenses do
+  not border the caps: (Q)-free, outside N4-BOWTIE's reading R-T); **route T's aperiodic step via the Mass-Transport Principle** (N6-MTP), for C114-BUDGET.
+- `BIBLIOGRAPHY.md`: rows for `[AldousLyons2007]`, `[AHNR2018]`, `[BenjaminiSchramm2001]` with §5.1's reading status (venues to be checked against the papers).
+- Slip, disclosed: stage 2's N6-P60 (a Reuleaux corner cone taken as 60°, not 120°) and its α ≡ 90° clause; corrected at stage 3, the table rows rewritten.
