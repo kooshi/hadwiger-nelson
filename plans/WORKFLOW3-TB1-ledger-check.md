@@ -209,3 +209,43 @@ it tests.
 - The region the check reads ends at the next `derivation:` header or heading. So a file that gathers every entry's "rests on" prose
   in one later section would fail every entry. That is the right verdict under the lane file's "under each entry", but a reader should
   know where the region ends.
+
+## Stage 3 — SAVED
+
+### 3.1 The survey: other tools that read `plans/*-derivation.md` entries by their older shape
+
+**Method.** I grepped every file in `tools/` and `scripts/` for the derivation-file path, for the older header regex (a bold span
+opening a line), for the five italic field labels, and for globs over `plans/`. Then I read each hit's reading code. Most hits are
+mentions in docstrings or comments.
+
+**Result: no other tool parses derivation-file entries by the older shape.** `tools/fs71_ledger_b_check.py` is the only reader of
+entries (the only glob over `plans/*-derivation.md` and the only `ENTRY_RE`). The tools that do read derivation files read them as
+text, and here is what each would miss in a new-grammar file:
+
+| tool | what it reads | what it would miss in a new-grammar file |
+|---|---|---|
+| the quote checkers: `tools/fs110_nb_quotes.py`, `fs112_y_quotes.py`, `fs112_y3_quotes.py`, `fs112_yb3_quotes.py`, `fs114_n_quotes.py`, `fs114_n3_quotes.py`, `fs114_n4_quotes.py`, `fs114_n7_quotes.py`, `fs114_y_quotes.py` … `fs114_y6_quotes.py`, `fs114_l60_quotes.py`, `crunch_j27d_quotes.py` | a verbatim quotation, found as a substring after collapsing whitespace, in a fixed older file (`FS110-`, `FS112-`, a crunch brief) | nothing. Collapsing whitespace absorbs the grammar's indented continuation lines. `fs114_l60_quotes.py` anchors quotes by line number, and one quote is FS112's literal "Rests on it: …" line; both suit its fixed older target and would not carry over to a new file, but no one points it at one. |
+| `tools/claude_md_fact_audit.py` | a "home" file's normalised text, for a token's presence | nothing: it reads tokens, not grammar |
+| the Proof Atlas (`tools/viz_proof_atlas_common.py`, `_facts.py`, `_check.py`) | `LEDGER.md` § B rows, CLAUDE.md sections, grokkings, Lean declarations | nothing: it has no address form for a derivation entry in either grammar |
+| `tools/viz_local_global_map_common.py` | `LEDGER.md` § B's grade column, folded by keywords | not a derivation-file reader, but a consumer of the § B lines a close drafts from new-grammar entries. Its fold reads "hand", "tools", "cert", "derived", "two derivations", "one mind" and similar words. A § B grade copied verbatim from a `grade: computed over: …` field matches none of them and folds to **open**. The lane file's translation table ("`computed over: <set>`" → "[tools]") prevents this, but only if it is followed. |
+
+### 3.2 Findings for the coordinator
+
+1. **Hyphenated bare names.** Under the older id rule `derivation: N7-3T` is counted as `N7-3T`, not `FS114-N7-3T`. Reported
+   mid-flight; the coordinator amended both close briefs (`7ed60495`). The checker prints a hint when it sees the pair.
+2. ***Rests on it* has no field in the new grammar, and the gate silently folds an indented `rests on it:` line into the field above
+   it.** The checker now requires the words "rests on" in the prose under each entry. A draft replacement for the lane file's line is
+   in §2.2, for Keryx to file. A true field in the grammar would be Kooshi's call, because the skill is upstream.
+3. **The gate's folding is general, not special to *Rests on it*.** Any indented `key: value` line whose key is not a field of the
+   block is appended to the previous field's value, with no warning. So a misspelled field (`prior-art:`, `hand off:`) is absorbed,
+   not flagged. `derive_gate.py` documents the behaviour ("an indented line whose key is not a field of the block continues the
+   previous field's value"), so it is a design choice upstream. It is also a silent path of the kind `CLAUDE.md` § Make the gate fail
+   warns about. For Kooshi's upstream skill; not changed here.
+4. **§ B lines drafted from new-grammar grades must use the project's words**, or the local–global map folds them to "open" (§3.1).
+5. **The existing self-test's two weaknesses, fixed in stage 2**: `clean` was outside the verdict, and the count check was one-sided.
+6. **My own control defect, found by the mutation harness and fixed before commit** (§2.4): the field loop read the constant under test.
+
+### 3.3 What is left
+
+Nothing in this job's scope. The closes run `--strict` on a scratch copy with their drafts applied (their briefs say so); the checker
+and its evidence are at `95efed69`.
