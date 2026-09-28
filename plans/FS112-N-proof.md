@@ -816,3 +816,73 @@ as N3-DENSE3 asks. N3-COR3 is local (it reads `u, u′`, the rhombus and small d
 antipodal votes (a scan) — replaced by the second-order formula and named exact values (ANTI).
 
 ## Stage N3-3 — SAVED
+
+## Stage N3-4 — SAVED: R2 (card R) — the chain's end is anchored at four-colour vertices; R3 read on the held positives; precisions to stage N3-3
+
+**Precisions to stage N3-3 (written after its commit; no verdict changes).**
+1. N3-FAIL's shadows need no first-order cone: the unit arc `τ ⊂ ω(q)` leaving `u` has `u` in the closure of both its side tiles, so for `z` near `q`,
+   `|z − u| < 1` puts points of `T_out` within `< 1` of `z` (and `T_out` has points beyond `1 + η₀` from `q`), and `|z − u| > 1` puts points of `T_in` beyond 1
+   (and `T_in` has points within `1 − η₀` of `q`). So `s_out` is absent from **all** of `B(u, 1)` near `q` and `s_in` from **all** of the outside near `q`; the
+   word "transversal" in N3-FAIL and N3-COR3 is not needed.
+2. Prop. 17 in N3-BASE's table is taken on N3-P17's route (FS110-P17); row 12 of the walk names its one Condition-5 use. The ring lemmas it rests on (FS110
+   N2-ROT, N2-HEX) were not walked separately in this job or in N's walk: **a named check for the verifier.** CB's own route (D5 item 5) reads the directions of
+   the branches of `ω(x_{i±1})` at `x_i`; with a unit arc of `ω(x_{i+1})` through `x_i` that is not both-kind, its sector constraint weakens, so that route is not
+   used here.
+
+### R2 — "a stuck chain whose end carries a horn bound of exactly ±1": not excluded; what it forces [hand, one mind]
+
+*Frame: FS110-N4 §2.5 (at `P_k` the cone colour is `a_k`, `a_{k−1}` fills the `+n` side, `a_{k+1}` the `−n` side). A chain `P_0, …, P_L` of stuck vertices of a
+terminal map with `λ_0 = −1`: the lower arc `α` of `P_0`'s `+a` horn `H₊` (colour `c = a_0`) is a unit arc of `ω(P_{−1})` leaving `P_0`, with `s_out = c`, `s_in = h = a_1`;
+`g = a_{−1}`; stuck `P_0` has `P_cl(P_0) = {c, g, h}`.*
+
+**N3-END.** *Either `υ_0 = 1` too — both of `P_0`'s horns lie between `ω(P_{−1})` and `ω(P_1)`, `P_0` is a one-vertex chain, and the in-type `g` at `P_1` and `h` at
+`P_{−1}` make both neighbours unit-arc centres — or:*
+1. *`P_{−1}` carries `c` (N3-DEG at `P_0`) and two `g`-sectors, tangent to `+a` and to `−a` from below (FLANK for the upper flank `g`, which `λ_0 = −1` does not touch; an
+   in-type `g` at `P_1` would force `υ_0 = 1`, N2-FLANK-Q), separated by `c` below and by `r′` or `h` above;*
+2. *terminality forces `int D_g(P_{−1}) = ∅` (else W-MERGE), so an out-type `g`-tile at `P_{−2}` and `g`'s two sectors are horns `G_±` along `±a` (N3-DEG);*
+3. *the colour `y` just below `G₊` lies in `α`'s side cone `(−ℓ, 0)` at `P_{−1}`, so `y ∉ {c, h}` (N112-U1), `y ≠ g`, and `y ≠` `G₊`'s upper flank (else SHAVE); so
+   **`P_{−1}` has at least four colours and a repeated colour**;*
+4. *`G₊` is not shaveable (terminal), so its lower flank `y` shadows it; FLANK's list admits only `y`-tiles at `P_0` (absent: `y ∉ P_cl(P_0)`) or, at lower bound `−1`,
+   an in-type `y`-tile at `P_{−2}`: so **`G₊`'s lower arc `β` is a unit arc of `ω(P_{−2})` through `P_{−1}`, with `s_out = g`, `s_in = y`, both at `P_{−2}`** — both-kind, so
+   `P_{−2}` has four or more colours or a repeated colour (N3-NOBOTH).*
+*Proof:* items 1–4 as stated; the SHAVE of item 4 with an absent `y`-shadow is valid (FLANK's list is complete when no in-type `y` sits at `P_{−2}`; the new circle
+has curvature `κ₊ ∈ (−1, 1)`). ∎ The mirror holds at an upper end `υ_L = 1`.
+
+**The step that fails, named.** N112-END would exclude the end if `P_{−1}` were stuck; `P_{−1}` does carry a repeated colour with horns along `±a` (item 2), but
+N4-STUCK (ii) — the step END uses ("`c` fills the whole `−n` half-plane") — needs **three colours at `P_{−1}`**, and item 3 gives four. So **R2's object is not
+excluded by the local calculus; it is anchored**: its end puts a four-colour vertex with a repeated colour one step beyond it and a both-kind unit arc centred two
+steps beyond it. This is **NB2-END made unconditional** (its premise, two `g`-sectors at `P_{−1}`, fails only in the doubly bounded one-vertex case, `υ_0 = 1`), and
+it is C-UA-CHAIN's shape: *a chain's end forces a further unit arc one step beyond it*.
+*Where six is spent:* item 3 (the four colours at `P_{−1}` are counted among six only through `P_cl(P_0) = {c, g, h}`, NB-4 at `P_0`). *Seven-colour control:* no
+stuck vertex; vacuous.
+
+**(b), after R1 and N3-END.** A stuck ray's end is anchored at four-colour vertices (N3-END); its vertices are repeated-colour vertices, so it is consistent with
+N3-DENSE3 along its line; its horns flatten at rate `≥ 1/(k+1)` (N3-RAYR). **GAP (b′), named:** whether a stuck ray can live in a valid map of the plane — a
+whole-line object; for periodic maps it cannot (N3-PER, N3-LEN).
+
+### R3 — the held positives' close complementary pairs, at both common unit points [a reading of held text and held formulas; N3-COR3 applied]
+
+| held positive | close complementary pair(s) | saved at the first common unit point by | at the second by | reading grade |
+|---|---|---|---|---|
+| FS-110 **T2** (`tools/fs110_y_fragments.py` header: "u on a full arc of omega(w) plus a ray along omega(w′); v its point reflection; w, w′ four-colour vertices") | `(u, v)`, `d = 1`, cubic | `w`: a four-colour vertex, centre of arcs leaving `u` (two, through `u`: DEG2) and leaving `v` | `w′`: the same, one arc each | the fragment's formula, as its header states it — **N3-COR3's rhombus exactly** |
+| FS-110 **S1** ("a bowtie u whose unit circle carries two boundary arcs … through w and w′") | `(u, v)`, `u` a bowtie | an arc of `ω(u)` through `w`, both-kind at `u` — a **repeated colour** at `u` (N3-NOBOTH's other branch) | the same at `w′` | header |
+| FS-110 **BB** ("u and v bowties escaping at both w and w′ (all straight)") | `(u, v)`, both bowties | the bowties' repeated colours (no unit arc); `w` four-colour | the same at `w′` | header |
+| FS-110 **MX** ("u a bowtie lying on a full arc of omega(w) (T2 at w, escape at w′)") | `(u, v)` | `w`: T2's four-colour double centre | `w′`: `u`'s bowtie | header |
+| **CAL-STRIP** (`[AxenovichEtAl2014]` p. 8: "The symmetric tiles have width 1/2, with the rounded boundary being a circular arc of radius 1 centered at the opposite corner of the tile"; `[07.10]`: "each vertex down the middle mandates four such curved edges") | not in the printed words (the colours are in the figure) | — | — | the words fix only that every unit arc is centred at a tile corner opposite it, the midline corners each centring four |
+
+**What N3-COR3 says of the strip, from its words and card X's midline fact (my record, N2-4):** every close complementary pair of cubic trichromatic vertices whose
+rhombus lies inside the strip is saved at **both** common unit points, and only by four-colour vertices that are centres of arcs leaving both; if the strip's only
+four-colour vertices are its midline vertices, both rhombus corners lie on the midline, so **the pair is a mirror pair across the midline** (a rhombus's diagonals
+bisect each other at right angles). Every held positive saves each of its close complementary pairs at both common unit points by a four-colour vertex or a repeated
+colour — never by a three-colour unit-arc centre.
+
+**Registered (G21 instruments).**
+
+| id | prediction | p | both outcomes reachable |
+|---|---|---|---|
+| N3-P4 | on the exact strip, every close complementary pair of cubic trichromatic vertices inside it is a mirror pair across the midline, both common unit points midline vertices | 0.75 | a pair with a corner off the midline (a four-colour vertex elsewhere, or a refutation of N3-COR3 if that corner has three colours) |
+| N3-P5 | a construction of R2's object by formula (a finite chain with `λ_0 = −1`) has four or more colours at `P_{−1}` and a unit arc of `ω(P_{−2})` through `P_{−1}` | 0.85 | a checked fragment with three colours at `P_{−1}`, or no arc at `P_{−2}`, refutes N3-END |
+
+**Would have searched here:** end configurations at `P_{−1}` (sector orders; an enumeration) — derived from FLANK, N3-DEG and N112-U1's side cone instead.
+
+## Stage N3-4 — SAVED
