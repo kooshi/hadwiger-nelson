@@ -1,0 +1,27 @@
+# FS114-NB quotations: <source>\t<quotation>
+data/fs114/claims.md	`F(M)`: the vertices of at least four colours; `R(M)`: the vertices carrying a repeated colour.
+plans/FS112-derivation.md	`F(M)`: the vertices of at least four colours; `R(M)`: the vertices carrying a repeated colour.
+data/fs114/claims.md	By the strip, any such `R` exceeds `√15/4 + √3/2 ≈ 1.834`.
+plans/FS112-derivation.md	On both positives it holds (four-colour midline vertices within 1.834 of every point of the strip; the disk's corners).
+data/fs114/claims.md	The positive control of any counting route: it must yield that non-Siamese valid five-colour maps do not exist (a known value, row 132), and name the step where six's room enters.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	so 200% of the edges are curved, so a 5-coloring is impossible.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges).
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I think it creates another quad/pentagon.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Degree 6 isn't possible with only 6 colors.
+/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G has a vertex of degree at least 6.
+/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	We define the map graph M = M(G, S) as the graph whose vertices are the faces of G such that two vertices in M are neighbors if and only if the corresponding facial cycles in G intersect.
+/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	It follows that M - x (that is, M with x and the edges incident with x removed) is connected.
+/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	Then any two consecutive vertices in the sequence xI, x2, .. ., Xk, x1 are neighbors in M and so M is locally connected.
+plans/FS106-V-verification.md	Niceness is used at exactly **two** steps: the rainbow step (touching faces, and two faces touching one face, differ) and the count of same-coloured faces inside a curve of diameter `< 2`.
+data/fs114/fs114-nb/voronov-arXiv-2304.10163.txt	Suppose that the disc of radius 3 defined by an arbitrary 2-dimensional norm is covered by 6 closed sets. Then at least one of these sets realizes the unit distance.
+data/fs114/fs114-nb/voronov-arXiv-2304.10163.txt	Denote by Ur (x) closed unit disc of radius r centered at x.
+data/fs114/claims.md	the step closedness buys (row 132: "closedness enters once, as compactness giving a band", `CLAUDE.md` § The aim, link 4).
+CLAUDE.md	closedness enters once, as compactness giving a band
+data/fs112/claims.md	At bounded `K`, a NO gives some radius by compactness [hand, one mind: FS112-A, over `plans/FS107-derivation.md` W-EQ-K's compactness step
+data/fs112/claims.md	is there a NO of Q-full whose every step reads a disc of bounded radius `R`? TRUE (with `R`) / FALSE / GAP.
+plans/FS107-derivation.md	TRUE at W's class; under a per-tile count alone (VW's (Ct)) the compactness step is a GAP that does not bear on `𝓜_K`
+plans/FS112-derivation.md	Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.
+plans/FS112-derivation.md	In a valid map, if the closed disc of radius 2 about a cubic trichromatic vertex `u` holds no vertex of at least four colours and none with a repeated colour, row 134's base refutes the map near `u`
+data/fs112/fs112-pa/extracts.md	tiles that lie entirely within each other’s annulus of exclusion
+data/fs114/claims.md	(this list) A vertex at which two tiles of one colour meet carries a repeated colour, so it is in `R(M)`.
+data/fs114/fs114-nb/sv-arXiv-2502.01958.txt	Note that all reasoning remains valid if we consider the interior of a circle of radius 3.
