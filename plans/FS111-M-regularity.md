@@ -52,8 +52,13 @@ each stage's section is headed "Stage n — SAVED" and committed before the next
 - **M-BLOCK-EQ** — in a colouring whose classes are a.e. unions of path-connected components, two components of one class are "near" (all cross
   distances `< 1`) or "far" (all `> 1`); tight block structure holds iff "near" is transitive — [hand, one mind] §4.2. R7: blocks = tiles, checked
   exactly (216 distinct same-colour pairs, every critical distance `≥ 1`).
+- **M-REDUCE-I** — REG-I_k follows from the honest existence form of C-SAT-T at `k` together with REG-J′_k (a saturated colouring whose singular set
+  Σ is locally finite, each point meeting finitely many interface arcs); so, with FS106-AE-MAP6, `χ_m⁰(ℝ²) ≥ 6` follows from those two statements at
+  `k = 5` — [derived, one mind] §5.1.
 
 ## Would-have-searched-here log (standing rule 3)
+
+- Stage 5: none (no object was hunted).
 
 - Stage 1: none.
 - Stage 2: would have run a local-search colourer for a saturated seven-colouring (every boundary point bound on both sides) on a pixel grid →
@@ -450,3 +455,93 @@ the middle one within `< 1` of both ends, the ends more than 1 apart — allowed
 plants `down_mod2` and `up_m_only` fire it). At `k = 5, 6` the step is transitivity of "near" in some saturated (or any) tight colouring: not reached;
 saturation does not visibly force it (a near-chain's middle component can be bound by both ends). *The calibration CM-Q5.1* (Cohen–Mani's one-class
 question): untouched; M-BLOCK-EQ is its multi-class restatement in the chain form.
+
+## Stage 5 — SAVED: M2 — REG-I reduced, REG-A's missing rung named, PER not reached; the verdict, the obstructions, and what the close should write
+
+*The brief's condition for M2* ("only if 2 and 3 land"): stage 2 landed in cover form (honest form GAP at `k = 5, 6`), stage 3 in corrected form. So M2
+is run as far as a reduction, with the obstruction named.
+
+### 5.1 M-REDUCE-I — REG-I_k from honest saturation and REG-J′_k [derived, one mind]
+
+*Statement.* If a tight a.e.-proper `k`-colouring exists and (i) a saturated honest one exists (C-SAT-T's existence form at `k`) whose (ii) singular set
+Σ is locally finite with finitely many interface arcs at each of its points (REG-J′_k, §4.1), then a map-type colouring (S–V Conditions 2–4) with `k`
+colours is a.e.-proper (REG-I_k). At `k = 5`, with C-SIX-M and FS106-AE-MAP6: **(i) and (ii) at `k = 5` imply `χ_m⁰(ℝ²) ≥ 6`, hence `χ(ℝ²) ≥ 6` given
+MR** — FS-104's statement, reduced to two regularity statements about a hypothetical saturated five-colouring.
+*Proof.* Off Σ, (H1) and (H2) hold by Σ's definition, so the essential boundary there is a union of `C^{1,1}` arcs (M-C11). An arc cannot close up off
+Σ: the region it would bound has points of Σ on its minimal enclosing circle (M-EXTREME), which lie in its closure's boundary. So every arc ends at
+points of Σ. In a bounded set `B`, every region meeting `B` has diameter `≤ 1` (M-HULL2), so its boundary arcs end at points of the finite set
+`Σ ∩ (B + B̄(0, 1))`, each meeting finitely many arcs: finitely many arcs meet `B` (Condition 3). Vertices: the points of Σ met by at least three arcs;
+a point met by two is erased into one boundary; boundaries are the arcs (Jordan, `C^{1,1}`); regions the components of the complement, each a
+component of one open class; adjacent regions differ in colour (an interface point has two colours). Condition 2's last clause holds after erasing.
+a.e.-properness is the colouring's own (boundaries null). ∎
+
+### 5.2 REG-A — the missing rung, named
+
+M-PINCH leaves two interface types off Σ: **(split)** arcs — unit arcs of kind both, already in Q-NO's class (FS-114's half, with unit arcs); and
+**(tangent)** curves — `C^{1,1}`, `|κ| ≤ 1`, with unit-parallel partners of the far colours at distance exactly 1 on both sides. REG-A (segments and arcs)
+needs the second type to be segments or circular arcs. Two routes, either suffices for C-SEVEN-M with FS-114's NO:
+- **REG-CHAIN** (proposed): in a saturated six-colouring, a (tangent) interface generates a chain of unit-parallel interfaces (its partner curves, which
+  are themselves interfaces with partners); row 134's shadow map `λ ↦ λ/(1 + λ)` (FS110-N4) transports curvature along such a chain. *Statement to
+  decide:* every chain is straight or ends at (split) arcs or at Σ.
+- **NO-C11** (proposed, X16's alternative; a sharpening of the list's NO-C2): no map-type colouring whose interfaces are unit arcs of kind both and
+  (tangent) `C^{1,1}` curves with `|κ| ≤ 1` carries an a.e.-proper six-colouring. Row 134's chain "uses no complexity bound" and its N4 step reads
+  exactly curvature along unit-parallel chains, so this is where its extension would be decided.
+
+### 5.3 PER
+
+Not reached (a statement about the sequence SEQ; nothing here bears on perimeter density along a sequence). On the limit side only: under REG-J′,
+a saturated colouring's interfaces in a bounded set are finitely many `C^{1,1}` arcs of curvature `≤ 1`, so each class has locally finite perimeter
+— PER's limit shadow, conditional.
+
+### 5.4 The verdict table (every claim worked, with its grade and minds)
+
+| claim | verdict | grade, minds | where |
+|---|---|---|---|
+| C-FILL | TRUE | [hand], two minds (P; V0; here, sighted) | §1.4 |
+| C-HULL | MISSTATED — first clause TRUE; "so" FALSE (V0's hexagon); corrected as V0 and as M-HULL2 | [hand], two minds on the verdict (V0; here) | §1.5 |
+| C-SAT-T | honest existence form: TRUE at `k ≥ 7` (R7), vacuous at `k ≤ 4`, **GAP at `k = 5, 6`** (from a maximal cover to an honest colouring bound on both sides of every interface); cover form M-SATC **TRUE**; process form ("by fills") not decided, local fills deadlock (M-DEADLOCK) | [hand + tools exact], one mind | §2 |
+| C-HULL-REG | **MISSTATED** — GAP as stated at (H1), (H2); corrected (M-PINCH, M-C11) TRUE: `C^{1,1}`, `\|κ\| ≤ 1`, unit arc of kind both or two-sided tangent unit discs | [hand], one mind | §3 |
+| REG-J_k | **MISSTATED** (the junction set must be Σ, not `\|P\| ≥ 3`); REG-J′ TRUE at `k ≥ 7` (R7), GAP at `k = 5, 6` (local finiteness of Σ); M-HALF, M-POLAR, M-EXTREME proved toward it | [hand], one mind | §4.1 |
+| REG-B_k | TRUE at `k ≥ 7` (R7, exact), GAP at `k = 5, 6` (transitivity of "near", M-BLOCK-EQ) | [hand + tools exact], one mind | §4.2 |
+| REG-I_k | GAP; reduced (M-REDUCE-I) to honest C-SAT-T ∧ REG-J′ | [derived], one mind | §5.1 |
+| REG-A_k | GAP; the missing rung named (REG-CHAIN or NO-C11) | — | §5.2 |
+| PER | not reached | — | §5.3 |
+| C-SEVEN-M, C-SIX-M, C-REG-EQ | not re-worked (TRUE at two minds: P, V0) | — | §1.3 |
+| CM-Q5.1 | untouched; M-BLOCK-EQ is its multi-class chain form | — | §4.2 |
+
+**Registrations scored** (`plans/FS111-cone-scale.md` §6.3, read after stage 1): E3 — GAP (honest form), with the cover form TRUE; E4 — as stated GAP,
+corrected TRUE and stronger than registered; E5 (0.2) — not landed; E6 (0.05) — not landed, reduced (M-REDUCE-I); E9 (0.85) — met: named GAPs at named
+steps, plus four lemmas and one exact inhabitant.
+
+**The obstructions met, in one list.** (1) Fills are not monotone and an honest interface can sit in a gap no local move closes (M-DEADLOCK) — the
+honest saturation is global. (2) `P(x)` does not see density-0 colours or disconnected local parts: the regularity statements must be posed off Σ.
+(3) The (tangent) interfaces are not forced to be segments or arcs by anything proved here: REG-A needs a chain argument (REG-CHAIN) or a NO for the
+class saturation delivers (NO-C11). (4) Block structure is exactly transitivity of "near" (M-BLOCK-EQ); nothing proved here forces it.
+
+**What would kill the headline reading** (*saturation is the regularity mechanism: after saturation, interfaces off Σ are unit arcs of kind both or
+unit-parallel `C^{1,1}` curves*): a saturated honest colouring with an interface point satisfying (H1) and (H2) whose interface is not `C^{1,1}` there
+(a defect in M-PINCH's Step 2 or in the rolling-ball step).
+
+### 5.5 Proposed for the close (I edit none of these files)
+
+- **`LEDGER.md`, a row for route M's first rungs** (with W's results, when reconciled): M-SATC, M-PINCH, M-C11, M-EXTREME, M-HALF, M-POLAR, M-BLOCK-EQ,
+  M-REDUCE-I, M-DEADLOCK [hand, one mind each]; M-R7 [tools exact, two engines, one mind]; the verdicts of §5.4. "It moves no value."
+- **A grokking (draft G84), in G67's form:** *Saturation pins interfaces between unit circles. [hand, one mind]* In a saturated colouring every
+  interface point off Σ carries a contact for each side colour, and each side's local part lies on one side of each contact circle; so the interface
+  is a unit arc whose centre carries both colours (split), or a `C^{1,1}` curve squeezed between two unit discs with unit-parallel partners (tangent);
+  "(in, in)" cannot occur. *Do: when a regularity question about a tight colouring arises, saturate first — the cover form costs nothing (Zorn) —,
+  read each interface point's two contacts, and spend effort only on Σ (cusps, three-colour points, disconnected local parts) and on the parallel
+  chains. Killing test: a saturated honest colouring with an interface point satisfying (H1), (H2) whose interface is not `C^{1,1}` there.*
+- **`data/fs111/claims.md` corrections:** C-HULL (V0's correction, now two minds); C-SAT-T's two readings; C-HULL-REG's hypotheses (H1), (H2); REG-J's
+  junction set Σ (REG-J′).
+- **Stubs to mint:** (a) *honest saturation* — from a maximal cover to an honest colouring bound on both sides of every interface, at `k = 5, 6` (or run
+  REG on covers and select); (b) *REG-CHAIN / NO-C11* — unit-parallel chains and the shadow map (bears on REG-A and on FS-114's class); (c) *REG-J′* —
+  local finiteness of Σ in some saturated colouring; (d) for competitor W or the close: a saturated colouring (any `k`) with a bichromatic vertex of
+  degree `≥ 4` or a density-0 third colour at a two-colour point, which would make C-HULL-REG *as stated* FALSE.
+- **`BIBLIOGRAPHY.md`:** `[Polymath16threads]` — add thread 4, de Grey, 5 May 2018 (the Reuleaux 4 + 3 colouring, R7, quoted in §2.4) and thread 12,
+  Hockertz, 24 March and 14 April 2019 ("the 7-color Reuleaux triangle tesselation"; "the Reuleaux tiling whose 100% exclusion rate still fascinates
+  me"); Rataj–Zajíček 2017 (arXiv:1604.08841) read: §2 Definition 2.1 and eq. (2), §6 Lemmas 6.1–6.2, Definition 6.3, Theorem 6.4's statement and
+  the first part of its proof; Rataj–Zajíček 2025 (arXiv:2512.17606) read: abstract and §1 to Definition 1.2. *Debts:* the two-sided rolling-ball
+  theorem (Walther 1999; the "two-sided supporting spheres" literature) cited as classical, not held or read; Jung's theorem used (classical).
+- **Front-page correction (with V0's §2.10):** the rank-2 row's composition needs, on route M, REG in the corrected rungs of this record — honest
+  saturation, REG-J′, and REG-CHAIN or NO-C11 — and at five colours M-REDUCE-I gives FS-104's statement from honest saturation and REG-J′ alone.
