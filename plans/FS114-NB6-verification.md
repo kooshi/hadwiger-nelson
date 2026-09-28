@@ -25,6 +25,8 @@ N-E1, N-E2, N3-FACE, N3-HALF, N3-SEC, N3-FLANK, N3-PAIR, N4-LENS, N5-SIGHT, N5-B
 | NB6-CENT | N6-CENT: TRUE with its last clause read as `0° < γ < 60°` (literally it also covers `γ = 0°`, which its previous clause allows) | [hand, one mind] | §1c.6 |
 | NB6-COV | N6-COV: first clause GAP as stated — the windows alone let the ring tiles hold the cone about the direction of `p`; TRUE with `κ` defined just beyond both windows; second clause TRUE in the pinwheel | [hand, one mind] | §1c.7 |
 | NB6-PIN | N6-PIN: TRUE as a status | [hand, one mind] | §1c.8 |
+| **NB6-MTP** | N6-MTP: the stationary hull member, its unimodular Palm version and hyperfiniteness TRUE (printed: `[AldousLyons2007]` Ex. 9.5, Thm 8.5; a nested random grid); "so of average curvature zero" **GAP** as stated — a hole-free map's hull can hold maps with annular faces or collapsed tiles, outside `[AngelHutchcroftNachmiasRay2018]` Thm 1's maps; it needs GAP-μ in the hull | [hand, one mind; over the printed theorems read] | §1d.2 |
+| **NB6-FOLNER** | For a valid map of bounded complexity whose tiles are open discs (pinch points allowed), route T's aperiodic averaging step closes by Euler's formula on large discs (boundary `O(R)`, a local surplus `≥ cR²`): no hull, no unimodularity needed | [hand, one mind] | §1d.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -33,6 +35,7 @@ N-E1, N-E2, N3-FACE, N3-HALF, N3-SEC, N3-FLANK, N3-PAIR, N4-LENS, N5-SIGHT, N5-B
 | enumerate ring patterns (change points, (Q)/(R2) pieces) of a four-colour vertex | N6-KAPPA's straddle and CL-ring by hand (§1b.1–1b.3) |
 | scan the cone patterns `(α_1, …, α_4)` of a pinwheel for survivors | reduced to multiples of 60° by N6-RING60 and killed each 60°→larger step by one lemma (§1b.4–1b.5) |
 | build a fragment by formula with a (Q) arc ending 60° after a change point, to decide N6-WIN (iii) | read the strip's `P_1` (a held rebuild) as a near-instance; the sub-case left a GAP (§1b.2) |
+| construct a map whose hull holds an annular face, to test N6-MTP's step 4 | described one by formula in words (C-shaped tiles, channel width `1/n` on the dyadic annuli) and argued the limit; not built (§1d.2) |
 
 ## Fence log (standing rule 13; template and instance § Fences)
 
@@ -279,3 +282,55 @@ and at N-E1 in N6-QE1; the hexagonal seven-colouring has three absent colours at
 counts); it is run through N6-MTP at stage 1d.
 
 ## Stage 1c — SAVED
+
+## Stage 1d — SAVED: N6-MTP, the separate question (reading and verdict)
+
+### 1d.1 Read (G50), section by section
+
+- **`[AngelHutchcroftNachmiasRay2018]`** (O. Angel, T. Hutchcroft, A. Nachmias, G. Ray, *Hyperbolic and parabolic unimodular random maps*, arXiv:1612.08693v2,
+  held `~/source/library/pdf/arXiv-1612.08693-…pdf`; journal data not checked here): **read** — abstract, §1 (Theorem 1, the Dichotomy Theorem, statement), §2.1
+  (maps: a connected locally finite graph, every face an open disc, faces counted with multiplicity at a vertex), §2.2 (unimodularity, the MTP), §3.2–3.3 (invariant
+  Cheeger constant; Theorem 3.4 with its proof), Example 4.11 (Euclidean Delaunay and Voronoi maps are parabolic). **Not read:** §§4–7 otherwise.
+- **`[AldousLyons2007]`** (D. Aldous, R. Lyons, *Processes on unimodular random networks*, Electron. J. Probab. 12, Paper 54 (2007), 1454–1508; arXiv:math/0603062v6,
+  held): **read** — Theorem 8.5 (amenability criteria, statement), Example 9.5 (tilings; the Palm measure of an isometry-invariant embedded graph is unimodular, with the
+  proof's first half). **Not read:** the rest.
+- Neither is in `BIBLIOGRAPHY.md` (grepped by author and arXiv id); rows proposed at stage 2's end.
+
+### 1d.2 N6-MTP — TRUE in its printed steps; GAP at "so of average curvature zero" as stated (the hull's member need not be a proper map); its conclusion for the averaging step TRUE for hole-free maps by a direct argument [hand, one mind; over the printed theorems read]
+
+*The statement's chain, step by step.*
+1. **A stationary random valid map in the hull.** The translates of a map with `𝓜_K`'s bounds (at most `K` arcs per tile, radii at least `1/K`, at most `K` tiles per unit
+   disc) have compact closure in the local topology; `ℝ²` is amenable, so empirical averages over growing squares have translation-invariant limit points
+   (Krylov–Bogolyubov). Validity is closed under these limits: two interior points of one colour at distance 1 in a limit would give, nearby in the approximants, open sets
+   of one colour whose distances straddle 1 (N-E0); non-Siamese is closed too (cross distances stay `≥ 1`, and `= 1` is excluded as just said). ✓
+2. **Its Palm version is unimodular.** `[AldousLyons2007]` Example 9.5, stated for laws invariant under the full isometry group; its proof uses only that the diagonal
+   measure `ρ(B × C)` has equal marginals, which translation invariance gives on `ℝ²` (a unimodular group acting simply transitively). The map's rotation system and
+   geometry ride as marks (`[AngelHutchcroftNachmiasRay2018]` §2.2). ✓
+3. **Hyperfinite.** An independent translation-invariant nested dyadic grid (offset Haar-distributed on the inverse limit of `ℝ²/2ⁿℤ²`) gives finitary percolations
+   `ω_n` = edges inside one level-`n` square, increasing, with finite clusters (at most `K` tiles per unit disc), exhausting every edge almost surely (an edge of length
+   `≤ 1` crosses a level-`n` line with probability `O(2^{−n})`): `[AldousLyons2007]` Theorem 8.5 (iv). ✓
+4. **"So of average curvature zero."** `[AngelHutchcroftNachmiasRay2018]` Theorem 1 ((1) ⟺ (2)) with Theorem 3.4 gives it for an infinite ergodic unimodular random rooted
+   **planar map** with `E[deg ρ] < ∞` (ergodic components otherwise). A planar map there has a **connected** graph and **every face an open disc** (§2.1); pinch points are
+   allowed and counted by multiplicity, as the statement says. **The GAP:** step 1's limits need not be such maps even when the map is. A C-shaped tile whose two tips
+   close around a pocket, the channel between them narrowing along the map (allowed in `𝓜_K`: the bounds cap arcs, radii and tiles per disc, not widths), converges to a
+   tile that surrounds the pocket — an annular face, and the pocket's boundary a separate component; a sliver tile collapses to a curve. A stationary measure can
+   concentrate on such limits (let the channel widths shrink along the map, e.g. width `1/n` in the annulus `2ⁿ ≤ |x| < 2ⁿ⁺¹`). So "`μ = 0` in the map" does not give
+   "`μ = 0` in the hull", and the scope line "GAP-μ … untouched" must read **GAP-μ in the hull**; the kill's local statements must also hold on the limits (degenerate
+   realizations are not valid maps in the strict sense). *Where it holds:* when the chosen stationary measure charges only maps whose faces are discs.
+5. **Intensity identities.** Given a proper Palm map, route T's counts (Euler in expectation: `E[κ(ρ)] = 0` is `E[deg ρ] − 2 = 2E[Σ_{f ∋ ρ} 1/deg f]`) and N3-JOINT's
+   assignment (a finite-range mass transport) hold in expectation by the MTP. ✓
+
+*A direct route, with no hull (derived here).* **For a valid map of bounded complexity whose tiles are open discs (pinch points allowed), the aperiodic averaging step
+closes by Euler's formula on large discs.** The tiles meeting `B(0, R)` form a finite connected plane map; Euler's formula for it, and each local identity of route T,
+hold up to a boundary term bounded by `C(K)` times the number of tiles meeting the annulus `R − 1 ≤ |x| ≤ R + 1`, which is `O(R)`; a local strict inequality ("a unit unused
+in every disc of radius `R₀`") gives at least `cR²/R₀²`. Contradiction for large `R`. This needs no unimodularity, no hyperfiniteness and no curvature theorem (it is the
+single-map, Følner form of the same count), and it keeps `μ = 0` in the map itself. **So N6-MTP's conclusion — "the aperiodic averaging step for Q-full_K closes" — is TRUE for
+hole-free maps**, by this route; by N6-MTP's own route it closes only under GAP-μ in the hull.
+
+*The positive control (C114-FIVE-COUNT), run through it.* Averaging adds nothing that depends on `k`: N114-EULER's identity
+`Σ_f (deg_M(f) − (k − 1)) = (7 − k)F + Σ_v (d − 2)(d − 3) − μ` holds on `B(0, R)` up to `O(R)`, so wherever the torus five-colour argument closes, the plane version at bounded
+complexity closes by the direct route (and by N6-MTP's route under the same GAP), and six's room enters at the same place: `(7 − k)F` drops from `2F` to `F` and the unit-arc
+repeats of the rainbow deficit (N114-RD's (A), (B)) are what allow map-degree above five. **Scope:** `𝓜_K` only (the `O(R)` boundary bound uses the tiles-per-disc cap);
+GAP-μ, K1, K2-loc, the Siamese class and unbounded complexity untouched, as the statement says.
+
+## Stage 1d — SAVED
