@@ -1,4 +1,4 @@
-*Instance file for job **FS114-YB** (the brief is `data/fs114/briefs/YB114-verify-construction.md`). Written by the product owner, 2026-09-28 night, at
+*Instance file for job **FS114-YB** (the brief is `data/fs114/briefs/YB114-verify-construction.md`). Written by the product owner, 2026-09-27 night, at
 FS114-Y's hand-back. The objects and statements below are FS114-Y's, quoted from its record with its grades, verdicts and proofs withheld, apart
 from the construction rule each object needs. Rebuild each object from its rule, check it exactly with your own tool, and give your own verdict:
 TRUE, FALSE (a counterexample), GAP at a named step, or MISSTATED (the corrected statement).*
