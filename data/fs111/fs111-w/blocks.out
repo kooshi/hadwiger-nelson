@@ -1,0 +1,24 @@
+### control: hex7 with S1, S2 on every hexagon
+  P: HOLDS
+  T: HOLDS: tile ('H', 0, 0) has diameter exactly 1
+  NB: dist^2(H,S1) = (7/16 + -1/4*r3), dist^2(H,S2) = (7/16 + -1/4*r3), maxdist^2(S1,S2) = 677/625 -> no tight block structure
+  => ALL HOLD
+exit=0
+### plant bigsq (must fail exactly ['P'])
+  P: FAILS: P: tiles ('H', 0, 0) and ('S1', 0, 0) (colour 0) have dist^2 (7/16 + -1/4*r3) < 1 < maxdist^2 (67/100 + 3/10*r3)
+  T: HOLDS: tile ('H', 0, 0) has diameter exactly 1
+  NB: dist^2(H,S1) = (7/16 + -1/4*r3), dist^2(H,S2) = (7/16 + -1/4*r3), maxdist^2(S1,S2) = 793/625 -> no tight block structure
+  fails ['P'] -> FIRES FOR ITS OWN REASON
+exit=0
+### plant near (must fail exactly ['P'])
+  P: FAILS: P: tiles ('S1', 0, 0) and ('S2', 0, 0) (colour 0) have dist^2 9409/10000 < 1 < maxdist^2 626/625
+  T: HOLDS: tile ('H', 0, 0) has diameter exactly 1
+  NB: dist^2(H,S1) = (7/16 + -1/4*r3), dist^2(H,S2) = (1021/2500 + -47/200*r3), maxdist^2(S1,S2) = 626/625 -> no tight block structure
+  fails ['P'] -> FIRES FOR ITS OWN REASON
+exit=0
+### plant far (must fail exactly ['NB', 'P'])
+  P: FAILS: P: tiles ('H', 0, 0) and ('S1', -3, 1) (colour 0) have dist^2 (5551/2500 + -703/625*r3) < 1 < maxdist^2 (25101/2500 + -9/2*r3)
+  T: HOLDS: tile ('H', 0, 0) has diameter exactly 1
+  NB: dist^2(H,S1) = (39/16 + -3/4*r3), dist^2(H,S2) = (7/16 + -1/4*r3), maxdist^2(S1,S2) = 2602/625 -> FAILS
+  fails ['NB', 'P'] -> FIRES FOR ITS OWN REASON
+exit=0

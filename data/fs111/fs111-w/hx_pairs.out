@@ -1,0 +1,13 @@
+### R = 0.5000 (the tight seven-colouring itself)
+   complementary pair at distance 1.3229: unit point in a colour-0 hexagon at 0.7913 R from its centre (x24)
+   angle from dir(vertex -> unit point) to the nearest edge-normal: [0.516, 22.303] degrees (blocking margin available: below 0.516)
+### R = 0.4364, HX void radius rho/R = 0.5000
+   complementary pair at distance 1.1547: unit point in a colour-0 hexagon at 0.4205 R from its centre -> inside the void (x24)
+   angle from dir(vertex -> unit point) to the nearest edge-normal: [5.629, 16.158] degrees (blocking margin available: below 5.629)
+### R = 0.4330, HX void radius rho/R = 0.5543
+   complementary pair at distance 1.1456: unit point in a colour-0 hexagon at 0.3982 R from its centre -> inside the void (x24)
+   angle from dir(vertex -> unit point) to the nearest edge-normal: [5.947, 15.839] degrees (blocking margin available: below 5.947)
+exit=0
+### plant: colour 3 absorbed -> unit points in colours [3]
+  -> FIRES FOR ITS OWN REASON
+exit=0
