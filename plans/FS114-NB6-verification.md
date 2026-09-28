@@ -27,6 +27,11 @@ N-E1, N-E2, N3-FACE, N3-HALF, N3-SEC, N3-FLANK, N3-PAIR, N4-LENS, N5-SIGHT, N5-B
 | NB6-PIN | N6-PIN: TRUE as a status | [hand, one mind] | §1c.8 |
 | **NB6-MTP** | N6-MTP: the stationary hull member, its unimodular Palm version and hyperfiniteness TRUE (printed: `[AldousLyons2007]` Ex. 9.5, Thm 8.5; a nested random grid); "so of average curvature zero" **GAP** as stated — a hole-free map's hull can hold maps with annular faces or collapsed tiles, outside `[AngelHutchcroftNachmiasRay2018]` Thm 1's maps; it needs GAP-μ in the hull | [hand, one mind; over the printed theorems read] | §1d.2 |
 | **NB6-FOLNER** | For a valid map of bounded complexity whose tiles are open discs (pinch points allowed), route T's aperiodic averaging step closes by Euler's formula on large discs (boundary `O(R)`, a local surplus `≥ cR²`): no hull, no unimodularity needed | [hand, one mind] | §1d.2 |
+| NB6-QT2 | The instance's thirteen statements are verbatim in N6's record (13 of 13); the instance's gloss of "(Q) arc" widens FS-112's term (it would count (R2) arcs) | [tools] | §2.2; `quotes-n6.out` |
+| **NB6-COVFIX** | N6-COV as stated is MISSTATED: its proof needs `κ` defined just beyond both windows (N6's own RCONE line uses an `X`-tile at `q − 60°`); corrected, TRUE | [hand; two minds, one blind] | §1c.7, §2.3 row 6 |
+| **NB6-WINFIX** | N6-WIN's table sentence is MISSTATED (the reach of `y + 60°` is unconditional there, conditional in N6's §2.2 and in my derivation); §2.2's form TRUE | [hand; two minds, one blind] | §1b.2, §2.3 row 1 |
+| **NB6-QSTART** | N6's §2.3 consequence "(Q) arcs never start at a centre from the counter-clockwise side" rests on the withdrawn N6-P60 step; after N6-P60′ a (Q) arc of `T_{j+2}` from `q_j` (outer tile `z_j`) is admitted by N6-QOUT's zone when `α_{j+1} = 60°`, `α_{j+2} ≤ 120°`: GAP | [hand, one mind] | §2.3 row 8 |
+| NB6-MTP2 | N6-MTP's route: GAP (hull limits of simple hole-free maps can be non-simple); its conclusion TRUE by N2-AVG, which NB6-FOLNER re-derived blind | [hand; two minds, one blind for the conclusion] | §2.3 rows 9–10 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -334,3 +339,64 @@ repeats of the rainbow deficit (N114-RD's (A), (B)) are what allow map-degree ab
 GAP-μ, K1, K2-loc, the Siamese class and unbounded complexity untouched, as the statement says.
 
 ## Stage 1d — SAVED
+
+## Stage 2 — SAVED: FS114-N6's record read; divergences; verdicts after reading
+
+### 2.1 Read (after stage 1's last commit `764dbc69`)
+
+`plans/FS114-N6-proof.md` in full (header, theorem table, logs, stages 1–5, proposals); `tools/fs114_n6_pin.py` re-run by me: output identical to
+`data/fs114/fs114-n6/pin.out` (20 lines), its `--plant` identical to `pin-plant.out` (exit 1, as recorded); `plans/FS114-N-proof.md` N2-AVG (l. 455–470, to
+compare with my NB6-FOLNER). Copies in `scratchpad/fs114-nb6/`.
+
+### 2.2 The quotation check of the instance against N6's record (standing rule 5)
+
+`tools/fs114_nb6_quotes.py data/fs114/fs114-nb6/quotes-n6.tsv` (the thirteen statements, extracted from the instance by script): **13 of 13 FOUND** verbatim in
+`plans/FS114-N6-proof.md` (`quotes-n6.out`, exit 0). **One paraphrase, in the instance's own gloss:** "A (Q) arc of the ring `ω(p)` is a boundary arc along `ω(p)`
+whose outer colour is carried at `p` (FS-112's (Q) type; N5-BENDG)" drops FS-112's "and the inner colour too"; N6 uses FS-112's (Q) (its §1.2 and §2.2: "(Q) or
+(R2)"). Read literally, the gloss makes (R2) arcs (Q) arcs, and then N6-QOUT's "inner `T_{j+1}`" and N6-QE1 are false for them. **My slip, disclosed:** §1b.0's
+"every verdict below holds under both readings" is right for §1b's claims (KAPPA, WIN, RING60, NOQ, the lemma) but not for §1c's N6-QOUT, N6-QE1 and N6-PIN, whose
+verdicts are for FS-112's (Q), N6's own.
+
+### 2.3 Divergences from my stage-1 verdicts (each with both addresses)
+
+| # | claim | kind | mine (stage 1) | N6 | changes a verdict? |
+|---|---|---|---|---|---|
+| 1 | N6-WIN | **scope, in the table sentence** | §1b.2: the reach of `y + 60°` TRUE only when `κ` is defined just before it; GAP at a (Q) end | table: "…one tile, which reaches `y + 60°`" unconditional; its own §2.2 (i): "if moreover `κ(y + 60° − δ)` is defined, `y + 60°` is a change point … and `R_A` has it in its closure" | **yes for the table sentence: MISSTATED**, corrected to §2.2 (i)'s form; §2.2's form TRUE, two minds, one blind |
+| 2 | N6-RING60 | wording | "after the bends" needed (§1b.3) | table omits it; §2.2's corollary carries it | no |
+| 3 | N6-P60′ | hypothesis | the table's "`κ` defined on the two 60° windows" suffices: the clockwise `δ` beyond `q_j − 60°` follows from N6-QOUT's zones, the counter-clockwise `δ` is not needed (`U′` is ordered behind `t_{j+1}`'s cone) (§1c.2, §1b.4) | §3.1 assumes `κ` on `(φ_j − 60° − δ, φ_j + 60° + δ)` and uses `R_− ⊂ [210°, 330°]` rel | no — both TRUE; mine proves the statement as tabled |
+| 4 | N6-P60′ | route | "the whole side": the region `Λ` holds only `t_{j+1}` and `U′`, `U′` separated from the side's middle (§1c.2) | §3.1: "simple class: the common boundary of two tiles is connected" | no — N6's is shorter |
+| 5 | N6-NOQ | route | no N6-PIN180: NB6-P60 also kills `(60, 60, 60, 180)` (§1b.5) | §2.4/§3.1: N6-PIN180 restricts to `{60°, 120°}`, then N6-P60′ | no |
+| 6 | **N6-COV** | **truth at the stated hypothesis** | §1c.7: GAP — with `κ` on the two windows only, the ring tiles' cones at `q` are `[30°, 210°]` and `[150°, 330°]` rel `φ`, both meeting `(150°, 210°)` | §Stage 4: TRUE, "(N6-WIN, as in N6-P60′)" — importing P60′'s `δ`-extended hypothesis; N6's own tool line RCONE "direction 180 (toward p) faces w_- strictly (so R_+ cannot hold it)" rests on an `X`-tile at `w_−`, outside the windows | **yes: MISSTATED**, corrected: "…with `κ` defined on `(φ − 60° − δ, φ + 60° + δ)` …", then TRUE (two minds, one blind); the second clause TRUE in the pinwheel |
+| 7 | N6-CENT | wording | the last clause needs `0° < γ < 60°` (§1c.6) | §Stage 4's body: "K1's "non-Reuleaux lenses" (`0 < γ < 60°`) reduce to rings with (Q) arcs" | no |
+| 8 | N6-QOUT's §2.3 consequence (not a table claim) | **truth of an unfiled step** | QOUT's zone for `T_{j+2}` starts at `q_j` when `α_{j+1} = 60°`, `α_{j+2} ≤ 120°`, and N6-ADJ/P60′ allow `T_{j+2} ∋ q_j`: a (Q) arc of `T_{j+2}` (outer tile `z_j`, by CL) starting at `q_j` counter-clockwise passes every constraint I hold | §2.3: "**(Q) arcs never start at a centre from the counter-clockwise side** (… needs `α_{j+1} = 60°` and `T_{j+2} ∋ q_j`, excluded in §2.4)" — §2.4's step was withdrawn at §3.1 and this consequence was not re-derived | not a table verdict; **GAP owed**: §2.3's dichotomy at centres gains a third case (the counter-clockwise branch a (Q) arc of `T_{j+2}` from `q_j`); N6-NOQ does not use it, the (Q)-pinwheel's residual (N6-PIN, K1-PINQ) does |
+| 9 | **N6-MTP** | **truth of the route** | §1d.2: the printed steps TRUE; "so of average curvature zero" GAP — the hull of a simple, hole-free map can hold non-simple members (a C-shaped tile's channel closing: a pinch point or an annular face; slivers collapsing), outside AHNR's maps and outside the simple class every kill statement assumes | §5.2: "closes … by printed theorems, with no Følner estimate"; holes bridged ("add a bridge edge … local, colour-free"), which settles the Euler side and turns a hole into `μ`, "GAP-μ … untouched" | **yes: the route is GAP** (it needs GAP-μ *and the simple class* in the hull, not only in the map); **the conclusion is TRUE by the direct route**, N2-AVG (FS114-N2, one mind) = NB6-FOLNER (mine, derived blind to N2-AVG): two minds, one blind, and with no complexity bound in N2's form |
+| 10 | N6-MTP | wording | translation invariance suffices for `[AldousLyons2007]` Ex. 9.5's proof on `ℝ²` | "Rotations are optional (SO(2) is compact)": average over rotations and apply Ex. 9.5 verbatim | no — both right |
+| 11 | grades | grade | — | every N6 row "one mind" | every row I confirm is now **two minds, one blind** (list in 2.4) |
+
+### 2.4 Verdicts after stage 2
+
+| claim | verdict | grade (minds) | radius read |
+|---|---|---|---|
+| N6-KAPPA | TRUE | hand; two, one blind | `1 + ε` |
+| N6-WIN | §2.2's form TRUE; the **table sentence MISSTATED** (the reach needs `κ` defined just before `y + 60°`; at a (Q) end it is a GAP) | hand; two, one blind | `1 + ε` |
+| N6-RING60 | TRUE (after the bends) | hand; two, one blind | `1 + ε` |
+| **N6-NOQ** | **TRUE** | hand; two, one blind, different routes at the 180° case | `1 + ε` (bends on the fragment) |
+| N6-PIN | TRUE as a status (the (Q) residual larger than §2.3 says: divergence 8) | hand; two, one blind | `1 + ε` |
+| N6-P60′ | TRUE as tabled (the proof's `δ`-extension not needed) | hand; two, one blind | `1 + ε` |
+| N6-ADJ | TRUE | hand; two, one blind | `p, q_j, q_{j+1}` |
+| N6-QOUT | TRUE (for FS-112's (Q)); its §2.3 second consequence GAP | hand; two, one blind | `1 + ε` |
+| N6-QE1 | TRUE | hand; two, one blind | `1 + ε` |
+| N6-PIN180 | TRUE | hand; two, one blind | `ε` |
+| N6-CENT | TRUE (last clause for `0 < γ < 60°`, as N6's body says) | hand; two, one blind | `1 + ε` |
+| **N6-COV** | **MISSTATED**: TRUE with `κ` defined on `(φ − 60° − δ, φ + 60° + δ)`; GAP with the windows only | hand; two, one blind (corrected form) | `1 + ε` |
+| **N6-MTP** | printed steps TRUE; **"closes by printed theorems" GAP** (the simple class and `μ = 0` are not inherited by the hull); the conclusion for Q-full_K TRUE by N2-AVG / NB6-FOLNER | hand; the printed steps two, one blind; the direct route two, one blind | — |
+
+**Controls (template item 3).** No step of N6's or mine reads beyond `1 + ε` about `p` (the bends on the fragment; N6's "at radius `1 + ε`" is attached to the `Γ`-free
+case, where no bend is needed). Neither the strip nor the disk refutes a step: their four-colour vertices carry arcs centred at them, not four tactic edges, so the pinwheel
+statements fail there at their hypotheses; N6-KAPPA and N6-WIN (§2.2's form) hold on the strip's `P_1`. *A consistency note, not checked exactly:* the disk's central
+Reuleaux pentagon has, at each corner, its two sides on unit circles about the opposite corners, `36°` apart as seen from the corner (a lens-like corner of cone 144° =
+`180° − 36°`), and its corners' rings carry arcs (row 136) — the shape N6-CENT's necessity direction predicts; whether both sides are tactic there was not checked.
+**Six** is spent where §1c.9 says, in both records. **C114-FIVE-COUNT** through N6-MTP: §1d.2 (the control passes through the direct route; through N6's route under
+the same GAP).
+
+## Stage 2 — SAVED
