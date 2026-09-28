@@ -33,6 +33,9 @@ named K1-PIN120 in the round-4 record list. It does not mean one specific member
 | **FS114-Y5-REDUCE** | outside E1 and E2, every pinwheel at radius `1 + ε` has cones `(x, 180° − x, x, 180° − x)` with `60° < x < 120°` (the family `P_x`) | [hand; one mind, over PIN120-60] | §3.3 |
 | **FS114-Y5-PIN120** | K1-PIN120 is closed at radius `1 + ε`: no member exists unless E2 holds at the blade two past the 120° tile | [hand; one mind, over PIN120-60] | §3.3 |
 | FS114-Y5-PX | in `P_x` (outside E2): `λ_k = α_k − 60°`, `v_{k+1} = e(φ_k + 60°)`, each `q_k` is a degree-4 vertex with exactly the tiles `O_k` (colour `k − 1`), `T_k` (`k`), `μ_k` (`m_k`), `t_{k+1}`; `μ_k` crosses the ring at `q_k`; `T_k`'s sector lies in `[φ_k − 90° + β_k, φ_k + 30°]`; the pocket colours alternate | [hand; one mind] | §3.4 |
+| **FS114-Y5-PXKILL** | no non-Siamese simple valid fragment containing a neighbourhood of `B̄(p, 1)` holds a pinwheel of the family `P_x` (`60° < x < 120°`), outside E2: `T_k` and `O_{k+1}`, both of colour `k`, border the pocket tile `μ_k` along `ω(v_{k+1})` from `q_k` and along `ω(q_k)` from `v_{k+1}`, both outward, and come within `√(1 − 2tt′) < 1` | [hand; one mind; tools exact at named values] | §4.1–4.2; `tools/fs114_y5_px.py` |
+| **FS114-Y5-PINALL** | **no non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about `p` holds a pinwheel at `p`**, except possibly under E1 (an edge at `p` of length exactly `60°`) or E2 (a blade's counter-clockwise side a unit arc centred at its clockwise edge end) | [hand; one mind, over REDUCE, PIN120-60, PXKILL] | §4.3 |
+| FS114-Y5-CHK4 | the inequalities PXKILL rests on at named values in `P_90`'s frame: 11 of 11 as registered; the plant (one arc turned inward) accepts, as registered | [tools, exact at named values] | §4.2; `data/fs114/fs114-y5/px.out` |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -344,3 +347,72 @@ In `P_x` (no cone is `60°`, so case (A) holds at every `q_k`), outside E2:
 - **Next:** build `P_90` by formula at radius `1 + ε`, check it exactly, and push its radius.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: `P_x` is excluded at radius `1 + ε`, so no pinwheel survives outside E1 and E2
+
+### 4.1 FS114-Y5-PXKILL [hand; one mind]
+
+*Setting:* `P_x`, `60° < x < 120°`, outside E2, with the forced shape of §3.4. Every cone lies in `(60°, 120°)`, so `|q_k − q_{k+1}| > 1`; `v_{k+1} = e(φ_k +
+60°)` is on `ω(q_k)`; `O_{k+1}` (colour `k`) borders `t_{k+2}`'s ring contact `[v_{k+1}, q_{k+1}]`; `μ_k` (colour `m_k`) contains `q_k` and `v_{k+1}`.
+1. **`T_k` stays out of `B(v_{k+1}, 1)`.** `T_k` and `O_{k+1}` are distinct tiles of colour `k`, since `O_{k+1} ∋ q_{k+1}`. `O_{k+1}` contains `v_{k+1}`.
+2. **`T_k` borders `μ_k` along `ω(v_{k+1})` from `q_k`.** By §3.4 step 3, `μ_k` covers the outside directions at `q_k` next to `T_k`, so they share a curve
+   from `q_k`. That curve lies in `cl μ_k ⊂ B̄(v_{k+1}, 1)` (`μ_k ∋ v_{k+1}`, diameter) and outside `B(v_{k+1}, 1)` (step 1). So it is an arc of
+   `ω(v_{k+1})`, leaving `q_k` at `φ_k + 30°`, outward.
+3. **The sectors at `v_{k+1}`** (frame `φ_k = 0°`: `ω(p)` and `ω(q_k)` cross at `v_{k+1}` at 60°):
+   - `(210°, 330°)`, inside both discs: `μ_k` (the pocket).
+   - `(150°, 210°)`, inside `B(p, 1)` only: `t_{k+2}`, since `μ_k ⊂ B̄(q_k, 1)`.
+   - `(330°, 30°)`, outside the ring, inside `B(q_k, 1)`. Only colours `k`, 5, 6 are free outside the ring on the arc `(φ_k, φ_{k+1})` (§3.4).
+     - Colour `k` would be within 1 of `q_k ∈ cl T_k`, by a tile other than `T_k` (step 1).
+     - `m̄_k` would be within 1 of `q_k+1 ∈ cl μ_{k+1}` (`|v_{k+1} − q_{k+1}| = 2 sin((α_{k+1} − 60°)/2) < 1`). It is not `μ_{k+1}`: that tile contains
+       `v_{k+2}`, more than 1 away.
+     - So the sector is **`μ_k`**.
+   - `(30°, 150°)`, outside both. Colour `m̄_k` is excluded as before. `m_k` is excluded: `μ_k ⊂ B̄(q_k, 1)`, and any other `m_k`-tile is within 1 of
+     `μ_k`. So the sector is colour `k`, **`O_{k+1}`**, the one `k`-tile at `v_{k+1}`.
+   - So `μ_k` and `O_{k+1}` share a curve from `v_{k+1}` in `cl μ_k ⊂ B̄(q_k, 1)` and outside `B(q_k, 1)` (step 1's symmetric fact). It is an arc of
+     `ω(q_k)`, leaving `v_{k+1}` outward.
+4. **The contradiction.** `v_{k+1} = q_k + e(b)`, `q_k = v_{k+1} + e(b + 180°)`. Points `v_{k+1} + e(b + 180° + t)` of `T_k`'s arc and `q_k + e(b − t′)` of
+   `O_{k+1}`'s arc are at distance `|e(t) − 1 + e(−t′)| = √(1 − 2tt′ + O(3)) < 1` (YB2-DE's computation). Both tiles have colour `k` and are distinct, and
+   they also have points more than 1 apart. So they straddle, which no valid map allows, Siamese or not. ∎
+
+*Equivalently:* RAINBOW on `μ_k`, which would have two edge-neighbours of colour `k`.
+
+### 4.2 FS114-Y5-CHK4 (`tools/fs114_y5_px.py`, `data/fs114/fs114-y5/px.out`)
+
+The frame is `P_90`, `k = 1`: `q_1 = (0, 1)`, `v_2 = e(150°)`. YB's checker is imported unedited, with this job's stage-2 wedges and probes. Predictions
+were registered in the docstring before the run. **11 of 11 as registered:**
+- PX-1: just outside the ring clockwise of `q_1`, the `t_1`, `t_2`, `t_3` wedges block and the `t_4` wedge does not (control).
+- `|q_4 − v_1|² = 1` exactly and `|q_1 − v_1|² < 1`.
+- At `v_2`, a `T_1`-wedge `[36.87°, 120°]` blocks colour 1 in the sector inside `B(q_1, 1)` and not in the sector outside it (control).
+- **The kill.** A colour-1 tile with an arc of `ω(v_2)` from `q_1` outward (to `v_2 + e(46.26°)`), and a colour-1 tile with an arc of `ω(q_1)` from `v_2`
+  outward (to `q_1 + e(193.74°)`): **REJECT**, with min < 1 < max. A wedge at `v_2` pointing away from `q_1` does not (control).
+
+**Plant** `inward` (`px-plant-inward.out`): the second arc taken into the disc (to `q_1 + e(226.26°)`) gives min exactly 1 and no pair below. So the pair
+ACCEPTs, as registered: the outward direction of both arcs is what fires.
+
+### 4.3 FS114-Y5-PINALL — no pinwheel at radius `1 + ε` [hand; one mind]
+
+REDUCE (§3.3) leaves only `P_x`, `60° < x < 120°`, outside E1 and E2, and PXKILL excludes `P_x` outside E2. So **no non-Siamese simple valid fragment
+containing a neighbourhood of the closed unit disc about `p` holds a pinwheel at `p`, outside E1 and E2.**
+- **Class covered:** K1-PIN's pinwheel, every member (every cone sequence), K1-PIN120 included, outside E1 and E2.
+- **Radius** `1 + ε`: every step reads neighbourhoods of `p`'s four centres, of the points `v_k` on the ring, of the edge ends, and the tiles inside the disc.
+- **What it uses:**
+  - non-Siamese (RAINBOW; one tile per colour at a vertex; REGION; the distinctness steps);
+  - simple (tiles are open discs, so no tile lies on both sides of a blade; connected sectors);
+  - GAPS, FS112-U1, L60-EQ (for E1's shape), the straddle computation.
+
+  It uses no count, no symmetry and no radius beyond `1 + ε`.
+- **Where six is spent:** RAINBOW with two free colours at every blade and pocket: MU, CASE (A)'s colour `k − 1`, §3.4 step 3's exclusion of `m̄_k`, and
+  step 3 of 4.1. A seventh colour gives each blade a third free neighbour colour and each sector at `v_{k+1}` a third candidate.
+- **Killing test 8 (the local positives):** the strip and the disk hold no degree-4 vertex with four tactic edges, so PINALL says nothing about them.
+- **G79 reading** (an example invariant of every valid map): around a degree-4 vertex whose four edges are tactic, a non-Siamese simple valid map never has
+  the pinwheel incidence (each tile inner for exactly one edge). Its tiles are inner for two edges or none, as in the Reuleaux bowtie `(2, 0, 2, 0)`, or
+  the vertex is in E1 or E2. By Y4-RSTOPALL and N4-BOWTIE the Reuleaux bowtie stops at `√3`.
+
+**What is left of K1's four-tactic-edge case:**
+- E1 and E2 for the pinwheel;
+- the non-Reuleaux lenses (tiles inner for both their edges but not Reuleaux triangles);
+- the non-simple bowtie.
+
+The three-tactic-edge patterns `(2, 1, 1, 0)` are untouched. This job has not built a pinwheel fragment at any radius: none exists outside E1 and E2.
+
+## Stage 4 — SAVED

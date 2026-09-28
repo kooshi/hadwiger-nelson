@@ -1,0 +1,13 @@
+plant: inward
+P1 probe vs t_1-wedge: REJECT (registered REJECT) as registered
+P1 probe vs t_2-wedge: REJECT (registered REJECT) as registered
+P1 probe vs t_3-wedge: REJECT (registered REJECT) as registered
+P2 probe vs t_4-wedge (control): ACCEPT (registered ACCEPT) as registered
+L1 |q_4 - v_1|^2 = 1: TRUE (registered TRUE) as registered
+L1 |q_1 - v_1|^2 < 1: TRUE (registered TRUE) as registered
+V1 T_1-wedge vs probe v_2 + e(90)/100: REJECT (registered REJECT) as registered
+V2 T_1-wedge vs probe v_2 + e(180)/100 (control): ACCEPT (registered ACCEPT) as registered
+K1 T vs O (both colour 1) [plant inward]: ACCEPT (registered ACCEPT) as registered
+   K1 detail: min<1 False, max>1 True, min=1 True
+K2 T vs wedge at v_2 [150,210] (control): ACCEPT (registered ACCEPT) as registered
+ALL AS REGISTERED
