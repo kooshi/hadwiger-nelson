@@ -1,0 +1,11 @@
+control 0 (faithful table): PASS — checked 187
+plant wrong grade (MR called kernel): FIRED once, naming MR — FAIL MR: page status 'kernel', but the source's words 'PE-2 two derivations blind to each other (X02D, X02V)' fold to 'hand-2b'
+plant dead address (row 999): FIRED once, naming R131 — FAIL R131: quote: LEDGER.md has no table row '999'
+plant missing file: FIRED once, naming R129 — ERROR R129: quote: plans/NO-SUCH-FILE.md does not exist
+plant quote not in source: FIRED once, naming R134 — FAIL R134: quote not found at LEDGER.md row 134: 'no locally finite map of the plane whose boundaries are segments and circular ar
+plant wrong registered p (0.35 → 0.5): FIRED once, naming SRAY — FAIL SRAY: registered p = 0.5 does not appear in its quoted words '(b′) excluded at one mind within FS-115 | 0.35'
+plant fenced address: FIRED once, naming SRAY — FAIL SRAY: quote address plans/BASE-V-verification.md is fenced tonight (another job's working file)
+plant a reduced question marked answered: FIRED once, naming N3DENSE3 — FAIL N3DENSE3: posed question marked answered, but its words do not say so: "So S–V's Question 2 with unit arcs is reduced, not an
+plant route link that is no node: FIRED once, naming route wall7 — FAIL route wall7: names no node: ['NOSUCHNODE']
+fence control: the fenced file was never opened
+SELF-TEST PASSED

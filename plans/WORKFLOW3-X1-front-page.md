@@ -226,3 +226,22 @@ FS-112's close") needed that line too: "the hunt's logic, 2026-09-27, after FS-1
 closes" (the ruled words; reported to the coordinator). Rebuilt: facts exit 0 (lint 0), checker "checked 187, failed 0, errors 0", self-test PASSED (8
 plants fired once), `build.py` exit 0, index.html 164,752 bytes; "after FS-112's close" no longer appears in it. The About tab's sentence "FS-112's close
 answered none: it reduced Sokolov–Voronov's Question 2 with unit arcs to the global step." (l. 987) is left: a statement about FS-112, not a date.
+
+## Stage 6 — SAVED: every gate on the final tree, and the report
+
+Each run in the worktree, its exit status read directly, its output saved as `data/workflow3/x1/stage6-<gate>.out`.
+
+| gate | exit | reads | negative control (this job) |
+|---|---|---|---|
+| `python3 tools/fs71_ledger_b_check.py --strict` | 0 | "LEDGER § B rows: 1134 \| placeholders: 0", "RESULT: PASS" | stage 2: one FS-111 line removed → exit 1, "RESULT: FAIL (1)" naming it; restored |
+| `python3 tools/bib_audit.py` | 0 | 0 arXiv ids and 0 keys unresolved | `--self-test` exit 0, "3 controls, ALL FIRED" (stage 4) |
+| `python3 tools/claude_md_fact_audit.py --base a9410925` | 1 | 12 flags, the same 12 as at stage 3, every one explained there (§ Stage 3) | `--self-test` exit 0, "SELF-TEST PASSED" |
+| `… --base 6f77a0ed` | 1 | the same 12 flags (the refactor's moved tokens print as registered explanations) | — |
+| `… --dupes` | 0 | 17 repeated runs (10 on `main`); the 7 new ones inside filed drafts (§ Stage 3) | the self-test's dupes plant fired (17 → 18) |
+| `wc -c CLAUDE.md` | — | **293,055** < 300,000 | — |
+| `python3 data/rerank-2026-09-27/rk_mirror_check.py` | 0 | "checked 69 ranked stubs; CLAUDE.md single rows 29, group row 30–69", "RESULT: PASS" | `--self-test` exit 0, "SELF-TEST PASS" (stage 4) |
+| `python3 tools/check_architecture.py` | 0 | "RESULT: PASS" | a copy of `ARCHITECTURE.md` with one module row removed → exit 1, "FAIL module coverage" (a first plant, on prose, could not fire and was replaced) |
+| `python3 scripts/identities.py check` | 0 | "IDENTITIES: PASS" | `--self-test` exit 0, both plants fail as they must |
+| `derive_gate.py all plans/FS114-derivation.md` | 0 | "GATE: PASS (0 failures, 0 warnings)" | `example-dirty.md` exit 1, "GATE: FAIL (49 failures, 9 warnings)"; `example-clean.md` exit 0 |
+| `derive_gate.py all plans/FS111-derivation.md` | 0 | "GATE: PASS (0 failures, 1 warning)" — the warning FS-111's own ("FS111-V0-CLOSE: prior art owed — novelty unmeasured; a standing finding") | as above |
+| the atlas: facts, checker, build | 0, 0, 0 | lint 0 overlaps; "checked 187, failed 0, errors 0"; index.html 164,752 bytes (the regenerated facts and page byte-identical to the committed ones) | `--self-test` exit 0, 8 plants fired once each, the fence control held; palette `--self-test` PASSED |
