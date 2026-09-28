@@ -25,6 +25,18 @@ before the next begins. Notation: M2's (`plans/FS111-M2-regularity.md` §1.4–�
 - **M3-D3** — HC_K satisfies MUA-FIN in M2's words (each band's boundary is two Jordan arcs) and fails it with VM2's D3 clause (the two arcs meet on the
   infinite set `Z × {1}`): the clause is exactly what separates a locally finite plane graph from a finite union of arcs, on a real object — [hand, one
   mind] §2.6.
+- **M3-HC′** — M3-HC holds for every gap function with (G1)'s bounds and a closed null zero set containing `±1/2` — [hand, one mind] §3.2.
+- **M3-MOVE** — HC-type pinches are removed by arbitrarily small moves of the class alone: `g_τ = (1 − τ)g_K + τ g₀` gives a regular MUA set with one
+  component per band (MUA-FIN + D3), differing from HC_K only by a lost sliver along each up side (`|L_τ| = O(τ)`) and a band thickening; HC_K is the
+  `L¹_loc`- and Hausdorff-limit of locally finite regular MUA sets — [hand + tools exact, one mind] §3.2.
+- **M3-COVER** — in a regular maximal cover containing HC_K, the move keeps a maximal cover iff the lost sliver is covered by the other classes — [hand,
+  one mind] §3.3.
+- **M3-CASCADE** — in a regular maximal partition, a change that removes a positive-measure set from one class makes some other class gain, and every
+  gaining class `b` loses all its old material `F_b ∩ {φ_{G_b} > 0}` (positive measure) — the named obstruction to MUA-FIN-L in partitions; whether it
+  can close up near an HC-type pinch is open — [hand, one mind] §3.3.
+- **M3-IRREG** — with a fat Cantor set, `A_f = int HC(g_f)` is unit-avoiding, regular and satisfies the shadow identity, but is not maximal, and **every**
+  maximal unit-avoiding set containing it has `|∂ supp| > 0`: **MUA-REG-U is FALSE** — [hand, one mind] §4.1–§4.2.
+- **M3-FIXCONV** — the converse of M2-FIX is false: `F_f` is regular with `int F = ℝ² ∖ (F + S¹)` and non-maximal interior — [hand, one mind] §4.1.
 - **M3-BAND** (the design facts) — a flat side of a block of diameter `≤ 1` needs material of its class at distance exactly 1 over the middle half of
   the side; a band of length `λ` excludes its own horns out to `λ` and is unit-free only if `λ ≤ 1`; a side of length 1 with its band at distance 1 is
   excluded exactly by an apex at depth `√3/2`, tight at one point (C0) — [hand, one mind] §1.5, §2.4.
@@ -384,3 +396,70 @@ may pinch again. **So zooming-out is row 131's stability move, not an exact smoo
 
 *Inhabitant at `k = 7`:* the existence form is inhabited by R7 and DISC7 (already locally finite); **no maximal seven-cover with a pinched class is
 exhibited** — M3-MOVE and M3-CASCADE are single-class and partition statements whose only pinched inhabitant is HC_K itself (no colour count).
+
+## Stage 3 — SAVED
+
+## Stage 4 — SAVED: MUA-REG — a fat pinch makes every maximal completion irregular (MUA-REG-U FALSE); M2-FIX's converse fails
+
+### 4.1 Statement
+
+**M3-IRREG** [hand, one mind; over M3-HC's covering argument]. *Let `Z_f ⊆ [−1/2, 1/2]` be a closed nowhere dense set of positive length with
+`±1/2 ∈ Z_f` (the Smith–Volterra–Cantor set, length `1/2`, scaled to `[−1/2, 1/2]`), `g_f = (1/4) Σ_J φ_J` over its gaps (so (G1) holds), and
+`F_f = HC(g_f)`, `A_f = int F_f`. Then:*
+1. *`A_f` is unit-avoiding (no two points at distance 1), `F_f = cl A_f`, `|∂F_f| = 0`, and `F_f` satisfies the shadow identity
+   `int F_f = ℝ² ∖ (F_f + S¹)` — but **`A_f` is not maximal**: its free set `E = {z ∉ F_f : T₁(z) ∩ A_f = ∅}` has positive measure.*
+2. *`E` lies in a closed nowhere dense set `K`.*
+3. ***Every** maximal unit-avoiding `A′ ⊇ A_f` (one exists, Zorn) is irregular: `|∂ supp A′| ≥ |A′ ∖ A_f| > 0`.*
+
+So **MUA-REG-U** ("every MUA set is regular") **is FALSE**, and **the converse of M2-FIX is FALSE**: a regular closed set can satisfy the shadow identity
+without its interior being maximal (**M3-FIXCONV**) — M2-FIX's `⊇` half holds pointwise for closures, while maximality is an almost-everywhere statement
+about circles meeting the *interior*, and a fat pinch set separates the two.
+
+### 4.2 Proof
+
+**(1) Everything but maximality is stage 2's.** §2.3 (unit-avoidance) and B1–B2 with Lemma NL (every `z ∉ A_f` on a unit circle about `F_f`) use only
+(G1) and that `Z_f` has empty interior (so `σ_e ⊆ cl Λ_e`); nullity of `Z` entered only in the almost-everywhere step, through `N_e`.
+
+*`|E| > 0`.* In an edge frame take a point `z = (s, t)` of the down triangle's bulge, `0 < t < √(1 − s²) − √3/2`, `|s| < 1/2`, and let `r = (2t − t²)^{1/2}`,
+so `T₁(z)` crosses the line `t = 1` at `c₁ = s − r` and `c₂ = s + r`. Suppose `c₁, c₂ ∈ Z_f`. Then `T₁(z)` misses `A_f`:
+- it misses `T_down` (`D_{T_down}(z) < 1`: the bulge), `U` (its top is `1 + t < 2`), the discs and the other blocks (the bulge is at distance `> 1.9` from
+  every face centre and far from other blocks, §2.3);
+- between the crossings its height `h(s′)` exceeds 1 and is concave with maximum `1 + t`, so `h(s′) − 1 ≥ t·d(s′)/r` with `d(s′) = dist(s′, {c₁, c₂})`,
+  while the band there is at most `g_f(s′) ≤ dist(s′, Z_f)²/4 ≤ d(s′)²/4`; since `d ≤ r` and `r² = 2t − t² < 4t`, `t·d/r > d²/4`: the arc passes
+  **above** the band; outside the crossings the circle is below `t = 1`. So `φ_{A_f}(z) = 0`.
+
+The map `(s, t) ↦ (a, b) = (s + r, s − r)` is a diffeomorphism near `t = 0⁺` (Jacobian `−2 dr/dt ≠ 0`) onto a region `{a > b}` near the diagonal. For a
+Lebesgue density point `p ∈ Z_f` with `|p| < 1/2`, `Z_f × Z_f` has density 1 at `(p, p)`, so it meets the wedge `{a > b, a − b < ε}` near `(p, p)` in
+positive measure, and those `(a, b)` come from bulge points (`s ≈ p`, `t` small, and the bulge has positive height over `|s| < 1/2`). So `|E| > 0`.
+
+**(2) `E ⊆ K`.** By B2 every `z ∉ F_f` satisfies a non-strict exclusion condition; where it holds strictly, `T₁(z)` meets `A_f` unless the only
+witnesses are secant points of some `σ_e` in `Z_f × {1}` or at `σ_e`'s ends. So `E` lies in the union of the level sets `{d_B = 1}`, `{D_B = 1}`,
+`{|z − O| = 3/2}`, the flat side lines, the circles `T₁(e±)`, and the sets `K_e = ⋃_{c ∈ Z_f} T₁((c, 1))` — a locally finite union of closed sets. Each
+is nowhere dense: the level sets are closed and null; `K_e` is closed (`Z_f` compact) and has empty interior — if it contained a ball, some height
+`t` with `|t − 1| < 1` would give an interval `I` of `s` with `I ⊆ (Z_f − ρ) ∪ (Z_f + ρ)`, `ρ = (1 − (t − 1)²)^{1/2} > 0`, against Baire (both are closed
+nowhere dense). So `K` is closed and nowhere dense.
+
+**(3) Irregularity of every completion.** Let `A′ ⊇ A_f` be maximal unit-avoiding and `S = A′ ∖ A_f`; `|S| > 0` since `A_f` is not maximal. Unit-avoidance
+of `A′` gives `∫_S φ_{A_f} = 0`, and `S ∩ F_f ⊆ ∂F_f` is null, so `S ⊆ E ⊆ K` a.e. Let `x` be a density point of `S` in `K ∖ F_f` (almost every point
+of `S`). A neighbourhood `N` of `x` misses `F_f` (closed), so `A′ ∩ N ⊆ K` a.e., hence the density points of `A′` in `N` lie in `K` (closed), so
+`supp A′ ∩ N ⊆ K` has empty interior. So `x ∈ supp A′ ∖ int supp A′ = ∂ supp A′`: `|∂ supp A′| ≥ |S| > 0`, and `A′` is not regular. ∎
+
+### 4.3 What it says, and the rung that is left
+
+- **The dust M2 §1.5 asked about exists in the plane**: `A′` carries a positive-measure part in the boundary of its own support, forced by maximality —
+  the two-dimensional form of M2's one-dimensional fat-Cantor example, and made by the same move (a fat Cantor set), placed where a band pinches.
+- **Mechanism.** A pinch set of positive length makes a positive-measure set of points whose unit circles touch the class only at pinch points: excluded
+  in closure (the shadow identity holds) and free in measure. Maximality then has to add them, and they form a nowhere dense set.
+- **The modification form survives** in this example: the same class with a null `Z` (HC_K, HC₀) is regular. **MUA-REG-P** ("every maximal cover can be
+  modified into one with regular classes") is **open**; at `k = 5` its existence reading is again not smaller than the answer (with M2-REDUCE-C,
+  MUA-FIN-P₅ and AE-MAP6), and its local reading meets M3-CASCADE's obstruction in partitions.
+
+| rung | verdict | grade, minds |
+|---|---|---|
+| **MUA-REG-U** (every MUA set regular) | **FALSE**: every maximal completion of `A_f` (M3-IRREG) | [hand], one mind |
+| converse of M2-FIX (regular + shadow identity ⟹ maximal) | **FALSE**: `F_f` (M3-FIXCONV) | [hand], one mind |
+| MUA-REG-P, one class | TRUE for HC-type sets (null `Z`); open in general | [hand], one mind |
+| MUA-REG-P, covers, `k = 5` (existence reading) | not smaller than the answer (honesty rule) | [derived], one mind |
+
+*Would kill M3-IRREG:* a point `z` of the bulge with both crossings in `Z_f` whose unit circle meets `A_f` (a defect in the arc-above-band inequality),
+or a completion `A′` whose added part has interior points of its support (a defect in (2)).
