@@ -10,7 +10,7 @@ session with no memory of FS-112: read `CLAUDE.md` § The aim and § Counter-pri
 
 **Provisional bearings** (WORKFLOW 3.1 replaces them at the opening): G79 (the chain's end, flipped from a wall into an anchor at FS-112), G72, G82,
 G21 (a local fragment is not a map; a finite chain is not a ray), G30 (the next discipline: dynamics of a parabolic map), G51, G17, G71 (the index at a
-bowtie seam; FS-112's E12 untested); rows 133–136; stubs FS-114, FS-111.
+bowtie seam; FS-112's E12 untested); rows 133–136; stubs FS-114, FS-111. *At FS-114's close:* G83 (rewritten), rows 137–138; stubs FS-116, FS-117.
 
 ## The question, in plain language
 
@@ -46,6 +46,14 @@ FS112-N3-PER); for aperiodic maps — the limit objects that row 133's W-EQ-K pr
 no MR), but a ray realised as a local fragment is only a local positive, which kills the four-colour route and leaves DENSE3's.
 The bowtie end (c), added at stage 1b, moves neither form: when all four of its horn arcs are unit arcs its neighbours are four-colour vertices
 (FS112-C-DOUBLE, one mind), so it is within 1 of `F`; it bears as a locally terminal object a YES could use, and through FS112-C-ENDS's one residue.
+
+**At FS-114's close (2026-09-28, FS114-C; `plans/FS114-C-close.md` stage 5).** FS-114's plan chose DENSE3's form (2026-09-27), and then
+**FS114-CV-EXISTS** (two minds, blind to each other) proved that every valid map has a vertex of at least four colours — so the unit-arc NO is one local
+statement about one such vertex (C114-LOCAL-F, FS-116's), with no ray step: **(b′) and (b″) bear only on GS-4's density form** ("four-colour vertices
+within `R` of every point"), never on the NO. FS112-C-ENDS's residue is **empty** (CV-ENDS, two minds) and FS112-C-DOUBLE is at two minds, so (c) bears
+only as a locally terminal object a YES could use. **A cross-milestone link for Poros's re-rank** (`plans/FS114-close-inventory.md` item 78): FS111-M2-INTRAD
+derives that FS-111's route M needs ¬LRA, large-radius accumulation, which is this stub's stuck ray in the measurable setting — so FS-115's bearing may be
+larger than "none alone" through FS-111's route M; FS-111's close states that clause.
 
 ## What FS-112 established (addresses in `plans/FS112-derivation.md`)
 

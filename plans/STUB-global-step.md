@@ -39,12 +39,18 @@ of Thomassen", eliminating "(ii) the unit-radius tactic") for such tilings, and 
 colours would be `χ(ℝ²) ≤ 5`, a different outcome). A NO for doubly periodic maps only is a result, not the question: W-EQ-K's limit objects need not
 be periodic — but it kills every YES given by formula.
 
+**At FS-114's close (2026-09-28, FS114-C): undecided.** The NO is reduced to one local statement: every valid map has a vertex of at least four
+colours (FS114-CV-EXISTS, two minds blind to each other), so an explicit radius about such a vertex within which no valid fragment exists
+(C114-LOCAL-F) is the whole NO, Siamese pairs included — `LEDGER.md` rows 137–138 (drafted), `plans/FS114-derivation.md`. The successors are **FS-116**
+(`plans/STUB-local-exclusion.md`: C114-LOCAL-F, opening with round 7's queue) and **FS-117** (`plans/STUB-route-t-count.md`: the count, the non-Siamese
+part only).
+
 ## What FS-112 established about the object (addresses in `plans/FS112-derivation.md`)
 
 - **Every unit arc reduces to one kind.** Every valid map has a valid modification, creating no unit arc, in which every unit arc is **(Q)** — centred
   at a vertex of at least four colours that carries both of the arc's side colours (Polymath's tactic at a vertex of degree at least 4) — or **(R2)**,
   an arc whose inner colour runs along the radius-2 circle about its centre (FS112-N2-RED, two minds, one blind). The centre's wedges: the inner side
-  colour faces the arc, the outer faces away, the side cones hold neither (FS112-U1). A unit arc is shorter than 60° (FS112-L60).
+  colour faces the arc, the outer faces away, the side cones hold neither (FS112-U1). A unit arc with constant sides is at most 60° long, with equality only when both side tiles lie in the lens of its ends (FS112-L60 as corrected at FS-114's close; first written here "shorter than 60°", false at exactly 60°: `plans/FS112-derivation.md` § Errata, item 1).
 - **Every four-colour vertex is tied to unit arcs** (FS112-NB4P, three minds): either unit arcs centred at it (at least 60° or six of them when its
   ring has no covering pair, FS112-A4SIX) or an arc through a point of a covering pair's orbit on its unit circle. Five colours force at least 180° of
   arcs centred at the vertex; six force its whole unit circle into the boundary (FS112-SIX).

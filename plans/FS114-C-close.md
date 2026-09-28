@@ -379,3 +379,26 @@ chose the count — then spent five rounds on local kills the count located, so 
 not run (round 7 was cut; no blind check of L60 was spent). They carry to the successor stub, where round 7's queue scores N7's two.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the successor stubs and the bearing lines
+
+- **FS-116, the local exclusion** — `plans/STUB-local-exclusion.md` (new): C114-LOCAL-F, the whole NO given FS114-CV-EXISTS; opens with round 7's queue in
+  the coordinator's order (a blind check of FS114-N7-3T, N7-HUB (b) first; the wrap lemma; OC; the rings with (Q) arcs, beginning with the R-E2/E2
+  comparison of stage 2 §2.5), then E1's residues, S6, non-simple bowties, the Reuleaux `(2, 1, 1, 0)` on (Q) rings; beyond K1, four-colour vertices with at
+  most two tactic edges and degree ≥ 5, with N7-HUB's hexagon lead; the owed second minds (N3-LOCAL's four lemmas, N7-3T, YB5's cut to S6, L60-WALK, and
+  row 134's Lemma 4 at cusps before any publication); construction targets; debts; D6.
+- **FS-117, route T's count** — `plans/STUB-route-t-count.md` (new): K2′, GAP-μ (with its hull form from NB6-MTP, and a pointer for FS-111's limits),
+  COVER-3, Sirgedas's metagraph, the torus design; partial by theorem (G86).
+- **FS-118 and FS-119: not minted, skipped** (never reused). The second mind on row 134's Lemma 4 at cusps (inventory item 14) is a job, not a
+  milestone: it is placed in FS-116's owed list, where anything final waits on it.
+- **Placement of the inventory's stub items**: 8 → `plans/STUB-stuck-ray.md`'s bearing line (re-aimed by CV-EXISTS); 14 → FS-116 owed list; 28 → FS-116
+  construction targets (curve pair carried; RAINBOW (ii) done; torus skeleton to FS-117; the 60° ring aim carried); 42 → K1 to FS-116, K2-loc declined
+  (moot), SIAM-KILL declined (subsumed), COVER-3 to FS-117; 55 → K1′ in FS-116 and FS-117, K2′ in FS-117; 64 → declined (run in rounds 4–6); 69 →
+  K1-ΓRING declined (closed at `√3`), K1-PIN's remainders to FS-116; 91, 101 → FS-116 (K1-PINQ residual, OC) and FS-117 (MTP's hull form).
+- **Bearing lines written**: `plans/STUB-stuck-ray.md` (a dated paragraph under § Bearing on the answer, and its provisional-bearings line; item 78's
+  FS-111 link named for Poros, FS-111's clause left to FS111-C); `plans/STUB-global-step.md` (a dated "At FS-114's close" paragraph before § What FS-112
+  established, and l. 47's FS112-L60 sentence corrected in place with a dated note, inventory item 74). **No other open stub's bearing line is written:**
+  the drafted G86 fires on tile-count arguments, which no other open stub runs (FS-109 traces holes along eroded tilings as a dial); the G83 rewrite bears
+  on FS-111, whose stub FS111-C is closing now — the pointer is in FS-117's GAP-μ line and in the drafts.
+
+## Stage 5 — SAVED
