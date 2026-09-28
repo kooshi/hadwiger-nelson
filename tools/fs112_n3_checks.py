@@ -23,6 +23,18 @@ ups_k < 1 whenever P_k, resp. P_{k+1}, is stuck (N112-END).
          radius k+1 about P_{-1} has upward curvature -1/(k+1) at P_k).  Named x: -1, -1/2, -1/7; 1, 1/3.  Expected: BOUND_HOLDS.
          plant ray_below: x = -11/10 (below N3-DEG's -1) -> the bound fails -> RED, BELOW_BOUND.
 
+  VOTES  the vote table at a leaving centre q (N3-FAIL, stage N3-3): u cubic with colours i, j, k; tau_ij a unit arc of omega(q) leaving u
+         (its outer colour s_out is excluded inside omega(u) near q, its inner colour s_in outside: N112-U1's shadows), tau_ik, tau_jk voting
+         'in' or 'out' (S-V Prop. 9: an arc excludes its two colours on the side it votes).  Also DEG2: tau_ij, tau_ik both on omega(q).
+         Checked over the whole finite case table: u's strip fails at q exactly in the stated cases, and then the colours of c(u) allowed
+         inside omega(u) near q are exactly the s_in colours, outside exactly the s_out colours.  Expected: LAW_HOLDS.
+         plant votes_noshadow: the unit arc's shadow exclusions dropped -> an s_out colour is allowed inside -> RED, LAW_BROKEN.
+  ANTI   the antipodal vote lemma (N3-ANTI): an arc from u = 0 with tangent t and upward curvature kappa votes at q = +e and q = -e by the
+         sign of F(+/-e) = |x -/+ e|^2 - 1; F(+e) - ... : F(+/-e) = -/+ 2 e.x + |x|^2, and on exact circle points x (rational parametrisation)
+         at named kappa in {-2, -1, -1/2, 0, 1/2, 1, 2}, named directions and delta in {1/10, 1/100}: at least one of F(+e), F(-e) is > 0 (an
+         'in' vote), never both < 0; kappa = +/-1 with t perpendicular to e gives exactly 0 at one antipode.  Expected: IN_VOTE.
+         plant anti_half: the antipodes replaced by +/- e/2 (not on omega(u)) -> both negative -> RED, NO_IN_VOTE.
+
 Exit 0 iff the requested run behaves as expected (faithful: all GREEN; --plant X: exactly X RED with its reason; --self-test: all of it).
 """
 from __future__ import annotations
@@ -34,8 +46,10 @@ from fractions import Fraction as Fr
 
 import sympy as sp
 
-REASONS = ("IDENTITY", "NOT_BELOW", "STRICT_STEP", "NO_STRICT_STEP", "BOUND_HOLDS", "BELOW_BOUND")
-PLANTS = {"mono_swap": ("MONO", "NOT_BELOW"), "step_identity": ("STEP", "NO_STRICT_STEP"), "ray_below": ("RAY", "BELOW_BOUND")}
+REASONS = ("IDENTITY", "NOT_BELOW", "STRICT_STEP", "NO_STRICT_STEP", "BOUND_HOLDS", "BELOW_BOUND", "LAW_HOLDS", "LAW_BROKEN",
+           "IN_VOTE", "NO_IN_VOTE")
+PLANTS = {"mono_swap": ("MONO", "NOT_BELOW"), "step_identity": ("STEP", "NO_STRICT_STEP"), "ray_below": ("RAY", "BELOW_BOUND"),
+          "votes_noshadow": ("VOTES", "LAW_BROKEN"), "anti_half": ("ANTI", "NO_IN_VOTE")}
 
 
 def f(x):
@@ -105,7 +119,71 @@ def check_ray(plant):
     return True, "BOUND_HOLDS", "ft^k(x) >= -1/(k+1) on [-1, 0), f^k(x) <= 1/(k+1) on (0, 1], k <= 20; equality at x = -1 (the pencil)"
 
 
-CHECKS = {"MONO": check_mono, "STEP": check_step, "RAY": check_ray}
+def check_votes(plant):
+    C = {"i", "j", "k"}
+    shadows = plant != "votes_noshadow"
+    rows = 0
+    # single unit arc tau_ij on omega(q); tau_ik, tau_jk vote
+    for s_ik, s_jk, s_out in itertools.product(("in", "out"), ("in", "out"), ("i", "j")):
+        s_in = ({"i", "j"} - {s_out}).pop()
+        ex = {"in": set(), "out": set()}
+        ex[s_ik] |= {"i", "k"}
+        ex[s_jk] |= {"j", "k"}
+        if shadows:
+            ex["in"].add(s_out)
+            ex["out"].add(s_in)
+        fails = ex["in"] != C and ex["out"] != C
+        shared_with_in_voter = "i" if s_ik == "in" else "j"
+        predicted = (s_ik != s_jk) and s_out == shared_with_in_voter
+        rows += 1
+        if fails:
+            if (C - ex["in"]) != {s_in} or (C - ex["out"]) != {s_out}:
+                return False, "LAW_BROKEN", f"allowed in {sorted(C - ex['in'])}, out {sorted(C - ex['out'])} vs s_in {s_in}, s_out {s_out}"
+        if fails != predicted:
+            return False, "LAW_BROKEN", f"failure pattern differs at {(s_ik, s_jk, s_out)}"
+    # DEG2: tau_ij, tau_ik on omega(q), colour i between them on one side; tau_jk votes
+    for i_side, s_jk in itertools.product(("in", "out"), ("in", "out")):
+        s_ins = {"i"} if i_side == "in" else {"j", "k"}
+        s_outs = C - s_ins
+        ex = {"in": set(), "out": set()}
+        ex[s_jk] |= {"j", "k"}
+        if shadows:
+            ex["in"] |= s_outs
+            ex["out"] |= s_ins
+        fails = ex["in"] != C and ex["out"] != C
+        rows += 1
+        if fails and ((C - ex["in"]) - s_ins or (C - ex["out"]) - s_outs or not (C - ex["in"]) or not (C - ex["out"])):
+            return False, "LAW_BROKEN", f"DEG2 {(i_side, s_jk)}: allowed in {sorted(C - ex['in'])}, out {sorted(C - ex['out'])}"
+    return True, "LAW_HOLDS", f"{rows} case rows: at a failing leaving centre, inside allows only s_in colours, outside only s_out colours"
+
+
+def check_anti(plant):
+    scale = sp.Rational(1, 2) if plant == "anti_half" else sp.Integer(1)
+    dirs = [(sp.Integer(0), sp.Integer(1)), (sp.Rational(3, 5), sp.Rational(4, 5)), (sp.Integer(1), sp.Integer(0))]
+    n = 0
+    for kap in (sp.Integer(-2), sp.Integer(-1), sp.Rational(-1, 2), sp.Integer(0), sp.Rational(1, 2), sp.Integer(1), sp.Integer(2)):
+        for d in (sp.Rational(1, 10), sp.Rational(1, 100)):
+            # exact point on the circle of upward curvature kap tangent to t = (1, 0) at 0: rational parametrisation by s = tan(theta/2)
+            if kap == 0:
+                x = (d, sp.Integer(0))
+            else:
+                sv = d * kap / 2          # arc parameter ~ half the turning angle
+                x = (2 * sv / (kap * (1 + sv ** 2)), 2 * sv ** 2 / (kap * (1 + sv ** 2)))
+            for e in dirs:
+                ep = (scale * e[0], scale * e[1])
+                Fp = (x[0] - ep[0]) ** 2 + (x[1] - ep[1]) ** 2 - 1
+                Fm = (x[0] + ep[0]) ** 2 + (x[1] + ep[1]) ** 2 - 1
+                n += 1
+                if Fp < 0 and Fm < 0:
+                    return False, "NO_IN_VOTE", f"kappa {kap}, e {e}: both antipodes vote out"
+                if not (Fp > 0 or Fm > 0):
+                    return False, "NO_IN_VOTE", f"kappa {kap}, e {e}: no antipode votes in (F = {Fp}, {Fm})"
+                if e == dirs[0] and abs(kap) == 1 and scale == 1 and not (Fp == 0 or Fm == 0):
+                    return False, "NO_IN_VOTE", f"kappa {kap}: the unit arc should vote exactly 0 at one antipode"
+    return True, "IN_VOTE", f"{n} (arc, antipodal pair) cases: every arc votes 'in' at one antipode at least; unit arcs vote 0 exactly on their own circle"
+
+
+CHECKS = {"MONO": check_mono, "STEP": check_step, "RAY": check_ray, "VOTES": check_votes, "ANTI": check_anti}
 
 
 def run(plant):

@@ -698,3 +698,121 @@ NOT_BELOW), `step_identity` (recursions replaced by plain monotonicity: a quadru
 (`λ_0 = −11/10`: BELOW_BOUND) each fire alone, for their own reason.
 
 ## Stage N3-2 — SAVED
+
+## Stage N3-3 — SAVED: (a) — the base with unit arcs: every failure is a vertex of four colours or a repeated colour within 2
+
+*Frame. A valid map (unit arcs allowed). A **cubic trichromatic** vertex `u`: three colours, one sector each (cusp sectors allowed), `c(u) = C = {4,5,6}`,
+the arcs `τ_45, τ_46, τ_56` leaving `u`, `Ω = ω(u)`. A **leaving centre** of `u`: a point `q ∈ Ω` that is the centre of a unit arc with endpoint `u` (an arc
+leaving `u` lies on at most one unit circle, so `u` has at most three). A **both-centre**: the centre of a both-kind unit arc. **Votes** (S–V Prop. 9):
+at `q ∈ Ω` a non-unit arc `τ` from `u` votes *in* when `|q − x_τ(δ)| > 1` for small `δ` (then its two colours are absent inside `Ω` near `q`, S–V Prop. 2)
+and *out* when `< 1`; the sign is eventually constant unless `τ ⊂ ω(q)`. The **strip holds at `q`** when one side of `Ω` near `q` has only colours
+outside `C` (two arcs voting the same way); the base's `γ(u)` is built from it.*
+
+**N3-NOBOTH [hand, one mind; over N112-U1 (two minds)].** *A both-centre `P` is a vertex with at least four colours or a repeated colour.* At `P` the
+inner colour's sectors lie in the closed facing cone, the outer colour's in the closed away cone, and the two open side cones (angle `ℓ > 0`) meet neither
+(N112-U1), so each side cone contains directions interior to sectors of other colours. One sector (an open angular interval) meeting both side cones
+contains the whole facing or the whole away cone, hence the direction of an inner- or outer-colour sector (a cusp horn included): impossible. So the two
+side cones carry two further colours, or one colour twice. (A point on an arc, or interior to a tile, has at most two colours: never a both-centre.) ∎
+*Consequence:* no both-kind unit arc is centred at a cubic trichromatic vertex — the three-colour (S1) needs a bowtie (C-SEAMS-TWO's centre), and N112-RED's
+case split holds with no merge.
+
+**N3-FAIL (the strip at a leaving centre) [hand, one mind; tools exact, VOTES].** *The strip at `q ∈ Ω` fails only if `q` is a leaving centre of `u` (S–V
+Prop. 10's proof, by local finiteness). When it fails, the colours of `C` allowed inside `Ω` near `q` are exactly the inner colours of the unit arcs of `ω(q)`
+leaving `u`, and outside exactly their outer colours; the third colour is excluded on both sides.* The unit arc `τ ⊂ ω(q)` from `u` has its outer tile's
+shadow containing every point of `B(u, 1)` near `q` (points within `< 1` of the arc's endpoint `u`; N112-U1) and its inner tile's shadow containing every
+point of the outside near `q` on a curve transversal to `Ω` there. The finite table (`τ_ij` unit, `τ_ik`, `τ_jk` voting; and **DEG2**, `τ_ij`, `τ_ik` both
+on `ω(q)`): the strip fails exactly when the two voting arcs vote opposite ways and `τ`'s outer colour is the colour it shares with the arc voting in (DEG2:
+when `τ_jk` votes on the side of the arcs' inner colours), and then inside allows only the inner colours, outside only the outer ones (VOTES, 12 rows; the
+plant `votes_noshadow` breaks the law for its own reason).
+
+**N3-ANTI (CE5, the Antipodal Lemma, survives unit arcs) [hand, one mind; tools exact, ANTI].** *At a cubic trichromatic `u` no two points of `Ω` at distance
+2 are both M-in.* An M-in point admits at most one in-vote (two arcs voting in exclude all of `C` inside). An arc `x(δ) = δt + (δ²/2)κn + O(δ³)` gives
+`|x ∓ e|² − 1 = ∓2δ(e·t) ∓ δ²κ(e·n) + δ² + O(δ³)`: for `e·t ≠ 0` it votes in at one antipode and out at the other; for `e·t = 0` it votes in at `+e` unless
+`κ(e·n) ≥ 1` and at `−e` unless `κ(e·n) ≤ −1` — never neither; a unit arc on `ω(u ± e)` votes 0 there and in at the other. So each of the three arcs casts
+an in-vote at `u + e` or `u − e`: three in-votes against a budget of two. ∎ CE5's step "at an M-in point the strip's majority side is outside" is not
+needed; the count of in-votes carries it, cusps and unit arcs included.
+
+**N3-COR3 (Cor. 3 with unit arcs: the unit rhombus) [hand, one mind].** *Let `u`, `u′` be cubic trichromatic vertices with disjoint multicolours at distance
+`d < 2`. Then each of their two common unit points `q` is a leaving centre of `u` **and** of `u′`, and a vertex with at least four colours, two from each
+triple; a unit arc of `ω(q)` leaving `u` is both-kind at `q` (in DEG2, one of the two).* So `u, q₊, u′, q₋` is a **unit rhombus whose other two corners
+are four-colour vertices** — FS-110's T2, now forced.
+*Proof.* If `u′`'s strip holds at `q`, a side `S′` of `ω(u′)` near `q` has only colours of `C` (the complement of `c(u′)`). `Ω` crosses `ω(u′)` transversally
+at `q` (`0 < d < 2`) and meets no tile of a colour of `C` (N-E1 at `u`), so its half in `S′` lies in `Γ`: an arc of `Γ` on `Ω` whose two sides have colours in
+`C` — both-kind at `u`, against N3-NOBOTH. So `u′`'s strip fails at `q` (a leaving centre of `u′`, N3-FAIL), and likewise `u`'s. Now the half `h₁` of `ω(u′)`
+inside `Ω` near `q` meets only tiles of colours in `C` (N-E1 at `u′`) allowed inside (N3-FAIL: the inner colours `s_in` of `u`'s unit arcs at `q`): so either
+an `s_in`-tile has `q` in its closure, or `h₁` is an arc of `Γ` on `ω(u′)` whose sides are not both in `c(u′)` (N3-NOBOTH at `u′`), hence one side is an `s_in`
+colour — `s_in ∈ c(q)` either way. The outside half `h₂` (transversal, so inside the inner tile's shadow) gives an outer colour. Symmetric for `u′`. ∎
+
+**N3-I ((i) never fails) [hand, one mind].** *For unit pairs `x ∈ ω(u₁)`, `y ∈ ω(u₂)` (the base's circles, `u_k` cubic trichromatic), `c′(x) = c′(y) = {a}` is
+impossible.* Where the strip holds at `x`, CB's proof stands (the half of `ω(y)` on the strip side meets an `a`-tile: after merging, no `a|a` arc exists). The
+strip fails at no more than three points of `ω(u₁)`; `c′` is locally constant at singletons (`{p : a ∈ c′(p)}` is closed and `c′ ≠ ∅`), so a failure at
+`(x, y)` would recur at nearby unit pairs `(x′, y′)` with `x′` not a leaving centre. ∎
+
+**N3-II ((ii) fails only at four-colour or repeated-colour vertices) [hand, one mind].** *Let `x ∈ ω(u₁)`, `y ∈ ω(u₂)`, `|x − y| = 1`, `c′(x) = c′(y) = {a, b}`,
+`ω(y)` transversal to `ω(u₁)` at `x`. Then `x` has at least four colours, or `y` has at least four colours or a repeated colour.* Strip holds at `x`, side `σ`:
+near `x` on `σ` only `a`, `b` occur; the half of `ω(y)` on `σ` avoids both (`⊆ c(y)`), so it lies in `Γ`: an arc of `ω(y)` with sides `a | b` — both-kind at
+`y`, so N3-NOBOTH. Strip fails at `x` (a leaving centre of `u₁`): by N3-FAIL the halves of `ω(y)` at `x` meet, inside, only `a`, `b` and the inner colours,
+outside only `a`, `b` and the outer colours; avoiding `a, b` they give an inner and an outer colour to `c(x)`, unless a half is a `Γ`-arc of `ω(y)` with sides
+`a | b` (both-kind at `y`). So `c(x) ⊇ {a, b, s_in, s_out}` or `y` is a both-centre. ∎ With `u₁ = u₂ = u` this is (ii) on `Ω` at pairs `60°` apart.
+
+**N3-P′ [hand, one mind].** *Two cubic trichromatic vertices with one multicolour are never at distance 1.* A failure of (P′) at `(p, p′)` needs `ω(p′)` along `Γ`
+on both sides of `p`, with side colours in `c(p) = c(p′)`: both-kind at `p′`, against N3-NOBOTH. ∎ Pigeonhole points of distinct multicolours never nest
+(same size, distinct). **So no (P′)-nesting pair is ever handed to Lemma 3 or Cor. 3** — A3's question, answered; and N2's "trichromatic end vertex nests
+into its centre only at a junction of two centred arcs" never fires at a pigeonhole pair (the centre would be a both-centre with three colours).
+
+**The pseudo-colouring of `ω(p)`, `p` cubic trichromatic [hand, one mind].** `c′ ≠ ∅`: a point of `ω(p)` with no colour outside `c(p)` has `ω(p)` in `Γ` on both
+sides, with sides in `c(p)` (N-E1) — both-kind at `p`. `|c′| ≤ 2`: a point `x` with `c′(x) ⊇` the whole complement is cubic trichromatic and complementary to `p` at
+distance 1 (then N3-COR3 puts four-colour vertices at `p ± 60°` on `ω(p)`), or itself has four colours or a repeated colour. Finitely many two-colour points:
+an **inert** unit arc of `ω(p)` (both sides outside `c(p)`) bends toward `p` (N2-TOWARD, two minds), a valid modification in which no point gains a colour or a
+sector; the base is run on it.
+
+**The eleventh point [hand, one mind].** Let `R` be the component containing `u` of the interior of the union of closures of `C`-tiles (connected through shared
+arcs). `R` is open and cannot meet `Ω`: a point of `Ω` in `R` has a neighbourhood whose tile points are `C`-coloured, so `Ω` there lies in `Γ` with `C` on both
+sides — both-kind at `u`. So `R ⊂ B(u, 1)` with no use of `γ(u)`, and the eleventh point on `∂R` is within `1` of `u`.
+
+**N3-BASE (the base at a cubic trichromatic vertex, unit arcs allowed) [hand, one mind; over row 134's base: CB's route with CE's repairs, CUSP-BASE, Prop. 17
+on its printed route (FS110-P17; its unit-arc exception is row 12's both-kind arc)].** *In a valid map, if `B̄(u, 2)` contains no vertex with four or more
+colours and no vertex with a repeated colour, the base refutes the map near `u`.*
+
+| the base's step (CB / CE) | Condition 5 used for | with unit arcs | where the exception lives |
+|---|---|---|---|
+| (P) sweep | — | holds | — |
+| (P′) for the pigeonhole's same-multicolour pairs | `ω(p′)` meets `Γ` finitely at `p` | N3-P′ | nowhere (cubic) |
+| D2 strip, `γ(u)` | Prop. 10 | fails only at `≤ 3` leaving centres per vertex (N3-FAIL) | used only through the rows below |
+| `c′ ≠ ∅`, `|c′| ≤ 2`, finiteness | the strip; Cor. 3; Condition 5 | above | a four-colour vertex on `ω(p)` or at `p ± 60°` |
+| (i) | transversal circle meets a tile | N3-I | nowhere |
+| (ii), Lemma 3's swaps and endpoints, CE7, Lemma 5, Prop. 18 | (ii) | N3-II | `x` or `y`, points of `ω(p)`, `p ∈ B̄(u, 1)`: within 2 |
+| Cor. 3 (disjoint pigeonhole pairs) | `γ(u)`, `γ(u′)` | N3-COR3 | the rhombus corners, within 2 |
+| CE5 (distance 2) | the strip's majority | N3-ANTI | nowhere |
+| Prop. 17 | the arc between `g` and `q` at `x₁` not on `ω(x₂)` | row 12: both-kind at `x₂` | `x₂ ∈ Ω` |
+| D5's reduction (R1–R4), 10+1 count, hole-filling | (P′), (i), generic centres | as above; centres moved off the finitely many unit-arc centres | as above |
+| the eleventh point | `R` inside `γ(u)` | `R ⊂ B(u, 1)` by N-E1 | nowhere |
+
+**N3-DENSE3 [hand, one mind, over N3-BASE, NB2-DISC1 (two minds) and N2-TOWARD (two)].** *In every valid map, every closed disc of radius 3 contains a vertex
+with at least four colours or a vertex with a repeated colour.* A closed disc of radius 1 holds a vertex `w` of degree `≥ 3` (NB2-DISC1); if `w` is cubic
+trichromatic, N3-BASE puts one within 2 of it. (Moves never add a colour or a sector to an existing point, so the modification's witnesses are the map's.)
+
+**What it does to the question.** NB2-DENSE's alternative "a unit-arc centre within 3" is now **"a vertex of four or more colours within 2"**: a unit arc saves
+the base only through a vertex where four colours meet. **(R2) centres never save it**, nor does any unit arc whose centre carries three colours; after
+N2-RED the (Q) centres are exactly the four-colour vertices that do. So a YES of Q-full is a map whose four-colour (or repeated-colour) vertices come within 3 of
+every point, and a NO is the exclusion of such maps: **the unit-arc half of Question 2 is a question about four-colour vertices**, with NB4′ describing each one
+((E1): `≥ 60°` of centred arcs; (E2)) and N3-COR3 describing how pairs of them hold a close complementary pair.
+*Where six is spent:* N3-COR3 ("the complement of `c(u′)` is `c(u)`"; with seven colours `u′`'s strip leaves a fourth colour and the argument stops), the base's
+count and NB4′; N3-NOBOTH, N3-FAIL, N3-ANTI, N3-I spend nothing. *Seven-colour control:* the hexagonal seven-colouring has no four-colour vertex and no unit arc,
+and is valid; N3-BASE does not start there (four ring colours), as required. **The strip (killing test 8):** N3-BASE reads `B̄(u, 2)`, and no trichromatic vertex of
+a strip of half-height `1.834` has that disc inside it; the strip cannot test N3-BASE, and its midline four-colour vertices are within `1.834` of all its points,
+as N3-DENSE3 asks. N3-COR3 is local (it reads `u, u′`, the rhombus and small discs about its corners) and **is** testable on the strip (registered below).
+**C-LOCAL:** N3-DENSE3 is local and explicit (radius 3); not a NO.
+
+**Registered (G21 instruments, scored at the close).**
+
+| id | prediction | p | both outcomes reachable |
+|---|---|---|---|
+| N3-P1 | on the exact strip, every pair of trichromatic vertices with disjoint multicolours at distance `< 2` whose rhombus lies inside the strip has both rhombus corners at four-colour (midline) vertices, each the centre of arcs leaving both | 0.9 | the rebuild reads every such pair; a pair with a three-colour corner refutes N3-COR3 |
+| N3-P2 | a blind second mind finds N3-BASE TRUE, possibly with a repair in a row of its table | 0.6 | a step of the base whose unit-arc exception is not a four-colour or repeated-colour vertex refutes it |
+| N3-P3 | the (R2) centres of any held positive with unit arcs are at distance `≤ 2` from a four-colour vertex wherever the base's disc fits | 0.8 | an (R2) centre far from every four-colour vertex in a region where N3-BASE's disc fits refutes N3-BASE |
+
+**Would have searched here:** vertex figures at a leaving centre (an enumeration) — replaced by the finite vote table VOTES; arcs' curvatures against the
+antipodal votes (a scan) — replaced by the second-order formula and named exact values (ANTI).
+
+## Stage N3-3 — SAVED
