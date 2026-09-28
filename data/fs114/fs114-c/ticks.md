@@ -1,7 +1,7 @@
 # FS-114 close inventory — proposed ticks (FS114-C)
 
 *Proposed by the close job FS114-C, 2026-09-28, for the coordinator to apply at the filing. "Record" is `plans/FS114-C-close.md`; "Drafts" is its
-`## Drafts for the front page`; "Deriv." is `plans/FS114-derivation.md`; "Successor" is the successor stub named at stage 5. Every "done" names where;
+`## Drafts for the front page`; "Deriv." is `plans/FS114-derivation.md`; "Successor" is FS-116 (`plans/STUB-local-exclusion.md`) or FS-117 (`plans/STUB-route-t-count.md`), as named. Every "done" names where;
 every "declined" gives the reason. Checked against the record at stage 6.*
 
 | # | kind | proposed tick | where / reason |
@@ -19,7 +19,7 @@ every "declined" gives the reason. Checked against the record at stage 6.*
 | 11 | result | done | Record stage 2 (BASE-V's upgrades to row 134's base) |
 | 12 | correction owed | done | the regrade: Drafts § `LEDGER.md` (row 134's grade line) and a dated regrade note appended to `plans/FS112-derivation.md` (stage 3); NB3 §2.3's parenthetical and the print's Prop. 18 sentence: noted there (side records are not rewritten) |
 | 13 | slip | done | — |
-| 14 | stub to mint | done | the second mind on Lemma 4 at cusps (CUSP-BASE) is placed in a stub at stage 5 (named there), as owed before any publication of row 134 |
+| 14 | stub to mint | done | placed in FS-116's owed list (`plans/STUB-local-exclusion.md` § Owed second minds): a job, not a milestone; owed before any publication of rows 134–135 and of any NO resting on FS112-N3-DENSE3 |
 | 15 | owner ruling | done | the stale "under blind check" ring on row 134: Drafts § Proof Atlas |
 | 16 | result | done | Record stage 2 |
 | 17 | prior-art debt | done | Drafts § `BIBLIOGRAPHY.md`: `[Mohar2002]`, Ágoston 2025 |
@@ -33,7 +33,7 @@ every "declined" gives the reason. Checked against the record at stage 6.*
 | 25 | result | done | Record stage 2; Deriv. |
 | 26 | correction owed | done | FS112-Y3's §4.2 item 4 and Y3-T2-BUDGET's not-claimed: a dated note appended to `plans/FS112-derivation.md` (stage 3); C114-RAINBOW's corrected form: Drafts § claims corrections |
 | 27 | prior-art debt | done | Drafts § `BIBLIOGRAPHY.md` (`[Sirgedas2021]`, the group row, Ágoston, Mohar: read status per FS114-Y §1.1, §3.4) |
-| 28 | stub to mint | placed or declined per aim | Successor § Carried: each of Y's four aims placed or declined with the result that superseded it (RAINBOW case (ii)–(iii): YB's radius-3/5 fragment) |
+| 28 | stub to mint | placed or declined per aim | FS-116 § Construction targets: the BOWTIE-seam curve pair carried; RAINBOW case (ii) done (YB's radius-3/5 fragment); the 60° ring aim carried; the torus skeleton moved to FS-117 |
 | 29 | slip | done | — |
 | 30 | tool defect | declined to fix — recorded | `FS112-Y`'s `locate` guard is another job's tool (standing rule 7); no verdict rests on it; named in the Successor's § Known tool defects |
 | 31 | owner ruling | done | — |
@@ -124,7 +124,7 @@ every "declined" gives the reason. Checked against the record at stage 6.*
 | 116 | result | done | Record stage 2; Deriv. |
 | 117 | owner ruling | done | — |
 | 118 | result | done | Record stage 2; Deriv. (N7-3T at one mind, per the brief) |
-| 119 | owner ruling | (1) done in Record stage 2 if the records settle it, else carried; (2) carried | (2), the blind check of N7-HUB, is the Successor's first job (item 121) |
+| 119 | owner ruling | (1) not settled — carried; (2) carried | (1): Record stage 2 §2.5 — on their face R-E2 fixes a 60° cone and E2 none, and E2 at a 60° blade needs E1 (YB5-E2-60), so R-E2 is at most a subcase; the frame-mapping comparison is FS-116's opening item 4. (2): FS-116's opening item 1 |
 | 120 | result | done | Record stage 2; Deriv.; the wrap lemma is the Successor's second job |
 | 121 | owner ruling | done | Record stage 1.3; the Successor carries round 7's queue |
 | 122 | owner ruling | done | this job |

@@ -6,13 +6,15 @@ and the drafts of the front page. Launched beside FS111-C, which writes other fi
 
 ## Theorems this phase proved
 
-A close proves none of its own unless it does. Filled at stage 6 (the headline and each line's grade).
+**None of its own.** This close files the milestone's theorems (`plans/FS114-derivation.md`, 46 entries, at the grades the records support) and
+derives nothing new: its reconciliation (stage 2), its comparison of R-E2 with E2 (stage 2 §2.5, not settled) and its divergence count are readings of
+the records, not theorems.
 
 ## Would-have-searched-here log (standing rule 5)
 
 | stage | move a search would have made | what was done instead |
 |---|---|---|
-| 1 | — | none (reading only) |
+| 1–6 | — | none: reading, filing and drafting only; no search of any kind (the only computations are the gates, the ledger checker, the Brier sum and a byte count) |
 
 ## Fence log (standing rule 8)
 
@@ -402,3 +404,317 @@ not run (round 7 was cut; no blind check of L60 was spent). They carry to the su
   on FS-111, whose stub FS111-C is closing now — the pointer is in FS-117's GAP-μ line and in the drafts.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — the drafts, and the report
+
+## Drafts for the front page
+
+*Each draft is written to be filed as it stands. Numbers: ledger rows 137–138 (the brief's); grokking G86 (G84–G85 are FS-111's); stubs FS-116 and
+FS-117 written directly (stage 5), FS-118 and FS-119 unused and skipped. Where FS-111's clause belongs in a shared unit, the marker ‹FS-111› stands.*
+
+### `LEDGER.md` — § A, rows 137–138 (to append after row 136)
+
+| 137 | **With unit arcs, the six-map question is local: every locally finite map of the plane bounded by segments and circular arcs, arcs of radius 1 allowed, whose six-colouring puts no two interior points of one colour at distance exactly 1, has a vertex of at least four colours — in the map itself, with no ray step and no residue. So S–V's Question 2 with unit arcs is one local statement: its NO is exactly an explicit radius about a vertex of at least four colours within which no such map fragment exists, Siamese pairs included, and by the capped strip any such radius exceeds `φ²/√2 ≈ 1.8512` (row 138). The count on the map graph — Sirgedas's program, made exact — gives the other view: on a torus map with no Siamese pair a charge of `n`, `n − 2`, `n`, `n + 6` at vertices of degree 3–6 (`n` the edges that are not unit arcs about four-colour vertices at distance 1) sums to zero, it averages on discs of the plane at every complexity, and it is negative only at a degree-4 four-colour vertex with three or four such edges; with Siamese pairs no density bound exists, so the count reaches the non-Siamese part only. On the way: the five-colour count closes (maps need six, by counting); Thomassen's topological steps hold for every such map, and his argument fails only at the rainbow step; FS-112's chain-end residue is empty; FS112-L60 is false at exactly 60° and holds as "at most 60°", the chain intact. It moves no value** (FS-114; FS114-CV-EXISTS, CV-HD, N2-ENDS, N2-AVG, N2-FIVE, N114-RD, CVB-THOM, L60-LE and the rest of § B). **[hand; CV-EXISTS two minds, blind to each other (CV; CVB), over FS112-N3-DENSE3 and row 134's base, whose Lemma 4 at cusps is still one mind (BASE-V regraded the rest upward); the count's lemmas two minds, one blind (N, N2; NB), N2-ENDS's exact identity one mind with tools; the averaging two minds (N2; NB6, blind); C114-THOM-TOP three minds, decided 2–1; L60's correction two minds (N4; L60), its walk one mind]** Mechanism: a four-colour vertex is where the unit-radius tactic lives, and in a map with none every stuck chain of the terminal modification is bi-infinite, which N4-FIN forbids; a six-colouring pays for a tile's neighbours beyond five with repeated colours, each a unit arc about a four-colour vertex or a Siamese pair, and Euler's formula leaves room only at degree-4 four-colour vertices. **Not claimed:** the NO; an explicit radius (C114-LOCAL-F, FS-116); the non-Siamese NO (route T GAP at K1′ ∧ K2′ ∧ GAP-μ, FS-117); anything at a fixed complexity alone. **Prior art:** not found in print (FS-114's gate); route T's count, cover rule and red blocks are Sirgedas's program (the Google group, 2020–22, stated without proofs); the plane's nice case by pure Euler is Ágoston 2025's (`[Agoston2025]`); the rainbow deficit's two types are Gibbs's and Mixon's search constraints (`[Polymath16threads]` `[09.11]`, `[09.28]`, `[08.14]`). | `plans/FS114-derivation.md` §§1–2, 5; `plans/FS114-CV-verification.md`; `plans/FS114-CVB-verification.md`; `plans/FS114-N-proof.md`; `plans/FS114-NB-verification.md`; `plans/FS114-L60-audit.md`; `plans/BASE-V-verification.md`; `tools/fs114_n2_count.py`, `tools/fs114_nb_count.py`, `tools/fs114_l60_check.py` | FS-114 (2026-09-28) |
+| 138 | **Where the count gives six room, the configurations die locally, and both printed positives are part of no six-map with unit arcs. At a degree-4 four-colour vertex with four edges that are unit arcs about four-colour vertices at distance 1: two width-1 Reuleaux triangles corner to corner (the bowtie) fit a closed disc of radius `3√3/5` exactly (a 20-tile fragment over ℚ(√3), built independently twice) and no disc of radius `√3`, whatever the colouring near their lunes (two independent derivations); four such edges turning one way (the pinwheel) die within `1 + ε` of the vertex except when an edge is exactly 60° long or a blade's side is a unit arc about its own edge's end, and those two exceptions reduce to named shapes (the first forces a second 60° arc under a Reuleaux cap; the second leaves one cone family); three or more such edges die at `1 + ε` on rings carrying no unit arc about the vertex with both side colours there, except one open-cap family. The strip's six tiles at a valley and the disk's pentagon skeleton are part of no valid map under any colouring, and each geometry has one colouring; the strip capped by unit arcs holds every disc of radius below `φ²/√2` about a four-colour vertex. Every kill is a straddle: two tiles of one colour forced along two unit circles to come within 1, seen at second order. It moves no value** (FS-114; FS114-Y4-RSTOPALL, N4-D, N5-GRING, Y2-BOWTIE, Y5-PINALL, N6-NOQ, Y6-E1CAP, Y6-E2RED, N7-3T, Y-DIAL, Y-PENT, Y-STRIPK6 and the rest of § B). **[hand and tools, exact; RSTOPALL two minds, one blind (Y4; YB3), and the proof side's chain (N4, N5, NB5) independent of both, its last step one mind; the bowtie fragment two independent objects, two checkers; the pinwheel two minds, one blind, on each side (Y5; YB4 — N6; NB6); E1CAP two minds with its λ clause a GAP (the wrap), E2's cut to one family one mind (YB5); N7-3T one mind; the printed geometries two minds, one blind (Y; YB)]** Mechanism: at a vertex with such edges every tile's cone and colour is pinned by the half-planes facing the edges' centres (N-E2's cone form), and a configuration that needs one colour on both sides of a point where two unit circles meet tangentially has no colour left. **Not claimed:** K1 (GAP at rings with (Q) arcs, the first exception's residues, the second's surviving family, the wrap, the open-cap family, non-simple bowties); four-colour vertices with at most two such edges or of degree ≥ 5; Siamese maps (every exclusion here is non-Siamese and simple); a YES. **Prior art:** not found in print (FS-114's gate); the strip is `[AxenovichEtAl2014]`'s and the disk `[Polymath2021]`'s (Gibbs's); the slack form of the partner lemma is de Grey's (`[Polymath16threads]` `[17.282]`). | `plans/FS114-derivation.md` §§3–4; `plans/FS114-Y2-construction.md` … `plans/FS114-Y6-construction.md`; `plans/FS114-N3-proof.md` … `plans/FS114-N7-proof.md`; the verifiers `plans/FS114-NB4-verification.md` … `-NB6-`, `-YB-` … `-YB5-verification.md`; `tools/fs114_y2_k1.py`, `tools/fs114_y4_diag.py`, `tools/fs114_y5_px.py`, `tools/fs114_nb5_check.py`, `tools/fs114_yb4_pin.py` | FS-114 (2026-09-28) |
+
+### `LEDGER.md` — § B, 49 lines (to append after FS-112's)
+
+**The block is `data/fs114/fs114-c/ledger-b-draft.md`, verbatim** (committed with this stage; 46 entries, one line each, the three stalled or gapped
+entries included because the census counts them). **The census:** `python3 tools/fs71_ledger_b_check.py --strict` (TB1's version, commit 95efed69) on
+a scratch copy of the repository with this block appended to `LEDGER.md`: **exit 0, "RESULT: PASS", "LEDGER § B rows: 1049"** with FS-111's
+not-yet-filed `plans/FS111-derivation.md` left out of the copy (output `data/fs114/fs114-c/ledger-check-strict.out`); with it in, exit 1, all 85
+failures FS-111's unfiled entries, none FS-114's. The first run found three FAILs of mine (the gapped entries FS114-ROUTE-T, -GSD, -K1 had no line),
+fixed by adding their lines.
+
+### `LEDGER.md` — corrections owed to existing rows and lines
+
+- **Row 134's grade bracket** (inventory item 12, upgrades only): insert before its closing "]**": "; re-derived blind at FS-114 by BASE-V (`plans/BASE-V-verification.md`): S–V Lemma 5 and Prop. 18 (a third mind, with CB and CD), Lemma 3 and Cor. 3 at cusps, and D5 item 5 in substance under H with unit arcs (BV-HEX) — D5 items 1–4 and 6 (Lemma 4 at cusps) stay one mind". The Proof Atlas's "under blind check" ring on row 134 is stale (item 15).
+- **Row 135:** in its statement, "(the close's assembly, one mind, bar one named residue at such single vertices)" → "(the close's assembly; the residue closed at FS-114, two minds)"; in its grade bracket, "over row 134's base at its grade, unre-derived here — S–V Lemma 5, Prop. 18, Lemma 6's `< 9` branch and CUSP-BASE — where a common error of both walks would sit" → "over row 134's base, re-derived by BASE-V at FS-114 but for Lemma 4 at cusps (CUSP-BASE's D5 items 1–4, 6, one mind), where a common error would now sit", "the composition, C-ENDS and C-PARTNERS one mind (FS112-C)" → "the composition, C-ENDS (its residue empty) and C-PARTNERS two minds (FS112-C; FS114-CV, blind)", and "C-HORNEND and C-DOUBLE one mind (FS112-C2)" → "C-HORNEND one mind (FS112-C2); C-DOUBLE two minds (FS112-C2; FS114-CV)"; in its **Not claimed**, delete "a chain end at a unit arc bounding one horn only" (walked: FS114-CV-HD). *The Proof Atlas's N3BASE node quotes the old grade clause; its quotation moves with the row.*
+- **§ B, l. 1144, FS112-L60:** "a unit arc with constant sides is shorter than 60°" → "a unit arc with constant sides is at most 60° long (filed as "shorter than 60°", false at exactly 60°; corrected at FS-114's close, FS114-L60-LE)"; grade → "hand; the corrected bound two minds: N4; L60; the strict form refuted".
+- **§ B, FS112-N3-BASE:** grade "…; over row 134's base unre-derived" → "…; over row 134's base, re-derived by BASE-V but for Lemma 4 at cusps".
+- **§ B, FS112-C-ENDS:** "… has ≥ 4 colours, bar one residue at one-vertex chains (not all four horn arcs unit, an R2 bound)" → "… has ≥ 4 colours (its residue empty: FS114-CV-HD)"; grade → "hand; two minds: FS112-C, repaired by FS112-C2; FS114-CV and FS114-CVB, blind".
+- **§ B, FS112-C-PARTNERS:** grade → "hand; two minds: FS112-C; FS114-CV, blind, over N3-COR3; the count two minds: Y3; YB3". **FS112-C-DOUBLE:** grade → "hand; two minds: FS112-C2, a sketch; FS114-CV, blind".
+- **§ B, every FS-112 line whose kernel column reads "stub (FS-114)"** → "stub (FS-116)" (D6 still held; `plans/FS112-derivation.md` § Errata item 8).
+
+### `CLAUDE.md` — the shared units, the grokkings, and the corrections (net **+1,878 bytes**, the markers counted as written)
+
+*Generated and checked by `data/fs114/fs114-c/claude_md_units.py` (run from the repository root: each old unit is found exactly once in `CLAUDE.md` at
+288,911 bytes; `--emit` prints the pairs below). G86 follows G83 directly, before G51. The "Where the problem stands" item 31 and the three other
+shared units carry ‹FS-111› where FS-111's clause belongs.*
+#### last: replace (verbatim, the whole unit)
+
+```text
+*Last updated: 2026-09-27 — **FS-112, the unit-arc half, closed undecided** (rows 135–136; `plans/FS112-unit-arc-half.md` §R-close): the NO
+reduced to four-colour and repeated-colour vertices (row 135), the YES stalled where the printed positives stop (row 136); its gaps are FS-114 and
+FS-115. Before it, **FS-110** (row 134), **FS-107** (row 133) and **the reframe** (Kooshi,
+2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain).
+Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+```
+
+with
+
+```text
+*Last updated: 2026-09-28 — **FS-114, the unit-arc question, closed undecided** (rows 137–138; `plans/FS114-C-close.md`): every six-map with
+unit arcs has a four-colour vertex, so the NO is one exclusion at an explicit radius about such a vertex (row 137), and where the count gives six room
+the configurations die locally but for named cases (row 138); its successors are FS-116 and FS-117. ‹FS-111› Before them, **FS-112** (rows 135–136),
+**FS-110** (row 134), **FS-107** (row 133) and **the reframe** (Kooshi, 2026-09-26): the aim is the answer, formalized in Lean (§ The aim). **No
+finite-witness search runs until 2026-10-01** (Kooshi; § Toolchain). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+```
+
+#### open: replace (verbatim, the whole unit)
+
+```text
+**Open milestones, in order.** **None is open.** FS-112, the unit-arc half (`plans/STUB-unit-arc-half.md`), is **closed undecided** (rows 135–136;
+`plans/FS112-unit-arc-half.md` §R-close). **Next: FS-114, the unit-arc question, then FS-111, the cone scale** (`plans/STUB-global-step.md`, `plans/STUB-reg-scale.md`), beside BASE-V's blind re-derivation of row 134's print steps; FS-115 waits for FS-114's plan (NIGHT-A on Kooshi's deferral, `plans/POROS-2026-09-27-night-aim.md` §1); the finite-witness-free week runs to 2026-10-01 (§ Toolchain).
+**M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close: `plans/FRONTIER-STUBS.md`'s closed list.
+```
+
+with
+
+```text
+**Open milestones, in order.** **None is open.** FS-114, the unit-arc question (`plans/STUB-global-step.md`), is **closed undecided** (rows 137–138;
+`plans/FS114-C-close.md`), with BASE-V beside it (row 134's base re-derived but for Lemma 4 at cusps). ‹FS-111› **Next: Poros's re-rank**
+(`plans/FRONTIER-STUBS.md`); FS-114's successors are **FS-116, the local exclusion** (`plans/STUB-local-exclusion.md`, opening with round 7's queue) and
+**FS-117, route T's count** (`plans/STUB-route-t-count.md`); FS-115 bears only on the four-colour density form (row 137); the finite-witness-free week
+runs to 2026-10-01 (§ Toolchain). **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close:
+`plans/FRONTIER-STUBS.md`'s closed list.
+```
+
+#### prog: replace (verbatim, the whole unit)
+
+```text
+**The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
+Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
+complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136); **FS-114, the unit-arc question**; **FS-115, the stuck ray**;
+**FS-111, the cone scale** — the same at unbounded complexity; **Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the
+collapse, the measurable chain, the map argument.
+```
+
+with
+
+```text
+**The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
+Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
+complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136);
+**FS-114, the unit-arc question — closed** (rows 137–138: the NO is one local exclusion about a four-colour vertex); **FS-116, the local exclusion**;
+**FS-117, route T's count** (the non-Siamese part); **FS-115, the stuck ray** (the density form only); ‹FS-111› **Lean throughout** — MR in full
+(Einsiedler–Lindenstrauss, Einsiedler–Fish), the collapse, the measurable chain, the map argument.
+```
+
+#### i31: replace (verbatim, the whole unit)
+
+```text
+31. **The regularity wall, verified; the question is stability; at bounded complexity, four-colour vertices** (§ The aim; rows 131–136;
+   FS-114, FS-115, FS-111). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+   classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+   exists (row 133): under Condition 5 none does (row 134); with unit arcs each would have a vertex of four colours or a repeated colour within 3 of
+   every point, and both printed positives stop where a second four-colour vertex is missing (rows 135–136). Past it, whether junctions keep a cone scale.
+   Bearing on the answer: none moved; half of door (A) closed, the other half reduced.
+```
+
+with
+
+```text
+31. **The regularity wall, verified; the question is stability; at bounded complexity, one four-colour vertex** (§ The aim; rows 131–138;
+   FS-116, FS-117, ‹FS-111›). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+   classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+   exists (row 133): under Condition 5 none does (row 134); with unit arcs every one has a vertex of at least four colours (rows 135, 137), so the NO is one
+   exclusion at an explicit radius, above `φ²/√2`, about such a vertex; where the count gives six room the configurations die at `√3` or `1 + ε` but for
+   named cases, and both printed positives are part of no such map (rows 136, 138). ‹FS-111›
+   Bearing on the answer: none moved; half of door (A) closed, the other half one local statement.
+```
+
+#### g83: replace (verbatim, the whole unit)
+
+```text
+* **G83 — With unit arcs, the tight question lives at four-colour vertices. [hand, two minds, one blind (rows 135–136); the reading one mind]**
+  The unit-radius tactic survives reduction only at vertices of four or more colours; the base refutes a map around any cubic trichromatic vertex
+  lacking a four-colour or repeated-colour vertex within 2; a close complementary pair sits on a unit rhombus with four-colour corners — and both printed
+  positives stop exactly where a pair's second corner is missing. *Reading:* the unit-arc half is a placement problem for four-colour vertices, a
+  discrete one (Sirgedas's quads); killing test: FS-114 decided by an argument that reads no such vertex. *Do: when a tight-map question admits unit
+  arcs, list its four-colour and repeated-colour vertices first and read each close complementary pair's two rhombus corners — a construction that
+  saves one has found its stop. Nothing kills the theorems but a defect in row 134's base; they forbid a valid map with unit arcs having a disc of
+  radius 3 with no such vertex.*
+```
+
+with
+
+```text
+* **G83 — With unit arcs, the tight question lives at one four-colour vertex. [hand, two minds, one blind (rows 135–138); the reading one mind]**
+  The unit-radius tactic survives reduction only at vertices of four or more colours, and every valid map has one (row 137, two minds blind to each
+  other), so the NO is an exclusion at an explicit radius about a single such vertex; the count (route T) gives six room only at degree-4 four-colour
+  vertices with three or four tactic edges, and every such configuration examined died by a straddle — two tiles of one colour forced along two unit
+  circles to come within 1 — at `√3` or `1 + ε` (row 138). *Reading:* what is left is four-colour vertices whose rings carry (Q) arcs, the class every
+  exclusion so far had to except; killing test: a valid fragment by formula about such a vertex beyond `φ²/√2`. *Do: when a tight-map question admits
+  unit arcs, take one four-colour vertex and ask what its ring carries (a (Q)-free ring's change points are four-colour vertices, N7-HUB) before
+  excluding its next escape, and hunt the straddle along two unit circles. Nothing kills the theorems but a defect in row 134's base; they forbid a
+  valid map with unit arcs and no four-colour vertex.*
+* **G86 — Tile counts are blind to Siamese pairs: a count reaches the non-Siamese part, and a Siamese kill reads points and distances. [hand, one mind
+  (FS114-N2, row 137); the reading one mind]** Euler's formula fixes a map's average number of neighbours, and a six-colouring pays for neighbours beyond
+  five with repeated colours — a unit arc about a four-colour vertex, or a Siamese pair (tiles of one colour within each other's exclusion annulus).
+  Where Siamese pairs are allowed a tile can be cut into any two-colour map, so no density bound exists and a Siamese vertex pays its demand at no cost:
+  no count over tiles charges it (N2-REFINE). So a count gives the non-Siamese NO at best — de Grey's target (`[16.317]`), Thomassen's theorem without
+  scalability — and the whole NO must be a local exclusion reading distances between points of colour classes. *Do: before a counting or discharging
+  route to a map-colouring NO, ask whether the class allows Siamese pairs; if it does, put "non-Siamese" in the count's headline and aim the rest at a
+  distance argument. Nothing kills the refinement lemma; it forbids a tile-count proof of a NO for a class with Siamese pairs.*
+```
+
+#### g72: replace (verbatim, the whole unit)
+
+```text
+**The count so far — sixteen of nineteen** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-112, through: §IQ's per-centre question gave the reduction to four-colour vertices).
+```
+
+with
+
+```text
+**The count so far — seventeen of twenty** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-114, through: §IQ's per-vertex datum is route T's charge, which set FS-114's targets).
+```
+
+#### rows: replace (verbatim, the whole unit)
+
+```text
+**Rows 1–136 live in `LEDGER.md`**
+```
+
+with
+
+```text
+**Rows 1–‹last› live in `LEDGER.md`**
+```
+
+### `plans/GROKKING-INSTANCES.md` — new instances (each with its source)
+
+- **§G21**, after its last instance: *FS114-C, FS-114's close (`plans/FS114-C-close.md` stage 4.1):* FS-114: FS112-L60 ("below 60°") stood on two minds,
+  one blind, and a tool, and was false at exactly 60° — the frozen tools' plant sat at 50°, and their check computed a pair the equality tile never
+  contains; the proof side found it by meeting the tile the bound excludes, the Reuleaux cap over a 60° arc (`plans/FS114-N4-proof.md` §2.6), and the
+  audit found that both printed proofs break at the boundary, by different steps (`plans/FS114-L60-audit.md` §1.3). **A boundary claim needs a plant at the
+  boundary, not only on each side of it.**
+- **§G51**, after its last instance: *FS114-C, FS-114's close (stage 2 §2.1):* FS-114: six rounds of a proof side against a construction side, fenced
+  from each other, with routes never relayed mid-round (inventory items 50, 57, 87); three blind convergences — the proof side's escape DR was the
+  construction side's bowtie; both sides reached `√3` by different routes; the proof side's residual (R-V) had the construction side's escape E2's shape
+  and was excluded by RSTOPALL, blind to NB5's own kill — each a second derivation a relay would have spent; and a divergence of truth in every round,
+  21 in all, each settled for the second mind or by a third (C114-THOM-TOP, 2–1).
+- **§G72**, after the nineteenth: *FS114-C, FS-114's close (stage 4.2):* Twentieth, FS-114: through — §IQ's per-vertex datum is route T's charge (FS114-N2-ENDS),
+  which located six's room at degree-4 four-colour vertices with three or four tactic edges and set rounds 2–6's targets; FS114-CV-EXISTS came from
+  re-deriving the composition's chain end.
+- **§G79**, after FS-110's: *FS114-C, FS-114's close (stage 4.2):* FS-114: the headline (every valid map carries a four-colour vertex) and the count (every map's
+  charge sums to zero) from example invariants; the six rounds' kills from counterexample invariants — what an escape at a deficient vertex must carry
+  (DR, the Γ-ring bowtie, the pinwheel, E1, E2, OC), each then killed; the flip ran late: the example invariant at the same vertex — what every
+  four-colour vertex's ring carries (N6-RING60, N7-HUB) — arrived in rounds 5–6 and is FS-116's lead. No breakthrough of the second kind.
+
+### `BIBLIOGRAPHY.md` — rows (§ A form: key | work | what of ours rests on it | copy | read)
+
+| **[Mohar2002]** | B. Mohar, *Light structures in infinite planar graphs without the strong isoperimetric property*, Trans. Amer. Math. Soc. 354(8) (2002) 3059–3074, Zbl 0996.05031 | nothing: discharging on infinite planar graphs of subexponential growth, named at FS-114's gate as route T's aperiodic tool; the step closed by averaging on discs instead (FS114-N2-AVG) | `~/source/library/pdf/` (fetched by FS114-N) | §§1–3 (FS114-N); §§1–2 (FS114-Y); the reviewer's review at the gate (FS114-P); the rest not read |
+| **[Higuchi2001]** | Y. Higuchi, *Combinatorial curvature for planar graphs*, J. Graph Theory 38(4) (2001) 220–229, Zbl 0996.05041 | nothing: names route T's discipline (combinatorial curvature of infinite planar graphs) | not held | the author's summary only (a claim; FS114-P) |
+| **[Agoston2025]** | P. Ágoston, *A lower bound on the number of colours needed to nicely colour a sphere*, Discrete Comput. Geom. 74(3) (2025) 691–718, Zbl 1580.05061; arXiv:2404.14398 (v2) | prior art for FS114-N114-CUBIC's shape: the plane's nice case from his Lemma 7 and `3n − 6`, pure Euler (row 137) | `~/source/library/pdf/` (arXiv v2, fetched by FS114-N) | §§1–2 in outline (FS114-N); §1 to §2.1's opening (FS114-Y); Lemma 7's proof not read |
+| **[AxenovichLiuSagdeev2025]** | Axenovich, Liu and Sagdeev (first names not checked), arXiv:2512.15516 (2025), on Euclidean Ramsey problems for unit copies of a graph | nothing: the one work Semantic Scholar lists as citing `[SokolovVoronov2025]`; off topic | not held | abstract only (FS114-P) |
+| **[AldousLyons2007]** | D. Aldous, R. Lyons, *Processes on unimodular random networks*, Electron. J. Probab. 12, Paper 54 (2007), 1454–1508; arXiv:math/0603062 (v6) (venue checked on the PDF by FS114-NB6) | FS114-N6's mass-transport route (Ex. 9.5: the Palm version of an isometry-invariant embedded graph is unimodular); the route needs GAP-μ in the hull (NB6-MTP), and the conclusion rests on FS114-N2-AVG instead | `~/source/library/pdf/arXiv-math-0603062-aldous-lyons-processes-on-unimodular-random-networks.pdf` | Def. 2.1 and Ex. 9.5 (FS114-N6); Thm 8.5's statement and the first half of Ex. 9.5's proof (FS114-NB6); the rest not read |
+| **[AngelHutchcroftNachmiasRay2018]** | O. Angel, T. Hutchcroft, A. Nachmias, G. Ray, *Hyperbolic and parabolic unimodular random maps*, arXiv:1612.08693 (v2); venue as recalled GAFA 28 (2018), not checked | as `[AldousLyons2007]` (Thm 1, the Dichotomy Theorem; Thm 3.4) | `~/source/library/pdf/arXiv-1612.08693-angel-hutchcroft-nachmias-ray-hyperbolic-parabolic-unimodular-maps.pdf` | abstract; §1 to Thm 1; §§2.1–2.2; §§3.2–3.3; §4's opening; Ex. 4.3's proof; Ex. 4.11 (FS114-N6, FS114-NB6); the rest not read |
+| **[BenjaminiSchramm2001]** | I. Benjamini, O. Schramm, *Recurrence of distributional limits of finite planar graphs*, arXiv:math/0011019 (venue not checked) | nothing: named in Kooshi's lead (inventory item 79); not about Euler counts | `~/source/library/pdf/arXiv-math-0011019-benjamini-schramm-recurrence-distributional-limits.pdf` | abstract, §§1.1–1.2 (FS114-N6) |
+
+**§ A′ (alternate keys):** `| [AHNR2018] | **[AngelHutchcroftNachmiasRay2018]** | the short key FS114-N6 and FS114-NB6 used |`.
+**Edits to existing rows:** `[Oostema2020]` — last page **389** (the publisher's page, doi 10.29007/btmj, reads "pages 373-389"; OpenAlex's 355 is its
+record's defect; FS114-P). `[Sirgedas2021]` — read: pp. 1–11 and 13 (FS114-Y); its stitch is a seven-colour device. `[Thomassen1999]` — page images not
+held, OCR only (FS114-CVB). `[Polymath16threads]` — add: thread 7's disk question (Mixon, 2018-06-16, "What is the radius of the largest disk in
+$\mathbb{R}^2$ that can be 6-colored?"), the local form of C114-LOCAL-F; thread 16's non-Siamese search (de Grey, 2020-05-27); `[09.11]`, `[09.28]`
+(Gibbs's "vertex-edge" and "vertex-vertex constraints") and `[08.14]` (Mixon) as prior art in words for FS114-N114-RD's two types, as search rules
+(FS114-NB §1.2 item 1). **The Google group row** (`~/source/library/hadwiger-nelson-problem-group/`): archived 2026-09-27 with no browser profile
+(`tools/fetch_hn_google_group.py`: all 11 conversations, message counts matching, 2 attachments); read: `Z50mmulkXCQ` in full (FS114-P, FS114-Y);
+`J_Tw1_hUxQI` in part (FS114-P: ll. 1–40, 589–770, 885–945, 4150–4200, 4455–4545 and greps; about 4,300 lines unread); nine other threads by title;
+attachments unopened; the HNT simulator thread `a701Kwnhp_A` (`[Parts2023]`'s [9]) to be checked against the archive — the inventory calls it unheld.
+With these rows `tools/bib_audit.py`'s FS-114 failures (the four arXiv ids and six keys the brief lists) resolve; its FS-111 failures are FS111-C's.
+
+### `data/fs114/claims.md` — corrections at the close (to append as its § 9; the list is frozen and Keryx's)
+
+- **C114-RAINBOW: MISSTATED** (four minds). Corrected: "Siamese, or the unit-radius tactic (one face shares a unit arc of `ω(q)` with `x`, the other meets
+  `cl x` only at `q`), or both meet `cl x` only in finite sets at mutual distance exactly 1" (FS114-YB §1c item 10; = FS114-N114-RD read on contact sets).
+- **C114-DUAL-COUNT: MISSTATED.** Corrected (FS114-NB-DUAL, two minds, both blind): at least `2F + 2V₅ + 6V₆` of the `2.5F` edges are unit arcs — at least
+  80 %, exactly `2n` iff no vertex has degree 5 or 6. FS114-Y's "TRUE as stated" an over-grade.
+- **C114-FIVE-COUNT: TRUE** (FS114-N2-FIVE, two minds). **C114-EDGE-RAINBOW: TRUE** (four minds). **C114-THOM-TOP: TRUE with a colour-free repair**
+  (three minds, 2–1). **C114-VOR:** fails at C-CS-1 (c) (two minds). **C114-COMPACT: TRUE for every `K`**; not at a fixed `K` read as "≤ `K` tiles per unit
+  disc" (two minds). **C114-CURV: TRUE at each `K`**, `R₀ = O(K²)`; a uniform radius a reading. **C114-REDBLOCK:** first clause and "no pentagons" TRUE;
+  "no quadrilateral" GAP; "only triangles" undecided. **C114-ENCLOSED3: GAP** (it implies COVER-3). **C114-PENT: no** (two minds); its second question
+  answered at named points (FS114-Y-ROUTES). **C114-DIAL: met** (FS114-Y-DIAL). **C114-TORUS:** F1, F2 excluded; F3 undecided. **C114-SIRGEDAS-FORM:** not
+  landed; its gloss "no Siamese pair (every vertex of `R(M)` absent)" is one-way — no Siamese pair implies no vertex of `R(M)`, not conversely (FS114-YB).
+- **C114-EXISTS-F: TRUE, with no residue** (FS114-CV-EXISTS, two minds blind to each other). **GS-1:** delete "outside FS112-C-ENDS's named residue" and
+  "the terminal modification" (every valid map itself has the vertex). **C114-LOCAL-F: GAP** — and its lower bound "`√15/4 + √3/2 ≈ 1.834`" → "`φ²/√2 ≈
+  1.8512`" (FS114-Y-DIAL, two minds). **C114-LOCAL-FR:** not needed (C114-LOCAL-F alone is the NO). **GS-D:** stalls at C114-LOCAL-F.
+- **Route T:** K1 GAP (at the named cases of FS114-K1); K2-loc moot (its content is K2′); GAP-μ stands; SIAM-KILL subsumed by C114-LOCAL-F. **C114-SKELETON:**
+  not derived. **C114-BUDGET:** route T's charge (FS114-N2-ENDS) is non-negative at every vertex type but a degree-4 vertex with at least three tactic
+  edges — named.
+
+### `CLOSED-QUESTIONS.md` — declined
+
+Nothing FS-114 holds answers a question the literature posed. The reduction to C114-LOCAL-F is partial for `[SokolovVoronov2025]` Question 2's unit-arc
+half and for `[Polymath2021]` p. 199's hope; no explicit radius landed for Mixon's thread-7 question's upper side; the non-Siamese case (de Grey's
+`[16.317]`) is reduced, not decided; the five-colour count by counting is a known value (row 132, `[Woodall1973]`).
+
+### `plans/STUB-global-step.md` — the closed banner (to insert under its title line)
+
+> **CLOSED 2026-09-28 — undecided** (FS-114; `plans/FS114-C-close.md`; `LEDGER.md` rows 137–138). Every valid map has a vertex of at least four
+> colours, so the NO is one local statement, C114-LOCAL-F (an explicit radius about such a vertex). Successors: FS-116, the local exclusion
+> (`plans/STUB-local-exclusion.md`), and FS-117, route T's count (`plans/STUB-route-t-count.md`). This stub stays as the record of the question as posed.
+
+### `tools/viz_proof_atlas_facts.py` — entries (drafted; every quotation is from a drafted row or line above, so the checker runs after the filing)
+
+```python
+# ---- FS-114, the unit-arc question: closed undecided (rows 137–138); successors FS-116 (the local exclusion) and FS-117 (route T's count)
+LSTUB = STUB("STUB-local-exclusion.md")
+TSTUB = STUB("STUB-route-t-count.md")
+N("CVEXISTS", "CV-EXISTS", "held", "Every six-map with unit arcs has a vertex of at least four colours, in the map itself. So the unit-arc NO is "
+  "one local statement about one such vertex, Siamese pairs included, with no step about stuck rays.", B("FS114-CV-EXISTS"),
+  "every valid map with unit arcs has a vertex of at least four colours, in the map itself",
+  "hand; two minds, blind to each other: CV; CVB, by different routes; over FS112-N3-DENSE3, N2-TERM, N4-FIN", at=(20, 560), sector="seven",
+  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")])
+N("LOCALF", "the local exclusion (NO)", "question", "Exclude every six-map fragment on a disc of explicit radius about a four-colour vertex. With "
+  "CV-EXISTS this is the whole unit-arc NO; the capped strip puts the radius above φ²/√2 ≈ 1.8512 (FS-116, the successor).", L(137),
+  "its NO is exactly an explicit radius about a vertex of at least four colours within which no such map fragment exists",
+  (L(137), "the NO; an explicit radius (C114-LOCAL-F, FS-116)"), at=(22, 525), sector="seven", tier=1)
+N("BOWSQ3", "the bowtie dies at √3", "nogo", "Two width-1 Reuleaux triangles corner to corner at a four-colour vertex fit a disc of radius "
+  "3√3/5 exactly and no disc of radius √3: two independent derivations.", B("FS114-Y4-RSTOPALL"),
+  "no non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of `B̄(p, 1)` and of `r = q1 + q2`",
+  "hand; three minds: Y4; YB3, blind; the proof side (N4, N5, NB5) blind to both, its last step one mind", at=(34, 575), sector="seven")
+N("PINW", "the pinwheel dies at 1 + ε", "nogo", "Four unit-arc edges turning one way at a four-colour vertex die within 1 + ε of it, but for "
+  "two named exceptions (an edge exactly 60° long; a blade's side a unit arc about its own edge's end).", B("FS114-Y5-PINALL"),
+  "except under E1 (an edge of exactly 60°) or E2 (a blade's counter-clockwise side a unit arc about its clockwise edge end)",
+  "hand; two minds: Y5; YB4, blind; tools exact at named values", at=(48, 575), sector="seven")
+N("ROUTET", "route T, the count", "step", "Euler's formula on the map graph: a charge summing to zero, negative only where four-colour vertices "
+  "carry three or four unit-arc edges; it reaches the non-Siamese part only (FS-117).", B("FS114-N2-ENDS"),
+  "negative only at a degree-4 vertex with at least three tactic edges",
+  "hand; one mind: N2; tools exact; its inequality form two minds (NB-ARCS, blind)", at=(62, 560), sector="seven",
+  words=(TSTUB, "K2′ derived under K1 at one mind (0.35)"))
+N("CAPSTRIP", "the capped strip", "positive", "The strip with each top tile capped by a unit arc holds every disc of radius below φ²/√2 about a "
+  "four-colour vertex, and no extension does better.", B("FS114-Y-DIAL"),
+  "the capped strip is a valid fragment holding every closed disc of radius below `φ²/√2 ≈ 1.8512` about a midline four-colour vertex",
+  "tools, exact; two minds: Y; YB, blind", at=(119, 440), sector="six-up")
+E("N3DENSE3", "CVEXISTS", "rests", B("FS114-CV-EXISTS"), "over FS112-N3-DENSE3, N2-TERM, N4-FIN")
+E("CVEXISTS", "LOCALF", "rests", L(137), "its NO is exactly an explicit radius about a vertex of at least four colours within which no such map fragment exists")
+E("LOCALF", "UANO", "rests", L(137), "So S–V's Question 2 with unit arcs is one local statement")
+E("BOWSQ3", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
+E("PINW", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
+E("ROUTET", "BOWSQ3", "context", B("FS114-N2-ENDS"), "negative only at a degree-4 vertex with at least three tactic edges", label="where six has room")
+E("CAPSTRIP", "LOCALF", "blocks", B("FS114-Y-DIAL"), "no extension does better", label="R > φ²/√2")
+```
+
+**Edits to existing nodes** (the coordinator's, after the filing): **GSTEP** — its text gains "FS-114 closed undecided: the global step is now the local
+exclusion (LOCALF)"; its `words` registration (0.2) is scored: not met. **N3BASE** — its note "is being re-derived blind tonight (BASE-V); row 134's grade
+stands as printed until it reports" → "BASE-V re-derived row 134's print steps blind: every step but Lemma 4 at cusps upgraded"; its `also` quotation moves
+with row 135's corrected clause. **TSMYES** — "By row 135 it must hold a four-colour or repeated-colour vertex within 3 of every point" gains "and, by row
+137, a vertex of at least four colours"; its registration (0.03) scored not met. **FOURC**, **SRAY**, **CHAINB** — bearing reduced to GS-4's density form
+(row 137); their `words` lines reference rank 1 and 4 of the old table, Poros's to update. Coordinates are placeholders for the layout.
+
+### Questions and findings for another lane (for the coordinator)
+
+1. **Workflow 3.0, the close job (Kooshi asked for the friction):** (a) the lane file's § The close job says "Enter every theorem … as an entry" and
+   the census counts **gapped and stalled entries too** (the checker failed on FS114-ROUTE-T, -GSD, -K1 until each had a § B line) — the lane file should say
+   § B carries one line per entry, gaps included; (b) the entry grammar has **no field for "rests on it"** and its `model:` field has no form for a
+   statement about a class not known to be non-empty (every valid-map statement here) — I wrote the vacuity caveat into each model line; the grammar or the
+   lane file should say so, since an empty class is exactly the NO; (c) the lane file names no place for **regrades of an earlier close's entries** (only
+   errata): I appended both in one dated section; (d) grouped entries (a lemma family under one id, each member quoted with its id) were needed to keep 150
+   record ids to 46 entries — the lane file is silent on grouping, and the census cannot see member ids; (e) the brief's "items 1–121" missed item 122.
+2. **Standing rule 3, measured again:** the owner's summaries in FS-114 dropped or widened a clause six times (inventory items 34, 39, 82, 86, 90, 109);
+   the repair adopted mid-milestone — verifier instances with statements scripted verbatim from the record's table — worked, and the one slip after it was
+   in a definition the script did not copy (item 109). A candidate rule for Keryx's own workflow: script the definitions as well as the statements.
+3. **For FS-111's close and Poros's re-rank:** NB6-MTP's recognition (limits of simple hole-free valid maps can pinch or open holes) bears on FS-111's limit
+   objects; FS111-M2-INTRAD's link makes FS-115's bearing possibly larger through route M (item 78).

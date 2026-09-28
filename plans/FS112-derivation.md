@@ -459,3 +459,5 @@ Filed by the close job of FS-114 (`plans/FS114-C-close.md` stage 3; FS-114's own
    `plans/FS114-Y-construction.md` §1.3, §2.2; inventory item 26.
 7. **Row 135's "Not claimed" line** — "a chain end at a unit arc bounding one horn only" — is walked: at a stuck vertex of `M*` the four horn-arc
    conditions are equivalent (FS114-CV-HD, two minds). *Source:* CV §2.4.
+8. **Every "*Kernel:* stub — with FS-114"** above now reads **"stub — with FS-116"**: FS-114 closed undecided (2026-09-28) with D6 (a Lean skeleton of
+   Q-full's statement) still held for Kooshi, and the NO's successor is FS-116 (`plans/STUB-local-exclusion.md`). *Source:* `plans/FS114-C-close.md` stage 6.
