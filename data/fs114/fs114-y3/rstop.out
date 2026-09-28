@@ -1,0 +1,16 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== FS114-Y3 r-stop: the named ring point y = q1 + e(330)(399/401 + i 40/401)
+   |y - q1|^2 = 1 (exactly 1); |y - q2|^2 = 1.17776067906 = 1.177761 (> 1: True); |y|^2 = 3.167786 (|r|^2 = 3)
+   tiles at q1: [('L1', 5), ('T1', 4), ('V', 6), ('W', 3), ('t1', 1)]
+ok  S-probe colour 2 vs T2: REJECT (registered REJECT; 78 candidate pairs; min<1; max>1)
+ok  O-probe colour 1 vs t1: REJECT (registered REJECT; 128 candidate pairs; min<1; max>1)
+ok  O-probe colour 3 vs W: REJECT (registered REJECT; 110 candidate pairs; min<1; max>1)
+ok  O-probe colour 4 vs T1: REJECT (registered REJECT; 80 candidate pairs; min<1; max>1)
+ok  O-probe colour 6 vs V: REJECT (registered REJECT; 86 candidate pairs; min<1; max>1)
+ok  O-probe colour 5 vs L1: REJECT (registered REJECT; 232 candidate pairs; min<1; max>1)
+ok  O-probe colour 2 vs T2: REJECT (registered REJECT; 78 candidate pairs; min<1; max>1)
+ok  C-sector: probe off the ring at r + e(16.26)/100, colour 5 vs L1: ACCEPT (registered ACCEPT; 226 candidate pairs; max>1)
+ok  C-sector: the same probe colour 4 vs T1: REJECT (registered REJECT; 78 candidate pairs; min<1; max>1)
+ok  P-E1: colour-2 wedge at q2, sector [240,300], vs the S-probe: ACCEPT (registered ACCEPT; 72 candidate pairs; max>1)
+ok  P-E2: colour-5 wedge at q1, sector [90,150], vs the O-probe colour 5: ACCEPT (registered ACCEPT; 74 candidate pairs; max>1)
+11 of 11 as registered

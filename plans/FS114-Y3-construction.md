@@ -13,8 +13,16 @@ directions it fills there.*
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
+| FS114-Y3-RSTOP | **FS114-Y2-BOWTIE stops at `√3`**: no valid fragment (Siamese pairs allowed) that agrees with it near `q1` and `q2` contains a neighbourhood of `r = q1 + e(330°) = (√3, 0)`; so the bowtie extends to no closed disc of radius `√3` or more about `p`. The step: the ring of `q1` just above `r` has no state — a tile-interior point has colour 2 (N-E1), which straddles `T2`; a unit arc there has an outer colour that straddles its own `q1`-tile (FS112-U1) or, if 2, `T2` | [hand; tools exact at a named ring point, 11 of 11 as registered; one mind] | §2.1; `tools/fs114_y3_rstop.py`; `data/fs114/fs114-y3/rstop.out` |
+| FS114-Y3-R | About every valid map with a Reuleaux bowtie at `p` that contains a neighbourhood of `r`: the ring of `q1` just above `r` carries, on it or just outside it, a colour `c` that (i) is absent at `q1`, or whose `q1`-tile lies in the open cone `(60°, 240°)` at `q1`, and (ii) has no tile at `q2` with a direction within 90° of `30°`. With five colours at `q1` this is **E1** (`T2`'s sector at `q2` inside `[240°, 300°]`) **or E2** (a tile at `q1` whose sector starts after `60°`, its colour pointing nowhere near `r` from `q2`) | [hand; one mind] | §2.2 |
+| FS114-Y3-D2 | **The bowtie's symmetry class stops at `√3`, and forces five colours:** in a non-Siamese valid fragment with a Reuleaux bowtie at `p`, invariant under `x ↦ −x` with colours `(1 3)(5 6)` and `y ↦ −y` with `(2 4)(5 6)` (Y2's action) and containing a neighbourhood of `top`, each `q_i` has exactly five colours, its tiles `t1, W, T1, V, L` (FS114-Y2-BOWTIE's arrangement: `L ∋ top`, `T1` ending before `60°`, the sliver `V` between); and no such fragment contains a neighbourhood of `r`, so none holds the closed disc of radius `√3` about `p` | [hand; one mind] | §2.3 |
 
 ## Would-have-searched-here log (standing rule 3)
+
+- Stage 2: I would have tried tile layouts in the annulus `1.04 < |z| < 2` about `p`, extending the bowtie outward until one failed the checker;
+  instead the ring of each `q_i` was read cone by cone (FS112-U1, N-E1) until a direction with no admissible state appeared (just above `r`), and
+  only that point was probed, at one named ring point. For the symmetric class I would have enumerated colourings of the tiles at `top` and `q1`;
+  instead each tile's colour was derived from the tiles at `p`, `q1`, `q4` that point toward it.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -65,3 +73,94 @@ YB's checker, unedited, re-run in this session under `scripts/slot.py --mem 2 --
   pairs of Y2's record (`y2-k1-rerun.out`).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the bowtie stops at `√3` — at `r`, the ring of `q1` has no state
+
+**Frame.** `r = q1 + e(330°) = q2 + e(30°) = (√3, 0)`: the fourth corner of the unit rhombus `p, q1, r, q2`, at distance `√3` from `p`. The rings of
+`q1` and `q2` cross there. Every extension of the bowtie to a disc of radius `√3` or more about `p` must colour a neighbourhood of `r`. Facts used,
+each held: **N-E1** (`ω(u)` meets no open tile of a colour of `P_cl(u)`), **FS112-U1** (quoted, `tools/fs114_y3_quotes.py`: "At a unit arc `α ⊂ ω(P)` of
+angular length `ℓ`, an inner side colour in `P_cl(P)` has its sectors at `P` in the closed cone of width `π − ℓ` facing `α`, an outer one in the
+closed cone facing away"), the **diameter bound** (a tile of a valid map has diameter at most 1), and the **straddle rule** (two distinct tiles of one
+colour with minimum distance below 1 and maximum above 1 are invalid, Siamese or not). One computation is used throughout: a tile with `q` in its
+closure and a direction `ψ` at `q` has points `q + s·e(ψ)` for small `s`; a point `z` with `|z − q| = 1 + ε` then has
+`|z − q − s·e(ψ)|² = (1 + ε)² + s² − 2(1 + ε)s·cos(ψ − arg(z − q))`, below 1 for suitable small `s` when the cosine is positive and `ε ≪ s`, and above 1
+as `s → 0`. So **a tile at `q` with a direction within 90° of the direction to `z` straddles every other tile of its colour containing points just
+beyond distance 1 from `q` near `z`**.
+
+### 2.1 FS114-Y3-RSTOP — FS114-Y2-BOWTIE's own stop [hand; tools exact at a named point; one mind]
+
+In the bowtie, `P_cl(q1) = {1, 3, 4, 5, 6}` with sectors at `q1`: `t1 [180°, 300°]`, `W (3) [300°, 330°]`, `T1 (4) [330°, 53.13°]`, `V (6) [53.13°, 60°]`,
+`L1 (5) [60°, 180°]`; `T2`'s sector at `q2` is `[306.87°, 30°]` (`T1`'s mirror). Take `y = q1 + e(φ)`, `φ` just above `330°`, so `|y − q2| > 1`
+(`|y − q2|² = 2 + 2 sin φ`). All but finitely many such `y` are (S) interior to a tile or (Γ) interior to a unit arc about `q1`.
+- **(S)** The tile's colour is not in `P_cl(q1)` (N-E1), so it is 2. `T2` has directions at `q2` within 90° of the direction to `y` (about `33°`), so it
+  straddles that tile, which is not `T2` (`q2 ∈ cl T2`, `|y − q2| > 1`, diameter). Invalid.
+- **(Γ)** The outer tile `Z` has colour `c`. If `c = 2`: `T2` straddles `Z` as in (S). If `c ∈ P_cl(q1)`: its `q1`-tile has a direction within 90° of
+  `φ` — `t1` at `280°`, `W` at `315°`, `T1` at `0°`, `V` at `55°`, and `L1` at `60° + η` for any `η < φ − 330°` (`cos(60° + η − φ) = sin(φ − 330° − η) > 0`)
+  — so it straddles `Z` (FS112-U1's cone, violated). Invalid.
+
+No state is left, so **no valid fragment agreeing with the bowtie near `q1` and `q2` contains a neighbourhood of `r`**. The bowtie holds the disc of
+radius `3√3/5`; it can be extended to no closed disc of radius `≥ √3`. Siamese pairs are not excluded by the argument (every exclusion is a straddle).
+
+*The exact check* (`tools/fs114_y3_rstop.py`, `data/fs114/fs114-y3/rstop.out`; YB's checker and Y2's builder imported unedited), registered in the tool's
+docstring before its first run, at `y = q1 + e(330°)(399/401 + 40i/401)` (`φ − 330° = 5.72°`, all coordinates in `ℚ(√3)`): an S-probe (a triangle of
+size `1/100` around `y`) coloured 2 against `T2`, and an O-probe (a triangle `1/1000` to `3/1000` outside `ω(q1)` at `y`, width `2/100`) coloured
+1, 3, 4, 6, 5, 2 against `t1, W, T1, V, L1, T2`: **all seven REJECT**. Controls and plants, beside their faithful twins: the O-probe moved off the ring
+to `r + e(16.26°)/100`, strictly inside the sector `(330°, 60°)` at `r`, coloured 5 against `L1` → **ACCEPT** (the exclusion of colour 5 needs the
+ring: there `|z − q1 − s·e(60°⁺)|² − 1` has no real root in `s`), and coloured 4 against `T1` → REJECT; a colour-2 wedge at `q2` with sector
+`[240°, 300°]` against the S-probe → **ACCEPT** (escape E1 below); a colour-5 wedge at `q1` with sector `[90°, 150°]` against the colour-5 O-probe →
+**ACCEPT** (escape E2). **11 of 11 as registered.** The check confirms the derivation's inequalities at named values; the proof is the derivation (for
+any small probe, not the one checked).
+
+### 2.2 FS114-Y3-R — what every map with a Reuleaux bowtie needs at `r` [hand; one mind]
+
+The same reading at `r` for any valid map with a Reuleaux bowtie at `p` (`t1` the Reuleaux triangle `(p, q1, q2)`, so its sector at `q1` is
+`[180°, 300°]`): on or just outside the ring point `q1 + e(φ)`, `φ` just above `330°`, some tile of a colour `c` sits (the (S) tile or the (Γ) outer
+tile), and it is valid only if
+- (i) `c ∉ P_cl(q1)`, or `c`'s tile at `q1` has its sector inside the facing-away cone `[φ + ℓ + 90°, φ + 270°]` — for `φ → 330°⁺`, inside
+  `(60°, 240°)`; and
+- (ii) no tile of colour `c` at `q2` has a direction within 90° of `30°` (the direction from `q2` to `r`).
+
+**With five colours at `q1`** (`P_cl(q1) = {1, 3, 4, 5, 6}`, the only absent colour 2, because no colour-2 tile is at `q1`: `t2` cannot reach `q1` by
+its diameter, and any other colour-2 tile at `q1` straddles `t2`, which contains the ring points `q1 + e(210° − δ)` near `p`), (i)–(ii) leave two
+escapes, and every such map uses one:
+- **E1**: `T2`'s sector at `q2` lies in `[240°, 300°]` (colour 2 then passes (ii));
+- **E2**: some tile at `q1` other than `t1, T1` and the tiles between `t1` and `T1` has its whole sector after `60°` (its colour passes (i)), and that
+  colour has no tile at `q2` pointing within 90° of `30°` (it passes (ii)).
+The mirror statement holds at `r` for the ring of `q2` just below `r` (E1′: `T1`'s sector at `q1` inside `[60°, 120°]`; E2′: a tile at `q2` whose sector
+ends before `300°`). FS114-Y2-BOWTIE has neither (hence 2.1).
+
+### 2.3 FS114-Y3-D2 — the symmetric class: five colours forced, and the stop [hand; one mind]
+
+*Setting:* a non-Siamese valid fragment with a Reuleaux bowtie at `p`, invariant under `σ_x : (x, y) ↦ (−x, y)` acting on colours by `(1 3)(5 6)` and
+`σ_y : (x, y) ↦ (x, −y)` by `(2 4)(5 6)` (FS114-Y2-BOWTIE's action), containing neighbourhoods of `top` and `r`. At `top` the circles `ω(p)`, `ω(q1)`,
+`ω(q4)` cross (tangents `0°`, `60°`, `120°`), cutting six sectors; `(0°, 60°)` is inside `B(q1, 1)` and outside `B(p, 1)`, `B(q4, 1)`; `(60°, 120°)` is
+outside all three.
+1. **`N`, the tile covering direction `90°` at `top`, has colour 4.** `σ_x` fixes it, so its colour is fixed by `(1 3)(5 6)`: 2 or 4. It is not 2: its
+   points lie outside `B̄(p, 1)` and `t2` has directions at `p` toward `top`, so `t2` straddles it.
+2. **`T1` has no direction in `(60°, 240°)` at `q1`**: such a direction points toward `top` and `T1` would straddle `N` (both colour 4; `T1 ≠ N`, since
+   `N = σ_x(N)` would then contain `q1` and `q4`, `√3` apart). So `T1 ⊂ [300° + β, 60°]`.
+3. **The tile `L` at `top` in the sector `(0°, 60°)` is a tile at `q1`, with `q1`-sector inside `[60°, 180°]` and colour 5 or 6.** Its colour is not 1, 2 or 3
+   (the tiles `t1, t2, t3` at `p` point toward `top`); not 4 (it lies inside `B(q1, 1)`, so `T1` straddles it; `T1 ∌ top` by step 2). If its colour
+   were absent at `q1`: the tile at `q1` covering direction `150°` meets `B(p, 1)`, so has colour 5 or 6 (FS114-Y2-GAPS), the other one; its `σ_x`-image
+   at `q4` has `L`'s colour and direction `30°`, straight at `top`, and straddles `L` (`L` has points outside `B̄(q4, 1)`, so is not that image). If its
+   colour is present at `q1` on another tile, the two are within 1 near `q1` and not Siamese — invalid. So `L` is a `q1`-tile; containing `top`, its
+   sector at `q1` lies within 90° of `150°`, inside `[60°, 180°]` (the inner gap), sector `[λ, 180°]` with `λ ≥ 60°`.
+4. **Five colours at `q1`.** Every tile in `top`'s sector `(60°, 120°)` has colour 4 (5 and 6 are excluded by `L` and `σ_x(L)`, which point at `top`), so
+   `N` fills `[60°, 120°]` and meets `L` along an edge leaving `top` at `60°`. That edge lies on `ω(q1)`: `cl L ⊂ B̄(q1, 1)` (diameter) and `N` misses
+   `B(q1, 1)` (else `T1` straddles `N`). So it is a unit arc about `q1` of positive length `ℓ`, inner `L`, outer colour 4; FS112-U1 puts `T1`'s sector in
+   `[240°, 60° − ℓ]`. `T1` ends before `60°`, `L` starts at `λ ≥ 60°`: a tile `V` lies between. With `t1`, `T1`, an outer-gap tile `W`, `V` and `L` at `q1`,
+   distinct colours, and 2 absent (2.2), **`P_cl(q1) = {1, 3, 4, 5, 6}` exactly**, the tiles exactly `t1, W, T1, V, L`. By the symmetry, every `q_i`.
+5. **The stop at `r`.** E1 fails: `T2 = σ_y(T1)` has sector `[300° + ℓ, 60° − β]`, containing `0°`. E2's only candidate is `L` (if `λ > 60°`); its colour
+   `c(L) ∈ {5, 6}`; `{c(W), c(V)} = {3, c̄(L)}`, so `σ_y` gives `q2` a tile of colour `c(L)` among `σ_y(W)` (sector `[60° − β′, 60°]`) and `σ_y(V)` (sector
+   `(360° − λ, 360° − θ_T)`, `θ_T < 60°`); both have directions within 90° of `30°`, so (ii) fails. No state at `r⁺` (2.2). ∎
+
+**What 2.3 does and does not reach.** Steps 1 and 3 use `σ_x`'s swap of 5 and 6, and step 5 uses `σ_y`'s. The other three symmetric actions are **not
+covered**: with `σ_x = (1 3)` (5 and 6 fixed) step 1 allows `N` of colour 5 or 6 and step 3 fails (a tile at `q4` and its image at `q1` share a
+colour), so `top` may carry a colour absent at `q1` and `q1` may have four colours (stage 3); with `σ_y = (2 4)`, step 5's E2 escape survives when
+`λ > 60°`. Without symmetry, 2.2 (FS114-Y3-R) is the general statement. **Where it bears** (the round-3 card's meeting point): FS114-Y2-BOWTIE does not
+extend to radius 2; its stop is `√3`, at a named step — a first piece of C114-LOCAL-F for this configuration: *no Reuleaux bowtie in Y2's symmetry
+class, and no extension of Y2's own fragment, holds the closed disc of radius `√3` about its degree-4 vertex `p`*. For K1 this means: the escape DR
+(N3's), realised with Y2's symmetry, cannot carry a radius-2 argument's disc — any valid bowtie that does is asymmetric or uses another colour action,
+and must use E1 or E2 at `r`. The proof side's K1, read at radius 2, is **not refuted** by any object of this job.
+
+## Stage 2 — SAVED
