@@ -17,6 +17,8 @@ is not known to be non-empty. Stage 1 (my verdicts) is committed before I open `
 | YB5-F0 | with E2 at `t_{c+1}` and nothing at `q_c`, the cone family `(180° − b, b, c, 180° − c)`, `b + c ≤ 180°`, is killed by PXKILL at `k = c + 1` | hand; mine | 1b item 6 |
 | YB5-CONE180 | every cone of a pinwheel is below `180°` (at `180°` edge `j + 1` leaves `B̄(q_j, 1)`) | hand; mine | 1b preamble |
 | YB5-CHK | an exact `ℚ(√3)` named-point checker: 31 of 31 as registered, four plants each failing exactly its predicted check | tools | 1c.2 |
+| YB5-HALF4 | in a Reuleaux `(2, 1, 1, 0)` pattern with `t_4`'s cone below `60°`, `X1 = t_2` or `X2 = t_4` (else the ring-arc tile at `q2` has no colour) | hand; mine | §2.3 |
+| YB5 verdicts after comparison | E1FORM, E1Q3, E1OMEGA, E1K1 TRUE (two minds, one blind); E1CAP TRUE but `λ_3` GAP; E2RED's chain TRUE, survivors sharpened from S1–S6 to S6, "short of the tangent" GAP; HALF MISSTATED (true with a cone hypothesis) | hand; two minds, one blind for what agrees | §2.4 |
 
 ## Would have searched here (standing rule 3)
 
