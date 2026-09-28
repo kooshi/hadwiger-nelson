@@ -1,0 +1,30 @@
+FOUND     rule 0: Kooshi
+FOUND     rule 4: Kooshi
+FOUND     rule 10: Kooshi
+FOUND     rule 3: Kooshi (ban beyond)
+FOUND     card3 CV-EXISTS (VERBATIM, CV)
+FOUND     card3 CV-EXISTS (VERBATIM, CVB)
+FOUND     card3 CVB two minds
+FOUND     card3 LOCAL-F source (SUMMARY)
+FOUND     card3 THOM-TOP source (SUMMARY)
+FOUND     card3 N3-K1 source (SUMMARY)
+FOUND     card3 DR source (SUMMARY)
+FOUND     card3 N3-DR0 source (SUMMARY)
+FOUND     card3 N3-DR1 source (SUMMARY)
+FOUND     card3 N3-CONT source (SUMMARY)
+FOUND     card3 N3-JOINT (VERBATIM)
+FOUND     card3 N3-PAY source (SUMMARY)
+FOUND     card3 K2-loc moot (SUMMARY)
+FOUND     card3 GAP-mu stands
+FOUND     card3 SIAM-KILL subsumed (SUMMARY)
+FOUND     card3 SIX source (SUMMARY)
+FOUND     card3 SIX grade
+FOUND     brief A4SIX
+FOUND     brief NB4P
+FOUND     brief COR3
+FOUND     brief K1 at radius 2 (N2-ENDS)
+FOUND     card2 K1
+FOUND     card2 N2-ENDS partner
+FOUND     card2 tactic edge definition
+FOUND     card2 LOCAL-F strip bound
+RESULT OK
