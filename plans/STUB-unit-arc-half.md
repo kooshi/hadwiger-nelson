@@ -1,5 +1,7 @@
 # FS-112 — the unit-arc half: does a tight six-map exist once boundary arcs of radius 1 are allowed? (stub)
 
+**CLOSED 2026-09-27, undecided** (FS-112; record `plans/FS112-unit-arc-half.md` §R-close; `plans/FS112-derivation.md`; close inventory `plans/FS112-close-inventory.md`; `LEDGER.md` rows 135–136): the NO reduced to one statement about every valid map — a vertex of at least four colours or a repeated colour within 3 of every point (FS112-N3-DENSE3, two minds, one blind) — and the YES stalled where both printed positives stop, the pinned corner (FS112-STOP). Successors: **FS-114, the global step** (`plans/STUB-global-step.md`) and **FS-115, the stuck ray** (`plans/STUB-stuck-ray.md`). This stub is kept as written below (deprecate, never delete).
+
 *Minted 2026-09-27 by the close planner FS110-C at FS-110's close (`plans/FS110-tangency-seam.md` §R-close; inventory items 68, 78; A5-5.6, A6-2.2 (b)).
 Provisional bearings (WORKFLOW 3.1 replaces them at the opening): G82, G79, G51, G21, G71, G13, G50.*
 

@@ -37,13 +37,13 @@ compactness methods of the distance-avoiding-sets literature: `[Bukh2008]`, Falc
 
 ## Bearing on the answer
 
-Decisive jointly with (A) (FS-110's NO in its quantitative form): together they give `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR. Alone, a regularity
+Decisive jointly with (A) — at bounded complexity row 134 (no valid map under Condition 5) and, with unit arcs, FS-114's NO (`plans/STUB-global-step.md`; with FS-115's two steps where FS-114 is taken in its four-colour form, `plans/STUB-stuck-ray.md`; re-aimed at FS-112's close, 2026-09-27): together they give `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR. Alone, a regularity
 theorem for near-optimal colourings. A family refuting it with holes `→ 0` is W's claim itself: `χ(ℝ²) ≤ 6` with no MR.
 
 ## Provisional bearings (replaced by the re-grokking at the opening)
 
 G82 as corrected at FS-107's close (a defect at a scale independent of `ε`: positive measure, or features whose scale is bounded below — this stub is
 the second door); G30 (the next room: geometric measure theory); G24 and G60 (integrality; per-class density caps stop below 4.37, row 129); G79 (the
-example invariant every near-optimal colouring carries); G21. Rows 131–133. Stubs: FS-110, FS-109 (the dial reads the scale), FS-104.
+example invariant every near-optimal colouring carries); G21. Rows 131–136 (row 135: with unit arcs every valid map has a vertex of at least four colours or a repeated colour within 3 of every point; row 136: the positives' stops). Stubs: FS-114, FS-115, FS-109 (the dial reads the scale), FS-104.
 
 *Would have searched here:* a numerical study of junction scales along optimised tilings — post-ban at the earliest, and a dial (FS-109), never a proof.

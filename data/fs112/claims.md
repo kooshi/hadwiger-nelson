@@ -288,3 +288,50 @@ has committed its stage 1** (two blind walks are worth two samples only if they 
 Any value of `χ(ℝ²)`; unbounded complexity in FS-107's sense (FS-111); boundaries other than segments and circular arcs; `[Polymath2021]`'s question for
 tilings bounded by general closed curves; `[Kainen1992]`'s robustness conjecture (its everywhere form is `χ(ℝ²) = 7` given `[Voronov2023]` Thm 1.1); C-VOID
 (FS-109).
+
+## 11. Corrections and verdicts at FS-112's close (FS112-C, 2026-09-27; appended — the list above is kept as written)
+
+*Each line: the claim's id, its verdict with grade and minds, and the entry of `plans/FS112-derivation.md` that holds it. Where a statement above is
+wrong, the corrected statement is here; the text above is not rewritten.*
+
+1. **§2, NB-4's general form (the MISSTATED-suspect note).** Confirmed MISSTATED: the printed `ω(y_k)` clause is impossible as written and is not needed.
+   Corrected (NB4′): *at a vertex of exactly four colours, let `(v, y₀)` be a covering pair at a change point of its ring; if no point of `y₀`'s
+   `σ_v`-orbit lies in the closure of an arc of `Γ` on `ω(v)`, and no arc of `Γ` on `ω(y_{k±1})` has `y_k` in its closure, contradiction; the bound on the
+   colours at `y_k` is not needed.* [hand; three minds, one blind: N; NB; Y2] — FS112-NB4P.
+2. **§2, T2's definition** "(the spindle's rhombus)" is too narrow: the strip also realises T2 on a thin unit rhombus at `√15/2` (YB D8) — FS112-STRIP-SEAMS.
+3. **§2, C-SEAMS-TWO: MISSTATED.** Filed as the owner ruled (inventory item 30): *at a close covering pair (union sense) the seam point either lies in the
+   closure of a unit arc centred at `u` or `v`, or is a vertex of at least four colours* [hand, one mind: NB]; its corollary up to reduction, one species (a
+   (Q) centre) plus (R2) [two minds, one blind, over FS112-N2-RED] — FS112-SEAMS-TWO.
+4. **§2, C-V4-K:** a four-colour vertex with its whole ring is realised exactly (the strip's midline vertices; the disk's corners) [tools, exact; two rebuilds
+   each] — FS112-CAL-STRIP, FS112-CAL-DISK. **C-V56:** five colours force at least 180° of centred unit arcs, six a whole boundary circle (FS112-SIX, two
+   minds); de Grey's covering step is a GAP, his unproved merge `[08.16]`.
+5. **§2, C-V56's source:** thread 8, `[08.17]` (corrected before the contest); the degree-4 sketch the plan attributes to de Grey (§PA row 3) is **Philip
+   Gibbs's**, `[06.62]` (FS112-PA).
+6. **§1, Q-rule's (S2) with arcs** ("GAP at every pattern but N-X's"): the pattern "one arc of each circle ending at the seam" is realised exactly and
+   arc-closed on the strip — T2 read from the rhombus's other diagonal [tools, exact; two minds: A3; Y2] — FS112-STRIP-SEAMS.
+7. **§3, the chain walk:** first break C-CHAIN-1 [two minds, one blind] — FS112-WALK; C-CHAIN-3, 4, 9 (as a statement) and N4-RAY hold as written; FLANK fails
+   at `κ = ±1` (FS112-FLANK); N4-FIN's application fails at a chain's end, N4-CONE a GAP (FS112-N2-RAY); the base holds away from four-colour and
+   repeated-colour vertices (FS112-N3-BASE).
+8. **§6, C-UA-WEDGE: MISSTATED.** Corrected: *an inner side colour at `P` has its sectors in the closed cone of width `π − ℓ` facing the arc, an outer one in
+   the cone facing away; neither meets the open side cones* [hand; three minds: N; NB; YB] — FS112-U1.
+9. **§6, C-UA-BUDGET:** branch 1 TRUE [three minds: A4; N; NB] — FS112-A4SIX; branch 2 FALSE as stated in both senses (the strip's `P_1`, union; the disk's
+   `A_0`, disjoint) — FS112-BUDGET2; its derivable form is item 1 above.
+10. **§6, C-UA-INC:** held exactly: **both** (strip, disk) and **in** (the moved disk, FS112-MOVE); up to reduction only (Q) and (R2) survive
+    (FS112-N2-RED).
+11. **§6, C-UA-CHAIN: GAP** at "each unit arc forces a further unit arc"; a chain's end forces a both-kind unit arc two steps beyond (FS112-N3-END); the
+    strip carries bi-infinite periodic chains of unit arcs (FS112-STRIP-CHAIN); the killing test (a closed cycle) did not fire.
+12. **§6, ARC-INERT: TRUE, sharper** — an inert arc bends toward its centre with no exceptional interior point; its end-vertex GAP closed (FS112-BEND,
+    FS112-N2-BENDS).
+13. **§6, C-BEYOND:** TRUE given the positives; the disk's clause holds for steps reading a disc about a vertex only at radius `φ` (no larger vertex-centred
+    disc in any valid extension, and `φ` attained) — FS112-DISC. **C-LOCAL: GAP** (no explicit radius for a NO; N3-DENSE3's radius 3 is not a NO).
+14. **§6, C-ARC-END:** realised arc-closed — T2 and the four-colour vertex on the strip, (S1) on the disk (FS112-STRIP-SEAMS, FS112-DISK-S1).
+15. **§6, C-HOCK:** its first instance (A6-C2's radius-9/10 arc) is mis-aimed — that arc borders an uncoloured gap; no held valid object has an arc of
+    radius below 1 between two tiles. Open, with no instance.
+16. **§7, CAL-7:** the claim list names row 33's brick; FS112-Y first calibrated on the hexagonal seven-colouring; its checker ACCEPTs the brick with no
+    disagreement against YB's (Y2-D3) — FS112-CHK.
+17. **§7, CAL-STRIP and CAL-DISK:** both robust — three and two independent exact rebuilds, blind, on independent checkers — FS112-CAL-STRIP, FS112-CAL-DISK.
+18. **§8, killing tests:** 1 (seven-colour control) met by every derivation; 2 (the exact check) met; 4 did not fire (every seam realised arc-closed); 5
+    untested; 6: C-UA-WEDGE's cannot fire as corrected, C-UA-BUDGET's fired on branch 2, C-UA-CHAIN's did not fire; 7 fired only as corrected (NB-4 by the
+    strip); 8 met — every NO step named reads beyond the strip only where its conclusion holds (FS112-N3-BASE, FS112-N3-DENSE3).
+19. **The global statement FS-112 leaves:** every valid map has a vertex of at least four colours or a repeated colour within 3 of every point
+    [hand; two minds, one blind] — FS112-N3-DENSE3; how its two open steps compose — FS112-C-COMPOSE [one mind: FS112-C].
