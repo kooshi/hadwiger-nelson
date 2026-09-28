@@ -1,0 +1,5 @@
+self-test: faithful twin then one altered word
+FOUND   AX-1         (brief step 2; claims §7)
+MISSING AX-1-ALT     (brief step 2; claims §7); longest matching prefix 111/299 chars: ...'ircular arc of radius 1 centered at the ' | next 'nearest corner of the tile. The tiles us'
+found=1 missing=1 fenced=0
+SELF-TEST PASSED (the altered quotation is MISSING, the faithful twin FOUND)
