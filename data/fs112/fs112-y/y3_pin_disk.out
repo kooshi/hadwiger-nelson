@@ -1,0 +1,46 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== the disk's second move at C_0 (exact, Y2's base tower)
+ok       sqrt(4r^2 - 1) = 3 tan72/sqrt5
+ok       q2 = Z^L_0 - (1,0) is on omega(C_0) and omega(Z^L_0), inside the disc
+ok       the other point of omega(C_0) cap omega(Z^L_0) is D_0
+ok       p* on the rim and omega(C_0), counter-clockwise of C_0
+ok       s1, s2 beyond the rim on omega(Z^L_0), omega(C_0)
+ok       s1' on omega(Z^L_0), beyond the rim, inside B(Y_0,1) and B(C_0,1)
+ok       s1 is outside B(Y_0, 1) (why U_0 cannot reach s1)
+ok       |q2 - Y_0| < 1 (Y_0 a corner of T2_0)
+ok       |q2 - Z^R_0| > 1 (T2_0 reaches beyond 1 from q2)
+ok       |A_0 - q2|^2 = |A_0 - C_0|^2 = phi^2: the leg Y_0 A_0 is the perpendicular bisector of C_0 q2
+ok       K (in Q(...)(sqrt3)) is on omega(C_0), on omega(q2), and on T2_0's side Y_0 A_0 strictly between
+ok       |K - u_0| > 1 (K cannot be purple with U_0)
+ok       |K - A_1| < 1
+ok       |Z^L_0 - A_1| > 1 (Z^L_0 cannot be orange with T1_0)
+ok       |M - q2| > 1 (the 270-degree sliver cannot join a U_0 holding q2)
+   points: q2 = (-1.3090, 1.4768) (|.| = 1.97343); pstar = (-1.3892, 1.6070) (|.| = 2.12426); s1 = (-1.2601, 1.7858) (|.| = 2.18561); s1b = (-1.2797, 1.7172) (|.| = 2.14156); s2 = (-1.4511, 1.7556) (|.| = 2.27762); M = (-0.3090, 1.1617) (|.| = 1.20214)
+   [route: T2_0 unchanged] same-colour pairs holding a changed tile examined: 17 (the object has 76; the other 59 are Y2's moved disk's, unchanged, ACCEPT in data/fs112/fs112-y/y2_dial_move.out); VERDICT REJECT; REJECT [('T2_0', 'Tstar')]
+      (T2_0, Tstar): float min 0.90363 at primitives Seg((-0.309016994, 1.476787628),(-0.462088186, 1.161740937)) | Arc(C=(-0.500000000, 2.064572881), r=1.000000000, (-1.451056516, 1.755555886)->(-1.309016994, 1.476787628))
+ok       route: REJECT exactly at (T2_0, T*)
+   [sliver270: Y2's literal change near Z^L_0] same-colour pairs holding a changed tile examined: 17 (the object has 76; the other 59 are Y2's moved disk's, unchanged, ACCEPT in data/fs112/fs112-y/y2_dial_move.out); VERDICT REJECT; REJECT [('T2_0', 'Tstar'), ('U_0', 'U_0')]
+      (T2_0, Tstar): float min 0.90363 at primitives Seg((-0.462088186, 1.161740937),(0.000000000, 0.525731112)) | Arc(C=(-0.500000000, 2.064572881), r=1.000000000, (-1.451056516, 1.755555886)->(-1.309016994, 1.476787628))
+      (U_0, U_0): float min 0.00000 at primitives Arc(C=(0.000000000, 0.000000000), r=2.124255441, (-0.500000000, 2.064572881)->(-1.248606020, 1.718558752)) | Arc(C=(0.000000000, 0.000000000), r=2.124255441, (-0.500000000, 2.064572881)->(-1.248606020, 1.718558752))
+ok       sliver270: REJECT at (T2_0, T*) (Y_0 to q2) and (U_0, U_0) (M to q2)
+-- points p = q2 + rho e(-2 atan t) of T2_0 inside B(q2, 1): free colours with T2_0 itself ignored (the route's other tiles in place)
+   t = 1/40, rho = 99/100: p = (-0.3203, 1.4273) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/40, rho = 19/20: p = (-0.3602, 1.4293) NOT in T2_0; free ['P']; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']
+   t = 1/20, rho = 99/100: p = (-0.3240, 1.3780) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/20, rho = 19/20: p = (-0.3638, 1.3820) NOT in T2_0; free ['P']; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']
+   t = 1/12, rho = 99/100: p = (-0.3327, 1.3129) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/12, rho = 19/20: p = (-0.3721, 1.3195) in T2_0; free ['P']; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']
+   t = 1/8, rho = 99/100: p = (-0.3495, 1.2331) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/8, rho = 19/20: p = (-0.3882, 1.2429) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/6, rho = 99/100: p = (-0.3725, 1.1557) in T2_0; free NONE; blockers R: ['C0', 'R_0']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/6, rho = 19/20: p = (-0.4104, 1.1687) in T2_0; free NONE; blockers R: ['C0', 'R_0', 'R_1']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; O: ['T1_0']; P: ['U_0']
+   t = 1/4, rho = 99/100: p = (-0.4355, 1.0109) NOT in T2_0; free ['O']; blockers R: ['C0', 'R_0', 'R_1']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; P: ['U_0', 'T1_1']
+   t = 1/4, rho = 19/20: p = (-0.4708, 1.0297) NOT in T2_0; free ['O']; blockers R: ['C0', 'R_0', 'R_1']; Bl: ['Tstar']; G: ['T2_1', 'Up_4']; Yw: ['Up_0', 'T1_4']; P: ['U_0', 'T1_1']
+ok       named points of T2_0 cap B(q2, 1) with no admissible colour once T2_0 vacates it: [(Fraction(1, 40), Fraction(99, 100)), (Fraction(1, 20), Fraction(99, 100)), (Fraction(1, 12), Fraction(99, 100)), (Fraction(1, 8), Fraction(99, 100)), (Fraction(1, 8), Fraction(19, 20)), (Fraction(1, 6), Fraction(99, 100)), (Fraction(1, 6), Fraction(19, 20))]
+-- on Y2's moved disk, points of W = U'_0 cap B(C_0,1) near q2, outside B(Z^L_0,1): free colours with U'_0 ignored
+   p = q2 + 1/50*(-1/10, 1) = (-1.3110, 1.4968) in W, outside B(Z^L_0,1); free ['Yw']; blockers R: ['R_0', 'R_1']; Bl: ['T2_0']; G: ['T2_1']; O: ['T1_0']; P: ['U_0']
+   p = q2 + 1/50*(-1/5, 1) = (-1.3130, 1.4968) in W, outside B(Z^L_0,1); free ['Yw']; blockers R: ['R_0', 'R_1']; Bl: ['T2_0']; G: ['T2_1']; O: ['T1_0']; P: ['U_0']
+   p = q2 + 1/20*(-1/10, 1) = (-1.3140, 1.5268) in W, outside B(Z^L_0,1); free ['Yw']; blockers R: ['R_0', 'R_1']; Bl: ['T2_0']; G: ['T2_1']; O: ['T1_0']; P: ['U_0']
+   p = q2 + 1/30*(-1/2, 1) = (-1.3257, 1.5101) in W, outside B(Z^L_0,1); free ['Yw']; blockers R: ['R_0', 'R_1']; Bl: ['T2_0']; G: ['T2_1']; O: ['T1_0']; P: ['U_0']
+ok       at every named point of W near q2 outside B(Z^L_0, 1) the only admissible colour is yellow, the colour the move must remove, and blue is blocked by T2_0 alone: 4/4
+ALL AS EXPECTED

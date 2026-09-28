@@ -1,0 +1,19 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== the disk's second move at C_0 (exact, Y2's base tower)
+ok       identity root
+ok       identity q2
+ok       identity D0
+ok       identity pstar
+ok       identity s1
+ok       identity s2
+ok       identity u0
+ok       identity M
+   points: q2 = (-1.3090, 1.4768) (|.| = 1.97343); pstar = (-1.3892, 1.6070) (|.| = 2.12426); s1 = (-1.2601, 1.7858) (|.| = 2.18561); s2 = (-1.4511, 1.7556) (|.| = 2.27762); M = (-0.3090, 1.1617) (|.| = 1.20214)
+   same-colour pairs holding a changed tile examined: 17 (the object has 76; the other 59 are Y2's moved disk's, unchanged, ACCEPT); VERDICT REJECT; REJECT [('T2_0', 'Tstar'), ('U_0', 'U_0')]
+MISMATCH the disk with the second move and the Z^L_0 change: REJECT on the 17 changed pairs
+   closed_interval on the changed pairs: contacts at 1: [('T1_1', 'U_0'), ('T1_2', 'T2_0'), ('T1_4', 'Up_0'), ('T2_0', 'T2_0'), ('T2_0', 'Tstar'), ('U_0', 'U_0'), ('Up_0', 'Up_0')]
+   free colours at C_0 + e(theta)/100 outside the disc: 0: -; 18: ['R', 'Yw']; 36: ['R', 'Yw']; 54: ['Yw']; 72: ['Yw']; 90: ['G', 'Yw']; 108: ['G', 'Yw']; 126: ['G']; 144: ['G']; 162: ['G']; 180: ['G', 'P']
+ok       C_0's colourless wedge (54, 90) is closed at the named directions: [['Yw'], ['Yw'], ['G', 'Yw']]
+   free colours at D_0 + e(theta)/100 outside the disc: 0: ['G', 'P']; 18: ['P']; 36: ['P']; 54: ['P']; 72: ['P']; 90: ['P']; 108: NONE; 126: NONE; 144: ['R']; 162: ['R']; 180: -
+ok       float overlap guard on the box [-1.6, -0.3] x [1.0, 2.3]: 4900 samples, 0 overlaps, 0 far-from-boundary holes inside the disc
+SOME MISMATCH
