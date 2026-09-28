@@ -22,8 +22,21 @@ M-SATC, M-HULL1/2, M-PINCH, M-C11, Σ, REG-J′).*
   colour before). [hand, one mind] §1.5
 - **VM2-RAD** — under the same hypotheses every interface has radius of curvature in `{1, 2, 3, …} ∪ {∞}` almost everywhere, and a chain of inner
   parallels of an arc of radius `R` ends at a unit arc about the arc's centre `O`, which lies in Σ. [hand, one mind] §1.5
-- **VM2-FIN** — hence, off Σ, each interface is locally a finite chain of segments and circular arcs of any bounded set of radii (the switch points are
-  tangency points of finitely many circles and lines). [hand, one mind] §1.5
+- **VM2-FIN** — hence, off Σ, each interface is locally a finite chain of segments and circular arcs of any bounded set of radii. [hand, one mind] §1.5
+  **Its stage-1 proof is withdrawn at stage 2 (§2.3 D6):** a segment can leave a circle tangentially at any point, so switch points are not confined
+  to finitely many tangency points. Replaced by **VM2-FIN′** (stage 2).
+- **VM2-FIN′** (stage 2) — under REG-J′, the points of an interface with radius of curvature `n` form locally finitely many intervals: the `n`-th inner
+  parallel (taken on the side of the centre of the component the gap starts from) maps each gap between them to an interface curve starting at that
+  component's centre, one of finitely many terminal centres in Σ; distinct gaps give distinct curves (the parallel map is injective on one side), so
+  infinitely many gaps would put infinitely many interface arcs at one point of Σ, against REG-J′'s second clause. By induction on `n` (the radii
+  `< n` are already finitely many intervals, so near any point the gaps carry radii `> n` or segments, and every parallel up to the `n`-th is regular).
+  [hand, one mind] §2.3 D6
+- **VM2-DISCK7-ORIENT** (stage 2) — K (support `1/2 + sin³(3θ)/200`) placed at M2 §1.6's hex7 centres `m(√3/2, 0) + n(√3/4, 3/4)` leaves the
+  tiling vertex `c + (0, 1/2)` outside all three adjacent copies (`h = 99/200` in each of its three directions) and at distance `≥ 1` from every other
+  centre: **the seven classes do not cover the plane** in that orientation. [tools exact + hand, one mind] §2.3 D1, `disck7_m2orient.out`
+- **VM2-DISC7-EXACT** (stage 2) — M2's DISC7 (circumscribed discs of radius `1/2`) checked by exact bounds (not samples): cover, same-colour separation,
+  maximality, lenses, exclusive centres, self-parallel, curvature exactly 2, and the face colouring's degree 3 at every vertex. [tools exact, one mind]
+  §2.3 D2, `disc7_discs.out`
 - **VM2-LAD-CTL** — the controls satisfy M2-INTRAD's conclusions, exactly: SQ9 (48 of 48 edge-sides carry the unit-parallel ladder), HEX9 (76 of 76),
   R7 (432 of 432 arcs of kind both, radius 1), the strip of row 136 (16 of 16 vertical edge-sides, 26 of 26 arcs of kind both, radius 1). [tools exact,
   one mind] §1.3, `tools/fs111_vm2_intrad.py`
@@ -47,6 +60,8 @@ M-SATC, M-HULL1/2, M-PINCH, M-C11, Σ, REG-J′).*
   every check by formula (`tools/fs111_vm2_disc7.py`).
 - Stage 1: would have searched for a saturated colouring with an interface of non-integer radius (to refute M2-INTRAD) → derived the parallel lemma and
   the radius chain instead, and checked the four controls exactly.
+- Stage 2: would have searched numerically for the uncovered region of DISCK7 at M2's orientation → located it by formula (the tiling vertex in the
+  directions `π/2 + (0, 2π/3, 4π/3)`, `h = 99/200` in all three) and checked it exactly.
 
 ## Fence log (standing rule 13)
 
@@ -60,6 +75,9 @@ M-SATC, M-HULL1/2, M-PINCH, M-C11, Σ, REG-J′).*
   stage 2, `plans/FS111-VMW-verification.md` in full, `plans/FS111-V0-verification.md` §2.1, §2.8–§2.10, `plans/CONSOLIDATION-2026-09-27.md` l. 75, and
   `tools/fs112_y_check.py` (imported, not edited). No transcript, `chats-bak/` file, foreign scratchpad file, `plans/FS111-close-inventory.md`, other
   brief or FS-114 file was opened.
+- Stage 1 committed and pushed at `00fd646f`. Stage 2 then opened: `plans/FS111-M2-regularity.md` in full; `tools/fs111_m2_disck7.py` and
+  `data/fs111/fs111-m2/disck7.out`; the listing of `data/fs111/fs111-m2/` and of `data/fs111/reports/`, and `data/fs111/reports/FS111-M2.md`. Not opened:
+  `tools/fs111_m2_covers.py`, `covers.out` (their results are quoted from M2 §2.4), and everything fenced always.
 
 ## Stage 1 — SAVED: quotation check, blind verdicts on items 1–6, exact tools
 
@@ -253,3 +271,75 @@ parallels and are not arcs (NO-PAR) — a correct reading of what DISC7 shows.
 | 6 | M2-HULLC | **TRUE**, corrections: exterior radius 1 per component; DISC7's curvature `[100/63, 100/37]`, not 2; one clause unchecked | [hand + exact], one mind |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: reconciliation with M2 (`plans/FS111-M2-regularity.md`), read only after `00fd646f`
+
+### 2.1 The deferred quotations (standing rule 5)
+
+All seven quoted statements of the brief (items 1–6, with M2-NOSEL) are **verbatim** in M2's "Theorems this phase proved" (exact substring check on
+whitespace-joined text; item 6's "…" elides "(near components through their open spindle hulls, far ones through their unit neighbourhoods), so its
+boundary lies on unit parallels (outer and far) of its own components"; M2-NOSEL's quotation is a prefix — the line continues ": selecting from a given
+maximal cover is not a colour-generic route to honest saturation").
+
+### 2.2 My readings against M2's definitions
+
+- **"Regular"** — M2 §1.5: `|F ∖ A| = 0` and `|∂F| = 0` (MUA-REG). That is my R-REG (§1.2). My (O2) is M2's own caution: "M2-FIX needs `int F ⊆ Ã`. For a
+  general MUA set this is not proved", with a one-dimensional example of a maximal set whose support has holes. **Agreement; two minds** (M2-INT and
+  M2-FIX; VM2-INT). M2-INT is the stronger form (no point of `int Ã` at distance 1 from `cl Ã`).
+- **REG-J′-C_k** — conditional, as I read it (§1.2). M2 §2.3 states my (O1) itself: "At `k = 5`, given FS106-AE-MAP6 and stage 3's M2-REDUCE-C, it is
+  equivalent to `χ_m⁰(ℝ²) ≥ 6` … so it is not a smaller statement", and §3.2 "M2-REDUCE-C moves no value". **Agreement; two minds on VM2-EQ5.**
+- **DISC7 is not DISCK7.** DISC7 (M2 §1.6) is the cover by the **circumscribed discs** of hex7's hexagons (radius `1/2`); DISCK7 (M2 §4.2) is the cover by
+  the constant-width bodies. I read the brief's "DISC7" in items 4 and 6 as DISCK7's cover — **my error** (D2 below).
+
+### 2.3 Divergences, with addresses
+
+| # | claim | M2 | VM2 (blind, stage 1) | kind | settled |
+|---|---|---|---|---|---|
+| **D1** | M2-DISCK7 | K at "hex7's colour-`a` centres (§1.6)", §1.6's lattice `c(m, n) = m(√3/2, 0) + n(√3/4, 3/4)`; its tool checks "the regular hexagon of circumradius `1/2` (vertices at angles `60k` degrees)" | rebuilt with the hexagon vertices at `kπ/3` (neighbour centres at `30° + 60k`) — TRUE | **truth (of the object as the record specifies it)** | **§1.6's lattice has hexagon vertices at `30° + 60k`**, where `h(90°) = h(210°) = h(330°) = 99/200 < 1/2`: the tiling vertex `c + (0, 1/2)` is outside all three adjacent copies, and every other centre is `≥ 1` from it, so a neighbourhood of every such vertex is uncovered — **not a cover, hence not a maximal cover** (VM2-DISCK7-ORIENT, exact, `disck7_m2orient.out`; it is my stage-1 plant `rot`). M2's tool checked the other orientation, so its PASS was about a different object than the record specifies (a tool–record mismatch, G21's generator-image rule). **Corrected statement:** "… at hex7's colour lattice, oriented so that the hexagons' vertices lie in the directions where `sin 3θ = 0` (equivalently, support `1/2 + cos³(3θ)/200` at §1.6's lattice) …" — **TRUE** [hand + tools exact, two minds: M2's hand argument and body checks, VM2's exact rebuild]. Every consequence M2 draws (REG-J′-C₇ inhabited with non-circular boundaries; the universal cover form of REG-A FALSE at seven; NO-PAR; no saturated selection) holds for the corrected object |
+| **D2** | M2-HULLC's "(DISC7: curvature 2)"; M2-NOSEL | DISC7 = circumscribed discs | read DISC7 as DISCK7; "curvature is not 2 but `[100/63, 100/37]`" | reading (mine) | **Mine withdrawn:** DISC7's class boundaries are circles of radius `1/2`, curvature exactly 2 (exact, `disc7_discs.out`); `[100/63, 100/37]` is DISCK7's range. M2-NOSEL holds for both covers (every centre exclusive in each). M2's DISC7 check was a 2,173-point exact grid (a sample, the proof by hand, M2 §2.4); `tools/fs111_vm2_disc7.py --object disc7` decides every point by rational bounds (VM2-DISC7-EXACT): **the grade of M2-DISC7 rises to [hand + tools exact], two minds** |
+| **D3** | REG-J′-C_k (the hypothesis of M2-REDUCE-C) | §2.3 defines MUA-FIN as "`⋃_j ∂F_j` is, in every bounded set, a finite union of Jordan arcs"; §3.2 and the theorem line say "finitely many Jordan arcs meeting only at endpoints" / "a locally finite plane graph" | read the theorem line (plane graph) | **statement** | M2-REDUCE-C is proved (and TRUE, §1.4) with the plane-graph clause. §2.3's MUA-FIN omits "meeting only at endpoints": two classes' boundaries may then meet in infinitely many points (a Cantor set), the arrangement may have infinitely many faces in a bounded set, and the face colouring can fail Condition 3 (the least-index colouring M2 uses makes the colour-2 regions the components of `int F_2 ∖ F_1`). So **§3.3's route summary "some maximal five-cover satisfies MUA-REG and MUA-FIN" is MISSTATED**; add "meeting only at endpoints" to MUA-FIN. No counterexample is known; the clause is what the proof uses |
+| **D4** | M2-REDUCE-C, proof step (2) | checks D-AEMAP on faces; step (3) then erases edges and degree-2 vertices | VM2-FACE step 4: an erased edge between two faces of colour `j` lies in `int F_j`, and so does an erased vertex | exposition | The erased edges and vertices become region points after step (3); M2 does not say they lie in `int F_j`. They do (VM2-FACE step 4), so D-AEMAP holds on the merged regions. **M2-REDUCE-C TRUE, two minds** (M2; VM2 blind), over FS106-AE-MAP6's grade |
+| **D5** | M2-REDUCE-C, the island fill | step (3), "as V0-CLEAN" | (O3): not in the statement, needed | none | M2's proof contains it. Agreement |
+| **D6** | M2-INTRAD (iii), "finitely many of each radius locally" | step (3): `f = |γ − p|² − n²`, "`f″ = 2(1 − nκ(1 + o(1)))` … `f″ < 0` only on `⋃_{k<n} E_k`", then convexity between points of `E_{n,p}` | VM2-FIN: switch points are tangency points of finitely many circles and lines | **proof, both** | **Mine is flawed** (a segment leaves a circle tangentially at any of its points) — withdrawn. **M2's is an outline with a gap:** exactly, `f″ = 2(1 − κ·⟨p − γ, n⟩)`, and on `E_n ∖ E_{n,p}` (radius `n` about another centre `p′`) `f″ = −2⟨p − p′, n⟩/n` has either sign, so "`f″ < 0` only on `⋃_{k<n} E_k`" omits those pieces, and the `o(1)` is not uniform. **The conclusion is TRUE by VM2-FIN′** (the `n`-th parallel, on the side of the centre the gap starts from, carries each gap to an interface curve starting at one of finitely many centres in Σ; REG-J′'s "finitely many interface arcs at each point of Σ" allows only finitely many gaps). (i)–(ii): **agree, two minds, different routes for step (1)** (M2: `J⁺ ⊆ cl P_a ∖ P_a` from I-D1 and (H2); VM2: the near side of `J⁺` has `a`-density 0 by M-HULL1). Statement TRUE; grade [hand], two minds on (i)–(ii), one complete argument for (iii) |
+| **D7** | M2-REDUCE-A | "REG-A_k ⟸ honest C-SAT-T_k ∧ REG-J′_k ∧ ¬LRA" | TRUE; the C-SAT-T conjunct is implied by REG-J′_k | none (redundancy) | TRUE, two minds, over M2-INTRAD (with D6's repair of (iii)) and M-REDUCE-I |
+| **D8** | M2-SELCOMP | the proof states `∂_e S_a ∩ int Ã = ∅` | TRUE with "interface point" = point of `∂_e S_j` of the enlarged class; the broader wording FALSE by a degenerate example | statement (wording) | The theorem line's "no interface point lies in `int Ã`" should read "no interface point **of the class**". TRUE, two minds (M2 via M2-INT; VM2 by the same contact argument), over Federer 4.5.11 |
+| **D9** | M2-HULLC | the elided clause "so its boundary lies on unit parallels (outer and far) of its own components"; §2.1 (iv) derives it only "If `F_x` has finitely many components `K_1, …, K_m`" | not checked (elided in the brief) | **statement** | The carving "`int F ∩ B(x, r) = B(x, r) ∖ ⋃_{p ∈ F_x} T₁(p)`" is unconditional (F3); the unit-parallel description needs `F_x` to have finitely many components — **the theorem line drops that hypothesis** (MISSTATED; corrected by restoring it). "Radius `1/2`" is TRUE and not sharp (radius 1 per component, VM2-HULLC; M2 uses `1/2` for (iii)'s parallel-set argument). "Curvature 2": right (D2). Otherwise TRUE, two minds |
+| **D10** | M2-DISC7's maximality | "for `1/2 < |z − c| < 3/2` the circle `T₁(z)` crosses the disc" | the same by the constant-width bound `maxdist ≥ dist + 1` | none | Agreement |
+
+### 2.4 Corrections to my stage 1 (made here, not in §1)
+
+- §1.9, "DISC7's curvature is not 2": **withdrawn** (D2). DISCK7's curvature is `[100/63, 100/37]`; DISC7's is 2.
+- §1.8 and VM2-DISC7: my rebuild is of the **corrected** orientation; M2's record places K differently (D1). The stage-1 verdict "M2-DISCK7 TRUE as
+  rebuilt" stands for my object; for the object as M2 §1.6 + §4.2 specify it, **not a cover** (VM2-DISCK7-ORIENT).
+- §1.5 VM2-FIN: its proof **withdrawn** (D6); VM2-FIN′ replaces it.
+- §1.7 M2-NOSEL: stands for DISC7 (discs) and for DISCK7 (corrected orientation).
+
+### 2.5 Final verdicts
+
+| item | claim | verdict | grade, minds |
+|---|---|---|---|
+| 1 | M2-REDUCE-C | **TRUE** (theorem line's plane-graph hypothesis; merged points in `int F_j`, D4; island fill); an equivalence at five given AE-MAP6 (both minds say so); §3.3's summary with §2.3's MUA-FIN MISSTATED (D3) | [derived], two minds (M2; VM2 blind), over FS106-AE-MAP6 |
+| 2 | M2-INTRAD | **TRUE**; (iii)'s proof repaired (VM2-FIN′) | [hand], two minds on (i)–(ii), one complete argument for (iii) |
+| 3 | M2-REDUCE-A | **TRUE** | [derived], two minds |
+| 4 | M2-SELCOMP | **TRUE** with "interface point of the class" (D8) | [hand], two minds; over Federer 4.5.11 |
+| 4 | M2-NOSEL | **TRUE** (DISC7; also DISCK7 corrected) | [hand + tools exact], two minds |
+| 5 | M2-DISCK7 | **MISSTATED**: FALSE for the object as the record places it (not a cover, VM2-DISCK7-ORIENT); TRUE with the orientation fixed (VM2-DISC7) | [hand + tools exact], two minds on the corrected object |
+| 6 | M2-HULLC | **TRUE** with the dropped hypothesis of (iv) restored (D9); radius 1 per component | [hand], two minds; finite perimeter over a classical fact |
+
+### 2.6 Proposed for the close (I edit none of these files)
+
+- **M2-DISCK7's statement:** add the orientation ("hexagon vertices in the directions where `sin 3θ = 0`", or `cos³` at §1.6's lattice), and fix
+  `tools/fs111_m2_disck7.py`'s HEX check to the lattice the record uses (M2's tool; not edited here). `plans/GROKKING-INSTANCES.md` §G21: *a check must
+  build the object the record specifies* — M2's containment check verified a hexagon rotated 30° from §1.6's, and passed.
+- **MUA-FIN** (M2 §2.3): add "meeting only at endpoints"; §3.3's route summary with it.
+- **M2-HULLC's theorem line:** restore "(where `F_x` has finitely many components)" before "so its boundary lies on unit parallels".
+- **M2-SELCOMP's theorem line:** "no interface point **of the class** lies in `int Ã`".
+- **M2-INTRAD (iii):** replace step (3)'s convexity argument by VM2-FIN′ (or repair its sign analysis on `E_n ∖ E_{n,p}`).
+- **Grades for the ledger row:** M2-REDUCE-C, M2-REDUCE-A, M2-SELCOMP, M2-NOSEL, M2-HULLC two minds; M2-INTRAD two on (i)–(ii); M2-DISC7 [hand + tools
+  exact], two minds; M2-DISCK7 corrected, two minds.
+- **VM2-STRIP-MID** for `LEDGER.md` row 136's note: the strip is tight but not saturated on its midline (exact).
+- **The owner's framing** ("if it holds, `χ(ℝ²) ≥ 6` given MR is one regularity statement away"): literally true, and the statement (REG-J′-C₅ with
+  the plane-graph clause) is equivalent to `χ_m⁰(ℝ²) ≥ 6` given AE-MAP6 — the gain is its *form* (a maximal cover, free by Zorn; no honest saturation),
+  not its size. The colour-generic rung smaller than the answer is M2's MUA-FIN-P (with the clause of D3).
+
+## Stage 2 — SAVED

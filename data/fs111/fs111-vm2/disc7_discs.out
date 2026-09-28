@@ -1,0 +1,21 @@
+object = disc7, plant = None
+h(t)   = 1/2
+rho(t) = h + h'' = 1/2
+W    PASS  h(t) + h(t+pi) - 1 = 0
+     rho Fourier: {0: 1/2}
+CV   PASS  rho >= c0 - sum|c_k| = 1/2 - 0 = 1/2
+     GUARD (float, sampled 2e5 points): min rho = 0.500000, max rho = 0.500000; curvature range [2.0000, 2.0000]
+NC   PASS  h = 1/2: the discs are circles (DISC7 claims no non-circularity; recorded, not required)
+     h bounds (exact, by Fourier): 1/2 <= h <= 1/2
+VX   PASS  h(k pi/3) = 1/2 and h'(k pi/3) = 0 for k = 0..5: every hexagon vertex is x(k pi/3) on dK; K convex contains the hexagon
+     colouring c(m, n) = (m + 5n) mod 7 (index 7; kernel spanned by (2,1), (-1,3)): min kernel norm m^2+mn+n^2 = 7 (box |m|,|n| <= 12), d_c^2 = 21/4
+SEP  PASS  d_c^2 = 21/4 vs (1 + 2 max h)^2 = 4: every cross-body same-colour pair is > 1 apart
+MAX  PASS  covering radius^2 = 7/4 <= (1 + min h)^2 = 9/4: every point within <= 1 of every colour
+LNS  PASS  (min h)^2 = 1/4 > 3/16: bodies bulge past every edge
+EXC  PASS  (sqrt3/2)^2 = 3/4 > (max h)^2 = 1/4: centres are exclusive
+FAR  PASS  3/2 > 2 max h = 1: only first neighbours meet
+PAR  PASS  x(t+pi) - (x(t) - u(t)) = [0, 0]: the unit parallel of dK is dK
+KAP  PASS  curvature 1/rho in [2, 2] = [2.0000, 2.0000] (exact bounds); every value > 1: semiconvexity with constant 1 fails everywhere on dK
+     sectors at v (ccw from 15 deg): [[2, 3], [2], [1, 2], [1], [1, 3], [3]]
+FACE PASS  six sectors alternating 1/2 bodies; merged degrees over the 8 lens choices: [3, 3, 3, 3, 3, 3, 3, 3] (each vertex keeps exactly 3 boundaries: Condition 2 holds for the face colouring)
+ALL PASS (plant = None)

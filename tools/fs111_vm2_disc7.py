@@ -33,6 +33,10 @@ Plants (--plant NAME; each must fail at the check named, for its own reason; the
   width  sin(3t)^2 in place of sin(3t)^3         -> W fails (and PAR)
   lat4   colouring by the four cosets of 2L      -> SEP fails (same-colour centres sqrt3 apart)
 Output: data/fs111/fs111-vm2/disc7.out (faithful) and disc7_plants.out.
+Stage 2 addition: --object disck7-m2 runs the same body at M2 §1.6's hex7 lattice (centres m(sqrt3/2, 0) + n(sqrt3/4, 3/4), hexagon
+vertices at 30 + 60k degrees): VX fails and a tiling vertex is uncovered by all three adjacent bodies (output disck7_m2orient.out).
+Stage 2 addition: --object disc7 runs the same exact checks on M2's DISC7 (the circumscribed discs, h = 1/2; curvature exactly 2);
+output data/fs111/fs111-vm2/disc7_discs.out.
 """
 from __future__ import annotations
 import sys
@@ -41,9 +45,12 @@ import sympy as sp
 
 t = sp.symbols("t", real=True)
 PLANT = None
+OBJECT = "disck7"      # --object disc7: M2's DISC7 (circumscribed discs of radius 1/2, h = 1/2), added at stage 2
 for i, a in enumerate(sys.argv):
     if a == "--plant":
         PLANT = sys.argv[i + 1]
+    if a == "--object":
+        OBJECT = sys.argv[i + 1]
 
 LOG = []
 
@@ -59,6 +66,8 @@ def check(name, ok, why):
 
 
 def support():
+    if OBJECT == "disc7":
+        return sp.Rational(1, 2) + 0 * t
     if PLANT == "amp":
         return sp.Rational(1, 2) + sp.sin(3 * t) ** 3 / 40
     if PLANT == "rot":
@@ -98,7 +107,7 @@ def main():
     h = support()
     hp = sp.diff(h, t)
     rho = sp.simplify(h + sp.diff(h, t, 2))
-    say(f"plant = {PLANT}")
+    say(f"object = {OBJECT}, plant = {PLANT}")
     say(f"h(t)   = {h}")
     say(f"rho(t) = h + h'' = {sp.simplify(sp.expand_trig(rho))}")
     ok_all = True
@@ -122,7 +131,10 @@ def main():
 
     # NC: non-circular
     ch = fourier(h)
-    ok_all &= check("NC", any(k != 0 for k in ch), f"h - 1/2 has nonzero Fourier modes {sorted(k for k in ch if k != 0)}")
+    if OBJECT == "disc7":
+        check("NC", not any(k != 0 for k in ch), "h = 1/2: the discs are circles (DISC7 claims no non-circularity; recorded, not required)")
+    else:
+        ok_all &= check("NC", any(k != 0 for k in ch), f"h - 1/2 has nonzero Fourier modes {sorted(k for k in ch if k != 0)}")
 
     # bounds on h
     Mh = abs_sum_nonconst(ch)
@@ -132,22 +144,23 @@ def main():
 
     # VX: vertices at k pi/3 on the boundary with h = 1/2 and h' = 0
     vx_ok = True
+    VOFF = sp.pi / 6 if OBJECT == "disck7-m2" else 0     # M2 §1.6's hex7: centres m(sqrt3/2, 0) + n(sqrt3/4, 3/4), vertices at 30 + 60k deg
     for k in range(6):
-        tv = k * sp.pi / 3
+        tv = VOFF + k * sp.pi / 3
         hv, hpv = sp.simplify(h.subs(t, tv)), sp.simplify(hp.subs(t, tv))
         if not (hv == sp.Rational(1, 2) and hpv == 0):
             vx_ok = False
-            say(f"     vertex direction {k}*pi/3: h = {hv}, h' = {hpv}")
+            say(f"     vertex direction {sp.nsimplify(tv)}: h = {hv}, h' = {hpv}")
     ok_all &= check("VX", vx_ok, "h(k pi/3) = 1/2 and h'(k pi/3) = 0 for k = 0..5: every hexagon vertex is x(k pi/3) on dK; K convex "
                     "contains the hexagon" if vx_ok else "some hexagon vertex is not the boundary point of K in its direction")
     if not vx_ok:
         # exact coverage witness: a tiling vertex is seen from its three hexagons' centres in directions t0, t0 + 2pi/3,
         # t0 + 4pi/3; it lies outside body i iff v.u(t) > h(t) for some t, and t = its own direction suffices when h < 1/2 there
         for k0 in range(2):
-            t0 = k0 * sp.pi / 3
+            t0 = VOFF + k0 * sp.pi / 3
             hs = [sp.simplify(h.subs(t, t0 + j * 2 * sp.pi / 3)) for j in range(3)]
             out = all(hh < sp.Rational(1, 2) for hh in hs)
-            say(f"     tiling vertex seen in directions {k0}pi/3 + (0, 2pi/3, 4pi/3): h = {hs}: "
+            say(f"     tiling vertex seen in directions {sp.nsimplify(t0)} + (0, 2pi/3, 4pi/3): h = {hs}: "
                 + ("OUTSIDE all three bodies -- uncovered point, the bodies do not cover" if out else "covered by some body"))
 
     # colour lattice: hex centres L = Z a + Z b, a = (sqrt3/2) e(30deg), b = (sqrt3/2) e(90deg); |m a + n b|^2 = (3/4)(m^2 + mn + n^2)
@@ -194,6 +207,10 @@ def main():
     # FACE: at a hexagon vertex v shared by H1 (centre 0), H2 (centre (3/4, sqrt3/4)), H3 (centre (3/4, -sqrt3/4)); v = (1/2, 0).
     # In body i the vertex is in direction tv_i from its centre; the outward normal of K_i at v is u(tv_i) (the boundary point
     # x(tv_i) has normal u(tv_i)).  Near v body i is, to first order, {v + d : d . u(tv_i) < 0}.
+    if OBJECT == "disck7-m2":
+        say("     FACE n/a for this orientation (the bodies do not cover; see VX)")
+        say(f"ALL {'PASS' if ok_all else 'FAIL'} (object = {OBJECT}, plant = {PLANT})")
+        return ok_all
     s3 = sp.sqrt(3)
     centres = {1: sp.Matrix([0, 0]), 2: sp.Matrix([sp.Rational(3, 4), s3 / 4]), 3: sp.Matrix([sp.Rational(3, 4), -s3 / 4])}
     v = sp.Matrix([sp.Rational(1, 2), 0])

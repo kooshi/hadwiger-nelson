@@ -1,4 +1,4 @@
-plant = None
+object = disck7, plant = None
 h(t)   = sin(3*t)**3/200 + 1/2
 rho(t) = h + h'' = 128*sin(t)**9/5 - 288*sin(t)**7/5 + 216*sin(t)**5/5 - 297*sin(t)**3/25 + 81*sin(t)/100 + 1/2
 W    PASS  h(t) + h(t+pi) - 1 = 0
