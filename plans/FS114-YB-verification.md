@@ -308,3 +308,88 @@ red tile; a red tile lies in its own block and in no other (two reds in one neig
 - Item 10: I would have searched for a configuration; instead one fragment written down by formula.
 
 ## Stage 1c — SAVED
+
+## Stage 2 — SAVED: FS114-Y's record and tools read; the two rebuilds compared; every divergence
+
+*Opened only after stage 1's commit `8ac5aa39`: `plans/FS114-Y-construction.md` in full; `tools/fs114_y_dial.py` (header, `CappedStrip`),
+`tools/fs114_y_pent.py` (imports, `routes`), the function lists of `fs114_y_conflicts.py`, `fs114_y_insert.py`; `data/fs114/fs114-y/routes.out`;
+`plans/FS114-unit-arc-question.md` §5.3. Outputs: `compare-stage2.out`, `routes-theirs.out`, `moved-partition.out`, `strip-rows.out`,
+`quotes-instance.out`, `quotes-instance-diff.out`.*
+
+### 2.1 The instance's quotations against FS114-Y's record (standing rule 5)
+
+`tools/fs114_yb_quotes.py data/fs114/fs114-yb/quotes-instance.tsv`: **1 of 8 verbatim** (STRIPRIGID); the other seven are the owner's abridgements of
+the record's table (word diff in `quotes-instance-diff.out`): DIAL drops "`= φ⁴/2 (R < φ²/√2 ≈ 1.85123)`" and "C114-DIAL met, marginally"; PENT turns
+"— C114-PENT's first question answered **no**. The completion" into "; and"; ROUTES "straddler of" → "tile straddling", "its" → "the tile's"; STRIPK6
+drops "`Q_m` the pair's second common unit point"; PAIRSHARE "have … in common" → "share"; K6 drops "A design screen, about every valid map:" into the
+item's title. **One abridgement drops a load-bearing clause:** DISKRIGID's reason, in the record "the central tile and the five ring-1 tiles pairwise
+straddle distance 1, **and each other tile, in a fixed order, then has exactly one colour left**", reads in the instance "(its central tile and five
+ring-1 tiles pairwise straddle distance 1)" — the clique alone does not force the colouring (`R_k` misses `C0` and three ring-1 tiles, `U_k`, `U′_k`
+three each; stage 1c §6). No verdict of mine used the abridged reason.
+
+### 2.2 The rebuilds compared (label maps)
+
+| object | my rebuild | FS114-Y's (or the object it runs) | agreement |
+|---|---|---|---|
+| the capped strip | `tools/fs114_yb_objects.py Strip(capped=True)` | `tools/fs114_y_dial.py CappedStrip` (FS112-YB2's strip with the cap swapped in) | **36 of 36 tiles** (columns −3…5) equal, same names and colours (vertex sets and arc circles to 1e-9); labels identical |
+| the moved disk | `Disk(moved=True)` (Y2's labels) | FS112-Y2's `MovedDisk` (`tools/fs112_y2_dial.py`), which FS114-Y's `routes` runs | **26 of 26 tiles** match, colours included; labels identical (`U′` = `Up`) |
+| the disk | `Disk()` | FS112-YB2's builder (FS114-Y's conflicts table runs it) | 26 of 26 (stage 1b); map `C0→Z`, `T1_k→P_k`, `T2_k→W_k`, `U_k→S_k`, `U′_k→T_{k+1}` |
+| the strip's straddle rows | `U0`, `T0` against columns −7…9, exact (`strip-rows.out`) | FS114-Y §2.2's table ("`U_0` conflicts with `U_{±1}`, `U_{±2}`, `D_{−2…2}`, `T_{−2…3}`, `B_0`, `B_1`; `T_0` with `T_{±1}`, `T_{±2}`, `U_{−3…2}`, `D_{−1}`, `D_0`") | **identical** |
+| ROUTES' named points | FS114-Y's 18 points rebuilt by their formulas in my tower, each checked exactly (`routes-theirs.out`) | `data/fs114/fs114-y/routes.out` | **identical free sets at all 18**; all 18 lie **exactly** in the tile named (their membership was a float guard) |
+
+The moved disk's partition is exact on my side (`moved-partition.out`: every non-rim piece shared by two tiles in opposite directions; area sum
+`πr²` to 1e-9).
+
+### 2.3 Divergences, each with both addresses
+
+| # | kind | FS114-Y | mine | resolution |
+|---|---|---|---|---|
+| D1 | **verdict (truth as stated)** | C114-DUAL-COUNT "**TRUE as stated**" (record, table FS114-Y-DUALCOUNT; §3.2; derivation §2.3 F3: "with only cubic vertices and quads, `n/2` quads") | **MISSTATED** (stage 1c §9) | the derivation carries a premise the verdict drops (Sirgedas's own, in the post quoted: "Assuming the graph has only triangles and quadrilaterals"). Without it the quads emit `2n − 8p₅ − 12p₆` and all emitting vertices `2n + 2p₅ + 6p₆`; whether five- or six-tile vertices occur in this class is not decided (a quick attempt here: the five tiles at such a vertex cannot fill `B(v,1)` alone, each being a sector of angle at most 60° if its outer boundary lies on `ω(v)` — so tiles of the sixth colour lie inside; no contradiction reached). **"TRUE as stated" is an over-grade**; "at least 80%" is TRUE in general |
+| D2 | rigour (a gap closed) | the emission step "the tile opposite a tile `t` at `w` carries the colour of an edge-neighbour of `t`" (§2.3 F3) presupposes that neighbour is not the opposite tile itself | stage 1c §9 (iii): the opposite tile is never an edge-neighbour (an enclosure argument inside `B̄(v,1)` against the non-Siamese rule) | Y's step is TRUE; its missing justification is supplied |
+| D3 | scope | RAINBOW corrected, case (ii): "both touch `x` only at single points, vertices of at least four colours" (table FS114-Y-RAINBOW; §3.1 says "in a non-Siamese map") | stage 1c §10: finite contact sets with every cross distance exactly 1 (a face may touch `x` at two points, both at distance 1 from the other's contact) | Y's (ii) is the one-point-each subcase; its "four colours" holds under Y's stated non-Siamese hypothesis, which the table's one-line statement drops ("or a repeated colour" otherwise) |
+| D4 | an open item closed | "Not built: a fragment realising (ii)" (§3.1; successor item (3), §3.4) | **built**: the exact valid fragment of `rainbow.out` (radius 3/5), whose contact points `(0,0)`, `(1,0)` have four colours each and together all six — consistent with Y's covering-pair consequence | Y's further consequence (unit arcs on `ω(p)` by NB4P or FS112-SIX) reads the whole ring of `p`, radius 1, which my fragment does not hold: **untested**, and a fragment holding `B̄(p, 1+ε)` with no unit arc would test it |
+| D5 | wording against own data | ROUTES' one-line statement: "at named exact points … the free set with the cut tile ignored is exactly its own colour" (table) | Y's own §1.3 data: `{Bl, P}` at two of its nine blue points (reproduced exactly); mine: a second free colour at 3 of my 11 points (purple near `Z^L_0`, green near `T2_0`'s side toward `X_4`, blue at `B_0 + (3/10, −1/50)`) | the route's failure stands (Y's own check is "some named point … within {Bl}"); the statement should say "at seven of nine named points of `T2_0` and all nine of `T1_0`" — the regions are not own-colour-only |
+| D6 | grade | ROUTES' "named exact points": inside `B(C_0,1)` exact, **tile membership by a float polyline guard** | tile membership exact at all 18 of Y's points and my 11 | promoted: membership exact |
+| D7 | tool defect (a frozen FS-112 guard, not a verdict) | `routes.out`: the guard `locate` (FS112-Y2's `tile_poly`) places `B_0 + s e(0)` in `['T1_0', 'R_4', 'U_4']`; Y recorded it as a guard artefact | exact: only `T1_0`, not on any boundary (`moved-partition.out`) | the polyline guard misplaces points on the moved disk (`R_4`, `U_4` lie in the opposite sector) — FS112-Y2's guard, not to be trusted as a membership test there |
+| D8 | scope | F1: "no doubly periodic design contains a row of `[AxenovichEtAl2014]`'s arches, however the rows are stacked, shifted or recoloured" (§2.3) | STRIPK6 reads six tiles, three of them top tiles | F1 excludes maps containing the **six** tiles (three arches **and** the three top tiles over them); a row of arches with other tiles in its valleys is not in F1 |
+| D9 | none (agreement, precision) | DISKRIGID "near any `B_k`"; F2 "the disk's tiles near some `B_k` … and those the rigidity chain reads"; "(The disk is not a clique argument: `T_0` and `T_1` may share a colour)" | the nine tiles at `B_0`, `Z^R_0`, `Z^L_1` leave `(U′_0, U′_4)` and `(U_0, U_1)` unforced (`local-b0.out`) | the same fact, from two sides (`U′_4`, `U′_0` are YB2's `T_0`, `T_1`) |
+| D10 | minds (grade) | one mind on DIAL, PENT, ROUTES, STRIPK6, STRIPRIGID, DISKRIGID, PAIRSHARE, K6, EDGE-RAINBOW, REDBLOCK1 | each TRUE here, blind | **two minds, one blind** on each; different routes on STRIPRIGID (Y: four consecutive arches under three top tiles; mine: overlapping six-cliques) and DISKRIGID (different propagation orders), on DIAL's disc (Y: an identity; mine: exact candidates) and on the plants (`cap_high` vs `cap_bulge`, both firing at exactly the six capped self-pairs) |
+
+**No divergence of mathematical truth** on any object or on any theorem Y states with its hypotheses; one **over-grade** (D1: TRUE as stated, on a
+premise the verdict drops), one closed gap (D2), two scope corrections to one-line statements (D3, D5), one scope correction to a family (D8), one
+promoted grade (D6), one open item closed (D4), one tool defect in a frozen FS-112 guard (D7).
+
+### 2.4 The families that failed (brief item 3)
+
+Y's C114-TORUS families (§2.3): **F1** — every map containing the strip's valley–apex six tiles; **F2** — every map containing the disk's tiles through
+which the rigidity chain passes near some `B_k`; **F3** — Sirgedas's class, a budget, no verdict. **Free parameters against the configuration's.** F1
+and F2 are not formula families with a finite parameter image: each member is "the configuration plus anything", the configuration fixed exactly
+(zero free parameters), the rest unbounded — so G21's image question is moot: **the exclusion covers every member, because the obstruction reads
+only the configuration and no colouring** (STRIPK6; DISKRIGID with PENT). **The reason each member fails is the reason Y gave**, verified here
+blind (stage 1c §§4, 6), with D8's scope correction to F1's gloss and D9's precision to F2's. F3's count is D1's.
+
+### 2.5 Registrations touched (for the close; I score none)
+
+E6 (C114-RAINBOW TRUE as stated, 0.5): both sides MISSTATED — **not met**. E10 (the pentagon admits the third arc, 0.3): **not met** here too
+(stage 1c §2). E11 (the dial beyond 1.834, 0.25): **met**, at two minds (`φ²/√2`). E15 (a blind verifier finds a divergence of truth, 0.6): **D1 is
+the candidate** — a verdict "TRUE as stated" on a statement proved only under a dropped premise; I do not find a false mathematical statement in the
+construction side's record. The owner scores it.
+
+### 2.6 Proposed edits for the close (I edit none of these files)
+
+- `data/fs114/claims.md`: C114-DUAL-COUNT — restore Sirgedas's premise ("only triangles and quadrilaterals") or state the corrected count
+  (`2n + 2p₅ + 6p₆` emitted unit arcs, all distinct, each of kind both, centred at its emitting vertex); C114-RAINBOW — the corrected trichotomy
+  (stage 1c §10); the gloss of C114-SIRGEDAS-FORM "no Siamese pair (every vertex of `R(M)` absent)" is one-way (no Siamese pair ⇒ no `R(M)` vertex,
+  not conversely); C114-LOCAL-F's "any such `R` exceeds `√15/4 + √3/2 ≈ 1.834`" → "at least `φ²/√2 ≈ 1.8512`" (the capped strip).
+- `LEDGER.md`: FS114-Y's DIAL, PENT, ROUTES (as D5 words it), STRIPK6, STRIPRIGID, DISKRIGID, PAIRSHARE, K6, EDGE-RAINBOW, REDBLOCK1 at two minds,
+  one blind; DUAL-COUNT as corrected; RAINBOW's third case realised (`rainbow.out`).
+- A tool note for FS112-Y2's `tile_poly` guard (D7).
+
+### Theorems this phase proved (stage 2)
+
+| id | statement | grade, minds | address |
+|---|---|---|---|
+| YB114-SAME | my capped strip, moved disk and disk equal FS114-Y's objects (and the FS-112 builders they run) tile for tile; Y's strip straddle rows equal mine | tools | §2.2 |
+| YB114-THEIRPTS | all 18 of FS114-Y's ROUTES points lie exactly in the tile named; their free sets reproduce exactly | tools, exact | §2.2; `routes-theirs.out` |
+
+## Stage 2 — SAVED

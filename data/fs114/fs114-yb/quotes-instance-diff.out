@@ -1,0 +1,43 @@
+For each instance statement: the best-matching window of FS114-Y's record (word level), and the word differences
+I1-DIAL: similarity 0.849
+   replace: instance «it» / record «top corners»
+   delete: instance «P_j» / record «»
+   replace: instance «3√5)/4;» / record «3√5)/4 = φ⁴/2 (R < φ²/√2 ≈ 1.85123);»
+   delete: instance «would» / record «»
+   replace: instance «hold» / record «holds»
+I2-PENT: similarity 0.825
+   replace: instance «D_{k+1},» / record «D_{k+1};»
+   replace: instance «B_k, nor» / record «B_k (nor»
+   replace: instance «arcs,» / record «arcs)»
+   replace: instance «it; and» / record «it — C114-PENT's first question answered no. The completion»
+   delete: instance «A_{k+3}» / record «»
+I3-ROUTES: similarity 0.800
+   insert: instance «» / record «| FS114-Y-ROUTES | On the moved disk (FS112-MOVE)»
+   replace: instance «tile straddling» / record «straddler of»
+   insert: instance «» / record «exact»
+   replace: instance «B(C_0, 1)» / record «B(C_0,1)»
+   replace: instance «B(C_0, 1)» / record «B(C_0,1)»
+   replace: instance «set,» / record «set»
+   replace: instance «ignored,» / record «ignored»
+   replace: instance «the tile's» / record «its»
+I4-STRIPK6: similarity 0.899
+   replace: instance «ω(Q_m); so,» / record «ω(Q_m), Q_m the pair's second common unit point; so»
+   replace: instance «FS112-N3-COR3,» / record «FS112-N3-COR3»
+   delete: instance «tiles» / record «»
+I5-STRIPRIGID: similarity 0.850
+   insert: instance «» / record «tools/fs114_y_conflicts.py strip | | FS114-Y-STRIPRIGID |»
+I6-DISKRIGID: similarity 0.565
+   delete: instance «Every valid colouring of the disk's geometry» / record «»
+   replace: instance «(its» / record «of the six colours: the»
+   insert: instance «» / record «the»
+   replace: instance «1);» / record «1, and each other tile, in a fixed order, then has exactly one colour left;»
+   replace: instance «PENT» / record «FS114-Y-PENT»
+   replace: instance «colouring, and» / record «colouring:»
+   delete: instance «disk's geometry near any B_k» / record «»
+I7-PAIRSHARE: similarity 0.868
+   insert: instance «» / record «|---|---|---|---| | FS114-Y-PAIRSHARE |»
+   replace: instance «share» / record «have»
+   replace: instance «u:» / record «u in common:»
+I8-K6: similarity 0.864
+   replace: instance «If» / record «A design screen, about every valid map: if»
+   replace: instance «ω(u) and» / record «ω(u),»

@@ -1,0 +1,3 @@
+moved disk map consistency (exact): 0 pieces unmatched off the rim; 15 rim pieces; float area sum 14.176314892 vs pi r^2 14.176314892
+B_0 + (1/20, 0): tiles containing it (exact ray count): ['T1_0']; on a boundary: []
+B_0 + (1/10, 0): tiles containing it (exact ray count): ['T1_0']; on a boundary: []

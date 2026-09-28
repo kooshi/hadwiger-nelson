@@ -325,3 +325,38 @@ def rainbow():
 
 def main(what):
     {"capped": capped, "pent": pent, "move": move, "straddle-strip": straddle_strip, "straddle-disk": straddle_disk, "rainbow": rainbow}[what]()
+
+
+# =================================================================================== stage 2: FS114-Y's own named points, re-checked exactly
+def routes_theirs():
+    """FS114-Y's 18 named points (tools/fs114_y_pent.py routes, read after my stage 1), rebuilt by their formulas in my tower: exact tile
+    membership (their record's membership is a float guard), |z - C_0|^2 < 1, and the free set with the cut tile ignored, by my checker."""
+    Dm = O.Disk(moved=True)
+    tiles = Dm.tiles()
+    p, e = Dm.p, Dm.e
+    C0, B0, ZL, A0 = p("C", 0), p("B", 0), p("ZL", 0), p("A", 0)
+    cols = Dm.CS + ["red"]
+    pts = []
+    for s in (Fr(1, 50), Fr(1, 20), Fr(1, 10)):
+        pts.append(("T2_0", f"A_0 + (1 - s) e(90), s = {s}", vadd(A0, vmul(1 - s, e(90)))))
+        pts.append(("T2_0", f"A_0 + (1 - s)(e(90) + e(108))/2, s = {s}", vadd(A0, vmul((1 - s) / 2, vadd(e(90), e(108))))))
+        pts.append(("T2_0", f"Z^L_0 + s (A_0 - Z^L_0), s = {s}", vadd(ZL, vmul(s, vsub(A0, ZL)))))
+    for s in (Fr(1, 50), Fr(1, 20), Fr(1, 10)):
+        pts.append(("T1_0", f"B_0 + s e(0), s = {s}", vadd(B0, vmul(s, e(0)))))
+        pts.append(("T1_0", f"B_0 + s (e(0) + e(342))/2, s = {s}", vadd(B0, vmul(s / 2, vadd(e(0), e(342))))))
+        pts.append(("T1_0", f"B_0 + s (e(0) + e(18))/2, s = {s}", vadd(B0, vmul(s / 2, vadd(e(0), e(18))))))
+    print("== FS114-Y's 18 named points of ROUTES, re-checked exactly with my checker")
+    for cut, lab, z in pts:
+        homes = [t.name for t in tiles if X.inside(z, t) == 1]
+        dC = n2(vsub(z, C0))
+        fr, bl = X.free_colours(z, tiles, cols, ignore=(cut,))
+        print(f"   {lab}: in (exact) {homes}; |z - C_0|^2 = {float(dC):.4f} < 1: {(dC - 1).sign() < 0}; free {fr}")
+
+
+_MAIN_OLD = main
+
+
+def main(what):  # noqa: F811
+    if what == "routes-theirs":
+        return routes_theirs()
+    return _MAIN_OLD(what)
