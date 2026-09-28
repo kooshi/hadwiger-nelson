@@ -1,0 +1,20 @@
+OK   D1 |top-q1|=|top-q3|=1 
+OK   D2 P90, P90p unit from their corners and top 
+OK   D3 |P90|^2 = |P90p|^2 = 3 
+OK   D4 |P90p - q4| = 2 and |P90 - q2| = 2 
+OK   D5 |q1 - P90p| = 2: omega(q1), omega(P90p) externally tangent at top 
+FAIL G1 |x - q1|^2 = 1 + t^2 (x outside cl z4, z4 in B(q1,1)) [dir 70] t**2 + 2*t*sin(pi/18) + 1
+FAIL G2 |x - P90p|^2 = 1 + t^2 (x outside B(P90p,1), so not in T) [dir 70] t**2 - 2*t*sin(pi/18) + 1
+FAIL G3 at t = 1/100 the point is outside both closed discs [dir 70]
+OK   H1 e(90).(p-top) < 0, e(90).(q1-top) < 0, e(90).(q3-top) < 0 
+OK   H2 t1, t2, t3 meet B(top,1): p + d e(45), e(90), e(135) at d = 1/10 
+OK   C1 q3 + e(235)/10 outside B(p,1) and outside B(P90p,1) 
+OK   C2 e(235).(P90p - q3) < 0 (C' not in B(P90p,1): cone would have to lie in [0,180]) 
+OK   T1 point just outside omega(q4) near q3 is outside B(P90p,1) |z-q3|^2=0.0396446
+OK   R1 e(d).(e(th) - q1) < 0 for d in {300,330,359}, th in {31,60,90} 
+OK   R2 z4's cone at q1 within facing-top [60,240] and away-from-p [300,120]: 60,120 on both boundaries 
+OK   K1 overlap of 60-shifted outer tiles gives distance < 1 (th=40, shift 59) 0.97186467
+OK   K2 at shift exactly 60 the same points are > 1 apart (endpoint case not excluded) 1.0020010
+OK   B1 4 sin(ell/2) = 1 at ell = 2 arcsin(1/4) ~ 28.955 deg 28.9550
+OK   P1 2 sin(60) = sqrt3 > 1 
+RESULT 3 FAIL plant=on
