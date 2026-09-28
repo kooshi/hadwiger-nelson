@@ -296,3 +296,95 @@ hexagon rotated 30° from the record's lattice, so its PASS is about another obj
   M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) go to de Bruijn **queued behind the measurable chain** (FS-113, FS-101): their objects
   (D-NF colourings, maximal covers, µ₆, `𝓜_K`) are not in `Proofs/`. R7 is kernel-checkable now by exact arithmetic in ℚ(√3) and is marked not urgent.
   Every other entry is `none —` with its reason (a no-go, a control object, a composition of open statements, or a caution about strength).
+
+## Stage 4 — SAVED: the sweeps, and every registration scored
+
+### 4.1 §G re-read — which extractions paid, which entry should have borne
+
+| X | from | paid? | how |
+|---|---|---|---|
+| X1 | G13, G15 | not tested | phase R1 never ran (route R got W's analysis only) |
+| X2 | G17 | **paid** | the local rungs (M-PINCH, M-C11, M-HALF) are disc statements; the global piece was named and is where the work sits (honest saturation is global, M-DEADLOCK) |
+| X3 | G20, row 33 | **paid, and sharpened** | the seven-colour controls carried every round (hex7, R7, DECO-B, DISC7, DISCK7, SQ9, HEX9); W-NEG showed a `k = 7` inhabitant tests only procedures and universal forms, never an existence rung |
+| X4 | G21 | **paid, with a miss inside it** | the strip was read (VM2-STRIP-MID); but W-P1 (0.65) was registered from a generator that could not produce R7 (recolourings of polygonal tilings) — a G21 generator-image instance (Drafts §D4) |
+| X5 | G22 | **paid** | M2-INTRAD's integer radii; DISCK7 shows covers carry non-arc curves |
+| X6 | G24, G60, row 129 | **paid, refined** | M2-COV makes every cover rung a statement about one MUA set with the count spent only at the union and the NO — class-by-class regularity is legitimate where class-by-class density is capped; the ruling on covers (item 25) is G24 applied |
+| X7 | G29 | stated, not run | the ban |
+| X8 | G30, G46 | **paid** | positive reach, `r`-convexity, the two-sided rolling ball (Rataj–Zajíček; Walther) named the C^{1,1} step |
+| X9 | G40 | **misfired** | the non-absorption extraction produced B-NONABS with a `δ`-dependent scale, FALSE as written (W's fragment); the content wanted is a `δ`-independent bound (B-RR) |
+| X10 | G64 | **paid, made structural** | W-NEG: no rung is refutable without six |
+| X11 | G71, row 79 | not tested | route R not worked |
+| X12 | G79 | **paid most** | the contact structure is the example invariant; every positive rung came from it |
+| X13 | G82, rows 130–131 | **paid** | every claim named its object (SEQ/LIM/MAP) |
+| X14 | G83, rows 135–136 | **partly** | REG-J′ moved to Σ (four-colour vertices included); M4's reading puts the colour count at the junction where a ladder ends — G83's vertices — but no round worked a junction |
+| X15 | row 132 | **paid** | REDUCE-C aims at "maps need six" (AE-MAP6) at five |
+| X16 | row 134 | **paid** | M2-INTRAD is row 134's shadow-map mechanism on saturated colourings: radii fall by 1 along unit parallels |
+| X17 | rows 41, 111 | **paid** | framed C1-UNIF and V0's card-1 work |
+| X18 | G51 | **paid** | the competitor pair and three blind verifiers caught three divergences of truth, each before anything was filed |
+
+**Entries that should have borne and were not used.**
+- **G54** (walked "silent: residue planes") holds in its body *"every colouring of a Hoffman-tight plane is gap-free — a fall colouring"*. Round 2's
+  object is a maximal partition, which M2 identified as a **measurable fall colouring** from its own gate (M2 §1.3), with FS-67's held Dunbar row. G54
+  bore on rounds 2–4 by its body; walked by its title it read silent. **The mechanism is not the walk's but the time's**: §G was read once, at the
+  opening, when the object was a tight colouring; the object changed at round 2 (to maximal covers) and nothing re-read the corpus from inside the
+  new object. A G67 instance (Drafts §D4), and a finding for the workflow (report).
+- **Row 134's N4 step** (curvature monotonicity along the shadow map) is where NO-C11/NO-PAR would be decided (V0 §2.4 item 7, M §5.2); it was named
+  and not worked. Carried into FS-121.
+
+### 4.2 §IQ, G72 and G79
+
+- **§IQ's structural form** — *"What does every tight a.e.-proper `k`-colouring of `ℝ²` carry at every point of its essential boundary, once the moves
+  that cost nothing have been made?"* — **produced the milestone's positive results**: its candidate invariant, the contact structure, is M-PINCH/M-C11
+  (every saturated boundary point is pinned between unit circles), and on covers M2-FIX's shadow identity and M2-INTRAD's integer radii. Card 1's
+  answer came through a question about every sequence (C1-UNIF). **G72's count: FS-111 is one more result through the structural question** (the count
+  before this close and FS-114's is sixteen of nineteen, `plans/GROKKING-INSTANCES.md` §G72; the coordinator composes the two closes' increments).
+- **G79's record:** the headline came from **example invariants** (the contact structure every saturated colouring carries; R7 as the example); the
+  walls came as **counterexample invariants** (HC_K and M3-IRREG — what a non-locally-finite or irregular maximal class carries; M4-CUT — what a pinch
+  must carry, a junction within a bounded number of rungs; DECO-B; W-NEG). The same split as FS-106's.
+
+### 4.3 §PA — recognitions about what the object is
+
+| recognition | where it goes |
+|---|---|
+| A maximal cover is `k` MUA sets; a maximal partition is a **measurable fall colouring** (idomatic partition) of the unit-distance graph — graph theory's word; descriptive combinatorics' **measurable maximal independent set** for one class | G84 (drafted); FS-120's room |
+| Saturated interfaces are **two-sided rolling-ball boundaries** — the planar theory of `r`-convexity and positive reach (Rataj–Zajíček; Walther 1999) | G84; bibliography rows |
+| R7 is **de Grey's Reuleaux 4 + 3 colouring** (`[Polymath16threads]` thread 4, 5 May 2018); Hockertz's "100% exclusion rate" (thread 12, 2019) is its saturation, informally | M-R7's prior-art line; ledger draft |
+| The one-class form of REG is **Cohen–Mani's Question 5.1**, posed and open; M-BLOCK-EQ is its multi-class chain form | `CLOSED-QUESTIONS.md` note (Drafts §D6); FS-121's calibration |
+| Rows 130–131's Rajchman step is **in print for one class** (`[Bukh2008]` Lemma 12; Cohen–Mani Lemma 2.4 and Remark 2.5, crediting Bourgain 1986) | `LEDGER.md` correction (Drafts §D1) |
+| M2-INTRAD's radii falling by 1 along unit parallels is **row 134's shadow map** on saturated colourings | G85 (drafted) |
+| M4-CUT's downward half is **mathematical morphology's closing and opening by discs** (Matheron, Serra; classical, unread) | FS-120's room |
+
+**The debts, closed or named.** OpenAlex cross-check (item 4, owed by FS111-P): run 2026-09-28. Cohen–Mani appears twice — the 2024 preprint
+(W4400480794, cited by 0) and the 2025 journal version (W4414391409, cited by 1) — G49's version trap, both checked; its one citing work is *"On lower
+bounds of the density of planar periodic sets without unit distances"* (2025), **title seen only**. Nothing found that answers Question 5.1. Unfetched
+still: FM86, FKW90, Bourgain 1986, Morgan 1994 (reviews read), Walther 1999 (listing seen), Brown 1972, Fu 1985, Federer 1959/1969, Kershner 1939
+(listings seen) — none carries a result filed here; each is a bibliography row at its true read status (Drafts §D5).
+
+### 4.4 The plan's "conjecture" and "not claimed" (grep of `plans/FS111-cone-scale.md`)
+
+Two hits: l. 252 (G58's name in the §G table — no conjecture of this milestone; declined, nothing to stub) and l. 487 ("not claimed beyond the claim
+list's wording" — a scope note; declined). The plan's open statements live in its claim list and in the job records; their stubs are § Stage 5.
+
+### 4.5 Every registered prediction, scored
+
+| # | registration | p | outcome | score |
+|---|---|---|---|---|
+| E1 | V0 confirms C1-GAP (a third statement is needed) | 0.85 | a third statement is needed in the only provable sense; C1-GAP as worded MISSTATED | **met** (the answer); the claim's wording not |
+| E2 | C1-UNIF TRUE as an equivalence; as an equality after 3b | 0.9; 0.8 | both TRUE, two minds | **met; met** |
+| E3 | C-SAT-T TRUE / GAP / FALSE | 0.35 / 0.5 / 0.15 | honest form GAP at `k = 5, 6` (TRUE at `k ≥ 7`); cover form TRUE | **GAP** (the mode) |
+| E4 | C-HULL-REG TRUE given C-SAT-T | 0.5 | as stated GAP at (H1), (H2); corrected TRUE and stronger (`C^{1,1}`, `\|κ\| ≤ 1`) | **not met as stated** |
+| E5 | REG-B_k or REG-J_k proved for every `k`, one mind | 0.2 | TRUE at `k ≥ 7` only; GAP at 5, 6 | **not landed** |
+| E6 | REG-I₅ (so `χ_m⁰ ≥ 6`) within FS-111 | 0.05 | not landed; reduced to REG-J′-C₅, which is equivalent to it (VM2-EQ5) | **not landed** |
+| E7 | W names an obstruction to a rung | 0.4 | DECO-B refutes REG-B's universal form; W-NEG caps what a wild object can refute | **met** |
+| E8 | R-P3 decided by W | 0.1 | not decided; read by W-NEG as a bet on six (P3′ proposed) | **not landed** |
+| E9 | the product is a named obstruction or a GAP at a named step | 0.85 | GAPs at named steps (the singular set; honest saturation at 5, 6; MUA-REG/MUA-FIN) and named obstructions | **met** |
+| G82 | a route-M proof by compactness scores G82's reading "not applicable" | — | no route-M proof landed | **void** (its condition never arose) |
+| W-P1 | no saturated a.e.-proper seven-colouring exists | 0.65 | R7 is one | **FALSE** |
+| W-P2 | the least saturated `k` is 9 | 0.3 | it is `≤ 7` | **FALSE** |
+| M2's reading | MUA-FIN-U FALSE (killing test: complete the Cantor pinch to a maximal set) | — | M3-HC completes it (a regular MUA set with infinitely many components); M2-PINCH-C's own hypothesis vacuous | **confirmed** |
+| stub (mint) | a cone-scale bound for near-optimal colourings at one mind | 0.15 | none | **not landed** |
+| stub (mint) | a named obstruction (a family, or a class of arguments shown capped) | 0.5 | V0-WIGGLE caps "cone scale ⟹ complexity"; W-NEG caps wild refutations | **met** |
+
+**Brier score** over the thirteen binary registrations (E1, E2 ×2, E4–E9, W-P1, W-P2, the stub's two): **0.119**; E3's three-way Brier 0.395.
+**Calibration, read (never a cap):** every registration below 0.3 failed to land, as at FS-107; the one confident "no" (W-P1, 0.65) missed because
+the object was in print from 2018 and outside the generator's image — the miss was the search's genre, not the mathematics'.
