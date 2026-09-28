@@ -622,6 +622,8 @@ disagree I say so here. Notation as §1.3 and N2's frame; `M*` a terminal valid 
 2. `ls data/fs112/briefs/` and one `wc -c data/fs112/briefs/*` printed the other jobs' brief **names and byte counts**; none was opened.
 3. Card R's source (`data/fs112/fs112-a3/card-R.md`) and A3's record (`plans/POROS-2026-09-27-fs112-competition.md`) are fenced: not opened.
 4. `git log --oneline -3` printed three subjects, all inside the start-up snapshot. No further `git log`.
+5. For the report, one path-restricted `git log -n 6 --format='%h %s' -- plans/FS112-N-proof.md tools/fs112_n3_checks.py` printed my five commit subjects and N2's
+   last (`3078a6d8 FS112-N2: stage 5`); nothing of any other job.
 
 ## Stage N3-1 — SAVED: quotation check; what N3 inherits
 
