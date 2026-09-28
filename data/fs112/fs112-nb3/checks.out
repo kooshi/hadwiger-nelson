@@ -1,0 +1,5 @@
+RAYR: GREEN EXACT (f~^k(-1) = -1/(k+1), k<=60; f(f~(x)) = x on 73 rationals)
+STEP: GREEN EXACT (81 rationals): f(x) <= x, f~(x) >= x, equality only at 0
+LEN: GREEN EXACT: longest chain <= 2|K|-3 on 5 sets (so <= 2|K|-1)
+FAIL: GREEN EXACT (first order): 16 of 28 single configurations fail, exactly the middle ones, inner in / outer out; both doubles as derived
+COR3: GREEN EXACT (angles): 336 strip-holds cases each with an empty probe; 403 both-fail cases each forcing an inner and an outer colour of u and of v; 128 both-fail cases impossible outright (an empty probe); 141 skipped (arcs overlap)
