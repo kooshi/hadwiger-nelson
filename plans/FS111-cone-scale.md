@@ -432,3 +432,44 @@ decide six; a negative one there would warn about REG). (e) The novelty claim fo
 **Papers still needed (for the report):** `[FalconerMarstrand1986]`, Furstenberg–Katznelson–Weiss 1990, Bourgain 1986 (Isr. J. Math. 54), Morgan 1994
 (Pacific J. Math. 165) — held as reviews only; Walther 1999 (the rolling-ball theorem), Brown 1972 and Fu 1985 (parallel sets), Federer 1959 — not
 fetched; OpenAlex cross-check not run.
+
+## Stage 5 — SAVED: §IQ — the invariant question (WORKFLOW 3.3), after card 1; the fixed claim list `data/fs111/claims.md`
+
+1. **The existence form.** Is there a lower bound `s₀` on the cone scale of junctions of near-optimal band-proper partial six-colourings (route R's (B))?
+   Is there a regularity theorem turning the tight limit of a hole-vanishing sequence into a segment-and-arc map (route M's REG)?
+2. **The structural form** — a question about every solution, in the most general class, arithmetic already gone (row 128): ***What does every tight
+   a.e.-proper `k`-colouring of `ℝ²` carry at every point of its essential boundary, once the moves that cost nothing have been made — a fill with a
+   colour that is free at a boundary point (C-FILL), and the filling of a region's inclusions (`[Voronov2023]` Obs. 2.2)?*** `k` is a parameter: at
+   `k = 7` the question has real instances (the tight seven-colourings, G20), and the invariant must be carried by them; at `k = 6` its domain is empty
+   iff the answer is seven (the vacuity rule of the claim list).
+3. **The invariant it forces.** **None known in print** (§PA: the one-class form is Cohen–Mani's open Question 5.1; the multi-class form is not posed);
+   finding it is the milestone. **The candidate this plan names: the contact structure.** The tight analogue of FS107-R-SAT (held, two minds): after
+   saturation by fills, every essential boundary point is a contact point for each colour of its essential multicolour (C-SAT-T), and, by I-D1, a
+   class's essential closure avoids the unit circles about the class (C-HULL: each path-connected piece `C` of the class sits wholly inside `B(x, 1)` or
+   wholly outside `B̄(x, 1)` for every `x` in the essential closure). If C-SAT-T holds, every boundary piece is bound by a contact, and a bound piece lies
+   on the boundary of a ball hull or of a union of unit discs — an `r`-convexity condition whose planar theory is Rataj–Zajíček's (PA-5); the rungs
+   REG-B, REG-J, REG-I follow or fail from there. The cone scale is this structure read at a junction: how far the sectors bounded by contact curves stay
+   sectors.
+4. **Its route.** Derivation only. Exact checks only of objects given by formula (a fill-saturated tight seven-colouring; the strip; the disk).
+5. **The open instances it would decide.**
+   - `χ_m⁰(ℝ²) ≥ 7` (so `χ(ℝ²) = 7` given MR), through REG-A₆ and Q-NO (C-SEVEN-M; FS-114 in progress).
+   - **`χ_m⁰(ℝ²) ≥ 6` (so `χ(ℝ²) ≥ 6` given MR), through REG-I₅ and the held FS106-AE-MAP6** (C-SIX-M): at five colours the map NO needed is
+     Woodall–Townsend's "maps need six", held a.e. at row 132 (one mind per link, the fill in outline; FS-108 carries Townsend's (c)). **This is FS-104's
+     statement, reached by regularity** — a route FS-104's stub does not list. REG is colour-generic; the colour count enters only at the NO.
+   - `[SokolovVoronov2025]` Question 2 for measurable colourings, not only maps (REG-A₆ with Q-NO).
+   - The reverse of the printed hierarchy "χmes ≤ χmap" (S–V §1; `[Voronov2023]` §1) at five and at six colours.
+   - Cohen–Mani's Question 5.1 (one class; a calibration: its answer decides nothing about six).
+
+**Honesty about what REG is (C-REG-EQ).** Given Q-NO, REG-A₆ is *equivalent* to `χ_m⁰(ℝ²) ≥ 7`; given FS106-AE-MAP6, REG-I₅ is equivalent to
+`χ_m⁰(ℝ²) ≥ 6`. The top rung is not a smaller statement than the answer. It is the answer stated in the discipline where a proof would live, and its
+lower rungs — C-FILL, C-HULL, C-SAT-T, C-HULL-REG, REG-B, REG-J, PER — are smaller statements, each testable at `k = 7` on real objects.
+
+**The claim list** is written: `data/fs111/claims.md` (§0 definitions; §1 held inputs quoted with grades; §2 card 1's five claims for the blind verifier;
+§3 route M — REG-A/I/J/B, C-SEVEN-M, C-SIX-M, C-REG-EQ, C-HULL, C-FILL, C-SAT-T, C-HULL-REG, PER, NO-C2, CM-Q5.1; §4 route R — A-ALL, B-RR, B-NONABS,
+R-P3; §5 controls).
+
+*Theorems this stage proved (planner, one mind, [hand]; listed for the verifier, not claimed beyond the claim list's wording):* C-HULL (from I-D1 and
+the continuity of `y ↦ |x − y|` on a path-connected set, whose image is an interval missing 1) and C-FILL (new `j`-points in `B(x, η/2)` meet `S_j` at
+distance 1 only inside `A_η(x)`, where `S_j` is null; pairs inside the disc are shorter than 1 for `η ≤ 1`). C-SIX-M and C-SEVEN-M are two-line
+compositions (a tight colouring exists iff `χ_m⁰ ≤ k`; REG gives a map one; the NO excludes it). C-REG-EQ is the same composition read backwards (if
+`χ_m⁰ ≥ k + 1` there is no tight `k`-colouring, and REG holds vacuously).
