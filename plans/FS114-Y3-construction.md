@@ -16,6 +16,8 @@ directions it fills there.*
 | FS114-Y3-RSTOP | **FS114-Y2-BOWTIE stops at `√3`**: no valid fragment (Siamese pairs allowed) that agrees with it near `q1` and `q2` contains a neighbourhood of `r = q1 + e(330°) = (√3, 0)`; so the bowtie extends to no closed disc of radius `√3` or more about `p`. The step: the ring of `q1` just above `r` has no state — a tile-interior point has colour 2 (N-E1), which straddles `T2`; a unit arc there has an outer colour that straddles its own `q1`-tile (FS112-U1) or, if 2, `T2` | [hand; tools exact at a named ring point, 11 of 11 as registered; one mind] | §2.1; `tools/fs114_y3_rstop.py`; `data/fs114/fs114-y3/rstop.out` |
 | FS114-Y3-R | About every valid map with a Reuleaux bowtie at `p` that contains a neighbourhood of `r`: the ring of `q1` just above `r` carries, on it or just outside it, a colour `c` that (i) is absent at `q1`, or whose `q1`-tile lies in the open cone `(60°, 240°)` at `q1`, and (ii) has no tile at `q2` with a direction within 90° of `30°`. With five colours at `q1` this is **E1** (`T2`'s sector at `q2` inside `[240°, 300°]`) **or E2** (a tile at `q1` whose sector starts after `60°`, its colour pointing nowhere near `r` from `q2`) | [hand; one mind] | §2.2 |
 | FS114-Y3-D2 | **The bowtie's symmetry class stops at `√3`, and forces five colours:** in a non-Siamese valid fragment with a Reuleaux bowtie at `p`, invariant under `x ↦ −x` with colours `(1 3)(5 6)` and `y ↦ −y` with `(2 4)(5 6)` (Y2's action) and containing a neighbourhood of `top`, each `q_i` has exactly five colours, its tiles `t1, W, T1, V, L` (FS114-Y2-BOWTIE's arrangement: `L ∋ top`, `T1` ending before `60°`, the sliver `V` between); and no such fragment contains a neighbourhood of `r`, so none holds the closed disc of radius `√3` about `p` | [hand; one mind] | §2.3 |
+| FS114-Y3-FOUR | About every non-Siamese valid map with a Reuleaux bowtie at `p` containing a neighbourhood of `top`, in which `q1` and `q4` each have exactly four colours: `P_cl(q1) = {1, 3, 4, b}` with `b ∈ {5, 6}` on the single tile `X` between `T1` and `t1`, and colour 3 on the single tile between `t1` and `T1`; `X ∌ top`; the tile at `top` in the sector `(0°, 60°)` has the other colour `b̄`, absent at `q1`; and `q4`'s tile between `T4` and `t3` has colour `b` too. **So five colours at `q_i` are not forced by the bowtie**: their absence is paid for by a tile at `top` of a colour absent at `q1` | [hand; one mind] | §3.1 |
+| FS114-Y3-13 | In the symmetry class with `x ↦ −x` acting as `(1 3)` (5 and 6 fixed), every non-Siamese bowtie fragment containing `top` has **exactly four colours** at each `q_i` (the sliver `V` never occurs), one tile `Y` of colour `b̄` covering the upper half of `top`'s neighbourhood, and `X`, `σ_x(X)` of one colour `b`, at mutual distance at least 1; the tiles along `t1`'s upper side are `t2`, `X`, `Y` only, and `X`'s points on `ω(p)` form a set `A` with `A ∩ (120° − A) = ∅`. FS114-Y3-R does not stop this class at `r`. Whether it holds any valid fragment is **open** (GAP: the filling of the region between `t1` and `t3` inside `B(p, 1)`) | [hand; one mind] | §3.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -23,6 +25,8 @@ directions it fills there.*
   instead the ring of each `q_i` was read cone by cone (FS112-U1, N-E1) until a direction with no admissible state appeared (just above `r`), and
   only that point was probed, at one named ring point. For the symmetric class I would have enumerated colourings of the tiles at `top` and `q1`;
   instead each tile's colour was derived from the tiles at `p`, `q1`, `q4` that point toward it.
+- Stage 3: I would have built trial four-colour bowties in the `(1 3)` class and run the checker on each; instead the class's forced structure was
+  derived (four colours, `Y` at `top`, `X` and `X4` of one colour) and the construction is left, with its pressure point named, to a successor.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -164,3 +168,53 @@ class, and no extension of Y2's own fragment, holds the closed disc of radius `�
 and must use E1 or E2 at `r`. The proof side's K1, read at radius 2, is **not refuted** by any object of this job.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: is the five-colour `q_i` forced? In Y2's class yes; in general no — four colours are paid for at `top`
+
+*Item 2 of my brief. Setting throughout: a non-Siamese valid map (or fragment containing a neighbourhood of `top`) with a Reuleaux bowtie at `p`. At
+`q1` the tiles run counter-clockwise `t1 [180°, 300°]`, the **outer gap** (tiles between `t1` and `T1`, directions from `300°`), `T1`, the **inner gap**
+(tiles between `T1` and `t1`, ending at `180°`); FS114-Y2-GAPS and 2.2 give: 2 is absent at `q1`; inner-gap tiles with directions in `(120°, 180°)` meet
+`B(p, 1)` and have colour 5 or 6; outer-gap colours lie in `{3, 5, 6}`. Tiles at `top` are read by the sector they occupy (2.3's frame).*
+
+### 3.1 FS114-Y3-FOUR — what four colours at `q1` force [hand; one mind]
+
+Let `q1` and `q4` have exactly four colours, so each gap at `q1` is one tile: `W` (outer, colour `a`) and `X` (inner, colour `b ∈ {5, 6}`); at `q4`, `W4`
+(`a₄`) and `X4` (`b₄`).
+1. **`X ∌ top`.** Suppose `X ∋ top` (so `X`'s sector at `q1` lies in `[60°, 180°]`, and `T1` ends at `θ_T ≥ 60°`). Take `N`, the tile covering direction
+   `90°` at `top`. Its colour is not 1, 2, 3 (the tiles at `p` point at `top`) nor `b` (`X` points at `top`) nor `b₄` (`X4` points at `top`: it has
+   directions near `30°` at `q4`). If it is 4, `T1` must not point at `top` (2.3 step 2), so `θ_T = 60°`; the `X|N` edge at `top` then lies on `ω(q1)`
+   (as 2.3 step 4) and FS112-U1 puts `T1` inside `[240°, 60° − ℓ]` — contradiction. So `N` has colour `b̄` and `b₄ = b`; but then `X4` (colour `b`, pointing
+   at `top` from `q4`) straddles `X ∋ top`. Contradiction.
+2. So the tile `Y` at `top` in the sector `(0°, 60°)` is not a tile at `q1`. It lies inside `B(q1, 1)`, so its colour is absent at `q1` (a colour present
+   there sits on a tile within 1 of it, and the pair is not Siamese). It is not 1, 2 or 3 (tiles at `p`). Its colour is therefore in
+   `{5, 6} ∖ {a, b}` — which is non-empty only if **`a = 3`** — and equals **`b̄`**; and no tile at `q4` pointing at `top` has colour `b̄`, so `b₄ = b`. ∎
+
+**Reading against Y2's arrangement.** The fifth colour at `q1` (the sliver `V`) is forced exactly when the tile at `top` beside `q1` is a tile of `q1`
+(2.3 step 3); four colours at `q1` are possible only if that tile carries a colour absent at `q1`. So **five colours at `q_i` are not forced by the
+Reuleaux bowtie**; they are forced by the bowtie together with `top`'s colours.
+
+### 3.2 FS114-Y3-13 — the symmetry class where four colours are forced [hand; one mind]
+
+Let the fragment be invariant under `σ_x : (x, y) ↦ (−x, y)` acting on colours by `(1 3)` (5 and 6 fixed); `σ_y` plays no part until the last item.
+1. **Four colours at `q1`.** The tile `L` at `top` in `(0°, 60°)` is not 4 (2.3 step 3, whose argument for 4 uses no colour action), not 1, 2, 3. If it
+   were a tile at `q1`, `σ_x(L)` would be a tile at `q4` of the same colour, also containing `top`: two tiles of one colour at `top`, so one tile,
+   containing `q1` and `q4` (`√3` apart). So `L` is no tile at `q1`, its colour `b̄ ∈ {5, 6}` is absent at `q1` (3.1 step 2's argument), and
+   `P_cl(q1) ⊆ {1, 3, 4, b}`: with the tactic's four, **exactly four colours**, `W = 3`, `X = b`. By the symmetry, at every `q_i`.
+2. **`top`.** `L` and `σ_x(L)` both have colour `b̄` and contain `top`: they are one tile `Y`, which also covers `(60°, 120°)`; `top`'s lower sectors are
+   `t2` or `Y` (a tile at `q1` or `q4` there would, with its mirror image, again join `q1` to `q4`). So `P_cl(top) ⊆ {2, b̄}`.
+3. **The pressure point.** `X` and `X4 = σ_x(X)` share colour `b`, so they are at least 1 apart. Every point of `t1`'s upper side (the arc of `ω(q2)` from
+   `p` to `q1`) is within 1 of `top` and of `q1`, so the tiles along it are `t2`, `X` or `Y` only (a colour-`b̄` tile there is `Y`, a colour-`b` tile is `X`,
+   and colours 1–4 other than `t2` cannot meet `B(p, 1)` there); likewise `t2`, `X4`, `Y` along `t3`'s. On `ω(p)` (colours 5, 6 only; points `60°` apart
+   of different colours), `X`'s points form a set `A ⊂ (30°, 90°)` and `X4`'s the set `180° − A`, so **`A ∩ (120° − A) = ∅`**.
+4. **At `r`** (FS114-Y3-R): the ring colours at `q1` are `{2, b̄}`; `b̄` passes (i). It passes (ii) if `σ_y` fixes 5 and 6 (`q2`'s inner tile then has
+   colour `b`), and if `σ_y` swaps them provided `T1` ends at `θ_T ≥ 60°` (`q2`'s inner tile, of colour `b̄`, then points nowhere within `90°` of `30°`).
+   **So this class is not stopped at `r` by the argument that stops Y2's.**
+
+**Open (GAP, named).** Whether the class holds any valid fragment: the region between `t1` and `t3` inside `B(p, 1)` must be filled by `t2` (diameter at
+most 1, containing `p`, touching `ω(p)` only along unit arcs, since 2 is a colour at `p`), `X`, `X4` (one colour, at least 1 apart) and `Y` (diameter at most 1,
+containing `top`), with item 3's constraints. Two layouts tried by hand fail at named corners: (a) `t2` ending where `t1`'s upper side reaches `x = 1/2`, so
+that `X ⊂ {x ≥ 1/2}`, forces `t2` or `Y` to contain two points more than 1 apart (`(−1/2, y₀)` and `e(60°)`, `y₀ = −1/2 + (√3/2)^{1/2}`); (b) `Y` meeting
+both sides at `x = ±1/2` puts the `X|Y` edge on the unit circle about `(−1/2, y₀)`, which cuts `ω(p)` near `69°`, and then `X ∋ e(65°)` and `X4 ∋ e(125°)`,
+exactly 1 apart. Neither is a proof that the class is empty; they locate the difficulty.
+
+## Stage 3 — SAVED
