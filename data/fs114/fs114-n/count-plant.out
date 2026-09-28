@@ -1,0 +1,6 @@
+square grid 8x8: E2 with deg_M from edges only: FAILS (-128 vs 128); expected FAIL: as expected
+honeycomb (bricks) 8x8: E2 with deg_M from edges only: holds (0 vs 0); expected hold (cubic): as expected
+triangular 8x8: E2 with deg_M from edges only: FAILS (-384 vs 768); expected FAIL: as expected
+square + alternate diagonals 8x8: E2 with deg_M from edges only: FAILS (-256 vs 448); expected FAIL: as expected
+prismatic pentagonal 6x4: E2 with deg_M from edges only: FAILS (-48 vs 48); expected FAIL: as expected
+PLANT FIRES FOR ITS OWN REASON
