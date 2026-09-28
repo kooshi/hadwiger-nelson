@@ -1,0 +1,130 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "marstrand.j-m"
+      ],
+      "name": "Marstrand, J. M."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "juza.miloslav",
+      "reviewer_id": "818",
+      "name": "Miloslav J\u016fza",
+      "sign": "M.J\u016fza"
+     },
+     "text": "Let \\(B_ r(x)\\) denote the closed disc of centre x and radius r and let m be plane Lebesgue measure. The authors prove the following Theorem: Let \\(F\\subset R^ 2\\) be a Lebesgue measurable set with \n\\[\n \\limsup_{r\\to \\infty}r^{-2}m(F\\cap B_ r(0))>0. \n\\]\n Then there is a positive number \\(r_ 0\\) such that for every \\(r>r_ 0\\) there exist x,y\\(\\in F\\) with \\(| x-y| =r.\\) \n\n\nThis theorem was conjectured by Sz\u00e9kely and a very complicated proof based on the ergodic theorem was found by Weiss. The authors give a more simple proof.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 3966555,
+   "identifier": "0599.28008",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1112/blms/18.5.471",
+     "type": "doi",
+     "url": "https://doi.org/10.1112/blms/18.5.471"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "471-474",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0024-6093",
+        "type": "print"
+       },
+       {
+        "number": "1469-2120",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 149996,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "John Wiley \\& Sons, Chichester; London Mathematical Society, London",
+      "series_id": 369,
+      "short_title": "Bull. Lond. Math. Soc.",
+      "title": "Bulletin of the London Mathematical Society",
+      "volume": "18",
+      "year": "1986"
+     }
+    ],
+    "source": "Bull. Lond. Math. Soc. 18, 471-474 (1986)."
+   },
+   "states": [
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Plane sets with positive density at infinity contain all large distances"
+   },
+   "year": "1986",
+   "zbmath_url": "https://zbmath.org/3966555"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.0521852970123291,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:07:16Z"
+ }
+}

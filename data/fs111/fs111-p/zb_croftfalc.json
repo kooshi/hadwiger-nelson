@@ -1,0 +1,190 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "croft.hallard-t"
+      ],
+      "name": "Croft, H. T."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3778258,
+   "identifier": "0494.52008",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1017/S0305004100057960",
+     "type": "doi",
+     "url": "https://doi.org/10.1017/S0305004100057960"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52A40",
+     "scheme": "msc2020",
+     "text": "Inequalities and extremum problems involving convexity in convex geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Selfridge, Combinatorial structures and their applications pp 508-- (1970)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Rogers, Hausdorff measures (1970)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2307/2307717",
+     "position": "3",
+     "text": "DOI: 10.2307/2307717",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal",
+       "bateman.paul-t"
+      ],
+      "document_id": 3066332,
+      "msc": [
+       "52A40",
+       "52A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Eggleston, Convexity (1969)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Rogers, Packing and covering (1964)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "79-88",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0305-0041",
+        "type": "print"
+       },
+       {
+        "number": "1469-8064",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 145416,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Cambridge University Press, Cambridge",
+      "series_id": 158,
+      "short_title": "Math. Proc. Camb. Philos. Soc.",
+      "title": "Mathematical Proceedings of the Cambridge Philosophical Society",
+      "volume": "89",
+      "year": "1981"
+     }
+    ],
+    "source": "Math. Proc. Camb. Philos. Soc. 89, 79-88 (1981)."
+   },
+   "states": [
+    [
+     "r",
+     "item has references"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On maximal Euclidean sets avoiding certain distance configurations"
+   },
+   "year": "1981",
+   "zbmath_url": "https://zbmath.org/3778258"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.05522727966308594,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:07:20Z"
+ }
+}

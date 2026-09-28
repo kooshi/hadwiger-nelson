@@ -1,0 +1,4190 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "soifer.alexander"
+      ],
+      "name": "Soifer, Alexander"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "shelah.saharon"
+      ],
+      "name": "Shelah, Saharon"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2005-05-23T09:24:14Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "weese.martin",
+      "reviewer_id": "4519",
+      "name": "Martin Weese",
+      "sign": "Martin Weese (Potsdam)"
+     },
+     "text": "The authors investigate the chromatic numbers of distance graphs on the plane. They investigate three examples in a uniform way. Under ZFC these graphs have the chromatic numbers 2, 3 and 4. Assuming the countable axiom of choice and that every set of reals is Lebesgue measurable, the chromatic number cannot be any positive integer \\(n\\) nor even \\(\\aleph_0\\).",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 2170328,
+   "identifier": "1066.05067",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "03E25",
+     "scheme": "msc2020",
+     "text": "Axiom of choice and related propositions"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "5-9",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0384-9864",
+        "type": "print"
+       }
+      ],
+      "issue": null,
+      "issue_id": 103922,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Combinatorial Press, Winnipeg, MB",
+      "series_id": 1993,
+      "short_title": "Congr. Numerantium",
+      "title": "Congressus Numerantium",
+      "volume": "166",
+      "year": "2004"
+     }
+    ],
+    "source": "Congr. Numerantium 166, 5-9 (2004)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "How the axiom of choice can affect the chromatic number of distance graphs: three examples on the plane"
+   },
+   "year": "2004",
+   "zbmath_url": "https://zbmath.org/2170328"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "shelah.saharon"
+      ],
+      "name": "Shelah, Saharon"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "soifer.alexander"
+      ],
+      "name": "Soifer, Alexander"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2004-08-23T10:10:58Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "weese.martin",
+      "reviewer_id": "4519",
+      "name": "Martin Weese",
+      "sign": "Martin Weese (Potsdam)"
+     },
+     "text": "Let \\(\\chi\\) denote the chromatic number of the unit distance graph of the plane. It is known that \\(4\\leq\\chi\\leq 7\\) but it is a long outstanding problem to determine \\(\\chi\\). The authors motivate that \\(\\chi\\) may depend upon the system of axioms we choose for set theory. So they give an example of graph \\(G\\) with chromatic number 2 assuming the axiom of choice and with chromatic number greater \\(\\omega\\) working in a model with the countable axiom of choice and such that every set of real numbers is Lebesgue measurable (LM). Further on they have the following conditional theorem: Assume that any finite distance graph has chromatic number 4. Then assuming the axiom of choice, the chromatic number of the plane is 4. Assuming dependent choice and LM, the chromatic number of the plane is 5, 6 or 7.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 2094516,
+   "identifier": "1049.05038",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "03E25",
+     "scheme": "msc2020",
+     "text": "Axiom of choice and related propositions"
+    },
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "41-46",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1065-7371",
+        "type": "print"
+       }
+      ],
+      "issue": "1",
+      "issue_id": 95371,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "University of Colorado and Center for Excellence in Mathematical Education, Colorado Springs, CO",
+      "series_id": 2138,
+      "short_title": "Geombinatorics",
+      "title": "Geombinatorics",
+      "volume": "13",
+      "year": "2003"
+     }
+    ],
+    "source": "Geombinatorics 13, No. 1, 41-46 (2003)."
+   },
+   "states": [],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Chromatic numbers of the plane. III: Its future"
+   },
+   "year": "2003",
+   "zbmath_url": "https://zbmath.org/2094516"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "jendrol.stanislav"
+      ],
+      "name": "Jendrol, Stanislav"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "skupien.zdzislaw"
+      ],
+      "name": "Skupie\u0144, Zdzis\u0142aw"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "casali.maria-rita",
+      "reviewer_id": "8065",
+      "name": "Maria Rita Casali",
+      "sign": "Maria Rita Casali (Modena)"
+     },
+     "text": "A plane map is called a normal plane map if the involved pseudograph is connected and all vertices and all faces have degree not less than three. The first purpose of the paper is to present a structural result on normal plane maps, which strengthens the one obtained by \\textit{O. V. Borodin} in [Diskretn. Mat. 3, No. 4, 24-27 (1991; Zbl 0742.05034)] (strictly related to Kotzig's and Lebesgue's classical results). Then, the authors take into account the notion of \\(t\\)-distance chromatic number introduced by \\textit{F. Kramer} and \\textit{H. Kramer} in [C. R. Acad. Sci., Paris, S\u00e9r. A 268, 46-48 (1969; Zbl 0165.57302) and Ann. Discrete Math. 30, 275-284 (1986; Zbl 0601.05020)], and recently investigated in [\\textit{Z. Skupie\u0144}, Discuss. Math., Graph Theory 15, No. 1, 89-106 (1995; Zbl 0833.05036)] and [\\textit{G. Chen, A. Gy\u00e1rf\u00e1s}, and \\textit{R. H. Schelp}, Discrete Math. 191, No. 1-3, 65-82 (1998; Zbl 0958.05053)]. \n\n\nThe present paper yields a polynomial \\(\\Phi_t(D)\\) in \\(D\\) of degree \\(t-1\\), such that the \\(t\\)-distance chromatic number of any planar graph \\(G\\) with maximum degree \\(\\Delta(G) \\leq D\\), where \\(D \\geq 8\\), is bounded above by \\(\\Phi_t(D).\\)",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 1722220,
+   "identifier": "0990.05043",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/S0012-365X(00)00440-4",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/S0012-365X(00)00440-4"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    },
+    {
+     "code": "05C12",
+     "scheme": "msc2020",
+     "text": "Distance in graphs"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "167-177",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0012-365X",
+        "type": "print"
+       },
+       {
+        "number": "1872-681X",
+        "type": "electronic"
+       }
+      ],
+      "issue": "1-3",
+      "issue_id": 76416,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (North-Holland), Amsterdam",
+      "series_id": 69,
+      "short_title": "Discrete Math.",
+      "title": "Discrete Mathematics",
+      "volume": "236",
+      "year": "2001"
+     }
+    ],
+    "source": "Discrete Math. 236, No. 1-3, 167-177 (2001)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Local structures in plane maps and distance colourings"
+   },
+   "year": "2001",
+   "zbmath_url": "https://zbmath.org/1722220"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "kruskal.clyde-p"
+      ],
+      "name": "Kruskal, Clyde P."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2008-06-10T10:15:12Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 5285951,
+   "identifier": "1139.05023",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.jcss.2007.06.003",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.jcss.2007.06.003"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "51B20",
+     "scheme": "msc2020",
+     "text": "Minkowski geometries in nonlinear incidence geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bauslaugh.bruce-l"
+      ],
+      "document_id": 1286480,
+      "msc": [
+       "05C10",
+       "05C12",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "1998"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "johnson.peter-d-jun",
+       "lanig.jeremy",
+       "rubalcaba.robert-r",
+       "bohannon.aaron"
+      ],
+      "document_id": 1610385,
+      "msc": [
+       "05C15",
+       "05C12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2001"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 2068164,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1993,
+      "year": "2003"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 5295135,
+      "msc": [
+       "05-01",
+       "05C15",
+       "05C55",
+       "05-03",
+       "01A60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2009"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "598-627",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0022-0000",
+        "type": "print"
+       },
+       {
+        "number": "1090-2724",
+        "type": "electronic"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 219431,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (Academic Press), San Diego, CA",
+      "series_id": 483,
+      "short_title": "J. Comput. Syst. Sci.",
+      "title": "Journal of Computer and System Sciences",
+      "volume": "74",
+      "year": "2008"
+     }
+    ],
+    "source": "J. Comput. Syst. Sci. 74, No. 4, 598-627 (2008)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The chromatic number of the plane: the bounded case"
+   },
+   "year": "2008",
+   "zbmath_url": "https://zbmath.org/5285951"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "hornak.mirko"
+      ],
+      "name": "Hor\u0148\u00e1k, Mirko"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "jendrol.stanislav"
+      ],
+      "name": "Jendrol', Stanislav"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "scapellato.raffaele",
+      "reviewer_id": "6538",
+      "name": "Raffaele Scapellato",
+      "sign": "R.Scapellato (Milano)"
+     },
+     "text": "Let \\(G\\) be a finite connected plane graph, and let \\(F(G)\\) be the set of all faces of \\(G\\). The distance of two faces \\(f_1\\), \\(f_2\\) of \\(G\\) is the minimum value of \\(d(x_1,x_2)\\) for \\(x_i\\in f_i\\). For an integer \\(d\\leq 0\\), the \\(d\\)-distance face \\(k\\)-colouring of \\(G\\) is a map \\(\\varphi: F(G)\\to\\{1,\\dots, k\\}\\) such that if \\(f_1\\neq f_2\\) and \\(d(f_1,f_2)\\leq d\\) then \\(\\varphi(f_1)\\neq\\varphi(f_2)\\). The minimum \\(k\\) for which such a map exists is called the \\(d\\)-distance face chromatic number, and is denoted by \\(df_c(G)\\). In this paper, an upper bound for \\(df_c(G)\\) is given when the maximum degree is greater than or equal to 8. Some known results for \\(d=0\\) are obtained as corollaries.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 1019060,
+   "identifier": "0880.05040",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/S0012-365X(96)00049-0",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/S0012-365X(96)00049-0"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "05C12",
+     "scheme": "msc2020",
+     "text": "Distance in graphs"
+    },
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "document_id": 3900784,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1923,
+      "year": "1984"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "document_id": 4177087,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "document_id": 30974,
+      "msc": [
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1297,
+      "year": "1991"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "document_id": 90264,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bouchet.andre",
+       "fouquet.jean-luc",
+       "jolivet.jean-loup"
+      ],
+      "document_id": 4043860,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 340,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "gross.jonathan-l",
+       "tucker.thomas-w"
+      ],
+      "document_id": 4006288,
+      "msc": [
+       "05C10",
+       "05-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 10225,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "hornak.mirko",
+       "jendrol.stanislav"
+      ],
+      "document_id": 811251,
+      "msc": [
+       "05C10",
+       "05C12",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "plummer.michael-d",
+       "ore.oystein"
+      ],
+      "document_id": 3310750,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1969"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "plummer.michael-d",
+       "toft.bjarne"
+      ],
+      "document_id": 4068903,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "jensen.tommy-rene",
+       "toft.bjarne"
+      ],
+      "document_id": 821271,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "zhao.yue",
+       "sanders.daniel-p"
+      ],
+      "document_id": 784575,
+      "msc": [
+       "05C15",
+       "05C40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "ringel.gerhard"
+      ],
+      "document_id": 3214386,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 272,
+      "year": "1965"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "171-174",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0012-365X",
+        "type": "print"
+       },
+       {
+        "number": "1872-681X",
+        "type": "electronic"
+       }
+      ],
+      "issue": "1-3",
+      "issue_id": 41126,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (North-Holland), Amsterdam",
+      "series_id": 69,
+      "short_title": "Discrete Math.",
+      "title": "Discrete Mathematics",
+      "volume": "164",
+      "year": "1997"
+     }
+    ],
+    "source": "Discrete Math. 164, No. 1-3, 171-174 (1997)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the \\(d\\)-distance face chromatic number of plane graphs"
+   },
+   "year": "1997",
+   "zbmath_url": "https://zbmath.org/1019060"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "soifer.alexander"
+      ],
+      "name": "Soifer, Alexander"
+     }
+    ],
+    "author_references": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "grunbaum.branko"
+      ],
+      "name": "Gr\u00fcnbaum, Branko"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "johnson.peter-d-jun"
+      ],
+      "name": "Johnson, Peter D. jun."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "rousseau.cecil-c"
+      ],
+      "name": "Rousseau, Cecil"
+     }
+    ],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2008-07-01T13:08:03Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "white.arthur-t",
+      "reviewer_id": "1899",
+      "name": "Arthur T. White",
+      "sign": "Arthur T. White (Kalamazoo)"
+     },
+     "text": "This very nicely presented book, lovingly prepared by the author over a period of 18 years, studies problems involving colored objects, and the Ramsey theory that such problems are imbedded into. Two problems receiving special attention are the well-known four color problem (resolved in 1976 after an assault of 124 years) and the author's ``favorite open problem in mathematics'', the chromatic number of the plane problem: What is the smallest number of colors sufficient for coloring the plane so that no two points of the same color are unit distance apart? The book is very thorough, in unusual ways perhaps best expressed by the author himself: \n\n\n \n``This book includes not just mathematics, but also the process of investigation, trains of mathematical thought, and where possible, psychology of mathematical invention. The book does not just include history and prehistory of Ramsey theory and related fields, but also conveys the process of historical investigation -- the kitchen of historical research if you will. It has captivated me, and made me feel like a Sherlock Holmes -- I hope my reader will enjoy this sense of suspense and discovery as much as I have. \\dots I hope the book will present mathematics as a human endeavor: the reader should expect to find in it not only results, but also portraits of their creators; not only mathematical facts, but also open problems; not only new mathematical research, but also new historical investigations; not only mathematical aspirations, but also moral dilemmas of the times between and during the two horrific World Wars of the twentieth century.''\n\n\n \nFor example, new facts and artifacts are presented, pertaining to the lives of Issai Schur, Pierre Joseph Henry Baudet, and Bartel Leendert van der Waerden. The 49 chapters are divided into 11 parts: I. Merry-go-round; II. Colored plane; III. Coloring graphs; IV. Coloring maps (a map is defined to be a plane connected multigraph with no bridges); V. Colored graphs; VI. The Ramsey principle; VII. Colored integers: Ramsey theory before Ramsey and its aftermath; VIII. Colored polygons: Euclidean Ramsey theory; IX. Colored integers in service of chromatic number of the plane; X. Predicting the future (here the author conjectures that the chromatic number of the plane is either 4 or 7, expressing a preference for 7); XI. Farewell to the reader. There are an extensive bibliography, and indices of names, subjects, and notations; the latter two are brief. The author has used his own book as a text, at both the senior and the graduate level. There are numerous open problems, but no formal problem sets. But there is much to recommend this book, both for mathematicians and for those who wish to learn more about mathematicians and their subject.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5295135,
+   "identifier": "1221.05001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/978-0-387-74642-5",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/978-0-387-74642-5"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to combinatorics"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "05C55",
+     "scheme": "msc2020",
+     "text": "Generalized Ramsey theory"
+    },
+    {
+     "code": "05-03",
+     "scheme": "msc2020",
+     "text": "History of combinatorics"
+    },
+    {
+     "code": "01A60",
+     "scheme": "msc2020",
+     "text": "History of mathematics in the 20th century"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 5295135,
+      "isbn": [
+       {
+        "number": "978-0-387-74640-1",
+        "type": "hbk"
+       }
+      ],
+      "publisher": "New York, NY: Springer",
+      "year": "2009"
+     }
+    ],
+    "pages": "xxx, 607~p.",
+    "series": [],
+    "source": "New York, NY: Springer (ISBN 978-0-387-74640-1/hbk). xxx, 607~p. (2009)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Branko Gr\u00fcnbaum, Peter D. Johnson jun., and Cecil Rousseau"
+   },
+   "year": "2009",
+   "zbmath_url": "https://zbmath.org/5295135"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "bellitto.thomas"
+      ],
+      "name": "Bellitto, Thomas"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "pecher.arnaud"
+      ],
+      "name": "P\u00eacher, Arnaud"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "sedillot.antoine"
+      ],
+      "name": "S\u00e9dillot, Antoine"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2022-09-30T08:56:55Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: A subset \\(A \\subset \\mathbb R^2\\) is said to avoid distance \\(1\\) if: \\( \\forall x,y \\in A, \\left\\| x-y \\right\\|_2 \\neq 1\\). In this paper we study the number \\(m_1(\\mathbb R^2)\\) which is the supremum of the upper densities of measurable sets avoiding distance 1 in the Euclidean plane. Intuitively, \\(m_1(\\mathbb R^2)\\) represents the highest proportion of the plane that can be filled by a set avoiding distance 1. This parameter is related to the fractional chromatic number \\(\\chi_f(\\mathbb R^2)\\) of the plane.\n\nWe establish that \\(m_1(\\mathbb R^2) \\leq 0.25647\\) and \\(\\chi_f(\\mathbb R^2) \\geq 3.8991\\).",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 7594849,
+   "identifier": "1498.05078",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+   ],
+   "links": [
+    {
+     "identifier": "10.46298/dmtcs.5153",
+     "type": "doi",
+     "url": "https://doi.org/10.46298/dmtcs.5153"
+    },
+    {
+     "identifier": "1810.00960",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1810.00960"
+    },
+    {
+     "identifier": "dmtcs.episciences.org/8426",
+     "type": "https",
+     "url": "https://dmtcs.episciences.org/8426"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C12",
+     "scheme": "msc2020",
+     "text": "Distance in graphs"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "52C20",
+     "scheme": "msc2020",
+     "text": "Tilings in \\(2\\) dimensions (aspects of discrete geometry)"
+    },
+    {
+     "code": "52C26",
+     "scheme": "msc2020",
+     "text": "Circle packings and discrete conformal geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "passuello.alberto",
+       "thiery.alain"
+      ],
+      "document_id": 6450887,
+      "msc": [
+       "52C10",
+       "90C05",
+       "90C27",
+       "05C69"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "bellitto.thomas",
+       "moustrou.philippe",
+       "pecher.arnaud"
+      ],
+      "document_id": 7103917,
+      "msc": [
+       "52C10",
+       "52B11",
+       "11H06"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2019"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bellitto.thomas"
+      ],
+      "document_id": 6849502,
+      "msc": [
+       "68R10",
+       "68Q45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 735,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "cranston.daniel-w",
+       "rabern.landon"
+      ],
+      "document_id": 6909472,
+      "msc": [
+       "05C15",
+       "05C12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "de-grey.aubrey-d-n-j"
+      ],
+      "document_id": 6984330,
+      "msc": [
+       "05C15",
+       "05C55",
+       "05D10",
+       "05C12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "exoo.geoffrey",
+       "ismailescu.dan-p"
+      ],
+      "document_id": 6708269,
+      "msc": [
+       "05C10",
+       "05C12",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "schrijver.alexander",
+       "lovasz.laszlo",
+       "grotschel.martin"
+      ],
+      "document_id": 3775264,
+      "msc": [
+       "90C10",
+       "68Q25",
+       "65K05",
+       "90C05",
+       "90C09"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "keleti.tamas",
+       "ruzsa.imre-z",
+       "matolcsi.mate",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6579865,
+      "msc": [
+       "05C10",
+       "42B05",
+       "52C10",
+       "52C17",
+       "90C05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "larman.david-g"
+      ],
+      "document_id": 3389061,
+      "msc": [
+       "05B99",
+       "51M99",
+       "05B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "moustrou.philippe"
+      ],
+      "document_id": 6731361,
+      "msc": [
+       "11H31",
+       "11H71"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3335,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "szekely.laszlo-a"
+      ],
+      "document_id": 1943977,
+      "msc": [
+       "05C12",
+       "52C10",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2002"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "Paper No. 8, 13 p.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1365-8050",
+        "type": "electronic"
+       }
+      ],
+      "issue": "1",
+      "issue_id": 462397,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Maison de l'Informatique et des Math\u00e9matiques Discr\u00e8tes, MIMD, Paris",
+      "series_id": 2430,
+      "short_title": "Discrete Math. Theor. Comput. Sci.",
+      "title": "Discrete Mathematics and Theoretical Computer Science. DMTCS",
+      "volume": "23",
+      "year": "2021"
+     }
+    ],
+    "source": "Discrete Math. Theor. Comput. Sci. 23, No. 1, Paper No. 8, 13 p. (2021)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the density of sets of the Euclidean plane avoiding distance 1"
+   },
+   "year": "2021",
+   "zbmath_url": "https://zbmath.org/7594849"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "madaras.tomas"
+      ],
+      "name": "Madaras, Tom\u00e1\u0161"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "marcinova.andrea"
+      ],
+      "name": "Marcinov\u00e1, Andrea"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "jendrol.stanislav",
+      "reviewer_id": "8213",
+      "name": "Stanislav Jendrol'",
+      "sign": "Stanislav Jendrol' (Ko\u0161ice)"
+     },
+     "text": "A plane pseudograph \\(G\\) is said to be a plane normal map if each of its vertices has degree at least three and each of its faces has size at least three. The authors determine a set of unavoidable configurations for the family of all normal plane maps. Applying this result they prove that the distance-\\(t\\) chromatic number \\(\\chi^{(t)}(G)\\) of a plane graph \\(G\\) with maximum degree \\(\\Delta(G)\\leq D\\), \\(D\\geq 12\\), is bounded from above by \n\\[\nG+\\frac{2D+12}{D-2}((D-1)^{t-1}-1).\n\\]\n For \\(t=2\\) this bound provides the upper bound \\(2\\Delta(G)+17\\) for the chromatic number of the square of plane graphs \\(G\\) of maximum degree \\(\\Delta(G)\\leq 12\\), which is better than the one obtained by \\textit{J. van den Heuvel }and \\textit{S. McGuinness} [J. Graph Theory 42, 110-124 (2003; Zbl 1008.05065)].",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 2005066,
+   "identifier": "1027.05028",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.7151/dmgt.1176",
+     "type": "doi",
+     "url": "https://doi.org/10.7151/dmgt.1176"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "293-303",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1234-3099",
+        "type": "print"
+       },
+       {
+        "number": "2083-5892",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 90529,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "University of Zielona G\u00f3ra Press, Zielona G\u00f3ra",
+      "series_id": 2141,
+      "short_title": "Discuss. Math., Graph Theory",
+      "title": "Discussiones Mathematicae. Graph Theory",
+      "volume": "22",
+      "year": "2002"
+     }
+    ],
+    "source": "Discuss. Math., Graph Theory 22, No. 2, 293-303 (2002)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the structural result on normal plane maps"
+   },
+   "year": "2002",
+   "zbmath_url": "https://zbmath.org/2005066"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "payne.michael-s"
+      ],
+      "name": "Payne, Michael S."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2010-03-26T12:59:27Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: First L\u00e1szl\u00f3 Sz\u00e9kely [\\textit{L. Szekely}, ``Measurable chromatic number of geometric graphs and sets without some distances in Euclidean space,'' Combinatorica 4, 213--218 (1984; Zbl 0558.05020)] and more recently Saharon Shelah and Alexander Soifer [\\textit{S. Shelah} and \\textit{A. Soifer}, ``Axiom of choice and chromatic number of the plane,'' J. Comb. Theory, Ser. A 103, No.\\,2, 387--391 (2003; Zbl 1030.03035)] have presented examples of infinite graphs whose chromatic numbers depend on the axioms chosen for set theory. The existence of such graphs may be relevant to the Chromatic Number of the Plane problem. In this paper we construct a new class of graphs with ambiguous chromatic number. They are unit distance graphs with vertex set Rn, and hence may be seen as further evidence that the chromatic number of the plane might depend on set theory.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 5686770,
+   "identifier": "1185.05063",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "0707.1177",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/0707.1177"
+    },
+    {
+     "identifier": "228865",
+     "type": "eudml",
+     "url": "https://eudml.org/doc/228865"
+    },
+    {
+     "identifier": "10_37236_269/",
+     "type": "geodesic",
+     "url": "https://geodesic.mathdoc.fr/item/10_37236_269/"
+    },
+    {
+     "identifier": "6668",
+     "type": "emis",
+     "url": "http://www.emis.de/6668"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "05C12",
+     "scheme": "msc2020",
+     "text": "Distance in graphs"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "Paper No. N31, 7 p.",
+    "series": [
+     {
+      "acronym": "EJC",
+      "issn": [
+       {
+        "number": "1077-8926",
+        "type": "electronic"
+       }
+      ],
+      "issue": "1",
+      "issue_id": 248321,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Prof. Andr\u00e9 K\u00fcndgen c/o California State University San Marcos, Deptartment of Mathematics, San Marcos, CA",
+      "series_id": 2064,
+      "short_title": "Electron. J. Comb.",
+      "title": "The Electronic Journal of Combinatorics",
+      "volume": "16",
+      "year": "2009"
+     }
+    ],
+    "source": "Electron. J. Comb. 16, No. 1, Paper No. N31, 7 p. (2009)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Unit distance graphs with ambiguous chromatic number"
+   },
+   "year": "2009",
+   "zbmath_url": "https://zbmath.org/5686770"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [],
+    "author_references": [],
+    "editors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "pach.janos"
+      ],
+      "name": "Pach, J\u00e1nos"
+     }
+    ]
+   },
+   "database": "Zbl",
+   "datestamp": "2012-07-31T10:32:10Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 6062328,
+   "identifier": "1256.05002",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/978-1-4614-0110-0",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/978-1-4614-0110-0"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05-06",
+     "scheme": "msc2020",
+     "text": "Proceedings, conferences, collections, etc. pertaining to combinatorics"
+    },
+    {
+     "code": "05C35",
+     "scheme": "msc2020",
+     "text": "Extremal problems in graph theory"
+    },
+    {
+     "code": "05C62",
+     "scheme": "msc2020",
+     "text": "Graph representations (geometric and intersection representations, etc.)"
+    },
+    {
+     "code": "05C65",
+     "scheme": "msc2020",
+     "text": "Hypergraphs"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    },
+    {
+     "code": "00B15",
+     "scheme": "msc2020",
+     "text": "Collections of articles of miscellaneous specific interest"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 6062328,
+      "isbn": [
+       {
+        "number": "978-1-4614-0109-4",
+        "type": "hbk"
+       },
+       {
+        "number": "978-1-4614-0110-0",
+        "type": "ebook"
+       }
+      ],
+      "publisher": "Berlin: Springer",
+      "year": "2013"
+     }
+    ],
+    "pages": "xiii, 607~p.",
+    "series": [],
+    "source": "Berlin: Springer (ISBN 978-1-4614-0109-4/hbk; 978-1-4614-0110-0/ebook). xiii, 607~p. (2013)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Thirty essays on geometric graph theory"
+   },
+   "year": "2013",
+   "zbmath_url": "https://zbmath.org/6062328"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "kaminski.marcin"
+      ],
+      "name": "Kami\u0144ski, Marcin"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "medvedev.paul"
+      ],
+      "name": "Medvedev, Paul"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "milanic.martin"
+      ],
+      "name": "Milani\u010d, Martin"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2013-10-10T17:06:09Z",
+   "document_type": {
+    "code": "a",
+    "description": "serial article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: Map the vertices of a graph to (not necessarily distinct) points of the plane so that two adjacent vertices are mapped at least a unit distance apart. The plane-width of a graph is the minimum diameter of the image of the vertex set over all such mappings. We establish a relation between the plane-width of a graph and its chromatic number, and connect it to other well-known areas, including the circular chromatic number and the problem of packing unit discs in the plane.\n\nFor the entire collection see [Zbl 1239.05008].",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 6215226,
+   "identifier": "1273.05054",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.endm.2009.07.107",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.endm.2009.07.107"
+    },
+    {
+     "identifier": "0812.4346",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/0812.4346"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C12",
+     "scheme": "msc2020",
+     "text": "Distance in graphs"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Bateman, P.; Erd\u0151s, P., Geometrical extrema suggested by a lemma of Besicovitch, American Math. Monthly, 58, 306-314, 1951",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal",
+       "bateman.paul-t"
+      ],
+      "document_id": 3066332,
+      "msc": [
+       "52A40",
+       "52A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Bezdek, A.; Fodor, F., Minimal diameter of certain sets in the plane, J. Comb. Theory, Ser. A, 85, 105-111, 1999",
+     "zbmath": {
+      "author_codes": [
+       "fodor.ferenc",
+       "bezdek.andras"
+      ],
+      "document_id": 1251153,
+      "msc": [
+       "51M16"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Bollob\u00e1s, B., The chromatic number of random graphs, Combinatorica, 8, 49-55, 1988",
+     "zbmath": {
+      "author_codes": [
+       "bollobas.bela"
+      ],
+      "document_id": 4089577,
+      "msc": [
+       "05C15",
+       "05C80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1988"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Erd\u0151s, P., Graph theory and probability, Canad. J. Math., 11, 34-38, 1959",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3138648,
+      "msc": [
+       "05C35",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 383,
+      "year": "1959"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Erd\u0151s, P., Geometry and Differential Geometry, 46-53",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Kami\u0144ski, M.; Medvedev, P.; Milani\u010d, M., The plane-width of graphs",
+     "zbmath": {
+      "author_codes": [
+       "kaminski.marcin",
+       "milanic.martin",
+       "medvedev.paul"
+      ],
+      "document_id": 5971969,
+      "msc": [
+       "05C62",
+       "05C10",
+       "05C15",
+       "05C12",
+       "51N20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 494,
+      "year": "2011"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Sch\u00fcrmann, A., On extremal finite packings, Discrete Comput. Geom., 28, 389-403, 2002",
+     "zbmath": {
+      "author_codes": [
+       "schurmann.achill"
+      ],
+      "document_id": 1837074,
+      "msc": [
+       "52C15",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2002"
+     }
+    }
+   ],
+   "source": {
+    "book": [
+     {
+      "book_id": 6039259,
+      "isbn": [],
+      "publisher": "Amsterdam: Elsevier",
+      "year": "2009"
+     }
+    ],
+    "pages": "633-637",
+    "series": [],
+    "source": "Ne\u0161et\u0159il, Jaroslav (ed.) et al., Extended abstracts of the 5th European conference on combinatorics, graph theory and applications, EuroComb'09, Bordeaux, France, September 7--11, 2009. Amsterdam: Elsevier. Electronic Notes in Discrete Mathematics 34, 633-637 (2009)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the plane-width of graphs"
+   },
+   "year": "2009",
+   "zbmath_url": "https://zbmath.org/6215226"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "esperet.louis"
+      ],
+      "name": "Esperet, Louis"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "goncalves.daniel.1"
+      ],
+      "name": "Gon\u00e7alves, Daniel"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "labourel.arnaud"
+      ],
+      "name": "Labourel, Arnaud"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2013-10-10T17:06:09Z",
+   "document_type": {
+    "code": "a",
+    "description": "serial article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: For a family \\(\\mathcal{F}\\) of geometric objects in the plane, define \\(\\chi(\\mathcal{F})\\) as the least integer \\(\\ell\\) such that the elements of \\(\\mathcal{F}\\) can be colored with \\(\\ell\\) colors, in such a way that any two intersecting objects have distinct colors. When \\(\\mathcal{F}\\) is a set of Jordan regions that may only intersect on their boundaries, and such that any point of the plane is contained in at most \\(k\\) regions, it can be proven that \\(\\chi(\\mathcal{F})\\leq 3k/2+o(k)\\) since the problem is equivalent to cyclic coloring of plane graphs [\\textit{O. Amini}, \\textit{L. Esperet}, and \\textit{J. van den Heuvel}, ``A Unified Approach to Distance-Two Colouring of Planar Graphs'', in: Proceedings of the 20th annual ACM-SIAM symposium on discrete algorithms. New York, NY: ACM Press. 273--282 (2009)]. In this paper, we study the same problem when Jordan regions are replaced by Jordan curves that do not cross (two curves are only allowed to ``touch'' each other). We conjecture that also in this case, \\(\\chi(\\mathcal{F})\\) is bounded by \\(ck\\) for some \\(c>0\\). To support this conjecture, we prove it when the curves are \\(x\\)-monotone (any vertical line intersect each curve at most once), and we give a bound in the general case that also depends on how many times two curves intersect.\n\nFor the entire collection see [Zbl 1239.05008].",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 6215154,
+   "identifier": "1273.05066",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.endm.2009.07.035",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.endm.2009.07.035"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Amini, O.; Esperet, L.; van den Heuvel, J., A Unified Approach to Distance-Two Colouring of Planar Graphs",
+     "zbmath": {
+      "author_codes": [
+       "amini.omid",
+       "van-den-heuvel.jan",
+       "esperet.louis"
+      ],
+      "document_id": 6270631,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Asplund, E.; Gr\u00fcnbaum, B., On a coloring problem, Math. Scand., 8, 181-188, 1960",
+     "zbmath": {
+      "author_codes": [
+       "asplund.edgar",
+       "grunbaum.branko"
+      ],
+      "document_id": 3155306,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 572,
+      "year": "1960"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Borodin, O. V., Solution of the Ringel problem on vertex-face coloring of planar graphs and coloring of 1-planar graphs, Metody Diskret. Analyz., 41, 12-26, 1984",
+     "zbmath": {
+      "author_codes": [
+       "borodin.oleg-veniaminovich"
+      ],
+      "document_id": 3900784,
+      "msc": [
+       "05C15",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1923,
+      "year": "1984"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Fox, J.; Pach, J., Coloring \\(K_k\\)-free intersection graphs of geometric objects in the plane, 346-354",
+     "zbmath": {
+      "author_codes": [
+       "fox.jacob",
+       "pach.janos"
+      ],
+      "document_id": 5507889,
+      "msc": [
+       "05C15",
+       "05C62"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Gy\u00e1rf\u00e1s, A., Problems from the world surrounding perfect graphs, Zastosow. Mat., 19, 413-441, 1987",
+     "zbmath": {
+      "author_codes": [
+       "gyarfas.andras"
+      ],
+      "document_id": 4183452,
+      "msc": [
+       "05C99",
+       "05C60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 222,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Gy\u00e1rf\u00e1s, A.; Lehel, J., Covering and coloring problems for relatives of intervals, Discrete Math., 55, 167-180, 1985",
+     "zbmath": {
+      "author_codes": [
+       "gyarfas.andras",
+       "lehel.jeno"
+      ],
+      "document_id": 3908456,
+      "msc": [
+       "05C15",
+       "05B40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Kostochka, A. V., On upper bounds for the chromatic number of graphs, Trudy Inst. Math., 10, 204-226, 1988",
+     "zbmath": {
+      "author_codes": [
+       "kostochka.alexandr-v"
+      ],
+      "document_id": 4108789,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1988"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Kostochka, A. V.; Kratochv\u00edl, J., Covering and coloring polygon-circle graphs, Discrete Math., 163, 299-305, 1997",
+     "zbmath": {
+      "author_codes": [
+       "kratochvil.jan",
+       "kostochka.alexandr-v"
+      ],
+      "document_id": 1018644,
+      "msc": [
+       "05C15",
+       "05C35",
+       "05C70"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Kostochka, A. V.; Ne\u0161et\u0159il, J., Coloring relatives of intervals on the plane. I. Chromatic number versus girth, European J. Combin., 18, 1, 103-107, 1998",
+     "zbmath": {
+      "author_codes": [
+       "kostochka.alexandr-v",
+       "nesetril.jaroslav"
+      ],
+      "document_id": 1117442,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "1998"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "McGuinness, S., Coloring arcwise connected sets in the plane I, Graphs Combin., 16, 429-439, 2000",
+     "zbmath": {
+      "author_codes": [
+       "mcguinness.sean"
+      ],
+      "document_id": 1610697,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1070,
+      "year": "2000"
+     }
+    }
+   ],
+   "source": {
+    "book": [
+     {
+      "book_id": 6039259,
+      "isbn": [],
+      "publisher": "Amsterdam: Elsevier",
+      "year": "2009"
+     }
+    ],
+    "pages": "213-217",
+    "series": [],
+    "source": "Ne\u0161et\u0159il, Jaroslav (ed.) et al., Extended abstracts of the 5th European conference on combinatorics, graph theory and applications, EuroComb'09, Bordeaux, France, September 7--11, 2009. Amsterdam: Elsevier. Electronic Notes in Discrete Mathematics 34, 213-217 (2009)."
+   },
+   "states": [
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Coloring a set of touching strings"
+   },
+   "year": "2009",
+   "zbmath_url": "https://zbmath.org/6215154"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "conlon.david"
+      ],
+      "name": "Conlon, David"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "lim.jeck"
+      ],
+      "name": "Lim, Jeck"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2023-12-21T16:35:05Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "kolbl.max",
+      "reviewer_id": "17880",
+      "name": "Max K\u00f6lbl",
+      "sign": "Max K\u00f6lbl (\u014csaka)"
+     },
+     "text": "A set \\(S\\subset\\mathbb{R}^d\\) is in \\textit{general position} if for every \\(k<d\\) and every affine \\(k\\)-dimensional subspace \\(V\\), \\(\\lvert S\\cap V\\rvert\\leq k+1\\).\n\nThe famous ``happy ending problem'' states that for any set of five points in general position, there exists a subset of four points that form the vertices of a convex quadrilateral. Erd\u0151s and Szekeres generalised this in [\\textit{P. Erd\u0151s} and \\textit{G. Szekeres}, Compos. Math. 2, 463--470 (1935; Zbl 0012.27010)] to say that for any integer \\(\\ell\\) there exists an integer \\(n\\geq\\ell\\) such that any set \\(S\\) of \\(n\\) points in general position contains a subset of \\(\\ell\\) points that form the vertices of a convex \\(\\ell\\)-gon. The analogue of this statement in higher dimensions follows as a corollary.\n\nA variant of this problem, later introduced by \\textit{P. Erd\u0151s} [Aust. Math. Soc. Gaz. 5, 52--54 (1978; Zbl 0417.52002); Colloq. Math. Soc. Janos Bolyai 25, 137--148 (1981; Zbl 0472.10001)], asks if the statement remains true if we further require the convex polytope with \\(\\ell\\) vertices not to include any point of \\(S\\) in its interior. In other words, if the polytope is an \\textit{\\(\\ell\\)-hole}. In the plane, this was disproven by \\textit{J. D. Horton} [Can. Math. Bull. 26, 482--484 (1983; Zbl 0521.52010)] for \\(\\ell\\geq 7\\) using a construction which has come to be referred to as \\textit{Horton sets}. In higher dimensions, \\textit{P. Valtr} [Discrete Math. 108, No. 1--3, 115--124 (1992; Zbl 0766.52003)] used Horton-type sets to find an upper bound for \\(\\ell\\) which depends on the dimension. The present paper builds on these ideas.\n\nThe question the authors ask concerns sets in general position with large holes. Given such a set, is it always possible to find supersets in general position with no large holes? In Theorem 1.1 the authors answer their question in the affirmative: For every dimension \\(d\\), they give an integer \\(C_d = d^{O(d^3)}\\) such that any set in general position can be extended to a set in general position with no \\(C_d\\)-holes.\n\nThe authors prove this theorem using Theorem 1.2 which states that in any dimension \\(d\\geq 2\\), and for any \\(n\\geq 1\\) and any \\(\\varepsilon>0\\), there exists an integer \\(C_d^\\prime=d^{O(d^3)}\\) and a map \\(f\\colon [n]^d\\to\\mathbb{R}^d\\) with \\(\\|x-f(x)\\| <\\varepsilon\\) for all \\(x\\in [n]^d\\) such that \\(f([n]^d)\\) has no \\(C_d^\\prime\\)-holes.\n\nThe paper consists of a total of four sections. The proof of the second theorem splits into two parts, the planar case which is treated in Section 2, and the non-planar case in Section 3. This structuring is motivated by the fact that the planar case is already implicity treated in [\\textit{P. Valtr}, Discrete Comput. Geom. 7, No. 2, 135--152 (1992; Zbl 0748.52005)]. However, as a side effect, it leads to a nice flow of the paper where the Section 2 helps the reader build intuition and Section 3 emerges as a natural extension.\n\nThe last section includes a corollary of the second theorem about the \\textit{spread} of a set \\(S\\), which is defined as the maximum distance between any pair of points divided by the minimum distance of any pair of points in \\(S\\).",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 7781571,
+   "identifier": "1534.52016",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s00454-023-00561-6",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s00454-023-00561-6"
+    },
+    {
+     "identifier": "2108.07087",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2108.07087"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.1007/BF02187725",
+     "position": "1",
+     "text": "Alon, N.; Katchalski, M.; Pulleyblank, WR, The maximum size of a convex polygon in a restricted set of points in the plane, Discrete Comput. Geom., 4, 3, 245-251 (1989)",
+     "zbmath": {
+      "author_codes": [
+       "alon.noga",
+       "katchalski.meir",
+       "pulleyblank.william-r"
+      ],
+      "document_id": 4186514,
+      "msc": [
+       "52A37",
+       "52A40",
+       "52A10",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": "10.1016/j.comgeo.2012.11.004",
+     "position": "2",
+     "text": "Balogh, J.; Gonz\u00e1lez-Aguilar, H.; Salazar, G., Large convex holes in random point sets, Comput. Geom., 46, 6, 725-733 (2013)",
+     "zbmath": {
+      "author_codes": [
+       "salazar.gelasio",
+       "balogh.jozsef",
+       "gonzalez-aguilar.hernan"
+      ],
+      "document_id": 6159339,
+      "msc": [
+       "52A22",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1378,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Bukh, B., Chao, T.-W.: Digital almost nets. Electron. J. Combin. 29(4), # P4.27 (2022)",
+     "zbmath": {
+      "author_codes": [
+       "bukh.boris",
+       "chao.ting-wei"
+      ],
+      "document_id": 7640586,
+      "msc": [
+       "11K38",
+       "52C10",
+       "65D99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2064,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "10.1017/S0963548321000195",
+     "position": "4",
+     "text": "Bukh, B.; Chao, T-W; Holzman, R., On convex holes in \\(d\\)-dimensional point sets, Combin. Probab. Comput., 31, 1, 101-108 (2022)",
+     "zbmath": {
+      "author_codes": [
+       "bukh.boris",
+       "chao.ting-wei",
+       "holzman.ron"
+      ],
+      "document_id": 7671049,
+      "msc": [
+       "52C10",
+       "11K38"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1952,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Erd\u0151s, P., Some more problems on elementary geometry, Austral. Math. Soc. Gaz., 5, 2, 52-54 (1978)",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3649571,
+      "msc": [
+       "52A10",
+       "52B99",
+       "52A40",
+       "00A07"
+      ],
+      "prefix": "Zbl",
+      "series_id": 346,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Erd\u0151s, P.: Some applications of graph theory and combinatorial methods to number theory and geometry. In: Algebraic Methods in Graph Theory (Szeged 1978), Vol. 1. Colloquia Mathematica Societatis J\u00e1nos Bolyai, vol. 25, pp. 137-148. North-Holland, Amsterdam (1981)",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3739641,
+      "msc": [
+       "11-02",
+       "51-02",
+       "11B83",
+       "11B75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Erd\u00f6s, P.; Szekeres, G., A combinatorial problem in geometry, Compos. Math., 2, 463-470 (1935)",
+     "zbmath": {
+      "author_codes": [
+       "szekeres.george",
+       "erdos.pal"
+      ],
+      "document_id": 2533129,
+      "msc": [
+       "51-XX"
+      ],
+      "prefix": "JFM",
+      "series_id": 393,
+      "year": "1935"
+     }
+    },
+    {
+     "doi": "10.1007/s00454-007-9018-x",
+     "position": "8",
+     "text": "Gerken, T., Empty convex hexagons in planar point sets, Discrete Comput. Geom., 39, 1-3, 239-272 (2008)",
+     "zbmath": {
+      "author_codes": [
+       "gerken.tobias"
+      ],
+      "document_id": 5264617,
+      "msc": [
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Harborth, H., Konvexe F\u00fcnfecke in ebenen Punktmengen, Elem. Math., 33, 5, 116-118 (1978)",
+     "zbmath": {
+      "author_codes": [
+       "harborth.heiko"
+      ],
+      "document_id": 3617088,
+      "msc": [
+       "52A37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1572,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": "10.4153/CMB-1983-077-8",
+     "position": "10",
+     "text": "Horton, JD, Sets with no empty convex \\(7\\)-gons, Can. Math. Bull., 26, 4, 482-484 (1983)",
+     "zbmath": {
+      "author_codes": [
+       "horton.joseph-d"
+      ],
+      "document_id": 3824603,
+      "msc": [
+       "52A40",
+       "52A10",
+       "52C17",
+       "52A37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 384,
+      "year": "1983"
+     }
+    },
+    {
+     "doi": "10.1007/s00454-007-1343-6",
+     "position": "11",
+     "text": "Nicol\u00e1s, CM, The empty hexagon theorem, Discrete Comput. Geom., 38, 2, 389-397 (2007)",
+     "zbmath": {
+      "author_codes": [
+       "nicolas.carlos-m"
+      ],
+      "document_id": 5221880,
+      "msc": [
+       "52C10",
+       "52A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2007"
+     }
+    },
+    {
+     "doi": "10.1016/0012-365X(92)90665-3",
+     "position": "12",
+     "text": "Valtr, P., Sets in \\(\\mathbb{R}^d\\) with no large empty convex subsets, Discrete Math., 108, 1-3, 115-124 (1992)",
+     "zbmath": {
+      "author_codes": [
+       "valtr.pavel"
+      ],
+      "document_id": 97492,
+      "msc": [
+       "52A20",
+       "52B05",
+       "05B99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": "10.1007/BF02187831",
+     "position": "13",
+     "text": "Valtr, P., Convex independent sets and \\(7\\)-holes in restricted planar point sets, Discrete Comput. Geom., 7, 2, 135-152 (1992)",
+     "zbmath": {
+      "author_codes": [
+       "valtr.pavel"
+      ],
+      "document_id": 34169,
+      "msc": [
+       "52A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "1992"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "1551-1570",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0179-5376",
+        "type": "print"
+       },
+       {
+        "number": "1432-0444",
+        "type": "electronic"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 506409,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer US, New York, NY",
+      "series_id": 1119,
+      "short_title": "Discrete Comput. Geom.",
+      "title": "Discrete \\& Computational Geometry",
+      "volume": "70",
+      "year": "2023"
+     }
+    ],
+    "source": "Discrete Comput. Geom. 70, No. 4, 1551-1570 (2023)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Fixing a hole"
+   },
+   "year": "2023",
+   "zbmath_url": "https://zbmath.org/7781571"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "malen.greg"
+      ],
+      "name": "Malen, Greg"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2015-10-20T18:01:28Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: We examine the measurable chromatic number of distance colorings on the surface of 2-dimensional spheres of varying radii, showing in particular that similar arguments to those used to raise lower bounds in the plane work for all but a countable set of radii. Furthermore, we show that measurable chromatic number as a function of the radius, or more generally the curvature, is not monotonic.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 6496927,
+   "identifier": "1345.05031",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "1412.2091",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1412.2091"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "172-180",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1065-7371",
+        "type": "print"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 343013,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "University of Colorado and Center for Excellence in Mathematical Education, Colorado Springs, CO",
+      "series_id": 2138,
+      "short_title": "Geombinatorics",
+      "title": "Geombinatorics",
+      "volume": "24",
+      "year": "2015"
+     }
+    ],
+    "source": "Geombinatorics 24, No. 4, 172-180 (2015)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Measurable colorings of \\(\\mathbb{S}^2_r\\)"
+   },
+   "year": "2015",
+   "zbmath_url": "https://zbmath.org/6496927"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "decorte.evan"
+      ],
+      "name": "DeCorte, Evan"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "golubev.konstantin"
+      ],
+      "name": "Golubev, Konstantin"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2019-08-07T08:49:59Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 7089398,
+   "identifier": "1417.05063",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s00454-018-0027-8",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s00454-018-0027-8"
+    },
+    {
+     "identifier": "1708.01081",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1708.01081"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "42B10",
+     "scheme": "msc2020",
+     "text": "Fourier and Fourier-Stieltjes transforms and other transforms of Fourier type"
+    },
+    {
+     "code": "05C63",
+     "scheme": "msc2020",
+     "text": "Infinite graphs"
+    },
+    {
+     "code": "51M10",
+     "scheme": "msc2020",
+     "text": "Hyperbolic and elliptic geometries (general) and generalizations"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.1007/s11856-014-1070-7",
+     "position": "1",
+     "text": "Bachoc, C., DeCorte, E., de Oliveira, F., Vallentin, F.: Spectral bounds for the independence ratio and chromatic number of an operator. Isr. J. Math. 202, 227-254 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "decorte.evan",
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6361333,
+      "msc": [
+       "05C15",
+       "05C70",
+       "05C85",
+       "05C63"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "10.1007/s00039-009-0013-7",
+     "position": "2",
+     "text": "Bachoc, C., Nebe, G., de Oliveira, F., Vallentin, F.: Lower bounds for measurable chromatic numbers. Geom. Funct. Anal. 19(3), 645-661 (2009)",
+     "zbmath": {
+      "author_codes": [
+       "nebe.gabriele",
+       "bachoc.christine",
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 5652303,
+      "msc": [
+       "05C15",
+       "05C12",
+       "90C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1418,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": "10.1007/s00454-015-9668-z",
+     "position": "3",
+     "text": "Bachoc, C., Passuello, A., Thiery, A.: The density of sets avoiding distance 1 in Euclidean space. Discrete Comput. Geom. 53(4), 783-808 (2015)",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "passuello.alberto",
+       "thiery.alain"
+      ],
+      "document_id": 6450887,
+      "msc": [
+       "52C10",
+       "90C05",
+       "90C27",
+       "05C69"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "DeCorte, E.: The eigenvalue method for extremal problems on infinite vertex-transitive graphs. PhD thesis, TU Delft, Delft (2015)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1093/imrn/rnv319",
+     "position": "5",
+     "text": "DeCorte, E., Pikhurko, O.: Spherical sets avoiding a prescribed set of angles. Int. Math. Res. Not. 2016(20), 6095-6117 (2015)",
+     "zbmath": {
+      "author_codes": [
+       "pikhurko.oleg",
+       "decorte.evan"
+      ],
+      "document_id": 6992371,
+      "msc": [
+       "28A75",
+       "33C45",
+       "33C55",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1388,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "10.1016/0097-3165(81)90014-5",
+     "position": "6",
+     "text": "Falconer, K.: The realization of distances in measurable subsets covering \\[\\mathbb{R}^nRn\\]. J. Comb. Theory Ser. A 31(2), 184-189 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3735836,
+      "msc": [
+       "05B30",
+       "05C15",
+       "28A05",
+       "51M20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "10.1007/BF02579457",
+     "position": "7",
+     "text": "Frankl, P., Wilson, R.: Intersection theorems with geometric consequences. Combinatorica 1(4), 357-368 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter",
+       "wilson.richard-m"
+      ],
+      "document_id": 3784938,
+      "msc": [
+       "05C65",
+       "05A05",
+       "05C15",
+       "05C35",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "de Grey, A.: The chromatic number of the plane is at least 5 (2018). arXiv:1804.02385",
+     "zbmath": {
+      "author_codes": [
+       "de-grey.aubrey-d-n-j"
+      ],
+      "document_id": 6984330,
+      "msc": [
+       "05C15",
+       "05C55",
+       "05D10",
+       "05C12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "10.1090/surv/083",
+     "position": "9",
+     "text": "Helgason, S.: Groups and Geometric Analysis: Integral Geometry, Invariant Differential Operators, and Spherical Functions. Mathematical Surveys and Monographs, vol. 83. American Mathematical Society, Providence (2000)",
+     "zbmath": {
+      "author_codes": [
+       "helgason.sigurdur"
+      ],
+      "document_id": 1544060,
+      "msc": [
+       "43A85",
+       "43A90",
+       "22-02",
+       "53-02",
+       "53C65",
+       "22E46",
+       "53C35",
+       "58C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4094,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Hoffman, A.; Harris, B. (ed.), On eigenvalues and colorings of graphs, 79-91 (1970), New York",
+     "zbmath": {
+      "author_codes": [
+       "hoffman.alan-j"
+      ],
+      "document_id": 3349875,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Katok, S.: Fuchsian Groups. Chicago Lectures in Mathematics. University of Chicago Press, Chicago (1992)",
+     "zbmath": {
+      "author_codes": [
+       "katok.svetlana-r"
+      ],
+      "document_id": 54069,
+      "msc": [
+       "30-01",
+       "30F35",
+       "20H10",
+       "20-01"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1992"
+     }
+    },
+    {
+     "doi": "10.1007/s00454-015-9751-5",
+     "position": "12",
+     "text": "Keleti, T., Matolcsi, M., de Oliveira, F., Ruzsa, I.: Better bounds for planar sets avoiding unit distances. Discrete Comput. Geom. 55(3), 642-661 (2016)",
+     "zbmath": {
+      "author_codes": [
+       "keleti.tamas",
+       "ruzsa.imre-z",
+       "matolcsi.mate",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6579865,
+      "msc": [
+       "05C10",
+       "42B05",
+       "52C10",
+       "52C17",
+       "90C05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Kloeckner, B.: Coloring distance graphs: a few answers and many questions. Geombinatorics 24(3), 117-134 (2015)",
+     "zbmath": {
+      "author_codes": [
+       "kloeckner.benoit-r"
+      ],
+      "document_id": 6520322,
+      "msc": [
+       "05C15",
+       "05C12",
+       "05C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2138,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.2009.58.3588",
+     "position": "14",
+     "text": "Liu, C., Peng, L.: Generalized Helgason-Fourier transforms associated to variants of the Laplace-Beltrami operators on the unit ball in \\[\\mathbb{R}^nRn\\]. Indiana Univ. Math. J. 58(3), 1457-1491 (2009)",
+     "zbmath": {
+      "author_codes": [
+       "liu.congwen",
+       "peng.lizhong"
+      ],
+      "document_id": 5592607,
+      "msc": [
+       "43A85",
+       "42B10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": "10.1109/TIT.1979.1055985",
+     "position": "15",
+     "text": "Lov\u00e1sz, L.: On the Shannon capacity of a graph. IEEE Trans. Inform. Theory 25(1), 1-7 (1979)",
+     "zbmath": {
+      "author_codes": [
+       "lovasz.laszlo"
+      ],
+      "document_id": 3614658,
+      "msc": [
+       "05C99",
+       "94A17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 90,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "de Oliveira, F.M.: New bounds for geometric packing and coloring via harmonic analysis and optimization. PhD thesis, CWI, Amsterdam (2009)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "de Oliveira, F., Vallentin, F.: Fourier analysis, linear programming, and densities of distance avoiding sets in \\[\\mathbb{R}^nRn\\]. J. Eur. Math. Soc. (JEMS) 12(6), 1417-1428 (2010)",
+     "zbmath": {
+      "author_codes": [
+       "de-oliveira-filho.fernando-mario",
+       "vallentin.frank"
+      ],
+      "document_id": 5815169,
+      "msc": [
+       "90C05",
+       "42B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2579,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": "10.1007/s10711-012-9814-1",
+     "position": "18",
+     "text": "de Oliveira, F., Vallentin, F.: A quantitative version of Steinhaus\u2019 theorem for compact, connected, rank-one symmetric spaces. Geom. Dedicata 167(1), 295-307 (2013)",
+     "zbmath": {
+      "author_codes": [
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6242085,
+      "msc": [
+       "53C35",
+       "28C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 434,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Parlier, H., Petit, C.: Chromatic numbers for the hyperbolic plane and discrete analogs (2017). arXiv:1701.08648",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1070/RM2000v055n02ABEH000281",
+     "position": "20",
+     "text": "Raigorodskii, A.: On the chromatic number of a space. Russ. Math. Surv. 55(2), 351-352 (2000)",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1535387,
+      "msc": [
+       "05C15",
+       "51M99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Soifer, A.: The Hadwiger-Nelson problem. In: Nash Jr., J.F., Rassias, M.Th. (eds.) Open Problems in Mathematics, pp. 439-457. Springer, Cham (2016)",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 6640557,
+      "msc": [
+       "05C15",
+       "05C10",
+       "05C62",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "10.1080/00029890.1974.11993744",
+     "position": "22",
+     "text": "Witsenhausen, H.: Spherical sets without orthogonal point pairs. Am. Math. Mon. 81(10), 1101-1102 (1974)",
+     "zbmath": {
+      "author_codes": [
+       "witsenhausen.hans-s"
+      ],
+      "document_id": 3466143,
+      "msc": [
+       "52A40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1974"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "481-496",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0179-5376",
+        "type": "print"
+       },
+       {
+        "number": "1432-0444",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 436349,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer US, New York, NY",
+      "series_id": 1119,
+      "short_title": "Discrete Comput. Geom.",
+      "title": "Discrete \\& Computational Geometry",
+      "volume": "62",
+      "year": "2019"
+     }
+    ],
+    "source": "Discrete Comput. Geom. 62, No. 2, 481-496 (2019)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Lower bounds for the measurable chromatic number of the hyperbolic plane"
+   },
+   "year": "2019",
+   "zbmath_url": "https://zbmath.org/7089398"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "tolmachev.alexander"
+      ],
+      "name": "Tolmachev, Alexander"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2026-03-23T13:33:26Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "szekely.laszlo-a",
+      "reviewer_id": "5891",
+      "name": "L\u00e1szl\u00f3 A. Sz\u00e9kely",
+      "sign": "L\u00e1szl\u00f3 A. Sz\u00e9kely (Columbia)"
+     },
+     "text": "The paper uses experimental computational techniques to find doubly periodic Lebesgue measurable sets in the plane, such that the set has no two points at unit distance from each other, and the set has large upper density in the plane. The author did not find anything better than the well-known construction of \\textit{H. Croft} [``Incidence incidents'', Eureka 30, 22--26 (1967)].",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 8175692,
+   "identifier": null,
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1142/S1793830925500314",
+     "type": "doi",
+     "url": "https://doi.org/10.1142/S1793830925500314"
+    },
+    {
+     "identifier": "2411.13248",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2411.13248"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "csiszarik.adrian",
+       "matolcsi.mate",
+       "zsamboki.pal",
+       "varga.daniel",
+       "ambrus.gergely"
+      ],
+      "document_id": 7915917,
+      "msc": [
+       "42B05",
+       "52C10",
+       "52C17",
+       "90C05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1746,
+      "year": "2024"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "ambrus.gergely",
+       "matolcsi.mate"
+      ],
+      "document_id": 7526466,
+      "msc": [
+       "52C10",
+       "52C17",
+       "42B05",
+       "90C05",
+       "51K99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3907247,
+      "msc": [
+       "51D20",
+       "52A37",
+       "52A40",
+       "05A99",
+       "00A07"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "johnson.david-stifler",
+       "garey.michael-r"
+      ],
+      "document_id": 3591380,
+      "msc": [
+       "68Q25",
+       "68W99",
+       "68N01",
+       "90B35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 477,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lamm.sebastian",
+       "schulz.christian",
+       "strash.darren",
+       "werneck.renato-f",
+       "sanders.peter"
+      ],
+      "document_id": 6771153,
+      "msc": [
+       "90C27",
+       "90C59"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2199,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "lamm.sebastian",
+       "schulz.christian",
+       "strash.darren",
+       "williger.robert",
+       "zhang.huashuo"
+      ],
+      "document_id": 7104646,
+      "msc": [
+       "68R10",
+       "05C69",
+       "68W05",
+       "90C27",
+       "90C59"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2019"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 6640557,
+      "msc": [
+       "05C15",
+       "05C10",
+       "05C62",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "Article ID 2550031, 20 p.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1793-8309",
+        "type": "print"
+       },
+       {
+        "number": "1793-8317",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 540488,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "World Scientific, Singapore",
+      "series_id": 6673,
+      "short_title": "Discrete Math. Algorithms Appl.",
+      "title": "Discrete Mathematics, Algorithms and Applications",
+      "volume": "18",
+      "year": "2025"
+     }
+    ],
+    "source": "Discrete Math. Algorithms Appl. 18, No. 2, Article ID 2550031, 20 p. (2025)"
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On lower bounds of the density of planar periodic sets without unit distances"
+   },
+   "year": "2025",
+   "zbmath_url": "https://zbmath.org/8175692"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "townsend.s-p"
+      ],
+      "name": "Townsend, S. P."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3717347,
+   "identifier": "0458.05032",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/0097-3165(81)90046-7",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/0097-3165(81)90046-7"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "rothschild.bruce-l",
+       "graham.ronald-l",
+       "straus.ernst-g",
+       "montgomery.peter-l",
+       "erdos.pal",
+       "spencer.joel-h"
+      ],
+      "document_id": 3433883,
+      "msc": [
+       "05A05",
+       "05A17",
+       "05B30",
+       "05-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "klee.victor"
+      ],
+      "document_id": 3651318,
+      "msc": [
+       "51M05",
+       "51M20",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 253,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "woodall.douglas-r"
+      ],
+      "document_id": 3396693,
+      "msc": [
+       "51M20",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "114-115",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0097-3165",
+        "type": "print"
+       },
+       {
+        "number": "1096-0899",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 145267,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (Academic Press), San Diego, CA",
+      "series_id": 479,
+      "short_title": "J. Comb. Theory, Ser. A",
+      "title": "Journal of Combinatorial Theory. Series A",
+      "volume": "30",
+      "year": "1981"
+     }
+    ],
+    "source": "J. Comb. Theory, Ser. A 30, 114-115 (1981)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Every 5-coloured map in the plane contains a monochrome unit"
+   },
+   "year": "1981",
+   "zbmath_url": "https://zbmath.org/3717347"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 17,
+  "nr_request_results": 17,
+  "query_execution_time_in_seconds": 0.4382290840148926,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:07:38Z"
+ }
+}

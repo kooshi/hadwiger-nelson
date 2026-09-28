@@ -1,0 +1,130 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "furstenberg.hillel"
+      ],
+      "name": "Furstenberg, Hillel"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "katznelson.yitzhak"
+      ],
+      "name": "Katznelson, Yitzchak"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "weiss.benjamin"
+      ],
+      "name": "Weiss, Benjamin"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "a",
+    "description": "serial article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "German",
+     "reviewer": {
+      "author_code": "strambach.karl",
+      "reviewer_id": "1674",
+      "name": "Karl Strambach",
+      "sign": "Karl Strambach (Erlangen)"
+     },
+     "text": "Es sei \\(S\\) ein Element in der Menge aller Quadrate der euklidischen Ebene \\(\\mathbb R^2\\), und \\(\\ell(S)\\) sei die L\u00e4nge einer Seite von \\(S\\). Ist \\(E\\) eine me\u00dfbare Menge von \\(\\mathbb R^2\\), so hat \\(E\\) eine positive obere Dichte, wenn \\(\\lim\\sup_{\\ell(S)\\to \\infty} m(S\\cap E)/m(S)>0\\) gilt; dabei ist \\(m(S\\cap E)\\) bzw. \\(m(S)\\) das Ma\u00df der jeweiligen Mengen. Die Autoren beweisen: \n\nEs sei \\(E\\subset \\mathbb R^2\\) eine Menge positiver oberer Dichte. Dann existiert eine reelle Zahl \\(\\ell_ 0\\), so da\u00df f\u00fcr jede reelle Zahl \\(\\ell>\\ell_0\\) in \\(E\\) ein Paar von Punkten \\(x,y\\) mit \\(\\| x-y\\| =\\ell\\) existiert. Ist \\(E_\\delta\\) die Menge der Punkte von \\(\\mathbb R^2\\), die einen Abstand \\(<\\delta\\) von \\(E\\) haben, so gibt es zu je zwei Punkten \\(u,v\\in \\mathbb R^2\\) eine reelle Zahl \\(\\ell_0\\), so da\u00df f\u00fcr jedes \\(\\ell>\\ell_0\\) und jede reelle Zahl \\(\\delta>0\\) in \\(E_\\delta\\) ein Dreieck bildendes Tripel \\(\\{x,y,z\\}\\) von Punkten existiert, welches zum Dreieck mit den Ecken \\(\\{0,\\ell u,\\ell v\\}\\) kongruent ist. \n\nIn den Beweisen der Autoren spielen die Ergodens\u00e4tze eine wichtige Rolle. Mit anderen Methoden konnten die Ergebnisse (nach deren Ank\u00fcndigung durch die Verff. dieser Arbeit) auch von \\textit{J. Bourgain} [Isr. J. Math. 54, 307--316 (1986; Zbl 0609.10043)] sowie von \\textit{K. J. Falconer} und \\textit{J. M. Marstrand} [Bull. Lond. Math. Soc. 18, 471--474 (1986; Zbl 0599.28008)] bewiesen werden.\n\nFor the entire collection see Zbl 0715.00011.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 16111,
+   "identifier": "0738.28013",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "28D05",
+     "scheme": "msc2020",
+     "text": "Measure-preserving transformations"
+    },
+    {
+     "code": "11B05",
+     "scheme": "msc2020",
+     "text": "Density, gaps, topology"
+    },
+    {
+     "code": "05D10",
+     "scheme": "msc2020",
+     "text": "Ramsey theory"
+    },
+    {
+     "code": "37A05",
+     "scheme": "msc2020",
+     "text": "Dynamical aspects of measure-preserving transformations"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 16104,
+      "isbn": [],
+      "publisher": null,
+      "year": null
+     }
+    ],
+    "pages": "184-198",
+    "series": [],
+    "source": "Mathematics of Ramsey theory, Coll. Pap. Symp. Graph Theory, Prague/Czech., Algorithms Comb. 5, 184-198 (1990)."
+   },
+   "states": [
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Ergodic theory and configurations in sets of positive density"
+   },
+   "year": "1990",
+   "zbmath_url": "https://zbmath.org/16111"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.054773807525634766,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:07:20Z"
+ }
+}

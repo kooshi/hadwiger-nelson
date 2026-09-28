@@ -1,0 +1,285 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "bourgain.jean"
+      ],
+      "name": "Bourgain, J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "volkmann.bodo",
+      "reviewer_id": "1839",
+      "name": "Bodo Volkmann",
+      "sign": "B. Volkmann (Stuttgart)"
+     },
+     "text": "The following theorem is proved: For any set \\(A\\subseteq \\mathbb R^k\\) with upper metric density \\(\\delta (A)>0\\) and any set \\(V=\\{x_1,\\dots,x_k\\}\\subseteq \\mathbb R^k\\) spanning a nondegenerate \\((k-1)\\)-dimensional simplex, there exists a number \\(\\lambda_0\\) such that \\(A\\) contains an isometric image of \\(\\lambda V\\) for any \\(\\lambda >\\lambda_0\\). The case \\(k=2\\) had been proved by Y. Katznelson and B. Weiss (preprint) [see also H. Furstenberg, Y. Katznelson and B. Weiss, Mathematics of Ramsey theory, Coll. Pap. Symp. Graph Theory, Prague/Czech., Algorithms Comb. 5, 184--198 (1990; Zbl 0738.28013)]. \n\n\nIn an appendix the author establishes a result on double integrals over compact abelian groups from which \\textit{K. F. Roth}'s celebrated pre-Szemer\u00e9di theorem on arithmetic progressions follows [J. Lond. Math. Soc. 28, 104--109 (1953; Zbl 0050.04002)].",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 3985345,
+   "identifier": "0609.10043",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/BF02764959",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/BF02764959"
+    }
+   ],
+   "msc": [
+    {
+     "code": "11B05",
+     "scheme": "msc2020",
+     "text": "Density, gaps, topology"
+    },
+    {
+     "code": "11B25",
+     "scheme": "msc2020",
+     "text": "Arithmetic progressions"
+    },
+    {
+     "code": "43A25",
+     "scheme": "msc2020",
+     "text": "Fourier and Fourier-Stieltjes transforms on locally compact and other abelian groups"
+    },
+    {
+     "code": "28C10",
+     "scheme": "msc2020",
+     "text": "Set functions and measures on topological groups or semigroups, Haar measures, invariant measures"
+    },
+    {
+     "code": "11B83",
+     "scheme": "msc2020",
+     "text": "Special sequences and polynomials"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "J. Bourgain,On the spherical maximal function in the plane, preprint, IHES.",
+     "zbmath": {
+      "author_codes": [
+       "bourgain.jean"
+      ],
+      "document_id": 3983824,
+      "msc": [
+       "42B25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Furstenberg, H., Ergodic behavior of diagonal measures and a theorem of Szemer\u00e9di on arithmetic progressions, J. Analyse Math., 31, 204-256 (1977)",
+     "zbmath": {
+      "author_codes": [
+       "furstenberg.hillel"
+      ],
+      "document_id": 3541090,
+      "msc": [
+       "28D05",
+       "47A35",
+       "54H20",
+       "11B83"
+      ],
+      "prefix": "Zbl",
+      "series_id": 123,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": "10.1007/BF02790016",
+     "position": "3",
+     "text": "Furstenberg, H.; Katznelson, Y., An ergodic Szemer\u00e9di theorem for commuting transformations, J. Analyse Math., 34, 275-291 (1978)",
+     "zbmath": {
+      "author_codes": [
+       "furstenberg.hillel",
+       "katznelson.yitzhak"
+      ],
+      "document_id": 3663470,
+      "msc": [
+       "28D05",
+       "37A44",
+       "37B20",
+       "11B25",
+       "11B30",
+       "11B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 123,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Y. Katznelson and B. Weiss, preprint.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1112/jlms/s1-28.1.104",
+     "position": "5",
+     "text": "Roth, K., On certain sets of integers, J. London Math. Soc., 28, 104-109 (1953)",
+     "zbmath": {
+      "author_codes": [
+       "roth.klaus-f"
+      ],
+      "document_id": 3078606,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3410,
+      "year": "1953"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Salem, R., Oeuvres Mathematiques (1967), Paris: Hermann, Paris",
+     "zbmath": {
+      "author_codes": [
+       "salem.raphael"
+      ],
+      "document_id": 3233817,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1967"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Szemer\u00e9di, E., On sets of integers containing no k elements in arithmetic progression, Acta Arith., 27, 199-245 (1975)",
+     "zbmath": {
+      "author_codes": [
+       "szemeredi.endre"
+      ],
+      "document_id": 3473791,
+      "msc": [
+       "11B25",
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 278,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "S\u00e9minaire d\u2019Analyse Fonctionnelle, Ecole Polytechnique, 1978-79, Exp. 9.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "307-316",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0021-2172",
+        "type": "print"
+       },
+       {
+        "number": "1565-8511",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 152278,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Berlin/Heidelberg; Hebrew University Magnes Press, Jerusalem",
+      "series_id": 115,
+      "short_title": "Isr. J. Math.",
+      "title": "Israel Journal of Mathematics",
+      "volume": "54",
+      "year": "1986"
+     }
+    ],
+    "source": "Isr. J. Math. 54, 307-316 (1986)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "A Szemer\u00e9di type theorem for sets of positive density in \\(\\mathbb R^k\\)"
+   },
+   "year": "1986",
+   "zbmath_url": "https://zbmath.org/3985345"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 1,
+  "nr_request_results": 1,
+  "query_execution_time_in_seconds": 0.06014204025268555,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:14:04Z"
+ }
+}

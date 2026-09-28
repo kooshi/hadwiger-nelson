@@ -1,0 +1,1189 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "Morgan, Frank"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2016-04-19T12:59:57Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "masiello.antonio",
+      "reviewer_id": "7289",
+      "name": "Antonio Masiello",
+      "sign": "Antonio Masiello (Bari)"
+     },
+     "text": "This is a review paper on soap bubbles and minimal surfaces written by one of the leading experts on the topic. The paper is addressed to a wide audience, not only scholars. It contains several images describing some kinds of soap bubbles and in particular one image shows how human cells look and act like soap bubbles.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 6570600,
+   "identifier": "1358.53015",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "53A10",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces in differential geometry, surfaces with prescribed mean curvature"
+    },
+    {
+     "code": "49Q05",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces and optimization"
+    },
+    {
+     "code": "00A66",
+     "scheme": "msc2020",
+     "text": "Mathematics and visual arts"
+    },
+    {
+     "code": "65D18",
+     "scheme": "msc2020",
+     "text": "Numerical aspects of computer graphics, image analysis, and computational geometry"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "32-36",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1027-488X",
+        "type": "print"
+       }
+      ],
+      "issue": null,
+      "issue_id": 348517,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "European Mathematical Society (EMS) Publishing House, Zurich",
+      "series_id": 2246,
+      "short_title": "Eur. Math. Soc. Newsl.",
+      "title": "European Mathematical Society Newsletter",
+      "volume": "97",
+      "year": "2015"
+     }
+    ],
+    "source": "Eur. Math. Soc. Newsl. 97, 32-36 (2015)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Soap bubbles and mathematics"
+   },
+   "year": "2015",
+   "zbmath_url": "https://zbmath.org/6570600"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "Morgan, Frank"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "polthier.konrad",
+      "reviewer_id": "7567",
+      "name": "Konrad Polthier",
+      "sign": "K.Polthier (Berlin)"
+     },
+     "text": "The general soap bubble problem looks for a least-area way to enclose and separate a number of given volumes in \\(\\mathbb{R}^ n\\) or in a smooth compact Riemannian manifold. Existence and regularity were treated by F. Almgren \\((n \\geq 3)\\) and J. Taylor \\((n = 3)\\). The present paper proves the corresponding result in dimension 2: the solutions consist of constant- curvature arcs meeting in threes at 120 degrees. If the combinatorial type is described, too, then the arcs may bump up against each other.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 714671,
+   "identifier": "0820.53002",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.2140/pjm.1994.165.347",
+     "type": "doi",
+     "url": "https://doi.org/10.2140/pjm.1994.165.347"
+    },
+    {
+     "identifier": "A307234",
+     "type": "oeis",
+     "url": "https://oeis.org/A307234"
+    }
+   ],
+   "msc": [
+    {
+     "code": "53A04",
+     "scheme": "msc2020",
+     "text": "Curves in Euclidean and related spaces"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "347-361",
+    "series": [
+     {
+      "acronym": "PJM",
+      "issn": [
+       {
+        "number": "1945-5844",
+        "type": "print"
+       },
+       {
+        "number": "0030-8730",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 23532,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Mathematical Sciences Publishers (MSP), Berkeley, CA; Pacific Journal of Mathematics c/o University of California, Berkeley, CA",
+      "series_id": 615,
+      "short_title": "Pac. J. Math.",
+      "title": "Pacific Journal of Mathematics",
+      "volume": "165",
+      "year": "1994"
+     }
+    ],
+    "source": "Pac. J. Math. 165, No. 2, 347-361 (1994)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Soap bubbles in \\(\\mathbb{R}^ 2\\) and in surfaces"
+   },
+   "year": "1994",
+   "zbmath_url": "https://zbmath.org/714671"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "emmer.michele",
+      "reviewer_id": "5172",
+      "name": "Michele Emmer",
+      "sign": "M.Emmer (Roma)"
+     },
+     "text": "The paper is a survey of several open questions in the geometry of soap bubbles. In particular the author considers the problem: do soap bubble clusters always find the absolute least area shape? The answer is: not always. Several figures illustrate open questions like: for area- minimizing clusters, it is an open question whether each separate region is connected. It is an open question too whether an area-minimizing cluster may incidentally trap inside ``empy chambers'' which do not contribute to the prescribed volume. The planar soap bubble problem is considered: find the least perimeter way to enclose and separate \\(n\\) given areas in the plane. All problems are illustrated by figures and the results are not proved in the paper but references are given. The authors point out the importance of undergraduate research groups in mathematics quoting results obtained by the Williams College SMALL undergraduate research project in the area of geometry of soap bubbles.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 604974,
+   "identifier": "0814.53002",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.2307/2975627",
+     "type": "doi",
+     "url": "https://doi.org/10.2307/2975627"
+    }
+   ],
+   "msc": [
+    {
+     "code": "53-02",
+     "scheme": "msc2020",
+     "text": "Research exposition (monographs, survey articles) pertaining to differential geometry"
+    },
+    {
+     "code": "53A10",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces in differential geometry, surfaces with prescribed mean curvature"
+    },
+    {
+     "code": "49Q05",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces and optimization"
+    },
+    {
+     "code": "58E12",
+     "scheme": "msc2020",
+     "text": "Variational problems concerning minimal surfaces (problems in two independent variables)"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9890",
+        "type": "print"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 19829,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Mathematical Association of America (MAA), Washington, D.C.; Taylor \\& Francis, Abingdon, Oxfordshire",
+      "series_id": 20,
+      "short_title": "Am. Math. Mon.",
+      "title": "American Mathematical Monthly",
+      "volume": "101",
+      "year": "1994"
+     }
+    ],
+    "source": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "subtitle": null,
+    "title": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+   },
+   "year": "1994",
+   "zbmath_url": "https://zbmath.org/604974"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "Morgan, Frank"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "a",
+    "description": "serial article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "emmer.michele",
+      "reviewer_id": "5172",
+      "name": "Michele Emmer",
+      "sign": "M.Emmer (Roma)"
+     },
+     "text": "The author is presenting to a general audience the main ideas of the geometry of soap bubbles and soap films. He recalls the discovery of the behaviour of singularities obtained by the Belgian physicist J. A. F. Plateau and the famous demonstration of Plateau's results obtained by Jean E. Taylor, in 1976 [\\textit{J. E. Taylor}, Ann. Math. (2) 103, 489--539 (1976; Zbl 0335.49032)]. Then he poses the question: Can a boundary support infinitely many soap films? Richard Courant described an example in 1950 that he himself considered so badly twisted [\\textit{R. Courant}, Dirichlet's principle, conformal mapping and minimal surfaces. New York: Interscience Publishers (1950; Zbl 0040.34603), p. 122]. The author asks himself a similar question: Can a nice, smooth boundary support infinitely many soap films?\n\n\nThe answer is yes and he describes how to construct the example. The boundary consists of four wires bent into four circles. Two of the circles are concentric; a third circle lies between and above them, and a fourth circle lies between and below them. One soap film with its boundary consists of two separate strips of surface, each bounded by two of the circles. Another soap film consists of strips that switch at two crosspiece saddles placed at opposite points and balancing each other. There can be any even number of evenly spaced crosspiece saddles and holes in a soap film that looks something like the original figure 12 in the paper. Then any one such soap film gives rise to infinitely many others under rotations. The proof, a sketch of the proof, is given using the reflection principle and the figures. It is a visual demonstration and so illustrations are really essential. A detailed version of the proof appeared [the author, Arch. Ration. Mech. Anal. 75, 193--197 (1981; Zbl 0453.49027)]. The illustrations are by Jim Bredt.\n\n\n[For the entire collection see Zbl 0742.00037.]",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 65650,
+   "identifier": "0774.53005",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "53A10",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces in differential geometry, surfaces with prescribed mean curvature"
+    },
+    {
+     "code": "49Q05",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces and optimization"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 51701,
+      "isbn": [
+       {
+        "number": "0-89766-639-9",
+        "type": "hbk"
+       },
+       {
+        "number": "0-89766-640-2",
+        "type": "pbk"
+       }
+      ],
+      "publisher": "New York: New York Academy of Sciences",
+      "year": "1990"
+     }
+    ],
+    "pages": "98-106",
+    "series": [],
+    "source": "Mathematical vistas, Pap. Math. Sect., Ann. N. Y. Acad. Sci. 607, 98-106 (1990)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Soap bubbles and soap films"
+   },
+   "year": "1990",
+   "zbmath_url": "https://zbmath.org/65650"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "hass.joel"
+      ],
+      "name": "Hass, Joel"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "Morgan, Frank"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": "F.Morgan (Williamstown)"
+     },
+     "text": "On a Riemannian surface there is a curve, often of constant curvature, which minimizes length among all curves bounding the same area or curvature. This curve can be required to satisfy additional topological restrictions. One consequence is a simple proof of an argument, suggested by Poincar\u00e9, that the shortest curve which divides a convex 2-sphere into two regions of total curvature \\(2\\pi\\) is a simple geodesic.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 980751,
+   "identifier": "0865.53009",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/PL00004560",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/PL00004560"
+    },
+    {
+     "identifier": "174916",
+     "type": "eudml",
+     "url": "https://eudml.org/doc/174916"
+    },
+    {
+     "identifier": "MZ_1996__223_3_174916/",
+     "type": "geodesic",
+     "url": "https://geodesic.mathdoc.fr/item/MZ_1996__223_3_174916/"
+    }
+   ],
+   "msc": [
+    {
+     "code": "53A10",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces in differential geometry, surfaces with prescribed mean curvature"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Manuel Alfaro, Jeffrey Brock, Joel Foisy, Nickelous Hodges, Jason Zimba: Compound soap bubbles in the plane. SMALL undergraduate research Geometry Group report, Williams College, summer, 1990",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "William K. Allard: On a problem of Poincare. Notes",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "F.J. Almgren, Jr.: Existence and regularity almost everywhere of solutions to elliptic variational problems with constraints. Mem. AMS163 (1976)",
+     "zbmath": {
+      "author_codes": [
+       "almgren.frederick-j-jun"
+      ],
+      "document_id": 3512889,
+      "msc": [
+       "49Q15",
+       "49J99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 584,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": "10.1016/0022-1236(81)90091-4",
+     "position": "4",
+     "text": "M.S. Berger, E. Bombieri: On Poincare's isoperimetric problem for closed geodesics. J. Func. Anal.42 (1981) 274--298",
+     "zbmath": {
+      "author_codes": [
+       "bombieri.enrico",
+       "berger.melvyn-s"
+      ],
+      "document_id": 3736664,
+      "msc": [
+       "58E10",
+       "49Q15",
+       "53C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 492,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Kenneth Brakke, Frank Morgan: The wet X soap film is unstable. In preparation.",
+     "zbmath": {
+      "author_codes": [
+       "brakke.kenneth-a",
+       "morgan.frank"
+      ],
+      "document_id": 1463808,
+      "msc": [
+       "53A10",
+       "49Q05",
+       "76D45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1392,
+      "year": "1998"
+     }
+    },
+    {
+     "doi": "10.1080/13642819208207644",
+     "position": "6",
+     "text": "F. Bolton, D. Weaire: The effects of Plateau boilers in the two-dimensional froth II: General simulation and analysis of rigidity loss transition. Phil. Mag. B 65 (1992) 473--487.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Jaigyoung Choe: On the existence and regularity of fundamental domains with least boundary area. J. Diff. Geom.29 (1989) 623--663",
+     "zbmath": {
+      "author_codes": [
+       "choe.jaigyoung"
+      ],
+      "document_id": 4048577,
+      "msc": [
+       "53C42",
+       "49Q05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 485,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Croke, C.: Poincare's problem on the shortest closed geodesic on a convex hypersurface. J. Diff. Geom.17 (1982) 595--634",
+     "zbmath": {
+      "author_codes": [
+       "croke.christopher-b"
+      ],
+      "document_id": 3789441,
+      "msc": [
+       "53C22",
+       "53A07"
+      ],
+      "prefix": "Zbl",
+      "series_id": 485,
+      "year": "1982"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Joel Foisy: Soap bubble clusters inR 2 andR 3. Undergraduate thesis, Williams College, 1991",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2140/pjm.1993.159.47",
+     "position": "10",
+     "text": "Joel Foisy, Manuel Alfaro, Jeffrey Brock, Nickelous Hodges, Jason Zimba: The standard double soap bubble inR 2 uniquely minimizes perimeter. Pacific J. Math.159 (1993) 47--59. Featured in the 1994 AMS What's Happening in the Mathematical Sciences",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1990.39.39049",
+     "position": "11",
+     "text": "M.E. Gage: Deforming curves on convex surfaces to simple closed geodesics. Indiana U. Math. J.39 (1990) 1037--1059",
+     "zbmath": {
+      "author_codes": [
+       "gage.michael-e"
+      ],
+      "document_id": 599223,
+      "msc": [
+       "53C22",
+       "53A05",
+       "37C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Joel Hass, Frank Morgan: Geodesic Nets on Surfaces. Proc. AMS, to appear",
+     "zbmath": {
+      "author_codes": [
+       "hass.joel",
+       "morgan.frank"
+      ],
+      "document_id": 955944,
+      "msc": [
+       "53C22",
+       "53A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "1996"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Joel Hass, Michael Hutchings, Roger Schlafly: The double bubble conjecture. ERA-AMS 1 (1995) 98--102",
+     "zbmath": {
+      "author_codes": [
+       "hass.joel",
+       "schlafly.roger",
+       "hutchings.michael-lounsbery"
+      ],
+      "document_id": 918334,
+      "msc": [
+       "53A10",
+       "49Q10",
+       "49Q20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2169,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Hugh Howards: Soap bubbles on surfaces. Undergraduate Honors thesis, Williams College, 1992",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Michael Hutchings: The structure of area-minimizing double bubbles. (to appear in J. Geom. Anal.)",
+     "zbmath": {
+      "author_codes": [
+       "hutchings.michael-lounsbery"
+      ],
+      "document_id": 1228525,
+      "msc": [
+       "53A10",
+       "53C42",
+       "49Q10",
+       "76B45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1392,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Frank Morgan: Geometric Measure Theory: a Beginner's Guide. Academic Press, second edition, 1995",
+     "zbmath": {
+      "author_codes": [
+       "morgan.frank"
+      ],
+      "document_id": 768050,
+      "msc": [
+       "49Q15",
+       "49-01",
+       "49Q05",
+       "49Q20",
+       "53-01",
+       "53C42"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": "10.2307/2975627",
+     "position": "17",
+     "text": "Frank Morgan: Mathematicians, including undergraduates, look at soap bubbles. Amer. Math. Monthly101 (1994) 343--351",
+     "zbmath": {
+      "author_codes": [
+       "morgan.frank"
+      ],
+      "document_id": 604974,
+      "msc": [
+       "53-02",
+       "53A10",
+       "49Q05",
+       "58E12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": "10.2140/pjm.1994.165.347",
+     "position": "18",
+     "text": "Frank Morgan: Soap bubbles inR 2 and in surfaces. Pac. J. Math.165 (1994) 347--361",
+     "zbmath": {
+      "author_codes": [
+       "morgan.frank"
+      ],
+      "document_id": 714671,
+      "msc": [
+       "53A04"
+      ],
+      "prefix": "Zbl",
+      "series_id": 615,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": "10.1512/iumj.1994.43.43042",
+     "position": "19",
+     "text": "Jeff Oaks: Singularities and self-intersections of curves evolving on surfaces. Indiana U. Math. J.43 (1994) 959--981",
+     "zbmath": {
+      "author_codes": [
+       "oaks.jeffrey-a"
+      ],
+      "document_id": 750647,
+      "msc": [
+       "53C20",
+       "53A04"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": "10.2307/1986219",
+     "position": "20",
+     "text": "H. Poincare: Sur les lignes geodesiques des surfaces convexes. Trans. Amer. Math. Soc.6 (1905) 237--274",
+     "zbmath": {
+      "author_codes": [
+       "poincare.henri"
+      ],
+      "document_id": 2651299,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 744,
+      "year": "1905"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "185-196",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0025-5874",
+        "type": "print"
+       },
+       {
+        "number": "1432-1823",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 36497,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Berlin/Heidelberg",
+      "series_id": 579,
+      "short_title": "Math. Z.",
+      "title": "Mathematische Zeitschrift",
+      "volume": "223",
+      "year": "1996"
+     }
+    ],
+    "source": "Math. Z. 223, No. 2, 185-196 (1996)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Geodesics and soap bubbles in surfaces"
+   },
+   "year": "1996",
+   "zbmath_url": "https://zbmath.org/980751"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "adams.colin-c"
+      ],
+      "name": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "sullivan.john-matthew"
+      ],
+      "name": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2009-02-26T15:58:53Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "gfrerrer.anton",
+      "reviewer_id": "8111",
+      "name": "Anton Gfrerrer",
+      "sign": "Anton Gfrerrer (Graz)"
+     },
+     "text": "Planar soap bubble froths have bubbles that meet in at most three at a point whereas in dimension three typically at most four bubbles meet. \n\nIn this paper it is shown that it is not possible to decompose the \\(n\\)-dimensional space \\({\\mathbb R}^n\\) into sets of bounded diameter where at most \\(n\\) such sets meet. The base is Lebesgue's covering theorem which says that it is impossible to decompose the unit cube in \\({\\mathbb R}^n\\) into pieces of diameter less than 1 so that at most \\(n\\) pieces meet at a point. Among other corollaries the authors prove the following: There is no decomposition of the unit \\(n\\)-ball of \\({\\mathbb R}^n\\) into sets of diameter less than \\(\\frac{2}{\\sqrt{n}}\\) that meet at most \\(n\\) at a point. Consequently, if a 3-dimensional soap bubble cluster covers a ball of diameter at least \\(\\frac{\\sqrt{3}}{2}\\) times the largest diameter of a bubble in the cluster, then there must be a point where four bubbles meet.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5519697,
+   "identifier": "1183.52015",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1080/00029890.2007.11920420",
+     "type": "doi",
+     "url": "https://doi.org/10.1080/00029890.2007.11920420"
+    },
+    {
+     "identifier": "math/0412020",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/math/0412020"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C99",
+     "scheme": "msc2020",
+     "text": "Discrete geometry"
+    },
+    {
+     "code": "55M30",
+     "scheme": "msc2020",
+     "text": "Lyusternik-Shnirel'man category of a space, topological complexity \u00e0 la Farber, topological robotics (topological aspects)"
+    },
+    {
+     "code": "54F45",
+     "scheme": "msc2020",
+     "text": "Dimension theory in general topology"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0002-9890",
+        "type": "print"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 194800,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Mathematical Association of America (MAA), Washington, D.C.; Taylor \\& Francis, Abingdon, Oxfordshire",
+      "series_id": 20,
+      "short_title": "Am. Math. Mon.",
+      "title": "American Mathematical Monthly",
+      "volume": "114",
+      "year": "2007"
+     }
+    ],
+    "source": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "subtitle": null,
+    "title": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+   },
+   "year": "2007",
+   "zbmath_url": "https://zbmath.org/5519697"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "morgan.frank"
+      ],
+      "name": "Morgan, Frank"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "editorial"
+    }
+   ],
+   "id": 729594,
+   "identifier": "0925.53003",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [],
+   "msc": [
+    {
+     "code": "53A10",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces in differential geometry, surfaces with prescribed mean curvature"
+    },
+    {
+     "code": "49Q05",
+     "scheme": "msc2020",
+     "text": "Minimal surfaces and optimization"
+    },
+    {
+     "code": "58E12",
+     "scheme": "msc2020",
+     "text": "Variational problems concerning minimal surfaces (problems in two independent variables)"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 729594,
+      "isbn": [
+       {
+        "number": "0-8218-8063-2",
+        "type": "print"
+       }
+      ],
+      "publisher": "Providence, RI: American Mathematical Society",
+      "year": "1992"
+     }
+    ],
+    "pages": "1 videocassette (NTSC; 60 min.; VHS)",
+    "series": [],
+    "source": "AMS-MAA Joint Lecture Series. Providence, RI: American Mathematical Society (AMS). 1 videocassette (NTSC; 60 min.; VHS) (1992)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Compounded soap bubbles, shortest networks, and minimal surfaces. A joint AMS-MAA lecture presented in San Francisco, CA, USA, January 1991. Videotape"
+   },
+   "year": "1992",
+   "zbmath_url": "https://zbmath.org/729594"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 7,
+  "nr_request_results": 7,
+  "query_execution_time_in_seconds": 0.18877673149108887,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:12:02Z"
+ }
+}

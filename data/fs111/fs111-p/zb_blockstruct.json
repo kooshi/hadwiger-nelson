@@ -1,0 +1,2415 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "bachoc.christine"
+      ],
+      "name": "Bachoc, Christine"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "passuello.alberto"
+      ],
+      "name": "Passuello, Alberto"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "thiery.alain"
+      ],
+      "name": "Thiery, Alain"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2015-06-26T08:11:11Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "szekely.laszlo-a",
+      "reviewer_id": "5891",
+      "name": "L\u00e1szl\u00f3 A. Sz\u00e9kely",
+      "sign": "L\u00e1szl\u00f3 A. Sz\u00e9kely (Columbia)"
+     },
+     "text": "The paper improves on the upper bound for the upper density of sets avoiding two points at unit distance apart in Euclidean spaces, both asymptotically, and numerically for dimensions between 4 and 24. The results depend on the study of an analogue of Lov\u00e1sz' \\(\\vartheta\\) function for the (infinite) unit distance graph and on some finite subgraphs of the unit distance graph. As a consequence, improved lower bounds are obtained for the measurable chromatic number of the Euclidean space for dimensions between 4 and 24.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 6450887,
+   "identifier": "1327.52032",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s00454-015-9668-z",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s00454-015-9668-z"
+    },
+    {
+     "identifier": "1401.6140",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1401.6140"
+    },
+    {
+     "identifier": "hal-01003676",
+     "type": "hal",
+     "url": "https://hal.science/hal-01003676"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    },
+    {
+     "code": "90C05",
+     "scheme": "msc2020",
+     "text": "Linear programming"
+    },
+    {
+     "code": "90C27",
+     "scheme": "msc2020",
+     "text": "Combinatorial optimization"
+    },
+    {
+     "code": "05C69",
+     "scheme": "msc2020",
+     "text": "Vertex subsets with special properties (dominating sets, independent sets, cliques, etc.)"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Abramowitz, M., Stegun, I.A.: Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables. National Bureau of Standards Applied Mathematics Series, vol. 55. (1964); Reprint: Dover Publications, Mineola NY (1972)",
+     "zbmath": {
+      "author_codes": [
+       "abramowitz.milton",
+       "stegun.irene-a"
+      ],
+      "document_id": 3273551,
+      "msc": [
+       "33-00",
+       "00A20",
+       "00A22",
+       "65A05",
+       "65Dxx",
+       "41A55",
+       "62Q05",
+       "44A10",
+       "11B68",
+       "11M06",
+       "11Y70"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1964"
+     }
+    },
+    {
+     "doi": "10.1006/eujc.1995.0092",
+     "position": "2",
+     "text": "Ahlswede, R., Khachatrian, L.: The complete intersection theorem for systems of finite sets. Eur. J. Comb. 18, 125-136 (1997)",
+     "zbmath": {
+      "author_codes": [
+       "khachatrian.levon-h",
+       "ahlswede.rudolf"
+      ],
+      "document_id": 986975,
+      "msc": [
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": "10.1017/CBO9781107325937",
+     "position": "3",
+     "text": "Andrews, G.E., Askey, R., Roy, R.: Special Functions. Cambridge University Press, Cambridge (1999)",
+     "zbmath": {
+      "author_codes": [
+       "andrews.george-eyre",
+       "askey.richard-a",
+       "roy.ranjan"
+      ],
+      "document_id": 1231230,
+      "msc": [
+       "33-02",
+       "33B15",
+       "33Cxx",
+       "33Dxx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3879,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": "10.5802/jtnb.847",
+     "position": "4",
+     "text": "Arias de Reyna, J., Toulisse, J.: The \\[n\\] n-th prime asymptotically. J. Th\u00e9or. nombres Bordx. 25, 521-555 (2013)",
+     "zbmath": {
+      "author_codes": [
+       "arias-de-reyna-martinez.juan",
+       "toulisse.jeremy"
+      ],
+      "document_id": 6291366,
+      "msc": [
+       "11N05",
+       "11N37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1917,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": "10.1007/s00039-009-0013-7",
+     "position": "5",
+     "text": "Bachoc, C., Nebe, G., de Oliveira Filho, F.M., Vallentin, F.: Lower bounds for measurable chromatic numbers. Geom. Funct. Anal. 19, 645-661 (2009)",
+     "zbmath": {
+      "author_codes": [
+       "nebe.gabriele",
+       "bachoc.christine",
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 5652303,
+      "msc": [
+       "05C15",
+       "05C12",
+       "90C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1418,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": "10.1007/s11856-014-1070-7",
+     "position": "6",
+     "text": "Bachoc, C., Decorte, E., de Oliveira Filho, F.M., Vallentin, F.: Spectral bounds for the independence ratio and the chromatic number of an operator. Israel J. Math. 202, 227-254 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "decorte.evan",
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6361333,
+      "msc": [
+       "05C15",
+       "05C70",
+       "05C85",
+       "05C63"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "10.1090/gsm/054",
+     "position": "7",
+     "text": "Barvinok, A.: A Course in Convexity, GSM 54. American Mathematical Society, Providence, RI (2002)",
+     "zbmath": {
+      "author_codes": [
+       "barvinok.alexander-i"
+      ],
+      "document_id": 1860211,
+      "msc": [
+       "52-01",
+       "52-02",
+       "52Axx",
+       "52Bxx",
+       "11Hxx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3915,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Berkelaar, M., Eikland, K., Notebaert, P.: An Open Source (Mixed-Integer) Linear Programming System. lpsolve 5.5.2.0, Licence terms: GNU LGPL. http://lpsolve.sourceforge.net/",
+     "zbmath": {
+      "author_codes": [
+       "khachatrian.levon-h",
+       "ahlswede.rudolf"
+      ],
+      "document_id": 986975,
+      "msc": [
+       "05D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": "10.1016/j.ejc.2006.08.011",
+     "position": "9",
+     "text": "de Klerk, E., Pasechnik, D.V.: A note on the stability number of an orthogonality graph. Eur. J. Comb. 28(7), 1971-1979 (2007)",
+     "zbmath": {
+      "author_codes": [
+       "de-klerk.etienne",
+       "pasechnik.dmitrii-v"
+      ],
+      "document_id": 5183154,
+      "msc": [
+       "05C35",
+       "90C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 824,
+      "year": "2007"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "de Laat, D., Vallentin, F.: A semidefinite programming hierarchy for packing problems in discrete geometry. Math. Program. Ser. B http://arxiv.org/abs/1311.3789 (2013)",
+     "zbmath": {
+      "author_codes": [
+       "de-laat.david",
+       "vallentin.frank"
+      ],
+      "document_id": 6447636,
+      "msc": [
+       "90C22",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1746,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "de Oliveira Filho, F.M.: New bounds for geometric packings and colorings via harmonic analysis and optimization. Doctoral Thesis, University of Amsterdam. http://www.ime.usp.br/~fmario/pubs.html (2009)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1080/10586458.2014.882170",
+     "position": "12",
+     "text": "Decorte, E., de Laat, D., Vallentin, F.: Fourier analysis on finite groups and the Lov\u00e1sz theta-number of Cayley graphs. Exp. Math. 23, 146-152 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "decorte.evan",
+       "de-laat.david",
+       "vallentin.frank"
+      ],
+      "document_id": 6328239,
+      "msc": [
+       "05C50",
+       "05C25",
+       "05C69",
+       "05A30",
+       "20C30",
+       "43A35",
+       "90C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1825,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Delsarte, P.: An algebraic approach to the association schemes of coding theory. Philips Res. Repts Suppl. 10, 1-97 (1973)",
+     "zbmath": {
+      "author_codes": [
+       "delsarte.philippe"
+      ],
+      "document_id": 2232233,
+      "msc": [
+       "05E30",
+       "94B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1973"
+     }
+    },
+    {
+     "doi": "10.1137/0134012",
+     "position": "14",
+     "text": "Delsarte, P.: Hahn polynomials, discrete harmonics and \\[t\\] t-designs. SIAM J. Appl. Math. 34(1), 157-166 (1978)",
+     "zbmath": {
+      "author_codes": [
+       "delsarte.philippe"
+      ],
+      "document_id": 3845587,
+      "msc": [
+       "05B05",
+       "05A15",
+       "33C45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1637,
+      "year": "1978"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Folland, G.B.: A Course in Abstract Harmonic Analysis. CRC Press, LLC, Boca Raton (1995)",
+     "zbmath": {
+      "author_codes": [
+       "folland.gerald-b"
+      ],
+      "document_id": 918597,
+      "msc": [
+       "43-01",
+       "22-01",
+       "22D10",
+       "22D30",
+       "43A35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": "10.1007/BF02579457",
+     "position": "16",
+     "text": "Frankl, P., Wilson, R.M.: Intersection theorems with geometric consequences. Combinatorica 1, 357-368 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter",
+       "wilson.richard-m"
+      ],
+      "document_id": 3784938,
+      "msc": [
+       "05C65",
+       "05A05",
+       "05C15",
+       "05C35",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300004903",
+     "position": "17",
+     "text": "Larman, D.G., Rogers, C.A.: The realization of distances within sets in Euclidean space. Mathematika 19, 1-24 (1972)",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "larman.david-g"
+      ],
+      "document_id": 3389061,
+      "msc": [
+       "05B99",
+       "51M99",
+       "05B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "10.1137/S1052623400380079",
+     "position": "18",
+     "text": "Lasserre, J.B.: An explicit equivalent positive semidefinite program for nonlinear 0-1 programs. SIAM J. Optim. 12, 756-769 (2002)",
+     "zbmath": {
+      "author_codes": [
+       "lasserre.jean-bernard"
+      ],
+      "document_id": 1732326,
+      "msc": [
+       "90C22",
+       "90C09",
+       "90C27",
+       "90C30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1796,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": "10.1287/moor.28.3.470.16391",
+     "position": "19",
+     "text": "Laurent, M.: A comparison of the Sherali-Adams, Lov\u00e1sz-Schrijver, and Lasserre relaxations for 0-1 programming. Math. Oper. Res. 28, 470-496 (2003)",
+     "zbmath": {
+      "author_codes": [
+       "laurent.monique"
+      ],
+      "document_id": 2228302,
+      "msc": [
+       "90C22",
+       "90C09",
+       "90C27"
+      ],
+      "prefix": "Zbl",
+      "series_id": 563,
+      "year": "2003"
+     }
+    },
+    {
+     "doi": "10.1109/TIT.1979.1055985",
+     "position": "20",
+     "text": "Lov\u00e1sz, L.: On the Shannon capacity of a graph. IEEE Trans. Inf. Theory 25, 1-7 (1979)",
+     "zbmath": {
+      "author_codes": [
+       "lovasz.laszlo"
+      ],
+      "document_id": 3614658,
+      "msc": [
+       "05C99",
+       "94A17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 90,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": "10.1109/TIT.1977.1055688",
+     "position": "21",
+     "text": "McEliece, R.J., Rodemich, E.R., Rumsey, H., Welch, L.: New upper bounds on the rate of a code via the Delsarte-MacWilliams inequalitie. IEEE Trans. Inf. Theory 23, 157-166 (1977)",
+     "zbmath": {
+      "author_codes": [
+       "rumsey.howard-jun",
+       "welch.lloyd-r",
+       "mceliece.robert-j",
+       "rodemich.eugene-r"
+      ],
+      "document_id": 3562944,
+      "msc": [
+       "94B99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 90,
+      "year": "1977"
+     }
+    },
+    {
+     "doi": "10.4171/JEMS/236",
+     "position": "22",
+     "text": "de Oliveira Filho, F.M., Vallentin, F.: Fourier analysis, linear programming, and densities of distance avoiding sets in \\[{\\mathbb{R}}^nRn\\]. J. Eur. Math. Soc. 12, 1417-1428 (2010)",
+     "zbmath": {
+      "author_codes": [
+       "de-oliveira-filho.fernando-mario",
+       "vallentin.frank"
+      ],
+      "document_id": 5815169,
+      "msc": [
+       "90C05",
+       "42B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2579,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "Raigorodskii, A.M.: On the chromatic number of a space. Uspekhi Mat. Nauk 55 147-148 (2001); English translation in Russian Math. Surv. 55, 351-352 (2000)",
+     "zbmath": {
+      "author_codes": [
+       "raigorodskii.andrei-m"
+      ],
+      "document_id": 1535387,
+      "msc": [
+       "05C15",
+       "51M99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 201,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "24",
+     "text": "Rudin, W.: Fourier Analysis on Groups. Wiley, New York (1962)",
+     "zbmath": {
+      "author_codes": [
+       "rudin.walter"
+      ],
+      "document_id": 3174732,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 9940,
+      "year": "1962"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "Rudin, W.: Real and Complex Analysis, 3rd edn. McGraw-Hill, New York (1987)",
+     "zbmath": {
+      "author_codes": [
+       "rudin.walter"
+      ],
+      "document_id": 1022658,
+      "msc": [
+       "00A05",
+       "26-01",
+       "30-01",
+       "46-01"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1987"
+     }
+    },
+    {
+     "doi": "10.1109/TIT.1979.1056072",
+     "position": "26",
+     "text": "Schrijver, A.: A comparison of the Delsarte and Lov\u00e1sz bounds. IEEE Trans. Inf. Theory 25(4), 425-429 (1979)",
+     "zbmath": {
+      "author_codes": [
+       "schrijver.alexander"
+      ],
+      "document_id": 3695074,
+      "msc": [
+       "94A17",
+       "90C05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 90,
+      "year": "1979"
+     }
+    },
+    {
+     "doi": "10.1109/TIT.2005.851748",
+     "position": "27",
+     "text": "Schrijver, A.: New code upper bounds from the Terwilliger algebra and semidefinite programming. IEEE Trans. Inf. Theory 51, 2859-2866 (2005)",
+     "zbmath": {
+      "author_codes": [
+       "schrijver.alexander"
+      ],
+      "document_id": 5454944,
+      "msc": [
+       "94B65",
+       "94B05",
+       "05E30",
+       "16S99",
+       "90C22"
+      ],
+      "prefix": "Zbl",
+      "series_id": 90,
+      "year": "2005"
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "Soicher, LH; Beineke, LW (ed.); Wilson, RJ (ed.), Computing with graphs and groups, 250-266 (2004), Cambridge",
+     "zbmath": {
+      "author_codes": [
+       "soicher.leonard-h"
+      ],
+      "document_id": 2149412,
+      "msc": [
+       "05C25",
+       "05E30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "Stein, W.A., et al.: Sage Mathematics Software (Version 4.7). The Sage Development Team http://www.sagemath.org (2011)",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "decorte.evan",
+       "vallentin.frank",
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "document_id": 6361333,
+      "msc": [
+       "05C15",
+       "05C70",
+       "05C85",
+       "05C63"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "10.1016/0012-365X(89)90099-X",
+     "position": "30",
+     "text": "Sz\u00e9kely, L.A., Wormald, N.C.: Bounds on the measurable chromatic number of \\[{\\mathbb{R}}^nRn\\]. Discrete Math. 75, 343-372 (1989)",
+     "zbmath": {
+      "author_codes": [
+       "wormald.nicholas-c",
+       "szekely.laszlo-a"
+      ],
+      "document_id": 4118393,
+      "msc": [
+       "05C15",
+       "05C99",
+       "05A20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": "10.1080/10556789908805762",
+     "position": "31",
+     "text": "Toh, K.C., Todd, M.J., Tutuncu, R.H.: SDPT3-a Matlab software package for semidefinite programming. Optim. Methods Softw. 11, 545-581 (1999)",
+     "zbmath": {
+      "author_codes": [
+       "todd.michael-j",
+       "tutuncu.reha-h",
+       "toh.kimchuan"
+      ],
+      "document_id": 1506389,
+      "msc": [
+       "90C22",
+       "65Y15",
+       "65K05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2327,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "32",
+     "text": "Watson, G.N.: A Treatise on the Theory of Bessel Functions. Cambridge University Press, Cambridge (1966)",
+     "zbmath": {
+      "author_codes": [
+       "watson.george-neville"
+      ],
+      "document_id": 3278469,
+      "msc": [
+       "33-02",
+       "33C10",
+       "65A05",
+       "65D20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1966"
+     }
+    },
+    {
+     "doi": "10.1007/978-1-4614-0769-0_24",
+     "position": "33",
+     "text": "Yamashita, M.; Fujisawa, K.; Fukuda, M.; Kobayashi, K.; Nakta, K.; Nakata, M.; Anjos, MF (ed.); Lasserre, JB (ed.), Latest developments in the SDPA family for solving large-scale SDPs, 687-714 (2012), New York",
+     "zbmath": {
+      "author_codes": [
+       "yamashita.makoto.1",
+       "fujisawa.katsuki",
+       "fukuda.mituhiro",
+       "kobayashi.kazuhiro",
+       "nakata.kazuhide",
+       "nakata.maho"
+      ],
+      "document_id": 6573925,
+      "msc": [
+       "90C22",
+       "90-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2012"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "783-808",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0179-5376",
+        "type": "print"
+       },
+       {
+        "number": "1432-0444",
+        "type": "electronic"
+       }
+      ],
+      "issue": "4",
+      "issue_id": 345250,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer US, New York, NY",
+      "series_id": 1119,
+      "short_title": "Discrete Comput. Geom.",
+      "title": "Discrete \\& Computational Geometry",
+      "volume": "53",
+      "year": "2015"
+     }
+    ],
+    "source": "Discrete Comput. Geom. 53, No. 4, 783-808 (2015)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The density of sets avoiding distance 1 in Euclidean space"
+   },
+   "year": "2015",
+   "zbmath_url": "https://zbmath.org/6450887"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "keleti.tamas"
+      ],
+      "name": "Keleti, Tam\u00e1s"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "matolcsi.mate"
+      ],
+      "name": "Matolcsi, M\u00e1t\u00e9"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "de-oliveira-filho.fernando-mario"
+      ],
+      "name": "de Oliveira Filho, Fernando M\u00e1rio"
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "ruzsa.imre-z"
+      ],
+      "name": "Ruzsa, Imre Z."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2016-05-12T12:22:30Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 6579865,
+   "identifier": "1335.05048",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s00454-015-9751-5",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s00454-015-9751-5"
+    },
+    {
+     "identifier": "1501.00168",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1501.00168"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05C10",
+     "scheme": "msc2020",
+     "text": "Planar graphs; geometric and topological aspects of graph theory"
+    },
+    {
+     "code": "42B05",
+     "scheme": "msc2020",
+     "text": "Fourier series and coefficients in several variables"
+    },
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    },
+    {
+     "code": "52C17",
+     "scheme": "msc2020",
+     "text": "Packing and covering in \\(n\\) dimensions (aspects of discrete geometry)"
+    },
+    {
+     "code": "90C05",
+     "scheme": "msc2020",
+     "text": "Linear programming"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.1007/s00454-015-9668-z",
+     "position": "1",
+     "text": "Bachoc, C., Passuello, A., Thiery, A.: The density of sets avoiding distance 1 in Euclidean space. Discrete Comput. Geom. 53(4), 783-808 (2015)",
+     "zbmath": {
+      "author_codes": [
+       "bachoc.christine",
+       "passuello.alberto",
+       "thiery.alain"
+      ],
+      "document_id": 6450887,
+      "msc": [
+       "52C10",
+       "90C05",
+       "90C27",
+       "05C69"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1119,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Croft, H.T.: Incidence incidents. Eureka 30, 22-26 (1967)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1016/0097-3165(81)90014-5",
+     "position": "3",
+     "text": "Falconer, K.J.: The realization of distances in measurable subsets covering \\[{\\mathbb{R}}^nRn\\]. J. Comb. Theory Ser. A 31, 184-189 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3735836,
+      "msc": [
+       "05B30",
+       "05C15",
+       "28A05",
+       "51M20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "10.1007/BF02579457",
+     "position": "4",
+     "text": "Frankl, P., Wilson, R.M.: Intersection theorems with geometric consequences. Combinatorica 1, 357-368 (1981)",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter",
+       "wilson.richard-m"
+      ],
+      "document_id": 3784938,
+      "msc": [
+       "05C65",
+       "05A05",
+       "05C15",
+       "05C35",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": "10.1090/S0273-0979-02-00941-2",
+     "position": "5",
+     "text": "Gardner, R.J.: The Brunn-Minkowski inequality. Bull. Am. Math. Soc. 39(3), 355-405 (2002)",
+     "zbmath": {
+      "author_codes": [
+       "gardner.richard-j"
+      ],
+      "document_id": 1756731,
+      "msc": [
+       "26D15",
+       "52A40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1661,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Katznelson, Y.: An Introduction to Harmonic Analysis. Wiley, New York (1968)",
+     "zbmath": {
+      "author_codes": [
+       "katznelson.yitzhak"
+      ],
+      "document_id": 3271087,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1968"
+     }
+    },
+    {
+     "doi": "10.1112/S0025579300004903",
+     "position": "7",
+     "text": "Larman, D.G., Rogers, C.A.: The realization of distances within sets in Euclidean space. Mathematika 19, 1-24 (1972)",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "larman.david-g"
+      ],
+      "document_id": 3389061,
+      "msc": [
+       "05B99",
+       "51M99",
+       "05B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "10.1090/S0002-9947-2013-06126-0",
+     "position": "8",
+     "text": "Maggi, F., Ponsiglione, M., Pratelli, A.: Quantitative stability in the isodiametric inequality via the isoperimetric inequality. Trans. Am. Math. Soc. 366, 1141-1160 (2014)",
+     "zbmath": {
+      "author_codes": [
+       "ponsiglione.marcello",
+       "maggi.francesco",
+       "pratelli.aldo"
+      ],
+      "document_id": 6268318,
+      "msc": [
+       "51M16",
+       "51N20",
+       "52A40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Moser, L., Moser, W.: Solution to problem 10. Can. Math. Bull. 4, 187-189 (1961)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.4171/JEMS/236",
+     "position": "10",
+     "text": "de Oliveira Filho, F.M., Vallentin, F.: Fourier analysis, linear programming, and densities of distance-avoiding sets in \\[{\\mathbb{R}}^nRn\\]. J. Eur. Math. Soc. 12, 1417-1428 (2010)",
+     "zbmath": {
+      "author_codes": [
+       "de-oliveira-filho.fernando-mario",
+       "vallentin.frank"
+      ],
+      "document_id": 5815169,
+      "msc": [
+       "90C05",
+       "42B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2579,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": "10.2307/1968466",
+     "position": "11",
+     "text": "Schoenberg, I.J.: Metric spaces and completely monotone functions. Ann. Math. 39, 811-841 (1938)",
+     "zbmath": {
+      "author_codes": [
+       "schoenberg.isaac-jacob"
+      ],
+      "document_id": 3031611,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1938"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Soifer, A.: The Mathematical Coloring Book. Springer, New York (2009)",
+     "zbmath": {
+      "author_codes": [
+       "soifer.alexander"
+      ],
+      "document_id": 5295135,
+      "msc": [
+       "05-01",
+       "05C15",
+       "05C55",
+       "05-03",
+       "01A60"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Stein, W.A. et al.: Sage Mathematics Software (Version 6.3), The Sage Development Team (2014). http://www.sagemath.org",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF02579223",
+     "position": "14",
+     "text": "Sz\u00e9kely, L.A.: Measurable chromatic number of geometric graphs and sets without some distances in Euclidean space. Combinatorica 4, 213-218 (1984)",
+     "zbmath": {
+      "author_codes": [
+       "szekely.laszlo-a"
+      ],
+      "document_id": 3889548,
+      "msc": [
+       "05C15",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1984"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Sz\u00e9kely, L.A.: Erd\u0151s on unit distances and the Szemer\u00e9di-Trotter theorems. In: Hal\u00e1sz, G., Lov\u00e1sz, L., Simonovits, M., S\u00f3s, V.T. (eds.) Paul Erd\u0151s and His Mathematics II. Bolyai Society Mathematical Studies 11. J\u00e1nos Bolyai Mathematical Society, Budapest, pp. 646-666. Springer, Berlin (2002)",
+     "zbmath": {
+      "author_codes": [
+       "szekely.laszlo-a"
+      ],
+      "document_id": 1943977,
+      "msc": [
+       "05C12",
+       "52C10",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": "10.1016/0012-365X(89)90099-X",
+     "position": "16",
+     "text": "Sz\u00e9kely, L.A., Wormald, N.C.: Bounds on the measurable chromatic number of \\[R^nRn\\]. Discrete Math. 75, 343-372 (1989)",
+     "zbmath": {
+      "author_codes": [
+       "wormald.nicholas-c",
+       "szekely.laszlo-a"
+      ],
+      "document_id": 4118393,
+      "msc": [
+       "05C15",
+       "05C99",
+       "05A20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1989"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Watson, G.N.: A Treatise on the Theory of Bessel Functions. Cambridge University Press, Cambridge (1922)",
+     "zbmath": {
+      "author_codes": [
+       "watson.george-neville"
+      ],
+      "document_id": 2601513,
+      "msc": [
+       "33-02",
+       "33C10",
+       "65A05",
+       "65D20"
+      ],
+      "prefix": "JFM",
+      "series_id": 0,
+      "year": "1922"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "642-661",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0179-5376",
+        "type": "print"
+       },
+       {
+        "number": "1432-0444",
+        "type": "electronic"
+       }
+      ],
+      "issue": "3",
+      "issue_id": 354697,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer US, New York, NY",
+      "series_id": 1119,
+      "short_title": "Discrete Comput. Geom.",
+      "title": "Discrete \\& Computational Geometry",
+      "volume": "55",
+      "year": "2016"
+     }
+    ],
+    "source": "Discrete Comput. Geom. 55, No. 3, 642-661 (2016)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Better bounds for planar sets avoiding unit distances"
+   },
+   "year": "2016",
+   "zbmath_url": "https://zbmath.org/6579865"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "matolcsi.mate"
+      ],
+      "name": "M\u00e1t\u00e9 Matolcsi"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "ruzsa.imre-z"
+      ],
+      "name": "Imre Z. Ruzsa"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "varga.daniel"
+      ],
+      "name": "D\u00e1niel Varga"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "zsamboki.pal"
+      ],
+      "name": "P\u00e1l Zs\u00e1mboki"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "arXiv",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": null,
+    "description": null
+   },
+   "editorial_contributions": [
+    {
+     "language": null,
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 902366587,
+   "identifier": "arXiv:2311.10069",
+   "keywords": [],
+   "language": {
+    "languages": [],
+    "addition": [
+     null
+    ]
+   },
+   "license": [
+    "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+   ],
+   "links": [
+    {
+     "identifier": "2311.10069",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2311.10069"
+    }
+   ],
+   "msc": [],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": null,
+    "series": [],
+    "source": "Preprint, arXiv:2311.10069 [math.CO] (2023)"
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The fractional chromatic number of the plane is at least 4"
+   },
+   "year": "2023",
+   "zbmath_url": "https://zbmath.org/902366587"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "jiang.yanqun"
+      ],
+      "name": "Jiang, Yanqun"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "chen.bokui"
+      ],
+      "name": "Chen, Bokui"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "li.xi.5"
+      ],
+      "name": "Li, Xi"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "ding.zhongjun"
+      ],
+      "name": "Ding, Zhongjun"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2020-04-24T07:47:31Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 7193154,
+   "identifier": "1481.90119",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.apm.2019.10.016",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.apm.2019.10.016"
+    }
+   ],
+   "msc": [
+    {
+     "code": "90B20",
+     "scheme": "msc2020",
+     "text": "Traffic problems in operations research"
+    },
+    {
+     "code": "91D10",
+     "scheme": "msc2020",
+     "text": "Models of societies, social and urban evolution"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "ruggiero.lovreglio",
+       "charitha.dias",
+       "xiang.song",
+       "lucia.ballerini"
+      ],
+      "document_id": 7182575,
+      "msc": [
+       "90B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1551,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "bellomo.nicola",
+       "dogbe.christian"
+      ],
+      "document_id": 5360616,
+      "msc": [
+       "92D25",
+       "91D99",
+       "91D25",
+       "35F20",
+       "92D50"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1416,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "twarogowska.monika",
+       "goatin.paola",
+       "duvigneau.regis"
+      ],
+      "document_id": 6994752,
+      "msc": [
+       "90B20",
+       "35L65",
+       "76M10",
+       "76M12"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1551,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "priuli.fabio-simone",
+       "cristiani.emiliano",
+       "tosin.andrea"
+      ],
+      "document_id": 6440502,
+      "msc": [
+       "35L65",
+       "49N90",
+       "49Q10",
+       "91D10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1637,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "jiang.yanqun",
+       "guo.renyong",
+       "tian.fangbao",
+       "zhou.shu-guang"
+      ],
+      "document_id": 7147664,
+      "msc": [
+       "90-10",
+       "90B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1551,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "cristiani.emiliano",
+       "peri.daniele"
+      ],
+      "document_id": 7157934,
+      "msc": [
+       "90-10",
+       "90B20",
+       "35L65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1551,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "hu.xiaoming",
+       "chen.yao.2",
+       "yang.xiaoxia.1",
+       "dong.hairong",
+       "wang.qianling"
+      ],
+      "document_id": 6940151,
+      "msc": [
+       "91D10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 179,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "kirchner.ansgar",
+       "schadschneider.andreas"
+      ],
+      "document_id": 1785365,
+      "msc": [
+       "90B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 179,
+      "year": "2002"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "kaji.masaru",
+       "inohara.takehiro"
+      ],
+      "document_id": 6978714,
+      "msc": [
+       "90B20",
+       "68Q80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 179,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "cristiani.emiliano",
+       "piccoli.benedetto",
+       "tosin.andrea"
+      ],
+      "document_id": 6292866,
+      "msc": [
+       "00A71",
+       "90-02",
+       "00A69",
+       "90B20",
+       "49-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6759,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "qian.jianliang",
+       "zhang.yongtao",
+       "zhao.hongkai"
+      ],
+      "document_id": 5082153,
+      "msc": [
+       "70-08",
+       "70H20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1246,
+      "year": "2006"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "butcher.john-c"
+      ],
+      "document_id": 2006091,
+      "msc": [
+       "65Lxx",
+       "34-01",
+       "34A12",
+       "65-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2003"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "815-826",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0307-904X",
+        "type": "print"
+       }
+      ],
+      "issue": null,
+      "issue_id": 448630,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier, New York, NY",
+      "series_id": 1551,
+      "short_title": "Appl. Math. Modelling",
+      "title": "Applied Mathematical Modelling",
+      "volume": "80",
+      "year": "2020"
+     }
+    ],
+    "source": "Appl. Math. Modelling 80, 815-826 (2020)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Dynamic navigation field in the social force model for pedestrian evacuation"
+   },
+   "year": "2020",
+   "zbmath_url": "https://zbmath.org/7193154"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "lin.shu"
+      ],
+      "name": "Lin, Shu"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "li.juane"
+      ],
+      "name": "Li, Juane"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2021-10-06T08:42:06Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "yankov.nikolay",
+      "reviewer_id": "15316",
+      "name": "Nikolay Yankov",
+      "sign": "Nikolay Yankov (Shumen)"
+     },
+     "text": "Under the title ``Fundamentals of Classic and Modern Error-Correcting Codes'' the authors have taken the Sisyphus task of introducing to the reader the vast fields of coding theory and how error-correcting codes (ECCs) can be used to achieve reliable communications and data storage. The main topic of this book is focused on ECCs with block structure (block codes) and their contemporary developments in construction, encoding, and decoding techniques.\n\nThese ever evolving topics are summarized in seventeen chapters and five appendices. In my opinion the authors excel in they claim effort to convey to the readers the beauty and usefulness of ECCs and entice him ``... to follow and fully understand the topic with a minimum barrier.'' To this end long derivations and excessive proofs are avoided and each chapter concludes with twenty to fifty references for books and journal papers pointing the reader to the rigorous proofs and additional information on the topic.\n\nThe book truly explains these highly mathematical subjects to a level that can be accessed and applied with as little background in mathematics as possible. It provides step-by-step explanation of all covered topics, both more theoretical or applied, and includes sufficient illustrative examples to assist understanding. After familiarizing the reader to the topic of each chapter more than 300 challenging homework problems (except for the introductory first chapter) are included to strengthen the comprehension of the material. Like all great math books a solutions manual of all problems is available online for instructors.\n\nThe book begins with an introduction on the main problem of coding for reliable digital transmission and storage of information. The main topics in the first chapter are categories of codes, modulation/demodulation, hard- and soft-decision, maximum aposteriori and maximum likelihood decoding. More information is given on channel capacity, classification of channel errors, error-control strategies and measures of code performance.\n\nChapter 2 presents some important elements of algebra (groups, finite fields, polynomials, vector spaces over finite fields, matrices) and graphs necessary for understanding the rest of the chapters of the book. Chapter 3 gives an introduction to linear block codes, generator and parity-check matrices, minimum distance and general and minimum-distance decoding. Chapter 4 focuses on cyclic codes that are crucial for most error-correcting schemes. Aside from cyclic code and their encoding/decoding the class of quasicyclic codes (QC) is described.\n\nThe next two chapters (Chapters 5 and 6) cover the binary BCH, and nonbinary BCH codes, respectively. Special attention is devoted to the class of Reed-Solomon (RS) codes.\n\nChapter 7 presents the finite-geometry codes that are interesting because of their distinctive geometric structures allowing them to be decoded with various decoding methods.\n\nThe eight chapter considers the Reed-Muller (RM) codes and their use for correcting multiple random errors. Using a geometric approach, RM codes can be put in cyclic form forming a special subclass of finite-geometry codes.\n\nThe next chapter nine is an auxiliary presentation of some coding techniques like interleaving, direct product, concatenation, turbo coding, \\((u \\vert u + v)\\)-construction and Kronecker product. Lastly in this chapter the ARQ and HARQ schemes that provide highly reliable information transmission in two-way communication systems are covered.\n\nChapter 10 studies codes and coding techniques that are effective for correcting bursts of errors, random erasures, and bursts of erasures.\n\nChapter 11 introduces low-density parity-check (LDPC) codes which can achieve near Shannon limit performance on various communication and data-storage channels. LDPC are currently considered standard codes for various current and next-generation communication systems, such as wireless (4G, 5G, etc.), optical, satellite, space, digital video broadcast among others. The chapter covers the basic concepts and definitions, matrix and graph representations, and original construction methods for LDPC codes as well as their decoding and error performance.\n\nChapter 12 presents the class of finite-geometry (FG) LDPC codes which are constructed based on finite geometries and are the only class of LDPC codes with cyclic structure.\n\nChapter 13 considers a class of LDPC codes constructed based on partial geometries (PaGs). The coverage of this chapter includes construction of PaGs (and their associated QC-LDPC codes) based on: cyclic subgroups of prime order of finite fields; prime fields; and a special class of designs, called balanced incomplete block designs.\n\nNext two chapters (14 and 15) are devoted to the construction of QC-LDPC codes based on finite, and LDPC codes constructed using graphs, respectively. In Chapter 15, two graphical methods to construct LDPC codes are presented resulting in so-called graph-theoretic LDPC codes.\n\nChapter 16 focuses on a universal coding scheme for collective encoding/decoding and iterative soft-decision decoding of cyclic codes of prime lengths. The coverage of this chapter includes: cyclic code of prime length; code composition, cascading, and interleaving of codewords in a cyclic code of prime length; GFT of an interleaved and cascaded composite code and much more.\n\nThe last Chapter 17 presents the class of polar codes which approach channel capacity. Their construction, encoding, and decoding are masterfully described.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 7407036,
+   "identifier": "1490.94078",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1017/9781009067928",
+     "type": "doi",
+     "url": "https://doi.org/10.1017/9781009067928"
+    }
+   ],
+   "msc": [
+    {
+     "code": "94Bxx",
+     "scheme": "msc2020",
+     "text": "Theory of error-correcting codes and error-detecting codes"
+    },
+    {
+     "code": "94-01",
+     "scheme": "msc2020",
+     "text": "Introductory exposition (textbooks, tutorial papers, etc.) pertaining to information and communication theory"
+    },
+    {
+     "code": "94A29",
+     "scheme": "msc2020",
+     "text": "Source coding"
+    },
+    {
+     "code": "94A40",
+     "scheme": "msc2020",
+     "text": "Channel models (including quantum) in information and communication theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 7407036,
+      "isbn": [
+       {
+        "number": "978-1-316-51262-3",
+        "type": "hbk"
+       },
+       {
+        "number": "978-1-316-51262-3",
+        "type": "ebook"
+       }
+      ],
+      "publisher": "Cambridge: Cambridge University Press",
+      "year": "2022"
+     }
+    ],
+    "pages": "xxix, 812~p.",
+    "series": [],
+    "source": "Cambridge: Cambridge University Press (ISBN 978-1-316-51262-3/hbk; 978-1-316-51262-3/ebook). xxix, 812~p. (2022)."
+   },
+   "states": [
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Fundamentals of classical and modern error-correcting codes"
+   },
+   "year": "2022",
+   "zbmath_url": "https://zbmath.org/7407036"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "cohen.alex"
+      ],
+      "name": "Cohen, A."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "mani.nitya"
+      ],
+      "name": "Mani, N."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2025-10-09T12:19:22Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 8103764,
+   "identifier": null,
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s10474-025-01556-w",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s10474-025-01556-w"
+    },
+    {
+     "identifier": "2407.05071",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2407.05071"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C35",
+     "scheme": "msc2020",
+     "text": "Arrangements of points, flats, hyperplanes (aspects of discrete geometry)"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "473-497",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0236-5294",
+        "type": "print"
+       },
+       {
+        "number": "1588-2632",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 534287,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer Netherlands, Dordrecht; Akad\u00e9miai Kiad\u00f3, Budapest",
+      "series_id": 963,
+      "short_title": "Acta Math. Hung.",
+      "title": "Acta Mathematica Hungarica",
+      "volume": "176",
+      "year": "2025"
+     }
+    ],
+    "source": "Acta Math. Hung. 176, No. 2, 473-497 (2025)"
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Clustering in typical unit-distance avoiding sets"
+   },
+   "year": "2025",
+   "zbmath_url": "https://zbmath.org/8103764"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 6,
+  "nr_request_results": 6,
+  "query_execution_time_in_seconds": 0.2211623191833496,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:14:05Z"
+ }
+}

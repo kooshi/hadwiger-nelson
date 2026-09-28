@@ -1,0 +1,2698 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2006-09-04T10:54:06Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": "8977",
+      "name": "Tian You Hu",
+      "sign": "Tian You Hu (Green Bay)"
+     },
+     "text": "The author obtains an estimate for the typical Hausdorff dimension of the intersection of a set \\(E\\) with homothetic copies of a set \\(F\\), where \\(E\\) and \\(F\\) are Borel subsets in the \\(n\\)-dimensional space. The result is applied to the `distance set problem' for a polyhedral norm on the \\(n\\)-dimensional space, by showing that there are subsets of full dimension with distance set of Lebesgue measure zero.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5051037,
+   "identifier": "1107.28008",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.14321/realanalexch.30.2.0719",
+     "type": "doi",
+     "url": "https://doi.org/10.14321/realanalexch.30.2.0719"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A78",
+     "scheme": "msc2020",
+     "text": "Hausdorff and packing measures"
+    },
+    {
+     "code": "28A12",
+     "scheme": "msc2020",
+     "text": "Contents, measures, outer measures, capacities"
+    },
+    {
+     "code": "28A80",
+     "scheme": "msc2020",
+     "text": "Fractals"
+    },
+    {
+     "code": "51F99",
+     "scheme": "msc2020",
+     "text": "Metric geometry"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "719-726",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0147-1937",
+        "type": "print"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 121412,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Michigan State University Press, East Lansing, MI",
+      "series_id": 655,
+      "short_title": "Real Anal. Exch.",
+      "title": "Real Analysis Exchange",
+      "volume": "30",
+      "year": "2005"
+     }
+    ],
+    "source": "Real Anal. Exch. 30(2004-2005), No. 2, 719-726 (2005)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Dimensions of intersections and distance sets for polyhedral norms"
+   },
+   "year": "2005",
+   "zbmath_url": "https://zbmath.org/5051037"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "mattila.pertti",
+      "reviewer_id": "5809",
+      "name": "Pertti Mattila",
+      "sign": "P.Mattila"
+     },
+     "text": "The distance set of a subset E of \\(R^ n\\) is \\(D(E)=\\{| x- y|:x,y\\in E\\}.\\) If E is analytic (i.e. Suslin), the author uses Fourier transform to derive the following lower bound for the Hausdorff dimension of \\(E\\): \n\\[\n \\dim D(E)\\geq \\min \\{1,(\\dim E)-(n-1)/2\\}. \n\\]\n Moreover, \\(D(E)\\) has positive Lebesgue measure if \\(\\dim E>(n+1)/2\\). The continuum hypothesis is used to show that for general non-analytic sets no such results hold.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 3977329,
+   "identifier": "0605.28005",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1112/S0025579300010998",
+     "type": "doi",
+     "url": "https://doi.org/10.1112/S0025579300010998"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Davies, Colloq. Math 42 pp 53-- (1979)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1016/S1385-7258(52)50068-4",
+     "position": "2",
+     "text": "Davies, Indag. Math 14 pp 488-- (1952)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1016/0097-3165(84)90041-4",
+     "position": "3",
+     "text": "DOI: 10.1016/0097-3165(84)90041-4",
+     "zbmath": {
+      "author_codes": [
+       "chung.fan"
+      ],
+      "document_id": 3851101,
+      "msc": [
+       "05A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1984"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Carleson, Selected Problems on Exceptional Sets (1967)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Watson, A Treatise on the Theory of Bessel Functions (1984)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Falconer, The Geometry of Fractal Sets (1984)",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3941840,
+      "msc": [
+       "28A75",
+       "28-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3803,
+      "year": "1985"
+     }
+    },
+    {
+     "doi": "10.1017/S0305004100029236",
+     "position": "7",
+     "text": "DOI: 10.1017/S0305004100029236",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Rogers, Hausdorff Measures (1970)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Falconer, Mathematika 32 pp 191-- (1985)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Falconer, Mathematika 31 pp 25-- (1984)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Steinhaus, Fund. Math 1 pp 93-- (1920)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "206-212",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0025-5793",
+        "type": "print"
+       },
+       {
+        "number": "2041-7942",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 150089,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "John Wiley \\& Sons, Chichester; London Mathematical Society, London",
+      "series_id": 580,
+      "short_title": "Mathematika",
+      "title": "Mathematika",
+      "volume": "32",
+      "year": "1985"
+     }
+    ],
+    "source": "Mathematika 32, 206-212 (1985)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On the Hausdorff dimensions of distance sets"
+   },
+   "year": "1985",
+   "zbmath_url": "https://zbmath.org/3977329"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3735836,
+   "identifier": "0469.05021",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/0097-3165(81)90014-5",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/0097-3165(81)90014-5"
+    }
+   ],
+   "msc": [
+    {
+     "code": "05B30",
+     "scheme": "msc2020",
+     "text": "Other designs, configurations"
+    },
+    {
+     "code": "05C15",
+     "scheme": "msc2020",
+     "text": "Coloring of graphs and hypergraphs"
+    },
+    {
+     "code": "28A05",
+     "scheme": "msc2020",
+     "text": "Classes of sets (Borel fields, \\(\\sigma\\)-rings, etc.), measurable sets, Suslin sets, analytic sets"
+    },
+    {
+     "code": "51M20",
+     "scheme": "msc2020",
+     "text": "Polyhedra and polytopes; regular figures, division of spaces"
+    }
+   ],
+   "references": [
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "de-bruijn.nicolaas-govert",
+       "erdos.pal"
+      ],
+      "document_id": 3068973,
+      "msc": [
+       "05C15",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6644,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "wright.edward-maitland",
+       "hardy.godfrey-harold"
+      ],
+      "document_id": 3141365,
+      "msc": [
+       "11-01",
+       "11-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1960"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "rogers.claude-ambrose",
+       "larman.david-g"
+      ],
+      "document_id": 3389061,
+      "msc": [
+       "05B99",
+       "51M99",
+       "05B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1972"
+     }
+    },
+    {
+     "doi": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "position": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "text": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+     "zbmath": {
+      "author_codes": [
+       "woodall.douglas-r"
+      ],
+      "document_id": 3396693,
+      "msc": [
+       "51M20",
+       "52C17"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1973"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "184-189",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0097-3165",
+        "type": "print"
+       },
+       {
+        "number": "1096-0899",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 146231,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Elsevier (Academic Press), San Diego, CA",
+      "series_id": 479,
+      "short_title": "J. Comb. Theory, Ser. A",
+      "title": "Journal of Combinatorial Theory. Series A",
+      "volume": "31",
+      "year": "1981"
+     }
+    ],
+    "source": "J. Comb. Theory, Ser. A 31, 184-189 (1981)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The realization of distances in measurable subsets covering \\(R^ n\\)."
+   },
+   "year": "1981",
+   "zbmath_url": "https://zbmath.org/3735836"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "croft.hallard-t"
+      ],
+      "name": "Croft, H. T."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3778258,
+   "identifier": "0494.52008",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1017/S0305004100057960",
+     "type": "doi",
+     "url": "https://doi.org/10.1017/S0305004100057960"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52A40",
+     "scheme": "msc2020",
+     "text": "Inequalities and extremum problems involving convexity in convex geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Selfridge, Combinatorial structures and their applications pp 508-- (1970)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Rogers, Hausdorff measures (1970)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.2307/2307717",
+     "position": "3",
+     "text": "DOI: 10.2307/2307717",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal",
+       "bateman.paul-t"
+      ],
+      "document_id": 3066332,
+      "msc": [
+       "52A40",
+       "52A10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 20,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Eggleston, Convexity (1969)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Rogers, Packing and covering (1964)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "79-88",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0305-0041",
+        "type": "print"
+       },
+       {
+        "number": "1469-8064",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 145416,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Cambridge University Press, Cambridge",
+      "series_id": 158,
+      "short_title": "Math. Proc. Camb. Philos. Soc.",
+      "title": "Mathematical Proceedings of the Cambridge Philosophical Society",
+      "volume": "89",
+      "year": "1981"
+     }
+    ],
+    "source": "Math. Proc. Camb. Philos. Soc. 89, 79-88 (1981)."
+   },
+   "states": [
+    [
+     "r",
+     "item has references"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "On maximal Euclidean sets avoiding certain distance configurations"
+   },
+   "year": "1981",
+   "zbmath_url": "https://zbmath.org/3778258"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "juza.miloslav",
+      "reviewer_id": "818",
+      "name": "Miloslav J\u016fza",
+      "sign": "M.J\u016fza"
+     },
+     "text": "Let \\(B_ r(x)\\) denote the closed disc of centre x and radius r and let m be plane Lebesgue measure. If E is a set and if there exist x,y\\(\\in E\\) such that \\(dist(x,y)=d\\), we say that the distance d is realized in E. \n\n\nThe author proves the following theorem conjectured by L. A. Sz\u00e9kely: Let \\(\\{d_ j\\}\\) be a sequence of positive numbers with \\(d_ j\\to 0\\), and let \\(0<\\rho \\leq 1\\). Then there exists a positive integer k such that for every measurable set \\(E\\subset R^ 2\\) satisfying \n\\[\n \\limsup_{r\\to \\infty}r^{-2}m(E\\cap B_ r(0))=\\pi \\rho\n\\]\n at least one of the distances \\(d_ 1,d_ 2,...,d_ k\\) is realized in E.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 3966556,
+   "identifier": "0599.28009",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1112/blms/18.5.475",
+     "type": "doi",
+     "url": "https://doi.org/10.1112/blms/18.5.475"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "475-477",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0024-6093",
+        "type": "print"
+       },
+       {
+        "number": "1469-2120",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 149996,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "John Wiley \\& Sons, Chichester; London Mathematical Society, London",
+      "series_id": 369,
+      "short_title": "Bull. Lond. Math. Soc.",
+      "title": "Bulletin of the London Mathematical Society",
+      "volume": "18",
+      "year": "1986"
+     }
+    ],
+    "source": "Bull. Lond. Math. Soc. 18, 475-477 (1986)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The realization of small distances in plane sets of positive measure"
+   },
+   "year": "1986",
+   "zbmath_url": "https://zbmath.org/3966556"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, Kenneth J."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "jin.xiong"
+      ],
+      "name": "Jin, Xiong"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2014-10-15T09:08:48Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "savvopoulou.anna-k",
+      "reviewer_id": "13795",
+      "name": "Anna Savvopoulou",
+      "sign": "Anna Savvopoulou (South Bend)"
+     },
+     "text": "The authors study the geometric properties of projections and sections of random multiplicative cascade measures on self-similar sets. Firstly, they construct the probability space underlying the random cascade measures and then obtain an ergodic random dynamical system on the space of these measures. The compact group extension theorem is applied to show that the skew product of this random dynamical system with the rotation group \\(G\\) is also ergodic. Later on, they take advantage of all these ergodicities and prove that almost surely a random multiplicative cascade measure along with its projections and sections is exact dimensional. Finally, these results are applied to self-similar sets and fractal percolations. New results on projections, \\(\\mathbb{C}^1\\)-images and distance sets are also included.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 6355577,
+   "identifier": "1305.28010",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1112/jlms/jdu031",
+     "type": "doi",
+     "url": "https://doi.org/10.1112/jlms/jdu031"
+    },
+    {
+     "identifier": "1212.1345",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/1212.1345"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A78",
+     "scheme": "msc2020",
+     "text": "Hausdorff and packing measures"
+    },
+    {
+     "code": "28D20",
+     "scheme": "msc2020",
+     "text": "Entropy and other invariants"
+    },
+    {
+     "code": "60D05",
+     "scheme": "msc2020",
+     "text": "Geometric probability and stochastic geometry"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Athreya, K. B.; Ney, P. E., Branching processes, 2004, Dover Publications Inc.: Mineola, NY",
+     "zbmath": {
+      "author_codes": [
+       "athreya.krishna-balasundaram",
+       "ney.peter-e"
+      ],
+      "document_id": 2119076,
+      "msc": [
+       "60-02",
+       "60J80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Barral, J., Moments, continuit\u00e9, et analyse multifractale des martingales de Mandelbrot, Probab. Theory Related Fields, 113, 535-569, 1999",
+     "zbmath": {
+      "author_codes": [
+       "barral.julien"
+      ],
+      "document_id": 1300445,
+      "msc": [
+       "60G57",
+       "28A75",
+       "60F10",
+       "60D05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1080,
+      "year": "1999"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Barral, J.; Jin, X., Multifractal analysis of complex random cascades, Comm. Math. Phys., 297, 129-168, 2010",
+     "zbmath": {
+      "author_codes": [
+       "barral.julien",
+       "jin.xiong"
+      ],
+      "document_id": 5729793,
+      "msc": [
+       "28A80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 63,
+      "year": "2010"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "Dekking, M., Random Cantor sets and their projections, Fractal geometry and stochastics IV, 269-284, 2009, Birkh\u00e4user: Basel",
+     "zbmath": {
+      "author_codes": [
+       "dekking.michel"
+      ],
+      "document_id": 5652652,
+      "msc": [
+       "28A80",
+       "60J80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Durrett, R.; Liggett, T., Fixed points of the smoothing transformation, Z. Wahrsch. Verw. Gebiete, 64, 275-301, 1983",
+     "zbmath": {
+      "author_codes": [
+       "liggett.thomas-m",
+       "durrett.richard-t"
+      ],
+      "document_id": 3798823,
+      "msc": [
+       "60K35",
+       "60G50",
+       "60J45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 766,
+      "year": "1983"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Falconer, K. J., Random fractals, Math. Proc. Cambridge Philos. Soc., 100, 559-582, 1986",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 4011530,
+      "msc": [
+       "60D05",
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 158,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Falconer, K. J., Techniques in fractal geometry, 1997, Wiley: Chichester",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 981057,
+      "msc": [
+       "28A80",
+       "28-02",
+       "37D45",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Falconer, K. J., Fractal geometry \u2014 mathematical foundations and applications. 3rd edn, 2014, Wiley: Chichester",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 6245248,
+      "msc": [
+       "28A80",
+       "28-02",
+       "28A78",
+       "37D45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Falconer, K. J.; Howroyd, J., Packing dimensions of projections and dimension profiles, Math. Proc. Cambridge Philos. Soc., 121, 269-286, 1997",
+     "zbmath": {
+      "author_codes": [
+       "howroyd.john-d",
+       "falconer.kenneth-j"
+      ],
+      "document_id": 1052868,
+      "msc": [
+       "28A80",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 158,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Feng, D.\u2010J.; Hu, H., Dimension theory of iterated function systems, Comm. Pure Appl. Math., 62, 1435-1500, 2009",
+     "zbmath": {
+      "author_codes": [
+       "hu.huyi",
+       "feng.de-jun"
+      ],
+      "document_id": 5614742,
+      "msc": [
+       "37C40",
+       "37C45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 66,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Furstenberg, H., Ergodic fractal measures and dimension conservation, Ergodic Theory Dynam. Systems, 28, 405-422, 2008",
+     "zbmath": {
+      "author_codes": [
+       "furstenberg.hillel"
+      ],
+      "document_id": 5272907,
+      "msc": [
+       "37C45",
+       "28A80",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 868,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Hochman, M., Dynamics on fractals and fractal distributions",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Hochman, M.; Shmerkin, P., Local entropy averages and projections of fractal measures, Ann. of Math., 175, (2), 1001-1059, 2012",
+     "zbmath": {
+      "author_codes": [
+       "shmerkin.pablo-s",
+       "hochman.michael"
+      ],
+      "document_id": 6051266,
+      "msc": [
+       "28A80",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "2012"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Hutchinson, J., Fractals and self\u2010similarity, Indiana Univ. Math. J., 30, 713-747, 1981",
+     "zbmath": {
+      "author_codes": [
+       "hutchinson.john-e"
+      ],
+      "document_id": 3964277,
+      "msc": [
+       "28A75",
+       "49Q15",
+       "58C25",
+       "58K99"
+      ],
+      "prefix": "Zbl",
+      "series_id": 451,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Kahane, J.\u2010P.; Peyri\u00e8re, J., Sur certaines martingales de Benoit Mandelbrot, Adv. Math., 22, 131-145, 1976",
+     "zbmath": {
+      "author_codes": [
+       "kahane.jean-pierre",
+       "peyriere.jacques"
+      ],
+      "document_id": 3544943,
+      "msc": [
+       "60G45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 290,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Kaufman, R., On Hausdorff dimension of projections, Mathematika, 15, 153-155, 1968",
+     "zbmath": {
+      "author_codes": [
+       "kaufman.robert-p"
+      ],
+      "document_id": 3265085,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 580,
+      "year": "1968"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Kenyon, R., Projecting the one\u2010dimensional Sierpi\u0144ski gasket, Israel J. Math., 97, 221-238, 1997",
+     "zbmath": {
+      "author_codes": [
+       "kenyon.richard-w"
+      ],
+      "document_id": 1011400,
+      "msc": [
+       "28A80",
+       "37D45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "Keynes, H. B.; Newton, D., Ergodic measures for nonabelian compact group extensions, Compos. Math., 32, 53-70, 1976",
+     "zbmath": {
+      "author_codes": [
+       "newton.dan",
+       "keynes.harvey-b"
+      ],
+      "document_id": 3498228,
+      "msc": [
+       "28D05",
+       "54H20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 393,
+      "year": "1976"
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Maker, P. T., The ergodic theorem for a sequence of functions, Duke Math. J., 6, 27-30, 1940",
+     "zbmath": {
+      "author_codes": [
+       "maker.philip-tillotson"
+      ],
+      "document_id": 2509097,
+      "msc": [],
+      "prefix": "JFM",
+      "series_id": 411,
+      "year": "1940"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "Manning, A.; Simon, K., Dimension of slices through the Sierpi\u0144ski carpet, Trans. Amer. Math. Soc., 365, 213-250, 2013",
+     "zbmath": {
+      "author_codes": [
+       "simon.karoly",
+       "manning.anthony"
+      ],
+      "document_id": 6152557,
+      "msc": [
+       "28A78",
+       "28A80",
+       "37H15",
+       "37C45",
+       "37B10",
+       "37A30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "2013"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Marstrand, J. M., Some fundamental geometrical properties of plane sets of fractional dimensions, Proc. London Math. Soc., 4, 257-302, 1954",
+     "zbmath": {
+      "author_codes": [
+       "marstrand.j-m"
+      ],
+      "document_id": 3089278,
+      "msc": [
+       "28-XX"
+      ],
+      "prefix": "Zbl",
+      "series_id": 628,
+      "year": "1954"
+     }
+    },
+    {
+     "doi": null,
+     "position": "22",
+     "text": "Marstrand, J. M., The dimension of Cartesian product sets, Proc. Cambridge Philos. Soc., 50, 198-202, 1954",
+     "zbmath": {
+      "author_codes": [
+       "marstrand.j-m"
+      ],
+      "document_id": 3086971,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 3325,
+      "year": "1954"
+     }
+    },
+    {
+     "doi": null,
+     "position": "23",
+     "text": "Mattila, P., Hausdorff dimension, orthogonal projections and intersections with planes, Ann. Acad. Sci. Fenn. Ser. A I Math., 1, 227-244, 1975",
+     "zbmath": {
+      "author_codes": [
+       "mattila.pertti"
+      ],
+      "document_id": 3542724,
+      "msc": [
+       "28C10",
+       "31C15",
+       "28A75",
+       "53C65"
+      ],
+      "prefix": "Zbl",
+      "series_id": 308,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "24",
+     "text": "Mattila, P., Geometry of sets and measures in Euclidean spaces, fractals and rectifiability, 1995, Cambridge University Press: Cambridge",
+     "zbmath": {
+      "author_codes": [
+       "mattila.pertti"
+      ],
+      "document_id": 739280,
+      "msc": [
+       "28A75",
+       "28-02",
+       "28A78",
+       "28A80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3801,
+      "year": "1995"
+     }
+    },
+    {
+     "doi": null,
+     "position": "25",
+     "text": "Mauldin, R. D.; Williams, S. C., Random recursive constructions: asymptotic geometric and topological properties, Trans. Amer. Math. Soc., 295, 325-346, 1986",
+     "zbmath": {
+      "author_codes": [
+       "mauldin.richard-daniel"
+      ],
+      "document_id": 4015695,
+      "msc": [
+       "54H20",
+       "60B05",
+       "28C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 744,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": null,
+     "position": "26",
+     "text": "Orponen, T., On the distance sets of self\u2010similar sets, Nonlinearity, 25, 1919-1929, 2012",
+     "zbmath": {
+      "author_codes": [
+       "orponen.tuomas"
+      ],
+      "document_id": 6052386,
+      "msc": [
+       "28A80",
+       "28A78",
+       "37C45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 173,
+      "year": "2012"
+     }
+    },
+    {
+     "doi": null,
+     "position": "27",
+     "text": "Parry, W., Skew products of shifts with a compact Lie group, J. London Math. Soc., 56, (2), 395-404, 1997",
+     "zbmath": {
+      "author_codes": [
+       "parry.william"
+      ],
+      "document_id": 1180005,
+      "msc": [
+       "37A25",
+       "37C85"
+      ],
+      "prefix": "Zbl",
+      "series_id": 500,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "28",
+     "text": "Peres, Y.; Schlag, W., Smoothness of projections, Bernoulli convolutions, and the dimension of exceptions, Duke Math. J., 102, 193-251, 2000",
+     "zbmath": {
+      "author_codes": [
+       "schlag.wilhelm",
+       "peres.yuval"
+      ],
+      "document_id": 1436087,
+      "msc": [
+       "42A85",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 411,
+      "year": "2000"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "Rams, M.; Simon, K., The dimension of projections of fractal percolations, J. Stat. Phys., 154, 633-655, 2014",
+     "zbmath": {
+      "author_codes": [
+       "rams.michal",
+       "simon.karoly"
+      ],
+      "document_id": 6305967,
+      "msc": [
+       "82B43",
+       "28A80",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 140,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "30",
+     "text": "Rhodes, R.; Vargas, V., Gaussian multiplicative chaos and applications: a review",
+     "zbmath": {
+      "author_codes": [
+       "rhodes.remi",
+       "vargas.vincent"
+      ],
+      "document_id": 6370363,
+      "msc": [
+       "60G57",
+       "60G15",
+       "60G60",
+       "28A80",
+       "60-02"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6844,
+      "year": "2014"
+     }
+    },
+    {
+     "doi": null,
+     "position": "31",
+     "text": "Rohlin, V. A., On the fundamental ideas of measure theory, Mat. Sb. N.S., 25, 107-150, 1949",
+     "zbmath": {
+      "author_codes": [
+       "rokhlin.v-a"
+      ],
+      "document_id": 3051069,
+      "msc": [],
+      "prefix": "Zbl",
+      "series_id": 550,
+      "year": "1949"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "388-412",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0024-6107",
+        "type": "print"
+       },
+       {
+        "number": "1469-7750",
+        "type": "electronic"
+       }
+      ],
+      "issue": "2",
+      "issue_id": 336955,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "John Wiley \\& Sons, Chichester; London Mathematical Society, London",
+      "series_id": 500,
+      "short_title": "J. Lond. Math. Soc., II. Ser.",
+      "title": "Journal of the London Mathematical Society. Second Series",
+      "volume": "90",
+      "year": "2014"
+     }
+    ],
+    "source": "J. Lond. Math. Soc., II. Ser. 90, No. 2, 388-412 (2014)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Exact dimensionality and projections of random self-similar measures and sets"
+   },
+   "year": "2014",
+   "zbmath_url": "https://zbmath.org/6355577"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, K. J."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [],
+   "id": 3768648,
+   "identifier": "0488.58021",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1112/jlms/s2-27.2.356",
+     "type": "doi",
+     "url": "https://doi.org/10.1112/jlms/s2-27.2.356"
+    }
+   ],
+   "msc": [
+    {
+     "code": "37-XX",
+     "scheme": "msc2020",
+     "text": "Dynamical systems and ergodic theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "356-372",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0024-6107",
+        "type": "print"
+       },
+       {
+        "number": "1469-7750",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 146628,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "John Wiley \\& Sons, Chichester; London Mathematical Society, London",
+      "series_id": 500,
+      "short_title": "J. Lond. Math. Soc., II. Ser.",
+      "title": "Journal of the London Mathematical Society. Second Series",
+      "volume": "27",
+      "year": "1983"
+     }
+    ],
+    "source": "J. Lond. Math. Soc., II. Ser. 27, 356-372 (1983)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Differentiation of the limit mapping in a dynamical system"
+   },
+   "year": "1983",
+   "zbmath_url": "https://zbmath.org/3768648"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, Kenneth"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "kovac.vjekoslav"
+      ],
+      "name": "Kova\u010d, Vjekoslav"
+     },
+     {
+      "aliases": [],
+      "checked": "0",
+      "codes": [
+       "yavicoli.alexia"
+      ],
+      "name": "Yavicoli, Alexia"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2022-12-29T09:43:34Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "julia.antoine",
+      "reviewer_id": "19180",
+      "name": "Antoine Julia",
+      "sign": "Antoine Julia (Paris)"
+     },
+     "text": "This paper adresses a variant of Falconer's distance problem: Given a set \\(E\\subset \\mathbb{R}^d\\), what can be said of the collection of all the distances between proints of \\(E\\): \\(\\{|x-y|, x,y\\in E\\}\\), depending on the dimension or density of \\(E\\). In particular it has been proved in [\\textit{H. Furstenberg} et al., in: On size Ramsey number of paths, trees and circuits. II. . 184--198 (1990; Zbl 0738.28013)] and [\\textit{J. Bourgain}, Isr. J. Math. 54, 307--316 (1986; Zbl 0609.10043)] that if \\(E\\) has positive density at infinity, then the distance set of \\(E\\) contains the interval \\([R,\\infty)\\) for sufficiently large \\(R\\).\n\nHere, the authors prove an analogous result, replacing the distance between pairs of points by ``configurations of \\(N\\) point sets'' up to isometry. More precisely, given an integer \\(N\\ge 2\\), if \\(E\\) has upper Banach density at infinity larger than \\((N-2)/(N-1)\\) (a condition weaker than the same bound on Lebesgue density) then for any \\(N\\) point set \\(P\\in \\mathbb{R}^d\\), there is \\(R>0\\) such that \\(E\\) contains a homothetic copy of \\(P\\) at every scale at least \\(R\\), and \\(R\\) depends only on \\(d\\), \\(N\\) and the diameter and separation of \\(P\\). Bourgain's result mentioned above dealt with families of \\(d\\) points spanning a hyperplane in \\(\\mathbb{R}^d\\).\n\nThe proof consists of two main parts. First (Lemma 2.2) Given a pattern \\(P=\\{x_0,x_1,\\dots, x_{N-1}\\}\\), suppose that \\(x_0\\in E\\) and that \\(E\\) contains large portions of the spheres of center \\(x_0\\) and radii \\(|x_j-x_0|\\) for \\(j=1,\\dots, N-1\\), then \\(E\\) contains a rotated copy of \\(P\\).\n\nThe harder part (Proposition \\(2.1\\)) is to prove that a set \\(E\\) with large density at infinity contains large portion of concentric spheres with related radii at large enough scales. This is done by using thin annuli to approximate spheres and passing to the limit via a singular integral argument involving the intersections of two thin annuli with different centers.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 7637559,
+   "identifier": "1518.28004",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s11854-022-0231-6",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s11854-022-0231-6"
+    },
+    {
+     "identifier": "2007.03493",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/2007.03493"
+    }
+   ],
+   "msc": [
+    {
+     "code": "28A75",
+     "scheme": "msc2020",
+     "text": "Length, area, volume, other geometric measure theory"
+    },
+    {
+     "code": "11B05",
+     "scheme": "msc2020",
+     "text": "Density, gaps, topology"
+    }
+   ],
+   "references": [
+    {
+     "doi": "10.1515/9783110317930.45",
+     "position": "1",
+     "text": "Bilyk, D., Discrepancy theory and harmonic analysis, Uniform Distribution and Quasi-Monte Carlo Methods, 45-61 (2014), Berlin: De Gruyter, Berlin",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/BF02764959",
+     "position": "2",
+     "text": "Bourgain, J., A Szemer\u00e9di type theorem for sets of positive density inR^k, Israel J. Math., 54, 307-316 (1986)",
+     "zbmath": {
+      "author_codes": [
+       "bourgain.jean"
+      ],
+      "document_id": 3985345,
+      "msc": [
+       "11B05",
+       "11B25",
+       "43A25",
+       "28C10",
+       "11B83"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": "10.1017/CBO9781139017732",
+     "position": "3",
+     "text": "Bugeaud, Y., Distribution Modulo one and Diophantine Approximation (2012), Cambridge: Cambridge University Press, Cambridge",
+     "zbmath": {
+      "author_codes": [
+       "bugeaud.yann"
+      ],
+      "document_id": 6066616,
+      "msc": [
+       "11-02",
+       "11J71",
+       "11K06"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3803,
+      "year": "2012"
+     }
+    },
+    {
+     "doi": "10.1007/s11854-016-0010-3",
+     "position": "4",
+     "text": "Chan, V.; \u0141aba, I.; Pramanik, M., Finite configurations in sparse sets, J. Anal. Math., 128, 289-335 (2016)",
+     "zbmath": {
+      "author_codes": [
+       "chan.vincent-m-k",
+       "pramanik.malabika",
+       "laba.izabella"
+      ],
+      "document_id": 6575179,
+      "msc": [
+       "28A78",
+       "42B10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 123,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "10.1112/blms.12043",
+     "position": "5",
+     "text": "Cook, B.; Magyar, \u00c1.; Pramanik, M., A Roth-type theorem for dense subsets of \u211d^d, Bull. Lond. Math. Soc., 49, 676-689 (2017)",
+     "zbmath": {
+      "author_codes": [
+       "cook.brian",
+       "magyar.akos",
+       "pramanik.malabika"
+      ],
+      "document_id": 6774585,
+      "msc": [
+       "05D10",
+       "42B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 369,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "10.1007/BFb0093404",
+     "position": "6",
+     "text": "Drmota, M.; Tichy, R. F., Sequences, Discrepancies and Applications (1997), Berlin: Springer, Berlin",
+     "zbmath": {
+      "author_codes": [
+       "drmota.michael",
+       "tichy.robert-franz"
+      ],
+      "document_id": 1001300,
+      "msc": [
+       "11K06",
+       "11-02",
+       "11K38",
+       "65C10",
+       "65D30",
+       "11K45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 4020,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": "10.1017/S0305004120000316",
+     "position": "7",
+     "text": "Durcik, P.; Kova\u010d, V., Boxes, extended boxes, and sets of positive upper density in the Euclidean space, Math. Proc. Cambridge Philos. Soc., 171, 481-501 (2021)",
+     "zbmath": {
+      "author_codes": [
+       "durcik.polona",
+       "kovac.vjekoslav"
+      ],
+      "document_id": 7411942,
+      "msc": [
+       "05D10",
+       "28A75",
+       "11B30",
+       "42B20",
+       "11B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 158,
+      "year": "2021"
+     }
+    },
+    {
+     "doi": "10.2140/apde.2022.15.507",
+     "position": "8",
+     "text": "Durcik, P.; Kova\u010d, V., A Szemer\u00e9di-type theorem for subsets of the unit cube, Anal. PDE., 15, 507-549 (2022)",
+     "zbmath": {
+      "author_codes": [
+       "durcik.polona",
+       "kovac.vjekoslav"
+      ],
+      "document_id": 7511980,
+      "msc": [
+       "05D10",
+       "42B20",
+       "11B30"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6354,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "10.1093/imrn/rnx093",
+     "position": "9",
+     "text": "Durcik, P.; Kova\u010d, V.; Rimani\u0107, L., On side lengths of corners in positive density subsets of the Euclidean space, Int. Math. Res. Not. IMRN, 22, 6844-6869 (2018)",
+     "zbmath": {
+      "author_codes": [
+       "kovac.vjekoslav",
+       "rimanic.luka",
+       "durcik.polona"
+      ],
+      "document_id": 7102048,
+      "msc": [
+       "05D10",
+       "42B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1388,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "10.1112/blms/18.5.471",
+     "position": "10",
+     "text": "Falconer, K. J.; Marstrand, J. M., Plane sets with positive density at infinity contain all large distances, Bull. London Math. Soc., 18, 471-474 (1986)",
+     "zbmath": {
+      "author_codes": [
+       "marstrand.j-m",
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3966555,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 369,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": "10.1007/978-3-642-72905-8_13",
+     "position": "11",
+     "text": "Furstenberg, H.; Katznelson, Y.; Weiss, B., Ergodic theory and configurations in sets of positive density, Mathematics of Ramsey Theory, 184-198 (1990), Berlin: Springer, Berlin",
+     "zbmath": {
+      "author_codes": [
+       "katznelson.yitzhak",
+       "weiss.benjamin",
+       "furstenberg.hillel"
+      ],
+      "document_id": 16111,
+      "msc": [
+       "28D05",
+       "11B05",
+       "05D10",
+       "37A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": "10.1016/0012-365X(94)00110-5",
+     "position": "12",
+     "text": "Graham, R. L., Recent trends in Euclidean Ramsey theory, Discrete Math., 136, 119-127 (1994)",
+     "zbmath": {
+      "author_codes": [
+       "graham.ronald-l"
+      ],
+      "document_id": 722488,
+      "msc": [
+       "05D10",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 69,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "A. Greenleaf, A. Iosevich, B. Liu and E. Palsson, An elementary approach to simplexes in thin subsets of euclidean space, arXiv:1608.04777 [math.CA].",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/s00209-020-02537-1",
+     "position": "14",
+     "text": "Greenleaf, A.; Iosevich, A.; Mkrtchyan, S., Existence of similar point configurations in thin subsets of \u211d^d, Math. Z., 297, 855-865 (2021)",
+     "zbmath": {
+      "author_codes": [
+       "iosevich.alex",
+       "greenleaf.allan",
+       "mkrtchyan.sevak"
+      ],
+      "document_id": 7303596,
+      "msc": [
+       "52C10",
+       "05D05",
+       "28A75",
+       "42B10",
+       "53C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 579,
+      "year": "2021"
+     }
+    },
+    {
+     "doi": "10.2140/apde.2016.9.1153",
+     "position": "15",
+     "text": "Henriot, K.; \u0141aba, I.; Pramanik, M., On polynomial configurations in fractal sets, Anal. PDE, 9, 1153-1184 (2016)",
+     "zbmath": {
+      "author_codes": [
+       "laba.izabella",
+       "pramanik.malabika",
+       "henriot.kevin"
+      ],
+      "document_id": 6608422,
+      "msc": [
+       "28A78",
+       "11B30",
+       "28A80"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6354,
+      "year": "2016"
+     }
+    },
+    {
+     "doi": "10.1090/proc/13538",
+     "position": "16",
+     "text": "Huckaba, L.; Lyall, N.; Magyar, \u00c1., Simplices and sets of positive upper density in \u211d^d, Proc. Amer. Math. Soc., 145, 2335-2347 (2017)",
+     "zbmath": {
+      "author_codes": [
+       "huckaba.lauren",
+       "lyall.neil",
+       "magyar.akos"
+      ],
+      "document_id": 6697201,
+      "msc": [
+       "11B30",
+       "42B25",
+       "42A38"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "2017"
+     }
+    },
+    {
+     "doi": "10.1007/s11856-019-1848-8",
+     "position": "17",
+     "text": "Iosevich, A.; Liu, B., Equilateral triangles in subsets of \u211d^dof large Hausdorff dimension, Israel J. Math., 231, 123-137 (2019)",
+     "zbmath": {
+      "author_codes": [
+       "iosevich.alex",
+       "liu.bochen"
+      ],
+      "document_id": 7067359,
+      "msc": [
+       "52C10",
+       "28A75",
+       "28A78"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2019"
+     }
+    },
+    {
+     "doi": "10.1007/978-3-030-26748-3_3",
+     "position": "18",
+     "text": "Iosevich, A.; Taylor, K., Finite trees inside thin subsets of \u211d^d, Modern Methods in Operator Theory and Harmonic Analysis, 51-56 (2019), Cham: Springer, Cham",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": "10.1007/s00039-004-0472-9",
+     "position": "19",
+     "text": "Kolountzakis, M., Distance sets corresponding to convex bodies, Geom. Funct. Anal., 14, 734-744 (2004)",
+     "zbmath": {
+      "author_codes": [
+       "kolountzakis.mihail-n"
+      ],
+      "document_id": 2133448,
+      "msc": [
+       "52A21"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1418,
+      "year": "2004"
+     }
+    },
+    {
+     "doi": null,
+     "position": "20",
+     "text": "V. Kova\u010d, Density theorems for anisotropic point configurations, Canad. J. Math., to appear.",
+     "zbmath": {
+      "author_codes": [
+       "kovac.vjekoslav"
+      ],
+      "document_id": 7613384,
+      "msc": [
+       "05D10",
+       "05C55",
+       "05C12",
+       "28A75",
+       "42B20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 383,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": null,
+     "position": "21",
+     "text": "Kuipers, L.; Niederreiter, H., Uniform Distribution of Sequences (1974), New York-London-Sydney: Wiley-Interscience, New York-London-Sydney",
+     "zbmath": {
+      "author_codes": [
+       "niederreiter.harald",
+       "kuipers.lauwerens"
+      ],
+      "document_id": 3440485,
+      "msc": [
+       "11-02",
+       "11J71",
+       "11K06",
+       "11K16",
+       "11K36",
+       "11K38",
+       "65D30",
+       "22D99",
+       "54D45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1974"
+     }
+    },
+    {
+     "doi": "10.1007/s00039-009-0003-9",
+     "position": "22",
+     "text": "\u0141aba, I.; Pramanik, M., Arithmetic progressions in sets of fractional dimension, Geom. Funct. Anal., 19, 429-456 (2009)",
+     "zbmath": {
+      "author_codes": [
+       "pramanik.malabika",
+       "laba.izabella"
+      ],
+      "document_id": 5627019,
+      "msc": [
+       "28A78",
+       "42A32",
+       "42A38",
+       "42A45",
+       "11B25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1418,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": "10.1017/S0305004117000184",
+     "position": "23",
+     "text": "Lyall, N.; Magyar, \u00c1., Product of simplices and sets of positive upper density in \u211d^d, Math. Proc. Cambridge Philos. Soc., 165, 25-51 (2018)",
+     "zbmath": {
+      "author_codes": [
+       "lyall.neil",
+       "magyar.akos"
+      ],
+      "document_id": 6903459,
+      "msc": [
+       "11B05",
+       "52C07",
+       "05D10",
+       "28A75",
+       "37A45",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 158,
+      "year": "2018"
+     }
+    },
+    {
+     "doi": "10.2140/apde.2020.13.685",
+     "position": "24",
+     "text": "Lyall, N.; Magyar, \u00c1., Distance graphs and sets of positive upper density in \u211d^d, Anal. PDE, 13, 685-700 (2020)",
+     "zbmath": {
+      "author_codes": [
+       "lyall.neil",
+       "magyar.akos"
+      ],
+      "document_id": 7190788,
+      "msc": [
+       "11B30",
+       "05C55",
+       "05C62",
+       "28A75",
+       "52C10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6354,
+      "year": "2020"
+     }
+    },
+    {
+     "doi": "10.1090/btran/61",
+     "position": "25",
+     "text": "Lyall, N.; Magyar, \u00c1., Weak hypergraph regularity and applications to geometric Ramsey theory, Trans. Amer. Math. Soc. Ser. B, 9, 160-207 (2022)",
+     "zbmath": {
+      "author_codes": [
+       "lyall.neil",
+       "magyar.akos"
+      ],
+      "document_id": 7503402,
+      "msc": [
+       "11B30",
+       "05D10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 8835,
+      "year": "2022"
+     }
+    },
+    {
+     "doi": "10.1007/s11856-015-1187-3",
+     "position": "26",
+     "text": "Morris, I. D., A note on configurations in sets of positive density which occur at all large scales, Israel J. Math., 207, 719-738 (2015)",
+     "zbmath": {
+      "author_codes": [
+       "morris.ian-d"
+      ],
+      "document_id": 6486896,
+      "msc": [
+       "28A75",
+       "28D05",
+       "37A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2015"
+     }
+    },
+    {
+     "doi": "10.1016/j.jcta.2008.10.006",
+     "position": "27",
+     "text": "Quas, A., Distances in positive density sets in \u211d^d, J. Combin. Theory Ser. A, 116, 979-987 (2009)",
+     "zbmath": {
+      "author_codes": [
+       "quas.anthony-n"
+      ],
+      "document_id": 5565598,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "2009"
+     }
+    },
+    {
+     "doi": "10.1090/proc/14802",
+     "position": "28",
+     "text": "Rice, A., Sets in \u211d^dwith slow-decaying density that avoid an unbounded collection of distances, Proc. Amer. Math. Soc., 148, 523-526 (2020)",
+     "zbmath": {
+      "author_codes": [
+       "rice.alex"
+      ],
+      "document_id": 7152580,
+      "msc": [
+       "11B05",
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 623,
+      "year": "2020"
+     }
+    },
+    {
+     "doi": null,
+     "position": "29",
+     "text": "Sz\u00e9kely, L., Remarks on the chromatic number of geometric graphs, Graphs and Other Combinatorial Topics (Prague, 1982), 312-315 (1983), Leipzig: Teubner, Leipzig",
+     "zbmath": {
+      "author_codes": [
+       "szekely.laszlo-a"
+      ],
+      "document_id": 3851122,
+      "msc": [
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1983"
+     }
+    },
+    {
+     "doi": "10.1090/gsm/142",
+     "position": "30",
+     "text": "Tao, T., Higher Order Fourier Analysis (2012), Providence, RI: American Mathematical Society, Providence, RI",
+     "zbmath": {
+      "author_codes": [
+       "tao.terence-c"
+      ],
+      "document_id": 6110460,
+      "msc": [
+       "11B30",
+       "11-02",
+       "11L07",
+       "11U07",
+       "37A45"
+      ],
+      "prefix": "Zbl",
+      "series_id": 3915,
+      "year": "2012"
+     }
+    },
+    {
+     "doi": "10.1007/s11856-021-2173-6",
+     "position": "31",
+     "text": "Yavicoli, A., Patterns in thick compact sets, Israel J. Math., 244, 95-126 (2021)",
+     "zbmath": {
+      "author_codes": [
+       "yavicoli.alexia"
+      ],
+      "document_id": 7436538,
+      "msc": [
+       "28A80",
+       "11B25"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "2021"
+     }
+    },
+    {
+     "doi": "10.1007/BF02789447",
+     "position": "32",
+     "text": "Ziegler, T., Nilfactors of \u211d^m-actions and configurations in sets of positive upper density in \u211d^m, J. Anal. Math., 99, 249-266 (2006)",
+     "zbmath": {
+      "author_codes": [
+       "ziegler.tamar"
+      ],
+      "document_id": 5256540,
+      "msc": [
+       "37A30",
+       "28D10"
+      ],
+      "prefix": "Zbl",
+      "series_id": 123,
+      "year": "2006"
+     }
+    }
+   ],
+   "source": {
+    "book": [],
+    "pages": "339-359",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0021-7670",
+        "type": "print"
+       },
+       {
+        "number": "1565-8538",
+        "type": "electronic"
+       }
+      ],
+      "issue": "1",
+      "issue_id": 491362,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Berlin/Heidelberg; Hebrew University Magnes Press, Jerusalem",
+      "series_id": 123,
+      "short_title": "J. Anal. Math.",
+      "title": "Journal d'Analyse Math\u00e9matique",
+      "volume": "148",
+      "year": "2022"
+     }
+    ],
+    "source": "J. Anal. Math. 148, No. 1, 339-359 (2022)."
+   },
+   "states": [
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "The density of sets containing large similar copies of finite sets"
+   },
+   "year": "2022",
+   "zbmath_url": "https://zbmath.org/7637559"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "croft.hallard-t"
+      ],
+      "name": "Croft, Hallard T."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "falconer.kenneth-j"
+      ],
+      "name": "Falconer, Kenneth J."
+     },
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "guy.richard-k"
+      ],
+      "name": "Guy, Richard K."
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "0001-01-01T00:00:00Z",
+   "document_type": {
+    "code": "b",
+    "description": "book / book article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": "3934",
+      "name": "William Moser",
+      "sign": "William Moser (Montreal)"
+     },
+     "text": "This book had its beginnings thirty years ago when the first author started to collect and circulate many unsolved problems in geometry. There was an initial large collection followed by several addenda. Although poorly printed (some problems in ``scribbles'') they were received with gratitude, copied and further circulated. The world of discrete geometers waited (and waited) for the book version to appear. There was a well-known conjecture that it would not appear in this century. But it has! Halleluya!! This volume is a source book for anyone wishing to pursue problems in convex, discrete and combinatorial geometry. Following the Preface there is a list of Other Problem Collections (17 entries) and a list of Standard References (26 entries). Then follow 6 sections, subdivided into subsections each containing a problem or a group of related problems ending with references for the subsection. The reader (of this review) may get a ``feel'' for the content of the book from the next part of the review which gives the titles of the sections, followed by the number of subsections and the titles of 3 ``sample'' subsections.\n\n\n\\textbf{A. Convexity} (38): A5. Illumination problems; A14. Rotating polyhedra; A17. Isoperimetric inequalities and extremal problems. \n\n\\textbf{B. Polygons, Polyhedra and Polytopes} (25): B10. Shadows of polyhedra; B14. Rigidity of frameworks; B20. Lengths of paths on polyhedra. \n\n\\textbf{C. Tiling and Dissection} (20): C2. Squaring the square; C14. Which polygons tile the plane?; C20. Problems on equidecomposability. \n\n\\textbf{D. Packing and Covering} (18): D3. Covering a circle with equal discs; D7. The problem of Tammes; D10. Packing balls in space. \n\n\\textbf{E. Combinatorial Geometry} (14) E7. Neighborly convex bodies; E11. Sets that can be moved to cover several lattice points; E13. Variations on Minkowski's theorem. \n\n\\textbf{F. Finite Sets of Points} (17): F1. Minimum number of distinct distances: F4. Can each distance occur a different number of times?; F12. Lines through sets of points.\n\n\\textbf{G. General Geometric Problems} (16): G4. Maximal sets avoiding certain distance configurations; G12. Euclidean Ramsey problems; G16. Unions of similar copies of sets.\n\n\nIn spite of the several decade gestation period there is evidence that the ``final'' manuscript was prepared in haste from the vast amount of information available. Readers should report errors (e.g., on page 150, \\(r(4)=3\\) should be \\(r(4)=6\\)) and new relevant results (e.g., a paper by Csima and Sawyer, to appear shortly in Discrete and Computational Geometry, is an important addition to F12) to the authors for consideration in preparing the second edition. Meanwhile, choose a problem from this wonderful collection and get cracking. And give thanks to C-F-G for this service to the community.",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 50186,
+   "identifier": "0748.52001",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/978-1-4612-0963-8",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/978-1-4612-0963-8"
+    },
+    {
+     "identifier": "A000944",
+     "type": "oeis",
+     "url": "https://oeis.org/A000944"
+    },
+    {
+     "identifier": "A003034",
+     "type": "oeis",
+     "url": "https://oeis.org/A003034"
+    },
+    {
+     "identifier": "A005670",
+     "type": "oeis",
+     "url": "https://oeis.org/A005670"
+    },
+    {
+     "identifier": "A005841",
+     "type": "oeis",
+     "url": "https://oeis.org/A005841"
+    },
+    {
+     "identifier": "A005842",
+     "type": "oeis",
+     "url": "https://oeis.org/A005842"
+    },
+    {
+     "identifier": "A019502",
+     "type": "oeis",
+     "url": "https://oeis.org/A019502"
+    },
+    {
+     "identifier": "A019503",
+     "type": "oeis",
+     "url": "https://oeis.org/A019503"
+    },
+    {
+     "identifier": "A019504",
+     "type": "oeis",
+     "url": "https://oeis.org/A019504"
+    },
+    {
+     "identifier": "A058211",
+     "type": "oeis",
+     "url": "https://oeis.org/A058211"
+    },
+    {
+     "identifier": "A193362",
+     "type": "oeis",
+     "url": "https://oeis.org/A193362"
+    },
+    {
+     "identifier": "A243309",
+     "type": "oeis",
+     "url": "https://oeis.org/A243309"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52-02",
+     "scheme": "msc2020",
+     "text": "Research exposition (monographs, survey articles) pertaining to convex and discrete geometry"
+    },
+    {
+     "code": "00A07",
+     "scheme": "msc2020",
+     "text": "Problem books"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [
+     {
+      "book_id": 50186,
+      "isbn": [
+       {
+        "number": "978-0-387-97506-1",
+        "type": "hbk"
+       },
+       {
+        "number": "978-1-4612-6962-5",
+        "type": "pbk"
+       },
+       {
+        "number": "978-1-4612-0963-8",
+        "type": "ebook"
+       }
+      ],
+      "publisher": "New York etc.: Springer-Verlag",
+      "year": "1991"
+     }
+    ],
+    "pages": "xv, 198 p.",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "0941-3502",
+        "type": "print"
+       },
+       {
+        "number": "2197-8506",
+        "type": "electronic"
+       }
+      ],
+      "issue": null,
+      "issue_id": 380136,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer, Cham",
+      "series_id": 9114,
+      "short_title": "Probl. Books Math.",
+      "title": "Problem Books in Mathematics",
+      "volume": null,
+      "year": "1991"
+     }
+    ],
+    "source": "Problem Books in Mathematics 2. New York etc.: Springer-Verlag (ISBN 978-0-387-97506-1/hbk; 978-1-4612-6962-5/pbk; 978-1-4612-0963-8/ebook). xv, 198 p. (1991)."
+   },
+   "states": [
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Unsolved problems in geometry"
+   },
+   "year": "1991",
+   "zbmath_url": "https://zbmath.org/50186"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 9,
+  "nr_request_results": 9,
+  "query_execution_time_in_seconds": 0.2576100826263428,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:14:03Z"
+ }
+}

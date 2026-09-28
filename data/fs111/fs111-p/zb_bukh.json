@@ -1,0 +1,627 @@
+{
+ "result": [
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "bukh.boris"
+      ],
+      "name": "Bukh, Boris"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2009-06-17T14:40:18Z",
+   "document_type": {
+    "code": "j",
+    "description": "journal article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": "szekely.laszlo-a",
+      "reviewer_id": "5891",
+      "name": "L\u00e1szl\u00f3 A. Sz\u00e9kely",
+      "sign": "L\u00e1szl\u00f3 A. Sz\u00e9kely (Columbia)"
+     },
+     "text": "For a set of distances \\(D=\\{d_1,d_2,\\dots,d_k\\}\\), a set \\(A\\subset \\mathbb{R}^n\\) is called \\(D\\)-avoiding, if no pair of points of \\(A\\) is at distance \\(d_i\\) for some \\(i\\). The paper shows that the density of \\(A\\) is exponentially small in \\(k\\) provided the ratios \\(d_1/d_2,d_2/d_3,\\dots,d_{k-1}/d_k\\) are all small enough.\n\nThis resolves an old question of the reviewer, and generalizes results of \\textit{H. Furstenberg, Y. Katznelson} and \\textit{B. Weiss} [Coll. Pap. Symp. Graph Theory, Prague/Czech., Algorithms Comb. 5, 184--198 (1990; Zbl 0738.28013)]; \\textit{K. J. Falconer} and \\textit{J. M. Marstrand} [Bull. Lond. Math. Soc. 18, 471--474 (1986; Zbl 0599.28008)], and \\textit{J. Bourgain} [Isr. J. Math. 54, 307--316 (1986; Zbl 0609.10043)].",
+     "contribution_type": "review"
+    }
+   ],
+   "id": 5565914,
+   "identifier": "1169.52005",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1007/s00039-008-0673-8",
+     "type": "doi",
+     "url": "https://doi.org/10.1007/s00039-008-0673-8"
+    },
+    {
+     "identifier": "math/0703856",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/math/0703856"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    },
+    {
+     "code": "05D10",
+     "scheme": "msc2020",
+     "text": "Ramsey theory"
+    },
+    {
+     "code": "11B75",
+     "scheme": "msc2020",
+     "text": "Other combinatorial number theory"
+    }
+   ],
+   "references": [],
+   "source": {
+    "book": [],
+    "pages": "668-697",
+    "series": [
+     {
+      "acronym": null,
+      "issn": [
+       {
+        "number": "1016-443X",
+        "type": "print"
+       },
+       {
+        "number": "1420-8970",
+        "type": "electronic"
+       }
+      ],
+      "issue": "3",
+      "issue_id": 232323,
+      "parallel_title": null,
+      "part": null,
+      "publisher": "Springer International Publishing, Cham",
+      "series_id": 1418,
+      "short_title": "Geom. Funct. Anal.",
+      "title": "Geometric and Functional Analysis. GAFA",
+      "volume": "18",
+      "year": "2008"
+     }
+    ],
+    "source": "Geom. Funct. Anal. 18, No. 3, 668-697 (2008)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "c",
+     "is cited"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Measurable sets with excluded distances"
+   },
+   "year": "2008",
+   "zbmath_url": "https://zbmath.org/5565914"
+  },
+  {
+   "biographic_references": [],
+   "contributors": {
+    "authors": [
+     {
+      "aliases": [],
+      "checked": "1",
+      "codes": [
+       "bukh.boris"
+      ],
+      "name": "Bukh, Boris"
+     }
+    ],
+    "author_references": [],
+    "editors": []
+   },
+   "database": "Zbl",
+   "datestamp": "2008-06-05T12:50:57Z",
+   "document_type": {
+    "code": "a",
+    "description": "serial article"
+   },
+   "editorial_contributions": [
+    {
+     "language": "English",
+     "reviewer": {
+      "author_code": null,
+      "reviewer_id": null,
+      "name": null,
+      "sign": null
+     },
+     "text": "Summary: For a set of distances \\(D=\\{d_{1},\\cdots ,d_k\\}\\) a set \\(A\\) in the plane is called \\(D\\)-avoiding if no pair of points of \\(A\\) is at distance \\(di\\) for some \\(i\\). We show that the density of \\(A\\) is exponentially small in \\(k\\) provided the ratios \\(d_{1}/d_{2},d_{2}/d_{3},\\cdots ,d_{k - 1}/d_k\\) are all small enough. We also show that there exists a largest \\(D\\)-avoiding set, and give an algorithm to compute the maximum density of a \\(D\\)-avoiding set for any \\(D\\).\n\nThe journal version has been published in Geom. Funct. Anal. 18, No. 3, 668--697 (2008; Zbl 1169.52005).\n\nFor the entire collection see [Zbl 1137.05002].",
+     "contribution_type": "summary"
+    }
+   ],
+   "id": 5284885,
+   "identifier": "1236.52015",
+   "keywords": [],
+   "language": {
+    "languages": [
+     "English"
+    ],
+    "addition": [
+     null
+    ]
+   },
+   "license": [],
+   "links": [
+    {
+     "identifier": "10.1016/j.endm.2007.07.011",
+     "type": "doi",
+     "url": "https://doi.org/10.1016/j.endm.2007.07.011"
+    },
+    {
+     "identifier": "math/0703856",
+     "type": "arxiv",
+     "url": "https://arxiv.org/abs/math/0703856"
+    }
+   ],
+   "msc": [
+    {
+     "code": "52C10",
+     "scheme": "msc2020",
+     "text": "Erd\u0151s problems and related topics of discrete geometry"
+    },
+    {
+     "code": "05D10",
+     "scheme": "msc2020",
+     "text": "Ramsey theory"
+    },
+    {
+     "code": "11B75",
+     "scheme": "msc2020",
+     "text": "Other combinatorial number theory"
+    }
+   ],
+   "references": [
+    {
+     "doi": null,
+     "position": "1",
+     "text": "Bourgain, J., A Szemer\u00e9di type theorem for sets of positive density in \\textbf{R}^k, Israel J. Math., 54, 3, 307-316, 1986",
+     "zbmath": {
+      "author_codes": [
+       "bourgain.jean"
+      ],
+      "document_id": 3985345,
+      "msc": [
+       "11B05",
+       "11B25",
+       "43A25",
+       "28C10",
+       "11B83"
+      ],
+      "prefix": "Zbl",
+      "series_id": 115,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": null,
+     "position": "2",
+     "text": "Bukh, B., Measurable sets with excluded distances, Preprint at",
+     "zbmath": {
+      "author_codes": [
+       "bukh.boris"
+      ],
+      "document_id": 5565914,
+      "msc": [
+       "52C10",
+       "05D10",
+       "11B75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1418,
+      "year": "2008"
+     }
+    },
+    {
+     "doi": null,
+     "position": "3",
+     "text": "Croft, Hallard T.; Falconer, Kenneth J.; Guy, Richard K., Unsolved problems in geometry, Problem Books in Mathematics, 1994, Springer-Verlag: Springer-Verlag New York, Corrected reprint of the 1991 original, Unsolved Problems in Intuitive Mathematics, II",
+     "zbmath": {
+      "author_codes": [
+       "guy.richard-k"
+      ],
+      "document_id": 683826,
+      "msc": [
+       "11-02",
+       "00A07",
+       "11Bxx",
+       "11Dxx",
+       "11Nxx",
+       "11Pxx",
+       "11Axx"
+      ],
+      "prefix": "Zbl",
+      "series_id": 9114,
+      "year": "1994"
+     }
+    },
+    {
+     "doi": null,
+     "position": "4",
+     "text": "de Bruijn, N. G.; Erd\u0151s, P., A colour problem for infinite graphs and a problem in the theory of relations, Nederl. Akad. Wetensch. Proc. Ser. A. 54 = Indagationes Math., 13, 369-373, 1951",
+     "zbmath": {
+      "author_codes": [
+       "de-bruijn.nicolaas-govert",
+       "erdos.pal"
+      ],
+      "document_id": 3068973,
+      "msc": [
+       "05C15",
+       "05C35"
+      ],
+      "prefix": "Zbl",
+      "series_id": 6644,
+      "year": "1951"
+     }
+    },
+    {
+     "doi": null,
+     "position": "5",
+     "text": "Erd\u0151s, P., On the combinatorial problems which I would most like to see solved, Combinatorica, 1, 1, 25-42, 1981",
+     "zbmath": {
+      "author_codes": [
+       "erdos.pal"
+      ],
+      "document_id": 3763931,
+      "msc": [
+       "05-02",
+       "05Cxx",
+       "05Bxx",
+       "11B75",
+       "03E05",
+       "00A07"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "6",
+     "text": "Falconer, K. J., The realization of distances in measurable subsets covering \\textbf{R}^n, J. Combin. Theory Ser. A, 31, 2, 184-189, 1981",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3735836,
+      "msc": [
+       "05B30",
+       "05C15",
+       "28A05",
+       "51M20"
+      ],
+      "prefix": "Zbl",
+      "series_id": 479,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "7",
+     "text": "Falconer, K. J., The realization of small distances in plane sets of positive measure, Bull. London Math. Soc., 18, 5, 475-477, 1986",
+     "zbmath": {
+      "author_codes": [
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3966556,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 369,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": null,
+     "position": "8",
+     "text": "Furstenberg, Hillel; Katznelson, Yitzchak; Weiss, Benjamin, Ergodic theory and configurations in sets of positive density, 184-198",
+     "zbmath": {
+      "author_codes": [
+       "katznelson.yitzhak",
+       "weiss.benjamin",
+       "furstenberg.hillel"
+      ],
+      "document_id": 16111,
+      "msc": [
+       "28D05",
+       "11B05",
+       "05D10",
+       "37A05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1990"
+     }
+    },
+    {
+     "doi": null,
+     "position": "9",
+     "text": "Falconer, K. J.; Marstrand, J. M., Plane sets with positive density at infinity contain all large distances, Bull. London Math. Soc., 18, 5, 471-474, 1986",
+     "zbmath": {
+      "author_codes": [
+       "marstrand.j-m",
+       "falconer.kenneth-j"
+      ],
+      "document_id": 3966555,
+      "msc": [
+       "28A75"
+      ],
+      "prefix": "Zbl",
+      "series_id": 369,
+      "year": "1986"
+     }
+    },
+    {
+     "doi": null,
+     "position": "10",
+     "text": "Frankl, P.; Wilson, R. M., Intersection theorems with geometric consequences, Combinatorica, 1, 4, 357-368, 1981",
+     "zbmath": {
+      "author_codes": [
+       "frankl.peter",
+       "wilson.richard-m"
+      ],
+      "document_id": 3784938,
+      "msc": [
+       "05C65",
+       "05A05",
+       "05C15",
+       "05C35",
+       "03E05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 919,
+      "year": "1981"
+     }
+    },
+    {
+     "doi": null,
+     "position": "11",
+     "text": "Hadwiger, Hugo, Ungel\u00f6ste probleme no. 40, Elemente de Math, 16, 103-104, 1961",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "12",
+     "text": "Kahn, Jeff; Kalai, Gil, A counterexample to Borsuk's conjecture, Bull. Amer. Math. Soc. (N.S.), 29, 1, 60-62, 1993",
+     "zbmath": {
+      "author_codes": [
+       "kahn.jeff-d",
+       "kalai.gil"
+      ],
+      "document_id": 431304,
+      "msc": [
+       "52A20",
+       "05D05",
+       "52A37"
+      ],
+      "prefix": "Zbl",
+      "series_id": 1661,
+      "year": "1993"
+     }
+    },
+    {
+     "doi": null,
+     "position": "13",
+     "text": "Koml\u00f3s, J.; Simonovits, M., Szemer\u00e9di's regularity lemma and its applications in graph theory, 295-352",
+     "zbmath": {
+      "author_codes": [
+       "simonovits.miklos",
+       "komlos.janos"
+      ],
+      "document_id": 878896,
+      "msc": [
+       "05C35",
+       "05C80",
+       "05C05",
+       "05C10",
+       "05C85",
+       "05C65",
+       "05C70"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "1996"
+     }
+    },
+    {
+     "doi": null,
+     "position": "14",
+     "text": "Moser, Leo; Moser, William, Solution to problem 10, Canad. Math. Bull., 4, 187-189, 1961",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "15",
+     "text": "Ray-Chaudhuri, Dijen K.; Wilson, Richard M., On t-designs, Osaka J. Math., 12, 3, 737-744, 1975",
+     "zbmath": {
+      "author_codes": [
+       "ray-chaudhuri.dijen-k",
+       "wilson.richard-m"
+      ],
+      "document_id": 3532974,
+      "msc": [
+       "05B30",
+       "05B05"
+      ],
+      "prefix": "Zbl",
+      "series_id": 613,
+      "year": "1975"
+     }
+    },
+    {
+     "doi": null,
+     "position": "16",
+     "text": "Solovay, Robert M., A model of set-theory in which every set of reals is Lebesgue measurable, Ann. of Math., 92, 2, 1-56, 1970",
+     "zbmath": {
+      "author_codes": [
+       "solovay.robert-m"
+      ],
+      "document_id": 3328996,
+      "msc": [
+       "03C62",
+       "03E55",
+       "03E25",
+       "03E35",
+       "03E40"
+      ],
+      "prefix": "Zbl",
+      "series_id": 2531,
+      "year": "1970"
+     }
+    },
+    {
+     "doi": null,
+     "position": "17",
+     "text": "Scheinerman, Edward R.; Ullman, Daniel H., Fractional graph theory, Wiley-Interscience Series in Discrete Mathematics and Optimization, 1997, John Wiley & Sons Inc.: John Wiley & Sons Inc. New York, A rational approach to the theory of graphs, With a foreword by Claude Berge, A Wiley-Interscience Publication",
+     "zbmath": {
+      "author_codes": [
+       "scheinerman.edward-r",
+       "ullman.daniel-h"
+      ],
+      "document_id": 1131873,
+      "msc": [
+       "05-02",
+       "05C70",
+       "05C65",
+       "05B35",
+       "90C05",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 10225,
+      "year": "1997"
+     }
+    },
+    {
+     "doi": null,
+     "position": "18",
+     "text": "L\u00e1szl\u00f3 Sz\u00e9kely. Analytic methods in combinatorics. PhD thesis, Hungarian Academy of Sciences, 1985. (in Hungarian)",
+     "zbmath": {
+      "author_codes": [],
+      "document_id": null,
+      "msc": [],
+      "prefix": null,
+      "series_id": 0,
+      "year": null
+     }
+    },
+    {
+     "doi": null,
+     "position": "19",
+     "text": "Sz\u00e9kely, L. A., Erd\u0151s on unit distances and the Szemer\u00e9di-Trotter theorems, 649-666",
+     "zbmath": {
+      "author_codes": [
+       "szekely.laszlo-a"
+      ],
+      "document_id": 1943977,
+      "msc": [
+       "05C12",
+       "52C10",
+       "05C15"
+      ],
+      "prefix": "Zbl",
+      "series_id": 0,
+      "year": "2002"
+     }
+    }
+   ],
+   "source": {
+    "book": [
+     {
+      "book_id": 5281986,
+      "isbn": [],
+      "publisher": "Amsterdam: Elsevier",
+      "year": "2007"
+     }
+    ],
+    "pages": "65-71",
+    "series": [],
+    "source": "M\u00e1rquez, Alberto (ed.) et al., Proceedings of the 4th European conference on combinatorics, graph theory and applications, EuroComb'07, Seville, Spain, September 11--15, 2007. Amsterdam: Elsevier. Electronic Notes in Discrete Mathematics 29, 65-71 (2007)."
+   },
+   "states": [
+    [
+     "s",
+     "item with single author"
+    ],
+    [
+     "o",
+     "has open version"
+    ],
+    [
+     "r",
+     "item has references"
+    ]
+   ],
+   "title": {
+    "addition": null,
+    "original": null,
+    "subtitle": null,
+    "title": "Measurable sets with excluded distances"
+   },
+   "year": "2007",
+   "zbmath_url": "https://zbmath.org/5284885"
+  }
+ ],
+ "status": {
+  "execution": "successful request",
+  "execution_bool": true,
+  "internal_code": "ok",
+  "last_id": null,
+  "nr_total_results": 2,
+  "nr_request_results": 2,
+  "query_execution_time_in_seconds": 0.0806431770324707,
+  "status_code": 200,
+  "time_stamp": "2026-09-28T04:07:19Z"
+ }
+}

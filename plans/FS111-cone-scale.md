@@ -356,3 +356,79 @@ one class. So the equality holds; **the equivalence `χ_m⁰(ℝ²) ≥ 7 ⟺ in
 | X16 | row 134 | the shadow map transports curvature along any chain of unit-parallel curves: test whether row 134's cone removal runs for piecewise `C²` boundaries (Q-NO extended), an alternative to REG-A | M3 |
 | X17 | row 41, row 111 | compactness sees bounded size and forgets density-0 structure: route M's REG is a statement about limits; route R keeps what the sequence does at density 0 | brief framing |
 | X18 | G51, delegation | a competitor pair once phases run (regularity against wild fragments), a blind verifier for card 1 first | staffing |
+
+## Stage 4 — SAVED: §PA — the prior-art gate (WORKFLOW 3.2, all eight questions), 2026-09-27 night
+
+**The recognition sentence (G46), used as the query.** FS-111's object, after card 1, is *the regularity of tight (zero-slack) measurable
+colourings of the plane that avoid one distance, and of their near-optimal approximants*. It sits in three literatures that cite one another thinly:
+(i) **densities of distance-avoiding sets** — compactness, supersaturation, "block structure" of near-optimal sets (Bourgain 1986; `[Bukh2008]`;
+`[KMOR2016]`; Cohen–Mani 2024); (ii) **the chromatic number of the plane under regularity hypotheses** — measurable, map-type, nice, polygonal
+(`[Falconer1981]`, `[Woodall1973]`, `[Townsend1981]`, `[Thomassen1999]`, `[Voronov2023]`, `[SokolovVoronov2025]`); (iii) **geometric measure
+theory of boundaries** — sets of positive reach and their planar characterisation (Federer; Rataj–Zajíček), rolling-ball and `r`-convexity
+conditions, and the regularity of minimising planar clusters (Morgan; Almgren; Taylor). Saved queries: `data/fs111/fs111-p/zb_*.json`,
+`s2_bukh_cit.json`; tool `tools/fs111_p_zb.py` (self-test: a positive control, Zbl 0599.28008, and a negative control whose first run **failed for its
+own reason** — the API answers a clean zero with status 404, not 200; the tool was fixed before any query was believed).
+
+| # | question | what was done | finding |
+|---|---|---|---|
+| 1 | the discipline's words | zbMATH: `(cc:05C15 \| cc:52C10) & ab:plane & (ab:measurable \| ab:regions \| ab:map) & ab:distance` (17 hits); `ab:"distance" & ab:"measurable" & ab:"map" & ab:colo(u)ring` (clean 0); `(ab:"block structure" \| ab:"unit distance") & ab:avoid* & ab:density` (6); clusters: `au:Morgan & ti:"soap bubbles"` (7), `(ti:"planar clusters" \| ti:"minimal clusters") & (ab:"circular arcs" \| ab:regularity)` (clean 0); arXiv: "positive reach" (Rataj), "Blaschke rolling", "ball-polyhedra" | (i) and (iii) answer; (ii) returns the hierarchy papers only. Every regularity statement found is either one class (i) or variational (iii) |
+| 2 | two disciplines | (i) × (ii): Bukh's citing works; (ii) × (iii): the S–V and Voronov texts read for "measurable", "map", "regular"; (i) × (iii): Cohen–Mani §2.3 | **PA-1, PA-2, PA-3 below** |
+| 3 | the question, not the method | Soifer 2024 chs. 8–9 (held; text searched: map-type and measurable chapters, their open problems); S–V §1 and §9 (held); `[Voronov2023]` §1–§2 (held); Cohen–Mani §5 | **The one-class form of REG is posed in print and open**: Cohen–Mani, *Clustering in typical unit-distance avoiding sets* (arXiv:2407.05071; Acta Math. Hungar. 176 (2025) 473–497), §5, verbatim: *"Question 5.1. Does there exist a set A with block structure and δ(A) = m₁?"*, with §2.3: *"Our intuition is that dense unit distance avoiding sets are a union of large scale blocks. Unfortunately, we don't know how to prove such a strong structural statement."* The **multi-class form is not found posed**: the hierarchy is printed one way only — S–V §1, verbatim: *"χ{1} (R2 ) ≤ χmes (R2 ) ≤ χmap (R2 ) ≤ χpoly (R2 )"*; `[Voronov2023]` §1: *"5 ≤ χ{1} (R2 ) ≤ χmes (R2 ) ≤ χmap (R2 ) ≤ 7 ≤ χ[1−ε,1+ε] (R2 )"*, and of the measurable problem, *"The problem on measurable chromatic number seems to be substantially more difficult than the one under consideration."* Soifer 2024 chs. 8–9 pose nothing on the reverse inequality |
+| 4 | outside arXiv | zbMATH reviews (reviewer's reviews, not author summaries): `[FalconerMarstrand1986]` (Zbl 0599.28008), Furstenberg–Katznelson–Weiss 1990 (Zbl 0738.28013), Bourgain 1986 (Zbl 0609.10043), Morgan 1994 (Zbl 0820.53002); the Geombinatorics catalogue not re-searched (FS-107's and FS-112's gates covered it for the map line) | FM86, FKW90, Bourgain86: sets of positive upper density contain all large distances — compactness at infinity, **silent on regularity at a scale**. Morgan 1994's review: *"the solutions consist of constant- curvature arcs meeting in threes at 120 degrees"* — the variational paradigm's regularity theorem (a perimeter functional, which FS-111's problem does not have: a constraint, not an energy). **Unheld:** FM86, FKW90, Bourgain86, Morgan94 (the MSP PDF refused a scripted fetch), Walther 1999 (rolling ball), Brown 1972 and Fu 1985 (parallel sets) |
+| 5 | the poser's citation graph | Semantic Scholar: the 32 works citing `[Bukh2008]` (the compactness principle's modern source), titles screened | Cohen–Mani 2024 (the structure of near-optimal avoiding sets — fetched and read, below); Castro-Silva 2021 (forbidden configurations; abstract); Chybowska-Sokół–Junosza-Szaniawski–Węsek 2022 (`[1, b]`-distance colourings; abstract) |
+| 6 | open every neighbouring work | fetched to `~/source/library/pdf/`: `arXiv-math0703856-bukh-measurable-sets-excluded-distances.pdf`, `arXiv-2407.05071-cohen-mani-clustering-unit-distance-avoiding-sets.pdf`, `arXiv-2512.17606-rataj-zajicek-local-structure-2d-positive-reach.pdf`, `arXiv-1604.08841-rataj-zajicek-structure-positive-reach.pdf` | reading status per section in the table below |
+| 7 | two databases | zbMATH and Semantic Scholar (Bukh's citing list) | **OpenAlex not run** — a debt, named (G49) |
+| 8 | full author listings, the question in their words | Falconer (`au:Falconer, K* & distance`, 9 items: FM86, Falconer 1986 small distances, Croft–Falconer 1981, CFG 1991); Bourgain 1986; Voronov, Parts, Croft, Pritikin at FS-107 | nothing further on regularity of colourings |
+
+**Reading status, per section** (G50; proposed `BIBLIOGRAPHY.md` rows in stage 6):
+
+| work | held at | read |
+|---|---|---|
+| `[Bukh2008]`, arXiv:math/0703856v2 | `~/source/library/pdf/arXiv-math0703856-bukh-measurable-sets-excluded-distances.pdf` | §1 (introduction) in full; §3's framing: the zooming-out operator, Lemma 3, the seven conditions of a supersaturable property, the Supersaturation lemma's statement; §4: Definitions 9–10, Theorem 11 and Lemma 12 with its proof. §2, §5 (the zooming-out lemma's proof) and §§6–8 not read |
+| Cohen–Mani 2024, arXiv:2407.05071 (Acta Math. Hungar. 176 (2025) 473–497, from zbMATH) | `~/source/library/pdf/arXiv-2407.05071-cohen-mani-clustering-unit-distance-avoiding-sets.pdf` | §1 in full; §2.3 (Lemma 2.4, Remark 2.5, Lemma 2.6's statement) in full; §5's first page (block structure, Question 5.1). §§3–4 not read |
+| Rataj–Zajíček 2025, arXiv:2512.17606 | `~/source/library/pdf/arXiv-2512.17606-rataj-zajicek-local-structure-2d-positive-reach.pdf` | abstract and §1 (Theorems F and L; the planar remark) |
+| Rataj–Zajíček 2017, arXiv:1604.08841 | `~/source/library/pdf/arXiv-1604.08841-rataj-zajicek-structure-positive-reach.pdf` | abstract; Theorem 6.4's statement and the first part of its proof |
+| `[SokolovVoronov2025]`, `[Voronov2023]` | held (FS-106) | S–V §1 and §9 re-read for the hierarchy; Voronov §1 and §2 (Prop. 2.1, Obs. 2.2–2.3) re-read |
+
+**The findings.**
+- **PA-1 — the one-class compactness step behind rows 130–131 is in print** (a re-attribution owed at the close). Row 131 reads *"the Rajchman step
+  not found in print"*; row 130 *"the Rajchman step not searched (N) — a debt"*. Cohen–Mani §2.3, verbatim: *"Bourgain [Bou86], and later Bukh [Buk08],
+  proved a compactness property for unit distance avoiding sets"*; Lemma 2.4: *"Suppose Φ j ∈ L 2 (T2K ) is a uniformly bounded sequence which weakly
+  converges in L 2 to Φ ∈ L 2 (T2K ). … We have f j◦ (r ) → f ◦ (r ) for every r ."*, proved by the decay of `J₀`; Remark 2.5: *"The Bessel function J 0 (ξ)
+  … decays as ξ → ∞ because of the curvature of the unit circle"*, with an `ℓ∞` counterexample where the step fails — row 130's "false without it". And
+  `[Bukh2008]` Lemma 12, verbatim: *"If P is a finite supersaturable property, and A1 , A2 , . . . is a sequence of sets with property P whose
+  characteristic functions converge in the weak* topology of L∞ (Rd ). Then there is a nonnegative function A ∈ L∞ (Rd ) such that A1 , A2 , . . . → A in
+  the weak* topology, and supp A = {x : A(x) > 0} has the property P ."* — the one-class support selection. **What stays unprinted, as far as this gate
+  reached:** the `k`-class, colour-simplex (CP) form. Proposed wording for rows 130–131 in stage 6.
+- **PA-2 — the one-class REG is an open question in print** (Cohen–Mani Question 5.1, quoted above), on `[KMOR2016]`'s *block structure* (Cohen–Mani
+  §5: *"|x − y| < 1 for x, y in the same block A j , and |x − y| > 1 for x, y in different blocks"*). A calibration, never a cap (counter-priors rule 2):
+  FS-111's REG is the six-class, tight (non-strict) form of the same kind of statement, and its first rung is a block structure with Siamese contacts
+  allowed — exactly W-EQ-K's ⟸ hypothesis ("each tile has diameter `≤ 1` and two tiles of one colour have cross-distances all `≥ 1` or all `≤ 1`").
+- **PA-3 — the (i) literature's regularity lemma is uniform in the set.** `[Bukh2008]` §3: *"The zooming-out lemma states that every measurable set can
+  be replaced by a "zoomed-out set" which captures some of information about counting (by an appropriate integral) pairs of points that are at a given
+  distance away"*; its error `h_P(ε, δ)` depends on `ε, δ` only; the Supersaturation lemma (verbatim: *"For every ε1 , ε2 > 0 there is a constant c = c(ε1
+  , ε2 ) > 0 … if dQ(0,R) (Zδ (ε1 )A) > mQ(0,R) (P )(1 + ε2 ), then IP (A) ≥ cRd"*) is a one-class stability theorem; Theorem 11 gives *"a locally optimal
+  set"* (one class) by weak-* compactness. A tool for route M (a regularisation at a fixed scale with errors uniform in the colouring), and the one-class
+  form of FS106-SUP's attainment.
+- **PA-4 — regularisation is in print at positive slack, and named hard at zero slack.** `[Voronov2023]` Prop. 2.1 (verbatim: *"Let the plane, in
+  addition, be divided into tiles of arbitrary shape, … the diameter of each tile does not exceed h, and 2h < ε. Then for the interval of positive length
+  Dh = [1 − (ε − 2h), 1 + (ε − 2h)] there exists a proper k-coloring of the plane, in which the interior of each tile is monochromatic"*) and Obs. 2.2
+  (filling a region's inclusions keeps properness) are W's rasterisation and the map line's hole-filling; at zero slack the tile scale `h < ε/2` is lost,
+  which is C1-UNIF's `K → ∞` in Voronov's words.
+- **PA-5 — the discipline of binding boundaries is the planar theory of sets with positive reach and of `r`-convexity.** Rataj–Zajíček 2025 §1,
+  verbatim: *"If A ⊂ R2 has positive reach then its local description using semiconcave and semiconvex functions (without any further restrictions)
+  follows easily from [22, Theorem 6.4]."* A recognition, not a finding: a boundary point of colour `j` with a same-colour contact partner at distance 1
+  has the `j`-region locally inside a ball hull or outside a union of unit discs (FS-110's PA-1 spindle vocabulary), which is an `r`-convexity
+  condition; positive reach is its interior-ball dual. Route M's phase M1 derives what this gives (claims C-SAT-T, C-HULL in stage 5).
+- **PA-6 — the variational paradigm does not transfer as a theorem.** Morgan 1994 (review read) is regularity for perimeter minimisers; FS-111's classes
+  minimise nothing. What transfers is the *shape* of the theory — blow-ups are cones, junctions are isolated, the boundary is a finite union of arcs —
+  and the question of which functional, if any, a tight colouring extremises (the hole density along the sequence, R-SAT's saturation).
+
+**What the gate changes in the plan.** (a) A correction owed to rows 130–131 (PA-1). (b) REG gets its first rung, **REG-B, block structure** (PA-2), and
+the M phases take Bukh's zooming-out and supersaturation as tools (PA-3). (c) Route M's phase M1 is aimed at the contact structure of tight colourings
+(PA-5; the tight analogue of R-SAT). (d) The one-class Question 5.1 goes into the claim list as a calibration instance (a positive answer there would not
+decide six; a negative one there would warn about REG). (e) The novelty claim for any REG theorem is "not found in print" for six classes only.
+
+**Papers still needed (for the report):** `[FalconerMarstrand1986]`, Furstenberg–Katznelson–Weiss 1990, Bourgain 1986 (Isr. J. Math. 54), Morgan 1994
+(Pacific J. Math. 165) — held as reviews only; Walther 1999 (the rolling-ball theorem), Brown 1972 and Fu 1985 (parallel sets), Federer 1959 — not
+fetched; OpenAlex cross-check not run.
