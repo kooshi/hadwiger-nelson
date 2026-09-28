@@ -263,3 +263,96 @@ REG, followed by REG-I, REG-A and the map NO). Verdicts: **bears** (what it says
 
 **Count:** 83 entries; **bears** 24 (G13, G15, G17, G20, G21, G22, G24, G29, G30, G40, G46, G49, G50, G60, G64, G67, G71, G72, G79, G82, G83, G51, and the
 method pair G49/G50 counted once each); **silent** 59; **falsifiable here** 1 (G82, registered above).
+
+## Stage 3b — SAVED: §G part 2 (the `LEDGER.md` rows; the method rules) and part 3 (the extraction)
+
+*Correction to stage 3a's count line (self-audit): the **bears** column holds **22** entries (G13, G15, G17, G20, G21, G22, G24, G29, G30, G40, G46,
+G49, G50, G60, G64, G67, G71, G72, G79, G82, G83, G51), not 24; **silent 61**; falsifiable here 1 (G82). The table is unchanged.*
+
+*Correction to stage 2's C1-UNIF proof, direction (≤), as an equality (self-audit):* H-EQ's clause and FS106-SUP give periodic families at each level,
+not grid squares; the grid form at each level is one more step — keep the cells of side `h` in which one class has density `≥ 1 − η` (Lebesgue
+differentiation on the period torus: the kept fraction tends to the union's density as `h → 0`); two kept cells of one colour have all their cross
+distances within `2√2h` of each other, so a monochromatic pair of them in `[1 − ε + 2√2h, 1 + ε − 2√2h]` would put `(1 − η)²h⁴` of band pairs in
+one class. So the equality holds; **the equivalence `χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0`, which is all stage 2 uses, needs only H-EQ as quoted.**
+
+### §G part 2a — `LEDGER.md` rows (§ A on disk at `a9410925`: rows 128–136 read in full in stage 1; rows 1–127 by their headline sentence, the bodies of rows 34, 36, 38, 40, 41, 62, 79, 80, 108–114, 116, 118, 119, 122, 124–127 opened where the headline left the bearing unclear)
+
+*Mechanism, one line per row; the verdict reads it from inside FS-111's two routes (stage 2).*
+
+| row | verdict | reason |
+|---|---|---|
+| 1–11 (two circles, seam identity, coverage, fan, 120° compulsion, pivot cap, strip automaton) | silent (each) | finite two-circle systems over K; row 3–4's coverage/fan equivalence is carried by G13 |
+| 12–21 (extension profile, negative knowledge, gluing classification, near-relation, kill mechanism, triangle layer, statistics) | silent (each) | the M17-era finite lab |
+| 22–25 (ladder pair, four-ladder, hexagram, field-wall identity) | silent (each) | seam-field closures, exactly 4-chromatic |
+| 26–30 (de Grey anatomy, quadrature, 2-adic kill engine, stacking law, mechanism hunt) | silent (each) | finite witnesses |
+| 31–32 (Act One; the hex-shell pigeonhole, `χ(ℝ²; {1,√3,2}) ≥ 7`) | silent (each) | finite carriers; the hex shell is a distance-set statement |
+| 33 (the classical interval `5 ≤ χ(ℝ²) ≤ 7`) | silent | the seven-colour control's upper half; carried by G20 |
+| 34–40 (cell family: coset floor 7, coarse cells, non-monotone scale, gap atlas, gradient hunt, kernel side, fine tail) | **bears (34, 40)**, silent (35–39) | 34, 40: every cell-constant colouring needs seven at every scale, via `[Voronov2023]` Thm 1.3 on closed classes — the regular half REG would have to reach; an instance of "regular ⟹ seven". 35–39: cell-family internals |
+| 41 (the limit lemma) | **bears** | "non-k-colourable graphs of bounded size, drawn in one compact region with every edge within ε of 1 for every ε, give χ ≥ k + 1": the finite-graph form of stability by compactness — the template of C1-PW's step (compactness at bounded complexity) and of why unbounded size escapes it |
+| 42–51 (compulsion toolkit: arity floor, homogeneity, two-distance dial, batch descent, copy unions, M53, critical sets, absorption, additive yardstick, additive rigidity) | silent (each); 49's absorption carried by G40 | finite compulsions |
+| 52–60 (finite-plane bound, sieve, lift, residue obstruction, tightness, Theorems A and B, Moser recipe threshold, 2-adic law, plane freedom) | silent (each) | arithmetic of field planes |
+| 61 (statements at their proofs' level) | silent | six-target gadgets |
+| 62 (overcompression is an orbit-closure gap) | silent | refusal families under automorphisms |
+| 63–65 (two colours from inertia; the 6-open arena; Parts's shape dropped) | silent (each) | fields and arenas |
+| 66–71 (fan gap; 2-adic tower; six refused at 83; the window; five refused at 27; five at 23 and `χ_f(K²) = 4`) | silent (each) | residue planes |
+| 72–75 (3-adic barrier; real quadratic fours; census; the residue ceiling up the tower) | silent (each) | fields |
+| 76–78 (five over ℚ(√3,√5); the theorem audit; de Grey's lattice) | silent (each); 77 bears as method (a derivation file for every milestone, WORKFLOW 9) | lattices; method |
+| 79 (three colours linear; heights) | **bears** | carried by G71: the height on a curve is FS106-IND's index, route R's one integer invariant |
+| 80–81 (four colours cell by cell; ℚ(√167) at four) | silent (each) | lattice certificates at four colours |
+| 82–87 (three colours over every subfield; the census; de Grey's lattice derived; triangle-free rigidity; what does not reach `8Λ`) | silent (each) | fields and lattices |
+| 88–94 (type-(B) frame; K's colourings; `ℚ₂(√3)` rigid; the no-go family; windows; towers; two neighbours) | silent (each) | fields at four colours |
+| 95–102 (band rigidity; HD1; one prime; every band; three colours over every field; CLG; character chromatic numbers; one prime fails) | silent (each) | characters over fields |
+| 103–107 (kernel lane: chain, transcendence, prime inversion, stripe lemma, the bridge) | silent (each) | kernel arithmetic |
+| 108 (rank-one inheritance: countable ⟹ finite) | silent | one-dimensional shifts |
+| 109–110 (mixing selection; windows at five over ℚ(√167)) | silent (each) | products and places |
+| 111 (invariant measures and transience) | **bears** (by analogy, a reading) | "transience … invisible to every invariant measure": a weak-* limit, like an invariant measure, forgets what has density 0 — route M reads the tight limit, so a feature of a hole-vanishing sequence that vanishes in density (a junction cascade) is invisible to it. → phase M's brief: REG is a statement about the limit; what the sequence does at density 0 is route R's |
+| 112–118 (Theorem C; ℚ(√47) spectra; products; mixing pins; Kronecker selection; T-C(A)'s class; rank one) | silent (each) | fields and products |
+| 119–127 (`Θ₃` certificate; MR; ℚ(√47); where MR's other routes stop; the main clause through five; type-(B) given MR; six at ℚ(√167); TR-ROT; the kernel form) | silent (each); 120 context (MR is link 1's hypothesis, not FS-111's) | fields |
+| 128 (the collapse) | **bears** (context) | given MR, rung D is `χ_CP(ℝ²)`'s value: FS-111's product, if route M or R closes, is `χ_m⁰(ℝ²) = 7` with no MR, and `χ(ℝ²) = 7` given MR |
+| 129 (the fractional principle; one class at a time stops below 4.37) | **bears** | carried by G24/G60: no per-class argument |
+| 130 (`χ_CP = χ_m⁰ ≤ χ_m`; the Rajchman step) | **bears** | route M's first move: a hole-vanishing sequence gives a tight a.e.-proper six-colouring (a D-NF colouring); REG is stated on that object |
+| 131 (H-EQ; hitting and PIX no-gos) | **bears** | H-EQ is C1-UNIF's input; the PIX no-go ("a trichromatic-point argument cannot see partial colourings (erosion leaves every coloured point of chromaticity 1 at vanishing cost)") says (B) on SEQ must read junctions as hole components (D-JUNC), never as coloured trichromatic points |
+| 132 (the regular half a.e.) | **bears** | route M's last step can be any a.e. NO for the class REG delivers: polygons and convex tilings (seven), nice maps (`[Thomassen1999]`, seven), segment-and-arc maps (rows 134–135 with FS-114); Woodall's maps give only six. "hole-filling … fails exactly at bichromatic vertices of degree ≥ 4" |
+| 133 (RR, CP, W-EQ-K, W-TAN, W-POLY) | **bears** | the two routes' held pieces; "So stability at six is two questions" is corrected by C1-ROUTES (a correction owed) |
+| 134 (no valid map under Condition 5) | **bears** | Q-NO's first half; "No step uses the complexity bound" (so it is a NO for all `K` at once — C1-PW uses it that way); its cone removal transports curvature along a line by the shadow map `λ/(1 + λ)` — the same map transports curvature along any chain of unit-parallel curves, pointwise (→ phase M3) |
+| 135 (with unit arcs, four-colour vertices) | **bears** | Q-NO's second half is FS-114's; REG-A must keep unit arcs centred at four-colour vertices |
+| 136 (the strip and the disk stop at the pinned corner) | **bears** | the positive controls for every phase: valid tight fragments, exact, whose junctions are four-colour vertices with unit arcs; any regularity rung must hold on them, any cone bound must be read on them |
+
+### §G part 2b — the method rules (`CLAUDE.md` § The standard of evidence, § What compute actually helps, § Toolchain, § Building, § Searching, § The gate, § Make the gate fail; § Counter-priors; § Delegation)
+
+| rule | verdict | extraction |
+|---|---|---|
+| Counter-priors 1–4 | **bears** | rank the routes by bearing (both routes decide seven if they close); no registration caps an aim; "not landed" stated plainly |
+| Delegation one level deep; at most three agents, all Opus 5.5 | **bears** | every brief says it, with the reason; FS-111's phases take slots after FS-114's |
+| Standard of evidence: the certificate plus the checker; read the statement aloud; report the hunt | **bears** | every exact check of a fragment by formula ships a checker with planted faults; each claim read against its informal form (C1-GAP's "cone scale" readings are the instance) |
+| Write the certificate for the reviewer early | **bears** | ask of each rung "what must someone who trusts none of this check?" — for REG, the regularisation map and its a.e.-properness proof |
+| What compute helps; kernel phases re-priced low | **bears** (Lean slot) | C1-UNIF and C1-PW are the first formal candidates (their objects are not in Lean yet: µ₆, `𝓜_K`) — named, declined for this milestone |
+| Toolchain: the ban to 2026-10-01; no finite-graph search after | **bears** | every phase is derivation; exact checks only on fragments given by formula; the "would have searched here" log |
+| Building: `slot.py`, checkpoints, kill by pid | silent | no long runs planned |
+| Searching: `rg`, `grep -oF`; `exact?` is not an absence | silent | no Lean in this milestone's phases |
+| The gate (vacuity) | silent | no kernel theorems planned |
+| Make the gate fail: plant faults; state the uninformative outcome and confirm both outcomes reachable; one thing differs; carry what a number measures | **bears** | registrations (stage 6) state both outcomes and their reachability; C1-UNIF's `δ₀(K)` is a number carried with its class (`𝓜_K`) and its slack order (inf over `ε`) |
+| "Enumerate the parameter first" / "a positive control proves an instrument finds things of the shape its generator can represent" | **bears** | C1-GAP is this rule: the cone scale's image is the junctions; REG's statement must name the class it maps into before any proof |
+
+### §G part 3 — the extraction: each *bears* as an instruction to a phase (carried into stage 6's phase table and the briefs)
+
+| X | from | instruction | phase |
+|---|---|---|---|
+| X1 | G13, G15 | state each certificate as coverage at the forced point; pose (A) as a class disjunction on junction types (K-C6) | R1 |
+| X2 | G17 | expect the local rungs (REG-J, (B)) on a disc of radius `O(1)`; name the carrier of every global step | M1, M2, R1 |
+| X3 | G20, row 33 | the seven-colour controls (hexagonal, brick): each rung and each cone bound says what it does there and where six is spent | all |
+| X4 | G21, the generator-image rule | every claim's headline names object (SEQ or LIM), complexity class and boundary class; positive controls on the strip and the disk (row 136) | all |
+| X5 | G22, W-POLY | REG's target class contains arcs, unit arcs included; a rung that delivers polygons delivers the empty class | M2, M3 |
+| X6 | G24, G60, row 129 | no argument one class at a time | all |
+| X7 | G29, C1-UNIF | `δ₀(K)` is the dial along complexity; stated for FS-109 (post-ban), never run here | registration |
+| X8 | G30, G46 | name REG in the regularity theory of optimal partitions, free boundaries, parallel sets and sets of positive reach; §PA searches there | §PA, M1 |
+| X9 | G40 | (B) is a non-absorption statement: the hole cannot absorb a complementary pair except by degrading the junction's own scale | R2 |
+| X10 | G64 | registrations never lean on seven; five and six kept apart | registration |
+| X11 | G71, row 79 | the index is route R's integer invariant; (A) at every complexity must say what replaces the bicycle's swap | R1 |
+| X12 | G79 | derive the example invariants of tight colourings (what the tight constraint does at a boundary point where it binds) before sharpening any cone bound | M1 |
+| X13 | G82, rows 130–131 | route M is stated on the tight D-NF limit; route R on SEQ with junctions as hole components (the PIX no-go) | M1, R1 |
+| X14 | G83, rows 135–136 | REG-J must handle junctions of four or more colours; REG-A must keep unit arcs centred at four-colour vertices | M1, M2 |
+| X15 | row 132 | route M's final NO is any a.e. NO for the delivered class (nice maps, polygons, convex tilings; segment-and-arc maps with FS-114) — choose REG's target to meet the strongest held NO | M2 |
+| X16 | row 134 | the shadow map transports curvature along any chain of unit-parallel curves: test whether row 134's cone removal runs for piecewise `C²` boundaries (Q-NO extended), an alternative to REG-A | M3 |
+| X17 | row 41, row 111 | compactness sees bounded size and forgets density-0 structure: route M's REG is a statement about limits; route R keeps what the sequence does at density 0 | brief framing |
+| X18 | G51, delegation | a competitor pair once phases run (regularity against wild fragments), a blind verifier for card 1 first | staffing |
