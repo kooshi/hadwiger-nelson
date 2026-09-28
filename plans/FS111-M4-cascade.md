@@ -173,11 +173,13 @@ from `{t > 1}` near some `(s, 1)` (a defect in M-PINCH's (tangent) partners or i
 Iterate M4-LADDER. **Rung 0** is the layer `Λ` (class `x_0 = a`, flat side `t = 0`, curved side `β`). **Rung `k + 1`** is `W⁺` of rung `k` and
 **rung `−(k + 1)`** is `W⁻` of rung `−k`. By M4-LADDER (3) and the composition of dilations, rung `k` has flat side `t = k` and curved side
 `β^{+k}` for `k ≥ 0`, and flat side `t = k` and curved side `β^{−|k|}` for `k ≤ 0`; its class `x_{k+1}` is the class under rung `k`'s flat side
-(`k ≥ 0`), and `x_{−(k+1)}` is the class over rung `−k`'s curved side. The ladder is **ordinary through rung `k`** over a gap `J` when (A) and (B)
-of §2.1 hold for rungs `0, …, k` (resp. `0, …, −k`) at every point over `J` — each rung a single class between its two sides, with ordinary
-interfaces.
+(`k ≥ 0`), and `x_{−(k+1)}` is the class over rung `−k`'s curved side. The ladder is **ordinary through rung `k`** over a gap `J` when (R), (A) and (B)
+of §2.1 hold for rungs `0, …, k` (resp. `0, …, −k`) at every point over `J` (each for the rung's own curved side, with `|κ| < 1` there) — each rung a
+single class between its two sides, with ordinary interfaces. *Which half of (R) is a real hypothesis* (found on audit, §3.2 (2)): the upper half
+(the region over a rung's curved side is a union of open unit discs) follows from (F1) as in (1)'s first step, the discs `B(x + n(x), 1)` missing the
+rung's layer and everything under its flat side; the lower half does not follow, and (2) uses it.
 
-**M4-CUT** [hand, one mind; over M4-LADDER and M2-FIX (F1)]. *Let `f` be a regular maximal partition (so every class satisfies M2-FIX), with the
+**M4-CUT** [hand, one mind; over M4-LADDER and M2-FIX (F1); (2) conditional on (R)'s lower half at the downward rungs]. *Let `f` be a regular maximal partition (so every class satisfies M2-FIX), with the
 setting of §2.1 over `I`, and `n ≥ 1`.*
 1. *(Upward.) If the ladder is ordinary through rung `n − 1` over every gap of `I`, then `β(u) ≤ n − (n² − (u − z)²)^{1/2}` for all `u ∈ I`,
    `z ∈ Z`, `|u − z| ≤ n` — **(C_n)**. In particular, at an end `z` of a gap where `β(u) ≥ c (u − z)²`, `n ≤ 1/(2c)`.*
@@ -196,12 +198,11 @@ z)²)^{1/2}}`; so every component lies outside `B(y, 1)`: `B(y, 1)` misses `{k <
 rung `n − 1`'s layer in `B((z, n), 1)`. Contradiction; so `B((z, n), n)` misses the region under the graph, which is (C_n). With
 `β ≥ c(u − z)²` and `n − (n² − x²)^{1/2} = x²/(2n) + O(x⁴)`, (C_n) gives `c ≤ 1/(2n)`.
 
-*(2)* Fix `k ≤ n − 1`; put `P` the class `x_{−(k+1)}` (over rung `−k`'s curved side). Every point `y` of rung `−(k + 1)`'s curved side
-`β^{−(k+1)}` (over `I`, including its points over `Z`, as limits) lies in `F_P`, and its normal meets `β^{−k}` at `x = y + n(y)` (parallel curves
-share normals), where by (A) at rung `−k` a half-ball above `x` lies in one component of `int F_P`, which near `x` is outside `B(y, 1)`; by (F1) the
-whole component is outside `B(y, 1)`. So the half-balls above `β^{−k}` lie above the upper boundary of `⋃_y B(y, 1)`, which is
-`(β^{−(k+1)})^{+1}`: `(β^{−(k+1)})^{+1} ≤ β^{−k}`. The reverse inequality holds for every graph (a closing contains the set). So
-`(β^{−(k+1)})^{+1} = β^{−k}` for `k = 0, …, n − 1`, and composing, `(β^{−n})^{+n} = β`: the open region under the graph is the union of the open
+*(2)* For every graph, `(β^{−(k+1)})^{+1} ≤ β^{−k}`: the region under `(β^{−(k+1)})^{+1}` is the opening (by unit discs) of the region under
+`β^{−k}`, the union of the open unit discs it contains. Equality holds iff the region under `β^{−k}` is itself a union of open unit discs — (R)'s lower
+half at rung `−k`, part of "ordinary". *(Audit record: the first draft derived the equality from (F1) applied to the class over rung `−k`; that
+argument yields only the inequality above, which holds for every graph. The lower half of (R) is therefore a hypothesis, not a consequence.)* So under
+(R) at rungs `0, …, −(n − 1)`, `(β^{−(k+1)})^{+1} = β^{−k}` for `k = 0, …, n − 1`, and composing, `(β^{−n})^{+n} = β`: the open region under the graph is the union of the open
 discs `B(q, n)`, `q` under `β^{−n}`. Take a gap `J = (z₁, z₂)`, `w = |J| < n`, its highest point `(u*, h)`, and `ε > 0`: some `B(q, n)` under the graph
 contains `(u*, h − ε)`. Its upper arc `A` is concave, `A(z_i) ≤ β(z_i) = 0` wherever the disc reaches the vertical through `z_i`, and the disc
 (width `2n > w`) reaches at least one of them. If it reaches both, `A(u*) ≤ n − (n² − w²/4)^{1/2}` (the sagitta over a chord of length `w`). If it
@@ -211,8 +212,11 @@ reaches only `z₁`, its centre is left of `z₂ − n < z₁`, so `A` decreases
 ### 3.3 Reading
 
 - **The pinch's ladder is finite.** Near a gap of width `w`, an ordinary ladder has at most about `1/(2c)` rungs above (`c` the curvature scale at the
-  gap's end) and at most about `w²/(8h)` below (`h` the gap's bump height); past them, (A) or (B) fails at some rung over the gap: a point with three
-  colours, a class whose local part is disconnected, or a rung that is not one class (the sub-layers of §2.2 (3)). **The cascade does not run to
+  gap's end) and at most about `w²/(8h)` below (`h` the gap's bump height); past them, (A), (B) or `|κ| < 1` fails at some rung over the gap (a point
+  with three colours, a class whose local part is disconnected, a rung that is not one class — the sub-layers of §2.2 (3) — or a curvature above 1,
+  which M-C11 forbids at ordinary points) or, downward, (R)'s lower half fails: the rung's curved side stops being rolled from below by unit discs, and
+  the next rung's curved side is reached from two points of it (a fold of the normal map). *That such a fold is a singular point is a reading, not
+  proved (GAP).* **The cascade does not run to
   infinity through ordinary interfaces; it ends at the singular set.** As `w → 0` both bounds grow, so small gaps allow long ladders; the large gaps pin
   singular points near the pinch.
 - **The mechanism is the shadow map's curvature transport** (row 134, M2-INTRAD (2)): going up, the parallels of the bump's convex ends sharpen until
