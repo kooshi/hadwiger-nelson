@@ -630,3 +630,71 @@ vertex has a repeated-colour vertex within 2 or a unit-arc centre within 3; ever
 weaker form two minds]. Open and mine: R1 (card R), then (a) the base near a (Q)/(R2) centre, then (b)'s aperiodic case with R2 (card R) and NB2-END.
 
 ## Stage N3-1 — SAVED
+
+## Stage N3-2 — SAVED: R1 (card R) — TRUE as corrected, with a sharper form; (b) closed for periodic maps
+
+*Frame: FS110-N4 §2.6. In a terminal valid map (unit arcs allowed), let `P_0, …, P_L` be consecutive stuck vertices of one chain. The two recursions of
+C-CHAIN-9 hold between consecutive stuck vertices: at stuck `P_k`, N112-END gives `λ_{k+1} > −1`, so the `a_{k+1}`-horn at `P_{k+1}` is out-type relative
+to `P_k` with a shadow circle of curvature `f(λ_{k+1})` (N4-SHADOW, `C ≠ 0`), and N4-STUCK (ii) at `P_k` (which survives unit arcs: N2-4, NB2 divergence 2)
+puts `a_{k+1}`'s sector just below the arc `λ_k`; N-E0 gives `λ_k ≤ f(λ_{k+1})`. Mirror: at stuck `P_{k+1}`, `υ_k < 1` and `f̃(υ_k) ≤ υ_{k+1}`. So for
+`0 ≤ k < L`: `λ_{k+1} ∈ (−1, 1)`, `υ_k ∈ (−1, 1)`, and only the chain's two outer bounds `λ_0 ∈ [−1, 1)`, `υ_L ∈ (−1, 1]` may reach `∓1`.*
+
+**N3-STEP (the step lemma) [hand, one mind; tools exact, STEP].** *At every step `k → k + 1` of a chain, neither `λ` nor `υ` decreases and at least one of
+them strictly increases.* Exact identities (MONO): `f(x) − x = −x²/(1+x)`, `f̃(x) − x = x²/(1−x)`. If `λ_{k+1} ≠ 0`, `λ_k ≤ f(λ_{k+1}) < λ_{k+1}`; if
+`λ_{k+1} = 0`, `λ_k ≤ f(0) = 0`. If `υ_k ≠ 0`, `υ_{k+1} ≥ f̃(υ_k) > υ_k`; if `υ_k = 0`, `υ_{k+1} ≥ 0`. So `λ` and `υ` are non-decreasing, and `λ_k = λ_{k+1}`
+forces `λ_{k+1} = 0`, hence `υ_{k+1} > λ_{k+1} = 0`, and `υ_k = υ_{k+1}` would force `υ_{k+1} = 0`: one of them moves. ∎ Card R's "each sequence is strictly
+increasing in `k` wherever it is nonzero" is TRUE read as "`λ_k < λ_{k+1}` when `λ_{k+1} ≠ 0`; `υ_k < υ_{k+1}` when `υ_k ≠ 0`"; the step lemma is the line its
+next sentence needs (both sequences could otherwise sit still where one of them is 0).
+
+**N3-LEN [hand, one mind].** *If every `λ_k`, `υ_k` lies in a finite set `K ⊂ [−1, 1]`, the chain has at most `2|K| − 1` vertices; a one-sided infinite chain
+carries infinitely many distinct values among its `λ_k, υ_k`.* The rank of `λ_k` plus the rank of `υ_k` in `K` rises by at least one per step (N3-STEP). ∎
+`λ_k, υ_k` are upward curvatures of boundary arcs of the terminal map through `P_k` tangent to `a`, so `K` may be taken as `{±1/r : r a radius of an arc of
+the terminal map} ∪ {0}`, cut to `[−1, 1]`.
+
+**N3-RAYR (the ray needs unbounded radii) [hand, one mind; tools exact, RAY].** *On an upward-infinite chain (`k ≥ 0`), `−1/(k+1) ≤ λ_k < 0` and `λ_k < υ_k ≤ 0`
+for every `k`: the lower arc of the horn at `P_k` has radius at least `k + 1`. Mirror, downward (`k ≤ 0`): `0 ≤ λ_k < υ_k ≤ 1/(|k|+1)`, `υ_k > 0`.* FIN's upward
+count forces `υ_k ≤ 0` (if `υ_m > 0`, `1/υ` drops by 1 per step up and `υ` passes 1), so `λ_k < 0`. `f̃` is increasing on `[−1, 1)`, so `λ_k ≤ f(λ_{k+1})` gives
+`λ_{k+1} ≥ f̃(λ_k)`, hence `λ_k ≥ f̃^k(λ_0) = λ_0/(1 − kλ_0)`, and `λ_0/(1 − kλ_0) + 1/(k+1) = (λ_0 + 1)/((1 − kλ_0)(k+1)) ≥ 0` for `λ_0 ≥ −1` (RAY, exact for
+`k ≤ 20`; the closed form by induction). Equality throughout is NB2's pencil: `λ_0 = −1` and every lower arc the circle of radius `k+1` about `P_{−1}`. ∎ **So a
+stuck ray needs boundary arcs of every large radius, at unit spacing along one line** — sharper than card R's "infinitely many distinct boundary curvatures",
+and the same object NB2 recognised, now as the only way down to 0.
+
+**N3-PER (a periodic map has a periodic terminal modification) [hand, one mind].** *Let a valid map `M` be invariant under a rank-2 lattice `Λ` of translations
+(colours kept). Then the terminal modification (N2-RED's bends with N4-TERM's merges, ray merges and shaves) can be chosen `Λ`-invariant; it has finitely many
+arcs up to translation, so a finite `K`.*
+1. No `t ∈ Λ` has `|t| = 1` (else almost every `x` and `x + t` are a same-colour unit pair); `Λ` is discrete, so `d₀ = min{ ||t| − 1| : t ∈ Λ ∖ 0 } > 0`.
+2. Perform each operation at all translates of its site at once. The new colouring can fail only at a pair `z ∈ S`, `z′ ∈ S + t` (`t ≠ 0`, `S` the recoloured
+   set) given one colour at distance 1; every other pair is a pair of the single operation at `S + t`, valid by translation, and colours only lost create no pair.
+   (i) MERGE, MERGE-RAY and SHAVE recolour sets inside `B(v, ρ)` with `ρ` free below a clearance radius (FS110-N4 §2.7): take `ρ < d₀/4`, so `||z − z′| − |t|| <
+   d₀/2` and `|z − z′| ≠ 1`. (ii) A bend's lens lies inside one tile (`T_in` toward, `T_out` away; N2-TOWARD's lens stays in `T_in`'s sectors at the ends), so
+   `z, z′` had one colour before, and `|z − z′| ≠ 1` by N-E0.
+3. Each operation's local properties (a lower `Φ`, no unit arc created, the types of its new vertices, its lens avoiding the nearby centres) hold at each
+   translate. Run N2-RED's and N4-TERM's procedure on orbits: one fundamental domain carries finitely many vertices and unit arcs, each orbit operation lowers
+   N2-RED's count there, so it stops, and the result is `Λ`-invariant and terminal (an operation available at a site is available at every translate). ∎
+
+**Verdict on R1 (card R): TRUE, as corrected** [hand, one mind, over N4-FIN, N4-SHADOW, N4-STUCK (ii) as surviving unit arcs (two minds), N112-END (two)]:
+- **The correction:** a stuck chain lives in the **terminal** map, so the finiteness premise is on the terminal map's arcs. For a periodic map this costs nothing
+  (N3-PER). For a map with finitely many arc classes that is not periodic, whether the terminal map keeps finitely many classes is **not derived**: SHAVE's
+  circle has the exact curvature `σ_h` of a shadow (`f` or `f̃` of an arc's), and a bend's tangent start at an end vertex has a curvature chosen in an interval,
+  so iterated operations may create new classes. Named **GAP N3-ALPH**.
+- **What holds:** (i) a one-sided infinite chain needs boundary arcs of radius `≥ k + 1` at its `k`-th vertex (N3-RAYR); (ii) with finitely many arc classes in
+  the terminal map, every chain has at most `2|K| − 1` vertices (N3-LEN); (iii) so **a periodic valid map has no stuck ray, and every stuck vertex of its periodic
+  terminal map lies within `2|K| − 2` of a chain end** — within `2|K|` of a unit-arc centre (a chain's end is within 1 of a (Q)/(R2) arc of `ω(P_{L+1})` or
+  `ω(P_L)`, or of a `≥ 4`-colour vertex, which has a unit-arc centre within 1: NB2-TERM, NB2-DENSE step 2).
+- **(b), as A3 asks it:** closed for periodic maps and for every map whose terminal modification has arcs of bounded radius; the **aperiodic case is the named
+  GAP**, now sharpened to rays whose horns flatten at rate `≥ 1/(k+1)` (N3-RAYR), with NB2-END as its route (stage N3-4).
+- **With NB2-DENSE (applied to `M*`, itself valid):** in a periodic map, every closed disc of radius `4 + 2|K|` contains a unit-arc centre of `M*` (a subset of the
+  original map's). Periodicity alone gives some radius (the centres form a periodic set, non-empty by row 134); N3-LEN's radius depends only on the alphabet.
+
+*Where six is spent:* nowhere in N3-STEP, N3-LEN, N3-RAYR, N3-PER (curvature algebra and translation); inherited through N4-STUCK (NB-4 at `P_k`). *Seven-colour
+control:* the hexagonal seven-colouring has no stuck vertex; R1 is vacuous there, as required. *The strip (card R's R3 aim):* no stuck vertex (card X; N2-5), so R1
+does nothing there.
+
+**Would have searched here:** the longest chain over a named finite `K` (a DP over curvature sequences) — replaced by the rank count; STEP's grid check verifies the
+step lemma at named values, not the bound.
+
+**Tool.** `tools/fs112_n3_checks.py --self-test` → `data/fs112/fs112-n/n3-checks-selftest.out`, exit 0: MONO, STEP, RAY green; plants `mono_swap` (`f̃` in place of `f`:
+NOT_BELOW), `step_identity` (recursions replaced by plain monotonicity: a quadruple `(−5/6, −5/6, −2/3, −2/3)` with no strict step, NO_STRICT_STEP), `ray_below`
+(`λ_0 = −11/10`: BELOW_BOUND) each fire alone, for their own reason.
+
+## Stage N3-2 — SAVED

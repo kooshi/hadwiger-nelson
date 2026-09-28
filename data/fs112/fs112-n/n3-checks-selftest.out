@@ -1,0 +1,7 @@
+plant mono_swap    : red ['MONO'], reason NOT_BELOW -> FIRES
+plant step_identity: red ['STEP'], reason NO_STRICT_STEP -> FIRES
+plant ray_below    : red ['RAY'], reason BELOW_BOUND -> FIRES
+faithful run: red [] -> PASS
+  MONO : IDENTITY     f(x) - x = -x^2/(1+x), ft(x) - x = x^2/(1-x); f(x) < x < ft(x) at -5/6, -1/3, 1/7, 2/3
+  STEP : STRICT_STEP  1191 admissible quadruples on the grid j/6; each has lam or ups strictly increasing, neither decreasing
+  RAY  : BOUND_HOLDS  ft^k(x) >= -1/(k+1) on [-1, 0), f^k(x) <= 1/(k+1) on (0, 1], k <= 20; equality at x = -1 (the pencil)
