@@ -6,6 +6,9 @@ then its sections (addresses in each row). "Blind" = a verifier that derived bef
 construction side (Y, Y2, Y3) were independent of each other throughout (competitors), so a statement both reached counts two minds, neither blind.
 FS112-YB3 (blind on Y3) is still running: its record and working directory are unopened here; stage 1b folds it in on the owner's message.*
 
+*Stage 1b (FS112-C2, on the owner's message, inventory items 67–69): §1.8 below. The "(YB3 pending)" cells of §§1.2 and 1.4 and §1.5's two scope points
+are settled there; stage 1a's text is kept as saved.*
+
 ## Stage 1a — SAVED
 
 ### 1.0 Files read, and the quotation check (standing rule 5)
@@ -250,3 +253,156 @@ both the stuck ray (b′) and a uniform bound on finite chains (b″) beside it.
 - Errata the derivation file carries (side records never rewritten): N's l. 231; N's row 9 (two counts); N3-END's first alternative and item 3; N3-LEN's
   bound; N3-BASE's Prop. 17 row (+ N3-COR3); N112-RED's merge (unneeded at cubic centres, N3-NOBOTH) and CE5's step (in-votes, N3-ANTI); Y112-NB4-MIS's
   (γ) withdrawn; the strip's stop cone; the label `P_2` → `P_3`; Y2 §6.4's blocker (`Y_0`); A3-2.3's second reason; the degree-4 sketch's author (Gibbs).
+
+## Stage 1b — SAVED (FS112-C2, de Bruijn, Opus 5.5, 2026-09-27; brief `data/fs112/briefs/C2-112-stage1b.md` on `C112-close-math.md`)
+
+### 1.8 Round 3's construction side: Y3 against FS112-YB3
+
+**Read from disk, in this order:** the brief `data/fs112/briefs/C2-112-stage1b.md`, `STANDING-RULES.md` (rule 0 first) and FS112-C's brief; FS112-C's
+report and this file (§1.5, §1.7 first, then all of it); `plans/FS112-close-inventory.md` items 60–69; FS112-YB3's report and its record
+`plans/FS112-YB3-verification.md` in full; `plans/FS112-Y3-construction.md` in full; `plans/FS112-N-proof.md` N3-END and N3's registrations (l. 850–905);
+`plans/FS112-NB3-verification.md` on N3-END (§1.3, §1.4, §2.2 #2–4); `plans/FS112-derivation.md` in full; §R-close; the two successor stubs;
+`data/fs112/claims.md` §11; `data/fs112/fs112-c/` (the § B draft, the ticks, `drafts.py`). CLAUDE.md § The aim and § Counter-priors are in my context
+(the brief's snapshot); nothing here rests on a later edit of them.
+**Quotation check** (`data/fs112/fs112-c2/quotes.py`, output `quotes.out`; `--self-test` in `quotes-selftest.out`: one word altered turns its quotation
+MISSING beside its faithful twin): the brief carries no statement inside quotation marks, only glosses of inventory items 65–69 and of YB3's report, each
+faithful to its source; **the 27 quotations this stage uses, all FOUND verbatim** (Y3 ×8, N3 ×5, NB3, YB3 ×8, the derivation file ×3, this file, the brief).
+**Control re-run** (sighted, not a mind): `tools/fs112_yb3_frags.py bowtie` reproduces `data/fs112/fs112-yb3/bowtie.out` exactly (`data/fs112/fs112-c2/bowtie-rerun.out`)
+(ACCEPT, 21 / 21 pairs; `E` doubly shadowed at every named point; no 3-tile at `N`), 0.08 s.
+
+**Every claim.** Y3's nine claims (its table, `plans/FS112-Y3-construction.md` l. 13–21), YB3's verdict (its §3, derived blind before Y3's record was
+opened at `ec57f5f1`), the grade after the comparison, and each divergence (YB3 §4, D1–D10) with its settlement. "Blind" = YB3, blind to Y3.
+
+| claim | Y3's grade | YB3's verdict | after the comparison | divergence → settlement |
+|---|---|---|---|---|
+| Y3-END-A | tools, exact; one mind | TRUE on a blind rebuild (39 / 39 pairs; `P_1`, `E` stuck; the MERGE of 4 at `N` performed and checked, 43 / 43) | **two rebuilds, one blind** [tools, exact] — two members of one family (colours, where the horns end, the closing tiles differ); every clause realised by both | D4: Y3 read the MERGE from free sets, YB3 built it → agreement |
+| Y3-END-B | tools, exact; one mind | TRUE on a blind rebuild (44 / 44; `P_cl(N) = {1,3,4,5,6}`; no MERGE; both SHAVEs performed and checked, 46 / 46, 49 / 49) | **two rebuilds, one blind** [tools, exact] (Y3's concentric centre `(0, 6)`, radius 3; YB3's `(0, 5)`, radius 2) | D3: Y3's remedy for END-B's open arc ends ("closing it needs `H1`'s arc to end at a smaller angle than `E`'s. Named, not built.") is **necessary, not sufficient**: with five colours at `N`, `N` must centre unit arcs of total length at least 180° — FS112-SIX's statement ("A vertex with five colours has unit arcs centred at it of total length at least 180°", two minds, one blind), which YB3 re-derived at `N` by Y's W1 (ii) argument; END-B carries ≈ 45.2° in YB3's rebuild and ≈ 14.3° (`4 atan(1/16)`) in Y3's → correction owed (item 68) |
+| Y3-LEG | tools, exact | TRUE, exact | **two minds, one blind** [tools, exact] (Y3 sympy at 170 digits for `K′`; YB3 in the tower with `√3`) | D10 agreement. D7: Y3 §2.2 item 2's "`\|q2 − Y_0\|² < 1` (float 0.9036)" — 0.9036 is the distance, its square 0.8165 (YB3 exact) → a label's correction owed; the inequality stands |
+| Y3-STRIPCUT | tools, exact at 15 points; case split hand | TRUE at 22 exact points; its tile list one-sided | **two minds, one blind** [tools, exact at named points] for "4 is the only free colour on and beside the cut in both tiles" and for `C_{−1}`'s blockers; `C_2`'s list one mind (YB3) | D5: Y3 wrote "The same at `C_2`" and listed `C_{−1}`'s blockers only; `C_2`'s are the mirror image under `x ↦ 1/2 − x` — a midline arch (`A_{−1}…A_4`), `C_0` (5) or `C_4` (6) → precision owed (item 68) |
+| Y3-DISK-T* | tools, exact at 7 points + hand | TRUE; Y3's seven points colour-free in a second object | **two minds, one blind** [tools, exact at named points] for the chain `T*` ∋ `q2` → `T2_0` must vacate `B(q2, 1)` → colour-free points there → a change to one of the six named tiles or to the move's own choices; **the colour-free set's extent one mind (YB3)**: a proper sub-region of the vacated triangle `Z^L_0 Y_0 K` (at YB3's own seven points two colour-free, five with one colour — violet near `Z^L_0` and `Y_0`, orange near `K`) | D6: Y3's route object closes `T*` and violet `U_0` beyond the rim, and admissibility is not monotone as tiles grow, so the second object (YB3's, in the disk) is the check that was needed → agreement at Y3's points; "no colour admissible" holds on the sub-region hugging `ω(q2)` and the chord |
+| Y3-R1 | hand, one mind | TRUE; the bound sharpens to `2V` | **two minds, one blind** [hand, arithmetic]; with FS112-N3-CHAINS (N3; NB3) the same arithmetic three times | D8: `3V + 3` and `2V` both true. **C's scope point 1 (§1.5) stands and YB3 does not reach it**: YB3 also applies the finite alphabet to "a map" ("a map with finitely many arc radii (every doubly periodic map, every map of `𝓜_K`'s periodic designs) has none"); a stuck chain lives in the terminal modification, so the premise belongs on `M*` — TRUE for doubly periodic maps by FS112-N3-PER, GAP N3-ALPH otherwise. Both construction-side minds took the same step; the correction is the proof side's |
+| Y3-R3 | a reading of exact results; one mind | TRUE, recounted exactly on YB2's rebuilds (strip: 24 pairs with a member in one period — 18 `(V, A)`, 3 `(V_m, V′_m)`, 3 `(A_j, A′_j)`; disk: 20) | **two minds, one blind**, now [tools, exact] on YB3's side; the disk's `(A_0, y)` (S1) clause not re-checked (Y2's words, YB3 does not dispute them) | D9: Y3's "12 per period" `(V, A)` pairs and YB3's 18 listed with a member in one period count the same pairs two ways; no pair differs → agreement |
+| Y3-T2-BUDGET | hand, one mind | TRUE; the strip clause exact (its 18 `(V, A)` pairs complementary at ≈ 0.7569 and not completions) | **two minds, one blind** [hand; the strip clause tools, exact] | D10 agreement. Knock-on: FS112-C-PARTNERS's count of leaving centres is now two minds |
+| **Y3-END-NEEDS** | hand, one mind; levels 1–2 realised exactly | **TRUE for a chain of two or more vertices; FALSE as stated** — its first requirement misses one shadow source, and BOWTIE, an exact valid fragment (21 / 21), realises the miss | below | **D1, a divergence of truth** (the round's only one on either side); D2 a step one side proves |
+
+**Y3-END-NEEDS, in full.** Y3's statement (its table, verbatim in part): "what the end's unit-arc centre `N` needs, with `E`'s type `{g, c, h}`: to keep
+`E` stuck, `c` at `N` in the pinch `[δ, 180° − δ]` and `h` tangent to `±a` at `N` (so `h` in two sectors) …" and its conclusion "So a stuck chain cannot
+end at a unit arc in a terminal map while `E` has three colours".
+1. **Where Y3 went wrong** (D1). Y3 §3.3 item 1: "No SHAVE at `E` needs `h` shadowing the horn from above: FLANK's list, re-read with unit arcs, leaves only
+   `h`-tiles at `N` tangent to `±a` from above". Y3 re-read FLANK at the unit arc it was studying (the upper one, where it set aside the in-type `g` at `N`)
+   and not at its mirror: **an in-type `h`-tile at `E − n` shadows the whole horn from below, and it is possible exactly when `E`'s lower arcs are unit
+   arcs of `ω(E − n)`** (YB3 Step 2: "TRUE **iff `λ_E > −1`**"; its source list — out-type tangent `h` at `N`, or in-type `h` at `E − n` — one mind, YB3).
+   Y3's own closing hedge names the place without seeing it: "or a step of 1–3 fails at a unit arc I have not seen".
+2. **The levels hold** (steps 1, 3, 4: the pinch; `h`'s two sectors made horns; `x ≠ x′`, not `g`, `c`, `h`; the unit arcs of `ω(N + n)`; the seventh
+   colour at `N + n`): **two minds, one blind** (Y3; YB3), step for step. **One load-bearing step is YB3's alone (D2):** `y ≠ g`, the lower flank of `N`'s
+   horns (YB3 Step 3 (a): "a `g`-tile below `N`'s horn crosses `ω(E)` unless `N`'s lower arcs are `ω(E)` itself", and then a straddle). Y3 counts
+   "Six colours were `{g, c, h, x, x′, y}`" and so assumes it; and step 4's "none from `E`" for the lower flank's shadow needs `y ∉ P_cl(E)`: if `y` were
+   `g`, `E`'s own `g`-sector — an in-type tile at `E` relative to `N` — would shadow `N`'s horn by YB3-SHADOW (ii) [this reading of where D2 bears: one
+   mind, FS112-C2].
+3. **The exact scope.** YB3's Step 2 is an "iff", and steps 3–4 use only its conclusion, so the corrected statement holds **whenever neither of `E`'s
+   horns has its lower arc on `ω(E − n)`** — in particular for every end of a chain of two or more vertices, which is YB3's proposed form ("If `E` is
+   the upper end of a stuck chain of at least two vertices (so `λ_E > −1`) … then a terminal map needs a seventh colour at `N + n`; a single stuck vertex
+   may end at unit arcs on both sides …, as BOWTIE realises locally"). Two precisions of the setting, named, not walked: both Y3 and YB3 take **both**
+   horns' upper arcs on `ω(N)` (the (Q) case forces that, FS112-N2-FLANK-Q; an (R2) bound on one horn only is outside the setting), and a horn whose lower
+   arc alone is a unit arc makes step 3's "two sectors of `h` at `N`" fail for that horn — so the statement's exact hypothesis is *both upper arcs unit
+   arcs, neither lower arc*.
+4. **Step 2′ is the proof side's FS112-END.** YB3's reason that a chain of two or more vertices has `λ_E > −1` ("`E`'s `c`-horns would lie beyond arcs
+   of `ω(E − n)` and … shadow near `E − n` … the directions just below `±a` where `c` sits there") is FS112-END ("In a stuck chain whose vertices all carry
+   N4-STUCK's structure, the horn curvatures cannot reach `λ_{k+1} = −1` or `υ_{k−1} = 1`"; N; NB, blind) and NB3's N3-END item 1 ("If an upper bound of
+   `H_±` is `+1`, … a stuck `P_1` would need `c` to fill its `+n` side against N112-U1 (N112-END's argument): the chain is `{P_0}`, doubly bounded."), re-
+   derived blind a third time. And YB3's exception is the proof side's in-type-tile clause: N3-END item 1's "an in-type `g` at `P_1` would force `υ_0 = 1`,
+   N2-FLANK-Q", with `n` reversed.
+5. **BOWTIE is the proof side's doubly bounded one-vertex chain, built blind.** N3-END's table closes with "(or is the doubly bounded one-vertex chain)";
+   N3's body first described it as "Either `υ_0 = 1` too — both of `P_0`'s horns lie between `ω(P_{−1})` and `ω(P_1)`, `P_0` is a one-vertex chain, and
+   the in-type `g` at `P_1` and `h` at `P_{−1}` make both neighbours unit-arc centres", which NB3 judged MISSTATED as a case description (the in-type
+   tiles not derived; §2.2 #2). Frames matched (N3's `P_0`, `P_1`, `P_{−1}`, `g` above, `h` below ↔ YB3's `E`, `N`, `S`, `G` colour 1 above, `H` colour 3
+   below), **BOWTIE is exactly N3's first description**: all four horn arcs unit arcs, the in-type `G` at `N`, `H` at `S`, both neighbours four-coloured
+   (Q) centres — built by the construction side's verifier fenced from every proof-side record. So the two sides met a second time without contact
+   (the first: the pinned corner, §1.5). It is **no refutation of anything on the proof side**: N3-END allows it by its own disjunct, and FS112-N2-TERM's
+   clauses hold on it (its horn bounds `±1` sit on (Q) arcs). *Naming:* "bowtie" in FS-106/FS-107's words (W-TAN, IND-X) is any vertex with one colour
+   in two opposite sectors — every stuck vertex is one; YB3's BOWTIE is the doubly bounded one. Whether BOWTIE is a bowtie seam in E12's sense (FS106-IND-X's
+   configuration C5) is not checked here; E12 stays untested.
+6. **C's scope points (§1.5).** (i) *FLANK's in-type exception at `N`*, which Y3's setting excluded: at the end of a chain of two or more vertices it does
+   not occur — YB3-N5 ("`P_cl(N) = {c, h, x₁, x₂, y}` exactly … `g ∉ P_cl(N)`", one mind; its "exactly" checked here, sighted: the only place a `g`-sector
+   could sit is between the two lower flanks, which would split `y` into two sectors with no out-type `y` at `N − n = E`, so a MERGE) — and where it does
+   occur, at a doubly bounded vertex, it is BOWTIE's `G`. **Settled.** (ii) *Y3's periodic corollary* ("a periodic terminal map has no stuck chain at all
+   unless an end vertex is a four-colour vertex") still omits ends whose next point is an NB4P exception or carries an arc of the end vertex's circle, and
+   now the one-vertex bowtie too; YB3 read Y3's hedge as the bowtie case (D1) and did not address the rest. **Stands**, corrected in 1.9.
+
+**Theorems this stage proved** (each also filed in `plans/FS112-derivation.md`):
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| FS112-C-HORNEND | in a terminal valid map, a stuck vertex both of whose horns are bounded by unit arcs of `ω(E + n)` has a horn bounded by a unit arc of `ω(E − n)` too, and is a one-vertex chain (and with `n` reversed) | hand; one mind: FS112-C2, an assembly over Y3-END-NEEDS as corrected (its levels two minds, one blind; its scope and `y ≠ g` one mind, YB3) and FS112-END (two minds, one blind) | 1.9 |
+| FS112-C-DOUBLE | in a terminal valid map, a stuck vertex all four of whose horn arcs are unit arcs (of `ω(E ± n)`) carries an in-type tile of its upper flank colour at `E + n` and of its lower at `E − n`; both centres are (Q), with at least four colours — BOWTIE's structure, N3's first description of the one-vertex chain | hand; one mind: FS112-C2, a sketch over Y3-END-NEEDS's levels with `n` reversed and FS112-N2-TERM | 1.9 |
+
+### 1.9 The knock-on: what the corrected Y3-END-NEEDS does to the composition (the brief's step 2)
+
+**FS112-C-HORNEND** [hand; one mind: FS112-C2]. *Proof:* if both horns of stuck `E` have upper arcs on `ω(N)` and neither has its lower arc on
+`ω(E − n)`, Y3-END-NEEDS as corrected needs a seventh colour; so some lower arc is a unit arc of `ω(E − n)`. A unit arc of `ω(E ± n)` bounding a horn of
+`E` makes `E ± n` not stuck (FS112-END, or YB3's Step 2′ and NB3's N3-END item 1), so the chain is `{E}`. The mirror is the same argument with `n`
+reversed (Y3's and YB3's derivations use nothing that distinguishes `+n`). ∎ *Residue, named:* a horn bound `±1` on **one horn only** of a side (an (R2)
+arc; the (Q) case bounds both horns by one arc of `ω(N)`, FS112-N2-FLANK-Q) is outside Y3-END-NEEDS's setting and not walked.
+
+**FS112-C-DOUBLE** [hand; one mind: FS112-C2; a sketch]. *Setting:* `E` stuck in a terminal map, `P_cl(E) = {g, c, h}`, both horns' upper arcs on `ω(N)`,
+`N = E + n`, and both lower arcs on `ω(S)`, `S = E − n` (BOWTIE's). *Proof sketch:*
+1. Any `g` at `N` is in-type: an out-type `g`-contact of `E` at `N` would force `D_g(E) ⊆ {d·n ≤ 0}` against `g` filling `E`'s `+n` side (Y3 §3.3 item 2;
+   YB3 Step 3). Likewise any `h` at `S`.
+2. Suppose `g ∉ P_cl(N)`. No SHAVE at `E`: each horn needs a `g`-shadow; YB3's source list with `n` reversed leaves only out-type `g`-tiles at `S` tangent
+   to `+a` and to `−a` (an in-type `g` at `S` straddles `E`'s own `g`-sector; off `E ± n`, N3-CLEAR). They are two sectors of `g` at `S`: above `S` every
+   point is inside `B(E, 1)`, where an out-type tile cannot reach, and below, `c` sits at `S` (FS112-N3-DEG: no MERGE of `c` at `E`) in the pinch that `E`'s
+   lower unit arcs leave (YB3 Step 1 reversed).
+3. That is Y3-END-NEEDS's level 2 at `S` with `g` in `h`'s role; its levels 2–3 (Y3 items 2–3; YB3 Steps 3–4, which never use the curvature on the far
+   side of `E`) then need a seventh colour at `S − n`. So `g ∈ P_cl(N)`, in-type by 1; and `h ∈ P_cl(S)`, in-type.
+4. `N` carries `c` (FS112-N3-DEG) and `g`: each unit arc of `ω(N)` bounding a horn has both side colours at its centre, so it is not (R2), hence (Q) in
+   `M*` (FS112-N2-TERM), and `N` carries at least four colours. Likewise `S`. ∎
+*Checks spent against it (G21: it flatters the NO):* the mixed source case (one horn's `g`-shadow from `N`, the other's from `S`) — then `g ∈ P_cl(N)`
+already, and step 4 applies; the one-horn case — outside the setting, named. *Residue:* a one-vertex chain with a unit arc on one horn only of a side.
+
+**What changes, link by link** (the brief: "say whether any other link of the composition used END-NEEDS").
+- **No link (L1)–(L5) of §1.6 used Y3-END-NEEDS**; only item 5's forecast did. The NO's statement (FS112-N3-DENSE3) and C-COMPOSE's items 1–4 do not
+  rest on it.
+- **(L4) / FS112-C-ENDS used FS112-N3-END's first disjunct and dropped its second** — "at a horn bound `±1`, FS112-N3-END puts four colours at the centre
+  one step beyond" — while N3-END's table statement ends "(or is the doubly bounded one-vertex chain)", where it says nothing about the neighbours'
+  colours. A slip of the close's assembly (FS112-C), made visible by BOWTIE, which realises that disjunct. **Repair:** at a bound on an in-type flank tile
+  the neighbour is a (Q) centre with four colours (C-ENDS's own first case); with all four horn arcs unit arcs, FS112-C-DOUBLE (one mind) makes both
+  neighbours (Q). **C-ENDS stays TRUE at one mind outside one named residue**: a one-vertex chain with a unit-arc bound on an (R2) arc of one horn only
+  of a side and a bound `∓1` on the other side.
+- **Item 5 of §1.6, corrected** (it read: "**Y3-END-NEEDS, if YB3 confirms it, removes horn-bound-`±1` ends from terminal maps** and so narrows (b′) and
+  (b″) to chains ending at NB4′ exceptions or row 8's configuration."): *YB3 confirms Y3-END-NEEDS for every end at which both horns are bounded by unit
+  arcs on one side and neither on the other — every such end of a chain of two or more vertices (FS112-C-HORNEND) — and refutes it at a one-vertex chain
+  bounded by unit arcs on both sides (FS112-BOWTIE). So (b′) and (b″), which concern rays and chains of two or more vertices, narrow to chains ending at
+  NB4P exceptions, at an arc of the end vertex's circle through the next point, or at a unit arc bounding one horn only (not walked). The bowtie is a
+  chain of one vertex, within 1 of two four-colour vertices when all four of its horn arcs are unit arcs (FS112-C-DOUBLE), so it adds nothing to (b′),
+  (b″) or item 3's radius `|K| + 2`; its one open case is C-ENDS's residue.* [hand; one mind: FS112-C2, over the grades above]
+- **The one sentence of §1.6** stands with one change of grade: its clause "each finite end of which is one step from a four-colour vertex" is C-ENDS's,
+  one mind, outside C-ENDS's residue.
+- **Y3's periodic corollary, corrected** (§1.8 6 (ii)): *in a periodic terminal map every stuck chain is finite (FS112-N3-PER), and each end of a chain
+  of two or more vertices lies where the next point is an NB4P exception or carries an arc of the end vertex's circle through it, or at a unit arc on one
+  horn only (not walked); a chain of one vertex may be a bowtie.* [hand; one mind: FS112-C2]
+
+### 1.10 The registrations the round left, scored
+
+- **N3-P5 (0.85)** — "a construction of R2's object by formula (a finite chain with `λ_0 = −1`) has four or more colours at `P_{−1}` and a unit arc of
+  `ω(P_{−2})` through `P_{−1}`"; falsifier "a checked fragment with three colours at `P_{−1}`, or no arc at `P_{−2}`, refutes N3-END". **Not met as
+  registered; N3-END not refuted.** The one locally terminal fragment held with a horn bound `−1`, BOWTIE, has four colours at `P_{−1}` (`S`) and no arc
+  of `ω(P_{−2})` — and it is N3-END's own second disjunct, so the registered falsifier fires for a reason the statement allows: **the falsifier omitted
+  its statement's disjunct** (a registration slip of N3's, the kind G21's *Do* and WORKFLOW's "confirm both outcomes reachable" name). Y3's END-A and
+  END-B are not terminal at `N` and do not bear. And if FS112-C-HORNEND holds, the prediction's first case — a terminal end of a chain of two or more
+  vertices with both horns bounded — has no instance at all.
+- **E16 (0.4)** — "a blind verifier finds a divergence of truth": **met in every round** — round 3 by FS112-YB3 (Y3-END-NEEDS FALSE as stated), NB3 none.
+- **YB3's own registrations** (its §2.3): every one met, one after a reporting defect of its tool was fixed ("colours at `N`" read `{3,4,5,6}` because
+  `N` lies on `L3`'s edge — a wrong-reason miss, caught and disclosed before any verdict).
+- **FS-115's stub row "Y3-END-NEEDS holds as stated (a second mind)" (0.6)** — decided before FS-115 opens: FALSE as stated, TRUE in its corrected
+  scope; the stub's row is replaced (stage 4), not scored against FS-115.
+
+### 1.11 Slips and would-have-searched lines of this stage
+
+- **Slip found (FS112-C's):** 1.9's C-ENDS clause — the assembly cited N3-END's first disjunct only. **Slips (YB3's, item 69):** one exact run past two
+  minutes before its slot (stopped by process group, nothing written); five tool-reporting defects, each fixed before a verdict. **Y3's** (its §4.3): the
+  same slot slip. Two jobs of one round made the same slot slip.
+- **Would have searched here:** I would have varied BOWTIE's parameters in YB3's builder (the sector's half-angle, which colours fill `N`'s sides) to look
+  for a doubly bounded end without in-type tiles; instead FS112-C-DOUBLE's sketch derives that every such end has them. I would have built an (R2)-bounded
+  doubly bounded fragment to test C-ENDS; instead the sketch's step 3 excludes it when all four arcs are unit arcs, and the rest is named as residue.
+
+## Stage 1b — SAVED

@@ -1,0 +1,28 @@
+FOUND   plans/FS112-Y3-construction.md | what the end's unit-arc centre `N` needs, with `E`'s type `{g, c, h}`: to keep `E` stuck, 
+FOUND   plans/FS112-Y3-construction.md | So a stuck chain cannot end at a unit arc in a terminal map while `E` has three colours
+FOUND   plans/FS112-Y3-construction.md | No SHAVE at `E` needs `h` shadowing the horn from above: FLANK's list, re-read with unit a
+FOUND   plans/FS112-Y3-construction.md | or a step of 1–3 fails at a unit arc I have not seen
+FOUND   plans/FS112-N-proof.md | Either `υ_0 = 1` too — both of `P_0`'s horns lie between `ω(P_{−1})` and `ω(P_1)`, `P_0` i
+FOUND   plans/FS112-N-proof.md | (or is the doubly bounded one-vertex chain)
+FOUND   plans/FS112-N-proof.md | an in-type `g` at `P_1` would force `υ_0 = 1`, N2-FLANK-Q
+FOUND   plans/FS112-N-proof.md | a construction of R2's object by formula (a finite chain with `λ_0 = −1`) has four or more
+FOUND   plans/FS112-N-proof.md | a checked fragment with three colours at `P_{−1}`, or no arc at `P_{−2}`, refutes N3-END
+FOUND   plans/FS112-NB3-verification.md | If an upper bound of `H_±` is `+1`, that arc lies on `ω(P_1)` with the horn colour `c` out
+FOUND   plans/FS112-YB3-verification.md | Step 2 — "`h` tangent to `±a` at `N`"**: TRUE **iff `λ_E > −1`**
+FOUND   plans/FS112-YB3-verification.md | If `E` is the upper end of a stuck chain of at least two vertices (so `λ_E > −1`), with `P
+FOUND   plans/FS112-YB3-verification.md | a `g`-tile below `N`'s horn crosses `ω(E)` unless `N`'s lower arcs are `ω(E)` itself
+FOUND   plans/FS112-YB3-verification.md | the proof side's stuck-ray question must include the one-vertex "bowtie" end
+FOUND   plans/FS112-YB3-verification.md | a map with finitely many arc radii (every doubly periodic map, every map of `𝓜_K`'s period
+FOUND   plans/FS112-derivation.md | at a horn bound `±1`, FS112-N3-END puts four colours at the centre one step beyond
+FOUND   data/fs112/fs112-c/reconciliation.md | **Y3-END-NEEDS, if YB3 confirms it, removes horn-bound-`±1` ends from terminal maps** and 
+FOUND   plans/FS112-derivation.md | A vertex with five colours has unit arcs centred at it of total length at least 180°
+FOUND   plans/FS112-derivation.md | In a stuck chain whose vertices all carry N4-STUCK's structure, the horn curvatures cannot
+FOUND   plans/FS112-Y3-construction.md | closing it needs `H1`'s arc to end at a smaller angle than `E`'s. Named, not built.
+FOUND   plans/FS112-Y3-construction.md | `|q2 − Y_0|² < 1` (float 0.9036)
+FOUND   data/fs112/briefs/C2-112-stage1b.md | Y3-END-NEEDS FALSE as stated
+FOUND   plans/FS112-Y3-construction.md | Six colours were `{g, c, h, x, x′, y}`
+FOUND   plans/FS112-Y3-construction.md | a periodic terminal map has no stuck chain at all unless an end vertex is a four-colour ve
+FOUND   plans/FS112-YB3-verification.md | `E`'s `c`-horns would lie beyond arcs of `ω(E − n)` and
+FOUND   plans/FS112-YB3-verification.md | including the directions just below `±a` where `c` sits there
+FOUND   plans/FS112-YB3-verification.md | So `P_cl(N) = {c, h, x₁, x₂, y}` **exactly**, `y = y₁ = y₂` the sixth colour, `g ∉ P_cl(N)
+missing: 0
