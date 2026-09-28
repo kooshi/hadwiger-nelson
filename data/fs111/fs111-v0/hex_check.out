@@ -1,0 +1,18 @@
+### fs111_v0_hex.py 
+a = 1/2; colour (m + 3 n) mod 7; min same-colour centre D^2 = 21/4; (2a+1)^2 = 4; squared distances v0->vk = ['0', '1/4', '3/4', '1', '3/4', '1/4']
+ALL HOLD: proper across and within, tight, and C-HULL's second clause fails at x = v0, C = int H
+exit=0
+### fs111_v0_hex.py --plant diameter
+a = 11/20; colour (m + 3 n) mod 7; min same-colour centre D^2 = 2541/400; (2a+1)^2 = 441/100; squared distances v0->vk = ['0', '121/400', '363/400', '121/100', '363/400', '121/400']
+FAIL PROPER-WITHIN: diameter 2a = 11/10 > 1
+FAIL TIGHT: diameter 2a = 11/10 is not exactly 1
+FAIL THE-CLAUSE-FAILS: sup^2 = 121/100 at vertices [3]; expected exactly 1, attained only at v3
+exit=1
+### fs111_v0_hex.py --plant colour
+a = 1/2; colour (m + 2 n) mod 7; min same-colour centre D^2 = 9/4; (2a+1)^2 = 4; squared distances v0->vk = ['0', '1/4', '3/4', '1', '3/4', '1/4']
+FAIL PROPER-ACROSS: min same-colour centre D^2 = 9/4 not > (2a+1)^2 = 4
+exit=1
+### fs111_v0_hex.py --plant vertex
+a = 1/2; colour (m + 3 n) mod 7; min same-colour centre D^2 = 21/4; (2a+1)^2 = 4; squared distances v0->vk = ['0', '1/4', '3/4', '3/4', '1/4']
+FAIL THE-CLAUSE-FAILS: sup^2 = 3/4 at vertices [2, 4]; expected exactly 1, attained only at v3
+exit=1
