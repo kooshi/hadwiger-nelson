@@ -279,6 +279,12 @@ say so in this section. Working files: `data/fs112/fs112-y/` (prefix `y2_`); too
 | Y2-D3 | FS112-Y's checker ACCEPTs CAL-7's brick (row 33's), REJECTs YB's two plants at the same pairs, and certifies its tightness at the same three contacts; 0 disagreements with FS112-YB's checker pair by pair | tools, exact | §3.3 |
 | Y2-D4S | FS112-Y's strip object passes FS112-YB's checker (exact meeting test, no map hypothesis): 60 of 60 pairs ACCEPT, 0 distinct same-colour tiles meet, 60 exact contacts | tools, exact | §3.3 |
 | Y2-D6 | the strip's arc count is 24 in columns −1…4; Y's 22 is a window effect (the right arcs of `A_4`, `B_4`, whose outer tiles `C_5`, `D_5` lay outside Y's tile window) | tools, exact | §3.4 |
+| Y2-DISK | CAL-DISK rebuilt: `[Polymath2021]` Fig. 10 transcribed by eye (stage 4), the one unknown solved exactly, the control `r² = (25 + 9√5)/10` reproduced; the 26 tiles are a valid six-colouring of the disc of radius `√(5/2 + 9/(2√5))`: ACCEPT on 71 of 71 same-colour pairs, every tile of diameter exactly 1, 20 exact out-contacts, 25 slack pairs | tools, exact, one checker (FS112-Y's; FS112-YB's cannot represent the field); the transcription hand, one mind | §5.1–5.2 |
+| Y2-DISK-KINDS | the disk's 20 unit arcs are all of kind **both**, four centred at each corner `A_k` of the central Reuleaux pentagon (`|P_cl(A_k)| = 4`), each an arc of its inner tile's own corner; every arc end is an interior vertex (arc-closed) | tools, exact | §5.3 (a)–(b) |
+| Y2-DISK-S1 | the disk realises (S1) exactly and arc-closed: the covering pairs `(A_k, X_{k+3})`, `(A_k, Y_{k+1})` (distance ≈ 1.3871, overlap one colour) and the complementary pairs `(A_k, y)`, `y` a transversal change point of `A_k`'s ring, are saved at non-vertex points of unit arcs centred at `A_k` | tools, exact at the vertices and arcs; the non-vertex seam points located in float and placed on their arcs by angle | §5.3 (d) |
+| Y2-BUDGET2 | C-UA-BUDGET's second branch is FALSE in the disjoint sense too: at `A_0`, `P_cl = {Bl, O, R, Yw}`, the ring point `y` at ≈ 209° on the leg `A_1Y_1` has `P_cl(y) = {G, P}` (complementary, `y ∈ ω(A_0)`), and no arc of `Γ` passes through `y`; the ring's arcs are centred at `A_0` itself | tools, exact (the crossing by the intermediate value theorem on an exact segment) + hand, one mind | §5.3 (e) |
+| Y2-STOP | both held positives stop at the same kind of point: the second common unit point of a complementary pair of trivalent arc-end vertices whose first common unit point is a four-colour vertex at which both emit arcs of its unit circle — the strip at the edge vertex `Q` of `(V₀, A₁)`, the disk at the rim point `C_k` of `(B_k, Z^R_k)` (and `D_k` of `(B_{k−1}, Z^L_k)`); no colour is available just beyond either | tools, exact at named points (the strip: two minds, Y and YB; the disk: one) | §5.3 (f) |
+| Y2-DISK-R | no disc of radius above `φ ≈ 1.618` about a vertex lies in any extension of the disk's colouring, and inside the disc of radius `r` the largest vertex-centred disc has radius `r − |OA| ≈ 1.5985` (about the four-colour corners); the strip holds `1.834` about its four-colour vertices. So CAL-DISK does not enlarge C-BEYOND for any step that reads a disc about a vertex | tools, exact at named points + hand, one mind | §5.3 (g) |
 | Y2-X2 | the unit circles about the strip's unit-arc end vertices leave it exactly through edge vertices: `ω(V_0)` crosses the top line at `(±1/4, top)`, reaching `1 − √15/4 ≈ 0.0318` above; `ω(A_0)` at `(−1/4, top)`, `(3/4, top)`, `≈ 0.1340` above | tools, exact | §3.6 |
 
 ## Y2 — Fence log
@@ -457,3 +463,74 @@ Predictions for step 3, written before the checker is run on the disk:
   `(R_k, R_k)`.
 - **plant `swap`** (`U_0` and `U′_0` exchange colours): REJECT at exactly `(U_0, T1_4)` and `(U′_0, T1_1)`.
 - **plant `chords`** (the central tile's arcs replaced by chords): REJECT at exactly the five `(T1_k, T2_{k+3})`.
+
+### 5.1 Step 2: the exact system (`tools/fs112_y2_disk.py solve`; `data/fs112/fs112-y/y2_disk_solve.out`) [tools, exact; sympy]
+
+One unknown, `a = |OA|`: `Π_0` is the unit pentagon with edges at `144°, 72°, 0°, −72°, −144°` from `A = (0, a)`, and "connected" (`B_0 = ρE_0`) is one
+equation of rank one (its `y`-part holds at the root of its `x`-part). **Root: `a = √2/√(5 + √5) = 1/(2 sin 72°)`**, so the `A_k` form a regular
+pentagon of diagonal 1 (the central tile is a Reuleaux pentagon of width 1). **Control: `r² = |OC|² = (25 + 9√5)/10 = 5/2 + 9/(2√5) = φ²(15 + √5)/10`,
+exactly** (caption; Parts). The rules of §4.2 as identities: `|AC| = φ`, so `Z^L = A + (C − A)/φ` is at distance 1 from `A` and lies on `BD` (`Z^L =
+AC ∩ BD`, a pentagram point), `|Z^LD| = |Z^RC| = 1`; the leg `L² = 1 − |A_0A_1|² = (√5 − 1)/2`, the normal of `A_0A_1` at `126°`, `Y_0 = A_0 + Ln_0 ∈
+ω(A_1)`; `|B_0A_0| = |B_0A_1| = 1`; `B_0` on the ray at `126°`; and the complementary pair `(B_0, Z^R_0)` has common unit points exactly `A_0` and `C_0`.
+
+### 5.2 Step 3: the exact check (`check`; `data/fs112/fs112-y/y2_disk_check.out`, `y2_disk_plant_*.out`) [tools, exact]
+
+Built in FS112-Y's tower `ℚ(√5)(√(10 + 2√5))(√((√5 − 1)/2))(√((25 + 9√5)/10))` (each radicand a non-square at its level: the first by its norm 80, the
+second because `ℚ(sin 72°)` is totally real and `(√5 − 1)/2` has a negative conjugate, the third because neither `r²` nor `r²φ` is a square in `ℚ(sin 72°)`
+(norms 11/5, 11/400, and a negative conjugate)).
+- **ACCEPT on 71 of 71 same-colour pairs** (six red tiles, four of each other colour; each tile with itself). Float partition guard inside the disc: 6,296
+  samples, 0 overlaps, 0 holes.
+- `closed_interval`: **26 self contacts** (every tile of diameter exactly 1) and **exactly the 20 predicted out-contacts**; the other 25 pairs are slack
+  (`R_j` against `R_k`; `T2_k` against `U_{k+1}`, `U′_{k−2}`; `U_k` against `U′_{k+2}`).
+- **Plants, each as registered in 5.0:** `ring2_short` → exactly the five `(C0, R_k)` and five `(R_k, R_k)`; `swap` → exactly `(T1_4, U_0)`, `(T1_1, U′_0)`;
+  `chords` → exactly the five `(T1_k, T2_{k+3})`. The faithful twin ACCEPTs beside each.
+- **D4 cannot be met on the disk with FS112-YB's tool as it stands:** its field is `ℚ(√p : p ≤ 23)`, multiquadratic by design, and the disk needs
+  `sin 72° = √(10 + 2√5)/4`, a generator of a cyclic quartic field (`yb` section: YB's `F.sqrt` refuses `√(10 + 2√5)`). The robust form (two rebuilds)
+  needs a blind verifier with a tower-capable checker.
+- E7's twin for the disk: rebuilt by formula from its figure's combinatorics and accepted; its contacts read off below.
+
+### 5.3 Step 3's read-off (`readoff`, `rim`, `seams`; `data/fs112/fs112-y/y2_disk_readoff.out`)
+
+**(a) Unit arcs.** 20, all **both**; four centred at each `A_k` (`P_cl(A_0) = {Bl, O, R, Yw}`): the central side opposite (inner `C0`, outer `T1_{k+2}`),
+the ring-2 top (inner `T2_k`, outer `R_k`: `[Polymath2021]` p. 194's tactic, `V = C0`), and one outer arc of each adjacent ring-1 tile (inner `T1_{k−1}` or
+`T1_k`, outer a rim tile). Each arc is an arc of its inner tile's own corner (self in-contact), and its outer colour is carried at the centre by another
+tile (out-contact). On `ω(A_0)`: arcs at `[15.83°, 36°]`, `[72°, 108°]`, `[144°, 164.17°]`, `[252°, 288°]`, total **112.35°**.
+**(b) Arc-closed.** Every arc end (`A_k`, `B_k`, `Y_k`, `X_k`, `Z^L_k`, `Z^R_k`; radii ≤ 1.509 < `r`) is an interior vertex with a fully coloured neighbourhood
+(C-ARC-END realised; killing test 4 does not fire).
+**(c) The four-colour corners' rings** lie wholly inside the disc (`|OA| + 1 ≈ 1.526 < r`). Ring of `ω(A_0)`: `P [−29°, 15.8°] | Γ | G [36°, 72°] | Γ | P [108°,
+144°] | Γ | G [164.2°, 209.0°] | P [209.0°, 252°] | Γ | G [288°, 330.9°] | P` — tile-interior colours exactly `{G, P}`, the complement of `P_cl(A_0)`; two
+transversal change points (≈ 209.0° on the leg `A_1Y_1`, ≈ 330.9° on `A_4X_3`). Y2-NB4's (α) holds in every orbit: `209° ± 60°` and `331° ± 60°` lie on arcs,
+and each arc end's orbit meets another arc.
+**(d) Seams (YB-SEAMS for the disk).** Close covering pairs of vertices (one per rotation class), and their common unit points:
+
+| pair | distance | types | common unit points |
+|---|---|---|---|
+| `(A_0, A_1)` | `1/φ ≈ 0.618` | `{Bl,O,R,Yw}`, `{G,O,P,R}` (overlap `{O, R}`) | `A_3` (four-colour), `B_0` (trivalent, where both emit arcs) — vertices |
+| `(X_0, Z^L_0)`, mirror `(Y_0, Z^R_1)` | 0.9416 | `{G,O,Yw}` \| `{Bl,P,R}` complementary | `A_0` (four-colour; both emit arcs of `ω(A_0)`); **`w*` on the ray at 126°, radius 2.1625 — outside the disc**; `w*` is at distance 1 from `X_0`, `Y_0`, `Z^L_0`, `Z^R_1` |
+| `(B_0, Z^R_0)`, mirror `(B_0, Z^L_1)` | 1.1756 | `{O,P,Yw}` \| `{Bl,G,R}` complementary | `A_0` (four-colour; both emit arcs); **`C_0` on the rim** (resp. `A_1`, `D_1`) |
+| `(A_0, X_3)`, mirror `(A_0, Y_1)` | 1.3871 | `{Bl,O,R,Yw}`, `{Bl,G,P}` (overlap `{Bl}`) | `A_3` (vertex); a **non-vertex point of the unit arc `Y_4B_4` of `ω(A_0)`** (at 20.2° from `A_0`; sides `Yw`, `O`, both `A_0`'s): **(S1)** |
+| `(A_0, B_2)` | 1.9021 | `{Bl,O,R,Yw}`, `{Bl,G,P}` | `A_2`, `A_3` (vertices) |
+| `(A_0, y)`, `y` the ring's change point at ≈ 209° | 1 | `{Bl,O,R,Yw}` \| `{G,P}` complementary | `σ^{±1}y` at 149° and 269° on `ω(A_0)`: non-vertex points of the arcs `B_0X_0` (sides `O`, `Yw`) and `A_2A_3` (sides `R`, `Bl`) — **(S1)**, both sides `A_0`'s |
+
+So the disk carries (S1) (which the strip does not), arc-closed and exact, with centre `A_0` of kind both — an instance for C-S1-G and Y2-S1I (the arcs'
+ends `Y_4`, `B_4` meet `P`, `G` of `P(v) = {Bl, G, P}`, as Y2-S1I's item 4 says).
+**(e) C-UA-BUDGET, branch 2, in the disjoint sense (Y2-BUDGET2).** `(A_0, y)` is a covering pair with `P_cl(y) = {G, P} = {e, f}` exactly and `y ∈ ω(A_0)`;
+the branch's conclusion ("the arcs sit on `ω(σ_v^{±1}y)` through `y`") fails — `y` lies on a straight leg and `A_0`'s arcs are centred at `A_0`. YB found
+branch 2 false only in the union sense on the strip; the disk refutes it in NB §2.3's own sense. The escape is Y2-NB4's (α).
+**(f) Where the disk cannot be continued (`rim`).** At `z = C_0 + e(θ)/100`, exact straddle tests against every tile: **no colour** for `θ = 54°, 72°, …,
+162°`; `R` free at `36°` (along the rim over `R_0`); control beyond `u_0`, `z = (r + 1/100)e(126°)`: `P`, `Yw` free. So the rim cannot be passed at `C_k`
+(nor, by the mirror, at `D_k`): **`C_0` is the unsaved second seam of the complementary pair `(B_0, Z^R_0)`**, whose first seam `A_0` is a four-colour
+vertex at which both emit arcs of `ω(A_0)` — exactly the strip's `(V₀, A₁)` at `Q` (Y112-EDGE, YB-EDGE). **a3-disk-stops-at-a-seam: TRUE**, and the same
+law on two positives with different skeletons (Y2-STOP). Along the mirror lines the colouring may pass the rim (at `u_0`, `P`, `Yw` are free) but not past
+`w*` (radius 2.1625), the second seam of `(X_0, Z^L_0)`.
+**(g) C-BEYOND at vertex-centred steps (Y2-DISK-R).** The disc of radius `r` is centred at `O`, a free point of the central tile. Inside it, the largest disc
+about a vertex has radius `r − |OA| ≈ 1.5985` (about the `A_k`; `0.874` about `X_k`, `Y_k`; `0.748` about `B_k`; `0.616` about `Z_k`), and no extension of
+the colouring holds a disc of radius above `|A_0C_0| = φ ≈ 1.618` about `A_0` (the point `C_0 + e(108°)/100` is at distance `φ + 1/100` from `A_0`, in
+the direction `A_0 → C_0`, and has no colour). The strip holds `1.834` about its four-colour vertices. **So CAL-DISK does not refute any step that reads a
+disc about a vertex which the strip does not already refute**; in particular it holds no radius-2 disc about any vertex (the base's `ω(y)`, `y ∈ ω(u)`,
+at a vertex `u`, reads one). A3-2.3's second reason ("the only calibration between 1.834 and 2.124 … the base does") does not survive at vertex-centred
+steps; its first (a second positive with a different skeleton, read beside the strip) does — and (f) is its answer.
+**(h) `[16.106]`** ("a `{1,3,5,6}` junction at 2 o'clock on the central tile"): every corner of the central tile is a four-colour junction; `A_4` at 18°
+carries `{R, G, Yw, P}` — consistent with the words (the thread's colour numbering is not held).
+
+## Stage 5 — SAVED

@@ -268,30 +268,8 @@ def readoff():
         print(f"   P_cl({k[0]}_{k[1]}) = {sorted(pcl[k])}  (|.| = {len(pcl[k])}; radius {math.hypot(*fpt(P[k])):.6f})")
     four = [k for k in names if len(pcl[k]) >= 4]
     say(sorted({k[0] for k in four}) == ["A"], f"four-colour vertices: {len(four)}, all corners of the central tile: {sorted(four)}")
-    # rings of the four-colour corners: arcs of Gamma on omega(A_0), and the colour sequence (float sampling, a reading)
-    A0 = P[("A", 0)]
-    arcs_on = []
-    for nm, (c, prims) in T.items():
-        for p in prims:
-            if isinstance(p, Y.Arc) and Y.is0(Y.sub(p.C, A0)) and p.r == 1:
-                a1 = math.degrees(math.atan2(*reversed(fpt(Y.sub(p.S, A0))))) % 360
-                a2 = math.degrees(math.atan2(*reversed(fpt(Y.sub(p.E, A0))))) % 360
-                arcs_on.append((round(a1, 3), round(a2, 3)))
-    arcs_on = sorted(set(arcs_on))
-    tot = sum((b - a) % 360 for a, b in arcs_on)
     Tf = {nm: tile_poly(prims) for nm, (c, prims) in T.items()}
-    ring = []
-    ax, ay = fpt(A0)
-    for i in range(720):
-        th = math.radians(i / 2 + 0.25)
-        hit = locate(Tf, ax + math.cos(th), ay + math.sin(th))
-        ring.append(T[hit[0]][0] if len(hit) == 1 else "?")
-    seq = [ring[0]]
-    for x in ring[1:]:
-        if x != seq[-1]: seq.append(x)
-    print(f"   omega(A_0): {len(arcs_on)} arcs of Gamma on it (deg, ccw from S to E): {arcs_on}; total {tot:.3f} deg; wholly inside the disc "
-          f"(|A_0| + 1 = {math.hypot(ax, ay) + 1:.6f} < r = {Dk.r.f():.6f})")
-    print(f"   ring colour sequence of omega(A_0) (float sampling, 0.5 deg; '?' = on Gamma): {' '.join(seq)}")
+    # (the ring of omega(A_0) is read in `seams`, with the arcs of Gamma marked exactly)
     # close covering pairs of vertices, and their common unit points
     print("   close covering pairs of vertices (types' union = all six, |u - v| < 2), sector 0 representatives, and their common unit points:")
     six = {"R", "Bl", "G", "Yw", "O", "P"}
@@ -323,7 +301,9 @@ def readoff():
                 where.append(f"({x:.4f},{y:.4f}) OUTSIDE the disc (radius {math.hypot(x, y):.4f})")
             else:
                 hit = locate(Tf, x, y)
-                where.append(f"({x:.4f},{y:.4f}) in {hit if hit else 'on Gamma'}")
+                onarc = [f"{nm}" for nm, (c, prims) in T.items() for p in prims if isinstance(p, Y.Arc)
+                         and abs(math.dist(fpt(p.C), (x, y)) - p.r.f()) < 1e-9]
+                where.append(f"({x:.4f},{y:.4f}) " + (f"ON a unit arc (tiles {sorted(set(onarc))}; float)" if onarc else f"in {hit if hit else 'on Gamma'}"))
         disj = not (pcl[k1] & pcl[k2])
         rows.append((dd, k1, k2, disj, where))
     for dd, k1, k2, disj, where in sorted(rows):
@@ -356,6 +336,63 @@ def rim_stop():
     return res
 
 
+def seams():
+    """exact: the unsaved second common unit points of the complementary pairs (B_0, Z^R_0) and (X_0, Z^L_0); the ring of omega(A_0)."""
+    print("== the disk's unsaved seams, exact; and the ring of omega(A_0) (the arcs exact, the colours by float sampling off the arcs)")
+    Dk = Disk()
+    T, P, F = Dk.T, Dk.P, Dk.F
+    g = lambda nm, k: P[(nm, k % 5)]
+    r2 = Dk.r * Dk.r
+    def refl(pt, a, b):
+        d = Y.sub(b, a); t = Y.dot(Y.sub(pt, a), d) / Y.n2(d)
+        foot = Y.add(a, Y.mul(t, d))
+        return Y.sub(Y.mul(F(2), foot), pt)
+    A0 = g("A", 0)
+    for lab, u, v in [("(B_0, Z^R_0)", g("B", 0), g("ZR", 0)), ("(X_0, Z^L_0)", g("X", 0), g("ZL", 0))]:
+        pu, pv = Y.closure_type(T, u), Y.closure_type(T, v)
+        w = refl(A0, u, v)
+        dist1 = Y.n2(Y.sub(w, u)) == 1 and Y.n2(Y.sub(w, v)) == 1 and Y.n2(Y.sub(A0, u)) == 1 and Y.n2(Y.sub(A0, v)) == 1
+        on_rim = Y.n2(w) == r2
+        out = Y.n2(w) > r2
+        others = [k for k, q in P.items() if Y.n2(Y.sub(q, w)) == 1]
+        say(dist1 and not (pu & pv) and (pu | pv) == {"R", "Bl", "G", "Yw", "O", "P"},
+            f"{lab}: complementary {sorted(pu)} | {sorted(pv)}, |u - v|^2 = {Y.n2(Y.sub(u, v))}; common unit points A_0 (four-colour; both emit arcs of "
+            f"omega(A_0)) and w = {Y.n2(w) and (round(w[0].f(), 6), round(w[1].f(), 6))}, |w|^2 = {Y.n2(w)} ({'ON the rim' if on_rim else 'OUTSIDE the disc' if out else 'inside'}); "
+            f"vertices at distance exactly 1 from w: {sorted(others)}; w on the ray at 126 deg: {Y.cross(w, Dk.e(126)) == 0}")
+    # C_0 is the second seam of (B_0, Z^R_0): identify
+    C0 = g("C", 0)
+    w = refl(A0, g("B", 0), g("ZR", 0))
+    say(Y.is0(Y.sub(w, C0)), "the second common unit point of (B_0, Z^R_0) is C_0 exactly: the disc's rim passes through it")
+    # the ring of omega(A_0)
+    arcs = []
+    for nm, (c, prims) in T.items():
+        for p in prims:
+            if isinstance(p, Y.Arc) and Y.is0(Y.sub(p.C, A0)) and p.r == 1:
+                arcs.append((math.degrees(math.atan2(*reversed(fpt(Y.sub(p.S, A0))))) % 360,
+                             math.degrees(math.atan2(*reversed(fpt(Y.sub(p.E, A0))))) % 360, nm))
+    arcs = sorted({(round(a, 6), round(b, 6)) for a, b, _ in arcs})
+    Tf = {nm: tile_poly(prims) for nm, (c, prims) in T.items()}
+    ax, ay = fpt(A0)
+    onarc = lambda t: any((t - a) % 360 <= (b - a) % 360 for a, b in arcs)
+    segs = []
+    for i in range(3600):
+        t = i / 10 + 0.05
+        if onarc(t):
+            lab = "Gamma"
+        else:
+            h = locate(Tf, ax + math.cos(math.radians(t)), ay + math.sin(math.radians(t)))
+            lab = T[h[0]][0] + ":" + h[0] if len(h) == 1 else "?"
+        if not segs or segs[-1][0] != lab:
+            segs.append([lab, t, t])
+        else:
+            segs[-1][2] = t
+    print("   ring of omega(A_0), P_cl(A_0) = " + str(sorted(Y.closure_type(T, A0))) + ": " +
+          "; ".join(f"{s0} [{a:.1f}, {b:.1f}]" for s0, a, b in segs))
+    cols = {s0.split(":")[0] for s0, _, _ in segs if s0 != "Gamma"}
+    say(cols == {"G", "P"}, f"tile-interior ring colours {sorted(cols)} = the complement of P_cl(A_0); arcs of Gamma on omega(A_0): {arcs}, "
+                            f"total {sum((b - a) % 360 for a, b in arcs):.3f} deg")
+
+
 def yb():
     print("== FS112-YB's checker on the disk: its field cannot hold sin 72")
     import fs112_yb_check as K
@@ -373,8 +410,8 @@ if __name__ == "__main__":
     if "--plant" in sys.argv:
         PLANT = sys.argv[sys.argv.index("--plant") + 1]
         args = [a for a in args if a != PLANT]
-    todo = args or ["solve", "check", "readoff", "rim", "yb"]
+    todo = args or ["solve", "check", "readoff", "rim", "seams", "yb"]
     for s in todo:
-        {"solve": solve, "check": check, "readoff": readoff, "rim": rim_stop, "yb": yb}[s]()
+        {"solve": solve, "check": check, "readoff": readoff, "rim": rim_stop, "seams": seams, "yb": yb}[s]()
     print("ALL AS EXPECTED" if OK else "SOME MISMATCH")
     sys.exit(0 if OK else 1)

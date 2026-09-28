@@ -1,0 +1,6 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 3
+== step 3: the 26 tiles in FS112-Y's tower checker  [PLANT chords]
+   tiles 26, colour classes {'Bl': 4, 'G': 4, 'O': 4, 'P': 4, 'R': 6, 'Yw': 4}; same-colour pairs examined 71 of 71 present
+   VERDICT REJECT; REJECT pairs [('T1_0', 'T2_3'), ('T1_1', 'T2_4'), ('T1_2', 'T2_0'), ('T1_3', 'T2_1'), ('T1_4', 'T2_2')]
+ALL AS EXPECTED
+exit 0

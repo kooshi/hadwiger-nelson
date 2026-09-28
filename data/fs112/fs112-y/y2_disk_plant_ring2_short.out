@@ -1,0 +1,6 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 2
+== step 3: the 26 tiles in FS112-Y's tower checker  [PLANT ring2_short]
+   tiles 26, colour classes {'Bl': 4, 'G': 4, 'O': 4, 'P': 4, 'R': 6, 'Yw': 4}; same-colour pairs examined 71 of 71 present
+   VERDICT REJECT; REJECT pairs [('C0', 'R_0'), ('C0', 'R_1'), ('C0', 'R_2'), ('C0', 'R_3'), ('C0', 'R_4'), ('R_0', 'R_0'), ('R_1', 'R_1'), ('R_2', 'R_2'), ('R_3', 'R_3'), ('R_4', 'R_4')]
+ALL AS EXPECTED
+exit 0

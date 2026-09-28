@@ -1,0 +1,40 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== read-off (exact where stated; float only to locate)
+   P_cl(A_0) = ['Bl', 'O', 'R', 'Yw']  (|.| = 4; radius 0.525731)
+   P_cl(B_0) = ['O', 'P', 'Yw']  (|.| = 3; radius 1.376382)
+   P_cl(C_0) = ['P', 'R']  (|.| = 2; radius 2.124255)
+   P_cl(D_0) = ['G', 'R']  (|.| = 2; radius 2.124255)
+   P_cl(ZL_0) = ['Bl', 'P', 'R']  (|.| = 3; radius 1.508772)
+   P_cl(ZR_0) = ['Bl', 'G', 'R']  (|.| = 3; radius 1.508772)
+   P_cl(Y_0) = ['Bl', 'O', 'P']  (|.| = 3; radius 1.250267)
+   P_cl(X_0) = ['G', 'O', 'Yw']  (|.| = 3; radius 1.250267)
+   P_cl(u_0) = ['P', 'Yw']  (|.| = 2; radius 2.124255)
+ok       four-colour vertices: 5, all corners of the central tile: [('A', 0), ('A', 1), ('A', 2), ('A', 3), ('A', 4)]
+   close covering pairs of vertices (types' union = all six, |u - v| < 2), sector 0 representatives, and their common unit points:
+     (A_0, A_1) d = 0.618034 covering (overlap) ['Bl', 'O', 'R', 'Yw'] | ['G', 'O', 'P', 'R']: A_3 (vertex, exact); B_0 (vertex, exact)
+     (X_0, ZL_0) d = 0.941604 complementary ['G', 'O', 'Yw'] | ['Bl', 'P', 'R']: (-1.2711,1.7495) OUTSIDE the disc (radius 2.1625); A_0 (vertex, exact)
+     (Y_0, ZR_1) d = 0.941604 complementary ['Bl', 'O', 'P'] | ['G', 'R', 'Yw']: A_1 (vertex, exact); (-1.2711,1.7495) OUTSIDE the disc (radius 2.1625)
+     (B_0, ZL_1) d = 1.175571 complementary ['O', 'P', 'Yw'] | ['Bl', 'G', 'R']: A_1 (vertex, exact); D_1 (vertex, exact)
+     (B_0, ZR_0) d = 1.175571 complementary ['O', 'P', 'Yw'] | ['Bl', 'G', 'R']: C_0 (vertex, exact); A_0 (vertex, exact)
+     (A_0, X_3) d = 1.387147 covering (overlap) ['Bl', 'O', 'R', 'Yw'] | ['Bl', 'G', 'P']: (0.9387,0.8706) ON a unit arc (tiles ['C0', 'R_0', 'T1_0', 'T1_2', 'T1_4', 'T2_0', 'U_4', 'Up_0']; float); A_3 (vertex, exact)
+     (A_0, Y_1) d = 1.387147 covering (overlap) ['Bl', 'O', 'R', 'Yw'] | ['Bl', 'G', 'P']: A_2 (vertex, exact); (-0.9387,0.8706) ON a unit arc (tiles ['C0', 'R_0', 'T1_0', 'T1_2', 'T1_4', 'T2_0', 'U_4', 'Up_0']; float)
+     (A_0, B_2) d = 1.902113 covering (overlap) ['Bl', 'O', 'R', 'Yw'] | ['Bl', 'G', 'P']: A_3 (vertex, exact); A_2 (vertex, exact)
+== where the disk cannot be continued: points just outside the rim near C_0 and near the rim midpoint of U_0, exact
+   z = C_0 + (1/100) e(36): colours free at z: ['R']
+   z = C_0 + (1/100) e(54): colours free at z: NONE
+   z = C_0 + (1/100) e(72): colours free at z: NONE
+   z = C_0 + (1/100) e(90): colours free at z: NONE
+   z = C_0 + (1/100) e(108): colours free at z: NONE
+   z = C_0 + (1/100) e(126): colours free at z: NONE
+   z = C_0 + (1/100) e(144): colours free at z: NONE
+   z = C_0 + (1/100) e(162): colours free at z: NONE
+   control z = (r + 1/100) e(126) (beyond u_0): colours free: ['P', 'Yw']
+== the disk's unsaved seams, exact; and the ring of omega(A_0) (the arcs exact, the colours by float sampling off the arcs)
+ok       (B_0, Z^R_0): complementary ['O', 'P', 'Yw'] | ['Bl', 'G', 'R'], |u - v|^2 = 1.381966011; common unit points A_0 (four-colour; both emit arcs of omega(A_0)) and w = (-0.5, 2.064573), |w|^2 = 4.512461180 (ON the rim); vertices at distance exactly 1 from w: [('B', 0), ('D', 0), ('ZR', 0)]; w on the ray at 126 deg: False
+ok       (X_0, Z^L_0): complementary ['G', 'O', 'Yw'] | ['Bl', 'P', 'R'], |u - v|^2 = 0.886617230; common unit points A_0 (four-colour; both emit arcs of omega(A_0)) and w = (-1.271105, 1.749526), |w|^2 = 4.676550266 (OUTSIDE the disc); vertices at distance exactly 1 from w: [('X', 0), ('Y', 0), ('ZL', 0), ('ZR', 1)]; w on the ray at 126 deg: True
+ok       the second common unit point of (B_0, Z^R_0) is C_0 exactly: the disc's rim passes through it
+   ring of omega(A_0), P_cl(A_0) = ['Bl', 'O', 'R', 'Yw']: P:T2_4 [0.1, 15.8]; Gamma [15.9, 35.9]; G:Up_4 [36.0, 72.0]; Gamma [72.0, 108.0]; P:U_0 [108.0, 144.0]; Gamma [144.1, 164.2]; G:T2_1 [164.2, 209.0]; P:T1_1 [209.1, 252.0]; Gamma [252.1, 287.9]; G:T1_3 [288.1, 330.9]; P:T2_4 [331.1, 359.9]
+ok       tile-interior ring colours ['G', 'P'] = the complement of P_cl(A_0); arcs of Gamma on omega(A_0): [(15.827292, 36.0), (72.0, 108.0), (144.0, 164.172708), (252.0, 288.0)], total 112.345 deg
+== FS112-YB's checker on the disk: its field cannot hold sin 72
+ok       YB's F.sqrt refuses sqrt(10 + 2 sqrt5): TypeError: argument should be a string or a Rational instance or have the as_integer_ratio() method -- the disk is outside YB's field by design
+ALL AS EXPECTED
