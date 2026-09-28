@@ -17,6 +17,8 @@ record `plans/FS112-Y-construction.md` and never rewrites a verdict there; where
 | Y3-END-A | a finite stuck chain `P_0, P_1, E = P_2` with C-CHAIN-9's recursion taken with equality from the end (upper arcs on the circles about `N = P_3` of radii 3, 2, 1 — the unit arc at `E` — lower boundaries the lines `y = k`), `N`'s neighbourhood completed by colours 1 (below), 3 (top, directions `[45°, 135°]`), 4 (two wedges tangent to `a`): valid, arc-closed at the unit arcs' ends, `P_1` and `E` stuck (no MERGE, MERGE-RAY or SHAVE), and a MERGE of colour 4 available at `N` | tools, exact over ℚ (43 of 43 pairs, contacts, free sets at named points); plants fire | §3.2 |
 | Y3-END-B | the same chain with `N` a five-colour vertex `{1, 3, 4, 5, 6}` (colour 4 a double horn at `N`, flanks 5 and 6, and a colour-4 tile at `N + n` on the concentric circle making `D_4(N)` the line): valid, no MERGE at `N`, and a SHAVE of `N`'s 4-horns by their lower flank available | tools, exact over ℚ (47 of 47 pairs) | §3.2 |
 | Y3-END-NEEDS | what the end's unit-arc centre `N` needs, with `E`'s type `{g, c, h}`: to keep `E` stuck, `c` at `N` in the pinch `[δ, 180° − δ]` and `h` tangent to `±a` at `N` (so `h` in two sectors); to block the MERGE there, `h`'s sectors horns and two upper flank colours outside `{g, c, h}`, so `|P_cl(N)| ≥ 5`; to block the SHAVE too, the horns' upper arcs unit arcs of `ω(N + n)` and, at `N + n`, two distinct upper flank colours outside five used colours — a seventh colour. **So a stuck chain cannot end at a unit arc in a terminal map while `E` has three colours** | hand, one mind; its first two levels realised exactly (Y3-END-A, -B) | §3.3 |
+| Y3-R3 | at both held positives every close complementary pair of vertices is saved at one common unit point by a four-colour vertex at which both members emit arcs of its unit circle (half of T2), and at both points exactly when it is a rhombus completion (the strip's `(V_m, V′_m)`, `(A_j, A′_j)`: T2 twice) — the unsaved second points are the stop points (the strip's edge vertices, the disk's rim point `C_0` and the point `w*` beyond it); the disk adds `(A_0, y)`, `y` a ring change point, saved at both by (S1) | reading of exact results held (YB-SEAMS, exhaustive per period; Y2 §5.3 (d)); one mind | §4.1 |
+| Y3-T2-BUDGET | if a close complementary pair `(u, v)` with `u` trivalent is saved by T2 at both common unit points, then `v = w_i + w_j − u` for two of the at most three centres `w_i` of unit arcs `u` emits; so a trivalent vertex has at most three such partners, at determined places, and a pattern saving every close complementary pair by T2 at both points has every such pair a rhombus completion — which the strip's geometry cannot meet (its colouring is forced up to permutation, and its `(V, A)` pairs are complementary and not completions) | hand, one mind | §4.2 |
 
 ## Fence log (standing rule 13; the three briefs' fences)
 
@@ -227,3 +229,68 @@ Setting: a stuck vertex `E` (C-CHAIN-8 (i)–(iii) at `E`, all of which survive 
    **Its exceptions, named:** (i) `E` with four colours (then `x` could be `E`'s fourth colour, shadowing from `E`); (ii) FLANK's list with contact *arcs*
    at points other than `N`, `S′` (N3-CLEAR is uniform on compact arc sets, but an arc accumulating at `N` is not covered); (iii) the operations' own
    validity with unit arcs (W-MERGE as written, card W; SHAVE's `Σ` of radius `≠ 1`). One mind; the proof side's R2 is the second.
+
+## Stage 4 — SAVED: card R's R3, and A3-3.5 step 3 (the design principle), derived; hand-back notes
+
+### 4.1 R3 — the held positives' close complementary pairs at both common unit points (Y3-R3) [a reading of exact results held; one mind]
+
+| positive | close complementary pair (per period / rotation class) | distance | first common unit point | second common unit point |
+|---|---|---|---|---|
+| strip | `(V_m, V′_m)` valley and its mirror (3 per period) | `√3` | midline four-colour vertex, both emit arcs of its circle | the same, the next midline vertex: **T2 twice** (Y112-T2-SQRT3) |
+| strip | `(A_j, A′_j)` apex and its mirror (3) | `√15/2` | `P_j`, both emit arcs | `P_{j+1}`, both emit arcs: **T2 twice** on a thin rhombus (YB, D8) |
+| strip | `(V, A)` valley and a neighbouring apex on the same side (12) | `≈ 0.757` | a midline four-colour vertex, both emit arcs (**half of T2**; X4: the (S2)-with-arcs pattern) | **an edge vertex: unsaved** — the stop (Y112-EDGE, YB-EDGE; forced sectors Y2-FORCE; the cut Y3-STRIPCUT) |
+| disk | `(X_0, Z^L_0)`, mirror `(Y_0, Z^R_1)` | 0.9416 | `A_0`, four-colour, both emit arcs of `ω(A_0)` | `w*` on the ray at 126°, radius 2.1625: **beyond the rim, unsaved** |
+| disk | `(B_0, Z^R_0)`, mirror `(B_0, Z^L_1)` | 1.1756 | `A_0`, both emit arcs | **`C_0` on the rim: unsaved** — the stop (Y2-STOP; Y3-DISK-T*) |
+| disk | `(A_0, y)`, `y` a transversal change point of `A_0`'s ring (not a vertex) | 1 | `σ y`: a non-vertex point of a unit arc centred `A_0`, both sides `A_0`'s: **(S1)** | `σ⁻¹ y`: **(S1)** — saved at both |
+
+Sources: YB-SEAMS (exhaustive over one period of the strip, exact), Y2 §5.3 (d) (the disk's vertex pairs of union six at distance `< 2`, exact at the
+vertices, the non-vertex points located in float). **The pattern:** at both positives, (i) every close complementary pair of vertices is saved at one
+point by half of T2 — a four-colour vertex whose unit circle both members' arcs lie on; (ii) it is saved at both points exactly when its members are the
+two free corners of a rhombus of unit arcs, `v = w₀ + w₀′ − u` (T2 twice); (iii) otherwise its second point is exactly where the positive stops (the
+strip's edge, the disk's rim at `C_k`, or beyond the rim at `w*`); (iv) the only other full save held is (S1) twice, for a four-colour centre and a
+non-vertex ring point. One mind; (ii)'s "exactly when" is a reading of two objects.
+
+### 4.2 A3-3.5 step 3 — the design principle, derived: the T2 budget (Y3-T2-BUDGET) [hand, one mind]
+
+Step 1 escaped nowhere (stage 2), so the brief's alternative applies: attempt the pattern in which every close complementary pair is saved at both
+common unit points as T2 saves `(W, W′)`. Derived first, before anything is built:
+1. **T2 at both points ties the pair to the arcs `u` emits.** T2 at `w₀` means `u` and `v` both emit arcs of `ω(w₀)`; at `w₀′` both emit arcs of `ω(w₀′)`.
+   A boundary curve leaving `u` is an arc of at most one unit circle, centred on `u`'s circle along the curve's normal. A trivalent `u` emits three curves,
+   so it has **at most three unit-arc centres `w_1, w_2, w_3 ∈ ω(u)`**, and `{w₀, w₀′} = ω(u) ∩ ω(v)` must be two of them: **`v = w_i + w_j − u`**, the
+   fourth corner of the unit rhombus on `u, w_i, w_j`. So a trivalent vertex has at most three partners saved by T2 at both points, at places its own
+   arcs fix, and every `w_i` so used is a vertex of degree `≥ 4` (Y-T2W).
+2. **The principle, stated as a condition a YES must meet if it saves by T2 alone:** every close complementary pair of trivalent vertices is a rhombus
+   completion of their unit-arc centres. Any other close complementary pair must be saved by (S1) or by an (S2) pattern at each point (claim list §1–2).
+3. **The strip cannot meet it.** The strip's colouring is forced up to a permutation (the arches' row needs three colours in period 3 — `A_j` and
+   `A_{j+2}` are `1/2` apart — the top row the other three), so a valley `{A_{j−1}, A_j, C_j}` and the apex `{A_{j+1}, C_{j+1}, C_{j+2}}` beside it are
+   always complementary, at `≈ 0.757`, and not a completion: the valley's unit-arc centres are the two midline vertices beside it (its third boundary
+   is a straight side), whose completion is its mirror valley. That is Y3-R3's line (iii) derived, not read.
+4. **What a pattern meeting it looks like, locally** (derived; not built — this round's budget ended here): each trivalent vertex's three boundaries are
+   unit arcs (to have three centres), its complementary partners sit at the three rhombus completions, and every other vertex within 2 must share a
+   colour with it. At a vertex with three unit-arc boundaries the three centres lie on `ω(u)` at the normals of its three sector boundaries, so the
+   completions `w_i + w_j − u` are at distance `2 cos(θ_ij/2)` where `θ_ij` is the angle at `u` between `w_i` and `w_j`. A first test for a successor, in
+   ban: the disk's corners `A_k` already emit four unit arcs each; take the Reuleaux-pentagon skeleton and ask, by derivation, whether its trivalent
+   vertices `B_k` (two unit-arc boundaries, centres `A_k`, `A_{k+1}`) can be given a third unit-arc boundary whose completions are exactly their
+   complementary partners — `B_0`'s current partners `Z^R_0`, `Z^L_1` are not completions (the completion `A_0 + A_1 − B_0` lies inside the central tile).
+
+### 4.3 Retractions and slips this job
+
+- **Retractions: 0.** **Disagreement with Y2, recorded (not a rewrite):** Y2 §6.4 placed the obstruction to a blue `T*` at `T2_0`'s sector at `Z^L_0`; the
+  decisive blocker is `T2_0`'s corner `Y_0` (§2.2).
+- **Slips of mine:** (1) a 2-minute-plus run of Y2's `move` section started bare, not under `scripts/slot.py`; stopped by the harness's task id within
+  two minutes of the rule's line, confirmed gone by `ps` (nothing written); every later run went through `slot.py`. (2) Two registered expectations in
+  my tool failed for the instrument's reason, each caught by its own MISMATCH and repaired before any verdict rested on it: the valley test removed the
+  tiles that carry the force (§2.1); the "no colour on `W`" test forgot that yellow is `W`'s own colour (the corrected claim is "only yellow", §2.2).
+  (3) My first disk object used Y2's literal sliver and closed `U_0` at `s1`; both REJECTs were diagnosed to named distances (`y3_pin_disk_first.out`).
+  (4) Fence touches: the start-up listings (fence log items 1–2), names only.
+
+### 4.4 Proposed edits for the close (I edit none of these files)
+
+- `LEDGER.md` / `plans/FS112-derivation.md`: Y3-STRIPCUT, Y3-DISK-T*, Y3-LEG, Y3-END-A, Y3-END-B, Y3-END-NEEDS, Y3-R1, Y3-R3, Y3-T2-BUDGET as in the
+  table above, at their grades. Y2-PIN strengthened as in §2.3.
+- `plans/FS112-Y-construction.md` §6.4's clause (Y2's GAP) is answered here; the close's filing of Y2-PIN should cite §2.2 for the blocker.
+- `BIBLIOGRAPHY.md`: no new reading this job (the objects are the held rebuilds).
+- Stubs: (i) the terminal-map claim of Y3-END-NEEDS for the proof side's R2 (a second mind, and its exceptions (i)–(iii)); (ii) the disk's blue and
+  orange routes to a fourth colour at `C_0` (never analysed); (iii) the design test of §4.2 item 4 on the pentagon skeleton.
+
+## Stage 4 — SAVED
