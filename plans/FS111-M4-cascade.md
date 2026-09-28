@@ -230,7 +230,7 @@ reaches only `z₁`, its centre is left of `z₂ − n < z₁`, so `A` decreases
 In the edge frame (flat side `σ_e` at `t = 1`, so rung `k`'s flat side is `t = 1 + k`), every rung is at most as thick as the band (`β^{−n} + n ≤
 β` and `β^{+n} − n ≤ max β ≤ 1/64`). Over the first gap `|s| < 1/6`:
 - **rung `−4`** lies in `{−3 < t ≤ −3 + 1/64}` and **rung `+4`** in `{5 < t ≤ 5 + 1/64}`: inside the open discs of radius `1/2` about the face centres
-  `O± = (0, ±(2 + √3/2) + (0 or 2))`, i.e. `(0, −2 − √3/2)` and `(0, 4 + √3/2)` (K1, exact). Those discs are open sets of class `j`. M4-LADDER (3) at
+  `O₋ = (0, −2 − √3/2)` and `O₊ = (0, 4 + √3/2)`, each at distance 2 beyond its triangle's apex (K1, exact). Those discs are open sets of class `j`. M4-LADDER (3) at
   rung `−3` puts `x_{−3}` below `t = −3` and a different colour `x_{−4}` just above, near every `(s, −3)`; inside the disc both are `j`. Contradiction;
   likewise at rung `+3` with `t = 5`.
 - **rungs `±1, ±2, ±3`** have their flat sides on `t = 0, −1, −2` and `2, 3, 4`, which miss both discs and both triangles' interiors (`t = 0` and `t = 2`
@@ -256,3 +256,89 @@ sympy, exact; output `data/fs111/fs111-m4/rungs.out`, exit 0 (all as expected).
   `sq4` (squares coloured mod 4) → K4.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the cascade answered in partitions; where the colour count enters; MUA-REG in partitions
+
+### 4.1 M4-MOVE — the cascade of a move is the ladder, and it is forced
+
+**M4-MOVE** [hand, one mind; over M4-LADDER, M4-CUT]. *Let `f` and `f′` be regular maximal partitions that agree outside the ladder region of a gap
+`J` and differ there by replacing `β` with `β′ ≠ β` (e.g. M3-MOVE's `g_K → g_τ`), both ordinary through rungs `−N, …, N` over `J`. Then:*
+1. *The classes are the same at every rung (`x_k` depends only on the classes around rung 0, by M4-LADDER (3)), so **no class outside the ladder's
+   classes changes and no spare colour enters**: the class that absorbs M3-MOVE's lost sliver `L_τ` is forced — it is `x_1`, the class under the band,
+   because `L_τ ⊆ W⁺_τ` (rung 1 of `f′`) and `W⁺_τ` is `x_1`'s.*
+2. *At every downward rung `−k`, `1 ≤ k ≤ N`, the curved side moves (`β^{−k} ≠ β′^{−k}`): by M4-CUT (2), `β = (β^{−k})^{+k}` and `β′ = (β′^{−k})^{+k}`,
+   so equal parallels would give `β = β′`. The class `x_{−k}` gains or loses the region between `β^{−k}` and `β′^{−k}`, and the class over it the
+   complement. At rung `+1` the curved side moves by `L_τ`'s shape (`β^{+1} = 2 + g` in HC's frame).*
+3. *So **the cascade runs one unit per step along the ladder, through every ordinary rung, and does not close there**; it can end only where the ladder
+   stops being ordinary — by M4-CUT within `1 + 2/w²` rungs up and `w²/(8h)` down over a gap of width `w` and height `h`, and for HC's skeleton within
+   three rungs (M4-HC, whatever `g`: the collision K1 uses only the skeleton).*
+
+*What it answers* (the brief's item 2): the cascade of a pinch-removing move in a regular maximal partition **neither closes in the ordinary region nor
+runs to infinity**: it is carried by the ladder's finitely many ordinary rungs to the singular set. Whether it can be absorbed there — a junction (three
+or more colours), a class with disconnected local parts, a rung that is not one class — is the open step: **GAP at the singular set**. M3-CASCADE's
+measure statement ("the gainer loses its old material at distance 1 from what it gained") is, in the ordinary region, exactly M4-MOVE (2)'s moving
+curved sides (the lost material is the thin region between old and new parallels at the next rung).
+
+### 4.2 Where the colour count enters
+
+- **Not in the ladder.** The ladder's classes are determined by the classes around rung 0 (M4-MOVE (1)); the absorption needs no spare colour at any
+  `k`, and M3's reading (three spare HC translates absorbing the slivers, a construction at `k + 3`) does not arise in partitions: the slivers are the
+  class under the band's already (M4-LADDER, §2.4). **So the answer to "at which `k` is a spare colour available" is: none is needed along the ladder;
+  the count can enter only where the ladder ends, at a junction.**
+- **At the junction, a reading.** A ladder ends at a point where (A) or (B) fails; the generic such point is a junction of three or more classes, and
+  saturated junctions are where the count lives (round 1 §4: M-HALF's sector structure; row 135: four-colour vertices). A pinch's ladder ending at a
+  junction within `N` rungs means **every large gap of a pinch brings a junction within distance about `N`** — the pinch is tied to the junction
+  structure, and a count argument would have to see the junctions, not the pinch. *Killing test:* a regular maximal partition with a Cantor pinch whose
+  ladders end at points of only two colours (a class with disconnected local parts, or a sub-layer) with no junction within `N` rungs.
+- *A registered observation, not a theorem:* near a pinch the region between rung `k`'s curved side and rung `k + 1`'s flat side has height tending
+  to 1, so if it were one class it would contain unit pairs in positive measure once its width exceeds about `(2β)^{1/2}`; so the ladder's gaps between
+  rungs are not single classes over any interval near a pinch point, and ordinary ladders near a pinch carry interior interfaces with their own ladders
+  (the colour sequence along a vertical near the pinch is 1-periodic in its jumps, `c(h + 1 + 0) = c(h − 0)` at every ordinary jump `h`). Not pursued.
+
+### 4.3 MUA-REG in partitions (the brief's item 3)
+
+- **M3-IRREG transfers verbatim**: a class of any maximal partition is a maximal unit-avoiding set, so a class containing M3-IRREG's `A_f` (HC with a
+  fat pinch set) is irregular (M3-IRREG (3)); whether a partition containing `A_f` exists is open for the same reason as HC_K's (§3.4).
+- **M4-CUT needs regularity** exactly at (F1) (M2-FIX), which holds for regular classes. A class whose support carries a positive-measure boundary
+  (M3-IRREG's dust) escapes the step "every component lies inside or outside `B(y, 1)`" through its nowhere dense part. *Reading:* **an irregular class is
+  the one way a pinch's ladder could run on without junctions** — the cut forces either junctions or irregularity near every large gap. *Killing test:*
+  a proof that (F1)'s conclusion holds for every MUA set's interior components (then irregularity does not help the ladder). Not decided.
+- So MUA-REG-P in partitions is **GAP**; this round adds only the reading above.
+
+### 4.4 Verdict on the brief
+
+| item | answer | grade, minds |
+|---|---|---|
+| 1. a partition with an HC-type class, or the obstruction "the pinch forces a neighbouring class to be pinched, and so on without end" | **Not built.** The obstruction's first half is **TRUE** (M4-LADDER: both neighbouring classes are pinched, one unit away, on the same set); its second half is **FALSE** in ordinary form (M4-CUT: the ladder must meet the singular set within finitely many rungs); HC_K itself fits no regular maximal partition with an ordinary ladder through three rungs over its first gap, or with an ordinary disc boundary point (M4-HC). **Whether MUA-FIN-L can fail in partitions: GAP at the singular set** — a pinch in a regular maximal partition must bring singular points (or irregularity) near its large gaps | [hand; hand + tools exact], one mind |
+| 2. the cascade | runs one rung per step through the ordinary ladder, never closing there, with forced absorbing classes; ends at the singular set within the M4-CUT bounds; its fate there is open | [hand], one mind |
+| where a spare colour enters | nowhere along the ladder, at any `k`; only possibly at the junction where the ladder ends (reading) | [hand; reading], one mind |
+| 3. MUA-REG in partitions | M3-IRREG transfers (a class containing `A_f` is irregular); M4-CUT's use of (F1) makes irregularity the only junction-free escape (reading); GAP | [hand; reading], one mind |
+
+*Honesty rule:* nothing here is stated at `k = 5` alone; every statement is colour-generic, and none decides a colour count (G24). The existence of a
+regular maximal five-cover satisfying MUA-FIN + D3 remains equivalent to `χ_m⁰ ≥ 6` (M2-REDUCE-C, VM2-EQ5), untouched.
+
+### 4.5 Proposed for the close (I edit none of these files)
+
+- **`data/fs111/claims.md` §3:** MUA-FIN-L in partitions — M4-LADDER (a pinch propagates to both neighbours at distance 1, same zero set), M4-CUT
+  (ordinary ladders are finite: `≤ 1 + 2/w²` up, `≤ w²/(8h)` down), M4-HC (HC_K: three rungs; discs never ordinary), M4-MOVE (the cascade is the ladder;
+  no spare colour); the open step is the singular set.
+- **`LEDGER.md`, FS-111's row:** M4-LADDER, M4-CUT [hand, one mind], M4-HC [hand + tools exact, one mind]; "it moves no value: it turns M3-CASCADE's
+  measure statement into the unit-parallel ladder and shows the ladder must end at a junction or an irregular class within a bounded number of rungs".
+- **Grokking draft (to merge with M3's G84′ draft), G67's form:** *A pinch climbs a ladder of unit parallels, and the ladder is short. [hand, one mind]*
+  In a saturated partition every ordinary interface has partners of both its colours one unit away along the normal; a pinched layer's partners are
+  pinched layers of the two neighbouring classes on the same set, and so on, but the curved side's parallels sharpen upward and its bumps stop being
+  unions of `n`-discs downward, so within about `1/(2c)` rungs up and `w²/(8h)` down the ladder must meet a junction (or an irregular class). *Do: when a
+  pinch or any curved interface is proposed in a partition, draw its ladder of unit parallels first and find where it must end — the junction is where the
+  argument lives. Killing test: a regular maximal partition with a pinch whose ladder is ordinary for more rungs than M4-CUT allows (a defect in the cut),
+  or one whose ladders end with no junction and no irregular class within the bound (the reading).*
+- **Stubs:** (a) *the pinch at a junction* — what a saturated junction does with a ladder that ends at it (does the change of M4-MOVE get absorbed?);
+  provisional bearings G83 (four-colour vertices), G82, G79, row 135. (b) *(F1) for irregular MUA sets* — does every component of the interior of a MUA
+  set's density set lie inside or outside each unit disc about its support? (the step irregular classes could evade). (c) retire M3's stub (b) (the
+  spare-colour absorption): superseded by M4-MOVE (1).
+- **`BIBLIOGRAPHY.md`:** nothing new read this round. The closing/opening identities used (a set equals its closing by a disc iff its complement is a
+  union of such discs) are classical mathematical morphology (Matheron, Serra); **not held, not read** — nothing rests on a citation, the step is proved
+  in place.
+- **Corrections owed:** M3 §3.3's reading "three spare classes (HC translates) would absorb the slivers" — superseded in partitions (M4-MOVE (1)); M3's
+  stub (b) likewise.
+
+## Stage 4 — SAVED
