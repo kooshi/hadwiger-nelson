@@ -463,3 +463,40 @@ of `S`). A neighbourhood `N` of `x` misses `F_f` (closed), so `A′ ∩ N ⊆ K`
 
 *Would kill M3-IRREG:* a point `z` of the bulge with both crossings in `Z_f` whose unit circle meets `A_f` (a defect in the arc-above-band inequality),
 or a completion `A′` whose added part has interior points of its support (a defect in (2)).
+
+### 4.4 The controls (the brief's `k = 7` inhabitants), read against this round's facts
+
+- **R7** (ups: Reuleaux triangles of width 1; downs: cusped curvilinear triangles), **DISC7** (discs of radius `1/2`), **DISCK7** (constant-width bodies,
+  VM2's orientation): every up, disc and body has constant width 1, so it excludes its own near exterior and carries no band (§1.5 fact 1 needs a flat side);
+  their classes are regular MUA sets with finitely many components per bounded set — MUA-FIN + D3 holds on them (M2, VM2, VMW). R7's downs have no flat
+  side either (three concave unit arcs).
+- **SQ9** (squares of side `1/2` at period `3/2`): flat sides, but each faces a flat side of the same class at distance exactly 1 (W's ladder) — the
+  "material at distance exactly 1 over the middle half" of fact 1 is the facing square itself, so no band is needed and none exists.
+- **HC** is the first object in this programme whose classes need bands: its flat sides face each other at distance 2. **None of the round's claims is a
+  claim about colourings**, so the strip and the disk (row 136) carry nothing to check here.
+
+### 4.5 Proposed for the close (I edit none of these files)
+
+- **`data/fs111/claims.md` §3:** add MUA-FIN-U — FALSE (M3-HC, HC_K); M2-PINCH-C — as stated vacuous (M3-VAC), corrected TRUE; MUA-FIN in M2's words vs with
+  D3 — separated by HC_K (M3-D3); MUA-FIN-P — the existence reading is not smaller than the answer at five, the local reading MUA-FIN-L is the colour-
+  generic rung, with M3-MOVE (one class: TRUE), M3-COVER, and M3-CASCADE (partitions: GAP at the cascade); MUA-REG-U — FALSE (M3-IRREG); M2-FIX's converse —
+  FALSE (M3-FIXCONV).
+- **`LEDGER.md`, FS-111's row:** M3-HC (with HC's definition), M3-IRREG, M3-MOVE [hand + tools exact / hand, one mind each]; "it moves no value: it closes
+  two universal forms (MUA-FIN-U, MUA-REG-U) and names the obstruction to the local form (the cascade)".
+- **Grokking draft (G84′, in G67's form), to merge with M2's G84 draft:** *A maximal class is as wild as its bands' zero sets. [hand, one mind]* A flat
+  side of a block of diameter `≤ 1` must see its class at distance exactly 1 over its middle; when the facing block is at distance 2, that material is a
+  band, which cuts itself off at length exactly 1 and whose thickness is the gap's excess over 2 — free to vanish on any closed set. A null zero set gives
+  infinitely many components (not locally finite, still regular); a fat one gives a closure-maximal but measure-free set, whose every maximal completion
+  is irregular. *Do: when a maximality argument needs local finiteness or regularity, look for two blocks facing at distance exactly 2 and ask what the
+  gap's zero set is; expect nothing from maximality class by class, and spend the finiteness on a move (M3-MOVE) or on the whole cover. Killing test: a
+  regularity or finiteness theorem for MUA sets proved class by class, with no hypothesis excluding facing blocks at distance 2.*
+- **Stubs:** (a) *MUA-FIN-L in partitions* — a regular maximal partition (a measurable fall colouring) with an HC-type class, and whether its pinches can
+  be removed locally; provisional bearings G54 (fall colourings), G82, G79, W §2.7. (b) *The spare-colour absorption* (§3.3's reading): three HC translates
+  absorbing the lost slivers — a construction at `k + 3`. (c) Retire M2's stub (c) (M2-PINCH-C's completion): done by HC_K.
+- **`BIBLIOGRAPHY.md`:** `[Bukh2008]` — §4 read to the supersaturation lemma's statement (definitions of `Z_δ(ε)`, properties I–VII), Lemma 12's
+  statement; proofs not read. Federer 1969 (4.5.11), Federer 1959, Kershner 1939: **not held, not read** (M2's debts stand; nothing here rests on them).
+  The Smith–Volterra–Cantor set is classical (no entry needed).
+- **Corrections owed:** M2's record §2.3 — M2-PINCH-C's hypothesis is unsatisfiable (M3-VAC); its reading "MUA-FIN-U is FALSE" is now a theorem. M2 §1.5's
+  sentence "a MUA set whose support carries a positive-measure 'dust' … is not ruled out here" — now realised (M3-IRREG).
+
+## Stage 4 — SAVED
