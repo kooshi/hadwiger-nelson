@@ -1,18 +1,12 @@
 {
+  "outputStyle": "keryx",
+  "skillOverrides": {
+    "keryx": "user-invocable-only",
+    "poros": "user-invocable-only",
+    "ephodos": "user-invocable-only",
+    "debruijn": "user-invocable-only"
+  },
   "env": {
     "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1"
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/keryx-session-start.sh",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
   }
 }

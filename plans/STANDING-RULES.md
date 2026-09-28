@@ -37,16 +37,9 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
    - State each result at its grade, with its count of independent minds; say "not found in print", never "first". Never raise a
      grade, a scope or a verdict you are copying.
 
-5. **The ban on finite-witness search runs to 2026-10-01** (`CLAUDE.md` § Toolchain). Kooshi's intent: *"to eliminate the crutch of
-   feeling like we're accomplishing something by asking uncomputable problems for days at a time."*
-   - **Out:** SAT, MaxSAT and #SAT solvers; MILP/CP and local-search colourers; Θ relation trees and float Θ finders;
-     quotient-colouring searches; lattice sweeps hunting survivors.
-   - **In:** hand derivation; exact arithmetic that checks a derived claim; existing checkers on existing certificates; the Lean
-     kernel. A complete exact enumeration of a finite set whose extent a derivation fixed first is in, and is logged as such. "Try
-     cases until one works" is out.
-   - Keep a **"would have searched here" log** in your record: one line per move you would have made by search, and what you did
-     instead.
-   - Delete this rule after 2026-10-01 unless Kooshi extends it.
+5. **The ban on finite-witness search runs to 2026-10-01.** Its lists of what is out and what is in are `CLAUDE.md` § Toolchain, and
+   they bind you. Keep a **"would have searched here" log** in your record: one line per move you would have made by search, and
+   what you did instead. Delete this rule after 2026-10-01 unless Kooshi extends it.
 
 6. **Commits by explicit path.** Other agents share the tree.
    - `git add <new file>`, then `git commit <paths> -m …`. Never a bare `git commit`, never `git add -A`, never amend.
@@ -62,15 +55,13 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
      nothing (G21).
    - Never edit a frozen tool (`tools/fs58_*`, `tools/fs61_*`, `tools/fs66_*`, `tools/fs73_*check*.py`, `tools/fs73v2_check.py`,
      `data/fs73/coxeter-c3/certcheck.py`) or another job's tools.
-   - **One writer per file.** Keryx alone writes `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`,
-     `BIBLIOGRAPHY.md`, the close inventory, the claim lists once frozen, and this file, unless your brief makes you the front-page
-     lane. Propose edits in your record, each written to be copied as it stands.
+   - **One writer per file.** `CLAUDE.md` § The pipeline names the files Keryx alone writes; unless your brief makes you the
+     front-page lane, draft edits to them in your record, each written to be copied as it stands.
 
 8. **Fences.** If your brief fences a path and a search prints fenced text, stop reading it, and log the touch at once in your record
    and your report: the time, the file, and what it carried. A disclosed touch costs little; an undisclosed one voids the grade. The
    session transcripts (`~/.claude/projects/`, `chats-bak/`) hold every earlier agent's route: a fenced job does not read them. Never
-   write anything about an open milestone (a verdict, a route, a hunch) into the auto-memory, `~/.claude/projects/…/memory/`: the
-   harness gives its index to every agent at launch, blind ones included. Never copy an agent id (a string like `a1b2c3…`) into any
+   write anything about an open milestone into the auto-memory (`CLAUDE.md` § The pipeline says why). Never copy an agent id (a string like `a1b2c3…`) into any
    file. Never read credential files (`auth.json`, `.env`, keyrings).
 
 9. **The machine.**

@@ -6,7 +6,7 @@ the future." Its model is `plans/PROTOCOL-competitor-and-advisor.md`. It is writ
 run the third crunch from this file, the two queues it cites, and the briefs it points to. No agent id appears here; jobs are named by
 their job ids.*
 
-> **Since 2026-09-28 each role below runs under an agent file** (`WORKFLOW.md` § The roles). The owner is **Keryx**, the top-level
+> **Since 2026-09-28 each role below runs under an agent file** (`CLAUDE.md` § The pipeline). The owner is **Keryx**, the top-level
 > session; it coordinates and never derives. The planner's reframe, and the reframe, derivation, reader and close-math jobs, are
 > **`ephodos`** agents. The blind verifier and the blind second derivation are **`ephodos-verifier`** agents. The advisor, in the main
 > run and in mid-run sessions, is a **`poros`** agent. The kernel job is a **`debruijn`** agent. The front page, clerk, bookkeeper and
@@ -273,7 +273,7 @@ first." Copy the best instance below and change only its slots. Paths are relati
 
 1. **A header line:** the job id, its kind, the model, the date, who wrote it, which brief it copies, when to launch it, and any hard stop
    ("Launch only after X30F has handed back"; "Hard stop: 11:50 UTC").
-2. **"Hello. You are <the identity of the agent file the job is launched from>, <role>"**, with `CLAUDE.md` and `WORKFLOW.md` read from disk (since 2026-09-28 the identity is the agent file the job is launched from), and
+2. **"Hello. You are <the identity of the agent file the job is launched from>, <role>"**, with `CLAUDE.md` read from disk (since 2026-09-28 the identity is the agent file the job is launched from), and
    **"`STANDING-RULES.md` is part of this brief; read it in full."**
 3. **The resume paragraph:** "If your record already exists, you are resuming: check the last SAVED stage against `git log -- <record>`."
 4. **Kooshi's words, verbatim**, where they are why the job exists.

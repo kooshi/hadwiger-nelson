@@ -1,13 +1,10 @@
-# Workflow
-@WORKFLOW.md
-
 # This workspace — lean-dir
 
 A Lean 4 proof workspace aimed at one target: **the Hadwiger–Nelson problem**. Its work runs as a pipeline of four identities
-(WORKFLOW § The roles): Poros asks the question, Ephodos derives the answer, de Bruijn formalizes it to its Lean standard, and
-Keryx coordinates. **Who you are is set by how you were launched.** The top-level session is Keryx: it loads the `keryx` skill at
-every start and every compaction, as the SessionStart hook in `.claude/settings.json` tells it to. An agent launched from
-`.claude/agents/` is the identity its file names; this file is its project context, never its identity. Everything reduces to what
+(§ The pipeline): Poros asks the question, Ephodos derives the answer, de Bruijn formalizes it to its Lean standard, and
+Keryx coordinates. **Who you are is set by how you were launched.** The top-level session is Keryx, whose identity and workflow are the output
+style `.claude/output-styles/keryx.md`, which `.claude/settings.json` selects. An agent launched from `.claude/agents/` is the
+identity its file names, with its lane's workflow beneath. This file is every mind's shared context, never an identity. Everything reduces to what
 the kernel checked plus what we explicitly chose to trust.
 
 **This file holds current state only.** Every update rewrites the affected text in place: no dated
@@ -17,7 +14,7 @@ correction belongs in the commit message and the milestone's plan. **History is 
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
 **Size budget: keep this file under 300,000 bytes** (it applies: Kooshi suspended it for the 2026-09-26 reframe — *"Ignore the 300kB limit while you reframe the file."* — and it was restored at FS-106's close, 2026-09-27) (Kooshi, 2026-09-26, at the ×2×3 crunch's end, after it ran unbounded: *"the 300kB limit returns, and we'll likely need to find a way to extract what's not necessary, treat the grokkings there as a cache for a dedicated grokking file, or merge things to reduce it from here on out. There's just too much new knowledge to carry in every session."*; the same day he chose design (b) of `plans/PROPOSAL-claude-md-knowledge-cache.md` — *"Implement b on the file. Remove incidentals, keep intrinsics."* — and E1's pass took the file from 299,491 to 282,481 bytes: the second and later instances of rules to `plans/GROKKING-INSTANCES.md`, the "Not ours" list to `LEDGER.md`, the paths-forward rows ranked ≥ 30 to `plans/FRONTIER-STUBS.md` alone; E2's check restored two intrinsics the pass had moved (283,274), and F1's audit of the git history (Kooshi: *"It's been a long struggle to maintain the balance."*) restored the reasons and killing tests the compression passes since 2026-09-10 had cut, the stories to the same file (291,306 bytes); *"We'll revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals."*; at the 2026-09-25 crunch's end: back to 300,000 after a temporary 325,000 during it; the no-loss pass that followed took the file to 283,826 and found almost nothing more that touches no reasoning) (Kooshi, 2026-09-11: the budget is on *this file
-itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
+itself*, not on the files it imports — there is a lot here worth remembering; raised from 150,000 to
 200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
 on 2026-09-17 with the file at 199,785 bytes, from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
 no-loss compression pass measured its floor at about 228,000, and from 275,000 to 300,000 on 2026-09-25 with the file at 274,995
@@ -1631,12 +1628,59 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   shape in which the competitor and the advisor produce nothing the single agent would not have produced alone, and the
   corrections all flow one way.* More instances: `plans/GROKKING-INSTANCES.md` §G51. Its runs: the protocol's §3. The standing rules they left: hand-backs content-free, every report by explicit message; working files in scratch until hand-back; neutral commit subjects from the first competitive commit on; work in stages from the first turn (FS-86 lost three responses to the output-token limit); quote statements verbatim in briefs; tell the advisor of every stand-down and launch.
 
+## The pipeline
+
+*The map every mind shares. Each role's own workflow is beneath its verbatim identity, in its own file, and loads into that mind
+alone (Kooshi, 2026-09-28: "split the whole workflow into the separate agent files").*
+
+| role | identity | its file: the identity verbatim, then the lane's workflow |
+|---|---|---|
+| **coordinate**, the top-level session | Keryx | `.claude/output-styles/keryx.md`, the output style `.claude/settings.json` selects |
+| **ask**, scouting ahead | Poros | `.claude/agents/poros.md` |
+| **derive**, blazing the trail | Ephodos | `.claude/agents/ephodos.md` |
+| **verify**, a blind second mind | Ephodos | `.claude/agents/ephodos-verifier.md` |
+| **formalize**, paving behind | de Bruijn | `.claude/agents/debruijn.md` |
+
+The identities are the core skills in `.claude/skills/`, imported unchanged from `~/source/agent-forge`; `scripts/identities.py
+check` holds each copy to its skill, and the four cores are hidden from the model's skill list so that no mind loads a second
+identity. Every arrow between lanes passes through Keryx, and only Keryx launches agents (§ Delegation — one level deep). Every
+brief carries `plans/STANDING-RULES.md`. `WORKFLOW.md`, loaded by no one, is the index for the old workflow's step numbers.
+
+**One writer per file.** Keryx alone writes this file, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`,
+`BIBLIOGRAPHY.md`, the close inventories, the frozen claim lists and `plans/STANDING-RULES.md`, filing the lanes' drafts verbatim.
+
+**Never write an open milestone's verdict, route or hunch into the auto-memory**: the harness gives its index to every agent at
+launch, blind ones included, and no fence closes that channel.
+
+**Conventions.**
+
+| what | where |
+|---|---|
+| a job id | `FSnnn-<letters><n>`, the letters naming the job's kind by the milestone's own choice (FS-114's: `N` the proof side, `Y` the construction side, `NB`/`YB` their blind verifiers, `CV` a composition check) |
+| a brief | `data/fsNNN/briefs/<job id>-<slug>.md`, in the `keryx` skill's header form; its `identity:` field names the agent file the job is launched from |
+| a report | `data/fsNNN/reports/<job id>.md`, and the same text to "main" by `SendMessage` |
+| a job record | `plans/FSnn-<job>-<kind>.md` (`-proof`, `-verification`, `-construction`, `-audit`); Poros's `plans/POROS-<date>-<topic>.md` |
+| a milestone's plan | `plans/FSnn-<slug>.md` |
+| its claim list | `data/fsNNN/claims.md`, frozen by Keryx |
+| its close inventory | `plans/FSnn-close-inventory.md` |
+| its derivation file | `plans/FSnn-derivation.md` |
+| a stub | `plans/STUB-<slug>.md` |
+| a handoff before a compaction | `plans/SESSION-HANDOFF-<date>.md` |
+
+**The stub rule** (Kooshi, 2026-08-09). Every future milestone on the roadmap is kept as a detailed stub in `plans/`. It holds the
+full mission context in plain language and everything the deciding session knew: the observations, the registered expectations, the
+failure clauses, the named deliverables (visualizers among them, where the milestone produces an explorable object), and the
+provisional bearings. It is written so a fresh mind with no conversation memory can plan it with all meaning intact. Sessions die and
+compaction loses nuance; the stubs are the roadmap's memory. A direction change that does not rewrite the affected stubs is not
+recorded. A demoted milestone keeps its stub with a banner saying why. Poros writes a stub's question section, bearings and bearing
+on the answer; Ephodos's close job writes new stubs and the bearing lines of open ones; Keryx files the banners.
+
 ## Whose work this is
 
 The mathematics and the engineering here are the agents': the questions Poros's, the derivations Ephodos's, the kernel proofs
 de Bruijn's, the coordination Keryx's — the models, the statements, the proofs, the measurements, and every decision recorded in
-`plans/`. Kooshi set the target, built the method this project runs on (the identities, forged in `~/source/agent-forge`;
-`WORKFLOW.md`; the skill suite), supplies the machines, and interrupts when a mind runs ahead of the workflow. If a rung of this
+`plans/`. Kooshi set the target, built the method this project runs on (the identities, forged in `~/source/agent-forge`,
+with the workflow beneath each; the skill suite), supplies the machines, and interrupts when a mind runs ahead of the workflow. If a rung of this
 ratchet lands, that is the division to state.
 
 Two working instructions for every role follow, not sentiment:
@@ -1649,22 +1693,10 @@ justifies it. A constraint nobody questioned, that slowed the proof, is a choice
 
 ## Delegation — one level deep
 
-**Standing rule (Kooshi, 2026-09-19): no child agent spawns children of its own**; only the top-level session launches agents. Its
-reasons and its incident are `plans/STANDING-RULES.md` rule 1, and it is enforced by the agent files' withheld tools and by
-`.claude/settings.json`. Staffing — head-count, model, budget — is Kooshi's decision:
-- **Head-count.** The pipeline runs **three agents at once, one per lane** — Poros, Ephodos, de Bruijn — **plus the Ephodos
-  verifiers a derivation needs, possibly in parallel with it**; a competition or a crunch runs more, on his word (Kooshi, 2026-09-28: *"3 agents will be running, with Poros scouting
-  ahead, Efodos blazing the trail, and de Bruijn paving [it] behind them … Efodos can still have multiple stages, and will have
-  verification versions of itself running after new theorems, also possibly in parallel to it"*). It replaces the earlier cap of three (Kooshi,
-  2026-09-23: *"the one agent at a time rule is lifted, as Opus 5.5 is much cheaper than Fable 5.1 was. Now it can be up to 3 to
-  accommodate debruijn, coxeter, and poros"*), whose three were a working agent, a competitor and an advisor.
-- **Model.** Every role on Opus 5.5 (Kooshi, 2026-09-22: *"Opus 5.5 should be used for all purposes until further notice"*), a step
-  above Opus 5 and Fable 5.1, which held the planner and implementer roles until then; every rule this project recorded about those
-  models' quirks is retired. The agent files say `model: opus`.
-- **Replace, do not reuse.** An agent returning with ~500k–600k tokens of context, by the harness's count (agents' own count runs at
-  55–70 % of it, FS-89), is replaced from the record, not continued — the one model-quirk rule that holds for every model.
-
-**The crunch** — many agents from a job queue for a fixed block of hours, the owner coordinating by short reports, then the consolidation: `plans/PROTOCOL-crunch.md` (roles, runbook, standing rules, brief templates, both runs).
+**No child agent spawns children of its own** (Kooshi, 2026-09-19): only the top-level session launches agents. Its reasons and
+its incident are `plans/STANDING-RULES.md` rule 1, and it is enforced by the agent files' withheld tools and by
+`.claude/settings.json`. Staffing — head-count, model, budget, and the crunch and competition protocols — is Kooshi's decision, and
+its record is Keryx's workflow (`.claude/output-styles/keryx.md` § Staffing).
 
 ## The standard of evidence above rung B
 
@@ -1714,23 +1746,8 @@ good CPU solvers; do not plan around one until a *measured* bottleneck is someth
 
 ## The shape of the proof
 
-The whole argument is one reduction plus two certified computations:
-
-```
-χ(ℝ²) ≥ 5  ⟸  some finite unit-distance graph is not 4-colourable
-                 ├── geometry:  every listed edge really has length 1   (exact field arithmetic)
-                 └── combinatorics: the graph has no 4-colouring        (verified LRAT checker)
-```
-
-Neither computation is trusted on its own say-so. The geometry is exact — coordinates live in the
-multiquadratic field ℚ(√3,√5,√7,√11) represented as an iterated quadratic extension over ℤ, so
-"distance = 1" is an integer identity, not a float comparison. The combinatorics goes through a verified
-LRAT checker the kernel can run: core ships one (`Std.Tactic.BVDecide.LRAT.check` + `check_sound`) that the
-kernel cannot evaluate (among other causes, `Std.HashMap` reaches an `@[extern] opaque` word size), so M05
-built a kernel-reducible one. CaDiCaL is an untrusted oracle that merely proposes the certificate.
-
-**Nothing in `tools/` is trusted.** The generator may be wrong; Lean re-derives every claim from
-the emitted data. A generator bug can only produce data Lean refuses to certify.
+The shape of the proof — one reduction plus two certified computations, and why nothing in `tools/` is trusted — is the
+kernel lane's: `.claude/agents/debruijn.md` § The shape of the proof.
 
 ## Trust ledger
 
@@ -1738,36 +1755,13 @@ Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `
 current audit reads 1236 clean and 5 declared purchases (and 11 axiom-free; 1,252 records at X11K3's gate, FS-100 wave 3), each listed in `ARCHITECTURE.md` § Trust. Rung B
 holds none.
 
-| Entry | Status |
-|---|---|
-| `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
-| `sorryAx` | the gate fails on it |
-| `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use, recorded here** |
-
-`native_decide` trusts the compiler and this CPU rather than the kernel. Where a `Bool` cannot be
-kernel-reduced we may buy it — but the purchase is named in the docstring of the declaration that makes
-it, and listed in `ARCHITECTURE.md` § Trust. Soundness theorems are identical either way; only the axiom
-list moves.
-
-**Grep for the right name.** At v4.32.0 `native_decide` mints a *per-declaration* axiom;
-`Lean.ofReduceBool` never appears in `#print axioms`. An audit looking only for that name passes a
-native purchase in silence.
-
-**`lean4checker` is a publication gate, not a milestone gate** (Kooshi, 2026-08-02): the build-time kernel is the trust
-anchor; the independent replay is single-threaded and RAM-heavy, so run it once, on hardware other than the desktop, before
-any external claim of new mathematics — never as routine. It cannot re-check a native purchase (a purchase is an axiom, and
-every kernel accepts axioms), so "replayed through an independent kernel" covers the kernel-checked part only.
+What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, `lean4checker` as the
+publication gate — is the kernel lane's: `.claude/agents/debruijn.md` § Trust ledger.
 
 ## Toolchain
 
-Managed by **elan** and pinned by `lean-toolchain` (`leanprover/lean4:v4.32.0`); the toolchain and the
-Mathlib pin move as one unit. If `lean` / `lake` are missing, run `./install-toolchain.sh`.
-
-**Arch build env — required before building.** The toolchain's bundled `clang` is broken against Arch's
-system LLVM, so any native/C compile fails unless you use the system clang plus the toolchain's bundled
-`libc++`. `source scripts/dev-env.sh` in your shell (it sets `LEAN_CC`, `LIBRARY_PATH` and
-`LEAN_ABORT_ON_PANIC`; the installer wires it into `~/.profile`, and Claude's own shell gets it via
-`.claude/settings.local.json`).
+The Lean toolchain — elan, the pin, the Arch build environment — is the kernel lane's: `.claude/agents/debruijn.md` §
+Toolchain — Lean. What follows binds every job.
 
 **The SAT solver.** The toolchain ships **`cadical`** (2.1.2, LRAT-capable) at `$(lean --print-prefix)/bin/cadical` — that command
 works only from inside the repository; elsewhere use the path under `~/.elan/toolchains/`. It is single-threaded: use
@@ -1836,30 +1830,8 @@ minimum of three runs**, and name the machine beside any number.
 
 ### Building
 
-**ALWAYS build through `./scripts/build.sh` — never `lake build`, bare *or named*. No exceptions.** Lake 5.0.0 has no `-j`
-and sizes its job pool from the machine; data modules here peak at ~9 GB each and certificate segments at 3.4 GB + 0.81 GB
-per chunk, so an unrestricted build asks for hundreds of gigabytes (it took the desktop down twice on 2026-07-30), and a
-*named* target silently queues every missing or stale dependency into the same pool (on 2026-08-02 a one-module build queued
-four 22 GB certificate rebuilds behind a 20 GB cap, the OOM killer ate them twice, and a grep-piped invocation read as a
-pass; the loophole cost hours). `scripts/build.sh` builds every module in dependency order (`scripts/build_order.py`), leaves
-first, in explicitly named batches (`BATCH`, default 10), each under a `systemd-run` memory cap (`MEMMAX`, default 100G);
-`--plan` prints the batches and builds nothing. It first asks Lake once, under the same cap, whether any module is out of
-date (`lake build --no-build`, about 2 s against about 3 min for the walk); only exit 0 skips the walk, so the check can cost
-time but never skip a build.
-
-**`lake env lean <file>` is fine for iteration — it builds nothing — and it is not the same check.** It does
-not apply the lakefile's options, so `autoImplicit := false` is not in force: a stray identifier is
-silently auto-bound and the file elaborates clean, then fails the real build. Never conclude from it that a
-module is green.
-
-**The batch is the plan; the cap is a backstop.** Lean `mmap`s its `.olean` files, so at the limit the
-kernel reclaims their page cache and must read it back — with `MemorySwapMax=0` that is an I/O thrash, not
-a clean kill. Before raising `BATCH`, measure a module's peak and choose the width from
-`available_memory / peak`; sum the RSS of the running `lean` processes with:
-
-```bash
-ps -C lean -o rss= --no-headers | awk '{s+=$1} END {print s/1048576 " GB"}'
-```
+The Lean build — `./scripts/build.sh`, never `lake build`; `lake env lean`; the batch and the cap; generated modules and
+invalidation — is the kernel lane's: `.claude/agents/debruijn.md` § Building Lean. What follows binds every job that runs a process.
 
 **On any unexplained process crash, from any process: HALT and report to Kooshi immediately.** Do not
 diagnose, retry, or work past it — the 2026-08-02 filesystem event (kernel ext4 oopses, ~50 compiled modules lost) is what working past one looks like.
@@ -1960,56 +1932,9 @@ mid-token — it killed a 46-minute `lean4checker` run at M07 with `line 110: ul
 looks like corruption and is nothing of the kind. Launch long runs from a snapshot copy (`cp scripts/x.sh
 build/x-snapshot.sh`; `build/` is gitignored).
 
-**Generated modules and invalidation.** For work split across independent modules the wall clock depends only on the
-job count, not the piece size, so smaller pieces are free concurrency. Lake takes a module's own trace from its source and
-its dependents' traces from the resulting `.olean` (measured at M11 — not what the rule used to say, and ignoring the
-corollary cost 28 hours of processor time at M07; doc comments are queryable data and therefore part of the artifact,
-`--` comments are not):
-
-| edit to an upstream module | that module | its dependents |
-|---|---|---|
-| a `-- line comment`, anywhere, including inside a proof | re-elaborates | **not rebuilt** — the `.olean` is byte-identical |
-| a `/-- docstring -/` or a `/-! module doc -/` | re-elaborates | **rebuilt** — doc strings are environment data |
-| a declaration, or any change to one | re-elaborates | rebuilt |
-
-So: prose in a module a certificate imports is written as `--` comments or not at all; diagnostics live
-downstream in `Sat/Diagnose.lean`; `Sat/Mask.lean`, `Sat/ClauseTable.lean` and `Sat/MaskCheck.lean` are
-settled, and changing a declaration or docstring there is a decision about hours; deleting a generated `.c`
-under `.lake/build/ir/` invalidates its module exactly as deleting the `.olean` would. Settle every
-hand-written module before starting a long generated build.
-
 ### The kernel's cost model
 
-- **`decide +kernel`, not `decide`, for anything large.** Plain `decide` reduces the `Decidable` instance
-  twice — in the elaborator and in the kernel — so it is ~2× slower and dies on `maxHeartbeats` first;
-  `+kernel` needs no knob and buys the same axioms.
-- **Reduction-step count is the only thing that costs** (measured: ~33 µs per iteration of a trivial
-  recursive function). This model predicted core's already-measured LRAT checker cost to within 20% (it rebuilds a 6,325-slot
-  array per step; 6,325 × 33 µs = 209 ms against 100–180 ms measured), which is why to trust it. GMP-backed `Nat` arithmetic *and bitwise* operations are free at thousands of bits;
-  `USize` is stuck (its width is an `@[extern] opaque`); `Nat.ldiff` is not accelerated; `Nat.fold` is
-  superlinear. Which operations are hardware-backed is invisible in the source — measure before believing.
-- **Data the kernel must *build* costs O(its whole size) per access; a *literal* does not.** A structure
-  grown by N applications costs O(N) to reach weak head normal form (a lookup in a table grown by `insert`
-  went from 2.14 ms at 2,381 entries to 16.7 ms at 33,089). Emit big tables as literals (M04's `PtTable`
-  pattern), never accumulate one during a kernel evaluation, and never build an index list with
-  `List.range` + `List.map` (~0.83 ms per element). **The figure is for `range` + `map`, and does not transfer to a
-  bare `List.range` re-evaluated in a loop** (measured 2026-09-15, FS-53 K1): a `check` that rebuilt `List.range 529`
-  once per circle point — 12,696 nodes, ~10 s by that figure — cost **4.19 s against 4.17 s** for the hoisted form,
-  inside run-to-run noise, because the kernel's cache absorbs the repeat. The hoisted shape was kept anyway (it is the
-  honest one and costs nothing), and the docstring that had asserted the order mattered was rewritten: **a rule you are
-  obeying is still a claim, and it is measured before it is written down.** A `Nat` literal costs ~2.3 KB of olean against ~145
-  bytes per plain literal node, so pack many values into few big `Nat`s.
-- **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`.** Measured
-  (FS-38 K3): `∀ e ∈ (778 pairs), e.1 ≠ e.2` on a bare import cost 31.9 GB and timed out; `l.all f = true` on the real
-  predicate cost 3.5 GB and 5 s. State list checks through `List.all` and recover the per-element form with
-  `List.all_eq_true`.
-- **A numeral at an unsimplified type index is paid per numeral, at elaboration, even in a definition with no
-  proof.** A 48-point literal at `ZMod (2 ^ ((5 + 1) / 2))` cost 32.9 GB and a timeout; the same points at `ZMod 8` cost
-  2.5 GB, and then a defeq wall on every access. Carry no literal at such a type; evaluate the form per element.
-- **Feed the kernel the refutation's core, never the whole instance.** A certificate's clause table costs
-  `agreesWithCNF` over the entire formula: 853 s at 33 GB for a 1,024-vertex instance whose proof reached 125 vertices;
-  the core, extracted from the LRAT by backward reachability from the empty clause (861 of 99,335 clauses), proves the
-  identical statement in 5.9 s (recipe: `Instances/TwoAdicFive/Edges.lean`).
+The kernel's cost model is the kernel lane's: `.claude/agents/debruijn.md` § The kernel's cost model.
 
 ### Searching
 
@@ -2022,61 +1947,23 @@ hand-written module before starting a long generated build.
   recursive discovery from `.` that skips it). Use `rg` for
   searching source; use `rg -uu` or `grep -rP` for any completeness question (does this artifact exist, is
   this string anywhere); never believe a count from a bare `grep -E` alternation inside a star.
-- **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the
-  statement (`= true` versus `decide (…)`, an iff versus an implication) first — `Nat.testBit_two_pow_sub_one` was reported
-  missing here on exactly that error. **And Mathlib is not the
-  whole library:** `grep -rn "<name-fragment>" $(lean --print-prefix)/src/lean/` searches core. Grep the
-  source before writing a proof, and before writing that something is missing. More instances: `plans/GROKKING-INSTANCES.md` § Searching.
-
+- **The Lean half** (`exact?`, core's
+  library) is the kernel lane's: `.claude/agents/debruijn.md` § Searching — Lean.
 ## The package
 
-The **`proofs`** package (`lakefile.toml`): library **`Proofs`** (`Proofs.lean` is the flat import
-surface, modules under `Proofs/`), with `autoImplicit`/`relaxedAutoImplicit` off. **Mathlib** is
-pinned to tag `v4.32.0`. `scripts/Axioms.lean` is the trust receipt.
-
-When adding a library/executable, changing dependencies, or bumping Mathlib, work through the
-**`debruijn-init`** skill — freshly invoked, per the fresh-invocation rule (`.claude/agents/debruijn.md`, step 6). `lake update` /
-Mathlib bumps go alone in a labeled commit (they move the ground under every proof).
+The package — `proofs`, its library, the Mathlib pin, and how a dependency or a Mathlib bump is made — is the kernel lane's:
+`.claude/agents/debruijn.md` § The package.
 
 ## The gate
 
-Elaboration is the floor of the test suite: the build green, zero `sorry`, `#print axioms` clean on the
-public surface, linters silent, spec examples passing. On top of that, this project's statement-level gate,
-because a formalization that proves the *wrong* theorem is the characteristic failure here:
+The Lean gate — the build, zero `sorry`, the axiom audit, linters, spec examples, and the statement-level vacuity check — is the
+kernel lane's procedure: `.claude/agents/debruijn.md` § The gate. Its recorded state stays here, where `scripts/gate_report.py`
+reads it. The vacuity scan's **counts** — a silent change in them is this gate's own failure mode (declarations are the library's;
+the audit's own are not counted):
+`declarations=7438 refutations-skipped=313 sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`.
+The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
 
-- **`./scripts/vacuity.sh` and `./scripts/vacuity.sh --self-test` are green** — no theorem is a `∀` over an
-  empty domain. Vacuity is undecidable, so the check **requires evidence**, as `axioms.sh` requires every
-  purchase to be declared. **The law:** a statement is vacuous exactly when some `∀`-binder has an empty
-  domain; `(C : G.Coloring α)` is the dangerous binder, a `Forces` binder is a possible *overclaim* instead
-  (FS-29), and a declaration concluding `False` is a refutation and is skipped — its binders are meant to be unsatisfiable, and flagging one
-  is flagging a theorem for its own content. **Verdicts:** `WITNESSED`
-  (inhabitant proved); `DECLARED` (deliberate emptiness, named with its reason in the docstring as
-  `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
-  not proved, which is what makes the annotation a checked claim rather than a `# noqa`), which fail unconditionally before the baseline; `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's
-  obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
-  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=7438 refutations-skipped=313
-  sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`. The baseline's two entries,
-  `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
-  `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
-  at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`, since a check that flags it is matching the family name rather than the
-  instance and is worthless. More instances: `plans/GROKKING-INSTANCES.md` § The gate.
-- **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`,
-  `vacuity.sh` and `lean4checker.sh` save their tool's complete output under `build/gate/<gate>/` (`latest`
-  is the last complete run; `scripts/gate-log.sh`) and print a digest: every count, whether the counts
-  recorded in this file still match, every flagged or declared row in full, and every row that changed
-  since the previous run (`scripts/gate_report.py`). The vacuity log holds every site with the evidence
-  that decided it. `regen-check.sh` keeps each step's log in its scratch directory.
-- **Every theorem whose hypothesis is a structure** (a colouring, an embedding, a certificate, a
-  homomorphism) **ships a named inhabitant** in the same file, or a one-line note naming the theorem that
-  supplies one.
-- Every definition has a `#eval`/`example` that would fail if it drifted.
-- The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge —
-  so the CNF encoding is checked against an independent oracle.
-- The final statement is read against Mathlib's `SimpleGraph.chromaticNumber` and the informal claim, out
-  loud, before it is believed.
-
-The InfoView is continuous testimony at zero cost — save and read the goal state after every step rather
-than debugging by guess.
+What follows binds every mind that builds an instrument, not only the kernel lane.
 
 ### Make the gate fail, and watch it fail
 

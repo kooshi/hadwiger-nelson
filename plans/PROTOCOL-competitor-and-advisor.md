@@ -7,7 +7,7 @@ mathematics of the session is in `plans/MASCOT-DERIVATION.md`, `plans/COXETER-20
 `plans/POROS-2026-09-08-mascot.md`; the method entry is `CLAUDE.md` G51; the message exchange (27 messages over 45 minutes,
 2026-09-09 04:39–05:24) is in the session transcripts outside the repository and is summarised in §2 below.*
 
-> **Since 2026-09-28 the roles here run under agent files** (`WORKFLOW.md` § The roles). The owner is **Keryx**, the top-level
+> **Since 2026-09-28 the roles here run under agent files** (`CLAUDE.md` § The pipeline). The owner is **Keryx**, the top-level
 > session. It coordinates and no longer takes a competitor's side, so both competitors are **`ephodos`** agents, briefed identically
 > and fenced from each other. The advisor is a **`poros`** agent. A competitor's result counts as a second mind only on the axes its
 > fence made true (the `keryx` skill's `<independence>`). Every message goes through Keryx, which runs a star: where §1 has the advisor
