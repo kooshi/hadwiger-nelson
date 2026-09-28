@@ -1,9 +1,9 @@
 {
  "meta": {
   "title": "Proof Atlas",
-  "built": "2026-09-27",
-  "job": "VIZ-ATLAS-2",
-  "as_of": "FS-112's close",
+  "built": "2026-09-28",
+  "job": "X1",
+  "as_of": "FS-114's and FS-111's closes",
   "statuses": {
    "kernel": "kernel — checked by Lean's kernel",
    "cert": "certificate — an exact object accepted by exact checkers",

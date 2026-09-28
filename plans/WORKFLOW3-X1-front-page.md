@@ -217,3 +217,12 @@ changed. **Before:** from the root exit 0 ("ALL PASS"; "ALL AS EXPECTED"); from 
 
 **Also this stage:** F9's substitution in `plans/STUB-reg-scale.md` § Bearing (Amendment 2). **Slip, disclosed (§1.7):** one run of the facts writer in the
 main tree, restored.
+
+### 5.1 Amendment 4 (23:17 UTC): the atlas header
+
+The facts writer's meta now reads built="2026-09-28", job="X1", as_of="FS-114's and FS-111's closes". The page's header line is not read from the meta
+but hard-coded in `visualizations/proof-atlas/page.tmpl.html` l. 283, so the ruling's purpose ("a republished page must not say it's current as of
+FS-112's close") needed that line too: "the hunt's logic, 2026-09-27, after FS-112's close" → "the hunt's logic, 2026-09-28, after FS-114's and FS-111's
+closes" (the ruled words; reported to the coordinator). Rebuilt: facts exit 0 (lint 0), checker "checked 187, failed 0, errors 0", self-test PASSED (8
+plants fired once), `build.py` exit 0, index.html 164,752 bytes; "after FS-112's close" no longer appears in it. The About tab's sentence "FS-112's close
+answered none: it reduced Sokolov–Voronov's Question 2 with unit arcs to the global step." (l. 987) is left: a statement about FS-112, not a date.

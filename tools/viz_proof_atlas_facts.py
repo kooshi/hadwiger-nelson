@@ -639,7 +639,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-27", job="VIZ-ATLAS-2", as_of="FS-112's close",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-28", job="X1", as_of="FS-114's and FS-111's closes",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)
