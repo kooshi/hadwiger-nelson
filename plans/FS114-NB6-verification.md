@@ -400,3 +400,21 @@ Reuleaux pentagon has, at each corner, its two sides on unit circles about the o
 the same GAP).
 
 ## Stage 2 — SAVED
+
+## Proposed for the close (I edit none of these files)
+
+- **FS-114's derivation file.** N6-KAPPA, N6-RING60 (with "after the bends"), N6-NOQ, N6-PIN, N6-P60′, N6-ADJ, N6-QOUT, N6-QE1, N6-PIN180, N6-CENT: **two minds, one blind**
+  (N6; NB6). N6-WIN: file §2.2 (i)'s form (the reach conditional on `κ` defined just before `y + 60°`), the table sentence MISSTATED. N6-COV: file with the hypothesis
+  "`κ` defined on `(φ − 60° − δ, φ + 60° + δ)`" (NB6-COVFIX). N6-MTP: the printed steps two minds; the route's closing clause GAP (hull limits leave the simple class);
+  **route T's aperiodic averaging step is closed by N2-AVG** (FS114-N2; NB6-FOLNER, blind), for simple non-Siamese maps of any complexity. File NB6-P60 (the pinwheel
+  lemma, with its colour exhaustion of the cone `(240°, 300°)` at `q_j`) beside N6-P60′, and NB6-QSTART as a GAP.
+- **K1-PIN's residual (N6's K1-PINQ):** add the case NB6-QSTART — a (Q) arc of `T_{j+2}` starting at `q_j` counter-clockwise (possible by N6-QOUT's zone only when
+  `α_{j+1} = 60°`, `α_{j+2} ≤ 120°`); N6's §2.3 dichotomy at centres then has three cases.
+- **`data/fs114/claims.md` / the next instance files:** gloss "(Q) arc" as FS-112's (both side colours carried at the centre); the instance's "whose outer colour is
+  carried at `p`" also counts (R2) arcs.
+- **`BIBLIOGRAPHY.md`:** `[AldousLyons2007]` — D. Aldous, R. Lyons, *Processes on unimodular random networks*, Electron. J. Probab. 12, Paper 54 (2007), 1454–1508 (venue
+  read on the held PDF's first page), arXiv:math/0603062v6, held; read: Thm 8.5 (statement), Ex. 9.5 (N6: also Def. 2.1). `[AHNR2018]` — O. Angel, T. Hutchcroft,
+  A. Nachmias, G. Ray, *Hyperbolic and parabolic unimodular random maps*, arXiv:1612.08693v2, held (journal venue not on the held copy; unchecked); read: abstract, §1
+  Thm 1, §2.1–2.2, §3.2–3.3 (Thm 3.4 and proof), Ex. 4.11 (N6: also §4's opening, Exs. 4.1–4.3). N6's `[BenjaminiSchramm2001]` as N6 §5.1 records.
+- **Registered by N6, for the close to score:** "every pinwheel with a (Q) arc dies within radius `√3` about `p`", p = 0.5 — NB6-QSTART enlarges the population it is
+  scored on.
