@@ -14,7 +14,7 @@ place to start. Current state only; the history is in the documents it points to
      `[Polymath2021]` p. 199 poses FS-112's question. **NEXT: open FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`, rank 1; its
      banner carries four re-aims; re-register its "a YES by formula (0.03)" at the opening). Budgets in briefs are guidance only (Kooshi,
      2026-09-27: *"It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."*).
-  0a. **FS-112, the unit-arc half — IN PROGRESS (opened 16:09; state at 23:50 UTC). READ `plans/FS112-close-inventory.md` (items 1–42; the owner is its
+  0a. **FS-112, the unit-arc half — IN PROGRESS (opened 16:09; state at 00:03 UTC (next day)). READ `plans/FS112-close-inventory.md` (items 1–42; the owner is its
      only writer) FIRST.** Plan `plans/FS112-unit-arc-half.md` (accepted, item 12), claims `data/fs112/claims.md`, briefs `data/fs112/briefs/`, reports
      `data/fs112/reports/`. Round 1 done: first break at C-CHAIN-1 (NB-4), two minds one blind; the printed strip exact (two blind rebuilds, two
      checkers); N112-RED and lemmas (NB). Round 2: N2 DONE (N2-RED closed, N2-TERM, N2-RAY: the stuck ray makes N4-CONE a GAP, N2-DENSE) — **NB2
