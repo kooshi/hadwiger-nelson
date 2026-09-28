@@ -34,6 +34,15 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
 - **M2-PINCH-C** — a regular maximal class containing two blocks at vertical distance 2 whose facing boundaries are flat and a smooth graph touching
   its flat unit parallel exactly on a Cantor set, and otherwise isolated near the gap, has infinitely many components accumulating on that Cantor set —
   [hand, one mind; conditional on such a class existing, which is the reading "MUA-FIN-U is FALSE"] §2.3.
+- **M2-SELCOMP** — in a saturated colouring, for every unit-avoiding enlargement `A` of a class, no interface point lies in `int Ã`, so the class is
+  null or full on each component of `int Ã`: saturated means maximal at interfaces; from a regular maximal cover a saturated selection is a choice of
+  whole components forming a partition; if every component has exclusive points, a saturated selection exists only if the cover is a partition; and a
+  regular maximal partition (a measurable fall colouring) is saturated — [hand, one mind; over Federer 4.5.11, external] §3.1. Inhabitant: R7.
+- **M2-NOSEL** — DISC7 has no saturated selection (the lens): selecting from a given maximal cover is not a colour-generic route to honest saturation
+  — [hand + exact, one mind] §3.1.
+- **M2-REDUCE-C** — if some maximal `k`-cover has regular classes whose boundaries form a locally finite plane graph (REG-J′-C_k), then REG-I_k; at
+  `k = 5`, with FS106-AE-MAP6, `χ_m⁰(ℝ²) ≥ 6`, hence `χ(ℝ²) ≥ 6` given MR — with **no** honest saturation: the selection is the free colouring of the
+  arrangement's faces, and the colour count enters only at FS106-AE-MAP6 — [derived, one mind; over FS106-AE-MAP6's grade] §3.2.
 - **M2-KERSHNER** — no admissible five-cover has classes that are unions of discs of radius `1/2`: such a class has density at most `π/(8√3)`, and five
   of them fall below `2π/(3√3)` — [hand over Kershner 1939 and Fejes Tóth's packing bound, external] §1.6.
 
@@ -43,6 +52,7 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
 - Stage 2: would have searched for a wild maximal unit-avoiding set (a colourer or optimiser over pixel sets with an inclusion-maximality
   objective) → instead derived the local form of the shadow identity (M2-HULLC (iv)) and wrote a Cantor pinch down by formula (M2-PINCH-C), leaving its
   global completion as the named killing test.
+- Stage 3: none (the lens is exhibited by formula, DISC7; no selection was searched for).
 
 ## Fence log (standing rule 13)
 
@@ -272,3 +282,101 @@ contacts is W §2.7's self-sustaining question.
 - **Plants, each firing exactly its named failure and nothing else:** radius `11/20` → "both" (internal diameter `1.1`); colours `m + 4n mod 13`
   (covering radius `√13/2 > 3/2`) → "neither" (free points); only six of DISC7's classes → "cover"; squares at period 2 → "neither" (slack frees the
   boundary, M-SLACKFREE); squares of side `3/4` at period `3/2` → "both".
+
+## Stage 3 — SAVED: the selection at five — saturated selections are component choices, the lens blocks them, and the route does not need them
+
+### 3.1 M2-SELCOMP — a saturated class never has an interface inside a unit-avoiding enlargement of itself [hand, one mind; over Federer]
+
+*Statement (every `k`).* Let `f` be an a.e.-proper colouring in D-NF that is saturated (every `x ∈ ∂_e S_a` is an `a`-contact point, C-SAT-T's
+conclusion), and `A ⊇ S_a` (a.e.) any unit-avoiding set. Then `∂_e S_a ∩ int Ã = ∅`, and on every connected component `U` of `int Ã` the class `S_a` is
+a.e. null or a.e. full.
+*Proof.* If `x ∈ ∂_e S_a ∩ int Ã`, saturation gives `y ∈ cl S̃_a ⊆ cl Ã` with `|x − y| = 1`, against M2-INT. So every point of `U` has `S_a`-density 0
+or 1: `U` meets no point of the measure-theoretic boundary of `S_a` (our `∂_e`), so `S_a` has perimeter 0 in `U` (Federer 4.5.11: a set whose
+measure-theoretic boundary has locally finite `H¹` has locally finite perimeter, equal to that `H¹`) and `1_{S_a}` is a.e. constant on the connected
+`U`. [external, classical, not read here: Federer, *Geometric Measure Theory*, 4.5.11] ∎
+
+*Corollaries.*
+- **(a) saturated = interface-maximal.** In a saturated colouring no class can be enlarged, keeping it unit-avoiding, by material adjacent to it across
+  an interface: every unit-avoiding enlargement of `S_a` (e.g. its Zorn completion to a MUA set) adds only **new components** of `int Ã`. Saturation
+  is maximality at interfaces; maximality (M2-ZERO) is saturation everywhere.
+- **(b) from a regular maximal cover, a saturated selection is a component choice.** If `(A_j)` is a regular maximal cover and `S_j ⊆ A_j` a saturated
+  selection, then each `S_j` is a.e. a union of whole components of `int F_j`, the chosen components forming an a.e. partition of the plane. (Regularity:
+  `A_j = int F_j` a.e.)
+- **(c) the lens blocks it.** If every component of every `int F_j` has **exclusive points** (a positive-measure part covered by no other class), all
+  components must be chosen, so a saturated selection exists only if the classes' overlaps are null — only if the cover is already a partition.
+- **(d) a regular maximal partition is saturated.** If the classes of a regular maximal cover are pairwise a.e. disjoint, the colouring they define is
+  saturated: `x ∈ ∂_e S_j` has density `< 1`, so `x ∉ int F_j`, so `x ∈ F_j + S¹` (M-SATC (ii)). With M2-ZERO: **a regular maximal partition is a
+  measurable fall colouring (every point sees every other colour at distance 1 in positive circle measure), and it is saturated.** R7 is one at seven
+  (VMW-R7-COVER), SQ9 and HEX9 at nine.
+
+**M2-NOSEL — DISC7 has no saturated selection** [hand + exact, one mind]. DISC7 is a regular maximal seven-cover in which every disc has exclusive
+points and neighbouring discs overlap in lenses (§1.6, exact in §2.4); by (c) no measurable selection from it is saturated. This is round 1's
+M-DEADLOCK in global form, at `k = 7`: M-DEADLOCK said no *local* change binds a hexagonal edge; M2-NOSEL says no *selection* from the cover above
+the hexagonal colouring that DISC7 is can be saturated at all. So **"select at the end" is not a colour-generic way to reach honest saturation**: from
+a given maximal cover it succeeds only when that cover is a partition, and at seven the partition (R7) is a different cover altogether, on a
+different tiling.
+
+### 3.2 M2-REDUCE-C — the route at five needs no honest saturation [derived, one mind; over FS106-AE-MAP6's grade]
+
+*Statement.* If REG-J′-C_k holds (a maximal `k`-cover exists whose classes are regular and whose class boundaries `⋃_j ∂F_j` form, in every bounded set,
+finitely many Jordan arcs meeting only at endpoints), then an a.e.-proper map-type `k`-colouring (S–V Conditions 2–4, D-AEMAP) exists, i.e. REG-I_k.
+At `k = 5`, with FS106-AE-MAP6: **REG-J′-C₅ ⟹ `χ_m⁰(ℝ²) ≥ 6`**, hence `χ(ℝ²) ≥ 6` given MR (row 130).
+*Proof.* Let `𝒜 = ⋃_j ∂F_j`, a locally finite plane graph. (1) *Faces are coloured.* A face `R` of `𝒜` (a component of `ℝ² ∖ 𝒜`) is connected and
+meets no `∂F_j`, so for each `j` it lies in `int F_j` or outside `F_j`; the `int F_j` cover a.e. (regular cover), so `R ⊆ int F_j` for some `j`; colour
+`R` by the least such `j`. (2) *Proper, pointwise.* Two faces of colour `j` lie in `int F_j = int Ã_j`, and M2-INT forbids any two points of
+`int Ã_j` at distance 1: D-AEMAP holds, even everywhere on the open regions. (3) *Map-type.* Erase every edge with the same colour on both sides and
+every vertex of degree 2 (merging its two edges); what remains is locally finite (Condition 3). A remaining closed edge with no vertex bounds an island:
+recolour the island by the colour of the face around it; the surrounding face lies in one component of `int F_c`, of diameter `≤ 1` (M-HULL2), so the
+filled face has the same outer boundary, its points are within `< 1` of every point of a "near" component of colour `c` (the maximum of `|· − q|` over
+the filled face is taken on its outer boundary) and farther than 1 from every "far" one (a segment from the island to it crosses the surrounding face):
+properness is kept (as V0-CLEAN). Every vertex left has degree `≥ 3` with distinct colours on adjacent faces (Condition 2). (4) At `k = 5` this map
+contradicts FS106-AE-MAP6. ∎
+
+*What it changes.* Round 1's M-REDUCE-I needed (i) honest saturation at five and (ii) REG-J′₅ for the saturated colouring; **(i) is gone**. Saturation's
+two jobs in round 1 were regularity of interfaces (M-PINCH's `C^{1,1}`) and closing arcs at singular points (M-EXTREME); on a cover neither is needed,
+because FS106-AE-MAP6 asks only for Jordan boundaries and local finiteness, and the maximal cover's class boundaries supply the edges and their crossings
+the vertices. **The owner's ruling holds in the strongest form: the selection is the free face-colouring of step (1), and the colour count enters only
+at FS106-AE-MAP6 — Woodall and Townsend's map argument.** What is left at five is REG-J′-C₅ alone: MUA-REG and MUA-FIN for one maximal five-cover.
+
+*Grade and minds.* One mind; the island fill as in round 1 (V0-CLEAN, VMW D4). As an existence statement REG-J′-C₅ is equivalent to the answer given
+FS106-AE-MAP6 (it is vacuous if `χ_m⁰ ≥ 6`), so M2-REDUCE-C moves no value; it removes a hypothesis (honest saturation) that M2-NOSEL shows cannot be had
+by selection in general.
+
+### 3.3 The selection at `k = 5`, answered
+
+| the brief's question | answer | grade, minds |
+|---|---|---|
+| "from a maximal cover of a tight five-colouring to an honest saturated colouring whose Σ is locally finite" — derive it, or name the step and the configuration | **As a selection: FALSE colour-generically** — the configuration is the **lens** (two overlapping components of different classes, each with exclusive points), M2-SELCOMP (c); DISC7 inhabits it at seven (M2-NOSEL). **As an existence statement at five:** equivalent to `χ_m⁰ ≥ 6` given FS106-AE-MAP6, and **not needed** (M2-REDUCE-C) | [hand + exact; derived], one mind |
+| what a five-colour deadlock would need | a tight five-colouring **no** maximal five-cover of which (over every Zorn completion) can be refined into a partition: in every regular one, some components that no choice separates — two overlapping components with exclusive points, as in DISC7. Equivalently: no measurable fall five-colouring exists although a five-colouring does | [derived], one mind |
+| whether the count forbids it | **No**, as far as counting goes: five unit-avoiding classes have density sum at most `5 m₁(ℝ²) < 1.235` (row 129: `1/m₁ ≥ 4.0487`), so up to `0.235` of overlap is allowed per unit area, and nothing forces it to vanish. The count forbids a whole cover only for special piece shapes (M2-KERSHNER: discs of radius `1/2`), never a deadlock by density. And after M2-REDUCE-C a deadlock does not block the route | [hand, over row 129], one mind |
+| M-DEADLOCK at seven | subsumed: DISC7 is the maximal cover above the hexagonal colouring's circumscribed discs, and M2-NOSEL shows it has no saturated selection; R7, a partition, is the saturated seven-colouring | [hand + exact], one mind |
+
+**The route at five, as it now stands.** `χ_m⁰(ℝ²) ≥ 6` (so `χ(ℝ²) ≥ 6` given MR) ⟸ some maximal five-cover satisfies MUA-REG and MUA-FIN
+(M2-REDUCE-C, FS106-AE-MAP6). Its contrapositive is an invariant of every hypothetical counterexample (G79's form): **if the plane has an a.e.-proper
+measurable five-colouring, then every maximal five-cover above it is irregular or has class boundaries that accumulate** — in the local form of
+M2-PINCH-C, unit parallels of one class touching along infinite sets. The colour-generic question that is smaller than the answer is MUA-FIN-P: can a
+regular maximal cover always be modified into a locally finite one? Its known obstruction is M2-PINCH-C's tangency, removable locally (raise the upper
+block) but with a propagation question at distance 1.
+
+### 3.4 Proposed for the close (I edit none of these files)
+
+- **`data/fs111/claims.md`:** C-SAT-T — add "a regular maximal partition (measurable fall colouring) is saturated (M2-SELCOMP (d)); from a maximal cover
+  a saturated selection is a component choice and the lens blocks it (M2-SELCOMP, M2-NOSEL)". C-HULL-REG — the cover form (M2-HULLC): semiconcave yes,
+  semiconvex no (DISC7). REG-J′ — its cover form REG-J′-C_k, with MUA-REG and MUA-FIN named. M-REDUCE-I — superseded at five by M2-REDUCE-C.
+- **`LEDGER.md` (FS-111's row):** M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-SELCOMP, M2-NOSEL, M2-REDUCE-C [hand, one mind each]; M2-DISC7 [hand +
+  exact]; the reading M2-PINCH-C. "It moves no value."
+- **A grokking (draft G84, replacing round 1's draft), in G67's form:** *A maximal class is a fixed point of its own unit shadow. [hand, one mind]* A
+  maximal unit-avoiding set is exactly a measurable independent dominating set of the unit-distance graph (`A = {φ_A = 0}`); when regular, its interior
+  is the set of points whose unit circle misses it, so it is carved by the unit circles about its own points and its boundary lies on unit parallels
+  of its own components. A maximal cover is `k` such sets covering; a maximal partition is a measurable fall colouring, and it is saturated. *Do:
+  when a question about a tight `k`-colouring needs regularity, pass to a maximal cover (Zorn, free) and ask it of one maximal class — never ask a
+  selection to be saturated unless the cover is a partition (the lens blocks it); spend the colour count only at the map theorem. Killing test: a
+  regular maximal class whose boundary near some point is not contained in the unit parallels (outer or far) of its own components within distance 1.*
+- **Stubs to mint or re-aim:** (a) round 1's stub "honest saturation" is **retired as unnecessary** (M2-REDUCE-C) — keep its banner; (b) **MUA-FIN-P**
+  (the colour-generic rung: make a regular maximal cover locally finite), with MUA-REG — provisional bearings G82, G79, G71's heights (a MUA set's
+  boundary pieces as level sets), W §2.7; (c) M2-PINCH-C's completion (a regular MUA set with infinitely many components), the killing test of the
+  reading MUA-FIN-U FALSE.
+- **`BIBLIOGRAPHY.md`:** Federer, *Geometric Measure Theory* (1969), 4.5.11 (the criterion for finite perimeter) and Federer 1959 (curvature measures;
+  reach of the complement of a parallel body), cited as classical, not read here — debts; Kershner 1939 (thinnest covering of the plane by equal
+  discs, `2π/√27`) and the hexagonal packing bound for equal discs, cited as classical (M2-KERSHNER); Dunbar et al. 2000 (fall colourings, already held
+  under FS-67) now also for M2-ZERO's reading.
