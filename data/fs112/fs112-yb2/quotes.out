@@ -1,0 +1,21 @@
+FOUND                          | Axenovich p.8            | brief step 2; claims §7 CAL-STRIP      | The symmetric tiles have width 1/2, with the rounded boundar
+FOUND                          | Polymath16 threads       | instance O1 ([11.34])                  | a skeleton from five connected regular pentagons with unit e
+FOUND                          | Polymath16 threads       | [11.34] radius (record)                | Minimum radius of 6-flower is $r=\frac{1+\sqrt5}{2} \sqrt{\f
+FOUND                          | Polymath16 threads       | [07.49] (record)                       | I think it is possible to get beyond a radius of 2 with some
+FOUND                          | Polymath16 threads       | [07.50] (record)                       | (Same thing at the equivalent tiles at multiples of 72 degre
+FOUND                          | Polymath16 threads       | [16.346] (record)                      | In the dual graphs, they both have quads on the interior, an
+FOUND                          | Polymath16 threads       | [16.106] (record)                      | a {1,3,5,6} junction (at 2 o’clock on the central tile of th
+FOUND                          | Polymath16 threads       | [16.91] (record)                       | Interestingly, they can all be one colour: they come in Siam
+FOUND                          | Polymath2021 pp.194-200  | claims §7 CAL-DISK, p.199              | For k = 6, our best result is the disk shown in Fig. 10, who
+FOUND                          | Polymath2021 pp.194-200  | claims §7 CAL-DISK, p.199              | (The relative simplicity of the expression for this radius a
+FOUND                          | Polymath2021 pp.194-200  | claims §7 CAL-DISK, p.198              | Note that we again employ the tactic of drawing inter-tile b
+FOUND                          | Polymath2021 pp.194-200  | claims §0, p.194's tactic              | a tile T of color 1 can share a boundary segment E with a ti
+FOUND                          | Polymath2021 pp.194-200  | claims §7 caption (text layer part)    | A 6-tiling of a disk of radius
+FOUND                          | CLAUDE.md                | standing rule 0                        | From here on out, you may doubt your ability to tackle the d
+FOUND                          | CLAUDE.md                | standing rule 3                        | to eliminate the crutch of feeling like we're accomplishing 
+FOUND                          | CLAUDE.md                | standing rule 3                        | search for a finite graph is out. It would be huge, not feas
+FOUND up to a terminal period  | CLAUDE.md                | standing rule 4                        | A proven theorem about why its impossible is also valid. All
+FOUND                          | CONSOLIDATION            | standing rule 10                       | It's ok if jobs overrun a bit. Setting a budget is reasonabl
+FOUND                          | claims.md                | claims §6 C-ARC-END (record)           | the end vertices of a unit arc of a tight map are realised i
+FOUND                          | claims.md                | claims §0 contact kinds (record)       | **out-contact** — `s_out ∈ P_cl(P)`: two tiles of colour `s_
+19 of 20 FOUND verbatim; the rest listed above with their verdicts
