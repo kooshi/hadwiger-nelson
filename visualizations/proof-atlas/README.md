@@ -1,5 +1,7 @@
 # The Proof Atlas
 
+Published artifact (private until shared): **https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx** (Version 1, 2026-09-27).
+
 An explorable map of the logic of the Hadwiger–Nelson hunt, built for Kooshi by job VIZ-ATLAS on 2026-09-27. The three possible answers,
 `χ(ℝ²) = 5, 6, 7`, sit at the centre, each ringed by its two halves; every key theorem, missing step and no-go lies outward in the sector of the
 answer it serves, so a route reads as a path inward. Solidity is the grade (solid is kernel, hollow red with a question mark is missing,
