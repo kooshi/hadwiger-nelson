@@ -43,6 +43,8 @@ top lune's ring `(30°, 150°)` changes colour once, at `top`"; a ring **free of
    `FS114-CV*-verification.md`, `plans/FS114-close-inventory.md`, the directories `data/fs114/fs114-n*`, `fs114-nb`, `fs114-cv*`, `reports`, and the
    proof side's tools `tools/fs114_n*_*.py`. **Names only**; nothing in them opened, listed inside or grepped.
 2. The harness's start-up `git status` named FS-111's untracked `data/fs111/fs111-w/*.out` and five commit subjects. Names only.
+4. After my stage-3 commit, `git log --oneline -4` (to confirm my push) printed two subjects past the start-up snapshot ("FS-114 inventory: no
+   Reuleaux bowtie reaches root 3 (construction side, one mind)", "FS114-NB5: stage 1a"). Subjects only.
 3. The owner's message of 2026-09-28 quoted five definitions from the proof side's records (N3 header, N3 §2.2, N4 §2.2, N-proof N2-3); vocabulary,
    sent by the owner, recorded in the header above.
 
@@ -244,7 +246,7 @@ the proofs are §3's derivations, for every small germ.
 1. **A second mind on §3** (standing rule 4, G51), blind if possible: LUNE item 1, DIAG steps 1, 4 and 5 first (§3.3's audit list).
 2. **My brief's item 3, not started:** the pinwheel (each tile at `p` inner for one tactic edge) and the `(2, 1, 1, 0)` patterns. SIDES does not apply
    as stated (no tile carries two tactic sides), but its engine does: at two tactic centres 1 apart, UPDOWN and the germ table (§2.2) read every sector of
-   the rhombus corner `q_i + q_j − p` and of the point `q_i + (q_i − p)`-type corners as §3.2 read `top`, `r` and `bot`. That is the first move there.
+   the rhombus corner `q_i + q_j − p` and of the other points where two tactic centres' unit circles cross, as §3.2 read `top`, `r` and `bot`. That is the first move there.
 3. **Non-Reuleaux lenses at four tactic edges** (the round-4 card's list): not touched.
 4. **The non-simple case** of LUNE and W (a tile meeting itself at `q1` around `T1`) is not covered. It belongs with GAP-μ.
 
