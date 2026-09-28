@@ -20,7 +20,15 @@ distance below 1 and maximum above 1 carry interior points at distance exactly 1
 
 ## Theorems this phase proved
 
-(filled at each stage's end)
+The full table is at the end of stage 1c; stage 2 adds one item and the grades after comparison (§2.4).
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| YB3-LUNE, -DIAG, -RSTOPALL, -SIDES, -UPDOWN, -W, -D2ALL, -E2X | FS114-Y4's eight statements, each TRUE (LUNE without "simple"; RSTOPALL's E0 clause included) | hand; mine, blind; with Y4 two minds, one blind | stage 1b; §2.4 |
+| YB3-D2T | `q1, q4 ∉ cl t2`, `q2, q3 ∉ cl t4`; 2 absent at `q1`, `q4` and 4 at `q2`, `q3` (non-Siamese) | hand; mine | stage 1b |
+| YB3-FIVE | with a neighbourhood of `top`, `q1` and `q4` have exactly five colours: FS114-Y3-FOUR's class is empty | hand; mine (Y4 DIAG step 3 agrees) | stage 1b |
+| YB3-CUSP | DIAG step 5's written reason misses a cusp `T2` along `300°` (on `r`'s side it is an E1 member and does not reach `bot`'s sector); the `X2 | N′` unit arc excludes it | hand + tools exact at named values (5 of 5 as registered); mine | §2.3; `tools/fs114_yb3_cusp.py` |
+| YB3-CHK | an exact checker by intervals and minimal polynomials; six plants fire as predicted; accepts the five controls; reads the held bowtie's forced structure (13 of 13) | tools | stage 1c |
 
 ## Would have searched here (standing rule 3)
 
