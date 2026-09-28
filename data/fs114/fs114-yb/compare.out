@@ -1,0 +1,4 @@
+disk: 26 of 26 of my tiles match a held tile piece for piece and colour for colour; held tiles 26; mismatches 0
+   label map (mine -> FS112-YB2's): C0->Z, T1_0->P0, T1_1->P1, T1_2->P2, T1_3->P3, T1_4->P4, T2_0->W0, T2_1->W1, T2_2->W2, T2_3->W3, T2_4->W4, R_0->R0, R_1->R1, R_2->R2, R_3->R3, R_4->R4, U_0->S0, U_1->S1, U_2->S2, U_3->S3, U_4->S4, U'_0->T1, U'_1->T2, U'_2->T3, U'_3->T4, U'_4->T0
+strip (columns -3..5): 36 of 36 of my tiles match a held tile piece for piece and colour for colour; mismatches 0
+   labels identical (U, D, T, B with the same index): True

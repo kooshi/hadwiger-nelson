@@ -54,3 +54,47 @@ first step. **No paraphrase found in my brief.** One reading point, recorded bef
 with Y2's placement the colourless cone at `C_0` after the move is `(54°, 90°)` (FS112-MOVE), so 72° lies in it.
 
 ## Stage 1a — SAVED
+
+## Stage 1b — SAVED: my exact checker, its controls and plants, and its calibration on the five held objects
+
+**The checker** `tools/fs114_yb_exact.py` (written for this job; no FS114-Y file and no FS-112 pair or sign code read). *Arithmetic:* towers of
+quadratic extensions `ℚ(√d₁)…(√d_n)`, an element of level k a pair `a + b√d_k`; **the sign exact by recursion** (`sign a` when `b = 0`, `sign b` when
+`a = 0`, the common sign when they agree, `sign(a)·sign(a² − b²d)` when they differ — true of real numbers even if a radicand is a square lower
+down); equality is sign 0; inversion raises rather than guess. *Verdict* for two tiles of one colour (a tile with itself included): **REJECT iff
+m < 1 < M**, m and M the exact minimum and maximum distance between the closed tiles, decided from a complete list of realised candidate pairs —
+every critical point of the squared distance on (piece) × (piece): endpoint pairs, an endpoint against a segment's foot or an arc's two radial
+points, a segment against an arc along the segment's normal through the centre, two arcs on their line of centres (radial and antipodal pairs when
+concentric) — plus an **exact intersection test** of every two pieces (a crossing gives m = 0 where no critical candidate need lie). Every candidate
+is `√S` or `|√D + k|` in the tower and is compared with 1 exactly. No map hypothesis. *Points:* a point straddles a tile iff min < 1 < max over the
+closed tile, inside-ness by an exact ray count (retried on any degeneracy); a colour is free at a point iff no tile of that colour straddles it.
+
+**Self-test** (`python3 tools/fs114_yb_run.py selftest`, `data/fs114/fs114-yb/selftest.out`; exit 0): exact arithmetic checks (√2's bounds,
+`√(3+√2)²`, inversion), eight controls (a Reuleaux triangle of width 1; rectangles of diagonal 0.99 and 1.06; squares at gap 9/10 and exactly 1; two
+long bars crossing with every critical candidate ≥ 1.9; a unit cap facing a bar, nearest pair 0.9 interior to both; the same against a wide bar,
+where only the interior–interior pair is below 1), and **five checker plants, each flipping exactly the controls predicted in the code before the
+first run**: `noself` → the 1.06 rectangle; `closed_interval` → the two tight controls; `no_intersect` → the crossing bars; `endpoints_only` → both
+cap controls; `no_interior` → the wide-bar control only. The point routine: a straddle, and the ray count inside the Reuleaux triangle's bulge.
+
+**Calibration** (`python3 tools/fs114_yb_run.py calib`, `data/fs114/fs114-yb/calib.out`, under `scripts/slot.py --mem 2 --cpus 1`; about 45 s).
+Every object plant's rejected pairs were written down before the run (the disk's `swap` prediction is Y2's, re-derived here by hand: `U_0`, made
+yellow, is within `L ≈ 0.786` of `A_0 ∈ T1_4`; `U′_0`, made purple, holds `X_0` at `L` from `A_1 ∈ T1_1`).
+
+| object | built from | pairs the object has / examined exactly / dismissed by an exact bounding-box gap ≥ 1 | verdict | tight at 1 | plant beside the faithful twin → rejected pairs (all as predicted) |
+|---|---|---|---|---|---|
+| brick (row 33) | `Seven.lean`'s words: `4/5 × 3/5`, shear `2/5`, colour `(i + 3j) mod 7`; cell (0,0) against the window `|i|, |j| ≤ 5` | 17 / 3 / 14 | **ACCEPT** | the cell's diagonal; the cosets `(±1, ±2)` | cells `1/2` wide (mine) → exactly `(0,0)|(−3,1)`, `(0,0)|(3,−1)` |
+| hexagonal 7-colouring | side `1/2`, centres `q a₁ + r a₂`, colour `(q + 3r) mod 7`, in `ℚ(√3)` | 11 / 3 / 8 | **ACCEPT** | the diameter | side `11/20` → exactly the hexagon with itself |
+| the strip | FS-112's rule (YB's words, stage 3 of `plans/FS112-YB-verification.md`), in `ℚ(√3)(√5)`; the 12 tiles of a period against columns −9…11, orbit pairs under the colour period `3/2` | 90 / 24 / 66 | **ACCEPT** | 12 self-maxima, 12 out-contact minima; the 12 like tiles three columns apart are the pairs dismissed at gap exactly 1 (36 in all, YB's count) | `U_0` recoloured G → exactly `(U0,U−2)`, `(U0,B0)`, `(U0,U1)` (YB's) |
+| the disk | Y2's rules (`plans/FS112-Y-construction.md` §4), tower `ℚ(√5)(√(10+2√5))(√(1/φ))(r)` | 71 / 52 / 19 | **ACCEPT** | 26 self-maxima (every tile of diameter exactly 1), 20 minima (the 20 unit arcs' out-contacts); `closed_interval` shows exactly those 46 | `swap` → exactly `(T1_4,U_0)`, `(T1_1,U′_0)`; `chords` → exactly the five `(T1_k, T2_{k+3})` |
+| FS112-BOWTIE | FS112-YB3's builder (imported, never edited), converted exactly (over ℚ) | 21 / 18 / 3 | **ACCEPT** | 2 maxima, 4 minima; `closed_interval` shows exactly six (YB3's) | `h_is_g` → exactly `(G, H)` (touching at `E`) |
+
+Map consistency (exact): the disk, 125 pieces, every non-rim piece shared by exactly two tiles in opposite directions, 15 rim pieces; the strip's
+base period, 54 of 60 pieces shared with a window tile, the other 6 on `y = ±Y`. Float guards: the disk's 26 areas sum to `πr²` (14.176314892); the
+strip's 12 base areas to period × height (5.502813721). **Identities of the disk's rule: 87 of 87 exact**, among them `B_k = E_{k+1}` ("connected"),
+`r² = (25 + 9√5)/10 = φ²(15 + √5)/10`, `|Z^L_kD_k| = |Z^R_kC_k| = 1`, `B_k` on the ray of `u_k`, and **`A_k + A_{k+1} − B_k = A_{k+3}`** (PENT's last
+clause, exact, all five k).
+
+**Against FS-112's held builders** (`python3 tools/fs114_yb_compare.py`, `compare.out`; FS112-YB2's `fs112_yb2_objects.py` imported and run, never
+edited): **26 of 26 disk tiles and 36 of 36 strip tiles (columns −3…5) match a held tile piece for piece** (ends, centres, radii to 1e-9) **and colour
+for colour**. Label map, mine (Y2's) → FS112-YB2's: `C0→Z`, `T1_k→P_k`, `T2_k→W_k`, `R_k→R_k`, `U_k→S_k`, `U′_k→T_{k+1}`; the strip's labels coincide.
+
+## Stage 1b — SAVED

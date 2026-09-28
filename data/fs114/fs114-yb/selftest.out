@@ -1,0 +1,17 @@
+arithmetic: sqrt2 bounds, sqrt(3 + sqrt2) squared, inversion -- exact
+control | expected | faithful | noself | closed_interval | no_intersect | endpoints_only | no_interior
+  Reuleaux triangle, width 1, against itself | ACCEPT | ACCEPT | ACCEPT | REJECT | ACCEPT | ACCEPT | ACCEPT
+  rectangle of diagonal 0.99 against itself | ACCEPT | ACCEPT | ACCEPT | ACCEPT | ACCEPT | ACCEPT | ACCEPT
+  rectangle of diagonal 1.06 against itself | REJECT | REJECT | ACCEPT | REJECT | REJECT | REJECT | REJECT
+  two squares at gap 9/10 | REJECT | REJECT | REJECT | REJECT | REJECT | REJECT | REJECT
+  two squares at gap exactly 1 (tight) | ACCEPT | ACCEPT | ACCEPT | REJECT | ACCEPT | ACCEPT | ACCEPT
+  two long bars crossing (a crossing only the intersection test sees) | REJECT | REJECT | REJECT | REJECT | ACCEPT | REJECT | REJECT
+  a cap facing a bar, nearest pair interior to both (0.9) | REJECT | REJECT | REJECT | REJECT | REJECT | ACCEPT | REJECT
+  a cap facing a wide bar: only the interior-interior pair is below 1 | REJECT | REJECT | REJECT | REJECT | REJECT | ACCEPT | ACCEPT
+  plant noself: flips [2], predicted [2] -- as predicted
+  plant closed_interval: flips [0, 4], predicted [0, 4] -- as predicted
+  plant no_intersect: flips [5], predicted [5] -- as predicted
+  plant endpoints_only: flips [6, 7], predicted [6, 7] -- as predicted
+  plant no_interior: flips [7], predicted [7] -- as predicted
+point routine: straddle and the ray-cast inside test on the Reuleaux triangle (a point in the lens below the chord is inside) -- exact
+SELF-TEST PASSED
