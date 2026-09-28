@@ -1,0 +1,31 @@
+FOUND   CLAUDE.md | My goal is to fully solve, and then verify in Lean, HN. Then we publish.
+FOUND   plans/FS112-close-inventory.md | When round 3 finishes, let's close this milestone, and point two milestones at the two gaps, so we c
+FOUND   plans/FS112-close-inventory.md | Even decompressed, this is a bit beyond me, […]. I'll defer to a Poros agent.
+FOUND   plans/STUB-global-step.md | can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every po
+FOUND   plans/STUB-global-step.md | Choosing the form is the milestone's first decision.
+FOUND   plans/POROS-2026-09-27-night-aim.md | Is the unit-arc NO local — an explicit radius past which no valid fragment survives around a four-co
+FOUND   plans/POROS-2026-09-27-night-aim.md | an explicit radius R with a derived exclusion of every valid fragment on the disc of radius R about 
+FOUND   data/fs112/fs112-pa/extracts.md | that the plane cannot be 6-tlled
+FOUND   plans/FS112-close-inventory.md | that the plane cannot be 6-tlled [sic] with a non-Siamese tiling
+FOUND   CLAUDE.md | search for a finite graph is out.
+FOUND   plans/FS112-close-inventory.md | FS-114's one name: "the unit-arc question"
+FOUND   plans/FS112-close-inventory.md | with "the global step" kept as the name of its central statement
+FOUND   plans/POROS-2026-09-27-night-aim.md | A local exclusion about **one** four-colour vertex would be the whole NO, with no ray step and no de
+FOUND   plans/POROS-2026-09-27-night-aim.md | hunch: global — G17's top-rung pattern, and the strip forces any obstruction to read two dimensions
+FOUND   CLAUDE.md | From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. 
+FOUND   CLAUDE.md | to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problem
+FOUND   CLAUDE.md | A proven theorem about why its impossible is also valid. All novel knowledge is a success
+FOUND   plans/CONSOLIDATION-2026-09-27.md | It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth t
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | Especially if Philip and Tom reach some kind of closure on their attempts to perform an exhaustive s
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | The answer for a 6-coloring is thus the circumcircle radius of a hexagon with side length 1, which i
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | (This would strengthen the old result of Thomassen, wich applied only to scaleable tilings.)
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | 4 unconditionally, 5 if measurable, 6 if tile-based, 7 if scaleable-non-Siamese-tile-based
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | because “nice” means not only non-Siamese, which Tom’s tiling is, but also scaleable, which Tom’s ti
+FOUND   data/fs114/fs114-p/geomb-extracts.txt | Since a block-structured 6-tiling of the plane excluding distance 1 can only use tiles with at most 
+FOUND   plans/FS106-V-verification.md | Niceness is used at exactly **two** steps: the rainbow step (touching faces, and two faces touching 
+FOUND   plans/FS106-V-verification.md | If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G
+FOUND   plans/FS106-V-verification.md | six such closed sets covering `U₃(0)` contradict `[Voronov2023]` Theorem 1.3
+FOUND   plans/FS112-derivation.md | On both positives it holds (four-colour midline vertices within 1.834 of every point of the strip; t
+FOUND   plans/FS112-derivation.md | No vertex-centred disc of radius above `φ` lies in any valid extension of the disk, and a valid exte
+quotations: 30 missing: 0

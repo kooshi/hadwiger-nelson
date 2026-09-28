@@ -1,0 +1,13 @@
+# FS114-P stage 3 quotations: <source>\t<quotation>
+data/fs114/fs114-p/polymath16-greps.txt	Especially if Philip and Tom reach some kind of closure on their attempts to perform an exhaustive search of non-Siamese 6-tilings, that would merit a stand-alone article.
+data/fs114/fs114-p/polymath16-greps.txt	What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?
+data/fs114/fs114-p/polymath16-greps.txt	The answer for a 6-coloring is thus the circumcircle radius of a hexagon with side length 1, which is a circle with radius 1.
+data/fs114/fs114-p/polymath16-greps.txt	(This would strengthen the old result of Thomassen, wich applied only to scaleable tilings.)
+data/fs114/fs114-p/polymath16-greps.txt	4 unconditionally, 5 if measurable, 6 if tile-based, 7 if scaleable-non-Siamese-tile-based
+data/fs114/fs114-p/polymath16-greps.txt	because “nice” means not only non-Siamese, which Tom’s tiling is, but also scaleable, which Tom’s tiling very much isn’t.
+data/fs114/fs114-p/geomb-extracts.txt	Since a block-structured 6-tiling of the plane excluding distance 1 can only use tiles with at most five edges, simplistic application of the meth- ods used here cannot reach d(6) = 1.
+plans/FS106-V-verification.md	Niceness is used at exactly **two** steps: the rainbow step (touching faces, and two faces touching one face, differ) and the count of same-coloured faces inside a curve of diameter `< 2`.
+plans/FS106-V-verification.md	If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G has a vertex of degree at least 6.
+plans/FS106-V-verification.md	six such closed sets covering `U₃(0)` contradict `[Voronov2023]` Theorem 1.3
+plans/FS112-derivation.md	On both positives it holds (four-colour midline vertices within 1.834 of every point of the strip; the disk's corners).
+plans/FS112-derivation.md	No vertex-centred disc of radius above `φ` lies in any valid extension of the disk, and a valid extension holds `B̄(A_0, φ)`: φ is attained

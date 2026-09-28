@@ -386,3 +386,86 @@ torus-first order for any count (G68's periodic principle, which no stub named);
 test (G29's comparison clause, r40); (iv) a winding route must face the swap (G71 via r132). Each is an instruction in the phase table (stage 5).
 
 ## Stage 2b — SAVED
+
+## Stage 3 — SAVED: §PA (the prior-art gate) and §IQ (the invariant question)
+
+### §PA — searched 2026-09-27 by the planner (zbMATH Open API for discovery; Semantic Scholar for S–V's citing list; OpenAlex rate-limited this session; full text of the held Polymath16 threads and of the held Geombinatorics issues XXX(4)–XXXVI(1) by `pdftotext`/`grep`; raw outputs `data/fs114/fs114-p/zb_*.json`, `s2_*.json`, `polymath16-greps.txt`, `geomb-extracts.txt`; every quotation below checked, `data/fs114/fs114-p/quotes-stage3.out`, 30 of 30 FOUND)
+
+**The recognition sentence (G46), used as the query.** FS-114's object is an infinite, locally finite planar map whose faces have diameter at most
+1, coloured with six colours so that no two points of open faces of one colour are at distance exactly 1; whether one exists is a question about
+tilings with prescribed local vertex types (four-colour, repeated-colour, cubic trichromatic), and a NO would be, in the planar-map discipline, an
+**unavoidable set composed with reducibility** (discharging; the four-colour theorem's architecture) or a **combinatorial-curvature count** on the map's
+face-adjacency graph. In the unit-distance discipline the one printed argument of the second kind is `[Thomassen1999]`'s: its map graph `M` (faces
+adjacent when their boundary cycles meet) is locally Hamiltonian, and its Lemma 1 — "If G is a connected, locally finite, and locally Hamiltonian
+graph with at least 13 vertices, then G has a vertex of degree at least 6." (held text, as quoted in `plans/FS106-V-verification.md`) — is the
+positive-curvature finiteness statement of Higuchi's discipline (the icosahedron is the extremal case).
+
+| # | question (WORKFLOW 3.2) | what was done | finding |
+|---|---|---|---|
+| 1 | the discipline's words | zbMATH: `ab:discharging & ab:"unit distance"` (1); `ab:discharging & (ab:tiling \| ab:tilings \| ab:tessellation)` (1); `ab:"combinatorial curvature" & (ab:tiling \| …)` (2); `ab:"infinite planar" & ab:curvature` (10); `ab:"Gauss-Bonnet" & (…planar graph…)` (2); `ab:"locally Hamiltonian" & ab:degree` (10); `ab:"exclusion zone" & ab:colo*` (0); `ab:Reuleaux & ab:colo*` (3, none on topic); `ab:"chromatic number of the plane"` with disk/strip (2), with tiling/tiles (3), with regions/maps/measurable (8); `(ab:map \| ab:maps) & ab:"distance 1" & ab:colo* & ab:plane` (0) | **No printed work applies discharging or combinatorial curvature to a map colouring avoiding a distance.** The tools exist, apart: `[Mohar2002]` (Trans. AMS 354, Zbl 0996.05031; reviewer's review read): "the discharging method … can be extended from finite planar graphs to infinite planar graphs of subexponen[tial growth]" — the aperiodic count's tool; `[Higuchi2001]` (J. Graph Theory 38, Zbl 0996.05041; author's summary, a claim): combinatorial curvature of infinite planar graphs; Hua–Su 2020 (non-negative curvature; title only). Off topic: Lavollée–Swanepoel 2023 (matchstick graphs), Heule 2021, Donnelly 2018, Kruskal 2008 (retired at FS-112). `[SokolovVoronov2025]` is now printed: Discrete Math. 349 (2026) 115321 (zbMATH, no Zbl id yet; `BIBLIOGRAPHY.md` l. 126 already has it) |
+| 2 | two disciplines | (i) planar maps: discharging, curvature, Euler characteristic × (ii) unit-distance map colourings: `[Thomassen1999]`, `[Woodall1973]`, S–V, Polymath16 | **PA-A (a recognition): the printed NOs for regular maps are local with explicit radii.** `[Voronov2023]` Thm 1.3: closed classes, a disc of radius 3; `[Thomassen1999]`: nice colourings, a curvature count on `M` reading 13 faces for its core and a region of diameter `12k + 30` (`k ≤ 10` in the plane, FS106-V3's repair) for its 2-separator analysis; S–V Cor. 1 (row 134's base): radius 2 about a trichromatic vertex, after reduction moves. **The one non-local step this project holds is a reduction step, not a kill**: N4-FIN's bi-infinite chain along a line (row 134). And per FS106-V3, "Niceness is used at exactly **two** steps: the rainbow step (touching faces, and two faces touching one face, differ) and the count of same-coloured faces inside a curve of diameter `< 2`." — at bounded complexity the second holds for every map (at most `K` tiles per unit disc), so **on a valid map only the rainbow step reads the colouring's metric**, and it fails exactly where two same-coloured faces touch one face at distance below or exactly 1 |
+| 3 | the question, not only the method | the held Polymath16 threads grepped (`polymath16-greps.txt`: "discharg" 0, "Euler" 2, "curvature" 16, "non-Siamese" 6, "dual graph" 31, "Thomassen" 24, "locally Hamiltonian" 0, "exclusion zone" 102, "largest disk" 5, "6-tiling of the plane" 4, "Sirgedas" 93) | **The local form is a question in print.** Thread 7 (Mixon, 2018-06-16): "What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?"; answered from below only (the disk, 2.124; `[Polymath2021]`), and wrongly from above the same day by Hockertz ("The answer for a 6-coloring is thus the circumcircle radius of a hexagon with side length 1, which is a circle with radius 1."). An explicit `R` for FS-114's NO answers its upper side for maps with unit arcs. **Sirgedas's near-proof was pursued at least in part as a search**: de Grey, thread 16 (2020-05-27): "Especially if Philip and Tom reach some kind of closure on their attempts to perform an exhaustive search of non-Siamese 6-tilings, that would merit a stand-alone article." De Grey's own gloss of the target (`[16.317]`): "(This would strengthen the old result of Thomassen, wich applied only to scaleable tilings.)"; his ladder (`[17.5]`): "4 unconditionally, 5 if measurable, 6 if tile-based, 7 if scaleable-non-Siamese-tile-based"; and (thread 16, on Sirgedas's sphere colouring) "because “nice” means not only non-Siamese, which Tom’s tiling is, but also scaleable, which Tom’s tiling very much isn’t." — so "non-Siamese" and "scaleable" are two hypotheses, and Thomassen needs both |
+| 4 | outside arXiv | held Geombinatorics XXX(4)–XXXVI(1), text layers grepped (`geomb-extracts.txt`; XXX(2)–(3) unreadable Type-3 printouts, a blind spot); the Google group and Hockertz's manuscript unheld | Five held items cite `[Polymath2021]` (Heule 2021, XXXI(2); de Grey–Parts 2022, XXXII(2); `[Parts2023]`, XXXII(4); Mundinger et al. 2024 and Soifer 2024, XXXIV(1)); **none states or answers the unit-arc question or bounds a six-tileable disc from above.** De Grey–Parts 2022, p. 69: "Since a block-structured 6-tiling of the plane excluding distance 1 can only use tiles with at most five edges" — an Euler-type constraint for one family, unproved there. `[Parts2023]`'s tilings were optimised with "the HNT program [9], specially developed for solving such problems by Tom Sirgedas" (its [9]: the Google group thread `a701Kwnhp_A`, unheld). "discharg" occurs only in essays on the four-colour theorem (XXXIII(2), XXXVI(1)) |
+| 5 | the poser's citation graph | S–V (Question 2): Semantic Scholar's citing list of arXiv:2502.01958; `[Polymath2021]` (p. 199): the held issues (row 4; no index reaches it); Mixon's thread-7 question: the threads | S–V: one citing work, Axenovich–Liu–Sagdeev 2025 (arXiv:2512.15516, abstract read: Euclidean Ramsey for unit copies of `H`; off topic). OpenAlex's search cluster returned 429 this session, so no OpenAlex citing list was obtained — **a limit, not a zero**; FS-112's OpenAlex lists (Thomassen 7 + 1, Axenovich 9, Coulson 5) stand |
+| 6 | open every neighbouring citing work | the five held items (row 4) grepped for tiles and arcs; de Grey–Parts p. 69 read; `[Parts2023]`'s reference list read; Axenovich–Liu–Sagdeev's abstract | none on topic; the method-bearing debts are Ágoston 2025 (below) and the Google group |
+| 7 | two databases | zbMATH and Semantic Scholar; OpenAlex attempted, rate-limited | the two used share no source for these records; zbMATH's `nicely` query (39 hits) found one on topic, Ágoston 2025, already known at abstract level (FS-112) |
+| 8 | full author listings in the question's vocabulary | zbMATH `au:`: Sirgedas (1), Hockertz (0), Gibbs (11), de Grey (9), Ágoston (9), Thomassen with unit-distance words (1); Parts, Woodall, Townsend, Coulson, Voronov at FS-106–FS-110 | Sirgedas's one indexed paper is `[Sirgedas2021]` (the sphere of radius above ≈ 12.44 seven-colourable, Geombinatorics XXX(3) 138–151; held as a render, unread — its "stitch" of unit-radius arcs, `[16.263]`, is construction vocabulary for Y). **Ágoston 2025** (*A lower bound on the number of colours needed to nicely colour a sphere*, DCG 74(3) 691–718, Zbl 1580.05061): the one printed sharpening of Thomassen's count (eight on spheres) — its method unread, a debt for N. Gibbs: nothing on tilings in print; Hockertz: nothing indexed |
+
+**Owner's item 79 closed on the way:** `[Oostema2020]`'s last page is **389** — the publisher's landing page at doi 10.29007/btmj reads "pages
+373-389" (`data/fs114/fs114-p/oostema.html`); OpenAlex's 355 is its record's defect. Proposed for `BIBLIOGRAPHY.md` (stage 5 §5.6).
+
+**What the gate changes in the plan.**
+- (a) **Card 2 gets its evidence from print, and it leans local.** Every printed NO in the neighbourhood is local with an explicit radius (PA-A); the
+  "global" hunch rests on G17's analogy alone. The registration E-LOC (stage 5) is set against that, and N's first stage asks, of each printed
+  radius, which hypothesis bought it (closedness for Voronov; the rainbow step for Thomassen; Condition 5 for S–V's base).
+- (b) **A route the stub did not name — Thomassen's count on a valid map** (route T). His Lemma 1 and his topological steps read no metric, so they
+  hold for every map with faces of diameter at most 1; only the rainbow step reads the colouring. The route asks what the rainbow step's failure at a
+  face of map-degree at least 6 forces in a valid map — a Siamese pair or the unit-radius tactic are the candidates — and whether the curvature
+  count (average map-degree 6 in the plane) then over-spends them. This is an unavoidable-set argument with Thomassen's count as Act One (G15).
+- (c) **Mixon's thread-7 question is the local form in print**; an explicit `R` answers its upper side for maps with unit arcs, and is cited so.
+- (d) **Sirgedas's near-proof was pursued at least in part as an exhaustive search** (Gibbs and Sirgedas, 2020); its statement is FS-114's
+  four-colour form restricted to non-Siamese tilings, and its method may be one Kooshi's ruling excludes. The debt stands as the gate's first, for
+  Kooshi's call on fetching from the Google group; nothing in the plan waits for it.
+- (e) **The aperiodic count has a printed tool**: discharging on infinite planar graphs of subexponential growth (`[Mohar2002]`); the torus case needs
+  none (G68).
+
+**Papers still needed (for the report).** None blocks the opening. Debts: Sirgedas's argument and the HNT simulator thread (Google group; Kooshi's
+call); Hockertz's manuscript (dropbox, thread 6); `[Mohar2002]` and `[Higuchi2001]` (not held; fetchable); Ágoston 2025 (DCG; arXiv version to be
+found by N at stage 1); `[Sirgedas2021]` (held as a render; for Y). **Proposed `BIBLIOGRAPHY.md` rows** (the close writes them): `[Mohar2002]`
+(review read, not held); `[Higuchi2001]` (author's summary, a claim; not held); Ágoston 2025 (Zbl 1580.05061 added; method unread); Axenovich–Liu–Sagdeev
+2025 (arXiv:2512.15516; abstract read; off topic; cites S–V); `[Oostema2020]` (last page 389 confirmed at the publisher); `[Polymath16threads]` (thread
+7's disk question and thread 16's non-Siamese search, both quoted here); the Google group row (add the HNT simulator thread `a701Kwnhp_A`).
+
+### §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** Is there a valid six-map with unit arcs — a locally finite map of the plane bounded by segments and circular arcs, arcs of
+   radius 1 allowed, six-coloured so that no two interior points of one colour are at distance exactly 1 (Q-full; Q-full_K at complexity `K`)?
+2. **The structural form.** *For every valid map, what discrete datum does it carry at each of its vertices of at least four colours and each vertex
+   with a repeated colour — the vertices DENSE3 puts within 3 of every point — such that validity is a condition on that datum within a bounded
+   radius, and the datum's average over the plane is fixed by the map's topology alone?* Posed for every valid map at once (periodic or not), in the
+   widest class where it is defined (locally finite, curved, almost everywhere, no complexity bound, as row 134's chain used none), by derivation
+   only. A NO then reads: the local conditions force the datum's average away from the value topology fixes.
+3. **The invariant it forces: none known in print for maps with unit arcs.** Three candidates, each a reading with its killing test, handed to the
+   sides as starting points, not results:
+   - **(a) The rainbow deficit on the map graph** (route T; §PA (b)). Every map carries its map graph `M`, whose average degree over the plane is 6
+     (Euler; Thomassen's Lemma 1 is its positive-curvature half). At a face of map-degree `6 + r` a six-colouring spends at least `r + 1` colour
+     repetitions in the face's closed neighbourhood; each repetition in a valid map is a Siamese pair or the unit-radius tactic. *Killing test:* a
+     valid local fragment by formula with a face of map-degree at least 7 whose closed neighbourhood repeats a colour with neither a Siamese pair nor a
+     unit arc.
+   - **(b) The (Q) skeleton** (Sirgedas's quads and arrows, `[16.346]`): every four-colour vertex with its (Q) arcs, and the rhombus completions its close
+     complementary pairs force (FS112-N3-COR3, FS112-C-PARTNERS), as a discrete planar structure with local rules. *Killing test:* a valid fragment whose
+     four-colour vertices violate a rule the skeleton asserts (a quad emitting fewer than four arrows, or a close complementary pair not a rhombus
+     completion).
+   - **(c) The arc budget as a charge**: the total angle of unit arcs centred at each vertex of `F` (at least 60° or six arcs at four colours, FS112-A4SIX;
+     180° at five, FS112-SIX), against what their ends demand. *Killing test:* a valid fragment whose four-colour vertex carries arcs below the budget a
+     charge rule assumes.
+   G79's flip, stated: FS-112's walls were counterexample invariants (the stuck ray, the pinned corner); DENSE3 and C-PARTNERS are example invariants.
+   §IQ asks for the example invariant at the vertices DENSE3 names, and for its average.
+4. **Its route.** Derivation only. The construction side's fragments by formula check derived claims (each killing test above); they never answer
+   the structural form.
+5. **The open instances it would decide.** The global step (FS-114, in the form chosen at stage 5); C-LOCAL (an explicit radius); Mixon's question's
+   upper side for maps with unit arcs (thread 7); `[Polymath2021]` p. 199's hope; `[SokolovVoronov2025]` Question 2's unit-arc half; the non-Siamese
+   case of the four-colour form (de Grey's `[16.317]`); the pentagon-skeleton test (the stub's open item 3); and for FS-115, whether its (b′) and (b″)
+   are needed at all.
+
+## Stage 3 — SAVED
