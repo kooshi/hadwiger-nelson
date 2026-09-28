@@ -1,0 +1,295 @@
+controls
+  C.brick_diagonal                   =1   (4/5, 3/5): the brick's cell diagonal is exactly 1
+  C.reuleaux_width                   =1   |e(0) - e(60)|^2
+  C.sides_9_25                       =    YB3's SIDES identity at cos eps = 4/5
+  C.sign_7-4r3                       +    
+  C.sign_26-15r3                     +    
+  C.sign_97-56r3                     +    
+  C.sign_56r3-97                     -    
+  C.hex_side_half_diameter           =1   a hexagon of side 1/2 has diameter exactly 1
+region
+  R.q_j_vs_q_j+1_alpha60             =1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_11.4          <1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_90            >1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+pxkill
+  P.|q-v|                            =1   
+  P.arcs_t=1/10,1/10                 <1   points ON the two arcs
+  P.formula_t=1/10,1/10              =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/10             <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/10   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/10   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/10,1/50                 <1   points ON the two arcs
+  P.formula_t=1/10,1/50              =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/50             <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/50   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/50   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/50,1/200                <1   points ON the two arcs
+  P.formula_t=1/50,1/200             =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/50,1/200            <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/50,1/200  >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/50,1/200  >1   O's point lies outside B(q,1)
+  P.rays_s=1/10                      >1   first order alone gives no conflict
+  P.rays_s=1/100                     >1   first order alone gives no conflict
+blocking
+  B.x=90.q_k.out.colour_k+1          <1   blocked (t_{k+1})
+  B.x=90.q_k.out.colour_k+2          <1   blocked (t_{k+2})
+  B.x=90.q_k.out.colour_k            >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.x=90.v.out.colour_k+1            <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.x=90.v.out.colour_k-1            <1   blocked (t_{k-1})
+  B.x=90.|v-q_k+1|                   <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.x=90.|v_k-q_k|                   <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.x=90.q_k.out.colour_k-1_sum>180  <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=112.6.q_k.out.colour_k+1     <1   blocked (t_{k+1})
+  B.a_k=112.6.q_k.out.colour_k+2     <1   blocked (t_{k+2})
+  B.a_k=112.6.q_k.out.colour_k       >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=112.6.v.out.colour_k+1       <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=112.6.v.out.colour_k-1       <1   blocked (t_{k-1})
+  B.a_k=112.6.|v-q_k+1|              <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=112.6.|v_k-q_k|              <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=112.6.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=67.4.q_k.out.colour_k+1      <1   blocked (t_{k+1})
+  B.a_k=67.4.q_k.out.colour_k+2      <1   blocked (t_{k+2})
+  B.a_k=67.4.q_k.out.colour_k        >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=67.4.v.out.colour_k+1        <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=67.4.v.out.colour_k-1        <1   blocked (t_{k-1})
+  B.a_k=67.4.|v-q_k+1|               <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=67.4.|v_k-q_k|               <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=67.4.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+FAITHFUL: 53 of 53 as predicted; unpredicted keys: []
+--- plant signflip
+controls
+  C.brick_diagonal                   =1   (4/5, 3/5): the brick's cell diagonal is exactly 1
+  C.reuleaux_width                   =1   |e(0) - e(60)|^2
+  C.sides_9_25                       =    YB3's SIDES identity at cos eps = 4/5
+  C.sign_7-4r3                       -    
+  C.sign_26-15r3                     -    
+  C.sign_97-56r3                     -    
+  C.sign_56r3-97                     +    
+  C.hex_side_half_diameter           =1   a hexagon of side 1/2 has diameter exactly 1
+region
+  R.q_j_vs_q_j+1_alpha60             =1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_11.4          <1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_90            >1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+pxkill
+  P.|q-v|                            =1   
+  P.arcs_t=1/10,1/10                 <1   points ON the two arcs
+  P.formula_t=1/10,1/10              =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/10             <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/10   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/10   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/10,1/50                 <1   points ON the two arcs
+  P.formula_t=1/10,1/50              =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/50             <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/50   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/50   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/50,1/200                <1   points ON the two arcs
+  P.formula_t=1/50,1/200             =    |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/50,1/200            <1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/50,1/200  >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/50,1/200  >1   O's point lies outside B(q,1)
+  P.rays_s=1/10                      >1   first order alone gives no conflict
+  P.rays_s=1/100                     >1   first order alone gives no conflict
+blocking
+  B.x=90.q_k.out.colour_k+1          <1   blocked (t_{k+1})
+  B.x=90.q_k.out.colour_k+2          <1   blocked (t_{k+2})
+  B.x=90.q_k.out.colour_k            >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.x=90.v.out.colour_k+1            <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.x=90.v.out.colour_k-1            >1   blocked (t_{k-1})
+  B.x=90.|v-q_k+1|                   >1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.x=90.|v_k-q_k|                   >1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.x=90.q_k.out.colour_k-1_sum>180  <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=112.6.q_k.out.colour_k+1     <1   blocked (t_{k+1})
+  B.a_k=112.6.q_k.out.colour_k+2     <1   blocked (t_{k+2})
+  B.a_k=112.6.q_k.out.colour_k       >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=112.6.v.out.colour_k+1       <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=112.6.v.out.colour_k-1       >1   blocked (t_{k-1})
+  B.a_k=112.6.|v-q_k+1|              >1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=112.6.|v_k-q_k|              >1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=112.6.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=67.4.q_k.out.colour_k+1      <1   blocked (t_{k+1})
+  B.a_k=67.4.q_k.out.colour_k+2      <1   blocked (t_{k+2})
+  B.a_k=67.4.q_k.out.colour_k        >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=67.4.v.out.colour_k+1        <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=67.4.v.out.colour_k-1        >1   blocked (t_{k-1})
+  B.a_k=67.4.|v-q_k+1|               >1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=67.4.|v_k-q_k|               >1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=67.4.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+PLANT signflip: flipped ['B.a_k=112.6.v.out.colour_k-1', 'B.a_k=112.6.|v-q_k+1|', 'B.a_k=112.6.|v_k-q_k|', 'B.a_k=67.4.v.out.colour_k-1', 'B.a_k=67.4.|v-q_k+1|', 'B.a_k=67.4.|v_k-q_k|', 'B.x=90.v.out.colour_k-1', 'B.x=90.|v-q_k+1|', 'B.x=90.|v_k-q_k|', 'C.sign_26-15r3', 'C.sign_56r3-97', 'C.sign_7-4r3', 'C.sign_97-56r3']; predicted ['B.a_k=112.6.v.out.colour_k-1', 'B.a_k=112.6.|v-q_k+1|', 'B.a_k=112.6.|v_k-q_k|', 'B.a_k=67.4.v.out.colour_k-1', 'B.a_k=67.4.|v-q_k+1|', 'B.a_k=67.4.|v_k-q_k|', 'B.x=90.v.out.colour_k-1', 'B.x=90.|v-q_k+1|', 'B.x=90.|v_k-q_k|', 'C.sign_26-15r3', 'C.sign_56r3-97', 'C.sign_7-4r3', 'C.sign_97-56r3']: AS PREDICTED
+--- plant firstorder
+controls
+  C.brick_diagonal                   =1   (4/5, 3/5): the brick's cell diagonal is exactly 1
+  C.reuleaux_width                   =1   |e(0) - e(60)|^2
+  C.sides_9_25                       =    YB3's SIDES identity at cos eps = 4/5
+  C.sign_7-4r3                       +    
+  C.sign_26-15r3                     +    
+  C.sign_97-56r3                     +    
+  C.sign_56r3-97                     -    
+  C.hex_side_half_diameter           =1   a hexagon of side 1/2 has diameter exactly 1
+region
+  R.q_j_vs_q_j+1_alpha60             =1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_11.4          <1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_90            >1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+pxkill
+  P.|q-v|                            =1   
+  P.arcs_t=1/10,1/10                 =1   points ON the two arcs
+  P.formula_t=1/10,1/10              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/10             =1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/10   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/10   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/10,1/50                 >1   points ON the two arcs
+  P.formula_t=1/10,1/50              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/50             >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/50   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/50   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/50,1/200                >1   points ON the two arcs
+  P.formula_t=1/50,1/200             !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/50,1/200            >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/50,1/200  >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/50,1/200  >1   O's point lies outside B(q,1)
+  P.rays_s=1/10                      >1   first order alone gives no conflict
+  P.rays_s=1/100                     >1   first order alone gives no conflict
+blocking
+  B.x=90.q_k.out.colour_k+1          <1   blocked (t_{k+1})
+  B.x=90.q_k.out.colour_k+2          <1   blocked (t_{k+2})
+  B.x=90.q_k.out.colour_k            >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.x=90.v.out.colour_k+1            <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.x=90.v.out.colour_k-1            <1   blocked (t_{k-1})
+  B.x=90.|v-q_k+1|                   <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.x=90.|v_k-q_k|                   <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.x=90.q_k.out.colour_k-1_sum>180  <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=112.6.q_k.out.colour_k+1     <1   blocked (t_{k+1})
+  B.a_k=112.6.q_k.out.colour_k+2     <1   blocked (t_{k+2})
+  B.a_k=112.6.q_k.out.colour_k       >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=112.6.v.out.colour_k+1       <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=112.6.v.out.colour_k-1       <1   blocked (t_{k-1})
+  B.a_k=112.6.|v-q_k+1|              <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=112.6.|v_k-q_k|              <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=112.6.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=67.4.q_k.out.colour_k+1      <1   blocked (t_{k+1})
+  B.a_k=67.4.q_k.out.colour_k+2      <1   blocked (t_{k+2})
+  B.a_k=67.4.q_k.out.colour_k        >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=67.4.v.out.colour_k+1        <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=67.4.v.out.colour_k-1        <1   blocked (t_{k-1})
+  B.a_k=67.4.|v-q_k+1|               <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=67.4.|v_k-q_k|               <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=67.4.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+PLANT firstorder: flipped ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200']; predicted ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200']: AS PREDICTED
+--- plant far
+controls
+  C.brick_diagonal                   =1   (4/5, 3/5): the brick's cell diagonal is exactly 1
+  C.reuleaux_width                   =1   |e(0) - e(60)|^2
+  C.sides_9_25                       =    YB3's SIDES identity at cos eps = 4/5
+  C.sign_7-4r3                       +    
+  C.sign_26-15r3                     +    
+  C.sign_97-56r3                     +    
+  C.sign_56r3-97                     -    
+  C.hex_side_half_diameter           =1   a hexagon of side 1/2 has diameter exactly 1
+region
+  R.q_j_vs_q_j+1_alpha60             =1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_11.4          <1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_90            >1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+pxkill
+  P.|q-v|                            =1   
+  P.arcs_t=1/10,1/10                 >1   points ON the two arcs
+  P.formula_t=1/10,1/10              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/10             >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/10   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/10   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/10,1/50                 >1   points ON the two arcs
+  P.formula_t=1/10,1/50              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/50             >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/50   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/50   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/50,1/200                >1   points ON the two arcs
+  P.formula_t=1/50,1/200             !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/50,1/200            >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/50,1/200  >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/50,1/200  >1   O's point lies outside B(q,1)
+  P.rays_s=1/10                      >1   first order alone gives no conflict
+  P.rays_s=1/100                     >1   first order alone gives no conflict
+blocking
+  B.x=90.q_k.out.colour_k+1          <1   blocked (t_{k+1})
+  B.x=90.q_k.out.colour_k+2          <1   blocked (t_{k+2})
+  B.x=90.q_k.out.colour_k            >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.x=90.v.out.colour_k+1            <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.x=90.v.out.colour_k-1            <1   blocked (t_{k-1})
+  B.x=90.|v-q_k+1|                   <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.x=90.|v_k-q_k|                   <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.x=90.q_k.out.colour_k-1_sum>180  <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=112.6.q_k.out.colour_k+1     <1   blocked (t_{k+1})
+  B.a_k=112.6.q_k.out.colour_k+2     <1   blocked (t_{k+2})
+  B.a_k=112.6.q_k.out.colour_k       >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=112.6.v.out.colour_k+1       <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=112.6.v.out.colour_k-1       <1   blocked (t_{k-1})
+  B.a_k=112.6.|v-q_k+1|              <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=112.6.|v_k-q_k|              <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=112.6.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=67.4.q_k.out.colour_k+1      <1   blocked (t_{k+1})
+  B.a_k=67.4.q_k.out.colour_k+2      <1   blocked (t_{k+2})
+  B.a_k=67.4.q_k.out.colour_k        >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=67.4.v.out.colour_k+1        <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=67.4.v.out.colour_k-1        <1   blocked (t_{k-1})
+  B.a_k=67.4.|v-q_k+1|               <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=67.4.|v_k-q_k|               <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=67.4.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+PLANT far: flipped ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200']; predicted ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200']: AS PREDICTED
+--- plant wrongv
+controls
+  C.brick_diagonal                   =1   (4/5, 3/5): the brick's cell diagonal is exactly 1
+  C.reuleaux_width                   =1   |e(0) - e(60)|^2
+  C.sides_9_25                       =    YB3's SIDES identity at cos eps = 4/5
+  C.sign_7-4r3                       +    
+  C.sign_26-15r3                     +    
+  C.sign_97-56r3                     +    
+  C.sign_56r3-97                     -    
+  C.hex_side_half_diameter           =1   a hexagon of side 1/2 has diameter exactly 1
+region
+  R.q_j_vs_q_j+1_alpha60             =1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_11.4          <1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+  R.q_j_vs_q_j+1_alpha_90            >1   q_j must be >= 1 from q_{j+1}; < 1 means no blade of that cone
+pxkill
+  P.|q-v|                            >1   
+  P.arcs_t=1/10,1/10                 >1   points ON the two arcs
+  P.formula_t=1/10,1/10              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/10             >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/10   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/10   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/10,1/50                 >1   points ON the two arcs
+  P.formula_t=1/10,1/50              !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/10,1/50             >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/10,1/50   >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/10,1/50   >1   O's point lies outside B(q,1)
+  P.arcs_t=1/50,1/200                >1   points ON the two arcs
+  P.formula_t=1/50,1/200             !=   |A-B|^2 = 1 + 2(1-c)(1-c') - 2 s s'
+  P.interior_t=1/50,1/200            >1   interior points of T_k and O_{k+1}
+  P.Ai_outside_omega_v_t=1/50,1/200  >1   T_k's point lies outside B(v,1): consistent with T_k avoiding B(v,1)
+  P.Bi_outside_omega_q_t=1/50,1/200  >1   O's point lies outside B(q,1)
+  P.rays_s=1/10                      >1   first order alone gives no conflict
+  P.rays_s=1/100                     >1   first order alone gives no conflict
+blocking
+  B.x=90.q_k.out.colour_k+1          <1   blocked (t_{k+1})
+  B.x=90.q_k.out.colour_k+2          <1   blocked (t_{k+2})
+  B.x=90.q_k.out.colour_k            >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.x=90.v.out.colour_k+1            <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.x=90.v.out.colour_k-1            <1   blocked (t_{k-1})
+  B.x=90.|v-q_k+1|                   <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.x=90.|v_k-q_k|                   <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.x=90.q_k.out.colour_k-1_sum>180  <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=112.6.q_k.out.colour_k+1     <1   blocked (t_{k+1})
+  B.a_k=112.6.q_k.out.colour_k+2     <1   blocked (t_{k+2})
+  B.a_k=112.6.q_k.out.colour_k       >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=112.6.v.out.colour_k+1       <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=112.6.v.out.colour_k-1       <1   blocked (t_{k-1})
+  B.a_k=112.6.|v-q_k+1|              <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=112.6.|v_k-q_k|              <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=112.6.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+  B.a_k=67.4.q_k.out.colour_k+1      <1   blocked (t_{k+1})
+  B.a_k=67.4.q_k.out.colour_k+2      <1   blocked (t_{k+2})
+  B.a_k=67.4.q_k.out.colour_k        >1   t_k's near-p points do not block outside (T_k is excluded by U1's side cone)
+  B.a_k=67.4.v.out.colour_k+1        <1   blocked (t_{k+1}, a direction in (60, alpha_{k+1}))
+  B.a_k=67.4.v.out.colour_k-1        <1   blocked (t_{k-1})
+  B.a_k=67.4.|v-q_k+1|               <1   < 1 iff alpha_{k+1} < 120: colour m_{k+1} blocked at v via mu_{k+1}
+  B.a_k=67.4.|v_k-q_k|               <1   < 1 iff alpha_k > 60: colour m_{k-1} blocked at q_k (wrap or not)
+  B.a_k=67.4.q_k.out.colour_k-1_sum>180 <1   blocked when alpha_{k-1} + alpha_k > 180
+PLANT wrongv: flipped ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200', 'P.|q-v|']; predicted ['P.arcs_t=1/10,1/10', 'P.arcs_t=1/10,1/50', 'P.arcs_t=1/50,1/200', 'P.formula_t=1/10,1/10', 'P.formula_t=1/10,1/50', 'P.formula_t=1/50,1/200', 'P.interior_t=1/10,1/10', 'P.interior_t=1/10,1/50', 'P.interior_t=1/50,1/200', 'P.|q-v|']: AS PREDICTED
+ALL AS PREDICTED
