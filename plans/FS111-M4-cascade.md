@@ -13,17 +13,42 @@ and `β^{−n}(s) = inf{p_t − (n² − (s − p_s)²)^{1/2} : …}` — the up
 
 *(one line per theorem: statement, grade, count of minds, address)*
 
-*(filled as stages land)*
+- **M4-LADDER** — in a saturated colouring (every regular maximal partition), a layer of class `a` over an interval, flat below (class `b`) and bounded
+  above by a graph `β ≥ 0` (class `c`) vanishing exactly on a closed set `Z` with empty interior, with ordinary interfaces near the four unit-parallel
+  curves ((R), (A), (B)): every interface point is of M-PINCH's (tangent) type with its contacts one unit along the normal; the regions `W⁺` (between
+  `t = 1` and `β^{+1}`) and `W⁻` (between `t = −1` and `β^{−1}`) are `a`-free, vanish exactly on `Z`, and carry `b` along `W⁺`'s flat side and `c` along
+  `W⁻`'s curved side; so **`b` and `c` are pinched on the same `Z`** (one interior component per gap) — [hand, one mind; over M-PINCH, M-C11] §2.1–§2.2.
+  Instance: in a partition containing HC_K the class under the band owns the up triangles' slivers (§2.4). Unpinched inhabitant: SQ9 (nine colours).
+- **M4-CUT** — in a regular maximal partition, the ladder of rungs (iterated `W^±`) is ordinary for `n` rungs upward only if
+  `β(u) ≤ n − (n² − (u − z)²)^{1/2}` (`u ∈ I`, `z ∈ Z`), so `n ≤ 1/(2c)` at a gap end where `β ≥ c(u − z)²`; and downward, when ordinary includes
+  (R)'s lower half, only if the region under `β` is a union of open `n`-discs, so a gap of width `w`, height `h` needs `h ≤ n − (n² − w²/4)^{1/2}`
+  (`≈ w²/(8n)`) — [hand, one mind; the upward half over M2-FIX (F1); the downward half conditional on (R)'s lower half (audit correction, §3.2)] §3.1–§3.3.
+- **M4-HC** — HC_K lies in no regular maximal partition whose ladder over the band's first gap is ordinary through three rungs up or down (rung `±4`
+  lands inside a face-centre disc of the class itself), whatever the gap function; and HC's discs (curvature 2) have no ordinary boundary point in any
+  saturated colouring (M-C11) — [hand + tools exact (`tools/fs111_m4_rungs.py`, four checks, four plants), one mind] §3.4–§3.5.
+- **M4-MOVE** — for a move of the curved side (M3-MOVE), in two regular maximal partitions ordinary through the same rungs: the classes at every rung
+  are forced (no spare colour; M3-MOVE's lost sliver is absorbed by the class under the band), and every downward rung's curved side moves; the cascade
+  runs through every ordinary rung and ends only where the ladder stops being ordinary — [hand, one mind; downward over M4-CUT (2)'s hypothesis] §4.1.
+- **Readings** (not theorems): the count enters only at the junction where a ladder ends (§4.2); an irregular class is the only junction-free escape
+  from M4-CUT (§4.3); a fold of a downward rung's normal map is a singular point (§3.3).
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none.
+- Stage 2: would have searched for a fall colouring of HC_K's complement (to see the classes around the band) → instead applied M-PINCH to the
+  band's interfaces and derived which classes the neighbourhood forces (M4-LADDER).
+- Stage 3: would have searched for a partition with a long ladder over a pinch → instead derived the bounds from (F1) and the dilation identities, and
+  checked HC's collision exactly (K1–K4; seconds, by formula).
+- Stage 4: would have searched for the cascade's end state (a partition after M3-MOVE) → did not; derived that it is carried by the ladder and named the
+  singular set as the open step.
 
 ## Fence log (standing rule 13)
 
 - Stage 1: the start-up git status printed the names of four untracked W files (`data/fs111/fs111-w/blocks.out`, `hex7_free.out`, `hx_pairs.out`)
   and one FS-114 file name (`data/fs114/fs114-yb4/yb3-calib-rerun.out`), and `git log` printed FS-114 commit subjects: names and subjects only, nothing
   opened. No transcript, `chats-bak/` file, foreign scratchpad file, close inventory, other brief or FS-114 file was opened.
+- Stages 2–4: `git push` printed only commit ranges; no fenced file opened. Harness notices reported two files changed on disk (my own record
+  after my own edits, my own tool after my own `sed`): nothing foreign.
 
 ## Stage 1 — SAVED: resuming check; quotation check; the object named
 
@@ -274,7 +299,7 @@ sympy, exact; output `data/fs111/fs111-m4/rungs.out`, exit 0 (all as expected).
    so equal parallels would give `β = β′`. The class `x_{−k}` gains or loses the region between `β^{−k}` and `β′^{−k}`, and the class over it the
    complement. At rung `+1` the curved side moves by `L_τ`'s shape (`β^{+1} = 2 + g` in HC's frame).*
 3. *So **the cascade runs one unit per step along the ladder, through every ordinary rung, and does not close there**; it can end only where the ladder
-   stops being ordinary — by M4-CUT within `1 + 2/w²` rungs up and `w²/(8h)` down over a gap of width `w` and height `h`, and for HC's skeleton within
+   stops being ordinary — by M4-CUT within `1 + 2/w²` rungs up and (under (R)'s lower half) `w²/(8h)` down over a gap of width `w` and height `h`, and for HC's skeleton within
    three rungs (M4-HC, whatever `g`: the collision K1 uses only the skeleton).*
 
 *What it answers* (the brief's item 2): the cascade of a pinch-removing move in a regular maximal partition **neither closes in the ordinary region nor
@@ -313,7 +338,7 @@ curved sides (the lost material is the thin region between old and new parallels
 
 | item | answer | grade, minds |
 |---|---|---|
-| 1. a partition with an HC-type class, or the obstruction "the pinch forces a neighbouring class to be pinched, and so on without end" | **Not built.** The obstruction's first half is **TRUE** (M4-LADDER: both neighbouring classes are pinched, one unit away, on the same set); its second half is **FALSE** in ordinary form (M4-CUT: the ladder must meet the singular set within finitely many rungs); HC_K itself fits no regular maximal partition with an ordinary ladder through three rungs over its first gap, or with an ordinary disc boundary point (M4-HC). **Whether MUA-FIN-L can fail in partitions: GAP at the singular set** — a pinch in a regular maximal partition must bring singular points (or irregularity) near its large gaps | [hand; hand + tools exact], one mind |
+| 1. a partition with an HC-type class, or the obstruction "the pinch forces a neighbouring class to be pinched, and so on without end" | **Not built.** The obstruction's first half is **TRUE** (M4-LADDER: both neighbouring classes are pinched, one unit away, on the same set); its second half is **FALSE** in ordinary form (M4-CUT: the ladder must stop being ordinary within finitely many rungs — upward given (A), (B) and `|κ| < 1` per rung; downward when ordinary includes (R)'s lower half); HC_K itself fits no regular maximal partition with an ordinary ladder through three rungs over its first gap, or with an ordinary disc boundary point (M4-HC). **Whether MUA-FIN-L can fail in partitions: GAP at the singular set** — a pinch in a regular maximal partition must bring singular points (or irregularity) near its large gaps | [hand; hand + tools exact], one mind |
 | 2. the cascade | runs one rung per step through the ordinary ladder, never closing there, with forced absorbing classes; ends at the singular set within the M4-CUT bounds; its fate there is open | [hand], one mind |
 | where a spare colour enters | nowhere along the ladder, at any `k`; only possibly at the junction where the ladder ends (reading) | [hand; reading], one mind |
 | 3. MUA-REG in partitions | M3-IRREG transfers (a class containing `A_f` is irregular); M4-CUT's use of (F1) makes irregularity the only junction-free escape (reading); GAP | [hand; reading], one mind |
