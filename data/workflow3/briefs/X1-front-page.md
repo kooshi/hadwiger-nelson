@@ -124,3 +124,32 @@ rather than file it: that is a finding, not a refusal.
 6. Every gate, and the report.
 
 Thank you.
+
+## Amendment 1 — 2026-09-28 22:53 UTC, from the coordinator: rulings on X1's nine questions
+
+Each ruling is the coordinator's, and these are the only words it adds beyond the merges above. The no-agents rule stands
+(`plans/STANDING-RULES.md` rule 1). Touches unchanged.
+
+- **Q1, G72's unit** — file exactly: "**The count so far — eighteen of twenty-one** (each derivation close's §IQ record; milestone by
+  milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-114 and FS-111, both through)." Alternative weighed: your proposal,
+  built from the drafts' own words — lost because the instances file is those words' home (one home per fact) and `CLAUDE.md` is at
+  its budget. Confidence medium-high.
+- **Q2, row 133** — option (a): keep the FS-110 parenthesis, as it stands, right after "route M, the map NO (FS-110's question, then
+  FS-114's)". FS-111's draft says it is kept; (b) would drop a clause no draft asked to drop. High.
+- **Q3, the global-step stub's bearing** — your proposal, which moves words and adds none. High.
+- **Q4, D8's "add" lines** — your form, "*At FS-111's close:* …" appended to the sections you name; for FS-104, "## Bearing on χ ≥ 6",
+  its bearing section, as D8 says "bearing". High.
+- **Q5, § B's milestone column** — "row 139", "row 140", "row 141", the column's form in every other line. High.
+- **Q6, the bibliography** — (a) no § A row for `[AxenovichLiuSagdeev2025]`; § C's row stands. (b) the `[Oostema2020]` edit is a no-op;
+  say so in your record. (c) your separators. (d) `[Sirgedas2021]`'s read cell becomes the draft's text, "read: pp. 1–11 and 13
+  (FS114-Y); its stitch is a seven-colour device"; the Google group row's verdict "**Held, unread**" becomes "**Held, partly read**", and
+  the draft's text is appended — "unread" is no longer true, and this file holds current state. (e) the alias in the table's backtick form.
+  High.
+- **Q7, the instances** — your header for FS-111's instances; the new G67 section where you say; FS-111's G72 instance opens
+  "Twenty-first, FS-111:", the form its siblings use. High.
+- **Q8, the claim-list headings** — as you propose. High.
+- **Q9** — apply F1's substitution to the two texts F1 missed: in `plans/STUB-global-step.md`'s "At FS-114's close" paragraph, "is the
+  whole NO" → "suffices for the whole NO"; in the atlas node CVEXISTS, "So the unit-arc NO is one local statement about one such vertex"
+  → "So one local statement about one such vertex suffices for the unit-arc NO". Re-quote LOCALF from the corrected row 137. The
+  atlas README's step 6 (the DESIGN.md stage record) is not in the manifest: skip it, and list it in your report as owed. High.
+- **The "49 lines" heading in FS-114's drafts** (46 in the file): noted as FS114-C's slip; file the 46.
