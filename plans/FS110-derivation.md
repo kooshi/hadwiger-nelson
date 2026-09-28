@@ -39,7 +39,7 @@ stub — the map argument in Lean (§ The aim's "Lean throughout"), with FS-110'
 
 **FS110-NB-4 — In a tight six-map in `𝓜_K` under Condition 5 no vertex has four colours (nor five). [hand; two minds, one blind: NB; A4]**
 *Proof:* NB §2.3 (each of the four colours squeezed into 60° of the ring; 240° < 360°); A4 stage 2 checked it step by step. *Proof verdict:* TRUE. The
-general form: a four-colour vertex needs an arc of `Γ` of `ω(y)` or `ω(σ_v^{±1}y)` through a change point of every orbit of its ring. *Rests on it:* NB-5;
+general form (read as FS112-NB4P at FS-112's close): a four-colour vertex needs an arc of `Γ` of `ω(σ_v^{±1}y)` with a change point of every orbit of its ring in its closure, or an orbit point in the closure of an arc of `ω(v)`. *Rests on it:* NB-5;
 the N4 chain at every stage (K-TIGHT). *Prior art:* its four-colour half is `[SokolovVoronov2025]` Lemma 2 (FS110-PA), TRUE region-only (FS106-V).
 *Kernel:* with FS110-CLOSURE.
 
@@ -151,7 +151,7 @@ arbitrarily close to x): at an M-in point `u + e` the strip's majority side is o
 u's arcs vote outside there; an arc point `x ≠ u` cannot lie within 1 of both `u + e` and `u − e`, since `2 = |2e| ≤ |u+e−x| + |x−u+e| < 2`; so
 the outside votes at ±e number at most three, not four. No tangent is used. `tools/fs110_ce_scope.py` AL: an ordinary vertex, three cusps and a
 double cusp over 46 directions including the horn normal; the `nearAntipodal` plant fires. *Proof verdict:* TRUE, one mind; one-sided (at the a6
-cusp all three arcs vote inside at both ±n), which is why R2 ends paths only at V-in vertices. *Rests on it:* FS110-CE6; the `d = 2` closure's
+cusp all three arcs vote inside at both ±n), which is why R2 ends paths only at V-in vertices. Its step 'at an M-in point the strip's majority side is outside' is not needed — the in-vote count carries it, unit arcs included (FS112-N3-ANTI; FS-112's close). *Rests on it:* FS110-CE6; the `d = 2` closure's
 second route, beside CD's Theorem D2 (row 134's grade; FS110-COR1-NOD2). *Prior art:* not found in print. *Kernel:* with FS110-CLOSURE.
 
 **FS110-CE6 — CB's D5 repaired by R1–R4 and the Antipodal Lemma: every pair the chain hands to S–V Lemma 3 or Cor. 3 is at distance below 2, at cusp centres and cusp endpoints included, so S–V Cor. 1 almost everywhere needs no `d = 2` exception. [hand; one mind by this route: CE]**

@@ -68,3 +68,31 @@ undefined, expected (C's 4.3 adds it); `check_architecture.py` exit 0; `rk_mirro
   a correction owed for the owner.
 - Gates (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `check_architecture` exit 0;
   `rk_mirror_check` exit 0 (table untouched); `bib_audit` exit 1, the pre-existing `[Oostema2020]` only.
+
+## Stage 4 — SAVED: `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md`, `plans/GROKKING-INSTANCES.md` (the rest), the protocol, `plans/FS110-derivation.md`
+
+Applied by `data/fs112/fs112-x/apply_stage4.py`, reading C's texts out of §R-close 4.3–4.8 with `data/fs112/fs112-x/drafts_extract.py` (every
+replacement asserted once). The owner's ranking message arrived during this stage (2abacbfa, NIGHT-A's §2); it is stage 5's.
+- **`BIBLIOGRAPHY.md`** (4.3): `[Polymath2021]` reading column; `[AxenovichEtAl2014]` reading and role columns; `[Polymath16threads]` reading and role
+  columns (FS112-PA's Stage 8 item 1, checked verbatim against `plans/FS112-PA-reading.md` l. 258–262); `[Coulson2004]` figures viewed;
+  `[Soifer2024]` ch. 18; Kruskal's and Ágoston's rows in FS-110's gate block; a new block, "FS-112's prior-art gate", with C's five rows verbatim
+  (`[Oostema2020]` keyed). **Checked against source records:** Ágoston's title, author, DOI and venue against FS112-P's OpenAlex record
+  (`data/fs112/fs112-p/thomassen_citing.json`); Oostema's title, authors, DOI, volume and first page against `axenovich_citing.json`, whose last page
+  reads 355 (a defect of the record), so "389" is unchecked — said in the block's head line. **Two changes beyond C's "add", for current state:**
+  Axenovich's reading column said "§3–§4 not read", now "§3 and the rest of §4 not read"; its role column began "**Nothing of ours rests on it; it
+  blocks a novelty claim.**", now "**Row 136 rests on it: the one exact six-coloured strip with unit arcs, FS-112's calibration. Otherwise it blocks a
+  novelty claim.**" (C's role text inside).
+- **`CLOSED-QUESTIONS.md`** (4.4): §3's sentence after "…FS-112 is silent." as drafted. **§2.8's sentence placed after the Not-answered list's last
+  item** ("…boundaries other than segments and circular arcs.") rather than between its two items, where C's anchor put it, so the list stays whole;
+  the text is C's.
+- **`plans/GROKKING-INSTANCES.md`** (4.6): §G51 — FS-112's run, the quote-verbatim instance, the fence instance, each under an "*FS112-X, …*" line
+  after FS-110's; §G72 — nineteenth; §G79 — FS-112; **a new section "`CLAUDE.md` § Building — RAM is the discriminator (`scripts/slot.py`)"** for C2's
+  slot-line instance (no section for that rule existed).
+- **The protocol** (4.7): rule 12 extended, rules 13 and 14 added; §3's eleventh run before "The next use", laid out as the tenth run is (records;
+  a bullet for the rounds' objects; a bullet "**The run** (FS112-C, §R-close 3.1, 3.4, 4.6):" carrying 4.6's G51 text in place of C's "4.6's G51 text").
+- **`plans/FS110-derivation.md`** (4.8; inventory item 65): FS110-NB-4's general form read as FS112-NB4P — "`ω(y)` or" deleted, the orbit-point clause
+  added, and "through a change point" written "with a change point … in its closure" (C's "through" → "in the closure of", in the direction NB4P
+  states: the change point lies in the arc's closure); FS110-CE5's note added after its proof verdict.
+- **Left (no draft):** CLAUDE.md's slot rule (§ Building, "RAM is the discriminator") has no pointer to its new instance section; none added.
+- Gates (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; **`bib_audit` exit 0 PASS**
+  (exit 1 at launch); `check_architecture` exit 0; `rk_mirror_check` exit 0.

@@ -279,6 +279,18 @@ FS-110's owner slips (items 2, 23, 46, 63; §R-close 1.0): a paraphrase of V's C
 
 FS-110's fence listings (items 18, 42, 46, 52, 55; Y4, NB4, YB4 fence logs): first-command `ls` of `data/fs110/reports/` and `briefs/` (N, Y, Y2, Y4), `git log -1` subjects (NB, A4, Y2, Y3), an `rg -l` returning a verifier's tool name (Y3), a grep over an advisor's copy of a fenced record (PA), and `ls` of the shared scratchpad root showing other jobs' file names (Y4, NB4). Names only, all disclosed; no content crossed.
 
+*FS112-X, FS-112's close (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 4.6):*
+
+FS-112's run (FS112-C, §R-close 3.1, 3.4): three rounds, two sides (N, N2, N3 against Y, Y2, Y3), six blind verifiers (NB, YB, NB2, YB2, NB3, YB3), a reading job (P0) before the contest, advisors A (planning), A2 (replaced at about 480k after round 1's proof half) and A3 (replaced at about 550k after round 2), and the close comparing round 3 in place of an advisor (Kooshi, item 59). No truth divergence between the sides in three rounds; the truth divergences came from verifiers (NB's #4 in round 1: N's 'isolated contacts do not exist' FALSE and an unnamed GAP; YB2's D1 in round 2: the strip's colourless cone), in round 3 none on the proof side and one on the construction side (YB3's D1: Y3-END-NEEDS FALSE as stated, by an exact fragment). Retractions 19 (N 1, NB 3, N2 2, NB2 3, NB3 1; Y 3, Y2 1; A 1, A2 3, A3 1). **A separate record file for a side's next round kept a running verifier blind** (Y3's record, item 50). **The routing effect twice**: the planner's message resumed the idle planning advisor (P's report), and Y's message to A2's raw id resumed A2 under Y's session (item 23). The two sides met twice without contact — N3-COR3 is the positives' stop, and YB3's BOWTIE, built blind against Y3, is N3-END's doubly bounded one-vertex chain in N3's first description — and the combinations (C-PARTNERS; C-HORNEND, C-DOUBLE) were the close's. The close planner was replaced at about 799k before YB3 reported; its successor (FS112-C2) folded YB3 in as stage 1b.
+
+*FS112-X at FS-112's close — the rule "quote statements verbatim in briefs" (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 4.6):*
+
+FS-112's slips (items 11, 32, 34, 62; N3 stage N3-1): the planner's §IQ (b) dropped A4-SIX-ARCS's hypothesis and C-SEAMS-TWO dropped N-X's 'and disjoint types' (both caught by FS112-A); the owner's first N2 brief paraphrased A2's §3.5 (caught before launch); the YB instance copied Y's label `P_2` for `P_3`; the NB3 instance pointed N2-ROT and N2-HEX at FS112-N2 instead of FS-110's round 2; the N3 brief's gloss of NB2-END dropped 'conditional'. Each was caught by the recipient's first-stage check or by a verifier; none reached a verdict.
+
+*FS112-X, FS-112's close, under the fence rule (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 4.6):*
+
+FS-112's fence listings (items 19, 33, 45, 51, 56, 60; each record's fence log): start-up `ls` of `data/fs112/`, `briefs/` and `reports/` printing fenced names (N, Y, YB, Y2, Y3, YB2, N2, N3, NB3); one `git log -1` subject (N, N2); a heading listing that printed §5.3's heading line (N), N2-DENSE's grade tag (NB2) and N3's heading line (NB3); the owner's launch message pointing A2 at two fenced files (item 19). Names only, all disclosed; no content crossed.
+
 ## G54 — Tight or slack
 
 *FS103-X, FS-103's close (`plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -342,6 +354,10 @@ Seventeenth, FS-107: through — the meeting point and R's reduction came throug
 
 Eighteenth, FS-110 (§R-close 3.3): mixed, counted through — NB-4, the step that emptied the seam, answers §IQ's per-vertex question; the closure extends a known tool (Woodall's step 3, S–V's Cor. 1).
 
+*FS112-X, FS-112's close (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 3.3):*
+
+Nineteenth, FS-112 (§R-close 3.3): mixed, counted through — the reduction to four-colour vertices (N2-RED, NOBOTH, COR3) answers §IQ's per-centre question; the global statement (DENSE3) extends a known tool, row 134's base.
+
 ## G79 — A wall arrives as a counterexample's invariant
 
 *FS103-X, from G79, after “…make the rule ceremony.” (moved at FS-103's close, `plans/FS103-collapse-cp-plane.md` §R-close 4.7):*
@@ -363,6 +379,10 @@ FS-107: SAT and W-EQ-K from example invariants (the open six-sighted hole set ev
 *FS110-X, FS-110's close (FS110-C, `plans/FS110-tangency-seam.md` §R-close 3.3):*
 
 FS-110: NB-4, NB-5, W-MERGE and the cone removal from example invariants (what every vertex, sector and stuck vertex carries); YB3-SAME, Y-BIKE-3C's corners and A6-C2's single horn counterexample invariants; one flip, N4's 'a stuck cone forces its antipodes stuck', made round 4.
+
+*FS112-X, FS-112's close (FS112-C, `plans/FS112-unit-arc-half.md` §R-close 3.3):*
+
+FS-112: U1, NB4P, N2-RED, NOBOTH, COR3 and DENSE3 from example invariants (what every unit-arc centre, four-colour vertex, unit arc, close complementary pair and valid map carries); the stuck ray, Y3-END-NEEDS, the pinned corner and BUDGET2 counterexample invariants. Two flips: the chain's end read as what every end carries (N3-END), and the pinned corner read as what every valid map carries at both corners (C-PARTNERS). A wall broken by an example: Y3-END-NEEDS (what a terminal chain end must carry) fell to FS112-BOWTIE, which its blind verifier built by asking what configuration its own derivation's exception names.
 
 ## `CLAUDE.md` § Delegation — one level deep
 
@@ -405,6 +425,12 @@ followed by a count of processes *in that group* reported **"survivors: 0"**. Th
 still waiting was killed and reported stopped — but it had already started its child, which inherited the lock's descriptor and
 ran an obsolete search orphaned, holding the machine's one heavy lock for about 17 minutes while every queued job waited; found
 by a `ps` sorted by CPU. Kill the process group, and verify against the work: the child absent from `ps` and the lock free.
+
+## `CLAUDE.md` § Building — RAM is the discriminator (`scripts/slot.py`)
+
+*FS112-X, FS-112's close (FS112-C2, `plans/FS112-unit-arc-half.md` §R-close 4.6):*
+
+FS-112's round 3: Y3 and YB3 each started one run past two minutes without `scripts/slot.py` (Y3 §4.3 (1); YB3 stage 5 (1)); each was stopped by its id within minutes, confirmed gone, nothing written, and every later run was slotted.
 
 ## `CLAUDE.md` § The standard of evidence above rung B
 
