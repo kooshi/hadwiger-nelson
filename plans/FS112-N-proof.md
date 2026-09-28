@@ -594,8 +594,26 @@ disagree I say so here. Notation as §1.3 and N2's frame; `M*` a terminal valid 
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
+| N3-STEP | along a stuck chain neither `λ` nor `υ` decreases and one of them strictly increases at every step | hand, one mind; tools exact (STEP, MONO) | stage N3-2 |
+| N3-LEN | with every horn curvature in a finite set `K`, a chain has at most `2\|K\| − 1` vertices; a one-sided infinite chain carries infinitely many curvatures | hand, one mind | N3-2 |
+| N3-RAYR | on an upward-infinite chain `−1/(k+1) ≤ λ_k < 0`: the horn at `P_k` needs a boundary arc of radius `≥ k+1` (mirror downward) | hand, one mind; tools exact (RAY) | N3-2 |
+| N3-PER | a doubly periodic valid map has a periodic terminal modification (so finitely many arc classes) | hand, one mind | N3-2 |
+| R1 (card R) | TRUE as corrected: the premise is on the terminal map; periodic maps have no stuck ray and bounded chains; aperiodic finite-alphabet maps: GAP N3-ALPH | hand, one mind | N3-2 |
+| N3-NOBOTH | a both-centre is a vertex with `≥ 4` colours or a repeated colour | hand, one mind, over N112-U1 (two) | N3-3 |
+| N3-FAIL | the strip at `q ∈ ω(u)` fails only at a leaving centre; there `C` allows only the unit arcs' inner colours inside, outer outside | hand, one mind; tools exact (VOTES) | N3-3, N3-4 precision 1 |
+| N3-ANTI | CE5 (the Antipodal Lemma) survives unit arcs, by counting in-votes | hand, one mind; tools exact (ANTI) | N3-3 |
+| N3-COR3 | a close complementary pair of cubic trichromatic vertices sits on a unit rhombus whose other corners are four-colour double leaving centres | hand, one mind | N3-3 |
+| N3-I / N3-II / N3-P′ | (i) never fails; (ii) fails only at a four-colour or repeated-colour vertex; same-multicolour cubic trichromatic vertices are never at distance 1 | hand, one mind | N3-3 |
+| N3-BASE | the base refutes a valid map near a cubic trichromatic `u` unless `B̄(u, 2)` holds a vertex of `≥ 4` colours or a repeated colour | hand, one mind, over row 134's base | N3-3 (table), N3-4 precision 2 |
+| N3-DENSE3 | every closed disc of radius 3 of a valid map holds a vertex of `≥ 4` colours or a repeated colour | hand, one mind | N3-3 |
+| N3-END | a stuck chain's end with horn bound `−1` has a four-colour, repeated-colour vertex one step beyond and a both-kind unit arc centred two steps beyond (or is the doubly bounded one-vertex chain) | hand, one mind | N3-4 |
 
 ### N3: would-have-searched-here log
+
+- The longest chain over a named finite curvature set (a DP): replaced by the rank count (N3-LEN).
+- Vertex figures at a leaving centre (an enumeration): replaced by the finite vote table (VOTES).
+- Arc curvatures against the antipodal votes (a scan): replaced by the second-order formula and named exact values (ANTI).
+- End configurations at `P_{−1}` (sector orders): derived from FLANK, N3-DEG and N112-U1's side cone (N3-END).
 
 ### N3: fence log
 
