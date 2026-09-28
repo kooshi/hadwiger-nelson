@@ -1,0 +1,7 @@
+ok  C1: H vs the bot probe: ACCEPT (registered ACCEPT; min<1 False, max>1 True, tight False)
+ok  C2: H vs the ring probe above r: ACCEPT (registered ACCEPT; min<1 False, max>1 True, tight False)
+ok  C3: H vs the probe beyond the X2 | N' arc: REJECT (registered REJECT; min<1 True, max>1 True, tight False)
+ok  C4: wedge [270, 300] at q2 vs the bot probe: REJECT (registered REJECT; min<1 True, max>1 True, tight False)
+ok  C5: H with itself: ACCEPT (registered ACCEPT; min<1 True, max>1 False, tight False)
+ALL AS REGISTERED
+exit 0

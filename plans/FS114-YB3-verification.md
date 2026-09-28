@@ -30,6 +30,7 @@ distance below 1 and maximum above 1 carry interior points at distance exactly 1
 | 1b | try fillings of a same-colour lune until one failed a checker | derived the contradiction from the two `t2`-frontiers (every cross pair at distance exactly 1) |
 | 1b | probe points around `r` for a free colour | derived the straddler of each colour at the ring of `q1` just above `r` |
 | 1c | build same-colour-lune fillings and asymmetric bowties by formula and run the checker on each | none built: the derivations decide the statements; the checker reads one held object (and its plants) against the structure the derivations say is forced |
+| 2 | scan degenerate `T2` shapes for one that escapes DIAG step 5 | derived the one escape (a cusp along `300°` on `r`'s side of the tangent) and checked it once at named values, five registered verdicts |
 
 ## Fence log (standing rule 13; the template's and the instance's fences)
 
@@ -49,6 +50,8 @@ distance below 1 and maximum above 1 carry interior points at distance exactly 1
 6. `ls tools/ | grep -E "fs112_yb|fs114"` listed by name the fenced tools `tools/fs114_n*`, `tools/fs114_nb*` and `tools/fs114_y4_diag.py`,
    `tools/fs114_y4_quotes.py`, `tools/fs114_y4_sides.py` (the Y4 names suggest exact checks called "diag" and "sides"). Not opened.
 7. One `rg` for the quoted definition of "simple" ran with every fenced path excluded (`-g '!…'`); it printed nothing.
+8. *Stage 2, a slip of mine (no fence):* re-running FS114-Y4's `tools/fs114_y4_diag.py` I wrote its output to a temporary file in the repository root
+   (`scratch_y4diag.tmp`), not my scratch directory; it was deleted in the same command and never staged.
 
 ## Stage 1a — SAVED: reading; the quotation check
 
@@ -312,3 +315,76 @@ At `cos ε = 4/5`, `sin ε = 3/5`: `z₁ = q2 + (−3/5, 4/5)` and `z₂ = q1 + 
 | YB3-CHK | an exact checker by intervals and minimal polynomials, six plants firing as predicted, accepting the brick, the hexagonal 7-colouring, the strip, the disk and FS112-BOWTIE | tools | 1c.1–1c.2; `tools/fs114_yb3_check.py`, `tools/fs114_yb3_run.py` |
 
 ## Stage 1c — SAVED
+
+## Stage 2 — SAVED: FS114-Y4's record read and compared (opened only after stage 1's commit `f8a9313e`)
+
+### 2.1 The quotation check, completed
+
+The instance's eight statements against `plans/FS114-Y4-construction.md`'s theorem table: **8 of 8 FOUND** verbatim (`quotes-stmts.out`, exit 0,
+FS114-YB's tool unedited); also the definition of **simple** as Y4's header quotes it, and **E0** as Y4 §3 defines it ("E1 and E2 are both impossible, and
+so is the third escape a four-colour `q1` would give (E0)"): FOUND. So my stage-1 guess at E0 was right, and RSTOPALL's E0 clause is **TRUE** (DIAG step 5:
+only 2 is absent at `q1`).
+
+**Replication, not independence:** FS114-Y4's `tools/fs114_y4_diag.py`, re-run unedited under `scripts/slot.py`, prints output identical to its committed
+`diag.out` (19 of 19 as registered). Its E1 wedge `B4` has the sector `[253.74°, 286.26°]`, of positive width.
+
+### 2.2 The two derivations compared (label map: identity — Y4's `X1…X4`, `W`, `N`, `N′`, sliver `V`, `L = X1` are mine; FS114-YB2's object: `V` = `W`,
+`Z` = sliver, `X` = `X1`)
+
+| # | item | FS114-Y4 (address) | FS114-YB3 (address) | divergence |
+|---|---|---|---|---|
+| 1 | LUNE's hypotheses | "simple" used: one switch point `c1 = cl t2 ∩ cl X1 ∩ S1` (§3.1 step 1); "the non-simple case is not covered" (§3.3, §4.3 item 4) | not used: any vertex of `S1` between a `t2`-arc and an `X1`-arc has a `t2 | X1` pair in its rotation (1b, YB3-LUNE step 3) | **scope**: LUNE holds without "simple"; Y4's open item 4 is answered for LUNE (not for W) |
+| 2 | LUNE's frontier | semicircles about `c1`, each meeting `cl t2 ∩ cl X1` (§3.1 step 2) | the shared edge at the switch vertex (1b step 3) | route only |
+| 3 | LUNE's implicit step (Y4's own audit target "LUNE item 1") | `X2` straddles points just outside `S1` (§3.1 step 1) | `X2` points at every `z ∈ S1 ∖ {q1}` (1b step 2) | **agree**, same inequality (`δ < α`); Y4's condition "`X2`'s germ reaches below `θ + 90°`" is mine written as `δ < θ − 90°` |
+| 4 | SIDES and "simple" | §3.3 lists "SIDES' … `X1 ≠ W1`" under simple | SIDES uses no simplicity (Y4 §2.1's own proof uses none either) | **scope**: a wording slip in Y4 §3.3; only W needs "simple" |
+| 5 | W, colour 4 excluded at `W₁` | `T1 ≠ W₁` (`T1` in the away cone `[300° + β₁, 120°]`) (§2.2) | `t4` points from `p` at the outer arc near `q1` (UPDOWN) (1b YB3-W step 1) | route only |
+| 6 | W, colour 3 | two cases: `W₁ ≠ W₂` contradicts itself (§2.2) | `ā` at `W₁` would make it `X2`: diameter (1b step 3) | route only |
+| 7 | DIAG step 5's reason | "`T2 ⊂ [240°, 300°]` has directions within 90° of `210°`" (§3.2 step 5) | through the `X2 | N′` unit arc at `bot`, `T2 ⊂ [300° + ℓ′, 120°]` (1b YB3-DIAG step 7) | **GAP in the written reason, statement unaffected** (2.3) |
+| 8 | DIAG's "each `q_i` has exactly five colours" | derived at `q1` (§3.2 step 3); `q2, q3` not written | the mirror at `bot` written (1b step 7) | presentation; the mirror is what closes row 7 |
+| 9 | DIAG's, E2X's hypotheses | carried by §2's and §3's setting paragraphs (non-Siamese, simple, R-T) | used, and absent from the statements' own words | scope, words only |
+| 10 | DIAG step 4 (the tangent `X1` at `60°`) | `X1` has points `q1 + ρe(60° + g(ρ))`, `g → 0` | points `q1 + ρe(60° + δ/2)` for small `ρ` | agree |
+| 11 | DIAG step 1 (colours at `top`) | as mine | as Y4 | agree, letter for letter |
+| 12 | RSTOPALL, E0 | E0 = the four-colour `q1` escape, excluded by DIAG step 3 | undefined in my brief; my stage-1 reading matched | agree |
+| 13 | D2ALL | four colour actions, reasons SIDES / YB2-EMPTY13 / Y3-D2 | the same four, same reasons; LUNE a second reason for `(1 3)`, needing no `top` | agree; free parameters counted alike (2 × 2) |
+| 14 | grades | every statement one mind | each now **two minds, one blind** (mine), by partly different routes (rows 2, 5, 6, 7) | grade |
+
+No divergence of truth: all eight statements are TRUE in both records.
+
+### 2.3 The one gap, and its repair, checked exactly (`tools/fs114_yb3_cusp.py`, `cusp.out`; predictions registered in the docstring before the run)
+
+**Where.** Y4 §3.2 step 5 blocks colour 2 in `bot`'s sector `(240°, 300°)` by "`T2 ⊂ [240°, 300°]` has directions within 90° of `210°`". E1 (step 4) allows a
+`T2` whose sector at `q2` is the single direction `300°` — a cusp tile, legal in a segment-and-arc map — and `cos(300° − 210°) = 0`: first order says
+nothing, and at second order a horn on `r`'s side of the tangent line stays at distance above 1 from `bot`'s sector (every point `w` there has
+`(w − bot)·e(30°) < 0`, every horn point `z` has `(z − bot)·e(30°) > 1`).
+**The repair** (YB3-DIAG step 7, the mirror of Y4's own steps 1–2 at `bot`): the tile `N′` in `bot`'s sector has colour 2, `X2 ∋ bot`, and the `X2 | N′`
+edge is a unit arc of `ω(q2)` of length `ℓ′ > 0`, directions `[210°, 210° + ℓ′]` from `q2`; any `T2` with a direction within 90° of an interior arc
+direction straddles `N′` just outside the arc — a cusp at `300°` does (`cos(300° − 210° − ℓ′/2) > 0`). So `T2 ⊂ [300° + ℓ′, 120°]`, disjoint from E1's
+`[240°, 300°]`: the statement's conclusion holds, through the arc and not through `bot` alone.
+**Exact, five of five as registered:** a horn `H` at `q2` between the tangent line (direction `300°`) and `ω(r)`, on `r`'s side, out to `s = 3/5`:
+C1 `H` against a probe at `bot + e(270°)/100` → **ACCEPT** (the written reason does not fire); C2 `H` against a probe just outside `ω(q1)` above `r`
+(`q1 + (1001/1000)e(330° + η)`, `cos η = 399/401`) → **ACCEPT** (the cusp is an E1 member there, second order included); C3 `H` against a probe just outside
+`ω(q2)` at `q2 + (1001/1000)e(210° + φ)`, `cos φ = 399/401`, where `N′` lies beyond the arc → **REJECT** (the repair); C4 control, a wedge `[270°, 300°]` at `q2`
+against the `bot` probe → **REJECT** (the written reason works at positive width); C5 `H` with itself → ACCEPT.
+
+### 2.4 Verdicts after the comparison
+
+| # | statement | verdict | grade, minds |
+|---|---|---|---|
+| 1 | FS114-Y4-LUNE | **TRUE**, and **without "simple"** | hand; two minds, one blind (Y4; YB3), different routes to the frontier |
+| 2 | FS114-Y4-DIAG | **TRUE**; step 5's written reason a **GAP at a cusp `T2` along `300°`**, closed by the `X2 | N′` arc (exact at named values) | hand; two minds, one blind; the repair one mind (mine) |
+| 3 | FS114-Y4-RSTOPALL | **TRUE**, E0 clause included | hand; two minds, one blind, over 1, 2, 4, 6 |
+| 4 | FS114-Y4-SIDES | **TRUE** ("simple" not used) | hand + exact; two minds, one blind |
+| 5 | FS114-Y4-UPDOWN | **TRUE** | hand; two minds, one blind |
+| 6 | FS114-Y4-W | **TRUE** ("simple" used once, at `W₁ ≠ X1`, in both records) | hand; two minds, one blind, different routes |
+| 7 | FS114-Y4-D2ALL | **TRUE** | hand; two minds, one blind |
+| 8 | FS114-Y4-E2X | **TRUE** | hand; two minds, one blind |
+
+### 2.5 Proposed edits for the close (standing rule 7: I edit none of these files)
+
+- `LEDGER.md` § B / FS-114's derivation file: FS114-Y4-SIDES, -UPDOWN, -W, -D2ALL, -E2X, -LUNE, -DIAG, -RSTOPALL at **two minds, one blind** (Y4; YB3);
+  LUNE's hypothesis list without "simple"; DIAG's proof with step 5 read through the `X2 | N′` arc (YB3-DIAG step 7; `tools/fs114_yb3_cusp.py`).
+- FS114-Y3-FOUR (FS-114's derivation file, when filed): its closing inference "So five colours at `q_i` are not forced by the bowtie" is **FALSE** once
+  the fragment contains a neighbourhood of `top` (YB3-FIVE; Y4 DIAG step 3): its class is empty; YB2's correction ("open for asymmetric maps") is answered.
+- FS114-Y4 §4.3 item 4 ("the non-simple case of LUNE and W is not covered"): LUNE's is covered (row 1 above); W's stays open.
+
+## Stage 2 — SAVED
