@@ -679,7 +679,7 @@ N("PINW", "the pinwheel dies at 1 + ε", "nogo", "Four unit-arc edges turning on
   "two named exceptions (an edge exactly 60° long; a blade's side a unit arc about its own edge's end).", B("FS114-Y5-PINALL"),
   "except under E1 (an edge of exactly 60°) or E2 (a blade's counter-clockwise side a unit arc about its clockwise edge end)",
   "hand; two minds: Y5; YB4, blind; tools exact at named values", at=(48, 575), sector="seven")
-N("ROUTET", "route T, the count", "step", "Euler's formula on the map graph: a charge summing to zero, negative only where four-colour vertices "
+N("ROUTET", "route T, the count", "held", "Euler's formula on the map graph: a charge summing to zero, negative only where four-colour vertices "
   "carry three or four unit-arc edges; it reaches the non-Siamese part only (FS-117).", B("FS114-N2-ENDS"),
   "negative only at a degree-4 vertex with at least three tactic edges",
   "hand; one mind: N2; tools exact; its inequality form two minds (NB-ARCS, blind)", at=(62, 560), sector="seven",
@@ -718,3 +718,4 @@ with row 135's corrected clause. **TSMYES** — "By row 135 it must hold a four-
    in a definition the script did not copy (item 109). A candidate rule for Keryx's own workflow: script the definitions as well as the statements.
 3. **For FS-111's close and Poros's re-rank:** NB6-MTP's recognition (limits of simple hole-free valid maps can pinch or open holes) bears on FS-111's limit
    objects; FS111-M2-INTRAD's link makes FS-115's bearing possibly larger through route M (item 78).
+## Stage 6 — SAVED

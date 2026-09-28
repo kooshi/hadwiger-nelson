@@ -106,7 +106,7 @@ every "declined" gives the reason. Checked against the record at stage 6.*
 | 98 | owner ruling | done | — |
 | 99 | result | done | superseded by items 103–105; Record stage 2 |
 | 100 | result | done | Record stage 2; Deriv. |
-| 101 | stub to mint | placed | Successor (K1-PINQ's residual, K1-OPENCAP = OC, route T's aperiodic step); rows: Drafts § `BIBLIOGRAPHY.md`; N5-PIN0's 180° case: Deriv. |
+| 101 | stub to mint | placed | FS-116 (K1-PINQ's residual, OC) and FS-117 (MTP's hull form, GAP-μ); rows: Drafts § `BIBLIOGRAPHY.md`; N5-PIN0's lost 180° case: Record stage 2 §2.2 (N5-PIN0's row) |
 | 102 | owner ruling | done | — |
 | 103 | result | done | superseded by item 105; Record stage 2 |
 | 104 | result | done | superseded by item 105; Record stage 2 |
@@ -116,7 +116,7 @@ every "declined" gives the reason. Checked against the record at stage 6.*
 | 108 | result | done | Record stage 2; Deriv. |
 | 109 | correction owed | done | Deriv. (N6-WIN, N6-COV, N6-MTP as corrected); Drafts § `BIBLIOGRAPHY.md`; the owner's gloss slip recorded in Record stage 2 |
 | 110 | result | done | Record stage 2; Deriv. |
-| 111 | correction owed | done | Deriv. (Y5-PX, PIN120-60, PIN120, MU, ALT as corrected by YB4) |
+| 111 | correction owed | done | Deriv. FS114-Y5-PINALL (MU's two hypotheses, PX's `λ` clause a GAP, PIN120-60's and PIN120's no-exception claims GAPs); ALT's completed reason changes no statement and stays in YB4 §2.2 row 4 |
 | 112 | owner ruling | done | — |
 | 113 | result | done | superseded by item 116; Record stage 2 |
 | 114 | result | done | superseded by item 116; Record stage 2 |
