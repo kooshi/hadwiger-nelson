@@ -22,6 +22,11 @@ never touches itself) unless said otherwise. FS112-L60 is used only in its corre
 | N7-TAN | At `D_m` the circles `ω(y_{m−1})` (clockwise) and `ω(y_{m+2})` (counter-clockwise) are tangent; the tile of `p` holding a branch has a colour absent at that centre, the side decided by the edge's curvature | [hand, one mind; N4-OPP in NB4's form; tools] | §2.1 |
 | N7-TAC | On a (Q)-free ring every tactic edge leaves at some `D_m`, a `+` edge along `ω(y_{m+2})`, a `−` edge along `ω(y_{m−1})`; inner tile reaches the centre, outer tile misses its open unit disc | [hand, one mind; over N3-FLANK, N6-RING60] | §2.1 |
 | **N7-3T** | **Three or more tactic edges at a degree-4 vertex with a (Q)-free ring are excluded at radius `1 + ε`**, except the open-cap family **OC** (`+−+`, a Reuleaux lens beside a `60°` anti-lens; with a fourth tactic edge, the Reuleaux bowtie whose lenses do not border the caps): the `(2, 1, 1, 0)` patterns, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `++−`, `−++` die in every member | [hand, one mind] | §2.2 |
+| N7-FLANK | A tile of `p` with cone `[a, b]` puts its colour at no ring point in `(a ∓ 90°, b ∓ 90°)`; in `W(t) = [b − 90°, a + 90°]` only as itself, in `W̄(t)` only as other tiles; a ring point carries at most two colours of `p` | [hand, one mind; N-E1, N-E2] | §3.1 |
+| **N7-QOPP** | Every (Q) arc of a four-colour degree-4 vertex joins opposite tiles (inner `t_i`, outer colour `c_{i+2}`); the other two tiles' colours are absent along it | [hand, one mind; tools] | §3.1; `tools/fs114_n7_oc.py` |
+| N7-CHAIN | Change points propagate by `±60°` until the next point lies on a (Q) arc | [hand, one mind; N6-KAPPA] | §3.1 |
+| N7-HUBQ | At a change point whose `±60°` points have `κ` defined just outside, a tip exists (N7-HUB (b) with (Q) arcs allowed) | [hand, one mind] | §3.1 |
+| N7-OCTB | In OC (`θ_4 ∈ (180°, 240°]`): `top = R_0 | W | R_1 | t2` with `W` of colour 4, `R_0 | W` an arc of `ω(q1)`; `bot = R_4 | t4 | R_3 | W′` with `W′` of colour 2, cone exactly `[240°, 300°]`, bordered by arcs of `ω(q4)`, `ω(q2)` toward `P`, `P′` (`√3` apart) | [hand, one mind; tools] | §3.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -204,3 +209,83 @@ The mirrors `−−−`, `+−−`, `−+−`, `−−+` follow by reflection. �
   and pinwheels whose ring carries (Q) arcs*, p = 0.4 (the alternative: new (Q)-ring members of `++−`, `−++` or `+++`).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: tools for rings with (Q) arcs; where the (Q) cases stand; OC's forced structure
+
+*Setting as stage 2, the ring now allowed (Q) arcs (after the bends on a fragment of radius `1 + ε` they are its only `Γ`-arcs). Metric facts:
+`tools/fs114_n7_oc.py` (`data/fs114/fs114-n7/oc.out`, 20 lines OK, exit 0; plant `--plant`, `q4` moved to `e(215°)` so that `|q4 − bot| < 1`, fails exactly the
+two BOT-inside lines and the line `P = q4 + e(270°)`, `oc-plant.out`, exit 1).*
+
+### 3.1 Four tools that do not need a (Q)-free ring
+
+**N7-FLANK [hand, one mind; N-E1 and N-E2, the continuous form of N7-TAN].** *Let a tile `t` of `p` have cone `[a, b]`, `b − a < 180°`. Its colour occurs at
+no ring point `e(ψ)` with `ψ ∈ (a − 90°, b − 90°) ∪ (a + 90°, b + 90°)` (the branch of `ω(e(ψ))` at `p` in direction `ψ ± 90°` runs inside `t`: N-E1); at ring
+points of `W(t) = [b − 90°, a + 90°]` it occurs only as `t` itself, and at those of `W̄(t) = W(t) + 180°` only as tiles other than `t` (N-E2 puts a second tile
+of `t`'s colour at `e(ψ)` only where `t`'s cone faces away from it).* So a ring point `e(ψ)` with neither `ψ + 90°` nor `ψ − 90°` an edge direction at `p` carries
+**at most two colours of `p`**. ∎ *Reads:* `B̄(p, 1 + ε)`.
+
+**N7-QOPP [hand, one mind; tools QOPP].** *Every (Q) arc `[u, v]` of the ring joins opposite tiles: its inner tile is some `t_i` and its outer colour is
+`c_{i+2}`. `t_i`'s cone lies in `[v − 90°, u + 90°]`, `t_{i+2}`'s in `[v + 90°, u + 270°]`, and `t_{i+1}`, `t_{i+3}` hold the two gaps `[u + 90°, v + 90°]`,
+`[u + 270°, v + 270°]` in their cones, so their colours are absent along the arc.* The inner tile holds the whole arc (diameter); the tile of `p` of the outer
+colour faces away from every arc point (N-E2). The two windows are disjoint with gaps of length `v − u > 0`, so two tiles adjacent at `p`, which share a
+bounding direction, cannot be the arc's inner tile and its outer colour's tile. ∎ (N6-QOUT's "outer colour `c_{j+3}`" is its pinwheel instance.)
+
+**N7-CHAIN [hand, one mind; N6-KAPPA].** *If `y` is a change point and `κ` is defined on both sides of `y + 60°`, then `y + 60°` is a change point (and
+likewise `y − 60°`).* So the change points form chains `y, y + 60°, …, y + 60°k`, each ending where the next point lies in the closure of a (Q) arc. ∎
+
+**N7-HUBQ [hand, one mind; N7-HUB (b)'s proof].** *At a change point `y` (colour `Ā` just clockwise, `A` just counter-clockwise), if `κ` is defined just
+clockwise of `y − 60°` and just counter-clockwise of `y + 60°`, then some tile of `p` reaches `y` and meets `B(y − 60°, 1) ∩ B(y + 60°, 1)` (a tip).* `κ` there is
+`A` and `Ā` respectively (N6-KAPPA against `y ∓ δ`), carried by tiles holding `y − 60°` and `y + 60°` that differ from the ring tiles at `y` (diameter), so
+those ring tiles miss `B(y ∓ 60°, 1)` (N-E2), and the rest is N7-HUB (b). ∎ **This is exactly where (Q) arcs weaken stage 2:** the tip at a change point can
+fail only when a (Q) arc starts at `y + 60°` or ends at `y − 60°`, or holds one of them — then a ring tile at `y` may itself reach toward `p`.
+
+### 3.2 The (Q) cases of K1: what the tools give, and the GAP
+
+- **Where the (Q) arcs can be.** By N7-QOPP and N7-FLANK, a (Q) arc whose inner tile `x` is inner to a tactic edge with centre `q` lies in `W(x)` within `60°` of
+  `q`, on `x`'s side (for a `+` edge, just clockwise of `q`), with the opposite tile's colour outside. For the pinwheel this is N6-QOUT; for `++−`, `+−+`, `−++` it
+  confines each (Q) arc to one zone `W(t_i) ∩ W̄(t_{i+2})` per tile, computed in closed form from the three centres and `θ_4` (§2.2's frame with the angles
+  continuous). No zone argument alone kills a pattern: the zones are non-empty for open sets of parameters.
+- **Why stage 2's kills do not transfer verbatim.** They used N6-CENT (cones in `60°ℤ`) and a tip at every change point. With (Q) arcs the centres may sit at (Q)
+  ends, so the cones are continuous, and N7-HUBQ supplies a tip only at change points whose `±60°` points are free of (Q) arcs. **The (Q) cases of three and four
+  tactic edges are a GAP** at that step: every surviving member has a change point or a centre whose `60°`-neighbour on the ring lies on a (Q) arc.
+- **The pinwheel's E1 and E2, in my readings** (the construction side's records are fenced from me; the owner's wording only). *R-E1:* a (Q) arc of full length
+  `60°` on the ring; by N6-QOUT it is `[φ_j − 60°, φ_j]` with inner `T_{j+1} ⊂ Reul(p, e(φ_j − 60°), q_j)` (L60-EQ), which needs `α_{j+1} ≤ 120°`,
+  `α_{j+1} + α_{j+2} ≥ 180°` and (N6-QE1) `α_j ∉ (60°, 120°)`; at `q_j` the clockwise ring branch is `Γ`, so N7-HUBQ is unavailable there. *R-E2:* `α_{j+1} = 60°`
+  with `e_{j+1}` running from `p` to `q_j` (`T_{j+2} ⊂ Reul(p, q_j, q_{j+1})`, N6-P60′'s configuration) and a (Q) arc of `T_{j+2}` starting at `q_j`, whose outer
+  tile is the partner `z_j` (N7-QOPP: outer colour `c_j`; one tile per colour at `q_j`) — NB6-QSTART's member, where N6-P60′'s hypothesis on `κ` fails. In R-E2
+  derived here: `q_j` carries exactly `R | z_j | T_{j+2} | T_{j+1}` (a four-colour vertex at distance 1 from `p`, `R` the ring tile clockwise of `q_j`, since no (Q)
+  arc of `T_{j+1}` can end at `q_j` when `α_{j+2} < 120°`), and N-E1 at `q_j` forces `κ = Ā` at `e(φ_j − 60°)` (where `ω(q_j)` crosses the ring), so `R`'s stretch
+  of colour `A` stops at a change point `y ∈ (φ_j − 60°, φ_j)`. **Not closed:** both are GAP; the next step in R-E2 is the chain of `y` (N7-CHAIN) against the
+  (Q) arc of `T_{j+2}` at `y + 60°`.
+
+### 3.3 OC's forced structure (the survivor of stage 2), toward radius `√3`
+
+*Frame of §2.3 (N4's bowtie frame), `θ_4 ∈ (180°, 240°]`.* Using N7-FLANK's windows: the colours of `p` that can sit at `top` on tiles other than `p`'s are those
+`c` with `90° ∈ W̄(t_c)`: only 4; at `bot`, only 2.
+
+**N7-OCTB [hand, one mind; tools BOT, TOP].**
+- *`top = R_0 | W | R_1 | t2`*, `W` of colour 4 with cone in `[60°, 180°]` containing `(60°, 120°)`; `W` is not the partner `z4` (whose cone at `top` would face
+  `q1`), so `W ∩ B(q1, 1) = ∅`, and **the edge `R_0 | W` at `top` is an arc of `ω(q1)`** (`R_0 ⊂ B̄(q1, 1)`) — N4-D's arc from `top` toward `P90`.
+- *`bot = R_4 | t4 | R_3 | W′`*, `W′` of colour 2 with cone **exactly `[240°, 300°]`**: it is neither partner of colour 2 (`z2` at `q2`, `z2′` at `q4`; their cones at
+  `bot` would face `q2`, `q4`), so it misses `B(q2, 1)` and `B(q4, 1)`; **the edges `R_3 | W′` and `R_4 | W′` are arcs of `ω(q4)` and `ω(q2)`**, running from `bot`
+  toward `P = √3 e(240°)` and `P′ = √3 e(300°)`, `|P − P′| = √3`.
+- **The route to `√3`** (N4-D's shape, not closed): on the arc `A4` of `ω(q4)` from `bot` to `P` (outside `B̄(p, 1)`, inside `B(bot, 1)`, outside `B̄(q2, 1)`: tools
+  ARC) colours 4 and `X`, `X̄`, 2, 3 are excluded (4 by `t4 ⊂ B̄(p, 1)`; 3 because `t3`, the tip at `q4`, holds directions near `0°` there), so `A4 ⊂ Γ` when
+  `1 ∈ P(q4)`, and then its outer side meets only colours 2 and 1; likewise `ω(q2)`'s arc to `P′` with 3 in place of 1. **If colour 1 is excluded beside `A4` and
+  colour 3 beside the other arc, `W′` reaches `P` and `P′` and has diameter `√3`.** Open: a tile of colour 1 (resp. 3) far from the tiles of that colour at `q4`
+  (resp. `q2`) beside the arcs, and the cases `1 ∉ P(q4)`, `3 ∉ P(q2)`, `θ_4 = 180°`.
+
+### 3.4 Registrations and K1 after this job
+
+| configuration at a degree-4 vertex, three or four tactic edges | status after FS114-N7 |
+|---|---|
+| any pattern, ring (Q)-free | **excluded at `1 + ε`** (N7-3T), except OC |
+| OC (`+−+`, Reuleaux lens, `60°` anti-lens; K1-OPENCAP when `e4` is tactic) | GAP at `1 + ε`; forced structure N7-OCTB; route to `√3` named (§3.3) |
+| Reuleaux bowtie (lenses bordering the caps) | excluded at `√3` (N4, N5, NB5; earlier rounds) |
+| pinwheel with (Q) arcs, incl. R-E1, R-E2 | GAP (§3.2) |
+| `++−`, `+−+`, `−++`, `(2, 1, 1, 0)` with (Q) arcs; non-Reuleaux lenses | GAP: every survivor has a change point or centre whose `60°`-neighbour lies on a (Q) arc (N7-HUBQ) |
+
+*Registered* (G21; both outcomes reachable): *OC dies within `√3` by §3.3's route* (p = 0.5, carried from §2.4); *every (Q)-ring survivor of three tactic edges has a
+(Q) arc of length exactly `60°` or a (Q) arc ending `60°` from a tactic centre* (p = 0.4).
+
+## Stage 3 — SAVED

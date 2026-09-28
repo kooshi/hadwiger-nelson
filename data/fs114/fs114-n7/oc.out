@@ -1,0 +1,21 @@
+OK   BOT dir 235: outside B(q4,1) and B(q2,1) is False
+OK   BOT dir 245: outside B(q4,1) and B(q2,1) is True
+OK   BOT dir 295: outside B(q4,1) and B(q2,1) is True
+OK   BOT dir 305: outside B(q4,1) and B(q2,1) is False
+OK   ARC phi=280: |x|>1, |x-bot|<1, |x-q2|>1
+OK   ARC phi=300: |x|>1, |x-bot|<1, |x-q2|>1
+OK   ARC phi=320: |x|>1, |x-bot|<1, |x-q2|>1
+OK   ARC P = q4 + e(270) = sqrt3 e(240)
+OK   ARC P' = q2 + e(270) = sqrt3 e(300)
+OK   ARC |P - P'|^2 = 3
+OK   TOP dir 55: outside B(p,1) and B(q1,1) is False
+OK   TOP dir 65: outside B(p,1) and B(q1,1) is True
+OK   TOP dir 175: outside B(p,1) and B(q1,1) is True
+OK   TOP dir 185: outside B(p,1) and B(q1,1) is False
+OK   QOPP gap direction 135.0: in neither window
+OK   QOPP gap direction 315.0: in neither window
+OK   QOPP inner dir -19 faces u and v
+OK   QOPP inner dir 109 faces u and v
+OK   QOPP outer dir 161 faces away from u and v
+OK   QOPP outer dir 289 faces away from u and v
+RESULT OK
