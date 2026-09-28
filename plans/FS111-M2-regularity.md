@@ -45,9 +45,10 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
   arrangement's faces, and the colour count enters only at FS106-AE-MAP6 — [derived, one mind; over FS106-AE-MAP6's grade] §3.2.
 - **M2-INTRAD** — in an honest saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point (REG-J′),
   the unit parallel of every (tangent) interface arc is again an interface arc, so radii of curvature drop by exactly 1 toward the centre and must stop at
-  1: every interface is locally a finite chain of segments and circular arcs of **integer** radius — REG-CHAIN in a strong form — [hand, one mind] §4.1.
+  1: every interface has **integer** radius of curvature a.e., and is a chain of segments and circular arcs with finitely many of each radius locally —
+  REG-CHAIN in a strong form; accumulation with radii → ∞ (LRA, FS-115's stuck ray) not excluded — [hand, one mind] §4.1.
   Controls: R7, the strip, SQ9, HEX9.
-- **M2-REDUCE-A** — REG-A_k ⟸ honest C-SAT-T_k ∧ REG-J′_k; at six with Q-NO, `χ_m⁰(ℝ²) ≥ 7` — [derived, one mind] §4.1.
+- **M2-REDUCE-A** — REG-A_k ⟸ honest C-SAT-T_k ∧ REG-J′_k ∧ ¬LRA; at six with Q-NO, `χ_m⁰(ℝ²) ≥ 7` — [derived, one mind] §4.1.
 - **M2-DISCK7** — translates of a smooth non-circular body of constant width 1 (support `1/2 + sin³(3θ)/200`) at hex7's colour lattices form a regular
   maximal seven-cover with a locally finite arrangement: the cover form of REG-A is FALSE at seven, and on the cover route the NO at six must cover
   self-parallel curved boundaries (NO-PAR) — [hand + tools exact (sympy + rationals, three plants), one mind] §4.2.
@@ -400,9 +401,11 @@ boundary points at which M-PINCH's hypotheses (H1), (H2) fail, together with eve
 (with its clause, §1.2 item 6): Σ locally finite, finitely many interface arcs at each of its points; then (M-REDUCE-I's proof) every bounded set meets
 finitely many interface arcs, each `C^{1,1}` off Σ (M-C11).
 
-*Statement.* Under REG-J′, every interface arc is, near each of its points, a finite `C¹` concatenation of **segments and circular arcs of integer
-radius `n ≥ 1`**; the arcs of radius 1 are unit arcs of kind both or unit arcs centred at a point of Σ, and an arc of radius `n ≥ 2` is concentric with a
-chain of `n − 1` parallel interface arcs ending at a unit arc.
+*Statement.* Under REG-J′, (i) every interface arc has radius of curvature in **`{1, 2, 3, …} ∪ {∞}` at almost every point**; (ii) for each `n`, its
+points of radius `n` form, near any point, finitely many arcs of circles of radius `n`, each concentric with a chain of `n − 1` parallel interface arcs
+ending at a unit arc of kind both or at a unit arc centred at a point of Σ; so (iii) an interface is a `C¹` chain of segments and circular arcs of
+integer radius in which arcs of any bounded radius are locally finitely many — **infinitely many arcs can accumulate at a point only with radii tending
+to infinity** (call that **LRA**, large-radius accumulation; not excluded here).
 
 *Proof.* (1) *Partners are interfaces.* On an open subarc `J` of type (tangent) (between `a` and `b`, `ν` the unit normal into `b`), M-PINCH puts the
 `a`-contact of `x` at `x + ν(x)` and the `b`-contact at `x − ν(x)`. So the unit parallels `J^± = {x ± ν(x)}` lie in `supp S_a`, resp. `supp S_b`, and miss
@@ -423,16 +426,22 @@ many near `J` under REG-J′), `E_{n,p}` the part of `E_n` whose chain ends at a
 `f(s) = |γ(s) − p|² − n²`: `f = f′ = 0` on `E_{n,p}`, and near it `f″ = 2(1 − nκ(s)(1 + o(1)))`, which is `> 0` on `E_0` and on `E_k` for `k > n`.
 For `n = 1`, `|κ| ≤ 1` makes `f` convex near `E_{1,p}`, so `E_{1,p}` is locally an interval (a convex function vanishing with its derivative at two
 points vanishes between them). Inductively, `f″ < 0` only on `⋃_{k<n} E_k`, locally finitely many intervals; on each complementary interval `f` is convex
-and `E_{n,p}` meets it in an interval. So every `E_n` is locally a finite union of intervals, and so is `E_0`, the rest. ∎
+and `E_{n,p}` meets it in an interval. So every `E_n` is locally a finite union of intervals. ∎ *Not proved:* that only finitely many `n` occur near
+a point. Arcs of radii `n_i → ∞` accumulating at a flat point have chains of length `n_i`, ending at unit arcs near `n_i` along the normal — far apart,
+consistent with REG-J′'s local finiteness. This is FS-112's stuck ray in another form: row 135 found the one-sided chain "a pencil of circles of radius
+`k + 1`" consistent and noted that "a ray needs arcs of every radius `≥ k + 1`, doubly periodic maps have none".
 
 *Controls.* R7: every interface a unit arc of kind both (`n = 1`). The strip (row 136): unit arcs of kind both and segments (`n = 1, ∞`). SQ9, HEX9:
 segments (the ladder, `n = ∞`). None exhibits `n ≥ 2`; a radius-2 arc would sit concentric with a unit arc of kind both. *Would kill it:* a saturated
 colouring with locally finite Σ and an interface arc of non-integer radius (a defect in M-PINCH's (tangent) partners or in the descent).
 
-**M2-REDUCE-A** [derived, one mind]. *REG-A_k ⟸ C-SAT-T_k (honest, existence) ∧ REG-J′_k.* M-REDUCE-I's construction gives a map-type colouring whose
-boundaries are the interface arcs; by M2-INTRAD they are finite chains of segments and circular arcs: a segment-and-arc map, a.e.-proper. **At six,
-with Q-NO (row 134 with FS-114's NO): honest saturation at six and REG-J′₆ give `χ_m⁰(ℝ²) ≥ 7`** (C-SEVEN-M), so `χ(ℝ²) = 7` given MR. REG-CHAIN
-is proved in the strong form (every chain ends at a unit arc or at Σ, and the radii are integers); NO-C11 is not needed on this route.
+**M2-REDUCE-A** [derived, one mind]. *REG-A_k ⟸ C-SAT-T_k (honest, existence) ∧ REG-J′_k ∧ ¬LRA.* M-REDUCE-I's construction gives a map-type
+colouring whose boundaries are the interface arcs; by M2-INTRAD, with no large-radius accumulation, each is a finite chain of segments and circular arcs:
+a segment-and-arc map, a.e.-proper. **At six, with Q-NO (row 134 with FS-114's NO): honest saturation at six, REG-J′₆ and ¬LRA give
+`χ_m⁰(ℝ²) ≥ 7`** (C-SEVEN-M), so `χ(ℝ²) = 7` given MR. REG-CHAIN is proved in its strong form (every chain toward the centre ends at a unit arc or at
+Σ, and the radii are integers); NO-C11 is not needed on this route; what REG-CHAIN left open is now LRA, which is where FS-112's stuck ray sits
+(FS-115). *Audit (standing rule 4):* the first draft of this stage claimed a finite concatenation outright; the accumulation with radii `→ ∞` was
+found on re-reading step (3), before the report.
 
 ### 4.2 M2-DISCK7 — on covers, class boundaries need not be arcs [hand + exact, one mind]
 
@@ -455,7 +464,7 @@ excludes ((in, in) is impossible, and (in, out) forces a unit arc).
 
 | route | what it needs at six | status |
 |---|---|---|
-| **honest** (round 1, completed here) | honest saturation (C-SAT-T₆) ∧ REG-J′₆, then Q-NO | REG-A₆ ⟸ these two (M2-REDUCE-A, with M2-INTRAD); **but** honest saturation cannot be reached by selecting from a maximal cover (M2-NOSEL), so it needs a global re-choice of the cover — a measurable fall six-colouring, or at least an interface-maximal one (M2-SELCOMP (a)). GAP there |
+| **honest** (round 1, completed here) | honest saturation (C-SAT-T₆) ∧ REG-J′₆ ∧ ¬LRA, then Q-NO | REG-A₆ ⟸ these three (M2-REDUCE-A, with M2-INTRAD); LRA is FS-115's stuck ray in another form; **but** honest saturation cannot be reached by selecting from a maximal cover (M2-NOSEL), so it needs a global re-choice of the cover — a measurable fall six-colouring, or at least an interface-maximal one (M2-SELCOMP (a)). GAP there |
 | **cover** (this round) | REG-J′-C₆ (free saturation; MUA-REG, MUA-FIN), then a NO for maps whose boundaries are unit parallels, outer and far, of their own classes' components (**NO-PAR**, proposed) | Q-NO does not suffice: DISCK7 shows maximal classes with non-circular boundaries at seven. GAP at MUA-FIN and at NO-PAR |
 
 *The trade, in one line:* **covers give saturation for free and lose circularity; honest saturation gives circularity (integer radii) and cannot be had by
@@ -473,6 +482,7 @@ the object side is W's and, by W-NEG, would be `χ_m⁰ ≤ 6`.
   G54 (fall colourings; gap-free), G82, G83.
 - **A second grokking draft (G85), in G67's form:** *Saturated interfaces have integer radii. [hand, one mind]* Off a locally finite singular set, the unit
   parallel of a saturated interface is again an interface, so radii of curvature fall by exactly 1 toward the centre and the fall must stop at 1: every
-  interface is a chain of segments and circular arcs of integer radius. *Do: before asking whether a hypothetical saturated colouring has curved
-  interfaces, read the chain of unit parallels toward the centre; if it cannot end at a unit arc or at a singular point, the arc cannot exist. Killing
-  test: a saturated colouring with locally finite Σ and an interface of non-integer radius.*
+  interface is a chain of segments and circular arcs of integer radius, finitely many of each radius locally. *Do: before asking whether a hypothetical
+  saturated colouring has curved interfaces, read the chain of unit parallels toward the centre; if it cannot end at a unit arc or at a singular point,
+  the arc cannot exist; what remains is accumulation with radii → ∞ (the stuck ray). Killing test: a saturated colouring with locally finite Σ and an
+  interface of non-integer radius.*
