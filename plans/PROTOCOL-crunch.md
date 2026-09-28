@@ -6,6 +6,13 @@ the future." Its model is `plans/PROTOCOL-competitor-and-advisor.md`. It is writ
 run the third crunch from this file, the two queues it cites, and the briefs it points to. No agent id appears here; jobs are named by
 their job ids.*
 
+> **Since 2026-09-28 each role below runs under an agent file** (`WORKFLOW.md` § The roles). The owner is **Keryx**, the top-level
+> session; it coordinates and never derives. The planner's reframe, and the reframe, derivation, reader and close-math jobs, are
+> **`ephodos`** agents. The blind verifier and the blind second derivation are **`ephodos-verifier`** agents. The advisor, in the main
+> run and in mid-run sessions, is a **`poros`** agent. The kernel job is a **`debruijn`** agent. The front page, clerk, bookkeeper and
+> consolidation jobs are briefed by Keryx under the identity their work needs. The standing rules are `plans/STANDING-RULES.md` plus
+> this protocol's crunch additions (§5). The rest of this file is the record of the two runs as they happened, under Workflow 2.0.
+
 **Shape, and why it differs from the brief's list.** The brief's seven sections are here in its order, with three changes: §0 (the design in
 one paragraph, as in the model) is added in front; §3 is written as a runbook with the owner's acts at each phase, because the reader this
 file is for has to *run* a crunch, not only understand one; and **the consolidation is a phase of its own, §4**, at Kooshi's word, relayed
@@ -240,100 +247,20 @@ There's just too much new knowledge to carry in every session."; "Implement b on
 revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals." Steps
 4–7 run only when the budget binds; steps 1–3, 8 and 9 run after every crunch.
 
-## 5. Standing rules — the version that worked, as a template
+## 5. Standing rules — the base file, plus the crunch's additions
 
-*Merged from `data/crunch-2026-09-25/briefs/STANDING-RULES.md`, `data/crunch-2026-09-26-x2x3/briefs/STANDING-RULES.md` and
-`data/consolidation-2026-09-26/briefs/STANDING-RULES.md`, with the lessons of §7 folded in (marked ⁺). Copy it into
-`data/crunch-<date>/briefs/STANDING-RULES.md`, fill the `<…>`, and delete a rule only when its reason no longer holds. Every brief says
-"STANDING-RULES.md is part of this brief; read it in full."*
+*The base standing rules are `plans/STANDING-RULES.md`, part of every brief in the pipeline since 2026-09-28. They were merged from this
+section's earlier text, which stays in git (`git show 280aad6a:plans/PROTOCOL-crunch.md`, §5), with the lessons of §7 folded in. A crunch
+copies the base file to `data/crunch-<date>/briefs/STANDING-RULES.md`, fills its dates, and appends the three additions below. Every brief
+says "STANDING-RULES.md is part of this brief; read it in full."*
 
 ```
-# Standing rules for every job of the <date> crunch (<clock>) — part of every brief
-
-1. No children. Do not use the Agent tool, a fork, a workflow or anything else that starts another agent. Delegation here is one level
-   deep (CLAUDE.md § "Delegation — one level deep"). The reason: staffing is Kooshi's budget decision, and the owner can only review
-   work it knows about. If the work outgrows your context, stop at a saved stage and say what is left. That is a good report, never a
-   failure.
-
-2. Work in stages, and keep each response short. Save your record after every stage: add the stage's section, headed
-   "Stage n — SAVED", then commit it before the next stage starts. The reasons: at FS-86 an agent lost three responses to the
-   output-token limit, and nothing can recover a lost response; a 5-hour usage window can halt you mid-job, and a halt then costs one
-   stage, not the job.
-   - Resuming: if your record already exists when you start, you are resuming. Read it and your brief, check the last SAVED stage
-     against `git log -- <record>`, and continue at the first stage that is not SAVED. Redo nothing that is saved.
-   - Working files a successor would need go under the data/… path your brief names, committed with the stage, never only in /tmp.
-     /tmp is RAM and dies with the session.
-
-3. <If the ban is in force:> The ban on finite-witness search runs to <date>.
-   - Out: SAT, MaxSAT, #SAT, MILP/CP, local-search colourers, Θ relation trees and float Θ finders, quotient-colouring searches, lattice
-     sweeps hunting survivors, and machine-long certificates such as multi-hour relaxations.
-   - Kooshi's intent, in his words: "The intent of the ban is to eliminate the crutch of feeling like we're accomplishing something by
-     asking uncomputable problems for days at a time."
-   - In: hand derivation; exact arithmetic of seconds that checks a derived claim; existing checkers on existing certificates; the Lean
-     kernel. At the edge: a complete exact enumeration of a finite set whose extent a derivation fixed first is in, and is logged as such.
-     "Try cases until one works" is out.
-   - Keep a "would have searched here" log in your record: one line per move you would have made by search, and what you did instead.
-
-4. All novel knowledge is a success. Kooshi: "A proven theorem about why its impossible is also valid. All novel knowledge is a success."
-   - Do not lean toward a yes. This project's recorded failure mode is selection (CLAUDE.md G21): defects that flatter the work survive,
-     and defects that displease are found within the hour. Audit a result you like as hard as one you dislike.
-   - FALSE with a counterexample, or GAP with the missing step named, is as valuable as TRUE.
-   - State every result at its grade, with its count of minds; "not found in print", never "first". Never raise a grade, a scope or a
-     verdict you are copying.⁺
-
-5. Quote statements verbatim, never paraphrase. Every statement you hand on goes in quotation marks with its source address. Paraphrases
-   in briefs have invented a gap, widened a statement and emptied a claim (the flip lost "affine, U-invariant"; NA₀ lost "positive").⁺
-   Your first stage checks every quotation in your brief against its source and logs the result.
-
-6. Commits by explicit path. The tree is shared by <n> agents.
-   - git add <new file>, then git commit <paths> -m …; never a bare git commit, never git add -A, never amend.
-   - Push after each commit (git push origin main); on a ref-lock race, sleep 4 and retry. Never force-push.
-   - Subjects are neutral, naming the job and the stage ("X01D: stage 2"): the harness shows every newly launched agent the last five
-     subjects, and blind jobs are running.⁺
-   - End each message with your harness's attribution lines.
-
-7. Records, tools and fences.
-   - Your record is the path your brief names. Give it a heading "Theorems this phase proved": one line per theorem, with its grade and
-     its address.
-   - Your exact checks go in tools/<job-prefix>_*.py. Plant a fault in each and watch it fire; a plant that cannot fire tests nothing,
-     and a control proves only the shapes its generator can represent (G21).
-   - Never edit a frozen tool (tools/fs58_*, tools/fs61_*, tools/fs66_*, tools/fs73_*check*.py, tools/fs73v2_check.py,
-     data/fs73/coxeter-c3/certcheck.py) or any other job's tools.
-   - Never edit CLAUDE.md, LEDGER.md, plans/FRONTIER-STUBS.md or BIBLIOGRAPHY.md unless your brief makes you the front-page lane; propose
-     edits in your record.
-   - If your brief fences files and a search prints fenced text, stop reading it, and log the touch (time, file, what it carried) in your
-     record and your report at once.⁺
-   - Never copy an agent id (a string like a1b2c3…) into any file. Never read credential files (auth.json, .env, keyrings).
-
-8. Machine.
-   - Any job over about 2 GiB or 2 minutes runs under scripts/slot.py --mem <GiB> --cpus <N> -- <cmd>, with an honest --mem (a checker
-     under-declared at 8 GiB was killed by its own cap).⁺
-   - On exit 75 (not admitted after 1,800 s), wait ten minutes and retry. Never raise a cap. After three refusals, report BLOCKED.
-   - Never run lake build, bare or named. Kernel jobs follow their brief's build line; there is one kernel job at a time.
-   - Read every exit status directly, never through a pipe, and never chain a commit after a gate with ";".⁺
-   - On any unexplained crash of any process, halt and report. Do not diagnose or retry.
-
-9. The report. When you finish, and at any halt you can foresee, write this and commit it to data/crunch-<date>/reports/<job id>.md. Then
-   send the same text to "main" by SendMessage:
-     JOB <id> — <DONE | STAGE n SAVED | BLOCKED: reason>   harness≈<k> (own≈<k>)
-     RESULT: <one line; per claim TRUE / FALSE / GAP-at-step, or the theorem's name and grade>
-     RECORD: <path>   COMMITS: <hashes>
-     INVENTORY: <n lines follow, each "kind — one line — source address">
-     SPAWN: <n lines follow in the queue's format, or "none">
-     HELD FOR THE OWNER: <a decision or a slip, one line each; or "none">
-   - INVENTORY kinds: result, correction owed, prediction scored, slip, tool defect, prior-art debt, stub to mint or re-aim, fence touch.⁺
-   - SPAWN lines use the queue's columns, and each comes with its brief written as a file under data/crunch-<date>/briefs/.
-   - The final text of your turn: "<job id> idle; report sent to the owner by SendMessage".
-
-10. Budget and clock. Your brief names the budget in the harness's count; hand back with your record saved before <line>. The loaded
-    context at launch is itself about 165k by the counter, and agents' own counts have run at 29–70 % of the harness's, so leave a
-    margin.⁺ The crunch ends at about <time>; the close reads reports from <time>: check `date` at every stage, and at <time − 5 min>
-    finish the current claim, save, and report, whatever is left.
-
-11. Reading is in; cite what you read. Grep BIBLIOGRAPHY.md (by arXiv id and Zbl number) and ~/source/library/ before calling a paper
-    unheld or fetching it; papers held under a journal-year key have been re-fetched twice (G50).⁺ Record a reading status per section;
-    an abstract is not a reading. Never commit a paper's PDF into the repository; name it for the library.⁺ Propose BIBLIOGRAPHY.md rows
-    in your record; the front-page job writes them.
+C1. The queue. A job that finds follow-on work writes SPAWN lines in its report, in the queue's columns, each with its brief written
+    as a file under data/crunch-<date>/briefs/. It never starts that job itself (rule 1).
+C2. The report's home. Reports are committed to data/crunch-<date>/reports/<job id>.md, and the report block (rule 11) carries one
+    more field after INVENTORY: "SPAWN: <n lines follow in the queue's format, or "none">". There is one kernel job at a time.
+C3. The clock. The crunch ends at about <time>; the close reads reports from <time>. Check `date` at every stage, and at
+    <time − 5 min> finish the current claim, save, and report, whatever is left.
 ```
 
 ## 6. Templates — the briefs to copy
@@ -346,7 +273,7 @@ first." Copy the best instance below and change only its slots. Paths are relati
 
 1. **A header line:** the job id, its kind, the model, the date, who wrote it, which brief it copies, when to launch it, and any hard stop
    ("Launch only after X30F has handed back"; "Hard stop: 11:50 UTC").
-2. **"Hello. You are <de Bruijn | Coxeter | Poros>, <role>"**, with `CLAUDE.md`, `WORKFLOW.md` and `DEBRUIJN.md` read from disk, and
+2. **"Hello. You are <de Bruijn | Coxeter | Poros>, <role>"**, with `CLAUDE.md` and `WORKFLOW.md` read from disk (since 2026-09-28 the identity is the agent file the job is launched from), and
    **"`STANDING-RULES.md` is part of this brief; read it in full."**
 3. **The resume paragraph:** "If your record already exists, you are resuming: check the last SAVED stage against `git log -- <record>`."
 4. **Kooshi's words, verbatim**, where they are why the job exists.
@@ -363,8 +290,8 @@ first." Copy the best instance below and change only its slots. Paths are relati
    statements, never its proofs, and only after its own verdicts are committed.
 9. **"Every outcome counts … do not lean toward TRUE"**, and where the brief can, the step where a failure is most likely.
 10. **The ban and the "would have searched here" log**, while the ban holds.
-11. **The no-children line with its reason**, in words: "No subagents, forks or workflows — delegation is one level deep (`CLAUDE.md` §
-    Delegation): staffing is Kooshi's budget decision, and the owner can only review work it knows about. If the work outgrows your context,
+11. **The no-children line with its reason**, in words: "No subagents, forks or workflows — delegation is one level deep (`plans/STANDING-RULES.md`
+    rule 1): staffing is Kooshi's budget decision, and the owner can only review work it knows about. If the work outgrows your context,
     stop at a saved stage and say what is left."
 12. **Record, data and tools paths:** the record with "Theorems this phase proved"; `data/<m>/<job>/`; `tools/<job>_*.py` with plants.
 13. **The touch list:** what the job may edit; the four front files only for the front-page lane.

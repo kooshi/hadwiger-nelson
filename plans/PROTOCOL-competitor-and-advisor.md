@@ -7,6 +7,11 @@ mathematics of the session is in `plans/MASCOT-DERIVATION.md`, `plans/COXETER-20
 `plans/POROS-2026-09-08-mascot.md`; the method entry is `CLAUDE.md` G51; the message exchange (27 messages over 45 minutes,
 2026-09-09 04:39–05:24) is in the session transcripts outside the repository and is summarised in §2 below.*
 
+> **Since 2026-09-28 the roles here run under agent files** (`WORKFLOW.md` § The roles). The owner is **Keryx**, the top-level
+> session. It coordinates and no longer takes a competitor's side, so both competitors are **`ephodos`** agents, briefed identically
+> and fenced from each other. The advisor is a **`poros`** agent. A competitor's result counts as a second mind only on the axes its
+> fence made true (the `keryx` skill's `<independence>`). The rules below stand; the briefs in §4–§5 are the record of the first run.
+
 ## 0. The design in one paragraph
 
 Kooshi's idea: set two independent sessions on one derivation — the owner (de Bruijn) and a friendly competitor (Coxeter) — briefed

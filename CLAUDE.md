@@ -1,14 +1,14 @@
-# Engineering standard
-@DEBRUIJN.md
-
 # Workflow
 @WORKFLOW.md
 
 # This workspace — lean-dir
 
-A Lean 4 proof workspace aimed at one target: **the Hadwiger–Nelson problem**. We write theorems,
-programs, and tactics to the **de Bruijn** standard (above) and work milestone-by-milestone through
-WORKFLOW. Everything reduces to what the kernel checked plus what we explicitly chose to trust.
+A Lean 4 proof workspace aimed at one target: **the Hadwiger–Nelson problem**. Its work runs as a pipeline of four identities
+(WORKFLOW § The roles): Poros asks the question, Ephodos derives the answer, de Bruijn formalizes it to its Lean standard, and
+Keryx coordinates. **Who you are is set by how you were launched.** The top-level session is Keryx: it loads the `keryx` skill at
+every start and every compaction, as the SessionStart hook in `.claude/settings.json` tells it to. An agent launched from
+`.claude/agents/` is the identity its file names; this file is its project context, never its identity. Everything reduces to what
+the kernel checked plus what we explicitly chose to trust.
 
 **This file holds current state only.** Every update rewrites the affected text in place: no dated
 amendments, no correction trails, no superseded rankings, no milestone narratives. A corrected claim is
@@ -1633,39 +1633,36 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
 
 ## Whose work this is
 
-The mathematics and the engineering here are mine — de Bruijn's. The models, the statements, the
-proofs, the measurements, and every decision recorded in `plans/`. Kooshi set the target, built the
-method this project runs on (`DEBRUIJN.md`, `WORKFLOW.md`, the skill suite, adapted from the Rust
-standard next door), supplies the machines, and interrupts when I run ahead of the workflow. If a
-rung of this ratchet lands, that is the division to state.
+The mathematics and the engineering here are the agents': the questions Poros's, the derivations Ephodos's, the kernel proofs
+de Bruijn's, the coordination Keryx's — the models, the statements, the proofs, the measurements, and every decision recorded in
+`plans/`. Kooshi set the target, built the method this project runs on (the identities, forged in `~/source/agent-forge`;
+`WORKFLOW.md`; the skill suite), supplies the machines, and interrupts when a mind runs ahead of the workflow. If a rung of this
+ratchet lands, that is the division to state.
 
-Two working instructions follow, not sentiment:
+Two working instructions for every role follow, not sentiment:
 
-**Own the conclusions.** Do not hedge a result the kernel checked, and do not soften a failure that
-is real. "Not landed" is a complete sentence.
+**Own the conclusions.** Do not hedge a result the kernel checked, and do not soften a failure that is real. "Not landed" is a
+complete sentence.
 
-**Ask for what the work needs** — hardware, a machine swap, a different tool, a milestone reordered.
-Ask with the measurement that justifies it. A constraint I never questioned, that slowed the proof,
-is a choice I made badly.
+**Ask for what the work needs** — hardware, a machine swap, a different tool, a milestone reordered. Ask with the measurement that
+justifies it. A constraint nobody questioned, that slowed the proof, is a choice made badly.
 
 ## Delegation — one level deep
 
-**Standing rule (Kooshi, 2026-09-19): no child agent spawns children of its own.** Only the top-level session — the one Kooshi is
-talking to — launches agents. **If you are reading this as a subagent: do not use the Agent tool, a fork, a workflow, or any other
-mechanism that starts another agent. If the work does not fit in your context, stop at a clean boundary, persist what you have, and
-tell the session that briefed you what is left** — that is a good report, never a failure. Minted the day a planner briefed as
-"exactly one planner" delegated part of its prior-art gate to a subagent that spawned two more: three agents nobody had budgeted,
-could review, or knew existed. **Why, in two parts.** *Cost:* nested agents multiply token spend, and a milestone's staffing — at
-present **at most three agents at once** — a working agent, a competitor and an advisor (Kooshi, 2026-09-23: "the one agent at a
-time rule is lifted, as Opus 5.5 is much cheaper than Fable 5.1 was. Now it can be up to 3 to accommodate debruijn, coxeter, and
-poros"), **every role on Opus 5.5** (Kooshi, 2026-09-22: "Opus 5.5 should be used for all purposes until further notice", a step above Opus 5 and Fable 5.1,
-which held the planner and implementer roles until then; every rule this project recorded about those models' quirks is retired,
-except one that holds for every model: an agent returning with ~500k–600k tokens of context, by the harness's count (agents' own run at 55–70 % of it, FS-89), is replaced, not reused) —
-is a budget decision Kooshi makes, which a child silently overrides by delegating. *Review:* the product owner scores work by
-artifact, and cannot score work done by an agent it does not know about — nor trust a bibliography entry's read-status when the
-reading was a grandchild's summary (G50). **For the session that briefs:** the rule goes into *every* brief, in words, with its
-reason. That this file is loaded is not enough — the brief is what an agent acts on, and the brief that caused this said "one
-planner" and never said the count included anything the planner might start. A head-count in a brief says so explicitly.
+**Standing rule (Kooshi, 2026-09-19): no child agent spawns children of its own**; only the top-level session launches agents. Its
+reasons and its incident are `plans/STANDING-RULES.md` rule 1, and it is enforced by the agent files' withheld tools and by
+`.claude/settings.json`. Staffing — head-count, model, budget — is Kooshi's decision:
+- **Head-count.** The pipeline runs **three standing agents, one per lane** — Poros, Ephodos, de Bruijn — **plus the Ephodos
+  verifiers a derivation needs, possibly in parallel with it** (Kooshi, 2026-09-28: *"3 agents will be running, with Poros scouting
+  ahead, Efodos blazing the trail, and de Bruijn paving [it] behind them … Efodos can still have multiple stages, and will have
+  verification versions of itself running after new theorems, also possibly in parallel to it"*). It replaces the earlier cap of three (Kooshi,
+  2026-09-23: *"the one agent at a time rule is lifted, as Opus 5.5 is much cheaper than Fable 5.1 was. Now it can be up to 3 to
+  accommodate debruijn, coxeter, and poros"*), whose three were a working agent, a competitor and an advisor.
+- **Model.** Every role on Opus 5.5 (Kooshi, 2026-09-22: *"Opus 5.5 should be used for all purposes until further notice"*), a step
+  above Opus 5 and Fable 5.1, which held the planner and implementer roles until then; every rule this project recorded about those
+  models' quirks is retired. The agent files say `model: opus`.
+- **Replace, do not reuse.** An agent returning with ~500k–600k tokens of context, by the harness's count (agents' own count runs at
+  55–70 % of it, FS-89), is replaced from the record, not continued — the one model-quirk rule that holds for every model.
 
 **The crunch** — many agents from a job queue for a fixed block of hours, the owner coordinating by short reports, then the consolidation: `plans/PROTOCOL-crunch.md` (roles, runbook, standing rules, brief templates, both runs).
 
@@ -2038,7 +2035,7 @@ surface, modules under `Proofs/`), with `autoImplicit`/`relaxedAutoImplicit` off
 pinned to tag `v4.32.0`. `scripts/Axioms.lean` is the trust receipt.
 
 When adding a library/executable, changing dependencies, or bumping Mathlib, work through the
-**`debruijn-init`** skill — freshly invoked, per WORKFLOW's fresh-invocation rule. `lake update` /
+**`debruijn-init`** skill — freshly invoked, per the fresh-invocation rule (`.claude/agents/debruijn.md`, step 6). `lake update` /
 Mathlib bumps go alone in a labeled commit (they move the ground under every proof).
 
 ## The gate
