@@ -43,6 +43,12 @@ are resuming: read your record there.
 
 ## The manifest
 
+**First, before any draft is filed: Poros's corrections to the closes' drafts** (`plans/POROS-2026-09-28-close-reread.md` § Draft
+re-rank, item 6 — F1, F9, F3, F2 and F6). Apply each to the draft it names, then file the corrected draft. The coordinator checked F1 at
+its source — `plans/FS114-derivation.md`, FS114-N114-COMPACT's statement: "a radius uniform in `K` exists iff C-LOCAL holds" — and rules
+all five filed: each narrows a claim to what the derivations show. F3 and F2 edit two stubs the closes wrote (`plans/STUB-local-exclusion.md`,
+`plans/STUB-map-step.md`); F6 sets G72's count to "eighteen of twenty-one", in place of FS-114's drafted count.
+
 Every draft below is filed as it stands. The sources are the two close records, `plans/FS114-C-close.md` (its `## Drafts for the front
 page`) and `plans/FS111-C-close.md` (its `## Drafts for the front page`, D1–D10), the files they name, and Poros's record,
 `plans/POROS-2026-09-28-close-reread.md` (its `## Draft re-rank` and `## Draft for CLAUDE.md § Paths forward`).
@@ -57,14 +63,18 @@ page`) and `plans/FS111-C-close.md` (its `## Drafts for the front page`, D1–D1
      G83 and the new G86, G72's count, "Rows 1–‹last›" with `‹last›` = 141.
    - FS-111's four clauses (D2), each at FS-114's `‹FS-111›` marker in the matching unit; G84 and G85 (D4), placed with G86 after G83 in
      numeric order.
-   - Poros's § Paths forward table and its "Next:" clause.
+   - Poros's § Paths forward table (its `## Draft for CLAUDE.md § Paths forward`, with the in-place amendments listed in
+     `data/workflow3/r1/assemble.py`'s AMEND list), and **Poros's whole open-milestones unit**, which replaces FS-114's drafted one and
+     already merges FS-111's clause.
 4. **`plans/GROKKING-INSTANCES.md`**: both closes' instances, each under its rule's section (create a section in the file's form only
    where none exists, as for G67).
 5. **`BIBLIOGRAPHY.md`**: FS-114's rows, alias and edits; FS-111's D5 (§ A amendments and rows, § C rows).
 6. **`data/fs114/claims.md`**: FS-114's corrections as its § 9; **`data/fs111/claims.md`**: FS-111's D3 as a dated section at the end.
 7. **Stubs**: the closed banners on `plans/STUB-global-step.md` (FS-114's draft) and `plans/STUB-reg-scale.md` (FS-111's D7), each under
    its title line; FS-111's D8 bearing lines in the stubs it names.
-8. **`plans/FRONTIER-STUBS.md`**: Poros's draft re-rank, with its banners; FS-114 and FS-111 to the closed list.
+8. **`plans/FRONTIER-STUBS.md`**: Poros's draft re-rank (`data/workflow3/r1/ranked-table.md`, assembled by its script) with every block of
+   its § Draft re-rank — its dated paragraph in the file's own form, its open-milestones text, the closed-list lines for FS-114 and FS-111,
+   and its banner for `plans/STUB-stuck-ray.md`.
 9. **The close inventories**: apply each close's proposed ticks (`data/fs114/fs114-c/ticks.md`, `data/fs111/fs111-c/ticks.md`),
    and tick "done" every later item the coordinator logged (FS-114 items 121–125, FS-111 items 38–42 and any after), each with where.
 10. **The Proof Atlas**: both closes' entries and FS-114's "edits to existing nodes" into `tools/viz_proof_atlas_facts.py`; place the
@@ -77,12 +87,9 @@ page`) and `plans/FS111-C-close.md` (its `## Drafts for the front page`, D1–D1
     `tools/fs111_vm2_disc7.py`, which holds both orientations. Change nothing else in them.
 
 **The merges Keryx has ruled, the only words you may add:**
-- FS-111's "Last updated" clause and its open-milestones clause each end with a full stop where they stand; its programme-line clause
-  ends with a semicolon.
-- In FS-111's open-milestones clause, "await Poros's rank" becomes "are ranked in `plans/FRONTIER-STUBS.md`".
-- In FS-114's open-milestones draft, "**Next: Poros's re-rank** (`plans/FRONTIER-STUBS.md`)" is replaced by Poros's "Next:" clause.
+- FS-111's "Last updated" clause ends with a full stop where it stands; its programme-line clause ends with a semicolon.
 - Item 31's heading parenthesis reads "(§ The aim; rows 131–141; FS-116, FS-117, FS-120–FS-122)".
-- Every `‹R111-a›`, `‹R111-b›`, `‹R111-c›` in any draft becomes 139, 140, 141, and `‹R111-a›–‹R111-c›` becomes 139–141.
+- Every `‹R111-a›`, `‹R111-b›`, `‹R111-c›` in any draft, Poros's included, becomes 139, 140, 141, and `‹R111-a›–‹R111-c›` becomes 139–141.
 
 Anything else that seems to need a word of yours, a draft that does not fit its target, or two drafts that disagree: stop and ask "main".
 
