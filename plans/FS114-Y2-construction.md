@@ -139,3 +139,28 @@ nothing.
 - The rim points (`a`, `b`, `b′`, `c` and the three between `b` and `a`) are rational points of the named circles, chosen so every point lies in `ℚ(√3)`.
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: where the bowtie must be tested next, and what is left (hand-back at a stage boundary; the harness count is past 500k)
+
+**What an extension to radius 2 about `p` must carry** (read off the design, [hand; one mind]; not a claim about every map). In the fragment each `q_i` is a
+vertex of **five** colours (`t_in`, the gap tile of GAPS on the far side, `T_i`, the sliver `V`, the gap tile `L_i`): the sliver is forced in this design,
+because `L1 ∋ top` keeps `L1` in `B̄(top, 1)` while `N` (colour 4, along `ω(q1)` above `top`) keeps `T1` out of the unit discs about its arc, and the two
+tangents at `q1` differ. The ring of `q_i` lies within radius 2 of `p`. By FS112-SIX (two minds, one blind) a five-colour vertex whose ring is inside a
+valid map carries unit arcs centred at it of total length at least 180°; the fragment carries about `66.9°` about `q1` (`t1`'s side, 60°, and the
+`L1 | N` arc, `6.87°`). **So any extension of this design to radius 2 about `p` must add about 113° of unit arcs about each `q_i`, or a proof of K1 may
+bite exactly there.** I did not derive that the sliver, and so the five colours, are forced in every map with a Reuleaux bowtie at `p`: my argument
+for `top ∈ cl L1` used the design's arrangement over the arc `(30°, 150°)` of `ω(p)` and does not cover every arrangement of colour-5/6 tiles along it.
+
+**Left for a successor** (ranked by bearing on the meeting point):
+1. **Extend the bowtie to radius 2 about `p`, or derive where it stops.** The test is FS112-SIX at the `q_i` (above), then A4SIX at `top` and `bot`
+   (four-colour vertices at distance 1 from `p`; their rings reach radius 2). An extension to radius 2 refutes any radius-2 proof of K1. A stop at a named
+   radius is the obstruction K1 needs, for this configuration.
+2. **The other K1 configurations** (FS114-Y2-GAPS gives their local shape): the pinwheel (each tile inner for one edge, angles ≤ 180°), and the three-tactic
+   patterns `(2, 1, 1, 0)`. The bowtie is the one built.
+3. **K2's extreme as a design target** (my brief's step 2): not started beyond one observation. In the "quads on lines" family (non-tactic curves
+   horizontal lines, half-lenses of width 1 above them, cusps between), a cusp's top arc is centred at a quad on the line. By GAPS the quad then needs
+   the outer colour's tile in a cone of width `180° − β` below the line, and two more tiles beside it, so the quad has degree at least 5, not 4. A
+   one-mind observation, not a verdict on the family.
+4. **The Siamese class** (step 3): not started.
+
+## Stage 1c — SAVED
