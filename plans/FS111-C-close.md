@@ -266,3 +266,33 @@ hexagon rotated 30° from the record's lattice, so its PASS is about another obj
    an HC-type pinch whose ladders end at two-colour points with no junction and no irregular class within M4-CUT's bound (M4's killing test) — then the
    rung is not local and the finiteness question moves to irregular classes; or a proof that (F1) holds for every MUA set's interior components, which
    removes irregularity as an escape and leaves the junction alone.
+
+## Stage 3 — SAVED: `plans/FS111-derivation.md`, and the erratum to FS-107's
+
+- **The file:** 85 entries — 78 derived, 4 gaps (FS111-C-SAT-T-HONEST, FS111-REG-JP-C5, FS111-MUA-FIN-L, FS111-REG-A6), 3 refuted (FS111-C-HULL-SO,
+  FS111-W-B-NONABS, FS111-M2-DISCK7-AS-PLACED) — each id qualified `FS111-…`, each block followed by a "Rests on it:" paragraph (Amendment 1). A
+  verifier's re-derivation is counted in its entry's minds, never filed twice. Five controls, each run from `plans/` within seconds: the hexagon
+  counterexample (`fs111_v0_hex.py`, plant `vertex`), R7 (`fs111_m_reuleaux7.py`, plant `down_mod2`), DECO-B (`fs111_w_blocks.py`, plant `bigsq`), DISC7
+  (`fs111_vm2_disc7.py --object disc7`, plant `lat4`), DISCK7 in the corrected orientation against the record's (`--object disck7-m2`).
+- **The gate:** `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS111-derivation.md` → **GATE: PASS (0 failures, 1 warning)**, the
+  warning FS111-V0-CLOSE's "prior art owed" (a one-line lemma, no search at its grain). Its own negative control: the skill's self-test exits 0; a scratch
+  copy with FS111-C1-UNIF's converse deleted fails (exit 1, "the statement is two-way … converse is absent").
+- **Novelty.** Nine zbMATH queries in the disciplines' words, by `tools/fs111_c_zb.py` (self-test: a positive control, `an:0599.28008`, and a clean-zero
+  negative control; a planted fault — `total` read as 0 — fails it), saved as `data/fs111/fs111-c/zb_*.json`: Reuleaux colourings (0), unit distance with
+  measurable boundaries (1: Donnelly's taxicab plane, not this), measurable independent dominating sets (0), rolling-ball regularity (8, none on
+  colourings), Walther's author listing (1: Zbl 0933.52003), constant-width coverings (1: Raigorodskii's survey), tight or maximal measurable map
+  colourings (7, none on this), parallel curves at unit distance (0); and four identifier lookups for the bibliography rows. With FS111-P's and FS111-M2's
+  queries they are the "new — …" lines' evidence. **Grain:** novelty is measured at the object class the queries name, not per step; that is the
+  honest reach of these searches.
+- **The erratum** is appended to `plans/FS107-derivation.md` as §5 (dated, sourced, the text above it untouched). **A finding about the brief (item
+  21):** the words "K-C6 vacuous" are not in `plans/FS107-derivation.md`; they are in `plans/FS107-W-near-colourings.md` ll. 313–315, the source
+  record of HX-STALL. HX-STALL's entry is correct as it stands; the erratum corrects the gloss it rests beside and says nothing there rested on it.
+- **Tool defects found while choosing controls:** `tools/fs111_m3_honey.py` and `tools/fs111_m4_rungs.py` open their output files by a path relative
+  to the repository root (`data/fs111/fs111-m3/honey.out`, `…/fs111-m4/rungs.out`), so from any other directory they crash after printing "ALL PASS"
+  and exit 1 — a PASS that reads as a failure. Not edited (other jobs' tools, standing rule 7); not used as controls (run from the root, they would
+  overwrite their jobs' committed outputs). The zbMATH API answered one unquoted nonsense query with a clean 404 and, minutes later, with a 502 proxy
+  error; this close's tool refuses a non-JSON reply loudly and retries it, never reading it as a zero.
+- **Kernel decisions** (each entry's `handoff:`): the route-M lemmas (FS111-C1-UNIF, V0-RESCALE, C-FILL, C-HULL, V0-ID1, M-SATC, M-PINCH, M-C11,
+  M2-COV, M2-ZERO, M2-INT, M2-FIX, M2-HULLC, M2-REDUCE-C, M2-INTRAD) go to de Bruijn **queued behind the measurable chain** (FS-113, FS-101): their objects
+  (D-NF colourings, maximal covers, µ₆, `𝓜_K`) are not in `Proofs/`. R7 is kernel-checkable now by exact arithmetic in ℚ(√3) and is marked not urgent.
+  Every other entry is `none —` with its reason (a no-go, a control object, a composition of open statements, or a caution about strength).
