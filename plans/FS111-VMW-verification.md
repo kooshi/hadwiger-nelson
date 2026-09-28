@@ -14,9 +14,12 @@ is committed. Working files: `data/fs111/fs111-vmw/`. Tools: `tools/fs111_vmw_*.
   `η > 0`. [hand + exact certificates, one mind] §1.5
 - **VMW-R7-MAX** — R7 is saturated in the strongest reading too: for every point `x` and every colour `j` with `x ∉ S̃_j`, some point of `cl S̃_j` is at
   distance exactly 1 from `x`; so no fill move of any colour at any point keeps it a.e.-proper. [hand, one mind; exact grid of 144 points, 0 exceptions] §1.5
-- **VMW-R7-P+** — R7 is **not** saturated if contact partners must have positive density: every relative-interior point of a down triangle's arc has
-  exactly one same-colour closure point at distance 1, the cusp of the neighbouring same-colour down triangle, of density 0; named: `x = (1, √3 − 1)`,
-  partner `(1, √3)`. [hand (cone lemma) + exact, one mind] §1.5
+- **VMW-R7-P+** — R7 is **not** saturated if contact partners must have positive density: at the named point `x = (1, √3 − 1)` (exact) and at all 69
+  exact relative-interior points sampled on a down tile's arcs, the only same-colour closure point at distance 1 is the cusp of the neighbouring
+  same-colour down tile (density 0); partner of the named point `(1, √3)`. [hand (cone lemma) + exact, one mind; "every relative-interior point" is
+  sampled, not proved] §1.5, §2.2 (`tools/fs111_vmw_pplus.py`, scope corrected at stage 2)
+- **VMW-R7-COVER** (stage 2) — by VMW-R7-MAX, R7's seven classes form a **maximal admissible cover** in M-SATC's sense with disjoint classes: the cover
+  form and the honest form of saturation coincide at R7 (M left the down classes' maximality open). [hand, one mind] §2.3
 - **VMW-SQ9, VMW-HEX9** — squares of side `1/2` coloured `(i mod 3, j mod 3)` and hexagons of width `1/2` coloured by `Λ′/3Λ′` are a.e.-proper, tight
   and saturated, in the literal reading and with positive-density partners (every edge faces a same-colour edge at distance exactly 1). [exact
   certificates + hand, one mind] §1.8
@@ -46,6 +49,12 @@ is committed. Working files: `data/fs111/fs111-vmw/`. Tools: `tools/fs111_vmw_*.
 - `ls tools/ | grep fs111` displayed the **names** of fenced tool files (`fs111_m_reuleaux7.py`, `fs111_w_blocks.py`, `fs111_w_check.py`,
   `fs111_w_hex7_free.py`, `fs111_w_hx_pairs.py`); none opened. The start-up git status had shown untracked names under `data/fs111/fs111-w/`; none opened.
 - No fenced record, directory content, report, transcript, `chats-bak/` file or foreign scratchpad file was opened before stage 1's commit.
+- Stage 1's commit step: `git status --short` printed the **names** of FS-114 files (`plans/FS114-N4-proof.md`, `data/fs114/fs114-n4/*.out`,
+  `tools/fs114_n4_bowtie.py`), fenced always; none opened.
+- Stage 2 (after `3ea1d5ab`, pushed): read `plans/FS111-M-regularity.md` and `plans/FS111-W-wild.md` in full, `data/fs111/reports/FS111-M.md` and
+  `FS111-W.md`, `data/fs111/fs111-w/blocks.out` and the docstring and `build` of `tools/fs111_w_blocks.py` (ll. 1–40), and listed
+  `data/fs111/fs111-m/`, `data/fs111/fs111-w/`, `data/fs111/reports/`. Not opened: the other competitor tools and outputs, the P and V0 reports, and
+  everything fenced always.
 
 ## Stage 1 — SAVED: blind verdicts on items 1–6
 
@@ -274,3 +283,73 @@ interfaces `C^{1,1}` (§1.7) ⟹ a map-type colouring (S–V Conditions 2–4) �
 | 6 | M-REDUCE-I | GAP at "finitely many interface arcs at each point of `Σ`"; TRUE with it, over FS106-AE-MAP6 | [derived], one mind |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: reconciliation with M (`plans/FS111-M-regularity.md`) and W (`plans/FS111-W-wild.md`), read only after `3ea1d5ab`
+
+### 2.1 The deferred quotations (standing rule 5)
+
+| # | brief | source | result |
+|---|---|---|---|
+| 1 | M-R7, "the Reuleaux seven-colouring (…) is a.e.-proper, tight and **saturated**" | M, "Theorems this phase proved", M-R7 | verbatim prefix (the source continues "(every essential boundary point is a contact point for each of its colours); every boundary is a unit arc …") |
+| 2 | W-P1, "no saturated 7-colouring exists" at 0.65 | W §2.8: "**W-P1:** no saturated a.e.-proper 7-colouring exists (0.65)" | "a.e.-proper" dropped (harmless: saturation is defined for a.e.-proper colourings) |
+| 3 | W "calls C-SAT-T a GAP at `k = 7, 8`" | W §2.6: "**TRUE at `k ≥ 9`; GAP at `k = 7, 8`**" | verbatim |
+| 4 | FS111-W-SQ9, W-HEX9 | W, theorem lines | consistent paraphrase |
+| 5 | W-DECO-B, "hex7 decorated with two squares per hexagon: tight, a.e.-proper, no class with tight block structure" | W, theorem line | verbatim |
+| 6 | M's REG-B "TRUE for 7 or more colours (checked exactly)" | M §5.4: "TRUE at `k ≥ 7` (R7, exact), GAP at `k = 5, 6`" | **not in M's record verbatim**; a faithful paraphrase |
+| 7 | M-BLOCK-EQ, "block structure holds exactly when 'all cross distances < 1' is transitive among one colour's components" | M: "tight block structure holds iff 'near' is transitive" | faithful paraphrase |
+| 8 | M-PINCH/M-C11 | M §3.1–§3.2 | faithful; M's (H2) also requires `x ∈ cl P_a ∩ cl P_b`, and "No thickness of the partner is needed" (the brief omits it — it bears on §2.2 D2) |
+| 9 | W-C11 / NOBEND / NOREP, "on every saturated map without cusps …" | W §2.2–§2.3, §2.6 | faithful for maps without cusps; W-C11's general statement carries **H-DEN** (partners of positive density), which the brief's "without cusps" implies |
+| 10 | W-NEG, "… A-ALL or B-RR failing means `χ_m⁰ ≤ 6`" | W §1.4 (iv): "If `χ_m⁰(ℝ²) ≥ 7`, A-ALL and B-RR hold (vacuously for large `R` and small `δ`); the negation of A-ALL implies `χ_m⁰(ℝ²) ≤ 6`" | **strengthened**: W states B-RR's side as "seven ⟹ B-RR for large `R`, small `δ`", not "B-RR failing (at A-ALL's `R, δ`) ⟹ six" (§2.2 D5) |
+| 11 | M-REDUCE-I, "honest saturation plus a locally finite singular set Σ at five colours …" | M §5.1: "(ii) singular set Σ is locally finite **with finitely many interface arcs at each of its points** (REG-J′_k)" | **a clause dropped** — exactly the clause my blind stage 1 named as the missing step (§2.2 D4) |
+
+### 2.2 Divergences, with addresses
+
+| # | claim | M | W | VMW (blind, stage 1) | kind | settled |
+|---|---|---|---|---|---|---|
+| D1 | is there a saturated seven-colouring? (C-SAT-T at `k = 7, 8`; W-P1; W-P2) | yes: R7 (§2.4, exact, two engines) | no known; C-SAT-T "GAP at `k = 7, 8`"; W-P1 at 0.65, W-P2 "least `k` is 9" at 0.3 (§2.6, §2.8) | R7 saturated in (L), (B), (A) — hand proofs + exact certificates (§1.5) | **truth** | **M right; W-P1 FALSE; W-P2 FALSE** (the least `k` with a saturated a.e.-proper `k`-colouring is `≤ 7`). One definition, read one way: W's own (§2.0, "in D-NF, no `x ∈ ∂_e S_j` is `j`-free, for every `j`"; §1.3's gloss "every essential boundary point a contact for each colour of its multicolour") is (L), and R7 meets it. R7 even meets every necessary condition W listed for a saturated seven-colouring (`C^{1,1}`, no bend, rainbow vertices, kind-both arcs with the inner sector toward the arc): **the miss is W's generator image** — its searches ranged over recolourings of polygonal tilings (hex7, brick; LADDER, HEXSAT), and R7 has no flat edge. Grade: [hand + exact], three minds on R7's saturation (M exact; VMW blind, hand + exact; W's structure consistent) |
+| D2 | the hypotheses of the two-colour regularity lemma | M-PINCH: (H1), (H2) only; Step 1 applies M-HULL1 at density points `q_n → y_a`, so "no thickness of the partner is needed" | W-C11: adds **H-DEN** (partners of positive density), applying C-HULL at `y_a` itself | assumed one-sidedness (H2′) and flagged tangential cusp partners as a GAP for M | statement | **M's form is the common form**: Step 1 checked (M-HULL1 at `q_n ∈ S̃_a ⊆ A*_a`, then the closed-disc limit) — valid with no density at the partner. My stage-1 GAP flag on M-PINCH is **withdrawn**; W's H-DEN is removable. R7 is the instance that needs this: its down side's partners are cusps (H-DEN fails), and the conclusion holds. Case analysis: three minds (M; W with H-DEN; VMW blind with (H2′)) |
+| D3 | W-CURV, "curvature is at most 1, equal to 1 exactly on arcs of kind both" | — (M-C11: `|κ| ≤ 1`; (split) ⟹ unit arc) | as quoted | — | statement | **the "only if" half is not derived**: C11's case (i) (outer–outer) allows the interface to coincide with one tangent circle — a unit arc about an `a`-contact `z` with `b` inside and `b`'s partners on the radius-2 arc about `z`, `z` not a `b`-contact; locally consistent (the `a`-sector at `z` must point away from the arc). Corrected: "curvature at most 1; arcs of kind both have curvature 1". [hand, one mind; no saturated colouring realising a case-(i) unit arc was built] |
+| D4 | M-REDUCE-I | includes "finitely many interface arcs at each point of Σ"; loops excluded by M-EXTREME | — | GAP at exactly that clause (the brief's paraphrase dropped it); loops by V0-CLEAN's island fill | statement (a quotation slip) | **TRUE as M states it** [derived, two minds: M; VMW blind on the step], over honest saturation at `k = 5` (open), REG-J′₅ (open) and FS106-AE-MAP6's grade. M-EXTREME read and checked: a region's extreme points on its minimal enclosing circle (radius `< 1`) cannot carry the unit disc M-PINCH puts on the region's side |
+| D5 | W-NEG, B-RR's clause | — | "seven ⟹ A-ALL and B-RR, vacuously for large `R`, small `δ`"; A-ALL's negation ⟹ six by periodising the inscribed square | "B-RR failing ⟹ six" MISSTATED at A-ALL's fixed `R, δ`; TRUE for the joint statement with `R, δ` free | statement | **agree**: W's statement is my corrected form; the brief's "B-RR failing means `χ_m⁰ ≤ 6`" is the misstatement. A-ALL: two minds, two routes (W periodises; VMW cites row 131's disc form) |
+| D6 | REG-B | existence form TRUE at `k ≥ 7` (R7, exact); M-BLOCK-EQ | existence TRUE at `k ≥ 7` (hex7); universal form FALSE at `k = 7` (DECO-B, exact) | the same, VMW-DECO built blind; M-BLOCK-EQ re-derived | none of truth | **two statements, both settled**: REG-B_k (existence) TRUE at `k ≥ 7`; the universal form FALSE at `k = 7`. W's own object re-checked with this verifier's engine (`tools/fs111_vmw_decow.py`, `decow.out`): 14 squares, 0 improper, every colour's triple `S1 ~ H ~ S2` with `dmin(S1, S2) = 1` exactly, `dmax > 1`; W's `bigsq` plant fires. DECO-B: two minds, two objects (W's squares `[1/2, 13/25] × [−1/50, 1/50]`, dmin exactly 1; mine at offsets `8/100–9/100`, dmin `√3/2 + 16/100`), three engines agreeing on W's object |
+| D7 | are R7's down classes maximal? | open (M-SATC: "not decided here (not needed)") | — | yes: VMW-R7-MAX (reading (A)) | open item closed | **R7 is a maximal admissible cover with disjoint classes** (VMW-R7-COVER): (A) is exactly M-SATC (ii)'s condition `ℝ² = int F_j ∪ (F_j + S¹)` for every `j`. So at `k = 7` the cover form and the honest form coincide on one object |
+| D8 | W-NOREP | — (M-HALF, M-POLAR: no reflex sector at a saturated point) | TRUE at cone points of saturated colourings with H-DEN | not derived | proof, read sighted | **TRUE on saturated maps without cusps**; as stated for general saturated colourings, a **GAP**: the proof applies C11 at the partner points `y_a(p)` (§2.3 case (i)), where H2 is not among its hypotheses; on a map, `y_a(p)` is an essential boundary point (it is not in `S̃_a` by I-D1) sweeping a curve that meets finitely many vertices, so H2 holds there for all but finitely many `p`. [one mind (W), checked sighted] |
+| D9 | C-HULL-REG as stated | MISSTATED: GAP at (H1), (H2) | TRUE on saturated maps without cusps (C11 + NOBEND + NOREP) | common form under (H1), one-sidedness | scope | **consistent**: W's class (maps, no cusps) is where (H1), (H2) hold at bichromatic points once NOREP removes repeated-colour vertices; M's GAP is for general colourings. M's stub (d) (a saturated colouring with a bichromatic vertex of degree `≥ 4`) is excluded among maps without cusps by W-NOREP, over D8's grade |
+| D10 | the hexagonal seven-colouring | M-DEADLOCK: no local modification binds an edge | HEXSAT (2), HEX7-RIGID, FILL-FREE | calibration: every edge midpoint free for its own colour and one neighbour's | none | agree, three minds, three instruments |
+| D11 | C-SAT-T's forms | cover form TRUE (Zorn); honest existence form TRUE at `k ≥ 7`, GAP at `k = 5, 6`; process form undecided | "TRUE at `k ≥ 9`, GAP at 7, 8"; FILL-FREE | existence form TRUE at `k ≥ 7`; procedural form GAP (no monotone potential; colour-by-colour Zorn stalls at interfaces) | truth at `k = 7, 8` (D1); otherwise agree | **existence form TRUE at `k ≥ 7`** (R7), GAP at `k = 5, 6`; M's cover form is the right repair of the procedural gap (Zorn works for covers) — two minds on the gap's location (M; VMW blind) |
+
+### 2.3 Corrections to my stage 1 (made here, not in §1)
+
+- **M-PINCH:** my "GAP at tangential cusp partners" is withdrawn (D2): (H2) alone gives one-sidedness, by M's Step 1. The common form is M-PINCH/M-C11.
+- **M-REDUCE-I:** my GAP was against the brief's paraphrase; M's statement contains the clause (D4). Verdict: TRUE as M states it.
+- **W-NOREP:** "not derived" becomes: TRUE on saturated maps without cusps, GAP for general colourings at H2 at the partners (D8).
+- **VMW-R7-P+:** its theorem line claimed "every relative-interior point"; the proof covers the named point exactly and 69 sampled exact points
+  (`tools/fs111_vmw_pplus.py`, `pplus.out`; control: 0 of 69 Reuleaux-arc points are (P+)-free). Line corrected.
+- **VMW-R7-COVER** added (D7).
+
+### 2.4 Registrations scored
+
+- **W-P1** (0.65), "no saturated a.e.-proper 7-colouring exists": **FALSE** (R7).
+- **W-P2** (0.3), "the least `k` with a saturated a.e.-proper `k`-colouring is 9": **FALSE** (it is `≤ 7`; it equals `χ_m⁰(ℝ²)` exactly when C-SAT-T's
+  existence form holds at `χ_m⁰(ℝ²)`, and is 7 if `χ_m⁰(ℝ²) = 7`).
+- W's proposed stub "the saturated chromatic number (between 7 and 9)" collapses: that number lies in `[χ_m⁰(ℝ²), 7]`, and deciding it below 7 is
+  C-SAT-T at `k = 5, 6` — M's stub (a), honest saturation.
+
+### 2.5 Proposed for the close (I edit none of these files)
+
+- **`data/fs111/claims.md`, C-SAT-T:** "existence form TRUE at every `k ≥ 7` (R7: M exact, VMW blind hand + exact); GAP at `k = 5, 6`; cover form TRUE
+  (M-SATC); W's 'GAP at `k = 7, 8`' corrected". The brief-level wording "saturated if … no `x ∈ ∂_e S_j` is `j`-free, for every `j`" should always carry
+  its second half "for every `j ∈ P(x)`".
+- **`LEDGER.md` (FS-111's row):** R7 saturated in the strongest sense (VMW-R7-MAX) and a maximal cover (VMW-R7-COVER) [hand, one mind; exact checks];
+  VMW-DECO (a second DECO-B object); VMW-BLOCK-EQ as a second mind on M-BLOCK-EQ.
+- **M's draft G84** ("saturation pins interfaces between unit circles"): support, with two additions — "no thickness of the partner is needed" (the
+  step that makes it hold at cusp partners, R7's down sides), and R7 as the inhabitant in which every interface is of the (split) type.
+- **`plans/GROKKING-INSTANCES.md` §G21 (generator image):** W-P1 registered at 0.65 from recolourings of polygonal tilings, while W's own necessary
+  conditions admitted an all-arc tiling (R7) that the generator could not produce.
+- **W-CURV:** drop "exactly" (D3). **W-NOREP:** scope "on saturated maps" (D8).
+- **Open, minor, not proposed as a stub:** a saturated tight seven-colouring whose contact partners all have positive density ((P+); R7 fails it at its
+  down arcs). Since M-PINCH needs no partner density, (P+) bears on nothing downstream that I can find.
+- **`BIBLIOGRAPHY.md`:** with M's proposal, `[Polymath16threads]` thread 4, ag24ag24 (de Grey), 5 May 2018, 4:37 pm — the 4 + 3 Reuleaux colouring,
+  verified here in the held text (line 16; `ag24ag24` = de Grey by line 55); the classical two-sided rolling-ball theorem remains a debt (M, W and here).
+
+## Stage 2 — SAVED

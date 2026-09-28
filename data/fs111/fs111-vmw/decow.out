@@ -1,0 +1,10 @@
+[W-DECO] squares checked 14; improper 0; contacts at exactly 1: 14
+[W-DECO] colour 4: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 5: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 6: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 0: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 1: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 2: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO] colour 3: dmax(H,S1)<1 True, dmax(H,S2)<1 True, dmin(S1,S2)=1 True, dmax(S1,S2)>1 True -> no tight block structure True
+[W-DECO plant bigsq] improper pairs for S1_0,0: [('S1_0,0<0>', 'H0,0<0>', '1 in (dmin, dmax)')]
+[W-DECO] W's object PASSES this verifier's engine: a.e.-proper, tight, no class with tight block structure
