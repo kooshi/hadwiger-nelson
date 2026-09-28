@@ -1,0 +1,187 @@
+== Y3-STRIPCUT on YB2's strip (exact).  Y's colours: 1..6 = P, G, B, M, R, O; colour 4 = M; C_m = YB2's T_m
+   T-1 colour M: corners (-0.500000, 0.866025), (-0.250000, 0.968246), (-0.250000, 0.968246), (-0.250000, 1.834271), (-0.750000, 1.834271)
+   T2 colour M: corners (1.000000, 0.866025), (1.250000, 0.968246), (1.250000, 0.968246), (1.250000, 1.834271), (0.750000, 1.834271)
+   |Q - (-3/4, Y)|^2 = 1.000000: = 1
+   |Q - apex A_{-1} (-1/4, sqrt15/4)|^2 = 1.000000: = 1
+   |Q - (5/4, Y)|^2 = 1.000000: = 1
+   |Q - apex A_1 (3/4, sqrt15/4)|^2 = 1.000000: = 1
+   |Q - valley V_2 (1, sqrt3/2)|^2 = 1.500000: > 1
+   |Q - valley V_-1 (-1/2, sqrt3/2)|^2 = 1.500000: > 1
+-- T2 on the cut, Q + (3/5, -4/5): (0.850000, 1.034271) [on omega(Q)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U-1, U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0, T3
+     colour 6 (O) blocked by: T4
+-- T2 just inside the cut, Q + 0.97(3/5, -4/5): (0.832000, 1.058271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U-1, U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0, T3
+     colour 6 (O) blocked by: T4
+-- T2 just outside the cut, Q + 1.03(3/5, -4/5): (0.868000, 1.010271) [outside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U-1, U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0, T3
+     colour 6 (O) blocked by: T1, T4
+-- T2 on the cut, Q + (4/5, -3/5): (1.050000, 1.234271) [on omega(Q)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T4
+-- T2 just inside the cut, Q + 0.97(4/5, -3/5): (1.026000, 1.252271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T4
+-- T2 just outside the cut, Q + 1.03(4/5, -3/5): (1.074000, 1.216271) [outside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1, U4
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T1, T4
+-- T2 on the cut, Q + (12/13, -5/13): (1.173077, 1.449656) [on omega(Q)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T1, T4
+-- T2 just inside the cut, Q + 0.97(12/13, -5/13): (1.145385, 1.461194) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T1, T4
+-- T2 just outside the cut, Q + 1.03(12/13, -5/13): (1.200769, 1.438117) [outside B(Q,1)]
+     colour 1 (P) blocked by: U0, U3
+     colour 2 (G) blocked by: U1, U4
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0
+     colour 6 (O) blocked by: T1, T4
+-- T2 inner corner region (3/4 + 1/20, Y - 1/20): (0.800000, 1.784271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0, T3
+     colour 6 (O) blocked by: T4
+-- T2 inner part (3/4 + 1/5, Y - 1/10): (0.950000, 1.734271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0
+     colour 2 (G) blocked by: U1
+     colour 3 (B) blocked by: U2
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T0, T3
+     colour 6 (O) blocked by: T1, T4
+-- T-1 on the cut, Q + (-3/5, -4/5): (-0.350000, 1.034271) [on omega(Q)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2, U1
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3
+     colour 6 (O) blocked by: T-2, T1
+-- T-1 just inside the cut, Q + 0.97(-3/5, -4/5): (-0.332000, 1.058271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2, U1
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3
+     colour 6 (O) blocked by: T-2, T1
+-- T-1 just outside the cut, Q + 1.03(-3/5, -4/5): (-0.368000, 1.010271) [outside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2, U1
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T-2, T1
+-- T-1 on the cut, Q + (-4/5, -3/5): (-0.550000, 1.234271) [on omega(Q)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3
+     colour 6 (O) blocked by: T1
+-- T-1 just inside the cut, Q + 0.97(-4/5, -3/5): (-0.526000, 1.252271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3
+     colour 6 (O) blocked by: T1
+-- T-1 just outside the cut, Q + 1.03(-4/5, -3/5): (-0.574000, 1.216271) [outside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1, U-4
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T1
+-- T-1 on the cut, Q + (-12/13, -5/13): (-0.673077, 1.449656) [on omega(Q)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T1
+-- T-1 just inside the cut, Q + 0.97(-12/13, -5/13): (-0.645385, 1.461194) [inside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T1
+-- T-1 just outside the cut, Q + 1.03(-12/13, -5/13): (-0.700769, 1.438117) [outside B(Q,1)]
+     colour 1 (P) blocked by: U-3, U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1, U-4
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T1
+-- T-1 inner corner region (-1/4 + -1/20, Y - 1/20): (-0.300000, 1.784271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3
+     colour 6 (O) blocked by: T-2, T1
+-- T-1 inner part (-1/4 + -1/5, Y - 1/10): (-0.450000, 1.734271) [inside B(Q,1)]
+     colour 1 (P) blocked by: U0
+     colour 2 (G) blocked by: U-2
+     colour 3 (B) blocked by: U-1
+     colour 4 (M) blocked by: NO OTHER TILE
+     colour 5 (R) blocked by: T-3, T0
+     colour 6 (O) blocked by: T-2, T1
+-- summary: colours no other tile forbids (T_-1 and T_2 excluded)
+     T2 on the cut, Q + (3/5, -4/5)                       [on omega(Q)   ]: [4]
+     T2 just inside the cut, Q + 0.97(3/5, -4/5)          [inside B(Q,1) ]: [4]
+     T2 just outside the cut, Q + 1.03(3/5, -4/5)         [outside B(Q,1)]: [4]
+     T2 on the cut, Q + (4/5, -3/5)                       [on omega(Q)   ]: [4]
+     T2 just inside the cut, Q + 0.97(4/5, -3/5)          [inside B(Q,1) ]: [4]
+     T2 just outside the cut, Q + 1.03(4/5, -3/5)         [outside B(Q,1)]: [4]
+     T2 on the cut, Q + (12/13, -5/13)                    [on omega(Q)   ]: [4]
+     T2 just inside the cut, Q + 0.97(12/13, -5/13)       [inside B(Q,1) ]: [4]
+     T2 just outside the cut, Q + 1.03(12/13, -5/13)      [outside B(Q,1)]: [4]
+     T2 inner corner region (3/4 + 1/20, Y - 1/20)        [inside B(Q,1) ]: [4]
+     T2 inner part (3/4 + 1/5, Y - 1/10)                  [inside B(Q,1) ]: [4]
+     T-1 on the cut, Q + (-3/5, -4/5)                     [on omega(Q)   ]: [4]
+     T-1 just inside the cut, Q + 0.97(-3/5, -4/5)        [inside B(Q,1) ]: [4]
+     T-1 just outside the cut, Q + 1.03(-3/5, -4/5)       [outside B(Q,1)]: [4]
+     T-1 on the cut, Q + (-4/5, -3/5)                     [on omega(Q)   ]: [4]
+     T-1 just inside the cut, Q + 0.97(-4/5, -3/5)        [inside B(Q,1) ]: [4]
+     T-1 just outside the cut, Q + 1.03(-4/5, -3/5)       [outside B(Q,1)]: [4]
+     T-1 on the cut, Q + (-12/13, -5/13)                  [on omega(Q)   ]: [4]
+     T-1 just inside the cut, Q + 0.97(-12/13, -5/13)     [inside B(Q,1) ]: [4]
+     T-1 just outside the cut, Q + 1.03(-12/13, -5/13)    [outside B(Q,1)]: [4]
+     T-1 inner corner region (-1/4 + -1/20, Y - 1/20)     [inside B(Q,1) ]: [4]
+     T-1 inner part (-1/4 + -1/5, Y - 1/10)               [inside B(Q,1) ]: [4]
+exit=0

@@ -1,0 +1,70 @@
+== Y3-LEG and the facts Y3-DISK-T* rests on (exact, in the tower Q(sqrt 5, sqrt 10+2*sqrt5, sqrt 1/phi, sqrt r^2, sqrt 3, sqrt 4r^2-1, sqrt r^2u^2-m^2) )
+   |q2 - Z^L_0|^2 = 1: True;  |q2 - C_0|^2 = 1: True  (so q2 is a point of omega(C_0) and omega(Z^L_0); the other is D_0: True and C_0 + Z^L_0 - q2 = D_0: True)
+   |A_0 - q2|^2 = phi^2: True;  |A_0 - C_0|^2 = phi^2: True
+   the leg's line is the perpendicular bisector of C_0, q2: (C_0 - q2).leg = 0: True;  the midpoint on the leg's line: True
+   leg direction e(126): True;  q2 - C_0 = -e(36): True
+   K = (-0.395472, 1.070051): |K - C_0|^2 = 1: True; |K - q2|^2 = 1: True; on the leg's line: True; direction of K - C_0 = 276.000000 deg
+   K' = (-1.413545, 2.471310): |K' - C_0|^2 = 1: True; |K' - q2|^2 = 1: True; on the leg's line: True; direction of K' - C_0 = 156.000000 deg
+   K on the SEGMENT A_0 Y_0 (Y2's leg): 0 < d < s with d = (K - A_0).u: True  (d ~ 0.672816, s ~ 0.786151);  K' beyond Y_0: True
+   |q2 - Y_0|^2 < 1 (Y2's Y_0 = YB2's X_0): True  (~ 0.816543)
+
+== Y3-DISK-T*: the region V = W_0 ∩ B(q2, 1) (Y2's T2_0 ∩ B(q2, 1)), at named points, against the moved disk (Y2-MOVE = YB2 O3)
+   T*: q2 (-1.309017, 1.476788) (angle 131.5536), p* (-1.389196, 1.607046) (rim angle 130.8415), rho* (-1.285828, 1.690889) (rim angle 127.2510)
+-- centroid (-0.388859, 1.236193): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by P0
+     violet  blocked by no unchanged tile | S0 does not straddle
+-- near Z^L_0 (-0.324985, 1.428669): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by P0
+     violet  blocked by no unchanged tile | S0 does not straddle
+-- near Y_0 (-0.447442, 1.176631): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, R1, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by P0
+     violet  blocked by no unchanged tile | S0 does not straddle
+-- near K (-0.394149, 1.103279): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, R1, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by no unchanged tile
+     violet  blocked by P1 | S0 STRADDLES
+-- side Z^L_0-Y_0 (-0.385883, 1.310957): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by P0
+     violet  blocked by no unchanged tile | S0 does not straddle
+-- leg Y_0-K (-0.424788, 1.127926): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, R1, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by no unchanged tile
+     violet  blocked by P1 | S0 STRADDLES
+-- chord K-Z^L_0 (-0.355906, 1.269697): in B(q2, 1): True; on W_0's side of its leg and of its side Z^L_0-Y_0: True
+     red     blocked by R0, Z
+     blue    blocked by no unchanged tile | T* STRADDLES
+     green   blocked by T0, W1
+     yellow  blocked by P4 | T1 (cut by the move) straddles
+     orange  blocked by P0
+     violet  blocked by no unchanged tile | S0 does not straddle
+-- summary: colours admissible at each named point (blocked neither by an unchanged tile nor by T* / the unchanged S_0):
+     centroid          : ['violet']
+     near Z^L_0        : ['violet']
+     near Y_0          : ['violet']
+     near K            : ['orange']
+     side Z^L_0-Y_0    : ['violet']
+     leg Y_0-K         : ['orange']
+     chord K-Z^L_0     : ['violet']
+exit=0

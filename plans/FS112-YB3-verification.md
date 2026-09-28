@@ -142,3 +142,151 @@ coverage guard at 96 segments per arc showed 1–3 "holes" at unit-arc ends, eve
 two tiles subdividing one arc differently) and gone at 2,000 segments: an artefact of the guard, disclosed; the guard now uses 2,000.
 
 ## Stage 2 — SAVED
+
+## Stage 3 (in progress): my verdicts on the nine claims, committed before I open Y3's record
+
+### 3.1 Y3-END-NEEDS — derived blind; **TRUE for a chain of two or more vertices; FALSE as stated, by an exact fragment (BOWTIE)**
+
+*Setting, as the claim's words give it:* a terminal valid map (unit arcs allowed; terminal = no MERGE, MERGE-RAY or SHAVE at any vertex);
+`E` a stuck vertex with `P_cl(E) = {g, c, h}` — `c`-horns along `±a`, `g` filling the `+n` side, `h` the `−n` side (N4-STUCK (i)–(ii), which
+with three colours at `E` need no NB-4); `E`'s horns' upper arcs unit arcs of `ω(N)`, `N = E + n` (`υ_E = 1`). I use, at the grades the claim
+list gives them with unit arcs allowed, N3-DEG's cone (Y's walk, row 5 (b): out-type contacts at both antipodes; horn curvatures in `[−1, 1]`),
+W-MERGE as written (Y's retraction 1), N4-SHAVE's criterion (blocked iff doubly shadowed), and the shadow calculus of N4 §2.1 completed by two
+unit-arc cases I derive here: **(i) a tile beyond an arc of `ω(v)` (outside `B(v, 1)`, touching `ω(v)` along the arc of directions `u ∈ I`)
+shadows near `v` every direction `d` with `d·u > 0` for some `u ∈ I`** (for `z = v + εd`, `|z − (v + u)|² = 1 − 2ε d·u + ε²`) — the `C = 0` case;
+**(ii) an in-type tile at `w ∈ ω(v)` (inside `B̄(v, 1)` near `w`, with interior points inside `B(v, 1)`) shadows near `v` every point `z` with
+`|z − w| > 1`** (`sup ≥ |z − w| > 1`, and `dist < 1` through the interior points).
+
+**Step 1 — `c` at `N` in the pinch** (the claim's first clause): TRUE. No MERGE of `c` at `E` needs `D_c(E)` the line, so out-type `c`-contacts
+at `E ± n` (N3-DEG): `c ∈ P_cl(N)`. `E`'s `c`-horns lie outside `B(N, 1)` and touch `ω(N)` along their upper arcs, directions `[270°, 270° + φ₀]`
+and `[270° − φ₀, 270°]` from `N`; by (i) they shadow near `N` every direction in `(180° − φ₀, 360° + φ₀)`; N-E0 puts `c` at `N` in `[φ₀, 180° − φ₀]`:
+the pinch with `δ = φ₀`, the angular half-width of `E`'s unit arcs seen from `N`.
+
+**Step 2 — "`h` tangent to `±a` at `N`"**: TRUE **iff `λ_E > −1`**. No SHAVE at `E` needs an `h`-shadow on `E`'s horn near `E`. The sources are
+`h`-tiles touching `ω(E)`; off `E ± n` N3-CLEAR clears the tip. At `N`: out-type tangent to `±a` (the claim's); out-type non-tangent shadows
+only inside `B(N, 1)` (N4 §2.1), missing the horn; in-type is Siamese with `h`'s sector below `E`, which lies outside `B̄(N, 1)`: a straddle. At
+`E − n`: out-type shadows a set closed downward that must miss `h`'s flank below the horn, hence misses the horn (N4-FLANK mirrored); **in-type
+`h` at `E − n` is possible exactly when `h`'s flank lies in `B̄(E − n, 1)` near `E`, i.e. `λ_E = −1` (`E`'s lower arcs unit arcs of `ω(E − n)`),
+and then by (ii) it shadows the whole horn**. So the clause fails at `λ_E = −1`, and holds otherwise.
+
+**Step 2′ — when `λ_E > −1` is forced** [hand, one mind]: if `E − n` is a stuck vertex of the chain in N4-PROP's sense (its cone colour `g`, with
+`c` filling its `−n` side, tangent to `±a` as the lower flank of its horns), then `λ_E = −1` is impossible: `E`'s `c`-horns would lie beyond arcs of
+`ω(E − n)` and by (i) shadow near `E − n` every direction in `(−φ₁, 180° + φ₁)`, including the directions just below `±a` where `c` sits there.
+So **for a chain of two or more vertices, Step 2 holds.** (END-A is such a chain: `λ_E = 0`.)
+
+**Step 3 — "to block the MERGE there, `h`'s sectors horns and two upper flank colours outside `{g, c, h}`, so `|P_cl(N)| ≥ 5`"**: TRUE (given
+Step 2). `h` has two sectors at `N` (tangent to `+a` and to `−a`, the pinch between). No MERGE of `h` ⟹ `D_h(N)` the line ⟹ (N3-DEG) out-type `h`
+at `N ± n` and `h`'s sectors cusp horns along `±a`. Upper flanks `x₁` (+a), `x₂` (−a): not `h`; not `c` (only in the pinch); not `g` (the flank's
+tile at `N` lies outside `B̄(E, 1)`, an out-type `g`-contact of `E` that would force `D_g(E) ⊆ {d·n ≤ 0}` while `g` fills `E`'s `+n` side); and
+`x₁ ≠ x₂` (else two `x`-sectors at `N`, separated by the pinch; no MERGE needs out-type `x` at `N − n = E`, but `x ∉ P_cl(E)`). The lower flank
+`y₁` of the `+a` horn is not `h`, not `c`, not `x₁` (both flanks `x₁` = a MERGE of `x₁` through the horn, `D_{x₁}(N)` non-degenerate), not `x₂`
+(two sectors): five colours at `N`.
+**Two sharpenings of mine** [hand, one mind]: (a) **`y₁ ≠ g`**: a `g`-tile below `N`'s horn crosses `ω(E)` unless `N`'s lower arcs are `ω(E)`
+itself (`κ_− = −1`); then `E`'s `g`-sector (on `ω(N)` on both sides of `E`) and `N`'s `g`-tile (on `ω(E)` beside `N`) contain pairs at distance²
+`≈ 1 + 2θθ′ > 1` beside pairs below 1 — a straddle. So `P_cl(N) = {c, h, x₁, x₂, y}` **exactly**, `y = y₁ = y₂` the sixth colour, `g ∉ P_cl(N)`.
+(b) **`N` must centre unit arcs of total length at least 180°**: with five colours at `N`, every tile-interior point of `ω(N)` carries `g` (N-E1),
+and two such points `60°` apart are at distance 1; so the tile-interior part `S` of `ω(N)` has `S ∩ (S + 60°) = ∅`, `|S| ≤ 180°` (Y's W1 (ii)
+argument, applied at `N`).
+
+**Step 4 — "to block the SHAVE too, the horns' upper arcs unit arcs of `ω(N + n)` and, at `N + n`, two distinct upper flank colours outside five
+used colours — a seventh colour"**: TRUE (given Step 2). An `x₁`-shadow on `N`'s `+a` horn: none from `E` (`x₁ ∉ P_cl(E)`); out-type `x₁` at
+`N + n` shadows a set closed upward that must miss the `x₁` flank, so misses the horn; **in-type `x₁` at `N + n` requires the flank inside
+`B̄(N + n, 1)`, i.e. the horn's upper arc on `ω(N + n)`** (else the flank's points just above the arc straddle with the in-type tile). A `y`-shadow:
+none from `E`; in-type `y` at `N + n` impossible (`y`'s flank below `N` is outside `B̄(N + n, 1)`); so out-type `y` at `N + n`, tangent to `+a`, and
+likewise to `−a`. `h` is out-type at `N + n` (Step 3) and, by (i) applied to `N`'s `h`-horns (beyond arcs of `ω(N + n)`), confined to a pinch there;
+so `y` has two sectors at `N + n` ⟹ (no MERGE) `y`-horns along `±a` at `N + n`, with upper flanks `z₁, z₂`: not `y`; not `h` (pinch); not `c`, `x₁`,
+`x₂` (their sectors at `N` have `d·n > 0`, while `z_i`'s tile at `N + n` lies outside `B̄(N, 1)`); `z₁ ≠ z₂` (two sectors at `N + n` separated by
+`h`'s pinch; degenerate only with an out-type `z` at `N`, i.e. `z ∈ {h, y}`). So `z₁, z₂` are two distinct colours outside
+`{c, h, x₁, x₂, y}`, of which only `g` remains: **a seventh colour.**
+
+**The conclusion, "So a stuck chain cannot end at a unit arc in a terminal map while `E` has three colours":**
+- **TRUE for a chain of two or more vertices** (`E − n` stuck in N4-PROP's sense), [hand, one mind (mine, blind), over the chain steps named
+  above].
+- **FALSE as stated, for a chain of one vertex** — the exception at Step 2 is realised. **BOWTIE** (stage 2, `tools/fs112_yb3_frags.py bowtie`)
+  is an exact valid local fragment with the following properties.
+  - **`E` is stuck with `P_cl(E) = {1, 2, 3}`.** Its `c = 2` horns lie between two unit circles, `ω(N)` above and `ω(S)` below (`υ_E = 1`,
+    `λ_E = −1`). `D_2(E)` is the line: the only 2-contacts are `CN` (out-type at `N`) and `CS` (out-type at `S`). Colour 1 is blocked by `G` and
+    colour 3 by `H` at every named horn point: `G` is the in-type tile at `N`, `H` the in-type tile at `S`, each a circular sector of radius 1
+    whose arc bounds the horns.
+  - **`N` is not stuck.** `P_cl(N) = {1, 2, 4, 5}`, **`h = 3` absent**, each colour one sector, no horn; `S` likewise. No operation applies at
+    `E`, `N` or `S`.
+  - **Every unit arc's end is interior**, with its neighbourhood fully coloured.
+
+  So the claim's clause "to keep `E` stuck, … `h` tangent to `±a` at `N`" has an exact counter-configuration, and a stuck vertex can end a chain
+  at unit arcs **on both sides** with neither neighbour stuck. The fragment is local; whether a tight map of the plane contains it is Q-full's
+  question. Grade: [tools, exact; one fragment, mine] + [hand, one mind] for reading it against the clause.
+- **Corrected statement (proposed):** *"If `E` is the upper end of a stuck chain of at least two vertices (so `λ_E > −1`), with `P_cl(E) = {g, c, h}`
+  and `υ_E = 1`, then a terminal map needs a seventh colour at `N + n`; a single stuck vertex may end at unit arcs on both sides (`υ_E = 1`,
+  `λ_E = −1`, shadowed by in-type tiles at both antipodes: the tactic's self in-contact), as BOWTIE realises locally."*
+- **Bearing (for the owner and the proof side, stated plainly):** the proof side's stuck-ray question must include the one-vertex "bowtie" end
+  as a residue; FS-110's N4-PROP forced a stuck vertex's neighbours to be stuck, and with unit arcs that step fails exactly here.
+
+### 3.2 Y3-END-A and Y3-END-B — **TRUE on my rebuilds** [tools, exact; one rebuild each, mine; stuckness exact at the antipodes and at named points, hand for the rest]
+
+- **Y3-END-A**: rebuilt from its words (reading in 2.2), every clause realised: **valid** (39/39 pairs ACCEPT); **arc-closed at the unit arcs' ends**
+  (`E` and `V_2±` interior, neighbourhoods fully coloured); **`P_1` and `E` stuck** (the two-sector colour's contacts on the vertex's unit circle
+  exactly out-type at both antipodes; one horn per ray; both flank colours blocked at every named point of each horn tip — and by the hand shadow
+  bookkeeping, the whole horn near the vertex is doubly shadowed: at `E`, `σ_2 = f̃(1/2) = 1 = κ_+` from `H1±` and `σ_4 = f(0) = 0 = κ_−` from `W±`;
+  at `P_1`, `σ_5 = f̃(1/3) = 1/2 = κ_+`, `σ_3 = f(0) = 0 = κ_−`); **a MERGE of 4 at `N` available** (`D_4(N)` the half-plane; the merged fragment
+  exact-valid). My choices beyond the words (named in 2.2): the colours `a_1, a_0, a_{−1} = 2, 5, 6`; where the horns end (rational points); the band
+  tops; the closing tiles `Q±` (colour 6 — the one colour free there).
+- **Y3-END-B**: rebuilt, every clause realised: **valid** (44/44); `P_cl(N) = {1, 3, 4, 5, 6}`; **no MERGE at `N`** (`D_4(N)` the line: `L2` out at
+  `E`, `U4` out at `N + n`; the others one sector each); **a SHAVE of `N`'s 4-horns by their lower flank available** (no tile blocks 1 or 5 at named tip
+  points; both shaved fragments exact-valid). **One consequence the claim does not state** [hand, one mind]: END-B is not arc-closed (it is not
+  claimed to be), and by 3.1 Step 3 (b) no valid completion of `N`'s neighbourhood exists unless unit arcs centred at `N` total at least 180° —
+  END-B carries `2·arcsin(5/13) ≈ 45.2°` (E's two arcs); in particular the tiles crossing `ω(N)` beside `V_2±` must be colour 2, the only colour not
+  at `N`.
+
+### 3.3 Y3-LEG — **TRUE** [tools, exact; one mind] (`tools/fs112_yb3_pins.py leg`, `data/fs112/fs112-yb3/leg.out`)
+
+In YB2's disk (Y2's labels as the claim uses them): `|A_0 − q2|² = |A_0 − C_0|² = φ²` exactly; `(C_0 − q2)·(Y_0 − A_0) = 0` and the midpoint of `C_0q2`
+on the leg's line: **the leg's line is the perpendicular bisector of `C_0, q2`**; `|C_0 − q2| = 1` (`q2 ∈ ω(C_0)` by definition), so `ω(C_0) ∩ ω(q2)`
+is the pair of apexes of the two equilateral triangles on `C_0q2` — both on the bisector: `K = C_0 + e(276°)` at distance `≈ 0.6728` from `A_0` (on
+the **segment** `A_0Y_0`, `|A_0Y_0| = √(1/φ) ≈ 0.7862`) and `K′ = C_0 + e(156°)` on the line beyond `Y_0`. Also exact: `q2 − C_0 = −e(36°)`, the leg's
+direction `e(126°)`, `|q2 − Y_0|² ≈ 0.8165 < 1`, and `C_0 + Z^L_0 − q2 = D_0` (the other point of `ω(C_0) ∩ ω(Z^L_0)`).
+
+### 3.4 Y3-STRIPCUT — **TRUE, with its list of tiles one-sided** [tools, exact at 22 named points; one mind] (`pins.py strip`, `strip.out`)
+
+On YB2's strip (Y's `C_m` = YB2's `T_m`; colour 4 = marble): `ω(Q)` passes exactly through `(−3/4, top)` and `A_{−1}`'s apex `(−1/4, √15/4)`, and
+through `(5/4, top)` and the apex `A_1 = (3/4, √15/4)`; the valleys `V_2`, `V_{−1}` (whose top sectors are forced to 4, YB2-FORCE / Y2-FORCE) lie outside
+`B(Q, 1)` (`|·|² = 3/2`), so each tile's outer part keeps 4. **At all 22 named points** (per tile: three points of `ω(Q)` inside the tile, each with a
+point just inside and just outside the cut, and two points of the inner part), **4 is the only colour no other tile forbids**. The blockers:
+- **`C_{−1}`'s inner part**: colours 1, 2, 3 blocked only by midline arches (`U0`, `U−2`, `U−1` at every point; `U−3`, `U−4` at some), 5 by
+  **`C_{−3}`** (and `C_0` at some points), 6 by **`C_1`** (and `C_{−2}`) — exactly the claim's "a midline arch or `C_{−3}` or `C_1`".
+- **`C_2`'s inner part**: 1, 2, 3 by midline arches, 5 by **`C_0`** (and `C_3`), 6 by **`C_4`** (and `C_1`) — the mirror image under `x ↦ 1/2 − x`
+  (which fixes `Q` and exchanges `C_{−1} ↔ C_2`, `C_{−3} ↔ C_4`, `C_1 ↔ C_0`).
+Both cuts are needed to free 4 at `Q`, so "the cut also needs a change to a midline arch or to `C_{−3}` or `C_1`" is **true as a necessary condition**;
+as a list it names `C_{−1}`'s side only — **precision owed**: "… and, for `C_2`'s part, to a midline arch or to `C_0` (one of `Q`'s own tiles) or `C_4`".
+
+### 3.5 Y3-R1 — **TRUE, and the length bound sharpens to `2V`** [hand, one mind]
+
+`f(x) − x = −x²/(1 + x) ≤ 0` for `x > −1` and `f̃(x) − x = x²/(1 − x) ≥ 0` for `x < 1`, each zero only at `x = 0`. So `λ_k ≤ f(λ_{k+1}) ≤ λ_{k+1}` and
+`υ_{k−1} ≤ f̃(υ_{k−1}) ≤ υ_k`: both non-decreasing, and a consecutive equality forces the later term (then the earlier) to be 0. (At a unit arc,
+`λ = −1` or `υ = 1`, the next inequality has no finite solution: the chain ends there.) Infinite toward `+k`: if some `υ_m > 0`, `1/υ` drops by at least
+1 per step and `υ` passes 1 — so every `υ_k ≤ 0` and every `λ_k < υ_k ≤ 0`. Infinite toward `−k`: if some `λ_m < 0`, `1/λ` rises by at least 1 per
+step down and `λ` passes `−1` — so every `λ_k ≥ 0` and `υ_k > 0`. A one-sided infinite chain therefore has its `λ` (resp. `υ`) strictly monotone and
+nonzero: infinitely many distinct curvatures, hence radii; a map with finitely many arc radii (every doubly periodic map, every map of `𝓜_K`'s
+periodic designs) has none. **Length:** monotone and repeating only at 0, the nonzero `λ_k` are distinct (at most `V` indices); where `λ_k = 0`,
+`υ_k > 0`, and those `υ_k` are distinct (at most `V` more) — so **a chain has at most `2V` vertices**, within the claim's `3V + 3`.
+
+### 3.6 Y3-T2-BUDGET — **TRUE** [hand, one mind; the strip clause exact] (`tools/fs112_yb3_r3.py`, `r3.out`)
+
+For any pair `(u, v)` with common unit points `w₀, w₀′`, `u w₀ v w₀′` is a unit rhombus, so `u + v = w₀ + w₀′`. T2 at both points means `u` emits
+unit arcs of `ω(w₀)` and `ω(w₀′)`: `w₀, w₀′` are among the centres of the unit arcs `u` emits — at most three for a trivalent `u` (one per edge;
+two edges on one circle count once) — and `v = w_i + w_j − u` for two of them: at most `C(3, 2) = 3` partners, at determined places. The strip
+(exact, YB2's rebuild): every `(V, A)` pair (18 listed) is complementary, at distance `≈ 0.7569`, **not** a completion (a valley emits arcs about
+two midline vertices only, whose completion is the mirror valley), and saved by T2 at one point only — so the printed colouring does not meet the
+pattern; the claim's hedge ("whether some other colouring of the strip's geometry avoids them is not claimed") stands.
+
+### 3.7 Y3-R3 — **TRUE at both held positives** [tools, exact; one mind] (`tools/fs112_yb3_r3.py strip disk`, `r3.out`)
+
+Every close complementary pair of vertices, listed exhaustively on YB2's two rebuilds, with its two common unit points tested exactly (is it a
+vertex, how many colours, does each member emit a unit arc centred there) and tested for being a rhombus completion:
+- **the strip** (24 pairs with a member in one period): 18 `(V, A)` pairs — saved at one four-colour midline vertex (both members emit arcs of its
+  unit circle), the other point **an edge vertex** (two colours), not completions; 3 `(V_m, V′_m)` (√3) and 3 `(A_j, A′_j)` (√15/2) — completions,
+  saved at **both** points (T2 twice);
+- **the disk** (20 pairs): each saved at one four-colour vertex `A_j`; none a completion; the other point **on the rim** (`C_k`, `D_k`; 10 pairs) or
+  **outside the disk, not a vertex** (Y2's `w*`, YB2's `Q_k`; 10 pairs).
+So "saved at one common unit point by a four-colour vertex, and at both exactly when a rhombus completion" holds at both, and the unsaved second
+points are the stop points. The disk's `(A_0, y)` (a ring change point, not a vertex) saved at both by (S1): Y2's §5.3 (d) (exact at the arcs, the
+seam points placed in float) — not re-checked here; the claim's words for it are Y2's, which I read and do not dispute.

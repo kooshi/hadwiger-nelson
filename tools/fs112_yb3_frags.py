@@ -57,19 +57,21 @@ def poly(*v):
 # ============================================================ my own point-to-tile routine (exact)
 def _cands_point_piece(z, pc):
     """(A, B) with the candidate distance |sqrt(A) + B| from z to the piece pc: every extreme of |z - p| over p in pc is among them."""
+    Tz = z[0].T
+    zero = Tz(0)
     out = []
     for X in pc.ends():
-        out.append((K.n2(K.vsub(z, X)), q(0)))
+        out.append((K.n2(K.vsub(z, X)), zero))
     if pc.kind == "S":
         v = K.vsub(pc.Q, pc.P)
         t = K.dot(K.vsub(z, pc.P), v)
         if t.sign() > 0 and t < K.n2(v):          # the foot is interior to the segment
             c = K.cross(K.vsub(z, pc.P), v)
-            out.append((c * c / K.n2(v), q(0)))
+            out.append((c * c / K.n2(v), zero))
     else:
         w = K.vsub(z, pc.C)
         if K.is0v(w):
-            out.append((q(0), pc.rho))
+            out.append((zero, pc.rho))
         else:
             if pc.has_dir(w):                        # the arc point nearest z (on the ray from the centre through z)
                 out.append((K.n2(w), -pc.rho))
@@ -101,16 +103,17 @@ def blocked(z, tiles, colour, exclude=()):
 
 def _touch_points(v, pc):
     """the points of the piece pc at distance exactly 1 from v, among its extreme candidates (vertex, segment foot, arc radial point)."""
+    one = v[0].T(1)
     out = []
     for X in pc.ends():
-        if K.n2(K.vsub(X, v)) == q(1):
+        if K.n2(K.vsub(X, v)) == one:
             out.append(X)
     if pc.kind == "S":
         d = K.vsub(pc.Q, pc.P)
         t = K.dot(K.vsub(v, pc.P), d)
         if t.sign() > 0 and t < K.n2(d):
             F = K.vadd(pc.P, K.vmul(t / K.n2(d), d))
-            if K.n2(K.vsub(F, v)) == q(1):
+            if K.n2(K.vsub(F, v)) == one:
                 out.append(F)
     else:
         w = K.vsub(v, pc.C)

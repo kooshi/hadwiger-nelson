@@ -1,0 +1,9 @@
+== Y3-LEG and the facts Y3-DISK-T* rests on (exact, in the tower Q(sqrt 5, sqrt 10+2*sqrt5, sqrt 1/phi, sqrt r^2, sqrt 3, sqrt 4r^2-1, sqrt r^2u^2-m^2) )
+   |q2 - Z^L_0|^2 = 1: True;  |q2 - C_0|^2 = 1: True  (so q2 is a point of omega(C_0) and omega(Z^L_0); the other is D_0: True and C_0 + Z^L_0 - q2 = D_0: True)
+   |A_0 - q2|^2 = phi^2: True;  |A_0 - C_0|^2 = phi^2: True
+   the leg's line is the perpendicular bisector of C_0, q2: (C_0 - q2).leg = 0: True;  the midpoint on the leg's line: True
+   leg direction e(126): True;  q2 - C_0 = -e(36): True
+   K = (-0.395472, 1.070051): |K - C_0|^2 = 1: True; |K - q2|^2 = 1: True; on the leg's line: True; direction of K - C_0 = 276.000000 deg
+   K' = (-1.413545, 2.471310): |K' - C_0|^2 = 1: True; |K' - q2|^2 = 1: True; on the leg's line: True; direction of K' - C_0 = 156.000000 deg
+   K on the SEGMENT A_0 Y_0 (Y2's leg): 0 < d < s with d = (K - A_0).u: True  (d ~ 0.672816, s ~ 0.786151);  K' beyond Y_0: True
+   |q2 - Y_0|^2 < 1 (Y2's Y_0 = YB2's X_0): True  (~ 0.816543)

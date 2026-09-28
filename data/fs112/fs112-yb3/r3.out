@@ -1,0 +1,137 @@
+== the strip (YB2's rebuild; pairs with a member in one period x in [0, 3/2), edge vertices included): 112 vertices, 120 unit-arc pieces
+-- (-0.50000, +0.86603) ['B', 'G', 'M'] | (+0.25000, +0.96825) ['O', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.25000, +1.83427): vertex ['M', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.75000, +0.96825) ['G', 'M', 'O'] | (+0.00000, +0.86603) ['B', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (-0.50000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.25000, +1.83427): vertex ['M', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.75000, -0.96825) ['B', 'P', 'R'] | (+0.00000, -0.86603) ['G', 'M', 'O']  |uv| ~ 0.756934; rhombus completion: False
+     w (-0.50000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.25000, -1.83427): vertex ['G', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.50000, -0.86603) ['O', 'P', 'R'] | (+0.25000, -0.96825) ['B', 'G', 'M']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.25000, -1.83427): vertex ['G', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.00000, +0.86603) ['B', 'P', 'R'] | (+0.00000, -0.86603) ['G', 'M', 'O']  |uv| ~ 1.732051; rhombus completion: True
+     w (-0.50000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+0.00000, +0.86603) ['B', 'P', 'R'] | (+0.75000, +0.96825) ['G', 'M', 'O']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.25000, +1.83427): vertex ['O', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.25000, +0.96825) ['B', 'M', 'R'] | (+0.50000, +0.86603) ['G', 'O', 'P']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.25000, +1.83427): vertex ['O', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.25000, -0.96825) ['G', 'O', 'P'] | (+0.50000, -0.86603) ['B', 'M', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.25000, -1.83427): vertex ['B', 'G'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.00000, -0.86603) ['G', 'M', 'O'] | (+0.75000, -0.96825) ['B', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.25000, -1.83427): vertex ['B', 'G'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.50000, +0.86603) ['G', 'O', 'P'] | (+0.50000, -0.86603) ['B', 'M', 'R']  |uv| ~ 1.732051; rhombus completion: True
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+0.50000, +0.86603) ['G', 'O', 'P'] | (+1.25000, +0.96825) ['B', 'M', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.75000, +1.83427): vertex ['M', 'O'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.25000, +0.96825) ['O', 'P', 'R'] | (+0.25000, -0.96825) ['B', 'G', 'M']  |uv| ~ 1.936492; rhombus completion: True
+     w (+0.00000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+0.25000, +0.96825) ['O', 'P', 'R'] | (+1.00000, +0.86603) ['B', 'G', 'M']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.75000, +1.83427): vertex ['M', 'O'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.25000, -0.96825) ['B', 'G', 'M'] | (+1.00000, -0.86603) ['O', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.75000, -1.83427): vertex ['B', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.50000, -0.86603) ['B', 'M', 'R'] | (+1.25000, -0.96825) ['G', 'O', 'P']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.75000, -1.83427): vertex ['B', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.00000, +0.86603) ['B', 'G', 'M'] | (+1.00000, -0.86603) ['O', 'P', 'R']  |uv| ~ 1.732051; rhombus completion: True
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+1.00000, +0.86603) ['B', 'G', 'M'] | (+1.75000, +0.96825) ['O', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.25000, +1.83427): vertex ['M', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.75000, +0.96825) ['G', 'M', 'O'] | (+0.75000, -0.96825) ['B', 'P', 'R']  |uv| ~ 1.936492; rhombus completion: True
+     w (+0.50000, +0.00000): vertex ['G', 'M', 'P', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+0.75000, +0.96825) ['G', 'M', 'O'] | (+1.50000, +0.86603) ['B', 'P', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.25000, +1.83427): vertex ['M', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.75000, -0.96825) ['B', 'P', 'R'] | (+1.50000, -0.86603) ['G', 'M', 'O']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.25000, -1.83427): vertex ['G', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.00000, -0.86603) ['O', 'P', 'R'] | (+1.75000, -0.96825) ['B', 'G', 'M']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.25000, -1.83427): vertex ['G', 'P'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.25000, +0.96825) ['B', 'M', 'R'] | (+1.25000, -0.96825) ['G', 'O', 'P']  |uv| ~ 1.936492; rhombus completion: True
+     w (+1.00000, +0.00000): vertex ['B', 'G', 'O', 'R'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+-- (+1.25000, +0.96825) ['B', 'M', 'R'] | (+2.00000, +0.86603) ['G', 'O', 'P']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.75000, +1.83427): vertex ['O', 'R'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.25000, -0.96825) ['G', 'O', 'P'] | (+2.00000, -0.86603) ['B', 'M', 'R']  |uv| ~ 0.756934; rhombus completion: False
+     w (+1.50000, +0.00000): vertex ['B', 'M', 'O', 'P'] (4 colours); u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.75000, -1.83427): vertex ['B', 'G'] (2 colours); u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+   24 close complementary pairs listed
+== the disk (YB2's rebuild; interior vertices): 45 vertices, 40 unit-arc pieces
+-- (-0.46209, +1.16174) ['blue', 'orange', 'violet'] | (-1.30902, +0.75025) ['green', 'red', 'yellow']  |uv| ~ 0.941604; rhombus completion: False
+     w (-0.50000, +0.16246): vertex ['green', 'orange', 'red', 'violet'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-1.27111, +1.74953): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.30902, +1.47679) ['blue', 'red', 'violet'] | (-0.96209, +0.79847) ['green', 'orange', 'yellow']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.00000, +0.52573): vertex ['blue', 'orange', 'red', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-1.27111, +1.74953): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.30902, +1.47679) ['blue', 'red', 'violet'] | (+0.80902, +1.11352) ['green', 'orange', 'yellow']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.00000, +0.52573): vertex ['blue', 'orange', 'red', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.50000, +2.06457): vertex ['green', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.30902, +1.47679) ['blue', 'green', 'red'] | (-0.80902, +1.11352) ['orange', 'violet', 'yellow']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.00000, +0.52573): vertex ['blue', 'orange', 'red', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.50000, +2.06457): vertex ['red', 'violet'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.30902, +1.47679) ['blue', 'green', 'red'] | (+0.96209, +0.79847) ['orange', 'violet', 'yellow']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.00000, +0.52573): vertex ['blue', 'orange', 'red', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.27111, +1.74953): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.46209, +1.16174) ['blue', 'green', 'yellow'] | (+1.30902, +0.75025) ['orange', 'red', 'violet']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.50000, +0.16246): vertex ['green', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.27111, +1.74953): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.80902, +1.11352) ['orange', 'violet', 'yellow'] | (-1.50000, +0.16246) ['blue', 'green', 'red']  |uv| ~ 1.175571; rhombus completion: False
+     w (-0.50000, +0.16246): vertex ['green', 'orange', 'red', 'violet'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-1.80902, +1.11352): vertex ['red', 'yellow'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.80902, +1.11352) ['green', 'orange', 'yellow'] | (+1.50000, +0.16246) ['blue', 'red', 'violet']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.50000, +0.16246): vertex ['green', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.80902, +1.11352): vertex ['orange', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-1.24767, -0.08047) ['blue', 'green', 'violet'] | (-1.11803, -1.01311) ['orange', 'red', 'yellow']  |uv| ~ 0.941604; rhombus completion: False
+     w (-0.30902, -0.42533): vertex ['blue', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-2.05669, -0.66826): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-1.50000, +0.16246) ['blue', 'green', 'red'] | (-1.05669, -0.66826) ['orange', 'violet', 'yellow']  |uv| ~ 0.941604; rhombus completion: False
+     w (-0.50000, +0.16246): vertex ['green', 'orange', 'red', 'violet'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-2.05669, -0.66826): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-1.30902, +0.75025) ['green', 'red', 'yellow'] | (-1.30902, -0.42533) ['blue', 'orange', 'violet']  |uv| ~ 1.175571; rhombus completion: False
+     w (-0.50000, +0.16246): vertex ['green', 'orange', 'red', 'violet'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-2.11803, +0.16246): vertex ['blue', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-1.30902, -0.42533) ['blue', 'orange', 'violet'] | (-0.61803, -1.37638) ['green', 'red', 'yellow']  |uv| ~ 1.175571; rhombus completion: False
+     w (-0.30902, -0.42533): vertex ['blue', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-1.61803, -1.37638): vertex ['orange', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.30902, -1.21148) ['blue', 'green', 'yellow'] | (+0.61803, -1.37638) ['orange', 'red', 'violet']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.30902, -0.42533): vertex ['blue', 'green', 'orange', 'red'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.00000, -2.16253): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-0.61803, -1.37638) ['green', 'red', 'yellow'] | (+0.30902, -1.21148) ['blue', 'orange', 'violet']  |uv| ~ 0.941604; rhombus completion: False
+     w (-0.30902, -0.42533): vertex ['blue', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.00000, -2.16253): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (-1.11803, -1.01311) ['orange', 'red', 'yellow'] | (+0.00000, -1.37638) ['blue', 'green', 'violet']  |uv| ~ 1.175571; rhombus completion: False
+     w (-0.30902, -0.42533): vertex ['blue', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (-0.80902, -1.96417): vertex ['green', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.00000, -1.37638) ['blue', 'green', 'violet'] | (+1.11803, -1.01311) ['orange', 'red', 'yellow']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.30902, -0.42533): vertex ['blue', 'green', 'orange', 'red'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+0.80902, -1.96417): vertex ['red', 'violet'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.05669, -0.66826) ['green', 'orange', 'yellow'] | (+1.50000, +0.16246) ['blue', 'red', 'violet']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.50000, +0.16246): vertex ['green', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+2.05669, -0.66826): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.11803, -1.01311) ['orange', 'red', 'yellow'] | (+1.24767, -0.08047) ['blue', 'green', 'violet']  |uv| ~ 0.941604; rhombus completion: False
+     w (+0.30902, -0.42533): vertex ['blue', 'green', 'orange', 'red'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+2.05669, -0.66826): not a vertex; OUTSIDE the disk; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+0.61803, -1.37638) ['orange', 'red', 'violet'] | (+1.30902, -0.42533) ['blue', 'green', 'yellow']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.30902, -0.42533): vertex ['blue', 'green', 'orange', 'red'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+1.61803, -1.37638): vertex ['red', 'yellow'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+-- (+1.30902, -0.42533) ['blue', 'green', 'yellow'] | (+1.30902, +0.75025) ['orange', 'red', 'violet']  |uv| ~ 1.175571; rhombus completion: False
+     w (+0.50000, +0.16246): vertex ['green', 'red', 'violet', 'yellow'] (4 colours); inside; u emits an arc of omega(w): True; v emits one: True -> SAVED by half of T2
+     w (+2.11803, +0.16246): vertex ['blue', 'red'] (2 colours); ON THE RIM; u emits an arc of omega(w): False; v emits one: False -> not saved by T2 here
+   20 close complementary pairs listed
+exit=0
