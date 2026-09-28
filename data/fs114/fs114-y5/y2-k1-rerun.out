@@ -1,0 +1,46 @@
+== FS114-Y2 K1 fragment: 20 tiles
+validity (every same-colour pair, a tile with itself included): ACCEPT -- same-colour pairs the object has: 46 (a tile with itself included); examined exactly 40; dismissed by an exact bounding-box gap >= 1: 6; tight at 1: 10 maxima, 18 minima; 0.5 s
+non-Siamese: distinct same-colour pairs with min < 1: none; distinct pairs with max exactly 1: none
+   tight minima (distinct pairs at minimum exactly 1): (t1,W'), (t3,W), (t2,T2), (t2,T3), (t4,T1), (t4,T4), (L1,V''), (L1,V'), (L4,V), (L4,V'''), (L2,V), (L2,V'''), (L3,V''), (L3,V'), (T1,N), (T4,N), (T2,N'), (T3,N')
+   tight maxima (tiles of diameter exactly 1): t1, t3, t2, t4, L1, L4, L2, L3, W, W'
+map consistency: 0 unmatched non-rim pieces; 28 rim pieces
+the rim: 28 segments; min distance^2 from p = 1.080000; >= R0^2 = 27/25 (R0 = 3 sqrt3/5 = 1.039230): True; equal: True
+float guard: tiles' areas sum 3.736753117684; the rim polygon's area 3.736753117684; every tile area positive: True
+tiles with a corner at p: ['t1', 't2', 't3', 't4']; colours [1, 2, 3, 4]
+   edge of t1 leaving p: unit arc about (0.866025, 0.5)
+   edge of t3 leaving p: unit arc about (-0.866025, -0.5)
+   edge of t2 leaving p: unit arc about (0.866025, -0.5)
+   edge of t4 leaving p: unit arc about (-0.866025, 0.5)
+q1: |q1 - p|^2 = 1; tiles with a corner there ['L1', 'T1', 'V', 'W', 't1'], colours [1, 3, 4, 5, 6] (5); T1 colour 4 = colour of the outer tile t4 (4): True; T1 meets the closed unit disc about p only at q1 (so meets t1, which lies in it, only there): True (ok)
+q2: |q2 - p|^2 = 1; tiles with a corner there ['L2', 'T2', "V'", 'W', 't1'], colours [1, 2, 3, 5, 6] (5); T2 colour 2 = colour of the outer tile t2 (2): True; T2 meets the closed unit disc about p only at q2 (so meets t1, which lies in it, only there): True (ok)
+q3: |q3 - p|^2 = 1; tiles with a corner there ['L3', 'T3', "V'''", "W'", 't3'], colours [1, 2, 3, 5, 6] (5); T3 colour 2 = colour of the outer tile t2 (2): True; T3 meets the closed unit disc about p only at q3 (so meets t3, which lies in it, only there): True (ok)
+q4: |q4 - p|^2 = 1; tiles with a corner there ['L4', 'T4', "V''", "W'", 't3'], colours [1, 3, 4, 5, 6] (5); T4 colour 4 = colour of the outer tile t4 (4): True; T4 meets the closed unit disc about p only at q4 (so meets t3, which lies in it, only there): True (ok)
+== FS114-Y2 K1 fragment -- PLANT v5: 20 tiles
+validity (every same-colour pair, a tile with itself included): REJECT -- same-colour pairs the object has: 46 (a tile with itself included); examined exactly 40; dismissed by an exact bounding-box gap >= 1: 6; tight at 1: 10 maxima, 10 minima; 0.5 s
+   REJECT L1|V (249 cands; touch)
+   REJECT L4|V'' (249 cands; touch)
+   REJECT L2|V' (249 cands; touch)
+   REJECT L3|V''' (249 cands; touch)
+non-Siamese: distinct same-colour pairs with min < 1: [('L1', 'V'), ('L4', "V''"), ('L2', "V'"), ('L3', "V'''")]; distinct pairs with max exactly 1: none
+   tight minima (distinct pairs at minimum exactly 1): (t1,W'), (t3,W), (t2,T2), (t2,T3), (t4,T1), (t4,T4), (T1,N), (T4,N), (T2,N'), (T3,N')
+   tight maxima (tiles of diameter exactly 1): t1, t3, t2, t4, L1, L4, L2, L3, W, W'
+== FS114-Y2 K1 fragment -- PLANT wide_t1: 20 tiles
+validity (every same-colour pair, a tile with itself included): REJECT -- same-colour pairs the object has: 46 (a tile with itself included); examined exactly 40; dismissed by an exact bounding-box gap >= 1: 6; tight at 1: 10 maxima, 12 minima; 0.5 s
+   REJECT t1|W' (188 cands)
+   REJECT t3|W (188 cands)
+   REJECT t2|T2 (150 cands)
+   REJECT t2|T3 (150 cands)
+   REJECT t4|T1 (150 cands)
+   REJECT t4|T4 (150 cands)
+non-Siamese: distinct same-colour pairs with min < 1: [('t1', "W'"), ('t3', 'W'), ('t2', 'T2'), ('t2', 'T3'), ('t4', 'T1'), ('t4', 'T4')]; distinct pairs with max exactly 1: none
+   tight minima (distinct pairs at minimum exactly 1): (L1,V''), (L1,V'), (L4,V), (L4,V'''), (L2,V), (L2,V'''), (L3,V''), (L3,V'), (T1,N), (T4,N), (T2,N'), (T3,N')
+   tight maxima (tiles of diameter exactly 1): t1, t3, t2, t4, L1, L4, L2, L3, W, W'
+== FS114-Y2 K1 fragment -- PLANT wide_t1b: 20 tiles
+validity (every same-colour pair, a tile with itself included): REJECT -- same-colour pairs the object has: 46 (a tile with itself included); examined exactly 40; dismissed by an exact bounding-box gap >= 1: 6; tight at 1: 10 maxima, 14 minima; 0.5 s
+   REJECT t2|T2 (152 cands)
+   REJECT t2|T3 (152 cands)
+   REJECT t4|T1 (152 cands)
+   REJECT t4|T4 (152 cands)
+non-Siamese: distinct same-colour pairs with min < 1: [('t2', 'T2'), ('t2', 'T3'), ('t4', 'T1'), ('t4', 'T4')]; distinct pairs with max exactly 1: none
+   tight minima (distinct pairs at minimum exactly 1): (t1,W'), (t3,W), (L1,V''), (L1,V'), (L4,V), (L4,V'''), (L2,V), (L2,V'''), (L3,V''), (L3,V'), (T1,N), (T4,N), (T2,N'), (T3,N')
+   tight maxima (tiles of diameter exactly 1): t1, t3, t2, t4, L1, L4, L2, L3, W, W'
