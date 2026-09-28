@@ -1,0 +1,9 @@
+# FS114-P stage 6: the briefs' quotations: <source>\t<quotation>
+plans/FS112-derivation.md	In a terminal valid map, a stuck vertex `E` both of whose horns are bounded by unit arcs of `ω(E + n)` has a horn bounded by a unit arc of `ω(E − n)` too, and is a one-vertex chain; likewise with `n` reversed.
+plans/FS112-derivation.md	In a terminal valid map, a stuck vertex `E` all four of whose horn arcs are unit arcs, of `ω(E + n)` above and `ω(E − n)` below, carries an in-type tile of its upper flank colour at `E + n` and of its lower flank colour at `E − n`, and both are (Q) centres with at least four colours.
+plans/STUB-global-step.md	second minds on FS112-C-ENDS (with its stage-1b repair), C-COMPOSE and C-PARTNERS
+plans/POROS-2026-09-27-night-aim.md	Is the unit-arc NO local — an explicit radius past which no valid fragment survives around a four-colour vertex — or visible only to a count over the whole plane, as Euler's formula and discharging give?
+data/fs112/claims.md	Is it true that 7 colors are needed to color a locally finite map in the plane if the boundaries can be arcs of unit circles and if trichromatic vertices of degree greater than 3 are allowed?
+CLAUDE.md	My goal is to fully solve, and then verify in Lean, HN. Then we publish.
+CLAUDE.md	Let's see some ambition. I know we can do it.
+CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.

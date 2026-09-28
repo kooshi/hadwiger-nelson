@@ -14,6 +14,8 @@ do."). Every mathematical sentence below is a quotation with its address, a read
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none.
+- Stages 2–6: none. The §PA queries (zbMATH, Semantic Scholar, greps of held texts) are reading, not a search for a witness; no map,
+  colouring, tile graph or configuration was enumerated or scanned. The one computation run was the quotation checker.
 
 ## Stage 1 — SAVED: files read from disk, and the quotation check (standing rule 5)
 
@@ -668,3 +670,25 @@ de Grey's non-Siamese target (`[16.317]`) from the whole question.
   and a finding of a flawed search is no input to a proof.
 
 ## Stage 5b — SAVED
+
+## Stage 6 — SAVED: the briefs, and the hand-off
+
+**Briefs drafted for the owner to launch** (each points to `STANDING-RULES.md`, carries the no-children rule with its reason, the ban with Kooshi's
+ruling and the "would have searched here" log, the fences of protocol rule 1 and standing rule 13 by path, neutral commit subjects, and the report
+format of standing rule 9; quotations checked, `data/fs114/fs114-p/quotes-briefs.out`, 26 of 26 FOUND):
+- `data/fs114/briefs/N114-proof.md` — FS114-N, the proof side: stage 1 card 2 by derivation (C114-COMPACT's use, C114-VOR, C114-THOM-TOP, route T with
+  its positive control C114-FIVE-COUNT, the verdict with every step's radius); stage 2 the torus; stage 3 aperiodic maps. 400k.
+- `data/fs114/briefs/Y114-construction.md` — FS114-Y, the construction side, identical but for § Your side: calibration on five controls, C114-PENT
+  before anything is built, C114-DIAL, C114-TORUS, C114-SIRGEDAS-FORM, the killing tests of §IQ and §8, E12 at BOWTIE's seam. 400k.
+- `data/fs114/briefs/CV114-composition.md` — FS114-CV, blind second minds on FS112-C-ENDS (its residue the point), C-COMPOSE, C-PARTNERS, C114-EXISTS-F,
+  with C-HORNEND and C-DOUBLE; fenced from the assembly until its stage 1. 250k.
+- `data/fs114/briefs/NB114-verify-proof.md`, `YB114-verify-construction.md` — templates; the owner writes each instance file (claim ids or objects,
+  verdicts withheld) at the side's hand-back. 300k each.
+- `data/fs114/briefs/A114-advisor.md` — optional, only into an idle slot. 350k.
+- R0 (BASE-V's repair) has no brief: the owner writes it from BASE-V's report if a step fails.
+
+**Held for the owner** (each a decision of stage 5): D5 — the registrations fenced from every job until its stage 1 is committed (FS-112's ruling;
+confirm); D6 — no Lean lane now (whether Kooshi wants a skeleton phase K for Q-full's statement at once); the launch order N, Y, CV, NB and YB at the
+hand-backs, A only into an idle slot.
+
+## Stage 6 — SAVED
