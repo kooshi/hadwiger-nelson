@@ -384,3 +384,51 @@ HX's K-ISL; HX stalls at the islands' diameter, mine at the sea's spacing.
 packing bound SEA-PACK instead; (b) a numerical optimisation of the fragment `F_{s,ε}`'s colouring near `w` → the two-annulus rule, derived.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the verdict, and the obstructions met, each at its grade
+
+### 4.1 Verdict
+
+**Route M.** No rung of route M is refuted in its existence form, and none can be by a wild object: at `k ≥ 7` each is TRUE (the tight hexagonal
+seven-colouring witnesses it), and at `k ≤ 6` its failure is a tight `k`-colouring, i.e. `χ_m⁰(ℝ²) ≤ k` (FS111-W-NEG). What a wild object can test —
+the universal and procedural forms a colour-generic proof would pass through — gave: **C-SAT-T** TRUE at `k ≥ 9` by two saturated colourings given by
+formula (SQ9, HEX9), **GAP at `k = 7, 8`**, where it is exactly the existence of a saturated seven- (eight-)colouring; **C-HULL-REG** TRUE on every
+saturated map without cusps (C11, NOBEND, NOREP), open only at bichromatic points where a third colour or a class's components accumulate; **REG-B's
+universal form** FALSE at `k = 7` (DECO-B, exact); **REG-J's universal form** not refuted — the one tight seven-colouring held is junction-rigid under
+local modification (HEX7-RIGID), and accumulation lives only where there is slack (V0-WIG7's principle). **Route R.** A-ALL and B-RR cannot be refuted
+without a six-colouring (FS111-W-NEG); R-P3, as written, is a registration on the answer; **B-NONABS** is MISSTATED (FALSE as written by the fragment
+`F_{s,ε}`; its content is B-RR); HX, the last family of the wild shape, carries complementary blocking pairs whose unit points are its voids
+(HX-PAIRS); my complementary-free design stalls at SEA-PACK. Minds: one throughout. Nothing moves a value; neither `χ_m⁰(ℝ²) ≤ 6` nor `≥ 7` is shown.
+
+### 4.2 The obstructions met (what route M's saturation rung now has to face)
+
+1. **Saturation is rigid** [hand, one mind]: wherever two colours meet with each side locally connected, a saturated interface is `C^{1,1}` of
+   curvature `≤ 1`, each point between two externally tangent unit discs or on a unit arc of kind both whose inner colour points toward the arc; no
+   bend; no colour repeated at a vertex; flat edges only in unit ladders. This is far more than route M's REG-J/REG-I need — *if* C-SAT-T holds at six.
+2. **Saturation may cost colours** [open; W-P1 at 0.65]: no saturated colouring below nine colours is known, and the two tight seven-colourings held
+   cannot be recoloured into one. If none exists at seven, C-SAT-T is not colour-generic, and a route-M proof through saturation must use six at the
+   saturation step itself — where C-SAT-T₆'s failure is `χ_m⁰(ℝ²) ≤ 6`. That is the question this job hands to FS-111's close.
+3. **A wild object at `k = 7` measures the universal form only** (G21, the generator-image rule): the claim list's "inhabitant at `k = 7`" is always
+   met for existence rungs, so it tests nothing there; the useful `k = 7` tests are of procedures (local modifications, fills, saturation).
+4. **(A) and CP locate holes without sizing them** at HX's parameters: CP's bound (`≈ 10⁻¹¹`) is eleven orders below HX's stall (`0.0432`); K-ISL sizes
+   the stall, CP says where the holes must be.
+
+### 4.3 Proposals for the close (I edit none of these files)
+
+- **`LEDGER.md` § B**, one line each: FS111-W-NEG, -SQ9, -HEX9, -C11, -NOBEND, -NOREP, -KB-DIR, -LADDER, -HEXSAT, -HEX7-RIGID, -FILL-FREE, -DECO-B,
+  -HX-PAIRS, -SEA-PACK, B-NONABS's refutation; addresses in "Theorems this phase proved".
+- **`data/fs111/claims.md`**: B-NONABS → MISSTATED, corrected form B-RR (§3.3); C-SAT-T annotated "TRUE at `k ≥ 9` (SQ9, HEX9); at `k = 7, 8` ⟺ a saturated
+  colouring exists" (§2.6); the vacuity rule annotated with FS111-W-NEG (an inhabitant at `k = 7` makes an existence rung trivially true there).
+- **`plans/FS107-W-near-colourings.md` §3.6 and `plans/FS107-derivation.md`'s HX-STALL line**: "K-C6 vacuous" holds for hole components only; under
+  FS107-R-CP's definition HX carries complementary pairs of fat junctions at distance `√7R` blocking toward points inside its voids (§3.4).
+- **R-P3**: re-registration P3′ (§3.2), and the plan's E8 read as a probability that W proves `χ_m⁰(ℝ²) ≤ 6`.
+- **A stub**: *the saturated chromatic number* — the least `k` with a saturated a.e.-proper `k`-colouring (between 7 and 9; W-P1, W-P2) — which decides
+  whether route M's first rung is colour-generic. Provisional bearings: G82, G83 (kind-both arcs are C11's case (ii)), G20, G22.
+- **`BIBLIOGRAPHY.md`**: no new work read beyond held ones (Cohen–Mani §5 and Voronov §2 read in full this job); **prior-art debt**: a source for "the
+  uniform two-sided ball condition of radius `r` gives `C^{1,1}` boundary with curvature `≤ 1/r`", used as standard in C11.
+
+### 4.4 Stage 5 (after hand-back only)
+
+Reading competitor M's record for divergences is owed after hand-back, per the brief; I have not opened it.
+
+## Stage 4 — SAVED
