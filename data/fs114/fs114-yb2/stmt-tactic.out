@@ -1,0 +1,5 @@
+  T1 vs t1 at (0.866025, 0.500000): tactic tile signs [0, 1] (zero only at q: True); inner tile signs [-1, 0]: meets at q alone
+  T1_y vs t1 at (0.866025, -0.500000): tactic tile signs [0, 1] (zero only at q: True); inner tile signs [-1, 0]: meets at q alone
+  T1_x vs t3 at (-0.866025, 0.500000): tactic tile signs [0, 1] (zero only at q: True); inner tile signs [-1, 0]: meets at q alone
+  T1_xy vs t3 at (-0.866025, -0.500000): tactic tile signs [0, 1] (zero only at q: True); inner tile signs [-1, 0]: meets at q alone
+TACTIC OK

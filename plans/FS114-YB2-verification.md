@@ -143,3 +143,138 @@ width 1 corner to corner, all four edges at `p` tactic with centres `q_i` of fiv
 [tools, exact; one mind (mine); two checkers]. Whether it is *the same* object as Y2's is stage 2's comparison.
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: verdicts on statements 2–7 (blind: no FS114-Y2/Y3 file, no ROUND3 card opened)
+
+*Exact checks: `tools/fs114_yb2_stmts.py tactic|rstop|ring` → `stmt-tactic.out`, `stmt-rstop.out`, `stmt-ring.out` (on my object). Every verdict is
+[hand; one mind, mine] unless marked. **Reading R-T, used throughout and flagged:** "a Reuleaux bowtie at `p`" is read as object 1's configuration —
+`t1`, `t3` Reuleaux of width 1 corner to corner at `p`, `t2` above, `t4` below, **all four edges at `p` tactic** (colour 4 at `q1`, `qC`; colour 2 at
+`q2`, `qD`, each on a tile meeting the inner tile at the centre alone) — with the fragment containing neighbourhoods of the `q_i` and covering the
+regions `U`, `L` between `t1` and `t3` inside `B(p, 1)`. Labels as stage 1b (`q4` of the instance read as `qC = e(150°)`, from `e(180° − 30°)`).*
+
+**Precondition, exact (`stmt-tactic.out`):** on my object each tactic tile and its inner tile lie in opposite closed half-planes of a line through
+`q_i`, the tactic tile touching the line only at `q_i` — **they meet at `q_i` alone** (all four). This discharges stage 1b's sentence, which I wrote
+before running the check (an ordering slip of mine, now closed).
+
+### Summary
+
+| # | statement | verdict | grade, minds |
+|---|---|---|---|
+| 1 | FS114-Y2-BOWTIE (object) | **REALISED** by my own fragment (stage 1b) | tools, exact; mine; two checkers |
+| 2 | FS114-Y3-RSTOP | **TRUE**, with the germ condition made explicit; Siamese pairs not used | hand + exact at 10 points; mine |
+| 4 | FS114-Y3-D2 | **TRUE under R-T**: five colours and Y2's arrangement forced; no neighbourhood of `r` | hand; mine. Without the tactic edges: GAP at one case (below) |
+| 3 | FS114-Y3-R | **TRUE** (a necessary condition); **precision** to (i): a tile tangent to `60°` at `q1` (my `X`) lies pointwise in the open cone yet straddles every ring point just above `r` | hand + exact at 4 points; mine |
+| 5 | FS114-Y3-FOUR | **not verified in general (my GAP, budget)**; its closing inference **"So five colours at `q_i` are not forced by the bowtie" does not follow** from a structure statement about a class not shown non-empty; in both symmetric classes I find no four-colour fragment (4 and 6) | hand; mine |
+| 7 | FS114-Y2-GAPS | **TRUE** (part 1 over FS112-U1; part 2 immediate) | hand; mine |
+| 6 | FS114-Y3-13 | **TRUE as stated, and vacuous: the class is EMPTY** — no non-Siamese fragment in it contains neighbourhoods of `top`, `q1`, `qC` and fills `U` (the open step, decided: none exists) | hand; mine, one mind |
+
+### 2. FS114-Y3-RSTOP — TRUE
+
+*Derivation.* Let `z = r + s·e(θ)`, `s > 0` small, `θ ∈ (−60°, 60°)`. Then `|z − q1| > 1` and `|z − q2| > 1` (outside `B̄(q1,1)` iff
+`cos(θ + 30°) > 0`, outside `B̄(q2,1)` iff `cos(θ − 30°) > 0`). A tile `W ∋ q1` with a point `q1 + ρe(φ)`, `ρ` small, `cos(φ − 330°) > 0`, **straddles
+`z`**: `|z − q1| > 1` gives the maximum, and `|z − q1 − ρe(φ)|² = |z − q1|² − 2ρ⟨z − q1, e(φ)⟩ + ρ² < 1` once `s` is small against `ρ` gives the
+minimum (`z − q1 → e(330°)`). Likewise at `q2` with `cos(φ − 30°) > 0`. A straddled colour cannot hold `z`: the tile holding `z` is not the
+straddler (whose diameter would exceed 1), and continuity gives interior points at distance exactly 1 — **Siamese pairs change nothing**. The germs
+(my object's, and forced in the D2 class, §4): at `q1`, `t1` (1) has directions up to `300°`; `V` (3) from `300°`; `T1` (4) in `(300°, 60°)`; `Z` (6)
+in `[b, 60°]` with `b < 60°` — each has points with `cos(φ − 330°) > 0`; at `q2` the mirrors `t1`, `V`, `T1_y` (2), `Z_y` (5) with `cos(φ − 30°) > 0`.
+So **all six colours are straddled at every `z` in the cone `(−60°, 60°)` at `r`**, and no fragment agreeing with these germs contains a
+neighbourhood of `r`; a closed disc of radius `≥ √3 = |r|` about `p` contains `r`. *Exact (`stmt-rstop.out`):* at `r + (1/100)u` for `u` at
+`0°, ±36.87°, ±53.13°`: **no colour free**, each blocked by exactly the tiles named above; outside the cone, colours become free (`90°`: 4;
+`126.87°, 180°, −126.87°`: 2, 3, 4; `−90°`: 2) — the stop is the cone `(−60°, 60°)` at `r`. *Germ condition (the hypothesis made explicit):* at
+`q1`, tiles of colours 1, 3, 4, 6 each with points in directions `(240°, 60°)` arbitrarily near `q1`; at `q2` tiles of colours 1, 3, 2, 5 with
+points in `(300°, 120°)`. Stage 2 checks it against Y2's bowtie.
+
+### 4. FS114-Y3-D2 — TRUE under R-T
+
+In the D2 class (non-Siamese; Y2's action `x ↦ −x`: `(1 3)(5 6)`, `y ↦ −y`: `(2 4)(5 6)`; neighbourhood of `top`):
+1. `t2 ∌ q1` (else `t2 ∋ qC` by symmetry, diameter `√3`); colour 2 is straddled near `q1` (stage 1b D-a). The `U`-cusp at `q1` is a tile `X` of colour
+   `c₁ ∈ {5, 6}`; its mirror `X′` at `qC` has `c̄₁`; `U ⊂ B̄(top, 1)`, interior strictly inside, so **every `c₁`-tile touching `top` is `X` and every
+   `c̄₁`-tile touching `top` is `X′`**.
+2. **The tile `Y` at `top` in direction `0⁺` outside `ω(p)` is `X`.** Colours 1, 2, 3 are straddled there; `X′ ⊂ B̄(qC,1)` lies at `top` in
+   `[120°, 300°]`; a colour-4 `Y` lies within `< 1` of `q1`, so it is the tactic tile `T1` (R-T), whose mirror would also touch `top` — excluded. So
+   `Y = X ∋ top`, `X ⊂ B̄(q1,1) ∩ B̄(top,1)`, `X′ ∋ top`, and the sector `[60°, 120°]` at `top` is a colour-4 tile `Ttop` outside `B(q1,1) ∪ B(qC,1)`;
+   hence `T1 ⊂ ∁B(top, 1)`.
+3. At `q1`, the tile `W` at `300⁺` lies in `B(q2, 1)`: not 4 (`t4`'s arc on `ω(q1)` from `p` straddles it), not `c₁` (`X` would then cover `T1`'s
+   place), not `c̄₁` (it would be `q2`'s `c̄₁`-tile, the mirror `X_y ∋ bot`: diameter `√3`); so **`W = V`, colour 3, `V ⊂ B̄(q2, 1)`**, i.e. `V` at `q1`
+   lies in `[180°, 360°]`.
+4. `X` starts at `60°` (it lies in `B̄(top,1)`, the tiles before it do not). The tile adjacent to `X` along `ω(top)` is not `T1` (stage 1b D-e: with
+   `Ttop` on `ω(q1)`, `|x − y|² = 1 − 2tt′ + O(3)`), not `V` (confined to `[180°, 360°]`), so it has colour `c̄₁` — **five colours**, in the order
+   `t1, V, T1, Z, X`: Y2's arrangement (as I reconstruct it; stage 2 compares).
+5. **No neighbourhood of `r`:** `T1` must avoid the unit discs about the points of `Ttop`'s arc `q1 + e(150° − t′)`, `t′ ∈ [0, t′₀]`, all of whose
+   circles pass through `q1` with the discs covering directions `(60° − t′₀, 240°)` there; so `T1` lies in directions `≤ 60° − t′₀` and `Z`'s germ
+   contains directions below `60°` by a positive angle. The germ condition of §2 holds, and RSTOP's argument applies.
+**GAP without R-T** (outside the verdict, stated so it is not lost): if the edges at `p` need not be tactic, step 2 leaves the case `Y` = one
+x-invariant colour-4 tile spanning `top`'s outside; then colour 4 is straddled at `q1`, and my steps do not decide that case.
+
+### 3. FS114-Y3-R — TRUE (a necessary condition), with a precision
+
+A colour holding points of `ω(q1)` (or just outside it) arbitrarily near `r` above it is straddled by none of its tiles there; by §2's computation its
+`q1`-tile has no points in directions `φ` with `cos(φ − 330° − ε) > 0` for the point's offset `ε`, and its `q2`-tile none with `cos(ψ − 30°) > 0`
+(up to `O(ε)`): these are (i) and (ii). **Precision (exact, `stmt-ring.out`):** my `X` (colour 5) has sector `[60°, 180°]` at `q1`, its points at
+directions `60° + ρ/2 > 60°` — pointwise in the open cone `(60°, 240°)` — yet **`X` straddles `q1 + e(330° + ε)` on the ring at `ε = 5.71°` and
+`ε = 1.15°`** (points at `ρ < ε` come within 1). So (i)'s "lies in the open cone" is necessary but not sufficient; E2's "sector starts after `60°`"
+is the sharp form. As an existence claim R stands. E1/E2 with five colours `{1,3,4,5,6}` at `q1`: the covering colour is 2 (absent), whose tactic
+tile at `q2` must avoid directions within `90°` of `30°` and, outside `B̄(p,1)` at `q2`, lies in `[240°, 300°]` (E1), or a `q1` colour whose tile
+starts after `60°` (E2). *Reading point:* "five colours" excludes 2 at `q1` only when `t2 ∌ q1` (forced by symmetry; not decided here for asymmetric
+maps). Exact at the ring, 1e-6 outside: at `ε = 1.15°` **no colour free**; at `ε = 5.71°` colour 2 is free (the point is not yet "just above" `r`
+for my small `T1_y`).
+
+### 7. FS114-Y2-GAPS — TRUE
+
+Part 1: FS112-U1 puts the inner colour's sectors at `q` in the closed cone of width `180° − β` facing the arc and the outer colour's in the closed cone
+facing away; with the arc running from `p`'s direction `d_p` to `d_p + β`, the facing cone is `[d_p + β − 90°, d_p + 90°]`, the away cone
+`[d_p + β + 90°, d_p + 270°]`, the two gaps `(d_p + 90°, d_p + 90° + β)` and `(d_p − 90°, d_p − 90° + β)`, the second inside `B(p, 1)` (whose cone
+at `q` is `(d_p − 90°, d_p + 90°)`). On my object at `q1`: `β = 30°`, `t1` fills `120° ≤ 150°`, `T1` fills about `30°`, the gaps `(120°, 150°)` (in
+`X`, inside `B(p,1)`) and `(300°, 330°)` (in `V`). Part 2: a tile `W` meeting `B(p, 1)` whose colour is carried at `p` by another tile `W_p` has
+`min(W, W_p) < 1`, which a non-Siamese valid map forbids (non-Siamese forces `min ≥ 1` for distinct same-colour tiles).
+
+### 6. FS114-Y3-13 — TRUE, and the class is empty (derived)
+
+Class: `x ↦ −x` acts as `(1 3)`, fixing 2, 4, 5, 6; non-Siamese; R-T; neighbourhoods of `top`, `q1`, `qC`; `U` filled. Then:
+(a) as §4 step 1, `t2 ∌ q1`; the `U`-cusp tile `X` at `q1` has colour `c₁ ∈ {5, 6}` and its mirror `X′` the **same** colour;
+(b) the tile `Y` at `top` direction `0⁺`: not `c₁` (it would meet `X′`'s points inside `B(top, 1)`; and `Y = X` would put `X′ ∋ top` too), not 4 (R-T:
+it would be `T1`, whose mirror also reaches `top`), not 1, 2, 3; so **`Y` has colour `c̄₁`, is x-invariant, and `c̄₁ ∉ P_cl(q1)`** — with `V` (colour 3)
+at `300⁺` as in §4 step 3, `P_cl(q1) = {1, 3, 4, c₁}`: exactly four (the statement's first clause, TRUE);
+(c) R does not stop the class at `r`: `c̄₁` is absent at `q1` and at `q2` is carried by `X_y` in `[180°, 240°]` (not within `90°` of `30°`) — TRUE;
+(d) **but the class is empty.** Inside `U`: colours 1, 3, 4 excluded (tiles at `p`), 2 only `t2`, `c̄₁` only `Y` (`U ⊂ B̄(top,1)`, interior strictly
+inside, `Y ∋ top`), `c₁` only `X`, `X′` (a third `c₁`-tile would avoid `B(q1,1) ∪ B(qC,1)`, which misses `int U`). `X′` is the mirror of `X`, distinct,
+same colour, so `|x − x̄| = 2|x₁| ≥ 1`: **`X ⊂ {x₁ ≥ 1/2}`, `X′ ⊂ {x₁ ≤ −1/2}`**, and the strip `S = U ∩ {|x₁| < 1/2}` lies in `t2 ∪ Y`. Its closure
+holds `c₁± = (±1/2, −1/2 + √(√3/2)) ≈ (±0.5, 0.4306)` (on `ω(q2)`, `ω(qD)`) and `c₂± = (±1/2, √3/2)` (on `ω(p)`), with `|c₁+ − c₂−|² = 1 +
+(√3/2 + 1/2 − √(√3/2))² ≈ 1.19 > 1`. The right edge `σ+ = {1/2} × [0.4306, 0.866]` of `S` is connected and covered by the closed sets `t2`, `Y` (both
+x-invariant, diameters `≤ 1`); neither covers it alone (it would hold `c₁+` and, by the mirror, `c₂−`), so they share a point `m*`. If `c₂+ ∈ t2`, then
+`c₂− ∈ t2`, so `c₁± ∉ t2`, so `c₁± ∈ Y`; and `|m* − c₂−| ≤ 1` forces `m* = c₂+`, putting `c₂+` and `c₁−` in `Y`: contradiction. If `c₂+ ∉ t2`, then
+`c₂± ∈ Y`, `|m* − c₂−| ≤ 1` again forces `m* = c₂+ ∈ t2`: contradiction. **No such fragment exists** — the construction side's open step is decided in
+the negative (one mind; the steps (b) and (d) are where a second mind should look first).
+
+### 5. FS114-Y3-FOUR — partial
+
+Consistent with (6) and (4): in the `(1 3)` class the four-colour structure is `P_cl(q1) = {1, 3, 4, b}`, `b = c₁`, and the `top` tile at `(0°, 60°)` is
+`b̄` (derived above) — but that class is empty; under Y2's action four colours are impossible (§4). The general (asymmetric) statement I have **not**
+verified. **Its closing inference fails as stated:** "So five colours at `q_i` are not forced by the bowtie" would need a map (or fragment) with four
+colours; a structure theorem about the four-colour class does not supply one, and I know none (**MISSTATED**; corrected: "the bowtie with a
+neighbourhood of `top` forces five colours at `q1` under Y2's action (§4); in the `(1 3)` class it admits no fragment (§6); for asymmetric maps the
+four-colour case is open").
+
+### Theorems this phase proved (stage 1)
+
+| id | statement (one line) | grade, minds | address |
+|---|---|---|---|
+| YB2-CHK | an exact segment-and-arc checker over towers (no adjoined roots; `sgn_km`), self-test, five plants firing as predicted; accepts brick, hexagonal 7-colouring, strip, disk, FS112-BOWTIE | tools | 1b.1–1b.2; `tools/fs114_yb2_exact.py` |
+| YB2-BOW | a D2-symmetric non-Siamese valid 20-tile fragment over `ℚ(√3)` realising every condition of FS114-Y2-BOWTIE, holding `B̄(p, 3√3/5)` | tools, exact; mine; two checkers | 1b.4; `bowtie.out`, `second.out` |
+| YB2-ARR | in the D2 class (R-T) the arrangement at `q1` is forced: `t1, V(3), T1(4), Z(c̄₁), X(c₁)`, `V ⊂ B̄(q2,1)`, `X ∋ top` | hand; mine | 1b.3, 1c §4 |
+| YB2-DE | two tiles of one colour, one with an arc of `ω(top)` from `q1`, the other with an arc of `ω(q1)` from `top`, straddle (`1 − 2tt′`) | hand + exact (plants) | 1b.3 D-e; `bowtie-plant-*.out` |
+| YB2-RSTOP | RSTOP with its germ condition explicit; the stop is the cone `(−60°, 60°)` at `r`; Siamese pairs irrelevant | hand + exact; mine | 1c §2 |
+| YB2-D2 | D2 under R-T; a GAP at one case without tactic edges | hand; mine | 1c §4 |
+| YB2-RPREC | R TRUE; (i)'s open-cone form admits a tangent tile that blocks the ring (exact) | hand + exact; mine | 1c §3 |
+| YB2-GAPS | GAPS TRUE | hand over FS112-U1 | 1c §7 |
+| YB2-EMPTY13 | the `(1 3)` class holds no non-Siamese fragment with neighbourhoods of `top`, `q1`, `qC` filling `U` (R-T) | hand; mine, one mind | 1c §6 |
+| YB2-FOURNS | FOUR's "so five colours are not forced" is a non-sequitur without an example | hand | 1c §5 |
+
+### Would have searched here (stage 1)
+
+- Object 1: I would have varied the cut line, the wedge split and the outer points until a checker accepted; instead the arrangement was derived
+  (D-a…D-e), the cut placed by the point-image bound (`⟨x, e60⟩ = 1/2`), the outer points chosen by formula, and one object checked.
+- Statement 2: I would have scanned points around `r` for free colours; instead the straddle derivation, then ten named points.
+- Statement 6: I would have tried fillings of `U` in the `(1 3)` class; instead the strip-diameter derivation.
+
+## Stage 1c — SAVED

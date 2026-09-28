@@ -1,0 +1,4 @@
+  q1 + on the ring e(330 + 5.71 deg): free [2, 4, 6]; straddled by 1:t1; 3:V; 5:X
+  q1 + 1e-6 outside e(330 + 5.71 deg): free [2]; straddled by 1:t1; 3:V; 4:T1; 5:X; 6:Z
+  q1 + on the ring e(330 + 1.15 deg): free [4]; straddled by 1:t1; 2:T1_y; 3:V; 5:X,Z_y; 6:Z
+  q1 + 1e-6 outside e(330 + 1.15 deg): free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:X,Z_y; 6:Z

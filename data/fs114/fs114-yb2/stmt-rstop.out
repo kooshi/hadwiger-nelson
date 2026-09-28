@@ -1,0 +1,10 @@
+  r + (1/100)(1, 0) [   0.00 deg]: free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:Z_y; 6:Z
+  r + (1/100)(4/5, 3/5) [  36.87 deg]: free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:Z_y; 6:Z
+  r + (1/100)(4/5, -3/5) [ -36.87 deg]: free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:Z_y; 6:Z
+  r + (1/100)(3/5, 4/5) [  53.13 deg]: free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:Z_y; 6:Z
+  r + (1/100)(3/5, -4/5) [ -53.13 deg]: free []; straddled by 1:t1; 2:T1_y; 3:V; 4:T1; 5:Z_y; 6:Z
+  r + (1/100)(0, 1) [  90.00 deg]: free [4]; straddled by 1:t1; 2:T1_y; 3:V; 5:X,Z_y; 6:Z
+  r + (1/100)(-3/5, 4/5) [ 126.87 deg]: free [2, 3, 4]; straddled by 1:t1; 5:X,Z_y; 6:X_y,Z
+  r + (1/100)(-1, 0) [ 180.00 deg]: free [2, 3, 4]; straddled by 1:t1; 5:X,Z_y; 6:X_y,Z
+  r + (1/100)(-3/5, -4/5) [-126.87 deg]: free [2, 3, 4]; straddled by 1:t1; 5:X,Z_y; 6:X_y,Z
+  r + (1/100)(0, -1) [ -90.00 deg]: free [2]; straddled by 1:t1; 3:V; 4:T1; 5:Z_y; 6:X_y,Z
