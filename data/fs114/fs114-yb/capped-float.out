@@ -1,0 +1,8 @@
+float guard (sampling, 400 points per piece): the capped tiles' diameters, and the capped tile against its out-contact inverted arches
+  T0: sampled diameter 1.000000000000
+  T1: sampled diameter 1.000000000000
+  T2: sampled diameter 1.000000000000
+  B0: sampled diameter 1.000000000000
+  T0 vs D1 (same colour True): sampled min distance 1.000000000000
+  T0 vs D-2 (same colour True): sampled min distance 1.000000000000
+  T0 vs T3 (same colour True): sampled min distance 1.000000000000

@@ -1,0 +1,6 @@
+local check at B_0 (Y2's labels): cross pairs between B_0's tiles and each partner's tiles, exact straddle
+  Z^R_0: cross pairs not straddling: [("U'_0", "U'_4")]
+  Z^L_1: cross pairs not straddling: [('U_0', 'U_1')]
+  ['T1_0', 'U_0', "U'_0"] pairwise straddle: True
+  ['T2_0', 'R_0', "U'_4"] pairwise straddle: True
+  ['T2_1', 'R_1', 'U_1'] pairwise straddle: True

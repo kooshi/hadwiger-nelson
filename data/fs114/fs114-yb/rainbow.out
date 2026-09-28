@@ -1,0 +1,12 @@
+== C114-RAINBOW's third case: a valid fragment on the closed disc of radius 3/5 about (1/2, 0) (it covers [-1/5, 6/5] x [-7/10, 7/10])
+   float guard: areas sum to 1.960000000 against the rectangle's 1.960000000
+   ACCEPT x|x (144 cands; max=1)
+   ACCEPT n1|n1 (76 cands)
+   ACCEPT n2|n2 (76 cands)
+   ACCEPT y1|y1 (212 cands)
+   ACCEPT y2|y2 (212 cands)
+   ACCEPT z1|z1 (212 cands)
+   ACCEPT z2|z2 (212 cands)
+the fragment: ACCEPT -- same-colour pairs the object has: 8 (a tile with itself included); examined exactly 7; dismissed by an exact bounding-box gap >= 1: 1; tight at 1: 1 maxima, 0 minima; 0.0 s
+   x's corners have abscissae in [0, 1], only (0,0) at 0 and only (1,0) at 1: True; n1's corners at abscissa <= 0, only (0,0) at 0: True; n2's at >= 1, only (1,0) at 1: True  (all three convex polygons, so cl n1 meets cl x exactly at (0,0) and cl n2 exactly at (1,0))
+   x's diameter is exactly 1: True; n1, n2 at minimum distance exactly 1: True; no piece of the fragment is an arc (no unit arc anywhere)

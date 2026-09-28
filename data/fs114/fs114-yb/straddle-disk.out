@@ -1,0 +1,50 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== the disk's straddle relation: 325 pairs, exact; 39.3 s
+   the six-clique ['C0', 'T1_0', 'T1_1', 'T1_2', 'T1_3', 'T1_4'] pairwise straddle: True
+   T2_0 (blue) does not straddle: ['T1_2']
+   T2_1 (green) does not straddle: ['T1_3']
+   T2_2 (yellow) does not straddle: ['T1_4']
+   T2_3 (orange) does not straddle: ['T1_0']
+   T2_4 (purple) does not straddle: ['T1_1']
+   R_0 (red) does not straddle: ['C0', 'T1_1', 'T1_2', 'T1_3']
+   R_1 (red) does not straddle: ['C0', 'T1_2', 'T1_3', 'T1_4']
+   R_2 (red) does not straddle: ['C0', 'T1_0', 'T1_3', 'T1_4']
+   R_3 (red) does not straddle: ['C0', 'T1_0', 'T1_1', 'T1_4']
+   R_4 (red) does not straddle: ['C0', 'T1_0', 'T1_1', 'T1_2']
+   U_0 (purple) does not straddle: ['T1_1', 'T1_2', 'T1_3']
+   U_1 (blue) does not straddle: ['T1_2', 'T1_3', 'T1_4']
+   U_2 (green) does not straddle: ['T1_0', 'T1_3', 'T1_4']
+   U_3 (yellow) does not straddle: ['T1_0', 'T1_1', 'T1_4']
+   U_4 (orange) does not straddle: ['T1_0', 'T1_1', 'T1_2']
+   U'_0 (yellow) does not straddle: ['T1_2', 'T1_3', 'T1_4']
+   U'_1 (orange) does not straddle: ['T1_0', 'T1_3', 'T1_4']
+   U'_2 (purple) does not straddle: ['T1_0', 'T1_1', 'T1_4']
+   U'_3 (blue) does not straddle: ['T1_0', 'T1_1', 'T1_2']
+   U'_4 (green) does not straddle: ['T1_1', 'T1_2', 'T1_3']
+   step 1: T2_0 gets the colour of T1_2 (it straddles ['C0', 'T1_0', 'T1_1', 'T1_3', 'T1_4'])
+   step 2: T2_1 gets the colour of T1_3 (it straddles ['C0', 'T1_0', 'T1_1', 'T1_2', 'T1_4', 'T2_0'])
+   step 3: T2_2 gets the colour of T1_4 (it straddles ['C0', 'T1_0', 'T1_1', 'T1_2', 'T1_3', 'T2_1'])
+   step 4: T2_3 gets the colour of T1_0 (it straddles ['C0', 'T1_1', 'T1_2', 'T1_3', 'T1_4', 'T2_2'])
+   step 5: T2_4 gets the colour of T1_1 (it straddles ['C0', 'T1_0', 'T1_2', 'T1_3', 'T1_4', 'T2_0', 'T2_3'])
+   step 6: R_0 gets the colour of C0 (it straddles ['T1_0', 'T1_4', 'T2_0', 'T2_1', 'T2_4'])
+   step 7: R_1 gets the colour of C0 (it straddles ['T1_0', 'T1_1', 'T2_0', 'T2_1', 'T2_2'])
+   step 8: R_2 gets the colour of C0 (it straddles ['T1_1', 'T1_2', 'T2_1', 'T2_2', 'T2_3'])
+   step 9: R_3 gets the colour of C0 (it straddles ['T1_2', 'T1_3', 'T2_2', 'T2_3', 'T2_4'])
+   step 10: R_4 gets the colour of C0 (it straddles ['T1_3', 'T1_4', 'T2_0', 'T2_3', 'T2_4'])
+   step 11: U_0 gets the colour of T1_1 (it straddles ['C0', 'R_0', 'R_1', 'T1_0', 'T1_4', 'T2_0', 'T2_1'])
+   step 12: U_1 gets the colour of T1_2 (it straddles ['C0', 'R_1', 'R_2', 'T1_0', 'T1_1', 'T2_1', 'T2_2'])
+   step 13: U_2 gets the colour of T1_3 (it straddles ['C0', 'R_2', 'R_3', 'T1_1', 'T1_2', 'T2_2', 'T2_3'])
+   step 14: U_3 gets the colour of T1_4 (it straddles ['C0', 'R_3', 'R_4', 'T1_2', 'T1_3', 'T2_3', 'T2_4'])
+   step 15: U_4 gets the colour of T1_0 (it straddles ['C0', 'R_0', 'R_4', 'T1_3', 'T1_4', 'T2_0', 'T2_4'])
+   step 16: U'_0 gets the colour of T1_4 (it straddles ['C0', 'R_0', 'R_1', 'T1_0', 'T1_1', 'T2_0', 'T2_1', 'U_0', 'U_1'])
+   step 17: U'_1 gets the colour of T1_0 (it straddles ['C0', 'R_1', 'R_2', 'T1_1', 'T1_2', 'T2_1', 'T2_2', 'U_1', 'U_2'])
+   step 18: U'_2 gets the colour of T1_1 (it straddles ['C0', 'R_2', 'R_3', 'T1_2', 'T1_3', 'T2_2', 'T2_3', 'U_2', 'U_3'])
+   step 19: U'_3 gets the colour of T1_2 (it straddles ['C0', 'R_3', 'R_4', 'T1_3', 'T1_4', 'T2_3', 'T2_4', 'U_3', 'U_4'])
+   step 20: U'_4 gets the colour of T1_3 (it straddles ['C0', 'R_0', 'R_4', 'T1_0', 'T1_4', 'T2_0', 'T2_4', 'U_0', 'U_4'])
+   determined: 26 of 26; undetermined: []
+   the forced colouring equals the printed one up to a permutation (same-colour classes identical): True
+   local six-cliques at B_0: tiles of B_k and Z^R_k ['T1_0', 'U_0', "U'_0", 'T2_0', 'R_0', "U'_4"]: False; of B_k and Z^L_(k+1) ['T1_0', 'U_0', "U'_0", 'T2_1', 'R_1', 'U_1']: False
+   local six-cliques at B_1: tiles of B_k and Z^R_k ['T1_1', 'U_1', "U'_1", 'T2_1', 'R_1', "U'_0"]: False; of B_k and Z^L_(k+1) ['T1_1', 'U_1', "U'_1", 'T2_2', 'R_2', 'U_2']: False
+   local six-cliques at B_2: tiles of B_k and Z^R_k ['T1_2', 'U_2', "U'_2", 'T2_2', 'R_2', "U'_1"]: False; of B_k and Z^L_(k+1) ['T1_2', 'U_2', "U'_2", 'T2_3', 'R_3', 'U_3']: False
+   local six-cliques at B_3: tiles of B_k and Z^R_k ['T1_3', 'U_3', "U'_3", 'T2_3', 'R_3', "U'_2"]: False; of B_k and Z^L_(k+1) ['T1_3', 'U_3', "U'_3", 'T2_4', 'R_4', 'U_4']: False
+   local six-cliques at B_4: tiles of B_k and Z^R_k ['T1_4', 'U_4', "U'_4", 'T2_4', 'R_4', "U'_3"]: False; of B_k and Z^L_(k+1) ['T1_4', 'U_4', "U'_4", 'T2_0', 'R_0', 'U_0']: False

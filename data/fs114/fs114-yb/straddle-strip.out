@@ -1,0 +1,14 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+== the strip's straddle relation on columns -3..5 (36 tiles, 630 pairs, exact; 5.9 s)
+   m=0: ['U-1', 'U0', 'T0', 'U1', 'T1', 'T2'] pairwise straddle: True; mirror ['D-1', 'D0', 'B0', 'D1', 'B1', 'B2']: True
+        U2~T0: True; T3~U-1: False; D2~B0: True; U-1~U2: False; T0~T3: False
+        U0~D-2..D2: [True, True, True, True, True]; U0~D3: False; T0~D-1, D0, D1, D-2: [True, True, False, False]; B0~U-1, U0, U1, U-2: [True, True, False, False]
+   m=1: ['U0', 'U1', 'T1', 'U2', 'T2', 'T3'] pairwise straddle: True; mirror ['D0', 'D1', 'B1', 'D2', 'B2', 'B3']: True
+        U3~T1: True; T4~U0: False; D3~B1: True; U0~U3: False; T1~T4: False
+        U1~D-1..D3: [True, True, True, True, True]; U1~D4: False; T1~D0, D1, D2, D-1: [True, True, False, False]; B1~U0, U1, U2, U-1: [True, True, False, False]
+   m=2: ['U1', 'U2', 'T2', 'U3', 'T3', 'T4'] pairwise straddle: True; mirror ['D1', 'D2', 'B2', 'D3', 'B3', 'B4']: True
+        U4~T2: True; T5~U1: False; D4~B2: True; U1~U4: False; T2~T5: False
+        U2~D0..D4: [True, True, True, True, True]; U2~D5: False; T2~D1, D2, D3, D0: [True, True, False, False]; B2~U1, U2, U3, U0: [True, True, False, False]
+   |V_0 - A_1|^2 = 0.572949 < 4; |V_0 - Q_0|^2 = 1: True; |A_1 - Q_0|^2 = 1: True; |V_0 - P_1|^2 = 1: True; |A_1 - P_1|^2 = 1: True
+   boundary curves at V_0: S; A about (-0.5, 0.0); A about (0.5, 0.0); any on the unit circle about Q_0: False
+   boundary curves at A_1: A about (0.5, 0.0); A about (1.0, 0.0); S
