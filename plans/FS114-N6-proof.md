@@ -27,6 +27,8 @@ itself) unless said otherwise. **FS112-L60 is used only in its corrected form, "
 | N6-ADJ | If `T_{j+2}` reaches `q_j` then `α_{j+1} = 60°` and `α_{j+1} + α_{j+2} < 180°` | [hand, one mind; tools exact] | §3.1 |
 | N6-QE1 | If `α_{j+1} ∈ (60°, 120°)`, no (Q) arc of `T_{j+2}` (outer colour `c_j`) holds `e(φ_j + 60°)` inside: `ω(q_j)` would enter a `c_j`-tile (N-E1 at `q_j`, which carries `c_j` by `z_j`); the pinwheel `α ≡ 90°` with full-zone (Q) arcs dies | [hand, one mind] | §3.2 |
 | N6-PIN | K1-PIN after stage 3: the pinwheel is excluded at radius `1 + ε` unless its ring carries (Q) arcs of N6-QOUT's kind; **GAP** there | [hand, one mind] | §3.3 |
+| **N6-CENT** | At a non-Siamese degree-4 vertex whose ring carries no (Q) arc (after the bends), all tactic centres lie in one class mod 60°: every cone between tactic edges is a multiple of 60°, and a lens is Reuleaux or `γ = 0°`; **non-Reuleaux lenses need a (Q) arc** | [hand, one mind] | §Stage 4 |
+| N6-COV | At a tactic centre that is a change point with `κ` defined on both windows beside it, the directions toward `p` are covered only by `p`'s own tiles reaching it; a unit gap between consecutive centres of one tile pushes that tile aside and forces a neighbour into a Reuleaux triangle on `p` | [hand, one mind] | §Stage 4 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -223,3 +225,43 @@ points `w_±`) reads radius `1 + ε`; the next reads are the (Q) arcs' outer til
 rhombus corners `q_j + e(φ_j − 60°)`.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: brief item 2 — the (2, 1, 1, 0) patterns and three tactic edges, reduced by the same two tools
+
+*Setting: any degree-4 vertex `p` of a non-Siamese valid map (simple class), four colours, after the bends; tactic edges of either sign (N3-SEC). A tactic
+edge leaving `p` in direction `θ` has its centre at `p + e(θ ± 90°)`, the sign by which side its inner tile lies.*
+
+**N6-CENT [hand, one mind].** *If `p`'s ring carries no (Q) arc, the centres of all tactic edges at `p` lie in one class `y + 60°ℤ`; hence all tactic edge
+directions lie in one class modulo 60°, and every cone between two tactic edges is a multiple of 60°.* Each tactic centre is a `κ`-change point (N3-FLANK:
+its two ring branches lie on (R2) arcs or in tiles of the absent colours, of different colours), and by N6-RING60 the change points are exactly `y + 60°ℤ`.
+The direction of an edge is its centre's direction `± 90°`, and `90° ≡ −90° (mod 60°)`. ∎ *Reads:* the closed disc of radius `1 + ε` about `p`.
+
+**Consequences for K1's open shapes (each at radius `1 + ε`).**
+- **Non-Reuleaux lenses need a (Q) arc.** A lens has its two centres `γ ≤ 60°` apart (N3-SEC (iii)); with a (Q)-free ring `γ ∈ {0°, 60°}`: the lens is Reuleaux
+  (`γ = 60°`, cone 120°) or the degenerate `γ = 0°` (cone 180°, both edges on one circle `ω(q)`). **K1's "non-Reuleaux lenses" (`0 < γ < 60°`) reduce to rings
+  with (Q) arcs.**
+- **The (2, 1, 1, 0) patterns and three tactic edges with a (Q)-free ring** have every cone between consecutive tactic edges in `{60°, 120°, 180°}` (N3-SEC (i):
+  a tile beside a tactic edge has cone at most 180°), rotational tiles `≥ 60°`, lenses `120°` or `180°`.
+- **N6-COV, the coverage step, general [hand, one mind].** *At a tactic centre `q = e(φ)` that is a change point with `κ` defined on both 60° windows beside it,
+  the directions `(150°, 210°)` rel `φ` (toward `p`) lie in the cones of `p`'s own tiles that reach `q`.* The two absent-colour tiles at `q` have cones in
+  `[30°, 150°]` and `[210°, 330°]` (N6-WIN, as in N6-P60′); every other tile at `q` meeting `B(p, 1)` is a tile at `p`. The inner tile of `q`'s edge reaches `q`;
+  when the tile's other bounding centre is at distance exactly 1 from `q`, its cone at `q` is pushed to one side (`[210°, 270°]` or `[90°, 150°]`), and a
+  neighbouring tile of `p` must reach `q` — which puts it in a Reuleaux triangle on `p` and costs it the cone bound of N6-ADJ. This is the mechanism that
+  closed the (Q)-free pinwheel; applied to `+++−` and `++−−` it is a finite list of cone vectors in `60°ℤ`, **not walked here**.
+
+**The Reuleaux bowtie in this language.** Its caps are (Q) arcs (inner `t1`, outer the colour-3 cap tile), so N4's and N5's bowtie is a (Q)-ring configuration;
+N6-CENT holds for its centres `e(±30°), e(180° ± 30°)` (all `≡ 30° mod 60°`) without contradiction. A bowtie whose lenses do **not** border the caps (the caps'
+ring arcs in absent-colour tiles) is (Q)-free and passes N6-COV at the corners (checked at `q1`: `R′ ⊂ [90°, 150°]`, `t1 ⊂ [150°, 270°]`, `R ⊂ [210°, 270°]` rel
+`φ = 30°`); **it is outside N4-BOWTIE's scope** (reading R-T takes the lenses to be whole Reuleaux triangles) and is named here as an open member of K1.
+
+### K1 after stage 4
+
+| degree-4 shape with three or four tactic edges | status |
+|---|---|
+| `++++` pinwheel | (Q)-free: **excluded at `1 + ε`** (N6-NOQ); with (Q) arcs: GAP (N6-QOUT, N6-QE1 constrain it) |
+| `+−+−` Reuleaux bowtie (lenses whole Reuleaux triangles) | N4-BOWTIE (`√3`, `Γ`-free lune rings, two minds), N5-ΓRING (radius 2 except (R-V), one mind); (R-V) GAP |
+| `+−+−` with lenses not bordering the caps | (Q)-free is possible only with `γ ∈ {0°, 60°}`; GAP, not walked |
+| non-Reuleaux lenses `0 < γ < 60°` | need a (Q) arc (N6-CENT); GAP there |
+| `+++−`, `++−−`; three tactic edges | (Q)-free: cones in `60°ℤ` (N6-CENT), N6-COV applies; GAP, not walked |
+
+## Stage 4 — SAVED
