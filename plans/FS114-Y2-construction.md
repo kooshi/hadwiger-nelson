@@ -80,3 +80,7 @@ a pinch point and breaks at a hole (`plans/FS114-CVB-verification.md`, open). Wh
   piece unmatched, a `T_i` touching its inner tile elsewhere.
 - plant `v5` (`V` coloured 5, images by the colour maps): **REJECT exactly** `(L1,V)`, `(L4,V'')`, `(L2,V')`, `(L3,V''')`.
 - plant `wide_t1` (the `T1 | W` edge leaves `q1` at 300° instead of 330°, all four images): **REJECT exactly** `(t4,T1)`, `(t4,T4)`, `(t2,T2)`, `(t2,T3)`.
+- **Run 1 (faithful, `v5`, `wide_t1`), before `wide_t1b` existed:** faithful and `v5` as registered. `wide_t1` fired at the four registered pairs **and at
+  two I did not register**, `(t1,W')` and `(t3,W)`: moving `c` to `q1 + e(300°)/5` also moves `W`'s rim chord `c′c` to `x ≈ 0.966`, inside the unit disc
+  about `p`, so `W` reaches within 1 of `p ∈ cl t3` — a registration miss of mine, named. **Registered now, before its run:** plant `wide_t1b` (the same
+  edge direction, `c = (3√3/5, 1/5)` on `W`'s unmoved rim line): **REJECT exactly** `(t4,T1)`, `(t4,T4)`, `(t2,T2)`, `(t2,T3)`.
