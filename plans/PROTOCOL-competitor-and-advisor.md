@@ -10,7 +10,10 @@ mathematics of the session is in `plans/MASCOT-DERIVATION.md`, `plans/COXETER-20
 > **Since 2026-09-28 the roles here run under agent files** (`WORKFLOW.md` § The roles). The owner is **Keryx**, the top-level
 > session. It coordinates and no longer takes a competitor's side, so both competitors are **`ephodos`** agents, briefed identically
 > and fenced from each other. The advisor is a **`poros`** agent. A competitor's result counts as a second mind only on the axes its
-> fence made true (the `keryx` skill's `<independence>`). The rules below stand; the briefs in §4–§5 are the record of the first run.
+> fence made true (the `keryx` skill's `<independence>`). Every message goes through Keryx, which runs a star: where §1 has the advisor
+> send a card to a competitor by `SendMessage`, the card now goes to "main", addressed, and Keryx delivers it verbatim. A competition
+> runs more agents than the pipeline's lanes and needs Kooshi's word first. The other rules below stand; the briefs in §4–§5 are the
+> record of the first run.
 
 ## 0. The design in one paragraph
 

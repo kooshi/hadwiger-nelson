@@ -1652,8 +1652,8 @@ justifies it. A constraint nobody questioned, that slowed the proof, is a choice
 **Standing rule (Kooshi, 2026-09-19): no child agent spawns children of its own**; only the top-level session launches agents. Its
 reasons and its incident are `plans/STANDING-RULES.md` rule 1, and it is enforced by the agent files' withheld tools and by
 `.claude/settings.json`. Staffing — head-count, model, budget — is Kooshi's decision:
-- **Head-count.** The pipeline runs **three standing agents, one per lane** — Poros, Ephodos, de Bruijn — **plus the Ephodos
-  verifiers a derivation needs, possibly in parallel with it** (Kooshi, 2026-09-28: *"3 agents will be running, with Poros scouting
+- **Head-count.** The pipeline runs **three agents at once, one per lane** — Poros, Ephodos, de Bruijn — **plus the Ephodos
+  verifiers a derivation needs, possibly in parallel with it**; a competition or a crunch runs more, on his word (Kooshi, 2026-09-28: *"3 agents will be running, with Poros scouting
   ahead, Efodos blazing the trail, and de Bruijn paving [it] behind them … Efodos can still have multiple stages, and will have
   verification versions of itself running after new theorems, also possibly in parallel to it"*). It replaces the earlier cap of three (Kooshi,
   2026-09-23: *"the one agent at a time rule is lifted, as Opus 5.5 is much cheaper than Fable 5.1 was. Now it can be up to 3 to

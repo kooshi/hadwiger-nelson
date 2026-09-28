@@ -273,7 +273,7 @@ first." Copy the best instance below and change only its slots. Paths are relati
 
 1. **A header line:** the job id, its kind, the model, the date, who wrote it, which brief it copies, when to launch it, and any hard stop
    ("Launch only after X30F has handed back"; "Hard stop: 11:50 UTC").
-2. **"Hello. You are <de Bruijn | Coxeter | Poros>, <role>"**, with `CLAUDE.md` and `WORKFLOW.md` read from disk (since 2026-09-28 the identity is the agent file the job is launched from), and
+2. **"Hello. You are <the identity of the agent file the job is launched from>, <role>"**, with `CLAUDE.md` and `WORKFLOW.md` read from disk (since 2026-09-28 the identity is the agent file the job is launched from), and
    **"`STANDING-RULES.md` is part of this brief; read it in full."**
 3. **The resume paragraph:** "If your record already exists, you are resuming: check the last SAVED stage against `git log -- <record>`."
 4. **Kooshi's words, verbatim**, where they are why the job exists.
@@ -294,7 +294,7 @@ first." Copy the best instance below and change only its slots. Paths are relati
     rule 1): staffing is Kooshi's budget decision, and the owner can only review work it knows about. If the work outgrows your context,
     stop at a saved stage and say what is left."
 12. **Record, data and tools paths:** the record with "Theorems this phase proved"; `data/<m>/<job>/`; `tools/<job>_*.py` with plants.
-13. **The touch list:** what the job may edit; the four front files only for the front-page lane.
+13. **The touch list:** what the job may edit; the front-page files (`plans/STANDING-RULES.md` rule 7) only for the front-page lane.
 14. **Commits** by explicit path, subjects "<id>: stage n", push after each commit (on a ref-lock race `sleep 4` and retry), never amend,
     never force-push, the harness's attribution lines.
 15. **Budget in the harness's count, a hand-back line and a stop rule** in tokens and in clock time.

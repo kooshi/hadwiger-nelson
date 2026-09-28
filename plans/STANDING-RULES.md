@@ -2,12 +2,14 @@
 
 *The rules every job in lean-dir's pipeline shares. Every brief names this file in its `standing rules:` field and says "it is part of
 this brief; read it in full." Its frame is Keryx's template (`.claude/skills/keryx/scripts/standing-rules.md`). Its lean-dir rules are
-the crunch runs' (`plans/PROTOCOL-crunch.md` §5 and §7), which is where each was learned, most of them from an incident. A crunch adds
+the crunch runs', where each was learned, most of them from an incident: the incidents are `plans/PROTOCOL-crunch.md` §7, and the
+rules' earlier text is that file's §5 before 2026-09-28 (`git show 280aad6a:plans/PROTOCOL-crunch.md`). A crunch adds
 its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule only when its reason no longer holds; Keryx is this file's writer.*
 
 1. **No agents of your own.** Do not use the Agent tool, a fork, a workflow, or anything else that starts another agent. Delegation
    here is one level deep. The pipeline's agent files withhold the Agent and Workflow tools, so this rule is also enforced
-   mechanically. The reason is in two parts. Staffing is Kooshi's budget decision, and an agent you start overrides it silently. And
+   mechanically. The reason is in two parts. Staffing is Kooshi's budget decision, nested agents multiply its token spend, and an agent you start
+   overrides it silently. And
    Keryx reviews by artifact, so it cannot review work by an agent it does not know exists, nor trust a bibliography entry's
    read-status when the reading was a grandchild's summary (G50). Kooshi's rule, 2026-09-19, was minted the
    day a planner briefed as "exactly one planner" started a subagent that started two more. If the work outgrows your context, stop at
@@ -67,7 +69,9 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
 8. **Fences.** If your brief fences a path and a search prints fenced text, stop reading it, and log the touch at once in your record
    and your report: the time, the file, and what it carried. A disclosed touch costs little; an undisclosed one voids the grade. The
    session transcripts (`~/.claude/projects/`, `chats-bak/`) hold every earlier agent's route: a fenced job does not read them. Never
-   copy an agent id (a string like `a1b2c3…`) into any file. Never read credential files (`auth.json`, `.env`, keyrings).
+   write anything about an open milestone (a verdict, a route, a hunch) into the auto-memory, `~/.claude/projects/…/memory/`: the
+   harness gives its index to every agent at launch, blind ones included. Never copy an agent id (a string like `a1b2c3…`) into any
+   file. Never read credential files (`auth.json`, `.env`, keyrings).
 
 9. **The machine.**
    - Any job over about 2 GiB or 2 minutes runs under `scripts/slot.py --mem <GiB> --cpus <N> -- <cmd>`, with an honest `--mem`.
@@ -90,10 +94,10 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
     INVENTORY: <one line per item — kind — one line — source address>
     HELD FOR THE COORDINATOR: <a decision or a slip, one line each; or "none">
     ```
-    INVENTORY kinds: result, correction owed, prediction scored, slip, tool defect, prior-art debt, stub to mint or re-aim, fence
-    touch, statement defect, question for another lane. Your last words are exactly "<id> idle; report sent to the coordinator", with
+    INVENTORY kinds: result, correction owed, prediction scored, retraction (counted per mind), slip, tool defect, prior-art debt,
+    stub to mint or re-aim, fence touch, statement defect, question for another lane. Your last words are exactly "<id> idle; report sent to the coordinator", with
     no content: a hand-back is delivered to whichever agent last woke you, which may not be the coordinator.
 
 12. **Budget.** Your brief names a size as guidance and a hand-back line. An overrun is not a slip (Kooshi, 2026-09-27). Leave margin:
-    the loaded context at launch is itself large, and agents' own counts of their context have run at 29–70 % of the harness's. Past
-    about 500k by the harness's count, a mind is replaced from the record, not continued.
+    the loaded context at launch is itself large, and agents' own counts of their context have run at 29–70 % of the harness's (the
+    crunch runs; FS-89 measured 55–70 %). Hand back at a saved stage before your brief's line.
