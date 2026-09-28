@@ -1,0 +1,21 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0
+ok  L1: probe vs X2: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  L2: probe vs far: ACCEPT (registered ACCEPT; min<1 False, max>1 True)
+ok  T1: probe vs t1: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T2: probe vs t3: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T3: probe vs t2w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T4: probe vs X1w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T5: probe vs X4w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T6: probe vs T4w: ACCEPT (registered ACCEPT; min<1 False, max>1 True)
+ok  T7: probe vs X4w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T8: probe vs T1w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  T9: probe vs X1w: ACCEPT (registered ACCEPT; min<1 True, max>1 False)
+ok  B1: probe vs t1: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B2: probe vs t3: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B3: probe vs t4w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B4: probe vs T2e1: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B5: probe vs X2: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B6: probe vs X3w: REJECT (registered REJECT; min<1 True, max>1 True)
+ok  B7: probe vs T2r: ACCEPT (registered ACCEPT; min<1 False, max>1 True)
+ok  V1: |q1 + e(61.93)/100 - top|^2 = 0.99942730 < 1: True
+ALL AS REGISTERED

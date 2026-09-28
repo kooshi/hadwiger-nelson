@@ -24,12 +24,16 @@ top lune's ring `(30°, 150°)` changes colour once, at `top`"; a ring **free of
 | **FS114-Y4-LUNE** | In a non-Siamese simple valid map with a Reuleaux bowtie at `p`, the two side tiles of each lune differ in colour: `c(X1) ≠ c(X4)`, `c(X2) ≠ c(X3)`; with SIDES the pattern is diagonal (`c(X1) = c(X3)`, `c(X2) = c(X4)`). Proof: a same-colour lune puts two frontier arcs, from the points where `t2` meets `X1` on `S1` and `X4` on `S4`, inside `cl t2` at mutual distance exactly 1 — infinitely many points on two circles | [hand; one mind; YB2-EMPTY13 is its symmetric instance] | §3.1 |
 | **FS114-Y4-DIAG** | In a diagonal bowtie containing neighbourhoods of `top` and `bot`: `top` carries `X1`, `N` (4), `X4`; each `q_i` has exactly five colours with the sliver forced and `X1` starting at exactly `60°`; so the ring of `q1` above `r` forces E1 (`T2 ⊂ [240°, 300°]`), and then `bot`'s sector `(240°, 300°)` has no colour: **no neighbourhood of `r`** | [hand; one mind, over FS112-U1, FS114-Y3-R and YB2-RPREC] | §3.2 |
 | **FS114-Y4-RSTOPALL** | **No non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of the closed unit disc about `p` and of `r`**: RSTOP extends to every Reuleaux bowtie, symmetric or not, Γ-free or ΓRING; none holds a closed disc of radius `√3` about `p`. E1, E2 and E0 are all excluded | [hand; one mind] | §3.3 |
+| FS114-Y4-CHK | The inequalities LUNE and DIAG rest on, at named points with germ wedges: the `ā`-block just outside `S1` (with a control that does not block), the colour lists at `top`'s sectors `(60°, 120°)` and `(0°, 60°)` (controls: colour 4 free where `T4`/`T1` point away, `a` free inside `B(q1, 1)`), `V`'s distance to `top`, and `bot`'s sector `(240°, 300°)` under E1 (control: colour 2 free when `T2` points toward `r`, as at Y2's `N′`): **19 of 19 as registered** | [tools, exact at named values; the proofs are the derivations] | §4; `tools/fs114_y4_diag.py`; `data/fs114/fs114-y4/diag.out` |
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 2: I would have varied the bowtie's tiles near `r` (sector boundaries at `q1`, `q2`, the colour of the sliver) and run the checker on
   each; instead each sector at `r` was read against the germs at `q1` and `q2` (the table of §2.2) and the tiles' colours derived from SIDES,
   UPDOWN and W. The exact check was run once, on named points and on Y2's object recoloured by the action in question.
+- Stage 3: I would have tried asymmetric bowties (four colours at `q1`; E1 at `q2`; E2 with `λ > 60°`) as tile layouts and run the checker; instead the
+  colours at `top`, `r` and `bot` were read sector by sector, which led to LUNE and DIAG; no layout was built.
+- Stage 4: I would have scanned probe positions near `top` and `bot`; instead one named probe per sector, registered with its controls.
 
 ## Fence log (standing rule 13; the brief's § Fences)
 
@@ -199,8 +203,7 @@ Diagonal: `c(X1) = a`, `c(X4) = ā`.
 ### 3.3 FS114-Y4-RSTOPALL — the Reuleaux bowtie never reaches `r` [hand; one mind]
 
 **No non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about `p` and a neighbourhood of `r` holds a Reuleaux bowtie
-at `p`** (LUNE: diagonal; DIAG: then no `r`). By the bowtie's own symmetries the same holds at `−r = q3 + q4` and, with `t2` and `t4` in the roles of the
-Reuleaux triangles' outer tiles, nowhere else is needed. **So no Reuleaux bowtie fragment holds a closed disc of radius `√3` about `p`**, whatever its
+at `p`** (LUNE: diagonal; DIAG: then no `r`). The same argument, with `t3`, `q3`, `q4` in place of `t1`, `q2`, `q1`, excludes a neighbourhood of `−r = q3 + q4`. **So no Reuleaux bowtie fragment holds a closed disc of radius `√3` about `p`**, whatever its
 lune rings carry: this answers my brief's item 1 in its second form (E1 and E2 impossible — and E0, which four colours at `q1` would give, is excluded
 by DIAG step 3's forced five), and item 2 at radius `√3` (the bowtie with a lune ring carrying arcs of `ω(p)` stops there too — K1-ΓRING at `√3`), and
 it re-derives the proof side's N4-BOWTIE (Γ-free rings, radius `√3`) by another route. It does **not** decide K1: the pinwheel, the `(2, 1, 1, 0)`
@@ -215,3 +218,43 @@ germ to reach below the direction `θ + 90°`, which holds because `S2` curves u
 DIAG step 4 (the tangent case of `X1` at `60°`); DIAG step 5 (the colour list at `bot`'s `(240°, 300°)`).
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the exact checks, the controls, and what is left
+
+### 4.1 FS114-Y4-CHK (`tools/fs114_y4_diag.py`, `data/fs114/fs114-y4/diag.out`)
+
+YB's checker and Y2's `t1`, `t3`, unedited; every other tile a germ wedge (a sector of radius `1/5` at the named vertex) or a probe (a triangle of size
+`1/1000`), all in `ℚ(√3)`; predictions registered in the docstring before the run. **19 of 19 as registered:** L1 (the `ā`-block just outside `S1` at
+`q2 + (1001/1000)e(120°)` by a wedge below `S2`) REJECT, L2 (a wedge at `[226.4°, 240°]`) ACCEPT; at `top + e(90°)/100`: `t1`, `t3`, the `t2`-wedge, the
+`X1`-wedge, the `X4`-wedge all REJECT, a `T4`-wedge pointing away ACCEPT; at `top + e(30°)/100`: the `X4`-wedge and a `T1`-wedge pointing away REJECT, the
+`X1`-wedge ACCEPT; V1: `|q1 + e(61.93°)/100 − top|² = 0.99943 < 1`; at `bot + e(270°)/100`: `t1`, `t3`, the `t4`-wedge, an E1 `T2`-wedge, the `X2`-wedge
+and the `X3`-wedge all REJECT, a `T2`-wedge toward `r` ACCEPT (Y2's `N′`, colour 2, sits there). The checks confirm the inequalities at named values;
+the proofs are §3's derivations, for every small germ.
+
+### 4.2 The claim list's killing tests, read against RSTOPALL
+
+- **Seven colours** (claim list §6, killing test 1): with a seventh colour DIAG fails at step 3 (the gap tile `V` need not be `ā`) and at step 5 (`bot`'s
+  sector takes colour 7). LUNE, SIDES, UPDOWN and W use no colour count. So "six" is spent at DIAG steps 3 and 5.
+- **The local positives** (killing test 8): the strip and the disk hold no Reuleaux bowtie, so RSTOPALL says nothing about them. FS114-Y2-BOWTIE and
+  YB2's bowtie are the held Reuleaux bowties: both are diagonal (LUNE), both have `N` above `top`, five colours at each `q_i` and `λ = 60°` (DIAG
+  steps 1–3), and both have `T2` toward `r`, so neither meets step 5. They stop at `r` by RSTOP, which is DIAG step 4 read on them.
+
+### 4.3 What is left (for a successor)
+
+1. **A second mind on §3** (standing rule 4, G51), blind if possible: LUNE item 1, DIAG steps 1, 4 and 5 first (§3.3's audit list).
+2. **My brief's item 3, not started:** the pinwheel (each tile at `p` inner for one tactic edge) and the `(2, 1, 1, 0)` patterns. SIDES does not apply
+   as stated (no tile carries two tactic sides), but its engine does: at two tactic centres 1 apart, UPDOWN and the germ table (§2.2) read every sector of
+   the rhombus corner `q_i + q_j − p` and of the point `q_i + (q_i − p)`-type corners as §3.2 read `top`, `r` and `bot`. That is the first move there.
+3. **Non-Reuleaux lenses at four tactic edges** (the round-4 card's list): not touched.
+4. **The non-simple case** of LUNE and W (a tile meeting itself at `q1` around `T1`) is not covered. It belongs with GAP-μ.
+
+### 4.4 Proposed edits for the close (standing rule 7: the close writes them)
+
+- `LEDGER.md` § B and FS-114's derivation file: FS114-Y4-SIDES, -UPDOWN, -W, -D2ALL, -E2X, -LUNE, -DIAG, -RSTOPALL (hand, one mind each), -CHK (tools).
+- `CLAUDE.md` G83's body: "every Reuleaux bowtie is coloured diagonally and stops before `r = q1 + q2`, at radius `√3` (RSTOPALL, one mind)". The
+  unit-arc NO's local form, C114-LOCAL-F, gains a first piece that holds for every Reuleaux bowtie, where Y3-RSTOP's held for one design.
+- `plans/FRONTIER-STUBS.md`, FS-114's row: K1's open cases shrink to the pinwheel, the `(2, 1, 1, 0)` patterns, non-Reuleaux lenses and the non-simple
+  bowtie. K1-ΓRING is closed at `√3` by RSTOPALL, and N4-BOWTIE gains a second, independent route.
+- No bibliography rows: nothing new was read.
+
+## Stage 4 — SAVED
