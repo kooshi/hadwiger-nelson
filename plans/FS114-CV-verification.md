@@ -225,3 +225,58 @@ under unit arcs, N4-FIN's recursions, N112-U1 and DENSE3 — all held at two min
 | CV-P3 | the night advisor's C114-EXISTS-F passes through C-ENDS and keeps the residue as its exception (no remark that a one-vertex chain always has a four-colour neighbour) | 0.7 |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the assembly read (after `21b20bf7`); divergences
+
+*Read after stage 1 was committed and pushed: `data/fs112/fs112-c/reconciliation.md` §§1.5–1.7, 1.9–1.11; `plans/FS112-derivation.md` §3 in full;
+`plans/POROS-2026-09-27-night-aim.md` §5's hunch `every-valid-map-has-a-four-colour-vertex` and §6. Not opened: `data/fs112/fs112-c2/` (its quote and edit
+scripts; nothing in the brief rests on them), `plans/FS112-unit-arc-half.md` §R-close, the two stubs.*
+
+### 2.1 Quotation check, completed
+
+`tools/fs114_cv_quotes.py --file data/fs114/fs114-cv/quotes-stage2.tsv --self-test` (`data/fs114/fs114-cv/quotes-stage2.out`, exit 0): **19 of 19 exact** —
+the claim list's thirteen §2 statements against `plans/FS112-derivation.md`, GS-1's two quotations against the night advisor's record, GS-4 and the brief's
+"second minds on FS112-C-ENDS (with its stage-1b repair), C-COMPOSE and C-PARTNERS" against `plans/STUB-global-step.md`, and the brief's C-HORNEND and C-DOUBLE
+against `plans/FS112-derivation.md` §3. The plant (one character altered) fires for its own row only.
+
+### 2.2 Divergences (both addresses; kind; whether a verdict changes)
+
+| # | statement | the assembly | mine (stage 1) | kind | verdict change? |
+|---|---|---|---|---|---|
+| 1 | **C-ENDS's residue** | "a one-vertex chain with a unit-arc bound on an (R2) arc of one horn only of a side and a bound `∓1` on the other side" — not walked (reconciliation §1.9; derivation §3, C-ENDS) | **empty** (§1.5 row 1). Its sub-cases: (a) one horn bounded above, one below — no in-type flank tile exists (each needs both horns of its side, CV-FLANK), so CV-P puts a repeated colour at both neighbours and CV-U makes both non-stuck: four colours at each; **no new lemma is needed** (the assembly's own "where (iii) holds the antipode carries a double sector", with N112-END's content); (b) one horn above, both below — impossible, CV-HD's mirror (both lower arcs force `G_N`, hence both upper); (c) both above, one below — impossible, CV-HD | **truth of the residue: closed** | **yes**: C-ENDS's exception clause can be deleted [one mind for (b), (c); (a) rests on links at two minds] |
+| 2 | C-ENDS's proof: where a chain stops | lists "an arc of `ω(v)` through `N` forces `\|P_cl(N)\| ≥ 4` (NB §2.3 #10, one mind)" among the stops; its grade line carries that one-mind link | **the case never occurs**: a stuck vertex of `M*` centres no unit arc (CV-L0: every unit arc of `M*` is (Q) or (R2), whose outer colour sits in a cone of angle `< π` at the centre, where `g`, `h` fill half-planes and `c` holds `±a`) | scope | no; the one-mind link leaves C-ENDS's grade |
+| 3 | C-HORNEND | TRUE, one mind (FS112-C2), over Y3-END-NEEDS as corrected; "a unit arc bounding one horn only of a side (an (R2) arc) is not walked" | TRUE, **sharper** (both lower arcs, with an in-type lower-flank tile: CV-HD), derived blind in full: the `G_N` branch (dies at step 9), `x+ = x−` (W-MERGE at `N`, step 8) and two `y`-sectors at `N` (step 9) are cases Y3/YB3's levels do not write out (the reconciliation §1.5 names the first as unsaid by Y3). The one-horn case is walked: case (II) of CV-CLASS | strengthening; scope | no for the stated form (now two minds); the sharper form one mind |
+| 4 | C-DOUBLE | TRUE, one mind, "a sketch" over Y3-END-NEEDS's levels with `n` reversed | TRUE; the same route (level 2 at `S` with `g` in `h`'s role, a seventh colour at `S − n`), written out step by step in CV-HD | agreement, route shared | no; **two minds** (FS112-C2, mine blind) |
+| 5 | C-PARTNERS | TRUE, one mind, over N3-COR3 and the count of leaving centres | the same argument | agreement | no; **two minds** |
+| 6 | C-COMPOSE (1) | TRUE, trivial | TRUE, trivial | agreement | no; two minds |
+| 7 | C-COMPOSE (2) | TRUE at one mind; "item 2 inherits FS112-C-ENDS's residue" | TRUE; the radius `\|K\| + 2` needs NB3-LEN's `2\|K\| − 3` (both cite it) and **never needed the residue closed**: a one-vertex chain lies within 1 of a four-colour neighbour in every case (CV-CLASS; before CV-HD, already: `G_N` gives `N`, `¬G_N` gives `S`) | scope of a dependency | no; two minds, the residue dependency removed |
+| 8 | C-COMPOSE (3) and its narrowing of (b′), (b″) | chains' ends "at NB4P exceptions, at an arc of the end vertex's circle through the next point, or at a unit arc bounding one horn only (not walked)" | the second never occurs (#2); the third is walked (CV-CLASS (II)): **every end's next point has four colours or more and a repeated colour**. (3) itself agreed: GS-4's density form needs (b′), (b″) | scope | no for (3); the narrowing's list shrinks to "four-colour vertices" |
+| 9 | C114-EXISTS-F / GS-1 | NIGHT-A (one mind): "outside C-ENDS's residue", through (L1)–(L4) with (L4) = C-ENDS; "the terminal modification" | TRUE with **no residue**, derived **without C-ENDS** (CV-P and CV-L4 make every stuck vertex's chain bi-infinite when `F(M*) = ∅`; N4-FIN forbids it), and **for the map itself** (moves never add a colour to an existing point) | scope (residue and modification both dropped) | **yes for GS-1's statement**: the exception is deleted. Minds: two for the form outside the residue (NIGHT-A; mine), one for the full form (mine) |
+| 10 | LEDGER row 135 "Not claimed … a chain end at a unit arc bounding one horn only" | not walked | walked: case (II) — the next point has four colours or more and a repeated colour | scope | the row's not-claimed item is answered (one mind) |
+
+**Agreements** (mine blind): the assembly's (L4) mechanism "where (iii) holds the antipode carries a double sector, so in `M*` it is stuck or has four
+colours" is CV-P; FS112-END's use in C-HORNEND is CV-U; the composition's items 1–3 and the radius `|K| + 2`; C-PARTNERS's proof word for word in substance.
+
+### 2.3 Registrations scored
+
+| id | outcome |
+|---|---|
+| CV-P1 (0.6) | **met** on its second disjunct: the assembly held the mechanism ("where (iii) holds the antipode carries a double sector") and did not apply it at an (R2) bound, where no in-type tile exists and (iii) holds; the first disjunct also bears on sub-cases (b), (c) |
+| CV-P2 (0.7) | **met**: C-HORNEND rests on Y3-END-NEEDS as corrected and concludes "a horn bounded by a unit arc of `ω(E − n)`" |
+| CV-P3 (0.7) | **met**: NIGHT-A's (L4) is C-ENDS, and the hunch keeps "outside FS112-C-ENDS's named residue" |
+
+### 2.4 Proposed edits (for the close; I edit none of these files)
+
+- `plans/FS112-derivation.md` §3 (or FS-114's derivation file) and `LEDGER.md` row 135: C-ENDS **without its residue** [hand; the stated form two minds (FS112-C;
+  FS114-CV), the residue-free form one mind (FS114-CV)]; drop "but the arc-through-N count one mind: NB" from its grade (#2); C-HORNEND's sharper form and
+  C-DOUBLE at two minds; C-PARTNERS at two minds; row 135's not-claimed "a chain end at a unit arc bounding one horn only" answered.
+- FS-114's derivation file: CV-L0, CV-FLANK, CV-U, CV-P, CV-L4, CV-HD, CV-CLASS, CV-EXISTS as filed in this record's theorem table.
+- `data/fs114/claims.md` verdicts: C114-EXISTS-F **TRUE, stronger** (the valid map itself; no residue); GS-1 TRUE with "outside FS112-C-ENDS's named residue"
+  deleted; C114-LOCAL-FR not needed (C114-LOCAL-F with CV-EXISTS is the NO).
+- The night advisor's hunch `every-valid-map-has-a-four-colour-vertex`: scored TRUE, sharper.
+- `CLAUDE.md` G83 (the close's call): its reading "the unit-arc half is a placement problem for four-colour vertices" gains a theorem — every valid map has one
+  (CV-EXISTS) — so the NO is a local exclusion about one four-colour vertex; its *Do* could read "list the four-colour vertices first: there is always one".
+- Stubs to re-aim: `plans/STUB-stuck-ray.md` (FS-115) bears only on GS-4's density form, not on the NO; `plans/STUB-global-step.md`'s form of the step is
+  C114-LOCAL-F.
+
+## Stage 2 — SAVED
