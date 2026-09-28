@@ -363,7 +363,7 @@ In `P_x` (no cone is `60°`, so case (A) holds at every `q_k`), outside E2:
    - `(150°, 210°)`, inside `B(p, 1)` only: `t_{k+2}`, since `μ_k ⊂ B̄(q_k, 1)`.
    - `(330°, 30°)`, outside the ring, inside `B(q_k, 1)`. Only colours `k`, 5, 6 are free outside the ring on the arc `(φ_k, φ_{k+1})` (§3.4).
      - Colour `k` would be within 1 of `q_k ∈ cl T_k`, by a tile other than `T_k` (step 1).
-     - `m̄_k` would be within 1 of `q_k+1 ∈ cl μ_{k+1}` (`|v_{k+1} − q_{k+1}| = 2 sin((α_{k+1} − 60°)/2) < 1`). It is not `μ_{k+1}`: that tile contains
+     - `m̄_k` would be within 1 of `q_{k+1} ∈ cl μ_{k+1}` (`|v_{k+1} − q_{k+1}| = 2 sin((α_{k+1} − 60°)/2) < 1`). It is not `μ_{k+1}`: that tile contains
        `v_{k+2}`, more than 1 away.
      - So the sector is **`μ_k`**.
    - `(30°, 150°)`, outside both. Colour `m̄_k` is excluded as before. `m_k` is excluded: `μ_k ⊂ B̄(q_k, 1)`, and any other `m_k`-tile is within 1 of
@@ -405,8 +405,9 @@ containing a neighbourhood of the closed unit disc about `p` holds a pinwheel at
   step 3 of 4.1. A seventh colour gives each blade a third free neighbour colour and each sector at `v_{k+1}` a third candidate.
 - **Killing test 8 (the local positives):** the strip and the disk hold no degree-4 vertex with four tactic edges, so PINALL says nothing about them.
 - **G79 reading** (an example invariant of every valid map): around a degree-4 vertex whose four edges are tactic, a non-Siamese simple valid map never has
-  the pinwheel incidence (each tile inner for exactly one edge). Its tiles are inner for two edges or none, as in the Reuleaux bowtie `(2, 0, 2, 0)`, or
-  the vertex is in E1 or E2. By Y4-RSTOPALL and N4-BOWTIE the Reuleaux bowtie stops at `√3`.
+  the pinwheel incidence (each tile inner for exactly one edge). Counting, for each tile, the edges it is inner for gives `(1, 1, 1, 1)` (the pinwheel), `(2, 1, 1, 0)` or `(2, 0, 2, 0)` (the bowtie family); two adjacent
+  2's would give one edge two inner tiles. So the vertex's pattern is `(2, 1, 1, 0)` or `(2, 0, 2, 0)`, or it is in E1 or E2. By Y4-RSTOPALL and
+  N4-BOWTIE the Reuleaux members of `(2, 0, 2, 0)` stop at `√3`.
 
 **What is left of K1's four-tactic-edge case:**
 - E1 and E2 for the pinwheel;
