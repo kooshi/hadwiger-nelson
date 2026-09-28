@@ -29,17 +29,20 @@ view still too busy, the fallback is to hide the orbit edges at rest entirely.
 | which answer a route serves | sector (angle), a faint wedge tinted with the answer's hue, and the sector's name set along the rim |
 | distance from the answer, structurally | ring (radius): answers, then their halves, then the deciding steps, then their premises outward |
 | grade (how solid) | **solidity**: kernel solid; certificate solid with a second ring; hand, two minds, one blind 62 % fill; two minds 38 %; one mind 18 %; in print hatched; a belief dashed amber |
-| missing | hollow, red, dashed, with a question mark; an open question not yet reduced to named steps gets a second dashed ring |
+| missing | hollow, red, dashed, with a question mark; an open question not split into named steps gets a second dashed ring |
 | follows once its premises hold | hollow, dashed, in the answer's hue (the open halves `χ ≥ 7`, `χ ≥ 6`, `χ ≤ 6`, `χ ≤ 5`, and the conclusions such as `χ_m⁰(ℝ²) ≥ 7`) |
 | role | circle a theorem or step; **octagon a no-go**; diamond an exact object (the strip, the disk, Parts's tiling); square Lean work |
 | a no-go's effect | a maroon edge ending in a bar into what it rules out |
-| FS-112 closing tonight | a long-dashed ring in the seven hue; claims under blind verification tonight add an amber dotted ring |
+| under blind verification | an amber dotted ring (after FS-112's close: row 134, whose base steps BASE-V is re-deriving blind) |
+| a question posed in print | a small flag beside the mark: filled when a result here answers it, half-filled when one reduced it without answering it, hollow when it is open; the card quotes the words that say which |
+| a link held only as a reading | dashed amber, like a belief, and counted in its route (the meeting of the two doors to seven, FS107-MEET) |
 | a held half of an answer | the answer's disc half-filled on the side of the held bound (7 on its `≤ 7` side, 5 on its `≥ 5` side; 6 empty) |
 | the centre | the kernel's own seven-colouring behind the answers: 4/5 × 3/5 bricks, each row shifted 2/5, coloured (column + 3·row) mod 7 (`Instances/Seven.lean`); one cell's diagonal is drawn, exactly the unit distance |
 
 Grades are the source's own words, folded to the page's statuses by one rule (`tools/viz_proof_atlas_common.py` `fold`), in order: a gap word
 ("GAP", "gaps", "open", "not claimed", a question, a stub's title) → missing; "kernel" → kernel; "exact checker" or "ACCEPT … exact" →
-certificate; "external" or "in print" → in print; "reading", "a reading" or "conjecture" → belief; "blind" → hand, two minds, one blind; "two/three
+certificate, and so do "exact" with "checker(s)"; "external" or "in print" → in print; "reading", "a reading", "a one-mind reading" or
+"conjecture" → belief; "blind" → hand, two minds, one blind; "two/three
 minds, derivations, readings" → hand, two minds; "hand", "one mind" → hand, one mind. A Lean declaration (`@lean`) is kernel only if the checker
 finds it. The card always shows the words themselves beside the folded status.
 
@@ -56,61 +59,67 @@ before publishing").
 | status | p | where it comes from |
 |---|---|---|
 | kernel | 1.00 | checked by the kernel: 0 bits |
-| certificate | 0.99 | exact objects rebuilt twice blind and accepted by two exact checkers (the strip, the disk) |
+| certificate | 0.99 | exact objects accepted by exact checkers (the strip and the disk, rebuilt two or three times; the bowtie once, one checker) |
 | hand, two minds, one blind | 0.95 | `LEDGER.md` row 77, the theorem audit: "184 hand, 23 derived, 31 tools, 2 cert", one proof wrong, grades under-stated four times for each over-statement — the measured record is better than this |
 | hand, two minds | 0.90 | lower than blind: `plans/FS112-unit-arc-half.md` E16 registers "a blind verifier finds a divergence of truth" at 0.4, FS-110's rate |
 | hand, one mind | 0.80 | a stated default |
 | in print, not re-checked | 0.90 | a stated default (Einsiedler–Lindenstrauss's Thm 1.3; Parts's tiling) |
-| belief | 0.50 | a stated default; the conjecture is drawn but counted in no route |
+| belief | 0.50 | a stated default; the local–global conjecture is drawn but counted in no route; the meeting of the two doors (FS107-MEET, "a one-mind reading") counts on the route to seven |
 | missing step named by a reduction | 0.30 | anchored on `plans/FS112-unit-arc-half.md` E14: "a NO of Q-full at one mind with every GAP named, within P1", 0.3 |
-| open question not yet reduced | 0.03 | anchored on the one registered credence for a question of the answer's size, E5: "a YES by formula (0.03)" |
+| open question, not split into named steps | 0.03 | anchored on the one registered credence for a question of the answer's size, E5: "a YES by formula (0.03)"; since FS-112's close it also prices FS-114's global step, the whole remaining unit-arc question |
 
-**Registered probabilities used in place of the defaults:** a tight six-map (the YES), 0.03 — `plans/FS112-unit-arc-half.md` E5, population
-"within FS-112 … given by formula and accepted exactly, among asymmetric curved maps with unit-arc seams and four-colour vertices"; the cone scale
-(door B), 0.15 — `plans/STUB-reg-scale.md`, "a cone-scale bound for near-optimal colourings at one mind, 0.15". The stubs of FS-104, FS-80 and
-FS-44 give only words ("success low", "soft as to success", "soft as to truth"); the page shows those words on each card and uses the default.
+**Registered probabilities used in place of the defaults** (only where the registration is for the link's own event): a tight six-map (FS-114's
+YES), 0.03 — `plans/STUB-global-step.md`, "a YES by formula | 0.03"; the cone scale (door B), 0.15 — `plans/STUB-reg-scale.md`, "a cone-scale bound
+for near-optimal colourings at one mind, 0.15"; the stuck ray (b′), 0.35, and bounded chains (b″), 0.25 — `plans/STUB-stuck-ray.md` (on no route).
+**Shown on the card but not used:** FS-114's "the global step decided (NO or YES) at one mind within FS-114 | 0.2" — decided either way, a different
+event from the NO holding, so the NO keeps the open-question default and the bits do not make it look smaller than it is; FS-114's "a NO for doubly
+periodic maps (the four-colour form), one mind | 0.3", on the four-colour form's card. The stubs of FS-104, FS-80 and FS-44 give only words
+("success low", "soft as to success", "soft as to truth"); the page shows those words on each card and uses the default.
 
-**At the defaults** (the page recomputes live): seven **8.91 bits** (four named missing steps; 16 links not in Lean); six **10.6 bits** (two
-open questions; 7 links); five **5.28 bits** (one open question; 3 links); the classical interval 0; five by measure rigidity 0.30 (a second
-proof of a held bound). **What the numbers are not**, stated on the page: a credence is an instrument (§ Counter-priors rule 2), never evidence;
-a belief about the answer is not evidence for it (§ The local–global conjecture, G64); the numbers are not a ranking (§ Counter-priors rule 1);
-and they count only named steps — the route to seven is analysed furthest, so more of its cost shows, while a route resting on one open question
-hides the steps inside it. The page puts the counts of named steps and open questions beside every distance for that reason.
+**At the defaults, after FS-112's close** (the page recomputes live): seven **10.0 bits** (FS-114's global step as one open question, 5.06; FS-111's
+cone scale, 2.74; the doors' meeting as a reading, 1.0; the composition at one mind, 0.32; 15 of 17 links not in Lean); six **10.6 bits** (two open
+questions; 7 links); five **5.28 bits** (one open question; 3 links); the classical interval 0; five by measure rigidity 0.30 (a second proof of a held
+bound). Version 1 read seven at 8.91 bits over four named steps; the rise is the honest price of FS-112's result — the NO is one whole question, not
+three small steps and a composition. **What the numbers are not**, stated on the page: a credence is an instrument (§ Counter-priors rule 2), never
+evidence; a belief about the answer is not evidence for it (§ The local–global conjecture, G64); the numbers are not a ranking (§ Counter-priors rule
+1); and they count only named steps — a route resting on one open question hides the steps inside it. The page puts the counts of named steps, open
+questions and readings beside every distance for that reason.
 
 ## 4. The facts, and the check
 
-- **One table**, `data/viz/proof-atlas/facts.json`, written by `tools/viz_proof_atlas_facts.py` from hand-authored entries: 61 nodes, 73 edges,
-  9 routes, 9 credence defaults, 4 notes. Every node carries its plain statement, a verbatim quote at an address (a `LEDGER.md` row, an item of
+- **One table**, `data/viz/proof-atlas/facts.json`, written by `tools/viz_proof_atlas_facts.py` from hand-authored entries: 68 nodes, 84 edges,
+  9 routes, 9 credence defaults, 4 notes, 5 posed-question marks (after FS-112's close). Every node carries its plain statement, a verbatim quote at an address (a `LEDGER.md` row, an item of
   `plans/FS112-close-inventory.md`, a row of `plans/FS112-N-proof.md`'s tables, a section of `CLAUDE.md` or of a plan, a stub, or a Lean
   declaration), the source's grade words at their own address, and any registered probability with its population. Every edge carries the quote
   that establishes it.
 - **The checker**, `tools/viz_proof_atlas_check.py`: re-reads every quote from its address (after removing markdown marks and collapsing
   whitespace); re-folds every grade from its words; confirms each `@lean` declaration exists; confirms each registered number stands in its quote
-  and at its address; confirms every route reaches its half-answer along the edges; refuses any address inside tonight's fenced files before
-  reading. Result: **checked 151, failed 0, errors 0.**
-- **Controls** (`--self-test`, PASSED): the faithful table passes; seven plants each fire exactly once, naming their fact — a wrong grade (MR
+  and at its address; confirms every posed question's state is what its words say; confirms every route reaches its half-answer along the
+  edges; refuses any address inside tonight's fenced files before reading. Result: **checked 169, failed 0, errors 0.**
+- **Controls** (`--self-test`, PASSED): the faithful table passes; eight plants each fire exactly once, naming their fact — a wrong grade (MR
   called kernel), a dead address (row 999), a missing file (ERROR), a quote not in its source, a wrong registered probability (0.03 → 0.3), a
-  fenced address, a route link that is no node — and the fenced file is confirmed never opened.
-- **`build.py`** runs the checker, refuses to build when it fails, inlines the table and asserts the page contract (no doctype, html, head or
-  body tags).
+  fenced address, a reduced question marked answered, a route link that is no node — and the fenced file is confirmed never opened.
+- **`build.py`** runs the checker and the palette review, refuses to build when either fails or when the two dark token blocks disagree, inlines
+  the table and asserts the page contract (no doctype, html, head or body tags).
 
 ## 5. Scope
 
 **The routes drawn** (each verified against the files): the classical interval (row 33); five algebraically through measure rigidity (rows 120,
-121); the regularity wall toward seven (§ The aim links 1–6; rows 128, 130–134; FS-112's reduction; FS-111); the YES side, bounded and unbounded
-complexity (rows 131, 133; the strip and the disk; FS-112 E5); six from below by `χ_CP`, by an averaged certificate, and through ℚ(√167) (FS-104,
-FS-80, row 125, FS-59); exactly five (FS-44); and the local–global structure (rows 52, 99, 119, 123, 127; the conjecture as a belief). Lean work:
-row 127, FS-101, FS-113 and the wall's own chain.
+121); the regularity wall toward seven (§ The aim links 1–6; rows 128, 130–136; FS-114's global step; FS-111; the doors' meeting as a reading); the
+YES side, bounded and unbounded complexity (rows 131, 133, 136; the strip and the disk; FS-114's YES); six from below by `χ_CP`, by an averaged
+certificate, and through ℚ(√167) (FS-104, FS-80, row 125, FS-59); exactly five (FS-44, FS-104's NO); and the local–global structure (rows 52, 99,
+119, 123, 127; the conjecture as a belief). Beside the route to seven, not on it: the four-colour form of the NO with FS-115's two steps, the stuck
+ray (b′) and bounded chains (b″), and the lemmas toward them (N3-PER, N3-END, Y3-END-NEEDS as corrected, C-HORNEND with C-DOUBLE, the bowtie).
+Lean work: row 127, FS-101, FS-113 and the wall's own chain.
 
 **Left out, deliberately:** the finite-plane window and residue towers (rows 68–75: they bound fields, and the collapse makes the plane's question
 archimedean); the kernel toolbox of rows 1–118 beyond what a route uses; the null-set step to Falconer's everywhere-proper `χ_m` (row 130's GAP; it
-does not bear on the answer given MR); FS-62, FS-64, FS-109, FS-49, FS-108 and stubs ranked 13 and below; the (A)-by-compactness step
-(`plans/FS112-unit-arc-half.md` E17, one mind), folded into the edge "no tight six-map ⟹ χ_m⁰ ≥ 7" as the frontier table states it
-("decisive jointly with row 134 … and FS-112's unit-arc half").
+does not bear on the answer given MR); FS-62, FS-64, FS-109, FS-49, FS-108 and stubs ranked 14 and below; FS-112's other local lemmas (the § B lines
+of rows 135–136: U1, SIX, NB4P, L60, LOCK, BEND, N2-RED, the pencil, the dial, the disc bound and the rest); C-ENDS and C-PARTNERS (quoted on the
+cards of the four-colour form's neighbours and of the rhombus lemma, not drawn).
 
-**Could not source (fenced tonight):** FS-114's and FS-115's stubs and any registered probabilities they carry (the two gaps use the default);
-how the two gaps compose into a NO (FS112-C is deriving it; drawn as its own missing step at the default); FS112-YB3's verdicts on Y3 (Y3's
-claims are drawn at one mind, "under blind check").
+**Fenced (not read):** BASE-V's files (`plans/BASE-V-verification.md`, `data/base-v/`, `tools/base_v_*`), a blind verifier re-deriving row 134's
+base steps tonight. Row 134 is drawn at its printed grade with the "under blind check" ring.
 
 ## Stage 1 — SAVED: the fact table and its checker (commit be8d53ce)
 
@@ -185,3 +194,42 @@ the panel. **The one pass of edits:** a thin scrollbar coloured from the rule to
 None. The stage is a control and a palette; its only computations are contrast ratios and colour distances.
 
 **Would have searched here:** none. Nothing here is a search.
+
+## VIZ-ATLAS-2, stage 2 — SAVED: FS-112's close folded in
+
+*The owner's stage-2 message, after commit a9410925: FS-112 closed undecided (rows 135–136); the ranking is NIGHT-A's (FS-114, FS-111, FS-104,
+FS-115); the composition makes the global step the NO with no ray step; FS-111 plus FS-114's NO giving seven is a one-mind reading; FS-104's bearing
+corrected; FS112-YB3's verdicts; BASE-V fenced.*
+
+**What the checker named first:** 14 facts had moved — the re-rank shifted every `PF(n)` address (FS-44 to 7, FS-80 to 8, FS-59 to 13), FS-104's
+bearing was rewritten, and item 31 of § Where the problem stands no longer says "with unit arcs, open".
+
+**What changed on the map.**
+- **The route to seven, redrawn.** Version 1 drew the stuck ray as a required link and the composition as a missing step. Now: row 134 → N3-BASE →
+  N3-DENSE3 → the global step (FS-114) and the composition (FS112-C-COMPOSE, one mind) → the unit-arc NO → door (A) → the doors' meeting → `χ_m⁰(ℝ²) ≥ 7`.
+  The global step is drawn as an open question, the whole remaining unit-arc question, and its card says so; the stub's 0.2 (decided either way) is
+  shown there and not used. The meeting of the two doors (FS107-MEET) is a new mark held only as a reading, with the night advisor's first question
+  and hunch quoted as its killing test.
+- **The stuck ray, beside the route.** FS-115's (b′) and the new (b″) feed the four-colour form of the NO by dotted context edges, labelled "needed by
+  this form, aperiodic maps only"; N3-PER says periodic maps need neither. Its lemmas: N3-END, Y3-END-NEEDS as corrected (one mind for its scope; false
+  as first stated), C-HORNEND with C-DOUBLE, and the bowtie, an exact fragment that refutes Y3-END-NEEDS as first stated and is a local positive a YES
+  could use.
+- **The YES side.** The strip and the disk now carry row 136's grades (three and two rebuilds, exact checkers); the pinned-corner obstructions
+  (FS112-Y3-PIN) are two minds, one blind; the rhombus lemma (FS112-N3-COR3) explains the stop. FS-114's YES keeps 0.03, now from FS-114's stub.
+- **FS-104, two-sided.** Its YES gives `χ(ℝ²) ≥ 6` given MR; its NO is a stationary five-colouring, FS-44's question, drawn as a context edge.
+- **Posed questions.** A flag marks each question posed in print: Sokolov–Voronov's Question 2 answered for its Condition-5 half (row 134) and
+  reduced, not answered, with unit arcs (row 135); Moorhouse's question and Soifer 55.1's existence half (row 121) and Ducz–Varga's Conjecture 1 and
+  Matolcsi et al.'s equality question (row 129) answered given MR; Graham's $1,000 problem open. FS-112's close answered none.
+- **Row 134 under blind check** (BASE-V); the "FS-112, closing" rings are gone.
+
+**The one look** (one headless screenshot per theme, network cut, the page in the publish skeleton): both themes read; the seven sector holds its
+new marks with no overlapping labels (the layout lint read 0 after moving eleven marks and folding C-DOUBLE into C-HORNEND's card). One defect: the
+route bar drew the reading link as a grey held segment. **The one pass of edits:** reading segments in the reading colour (and the palette review
+reports them: 2.68 against the track in light, 7.15 in dark). Not re-looked.
+
+## Theorems this phase proved
+
+None. The job folds a close into an instrument.
+
+**Would have searched here:** none. The layout was placed by hand against the lint; nothing here is a search for a finite witness.
+

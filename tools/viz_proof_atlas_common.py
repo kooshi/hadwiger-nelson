@@ -11,21 +11,16 @@ from its source). A source address is a dict:
   {"file": "Proofs/…/Interval.lean", "decl": "chromaticNumber_plane_interval"}   a `theorem` / `lemma` declaration and its docstring
   {"file": "plans/STUB-reg-scale.md"}                          the whole file
 
-The fence: the files other jobs are writing tonight are never opened (the brief's list). A source address pointing into them is a failure
-before any read.
+The fence: the files another job is writing tonight are never opened. A source address pointing into them is a failure before any read.
 """
 import pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
-FENCED = (  # the brief: FS112-YB3 (a blind verifier) and FS112-C (the close planner) are working in these tonight; never read
-    "plans/FS112-YB3-verification.md",
-    "data/fs112/fs112-yb3/",
-    "plans/FS112-derivation.md",
-    "data/fs112/fs112-c/",
-    "plans/STUB-global-step",          # the two successor stubs FS112-C is drafting (their names are not known here; any stub
-    "plans/STUB-stuck-ray",            # file matching these stems, or naming FS-114 / FS-115 in its path, is refused)
-    "FS-114", "FS-115", "FS114", "FS115",
+FENCED = (  # the owner's stage-2 message: BASE-V, a blind verifier, is re-deriving row 134's base steps; never read its files
+    "plans/BASE-V-verification.md",
+    "data/base-v/",
+    "tools/base_v_",
 )
 
 
@@ -64,11 +59,11 @@ def fold(g: str) -> str:
         return "gap"
     if "kernel" in low and "nothing kernel" not in low:
         return "kernel"
-    if "exact checker" in low or ("accept" in low and "exact" in low):
+    if "exact checker" in low or ("accept" in low and "exact" in low) or ("exact" in low and re.search(r"\bcheckers?\b", low)):
         return "cert"
     if "external" in low or "in print" in low:
         return "external"
-    if (low.startswith("[reading") or low.startswith("reading") or re.search(r"\ba reading\b", low)
+    if (low.startswith("[reading") or low.startswith("reading") or re.search(r"\ba reading\b|\bone-mind reading\b", low)
             or "conjecture" in low):
         return "reading"
     if "blind" in low:

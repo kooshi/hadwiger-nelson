@@ -280,7 +280,7 @@ footer { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; g
 
 <div class="page">
   <div class="masthead">
-    <div class="eyebrow">Hadwiger–Nelson · the hunt's logic, 2026-09-27</div>
+    <div class="eyebrow">Hadwiger–Nelson · the hunt's logic, 2026-09-27, after FS-112's close</div>
     <div class="theme" role="group" aria-label="Colour theme">
       <button type="button" id="theme-system" data-theme-choice="system" aria-pressed="true" title="Follow your device's setting, or the viewer's"><svg width="12" height="12" viewBox="-6 -6 12 12" aria-hidden="true"><circle r="5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M0,-5 A5,5 0 0 0 0,5 Z" fill="currentColor"/></svg>System</button>
       <button type="button" id="theme-light" data-theme-choice="light" aria-pressed="false"><svg width="12" height="12" viewBox="-6 -6 12 12" aria-hidden="true"><circle r="2.3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M0,-3.9V-5.6M0,3.9V5.6M-3.9,0H-5.6M3.9,0H5.6M2.76,2.76L3.96,3.96M-2.76,-2.76L-3.96,-3.96M2.76,-2.76L3.96,-3.96M-2.76,2.76L-3.96,3.96" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Light</button>
@@ -345,7 +345,7 @@ const STATUS_ORDER = ["kernel", "cert", "hand-2b", "hand-2", "hand-1", "external
 const STATUS_NAME = {
   "kernel": "kernel", "cert": "certificate", "hand-2b": "hand, two minds, one blind", "hand-2": "hand, two minds",
   "hand-1": "hand, one mind", "external": "external — in print, not re-checked", "reading": "reading — a belief with a killing test",
-  "gap-step": "missing step (named by a reduction)", "gap-question": "open question (not yet reduced)", "gap": "missing / open"
+  "gap-step": "missing step (named by a reduction)", "gap-question": "open question (not split into named steps)", "gap": "missing / open"
 };
 const FILL = { "kernel": 1, "cert": .9, "hand-2b": .62, "hand-2": .38, "hand-1": .18 };
 
@@ -387,6 +387,7 @@ function routeStats(r) {
     pub: links.filter(l => l.n.status !== "kernel").length,
     named: links.filter(l => l.n.status === "gap" && l.n.role === "step").length,
     unreduced: links.filter(l => l.n.status === "gap" && l.n.role === "question").length,
+    readings: links.filter(l => l.n.status === "reading").length,
     heldBits: links.filter(l => l.n.status !== "gap").reduce((s, l) => s + l.b, 0)
   };
 }
@@ -406,6 +407,7 @@ function answerStats(v) {
     pub: links.filter(l => l.n.status !== "kernel").length,
     named: links.filter(l => l.n.status === "gap" && l.n.role === "step").length,
     unreduced: links.filter(l => l.n.status === "gap" && l.n.role === "question").length,
+    readings: links.filter(l => l.n.status === "reading").length,
     held: v === 7 ? "χ(ℝ²) ≤ 7" : v === 5 ? "χ(ℝ²) ≥ 5" : null, interval
   };
 }
@@ -494,9 +496,18 @@ function drawMark(g, kind, r, o) {
   if (kind === "gap-step" || kind === "gap-question") {
     const t = el("text", { class: "glyph", fill: "var(--missing)", "font-size": Math.max(8, r * 1.35).toFixed(1) }, g); t.textContent = "?";
   }
-  if (o.closing) el("circle", { r: r + 6.5, fill: "none", stroke: "var(--c7)", "stroke-width": 1.4, "stroke-dasharray": "10 4", class: "ring2" }, g);
-  if (o.verifying) el("circle", { r: r + (o.closing ? 10 : 6.5), fill: "none", stroke: "var(--reading)", "stroke-width": 1.2, "stroke-dasharray": "1.5 3", "stroke-linecap": "round", class: "ring2" }, g);
+  if (o.verifying) el("circle", { r: r + 6.5, fill: "none", stroke: "var(--reading)", "stroke-width": 1.2, "stroke-dasharray": "1.5 3", "stroke-linecap": "round", class: "ring2" }, g);
   return body;
+}
+// a question posed in print: a small flag beside the mark — filled when a result here answers it, half when one reduced it, hollow when open
+const POSED_WORD = { answered: "answered", reduced: "reduced, not answered", open: "open" };
+function posedState(list) { return list.some(q => q.state === "answered") ? "answered" : list.some(q => q.state === "reduced") ? "reduced" : "open"; }
+function drawFlag(g, r, state) {
+  const x = r + 3, fl = el("g", { class: "flag" }, g);
+  el("line", { x1: x, y1: 5, x2: x, y2: -11, stroke: "var(--ink)", "stroke-width": 1.3, "stroke-linecap": "round" }, fl);
+  el("path", { d: `M${x},-11 L${x + 10},-7.2 L${x},-3.4 Z`, fill: state === "answered" ? "var(--ink)" : "var(--panel)", stroke: "var(--ink)",
+    "stroke-width": 1.2, "stroke-linejoin": "round" }, fl);
+  if (state === "reduced") el("path", { d: `M${x},-11 L${x + 10},-7.2 L${x},-7.2 Z`, fill: "var(--ink)" }, fl);
 }
 const shapeOf = n => n.role === "nogo" ? "oct" : n.role === "positive" ? "diamond" : (n.role === "lean" || n.role === "lean-held") ? "square" : "circle";
 
@@ -622,11 +633,12 @@ function buildMap() {
       } else el("circle", { r: 26, fill: "none", style: `stroke: ${hue}`, "stroke-width": 1, "stroke-dasharray": "3 3" }, g);
       const t = el("text", { class: "glyph", "font-size": 30, style: `fill: ${hue}; font-style: italic` }, g); t.textContent = a;
     } else {
-      drawMark(g, kindOf(n), radius(n), { shape: shapeOf(n), nogo: n.role === "nogo", closing: n.closing, verifying: n.verifying,
+      drawMark(g, kindOf(n), radius(n), { shape: shapeOf(n), nogo: n.role === "nogo", verifying: !!n.verifying,
         stroke: n.role === "bound" && n.status === "kernel" ? HUE[n.answer] : null });
       if (n.role === "bound") { const b = g.querySelector(".body"); if (n.status === "kernel") { b.style.fill = HUE[n.answer]; b.setAttribute("fill-opacity", .9); } else b.style.stroke = HUE[n.answer]; }
       if (n.role === "conclusion" && n.answer) { const b = g.querySelector(".body"); b.style.stroke = HUE[n.answer]; b.setAttribute("stroke-width", 2.2); }
     }
+    if (n.posed && n.posed.length) drawFlag(g, n.role === "answer" ? 30 : radius(n), posedState(n.posed));
     const tt = el("title", {}, g); tt.textContent = `${n.label} — ${STATUS_NAME[kindOf(n)] || n.status}`;
     g.addEventListener("click", ev => { ev.stopPropagation(); selectNode(n.id, true); });
     g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); selectNode(n.id, true); } });
@@ -751,8 +763,8 @@ function segBar(links, scaleMax) {
   links.filter(l => l.b > 0.004).forEach(l => {
     const k = kindOf(l.n); const i = h("i");
     i.style.width = (100 * Math.min(l.b, scaleMax) / scaleMax) + "%";
-    i.style.background = k.startsWith("gap") ? "var(--missing)" : k === "external" ? "var(--external)" : "var(--ink)";
-    i.style.opacity = k.startsWith("gap") ? (k === "gap-question" ? 1 : .8) : k === "external" ? .85 : ({ "cert": .9, "hand-2b": .66, "hand-2": .5, "hand-1": .38 })[k] || .5;
+    i.style.background = k.startsWith("gap") ? "var(--missing)" : k === "external" ? "var(--external)" : k === "reading" ? "var(--reading)" : "var(--ink)";
+    i.style.opacity = k.startsWith("gap") ? (k === "gap-question" ? 1 : .8) : k === "external" || k === "reading" ? .85 : ({ "cert": .9, "hand-2b": .66, "hand-2": .5, "hand-1": .38 })[k] || .5;
     i.title = `${l.n.label}: p = ${fmtP(l.p)}, ${fmtBits(l.b)} bits`;
     bar.appendChild(i);
   });
@@ -765,7 +777,8 @@ function renderAnswers() {
     const b = h("button", { class: "ans", style: `--hue: ${HUE[v]}`, "aria-pressed": !!(focus && focus.kind === "answer" && focus.id === v) });
     const miss = [];
     if (s.named) miss.push(`<b>${s.named}</b> missing step${s.named > 1 ? "s" : ""} named`);
-    if (s.unreduced) miss.push(`<b>${s.unreduced}</b> open question${s.unreduced > 1 ? "s" : ""} not yet reduced`);
+    if (s.unreduced) miss.push(`<b>${s.unreduced}</b> open question${s.unreduced > 1 ? "s" : ""}, not split into steps`);
+    if (s.readings) miss.push(`<b>${s.readings}</b> link${s.readings > 1 ? "s" : ""} held only as a reading`);
     b.innerHTML = `<span class="num">χ = ${v}<small>${s.held ? "half held: " + s.held : "neither half held"}</small></span>
       <span class="dist">${fmtBits(s.bits)}<span>bits away</span></span>
       <span class="meta">${miss.join(" · ")}</span>
@@ -802,7 +815,9 @@ function renderRoutes() {
       card.appendChild(h("div", { class: "head" }, `<span class="name">${esc(r.name)}</span><span class="bits">${fmtBits(s.bits)} <small>bits</small></span>`));
       card.appendChild(segBar(s.links, MAX));
       const miss = s.links.filter(l => l.n.status === "gap").map(l => esc(l.n.label));
+      const rdg = s.links.filter(l => l.n.status === "reading").map(l => esc(l.n.label));
       card.appendChild(h("div", { class: "facts" }, `gives <b>${half}</b> · ${miss.length ? "missing: " + miss.join(", ") : "nothing missing"} · ` +
+        (rdg.length ? `held only as a reading: ${rdg.join(", ")} · ` : "") +
         `<b>${s.pub}</b> of ${s.links.length} links not in Lean`));
       if (active) {
         card.appendChild(h("div", { class: "about" }, esc(r.about)));
@@ -819,7 +834,7 @@ function renderRoutes() {
     pane.appendChild(g);
     if (gp.v === 7) pane.appendChild(scale);
   });
-  pane.appendChild(h("p", { class: "note" }, "Bits count the steps somebody has named. The route to seven is analysed furthest, so more of its cost shows; a route whose missing part is one open question hides the steps inside it. Compare the counts of named steps and open questions, not only the bits."));
+  pane.appendChild(h("p", { class: "note" }, "Bits count the steps somebody has named. The route to seven is analysed furthest, so more of its cost shows; a route whose missing part is one open question hides the steps inside it. Compare the counts of named steps and open questions, not only the bits. FS-114's global step is priced as a whole open question: it is the entire remaining unit-arc question, not a small lemma."));
 }
 
 // ---------------------------------------------------------------- card tab
@@ -846,14 +861,16 @@ function renderCard() {
   const head = h("div", { class: "card-title" });
   const roleWord = { answer: "an answer", bound: "one half of an answer", conclusion: "what follows once its premises hold", held: "a held result",
     nogo: "a no-go: a route proved not to work", positive: "an exact object", external: "a theorem in print", step: "a missing step",
-    question: "an open question", belief: "a belief", lean: "Lean work still owed", "lean-held": "a Lean artifact" }[n.role] || n.role;
-  head.appendChild(h("div", { class: "eyebrow" }, esc(roleWord) + (n.closing ? " · FS-112, closing tonight" : "")));
+    question: "an open question", belief: "a belief", lean: "Lean work still owed", "lean-held": "a Lean artifact",
+    "reading-link": "a link held only as a reading" }[n.role] || n.role;
+  head.appendChild(h("div", { class: "eyebrow" }, esc(roleWord)));
   head.appendChild(h("h2", {}, esc(n.label)));
   pane.appendChild(head);
   const sl = h("div", { class: "statusline" });
   const chip = h("span", { class: "chip" }); chip.appendChild(markSVG(k, 14, { shape: shapeOf(n), nogo: n.role === "nogo" })); chip.appendChild(document.createTextNode(STATUS_NAME[k] || n.status));
   sl.appendChild(chip);
-  if (n.verifying) sl.appendChild(h("span", { class: "chip" }, "under blind verification tonight"));
+  if (n.verifying) sl.appendChild(h("span", { class: "chip" }, esc(n.verifying === true ? "under blind verification" : n.verifying)));
+  if (n.posed && n.posed.length) sl.appendChild(h("span", { class: "chip" }, "posed in print: " + esc(POSED_WORD[posedState(n.posed)])));
   if (n.role !== "answer" && n.role !== "conclusion" && n.role !== "bound" && !n.role.startsWith("lean") && n.role !== "belief") {
     const p = credOf(n); sl.appendChild(h("span", { class: "chip" }, `p ${fmtP(p)} · ${fmtBits(bitsOf(p))} bits`));
   }
@@ -871,6 +888,11 @@ function renderCard() {
     r.appendChild(addrRow("", n.registered.address)); pane.appendChild(r);
   }
   if (n.words) { const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, "The stub's own words on its chances")); r.appendChild(h("blockquote", {}, esc(n.words.quote))); r.appendChild(addrRow("", n.words.address)); pane.appendChild(r); }
+  (n.posed || []).forEach(q => {
+    const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, "Posed in print · " + esc(POSED_WORD[q.state])));
+    r.appendChild(h("p", { class: "small" }, esc(q.question))); r.appendChild(h("blockquote", {}, esc(q.quote))); r.appendChild(addrRow("", q.address));
+    pane.appendChild(r);
+  });
   if (n.note) pane.appendChild(h("p", { class: "note" }, esc(n.note)));
   if (n.role !== "answer" && (n.status === "gap" && (n.role === "step" || n.role === "question") || (n.status !== "gap" && n.status !== "kernel"))) {
     const row = credRow(n.id + "-card", n.label, credOf(n), v => { over[n.id] = v; store.set("over", over); recompute(); }, n.registered ? "reg" : "", null,
@@ -961,13 +983,15 @@ function renderAbout() {
     <ul class="plain">
       <li>The three answers sit at the centre; each is ringed by its two halves. Premises lie outward, so a route reads inward to its answer. Held ground mostly lies on the outer rings, and the missing steps sit near the answers they would decide.</li>
       <li>Solidity is the grade: a solid mark is in the kernel; the less fill, the fewer minds have checked it. Hollow red marks with a question mark are missing steps; a second dashed ring marks an open question nobody has reduced yet.</li>
-      <li>Octagons are no-gos, drawn with a blocked edge (a bar) into what they rule out. Diamonds are exact objects. Squares are Lean work. A long blue dashed ring marks FS-112's results, closing tonight; an amber dotted ring marks claims under blind verification.</li>
+      <li>Octagons are no-gos, drawn with a blocked edge (a bar) into what they rule out. Diamonds are exact objects. Squares are Lean work. An amber dotted ring marks a result under blind verification: tonight, row 134, whose base steps a blind verifier is re-deriving.</li>
+      <li>A small flag marks a question posed in print: filled when a result here answers it, half-filled when a result reduced it without answering it, hollow when it is open. FS-112's close answered none: it reduced Sokolov–Voronov's Question 2 with unit arcs to the global step.</li>
+      <li>A dashed amber circle on a route is a link held only as a reading: the meeting of the two doors to seven (FS-114's NO and FS-111's cone scale) is one mind's synthesis, and counts one bit at the default.</li>
       <li>Behind the answers is the kernel's own seven-colouring of the plane: bricks 4/5 by 3/5, each row shifted 2/5, coloured (column + 3·row) mod 7. One cell's diagonal is drawn; it is exactly the unit distance.</li>
       <li>Edges that would cross the map run along an orbit instead, near the answers or around the rim. They stay faint until you follow a route, an answer or a mark they join; long "blocks" edges appear only then. Those from the measure-rigidity engine are all "given MR".</li>
     </ul>
     <div><h3>Sources</h3>
       <p class="small" style="margin-top:6px">Every mark comes from one fact table, and each fact carries a verbatim quote and its address: a ledger row, a plan's item or section, a stub, or a Lean declaration. A checker re-reads every quote from its source before the page is built, and refuses to build on any mismatch.</p></div>
-    <p class="note">Left out, deliberately: the finite-plane window and the residue towers (they bound fields, not the plane, and the collapse makes the plane's question archimedean); the kernel toolbox behind rows 1–118; the null-set step to Falconer's everywhere-proper number (it does not bear on the answer given MR); FS-62, FS-64, FS-109, FS-49 and the stubs ranked 13 and below.</p>`;
+    <p class="note">Left out, deliberately: the finite-plane window and the residue towers (they bound fields, not the plane, and the collapse makes the plane's question archimedean); the kernel toolbox behind rows 1–118; the null-set step to Falconer's everywhere-proper number (it does not bear on the answer given MR); FS-62, FS-64, FS-109, FS-49 and the stubs ranked 14 and below; FS-112's many local lemmas beyond those drawn (every one is a line of <span class="mono">LEDGER.md</span> § B, rows 135–136).</p>`;
 }
 
 // ---------------------------------------------------------------- legend and footer
@@ -991,9 +1015,13 @@ function renderLegend() {
   item(g3, blk, "blocks");
   item(g3, markSVG("cert", 18, { shape: "diamond" }), "exact object");
   item(g3, markSVG("gap", 16, { shape: "square", stroke: "var(--external)" }), "Lean work");
-  item(g3, markSVG("hand-2b", 22, { closing: true }), "FS-112, closing");
   item(g3, markSVG("hand-1", 22, { verifying: true }), "under blind check");
-  L.appendChild(g1); L.appendChild(g2); L.appendChild(g3);
+  const g4 = h("div", { class: "grp" });
+  for (const st of ["answered", "reduced", "open"]) {
+    const f = el("svg", { width: 18, height: 18, viewBox: "-3 -13 18 20", "aria-hidden": "true" }); drawFlag(f, -3, st);
+    item(g4, f, st === "answered" ? "posed in print: answered" : st === "reduced" ? "reduced, not answered" : "posed, open");
+  }
+  L.appendChild(g1); L.appendChild(g2); L.appendChild(g3); L.appendChild(g4);
   // the legend's marks need the hatch pattern: reuse the map's by id (it is in the same document)
 }
 function renderFooter() {

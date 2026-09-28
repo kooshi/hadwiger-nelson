@@ -9,15 +9,18 @@ Every fact is re-read from the address it names, never from the builder's memory
   * every "also" quote, registered probability (the number must appear in its quoted words) and verbal registration likewise;
   * every edge's quote at its address; both ends must be nodes;
   * every route's links must be nodes, and each node a route reaches must be reachable from its links along the edges;
+  * every posed question's state must be what its quoted words say ("answered" needs "answer…" and no "not answered"; "reduced" needs
+    "reduced"; "open" needs the node itself to be missing);
   * no address may point into tonight's fenced files (another job's working files) — refused before any read.
 
 Exit 0: every fact passes.  Exit 1: FAIL, one line per failed fact, naming it.  Exit 2: ERROR, a source missing or unreadable.
 The last line is always the count: "checked N, failed M, errors E".
 
   python3 tools/viz_proof_atlas_check.py              # check data/viz/proof-atlas/facts.json
-  python3 tools/viz_proof_atlas_check.py --self-test  # the controls: the faithful table passes; six plants — a wrong grade, a dead
-                                                      # address, a quote not in its source, a wrong registered probability, a fenced
-                                                      # address, a route link that is no node — each fire exactly once, naming their
+  python3 tools/viz_proof_atlas_check.py --self-test  # the controls: the faithful table passes; eight plants — a wrong grade, a dead
+                                                      # address, a missing file, a quote not in its source, a wrong registered
+                                                      # probability, a fenced address, a reduced question marked answered, a route link
+                                                      # that is no node — each fire exactly once, naming their
                                                       # fact, and nothing else fires (a two-sided bound: a plant that stops firing, or
                                                       # fires twice, fails the self-test)
 """
@@ -95,6 +98,18 @@ def check_node(n, rep):
     w = n.get("words")
     if w and not quoted(fid, w["src"], w["quote"], rep, "verbal registration"):
         return
+    for q in n.get("posed", []):  # a question posed in print: its state must be what the quoted words say
+        if not quoted(fid, q["src"], q["quote"], rep, "posed question"):
+            return
+        low, st = C.norm(q["quote"]).lower(), q["state"]
+        if st == "answered" and (not re.search(r"\banswer(s|ed)?\b", low) or "not answered" in low):
+            rep.fail(fid, f"posed question marked answered, but its words do not say so: {q['quote']!r}"); return
+        if st == "reduced" and "reduced" not in low:
+            rep.fail(fid, f"posed question marked reduced, but its words do not say so: {q['quote']!r}"); return
+        if st == "open" and n["status"] != "gap":
+            rep.fail(fid, f"posed question marked open on a node whose status is {n['status']!r}"); return
+        if st not in ("answered", "reduced", "open"):
+            rep.fail(fid, f"posed question with unknown state {st!r}"); return
     rep.ok()
 
 
@@ -188,12 +203,13 @@ def self_test(d):
     plant("quote not in source", lambda dd: node(dd, "R134").update(quote=node(dd, "R134")["quote"].replace("none of radius 1", "none of radius 2")),
           "R134", "FAIL")
     plant("wrong registered p (0.03 → 0.3)", lambda dd: node(dd, "TSMYES")["registered"].update(p=0.3), "TSMYES", "FAIL")
-    plant("fenced address", lambda dd: node(dd, "SRAY").update(src={"file": "plans/FS112-YB3-verification.md"}), "SRAY", "FAIL")
+    plant("fenced address", lambda dd: node(dd, "SRAY").update(src={"file": "plans/BASE-V-verification.md"}), "SRAY", "FAIL")
+    plant("a reduced question marked answered", lambda dd: node(dd, "N3DENSE3")["posed"][0].update(state="answered"), "N3DENSE3", "FAIL")
     plant("route link that is no node", lambda dd: dd["routes"][2]["links"].append("NOSUCHNODE"), "route wall7", "FAIL")
     # the fence must refuse BEFORE reading: the fenced file is never opened (the cache stays free of it)
     C._cache.clear()
-    dd = copy.deepcopy(d); node(dd, "SRAY").update(src={"file": "plans/FS112-YB3-verification.md"}); run(dd)
-    if any("YB3" in k for k in C._cache):
+    dd = copy.deepcopy(d); node(dd, "SRAY").update(src={"file": "plans/BASE-V-verification.md"}); run(dd)
+    if any("BASE-V" in k or "base_v" in k for k in C._cache):
         ok = False; print("fence control: FAILED — the fenced file was read")
     else:
         print("fence control: the fenced file was never opened")

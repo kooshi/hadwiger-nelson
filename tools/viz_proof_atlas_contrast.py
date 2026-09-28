@@ -26,7 +26,7 @@ PAIRS = (("missing", "nogo"), ("missing", "c5"), ("c5", "reading"), ("c7", "focu
          ("external", "focus"), ("nogo", "external"))
 # the route bar's segment opacities, as page.tmpl.html's segBar sets them
 BAR = (("cert", "ink", .9), ("two minds, one blind", "ink", .66), ("two minds", "ink", .5), ("one mind", "ink", .38),
-       ("in print", "external", .85), ("missing step", "missing", .8), ("open question", "missing", 1.0))
+       ("in print", "external", .85), ("a reading", "reading", .85), ("missing step", "missing", .8), ("open question", "missing", 1.0))
 FILL = (("kernel", 1), ("cert", .9), ("2b", .62), ("2", .38), ("1", .18), ("hollow", 0))
 
 

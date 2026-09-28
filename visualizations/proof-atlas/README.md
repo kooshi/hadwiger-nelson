@@ -29,21 +29,41 @@ measure and the palette review are in `DESIGN.md`.
 ## Build, check, publish
 
 ```
-python3 tools/viz_proof_atlas_facts.py
-python3 tools/viz_proof_atlas_check.py              # "checked 151, failed 0, errors 0" on 2026-09-27
-python3 tools/viz_proof_atlas_check.py --self-test  # "SELF-TEST PASSED"
+python3 tools/viz_proof_atlas_facts.py              # writes the table; prints a label-overlap lint ("layout lint: 0 overlaps")
+python3 tools/viz_proof_atlas_check.py              # "checked 169, failed 0, errors 0" after FS-112's close
+python3 tools/viz_proof_atlas_check.py --self-test  # "SELF-TEST PASSED": eight plants, each fires once
 python3 tools/viz_proof_atlas_contrast.py           # "palette review: 0 failed"
 python3 tools/viz_proof_atlas_contrast.py --self-test
-python3 visualizations/proof-atlas/build.py
+python3 visualizations/proof-atlas/build.py         # refuses unless the checker and the palette review pass
 ```
 
-When a source moves (a ledger row rewritten, FS-112's close landing), rerun the checker first: it names every quote that no longer stands at its
-address, and the build refuses until the table is corrected.
+## Updating at a close
+
+Kooshi wants the page kept current: it is refreshed at every milestone close, and the owner republishes `index.html` to the same link
+(https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx), so viewers keep their theme and credence settings.
+
+1. **Re-run the checker first**, before editing anything: `python3 tools/viz_proof_atlas_check.py`. It names every quote that no longer stands at its
+   address. Ranked-stub rows are addressed by rank number (`PF(n)` in the table's builder), so a re-rank moves them.
+2. **Re-read, from disk, what the close changed**: the close's new `LEDGER.md` rows and their § B lines (§ B lines are addressable as rows, e.g.
+   `{"file": "LEDGER.md", "row": "FS112-N3-DENSE3"}`); the milestone's `plans/FSnn-derivation.md` and its plan's §R-close; the stubs it minted or
+   re-aimed; `plans/FRONTIER-STUBS.md`; `CLAUDE.md` § The aim, § Where the problem stands, § Paths forward, ranked and any new grokking; and the
+   advisor's notes for the atlas keeper, if the close had one.
+3. **Fold it into `tools/viz_proof_atlas_facts.py`**: every node and edge a verbatim quote at an address, every grade the source's own words (the
+   page status is computed from them). A missing step takes the registered probability its stub gives *for that event*; a registration for a
+   different event (for example "decided either way") goes on the card as the stub's words, not into the distance. Mark every question posed in
+   print that the close answers or reduces (`posed=`, with the words that say so; the checker refuses "answered" when the words do not say it).
+4. **Fence** any file another job is writing that night (`FENCED` in `tools/viz_proof_atlas_common.py`): the checker refuses an address inside it
+   before reading.
+5. **Build and check**: the commands above; fix the layout lint's overlaps by moving marks, then look once at each theme (a headless screenshot of the
+   page wrapped in the publish skeleton, network off) and make one pass of edits.
+6. **Record** the close in `DESIGN.md` (a stage section: what moved, the distances at the defaults, what was left out), commit by explicit path,
+   push, and tell the owner, who republishes.
 
 ## Three questions to ask it
 
-1. *How far is seven, and what is missing?* Click the 7 tile: the regularity wall lights up; four named missing steps (the global step, the stuck
-   ray, how they compose into a NO, and the cone scale) sit hollow and red in the top sector, everything outward of them solid.
-2. *Why does five look nearer than seven?* Read the counts under the bits: five's distance is one open question nobody has reduced (a stationary
-   five-colouring of the plane); seven's is four named steps. Bits count only named steps.
+1. *How far is seven, and what is missing?* Click the 7 tile: the regularity wall lights up. Two things are missing — FS-114's global step, which is
+   the whole remaining unit-arc question, and FS-111's cone scale — and one link, the meeting of the two doors, is held only as a one-mind reading.
+   The stuck ray (FS-115) sits beside the route, needed only by the four-colour form of the NO.
+2. *Why does five look nearer than seven?* Read the counts under the bits: five's distance is one open question (a stationary five-colouring of the
+   plane); seven's is one open question, one named step and one reading. Bits count only what somebody has named.
 3. *What would it take to publish?* The "links still to put in Lean" count on each tile, and the square marks (FS-113, FS-101, the wall's own chain).
