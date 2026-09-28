@@ -23,6 +23,8 @@ The blade `t_{j+1}`'s sides: `L_j` (from `w_j` to `q_j`), `M_j` (from `q_j` to `
 | **FS114-Y6-E1CAP** | **E1 forces a second 60° arc**: `t_2` borders the whole ring arc from `q_4` to `q_1`; the tactic tile `T_4` borders all of it from outside, contains `q_1` and lies in the Reuleaux cap `Reul(q_4, q_1, q_1 + q_4) ∖ B(p, 1)`; `α_4 = 120°` exactly (`φ_3 = φ_1 + 180°`), `α_2 + α_3 = 180°`, CASE (A) at `q_3` with `λ_3 = α_3 − 60°` | [hand; one mind; tools exact at named values] | §2.4; `tools/fs114_y6_e1.py` |
 | FS114-Y6-E1K1 | in E1 with `μ_1` bordering all of `M_1` and `α_2 > 60°`, the P_x kill of FS114-Y5-PXKILL runs at `k = 1` (`T_1` against `O_2`, colour 1) unless `T_4` fills the cap's corner at `q_4` and a tile of colour `m_2` sits at `q_1` between `T_1` and `μ_1` | [hand; one mind; tools exact at named values] | §2.5 |
 | **FS114-Y6-E2RED** | E2 at one blade `t_{c+1}` (no E1) breaks only ALT(`μ_{c−1}`, `μ_c`), hence only POCKET at `w_c` and CASE at `q_c`, and there only case (B)'s `α_c = 60°` and (A)'s `α_c − λ_c ≤ 60°`; (A) at `q_c` still gives `α_{c−1} + α_c ≤ 180°` and so leads to `P_x`; `P_x` is still excluded (Y5-PXKILL at `k = c + 1` reads no pocket beside `t_{c+1}`); the survivors are the cone sequences S1–S6 of §3.2, all with `t_{c+1}` short of the ring's clockwise tangent at `q_c` | [hand; one mind, over Y5's lemmas] | §3 |
+| FS114-Y6-HELD | among the held fragments (the strip, the disk, FS112-BOWTIE, FS114-Y2-BOWTIE's rebuild) the degree-4 vertices carry 0 (the strip's midline), 2 (the disk's five corners `A_k`: the two central Reuleaux-pentagon arcs, the other two edges straight legs) or 4 (the bowtie's centre) tactic edges — **none carries exactly three**; the disk attains K1's bound of two at a vertex a valid extension holds to radius `φ` (FS112-DISC) | [tools: float survey of held builders, aiming only; the disk's edge list is FS112-Y §4.3's] | §4.1; `data/fs114/fs114-y6/survey.out` |
+| FS114-Y6-HALF | in a `(2, 1, 1, 0)` pattern whose two-edge tile `t_1` is a width-1 Reuleaux triangle, FS114-Y4-SIDES, FS114-YB3-D2T and FS114-Y4-W hold unchanged: the side tiles at its corners are 5 and 6, and the tile along its ring arc is one cap tile `W`, of the colour of the tile opposite `t_1` at `p`; the stop at `√3` is **not** inherited, since Y3's germ condition at `r` needs the slivers that FS114-Y4-DIAG derived from the second Reuleaux triangle | [hand; one mind] | §4.2 |
 | FS114-Y6-E1CHK | the inequalities §2.1–2.5 rest on, at named points: 10 of 10 as registered (after one re-registration of two controls, misses named); a plant reversing one arc flips the straddle | [tools, exact at named values] | §2.6; `data/fs114/fs114-y6/e1.out` |
 
 ## Would-have-searched-here log (standing rule 3)
@@ -281,3 +283,67 @@ Y5's lemmas, one by one:
   either side of that blade share a colour at distance exactly 1.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: item 2 begun — no held object has exactly three tactic edges; the Reuleaux `(2, 1, 1, 0)` is a half-bowtie that need not stop at `√3`
+
+### 4.1 FS114-Y6-HELD (`data/fs114/fs114-y6/survey.py`, `survey.out`; a float read of held builders, for aiming only)
+
+For every degree-4 vertex of each held fragment, the survey lists its edges. For each unit-arc edge it gives the centre, the inner tile, whether the
+centre lies in the inner tile's closure, and the tiles of the outer colour at the centre.
+- **The strip:** the midline vertices have four straight edges. No tactic edge; they are the centres of the strip's arcs.
+- **The disk:** each corner `A_k` of the central Reuleaux pentagon has four edges.
+  - Two are the pentagon's arcs through `A_k`, centred at the opposite corners. The pentagon (`C0`) is the inner tile, containing the centre, and a
+    tile of the outer ring-1 tile's colour sits at the centre. **Two tactic edges.**
+  - The other two are the straight legs `A_kX_{k−1}` and `A_kY_k` (FS112-Y §4.3).
+  - By FS112-DISC a valid extension holds `B̄(A_0, φ)` and none holds more.
+- **FS112-BOWTIE:** its two degree-4 vertices sit on the rim and have no tactic edge.
+- **FS114-Y2-BOWTIE:** its centre `p` has four tactic edges (radius `3√3/5`, Y2's exact figure).
+
+**So no held object carries exactly three tactic edges at a degree-4 vertex.** The disk's corners realise K1's bound (two) at radius up to `φ ≈ 1.618`:
+a local positive for K1 itself. Any proof of K1 must allow them, and a three-edge construction could start from them. The third edge would have to be a
+leg made into a unit arc through `A_k`, whose inner tile holds its centre.
+
+### 4.2 FS114-Y6-HALF [hand; one mind]
+
+*Setting:* a `(2, 1, 1, 0)` pattern whose two-edge tile is `t_1 = Reul(p, q1, q2)`, `q1 = e(30°)`, `q2 = e(−30°)`, with both its edges tactic.
+Name the other tiles as in the bowtie: `t_2` above (a blade, inner for its other edge), `t_3` opposite (a blade, inner for its other edge), `t_4` below
+(outer for both its edges).
+
+Then FS114-Y4-SIDES, FS114-YB3-D2T and FS114-Y4-W go through word for word. They read only:
+- `t_1`;
+- its two tactic tiles (colours 4 at `q1` and 2 at `q2`);
+- the sectors at `p` of the tiles beside it. Every tile at `p` has a cone of at least `60°`, so `t_2`'s sector contains the directions near `120°` and
+  `t_4`'s those near `270°`, which is all D2T uses.
+
+So:
+- `q1, q2 ∉ cl t_2 ∪ cl t_4`;
+- the side tiles `X1` (at `q1`) and `X2` (at `q2`) carry `5` and `6`;
+- the tile along `t_1`'s ring arc is one tile `W`, of colour 3, in the cap `Reul(q1, q2, r) ∖ B(p, 1)`.
+
+**What is not inherited.** Y3-RSTOP (two minds with YB2) stops the bowtie at `r = q1 + q2` through a germ condition: six colours straddled near `r`, among
+them the slivers `ā` at `q1` and `a` at `q2`. FS114-Y4-DIAG derived the slivers from the second Reuleaux triangle (`top`'s colour-4 tile `N` and `X4`'s
+colour). With `t_2` and `t_3` blades there is no second Reuleaux triangle.
+- Near `r`, colours 1 and 3 are straddled (`t_1` and `W` at both corners).
+- Colour 4 is straddled only if `T1` points toward `r`, and colour 2 only if `T2` does.
+- `5` and `6` are straddled by nothing held.
+
+**So the Reuleaux `(2, 1, 1, 0)` is a half-bowtie that the held stop does not reach.** It is the first candidate for a four-tactic-edge fragment past `√3`,
+and its next step is the colour analysis at the ring point between `q1` and `t_2`'s centre. That analysis is the analogue of DIAG's `top`, with a blade
+in place of the second Reuleaux triangle.
+
+### 4.3 What is left of item 2 (for a successor)
+
+1. **The Reuleaux `(2, 1, 1, 0)`:** carry DIAG's colour analysis to the ring point above `q1` with `t_2` a blade. Either the slivers are forced (then Y3-R's
+   E1/E2 dichotomy applies, as in RSTOPALL), or they are not, and a design by formula past `√3` is the construction target.
+2. **Three tactic edges:** the disk's corner is a held two-tactic vertex at radius `φ`. The derivation to try is whether a leg `A_kY_k` can be a unit arc
+   through `A_k` with a tactic tile at its centre.
+   - The only point of `cl T1_k` at distance 1 from `A_k` in the disk is `B_k` (on `ω(A_k)`). `B_k`'s tiles are `T1_k`, `U_k`, `U′_k`, and both `U`s border
+     `T1_k` along unit arcs.
+   - So the disk's own geometry offers no tactic tile there, and a redesign is needed.
+3. **The three-tactic chain** (edges 1, 2, 3 tactic, inner tiles `t_2`, `t_3`, `t_4`, edge 4 free): Y5's MU, ALT and POCKET hold at `t_2`, `t_3`, `t_4`, but
+   CASE loses its colour-1 block wherever `t_1`'s free sector does not point. The pinwheel's kills do not transfer as they stand.
+
+**The brief's question — do three tactic edges survive to radius 2 while four do not? — is not answered.** No held object has three. The four-edge Reuleaux
+bowtie stops at `√3` (RSTOPALL), but the Reuleaux `(2, 1, 1, 0)` is not shown to stop there.
+
+## Stage 4 — SAVED

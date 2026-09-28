@@ -1,0 +1,100 @@
+== strip: 44 tiles
+ v=(-1.5, 0.0) deg4 colours=['B', 'M', 'O', 'P'] tactic=0 rimdist=0.0049
+     seg
+     seg
+     seg
+     seg
+ v=(-1.0, 0.0) deg4 colours=['G', 'M', 'P', 'R'] tactic=0 rimdist=0.5000
+     seg
+     seg
+     seg
+     seg
+ v=(-0.5, 0.0) deg4 colours=['B', 'G', 'O', 'R'] tactic=0 rimdist=1.0000
+     seg
+     seg
+     seg
+     seg
+ v=(0.0, 0.0) deg4 colours=['B', 'M', 'O', 'P'] tactic=0 rimdist=1.5000
+     seg
+     seg
+     seg
+     seg
+ v=(0.5, 0.0) deg4 colours=['G', 'M', 'P', 'R'] tactic=0 rimdist=1.5001
+     seg
+     seg
+     seg
+     seg
+ v=(1.0, 0.0) deg4 colours=['B', 'G', 'O', 'R'] tactic=0 rimdist=1.0001
+     seg
+     seg
+     seg
+     seg
+ v=(1.5, 0.0) deg4 colours=['B', 'M', 'O', 'P'] tactic=0 rimdist=0.5002
+     seg
+     seg
+     seg
+     seg
+ v=(2.0, 0.0) deg4 colours=['G', 'M', 'P', 'R'] tactic=0 rimdist=0.0103
+     seg
+     seg
+     seg
+     seg
+ v=(2.5, 0.0) deg4 colours=['B', 'G', 'O', 'R'] tactic=0 rimdist=0.5001
+     seg
+     seg
+     seg
+     seg
+ v=(3.0, 0.0) deg4 colours=['B', 'M', 'O', 'P'] tactic=0 rimdist=0.5000
+     seg
+     seg
+     seg
+     seg
+== disk: 26 tiles
+ v=(0.0, 0.5257311) deg4 colours=['blue', 'orange', 'red', 'yellow'] tactic=2 rimdist=1.5985
+     unit arc c=(0.309, -0.425) inner=Z q∈inner=True T=['W3']
+     unit arc c=(-0.309, -0.425) inner=Z q∈inner=True T=['W2']
+     seg
+     seg
+ v=(-0.5, 0.1624598) deg4 colours=['green', 'orange', 'red', 'violet'] tactic=2 rimdist=1.5985
+     unit arc c=(0.309, -0.425) inner=Z q∈inner=True T=['W3']
+     unit arc c=(0.5, 0.162) inner=Z q∈inner=True T=['W4']
+     seg
+     seg
+ v=(-0.309017, -0.4253254) deg4 colours=['blue', 'red', 'violet', 'yellow'] tactic=2 rimdist=1.5985
+     unit arc c=(0.5, 0.162) inner=Z q∈inner=True T=['W4']
+     unit arc c=(0.0, 0.526) inner=Z q∈inner=True T=['W0']
+     seg
+     seg
+ v=(0.309017, -0.4253254) deg4 colours=['blue', 'green', 'orange', 'red'] tactic=2 rimdist=1.5985
+     unit arc c=(0.0, 0.526) inner=Z q∈inner=True T=['W0']
+     unit arc c=(-0.5, 0.162) inner=Z q∈inner=True T=['W1']
+     seg
+     seg
+ v=(0.5, 0.1624598) deg4 colours=['green', 'red', 'violet', 'yellow'] tactic=2 rimdist=1.5985
+     unit arc c=(-0.5, 0.162) inner=Z q∈inner=True T=['W1']
+     unit arc c=(-0.309, -0.425) inner=Z q∈inner=True T=['W2']
+     seg
+     seg
+== FS112-BOWTIE: 12 tiles
+ v=(0.0, 1.0) deg4 colours=[1, 2, 4, 5] tactic=0 rimdist=0.0000
+     seg
+     seg
+ v=(0.0, -1.0) deg4 colours=[2, 3, 4, 5] tactic=0 rimdist=0.0000
+     seg
+     seg
+== YB2 bowtie (Y2-BOWTIE rebuild): 20 tiles
+ v=(0.0, 0.0) deg4 colours=[1, 2, 3, 4] tactic=4 rimdist=1.0617
+     unit arc c=(0.866, 0.5) inner=t1 q∈inner=True T=['T1']
+     unit arc c=(0.866, -0.5) inner=t1 q∈inner=True T=['T1_y']
+     unit arc c=(-0.866, -0.5) inner=t3 q∈inner=True T=['T1_xy']
+     unit arc c=(-0.866, 0.5) inner=t3 q∈inner=True T=['T1_x']
+ v=(0.0, 1.0) deg4 colours=[2, 4, 5, 6] tactic=2 rimdist=0.0839
+     unit arc c=(-0.866, 0.5) inner=t2 q∈inner=False T=['Z_x']
+     unit arc c=(0.866, 0.5) inner=t2 q∈inner=False T=['Z']
+     unit arc c=(0.866, 0.5) inner=X q∈inner=True T=['T1']
+     unit arc c=(-0.866, 0.5) inner=X_x q∈inner=True T=['T1_x']
+ v=(0.0, -1.0) deg4 colours=[2, 4, 5, 6] tactic=2 rimdist=0.0839
+     unit arc c=(0.866, -0.5) inner=t4 q∈inner=False T=['Z_y']
+     unit arc c=(-0.866, -0.5) inner=t4 q∈inner=False T=['Z_xy']
+     unit arc c=(0.866, -0.5) inner=X_y q∈inner=True T=['T1_y']
+     unit arc c=(-0.866, -0.5) inner=X_xy q∈inner=True T=['T1_xy']
