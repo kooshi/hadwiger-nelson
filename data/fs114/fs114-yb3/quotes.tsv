@@ -1,0 +1,18 @@
+# FS114-YB3 quotation check: id <TAB> source <TAB> quotation (as it stands in my brief, the standing rules, or my record)
+SR0	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.
+SR3a	CLAUDE.md	to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time
+SR3b	CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.
+SR4	CLAUDE.md	A proven theorem about why its impossible is also valid. All novel knowledge is a success
+SR10	plans/CONSOLIDATION-2026-09-27.md	It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.
+L60	plans/FS114-L60-audit.md	at most 60°
+RT	data/fs114/briefs/ROUND4-card.md	two width-1 Reuleaux triangles meeting corner to corner at a degree-4 vertex p, with all four edges at p tactic
+SIAM	data/fs114/claims.md	tiles that lie entirely within each other's annulus of exclusion
+VALID	data/fs114/claims.md	A map is valid when it is a locally finite map of the plane bounded by segments and circular arcs, arcs of radius 1 allowed (Condition 5 dropped), carrying a six-colouring in which no two interior points of one colour are at distance exactly 1.
+U1	plans/FS112-derivation.md	At a unit arc α ⊂ ω(P) of angular length ℓ, an inner side colour in P_cl(P) has its sectors at P in the closed cone of width π − ℓ facing α, an outer one in the closed cone facing away
+K1	data/fs114/briefs/ROUND2-card.md	K1: a degree-4 vertex of a non-Siamese valid map has at most two tactic edges.
+RA	data/fs114/briefs/ROUND2-card.md	(A) a unit arc of ∂x, shared with one member and centred at a point q ∈ F ∪ R where the other member touches x at q alone
+E1	data/fs114/briefs/ROUND4-card.md	E1: T2's sector at q2 lies inside [240°, 300°].
+E1Y3	plans/FS114-Y3-construction.md	E1: T2's sector at q2 lies in [240°, 300°] (colour 2 then passes (ii));
+E2Y3	plans/FS114-Y3-construction.md	E2: some tile at q1 other than t1, T1 and the tiles between t1 and T1 has its whole sector after 60° (its colour passes (i))
+EMPTY13	plans/FS114-YB2-verification.md	the (1 3) class holds no non-Siamese fragment with neighbourhoods of top, q1, qC filling U (R-T)
+Y3D2	plans/FS114-Y3-construction.md	no such fragment contains a neighbourhood of r, so none holds the closed disc of radius √3 about p
