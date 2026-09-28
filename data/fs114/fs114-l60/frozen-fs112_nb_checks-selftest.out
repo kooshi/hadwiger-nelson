@@ -1,0 +1,7 @@
+plant U1   : failing checks ['U1'] -> FIRES
+plant L60  : failing checks ['L60'] -> FIRES
+plant LOCK : failing checks ['LOCK'] -> FIRES
+plant HP60 : failing checks ['HP60'] -> FIRES
+plant FLAT : failing checks ['FLAT'] -> FIRES
+plant CUSP : failing checks ['CUSP'] -> FIRES
+faithful run: failing checks [] -> PASS

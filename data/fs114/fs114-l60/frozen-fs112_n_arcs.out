@@ -1,0 +1,6 @@
+R2: side tile T_out: |side(w) - X|^2 = 0.960400, |side(w') - X|^2 = 1.121192, straddle = True
+END: |z - h1|^2 = 0.992977, |z - h2|^2 = 1.011802, straddle = True
+BAND: z in horn = True; |z - p1|^2 = 0.811025, |z - p2|^2 = 1.001926, straddle = True
+L60: arc 60 deg, outer points at radius 1+1/100 at its ends: squared distance 1.0201000, > 1: True
+L60: arc 50 deg, outer points at radius 1+1/100 at its ends: squared distance 0.72878472, > 1: False
+ALL CHECKS PASS

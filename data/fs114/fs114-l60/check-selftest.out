@@ -1,0 +1,26 @@
+faithful run:
+  CHORD: GREEN CHORD_EQ
+      |A - B|^2 = 1 = 1: 60 deg is allowed (<= 60), and is the equality case
+  TILE: GREEN CAP_IN_LENS
+      13 named points of K_out lie in B(A,1) & B(B,1) & B(C,1), outside B(P,1); max squared distance 1, attained only at [('A', 'B'), ('A', 'C'), ('A', 'mid omega(A)'), ('B', 'C'), ('B', 'mid omega(B)')]; the omega(P)-arc meets omega(C) only at A, B
+  RADIAL: GREEN RADIAL_OUTSIDE
+      eps=1/100: |(1+eps)A - B|^2 = 10101/10000; eps=1/1000000: |(1+eps)A - B|^2 = 1000001000001/1000000000000 (> 1: outside the closed B(B,1), so in no tile reaching B); the frozen tools' pair distance^2 10201/10000 reproduced
+  NBSTEP: GREEN NB_PAIR_LE1
+      t=1/100: tau*=0.034438 (< 2sqrt3 t = 0.034641), pair^2=0.996803; t=1/20: tau*=0.167786 (< 2sqrt3 t = 0.173205), pair^2=0.921983; t=1/10: tau*=0.323178 (< 2sqrt3 t = 0.346410), pair^2=0.710906; t=1/5: tau*=0.589250 (< 2sqrt3 t = 0.692820), pair^2=0.166696; t=1/4: tau*=0.697436 (< 2sqrt3 t = 0.866025), pair^2=0.013039
+  SECOND: GREEN INTERIOR_CLEAR_ENDS_SHARED
+      interior w: w+60 is > 1 from A and w-60 > 1 from B (outside K_in, K_out); the ends A, B are corners of K_in and K_out, 1 apart; omega(A) crosses omega(P) at B at 60 deg
+  FRAG: GREEN FRAGMENT_OK
+      probes about A and B each in exactly one class, sectors as the tangent cones predict; sides of the arc 1 | 3; small classes of diameter 1/2 < 1; classes: {'A+e(0)/8': 4, 'A+e(30)/8': 4, 'A+e(60)/8': 3, 'A+e(90)/8': 3, 'A+e(120)/8': 1, 'A+e(150)/8': 1, 'A+e(180)/8': 1, 'A+e(210)/8': 4, 'A+e(240)/8': 4, 'A+e(270)/8': 4, 'A+e(300)/8': 4, 'A+e(330)/8': 4, 'B+e(0)/8': 3, 'B+e(30)/8': 5, 'B+e(60)/8': 5, 'B+e(90)/8': 5, 'B+e(120)/8': 5, 'B+e(150)/8': 5, 'B+e(180)/8': 5, 'B+e(210)/8': 5, 'B+e(240)/8': 1, 'B+e(270)/8': 1, 'B+e(300)/8': 1, 'B+e(330)/8': 3}
+  ENV60: GREEN ENV_MARGIN_POSITIVE
+      t=1/100, s=1/200: 1 - |C-z|^2 = 0.028842; t=1/10, s=1/20: 1 - |C-z|^2 = 0.216896; t=1/5, s=1/10: 1 - |C-z|^2 = 0.281864; t=(2 + -1*sqrt3), s=1/10: 1 - |C-z|^2 = 0.307691
+  COR3: GREEN COR3_AT_60
+      arc lengths 55, 59, 60 (v: 7, 30, 60): 504 strip-holds cases each with an empty probe; 361 both-fail cases each forcing four colours; 287 impossible outright; 360 skipped
+plant past: FIRES -> CHORD: CHORD_OVER: |A - B_end|^2 = 334084/333521 > 1: no tile holds both ends (TS-C); reds=['CHORD']
+plant radial: FIRES -> TILE: OUTSIDE_LENS: radial (1+eps)A is at squared distance 10101/10000 > 1 from B; reds=['TILE']
+plant radial_in: FIRES -> RADIAL: RADIAL_NOT_OUTSIDE: eps = 0: |(1+eps)A - B|^2 = 1, not > 1; reds=['RADIAL']
+plant nb_free: FIRES -> NBSTEP: NB_POINT_OUTSIDE: planted tau = 1/5 > tau* = (-2/10001 + 200/10001*sqrt3): (1+tau)e(d) at |.-B|^2 = (310091/250025 + -240/10001*sqrt3) > 1; reds=['NBSTEP']
+plant second_end: FIRES -> SECOND: INTERIOR_NOT_CLEAR: t=0: |w+60 - A|^2 = 1, |w-60 - B|^2 = 3; reds=['SECOND']
+plant frag_big: FIRES -> FRAG: SMALL_DIAM_OVER: the small classes have diameter 2r = 6/5 >= 1; reds=['FRAG']
+plant env_thick: FIRES -> ENV60: ENV_MARGIN_LOST: t=1/100, s=1/10: |C - z|^2 = (1110651/1000100 + -180/10001*sqrt3) >= 1; reds=['ENV60']
+plant cor3_nou1: FIRES -> COR3: HOLD_NO_EMPTY: u=single_cw theta=3 ell=55 side=in; reds=['COR3']
+SELF-TEST PASS

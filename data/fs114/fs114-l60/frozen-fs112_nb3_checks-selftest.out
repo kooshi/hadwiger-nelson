@@ -1,0 +1,12 @@
+faithful: PASS
+  RAYR: GREEN EXACT (f~^k(-1) = -1/(k+1), k<=60; f(f~(x)) = x on 73 rationals)
+  STEP: GREEN EXACT (81 rationals): f(x) <= x, f~(x) >= x, equality only at 0
+  LEN: GREEN EXACT: longest chain <= 2|K|-3 on 5 sets (so <= 2|K|-1)
+  FAIL: GREEN EXACT (first order): 16 of 28 single configurations fail, exactly the middle ones, inner in / outer out; both doubles as derived
+  COR3: GREEN EXACT (angles): 336 strip-holds cases each with an empty probe; 403 both-fail cases each forcing an inner and an outer colour of u and of v; 128 both-fail cases impossible outright (an empty probe); 141 skipped (arcs overlap)
+plant rayr_f: FIRES -> RAYR: POLE: f(-1) undefined (f used in place of f~); reds=['RAYR']
+plant step_flip: FIRES -> STEP: F_NOT_BELOW at -40/41; reds=['STEP']
+plant len_nonstrict: FIRES -> LEN: OVER_NB3_BOUND |K|=2: 3 > 1 (N3's 2|K|-1 holds); reds=['LEN']
+plant fail_vote: FIRES -> FAIL: FAIL_NOT_MIDDLE t46=100 t56=280 in={5} out=set(); reds=['FAIL']
+plant cor3_nou1: FIRES -> COR3: HOLD_NO_EMPTY u=single_cw theta=3 ell=5 side=in; reds=['COR3']
+SELFTEST PASS
