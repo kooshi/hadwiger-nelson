@@ -99,3 +99,117 @@ examined against pairs present, and the plants show which kinds of pair the ACCE
 
 ## Stage 2 — SAVED
 
+## Stage 3 — SAVED: `[Polymath2021]` Fig. 10 transcribed by eye (the D5 conditions), committed before any solve
+
+*Source: PDF p. 36 of `~/source/library/geombinatorics/geombinatorics-v30-n4-2021-04.pdf` (the paper's p. 200), rendered at 300 and 600 dpi, viewed
+whole and in five crops (top, left, bottom, right, centre). **Read: tiles, colours, adjacencies, junctions, which edges are curved and which straight,
+the direction each curved edge bulges.** Not read: any coordinate, length or angle (no pixel is used as data; D5). Where the figure is read for a
+qualitative feature that fixes geometry (parallel sides, mirror symmetry), it is marked **(reading)** and the rebuild says how it enters.*
+
+### 3.1 The labelled points and the colours
+
+- Six colours in the figure: red, orange, yellow, green, blue, violet. Labels printed on the figure: **A** (at the top vertex of the central red tile),
+  **B** (inside the orange tile, at its upper-left corner), **C**, **D** (at the two upper corners of the top red tile, on the rim), **E** (inside the
+  yellow tile, at its upper-right corner). By the printed words these are "the vertices of a unit-edge regular pentagon" (p. 199).
+- **Notation (mine).** Sectors `k ∈ ℤ/5`, counter-clockwise, sector 0 the top one (the one holding the labels). `A_k` = the `k`-th vertex of the
+  central tile (A = `A_0`, `A_k` = `A_0` turned by `72k`°). Non-red colours indexed cyclically: `c(0)` blue, `c(1)` green, `c(2)` yellow, `c(3)` orange,
+  `c(4)` violet (the order in which blue, the colour of the tile above A, moves under a turn of 72°: see 3.3).
+
+### 3.2 The tiles (26), per sector `k` (five tiles each) and the centre
+
+| tile | where | corners (counter-clockwise description) | colour (sector 0 read; all sectors read) |
+|---|---|---|---|
+| `Z` | the centre | the five points `A_0 … A_4`; its five edges are curved, bulging outward | red |
+| `W_k` "wedge" | above `A_k`, between the arches `P_{k−1}` and `P_k` | `A_k` (a point: the wedge comes down to `A_k`), `X_k`, `U_k`, `U′_k`, `X′_k` | `c(k)`: `W_0` blue, `W_1` green, `W_2` yellow, `W_3` orange, `W_4` violet |
+| `P_k` "arch" | across the central edge `A_k A_{k+1}` | `A_k`, `X_k`, `B_k` (its apex, away from the centre), `Y_k`, `A_{k+1}` | `c(k+3)`: `P_0` orange, `P_1` violet, `P_2` blue, `P_3` green, `P_4` yellow |
+| `R_k` | on the rim, above `W_k` | `C_k`, `U_k`, `U′_k`, `D_k` and the rim from `D_k` to `C_k` | red, all five |
+| `S_k` | on the rim, above `P_k`'s edge `X_k B_k` | `B_k`, `X_k`, `U_k`, `C_k`, the rim from `C_k` to `F_k`, `F_k` | `c(k+4)`: `S_0` violet, `S_1` blue, `S_2` green, `S_3` yellow, `S_4` orange |
+| `T_k` | on the rim, above `P_{k−1}`'s edge `Y_{k−1} B_{k−1}` | `D_k`, `U′_k`, `X′_k`, `B_{k−1}`, `F_{k−1}`, the rim from `F_{k−1}` to `D_k` | `c(k+1)`: `T_0` green, `T_1` yellow, `T_2` orange, `T_3` violet, `T_4` blue |
+
+Identities read from the junctions: **`X′_k = Y_{k−1}`** (the wedge `W_k`, the rim tile `T_k` and the arch `P_{k−1}` meet there) and **`B_{k−1} = E`-point of
+sector `k`** (the label E sits at `B_4`, the apex of the yellow arch `P_4`; the label B at `B_0`, the apex of the orange arch `P_0`). So the five pentagons
+`A_k B_k C_k D_k B_{k−1}` are "connected" at the apexes, each apex shared by two consecutive pentagons — `[11.34]`'s "five connected regular pentagons".
+
+**The colouring is five-fold with a colour permutation, and mirror-symmetric with another** (read, every tile): a turn by 72° carries each tile to its
+namesake in the next sector and each non-red colour `c(j)` to `c(j+1)`, red fixed; the reflection in the vertical line through `A` carries `W_k ↔ W_{−k}`,
+`P_k ↔ P_{−1−k}`, `S_k ↔ T_{−k}`, `R_k ↔ R_{−k}` with the colours `(green violet)(orange yellow)`, blue and red fixed. (Checked tile by tile: `P_0` orange
+↔ `P_4` yellow; `S_0` violet ↔ `T_0` green; `S_1` blue ↔ `T_4` blue; `S_2` green ↔ `T_3` violet; `W_1` green ↔ `W_4` violet; `W_2` yellow ↔ `W_3` orange;
+`P_2` blue fixed.)
+
+### 3.3 Vertices (30 interior, 15 on the rim) and their colour sets
+
+| vertex | tiles meeting there | colours (sector 0) | degree |
+|---|---|---|---|
+| `A_k` | `Z`, `P_{k−1}`, `W_k`, `P_k` | red, yellow, blue, orange — **four colours** | 4 |
+| `X_k` | `P_k`, `W_k`, `S_k` | orange, blue, violet | 3 |
+| `U_k` | `W_k`, `S_k`, `R_k` | blue, violet, red | 3 |
+| `U′_k` | `W_k`, `R_k`, `T_k` | blue, red, green | 3 |
+| `X′_k = Y_{k−1}` | `W_k`, `T_k`, `P_{k−1}` | blue, green, yellow | 3 |
+| `B_k` | `P_k`, `S_k`, `T_{k+1}` | orange, violet, yellow | 3 |
+| rim `C_k` | `R_k`, `S_k` | red, violet | — |
+| rim `D_k` | `R_k`, `T_k` | red, green | — |
+| rim `F_k` | `S_k`, `T_{k+1}` | violet, yellow | — |
+
+The four-colour vertices are exactly the five `A_k` — de Grey's "{1,3,5,6} junction (at 2 o’clock on the central tile of the main disc; call it B)"
+(`[16.106]`), and Sirgedas's "quads" (`[16.346]`). Euler's count: 45 vertices, 70 edges (55 interior, 15 on the rim), 26 tiles + the outside: 45 − 70 + 27 = 2.
+
+### 3.4 Edges: which are curved, and where each curved edge is centred
+
+**Curved (20), each bulging as stated; read as unit arcs** (the p. 198 words "we again employ the tactic of drawing inter-tile boundaries as arcs of
+radius 1", p. 194's tactic, `[16.346]` "Arrows in the dual graph correspond to curved edges in the tile graph. Each quad in the dual graph “emits” four
+arrows."). **Centres**: each curved edge is centred at the corner of its inner tile that is opposite it — the rule the strip's words state ("a circular arc
+of radius 1 centered at the opposite corner of the tile") — which puts **four arcs at each `A_k`** and none elsewhere, as "each quad emits four arrows" says.
+
+| curved edge | between (inner \| outer) | bulges | centre (the inner tile's opposite corner) |
+|---|---|---|---|
+| `A_{k+2} A_{k+3}` (an edge of `Z`) | `Z` \| `P_{k+2}` | away from the centre | `A_k` |
+| `U_k U′_k` (the wedge's far edge) | `W_k` \| `R_k` | away from the centre | `A_k` |
+| `Y_k B_k` | `P_k` \| `T_{k+1}` | away from `P_k` | `A_k` |
+| `X_{k−1} B_{k−1}` | `P_{k−1}` \| `S_{k−1}` | away from `P_{k−1}` | `A_k` |
+
+**Straight (35):** the wedge's four sides `A_k X_k`, `X_k U_k`, `U′_k X′_k`, `X′_k A_k`; the rim tiles' sides `U_k C_k`, `U′_k D_k`, `B_k F_k`. (Every straight
+edge looks straight at 600 dpi; no curved edge looks like a segment.) **Rim (15):** arcs of the disk's boundary circle.
+
+### 3.5 Readings that fix geometry beyond the printed words (stated before any solve; each enters the rebuild as named)
+
+- **(reading P) Each arch's two straight sides look parallel to its axis** (clearest at `P_2`, whose sides both look vertical). In the rebuild this is not
+  taken from the figure: it is the bound derived at A (§3.6), met with equality; the figure is consistent with it.
+- **(reading M) The geometry looks mirror-symmetric** about each line through the centre and an `A_k` (and so about each line through a `B_k`): I read
+  it as full five-fold dihedral symmetry of the geometry. It enters the rebuild in one place: the rim tiles' boundary `B_k F_k` then lies on the
+  mirror line through `B_k`, i.e. is **radial**. Not printed; `[07.50]` prints only the five-fold turn ("(Same thing at the equivalent tiles at
+  multiples of 72 degrees rotated, of course.)").
+- **(reading W) Where the wedge's far arc `U_k U′_k` ends** is not printed and not fixed by the combinatorics. The rebuild takes the bound derived at A
+  (§3.6) with equality.
+
+### 3.6 Two bounds read off the transcription at the four-colour vertex (hand, before any solve; they aim the rebuild, the checker decides)
+
+At `A_0` (every colour of every arc centred there is present at `A_0`, so every arc there is an out-contact — kind **both** once the inner tile's
+self in-contact is counted): a tile of colour `s_out` at the centre must lie in the wedge facing away from the arc, to first order at the centre (for
+`q = A_0 + t d`, `|q − (A_0 + e)|² = 1 + t² − 2t d·e`, which is below 1 for small `t` iff `d·e > 0`).
+- The arc `X_4 B_4` (centred `A_0`, outer tile `S_4`, colour `c(3)` = orange = `P_0`'s colour at `A_0`) ends at `B_4`, and `B_4 − A_0` points at 36°
+  (`A_0 B_4` is the pentagon's edge AE). So **`P_0`'s straight side at `A_0` points at 126° or more** (at least 90° from 36°); by the mirror reading the
+  same for every arch at each end. **Equality (126°) is reading P**: the side is then parallel to `P_0`'s axis.
+- The arc `U_0 U′_0` (centred `A_0`, outer tile `R_0`, red = `Z` at `A_0`): `Z`'s cone at `A_0` starts at the tangent of `Z`'s edge `A_0 A_1`, at 198°
+  (the chord at 216° less half the edge's 36° opening). So **`U_0` lies at 108° or less** from `A_0` (at least 90° from 198°). The rebuild takes 108°.
+- The other two arcs at `A_0` (`Z`'s far edge, outer `P_2`, colour blue = `W_0`; `Y_0 B_0`, outer `T_1`, yellow = `P_4`) impose the mirror images of the
+  first and nothing new on `W_0` (its cone lies well inside the allowed one).
+
+**Ambiguities reported, not resolved by a solver (D5):** (i) whether the figure's arch sides are exactly parallel (reading P) and `U_k` exactly at 108°
+(reading W) — the rebuild uses the derived bounds with equality and says so; the checker's verdict is for that member only; (ii) the rim boundary `B_k F_k`
+radial (reading M); (iii) nothing else: the combinatorics (tiles, colours, junctions, which edges curve and which way) read without ambiguity at 600 dpi.
+
+### 3.7 Expectations registered before the solve (hand; each scored at stage 4, both outcomes reachable)
+
+- **E-r.** The rebuild reproduces `r² = (25 + 9√5)/10` exactly, with `C_k, D_k` on the rim (the built-in control). Unreachable-outcome check: a wrong
+  skeleton (e.g. `A_k` at another radius) changes `r²`, so a match is informative.
+- **E-valid.** The rebuild with the two bounds met with equality (126°, 108°) and radial rim boundaries is ACCEPTed; if REJECTed, the rejected pair names
+  which reading failed (three causes, told apart as the strip's were: a REJECT at a pair fixed only by the derived bounds points at the rebuild; one that
+  survives a hand recomputation points at the print).
+- **E-pairs.** Every close complementary pair of vertices contains a red three-colour vertex (`U_k` or `U′_k`): five non-red colours cannot make two
+  disjoint non-red triples (a derivation from 3.3, not a hope). Registered: `(U′_0, B_0)` has common unit points `A_0` and the rim point `C_0`
+  (mirror: `(U_0, B_4)` at `A_0` and `D_0`) — the strip's pattern (one common point a four-colour unit-arc centre, the other on the edge); and
+  `(U′_0, X_4)` has `A_0` and a second common point **just outside** the rim near the radial line through `B_4` (hand floats: radius ≈ 2.16 > 2.124).
+- **E-rim.** The rim points near which no colour is available include `C_k` and `D_k`; whether they are the only ones is not predicted.
+
+
+## Stage 3 — SAVED
