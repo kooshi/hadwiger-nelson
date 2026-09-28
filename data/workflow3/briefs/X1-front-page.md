@@ -169,3 +169,12 @@ Each proposal uses only its sources' own words, and each is ruled as proposed un
 - **F** (layout): move only the new nodes, by the lint, and say where each went.
 - **The F9-shaped phrase in `plans/STUB-reg-scale.md` § Bearing**: apply F9's substitution there too — "seven is the map NO made uniform in
   the complexity bound" → "seven is the NO's hole bound made uniform in the complexity bound".
+
+## Amendment 3 — 2026-09-28 23:15 UTC, from the coordinator: the atlas self-test
+
+Ruling B dropped TSMYES's registered block, which `tools/viz_proof_atlas_check.py --self-test`'s plant "wrong registered p (0.03 → 0.3)"
+mutates, so the self-test crashes. **Repoint that one plant at SRAY's registered block, as proposed** — `plant("wrong registered p (0.35 →
+0.5)", lambda dd: node(dd, "SRAY")["registered"].update(p=0.5), "SRAY", "FAIL")` — and show the self-test passing with every plant firing
+once. Standing rule 7's "never edit another job's tools" is lifted for that line only. Alternative weighed: leave it and report the tool
+defect — lost because a control that cannot run is a check nobody has seen fail (`CLAUDE.md` § Make the gate fail). Confidence high.
+Your 18:08 run in the main tree, restored at 18:09, is logged as your disclosed slip; the coordinator saw main's status clean.
