@@ -165,3 +165,94 @@ satisfying (A), (B) at the band's gaps has:
 from `{t > 1}` near some `(s, 1)` (a defect in M-PINCH's (tangent) partners or in the path argument).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: M4-CUT — the ladder cannot run on: within a bounded number of rungs it must meet the singular set
+
+### 3.1 The ladder, and the statement
+
+Iterate M4-LADDER. **Rung 0** is the layer `Λ` (class `x_0 = a`, flat side `t = 0`, curved side `β`). **Rung `k + 1`** is `W⁺` of rung `k` and
+**rung `−(k + 1)`** is `W⁻` of rung `−k`. By M4-LADDER (3) and the composition of dilations, rung `k` has flat side `t = k` and curved side
+`β^{+k}` for `k ≥ 0`, and flat side `t = k` and curved side `β^{−|k|}` for `k ≤ 0`; its class `x_{k+1}` is the class under rung `k`'s flat side
+(`k ≥ 0`), and `x_{−(k+1)}` is the class over rung `−k`'s curved side. The ladder is **ordinary through rung `k`** over a gap `J` when (A) and (B)
+of §2.1 hold for rungs `0, …, k` (resp. `0, …, −k`) at every point over `J` — each rung a single class between its two sides, with ordinary
+interfaces.
+
+**M4-CUT** [hand, one mind; over M4-LADDER and M2-FIX (F1)]. *Let `f` be a regular maximal partition (so every class satisfies M2-FIX), with the
+setting of §2.1 over `I`, and `n ≥ 1`.*
+1. *(Upward.) If the ladder is ordinary through rung `n − 1` over every gap of `I`, then `β(u) ≤ n − (n² − (u − z)²)^{1/2}` for all `u ∈ I`,
+   `z ∈ Z`, `|u − z| ≤ n` — **(C_n)**. In particular, at an end `z` of a gap where `β(u) ≥ c (u − z)²`, `n ≤ 1/(2c)`.*
+2. *(Downward.) If the ladder is ordinary through rung `−(n − 1)` over every gap of `I`, then `(β^{−n})^{+n} = β` on `I`: the region under the graph
+   is a union of open discs of radius `n`; so every gap `J` with `|J| < n` and `dist(J, ∂I) > n` has `max_J β ≤ n − (n² − |J|²/4)^{1/2}`.*
+
+### 3.2 Proof
+
+*(1)* Fix `k ≤ n − 1` and `z ∈ Z`. The `x_k`-contacts of rung `k`'s curved side, `x + n(x)` (M4-LADDER (1) at rung `k`), accumulate at
+`y = (z, k + 1)` as `x → (z, k)` (`Z` has empty interior), so `y ∈ F_{x_k}` (closed). By M2-FIX (F1), every component of `int F_{x_k}` lies in
+`B(y, 1)` or outside `B̄(y, 1)`. The components of rung `k`'s layer are one per gap `J′` (M4-LADDER (4) at rung `k`), and each has points
+`(u, t)` with `u` near an end `z′ ≠ z` of `J′` and `t − k` as small as we like, while the open disc `B(y, 1)` lies in `{t > k + 1 − (1 − (u −
+z)²)^{1/2}}`; so every component lies outside `B(y, 1)`: `B(y, 1)` misses `{k < t < β^{+k}}`. Now let `p` be a point with `0 < p_t < β(p_s)` and
+`|p − (z, n)| < n`, and take `k = n − 1`: the point `p′` on the segment from `p` to `(z, n)` at distance `< 1` from `(z, n)` is within distance
+`n − 1` of `p`, so it lies under `β^{+(n−1)}` (dilation), and above `t = n − 1` (the open unit disc about `(z, n)` lies in `{t > n − 1}`): a point of
+rung `n − 1`'s layer in `B((z, n), 1)`. Contradiction; so `B((z, n), n)` misses the region under the graph, which is (C_n). With
+`β ≥ c(u − z)²` and `n − (n² − x²)^{1/2} = x²/(2n) + O(x⁴)`, (C_n) gives `c ≤ 1/(2n)`.
+
+*(2)* Fix `k ≤ n − 1`; put `P` the class `x_{−(k+1)}` (over rung `−k`'s curved side). Every point `y` of rung `−(k + 1)`'s curved side
+`β^{−(k+1)}` (over `I`, including its points over `Z`, as limits) lies in `F_P`, and its normal meets `β^{−k}` at `x = y + n(y)` (parallel curves
+share normals), where by (A) at rung `−k` a half-ball above `x` lies in one component of `int F_P`, which near `x` is outside `B(y, 1)`; by (F1) the
+whole component is outside `B(y, 1)`. So the half-balls above `β^{−k}` lie above the upper boundary of `⋃_y B(y, 1)`, which is
+`(β^{−(k+1)})^{+1}`: `(β^{−(k+1)})^{+1} ≤ β^{−k}`. The reverse inequality holds for every graph (a closing contains the set). So
+`(β^{−(k+1)})^{+1} = β^{−k}` for `k = 0, …, n − 1`, and composing, `(β^{−n})^{+n} = β`: the open region under the graph is the union of the open
+discs `B(q, n)`, `q` under `β^{−n}`. Take a gap `J = (z₁, z₂)`, `w = |J| < n`, its highest point `(u*, h)`, and `ε > 0`: some `B(q, n)` under the graph
+contains `(u*, h − ε)`. Its upper arc `A` is concave, `A(z_i) ≤ β(z_i) = 0` wherever the disc reaches the vertical through `z_i`, and the disc
+(width `2n > w`) reaches at least one of them. If it reaches both, `A(u*) ≤ n − (n² − w²/4)^{1/2}` (the sagitta over a chord of length `w`). If it
+reaches only `z₁`, its centre is left of `z₂ − n < z₁`, so `A` decreases on `[z₁, u*]` and `A(u*) ≤ 0 < h − ε`; likewise for `z₂`. So
+`h ≤ n − (n² − w²/4)^{1/2}`. ∎
+
+### 3.3 Reading
+
+- **The pinch's ladder is finite.** Near a gap of width `w`, an ordinary ladder has at most about `1/(2c)` rungs above (`c` the curvature scale at the
+  gap's end) and at most about `w²/(8h)` below (`h` the gap's bump height); past them, (A) or (B) fails at some rung over the gap: a point with three
+  colours, a class whose local part is disconnected, or a rung that is not one class (the sub-layers of §2.2 (3)). **The cascade does not run to
+  infinity through ordinary interfaces; it ends at the singular set.** As `w → 0` both bounds grow, so small gaps allow long ladders; the large gaps pin
+  singular points near the pinch.
+- **The mechanism is the shadow map's curvature transport** (row 134, M2-INTRAD (2)): going up, the parallels of the bump's convex ends sharpen until
+  the disc about `(z, n)` no longer fits over the bump; going down, the bump must be a union of `n`-discs, which a bump of height `h` over a gap of width
+  `w` is not once `n > w²/(8h)`. Flat layers (`Z = ∅`) are never cut: SQ9's and the strip's ladders run forever (control below).
+- **Controls.** *SQ9* (nine colours; the unpinched form, `β ≡ 1/2`, `Z = ∅`): the class two rows above a square is the class of the row below it,
+  and two rows below the class of the row above — M4-LADDER (3) — and the ladder is ordinary forever; (C_n) and the bump bound are vacuous (no `Z`).
+  Checked (K4). *R7* (seven): no flat or (tangent) interface — every interface is a unit arc of kind both, M-PINCH's (split) case — so M4-LADDER is
+  vacuous there; **no seven-colour regular maximal partition with a (tangent) interface is held**, so the vacuity rule's `k = 7` inhabitant is met only
+  in the unpinched form and at nine. *The strip and the disk* (row 136): their vertical segments are (tangent) interfaces with straight partners at
+  distance 1 on both sides (round 1 §3.5), the unpinched ladder; no pinch, nothing cut.
+
+### 3.4 HC_K: the ladder over its first gap collides within three rungs
+
+In the edge frame (flat side `σ_e` at `t = 1`, so rung `k`'s flat side is `t = 1 + k`), every rung is at most as thick as the band (`β^{−n} + n ≤
+β` and `β^{+n} − n ≤ max β ≤ 1/64`). Over the first gap `|s| < 1/6`:
+- **rung `−4`** lies in `{−3 < t ≤ −3 + 1/64}` and **rung `+4`** in `{5 < t ≤ 5 + 1/64}`: inside the open discs of radius `1/2` about the face centres
+  `O± = (0, ±(2 + √3/2) + (0 or 2))`, i.e. `(0, −2 − √3/2)` and `(0, 4 + √3/2)` (K1, exact). Those discs are open sets of class `j`. M4-LADDER (3) at
+  rung `−3` puts `x_{−3}` below `t = −3` and a different colour `x_{−4}` just above, near every `(s, −3)`; inside the disc both are `j`. Contradiction;
+  likewise at rung `+3` with `t = 5`.
+- **rungs `±1, ±2, ±3`** have their flat sides on `t = 0, −1, −2` and `2, 3, 4`, which miss both discs and both triangles' interiors (`t = 0` and `t = 2`
+  are the triangles' own sides, as the ladder requires: rung `−1`'s lower class is `j` = `T_down`, rung `+1`'s upper class is `j` = `U`) (K1).
+
+**M4-HC** [hand + tools exact, one mind]. *In no regular maximal partition containing HC_K as a class is the ladder of the band's first gap ordinary
+through rung `3` upward or through rung `−3` downward.* Independently, **HC's face-centre discs** (curvature 2) **have no ordinary boundary point in
+any saturated colouring**: at a point satisfying (H1), (H2), M-C11 bounds the interface's curvature by 1. So HC_K itself sits in a regular maximal
+partition only with singular points on every disc boundary point and within three rungs of its first gap. The generic bounds (K2, K3) at the first gap
+(`w = 1/3`, bump height `h = w⁴/64 = 1/5184` exactly — `ℓ(0) = 1 + g(0)` by Lemma NL's exterior disc) are 72 rungs down and 19 up: the collision is
+what cuts HC_K, the bounds are what cut any pinch.
+
+### 3.5 The exact check, `tools/fs111_m4_rungs.py`
+
+sympy, exact; output `data/fs111/fs111-m4/rungs.out`, exit 0 (all as expected).
+- **K1** rung `∓4` layers over `|s| ≤ 1/6` inside the discs about `O∓` (the four corners of each thin box, the disc being convex); flat sides
+  `t = −2, −1, 3, 4` clear of both discs and both apexes. **PASS.**
+- **K2** `g`'s maximum on a gap of width `w` is `w⁴/64` at the midpoint; the largest `n` with `1/5184 ≤ n − (n² − 1/36)^{1/2}` is **72**. **PASS.**
+- **K3** `min_y [c y² + (x − y)²/2] = x² c/(2c + 1)`; with `c = w²/4` the upward bound is `1 + 2/w²`, **19** at `w = 1/3`. **PASS.**
+- **K4** SQ9's rung classes (control). **PASS.**
+- **Plants, each firing for its own reason and only there:** `far` (face centres 3 from the apexes; at `21/10` and `5/2` the collision still happens —
+  the disc is roomy, a plant that could not fire, found and replaced) → K1; `gdbl` (`g` doubled: bound 36) → K2; `c2` (`c = w²/2`: bound 10) → K3;
+  `sq4` (squares coloured mod 4) → K4.
+
+## Stage 3 — SAVED
