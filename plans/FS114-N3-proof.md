@@ -23,6 +23,10 @@ is `ω(p)`; a **change point** of the ring is a point of `Γ ∩ ω(p)` where th
 | N3-DR0 | DR's **degenerate member** (a change point `60°` from a Reuleaux corner, `s′ ∈ {0°, −60°}`) does not exist: the partner at the corner and the forced `c₂` tile at the change point realise distance 1 | [hand, one mind; tools exact at named values] | §2.2 (iv); `tools/fs114_n3_dr.py` |
 | N3-CONT | In DR (general member) the continuation of each tactic lens arc beyond its end is non-tactic: every end of a tactic edge at `p` and every Reuleaux corner carries a non-tactic edge | [hand, one mind] | §2.2 (v) |
 | N3-K1 | **K1: GAP** — not derivable from structure within radius `1 + ε` by any lemma here; DR's general member passes every check made; rotational patterns not walked | [hand, one mind] | §2.3 |
+| N3-DR1 | In DR (general member, minimal ring pattern) the two same-colour ring tiles at the change points `y′, y″` (distance 1) would realise distance 1 along the tangent rays `±τ` unless blocked; the only blockers are the lune's `p`-tile (inside) and the corner partners (outside), so **`t₄` reaches the ring at `y′` or `y″`, and `z_a` reaches `y″` or `z_{−b}` reaches `y′`** | [hand, one mind] | §3.1 |
+| N3-DR2 | In N3-DR1's case (i) `y″` is a four-colour vertex `{X̄, c₄, X, c₂}` sharing `t₄` with `p` at distance 1, and its ring forces the edge `U₁ | U₂` to run along `ω(y″)` across the whole lune, from `y′` to `R3`'s arc at `y″ − a` | [hand, one mind] | §3.1 |
+| N3-JOINT | Route T's count restated: `N + U + 3V₆ = V₄` (non-tactic edges); the non-Siamese simple torus NO ⟸ a fractional assignment giving every degree-4 vertex two units among non-tactic edge-ends (its own or free ones within radius `R`), `U`, and six units per degree-6 vertex, with a unit unused in every disc of radius `R₀` (K1 ∧ K2-loc is the own-ends case) | [hand; N2-SLACK restated] | §3.2 |
+| N3-PAY | DR vertices pay: in DR the four continuation ends (N3-CONT) supply `½` each, and a cubic continuation end is claimed by at most two deficient vertices, so DR never breaks the assignment's capacities at cubic ends | [hand, one mind] | §3.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -42,6 +46,7 @@ is `ω(p)`; a **change point** of the ring is a point of `Γ ∩ ω(p)` where th
    only.
 3. The owner's mid-stage message (FS114-CV's result) unfenced `plans/FS114-CV-verification.md`; I read its theorem table lines 20–24 and its §1.5 rows
    for GS-1, C-COMPOSE (3) and C114-LOCAL-FR (grep hits), nothing else yet.
+4. The owner's second message (FS114-CVB confirms CV-EXISTS, two minds; THOM-TOP settled 2–1) unfenced `plans/FS114-CVB-verification.md`; not opened.
 
 ## Stage 1 — SAVED: reading, the quotation check, and where FS114-CV's result bears
 
@@ -193,3 +198,73 @@ by that fragment or by a derived obstruction in a lune interior): I expect such 
 configuration.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: DR's forced structure continued; the joint form of the kill
+
+### 3.1 N3-DR1 and N3-DR2 — the change points carry the lune's `p`-tile and a corner partner
+
+*Setting: DR's general member (§2.2 (v)), right lune, minimal ring pattern (exactly the change points `y′ = e^{is′}`, `y″ = e^{i(s′+60°)}`,
+`s′ ∈ (−60°, 0°)`); `n = y″ − y′` (a unit vector), `τ ⊥ n` the direction `s′ + 30°` (outside the ring at both points), `−τ` inside.*
+
+**N3-DR1 [hand, one mind].** `U₁ ∋ −b, y′` and `U₃ ∋ a, y″` carry one colour `X` and are distinct (a tile holding `a` and `−b` has diameter `√3`), hence far;
+N3-FACE puts `U₃`'s cone at `y″` in `{u·n ≥ 0}` and `U₁`'s at `y′` in `{w·n ≤ 0}`. If `y″` were an edge point (`U₂ | U₃` only), N3-PAIR makes that edge an arc of
+`ω(y′)`, so `U₃` holds all of the region outside `B(y′, 1)` near `y″`, including both tangent rays `y″ ± tτ`; likewise `U₁` at an edge point `y′` holds
+`y′ ± tτ`. Then `y″ + tτ` and `y′ + tτ` (or the `−τ` pair) are interior points of colour `X` at distance `|n| = 1`. So each ray direction must be **blocked** —
+covered by another tile — at `y′` or at `y″`. The only tiles that can sit there: **inside the ring**, a tile of a colour of `P(p)` containing the point must
+be a tile at `p` (anything else within distance `< 1` of `p` is Siamese with it), and only `t₄` can reach (`R1 ⊂ B̄(b, 1)`, `R3 ⊂ B̄(−a, 1)` miss both points);
+**outside**, `c₁, c₃, c₄` are excluded (`R1, R3, t₄` all point toward `y′` and `y″`), the two absent colours are taken, so the tile is `c₂`, and then it is
+`z_a` at `y″` (`|a − y″| < 1`) or `z_{−b}` at `y′`. Hence **`t₄` reaches the ring at `y′` or `y″`, and `z_a` reaches `y″` or `z_{−b}` reaches `y′`.** ∎
+Three cases: (i) both at `y″`; (ii) both at `y′` (the mirror); (iii) mixed. *Reads:* the disc of radius `1 + ε` about `p`; vertices `p, a, −b` (`F`) and the
+change points.
+
+**N3-DR2 [hand, one mind].** In case (i) `y″` is a vertex of degree 4 with tiles `U₂, t₄, U₃, z_a` in that order — **a four-colour vertex `{X̄, c₄, X, c₂}` at
+distance 1 from `p`, sharing `t₄` with it** — and its ring carries only `c₁, c₃`. `t₄, U₂, U₃` contain `y″`, so they lie in `B̄(y″, 1)`; `U₁` does not, faces
+away from `y″` at `y′`, and is connected, so it lies outside `B(y″, 1)`. The arc of `ω(y″)` inside the right lune runs from `y″ − a` (on `R3`'s arc `ω(−a)`,
+between `p` and `−b`) to `y′`, and separates `U₁` from `t₄ ∪ U₂ ∪ U₃`: **it lies in `Γ`**. So the lune is cut by a unit arc centred at a four-colour
+vertex, `U₁` on its outer side; the piece of it bordering `t₄` is not tactic (its would-be partner `U₃` is adjacent to `t₄` at `y″`). The rings of `y″` at
+`p` fall in `R1` and `R3` (tangents `s′ + 150°`, `s′ − 30°`, strictly inside their cones for `s′ < 0`), as they must. ∎ *Reads:* as N3-DR1, and `y″ ∈ F`.
+
+**What this says about DR.** Four tactic edges at one vertex propagate: the lune's `p`-tile must reach the ring (diameter 1 realised toward a change
+point), a corner partner must reach the same or the twin change point, and in case (i) a new four-colour vertex appears on `p`'s ring whose own unit
+circle is forced into `Γ` across the lune. Every step is local (radius `1 + ε`) and none has yet produced a contradiction beyond N3-DR0's member. **The
+next steps, not taken:** cases (ii), (iii); the left lune; whether `y″`'s own tactic edges (it is a degree-4 four-colour vertex) make it deficient too.
+
+### 3.2 The joint form of the kill (K1 is not available)
+
+**N3-JOINT [hand; N2-SLACK restated].** On a non-Siamese simple torus map, N2-SLACK reads `N + U + 3V₆ = V₄`, `N` the non-tactic edges. So the NO follows
+from any **fractional assignment** in which every degree-4 vertex receives two units, each unit being half of a non-tactic edge (one of its own ends, or a
+**free** end — an end at a vertex of degree 3 or 5, or beyond the first two at a degree-4 vertex), a unit of `U`, or one of six units per degree-6 vertex,
+every source used at most once, **and some source left unused in every disc of radius `R₀`**. K1 ∧ K2-loc is the special case where every degree-4 vertex
+uses its own ends only. Stated this way the kill is local and joint: it asks where the non-tactic ends near a deficient vertex are, not whether it has them.
+
+**N3-PAY [hand, one mind].** A DR vertex takes `½` from the continuation end at each of its four tactic ends `p′_i` (non-tactic by N3-CONT). At a cubic
+`p′_i` the continuation end is free, and at most two deficient vertices can claim it (the cubic `p′_i`'s other two edges are its tactic edge from `p` and
+one more), so its capacity 1 is never exceeded. **Not covered:** a `p′_i` of degree 4 or 5; the rotational and mixed patterns and non-Reuleaux lenses
+(**K1′**: the deficient configurations other than DR, with their local payment); and the unused unit (**K2′**: strictness), where N3-DR1/-DR2's forced
+structure is the first handle (each non-tactic edge it forces — the `ω(y″)` arc's pieces, the continuations — is a candidate unused source).
+
+**Verdicts of this stage.** K2-loc as stated ("under K1") is **moot** while K1 is a GAP with a live escape; its content moves into N3-JOINT's leftover
+clause (K2′). Route T's kill is **GAP at K1′ ∧ K2′ ∧ GAP-μ** for the non-Siamese class; DR is paid for (N3-PAY) but not yet shown to leave a surplus.
+
+## Stage 3 — SAVED
+
+## Stage 4 — SAVED: GAP-μ and the Siamese class, after FS114-CV and FS114-CVB
+
+**GAP-μ (brief step 3).** What the count needs is the tile identity (N2-ABS) with repeated contacts: a tile `z` meeting `x` twice lies in no (A) or (B) slot
+as N114-RD defines them ("touching `x` at `q` alone"). Derived here, for the record only: in the non-Siamese class a pocket (the region enclosed by two
+tiles meeting twice) lies in the convex hull of their union, of diameter `≤ 2`, so by N2-GROW's packing it holds at most `6·(2·1 + 1)² = 54` tiles, and a
+hole at most five (N2-MU). No payment rule for `μ` is derived: **GAP-μ stands as stated**. With CV-EXISTS it matters only to route T.
+
+**SIAM-KILL (brief step 4).** FS114-CV and FS114-CVB (two minds, blind to each other) give CV-EXISTS for every valid map, Siamese or not, so **C114-LOCAL-F
+alone is the unit-arc NO**; the Siamese class needs no count and no separate kill — it needs C114-LOCAL-F's radius. What an argument there must read (the
+brief's question), given N2-REFINE: any count over tiles is blind in the Siamese class (tile density is unbounded), so a Siamese kill must read **points
+and distances, not tiles** — a local exclusion about a four-colour vertex whose steps cite distances between points of colour classes (as N3-DR0 does), and
+never a tile count. FS112-N3-DENSE3's `R` half is subsumed. Not worked further.
+
+**Where the two routes now stand (a reading, one mind).** Route T reaches only the non-Siamese simple class and stops at K1′ ∧ K2′ ∧ GAP-μ; the local route
+reaches every valid map and stops at C114-LOCAL-F's radius. They meet at the vertex type this job studied: **every step of §§2–3 is already a
+C114-LOCAL-F step** (it reads radius `1 + ε` about a four-colour vertex and cites only distances), and N3-DR0 is the first derived local exclusion of a
+four-colour configuration. *Killing test of the reading:* a derivation of K1′ ∧ K2′ that uses a step no local exclusion about a four-colour vertex could use
+(a global average).
+
+## Stage 4 — SAVED
