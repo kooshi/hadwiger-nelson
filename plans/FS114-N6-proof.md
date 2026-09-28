@@ -29,6 +29,7 @@ itself) unless said otherwise. **FS112-L60 is used only in its corrected form, "
 | N6-PIN | K1-PIN after stage 3: the pinwheel is excluded at radius `1 + ε` unless its ring carries (Q) arcs of N6-QOUT's kind; **GAP** there | [hand, one mind] | §3.3 |
 | **N6-CENT** | At a non-Siamese degree-4 vertex whose ring carries no (Q) arc (after the bends), all tactic centres lie in one class mod 60°: every cone between tactic edges is a multiple of 60°, and a lens is Reuleaux or `γ = 0°`; **non-Reuleaux lenses need a (Q) arc** | [hand, one mind] | §Stage 4 |
 | N6-COV | At a tactic centre that is a change point with `κ` defined on both windows beside it, the directions toward `p` are covered only by `p`'s own tiles reaching it; a unit gap between consecutive centres of one tile pushes that tile aside and forces a neighbour into a Reuleaux triangle on `p` | [hand, one mind] | §Stage 4 |
+| N6-MTP | For every `K`, a valid map in `𝓜_K` has a stationary random valid map in its hull whose Palm version is unimodular and hyperfinite, so of average curvature zero (Euler in expectation, pinch points included by multiplicity); route T's counts and N3-JOINT's assignment (a mass transport) hold as intensity identities: the aperiodic averaging step for Q-full_K closes by printed theorems; GAP-μ, K1, K2-loc, the Siamese class and unbounded complexity are untouched | [hand, one mind, over `[AldousLyons2007]` Ex. 9.5, `[AHNR2018]` Thm 1, 3.4 (external) and W-EQ-K's compactness] | §Stage 5 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -265,3 +266,46 @@ ring arcs in absent-colour tiles) is (Q)-free and passes N6-COV at the corners (
 | `+++−`, `++−−`; three tactic edges | (Q)-free: cones in `60°ℤ` (N6-CENT), N6-COV applies; GAP, not walked |
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: brief item 3 — the mass-transport lead for route T's aperiodic step
+
+### 5.1 Read (G50; copies in `~/source/library/pdf/`, fetched from arXiv 2026-09-28)
+
+| key (proposed) | work | read |
+|---|---|---|
+| `[AldousLyons2007]` | D. Aldous, R. Lyons, *Processes on unimodular random networks*, arXiv:math/0603062 (venue as recalled: Electron. J. Probab. 12 (2007), unchecked against the paper) — `arXiv-math-0603062-aldous-lyons-processes-on-unimodular-random-networks.pdf` | **Definition 2.1** (unimodular = the Mass-Transport Principle (2.1)); **Example 9.5** (tilings: a `Γ`-invariant measure on graphs embedded in Euclidean space, rooted at a uniform vertex of a test region, is unimodular and independent of the region — "the Palm measure … except that µ is a measure on isomorphism classes"; "a limit measure obtained from translates of a given tiling"). Theorem 8.5 read only as AHNR restate it. Rest not read |
+| `[AHNR2018]` | O. Angel, T. Hutchcroft, A. Nachmias, G. Ray, *Hyperbolic and parabolic unimodular random maps*, arXiv:1612.08693v2 (venue as recalled: GAFA 28 (2018), unchecked) — `arXiv-1612.08693-angel-hutchcroft-nachmias-ray-hyperbolic-parabolic-unimodular-maps.pdf` | abstract; §1 to Theorem 1 (the Dichotomy Theorem, statement (1)–(9) read); §3.2 (invariant Cheeger constant, invariant amenability), §3.3 (hyperfiniteness, Theorem 3.4 = [AL, Thm 8.5] with its proof); §4 opening (angle sum `θ(v)`, curvature `κ(v) = 2π − θ(v)`, faces with multiplicity; Examples 4.1, 4.2) and the mass transport of Example 4.3's proof. Rest not read |
+| `[BenjaminiSchramm2001]` | I. Benjamini, O. Schramm, *Recurrence of distributional limits of finite planar graphs*, arXiv:math/0011019 — `arXiv-math-0011019-benjamini-schramm-recurrence-distributional-limits.pdf` | abstract, §1.1–1.2 (distributional limits; bounded-degree limits of finite planar graphs are recurrent). Not about Euler counts; rest not read |
+
+Not read (named in AHNR and AL as the stochastic-geometry side): Mecke-type intensity relations for stationary planar tessellations. **Would-have-searched:** none (reading only).
+
+### 5.2 The answer, at its grade
+
+**N6-MTP [hand, one mind, over `[AldousLyons2007]` Ex. 9.5 and `[AHNR2018]` Thm 1, Thm 3.4 at their printed grade; external].** *For every `K`, a valid map in `𝓜_K`
+has a translation-invariant random valid map in its hull; its Palm version is a unimodular random rooted planar map with `E[deg ρ] < ∞`, hyperfinite, hence of
+average curvature zero: **Euler's formula holds in expectation**, and N114-EULER, N2-SLACK, N2-ENDS and N3-JOINT's fractional assignment hold as identities of
+intensities, with no boundary term.*
+1. *The hull.* Average the translates of `M` over growing squares and take a weak limit point: a translation-invariant law `ν`. It is carried by valid maps in
+   `𝓜_K` because `𝓜_K`'s limit class is closed under local limits (the compactness step C114-COMPACT rests on, `plans/FS107-derivation.md` W-EQ-K, at its grade).
+   Rotations are optional (SO(2) is compact); Euler needs only translations.
+2. *Unimodular.* `[AldousLyons2007]` Ex. 9.5 applies verbatim to the 1-skeleton `Γ` with its faces (the tiles); `E[deg ρ] < ∞` from the complexity bound.
+3. *Hyperfinite, so invariantly amenable* (my step): keep the edges with both ends in one cell of a randomly shifted dyadic grid of side `2^i` (one shift for all
+   `i`, so the percolations nest); each is finitary (finite intensity), and every edge is eventually inside one cell. `[AHNR2018]` Thm 3.4 gives invariant
+   amenability, and Theorem 1 (2) ⟹ (1) average curvature zero: `E[2 − Σ_{f ⊥ ρ} (deg f − 2)/deg f] = 0`, faces counted with multiplicity at their corners — so
+   **pinch points are inside the identity**. A tile with a hole needs `Γ` connected: add a bridge edge from the hole's boundary outward (local, colour-free).
+4. *Route T's counts* are Euler plus local double counting, so each becomes an identity of Palm expectations times intensities; **N3-JOINT's assignment is a mass
+   transport**, and the Mass-Transport Principle is exactly "expected mass received = expected mass sent", so its torus statement transfers to stationary maps
+   unchanged.
+
+**What it closes, and what it does not.**
+- **Closes:** the averaging in route T's aperiodic step for Q-full_K (brief N114 stage 3's "averaging over the plane"; N2-AVG's disc accounting; C114-BUDGET's
+  "averaging to that value on the plane"): at each `K` the torus-form local statements imply the NO for aperiodic maps in `𝓜_K`, by printed theorems, with no
+  Følner estimate.
+- **Does not close GAP-μ.** `μ` is a local deficit in the rainbow count (pockets lower the demand `(d − 2)(d − 3)` by repeated face contacts), not an averaging
+  error; stationarity makes `μ` an intensity and still leaves it uncharged. AHNR's multiplicity convention settles only the Euler side of pinch points.
+- **Does not touch** K1, K2-loc, the Siamese class (N2-SIAM: the count is blind there), or unbounded complexity (without `𝓜_K`'s compactness a limit of translates
+  may leave the locally finite maps; N2-AVG's direct route is the one that reaches non-Siamese maps of any complexity).
+- **Row 130's sentence in the lead** ("one may assume a random colouring invariant under rigid motions") concerns `χ_m⁰`; a CP colouring is not a map, so it gives no
+  random valid map. For FS-114's maps the stationarity comes from the hull, at bounded complexity.
+
+## Stage 5 — SAVED
