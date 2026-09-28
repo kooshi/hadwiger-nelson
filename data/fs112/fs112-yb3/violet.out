@@ -1,0 +1,16 @@
+== the violet extension X_ext of S_0 (Y2 6.4), exact
+   |B_0 - C_0|^2 = 1: True; |F_0 - C_0|^2 < 1: True; |F_0 - Z^L_0|^2 < 1: True; |B_0 - Z^L_0|^2 < 1: True
+   pair (Xext, P1): ACCEPT min=1 max>1 ~[1.000000, 2.394521]
+   pair (Xext, S0): ACCEPT min<1 max=1 ~[0.000000, 1.000000]
+   pair (Xext, T3): ACCEPT min>1 max>1 ~[2.579844, 4.218564]
+   pair (Xext, W4): ACCEPT min>1 max>1 ~[1.618034, 3.177568]
+   pair (Xext, Xext): ACCEPT min<1 max<1 ~[0.000000, 0.748805]
+-- violet at the named points of V with S_0 and X_ext in place (the union straddles iff min < 1 over the union and max > 1)
+     centroid          : S_0 min < max <; X_ext min < max >; union straddles: True; other violet tiles blocking: none
+     near Z^L_0        : S_0 min < max <; X_ext min < max <; union straddles: False; other violet tiles blocking: none
+     near Y_0          : S_0 min < max <; X_ext min < max <; union straddles: False; other violet tiles blocking: none
+     near K            : S_0 min < max >; X_ext min < max >; union straddles: True; other violet tiles blocking: ['P1']
+     side Z^L_0-Y_0    : S_0 min < max <; X_ext min < max <; union straddles: False; other violet tiles blocking: none
+     leg Y_0-K         : S_0 min < max >; X_ext min < max >; union straddles: True; other violet tiles blocking: ['P1']
+     chord K-Z^L_0     : S_0 min < max <; X_ext min < max >; union straddles: True; other violet tiles blocking: none
+exit=0

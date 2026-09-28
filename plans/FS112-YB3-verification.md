@@ -7,11 +7,17 @@ of the plane.*
 
 ## Theorems this phase proved
 
-*(filled at the end of step 3; one line per theorem, its grade and its address)*
+The table is at the end of stage 3 ("Theorems this phase proved (FS112-YB3)").
 
 ## Would have searched here (standing rule 3)
 
-*(one line per move I would have made by search, and what I did instead)*
+- END-A, END-B: I would have tried horn lengths and closing colours until the checker accepted; instead each was fixed once by a derivation
+  (rational points of the named circles; the closing colour 6 as the one colour no tile within reach forbids) and checked once.
+- BOWTIE: I would have searched configurations for a stuck vertex with no `h` at `N`; instead Step 2's exception (in-type `h` at `E − n` needs
+  `λ_E = −1`) named one configuration, built once.
+- DISK-T* and STRIPCUT: I would have sampled points of the regions; instead named points by formula (centroids and pulled corners of `V`;
+  rational unit vectors from `Q`), each checked exactly.
+- The coverage guard is a float sampler, used as a sanity check only, never as a verdict.
 
 ## Fence log (standing rule 13; brief § Fences; instance)
 
@@ -143,7 +149,7 @@ two tiles subdividing one arc differently) and gone at 2,000 segments: an artefa
 
 ## Stage 2 — SAVED
 
-## Stage 3 (in progress): my verdicts on the nine claims, committed before I open Y3's record
+## Stage 3 — my verdicts on the nine claims, committed before I open Y3's record
 
 ### 3.1 Y3-END-NEEDS — derived blind; **TRUE for a chain of two or more vertices; FALSE as stated, by an exact fragment (BOWTIE)**
 
@@ -290,3 +296,49 @@ vertex, how many colours, does each member emit a unit arc centred there) and te
 So "saved at one common unit point by a four-colour vertex, and at both exactly when a rhombus completion" holds at both, and the unsaved second
 points are the stop points. The disk's `(A_0, y)` (a ring change point, not a vertex) saved at both by (S1): Y2's §5.3 (d) (exact at the arcs, the
 seam points placed in float) — not re-checked here; the claim's words for it are Y2's, which I read and do not dispute.
+
+### 3.8 Y3-DISK-T* — **TRUE; the colour-free part of the vacated region is a proper sub-region** [tools, exact at named points; hand; one mind] (`pins.py disk`, `violet`; `disk.out`, `violet.out`, `q2-inside.out`)
+
+On YB2's disk with the first move (Y2-MOVE = YB2's O3; the same object, two minds), in exact towers up to seven levels:
+- **`T*` holds `q2`**: `q2 = Z^L_0 − (1, 0)` lies on `ω(C_0)` and `ω(Z^L_0)` (the other common point is `D_0`), strictly inside the disk
+  (`|q2|² ≈ 3.894 < r² ≈ 4.512`); `T*` is the curvilinear triangle `q2`, `p*` (rim ∩ `ω(C_0)`, rim angle 130.84°), `ρ*` (rim ∩ `ω(Z^L_0)`, 127.25°).
+- **`|q2 − Y_0|² ≈ 0.8165 < 1`, so `W_0` (Y2's `T2_0`) must vacate `B(q2, 1)`**: `W_0` holds `Y_0` inside and `A_0` outside (`|A_0 − q2| = φ`), so it
+  straddles distance 1 from every point of a blue `T*` near `q2`. `ω(q2)` meets `W_0`'s boundary exactly at `Z^L_0` and at `K = C_0 + e(276°)` on
+  the leg (3.3): the vacated region `V` is the curvilinear triangle `Z^L_0, Y_0, K`, of diameter `≈ 0.42`.
+- **The second move's other tiles, built exactly:** `T*` blue; `T_1` (Y2's `U′_0`) cut to lie outside `B(C_0, 1)`; the violet extension
+  `X_ext = T_1 ∩ B(C_0, 1) ∩ B̄(Z^L_0, 1)` (corners `B_0`, `F_0`, `ρ*`, `q2`) — **valid as part of the violet tile**: against `S_0` max exactly 1,
+  against `P_1` min exactly 1, against `T_3`, `W_4` min > 1, itself diameter `≈ 0.749`.
+- **At seven named points of `V`** (the centroid of the triangle `Z^L_0 Y_0 K`; each corner pulled 1/5 toward it; each side's midpoint pulled 1/10
+  toward it), each colour's blockers:
+  - red (`Z`, `R_0`, and `R_1` at three points), green (`T_0`, `W_1`), yellow (`P_4`, and the cut `T_1`), blue (`T*`), everywhere;
+  - orange by `P_0` at five points, and **by nothing near `K` and on the leg `Y_0K`**;
+  - violet by `S_0 ∪ X_ext` at the centroid, near the chord `KZ^L_0`, near `K` and on the leg (the last two also by `P_1`), and **by nothing near
+    `Z^L_0`, near `Y_0` and on the side `Z^L_0Y_0`**.
+  So **at two of my seven points — the centroid and the point by the chord — no colour is admissible**, and there the blockers are exactly `Z`
+  (Y2's `C0`), `R_0`, `W_1` (`T2_1`), `T_0` (`U′_4`), `P_4` (`T1_4`), `P_0` (`T1_0`) — Y3's six tiles — plus the move's own tiles. At the other five,
+  one colour survives (violet or orange).
+
+**Verdict:** the claim's chain holds — `T*` holds `q2`; `W_0` must vacate a region reaching `Y_0` and `K`; that region contains points (an open
+set, blocking being open) where no colour is admissible with the move's other tiles in place; so a change to one of the six named tiles (or to
+the move's own choices, e.g. `X_ext`'s colour) is needed, and **no change confined to the region near `Z^L_0` lets `T*` be blue**. **Precision**:
+"at 7 named points … no colour is admissible" depends on where the points are — the colour-free set is a proper part of `V` (violet is
+admissible near `Z^L_0` and `Y_0`, orange near `K`); my points agree with the claim's conclusion at two of seven.
+
+## Theorems this phase proved (FS112-YB3)
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| YB3-ENDA | Y3-END-A rebuilt from its words is valid (39/39), arc-closed at its unit arcs' ends; `P_1`, `E` stuck; a MERGE of 4 at `N` is available and valid (43/43) | tools, exact; one rebuild (mine); stuckness exact at antipodes and named points + hand | 2.2, 2.4, 3.2 |
+| YB3-ENDB | Y3-END-B rebuilt is valid (44/44); `P_cl(N) = {1,3,4,5,6}`; no MERGE at `N`; SHAVEs of `N`'s horn by either flank valid (46/46, 49/49) | tools, exact; one rebuild (mine) | 2.4, 3.2 |
+| YB3-SHADOW | two unit-arc shadow cases: a tile beyond an arc of `ω(v)` shadows near `v` every direction within 90° of the arc; an in-type tile at `w ∈ ω(v)` shadows every `z` with `|z − w| > 1` | hand, one mind | 3.1 |
+| YB3-NEEDS | Y3-END-NEEDS holds for a stuck chain of at least two vertices (then `λ_E > −1`); its clause "`h` tangent to `±a` at `N`" fails exactly when `λ_E = −1` (in-type `h` at `E − n`) | hand, one mind | 3.1 |
+| YB3-BOWTIE | an exact valid fragment (21/21): a stuck vertex `E` with three colours whose horns lie between `ω(E + n)` and `ω(E − n)`, shadowed by in-type radius-1 sectors at both antipodes; `P_cl(E ± n)` four colours each, neither stuck, `h ∉ P_cl(E + n)`; every unit arc's end interior | tools, exact; one fragment (mine) | 2.2, 2.4, 3.1 |
+| YB3-N5 | at the end's centre `N` of a two-vertex-or-longer chain, `P_cl(N) = {c, h, x₁, x₂, y}` exactly (`g ∉ P_cl(N)`), and `N` must centre unit arcs of total length at least 180° | hand, one mind | 3.1 |
+| YB3-LEG | Y3-LEG: `|A_0 − q2|² = |A_0 − C_0|² = φ²`; the leg's line is the perpendicular bisector of `C_0, q2`; `K = C_0 + e(276°)` on the segment, `K′ = C_0 + e(156°)` beyond `Y_0` | tools, exact | 3.3 |
+| YB3-STRIPCUT | at 22 named points of `C_{−1}`, `C_2` on and beside `ω(Q)`, 4 is the only colour no other tile forbids; `C_{−1}`'s cut needs a midline arch, `C_{−3}` or `C_1`, `C_2`'s a midline arch, `C_0` or `C_4` | tools, exact at named points | 3.4 |
+| YB3-R1 | along C-CHAIN-9's inequalities `λ`, `υ` are non-decreasing, equal consecutive terms only 0; one-sided infinite chains need infinitely many radii; a chain has at most `2V` vertices | hand, one mind | 3.5 |
+| YB3-T2B | Y3-T2-BUDGET; the strip's 18 `(V, A)` pairs are not completions | hand; strip clause tools, exact | 3.6 |
+| YB3-R3 | Y3-R3 at both positives: every close complementary vertex pair saved by half of T2 at one four-colour vertex, at both exactly when a rhombus completion; the unsaved points are the edge vertices, rim points and outside points | tools, exact (exhaustive) | 3.7 |
+| YB3-DISKT | Y3-DISK-T*: `T*` holds `q2`; `W_0` must vacate `W_0 ∩ B(q2, 1)`; at two of seven named points of it no colour is admissible (blockers Y3's six tiles plus the move's), at five one colour is | tools, exact at named points + hand | 3.8 |
+
+## Stage 3 — SAVED (step 3 complete: every verdict above is committed before Y3's record, tools or outputs are opened)
