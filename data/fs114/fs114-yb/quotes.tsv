@@ -1,0 +1,21 @@
+# FS114-YB quotation check: id, source, quotation (as it stands in my brief's standing rules or in the claim list, normalised)
+SR0	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.
+SR3a	CLAUDE.md	to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time
+SR3b	CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.
+SR4	CLAUDE.md	A proven theorem about why its impossible is also valid. All novel knowledge is a success
+SR10	plans/CONSOLIDATION-2026-09-27.md	It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.
+C-DUALCOUNT	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges).
+C-EDGERB	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Degree 6 isn't possible with only 6 colors.
+C-RB1	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red blocks
+C-RB2	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Also this graph can't have pentagons.
+C-RB3	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Similarly the metagraph can't have a quadrilateral. (Well, I'm pretty certain, but the proof below is a bit sloppy(?)).
+C-RB4	~/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	So, the red metagraph must have only triangles.
+C-DEG4	~/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I think it creates another quad/pentagon.
+C-SIAM	data/fs112/fs112-pa/extracts.md	tiles that lie entirely within each other's annulus of exclusion
+C-COR3	plans/FS112-derivation.md	In a valid map, a close complementary pair of cubic trichromatic vertices u, u′ (disjoint multicolours, d < 2) sits on a unit rhombus u, q₊, u′, q₋ whose other corners are vertices of at least four colours, each a leaving centre of both u and u′, a unit arc of each leaving centre's circle being both-kind there: T2 is forced at both common unit points.
+C-PART	plans/FS112-derivation.md	In a valid map, every close complementary cubic trichromatic partner of a cubic trichromatic vertex u is the fourth corner w_i + w_j − u of a unit rhombus on two of u's leaving centres, so u has at most three such partners.
+C-NOBOTH	plans/FS112-derivation.md	The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour.
+C-VALID	plans/FS112-derivation.md	A map is valid when it is a locally finite map of the plane bounded by segments and circular arcs, arcs of radius 1 allowed (Condition 5 dropped), carrying a six-colouring in which no two interior points of one colour are at distance exactly 1. A unit arc is a boundary arc of radius 1; (Q) an arc whose centre carries both side colours and at least four colours; (R2) an arc whose centre carries the outer side colour and not the inner, with an inner-colour tile along the radius-2 circle over the whole arc. M* is a terminal valid modification (N2-TERM). F(M): the vertices of at least four colours; R(M): the vertices carrying a repeated colour.
+C-DENSE3	plans/FS112-derivation.md	Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.
+C-DISC	plans/FS112-derivation.md	No vertex-centred disc of radius above φ lies in any valid extension of the disk, and a valid extension holds B̄(A_0, φ): φ is attained
+TACTIC	pdf:~/source/library/geombinatorics/geombinatorics-v30-n4-2021-04.pdf:30-30	a tile T of color 1 can share a boundary segment E with a tile U of color 2 and also a point P with a tile V also of color 2, if E is drawn as an arc of radius 1 centered on P.

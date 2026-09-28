@@ -1,0 +1,6 @@
+self-test: the first row as written, then with its longest word altered (must be FOUND, then MISSING)
+SR0	FOUND	CLAUDE.md
+-- 1 of 1 FOUND; 0 MISSING; 0 UNREADABLE
+SR0-altered	MISSING	CLAUDE.md
+-- 0 of 1 FOUND; 1 MISSING; 0 UNREADABLE
+self-test PASSED
