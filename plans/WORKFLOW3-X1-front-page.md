@@ -75,3 +75,33 @@ Nine items: Q1 F6's G72 wording; Q2 row 133's kept parenthesis; Q3 D8's STUB-glo
 milestone column ("139" or "row 139"); Q6 the bibliography's fit issues (a duplicate key `[AxenovichLiuSagdeev2025]`, a no-op `[Oostema2020]` edit,
 prose edits' forms, `[Sirgedas2021]` and the group row's read cells, the § A′ form); Q7 the instances' headers, the G67 section, "Twenty-first";
 Q8 the claim-list headings; Q9 findings (F1's conflation in two unlisted texts; LOCALF's own quote; DESIGN.md not in the manifest).
+
+### 1.5 The coordinator's rulings (Amendment 1 to the brief, 2026-09-28 22:53 UTC, `data/workflow3/briefs/X1-front-page.md` on `main`, 7a35a0c8)
+
+Q1: G72's unit filed exactly as the amendment gives it. Q2: option (a), the FS-110 parenthesis kept right after "route M, the map NO (FS-110's
+question, then FS-114's)". Q3: my proposal (words moved, none added). Q4: "*At FS-111's close:* …" at the sections I named; FS-104's "## Bearing on
+χ ≥ 6". Q5: "row 139" etc. Q6: (a) no § A row for `[AxenovichLiuSagdeev2025]`; (b) the `[Oostema2020]` edit a no-op (its § C row already reads
+"373–389"); (c) my separators; (d) `[Sirgedas2021]`'s read cell = the draft's text; the group row "**Held, unread**" → "**Held, partly read**" + the
+draft's text; (e) the alias in backtick form. Q7: my header for FS-111's instances; G67's section between G65 and G72; FS-111's G72 instance opens
+"Twenty-first, FS-111:". Q8: my headings. Q9: F1's substitution applied to the stub's "At FS-114's close" paragraph ("is the whole NO" → "suffices for
+the whole NO") and to the atlas node CVEXISTS; LOCALF re-quoted from the corrected row 137; the README's step 6 skipped and listed as owed.
+
+## Stage 2 — SAVED: `LEDGER.md` (manifest items 1–2)
+
+Script: `data/workflow3/x1/file_ledger.py` (helpers `data/workflow3/x1/common.py`), run once; every text taken from its source by anchors, every
+replacement asserted once.
+
+| item | filed | source | corrections / merges used |
+|---|---|---|---|
+| 1a | rows 137, 138 after row 136 | `plans/FS114-C-close.md` § `LEDGER.md` — § A | F1 pairs 1–2 (row 137's opening, its "So S–V's Question 2" sentence) |
+| 1b | rows 139, 140, 141 | `plans/FS111-C-close.md` §D1 § A | ruling 3 (`‹R111-a/b/c›` → 139/140/141) |
+| 1c | row 134: the BASE-V clause before its bracket's "]**"; row 135: four replacements and the Not-claimed deletion ("; a chain end at a unit arc bounding one horn only") | FS-114 § corrections, bullets 1–2 | — |
+| 1d | rows 130, 131 (Prior art); row 133 (the sentence, Q2 (a)); row 136 (the clause appended to its Not claimed list, "; " before ". **Prior art:**") | FS-111 §D1 "Corrections to existing rows" | ruling 3 in row 133; Amendment 1 Q2 |
+| 2a | FS-114's 46 § B lines after FS-112's | `data/fs114/fs114-c/ledger-b-draft.md` | — |
+| 2b | FS-111's 85 § B lines after FS-114's | FS-111 §D1 § B | ruling 3; Amendment 1 Q5 ("row 139" …) |
+| 2c | FS112-L60 (statement, grade), -N3-BASE (grade), -C-ENDS (statement, grade), -C-PARTNERS, -C-DOUBLE (grades); 29 kernel cells "stub (FS-114)" → "stub (FS-116)", every one an FS-112 line | FS-114 § corrections, bullets 3–7 | — |
+
+**The census:** `python3 tools/fs71_ledger_b_check.py --strict` → **exit 0, "RESULT: PASS", "LEDGER § B rows: 1134 | placeholders: 0"** (1,134 theorems
+in 74 files; FS111=85, FS114=46; `data/workflow3/x1/stage2-ledger-check-strict.out`). **Negative control:** FS111-M4-CUT's line removed from a copy
+→ exit 1, "FAIL: entry FS111-M4-CUT has no LEDGER.md § B row", "RESULT: FAIL (1)" (`stage2-ledger-check-plant.out`); restored (sha256 identical,
+2581…), re-run exit 0. `LEDGER.md`: 493,844 → 541,387 bytes.
