@@ -24,12 +24,25 @@ M-SATC (`plans/FS111-M-regularity.md` §2.2: admissible cover, `≤`, `F_j = sup
 - **M2-DISC7** — the circumscribed discs of the tight hexagonal seven-colouring (radius `1/2`, centred at the hexagon centres, coloured as the
   hexagons) form a maximal admissible seven-cover with regular classes whose overlaps have positive measure; each class has density
   `π/(21√3/2) = 2π/(21√3) ≈ 0.1727`, and the seven sum to Kershner's thinnest-covering density `2π/(3√3)` — [hand + exact check pending stage 2] §1.6.
+- **M2-HULLC** — C-HULL-REG on maximal covers: every component of a regular maximal class lies inside or outside each unit circle centred in the
+  class, so it satisfies the exterior ball condition of radius `1/2`, is semiconcave with constant 1 where its boundary is a graph, and has finite
+  perimeter; near any point the class is carved by the unit circles about its own points (near components through their open spindle hulls, far ones
+  through their unit neighbourhoods), so its boundary lies on unit parallels (outer and far) of its own components; on the pinch set of two classes
+  M-PINCH/M-C11 hold verbatim. Semiconvexity (`|κ| ≤ 1` on the convex side) FAILS on covers (DISC7: curvature 2) — [hand, one mind; finite perimeter
+  over a classical fact] §2.1. Inhabitants: R7, DISC7 (exact), SQ9 at nine.
+- **M2-EXTREME-C** — round 1's M-EXTREME is FALSE on maximal covers (DISC7's components have no singular point) — [hand + exact, one mind] §2.2.
+- **M2-PINCH-C** — a regular maximal class containing two blocks at vertical distance 2 whose facing boundaries are flat and a smooth graph touching
+  its flat unit parallel exactly on a Cantor set, and otherwise isolated near the gap, has infinitely many components accumulating on that Cantor set —
+  [hand, one mind; conditional on such a class existing, which is the reading "MUA-FIN-U is FALSE"] §2.3.
 - **M2-KERSHNER** — no admissible five-cover has classes that are unions of discs of radius `1/2`: such a class has density at most `π/(8√3)`, and five
   of them fall below `2π/(3√3)` — [hand over Kershner 1939 and Fejes Tóth's packing bound, external] §1.6.
 
 ## Would-have-searched-here log (standing rule 3)
 
 - Stage 1: none. (Four zbMATH queries for prior art, §1.3, are reading, not search.)
+- Stage 2: would have searched for a wild maximal unit-avoiding set (a colourer or optimiser over pixel sets with an inclusion-maximality
+  objective) → instead derived the local form of the shadow identity (M2-HULLC (iv)) and wrote a Cantor pinch down by formula (M2-PINCH-C), leaving its
+  global completion as the named killing test.
 
 ## Fence log (standing rule 13)
 
@@ -152,3 +165,110 @@ below Kershner's bound `2π/(3√3) ≈ 1.209` for any covering by equal discs. 
 (`≈ 1.360`) are not excluded by this count. *What it shows:* a count can enter through the covering condition — how the classes fit together — and
 not class by class (G24): the bound is Kershner's covering density of the pieces' shape, which is available only because the pieces are congruent
 discs. For general pieces of diameter `≤ 1` the covering density of the shape can be 1 (hexagons tile), and no such count is known.
+
+## Stage 2 — SAVED: the rungs on maximal covers — C-HULL-REG and REG-J′ for covers; where the overlaps change round 1
+
+*By M2-COV every rung here is a statement about one maximal unit-avoiding set, class by class (G24's rule: said so; none decides a colour count).
+"Regular" (§1.5) is a named hypothesis, **MUA-REG**, wherever it appears.*
+
+### 2.1 M2-HULLC — C-HULL-REG on covers [hand, one mind; (iii) over a classical fact]
+
+*Statement (every `k`).* Let `F` be the support of a regular MUA set (a class of a regular maximal cover), `x ∈ ∂F`, and `U` a component of `int F`
+with `x ∈ cl U`.
+- **(i) one-sided unit discs.** For every contact `y ∈ F ∩ T₁(x)` (one exists, (F2)): `U ⊆ B(y, 1)` ("in") or `U ∩ B̄(y, 1) = ∅` ("out") — (F1). So
+  at every point of `∂U` the open ball of radius `1/2` tangent there on the far side misses `U` (in: `B(x + (x − y)/2, 1/2)`, externally tangent to
+  `B̄(y, 1)`; out: `B(x + (y − x)/2, 1/2) ⊆ B(y, 1)`): **`U` satisfies the uniform exterior ball condition of radius `1/2`**.
+- **(ii) semiconcave where a graph.** Where `∂U` is locally the graph of a continuous `u` with `U` below it, both cases touch `u` from above by a function
+  of second derivative `≤ 1`, so `u − s²/2` is concave: `u` is semiconcave with constant 1 (round 1's M-COVER-SC, now for components of `int F`).
+- **(iii) finite perimeter per component.** Let `C` be the closure of the set of centres of the balls in (i). Every `x ∈ ∂U` has `d_C(x) = 1/2` (it lies
+  on its own ball's circle, and inside no ball, since the balls are open and miss `U` while `x ∈ cl U`), so `∂U ⊆ {d_C = 1/2}`, the boundary of the
+  `1/2`-neighbourhood of a compact set, which has finite length [external, classical, not read here: Federer 1959 — the complement of an open
+  `r`-neighbourhood has reach `≥ r`, and sets of positive reach have boundaries of locally finite `H¹`]. So **every component has finite perimeter**.
+  Whether a class does (finitely many components locally) is MUA-FIN, §2.3.
+- **(iv) generation: the class is carved by unit circles about its own points.** For `r < 1/2`, `int F ∩ B(x, r) = B(x, r) ∖ ⋃_{p ∈ F_x} T₁(p)`, where
+  `F_x = F ∩ cl A_r(x)` (the part of `F` within `r` of `T₁(x)`) — (F3), since every circle through a point of `B(x, r)` centred in `F` is centred in
+  `F_x`. If `F_x` has finitely many components `K_1, …, K_m` (compact, connected), then, since `T₁(z)` meets a connected `K` iff
+  `d_K(z) ≤ 1 ≤ D_K(z)` (`D_K` the farthest distance),
+
+  `int F ∩ B(x, r) = B(x, r) ∩ ⋂_i ( H_i ∪ E_i )`, `H_i = ⋂_{p ∈ K_i} B(p, 1)` (the open spindle hull of `K_i`), `E_i = {d_{K_i} > 1}`,
+
+  with `H_i ∩ E_i = ∅`. So near `x` every component of `int F` is, for each `i`, either **near** `K_i` (inside the intersection of the open unit discs
+  about all its points — a convex set whose boundary curves by at least 1) or **far** from it (outside the union of the closed unit discs about its
+  points), and `∂F ∩ B(x, r) ⊆ ⋃_i (∂H_i ∪ {d_{K_i} = 1})`: **the class boundary near `x` lies on finitely many "far levels" `{D_{K_i} = 1}` (convex
+  arcs, the class inside) and "near levels" `{d_{K_i} = 1}` (outer unit parallels, the class outside)**. This is round 1's REG-CHAIN structure (unit-
+  parallel curves) found inside one class: every boundary arc of a maximal class is a unit parallel (outer, or far) of another part of the same class.
+- **(v) two-sided on the pinch set.** Where `∂F_a` and `∂F_b` of two classes coincide along an arc and, near a point `x` of it, only `a` and `b` carry
+  measure (`N ⊆ A_a ∪ A_b` a.e.) with `A_a ∩ N` and `A_b ∩ N` each a.e. one connected open set with `x` in both closures, round 1's M-PINCH and M-C11
+  hold verbatim: `C^{1,1}`, `|κ| ≤ 1`, a unit arc of kind both or two tangent unit discs (the overlap change in (out, out) is in §2.2).
+
+*Inhabitants at `k = 7`* (exact, §2.4). **R7** — a maximal cover with disjoint classes (VMW-R7-COVER): every class boundary point is a pinch point, every
+interface is (v)'s (split) type, and each Reuleaux tile is carved by the unit circles about its own three corners (a constant-width body is its own
+spindle hull: `⋂_{p ∈ K} B̄(p, 1) = K`). **DISC7** — overlapping classes: every class boundary point lies inside another class's disc (a lens arc), so
+only (i)–(iv) apply; the contact of every boundary point is its antipode in the same disc ("in"), every disc is its own spindle hull, and the class
+boundary has curvature 2. **SQ9** (`k = 9`) — disjoint; every edge point is "out" on both sides at distance 1, the outer parallel of a flat edge a flat
+edge (W's LADDER).
+
+*What survives of C-HULL-REG as stated, on covers.* **Semiconcavity: yes** (ii). **Semiconvexity (`|κ| ≤ 1` on the convex side): no** — DISC7's class
+boundaries have curvature 2; the round-1 bound `|κ| ≤ 1` comes from the partner colour's contact, which a cover does not supply off the pinch set.
+**"Graph of a Lipschitz function": GAP**, as in round 1, at two named configurations: a component's horn (R7's down tiles at their cusps; a
+horn tip is not a single graph) and two components of one class touching at a point (the honest bichromatic vertex of degree `≥ 4`).
+
+### 2.2 Where a cover's overlaps change round 1's proofs
+
+| round-1 result | on a maximal cover | the change, named |
+|---|---|---|
+| M-HULL1, M-HULL2 | hold, and stronger: (F1) holds for **every** `y ∈ F`, not only density points, and for components of `int F` | M2-INT replaces the density-point hypothesis (regularity used) |
+| M-SATC | holds (it is where covers come from) | — |
+| M-PINCH Step 1 | holds (class by class) | — |
+| M-PINCH Step 2 | needs two contacts **at one point**; a cover supplies them only on the pinch set `∂F_a ∩ ∂F_b`. Off it (a point of `∂F_a` inside `int F_b`, a lens arc) only (i) holds | **the overlap band**: a cover puts the two classes' boundaries on different curves |
+| M-PINCH, case (out, out) | round 1 used that `S_a`, `S_b` are disjoint ("the two open discs meet `N` in disjoint sets"). On a cover: `B(y_b, 1) ∩ N ⊆ A_a` a.e. (cover, and `A_b ∩ N` misses `B(y_b, 1)`), while `A_a ∩ N ∩ B(y_a, 1)` is null; so `B(y_a, 1) ∩ B(y_b, 1) ∩ N` is null, hence empty: tangent, as before | disjointness replaced by the one-component hypothesis on `A_a ∩ N` |
+| M-C11 | holds on arcs of the pinch set; off it only (ii) | as above |
+| M-EXTREME | **FALSE on covers**: DISC7's components have smooth boundaries and no singular point at all | round 1's proof put a unit disc of the region's own colour inside the region at an extreme point; that disc came from the partner's contact (two-sided), which a lens arc lacks |
+| M-HALF, M-POLAR | hold (class by class) | — |
+| M-BLOCK-EQ | holds (class by class) | — |
+| M-REDUCE-I | its arc-closing step (via M-EXTREME) fails: DISC7's class boundaries are closed loops with no singular point | replaced in stage 3 (M2-REDUCE-C): the vertices are the crossings of different classes' boundaries |
+
+### 2.3 REG-J′ on covers — verdict
+
+**REG-J′-C_k** (this record's): *if a maximal `k`-cover exists, then one exists whose classes are regular (MUA-REG) and in which every bounded set meets
+only finitely many components of the classes' interiors, and `⋃_j ∂F_j` is, in every bounded set, a finite union of Jordan arcs (MUA-FIN).*
+
+| form | verdict | grade, minds |
+|---|---|---|
+| existence, `k ≥ 7` | **TRUE**: R7 (unit arcs), DISC7 (circles of radius `1/2`), each exact (§2.4); SQ9 at `k = 9` | [hand + exact], one mind |
+| existence, `k ≤ 4` | vacuous (`χ_m⁰(ℝ²) ≥ 5`) | — |
+| existence, `k = 5, 6` | **GAP at MUA-REG and MUA-FIN.** At `k = 5`, given FS106-AE-MAP6 and stage 3's M2-REDUCE-C, it is equivalent to `χ_m⁰(ℝ²) ≥ 6` (as C-REG-EQ: the rung is vacuous if `χ_m⁰ ≥ 6`), so it is not a smaller statement; its colour-generic forms below are | [derived], one mind |
+| MUA-REG-U: every MUA set is regular | open; its one-dimensional analogue is FALSE (§1.5) | — |
+| MUA-FIN-U: every regular MUA set has locally finitely many components | **reading: FALSE**, by M2-PINCH-C below; killing test: a regular MUA set by formula containing the configuration, or a proof that M2-FIX forbids it globally | [reading], one mind |
+| MUA-FIN-P: every regular maximal cover can be modified, keeping it a maximal cover, into one satisfying MUA-FIN | open; the colour-generic procedural rung | — |
+
+**M2-PINCH-C — a class can pinch along a Cantor set** [hand, one mind; conditional]. Let `g : ℝ → [0, ∞)` be `C^∞` with `|g″| ≤ 1/2`, zero set exactly
+a Cantor set `Z ⊂ (−1/8, 1/8)` (a smooth function can have any closed zero set). Put `P = [−1/4, 1/4] × [−1/2, 0]` and
+`P′ = {(s, t) : |s| ≤ 1/4, 2 + g(s) ≤ t ≤ 5/2}`. *If* a regular MUA set `F` contains `P ∪ P′` and no other point of `F` lies within `11/10` of the strip
+`W = [−1/8, 1/8] × [9/10, 11/10]`, then `int F ∩ W` has infinitely many components, accumulating at every point of `Z × {1}`.
+*Proof.* For `z ∈ W`, (iv) gives `z ∈ int F` iff `T₁(z)` misses `P` and `P′` iff `d_P(z) > 1` and `d_{P′}(z) > 1` (the far alternatives fail:
+`D_P(z), D_{P′}(z) ≥ 3/2`). `d_P(z) > 1` iff `t > 1`. `d_{P′}(z) > 1` iff `z` lies below the lower unit parallel of `P′`'s bottom, a curve
+`t = ℓ(s)` with `ℓ ≥ 1` and `ℓ(s) = 1` iff `s ∈ Z` (a point `(s, 1)` has distance `≥ 1` from `P′`, with equality only at `(s, 2)` with `g(s) = 0`, where
+`g′(s) = 0`). So `int F ∩ W = {1 < t < ℓ(s)}`, one thin lens over each gap of `Z` and nothing over `Z`. ∎
+*Consistency (why this is a reading of FALSE and not a curiosity).* The configuration satisfies M2-FIX locally: `P`'s interior has diameter `< 1` and
+is more than 1 from the lenses and `P′`; every point strictly between the blocks outside the lenses lies on a unit circle about `P` or `P′`; the pinch
+points `(c, 1)` lie in `F` (closure) with density 0 and have contacts `(c, 0)` and `(c, 2)`, touched tangentially. Nothing local forbids it; what is not
+done is the completion to a global MUA set (the lenses' own shadows, the blocks' other sides, and the horizontal cut-off of the rung by other material
+of the class). In an honest saturated colouring the same picture puts infinitely many cusp points of Σ on a Cantor set: round 1's REG-J′ fails for
+it in the same way. So local finiteness is **not** a consequence of maximality class by class; it must come from a modification (MUA-FIN-P), or from
+the whole cover. *The local repair:* raising `P′` by any `τ > 0` turns the lenses into one strip; whether the raise propagates through `P′`'s other
+contacts is W §2.7's self-sustaining question.
+
+### 2.4 Exact checks
+
+`tools/fs111_m2_covers.py` (exact rational arithmetic; output `data/fs111/fs111-m2/covers.out`, exit 0, 22 s):
+- **DISC7** — grid points `z = (i√3/16, 3j/16)` (every `|z − c|²` rational), 2,173 points covering a period cell of the colour lattice with margin, each
+  against all seven classes: the shadow identity `z ∈ int F_a` XOR `z ∈ F_a + S¹` holds at every point and class; every point is covered; same-class
+  centres are more than 2 apart; every disc's centre is exclusive; neighbouring discs overlap (lens). **0 failures.** *(A sampled check of M2-DISC7;
+  the proof is §1.6's.)*
+- **SQ9**, class `(0, 0)` — 5,329 exact rational points over a period cell with margin: the shadow identity holds everywhere. **0 failures.**
+- **R7** — not re-checked here: VMW's exact results are the inhabitant (VMW-R7-MAX, reading (A), the 144-point grid: every point outside a class is on a
+  unit circle about it; VMW-R7-PROPER: no interior pair at distance 1), which together are M2-FIX's two halves at R7.
+- **Plants, each firing exactly its named failure and nothing else:** radius `11/20` → "both" (internal diameter `1.1`); colours `m + 4n mod 13`
+  (covering radius `√13/2 > 3/2`) → "neither" (free points); only six of DISC7's classes → "cover"; squares at period 2 → "neither" (slack frees the
+  boundary, M-SLACKFREE); squares of side `3/4` at period `3/2` → "both".

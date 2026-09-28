@@ -1,0 +1,19 @@
+FS111-M2 exact checks: DISC7 and SQ9 as maximal covers (tools/fs111_m2_covers.py)
+
+[DISC7] grid points 2173 x 7 classes; failures: none; first: {}
+   -> DISC7 (faithful): expected none, got none: PASS
+[disc-r11/20] grid points 2173 x 7 classes; failures: ['both']; first: {'both': (-8, -5, 3)}
+   -> plant disc-r11/20: expected ['both'], got ['both']: PASS
+[disc-idx13] grid points 1209 x 13 classes; failures: ['neither']; first: {'neither': (-8, -6, 3)}
+   -> plant disc-idx13: expected ['neither'], got ['neither']: PASS
+[disc-drop6] grid points 2173 x 7 classes; failures: ['cover']; first: {'cover': (-8, -2)}
+   -> plant disc-drop6: expected ['cover'], got ['cover']: PASS
+
+[SQ9] grid points 5329; failures: none; first: {}
+   -> SQ9 class (0,0) (faithful): expected none, got none: PASS
+[sq-period2] grid points 9409; failures: ['neither']; first: {'neither': (Fraction(-2, 1), Fraction(-2, 1))}
+   -> plant sq-period2: expected ['neither'], got ['neither']: PASS
+[sq-side3/4] grid points 5329; failures: ['both']; first: {'both': (Fraction(-23, 16), Fraction(-23, 16))}
+   -> plant sq-side3/4: expected ['both'], got ['both']: PASS
+
+ALL PASS
