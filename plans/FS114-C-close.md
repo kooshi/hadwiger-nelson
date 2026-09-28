@@ -258,3 +258,124 @@ in the non-Siamese simple class by counting, a known value, not an answer.
   NB6-FOLNER as the second mind); YB2-EMPTY13 (an instance of FS114-Y4-LUNE); the FS-112 confirmations (in the errata section, where the entries live).
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the sweeps, and every registered prediction scored
+
+### 4.1 §G re-read (the plan's §G part 3, fifteen extractions)
+
+| # | extraction | paid? | how |
+|---|---|---|---|
+| 1 | card 2 reframed by compactness (G17, G29, G82) | **paid** | FS114-N114-COMPACT (two minds): the local/global question became explicitness — C114-LOCAL-F is C-LOCAL's explicit form, and the milestone's verdict is stated as its stall |
+| 2 | the G15 architecture (an unavoidable set by a count × each member excluded locally) | **paid, and it is the milestone's shape** | route T's charge (N2-ENDS) named the deficient configurations; rounds 2–6 excluded them one by one, locally |
+| 3 | Voronov's radius 3 | paid, as a negative | FS114-N114-VOR: closedness buys the band; Voronov cannot refute a valid map |
+| 4 | the torus first (G68) | paid | every count ran on torus maps (17 exact, NB), then on discs of the plane (N2-AVG, NB6-FOLNER) |
+| 5 | swaps (G71) | silent in outcome | no winding route was run; E16 not reached |
+| 6 | no argument one class at a time (G24, G60) | held | route T's count reads all colours at once (absent-colour capacities), never one class |
+| 7 | calibration (G20, G21) | paid | every new checker accepted the five controls first; plants fired; six registration misses named before re-registering |
+| 8 | what a YES must carry (G22, G79) | paid | Y derived PENT before building; STRIPK6 and the K6 screen came from COR3; Y2's bowtie was designed from K1's killing test |
+| 9 | read at the opening (G46, G49, G50) | partly | Mohar and Ágoston fetched and read in part; Sirgedas's thread `J_Tw1_hUxQI` read in part (a debt, carried) |
+| 10 | the base (BASE-V) | not needed | BASE-V found no failing step; R0 did not run |
+| 11 | which vertices (G83) | paid | E14 met: every decisive argument reads four-colour vertices |
+| 12 | scope (rows 131, 133) | paid | every verdict states its class (reconciliation §2.6) |
+| 13 | staffing and counting (G51) | paid | a divergence of truth in every round; three blind convergences between the sides |
+| 14 | registrations (G21) | partly | several populations ended unreached (E7, E16, E19; N3's, N6's, N7's, L60's) — each named with both outcomes, but the verifiers that would have scored them did not run |
+| 15 | form (G67) | the close's | the drafted G83 rewrite and G86 are in G67's form |
+
+**An entry that should have borne and was used late: G79.** Rounds 2–5 each excluded one escape configuration — counterexample invariants, one per round
+(DR, the Γ-ring bowtie, the pinwheel, E1/E2). The example invariant at the same vertex — what every four-colour vertex's ring carries — arrived only in
+rounds 5–6: N6-RING60 (a (Q)-free ring has six 60° ring tiles), N7-HUB (its six change points are four-colour vertices). G79's *Do* ("when a wall hands
+back a no-go, flip the wanted poster") applied at round 2's boundary would have asked for N7-HUB three rounds sooner. A drafted instance for §G79.
+**A miss of method, G21's boundary form:** FS112-L60 carried two minds and a tool, and its plant sat at 50° while the claim's boundary was 60° (the L60
+audit); a drafted instance for §G21.
+
+### 4.2 §IQ, G72's count and G79's record
+
+- **§IQ's structural form** asked for a datum at every vertex of `F ∪ R`, valid locally, whose plane average topology fixes. **Route T's charge is that
+  datum** (candidates (a) and (c) merged: N2-ENDS's `n`, `n − 2`, `n`, `n + 6` from tactic edges, average zero by Euler), and it located six's room at a
+  degree-4 four-colour vertex with three or four tactic edges — the target of rounds 2–6. Candidate (b), the (Q) skeleton, appears only as N7-HUB's
+  hexagon reading (untested, one mind); E13 not met.
+- **G72: through** — the milestone's product (the charge, K1, and its local exclusions) came through the structural question; CV-EXISTS came from the
+  composition (a statement every map carries, found by re-deriving a chain end). **Twentieth; the count becomes seventeen of twenty.**
+- **G79's record:** the headline reduction (CV-EXISTS: every valid map carries a four-colour vertex) and the count (every map's charge sums to zero) from
+  **example invariants**; the six rounds' exclusions from **counterexample invariants** (what an escape at a deficient vertex must carry, then killed);
+  the lead for C114-LOCAL-F (N7-HUB) an example invariant, reached late (4.1). No breakthrough of the second kind.
+
+### 4.3 §PA — what the prior art says the object is
+
+1. **Route T is Sirgedas's program** (the Google group, 2020–22): the count, the cover rule, the red blocks; FS-114's route-T results are "proofs not
+   found in print" of statements he stated or aimed at (FS114-N2-FIVE, FS114-NB-DUAL, FS114-Y-EDGE, FS114-Y-REDBLOCK1, FS114-N2-ENC3). **Ágoston 2025**
+   states the plane's nice case from his Lemma 7 and `3n − 6` — pure Euler: prior art for FS114-N114-CUBIC's shape.
+2. **The rainbow deficit's types (A) and (B) are Gibbs's vertex-edge and vertex-vertex constraints** (`[09.11]`, `[09.28]`) and Mixon's (`[08.14]`), used as
+   search rules in 2018; FS114-N114-RD makes them a lemma about every valid map.
+3. **Kooshi's mass-transport lead** (item 79), checked: stationary hulls of valid maps of bounded complexity are unimodular and hyperfinite
+   (`[AldousLyons2007]` Ex. 9.5), but **the simple hole-free class is not closed under hull limits** (NB6-MTP), so the printed route needs GAP-μ in the hull;
+   the elementary disc average (NB6-FOLNER) suffices. A recognition about the object: limits of valid maps may pinch or open holes — it bears on FS-111's
+   limit objects (placed in the successor stub, with a pointer for FS-111).
+4. **Mixon's thread-7 question** ("What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?") is C114-LOCAL-F's printed form; its
+   lower side for maps with unit arcs is the disk's 2.1246 (a non-Siamese fragment, FS112-DISC's `φ` about a vertex); no upper side landed.
+5. **De Grey's ladder** ("6 if tile-based, 7 if scaleable-non-Siamese-tile-based", `[17.5]`) separates non-Siamese from scaleable; FS-114 explains why the
+   non-Siamese hypothesis is where counting lives: with Siamese pairs no density bound exists (N2-REFINE), so a tile count reaches the non-Siamese part
+   only. **Promoted to a drafted grokking, G86.**
+
+### 4.4 The plan's "conjecture" and "not claimed" hits
+
+- "conjecture": one hit, G58 (the antipodal conjecture) in §G, verdict silent — **declined** (no bearing on FS-114; FS-55's stub holds it).
+- "not claimed": the claim list's §7 — each already stubbed or declined: any value of `χ(ℝ²)` (declined: not a milestone's claim); unbounded complexity
+  (FS-111's stub); boundaries other than segments and circular arcs (declined: the class is W-EQ-K's); FS-115's (b′), (b″), (c) (FS-115's stub,
+  re-aimed at stage 5); C-HOCK (declined: FS-112 found no instance); `[Kainen1992]`'s robustness conjecture (declined: no bearing found); C-VOID (FS-109's
+  stub).
+- The derivation file's "not claimed" lines that name open work (E1's residues, S6, the wrap, OC, (Q)-rings, COVER-3, GAP-μ in the hull, N7-3T's blind
+  check, Lemma 4 at cusps) are all placed in the successor stubs (stage 5).
+
+### 4.5 Every registered prediction, scored
+
+**The plan's E1–E19** (`plans/FS114-unit-arc-question.md` 5.3 and 5b):
+
+| # | registered | p | outcome | score |
+|---|---|---|---|---|
+| E1 | card 2 chooses a local route over a count | 0.55 | FS114-N chose route T, the count, with local kills | **not met** |
+| E2 | an explicit radius for C114-LOCAL-FR or -F | 0.15 | C114-LOCAL-F not landed (pieces at `√3` for one configuration family) | not met |
+| E3 | GS-D decided at one mind | 0.2 | undecided | not met |
+| E4 | a NO for doubly periodic maps at one mind | 0.3 | reduced to K1′ ∧ K2′ ∧ GAP-μ, non-Siamese only | not met |
+| E5 | C114-THOM-TOP TRUE | 0.7 | TRUE with a colour-free repair, 2–1 (three minds) | **met** |
+| E6 | C114-RAINBOW TRUE as stated | 0.5 | MISSTATED (four minds) | not met |
+| E7 | C114-CURV's radius depends on `K` | 0.7 | the derived radius is `O(K²)`; no uniform radius excluded or found | **not reached** |
+| E8 | CV confirms C-ENDS, C-COMPOSE, C-PARTNERS | 0.8 | confirmed | met |
+| E9 | CV closes C-ENDS's residue; C114-EXISTS-F at two minds | 0.55 | residue empty; EXISTS-F two minds, blind to each other | met |
+| E10 | C114-PENT admits the third unit-arc boundary | 0.3 | no (FS114-Y-PENT, two minds) | not met |
+| E11 | a fragment about a four-colour vertex beyond `≈ 1.834`, by formula | 0.25 | the capped strip, to `φ²/√2 ≈ 1.8512` | **met** (marginally) |
+| E12 | a YES by formula | 0.03 | none | not met |
+| E13 | C114-SKELETON derived | 0.4 | not derived (N7-HUB's hexagon reading untested) | not met |
+| E14 | the decisive argument reads `F ∪ R` | 0.8 | K1's exclusions and CV-EXISTS read four-colour vertices | met |
+| E15 | a blind verifier finds a divergence of truth | 0.6 | one in every round (reconciliation §2.4) | met |
+| E16 | G71's index survives the bowtie seam | 0.75 | the curves not built | **not reached** |
+| E17 | a named obstruction or GAP as the product | 0.85 | GS-D stalls at C114-LOCAL-F; K1's open cases named | met |
+| E18 | the non-Siamese case decided at one mind | 0.25 | reduced to K1′ ∧ K2′ ∧ GAP-μ | not met |
+| E19 | Sirgedas's red-block statements hold as stated | 0.6 | first clause and "no pentagons" TRUE; "no quadrilateral" GAP; "only triangles" undecided | **not reached** |
+
+**Brier score over the sixteen resolved: 2.136 / 16 = 0.134.** Seven met, nine not met; three unreached (E7, E16, E19). **Direction:** the misses are
+the ambitious ones (E2, E3, E4, E18 — a NO, or its periodic or non-Siamese part, within one milestone) at p 0.15–0.3, so the planner priced them low and
+they did not land: the counter-prior rule's miscalibration (pricing a theorem landing too high) did not appear here; E11, met at 0.25, is the one
+construction priced low that landed. E1's miss is informative: the planner's print evidence (PA-A, every printed NO local) leaned local, and the proof side
+chose the count — then spent five rounds on local kills the count located, so the milestone ran both, as G15's architecture says.
+
+**The jobs' registrations:**
+
+| job | registered | p | outcome | score |
+|---|---|---|---|---|
+| FS114-N3 | a valid fragment realising DR with `s′ = −30°` exists at radius `1 + ε` | 0.7 | Y2 built DR's degenerate member at `3√3/5`; the general member (`s′ = −30°`) was never built, and N4-G excludes it at `√3` | not reached |
+| FS114-N4 | the bowtie with a Γ-arc lune ring is excluded by N4's three moves at `R ≤ 2` | 0.6 | excluded at `√3`, but needing the bends and N5-UP and NB5-RVKILL | split — met in conclusion, not in method (NB5) |
+| FS114-N5 | (R-V) dies within radius 2 | 0.4 | dies at `√3` (NB5-RVKILL; RSTOPALL) | met |
+| FS114-N6 | the (Q)-pinwheel dies within `√3` | 0.5 | `P_x` dies at `1 + ε` (Y5-PXKILL, outside E2); NB6-QSTART's residual open | not reached |
+| FS114-N7 | OC dies within `√3` | 0.5 | not run | not reached |
+| FS114-N7 | every (Q)-ring survivor has a 60° (Q) arc or one ending 60° from a tactic centre | 0.4 | not run | not reached |
+| FS114-L60 | L60-P1: a blind mind finds no strict use in the chain | 0.85 | no blind mind ran | not reached |
+| FS114-L60 | L60-P2: the inner clause and the clause split confirmed | 0.9 | no blind mind ran | not reached |
+| FS114-CV | CV-P1–P3 | — | met (scored by CV) | met |
+| FS114-CVB | CVB-P1–P5 | — | P1 missed (CV also took the short route), P2–P5 met (scored by CVB) | as scored |
+| tools | every exact check at named values (Y3 11/11; Y4 19/19; Y5 31/31, 11/11; Y6 10/10; YB4 53/53; YB5 31/31; YB3 5/5 and 13/13) | — | met at its final registration; six registration misses (Y2 `wide_t1`; Y5 `g_away`; Y6 three; YB4 run 1's five probes and two plants; YB5 run 1's boundary probe; YB2 three controls), each named before re-registering | the rule held |
+
+**What unreached registrations say:** five of the jobs' eight probabilistic registrations were never scored because the mind that would score them did
+not run (round 7 was cut; no blind check of L60 was spent). They carry to the successor stub, where round 7's queue scores N7's two.
+
+## Stage 4 — SAVED
