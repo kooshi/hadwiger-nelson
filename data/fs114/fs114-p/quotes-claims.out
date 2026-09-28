@@ -1,0 +1,64 @@
+FOUND   CLAUDE.md | My goal is to fully solve, and then verify in Lean, HN. Then we publish.
+FOUND   plans/FS112-close-inventory.md | When round 3 finishes, let's close this milestone, and point two milestones at the two gaps, so we c
+FOUND   plans/FS112-close-inventory.md | Even decompressed, this is a bit beyond me, […]. I'll defer to a Poros agent.
+FOUND   plans/STUB-global-step.md | can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every po
+FOUND   plans/STUB-global-step.md | Choosing the form is the milestone's first decision.
+FOUND   plans/POROS-2026-09-27-night-aim.md | Is the unit-arc NO local — an explicit radius past which no valid fragment survives around a four-co
+FOUND   plans/POROS-2026-09-27-night-aim.md | an explicit radius R with a derived exclusion of every valid fragment on the disc of radius R about 
+FOUND   data/fs112/fs112-pa/extracts.md | that the plane cannot be 6-tlled
+FOUND   plans/FS112-close-inventory.md | that the plane cannot be 6-tlled [sic] with a non-Siamese tiling
+FOUND   CLAUDE.md | search for a finite graph is out.
+FOUND   plans/FS112-close-inventory.md | FS-114's one name: "the unit-arc question"
+FOUND   plans/FS112-close-inventory.md | with "the global step" kept as the name of its central statement
+FOUND   plans/POROS-2026-09-27-night-aim.md | A local exclusion about **one** four-colour vertex would be the whole NO, with no ray step and no de
+FOUND   plans/POROS-2026-09-27-night-aim.md | hunch: global — G17's top-rung pattern, and the strip forces any obstruction to read two dimensions
+FOUND   CLAUDE.md | From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. 
+FOUND   CLAUDE.md | to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problem
+FOUND   CLAUDE.md | A proven theorem about why its impossible is also valid. All novel knowledge is a success
+FOUND   plans/CONSOLIDATION-2026-09-27.md | It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth t
+FOUND   plans/FS112-derivation.md | A map is **valid** when it is a locally finite map of the plane bounded by segments and circular arc
+FOUND   data/fs112/claims.md | periodic designs with at most `K` circular or straight arcs per tile, arc radii at least `1/K`, at m
+FOUND   data/fs112/claims.md | the same bounds without periodicity
+FOUND   data/fs112/fs112-pa/extracts.md | tiles that lie entirely within each other’s annulus of exclusion
+FOUND   data/fs112/fs112-pa/extracts.md | Call a coloring scalable, if there is some small positive number eps such that the coloring remains 
+FOUND   plans/FS106-V-verification.md | we assume that each face (i.e., arcwise connected component of S\G) has diameter less than 1, is hom
+FOUND   /home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt | We define the map graph M = M(G, S) as the graph whose vertices are the faces of G such that two ver
+FOUND   data/fs112/claims.md | a locally finite map bounded by segments and circular arcs, arcs of radius 1 allowed, carrying a six
+FOUND   data/fs112/claims.md | Is it true that 7 colors are needed to color a locally finite map in the plane if the boundaries can
+FOUND   data/fs112/claims.md | It may be possible to eliminate criterion (ii) via an exhaustive computer search of all possibilitie
+FOUND   data/fs114/fs114-p/polymath16-greps.txt | What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?
+FOUND   data/fs112/fs112-pa/extracts.md | to prove that the plane cannot be 6-tlled with a non-Siamese tiling; Tom Sirgedas got very close to 
+FOUND   plans/STUB-global-step.md | Is there a valid six-map with unit arcs — equivalently, since every valid map has the property, one 
+FOUND   plans/FS112-derivation.md | Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex
+FOUND   plans/FS112-derivation.md | In a valid map, if the closed disc of radius 2 about a cubic trichromatic vertex `u` holds no vertex
+FOUND   plans/FS112-derivation.md | In a valid map, a close complementary pair of cubic trichromatic vertices `u, u′` (disjoint multicol
+FOUND   plans/FS112-derivation.md | In a valid map, every close complementary cubic trichromatic partner of a cubic trichromatic vertex 
+FOUND   plans/FS112-derivation.md | The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour.
+FOUND   plans/FS112-derivation.md | Every valid map has a valid modification by W-MERGE and whole-arc bends, creating no unit arc, in wh
+FOUND   plans/FS112-derivation.md | NB-4 corrected: at a vertex of exactly four colours, let `(v, y₀)` be a covering pair at a change po
+FOUND   plans/FS112-derivation.md | A four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred
+FOUND   plans/FS112-derivation.md | A vertex with five colours has unit arcs centred at it of total length at least 180°; with six, its 
+FOUND   plans/FS112-derivation.md | Every valid map has a valid modification `M*`, creating no unit arc, in which every unit arc is (Q) 
+FOUND   plans/FS112-derivation.md | In a terminal valid map, the point of the normal line one step beyond each finite end of a stuck cha
+FOUND   plans/FS112-derivation.md | The two gaps compose as follows: (1) since every valid map has `F ∪ R` within 3 of every point, excl
+FOUND   plans/FS112-derivation.md | A doubly periodic valid map has a periodic terminal modification, so finitely many arc classes: it h
+FOUND   plans/FS112-derivation.md | On both positives it holds (four-colour midline vertices within 1.834 of every point of the strip; t
+FOUND   plans/FS112-derivation.md | No vertex-centred disc of radius above `φ` lies in any valid extension of the disk, and a valid exte
+FOUND   plans/STUB-global-step.md | no valid map whose vertices of at least four colours come within `R` of every point
+FOUND   plans/POROS-2026-09-27-night-aim.md | the terminal modification of every valid six-map with unit arcs has a vertex of at least four colour
+FOUND   plans/POROS-2026-09-27-night-aim.md | A local exclusion about **one** four-colour vertex would be the whole NO, with no ray step and no de
+FOUND   data/fs112/claims.md | is there a NO of Q-full whose every step reads a disc of bounded radius `R`? TRUE (with `R`) / FALSE
+FOUND   data/fs112/claims.md | **C-LOCAL: GAP** (no explicit radius for a NO; N3-DENSE3's radius 3 is not a NO).
+FOUND   data/fs112/claims.md | At bounded `K`, a NO gives some radius by compactness [hand, one mind: FS112-A, over `plans/FS107-de
+FOUND   CLAUDE.md | closedness enters once, as compactness giving a band
+FOUND   plans/FS106-V-verification.md | If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G
+FOUND   data/fs112/fs112-pa/extracts.md | Arrows in the dual graph correspond to curved edges in the tile graph. Each quad in the dual graph “
+FOUND   plans/STUB-global-step.md | on the disk's pentagon skeleton, can the trivalent `B_k` (two unit-arc boundaries, centres `A_k`, `A
+FOUND   plans/STUB-global-step.md | And the disk's blue and orange routes to a fourth colour at `C_0`, never analysed (Y3 §4.4 (ii)).
+FOUND   data/fs112/claims.md | The argument must fail on the slack hexagonal 7-colouring, and must name the step where "six" is spe
+FOUND   data/fs112/claims.md | every NO route fails on CAL-STRIP (and, once rebuilt, CAL-DISK) at a named step and says where the p
+FOUND   plans/STUB-global-step.md | A NO for doubly periodic maps only is a result, not the question (W-EQ-K's limits); a NO that uses t
+FOUND   plans/STUB-global-step.md | A YES candidate that fails the exact check measures the candidate; a family of formula candidates th
+FOUND   plans/STUB-global-step.md | No argument one class at a time (row 129).
+FOUND   CLAUDE.md | search for a finite graph is out.
+quotations: 63 missing: 0

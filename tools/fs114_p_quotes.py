@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """FS114-P stage 1 (standing rule 5): every quotation in the planner brief `data/fs114/briefs/P114-planner.md`, in
 `data/fs114/briefs/STANDING-RULES.md`, and every quotation the plan and the claim list use, checked verbatim against its source.
-Whitespace, typographic quotes and backticks normalised; bold markers `**` and italic `*` removed.  Exit 1 if any is MISSING.
+Whitespace, typographic quotes and backticks normalised; bold markers `**` and italic `*` removed; blockquote markers and line-break
+hyphens (a hyphen at a line's end joined to the next line's word) removed on both sides alike.  Exit 1 if any is MISSING.
 --self-test: one word altered in the first quotation must turn it MISSING while its faithful twin is FOUND (a plant that fires for
 its own reason: the altered word, nothing else differs)."""
 import re, sys, pathlib
@@ -34,6 +35,8 @@ Q = [
  ("It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.", 'plans/CONSOLIDATION-2026-09-27.md'),
 ]
 def norm(s):
+    s = re.sub(r'(?m)^\s*>\s?', '', s)                 # blockquote markers at line starts (the stub's quoted statements)
+    s = re.sub(r'(\w)-\s*\n\s*(\w)', r'\1\2', s)       # a line-break hyphen in an OCR text ("correspond-\ning"), both sides alike
     s = s.replace('**', '').replace('“', '"').replace('”', '"').replace('’', "'").replace('‘', "'").replace('`', '').replace('*', '')
     return re.sub(r'\s+', ' ', s).strip()
 _cache = {}

@@ -469,3 +469,32 @@ found by N at stage 1); `[Sirgedas2021]` (held as a render; for Y). **Proposed `
    are needed at all.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the fixed claim list (`data/fs114/claims.md`)
+
+**Written and checked.** `data/fs114/claims.md`: §0 definitions (valid map, unit arc, (Q), (R2), `M*`, `F`, `R` from FS-112's derivation header; `𝓜_K`;
+Siamese, scalable, nice and the map graph in their authors' words; "reads radius `R`" and "valid fragment on a disc", this list's); §1 the questions
+(Q-full, Q-full_K; S–V Question 2, `[Polymath2021]` p. 199, Mixon's disk question, de Grey's non-Siamese target; the global step as the stub states it);
+§2 the fourteen held inputs, each headline verbatim with its grade; §3 the forms — GS-D, GS-4, GS-1, C114-EXISTS-F, C114-LOCAL-F, C114-LOCAL-FR, C-LOCAL
+(carried with its FS-112 verdict), C114-COMPACT; §4 the route claims — C114-VOR, C114-THOM-TOP, C114-RAINBOW, C114-CURV, C114-SKELETON, C114-BUDGET; §5
+the construction claims — C114-PENT, C114-DIAL, C114-TORUS, C114-SIRGEDAS-FORM; §6 shared constraints; §7 not claimed. **Quotations:** 45 in the list,
+each paired with its source in `data/fs114/fs114-p/quotes-claims.tsv`; `tools/fs114_p_quotes.py --file …` reads **63 of 63 FOUND** (the list's 45 plus
+the brief's 18; `quotes-claims.out`), and a separate pass confirms every one of the 45 appears literally in the list itself. The checker gained two
+normalisations, applied to both sides alike (blockquote markers; a hyphen at a line's end joined to the next word, for the OCR text of `[Thomassen1999]`),
+and its self-test still fires (`quotes-selftest.out`: PASS); stage 3's quotations re-run, 30 of 30 FOUND after one TSV line was rejoined.
+
+**A correction to stage 2b, extraction 1 (and part 1's G82 line).** I called the compactness claim "a reading of the planner's". It is FS112-A's, one
+mind, already recorded in C-LOCAL's own note ("At bounded `K`, a NO gives some radius by compactness [hand, one mind: FS112-A, over
+`plans/FS107-derivation.md` W-EQ-K's compactness step"), over VW's compactness step (TRUE at W's class, one mind). C114-COMPACT carries that attribution;
+what this plan adds is only its use — card 2 read as a question about an explicit, uniform radius. (Found at stage 4 by reading C-LOCAL's text in full,
+which stage 2 had read by its §11 verdict alone — G50's rule, the note that "reads like knowledge", on the planner.)
+
+**Design notes on the list (why each new claim exists).**
+- C114-LOCAL-F and C114-LOCAL-FR separate the two anchors card 2 could use: four-colour vertices alone (needs C114-EXISTS-F, NIGHT-A's one-mind step
+  over FS112-C-ENDS) or four-colour and repeated-colour vertices (needs only FS112-N3-DENSE3, two minds).
+- C114-VOR and C114-THOM-TOP / C114-RAINBOW / C114-CURV are the two printed local NOs (§PA, PA-A) taken apart at the step where each reads the colouring's
+  metric; C114-CURV is Thomassen's Lemma 1 asked locally, with its dependence on the complexity bound stated.
+- C114-SIRGEDAS-FORM gives the construction side the non-Siamese case as a target it can check, so that de Grey's `[16.317]` statement is tested from the
+  positive side while its argument stays unheld.
+
+## Stage 4 — SAVED
