@@ -10,7 +10,7 @@ instance file alone, before `plans/FS114-N5-proof.md` is opened.*
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
-| NB5-QT | Every quotation my brief, instance and standing rules rely on whose source is open to me at stage 1 is verbatim: 20 of 20 FOUND; plant fires | [tools] | §1a.2; `tools/fs114_nb5_quotes.py` |
+| NB5-QT | Every quotation my brief, instance and standing rules rely on is verbatim: 20 of 20 at stage 1; the thirteen N5 statements 13 of 13 at stage 2; plant fires | [tools] | §1a.2, §2.2; `tools/fs114_nb5_quotes.py` |
 | NB5-OUT4 | In the Reuleaux bowtie every ring arc of outer colour 4 has outer tile `z4` (then in `(30°, 90°]`) or `z4′` (`[90°, 150°)`) | [hand, one mind] | §1b.0 |
 | NB5-SIGHT | N5-SIGHT: TRUE in the non-Siamese class | [hand, one mind] | §1b.1 |
 | NB5-UP, -DEG, -W | N5-UP, N5-DEG, N5-W: TRUE | [hand, one mind; DEG over N4-D, two minds] | §1b.2, 1b.3, 1c.6 |
@@ -20,7 +20,7 @@ instance file alone, before `plans/FS114-N5-proof.md` is opened.*
 | NB5-GRING | N5-ΓRING: TRUE as stated (the reduction), at `√3` | [hand, one mind] | §1b.5 |
 | NB5-BEND, -BENDG | N5-BEND: TRUE, its length bound derived for (R2) arcs only (GAP if read for (Q) arcs); N5-BENDG: TRUE | [hand, one mind; over N2-TOWARD, -AWAY, -TAN] | §1c.1, 1c.5 |
 | NB5-KAPPA, -XBAR, -DR1 | N5-KAPPA (in the interior sense of "60° apart"), N5-XBAR, N5-DR1: TRUE | [hand, one mind] | §1c.2, 1c.3, 1c.7 |
-| NB5-RV | N5-RV: structural clauses TRUE, `q1 = t1 | V1 | z4 | U1` (no `W3`: E1 at `q1` against the colour-3 tile at `P90`); **"Not excluded" FALSE** (NB5-RVKILL) | [hand, one mind] | §1c.4 |
+| NB5-RV | N5-RV: structural clauses TRUE (`q1 = t1 | V1 | (W3) | z4 | U1` as stated; my stage-1 "no `W3`" withdrawn at stage 2, §2.5); **"Not excluded" FALSE** (NB5-RVKILL) | [hand; clauses two minds, one blind; the kill one mind] | §1c.4, §2.4, §2.5 |
 | NB5-PIN0 | N5-PIN0: structural clauses TRUE; "no contradiction at `1 + ε`" not established | [hand, one mind] | §1c.8 |
 
 ## Would-have-searched-here log (standing rule 3)
@@ -284,3 +284,81 @@ direction `60°` at `top` in (R-V), the sector `(300°, 360°)` at `P90`, and N4
 - A scan of the (Q) arc's end `a` for a length bound → not done; the bound is recorded as not derived (§1c.1).
 
 ## Stage 1c — SAVED (end of the blind stage)
+
+## Stage 2 — SAVED: FS114-N5's record read; divergences; verdicts after reading
+
+### 2.1 Read (after stage 1's commit `d0f68196`)
+
+`plans/FS114-N5-proof.md` in full (header, theorem table, logs, stages 1–4); `tools/fs114_n5_ring.py` read and re-run by me: `RESULT OK`, output identical
+to `data/fs114/fs114-n5/ring.out`; its `--plant` (`top` at `e(80°)`) fails exactly the six lines its record names (my copies in `scratchpad/fs114-nb5/`).
+
+### 2.2 The quotation check of the instance against N5's record (standing rule 5)
+
+`tools/fs114_nb5_quotes.py data/fs114/fs114-nb5/quotes-n5.tsv` (the thirteen statements, extracted from the instance by script): **13 of 13 FOUND** verbatim in
+`plans/FS114-N5-proof.md` (`quotes-n5.out`, exit 0). The owner's script-copy did its job; no paraphrase.
+
+### 2.3 Divergences from my stage-1 verdicts (each with both addresses)
+
+| # | claim | kind | mine (stage 1) | N5 | changes a verdict? |
+|---|---|---|---|---|---|
+| 1 | **N5-RV** "Not excluded" / **N5-K1** / **N5-ΓRING**'s "unless (R-V)" | **truth** | §1b.5 items 2–6: (R-V) dies at `√3` (NB5-RVKILL) | §3.2 Verdict: "No contradiction at radius `√3`. **K1-ΓRING is GAP at (R-V)**" | **yes** — see 2.4; N5-RV's last clause FALSE, K1-ΓRING closed at `√3` in the non-Siamese simple class, one mind |
+| 2 | N5-RV's hypothesis "`C′ ∋ q4`" | scope | not needed: `C′ ∌ P90′` because its cone at `q3` contains `240°−` (§1b.5 item 5) | §3.2 item 1 uses `C′ ⊂ B̄(q4, 1)` | no for the clauses; it is what makes my kill free of the bottom lune |
+| 3 | N5-RV's `(W3)` | **my error** | §1c.4: "`W3` does not exist" (E1 at `q1`: the colour-3 tile at `P90` holds `ω(q1)`'s branch at `0°`) | §3.2 item 6: `W3`, if it exists, is bounded at `0°` by an arc of `ω(q1)` | **yes, mine withdrawn** — see 2.5; N5's optional `(W3)` is right |
+| 4 | N5-R0 | route | §1b.4: `C ∋ q2` makes `z4` start at `≤ 0°`, so `z4` bounds no ring arc; the ring is `Γ`-free and general; N4-G | §2.4: `t2 ∌ top`, then `T` misses `P90`, `P90′`, then N4-G's diameter kill or N5-DR1 | no — both TRUE; mine needs no case split |
+| 5 | N5-UP | route | colours 1–3 by SIGHT at `(top, p)` (`t1, t2, t3` meet `B(top, 1)`) | FACE at `(p, top)` on the `p`-cones | no |
+| 6 | N5-KAPPA | wording | "never 60° apart" true in the interior sense; end-point coincidence not excluded (tools K2) | §2.2 item 1: arc–arc gives disjoint side sets, read at interior points | no — same reading |
+| 7 | N5-BEND | scope reading | length bound derived for (R2) arcs only | §2.1: the bound is stated for "(R2) pieces" | no — the same scope; the theorem-table sentence's "each" means (R2) |
+| 8 | N5-ΓRING | radius | the reduction reads `√3` (bends run on a `√3` fragment) | "radius 2" | no — mine stronger, theirs true |
+| 9 | grades | grade | N4-D, N4-G two minds (NB4) | N5-ΓRING "over N4-D, N4-G at N4's grade (one mind each)" | no — N5 wrote before NB4 reported; now two minds each |
+| 10 | N5-SIGHT, -DEG, -W, -XBAR, -DR1, -BENDG, -PIN0 | none | TRUE (PIN0's last clause not established) | the same routes | no |
+
+### 2.4 Divergence 1 audited (G21: this is the verdict that flatters the NO)
+
+**What N5 held and where it stopped.** N5 §3.2 has every ingredient: `z4` "`[0°, 60°]`-bounded at `top`"; `T`'s "cone at `top` in `[60°, 240°]` (far from `V1`)";
+item 1, "`T ⊂ B̄(P90′, 1)`". It then walks to `P90` and stops. **The step it did not take is second-order at `top`:** first order, both `B̄(P90′, 1)` and "outside
+`B(q1, 1)`" allow `T`'s cone to start at `60°`, and `z4 ⊂ B̄(q1, 1)` allows `z4`'s to end there, so a cone check passes. But `ω(q1)` and `ω(P90′)` are **externally
+tangent at `top`** (`|q1 − P90′| = 2`, midpoint `top`), so `cl z4 ∩ cl T ⊆ B̄(q1, 1) ∩ B̄(P90′, 1) = {top}`: the two tiles cannot share an edge at `top`, the
+direction `60°` there needs a third tile, and N5's own colour list at `top` (its N5-UP and N5-SIGHT; my §1b.5 item 4) leaves none. **Re-checked by hand
+against N5's text, step by step:** `T`'s cone `[60°, 240°]` (N5 §3.2 setting line) ✓; `z4 ⊂ B̄(q1, 1)` (N5-XBAR) ✓; `T ⊂ B̄(P90′, 1)` (N5 §3.2 item 1, and mine
+without `C′ ∋ q4`) ✓; no colour-1, -3 tile at `top`, colour 2 only `t2` inside, 4 only `z4`, `X̄` only `T`, `X` only in `[240°, 300°]` ✓. **Verdict: N5-RV's
+"Not excluded" is FALSE; (R-V) dies at `B̄(p, √3)`.** Tools: G1–G3, D5 (and the plant at `70°`, where the gap closes because the point enters `B(P90′, 1)`).
+**Consequences.** N5-ΓRING's reduction then ends with no survivor: **the Reuleaux bowtie (non-Siamese, simple) with any lune rings is excluded at radius `√3`**,
+over N4-D, N4-G (two minds each), N5-DEG, N5-R0 (two minds each now: N5 and mine), N5-XBAR (two) and NB5-RVKILL (one mind, mine). N5's registration "(R-V)
+dies within radius 2 about `p`, p = 0.4" is **met** (at `√3`, one mind). N4's registration (p = 0.6, "excluded by the same three moves at radius at most 2") is met
+in its conclusion, not in its method: the bends, N5-UP and a tangency kill were needed.
+
+### 2.5 My stage-1 slip (divergence 3)
+
+§1c.4 said the colour-3 tile `C3` filling the sector `(300°, 360°)` at `P90` "holds `ω(q1)`'s branch leaving `P90` at `0°`", hence `3 ∉ P_cl(q1)` and no `W3`. **False
+step:** the branch leaves `P90` tangent to `0°` and bends toward `q1`, into that sector, but `C3` may be bounded exactly along it (`C3 ⊂ B̄(q1, 1)` there), with the
+next tile (colour 1, outside `B(q1, 1)`) beyond; then E1 at `q1` is not violated and `C3` may be `q1`'s tile `W3`, which then lies in `B̄(q1, 1) ∩ B̄(P90, 1)` with its
+cone at `q1` in `[0°, 60°]` — N5 §3.2 item 6, which I read as the refutation of my step. **Withdrawn:** N5's `q1 = t1 | V1 | (W3) | z4 | U1` stands as stated, and
+"`V1`'s cone exactly `[300°, 60°]`" holds only when `W3` is absent. **The kill does not use it** (NB5-RVKILL reads `top`, `q3`, `P90′`; nothing at `q1` but `z4 ⊂
+B̄(q1, 1)` and `V1`'s existence). Kind: slip of this job, caught at stage 2 by reading.
+
+### 2.6 Verdicts after stage 2
+
+| claim | verdict | grade (minds) | radius read |
+|---|---|---|---|
+| N5-UP | TRUE | hand; two, one blind (N5; NB5) | `B̄(top, 1)` and the tiles at `p, q1, q3` |
+| N5-DEG | TRUE | hand; two, one blind | `√3` |
+| N5-R0 | TRUE | hand; two, one blind, different routes | `√3` |
+| N5-ΓRING | TRUE as stated; **stronger in my derivation: no survivor, the bowtie excluded at `√3`** | hand; two, one blind, for the reduction; one (NB5) for closing (R-V) | `√3` |
+| N5-BEND | TRUE ((R2) bound) | hand; two, one blind, over N2-TOWARD, -AWAY, -TAN | a neighbourhood of `B̄(p, 2)` |
+| N5-KAPPA | TRUE (interior sense) | hand; two, one blind | `1 + ε` |
+| N5-XBAR | TRUE | hand; two, one blind | `1 + ε` and `B̄(top, 1)` |
+| **N5-RV** | clauses **TRUE** (my "no `W3`" withdrawn); **"Not excluded: K1-ΓRING is GAP at (R-V)" FALSE** | hand; clauses two, one blind; the kill one mind (NB5) | `√3` |
+| N5-SIGHT | TRUE (non-Siamese) | hand; two, one blind | `B̄(u, 1)` |
+| N5-BENDG | TRUE | hand; two, one blind | ring and radius-2 circle |
+| N5-W | TRUE | hand; two, one blind | `B̄(top, 1)` |
+| N5-DR1 | TRUE | hand; two, one blind (three with N3, N4 for the `Γ`-free form) | `1 + ε` |
+| N5-PIN0 | clauses TRUE; "No contradiction at this radius" consistent, not established | hand; two, one blind, for the clauses | `1 + ε` |
+
+**Controls (template item 3).** No step of N5's or mine reads the strip or the disk in a way they refute: neither holds a Reuleaux bowtie (§1c.9), so every kill fails
+there at its hypothesis; the tools (N5-SIGHT, N5-KAPPA's E0, N5-BENDG) are true statements about every non-Siamese valid map and hold on both. No step the side calls
+local reads beyond its stated radius: N5-UP, -XBAR, -DR1 read `1 + ε` about `p` plus `B̄(top, 1)`; N5-R0, -DEG and my kill read `√3`; N5-BEND reads `B̄(p, 2)`, as
+stated. **Proposed for the close** (I edit none of these files): FS-114's derivation file — N5-RV's last clause FALSE and NB5-RVKILL/NB5-BOWTIE filed at one mind,
+with a blind second mind owed on NB5-RVKILL first; K1-ΓRING closed at `√3` in the non-Siamese simple class (K1 still GAP at non-Reuleaux lenses, the pinwheel, the
+`(2, 1, 1, 0)` patterns and three tactic edges); the stub K1-RV proposed by N5 §4.5 is moot.
+
+## Stage 2 — SAVED
