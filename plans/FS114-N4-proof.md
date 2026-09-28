@@ -17,11 +17,13 @@ N3-FLANK, N3-PAIR, N3-ODD. All statements are for **non-Siamese** valid maps (no
 | N4-LENS | If `|u − v| = 1`, a tile meeting the open lens `B(u,1) ∩ B(v,1)` with a colour of `P_cl(u)` is `u`'s tile of that colour (likewise `v`); a colour that `u` and `v` carry on different tiles meets no point of the open lens | [hand, one mind] | §2.1 |
 | N4-TOP | In the degenerate member (one change point, at the lune's ring midpoint `top`): the ring tiles `T_R ⊂ B̄(q1,1) ∩ B̄(top,1)`, `T_L ⊂ B̄(q3,1) ∩ B̄(top,1)`; one tile `W` of the far lune's colour fills the outer wedge at `top`, cone exactly `[60°, 120°]`, bordered by arcs of `ω(q1)` and `ω(q3)`; the lune tile reaches `top`, a **degree-4 vertex of four colours `{2, 4, 5, 6}` at distance 1 from `p`** | [hand, one mind] | §2.2 |
 | N4-HORN | (N3-DR0's step 3, kept) the ring tile `T_R` and the partner `z4` are never adjacent at `q1` in the degenerate member | [hand, one mind; tools exact at named values] | §2.2; `… horn` |
-| N4-DR0 | **N3-DR0 is FALSE as stated**: its step 1 assumes the ring tile at the change point reaches the direction of `p`; it need not, and when it does not the degenerate member passes every check. Corrected: the corners of a degenerate lune carry **exactly five colours `{1, 3, 4, 5, 6}`** (degree 5), in one of two orders (O1) `t1 | Y3 | z4 | V6 | T_R` or (O2) `t1 | Y6 | z4 | V3 | T_R` | [hand, one mind] | §2.2 |
+| N4-DR0 | **N3-DR0's proof fails; its conclusion holds, at radius `√3`** (stage 3's N4-D). N3's step 1 assumes the ring tile at the change point reaches the direction of `p`; it need not, and at radius `1 + ε` the degenerate member passes every check: its corners carry **exactly five colours `{1, 3, 4, 5, 6}`** (degree 5), in one of two orders (O1) `t1 | Y3 | z4 | V6 | T_R` or (O2) `t1 | Y6 | z4 | V3 | T_R`. *(Stage 2 filed this row as "FALSE as stated"; withdrawn at stage 3: the statement is TRUE, the proof is the GAP.)* | [hand, one mind] | §2.2, §3.1 |
 | N4-FIVE | **The card's question answered:** five colours at a Reuleaux corner are not forced by the bowtie alone; with the lune rings free of `Γ`, a corner carries five colours iff its lune's ring is degenerate, and otherwise exactly four `{1, 3, 4, X}` (degree 4; N3's (ii) with its exception `t2 ∋ q1` closed by N4-OWN) | [hand, one mind] | §2.3 |
 | N4-ARC | At a five-colour corner `q1`: `ω(q1) ∖ Γ` is colour 2 only, and the 60° arc of `ω(q1)` from `P90 = q1 + e(90°)` to `top` lies in `Γ` (its points are in `B(top,1) ∖ B̄(p,1)`, out of reach of every colour-2 tile); so 120° of unit arcs centred at `q1` lie within radius `√3` of `p`, and FS112-SIX's demand adds nothing beyond N-E0 on the far arc | [hand, one mind; tools exact at named values] | §2.4; `… arc` |
 | N4-A4NB | At `top` A4SIX is vacuous (`(top, p)` is a covering pair) and NB4P is escaped by the caps (an arc of `ω(p)` ends at `q1`, an orbit point); at a four-colour corner NB4P is escaped by `t1`'s own arc on `ω(q1)`: **neither gives the bowtie a new constraint** | [hand, one mind] | §2.5 |
 | N4-L60 | **FS112-L60 is FALSE at exactly 60°**: the Reuleaux cap region `Reul(A, B, C) ∖ B̄(P, 1)` (diameter `≤ 1`) is an outer tile along a whole 60° arc of `ω(P)` with constant sides, and the bowtie's cap tile (N3's `T_top`) is one; its proof's step "T_out contains points (1+ε)e beside each end direction" fails there. Corrected: at most 60°, with equality only when the outer tile lies in `B̄(A,1) ∩ B̄(B,1)` | [hand, one mind; tools exact] | §2.6; `… l60` |
+| N4-TANG | In the degenerate member the ring tile `T_R` borders `t1` along `t1`'s arc on `ω(q2)` at `q1`, so it has points outside `B̄(P90, 1)`: `T_R` does not reach `P90` (`ω(q2)` and `ω(P90)` are tangent at `q1` from opposite sides) | [hand, one mind; tools exact at a named point] | §3.1; `tools/fs114_n4_dexcl.py` tang |
+| **N4-D** | **The degenerate member does not exist at radius `√3`**: no valid fragment on the closed disc of radius `√3` about `p` holds the Reuleaux bowtie with a lune whose ring is free of `Γ` and changes colour once. `q1`'s colour-3 tile must reach `P90`, which forces the far lune's colour-4 tile `W` at `top` along the whole arc of `ω(q1)` from `top` to `P90`; by the mirror it reaches `P90′ = q3 + e(90°)` too, and `|P90 − P90′| = √3` | [hand, one mind; tools exact at named values] | §3.1; `… dexcl` |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -185,3 +187,52 @@ a 60° arc with constant sides, which the stated L60 would forbid. **Owed:** the
 dependants FS112-N2-RED and FS112-N3-COR3 for a strict use of "below 60°" (not done here).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the degenerate lune excluded at radius `√3`
+
+*Setting D of §2.2 (top lune's ring free of `Γ`, one change point at `top`), frame and scope as stage 2. Metric facts: `tools/fs114_n4_dexcl.py`
+(`data/fs114/fs114-n4/dexcl.out`, all OK; plant `--plant`: the tangency point moved just inside `ω(q2)` and `P90′` moved to distance `0.9` from `P90`,
+each failing its own line, `dexcl-plant.out`). **Correction to stage 2:** §2.2's N4-DR0 called N3-DR0 "FALSE as stated". Withdrawn: N3-DR0's conclusion
+(the degenerate member does not exist) is TRUE by N4-D below; what fails is its proof, which reads radius `1 + ε`, where the member passes every check.
+The theorem table carries the corrected row.*
+
+### 3.1 N4-TANG and N4-D
+
+**N4-TANG [hand, one mind; tools exact].** *`T_R` does not reach `P90 = q1 + e(90°)`.* By N4-TOP item 4, `T_R` borders `t1` along `t1`'s arc from `q1`
+toward `p`, an arc of `ω(q2)`, and holds the points just outside it near `q1`. `q2 = q1 − e(90°)` and `P90 = q1 + e(90°)`, so `ω(q2)` and `ω(P90)` are
+tangent at `q1` and curve apart; a point just outside `ω(q2)` near `q1` lies outside `B̄(P90, 1)` (tools, tang: `x = q2 + 1.001 e(96°)`, 0.105 from `q1`,
+in the sliver). A tile holding such a point and reaching `P90` would have diameter above 1. ∎ *Reads:* `q1`, `q2`, `P90`.
+
+**N4-D [hand, one mind; tools exact at named values].** *No valid fragment on the closed disc of radius `√3` about `p` holds the Reuleaux bowtie with the
+top lune in setting D.*
+1. *What `q1` carries* (N4-TOP item 4): colours 1 (`t1`), 3 (a tile `C3`), 4 (`z4`, which is not `W`), 5 (`T_R`), 6 (a tile which is not `T_L`, since
+   `T_L ⊂ B̄(q3, 1)` misses `q1`); 2 is absent (N4-OWN). At `top` (item 5): `t2`, `W`, `T_R`, `T_L`.
+2. *The lens `L1 = B(q1, 1) ∩ B(top, 1)`* (corners `p` and `P90`). By N4-LENS, colours 4 and 6 (carried at `q1` and `top` by different tiles) meet no point of
+   `L1`; colour 1 meets it only in `t1`, 2 only in `t2`, both inside `B̄(p, 1)`; 5 only in `T_R`; 3 only in `C3`. So the part `Δ` of `L1` outside `B̄(p, 1)` —
+   the curvilinear triangle `q1, P90, top` — lies in `T_R ∪ C3 ∪ Γ`.
+3. *`C3` reaches `P90`.* Near `P90`, `Δ` is a sector of 120°; `T_R` misses a neighbourhood of `P90` (N4-TANG); so `C3` fills `Δ` there and `P90 ∈ cl C3`.
+   (This alone kills the order (O1), where `C3` is the cap tile `Y3`: a tile holding `q1` and `P90` has its cone at `q1` in `[0°, 180°]`, and `Y3`'s starts at
+   `300°`. The order (O2) survives it: `C3 = V3`.)
+4. *The arc of `ω(q1)` from `P90` to `top` lies in `Γ`* (N4-ARC). *Its outer side lies in `W` along its whole length.* Take `x` just outside it, at angle
+   `φ ∈ (90°, 150°)` about `q1`. Then `x ∈ B(top, 1) ∩ B(P90, 1)`, `x ∉ B̄(q1, 1) ∪ B̄(p, 1) ∪ B̄(q3, 1)` (tools, outer). Colour 2 at `x` would be `t2`'s, 5 `T_R`'s,
+   6 `T_L`'s (N4-LENS at `top`), and none of those tiles reaches `x`; colour 3 would be `C3`'s (it reaches `P90`, and `x ∈ B(P90, 1)`), which lies in `B̄(q1, 1)`;
+   colour 1 would be close to `t1` (`t1`'s points at `q1` in directions `ψ ∈ (180°, φ + 90°)` lie within distance `< 1` of `x`; tools, outer, at
+   `ψ = 185°`). So `x` has colour 4, and is in `W`. Letting `φ → 90°`: **`P90 ∈ cl W`.**
+5. *The mirror.* Reflection in the vertical axis fixes `p`, `top`, `t2`, `W` and the setting, and exchanges `q1 ↔ q3`, `t1 ↔ t3`, `T_R ↔ T_L`, `P90 ↔ P90′ =
+   q3 + e(90°)`. Items 1–4 at `q3` give **`P90′ ∈ cl W`**.
+6. `|P90 − P90′| = √3 > 1` (tools, far): `W` has diameter above 1. ∎
+
+*Reads:* the closed disc of radius `√3` about `p` (a neighbourhood of it); the vertices `p, q1, q3, top ∈ F` and the points `P90, P90′`; the arcs of `ω(q1)`
+and `ω(q3)` between `top` and `P90`, `P90′`. **It uses the tactic partners** (`z4`, `z4′`, through N4-TOP) and the simple class; no complexity bound.
+
+**What it says.** The degenerate member is the only configuration in which a Reuleaux corner carries five colours (N4-FIVE); so **in a valid map, the Reuleaux
+bowtie's lunes with `Γ`-free rings are general members, and all four Reuleaux corners are four-colour vertices of degree 4**. The card's design (each `q_i` of
+five colours; `top`, `bot` four-colour at distance 1) is the degenerate member at both lunes; by N4-D it **stops below radius `√3 ≈ 1.732`** about `p`, and
+it cannot be extended to radius 2. **The first piece of C114-LOCAL-F:** *no valid fragment on the closed disc of radius `√3` about a degree-4 four-colour vertex
+`p` whose four edges are tactic, with two opposite Reuleaux lenses and one lune whose ring is `Γ`-free with one change point.* It is narrow — one
+configuration of one vertex type — and its radius `√3` lies below the strip's `1.834` (another configuration, a midline vertex with no tactic edge at its
+lune).
+
+**Would-have-searched here.** A fragment by formula with (O2) at both corners, to see how far it goes: not built — the derivation reaches the obstruction first.
+
+## Stage 3 — SAVED

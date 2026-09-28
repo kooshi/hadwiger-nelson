@@ -1,0 +1,19 @@
+FAIL tang: |x - q2|^2 > 1
+OK   tang: |x|^2 < 1
+OK   tang: |x - q4|^2 > 1
+OK   tang: |x - q1|^2 < 1/64
+OK   tang: |x - P90|^2 > 1
+OK   outer: y in Reul(p, q1, q2)
+OK   outer: phi=100: in B(top,1) and B(P90,1)
+OK   outer: phi=100: outside B(p,1) and B(q3,1)
+OK   outer: phi=100: |x - y|^2 < 1
+OK   outer: phi=120: in B(top,1) and B(P90,1)
+OK   outer: phi=120: outside B(p,1) and B(q3,1)
+OK   outer: phi=120: |x - y|^2 < 1
+OK   outer: phi=140: in B(top,1) and B(P90,1)
+OK   outer: phi=140: outside B(p,1) and B(q3,1)
+OK   outer: phi=140: |x - y|^2 < 1
+FAIL far: |P90 - P90'|^2 = 3
+OK   far: |P90|^2 = 3
+OK   far: |P90 - top| = |P90 - q1| = 1
+RESULT 2 FAIL
