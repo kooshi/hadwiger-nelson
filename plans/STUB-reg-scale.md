@@ -37,8 +37,15 @@ compactness methods of the distance-avoiding-sets literature: `[Bukh2008]`, Falc
 
 ## Bearing on the answer
 
-**Decisive jointly with (A) — a one-mind reading** (FS107-MEET, row 133's grade; its test is card 1 of `plans/POROS-2026-09-27-night-aim.md` §3, FS-111's first question) — at bounded complexity row 134 (no valid map under Condition 5) and, with unit arcs, FS-114's NO (`plans/STUB-global-step.md`; with FS-115's two steps where FS-114 is taken in its four-colour form, `plans/STUB-stuck-ray.md`; re-aimed at FS-112's close, 2026-09-27): together they give `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR. Alone, a regularity
-theorem for near-optimal colourings. A family refuting it with holes `→ 0` is W's claim itself: `χ(ℝ²) ≤ 6` with no MR.
+*Rewritten 2026-09-28 at FS-111's close (FS111-C; `plans/FS111-derivation.md`).* **Not decisive jointly with FS-114's NO, as this stub once read.** FS-111's
+card 1, at two minds (one blind): seven is the map NO made uniform in the complexity bound (FS111-C1-UNIF); the map NO bounds holes at each bound only
+(FS111-C1-PW); so FS-114's NO plus a cone-scale bound gives seven only with a third statement (FS111-C1-GAP, corrected by FS111-V0). The two doors are two
+routes, not halves (FS111-C1-ROUTES): **route M** — FS-114's NO with the map step (the tight limit made a segment-and-arc map), the cone scale entering as
+the map step's first rung; **route R** — FS107-R-CP with (A) at every complexity and (B), FS-114's NO idle. Each third statement is the answer restated:
+the map step at six given FS-114's NO (FS111-C-REG-EQ), and (A) at every complexity outright (FS111-W-NEG). The question this stub posed — do near-optimal
+colourings keep their junctions fat — is (B) on route R and the rung REG-J′ on route M; neither was decided. Its successors: FS-120 (the pinch at a
+junction, the colour-generic finiteness rung), FS-121 (the map step), FS-122 (the forced pair). A family refuting (B) with holes `→ 0` is still W's claim
+itself: `χ(ℝ²) ≤ 6` with no MR.
 
 ## Provisional bearings (replaced by the re-grokking at the opening)
 

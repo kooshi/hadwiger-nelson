@@ -388,3 +388,29 @@ list's wording" — a scope note; declined). The plan's open statements live in 
 **Brier score** over the thirteen binary registrations (E1, E2 ×2, E4–E9, W-P1, W-P2, the stub's two): **0.119**; E3's three-way Brier 0.395.
 **Calibration, read (never a cap):** every registration below 0.3 failed to land, as at FS-107; the one confident "no" (W-P1, 0.65) missed because
 the object was in print from 2018 and outside the generator's image — the miss was the search's genre, not the mathematics'.
+
+## Stage 5 — SAVED: the successor stubs, and the bearing lines
+
+**Minted (three of the three numbers given):**
+
+| stub | file | what it carries | why its own stub |
+|---|---|---|---|
+| **FS-120 — the pinch at a junction** | `plans/STUB-pinch-at-junction.md` | M4's stub (a) (the pinch at a junction), M3's stub (a) (MUA-FIN-L in partitions), M4's stub (b) ((F1) for irregular MUA sets), M3's note (no maximal seven-cover with a pinched class exhibited) as question 1 | the colour-generic rung, smaller than the answer, and the step the milestone's last job named (item 38) |
+| **FS-121 — the map step** | `plans/STUB-map-step.md` | the planner's map-step draft; NO-PAR (item 27); interface-maximal six-colourings (item 27); REG-CHAIN (proved under REG-J′ by M2-INTRAD) and NO-C11 (unneeded on the honest route, subsumed by NO-PAR's test of row 134's N4); REG-J′ (item 17); MUA-FIN-P and MUA-REG-P at five; the LRA link to FS-115; CM-Q5.1 as calibration; M's stub (d) named, not first | route M's top rung, at five and six, with the honesty that it is the answer restated |
+| **FS-122 — the forced pair** | `plans/STUB-forced-pair.md` | the planner's forced-pair draft, **corrected**: A-ALL ⟺ seven (W-NEG), so its smaller statements are B-RR and a robust Lemma 6.1 count; HX-PAIRS | route R, whose method (a local count) meets route M nowhere below the answer |
+
+**Declined, with the reason:**
+- Round 1's "honest saturation at `k = 5, 6`" (M §5.5 (a)): **retired** — unnecessary at five (M2-REDUCE-C), and at six one of FS-121's three honest-route
+  conditions; never minted as a file, so no banner is owed.
+- W's "the saturated chromatic number": **collapsed** into C-SAT-T at five and six (VMW §2.4: that number lies in `[χ_m⁰(ℝ²), 7]`).
+- M3's stub (b), the spare-colour absorption at `k + 3`: **superseded** in partitions by M4-MOVE (1) (no spare colour enters along a ladder).
+- M2's stub (c), M2-PINCH-C's completion: **done** by HC_K (FS111-M3-FIN-U).
+- M's stub (d) (a saturated colouring with a bichromatic vertex of degree ≥ 4): not a stub — excluded on maps without cusps (FS111-W-NOREP); named in
+  FS-121's list for general colourings.
+- VMW's (P+) question (a saturated seven-colouring with positive-density partners): declined, as VMW itself declined — nothing downstream rests on it.
+
+**Bearing lines.** `plans/STUB-reg-scale.md` § Bearing on the answer rewritten in place (this job's file): the doors are two routes, each third
+statement the answer restated; its successors FS-120–FS-122. Its closed banner is the coordinator's, drafted in §D7 below. The bearing lines of stubs
+FS-114's close writes (FS-114, FS-115, FS-104 and others) are drafted in §D8 for the coordinator to file.
+
+**New keys the stubs and the derivation file cite:** `[Walther1999]`, `[Kershner1939]` (and those the brief lists) — rows drafted in §D5.
