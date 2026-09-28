@@ -1,0 +1,17 @@
+From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.	CLAUDE.md
+A proven theorem about why its impossible is also valid. All novel knowledge is a success	CLAUDE.md
+to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time	CLAUDE.md
+search for a finite graph is out. It would be huge, not feasible.	CLAUDE.md
+It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.	plans/CONSOLIDATION-2026-09-27.md
+DR's **degenerate member** (a change point `60°` from a Reuleaux corner, `s′ ∈ {0°, −60°}`) does not exist	plans/FS114-N3-proof.md
+a **tactic edge** (a whole unit arc on `ω(q)`, inner tile `x` with `q ∈ cl x`, and a tile of the outer tile's colour touching `x` at `q` alone)	plans/FS114-N3-proof.md
+All statements are for **non-Siamese** valid maps unless said otherwise; there every vertex carries distinct colours on its tiles.	plans/FS114-N3-proof.md
+A vertex with five colours has unit arcs centred at it of total length at least 180°; with six, its whole unit circle lies in `Γ`, every arc of kind both.	plans/FS112-derivation.md
+A four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred at it of total length at least 60°, or at least six, one in each of six consecutive 60° windows (C-UA-BUDGET, branch 1).	plans/FS112-derivation.md
+NB-4 corrected: at a vertex of exactly four colours, let `(v, y₀)` be a covering pair at a change point of its ring; if no point of `y₀`'s `σ_v`-orbit lies in the closure of an arc of `Γ` on `ω(v)`, and no arc of `Γ` on `ω(y_{k±1})` has `y_k` in its closure, contradiction; the bound on the colours at `y_k` is not needed.	plans/FS112-derivation.md
+In a valid map, a close complementary pair of cubic trichromatic vertices `u, u′` (disjoint multicolours, `d < 2`) sits on a unit rhombus `u, q₊, u′, q₋` whose other corners are vertices of at least four colours, each a leaving centre of both `u` and `u′`, a unit arc of each leaving centre's circle being both-kind there: T2 is forced at both common unit points.	plans/FS112-derivation.md
+At a unit arc `α ⊂ ω(P)` of angular length `ℓ`, an inner side colour in `P_cl(P)` has its sectors at `P` in the closed cone of width `π − ℓ` facing `α`, an outer one in the closed cone facing away; both side cones hold neither; the outer tile's first-order shadow near `P` contains the open facing cone of width `π + ℓ`.	plans/FS112-derivation.md
+A unit arc with constant sides has angular length below 60°; along it neither side colour recurs 60° apart.	plans/FS112-derivation.md
+Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.	plans/FS112-derivation.md
+tiles that lie entirely within each other’s annulus of exclusion	data/fs114/claims.md
+a statement or a step **reads radius `R`** when its hypotheses and its conclusion concern only the map inside a closed disc of radius `R`	data/fs114/claims.md

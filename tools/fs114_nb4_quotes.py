@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""FS114-NB4: verbatim-quotation check (standing rule 5).
+
+Input: a TSV file, one line per quotation: <quote>\t<source path>.
+Each quote and source is normalised the same way (whitespace collapsed,
+'**' removed) and the quote must occur as a substring of the source.
+--plant alters the first quote (one word changed) and adds its faithful twin,
+so a run must show exactly one NOT FOUND (the plant) and the twin FOUND.
+Exit status 0 iff every non-plant quote is FOUND (and, under --plant, the
+plant is NOT FOUND and the twin FOUND).
+"""
+import re, sys, pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+def norm(s: str) -> str:
+    s = s.replace("**", "")
+    return re.sub(r"\s+", " ", s).strip()
+
+def main() -> int:
+    args = sys.argv[1:]
+    plant = "--plant" in args
+    args = [a for a in args if a != "--plant"]
+    tsv = pathlib.Path(args[0])
+    rows = []
+    for ln in tsv.read_text().splitlines():
+        if not ln.strip() or ln.startswith("#"):
+            continue
+        q, src = ln.split("\t")
+        rows.append((q, src.strip(), "real"))
+    if plant:
+        q0, s0, _ = rows[0]
+        words = q0.split()
+        i = len(words) // 2
+        words[i] = words[i] + "XPLANT"
+        rows.insert(0, (" ".join(words), s0, "plant"))
+        rows.insert(1, (q0, s0, "twin"))
+    cache = {}
+    bad = 0
+    for q, src, kind in rows:
+        if src not in cache:
+            cache[src] = norm((ROOT / src).read_text())
+        found = norm(q) in cache[src]
+        tag = "FOUND" if found else "NOT FOUND"
+        print(f"{tag}\t[{kind}]\t{src}\t{q[:70]}")
+        if kind == "plant":
+            bad += found            # a plant that is found is a failure
+        elif not found:
+            bad += 1
+    n = sum(1 for r in rows if r[2] == "real")
+    f = sum(1 for q, s, k in rows if k == "real" and norm(q) in cache[s])
+    print(f"SUMMARY: {f} of {n} real quotations FOUND; plant={'on' if plant else 'off'}")
+    return 1 if bad else 0
+
+if __name__ == "__main__":
+    sys.exit(main())
