@@ -1,0 +1,12 @@
+plant = None
+SQ9: 24 fundamental edges x 2 sides: ladder present 48, FAIL at saturated points 0, absent at unsaturated points 0; all radii infinite (segments)
+HEX9: 38 fundamental edges x 2 sides: ladder present 76, FAIL at saturated points 0, absent at unsaturated points 0; all radii infinite (segments)
+R7: 432 arcs (12 x 12 ups x 3): kind both 432, not 0; all radii 1
+  strip LAD+ edge A0|B0 colour 1: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 1 (no tile of that colour at distance exactly 1): INTRAD silent here
+  strip LAD- edge A0|B0 colour 4: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 4 (no tile of that colour at distance exactly 1): INTRAD silent here
+  strip LAD+ edge A1|B1 colour 2: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 2 (no tile of that colour at distance exactly 1): INTRAD silent here
+  strip LAD- edge A1|B1 colour 5: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 5 (no tile of that colour at distance exactly 1): INTRAD silent here
+  strip LAD+ edge A2|B2 colour 3: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 3 (no tile of that colour at distance exactly 1): INTRAD silent here
+  strip LAD- edge A2|B2 colour 6: ladder absent -- the unit parallel is not covered by edges; the edge midpoint is NOT saturated for colour 6 (no tile of that colour at distance exactly 1): INTRAD silent here
+strip: 11 interior segment edges in columns 0..2, x 2 sides: ladder present 16, FAIL at saturated points 0, absent at unsaturated points 6; arcs (columns -2..4): kind both 26, not 0; arc radii [1.0]
+RESULT {'SQ': True, 'HEX': True, 'R7': True, 'strip': True}
