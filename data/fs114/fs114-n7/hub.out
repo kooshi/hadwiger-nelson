@@ -1,0 +1,41 @@
+OK   TAN D_0: w(y_m-1) leaves along D_0 curving cw
+OK   TAN D_0: w(y_m+2) leaves along D_0 curving ccw
+OK   TAN D_1: w(y_m-1) leaves along D_1 curving cw
+OK   TAN D_1: w(y_m+2) leaves along D_1 curving ccw
+OK   TAN D_2: w(y_m-1) leaves along D_2 curving cw
+OK   TAN D_2: w(y_m+2) leaves along D_2 curving ccw
+OK   TAN D_3: w(y_m-1) leaves along D_3 curving cw
+OK   TAN D_3: w(y_m+2) leaves along D_3 curving ccw
+OK   TAN D_4: w(y_m-1) leaves along D_4 curving cw
+OK   TAN D_4: w(y_m+2) leaves along D_4 curving ccw
+OK   TAN D_5: w(y_m-1) leaves along D_5 curving cw
+OK   TAN D_5: w(y_m+2) leaves along D_5 curving ccw
+OK   TIP y_0 dir psi+155: in B(p,1), B(y_-1,1), B(y_1,1)
+OK   TIP y_0 dir psi+180: in B(p,1), B(y_-1,1), B(y_1,1)
+OK   TIP y_0 dir psi+205: in B(p,1), B(y_-1,1), B(y_1,1)
+OK   TIP y_0 dir psi+140 leaves B(y_-1,1)
+OK   TIP y_0 dir psi+220 leaves B(y_1,1)
+OK   RCONE y_0: dir psi+25 leaves closed B(y_1,1)
+OK   RCONE y_0: dir psi+35 inside B(y_1,1)
+OK   RCONE y_0: dir psi+155 inside B(y_-1,1)
+OK   RCONE y_0: dir psi+145 outside closed B(y_-1,1)
+OK   WIN y_0: p + t e(psi+85) in B(y_0,1)
+OK   WIN y_0: p + t e(psi+95) outside closed B(y_0,1)
+OK   DIST |y_0-y_1| = 1
+OK   DIST |y_0-y_2|^2 = 3
+OK   DIST |y_0-y_3|^2 = 4
+OK   TIP y_3 dir psi+155: in B(p,1), B(y_2,1), B(y_4,1)
+OK   TIP y_3 dir psi+180: in B(p,1), B(y_2,1), B(y_4,1)
+OK   TIP y_3 dir psi+205: in B(p,1), B(y_2,1), B(y_4,1)
+OK   TIP y_3 dir psi+140 leaves B(y_2,1)
+OK   TIP y_3 dir psi+220 leaves B(y_4,1)
+OK   RCONE y_3: dir psi+25 leaves closed B(y_4,1)
+OK   RCONE y_3: dir psi+35 inside B(y_4,1)
+OK   RCONE y_3: dir psi+155 inside B(y_2,1)
+OK   RCONE y_3: dir psi+145 outside closed B(y_2,1)
+OK   WIN y_3: p + t e(psi+85) in B(y_3,1)
+OK   WIN y_3: p + t e(psi+95) outside closed B(y_3,1)
+OK   DIST |y_3-y_4| = 1
+OK   DIST |y_3-y_5|^2 = 3
+OK   DIST |y_3-y_6|^2 = 4
+RESULT OK

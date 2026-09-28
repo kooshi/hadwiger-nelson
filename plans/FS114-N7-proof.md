@@ -17,11 +17,17 @@ never touches itself) unless said otherwise. FS112-L60 is used only in its corre
 | id | statement (one line) | grade | where |
 |---|---|---|---|
 | N7-QT | Every quotation my brief relies on, where its source is open to me, is found (16 of 16); the brief's restatements compared by hand, all faithful; E1 and E2 (construction side) not checkable | [tools] | §1.2; `tools/fs114_n7_quotes.py` |
+| **N7-HUB** | At a four-colour vertex (non-Siamese, simple) whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours: the directions toward `p` there lie in tiles of `p` reaching `y_k` (a **tip**, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}` by no other tile), and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-tiles face away | [hand, one mind; tools exact at named values] | §2.1; `tools/fs114_n7_hub.py` |
+| N7-REACH | A tile of `p` reaching `y_k` has cone in `[D_{k−2}, D_{k+1}]`; reaching two change points, they are adjacent and it lies in their Reuleaux triangle on `p` | [hand, one mind; tools] | §2.1 |
+| N7-TAN | At `D_m` the circles `ω(y_{m−1})` (clockwise) and `ω(y_{m+2})` (counter-clockwise) are tangent; the tile of `p` holding a branch has a colour absent at that centre, the side decided by the edge's curvature | [hand, one mind; N4-OPP in NB4's form; tools] | §2.1 |
+| N7-TAC | On a (Q)-free ring every tactic edge leaves at some `D_m`, a `+` edge along `ω(y_{m+2})`, a `−` edge along `ω(y_{m−1})`; inner tile reaches the centre, outer tile misses its open unit disc | [hand, one mind; over N3-FLANK, N6-RING60] | §2.1 |
+| **N7-3T** | **Three or more tactic edges at a degree-4 vertex with a (Q)-free ring are excluded at radius `1 + ε`**, except the open-cap family **OC** (`+−+`, a Reuleaux lens beside a `60°` anti-lens; with a fourth tactic edge, the Reuleaux bowtie whose lenses do not border the caps): the `(2, 1, 1, 0)` patterns, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `++−`, `−++` die in every member | [hand, one mind] | §2.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
 | move I would have made by search | what I did instead |
 |---|---|
+| enumerate sign patterns, cone vectors and reach assignments at a degree-4 vertex with three tactic edges | N7-HUB's tips, N7-REACH and N7-TAN by hand, pattern by pattern (§2.2); metric facts checked at named values only |
 
 ## Fence log (standing rule 13; brief § Fences)
 
@@ -68,3 +74,133 @@ never touches itself) unless said otherwise. FS112-L60 is used only in its corre
 - **Not checkable:** E1 and E2 are the construction side's (fenced). I use them at the brief's wording only, and state my reading of E2 where I use it (§3).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the (Q)-free ring — a hub lemma, and every configuration with three or more tactic edges but one excluded at radius `1 + ε`
+
+*Setting: `p = 0` a vertex of a non-Siamese valid map in the simple class carrying exactly four colours (so degree 4), tiles `t1 … t4`
+counter-clockwise, edges `e_i = t_i | t_{i+1}` leaving `p` at `θ_i`, absent colours `X, X̄`; the map is bent on a fragment of radius `1 + ε`
+about `p` (NB6 §1b.0: then every ring `Γ`-arc but the (Q) arcs is removed, and the tactic edges, inner tiles and partners are kept, N5-BENDG). **The ring
+is (Q)-free**: then by N6-RING60 (two minds, one blind) its change points are exactly `y_k = e(ψ_k)`, `ψ_k = y + 60k`, and the ring tile `R_k` (colour `X`
+for even `k`, `X̄` for odd, say) realises `κ` on `(ψ_k, ψ_{k+1})` and holds `y_k`, `y_{k+1}` in its closure. Write `D_m = y + 30° + 60m` (indices mod 6).
+A tile **reaches** `y_k` when `y_k` is in its closure. Metric facts: `tools/fs114_n7_hub.py` (`data/fs114/fs114-n7/hub.out`, 40 lines OK, exit 0; plant
+`--plant`, `y_1` moved to `e(64°)`, fails exactly the five lines at `y_0` resting on `|y_0 − y_1| = 1`, `hub-plant.out`, exit 1).*
+
+### 2.1 N7-HUB — the six change points of a (Q)-free ring are four-colour vertices, each with a tip
+
+**N7-HUB [hand, one mind; tools exact at named values].** *At each change point `y_k`:*
+- *(a) `R_k`'s cone at `y_k` lies in `[ψ_k + 30°, ψ_k + 150°]` and `R_{k−1}`'s in `[ψ_k + 210°, ψ_k + 330°]`;*
+- *(b) the open cone `(ψ_k + 150°, ψ_k + 210°)` at `y_k` (the directions toward `p`) lies in cones of tiles of `p` reaching `y_k`; call such a tile a
+  **tip** at `y_k`. A tip meets `B(y_{k−1}, 1) ∩ B(y_{k+1}, 1)`, so its colour is carried at `y_{k−1}` and at `y_{k+1}` by no tile other than itself;*
+- *(c) the open cone `(ψ_k − 30°, ψ_k + 30°)` at `y_k` lies in cones of tiles of colours of `p` that are not tiles of `p`; the tile of `p` of each such
+  colour has its cone at `p` in `[ψ_k + 90°, ψ_k + 270°]`. So `y_k` carries at least four colours: `X`, `X̄`, a tip's, and an outer tile's.*
+
+*Proof.* (a) `R_k` holds `y_{k+1}`, so `R_k ⊂ B̄(y_{k+1}, 1)`: its cone faces `y_{k+1}` (`y_{k+1} − y_k` points at `ψ_k + 120°`), `[ψ_k + 30°, ψ_k + 210°]`.
+`R_{k−2}` holds `y_{k−1}`, has `R_k`'s colour, and is another tile (a tile holding `y_{k−2}` and `y_{k+1}` has diameter 2); by N-E2 at the unit pair
+`(y_k, y_{k−1})`, `R_k ∩ B(y_{k−1}, 1) = ∅`: its cone faces away from `y_{k−1}` (at `ψ_k + 240°`), `[ψ_k + 330°, ψ_k + 150°]`. Intersect. Mirror for
+`R_{k−1}` (tools, RCONE). (b) For a direction `u` in the open cone, `y_k + tu` lies in `B(p, 1) ∩ B(y_{k−1}, 1) ∩ B(y_{k+1}, 1)` for small `t` (tools,
+TIP, with the cone exact: TIP 140°, 220°). A tile at `y_k` whose cone holds `u` has such points. If its colour is absent at `p`, it has points within `< 1`
+of `R_{k−1}`'s and `R_k`'s points near `y_k`, so by CL it is `R_{k−1}` or `R_k`, whose cones (a) miss `u`. So its colour is at `p`, and by CL-p it is the tile
+of `p` of that colour. A tile of the same colour at `y_{k±1}` other than the tip would put the tip outside `B(y_{k±1}, 1)` (N-E2). (c) A direction `u`
+there points outside `B̄(p, 1)`; an absent colour is excluded as in (b); a tile of `p` lies in `B̄(p, 1)`, so its cone at `y_k` faces `p` and misses `u`. The
+tile of `p` of the same colour is another tile, and N3-FACE at the unit pair `(p, y_k)` puts its cone in the half-plane facing away from `y_k`. ∎ *Reads:*
+the closed disc of radius `1 + ε` about `p`; the vertices `p` and `y_0, …, y_5` (six vertices of `F` on `ω(p)`, by (c)).
+
+**N7-REACH [hand, one mind; tools WIN, DIST].** *A tile of `p` reaching `y_k` has cone `⊂ [ψ_k − 90°, ψ_k + 90°] = [D_{k−2}, D_{k+1}]`. One reaching two
+change points reaches two adjacent ones, `y_k` and `y_{k+1}`, lies in `Reul(p, y_k, y_{k+1})` and has cone `⊂ [D_{k−1}, D_{k+1}]`.* Diameter at most 1;
+non-adjacent change points are `√3` or `2` apart. ∎
+
+**N7-TAN [hand, one mind; tools TAN].** *At `p`, the circles `ω(y_{m−1})` and `ω(y_{m+2})` are tangent in the direction `D_m`, the first curving clockwise
+(toward `y_{m−1}`), the second counter-clockwise. By N-E1 at `y_j` (N4-OPP in NB4's corrected form): the tile of `p` holding the branch of `ω(y_j)` near
+`p` has a colour absent at `y_j`. Hence (i) if `D_m` is interior to a tile's cone, that tile's colour is absent at `y_{m−1}` and at `y_{m+2}`; (ii) if exactly
+one edge `e` leaves `p` at `D_m`, with signed curvature `κ_e` (counter-clockwise positive), the branch of `ω(y_{m−1})` (curvature `−1`) lies in the tile
+clockwise of `e` when `κ_e > −1`, and the branch of `ω(y_{m+2})` (curvature `+1`) in the tile counter-clockwise of `e` when `κ_e < 1`; `κ_e = ∓1` is the edge
+along the circle.* The edges are segments and circular arcs, so near `p` the second-order comparison decides the side. ∎
+
+**N7-TAC [hand, one mind; over N3-FLANK, N6-RING60].** *Every tactic edge at `p` leaves at some `D_m`. A `+` edge there (inner tile counter-clockwise) lies
+along `ω(y_{m+2})`, centre `y_{m+2}`; a `−` edge (inner tile clockwise) along `ω(y_{m−1})`, centre `y_{m−1}`. Its inner tile reaches the centre; its outer
+tile misses the open unit disc about the centre (far from the partner, N-E2) and has cone in the half-plane facing away from it.* Its centre is a change
+point (N3-FLANK: the ring carries no `Γ`-arc), so one of the `y_k`; the edge's direction is the centre's `± 90°` (N6-CENT). ∎
+
+### 2.2 N7-3T — three or more tactic edges on a (Q)-free ring
+
+Three tactic edges among four are consecutive; call them `e1, e2, e3` at `D_a, D_b, D_c` (`a < b < c < a + 6` in the cyclic order), so
+`t2 = [D_a, D_b]`, `t3 = [D_b, D_c]`, `t4 = [D_c, θ_4]`, `t1 = [θ_4, D_a]`, with `e4` at `θ_4` **tactic or not — no argument below uses its status**. Up to
+rotation and reflection (which reverses the order and the signs) the sign patterns are `+++`, `++−`, `+−+`, `−++`. A rotational tile's cone is `60°` or
+`120°` (N3-SEC (ii), N7-TAC, N6-PIN180); a lens is Reuleaux (`γ = 60°`, cone `120°`, reaching its two centres) or `γ = 0°` (cone `180°`, one centre); an
+anti-lens has cone at most `180°`, possibly `0°` (a cusp in a horn, the two edges tangent at one `D_m`). "`y_k` has no tip" contradicts N7-HUB (b).
+
+**N7-3T [hand, one mind; over N7-HUB, N7-REACH, N7-TAN, N7-TAC].** *At a degree-4 four-colour vertex of a non-Siamese valid map in the simple class whose
+ring is (Q)-free after the bends, three tactic edges occur only in the pattern `+−+` (or its mirror `−+−`) with a Reuleaux lens and a `60°` anti-lens: in
+the frame above, `t2 ⊂ Reul(p, y_{a+1}, y_{a+2})` with cone `[D_a, D_{a+2}]`, `t3 = [D_{a+2}, D_{a+3}]`, `t4 ⊂ Reul(p, y_{a+4}, y_{a+5})`, `t1` a tip at `y_a`,
+`θ_4 ∈ [D_{a+4}, D_{a+5}]` — the **open-cap family OC**. Every other configuration with three or four tactic edges is excluded at radius `1 + ε`.* In
+particular: the `(2, 1, 1, 0)` patterns `+++−`, `++−−` (they contain `+++` or `++−`); the pinwheel (N6-NOQ re-derived); the `γ = 0°` lens and every
+non-Reuleaux lens; `++−`, `+−−`, `−++`, `−−+` in every member; and `+−+` with a `γ = 0°` lens or an anti-lens other than `60°`. With `e4` tactic OC is the
+Reuleaux bowtie whose lenses do not border the caps (N6's K1-OPENCAP), `θ_4 = D_{a+5}`; `θ_4 = D_{a+4}` with `e4` tactic is `+−++`, which contains `−++`.
+
+*Proof, pattern by pattern (every step reads `B̄(p, 1 + ε)`).*
+
+**`+++`.** `t2` reaches `y_{a+2}` and misses `B(y_{b+2}, 1)`; `t3` reaches `y_{b+2}` and misses `B(y_{c+2}, 1)`; `t4` reaches `y_{c+2}`; `t1` misses
+`B(y_{a+2}, 1)`, cone in `[D_{a+3}, D_{a+6}]`.
+- *`b = a + 1`.* `t2` is not a tip at `y_{a+2}` (it misses `B(y_{a+3}, 1)`); `t4` cannot reach `y_{a+2}` (it reaches `y_{c+2} ∈ {y_{a+4}, y_{a+5}}`), nor `t1`;
+  so `t3` is the tip and reaches `y_{a+2}, y_{a+3}` (N7-REACH: cone `⊂ [D_{a+1}, D_{a+3}]`). If `c = a + 3`, the branch of `ω(y_{a+2})` at `D_{a+3}` lies in `t3`
+  (N7-TAN (ii): `e3` runs along `ω(y_{a+5})`), against `t3` reaching `y_{a+2}`; so `c = a + 2`, and `t3` misses `B(y_{a+4}, 1)`. At `y_{a+3}` the tip is then
+  `t4` (`t2` misses `B(y_{a+3}, 1)`, `t1`'s cone ends at `D_{a+6}`), so `t4 ⊂ Reul(p, y_{a+3}, y_{a+4})`, `θ_4 ≤ D_{a+4}`. `y_{a+5}` and `y_a` can be reached only by
+  `t1` (`t4` has two, `t2` reaches `y_{a+2}`), so `t1 ⊂ Reul(p, y_{a+5}, y_a)`, `θ_4 ≥ D_{a+4}`: `θ_4 = D_{a+4}`. Then `t4` reaching `y_{a+3}` needs `e4`'s
+  curvature `≤ −1` (the branch of `ω(y_{a+3})`, N7-TAN), and `t1` reaching `y_a` needs it `≥ +1` (the branch of `ω(y_a)`). ∎
+- *`b = a + 2`, `c = a + 3`.* `t2` cannot reach `y_{a+1}` (the branch of `ω(y_{a+1})` at `D_{a+2}` lies in `t2`: `e2` runs along `ω(y_{a+4})`). `t3` reaches `y_{a+4}`,
+  misses `B(y_{a+5}, 1)`, so the tip at `y_{a+4}` is `t4`: `t4 ⊂ Reul(p, y_{a+4}, y_{a+5})`, `θ_4 ≤ D_{a+5}`. `y_{a+1}` is then reachable only by `t1`, with cone
+  `⊂ [D_{a+5}, D_{a+8}]`: `θ_4 = D_{a+5}`, and `e4` would need curvature `≤ −1` (for `t4` at `y_{a+4}`) and `≥ +1` (for `t1` at `y_{a+1}`). ∎
+- *`b = a + 2`, `c = a + 4`.* `t2` reaches only `y_{a+2}`, `t3` only `y_{a+4}` (the branch of `ω(y_{a+3})` at `D_{a+4}` lies in `t3`), and `t4` (from `D_{a+4}`) and
+  `t1` (to `D_{a+6}`) cannot reach `y_{a+3}`: it has no tip. ∎ (`b = a + 1` covers `c = b + 2` with `b − a = 1`.)
+
+**`++−`** (`t3` the lens). `t2` misses `B(y_{b+2}, 1)`; `t4`, outer to `e3` (centre `y_{c−1}`), misses `B(y_{c−1}, 1)`; `t1` misses `B(y_{a+2}, 1)`.
+- *`γ = 0°` (`c = b + 3`, one centre `y_{b+2}`).* `D_{b+1}`, `D_{b+2}` are interior to `t3`, so `t3` reaches only `y_{b+2}` (N7-TAN (i)). If `b = a + 1`: at `y_{a+2}`
+  `t2` misses `B(y_{a+3}, 1)`, `t3` does not reach, `t4` has cone from `D_{b+3}` (outside `[D_{b−1}, D_{b+2}]`), `t1` misses `B(y_{a+2}, 1)`: no tip. If
+  `b = a + 2`: `y_{b+1}` is reached by none (`t2` from `D_{b−2}` cannot join `y_b` to `y_{b+1}`; `t1 ⊂ [D_{b+3}, D_{b+4}]`, `t4` from `D_{b+3}`). ∎
+- *Reuleaux (`c = b + 2`, `t3 ⊂ Reul(p, y_{b+1}, y_{b+2})`).* If `b = a + 1`: `e1` and `e3` both have centre `y_{b+1}`; `y_{b+3}` is reachable only by `t4`, so
+  `θ_4 ≤ D_{b+4}`; `t4` cannot reach `y_{b+4}` (the branch of `ω(y_{b+4})` at `D_{b+2}` lies in `t4`: `e3` runs along `ω(y_{b+1})`), so `t1` does — but the branch
+  of `ω(y_{b+4})` at `D_{b+5} = D_a` lies in `t1` (`e1` runs along `ω(y_{b+1})`). If `b = a + 2`: `y_{b+5}` is reachable only by `t1` (`t2` is excluded by the
+  branch of `ω(y_{b−1})` at `D_b`), and `t1` misses `B(y_b, 1) = B(y_{(b+5)+1}, 1)`: no tip. ∎
+
+**`+−+`** (`t2` the lens, `t3` the anti-lens, missing `B(y_{b−1}, 1)` and `B(y_{c+2}, 1)`; `t1` misses `B(y_{a+2}, 1)`).
+- *`γ = 0°` (`b = a + 3`).* `t2` reaches only `y_{a+2}`, and `c(t2) ∉ P(y_a), P(y_{a+1}), P(y_{a+3}), P(y_{a+4})`. `c = a + 3` (a cusp anti-lens) or `a + 4`: `y_{a+1}`
+  has no tip (`t1` misses `B(y_{a+2}, 1)`; `t4` reaches `y_{c+2}`, not adjacent, or cannot join `y_a` to `y_{a+1}` from `D_{a+4}`). `c = a + 5`: `y_{a+3}` is reached by
+  none. `c = a + 6` puts `e3` on `e1`'s circle in `e1`'s direction. ∎
+- *Reuleaux (`b = a + 2`).* `c(t2) ∉ P(y_a), P(y_{a+3})`. `c = a + 2` (cusp anti-lens in the horn at `D_{a+2}`): `c(t1) ∉ P(y_{a+5})` (branch of `ω(y_{a+5})` at
+  `D_a`), and `y_{a+5}` is reached by none. `c = a + 4`: `t3` reaches no change point (`D_{a+3}` interior; the branches of `ω(y_{a+4})` at `D_{a+2}` and of
+  `ω(y_{a+3})` at `D_{a+4}` lie in `t3`), and `y_{a+3}` is reached by none. `c = a + 5`: `e2`, `e3` both on `ω(y_{a+1})`; `y_{a+3}` reached by none. **`c = a + 3`**:
+  `t3` reaches `y_{a+3}` alone (it is excluded at `y_{a+4}` by the branch of `ω(y_{a+4})` at `D_{a+2}`, and at `y_{a+2}` by that of `ω(y_{a+2})` at `D_{a+3}`); `t4`
+  reaches `y_{a+4}, y_{a+5}`; `t1` reaches `y_a`; `θ_4 ∈ [D_{a+4}, D_{a+5}]` — **OC**, which passes every check at this radius (§2.3). ∎
+
+**`−++`** (`t2` the anti-lens, missing `B(y_{a−1}, 1)`, `B(y_{b+2}, 1)`; `t1` reaches `y_{a−1}`; `t3` rotational).
+- *`c = b + 1`.* `t3` misses `B(y_{b+3}, 1)`, so the tip at `y_{b+2}` is `t4` (`t2`, `t1` cannot reach), `t4 ⊂ Reul(p, y_{b+2}, y_{b+3})`, `θ_4 ≤ D_{b+3}`. `y_{b+4}` is
+  reachable only by `t1`, which needs `a ∈ {b + 4, b + 5}` (its two reached points adjacent, its cone ending by `D_{b+5}`); `y_b` only by `t2`, which needs
+  `a ∈ {b + 4, b + 5}` too. `a = b + 4`: the branch of `ω(y_{a+2}) = ω(y_b)` at `D_a` lies in `t2`. `a = b + 5`: `c(t2) ∉ P(y_{b+5})` (branch at `D_b`), so `t1` reaches
+  `y_{b+4}, y_{b+5}`, `θ_4 ≥ D_{b+3}`; `θ_4 = D_{b+3}` and `e4` needs curvature `≤ −1` (for `t4` at `y_{b+2}`) and `≥ +1` (for `t1` at `y_{b+5}`). `a = b` (cusp) or `b + 3`:
+  `y_{b+4}` is reached by none. ∎
+- *`c = b + 2`.* `t3` reaches only `y_{b+2}` (branch of `ω(y_{b+1})` at `D_{b+2}`); `y_{b+1}` can be reached only by `t2` with `a = b + 5` — excluded by the branch of
+  `ω(y_{a+2}) = ω(y_{b+1})` at `D_a` — or, for `a = b` (a cusp in the horn at `D_b`), by `t2`, which then must be its tip and misses `B(y_{b+2}, 1)`. ∎
+
+The mirrors `−−−`, `+−−`, `−+−`, `−−+` follow by reflection. ∎
+
+### 2.3 What survives, and where six and the controls are spent
+
+- **OC, at radius `1 + ε`** (frame of N4's bowtie: `t1 = [300°, 60°] ⊂ Reul(p, q2, q1)`, `t2 = [60°, 120°]` the tip at `top`, `t3 = [120°, θ_4] ⊂ Reul(p, q3, q4)`,
+  `t4 = [θ_4, 300°]` the tip at `bot`, `θ_4 ∈ [180°, 240°]`; tactic edges at `300°` (along `ω(q1)`, partner of colour 4 at `q1`), `60°` (along `ω(q2)`, partner 2 at
+  `q2`) and `120°` (along `ω(q4)`, partner 2 at `q4`); the ring's change points `q1, top, q3, q4, bot, q2`, ring tiles alternating `X, X̄` on the six 60° arcs).
+  Forced there: `2 ∉ P(q1), P(q3)`; `1 ∉ P(top), P(bot)`; `4 ∉ P(q2), P(q4)`; `top = R_0 | W | R_1 | t2` with `W` of colour 4 the only outer tile (the only tile of `p`
+  facing away from `top` is `t4`), and `W ≠ z4`, so `W ∩ B(q1, 1) = ∅`; `bot` carries `{X̄, X, 4, 2}`. Its lunes' rings are N4-FIVE's degenerate kind (one change point
+  at `top`), but its caps are not (Q) arcs, so N4-D does not apply. **Named as the survivor; walked at stage 4.**
+- **G83:** every step reads `p` and the six change points, vertices of `F` by N7-HUB (c).
+- **Six is spent** at N6-RING60 (two absent colours alternate; with a seventh colour the ring can carry three and the change points need not be `60°`-periodic) and
+  at N7-HUB (b)'s exhaustion (absent colours only `X`, `X̄`). The hexagonal seven-colouring: silent at N6-RING60, as required.
+- **The controls:** the strip's midline four-colour vertex carries four (Q) arcs, and the disk's corners carry unit arcs centred at them, so N7-HUB's hypothesis
+  fails at both; no step is tested there, and no NO is claimed beyond K1's configurations.
+
+### 2.4 Registrations
+
+- *Registered* (G21; both outcomes reachable — a derived obstruction or a fragment by formula): *OC dies within radius `√3` about `p`*, p = 0.5.
+- *Registered:* *with (Q) arcs allowed, the survivors of three or more tactic edges at radius `1 + ε` are OC, the Reuleaux bowtie family (N4, N5, NB5: dead at `√3`),
+  and pinwheels whose ring carries (Q) arcs*, p = 0.4 (the alternative: new (Q)-ring members of `++−`, `−++` or `+++`).
+
+## Stage 2 — SAVED
