@@ -609,3 +609,158 @@ together once `plans/FS112-PA-reading.md` has its extracts (the sides may start 
 read them before their chain walks); NB and YB into N's and Y's slots at their hand-backs, with the owner's instance files.
 
 ## Stage 5 addendum — SAVED
+
+## §R-close — FS-112's close (FS112-C, de Bruijn, Opus 5.5, 2026-09-27; brief `data/fs112/briefs/C112-close-math.md`)
+
+*Worked from `plans/FS112-close-inventory.md` (items 1–63; ticks in `data/fs112/fs112-c/ticks.md`, the owner applies them). Stage 1, the
+reconciliation and round 3's comparison (Kooshi's ruling, item 59: no fresh advisor stage), is `data/fs112/fs112-c/reconciliation.md` (stage 1a,
+ad4b0be1; stage 1b, Y3 against FS112-YB3, when the owner's message comes); stage 2 is `plans/FS112-derivation.md` (53 entries; § B draft
+`data/fs112/fs112-c/ledger-b-draft.md`; `tools/fs71_ledger_b_check.py --strict` PASS on a scratch copy of `LEDGER.md` with the draft appended, 1,000
+theorems; the live checker fails until the front-page job writes the § B lines, 49748392).*
+
+### Stage 3 — SAVED: the re-reads, the scores and the verdict
+
+**3.0 The headline, as round 3 leaves it.** FS-112's question (the plan's title): *"does a tight six-map exist once boundary arcs of radius 1 are
+allowed?"* — **not decided**. A YES would give `χ(ℝ²) ≤ 6` with no MR; a NO would answer `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors
+are needed …?") **yes** for its unit-arc half and close door (A). Neither landed.
+- **The NO side: reduced to one statement about every valid map** [hand; two minds, one blind]: every closed disc of radius 3 of every valid map holds a
+  vertex of at least four colours or a repeated colour (FS112-N3-DENSE3), because row 134's base refutes a valid map near any cubic trichromatic vertex
+  whose closed disc of radius 2 holds neither (FS112-N3-BASE). **It rests on row 134's base at row 134's grade, unre-derived here — S–V Lemma 5, Prop.
+  18, Lemma 6's `< 9` branch and CUSP-BASE — where a common error of both walks would sit** (NB3 §2.3). How the two open steps compose
+  (FS112-C-COMPOSE, one mind, this close): the global step in that form **is** the NO, for every map, with no ray step; for doubly periodic maps it
+  reduces to excluding four-colour vertices within `|K| + 2` of every point, with no ray step; for aperiodic maps that four-colour form needs **(b′)**,
+  the non-periodic stuck ray, **and (b″)**, a uniform bound on finite stuck chains — a third GAP, named here.
+- **The YES side: stalled at a named obstruction** [tools, exact; two rebuilds each, one blind]: both printed positives, rebuilt exactly — the strip
+  (three rebuilds, three checkers) and the disk (two rebuilds, identical, two checkers) — have every unit arc of kind both at a four-colour vertex and
+  stop at the pinned corner (FS112-STOP, two minds, one blind), the second common unit point of a close complementary pair saved by a four-colour vertex
+  at its first; the strip's colourless cone there is `(arcsin ¼, 180° − arcsin ¼)`; the tactic's move shrinks the disk's from 108° to 36° and stalls
+  (FS112-MOVE); φ is attained (FS112-DISC); Y3's attempts to pass either stop fail one ring further out (FS112-Y3-PIN, one mind, YB3 pending).
+- **The sides met at one object**: FS112-N3-COR3 (a valid map has four-colour vertices at **both** common unit points of every close complementary pair
+  of cubic trichromatic vertices) is the positives' stop seen from the proof side; with Y3's count it makes the T2 budget a theorem about every valid map
+  (FS112-C-PARTNERS: at most three such partners, at rhombus completions).
+
+**3.1 §G re-read.** *Paid:* **extraction 1** (the chain walk first; G82, row 134): both walks, one blind, put the first break at NB-4 letter for letter
+in the free window; **extraction 7** (calibration before refusal; G20, G21, row 33): three exact checkers and two positives rebuilt blind — the strip's
+ACCEPT falsified N's pre-round answer by its own named test and fired A2's §3.5 clause, which re-aimed round 2; **extraction 2** (count at the vertex;
+G13, row 4): every NO lemma that lasted is a vertex count (SIX, NB4P, A4SIX, NOBOTH) and the milestone's statement is about vertex types (`F ∪ R`);
+**extraction 9** (the flip; G79, G72): §IQ's per-centre question gave the (Q)/(R2) reduction and, at round 3, the chain's end turned from a wall into an
+anchor (N3-END); **extraction 10** (read at the opening; G46, G49, G50): the reading job P0 read Polymath16 threads 6–9 before the contest — FS-110's
+recorded miss (its §R-close 3.1, X10) not repeated — and its extracts held the pinned corner in dual-graph words (`[16.347]`) and the slack form of
+N3-COR3 (`[17.282]`); **extraction 11** (staffing; G51): the divergences of truth came from verifiers (NB #4 in round 1, YB2 D1 in round 2); **G82's
+*Do*** ("look first for the printed regular theorem's own chain"): route B is S–V's Cor. 1 extended once more. *Should have borne and was not used:*
+- **G21's acceptance-test rule, at registration.** E1 (0.9) registered that NB-4 and NB-5 "fail as written with unit arcs, realised by FS-110's own
+  fragments"; the planning advisor (§4.3), A2 (stage 1) and NB (stage 1) read the same truncated four-colour vertex (T2's `w`) as a counterexample to a
+  step that reads a whole unit circle. N caught it with BB, all straight and still four-coloured at a flower of radius 1/10 (A2 §3.2: "the acceptance
+  test … was sufficient-looking and was not the step's condition"). The plan had introduced a reading radius for positives (C-BEYOND) and never applied
+  it to counterexamples. G21's *Do* ("ask first whether the acceptance test is the exact condition") names the move; the registration table is where it
+  should have been asked.
+- **G30's failure mode 6** (a correct instance where a theorem was available): Y3-T2-BUDGET was derived as a design condition ("if saved by T2 at both
+  points") while N3-COR3, fenced from Y3, made its hypothesis a theorem about every valid map; the combination (FS112-C-PARTNERS) was left to the close.
+  The fence was right (independence); the *Do* is for the comparison: read each side's conditional statements against the other side's theorems.
+- **G71, extraction 8** (the index at a bowtie seam with unit arcs, E12): not worked; no bowtie seam with unit arcs was analysed (the disk's (S1) is at
+  one checker). Silent, not falsified.
+*Falsifiable here:* G17 (every seam realised as a tight local fragment) — **met, arc-closed** (T2 and the four-colour vertex on the strip, two minds;
+(S1) on the disk, one checker); G71's "fails only at a swap" — untested.
+
+**3.2 §PA sweep — what the prior-art work taught about the object itself.**
+1. **Sirgedas's dual graph is the reduced object in combinatorial form** (`[16.346]`: "Arrows in the dual graph correspond to curved edges in the tile
+   graph. Each quad in the dual graph “emits” four arrows."; `[16.347]`: the strip "can’t be extended. A triangle can’t be added because all 6 colors are
+   within two “steps” of the new vertex"). The quads that emit four arrows are FS112-N2-RED's (Q) centres; the "two steps" are FS112-N3-COR3's rhombus
+   and the pinned corner. **Promoted** to FS-114's reading section: the dual-graph encoding as a candidate discrete form of the global step, and its
+   vocabulary as a prior-art query.
+2. **"The plane cannot be 6-tiled with a non-Siamese tiling" is FS-114's four-colour form restricted** (`[16.317]`, de Grey, 2020: "Tom Sirgedas got
+   very close to such a proof"). A non-Siamese tiling has no vertex where one colour appears twice, so its `R` is empty, and DENSE3 then puts a
+   four-colour vertex within 3 of every point. **Promoted** to FS-114 as its first prior-art debt (the Google group `hadwiger-nelson-problem`, unheld).
+3. **N3-COR3 has a slack twin in print** (`[17.282]`, de Grey, 2022: "there can definitely be no two TPs that share zero colours and are less than 2
+   apart, since then the points at 1 from both those TPs must use a seventh colour", for tilings avoiding `[1, d]`) — FS-107's complementary junction
+   pair. The tight form, with its four-colour corners, is not in print. **Promoted** to FS-114 (a statement to cite and to extend).
+4. **HOCK runs the opposite way to N2-RED** (`[06.91]` fills arcs of radius below 1 up to 1; N2-RED bends unit arcs off radius 1 unless they are (Q) or
+   (R2)); no held exact object has an arc of radius below 1 between two tiles, so C-HOCK has no instance. **Declined** as a stub (no object to test on);
+   kept as one line in FS-114's reading section.
+5. **The positives' lineage** (the strip is Pritikin's design in the threads, never cited to Axenovich; the disk is Gibbs's with de Grey's symmetry and
+   Parts's radius): bibliography facts, no grokking.
+
+**3.3 §IQ re-read, G72's count and G79's record.** §IQ's structural form ("for every tight six-map … and every boundary arc of radius 1 in it, what
+must hold at the arc's centre?") was answered in each of its three candidate parts: (a) the centre's wedge profile — FS112-U1 (C-UA-WEDGE corrected);
+(b) the four-colour vertex's arc budget — FS112-A4SIX and FS112-NB4P, and, up to reduction, **every unit arc is centred at a vertex of at least four
+colours carrying both its side colours, or is (R2)** (FS112-N2-RED, NOBOTH); (c) propagation — the chains' monotone quantity survives (N3-CHAINS) but
+its application fails at a chain's end (N2-RAY), and the end forces a further both-kind unit arc two steps beyond (N3-END): candidate (c)'s "each unit
+arc forces a further unit arc" holds at chain ends in that form. The milestone's statement (DENSE3) is candidate (b)'s invariant carried to every
+point, through row 134's base extended (a known tool). **G72's count: nineteenth, FS-112 — mixed, counted through**: the reduction and DENSE3's
+content answer §IQ's per-centre question; the global statement extends a known tool. (Correction owed: `CLAUDE.md` G72 still reads "fourteen of
+seventeen … the latest, FS-107"; with FS-110's eighteenth, counted through, and FS-112's, the count is **sixteen of nineteen**.) **G79's record:**
+example invariants made every result that lasted — U1 (what every unit-arc centre carries), NB4P (what every four-colour vertex carries), N2-RED
+(what every unit arc carries after reduction), NOBOTH, COR3 (what every close complementary pair carries), DENSE3 (what every valid map carries); the
+walls are counterexample invariants — the stuck ray (what a counterexample to N4-CONE must carry: arcs of every radius `≥ k + 1`, N3-RAYR), Y3-END-NEEDS
+(what a terminal chain end must carry: a seventh colour), the pinned corner (what an extension past a stop must change), BUDGET2. **Two flips**: the
+chain's end, asked as "what does every end carry" (N3-END), and the pinned corner, a wall for the YES, read as what every valid map carries at both
+corners (C-PARTNERS). No breakthrough of the second kind.
+
+**3.4 Registered expectations, scored** (plan §5.3; E-numbers the planner's).
+
+| # | p | outcome |
+|---|---|---|
+| E1 NB-4, NB-5 fail as written, realised by FS-110's fragments | 0.9 | **half met**: they fail as written (two minds, one blind), realised exactly by the strip (`P_1`; `(W, W′)`), **not** by FS-110's fragments, which are below NB-4's reading radius |
+| E2 W-MERGE, N3-CONF survive (0.6); the N4 chain off centres (0.5) | 0.6/0.5 | **met**: W-MERGE and N3-CONF hold as written (three minds); the N4 chain's exceptions all sit at unit arcs centred at `v`, `N`, `S′` |
+| E3 the first N4 break at curvature `±1` | 0.5 | **met**: FLANK at `κ = ±1` (two minds) |
+| E4 the first unclosed step at a four-colour unit-arc centre | 0.5 | **met**: N2-RED lands on (Q) centres; DENSE3 makes four-colour and repeated-colour vertices the whole question |
+| E5 a YES by formula, in its stated population | 0.03 | **not met**: no global candidate; the design condition derived (T2 budget), which the strip's colouring violates |
+| E6 the dial (a record over print) | 0.2 | **not met**: a stall at the printed values with the obstruction named (MOVE, STOP; Y3-PIN one ring further out) |
+| E7 the strip rebuilt and accepted (0.85); it carries out-contacts (0.6) | 0.85; 0.6 | **both met**: three rebuilds, three checkers; every arc of kind both |
+| E8 C-SEAMS-TWO TRUE | 0.7 | **not met as stated**: MISSTATED; NB's correction keeps two species, N's corollary one species up to N2-RED |
+| E9 ARC-INERT TRUE off isolated contact points, GAP at them | 0.6 | **met, sharper**: no exceptional interior points; the end-vertex GAP closed (N2-TOWARD) |
+| E10 a closed cycle of unit arcs | 0.35 | **not met**: bi-infinite periodic chains instead (the sibling outcome) |
+| E11 every seam realised arc-closed | 0.6 | **met**: T2, the four-colour vertex (strip, two minds), (S1) (disk, one checker) |
+| E12 G71 survives the bowtie seam with unit arcs | 0.75 | **untested** |
+| E13 C-HOCK | 0.6 | **untestable on held objects** (no arc of radius below 1 between two tiles); declined as mis-aimed |
+| E14 a NO at one mind within P1 | 0.3 | **not met**: a reduction |
+| E15 a named obstruction or GAP as the product | 0.85 | **met**: the global step, (b′), (b″), the pinned corner |
+| E16 a blind verifier finds a divergence of truth | 0.4 | **met** in round 1 (NB #4) and round 2 (YB2 D1, a quantity); round 3: NB3 none of truth; YB3 pending |
+| E17 an explicit `R` for a NO | 0.35 | **not met**: DENSE3's radius 3 is explicit and not a NO; C-LOCAL a GAP |
+
+*Competitors.* **N:** pre-round answer (a four-colour vertex whose whole ring is coloured would not close) **falsified by its own named test** (the
+strip's `P_1`, two checkers); its secondary ((S1)'s arc ends fail) **falsified** (the disk's (S1), one checker); N112-P1 (0.8) **met exactly**; P2 (0.85)
+vacuous in the union sense, **met** in the disjoint sense, its conclusion unconditional; P3 (0.7) **met** (the disk's corners). **N3:** P1 (0.9) **met** for
+every pair whose rhombus lies in the open strip; P2 (0.6) **met** (NB3); P3 (0.8) **untested** (no held (R2) arc); P4 (0.75) **not met** — the strip's
+`(V, A)` pairs are close complementary pairs that are not mirror pairs, their second corner the edge vertex where the strip stops (read as a strip's
+boundary, consistent with N3-COR3); P5 (0.85) **pending** YB3 (Y3's fragments are not terminal at `N`; Y3 derives no terminal completion exists).
+**Y:** pre-round — C-UA-BUDGET branch 2 **met**; C-UA-CHAIN supported (the chain route not taken); "any NO route shaped like N4-PROP/N4-FIN" **met in
+effect at round 2** (the route stops at chain ends, N2-RAY), not through the strip's chain; its falsifier (a REJECT of the strip) did not fire. **Y2:**
+every §5.0 and §6.0 registration met except the plant `move_wrongside` (wrong reason; it revealed Y2-SLACK). **Y3:** two tool expectations
+mis-specified, each caught by its own MISMATCH before any verdict.
+*Advisors.* **FS112-A:** `h-seams-two` met in substance (T2's seam points four-colour, exact), its two-species form MISSTATED; **`h-loc` killed** — the
+stuck ray (N2-RAY) carries N4-CONE's failure along a whole line, arbitrarily far from every unit-arc centre, and N4-TERM's cubic clause imports NB-4
+(A2); `h-arc-cone` killed at N3-DEG, met at W-MERGE; `h-four-colour-crux` (0.6) supported (DENSE3), its falsifier (six resolved arcs at a four-colour
+vertex) not fired; `h-lattice` weakened (the disk's (S1) at ≈ 1.3871, one checker); `h-no-local-kill` (0.6) supported, open — every step derived reads
+radius ≤ 3 and none is a NO; `h-discharging` untested (carried to FS-114); `h-yb3-counter` untested; `h-dial` (0.3) not met; `h-answer-no` (0.85) open;
+`h-arc-inert` met, sharper; `h-nb4-slip` met in effect. **A2:** `a2-cubic-imports-nb4` confirmed; `a2-walks-miss-the-import` killed;
+`a2-base-scope-divergence` confirmed in shape, killed in mechanism; `a2-nb4-three-circles` killed in its `ω(y_k)` part, confirmed in its `ω(v)` part;
+`a2-arc-contact-vertex` confirmed; `a2-arc-ends-bind` killed (A3). **A3:** `a3-base-reads-beyond` **met** (N3-BASE is the NO's step past the strip);
+`a3-t2-dual` confirmed on the strip; `a3-disk-stops-at-a-seam` confirmed (two minds, one blind); `a3-ray-curvatures` (R1) TRUE with its premise moved to
+the terminal map (N3-PER; N3-ALPH otherwise).
+
+**3.5 The verdict, in four parts.**
+- **The choice:** close FS-112 now — the NO reduced to FS112-N3-DENSE3's statement (two minds, one blind), its composition derived (one mind), the YES
+  stalled at the pinned corner — and mint FS-114 (the global step) and FS-115 (the non-periodic stuck ray, with (b″)) at ranks 1–2, as Kooshi ruled
+  (item 59); Y3's grades set at stage 1b when FS112-YB3 reports.
+- **Alternative weighed:** a fourth round aimed at N3-ALPH and Y3-END-NEEDS before closing, so that FS-115's scope is fixed at the close. It buys a
+  narrower FS-115; it costs the night Kooshi has given to the two gaps, and neither item moves FS-114, which the composition shows is decisive alone.
+- **Why this one:** the two gaps need reading and new tools, not another round of the same contest (Kooshi: *"They seem to require more research and
+  careful exploration"*); YB3 changes only Y3's grades, none of which the NO's statement rests on.
+- **Confidence: high** that the reduction holds as graded (every link two minds, one blind; no divergence of truth in round 3); **medium** on the
+  composition's assembly (FS112-C-ENDS rests on N2's exception list for N4-STUCK (iii)–(iv) and on NB's one-mind count at an arc through `N`). It
+  changes if YB3 refutes Y3-END-NEEDS's third level (then horn-bound chain ends stay live inside FS-115; FS-114 unchanged), or if a step of row 134's
+  base is found failing (then N3-BASE's residue opens, and FS-114's statement with it).
+
+**3.6 Would-have-searched-here lines** (one per job, from each record's log): P — fit Fig. 4 for the strip's coordinates (rebuilt from the printed
+rule instead); PA — rebuild the disk or fit the strip from the lost figures (extracted the words instead); N — enumerate vertex figures at each step
+(derived each exception); N2 — scan end-vertex sector orders and the tangent bend's curvature (derived from the contact half-planes, `1 − κ ≪ 1 − 2κ_Y`);
+N3 — a DP over curvature sequences, a vote enumeration, an ANTI scan (the rank count, the VOTES table, a second-order formula); NB — enumerate the orbit's
+inner/outer assignments (derived); NB2 — a numerical lens scan (second-order expansion); NB3 — a local search for a counterexample vertex figure
+(walked every step of the base), a solver on COR3's placements (867 named configurations checked); Y — fit Fig. 4's pixels, scan horn curvatures
+(words; derived exceptions); Y2 — fit Fig. 10's pixels (a transcription by rule, pixel positions used only to recognise skeleton points, disclosed);
+Y3 — scan `M`'s position and the curvatures at `N` (derived choices, named points, the recursion with equality); YB — fit Fig. 4, scan the arc radius,
+sweep points above the edge, enumerate colourings (derived; two named plant values); YB2 — fit Figs. 4 and 10, sample rim points (derived bounds met
+with equality; the exact rim classification); this close — none (the composition derived; the ledger checker run on a scratch copy).
+
+### Stage 3 — SAVED
