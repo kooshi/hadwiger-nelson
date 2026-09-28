@@ -28,6 +28,7 @@ Controls (by formula; ``CLAUDE.md`` G20, row 33; ``data/fs111/claims.md`` §5):
   brick7  half-open 4/5 x 3/5 bricks, row j shifted 2/5 j, colour (i + 3j) mod 7 (``Proofs/HadwigerNelson/Instances/
           Seven.lean``, ``sevenBrick``).  Closed cells here.  Expected: P, T, not S.
   sq9     squares of side 1/2, colour (i mod 3, j mod 3).  Expected: P, T, S -- a saturated colouring (FS111-W-SQ9).
+  hex9    hexagons of circumradius sqrt3/6 (width 1/2), colour (m mod 3, n mod 3).  Expected: P, T, S (FS111-W-HEX9).
 
 Planted faults (``--plant NAME``); each must fail at exactly the named set of assertions, for its own reason (the
 failure message names the tile pair or edge):
@@ -37,6 +38,8 @@ failure message names the tile pair or edge):
   sq9shear  sq9 with row j shifted by j/4                               -> {S} only (horizontal edges uncovered)
   sq9j2     squares of side 1/2 coloured (i mod 3, j mod 2)             -> {P (rows two apart), S}
   sq9free   the free-point test run on sq9's edge midpoint              -> {F} (sq9's midpoint has contacts)
+  hex16     hex9's hexagons coloured by Lambda/4Lambda (gap 3/2, not 1)  -> {T (slack), S}
+  hex9big   hex9's colouring on hexagons of circumradius sqrt3/5 (gap 2*sqrt3/5 - ... != 1) -> {T, S}
 
 Usage:  fs111_w_check.py [--object NAME] [--plant NAME]      exit 0 iff every expectation holds
         fs111_w_check.py --self-test                          controls, plants and stubs; exit 0 iff all behave
@@ -437,6 +440,20 @@ def hex7(a=Fr(1, 2), coeff=3):
                   L1, L2, reach=6)
 
 
+def hex9(a=Q3(0, Fr(1, 6)), period=3):
+    """FS111-W-HEX9: regular hexagons of circumradius sqrt3/6 (width 1/2, diameter 1/sqrt3), coloured by
+    Lambda/3Lambda: (m mod 3, n mod 3).  Same-coloured hexagons lie three steps apart along every lattice direction,
+    so every edge faces a same-coloured parallel edge at distance 3/2 - 1/2 = 1 on its outer side."""
+    a = Q3.of(a)
+    half = a * Fr(1, 2)
+    rt = R3 * a * Fr(1, 2)
+    poly = [(rt, half), (Q3(0), a), (-rt, half), (-rt, -half), (Q3(0), -a), (rt, -half)]
+    L1 = (R3 * a, Q3(0))
+    L2 = (R3 * a * Fr(1, 2), a * Fr(3, 2))
+    return Tiling(f"hex9(a={a}, colour (m mod {period}, n mod {period}))",
+                  [("H", poly, lambda m, n: (m % period, n % period))], L1, L2, reach=3 * period + 2)
+
+
 def brick7(w=Fr(4, 5), h=Fr(3, 5), s=Fr(2, 5), coeff=3):
     poly = [pt(0, 0), pt(w, 0), pt(w, h), pt(0, h)]
     L1 = pt(w, 0)
@@ -479,6 +496,7 @@ OBJECTS = {
     "hex7": (lambda: hex7(), dict(P=True, T=True, S=False, F="edgemid")),
     "brick7": (lambda: brick7(), dict(P=True, T=True, S=False, F=pt(Fr(1, 5), 0))),
     "sq9": (lambda: sqN(Fr(1, 2), 3), dict(P=True, T=True, S=True, F=None)),
+    "hex9": (lambda: hex9(), dict(P=True, T=True, S=True, F=None)),
 }
 
 # plants: (builder, the exact set of assertions that must fail, F spec)
@@ -489,6 +507,8 @@ PLANTS = {
     "sq9shear": (lambda: sq9_sheared(), {"S"}, None),
     "sq9j2": (lambda: sq9_j2(), {"P", "S"}, None),
     "sq9free": (lambda: sqN(Fr(1, 2), 3), {"F"}, "edgemid"),
+    "hex16": (lambda: hex9(a=Q3(0, Fr(1, 6)), period=4), {"T", "S"}, None),
+    "hex9big": (lambda: hex9(a=Q3(0, Fr(1, 5))), {"T", "S"}, None),
 }
 
 
