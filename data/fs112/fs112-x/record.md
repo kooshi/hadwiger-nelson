@@ -96,3 +96,30 @@ replacement asserted once). The owner's ranking message arrived during this stag
 - **Left (no draft):** CLAUDE.md's slot rule (§ Building, "RAM is the discriminator") has no pointer to its new instance section; none added.
 - Gates (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; **`bib_audit` exit 0 PASS**
   (exit 1 at launch); `check_architecture` exit 0; `rk_mirror_check` exit 0.
+
+## Stage 5 — SAVED: the ranking (NIGHT-A's §2, on the owner's message) and its mirror; D2
+
+**The owner's message** (received during stage 4): apply `plans/POROS-2026-09-27-night-aim.md` §2 (2abacbfa) verbatim — 1 FS-114, the unit-arc
+question; 2 FS-111; 3 FS-104 (unchanged); 4 FS-115 ("none alone"); FS-112 to the closed list; FS-109 and below one lower; each row's bearing from
+§2's table; FS-111's bearing to carry the one-mind grade of its composition into seven (FS107-MEET; row 133's "the meeting one mind (A2)", checked in
+`LEDGER.md`), and every ungraded "decisive jointly" for FS-111 brought into line. Applied by `data/fs112/fs112-x/apply_stage5.py`.
+- **`CLAUDE.md` § Paths forward:** row 1 FS-114 (name and bearing from §2; question cell C's D5); row 2 FS-111 (bearing from §2; question cell as it
+  stood); row 3 FS-104 unchanged; row 4 FS-115 (bearing from §2; question cell C's D5); old ranks 4–28 → 5–29; FS-75 (old 29) into the group row,
+  labelled 30–66. **`plans/FRONTIER-STUBS.md`:** the same ranks, with C's 4.5 rows for FS-114 (renamed "the unit-arc question" as §2 names it) and
+  FS-115 (rank 4), their bearing cells from §2, FS-111's bearing cell from §2 (C's re-aim of it superseded); old ranks 4–65 → 5–66; a paragraph at the
+  head of "Ranked stubs" (C's 4.5 draft rewritten to the ruling: ranks 1, 2, 3, 4 and the one-mind grade); FS-112 heads the closed list (C's text).
+- **One change to §2's FS-111 sentence:** "until card 1 is answered" → "until its first question (`plans/POROS-2026-09-27-night-aim.md` §3, card 1) is
+  answered" — the owner's words, and an address, since "card 1" names nothing on the front page.
+- **FS-104:** its row kept unchanged in both files (the message's "(unchanged)"); §2's table gives it a different bearing sentence ("given MR,
+  `χ(ℝ²) ≥ 6`: a new lower bound, independent of the map line") against the current "decisive: given MR it is rung D (row 128) …" — held for the owner.
+- **"Decisive jointly" for FS-111:** none is left in `CLAUDE.md` or `plans/FRONTIER-STUBS.md`. The programme line in § The aim ("**FS-111, the cone
+  scale** — the same at unbounded complexity") and item 31 ("Past it, whether junctions keep a cone scale") make no joint claim, so neither changed.
+  `plans/STUB-reg-scale.md` l. 40 ("Decisive jointly with (A) — …") is outside my touch list: **left**.
+- **D2 (Open milestones), both files:** C's first sentence as drafted; its "Next:" rewritten to NIGHT-A's §1 decision and inventory items 73, 75
+  (FS-114 then FS-111, beside BASE-V; FS-115 waits for FS-114's plan), since C's "Kooshi, 2026-09-27: the night on both" is superseded by the ruling.
+- **`tools/claude_md_fact_audit.py`:** ALLOW "30–65" — the group label, now 30–66 (the 30–62 precedent; C forecast this one).
+- **Bytes: 298,118 → 298,745** (launch 296,992; under 300,000, so no budget move was needed).
+- **Name, held for the owner:** §2 names FS-114 "the unit-arc question"; the stub's title, C's D3 programme line ("**FS-114, the global step**"), the
+  closed-list entry, `CLOSED-QUESTIONS.md` and `BIBLIOGRAPHY.md` say "the global step" (FS-114 unnamed in the last two). No draft renames them.
+- Gates (exit status read directly): fact audit `--base e08a33f6` exit 0 PASS; `--dupes` 10; `--strict` exit 0 PASS; `bib_audit` exit 0 PASS;
+  `check_architecture` exit 0 PASS; `rk_mirror_check` exit 0 PASS (66 ranked stubs; single rows 29; group 30–66).
