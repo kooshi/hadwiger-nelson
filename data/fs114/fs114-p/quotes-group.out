@@ -1,0 +1,40 @@
+FOUND   CLAUDE.md | My goal is to fully solve, and then verify in Lean, HN. Then we publish.
+FOUND   plans/FS112-close-inventory.md | When round 3 finishes, let's close this milestone, and point two milestones at the two gaps, so we c
+FOUND   plans/FS112-close-inventory.md | Even decompressed, this is a bit beyond me, […]. I'll defer to a Poros agent.
+FOUND   plans/STUB-global-step.md | can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every po
+FOUND   plans/STUB-global-step.md | Choosing the form is the milestone's first decision.
+FOUND   plans/POROS-2026-09-27-night-aim.md | Is the unit-arc NO local — an explicit radius past which no valid fragment survives around a four-co
+FOUND   plans/POROS-2026-09-27-night-aim.md | an explicit radius R with a derived exclusion of every valid fragment on the disc of radius R about 
+FOUND   data/fs112/fs112-pa/extracts.md | that the plane cannot be 6-tlled
+FOUND   plans/FS112-close-inventory.md | that the plane cannot be 6-tlled [sic] with a non-Siamese tiling
+FOUND   CLAUDE.md | search for a finite graph is out.
+FOUND   plans/FS112-close-inventory.md | FS-114's one name: "the unit-arc question"
+FOUND   plans/FS112-close-inventory.md | with "the global step" kept as the name of its central statement
+FOUND   plans/POROS-2026-09-27-night-aim.md | A local exclusion about **one** four-colour vertex would be the whole NO, with no ray step and no de
+FOUND   plans/POROS-2026-09-27-night-aim.md | hunch: global — G17's top-rung pattern, and the strip forces any obstruction to read two dimensions
+FOUND   CLAUDE.md | From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. 
+FOUND   CLAUDE.md | to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problem
+FOUND   CLAUDE.md | A proven theorem about why its impossible is also valid. All novel knowledge is a success
+FOUND   plans/CONSOLIDATION-2026-09-27.md | It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth t
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | each quad in the graph "emits" an arrow for each of its degree-5 vertices. I think I can show that a
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | so 200% of the edges are curved, so a 5-coloring is impossible.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | Unfortunately, the fact that tile-based colourings need 6 colours was already known :-)
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | a proof that we need 7 colours unless there are Siamese tiles would still be a really big result.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | 1. no vertex can have the same color neighbor
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | 2. no polygon can have two vertices with matching colors
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | So, a valid tiling can't have an enclosed vertex with 3 neighbors.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | So, I think all the big pieces are in place for a proof. I'm not sure how to make it convincing that
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | Oh no... in thinking about how to more rigorously explain the basics of the searcher, I realized a p
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | My goal for this searcher was to prove that there's no 6-color non-siamese tiling
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | The main goal is to try get an exhaustive search to decide that there's no infinite 6-color tiling.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | One interesting thing to note is that all the interior vertices have degree 5. Degree 6 isn't possib
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Cover rule: For a degree-5 6-colored graph, every vertex must "cover" each color. (e.g. each vertex 
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red blocks
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Also this graph can't have pentagons.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Similarly the metagraph can't have a quadrilateral. (Well, I'm pretty certain, but the proof below i
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | So, the red metagraph must have only triangles.
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | 1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges).
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Not much progress, even for the degree-5 graphs, but I feel like proving it impossible should be wit
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt | Note that the emitted curved edges must all be unique (the curve lies on a unit radius circle center
+FOUND   /home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt | Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I think it creates 
+quotations: 39 missing: 0

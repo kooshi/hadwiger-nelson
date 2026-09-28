@@ -171,3 +171,25 @@ does not restate them, with its §11 corrections applied.*
 
 Any value of `χ(ℝ²)`; unbounded complexity in FS-107's sense (FS-111); boundaries other than segments and circular arcs; FS-115's (b′), (b″) and
 bowtie end (c) as questions of their own; C-HOCK (FS-112: no instance); `[Kainen1992]`'s robustness conjecture; C-VOID (FS-109).
+
+## 8. Added at the plan's stage 5b, after the Google group was fetched (2026-09-27; `plans/FS114-unit-arc-question.md` stage 5b)
+
+*Sources: `~/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt` ("Graph Coloring by Simulation") and `…/Z50mmulkXCQ.txt` ("6-coloring a
+degree 5 graph"); quotations checked, `data/fs114/fs114-p/quotes-group.out`. In Sirgedas's words a "vertex" is a tile, its "degree" the number of tiles
+sharing an edge with it, and a "polygon" or "quad" a map vertex where that many tiles meet.*
+
+- **C114-EDGE-RAINBOW** *(this list)*: in a valid map, two faces of one colour that each share a boundary arc of positive length with a face `x` (either may
+  be `x`) are Siamese. Its non-Siamese reading is Sirgedas's (`Z50mmulkXCQ`, 2020-09-12, verbatim): "Degree 6 isn't possible with only 6 colors."
+- **C114-DUAL-COUNT** (Sirgedas, `Z50mmulkXCQ`, 2022-05-01, verbatim): "1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges)." *(this list)*
+  Stated for a doubly periodic valid map with no Siamese pair in which every tile has five edge-neighbours: decide it; then say what replaces it when
+  tiles with four edge-neighbours occur (Sirgedas, `J_Tw1_hUxQI`, 2020-01-21, verbatim: "Allowing a degree-4 vertex can prevent curved edges adjacent to
+  that vertex, but I think it creates another quad/pentagon.") and when Siamese pairs occur.
+- **C114-REDBLOCK** (Sirgedas, `Z50mmulkXCQ`, 2021-06-27, verbatim): "Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red
+  blocks"; "Also this graph can't have pentagons."; "Similarly the metagraph can't have a quadrilateral. (Well, I'm pretty certain, but the proof below is a
+  bit sloppy(?))."; "So, the red metagraph must have only triangles." *(this list)* Each for valid maps with no Siamese pair and five edge-neighbours per
+  tile: TRUE, FALSE or GAP, by derivation.
+- **C114-ENCLOSED3** (Sirgedas, `J_Tw1_hUxQI`, 2020-03-08, verbatim, **a finding of a search later found flawed**): "So, a valid tiling can't have an
+  enclosed vertex with 3 neighbors." *(this list)* Derive or refute by hand, for non-Siamese valid maps; the search is no input.
+- **C114-FIVE-COUNT** (Sirgedas, `J_Tw1_hUxQI`, 2020-01-21, verbatim): "so 200% of the edges are curved, so a 5-coloring is impossible." *(this list)* The
+  positive control of any counting route: it must yield that non-Siamese valid five-colour maps do not exist (a known value, row 132), and name the step
+  where six's room enters.

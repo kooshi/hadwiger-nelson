@@ -604,3 +604,67 @@ Drafted at stage 6 for the owner to launch: `data/fs114/briefs/N114-proof.md`, `
 `NB114-verify-proof.md`, `YB114-verify-construction.md`, and `A114-advisor.md` (optional). R0's brief is the owner's, from BASE-V's report.
 
 ## Stage 5 — SAVED
+
+## Stage 5b — SAVED: §PA addendum — the Google group `hadwiger-nelson-problem`, held tonight
+
+*The owner's message (commit 3d12fbae): Kooshi authorised the fetch; the group is held at `~/source/library/hadwiger-nelson-problem-group/` (README,
+`threads/<id>.txt`, two attachments), outbound links not fetched. This supersedes §PA's "unheld" for the group; every quotation below checked,
+`data/fs114/fs114-p/quotes-group.out`, 39 of 39 FOUND (the group's 21 plus the brief's 18).*
+
+**Reading status, section by section (G50).**
+
+| thread | messages, dates | read |
+|---|---|---|
+| `J_Tw1_hUxQI` "Graph Coloring by Simulation" | 328, 2019-12-14 → 2020-05-21 | **in part**: lines 1–40 (the opening), 589–770 (the first searcher; the curved-edge count; de Grey's Siamese reply), 885–945 (the second searcher and its rules), 4150–4200 (the search's findings), 4455–4545 (the searcher's flaw; its goal); grepped whole for "siamese", "searcher", "exhaustive", "prove that there". About 4,300 lines unread |
+| `Z50mmulkXCQ` "6-coloring a degree 5 graph" | 27, 2020-09-12 → 2023-08-13 | **in full** (every message body; quoted replies skipped; the images the posts describe are not held) |
+| the other nine | Simulator (38), Coloring a sphere (85), 4-coloring infinite strip (8), coloring small disks (1), TileDist (1), Golomb Triangle Coordinates (5), graph coloring with a SAT solver (13), SAT-solving a grid of tiles (18), pentagonal tiling (6) | titles and first lines only |
+| attachments `disk.pdf`, `jaan13.dual` | — | not opened |
+
+**What it says, verbatim.**
+1. **The near-proof was a search, and it broke.** Goal (2020-03-09): "My goal for this searcher was to prove that there's no 6-color non-siamese
+   tiling"; earlier: "The main goal is to try get an exhaustive search to decide that there's no infinite 6-color tiling." Its rules include "1. no vertex
+   can have the same color neighbor" and "2. no polygon can have two vertices with matching colors" (a vertex is a tile, a polygon a map vertex). Its
+   finding (2020-03-08): "So, a valid tiling can't have an enclosed vertex with 3 neighbors." and "So, I think all the big pieces are in place for a
+   proof. I'm not sure how to make it convincing that the code is correct, though." The next day: "Oh no... in thinking about how to more rigorously
+   explain the basics of the searcher, I realized a problem." (a tile-attachment order the search could not reach). Nothing later in the thread's read
+   sections repairs it.
+2. **The count.** Sirgedas, 2020-01-21: "each quad in the graph "emits" an arrow for each of its degree-5 vertices. I think I can show that an infinite
+   6-color graph would have 80+% of its edges curved."; on degree 4: "Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I
+   think it creates another quad/pentagon."; at five colours: "so 200% of the edges are curved, so a 5-coloring is impossible." De Grey, the same day:
+   "Unfortunately, the fact that tile-based colourings need 6 colours was already known :-)" and "a proof that we need 7 colours unless there are
+   Siamese tiles would still be a really big result."
+3. **The derivational program** (`Z50mmulkXCQ`): "One interesting thing to note is that all the interior vertices have degree 5. Degree 6 isn't possible
+   with only 6 colors."; "Note that the emitted curved edges must all be unique (the curve lies on a unit radius circle centered on the emitting
+   vertex)."; the cover rule, "Cover rule: For a degree-5 6-colored graph, every vertex must "cover" each color. (e.g. each vertex must either be red or
+   have a red neighbor). Proof: otherwise there's a duplicate color among those 6 vertices."; red blocks, "Then, a 6-colored 5-regular graph that covers
+   the plane can be partitioned into red blocks"; their metagraph, "Also this graph can't have pentagons." and "Similarly the metagraph can't have a
+   quadrilateral. (Well, I'm pretty certain, but the proof below is a bit sloppy(?))." hence "So, the red metagraph must have only triangles."; the
+   Euler count (2022-05-01), "1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges)."; and his own status (2020-10-16): "Not much
+   progress, even for the degree-5 graphs, but I feel like proving it impossible should be within reach with a clever idea or two."
+
+**The recognition (PA-B): route T is Sirgedas's program.** His "graph" is the tiles' edge-adjacency dual; in a non-Siamese tiling its closed
+neighbourhoods are rainbow ("Degree 6 isn't possible with only 6 colors"), so Euler's formula forces quads — four-colour vertices — among its faces,
+and each quad "emits" unit arcs: at five colours the count over-spends the edges (a counting proof, in a post, that non-Siamese tilings need six); at six
+it leaves room (80% of edges curved when every tile has five neighbours), and the cover rule, the red blocks and the triangular metagraphs were his
+attempts to close it — open when he stopped (2022). FS-112's example invariants are his arrows made theorems (FS112-A4SIX, FS112-NB4P: what a
+four-colour vertex's unit arcs are; FS112-N3-COR3: his "two steps"). What FS-114 would add is (i) proofs in place of posts, (ii) the Siamese pairs his
+program set aside — FS112-N3-DENSE3's `R` — and (iii) the tiles with four edge-neighbours he set aside. Siamese pairs are exactly what separates
+de Grey's non-Siamese target (`[16.317]`) from the whole question.
+
+**What changes in the plan.**
+- **N's stage 1** reads `Z50mmulkXCQ` in full and `J_Tw1_hUxQI`'s sections above, and states route T as Sirgedas's program with its three gaps named;
+  **the five-colour count is route T's positive control**: any six-colour count N builds must reproduce "tile-based colourings need six" in the
+  non-Siamese case (row 132's maps-need-six, here by counting), and say where six's 20% room is spent.
+- **New claims**, `data/fs114/claims.md` §8: C114-EDGE-RAINBOW, C114-DUAL-COUNT, C114-REDBLOCK, C114-ENCLOSED3, C114-FIVE-COUNT.
+- **E14 corrected**: route T reads four-colour vertices too (its quads), so it is not the candidate for G83's killing test that 5.3 suggested; E14's
+  population is unchanged. **New registrations**: E18 — the non-Siamese case (de Grey's `[16.317]`; C114-SIRGEDAS-FORM's NO) decided at one mind within
+  FS-114, p 0.25 (population: N's verdict; both outcomes reachable — a derivation, or a non-Siamese valid map by formula); E19 — Sirgedas's red-block
+  and metagraph statements hold as stated for valid maps with no Siamese pair and five edge-neighbours per tile, p 0.6 (population: N's and NB's
+  verdicts on C114-REDBLOCK; FALSE or MISSTATED reachable by a fragment).
+- **Novelty wording**: the count, the cover rule and the red blocks are Sirgedas's (group posts, 2020–2022, informal); FS-114's results along route T are
+  "proofs not found in print" of statements he stated or aimed at.
+- **D1 stands**; it gains a reason: route T needs no anchor and reads `F` and `R` through the dual, which is GS-D's shape.
+- **The search itself is not reused**: its findings (C114-ENCLOSED3) are statements to derive by hand; the ban and Kooshi's ruling cover our searches,
+  and a finding of a flawed search is no input to a proof.
+
+## Stage 5b — SAVED

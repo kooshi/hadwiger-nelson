@@ -1,0 +1,22 @@
+# FS114-P stage 5b: the Google group quotations: <source>\t<quotation>
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	each quad in the graph "emits" an arrow for each of its degree-5 vertices. I think I can show that an infinite 6-color graph would have 80+% of its edges curved.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	so 200% of the edges are curved, so a 5-coloring is impossible.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	Unfortunately, the fact that tile-based colourings need 6 colours was already known :-)
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	a proof that we need 7 colours unless there are Siamese tiles would still be a really big result.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	1. no vertex can have the same color neighbor
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	2. no polygon can have two vertices with matching colors
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	So, a valid tiling can't have an enclosed vertex with 3 neighbors.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	So, I think all the big pieces are in place for a proof. I'm not sure how to make it convincing that the code is correct, though.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	Oh no... in thinking about how to more rigorously explain the basics of the searcher, I realized a problem.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	My goal for this searcher was to prove that there's no 6-color non-siamese tiling
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	The main goal is to try get an exhaustive search to decide that there's no infinite 6-color tiling.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	One interesting thing to note is that all the interior vertices have degree 5. Degree 6 isn't possible with only 6 colors.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Cover rule: For a degree-5 6-colored graph, every vertex must "cover" each color. (e.g. each vertex must either be red or have a red neighbor). Proof: otherwise there's a duplicate color among those 6 vertices.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Then, a 6-colored 5-regular graph that covers the plane can be partitioned into red blocks
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Also this graph can't have pentagons.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Similarly the metagraph can't have a quadrilateral. (Well, I'm pretty certain, but the proof below is a bit sloppy(?)).
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	So, the red metagraph must have only triangles.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	1 quad "emits" 4 curved edges. This is 2n edges (80% of all edges).
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Not much progress, even for the degree-5 graphs, but I feel like proving it impossible should be within reach with a clever idea or two.
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/Z50mmulkXCQ.txt	Note that the emitted curved edges must all be unique (the curve lies on a unit radius circle centered on the emitting vertex).
+/home/kooshi/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt	Allowing a degree-4 vertex can prevent curved edges adjacent to that vertex, but I think it creates another quad/pentagon.
