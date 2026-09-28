@@ -341,19 +341,20 @@ limit of locally finite ones: local finiteness is not closed under limits** (nei
 gives a regular maximal cover iff `L_τ ⊆ ⋃_{b ≠ j} F_b` a.e.* *Proof.* Each class stays a regular MUA set (M3-MOVE); the union loses at most `L_τ`, and
 loses exactly `L_τ ∖ ⋃_{b≠j} F_b`. ∎ *So the colour count does not enter where the other classes already overlap the up triangles' sides.*
 
-**M3-CASCADE** [hand, one mind]. *Let `(F_b)` be a regular maximal **partition** (pairwise null overlaps; a measurable fall colouring, M2-SELCOMP (d)) and
-`(F′_b)` a maximal cover with `F′_j ⊊ F_j ∪ …` losing a set `R_j = F_j ∖ F′_j` of positive measure. Then some `b ≠ j` has `G_b = F′_b ∖ F_b` of positive
-measure, and every such `b` loses at least `F_b ∩ (int G̃_b + S¹)` — its old material at distance exactly 1 from the density points of what it gains —
-which is of positive measure; and the same holds for every class that gains what `b` lost.* *Proof.* `R_j` is covered by `⋃_{b ≠ j} F′_b` a.e. and by no
-old `F_b` (partition), so some `G_b` is non-null. `F′_b` has null unit pairs, so it contains no positive-measure part of `F_b ∩ (G̃_b + S¹)`; that part is
-non-null because `F_b` is maximal and `G_b ∩ F_b = ∅`: `φ_{F_b} > 0` a.e. on `G_b` (M2-ZERO), i.e. `F_b`-material sits at distance 1 from a.e. point of
-`G_b`. ∎
+**M3-CASCADE** [hand, one mind]. *Let `(F_b)` be a regular maximal **partition** (pairwise null overlaps; a measurable fall colouring, M2-SELCOMP (d))
+and `(F′_b)` a maximal cover in which `R_j = F_j ∖ F′_j` has positive measure. Then some `b ≠ j` gains `G_b = F′_b ∖ F_b` of positive measure, and every
+such `b` loses (a.e.) all of `F_b ∩ {φ_{G_b} > 0}` — its old material at distance exactly 1 from `G_b` in positive circle measure — a set of positive
+measure; the same then holds for every class that gains what `b` lost.* *Proof.* `R_j` is covered a.e. by `⋃_{b ≠ j} F′_b` and by no old `F_b ≠ F_j`
+(partition), so some `G_b` is non-null. Unit-avoidance of `F′_b ⊇ G_b` gives `∫_{F′_b ∩ F_b} φ_{G_b} = 0`, so `F′_b ∩ F_b ⊆ {φ_{G_b} = 0}` a.e.; and
+`F_b ∩ {φ_{G_b} > 0}` is non-null because `F_b` is maximal and `G_b ∩ F_b` is null: `φ_{F_b} > 0` a.e. on `G_b` (M2-ZERO), so the pair measure between
+`G_b` and `F_b` is positive, and by the symmetry `w ↦ −w` it is `∫_{F_b} φ_{G_b}`. ∎
 
-*Reading of the obstruction for the HC move.* In a partition the sliver `L_τ` lies against the up triangle's side, inside class `j`'s exclusive
-territory; the class `b` that takes it must shed its own material at distance 1 from the sliver. The sliver's unit shadow reaches down to the band's top
-(`≈ 1 + g`) — so if `b` is the class that owns the thin layer just above the band, the cascade closes in one step (it sheds exactly the layer that the
-band's thickening takes back, and the exchange is local); if not, it propagates. Whether some partition forces propagation is **not decided here**: I have
-no regular maximal partition with an HC-type class (would-have-searched: a fall colouring of HC_K's complement by `k − 1` classes).
+*Reading of the obstruction for the HC move.* In a partition the sliver `L_τ` lies against the up triangle's side, in class `j`'s exclusive territory.
+The class `b` that takes it must vacate the sliver's exclusion zone `E_{L_τ}` — every point at distance exactly 1 from the sliver in positive circle
+measure — which, the sliver being a thin strip of length about 1 along the side, is essentially `(side + B̄₁) ∖ V_side`: a region of area about 3
+around each side, outside the side's vesica. In particular `b` cannot be the class owning the layer just above the band (that layer lies in
+`E_{L_τ}`), nor any class with material beside the side's ends. Whether some partition forces the cascade to propagate without end is **not decided
+here**: I have no regular maximal partition with an HC-type class (would-have-searched: a fall colouring of HC_K's complement by `k − 1` classes).
 
 **Where the colour count enters** [reading, one mind]. A spare class could take `L_τ` whole: `L_τ` is a union of thin strips along the up sides, each of
 length 1 thinning to 0 at its ends (a unit-free set, by §2.3's band step), laid out on three families of parallel lines. A maximal unit-avoiding set
@@ -378,7 +379,7 @@ may pinch again. **So zooming-out is row 131's stability move, not an exact smoo
 | existence reading, `k = 5` | equivalent to "no regular maximal five-cover" (with REDUCE-C, AE-MAP6); with MUA-REG₅, to `χ_m⁰ ≥ 6` — not a smaller statement | [derived], one mind |
 | **one class, HC type** | **TRUE**: every HC-type pinch is removed by an arbitrarily small move of the class alone (M3-MOVE) | [hand + tools exact], one mind |
 | **MUA-FIN-L, in a cover** | the HC move keeps the cover maximal iff the lost sliver is covered by the other classes (M3-COVER); the colour count does not enter there | [hand], one mind |
-| **MUA-FIN-L, in a partition** | **GAP**: the named obstruction is the cascade (M3-CASCADE) — the absorbing class sheds its material at distance 1 from the sliver; closes in one step iff that class owns the layer above the band; no partition with an HC-type class is exhibited | [hand], one mind |
+| **MUA-FIN-L, in a partition** | **GAP**: the named obstruction is the cascade (M3-CASCADE) — the absorbing class must vacate the sliver's exclusion zone (area about 3 per side, outside the side's vesica), and every class that takes what it sheds must do the same; no partition with an HC-type class is exhibited, so whether the cascade can close is open | [hand], one mind |
 | spare colour | a reading: three spare classes (HC translates) would absorb the slivers — **not constructed** | [reading], one mind |
 
 *Inhabitant at `k = 7`:* the existence form is inhabited by R7 and DISC7 (already locally finite); **no maximal seven-cover with a pinched class is
