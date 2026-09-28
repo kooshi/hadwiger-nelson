@@ -159,8 +159,230 @@ FS-112's composition, **R0** BASE-V's repair if a step fails, **A** a competitio
 | G83 four-colour vertices | **falsifiable here** | the milestone's own entry: the theorems hold unless row 134's base fails (BASE-V); its reading's killing test is "FS-114 decided by an argument that reads no such vertex". → N: every route says which vertices of `F ∪ R` it reads; the close scores the reading; Y follows its *Do* (list `F`, `R`; read both rhombus corners of every close complementary pair) |
 | G51 competitor and advisor | **bears** | at FS-112 every truth divergence came from a blind verifier and the sides met twice without contact. → staffing (stage 5): a proof side against a construction side, a blind verifier per side, retractions counted |
 
-**Tally of part 1:** 83 entries — bears 25 (G13, G15, G20, G21, G22, G24, G29, G30, G46, G49, G50, G60, G67, G68, G71, G72, G79, G82, G51, and the
-falsifiable G17, G83 also bear), silent 58, falsifiable here 2 (G17, G83; with E12 under G71). Drawn from a *Do* line: G13, G15, G20, G21, G22, G29 (its
+**Tally of part 1** (corrected at stage 2b; the saved count read 25 and 58): 83 entries — bears 19 (G13, G15, G20, G21, G22, G24, G29, G30, G46, G49,
+G50, G60, G67, G68, G71, G72, G79, G82, G51), falsifiable here 2 (G17, G83, both also bearing; with E12 under G71), silent 62. Drawn from a *Do* line: G13, G15, G20, G21, G22, G29 (its
 comparison clause, in the body), G46, G49, G50, G60, G67, G68 (its body's periodic principle, not its *Do*), G71 (body), G79, G82 (*Do* and body), G83.
 
 ## Stage 2a — SAVED
+
+## Stage 2b — SAVED: §G part 2 (the rows; the method rules) and part 3 (the extraction)
+
+### §G part 2a — `LEDGER.md` rows (rows 131–136 in full; rows 1–130 by headline and mechanism; (F) as in part 1)
+
+- r1 silent — a graph on two circles (F)
+- r2 silent (F)
+- r3 silent (F)
+- r4 **bears** — fan ⟺ coverage: the count at a centre (G13) → N
+- r5 silent (F)
+- r6 silent — the 120° identity: elementary geometry, nothing here
+- r7 silent — greedy colouring
+- r8 silent — de Grey's balance (F)
+- r9 silent (F)
+- r10 silent (F)
+- r11 silent — the "strip automaton" is a graph tube, not a geometric strip
+- r12 silent (F)
+- r13 silent (F)
+- r14 silent (F)
+- r15 silent (F)
+- r16 silent (F)
+- r17 silent — two circles meet in {point, mirror}: elementary geometry the local lemmas use, nothing more
+- r18 silent (F)
+- r19 silent (F)
+- r20 silent (F)
+- r21 silent (F)
+- r22 silent (F)
+- r23 silent (F)
+- r24 silent (F)
+- r25 silent (F)
+- r26 silent (F)
+- r27 silent (F)
+- r28 silent (F)
+- r29 silent (F)
+- r30 silent (F)
+- r31 silent (F)
+- r32 silent — the hex-shell pigeonhole in the `{1, √3, 2}` distance graph (F)
+- r33 **bears** — the classical interval's brick colouring is CAL-7, the tight seven-colour control (G20) → Y, YB
+- r34 silent — coset colourings; the polygonal floor is carried by G22
+- r35 silent — cell family
+- r36 silent — cell family
+- r37 silent — cell family
+- r38 silent — cell family (its pigeonhole × kill is G15's)
+- r39 silent — cell family
+- r40 **bears** — `[Voronov2023]` Thm 1.3 verified at FS-106: closed classes need seven on a disc of radius 3 — card 2's local precedent (G29) → N
+- r41 **bears** — the limit lemma: bounded families in one compact region; compactness in the kernel, the graph-side ancestor of C-COMPACT (G82) → N stage 1; a kernel note for the close
+- r42 silent (F)
+- r43 silent (F)
+- r44 silent (F)
+- r45 silent (F)
+- r46 silent (F)
+- r47 silent (F)
+- r48 silent (F)
+- r49 silent (F)
+- r50 silent (F)
+- r51 silent (F)
+- r52 silent (F)
+- r53 silent (F)
+- r54 silent (F)
+- r55 silent (F)
+- r56 silent (F)
+- r57 silent (F)
+- r58 silent (F) — minimal gadgets in a host graph
+- r59 silent (F)
+- r60 silent (F)
+- r61 silent (F)
+- r62 silent (F)
+- r63 silent (F)
+- r64 silent (F)
+- r65 silent (F)
+- r66 silent (F) — the fan gap frees pairs on graphs; its map shadow is the colourless cone, used under G13
+- r67 silent (F)
+- r68 silent (F)
+- r69 silent (F)
+- r70 silent (F)
+- r71 silent (F)
+- r72 silent (F)
+- r73 silent (F)
+- r74 silent (F)
+- r75 silent (F)
+- r76 silent (F)
+- r77 silent — the theorem audit's method is WORKFLOW's step 9, followed at the close
+- r78 silent (F)
+- r79 silent (F)
+- r80 silent (F)
+- r81 silent (F)
+- r82 silent (F)
+- r83 silent (F)
+- r84 silent (F)
+- r85 silent (F)
+- r86 silent (F)
+- r87 silent (F)
+- r88 silent (F)
+- r89 silent (F)
+- r90 silent (F)
+- r91 silent (F)
+- r92 silent (F)
+- r93 silent (F)
+- r94 silent (F)
+- r95 silent (F)
+- r96 silent (F)
+- r97 silent (F)
+- r98 silent (F)
+- r99 silent (F)
+- r100 silent (F)
+- r101 silent (F)
+- r102 silent (F)
+- r103 silent (F)
+- r104 silent (F)
+- r105 silent (F)
+- r106 silent (F)
+- r107 silent (F)
+- r108 silent (F)
+- r109 silent (F)
+- r110 silent (F)
+- r111 silent (F)
+- r112 silent (F)
+- r113 silent (F)
+- r114 silent (F)
+- r115 silent (F)
+- r116 silent (F)
+- r117 silent (F)
+- r118 silent (F)
+- r119 silent (F)
+- r120 silent (F)
+- r121 silent (F)
+- r122 silent (F)
+- r123 silent (F)
+- r124 silent (F)
+- r125 silent (F)
+- r126 silent (F)
+- r127 silent (F)
+- r128 **bears** (bearing only) — given MR the plane's number is a field's: a NO reaches `χ(ℝ²) = 7` only through rows 128 and 131 and FS-111's door
+- r129 **bears** — row 123's five is one class at a time, capped at `⌈1/α⌉ ≤ 5` (G60) → failure clause
+- r130 **bears** (bearing only) — `χ_CP = χ_m⁰`: a YES gives `χ(ℝ²) ≤ 6` with no MR (link 2)
+- r131 **bears** — the stability equivalence and its two proof no-gos (hole counts capped at `O(ε)`; trichromatic points invisible to partial colourings): they bind arguments on near-colourings; FS-114's NO is on full, tight maps (W-EQ-K moved the question there), so a count at vertices is not capped by them → N states which side of W-EQ-K it works on
+- r132 **bears** — hole-filling fails exactly at bichromatic vertices of degree ≥ 4; the index fails at a unit-arc interface facing a bowtie; maps need six (Woodall; Townsend); S–V Question 2 is the question → N (the printed tools and where they stop), §PA
+- r133 **bears** — W-EQ-K: at complexity `K`, vanishing-hole designs ⟺ a valid map of complexity `≤ K`; so FS-114 decides Q-full_K for each `K` and must cover aperiodic limit maps; W-TAN (complementary vertices within 2 are tangent pairs or bowties) → claim list (Q-full, Q-full_K), N
+- r134 **bears** — the Condition-5 NO: a local base (radius 2 about a cubic trichromatic vertex) plus moves plus one non-local step, the cone's bi-infinite chain along a line (N4-FIN) — the only non-local step held; its base's print steps are BASE-V's → N (card 2), R0
+- r135 **bears** — the milestone's statement and its inputs: DENSE3, N3-BASE, N2-RED, NOBOTH, COR3, C-ENDS, C-COMPOSE → every phase; CV second-minds C-ENDS, C-COMPOSE, C-PARTNERS
+- r136 **bears** — the controls and card 2's lower bounds: a valid fragment on the disc of radius `H/2 = √15/4 + √3/2 ≈ 1.834` about a four-colour midline vertex (the strip), and on `B̄(A_0, φ)` about a four-colour corner (the disk, attained); the pinned corner is where a second four-colour vertex is needed → N (any explicit `R` exceeds 1.834), Y (the dial)
+
+**Tally of part 2a:** 136 rows — bears 13 (r4, r33, r40, r41, r128–r136), silent 123.
+
+### §G part 2b — the method rules (`CLAUDE.md` § The standard of evidence, § What compute helps, § The shape of the proof, § Trust ledger, § Toolchain, § Building, § Searching, § The gate, § Make the gate fail; § Delegation; § Counter-priors)
+
+| rule | verdict | reason → phase |
+|---|---|---|
+| no native evaluation in the headline | silent | nothing here is kernel-evaluated |
+| the artifact is the certificate plus the checker | **bears** | a YES is a map by formula plus an exact checker a reviewer re-runs → Y, YB |
+| the witness must be re-derivable | **bears** | every candidate stated as a construction rule, not coordinates → Y |
+| read the final statement aloud | **bears** | the claim list's NO is read against S–V Question 2's and `[Polymath2021]` p. 199's words → claim list, close |
+| report the hunt honestly | **bears** | every failed candidate family recorded with its image → Y |
+| write the certificate for the reviewer early | **bears** | Y writes, at design time, what a reviewer must check of a candidate; N writes, for each lemma, what a verifier must re-derive → Y, N |
+| order verification by marginal value | **bears** | checkers run the decisive pair first → Y, YB |
+| what compute helps; kernel pricing | silent | no kernel work planned in the contest (the Lean lane is a decision of stage 5) |
+| the shape of the proof (rung B) | silent | rung B |
+| trust ledger | silent | no Lean in the contest; the close's kernel decisions ("stub — with FS-114" on 40 of FS-112's entries) are named at stage 5 |
+| the ban and Kooshi's ruling beyond it | **bears** | candidates by formula, checked exactly in seconds; no search for maps, colourings or configurations → every brief's "would have searched here" log |
+| `scripts/slot.py`; RAM the discriminator | **bears** | any exact check above 2 GiB or 2 minutes → every tool-running job |
+| Python 3.14 `forkserver` | **bears** | any multiprocessing checker passes a `fork` context → Y, YB |
+| symmetry-break before SAT; pysat interrupts | silent | no solver |
+| build through `scripts/build.sh` only | silent | no Lean in the contest (stage 5's Lean-lane decision cites it) |
+| halt on any unexplained crash | **bears** | every brief |
+| the checkpoint rule (PROTECTED) | **bears** | every job saves stage by stage; any exact run over 15 minutes checkpoints, its resume command written in its record → every brief |
+| a run that blocks something is killable | **bears** | the owner's rule for BASE-V's and FS-111's jobs against FS-114's phases; no job here should run long |
+| kill by PID; verify a kill by effect | **bears** | every brief |
+| a pipe can kill the producer | **bears** | exit statuses read directly → every brief |
+| never edit a running script | **bears** | tools run from their committed form |
+| searching: `ugrep`, `rg -uu`, `exact?` | **bears** (the first two) | §PA's greps use `grep -F` or `rg`; completeness questions `rg -uu` |
+| the gate: vacuity | **bears** | every statement about valid maps quantifies over a possibly empty class; the claim list says so; a Lean statement of the NO would carry `VACUITY DECLARED` or an inhabitant — the NO's domain is empty exactly when it is true |
+| every structure-hypothesis ships an inhabitant | **bears** | each local lemma about fragments names a held fragment it applies to (the strip, the disk, BOWTIE) → N, NB |
+| negative controls, planted faults | **bears** | every checker plants a fault that fires for its own reason, beside a faithful twin → Y, YB |
+| both outcomes reachable | **bears** | every registration of stage 5 |
+| a one-sided filter's applicability | **bears** | a local exclusion is one-sided: "does not apply" is not "excluded" → N, NB |
+| the generator's image and a parameter count | **bears** | Y's families |
+| an exact tile checker's ACCEPT is the suspect verdict | **bears** | every ACCEPT prints pairs examined against pairs the map has → Y, YB |
+| a caveat written and stepped over | **bears** | the form's grade (one mind over C-ENDS, with a residue) travels into every summary → report, claim list |
+| a true explanation stops the search | **bears** | a candidate failing one gate is checked against all before use as a test case → Y |
+| delegation one level deep | **bears** | every brief, with its reason |
+| the crunch | silent | not a crunch |
+| Counter-priors rules 1–4 | **bears** | rank the routes by bearing; registered `p` never caps; "say what it would take and start"; the standard of evidence does not move → stage 5 |
+
+### §G part 3 — the extraction (each *bears* as an instruction to a phase; carried into stage 5's phase table and the briefs)
+
+1. **Card 2 first, reframed by compactness** (G17, G29, G82; r40, r41, r134, r136) → **N stage 1**: before any route, decide the claim C-COMPACT (at each
+   complexity bound `K`, Q-full_K's NO holds iff some radius `R(K)` admits no valid `K`-fragment on a disc; a reading of the planner's, not derived);
+   then card 2 is about an **explicit** radius, uniform in `K` (a local NO, which would reach Q-full too, row 134's chain using no bound), against a
+   count whose contradiction appears only at a scale set by the map. Every step states its reading radius; any explicit `R` exceeds `H/2 ≈ 1.834`.
+2. **The G15 architecture** (G13, G15; r4) → **N**: the global route is "an unavoidable set by a count × each member excluded locally"; DENSE3 is
+   already an unavoidability statement with unavoidable set `F ∪ R`; each local lemma is a coverage count at a centre (the vertex, its (Q) arcs'
+   ends, the rhombus completions).
+3. **Voronov's radius 3** (G29, r40) → **N stage 1**: name the step of `[Voronov2023]` Thm 1.3 that closedness buys, and whether a map with unit arcs,
+   read almost everywhere, can replace it — the one printed explicit-radius NO in the neighbourhood.
+4. **The torus first** (G68) → **N**: any count runs on a doubly periodic valid map, a map on a torus (`V − E + F = 0` exactly, FS112-N3-PER), before
+   the aperiodic case (Følner averaging over a plane of quadratic growth); **Y**: every periodic candidate is a finite torus map checked exactly.
+5. **Swaps** (G71, r132) → **N**: a winding or index route says what it does at a unit-arc interface facing a bowtie; E12 stays falsifiable with
+   FS112-BOWTIE's seam as its test object.
+6. **No one class at a time** (G24, G60; r129) → failure clause in every brief; a charge per tile of one colour is such a reduction.
+7. **Calibration** (G20, G21; r33; the gate rules) → **Y, YB**: checkers accept the brick, the hexagonal seven-colouring, the strip and the disk before
+   any refusal is believed; planted faults with faithful twins; every ACCEPT prints pairs examined.
+8. **What a YES must carry** (G22, G79; r136) → **Y**: unit arcs, (Q)/(R2) only (FS112-N2-RED), the T2 budget (FS112-C-PARTNERS: a cubic trichromatic
+   vertex has at most three close complementary partners, at rhombus completions); the pentagon-skeleton design test (the stub's open item 3) first;
+   every stop read as a NO lemma before designing past it.
+9. **Read at the opening** (G46, G49, G50) → **N, Y stage 1**: the held sections §PA names (stage 3), in the words of their disciplines.
+10. **The base** (r134; BASE-V) → **R0**, conditional: if BASE-V reports a failing step, the repair is the first phase and row 134 and every FS-112
+    row resting on N3-BASE are regraded before N builds on them.
+11. **Which vertices** (G83) → **N**: every route says which vertices of `F ∪ R` it reads; the close scores G83's reading.
+12. **Scope** (r131, r133) → **N**: every NO says whether it is Q-full_K's (for which `K`) or Q-full's, whether it uses the complexity bound, and on
+    which side of W-EQ-K it works.
+13. **Staffing and counting** (G51) → stage 5: a proof side against a construction side, a blind verifier per side, CV on the composition,
+    retractions counted.
+14. **Registrations** (G21; the gate rules) → stage 5: each names its population, whether its test is the step's exact condition, and both outcomes'
+    reachability.
+15. **Form** (G67) → **close**: every statement minted ends with its trigger, *Do* and killing test or what it forbids.
+
+**The test of the re-grokking** (WORKFLOW 3.1 item 3). It changes the plan in four places: (i) card 2 is reframed before any route — by compactness
+the local/global dichotomy is not about truth at a fixed `K` but about explicitness and uniformity (extraction 1, from G82's body and r41); (ii) a
+torus-first order for any count (G68's periodic principle, which no stub named); (iii) Voronov's radius-3 disc enters as the one printed local NO to
+test (G29's comparison clause, r40); (iv) a winding route must face the swap (G71 via r132). Each is an instruction in the phase table (stage 5).
+
+## Stage 2b — SAVED
