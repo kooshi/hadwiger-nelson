@@ -33,6 +33,8 @@ never touches itself) unless said otherwise. FS112-L60 is used only in its corre
 | move I would have made by search | what I did instead |
 |---|---|
 | enumerate sign patterns, cone vectors and reach assignments at a degree-4 vertex with three tactic edges | N7-HUB's tips, N7-REACH and N7-TAN by hand, pattern by pattern (§2.2); metric facts checked at named values only |
+| scan (Q)-arc placements and cone parameters per pattern for survivors | N7-QOPP and N7-FLANK's windows in closed form by hand (§3.1–3.2); no scan |
+| build OC as a fragment by formula to see how far it goes | not built (the construction side's kind of object); its forced structure derived (§3.3) |
 
 ## Fence log (standing rule 13; brief § Fences)
 
@@ -254,8 +256,8 @@ fail only when a (Q) arc starts at `y + 60°` or ends at `y − 60°`, or holds 
   with `e_{j+1}` running from `p` to `q_j` (`T_{j+2} ⊂ Reul(p, q_j, q_{j+1})`, N6-P60′'s configuration) and a (Q) arc of `T_{j+2}` starting at `q_j`, whose outer
   tile is the partner `z_j` (N7-QOPP: outer colour `c_j`; one tile per colour at `q_j`) — NB6-QSTART's member, where N6-P60′'s hypothesis on `κ` fails. In R-E2
   derived here: `q_j` carries exactly `R | z_j | T_{j+2} | T_{j+1}` (a four-colour vertex at distance 1 from `p`, `R` the ring tile clockwise of `q_j`, since no (Q)
-  arc of `T_{j+1}` can end at `q_j` when `α_{j+2} < 120°`), and N-E1 at `q_j` forces `κ = Ā` at `e(φ_j − 60°)` (where `ω(q_j)` crosses the ring), so `R`'s stretch
-  of colour `A` stops at a change point `y ∈ (φ_j − 60°, φ_j)`. **Not closed:** both are GAP; the next step in R-E2 is the chain of `y` (N7-CHAIN) against the
+  arc of `T_{j+1}` can end at `q_j` when `α_{j+2} < 120°`), and N-E1 at `q_j` keeps colour `A` off the interior of every tile holding `e(φ_j − 60°)` (where `ω(q_j)` crosses the
+  ring), so `R`'s stretch of colour `A` ends at a change point or (Q) end `y ∈ [φ_j − 60°, φ_j)`. **Not closed:** both are GAP; the next step in R-E2 is the chain of `y` (N7-CHAIN) against the
   (Q) arc of `T_{j+2}` at `y + 60°`.
 
 ### 3.3 OC's forced structure (the survivor of stage 2), toward radius `√3`
