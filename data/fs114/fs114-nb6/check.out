@@ -36,4 +36,11 @@ OK 	BASE	PIN180: r e(181) (r = 1/10) lies outside closed B(q_j, 1)
 OK 	BASE	PIN180: r e(185) (r = 1/10) lies outside closed B(q_j, 1)
 OK 	BASE	QE1: |u - q_j| = 1 and |u - p| = 1 at u = e(phi_j + 60)
 OK 	BASE	QE1: the radii at u meet at 60 degrees (transversal crossing)
-SUMMARY: 38 lines; BASE failures 0; GAP60 failures 0 of 13; plant=off
+OK 	BASE	QOUT: zone at (alpha_{j+1}, alpha_{j+2}) = (90, 90) is [30, 90] (relative to phi_j = 90)
+OK 	BASE	QOUT: zone at (60, 60) is [30, 30] (a point: no (Q) arc with inner T_{j+1})
+OK 	BASE	QOUT: zone at (150, 60) is [60, 90]
+OK 	BASE	QOUT: arc [40, 80] at (90, 90) passes all three tests
+OK 	BASE	QOUT: arc [20, 80] at (90, 90) fails (below the zone)
+OK 	BASE	QOUT: arc [40, 80] at (90, 60) fails (above phi_j + a1 + a2 - 180 = 60)
+OK 	BASE	QE1: at alpha == 90 the zone of T_{j+2} is [120, 180] and holds phi_j + 60 = 150 inside
+SUMMARY: 45 lines; BASE failures 0; GAP60 failures 0 of 13; plant=off

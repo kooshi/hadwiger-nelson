@@ -19,6 +19,12 @@ N-E1, N-E2, N3-FACE, N3-HALF, N3-SEC, N3-FLANK, N3-PAIR, N4-LENS, N5-SIGHT, N5-B
 | **NB6-P60** | In a pinwheel with `α_{j+1} = 60°`, `q_j` a change point and `κ` defined just before `q_j − 60°`: `t_{j+2}` reaches `q_j`, lies in `Reul(p, q_j, q_{j+1})`, alone borders the side from `p` to `q_j`, and `α_{j+2} < 120°` — the kill is the cone `(240°, 300°)` at `q_j`, which no colour can hold unless `t_{j+2}` does | [hand, one mind; tools exact at named points] | §1b.4; `tools/fs114_nb6_check.py` |
 | NB6-ADJ | N6-ADJ: TRUE | [hand, one mind] | §1b.4 |
 | **NB6-NOQ** | N6-NOQ: TRUE at `1 + ε`, by N6-RING60, N3-FLANK and NB6-P60 (N6-PIN180 not needed) | [hand, one mind] | §1b.5 |
+| NB6-QOUT | N6-QOUT: TRUE; with `α_{j+1} = 60°` no (Q) arc ends at `q_j − 60°` from below | [hand, one mind; tools at named cones] | §1c.1 |
+| NB6-P60P | N6-P60′: TRUE (over NB6-P60, NB6-QOUT); the side is all of `e_{j+1}` | [hand, one mind] | §1c.2 |
+| NB6-QE1, -PIN180 | N6-QE1, N6-PIN180: TRUE | [hand, one mind; tools] | §1c.4, 1c.5 |
+| NB6-CENT | N6-CENT: TRUE with its last clause read as `0° < γ < 60°` (literally it also covers `γ = 0°`, which its previous clause allows) | [hand, one mind] | §1c.6 |
+| NB6-COV | N6-COV: first clause GAP as stated — the windows alone let the ring tiles hold the cone about the direction of `p`; TRUE with `κ` defined just beyond both windows; second clause TRUE in the pinwheel | [hand, one mind] | §1c.7 |
+| NB6-PIN | N6-PIN: TRUE as a status | [hand, one mind] | §1c.8 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -177,3 +183,99 @@ are centred at them), so no pinwheel lives there and no step is refuted by them.
 should check first NB6-P60's step 1 (`U3` exists and `U ∩ B(w₀, 1) = ∅`) and step 3 (the colour exhaustion of the cone `(240°, 300°)`).
 
 ## Stage 1b — SAVED
+
+## Stage 1c — SAVED: blind derivations, part 2 (N6-P60′, N6-QOUT, N6-QE1, N6-PIN180, N6-CENT, N6-COV, N6-PIN); the stage-1 table
+
+*Frame and tools as in §1b; tools lines QOUT and QE1 added (`check.out`, 45 of 45 OK; the plant unchanged, 5 unit-gap lines fail, no other).*
+
+### 1c.1 N6-QOUT — TRUE [hand, one mind; tools at named cones]
+
+*Derivation.* A (Q) arc `[a, b]` of the ring has inner colour at `p`, so its inner tile is a `p`-tile (CL-p); call it `T_{j+1}` (the index is the arc's).
+Its closure holds the arc, `p` and `q_j`, so `T_{j+1} ⊂ B̄(e(θ), 1)` for every arc point: (1) `|e(θ) − q_j| ≤ 1`, so `θ ≥ φ_j − 60°`; (2) its cone
+`[θ_j, θ_j + α_{j+1}]` lies in every `{v · e(θ) ≥ 0}`: `b ≤ φ_j` and `a ≥ φ_j − 180° + α_{j+1}`. **Outer colour** `o ∈ P_cl(p) ∖ {c_{j+1}}`; `p`'s `o`-tile is far from the
+outer tile, whose closure holds the arc, so its cone lies in `[b + 90°, a + 270°]` (U1's outer half): `c_j` fails (`t_j`'s cone ends at `θ_j = φ_j + 270°`, beyond
+`a + 270°` since `a < φ_j`); `c_{j+2}` fails (`t_{j+2}`'s cone starts at `θ_{j+1}`, which would need `b ≤ φ_j − 180° + α_{j+1} ≤ a`); so **`o = c_{j+3}`**, and `t_{j+3}`'s
+cone start `θ_{j+2} ≥ b + 90°` gives (3) `b ≤ φ_j + α_{j+1} + α_{j+2} − 180°`. (1)–(3) are the stated zone
+`[φ_j − min(60°, 180° − α_{j+1}), φ_j + min(0, α_{j+1} + α_{j+2} − 180°)]`. ∎ *Reads:* `B̄(p, 1 + ε)`. **Consequence used below:** with `α_{j+1} = α_{j+2} = 60°` the zone
+is a point (no (Q) arc has inner `T_{j+1}`), and **no (Q) arc ends at `q_j − 60°` from below when `α_{j+1} = 60°`** (checked against the zones of `T_j`, `T_{j−1}`,
+`T_{j+1}`, `T_{j+2}`: each lies wholly above or below `q_j − 60°`).
+
+### 1c.2 N6-P60′ — TRUE [hand, one mind; over NB6-P60 and NB6-QOUT]
+
+*Derivation.* `κ` defined on both windows beside `q_j` makes `q_j` a change point: were the two branches one colour, CL would give one tile holding both, whose cone
+(one interval, containing both tangents of the ring at `q_j`) would contain `t_{j+1}`'s cone or `z_j`'s — N3-FLANK's argument, with "holding a branch" read to include
+being the inner tile of an (R2) piece along it. `κ` is defined just before `q_j − 60°` by 1c.1's consequence. NB6-P60 then gives the four clauses: `T_{j+2}`
+reaches `q_j`, lies in `Reul(p, q_j, q_{j+1})`, borders the whole open side from inside, and `α_{j+1} + α_{j+2} < 180°`. **The side is all of `e_{j+1}`:** outside it,
+the region `Λ = B̄(p, 1) ∩ B̄(q_j, 1) ∖ B(q_{j+1}, 1)` holds only `t_{j+1}` and the `Ā`-tile `U′` (an `A`-tile there would be close to both `U` (via `q_j`) and `U3` (via `w₀`),
+two distinct tiles; `c_j`, `c_{j+2}`, `c_{j+3}` excluded by CL-p and the far-from-partner discs); `t_{j+1}` borders the side at both ends, so `U′`, which holds the ring
+near `q_j`, cannot reach the side's middle without crossing `t_{j+1}` or the side. ∎ *Reads:* `B̄(p, 1 + ε)`.
+
+### 1c.3 N6-ADJ — TRUE [hand, one mind] (NB6-ADJ, §1b.4). *Reads:* `p, q_j, q_{j+1}`.
+
+### 1c.4 N6-QE1 — TRUE [hand, one mind]
+
+*Derivation.* By 1c.1 at index `j + 1`, a (Q) arc with inner `T_{j+2}` has outer colour `c_{j+4} = c_j` (the parenthesis is right). `u = e(φ_j + 60°)` is on `ω(q_j)`,
+which crosses the ring at `u` at 60° (tools); if `u` is interior to such an arc, `ω(q_j)` enters its outer tile (colour `c_j`) near `u`, and `q_j` carries `c_j` by `z_j`:
+N-E1 at `q_j`. ∎ The hypothesis `α_{j+1} ∈ (60°, 120°)` is not used by the exclusion; it is where `T_{j+2}`'s zone can hold `u` in its interior. At `α ≡ 90°` that zone
+is `[φ_j + 30°, φ_j + 90°]` (tools), so a full-zone (Q) arc of `T_{j+2}` holds `u` and dies. ✓ *Reads:* `B̄(p, 1 + ε)`.
+
+### 1c.5 N6-PIN180 — TRUE [hand, one mind; tools]
+
+*Derivation.* `60° ≤ α_{j+1}` is N3-SEC (ii). If `α_{j+1} = 180°`, `e_{j+1}` leaves `p` at `θ_j + 180°` on `ω(q_{j+1})`, `q_{j+1} = e(θ_j + 270°)`, curving to directions
+`θ_j + 180° + r/2` at radius `r`; `T_{j+1}` lies between `e_j` and `e_{j+1}`, so it holds points beside `e_{j+1}` at directions in `(θ_j + 180°, θ_j + 180° + r/2)`, which are
+outside `B̄(q_j, 1)` (tools at 181°, 185°): against `T_{j+1} ⊂ B̄(q_j, 1)` (inner to `e_j`). ∎ *Reads:* `B̄(p, ε)`. (N6-NOQ does not need it: §1b.5.)
+
+### 1c.6 N6-CENT — TRUE, the last clause read as `0° < γ < 60°` [hand, one mind]
+
+*Derivation.* Degree 4, non-Siamese: four colours. After the bends on the fragment the ring is `Γ`-arc-free off its (Q) arcs, so with none, N6-RING60 applies; every
+tactic centre is a change point (N3-FLANK); so all centres lie in `y + 60°ℤ`. A tactic edge leaves `p` at 90° from its centre's direction, on the inner tile's side
+(N3-HALF (a)), so every tactic edge's direction lies in `y + 30° + 60°ℤ`, and the angle between any two is a multiple of 60°. A lens has `γ ≤ 60°` (N3-SEC (iii)), so
+`γ ∈ {0°, 60°}`; at 60° its closure holds `p` and both centres, and it lies in their Reuleaux triangle. ∎ *Reads:* `B̄(p, 1 + ε)`. **Wording:** "non-Reuleaux lenses need
+a (Q) arc", read literally, covers `γ = 0°` too, which the statement's own previous clause allows on a (Q)-free ring; I find no argument excluding a `γ = 0°` lens (a tile
+inner to both branches of one `ω(q)` at `p`, cone 180°) at this radius. Read as "lenses with `0° < γ < 60°` need a (Q) arc", TRUE.
+
+### 1c.7 N6-COV — first clause GAP as stated (TRUE with κ defined just beyond both windows); second clause TRUE in the pinwheel [hand, one mind]
+
+*Derivation.* At a change point `q` (frame `q = e(90°)`, ring tile `U` of colour `A` counter-clockwise, `U′` of `Ā` clockwise) with `κ` defined on both windows, the windows
+are one colour each (a change `z` inside one would put a change point at `z ∓ 60°` in the other window, and N6-WIN there would forbid `κ = Ā` just before `q`), so
+`U ⊂ B̄(q + 60°, 1)` and `U′ ⊂ B̄(q − 60°, 1)`: their cones at `q` lie in `[120°, 300°]` and `[240°, 60°]`. **Both admit directions of the cone `(240°, 300°)` about the direction
+of `p`**, so "the directions toward `p` are covered only by `p`'s own tiles" does not follow from the windows alone. It follows when `κ` is also defined just beyond both
+windows: then an `A`-tile holds `q − 60°` and an `Ā`-tile holds `q + 60°`, N-E2 puts `U`'s cone in `[60°, 240°]` and `U′`'s in `[300°, 120°]`, and by CL and CL-p the cone
+`(240°, 300°)` is held only by `p`-tiles reaching `q`. In the pinwheel at a centre with `α_{j+1} = 60°`, 1c.1 supplies the clockwise half (no (Q) arc ends at `q_j − 60°`),
+and NB6-P60 needs no more. **Second clause** ("a unit gap between consecutive centres of one tile pushes that tile aside and forces a neighbour into a Reuleaux triangle on
+`p`"): NB6-P60 steps 2 and 4 (`t_{j+1}`'s cone at `q_j` in `[300°, 360°]`; `t_{j+2} ⊂ Reul(p, q_j, q_{j+1})`), TRUE in the pinwheel under NB6-P60's hypotheses. *Reads:*
+`B̄(p, 1 + ε)`.
+
+### 1c.8 N6-PIN — TRUE as a status [hand, one mind]
+
+A pinwheel with a (Q)-free ring is excluded at `1 + ε` (N6-NOQ, §1b.5); every (Q) arc on a pinwheel's ring is of N6-QOUT's kind (1c.1), so "unless its ring carries (Q)
+arcs of N6-QOUT's kind" is "unless its ring carries (Q) arcs", and there it is a GAP (I derive no exclusion there either; N6-QE1 removes only (Q) arcs holding
+`e(φ_j + 60°)` inside). *Reads:* `B̄(p, 1 + ε)`.
+
+### 1c.9 The stage-1 table (radii read; the controls; six)
+
+| claim | verdict (stage 1) | radius it reads (derived) |
+|---|---|---|
+| N6-KAPPA | TRUE (N-E0 alone) | `1 + ε` |
+| N6-WIN | (i), (ii), (iv) TRUE; (iii) TRUE when `κ` is defined just before `y + 60°`, GAP at a (Q) end there | `1 + ε` |
+| N6-RING60 | TRUE after the bends (clause omitted in the statement) | `1 + ε` |
+| N6-NOQ | TRUE (my route: RING60, FLANK, NB6-P60) | `1 + ε` (bends on the fragment) |
+| N6-PIN | TRUE as a status | `1 + ε` |
+| N6-P60′ | TRUE (over NB6-P60 and N6-QOUT's zones) | `1 + ε` |
+| N6-ADJ | TRUE | `p, q_j, q_{j+1}` |
+| N6-QOUT | TRUE | `1 + ε` |
+| N6-QE1 | TRUE (its interval hypothesis locates the point; the exclusion needs none) | `1 + ε` |
+| N6-PIN180 | TRUE | `ε` |
+| N6-CENT | TRUE, the last clause read as `0° < γ < 60°` | `1 + ε` |
+| N6-COV | first clause GAP as stated (TRUE with `κ` defined just beyond both windows); second clause TRUE in the pinwheel | `1 + ε` |
+| N6-MTP | stage 1d | — |
+
+**The local controls (template item 3).** No step above reads beyond `1 + ε` about `p` (the bends are run on the fragment). The strip (radius `≈ 1.834` about a midline
+four-colour vertex) and the disk refute none of them: their four-colour vertices carry no tactic edges (every unit arc is centred at them), so the pinwheel and centre
+statements fail there at their hypotheses; N6-KAPPA and N6-WIN hold on the strip's `P_1` (its ring checked by hand against FS112-Y §1.3's arcs: 3 on `(0°, 60°)`, 6 on
+`(arccos ¼, 180° − arccos ¼)`, 3 on `(120°, 180°)`, 6 on `(180°, 240°)`, …, alternating wherever defined 60° apart), and N6-RING60's hypothesis fails there (four (Q) arcs).
+**Six** is spent at N6-KAPPA's alternation (exactly two absent colours), at the colour exhaustion of the cone `(240°, 300°)` (NB6-P60), at N6-QOUT's outer-colour exhaustion
+and at N-E1 in N6-QE1; the hexagonal seven-colouring has three absent colours at every vertex and no step closes. **C114-FIVE-COUNT:** not applicable to these claims (none
+counts); it is run through N6-MTP at stage 1d.
+
+## Stage 1c — SAVED

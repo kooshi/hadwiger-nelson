@@ -122,6 +122,28 @@ check("BASE", "QE1: |u - q_j| = 1 and |u - p| = 1 at u = e(phi_j + 60)", d2(u, q
 check("BASE", "QE1: the radii at u meet at 60 degrees (transversal crossing)",
       sp.simplify(dot(u - p, u - qj) - sp.Rational(1, 2)) == 0)
 
+# --- QOUT: the zone of a (Q) arc with inner T_{j+1} (phi_j = 90): [phi_j - min(60, 180 - a1'), phi_j + min(0, a1' + a2' - 180)] ---
+def zone(A1, A2, phi=90):
+    return (phi - min(60, 180 - A1), phi + min(0, A1 + A2 - 180))
+check("BASE", "QOUT: zone at (alpha_{j+1}, alpha_{j+2}) = (90, 90) is [30, 90] (relative to phi_j = 90)", zone(90, 90) == (30, 90))
+check("BASE", "QOUT: zone at (60, 60) is [30, 30] (a point: no (Q) arc with inner T_{j+1})", zone(60, 60) == (30, 30))
+check("BASE", "QOUT: zone at (150, 60) is [60, 90]", zone(150, 60) == (60, 90))
+# derive the zone from the constraints at named arcs: an arc [a, b] in the zone passes the three tests, one just outside fails one
+def arc_ok(a, b, A1, A2, phi=90):
+    th_j = phi - 90
+    inner_cone = (th_j, th_j + A1)                    # T_{j+1}'s cone at p
+    c3_start = th_j + A1 + A2                         # t_{j+3}'s cone starts at theta_{j+2}
+    t1 = all(abs(th - phi) <= 60 for th in (a, b))    # arc within closed B(q_j, 1) (chord <= 1 iff angle <= 60)
+    t2 = (b - 90 <= inner_cone[0]) and (a + 90 >= inner_cone[1])   # inner cone inside every {v . e(theta) >= 0}
+    t3 = c3_start >= b + 90                           # outer colour c_{j+3}: its p-tile faces away (U1)
+    return t1 and t2 and t3
+check("BASE", "QOUT: arc [40, 80] at (90, 90) passes all three tests", arc_ok(40, 80, 90, 90))
+check("BASE", "QOUT: arc [20, 80] at (90, 90) fails (below the zone)", not arc_ok(20, 80, 90, 90))
+check("BASE", "QOUT: arc [40, 80] at (90, 60) fails (above phi_j + a1 + a2 - 180 = 60)", not arc_ok(40, 80, 90, 60))
+# QE1: at alpha == 90 the zone of T_{j+2}, [phi_{j+1} - 60, phi_{j+1}] with phi_{j+1} = phi_j + 90, holds phi_j + 60 in its interior
+z = zone(90, 90, phi=90 + 90)
+check("BASE", "QE1: at alpha == 90 the zone of T_{j+2} is [120, 180] and holds phi_j + 60 = 150 inside", z == (120, 180) and z[0] < 150 < z[1])
+
 bad_base = [r_ for r_ in rows if r_[0] == "BASE" and not r_[2]]
 bad_gap = [r_ for r_ in rows if r_[0] == "GAP60" and not r_[2]]
 n_gap = sum(1 for r_ in rows if r_[0] == "GAP60")
