@@ -14,30 +14,22 @@ place to start. Current state only; the history is in the documents it points to
      `[Polymath2021]` p. 199 poses FS-112's question. **NEXT: open FS-112, the unit-arc half** (`plans/STUB-unit-arc-half.md`, rank 1; its
      banner carries four re-aims; re-register its "a YES by formula (0.03)" at the opening). Budgets in briefs are guidance only (Kooshi,
      2026-09-27: *"It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress."*).
-  0a. **FS-112, the unit-arc half — ROUND 3 FINISHING; THEN CLOSE, THEN TWO NEW MILESTONES FOR THE NIGHT (Kooshi, 2026-09-27, before compacting; inventory
-     item 59).** Kooshi, verbatim: *"When round 3 finishes, let's close this milestone, and point two milestones at the two gaps, so we can focus on them
-     specifically. They seem to require more research and careful exploration, and may be more complicated than they appear. Wrap up any further
-     documentation, and I'll compact now, then we can close out and spend the night on those two."*
-     - **READ `plans/FS112-close-inventory.md` FIRST (items 1–59; the owner is its only writer).** Plan `plans/FS112-unit-arc-half.md`; claims
-       `data/fs112/claims.md`; briefs `data/fs112/briefs/`; reports `data/fs112/reports/`; side records `plans/FS112-N-proof.md` (N, N2, N3 sections),
-       `plans/FS112-Y-construction.md` (Y, Y2), `plans/FS112-Y3-construction.md`; verifiers `plans/FS112-{NB,NB2,NB3,YB,YB2,YB3}-verification.md`; advisor
-       records `plans/POROS-2026-09-27-fs112-{unit-arc-half,competition}.md` (A, A2, A3); PA reading `plans/FS112-PA-reading.md`.
-     - **Running at compaction: FS112-NB3** (blind on N3: N3-BASE / N3-DENSE3 — the base fails only within 2 of a ≥4-colour or repeated-colour vertex;
-       R1 lemmas; N3-END) and **FS112-YB3** (blind on Y3: the chain-end fragments Y3-END-A/B, Y3-END-NEEDS — no terminal unit-arc end without a 7th
-       colour — the pinned-corner obstructions, T2-BUDGET). Log each report in the inventory; no fresh advisor stage (the close compares).
-     - **Then the close:** FS112-C (close planner, template `data/fs110/briefs/C110-close-math.md`) works the inventory — reconciliation, `plans/FS112-derivation.md`,
-       §R-close in the plan (§G re-read, §PA sweep, §IQ + G72/G79 records, E1–E17 scored), the ledger row(s) 135+ and § B lines, CLAUDE.md drafts, the
-       CLOSED-QUESTIONS note (the Polymath 2021 question: not answered; FS-112's partial reduction), BIBLIOGRAPHY (items 16, 55), the two new stubs;
-       then FS112-X (front page, template `data/fs110/briefs/X110-front-page.md`); owner re-runs the gates (fact audit, --dupes, ledger_b --strict,
-       bib_audit, check_architecture, rk_mirror_check).
-     - **Then two milestones, opened for the night** (each planner + advisor, then the competitor protocol): (1) **the global step** — exclude maps
-       whose ≥4-colour or repeated-colour vertices come within 3 of every point (DENSE3's form if NB3 confirms, else NB2's radius 4), with the pinned
-       corner (Y2-PIN, Y3) and the T2 budget as the construction side's handles; (2) **the non-periodic stuck ray** — N3-ALPH / (b′), Y3-END-NEEDS and
-       N3-END as the route, NB2's concentric-circle pencil as the extremal object. Rank them 1–2 above FS-111; research-heavy (Kooshi: "may be more
-       complicated than they appear").
-     - Protocol this milestone used (keep): sides fenced from each other; a successor reads its own side's finished verifiers; advisors' cards and aims
-       quoted verbatim in briefs with the advisor's fence notes honoured; nobody messages an idle agent; a running verifier's side writes to a
-       separate record file; budgets are guidance (Kooshi). Agent ids: the owner's job log only.
+  0a. **THE NIGHT OF 2026-09-27 (Kooshi deferred the choice to a Poros agent, inventory item 70; NIGHT-A decided, `plans/POROS-2026-09-27-night-aim.md`).**
+     - **FS-112 is CLOSING, UNDECIDED:** close planner C + C2 done (`plans/FS112-derivation.md`, 56 entries; §R-close drafts; stubs FS-114
+       `plans/STUB-global-step.md`, FS-115 `plans/STUB-stuck-ray.md`); **FS112-X (front page) running** (brief `data/fs112/briefs/X112-front-page.md`;
+       ranking sent by message: FS-114 1, FS-111 2, FS-104 3, FS-115 4; FS-111's "decisive jointly" carries FS107-MEET's one-mind grade). When X reports:
+       owner re-runs the gates (fact audit `--base` HEAD-before-X and `--dupes`, `tools/fs71_ledger_b_check.py --strict`, `tools/bib_audit.py`,
+       `tools/check_architecture.py`, `data/rerank-2026-09-27/rk_mirror_check.py`), reading each exit status directly; then marks FS-112 closed.
+     - **The result in one line:** every valid six-map with unit arcs has a vertex of ≥ 4 colours or a repeated colour within 3 of every point
+       (N3-DENSE3, two minds, one blind) — so the global step in that form IS the NO (C-COMPOSE, one mind); the YES stalls at the pinned corner.
+     - **Tonight (NIGHT-A):** FS-114's planner (`data/fs114/briefs/P114-planner.md`) and FS-111's planner (`data/fs111/briefs/P111-planner.md`) launch
+       when X reports; **BASE-V running** (blind re-derivation of S–V Lemma 5, Prop. 18, Lemma 6's < 9 branch, cusp items; brief
+       `data/night-2026-09-27/brief-BASE-V.md`; a failing step becomes FS-114's first phase). FS-115 opens only if FS-114's plan takes the four-colour
+       form for aperiodic maps. Sirgedas's Google-group note stays unfetched until Kooshi rules.
+     - **The Proof Atlas** (Kooshi's request; keep it current at every close): published https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx (v2, theme
+       switch); VIZ-ATLAS-2 is idle, to be resumed after X for stage 2 (fold in the close: C-COMPOSE, rows 135–136, YB3, FS-114/115) and republished.
+       Staffing order after X: FS-114's planner + VIZ-ATLAS-2 stage 2 (with BASE-V), then FS-111's planner when the atlas job hands back.
+     - Morning: one full report to Kooshi. Agent ids: the owner's job log only.
   0. **Status 2026-09-27 13:30 UTC:** **FS-106, FS-107 and FS-110 CLOSED** (rows 131–134); ranking pass done. Row 134: under S–V's Condition 5, no locally finite segment/circular-arc map (no arc of radius 1) has an a.e.-proper six-colouring — S–V Question 2's Condition-5 half answered YES (grade: inventory item 113). CLAUDE.md 295,846; all gates PASS. **No agent running.** Next milestone by ranking: FS-112 (the unit-arc half, `plans/STUB-unit-arc-half.md`) at rank 1, FS-111 (the cone scale) at 2 — Kooshi picks. Owed: CE1–CE7 derivation entries; CLOSED-QUESTIONS row for S–V Q2's Condition-5 half (Kooshi's call); 27 stub files' six-framed bearings.
   1. **FS106-V2 is running** (finishes the sighted check, aims at repairing Sokolov–Voronov). When it reports: log it; read its verdicts
      on SV-L3, SV-L4, Obs. 1, Prop. 8, SV-1, SV-2 and its repairs; **re-brief wave 2** (`data/fs106/briefs/TS106-structural.md`,
