@@ -264,3 +264,68 @@ residue); NB3-END's `z = y` case was pushed through horn flanks; NB3-COR3's sing
 (tools); the inert-arc case of step 4 is the one place the base, read literally, breaks on a general valid map, and it is closed only by a modification.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: N3's section read; divergences
+
+*Read after stage 1's commit (`83f40a5d`): `plans/FS112-N-proof.md` l. 584–908 (§ Continuation — FS112-N3) in full; `tools/fs112_n3_checks.py` (header, VOTES, ANTI)
+and `data/fs112/fs112-n/n3-checks-selftest.out`. Not opened: N3's report (`data/fs112/reports/` stays fenced for me except NB's and NB2's).*
+
+### 2.1 Quotation check, completed
+
+- The fourteen statements the instance quotes from N3's table (l. 594–608): **all exact** (a script over the table cells; N3-LEN by `grep -F`, whose `2\|K\|`
+  carries the table's escape in both files).
+- The instance's quotation of N3's report, l. 13: **not checkable** (the report is fenced for me). Its content — N2-ROT/N2-HEX "not walked", "a named check for the
+  verifier" — matches N3's record, l. 847–848.
+- N3's own pointer is right: l. 847 names them "FS110 N2-ROT, N2-HEX"; the instance's address (`plans/FS112-N-proof.md` § FS112-N2) is the owner's slip (§1.2).
+
+### 2.2 Divergences (both addresses; kind; whether a verdict changes)
+
+| # | claim | NB3 (stage 1) | N3 | kind | verdict change? |
+|---|---|---|---|---|---|
+| 1 | N3-I, "(i) never fails" | TRUE off **mutual both-centres**; GAP there as an unconditional statement (§1.4 N3-I) | TRUE unconditionally by **perturbation**: `c′` is locally constant at a singleton (`{p : a ∈ c′(p)}` closed, `c′ ≠ ∅`), leaving centres are at most three, so a failing pair `(x, y)` has failing pairs `(x′, y′)` nearby with `x′` not a leaving centre, where CB's proof stands (l. 784–787) | **truth, of my route**: my GAP was a gap in my derivation, not in the claim | **yes — mine to TRUE**. Checked sighted: `c′(x′) ⊆ c′(x)` near `x` by closedness, `= {a}` by `c′ ≠ ∅` (no both-kind arc of `ω(u₁)`, `u₁` cubic), `y′` follows `y` along `ω(x′) ∩ ω(u₂)`, transversality is generic, and at `x′` an `a | a` arc is merged away. Minds for the unconditional form: one (N3), with my sighted check; for the base's use (both-centres excluded) two, one blind |
+| 2 | N3-END, first alternative | an upper bound `+1` (either horn) makes the chain `{P_0}`; nothing more is forced (§1.4 N3-END item 1) | "Either `υ_0 = 1` too — **both of `P_0`'s horns lie between `ω(P_{−1})` and `ω(P_1)`**, `P_0` is a one-vertex chain, and the **in-type `g` at `P_1` and `h` at `P_{−1}`** make both neighbours unit-arc centres — or: 1–4" (l. 858–859) | **scope**: the body's first alternative carries structure its proof does not derive. N2-FLANK-Q gives both upper arcs on `ω(P_1)` only when an in-type `g` sits at `P_1`; `υ_0 = 1` does not force that `g` (the `g`-shadows may still come from `P_{−1}`, and then items 1–4 hold as well), and nothing forces both lower arcs onto `ω(P_{−1})` or an in-type `h` at `P_{−1}` | **no** for the table's statement (its disjunction "or is the doubly bounded one-vertex chain" is met either way). **MISSTATED** as a case description. Corrected: *if an in-type `g`-tile sits at `P_1`, both horns' upper arcs lie on `ω(P_1)` and the chain is `{P_0}`; otherwise items 1–4, with `P_1` not stuck whenever an upper bound is `+1`* |
+| 3 | N3-END item 3, `y ≠` the upper flank | proved: with both flanks `y`, a `y`-tile at `P_{−2}` would be Siamese to the lower flank and outer to the upper (N-E2 twice), so none exists, the tip is `y`-clear and SHAVE applies (§1.4 N3-END item 4) | "(else SHAVE)" (l. 866) | **precision**: under unit arcs the equal-flank SHAVE could a priori be blocked by FLANK's in-type exception at `P_{−2}` (round 1's row 7 found SHAVE's criterion incomplete there); the N-E2 argument is the step that excludes it | no |
+| 4 | N3-END item 4, the arc at `P_{−2}` | lower bound exactly `−1` needed: otherwise the flank has points both within `< 1` and `> 1` of `P_{−2}` and no `y`-tile sits there | "at lower bound `−1`, an in-type `y`-tile at `P_{−2}`" (l. 869) | precision (the reason the bound is `−1`) | no |
+| 5 | N3-BASE, the strip at leaving centres | under H a failing leaving centre is not a both-centre, so one side is clean and `γ(u)` exists (§1.4 step 2) | the strip is "used only through the rows below" (l. 802): (i) by perturbation, (ii), Cor. 3 by N3-COR3, the eleventh point by N-E1 | **route** | no |
+| 6 | N3-BASE, the eleventh point | `R` inside `γ(u)` | `R ⊂ B(u, 1)` by N-E1: a point of `Ω` in `R` makes `Ω ⊂ Γ` with `C` on both sides, both-kind at `u` (l. 796–798) | **route** (N3's needs no strip) | no |
+| 7 | N3-BASE, Prop. 17 | **walked** FS-110's N2-ROT and N2-HEX: both survive; N2-ROT's "no `r`-tile at `x`" is a covering pair at distance 1, so it needs N3-COR3 (corners in `B̄(u, 1)`) or a `≥ 4`-colour `x`: H (§1.4 step 10) | taken on FS110-P17's route, the ring lemmas "not walked … a named check for the verifier" (l. 846–848); the table's Prop. 17 row names only `x₂` | **scope: the named check done**; one dependency N3's row omits (COR3 inside N2-ROT) | no |
+| 8 | N3-BASE, D5 item 3 | explicit: `ω(w)` can run along `P` but must leave `cl Q` through `P`'s interior (it meets `Ω` only at `x`, `x ± 120°`), into the `a`-tile | "centres moved off the finitely many unit-arc centres" (l. 809) — i.e. by genericity/perturbation | **route** | no |
+| 9 | N3-BASE, inert arcs | pre-bend by N2-TOWARD | the same (l. 794–795) | **agreement, route included** (blind) | no |
+| 10 | N3-COR3 | U1's side cones at `±t_u` against a clean side of `v`; forcing checked on 403 + 128 + 336 cases (tool COR3) | N-E1 at `u`: `Ω`'s half on `v`'s clean side lies in `Γ`, both-kind at `u`; then N-E1 at `u′` along `ω(u′)` through `q` gives an inner and an outer colour (l. 773–781) | **route** (N3's is shorter) | no |
+| 11 | N3-ANTI | triangle inequality: a shared bounding arc voting `≤ 1` at both antipodes is at `u` | second-order expansion: every arc votes in at one antipode, three in-votes against a budget of two (l. 761–767) | **route**; mine needs no circularity of arcs | no |
+| 12 | N3-FAIL | geometric first-order vote model (tool FAIL) | the unit arc's own side tiles' shadows plus a combinatorial vote table (VOTES, 12 rows), "exactly" the inner/outer colours (l. 752–760, 841–845) | **route**; N3's table includes combinatorial rows the geometry never realises (the split with `s_out` shared with the out-voter), harmlessly | no |
+| 13 | N3-II | failing point `x` a both-centre, or `y` | "`c(x) ⊇ {a, b, s_in, s_out}` or `y` is a both-centre" (l. 789–794) — sharper at `x` (four colours, not "four or a repeat") | precision (N3's) | no |
+| 14 | N3-LEN | the rank count gives `≤ 2\|K\| − 3` (`λ < υ` strict) | `≤ 2\|K\| − 1` (l. 709–713) | **wording**: the stated bound is true and not sharp | no |
+| 15 | N3-BASE table | — | "a four-colour vertex on `ω(p)` or at `p ± 60°`" (l. 803) | **wording**: the corners are the common unit points of `ω(p)` and `ω(x)`, `x ± 60°` on `ω(p)` | no |
+| 16 | N3-NOBOTH, P′, DENSE3, STEP, RAYR, PER | as §1.4 | as N3 | **agreement**, blind; PER even to the lens-inside-one-tile step | no |
+
+### 2.3 Where both minds rest on the same thing (the selection audit's residue)
+
+Both derivations take from row 134's grade, unre-derived here: S–V's Lemma 5, Prop. 18 and Lemma 6's `< 9` branch (circle-abstract, from (i), (ii) and finiteness —
+CB and CE took them from print), CUSP-BASE, and N112-U1 and N2-TOWARD (two minds each). An error common to both walks would sit there, not in the unit-arc steps.
+Seven-colour control and killing test 8: as §1.4; N3 reads the strip the same way (its registered N3-P1 and N3-P4 are the strip's test of N3-COR3, unscored here).
+
+### 2.4 Verdicts after stage 2
+
+| claim | verdict | grade, minds |
+|---|---|---|
+| N3-BASE | **TRUE** | hand; two minds, one blind (N3; NB3) — over row 134's base and N2-TOWARD (two); the named check (FS-110's N2-ROT, N2-HEX) walked by NB3 |
+| N3-DENSE3 | **TRUE** | hand; two minds, one blind |
+| N3-NOBOTH, N3-FAIL, N3-ANTI, N3-COR3 | **TRUE** | hand; two minds, one blind, different routes for FAIL, ANTI, COR3; tools exact on both sides |
+| N3-I | **TRUE** (my stage-1 GAP retracted: N3's perturbation closes it) | hand; the base's use two minds, one blind; the unconditional form one mind (N3), checked sighted by NB3 |
+| N3-II, N3-P′ | **TRUE** | hand; two minds, one blind |
+| N3-STEP, N3-LEN, N3-RAYR, N3-PER | **TRUE** (LEN's bound not sharp: `2\|K\| − 3`) | hand; two minds, one blind; tools exact on both sides |
+| N3-END | **TRUE** as the table states it; the body's first alternative **MISSTATED** (divergence 2), item 3 needs the N-E2 step (divergence 3) | hand; two minds, one blind |
+
+**Registered prediction scored:** N3-P2 ("a blind second mind finds N3-BASE TRUE, possibly with a repair in a row of its table", 0.6) — **met**; no row needed a
+repair; one row (Prop. 17) gains a dependency (N3-COR3 inside N2-ROT) and the named check is done.
+**Retractions counted:** one (mine, divergence 1).
+
+### 2.5 Proposed edits (for the close; I edit none of these files)
+
+- `plans/FS112-N-proof.md` N3-END (l. 858): the first alternative as corrected in divergence 2; item 3 (l. 866): cite the N-E2 step.
+- N3-LEN: "at most `2|K| − 3` vertices (so `2|K| − 1`)".
+- `data/fs112/briefs/NB3-112-instance.md`'s pointer for N2-ROT/N2-HEX: `plans/FS110-N-proof.md` l. 374, l. 393 (FS-110's round 2), not FS112-N2.
+- `LEDGER.md` § B (when N3's rows are filed): N3-BASE, DENSE3 and the lemmas under it at two minds, one blind; N3-I's unconditional form one mind with a sighted check.
+
+## Stage 2 — SAVED
