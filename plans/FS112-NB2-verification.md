@@ -252,3 +252,63 @@ first-order error). Three defects of my own were found and fixed before this rec
 side of `ω(Q_A)`; a stationarity test relying on `simplify`), each seen as a plant that did not fire or a faithful check that failed.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the side's section read (after `8e3a08d6`); divergences
+
+*Read after stage 1 was committed and pushed (`8e3a08d6`): `plans/FS112-N-proof.md` ll. 303–582 (§ Continuation — FS112-N2) in full;
+`tools/fs112_n2_checks.py` (header and plant table); `data/fs112/fs112-n/n2-checks-selftest.out`. Re-run: `python3 tools/fs112_n2_checks.py --self-test`,
+exit 0, output identical to the committed one (seven plants fire for their own reason codes, faithful run PASS; my copy in scratch). N2's ENVT/ENVA identity
+checked by hand as well: at `s = 0`, `8 cos η sin(η + Δ/2) sin(Δ/2) = 4 cos η (cos η − cos(η + Δ))` gives `|p − z|² − 1` for `p = 2cos η·e_{−η}`,
+`z = e_Δ`; the `±s` and `s²` terms follow from `(1 ∓ s)²` and `−4cos η (1 ∓ s) cos(η + Δ)`.*
+
+### 2.1 Quotation check of the instance file against the side's table
+
+All ten statements are **verbatim** against the table "N2: theorems this continuation proved" (`plans/FS112-N-proof.md` ll. 310–323; string comparison,
+N2-RAY differing only by the instance file's line break). The instance file's gloss on N2-DENSE ("the side rests it on row 134's base, on NB4′, and on
+N2-TERM") matches the table's grade cell.
+
+### 2.2 The contest's result
+
+**No statement the side calls TRUE do I find false, and none I call TRUE does the side refute.** On N2-RAY — the step the round turns on — both walks,
+mine blind, find N4-CONE a GAP under unit arcs at the same place: N4-PROP cannot be carried past a chain's end where a horn bound is `±1`, N112-END does not
+reach the end, and the ray `λ_k = −1/(k+1)`, `υ_k = 0` meets N4-FIN's inequalities. The divergences are of scope, precision and wording; three are mine to
+correct.
+
+### 2.3 Divergences, each with both addresses
+
+| # | statement | mine (stage 1, §1.4) | the side (`plans/FS112-N-proof.md`) | changes a verdict? | resolution |
+|---|---|---|---|---|---|
+| 1 | N2-DENSE: radii and hypothesis | TRUE for **every** valid map ("stuck" read as "repeated colour"): a repeated-colour vertex within 2 or a unit-arc centre within 3 of `u`; every closed disc of radius 4 has one; CB's route reads local structure only in `B̄(u, 2)` and Condition 5 only on circles centred there | TRUE in `M*`, radii 4 / 3 / 5, over N2-TERM; the base "reads … points in `B̄(u, 3)`" (§5.3 (4)) | **no** (both TRUE); scope | Mine drops a hypothesis and sharpens the radii; N2's are sufficient. The base's circles `ω(x(t))`, `ω(y(t))` reach radius 3, but CB reads them only at their passage through the partner point (D1 (P′), D2 (i)/(ii)), which lies on `Ω_i ⊂ B̄(u, 2)`. **Consequence for the grade:** DENSE need not rest on N2-TERM (one mind). N2's disc-of-radius-1 lemma, "a sketch" there, is NB2-DISC1 here in full: two minds |
+| 2 | N2-RAY: where the step fails | "(ii)–(iv) at `P_0` rest on N4-FLANK … and (iv) rests on NB-4 at `P_{−1}`" (stage 1 §1.4 N2-RAY item 4) | "(ii) holds: the in-type `g`-contact at `N` gives the same half-plane `{d·n ≥ 0}` as the out-type one at `S′`"; (iii)–(iv) change at the exceptions (§N2-4) | no; precision — **mine corrected** | The side is right: N4-STUCK (ii) uses FLANK only for the half-planes, and an in-type flank tile at the near antipode gives the same one. PROP's step at a unit-arc end fails in **(iv)** (the two `g`-sectors at `S′` came from out-type `g`-tiles there, which FLANK's exception replaces; and NB-4 at `S′`, a unit-arc centre). The GAP's location is unchanged: PROP at the end |
+| 3 | N2-RAY: the ray's shape | the ray is the family of **concentric circles of radius `k+1` about `P_{−1}`** (every shadow tight), upper arcs straight | "met with equality by `λ_k = −1/(k+1)`, `υ_k = 0` (straight upper arcs)", "horn curvatures tending to 0" | no; mine adds | A recognition the side does not state; it makes the ray one object (a pencil of concentric circles and parallel lines along a normal line) |
+| 4 | N2-RAY: what the GAP lists | the GAP at N4-PROP's step at a unit-arc end; finite chains and a single stuck vertex with bounds `±1` equally unexcluded; NB2-END (sketch): an end at `λ_0 = −1` forces, if `g` has two sectors at `P_{−1}`, a colour `y ∉ P_cl(P_0)` in the side cone below `g`'s horn there, whose shadow FLANK's list lacks | GAPs "(a) finite stuck chains between two exceptions; (b) the stuck ray" (§N2-4) | no; compatible | Same GAP. NB2-END is an addition, conditional (its premise "two `g`-sectors at `P_{−1}`" is exactly what divergence 2 says FLANK's exception can remove), one mind, a sketch: a candidate route in which a chain's end forces a unit arc one step beyond it |
+| 5 | N2-TOWARD: route | contact half-planes through `τ_A` at the end vertex: only `P` and `Q_A`; in-type at `Q_A` impossible (N-E2 against `T_out`), out-type's shadow circle cannot pass below `α` | near tiles lie in `I = B̄(A, 1) ∩ B̄(B, 1)` and stay within `< 1` of every lens point (N2-ENV); far ones reach only `B(P, r(ψ))`; a Siamese tile at `q_A` would need `ᾱ ⊆ B̄(q_A, 1)` (§N2-3) | no; **different routes** | Two minds by different routes, mine blind. N2's lens stays inside `T_in`'s sectors at the ends (a corner, or a tangent start inside a horn); mine is a wedge that may cross other tiles at `A`. Checked sighted: `⋂_{w∈ᾱ} B̄(w, 1) = B̄(A, 1) ∩ B̄(B, 1)` for `ℓ < 60°` (a point within 1 of both ends is within 1 of every arc point except when it lies across `P`, which only `P` does) |
+| 6 | N2-AWAY: the end's blocker | with a horn lens only an `s_in` tile bounded near `Q_A` by the radius-2 circle blocks (`f(−1/2) = −1`); any tangent tile blocks a wedge lens | "blocked at first order by an `s_in` tile touching `q_A` … and by nothing else"; N2-TAN applies at "an isolated point `w₀` of `C₂` (interior, or an end of `α`)" | no; wording | The same fact: N2's tangent bend at an end is my horn lens |
+| 7 | N2-TAN | a contact tile rises linearly or with coefficient `a > 0`; only the radius-2 circle along an arc blocks | the same, with `a > 0` written `κ_Y < 1/2` (§N2-3) | no | Two minds, the same argument (both complete round 1's NB sketch); the side adds that the pair `(w₀, q₀)` stays outer |
+| 8 | N2-RED: termination | "each original unit arc is operated at most once, and wholly" | a bend "removes an arc (or replaces it by (R2) pieces) and is re-enabled only by a W-MERGE or by a colour lost at its centre (then it is removed for good)"; a lens meets another arc's R2 witness at most at a point (§N2-3) | no; precision — **mine corrected** | The side is right: where `α` carries an R2 sub-arc the bend removes the rest and leaves (R2) pieces, which a later W-MERGE may free. Termination stands by the side's count; my "at most once, wholly" is true only for arcs with no R2 sub-arc |
+| 9 | N2-TERM | the two alternatives are not exclusive; every chain has an end within 1 of an exception; the GAP is distance from exceptions | item 3: "each end that is not at infinity is within distance 1 of a (Q) or (R2) arc or an NB4′ exception … One-sided infinite chains: GAP" | no | Agree, the same precision |
+| 10 | N2-FLANK-Q: "then two-sided" | read as "both side colours at the centre" | "the exception is one unit arc of `ω(N)` through `v`, never one-sided": both horns' upper arcs lie on `ω(N)` once N4-STUCK (ii) makes `g` fill the `+n` side (§N2-4) | no; **my reading of an undefined phrase was wrong** | Re-derived sighted: at a stuck vertex `g` fills the `+n` side and is Siamese with the in-type `g`-tile at `N` (N-E2), so `g`'s sector lies in `B̄(N, 1)`; both horns' upper arcs bound it, so their upward curvature is `≥ 1`, hence `= 1`: one arc of `ω(N)` through `v`. TRUE, two minds (mine sighted on this clause) |
+| 11 | N2-SIGN: scope | TRUE for open-tile points; false for closure points (an R2 contact is at distance 1 from its foot) | proof reads open tiles; adds that each tile is wholly near or far by connectedness | no; wording | Agree. The side's "near = inside `I`" and "far = outside `⋃ B(w, 1)`" are the closure forms, consistent |
+| 12 | N2-ENV: orders | `r(ψ) = O(ψ)` toward, `O(√ψ)` away | toward `B(P, r(ψ))`; away "a cap of radial height `≤ s` and angular half-width `≍ √s`" | no | Agree: the side's `√s` is my `√ψ`. Its exact identity for points beyond an end is correct (checked by hand, above, and by its tool) |
+
+**Agreements** (second mind on each, mine blind; the side's first): N2-RAY, N2-DENSE (in either form), N2-TOWARD (different routes), N2-AWAY, N2-TAN,
+N2-RED, N2-TERM, N2-FLANK-Q, N2-SIGN, N2-ENV — **every one TRUE**; the GAPs named (N4-CONE at a stuck chain's end or ray) are the same GAP.
+
+### 2.4 Corrections to my stage 1 (not free: stage 1 was committed; counted)
+
+1. N2-RAY item 4: "(ii)–(iv) at `P_0` rest on N4-FLANK" → **(ii) survives FLANK's exception; PROP's step at a unit-arc end fails in (iv)** (divergence 2).
+2. N2-RED's termination: "each original unit arc is operated at most once, and wholly" holds only for arcs with no R2 sub-arc; in general a bend leaves (R2)
+   pieces that a later W-MERGE may free, and termination is the side's count (divergence 8).
+3. N2-FLANK-Q: "two-sided read as 'both side colours at the centre'" → the side's meaning, re-derived (divergence 10).
+Retractions: three, all mine, all after reading.
+
+### 2.5 Items for the close (proposed; I edit none of the shared files)
+
+- `LEDGER.md` / the derivation file: N2-RAY, N2-TOWARD, N2-AWAY, N2-TAN, N2-RED, N2-TERM, N2-FLANK-Q, N2-SIGN, N2-ENV at **two minds, one blind**
+  (N2; NB2); N2-TOWARD by different routes; N2-DENSE at two minds, **best filed in NB2's form**: every valid map; a repeated-colour vertex within 2 or a
+  unit-arc centre within 3 of each trichromatic cubic vertex; every closed disc of radius 4 contains one — over the base (row 134's grade), NB4′ and
+  N112-SIX, **not** over N2-TERM; NB2-DISC1 (every closed disc of radius 1 holds a vertex of degree `≥ 3`) two minds (N2's sketch, NB2's proof).
+- The ray's recognition: the extremal stuck ray is the pencil of circles of radius `k + 1` about `P_{−1}` with straight upper arcs.
+- NB2-END (one mind, a sketch, conditional): a candidate route to close N4-CONE's GAP — a chain's end forces a further unit arc one step beyond it.
+
+## Stage 2 — SAVED
