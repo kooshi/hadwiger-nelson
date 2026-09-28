@@ -1,4 +1,4 @@
-# FS-114 — the global step: can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every point? (stub)
+# FS-114 — the unit-arc question (its central statement, the global step): can a six-map with unit arcs have a vertex of four colours or a repeated colour within 3 of every point? (stub)
 
 *Minted 2026-09-27 by the close planner FS112-C at FS-112's close, on Kooshi's ruling (`plans/FS112-close-inventory.md` item 59: *"When round 3
 finishes, let's close this milestone, and point two milestones at the two gaps, so we can focus on them specifically. They seem to require more

@@ -37,7 +37,7 @@ compactness methods of the distance-avoiding-sets literature: `[Bukh2008]`, Falc
 
 ## Bearing on the answer
 
-Decisive jointly with (A) — at bounded complexity row 134 (no valid map under Condition 5) and, with unit arcs, FS-114's NO (`plans/STUB-global-step.md`; with FS-115's two steps where FS-114 is taken in its four-colour form, `plans/STUB-stuck-ray.md`; re-aimed at FS-112's close, 2026-09-27): together they give `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR. Alone, a regularity
+**Decisive jointly with (A) — a one-mind reading** (FS107-MEET, row 133's grade; its test is card 1 of `plans/POROS-2026-09-27-night-aim.md` §3, FS-111's first question) — at bounded complexity row 134 (no valid map under Condition 5) and, with unit arcs, FS-114's NO (`plans/STUB-global-step.md`; with FS-115's two steps where FS-114 is taken in its four-colour form, `plans/STUB-stuck-ray.md`; re-aimed at FS-112's close, 2026-09-27): together they give `χ_m⁰(ℝ²) = 7`, and `χ(ℝ²) = 7` given MR. Alone, a regularity
 theorem for near-optimal colourings. A family refuting it with holes `→ 0` is W's claim itself: `χ(ℝ²) ≤ 6` with no MR.
 
 ## Provisional bearings (replaced by the re-grokking at the opening)

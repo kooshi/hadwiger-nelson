@@ -1,4 +1,4 @@
-*Brief for job **FS114-P**: open FS-114, the global step (the unit-arc question), by WORKFLOW steps 3–5. Opus 5.5, 2026-09-27. Written by the product
+*Brief for job **FS114-P**: open FS-114, the unit-arc question (its central statement, the global step), by WORKFLOW steps 3–5. Opus 5.5, 2026-09-27. Written by the product
 owner. **Sized for about 350k tokens by the harness's count, as guidance** (standing rule 10). No planning advisor tonight: the three slots are yours,
 FS-111's planner, and a blind verifier (BASE-V) on the base's printed steps (`plans/POROS-2026-09-27-night-aim.md` §1).*
 
@@ -37,7 +37,7 @@ past which no valid fragment survives around a four-colour vertex — or visible
 give?"* Its hunch is "global" (G17); its falsifier "an explicit radius R with a derived exclusion of every valid fragment on the disc of radius R about a
 four-colour vertex". Put it to the re-grokking and the prior-art gate before any route.
 
-## What to produce: `plans/FS114-global-step.md`
+## What to produce: `plans/FS114-unit-arc-question.md`
 
 1. **§G** (WORKFLOW 3.1): one short line per grokking, row mechanism and method rule, each *bears* extracted into a phase. Save it in two stages.
 2. **§PA** (all eight questions), in the planar-map vocabulary as well as the unit-distance one: "discharging" with "unit distance", "tiling" or
@@ -58,7 +58,7 @@ four-colour vertex". Put it to the re-grokking and the prior-art gate before any
 
 ## Rules
 
-- **Touch only** `plans/FS114-global-step.md`, `data/fs114/` (claims, briefs, `data/fs114/fs114-p/`) and `tools/fs114_p_*.py`. Also create
+- **Touch only** `plans/FS114-unit-arc-question.md`, `data/fs114/` (claims, briefs, `data/fs114/fs114-p/`) and `tools/fs114_p_*.py`. Also create
   `plans/FS114-close-inventory.md` empty from `plans/FS112-close-inventory.md`'s header; from then on the owner is its only writer.
 - **No subagents, forks or workflows.** Delegation is one level deep (`CLAUDE.md` § Delegation): staffing is Kooshi's budget decision, and the owner
   can only review work it knows about.

@@ -110,7 +110,7 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 
 **The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
 Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
-complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136); **FS-114, the global step**; **FS-115, the stuck ray**;
+complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136); **FS-114, the unit-arc question**; **FS-115, the stuck ray**;
 **FS-111, the cone scale** — the same at unbounded complexity; **Lean throughout** — MR in full (Einsiedler–Lindenstrauss, Einsiedler–Fish), the
 collapse, the measurable chain, the map argument.
 
@@ -357,7 +357,7 @@ bearing on the answer stated honestly. Kooshi picks; the default is the top.*
 |---|---|---|---|
 | 1 | **FS-114 the unit-arc question** — `plans/STUB-global-step.md` (FS-112's successor) | exclude a six-map with unit arcs whose four-colour or repeated-colour vertices come within 3 of every point — row 135 says every one would, so this is the NO; for periodic maps four-colour vertices alone suffice. Handles: the pinned corner where both printed positives stop, and the rhombus with four-colour corners (rows 135–136); Sirgedas's unheld non-Siamese argument | decisive both ways at bounded complexity: a YES gives `χ(ℝ²) ≤ 6` with no MR; a NO answers `[SokolovVoronov2025]` Question 2's unit-arc half and `[Polymath2021]` p. 199's hope (with row 134, the whole question, almost everywhere, for segment-and-arc maps) and closes door (A) at every complexity bound |
 | 2 | **FS-111 the cone scale** — `plans/STUB-reg-scale.md` | door (B): do near-optimal band-proper six-colourings keep junction cone scales `≥ s₀` on a set of positive measure? De Giorgi's room (link 6) | the unbounded-complexity door: a family with holes `→ 0` refuting it is `χ(ℝ²) ≤ 6` with no MR; with FS-114's NO it is the route to `χ_m⁰(ℝ²) = 7` (so `χ(ℝ²) = 7` given MR) — but that composition is a one-mind reading (FS107-MEET; row 133's grade, "the meeting one mind (A2)") until its first question (`plans/POROS-2026-09-27-night-aim.md` §3, card 1) is answered |
-| 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? — row 131's question at five colours; its null-set step to Falconer's `χ_m` is row 131's sub-question; standing here: `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14), the density family, `k`-point correlations (FS-80) | decisive: given MR it is rung D (row 128); success low, a named no-go the likely product |
+| 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? — row 131's question at five colours; its null-set step to Falconer's `χ_m` is row 131's sub-question; standing here: `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14), the density family, `k`-point correlations (FS-80) | a NO (a CP five-colouring) gives `χ(ℝ²) = 5` with no MR; a YES gives `χ(ℝ²) ≥ 6` given MR (row 128), a new lower bound independent of the map line, six against seven left; success low, a named no-go the likely product |
 | 4 | **FS-115 the stuck ray** — `plans/STUB-stuck-ray.md` (FS-112's successor) | can a one-sided chain of stuck vertices, its extremal form a pencil of circles of radius `k + 1`, live in a valid map with unit arcs, and are finite chains bounded (row 135)? Periodic maps have neither | none alone: a lemma of FS-114's four-colour form on maps that are not periodic (FS112-C-COMPOSE); its fragments (the pencil, BOWTIE) are local positives a YES could use; it moves to 2 the day FS-114's plan commits to that form |
 | 5 | **FS-109 the hole dial** — `plans/STUB-hole-dial.md` (post-ban) | trace `1 − µ₆^per(ε)` as `ε → 0` along eroded `[Parts2020c]` tilings and W's families; C-VOID's thin-hole test in the ban; a second dial, `[Soifer1994X6]`'s X₆ | link 5 as a dial on row 131's question: flat is R's evidence, falling W's; decides nothing alone |
 | 6 | **FS-108 the print residuals of the regular half** — `plans/STUB-regular-half-residuals.md` | four of five answered (row 134; `[Townsend2005]` is the manuscript, (c) unargued); left: Townsend's (c) in full | link 4's print holes, now Townsend's only: none on the answer (row 131) |
@@ -405,7 +405,7 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G81 are stable identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G83 are stable identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 ***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
 row's mechanism in `LEDGER.md` and each method rule read from inside the milestone's question and its bearing extracted into the plan's phases, the
@@ -1878,7 +1878,7 @@ the ledger; `--self-test` plants an over-cap job and a full ledger and watches b
 may run without a slot; anything bigger or longer declares an honest `--mem`, since an under-declared job is killed by its cap. **A
 job that calls `systemd-run` itself escapes the slot's cap** (the new scope is a sibling, not a child), so a Lean build reserves and
 caps at the same number: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`. And `systemd-run` expands `$`
-in a command's arguments unless told `--expand-environment=no` (the wrapper passes it; `bash -c '… $$ …'` arrived as `$`).
+in a command's arguments unless told `--expand-environment=no` (the wrapper passes it; `bash -c '… $$ …'` arrived as `$`). More instances: `plans/GROKKING-INSTANCES.md` § Building — RAM is the discriminator.
 
 **Every long-running phase checkpoints and resumes exactly** (Kooshi, 2026-08-26). **[PROTECTED — never compress, trim or
 paraphrase this paragraph; rewrite it only to add an instance (Kooshi, 2026-09-15).]** A run expected to exceed ~15 minutes
