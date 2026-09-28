@@ -285,6 +285,11 @@ say so in this section. Working files: `data/fs112/fs112-y/` (prefix `y2_`); too
 | Y2-BUDGET2 | C-UA-BUDGET's second branch is FALSE in the disjoint sense too: at `A_0`, `P_cl = {Bl, O, R, Yw}`, the ring point `y` at ≈ 209° on the leg `A_1Y_1` has `P_cl(y) = {G, P}` (complementary, `y ∈ ω(A_0)`), and no arc of `Γ` passes through `y`; the ring's arcs are centred at `A_0` itself | tools, exact (the crossing by the intermediate value theorem on an exact segment) + hand, one mind | §5.3 (e) |
 | Y2-STOP | both held positives stop at the same kind of point: the second common unit point of a complementary pair of trivalent arc-end vertices whose first common unit point is a four-colour vertex at which both emit arcs of its unit circle — the strip at the edge vertex `Q` of `(V₀, A₁)`, the disk at the rim point `C_k` of `(B_k, Z^R_k)` (and `D_k` of `(B_{k−1}, Z^L_k)`); no colour is available just beyond either | tools, exact at named points (the strip: two minds, Y and YB; the disk: one) | §5.3 (f) |
 | Y2-DISK-R | no disc of radius above `φ ≈ 1.618` about a vertex lies in any extension of the disk's colouring, and inside the disc of radius `r` the largest vertex-centred disc has radius `r − |OA| ≈ 1.5985` (about the four-colour corners); the strip holds `1.834` about its four-colour vertices. So CAL-DISK does not enlarge C-BEYOND for any step that reads a disc about a vertex | tools, exact at named points + hand, one mind | §5.3 (g) |
+| Y2-PIN | the pinned-corner law, on both positives: at the stop point `Q` (strip: `(1/4, top)`; disk: `C_0`) every colour but `Q`'s own two straddles distance 1 at `Q` itself, and each of `Q`'s two tiles contains a point at distance exactly 1 from `Q` (strip: `V_0`, `A_1`; disk: `Z^R_0`, `B_0`) — so each own colour is confined to the half-plane toward its partner, and an outward wedge carries no colour (strip `(30°, 165.52°)`; disk `(54°, 162°)`) | tools, exact (straddles exact; the wedges at named directions) + hand, one mind | §6.1 |
+| Y2-FORCE | at the strip's valley `V_0` (a common unit point of the four-colour pair `(P_{−1}, P_1)`) the sectors are forced by those two vertices' quadrants except for one free direction (the `1 | 3` boundary, anywhere in `[210°, 330°]`); at the apex `A_1` (of `(P_1, P_2)`) likewise except the `4 | 6` boundary in `[14.48°, 165.52°]`; neither freedom unblocks any colour at `Q` | hand, one mind; exact tangent directions | §6.5 |
+| Y2-MOVE | the disk with `R_k`'s straight sides replaced by the unit arcs of `ω(C_k)` and `ω(D_k)` (derived as the only arcs through those ends that clear the rim neighbours) is valid (ACCEPT, 71 pairs), and its ten new arcs are of kind **in** (self in-contact only) — the first in-only unit arcs held in an exact valid object | tools, exact | §6.2 |
+| Y2-WEDGE | the move frees a third colour at each rim corner (`G` at `C_0` on `(90°, 234°)`, `P` at `D_0`) and shrinks the colourless wedge from 108° to 36° — `(54°, 90°)` at `C_0`, bounded by the normals to `C_0Z^R_0` and `C_0D_0` — but does not close it; the disk's minimal radius stays `r` | tools, exact at named directions + hand, one mind | §6.3 |
+| Y2-SLACK | the boundary `C_kZ^L_k` between `R_k` and `U_k` is not locked: bent into `R_k` by a unit arc (the plant `move_wrongside`) the disk stays valid | tools, exact | §6.6 |
 | Y2-X2 | the unit circles about the strip's unit-arc end vertices leave it exactly through edge vertices: `ω(V_0)` crosses the top line at `(±1/4, top)`, reaching `1 − √15/4 ≈ 0.0318` above; `ω(A_0)` at `(−1/4, top)`, `(3/4, top)`, `≈ 0.1340` above | tools, exact | §3.6 |
 
 ## Y2 — Fence log
@@ -546,3 +551,78 @@ lenses going to `R_k`. Predictions:
 - at `C_0 + e(θ)/100`: `R` free at 18°, 36°; `G` free at 90°, 108°, …, 180°; `P` free at 180°; **no colour at 54°, 72°** (the wedge `(54°, 90°)` stays);
 - at `D_0 + e(θ)/100` (the mirror, with `U_0` and `U′_4` exchanging roles): `G` and `P` at 0°; `P` at 18°…90°; **no colour at 108°, 126°**; `R` at 144°, 162°;
 - plant `move_wrongside` (the left arcs about the reflection of `D_k` in the chord, bulging into `R_k`): REJECT at exactly the five `(U_k, U_k)`.
+
+### 6.1 The pinned-corner law at both stop points (`pin`; `data/fs112/fs112-y/y2_dial_pin.out`) [tools, exact]
+
+| | strip, `Q = (1/4, top)` | disk, `C_0` |
+|---|---|---|
+| tiles at the point (its own colours) | `C_0` (5), `C_1` (6) | `R_0` (R), `U_0` (P) |
+| each own tile's point at distance exactly 1 (the pinned partner) | `V_0 ∈ cl C_0`, `A_1 ∈ cl C_1` | `Z^R_0 ∈ cl R_0`, `B_0 ∈ cl U_0` (and `D_0`, a corner of `U′_4`) |
+| tiles straddling distance 1 at the point itself | `A_{−1}` (3), `A_0` (1), `A_1` (2), `C_{−1}` (4), `C_2` (4) | `T1_0` (O), `T2_0` (Bl), `U′_0` (Yw), `U′_4` (G) |
+| free colours at `Q + e(θ)/100` beyond the object | none at 30°, 60°, 90°, 120°, 150° | `R` at 18°, 36°; none at 54°…162°; `P` at 180° |
+
+So at each stop the four foreign colours are blocked in a whole neighbourhood, and the two own colours only in the half-planes toward their partners
+(`⟨t, partner − Q⟩ ≥ 0`), which leave an outward wedge bare — strip `(30°, 165.52°)` (YB's cone), disk `(54°, 162°)`. The stop point of both positives is the
+same object: **the second common unit point of a complementary pair, at which each tile present realises its own diameter toward a member of the pair.**
+
+### 6.2 The move at the disk's rim corner, derived; checked (`move`; `data/fs112/fs112-y/y2_dial_move.out`) [hand, one mind; tools, exact]
+
+Of the four blocked colours at `C_0`, `U′_4` (G) straddles only through its side `Z^R_0D_0`, a chord of `ω(C_0)` (both ends at distance 1 from `C_0`, the chord
+inside). Green becomes free at `C_0` exactly when `U′_4` lies outside `B(C_0, 1)`; since `U′_4`'s closure holds `Z^R_0` and `D_0`, the boundary between them must
+leave `Z^R_0` at `≤ 54°` and reach `D_0` from `≥ 270°`: a circular arc through the two ends turning 18° from the chord at each, i.e. of radius
+`|Z^R_0D_0| / (2 sin 18°) = (1/φ)/(1/φ) = 1`, centred at the common point `C_0` — **the unit arc of `ω(C_0)`, the tactic's arc once more.** The lens goes to
+`R_0`, which stays in `B̄(Z^L_0, 1)` (the arc's farthest point from `Z^L_0` is `D_0`, at 1) and outside `B(A_0, 1)`. The mirror at `D_0`: the unit arc of
+`ω(D_0)` from `C_0` to `Z^L_0`. Done in all five sectors: **ACCEPT on 71 of 71 pairs**; tightness unchanged (26 self contacts, the same 20 cross contacts);
+**the ten new arcs are all of kind in** (inner `R_k`, whose corner is the centre; outer `U′_{k−1}` or `U_k`, whose colour is not yet carried at the
+centre) — an exact valid object with in-only unit arcs, which neither positive had (C-UA-INC: "in" realised, locally).
+
+### 6.3 What the move buys, exactly (registered in 6.0; all met)
+
+- At `C_0`: `R` at 18°, 36°; **`G` at 90°, 108°, 126°, 144°, 162°, 180°**; `P` at 180°; **none at 54°, 72°**. At `D_0`: `G, P` at 0°; `P` at 18°–90°; **none at
+  108°, 126°**; `R` at 144°, 162°.
+- **The colourless wedge shrinks from 108° to 36° and stays**: `(54°, 90°)` at `C_0`, between the normal to `C_0 → Z^R_0` (red's limit: `Z^R_0 ∈ R_0` at
+  distance 1) and the normal to `C_0 → D_0` (green's limit: `D_0` a corner of `U′_4` at distance 1). It lies in `C_0`'s outward half-plane `(13.6°, 193.6°)`,
+  so every disc about `O` of radius above `r` meets it: **the disk's minimal radius stays `r = √(5/2 + 9/(2√5))`.** E6: **stall at the printed value, with
+  the obstruction named** (Y2-WEDGE).
+
+### 6.4 The second move, and where it fails (hand, one mind; floats at named points; a **GAP**, not a claim of impossibility)
+
+To cover `(54°, 90°)` a fourth colour must be free at `C_0`: `Yw` would cover `(−18°, 117°)` if `U′_0` lay outside `B(C_0, 1)` with its contact on `ω(C_0)` between
+the directions of `B_0` (252°) and of `p*` (≈ 207°), where `p*` (rim angle ≈ 130.8°) is the point where `ω(C_0)` meets the rim. The cut-off part of `U′_0`
+inside `B(C_0, 1)` splits: inside `B̄(Z^L_0, 1)` it can join `U_0` (purple); the rest, a thin triangle `T* = disc ∩ B(C_0, 1) ∖ B̄(Z^L_0, 1)` at rim angles
+≈ 127.2°–130.8°, cannot be purple (`U_0`'s diameter through `Z^L_0`), yellow (inside `B(C_0,1)`), green (`T2_1` straddles near `p*`: its corners at
+≈ 0.86 and ≈ 1.70), red (`R_0`, `R_1` straddle), or orange (`T1_0`: ≈ 0.76 and ≈ 1.70); **blue is the only candidate**, and a blue `T*` meets `ω(Z^L_0)` where
+`T2_0`'s sector at `Z^L_0` (`[244°, 18°]`) partly faces it (directions `244°–263°`): a straddle. So the second move fails unless `T2_0` changes at `Z^L_0` —
+where its top unit arc (kind both, locked, YB-LOCK) begins. **Named GAP for a successor:** whether any recolouring near `Z^L_0` that keeps the arc lets `T*`
+be blue.
+
+### 6.5 The strip's stop, by the forced sectors (hand, one mind; exact tangent directions)
+
+`V_0 = (0, √3/2)` is a common unit point of the four-colour pair `(P_{−1}, P_1)` (types `{2,3,5,6}`, `{1,2,4,5}`). At `V_0` a colour of `P_cl(P)` needs, by N-E2,
+its tile inside `B̄(P, 1)` with `P`'s sector facing `V_0`, or outside with it facing away; reading the four quadrants at `P_{±1}`: colour 3 only facing `P_{−1}`,
+5 only facing away from both, 1 only facing `P_1`, and 2, 4, 6 nowhere. So near `V_0`: `(30°, 150°)` is 5, `(150°, 210°)` is 3, `(330°, 30°)` is 1, and
+`(210°, 330°)` is 1 or 3 — **the one free parameter is the `1 | 3` boundary's direction**. At `A_1` (of `(P_1, P_2)`), likewise: `(194.48°, 345.52°)` is 2,
+`(165.52°, 194.48°)` is 6, `(345.52°, 14.48°)` is 4, and `(14.48°, 165.52°)` 4 or 6 — one free direction. At `Q` (direction 75.5° from `V_0`, 120° from `A_1`):
+the forced 1- and 3-sectors at `V_0` and the forced 2-sector at `A_1` each straddle `ω(Q)` locally, whatever the free directions; colour 4 is blocked by
+`C_{−1}` and `C_2`, each holding points on both sides of `ω(Q)`. **So no change confined to the free directions, nor any change outside the neighbourhoods of
+`V_0`, `A_1` and those two top tiles, can save `Q`** (Y2-FORCE); freeing 4 needs `C_{−1}` and `C_2` cut along `ω(Q)` — a GAP for a successor (the cut parts
+meet the valleys' forced sectors).
+
+### 6.6 Plants
+
+- `move_wrongside` (registered in 6.0 as REJECT at the five `(U_k, U_k)`): **ACCEPT — my predicted reason was wrong.** Bending `C_kZ^L_k` into `R_k` by a unit
+  arc keeps `U_k` within 1 of `B_k` (the chord runs toward `B_k`: along the chord the distance to `B_k` falls at rate `cos 216°`, and the lens's offset cannot
+  undo it). A plant whose reason cannot fire tests nothing; it stays in the tool as a record, and **it is a finding**: the `R_k | U_k` boundary is slack
+  both ways (Y2-SLACK), unlike every unit-arc boundary of the disk.
+- `move_semicircle` (predicted in the tool's docstring before the run, not in 6.0 — disclosed): the right sides replaced by semicircles on the chords (apex
+  ≈ 1.027 from `Z^L_k`): **REJECT at exactly the five `(R_k, R_k)`**, beside the faithful move (ACCEPT) — `data/fs112/fs112-y/y2_dial_move_plant2.out`.
+
+### 6.7 The dial, read
+
+Both positives stall at the printed values, at the same object: a pinned corner (6.1), fed by forced sectors at the arc-end vertices (6.5; the disk's `B_0`
+is likewise a common unit point of `(A_0, A_1)`). One move of the tactic's kind (6.2) buys a third colour at the corner and never the fourth; the fourth needs a
+tile that is locked by a both-kind arc (6.4) or by forced sectors (6.5). **This is A3's "law, not design" reading, at two positives with different skeletons**
+(five-fold and translational): the dial's stall is structural. E6 (0.2): not met. For C-BEYOND: a NO route must read the pinned corner and the plane
+beyond it — the strip's `Q` (height `√15/2 + √3`) and the disk's `C_k` (radius `r`) are where such a step lives.
+
+## Stage 6 — SAVED

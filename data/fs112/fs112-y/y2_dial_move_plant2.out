@@ -1,0 +1,4 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== the move: R_k's straight sides replaced by unit arcs of omega(C_k), omega(D_k)  [PLANT move_semicircle]
+   same-colour pairs examined 71 of 71; VERDICT REJECT; REJECT pairs [('R_0', 'R_0'), ('R_1', 'R_1'), ('R_2', 'R_2'), ('R_3', 'R_3'), ('R_4', 'R_4')]
+ALL AS EXPECTED

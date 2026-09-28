@@ -10,9 +10,10 @@ Sections (python3 tools/fs112_y2_dial.py [section ...] [--plant NAME]):
             Z^R_kD_k replaced by the unit arcs of omega(D_k) and omega(C_k) through the same ends (the only arcs through those ends that put
             U'_{k-1} outside B(C_k, 1) and U_k outside B(D_k, 1)); the lenses go to R_k.  Exact validity check of the modified disk (every
             same-colour pair), the new arcs' kinds, and the free colours beyond C_0 at the same named points as `pin`.
-Plant (--plant move_wrongside): the left arcs drawn through C_k and Z^L_k about the reflection D'_k of D_k in the chord (bulging into R_k
-instead of U_k): U_k then crosses the chord toward D_k, and its points there are farther than 1 from its own corner B_k -- predicted
-REJECT at exactly the five (U_k, U_k) self pairs.
+Plants: --plant move_wrongside (the left arcs about the reflection D'_k of D_k in the chord, bulging into R_k): registered as REJECT at the
+five (U_k, U_k) -- it ACCEPTED: the predicted reason was wrong (the lens stays within 1 of B_k); kept as a record, it fires for no reason.
+--plant move_semicircle (R_k's right side the semicircle on the chord Z^R_kD_k, a far bigger lens): predicted REJECT at exactly the five
+(R_k, R_k) self pairs (the semicircle's apex is 1.027 from Z^L_k).
 """
 from __future__ import annotations
 import sys, os, math
@@ -123,6 +124,13 @@ class MovedDisk(DK.Disk):
                 d = Y.sub(ZL, C); t = Y.dot(Y.sub(D, C), d) / Y.n2(d)
                 foot = Y.add(C, Y.mul(t, d)); cL = Y.sub(Y.mul(F(2), foot), D)
             aR = arc(C, one, ZR, D)             # right side: omega(C_k) from Z^R_k to D_k
+            aR2 = None
+            if plant == "move_semicircle":      # the right side a semicircle on the chord Z^R D (two quarter arcs): a far bigger lens
+                m = Y.mul(F(Fr(1, 2)), Y.add(ZR, D)); h = (self.r5 - 1) / 4          # half-chord 1/(2 phi)
+                ch = Y.sub(D, ZR); nrm = (ch[1] / (2 * h), -ch[0] / (2 * h))          # unit normal to the chord, away from C_k
+                if Y.dot(nrm, Y.sub(C, m)) > 0: nrm = (-nrm[0], -nrm[1])
+                apex = Y.add(m, Y.mul(h, nrm))
+                aR, aR2 = arc(m, h, ZR, apex), arc(m, h, apex, D)
             aL = arc(cL, one, C, ZL)            # left side: omega(D_k) from C_k to Z^L_k
             self.new_arcs.append((k, aR, aL))
             def swap(prims, old_ends, new):
@@ -136,12 +144,15 @@ class MovedDisk(DK.Disk):
                 return out
             c, pr = T[f"R_{k}"]
             pr = swap(pr, (ZR, D), aR); pr = swap(pr, (C, ZL), aL)
+            if aR2 is not None: pr = pr + [aR2]
             T[f"R_{k}"] = (c, pr)
             c, pr = T[f"U_{k}"]
             T[f"U_{k}"] = (c, swap(pr, (C, ZL), aL))
             km = (k - 1) % 5
             c, pr = T[f"Up_{km}"]
-            T[f"Up_{km}"] = (c, swap(pr, (ZR, D), aR))
+            pr = swap(pr, (ZR, D), aR)
+            if aR2 is not None: pr = pr + [aR2]
+            T[f"Up_{km}"] = (c, pr)
 
 
 def move():

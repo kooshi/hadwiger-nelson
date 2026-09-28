@@ -1,0 +1,5 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 1
+== the move: R_k's straight sides replaced by unit arcs of omega(C_k), omega(D_k)  [PLANT move_wrongside]
+   same-colour pairs examined 71 of 71; VERDICT ACCEPT; REJECT pairs []
+ALL AS EXPECTED
+exit 0

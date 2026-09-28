@@ -1,0 +1,18 @@
+slot: admitted python3: mem 1 GiB (hard cap), cpus 0
+== the move: R_k's straight sides replaced by unit arcs of omega(C_k), omega(D_k)
+   same-colour pairs examined 71 of 71; VERDICT ACCEPT; REJECT pairs []
+ok       the moved disk: ACCEPT on 71 pairs
+   closed_interval: 26 self contacts, cross contacts [('C0', 'R_0'), ('C0', 'R_1'), ('C0', 'R_2'), ('C0', 'R_3'), ('C0', 'R_4'), ('T1_0', 'T2_3'), ('T1_0', 'U_4'), ('T1_0', 'Up_1'), ('T1_1', 'T2_4'), ('T1_1', 'U_0'), ('T1_1', 'Up_2'), ('T1_2', 'T2_0'), ('T1_2', 'U_1'), ('T1_2', 'Up_3'), ('T1_3', 'T2_1'), ('T1_3', 'U_2'), ('T1_3', 'Up_4'), ('T1_4', 'T2_2'), ('T1_4', 'U_3'), ('T1_4', 'Up_0')]
+   new arc centred C_0: inner R_0, outer Up_4, kind in (P_cl at the centre ['P', 'R'])
+   new arc centred D_0: inner R_0, outer U_0, kind in (P_cl at the centre ['G', 'R'])
+ok       the ten new unit arcs are all of kind 'in' (self in-contact only): ['in']
+-- moved disk, C_0: tiles straddling distance 1 at the stop point itself (colour blocked in a whole neighbourhood of it)
+   R_0(R) AT the point; T1_0(O) straddles; T2_0(Bl) straddles; U_0(P) AT the point; Up_0(Yw) straddles
+   colours of the tiles at the point: ['P', 'R']; colours blocked at the point itself by a straddling tile: ['Bl', 'O', 'Yw']
+   free colours at Q + e(theta)/100 outside the object: 18: ['R']; 36: ['R']; 54: NONE; 72: NONE; 90: ['G']; 108: ['G']; 126: ['G']; 144: ['G']; 162: ['G']; 180: ['G', 'P']
+-- moved disk, D_0: tiles straddling distance 1 at the stop point itself (colour blocked in a whole neighbourhood of it)
+   R_0(R) AT the point; T1_4(Yw) straddles; T2_0(Bl) straddles; U_4(O) straddles; Up_4(G) AT the point
+   colours of the tiles at the point: ['G', 'R']; colours blocked at the point itself by a straddling tile: ['Bl', 'O', 'Yw']
+   free colours at Q + e(theta)/100 outside the object: 0: ['G', 'P']; 18: ['P']; 36: ['P']; 54: ['P']; 72: ['P']; 90: ['P']; 108: NONE; 126: NONE; 144: ['R']; 162: ['R']
+ALL AS EXPECTED
+exit 0
