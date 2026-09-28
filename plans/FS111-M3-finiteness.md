@@ -15,6 +15,19 @@ before the next begins. Notation: M2's (`plans/FS111-M2-regularity.md` §1.4–�
 - **M3-VAC** — M2-PINCH-C's hypothesis is unsatisfiable: no regular MUA set contains `P ∪ P′` and has every point within `11/10` of `W` in
   `P ∪ P′ ∪ W` (a point just beside `W` inside the lens band is neither in `F` nor on a unit circle about `F`). The lemma is vacuously true; the
   configuration it names needs material within `11/10` of `W` to cut the lens band off — [hand, one mind] §1.4.
+- **M3-HC** — the honeycomb class HC (equilateral triangles of side 1 at the vertices of a honeycomb of edge `2 + √3/3`, pointing at the face centres;
+  on each edge a band of length 1 at distance 1 from both facing sides, of thickness `ℓ − 1 ∈ [0, g]` vanishing exactly on a closed null
+  `Z ∋ ±1/2`; discs of radius `1/2` at the face centres) is a **regular maximal unit-avoiding set** for every such `Z`, satisfying M2-FIX; with `Z` the
+  Cantor set (HC_K) each band has one component per gap: **infinitely many components of the interior in every bounded set of diameter `≥ 5`** —
+  [hand + tools exact (`tools/fs111_m3_honey.py`, six checks, five plants), one mind] §2.1–§2.5. The object is by formula and has no colour count.
+- **M3-FIN-U** — MUA-FIN-U is **FALSE** (HC_K); M2-PINCH-C, corrected to "some regular MUA set contains a Cantor pinch", is **TRUE** (HC_K) — [hand +
+  tools exact, one mind] §2.6.
+- **M3-D3** — HC_K satisfies MUA-FIN in M2's words (each band's boundary is two Jordan arcs) and fails it with VM2's D3 clause (the two arcs meet on the
+  infinite set `Z × {1}`): the clause is exactly what separates a locally finite plane graph from a finite union of arcs, on a real object — [hand, one
+  mind] §2.6.
+- **M3-BAND** (the design facts) — a flat side of a block of diameter `≤ 1` needs material of its class at distance exactly 1 over the middle half of
+  the side; a band of length `λ` excludes its own horns out to `λ` and is unit-free only if `λ ≤ 1`; a side of length 1 with its band at distance 1 is
+  excluded exactly by an apex at depth `√3/2`, tight at one point (C0) — [hand, one mind] §1.5, §2.4.
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -179,9 +192,9 @@ arcs meeting exactly on `Z × {1}`.
   `Λ_e` lies within `G = 1/64` of `σ_e`, so a band is more than `√7 − G > 1` from every non-flanking triangle and more than 1 from every other band and
   disc. Against its flanking triangles: `Λ_e ⊆ {t > 1}` and `T_down ⊆ {t ≤ 0}` (distance `> 1`); `d_U > 1` on `Λ_e` (G3).
 - **Inside each block:** triangles, `U ⊆ T_up` and discs have diameter 1, attained only at boundary pairs, so interior pairs are at distance `< 1`.
-  **The band:** for `(s₁, t₁), (s₂, t₂) ∈ Λ_e`, `s₁ < s₂`, put `u₁ = s₁ + 1/2`, `u₂ = 1/2 − s₂`. Then `(s₂ − s₁)² < (1 − u₁ − u₂)²` and
-  `|t₂ − t₁| < max_i (ℓ(s_i) − 1) ≤ max_i g(s_i) ≤ max_i dist(s_i, Z)²/4`, whose square is `< max(u₁, u₂)⁴ ≤ u₁ + u₂`
-  (`±1/2 ∈ Z`); and `1 − (1 − u₁ − u₂)² ≥ u₁ + u₂` (as `u₁ + u₂ ≤ 1`). So `|z₁ − z₂| < 1`. **The band has diameter `≤ 1` because it thins to 0
+  **The band:** for `(s₁, t₁), (s₂, t₂) ∈ Λ_e`, `s₁ < s₂`, put `u₁ = s₁ + 1/2`, `u₂ = 1/2 − s₂`. Then `s₂ − s₁ = 1 − σ` with `σ = u₁ + u₂ ∈ (0, 1]`, and
+  `|t₂ − t₁| < max_i (ℓ(s_i) − 1) ≤ max_i g(s_i) ≤ max_i dist(s_i, Z)²/4`, whose square is `< max(u₁, u₂)⁴/16 ≤ σ`
+  (`±1/2 ∈ Z`); so `|z₁ − z₂|² < (1 − σ)² + σ = 1 − σ + σ² ≤ 1`. **The band has diameter `≤ 1` because it thins to 0
   quadratically at both ends** — §1.5's fact 2.
 
 So no two points of `A` are at distance 1; since `HC = cl A` (every block is the closure of its interior) and `A` is open, no point of `A` is at distance 1
