@@ -22,8 +22,11 @@ itself) unless said otherwise. **FS112-L60 is used only in its corrected form, "
 | N6-WIN | **The window lemma**: at a `κ`-change point `y` (`Ā | A`), if `κ` is defined just beyond `y + 60°`, the window `(y, y + 60°)` carries no `Ā` and all its `A`-contacts are one tile, which reaches `y + 60°` (a change point when `κ` is defined just before it too); mirror for `(y − 60°, y)` | [hand, one mind] | §2.2 |
 | N6-RING60 | A four-colour vertex whose ring carries no (Q) arc has ring change points exactly `y + 60°ℤ`: six ring tiles alternating the absent colours, each spanning a closed 60° arc | [hand, one mind] | §2.2 |
 | N6-QOUT | A (Q) arc on the pinwheel's ring has inner `T_{j+1}`, lies in `[φ_j − min(60°, 180° − α_{j+1}), φ_j + min(0, α_{j+1} + α_{j+2} − 180°)]`, and has outer colour `c_{j+3}` (outer `c_j`, `c_{j+2}` impossible by U1) | [hand, one mind; tools exact at named values] | §2.3 |
-| N6-P60 | A 60° cone `α_{j+1}` with `κ` defined on the two 60° windows beside `q_j` is impossible: the directions toward `p` at `q_j`, `(150°, 210°)` rel `φ_j`, lie in no tile's cone | [hand, one mind; tools exact] | §2.4 |
-| **N6-NOQ** | **No pinwheel has a ring free of (Q) arcs** (after the bends): at radius `1 + ε`, the pinwheel with a `Γ`-free ring, and the pinwheel `α ≡ 90°`, do not exist | [hand, one mind, over N5-BENDG and FS112-U1] | §2.4 |
+| N6-P60′ | *(Stage 2's N6-P60, "a 60° cone is impossible", is withdrawn: its step 1 misread the Reuleaux triangle's corner cone as 60°; it is 120°.)* If `α_{j+1} = 60°` and `κ` is defined on the two 60° windows beside `q_j`, then `T_{j+2}` reaches `q_j`, lies in `Reul(p, q_j, q_{j+1})`, borders the whole side `e_{j+1}` from `p` to `q_j`, and `α_{j+1} + α_{j+2} < 180°` | [hand, one mind; tools exact] | §3.1 |
+| **N6-NOQ** | **No pinwheel has a ring free of (Q) arcs** (after the bends); in particular none with a `Γ`-free ring, at radius `1 + ε`. *(Stage 2's added clause "and the pinwheel `α ≡ 90°`" is withdrawn: N6-QOUT admits (Q) arcs there.)* Proof corrected in §3.1: a 60° cone forces the next cone below 120° (N6-P60′), so all four would be 60° | [hand, one mind, over N5-BENDG and FS112-U1] | §2.4, §3.1 |
+| N6-ADJ | If `T_{j+2}` reaches `q_j` then `α_{j+1} = 60°` and `α_{j+1} + α_{j+2} < 180°` | [hand, one mind; tools exact] | §3.1 |
+| N6-QE1 | If `α_{j+1} ∈ (60°, 120°)`, no (Q) arc of `T_{j+2}` (outer colour `c_j`) holds `e(φ_j + 60°)` inside: `ω(q_j)` would enter a `c_j`-tile (N-E1 at `q_j`, which carries `c_j` by `z_j`); the pinwheel `α ≡ 90°` with full-zone (Q) arcs dies | [hand, one mind] | §3.2 |
+| N6-PIN | K1-PIN after stage 3: the pinwheel is excluded at radius `1 + ε` unless its ring carries (Q) arcs of N6-QOUT's kind; **GAP** there | [hand, one mind] | §3.3 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -140,6 +143,10 @@ Two consequences used below: **(Q) arcs never start at a centre from the counter
 
 ### 2.4 N6-P60 and N6-NOQ — without a (Q) arc there is no pinwheel
 
+*[Corrected at stage 3 (§3.1): N6-P60's step 1 is wrong — the Reuleaux triangle `Reul(p, q_j, q_{j+1})` has a 120° corner cone `[φ_j − 30°, φ_j + 90°]`
+at `p`, so `T_{j+2}` may reach `q_j`; the tool line "P60: point near p in direction −30 …" tested the wrong side of `e_{j+1}`. N6-NOQ survives with the
+corrected proof of §3.1; its last sentence (the pinwheel `α ≡ 90°`) is withdrawn. The text below is kept as written.]*
+
 **N6-P60 [hand, one mind; tools exact].** *Let `α_{j+1} = 60°`, let `q_j` be a change point with `κ` defined on `(φ_j − 60° − δ, φ_j + 60° + δ)`
 (no (Q) arc there). Then there is no pinwheel.* Here `q_{j+1} = w_+ := w_+^{(j)}`.
 1. *Inside `q_j`, only four tiles can sit.* A tile at `q_j` whose cone meets the open half-plane facing `p` has points in `B(p, 1)`; with a colour of `p`
@@ -164,3 +171,55 @@ N6-QOUT (with `b_2 > −60°`) it has none — **the pinwheel `α ≡ 90°` does
 possible only where `α_{j+1} + α_{j+2} > 180° + b_2`.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the correction, N6-NOQ re-proved, and the (Q)-pinwheel's first constraint
+
+### 3.1 The correction (G21: a result I liked, audited)
+
+**Stage 2's N6-P60 was wrong at step 1.** The Reuleaux triangle `Reul(p, q_j, q_{j+1})` (`|q_j − q_{j+1}| = 1`) has a corner cone of **120°** at `p`,
+`[φ_j − 30°, φ_j + 90°]` (the intersection of the half-planes facing `q_j` and `q_{j+1}`), not 60°; `T_{j+2}`'s cone starts at `φ_j − 30°`, its boundary.
+The tool line that "checked" it tested a point on the wrong side of `e_{j+1}` (a true fact, irrelevant to the inference). Found by re-deriving the
+Reuleaux cone while checking a (Q) arc of full length, which used the same cone. The tool now checks the 120° cone (`P60′` lines) and N6-ADJ below.
+N6-NOQ's conclusion survives with this proof; its extra clause "the pinwheel `α ≡ 90°` does not exist" does not (N6-QOUT admits (Q) arcs there:
+`α_{j+1} + α_{j+2} = 180° ≥ 180° + b_2`) and is withdrawn.
+
+**N6-ADJ [hand, one mind; tools exact].** *If `T_{j+2}` reaches `q_j`, then `α_{j+1} = 60°` and `α_{j+1} + α_{j+2} < 180°`.* `T_{j+2} ⊂ B̄(q_{j+1}, 1)` reaching `q_j`
+gives `|q_j − q_{j+1}| ≤ 1`, so `α_{j+1} = 60°`. `T_{j+2} ⊂ B̄(q_j, 1)` puts its cone at `p` in `[φ_j − 90°, φ_j + 90°]`; at equality `θ_{j+2} = φ_j + 90°` the edge
+`e_{j+2}` lies on `ω(q_{j+2}) = ω(−q_j)`, curving away from `q_j`, and `T_{j+2}`'s points just clockwise of it near `p` lie outside `B̄(q_j, 1)` (tools, ADJ;
+N6-PIN180's argument). ∎ *Reads:* `p, q_j, q_{j+1}, q_{j+2}`.
+
+**N6-P60′ [hand, one mind; tools exact].** *Let `α_{j+1} = 60°` and let `κ` be defined on `(φ_j − 60° − δ, φ_j + 60° + δ)`. Then `T_{j+2}` reaches `q_j`, lies
+in `Reul(p, q_j, q_{j+1})`, borders the whole Reuleaux side `e_{j+1}` from `p` to `q_j` (simple class: the common boundary of two tiles is connected), and
+`α_{j+2} < 120°` (N6-ADJ).* Stage 2's items 1–3 stand with `T_{j+2}` kept as a candidate: inside `q_j` sit only `T_{j+1}` (cone at `q_j` in `[210°, 270°]` rel
+`φ_j`), `T_{j+2}`, and one tile of each absent colour, `R_+ ⊂ [30°, 150°]`, `R_− ⊂ [210°, 330°]` (N6-WIN); the directions `(150°, 210°)` must be `T_{j+2}`'s. ∎
+
+**N6-NOQ, re-proved.** With no (Q) arc, every centre is a change point, so every `α_j ∈ {60°, 120°}` and two are 60° (stage 2). By N6-P60′ a 60° cone
+`α_{j+1}` forces `α_{j+2} < 120°`, i.e. `α_{j+2} = 60°`: every 60° cone is followed by another, so all four are 60° and `Σ α_j = 240°`. ∎ **The pinwheel has a
+(Q) arc on its ring, at radius `1 + ε`.**
+
+### 3.2 N6-QE1 — the (Q) arcs meet `N-E1` at the neighbouring centre
+
+**N6-QE1 [hand, one mind].** *If `α_{j+1} ∈ (60°, 120°)`, no (Q) arc of `T_{j+2}` holds `w_+^{(j)} = e(φ_j + 60°)` in its interior.* By N6-QOUT at the centre `q_{j+1}`,
+a (Q) arc of `T_{j+2}` has outer colour `c_{(j+1)+3} = c_j`, and its outer tile borders the whole arc from outside. `ω(q_j)` passes through `w_+^{(j)}`, crossing
+`ω(p)` there at 60°, so it meets that outer tile's interior; `z_j` (colour `c_j`) has `q_j` in its closure: N-E1 at `q_j`. ∎ (`α_{j+1} ∈ (60°, 120°)` is exactly when
+`w_+^{(j)}` lies inside `T_{j+2}`'s zone `[φ_{j+1} − 60°, φ_{j+1}]`.) *Reads:* `q_j`, `w_+^{(j)}`; radius `1 + ε`.
+
+**An instance: the four-fold pinwheel `α ≡ 90°` with full-zone (Q) arcs dies.** Its zones are `[φ_k − 60°, φ_k]`; a (Q) arc filling a zone holds
+`w_+^{(k−1)} = e(φ_k − 30°)` inside (N6-QE1 with `α_k = 90°`). This is the member the first-order constraints (N6-QOUT, FS112-U1, L60's equality) all admit:
+`T_{k+1} = Reul(p, e(φ_k − 60°), q_k) ∖ B(q_{k+1}, 1)`, ring tiles on `(φ_k, φ_k + 30°)`, each centre `q_k = T_{k+1} | O_k | z_k | R_k` of degree 4. So for `α ≡ 90°`
+every (Q) arc lies in one half `[φ_k − 60°, φ_k − 30°]` or `[φ_k − 30°, φ_k]` of its zone.
+
+### 3.3 K1-PIN's status after this stage
+
+| pinwheel member | status |
+|---|---|
+| ring free of (Q) arcs after the bends (in particular `Γ`-free) | **excluded at radius `1 + ε`** (N6-NOQ; one mind) |
+| a 180° cone | excluded (N6-PIN180) |
+| ring with (Q) arcs | **GAP**: each (Q) arc has inner `T_{j+1}`, outer colour `c_{j+3}`, lies within `[φ_j − min(60°, 180° − α_{j+1}), φ_j + min(0, α_{j+1} + α_{j+2} − 180°)]` (N6-QOUT), and does not straddle `w_+^{(j−1)}` when `α_j ∈ (60°, 120°)` (N6-QE1); `α ≡ 90°` with full-zone arcs dies |
+
+*Registered* (G21; both outcomes reachable — a derived contradiction, or a fragment by formula on the construction side): *every pinwheel with a (Q) arc dies within
+radius `√3` about `p`*, p = 0.5. The mechanism that worked here (N6-WIN's rigidity of the ring, broken only by (Q) holes, and N-E1 at the centres through the
+points `w_±`) reads radius `1 + ε`; the next reads are the (Q) arcs' outer tiles `O_j` (colour `c_{j+3}`, in the Reuleaux cap over the arc when it is 60° long) at the
+rhombus corners `q_j + e(φ_j − 60°)`.
+
+## Stage 3 — SAVED

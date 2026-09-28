@@ -5,8 +5,8 @@ degrees at four named cone triples and three named arcs (a check of a derived id
 derivation is by hand).
 Frame: p = 0, centre q_j = e(phi_j) with phi_j = 0 unless said; directions in degrees.
 Run: python3 tools/fs114_n6_pin.py [--plant]
-Plant: moves the centre q_{j+1} of the alpha = 60 case to e(70 deg), so exactly the two lines resting on
-|q_j - q_{j+1}| = 1 and its direction (N6-P60's T_{j+1} cone bound) must fail, and nothing else."""
+Plant: moves the centre q_{j+1} of the alpha = 60 case to e(70 deg), so exactly the three lines resting on
+|q_j - q_{j+1}| = 1, its direction, and the Reuleaux corner cone's boundary at -30 (N6-P60') must fail, and nothing else."""
 import sys
 from fractions import Fraction as Fr
 import sympy as sp
@@ -37,18 +37,24 @@ x = sp.Matrix([-t, -t**2/2 + t**3])
 check('PIN180: sample point is outside B(q_{j+1},1) (on T_{j+1} side of e_{j+1})', d2(x, qj1) > 1)
 check('PIN180: sample point is outside closed B(q_j,1)', d2(x, qj) > 1)
 
-# --- N6-P60 (alpha_{j+1} = 60): q_j = e(0), q_{j+1} = e(60) (plant: e(70)); T_{j+1} far from q_{j+1} puts its cone at q_j
+# --- N6-P60' (alpha_{j+1} = 60): q_j = e(0), q_{j+1} = e(60) (plant: e(70)); T_{j+1} far from q_{j+1} puts its cone at q_j
 # in the closed half-plane facing away from q_{j+1}; the boundary directions are dir(q_{j+1}-q_j) +- 90.
 qj = e(0); qj1 = e(70) if PLANT else e(60)
 check('P60: |q_j - q_{j+1}| = 1', d2(qj, qj1) == 1)
 v = qj1 - qj
 ang = sp.nsimplify(sp.atan2(v[1], v[0]) * 180 / sp.pi)
 check('P60: direction q_j -> q_{j+1} is 120 deg (so facing-away half-plane is [210, 390])', ang == 120)
-# T_{j+2} containing p, q_j, q_{j+1} lies in the Reuleaux triangle; its cone at p is [dir q_j, dir q_{j+1}] = [0, 60];
-# T_{j+2}'s cone at p starts at theta_{j+1} = phi_{j+1} - 90 = -30, outside [0, 60]
-w = e(-30) * sp.Rational(1, 100)          # a point of T_{j+2} near p in direction -30
-check('P60: point near p in direction -30 is outside closed B(q_{j+1},1) (so outside the Reuleaux triangle)', d2(w, qj1) > 1)
-
+# N6-P60' (stage 3 correction): Reul(p, q_j, q_{j+1}) has corner cone [-30, 90] at p (rel phi_j = 0): its boundary directions
+# -30 and 90 are perpendicular to q_{j+1} and q_j; T_{j+2}'s cone starts at theta_{j+1} = -30, INSIDE it (stage 2's wrong line removed)
+check("P60': direction -30 is perpendicular to p->q_{j+1} (Reuleaux corner cone boundary)", dot(e(-30), qj1) == 0)
+check("P60': direction 90 is perpendicular to p->q_j (Reuleaux corner cone boundary)", dot(e(90), qj) == 0)
+check("P60': direction 30 (inside [-30, 90]) faces both q_j and q_{j+1} strictly", dot(e(30), qj) > 0 and dot(e(30), qj1) > 0)
+# N6-ADJ: alpha_{j+1} + alpha_{j+2} = 180 would make e_{j+2} an arc of omega(-q_j) leaving p in direction 90 curving toward -q_j;
+# the point of T_{j+2}'s sector just clockwise of it, (-t^3, t)... in the frame q_j = e(0): e_{j+2} is (-(1-cos s), sin s) ~ (-s^2/2, s)
+t = sp.Rational(1, 10)
+y = sp.Matrix([-t**2/2 + t**3, t])      # just clockwise of e_{j+2} (toward q_j's side) but beyond omega(q_j)'s tangent curve
+check('ADJ: sample point lies outside B(-q_j,1), on T_{j+2} side of e_{j+2}', d2(y, -e(0)) > 1)
+check('ADJ: sample point lies outside closed B(q_j,1)', d2(y, e(0)) > 1)
 # --- N6-RCONE (Gamma-free / Q-free window tiles at q_j = e(0)): R_+ lies in closed B(w_+,1) and misses B(w_-,1),
 # w_+ = e(60), w_- = e(-60): boundary directions of the allowed cone [30, 150] at q_j
 wp, wm = e(60), e(-60)

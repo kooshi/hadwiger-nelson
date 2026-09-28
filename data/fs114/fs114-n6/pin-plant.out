@@ -2,7 +2,11 @@ OK   PIN180: sample point is outside B(q_{j+1},1) (on T_{j+1} side of e_{j+1})
 OK   PIN180: sample point is outside closed B(q_j,1)
 FAIL P60: |q_j - q_{j+1}| = 1
 FAIL P60: direction q_j -> q_{j+1} is 120 deg (so facing-away half-plane is [210, 390])
-OK   P60: point near p in direction -30 is outside closed B(q_{j+1},1) (so outside the Reuleaux triangle)
+FAIL P60': direction -30 is perpendicular to p->q_{j+1} (Reuleaux corner cone boundary)
+OK   P60': direction 90 is perpendicular to p->q_j (Reuleaux corner cone boundary)
+OK   P60': direction 30 (inside [-30, 90]) faces both q_j and q_{j+1} strictly
+OK   ADJ: sample point lies outside B(-q_j,1), on T_{j+2} side of e_{j+2}
+OK   ADJ: sample point lies outside closed B(q_j,1)
 OK   RCONE: R+ cone lower end 30 (facing w_+ boundary) is perpendicular to q_j->target
 OK   RCONE: R+ cone upper end 150 (facing-away-from-w_- boundary) is perpendicular to q_j->target
 OK   RCONE: direction 90 (tangent) inside the cone: faces w_+ strictly
@@ -13,4 +17,4 @@ OK   RCONE: |q_j - w_+| = |q_j - w_-| = 1
 OK   QOUT: outer colour c_j never admissible at the named values (0 admissible)
 OK   QOUT: outer colour c_(j+2) never admissible at the named values (0 admissible)
 OK   QOUT: outer colour c_(j+3) admissible at some named value, always with a1 + a2 >= 180 + b2 (12 cases)
-RESULT 2 FAIL
+RESULT 3 FAIL
