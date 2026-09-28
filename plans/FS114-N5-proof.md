@@ -26,6 +26,8 @@ never touches itself). **FS112-L60 is used only in its corrected form, "at most 
 | N5-XBAR | In the residual (`X = X′`, `T` of colour `X̄`): at most one of `q1`, `q3` carries `X̄`; if `q1` does (tile `V1`), then `V1 ∩ B(top, 1) = ∅`, `κ ≠ X̄` on `(30°, 90°)`, a (Q) arc `(a, 90°)` with inner `t2` and outer `z4` ends at `top`, `z4 ⊂ B̄(q1, 1) ∩ B̄(top, 1)` has its cone at `q1` in `[60°, 120°]`, and `T` touches the ring just after 90° | [hand, one mind] | §2.4 |
 | **N5-R0** | The residual with no `X̄` at either corner has corners `t1 | C | z4 | U1` and `t3 | C′ | z4′ | U3` (degree 4, `C` of colour 3, `C′` of colour 1); **if `C ∋ q2` and `C′ ∋ q4` it does not exist at radius `√3`** (`t2 ∌ top`; `T` touches the ring on both sides of `top`, so misses `P90`, `P90′`; then N4-G's diameter kill at whichever side `t2` reaches, and N5-DR1 if it reaches neither) | [hand, one mind; tools exact at named points] | §2.4 |
 | **N5-ΓRING** | **K1-ΓRING reduced**: a Reuleaux bowtie whose lune rings carry arcs of `ω(p)` (non-Siamese, simple class) does not exist on the closed disc of radius 2 about `p` unless a lune is in the residual **(R-V)** of N5-XBAR (one corner carries both absent colours; a (Q) arc `t2 | z4` ends at the lune's ring midpoint): every lune is degenerate (N4-D), general (N4-G), or (R0) (N5-R0), and every pair of lunes not involving (R-V) dies | [hand, one mind, over N4-D, N4-G at N4's grade (one mind each)] | §2.5 |
+| N5-SIGHT | (N3-FACE in the form N5-UP uses, for any configuration) If `|u − v| = 1` and a tile `T` at `u` has a cone not contained in the closed half-plane facing `v`, then `T`'s colour is carried at `v` by no tile meeting `B(u, 1)` | [hand, one mind] | §3.1 |
+| **N5-RV** | (R-V) walked to `P90` (one corner, `q1`, carrying `X̄`; `C′ ∋ q4` at the other): `V1 ∌ P90`; `q1`'s cap tile is `V1`, its cone runs from 300° past 0°, and `q1 = t1 | V1 | (W3) | z4 | U1`; `P90` carries only colours 1, 3 and 4, the half-plane `(0°, 180°)` at `P90` only 1 and 3; `T ∋ P90′`. **Not excluded: K1-ΓRING is GAP at (R-V)** | [hand, one mind] | §3.2 |
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -191,3 +193,50 @@ the ring just after it; `q3 = t3 | C′ | z4′ | U3`. It is the construction si
 60°, of a colour with no tile at `q2`: `4 ∉ P_cl(q2)` by N4-OWN), reached from the proof side with a Γ-arc on the ring. Stage 3 walks it.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the residual (R-V) walked to `P90`, and one tool
+
+### 3.1 N5-SIGHT
+
+**N5-SIGHT [hand, one mind].** *If `|u − v| = 1` and a tile `T` at `u` has a cone not contained in `{w : w · (v − u) ≥ 0}`, then no tile at `v` meeting
+`B(u, 1)` has `T`'s colour.* A tile of that colour at `v` is `T` (then `T ⊂ B̄(v, 1)`, cone facing `v`) or far from it (then it misses `B(u, 1)`, N-E2). ∎ It is
+N3-FACE read at the target point; N5-UP is its instance at `(top; q1, q3)`. *Warning, recorded because I made the slip and caught it:* a tile at `v` meets
+`B(u, 1)` only when its cone at `v` meets the open half-plane facing `u` (or it has points there otherwise) — `t4` at `p` does not meet `B(top, 1)`, which is why
+the degenerate member's `W` (colour 4 at `top`) exists. *Reads:* `u`, `v`.
+
+### 3.2 N5-RV — (R-V) at `P90`
+
+*Setting (R-V1), from N5-XBAR: `q1` carries `X̄` (`V1`, cone in `[300°, 60°]`, `V1 ∩ B(top, 1) = ∅`); the (Q) arc `(a, 90°)` (`t2` inside, `z4` outside) ends at
+`top`; `z4 ⊂ B̄(q1, 1) ∩ B̄(top, 1) ∖ B(p, 1)` (cone `[60°, 120°]`-bounded at `q1`, `[0°, 60°]`-bounded at `top`); `T` (`X̄`) holds `top`, its cone at `top` in
+`[60°, 240°]` (far from `V1`), crossing the ring at `90°+`; `q3 = t3 | C′ | z4′ | U3`; and `C′ ∋ q4` (the bottom lune's corner cap at `q4` of colour 1).*
+1. *`T ∋ P90′`.* Near `P90′` the lens `B(q3, 1) ∩ B(top, 1)` outside `B̄(p, 1)` holds: colour 1 only in `C′` (N4-LENS at `q3`), which lies in `B̄(q4, 1)` and misses
+   `P90′`; 2 nothing (`t2 ∋ top`); 3 only `t3`; 4 nothing (`z4′` at `q3`, `z4` at `top`, different: N4-LENS both ways); `X` only `U3` (N4-TANG, mirror); `X̄` only
+   `T`. So `T` fills it: `T ⊂ B̄(P90′, 1)`, and `T ∌ P90` (`|P90 − P90′| = √3`).
+2. *What `P90` can carry.* By N5-SIGHT at `(P90; q1, top)` and N4-LENS: colour 2 nowhere (a second colour-2 tile misses `B(e(θ), 1)`, `θ ∈ (a, 90°)`, which
+   holds `P90`); `X` nowhere (`U1` meets `B(P90, 1)` near `e(30°+)` and misses `P90`, N4-TANG); `X̄` nowhere (`T` meets `B(P90, 1)` — its points near `top` in the
+   directions `(60°, 120°)` — and misses `P90`; `V1` is excluded in item 3); 4 only `z4` (which meets `B(P90, 1)`: `z4` lies in `Reul(q1, top, P90)`), with cone at
+   `P90` in `[180°, 300°]`. **So `P_cl(P90) ⊆ {1, 3, 4}`, and the half-plane `(0°, 180°)` at `P90` — outside `B̄(q1, 1)` — carries only colours 1 and 3** (at most
+   one tile each).
+3. *`V1 ∌ P90`.* `ω(P90)` passes through `top` in the directions 120° and 300°, curving toward `P90`; near `top` it enters `T` (direction `120° − ε`, inside `T`'s
+   cone). If `V1 ∋ P90`, `X̄ ∈ P_cl(P90)` and N-E1 at `P90` forbids that.
+4. *The sector `(300°, 360°)` at `P90`* (inside `B(q1, 1)`, outside `B̄(top, 1)`) holds a tile of a colour of `P_cl(q1)` only if it is `q1`'s tile of that colour
+   reaching `P90` — `t1`, `U1`, `z4` (cone at `P90` in `[180°, 300°]`), `V1` (item 3) cannot — or a colour absent at `q1`: 2 is excluded, so **colour 3**.
+5. *The cap tile is `V1`.* `ω(P90)` passes through `q1` horizontally, curving up; near `q1` it enters the tile at `q1` holding the direction `0°+`. That tile is `V1`
+   or colour 3 (the colours in `[300°, 60°]` at `q1`); colour 3 would put it on `ω(P90)` while `P90` carries 3 (item 4): N-E1. So `V1` holds the direction `0°+`, and
+   since the cap tile is `V1` or colour 3 and one tile per colour sits at `q1`, **`q1 = t1 | V1 | (W3) | z4 | U1`**: `V1` from 300° past 0°, then possibly a
+   colour-3 tile `W3`, then `z4`, then `U1`.
+6. *If `W3` exists* it fills the sector `(300°, 360°)` at `P90` (item 4, one colour-3 tile per vertex), bounded at 0° by an arc of `ω(q1)` (N-E1 at `q1`), and
+   `W3 ⊂ B̄(q1, 1) ∩ B̄(P90, 1)`. If not, that sector is a colour-3 tile absent at `q1`.
+*Reads:* the closed disc of radius `√3` about `p` (the points `q1, q3, q4, top, P90, P90′`).
+
+**Verdict.** No contradiction at radius `√3`. **K1-ΓRING is GAP at (R-V)**, with the forced shape above: a Reuleaux-cap tile `z4` over the ring arc `q1–top`
+(sector at `q1` starting at 60° or later, colour 4 absent at `q2` by N4-OWN) — the card's escape E2 in shape, found from the proof side through a (Q) arc on the ring.
+Its next reads are the other side of the colour-1/colour-3 pair at `P90` and the cap region `Reul(q1, q2, r) ∖ B̄(p, 1)`, where `V1` (colour `X̄`) now sits at `q1`
+in place of N4-G's colour-3 cap tile — so an (R-V) lune also removes the cap that N4-G and N5-R0 need to kill the *other* lune from the `q2` side.
+**Registered** (G21; both outcomes reachable — a derived contradiction, or a fragment by formula on the construction side): *(R-V) dies within radius 2 about `p`*,
+p = 0.4.
+
+**Would-have-searched here.** A fragment by formula for (R-V) to see where it stops: not built (the construction side's kind of object); the derivation stops
+at the named reads instead.
+
+## Stage 3 — SAVED
