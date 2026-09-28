@@ -105,3 +105,40 @@ replacement asserted once.
 in 74 files; FS111=85, FS114=46; `data/workflow3/x1/stage2-ledger-check-strict.out`). **Negative control:** FS111-M4-CUT's line removed from a copy
 → exit 1, "FAIL: entry FS111-M4-CUT has no LEDGER.md § B row", "RESULT: FAIL (1)" (`stage2-ledger-check-plant.out`); restored (sha256 identical,
 2581…), re-run exit 0. `LEDGER.md`: 493,844 → 541,387 bytes.
+
+## Stage 3 — SAVED: `CLAUDE.md` (manifest item 3)
+
+Script: `data/workflow3/x1/file_claude.py`, run once. FS-114's seven units are read from the close record's `#### <unit>: replace` blocks and
+asserted equal to `data/fs114/fs114-c/claude_md_units.py`'s `old`/`new` (they are); each old unit found exactly once. Poros's tables were re-assembled
+first in the worktree: `python3 data/workflow3/r1/assemble.py` exit 0 ("ranked rows: 69 (source 66)"; "CLAUDE.md table: 11894 -> 11247 bytes, net -647"),
+the outputs byte-identical to the committed `data/workflow3/r1/` files (git shows no change), `--self-test` PASS (both plants refused); the record's
+two inline tables equal the two files row for row, and its open unit equals `open-unit.md`.
+
+| unit | filed | corrections and merges used |
+|---|---|---|
+| last | FS-114's unit | F1 pair 3; FS-111's clause 1 at `‹FS-111›`, ended by a full stop (ruling 1); ruling 3 |
+| open | Poros's whole unit (`data/workflow3/r1/open-unit.md`), replacing FS-114's drafted one | ruling 3 |
+| prog | FS-114's unit | F1 pair 4; FS-111's clause 3 at `‹FS-111›`, ended by a semicolon (ruling 2); ruling 3 |
+| i31 | FS-114's unit | F1 pair 5 (matched across the unit's line break, the break kept) and pair 6; the heading parenthesis as ruled, "(§ The aim; rows 131–141; FS-116, FS-117, FS-120–FS-122)" (its line break kept); FS-111's clause 4 with F9 at the second `‹FS-111›`; ruling 3 |
+| g83 | FS-114's unit (G83, G86) | F1 pair 7 on G83; G84 and G85 (FS-111 §D4) between G83 and G86; ruling 3 |
+| g72 | the coordinator's line (Amendment 1, Q1), read from `main:data/workflow3/briefs/X1-front-page.md` | F6 as ruled |
+| rows | "**Rows 1–141 live in `LEDGER.md`**" | `‹last›` = 141 |
+| § Paths forward | Poros's 29 rows and the group row "30–69" (`data/workflow3/r1/claude-paths-forward.md`, CAMEND applied by the script) | — (no placeholder in it) |
+
+**Size:** `wc -c CLAUDE.md` = **293,055** (was 288,911; net +4,144), under 300,000.
+
+**Fact audit** (`python3 tools/claude_md_fact_audit.py --base a9410925`, FS-112's close; `data/workflow3/x1/stage3-fact-audit-a9410925.out`): exit 1,
+12 flags, every one caused by the filed drafts, none by the morning's refactor (its three moved tokens print as registered explanations):
+- `plans/POROS-2026-09-27-night-aim.md` (code and chunk tokens) and `plans/STUB-unit-arc-half.md`: both lived only in the old open-milestones unit, which
+  Poros's unit replaces (NIGHT-A's pointer was FS-115's "waits for FS-114's plan"; FS-112's stub is on the closed list in `plans/FRONTIER-STUBS.md`).
+- `plans/STUB-chain-theorem.md`, "588-core's", "D1–D3": FS-45's detailed row, which leaves `CLAUDE.md`'s table for the group row (Poros: "FS-43, FS-45 and
+  FS-39 leave the detailed rows for the group row"); the row stands in `plans/FRONTIER-STUBS.md`.
+- "Handles": FS-114's old rank-1 row ("Handles: the pinned corner …"), gone with FS-114's close.
+- "131–136", "1–136", "30–66": ranges extended by the close (item 31's rows 131–141, the ledger pointer 1–141, the group row 30–69) — the tool's own
+  precedents for each.
+- G83's status tag "(rows 135–136)" → "(rows 135–138)" (two flags: the lost tag token and the tag change): FS-114's drafted G83.
+**Duplicates** (`--dupes`, `stage3-fact-audit-dupes.out`): exit 0; 17 repeated runs against 10 on `main` — the 7 new ones all inside filed drafts:
+row 137 retells row 135's map definition; row 139 and FS111-W-HX-PAIRS, row 141 and FS111-M4-LADDER, FS111-W-SQ9 and -W-HEX9, FS111-M2-DISC7 and
+-M2-DISCK7 share runs (a row and its § B index line, or two § B lines' grade cells); row 138 and G83 share "two tiles of one colour forced along two unit
+circles to come within"; FS112-L60's corrected line and FS114-L60-LE share "a unit arc with constant sides is at most 60°". Filed as drafted; the
+retellings are the lanes' to trim, not mine.
