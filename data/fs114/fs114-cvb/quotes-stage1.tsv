@@ -1,0 +1,28 @@
+B-rainbow (brief, part B.2)	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	x and its neighbors must have distinct colors
+Thomassen Lemma 1 (claims.md C114-THOM-TOP)	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	If G is a connected, locally finite, and locally Hamiltonian graph with at least 13 vertices, then G has a vertex of degree at least 6.
+Thomassen: M - x connected	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	It follows that M - x (that is, M with x and the edges incident with x removed) is connected.
+Thomassen: 2-separator criterion	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	is connected unless y appears twice in the sequence
+Thomassen: the count	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	By (ii), there are at most k points Pz
+Thomassen: face hypothesis	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	is homeomorphic to a disc, and is bounded by a cycle in G
+Thomassen: map graph	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	We define the map graph M = M(G, S) as the graph whose vertices are the faces of G
+Thomassen: locally connected	/home/kooshi/source/library/papers/Thomassen-1999-On-the-Nelson-unit-distance-coloring-problem.txt	Then any two consecutive vertices in the sequence xI, x2, .. ., Xk, x1 are neighbors in M and so M is locally connected.
+claims.md C114-THOM-TOP	data/fs114/claims.md	and the topological steps of his Theorem 1's proof hold for the map graph of every valid map, with FS106-V3's repairs
+SR0 Kooshi (CLAUDE.md)	CLAUDE.md	From here on out, you may doubt your ability to tackle the difficulty of the problems we encounter. Don't. You are capable, and you will surprise yourself.
+SR3 ban intent (CLAUDE.md)	CLAUDE.md	to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time
+SR3 finite graph (CLAUDE.md)	CLAUDE.md	search for a finite graph is out. It would be huge, not feasible.
+SR4 (CLAUDE.md)	CLAUDE.md	A proven theorem about why its impossible is also valid. All novel knowledge is a success
+SR10 (CONSOLIDATION item 20)	plans/CONSOLIDATION-2026-09-27.md	It's ok if jobs overrun a bit. Setting a budget is reasonable, but holding them to it is not worth the stress.
+DENSE3	plans/FS112-derivation.md	Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.
+N2-TERM	plans/FS112-derivation.md	Every valid map has a valid modification `M*`, creating no unit arc, in which every unit arc is (Q) or (R2); every vertex is cubic, an NB4P exception with at least four colours, or stuck; every stuck vertex lies on a stuck chain along its normal line that is not bi-infinite, each finite end within distance 1 of a (Q) or (R2) arc or an NB4P exception, every horn bound `±1` on it a (Q) or (R2) arc; one-sided infinite chains are a GAP.
+U1	plans/FS112-derivation.md	At a unit arc `α ⊂ ω(P)` of angular length `ℓ`, an inner side colour in `P_cl(P)` has its sectors at `P` in the closed cone of width `π − ℓ` facing `α`, an outer one in the closed cone facing away; both side cones hold neither
+FLANK	plans/FS112-derivation.md	N4-FLANK fails when a horn's bounding arc is a unit arc centred at `N` (`κ₊ = 1`) or `S′` (`κ₋ = −1`): an in-type flank tile at the centre is then Siamese with the flank and shadows a band of the horn, and SHAVE's criterion is incomplete there.
+N2-FLANK-Q	plans/FS112-derivation.md	Every horn bound of exactly `±1` sits on a (Q) arc — FLANK's in-type exception, and then both horns' upper arcs form one arc of `ω(N)` through `v` — or on an (R2) arc
+END	plans/FS112-derivation.md	In a stuck chain whose vertices all carry N4-STUCK's structure, the horn curvatures cannot reach `λ_{k+1} = −1` or `υ_{k−1} = 1`.
+C-ENDS	plans/FS112-derivation.md	In a terminal valid map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours, except possibly beside a one-vertex chain bounded by unit arcs on both sides but not on all four horn arcs, at a bound on an (R2) arc — a residue not walked.
+C-HORNEND	plans/FS112-derivation.md	In a terminal valid map, a stuck vertex `E` both of whose horns are bounded by unit arcs of `ω(E + n)` has a horn bounded by a unit arc of `ω(E − n)` too, and is a one-vertex chain; likewise with `n` reversed.
+Y3-END-NEEDS corrected	plans/FS112-derivation.md	then keeping `E` stuck and `N` terminal needs five colours at `N` against its MERGE and a seventh colour at `N + n` against its SHAVE, so no such end exists
+N4-FIN	plans/FS110-derivation.md	No bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`.
+N3-DEG	plans/FS110-derivation.md	`int D_c(v)` is empty only in Woodall's cone: out-type `c`-contacts at both `v ± n`, every `c`-sector a cusp horn along `±a` with bounding curvatures in `(−1, 1)`.
+W-MERGE	plans/FS110-derivation.md	if `int D_c(v)` is nonempty, two non-adjacent `c`-sectors at `v` are joined by recolouring the gap inside `D_c(v)` near `v`
+WALK (unit arcs)	plans/FS112-derivation.md	N3-CONF, W-MERGE, N4-RAY and N4-FIN as a statement hold as written
+DENSE3 proof note	plans/FS112-derivation.md	Moves never add a colour or a sector to an existing point, so no terminal modification is needed.
