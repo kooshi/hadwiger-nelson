@@ -108,7 +108,7 @@
     "decl": "chromaticNumber_plane_interval"
    },
    "grade": "@lean",
-   "theta": 260,
+   "theta": 262,
    "r": 140,
    "sector": "five",
    "tier": 0,
@@ -143,7 +143,7 @@
     "decl": "chromaticNumber_plane_interval"
    },
    "grade": "@lean",
-   "theta": 344,
+   "theta": 338,
    "r": 140,
    "sector": "seven",
    "tier": 0,
@@ -177,7 +177,7 @@
     "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
    },
    "grade": "the exact value inside it remains open",
-   "theta": 16,
+   "theta": 22,
    "r": 140,
    "sector": "seven",
    "tier": 0,
@@ -275,7 +275,7 @@
     "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
    },
    "grade": "@lean",
-   "theta": 250,
+   "theta": 274,
    "r": 222,
    "sector": "five",
    "tier": 2,
@@ -302,8 +302,8 @@
     "file": "Proofs/HadwigerNelson/Instances/Interval.lean"
    },
    "grade": "@lean",
-   "theta": 338,
-   "r": 222,
+   "theta": 352,
+   "r": 212,
    "sector": "seven",
    "tier": 2,
    "lean": {
@@ -327,7 +327,7 @@
   },
   {
    "id": "EL",
-   "label": "Einsiedler–Lindenstrauss",
+   "label": "EL 2021, Thm 1.3",
    "role": "external",
    "plain": "A published rigidity theorem for commuting automorphisms of solenoids (positive entropy). Measure rigidity uses it by statement; its cited machinery is unread here.",
    "src": {
@@ -340,8 +340,8 @@
     "row": "120"
    },
    "grade": "EL2021 Thm 1.3 (external, published)",
-   "theta": 294,
-   "r": 490,
+   "theta": 298,
+   "r": 520,
    "sector": "engine",
    "tier": 2,
    "status": "external",
@@ -365,8 +365,8 @@
     "row": "120"
    },
    "grade": "PE-2 two derivations blind to each other (X02D, X02V)",
-   "theta": 302,
-   "r": 410,
+   "theta": 304,
+   "r": 440,
    "sector": "engine",
    "tier": 1,
    "status": "hand-2b",
@@ -390,7 +390,7 @@
     "row": "128"
    },
    "grade": "the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2)",
-   "theta": 314,
+   "theta": 316,
    "r": 330,
    "sector": "engine",
    "tier": 1,
@@ -415,8 +415,8 @@
     "row": "130"
    },
    "grade": "M1, M1b, M1c, M-FREE, M-AE3 and M-Q4 two derivations (FS103-M; FS103-N blind to M's record)",
-   "theta": 326,
-   "r": 262,
+   "theta": 331,
+   "r": 258,
    "sector": "engine",
    "tier": 1,
    "status": "hand-2b",
@@ -440,7 +440,7 @@
     "row": "121"
    },
    "grade": "the headline rule met (every half two blind minds, SP-Cor checked blind)",
-   "theta": 272,
+   "theta": 266,
    "r": 300,
    "sector": "five",
    "tier": 1,
@@ -465,7 +465,7 @@
     "decl": "chromaticNumber_planeOver_le_plane"
    },
    "grade": "@lean",
-   "theta": 268,
+   "theta": 254,
    "r": 215,
    "sector": "five",
    "tier": 2,
@@ -503,7 +503,7 @@
     "row": "123"
    },
    "grade": "CLS three derivations — X23D and X26B blind to each other in full",
-   "theta": 286,
+   "theta": 282,
    "r": 330,
    "sector": "lg",
    "tier": 2,
@@ -528,8 +528,8 @@
     "row": "99"
    },
    "grade": "S1 three derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three",
-   "theta": 280,
-   "r": 410,
+   "theta": 272,
+   "r": 420,
    "sector": "lg",
    "tier": 2,
    "status": "hand-2",
@@ -553,8 +553,8 @@
     "row": "52"
    },
    "grade": "[hand + tools]",
-   "theta": 266,
-   "r": 410,
+   "theta": 262,
+   "r": 420,
    "sector": "lg",
    "tier": 2,
    "status": "hand-1",
@@ -578,7 +578,7 @@
     "section": "## Notation"
    },
    "grade": "The conjecture (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7.",
-   "theta": 254,
+   "theta": 250,
    "r": 410,
    "sector": "lg",
    "tier": 2,
@@ -603,8 +603,8 @@
     "row": "127"
    },
    "grade": "[kernel; standard three axioms, no native purchase; the lower halves conditional on named propositions, not vacuous domains]",
-   "theta": 280,
-   "r": 490,
+   "theta": 284,
+   "r": 500,
    "sector": "lean",
    "tier": 2,
    "status": "kernel",
@@ -626,8 +626,8 @@
     "file": "plans/STUB-main-clause-five-kernel.md"
    },
    "grade": "FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)",
-   "theta": 270,
-   "r": 560,
+   "theta": 276,
+   "r": 575,
    "sector": "lean",
    "tier": 2,
    "status": "gap",
@@ -649,8 +649,8 @@
     "file": "plans/STUB-mr-in-lean.md"
    },
    "grade": "FS-113 — measure rigidity for the unit-vector group, in full, in Lean (stub)",
-   "theta": 306,
-   "r": 490,
+   "theta": 310,
+   "r": 520,
    "sector": "lean",
    "tier": 2,
    "status": "gap",
@@ -731,8 +731,8 @@
     "row": "131"
    },
    "grade": "EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind",
-   "theta": 44,
-   "r": 222,
+   "theta": 42,
+   "r": 200,
    "sector": "seven",
    "tier": 2,
    "status": "hand-2b",
@@ -782,7 +782,7 @@
    },
    "grade": "maps-six, Townsend's manuscript and Woodall one mind, the fill in outline",
    "theta": 204,
-   "r": 300,
+   "r": 320,
    "sector": "five",
    "tier": 2,
    "status": "hand-1",
@@ -856,8 +856,8 @@
     "row": "133"
    },
    "grade": "RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind",
-   "theta": 120,
-   "r": 262,
+   "theta": 118,
+   "r": 280,
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
@@ -906,7 +906,7 @@
     "section": "### Where the problem stands"
    },
    "grade": "with unit arcs, open.",
-   "theta": 24,
+   "theta": 22,
    "r": 375,
    "sector": "seven",
    "tier": 1,
@@ -955,7 +955,7 @@
     "row": "2"
    },
    "grade": "door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a set of positive measure?",
-   "theta": 66,
+   "theta": 62,
    "r": 262,
    "sector": "seven",
    "tier": 1,
@@ -1181,8 +1181,8 @@
     "row": "63"
    },
    "grade": "derives how the two gaps compose into a NO (periodic maps: the global step alone?)",
-   "theta": 40,
-   "r": 450,
+   "theta": 38,
+   "r": 460,
    "sector": "seven",
    "tier": 1,
    "also": [
@@ -1252,8 +1252,8 @@
     "row": "129"
    },
    "grade": "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
-   "theta": 112,
-   "r": 215,
+   "theta": 110,
+   "r": 205,
    "sector": "six-low",
    "tier": 2,
    "status": "hand-2b",
@@ -1277,8 +1277,8 @@
     "file": "plans/STUB-window-frequency-certificate.md"
    },
    "grade": "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)",
-   "theta": 78,
-   "r": 300,
+   "theta": 80,
+   "r": 320,
    "sector": "six-low",
    "tier": 2,
    "words": {
@@ -1311,8 +1311,8 @@
     "row": "125"
    },
    "grade": "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)",
-   "theta": 94,
-   "r": 375,
+   "theta": 92,
+   "r": 390,
    "sector": "six-low",
    "tier": 2,
    "status": "hand-2b",
@@ -1336,8 +1336,8 @@
     "row": "125"
    },
    "grade": "Not claimed: anything about six.",
-   "theta": 108,
-   "r": 300,
+   "theta": 106,
+   "r": 390,
    "sector": "six-low",
    "tier": 2,
    "status": "gap",
@@ -1388,8 +1388,8 @@
     "row": "119"
    },
    "grade": "[kernel; standard three axioms, no native purchase]",
-   "theta": 100,
-   "r": 450,
+   "theta": 104,
+   "r": 490,
    "sector": "six-low",
    "tier": 2,
    "status": "kernel",
@@ -1413,8 +1413,8 @@
     "section": "### The aim"
    },
    "grade": "[hand, two minds]: FS103-N's N-EASY, PA1's (E)",
-   "theta": 180,
-   "r": 178,
+   "theta": 186,
+   "r": 176,
    "sector": "six-up",
    "tier": 1,
    "note": "LEDGER.md row 130's grade bracket lists N-EASY at one mind; § The aim adds PA1's (E) as the second.",
@@ -1438,8 +1438,8 @@
     "file": "plans/STUB-regularity-wall.md"
    },
    "grade": "both claims GAP",
-   "theta": 152,
-   "r": 222,
+   "theta": 148,
+   "r": 215,
    "sector": "six-up",
    "tier": 1,
    "status": "gap",
@@ -1463,8 +1463,8 @@
     "row": "1"
    },
    "grade": "does a tight six-map exist once unit arcs are allowed?",
-   "theta": 138,
-   "r": 300,
+   "theta": 128,
+   "r": 325,
    "sector": "six-up",
    "tier": 1,
    "registered": {
@@ -1485,7 +1485,7 @@
   },
   {
    "id": "UNB",
-   "label": "unbounded complexity (door B's negation)",
+   "label": "unbounded complexity",
    "role": "question",
    "plain": "A family of near-colourings of unbounded complexity whose holes vanish while their junction scales shrink to 0 — W's claim itself, if FS-111 fails.",
    "src": {
@@ -1496,7 +1496,7 @@
     "file": "plans/STUB-regularity-wall.md"
    },
    "grade": "both claims GAP",
-   "theta": 164,
+   "theta": 162,
    "r": 300,
    "sector": "six-up",
    "tier": 2,
@@ -1521,8 +1521,8 @@
     "row": "33"
    },
    "grade": "two exact checkers, the same object and verdict",
-   "theta": 128,
-   "r": 375,
+   "theta": 119,
+   "r": 412,
    "sector": "six-up",
    "tier": 2,
    "also": [
@@ -1554,8 +1554,8 @@
     "row": "53"
    },
    "grade": "two exact checkers ACCEPT 71/71",
-   "theta": 144,
-   "r": 375,
+   "theta": 140,
+   "r": 400,
    "sector": "six-up",
    "tier": 2,
    "status": "cert",
@@ -1579,8 +1579,8 @@
     "row": "53"
    },
    "grade": "O2: the two positives stop for the same reason — TRUE (two minds, one blind)",
-   "theta": 130,
-   "r": 450,
+   "theta": 128,
+   "r": 480,
    "sector": "six-up",
    "tier": 2,
    "status": "hand-2b",
@@ -1605,7 +1605,7 @@
    },
    "grade": "[exact + hand]",
    "theta": 146,
-   "r": 450,
+   "r": 470,
    "sector": "six-up",
    "tier": 2,
    "verifying": true,
@@ -1632,7 +1632,7 @@
    },
    "grade": "LOCAL over Parts [external]",
    "theta": 168,
-   "r": 375,
+   "r": 390,
    "sector": "six-up",
    "tier": 2,
    "status": "external",
@@ -1656,8 +1656,8 @@
     "file": "plans/STUB-fifth-colour-structure.md"
    },
    "grade": "FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)",
-   "theta": 218,
-   "r": 222,
+   "theta": 216,
+   "r": 245,
    "sector": "five",
    "tier": 1,
    "words": {
@@ -2741,10 +2741,14 @@
   },
   {
    "status": "gap-question",
-   "p": 0.1,
-   "why": "An open question not yet reduced to named steps (FS-104, FS-80, FS-44, PL, door B's negation). Lower than a named step because it hides steps nobody has counted. A stated default; no source prices it.",
-   "src": null,
-   "quote": null
+   "p": 0.03,
+   "why": "An open question not yet reduced to named steps (FS-104, FS-80, FS-44, PL, door B's negation). Anchored on the one registered credence for a question of the answer's size: FS-112's 0.03 for a YES by formula. Lower than a named step because it hides steps nobody has counted.",
+   "src": {
+    "file": "plans/FS112-unit-arc-half.md",
+    "row": "E5"
+   },
+   "quote": "the stub's \"a YES by formula (0.03)\", re-registered at 0.03 with its population stated",
+   "address": "plans/FS112-unit-arc-half.md item E5, line 549"
   }
  ],
  "notes": [

@@ -1,0 +1,958 @@
+<title>Proof Atlas</title>
+<meta name="description" content="The logic of the Hadwiger–Nelson hunt, arranged around its answer: every theorem, missing step and no-go with its source, and each route's distance to an answer in bits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --ground: #eef1ef;
+  --panel: #f8faf8;
+  --panel-2: #e6ebe8;
+  --ink: #1c2a2e;
+  --ink-2: #3c4b4f;
+  --muted: #5d6c6e;
+  --rule: #c9d3d0;
+  --rule-2: #dfe5e2;
+  --c7: #33568f;
+  --c6: #217563;
+  --c5: #985a1a;
+  --missing: #c0432c;
+  --nogo: #7b2334;
+  --reading: #9c7a0c;
+  --external: #625f86;
+  --focus: #1d6fd8;
+  --halo: #eef1ef;
+  --brick-1: #33568f; --brick-2: #217563; --brick-3: #985a1a; --brick-4: #7b2334;
+  --brick-5: #625f86; --brick-6: #9c7a0c; --brick-7: #3c4b4f;
+  --brick-alpha: .13;
+  --wedge-alpha: .05;
+  --shadow: 0 1px 0 rgba(28, 42, 46, .05), 0 8px 24px -16px rgba(28, 42, 46, .35);
+  --f-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --f-ui: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0f1618; --panel: #151f22; --panel-2: #1c282b; --ink: #dde7e4; --ink-2: #bccac7; --muted: #8fa1a0;
+    --rule: #2c3b3e; --rule-2: #22302f; --c7: #8ea9e2; --c6: #6cc7b0; --c5: #e2a45f; --missing: #f07b62; --nogo: #e6798b;
+    --reading: #e0c25a; --external: #aeaad2; --focus: #7fb2ff; --halo: #0f1618; --brick-alpha: .16; --wedge-alpha: .07;
+    --brick-1: #8ea9e2; --brick-2: #6cc7b0; --brick-3: #e2a45f; --brick-4: #e6798b; --brick-5: #aeaad2; --brick-6: #e0c25a; --brick-7: #bccac7;
+    --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 10px 26px -18px rgba(0, 0, 0, .8);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0f1618; --panel: #151f22; --panel-2: #1c282b; --ink: #dde7e4; --ink-2: #bccac7; --muted: #8fa1a0;
+  --rule: #2c3b3e; --rule-2: #22302f; --c7: #8ea9e2; --c6: #6cc7b0; --c5: #e2a45f; --missing: #f07b62; --nogo: #e6798b;
+  --reading: #e0c25a; --external: #aeaad2; --focus: #7fb2ff; --halo: #0f1618; --brick-alpha: .16; --wedge-alpha: .07;
+  --brick-1: #8ea9e2; --brick-2: #6cc7b0; --brick-3: #e2a45f; --brick-4: #e6798b; --brick-5: #aeaad2; --brick-6: #e0c25a; --brick-7: #bccac7;
+  --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 10px 26px -18px rgba(0, 0, 0, .8);
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--ground); }
+body { margin: 0; color: var(--ink); font-family: var(--f-ui); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1480px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 40px; display: grid; gap: 16px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -.005em; }
+h1 { font-size: clamp(30px, 4.2vw, 44px); line-height: 1.05; }
+h2 { font-size: 21px; line-height: 1.2; }
+h3 { font-size: 17px; line-height: 1.25; }
+p { margin: 0; }
+.eyebrow { font-size: 11.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 700; }
+.mono { font-family: var(--f-mono); font-size: 12.5px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- header */
+.top { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.6fr); gap: 20px; align-items: end; }
+.lede { font-family: var(--f-display); font-size: 17.5px; line-height: 1.45; color: var(--ink-2); max-width: 60ch; margin-top: 8px; }
+.held-line { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+.held-line b { color: var(--ink); }
+.answers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ans { text-align: left; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px 12px;
+  display: grid; gap: 4px; cursor: pointer; position: relative; box-shadow: var(--shadow); }
+.ans::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; border-radius: 10px 10px 0 0; background: var(--hue); }
+.ans[aria-pressed="true"] { outline: 2px solid var(--hue); outline-offset: -1px; }
+.ans .num { font-family: var(--f-display); font-style: italic; font-size: 30px; line-height: 1; color: var(--hue); }
+.ans .num small { font-style: normal; font-family: var(--f-ui); font-size: 12px; color: var(--muted); margin-left: 6px; letter-spacing: .02em; }
+.ans .dist { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.ans .dist span { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+.ans .meta { font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
+.ans .meta b { font-variant-numeric: tabular-nums; }
+.ans .via { font-size: 12px; color: var(--muted); line-height: 1.35; }
+
+/* ---------- legend */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; padding: 10px 14px; background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 10px; font-size: 12.5px; color: var(--ink-2); }
+.legend .grp { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
+.legend .grp + .grp { padding-left: 14px; border-left: 1px solid var(--rule); }
+.legend .item { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+.legend svg { flex: none; overflow: visible; }
+
+/* ---------- work area */
+.work { display: grid; grid-template-columns: minmax(0, 1fr) 392px; gap: 16px; align-items: start; }
+.mapwrap { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; position: relative; }
+.maptools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--rule-2); }
+.maptools .spacer { flex: 1; }
+.tbtn { border: 1px solid var(--rule); background: var(--ground); border-radius: 7px; padding: 4px 10px; cursor: pointer; font-size: 13px;
+  min-height: 30px; color: var(--ink); }
+.tbtn:hover { border-color: var(--muted); }
+.tbtn[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.focusnote { font-size: 12.5px; color: var(--muted); }
+.focusnote b { color: var(--ink); }
+#map { display: block; width: 100%; aspect-ratio: 1 / 1; max-height: 86vh; touch-action: none; cursor: grab; user-select: none;
+  background: var(--panel); }
+#map.dragging { cursor: grabbing; }
+.hint { font-size: 12px; color: var(--muted); padding: 6px 12px 10px; }
+
+/* map marks */
+.ring { fill: none; stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 5; }
+.wedge { stroke: none; }
+.sector-label { font-family: var(--f-display); font-style: italic; font-size: 19px; fill: var(--muted); letter-spacing: .01em; }
+.edge { fill: none; stroke: var(--muted); stroke-width: 1.3; opacity: .72; transition: opacity .2s; }
+.edge.open { stroke-dasharray: 5 4; }
+.edge.half { stroke-width: 2.4; opacity: .9; }
+.edge.partial { stroke-dasharray: 1.5 4; stroke-linecap: round; stroke-width: 1.8; }
+.edge.blocks { stroke: var(--nogo); stroke-width: 1.8; opacity: .85; }
+.edge.predicts { stroke: var(--reading); stroke-dasharray: 1.5 5; stroke-linecap: round; stroke-width: 1.6; opacity: .75; }
+.edge.formalizes { stroke: var(--external); stroke-dasharray: 7 4 1 4; stroke-width: 1.2; opacity: .6; }
+.edge.context { stroke-dasharray: 1.5 4; stroke-linecap: round; opacity: .55; }
+.edge.faint { opacity: .32; }
+.edge.long { opacity: .2; }
+.edge.long.blocks, .edge.long.predicts, .edge.long.formalizes { display: none; }
+.edge.long.hot { opacity: .85; display: inline; }
+.node { cursor: pointer; transition: opacity .2s; }
+.node .body { stroke-width: 1.8; }
+.node text.glyph { font-family: var(--f-display); font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.label { font-family: var(--f-ui); fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 4px; stroke-linejoin: round;
+  text-anchor: middle; pointer-events: none; transition: opacity .2s; }
+.label.t0 { font-weight: 700; }
+.label .tag { fill: var(--muted); font-style: italic; }
+.dim { opacity: .13 !important; }
+.node.sel .body, .node.sel .ring2 { stroke: var(--focus) !important; stroke-width: 3 !important; }
+.node:focus-visible { outline: none; }
+.node:focus-visible .body { stroke: var(--focus); stroke-width: 3; }
+.bricks rect { stroke: none; }
+
+/* ---------- side panel */
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px);
+  max-height: calc(100vh - 24px); display: flex; flex-direction: column; overflow: hidden; }
+.tabs { display: flex; border-bottom: 1px solid var(--rule); }
+.tabs button { flex: 1; border: 0; background: none; padding: 10px 6px 9px; cursor: pointer; font-size: 13.5px; color: var(--muted);
+  border-bottom: 2px solid transparent; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 700; }
+.tabpane { overflow-y: auto; min-height: 0; flex: 1 1 auto; padding: 14px 16px 18px; display: grid; gap: 14px; align-content: start; }
+.tabpane[hidden] { display: none; }
+.small { font-size: 13px; color: var(--ink-2); }
+.note { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+
+/* routes */
+.scale { display: grid; grid-template-columns: repeat(7, 1fr); font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--rule); padding-top: 2px; }
+.scale span:last-child { text-align: right; }
+.rgroup { display: grid; gap: 8px; }
+.rgroup > h3 { display: flex; align-items: baseline; gap: 8px; }
+.rgroup > h3 .chip { font-family: var(--f-ui); }
+.route { border: 1px solid var(--rule); border-radius: 9px; padding: 9px 10px 10px; display: grid; gap: 6px; cursor: pointer; background: var(--ground); }
+.route:hover { border-color: var(--muted); }
+.route[aria-pressed="true"] { border-color: var(--hue); box-shadow: inset 3px 0 0 var(--hue); }
+.route .head { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; }
+.route .name { font-weight: 700; font-size: 13.5px; line-height: 1.3; }
+.route .bits { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; font-size: 14px; }
+.route .bits small { font-weight: 400; color: var(--muted); }
+.bar { display: flex; height: 12px; border-radius: 3px; overflow: hidden; background: var(--rule-2); }
+.bar i { display: block; height: 100%; border-right: 1px solid var(--ground); min-width: 0; }
+.route .facts { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+.route .about { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+.linktab { width: 100%; border-collapse: collapse; font-size: 12px; }
+.linktab td { padding: 3px 4px; border-top: 1px solid var(--rule-2); vertical-align: top; }
+.linktab td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.linktab button { border: 0; background: none; padding: 0; cursor: pointer; text-align: left; color: var(--ink); text-decoration: underline;
+  text-decoration-color: var(--rule); text-underline-offset: 2px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--rule);
+  background: var(--panel); white-space: nowrap; color: var(--ink-2); }
+.chip.h7 { color: var(--c7); border-color: var(--c7); }
+.chip.h6 { color: var(--c6); border-color: var(--c6); }
+.chip.h5 { color: var(--c5); border-color: var(--c5); }
+
+/* card */
+.card-title { display: grid; gap: 4px; }
+.card-title h2 { font-size: 23px; }
+.statusline { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+blockquote { margin: 0; padding: 8px 12px; border-left: 3px solid var(--rule); background: var(--ground); font-family: var(--f-display);
+  font-size: 15.5px; line-height: 1.45; color: var(--ink-2); }
+.addr { display: flex; gap: 8px; align-items: flex-start; }
+.addr .mono { flex: 1; word-break: break-word; color: var(--ink-2); }
+.copy { border: 1px solid var(--rule); background: var(--ground); border-radius: 6px; padding: 1px 8px; font-size: 11.5px; cursor: pointer; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.nlist { display: grid; gap: 5px; }
+.nlist button { border: 1px solid var(--rule-2); background: var(--ground); border-radius: 7px; padding: 5px 8px; text-align: left; cursor: pointer;
+  display: grid; gap: 1px; font-size: 13px; }
+.nlist button small { color: var(--muted); font-size: 11.5px; }
+.empty { color: var(--muted); font-size: 13.5px; }
+
+/* credences */
+.crow { display: grid; grid-template-columns: 22px minmax(0, 1fr) 46px; gap: 4px 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--rule-2); }
+.crow label { font-size: 13px; font-weight: 700; }
+.crow input[type=range] { grid-column: 2 / 3; width: 100%; accent-color: var(--ink); margin: 0; }
+.crow output { grid-column: 3; grid-row: 1 / span 2; text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; }
+.crow .why { grid-column: 2 / 4; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.crow .sw { grid-row: 1 / span 2; }
+.crow.reg label::after { content: "registered"; font-weight: 400; font-size: 10.5px; color: var(--c6); margin-left: 6px; letter-spacing: .04em; text-transform: uppercase; }
+.resetrow { display: flex; gap: 8px; align-items: center; }
+
+/* about */
+.formula { font-family: var(--f-display); font-size: 18px; text-align: center; padding: 10px; background: var(--ground); border-radius: 8px; }
+ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13.5px; }
+
+footer { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+
+@media (max-width: 1100px) {
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .panel { position: static; max-height: none; }
+  .top { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  body { font-size: 14.5px; }
+  .answers { gap: 6px; }
+  .ans { padding: 10px 9px; }
+  .ans .num { font-size: 24px; }
+  .ans .num small { display: block; margin: 2px 0 0; }
+  .ans .dist { font-size: 20px; }
+  .ans .via { display: none; }
+  .legend .grp + .grp { padding-left: 0; border-left: 0; }
+  .tabs button { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Hadwiger–Nelson · the hunt's logic, 2026-09-27</div>
+      <h1>Proof Atlas</h1>
+      <p class="lede">Every theorem, missing step and dead end on the way to the chromatic number of the plane, placed around its three possible
+        answers. Solid marks are built; hollow ones are missing; each carries its source. A route's distance to an answer is measured in bits.</p>
+      <p class="held-line">Held in Lean's kernel: <b>5 ≤ χ(ℝ²) ≤ 7</b>. Each answer below needs its other half.</p>
+    </div>
+    <div class="answers" id="answers" aria-label="Distance to each answer"></div>
+  </header>
+
+  <div class="legend" id="legend" aria-label="How to read the marks"></div>
+
+  <main class="work">
+    <section class="mapwrap" aria-label="The map">
+      <div class="maptools">
+        <button class="tbtn" id="zoomout" aria-label="Zoom out">−</button>
+        <button class="tbtn" id="zoomin" aria-label="Zoom in">+</button>
+        <button class="tbtn" id="zoomfit">Fit</button>
+        <button class="tbtn" id="labels" aria-pressed="false">All labels</button>
+        <span class="spacer"></span>
+        <span class="focusnote" id="focusnote"></span>
+        <button class="tbtn" id="clearfocus" hidden>Clear</button>
+      </div>
+      <svg id="map" viewBox="-660 -660 1320 1320" role="img" aria-label="A radial map: the three answers at the centre, the routes to them radiating outward"></svg>
+      <p class="hint">Drag to pan; scroll or pinch to zoom. Click a mark for its card. Click an answer or a route to follow it; long links come forward when you do.</p>
+    </section>
+
+    <aside class="panel" aria-label="Details">
+      <div class="tabs" role="tablist">
+        <button role="tab" id="t-routes" aria-selected="true" aria-controls="p-routes">Routes</button>
+        <button role="tab" id="t-card" aria-selected="false" aria-controls="p-card">Card</button>
+        <button role="tab" id="t-cred" aria-selected="false" aria-controls="p-cred">Credences</button>
+        <button role="tab" id="t-about" aria-selected="false" aria-controls="p-about">About</button>
+      </div>
+      <div class="tabpane" id="p-routes" role="tabpanel"></div>
+      <div class="tabpane" id="p-card" role="tabpanel" hidden></div>
+      <div class="tabpane" id="p-cred" role="tabpanel" hidden></div>
+      <div class="tabpane" id="p-about" role="tabpanel" hidden></div>
+    </aside>
+  </main>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+const FACTS = {"meta":{"title":"Proof Atlas","built":"2026-09-27","job":"VIZ-ATLAS","statuses":{"kernel":"kernel — checked by Lean's kernel","cert":"certificate — an exact object accepted by exact checkers","hand-2b":"hand, two minds, one blind","hand-2":"hand, two minds","hand-1":"hand, one mind","reading":"reading — believed, with a killing test","external":"external — claimed in print, not re-checked here","gap":"GAP / open — a missing step"}},"nodes":[{"id":"A7","label":"χ(ℝ²) = 7","role":"answer","plain":"The answer 7: the plane needs exactly 7 colours. Decided only when both halves hold — a lower bound of 7 and an upper bound of 7.","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","grade_src":{"file":"CLAUDE.md","section":"## The mission"},"grade":"χ(ℝ²) decided | open","theta":0,"r":62,"sector":"centre","tier":0,"answer":7,"status":"gap","line":216,"address":"CLAUDE.md § Where the problem stands, line 216","grade_address":"CLAUDE.md § The mission, line 72","also":[]},{"id":"A6","label":"χ(ℝ²) = 6","role":"answer","plain":"The answer 6: the plane needs exactly 6 colours. Decided only when both halves hold — a lower bound of 6 and an upper bound of 6.","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","grade_src":{"file":"CLAUDE.md","section":"## The mission"},"grade":"χ(ℝ²) decided | open","theta":120,"r":62,"sector":"centre","tier":0,"answer":6,"status":"gap","line":216,"address":"CLAUDE.md § Where the problem stands, line 216","grade_address":"CLAUDE.md § The mission, line 72","also":[]},{"id":"A5","label":"χ(ℝ²) = 5","role":"answer","plain":"The answer 5: the plane needs exactly 5 colours. Decided only when both halves hold — a lower bound of 5 and an upper bound of 5.","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","grade_src":{"file":"CLAUDE.md","section":"## The mission"},"grade":"χ(ℝ²) decided | open","theta":240,"r":62,"sector":"centre","tier":0,"answer":5,"status":"gap","line":216,"address":"CLAUDE.md § Where the problem stands, line 216","grade_address":"CLAUDE.md § The mission, line 72","also":[]},{"id":"LB5","label":"χ(ℝ²) ≥ 5","role":"bound","plain":"Five colours are needed. Held in the kernel: de Grey's graph cannot be four-coloured.","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean","decl":"chromaticNumber_plane_interval"},"quote":"5 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean","decl":"chromaticNumber_plane_interval"},"grade":"@lean","theta":262,"r":140,"sector":"five","tier":0,"answer":5,"also":[{"src":{"file":"LEDGER.md","row":"33"},"quote":"chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7","address":"LEDGER.md row 33, line 77"}],"status":"kernel","line":36,"address":"Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval), line 36","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval)"},{"id":"UB7","label":"χ(ℝ²) ≤ 7","role":"bound","plain":"Seven colours always suffice. Held in the kernel: a brick colouring of the plane by seven colours.","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean","decl":"chromaticNumber_plane_interval"},"quote":"(unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean","decl":"chromaticNumber_plane_interval"},"grade":"@lean","theta":338,"r":140,"sector":"seven","tier":0,"answer":7,"also":[{"src":{"file":"LEDGER.md","row":"33"},"quote":"chromaticNumber_plane_interval: 5 ≤ χ(ℝ²) ≤ 7","address":"LEDGER.md row 33, line 77"}],"status":"kernel","line":37,"address":"Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval), line 37","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean (chromaticNumber_plane_interval)"},{"id":"LB7","label":"χ(ℝ²) ≥ 7","role":"conclusion","plain":"Seven colours are needed. Reached by the regularity wall: given measure rigidity, the plane's number is its measurable number, and the measurable number is seven if vanishing holes cannot save a colour.","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"the exact value inside it remains open","theta":22,"r":140,"sector":"seven","tier":0,"answer":7,"status":"gap","line":102,"address":"CLAUDE.md § The aim, line 102","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 21","also":[]},{"id":"LB6","label":"χ(ℝ²) ≥ 6","role":"conclusion","plain":"Six colours are needed — the $1,000 question Soifer prints as Graham's.","src":{"file":"plans/STUB-cp-plane-six.md"},"quote":"The Ronald L. Graham New $1,000 Problem. Prove or disprove the existence of a 6-chromatic unit-distance graph.","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"the exact value inside it remains open","theta":100,"r":140,"sector":"six-low","tier":0,"answer":6,"status":"gap","line":14,"address":"plans/STUB-cp-plane-six.md, line 14","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 21","also":[]},{"id":"UB6","label":"χ(ℝ²) ≤ 6","role":"conclusion","plain":"Six colours suffice: the first move of the upper bound since 1950, and it would need no measure rigidity.","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"the exact value inside it remains open","theta":140,"r":140,"sector":"six-up","tier":0,"answer":6,"status":"gap","line":102,"address":"CLAUDE.md § The aim, line 102","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 21","also":[]},{"id":"UB5","label":"χ(ℝ²) ≤ 5","role":"conclusion","plain":"Five colours suffice — the answer five, with no measure rigidity.","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"the exact value inside it remains open","theta":220,"r":140,"sector":"five","tier":0,"answer":5,"status":"gap","line":102,"address":"CLAUDE.md § The aim, line 102","grade_address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 21","also":[]},{"id":"DEGREY","label":"de Grey's graph","role":"held","plain":"De Grey's 1581-vertex unit-distance graph cannot be four-coloured; its geometry is exact and its refutation an LRAT certificate the kernel replays (M06–M09).","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"quote":"the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"@lean","theta":274,"r":222,"sector":"five","tier":2,"lean":{"file":"Proofs/HadwigerNelson/Instances/DeGrey/Bound.lean","decl":"chromaticNumber_plane_ge_five"},"status":"kernel","line":12,"address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 12","grade_address":"Proofs/HadwigerNelson/Instances/DeGrey/Bound.lean (chromaticNumber_plane_ge_five)","also":[]},{"id":"SEVEN","label":"the seven-colouring","role":"held","plain":"A brick colouring of the plane by seven colours, checked by one kernel `decide` (M36). Classical; ours is the certificate.","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"quote":"the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring","grade_src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"grade":"@lean","theta":352,"r":212,"sector":"seven","tier":2,"lean":{"file":"Proofs/HadwigerNelson/Instances/Seven.lean","decl":"chromaticNumber_plane_le_seven"},"also":[{"src":{"file":"LEDGER.md","row":"33"},"quote":"The colouring is classical; ours is the certificate.","address":"LEDGER.md row 33, line 77"}],"status":"kernel","line":15,"address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 15","grade_address":"Proofs/HadwigerNelson/Instances/Seven.lean (chromaticNumber_plane_le_seven)"},{"id":"EL","label":"EL 2021, Thm 1.3","role":"external","plain":"A published rigidity theorem for commuting automorphisms of solenoids (positive entropy). Measure rigidity uses it by statement; its cited machinery is unread here.","src":{"file":"LEDGER.md","row":"120"},"quote":"the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3, from which its Thm 1.2 follows","grade_src":{"file":"LEDGER.md","row":"120"},"grade":"EL2021 Thm 1.3 (external, published)","theta":298,"r":520,"sector":"engine","tier":2,"status":"external","line":165,"address":"LEDGER.md row 120, line 165","grade_address":"LEDGER.md row 120, line 165","also":[]},{"id":"MR","label":"measure rigidity (MR)","role":"held","plain":"Every measure on the dual of the unit-vector ring that the unit-vector group preserves, and that gives no mass to the archimedean part, is a multiple of Haar measure. The hinge of every result above four at a field, and of the collapse.","src":{"file":"LEDGER.md","row":"120"},"quote":"every U_F-invariant finite positive measure on R̂ with τ(E) = 0 is a multiple of Haar measure (MR(F))","grade_src":{"file":"LEDGER.md","row":"120"},"grade":"PE-2 two derivations blind to each other (X02D, X02V)","theta":304,"r":440,"sector":"engine","tier":1,"status":"hand-2b","line":165,"address":"LEDGER.md row 120, line 165","grade_address":"LEDGER.md row 120, line 165","also":[]},{"id":"R128","label":"the collapse","role":"held","plain":"Given MR, at a totally real field whose every stable place mixes at six colours (ℚ(√635087), de Grey's field), the field's plane, the real plane and the stationary random colourings all need the same number of colours.","src":{"file":"LEDGER.md","row":"128"},"quote":"The collapse: given MR, the plane's number is a field's.","grade_src":{"file":"LEDGER.md","row":"128"},"grade":"the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2)","theta":316,"r":330,"sector":"engine","tier":1,"status":"hand-2b","line":173,"address":"LEDGER.md row 128, line 173","grade_address":"LEDGER.md row 128, line 173","also":[]},{"id":"R130","label":"χ_CP = χ_m⁰","role":"held","plain":"With no MR, the stationary number equals the measurable number: the fewest colours of a measurable colouring proper at almost every unit pair. Given MR, that is Hadwiger–Nelson itself.","src":{"file":"LEDGER.md","row":"130"},"quote":"Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)","grade_src":{"file":"LEDGER.md","row":"130"},"grade":"M1, M1b, M1c, M-FREE, M-AE3 and M-Q4 two derivations (FS103-M; FS103-N blind to M's record)","theta":331,"r":258,"sector":"engine","tier":1,"status":"hand-2b","line":175,"address":"LEDGER.md row 130, line 175","grade_address":"LEDGER.md row 130, line 175","also":[]},{"id":"R121","label":"χ(ℚ(√47)²) = 5","role":"held","plain":"The plane over ℚ(√47) needs exactly five colours — the cheapest exposed five of the local–global conjecture, with no finite graph exhibited. Answers Moorhouse's named question (2010).","src":{"file":"LEDGER.md","row":"121"},"quote":"χ(ℚ(√47)²) = 5: the local–global conjecture's cheapest exposed five-clause is met","grade_src":{"file":"LEDGER.md","row":"121"},"grade":"the headline rule met (every half two blind minds, SP-Cor checked blind)","theta":266,"r":300,"sector":"five","tier":1,"status":"hand-2b","line":166,"address":"LEDGER.md row 121, line 166","grade_address":"LEDGER.md row 121, line 166","also":[]},{"id":"SUB","label":"a subfield's plane","role":"held","plain":"The plane over any real subfield is a subgraph of the plane, so it needs no more colours: a field that needs five makes the plane need five.","src":{"file":"Proofs/HadwigerNelson/Bridge.lean","decl":"chromaticNumber_planeOver_le_plane"},"quote":"The plane over any real subfield needs at most as many colours as the plane.","grade_src":{"file":"Proofs/HadwigerNelson/Bridge.lean","decl":"chromaticNumber_planeOver_le_plane"},"grade":"@lean","theta":254,"r":215,"sector":"five","tier":2,"lean":{"file":"Proofs/HadwigerNelson/Bridge.lean","decl":"chromaticNumber_planeOver_le_plane"},"also":[{"src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5","address":"CLAUDE.md § Where the problem stands, line 218"}],"status":"kernel","line":187,"address":"Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane), line 187","grade_address":"Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane)"},{"id":"R123","label":"main clause through five","role":"held","plain":"The local–global conjecture holds whenever its local bound is at most five: every real number field's plane needs min(L(F), 5) colours, and exactly L(F) when L(F) ≤ 5.","src":{"file":"LEDGER.md","row":"123"},"quote":"for every real number field F, χ(F²) ≥ min(L(F), 5), so χ(F²) = L(F) whenever L(F) ≤ 5","grade_src":{"file":"LEDGER.md","row":"123"},"grade":"CLS three derivations — X23D and X26B blind to each other in full","theta":282,"r":330,"sector":"lg","tier":2,"status":"hand-2b","line":168,"address":"LEDGER.md row 123, line 168","grade_address":"LEDGER.md row 123, line 168","also":[]},{"id":"R99","label":"L ≤ 4: three and four","role":"held","plain":"Three and four colours obey the local–global conjecture over every real number field.","src":{"file":"LEDGER.md","row":"99"},"quote":"χ(F²) = L(F) whenever L(F) ≤ 4","grade_src":{"file":"LEDGER.md","row":"99"},"grade":"S1 three derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three","theta":272,"r":420,"sector":"lg","tier":2,"status":"hand-2","line":144,"address":"LEDGER.md row 99, line 144","grade_address":"LEDGER.md row 99, line 144","also":[]},{"id":"R52","label":"the residue bound","role":"held","plain":"A usable prime's finite plane colours the whole field's plane: χ(F²) ≤ χ(Γ_q). The upper half of the local–global conjecture; prior art (Moorhouse 2010, Manturov 2012, Madore 2015).","src":{"file":"LEDGER.md","row":"52"},"quote":"has χ(F²) ≤ χ(Γ_q)","grade_src":{"file":"LEDGER.md","row":"52"},"grade":"[hand + tools]","theta":262,"r":420,"sector":"lg","tier":2,"status":"hand-1","line":96,"address":"LEDGER.md row 52, line 96","grade_address":"LEDGER.md row 52, line 96","also":[]},{"id":"LG","label":"local–global conjecture","role":"belief","plain":"χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7. Kooshi holds it. A belief, drawn so it can be seen and never counted: no route's distance includes it.","src":{"file":"CLAUDE.md","section":"### The local–global conjecture"},"quote":"and its bold form is χ(ℝ²) = 7","grade_src":{"file":"CLAUDE.md","section":"## Notation"},"grade":"The conjecture (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its bold form is χ(ℝ²) = 7.","theta":250,"r":410,"sector":"lg","tier":2,"status":"reading","line":144,"address":"CLAUDE.md § The local–global conjecture, line 144","grade_address":"CLAUDE.md § Notation, line 47","also":[]},{"id":"R127","label":"main clause in Lean (conditional)","role":"lean-held","plain":"The main clause through five, in the kernel, over named hypotheses (MR among them); χ(ℚ(√47)²) ≤ 5 unconditionally. The composition is the kernel's; every link it names stays [hand].","src":{"file":"LEDGER.md","row":"127"},"quote":"The main clause through five in the kernel, conditional on named hypotheses","grade_src":{"file":"LEDGER.md","row":"127"},"grade":"[kernel; standard three axioms, no native purchase; the lower halves conditional on named propositions, not vacuous domains]","theta":284,"r":500,"sector":"lean","tier":2,"status":"kernel","line":172,"address":"LEDGER.md row 127, line 172","grade_address":"LEDGER.md row 127, line 172","also":[]},{"id":"FS101","label":"FS-101: the named hypotheses","role":"lean","plain":"Discharge row 127's named hypotheses one at a time: Markov–Kakutani, the residue bound's valuation subring, Herglotz–Bochner.","src":{"file":"plans/STUB-main-clause-five-kernel.md"},"quote":"Next: InvariantMeasureOnClosed as Markov–Kakutani (~100–200k), then the upper half hUpper via row 57's gap (~40–80k), then Herglotz–Bochner (weeks)","grade_src":{"file":"plans/STUB-main-clause-five-kernel.md"},"grade":"FS-101 — the local–global conjecture's main clause through five, in the kernel (stub)","theta":276,"r":575,"sector":"lean","tier":2,"status":"gap","line":25,"address":"plans/STUB-main-clause-five-kernel.md, line 25","grade_address":"plans/STUB-main-clause-five-kernel.md, line 1","also":[]},{"id":"FS113","label":"FS-113: MR in Lean","role":"lean","plain":"Measure rigidity in full in Lean, with no declared purchase — needed to publish every result through MR, and the answer seven through the collapse.","src":{"file":"plans/STUB-mr-in-lean.md"},"quote":"as a theorem in Proofs/, on the standard three axioms, with no declared purchase","grade_src":{"file":"plans/STUB-mr-in-lean.md"},"grade":"FS-113 — measure rigidity for the unit-vector group, in full, in Lean (stub)","theta":310,"r":520,"sector":"lean","tier":2,"status":"gap","line":12,"address":"plans/STUB-mr-in-lean.md, line 12","grade_address":"plans/STUB-mr-in-lean.md, line 1","also":[]},{"id":"LEANWALL","label":"Lean: the wall's chain","role":"lean","plain":"The collapse, the measurable chain and the map argument, in Lean — the regularity wall's own formalization, owed before seven could be published.","src":{"file":"plans/STUB-regularity-wall.md"},"quote":"MR in full ([EinsiedlerLindenstrauss2022] Thm 1.3 and the deduction FS105-DED; [EinsiedlerFish2010]'s transfer), the collapse (row 128), the measurable chain (row 130, link 2), and whichever half of FS-107 lands.","grade_src":{"file":"plans/STUB-regularity-wall.md"},"grade":"FS-106 and FS-107 — the regularity wall, and its stability form: can vanishing holes save a colour? (stub; the program Kooshi adopted)","theta":322,"r":560,"sector":"lean","tier":2,"status":"gap","line":124,"address":"plans/STUB-regularity-wall.md, line 124","grade_address":"plans/STUB-regularity-wall.md, line 1","also":[]},{"id":"R131","label":"stability: the question","role":"held","plain":"With no MR: the measurable number is at least seven exactly when six classes, each free of one-colour pairs at distances near 1, cannot cover the plane up to holes that vanish as the band narrows. At every k the same equivalence holds for k colours.","src":{"file":"LEDGER.md","row":"131"},"quote":"At six, χ_m⁰(ℝ²) ≥ 7 ⟺ lim µ₆(ε) < 1","grade_src":{"file":"LEDGER.md","row":"131"},"grade":"EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind","theta":0,"r":300,"sector":"seven","tier":1,"also":[{"src":{"file":"LEDGER.md","row":"131"},"quote":"χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1","address":"LEDGER.md row 131, line 176"}],"status":"hand-2b","line":176,"address":"LEDGER.md row 131, line 176","grade_address":"LEDGER.md row 131, line 176"},{"id":"NG131","label":"hole-counting capped","role":"nogo","plain":"Two proof shapes are closed: counting only the holes that unit circles meet proves at most holes of order ε, and trichromatic-point arguments cannot see partial colourings.","src":{"file":"LEDGER.md","row":"131"},"quote":"an argument counting only holes met by unit circles or bicycles proves at most 1 − µ₆(ε) ≳ ε","grade_src":{"file":"LEDGER.md","row":"131"},"grade":"EQ, SUP, EPS2 (given V-1.3), HIT, PIX, REM and COMP two derivations, the second blind","theta":42,"r":200,"sector":"seven","tier":2,"status":"hand-2b","line":176,"address":"LEDGER.md row 131, line 176","grade_address":"LEDGER.md row 131, line 176","also":[]},{"id":"R132","label":"regular classes need seven","role":"nogo","plain":"Almost everywhere: colourings with slack, polygons, locally finite convex tilings and nice maps all need seven (Voronov 2023 and Sokolov–Voronov 2025, repaired). So neither a YES nor a five can be regular.","src":{"file":"LEDGER.md","row":"132"},"quote":"The regular half, verified and transferred almost everywhere.","grade_src":{"file":"LEDGER.md","row":"132"},"grade":"Voronov's theorems and the closed-set step two minds, one blind (V; VB)","theta":348,"r":450,"sector":"seven","tier":2,"status":"hand-2b","line":177,"address":"LEDGER.md row 132, line 177","grade_address":"LEDGER.md row 132, line 177","also":[]},{"id":"MAPS6","label":"maps need six","role":"nogo","plain":"Any map colouring needs six colours (Woodall 1973, Townsend's manuscript, each repairing the other): a five-colouring of the plane cannot be a map.","src":{"file":"LEDGER.md","row":"132"},"quote":"maps need six modulo Townsend's simplification (c), which [Woodall1973]'s steps 2, 3, 5 fill (in outline)","grade_src":{"file":"LEDGER.md","row":"132"},"grade":"maps-six, Townsend's manuscript and Woodall one mind, the fill in outline","theta":204,"r":320,"sector":"five","tier":2,"status":"hand-1","line":177,"address":"LEDGER.md row 132, line 177","grade_address":"LEDGER.md row 132, line 177","also":[]},{"id":"RR","label":"R's reduction: (A) + (B)","role":"held","plain":"Given the quantified cone lemma, seven follows from (A) a forced pair of fat junctions in every disc of every near-colouring and (B) a lower bound on their cone scale.","src":{"file":"LEDGER.md","row":"133"},"quote":"given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)","grade_src":{"file":"LEDGER.md","row":"133"},"grade":"RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind","theta":22,"r":300,"sector":"seven","tier":2,"status":"hand-2b","line":178,"address":"LEDGER.md row 133, line 178","grade_address":"LEDGER.md row 133, line 178","also":[]},{"id":"WEQK","label":"W's equivalence","role":"held","plain":"At bounded complexity, near-colourings with vanishing holes exist exactly when a tight six-map exists: a six-colouring by a map, proper almost everywhere. So door (A) at bounded complexity is one question about maps.","src":{"file":"LEDGER.md","row":"133"},"quote":"at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists","grade_src":{"file":"LEDGER.md","row":"133"},"grade":"RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind","theta":46,"r":300,"sector":"seven","tier":1,"status":"hand-2b","line":178,"address":"LEDGER.md row 133, line 178","grade_address":"LEDGER.md row 133, line 178","also":[]},{"id":"WPOLY","label":"polygons keep holes","role":"nogo","plain":"Polygonal designs of bounded complexity keep holes bounded below: a YES cannot be polygonal.","src":{"file":"LEDGER.md","row":"133"},"quote":"polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)","grade_src":{"file":"LEDGER.md","row":"133"},"grade":"RR after two repairs, CP by different routes, W-EQ-K, W-POLY, W-RATE, W-TAN and HX-STALL two minds, one blind","theta":118,"r":280,"sector":"six-up","tier":2,"status":"hand-2b","line":178,"address":"LEDGER.md row 133, line 178","grade_address":"LEDGER.md row 133, line 178","also":[]},{"id":"R134","label":"Condition 5: no six-map","role":"held","plain":"Under Condition 5 (no boundary arc of radius 1), no map by segments and circular arcs six-colours the plane almost everywhere — Sokolov–Voronov's Question 2, its Condition-5 half, answered yes.","src":{"file":"LEDGER.md","row":"134"},"quote":"no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at distance exactly 1","grade_src":{"file":"LEDGER.md","row":"134"},"grade":"the chain — NB-4, NB-5, W-MERGE and the cone removal — two minds, one blind","theta":6,"r":450,"sector":"seven","tier":1,"status":"hand-2b","line":179,"address":"LEDGER.md row 134, line 179","grade_address":"LEDGER.md row 134, line 179","also":[]},{"id":"TSMNO","label":"no tight six-map (door A)","role":"conclusion","plain":"At bounded complexity, no tight six-map exists: under Condition 5 none does; with unit arcs, open. This is door (A) in its bounded-complexity form.","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"At bounded complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs, open.","grade_src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"grade":"with unit arcs, open.","theta":22,"r":375,"sector":"seven","tier":1,"status":"gap","line":325,"address":"CLAUDE.md § Where the problem stands, line 325","grade_address":"CLAUDE.md § Where the problem stands, line 326","also":[]},{"id":"M7","label":"χ_m⁰(ℝ²) ≥ 7","role":"conclusion","plain":"Vanishing holes cannot save a colour: Voronov's contradiction survives a free colour of vanishing density. Given MR, this is χ(ℝ²) = 7.","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"No — Voronov's contradiction survives a free colour of vanishing density — gives χ_m⁰(ℝ²) = 7","grade_src":{"file":"plans/STUB-regularity-wall.md"},"grade":"both claims GAP","theta":20,"r":222,"sector":"seven","tier":1,"status":"gap","line":101,"address":"CLAUDE.md § The aim, line 101","grade_address":"plans/STUB-regularity-wall.md, line 4","also":[]},{"id":"FS111","label":"(B) the cone scale","role":"step","plain":"Door (B): do near-optimal band-proper six-colourings keep their junctions fat at a scale bounded below? De Giorgi's room — the same question as (A) at unbounded complexity (FS-111).","src":{"file":"plans/STUB-reg-scale.md"},"quote":"(B) those junctions are fat at a scale s ≥ s₀ — on a set of positive measure — with voids small relative to min(s, µη²/100)","grade_src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"2"},"grade":"door (B): do near-optimal band-proper six-colourings keep junction cone scales ≥ s₀ on a set of positive measure?","theta":62,"r":262,"sector":"seven","tier":1,"registered":{"p":0.15,"src":{"file":"plans/STUB-reg-scale.md"},"quote":"a cone-scale bound for near-optimal colourings at one mind, 0.15","population":"the minting session's registration for FS-111: a cone-scale bound at one mind, within the milestone","address":"plans/STUB-reg-scale.md, line 35"},"status":"gap","line":12,"address":"plans/STUB-reg-scale.md, line 12","grade_address":"CLAUDE.md § Paths forward, ranked item 2, line 357","also":[]},{"id":"N3BASE","label":"N3-BASE","role":"held","plain":"With unit arcs, the base argument refutes a map near a three-colour vertex unless a vertex of four colours, or with a repeated colour, lies within distance 2.","src":{"file":"plans/FS112-N-proof.md","row":"N3-BASE"},"quote":"the base refutes a valid map near a cubic trichromatic u unless B̄(u, 2) holds a vertex of ≥ 4 colours or a repeated colour","grade_src":{"file":"plans/FS112-close-inventory.md","row":"60"},"grade":"every N3 statement TRUE — two minds, one blind","theta":8,"r":600,"sector":"seven","tier":2,"closing":true,"status":"hand-2b","line":607,"address":"plans/FS112-N-proof.md item N3-BASE, line 607","grade_address":"plans/FS112-close-inventory.md item 60, line 69","also":[]},{"id":"N3DENSE3","label":"N3-DENSE3","role":"held","plain":"In every valid map, every closed disc of radius 3 holds a vertex of four or more colours or a vertex with a repeated colour. So the unit-arc half is a question about four-colour vertices.","src":{"file":"plans/FS112-N-proof.md","row":"N3-DENSE3"},"quote":"every closed disc of radius 3 of a valid map holds a vertex of ≥ 4 colours or a repeated colour","grade_src":{"file":"plans/FS112-close-inventory.md","row":"60"},"grade":"every N3 statement TRUE — two minds, one blind","theta":24,"r":600,"sector":"seven","tier":2,"closing":true,"status":"hand-2b","line":608,"address":"plans/FS112-N-proof.md item N3-DENSE3, line 608","grade_address":"plans/FS112-close-inventory.md item 60, line 69","also":[]},{"id":"N3PER","label":"N3-PER","role":"held","plain":"A doubly periodic valid map has a periodic terminal modification — so a periodic map has no stuck ray.","src":{"file":"plans/FS112-N-proof.md","row":"N3-PER"},"quote":"a doubly periodic valid map has a periodic terminal modification (so finitely many arc classes)","grade_src":{"file":"plans/FS112-close-inventory.md","row":"60"},"grade":"every N3 statement TRUE — two minds, one blind","theta":42,"r":600,"sector":"seven","tier":2,"closing":true,"status":"hand-2b","line":600,"address":"plans/FS112-N-proof.md item N3-PER, line 600","grade_address":"plans/FS112-close-inventory.md item 60, line 69","also":[]},{"id":"N3END","label":"N3-END","role":"held","plain":"A stuck chain's end is anchored at a four-colour vertex with a repeated colour one step beyond it.","src":{"file":"plans/FS112-N-proof.md","row":"N3-END"},"quote":"a stuck chain's end with horn bound −1 has a four-colour, repeated-colour vertex one step beyond","grade_src":{"file":"plans/FS112-close-inventory.md","row":"60"},"grade":"every N3 statement TRUE — two minds, one blind","theta":56,"r":600,"sector":"seven","tier":2,"closing":true,"status":"hand-2b","line":609,"address":"plans/FS112-N-proof.md item N3-END, line 609","grade_address":"plans/FS112-close-inventory.md item 60, line 69","also":[]},{"id":"Y3END","label":"Y3-END-NEEDS","role":"held","plain":"The construction side's round 3: a stuck chain cannot end at a unit arc while its end vertex has three colours — blocking both moves there needs a seventh colour. Under blind verification tonight (FS112-YB3).","src":{"file":"plans/FS112-close-inventory.md","row":"56"},"quote":"Y3-END-NEEDS [hand, one mind]: N needs ≥ 3 colours (then MERGE at N), ≥ 5 to block it (then SHAVE at N), and blocking both needs a seventh colour","grade_src":{"file":"plans/FS112-close-inventory.md","row":"56"},"grade":"Y3-END-NEEDS [hand, one mind]","theta":70,"r":590,"sector":"seven","tier":2,"verifying":true,"closing":true,"status":"hand-1","line":65,"address":"plans/FS112-close-inventory.md item 56, line 65","grade_address":"plans/FS112-close-inventory.md item 56, line 65","also":[]},{"id":"GSTEP","label":"the global step","role":"step","plain":"Exclude every map whose four-colour or repeated-colour vertices come within 3 of every point — N3-DENSE3 says every valid map is such a map. The next milestone (FS-114).","src":{"file":"plans/FS112-close-inventory.md","row":"59"},"quote":"the global step — exclude maps whose vertices of ≥ 4 colours or a repeated colour come within 3 of every point","grade_src":{"file":"plans/FS112-close-inventory.md","row":"59"},"grade":"point two milestones at the two gaps","theta":30,"r":525,"sector":"seven","tier":1,"closing":true,"status":"gap","line":68,"address":"plans/FS112-close-inventory.md item 59, line 68","grade_address":"plans/FS112-close-inventory.md item 59, line 68","also":[]},{"id":"SRAY","label":"the stuck ray","role":"step","plain":"Can a one-sided infinite chain of stuck vertices live in a map that is not periodic? Periodic maps have none (N3-PER); the aperiodic case is open (GAP N3-ALPH). The next milestone (FS-115).","src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-4 — SAVED: R2"},"quote":"GAP (b′), named: whether a stuck ray can live in a valid map of the plane — a whole-line object; for periodic maps it cannot (N3-PER, N3-LEN).","grade_src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-4 — SAVED: R2"},"grade":"GAP (b′), named","theta":50,"r":525,"sector":"seven","tier":1,"also":[{"src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-2 — SAVED: R1"},"quote":"Named GAP N3-ALPH.","address":"plans/FS112-N-proof.md § Stage N3-2 — SAVED: R1, line 699"}],"closing":true,"status":"gap","line":880,"address":"plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 880","grade_address":"plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 880"},{"id":"UANO","label":"unit-arc half: NO","role":"step","plain":"The two gaps composed into a NO: no tight six-map even with unit arcs. How they compose is being derived at FS-112's close (for periodic maps, perhaps the global step alone).","src":{"file":"plans/FS112-close-inventory.md","row":"63"},"quote":"derives how the two gaps compose into a NO (periodic maps: the global step alone?)","grade_src":{"file":"plans/FS112-close-inventory.md","row":"63"},"grade":"derives how the two gaps compose into a NO (periodic maps: the global step alone?)","theta":38,"r":460,"sector":"seven","tier":1,"also":[{"src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-3 — SAVED"},"quote":"So a YES of Q-full is a map whose four-colour (or repeated-colour) vertices come within 3 of every point, and a NO is the exclusion of such maps","address":"plans/FS112-N-proof.md § Stage N3-3 — SAVED, line 817"}],"closing":true,"status":"gap","line":72,"address":"plans/FS112-close-inventory.md item 63, line 72","grade_address":"plans/FS112-close-inventory.md item 63, line 72"},{"id":"FS104","label":"χ_CP(ℝ²) ≥ 6","role":"question","plain":"Is the stationary (equivalently the measurable) chromatic number at least six? Given MR it is rung D: χ(ℝ²) ≥ 6. No held result gives it, and no one-point density bound can (FS-104).","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"3"},"quote":"is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?","grade_src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"3"},"grade":"is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?","theta":86,"r":222,"sector":"six-low","tier":1,"words":{"src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"3"},"quote":"success low, a named no-go the likely product","address":"CLAUDE.md § Paths forward, ranked item 3, line 358"},"status":"gap","line":358,"address":"CLAUDE.md § Paths forward, ranked item 3, line 358","grade_address":"CLAUDE.md § Paths forward, ranked item 3, line 358","also":[]},{"id":"R129","label":"density cannot give six","role":"nogo","plain":"One colour class at a time is capped below 4.37: the bound that gave five is a fractional bound rounded up, and that route never gives six. A proof of six must use how the classes fit together.","src":{"file":"LEDGER.md","row":"129"},"quote":"1/α_loc ≤ 4.36: that route never gives six","grade_src":{"file":"LEDGER.md","row":"129"},"grade":"FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)","theta":110,"r":205,"sector":"six-low","tier":2,"status":"hand-2b","line":174,"address":"LEDGER.md row 129, line 174","grade_address":"LEDGER.md row 129, line 174","also":[]},{"id":"FS80","label":"window-frequency certificate","role":"question","plain":"An averaged certificate at five colours on the real plane — the integrality shape a six certificate must take (FS-80).","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"7"},"quote":"averaged certificates at five colours on the real plane (FS-104's route (c))","grade_src":{"file":"plans/STUB-window-frequency-certificate.md"},"grade":"FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)","theta":80,"r":320,"sector":"six-low","tier":2,"words":{"src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"7"},"quote":"soft as to success","address":"CLAUDE.md § Paths forward, ranked item 7, line 362"},"status":"gap","line":362,"address":"CLAUDE.md § Paths forward, ranked item 7, line 362","grade_address":"plans/STUB-window-frequency-certificate.md, line 1","also":[]},{"id":"R125","label":"ℚ(√167) at six = plane + PL","role":"held","plain":"Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product locality at 23 and 43 — a reduction, not a bound.","src":{"file":"LEDGER.md","row":"125"},"quote":"Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)","grade_src":{"file":"LEDGER.md","row":"125"},"grade":"B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)","theta":92,"r":390,"sector":"six-low","tier":2,"status":"hand-2b","line":170,"address":"LEDGER.md row 125, line 170","grade_address":"LEDGER.md row 125, line 170","also":[]},{"id":"PL","label":"PL∃(23, 43)","role":"question","plain":"Product locality at the places 23 and 43: the direction missing from χ_CP(ℝ²) ≥ 6 to six at ℚ(√167) (FS-96, FS-67).","src":{"file":"LEDGER.md","row":"125"},"quote":"PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6","grade_src":{"file":"LEDGER.md","row":"125"},"grade":"Not claimed: anything about six.","theta":106,"r":390,"sector":"six-low","tier":2,"status":"gap","line":170,"address":"LEDGER.md row 125, line 170","grade_address":"LEDGER.md row 125, line 170","also":[]},{"id":"FS59","label":"χ(ℚ(√167)²) ≥ 6","role":"conclusion","plain":"Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the kernel). Through the plane only: never cheaper than FS-104 (FS-59).","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"12"},"quote":"given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)","grade_src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"12"},"grade":"its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)","theta":100,"r":300,"sector":"six-low","tier":2,"status":"gap","line":367,"address":"CLAUDE.md § Paths forward, ranked item 12, line 367","grade_address":"CLAUDE.md § Paths forward, ranked item 12, line 367","also":[]},{"id":"R119","label":"χ(ℚ(√167)²) ≥ 4, kernel","role":"held","plain":"Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of the widest gap.","src":{"file":"LEDGER.md","row":"119"},"quote":"χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph","grade_src":{"file":"LEDGER.md","row":"119"},"grade":"[kernel; standard three axioms, no native purchase]","theta":104,"r":490,"sector":"six-low","tier":2,"status":"kernel","line":164,"address":"LEDGER.md row 119, line 164","grade_address":"LEDGER.md row 119, line 164","also":[]},{"id":"LINK2","label":"upper bounds need no MR","role":"held","plain":"A measurable colouring proper at almost every unit pair, moved by a random rigid motion, colours every finite graph properly almost surely; de Bruijn–Erdős finishes. So χ(ℝ²) ≤ χ_m⁰(ℝ²) with no MR. Its argument is in print (Gwyn–Stavrianos 2022) under an invariant mean.","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Upper bounds need no MR. χ(ℝ²) ≤ χ_m⁰(ℝ²): move a measurable colouring by a random rigid motion","grade_src":{"file":"CLAUDE.md","section":"### The aim"},"grade":"[hand, two minds]: FS103-N's N-EASY, PA1's (E)","theta":186,"r":176,"sector":"six-up","tier":1,"note":"LEDGER.md row 130's grade bracket lists N-EASY at one mind; § The aim adds PA1's (E) as the second.","status":"hand-2","line":86,"address":"CLAUDE.md § The aim, line 86","grade_address":"CLAUDE.md § The aim, line 87","also":[]},{"id":"HOLES6","label":"vanishing holes save a colour","role":"conclusion","plain":"Six classes cover the plane up to holes of density tending to 0 as the band narrows: lim µ₆(ε) = 1. A refutation of seven needs no wild set — a sequence of periodic grid colourings, wild only in the limit.","src":{"file":"LEDGER.md","row":"131"},"quote":"a refutation needs no wild set — it is a sequence of periodic grid colourings with vanishing holes, the wildness only in the limit","grade_src":{"file":"plans/STUB-regularity-wall.md"},"grade":"both claims GAP","theta":148,"r":215,"sector":"six-up","tier":1,"status":"gap","line":176,"address":"LEDGER.md row 131, line 176","grade_address":"plans/STUB-regularity-wall.md, line 4","also":[]},{"id":"TSMYES","label":"a tight six-map (YES)","role":"step","plain":"A map by segments and circular arcs, unit arcs allowed, six-coloured with no two interior points of one colour at distance exactly 1. At bounded complexity it gives χ(ℝ²) ≤ 6 with no MR.","src":{"file":"plans/STUB-unit-arc-half.md"},"quote":"With FS-107's W-EQ-K (row 133) a YES at bounded complexity gives χ(ℝ²) ≤ 6 with no MR","grade_src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"1"},"grade":"does a tight six-map exist once unit arcs are allowed?","theta":128,"r":325,"sector":"six-up","tier":1,"registered":{"p":0.03,"src":{"file":"plans/FS112-unit-arc-half.md","row":"E5"},"quote":"the stub's \"a YES by formula (0.03)\", re-registered at 0.03 with its population stated","population":"within FS-112: a full tight six-map of the plane given by formula and accepted exactly, among asymmetric curved maps with unit-arc seams and four-colour vertices","address":"plans/FS112-unit-arc-half.md item E5, line 549"},"status":"gap","line":17,"address":"plans/STUB-unit-arc-half.md, line 17","grade_address":"CLAUDE.md § Paths forward, ranked item 1, line 356","also":[]},{"id":"UNB","label":"unbounded complexity","role":"question","plain":"A family of near-colourings of unbounded complexity whose holes vanish while their junction scales shrink to 0 — W's claim itself, if FS-111 fails.","src":{"file":"plans/STUB-reg-scale.md"},"quote":"A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.","grade_src":{"file":"plans/STUB-regularity-wall.md"},"grade":"both claims GAP","theta":162,"r":300,"sector":"six-up","tier":2,"status":"gap","line":41,"address":"plans/STUB-reg-scale.md, line 41","grade_address":"plans/STUB-regularity-wall.md, line 4","also":[]},{"id":"STRIP","label":"the six-coloured strip","role":"positive","plain":"Axenovich et al. 2014, Thm 4.2: a tight six-coloured strip of height √15/2 + √3 ≈ 3.668, its tiles bounded by unit arcs. Rebuilt twice blind and accepted by two exact checkers (FS-112).","src":{"file":"plans/FS112-close-inventory.md","row":"33"},"quote":"CAL-STRIP robust — two blind rebuilds from the printed words, two exact checkers, the same object and verdict","grade_src":{"file":"plans/FS112-close-inventory.md","row":"33"},"grade":"two exact checkers, the same object and verdict","theta":119,"r":412,"sector":"six-up","tier":2,"also":[{"src":{"file":"plans/STUB-unit-arc-half.md"},"quote":"One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured strip of height √15/2 + √3 (≈ 3.668)","address":"plans/STUB-unit-arc-half.md, line 10"}],"status":"cert","line":42,"address":"plans/FS112-close-inventory.md item 33, line 42","grade_address":"plans/FS112-close-inventory.md item 33, line 42"},{"id":"DISK","label":"the six-tiled disk","role":"positive","plain":"Polymath16's six-tiled disk (Fig. 10), transcribed and rebuilt exactly; its largest vertex-centred disc has radius φ, attained.","src":{"file":"plans/FS112-close-inventory.md","row":"53"},"quote":"CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece), two exact checkers ACCEPT 71/71","grade_src":{"file":"plans/FS112-close-inventory.md","row":"53"},"grade":"two exact checkers ACCEPT 71/71","theta":140,"r":400,"sector":"six-up","tier":2,"status":"cert","line":62,"address":"plans/FS112-close-inventory.md item 53, line 62","grade_address":"plans/FS112-close-inventory.md item 53, line 62","also":[]},{"id":"STOP","label":"both stop at a pinned corner","role":"nogo","plain":"The strip and the disk stop for the same reason: at the unsaved second seam of a complementary three-colour pair — a 'pinned corner'.","src":{"file":"plans/FS112-close-inventory.md","row":"53"},"quote":"O2: the two positives stop for the same reason — TRUE (two minds, one blind)","grade_src":{"file":"plans/FS112-close-inventory.md","row":"53"},"grade":"O2: the two positives stop for the same reason — TRUE (two minds, one blind)","theta":128,"r":480,"sector":"six-up","tier":2,"status":"hand-2b","line":62,"address":"plans/FS112-close-inventory.md item 53, line 62","grade_address":"plans/FS112-close-inventory.md item 53, line 62","also":[]},{"id":"Y3STOP","label":"pinned corners hold","role":"nogo","plain":"Round 3: both ways past the pinned corners close as derived obstructions, with no escape. Under blind verification tonight (FS112-YB3).","src":{"file":"plans/FS112-close-inventory.md","row":"56"},"quote":"both pinned-corner GAPs close as derived obstructions, no escape","grade_src":{"file":"plans/FS112-close-inventory.md","row":"56"},"grade":"[exact + hand]","theta":146,"r":470,"sector":"six-up","tier":2,"verifying":true,"closing":true,"status":"hand-1","line":65,"address":"plans/FS112-close-inventory.md item 56, line 65","grade_address":"plans/FS112-close-inventory.md item 56, line 65","also":[]},{"id":"PARTS","label":"Parts's six-tiling","role":"positive","plain":"The best printed six-tiling leaves holes of density 1.43·10⁻⁴ — small, but it has no parameter that drives them to 0.","src":{"file":"LEDGER.md","row":"131"},"quote":"the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)","grade_src":{"file":"LEDGER.md","row":"131"},"grade":"LOCAL over Parts [external]","theta":168,"r":390,"sector":"six-up","tier":2,"status":"external","line":176,"address":"LEDGER.md row 131, line 176","grade_address":"LEDGER.md row 131, line 176","also":[]},{"id":"FS44","label":"a CP five-colouring","role":"question","plain":"The shape of a stationary five-colouring of the plane — row 131 at five colours: lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"6"},"quote":"the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)","grade_src":{"file":"plans/STUB-fifth-colour-structure.md"},"grade":"FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)","theta":216,"r":245,"sector":"five","tier":1,"words":{"src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"6"},"quote":"soft as to truth (the bold form predicts no)","address":"CLAUDE.md § Paths forward, ranked item 6, line 361"},"status":"gap","line":361,"address":"CLAUDE.md § Paths forward, ranked item 6, line 361","grade_address":"plans/STUB-fifth-colour-structure.md, line 1","also":[]}],"edges":[{"source":"LB7","target":"A7","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"UB7","target":"A7","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"LB6","target":"A6","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"UB6","target":"A6","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"LB5","target":"A5","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"UB5","target":"A5","kind":"half","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"χ(ℝ²) ∈ {5, 6, 7}","address":"CLAUDE.md § Where the problem stands, line 216"},{"source":"DEGREY","target":"LB5","kind":"rests","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"quote":"the lower end is chromaticNumber_plane_ge_five — de Grey's 1581-vertex unit-distance graph","address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 12"},{"source":"SEVEN","target":"UB7","kind":"rests","src":{"file":"Proofs/HadwigerNelson/Instances/Interval.lean"},"quote":"the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring","address":"Proofs/HadwigerNelson/Instances/Interval.lean, line 15"},{"source":"EL","target":"MR","kind":"rests","src":{"file":"LEDGER.md","row":"120"},"quote":"the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3","address":"LEDGER.md row 120, line 165"},{"source":"MR","target":"R128","kind":"rests","src":{"file":"LEDGER.md","row":"128"},"quote":"The collapse: given MR, the plane's number is a field's.","address":"LEDGER.md row 128, line 173"},{"source":"MR","target":"R121","kind":"rests","src":{"file":"LEDGER.md","row":"121"},"quote":"MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at S = ∅ gives ≥ 5","address":"LEDGER.md row 121, line 166"},{"source":"MR","target":"R123","kind":"rests","src":{"file":"LEDGER.md","row":"123"},"quote":"With MR (row 120) that gives five","address":"LEDGER.md row 123, line 168"},{"source":"MR","target":"R125","kind":"rests","src":{"file":"LEDGER.md","row":"125"},"quote":"Given MR: χ(ℚ(√167)²) ≤ 5 ⟺ Y = UD(ℝ²) × G₂₃ × G₄₃ has a cut-and-project five-colouring","bus":true,"address":"LEDGER.md row 125, line 170"},{"source":"R128","target":"LB7","kind":"rests","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR","address":"CLAUDE.md § The aim, line 102"},{"source":"R130","target":"LB7","kind":"rests","src":{"file":"LEDGER.md","row":"130"},"quote":"Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)","address":"LEDGER.md row 130, line 175"},{"source":"M7","target":"LB7","kind":"rests","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR","address":"CLAUDE.md § The aim, line 102"},{"source":"R128","target":"LB6","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"3"},"quote":"decisive: given MR it is rung D (row 128)","bus":true,"address":"CLAUDE.md § Paths forward, ranked item 3, line 358"},{"source":"R130","target":"R131","kind":"rests","src":{"file":"LEDGER.md","row":"131"},"quote":"its first equivalence is row 130's","address":"LEDGER.md row 131, line 176"},{"source":"R121","target":"LB5","kind":"rests","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5","address":"CLAUDE.md § Where the problem stands, line 218"},{"source":"SUB","target":"LB5","kind":"rests","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5","address":"CLAUDE.md § Where the problem stands, line 218"},{"source":"R99","target":"R123","kind":"rests","src":{"file":"LEDGER.md","row":"123"},"quote":"below five it is row 99","address":"LEDGER.md row 123, line 168"},{"source":"R52","target":"R123","kind":"rests","src":{"file":"LEDGER.md","row":"123"},"quote":"the upper half is the residue map at the place realising L(F) (row 52)","address":"LEDGER.md row 123, line 168"},{"source":"LG","target":"A7","kind":"predicts","src":{"file":"CLAUDE.md","section":"### The local–global conjecture"},"quote":"and its bold form is χ(ℝ²) = 7","address":"CLAUDE.md § The local–global conjecture, line 144"},{"source":"R127","target":"R123","kind":"formalizes","src":{"file":"LEDGER.md","row":"127"},"quote":"min(L(F), 5) ≤ χ(F²) for every real number field (SpectralChain.min_localBound_five_le_chromaticNumber)","address":"LEDGER.md row 127, line 172"},{"source":"FS101","target":"R127","kind":"formalizes","src":{"file":"plans/STUB-main-clause-five-kernel.md"},"quote":"Status: first slot done (X11K3, 2026-09-26; LEDGER.md row 127","address":"plans/STUB-main-clause-five-kernel.md, line 19"},{"source":"FS113","target":"MR","kind":"formalizes","src":{"file":"plans/STUB-mr-in-lean.md"},"quote":"MR(F) as LEDGER.md row 120 states it","address":"plans/STUB-mr-in-lean.md, line 11"},{"source":"LEANWALL","target":"R128","kind":"formalizes","src":{"file":"plans/STUB-regularity-wall.md"},"quote":"the collapse (row 128), the measurable chain (row 130, link 2)","address":"plans/STUB-regularity-wall.md, line 124"},{"source":"LEANWALL","target":"R131","kind":"formalizes","src":{"file":"plans/STUB-regularity-wall.md"},"quote":"the collapse (row 128), the measurable chain (row 130, link 2)","address":"plans/STUB-regularity-wall.md, line 124"},{"source":"R131","target":"RR","kind":"rests","src":{"file":"LEDGER.md","row":"133"},"quote":"χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form)","address":"LEDGER.md row 133, line 178"},{"source":"RR","target":"M7","kind":"rests","src":{"file":"LEDGER.md","row":"133"},"quote":"given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)","address":"LEDGER.md row 133, line 178"},{"source":"TSMNO","target":"M7","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"2"},"quote":"decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)","address":"CLAUDE.md § Paths forward, ranked item 2, line 357"},{"source":"WEQK","target":"M7","kind":"rests","src":{"file":"LEDGER.md","row":"133"},"quote":"So stability at six is two questions: does a tight six-map with only tangent, bowtie or cusp seams exist","address":"LEDGER.md row 133, line 178"},{"source":"FS111","target":"M7","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"2"},"quote":"decisive jointly with row 134 (no segment-and-circular-arc tight six-map under Condition 5) and FS-112's unit-arc half (χ_m⁰ = 7, so χ(ℝ²) = 7 given MR)","address":"CLAUDE.md § Paths forward, ranked item 2, line 357"},{"source":"NG131","target":"M7","kind":"blocks","src":{"file":"LEDGER.md","row":"131"},"quote":"Two no-gos for proofs: an argument counting only holes met by unit circles or bicycles proves at most 1 − µ₆(ε) ≳ ε","label":"hole-counting proofs cannot reach it","address":"LEDGER.md row 131, line 176"},{"source":"R134","target":"TSMNO","kind":"rests","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"under Condition 5 none does (row 134); with unit arcs, open.","address":"CLAUDE.md § Where the problem stands, line 326"},{"source":"UANO","target":"TSMNO","kind":"rests","src":{"file":"CLAUDE.md","section":"### Where the problem stands"},"quote":"under Condition 5 none does (row 134); with unit arcs, open.","address":"CLAUDE.md § Where the problem stands, line 326"},{"source":"R132","target":"R134","kind":"rests","src":{"file":"LEDGER.md","row":"134"},"quote":"S–V Cor. 1, almost everywhere for curved cubic maps with no d = 2 exception, refutes it","address":"LEDGER.md row 134, line 179"},{"source":"R134","target":"N3BASE","kind":"rests","src":{"file":"plans/FS112-N-proof.md","row":"N3-BASE"},"quote":"hand, one mind, over row 134's base","address":"plans/FS112-N-proof.md item N3-BASE, line 607"},{"source":"N3BASE","target":"N3DENSE3","kind":"rests","src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-3 — SAVED: (a)"},"quote":"N3-DENSE3 [hand, one mind, over N3-BASE, NB2-DISC1 (two minds) and N2-TOWARD (two)]","address":"plans/FS112-N-proof.md § Stage N3-3 — SAVED: (a), line 811"},{"source":"N3DENSE3","target":"GSTEP","kind":"rests","src":{"file":"plans/FS112-close-inventory.md","row":"60"},"quote":"so milestone (1) takes DENSE3's form (item 59)","address":"plans/FS112-close-inventory.md item 60, line 69"},{"source":"GSTEP","target":"UANO","kind":"rests","src":{"file":"plans/FS112-close-inventory.md","row":"63"},"quote":"derives how the two gaps compose into a NO (periodic maps: the global step alone?)","address":"plans/FS112-close-inventory.md item 63, line 72"},{"source":"SRAY","target":"UANO","kind":"rests","src":{"file":"plans/FS112-close-inventory.md","row":"63"},"quote":"derives how the two gaps compose into a NO (periodic maps: the global step alone?)","address":"plans/FS112-close-inventory.md item 63, line 72"},{"source":"N3PER","target":"SRAY","kind":"rests","src":{"file":"plans/FS112-N-proof.md","section":"## Stage N3-4 — SAVED: R2"},"quote":"for periodic maps it cannot (N3-PER, N3-LEN)","label":"closes the periodic case","address":"plans/FS112-N-proof.md § Stage N3-4 — SAVED: R2, line 881"},{"source":"N3END","target":"SRAY","kind":"rests","src":{"file":"plans/FS112-close-inventory.md","row":"59"},"quote":"with Y3-END-NEEDS and N3-END as its candidate route","label":"candidate route","address":"plans/FS112-close-inventory.md item 59, line 68"},{"source":"Y3END","target":"SRAY","kind":"rests","src":{"file":"plans/FS112-close-inventory.md","row":"59"},"quote":"with Y3-END-NEEDS and N3-END as its candidate route","label":"candidate route","address":"plans/FS112-close-inventory.md item 59, line 68"},{"source":"FS104","target":"LB6","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"3"},"quote":"decisive: given MR it is rung D (row 128)","address":"CLAUDE.md § Paths forward, ranked item 3, line 358"},{"source":"FS80","target":"FS104","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"7"},"quote":"a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR","address":"CLAUDE.md § Paths forward, ranked item 7, line 362"},{"source":"R129","target":"LB6","kind":"blocks","src":{"file":"LEDGER.md","row":"129"},"quote":"1/α_loc ≤ 4.36: that route never gives six","label":"one class at a time never gives six","address":"LEDGER.md row 129, line 174"},{"source":"R125","target":"FS59","kind":"rests","src":{"file":"LEDGER.md","row":"125"},"quote":"Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)","address":"LEDGER.md row 125, line 170"},{"source":"FS104","target":"FS59","kind":"rests","src":{"file":"LEDGER.md","row":"125"},"quote":"Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)","address":"LEDGER.md row 125, line 170"},{"source":"PL","target":"FS59","kind":"rests","src":{"file":"LEDGER.md","row":"125"},"quote":"PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6","address":"LEDGER.md row 125, line 170"},{"source":"FS59","target":"LB6","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"12"},"quote":"through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104","address":"CLAUDE.md § Paths forward, ranked item 12, line 367"},{"source":"SUB","target":"LB6","kind":"rests","src":{"file":"Proofs/HadwigerNelson/Bridge.lean","decl":"chromaticNumber_planeOver_le_plane"},"quote":"The plane over any real subfield needs at most as many colours as the plane.","faint":true,"bus":true,"address":"Proofs/HadwigerNelson/Bridge.lean (chromaticNumber_planeOver_le_plane), line 187"},{"source":"R119","target":"FS59","kind":"context","src":{"file":"LEDGER.md","row":"119"},"quote":"The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six predicted; G59)","label":"the gap's kernel floor","address":"LEDGER.md row 119, line 164"},{"source":"LINK2","target":"UB6","kind":"rests","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Upper bounds need no MR.","address":"CLAUDE.md § The aim, line 86"},{"source":"LINK2","target":"UB5","kind":"rests","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Upper bounds need no MR.","address":"CLAUDE.md § The aim, line 86"},{"source":"R131","target":"UB6","kind":"rests","src":{"file":"LEDGER.md","row":"131"},"quote":"χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1","bus":true,"address":"LEDGER.md row 131, line 176"},{"source":"R131","target":"UB5","kind":"rests","src":{"file":"LEDGER.md","row":"131"},"quote":"χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1","bus":true,"address":"LEDGER.md row 131, line 176"},{"source":"HOLES6","target":"UB6","kind":"rests","src":{"file":"LEDGER.md","row":"131"},"quote":"The step from a refutation to χ(ℝ²) ≤ 6 is link 2's argument","address":"LEDGER.md row 131, line 176"},{"source":"TSMYES","target":"HOLES6","kind":"rests","src":{"file":"LEDGER.md","row":"133"},"quote":"at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists","address":"LEDGER.md row 133, line 178"},{"source":"WEQK","target":"HOLES6","kind":"rests","src":{"file":"LEDGER.md","row":"133"},"quote":"at bounded arc complexity K, band-proper designs with vanishing holes exist iff a full tight a.e.-proper six-colouring by a map of complexity ≤ K exists","bus":true,"address":"LEDGER.md row 133, line 178"},{"source":"UNB","target":"HOLES6","kind":"rests","src":{"file":"plans/STUB-reg-scale.md"},"quote":"A family refuting it with holes → 0 is W's claim itself: χ(ℝ²) ≤ 6 with no MR.","address":"plans/STUB-reg-scale.md, line 41"},{"source":"STRIP","target":"TSMYES","kind":"partial","src":{"file":"plans/STUB-unit-arc-half.md"},"quote":"One exact known positive: [AxenovichEtAl2014] Thm 4.2's six-coloured strip of height √15/2 + √3 (≈ 3.668)","label":"a tight fragment, not the plane","address":"plans/STUB-unit-arc-half.md, line 10"},{"source":"DISK","target":"TSMYES","kind":"partial","src":{"file":"plans/FS112-close-inventory.md","row":"53"},"quote":"CAL-DISK robust — two blind rebuilds IDENTICAL (26/26 tiles, every piece)","label":"a tight fragment, not the plane","address":"plans/FS112-close-inventory.md item 53, line 62"},{"source":"PARTS","target":"HOLES6","kind":"partial","src":{"file":"LEDGER.md","row":"131"},"quote":"the upper from [Parts2020c]'s tiling (δ₆ = 1.430172·10⁻⁴)","label":"small holes, not vanishing","address":"LEDGER.md row 131, line 176"},{"source":"STOP","target":"TSMYES","kind":"blocks","src":{"file":"plans/FS112-close-inventory.md","row":"53"},"quote":"O2: the two positives stop for the same reason — TRUE (two minds, one blind)","label":"the held positives stop at a pinned corner","address":"plans/FS112-close-inventory.md item 53, line 62"},{"source":"Y3STOP","target":"TSMYES","kind":"blocks","src":{"file":"plans/FS112-close-inventory.md","row":"56"},"quote":"both pinned-corner GAPs close as derived obstructions, no escape","label":"no way past the pinned corners (under verification)","address":"plans/FS112-close-inventory.md item 56, line 65"},{"source":"WPOLY","target":"TSMYES","kind":"blocks","src":{"file":"LEDGER.md","row":"133"},"quote":"polygonal designs of bounded complexity keep holes ≥ δ₀(K), bar d = 2 (W-POLY)","label":"a YES cannot be polygonal","address":"LEDGER.md row 133, line 178"},{"source":"R134","target":"TSMYES","kind":"blocks","src":{"file":"LEDGER.md","row":"134"},"quote":"no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring","label":"a YES must use unit arcs","bus":true,"address":"LEDGER.md row 134, line 179"},{"source":"R132","target":"TSMYES","kind":"blocks","src":{"file":"LEDGER.md","row":"132"},"quote":"polygonal colourings need seven, and so do locally finite tilings by convex polygons","label":"a YES cannot be regular","bus":true,"faint":true,"address":"LEDGER.md row 132, line 177"},{"source":"FS44","target":"UB5","kind":"rests","src":{"file":"CLAUDE.md","section":"### Paths forward, ranked","row":"6"},"quote":"decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)","address":"CLAUDE.md § Paths forward, ranked item 6, line 361"},{"source":"MAPS6","target":"FS44","kind":"blocks","src":{"file":"LEDGER.md","row":"132"},"quote":"maps need six modulo Townsend's simplification (c)","label":"a five cannot be a map","address":"LEDGER.md row 132, line 177"},{"source":"R132","target":"FS44","kind":"blocks","src":{"file":"CLAUDE.md","section":"### The aim"},"quote":"Regular colourings need seven, verified and almost everywhere","label":"a five cannot be regular","bus":true,"faint":true,"address":"CLAUDE.md § The aim, line 92"}],"routes":[{"id":"interval","name":"The classical interval, in the kernel","answer":"5–7","half":"both","links":["DEGREY","SEVEN","LB5","UB7"],"reaches":["LB5","UB7"],"about":"Both ends of 5 ≤ χ(ℝ²) ≤ 7, checked by Lean's kernel on the standard three axioms (row 33). Not new mathematics: the ground every route stands on."},{"id":"alg5","name":"Five, algebraically, through measure rigidity","answer":5,"half":"lower","links":["EL","MR","R121","SUB"],"reaches":["LB5"],"about":"χ(ℚ(√47)²) = 5 gives χ(ℝ²) ≥ 5 with no witness object (rows 120–121). A second proof of a held bound — it moves no value, and its publication waits on MR in Lean."},{"id":"wall7","name":"The regularity wall, toward seven","answer":7,"half":"lower","links":["EL","MR","R128","R130","R131","RR","WEQK","R132","R134","N3BASE","N3DENSE3","N3PER","GSTEP","SRAY","UANO","FS111","SEVEN","UB7"],"reaches":["LB7","UB7"],"about":"Given MR the plane's number is its measurable number (rows 128, 130); that is seven iff vanishing holes cannot save a colour (row 131); R's reduction splits it into door (A), a tight six-map's non-existence, and door (B), the cone scale. Door (A) under Condition 5 is closed (row 134); with unit arcs FS-112 reduced it to two gaps, the global step and the stuck ray."},{"id":"yes6","name":"The YES side: a tight six-map","answer":6,"half":"upper","links":["LINK2","R131","WEQK","TSMYES"],"reaches":["UB6"],"about":"A tight six-map at bounded complexity gives vanishing holes (W-EQ-K), hence χ(ℝ²) ≤ 6 with no MR. The held positives (the strip, the disk) are tight fragments that stop at a pinned corner."},{"id":"yes6b","name":"The YES side at unbounded complexity","answer":6,"half":"upper","links":["LINK2","R131","UNB"],"reaches":["UB6"],"about":"A family of near-colourings whose holes vanish while their junctions shrink — door (B)'s negation, W's claim itself."},{"id":"cp6","name":"Six from below: χ_CP(ℝ²) ≥ 6","answer":6,"half":"lower","links":["EL","MR","R128","FS104"],"reaches":["LB6"],"about":"Given MR, χ(ℝ²) ≥ 6 is χ_CP(ℝ²) ≥ 6 (FS-104). One colour class at a time can never give it (row 129)."},{"id":"win6","name":"Six from below by an averaged certificate","answer":6,"half":"lower","links":["EL","MR","R128","FS80"],"reaches":["LB6"],"about":"A window-frequency certificate at five colours on the real plane would give χ_CP(ℝ²) ≥ 6 (FS-80)."},{"id":"q167","name":"Six from below through ℚ(√167)","answer":6,"half":"lower","links":["EL","MR","R125","FS104","PL","SUB"],"reaches":["LB6"],"about":"Six at ℚ(√167) gives χ(ℝ²) ≥ 6 with no MR, but given MR it contains χ_CP(ℝ²) ≥ 6 as a conjunct (row 125): never cheaper than FS-104."},{"id":"five","name":"Exactly five: a stationary five-colouring","answer":5,"half":"upper","links":["LINK2","R131","FS44"],"reaches":["UB5"],"about":"Row 131 at five colours: a CP five-colouring of the plane gives χ(ℝ²) = 5 with no MR (FS-44). It cannot be regular or a map."}],"credence":[{"status":"kernel","p":1.0,"why":"Checked by Lean's kernel: zero bits. Distance to publication counts it as done.","src":null,"quote":null},{"status":"cert","p":0.99,"why":"An exact object accepted by exact checkers; here each was rebuilt twice, blind.","src":null,"quote":null},{"status":"hand-2b","p":0.95,"why":"A hand proof checked by a second mind that did not see the first. The theorem audit found one hand proof wrong among 184, and grades under-stated four times for every over-statement — the measured record is better than this default.","src":{"file":"LEDGER.md","row":"77"},"quote":"184 hand, 23 derived, 31 tools, 2 cert","address":"LEDGER.md row 77, line 122"},{"status":"hand-2","p":0.9,"why":"A hand proof checked by a second mind that saw it. Lower than blind: blind verifiers still find a divergence of truth in about 0.4 of milestones (FS-112's registration, from FS-110's rate).","src":{"file":"plans/FS112-unit-arc-half.md","row":"E16"},"quote":"a blind verifier finds a divergence of truth","address":"plans/FS112-unit-arc-half.md item E16, line 561"},{"status":"hand-1","p":0.8,"why":"One mind. Includes round-3 claims under blind verification tonight.","src":null,"quote":null},{"status":"external","p":0.9,"why":"Claimed in print and not re-checked here (Einsiedler–Lindenstrauss's Thm 1.3; Parts's tiling).","src":null,"quote":null},{"status":"reading","p":0.5,"why":"Believed, with a killing test. The local–global conjecture is drawn but counted in no route.","src":null,"quote":null},{"status":"gap-step","p":0.3,"why":"A missing step that a reduction has named. Anchor: FS-112 registered a NO of its whole question within one phase at 0.3.","src":{"file":"plans/FS112-unit-arc-half.md","row":"E14"},"quote":"a NO of Q-full at one mind with every GAP named, within P1","address":"plans/FS112-unit-arc-half.md item E14, line 558"},{"status":"gap-question","p":0.03,"why":"An open question not yet reduced to named steps (FS-104, FS-80, FS-44, PL, door B's negation). Anchored on the one registered credence for a question of the answer's size: FS-112's 0.03 for a YES by formula. Lower than a named step because it hides steps nobody has counted.","src":{"file":"plans/FS112-unit-arc-half.md","row":"E5"},"quote":"the stub's \"a YES by formula (0.03)\", re-registered at 0.03 with its population stated","address":"plans/FS112-unit-arc-half.md item E5, line 549"}],"notes":[{"id":"instrument","text":"A credence is an instrument, registered so it can be scored at the close — never a reason to shrink an aim or to stop.","src":{"file":"CLAUDE.md","section":"### Counter-priors — read before pricing anything"},"quote":"A registered probability is an instrument for G21, scored at the close. It is never a reason to shrink an aim or to stop.","address":"CLAUDE.md § Counter-priors — read before pricing anything, line 136"},{"id":"belief","text":"A belief about the answer is not evidence for it. The conjecture's bold form predicts seven; the page draws it and counts it in no route.","src":{"file":"CLAUDE.md","section":"### The local–global conjecture"},"quote":"Believing the answer is seven is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64).","address":"CLAUDE.md § The local–global conjecture, line 152"},{"id":"rank","text":"Routes are ranked by bearing on the answer, never by difficulty, length or formalization effort.","src":{"file":"CLAUDE.md","section":"### Counter-priors — read before pricing anything"},"quote":"Rank a route by its bearing on the answer, never by its difficulty, its length or its formalization effort.","address":"CLAUDE.md § Counter-priors — read before pricing anything, line 135"},{"id":"publish","text":"Nothing is published before it is formalized in Lean, in full, with no declared purchases.","src":{"file":"CLAUDE.md","section":"### The local–global conjecture"},"quote":"Nothing is published before it is formalized in Lean, in full, with no declared purchases","address":"CLAUDE.md § The local–global conjecture, line 166"}]};
+(function () {
+"use strict";
+const NS = "http://www.w3.org/2000/svg";
+const D = FACTS;
+const byId = Object.fromEntries(D.nodes.map(n => [n.id, n]));
+const HUE = { 7: "var(--c7)", 6: "var(--c6)", 5: "var(--c5)" };
+const ANSWERS = [7, 6, 5];
+const STATUS_ORDER = ["kernel", "cert", "hand-2b", "hand-2", "hand-1", "external", "reading", "gap-step", "gap-question"];
+const STATUS_NAME = {
+  "kernel": "kernel", "cert": "certificate", "hand-2b": "hand, two minds, one blind", "hand-2": "hand, two minds",
+  "hand-1": "hand, one mind", "external": "external — in print, not re-checked", "reading": "reading — a belief with a killing test",
+  "gap-step": "missing step (named by a reduction)", "gap-question": "open question (not yet reduced)", "gap": "missing / open"
+};
+const FILL = { "kernel": 1, "cert": .9, "hand-2b": .62, "hand-2": .38, "hand-1": .18 };
+
+// ---------------------------------------------------------------- state
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("proof-atlas:" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("proof-atlas:" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable: session only */ } }
+};
+const DEFAULT_CRED = Object.fromEntries(D.credence.map(c => [c.status, c.p]));
+let cred = Object.assign({}, DEFAULT_CRED, store.get("cred", {}));
+let over = store.get("over", {});
+let focus = null;           // {kind:'route'|'answer'|'node', id}
+let selected = null;        // node id shown in the card
+let allLabels = false;
+
+// ---------------------------------------------------------------- graph helpers
+const out = {}, inc = {};
+D.edges.forEach(e => { (out[e.source] = out[e.source] || []).push(e); (inc[e.target] = inc[e.target] || []).push(e); });
+const pol = (th, r) => { const a = th * Math.PI / 180; return [r * Math.sin(a), -r * Math.cos(a)]; };
+const kindOf = n => n.status === "gap" ? (n.role === "question" ? "gap-question" : n.role === "conclusion" || n.role === "answer" ? "gap" : "gap-step") : n.status;
+function credOf(n) {
+  if (n.id in over) return over[n.id];
+  if (n.status === "gap") {
+    if (n.role === "conclusion" || n.role === "answer") return 1;
+    if (n.registered) return n.registered.p;
+    return n.role === "question" ? cred["gap-question"] : cred["gap-step"];
+  }
+  return cred[n.status] != null ? cred[n.status] : 1;
+}
+const bitsOf = p => p >= 1 ? 0 : p <= 0 ? Infinity : -Math.log2(p);
+const fmtBits = b => !isFinite(b) ? "∞" : b < 0.005 ? "0" : b < 10 ? b.toFixed(2) : b.toFixed(1);
+const fmtP = p => p >= 1 ? "1" : p < 0.01 ? p.toFixed(3) : p.toFixed(2);
+
+function routeStats(r) {
+  const links = r.links.map(id => { const n = byId[id]; const p = credOf(n); return { n, p, b: bitsOf(p) }; });
+  const bits = links.reduce((s, l) => s + l.b, 0);
+  return {
+    r, links, bits,
+    pub: links.filter(l => l.n.status !== "kernel").length,
+    named: links.filter(l => l.n.status === "gap" && l.n.role === "step").length,
+    unreduced: links.filter(l => l.n.status === "gap" && l.n.role === "question").length,
+    heldBits: links.filter(l => l.n.status !== "gap").reduce((s, l) => s + l.b, 0)
+  };
+}
+function answerStats(v) {
+  const rs = D.routes.map(routeStats);
+  const pick = half => rs.filter(s => s.r.answer === v && s.r.half === half).sort((a, b) => a.bits - b.bits)[0] || null;
+  const interval = rs.find(s => s.r.id === "interval");
+  let parts;
+  if (v === 7) parts = [pick("lower")];
+  else if (v === 5) parts = [pick("upper")];
+  else parts = [pick("lower"), pick("upper")];
+  const ids = new Set(); parts.forEach(s => s.links.forEach(l => ids.add(l.n.id)));
+  const links = [...ids].map(id => { const n = byId[id]; const p = credOf(n); return { n, p, b: bitsOf(p) }; });
+  return {
+    v, parts, links,
+    bits: links.reduce((s, l) => s + l.b, 0),
+    pub: links.filter(l => l.n.status !== "kernel").length,
+    named: links.filter(l => l.n.status === "gap" && l.n.role === "step").length,
+    unreduced: links.filter(l => l.n.status === "gap" && l.n.role === "question").length,
+    held: v === 7 ? "χ(ℝ²) ≤ 7" : v === 5 ? "χ(ℝ²) ≥ 5" : null, interval
+  };
+}
+// nodes on a route's paths: forward from its links along 'rests'/'half' edges, intersected with backward from what it reaches
+function routeNodes(r) {
+  const fw = new Set(r.links), st = [...r.links];
+  while (st.length) { const x = st.pop(); (out[x] || []).forEach(e => { if ((e.kind === "rests" || e.kind === "half") && !fw.has(e.target)) { fw.add(e.target); st.push(e.target); } }); }
+  const goals = new Set(r.reaches);
+  (r.reaches || []).forEach(g => (out[g] || []).forEach(e => { if (e.kind === "half") goals.add(e.target); }));
+  const bw = new Set(goals), sb = [...goals];
+  while (sb.length) { const x = sb.pop(); (inc[x] || []).forEach(e => { if ((e.kind === "rests" || e.kind === "half") && !bw.has(e.source)) { bw.add(e.source); sb.push(e.source); } }); }
+  const set = new Set([...fw].filter(x => bw.has(x)));
+  r.links.forEach(x => set.add(x)); goals.forEach(x => set.add(x));
+  return set;
+}
+function focusSet() {
+  if (!focus) return null;
+  if (focus.kind === "route") return routeNodes(D.routes.find(r => r.id === focus.id));
+  if (focus.kind === "answer") {
+    const s = answerStats(focus.id); const set = new Set(["A" + focus.id]);
+    s.parts.forEach(p => routeNodes(p.r).forEach(x => set.add(x)));
+    D.edges.forEach(e => { if (e.target === "A" + focus.id) set.add(e.source); });
+    return set;
+  }
+  const set = new Set([focus.id]);
+  (out[focus.id] || []).forEach(e => set.add(e.target)); (inc[focus.id] || []).forEach(e => set.add(e.source));
+  return set;
+}
+
+// ---------------------------------------------------------------- svg helpers
+const PAINT = new Set(["fill", "stroke", "stop-color", "fill-opacity", "stroke-opacity"]);
+function el(tag, attrs, parent) {
+  const x = document.createElementNS(NS, tag);
+  for (const k in attrs) {
+    const v = attrs[k];
+    if (PAINT.has(k) && typeof v === "string" && v.indexOf("var(") >= 0) x.style.setProperty(k, v);   // var() is CSS, not an attribute value
+    else x.setAttribute(k, v);
+  }
+  if (parent) parent.appendChild(x);
+  return x;
+}
+function h(tag, attrs, html) {
+  const x = document.createElement(tag);
+  for (const k in (attrs || {})) { if (k === "class") x.className = attrs[k]; else x.setAttribute(k, attrs[k]); }
+  if (html != null) x.innerHTML = html;
+  return x;
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function wrap(label, width) {
+  width = width || 16; const words = label.split(" "), lines = []; let cur = "";
+  for (const w of words) {
+    if (cur && cur.length + 1 + w.length > width && lines.length < 1) { lines.push(cur); cur = w; }
+    else cur = (cur + " " + w).trim();
+  }
+  return lines.concat([cur]);
+}
+const radius = n => n.role === "answer" ? 30 : ({ 0: 17, 1: 13, 2: 10 })[n.tier];
+function octagon(r) {
+  const pts = []; for (let i = 0; i < 8; i++) { const a = Math.PI / 8 + i * Math.PI / 4; pts.push((r * 1.08 * Math.cos(a)).toFixed(2) + "," + (r * 1.08 * Math.sin(a)).toFixed(2)); }
+  return pts.join(" ");
+}
+// the small mark used in the legend, the cards and the credence table
+function markSVG(kind, size, extra) {
+  size = size || 16; const r = size / 2 - 2;
+  const s = el("svg", { width: size, height: size, viewBox: `${-size / 2} ${-size / 2} ${size} ${size}`, "aria-hidden": "true" });
+  drawMark(s, kind, r, extra || {});
+  return s;
+}
+function drawMark(g, kind, r, o) {
+  const shape = o.shape || "circle";
+  let body;
+  if (shape === "oct") body = el("polygon", { points: octagon(r) }, g);
+  else if (shape === "diamond") body = el("polygon", { points: `0,${-r * 1.2} ${r * 1.2},0 0,${r * 1.2} ${-r * 1.2},0` }, g);
+  else if (shape === "square") body = el("rect", { x: -r, y: -r, width: 2 * r, height: 2 * r, rx: r * .3 }, g);
+  else body = el("circle", { r }, g);
+  body.setAttribute("class", "body");
+  const stroke = o.stroke || (kind === "gap-step" || kind === "gap-question" ? "var(--missing)" : kind === "reading" ? "var(--reading)"
+    : kind === "external" ? "var(--external)" : kind === "gap" ? "var(--muted)" : o.nogo ? "var(--nogo)" : "var(--ink)");
+  body.style.stroke = stroke;
+  if (kind in FILL) { body.style.fill = o.nogo ? "var(--nogo)" : "var(--ink)"; body.setAttribute("fill-opacity", FILL[kind]); }
+  else if (kind === "external") body.style.fill = "url(#hatch)";
+  else body.style.fill = "var(--panel)";
+  if (kind === "gap-step" || kind === "gap-question" || kind === "reading" || kind === "gap") body.setAttribute("stroke-dasharray", r > 8 ? "4 3" : "2.5 2");
+  if (kind === "cert") el("circle", { r: r + 3, fill: "none", stroke: "var(--ink)", "stroke-width": 1, class: "ring2" }, g);
+  if (kind === "gap-question") el("circle", { r: r + 3.5, fill: "none", stroke: "var(--missing)", "stroke-width": 1, "stroke-dasharray": "2 3", class: "ring2" }, g);
+  if (kind === "gap-step" || kind === "gap-question") {
+    const t = el("text", { class: "glyph", fill: "var(--missing)", "font-size": Math.max(8, r * 1.35).toFixed(1) }, g); t.textContent = "?";
+  }
+  if (o.closing) el("circle", { r: r + 6.5, fill: "none", stroke: "var(--c7)", "stroke-width": 1.4, "stroke-dasharray": "10 4", class: "ring2" }, g);
+  if (o.verifying) el("circle", { r: r + (o.closing ? 10 : 6.5), fill: "none", stroke: "var(--reading)", "stroke-width": 1.2, "stroke-dasharray": "1.5 3", "stroke-linecap": "round", class: "ring2" }, g);
+  return body;
+}
+const shapeOf = n => n.role === "nogo" ? "oct" : n.role === "positive" ? "diamond" : (n.role === "lean" || n.role === "lean-held") ? "square" : "circle";
+
+// ---------------------------------------------------------------- map
+const svg = document.getElementById("map");
+const VB0 = { x: -660, y: -660, w: 1320, h: 1320 };
+let vb = Object.assign({}, VB0);
+let gEdges, gNodes, gLabels;
+const nodeEls = {}, labelEls = {}, edgeEls = [];
+
+function arcPath(r, a0, a1, reverse) {
+  const [x0, y0] = pol(reverse ? a1 : a0, r), [x1, y1] = pol(reverse ? a0 : a1, r);
+  const large = Math.abs(a1 - a0) > 180 ? 1 : 0;
+  return `M${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${large} ${reverse ? 0 : 1} ${x1.toFixed(1)},${y1.toFixed(1)}`;
+}
+function annulus(r0, r1, a0, a1) {
+  const [ax, ay] = pol(a0, r1), [bx, by] = pol(a1, r1), [cx, cy] = pol(a1, r0), [dx, dy] = pol(a0, r0);
+  const large = a1 - a0 > 180 ? 1 : 0;
+  return `M${ax},${ay} A${r1},${r1} 0 ${large} 1 ${bx},${by} L${cx},${cy} A${r0},${r0} 0 ${large} 0 ${dx},${dy} Z`;
+}
+const SECTORS = [
+  { a0: 291, a1: 340, label: "the measure-rigidity engine", hue: "var(--muted)" },
+  { a0: 343, a1: 437, label: "toward seven · the regularity wall", hue: "var(--c7)" },
+  { a0: 76, a1: 113, label: "six, from below", hue: "var(--c6)" },
+  { a0: 114, a1: 176, label: "the YES side · at most six", hue: "var(--c6)" },
+  { a0: 190, a1: 246, label: "exactly five", hue: "var(--c5)" },
+  { a0: 247, a1: 290, label: "five, held · the local–global frame", hue: "var(--c5)" }
+];
+let laneIn = 0, laneOut = 0;
+function edgePath(e) {
+  const s = byId[e.source], t = byId[e.target];
+  let d = ((t.theta - s.theta + 540) % 360) - 180;
+  const [sx, sy] = pol(s.theta, s.r), [tx, ty] = pol(t.theta, t.r);
+  const rt = radius(t) + (e.kind === "blocks" ? 5 : 4), rs = radius(s) + 2;
+  if (e.bus || Math.abs(d) > 70) {
+    e._orbit = true;
+    const outer = Math.min(s.r, t.r) >= 300;
+    const R = outer ? 628 + 7 * (laneOut++ % 4) : 176 + 7 * (laneIn++ % 4);
+    const [ax, ay] = pol(s.theta, R), [bx, by] = pol(t.theta, R);
+    const [s2x, s2y] = pol(s.theta, s.r + (R > s.r ? rs : -rs));
+    const [t2x, t2y] = pol(t.theta, t.r + (R > t.r ? rt : -rt));
+    return `M${s2x.toFixed(1)},${s2y.toFixed(1)} L${ax.toFixed(1)},${ay.toFixed(1)} A${R},${R} 0 0 ${d > 0 ? 1 : 0} ${bx.toFixed(1)},${by.toFixed(1)} L${t2x.toFixed(1)},${t2y.toFixed(1)}`;
+  }
+  const dx = tx - sx, dy = ty - sy, L = Math.hypot(dx, dy) || 1;
+  const x0 = sx + dx / L * rs, y0 = sy + dy / L * rs, x1 = tx - dx / L * rt, y1 = ty - dy / L * rt;
+  const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, k = 0.06;
+  const cx = mx * (1 - k), cy = my * (1 - k);
+  return `M${x0.toFixed(1)},${y0.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}`;
+}
+
+function buildMap() {
+  svg.innerHTML = "";
+  const defs = el("defs", {}, svg);
+  const hatch = el("pattern", { id: "hatch", width: 5, height: 5, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+  el("rect", { width: 5, height: 5, fill: "var(--panel)" }, hatch);
+  el("line", { x1: 0, y1: 0, x2: 0, y2: 5, stroke: "var(--external)", "stroke-width": 2.2 }, hatch);
+  for (const [id, col] of [["arr", "var(--muted)"], ["arr-nogo", "var(--nogo)"], ["arr-7", "var(--c7)"], ["arr-6", "var(--c6)"], ["arr-5", "var(--c5)"], ["arr-lean", "var(--external)"], ["arr-read", "var(--reading)"]]) {
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: 8.5, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse", markerUnits: "userSpaceOnUse" }, defs);
+    m.setAttribute("markerWidth", 9); m.setAttribute("markerHeight", 9);
+    el("path", { d: "M1,1.5 L9,5 L1,8.5 z", fill: col }, m);
+  }
+  const bar = el("marker", { id: "bar", viewBox: "0 0 10 20", refX: 5, refY: 10, markerWidth: 8, markerHeight: 16, orient: "auto", markerUnits: "userSpaceOnUse" }, defs);
+  el("path", { d: "M5,1 L5,19", stroke: "var(--nogo)", "stroke-width": 3.2, "stroke-linecap": "round" }, bar);
+  const clip = el("clipPath", { id: "hubclip" }, defs); el("circle", { r: 112 }, clip);
+
+  // sector wedges and their names
+  const gBack = el("g", {}, svg);
+  SECTORS.forEach((s, i) => {
+    el("path", { d: annulus(118, 612, s.a0, s.a1), class: "wedge", style: `fill: ${s.hue}; fill-opacity: var(--wedge-alpha)` }, gBack);
+    const mid = ((s.a0 + s.a1) / 2) % 360, bottom = mid > 100 && mid < 260;
+    const r = bottom ? 640 : 630;
+    const p = el("path", { id: "sec" + i, d: arcPath(r, s.a0 + 1, s.a1 - 1, bottom), fill: "none" }, defs);
+    const t = el("text", { class: "sector-label", "text-anchor": "middle", style: `fill: ${s.hue}` }, gBack);
+    const tp = el("textPath", { href: "#sec" + i, startOffset: "50%" }, t); tp.textContent = s.label;
+  });
+  [140, 222, 300, 375, 450, 525, 600].forEach(r => el("circle", { r, class: "ring" }, gBack));
+
+  // the hub: the kernel's own seven-colouring (4/5 × 3/5 bricks, rows shifted 2/5, colour (column + 3·row) mod 7; the cell diagonal is 1)
+  const hub = el("g", { "clip-path": "url(#hubclip)", class: "bricks" }, gBack);
+  const u = 46, w = 0.8 * u, hh = 0.6 * u, sh = 0.4 * u;
+  for (let j = -6; j <= 6; j++) for (let i = -8; i <= 8; i++) {
+    const c = (((i + 3 * j) % 7) + 7) % 7;
+    el("rect", { x: (i * w + j * sh - w / 2).toFixed(2), y: (-j * hh - hh / 2).toFixed(2), width: w.toFixed(2), height: hh.toFixed(2),
+      style: `fill: var(--brick-${c + 1}); fill-opacity: var(--brick-alpha)` }, hub);
+  }
+  el("circle", { r: 112, fill: "none", stroke: "var(--rule)", "stroke-width": 1 }, gBack);
+  const unit = el("g", { opacity: .8 }, gBack);   // the unit distance, drawn once: one cell's diagonal
+  el("line", { x1: (-w / 2 + 3 * w).toFixed(1), y1: (hh / 2).toFixed(1), x2: (w / 2 + 3 * w).toFixed(1), y2: (-hh / 2).toFixed(1), stroke: "var(--ink-2)", "stroke-width": 1.2 }, unit);
+
+  laneIn = 0; laneOut = 0;
+  gEdges = el("g", {}, svg); gNodes = el("g", {}, svg); gLabels = el("g", {}, svg);
+  edgeEls.length = 0;
+  D.edges.forEach(e => {
+    const s = byId[e.source];
+    const openSrc = s.status === "gap";
+    const d = edgePath(e);
+    const cls = ["edge", e.kind, openSrc && e.kind === "rests" ? "open" : "", e.faint ? "faint" : "", e._orbit ? "long" : ""].join(" ");
+    const p = el("path", { d, class: cls }, gEdges);
+    if (e.kind === "half") {
+      const a = byId[e.target].answer; p.style.stroke = HUE[a]; if (s.status === "gap") p.setAttribute("stroke-dasharray", "5 4");
+      p.setAttribute("marker-end", `url(#arr-${a})`);
+    } else if (e.kind === "blocks") p.setAttribute("marker-end", "url(#bar)");
+    else if (e.kind === "formalizes") p.setAttribute("marker-end", "url(#arr-lean)");
+    else if (e.kind === "predicts") p.setAttribute("marker-end", "url(#arr-read)");
+    else p.setAttribute("marker-end", "url(#arr)");
+    const tt = el("title", {}, p); tt.textContent = `${byId[e.source].label} → ${byId[e.target].label}` + (e.label ? ` (${e.label})` : "");
+    edgeEls.push({ e, p });
+  });
+
+  D.nodes.forEach(n => {
+    const [x, y] = pol(n.theta, n.r);
+    const g = el("g", { class: "node", transform: `translate(${x.toFixed(1)},${y.toFixed(1)})`, tabindex: 0, role: "button",
+      "aria-label": `${n.label}: ${STATUS_NAME[kindOf(n)] || n.status}` }, gNodes);
+    if (n.role === "answer") {
+      const a = n.answer, hue = HUE[a];
+      el("circle", { r: 30, fill: "var(--panel)", stroke: hue, "stroke-width": 2.6, class: "body" }, g);   // hue is var(): el() styles it
+      const heldId = a === 7 ? "UB7" : a === 5 ? "LB5" : null;
+      if (heldId) {   // fill the half facing the bound that is held in the kernel
+        const hb = byId[heldId]; const [hx, hy] = pol(hb.theta, hb.r); const ang = Math.atan2(hy - y, hx - x);
+        const p1 = [26 * Math.cos(ang + Math.PI / 2), 26 * Math.sin(ang + Math.PI / 2)], p2 = [-p1[0], -p1[1]];
+        el("path", { d: `M${p1[0]},${p1[1]} A26,26 0 0 1 ${p2[0]},${p2[1]} Z`, style: `fill: ${hue}; fill-opacity: .28` }, g);
+        el("path", { d: `M${p2[0]},${p2[1]} A26,26 0 0 1 ${p1[0]},${p1[1]}`, fill: "none", style: `stroke: ${hue}`, "stroke-width": 1, "stroke-dasharray": "3 3" }, g);
+      } else el("circle", { r: 26, fill: "none", style: `stroke: ${hue}`, "stroke-width": 1, "stroke-dasharray": "3 3" }, g);
+      const t = el("text", { class: "glyph", "font-size": 30, style: `fill: ${hue}; font-style: italic` }, g); t.textContent = a;
+    } else {
+      drawMark(g, kindOf(n), radius(n), { shape: shapeOf(n), nogo: n.role === "nogo", closing: n.closing, verifying: n.verifying,
+        stroke: n.role === "bound" && n.status === "kernel" ? HUE[n.answer] : null });
+      if (n.role === "bound") { const b = g.querySelector(".body"); if (n.status === "kernel") { b.style.fill = HUE[n.answer]; b.setAttribute("fill-opacity", .9); } else b.style.stroke = HUE[n.answer]; }
+      if (n.role === "conclusion" && n.answer) { const b = g.querySelector(".body"); b.style.stroke = HUE[n.answer]; b.setAttribute("stroke-width", 2.2); }
+    }
+    const tt = el("title", {}, g); tt.textContent = `${n.label} — ${STATUS_NAME[kindOf(n)] || n.status}`;
+    g.addEventListener("click", ev => { ev.stopPropagation(); selectNode(n.id, true); });
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); selectNode(n.id, true); } });
+    g.addEventListener("pointerenter", () => hover(n.id));
+    g.addEventListener("pointerleave", () => hover(null));
+    nodeEls[n.id] = g;
+
+    if (n.role !== "answer") {
+      const lines = wrap(n.label), r = radius(n), above = Math.cos(n.theta * Math.PI / 180) > 0.5;
+      const t = el("text", { class: "label t" + n.tier, "data-lines": lines.length + (n.verifying ? 1 : 0) }, gLabels);
+      lines.forEach((ln, i) => { const s = el("tspan", { x: x.toFixed(1) }, t); s.textContent = ln; s.dataset.i = i; });
+      if (n.verifying) { const s = el("tspan", { x: x.toFixed(1), class: "tag" }, t); s.textContent = "under blind check"; s.dataset.i = lines.length; }
+      labelEls[n.id] = { t, x, y, r, above, n };
+    }
+  });
+  layoutLabels();
+  applyFocus();
+}
+
+function scalePx() { const w = svg.clientWidth || 800; return w / vb.w; }
+function layoutLabels() {
+  const s = scalePx();
+  const fs = Math.max(10, Math.min(16, 10.5 / s));
+  const showAll = allLabels || s >= 0.85;
+  for (const id in labelEls) {
+    const L = labelEls[id], k = +L.t.dataset.lines;
+    L.t.setAttribute("font-size", fs.toFixed(2));
+    const lh = fs * 1.15;
+    const y0 = L.above ? L.y - L.r - 4 - lh * k + fs * 0.85 : L.y + L.r + 4 + fs * 0.85;
+    [...L.t.children].forEach(sp => sp.setAttribute("y", (y0 + lh * (+sp.dataset.i)).toFixed(1)));
+    const vis = L.n.tier <= 1 || showAll || (selected === id) || (hoverId && (hoverId === id || nbrs(hoverId).has(id)));
+    L.t.style.display = vis ? "" : "none";
+  }
+}
+const nbrs = id => { const s = new Set(); (out[id] || []).forEach(e => s.add(e.target)); (inc[id] || []).forEach(e => s.add(e.source)); return s; };
+function setVB() { svg.setAttribute("viewBox", `${vb.x.toFixed(1)} ${vb.y.toFixed(1)} ${vb.w.toFixed(1)} ${vb.h.toFixed(1)}`); layoutLabels(); }
+
+// pan and zoom by the viewBox: drag, wheel, pinch, buttons
+function toUser(cx, cy) { const r = svg.getBoundingClientRect(); return [vb.x + (cx - r.left) / r.width * vb.w, vb.y + (cy - r.top) / r.height * vb.h]; }
+function zoomAt(ux, uy, f) {
+  const nw = Math.max(260, Math.min(1500, vb.w * f)); const k = nw / vb.w;
+  vb.x = ux - (ux - vb.x) * k; vb.y = uy - (uy - vb.y) * k; vb.w = nw; vb.h = nw; setVB();
+}
+svg.addEventListener("wheel", ev => { ev.preventDefault(); const [ux, uy] = toUser(ev.clientX, ev.clientY); zoomAt(ux, uy, Math.exp(ev.deltaY * 0.0015)); }, { passive: false });
+const ptrs = new Map(); let panStart = null, pinch = null, moved = false;
+svg.addEventListener("pointerdown", ev => {
+  ptrs.set(ev.pointerId, [ev.clientX, ev.clientY]); moved = false;
+  if (ptrs.size === 1) { panStart = { x: ev.clientX, y: ev.clientY, vx: vb.x, vy: vb.y }; }
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), w: vb.w }; }
+});
+svg.addEventListener("pointermove", ev => {
+  if (!ptrs.has(ev.pointerId)) return;
+  ptrs.set(ev.pointerId, [ev.clientX, ev.clientY]);
+  if (ptrs.size === 2 && pinch) {
+    const [a, b] = [...ptrs.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    const [ux, uy] = toUser((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); zoomAt(ux, uy, (pinch.w * pinch.d / d) / vb.w); moved = true; return;
+  }
+  if (panStart) {
+    const dx = ev.clientX - panStart.x, dy = ev.clientY - panStart.y;
+    if (!moved && Math.hypot(dx, dy) < 4) return;
+    if (!moved) { svg.setPointerCapture(ev.pointerId); svg.classList.add("dragging"); }
+    moved = true;
+    const r = svg.getBoundingClientRect();
+    vb.x = panStart.vx - dx / r.width * vb.w; vb.y = panStart.vy - dy / r.height * vb.h; setVB();
+  }
+});
+const endPtr = ev => { ptrs.delete(ev.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) { panStart = null; svg.classList.remove("dragging"); } };
+svg.addEventListener("pointerup", endPtr); svg.addEventListener("pointercancel", endPtr);
+svg.addEventListener("click", () => { if (!moved && focus) { setFocus(null); } });
+document.getElementById("zoomin").onclick = () => zoomAt(vb.x + vb.w / 2, vb.y + vb.h / 2, 1 / 1.35);
+document.getElementById("zoomout").onclick = () => zoomAt(vb.x + vb.w / 2, vb.y + vb.h / 2, 1.35);
+document.getElementById("zoomfit").onclick = () => { vb = Object.assign({}, VB0); setVB(); };
+const lblBtn = document.getElementById("labels");
+lblBtn.onclick = () => { allLabels = !allLabels; lblBtn.setAttribute("aria-pressed", allLabels); layoutLabels(); };
+window.addEventListener("resize", layoutLabels);
+
+// ---------------------------------------------------------------- focus and selection
+let hoverId = null;
+function hover(id) { hoverId = id; layoutLabels(); applyFocus(); }
+function setFocus(f) {
+  focus = f; applyFocus(); renderAnswers(); renderRoutes();
+  const note = document.getElementById("focusnote"), clr = document.getElementById("clearfocus");
+  if (!f) { note.innerHTML = ""; clr.hidden = true; return; }
+  clr.hidden = false;
+  if (f.kind === "route") { const r = D.routes.find(x => x.id === f.id); note.innerHTML = `Following <b>${esc(r.name)}</b>`; }
+  else if (f.kind === "answer") note.innerHTML = `Following the nearest routes to <b>χ(ℝ²) = ${f.id}</b>`;
+  else note.innerHTML = `<b>${esc(byId[f.id].label)}</b> and its neighbours`;
+}
+document.getElementById("clearfocus").onclick = () => setFocus(null);
+function applyFocus() {
+  const fs = focusSet(), hs = hoverId ? new Set([hoverId, ...nbrs(hoverId)]) : null;
+  const on = id => (!fs || fs.has(id)) && (!hs || hs.has(id));
+  for (const id in nodeEls) {
+    nodeEls[id].classList.toggle("dim", !on(id));
+    nodeEls[id].classList.toggle("sel", id === selected);
+    if (labelEls[id]) labelEls[id].t.classList.toggle("dim", !on(id));
+  }
+  edgeEls.forEach(({ e, p }) => {
+    const a = (!fs || (fs.has(e.source) && fs.has(e.target))) && (!hs || e.source === hoverId || e.target === hoverId);
+    p.classList.toggle("dim", !a);
+    p.classList.toggle("hot", a && !!(fs || hs));   // a long edge comes forward only while something it joins is followed
+  });
+}
+function selectNode(id, show) {
+  selected = id; renderCard(); applyFocus(); layoutLabels();
+  if (show) showTab("card");
+  const n = byId[id];
+  if (n.role === "answer") setFocus({ kind: "answer", id: n.answer });
+}
+
+// ---------------------------------------------------------------- tabs
+const TABS = ["routes", "card", "cred", "about"];
+function showTab(t) {
+  TABS.forEach(x => { document.getElementById("t-" + x).setAttribute("aria-selected", x === t); document.getElementById("p-" + x).hidden = x !== t; });
+  store.set("tab", t);
+}
+TABS.forEach(x => document.getElementById("t-" + x).onclick = () => showTab(x));
+
+// ---------------------------------------------------------------- the answers
+function segBar(links, scaleMax) {
+  const bar = h("div", { class: "bar", role: "img", "aria-label": "bits by link" });
+  links.filter(l => l.b > 0.004).forEach(l => {
+    const k = kindOf(l.n); const i = h("i");
+    i.style.width = (100 * Math.min(l.b, scaleMax) / scaleMax) + "%";
+    i.style.background = k.startsWith("gap") ? "var(--missing)" : k === "external" ? "var(--external)" : "var(--ink)";
+    i.style.opacity = k.startsWith("gap") ? (k === "gap-question" ? .95 : .7) : k === "external" ? .8 : ({ "cert": .9, "hand-2b": .5, "hand-2": .38, "hand-1": .26 })[k] || .5;
+    i.title = `${l.n.label}: p = ${fmtP(l.p)}, ${fmtBits(l.b)} bits`;
+    bar.appendChild(i);
+  });
+  return bar;
+}
+function renderAnswers() {
+  const box = document.getElementById("answers"); box.innerHTML = "";
+  ANSWERS.forEach(v => {
+    const s = answerStats(v);
+    const b = h("button", { class: "ans", style: `--hue: ${HUE[v]}`, "aria-pressed": !!(focus && focus.kind === "answer" && focus.id === v) });
+    const miss = [];
+    if (s.named) miss.push(`<b>${s.named}</b> missing step${s.named > 1 ? "s" : ""} named`);
+    if (s.unreduced) miss.push(`<b>${s.unreduced}</b> open question${s.unreduced > 1 ? "s" : ""} not yet reduced`);
+    b.innerHTML = `<span class="num">χ = ${v}<small>${s.held ? "half held: " + s.held : "neither half held"}</small></span>
+      <span class="dist">${fmtBits(s.bits)}<span>bits away</span></span>
+      <span class="meta">${miss.join(" · ")}</span>
+      <span class="meta"><b>${s.pub}</b> link${s.pub === 1 ? "" : "s"} still to put in Lean</span>
+      <span class="via">via ${s.parts.map(p => esc(p.r.name)).join(" + ")}</span>`;
+    b.onclick = () => setFocus(focus && focus.kind === "answer" && focus.id === v ? null : { kind: "answer", id: v });
+    box.appendChild(b);
+  });
+}
+
+// ---------------------------------------------------------------- routes tab
+function renderRoutes() {
+  const pane = document.getElementById("p-routes"); pane.innerHTML = "";
+  const stats = D.routes.map(routeStats);
+  const MAX = 12;
+  pane.appendChild(h("p", { class: "small" }, "Each route is a chain of links from what is held to one half of an answer. Its distance is the sum of " +
+    "<b>−log₂ p</b> over its links, in bits, with <b>p</b> the credence the Credences tab sets. Kernel links cost nothing. Click a route to follow it on the map."));
+  const scale = h("div", { class: "scale", "aria-hidden": "true" }); [0, 2, 4, 6, 8, 10, 12].forEach(t => scale.appendChild(h("span", {}, t + (t === 12 ? " bits" : ""))));
+  const groups = [
+    { v: 7, title: "Toward seven", ids: ["wall7"] },
+    { v: 6, title: "Toward six", ids: ["cp6", "win6", "q167", "yes6", "yes6b"] },
+    { v: 5, title: "Toward five", ids: ["five", "alg5"] },
+    { v: null, title: "Held ground", ids: ["interval"] }
+  ];
+  groups.forEach(gp => {
+    const g = h("div", { class: "rgroup" });
+    g.appendChild(h("h3", {}, `${gp.title}${gp.v ? ` <span class="chip h${gp.v}">χ = ${gp.v}</span>` : ""}`));
+    gp.ids.forEach(id => {
+      const s = stats.find(x => x.r.id === id); const r = s.r;
+      const hue = typeof r.answer === "number" ? HUE[r.answer] : "var(--ink)";
+      const active = focus && focus.kind === "route" && focus.id === id;
+      const card = h("div", { class: "route", role: "button", tabindex: 0, "aria-pressed": !!active, style: `--hue: ${hue}` });
+      const half = r.half === "lower" ? `χ ≥ ${r.answer}` : r.half === "upper" ? `χ ≤ ${r.answer}` : "5 ≤ χ ≤ 7";
+      card.appendChild(h("div", { class: "head" }, `<span class="name">${esc(r.name)}</span><span class="bits">${fmtBits(s.bits)} <small>bits</small></span>`));
+      card.appendChild(segBar(s.links, MAX));
+      const miss = s.links.filter(l => l.n.status === "gap").map(l => esc(l.n.label));
+      card.appendChild(h("div", { class: "facts" }, `gives <b>${half}</b> · ${miss.length ? "missing: " + miss.join(", ") : "nothing missing"} · ` +
+        `<b>${s.pub}</b> of ${s.links.length} links not in Lean`));
+      if (active) {
+        card.appendChild(h("div", { class: "about" }, esc(r.about)));
+        const tb = h("table", { class: "linktab" });
+        tb.innerHTML = `<tbody>${s.links.map(l => `<tr><td><button data-id="${l.n.id}">${esc(l.n.label)}</button></td><td>${esc(STATUS_NAME[kindOf(l.n)])}</td>` +
+          `<td class="n">p ${fmtP(l.p)}</td><td class="n">${fmtBits(l.b)} b</td></tr>`).join("")}</tbody>`;
+        tb.querySelectorAll("button").forEach(bt => bt.onclick = ev => { ev.stopPropagation(); selectNode(bt.dataset.id, true); });
+        card.appendChild(tb);
+      }
+      card.onclick = () => setFocus(active ? null : { kind: "route", id });
+      card.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); card.click(); } };
+      g.appendChild(card);
+    });
+    pane.appendChild(g);
+    if (gp.v === 7) pane.appendChild(scale);
+  });
+  pane.appendChild(h("p", { class: "note" }, "Bits count the steps somebody has named. The route to seven is analysed furthest, so more of its cost shows; a route whose missing part is one open question hides the steps inside it. Compare the counts of named steps and open questions, not only the bits."));
+}
+
+// ---------------------------------------------------------------- card tab
+function addrRow(label, address) {
+  const r = h("div", { class: "addr" });
+  r.appendChild(h("span", { class: "mono" }, (label ? `<span style="color:var(--muted)">${esc(label)}</span> ` : "") + esc(address)));
+  const c = h("button", { class: "copy" }, "Copy");
+  c.onclick = () => {
+    const done = () => { c.textContent = "Copied"; setTimeout(() => c.textContent = "Copy", 1200); };
+    const fallback = () => { const sel = window.getSelection(), rg = document.createRange(); rg.selectNodeContents(r.firstChild); sel.removeAllRanges(); sel.addRange(rg); c.textContent = "Selected"; };
+    try { navigator.clipboard.writeText(address).then(done, fallback); } catch (e) { fallback(); }
+  };
+  r.appendChild(c); return r;
+}
+function nodeButton(id, sub) {
+  const n = byId[id]; const b = h("button", {});
+  b.innerHTML = `<span>${esc(n.label)}</span><small>${esc(sub)}</small>`;
+  b.onclick = () => selectNode(id, true); return b;
+}
+function renderCard() {
+  const pane = document.getElementById("p-card"); pane.innerHTML = "";
+  if (!selected) { pane.appendChild(h("p", { class: "empty" }, "Click any mark on the map for its card: what it says, in plain words and in the source's own words, its grade as the source writes it, where to find it, and what rests on it.")); return; }
+  const n = byId[selected], k = kindOf(n);
+  const head = h("div", { class: "card-title" });
+  const roleWord = { answer: "an answer", bound: "one half of an answer", conclusion: "what follows once its premises hold", held: "a held result",
+    nogo: "a no-go: a route proved not to work", positive: "an exact object", external: "a theorem in print", step: "a missing step",
+    question: "an open question", belief: "a belief", lean: "Lean work still owed", "lean-held": "a Lean artifact" }[n.role] || n.role;
+  head.appendChild(h("div", { class: "eyebrow" }, esc(roleWord) + (n.closing ? " · FS-112, closing tonight" : "")));
+  head.appendChild(h("h2", {}, esc(n.label)));
+  pane.appendChild(head);
+  const sl = h("div", { class: "statusline" });
+  const chip = h("span", { class: "chip" }); chip.appendChild(markSVG(k, 14, { shape: shapeOf(n), nogo: n.role === "nogo" })); chip.appendChild(document.createTextNode(STATUS_NAME[k] || n.status));
+  sl.appendChild(chip);
+  if (n.verifying) sl.appendChild(h("span", { class: "chip" }, "under blind verification tonight"));
+  if (n.role !== "answer" && n.role !== "conclusion" && n.role !== "bound" && !n.role.startsWith("lean") && n.role !== "belief") {
+    const p = credOf(n); sl.appendChild(h("span", { class: "chip" }, `p ${fmtP(p)} · ${fmtBits(bitsOf(p))} bits`));
+  }
+  pane.appendChild(sl);
+  pane.appendChild(h("p", {}, esc(n.plain)));
+  const q = h("div", {}); q.appendChild(h("div", { class: "eyebrow" }, "In the source's words"));
+  q.appendChild(h("blockquote", {}, esc(n.quote))); q.appendChild(addrRow("", n.address)); pane.appendChild(q);
+  (n.also || []).forEach(a => { const x = h("div", {}); x.appendChild(h("blockquote", {}, esc(a.quote))); x.appendChild(addrRow("", a.address)); pane.appendChild(x); });
+  const gr = h("div", {}); gr.appendChild(h("div", { class: "eyebrow" }, "Grade, as the source writes it"));
+  gr.appendChild(h("blockquote", {}, n.grade === "@lean" ? "a theorem in Lean, checked by the kernel on the standard three axioms" : esc(n.grade)));
+  gr.appendChild(addrRow("", n.grade_address)); pane.appendChild(gr);
+  if (n.registered) {
+    const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, `Registered probability: ${n.registered.p}`));
+    r.appendChild(h("blockquote", {}, esc(n.registered.quote))); r.appendChild(h("p", { class: "note" }, "Its population: " + esc(n.registered.population)));
+    r.appendChild(addrRow("", n.registered.address)); pane.appendChild(r);
+  }
+  if (n.words) { const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, "The stub's own words on its chances")); r.appendChild(h("blockquote", {}, esc(n.words.quote))); r.appendChild(addrRow("", n.words.address)); pane.appendChild(r); }
+  if (n.note) pane.appendChild(h("p", { class: "note" }, esc(n.note)));
+  if (n.role !== "answer" && (n.status === "gap" && (n.role === "step" || n.role === "question") || (n.status !== "gap" && n.status !== "kernel"))) {
+    const row = credRow(n.id + "-card", n.label, credOf(n), v => { over[n.id] = v; store.set("over", over); recompute(); }, n.registered ? "reg" : "", null,
+      () => { renderCred(); });
+    const wrapc = h("div", {}); wrapc.appendChild(h("div", { class: "eyebrow" }, "Your credence for this link")); wrapc.appendChild(row);
+    if (n.id in over) { const b = h("button", { class: "tbtn" }, "Use the default"); b.onclick = () => { delete over[n.id]; store.set("over", over); refresh(); }; wrapc.appendChild(b); }
+    pane.appendChild(wrapc);
+  }
+  const on = D.routes.filter(r => r.links.includes(n.id) || r.reaches.includes(n.id));
+  if (on.length) { const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, "On routes")); const l = h("div", { class: "nlist" });
+    on.forEach(rt => { const b = h("button", {}, `<span>${esc(rt.name)}</span><small>${fmtBits(routeStats(rt).bits)} bits</small>`); b.onclick = () => { setFocus({ kind: "route", id: rt.id }); showTab("routes"); }; l.appendChild(b); });
+    r.appendChild(l); pane.appendChild(r); }
+  const sec = (title, list, pick, sub) => {
+    if (!list.length) return; const r = h("div", {}); r.appendChild(h("div", { class: "eyebrow" }, title)); const l = h("div", { class: "nlist" });
+    list.forEach(e => l.appendChild(nodeButton(pick(e), sub(e)))); r.appendChild(l); pane.appendChild(r);
+  };
+  const kw = { rests: "rests on", half: "a half of", partial: "a partial positive toward", blocks: "blocks", predicts: "predicts", formalizes: "formalizes", context: "context for" };
+  const ins = inc[n.id] || [], outs = out[n.id] || [];
+  sec("It rests on", ins.filter(e => e.kind === "rests" || e.kind === "half"), e => e.source, e => `${e.label || ""} ${e.address}`.trim());
+  sec("Blocked or bounded by", ins.filter(e => e.kind === "blocks"), e => e.source, e => `${e.label ? e.label + " · " : ""}${e.address}`);
+  sec("Partial positives and context", ins.filter(e => e.kind === "partial" || e.kind === "context" || e.kind === "predicts" || e.kind === "formalizes"), e => e.source, e => `${kw[e.kind]} · ${e.label ? e.label + " · " : ""}${e.address}`);
+  sec("What rests on it", outs.filter(e => e.kind === "rests" || e.kind === "half"), e => e.target, e => e.address);
+  sec("What it blocks, formalizes or supports", outs.filter(e => e.kind !== "rests" && e.kind !== "half"), e => e.target, e => `${kw[e.kind]}${e.label ? " · " + e.label : ""}`);
+}
+
+// ---------------------------------------------------------------- credences tab
+function credRow(key, label, value, onInput, cls, swatch, onChange) {
+  const row = h("div", { class: "crow " + (cls || "") });
+  const sw = h("span", { class: "sw" }); if (swatch) sw.appendChild(swatch); row.appendChild(sw);
+  const id = "c-" + key.replace(/[^a-z0-9]/gi, "");
+  const lab = h("label", { for: id }, esc(label)); row.appendChild(lab);
+  const o = h("output", { for: id }, fmtP(value) + `<br><span style="color:var(--muted);font-size:11px">${fmtBits(bitsOf(value))} b</span>`);
+  const inp = h("input", { type: "range", id, min: 0.01, max: 1, step: 0.01, value });
+  inp.oninput = () => { const v = +inp.value; o.innerHTML = fmtP(v) + `<br><span style="color:var(--muted);font-size:11px">${fmtBits(bitsOf(v))} b</span>`; onInput(v); };
+  if (onChange) inp.onchange = () => onChange(+inp.value);
+  row.appendChild(o); row.appendChild(inp);
+  return row;
+}
+function renderCred() {
+  const pane = document.getElementById("p-cred"); pane.innerHTML = "";
+  pane.appendChild(h("p", { class: "small" }, "The defaults below are instruments, stated so they can be argued with. Move a slider and every distance on the page recomputes. Your changes stay in this browser only."));
+  const g1 = h("div", {}); g1.appendChild(h("h3", {}, "By grade"));
+  D.credence.forEach(c => {
+    const shape = c.status.startsWith("gap") ? "circle" : "circle";
+    const row = credRow(c.status, STATUS_NAME[c.status], cred[c.status], v => { cred[c.status] = v; store.set("cred", cred); recompute(); renderCard(); }, "",
+      markSVG(c.status, 18, { shape }), () => renderCred());
+    row.appendChild(h("div", { class: "why" }, esc(c.why) + (c.address ? ` <span class="mono" style="font-size:11px">— ${esc(c.address)}</span>` : "")));
+    g1.appendChild(row);
+  });
+  pane.appendChild(g1);
+  const g2 = h("div", {}); g2.appendChild(h("h3", {}, "Each missing step"));
+  g2.appendChild(h("p", { class: "note" }, "A registered probability, where the step's stub or plan gives one, replaces the default; its population is on the step's card."));
+  D.nodes.filter(n => n.status === "gap" && (n.role === "step" || n.role === "question")).forEach(n => {
+    const row = credRow(n.id, n.label, credOf(n), v => { over[n.id] = v; store.set("over", over); recompute(); renderCard(); }, n.registered ? "reg" : "",
+      markSVG(kindOf(n), 18), () => renderCred());
+    row.appendChild(h("div", { class: "why" }, n.registered ? `registered ${n.registered.p} — ${esc(n.registered.address)}` : (n.id in over ? "your value" : `default for ${n.role === "question" ? "an open question" : "a named step"}`)));
+    g2.appendChild(row);
+  });
+  pane.appendChild(g2);
+  const rr = h("div", { class: "resetrow" }); const b = h("button", { class: "tbtn" }, "Restore every default");
+  b.onclick = () => { cred = Object.assign({}, DEFAULT_CRED); over = {}; store.set("cred", {}); store.set("over", {}); refresh(); };
+  rr.appendChild(b); pane.appendChild(rr);
+}
+
+// ---------------------------------------------------------------- about tab
+function renderAbout() {
+  const pane = document.getElementById("p-about"); pane.innerHTML = "";
+  const notes = Object.fromEntries(D.notes.map(t => [t.id, t]));
+  pane.innerHTML = `
+    <div><h3>How far is a route?</h3>
+      <p class="small" style="margin-top:6px">Give every link a credence <i>p</i>: how likely it is to hold as a proved step. A route's distance is its <b>surprisal</b>,
+      the number of bits of luck it still needs, taking its links as independent:</p></div>
+    <div class="formula">d(route) = Σ<sub>links</sub> −log₂ p</div>
+    <ul class="plain">
+      <li>A route wholly in Lean's kernel is at <b>0 bits</b>. Each halving of credence adds one bit.</li>
+      <li>An answer needs both halves: seven needs χ ≥ 7 (the kernel holds χ ≤ 7); five needs χ ≤ 5 (the kernel holds χ ≥ 5); six needs both, so its distance adds its best lower route to its best upper route.</li>
+      <li><b>Distance to publication</b> is a count, not bits: the route's links not yet in Lean. The bar for publishing is a full formalization with no declared purchases, so a hand proof still counts.</li>
+    </ul>
+    <div><h3>What the numbers are not</h3></div>
+    <ul class="plain">
+      <li>${esc(notes.instrument.text)} <span class="mono" style="font-size:11px">${esc(notes.instrument.address)}</span></li>
+      <li>${esc(notes.belief.text)} <span class="mono" style="font-size:11px">${esc(notes.belief.address)}</span></li>
+      <li>They are not a ranking. ${esc(notes.rank.text)} <span class="mono" style="font-size:11px">${esc(notes.rank.address)}</span></li>
+      <li>They count only named steps. A route analysed into many named steps shows more of its cost than one still resting on a single open question.</li>
+      <li>${esc(notes.publish.text)} <span class="mono" style="font-size:11px">${esc(notes.publish.address)}</span></li>
+    </ul>
+    <div><h3>How the map is drawn</h3></div>
+    <ul class="plain">
+      <li>The three answers sit at the centre; each is ringed by its two halves. Premises lie outward, so a route reads inward to its answer. Held ground mostly lies on the outer rings, and the missing steps sit near the answers they would decide.</li>
+      <li>Solidity is the grade: a solid mark is in the kernel; the less fill, the fewer minds have checked it. Hollow red marks with a question mark are missing steps; a second dashed ring marks an open question nobody has reduced yet.</li>
+      <li>Octagons are no-gos, drawn with a blocked edge (a bar) into what they rule out. Diamonds are exact objects. Squares are Lean work. A long blue dashed ring marks FS-112's results, closing tonight; an amber dotted ring marks claims under blind verification.</li>
+      <li>Behind the answers is the kernel's own seven-colouring of the plane: bricks 4/5 by 3/5, each row shifted 2/5, coloured (column + 3·row) mod 7. One cell's diagonal is drawn; it is exactly the unit distance.</li>
+      <li>Edges that would cross the map run along an orbit instead, near the answers or around the rim. They stay faint until you follow a route, an answer or a mark they join; long "blocks" edges appear only then. Those from the measure-rigidity engine are all "given MR".</li>
+    </ul>
+    <div><h3>Sources</h3>
+      <p class="small" style="margin-top:6px">Every mark comes from one fact table, and each fact carries a verbatim quote and its address: a ledger row, a plan's item or section, a stub, or a Lean declaration. A checker re-reads every quote from its source before the page is built, and refuses to build on any mismatch.</p></div>
+    <p class="note">Left out, deliberately: the finite-plane window and the residue towers (they bound fields, not the plane, and the collapse makes the plane's question archimedean); the kernel toolbox behind rows 1–118; the null-set step to Falconer's everywhere-proper number (it does not bear on the answer given MR); FS-62, FS-64, FS-109, FS-49 and the stubs ranked 13 and below.</p>`;
+}
+
+// ---------------------------------------------------------------- legend and footer
+function renderLegend() {
+  const L = document.getElementById("legend"); L.innerHTML = "";
+  const g1 = h("div", { class: "grp" }), g2 = h("div", { class: "grp" }), g3 = h("div", { class: "grp" });
+  const item = (g, svgEl, text) => { const s = h("span", { class: "item" }); s.appendChild(svgEl); s.appendChild(document.createTextNode(text)); g.appendChild(s); };
+  item(g1, markSVG("kernel", 16), "kernel");
+  item(g1, markSVG("cert", 18), "certificate");
+  item(g1, markSVG("hand-2b", 16), "two minds, one blind");
+  item(g1, markSVG("hand-2", 16), "two minds");
+  item(g1, markSVG("hand-1", 16), "one mind");
+  item(g1, markSVG("external", 16), "in print");
+  item(g1, markSVG("reading", 16), "belief");
+  item(g2, markSVG("gap-step", 16), "missing step");
+  item(g2, markSVG("gap-question", 20), "open question");
+  item(g2, markSVG("gap", 16), "follows once its premises hold");
+  item(g3, markSVG("hand-2b", 18, { shape: "oct", nogo: true }), "no-go");
+  const blk = el("svg", { width: 30, height: 14, viewBox: "0 0 30 14", "aria-hidden": "true" });
+  el("line", { x1: 1, y1: 7, x2: 26, y2: 7, stroke: "var(--nogo)", "stroke-width": 2 }, blk); el("line", { x1: 26, y1: 1, x2: 26, y2: 13, stroke: "var(--nogo)", "stroke-width": 3 }, blk);
+  item(g3, blk, "blocks");
+  item(g3, markSVG("cert", 18, { shape: "diamond" }), "exact object");
+  item(g3, markSVG("gap", 16, { shape: "square", stroke: "var(--external)" }), "Lean work");
+  item(g3, markSVG("hand-2b", 22, { closing: true }), "FS-112, closing");
+  item(g3, markSVG("hand-1", 22, { verifying: true }), "under blind check");
+  L.appendChild(g1); L.appendChild(g2); L.appendChild(g3);
+  // the legend's marks need the hatch pattern: reuse the map's by id (it is in the same document)
+}
+function renderFooter() {
+  const f = document.getElementById("footer");
+  f.innerHTML = `<span>${D.nodes.length} marks · ${D.edges.length} edges · ${D.routes.length} routes, every one from <span class="mono">data/viz/proof-atlas/facts.json</span></span>` +
+    `<span>checked against its sources by <span class="mono">tools/viz_proof_atlas_check.py</span> before this page was built</span><span>built ${esc(D.meta.built)}, job ${esc(D.meta.job)}</span>`;
+}
+
+function recompute() { renderAnswers(); renderRoutes(); applyFocus(); }
+function refresh() { renderAnswers(); renderRoutes(); renderCard(); renderCred(); applyFocus(); }
+
+buildMap(); renderLegend(); renderAnswers(); renderRoutes(); renderCard(); renderCred(); renderAbout(); renderFooter();
+setVB();
+showTab(store.get("tab", "routes"));
+})();
+</script>
