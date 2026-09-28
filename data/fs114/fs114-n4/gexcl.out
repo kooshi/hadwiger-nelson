@@ -1,0 +1,14 @@
+OK   lens: |P90 - e(t)|^2 = 4 - 2 sqrt3 cos(t - 60) (symbolic)
+OK   lens: s=40: |P90 - y'|^2 < 1
+OK   lens: s=40: |P90 - y''|^2 > 1
+OK   lens: s=60: |P90 - y'|^2 < 1
+OK   lens: s=60: |P90 - y''|^2 > 1
+OK   lens: s=80: |P90 - y'|^2 < 1
+OK   lens: s=80: |P90 - y''|^2 > 1
+OK   lens: |P90 - q2|^2 = 4
+OK   region: |w - q1| < 1
+OK   region: |w - top| < 1
+OK   region: |w| > 1
+OK   region: |w - P90|^2 < 1/100
+OK   diam: |w - v|^2 > 1
+RESULT OK
