@@ -1,0 +1,22 @@
+FAIL dr0: |a - y0'|^2 = 1
+FAIL dr0: e^{i30} . (a - y0') = 0
+FAIL dr0: z outside B(y0', 1)
+OK   dr0: translate w in the open wedge (330, 30) at y0'
+FAIL dr0: w outside B(a, 1)
+OK   dr0: w outside B(-b, 1)
+FAIL dr0: |z - w| = 1
+OK   dr0: z - a is on the cw side of the 30-degree ray (inside z_a when its cone reaches 30)
+OK   cones: R1 at p (cone [30,150]) points toward y0' (u = 45)
+OK   cones: R3 at p (cone [210,330]) points toward y0' (u = 300)
+OK   cones: t4 at p (cone [330,30]) points toward y0' and toward a (u = 0)
+OK   cones: T_C at y0' (cone (180,330)) points toward a (u = 200)
+OK   cones: t2 at p (cone [150,210]) points toward b (u = 150)
+OK   cones: t2 at p does not point toward y0' side ring points in (-60, 60) beyond 90 deg (u = 150 vs e(0))
+OK   cont: |a - y''| < 1 at s' = -30
+OK   cont: |a - y'| > 1 at s' = -30
+OK   cont: |b - e^{i150}| < 1 (left middle tile within 1 of b)
+OK   p1: |p1 - v0'| = 1
+OK   p1: |p1 - a| = 1
+OK   p1: on R1's left arc (direction from a in (180, 240))
+  (direction a -> p1' = 205.6589 deg)
+RESULT 5 FAIL
