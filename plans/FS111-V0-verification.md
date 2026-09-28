@@ -20,6 +20,7 @@
 - **C-SEVEN-M, C-SIX-M, C-REG-EQ** TRUE; **C-FILL** TRUE. [derived / hand, one mind] §2.8
 - **V0-HULL-CX** — C-HULL's "so" is FALSE at the tight hexagonal seven-colouring of circumradius `1/2`. [hand + exact, one mind] §2.8, `tools/fs111_v0_hex.py`
 - *Reading (not a theorem):* Q-NO bears on seven only through a statement of F′'s kind; killing test in §2.4 item 6.
+- Stage 3: no new theorem; the reconciliation settles D1–D10 by the lemmas above (§3).
 
 ## Would-have-searched-here log (standing rule 3)
 
@@ -33,6 +34,8 @@
 
 - Stage 1: to check the brief's two quotations of card 1, I ran `grep -nF` for the two quoted strings on `plans/POROS-2026-09-27-night-aim.md`,
   printing only the matching lines (107 and 114). Nothing else of that file was displayed. No other fenced path was opened, listed or grepped.
+- Stage 3 (after `08c4d8f3`): read `plans/FS111-cone-scale.md` stages 2, 3b and 5 as the brief directs (and its heading list to find them); nothing
+  else of it, and nothing else fenced.
 
 ## Stage 1 — SAVED: quotation check; what each held statement quantifies over
 
@@ -298,3 +301,40 @@ limits have, or R's (A) (then FS-114's NO is idle); a hole bound uniform in the 
 of stage 3.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: reconciliation with `plans/FS111-cone-scale.md` stages 2, 3b and 5 (read only after stage 2 was committed at `08c4d8f3`)
+
+**Agreement first.** On the card's answer we agree: a third statement is needed, "a hole bound uniform in K" is seven itself, route R leaves Q-NO idle,
+route M's top rung is as strong as the answer, and the gap sits where neither premise speaks (`𝒩` beyond bounded complexity; the limit's interfaces).
+C1-UNIF, C1-PW, C1-ROUTES, C-SEVEN-M, C-SIX-M, C-REG-EQ and C-FILL are TRUE on both records: **two minds, one blind**.
+
+| # | claim | FS111-P | FS111-V0 (blind) | kind | settled |
+|---|---|---|---|---|---|
+| D1 | C1-UNIF, direction (≤) | stage 2 applied H-EQ's limit clause at a level and cited FS-106-SUP for grids; stage 3b corrects: SUP gives periodic families, a density-threshold rasterisation gives grids | the same route, independently (QB §2.6 (iii)'s pixelation, or a majority rule; checked with closed cells, slack loss `3h`) | proof | **agree after 3b's correction**; both note the equivalence needs only H-EQ |
+| D2 | C1-PW | "W-EQ-K gives … a locally finite map"; row 134 and FS-114 exclude it | the output is a tiling by closed tiles, not yet an S–V map; **V0-CLEAN** (merge equal colours, erase slits and degree-2 vertices, fill islands) makes it one | proof, a routine step made explicit | TRUE by V0-CLEAN [hand, one mind] |
+| D3 | C1-GAP | TRUE, "*Proof:* the three rows above; … neither premise mentions that part" | MISSTATED: the gap's location is TRUE, but "only together with" is a non-implication no argument can establish — seven implies every candidate third statement vacuously | **statement** | settled by derivation (§2.5): the composition holds iff Q-NO ∧ (B) ⟹ `T_r`, open. "Neither premise mentions it" shows no *known* derivation, not that none exists |
+| D4 | C1-GAP, reading 1–2's "`𝒩` at unbounded complexity" | complexity of a colouring | complexity of a single colouring is not a family invariant (**V0-WIGGLE**: notches raise it without bound for free); the restriction has content only modulo modification, and measured literally "(A) at unbounded complexity" already implies (A) at every complexity | **statement** | settled by V0-WIGGLE [hand, one mind] |
+| D5 | stage 2's "The cone scale supplies uniformity **only through CP**" | stated as the frame of C1-GAP | overstated: reading 3's own row (REG-J) supplies junction separation, not CP, and F′ would supply uniformity by regularisation | statement | settled: true of readings 1–2 only |
+| D6 | C1-FALS | "fails at the level of the notions … **Not fired.**" | the reason is TRUE and exact (V0-WIGGLE on the sequence, V0-WIG7 on the limit); **the falsifier as literally written is equivalent to "no hole-vanishing family keeps cone scale `≥ s₀`"**, so it is vacuous or false and could never fire as a bridge; its right form is F′ | **statement** | settled by V0-WIGGLE; F′ is the named bridge (V0-BRIDGE: Q-NO ∧ B_fam ∧ F′ ⟹ seven ⟹ F′) |
+| D7 | C1-ROUTES, route M's step "a tight D-NF colouring exists iff `χ_m⁰(ℝ²) ≤ 6`, row 130" | cited to row 130 and "this list's reading of the definition D-M" | row 130 does not state it, and a colouring with slack witnesses `χ_m⁰ ≤ 6` without being tight; **V0-RESCALE** proves it (rescale by `1 ± ε*`) | proof: an unsupported step | TRUE by V0-RESCALE [hand, one mind]; the same step closes C-SEVEN-M, C-SIX-M and C-REG-EQ's ⟹ |
+| D8 | C-HULL | TRUE (stage 5: "the image is an interval missing 1") — which proves the first clause only | first clause TRUE; **the "so" (`sup < 1` or `dist > 1`) FALSE** at the tight hexagonal seven-colouring of circumradius `1/2`, `x` a vertex, `C` the open hexagon (`tools/fs111_v0_hex.py`) | **truth** | settled by an exact counterexample; corrected form in §2.8 |
+| D9 | C-FILL | "pairs inside the disc are shorter than 1 for `η ≤ 1`" | `η < 1` is forced by `x ∈ A*_j` | none of truth | agree TRUE |
+| D10 | the front page's correction | "with FS-114's NO **and REG** (route M), or with **(A) at every complexity** in place of the NO (route R)" | "only with a third step — F′, a NO for the interfaces such limits have, or R's (A)" | statement | merged below; REG-A₆ (P) and F′ (V0) are two different third statements, each equivalent to seven given Q-NO (and, for F′, B_fam) |
+
+**Open, named (not settled by either record):** whether Q-NO ∧ (B) implies F′, REG-A₆ or `T_r` — the card's real question, now exactly posed; whether the
+cone scale's fatness can be given an angular-width lower bound (REG-J with uniform constants needs one; FS107-RR's fatness has none); whether row 134's
+N4 step survives curved (non-circular) interfaces (NO-C2's decisive step, since V0-WIG7 shows tight limits can carry them).
+
+**P's reading that agrees with V0-WIG7.** Stage 2 §2.5: "'every tight colouring is regular' is not expected, since a tight colouring can carry local
+slack where its boundaries are free" — V0-WIG7 is an instance at `k = 7`.
+
+**Merged proposal for `CLAUDE.md` rank-2 row (the close writes it):** *"with FS-114's NO it gives `χ_m⁰(ℝ²) = 7` only with a third statement — REG (the
+tight limit is, or can be replaced by, a segment-and-arc map; in sequence form F′: a hole-vanishing family keeping its cone scale can be replaced by one
+of bounded segment-and-arc complexity) or R's (A) at every complexity (then FS-114's NO is idle); a hole bound uniform in the complexity is seven itself
+(FS111-C1-UNIF); two minds, one blind (FS111-P, FS111-V0)."*
+
+**Corrections owed to `data/fs111/claims.md` (for the close):** C-HULL's "so" (§2.8's corrected form); C1-GAP and C1-FALS as corrected in §2.5–§2.6;
+the band-proper phrase's address (`data/fs107/claims.md` §1, l. 58–59, not §0 SEQ; the same slip in the planner's stage 2 §2.1); the parenthesis
+"(this list's reading of the definition D-M)" after row 130 becomes a theorem, V0-RESCALE.
+
+## Stage 3 — SAVED
