@@ -284,3 +284,54 @@ def run_violet():
 
 if __name__ == "__main__" and "violet" in sys.argv[1:]:
     run_violet()
+
+
+# ============================================================ step 4: Y3's seven named points, in the IN-DISK object
+def run_y3points():
+    """FS112-Y3 §2.2 item 4's seven points q2 + rho e(-2 atan t) (t = 1/40, 1/20, 1/12 at rho = 99/100; t = 1/8, 1/6 at rho = 99/100, 19/20),
+    tested against the moved disk with the second move's tiles kept INSIDE the disk (T*, the violet extension X_ext ending on the rim),
+    W_0, T_1, S_0 excluded as changed; violet against S_0 and X_ext together."""
+    Dk, T7, P, T5 = disk_setup()
+    L = {k: lift_pt(v, T7) for k, v in P.items()}
+    U0, C0, q2 = L["U0"], L["C0"], L["q2"]
+    one = T7(1)
+    r2, r = Dk.r2.to(T7), Dk.r.to(T7)
+    g6 = T7.gen(7)
+    u2 = n2(U0)
+    m = (r2 + u2 - 1) / 2
+    rstar = vadd(vmul(m / u2, U0), vmul(g6 / u2, perp(U0)))
+    B0, F0 = lift_pt(Dk.pt("B", 0), T7), lift_pt(Dk.pt("F", 0), T7)
+    O_ = (T7(0), T7(0))
+    xext = [Seg(B0, F0), Arc(O_, r, F0, rstar), Arc(U0, one, rstar, q2), Arc(C0, one, q2, B0)]
+    ts = tstar(Dk, T7, C0, U0, q2)
+    moved = lift_tiles(AN.moved_tiles(Dk), T7)
+    pts = []
+    for t, rho in ((Fr(1, 40), Fr(99, 100)), (Fr(1, 20), Fr(99, 100)), (Fr(1, 12), Fr(99, 100)), (Fr(1, 8), Fr(99, 100)),
+                   (Fr(1, 6), Fr(99, 100)), (Fr(1, 8), Fr(19, 20)), (Fr(1, 6), Fr(19, 20))):
+        e = ((1 - t * t) / (1 + t * t), -2 * t / (1 + t * t))
+        pts.append((f"t={t}, rho={rho}", vadd(q2, (T7(rho * e[0]), T7(rho * e[1])))))
+    print("== FS112-Y3's seven named points of V, tested in the IN-DISK object (my X_ext ends on the rim; Y3's U_0 was closed beyond it)")
+    for nm, z in pts:
+        free = []
+        parts = []
+        for col in ["red", "blue", "green", "yellow", "orange", "violet"]:
+            b = YF.blocked(z, moved, col, exclude={"W0", "T1", "S0"})
+            if col == "blue":
+                mn, mx = YF.point_vs_tile(z, ts)
+                if mn == "<" and mx == ">":
+                    b = b + ["T*"]
+            if col == "violet":
+                s_mn, s_mx = YF.point_vs_tile(z, moved["S0"][1])
+                x_mn, x_mx = YF.point_vs_tile(z, xext)
+                if ("<" in (s_mn, x_mn)) and (">" in (s_mx, x_mx)):
+                    b = b + ["S0+Xext"]
+            if col == "yellow" and YF.blocked(z, {"T1": moved["T1"]}, col):
+                b = b + ["(T1)"]
+            if not [x for x in b if not x.startswith("(")]:
+                free.append(col)
+            parts.append(f"{col}: {','.join(b) if b else '-'}")
+        print(f"   {nm:18s} {fp(z)} |z-q2|^2 < 1: {n2(vsub(z, q2)) < one}; free {free if free else 'NONE'}  [{'; '.join(parts)}]", flush=True)
+
+
+if __name__ == "__main__" and "y3points" in sys.argv[1:]:
+    run_y3points()

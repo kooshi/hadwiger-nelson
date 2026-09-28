@@ -1,0 +1,10 @@
+   T*: q2 (-1.309017, 1.476788) (angle 131.5536), p* (-1.389196, 1.607046) (rim angle 130.8415), rho* (-1.285828, 1.690889) (rim angle 127.2510)
+== FS112-Y3's seven named points of V, tested in the IN-DISK object (my X_ext ends on the rim; Y3's U_0 was closed beyond it)
+   t=1/40, rho=99/100 (-0.320254, 1.427319) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/20, rho=99/100 (-0.323955, 1.378035) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/12, rho=99/100 (-0.332672, 1.312926) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/8, rho=99/100  (-0.349479, 1.233095) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/6, rho=99/100  (-0.372531, 1.155707) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/8, rho=19/20   (-0.388248, 1.242941) |z-q2|^2 < 1: True; free NONE  [red: R0,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+   t=1/6, rho=19/20   (-0.410368, 1.168680) |z-q2|^2 < 1: True; free NONE  [red: R0,R1,Z; blue: T*; green: T0,W1; yellow: P4,(T1); orange: P0; violet: S0+Xext]
+exit=0

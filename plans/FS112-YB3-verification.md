@@ -342,3 +342,40 @@ admissible near `Z^L_0` and `Y_0`, orange near `K`); my points agree with the cl
 | YB3-DISKT | Y3-DISK-T*: `T*` holds `q2`; `W_0` must vacate `W_0 ∩ B(q2, 1)`; at two of seven named points of it no colour is admissible (blockers Y3's six tiles plus the move's), at five one colour is | tools, exact at named points + hand | 3.8 |
 
 ## Stage 3 — SAVED (step 3 complete: every verdict above is committed before Y3's record, tools or outputs are opened)
+
+## Stage 4 — SAVED: Y3's record, tools and outputs read (the brief's step 4); every divergence, with both addresses
+
+*Read after `ec57f5f1` (step 3): `plans/FS112-Y3-construction.md` in full; `data/fs112/fs112-y/y3_pin_disk.out` (the free sets at Y3's seven points);
+`tools/fs112_y3_chainend.py` and `tools/fs112_y3_pin.py` (headers and the relevant builders). Quotation check after step 3
+(`quotes-after3.out`): **the instance's nine Y3 claims are verbatim** in Y3's table. New run of this stage: `pins.py y3points` (`y3points.out`):
+Y3's seven named points tested in my in-disk object.*
+
+| # | divergence | Y3's address | mine | kind |
+|---|---|---|---|---|
+| D1 | **Y3-END-NEEDS: the first requirement misses one shadow source, and the conclusion fails for a one-vertex chain.** Y3: "No SHAVE at `E` needs `h` shadowing the horn from above: FLANK's list, re-read with unit arcs, leaves only `h`-tiles at `N` tangent to `±a` from above". Y3 notes the upper side's unit-arc case (in-type `g` at `N`) but not its mirror: **in-type `h` at `E − n`, possible exactly when `λ_E = −1`**, shadows the whole horn from below, and then `h` need not be at `N`. BOWTIE realises it exactly: `E` stuck with three colours; `N` and `S` four-coloured, neither stuck; `h ∉ P_cl(N)`. Y3's own exceptions (i)–(iii) do not name it, and its closing sentence ("a step of 1–3 fails at a unit arc I have not seen") is this case. **Verdicts differ:** Y3 TRUE, "no stuck chain ends at a unit arc while its end vertex has three colours". Mine: TRUE for a chain of two or more vertices (then `λ_E > −1` is forced); FALSE as stated, at one vertex. The rest of Y3's chain of requirements agrees with mine step for step (the pinch; `h`'s two sectors; horns; `x ≠ x′`, not `g`, `c`, `h`; the unit arcs of `ω(N + n)`; the seventh colour at `N + n`) | §3.3 items 1, 4 | 3.1 (Step 2, 2′), 2.4 (BOWTIE) | **a verdict differs; a correction owed** |
+| D2 | **`y ≠ g` at `N`, used but not argued by Y3.** Y3 lists `P_cl(N) ⊇ {h, c, x, x′, y}` and later counts "six colours were `{g, c, h, x, x′, y}`", so `y ≠ g` is assumed. I prove it: a `g`-tile below `N`'s horn either crosses `ω(E)` or pairs with `E`'s `g`-sector at distance² `≈ 1 + 2θθ′ > 1` beside distances below 1 | §3.3 items 2–3 | 3.1 Step 3 (a) | a step one side proves |
+| D3 | **How to close END-B's open arc ends.** Y3: "closing it needs `H1`'s arc to end at a smaller angle than `E`'s. Named, not built." Mine: with five colours at `N`, every tile-interior point of `ω(N)` must be colour 2, and two such points 60° apart are 1 apart. So **`N` must centre unit arcs of total length at least 180°**; END-B has 45.2°. Y3's condition is necessary but not sufficient | §3.2 (below the table) | 3.1 Step 3 (b), 3.2 | a finding one side has; a correction owed (sufficiency) |
+| D4 | **END-A, END-B: two rebuilds of one family, same verdicts.** Y3 colours `a_k = (k mod 4) + 1`, horns ending on one ray at `2 atan(1/16)`, closing triangles of colour 5, a box `[−1/4, 1/4]` below `N`: 43/43 pairs. Mine: colours `6, 5, 2, 3, 4, 1`, horns ending at rational points of their own circles, closing rectangles of colour 6: 39/39. END-B: Y3 uses the concentric centre `(0, 6)` with radius 3, 47/47; mine `(0, 5)` with radius 2, 44/44. Y3 reads the MERGE at `N` from free sets at named points; **I perform it and check the merged fragment exactly** (43/43). Every clause realised by both | §3.1–3.2 | 2.2, 2.4, 3.2 | agreement; two rebuilds, one blind |
+| D5 | **Y3-STRIPCUT's list of tiles covers one side.** Y3's blockers at `C_{−1}` equal mine (arches; 5 by `C_{−3}`; 6 by `C_1`). Y3 then writes "The same at `C_2`" and concludes "a midline arch (`A_{−4}…A_1`) or `C_{−3}` or `C_1`". At `C_2` (exact, 11 points) the blockers are the mirror image: arches `A_{−1}…A_4`, `C_0` (5) and `C_4` (6). Both cuts are needed, so the claim is true as a necessary condition, with its list incomplete | §2.1 | 3.4 | a precision owed |
+| D6 | **Y3-DISK-T*: agreement at Y3's points, in a second object; the colour-free set is a proper part of `V`.** Y3 tests its seven points against a route object whose `T*` and violet `U_0` are closed *beyond the rim*. A colour's admissibility is not preserved when tiles grow, so this needed checking. **In my in-disk object (the violet extension ending on the rim) all seven of Y3's points are colour-free, with the same blockers** (`Z`, `R_0`, `W_1`, `T_0`, `P_4`, `P_0` and the move's own tiles). Y3's points lie at distance 0.95–0.99 from `q2`. **At my own points of `V`:** violet is admissible near `Z^L_0` (at ≈ 0.985 from `q2`), near `Y_0` and on their side; orange near `K`; two points (the centroid, the point by the chord `KZ^L_0`) are colour-free. The claim's conclusion holds; "no colour admissible" holds on a sub-region hugging `ω(q2)` and the chord | §2.2 item 4; `y3_pin_disk.out` l. 26–39 | 3.8; `disk.out`, `violet.out`, `y3points.out` | agreement (two objects); coverage mine |
+| D7 | **A labelling slip.** Y3 §2.2 item 2: "`|q2 − Y_0|² < 1` (float 0.9036)". 0.9036 is the distance `|q2 − Y_0|`; its square is 0.8165 (mine, exact). The inequality is unaffected | §2.2 item 2 | 3.3; `leg.out` | a correction owed (a number's label) |
+| D8 | **Y3-R1: the length bound.** Y3 splits a chain into its `υ < 0`, `υ = 0`, `υ > 0` parts: `3V + 3`. I count distinct nonzero `λ`, then distinct positive `υ` where `λ = 0`: **`2V`**. Both true | §1.4 item 3 | 3.5 | a sharpening |
+| D9 | **Y3-R3: grade.** Y3's grade: "reading of exact results held; one mind". I recount every close complementary pair exactly on YB2's rebuilds (24 strip pairs with a member in one period, 20 disk pairs), testing each common unit point and each completion: **the same pattern** | §4.1 | 3.7; `r3.out` | agreement; now exact, two minds |
+| D10 | **Y3-LEG and Y3-T2-BUDGET:** the same statements, derived independently (LEG exact in both: Y3 by sympy at 170 digits for the second point, I in the tower with `√3`) | §2.2, §4.2 | 3.3, 3.6 | agreement |
+
+**Pairs one checker examined and the other did not.** END-A and END-B are two different members of the family, so no pair-by-pair comparison
+exists; each examined every same-colour pair of its own object (43 against 39; 47 against 44). In DISK-T*, Y3's route object checks the 17 pairs holding a
+changed tile (the other 59 from Y2's run) and is invalid by design at `(T2_0, T*)`. I checked the violet extension against every violet tile (5 pairs)
+and used `T*` as a blocker only, not as a tile checked against every blue tile.
+
+**Grades after the comparison.**
+- **Two minds, one blind (Y3; me):**
+  - Y3-END-A and Y3-END-B: two rebuilds, [tools, exact].
+  - Y3-LEG: [tools, exact].
+  - Y3-R1, Y3-T2-BUDGET: [hand].
+  - Y3-R3: [tools, exact] on my side.
+  - Y3-STRIPCUT's blocking at `C_{−1}`: [tools, exact].
+  - Y3-DISK-T* at Y3's seven points: two objects, [tools, exact].
+- **Y3-END-NEEDS:** two minds for its steps 1 and 3–4 and for the chain case. **Its first requirement and its conclusion are FALSE as stated**, by
+  BOWTIE: [tools, exact; one fragment, mine].
+- **One mind (mine):** YB3-N5 (`y ≠ g`; the 180° budget), and D3's consequence for END-B.
