@@ -26,16 +26,30 @@ half-planes facing away from each other; one tile with `u, w` in its closure lie
 - **FS116-N1-QDISK** — the disk's corner has a two-colour change point with its `±60°` points inside (Q) arcs: RING-Q is false below radius `1.5985` — [tools], one mind, § 3.2.
 - **RING-TWIST-Q** — a qualifying window's change points have both germs at `y − 60°` on (Q) arcs; a (Q)-free ring has none — [derived], one mind, § 3.4.
 - **RING-Q** — GAP (not a theorem), § 3.4.
+- *Stage 4 (the successor):*
+- **FS116-N1-GERM-R** — N-E1 as a cone rule at any ring point: a germ at `y ± 60°` carrying `c` forbids `c`-tiles at `y` in a named open half-plane — [hand], one mind, § 4.1.
+- **FS116-N1-GERM-S** — RING-GERM with the non-Siamese hypothesis dropped, (i) and (ii) in facing form — [derived], one mind, § 4.1.
+- **RING-Q-PRIME-S** — RING-Q′ in the Siamese and non-simple class, radius `1 + ε` — [derived], one mind, § 4.1.
+- **FS116-N1-QFREE4** — a (Q)-free ring forces four colours at `p` and no more — [derived], one mind, § 4.2.
+- **FS116-N1-TOUCH** — a point of `D` off the change points and the ring's arcs, with (Q)-free germs, is a touch point of a fixed shape — [derived], one mind, § 4.2.
+- **FS116-N1-ECHO** — at a saturated touch point of colour `X`, `X` is carried at `2w − p` — [hand], one mind, § 4.2.
+- **FS116-N1-AXIS** — the right-angled cross: absent colours inward, partners outward, two germs off (Q) arcs, touch unless an inner germ is (Q) — [derived], one mind, § 4.3.
+- **FS116-N1-F15TOUCH** — F(1/5)'s `q_N` is a touch point: SAT-QFREE without "(Q)-free" is FALSE — [tools], one mind, § 4.2.
+- **SAT-QFREE** — GAP at the touch point, § 4.2. **SAT-STRIP** — GAP at the right-angled cross's axis structure (non-right angles not worked), § 4.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Would have scanned ring configurations (arcs, change points, colours) at a four-colour vertex for a qualifying window or a two-colour change point.
   Instead: read the rings of the held fragments by formula (the strip's midline vertices, the disk's corner), piece by piece, with exact re-checks.
+- Stage 4: would have searched for a saturated six-coloured fragment realising SAT-STRIP's cross at `r = 1`, and for (Q)-free rings with a touch point.
+  Instead: derived GERM-R, AXIS, TOUCH and ECHO, and read the one held saturated fragment (FS116-Y1-F15) and SQ9 exactly at named points.
 
 ## Fence log (standing rule 8)
 
 - No path is fenced for this job. The harness's start-up context included the auto-memory index (milestone status lines, no proof content). I read no
   session transcript and no FS116-V1, FS116-Y1 or FS121-DB1 record. I write about my work only here, in `data/fs116/n1/` and in my report.
+- Stage 4 (the successor): no path fenced. Read, as the amendment directs: `plans/FS116-V1-verification.md` § 2.3–2.5, § 4.2 (SATPIN); FS116-Y1's record
+  (header, § 1.3, § 2); FS121-D1's § 2.1–2.2, § 3.4. Read no FS121-DB1 record and no transcript; wrote only this record, `data/fs116/n1/`, `tools/fs116_n1_axis.py`.
 
 ## G87 lookout
 
@@ -43,6 +57,8 @@ half-planes facing away from each other; one tile with `u, w` in its closure lie
 - Stage 3: none seen as a collision. Classed: FS114-derivation's N7-3T model line ("FS114-Y2-BOWTIE's centre … whose ring carries no (Q) arc")
   against FS114-N6 § 4 ("Its caps are (Q) arcs") and this job's survey (the caps are (Q) arcs: inner 1 | outer 3, inner 3 | outer 1) — a slip in a model line,
   not two truths; reported as a correction owed.
+- Stage 4: none seen as a collision. Classed: the plan's § 4.1 ("`p`'s colours reach such a ring at its change points … or on arcs of `Γ` of other kinds")
+  against F(1/5)'s touch point at `q_N` — a reading's overreach (N6-RING60 classifies only the ring's absent colours), not two truths; § 4.0.
 - Stage 2: none seen. The claim list's R7 control ("with three colours absent the parity fails") against FS111-M-R7 (six colours at each lattice point) is a
   wrong description of a control, not two truths: R7's statement stands and the list's parenthetical is corrected in § 2.4.
 
@@ -517,3 +533,338 @@ control: germ-report
 **The rung FS-121 takes** (its inventory item 8): RING-Q-PRIME, from RING-GERM — four-colour vertices at every change point whose `±60°` points avoid (Q)
 arcs, with the pairing rule (tip ⇐ outer germ pair, outer tile ⇐ inner germ pair) where they do not. Not RING-Q, which is GAP.
 
+## Stage 4 — SAVED: SAT-STRIP and SAT-QFREE (the successor's stage)
+
+*A successor on the brief's Amendment 1 (2026-09-29 06:28 UTC), launched 06:30 UTC. Resuming check (standing rule 2): the last SAVED stage is stage 3,
+commit `93627977`, and the report of stages 1–3 is commit `937b3564`; nothing of stages 1–3 is redone. Read at the source for this stage: the frozen list in
+full; the plan's § 1.2, § 4.1–4.6, § 5.1; `plans/FS116-V1-verification.md` § 2.3–2.5 and § 4.2 (SATPIN's corrected wording: "edge" is a boundary arc between
+tiles of two colours, "at least one of two types"; two minds); `plans/FS121-D1-proof.md` header, § 2.1, § 2.2, § 3.4; `plans/FS116-Y1-construction.md` header,
+§ 1.3 and § 2 in full (FS116-Y1-F15, FS116-Y1-STRIPCEIL, the families S1–S3, its reading of VT and EROSION), to which Keryx's message, received during this
+stage, pointed (it changed nothing in the brief); `plans/FS114-N6-proof.md` § 2 (N6-KAPPA, N6-WIN, N6-RING60, N6-P60). Inputs used, at their grades: FS116-O1-SATPIN in the
+corrected wording (two minds); FS116-Y1-F15 (one mind, [tools] exact) as a model. **FS121-D1-VT and FS121-D1-EROSION are not used**: each applies
+FS111-W-NOREP at the image `Y`, one unit from a saturated edge, and the images of `p`'s edges lie at distance above 1 from `p`, outside SAT-STRIP's saturation
+disc — so they do not carry to these fragments (Y1 § 2.4 reads them the same way), and nothing below needs them.*
+
+**Verdicts.** **SAT-QFREE: GAP at the touch point** — every SATPIN point that is neither a change point nor on an arc of `Γ` on `ω(p)` is a *touch point*
+of a fixed shape (FS116-N1-TOUCH), and nothing here excludes it; with "whose ring carries no (Q) arc" deleted the claim is FALSE (FS116-N1-F15TOUCH: F(1/5)'s
+`q_N`). **SAT-STRIP: GAP** — for the right-angled cross each axis point is a touch point, which saturation answers only at radius exactly 2 (FS116-N1-ECHO),
+or a change point fed by a (Q) arc at a named germ (FS116-N1-AXIS); F(1/5) carries both kinds at once, to radius `6/5` with saturation on `B̄(p, 1/5)`; crosses
+without right angles are not worked. P1 ("SAT-STRIP is TRUE", 0.55) is not scored. On the way: **RING-GERM holds without its non-Siamese hypothesis**
+(FS116-N1-GERM-S), so RING-Q′ holds in the Siamese and non-simple class too (RING-Q-PRIME-S).
+
+### 4.0 Recognition, renewed (`ephodos-recognition`, invoked fresh for this stage)
+
+*For a stranger* (a discrete geometer who works on colourings of the plane avoiding distance 1): "An open set containing the closed disc of radius 2 about
+the origin is cut into regions by segments and circular arcs, finitely many near each point; each region has one of six colours; no two interior points of one
+colour are exactly 1 apart; and every boundary point within distance 1 of the origin is at distance exactly 1 from the closure of each colour of positive
+density there. Can four regions of four colours meet at the origin along four straight segments?" — SAT-STRIP. And SAT-QFREE: "if no arc of the unit circle
+about the origin separates two of the origin's colours, must every point of that circle touched by one of the origin's colours be a point where the circle's
+own colour changes, or lie on a boundary arc along the circle?"
+
+| feature | sort | receipt |
+|---|---|---|
+| N-E1 at an interior point `z` near a ring point `y`, as `ω(z)` sweeps the ring near `y ± 60°` | determines | every step of FS116-N1-GERM-R consumes it, and nothing else |
+| the tangent partners of `p`'s straight edges (SATPIN) | determines | they put `p`'s colours at the axis points; the unsaturated strip has `T_0` (R) at `(s, 1)` and none of it (VM2-STRIP-MID) |
+| right angles between `p`'s edges | determines, for AXIS | the partner points coincide in pairs at the axis points, and the dip of `ω(z)` below `p` meets all four tiles (AXIS (a)); with other angles a tile can lie strictly inside the near half-plane and escape it |
+| six colours | determines | spent at GERM-S Step 1, FS116-N1-QFREE4, TOUCH's germ clause and AXIS (d); at `k = 9` SQ9 carries (d)'s hypothesis and not its conclusion (control `axis-sq9-six`) |
+| non-Siamese | accompanies | GERM-R and GERM-S run without it: RING-GERM's CL and N3-FACE steps are replaced by the interval argument (a tile pair's distances form an interval avoiding 1) |
+| saturation on `B̄(p, 1)` beyond `p`'s edges | unsorted | used once, at ECHO; whether it excludes the touch point is the open step |
+| the radius 2 | unsorted | ECHO lands exactly on it |
+
+*Homes.* (1) The project's ring theory (N-E1, RING-GERM, N6-WIN): adopted; it carries GERM-R and GERM-S, and **predicts a neighbour** — a point of `D` off
+the change points is a touch point of a fixed shape (TOUCH), which F(1/5) realises exactly at `q_N` and `q_S` (§ 4.4). (2) Mathematical morphology (the unit
+dilation, partner lines): decides the local edge types only (SATPIN), silent on touch points. (3) **N6-RING60, as the plan's § 4.1 reads it** ("`p`'s colours
+reach such a ring at its change points (N7-HUB's tips) or on arcs of `Γ` of other kinds; so a tangent edge's partner points `p ± ν(p)` must sit at change
+points or on such arcs"): **killed as SAT-QFREE's home** — N6-WIN and RING60 classify the ring's own colour `κ` (the two absent colours) and say nothing about
+where `p`'s colours touch the ring; a touch point sits inside one of RING60's 60° arcs without disturbing `κ`. The plan's sentence is SAT-QFREE itself, read
+into RING60: a finding about the plan's prose, no entry changes. *The recognition sentence:* SAT-QFREE is the exclusion of a touch point; the right-angled
+cross of SAT-STRIP is four axis points each a touch point or fed by a (Q) arc. No difference from the plan's frame beyond the RING60 reading.
+
+### 4.1 GERM-R, and RING-GERM without the non-Siamese hypothesis (GERM-S)
+
+*Notation.* `y = r(ψ)` a ring point, `v = r(ψ − 60°)`, `u = r(ψ + 60°)`; the germs `v⁻, v⁺, u⁻, u⁺` are the arcs of `ω(p)` of length `δ` just clockwise and
+just counter-clockwise of `v` and `u`. A germ *lies in the closure of a tile of colour `c`* when, for small `δ`, one tile of colour `c` has the whole germ in
+its closure (off `Γ`: the tile holding it; on an arc of `Γ` on `ω(p)`: a side tile of the arc). A tile *approaches `y` along `β`* when it has points
+`y + h_n`, `h_n → 0`, `h_n/|h_n| → u(β)`; a tile whose closure holds `y` approaches it along some `β` (compactness of directions).
+
+**The argument of FS116-N1-GERM-R.** `y − v = u(ψ + 60°)`, of length 1, so for `z = y + h`: `|z − v|² = 1 + 2h·u(ψ + 60°) + |h|²`. Along the ring,
+`(d/dθ)|z − r(θ)|` at `θ = ψ − 60°` tends, as `h → 0`, to `−(y − v)·u(ψ + 30°) = −cos 30° < 0`: the distance falls as `θ` rises through `ψ − 60°`. So when
+`|z − v| < 1` the ring point at distance exactly 1 from `z` lies just clockwise of `v`, within `O(|h|)` — in `v⁻` for small `|h|` — and when `|z − v| > 1`
+just counter-clockwise, in `v⁺`. For `h` along `β`, `|z − v| < 1` for all small `|h|` iff `cos(β − ψ − 60°) < 0`, iff `β − ψ ∈ (150°, 330°)`, and `> 1` iff
+`β − ψ ∈ (−30°, 150°)`. At `u`: `y − u = u(ψ − 60°)`, the derivative at `ψ + 60°` is `−(y − u)·u(ψ + 150°) = +cos 30°`, so `|z − u| < 1` (iff
+`β − ψ ∈ (30°, 210°)`) puts the unit point in `u⁺`, and `|z − u| > 1` (iff `β − ψ ∈ (−150°, 30°)`) in `u⁻`. If a tile of colour `c` approached `y` along such a
+`β` while the corresponding germ lay in the closure of a `c`-tile, one of its interior points would be at distance exactly 1 from a point of that closure:
+N-E1 forbids it. ∎ *Uses:* N-E1 only — no colour count, no non-Siamese hypothesis. The four open sets are the complements of RING-GERM's closed half-planes
+(a)–(d) (§ 3.1): (a) `u⁻` ↔ `(−150°, 30°)`, (b) `v⁻` ↔ `(150°, 330°)`, (c) `v⁺` ↔ `(−30°, 150°)`, (d) `u⁺` ↔ `(30°, 210°)`, each relative to `ψ`.
+
+**The argument of FS116-N1-GERM-S.** RING-GERM's § 3.1 with its two non-Siamese steps replaced. Step 1 is unchanged (TWIST-D, N-E1, six colours): `v⁻`,
+`u⁻` carry `X` and `v⁺`, `u⁺` carry `X̄` when off (Q) arcs. Step 2 is GERM-R. Step 3 (i): the inward cone `I = (ψ + 150°, ψ + 210°)` lies in `v⁻`'s forbidden
+set for `X` and in `u⁺`'s for `X̄`, so every tile approaching `y` along a direction of `I` has a colour `c` of `p`; it has points `y + h`, `h·e(ψ) < 0`, inside
+`B(p, 1)`, and every tile `A` of `p` of colour `c` has points arbitrarily near `p`, at distance `< 1` from those; their distances form an interval (two connected
+open sets) avoiding 1 (validity), so all are `< 1`, and letting the first points tend to `y`, **`A ⊂ B̄(y, 1)`**. (ii): `O = (ψ − 30°, ψ + 30°)` lies in `u⁻`'s
+set for `X` and `v⁺`'s for `X̄`; a tile there has a colour `c` of `p` and points outside `B̄(p, 1)`, so it is not a tile of `p` (a tile of `p` lies in
+`B̄(p, 1)`: diameter at most 1); its distances to each tile `A` of `p` of colour `c` exceed 1 near `p`, hence everywhere, and **`A ∩ B(y, 1) = ∅`**. (iii): the
+two colours differ, since a tile of `p` of both would lie in `B̄(y, 1) ∖ B(y, 1) = ω(y)`, which holds no open set. ∎ In the non-Siamese class (CL) the tile in
+(i) is `A` itself — RING-GERM's tip — so RING-GERM is GERM-S's corollary; and RING-Q-PRIME follows from GERM-S (iii) as it followed from RING-GERM (iii).
+
+### 4.2 SAT-QFREE: the touch point
+
+**The argument of FS116-N1-QFREE4.** Suppose `p` has five or six colours. With six, no colour is absent: a ring point off `Γ` would carry an absent colour
+(TWIST-D), so the ring lies in `Γ`, and an arc of `Γ` on `ω(p)` with both side colours at `p` is a (Q) arc (`p` carries at least four colours) — a (Q)-free
+ring would be a finite set. With five, one colour `X` is absent; outside a finite set every ring point is off `Γ` (colour `X`) or on a non-(Q) arc of `Γ` on
+`ω(p)`, whose absent side colour is `X`. Take such a `θ` with `θ + 60°` also outside the finite set: N-E1 (off `Γ`) or stage 2's L1 (on an arc) gives
+`X ∉ C(r(θ + 60°))`, while `r(θ + 60°)` carries `X`. ∎
+
+**The argument of FS116-N1-TOUCH.** `w ∈ D ⊂ Γ` (TWIST-D) and lies on no arc of `Γ` on `ω(p)`, so it is an isolated point of `Γ ∩ ω(p)`: its two ring germs
+are off `Γ`, each in one tile, of a colour absent at `p` (N-E1 at `p`); `w` is no change point, so both are one colour `X`. The four germs at `w ± 60°` are the
+images under `σ^{±1}` of the two ring germs at `w`: each of their points is at distance 1 from an interior point of an `X`-tile, so none lies in the closure of
+an `X`-tile (N-E1). Each lies off `Γ` (in one tile, of an absent colour, not `X`: `X̄`) or on an arc of `Γ` on `ω(p)` that is not (Q), whose side colours include
+an absent one, not `X`: `X̄`. So all four lie in closures of `X̄`-tiles, and GERM-R with `c = X̄` forbids the union of its four open sets, which is every
+direction: no `X̄`-tile approaches `w`, so none has `w` in its closure. ∎ Six colours are spent once, at "not `X`: `X̄`".
+
+**The argument of FS116-N1-ECHO.** Let `ρ = |w′ − w|` and `γ` the direction of `w′ − w`, with `γ − ψ ∉ {0°, 180°}` and `ρ` near 1. The ring germs at `w` are
+`w + h(t)`, `h(t) = r(ψ + t) − r(ψ) = t·u(ψ + 90°) + O(t²)`, interior to `X`-tiles for `0 < |t| < t₀`, and `|w′ − w − h(t)|` has derivative
+`−u(γ)·u(ψ + 90°) = −sin(γ − ψ) ≠ 0` at `t = 0`, where it equals `ρ`; so for `0 < |ρ − 1| < c·t₀|sin(γ − ψ)|` it takes the value 1 at some `t` with
+`0 < |t| < t₀` — a point of an `X`-tile at distance exactly 1 from `w′`, and `w′` lies in no `X`-tile (N-E1). An `X`-tile whose closure met `ω(w)` at a
+point with `γ − ψ ∉ {0°, 180°}` would have interior points there with `ρ ≠ 1`: excluded. So the support of `X` meets `ω(w)` at most at `p` (`γ = ψ + 180°`) and
+at `2w − p` (`γ = ψ`); `p` carries no `X` (`X` is absent at `p`: TWIST-D); saturation at `w` for `X` asks a point of that support at distance exactly 1 from
+`w`: it is `2w − p`. ∎ *Uses:* N-E1, TWIST-D, saturation at `w`; any `k`, Siamese pairs allowed. It reads `B̄(p, 2)`.
+
+**The verdict on SAT-QFREE.** Under its hypotheses `p` has four colours (QFREE4), and every SATPIN point `w` — a split centre carries both side colours of its
+edge, a tangent point `p + ν(p)` or `p − ν(p)` one (SATPIN in V1's wording) — lies in `D`. If `w` is neither a change point nor on an arc of `Γ` on `ω(p)`, the
+four germs at `w ± 60°` lie on no (Q) arc (the ring has none), and TOUCH gives its shape: the ring's colour `X` on both sides of `w`, `X̄` on all four germs, no
+`X̄` at `w`; where the saturation disc holds `w` and `X` has positive density there, ECHO puts `X` at `2w − p`. Nothing derived here excludes it: **GAP at the
+touch point.** The shape is realised, exactly, one hypothesis away: in F(1/5) (FS116-Y1-F15) the point `q_N = (0, 1)` is SATPIN's tangent point of the edge
+along the negative `x`-axis (`p − ν` for `ν = (0, −1)`, carrying `O`), the ring is `R` (`T_0`) on both sides, the four germs at `30°`, `150°` are `G`, and
+`q_N` carries `M, O, R` and no `G` (`data/fs116/n1/axis.out`); F(1/5) satisfies every hypothesis of SAT-QFREE except that its ring carries four (Q) arcs —
+`[60°, 75.52°]` with inner `P` and outer `O`, and its three mirror images — none of them on `q_N`'s germs. So **SAT-QFREE with "whose ring carries no (Q) arc"
+deleted is FALSE** (FS116-N1-F15TOUCH), and a proof must use (Q)-freeness away from the germs: in F(1/5) the `R`-arc about `q_N` ends at (Q) arcs, where in a
+(Q)-free ring it would end at change points, each of four colours by GERM-S (iii). **The stalled form:** a touch point `w` inside an arc of the ring's colour
+`X`, no longer than `60°` (its image under `σ` carries `X̄`), whose ends are change points of four colours.
+
+### 4.3 SAT-STRIP: the right-angled cross (FS116-N1-AXIS)
+
+*Frame.* `p = (0, 0)`, `p`'s edges segments along the four half-axes, of lengths `L_E, L_N, L_W, L_S > 0`; `p`'s tiles by quadrant with colours `c_I, …,
+c_IV` (the strip's labelling: `P, B, O, M`), absent colours `X, X̄`; the axis points `q_E, q_N, q_W, q_S`. Stated at `q_N`; at the others read with the
+quadrants turned with it.
+
+- **(a) The inward half-plane at `q_N` carries only absent colours.** For `z = (s, 1 − η) = q_N + h`, `h` along a fixed direction below the horizontal and
+  `|h|` small, `|z| < 1`: `p` lies inside `B(z, 1)` at depth `d = 1 − |z| = O(|h|)`, and `ω(z)` crosses the negative `y`-axis and both halves of the `x`-axis
+  within `O(√|h|)` of `p`, on the south, east and west edges, running between them through interior points of all four tiles of `p`. N-E1 excludes `p`'s four
+  colours at `z`.
+- **(b) The partners.** SATPIN: a segment edge is not split (a split edge is a unit arc), so it is tangent; along the east edge (`a = c_IV`, `b = c_I`,
+  `ν = (0, 1)`) the points `(s, 1)` carry `c_IV`, along the west edge (`a = c_II`, `b = c_III`, `ν = (0, −1)`) the points `(−s, 1)` carry `c_III`, `s` small.
+  A `c_IV`-tile holding `(s, 1)` lies in `y ≥ 1` near it (else its distances to tile IV straddle 1); one `c_IV`-tile `T_IV` borders `(0, ε) × {1}` from above
+  and approaches `q_N` along `0⁺`, one `c_III`-tile `T_III` along `180⁻`.
+- **(c) Two germs on no (Q) arc.** At a point `r(θ)` of a (Q) arc, every tile of `p` of the inner colour lies in `B̄(r(θ), 1)` and every tile of the outer
+  colour misses `B(r(θ), 1)` (GERM-S's interval argument on the arc's side tiles). For `θ` in the open quadrant I only tile I's cone lies in the closed
+  half-plane facing `r(θ)` and only tile III's in the one facing away: every (Q) arc there is `c_I | c_III` (inner | outer); in the open quadrant II,
+  `c_II | c_IV`. GERM-R at `q_N` (`ψ = 90°`): `T_III` along `180⁻` (relative `90⁻ ∈ (−30°, 150°)`) keeps `c_III` off `v⁺`, the arc just counter-clockwise of
+  `r(30°)`; `T_IV` along `0⁺` (relative `−90⁺ ∈ (−150°, 30°)`) keeps `c_IV` off `u⁻`, just clockwise of `r(150°)`. Neither lies on a (Q) arc.
+- **(d) Touch unless an inner germ is (Q).** If `v⁻` (just clockwise of `r(30°)`) and `u⁺` (just counter-clockwise of `r(150°)`) lie on no (Q) arc, each lies
+  in the closure of tiles of a non-empty set of absent colours, `S_v` and `S_u`. GERM-R: colours of `S_u` do not approach `q_N` along relative `(30°, 210°)`,
+  colours of `S_v` not along `(150°, 330°)`. By (a) the inward half, relative `(90°, 270°)`, carries absent colours only; so `(90°, 210°)` carries only the
+  colour outside `S_u`, `(150°, 270°)` only the colour outside `S_v`, and the overlap `(150°, 210°)` makes them one colour `X`: every tile approaching `q_N`
+  from the inward half has colour `X`, the ring germs at `q_N` among them — `q_N` is not a change point.
+
+At the other axis points the named germs turn with the quadrants: on no (Q) arc — `60⁻, 300⁺` (at `q_E`), `30⁺, 150⁻` (`q_N`), `120⁺, 240⁻` (`q_W`), `210⁺,
+330⁻` (`q_S`); the inner germs of (d) — `300⁻, 60⁺`; `30⁻, 150⁺`; `120⁻, 240⁺`; `210⁻, 330⁺`.
+
+**The verdict on SAT-STRIP.** SAT-STRIP's fragment is saturated on `B̄(p, 1)`, which holds the axis points, so at a touch point ECHO puts its colour `X` at
+`2q − p`, radius exactly 2, where the fragment is valid and nothing derived here opposes it; at a change point AXIS (d) needs a (Q) arc at an inner germ, and
+nothing here excludes that either. **F(1/5) carries both kinds together** (`data/fs116/n1/axis.out`): `q_N` and `q_S` are touch points (`R` and `G`, the
+four germs `G` and `R`), `q_E` and `q_W` change points whose inner germs `60⁺, 300⁻` and `120⁻, 240⁺` lie on its (Q) arcs `P|O`, `M|B`, `B|M`, `O|P`, the eight
+outer germs are off `Γ`, and the outward colours are (b)'s — on `B̄(p, 6/5)`, saturated on `B̄(p, 1/5)`, where FS116-Y1-STRIPCEIL caps every fragment keeping the
+strip inside `B(p, 1)` below `0.491`. So the right-angled cross holds AXIS's shape as far as anything is known, and the question is whether saturation on the
+whole of `B̄(p, 1)` — the interfaces of the `X`-tiles inside the ring, and ECHO's tile at radius 2 — can carry it. Crosses without right angles (eight distinct
+partner points; a tile inside the near half-plane escapes (a)) are not worked. **GAP** at the step below.
+
+**The stop rule.** Three attempts on "exclude the cross's axis structure": (1) VT and EROSION at the partner lines — they do not transfer (saturation stops at
+radius 1); (2) GERM-R at the axis points — ends at AXIS (touch points or (Q)-fed change points); (3) saturation at a touch point — ECHO, which lands at radius
+exactly 2 and meets nothing. Recognition ran at this stage's opening; its homes did not die on one shared premise (no two held truths collide — F(1/5) holds
+the shape to `6/5`), so no invention job: the provisional drop. **The stalled form, for a fresh mind:** in a six-coloured valid fragment on `B̄(p, 2)` saturated
+on `B̄(p, 1)`, with `p` the right-angled cross, exclude (1) an axis point `q` whose inward half-plane is one absent colour `X`, with `X̄` on the four germs at
+`q ± 60°` and `X` at `2q − p`, and (2) an axis point that is a change point with a (Q) arc on an inner germ — or build, by formula, a fragment that realises them
+with saturation on `B̄(p, 1)`.
+
+### 4.4 Controls: the strip, the disk, F(1/5), and `k = 7`, `k = 9`
+
+`tools/fs116_n1_axis.py` reads F(1/5) exactly (Y1's builder and FS114-YB's exact point location, imported, unedited): every point in `Q(√3, √5)`, the ring
+points by the half-angle parametrisation, `0.11°` from the named angles. Output `data/fs116/n1/axis.out`: all of AXIS (a)–(d) and TOUCH as derived; plant
+(`--plant`, `U1` recoloured `G → R`, `axis-plant.out`): TOUCH fails at `q_N` (the germs at `30°` carry the touch colour). `--sq9` reads SQ9 at `k = 9`
+(`axis-sq9.out`; plant: the square `(0, 1)` recoloured as `(−1, 1)`, `axis-sq9-plant.out`).
+- **The capped strip:** not saturated (FS111-VM2-STRIP-MID) — AXIS (b) fails at `q_N` (`T_0`, colour `R`, holds `(s, 1)`); SATPIN's points do not exist, so
+  SAT-QFREE and SAT-STRIP are silent. **The disk:** its corners' edges include the unit arcs of `C_0`, so no corner is SAT-STRIP's configuration; its saturation
+  is not known. **F(1/5):** the model of AXIS (a)–(d), TOUCH and GERM-R; it fails SAT-QFREE's (Q)-freeness only, and SAT-STRIP's saturation radius.
+- **`k = 9`:** SQ9 is saturated and has the cross at every grid point; at `q_N` (d)'s hypothesis holds (`30⁻` and `150⁺` off `Γ`, both colour `(1, 0)`) and its
+  conclusion fails (inward colours `(0, 1)`, `(2, 1)`): **six is spent at (d)**, where two absent colours leave the germs no room. GERM-R holds at every `k`.
+- **`k = 7`:** R7's lattice points have cusps and unit-arc edges: outside SATPIN's positive cones and SAT-STRIP's segments, so both claims are silent there;
+  six is spent at GERM-S Step 1, QFREE4, TOUCH's "not `X`: `X̄`" and AXIS (d). The slack hexagonal 7-colouring's vertices have degree 3: outside both
+  configurations.
+
+### 4.5 The entries
+
+derivation: FS116-N1-GERM-R
+  statement: in a valid k-coloured fragment on a closed disc of radius above 1 about a point p, for any k, Siamese pairs allowed, let y = r(ψ) be a point of
+    ω(p), c a colour, and v⁻, v⁺, u⁻, u⁺ the arcs of ω(p) just clockwise and just counter-clockwise of r(ψ − 60°) and r(ψ + 60°); if v⁻ lies in the closure
+    of a tile of colour c, no tile of colour c approaches y along a direction β with β − ψ in (150°, 330°); for v⁺ the interval is (−30°, 150°), for u⁻
+    (−150°, 30°), and for u⁺ (30°, 210°)
+  uses only: N-E1; that the ring point at distance 1 from y + h near y ± 60° moves monotonically through y ± 60° as |y + h − r(ψ ± 60°)| crosses 1
+  not claimed: anything about tiles that approach y only along the boundary directions ψ + 150°, ψ + 330°, ψ − 30°, ψ + 30°, ψ + 210°, ψ − 150°; anything
+    when a germ lies on Γ with colour c on neither side
+  argument: § 4.1 GERM-R, and RING-GERM without the non-Siamese hypothesis (GERM-S)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: F(1/5) at q_N (FS116-Y1-F15): the germs at 30° and 150° carry G, and no G-tile holds q_N — control axis-touch-f15
+  prior art: partly: the (a)–(d) half-planes of RING-GERM (§ 3.1, one mind), there proved with CL and N3-FACE; its form as N-E1 alone is this record's
+  handoff: de Bruijn — the statement with its four open intervals; N-E1 and a monotonicity along the ring; queued behind D6's map type
+
+derivation: FS116-N1-GERM-S
+  statement: in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed, let y be a change point
+    of the ring, X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise
+    and just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if
+    neither v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of a colour c of p
+    every tile of p of which colour lies in B̄(y, 1); (ii) if neither u⁻ nor v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the
+    direction away from p lies in the cone of a tile, not a tile of p, of a colour c of p every tile of p of which colour misses B(y, 1); (iii) if none of the
+    four lies on a (Q) arc, y is a vertex of at least four colours
+  uses only: FS116-N1-GERM-R; FS116-N1-TWIST-D; N-E1; that the distances between two tiles form an interval avoiding 1; that a tile of p lies in B̄(p, 1);
+    six colours, spent once, at Step 1 (a germ carrying no X̄ and a colour absent at p carries X)
+  not claimed: anything at k ≥ 7; that the tile in (i) is a tile of p (that is RING-GERM, in the non-Siamese class); that a change point with a germ on a (Q)
+    arc has fewer than four colours
+  argument: § 4.1 GERM-R, and RING-GERM without the non-Siamese hypothesis (GERM-S)
+  verdict: derived
+  grade: derived from: FS116-N1-GERM-R, FS116-N1-TWIST-D
+  minds: 1
+  model: the capped strip's midline vertex P₀ at its change point P₂ ((ii) met by two outer tiles) and FS114-Y2-BOWTIE's centre — control germ-report
+  prior art: partly: RING-GERM (this record, § 3.1) and FS114-N7-HUB (b), (c), both in the non-Siamese class; a search for the Siamese form is owed
+  handoff: de Bruijn — with RING-GERM, the non-Siamese hypothesis dropped and (i), (ii) in their facing form
+
+derivation: RING-Q-PRIME-S
+  statement: in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed, every change point of
+    the ring whose points at ±60° on ω(p) lie on no closed (Q) arc is a vertex of at least four colours
+  uses only: FS116-N1-GERM-S (iii); that a (Q) arc whose closure holds a ring point holds one of its two germs
+  not claimed: the change points with a point at ±60° on a (Q) arc (RING-Q, GAP)
+  argument: § 4.1 GERM-R, and RING-GERM without the non-Siamese hypothesis (GERM-S)
+  verdict: derived
+  grade: derived from: FS116-N1-GERM-S
+  minds: 1
+  model: none held with a change point in scope, as RING-Q-PRIME (§ 3.5); FS114-N7-HUB's (Q)-free rings are its non-Siamese instances
+  prior art: partly: RING-Q-PRIME (§ 3.5) in the non-Siamese simple class at radius above 2; FS114-N7-HUBQ
+  handoff: de Bruijn — with FS116-N1-GERM-S
+
+derivation: FS116-N1-QFREE4
+  statement: at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, if the ring carries
+    no (Q) arc then p has four colours and no more
+  uses only: FS116-N1-TWIST-D (a ring point off Γ has a colour absent at p); N-E1; stage 2's L1 (a ring arc of Γ excludes its side colours 60° away); six
+    colours
+  not claimed: anything at k ≥ 7; anything when the ring carries a (Q) arc (then p may have five colours)
+  argument: § 4.2 SAT-QFREE: the touch point
+  verdict: derived
+  grade: derived from: FS116-N1-TWIST-D
+  minds: 1
+  model: FS114-Y2-BOWTIE's ring has (Q) arcs and is no model; the degree-4 vertices of FS114-N6's (Q)-free pinwheel frame have four colours by hypothesis —
+    none held with a (Q)-free ring at six colours
+  prior art: partly: RING-TWIST-C's L2 gives four colours at a qualifying window (§ 2.2); this form's search is owed
+  handoff: none — a two-line step used inside TOUCH's reduction; it crosses to Lean with it
+
+derivation: FS116-N1-TOUCH
+  statement: in a valid fragment on a closed disc of radius above 1 about a vertex p of four colours and no more, Siamese pairs allowed, let w be a point of
+    ω(p) in the closure of a tile of one of p's colours which is not a change point of the ring and lies on no arc of Γ on ω(p), and suppose none of the four
+    arcs of ω(p) just clockwise and just counter-clockwise of w + 60° and w − 60° lies on a (Q) arc; then the ring just clockwise and just counter-clockwise of
+    w lies in tiles of one colour X absent at p, each of the four arcs lies in the closure of a tile of the other absent colour X̄ and of no tile of colour X,
+    and no tile of colour X̄ has w in its closure
+  uses only: FS116-N1-TWIST-D; N-E1; FS116-N1-GERM-R with c = X̄ at all four germs, whose four open intervals cover every direction; six colours, spent once
+  not claimed: that such a point exists in any fragment of SAT-QFREE's class; anything at k ≥ 7; anything when a germ lies on a (Q) arc
+  argument: § 4.2 SAT-QFREE: the touch point
+  verdict: derived
+  grade: derived from: FS116-N1-GERM-R, FS116-N1-TWIST-D
+  minds: 1
+  model: F(1/5) at q_N and at q_S (FS116-Y1-F15): ring R, germs G, no G at q_N; ring G, germs R, no R at q_S — control axis-touch-f15
+  prior art: owed
+  handoff: de Bruijn — the statement, queued behind D6's map type
+
+derivation: FS116-N1-ECHO
+  statement: in a valid k-coloured fragment on a closed disc of radius above 2 about a point p, for any k, Siamese pairs allowed, let w be a point of ω(p)
+    whose ring just clockwise and just counter-clockwise of w lies in tiles of one colour X absent at p; if the fragment is saturated at w and X is in w's
+    essential multicolour, the point 2w − p lies in the closure of a tile of colour X
+  uses only: N-E1 (the ring germs at w put X-interior points at distance exactly 1 from every point near ω(w) off the directions ψ and ψ + 180° from w);
+    FS116-N1-TWIST-D (X absent at p, so p carries no X); saturation at w
+  not claimed: anything when X has density 0 at w (a cusp); that the X-tile at 2w − p exists in any fragment of SAT-STRIP's class
+  argument: § 4.2 SAT-QFREE: the touch point
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held saturated at a touch point; F(1/5)'s q_N has the ring hypothesis (R on both sides, R of density 1/2 at q_N) but F(1/5) is saturated on
+    B̄(P₀, 1/5) only and ends at radius 6/5, before (0, 2)
+  prior art: owed
+  handoff: de Bruijn — with N-E1 and saturation read at a point
+
+derivation: FS116-N1-AXIS
+  statement: let p be a degree-4 vertex of four colours of a valid fragment on a closed disc of radius above 1 about p, saturated on a disc about p, whose four
+    edges are segments along the four half-axes, with tiles coloured c_I, c_II, c_III, c_IV by quadrant and absent colours X, X̄; then at q_N = p + (0, 1): (a)
+    every tile approaching q_N along a direction below the horizontal has colour X or X̄; (b) a tile of colour c_IV approaches q_N along 0⁺ and one of colour
+    c_III along 180⁻, both above the line y = 1; (c) the arcs of ω(p) just counter-clockwise of r(30°) and just clockwise of r(150°) lie on no (Q) arc; (d)
+    if the arcs just clockwise of r(30°) and just counter-clockwise of r(150°) lie on no (Q) arc, every tile approaching q_N along a direction below the
+    horizontal has one colour, and q_N is not a change point; and at each of the axis points q_E, q_W, q_S, read with the quadrants turned with it
+  uses only: N-E1 on the dip of ω(z) below p through the four tiles (a); FS116-O1-SATPIN in its corrected wording (two minds) at the four edges near p (b);
+    GERM-S's interval argument on a (Q) arc's side tiles and FS116-N1-GERM-R (c); FS116-N1-GERM-R and six colours (d)
+  not claimed: anything for four segments not at right angles; anything at k ≥ 7 for (d) (at k = 9 SQ9 fails it); that the axis points are touch points in
+    any fragment saturated on B̄(p, 1); SAT-STRIP
+  argument: § 4.3 SAT-STRIP: the right-angled cross (FS116-N1-AXIS)
+  verdict: derived
+  grade: derived from: FS116-N1-GERM-R
+  minds: 1
+  model: F(1/5) (FS116-Y1-F15), saturated on B̄(P₀, 1/5): touch points q_N, q_S; change points q_E, q_W with inner germs on its (Q) arcs — control
+    axis-touch-f15
+  prior art: partly: FS116-Y1-STRIPCEIL's step 2 is (b) at the strip's east edge (plans/FS116-Y1-construction.md § 2.2); the rest's search is owed
+  handoff: de Bruijn — the statement at q_N with the quarter-turn symmetry; queued behind SATPIN and D6's map type
+
+derivation: FS116-N1-F15TOUCH
+  statement: FS116-Y1-F15's fragment F(1/5), valid on B̄(P₀, 6/5) and saturated on B̄(P₀, 1/5) about the degree-4 four-colour vertex P₀ whose tiles all have
+    cones of 90°, has at q_N = P₀ + (0, 1) — the point p − ν(p) of the tangent-type edge along the negative x-axis, carrying O — a point that is not a change
+    point of the ring and lies on no arc of Γ on ω(P₀): the ring is R on both sides of q_N; so SAT-QFREE with the words "whose ring carries no (Q) arc"
+    deleted is false
+  uses only: FS116-Y1-F15 (its validity and saturation, one mind, exact); exact point location in its 22 tiles at the ring points 0.11° from q_N and the
+    tiles holding q_N
+  not claimed: SAT-QFREE as posed (its ring carries four (Q) arcs, [60°, 75.52°] and its images); that the touch point survives saturation on B̄(P₀, 1)
+  argument: § 4.2 SAT-QFREE: the touch point
+  verdict: derived
+  grade: computed over: F(1/5)'s tiles at the ring germs of its four axis points and their germs at ±60°
+  minds: 1
+  model: F(1/5) itself
+  prior art: partly: F(1/5) is FS116-Y1's; the touch point on its ring is this record's reading
+  handoff: none — a statement about one held object; it crosses to Lean only as a control on SAT-QFREE's hypothesis
+
+derivation: SAT-QFREE
+  statement: in a valid fragment saturated on a disc about a vertex p of at least four colours, every tile at p with a cone of positive angle, whose ring
+    carries no (Q) arc, each split centre of FS116-O1-SATPIN and each point p ± ν(p) of its tangent type is a change point of the ring or lies on an arc of Γ
+    on ω(p)
+  not claimed: rings with (Q) arcs; that such a vertex exists in a saturated fragment
+  argument: § 4.2 SAT-QFREE: the touch point
+  verdict: gap: a touch point — a SATPIN point w off the arcs of Γ on ω(p) with the ring's colour X on both sides, X̄ on the four germs at w ± 60°, no X̄ at w
+    (FS116-N1-TOUCH), and X at 2w − p where saturated (FS116-N1-ECHO) — neither excluded nor built; F(1/5) realises it where the ring carries (Q) arcs
+    (FS116-N1-F15TOUCH), so a proof must use (Q)-freeness at the ends of the X-arc about w
+
+derivation: SAT-STRIP
+  statement: no valid fragment on B̄(p, 2) saturated on B̄(p, 1) has at p a degree-4 vertex of four colours whose four edges are segments
+  not claimed: anything at k ≥ 7 (at k = 9 the square nine-colouring of side 1/2 has such vertices, saturated); anything about unsaturated fragments (the
+    capped strip holds such a vertex to φ²/√2, FS114-Y-DIAL)
+  argument: § 4.3 SAT-STRIP: the right-angled cross (FS116-N1-AXIS)
+  verdict: gap: at right angles, each axis point q is a touch point with its colour at 2q − p (FS116-N1-AXIS (d), FS116-N1-ECHO) or a change point with a
+    (Q) arc on an inner germ, and neither is excluded by saturation on B̄(p, 1) — F(1/5) carries both on B̄(p, 6/5) saturated on B̄(p, 1/5); crosses without
+    right angles are not worked
+
+control: axis-touch-f15
+  of: FS116-N1-AXIS and FS116-N1-TOUCH — (a)–(d) and the touch points read exactly on F(1/5); U1 recoloured G to R breaks TOUCH at q_N
+  run: python3 ../tools/fs116_n1_axis.py --line
+  expect: AXIS-TOUCH F(1/5): ALL AS DERIVED
+  fault: python3 ../tools/fs116_n1_axis.py --line --plant
+
+control: axis-sq9-six
+  of: FS116-N1-AXIS (d) at k = 9 — its hypothesis holds at SQ9's q_N and its conclusion fails; the square (0, 1) recoloured makes it one colour
+  run: python3 ../tools/fs116_n1_axis.py --sq9
+  expect: SQ9 k=9: qN inward {(0,1),(2,1)} CHANGE; germs 30-:(1,0) 150+:(1,0)
+  fault: python3 ../tools/fs116_n1_axis.py --sq9 --plant
+
+## Stage 4 — SAVED

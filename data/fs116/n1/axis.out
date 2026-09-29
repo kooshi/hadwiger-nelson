@@ -1,0 +1,5 @@
+qE: inward {G,R} CHANGE; ring R,G; outward left B right O; germs 300-:M|B 300+:R 60-:G 60+:P|O; at qE: B,G,O,R
+qN: inward {R} TOUCH; ring R,R; outward left O right M; germs 30-:G 30+:G 150-:G 150+:G; at qN: M,O,R
+qW: inward {G,R} CHANGE; ring G,R; outward left M right P; germs 120-:B|M 120+:G 240-:R 240+:O|P; at qW: G,M,P,R
+qS: inward {G} TOUCH; ring G,G; outward left P right B; germs 210-:R 210+:R 330-:R 330+:R; at qS: B,G,P
+AXIS-TOUCH F(1/5): ALL AS DERIVED
