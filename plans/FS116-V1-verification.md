@@ -7,11 +7,11 @@ counterexample, GAP at a step, MISSTATED with the corrected statement; in the ga
 
 ## Theorems this phase proved
 
-*(filled at each stage)* Stage 1 proves nothing.
+*(each stage adds its own section at its end: stage 2, V1-YESLIM, V1-SATPIN, V1-L1; stage 3, V1-F0, V1-F3, V1-F5, V1-F6, V1-HUB; stage 4, none new)* Stage 1 proves nothing.
 
 ## Would-have-searched-here log (standing rule 5)
 
-- *(none yet)*
+- None: no move of this job was a search. The frame checks of § 3.2 were done by hand on named configurations, never by program (the list's § 9).
 
 ## Fence log (standing rule 8)
 
@@ -210,10 +210,11 @@ verification: FS116-O1-YESLIM
     rounding at 1/k; the k = 6 clause also straight from the fragments by translation and de Bruijn–Erdős; the first derivation's route
     unknown to me until the comparison
   attack: § 2.2 Attack on YESLIM
-  divergences: none — the first derivation stays fenced until these verdicts are committed; the table is § 4
+  divergences: § 4.1 Divergences on YESLIM
   counterexamples: thin truth: any measurable k-colourings of growing discs with null monochromatic unit pairs and null holes give the
     same conclusion — the segments, arcs and local finiteness are idle beyond a null boundary (Steps 1–2)
-  minds: 1 — this mind alone until the comparison, blind to the first derivation, the same model as its author (Opus 5.5)
+  minds: 2 — blind to: the first derivation, until 3daaa05c; the same model as its author (one prior); method: the routes differ at the
+    Rajchman step (a compact operator here, dominated convergence of Fourier transforms there) and at the rounding (§ 4.1)
   grade: hand
 
 ### 2.3 SATPIN — the derivation (my route), under the author's readings S1 (`a ≠ b`) and S2 ("one of")
@@ -322,12 +323,12 @@ verification: FS116-O1-SATPIN
     to the edge through the edge being one circular arc near p (L3), and colour runs round p (L4); the same case split as the held pinch
     lemma, not independent of it
   attack: § 2.4 Attack on SATPIN
-  divergences: none — the first derivation stays fenced until these verdicts are committed; the table is § 4
+  divergences: § 4.2 Divergences on SATPIN
   counterexamples: monster: SQ9 with a spurious segment from p into one square, an edge with a = b of neither type — the term edge,
     fixed by the author as a ≠ b (§ 1.6); thin truth: R7's lattice points, cusped and six-coloured, where every edge is split and every
     colour is carried on ω(p) — the four-colour and positive-cone hypotheses are idle (L2–L4 read only points x ≠ p)
-  minds: 1 — this mind alone until the comparison, blind to SATPIN's first derivation but not to the held pinch lemma's method, the
-    same model as its author (Opus 5.5)
+  minds: 2 — blind to: SATPIN's first derivation, until 3daaa05c — not to FS111-M-PINCH's case split, which both routes use; the same model
+    as its author (one prior); method: the last clause by a different route (edges here, saturation at p there, § 4.2)
   grade: hand
 
 ### 2.5 Verdicts (stage 2)
@@ -467,10 +468,11 @@ verification: FS114-N7-3T
   method: F0's same-colour dichotomy (connected product, validity, non-Siamese) and the ring's flip under σ, read at a change point as four
     regions cut by ω(σy) and ω(σ⁻¹y); the first derivation's route unknown to me until the comparison
   attack: § 3.3 Attack on N7-3T
-  divergences: none — N7's proof record and FS-114's derivation file stay fenced until this verdict is committed; the table is § 4
+  divergences: § 4.3 Divergences on N7-3T
   counterexamples: none — searched by hand over the colour-level frame on OC, the (1, 2, 1, 2) pinwheel, +++ and the γ = 0° lens (none refuted,
     none built); the headline's missing hypotheses are a statement defect with no refuting object (§ 3.3)
-  minds: 1 — this mind alone, blind to N7's proofs, not to the D-frame's shape (given as definitions), the same model as its author (Opus 5.5)
+  minds: 1 — the pattern kills (not derived here; the +++, b = a + 1 step checked only after reading, a checking reading); N7-HUB (b), (c):
+    2, blind to its proof, the same model (§ 4.3)
   grade: hand
 
 ### 3.4 Verdict (stage 3)
@@ -488,3 +490,78 @@ missing non-Siamese and simple) is where the attack succeeded.
 - **V1-F3** — at a change point of a Γ-free ring of a four-colour vertex, six colours: regions I and O carry only `p`'s colours [hand] — § 3.1.
 - **V1-F5, V1-F6** — non-Siamese, simple: exactly six change points; every tactic centre is a change point [hand, one mind] — § 3.1.
 - **V1-HUB** — N7-HUB [hand, one mind, blind to its proof] — § 3.1.
+
+## Stage 4 — SAVED: the comparison, the divergence tables, retractions
+
+*Opened after the verdicts' commits (`3daaa05c` for YESLIM and SATPIN, `894db2d9` for N7-3T), 2026-09-29 06:15–06:18 UTC, and only these:
+`plans/FS116-local-exclusion.md` §§ 3.4–3.5 and 4.1–4.1a; `plans/FS114-N7-proof.md` § Stage 2 (§§ 2.1–2.3); `plans/FS114-derivation.md`'s
+FS114-N7-3T entry (ll. 711–728).*
+
+### 4.1 Divergences on YESLIM
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the Rajchman step | `T = 1_{B(0,R)}(σ ∗ ·)` on `L²(B(0,R+1))` is compact (Hilbert–Schmidt cut-off plus a small tail), so `T h_n → T h` | `ĥ^n_j → ĥ_j` pointwise, bounded, dominated convergence on the ball `‖ξ‖ ≤ T`, the supremum of `J₀` beyond `T` on the tail | route | kept both; each is sound |
+| 2 | the rounding | `f = min{j : φ_j ≥ 1/k}`, `1_{S_j} ≤ kφ_j` | `F = min{j : g_j > 0}`, `g_j (g_j ∗ σ) = 0` forces `g_j(x + w) = 0` for σ-a.e. `w` | route | kept both |
+| 3 | the `k = 6` clause | also straight from the fragments (translate a finite graph into a fragment; de Bruijn–Erdős), no limit | through `χ(ℝ²) ≤ χ_m⁰(ℝ²)` (row 130) | route | kept both; mine shows the clause needs no measure theory |
+| 4 | the model at `k = 7` | the hexagonal seven-colouring (`hex7-valid`) | R7 | route | kept both |
+| 5 | the class the argument carries | the map structure idle beyond a null boundary; a.e.-properness suffices (a thin truth) | "nothing about the centre, the four-colour vertex, the unit arcs or the complexity" | wording | the same finding; mine states it a little wider — for the author |
+
+Retractions: none. Truth divergences: none.
+
+### 4.2 Divergences on SATPIN
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the pointwise dichotomy | L1 (a connected-product interval) and L2's four cases, curvature read off the single circular arc | FS111-M-PINCH and FS111-M-C11 applied at the edge's interior points | route | kept both; the same case split (in/out), so not independent on method |
+| 2 | from points to the edge | near `p` the edge is one circular arc, so one split point makes it `T₁(y)` | split points open (M-C11 (iii)) and closed (a limit argument), so all or none | route | kept both |
+| 3 | "every colour of `p` is carried on `ω(p)`" | through the edges (L4), with no use of the cones | saturation at `p` itself, `p` an essential boundary point of each colour (uses the positive cones) | route | kept both; mine carries the clause at cusps too — the thin truth of § 2.4 |
+| 4 | "exactly one of two types" | not carried as exclusivity; "at least one" | the classification "all split or none split", read as the type | wording | the author's S2 answer: "one of" is meant; the statement should say "at least one" |
+| 5 | "edge" | needs `a ≠ b` (the spurious edge is of neither type) | "`x` is an essential boundary point of both side colours" — `a ≠ b` presupposed | wording | the author's S1 answer: `a ≠ b` is meant; the statement should say so |
+| 6 | the grade | [hand], self-contained | derived from FS111-M-PINCH, FS111-M-C11 | route | kept both |
+
+Retractions: none. Truth divergences: none.
+
+### 4.3 Divergences on N7-3T
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the pattern kills at `1 + ε` | stalled; § 3.2 said the colour-level frame kills none of OC, the pinwheel, `+++`, `γ = 0°` | killed pattern by pattern with N7-REACH, N7-TAN (the branch of `ω(y_j)` near `p` lies in a tile whose colour is absent at `y_j`) and N7-TAC | route | **my § 3.2 claim withdrawn in part** (retraction 1 below); the kills stay one mind: I checked the `+++`, `b = a + 1` kill after reading (a checking reading) and found it sound |
+| 2 | N7-HUB (b): the tip | region **I** `= B(σy,1) ∩ B(σ⁻¹y,1)` is non-absent by the ring's flip at `σ^{±1}y`; F0 makes it `p`'s own tile | an absent colour there would be within 1 of `R_{k−1}`, `R_k` and by CL be one of them, whose cones miss it | route | kept both; N7-HUB (b) now has a blind second derivation, the check the entry asked for |
+| 3 | N7-HUB (c): the outward tile | F0 (close or far) from `p ∈ cl t_{c′}` | N3-FACE at the unit pair `(p, y_k)` | route | kept both |
+| 4 | exactly six change points | derived (F5): tips are `p`'s own tiles of diameter `≤ 1`; `4(m + 1) < 6m` for `m ≥ 3` | held: N6-RING60 | route | kept both; F5 is a second route to N6-RING60's count, over non-Siamese |
+| 5 | tactic centres are change points | F6: a non-change centre puts two tiles of one absent colour at one point, Siamese | N7-TAC over N3-FLANK and N6-CENT | route | kept both |
+| 6 | the headline's hypotheses | the headline omits non-Siamese, simple, four colours at `p`, six colours and the bent ring, all used (§ 3.3) | N7's own statement of N7-3T (record § 2.2) carries them: "At a degree-4 four-colour vertex of a non-Siamese valid map in the simple class whose ring is (Q)-free after the bends …" | wording | the entry's headline should carry the record's setting; the record confirms the defect is the entry's wording, not the argument |
+| 7 | `+++` in the list | not in the entry's enumeration | handled first in the record's proof; named in "the sign patterns are `+++`, `++−`, `+−+`, `−++`" | wording | the entry's list should name `+++` (Keryx logged it) |
+| 8 | the model | § 3.3 called FS114-Y2-BOWTIE's caps (Q) arcs | the entry's model: "FS114-Y2-BOWTIE's centre, … whose ring carries no (Q) arc" | wording | **my § 3.3 remark withdrawn** (retraction 2): I inferred it from a definitions passage about a bowtie's caps; the bowtie whose lenses do not border its caps has (Q)-free caps, and Y2-BOWTIE is the entry's model of the excepted family |
+
+**Retractions (found by reading, so what they now say was given):**
+1. § 3.2's sentences "passes them all" for `+++` and for the `γ = 0°` lens, and "the colour-level frame kills none of these". My frame check
+   applied F4's facing condition but not its own consequence that a tip at `y_k` meets `B(y_{k±1}, 1)` while a tactic edge's outer tile misses the
+   open unit disc about its centre (F6). With it, my own frame kills the `γ = 0°` lens (its outer tiles miss `B(y_m, 1)`, which holds region **I** at
+   `y_{m±1}`, and no other tile faces `y_{m−1}`: no tip there) and forces `+++`, `b = a + 1`, to `θ_4 = D_{a+4}`, where the first derivation's branch
+   rule finishes it. The claim for OC stands; for the `(1, 2, 1, 2)` pinwheel another tip assignment meets my conditions, and its kill is N6-NOQ's.
+   **The verdict does not change:** the per-pattern kills were not derived blind here.
+2. § 3.3's model bullet: "FS114-Y2-BOWTIE (held, row 138; a bowtie whose caps are (Q) arcs, so outside the (Q)-free class)". Withdrawn; see row 8.
+
+Two retractions, both on N7-3T, both on side remarks, none on a verdict. **A question for the coordinator (not resolved here):** the definitions
+file quotes `plans/FS114-N6-proof.md` l. 253, "Its caps are (Q) arcs (inner `t1`, outer the colour-3 cap tile)", about a bowtie; the N7-3T entry's
+model says Y2-BOWTIE's ring carries no (Q) arc. If both passages describe Y2-BOWTIE, one of them is wrong; if the first is about a bowtie whose lenses
+border its caps, they agree. I did not read either source past what was given.
+
+### 4.4 The count (the procedure's four parts)
+
+1. **Information.** Blind to every first derivation until its verdict was committed (`3daaa05c`, `894db2d9`), by the record's § 1.3, § 3.0 and the
+   commit order. Given before deriving: the held pinch lemma's proof (SATPIN), the definitions file with the D-frame's shape and N7's setting (N7-3T).
+2. **Prior and method.** The same model (Opus 5.5) as every first derivation: one prior on every statement. Methods: YESLIM differs at two steps;
+   SATPIN shares the pinch lemma's case split; N7-HUB's routes differ (the flip at `σ^{±1}y` against CL and the ring cones).
+3. **The criterion, fixed first.** Statements quoted verbatim (§ 1.2, checked by `tools/fs116_v1_quotes.py`); predictions at § 1.5 before any written
+   derivation, informed for YESLIM and SATPIN.
+4. **The attack.** §§ 2.2, 2.4, 3.3; it succeeded at SATPIN's two words (a monster and a wording) and at N7-3T's headline (a wording defect the record
+   confirms), and found thin truths in YESLIM and SATPIN.
+
+**What no verification here supplies:** whether each statement is the one the milestone needs (a reader of intent).
+
+## Theorems this phase proved (stage 4)
+
+None new; N7-HUB (b), (c) now stand at two minds (blind, the same model) with the first derivation.
