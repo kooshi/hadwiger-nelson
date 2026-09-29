@@ -1,0 +1,12 @@
+(1) z = V_-1 + (0, 1/100): outside the unit discs about P_-2 and P_0: True
+    U-2 (G): witnesses in the closed tile True, in B(p,1) True, near < 1 True, far > 1 True -> blocks
+    U-1 (B): witnesses in the closed tile True, in B(p,1) True, near < 1 True, far > 1 True -> blocks
+    U0 (P): witnesses in the closed tile True, in B(p,1) True, near < 1 True, far > 1 True -> blocks
+    D-2 (R): witnesses in the closed tile True, in B(p,1) True, near < 1 True, far > 1 True -> blocks
+    D-1 (O): witnesses in the closed tile True, in B(p,1) True, near < 1 True, far > 1 True -> blocks
+    colours blocked at z: ['B', 'G', 'O', 'P', 'R']; the sixth: ['M']
+(2) D_0 against (1/4, 0): some distance > 1: False; some = 1: False -> within < 1
+(2) D_0 against (1/100, 0): some distance > 1: False; some = 1: False -> within < 1
+(3) x* = sqrt(sqrt3 - 3/4) - 1/2 = 0.490985: |V_-1 - (x*, 1)|^2 - 1 = 0 exactly: True; 0.49 < x* < 0.4911: True
+(4) |V_-1 - (49/100, 1)| < 1: True; |V_-1 - (1/2, 1)| > 1: True
+=> ALL HOLD

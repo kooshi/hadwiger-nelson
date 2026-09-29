@@ -1,0 +1,27 @@
+== F(1/5) plant swap: 22 tiles
+  validity: ACCEPT -- same-colour pairs the object has: 52 (a tile with itself included); examined exactly 38; dismissed by an exact bounding-box gap >= 1: 14; tight at 1: 12 maxima, 12 minima; 0.6 s
+  map: pieces 116, rim pieces 32, inconsistent 0; rim one closed chain: True
+  disc: rim pieces at distance <= R = 1.2 from p: 0; tiles whose closure holds p: 4
+  p: corner of ['U-1', 'D-1', 'U0', 'D0'], colours ['B', 'M', 'O', 'P']
+  FAIL  radial part [p, p + r u] Seg(-0.5, 0.0)->(0.0, 0.0) owners ['U-1', 'D-1']
+    side U-1 (B): partner segment (0.0, -1.0)->(-0.2, -1.0) NOT FOUND
+    side D-1 (O): partner segment (0.0, 1.0)->(-0.2, 1.0) NOT FOUND
+  CERT  radial part [p, p + r u] Seg(0.0, 0.0)->(0.0, 0.866025) owners ['U-1', 'U0']
+    side U-1 (B): partner segment (1.0, 0.0)->(1.0, 0.2) on U2
+    side U0 (P): partner segment (-1.0, 0.0)->(-1.0, 0.2) on U-3
+  CERT  radial part [p, p + r u] Seg(0.0, -0.866025)->(0.0, 0.0) owners ['D-1', 'D0']
+    side D-1 (O): partner segment (1.0, 0.0)->(1.0, -0.2) on D2
+    side D0 (M): partner segment (-1.0, 0.0)->(-1.0, -0.2) on D-3
+  FAIL  radial part [p, p + r u] Seg(0.0, 0.0)->(0.5, 0.0) owners ['U0', 'D0']
+    side U0 (P): partner segment (0.0, -1.0)->(0.2, -1.0) NOT FOUND
+    side D0 (M): partner segment (0.0, 1.0)->(0.2, 1.0) NOT FOUND
+  saturation on B(p, 0.2): NOT CERTIFIED -- pieces within r: 4
+  => F(1/5) plant swap: FAILS
+  contact at (0.1, 0) for colour P: NONE
+  contact at (0.1, 0) for colour M: NONE
+  contact at (-0.1, 0) for colour B: NONE
+  contact at (-0.1, 0) for colour O: NONE
+  contact at (0, 0.1) for colour B: U2
+  contact at (0, 0.1) for colour P: U-3
+  contact at (0, -0.1) for colour O: D2
+  contact at (0, -0.1) for colour M: D-3

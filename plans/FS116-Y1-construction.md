@@ -18,10 +18,15 @@ circle about `u`; `e(ψ)` the unit vector at angle `ψ`.
 | id | statement (one line) | grade | address |
 |---|---|---|---|
 | FS116-Y1-QT | the brief's two block quotations are verbatim in `data/fs116/claims.md` § 7; the self-test's plants fire | [tools] | § 1.2; `tools/fs116_y1_quotes.py` |
+| **FS116-Y1-F15** | **Y-SAT positive**: a valid six-coloured fragment by formula on `B̄(P_0, 6/5)`, saturated on `B̄(P_0, 1/5)`, about the capped strip's midline vertex (degree 4, four colours, four straight edges, four (Q) arcs on its ring) | [tools, exact; one mind] | § 2.1; `tools/fs116_y1_sat.py` |
+| **FS116-Y1-STRIPCEIL** | every fragment agreeing with the capped strip on `B(P_0, 1)` and saturated on `B̄(P_0, R − 1)` has `R − 1 < √(√3 − 3/4) − 1/2 ≈ 0.491`: the strip cannot be saturated along its midline, and cannot decide SAT-STRIP | [hand; one mind; its numerical facts tools-exact] | § 2.2; `tools/fs116_y1_ceil.py` |
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
+- Stage 2: (a) I would have searched the band above the arches for colourings reaching a larger `r`; instead the ceiling was derived first
+  (FS116-Y1-STRIPCEIL), which bounds every such search in the family. (b) I would have scanned witness points for the blocking fact; instead the two
+  failing witnesses were re-placed by the hand argument's own condition (§ 2.2).
 
 ## Fence log (standing rule 8)
 
@@ -145,3 +150,163 @@ redesigned. (3) No third home found that holds (Q)-ring vertices; a new skeleton
 **G87 lookout, stage 1:** none seen.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: Y-SAT — a saturated fragment to `R = 6/5`, and the ceiling of the strip family
+
+### 2.0 Registered before any run of `tools/fs116_y1_sat.py` (2026-09-29)
+
+- **controls** — `sq9` (k = 9, patch `|i|, |j| ≤ 5`): validity ACCEPT, saturation on `B̄(p, 1)` CERTIFIED; `r7` (k = 7, patch `|a|, |b| ≤ 2`):
+  validity ACCEPT, saturation on `B̄(p, 1/2)` CERTIFIED by the split type (each arc about a lattice point that is a corner of an up tile of one side
+  colour and a cusp of a down tile of the other); `strip` (the capped strip about `P_0`): no contact at `(1/4, 0)` for P nor for M, none at
+  `(1/10, 0)` for M, a contact at `p` for M (the corner `A_{−1}` of `T_{−1}`), and the certificate on `B̄(p, 1/5)` NOT CERTIFIED.
+- **the object `F(1/5)`** (`R = 6/5`): validity ACCEPT, map consistent with one closed rim chain, no rim piece within `6/5` of `p`, `p` a corner of
+  exactly `U_{−1}, U_0, D_{−1}, D_0` (colours B, P, O, M), saturation on `B̄(p, 1/5)` CERTIFIED (four radial pieces), and contacts at `(±1/10, 0)`,
+  `(0, ±1/10)` for both side colours.
+- **plants** — `lift` (M* raised by `1/20`): validity ACCEPT, certificate NOT CERTIFIED at `[p, (1/5, 0)]` (M partner not found), no M contact at
+  `(1/10, 0)`; `wide` (M* widened to `[0, 1/2]`): validity REJECT at exactly `(M*, T-1)`; `swap` (M* and O* colours exchanged, and their mirrors):
+  validity ACCEPT (every new same-colour pair meets at a single tight corner or lies within distance `< 1`), certificate NOT CERTIFIED (partners of
+  the wrong colour). *(The tool's header first guessed that `swap` REJECTs; corrected here, before the run, by computing its pairs: the header is
+  corrected to match.)*
+
+### 2.1 The runs, scored against 2.0
+
+- **controls** (`data/fs116/y1/sat-controls.out`): `sq9` validity ACCEPT (405 same-colour pairs; 81 examined, 324 dismissed by an exact gap `≥ 1`),
+  saturation on `B̄(p, 1)` CERTIFIED (36 pieces, each partner the edge of the square three over); `r7` validity ACCEPT (214 pairs), saturation on
+  `B̄(p, 1/2)` CERTIFIED by the split type (6 arcs); `strip` no contact at `(1/4, 0)` for P or M, none at `(1/10, 0)` for M, a contact at `p` for M,
+  certificate NOT CERTIFIED — **as registered**, one miss in wording: the tool names `D_{−3}` (its corner `P_{−2}` at distance 1) as the M contact at
+  `p`, not `A_{−1}`; both are contacts. *First run:* the `sq9` patch was built with `|i|, |j| ≤ 4`, too small for the partners of the rim-most pieces
+  (at `x = ±2.5`); the certificate failed there, the registration said `≤ 5`, and the rerun at `≤ 5` is the recorded one. The small patch is now the
+  certifier's own plant (`--sq9n 4`).
+- **`F(1/5)`** (`sat-F1_5.out`): **ALL HOLD** — validity ACCEPT (52 same-colour pairs, 38 examined exactly, 14 dismissed; 12 tight maxima, 12 tight
+  minima), map consistent (116 pieces, 32 rim pieces forming one closed chain), no rim piece within `6/5` of `p`, `p` a corner of exactly `U_{−1}, D_{−1},
+  U_0, D_0` (B, O, P, M), saturation on `B̄(p, 1/5)` CERTIFIED: `[p, (±1/5, 0)]` by partners on `M*`, `β*` and `O*`, `α*`; `[p, (0, ±1/5)]` by partners on
+  the sides of `U_2`, `U_{−3}`, `D_2`, `D_{−3}`. Contacts at the four named points, both colours each. **As registered.**
+- **plants**: `lift` — validity ACCEPT, certificate NOT CERTIFIED at `[p, (1/5, 0)]` ("side D0 (M): partner segment (0,1)->(0.2,1) NOT FOUND"), no M
+  contact at `(1/10, 0)`; `wide` — validity REJECT at exactly `(T-1, M*)`; `swap` — validity ACCEPT, certificate NOT CERTIFIED at both horizontal
+  pieces. **All three as registered** (`sat-F1_5-plant-*.out`).
+
+derivation: FS116-Y1-F15
+  statement: F(1/5) — the capped strip's arches U_j, D_j (j = −3..2), its top and bottom tiles over V_{−1}, V_0, V_1 trimmed at |y| = 5/4, with the
+    partner tiles M* = [0, 1/5] × [1, 5/4] (colour of D_0), O* = [−1/5, 0] × [1, 5/4] (colour of D_{−1}) and their mirrors β* (colour of U_0), α*
+    (colour of U_{−1}) cut from the tiles over V_0 and V′_0 — is a valid six-coloured fragment on B̄(P_0, 6/5), saturated on B̄(P_0, 1/5), and P_0 is a
+    degree-4 vertex of four colours whose four edges are segments and whose ring carries four (Q) arcs
+  uses only: exact arithmetic in Q(√3, √5) on the 22 tiles; FS114-YB's exact pair checker for validity; the tangent-type certificate (each piece of
+    the map within 1/5 of P_0 has, for each side tile, its unit translate away from that tile on a segment piece of a tile of the side tile's colour)
+  not claimed: saturation beyond B̄(P_0, 1/5); that the fragment extends to a larger disc; SAT-STRIP either way (its saturation disc is B̄(p, 1))
+  argument: § 2.1 The runs, scored against 2.0
+  verdict: derived
+  grade: computed over: the 52 same-colour tile pairs of F(1/5) and its 4 pieces within 1/5 of P_0
+  minds: 1
+  model: F(1/5) itself; its four (Q) arcs are the top arcs of U_{−1}, U_0 and the bottom arcs of D_{−1}, D_0 about P_0, whose outer tiles (over
+    V_{−1}, V_1, V′_{−1}, V′_1) carry colours present at P_0
+  prior art: new — "unit distance & (saturat* | maximal) & colo*" (0), "chromatic & plane & (measurable | map) & (tight | saturat* | maximal)" (7)
+  handoff: none — a fragment by formula checked exactly; it proves no value and the kernel lane holds no fragment checker; its exact certificate is
+    the tool
+
+control: fs116-y1-f15
+  of: FS116-Y1-F15 — the object holds every check; with M* lifted by 1/20 the saturation certificate fails at [p, (1/5, 0)]
+  run: python3 ../tools/fs116_y1_sat.py object 1 5 | grep '=> F'
+  expect: => F(1/5): ALL HOLD
+  fault: python3 ../tools/fs116_y1_sat.py object 1 5 --plant lift | grep '=> F'
+
+control: fs116-y1-satcert
+  of: FS116-Y1-F15 — the certifier's controls: SQ9 and R7 certified, the capped strip refused at its midline; with SQ9's patch too small it misreads
+  run: python3 ../tools/fs116_y1_sat.py controls | tail -1
+  expect: CONTROLS ALL AS KNOWN
+  fault: python3 ../tools/fs116_y1_sat.py controls --sq9n 4 | tail -1
+
+*Prior-art note for both entries of this stage:* the two queries were run in FS-111's gate (`plans/FS111-derivation.md`, Q1) and are recalled from that
+file, not rerun here; this job ran no search of its own (standing rule 5's ban does not bear; the prior-art debt is listed in the report).
+
+### 2.2 The ceiling of the strip family (FS116-Y1-STRIPCEIL)
+
+**The recognition's prediction, derived.** Let `F` be a valid six-coloured fragment on `B̄(P_0, R)` whose tiles, restricted to the open unit disc
+`B(P_0, 1)`, are the capped strip's there, coloured as there up to a permutation of the six colours; suppose `F` is saturated on `B̄(P_0, r)`, `r = R − 1`,
+and `r ≥ x* := √(√3 − 3/4) − 1/2 ≈ 0.49099`. Write `M` for `D_0`'s colour.
+
+*Step 1: the wedge above `V_{−1}` is `M`.* `V_{−1} = (−1/2, √3/2)` is on `ω(P_0)`, so `F`'s domain holds a disc about it. Let `W` be its points within
+`t₀` of `V_{−1}` outside both closed unit discs about `P_{−2}` and `P_0` — the wedge of directions `(30°, 150°)` at `V_{−1}` between `U_{−2}` and `U_{−1}`.
+For `z ∈ W` off `Γ`, each of `U_{−2}, U_{−1}, U_0, D_{−2}, D_{−1}` has interior points **inside `B(P_0, 1)`** at distance `< 1` from `z` (near `V_{−1}`,
+`V_{−1}`, `V_0`, `P_{−1}`, `P_{−1}`) and `> 1` (near `P_{−2}` and `P_0` — strictly, because `z` is outside their unit circles; near `P_1`, near
+`(−9/10, −4/10)`, near `(−1/10, −9/10)`); a tile's interior is connected, so each has an interior point at distance exactly 1 from `z`, and `z` has
+none of those five colours. So every tile meeting `W` is `M`. (Exact at `z = V_{−1} + (0, 1/100)` with named witnesses: fact (1).)
+
+*Step 2: the `M` partner of `(x, 0)`, `0 < x < 1/2`, is `(x, 1)`.* `(x, 0)` lies on the edge `U_0 | D_0`, so saturation (when `x ≤ r`) gives `y_x ∈ supp M`
+with `|y_x − (x, 0)| = 1`, in the closure of an `M`-tile `T′`. Let `D̃` be `F`'s tile containing `D_0`. `D̃` has diameter `≤ 1` (validity against
+itself), so `D̃ ⊂ B̄(P_0, 1) ∩ B̄(P_1, 1)`, a lens in which every point is at distance `< 1` from `(x, 0)` (strict convexity of the norm along
+`P_0P_1`); so `y_x ∉ cl D̃` and `T′ ≠ D̃`. The distances between `D̃°` and `T′°` form an interval (a connected set) avoiding 1 whose closure holds 1; the
+same lens shows they are not all `≤ 1`; so all are `≥ 1`, `dist(y_x, D̃) = 1 = |y_x − (x, 0)|`, `(x, 0)` is a nearest point of `D̃` to `y_x`, and since it
+is interior to `D̃`'s straight top edge, `y_x = (x, 1)`, the outward normal. `T′` lies at distance `≥ 1` from `D_0`, hence in `y ≥ 1` near `(x, 1)`.
+(Fact (2): `D_0` within `< 1` of `(1/4, 0)` and `(1/100, 0)`, exactly.)
+
+*Step 3: the collision.* `|V_{−1} − (x*, 1)| = 1` exactly (fact (3)); the direction from `V_{−1}` to `(x*, 1)` is `φ₀ ≈ 7.7°`. Since `x* ≤ r`, the points
+`(x, 1)`, `x ∈ (x* − ε, x*)`, lie in `supp M` from above; by local finiteness one `M`-tile `T` has the segment `(x* − ε, x*) × {1}` on its boundary and holds
+the points `(x* − σ, 1 + η)` for small `σ` and `0 < η ≤ σ²`. The directions `(97.7°, 150°)` at `V_{−1}` lie in `W` and are covered by finitely many
+sectors of positive angle of `M`-tiles (step 1); let `S` hold `V_{−1} + ρe(ψ)` for `ψ` in an open interval `J ⊂ (97.7°, 150°)` and small `ρ`. Then
+`|s − t|² = 1 − 2ρ cos(ψ − φ₀) − 2σ cos φ₀ + 2η sin φ₀ + O(ρ² + σ²)`, and `cos(ψ − φ₀) < 0` on `J`: `σ → 0` gives `|s − t| > 1`, `ρ → 0` gives
+`|s − t| < 1`. `S° × T°` is connected, so two interior points of colour `M` are at distance exactly 1 — `F` is not valid. ∎
+
+derivation: FS116-Y1-STRIPCEIL
+  statement: if a valid six-coloured fragment on B̄(P_0, R) agrees with the capped strip on the open unit disc about its midline vertex P_0 (tiles, and
+    colours up to a permutation) and is saturated on B̄(P_0, R − 1), then R − 1 < √(√3 − 3/4) − 1/2 ≈ 0.49099; in particular no such fragment is
+    saturated at every point of a midline edge at P_0
+  uses only: the wedge W above V_{−1} lies outside U_{−2} and U_{−1} and five of the strip's tiles straddle each of its points through their parts inside
+    B(P_0, 1) (so W is coloured M, the sixth colour); a tile has diameter at most 1; D_0 lies in the lens B̄(P_0, 1) ∩ B̄(P_1, 1), every point of which is
+    within distance < 1 of (x, 0) for 0 < x < 1/2, and D_0's top edge is straight, so the M partner of (x, 0) is (x, 1); |V_{−1} − (x*, 1)| = 1; local
+    finiteness of the map at V_{−1} and at (x*, 1); no count of colours beyond six, and none of SATPIN, M-PINCH, FS121-D1-VT or EROSION
+  not claimed: that any R − 1 between 1/5 (FS116-Y1-F15) and x* is attained; anything for fragments that change the strip inside B(P_0, 1); SAT-STRIP
+    (saturation on B̄(p, 1) about any degree-4 four-colour vertex with four straight edges); anything at k ≥ 7 (with a seventh colour W need not be M)
+  argument: § 2.2 The ceiling of the strip family (FS116-Y1-STRIPCEIL)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: F(1/5) (FS116-Y1-F15): R − 1 = 1/5 < x*; its wedge above V_{−1} is the tile over V_{−1}, coloured M, and its M* ends at x = 1/5, where
+    |V_{−1} − (1/5, 1)| < 1
+  prior art: new — "unit distance & (saturat* | maximal) & colo*" (0), "chromatic & plane & (measurable | map) & (tight | saturat* | maximal)" (7)
+  handoff: none — a no-go for one family of fragments, bearing on which positive the construction side may build; it enters no proof of a value
+
+control: fs116-y1-stripceil
+  of: FS116-Y1-STRIPCEIL — the exact facts (1)–(4) at named points; with the wedge point moved below V_{−1} fact (1) fails
+  run: python3 ../tools/fs116_y1_ceil.py | tail -1
+  expect: => ALL HOLD
+  fault: python3 ../tools/fs116_y1_ceil.py --plant inside | tail -1
+
+*The facts' first run* (recorded, G21): two of the five blocking witnesses were first placed at `(−99/100, 1/100)` and `(−1/100, 1/100)`, at distance
+`< 1` from `z` — the hand argument's own caveat (a witness near `P_{−2}` must sit within `|z − P_{−2}| − 1` of it, in a direction that does not shorten the
+distance by more); moved to height `1/1000`, both fire. The instrument caught the witnesses, not the lemma.
+
+**What it says.** "The capped strip made saturated at its midline" is impossible for every fragment keeping the strip inside the unit disc about a
+midline vertex: the first rung of the midline's ladder collides, at abscissa `x*`, with the colour the arches force above the next valley. FS116-Y1-F15
+reaches `r = 1/5` in that family; the family's supremum lies in `[1/5, x*)`. SAT-STRIP asks `r = 1` — so **the strip cannot decide SAT-STRIP from the
+construction side**, and a positive there needs a geometry that differs from the strip inside the unit disc. P1 is not scored by this job: neither
+TRUE nor FALSE follows.
+
+### 2.3 The families tried for SAT-STRIP's configuration at `r = 1` (the plan's stop rule)
+
+| family | its free parameters | the configuration's demands at `r = 1` | verdict |
+|---|---|---|---|
+| **S1** fragments agreeing with the capped strip on `B(P_0, 1)` | everything outside the unit disc | the rung `(x, 1)`, `x ∈ (0, 1]`, of both midline edges; the four axis points of the ring | **dead at `r ≥ x* ≈ 0.491`** (FS116-Y1-STRIPCEIL); alive at `r = 1/5` (FS116-Y1-F15) |
+| **S2** tilings of the disc by axis-parallel squares of side `1/2`, `p` a grid point (SQ9's geometry) | the colouring | the nine squares of the `3 × 3` block about `p` pairwise straddle distance 1 (index offsets at most 2: minimum `< 1`, maximum `> 1`) | **dead at six colours for validity alone** (it needs nine: FS111-W-SQ9) |
+| **S3** square grids of side `s ≠ 1/2` | `s`, the colouring | a tangent edge's rung lies on a grid line only if `1/s ∈ ℤ`; `s = 1` has diameter `√2 > 1`; `s = 1/n`, `n ≥ 3`, has a larger block of pairwise straddling squares | **dead** (hand) |
+
+No third family with a free parameter that meets the demands was found: **SAT-STRIP is not decided from the construction side in this round**. The next
+positive to try is a geometry whose midline does not run straight through the unit disc (FS121-D1-EROSION, below, points the same way).
+
+### 2.4 FS121-D1's two lemmas, read at their source on Keryx's message (`plans/FS121-D1-proof.md` § 2.1–2.2)
+
+- **FS121-D1-EROSION** at `P_0`: every sector at `P_0` has `θ = π/2`, `cot(θ/2) = 1`; the four tiles' maximal straight pieces at `P_0` have lengths `1/2`
+  (midline) and `√3/2` (vertical sides), so `min(L₁, L₂) = 1/2 ≤ 1`: **met**, by the strip and by F(1/5) alike. In a saturated fragment with `r = 1` about
+  such a vertex, a midline edge running straight past `x = 1` together with a vertical side past `y = 1` would need a point of `Σ` at distance 1 on each —
+  the same direction as § 2.3's conclusion.
+- **FS121-D1-VT** on F(1/5): the images of the saturated edges' interior points, `(s, ±1)` and `(±1, ±s)` for `0 < s < 1/5`, carry no arc ending from the
+  far side (M*, O*, α*, β* are rectangles whose near sides are single pieces; `U_2`, `U_{−3}`, `D_2`, `D_{−3}` have no vertex on their sides below height
+  `√3/2`): **met**. At `(±1/5, ±1)` an arc does end (the rectangles' sides); these are images of the saturation disc's boundary points, which VT excludes
+  ("not claimed: anything at the image of an endpoint of I").
+- **Carrying them to fragments.** Both lemmas are stated for colourings of the plane; their proofs apply FS111-W-NOREP at the image `Y`, one unit from the
+  saturated edge, so they transfer to a fragment saturated on `B̄(p, r)` only where saturation holds at and near `Y` — for `r < 1/2` nowhere, since `Y` is
+  at distance about 1 from `p`. What transfers without them is VT's step (i), the partner's location, which § 2.2's step 2 re-derives directly for the
+  strip's edge. Neither lemma is used by FS116-Y1-STRIPCEIL.
+
+**G87 lookout, stage 2:** none seen.
+
+## Stage 2 — SAVED
