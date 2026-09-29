@@ -44,3 +44,33 @@ why the map line never needed (A); so this route and FS-121's meet nowhere below
 
 G15 (pigeonhole × kill: the count is the pigeonhole, CP the kill), G71 (the index), G40 (non-absorption, read `δ`-independently — FS-111's X9 misfired on
 exactly that), G79, G82, G21. Rows 131–134. Stubs: FS-121 (the other route), FS-109 (the dial), FS-110's closed record (SWAP-PRICE).
+
+## A card carried for the opening (filed by Keryx, 2026-09-29)
+
+*Poros's card from the close re-read of 2026-09-28 (`plans/POROS-2026-09-28-close-reread.md` § 2.4, card 1), re-addressed here by Poros's
+job FS116-P1 (`plans/POROS-2026-09-28-fs116-question.md` § 2.4). Both quoted verbatim; the card's `answered by` line predates the re-address.*
+
+```
+question: do-fs114-kills-survive-a-band
+  evidence: drafted row 138, "Every kill is a straddle … seen at second order" (`plans/FS114-C-close.md` l. 418); FS114-Y5-PXKILL "appears only at
+    second order (YB4-2ND)" (§2.3); FS111-C1-UNIF "seven iff `inf_K δ₀(K) > 0`" and C1-PW "Q-NO ⟹ `δ₀(K) > 0` for every `K`" (FS111-C §B lines);
+    FS107's H-EQ: a refutation is a sequence of periodic grid-square colourings (`CLAUDE.md` § The aim, link 5); G82
+  expected: that some FS-114 kill had been priced against a band — none was
+  ask: Does FS114-Y4-RSTOPALL, the bowtie killed at `√3`, survive as an exclusion for band-proper fragments with slack ε and small holes, at a radius and margin independent of ε and the complexity?
+  if it survives: a robust route M exists — FS-116 posed on FS-107's grid-square near-colourings (with a robust form of CV-EXISTS) is a route to seven
+    with no map step; FS-116 is posed that way from its opening, and FS-121 drops below FS-104
+  if it dies: the margin is second-order in a scale the band can shrink; FS-116 stays exact, route M needs FS-121 as ranked, and G82's pricing rule
+    gains an instance
+  answered by: derivation — a fresh mind at FS-116's opening (its §IQ), on one kill, before round 7's queue
+  cost: one to two hours of one derivation
+  hunch: it dies — the straddle's margin is the square of the configuration's own scale, and at unbounded complexity nothing bounds that scale below
+  falsifier: RSTOPALL re-derived with slack ε and holes < η at a radius and margin independent of ε, η and complexity
+  rank: 1
+```
+
+> **R1's card 1, `do-fs114-kills-survive-a-band`: re-addressed to FS-122's opening (route R), not asked at FS-116.** Even if one kill survived a band, FS-116
+> could not be posed on near-colourings from its opening. That posing needs a robust form of FS114-CV-EXISTS (a fat four-colour point in every band-proper
+> near-colouring with small holes). CV-EXISTS goes through stuck chains of the terminal modification, a global and exact argument
+> (`plans/FS114-derivation.md` l. 26 on), and no one has a robust form. A band-stable local kill is a statement of route R's kind, beside (A) and B-RR, so
+> its home is FS-122. Hunch `kills-are-not-band-stable` stays open. **Default if Keryx says nothing:** the card is carried in FS-122's stub at its opening,
+> and FS-116 does not ask it.
