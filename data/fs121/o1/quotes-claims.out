@@ -1,0 +1,17 @@
+ok    1 data/fs111/claims.md: For a measurable `f : ℝ² → [k]` proper at `Leb ⊗ σ`-almost every edge:
+ok    2 data/fs111/claims.md: *Tight*: slack for no `ε > 0`
+ok    3 data/fs111/claims.md: **REG-J′_k**: a saturated colouring whose singular set Σ is locally fi
+ok    4 plans/FS111-M-regularity.md: every essential boundary point is at distance exactly 1 from the suppo
+ok    5 plans/FS111-derivation.md: every tight a.e.-proper k-colouring can be modified, keeping it a.e.-p
+ok    6 plans/FS111-M2-regularity.md: the essential boundary points at which M-PINCH's hypotheses (H1), (H2)
+ok    7 plans/FS111-M2-regularity.md: **infinitely many arcs can accumulate at a point only with radii tendi
+ok    8 plans/FS111-M-regularity.md: **(H1)** at `x`: a ball `N = B(x, ρ)` in which `S_c` is null for `c ∉ 
+ok    9 plans/FS111-M-regularity.md: (split) is a **unit arc of kind both** (row 135's term): its centre `y
+ok   10 data/fs114/claims.md: **(Q)** an arc whose centre carries both side colours and at least fou
+ok   11 plans/FS111-derivation.md: in an honest saturated colouring whose singular set Σ is locally finit
+ok   12 plans/FS111-derivation.md: at a saturated point x of an honest a.e.-proper colouring with a neigh
+ok   13 plans/FS112-derivation.md: The centre of a both-kind unit arc is a vertex with at least four colo
+ok   14 plans/FS111-derivation.md: at a cone vertex of a saturated map without cusps, no colour occupies 
+ok   15 plans/FS111-derivation.md: a flat edge of a saturated map carries interfaces at every unit transl
+ok   16 plans/FS116-local-exclusion.md: a saturated-class NO answers Question 2 for no map outside the class, 
+quotes: 16  found: 16  missing: 0

@@ -1,0 +1,109 @@
+# FS-121 — the proposed claim list (statements only)
+
+*Proposed by the opening job FS121-O1 (Ephodos), 2026-09-29, for Keryx to review and freeze. **Statements only: no proof, no sketch, no route, no
+grade.** Every quotation is verbatim, with its source address, and was checked by `python3 tools/fs121_o1_quotes.py
+data/fs121/o1/quotes-claims.tsv` (output `data/fs121/o1/quotes-claims.out`, 16 of 16). Text outside quotation marks is this list's
+own and is marked "(this list)". Give every claim you work one verdict — **TRUE** (with your derivation), **FALSE** (with a counterexample), **GAP at a
+named step**, or **MISSTATED** (with the corrected statement) — with your count of minds and your grade. FALSE and GAP are results, as valuable as TRUE.*
+
+**The vacuity rule for this list.** A claim about tight six-colourings may quantify over an empty class: the class is empty exactly when
+`χ_m⁰(ℝ²) ≥ 7`. So every structural claim is stated **for every number of colours `k`**, and each says whether a seven-colour (or nine-colour)
+inhabitant of its hypotheses is held. An inhabitant at `k ≥ 7` of an existence statement tests nothing about six. It tests only universal forms and
+procedures. **Where six is spent:** every claim in §§ 2–4 uses no colour count; six enters route M only at the map NO (`data/fs111/claims.md` § 0,
+Q-NO) and in C121-SAT6.
+
+## 0. Definitions
+
+- **D-NF** (`data/fs111/claims.md` § 0, quoting `data/fs106/claims.md` § 0, verbatim): "For a measurable `f : ℝ² → [k]` proper at `Leb ⊗ σ`-almost
+  every edge: `S_j = f⁻¹(j)`; `S̃_j` the points of density 1 of `S_j`; `E = ℝ² ∖ ⋃_j S̃_j` (Falconer's null set); `d̄_j(x) = limsup_{r→0} |S_j ∩ B(x,
+  r)|/|B(x, r)|`; **`P(x) = {j : d̄_j(x) > 0}`**, the *essential multicolour*." **Tight** (the same list, D-SLACK, verbatim): "*Tight*: slack for no
+  `ε > 0`".
+- **Saturated** (`plans/FS111-M-regularity.md` § 2.1, verbatim): "every essential boundary point is at distance exactly 1 from the support of each colour
+  of its essential multicolour". **Honest** (`plans/FS111-derivation.md`, FS111-C-SAT-T-HONEST, verbatim): "an honest (one colour per point) saturated
+  one".
+- **(H1), (H2)** (`plans/FS111-M-regularity.md` § 3, verbatim): "**(H1)** at `x`: a ball `N = B(x, ρ)` in which `S_c` is null for `c ∉ {a, b}`. **(H2)**
+  at `x`: in `N`, `S_a` and `S_b` are each a.e. equal to a connected open set of density points, `P_a ⊆ S̃_a`, `P_b ⊆ S̃_b`, with `x ∈ cl P_a ∩ cl P_b`".
+- **Σ, the singular set** (`plans/FS111-M2-regularity.md` § 4.1, verbatim): "the essential boundary points at which M-PINCH's hypotheses (H1), (H2)
+  fail, together with every point of `supp S_j` at which `S_j` has density 0 (cusps)".
+- **REG-J′** (`data/fs111/claims.md` § 6, verbatim): "**REG-J′_k**: a saturated colouring whose singular set Σ is locally finite, **each point of Σ
+  meeting finitely many interface arcs** (the clause two briefs dropped)".
+- **LRA** (`plans/FS111-M2-regularity.md` § 4.1, verbatim): "**infinitely many arcs can accumulate at a point only with radii tending to infinity** (call
+  that **LRA**, large-radius accumulation; not excluded here)". *(this list)* **¬LRA**: no point is an accumulation point of interface pieces whose
+  radii of curvature tend to infinity.
+- **Kind both** (`plans/FS111-M-regularity.md` § 3.1, verbatim): "(split) is a **unit arc of kind both** (row 135's term): its centre `y` carries both
+  side colours." **(Q), (R2)** (`data/fs114/claims.md` § 0, quoting `plans/FS112-derivation.md`, verbatim): "**(Q)** an arc whose centre carries both side
+  colours and at least four colours; **(R2)** an arc whose centre carries the outer side colour and not the inner, with an inner-colour tile along the
+  radius-2 circle over the whole arc." *(this list)* A point **carries** a colour `j` when it lies in `supp S_j`.
+- *(this list)* **Tangent type, split type**: the two cases of FS111-M-PINCH (§ 1) at an interface point. **The ladder** of an interface arc `J`: the family
+  of its unit parallel curves, at every integer distance on either side, as far as they are interface arcs. For an arc of radius `n` with centre `z`,
+  its **inner end** is the last member before `z`, its **outer** members those of radius `n + 1, n + 2, …`.
+
+## 1. Held inputs (use as held; each with its grade and minds, as filed)
+
+- **FS111-M-PINCH** (`plans/FS111-derivation.md`, verbatim) [derived, three minds]: "at a saturated point x of an honest a.e.-proper colouring with a
+  neighbourhood N in which only two colours a, b have positive measure and each is a.e. one connected open set of density points (H1, H2): either N is
+  split by one unit circle T₁(y) with a inside and b outside or the reverse, y a contact of both colours, or two open unit discs tangent at x from
+  opposite sides lie a.e. in S_a and in S_b; the case (in, in) is impossible; no positive density of the partner is needed"
+- **FS111-M2-INTRAD** (`plans/FS111-derivation.md`, verbatim) [derived, two minds on its core, its finiteness step one]: "in an honest saturated colouring
+  whose singular set Σ is locally finite with finitely many interface arcs at each point (REG-J′), the unit parallel of every tangent-type interface arc
+  is again an interface arc, so radii of curvature drop by exactly 1 toward the centre and stop at 1: every interface has integer radius of curvature
+  almost everywhere and is locally a chain of segments and circular arcs, finitely many of each radius"
+- **FS112-N3-NOBOTH** (`plans/FS112-derivation.md`, verbatim) [hand, two minds, one blind; stated for valid maps]: "The centre of a both-kind unit arc is a
+  vertex with at least four colours or a repeated colour."
+- **FS111-W-NOREP** (`plans/FS111-derivation.md`, verbatim) [derived, one mind]: "at a cone vertex of a saturated map without cusps, no colour occupies two
+  sectors"
+- **FS111-W-LADDER** (`plans/FS111-derivation.md`, verbatim) [derived, one mind]: "a flat edge of a saturated map carries interfaces at every unit translate
+  along its normal, with the colour rule β_{k+1} = τ_{k−1}"
+- **FS-116's qualification** (`plans/FS116-local-exclusion.md` § 4.1a, verbatim) [one mind]: "a saturated-class NO answers Question 2 for no map outside the
+  class, and serves route M only with C-SAT-T-HONEST at six (FS111-C-SAT-T-HONEST, GAP, FS-121's)"
+- **The controls** (all held, exact): R7 (`k = 7`), SQ9 and HEX9 (`k = 9`), DISC7 and DISCK7 (`k = 7`, covers), `plans/FS111-derivation.md`.
+
+## 2. The ladder ends (job FS121-D1; the first four for its blind verifier)
+
+- **C121-ENDS** (this list): in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius
+  ends, off a null set of normals, at a unit arc J_1 whose centre z carries J_1's outer colour; either z also carries J_1's inner colour — J_1 is of kind
+  both and z is a vertex with at least four colours or a repeated colour, at least four when no colour at z has density 0, so J_1 is (Q) — or it does not
+  — J_1 is (R2), and z is a point of Σ carrying at least three colours, and at least three distinct colours when no colour at z has density 0.
+  *Not claimed:* that every chain ends at a (Q) arc; that an (R2) end exists in any saturated colouring; that an (R2) centre has four colours.
+  *Colours:* every `k`. *Inhabitant:* `k = 7`, R7 (every interface a split unit arc; its centres carry six colours, with cusps).
+- **C121-OUT** (this list): in an honest saturated colouring in D-NF satisfying REG-J′, the unit parallel away from the centre of every tangent-type
+  interface arc of radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved
+  interface of tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular window.
+  *Not claimed:* that a saturated colouring with a curved tangent interface exists. *Colours:* every `k`. *Inhabitant:* `k = 9`, SQ9 (the flat case,
+  `n` infinite); **none held for the curved case at any `k`**.
+- **C121-PER** (this list): in an honest saturated colouring in D-NF satisfying REG-J′ whose interfaces carry only finitely many radii of curvature — in
+  particular a doubly periodic one satisfying ¬LRA — every curved interface is a split unit arc of kind both and no (R2) arc occurs; where no colour has
+  density 0 at an arc's centre, every such arc is (Q).
+  *Not claimed:* that a tight colouring can be taken periodic. *Colours:* every `k`. *Inhabitant:* `k = 7`, R7.
+- **C121-LRA-LINE** (this list): in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces of radii tending to infinity accumulate at
+  a point x₀ of an interface curve with normal ν there, then pieces of radii tending to infinity accumulate at x₀ + kν for every integer k.
+  *Not claimed:* that such a line is impossible. *Colours:* every `k`. *Inhabitant:* **none held** (no held saturated colouring has LRA; the statement is
+  a reduction).
+- **C121-R2-FOUR** (this list): in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, every centre z of an (R2) arc
+  that ends a chain of unit parallels, at which no colour has density 0, carries at least four colours.
+  *Not claimed:* anything at points where a colour has density 0; anything about the (Q) branch. *Colours:* every `k`. *Inhabitant:* **none held** (no held
+  saturated colouring has an (R2) arc; by C121-PER none periodic has one). A three-colour (R2) end at any `k ≥ 7`, given by formula, refutes it.
+- **C121-CURVED** (this list): for some k ≥ 7 there is an honest saturated colouring in D-NF satisfying REG-J′, with no colour of density 0 at any point,
+  that has a tangent-type interface arc of finite radius.
+  *Not claimed:* anything at `k ≤ 6`. *Role:* the inhabitant the classes of C121-OUT and C121-R2-FOUR lack (G21). A derived obstruction at every `k ≥ 7`
+  is also a result.
+
+## 3. Large-radius accumulation (job FS121-D2)
+
+- **C121-NOLRA** (this list): in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, ¬LRA holds.
+  *Not claimed:* anything without REG-J′. *Colours:* every `k`. *Inhabitants:* `k = 7`, R7; `k = 9`, SQ9 and HEX9 (none has LRA). A saturated colouring with
+  LRA at any `k ≥ 7` refutes it.
+
+## 4. Honest saturation and the singular set (jobs FS121-D3, FS121-D4)
+
+- **C121-SAT6** (`plans/FS111-derivation.md`, FS111-C-SAT-T-HONEST, verbatim, **worked at `k = 6`**): "every tight a.e.-proper k-colouring can be
+  modified, keeping it a.e.-proper with k colours, into an honest (one colour per point) saturated one, at k = 5 and k = 6".
+  *Not claimed:* that the modification is local, or a selection from a given maximal cover. *Colours:* `k = 6` by nature (this list): its existence
+  form holds at `k = 7` by R7 and tests nothing there, and the form "every tight `k`-colouring lies below an honest saturated one" is false at seven (the
+  tight hexagonal seven-colouring is not saturated, and its classes cover the plane). *Where six is spent:* in the global re-choice, which no held
+  argument names.
+- **C121-REGJ** (this list): in every honest saturated colouring in D-NF, with any number of colours, the singular set Σ is locally finite and each point
+  of Σ meets finitely many interface arcs.
+  *Not claimed:* any bound on how many points of Σ a set of given size holds. *Colours:* every `k`. *Inhabitants:* `k = 7`, R7; `k = 9`, SQ9 and HEX9. A
+  saturated colouring at any `k ≥ 7` whose Σ is not locally finite refutes it. **A derivation of it may not rest on C121-ENDS, C121-OUT, C121-PER or
+  C121-LRA-LINE, which assume REG-J′.**

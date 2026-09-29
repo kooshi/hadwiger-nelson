@@ -7,7 +7,14 @@ files.*
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, with its grade and address)*
+- FS121-O1-ENDS — a curved ladder ends at a unit arc whose centre carries its outer colour: (Q) (centre ≥ 4 colours off cusps) or (R2) (centre ≥ 3) —
+  [hand], one mind — § 3.2.
+- FS121-O1-OUT — a curved ladder has no outer end: a one-sided infinite pencil — [hand], one mind — § 3.3.
+- FS121-O1-PER — with finitely many radii (e.g. doubly periodic, ¬LRA), every curved interface is a split unit arc of kind both; no (R2) — [hand], one
+  mind — § 3.3.
+- FS121-O1-LRA-LINE — LRA at `x₀` gives LRA at `x₀ + kν` for every integer `k` — [hand], one mind — § 3.3.
+- FS121-O1-CARD — the card's composition: GAP at the (R2) branch — § 3.4.
+- (a remark, not an entry) honest saturation's "above `f`" form is false at seven, by the hexagonal seven-colouring — [hand], one mind — § 4.1.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -495,3 +502,19 @@ It keeps G21's warning in the entry.
 D1 is to derive it or build it by formula.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the proposed claim list, and the report
+
+**The coordinator's ruling** (received after stage 4): "`what-do-q-rings-force` stays FS-116's, as a derivation round there, and FS-121 takes its result
+as an input rung when it lands." FS121-O1-LRA-LINE goes to Keryx's inventory for FS-115. § 4.2's D4 row and § 4.4's P1 are read with it: D4 takes FS-116's
+ring result as an input.
+
+**Correction to § 4.2 (2026-09-29, found writing the claim list):** D4's row says it "Uses C121-ENDS (every end is a point of Σ of ≥ 3 colours)". That is
+circular. C121-ENDS assumes REG-J′, which is D4's own claim, C121-REGJ. D4 may use M-EXTREME, SATPIN and the pinching lemmas, which assume no local
+finiteness, but not C121-ENDS, OUT, PER or LRA-LINE. The claim list says so under C121-REGJ.
+
+**The proposed claim list** is `data/fs121/claims.md`: 9 claims (§ 2, the ladder ends: C121-ENDS, OUT, PER, LRA-LINE for verification, R2-FOUR, CURVED;
+§ 3, C121-NOLRA; § 4, C121-SAT6, C121-REGJ), definitions quoted verbatim and checked (`data/fs121/o1/quotes-claims.out`, 16 of 16), every claim with its
+colour count and its held inhabitant, or "none held".
+
+## Stage 5 — SAVED
