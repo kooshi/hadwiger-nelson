@@ -95,6 +95,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 61 | stub to mint or re-aim | **A ring type the plan omits: the six-colour vertex** (all-Γ ring, every arc (Q)); Y-QRING and C114-LOCAL-F admit it, RING-Q does not see it; de Grey and Gibbs left its next layer undone in 2018 (`[Polymath16threads]` [08.17]–[08.18]). Ruled: routed to FS116-N2 as a ring type for RING-TRANSFER (02:12); a separate claim only if N2 declines it | Y2 § 1.3, § 2.4 | open |
 | 62 | statement defect | The coordinator's Y2 brief (inherited from N1 § 3.4) said a fragment holding the disk-corner configuration beyond radius 2 "makes RING-Q FALSE outright", dropping RING-Q's class (non-Siamese, simple). Credit to FS116-Y2 | Y2 § 1.2 | done (noted) |
 | 63 | prior-art debt | SIXFRAG, SIXOFF, DCREAD: no search run; `[Polymath16threads]` thread 8 beyond [08.17]–[08.18] unread | Y2 § 2.3–2.4 | open |
+| 64 | owner ruling | **FS116-S1** (02:12): one fresh mind on SAT-STRIP from both sides (exclude, or build Y-SAT by formula), starting at the proof side's stalled form, as both N1 and Y2 advised. Alternative weighed: a proof job and a construction job separately. Why one: the two sides stalled at one configuration, and one mind holding both halves avoids routing between them; it also spares a slot. Confidence: medium-high | `data/fs116/briefs/FS116-S1-satstrip.md` | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
