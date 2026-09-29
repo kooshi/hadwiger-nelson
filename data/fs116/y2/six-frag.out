@@ -1,0 +1,7 @@
+fragment: RHO = 1.5000, pattern A, plant = None; 18 tiles
+  same-colour pairs (self included): 36
+  REJECT: none
+  distinct same-colour pairs with min distance < 1 (Siamese-close): none
+  consistency: 0 unmatched interior pieces, 12 rim pieces on |x| = RHO
+  colours of the tiles whose boundary holds p: [0, 1, 2, 3, 4, 5]
+=> FRAGMENT: VALID, NON-SIAMESE, SIX COLOURS AT p

@@ -1,0 +1,7 @@
+fragment: RHO = 1.5000, pattern A, plant = patbreak; 18 tiles
+  same-colour pairs (self included): 37
+  REJECT: [('Q0', 'Q1'), ('Q0', 'G5')]
+  distinct same-colour pairs with min distance < 1 (Siamese-close): [('Q0', 'Q1'), ('Q0', 'G5')]
+  consistency: 0 unmatched interior pieces, 12 rim pieces on |x| = RHO
+  colours of the tiles whose boundary holds p: [0, 1, 2, 3, 4, 5]
+=> FRAGMENT: FAILS

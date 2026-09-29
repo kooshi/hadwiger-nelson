@@ -1,0 +1,9 @@
+pattern B; x = (1.74205, 0.00000); plant = move
+  |x - e(30)|^2 - 1 = +0.01742,  |x - e(-30)|^2 - 1 = +0.01742
+  colour 0: STRADDLED by S0   [S0: min<1 True, max>1 True]
+  colour 1: STRADDLED by G5   [G5: min<1 True, max>1 True]
+  colour 2: STRADDLED by G0   [Q5: min<1 False, max>1 True; G0: min<1 True, max>1 True]
+  colour 3: STRADDLED by Q0   [Q0: min<1 True, max>1 True]
+  colour 4: not straddled   [Q1: min<1 False, max>1 True]
+  colour 5: STRADDLED by S5   [S5: min<1 True, max>1 True]
+=> unstraddled colours at x: [4]

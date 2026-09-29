@@ -18,10 +18,17 @@ counter-clockwise of `y`) and `X̄` (just clockwise) are the colours absent at `
 | id | statement (one line) | grade | address |
 |---|---|---|---|
 | FS116-Y2-QT | the brief's two block quotations are verbatim in `data/fs116/claims.md` § 7, and its five unquoted attributions are present at their sources | [tools] | § 1.2; `tools/fs116_y2_quotes.py` |
+| FS116-Y2-DCREAD | the disk realises the disk-corner configuration on all of its disc, so an exclusion of it on `B̄(p, 2)` (RING-Q's missing step) must read points outside the disk, which lie in the directions `(ψ + 157.4°, ψ + 324.5°)` about `p` — the side of `p` away from `y` | [hand; one mind; the window tools] | § 2.2; `tools/fs116_y2_six.py dcread` |
+| **FS116-Y2-SIXFRAG** | **a valid six-coloured fragment by formula about a vertex of six colours** (its ring entirely `Γ`, every ring arc (Q)): the unit sector flower, six outer lenses, six gap tiles, holding `B̄(p, R)` for every `R < 3/2`; non-Siamese | [tools, exact; one mind] | § 2.3; `tools/fs116_y2_six.py frag` |
+| **FS116-Y2-SIXOFF** | **no valid fragment, Siamese pairs allowed, in which `p` is a vertex of six colours whose tiles are the straight unit sectors and whose outer ring tiles are the six lenses over the arcs `[60j − 30°, 60j + 30°]` holds `B̄(p, √3)`**: both forced colour patterns leave a cone at `√3·e(60j)` with no colour | [hand; one mind; the six exclusions at the named points tools-exact] | § 2.4; `tools/fs116_y2_six.py point` |
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
+- Stage 2: (a) I would have searched re-rimmings of the disk for the disk-corner configuration beyond `φ`; instead I derived where any obstruction of it
+  must read (FS116-Y2-DCREAD) and recorded the held stalls of the rim moves. (b) I would have searched colourings of the outer layers of a six-colour
+  flower for the largest radius; instead the forced colours (the sector straddles, lens adjacency, the two cyclic patterns) were derived by hand and the
+  stop point proved (FS116-Y2-SIXOFF); the one fragment built (FS116-Y2-SIXFRAG) is given by formula, its colouring the pattern the derivation forces.
 
 ## Fence log (standing rule 8)
 
@@ -32,6 +39,9 @@ counter-clockwise of `y`) and `X̄` (just clockwise) are the colours absent at `
 ## G87 lookout
 
 - Stage 1: none seen.
+- Stage 2: none seen as two truths in collision. One near-miss classed: my own first-order reading of the point `x` beside `√3·e(0°)` ("the gap tile
+  stays within `< 1`, so non-Siamese is needed") against the exact check (it straddles) — a slip of mine in a prediction, corrected before filing (§ 2.0),
+  not two held results.
 
 ## Stage 1 — SAVED: the readback, and recognition on each claim
 
@@ -162,3 +172,185 @@ no family with a free parameter meeting that demand is in hand, and this round s
 **G87 lookout, stage 1:** none seen.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: Y-QRING — the disk-corner configuration read for where it must break; a vertex of six colours built to `3/2` and stopped below `√3`
+
+### 2.0 Registered before the runs of `tools/fs116_y2_six.py` (in its header, written before any run), and scored
+
+- `frag`: VALID, NON-SIAMESE, SIX COLOURS AT `p`. *First run:* consistency reported 12 unmatched interior pieces — the ring arcs, which the sectors and
+  the lenses split at different points (`60j` against `60j ± 30°`); both were split at every `30°` mark, a representation fix, and the rerun is the recorded
+  one (`data/fs116/y2/six-frag.out`): **as registered**.
+- `frag --plant patbreak` (Q₀ recoloured to Q₁'s colour): REJECT at `(Q₀, Q₁)`. *Scored:* REJECT at `(Q₀, Q₁)` **and** `(Q₀, G₅)` — the second not
+  registered: recoloured Q₀ also touches the colour-3 gap tile at `e(−30°)`. A miss in wording, not in the check.
+- `frag --plant grow` (cut at `8/5`): every `G_j` REJECTs against itself (diameter `2·(8/5)·sin(60° − arccos(4/5)) ≈ 1.257`). **As registered.**
+- `point` (§ 2.4's step at `√3·e(0°)`): I registered by hand, to first order in the displacements, that five colours are straddled at `x` and that the
+  sixth (colour 3 in pattern A, colour 2 in pattern B) is **not** straddled, its exclusion needing non-Siamese (CL). *Scored:* **all six straddled in both
+  patterns** — the sixth by the gap tile's points along the lens boundary, where the second-order term `t²` (the horn between the two tangent circles at
+  `e(∓30°)`) lifts the distance above 1. **The prediction lost, in the direction that strengthens the result:** the hand argument (§ 2.4) now runs by
+  straddles alone and holds with Siamese pairs allowed. `point --plant move` (the point moved to `(√3 + 1/100, 0)`): a different colour is left
+  unstraddled (colour 1 in pattern A, colour 4 in pattern B). **As registered.**
+
+### 2.1 What was read about the disk-corner configuration, and the families
+
+| family | free parameters | the configuration's demand beyond radius 2 | verdict |
+|---|---|---|---|
+| **D1** valid extensions of the disk about its corner `A₀` | the tiles beyond the rim | `B̄(A₀, R)`, `R > 2` | **dead above `φ`** (FS112-DISC, held: two minds on the bound, one on the attainment) |
+| **D2** the disk's core kept (`Z, W₀, P₀, P₄, W₁, P₁, P₂, T₁`, the tiles that carry `p`, `y` and the (Q) arcs at `u`, `v`), the rim redesigned | every tile of the outer ring | the colourless points `C₀`, `D₀` at distance `φ` from `A₀` (directions `ψ + 223°`, `ψ + 259°`) removed | **stalled in the record**: FS112-MOVE (the colourless cone `108° → 36°`, not closed), FS112-Y3-PIN (the pinned corner blocked by `Y₀`), FS114-Y-DISKRIGID (the geometry has one colouring); no new member built this round |
+| **D3** the capped strip | its upper band | a two-colour change point with `y ± 60°` inside (Q) arcs | **not a member**: the strip's midline change points are four-colour vertices whose `±60°` points *end* (Q) arcs (FS116-N1 § 3.3) |
+| **D4** a vertex of six colours | the flower, the outer ring | — | **not a member** (no change point: its ring is all `Γ`); it is Y-QRING's other target, § 2.3–2.4 |
+
+**Verdict on the disk-corner configuration: not landed** — no fragment holds it beyond `φ`, and no obstruction at radius 2 is derived. What is derived is
+where an obstruction must look (§ 2.2).
+
+### 2.2 Where an exclusion of the disk-corner configuration must read (FS116-Y2-DCREAD)
+
+*Argument.* The disk (FS112-CAL-DISK: valid, exact, two checkers) holds the closed disc `B̄(O, r)`, `r² = (25 + 9√5)/10`, and realises the configuration at
+`A₀`, `|A₀| = a`, `a² = (5 − √5)/10` (FS116-N1-QDISK; its class hypotheses non-Siamese and simple read in floats there). So a derivation that reads only
+`B̄(A₀, 2) ∩ B̄(O, r)` cannot exclude the configuration: the disk is a counter-model to it. A point `A₀ + t·e(θ)`, `t ≤ 2`, leaves `B̄(O, r)` only if
+`a² + t² + 2at sin θ > r²` (disk coordinates, `A₀ = (0, a)`), and the left side is largest at `t = 2`: so only if `sin θ > (r² − 4 − a²)/(4a) = (√5 − 2)/(4a)
+≈ 0.11226`, i.e. `θ ∈ (6.4°, 173.6°)`, which about `A₀` is `(ψ + 157.4°, ψ + 324.5°)` with `ψ ≈ 209.01°` the direction of `y`. With FS112-DISC's grown
+disk (valid, one checker) the region shrinks further to distance `> φ` from `A₀`; at `R = φ` the same window is exactly `(72°, 108°)`, the directions of
+the grown tile `R₀` (the plant's output). ∎
+
+derivation: FS116-Y2-DCREAD
+  statement: any derivation that excludes, on the closed disc of radius 2 about p, the disk-corner configuration (a vertex p of at least four colours
+    whose ring has a change point y of two colours with y ± 60° inside (Q) arcs) in RING-Q's class must read a point of that disc outside the disk of
+    [Polymath2021] Fig. 10 placed with its corner A₀ at p and its change point at y, and every such point lies in the directions (ψ + 157.4°, ψ + 324.5°)
+    about p, ψ the direction of y
+  uses only: that the disk is a valid fragment on B̄(O, r) realising the configuration at A₀ (FS112-CAL-DISK, FS116-N1-QDISK); r² = (25 + 9√5)/10,
+    a² = (5 − √5)/10, ψ ≈ 209.0102° (FS116-N1's ring survey); the maximum of |A₀ + t e(θ)| over t ≤ 2 is at t = 2
+  not claimed: that the configuration is excluded at any radius; that an exclusion must read every point of the window; anything outside RING-Q's class
+    (the disk's non-Siamese and simple readings are floats, FS116-N1)
+  argument: § 2.2 Where an exclusion of the disk-corner configuration must read (FS116-Y2-DCREAD)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the disk itself, about A₀
+  prior art: partly: FS112-DISC (the disk's reach about A₀) and FS116-N1 § 3.4 (the gap is not local, stated in radius); the direction window is new here
+  handoff: none — a scope statement for the proof side's RING-Q step (C-BEYOND in the claim list's sense)
+
+control: fs116-y2-dcread
+  of: FS116-Y2-DCREAD — the window at R = 2; at R = φ it is the grown tile's directions instead
+  run: python3 ../tools/fs116_y2_six.py dcread | tail -1
+  expect: R = 2.0000: sin t0 = 0.112257 (at R = 2 this is (sqrt5 - 2)/(4a)); window about A_0 in disk coordinates (6.4, 173.6) deg; relative to y at psi = 209.0102: (157.4, 324.5)
+  fault: python3 ../tools/fs116_y2_six.py dcread --plant phi | tail -1
+
+**What it says for the proof side.** RING-Q's missing step at radius 2 has to carry information from `y` round `p` to its far side — about `240°` from `y`,
+where the disk's own extension breaks at `C₀`, `D₀`. A ring lemma at `y` cannot do it.
+
+### 2.3 A vertex of six colours, by formula (FS116-Y2-SIXFRAG)
+
+*Why it is Y-QRING's.* At a vertex carrying all six colours, N-E1 forbids every colour at every interior point of `ω(p)`, so `ω(p) ⊆ Γ` (FS112-NB's NB-SIX,
+filed as FS112-SIX, two minds), and every ring arc has both side colours at `p`: every ring arc is a (Q) arc. In the non-Siamese class the inner tile of
+each ring arc is `p`'s tile of its colour (CL), so each of the six tiles at `p` carries exactly one `60°` ring arc and lies in the Reuleaux triangle on it
+(a remark, one mind; FS112-NB's C-V56 line is its prior form: "every tile `Z` meeting `B(V, 1)` is one of the six tiles at `V` or Siamese to the one of its
+colour"). The simplest member takes the six tiles to be the straight unit sectors `S_j` (cone `[60j, 60j + 60°]`).
+
+*The object* (`tools/fs116_y2_six.py`, exact in `ℚ(√3, √7)`): `S_j` coloured `j`; the lens `Q_j` — the points outside `ω(p)` within 1 of `e(60j − 30°)` and
+of `e(60j + 30°)` — coloured `j + 2`; the gap tile `G_j` at `e(60j + 30°)` — the points outside `ω(p)` at distance at least 1 from `e(60j − 30°)` and from
+`e(60j + 90°)` — coloured `j + 4` (mod 6); all cut at `|x| = 3/2`. *The check* (`data/fs116/y2/six-frag.out`): 36 same-colour pairs, **no REJECT**; **no
+distinct same-colour pair at distance below 1** (non-Siamese); every interior piece shared by exactly two tiles and the 12 rim pieces forming the circle of
+radius `3/2`, so the tiles tile the closed disc `B̄(p, 3/2)`; six colours at `p`. The plants fire (§ 2.0).
+
+derivation: FS116-Y2-SIXFRAG
+  statement: the unit sector flower S_j (colour j), the six lenses Q_j between e(60j − 30°) and e(60j + 30°) outside ω(p) (colour j + 2) and the six gap
+    tiles G_j at e(60j + 30°) (colour j + 4), all cut at |x| = 3/2, form a valid non-Siamese six-coloured fragment holding B̄(p, R) for every R < 3/2, in
+    which p is a vertex of six colours whose ring lies in Γ and all of whose ring arcs are (Q) arcs
+  uses only: exact arithmetic in Q(√3, √7) (the cut points have cosine 3/4 and sine √7/4 at the lens corners); FS114-YB's exact pair verdict (every
+    candidate distance compared with 1) and its map-consistency test; the 36 same-colour tile pairs, self-pairs included
+  not claimed: any R ≥ 3/2 in this form (at 8/5 each G_j exceeds diameter 1: the plant); that the fragment extends; Y-QRING (3/2 < φ²/√2); that a vertex
+    of six colours occurs in any valid map
+  argument: § 2.3 A vertex of six colours, by formula (FS116-Y2-SIXFRAG)
+  verdict: derived
+  grade: computed over: the 18 tiles of the fragment and their 36 same-colour pairs, exact in Q(√3, √7)
+  minds: 1
+  model: the fragment itself
+  prior art: partly: the six-sector picture at a six-colour vertex is de Grey's and Gibbs's ([Polymath16threads] [08.17], [08.18], 2018: "a circle divided
+    into six tiles around the vertex … but what next?"); a fragment beyond the ring not found in print (FS112-PA-reading stage 3: the next layer's case
+    analysis never done); no search of my own run (standing rule 5 does not bear; the debt is in the report)
+  handoff: de Bruijn — an exact fragment in Q(√3, √7) with its pair certificate, a control object for any local exclusion that claims six-colour vertices;
+    not urgent
+
+control: fs116-y2-sixfrag
+  of: FS116-Y2-SIXFRAG — the fragment holds every check; cut at 8/5 the gap tiles exceed diameter 1
+  run: python3 ../tools/fs116_y2_six.py frag | tail -1
+  expect: => FRAGMENT: VALID, NON-SIAMESE, SIX COLOURS AT p
+  fault: python3 ../tools/fs116_y2_six.py frag --plant grow | tail -1
+
+### 2.4 The offset flower stops below √3 (FS116-Y2-SIXOFF)
+
+*Setting.* A valid six-coloured fragment on `B̄(p, R)`, Siamese pairs allowed, in which `p`'s tiles are the six straight unit sectors `S_j` (colours
+`c_j`) and the tile covering the outer side of the ring near `e(60j)` is the lens `L_j` over the ring arc `[60j − 30°, 60j + 30°]` (as a tile, inside
+`B̄(p, R)`). Suppose `R ≥ √3`, so each `L_j` lies whole in the disc and its far vertex `√3·e(60j)` is a point of the disc. Every step is a **straddle**: a
+tile `T` is excluded at a point `x` when some tile of `T`'s colour has points at distance below 1 and above 1 from `x`'s neighbours in `T` (the interiors
+being connected, two interior points are then exactly 1 apart).
+
+*Step 1 (the lens colours).* Just outside `ω(p)` near `e(0°)`: `S_0`, `S_5` contain `e(0°)` and `p` (distances near 0 and above 1); `S_1` holds the points
+`(1 − t)·e(60°)`, at distance `√(1 − t + t²) < 1` from `e(0°)`, and `p` — so colours `c_0, c_5, c_1` and (by the mirror) `c_4` are excluded, and `L_0` has
+colour `c_2` or `c_3`; in general `L_j ∈ {c_{j+2}, c_{j+3}}`. Two lenses touching at `e(60j + 30°)` differ (the second has points beyond the first's arc,
+more than 1 from the first's far corner). A cyclic 0/1 sequence that never steps from 1 to 0 is constant: **pattern A** (`L_j = c_{j+2}`) or **pattern B**
+(`L_j = c_{j+3}`).
+*Step 2 (the gap cones).* At `e(30°)` the outer cone `(0°, 60°)` between `L_0` (cone `[−60°, 0°]`) and `L_1` (`[60°, 120°]`) excludes `c_0` (`S_0` holds
+`e(30°)`), `c_1`, `c_5` (the corners `e(60°)`, `e(0°)` of `S_1`, `S_5` at distance `0.518`) and the two lens colours (adjacency): it is **all `c_4`** in pattern
+A, **all `c_2`** in pattern B; likewise the cone `(300°, 360°)` at `e(−30°)` is all `c_3` (A) or all `c_1` (B).
+*Step 3 (the point `√3·e(0°)`).* `L_0` has cone `[120°, 240°]` there. For `x = √3·e(0°) + s·e(χ)`, `s` small, and a tile point `e(±30°) + t·e(δ)`:
+`|x − y|² = 1 + 2s·cos(χ ∓ 30°) − 2t·cos(δ ∓ 30°) + O(s² + t²)`, the sign `∓` for the corner `e(±30°)`. **Pattern A, `χ ∈ (240°, 300°)`:** `c_0`, `c_5` by the
+sectors; `c_2` by `L_0` (it holds `√3·e(0°)` and `e(30°)`, and `x` lies outside `B̄(e(30°), 1)`); `c_1` by `L_5` (cone `[240°, 300°]` at `e(−30°)`: the two
+first-order terms have opposite signs); `c_4` by the gap tiles at `e(30°)` (cone inside `(0°, 60°)`: opposite signs); `c_3` by the gap tile at `e(−30°)`
+adjacent to `L_5`, whose points `e(−30°) + t·e(300°)` lie on its side of `L_5`'s arc and give `|x − y|² = 1 + 2s·cos(χ − 30°) + t² + O(st + s²) > 1` at
+`t = 2√s`, while its points in directions near `330°` give `< 1` — the horn between the tangent circles `ω(e(−90°))` and `ω(√3·e(0°))`. **Pattern B,
+`χ ∈ (60°, 120°)`:** `c_0`, `c_5`; `c_3` by `L_0`; `c_4` by `L_1` (cone `[60°, 120°]` at `e(30°)`); `c_1` by the gap tiles at `e(−30°)`; `c_2` by the gap tile at
+`e(30°)` adjacent to `L_1`, the mirror horn. So in either pattern a cone of directions at `√3·e(0°)` carries no colour, and no fragment of the setting
+holds a neighbourhood of `√3·e(0°)`: `R < √3`. ∎
+
+*Exact at named points* (`data/fs116/y2/six-point-*.out`): at `x = (√3, −1/100)` (pattern A) and `(√3, +1/100)` (pattern B), every colour is straddled by
+exactly the tiles the argument names (the gap tiles as small pieces with their full cones at `e(±30°)`); moved to `(√3 + 1/100, 0)`, one colour is freed
+(the plant).
+
+derivation: FS116-Y2-SIXOFF
+  statement: no valid six-coloured fragment on B̄(p, R), Siamese pairs allowed, in which p is a vertex whose six tiles are the straight unit sectors
+    S_j and whose tile covering the outer side of the ring near e(60j) is the lens over the ring arc [60j − 30°, 60j + 30°], for each j, has R ≥ √3
+  uses only: the straddle principle (a tile's interior is connected); the sectors' corners and p; the lenses' corners e(60j ± 30°) and far vertices
+    √3 e(60j) with their cones there; the forced colours of Steps 1–2 (two cyclic patterns; the gap cones single-coloured); second order along the lens
+    boundary in Step 3 (the horn); no non-Siamese hypothesis, no count of colours beyond six at Step 3's exclusions
+  not claimed: anything for flowers whose tiles are not straight sectors (e.g. alternating Reuleaux and cusped tiles, where the corner straddles of Step 1
+    change); anything for outer rings that break away from the arc midpoints; that any R in (3/2, √3) is attained; anything at k ≥ 7 (with a seventh colour
+    the cone at √3 e(0) is coloured, as in R7's family)
+  argument: § 2.4 The offset flower stops below √3 (FS116-Y2-SIXOFF)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: FS116-Y2-SIXFRAG, a member of the setting on every B̄(p, R) with R < 3/2
+  prior art: partly: the six-sector picture at a six-colour vertex is [Polymath16threads] [08.17]–[08.18]'s; the layer after it is not done there
+    (FS112-PA-reading stage 3); no search of my own run — owed
+  handoff: none — a no-go for one family of one ring type, for D2's list of ring types; it enters no proof of a value
+
+control: fs116-y2-sixoff-a
+  of: FS116-Y2-SIXOFF — pattern A: every colour straddled at (√3, −1/100); moved to (√3 + 1/100, 0) colour 1 is freed
+  run: python3 ../tools/fs116_y2_six.py point --pattern A | tail -1
+  expect: => unstraddled colours at x: []
+  fault: python3 ../tools/fs116_y2_six.py point --pattern A --plant move | tail -1
+
+control: fs116-y2-sixoff-b
+  of: FS116-Y2-SIXOFF — pattern B: every colour straddled at (√3, +1/100); moved to (√3 + 1/100, 0) colour 4 is freed
+  run: python3 ../tools/fs116_y2_six.py point --pattern B | tail -1
+  expect: => unstraddled colours at x: []
+  fault: python3 ../tools/fs116_y2_six.py point --pattern B --plant move | tail -1
+
+**What it says for Y-QRING.** A vertex of six colours is a ring type Y-QRING admits and RING-Q does not see. Its most symmetric family lives on every disc of
+radius below `3/2` (exact) and dies below `√3 < φ²/√2`, Siamese pairs allowed: it does not meet G83's killing test. The general six-colour vertex is
+**GAP** at two named freedoms — the flower's shape (Reuleaux or cusped tiles in place of sectors) and the outer ring's break points — and a no-go for the
+whole ring type would be a piece of D2's exclusion. *A remark for Y-SAT:* the sector flower is never saturated at `p` — a ray between `S_j` and `S_{j+1}` is
+straight, so its partner point for `S_j`'s colour lies just outside `ω(p)` near `e(60j − 30°)`, where Step 1's straddles exclude `c_j`.
+
+### 2.5 Verdict on Y-QRING this round
+
+**Not landed**: no fragment beyond `φ²/√2` about a (Q)-ring vertex of at least four colours, and no obstruction for the class at a named radius. Landed on the
+way: where the disk-corner configuration's exclusion must read (FS116-Y2-DCREAD); the first exact fragment about a vertex of six colours
+(FS116-Y2-SIXFRAG, to `3/2`); and the stop of its symmetric family below `√3`, Siamese allowed (FS116-Y2-SIXOFF). The families tried and their free
+parameters: § 2.1 (the disk-corner configuration: D1–D4) and the six-colour setting of § 2.4 (free: the radius; forced: the colours; the flower and the
+lens break points held fixed, and named as the open freedoms).
+
+**G87 lookout, stage 2:** none seen (the near-miss is in the log above).
+
+## Stage 2 — SAVED
