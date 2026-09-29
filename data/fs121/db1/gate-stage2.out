@@ -1,0 +1,62 @@
+entry lint
+  claim DB1-readback: minds 1
+  claim DB1-readback: prior art known
+  claim DB1-L1: minds 1
+  claim DB1-L1: prior art partly
+  claim DB1-L3: governed by DB1-L1 (hand, minds 1)
+  claim DB1-L3: minds 1
+  claim DB1-L3: prior art partly
+  claim DB1-L4: governed by DB1-L1 (hand, minds 1)
+  claim DB1-L4: governed by DB1-L3 (derived from, minds 1)
+  claim DB1-L4: minds 1
+  claim DB1-L4: prior art partly
+  claim DB1-L5: governed by DB1-L1 (hand, minds 1)
+  claim DB1-L5: governed by DB1-L3 (derived from, minds 1)
+  claim DB1-L5: minds 1
+  warn  FS121-DB1-verification.md:401 (DB1-L5): prior art owed — novelty unmeasured; a standing finding
+  claim DB1-L5: prior art owed, 1 counted queries
+  claim DB1-L7: minds 1
+  claim DB1-L7: prior art partly
+  claim DB1-L6: minds 1
+  claim DB1-L6: prior art partly
+  entries: 7  derived: 7  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'C121-ENDS' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-ENDS: given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen …
+  claim verification C121-ENDS: committed 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  claim verification C121-ENDS: predicted derived (0.75); verdict derived — met
+  warn  FS121-DB1-verification.md:443 (verification C121-ENDS): divergences 'none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)' — until the comparison finds something, the disagreement has not started
+  claim verification C121-ENDS: thin truth: R7 at a lattice point, which has cusps of density 0 at every kind-both centre and still carries six colours — local to the clause "at least four when no colour at z has density 0" (DB1-L4 needs no density condition)
+  claim verification C121-ENDS: thin truth: every (R2) centre under DB1-L5 — local to the clause "at least three distinct colours when no colour at z has density 0", which holds without its condition
+  claim verification C121-ENDS: minds 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  warn  verification 'C121-OUT' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-OUT: given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen …
+  claim verification C121-OUT: committed 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  claim verification C121-OUT: predicted derived (0.85); verdict derived — met
+  warn  FS121-DB1-verification.md:467 (verification C121-OUT): divergences 'none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)' — until the comparison finds something, the disagreement has not started
+  claim verification C121-OUT: thin truth: the first clause without REG-J′ — local to REG-J′, which DB1-L7 does not use; none refuting — the tangent-type hypothesis was removed and the statement fails at R7's split arc (control db1-r7-parallel), the class the statement excludes
+  claim verification C121-OUT: minds 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  warn  verification 'C121-PER' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-PER: given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen …
+  claim verification C121-PER: committed 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  claim verification C121-PER: predicted derived (0.75); verdict derived — met
+  warn  FS121-DB1-verification.md:488 (verification C121-PER): divergences 'none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)' — until the comparison finds something, the disagreement has not started
+  claim verification C121-PER: thin truth: R7 — local to the clause "where no colour has density 0 at an arc's centre", idle by DB1-L4
+  claim verification C121-PER: minds 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  warn  verification 'C121-LRA-LINE' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-LRA-LINE: given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen …
+  claim verification C121-LRA-LINE: committed 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  claim verification C121-LRA-LINE: predicted derived (0.7); verdict derived — met
+  warn  FS121-DB1-verification.md:506 (verification C121-LRA-LINE): divergences 'none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)' — until the comparison finds something, the disagreement has not started
+  claim verification C121-LRA-LINE: counterexamples none — no saturated colouring with LRA is held, so no object tests either reading; reading (b) is a gap, not a refutation
+  claim verification C121-LRA-LINE: minds 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  verifications: 4  predictions met: 4 of 4 (Brier 0.059)  divergences: truth 0, route 0, wording 0  counterexamples: refutation 0, monster 0, thin truth 4
+quotes
+  statements named in more than one place: 0
+controls
+  ok    db1-quotes: printed 'failures: 0'; with the fault planted ('' → '--plant') it printed 'failures: 2' — it fires
+  ok    db1-r7-cones: printed 'arcs 3 cone-picture-ok 3 carried 6 essential 3'; with the fault planted ('' → '--plant') it printed 'arcs 3 cone-picture-ok 0 carried 5 essen' — it fires
+  ok    db1-cusp: printed 'K- circle about the cusp point meets G1 at 9 of 9; K+ circle meets G2 at 9 of 9'; with the fault planted ('' → '--plant') it printed 'K- circle about the cusp point meets G1 ' — it fires
+  ok    db1-r7-parallel: printed 'radius 2: lattice points checked 57; on an interface False; interior of U(1,1) True'; with the fault planted ('' → '--plant') it printed 'radius 1: lattice points checked 58; on ' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 9 warnings)
