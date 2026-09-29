@@ -18,6 +18,7 @@
 |---|---|---|---|---|
 | FS116-V3 | ephodos-verifier on the list's § 11 (GERM-R, GERM-S, TOUCH, ECHO, AXIS) | `data/fs116/briefs/FS116-V3-verify.md` | `plans/FS116-V3-verification.md` | yes: fence in its brief |
 | FS116-S1 | Ephodos, SAT-STRIP from both sides (exclude or build Y-SAT) | `data/fs116/briefs/FS116-S1-satstrip.md` | `plans/FS116-S1-proof.md` | no |
+| FS116-Y3 | Ephodos, construction: a Γ-free four-colour vertex (queue item 1) | `data/fs116/briefs/FS116-Y3-hub.md` | `plans/FS116-Y3-construction.md` | no |
 | FS121-D4 | Ephodos, C121-REGJ (the structural form) | `data/fs121/briefs/FS121-D4-regj.md` | `plans/FS121-D4-proof.md` | no |
 | FS121-V4 | ephodos-verifier on the list's § 7.2 (the cover route's lemmas) | `data/fs121/briefs/FS121-V4-verify.md` | `plans/FS121-V4-verification.md` | yes: fence in its brief |
 | FS121-V3 | ephodos-verifier on the list's § 6 (V2-SECTOR, D3-GRUNDY, D3-FALLSAT) | `data/fs121/briefs/FS121-V3-verify.md` | `plans/FS121-V3-verification.md` | yes: fence in its brief |
@@ -38,7 +39,7 @@ Everything else is one mind or GAP — see the inventories.
 
 ## Next (queue as of 2026-09-29 07:36 UTC; take from the top as slots free)
 
-1. **FS-116 construction** (item 68): build a Γ-free four-colour vertex on a disc of radius above 2 (a "hub"), or show by formula none
+1. *(launched as FS116-Y3)* **FS-116 construction** (item 68): build a Γ-free four-colour vertex on a disc of radius above 2 (a "hub"), or show by formula none
    exists — RECIP, ANTI, HEX6 have no model at six colours. Template: `data/fs116/briefs/FS116-Y2-construction.md`.
 2. **FS-116 D2's next object** (item 70): a four-colour vertex whose ring carries an arc of Γ at distance 1 from a Γ-free one, with its
    semi-hubs (RING-TRANSFER-Q). Template: `data/fs116/briefs/FS116-N2-transfer.md`.
