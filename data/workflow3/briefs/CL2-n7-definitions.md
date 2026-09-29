@@ -10,7 +10,7 @@ brief: CL2
   statements: none — a copying job; the terms to find are listed in § The terms
   acceptance: § Done means
   yours: § What is yours to decide
-  fences: none for you — but your output goes to a blind verifier after the coordinator vets it, so it must carry definitions only (§ What must not be copied)
+  fences: none — you are not blind; but your output goes to a blind verifier after the coordinator vets it, so it must carry definitions only (§ What must not be copied)
   channel: message the coordinator ("main") by SendMessage with any question mid-flight; the report goes to `data/workflow3/reports/CL2.md` and to "main" by message
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full
   record: `plans/WORKFLOW3-CL2-n7-definitions.md`

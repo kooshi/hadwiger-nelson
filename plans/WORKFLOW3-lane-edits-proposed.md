@@ -124,3 +124,4 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | E17 (new) | a proposed claim list asserted one of its own claims and gave a mind count, which its blind verifier would read | W12 |
 | U5 (new) | the brief gate reads a "…" inside a quoted statement's own text as an elision | W13 |
 | U3 | a fence section's "except" clause is invisible to the gate: every backticked path there is fenced (the gate caught the resulting self-fence, so this is a note on wording, not a defect) | W13 |
+| E17 | a frozen list quoted an earlier milestone's statement whose terms were defined only in records fenced from its verifier; the verifier had to ask (FS116-V1) | W16 |
