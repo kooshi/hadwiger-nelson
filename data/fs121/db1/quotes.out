@@ -1,0 +1,23 @@
+(1) the brief's quotations against the frozen list
+  FOUND   C121-ENDS (864 chars)
+  FOUND   C121-OUT (647 chars)
+  FOUND   C121-PER (464 chars)
+  FOUND   C121-LRA-LINE (457 chars)
+(2) the frozen list's sections 0-1 quotations against their open sources
+  FOUND   'For a measurable `f : ℝ² → [k]` proper at `Leb ⊗ σ`-almost every edge:' in data/fs106/claims.md
+  FOUND   '*Tight*: slack for no `ε > 0`' in data/fs106/claims.md
+  FOUND   'every essential boundary point is at distance exactly 1 from the suppo' in plans/FS111-M-regularity.md
+  FOUND   'an honest (one colour per point) saturated one' in plans/FS111-derivation.md
+  FOUND   '**(H1)** at `x`: a ball `N = B(x, ρ)` in which `S_c` is null for `c ∉ ' in plans/FS111-M-regularity.md
+  FOUND   "the essential boundary points at which M-PINCH's hypotheses (H1), (H2)" in plans/FS111-M2-regularity.md
+  FOUND   '**REG-J′_k**: a saturated colouring whose singular set Σ is locally fi' in data/fs111/claims.md
+  FOUND   '**infinitely many arcs can accumulate at a point only with radii tendi' in plans/FS111-M2-regularity.md
+  FOUND   "(split) is a **unit arc of kind both** (row 135's term): its centre `y" in plans/FS111-M-regularity.md
+  FOUND   '**(Q)** an arc whose centre carries both side colours and at least fou' in data/fs114/claims.md
+  FOUND   'at a saturated point x of an honest a.e.-proper colouring with a neigh' in plans/FS111-derivation.md
+  FOUND   'in an honest saturated colouring whose singular set Σ is locally finit' in plans/FS111-derivation.md
+  FOUND   'The centre of a both-kind unit arc is a vertex with at least four colo' in data/fs114/claims.md
+  FOUND   'at a cone vertex of a saturated map without cusps, no colour occupies ' in plans/FS111-derivation.md
+  FOUND   'a flat edge of a saturated map carries interfaces at every unit transl' in plans/FS111-derivation.md
+  NOT CHECKED (source fenced) 'a saturated-class NO answers Question 2 for no map outside the class, '
+failures: 0
