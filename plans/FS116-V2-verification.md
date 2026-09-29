@@ -6,7 +6,7 @@ exact checks: `tools/fs116_v2_*.py`. Blind, the same model as the minds whose wo
 
 ## Theorems this phase proved
 
-*Stage 1: none. Stage 2: § 2.4. Stage 3: § 3.5.*
+*Stage 1: none. Stage 2: § 2.4. Stage 3: § 3.5. Stage 4: none new (§ 4.8).*
 
 ## Fence log
 
@@ -14,6 +14,8 @@ exact checks: `tools/fs116_v2_*.py`. Blind, the same model as the minds whose wo
   not the records their `argument:` lines point to)". I read its header and § 3 as whole entries — the `statement:`, `uses only:`, `not claimed:`,
   `minds:` and `model:` lines, not only the statements — at about 06:35–06:45 UTC. No record an `argument:` line points to was opened. What
   those lines carried that bears here is listed under *given* below.
+- 2026-09-29 06:56 UTC, after the verdicts' commit `81bfc5cb`: the brief's second phase opened `plans/FS116-N1-proof.md` §§ 2–3. Printing its heading
+  lines to find them showed the titles of its other sections (titles only; § Stage 4).
 
 ## Stage 1 — SAVED
 
@@ -368,6 +370,93 @@ nothing for the simple class with Siamese pairs.
   clauses are verdicted as the conditionals they are.
 
 
+## Stage 4 — SAVED
+
+The verdicts were committed at `81bfc5cb` ("FS116-V2: stage 3"; RING-GERM's at `30fd7aaa`). Then, at 06:56 UTC, the brief's second phase opened the
+round-1 proof record `plans/FS116-N1-proof.md` §§ 2–3, and nothing else of the fence. Touch disclosed: to find §§ 2–3 I printed the record's heading
+lines, which showed the titles of its other sections (stage 1's "Recognition (`ephodos-recognition`, invoked fresh), claim by claim", "G87 lookout",
+"Hand-back at stage 3 — what is left, and the corrections owed"); titles only, after the verdicts.
+
+### 4.1 Divergences on RING-GERM
+
+The round-1 route (§ 3.1 there): Step 1 colours the germs by N-E1 against the ring tiles beside `y` (my (R1)); Step 2 identifies tiles — a non-(Q) germ's
+absent-colour tile is the ring tile `R` or `R′` at `y` (by CL, non-Siamese) or faces away from it (N3-FACE), confining `R`'s and `R′`'s cones at `y`; Step 3
+fills the inward cone with a tip and the outward cone with an outer tile, because only `R`, `R′` carry `X`, `X̄` at `y`.
+
+| # | item | this route | the round-1 route | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the mechanism of (i) and (ii) | colour exclusion at the tile in the cone: V2-L4 puts the far (near) side of `ω(y)` at `y ± 60°` off-limits to an inward (outward) tile's colour, and (R1) finishes | tile identification: the germs confine the cones of the two ring tiles `R`, `R′` at `y`, which then miss the open cones | route | kept both — a second method on the same model |
+| 2 | non-Siamese in (ii) | never used: (ii) holds in every valid fragment (V2-RG-THIN) | used in Step 2 (a), (c) (CL) and in Step 3 ("only `R`, `R′` carry `X`, `X̄` there") | route | kept both; no truth at stake (non-Siamese is a hypothesis of the statement). The round-1 entry's uses-only line lists CL and N3-FACE for the whole lemma; for (ii) the class is wider — a thin truth reported for whoever places the statement |
+| 3 | where six colours are spent | (0a) and the split `c ∈ P_cl(p) ∪ {X, X̄}` in (i), (ii) | "once, at Step 1" (a germ missing `X̄` carries `X`) | wording | the same spending: both routes need "two absent colours", once for the germs and once for the tiles in the cones; the round-1 line's "once" counts the germ step and folds the cone step into CL |
+| 4 | the reading of "change point" | reading L (the author's, Q1); under G the strip's apexes refute (ii), (iii) — the monster, `strip-ring-germ` | reading L, stated in its setting ("the ring off `Γ` on both sides of `y`"); G not considered | wording | settled by the author's answer (L); the monster is reported so that the definition carries "off `Γ` on both sides" wherever RING-GERM is quoted |
+| 5 | the model | the strip's `P_{±2}`, exact colour oracle: (0a), (0b), (ii) met; (i) fails where its hypothesis fails | the strip's `P₂` and FS114-Y2-BOWTIE's centre at `top` (`germ.out`): (ii) met, "no tip" at `P₂` | route | agree at `P₂`; the round-1 record has a second model (the bowtie), this one the orientation plant (`--cw`) and G's monster |
+
+No divergence of truth. No retraction.
+
+### 4.2 Divergences on RING-TWIST-C
+
+The round-1 route (§ 2.2 there): L1 (a germ on an arc of `Γ` on `ω(p)` excludes its side colours from `C(r(θ ± 60°))`, by N-E1 about `r(θ ± 60°)`), L2 (two
+absent colours, swapped singletons), L3 (a step function), L4 (the parity, the closed end by `D` closed), L5 (colour changes against change points), and the
+non-Siamese simple case.
+
+| # | item | this route | the round-1 route | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the 60° rule | germ against germ (V2-L3, radii `ρ₁, ρ₂` near 1 and the angle solving `ρ₁² + ρ₂² − 2ρ₁ρ₂ cos Δ = 1`) | germ against the closure colours at the single point `r(θ ± 60°)` (L1, N-E1 about that point) | route | kept both; the round-1 form is the stronger per point and is what L4 uses at the closed end |
+| 2 | the closed end of `W` | the window extended to `Ŵ = (θ₀ − δ, θ₀ + 120°)` by `D`'s closedness | the colour just below `θ₀` is `b′`, by `D` closed and L1 at `θ + 60°` | route | the same step, two phrasings |
+| 3 | "an arc of `Γ` on `ω(p)`" | an edge (Q2), stated; under a through-vertex reading the seam clause is not derived beyond the window | undefined; L3's "on a seam the two sides have one colour along it" reads it as an edge | wording | agree under the edge reading; the words should say "edge" (or "an arc of `Γ` on `ω(p)` with no vertex inside it") where the statement is quoted |
+| 4 | "simple" against slits | "does not meet itself" read as excluding a tile on both sides of an arc | "a slit makes a tile meet itself" | wording | agree |
+| 5 | four colours | from V2-L3 on a germ pair inside the window | from L2's disjoint non-empty subsets of `A` | route | the same count |
+
+No divergence of truth. No retraction.
+
+### 4.3 Divergences on FS116-N1-TWIST-LIT
+
+| # | item | this route | the round-1 route | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the slit | clockwise from the change point, into the tile beside it; may leave `W` through its closed end into `Ŵ` | counter-clockwise from the change point, inside `W` | route | the same construction |
+| 2 | what the "only if" consumes | nothing beyond the slit: if the count is even the clause already fails; if odd there is a change point to slit | uses-only lists RING-TWIST-C and the grade is "derived from: RING-TWIST-C" | route | the argument does not consume RING-TWIST-C (§ 2.3 there picks a change point only when the count is odd); the statement stands at hand grade on its own — a note for the close, no change of verdict |
+| 3 | the class the slit keeps | non-Siamese kept: the "only if" holds inside the non-Siamese part of the class (V2-TL-NS) | "Siamese pairs allowed", not asked | route | kept both; mine adds that simplicity, not non-Siamese, is what the parity needs |
+| 4 | reading G | the equivalence holds under G too (the slit makes infinitely many G-change points) | not considered | route | kept |
+
+No divergence of truth. No retraction.
+
+### 4.4 The minds, audited
+
+1. **Information.** Before its verdicts this mind saw the statements, the claim lists, FS-114's entries (with N7-HUB's one-line sketch and the statements
+   of N3-ODD and Y4-UPDOWN), and two definition sentences of the round-1 record quoted by the coordinator (§ 1.3), all dated in the stage-1 commit
+   `1a06d32a`; the round-1 argument only after `81bfc5cb`.
+2. **Prior and method.** The same model as the round-1 mind. On RING-GERM the routes differ (colour exclusion against tile identification), and the round-1
+   route is N7-HUB's mechanism, whose sketch I was given and did not follow. On RING-TWIST-C and FS116-N1-TWIST-LIT the routes coincide in substance.
+3. **Criterion.** Statements quoted verbatim (§ 1.1), readings asked and answered before derivation (§ 1.2), predictions committed in `1a06d32a`.
+4. **Attack.** § 2.3, § 3.2, § 3.4; it succeeded at: (i) without its hypothesis (the strip's `P_{±2}`), reading G (the strip's apexes), the seam in `W` (the
+   slit), and the through-vertex reading of "arc of `Γ`".
+
+So each statement now has **two minds, blind, the same model** — on RING-GERM with a different route, on the other two with the same route.
+
+### 4.5 Where the results go
+
+- **RING-GERM, RING-TWIST-C, FS116-N1-TWIST-LIT**: TRUE, each at two minds (blind, the same model). The entries' `minds:` lines may carry 2 with those terms.
+- **Findings for the close** (no verdict changes): RING-GERM (ii) holds without non-Siamese (V2-RG-THIN); FS116-N1-TWIST-LIT holds inside the non-Siamese
+  class (V2-TL-NS) and does not consume RING-TWIST-C; "change point" should be quoted with "the ring off `Γ` on both sides" wherever RING-GERM travels,
+  since under the other reading the strip refutes it (V2-RG-G); "arc of `Γ` on `ω(p)`" should read "edge" in RING-TWIST-C.
+- **Not supplied by this verification**: whether these are the statements D2's ring-following argument needs (a reader of intent), and any model of
+  RING-TWIST-C's window clauses (no held fragment has a qualifying window).
+
+### 4.6 Predictions scored
+
+All three met (derived at 0.85, 0.80, 0.90; Brier 0.024). They were informed predictions, registered after an in-head sketch (§ 1.3), so the score says
+little about calibration; the likeliest breaks named then were readings, and two of them fired as readings (G on RING-GERM, the through-vertex arc on
+RING-TWIST-C), not as refutations under the author's readings.
+
+### 4.7 Would have searched here
+
+- None at this stage.
+
+### 4.8 Theorems this stage proved
+
+- None new; the minds count of §§ 2–3's results is now two (blind, the same model).
+
+
 verification: RING-GERM
   statement: in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the ring, X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise and just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if neither v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of p; (ii) if neither u⁻ nor v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction away from p lies in the cone of a tile of a colour of p that is not a tile of p; (iii) if none of the four lies on a (Q) arc, y is a vertex of at least four colours
   given: the statement and its not-claimed line; the claim list with N7-HUB's one-line sketch (§ 8) and FS114-derivation.md § 3's entries,
@@ -376,13 +465,14 @@ verification: RING-GERM
   predicted: derived — 0.85 — likeliest break: y at an end of an arc of Γ on ω(p) (reading G)
   verdict: derived
   method: germ calculus on the ring — the 60° rule on germs (V2-L3) and the two sides of a unit circle (V2-L4) at y ± 60°, each absent colour
-    killed by one (Q)-free germ; the round-1 route is unread until stage 4
+    killed by one (Q)-free germ; the round-1 route identifies tiles instead (§ 4.1)
   attack: § 2.3 Attack on RING-GERM
-  divergences: none — the comparison with the round-1 derivation opens at stage 4, after all three verdicts are committed
+  divergences: § 4.1 Divergences on RING-GERM
   counterexamples: monster: the strip's apex (1/4, √15/4) on the ring of P₀, a change point only under reading G, where (ii) and (iii) fail —
     local at (R1), which needs y's own germs off Γ; reading L, the author's, excludes it; thin truth: (0a), (0b) and (ii) in any valid fragment
     with Siamese pairs — non-Siamese is spent only in (i)'s last step and (iii)
-  minds: 2 — blind to: the round-1 argument (fenced until this commit); method: the same model, a route of its own, compared at stage 4
+  minds: 2 — blind to: the round-1 argument until 81bfc5cb (though given N7-HUB's one-line sketch, whose mechanism the round-1 route follows);
+    the same model; method: a different route, colour exclusion at the tiles in the cones, not tile identification
   grade: hand
 
 control: strip-listing
@@ -409,14 +499,15 @@ verification: RING-TWIST-C
   predicted: derived — 0.80 — likeliest break: an arc of Γ on ω(p) running past W ∪ σ(W) into D; reading G of change point
   verdict: derived
   method: germ calculus on the ring — the 60° rule on germs (V2-L3) over the window extended past its closed end by D's closedness, then a
-    two-colour flip count; the round-1 route is unread until stage 4
+    two-colour flip count; the round-1 route is the same in substance (§ 4.2)
   attack: § 3.2 Attack on RING-TWIST-C
-  divergences: none — the comparison with the round-1 derivation opens at stage 4, after all three verdicts are committed
+  divergences: § 4.2 Divergences on RING-TWIST-C
   counterexamples: none — the strip's ring of P₀ read exactly for the first clause (D closed, four (Q) arcs and two points; no qualifying
     window, every D-free arc at most 60°); no held fragment has a qualifying window, so the window clauses were attacked by readings and by
     removing hypotheses (§ 3.2), not by objects; under reading G (not the author's) the clause "every change point in W is a colour change"
     fails on any seam in a qualifying window, and under a through-vertex reading of "arc of Γ" the seam clause is not derived beyond the window
-  minds: 2 — blind to: the round-1 argument (fenced until this commit); method: the same model, a route of its own, compared at stage 4
+  minds: 2 — blind to: the round-1 argument until 81bfc5cb; the same model; method: the same route in substance (the 60° rule germ against
+    germ where round 1 reads germ against point)
   grade: hand
 
 control: strip-D
@@ -433,10 +524,10 @@ verification: FS116-N1-TWIST-LIT
   predicted: derived — 0.90 — likeliest break: whether a seam laid on the ring keeps the fragment in the class
   verdict: derived
   method: the "if" is vacuous; the "only if" lays a slit — an arc of ω(p) inside one tile, ending at a change point — which removes one change
-    point and keeps the fragment valid, non-Siamese if it was, and its window qualifying; the round-1 route is unread until stage 4
+    point and keeps the fragment valid, non-Siamese if it was, and its window qualifying; the round-1 route is the same slit (§ 4.3)
   attack: § 3.4 Attack on FS116-N1-TWIST-LIT
-  divergences: none — the comparison with the round-1 derivation opens at stage 4, after all three verdicts are committed
+  divergences: § 4.3 Divergences on FS116-N1-TWIST-LIT
   counterexamples: none — the class was read for what could stop the slit (simplicity is not required, § 0's Γ admits it); under reading G the
     slit breaks the clause too (infinitely many change points)
-  minds: 2 — blind to: the round-1 argument (fenced until this commit); method: the same model, a route of its own, compared at stage 4
+  minds: 2 — blind to: the round-1 argument until 81bfc5cb; the same model; method: the same construction (a slit at a change point)
   grade: hand
