@@ -1,0 +1,4 @@
+d01_evolute	(ab:evolute | ab:"focal set" | ab:caustic) & (ab:"parallel curve" | ab:"parallel curves" | ab:"unit distance" | ab:colo*)
+d02_flc	(ab:"finite local complexity" | ab:"local complexity") & (ab:curvature | ab:"circular arc" | ab:colouring | ab:coloring | ab:"unit distance")
+d03_hn_curv	(ab:"chromatic number of the plane" | ab:"unit distance graph" | ab:"measurable chromatic") & (ab:curvature | ab:evolute | ab:"parallel curve" | ab:arc*)
+d04_accum	(ab:"piecewise circular" | ab:"circular arcs" | ab:biarc*) & (ab:accumulat* | ab:"infinitely many") & (ab:curvature | ab:radii)

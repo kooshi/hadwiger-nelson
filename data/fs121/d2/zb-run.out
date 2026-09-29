@@ -1,0 +1,31 @@
+control: an:0933.52003 -> 1 (want 1); nonsense -> 0 (want 0)
+
+[d01_evolute] (ab:evolute | ab:"focal set" | ab:caustic) & (ab:"parallel curve" | ab:"parallel curves" | ab:"unit distance" | ab:colo*)  => 14
+  2014 1308.53005 Fukunaga, T.; Takahashi, Masatomo: Evolutes of fronts in the Euclidean plane
+  2012 1267.53011 Saloom, Amani; Tari, Farid: Curves in the Minkowski plane and their contact with pseudo-circles
+  1994 0806.53001 Porteous, Ian: Geometric differentiation for the intelligence of curves and surfaces
+  2001 1013.53001 Porteous, Ian R.: Geometric differentiation for the intelligence of curves and surfaces.
+  2024 1548.53019 Zhang, Shuyue; Li, Pengcheng; Pei, Donghe: Pedal and contrapedal curves in equi-affine plane
+  1996 0849.58008 Berry, M. V.; Klein, S.: Colored diffraction catastrophes
+  2017 1392.53023 Simsek, Hakan; Özdemir, Mustafa: Shape curvatures of the Lorentzian plane curves
+  2025 None Honda, Shun'ichi; Takahashi, Masatomo: Circular evolutes and involutes of framed curves in the 3-dimensional Euclidean space
+  2022 1497.53002 Umehara, Masaaki; Saji, Kentaro; Yamada, Kotaro: Differential geometry of curves and surfaces with singularities. Translated from the Japanese by Wayne Rossman
+  2009 1172.51001 Troyanov, Marc: Course on geometry
+  2025 1580.53007 Teramoto, Keisuke: Parallels, evolutes and certain lifts of frontal curves in the Euclidean plane
+  2024 1540.13062 Breiding, Paul; Kohn, Kathlén; Sturmfels, Bernd: Metric algebraic geometry
+
+[d02_flc] (ab:"finite local complexity" | ab:"local complexity") & (ab:curvature | ab:"circular arc" | ab:colouring | ab:coloring | ab:"unit distance")  => 5
+  2013 1351.37030 Müller, Peter; Richard, Christoph: Ergodic properties of randomly coloured point sets
+  2018 1497.68568 Parter, Merav; Su, Hsin-Hao: Randomized \((\Delta+1)\)-coloring in \(O(\log^*\Delta)\) congested clique rounds
+  2022 None Brandt, Sebastian; Chang, Yi-Jun; Grebík, Jan: Local problems on trees from the perspectives of distributed algorithms, finitary factors, and descriptive com
+  2016 1360.19011 Kreisel, Michael: Gabor frames for quasicrystals, \(K\)-theory, and twisted gap labeling
+  2021 None Brandt, Sebastian; Latypov, Rustam; Uitto, Jara: Brief announcement: memory efficient massively parallel algorithms for LCL problems on trees
+
+[d03_hn_curv] (ab:"chromatic number of the plane" | ab:"unit distance graph" | ab:"measurable chromatic") & (ab:curvature | ab:evolute | ab:"parallel curve" | ab:arc*)  => 4
+  2026 arXiv:2608.04542 Jan Kristian Haugland: A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane
+  2026 None Sokolov, Georgy; Voronov, Vsevolod: On the chromatic number of the plane for map-type colorings
+  2015 1345.05031 Malen, Greg: Measurable colorings of \(\mathbb{S}^2_r\)
+  2022 1486.00004 Dunajski, Maciej: Geometry. A very short introduction
+
+[d04_accum] (ab:"piecewise circular" | ab:"circular arcs" | ab:biarc*) & (ab:accumulat* | ab:"infinitely many") & (ab:curvature | ab:radii)  => 1
+  1987 0621.30006 zbMATH Open Web Interface contents unavailable due to conflicting licenses.: zbMATH Open Web Interface contents unavailable due to conflicting licenses.

@@ -1,0 +1,9 @@
+# FS121-D2 readback: every quotation in data/fs121/briefs/FS121-D2-nolra.md (the brief's '> ' prefixes removed), and the plan sentences its paraphrases rest on
+data/fs121/claims.md	**C121-NOLRA** (this list): in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, ¬LRA holds.
+data/fs121/claims.md	*Not claimed:* anything without REG-J′. *Colours:* every `k`. *Inhabitants:* `k = 7`, R7; `k = 9`, SQ9 and HEX9 (none has LRA). A saturated colouring with LRA at any `k ≥ 7` refutes it.
+plans/FS121-map-step.md	**P2: ¬LRA derived under REG-J′ within D2 (C121-NOLRA TRUE) — 0.3.** Decides: if TRUE, LRA leaves FS-115's stub and the honest route's remaining rungs are C121-SAT6 and C121-REGJ. If not, the LRA line goes to FS-115 as its question restated (bi-infinite, not a ray).
+plans/FS121-map-step.md	Does row 134's N4 (curvature monotonicity) or a density count on the pencils' ends (each end a point of Σ with at least three colours, C121-ENDS) forbid it?
+data/fs121/claims.md	if interface pieces of radii tending to infinity accumulate at a point x₀ of an interface curve with normal ν there, then pieces of radii tending to infinity accumulate at x₀ + kν for every integer k.
+data/fs121/claims.md	**infinitely many arcs can accumulate at a point only with radii tending to infinity** (call that **LRA**, large-radius accumulation; not excluded here)
+data/fs121/claims.md	**¬LRA**: no point is an accumulation point of interface pieces whose radii of curvature tend to infinity.
+plans/FS111-M2-regularity.md	**infinitely many arcs can accumulate at a point only with radii tending to infinity** (call that **LRA**, large-radius accumulation; not excluded here)

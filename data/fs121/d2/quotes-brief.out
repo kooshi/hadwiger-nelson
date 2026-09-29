@@ -1,0 +1,9 @@
+ok    1 data/fs121/claims.md: **C121-NOLRA** (this list): in every honest saturated colouring in D-N
+ok    2 data/fs121/claims.md: *Not claimed:* anything without REG-J′. *Colours:* every `k`. *Inhabit
+ok    3 plans/FS121-map-step.md: **P2: ¬LRA derived under REG-J′ within D2 (C121-NOLRA TRUE) — 0.3.** D
+ok    4 plans/FS121-map-step.md: Does row 134's N4 (curvature monotonicity) or a density count on the p
+ok    5 data/fs121/claims.md: if interface pieces of radii tending to infinity accumulate at a point
+ok    6 data/fs121/claims.md: **infinitely many arcs can accumulate at a point only with radii tendi
+ok    7 data/fs121/claims.md: **¬LRA**: no point is an accumulation point of interface pieces whose 
+ok    8 plans/FS111-M2-regularity.md: **infinitely many arcs can accumulate at a point only with radii tendi
+quotes: 8  found: 8  missing: 0
