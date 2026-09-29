@@ -1623,6 +1623,20 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   scalability — and the whole NO must be a local exclusion reading distances between points of colour classes. *Do: before a counting or discharging
   route to a map-colouring NO, ask whether the class allows Siamese pairs; if it does, put "non-Siamese" in the count's headline and aim the rest at a
   distance argument. Nothing kills the refinement lemma; it forbids a tile-count proof of a NO for a class with Siamese pairs.*
+* **G87 — The invention signal: two truths that contradict, or a whiff of them. [method; Kooshi's wording, 2026-09-28; new, untested]**
+  *"we have one low frequency, high value gap. Every time Poros is active, it needs to look for the signal for invention: two
+  contradicting truths, or even a whiff of them. Add it in its jobs, as well as in the main instruction file so that everyone is on the
+  lookout."* The signal is what `ephodos-invention` begins from, a collision, in the four kinds its § the_collision names: "Two held
+  descriptions both apply and disagree"; "A derived consequence the frame refuses"; "A proof or a construction that will not close";
+  "A paradox dismissed". The easy exit is to settle it on the spot — one side called wrong, the case excluded, the consequence called an
+  artifact — and the exit hides the premise both sides share, which is where an invention starts. Poros looks for it in every job and
+  writes a line on it in every record (`.claude/agents/poros.md` § Your jobs); every other mind reports one when it sees it. *Do: when
+  two things held here — results, readings, descriptions, a theorem and a measurement — give answers that cannot both be true, or you
+  catch yourself about to exclude a case, dismiss a consequence, or push a proof that keeps failing on the same line, state the
+  collision in the words of both sides, with both addresses, and report it to Keryx as an `invention signal` item, without picking a
+  side; Keryx routes it to Poros for a card and on to Ephodos, who works it with `ephodos-invention` once recognition's homes are
+  killed. Killing test: a collision found afterwards on record, unreported, in a milestone whose minds were on the lookout (the lookout
+  did not install); or signals raised close after close with none worth an invention job (the threshold is set too low).*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58) — one attempt failing is a fact about the

@@ -86,7 +86,8 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
     HELD FOR THE COORDINATOR: <a decision or a slip, one line each; or "none">
     ```
     INVENTORY kinds: result, correction owed, prediction scored, retraction (counted per mind), slip, tool defect, prior-art debt,
-    stub to mint or re-aim, fence touch, statement defect, question for another lane. Your last words are exactly "<id> idle; report sent to the coordinator", with
+    stub to mint or re-aim, fence touch, statement defect, invention signal (`CLAUDE.md` G87: two truths that contradict, or a
+    whiff of them — both sides quoted with their addresses, no side picked), question for another lane. Your last words are exactly "<id> idle; report sent to the coordinator", with
     no content: a hand-back is delivered to whichever agent last woke you, which may not be the coordinator.
 
 12. **Budget.** Your brief names a size as guidance and a hand-back line. An overrun is not a slip (Kooshi, 2026-09-27). Leave margin:
