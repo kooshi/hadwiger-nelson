@@ -29,6 +29,7 @@ counter-clockwise of `y`) and `X̄` (just clockwise) are the colours absent at `
   must read (FS116-Y2-DCREAD) and recorded the held stalls of the rim moves. (b) I would have searched colourings of the outer layers of a six-colour
   flower for the largest radius; instead the forced colours (the sector straddles, lens adjacency, the two cyclic patterns) were derived by hand and the
   stop point proved (FS116-Y2-SIXOFF); the one fragment built (FS116-Y2-SIXFRAG) is given by formula, its colouring the pattern the derivation forces.
+- Stage 3: none (reading only; no construction attempted).
 
 ## Fence log (standing rule 8)
 
@@ -354,3 +355,31 @@ lens break points held fixed, and named as the open freedoms).
 **G87 lookout, stage 2:** none seen (the near-miss is in the log above).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: Y-SAT — read against the proof side's AXIS; not started as a construction
+
+*On the coordinator's message (2026-09-29): the proof side filed SAT-STRIP and SAT-QFREE as GAPs and named what a construction needs. Read at the source,
+`plans/FS116-N1-proof.md` § 4.2–4.4 (FS116-N1-QFREE4, -TOUCH, -ECHO, -AXIS, -F15TOUCH, the stop rule and the controls), one mind each as filed.*
+
+**A credit owed to my stage 1.** FS116-N1-QFREE4's argument (§ 4.2 there) states the premise of my recognition's second target in the same round: "With six,
+no colour is absent: a ring point off `Γ` would carry an absent colour (TWIST-D), so the ring lies in `Γ`, and an arc of `Γ` on `ω(p)` with both side colours at
+`p` is a (Q) arc". My stage 1 cited FS112-SIX for it; both hold, and FS116-Y2-SIXFRAG is a model of QFREE4's six-colour case (a ring that is all (Q)).
+
+**What a positive for Y-SAT at SAT-STRIP's configuration must carry** (AXIS (a)–(d), TOUCH, ECHO, verbatim in substance at the source): at each axis point `q`
+of the ring of the right-angled cross, either a **touch point** — its inward half-plane one absent colour `X`, `X̄` on the four germs at `q ± 60°`, no `X̄` at `q`,
+and, saturation on `B̄(p, 1)` holding `q`, colour `X` at `2q − p` (radius exactly 2) — or a **change point** with a (Q) arc on an inner germ (`30⁻, 150⁺` at
+`q_N`, turned with the quadrants elsewhere). FS116-Y1-F15 carries both kinds on `B̄(p, 6/5)`, saturated on `B̄(p, 1/5)` only, and FS116-Y1-STRIPCEIL caps every
+fragment that keeps the strip inside `B(p, 1)` below `0.491`. So the positive the proof side asks for is: a geometry that differs from the strip inside the
+unit disc, has the right-angled cross at `p`, realises AXIS at all four axis points, and is saturated on the whole of `B̄(p, 1)` — the interfaces of the `X`-tiles
+inside the ring included — with ECHO's `X`-tiles at radius 2.
+
+**Why this round's families do not bear.** The six-colour flower is not SAT-STRIP's configuration (six tiles, not four) and is never saturated at `p`
+(§ 2.4's remark). The disk's corners have unit-arc edges (FS116-N1 § 4.4). The strip family is capped (FS116-Y1-STRIPCEIL).
+
+**Verdict on Y-SAT this round: not started as a construction** — no family with a free parameter meeting AXIS's demands was built or tried here; nothing is
+claimed. The next construction job's target, in the proof side's words: "build, by formula, a fragment that realises them with saturation on `B̄(p, 1)`"
+(`plans/FS116-N1-proof.md` § 4.3, the stalled form).
+
+**G87 lookout, stage 3:** none seen.
+
+## Stage 3 — SAVED
