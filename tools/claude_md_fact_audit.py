@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fact audit for an edit of CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + plans/GROKKINGS-WORKFLOW.md: which fact tokens were in the old version and are NOWHERE in the new one.
+"""Fact audit for an edit of CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + the files CLAUDE.md sections moved to: which fact tokens were in the old version and are NOWHERE in the new one.
 
 The corpus audited is CLAUDE.md followed by LEDGER.md (the novel-results ledger, extracted from CLAUDE.md § Frontier on
 2026-09-22; at a base revision where LEDGER.md does not exist the ledger is still inside CLAUDE.md and the corpus is that file
@@ -326,6 +326,9 @@ ALLOW: dict[str, str] = {
     "G82:[hand, two minds, one blind (row 131); the reading one mind]": "G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)",
     # The pipeline refactor (2026-09-28, branch keryx-pipeline): de Bruijn became an agent file; CLAUDE.md no longer imports DEBRUIJN.md.
     "# Engineering standard": "the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs",
+    # The load audit (2026-09-28, plans/WORKFLOW-AUDIT-2026-09-28.md §7): CLAUDE.md's paths-forward table cut to the top ten at Kooshi's word.
+    "30–69": "the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md",
+    "121–126": "FS-100's paths-forward cell 'rows 121–126 at [hand]', cut with ranks 11–29 (Kooshi, 2026-09-28); the rows stand in LEDGER.md, and FS-100's full row in plans/FRONTIER-STUBS.md",
     "# Workflow": "the heading of CLAUDE.md's `@WORKFLOW.md` import, removed when the workflow was split into the identity files (Workflow 3.0, 2026-09-28): WORKFLOW.md is now an index loaded by no one; CLAUDE.md § The pipeline is the shared map",
     "SessionStart": "the name of the startup hook that told the main session to load `keryx`; retired the same day for the output style `.claude/output-styles/keryx.md`, which carries the identity in every request",
     # FP, the consolidation run's front page (2026-09-27; data/consolidation-2026-09-27/fp/record.md): the bridge's credit moved to Benda-Perles.
@@ -1000,11 +1003,12 @@ def self_test_files(text: str) -> int:
     return bad
 
 
-def corpus_files(main: str, ledger: str, instances: str = "", retired: str = "") -> str:
-    """The corpus as the audit reads it from disk: the main file, then the ledger, the instances file and the retired workflow
-    grokkings (extracted from CLAUDE.md § Grokkings on 2026-09-28), each only if it exists."""
+def corpus_files(main: str, ledger: str, instances: str = "", also: tuple = ()) -> str:
+    """The corpus as the audit reads it from disk: the main file, then the ledger, the instances file and each file CLAUDE.md
+    sections moved to (2026-09-28: the retired workflow grokkings, RUNNING.md, and the ranked stubs below the top ten), each only
+    if it exists."""
     text = Path(main).read_text(encoding="utf-8")
-    for extra in (ledger, instances, retired):
+    for extra in (ledger, instances, *also):
         if extra and Path(extra).exists():
             text += "\n\n" + Path(extra).read_text(encoding="utf-8")
     return text
@@ -1051,7 +1055,8 @@ def main() -> int:
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
-    ap.add_argument("--retired", default="plans/GROKKINGS-WORKFLOW.md", help="the retired workflow grokkings joined to the corpus (missing = not joined)")
+    ap.add_argument("--also", nargs="*", default=["plans/GROKKINGS-WORKFLOW.md", "RUNNING.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
+    ap.add_argument("--stubs", default="plans/FRONTIER-STUBS.md", help="the ranked stubs, joined to the loss audit only (CLAUDE.md keeps the top ten; --dupes leaves it out)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
     ap.add_argument("--self-test", action="store_true")
@@ -1070,13 +1075,14 @@ def main() -> int:
         r3 = subprocess.run(["git", "show", f"{rev}:{a.instances}"], capture_output=True)
         if r3.returncode == 0:   # the instances file exists at that revision
             text += "\n\n" + r3.stdout.decode("utf-8")
-        r4 = subprocess.run(["git", "show", f"{rev}:{a.retired}"], capture_output=True)
-        if r4.returncode == 0:   # the retired workflow grokkings exist at that revision
-            text += "\n\n" + r4.stdout.decode("utf-8")
+        for extra in (*a.also, a.stubs):
+            r4 = subprocess.run(["git", "show", f"{rev}:{extra}"], capture_output=True)
+            if r4.returncode == 0:   # the file exists at that revision
+                text += "\n\n" + r4.stdout.decode("utf-8")
         return text
 
     if a.dupes:
-        dupes(corpus_files(a.new, a.ledger, a.instances, a.retired))
+        dupes(corpus_files(a.new, a.ledger, a.instances, tuple(a.also)))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
@@ -1086,8 +1092,8 @@ def main() -> int:
             return 2
     if a.self_test:
         return self_test(old)
-    print(f"corpus: {a.new} + {a.ledger} + {a.instances} + {a.retired} (each joined if present)")
-    new = corpus_files(a.new, a.ledger, a.instances, a.retired)
+    print(f"corpus: {a.new} + {a.ledger} + {a.instances} + {' + '.join(a.also)} + {a.stubs} (each joined if present)")
+    new = corpus_files(a.new, a.ledger, a.instances, (*a.also, a.stubs))
     return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
 
 

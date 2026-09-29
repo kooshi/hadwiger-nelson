@@ -176,7 +176,7 @@ for i in "${!LAYERS[@]}"; do
   fi
   if [[ "${RC}" -ne 0 ]]; then
     echo "    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are"
-    echo "    skipped. Never a bare or named lake build (CLAUDE.md § Building)."
+    echo "    skipped. Never a bare or named lake build (RUNNING.md § Building)."
     FAIL=1
     break
   fi

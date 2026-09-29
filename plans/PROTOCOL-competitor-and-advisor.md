@@ -91,7 +91,7 @@ disagreement before anything is paid for, and count the retractions — zero mea
 10. **Concurrent jobs: RAM is the discriminator** (Kooshi, 2026-09-24; it supersedes the owner's FS-79 ruling R8, which proposed
    exactly this direction). Threads are not rationed — every thread can and should be used, jobs pinned to disjoint cores — and RAM is,
    against a global maximum of about 100 GB, enforced by `scripts/slot.py` (a shared reservation ledger, a hard `MemoryMax` cap per job,
-   core pinning, a loud exit 75 when not admitted; `CLAUDE.md` § Building). /tmp and swap are RAM on the desktop, so large outputs go to
+   core pinning, a loud exit 75 when not admitted; `RUNNING.md` § Building, moved from `CLAUDE.md` 2026-09-28). /tmp and swap are RAM on the desktop, so large outputs go to
    disk. Every brief states the rule and the command in place of the old single `flock` lock. The failure the old lock caused — a job
    queued under `flock -w` whose wait expires **exits without running**, a silent non-run (Coxeter's census nearly did) — is why the
    wrapper's refusal is loud and carries its own exit status.

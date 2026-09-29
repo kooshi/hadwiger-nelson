@@ -23,7 +23,7 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
    - **Working files.** Files a successor would need go under the `data/…` path your brief names, committed with the stage. `/tmp`
      is RAM here and dies with the session.
    - **Long runs.** A run expected to exceed about fifteen minutes checkpoints and resumes exactly. Your record names the checkpoint's
-     path and the resume command (`CLAUDE.md` § Building).
+     path and the resume command (`RUNNING.md` § Building, whose checkpointing paragraph is the rule in full).
 
 3. **Quote statements verbatim; never paraphrase.** Every statement you hand on goes in a quotation with its source address, because
    a paraphrase can widen a statement, narrow it or empty it, and the reader cannot tell which. Paraphrases in briefs here have
@@ -52,7 +52,7 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
    - Your record is the path your brief names. Give it a heading **"Theorems this phase proved"**: one line per theorem, with its
      grade and its address (Kooshi, 2026-09-22). A job that proves nothing says so under the heading.
    - Your exact checks go in `tools/<job-prefix>_*.py`. Plant a fault in each and watch it fire: a plant that cannot fire tests
-     nothing (G21).
+     nothing (G21). Before you build one, read `RUNNING.md` § Make the gate fail, and watch it fail.
    - Never edit a frozen tool (`tools/fs58_*`, `tools/fs61_*`, `tools/fs66_*`, `tools/fs73_*check*.py`, `tools/fs73v2_check.py`,
      `data/fs73/coxeter-c3/certcheck.py`) or another job's tools.
    - **One writer per file.** `CLAUDE.md` § The pipeline names the files Keryx alone writes; unless your brief makes you the
@@ -69,8 +69,10 @@ its own clock, queue and follow-on-job lines on top (§5 there). Delete a rule o
      On exit 75, wait ten minutes and retry; never raise a cap; after three refusals, report BLOCKED.
    - Never run `lake build`, bare or named. Lean builds go through `./scripts/build.sh` under a slot, in the kernel lane only.
    - Read every exit status directly, never through a pipe, and never chain a commit after a gate with `;`.
-   - Stop a process by its PID or process group, never by matching a command line (`CLAUDE.md` § Building).
+   - Stop a process by its PID or process group, never by matching a command line (`RUNNING.md` § Building).
    - On any unexplained crash of any process, halt and report. Do not diagnose or retry.
+   - `RUNNING.md` is this rule's long form: the toolchain, how to run a process, and how to build a check that fails loudly. Read it
+     before any run over about fifteen minutes and before building any tool.
 
 10. **Reading.** Grep `BIBLIOGRAPHY.md` by arXiv id and Zbl number, and look in `~/source/library/`, before calling a paper unheld or
     fetching it (G50). Record a reading status per section: an abstract is not a reading, and "recalled, not read" is said where it is

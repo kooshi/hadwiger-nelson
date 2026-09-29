@@ -9,7 +9,7 @@ nothing below is filed as a change except § 1. Every number is read from the ad
 
 Moved verbatim to `plans/GROKKINGS-WORKFLOW.md` (23,290 bytes), each leaving in `CLAUDE.md` its number, title, original status tag and
 one line naming where its content is now carried: G30, G46, G49, G50, G51, G67, G72, and the paragraph that opened § Grokkings.
-`CLAUDE.md` went from 295,069 to 275,019 bytes. `tools/claude_md_fact_audit.py` now joins the new file to its corpus (`--retired`);
+`CLAUDE.md` went from 295,069 to 274,901 bytes. `tools/claude_md_fact_audit.py` now joins the new file to its corpus (`--retired`);
 the audit passes with 0 failures, and `--dupes` reads 20 repeated runs. One operative clause was added where it had no workflow home:
 G50's "read every held-but-unread paper whose title touches the milestone" is now in `.claude/agents/ephodos.md` §PA.
 
@@ -78,3 +78,21 @@ Moving the first three would take about 40 KB (roughly 10k tokens) off every lau
 - **My close inventories** are the heaviest accounting in the pipeline (§4). They are mine to shorten.
 - **The test drive's own record** (`plans/WORKFLOW3-test-drive.md`) holds thirteen pending edits to the lane files, none filed. Filing
   the ones that remove work (drafts name their slot; the atlas facts generated, not drafted) shrinks the close.
+
+## 7. Done at Kooshi's word (2026-09-28)
+
+Kooshi: "Do #2, #3, #4. I like #1 and #5, having a central home for the most important facts. You can, however, reduce the in-CLAUDE
+milestone list to the top 10, with just a count of outstanding after that instead of a list." (The numbers are the report's: #2 the
+re-grokking walk, #3 the process sections, #4 the counts and predictions; #1, one home per theorem, and #5, the front page, are declined.)
+
+| item | what changed | where |
+|---|---|---|
+| #2 | §G writes a reason only for an entry that bears or is falsifiable, lists the rest by number, walks the ledger rows the stub cites and those the last close filed, and is walked again when the milestone's object changes; Keryx scores the *bears* lines and the silent list | `.claude/agents/ephodos.md` § The opening job §G and § A derivation job; `.claude/agents/debruijn.md` (kernel §G); `.claude/output-styles/keryx.md` step 4 |
+| #3 | § Toolchain (all but the search ban), § Building and § Make the gate fail moved verbatim to `RUNNING.md` (40,089 bytes), the two PROTECTED paragraphs with their tags; each heading stays in `CLAUDE.md` with a pointer. De Bruijn reads it in full at launch; a derivation job reads its gate section before building a check; every brief for a job that runs processes or builds a checker names it; standing rules 2, 7 and 9 point to it | `RUNNING.md`; `CLAUDE.md` § Toolchain, § Building, § The gate; `plans/STANDING-RULES.md`; the three lane files; `scripts/build.sh`, `scripts/vacuity.sh` messages |
+| #4 | no running count of any method rule (a close records only a counterexample to G72 or G79); a prediction is registered only where its outcome decides what runs next, and names that decision | `.claude/agents/ephodos.md` (the plan proper; the close's sweeps); `CLAUDE.md` G79's killing test |
+| the table | `CLAUDE.md` § Paths forward keeps ranks 1–10 and one row, "11–69 — 59 more open stubs"; Keryx copies the top ten at each close. The Proof Atlas's two citations of ranks 11 and 16 now cite the same rows of `plans/FRONTIER-STUBS.md` | `CLAUDE.md`; `.claude/output-styles/keryx.md` step 7; `tools/viz_proof_atlas_facts.py` |
+
+`CLAUDE.md`: 274,901 → 229,585 bytes. Checks: `tools/claude_md_fact_audit.py` (now joining `RUNNING.md`, the retired grokkings and, for the
+loss audit only, `plans/FRONTIER-STUBS.md`; two superseded range labels recorded with their reasons) passes with 0 failures and its
+self-test passes; `--dupes` 21 runs; `scripts/identities.py check` PASS; `tools/bib_audit.py` exit 0; the atlas checker 187 checked,
+0 failed, and its self-test passes; `scripts/gate_report.py` still reads the gate's nine counts and the trust ledger's two.

@@ -24,6 +24,7 @@ NOTATION = {"file": "CLAUDE.md", "section": "## Notation"}
 LGC = {"file": "CLAUDE.md", "section": "### The local–global conjecture"}
 PRIORS = {"file": "CLAUDE.md", "section": "### Counter-priors — read before pricing anything"}
 PF = lambda n: {"file": "CLAUDE.md", "section": "### Paths forward, ranked", "row": str(n)}  # noqa: E731
+FSR = lambda n: {"file": "plans/FRONTIER-STUBS.md", "section": "## Ranked stubs", "row": str(n)}  # noqa: E731  CLAUDE.md keeps the top ten
 INTERVAL = {"file": "Proofs/HadwigerNelson/Instances/Interval.lean"}
 INV = lambda n: {"file": "plans/FS112-close-inventory.md", "row": str(n)}                    # noqa: E731
 NTAB = lambda k: {"file": "plans/FS112-N-proof.md", "row": k}                                # noqa: E731
@@ -355,9 +356,9 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
               "at [hand]", state="answered", src=LGC, quote="row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
-  "shape a six certificate must take (FS-80).", PF(11), "averaged certificates at five colours on the real plane (FS-104's route (c))",
+  "shape a six certificate must take (FS-80).", FSR(11), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
   (STUB("STUB-window-frequency-certificate.md"), "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)"),
-  at=(80, 320), sector="six-low", words=(PF(11), "soft as to success"))
+  at=(80, 320), sector="six-low", words=(FSR(11), "soft as to success"))
 N("R125", "ℚ(√167) at six = plane + PL", "held", "Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product "
   "locality at 23 and 43 — a reduction, not a bound.", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
   "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)", at=(92, 390), sector="six-low")
@@ -366,9 +367,9 @@ N("PL", "PL∃(23, 43)", "question", "Product locality at the places 23 and 43: 
   "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6", (L(125), "Not claimed: anything about six."),
   at=(106, 390), sector="six-low")
 N("FS59", "χ(ℚ(√167)²) ≥ 6", "conclusion", "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the "
-  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", PF(16),
-  "given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)",
-  (PF(16), "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)"),
+  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", FSR(16),
+  "six at ℚ(√167) is rung D plus PL_∃(23, 43)",
+  (FSR(16), "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)"),
   at=(100, 300), sector="six-low")
 N("R119", "χ(ℚ(√167)²) ≥ 4, kernel", "held", "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of "
   "the widest gap.", L(119), "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
@@ -496,12 +497,12 @@ E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "6"}
 # toward six from below
 E("FS104", "LB6", "rests", PF(3), "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)", label="its YES, given MR")
 E("FS104", "FS44", "context", PF(3), "a NO (a CP five-colouring) gives χ(ℝ²) = 5 with no MR", label="its NO is this")
-E("FS80", "FS104", "rests", PF(11), "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR")
+E("FS80", "FS104", "rests", FSR(11), "a certificate gives χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130), hence χ(ℝ²) ≥ 6 given MR (row 128)")
 E("R129", "LB6", "blocks", L(129), "1/α_loc ≤ 4.36: that route never gives six", label="one class at a time never gives six")
 E("R125", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("FS104", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("PL", "FS59", "rests", L(125), "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6")
-E("FS59", "LB6", "rests", PF(16), "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104")
+E("FS59", "LB6", "rests", FSR(16), "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6")
 E("SUB", "LB6", "rests", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
   "The plane over any real subfield needs at most as many colours as the plane.", faint=True, bus=True)
 E("R119", "FS59", "context", L(119), "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six "

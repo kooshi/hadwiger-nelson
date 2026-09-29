@@ -344,7 +344,7 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 
 ### Paths forward, ranked
 
-*A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
+*A summary of `plans/FRONTIER-STUBS.md`, which is authoritative (the top ten here, and a count of the rest): every row there is a full stub with its
 bearing on the answer stated honestly. Kooshi picks; the default is the top.*
 
 **Open milestones, in order.** **None is open.** FS-114, the unit-arc question (`plans/STUB-global-step.md`), and FS-111, the cone scale
@@ -354,7 +354,7 @@ M's first half, opening with R1's band question (`plans/POROS-2026-09-28-close-r
 second half, is the alternative, and a second slot if one is staffed. The finite-witness-free week runs to 2026-10-01 (§ Toolchain). **M63** stands at
 phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earlier close: `plans/FRONTIER-STUBS.md`'s closed list.
 
-**Ranked stubs** (one rank per row, each bearing stated against the answer; the cells here are short, and `plans/FRONTIER-STUBS.md` is authoritative, with the full text, the re-rank history (the last, `plans/RERANK-2026-09-27.md`) and a solver column marking what the finite-witness-free week can run):
+**Ranked stubs** (the top ten, one rank per row, each bearing stated against the answer; the cells here are short, and `plans/FRONTIER-STUBS.md` is authoritative, with the full text, the re-rank history (the last, `plans/RERANK-2026-09-27.md`) and a solver column marking what the finite-witness-free week can run):
 
 | rank | stub | the question | bearing on the answer |
 |---|---|---|---|
@@ -368,26 +368,7 @@ phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. Every earl
 | 8 | **FS-109 the hole dial** — `plans/STUB-hole-dial.md` (post-ban) | trace `1 − µ₆^per(ε)` as `ε → 0` along eroded `[Parts2020c]` tilings and W's families; C-VOID's thin-hole test in the ban; a second dial, `[Soifer1994X6]`'s X₆ | link 5 as a dial on row 131's question: flat is R's evidence, falling W's; decides nothing alone |
 | 9 | **FS-108 the print residuals of the regular half** — `plans/STUB-regular-half-residuals.md` | four of five answered (row 134; `[Townsend2005]` is the manuscript, (c) unargued); left: Townsend's (c) in full | link 4's print holes, now Townsend's only: none on the answer (row 131), but under FS-121's route at five (AE-MAP6) |
 | 10 | **FS-44 the fifth colour** — `plans/STUB-fifth-colour-structure.md` | the shape of a CP five-colouring of the plane, row 131 at `k = 5` (`lim µ₅(ε) = 1`) — FS-104's mirror; first, where the fifth colour may go over a 6-open field | decisive if it lands: `χ(ℝ²) = 5` with no MR (link 2); link 5's *yes* one colour down; soft as to truth (the bold form predicts no) |
-| 11 | **FS-80 a window-frequency certificate** — `plans/STUB-window-frequency-certificate.md` | averaged certificates at five colours on the real plane (FS-104's route (c)), shape in-ban, LP post-ban; at four colours, ℚ(√167)'s survivors (row 80, G73) | link 3's shape for six, derived; soft as to success: a certificate gives `χ_CP(ℝ²) ≥ 6`, so `χ(ℝ²) ≥ 6` given MR — the lower half, not the answer |
-| 12 | **FS-113 MR in full, in Lean** — `plans/STUB-mr-in-lean.md` | row 120's MR(F) in `Proofs/` with no purchase: PE-2 (EL2021 Thm 1.3, FS105-DED), EF_F⁺, the composition; Mathlib lacks the entropy and solenoid layers (FS-105 §K) | none on deciding; publishing every MR row, and seven through link 1 (row 128), needs it; FS-101's precondition |
-| 13 | **FS-101 the main clause through five in the kernel** — `plans/STUB-main-clause-five-kernel.md` | row 127 landed; next `InvariantMeasureOnClosed` as Markov–Kakutani, the collapse over named hypotheses (Kooshi's call), the upper half via row 57's gap, Herglotz–Bochner | none on deciding; link 1 in the kernel, needed by any lower bound above five proved through MR (MR a named hypothesis; MR in full is FS-113's) |
-| 14 | **FS-62 six is not a value** — `plans/STUB-six-is-not-a-value.md` | S's exact form given MR (row 128): not a finite family; the gate on the image of `F ↦ χ(F²)`, an hour, unrun | a frame, soft as to truth; given MR, S ⟹ `χ(ℝ²) ≠ 6`, never deciding; one of the old goals the aim replaced |
-| 15 | **FS-67 colourings of gap-free products** — `plans/STUB-tight-product-colourings.md` | product locality in CP form at the non-mixing places, `k = 5, 6`; `PL_∃(23, 43)` its instance; left from its close: three colours, a Hoffman-tight counterexample, Zhang's exception | none: PL arises only at fields with a non-6-thick place, never where the field is the plane (row 128); derived for S and for six at ℚ(√167) (row 125); soft as to truth |
-| 16 | **FS-59 ℚ(√167): six colours** — `plans/STUB-four-colours-167.md` (its head block first) | `PL_∃(23, 43)` and the wall at 23 and 43: given MR, six at ℚ(√167) is `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (row 125); five answered at [hand] (row 123) | through the plane only: six there gives `χ(ℝ²) ≥ 6`, never cheaper than FS-104; its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119) |
-| 17 | **FS-96 windows at the non-mixing places** — `plans/STUB-windows-five-nonmixing.md` | `PL_∃(23, 43)`'s negation at five: the places `{∞, 23, 43}` modulo SP; GAP-2 is FS-67's question in CP form | none unless its colouring reads the real place alone (then FS-44's, `χ(ℝ²) = 5`); speculative; given MR, exactly whether ℚ(√167)'s plane is five-colourable (row 125) |
-| 18 | **FS-64 the adelic window colouring** — `plans/STUB-adelic-window-colouring.md` | a cut-and-project colouring on the S-integers of F in ℝ² × ℝ² × ℚ₃²: can it beat 6 over ℚ(√167)? "Six below HN" (R1); four-colour windows, characters and finite-place spectra closed | none on the answer (it bounds a field); the only ceiling instrument that could decide six at a field, derived as one way six occurs if HN = 7; soft (the conjecture predicts no) |
-| 19 | **FS-63 the crystallography gate** — `plans/STUB-moire-coincidence.md` | the aperiodic-order gate for `Y` with `p`-adic factors: a prior-art session in the vocabulary of coincidence site lattices, Moiré superlattices and aperiodic order (G62) | none: its cluster is product locality, which the direction never meets; classification theorems or a rich negative, and FS-20's second vocabulary |
-| 20 | **FS-49 one gadget for six** — `plans/STUB-distance-two-gadget.md` | route D: one five-colour virtual edge at distance 2 in a real F ⊇ K, on `[ExooIsmailescu2019]`'s host (G26, G55); the arena's sweep found none (G31) | if it lands, `χ(ℝ²) ≥ 6` with no MR, narrowing the answer to {6, 7}; given MR it is FS-104's question in finite form; a finite witness is out as a route (Kooshi) |
-| 21 | **FS-102 the fallback write-up** — `plans/STUB-writeup-main-clause-five.md` | rows 120–123 at [hand], the lead (rows 128–130) Kooshi's call; `[Johnson2000]`, `[Johnson2006]` read, not found; MR cited as EL2021 Thm 1.3 with FS-105's deduction | none; by the publication rule it waits on its rows' formalization in Lean in full |
-| 22 | **FS-69 the all-levels certificate at 43** — `plans/STUB-certificate-at-43.md` | five at every level of 43 (FS-59's necessary condition) and a window member; post-ban; five colours need `U < 369.8`, six `U < 308.17` | none on the answer (43 bounds the fields that use it); "43 at depth" in six at ℚ(√167) (row 125) |
-| 23 | **FS-57 the fractional wall** — `plans/STUB-fractional-wall.md` | refuse six by `α(U_Q) < Q²/6` at 47 (needs 368 against the certified 371) and `U₆₄` (682 against Hoffman 768); post-ban | none on `χ(ℝ²)`: the wall is `L(F) ≠ 6`, and row 128's fields have no window member |
-| 24 | **FS-100 one missing lemma for three fields** — `plans/STUB-measure-rigidity-three-fields.md` | MR proved (row 120, hardened at FS-105); rows 121–126 at [hand]; left: TR-ROT (row 126), C-4, row 100's exception fields, the complex place, the kernel port (FS-101) | none: MR is held at the fields link 1 uses (rows 120, 128), and its left items sit elsewhere |
-| 25 | **FS-65 an exact independence number for the window planes** — `plans/STUB-exact-independence-solver.md` | `α(Γ_q)` exactly at the window members; at 23 the question is integers — best set 87, six needs 89 | none on `χ(ℝ²)`; `α < ⌈q²/6⌉` closes a wall member, never opens one |
-| 26 | **FS-17 the first digit at 23** — `plans/STUB-first-digit-23.md` | is Γ₂₃ six- or seven-chromatic? `χ ∈ {6, 7, 8}` (eight in the kernel); six needs `α ≥ 89`, and the best set found is 87 | none on the answer; at the field, a six-colouring makes `χ(ℚ(√167)²) ≤ 6` a theorem, a refusal puts its local bound at 7 unless 43 is six-chromatic |
-| 27 | **FS-55 the antipodal conjecture** — `plans/STUB-antipodal-colouring.md` | does every plane have an optimal colouring symmetric under z ↦ −z up to a colour involution? True at all four planes where χ is known | none on the answer; medium-high as an instrument on the finite planes |
-| 28 | **FS-78 the five-colour rigidity table** — `plans/STUB-five-colour-rigidity-table.md` | G68/G69's screens at five colours over the 6-open fields: 25 of K(√7)(i)'s 28 quartic CM subfields loose for free, two survivors, every rank ≥ 6 lattice unscreened | none beyond FS-49's: where a five-colour compulsion, a finite six-graph's input, can live |
-| 29 | **FS-42 5-tight quotients of 6-open planes** — `plans/STUB-tight-quotients.md` | a five-colourable, 5-tight Cayley quotient of a 6-open field's plane (G54, G48): the one residue route to a five-colour forced pair row 66 leaves | none beyond FS-49's; medium-low, a reading |
-| 30–69 | FS-43, FS-45, FS-39, FS-75, FS-90, FS-98, FS-76, FS-95, FS-87, FS-92, FS-68, FS-47, FS-60, FS-46, FS-48, FS-72, FS-77, FS-88, FS-93, FS-94, FS-99, FS-41, FS-51, FS-52, FS-20, FS-2, FS-13, FS-12, FS-19, FS-37, FS-27, FS-23, FS-22, FS-30, FS-35, FS-8, FS-29, FS-9, FS-10, FS-5 — in rank order; their rows are `plans/FRONTIER-STUBS.md`'s alone | … | … |
+| 11–69 | 59 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
 
 **Closed as directions** (reasons in the grokkings): a five-colouring of ℚ(√167)'s plane from `UD(ℤ/529, 2)`, at any level (row 75); the six-level design target over a sealed field (FS-6) and
 the residue-allowed distances (FS-16), both dead by theorem (row 66, G48); the cell family, in both directions
@@ -1434,7 +1415,7 @@ unit-vector group (G80), with no forcer; and where every stable place mixes, the
   of the excluded formats.*
 * **G77 — A character colouring of a field plane is local in the existence sense only: the value-set profile peels. [hand, two independent derivations (rows 98, 100), given band rigidity at every band]** A band character of `R_F` is torsion plus archimedean; its archimedean part is zero at each complex place and an interval about 0 at each real one; the torsion part factors over the stable places (`R_F = O′`); and when symmetric subsets of the circle add up inside the band, **some** one of them already lies in it (the peeling lemma). So a band `k`-character exists iff a residue target at some level has one, and `χ_char(F²)` — `[BarajasSerra2008]`'s regular chromatic number — is a minimum over targets. **Existence, not classification:** CLG does not say a given character colouring comes from one place; that is proved at three colours (no mixing, row 99) and at HD1's fields (Lemma D), and open elsewhere (FS-92). On a finite plane a character colouring is a regular colouring of a circulant, weaker than a colouring (`χ_char(Γ₁₁) = 6 > 5`) and than a line-periodic one (`χ_char(Γ₄₃) = 9 > 8`). *Do: when a question is about character colourings of a field plane, compute each residue target's `χ_char` by its trace sets below Weil's threshold and take the minimum — no lattice, no solver; state the result as existence, and name the extra input (no mixing, Lemma D) before saying every character colouring is local. Nothing kills it but a flaw in the derivation; it forbids a character colouring with fewer than `L(F)` colours at `k ≤ 5` and over quadratic fields. Killing test of the reading that CLG-g's exception is never realised: a band 6- or 7-character above level one of a `U₆₄` tower, or at level `2e + 1` above 3 at `q = 27`.*
 * **G78 — Rank-one inheritance is "countable ⟹ finite", and Kempe moves cannot see a frozen wall. [hand, two derivations (row 108); tools exact on named sets; one reading]** The four-colourings of `G(ℤ, D)` form a one-dimensional SFT; all phases rigid is zero entropy, and R2 says such a shift is finite — equivalently `P₄ = F₄`, equivalently no heteroclinic colouring has an all-rigid completion `X₄(D_c(M))`. In an all-rigid shift the periodic points are gap-free with two-sided strands, and Kempe moves never bring a wall point's two tails into one labelled phase; at frozen tails Kempe moves only relabel, so the frozen part of R2 needs an invariant no Kempe argument supplies. *Reading:* all-rigid shifts are Kempe-rich (`{2,6,11,13,14}`: 94 phases, none frozen). *Do: when a rank-one colouring question resists, restate it on single colourings and split it at frozen tails before choosing a Kempe route. Killing test of the reading: an all-rigid `X₄(D)` with a frozen rigid point. Nothing kills the equivalences; they forbid a Kempe proof of the frozen case.*
-* **G79 — A wall arrives as a counterexample's invariant; the breakthroughs came from an example's. [method; Kooshi's wording, 2026-09-25; new, untested]** *"This is an interesting grokking too: walls often show up as 'the (impossible?) counter-example invariant' and we have had a successful breakthrough when looking for the 'example invariant'."* A no-go says what a counterexample must carry, a class that may be empty: rows 96, 113; G22; G48, G31; G57. What moved a question was an invariant every actual solution carries: G71 and G74's slope, G75's eigen-equation, G76's locality, row 95. It is G72's dual: G72 asks about every solution; G79 says which invariant to hunt once a wall stands. *Do: when a wall hands back a no-go ("a counterexample would need X"), flip the wanted poster — ask what every solution the problem already has must carry, and derive that before sharpening the no-go. Killing test: at each derivation close, record whether the result came from an example invariant or from a counterexample invariant alone; a breakthrough of the second kind, or flips that keep producing nothing, make the rule ceremony. Its record, milestone by milestone: `plans/GROKKING-INSTANCES.md` §G79 (FS-106: the headline from an example invariant, the walls from counterexample invariants).*
+* **G79 — A wall arrives as a counterexample's invariant; the breakthroughs came from an example's. [method; Kooshi's wording, 2026-09-25; new, untested]** *"This is an interesting grokking too: walls often show up as 'the (impossible?) counter-example invariant' and we have had a successful breakthrough when looking for the 'example invariant'."* A no-go says what a counterexample must carry, a class that may be empty: rows 96, 113; G22; G48, G31; G57. What moved a question was an invariant every actual solution carries: G71 and G74's slope, G75's eigen-equation, G76's locality, row 95. It is G72's dual: G72 asks about every solution; G79 says which invariant to hunt once a wall stands. *Do: when a wall hands back a no-go ("a counterexample would need X"), flip the wanted poster — ask what every solution the problem already has must carry, and derive that before sharpening the no-go. Killing test: a breakthrough that came from a counterexample invariant alone, or flips that keep producing nothing, make the rule ceremony; a close records only such a counterexample and keeps no running count (2026-09-28). Its record to that date: `plans/GROKKING-INSTANCES.md` §G79 (FS-106: the headline from an example invariant, the walls from counterexample invariants).*
 * **G80 — Infinite rank is the resource: the unit-vector group is large enough for rigidity that no finitely generated piece has. [hand theorem + reading]**
   `U_F` has polynomially many elements of bounded height; no finitely generated subgroup does, and none acts irreducibly on `R̂` (row 118). The classical
   ×2×3 question lives at finite rank; `U` sidesteps it (row 120): positive entropy is Einsiedler–Lindenstrauss (their Thm 1.3) on each finitely generated piece, all of it at finite places since `U` is isometric at every archimedean one, zero
@@ -1507,7 +1488,7 @@ check` holds each copy to its skill, and the four cores are hidden from the mode
 identity. Every arrow between lanes passes through Keryx, and only Keryx launches agents (§ Delegation — one level deep). Every
 brief carries `plans/STANDING-RULES.md`. `WORKFLOW.md`, loaded by no one, is the index for the old workflow's step numbers.
 
-**One writer per file.** Keryx alone writes this file, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`,
+**One writer per file.** Keryx alone writes this file, `LEDGER.md`, `RUNNING.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`, `plans/GROKKINGS-WORKFLOW.md`,
 `BIBLIOGRAPHY.md`, the close inventories, the frozen claim lists and `plans/STANDING-RULES.md`, filing the lanes' drafts verbatim.
 
 **Never write an open milestone's verdict, route or hunch into the auto-memory**: the harness gives its index to every agent at
@@ -1622,176 +1603,17 @@ publication gate — is the kernel lane's: `.claude/agents/debruijn.md` § Trust
 ## Toolchain
 
 The Lean toolchain — elan, the pin, the Arch build environment — is the kernel lane's: `.claude/agents/debruijn.md` §
-Toolchain — Lean. What follows binds every job.
-
-**The SAT solver.** The toolchain ships **`cadical`** (2.1.2, LRAT-capable) at `$(lean --print-prefix)/bin/cadical` — that command
-works only from inside the repository; elsewhere use the path under `~/.elan/toolchains/`. It is single-threaded: use
-`tools/portfolio.sh` (a configuration race) and colour-cube splits (one run per cube) to use the cores.
+Toolchain — Lean. The rest of the toolchain — the SAT solvers, what is installed, the symmetry-breaking checklist,
+Python's multiprocessing default, the two machines — is `RUNNING.md` § Toolchain (moved 2026-09-28), which every brief for a job that
+runs a solver, a build or a long process names. The ban below binds every job.
 
 **No search for a finite witness runs from 2026-09-24 to 2026-10-01** (Kooshi, at FS-81's close: *"ban SAT solvers for a week and see what we can do on algebra alone"*; its intent, *"to eliminate the crutch of feeling like we're accomplishing something by asking uncomputable problems for days at a time"*; the scope is the algebra-week advisor's, `plans/POROS-2026-09-24-algebra-week.md` §6.4, confirmed by Kooshi the same day). **Out:** SAT, MaxSAT and #SAT solvers, MILP/CP and local-search colourers, Θ relation trees and float Θ₄ finders, quotient-colouring searches, and lattice sweeps hunting survivors — FS-81's relation tree was no SAT solver and lost to a derived certificate exactly as SAT did. **In:** hand derivations; computer algebra and exact arithmetic (PARI, GAP, sympy); colourings given by formula; the Lean kernel; existing checkers on existing certificates; and an exact LP only when a derivation fixes its shape before it runs and its dual is read back as an identity, never as an escalating oracle. The line in one sentence: every certificate is derived and lives on the infinite object, never on a finite piece found by search. Every brief carries a **"would have searched here" log**: one line per move an agent would have made by search, and what it did instead. The solver column of `plans/FRONTIER-STUBS.md` marks which stubs the week can run.
 
-**What else is installed on the desktop** (inventory of 2026-09-21; Kooshi installs on request — *ask, with the reason*; verify with
-`command -v` before planning around any of it, and **a tool that is missing fails silently behind a pipe**: `/usr/bin/time` and `bc` were
-both absent until 2026-09-21 and turned three timed runs into non-runs that read like slow solvers):
-
-| kind | tools |
-|---|---|
-| SAT | `kissat` 4.0.4 (AUR; the strongest refuter), `cryptominisat5` 5.15, toolchain `cadical` 2.1.2; **PySAT** (`pysat` 1.9, system Python): `cadical103/153/195/300`, `glucose3/4/42`, `minisat22`, `maplechrono`, `maplecm`, `maplesat`, `mergesat3`, `lingeling`, `kissat404`, `cryptosat`, cardinality-aware `minicard`/`gluecard3/4` — four code bases in one process is the standing multi-solver recheck. **Not installed; build from source when wanted:** `march_cu` (lookahead cuber), `cake_lpr` (formally verified LRAT checker), `drat-trim`, BreakID |
-| optimisation | `scip` 10.1 (exact global optimisation, non-convex QCQP; open source). By `pip` into a venv: `pyscipopt`, and `gurobipy`, whose **size-limited licence stops at 2,000 variables or constraints** |
-| semidefinite | The symmetry-reduced moment relaxation and its exact certificate: `tools/fs66_b1_cert_make.py` + frozen `tools/fs66_b1_cert_check.py` (Python; no Julia needed to `n = 529`; costs in row 75's plan §R‴). SCS in `build/venv-sdp` (CPU), `build/venv-sdp-mkl`, and **`build/venv-sdp-gpu`** (GPU-indirect source build; keyword `linear_solver=`; 0.33 s/iteration at 83 on card A). `cvxpy`, `clarabel` by `pip`. **Julia 1.13** (`julia`): `SumOfSquares.jl` + `SymbolicWedderburn.jl` reduce a moment/SOS relaxation by its symmetry automatically — the step FS-50 did by hand — and `Clarabel`/`Hypatia` solve in `BigFloat`, which is what makes rounding to an exact certificate easy |
-| algebra | `gap` 4.16, `gp` (PARI 2.17; `nflist`), `dreadnaut` (nauty 2.9), `sympy` |
-| build, GPU | `cargo`/`rustc` 1.98 (the tabu finders `plane-colour`, `plane-independent` live in `~/source/descent-engine`, fields only — a ring `ℤ/p^r` is refused by design), `nvcc` (CUDA 13.4, `/opt/cuda/bin`), `gcc`, `clang`, `cmake`, `ninja`, `uv`, `pip`, `paru`; Python 3.14 with `numpy` 2.5, `scipy` 1.18 — **no `torch`, no `cupy`** |
-| shell | GNU `time` 1.10 at `/usr/bin/time`, `bc` — and `grep -E` here is `ugrep` (§ Searching) |
-
-**A pysat solver's interrupt is per back-end** (FS-79 phase 0): pysat's CaDiCaL back-ends ignore `interrupt()` — "Limited solve is
-currently unsupported by CaDiCaL" is raised inside the timer thread, so a Timer budget never fires and the solve runs unbounded. Bound a
-pysat CaDiCaL ask by a parent-enforced subprocess timeout (external kissat or cadical), or use a back-end that supports `solve_limited`.
-
-**Venvs and package depots live outside `build/`** when anything unrecoverable is in them (`build/` is scratch that agents clean); the three `venv-sdp*` are regenerable.
-
-**Break the symmetry before any (UN)SAT search, and treat an unbroken encoding's verdict as a measurement of the
-encoding** (Kooshi, 2026-09-15). These graphs are vertex- and arc-transitive with interchangeable colours, so a naive
-encoding asks the solver to re-derive the same contradiction once per symmetric copy. The checklist, cheapest first:
-1. **Pin a maximal clique.** The origin takes colour 0 (vertex-transitivity) and one neighbour takes colour 1
-   (arc-transitivity). **Check `ω` first, because it bounds what this can buy**: `ω(Γ_q) = 3` iff the
-   characteristic is 3 or 3 is a square in `𝔽_q`, else 2 (`[Krebs2022]`, verified here at 21 planes). Where `ω = 3` a
-   triangle pins three colours; where `ω = 2` — 7, 17, 19, 31, 43, 67, 79 among them — **an edge is all there is, and the
-   clique pin is therefore weak**.
-2. **Break the residual value symmetry, which the clique pin does not reach.** After pinning `k' ≤ ω` colours the
-   remaining `k − k'` are still freely interchangeable — `3! = 6` at `(17, 5)`. A precedence constraint **over the unpinned colours only** kills it: for each unpinned colour `c` above the first, `c` may appear at `v` only if `c − 1` appears strictly earlier (`¬x[v][c] ∨ ⋁_{u<v} x[u][c−1]`) — or put the pinned clique first in the vertex order. A chain that reaches down to a pinned colour, with the pinned vertices later in the order, forbids colourings no permutation repairs: an unsound encoding (FS81-T20, found by FS-81's modeling agent).
-   **Measured 2026-09-15: `(13, 5)` 251.09 s → 3.48 s, a 72× speedup, and `(17, 4)` 38.35 s → 11.55 s.** The 3.48 s
-   also reproduces M58's independently recorded 3.8 s for that instance, which is the control.
-3. **Then the cores:** `tools/portfolio.sh` for a configuration race, and cube-and-conquer for a hard instance — but
-   **price the cubes on a sample before committing** (M63 phase H2 priced 552 cubes before spending 20 core-hours).
-4. **Never report an `UNKNOWN` at a budget from an unbroken encoding as a fact about the graph.** It is G21's rule in
-   solver clothes: the verdict measures the enumeration, and an unbroken encoding's enumeration is `|Aut| × k!` times
-   larger than the question.
-
-
-**Python is 3.14, and its multiprocessing default changed.** On Linux the default start method is now
-`forkserver`, not `fork` (measured: 3.14.6), so a worker **re-imports the module** instead of inheriting the
-parent's memory, and state a parent leaves in a module-level global is **empty in the worker** — the symptom is
-a `KeyError` on a key the parent plainly holds, nowhere near the process model. Pass
-`mp_context=multiprocessing.get_context("fork")` (safe with no threads), or give the pool an `initializer` that
-rebuilds the state from picklable arguments, which also survives a platform without `fork`.
-
-**Two machines.** A desktop and a laptop (12 cores, 31 GB). The desktop has **16
-PHYSICAL cores, 32 threads** (2 per core), 64 MiB L3 in two instances, 128 GB RAM — `nproc` says **32** and
-that is the *thread* count. 32-way solving showed no *large* contention penalty (**12.6 cubes/min** against ~8 at sixteen workers), but per-cube times at
-ONE width vary as much as any width effect (105.1 s and 129.2 s at 32-way, 126.6 s at 16-way), so **the width effect is not
-distinguishable from run-to-run variation in this data**. More instances: `plans/GROKKING-INSTANCES.md` § Toolchain — Two machines.
-
-**Keep a PREDICTED throughput beside the measured one and reconcile them whenever they disagree**: a prediction that can be
-divided back out of a rate is a population check that runs itself — the answer to why writing a rule down does not install it (it caught a before/after comparison over two cube ranges
-of different difficulty — the cost model failed an arithmetic check). **Say physical cores when sizing memory-hungry work**; `nproc` disagreeing with a plan is the
-hardware moving — **ask which machine before treating a core or memory count as fact**, and ask to swap to the
-desktop when a step wants it (the SAT solving does). Timings compare only within one machine: per-operation
-ratios carry across, wall-clock totals and safe job counts do not. Measure in **CPU seconds (user + sys),
-minimum of three runs**, and name the machine beside any number.
-
 ### Building
 
-The Lean build — `./scripts/build.sh`, never `lake build`; `lake env lean`; the batch and the cap; generated modules and
-invalidation — is the kernel lane's: `.claude/agents/debruijn.md` § Building Lean. What follows binds every job that runs a process.
-
-**On any unexplained process crash, from any process: HALT and report to Kooshi immediately.** Do not
-diagnose, retry, or work past it — the 2026-08-02 filesystem event (kernel ext4 oopses, ~50 compiled modules lost) is what working past one looks like.
-**RAM is the discriminator; threads are not rationed** (Kooshi, 2026-09-24, replacing "one heavy job at a time", which was
-conservative and easy to enforce). Every thread can and should be used, jobs pinned to disjoint cores; RAM is rationed because
-exhausting it crashes the machine, against a global maximum of about 100 GB of the desktop's 125 GiB. **/tmp and swap are RAM here**
-(a tmpfs and zram): every agent's scratch directory holds RAM, so large outputs (over about 1 GiB) go to disk — `data/`, or under
-`~` — never to /tmp. **The enforcement is `scripts/slot.py`:** `scripts/slot.py --mem <GiB> [--cpus N] -- <cmd>` reserves RAM in a
-shared ledger, admitting the job only while the reservations stay within 90 GiB and MemAvailable keeps 25 GiB free; runs it under a
-hard `MemoryMax` cap with no swap, so an over-cap job is killed inside its own scope and never takes the machine; pins it to free
-cores, one thread per physical core first; and exits 75, loudly, if not admitted within `--wait` (default 1800 s). `--status` shows
-the ledger; `--self-test` plants an over-cap job and a full ledger and watches both refused. A job under about 2 GiB and 2 minutes
-may run without a slot; anything bigger or longer declares an honest `--mem`, since an under-declared job is killed by its cap. **A
-job that calls `systemd-run` itself escapes the slot's cap** (the new scope is a sibling, not a child), so a Lean build reserves and
-caps at the same number: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`. And `systemd-run` expands `$`
-in a command's arguments unless told `--expand-environment=no` (the wrapper passes it; `bash -c '… $$ …'` arrived as `$`). More instances: `plans/GROKKING-INSTANCES.md` § Building — RAM is the discriminator.
-
-**Every long-running phase checkpoints and resumes exactly** (Kooshi, 2026-08-26). **[PROTECTED — never compress, trim or
-paraphrase this paragraph; rewrite it only to add an instance (Kooshi, 2026-09-15).]** A run expected to exceed ~15 minutes
-persists its progress at natural acceptance points (a verdict, a wave, an accepted deletion, a solver's iterate) and resumes
-from that state after a kill; a long phase whose state lives only in a process's memory is a **bug, not a style choice** —
-on this hardware it is a bet against a demonstrated crash rate. The audit question at every phase design: *if this process
-dies at any instant, what does the relaunch redo?* — and the answer is written in the subplan, beside the checkpoint's path
-and the **resume command**, never discovered at the loss; a checkpoint nobody knows how to resume from is a file, not a
-recovery. The instances, each a clause of the rule:
-1. **The incident that minted it.** M51's iteration-3 halo shrink ran 19 hours with its state only in the parent (the cover
-   checkpointed per wave; the shrink saved only on completion); one worker died, the pool's `map` hung forever, and the
-   whole shrink was lost (M51 §R-INC5).
-2. **The checkpoint must not live where another agent is told to clean.** `build/` is regenerable scratch, and an agent
-   tidying up after itself deleted a tree under it on 2026-09-11 while a live job's only resume file sat in a sibling
-   directory (`build/m63d2/ckpt-hismove/`). Recoverable state one cleanup away from unrecoverable is not recoverable:
-   checkpoints live outside the scratch tree.
-3. **A wall is not a checkpoint, and a tool that cannot be interrupted is not a tool for a long run** (2026-09-15, FS-50).
-   Three semidefinite solves at 83 — 7.5 h, 4 h, and an implementer's 3 h 51 m — ran under `timeout` walls with the
-   solver's iterate in memory only, because the solver's off-the-shelf interface neither checkpoints nor resumes; the walls
-   fired or were about to, and **killing a `timeout` wrapper to lift its wall kills the child too** (GNU timeout 9.11 arms
-   `PR_SET_PDEATHSIG`; tested on `sleep`), so all three were lost with nothing on disk. The rule was in this file
-   the whole time; the runs were launched without asking its question. The repair: drive the solver through its own API in
-   warm-started chunks, the iterate saved after every chunk and one residual line per chunk (`tools/fplane_sdp_scs.py`),
-   never under a wall — and a process-model claim is tested on `sleep` before it is acted on or sent to anyone.
-
-**A run that blocks something is presumed killable** (Kooshi, 2026-09-12). **[PROTECTED — never compress, trim or
-paraphrase this paragraph; rewrite it only to add an instance (Kooshi, 2026-09-15).]** When a live job stands in the way
-of anything — an edit to a module it imports, a core another task needs, a fix it would invalidate — weigh
-**the value of the run against the value of what it blocks, and the default is to kill the run.** The burden
-of proof is on keeping it, never on stopping it. Because every long run checkpoints (above), **the cost of
-being wrong is the time to redo, never the result** — so weigh the cost of being wrong, not the hours
-already spent. Three shapes met in one night, each of which looked like a reason to wait and was not:
-- **The run is blocking its own replacement.** Two reductions spent hours on an operation a new engine did
-  186× faster, and `tools/` could not be edited while they held it open — so "wait for them to finish" made
-  the slow path self-perpetuating. Look for that circularity by name: *is the thing I am waiting on the
-  thing preventing the fix?* **Second instance, 2026-09-15 (FS-50), and this rule was on this page in full when it
-  happened:** four single-threaded semidefinite solves at 83, 3.4 s per iteration and a day to convergence, were kept
-  running while the timing of their replacement ran niced beside them — a threaded and a GPU linear-system backend of the
-  same solver, selectable the whole time by one keyword (`linear_solver=`) that had been misread the day before as
-  "unavailable in this wheel" because the wrong keyword was tried — and the product owner wrote "nothing else is runnable
-  until the measurements land". **Measuring the replacement is not a precondition for stopping the run**: with
-  checkpoints the redo is minutes on the fast path, so the runs are killed at their next checkpoint and relaunched on
-  whatever the measurement names; the two with no checkpoint on disk yet forfeited about 1,800 and 550 iterations of a
-  reading the surviving run's chunk lines already gave. The shape to recognise: *the measurement I am waiting on is the
-  measurement of the thing that replaces what I am protecting.*
-- **The run is producing records under code you are about to fix.** Finishing banks results from the broken
-  version and forces the redo anyway — and those records are the ones a later reader trusts.
-- **The fix makes the redo cheaper than the run being protected.** Then waiting costs twice.
-
-Two obligations when you do it. **Capture the run's state into the record before signalling** — a verdict
-written only at `finish()` is lost, and the log is not the record. And **name what the kill forfeits, out
-loud**: one such kill cost a registered out-of-sample prediction, and a forfeited instrument must not
-disappear quietly merely because the decision was otherwise right.
-
-**Kill by PID or process group, never by matching a command line.** `pkill -f <pattern>` matches the shell that runs it
-and every other process whose command line mentions the pattern — including another agent's monitor. Sixth recorded
-instance 2026-09-13 (FS-38 phase T): it killed the engineer's own level-7 run at 11,000 of 16,383 asks and the advisor's
-watcher in the same second. `setsid` the job, write its pgid to a file, signal that. **And the pid you hold may not be
-the process you mean** (2026-09-15, FS-53 A0.3): `nohup <binary> … &` followed by `$!` reports an intermediate **shell**
-in this harness, not the binary — reproduced deliberately on `sleep`, where `$!` read 3469129 and the binary was its
-child 3469131. Killing that pid leaves the binary running, re-parented, still writing its `--out`; the engineer found it
-only because `git status` showed a **committed** artifact modified after the commit. **A kill is verified by what stopped
-changing, never by the exit status of the kill**: after signalling, confirm by effect — no process of that name in `ps`,
-and the file's digest identical across ten seconds. Seventh to ninth instances: `plans/GROKKING-INSTANCES.md` § Building. **The rule in one line: verify a kill against the thing you wanted stopped — the named
-pid absent from `ps`, and the artifact it was writing static across ten seconds — never against group
-membership, and never through a pattern that can match the killing shell.** Both checks are two commands
-and both would have fired here. **A hand-rolled scan of `/proc/*/cmdline` is `pkill -f` in a
-different costume** (2026-09-15, FS-53 phase B): an agent stopping one solve matched its own pattern in the command line
-of the shell running the scan and killed its own process group. Nothing was lost — the certificate was already filed —
-but the repair is the one to copy: find a process by the **inode of the log file it holds open**, which cannot match a
-command line.
-
-**A pipe can kill the producer, and `| tail` can hide that it did.** Same session: a mutation harness run as
-`./plant.sh … | head -6` died of `SIGPIPE` when `head` closed the pipe — **before its `git checkout` restore** — leaving
-a planted fault in the tree, and the verification that should have caught it was `cargo nextest run | tail -2`, whose
-exit status is `tail`'s and therefore always zero. The plant reached a commit. Two rules, both already here in other
-costumes: a command whose *cleanup* matters is never piped into `head`, and a gate's exit status is read from the gate,
-never through a pipeline (`set -o pipefail`, or capture to a file and read it).
-
-**Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so a live process resumes
-mid-token — it killed a 46-minute `lean4checker` run at M07 with `line 110: ull-library: command not found`, a message that
-looks like corruption and is nothing of the kind. Launch long runs from a snapshot copy (`cp scripts/x.sh
-build/x-snapshot.sh`; `build/` is gitignored).
+The rules for running any process here — a halt on any unexplained crash, RAM as the discriminator and `scripts/slot.py`, the two
+**PROTECTED** paragraphs on checkpointing and on killable runs, kills by PID, pipes, and running scripts — are `RUNNING.md` § Building,
+moved there verbatim with their tags at Kooshi's word (2026-09-28). The ones every job needs are `plans/STANDING-RULES.md` rule 9.
 
 ### The kernel's cost model
 
@@ -1828,218 +1650,5 @@ What follows binds every mind that builds an instrument, not only the kernel lan
 
 ### Make the gate fail, and watch it fail
 
-**Run every check's negative control at every milestone.** Break the thing it guards on purpose, confirm it
-goes red and names the culprit, then put it back. A check is not known to work until it has been seen to
-fail.
-
-Every check that has failed here failed the same way: **it reported nothing when it could not run** — a
-comparison of two purchase ledgers never actually performed; an audit that aborted under `set -e` with no output
-and read as a pass through a pipe; a mutation rig that re-read a stale file and scored it as a pass; negative
-controls the instrument could not see. A trust receipt that fails open is worse than none, because it is
-believed. So make a check's failure path louder than its success path, never let a shell pipeline swallow an
-exit status the gate depends on, and give every discriminating claim a partner that goes red — a certificate
-filed against the wrong problem, a vertex moved off the unit circle, a satisfiable formula handed to the checker.
-
-**The unifying rule, from nine instruments that broke inside one phase** (M63 phase C, 2026-09-11; eight
-failed by silence, one by false alarm): **every check needs a positive signal for the thing that did not
-happen.** A wall that could not fire, an exception swallowed in a timer thread, a control asking the same
-question twice, a pid file catching a wrapper twice, a silent forty-minute search, a control announcing a
-refutation from an index mismatch, a trust receipt returning a benign verdict while checking nothing, a `grep`
-that killed its own shell, a four-hour deadline armed as an exit-waiter — each quiet exactly when it had
-something to report, because each reacted to an event instead of asserting an absence, and **an exit-waiter can
-tell you a thing has ended, never that it is late.**
-
-**A waiter whose success condition is a file that a GOOD outcome prevents from existing** (2026-09-12). A
-sweep dumped its residual-candidate file only when the survivor list was non-empty; the count reached zero, the
-file never appeared, and every waiter on it read like a hung run. Its sibling monitor had the same defect in the
-other costume — a `pgrep -f` liveness check that matched its own command line, so the process-gone branch could
-never fire. **Arm a waiter on a file the SUCCESS path always writes**, even if that file says "nothing found".
-
-**And a waiter's condition must be FALSE at the moment you arm it — check that, not just the condition** (2026-09-15,
-FS-53 K1). A wait-for-the-build loop watching for a line beginning `==> build:` fired **immediately**, printing
-"BUILD FINISHED" at batch 140 of 172, because `scripts/build.sh` prints exactly that as its *first* output. A waiter
-whose condition already holds at launch cannot tell you anything, and **it fails in the direction that looks like
-success** — the implementer caught it only because the rebuilt-module count came back zero. One line before arming:
-evaluate the condition and assert it is false. **Second instance, 2026-09-17, and the mechanism is different: the condition was
-vacuous, not already-satisfied.** A waiter armed as `until ! pgrep -u $USER -x python3 -f "valueset.py 3"` fired in the same second,
-because `-x` matches the process **name** exactly and, combined with `-f`, matched nothing at all — so "the job is gone" was true at
-arming while the job had six minutes left. **A predicate that can never match reads exactly like a predicate that is satisfied**, and
-both fail toward "done". The one-line guard covers both: before arming, evaluate the condition and assert it is false — here that
-printed `pid=` empty, which is the tell. The repair used the PID directly (`while kill -0 <pid>`), which cannot be vacuous.
-**Third instance, same session, and it is `pgrep -f` self-match wearing a waiter's costume:** `while pgrep -u $USER -f "fq_chi\.py
-[23] "; do sleep 15; done` can **never** exit, because the shell running the loop carries that pattern in its own command line and
-so matches itself forever. The self-match rule's eight recorded instances (§ Building; the eighth in `plans/GROKKING-INSTANCES.md`) are all *kills*; in a waiter's **condition**
-the same bug fails in the opposite direction — not a wrong process killed, but a wait that never ends and looks exactly like a job
-that never finished. **So the rule is not "don't pkill -f", it is "never let a pattern that can match the matching shell decide
-anything"** — a kill, a wait, or a liveness check. PIDs cannot self-match; patterns always can. Arm a waiter on the live job's pid, and re-arm it whenever the job it watches is replaced (its fourth instance: `plans/GROKKING-INSTANCES.md` § Make the gate fail).
-
-**And the rule the one above does not reach: state the uninformative outcome and confirm it is REACHABLE,
-before believing a control's pass or proposing a discriminator.** "Break it and watch it go red" assumes the
-break can fire. Twice in one evening it could not (M63 phase E, 2026-09-11), the same error with opposite
-signs: a planted fault that could never fire (a target loosened in the direction the search ignores) and a
-discriminator that could never discriminate (two attributions it could not separate). Both passed review; both
-were found by opening the module. **A control whose failure mode is unreachable has not been tested by
-passing** — it is indistinguishable from one that works. The paired form, measured the same evening: seven
-errors between two readers, four the engineer's and three the advisor's, every one found by reading code rather
-than by arguing, because each asked the right question of the other's instrument and never of their own.
-
-**Pre-decide how you will respond to your own gate failing — before it fails, on someone else's number.**
-Measured 2026-09-11: an engineer's pre-registered comparator went red on its own integration, and the honest
-diagnosis was exactly the one a motivated person would reach for. It did not widen the comparator, because it
-had already reasoned one commit earlier, on a different planted fault, that **a check you tune until it agrees
-with you has stopped being a check** — sequencing, not virtue, and cheap: settle the policy while the number
-under dispute is not yours.
-
-**And when you replace a broad instrument with a sharp one, you lose coverage you were not measuring.** A
-whole-run wall-clock test was traded for a six-point component measurement that established a cost law's
-*shape* by construction — strictly better on what it measures, and blind to any cost outside the component. A
-second cost of the same shape, hiding in a progress log, was invisible to the sharp instrument and would have
-been caught by the weak one. **State what the old instrument saw that the new one does not, at the moment you
-swap them.**
-
-**And when you put a measured number into a decision, carry what it MEASURES, never just its value.** Three
-rulings in one night rested on a number measuring something adjacent: a per-*ask solve* rate used as a
-per-*candidate* cost (wrong by 30×); a contended-wall timing used as a quiet-CPU cost (1.59×); a mid-window ratio
-used as a completed-window one (16× against 7×). None was a wrong measurement, which is why none looked wrong.
-**A number in a ruling travels with its units, its conditions and its population, or the ruling is about
-something else**; the repair is to re-derive the decision from the corrected figure out loud, because a ruling that survives its bad evidence needs new grounds, not a quiet pass.
-
-**And the sharp, checkable form of that rule, extracted 2026-09-12 after the same error's FOURTH instance in
-one milestone: when two numbers are compared, exactly ONE thing may differ between them.** A brief claimed a new
-rotation gave *"twice the record's circle count and twice its unit-neighbour count"* — the doubling came from
-dropping a coordinate restriction, and the unit shell does not depend on the rotation at all; a product owner
-scored an off-diagonal raw count against `24/54`, a share of the monochromatic cross edges under one colouring — a
-different denominator. **Both differed in two things and credited one, and the other thing was the change being
-advocated, so the error flattered the work.** The check costs seconds: **write both numbers as fractions with the
-denominators spelled out in words.** None of the four instances was a wrong measurement — each was a right
-measurement of a different quantity, which is why none looked wrong to its author.
-
-**The same rule has a second half, and its author broke it within two hours of writing it down.** Having
-recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
-prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a
-quantity ~90% of which is produced in the *other* phase on byte-identical code, so a ratio near 1 was forced.
-**Confirm that BOTH outcomes are reachable — the one that would teach you nothing and the one you predict.** A prediction whose target region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it fails. And
-the test of whether "mis-specified" is a diagnosis or an escape: **the evidence for the mis-specification must
-predate the result** (here the 90% split was in the run's own numbers before the prediction). **The rule is
-symmetric: a control going RED is not evidence either, until you can name what a wrong-reason red would look
-like** — it is an unexplained failure that happens to agree with you. Three plants in one night fired for the wrong reason, one on an out-of-range index that died before
-reaching the guard it was written to test. The repair is a **pair**: the stub that must fail beside a faithful
-stub that must pass, so the refusal is seen to come from the cause and not the scaffolding.
-
-**A measured half and a derived half fail in OPPOSITE directions, and one rule cannot cover both.** Where a
-graph's edges are *measured* — a float proposes, exact arithmetic decides — the only possible error is a
-**missed** edge, which makes colouring easier, so **a refusal is robust and a colourable verdict is suspect**.
-Where edges are *derived from a law*, the error is an **invented** edge, which makes refusals faster and cheaper
-and looks exactly like success — so there **a refusal is the suspect verdict.** M63 phase G, 2026-09-12: a
-ruling "believe a refusal immediately" from the measured half was applied to an arena whose novelty lived in the
-derived half. **Before trusting either verdict, ask which half of the object produced it**; being built by the
-law is the reason the law needs checking, not the reason it does not.
-
-**A check must read the value the code SHIPS, never a copy of it.** A control certifying the safety margin of
-a float gate asserted against a hardcoded `1e-7` rather than the gate's own default, so it would have kept
-certifying that margin after someone made the real default lossy — **a check reporting about code that is not
-the code that runs.** It now reads the default out of the signature, and every derived quantity with it.
-
-**And the failure path's FORMATTING is part of the check.** The same control's message rendered a failing
-ratio of 0.60 as `1×` — a display rounding turning a red into something that reads like a pass. **A check's
-output is the check**, and the last transformation before a human sees it is inside the trust boundary.
-
-**Bound a plant's effect on BOTH sides, and the control reports for free when it has gone blind.** A control
-that can say *"I can no longer tell"* beats one that can only pass or fail, because that third state is where this file's oldest failure mode hides — but the mechanism, not the outcome,
-is what reproduces. Assert the two-sided form:
-
-```
-0 < (guarded_result − planted_result) < threshold
-```
-
-The lower bound fails when the plant has stopped firing; the upper when it fires too much. Measured 2026-09-12:
-under a mutation that made the shipped value identical to the planted one, the difference collapsed to zero
-and the lower bound caught it, where the one-sided `planted < guarded` would have gone silent about having
-lost its power to discriminate.
-
-**To compare POLICIES, replay them over a recorded decision sequence rather than re-running** (2026-09-12). A batch-size
-lever estimated at ~2.9× measured **2.31×** when every policy was replayed over one pilot's own accept/reject log — one run,
-one population, one thing differing — with the control that the replay reproduces the original run's exact cost; re-running
-would have compared two populations and one policy at once. More instances: `plans/GROKKING-INSTANCES.md` § Make the gate fail.
-
-**A cost measured on a FAILING run understates a succeeding one — and the tell is that the cheap steps are the failures**
-(2026-09-12). A reduction walk was costed at **24% expensive probes** from a sample already fallen into the cheap satisfiable
-regime, where each step answers in a millisecond because the object has stopped refusing; on a walk actually progressing it is
-**~75%**.
-
-> **A successful walk is the expensive walk.**
-
-It inverts the intuition that a run going well is a run going fast, and it is how a pilot's cost model
-understates the real thing by 3×. **Before costing an iterative process from a sample, check which
-regime the sample's CHEAP steps were in**, because the cheap ones are the population that will not be there
-when it works.
-
-**A caveat you write and then step over is WORSE than one you never wrote** (2026-09-12). An advisor wrote *"this exhausts
-the additive twist family, not the twist family"* and, in the same report, *"the 72 off-diagonal edges are measurably
-load-bearing"* — the qualifier dropped, the headline amplified twice, a dead object kept alive a day. **The caveat is what
-made the headline look audited**: after writing a scope qualifier, re-read the summary sentence against it.
-
-**And the cheapest generator-image check there is: count your generator's free parameters against the
-problem's.** A search ran over `{(C, π∘C)}` — one free parameter — where the solution space `{(f, g)}` has two; the image was
-a measure-zero slice and the answer lived outside it, with the positive control passing. A parameter count is seconds and
-catches the whole class.
-
-**A TRUE explanation that fully accounts for the observation will stop you looking for a second one — and the second one may
-be the one about your own apparatus** (2026-09-12). An engineer tested a theorem out of sample at `n = 3`, where its load-bearing
-hypothesis `√(4n−1) ∉ K` fails by definition of the field (`4n−1 = 11`): the prediction was void, not met, and two laws "agreed
-300 of 300" because both were inapplicable. Its first account — a mis-filed fact — was wrong in the flattering direction — a confession can flatter, because *"I filed it under the wrong heading"* is tidier and more forgivable than what actually happened: `n = 3`
-fails **two** gates, and a true, sufficient-sounding reason for the first (*"this member can never reach five colours"*) made the
-member look **safe to compute on** — dead as an object, free as a test case — so it never asked whether a second gate also
-failed. The first failure was about the member; the second was about its own instrument.
-
-**The habit, and it is cheap: a candidate that fails one gate must be checked against ALL of them before
-being used as a test case, precisely because the first failure makes it feel already understood.** And
-re-read every hypothesis against the test instance immediately before believing an out-of-sample result,
-which is exactly when the result is most wanted and least examined.
-
-**And a mutation harness must verify its own RESTORE** (2026-09-12). One broke *itself* through CPython's bytecode cache,
-whose identity for a source file is `(size, mtime in whole seconds)`: a same-size mutation written inside one second left the
-interpreter executing mutated bytecode against a restored source — every plant "passing" while the arithmetic under test was
-wrong. What caught it was the harness **re-running its controls after the restore and asserting the guarded state comes
-back**. Restore, then re-verify, and treat a same-size edit inside one second as the case your caching cannot see.
-
-**And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
-is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
-would have shown it. The cheap half of the lesson, and the one that finds checks pointed at the wrong code.
-
-**Archiving a checker can break it in exactly the way it was built to detect.** A committed equivalence harness reconstructs its
-"before" tree from git and imports a module by name — so the reconstructed module binds to **today's** copy of its dependency if
-that reaches `sys.modules` first, and the comparison silently becomes one tree against itself **while printing ALL MATCH**. Assert
-the provenance of every module a reconstruction loads, and **provoke that assertion** — pre-load the wrong version deliberately
-and confirm the harness refuses. **The sharp form: a check that loads two versions of something and identifies them BY NAME** —
-module caches, class registries, singletons, environment lookups, anything with a global namespace. Its finder declined the
-credit: it had been forced to reason about module identity hours earlier, on a task that loaded two copies in one process —
-**an instance found by prior context is not evidence that a rule reproduces**, which is the argument *for* writing it down: it
-does not reproduce from care, only from the negative control being mandatory.
-
-**Enumerate the PARAMETER first and screen the objects against it second, never the reverse** (2026-09-12). A census of
-rotations was enumerated *over a base*, so a rotation whose circle is empty over that base never became a candidate — **no row
-to audit**, a family of 6-open rotations unrecorded while the headline read "none". **An omission is worse than a miscount**: a
-miscount is a wrong number in a row you can check. Sibling defect: an enumerator whose cut is one-sided
-on a dense set has no well-defined answer, so its `span` parameter *is* the answer — the tell is totals that never converge
-while the quantity of interest does. **When a generator takes a parameter, report the quantity at two values of it before
-believing either.**
-
-**A positive control proves an instrument finds things OF THE SHAPE ITS GENERATOR CAN REPRESENT, and says
-nothing about shapes it excludes.** A sweep of 781,284 candidates returned a decisive zero for a new parameter and nine hits
-for the known one, its positive control passing — the known witness *was* expressible in the generator's restricted shape and
-the new one was not. **Before believing any zero over a family, write down the generator's image and check the target is
-inside it.**
-
-**Do not mistake a one-sided filter for an inverted monotonicity** (an advisor's correction of the product owner who wrote it).
-Once a base contains the witness, growing it cannot recover the four-colouring (more material adds colour differences, and the certificate needs a value outside them) — adding material makes a graph harder to colour
-and a *sufficient condition for colourability* harder to fire: one statement, seen directly and through a one-sided filter;
-nothing is inverted. An agent told to expect an inversion hunts one and misses what is unusual: the filter can be defeated by
-**breaking its applicability rather than its conclusion**, and a `not-applicable` on the same footing as a silence is a pass nobody
-earned. **Whenever a one-sided filter judges something you are building, enumerate the ways to make
-it inapplicable before the ways to make it fail.**
-
-**And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose control
-docstring already said *"a control that passes without its failure mode being reachable has not been tested by passing"* had
-written a control that could not fire earlier the same evening, and noticed only when it tried to plant a fault in it. **The
-habit that produces the principle is planting faults routinely, not reasoning about controls carefully.** Reasoning finds the controls you thought about; planting finds the ones you did not.
+Its text — every check's negative control, and a positive signal for the thing that did not happen — is `RUNNING.md` § Make the gate
+fail, and watch it fail (moved 2026-09-28), read by every job that builds a checker or an instrument.

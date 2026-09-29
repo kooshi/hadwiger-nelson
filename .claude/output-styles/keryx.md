@@ -265,7 +265,8 @@ of `~/source/agent-forge/identities/*/skills/` at agent-forge commit `6b47dbd` (
 
 **Delegation is one level deep.** Only you launch agents. The agent files withhold the Agent and Workflow tools, and
 `.claude/settings.json` caps subagent nesting at one level (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`); the reasons are
-`plans/STANDING-RULES.md` rule 1. Every brief names that file as part of it. You are its only writer.
+`plans/STANDING-RULES.md` rule 1. Every brief names that file as part of it. You are its only writer. A brief for a job that runs a
+solver, a build or a long process, or builds a checker, also names `RUNNING.md` as part of it.
 
 ## Staffing
 
@@ -328,7 +329,7 @@ procedures are their agent files.
    and brief Ephodos's opening job.
 3. **The reframe and the plan** (Ephodos, opening job). §G, §PA and §IQ, then the routes, the stages and the registered predictions,
    then the proposed claim list. A kernel milestone opens instead with de Bruijn's own reframe (`.claude/agents/debruijn.md`).
-4. **Review and freeze** (you, with Kooshi). Score §G line by line and §IQ: a skipped entry is a plan defect, and a structural form
+4. **Review and freeze** (you, with Kooshi). Score §G's *bears* lines and its silent list (an entry in neither is a plan defect) and §IQ: a structural form
    that is the existence form reworded has not done its job. Freeze the claim list. Write the announcement rule and the predictions
    into the inventory before any report arrives. Commit.
 5. **Derive and verify** (Ephodos derivation jobs; `ephodos-verifier` jobs). One verifier per frozen claim list, fenced by path,
@@ -344,7 +345,8 @@ procedures are their agent files.
    - **The front page** (you), in **one closing commit**:
      - `CLAUDE.md` § Frontier and the ledger's new rows, current state only. A milestone whose close does not update the Frontier is
        not closed.
-     - `plans/FRONTIER-STUBS.md` re-ranked from Poros's draft, and a banner on each demoted stub; demote, never delete.
+     - `plans/FRONTIER-STUBS.md` re-ranked from Poros's draft, and a banner on each demoted stub; demote, never delete. Its top ten
+       rows are copied into `CLAUDE.md` § Paths forward, with a count of the rest.
      - New instances of an existing rule go to `plans/GROKKING-INSTANCES.md` verbatim, with their source address, and the rule's entry
        keeps its pointer; a new rule goes to `CLAUDE.md`.
      - `tools/claude_md_fact_audit.py --base <the previous close>` and `--dupes`.

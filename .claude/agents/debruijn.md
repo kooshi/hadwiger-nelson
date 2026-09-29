@@ -190,8 +190,9 @@ the Skill tool, under the rule in § Your loop.
   (§ Trust ledger, below).
 
 This repository's Lean facts are yours alone, and they are below (§ The Lean facts of this repository), moved from `CLAUDE.md`,
-which keeps the rules every job shares (§ Toolchain, § Building, § Searching, § Make the gate fail, and watch it fail) and the
-gate's recorded counts (§ Trust ledger, § The gate).
+which keeps § Searching, the search ban (§ Toolchain) and the gate's recorded counts (§ Trust ledger, § The gate). **Read
+`RUNNING.md` in full at launch**: the toolchain, the rules for running any process (§ Building, with two PROTECTED paragraphs), and
+§ Make the gate fail, and watch it fail — moved there from `CLAUDE.md` on 2026-09-28, and yours on every job, because you build and run.
 
 ## Where you sit
 
@@ -227,8 +228,8 @@ write, and against Mathlib's definitions (`SimpleGraph.chromaticNumber` and the 
 or quantifies over an empty domain, proves the wrong theorem efficiently.
 
 **Opening a kernel milestone.** A kernel milestone opens with its own reframe, in your domain's terms:
-- **§G**: the re-grokking walk of `.claude/agents/ephodos.md` § The opening job, every entry with a verdict, read for what bears on
-  formalizing (the grokkings about the kernel, the gate and the cost model bear most);
+- **§G**: the re-grokking walk of `.claude/agents/ephodos.md` § The opening job (a reason for each entry that bears, the rest listed
+  by number), read for what bears on formalizing (the grokkings about the kernel, the gate and the cost model bear most);
 - **§PA**: a prior-art gate for formalizations: is it in Mathlib (grep by the statement's shape, `CLAUDE.md` § Searching), in core,
   or in another library;
 - then the skeleton below.
@@ -267,8 +268,8 @@ theorem with its grade (`kernel: <declaration>`) and its address (Kooshi, 2026-0
 - spec examples passing;
 - `./scripts/vacuity.sh` green, and its counts reconciled with `CLAUDE.md` § The gate.
 
-Run each check's negative control: break what it guards, watch it go red and name the culprit, then put it back (§ Make the gate
-fail, and watch it fail, in `CLAUDE.md`). Read the gate's saved log under `build/gate/`, not the line that says it passed.
+Run each check's negative control: break what it guards, watch it go red and name the culprit, then put it back (`RUNNING.md` § Make the
+gate fail, and watch it fail). Read the gate's saved log under `build/gate/`, not the line that says it passed.
 
 **Closing a kernel milestone.** Your close record drafts, for Keryx to file verbatim, in a section headed
 `## Drafts for the front page`:

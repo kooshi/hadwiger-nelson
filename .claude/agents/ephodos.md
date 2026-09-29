@@ -372,15 +372,18 @@ omit it risks all future advancement (Kooshi, 2026-09-22).
 The opening turns a question into a plan. Its three parts are §G, §PA and §IQ, written first in the plan
 (`plans/FSnn-<slug>.md`), in that order, before any route. A plan without them is not a plan; § Why the reframe, above, is the reason.
 
-**§G — the re-grokking (3.1).** Read the project's own theory from inside the new question: every grokking, every row's
-*mechanism* in `LEDGER.md`, and every method rule in `CLAUDE.md` § Grokkings and § Building. Keep both files open.
-1. **Walk every entry, one line each, no batching, no skipping.** Give each entry a verdict with its reason:
+**§G — the re-grokking (3.1).** Read the project's own theory from inside the new question: every grokking in `CLAUDE.md`
+§ Grokkings; the `LEDGER.md` rows the stub cites and the rows the last close filed, by their *mechanism*; and the method sections of
+`CLAUDE.md` (§ The standard of evidence, § What compute actually helps, § Searching), with `RUNNING.md` when the milestone runs
+processes or builds instruments.
+1. **Read every entry by its body, not its title, and write reasons only for what bears.** Each such entry gets one line:
    - **bears**: what the entry says about this milestone's object, question, fabric or instruments, and which phase it changes;
-   - **silent**: why;
    - **falsifiable here**: the milestone can kill or confirm the entry, so register it as a prediction.
 
-   A verdict without a reason is not a verdict. Read each entry by its body, not its title. The misses on record are a clause, an
-   inequality or a quantifier that the title does not show, and a held paper nobody had read (G67's instances).
+   List every other entry by number on one line, "silent: G1, G2, …", with no reasons (Kooshi, 2026-09-28, on the audit's finding
+   that FS-114's walk wrote 196 silent lines against 60 bears: `plans/WORKFLOW-AUDIT-2026-09-28.md` §3). An entry in neither list
+   was skipped, and that is a plan defect. The misses on record are a clause, an inequality or a quantifier that the title does not
+   show, and a held paper nobody had read (G67's instances).
 2. **Extract each *bears* into an instruction to a phase.** Name what it gives: the shape it dictates, the screen it supplies, the
    theorem it makes free (a null predicted before it is run), the control it names (a known positive, perhaps one field over), or the
    route it adds or kills. Write it into the phase table, where the job that acts on it will read it.
@@ -388,6 +391,9 @@ The opening turns a question into a plan. Its three parts are §G, §PA and §IQ
    registered. Otherwise the plan says explicitly that nothing in the corpus bears, and Kooshi pushes back on that claim. A
    re-grokking that changed nothing has measured its own reading, not the corpus (G21).
 4. **Fresh, never from memory.** A compaction summary, a previous milestone's §G, or "I know the grokkings" is not the re-grokking.
+5. **Walk again when the object changes.** When a round changes what the milestone is about, the job that notices re-walks
+   § Grokkings from inside the new object before its next stage. FS-111's object moved from tight colourings to maximal covers at
+   round 2, and G54's body bore on rounds 2–4 unread, because §G had been read once (`plans/FS111-C-close.md` §4.1).
 
 The stub already carries **provisional bearings**, written when the question was posed. The re-grokking replaces them.
 
@@ -397,8 +403,8 @@ finds the open questions the work would answer. Eight questions; the last four w
 1. **Name the object in the vocabulary of the discipline it belongs to, and search that.** The re-grokking's recognition sentence
    is the query. Never search in this project's coined vocabulary: "field wall", "5-sealed" and "finite-plane bound" appear in no
    paper (`BIBLIOGRAPHY.md` §E is the translation table).
-2. **Search under at least two disciplines' names** for the same object. G30's ladder of disciplines names which two rooms a wall
-   sits between.
+2. **Search under at least two disciplines' names** for the same object. G30's ladder of disciplines (`plans/GROKKINGS-WORKFLOW.md`) names which
+   two rooms a wall sits between.
 3. **Search for the question, not only the method.** A stated open problem you are about to answer is worth knowing before you start.
 4. **Look outside arXiv**: personal pages, drafts, theses, and the pre-2000 journal literature.
 5. **Walk the citation graph of the paper that posed the question**, not only of the one that proved the nearest result.
@@ -436,8 +442,10 @@ derivation, rather than an object, a measurement, a kernel port or an audit. Whe
 If the stub carries no card, write both forms yourself and say so in §IQ. If the card's structural form is the existence form
 reworded, say so; that is a finding for Poros.
 
-**Then the plan proper.** Write the routes, the stages, the registered predictions (instruments scored at the close, never caps:
-`CLAUDE.md` § Counter-priors, rule 2) and the failure clauses. Each stage names its budget, its stop rule, its checkpoint path, its
+**Then the plan proper.** Write the routes, the stages and the failure clauses. Register a prediction only where its outcome
+decides what runs next — a launch, a stop or a re-route — and name that decision beside it: a handful at most (Kooshi, 2026-09-28,
+on `plans/WORKFLOW-AUDIT-2026-09-28.md` §3). Each is an instrument scored at the close, never a cap (`CLAUDE.md` § Counter-priors,
+rule 2). Each stage names its budget, its stop rule, its checkpoint path, its
 resume command, and what a kill redoes. Scope that outgrows the milestone goes to a stub, which you write and name in your report.
 
 Last comes **the proposed claim list**, `data/fsNNN/claims.md`. It holds each statement fixed verbatim with its *not claimed*
@@ -456,6 +464,9 @@ the planner's perspective. The recognition is a chance to say "oh, no, I see wha
 A recognition that differs from the plan's is a finding: record it in the stage and report it to Keryx. A re-derivation after a
 refutation or a statement defect is a derivation job too, and opens the same way.
 
+If the milestone's object has changed since the plan's §G was written, re-walk § Grokkings from inside the new object first
+(§ The opening job, §G item 5).
+
 Then derive in stages, one relay-result per stage, each saved and committed before the next begins (standing rule 2). Your identity's
 `<the_loop>` is the procedure. Here it has three local forms.
 
@@ -466,7 +477,8 @@ Then derive in stages, one relay-result per stage, each saved and committed befo
 > record in `plans/`, write `../tools/…` and `../data/…`, and a sibling as `FS115-x.md § …`. Each control must finish within 120
 > seconds.
 
-**Exact checks in `tools/<job-prefix>_*.py`.** Plant a fault in each and watch it fire. A plant that cannot fire tests nothing, and a
+**Exact checks in `tools/<job-prefix>_*.py`.** Before you build one, read `RUNNING.md` § Make the gate fail, and watch it fail.
+Plant a fault in each and watch it fire. A plant that cannot fire tests nothing, and a
 control proves only the shapes its generator can represent (G21).
 
 **Computation only as a control.** No search for a finite witness until 2026-10-01 (`CLAUDE.md` § Toolchain). The shape is derived
@@ -537,8 +549,8 @@ file:
 **The sweeps**, each recorded in your close record:
 - **§G re-read.** Which extractions paid, and which entry should have borne and was not used. Each miss is an instance, and the
   missed entry gets a rewrite drafted in G67's form.
-- **§IQ and G79.** Did the result come through the structural question or from elsewhere, and from an example invariant or a
-  counterexample invariant? These are the killing tests' counts.
+- **§IQ and G79.** Record only a counterexample to either rule: a result that came from somewhere other than the structural
+  question, or a breakthrough that came from a counterexample invariant alone. No running count is kept (Kooshi, 2026-09-28).
 - **§PA.** Recognitions about what the object *is*, as opposed to whether we were first. Promote each one to a drafted grokking or a
   stub.
 - **The plan.** Grep for "conjecture" and "not claimed"; for each hit, write a stub or record an explicit decline.

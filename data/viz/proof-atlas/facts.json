@@ -37,9 +37,9 @@
    "tier": 0,
    "answer": 7,
    "status": "gap",
-   "line": 215,
-   "address": "CLAUDE.md § Where the problem stands, line 215",
-   "grade_address": "CLAUDE.md § The mission, line 69",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 70",
    "also": []
   },
   {
@@ -63,9 +63,9 @@
    "tier": 0,
    "answer": 6,
    "status": "gap",
-   "line": 215,
-   "address": "CLAUDE.md § Where the problem stands, line 215",
-   "grade_address": "CLAUDE.md § The mission, line 69",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 70",
    "also": []
   },
   {
@@ -89,9 +89,9 @@
    "tier": 0,
    "answer": 5,
    "status": "gap",
-   "line": 215,
-   "address": "CLAUDE.md § Where the problem stands, line 215",
-   "grade_address": "CLAUDE.md § The mission, line 69",
+   "line": 216,
+   "address": "CLAUDE.md § Where the problem stands, line 216",
+   "grade_address": "CLAUDE.md § The mission, line 70",
    "also": []
   },
   {
@@ -184,8 +184,8 @@
    "tier": 0,
    "answer": 7,
    "status": "gap",
-   "line": 99,
-   "address": "CLAUDE.md § The aim, line 99",
+   "line": 100,
+   "address": "CLAUDE.md § The aim, line 100",
    "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
    "also": []
   },
@@ -244,8 +244,8 @@
    "tier": 0,
    "answer": 6,
    "status": "gap",
-   "line": 99,
-   "address": "CLAUDE.md § The aim, line 99",
+   "line": 100,
+   "address": "CLAUDE.md § The aim, line 100",
    "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
    "also": []
   },
@@ -269,8 +269,8 @@
    "tier": 0,
    "answer": 5,
    "status": "gap",
-   "line": 99,
-   "address": "CLAUDE.md § The aim, line 99",
+   "line": 100,
+   "address": "CLAUDE.md § The aim, line 100",
    "grade_address": "Proofs/HadwigerNelson/Instances/Interval.lean, line 21",
    "also": []
   },
@@ -465,7 +465,7 @@
       "section": "### The local–global conjecture"
      },
      "quote": "χ(ℚ(√47)²) = 5 (row 121) answers Moorhouse's named question (2010) and the existence half of Soifer's Open Problem 55.1 (2019)",
-     "address": "CLAUDE.md § The local–global conjecture, line 171"
+     "address": "CLAUDE.md § The local–global conjecture, line 172"
     }
    ],
    "status": "hand-2b",
@@ -504,7 +504,7 @@
       "section": "### Where the problem stands"
      },
      "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-     "address": "CLAUDE.md § Where the problem stands, line 217"
+     "address": "CLAUDE.md § Where the problem stands, line 218"
     }
    ],
    "status": "kernel",
@@ -607,9 +607,9 @@
    "sector": "lg",
    "tier": 2,
    "status": "reading",
-   "line": 142,
-   "address": "CLAUDE.md § The local–global conjecture, line 142",
-   "grade_address": "CLAUDE.md § Notation, line 44",
+   "line": 143,
+   "address": "CLAUDE.md § The local–global conjecture, line 143",
+   "grade_address": "CLAUDE.md § Notation, line 45",
    "also": []
   },
   {
@@ -916,7 +916,7 @@
       "section": "### Paths forward, ranked"
      },
      "quote": "with BASE-V beside them (row 134's base re-derived but for Lemma 4 at cusps)",
-     "address": "CLAUDE.md § Paths forward, ranked, line 350"
+     "address": "CLAUDE.md § Paths forward, ranked, line 351"
     }
    ],
    "posed": [
@@ -956,8 +956,8 @@
    "sector": "seven",
    "tier": 1,
    "status": "gap",
-   "line": 324,
-   "address": "CLAUDE.md § Where the problem stands, line 324",
+   "line": 325,
+   "address": "CLAUDE.md § Where the problem stands, line 325",
    "grade_address": "LEDGER.md row 135, line 180",
    "also": []
   },
@@ -980,8 +980,8 @@
    "sector": "seven",
    "tier": 1,
    "status": "gap",
-   "line": 98,
-   "address": "CLAUDE.md § The aim, line 98",
+   "line": 99,
+   "address": "CLAUDE.md § The aim, line 99",
    "grade_address": "plans/STUB-regularity-wall.md, line 4",
    "also": []
   },
@@ -1069,7 +1069,7 @@
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": "CLAUDE.md G83, line 1607"
+     "address": "CLAUDE.md G83, line 1437"
     }
    ],
    "posed": [
@@ -1440,7 +1440,7 @@
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": "CLAUDE.md G83, line 1607"
+     "address": "CLAUDE.md G83, line 1437"
     }
    ],
    "status": "hand-2b",
@@ -1710,12 +1710,12 @@
      "row": "3"
     },
     "quote": "success low, a named no-go the likely product",
-    "address": "CLAUDE.md § Paths forward, ranked item 3, line 362"
+    "address": "CLAUDE.md § Paths forward, ranked item 3, line 363"
    },
    "status": "gap",
-   "line": 362,
-   "address": "CLAUDE.md § Paths forward, ranked item 3, line 362",
-   "grade_address": "CLAUDE.md § Paths forward, ranked item 3, line 362",
+   "line": 363,
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 363",
+   "grade_address": "CLAUDE.md § Paths forward, ranked item 3, line 363",
    "also": []
   },
   {
@@ -1746,7 +1746,7 @@
       "section": "### The local–global conjecture"
      },
      "quote": "row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and [MatolcsiEtAl2025] §2's equality question",
-     "address": "CLAUDE.md § The local–global conjecture, line 172"
+     "address": "CLAUDE.md § The local–global conjecture, line 173"
     }
    ],
    "status": "hand-2b",
@@ -1761,11 +1761,11 @@
    "role": "question",
    "plain": "An averaged certificate at five colours on the real plane — the integrality shape a six certificate must take (FS-80).",
    "src": {
-    "file": "CLAUDE.md",
-    "section": "### Paths forward, ranked",
+    "file": "plans/FRONTIER-STUBS.md",
+    "section": "## Ranked stubs",
     "row": "11"
    },
-   "quote": "averaged certificates at five colours on the real plane (FS-104's route (c))",
+   "quote": "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
    "grade_src": {
     "file": "plans/STUB-window-frequency-certificate.md"
    },
@@ -1776,16 +1776,16 @@
    "tier": 2,
    "words": {
     "src": {
-     "file": "CLAUDE.md",
-     "section": "### Paths forward, ranked",
+     "file": "plans/FRONTIER-STUBS.md",
+     "section": "## Ranked stubs",
      "row": "11"
     },
     "quote": "soft as to success",
-    "address": "CLAUDE.md § Paths forward, ranked item 11, line 370"
+    "address": "plans/FRONTIER-STUBS.md § Ranked stubs item 11, line 94"
    },
    "status": "gap",
-   "line": 370,
-   "address": "CLAUDE.md § Paths forward, ranked item 11, line 370",
+   "line": 94,
+   "address": "plans/FRONTIER-STUBS.md § Ranked stubs item 11, line 94",
    "grade_address": "plans/STUB-window-frequency-certificate.md, line 1",
    "also": []
   },
@@ -1845,25 +1845,25 @@
    "role": "conclusion",
    "plain": "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the kernel). Through the plane only: never cheaper than FS-104 (FS-59).",
    "src": {
-    "file": "CLAUDE.md",
-    "section": "### Paths forward, ranked",
+    "file": "plans/FRONTIER-STUBS.md",
+    "section": "## Ranked stubs",
     "row": "16"
    },
-   "quote": "given MR, six at ℚ(√167) is χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43) (row 125)",
+   "quote": "six at ℚ(√167) is rung D plus PL_∃(23, 43)",
    "grade_src": {
-    "file": "CLAUDE.md",
-    "section": "### Paths forward, ranked",
+    "file": "plans/FRONTIER-STUBS.md",
+    "section": "## Ranked stubs",
     "row": "16"
    },
-   "grade": "its own content the conjecture's widest gap, ≥ 6 predicted against 5 at [hand] (4 in the kernel, row 119)",
+   "grade": "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)",
    "theta": 100,
    "r": 300,
    "sector": "six-low",
    "tier": 2,
    "status": "gap",
-   "line": 375,
-   "address": "CLAUDE.md § Paths forward, ranked item 16, line 375",
-   "grade_address": "CLAUDE.md § Paths forward, ranked item 16, line 375",
+   "line": 99,
+   "address": "plans/FRONTIER-STUBS.md § Ranked stubs item 16, line 99",
+   "grade_address": "plans/FRONTIER-STUBS.md § Ranked stubs item 16, line 99",
    "also": []
   },
   {
@@ -1912,9 +1912,9 @@
    "tier": 1,
    "note": "LEDGER.md row 130's grade bracket lists N-EASY at one mind; § The aim adds PA1's (E) as the second.",
    "status": "hand-2",
-   "line": 83,
-   "address": "CLAUDE.md § The aim, line 83",
-   "grade_address": "CLAUDE.md § The aim, line 84",
+   "line": 84,
+   "address": "CLAUDE.md § The aim, line 84",
+   "grade_address": "CLAUDE.md § The aim, line 85",
    "also": []
   },
   {
@@ -2180,11 +2180,11 @@
      "row": "10"
     },
     "quote": "soft as to truth (the bold form predicts no)",
-    "address": "CLAUDE.md § Paths forward, ranked item 10, line 369"
+    "address": "CLAUDE.md § Paths forward, ranked item 10, line 370"
    },
    "status": "gap",
-   "line": 369,
-   "address": "CLAUDE.md § Paths forward, ranked item 10, line 369",
+   "line": 370,
+   "address": "CLAUDE.md § Paths forward, ranked item 10, line 370",
    "grade_address": "plans/STUB-fifth-colour-structure.md, line 1",
    "also": []
   }
@@ -2280,7 +2280,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "UB7",
@@ -2291,7 +2291,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "LB6",
@@ -2302,7 +2302,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "UB6",
@@ -2313,7 +2313,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "LB5",
@@ -2324,7 +2324,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "UB5",
@@ -2335,7 +2335,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "χ(ℝ²) ∈ {5, 6, 7}",
-   "address": "CLAUDE.md § Where the problem stands, line 215"
+   "address": "CLAUDE.md § Where the problem stands, line 216"
   },
   {
    "source": "DEGREY",
@@ -2422,7 +2422,7 @@
     "section": "### The aim"
    },
    "quote": "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR",
-   "address": "CLAUDE.md § The aim, line 99"
+   "address": "CLAUDE.md § The aim, line 100"
   },
   {
    "source": "R130",
@@ -2444,7 +2444,7 @@
     "section": "### The aim"
    },
    "quote": "gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR",
-   "address": "CLAUDE.md § The aim, line 99"
+   "address": "CLAUDE.md § The aim, line 100"
   },
   {
    "source": "R128",
@@ -2457,7 +2457,7 @@
    },
    "quote": "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)",
    "bus": true,
-   "address": "CLAUDE.md § Paths forward, ranked item 3, line 362"
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 363"
   },
   {
    "source": "R130",
@@ -2479,7 +2479,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-   "address": "CLAUDE.md § Where the problem stands, line 217"
+   "address": "CLAUDE.md § Where the problem stands, line 218"
   },
   {
    "source": "SUB",
@@ -2490,7 +2490,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "a subfield's plane is a subgraph of ℝ²'s, so χ(ℚ(√47)²) = 5 (row 121) gives χ(ℝ²) ≥ 5",
-   "address": "CLAUDE.md § Where the problem stands, line 217"
+   "address": "CLAUDE.md § Where the problem stands, line 218"
   },
   {
    "source": "R99",
@@ -2523,7 +2523,7 @@
     "section": "### The local–global conjecture"
    },
    "quote": "and its bold form is χ(ℝ²) = 7",
-   "address": "CLAUDE.md § The local–global conjecture, line 142"
+   "address": "CLAUDE.md § The local–global conjecture, line 143"
   },
   {
    "source": "R127",
@@ -2685,7 +2685,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "under Condition 5 none does (row 134)",
-   "address": "CLAUDE.md § Where the problem stands, line 325"
+   "address": "CLAUDE.md § Where the problem stands, line 326"
   },
   {
    "source": "UANO",
@@ -2696,7 +2696,7 @@
     "section": "### Where the problem stands"
    },
    "quote": "with unit arcs every one has a vertex of at least four colours (rows 135, 137)",
-   "address": "CLAUDE.md § Where the problem stands, line 325"
+   "address": "CLAUDE.md § Where the problem stands, line 326"
   },
   {
    "source": "R132",
@@ -2904,7 +2904,7 @@
    },
    "quote": "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)",
    "label": "its YES, given MR",
-   "address": "CLAUDE.md § Paths forward, ranked item 3, line 362"
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 363"
   },
   {
    "source": "FS104",
@@ -2917,19 +2917,19 @@
    },
    "quote": "a NO (a CP five-colouring) gives χ(ℝ²) = 5 with no MR",
    "label": "its NO is this",
-   "address": "CLAUDE.md § Paths forward, ranked item 3, line 362"
+   "address": "CLAUDE.md § Paths forward, ranked item 3, line 363"
   },
   {
    "source": "FS80",
    "target": "FS104",
    "kind": "rests",
    "src": {
-    "file": "CLAUDE.md",
-    "section": "### Paths forward, ranked",
+    "file": "plans/FRONTIER-STUBS.md",
+    "section": "## Ranked stubs",
     "row": "11"
    },
-   "quote": "a certificate gives χ_CP(ℝ²) ≥ 6, so χ(ℝ²) ≥ 6 given MR",
-   "address": "CLAUDE.md § Paths forward, ranked item 11, line 370"
+   "quote": "a certificate gives χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130), hence χ(ℝ²) ≥ 6 given MR (row 128)",
+   "address": "plans/FRONTIER-STUBS.md § Ranked stubs item 11, line 94"
   },
   {
    "source": "R129",
@@ -2981,12 +2981,12 @@
    "target": "LB6",
    "kind": "rests",
    "src": {
-    "file": "CLAUDE.md",
-    "section": "### Paths forward, ranked",
+    "file": "plans/FRONTIER-STUBS.md",
+    "section": "## Ranked stubs",
     "row": "16"
    },
-   "quote": "through the plane only: six there gives χ(ℝ²) ≥ 6, never cheaper than FS-104",
-   "address": "CLAUDE.md § Paths forward, ranked item 16, line 375"
+   "quote": "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6",
+   "address": "plans/FRONTIER-STUBS.md § Ranked stubs item 16, line 99"
   },
   {
    "source": "SUB",
@@ -3022,7 +3022,7 @@
     "section": "### The aim"
    },
    "quote": "Upper bounds need no MR.",
-   "address": "CLAUDE.md § The aim, line 83"
+   "address": "CLAUDE.md § The aim, line 84"
   },
   {
    "source": "LINK2",
@@ -3033,7 +3033,7 @@
     "section": "### The aim"
    },
    "quote": "Upper bounds need no MR.",
-   "address": "CLAUDE.md § The aim, line 83"
+   "address": "CLAUDE.md § The aim, line 84"
   },
   {
    "source": "R131",
@@ -3222,7 +3222,7 @@
     "row": "10"
    },
    "quote": "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)",
-   "address": "CLAUDE.md § Paths forward, ranked item 10, line 369"
+   "address": "CLAUDE.md § Paths forward, ranked item 10, line 370"
   },
   {
    "source": "MAPS6",
@@ -3248,7 +3248,7 @@
    "label": "a five cannot be regular",
    "bus": true,
    "faint": true,
-   "address": "CLAUDE.md § The aim, line 89"
+   "address": "CLAUDE.md § The aim, line 90"
   }
  ],
  "routes": [
@@ -3505,7 +3505,7 @@
     "section": "### Counter-priors — read before pricing anything"
    },
    "quote": "A registered probability is an instrument for G21, scored at the close. It is never a reason to shrink an aim or to stop.",
-   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 134"
+   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 135"
   },
   {
    "id": "belief",
@@ -3515,7 +3515,7 @@
     "section": "### The local–global conjecture"
    },
    "quote": "Believing the answer is seven is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64).",
-   "address": "CLAUDE.md § The local–global conjecture, line 150"
+   "address": "CLAUDE.md § The local–global conjecture, line 151"
   },
   {
    "id": "rank",
@@ -3525,7 +3525,7 @@
     "section": "### Counter-priors — read before pricing anything"
    },
    "quote": "Rank a route by its bearing on the answer, never by its difficulty, its length or its formalization effort.",
-   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 133"
+   "address": "CLAUDE.md § Counter-priors — read before pricing anything, line 134"
   },
   {
    "id": "publish",
@@ -3535,7 +3535,7 @@
     "section": "### The local–global conjecture"
    },
    "quote": "Nothing is published before it is formalized in Lean, in full, with no declared purchases",
-   "address": "CLAUDE.md § The local–global conjecture, line 164"
+   "address": "CLAUDE.md § The local–global conjecture, line 165"
   }
  ]
 }

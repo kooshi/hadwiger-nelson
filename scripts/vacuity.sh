@@ -55,7 +55,7 @@ kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
 # ---------------------------------------------------------------------------------------------
 # --self-test — break the check on purpose and watch it fail.
 #
-# `CLAUDE.md` § "Make the gate fail, and watch it fail": a check is not known to work until it has
+# `RUNNING.md` § "Make the gate fail, and watch it fail": a check is not known to work until it has
 # been seen to fail, and this repository has twice shipped a gate that failed OPEN. Until
 # 2026-09-09 this gate's controls could not be run at all — `scripts/Vacuity.lean`'s header says
 # how — so they are now a flag rather than a memory.
@@ -253,7 +253,7 @@ if [[ -n "${NEW}" ]]; then
   rows "${NEW}" | sed 's/^/      /'
   echo
   echo "    UNKNOWN: no unconditional inhabitant is proved for the carrier. Ship one — the rule"
-  echo "             is CLAUDE.md G30's fifth failure mode: every theorem whose hypothesis is a"
+  echo "             is G30's fifth failure mode (plans/GROKKINGS-WORKFLOW.md): every theorem whose hypothesis is a"
   echo "             structure ships with a named inhabitant, or a note naming what supplies one."
   kept
   exit 1
