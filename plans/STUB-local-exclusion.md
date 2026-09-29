@@ -10,10 +10,22 @@ Written for a session with no memory of FS-114: read `CLAUDE.md` § The aim and 
 `plans/FS114-derivation.md` in full (46 entries; § 3 is this stub's ground), `plans/FS114-C-close.md` stage 2 (the reconciliation: every lemma's minds),
 `data/fs114/claims.md` §0 (the definitions), and the records named below at the sections named.*
 
-**Provisional bearings** (the opening's re-grokking replaces them): G83 (four-colour vertices; its FS-114 rewrite), G86 (tile counts are blind to Siamese
-pairs — a Siamese kill reads points and distances), G79 (the flip came late at FS-114: ask what every four-colour vertex's ring carries — N7-HUB — before
-excluding the next escape), G72, G82, G15 (count × local kill), G21 (a boundary claim needs a plant at the boundary: FS112-L60), G51 (three blind
-convergences between the sides at FS-114), G67; rows 131–138; stubs FS-117, FS-115, FS-111.
+**Provisional bearings** (the opening's re-grokking replaces them; rewritten by Poros, FS116-P1, 2026-09-29):
+- G83 — four-colour vertices; the (Q) rings are its named residue.
+- G84 — contact: a (Q) arc is FS111-M-PINCH's first case, "a unit arc whose centre carries both colours", and saturation pins every interface by
+  partners at distance 1.
+- G85 — saturated interfaces have integer radii.
+- G82 — a limit of near-colourings is a colouring; here, a limit of fragments on growing discs, card `the-yes-needs-no-map`.
+- G86 — tile counts are blind to Siamese pairs: a Siamese kill reads points and distances.
+- G72 — the structural form below.
+- G79 — ask what every four-colour vertex's ring carries before excluding the next escape.
+- G15 — count × local kill.
+- G21 — a boundary claim needs a plant at the boundary (FS112-L60); and a held positive measures its own geometry: the strip is unsaturated at its
+  midline (FS111-VM2-STRIP-MID).
+- G87 — the invention signal.
+- Rows 131 and 133–141.
+- Stubs: FS-121 (route M's other half; its honest route hands this NO an honestly saturated map), FS-117, FS-115, and FS-122 (R1's band card,
+  re-addressed there).
 
 ## The question, in plain language
 
@@ -21,23 +33,107 @@ Colour the plane with six colours so that no two points of one colour are exactl
 each bounded by segments and circular arcs, arcs of radius exactly 1 ("unit arcs") allowed, and no two interior points of one colour at distance 1. Row
 134 excluded such maps without unit arcs; with them, FS-112 showed every valid map has a vertex where four colours meet, or one colour repeats, within 3
 of every point, and **FS-114 showed that every valid map has a vertex where at least four colours meet** (FS114-CV-EXISTS, two minds blind to each
-other). So the whole question — does a valid six-map with unit arcs exist? — is now **local**:
+other). So one local statement suffices for the whole question — does a valid six-map with unit arcs exist?
 
 > **C114-LOCAL-F.** Is there an explicit radius `R` and a derivation that no valid fragment exists on the closed disc of radius `R` about a vertex of at
 > least four colours? *(`data/fs114/claims.md` §3, verbatim: "there are an explicit radius `R` and a derivation that no valid fragment exists on the
-> closed disc of radius `R` about a vertex of at least four colours.")* Exclude every such fragment (the NO), or build a valid map (the YES).
+> closed disc of radius `R` about a vertex of at least four colours.")* Exclude every such fragment (the NO), or build such a fragment on every disc (its failure; a valid map of the plane is one way, not the only one — § Bearing on the answer).
 
 A radius must exceed `φ²/√2 ≈ 1.8512`: the capped strip holds every smaller disc about a four-colour vertex (FS114-Y-DIAL, two minds).
 
+## The question (Poros, 2026-09-29)
+
+*Posed by Poros, job FS116-P1. The record is `plans/POROS-2026-09-28-fs116-question.md`: its § 2 holds the survey and all three of the opening's cards,
+ranked; its § 1.5 and § 2.2 hold the hunches. Ephodos's §IQ quotes the two forms below verbatim.*
+
+### The card
+
+```
+question: what-does-saturation-pin
+  evidence: FS111-M2-REDUCE-A derives REG-A_k "in an honest saturated k-colouring" (plans/FS111-derivation.md); FS111-M-PINCH, three minds: every
+    two-colour interface point of a saturated colouring lies on "a unit arc whose centre carries both colours" or a C^{1,1} curve "between two tangent
+    unit discs" (LEDGER.md row 140); FS111-VM2-STRIP-MID: the capped strip is "not saturated on its midline", at the four straight edges of its
+    four-colour vertices (data/fs114/fs114-y6/survey.out: tactic=0), the vertices about which it holds every disc below φ²/√2 (FS114-Y-DIAL)
+  expected: that route M consumes FS-116's NO over every valid map, as this stub's bearing said
+  ask: In an honestly saturated valid fragment — the class route M's honest branch must exclude — what does saturation force on the edges at a vertex
+    of at least four colours?
+  if every edge is pinned: the strip's midline configuration is outside the class; FS-116 poses its NO in the saturated class first (route M's need),
+    keeps the all-maps form for Sokolov–Voronov's Question 2, and aims FS-114's straddle kills at the pinned vertices with 0–2 tactic edges
+  if nothing new is pinned: saturation is a scope note for route M only; FS-116 keeps the all-maps class from its opening and starts from the
+    record's card what-do-q-rings-force
+  answered by: derivation — Ephodos, FS-116's proof side at its opening (FS-121's opening to be told the answer, since its honest route produces the class)
+  cost: an hour to one round; M-PINCH, W-NOBEND and W-NOREP are held, and the step is to read them at a vertex of a map
+  hunch: every edge is pinned, and the strip's midline dies (0.6)
+  falsifier: an honestly saturated valid fragment by formula with a four-colour vertex one of whose edges has a side colour with no tile at
+    distance exactly 1 from its points
+  rank: 1
+```
+
+The opening's other two cards, from the record's § 2.4:
+- **`the-yes-needs-no-map`** (rank 2, a check at the §IQ, under an hour): does a sequence of valid fragments on discs of unbounded radius, complexity
+  unbounded, give a measurable six-colouring of the plane proper at almost every unit pair, by row 131's weak-* step? If it does, this question is
+  decisive in both directions (§ Bearing on the answer).
+- **`what-do-q-rings-force`** (rank 3, one round): at a four-colour vertex whose ring carries a (Q) arc, what does the ring force at distance 1, as
+  N7-HUB does for (Q)-free rings? This is the structural form's first step.
+
+### Existence form
+
+**Is there a radius `R` — one `R` for every complexity, Siamese pairs allowed — such that no valid fragment exists on the closed disc of radius `R`
+about a vertex of at least four colours?**
+
+This is C114-LOCAL-F with its uniformity written in. The NO names `R` with a derivation, and any such `R` exceeds `φ²/√2 ≈ 1.8512` (FS114-Y-DIAL). The
+alternative is a valid fragment about such a vertex on every disc, its complexity free. A valid map of the plane is one way to supply it, not the only
+one. If the rank-1 card finds every edge pinned, the question is asked first for honestly saturated fragments: that is the class route M's honest
+branch hands this NO (FS111-M2-REDUCE-A).
+
+### Structural form
+
+**In every valid fragment with any number `k ≥ 4` of colours, what does the unit circle about each vertex of at least four colours carry — its (Q)
+arcs, its change points, and the vertices of at least four colours it places at distance 1 — and which of these ring types can recur at every such
+vertex a ring places?**
+
+*Why this is the structural form.* Its answer is the finite rule every fragment obeys at its four-colour vertices: a ring type, and which types a ring
+places at distance 1. The rule is independent of `R` and of the colour count, and the radius is read from it. The existence form cannot be answered
+without some such rule, since FS-114's case-by-case kills never reached the vertex types that reach farthest.
+
+*What it already holds:*
+- A (Q)-free ring has change points exactly at `y + 60°ℤ`, alternating the two absent colours (N6-RING60, two minds, one blind). Each of those six
+  points is a vertex of at least four colours (N7-HUB, one mind). The Reuleaux bowtie's `q1, q2, top, bot` are four of them, and the bowtie dies at
+  `r = (√3, 0)`, on the hexagon's second shell (FS114-Y4-RSTOPALL).
+- Every held fragment that reaches past `√3` has (Q) arcs on its four-colour vertices' rings (row 136). The capped strip is a line of such vertices at
+  spacing `1/2`, its colour sets repeating with period 3, and it reaches `φ²/√2`. The disk is a 5-cycle of corners, reaching `φ`.
+
+*Its seven-colour control.* At `k = 7`, R7's lattice points (six colours each; FS111-M-R7) recur over the whole plane. So the six-colour answer must name
+where the seventh colour's room is spent. N6-RING60 names one place: "with a seventh colour the ring can carry three" absent colours
+(`plans/FS114-N7-proof.md` § 2.3).
+
 ## Bearing on the answer
 
-**Decisive at every complexity.** An explicit `R`, uniform in the complexity, with FS114-CV-EXISTS gives the unit-arc NO for every valid map, periodic or not, Siamese pairs included,
-with no ray step and no density: it answers `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") **yes** for its unit-arc half,
-almost everywhere, for locally finite segment-and-arc maps, answers `[Polymath2021]` p. 199's hope for such tilings, closes door (A) of row 133 at every
-complexity bound, and answers the upper side of Mixon's thread-7 question ("What is the radius of the largest disk in $\mathbb{R}^2$ that can be
-6-colored?") for maps with unit arcs; with FS-121's map step (route M; FS111-C-SEVEN-M, two minds) it gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7`
-given MR. A YES — a valid map of the plane — gives `χ(ℝ²) ≤ 6` with no MR. A local exclusion for one configuration only (as FS-114 filed) is a piece,
-not the answer; a NO for non-Siamese maps only is FS-117's, not this stub's.
+*Rewritten by Poros (FS116-P1, 2026-09-29).*
+
+**Decisive in both directions, and route M's first half.**
+
+*The NO* is an explicit `R`, uniform in the complexity. With FS114-CV-EXISTS it gives the unit-arc NO for every valid map, periodic or not, Siamese
+pairs included, with no ray step and no density. It then:
+- answers `[SokolovVoronov2025]` Question 2 ("Is it true that 7 colors are needed …?") **yes** for its unit-arc half, almost everywhere, for locally
+  finite segment-and-arc maps;
+- answers `[Polymath2021]` p. 199's hope for such tilings;
+- closes door (A) of row 133 at every complexity bound;
+- answers the upper side of Mixon's thread-7 question ("What is the radius of the largest disk in $\mathbb{R}^2$ that can be 6-colored?") for maps with
+  unit arcs.
+
+With FS-121's map step (route M; FS111-C-SEVEN-M, two minds) the NO gives `χ_m⁰(ℝ²) = 7`, hence `χ(ℝ²) = 7` given MR. **Route M's honest branch needs
+the NO only for honestly saturated maps** (FS111-M2-REDUCE-A derives REG-A_k "in an honest saturated k-colouring"). So a NO in that class is already
+route M's half. The all-maps NO is what answers Question 2.
+
+*Its failure* is a valid fragment about a four-colour vertex on every disc, its complexity free. That gives `χ_m⁰(ℝ²) ≤ 6`, hence `χ(ℝ²) ≤ 6` with no
+MR, **if** card `the-yes-needs-no-map` holds. That card is a composition of `LEDGER.md` row 131's weak-* step, the exact-fragment twin of
+FS111-W-NEG (iii); it is Poros's, at one mind, and unchecked. A valid map of the plane is one way to supply the failure. If the card holds, the uniform
+radius is implied by seven: it is a necessary condition of the bold answer and never an overshoot of it, and this question decides something whichever
+way it goes, without FS-121.
+
+A local exclusion for one configuration only (as FS-114 filed) is a piece, not the answer. A NO for non-Siamese maps only is FS-117's, not this
+stub's.
 
 ## What FS-114 established (addresses in `plans/FS114-derivation.md`)
 

@@ -405,3 +405,50 @@ Invention signal: none seen. I read for it in the stub; `data/fs114/claims.md` �
 None is two held truths that cannot both stand.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED
+
+### 3.1 What I wrote into `plans/STUB-local-exclusion.md`, and what I changed that FS-114's close wrote
+
+- **Added** `## The question (Poros, 2026-09-29)`: § The card (the rank-1 card of § 2.4, verbatim, in a fence so that the gate reads only this record's
+  cards), with the other two cards named by rank; § Existence form; § Structural form. The forms are quoted here so that the record carries them:
+  - *Existence form:* "**Is there a radius `R` — one `R` for every complexity, Siamese pairs allowed — such that no valid fragment exists on the closed
+    disc of radius `R` about a vertex of at least four colours?**"
+  - *Structural form:* "**In every valid fragment with any number `k ≥ 4` of colours, what does the unit circle about each vertex of at least four
+    colours carry — its (Q) arcs, its change points, and the vertices of at least four colours it places at distance 1 — and which of these ring types
+    can recur at every such vertex a ring places?**"
+
+  The structural form is not the existence form reworded. It asks for the finite rule every fragment obeys at its four-colour vertices, independent of
+  `R` and of the colour count. It has a seven-colour inhabitant (R7's lattice points), which makes the vacuity test the claim list asks for, and it
+  names where six is spent (N6-RING60's "with a seventh colour the ring can carry three").
+- **Rewrote in place** the provisional-bearings line (as a list) and § Bearing on the answer. The bearing now says three things:
+  - the question is decisive in both directions if card `the-yes-needs-no-map` holds, and that card is marked as Poros's, one mind, unchecked;
+  - route M's honest branch needs the NO only in the honestly saturated class (FS111-M2-REDUCE-A);
+  - the all-maps NO is what answers Question 2.
+
+  I kept FS-114's list of what the NO answers word for word.
+- **Changed two sentences of § The question, in plain language, because they were wrong:**
+  - "So the whole question … is now **local**:" → "So one local statement suffices for the whole question …". This is R1's F1, left in this section
+    by the close: at each `K` the question is local by compactness, and one uniform radius suffices for the whole NO. "Is local" claims the converse,
+    which is open (hunch `local-f-overshoots`).
+  - "Exclude every such fragment (the NO), or build a valid map (the YES)" → "… or build such a fragment on every disc (its failure; a valid map of the
+    plane is one way, not the only one …)". The negation of C114-LOCAL-F is fragments at every radius, whose complexity may grow, and no compactness
+    turns them into a map.
+- **Dropped** G67 and G51 from the bearings; both are retired.
+- **Left as FS-114's close wrote them:** § What FS-114 established, § The opening queue, § Beyond K1, § Owed second minds, § Construction targets,
+  § Prior-art debts, § Registered expectations, § Failure clauses, § Known tool defects, § Decisions held, § Deliverables. The opening queue is not
+  wrong: its items are K1's, and K1 remains a piece of the NO. My cards rank ahead of it for the reasons in § 2.3, C1–C2. Whether round 7's items
+  keep their order is the plan's call once card 1 returns.
+
+### 3.2 E3 scored
+
+E3 (before any tool call) guessed an existence form "about a four-colour vertex whose rings carry (Q) arcs", and a structural form built on "the
+straddle count along two unit circles", "posed for every tight near-colouring".
+- **The (Q)-ring focus: met.** It became card 3 and the heart of the structural form.
+- **The structural invariant: missed.** It is the ring type and its transfer rule, not the straddle, which is the kill, not the invariant.
+- **The class: missed.** It is valid fragments at any `k`, not near-colourings; the band card went to route R.
+- **The existence form: missed.** It was not narrowed to (Q) rings; it covers every four-colour vertex, as C114-LOCAL-F does.
+
+A prior guess, 1 of 4 parts met, consistent with the study's rate for prior hunches.
+
+## Stage 3 — SAVED
