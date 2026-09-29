@@ -89,3 +89,18 @@ frame wrong, say so.
 4. SAT-STRIP and SAT-QFREE, if the budget holds; then the report.
 
 Thank you.
+
+## Amendment 1 (2026-09-29 06:28 UTC): for a successor, stage 4 only
+
+The first agent on this brief saved stages 1–3 (RING-TWIST, RING-Q and RING-Q′) and handed back before stage 4 at its budget line; its record
+`plans/FS116-N1-proof.md` has a hand-back section written for you. You are its successor: read the record in full, check its last SAVED stage
+against `git log -- plans/FS116-N1-proof.md` (standing rule 2), and do **stage 4 only — SAT-STRIP and SAT-QFREE** (§ Your claims), then the
+report. Inputs that arrived after the first agent launched, each to be used as graded:
+- FS116-O1-SATPIN now holds by two minds, the second blind, in a corrected wording: "edge" is a boundary arc between tiles of two different
+  colours, and "exactly one of two types" reads "at least one"; the blind mind also found it holds at every vertex of at least two colours in
+  the saturated disc, cusps included (`plans/FS116-V1-verification.md` § 2.3–2.4).
+- FS121-D1-VT and FS121-D1-EROSION (`plans/FS121-D1-proof.md` § 2.1–2.2), one mind each, proved for honest saturated colourings of the plane,
+  not for fragments: say how you carry them to a fragment if you use them. A blind check of both starts now.
+- The construction side (FS116-Y1) is working Y-SAT, the other side of SAT-STRIP; you may read its record, and neither of you is blind.
+Budget for you: about 400k by the harness's count, as guidance; hand back at a saved stage before about 550k. Unchanged: no agents of your own
+(standing rule 1: staffing is Kooshi's budget, and I can review only work I know exists).
