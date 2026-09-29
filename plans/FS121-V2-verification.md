@@ -11,11 +11,11 @@ my verdicts are committed. `e(φ)` is the unit vector at angle `φ`; a colour **
 | id | statement (one line) | grade | where |
 |---|---|---|---|
 | FS121-V2-QT | the brief's three quotations are verbatim in the frozen list (3 of 3; plant fires) | [tools] | § 1.2 |
-| DB1-L3 | TRUE: at a point of Σ no colour occupies two sectors of positive angle, whatever cusps are present | [hand, one mind, blind] | § 2.2 |
+| DB1-L3 | TRUE: at a point of Σ no colour occupies two sectors of positive angle, whatever cusps are present | [hand; two minds with FS121-DB1, blind, the same model, different methods] | § 2.2, § 3.2 |
 | **FS121-V2-SECTOR** | stronger: a colour with a sector of positive angle at a point of Σ occupies no other region there, not even a zero-angle one; only "two cusps" of one colour survives DB1-L3's *not claimed* line | [hand, one mind] | § 2.3 |
 | FS121-D1-VT | TRUE wherever `L` is `C¹` at `Y`; at a corner of `L` (an interior radius-1 piece of `I` curving toward `b`) TRUE under reading (W), GAP under reading (B); cusp-freeness used only at `Y` for `a` | [hand, one mind, blind] | §§ 2.5–2.6 |
 | FS121-V2-VT-W | FS121-D1-VT corrected: reading (W) named, the terminal radius-1 piece excluded | [derived, one mind] | § 2.10 |
-| FS121-D1-EROSION | TRUE, by § 2.5's argument at the crossing of the two inner partner lines (needs no corner case) | [derived, one mind, blind] | § 2.8 |
+| FS121-D1-EROSION | TRUE, by § 2.5's argument at the crossing of the two inner partner lines (needs no corner case) | [derived; two routes with FS121-D1, blind; the zero-angle step inside VT at one mind under (Σ)] | § 2.8, § 3.4 |
 | FS121-V2-EROSION-DIAM | in every a.e.-proper colouring `min(L₁, L₂) ≤ 1/(2 sin(θ/2))`, so EROSION's first disjunct is automatic for `θ ≤ 2π/3`; its content lies in `(2π/3, π)` | [hand, one mind] | § 2.9 |
 
 ## Would-have-searched-here log (standing rule 5)
@@ -40,6 +40,12 @@ my verdicts are committed. `e(φ)` is the unit vector at angle `φ`; a colour **
    repeated colour at a vertex, so no bichromatic vertex)" and "Rests on it: FS111-W-NOREP case (ii); …", and W-NOREP's own `model:` line. Open text,
    logged because it hints at W-NOREP's route (a case (ii) that uses W-KB-DIR). I chose **not** to read W-NOREP's entry body (lines 485–498 of the
    open file) before my verdicts, to keep my route on DB1-L3 my own.
+5. **Stage 3, after my verdicts' commit `f537b8c9`:** to locate the opened sections I ran `grep -n '^#'` on `plans/FS121-DB1-verification.md` and
+   `plans/FS121-D1-proof.md`, which printed **every heading** of both files, including sections that stay fenced: in D1, the headings of §§ 2.3–2.6
+   and 3.1–3.4 (among them "C121-R2-FOUR — GAP at the band structure of the corner", "C121-CURVED — GAP at the transverse subdivision" and
+   "3.4 Correction to stage 2 (2026-09-29, found at stage 3)"); in DB1, the headings of §§ 2.1–2.2, 2.4–2.8 and 3.1–3.5 (among them "3.2 What the
+   first derivation's § 3.4 changes here"). Headings only; none of those sections read. They carry verdict words on claims that are not mine and
+   the existence of a correction to D1's stage 2, which holds the two sections I compare against (§ 5 of the report asks about it).
 
 ## Stage 1 — SAVED: the readback, what I was given, and the registered expectations
 
@@ -136,7 +142,7 @@ parsing them and seeing how they hang together, before any derivation of their o
 
 ## Stage 2 — SAVED: the three derivations, the attacks, the verdicts
 
-*Written 2026-09-29 06:40–07:10 UTC, blind: none of the first derivations has been opened. Two readings were fixed by Keryx during this stage (§ 1.4
+*Written 2026-09-29 06:40–06:58 UTC, blind: none of the first derivations has been opened. Two readings were fixed by Keryx during this stage (§ 1.4
 and § 2.6): "cusp-free" in sense (Σ); "the far side of L" at a corner of `L` left undefined by its author, so both readings are worked.*
 
 ### 2.1 Three lemmas the derivations share
@@ -437,10 +443,11 @@ verification: DB1-L3
   method: contacts inherited at z as limits along the sector's two edges, then the component lemma (Lemma H) puts every second region of the colour on
     the sector's side of both edge lines; the first derivation's route not known to me
   attack: § 2.4 Attack on DB1-L3
-  divergences: none — the first derivation is not yet read; stage 3 writes the table
+  divergences: § 3.2 Divergences on DB1-L3
   counterexamples: none — the X-vertex, two sectors on one side of a line, and every angle of the first sector on a half-degree grid; without saturation
     the bow-tie colouring puts one colour on two sectors, as it must
-  minds: 1 — blind, the same model: blind to the first derivation's record (not opened before this commit); method: my own, route unknown to me
+  minds: 2 — blind to: each other's records (FS121-DB1's § 2.3 opened only after f537b8c9; it was written before this job began); method: the
+    component lemma at contacts inherited along the edges, against a straddle with a tangent/unit-arc case split and exact cusp checks; the same model
   grade: hand
 
 verification: FS121-D1-VT
@@ -455,10 +462,12 @@ verification: FS121-D1-VT
     not derived under reading (B); derived wherever L is C¹ at Y; the corrected statement is FS121-V2-VT-W, derived
   method: F2 (the near side of L is a-free) and F3 (L's far side is a) at points of L, then FS121-V2-SECTOR at Y; the first derivation's route unknown
   attack: § 2.7 Attack on FS121-D1-VT
-  divergences: none — the first derivation is not yet read; stage 3 writes the table
+  divergences: § 3.3 Divergences on FS121-D1-VT
   counterexamples: none — the zero-angle escape (killed), a self-touching L (killed), the double horn with cusps (outside the hypotheses; not excluded, not
     built); under reading (B) no object found either way
-  minds: 1 — blind, the same model: blind to the first derivation's record; method: my own, route unknown to me
+  minds: 1 — where L is C¹ at Y the conclusion has two routes (FS121-D1 § 2.1 opened only after f537b8c9), but under the author's own reading (Σ) of
+    cusp-free the first route's step "cusp-freeness gives every sector at Y positive angle" does not hold, and the zero-angle case rests on
+    FS121-V2-SECTOR alone; under reading (G) the two routes are two minds, the same model, different lemmas (FS111-W-NOREP against DB1-L3's route)
   grade: hand
 
 verification: FS121-D1-EROSION
@@ -471,10 +480,61 @@ verification: FS121-D1-EROSION
   verdict: derived
   method: the inner unit parallels cross at the images of the points at distance cot(θ/2); § 2.5's argument at the crossing, for the straight branch only
   attack: § 2.9 Attack on FS121-D1-EROSION
-  divergences: none — the first derivation is not yet read; stage 3 writes the table
+  divergences: § 3.4 Divergences on FS121-D1-EROSION
   counterexamples: thin truth: the unsaturated hexagonal seven-colouring at a hexagon corner — for θ ≤ 2π/3 the first disjunct holds in every
     a.e.-proper colouring by the diameter bound (FS121-V2-EROSION-DIAM), so the hypotheses are idle there
-  minds: 1 — blind, the same model: blind to the first derivation's record; method: the mechanism was named by the statement itself (given), the argument
-    at the crossing mine
+  minds: 2 — blind to: each other's records (FS121-D1 §§ 1.3, 2.2 opened only after f537b8c9); method: the same crossing (named in the statement, so
+    given), VT applied through different lemmas; the same model; under reading (Σ) both routes pass through the zero-angle case, which only
+    FS121-V2-SECTOR (one mind) carries
   grade: derived from: FS121-V2-VT-W
+
+
+## Stage 3 — SAVED: the comparison with the first derivations, the count, the report
+
+### 3.1 What I read, and when
+
+After my verdicts' commit `f537b8c9` (2026-09-29 ~06:58 UTC): `plans/FS121-DB1-verification.md` § 2.3 (DB1-L3's first derivation), and
+`plans/FS121-D1-proof.md` § 1.3 (FS121-D1-XCORNER), § 2.1 (FS121-D1-VT) and § 2.2 (FS121-D1-EROSION), each with its entry. Nothing else of either
+file (the heading touch is fence-log item 5). **Retractions: none** — nothing in the first derivations showed an error of mine.
+
+### 3.2 Divergences on DB1-L3
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | how the second sector is confined to `G₁`'s side of an edge line | Lemma H: the contact at `p` inherited as a limit along the edge, density points `q → y`, the component lemma on both sectors ("both in or both out") | a straddle: a unit circle about a point `δ` of `G₂` crosses the partner curve `Π` beyond the edge (case T) or the contact's own sectors (case K, with degenerate cusp subcases checked exactly by `tools/fs121_db1_cusp.py`) | route | kept both; mine never needs to know what the contact point carries, so it has no case split |
+| 2 | `θ₁ ≤ π` | from the edge constraints themselves (a reflex `G₁` fits no closed side); `p`'s own saturation is not used | FS111-M-HALF at `p` (`p` saturated for `γ`) | route | kept both |
+| 3 | inputs | Lemma C; M-PINCH and M-C11 at points of the edges | also DB1-L1, L4, L5 (a unit arc's centre lies in Σ), finiteness of radius-1 pieces near `p`, M2-INTRAD | route | kept both; a second method on the same statement |
+| 4 | a sector and a cusp of one colour at `p` | excluded: FS121-V2-SECTOR (§ 2.3) | "a colour repeated as a sector and a cusp at `p` is not excluded, and the statement does not say it is" | route | no disagreement of truth — the first derivation says its proof does not reach the case, not that the case occurs; FS121-V2-SECTOR (one mind) closes the first item of the statement's *not claimed* line |
+
+### 3.3 Divergences on FS121-D1-VT
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 5 | a region of angle 0 at `Y` (an arc leaving `Y` tangent to `L`) | killed by FS121-V2-SECTOR's zero-angle clause, using cusp-freeness only as "`a` has positive density at `Y`" | "cusp-freeness gives every sector at `Y` positive angle (a sector of angle 0 between tangent arcs is a colour of density 0 at a point of its support)" | route | the step holds under reading (G) and **not under the author's own definition (Σ)**: a zero-angle region of `a` at a point where `a` also holds a sector of positive angle is no point of density 0. It was my registered likeliest break. The conclusion survives through FS121-V2-SECTOR; the first route as written has a gap at this step, which that lemma fills |
+| 6 | `I` a chain with a sub-arc of radius 1 curving toward `b` | worked: `L` has a corner at that sub-arc's centre; TRUE under reading (W), GAP under reading (B) (§ 2.6) | "its curvature toward `b` is `< 1` … radius 1 toward `b` is the focal case", so `x ↦ x + ν(x)` is taken to be a `C¹` immersion | wording | the author's argument reads "not a unit arc curving toward b" as "no sub-arc of radius 1 curving toward b"; the statement's words admit such chains. Fix the words either way: state the exclusion (the author's intended scope, the smaller claim) or name reading (W) (FS121-V2-VT-W, the larger claim, derived). Truth at `C¹` points is unchanged by either |
+| 7 | the lemma the conclusion rests on | FS121-V2-SECTOR, DB1-L3's route extended — independent of FS111-W-NOREP | FS111-W-NOREP (one mind, `plans/FS111-W-wild.md`), its H-DEN supplied by cusp-freeness | route | kept both; mine is a second method that does not pass through W-NOREP |
+| 8 | where cusp-freeness is used | only at `Y`, for the colour `a` | the class hypothesis, as NOREP's | route | my route carries the statement with the local hypothesis; with `a` of density 0 at `Y` (the double horn, § 2.7) neither route decides it |
+
+### 3.4 Divergences on FS121-D1-EROSION
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 9 | the crossing point | symbolic in `θ` (`fs121-v2-crossing`) | trigonometry by hand and a 60-digit check at 60 angle pairs (FS121-D1-XCORNER) | route | the same point `Q = X`; kept both |
+| 10 | applying VT at the crossing | § 2.5's argument for the straight branch through `Q` alone, so no corner case arises | FS121-D1-VT's statement as filed | route | the first route inherits row 5's step; with FS121-V2-SECTOR both carry it |
+| 11 | what the models test | for `θ ≤ 2π/3` the first disjunct holds in every a.e.-proper colouring (FS121-V2-EROSION-DIAM); SQ9 (`π/2`) and HEX9 (`2π/3`) lie in that range | SQ9 and HEX9 as the statement's models; the control's plant is a hexagon of side `3/5` | route | the models test nothing the diameter bound does not already give, and a hexagon tile of side `3/5` (diameter `6/5`) occurs in no a.e.-proper colouring, so the plant is geometric only. The statement's content lies at `θ ∈ (2π/3, π)`, where no held colouring has a sector |
+| 12 | the second disjunct | what it needs at `Q`: four colours, T-junctions at `p₁` and `p₂`, the outer colours of the two edges beyond them equal (§ 2.9) | not examined | route | an addition, no disagreement |
+
+**No divergence of truth.** Every row is route or wording; none needs a third mind.
+
+### 3.5 The count, and what the verification could not supply
+
+- **DB1-L3:** two minds, blind to each other, the same model, different methods (rows 1–3). Held at [hand].
+- **FS121-D1-VT:** where `L` is `C¹` at `Y`, two routes; under reading (G) they are two minds, but under the author's reading (Σ) the zero-angle case
+  rests on FS121-V2-SECTOR alone, so the statement is at one mind on that case until a second mind derives the lemma. At a corner of `L`: GAP
+  under (B), derived under (W) (one mind). The corrected statement FS121-V2-VT-W: one mind.
+- **FS121-D1-EROSION:** two routes through the same crossing; the step inside VT that row 5 names is at one mind under (Σ).
+- **FS121-V2-SECTOR:** one mind, new; it is what the other two lean on under (Σ), so it is the one item here that wants a blind second mind next.
+- *Could not supply:* whether these statements are the ones FS-121's composition needs (a reader of intent), and whether the class they quantify over
+  is inhabited where they have content: no held saturated colouring has a curved tangent-type interface, a junction on a partner curve, or a sector
+  of angle in `(2π/3, π)`.
 

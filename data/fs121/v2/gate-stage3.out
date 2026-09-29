@@ -1,0 +1,45 @@
+entry lint
+  claim FS121-V2-QT: minds 1
+  claim FS121-V2-QT: prior art known
+  claim FS121-V2-SECTOR: minds 1
+  warn  FS121-V2-verification.md:359 (FS121-V2-SECTOR): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-V2-SECTOR: prior art owed
+  claim FS121-V2-VT-W: governed by FS121-V2-SECTOR (hand, minds 1)
+  claim FS121-V2-VT-W: minds 1
+  warn  FS121-V2-verification.md:391 (FS121-V2-VT-W): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-V2-VT-W: prior art owed
+  claim FS121-V2-EROSION-DIAM: minds 1
+  claim FS121-V2-EROSION-DIAM: prior art known
+  entries: 4  derived: 4  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'DB1-L3' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification DB1-L3: given: the statement verbatim and the list's §§ 0–1 (at 01:31); my brief's note that the …
+  claim verification DB1-L3: committed 2026-09-29, stage 2
+  claim verification DB1-L3: predicted derived (0.85); verdict derived — met
+  claim verification DB1-L3: counterexamples none — the X-vertex, two sectors on one side of a line, and every angle of the first sector on a half-degree grid; without saturation the bow-tie colouring puts one colour on two sectors, as it must
+  claim verification DB1-L3: minds 2 — blind to: each other's records (FS121-DB1's § 2.3 opened only after f537b8c9; it was written before this job began); method: the component lemma at contacts inherited along the edges, against a straddle with a tangent/unit-arc case split and exact cusp checks; the same model
+  warn  verification 'FS121-D1-VT' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D1-VT: given: the statement verbatim and the list's §§ 0–1; the list's note that EROSION rests on it; …
+  claim verification FS121-D1-VT: committed 2026-09-29, stage 2
+  claim verification FS121-D1-VT: predicted derived (0.55); verdict gap — missed
+  claim verification FS121-D1-VT: counterexamples none — the zero-angle escape (killed), a self-touching L (killed), the double horn with cusps (outside the hypotheses; not excluded, not built); under reading (B) no object found either way
+  claim verification FS121-D1-VT: minds 1 — where L is C¹ at Y the conclusion has two routes (FS121-D1 § 2.1 opened only after f537b8c9), but under the author's own reading (Σ) of cusp-free the first route's step "cusp-freeness gives every sector at Y positive angle" does not hold, and the zero-angle case rests on FS121-V2-SECTOR alone; under reading (G) the two routes are two minds, the same model, different lemmas (FS111-W-NOREP against DB1-L3's route)
+  warn  verification 'FS121-D1-EROSION' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D1-EROSION: given: the statement verbatim, whose not claimed line names FS121-D1-VT as the lever and the …
+  claim verification FS121-D1-EROSION: committed 2026-09-29, stage 2
+  claim verification FS121-D1-EROSION: predicted derived (0.5); verdict derived — met
+  claim verification FS121-D1-EROSION: thin truth: the unsaturated hexagonal seven-colouring at a hexagon corner — for θ ≤ 2π/3 the first disjunct holds in every a.e.-proper colouring by the diameter bound (FS121-V2-EROSION-DIAM), so the hypotheses are idle there
+  claim verification FS121-D1-EROSION: minds 2 — blind to: each other's records (FS121-D1 §§ 1.3, 2.2 opened only after f537b8c9); method: the same crossing (named in the statement, so given), VT applied through different lemmas; the same model; under reading (Σ) both routes pass through the zero-angle case, which only FS121-V2-SECTOR (one mind) carries
+  verifications: 3  predictions met: 2 of 3 (Brier 0.192)  divergences: truth 0, route 11, wording 1  counterexamples: refutation 0, monster 0, thin truth 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs121-v2-quotes: printed '3 of 3 verbatim'; with the fault planted ('' → '--plant') it printed '2 of 3 verbatim' — it fires
+  ok    fs121-v2-sectors: printed 'sectors: reflex W1 killed outright 358; theta1 leaving an arc for a second region 0; theta1 <= 180 whose allowed cusp directions are exactly the two edges 359 of 359'; with the fault planted ('' → '--plant') it printed 'sectors: reflex W1 killed outright 358; ' — it fires
+  ok    fs121-v2-comparison: printed 'comparison: points inside the open unit disc about (0, 1): 0 of 174'; with the fault planted ('' → '--plant') it printed 'comparison: points inside the open unit ' — it fires
+  ok    fs121-v2-sq9: printed 'sq9: vertices of one period with a repeated colour: 0 of 81'; with the fault planted ('' → '--plant') it printed 'sq9: vertices of one period with a repea' — it fires
+  warn  FS121-V2-verification.md:423 (fs121-v2-crossing): of 'FS121-D1-EROSION', which is not an entry in these files
+  ok    fs121-v2-crossing: printed 'crossing: t = cot(theta/2): True; s = cot(theta/2): True; Q = (1/sin(theta/2), 0)'; with the fault planted ('' → '--plant') it printed 'crossing: t = cot(theta/2): False; s = c' — it fires
+  ok    fs121-v2-diameter: printed 'diameter: the diameter bound gives the first disjunct at 120 of 179 integer angles, exactly 1..120'; with the fault planted ('' → '--plant') it printed 'diameter: disagreement at 91 degrees' — it fires
+  controls: 6  fired on their faults: 6
+GATE: PASS (0 failures, 6 warnings)
