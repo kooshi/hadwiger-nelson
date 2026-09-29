@@ -16,14 +16,13 @@
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
-| FS116-N2 | Ephodos, RING-TRANSFER (round 3) | `data/fs116/briefs/FS116-N2-transfer.md` | `plans/FS116-N2-proof.md` | no |
 | FS116-V3 | ephodos-verifier on the list's § 11 (GERM-R, GERM-S, TOUCH, ECHO, AXIS) | `data/fs116/briefs/FS116-V3-verify.md` | `plans/FS116-V3-verification.md` | yes: fence in its brief |
 | FS116-S1 | Ephodos, SAT-STRIP from both sides (exclude or build Y-SAT) | `data/fs116/briefs/FS116-S1-satstrip.md` | `plans/FS116-S1-proof.md` | no |
 | FS121-D4 | Ephodos, C121-REGJ (the structural form) | `data/fs121/briefs/FS121-D4-regj.md` | `plans/FS121-D4-proof.md` | no |
 | FS121-V4 | ephodos-verifier on the list's § 7.2 (the cover route's lemmas) | `data/fs121/briefs/FS121-V4-verify.md` | `plans/FS121-V4-verification.md` | yes: fence in its brief |
 | FS121-V3 | ephodos-verifier on the list's § 6 (V2-SECTOR, D3-GRUNDY, D3-FALLSAT) | `data/fs121/briefs/FS121-V3-verify.md` | `plans/FS121-V3-verification.md` | yes: fence in its brief |
 
-Done tonight, each logged: FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
+Done tonight, each logged: FS116-N2 (RING-TRANSFER MISSTATED; -C derived), FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
 FS121-V2, CL1, CL2.
 
 **Held at two minds tonight (the announcement rule met)**: FS116-O1-YESLIM; FS116-O1-SATPIN (corrected wording); N7-HUB (b), (c);
@@ -37,10 +36,18 @@ Everything else is one mind or GAP — see the inventories.
 - Claim lists frozen: `data/fs116/claims.md`, `data/fs121/claims.md` (blindness edits only, recorded in their headers).
 - Shared step: FS-116's `what-do-q-rings-force` (RING-Q) is FS-116's; FS-121 takes it as input (`plans/FS121-close-inventory.md` item 8).
 
-## Next
+## Next (queue as of 2026-09-29 07:36 UTC; take from the top as slots free)
 
-- FS-116: when the successor reports on SAT-STRIP (the plan's P1), round 3 is D2 (the exclusion) on RING-GERM's rule (RING-TRANSFER not yet
-  attempted), and a blind mind on round 2's new claims. FS-114's N7-3T entry repair and the bowtie (Q)-arc divergence go to the close (items 32, 39).
-- FS-121: freeze FS121-C1's proposed NO-PAR statements (it will send the path); when D2 reports, P2 decides FS-115's framing; D4 (C121-REGJ) is last.
-- Kooshi's report: tonight in his house format; the lane-edit review (`plans/WORKFLOW3-lane-edits-proposed.md`, § G is tonight's list);
-  the cover-route trigger ruling (`plans/FS121-close-inventory.md` item 35) and the round-1 staffing count (FS-116 item 24) are his to overturn.
+1. **FS-116 construction** (item 68): build a Γ-free four-colour vertex on a disc of radius above 2 (a "hub"), or show by formula none
+   exists — RECIP, ANTI, HEX6 have no model at six colours. Template: `data/fs116/briefs/FS116-Y2-construction.md`.
+2. **FS-116 D2's next object** (item 70): a four-colour vertex whose ring carries an arc of Γ at distance 1 from a Γ-free one, with its
+   semi-hubs (RING-TRANSFER-Q). Template: `data/fs116/briefs/FS116-N2-transfer.md`.
+3. **FS-116 blind check** (item 69): STAR, RECIP, ANTI, HEX6, HEX3, RING-TRANSFER-C from `plans/FS116-N2-proof.md`, added to the list as
+   § 12 by the same script shape as § 11 (`data/fs116/claims.md`); brief template `data/fs116/briefs/FS116-V3-verify.md`.
+4. **FS-121**: the round-3 candidate on the transverse subdivision (C121-R2-FOUR, C121-CURVED; item 24); a blind check of FS121-D2-SYM
+   (item 49) and of FS121-D3-EQ at the next verifier slot. The cover route is parked (item 51).
+5. **Kooshi's report**, in his house format: tonight's results at their grades (the two inventories), the rulings he may overturn
+   (FS-116 item 24 staffing; FS-121 items 35 and 51, the cover route), and the lane-edit review (`plans/WORKFLOW3-lane-edits-proposed.md` § G).
+
+Staffing ruled tonight: at most four non-verifier agents (FS-116 item 24), verifiers on top. Answer a blind verifier's reading question from
+the proposing record's definitions when the author is past its line; relay definitions only, never a proof's text (FS-116 W18).
