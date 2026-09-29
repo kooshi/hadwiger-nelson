@@ -12,16 +12,29 @@ frozen by Keryx 2026-09-29 07:09 UTC. Record written 2026-09-29 from 07:10 UTC.*
 - **V3-GERM-R-EDGE** — GERM-R with any end of `v⁻`'s or `v⁺`'s interval closed is FALSE (and by the mirror `u±`'s): four pairs of one-colour
   tiles by formula, each with a hand bound — [hand], § 2.3 item 3; sampled by `tools/fs116_v3_boundary.py` (a check of the bound, not a proof).
 - **V3-GERM-S** — FS116-N1-GERM-S as stated: TRUE — [hand], § 2.4, over V3-GERM-R.
+- **V3-TOUCH** — FS116-N1-TOUCH as stated: TRUE, its hypothesis "`w` in the closure of a tile of one of `p`'s colours" idle — [hand], § 3.1.
+- **V3-ECHO-ONLY** — under ECHO's ring hypothesis alone (any `k`, no saturation, no density): every point of `ω(w)` in the closure of an
+  `X`-tile is `2w − p` — [hand], § 3.3.
+- **V3-ECHO-B** — FS116-N1-ECHO corrected (`w` an essential boundary point, saturated there): TRUE — [hand], § 3.3, over V3-ECHO-ONLY.
+- **V3-ECHO-A** — FS116-N1-ECHO read with saturation at `w` vacuous off the essential boundary: FALSE, the hexagonal seven-colouring —
+  [hand] (validity) + [tools] at named points (`tools/fs116_v3_echo.py`), § 3.3.
+- **V3-AXIS** — FS116-N1-AXIS as stated: TRUE; (a) and (d) need no saturation — [hand], § 3.5.
+- **V3-AXIS-STRIP** — at the strip's midline vertex (unsaturated) AXIS (a), (c), (d) hold and (b) fails; at SQ9 (`k = 9`) (a)–(c) hold and
+  (d) fails — [tools] at named points (`tools/fs116_v3_axis.py`, floats with margins), § 3.6.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none — a readback and predictions.
 - Stage 2: would have sampled random one-colour tile pairs near `y` to probe GERM-R's ends → instead derived the second-order bounds of § 2.3
   by hand and built four pairs by formula; the tool evaluates those four objects only.
+- Stage 3: would have scanned angles `ψ` and colourings for an ECHO-(A) counterexample → instead took the one colouring the list names as a
+  control (the hexagonal seven-colouring), fixed `ψ = 20°`, and checked that point only. Would have searched unsaturated fragments for a
+  (Q) arc at AXIS (c)'s germs → instead read the one held unsaturated object with such a vertex (the strip), which does not decide it.
 
 ## Fence log (standing rule 8)
 
-- Stage 2 (07:30–08:05 UTC): no fenced path opened; reads were `plans/FS111-M-regularity.md` § 2.4–2.6 (R7, open).
+- Stage 3 (07:33 UTC on): no fenced path opened; reads were `LEDGER.md` rows 135–136 (by `grep`) and `plans/FS112-Y-construction.md` § 1.3 (open).
+- Stage 2 (07:26–07:32 UTC; corrected from `git log`): no fenced path opened; reads were `plans/FS111-M-regularity.md` § 2.4–2.6 (R7, open).
 - 2026-09-29 07:10–07:24 UTC: no fenced path opened. Searches this stage were `grep` for headings inside open files
   (`plans/FS114-derivation.md`, `plans/FS110-N-proof.md`, `plans/FS112-N-proof.md`, `plans/FS111-M-regularity.md`,
   `.claude/skills/ephodos/scripts/derive_gate.py`, `.claude/agents/ephodos.md`) and printed no fenced text.
@@ -104,7 +117,7 @@ proofs, the round-1 and round-2 records. I had met none of the five statements b
 
 ### 1.5 The registered expectations (honest about their timing)
 
-These were written at 07:24–07:30 UTC, **after** reading the statements and the held inputs and after working the arguments in my head
+These were written at 07:24–07:25 UTC (the stage-1 commit is 02:25:26; times corrected at stage 3 from `git log`), **after** reading the statements and the held inputs and after working the arguments in my head
 during the readback for about twenty minutes — so they are informed predictions, not naive ones, and a high hit rate here measures
 little. Nothing of the derivations was written before them.
 
@@ -126,7 +139,7 @@ their verdict lines were placeholders ("stalls at: stage 1 — not yet derived")
 
 ## Stage 2 — SAVED: GERM-R and GERM-S — derivation, attack, verdicts
 
-Written 2026-09-29 from 07:30 UTC. Tools of this stage: `tools/fs116_v3_germ.py` (the first-order bookkeeping, exact at the ends of
+Written 2026-09-29, 07:26–07:32 UTC (corrected at stage 3 from `git log`: the stage-2 commit is 02:32:35; the draft said "from 02:30"). Tools of this stage: `tools/fs116_v3_germ.py` (the first-order bookkeeping, exact at the ends of
 each interval), `tools/fs116_v3_boundary.py` (the boundary models of § 2.3). Neither searches: each evaluates objects given by formula.
 
 ### 2.1 Three facts used throughout (the held calculus, re-read)
@@ -265,6 +278,168 @@ counts a related sketch as given may count one.
 
 ## Stage 2 — SAVED
 
+## Stage 3 — SAVED: TOUCH, ECHO and AXIS — derivation, attack, verdicts
+
+Written 2026-09-29, 07:33–07:39 UTC and after (times from `date`). Tools of this stage: `tools/fs116_v3_echo.py` (ECHO's reading-(A) counterexample, the hexagonal
+seven-colouring by formula) and `tools/fs116_v3_axis.py` (AXIS's clauses read on the rebuilt strip and on the square nine-colouring, both
+by formula). Neither searches. Facts (S), (E1), (E2), (G) and GERM-R are § 2's.
+
+### 3.1 TOUCH — derived
+
+Six colours, `|P_cl(p)| = 4`, so exactly two absent colours; `w = r(ψ) ∈ ω(p)`, on no arc of `Γ` on `ω(p)` (arcs of `Γ` are closed:
+the list's `Γ` is a union of arcs "with one-sided tangents at their endpoints"), not a change point, `w ∈ cl T_c` for a tile `T_c` of a
+colour `c` of `p`, the four germs at `w ± 60°` on no (Q) arc.
+
+*Step 1 (the ring at `w`).* By (G), both ring germs at `w` are off `Γ`, each in one tile, of an absent colour (E1). If `w ∉ Γ`, `w` lies in
+a tile, which must be `T_c` (a point off `Γ` in a tile's closure is in that tile), against (E1) at `p`; so `w ∈ Γ`, and "not a change
+point" says the two ring germs have one colour, `X`. **The ring just clockwise and just counter-clockwise of `w` lies in `X`-tiles.**
+*Step 2 (the four germs).* Each germ at `w ± 60°` is 60° from one ring germ at `w`, both of which are `X`: by (E1) at the germ's points no
+`X`-tile has them in its closure. On no (Q) arc, a germ lies in the closure of a tile of an absent colour (§ 2.4 Step 1's argument), not
+`X`: **each germ lies in the closure of an `X̄`-tile and of no `X`-tile.**
+*Step 3 (`X̄` at `w`).* GERM-R at `y = w` with all four germs in the closure of `X̄`-tiles forbids `X̄` along
+`ψ + (150°, 330°) ∪ (−30°, 150°) ∪ (−150°, 30°) ∪ (30°, 210°)`: the first two leave out only `ψ + 150°` and `ψ + 330°`, which lie in the
+fourth and the third. Every tile with `w` in its closure approaches `w` along some direction (it holds a sector at `w`), so **no
+`X̄`-tile has `w` in its closure.** ∎
+*Uses only:* (E1), (G), GERM-R, exactly two absent colours. **Not used: `w ∈ cl T_c`** — Step 1 used it only to place `w` on `Γ`, and
+every conclusion holds as well when `w` lies inside an `X`-tile (then Steps 2 and 3 run unchanged, and Step 3 is immediate).
+
+### 3.2 Attack on TOUCH
+
+1. **Each hypothesis removed.** "`w` in the closure of a tile of one of `p`'s colours": idle — the conclusions hold for every point of
+   `ω(p)` that is on no arc of `Γ` on `ω(p)`, is not a change point, and has its four germs off (Q) arcs, e.g. a point inside a ring tile.
+   A **thin truth**: the hypothesis marks the case of interest (a point of `D`, RING-TWIST's set) and carries no weight in the argument.
+   "Four colours and no more": needed to name `X̄` (with five colours at `p` there is one absent colour, and a germ off (Q) arcs would
+   need an absent colour other than `X` — none — so the class is empty there). "No germ on a (Q) arc": needed (a germ on a (Q) arc
+   carries two colours of `p` and may carry no absent colour at all).
+2. **"Lies on no arc of `Γ` on `ω(p)`" read with open arcs.** Then `w` could be an end of an arc of `Γ` on `ω(p)`, not a change point
+   under § 10's reading (the ring is on `Γ` on one side), and the first conclusion ("the ring just clockwise and just counter-clockwise
+   of `w` lies in tiles") would fail on that side. The list fixes arcs as closed, so this is no counterexample; I note it as the one
+   word a reader could misread.
+3. **`k ≥ 7`** (disclaimed): Step 2's "an absent colour, not `X`, so `X̄`" is where six is spent.
+4. **Where the attack succeeds: a change point in place of `w`.** Drop "not a change point" and the germs split between both absent
+   colours (GERM-S Step 1), so conclusions two and three fail — which is GERM-S's case, not a defect of TOUCH.
+
+**Verdict: TOUCH derived** (TRUE), [hand], over GERM-R; one idle hypothesis (a thin truth).
+
+### 3.3 ECHO — derived under reading (B), refuted under reading (A); MISSTATED
+
+Any `k`; a disc of radius above 2 about `p`; `w = r(ψ)`; the ring germs `r(ψ ∓ t)` in tiles `R⁻`, `R⁺` of colour `X ∉ P_cl(p)`.
+
+**V3-ECHO-ONLY (a relay lemma; no saturation, no density used).** *Every point of `ω(w)` in the closure of an `X`-tile is `2w − p`.*
+Let `z = w + e(θ) ∈ cl T′`, `T′` an `X`-tile. By (E1) at `w` (`w ∈ cl R^±`), `T′` misses `ω(w)`, so `T′` lies inside `B(w, 1)` or outside
+`B̄(w, 1)`, being connected. `θ = ψ + 180°` gives `z = p`, excluded because `X` is absent at `p`. Otherwise let `sin(θ − ψ) ≠ 0`, and
+`a_t := r(ψ + εt) ∈ R^ε` for a side `ε = ±1` to be chosen; `a_t − w = εt·e(ψ + 90°) + O(t²)`. For `b ∈ T′` near `z`, put `η := |b − w|² − 1`
+(`η > 0` if `T′` is outside, `< 0` inside). Then
+
+  `|b − a_t|² − 1 = η − 2εt⟨b − w, e(ψ + 90°)⟩ + O(t²) = η − 2εt·sin(θ − ψ) + O(t|b − z| + t²)`.
+
+Choose `ε` so that `εη·sin(θ − ψ) > 0`. As `t → 0⁺` the expression has `η`'s sign; at `t = |η|/|sin(θ − ψ)|` (small once `b` is close
+to `z`) it is `−η + O(η·|b − z| + η²)`, of the other sign. So `T′ × R^ε` straddles 1, and (S) makes the fragment invalid. Hence
+`sin(θ − ψ) = 0`, `θ = ψ`, `z = 2w − p`. ∎ (Both ring tiles are used: which one depends on the sign of `η·sin(θ − ψ)`.)
+
+**Under (B)** (`w` an essential boundary point, saturated for each colour of `P(w)`; `X ∈ P(w)`): saturation for `X` gives a point
+`z ∈ ω(w) ∩ supp S_X` (the contact reading, § 1.3); `supp S_X = cl S̃_X` lies in the closure of the union of the `X`-tiles (`Γ` is null),
+and by local finiteness `z` is in the closure of one `X`-tile; by V3-ECHO-ONLY `z = 2w − p`. **So `2w − p` lies in the closure of an
+`X`-tile: TRUE.** The radius above 2 keeps `ω(w)` inside the fragment's domain.
+
+**Under (A)** (saturation at `w` checks nothing when `w` is not an essential boundary point): **FALSE**. `tools/fs116_v3_echo.py`: the
+hexagonal seven-colouring with hexagons of circumradius `a = 0.45` (the Voronoi cells of the triangular lattice of spacing `a√3`, the cell
+about `m b₁ + n b₂` coloured `(m + 3n) mod 7`) is valid — same-colour centres differ by a vector of the index-7 sublattice, of least length
+`√21·a = 2.062` (checked over `|m|, |n| ≤ 6`), so same-colour hexagons are more than `2.062 − 0.9 = 1.162` apart, and each has diameter
+`0.9`. With `p` the origin (a centre, colour 0) and `w = r(20°)`: `w` lies inside a hexagon of colour `X = 1` (margin 0.013 to its
+boundary), so both ring germs are in one `X`-tile and `X ≠ 0` is absent at `p`; `P(w) = {X}`, so `w` is no essential boundary point
+and (A)'s saturation at `w` holds with nothing to check, and `X ∈ P(w)`; but `2w − p` lies inside a hexagon of colour 5 (margin 0.32),
+in the closure of no `X`-tile. With the colouring `(m − n) mod 3` planted, the validity certificate fails and the tool says so (control
+`v3-echo-a`). The same holds under (A′), "saturated on a disc about `w`": a small disc about `w` holds no essential boundary point.
+
+**Which reading the statement should name: (B).** Corrected statement (MISSTATED → TRUE): *"… if `w` is an essential boundary point at
+which the fragment is saturated — each colour of `P(w)` has a point of its support at distance exactly 1 from `w` — and `X` is in `w`'s
+essential multicolour, the point `2w − p` lies in the closure of a tile of colour `X`."* Equivalently: add "`|P(w)| ≥ 2`". With
+V3-ECHO-ONLY it can be said sharper: **`ω(w) ∩ supp S_X ⊆ {2w − p}` always, and saturation at `w` for `X` makes it `{2w − p}`.**
+
+### 3.4 Attack on ECHO
+
+1. **The monster, placed.** The counterexample breaks no step of the argument under (B); it lives in the term "saturated at `w`", which
+   the list defines only for a colouring and for a disc. Its place is § 3.3's first line under (B): the existence of a contact `z`.
+2. **Each hypothesis removed (under B).** "`X ∈ P(w)`": saturation constrains only colours of `P(w)`; with `X` of density 0 at `w` (both
+   ring tiles cusps at `w`) no `X`-contact is promised — disclaimed. "Both ring germs `X`": V3-ECHO-ONLY uses the ring tile on the side
+   fixed by the sign of `η·sin(θ − ψ)`; with `X` on one side only, contacts on the other side's half of `ω(w)` are no longer excluded.
+   "`X` absent at `p`": used once, to exclude `z = p`. "Any `k`", "Siamese allowed": unused.
+3. **k = 7 inhabitant under (B)?** R7 (FS111-M § 2.4) is saturated everywhere; at a lattice point `p` its absent colour is one up colour,
+   and a point `w` of `ω(p)` with the ring in that colour on both sides and `|P(w)| ≥ 2` would need `ω(p)` tangent to an up's boundary
+   from inside. I did not locate one; the (B) form is derived, not exhibited.
+
+**Verdict: ECHO — refuted as written, with a monster** (the term "saturated at `w`"): FALSE under (A) by the hexagonal seven-colouring,
+TRUE under (B); **MISSTATED**, the corrected statement TRUE, [hand], with V3-ECHO-ONLY.
+
+### 3.5 AXIS — derived
+
+`p = 0`; `T_I, …, T_IV` the quadrant tiles (each the only tile at `p` of its colour: degree 4, four colours); six colours, so the absent
+pair is `{X, X̄}`; the fragment saturated on `B̄(p, ρ)`, `ρ > 0`. At `q_N = (0, 1)`, `ψ = 90°`.
+
+*(a), no saturation used.* A tile `T` approaching `q_N` along `β ∈ (180°, 360°)` has points `q_N + sd` with `|q_N + sd|² = 1 + 2s sin β′ +
+s² < 1` (`d = e(β′)`, `β′ → β`), so it meets `B(p, 1)`. If its colour were `p`'s, (E2) against the quadrant tile of that colour would be
+Siamese, putting that quadrant tile inside `B̄(q_N, 1)`; but each quadrant tile holds points `ε e(d)` with `d` as close as we like to the
+`x`-axis (`d → 0°` or `180°` for `T_I`, `T_II`; any `d` for `T_III`, `T_IV`), at distance `√(1 − 2ε sin d + ε²) > 1` from `q_N` once
+`sin d < ε/2`. So **`T` is `X` or `X̄`.**
+
+*(b), saturation at the edge points.* For `0 < s < s₀` (within `ρ` and the edge along `0°`), `x_s = (s, 0)` has `P(x_s) = {c_I, c_IV}`;
+saturation for `c_IV` gives `z = x_s + e(θ) ∈ cl T′`, `T′` a `c_IV`-tile, and `T′` misses `ω(x_s)` by (E1) (`x_s ∈ cl T_IV`), so `η :=
+|b − x_s|² − 1` has one sign on `T′`. `T_IV` holds `x_s + σd` for every `d` in the open lower half-plane. If `θ ∉ {90°, 270°}`, some such
+`d₁`, `d₂` have `⟨e(θ), d₁⟩ > 0 > ⟨e(θ), d₂⟩`, and `|b − x_s − σd|² − 1 = η − 2σ⟨b − x_s, d⟩ + σ²` takes both signs for `σ ≫ |η|`: (S).
+If `θ = 270°`, (E2) for `T_IV` and `T′`: not outer (`(s, −σ) ∈ T_IV` is within 1 of `z = (s, −1)`), not Siamese (`T_IV`'s points near `p`
+are about `√(1 + s²) > 1` from `z`). So `θ = 90°`, `z = (s, 1)`, and (E2) is outer (`(s, −σ)` is `1 + σ` from `z`): every point of `T′` is
+more than 1 from every point of `T_IV`, which holds `(x, −σ)` for `0 < x < s₀` and small `σ`, so `T′` misses `{0 < x < s₀, y < 1}`. Every
+`(s, 1)`, `0 < s < s₀`, is then on `Γ` (off `Γ` it would be inside a `c_IV`-tile reaching below `y = 1`), so `(0, s₀) × {1}` is a segment of
+`Γ` leaving `q_N` along `0°`, and the tile above it is `c_IV`; near `q_N` that tile is the one holding the sector just counter-clockwise
+of `0°`. **A `c_IV`-tile approaches `q_N` along `0⁺`, above `y = 1`.** The edge along `180°` (`T_II` above, `T_III` below) gives **a
+`c_III`-tile along `180⁻`**, the same way.
+
+*(c), over (b).* Let the germ just counter-clockwise of `r(30°)` lie on a (Q) arc: its side colours are colours of `p`. The inner side
+tile meets `B(p, 1)`, so by (E2) the quadrant tile of its colour lies in `B̄(z, 1)` for the germ's points `z = r(30° + t)`, which forces
+that quadrant's directions into `[t − 60°, t + 120°]`: quadrant I. The outer side tile has points outside `B̄(p, 1)`, so the quadrant tile
+of its colour misses `B(z, 1)`, which forces its directions into `[t + 120°, t + 300°]`: quadrant III. So the outer side colour is
+`c_III`, and GERM-R at `q_N` with this germ as `v⁺` (just counter-clockwise of `r(ψ − 60°)`) forbids `c_III` along `ψ + (−30°, 150°) =
+(60°, 240°)`, which holds `180⁻` — against (b). The germ just clockwise of `r(150°)` (as `u⁻`): inner quadrant II, outer quadrant IV,
+`c_IV` forbidden along `ψ + (−150°, 30°) = (−60°, 120°) ∋ 0⁺` — against (b). **Neither germ lies on a (Q) arc.**
+
+*(d), no saturation used.* The germ just clockwise of `r(30°)` (`v⁻` at `q_N`) and the one just counter-clockwise of `r(150°)` (`u⁺`), on no
+(Q) arc, each lie in the closure of a tile of an absent colour, say `Y` and `Y′`. GERM-R forbids `Y` along `(240°, 420°)` and `Y′` along
+`(120°, 300°)`; the tile holding the direction `270°` at `q_N` is `X` or `X̄` by (a) and neither `Y` nor `Y′`, so `Y = Y′ =: Z` and neither
+germ lies in the closure of a tile of the other absent colour `Z̄`. `Z` is forbidden along `(120°, 420°)`, which holds `(180°, 360°)`: **every
+tile approaching `q_N` from below the horizontal is `Z̄`**. If the ring is off `Γ` on both sides of `q_N`, its two germ tiles approach `q_N`
+along `0°` and `180°`, are absent-coloured (E1) and not `Z` (both directions are forbidden to `Z`): both `Z̄`, **so `q_N` is not a change
+point** (and if the ring lies on `Γ` on a side, `q_N` is none by § 10's reading). ∎
+
+The turned points `q_E`, `q_W`, `q_S`: the hypotheses are invariant under the quarter-turn about `p` with the quadrants relabelled.
+*Uses only:* (S), (E1), (E2), (G), GERM-R, six colours in (a) and (d), saturation at the four edges' points near `p` in (b) (and so in (c)).
+
+### 3.6 Attack on AXIS
+
+1. **Saturation removed: the strip.** `[AxenovichEtAl2014]`'s strip as rebuilt in `plans/FS112-Y-construction.md` § 1.3 (arches of
+   width 1/2 on the midline, top row `C_j`, colours `A` 1, 2, 3 / `B` 4, 5, 6 / `C` 5, 6, 4 / `D` 2, 3, 1): its midline vertex
+   `P_1 = (1/2, 0)` is a degree-4 vertex of four colours `{1, 2, 4, 5}` whose four edges are the half-axes (the midline and the arch
+   sides `x = 1/2`), valid on `B(P_1, 1.834)` (row 136) and **not saturated on its midline** (FS111-VM2-STRIP-MID). `tools/fs116_v3_axis.py`
+   reads it at `q_N = (1/2, 1)`, which lies inside the top tile `C_1` (colour 6): (a) holds (below `q_N` only 6, absent); **(b) fails** —
+   along `0⁺` and `180⁻` the tile is `C_1`, colour 6, not `c_IV = 5` or `c_III = 4`; (c) holds (both germs inside tiles); (d)'s hypothesis
+   holds (both germs inside colour-3 tiles) and its conclusion holds (one colour, 6; the ring is 6 on both sides). So **(b) needs the
+   saturation hypothesis**, and (a), (d) do not: the strip is an object outside AXIS's hypotheses satisfying (a) and (d) — a **thin
+   truth** for those two clauses (they hold in every valid fragment with such a vertex, saturated or not). Whether (c) needs saturation
+   is not decided (the strip satisfies it without).
+2. **k = 9: SQ9** (the square nine-colouring of side 1/2, about the grid vertex `(0, 0)`; saturated, the list's § 4 and § 9): (a), (b),
+   (c) hold (below `q_N` the colours `(0,1)`, `(2,1)`, absent; along `0⁺` `(0,2) = c_IV`, along `180⁻` `(2,2) = c_III`; the germs inside
+   squares); **(d) fails** — its hypothesis holds (both germs inside `(1,0)`-squares, so `Y = Y′` as § 3.5 requires) but two colours lie
+   below `q_N` and `q_N` is a change point: at `k = 9` there are five absent colours, and (d)'s step "the tile at `270°` is `X` or `X̄`, so
+   `Y = Y′` leaves one colour" is where six is spent. The statement disclaims `k ≥ 7` for (d) (naming SQ9); (a) is stated with "`X` or
+   `X̄`", so at `k = 9` it reads "absent at `p`", which holds.
+3. **Four segments not at right angles** (disclaimed): (a) uses that each quadrant tile reaches the horizontal through `p`; at other
+   angles the tiles whose sectors avoid a closed half-plane facing `q_N` are no longer all of `p`'s tiles.
+4. Both tools' faults fire (`v3-axis`: the strip's top-row colours read as the `B` row's turn (a) into "fails").
+
+**Verdict: AXIS derived** (TRUE), [hand]; (a) and (d) hold without saturation (thin truth); (b) is where saturation is spent.
+
+## Stage 3 — SAVED
+
 ## The verification blocks and controls
 
 verification: FS116-N1-GERM-R
@@ -325,14 +500,17 @@ verification: FS116-N1-TOUCH
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 1 (placeholder verdict; the derived verdict is committed at stage 2 or 3)
+  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
   predicted: derived — 0.85 — likeliest break: an idle hypothesis (a thin truth, not a break), or w an end of a Γ-arc on ω(p)
-  verdict: stalls at: stage 1 — not yet derived; the placeholder is replaced at stage 2 or 3
-  method: not yet — stage 2 or 3
-  attack: § 1.3 The statements restated (the readback)
+  verdict: derived
+  method: the ring germs at w by N-E1 and 'not a change point', each ±60° germ's colour by N-E1 against the X ring germ 60° away, then GERM-R's four
+    exclusions, whose union is every direction; the first derivation's route is not known to me (fenced)
+  attack: § 3.2 Attack on TOUCH
   divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
-  counterexamples: none — nothing searched yet (stage 1)
-  minds: 1 — blind to: the first derivation; method: not yet derived
+  counterexamples: thin truth: a point of ω(p) inside an X ring tile, on no arc of Γ on ω(p), its four germs off (Q) arcs — the hypothesis 'w in the
+    closure of a tile of one of p's colours' is idle (§ 3.1 Step 1 uses it only to place w on Γ)
+  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
+    statement alone by the route of § 3.1; the same model (Opus 5.5) — blind, the same model
   grade: hand
 
 verification: FS116-N1-ECHO
@@ -343,14 +521,19 @@ verification: FS116-N1-ECHO
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 1 (placeholder verdict; the derived verdict is committed at stage 2 or 3)
+  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
   predicted: refuted — 0.75 — likeliest break: a monster at "saturated at w" (reading A, w inside an X-tile); under reading B I expect it true
-  verdict: stalls at: stage 1 — not yet derived; the placeholder is replaced at stage 2 or 3
-  method: not yet — stage 2 or 3
-  attack: § 1.3 The statements restated (the readback)
+  verdict: refuted: monster at the term 'saturated at w' — under reading (A) FALSE by the hexagonal seven-colouring (w inside an X-hexagon, no
+    essential boundary point); under reading (B) TRUE; MISSTATED, corrected statement § 3.3
+  method: V3-ECHO-ONLY (every point of ω(w) in the closure of an X-tile is 2w − p, by a straddle against the ring tile on the side fixed by the sign
+    of η·sin(θ − ψ)), then saturation's contact; the first derivation's route is not known to me (fenced)
+  attack: § 3.4 Attack on ECHO
   divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
-  counterexamples: none — nothing searched yet (stage 1)
-  minds: 1 — blind to: the first derivation; method: not yet derived
+  counterexamples: monster: the hexagonal seven-colouring of circumradius 0.45, p a hexagon centre, w = r(20°) inside a colour-1 hexagon, 2w − p
+    inside a colour-5 hexagon (tools/fs116_v3_echo.py) — the term 'saturated at w', which checks nothing at a point that is no essential boundary
+    point (reading A); under reading B the hypothesis excludes it and the statement holds
+  minds: 1 — this mind's verdict on the statement as written (refuted, a monster) and on its reading (B) (derived); blind to the first derivation
+    (fenced); the count against it is stage 4's
   grade: hand
 
 verification: FS116-N1-AXIS
@@ -365,14 +548,18 @@ verification: FS116-N1-AXIS
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 1 (placeholder verdict; the derived verdict is committed at stage 2 or 3)
+  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
   predicted: derived — 0.85 — likeliest break: (b)'s "above the line y = 1", or (d) when the germ at r(30°) lies on Γ with both absent colours
-  verdict: stalls at: stage 1 — not yet derived; the placeholder is replaced at stage 2 or 3
-  method: not yet — stage 2 or 3
-  attack: § 1.3 The statements restated (the readback)
+  verdict: derived
+  method: (a) by N-E2 against the quadrant tiles; (b) saturation's contact at the edge points (s, 0), placed at (s, 1) by straddles and N-E2; (c) by
+    N-E2 fixing a (Q) arc's side colours as c_I | c_III, then GERM-R against (b); (d) by GERM-R at q_N and the direction 270°; the first derivation's
+    route is not known to me (fenced)
+  attack: § 3.6 Attack on AXIS
   divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
-  counterexamples: none — nothing searched yet (stage 1)
-  minds: 1 — blind to: the first derivation; method: not yet derived
+  counterexamples: thin truth: the strip's midline vertex P_1 = (1/2, 0) (row 136, as rebuilt in plans/FS112-Y-construction.md § 1.3), unsaturated (tools/fs116_v3_axis.py) — (a) and (d) hold there and
+    their steps in § 3.5 use no saturation; (b) fails there, so saturation is spent in (b)
+  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
+    statement alone by the route of § 3.5; the same model (Opus 5.5) — blind, the same model
   grade: hand
 
 control: v3-quotes
@@ -398,3 +585,15 @@ control: v3-germ-cones
   run: python3 ../tools/fs116_v3_germ.py cones | tail -1
   expect: cones closed: 2 of 2
   fault: python3 ../tools/fs116_v3_germ.py cones --plant | tail -1
+
+control: v3-echo-a
+  of: FS116-N1-ECHO — reading (A)'s counterexample: the hexagonal seven-colouring certified valid, the hypotheses checked at w = r(20°), 2w − p in no X-tile's closure
+  run: python3 ../tools/fs116_v3_echo.py | tail -1
+  expect: ECHO-A: hypotheses hold and 2w - p lies in the closure of no X-tile
+  fault: python3 ../tools/fs116_v3_echo.py --plant | tail -1
+
+control: v3-axis
+  of: FS116-N1-AXIS — the four clauses read on the unsaturated strip about P_1 and on SQ9 (k = 9) at q_N
+  run: python3 ../tools/fs116_v3_axis.py | tail -1
+  expect: summary: (a) holds, (b) fails, (c) holds, (d) holds | (a) holds, (b) holds, (c) holds, (d) fails
+  fault: python3 ../tools/fs116_v3_axis.py --plant | tail -1
