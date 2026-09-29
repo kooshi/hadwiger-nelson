@@ -1,0 +1,15 @@
+P_0 = ababc  proper on C_5: True
+P_1 = abacb  proper on C_5: True
+P_2 = abcab  proper on C_5: True
+P_3 = acbab  proper on C_5: True
+P_4 = babac  proper on C_5: True
+P_5 = babca  proper on C_5: True
+P_6 = bacba  proper on C_5: True
+P_7 = bcaba  proper on C_5: True
+(P) monochromatic overlaps under the shift by 1: 0
+(S) discontinuities: 15  unbound (point, colour) pairs: 2
+    unbound: y = 5/4  colour c
+    unbound: y = 7/4  colour c
+(G) Grundy defects in the order abc: 0
+(I) idomatic 3-partitions of C_5: 0; proper 2-colourings of C_5: 0
+FAILED: S
