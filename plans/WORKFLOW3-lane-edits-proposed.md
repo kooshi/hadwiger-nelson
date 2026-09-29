@@ -7,6 +7,8 @@ Edits already filed by the evening's audit are not repeated here: re-walking §G
 (F11) are in the files (`plans/WORKFLOW-AUDIT-2026-09-28.md` § 7), and the front-page lane's default identity is now the Clerk
 (`.claude/output-styles/keryx.md` step 7). Kooshi picks; Keryx files the picked ones in one commit.*
 
+**Deferred to 2026-09-29** (Kooshi, 2026-09-29 04:52 UTC): "defer these until tomorrow, and watch for instances or additions throughout this session. […] [W]e've only exercised the closing of Workflow 3.0. This session is the full thing (except formalization)."
+
 ## A. Ephodos's close job (`.claude/agents/ephodos.md` § The close job)
 
 These shrink the close and remove the questions the filing agent had to ask (twelve, at the last close).
@@ -103,3 +105,12 @@ entries of `tools/viz_proof_atlas_facts.py` for this milestone's results. Then r
 
 `plans/FRONTIER-STUBS.md` says it holds current state only, yet § Ranked stubs opens with about nineteen dated re-rank paragraphs. Moving
 them to git history is the next re-rank's to do unless Kooshi rules otherwise (the handoff § 5).
+
+## G. Instances and additions, as they arise this session (FS-116 and FS-121, the opening path)
+
+*One line per friction that is a new instance of an edit above (its E-number) or a new candidate (numbered on from E15). Each points to
+its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
+
+| edit | instance or addition | W-row |
+|---|---|---|
+| U3 | the brief gate's path check read a backticked word as a path (FS116-P1's brief) | W2 |
