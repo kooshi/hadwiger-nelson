@@ -66,3 +66,112 @@ scope says so.
 5-forcer), four drop a grade or widen a scope (4, 11, 15 their [measured]/[reading] grade; 10 and 19 their scope; 19 also "given
 MR"), two carry a one-word slip (2 "the prime", 5 "past five"), and the paragraph as a whole describes the project as of FS-103, not
 now. The framing of the job is right: the paragraph needs rewriting, not patching, because what it omits is the theory's present half.
+
+## Stage 3 — SAVED: the replacement, its checks, and what it leaves out
+
+**Decision on form.** One paragraph can be valid and useful at this size, so it stays one paragraph (2,995 bytes against the brief's
+"about 3,000"; `CLAUDE.md` would go from 68,853 to 70,037 bytes). It is rewritten, not patched: the clauses that hold are the
+five-and-six design theory the aim retired as a route, and what is missing is the theory's present half. The order is the arc the
+results take — the 4/5 wall, the residue rule exact through five, where the residue method runs out, the collapse, the density cap,
+the stability question, and the map line down to contact regularity — weighted toward the last four, which are what bears on the
+answer.
+
+**What the draft drops from the old paragraph, and why.** Clause 3's shape of a 5-forcer (stale as a universal, Stage 2); clause 4's
+pigeonhole × kill (true of the known finite forcers at [measured] grade, G15, and no longer on the path to the answer; the § The open
+structural question paragraph still carries G15's question); clauses 6–8's sealing mechanism (compressed into "a field Γ₁₁ seals at
+five … the spindle's design for six has no instance there (G48)"); clause 11's tight-or-slack classifier and clause 13's 2-adic tower
+(G54, rows 67, 87: they explain *why* the sealing planes free every pair, which the draft states as the fact, row 66); clause 15's FS-42
+(a [reading] with no bearing on the answer now) and clause 16's FS-40 (stale). Every token they carried still occurs elsewhere in the
+corpus: the fact audit passes with the draft substituted (below).
+
+**What the draft adds that the old one lacked, each at its source's grade:** the general four-colour rule (row 123's CLS, which is also
+the exact form of "the wall" for any real number field — see the correction owed below); the window for six (G56, G59, G64); the
+collapse with its scope and "given MR" (rows 128, 130, G81); the density cap (row 129, G60); the stability question (row 131, G82); the
+regular half (row 132); the bounded-complexity map question and its four-colour vertex (rows 133, 134, 137, G83, G86); the two routes
+(row 139); contact regularity (rows 140–141, G84, G85); and the value's standing (row 33).
+
+**A correction owed, found while writing the first sentence (not in the paragraph under review).** G56 defines the broken wall as
+"every prime above 2 splits in F(i)" and says "a wall-standing field is four-colourable by the residue at 2", while the same entry
+makes U₆₄ — the target of a prime above 2 *inert* in F(i) of norm 64, "Hoffman floor … 6", "6 ≤ χ ≤ 8" — a window member "realised
+only by fields of degree ≥ 12". A field whose only conjugation-fixed dyadic prime is inert of norm 64 has a standing wall in G56's
+sense and no four-colouring from it; G56's Do line ("or a prime above 2 is inert of norm 64, and the wall is broken") cannot hold under
+its own definition. G35's parenthetical "one above 2 exists iff −1 is not a square in some completion above 2 (norm 2 or 4)" is true
+for multiquadratic F (residue degree at 2 at most 2) and not for every real number field, as its first sentence scopes it. The exact
+form is row 123's CLS: the dyadic places that four-colour are those "dyadic inert of norm ≤ 32, and dyadic ramified in F(i)/F". The
+same scope sits under `CLAUDE.md` § Where the problem stands item 1 ("forces a fifth colour only if its coordinates break the 2-adic
+wall (G1, G35)"), true over fields ⊇ K and in general only with "the wall" read as "a four-colourable dyadic target". Both sides are
+quoted with their addresses; Keryx decides the wording. The draft avoids the word and states row 123's form.
+
+A second, smaller one: `CLAUDE.md` § Grokkings (disk, its first italic paragraph) still says "G1–G83 are stable identifiers cited
+across `plans/`"; the entries now run to G87.
+
+## Draft for the front page
+
+**The theory in one paragraph.** The 4/5 wall is arithmetic: over K a residue colouring at a prime of K(i) above 2 four-colours K²
+(Theorem B, row 57; G1, G35). A real number field's residue targets bound its plane, χ(F²) ≤ L(F) (row 52, G64; [hand]), and through
+five the bound is exact: χ(F²) = L(F) whenever L(F) ≤ 5 (row 99 below five; at five given MR, by measure rigidity for the unit-vector
+group, with no witness graph: rows 120, 123, G80; [hand]). So, given MR, F² needs five exactly when F has no usable prime with residue
+field 𝔽₃ or 𝔽₇ and no prime above 2 ramified in F(i) or inert there of norm at most 32 (row 123). Past five the residue method runs
+out: over a field Γ₁₁ seals at five, a five-colour forced pair is one point and a virtual edge a unit edge (row 66), so the spindle's
+design for six has no instance there (G48), and L(F) = 6 needs one of six finite targets — Γ_q at q ∈ {23, 27, 31, 43, 47}, or U₆₄ — to
+be six-chromatic, none decided (G56, G59). Where every stable place of a totally real field mixes at six colours, as at ℚ(√635087), the
+arithmetic is exhausted: given MR, χ(F²) = χ(ℝ²) = χ_m⁰(ℝ²), the least k with a measurable k-colouring proper at almost every unit pair
+(rows 128, 130, G81; [hand]), and χ(ℝ²) ≤ χ_m⁰(ℝ²) needs no MR (row 130). No argument that bounds one colour class at a time gives six:
+row 123's five is ⌈1/α_loc⌉, one densest class's bound, and 1/α_loc ≤ 4.36 (row 129, G60; [hand]). What is left, with no MR, is a
+stability question (row 131, G82; [hand]): χ_m⁰(ℝ²) ≥ 7 iff six classes free of monochromatic pairs at distances in [1 − ε, 1 + ε]
+cannot cover the plane up to holes whose density tends to 0; a refutation is a sequence of periodic grid colourings, wild only in the
+limit, and gives χ(ℝ²) ≤ 6. Colourings with slack, polygonal ones and nice maps need seven almost everywhere, maps six (row 132;
+[hand], printed proofs repaired). At bounded complexity vanishing holes are a tight six-map (row 133); with no unit arcs none exists
+(row 134), and with them every one has a vertex of at least four colours, so the map NO follows from one exclusion about such a vertex
+at an explicit radius uniform in the complexity (row 137, G83), and a tile count reaches only its non-Siamese part (G86; all [hand]).
+Seven, χ_m⁰(ℝ²) ≥ 7, is that NO made uniform in the complexity (row 139): it follows from the NO once the tight limit is made a map
+(route M, the map step), or from a forced complementary junction pair at every complexity with its cone scale bounded below (route R),
+and each route's third statement is the answer restated. Route M's regularity is contact: a saturated class is carved by unit circles
+about its own points, and off a locally finite singular set its interfaces are segments and arcs of integer radius, that finiteness
+open (rows 140–141, G84, G85; [hand]). No value has moved: χ(ℝ²) ∈ {5, 6, 7} (row 33).
+
+## The resolution check
+
+Every row and `GN` the draft cites, extracted from this record's § Draft for the front page and counted in `LEDGER.md` (a line opening
+`| N |`) and in `.claude/skills/grokkings/SKILL.md` (a line opening `* **GN — `). Run from the repository root:
+
+```python
+import re
+rec = open('plans/WORKFLOW3-TP1-theory-paragraph.md').read()
+d = rec.split('## Draft for the front page\n', 1)[1].split('\n## ', 1)[0]
+rows = set()
+for m in re.finditer(r'rows? (\d+(?:[–,] ?\d+)*)', d):
+    for p in re.split(r', ?', m.group(1)):
+        a, _, b = p.partition('–')
+        rows.update(range(int(a), int(b or a) + 1))
+led = open('LEDGER.md').read()
+grk = open('.claude/skills/grokkings/SKILL.md').read()
+print('bytes', len(d.strip().encode()))
+print('rows', ' '.join(f"{n}:{len(re.findall(rf'^\| {n} \|', led, re.M))}" for n in sorted(rows)))
+gs = sorted({int(g) for g in re.findall(r'\bG(\d+)\b', d)})
+print('G', ' '.join(f"G{g}:{len(re.findall(rf'^\* \*\*G{g} — ', grk, re.M))}" for g in gs))
+```
+
+Output:
+
+```
+bytes 2994
+rows 33:1 52:1 57:1 66:1 99:1 120:1 123:1 128:1 129:1 130:1 131:1 132:1 133:1 134:1 137:1 139:1 140:1 141:1
+G G1:1 G35:1 G48:1 G56:1 G59:1 G60:1 G64:1 G80:1 G81:1 G82:1 G83:1 G84:1 G85:1 G86:1
+```
+
+Every cited row and entry exists once; none of the cited entries is a retired one (G30, G46, G47, G49, G50, G51, G67, G72 are
+pointers). **The check fired on its plant:** the same script with `(row 33).` replaced by `(row 199, G99).` printed `199:0` and `G99:0`.
+
+**The front page's own audit, with the draft substituted** into a scratch copy of `CLAUDE.md` (the paragraph between
+`**The theory in one paragraph.**` and the next blank line replaced by the draft; nothing in the repository edited):
+
+- `python3 tools/claude_md_fact_audit.py --new <scratch copy>` — exit 0: `pointers: 108 distinct row references, 87 grokkings;
+  dangling: none`, `AUDIT PASSED (0 failure(s))`, `size: <scratch copy> 70,037 of 80,000 bytes`. No fact token of the old paragraph
+  vanished from the corpus (FS-40, FS-42, rows 67 and 87 among those it dropped: each lives on in G48, G54 or the ledger). **Plant:**
+  the scratch copy with `(row 33)` → `(row 199)` and `G84, G85` → `G84, G99` exits 1 with `FAIL: dangling pointer: G99 …` and
+  `FAIL: dangling pointer: row 199 …`.
+- `python3 tools/claude_md_fact_audit.py --dupes --new <scratch copy>` against the same on the current `CLAUDE.md`: identical output (24
+  repeated runs of ≥ 10 words, 2,017 bytes, both). A first draft added two — "colours in a measurable colouring proper at almost every
+  unit pair" (§ Where the problem stands) and "the NO with the map step, the tight limit made a" (row 139) — and both were reworded out.
+
