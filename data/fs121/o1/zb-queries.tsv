@@ -1,0 +1,17 @@
+q01_rregular	ab:"r-regular" & (ab:set | ab:morpholog*)
+q02_rolling	(ti:"rolling" | ab:"rolling ball" | ab:"rolling theorem") & (ab:curvature | ab:Blaschke | ab:reach)
+q03_partsing	ab:partition & ab:"singular set" & (ab:planar | ab:"two-dimensional" | ab:"locally finite")
+q04_idomatic	ab:idomatic | ti:idomatic
+q05_idom_inf	(ab:idomatic | ab:"fall coloring" | ab:"fall colouring" | ab:"independent dominating partition") & (ab:infinite | ab:measurable | ab:Borel | ab:Euclidean | ab:plane)
+q06_maxind_ud	(ab:"maximal independent" | ab:"independent dominating") & (ab:"unit distance" | ab:"distance graph") & (ab:plane | ab:measurable | ab:Euclidean)
+q07_avoid_max	(ab:"avoiding unit distance" | ab:"avoiding distance" | ab:"one-avoiding" | ab:"1-avoiding") & (ab:maximal | ab:structure | ab:regular* | ab:boundary)
+q08_blockstr	ab:"block structure" & (ab:distance | ab:avoiding)
+q09_mcn_map	(ab:"measurable chromatic" | ab:"chromatic number of the plane") & (ab:map | ab:tiling | ab:regular* | ab:Jordan | ab:boundar*)
+q10_parallel	(ab:"parallel curve" | ab:"parallel curves" | ab:equidistant*) & (ab:"unit distance" | ab:colo*)
+q11_voronov	au:"Voronov, V" & (cc:52C10 | cc:05C15 | ab:chromatic)
+q12_sokolov	au:"Sokolov" & (cc:52C10 | ab:chromatic) & py:2015-2026
+q13_townsend	au:"Townsend, S" & (cc:52C10 | cc:05C15 | ab:colo*)
+q14_coulson	au:"Coulson, D"
+q15_woodall	au:"Woodall, D" & (ab:plane | ti:plane | ti:distance | ab:distance)
+q16_mani	au:"Mani, N"
+q17_nonlocal	(ab:"unit distance" | ab:"distance one") & (ab:"free boundary" | ab:"nonlocal" | ab:saturat*)

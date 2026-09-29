@@ -1,0 +1,137 @@
+control: an:0933.52003 -> 1 (want 1); nonsense -> 0 (want 0)
+
+[q01_rregular] ab:"r-regular" & (ab:set | ab:morpholog*)  => 250
+  1994 0795.05088 [review] Robinson, R. W.; Wormald, N. C. — Almost all regular graphs are Hamiltonian
+  2002 1005.05039 [review] Cooper, Colin; Frieze, Alan; Reed, Bruce — Random regular graphs of non-constant degree: Connectivity and Hamiltonicity
+  2008 1181.05011 [summary] Friedland, S.; Krop, E.; Markstrom, K. — On the number of matchings in regular graphs
+  1996 0857.68084 [summary] Frieze, Alan; Jerrum, Mark; Molloy, Michael — Generating and counting Hamilton cycles in random regular graphs
+  1988 0673.05086 [summary] Bollobás, Béla — The isoperimetric number of random regular graphs
+  2005 1075.05079 [summary] Cooper, Colin; Frieze, Alan — The cover time of random regular graphs
+  2003 1028.05076 [summary] Jamison, Robert E.; Johnson, Peter D. jun. — The structure of (\(t,r\))-regular graphs of large order
+  1998 0895.05038 [review] Thomassen, Carsten — Independent dominating sets and a second hamiltonian cycle in regular graphs
+
+[q02_rolling] (ti:"rolling" | ab:"rolling ball" | ab:"rolling theorem") & (ab:curvature | ab:Blaschke | ab:reach)  => 57
+  1999 0958.53024 [review] Howard, Ralph — Blaschke's rolling theorem for manifolds with boundary
+  2026 1587.53033 [review] Drach, Kostiantyn — The Blaschke rolling theorem in Riemannian manifolds of bounded curvature
+  2016 1342.52003 [summary] Révész, Szilárd Gy. — A discrete extension of the Blaschke rolling ball theorem
+  1985 0588.52002 [review] Goodman, A. W. — Convex curves of bounded type
+  1972 0274.53002 [none] Koutroufiotis, Dimitri — On Blaschke's rolling theorems
+  2011 1360.70008 [summary] Oliva, Waldyr M.; Terra, Gláucio — Rolling ball problems
+  2015 1324.53053 [summary] Borisenko, A. A.; Drach, K. D. — Comparison theorem for the support functions of hypersurfaces
+  2026 None [summary] Knöppel, Felix; Pinkall, Ulrich; Schröder, Peter — Rolling spheres and the Willmore energy
+
+[q03_partsing] ab:partition & ab:"singular set" & (ab:planar | ab:"two-dimensional" | ab:"locally finite")  => 4
+  2016 1336.49054 [review] Ramos, Miguel; Tavares, Hugo; Terracini, Susanna — Extremality conditions and regularity of solutions to optimal partition problems involving Laplacian eigenvalu
+  2012 1255.49074 [review] Maggi, Francesco — Sets of finite perimeter and geometric variational problems. An introduction to geometric measure theory
+  2020 1442.05019 [summary] Alper, Onur — On the singular set of free interface in an optimal partition problem
+  2015 1325.53039 [review] Ghezzi, R.; Jean, F. — Hausdorff volume in non equiregular sub-Riemannian manifolds
+
+[q04_idomatic] ab:idomatic | ti:idomatic  => 16
+  2020 1508.05125 [summary] Goddard, Wayne; Henning, Michael A. — Independent domination, colorings and the fractional idomatic number of a graph
+  1983 0507.05059 [none] Zelinka, Bohdan — Adomatic and idomatic numbers of graphs
+  2011 1234.05177 [summary] Klavžar, Sandi; Mekiš, Gašper — On idomatic partitions of direct products of complete graphs
+  2010 1215.05136 [summary] Valencia-Pabon, Mario — Idomatic partitions of direct products of complete graphs
+  1986 0583.05050 [review] Zelinka, Bohdan — Domatic number and linear arboricity of cacti
+  1998 0894.05026 [review] Zelinka, Bohdan — Domatic numbers of graphs and their variants: A survey
+  1992 0772.05058 [review] Zelinka, Bohdan — Domatic number of a graph and its variants
+  2021 1486.05228 [review] Goddard, Wayne; Henning, Michael A. — Fractional domatic, idomatic, and total domatic numbers of a graph
+
+[q05_idom_inf] (ab:idomatic | ab:"fall coloring" | ab:"fall colouring" | ab:"independent dominating partition") & (ab:infinite | ab:measurable | ab:Borel | ab:Euclidean | ab:plane)  => 3
+  2010 1217.05086 [summary] Balakrishnan, Rangaswami; Kavaskar, T. — Fall coloring of graphs. I
+  2011 1244.05086 [review] Balakrishnan, R.; Kavaskar, T. — Color chain of a graph
+  2025 1579.05061 [review] Belavadi, Manoj; Cameron, Kathie; Hildred, Elias — Frozen colourings in \(2 K_2\)-free graphs
+
+[q06_maxind_ud] (ab:"maximal independent" | ab:"independent dominating") & (ab:"unit distance" | ab:"distance graph") & (ab:plane | ab:measurable | ab:Euclidean)  => 0
+
+[q07_avoid_max] (ab:"avoiding unit distance" | ab:"avoiding distance" | ab:"one-avoiding" | ab:"1-avoiding") & (ab:maximal | ab:structure | ab:regular* | ab:boundary)  => 11
+  2012 1230.05015 [review] Atkinson, M. D.; Sagan, Bruce E.; Vatter, Vincent — Counting \(\mathbf {(3+1)}\)-avoiding permutations
+  2016 1335.05048 [summary] Keleti, Tamás; Matolcsi, Máté; de Oliveira Filho, Fernando Mário — Better bounds for planar sets avoiding unit distances
+  2022 1480.05085 [review] Cioabă, Sebastian; Desai, Dheer Noal; Tait, Michael — The spectral radius of graphs with no odd wheels
+  1967 0171.14704 [none] Morreale, Eugenio — Partitioned list algorithms for prime implicant determination from canonical forms
+  2005 1079.05075 [summary] Kano, M.; Yu, Qinglin — Pan-factorial property in regular graphs
+  2020 1428.05035 [summary] Fu, Shishuo; Jin, Emma Yu; Lin, Zhicong — A new decomposition of ascent sequences and Euler-Stirling statistics
+  2022 1522.83263 [summary] Moitra, Upamanyu; Sake, Sunil Kumar; Trivedi, Sandip P. — Aspects of Jackiw-Teitelboim gravity in anti-de Sitter and de Sitter spacetime
+  2010 1499.65028 [summary] Amat, S.; Dadourian, K.; Liandrat, J. — On a nonlinear 4-point ternary and interpolatory multiresolution scheme eliminating the Gibbs phenomenon
+
+[q08_blockstr] ab:"block structure" & (ab:distance | ab:avoiding)  => 28
+  2016 1335.05048 [summary] Keleti, Tamás; Matolcsi, Máté; de Oliveira Filho, Fernando Mário — Better bounds for planar sets avoiding unit distances
+  1996 0861.15028 [editorial] Hayden, T. L.; Lee, Jon; Wells, Jim — Block matrices and multispherical structure of distance matrices
+  2002 arXiv:math/0212163 [summary] Michael H. Albert — The fine structure of 321 avoiding permutations
+  2018 arXiv:1810.02016 [summary] R W R Darling; Cheyne Homberger — The Four Point Permutation Test for Latent Block Structure in Incidence Matrices
+  2010 1284.05291 [summary] Hung, Ling-Ju; Kloks, Ton — Classifying rankwidth \(k\)-dh-graphs
+  2003 1028.15003 [review] Peña, Javier — A characterization of the distance to infeasibility under block-structured perturbations
+  2021 None [summary] Cslovjecsek, Jana; Eisenbrand, Friedrich; Hunkenschröder, Christoph — Block-structured integer and linear programming in strongly polynomial and near linear time
+  2024 1575.05135 [summary] Mahamud, Sajid Bin; Butler, Steve; Graff, Hannah — Coalescing sets preserving cospectrality of graphs arising from block similarity matrices
+
+[q09_mcn_map] (ab:"measurable chromatic" | ab:"chromatic number of the plane") & (ab:map | ab:tiling | ab:regular* | ab:Jordan | ab:boundar*)  => 13
+  2008 1178.05094 [review] Graham, Ron — Old and new problems and results in Ramsey theory
+  2009 1221.05001 [review] Soifer, Alexander — The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Br
+  2011 1216.00003 [review] Soifer, Alexander — The Colorado Mathematical Olympiad and further explorations. From the mountains of Colorado to the peaks of ma
+  2021 1477.05182 [summary] Exoo, Geoffrey; Fisher, David; Ismailescu, Dan — The chromatic number of the Minkowski plane -- the regular polygon case
+  2008 1139.05023 [summary] Kruskal, Clyde P. — The chromatic number of the plane: the bounded case
+  2018 1407.05233 [summary] Donnelly, John — The chromatic number of the taxicab plane
+  2007 1124.05087 [review] Graham, Ron — Some of my favorite problems in Ramsey theory
+  2019 1436.05110 [summary] Bernshteyn, Anton — Measurable versions of the Lovász local lemma and measurable graph colorings
+
+[q10_parallel] (ab:"parallel curve" | ab:"parallel curves" | ab:equidistant*) & (ab:"unit distance" | ab:colo*)  => 21
+  2020 1439.52016 [review] Balko, Martin; Pór, Attila; Scheucher, Manfred — Almost-equidistant sets
+  2019 1435.52008 [review] Kupavskii, Andrey; Mustafa, Nabil H.; Swanepoel, Konrad J. — Bounding the size of an almost-equidistant set in Euclidean space
+  2019 1407.52018 [summary] Polyanskii, A. — On almost-equidistant sets
+  2019 1415.51016 [summary] Polyanskii, Alexandr — On almost-equidistant sets. II
+  2013 1282.58003 [summary] Suri, Ali — Geometry of the double tangent bundles of Banach manifolds
+  2010 1206.65061 [review] Rovenski, Vladimir — Modeling of curves and surfaces with \texttt{Matlab}
+  2008 1145.92024 [review] Durrett, Richard; Restrepo, Mateo — One-dimensional stepping stone models, sardine genetics and Brownian local time
+  2004 1035.05001 [review] Jacobs, Konrad; Jungnickel, Dieter — Introduction to combinatorics
+
+[q11_voronov] au:"Voronov, V" & (cc:52C10 | cc:05C15 | ab:chromatic)  => 9
+  2018 1393.05117 [summary] Kanel-Belov, A. Ya.; Voronov, V. A.; Cherkashin, D. D. — On the chromatic number of an infinitesimal plane layer
+  2026 None [summary] Cherkashin, D. D.; Kanel-Belov, A. J.; Strukov, G. A. — On chromatic numbers of 3-dimensional slices
+  2022 arXiv:2208.02230 [summary] D. D. Cherkashin; A. J. Kanel-Belov; G. A. Strukov — On the chromatic numbers of 3-dimensional slices
+  2022 1497.05101 [summary] Voronov, V. A.; Neopryatnaya, A. M.; Dergachev, E. A. — Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres
+  2023 arXiv:2304.10163 [summary] Vsevolod Voronov — The chromatic number of the plane with an interval of forbidden distances is at least 7
+  2026 None [summary] Sokolov, Georgy; Voronov, Vsevolod — On the chromatic number of the plane for map-type colorings
+  2024 1532.05064 [summary] Cherkashin, Danila; Voronov, Vsevolod — On the chromatic number of 2-dimensional spheres
+  2026 arXiv:2607.19946 [summary] Maxim Didin; Vsevolod Voronov — The chromatic number of Euclidean space with dense color classes
+
+[q12_sokolov] au:"Sokolov" & (cc:52C10 | ab:chromatic) & py:2015-2026  => 4
+  2018 1439.05094 [summary] Sokolov, Artemiĭ Alekseevich; Raĭgorodskiĭ, Andreĭ Mikhaĭlovich — On rational analogs of Nelson-Hadwiger's and Borsuk's problems
+  2026 None [summary] Sokolov, Georgy; Voronov, Vsevolod — On the chromatic number of the plane for map-type colorings
+  2023 1521.05048 [summary] Sokolov, Georgy — Chromatic number of a line with geometric progressions of forbidden distances and the complexity of recognizin
+  2018 1392.05042 [review] Sokolov, Artem A. — On the chromatic numbers of rational spaces
+
+[q13_townsend] au:"Townsend, S" & (cc:52C10 | cc:05C15 | ab:colo*)  => 2
+  2005 1506.05079 [none] Townsend, S. P. — Colouring the plane with no monochrome units
+  1981 0458.05032 [none] Townsend, S. P. — Every 5-coloured map in the plane contains a monochrome unit
+
+[q14_coulson] au:"Coulson, D"  => 7
+  2002 1007.05052 [summary] Coulson, D. — A 15-colouring of 3-space omitting distance one
+  2004 1081.05022 [review] Coulson, D. — On the chromatic number of plane tilings
+  1997 0879.05030 [review] Coulson, D. — An 18-colouring of 3-space omitting distance one
+  2003 1035.05040 [review] Coulson, David — Tilings and colourings of 3-space
+  2007 1146.05025 [review] Payne, M. S.; Coulson, D. — A dense distance 1 excluding set in \(\mathbb R^3\)
+  1991 0731.11036 [review] Coulson, David — The dual lattice of an extreme six-dimensional lattice
+  2000 1002.57044 [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. — zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+
+[q15_woodall] au:"Woodall, D" & (ab:plane | ti:plane | ti:distance | ab:distance)  => 13
+  1973 0251.50003 [none] Woodall, D. R. — Distances realized by sets covering the plane
+  1992 0766.05030 [editorial] Woodall, D. R. — A zero-free interval for chromatic polynomials
+  1977 0357.05044 [none] Woodall, D. R. — Zeros of chromatic polynomials
+  1998 0927.05069 [review] Borodin, Oleg V.; Woodall, Douglas R. — Short cycles of low weight in normal plane maps with minimum degree 5
+  1998 0958.52015 [review] Borodin, O. V.; Woodall, D. R. — Weight of faces in plane maps
+  2007 1142.05031 [summary] Woodall, Douglas R. — Some totally 4-choosable multigraphs
+  1995 0836.05026 [review] Borodin, O. V.; Woodall, D. R. — Thirteen colouring numbers for outerplane graphs
+  1996 0897.05036 [review] Borodin, Oleg V.; Woodall, Douglas R. — Colourfully panconnected subgraphs
+
+[q16_mani] au:"Mani, N"  => 46
+  2020 1484.47114 [summary] Gupta, Vishal; Jungck, Gerald; Mani, Naveen — Some novel fixed point theorems in partially ordered metric spaces
+  2019 1489.54129 [none] Gupta, Vishal; Jungck, Gerald; Mani, Naveen — Common fixed point theorems for new contraction without continuity completeness and compatibility property in 
+  2013 1282.54042 [summary] Gupta, Vishal; Mani, Naveen — Existence and uniqueness of fixed point for contractive mapping of integral type
+  2023 None [summary] Chen, Zongchen; Mani, Nitya; Moitra, Ankur — From algorithms to connectivity and back: finding a giant component in random \(k\)-SAT
+  2018 1488.54147 [summary] Mani, Naveen — Generalized \(C^\psi_\beta\)-rational contraction and fixed point theorem with application to second order dif
+  2026 1585.60023 [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. — zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+  2023 None [editorial] Chen, Zongchen; Liu, Kuikui; Mani, Nitya — Strong spatial mixing for colorings on trees and its algorithmic applications
+  2013 1394.47054 [summary] Gupta, Vishal; Mani, Naveen — Common fixed point for two self-maps satisfying a generalized \(\int_{\phi}^{\psi}\) weakly contractive condit
+
+[q17_nonlocal] (ab:"unit distance" | ab:"distance one") & (ab:"free boundary" | ab:"nonlocal" | ab:saturat*)  => 2
+  2006 1182.70019 [summary] Silva, Manuel F.; Machado, J. A. Tenreiro — Fractional order PD\(^\alpha\) joint control of legged robots
+  2025 1553.49018 [summary] Pascale, Giulio — Existence and nonexistence of minimizers for classical capillarity problems in presence of nonlocal repulsion 
