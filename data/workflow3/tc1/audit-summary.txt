@@ -1,0 +1,33 @@
+== audit-baseline.out
+corpus: CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,089,233 -> 1,089,233  (+0)
+pointers: 108 distinct row references, 87 grokkings; dangling: none
+AUDIT PASSED (0 failure(s))
+size: CLAUDE.md 70,055 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 160,349 of 200,000 bytes
+== audit-brief-form.out
+corpus: data/workflow3/tc1/copies/CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,089,233 -> 1,089,574  (+341)
+pointers: 108 distinct row references, 87 grokkings; dangling: none
+AUDIT PASSED (0 failure(s))
+size: data/workflow3/tc1/copies/CLAUDE.md 70,396 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 160,349 of 200,000 bytes
+== audit-full-corpus.out
+corpus: CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,089,233 -> 1,091,870  (+2,637)
+pointers: 108 distinct row references, 87 grokkings; dangling: none
+AUDIT PASSED (0 failure(s))
+size: CLAUDE.md 70,396 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 162,397 of 200,000 bytes
+== audit-plant.out
+corpus: data/workflow3/tc1/copies/CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,089,233 -> 1,089,574  (+341)
+pointers: 109 distinct row references, 87 grokkings; dangling: ['row 199']
+FAIL: dangling pointer: row 199 is cited and no such entry exists
+AUDIT FAILED (1 failure(s))
+size: data/workflow3/tc1/copies/CLAUDE.md 70,396 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 160,349 of 200,000 bytes
+== dupes-baseline.out
+23 repeated runs of >= 10 words, 1,781 bytes in second and later tellings:
+== dupes-new.out
+23 repeated runs of >= 10 words, 1,781 bytes in second and later tellings:

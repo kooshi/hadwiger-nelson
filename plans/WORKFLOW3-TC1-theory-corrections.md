@@ -522,3 +522,36 @@ the exclusion does prove. A question for whoever owns G56's wording.
 | TC1-STANDING-FOUR | TC1 | over a multiquadratic field, or one of degree ≤ 11, a standing 2-adic wall four-colours the plane | derived; one mind | `plans/WORKFLOW3-TC1-theory-corrections.md` TC1-STANDING-FOUR | declined |
 | TC1-STANDING-FIVE | TC1 | K·E₇ (E₇ the septic subfield of ℚ(ζ₂₉)) contains K, keeps its wall at two places inert of norm 128, has L ≥ 7, and given MR needs five | derived (PARI exact); one mind; given MR | `plans/WORKFLOW3-TC1-theory-corrections.md` TC1-STANDING-FIVE | declined |
 ```
+
+## Stage 3 — SAVED: the front page's audit with the drafts substituted
+
+Copies made by `python3 data/workflow3/tc1/tc1_apply.py` (all sixteen drafts; the copies are not committed, since the script rebuilds
+them and a second LEDGER.md in the tree would pollute every later grep). Every exit status was read directly. The summary lines are in
+`data/workflow3/tc1/audit-summary.txt`.
+
+- **Baseline, the files as they stand:** `python3 tools/claude_md_fact_audit.py`, exit 0: `AUDIT PASSED`, `dangling: none`,
+  CLAUDE.md 70,055 of 80,000 bytes.
+- **The brief's form:** `python3 tools/claude_md_fact_audit.py --new data/workflow3/tc1/copies/CLAUDE.md`, exit 0: `AUDIT PASSED (0
+  failure(s))`, `pointers: 108 distinct row references, 87 grokkings; dangling: none`, 70,396 of 80,000 bytes, no fact token lost.
+- **The whole corpus with all three copies in place** (a local clone with the copies at their real paths, so the tool's HEAD side is
+  the real files), exit 0: `AUDIT PASSED`, `dangling: none`, CLAUDE.md 70,396 of 80,000, the grokkings 162,397 of 200,000 bytes.
+  *A mistake of mine, recorded:* my first run passed the copies through `--ledger` and `--also`. The tool then reads those same paths
+  at HEAD for the old side, where they do not exist. Its old corpus fell to 387,493 bytes against the baseline's 1,089,233, and it
+  failed on "grokking G21 status tag changed: None -> [method]". That run measured my invocation, not the drafts; the clone run
+  replaces it.
+- **Repeated runs:** `--dupes` on the files as they stand and `--dupes --new <copy>` print the same, `23 repeated runs of >= 10 words,
+  1,781 bytes`, both exit 0. A first draft of item 1 added one run ("ramified in F(i) or inert there of norm at most 32 (row", which
+  the theory paragraph already says). It now says "each place above 2 splits in F(i) or is inert there of norm 64 or more", the same
+  condition stated positively.
+- **The plant fires:** `TC1_FAULT=1 python3 data/workflow3/tc1/tc1_apply.py` writes item 1 with `(row 199)` for `(row 123)`. The
+  brief-form audit on it exits 1: `FAIL: dangling pointer: row 199 is cited and no such entry exists`, `AUDIT FAILED (1 failure(s))`.
+  The clean copies were then rebuilt.
+
+**The controls behind the verdicts**, each seen to fire:
+- TC1-FIELDS, in the derivation gate: `CHECK: PASS`, and `CHECK: FAIL [0, 1, 1, 0, 1, 0, 0, 0]` with its fault planted.
+- A syntax error planted inside its check block prints `CHECK: FAIL 0`. Found on the way: gp exits 0 after an error, and an unparsed
+  block once printed PASS. The block is now braced, with `ok` set to 0 first.
+- The quotation check: 7 of 7 found; with the misquote planted, 6 of 7.
+
+`python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/WORKFLOW3-TC1-theory-corrections.md`: `GATE: PASS (0 failures, 2
+warnings)`. The warnings are the two entries whose prior art is marked owed, a standing finding.
