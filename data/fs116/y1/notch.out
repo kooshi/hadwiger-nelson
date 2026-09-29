@@ -1,0 +1,12 @@
+(1) |Q_0 - V_0| = |Q_0 - V_1| = |Q_-1 - V_-1| = |Q_-1 - V_0| = 1 exactly: True
+(2) every wedge direction and every cone direction within 90 degrees of the valley-to-notch direction: True
+(3) at Q_0 + (0, 1/200): U0 (P) blocks
+(3) at Q_0 + (0, 1/200): U1 (G) blocks
+(3) at Q_0 + (0, 1/200): U-1 (B) blocks
+    arch colours blocked at Q_0: ['B', 'G', 'P']; within phi^2/sqrt2 + 1/100 of P_0: True
+(3) at Q_-1 + (0, 1/200): U-1 (B) blocks
+(3) at Q_-1 + (0, 1/200): U0 (P) blocks
+(3) at Q_-1 + (0, 1/200): U-2 (G) blocks
+    arch colours blocked at Q_-1: ['B', 'G', 'P']; within phi^2/sqrt2 + 1/100 of P_0: True
+(4) wedge colours V_-1 M, V_0 R, V_1 O; forced notch colour at Q_0: ['M'], at Q_-1: ['O']
+=> ALL HOLD

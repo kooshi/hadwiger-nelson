@@ -19,6 +19,7 @@ circle about `u`; `e(ψ)` the unit vector at angle `ψ`.
 |---|---|---|---|
 | FS116-Y1-QT | the brief's two block quotations are verbatim in `data/fs116/claims.md` § 7; the self-test's plants fire | [tools] | § 1.2; `tools/fs116_y1_quotes.py` |
 | **FS116-Y1-F15** | **Y-SAT positive**: a valid six-coloured fragment by formula on `B̄(P_0, 6/5)`, saturated on `B̄(P_0, 1/5)`, about the capped strip's midline vertex (degree 4, four colours, four straight edges, four (Q) arcs on its ring) | [tools, exact; one mind] | § 2.1; `tools/fs116_y1_sat.py` |
+| **FS116-Y1-NOTCH** | Y-QRING's strip family: with the capped strip's arches kept, the notch next to each top stop point `Q_0`, `Q_{−1}` is forced to one colour (`D_0`'s, `D_{−1}`'s) — the one the strip's columns block; so a positive beyond `φ²/√2` must split the columns along the unit circles about the notches | [hand; one mind; its facts tools-exact] | § 3.2; `tools/fs116_y1_notch.py` |
 | **FS116-Y1-STRIPCEIL** | every fragment agreeing with the capped strip on `B(P_0, 1)` and saturated on `B̄(P_0, R − 1)` has `R − 1 < √(√3 − 3/4) − 1/2 ≈ 0.491`: the strip cannot be saturated along its midline, and cannot decide SAT-STRIP | [hand; one mind; its numerical facts tools-exact] | § 2.2; `tools/fs116_y1_ceil.py` |
 
 ## Would-have-searched-here log (standing rule 5)
@@ -27,6 +28,8 @@ circle about `u`; `e(ψ)` the unit vector at angle `ψ`.
 - Stage 2: (a) I would have searched the band above the arches for colourings reaching a larger `r`; instead the ceiling was derived first
   (FS116-Y1-STRIPCEIL), which bounds every such search in the family. (b) I would have scanned witness points for the blocking fact; instead the two
   failing witnesses were re-placed by the hand argument's own condition (§ 2.2).
+- Stage 3: I would have searched partitions of the upper band into the three column colours for one that fills the notches; instead the notch colours
+  were derived (FS116-Y1-NOTCH) and the cascade stated as the family's open problem.
 
 ## Fence log (standing rule 8)
 
@@ -310,3 +313,75 @@ positive to try is a geometry whose midline does not run straight through the un
 **G87 lookout, stage 2:** none seen.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: Y-QRING — not landed; the strip family's notch colours are forced
+
+### 3.1 Registered before the run of `tools/fs116_y1_notch.py`
+
+The facts (1)–(4) of the tool's header hold (ALL HOLD); the plant `high` (notch points raised to `Y + 1/20`) makes fact (3) fail for `U_1` and `U_{−1}`
+at `Q_0` and their mirrors at `Q_{−1}`. *Scored:* both as registered (`data/fs116/y1/notch.out`, `notch-plant-high.out`). *First draft of the tool:* the
+near witnesses of `U_1`, `U_{−1}` were first put at the valleys `V_1`, `V_0`, at distance `1.007 > 1` from the notch point; the nearest points of those
+arches are on their top arcs facing the notch (`0.98` away), and the witnesses were placed there before the first run, by that computation.
+
+### 3.2 The forced notch colours (FS116-Y1-NOTCH)
+
+*Argument.* Let `F` be a valid six-coloured fragment on `B̄(P_0, R)`, `R ≥ φ²/√2`, whose tiles include the capped strip's arches `U_{−2}, …, U_1` and
+`D_{−2}, …, D_1` (all inside `B̄(P_0, 3/2)`), coloured as in the strip up to a permutation. The stop points `Q_0 = (1/4, Y)`, `Q_{−1} = (−1/4, Y)` are at
+distance `φ²/√2` from `P_0`, so `F`'s domain holds a disc about each. (a) *The valley wedges.* The wedges above `V_{−1}`, `V_0`, `V_1` (directions `(30°, 150°)`
+between two arches) are coloured M, R, O respectively: at `V_{−1}` by FS116-Y1-STRIPCEIL's step 1; at `V_0` the same argument with `U_{−1}, U_0` adjacent,
+`U_1` (through `V_1` and `P_2`), `D_{−1}` and `D_0` (through `P_0`) blocking G, B, P, O, M; at `V_1` with `U_0, U_1` adjacent, `U_{−1}` (through `V_0` and
+`P_{−1}`), `D_0` and `D_1` (through `P_1`) blocking P, G, B, M, R. (b) *The notch at `Q_0`.* Points `n` near `Q_0` in the cone `(arcsin ¼, 180° − arcsin ¼)`
+(the colourless cone of FS112-EDGE, bounded by the tangents at `Q_0` of `ω(V_0)` and `ω(V_1)`), at height below `≈ 1.854`, are straddled by `U_0` (P),
+`U_1` (G) and `U_{−1}` (B) (fact (3): `U_1`'s and `U_{−1}`'s top arcs pass within `0.99` of `n`, their bottom corners more than 1 away). `|Q_0 − V_0| = 1`
+exactly (fact (1)), and the direction `u` from `V_0` to `Q_0` lies within `90°` of every wedge direction at `V_0` and of every cone direction at `Q_0`
+(fact (2)); so for an R-tile `S` meeting the wedge at `V_0` (a sector of positive angle at `V_0`) and a tile `N` meeting the cone at `Q_0` (a sector of
+positive angle there), `|s − n|² = 1 − 2ρ⟨u, e(ψ)⟩ + 2σ⟨u, e(χ)⟩ + O(ρ² + σ²)` takes values below 1 (`σ → 0`) and above 1 (`ρ → 0`): `N` is not R. The
+same with `V_1` (`|Q_0 − V_1| = 1`): `N` is not O. Five colours excluded, `N` is M. (c) *At `Q_{−1}`*, by the mirror `x ↦ −x` of the argument (arches
+`U_{−1}, U_0, U_{−2}`; wedges at `V_{−1}` (M) and `V_0` (R)): the notch is O. ∎
+
+derivation: FS116-Y1-NOTCH
+  statement: in a valid six-coloured fragment on B̄(P_0, R), R ≥ φ²/√2, whose tiles include the capped strip's arches U_{−2}, …, U_1 and D_{−2}, …, D_1
+    with the strip's colours up to a permutation, every tile meeting the cone (arcsin ¼, 180° − arcsin ¼) at the stop point Q_0 = (1/4, Y), near Q_0
+    and below height 1.85, has D_0's colour, and every tile meeting the mirror cone at Q_{−1} = (−1/4, Y) has D_{−1}'s colour
+  uses only: the valley wedges' forced colours (the argument of FS116-Y1-STRIPCEIL step 1 at V_{−1}, V_0, V_1); the three arches' straddles at the
+    notch points; |Q_0 − V_0| = |Q_0 − V_1| = |Q_{−1} − V_{−1}| = |Q_{−1} − V_0| = 1 with every wedge and cone direction within 90° of the joining
+    direction; local finiteness at the valleys and at the notch; nothing about the tiles above the arches
+  not claimed: that a tile of that colour can be placed in the notch (the capped strip's columns over V_{−1} and V_2 straddle it); anything above height
+    about 1.854, where U_{±1}'s top arcs pass distance 1 and the arch colours can return; any fragment that changes an arch; anything at k ≥ 7
+  argument: § 3.2 The forced notch colours (FS116-Y1-NOTCH)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the capped strip itself: its notch at Q_0 is colourless (FS112-EDGE), because the column tiles over V_{−1} and V_2 (colour M) reach within 1 of
+    Q_0 while their valleys are at distance √(3/2) > 1 from it — the forced colour is the one the columns block
+  prior art: new — "unit distance & (saturat* | maximal) & colo*" (0), "chromatic & plane & (measurable | map) & (tight | saturat* | maximal)" (7); the
+    strip's stop point is FS112-EDGE's, the forced colour not considered there (plans/FS114-Y-construction.md § 2.1 read)
+  handoff: none — a relay-result for the construction side's round 2; it enters no proof of a value
+
+control: fs116-y1-notch
+  of: FS116-Y1-NOTCH — the exact facts (1)–(4); with the notch points raised above height 1.854 the arch blockings fail
+  run: python3 ../tools/fs116_y1_notch.py | tail -1
+  expect: => ALL HOLD
+  fault: python3 ../tools/fs116_y1_notch.py --plant high | tail -1
+
+**What it says for Y-QRING.** Any positive in the strip family must put an M-tile in the notch at `Q_0` and an O-tile at `Q_{−1}` (and, by the mirror
+`y ↦ −y`, tiles of `U_0`'s and `U_{−1}`'s colours in the bottom notches); the columns of colour M over `V_{−1}` and `V_2` then straddle the M notch
+through their upper parts, so each must be split along the unit circles about the notch points — which pass exactly through the apexes `A_{−1}` and
+`A_1` (`|Q_0 − A_{±1}| = 1`) and the columns' top corners — and the crescents left between the splits need a colour that the next columns block. The
+arches' (Q) arcs at `P_0` survive every such redesign: their outer tiles near `V_{±1}` are the forced wedges, whose colours are present at `P_0`.
+
+### 3.3 The families tried for Y-QRING (the plan's stop rule)
+
+| family | free parameters | the configuration's demand beyond `φ²/√2` | verdict |
+|---|---|---|---|
+| **Q1** the capped strip's arches kept, the region above and below them free | the partition and colouring of the upper and lower bands inside `B̄(P_0, R)` | the four notches coloured (M, O at the top by FS116-Y1-NOTCH; `U_0`'s and `U_{−1}`'s colours at the bottom), the columns split along the unit circles about the notches | **open**: reduced to one band-colouring problem with its forced colours named; no member built. The cascade (split, crescent, next column) did not close in this round |
+| **Q2** extensions of `[Polymath2021]` Fig. 10's disk about a corner `A_k` | the tiles beyond the disk | a disc of radius `> φ²/√2` about `A_k` | **dead above `φ`** (FS112-DISC, held, cited: the corners' dial is `φ`, attained); by containment the disk alone gives `≈ 1.599` |
+| **Q3** the Reuleaux bowtie (FS114-Y2-BOWTIE), whose centre's ring carries arcs of `ω(p)` | its rim | a disc of radius `> φ²/√2` | **dead at `√3`** (FS114-Y4-RSTOPALL, held, two independent derivations) |
+
+**Verdict on Y-QRING: not landed** — no fragment beyond `φ²/√2` about a (Q)-ring vertex was built; no obstruction at a named radius was derived
+beyond the held ones of Q2 and Q3; the strip family is reduced (FS116-Y1-NOTCH). **P2** ("no fragment by formula about a (Q)-ring four-colour vertex
+beyond `φ²/√2` is built in round 1", 0.8): **met** from this side.
+
+**G87 lookout, stage 3:** none seen.
+
+## Stage 3 — SAVED
