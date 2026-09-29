@@ -1,0 +1,4 @@
+symbolic: partner lines meet at cot(theta/2) along each, |X| = 1/sin(theta/2), 60 angle pairs, max residual 3.59E-189: True
+SQ9 square, side 1/2: 4 edges, partner segments crossing at interior points: 0 []
+HEX9 hexagon, side sqrt(3)/6: 6 edges, partner segments crossing at interior points: 0 []
+ALL HOLD

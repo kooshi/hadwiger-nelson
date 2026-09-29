@@ -1,0 +1,6 @@
+# FS121-D1 readback: every quotation in data/fs121/briefs/FS121-D1-r2-ends.md, source<TAB>quote (the brief's '> ' prefixes removed)
+data/fs121/claims.md	**C121-R2-FOUR** (this list): in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, every centre z of an (R2) arc that ends a chain of unit parallels, at which no colour has density 0, carries at least four colours.
+data/fs121/claims.md	*Not claimed:* anything at points where a colour has density 0; anything about the (Q) branch. *Colours:* every `k`. *Inhabitant:* **none held** (no held saturated colouring has an (R2) arc; by C121-PER none periodic has one). A three-colour (R2) end at any `k ≥ 7`, given by formula, refutes it.
+data/fs121/claims.md	**C121-CURVED** (this list): for some k ≥ 7 there is an honest saturated colouring in D-NF satisfying REG-J′, with no colour of density 0 at any point, that has a tangent-type interface arc of finite radius.
+data/fs121/claims.md	*Not claimed:* anything at `k ≤ 6`. *Role:* the inhabitant the classes of C121-OUT and C121-R2-FOUR lack (G21). A derived obstruction at every `k ≥ 7` is also a result.
+plans/FS121-map-step.md	Its argument reads M-PINCH at edge interior points and never uses the four-colour count

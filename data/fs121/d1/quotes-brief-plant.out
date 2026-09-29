@@ -1,0 +1,7 @@
+MISS  1 data/fs121/claims.md: **C121-R2-FOUR** (this list): in every honest saturated colouring in D
+ok    2 data/fs121/claims.md: *Not claimed:* anything at points where a colour has density 0; anythi
+ok    3 data/fs121/claims.md: **C121-CURVED** (this list): for some k ≥ 7 there is an honest saturat
+ok    4 data/fs121/claims.md: *Not claimed:* anything at `k ≤ 6`. *Role:* the inhabitant the classes
+ok    5 plans/FS121-map-step.md: Its argument reads M-PINCH at edge interior points and never uses the 
+quotes: 5  found: 4  missing: 1
+PLANT FIRED
