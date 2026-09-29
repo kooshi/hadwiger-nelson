@@ -15,12 +15,14 @@ holds the lanes' items that belong to no milestone.*
 |---|---|---|---|---|
 | 1 | owner ruling | FS-116 opens next, alone, on Poros's re-rank (rank 1); FS-121 as a second slot is Kooshi's staffing call, default not opened | `plans/SESSION-HANDOFF-2026-09-28.md` §3; `plans/POROS-2026-09-28-close-reread.md` § Draft re-rank | open |
 | 2 | owner ruling | Step 1 first: the stub has no `## The question (Poros, <date>)` section, so Poros (job FS116-P1) writes the card before Ephodos's opening job. Alternative weighed: Ephodos's opening job takes Poros's card 1 from the close re-read (§2.4) as its question directly. Why this won: the lane file makes the card's two forms the input §IQ quotes verbatim, and card 1 was posed as one kill's test, not as the milestone's question. Confidence: high | `.claude/output-styles/keryx.md` § A milestone step 1; `.claude/agents/poros.md` § Your jobs 1 | open |
+| 3 | owner ruling | FS116-P1 (Poros: FS-116's question card) and TC1 (Ephodos: the four owed scope corrections, item O1) launched at once, one per lane; de Bruijn's lane waits on Kooshi's order for its queue. Alternative weighed: hold Ephodos idle until the card lands. Why this won: TC1 touches no FS-116 file and is short, so the derive lane is free when the card arrives. Confidence: high | `data/fs116/briefs/FS116-P1-question.md`; `data/workflow3/briefs/TC1-theory-corrections.md` | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
 | # | when | lane | what happened | source | candidate edit |
 |---|---|---|---|---|---|
 | W1 | 2026-09-29 04:39 UTC | Keryx | The handoff's first act (a probe agent, launched to quote G87 from a loaded `grokkings` block) folded into the first two jobs' readbacks: each quotes the skill block's base-directory line and G87's first words from context before reading any file. Alternative weighed: a separate probe launch; lost because it costs a launch for the same evidence | this file | none yet |
+| W2 | 23:41 | Keryx (briefing) | The brief gate failed FS116-P1 on its first run on a path check again: a backticked `/grokkings` (a word, not a path) read as a path. Fixed in the text. The quotation check passed both briefs first time. Same shape as the test drive's I2 | gate run on `data/fs116/briefs/FS116-P1-question.md` | agent-forge: the path check (already pending from the test drive, F3) |
 
 ## Outside the milestone — lane items with no milestone home
 
