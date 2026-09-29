@@ -236,14 +236,17 @@ derivation: FS114-N2-ENDS
   verdict: derived
   grade: hand
   minds: 1
-  model: the capped strip's midline degree-4 vertices, each with four tactic edges (`n = 0`, charge −2) — the configuration the charge penalises, held
-    on a fragment
-  prior art: new — "ab:discharging & (ab:tiling | ab:tilings | ab:tessellation)" (1), "ab:combinatorial curvature & (ab:tiling | ab:tilings | ab:tessellation)" (2)
+    model: FS114-Y2-BOWTIE's centre `p`, a degree-4 four-colour vertex with four tactic edges (`n = 0`, charge −2) — the configuration the charge
+      penalises, held on a fragment (`B̄(p, 3√3/5)`); the capped strip's midline degree-4 vertices have four straight edges (`n = 4`, charge 2), each the
+      centre of four tactic arcs (N2-VCAP), not their own edges
+    prior art: new — "ab:discharging & (ab:tiling | ab:tilings | ab:tessellation)" (1), "ab:combinatorial curvature & (ab:tiling | ab:tilings | ab:tessellation)" (2)
     — FS-114's gate, none on map colourings avoiding a distance
   handoff: de Bruijn — deferred with D6: the identity on a torus map is a finite combinatorial statement, a natural first kernel target once the class is
     fixed
 
 Rests on it: K1's definition (the charge is negative only at a degree-4 vertex with at least three tactic edges), hence rounds 2–6; FS114-N3-JOINT.
+
+*Erratum (FS116-O1, 2026-09-29): the model line said the strip's midline vertices have four tactic edges (`n = 0`, charge −2); they have four straight edges (`n = 4`, charge 2) — `data/fs114/fs114-y6/survey.out`, FS114-N's control (`plans/FS114-N-proof.md` l. 299); found by Poros (FS116-P1). The model is now FS114-Y2-BOWTIE's centre; nothing rests on the model line.*
 Its exact identities are checked by `tools/fs114_n2_count.py`; NB-ARCS (the inequality `A ≥ E′ − V₄ + 3V₆`) is its blind second mind's form.
 
 derivation: FS114-N3-JOINT
@@ -258,11 +261,14 @@ derivation: FS114-N3-JOINT
   verdict: derived
   grade: hand
   minds: 1
-  model: the strip's midline vertices as deficient vertices, their continuation ends as sources (a fragment, not a map)
-  prior art: partly: `[Mohar2002]` (discharging on infinite planar graphs of subexponential growth) for the method; the assignment new
+    model: FS114-Y2-BOWTIE's centre `p` as a deficient vertex (DR's shape, FS114-N3-DR: four tactic edges, `n = 0`), its tactic ends' continuations as
+      N3-PAY's sources (a fragment, not a map); the strip's midline vertices carry `n = 4` (charge 2), so their two ends beyond the first two are free ends
+    prior art: partly: `[Mohar2002]` (discharging on infinite planar graphs of subexponential growth) for the method; the assignment new
   handoff: none — a reduction; the kill it names is the successor's
 
 Rests on it: route T's standing verdict (FS114-ROUTE-T); the successor's K1′ and K2′.
+
+*Erratum (FS116-O1, 2026-09-29): the model line changed with FS114-N2-ENDS's (see the erratum there); filed by Keryx.*
 
 derivation: FS114-N2-AVG
   statement: For simple non-Siamese valid maps of the plane (any complexity) the tile identities and Euler hold on discs up to `O(R)`: **no simple

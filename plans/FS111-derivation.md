@@ -1016,7 +1016,9 @@ derivation: FS111-M2-INTRAD
   grade: derived from: FS111-M-C11
   minds: 2 — blind to: M2's record until VM2's verdicts were committed; method: (i)–(ii) by two routes; (iii) completed by VM2 alone (VM2-FIN′, one
     mind), M2's convexity outline having a gap on E_n ∖ E_{n,p}
-  model: SQ9, HEX9, R7 and row 136's strip (VM2-LAD-CTL, exact: every edge-side carries its ladder, every arc of kind both has radius 1)
+  model: SQ9 and HEX9 (VM2-LAD-CTL, exact: 48 of 48 and 76 of 76 edge-sides carry the unit-parallel ladder), R7 (432 of 432 arcs of kind both, radius 1,
+    so the parallel clause is vacuous there) and row 136's strip off its midline (16 of 16 vertical edge-sides carry the ladder, 26 of 26 arcs of kind
+    both have radius 1; its midline is unsaturated, FS111-VM2-STRIP-MID); no control has an arc of radius ≥ 2
   prior art: new — “parallel curve* & unit distance” (0), “chromatic & plane & (measurable | map) & (tight | saturat* | maximal)” (7)
   handoff: de Bruijn — queued behind FS111-M-PINCH and FS111-M-C11: the link between route M and FS-115
 
