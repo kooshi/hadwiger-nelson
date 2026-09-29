@@ -14,6 +14,8 @@ For a vertex p of a held fragment (the strip, the disk, FS112-BOWTIE, the Y2 bow
   the twist       at 3600 sample angles theta with theta and theta + 60 both off Gamma, whether the colours differ.
 Run: python3 tools/fs116_n1_ring.py diskexact [--plant] [--noexit]  (the disk corner's two-colour change point, exactly; --noexit: exit 0 on FAIL)
      python3 tools/fs116_n1_ring.py survey [--plant]      (the plant recolours the strip's arch U1 from G to R: its ring loses both change points)
+     python3 tools/fs116_n1_ring.py germ [--plant]         (RING-GERM's four germs at every change point, its predictions, and what the fragment has)
+     python3 tools/fs116_n1_ring.py hyp                    (float readings of non-Siamese and simple on the disk and the strip)
      python3 tools/fs116_n1_ring.py summary [--plant]     (one line per vertex, for the record's controls)
      python3 tools/fs116_n1_ring.py exact                 (the load-bearing identities of the strip's midline ring, in sympy)
 """
@@ -277,6 +279,86 @@ def summary(S):
             f"maxDfree={math.degrees(mx):.3f} qualifying={'yes' if math.degrees(mx) > 120 + 1e-6 else 'no'} twistviolations={S['twist'][1]}")
 
 
+def germs(TF, p, S):
+    """for each change point y: the four germs at y +- 60 (u-, u+, v-, v+) and whether each lies on a (Q) arc; RING-GERM's predictions ((i) a tip,
+    (ii) an outer tile of a colour of p) and what the fragment has at y (its tiles of p, and its tiles of p's colours that are not tiles of p)."""
+    tp = around(TF, p)
+    Pp = set(S["P"])
+    qarcs = [(g[1], (g[1] + g[2]) % TAU) for g in S["gaps"] if g[0] == "G" and g[4] == "(Q)"]
+
+    def onq(t):
+        return any((t - a) % TAU <= (b - a) % TAU + 1e-12 for a, b in qarcs)
+    rows = []
+    d = 1e-4
+    for e, c, chg, _, _ in S["events"]:
+        if not chg:
+            continue
+        u, v = e + math.pi / 3, e - math.pi / 3
+        g = {"u-": not onq(u - d), "u+": not onq(u + d), "v-": not onq(v - d), "v+": not onq(v + d)}
+        ty = around(TF, rp(p, e))
+        tips = sorted(t for t in ty if t in tp)
+        outer = sorted(t for t in ty if t not in tp and TF[t][0] in Pp)
+        pred_i = g["v-"] and g["u+"]
+        pred_ii = g["u-"] and g["v+"]
+        if "--plantrule" in sys.argv:          # planted: the tip read from the wrong pair of germs
+            pred_i = g["u-"] and g["v+"]
+        rows.append(f"  y={math.degrees(e):8.3f}  germs off (Q): {''.join(k for k, ok in g.items() if ok) or 'none'}  "
+                    f"(i) tip forced={pred_i} has tip={bool(tips)}  (ii) outer forced={pred_ii} has outer={bool(outer)}  colours={len(c)}"
+                    f"  {'CONSISTENT' if (not pred_i or tips) and (not pred_ii or outer) else 'VIOLATES RING-GERM'}")
+    return rows
+
+
+def hyp():
+    """FLOAT readings of RING-Q's class hypotheses on the held disk and strip: the least distance between two distinct tiles of one colour (non-Siamese:
+    at least 1), and the tile pairs whose closures meet in more than one component (simple: none).  Boundaries sampled at 400 points per piece."""
+    import itertools
+
+    def samples(ps, n=400):
+        pts = []
+        for pc in ps:
+            if pc[0] == "S":
+                a, b = pc[1], pc[2]
+                pts += [(a[0] + (b[0] - a[0]) * i / n, a[1] + (b[1] - a[1]) * i / n) for i in range(n + 1)]
+            else:
+                _, C, r, S_, E_ = pc
+                a0 = math.atan2(S_[1] - C[1], S_[0] - C[0])
+                sp_ = (math.atan2(E_[1] - C[1], E_[0] - C[0]) - a0) % TAU
+                pts += [(C[0] + r * math.cos(a0 + sp_ * i / n), C[1] + r * math.sin(a0 + sp_ * i / n)) for i in range(n + 1)]
+        return pts
+
+    def ncomp(pts, th=0.01):
+        pts = list(pts)
+        lab = [-1] * len(pts)
+        c = 0
+        for i in range(len(pts)):
+            if lab[i] >= 0:
+                continue
+            st = [i]
+            lab[i] = c
+            while st:
+                j = st.pop()
+                for k in range(len(pts)):
+                    if lab[k] < 0 and math.dist(pts[j], pts[k]) < th:
+                        lab[k] = c
+                        st.append(k)
+            c += 1
+        return c
+    dt = O.Disk().tiles()
+    if "--plant" in sys.argv:              # planted: W1 recoloured violet, the colour of its neighbour P1 across the segment A1 X1
+        dt["W1"] = ("violet", dt["W1"][1])
+    for label, T in (("disk", dt), ("strip", O.Strip().tiles(-2, 3))):
+        TF = fl_tiles(XR.conv_tiles(T))
+        Sm = {nm: samples(ps) for nm, (c, ps) in TF.items()}
+        worst = min(min(math.dist(x, y) for x in Sm[a][::3] for y in Sm[b][::3])
+                    for a, b in itertools.combinations(TF, 2) if TF[a][0] == TF[b][0])
+        multi = []
+        for a, b in itertools.combinations(TF, 2):
+            sh = [x for x in Sm[a] if any(_pdist(pc, x) < 1e-9 for pc in TF[b][1])]
+            if sh and ncomp(set((round(x[0], 9), round(x[1], 9)) for x in sh)) > 1:
+                multi.append((a, b))
+        print(f"{label}: least distance between distinct tiles of one colour {worst:.6f}; tile pairs meeting in more than one component: {multi}")
+
+
 def objects(plant=False):
     st = O.Strip().tiles(-4, 6)
     if plant:
@@ -296,12 +378,23 @@ def main():
     plant = "--plant" in sys.argv
     if mode == "exact":
         return exact(plant)
+    if mode == "hyp":
+        return hyp()
     if mode == "diskexact":
         return diskexact(plant)
-    for label, T, p in objects(plant):
-        S = survey(fl_tiles(T), p, label)
+    objs = list(objects(plant))
+    if mode == "germ" or "--bowtie" in sys.argv:
+        import fs114_yb2_run as BW          # read-only import of FS114-YB2's bowtie rebuild
+        objs.append(("Y2 bowtie centre", XR.conv_tiles(BW.Bowtie().tiles()), (0.0, 0.0)))
+    for label, T, p in objs:
+        TF = fl_tiles(T)
+        S = survey(TF, p, label)
         if mode == "survey":
             show(S)
+        elif mode == "germ":
+            print(label)
+            for r in germs(TF, p, S):
+                print(r)
         else:
             print(summary(S))
 

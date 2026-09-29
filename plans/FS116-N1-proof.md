@@ -21,6 +21,11 @@ half-planes facing away from each other; one tile with `u, w` in its closure lie
 - **FS116-N1-TWIST-D** — RING-TWIST's first clause, at every `k`, radius `1 + ε`, Siamese pairs allowed — [hand], one mind, § 2.1.
 - **RING-TWIST-C** — RING-TWIST corrected (the claim as posed is MISSTATED): the parity of the ring's colour changes in every qualifying window — [derived], one mind, § 2.2.
 - **FS116-N1-TWIST-LIT** — the parity clause as posed holds on the class iff no fragment of the class has a qualifying window (the slit) — [derived], one mind, § 2.3.
+- **RING-GERM** — at a change point, the tip needs the outer pair of germs at `y ± 60°` off (Q) arcs, the outer tile the inner pair; all four give four colours — [derived], one mind, § 3.1.
+- **RING-Q-PRIME** (the claim RING-Q′) — TRUE as posed (closed arcs), from RING-GERM (iii) — [derived], one mind, § 3.1.
+- **FS116-N1-QDISK** — the disk's corner has a two-colour change point with its `±60°` points inside (Q) arcs: RING-Q is false below radius `1.5985` — [tools], one mind, § 3.2.
+- **RING-TWIST-Q** — a qualifying window's change points have both germs at `y − 60°` on (Q) arcs; a (Q)-free ring has none — [derived], one mind, § 3.4.
+- **RING-Q** — GAP (not a theorem), § 3.4.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -35,6 +40,9 @@ half-planes facing away from each other; one tile with `u, w` in its closure lie
 ## G87 lookout
 
 - Stage 1: see § 1.3 (RING-TWIST's literal parity clause against its own model class — a statement defect, classed below, not two truths in collision).
+- Stage 3: none seen as a collision. Classed: FS114-derivation's N7-3T model line ("FS114-Y2-BOWTIE's centre … whose ring carries no (Q) arc")
+  against FS114-N6 § 4 ("Its caps are (Q) arcs") and this job's survey (the caps are (Q) arcs: inner 1 | outer 3, inner 3 | outer 1) — a slip in a model line,
+  not two truths; reported as a correction owed.
 - Stage 2: none seen. The claim list's R7 control ("with three colours absent the parity fails") against FS111-M-R7 (six colours at each lattice point) is a
   wrong description of a control, not two truths: R7's statement stands and the list's parenthetical is corrected in § 2.4.
 
@@ -280,3 +288,204 @@ control: strip-exact
   fault: python3 ../tools/fs116_n1_ring.py exact --plant --line --noexit
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: RING-Q and RING-Q′
+
+**Verdicts.** **RING-Q′ is TRUE** (as posed, reading "lie on a (Q) arc" as lying in its closed arc), and holds more widely: without "simple", without
+the (Q) arc on the ring, at radius `1 + ε`; it is the case of all four germs of the **germ lemma RING-GERM** (derived), which says which germ at `y ± 60°`
+forces which colour at a change point `y`. **RING-Q is GAP** at the change points some of whose germs lie on (Q) arcs, and the gap is not local: **the
+disk's corner `A₀` has a change point carrying two colours only** (FS116-N1-QDISK, exact), on a non-Siamese simple valid fragment holding `B̄(A₀, R)` for
+every `R < 1.5985` and the whole unit disc about that change point — so RING-Q with any radius below `1.5985` in place of "above 2" is FALSE, and any proof of
+RING-Q as posed must read points of `B̄(p, 2)` outside the disk. One wording note: a change point in the quoted sense has the ring off `Γ` on both sides, so it
+never lies on an arc of `Γ` on `ω(p)`; RING-Q's qualifier "that lies on no (Q) arc" is empty, and RING-Q says every change point is a vertex of at least four
+colours.
+
+### 3.1 The germ lemma (RING-GERM) and its argument
+
+*Setting.* A non-Siamese valid fragment on a closed disc of radius above 1 about a vertex `p` of at least four colours; `y = r(ψ)` a change point, the ring
+off `Γ` on both sides of `y`, of colour `X̄` just clockwise (tile `R′`) and `X` just counter-clockwise (tile `R`). Both are absent at `p` (TWIST-D), so with
+six colours `p` has four and no more, and `A = {X, X̄}`. Put `u = r(ψ + 60°)`, `v = r(ψ − 60°)`, and call the **germs** the ring arcs `u⁻ = r((ψ + 60° − δ,
+ψ + 60°))`, `u⁺ = r((ψ + 60°, ψ + 60° + δ))`, `v⁻`, `v⁺` likewise, `δ` small. Since `Γ ∩ ω(p)` is finitely many arcs and points, for small `δ` each germ is
+either off `Γ` or inside one arc of `Γ` on `ω(p)`; a germ **lies on a (Q) arc** when that arc is a (Q) arc.
+
+**Step 1 (the germs' colours).** The points of `u⁻` and `v⁻` are at distance 1 from interior points of `R′` (their `∓60°` images lie just clockwise of `y`),
+so by N-E1 they carry no `X̄`; those of `u⁺`, `v⁺` carry no `X`. A germ off `Γ` has one absent colour (TWIST-D), hence `X` at `u⁻, v⁻` and `X̄` at `u⁺, v⁺`.
+A germ inside an arc of `Γ` that is not a (Q) arc has a side colour not at `p` (`p` has four colours, so "(Q)" fails only by a side colour), an absent colour,
+hence again `X` at `u⁻, v⁻` and `X̄` at `u⁺, v⁺`. **So a germ not on a (Q) arc lies in the closure of a tile of colour `X` (at `u⁻`, `v⁻`) or `X̄` (at
+`u⁺`, `v⁺`).**
+
+**Step 2 (four half-planes).** A tile has diameter at most 1 (its distances form an interval from 0 that avoids 1). By CL, `R` is the only tile of colour `X`
+at `y` and `R′` the only one of `X̄`.
+- (a) `u⁻` not on a (Q) arc: its `X`-tile has points within `< 1` of `R`'s points just counter-clockwise of `y` (angular gap below `60°`), so it is `R`; then
+  `u ∈ cl R`, `R ⊂ B̄(u, 1)`, and **`R`'s cone at `y` lies in `[ψ + 30°, ψ + 210°]`** (facing `u`, which is at `ψ + 120°` from `y`).
+- (b) `v⁻` not on a (Q) arc: its `X`-tile holds `v`; it is not `R` (then `cl R` would hold points more than `60°` apart on the ring, more than 1 apart), so
+  N3-FACE at `(y, v)` gives **`R`'s cone in `[ψ − 30°, ψ + 150°]`** (facing away from `v`, at `ψ + 240°`).
+- (c) `v⁺` not on a (Q) arc: as (a), its `X̄`-tile is `R′`, `R′ ⊂ B̄(v, 1)`, **`R′`'s cone in `[ψ + 150°, ψ + 330°]`**.
+- (d) `u⁺` not on a (Q) arc: as (b), **`R′`'s cone in `[ψ + 210°, ψ + 390°]`**.
+
+**Step 3 (what fills the gaps).** (i) With (b) and (d), the open cone `I = (ψ + 150°, ψ + 210°)` meets neither `R` nor `R′`; a tile at `y` whose cone meets
+`I` has a colour of `p` (only `R`, `R′` carry `X`, `X̄` there) and points in `B(p, 1)` (a direction `d ∈ I` has `d · e(ψ) < 0`), so it is within `< 1` of
+`p`'s tile of its colour, hence (CL) is that tile: **a tip**, a tile of `p` reaching `y`. (ii) With (a) and (c), the open cone `O = (ψ − 30°, ψ + 30°)` meets
+neither; a tile there has a colour of `p` and points outside `B̄(p, 1)`, while a tile of `p` lies in `B̄(p, 1)`: **an outer tile**, of a colour of `p`, not a
+tile of `p`. (iii) With all four, the tip's colour and the outer tile's differ (two tiles of one colour at `y` would be one tile, and one is a tile of `p`, the
+other not), so **`y` carries `X`, `X̄` and two colours of `p`**. ∎ *Uses:* N-E1, CL, N3-FACE, diameter; six colours at Step 1 only (a germ that misses `X̄`
+has `X`, because two colours are absent). *Reads:* `B̄(p, 1 + ε)`. It is N7-HUB (b), (c) and N7-HUBQ's mechanism with the bends dropped: a non-(Q) arc of `Γ`
+at a germ feeds its constraint as well as a ring tile does.
+
+**RING-Q′ from RING-GERM.** If `y + 60°` and `y − 60°` lie on no closed (Q) arc, no germ lies on one (a (Q) arc whose closure holds `u` holds one of `u`'s
+germs, and conversely), and (iii) applies. So every such change point is a vertex of at least four colours — in the class RING-Q′ names and in the wider one
+of RING-GERM.
+
+### 3.2 The disk's corner: RING-Q is not local (FS116-N1-QDISK)
+
+The disk (`[Polymath2021]` Fig. 10, rebuilt as FS112-CAL-DISK) is a valid fragment on the disc of radius `r = √((25 + 9√5)/10) ≈ 2.12426` about its
+centre (FS-112's exact check), so on `B̄(A₀, R)` for every `R < r − a ≈ 1.59852`, `a = |A₀|`. Read by `tools/fs116_n1_ring.py`: `A₀` carries red, blue,
+yellow, orange (degree 4; `Z`, `W₀`, `P₀`, `P₄`); its ring carries four (Q) arcs; its change points are at `209.0102°` and `330.9898°`
+(`data/fs116/n1/ring-survey.out`). **Exactly** (`diskexact`, 50-digit evaluation of the exact coordinates, `data/fs116/n1/disk-exact.out`): `ω(A₀)` meets the
+segment `A₁X₁` — the common side of `W₁` (green) and `P₁` (violet) — at `t = 0.500932`, margins `0.50` and `0.50` from its ends; the rotations of `y` by
+`±60°` about `A₀` lie strictly inside the (Q) arcs `A₂ → A₃` (inner `Z`, red; outer `P₂`, blue; margins `0.29`, `0.33` in cross product) and `B₀ → Y₀` (inner
+`P₀`, orange; outer `T₁`, yellow; margins `0.087`, `0.26`); no other boundary piece comes within `10⁻³` of `y`, and the ring is green just clockwise of `y`,
+violet just counter-clockwise. **So `y` is an edge point of two colours.** The class hypotheses, read in floats (`hyp`, `data/fs116/n1/hyp.out`): distinct
+tiles of one colour are at least `1.000000` apart (non-Siamese), and no two tiles' closures meet in more than one component (simple, on the sampled
+boundaries). `|y| = 0.875`, so the disk holds `B̄(y, 1)` too. The mirror change point at `330.99°` is the same by the disk's reflection symmetry. The germ report
+(`germ`, `data/fs116/n1/germ.out`): at both, **no germ is off the (Q) arcs**, and RING-GERM forces nothing — consistent.
+
+### 3.3 The controls, and `k = 7`
+
+`data/fs116/n1/germ.out` reports, at every change point of the held rings, which germs lie off (Q) arcs, what RING-GERM forces, and what the fragment has:
+- **the strip's midline vertices** — change points at `0°`, `180°` with germs `u⁻`, `v⁺` off (Q) (their `±60°` points end (Q) arcs): (ii) forces an outer
+  tile; the fragment has two (`U₂`, `D₂` at `P₂`) and no tip; four colours. Outside RING-Q′'s scope; RING-Q's conclusion holds there.
+- **the disk's corner** — as § 3.2: no germ off (Q); two colours. RING-Q's conclusion fails (at radius `< 1.5985`); RING-Q′ is silent.
+- **FS114-Y2-BOWTIE's centre** (rebuilt by FS114-YB2) — its ring carries two (Q) arcs, the Reuleaux caps (inner `t1`, outer colour 3, as FS114-N6 § 4 says:
+  "Its caps are (Q) arcs"); change points `top`, `bot` with germs `u⁻`, `v⁺` off (Q): (ii) forces an outer tile; the fragment has an outer tile and a tip; four
+  colours.
+- A **plant in the checker** (`germ --plantrule`: the tip read from the pair `u⁻, v⁺` instead of `v⁻, u⁺`) is reported as a violation at four change points.
+- **`k = 7`.** R7's lattice points carry six colours and their rings no change point (§ 2.4): RING-GERM, RING-Q and RING-Q′ are vacuous there. With seven
+  colours and four at `p`, three are absent and Step 1 fails: a germ that misses `X̄` may carry the third absent colour. **Six is spent at Step 1.**
+
+### 3.4 What RING-Q needs, and what it does to the plan
+
+- **Where the gap sits.** At a change point, the tip needs the outer pair of germs (`v⁻`, `u⁺`) off (Q) arcs and the outer tile needs the inner pair (`u⁻`,
+  `v⁺`). A change point of fewer than four colours has a (Q) arc on a germ of each missing kind — at the disk's corner on all four. Such a change point is not
+  excluded by anything inside `B̄(p, 1.5985) ∪ B̄(y, 1)`; RING-Q as posed is therefore an exclusion at radius 2 of a configuration class (a change point of two
+  or three colours whose `±60°` points lie on (Q) arcs), D2's kind of statement, not a ring lemma. **Registered prediction P3** ("RING-Q holds", 0.45): not
+  decided; its ring-scale form is lost (the disk).
+- **For D2's route.** Four-colour vertices propagate from a change point `y` to its neighbours at `y ± 60°` (N7-CHAIN's chains) exactly as long as the germs
+  there avoid (Q) arcs (RING-Q′); where a chain meets a (Q) arc, the outer-pair rule and the inner-pair rule say which of the tip and the outer tile survive.
+  The first object for D2 and for the construction side is the disk's corner configuration: **a two-colour change point whose `±60°` points lie inside (Q) arcs.**
+  A fragment by formula holding it on `B̄(p, R)` with `R > 2` makes RING-Q FALSE; an exclusion of it at radius 2 is RING-Q's missing step.
+- **A consequence for RING-TWIST** (RING-TWIST-Q below): in a non-Siamese simple fragment every change point of a qualifying window has **both** germs at `y − 60°`
+  on (Q) arcs; so a ring with no (Q) arc has no qualifying window at all, and RING-TWIST's parity clause has content only just after a (Q) arc.
+
+### 3.5 The entries
+
+derivation: RING-GERM
+  statement: in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the
+    ring, X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise and
+    just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if neither
+    v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of p; (ii) if neither u⁻ nor
+    v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction away from p lies in the cone of a tile of a colour of p that is
+    not a tile of p; (iii) if none of the four lies on a (Q) arc, y is a vertex of at least four colours
+  uses only: FS116-N1-TWIST-D (a ring point off Γ has a colour absent at p); N-E1; CL and N3-FACE (non-Siamese); that a tile has diameter at most 1; six
+    colours, spent once, at Step 1 (a germ carrying no X̄ and a colour absent at p carries X)
+  not claimed: anything at k ≥ 7; that a change point with a germ on a (Q) arc has fewer than four colours (the strip's P₂ has four, with u⁺ and v⁻ on (Q)
+    arcs); that the ring's change points are 60° apart (N6-RING60's conclusion, for (Q)-free rings)
+  argument: § 3.1 The germ lemma (RING-GERM) and its argument
+  verdict: derived
+  grade: derived from: FS116-N1-TWIST-D
+  minds: 1
+  model: the capped strip's midline vertex P₀ at its change point P₂ (u⁻, v⁺ off (Q) arcs; (ii) met by two outer tiles) and FS114-Y2-BOWTIE's centre at top
+    (u⁻, v⁺ off (Q) arcs; an outer tile and a tip) — `data/fs116/n1/germ.out`
+  prior art: partly: FS114-N7-HUB (b), (c) and FS114-N7-HUBQ (one mind each), whose mechanism this is, stated there on rings bent to (Q) and (R2) arcs; the
+    split of the four germs into the tip's pair and the outer tile's pair not found — FS-116's gate (`plans/FS116-local-exclusion.md` § 2.3), 12 queries
+  handoff: de Bruijn — the statement with its four germs, the six-colour step named, over TWIST-D; queued behind D6's map type
+
+derivation: RING-Q-PRIME
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries a (Q) arc,
+    every change point of the ring whose points at ±60° on ω(p) lie on no (Q) arc is a vertex of at least four colours
+  uses only: RING-GERM (iii); that a (Q) arc whose closure holds a ring point holds one of its two germs
+  not claimed: the change points with a point at ±60° on a (Q) arc (RING-Q, GAP); "lie on" read as the open arc (then a ±60° point may end a (Q) arc, as at
+    the strip's P₂, and RING-GERM gives only one of the tip and the outer tile)
+  argument: § 3.1 The germ lemma (RING-GERM) and its argument
+  verdict: derived
+  grade: derived from: RING-GERM
+  minds: 1
+  model: none held with a (Q) arc on the ring and a change point in scope — the strip's and the Y2 bowtie's change points have ±60° points ending (Q) arcs,
+    the disk's inside them; the statement holds at the class RING-GERM names, where FS114-N7-HUB's (Q)-free rings are its instances
+  prior art: partly: FS114-N7-HUBQ ("At a change point whose ±60° points have κ defined just outside, a tip exists", one mind), here with the outer tile and
+    without bends
+  handoff: de Bruijn — with RING-GERM
+
+derivation: FS116-N1-QDISK
+  statement: the disk of `[Polymath2021]` Fig. 10 (FS112-CAL-DISK), restricted to the closed disc of radius R about its corner A₀, is for every R below
+    r − |A₀| ≈ 1.59852 (r = √((25 + 9√5)/10) its rim radius) a non-Siamese simple valid fragment about a vertex of four colours whose ring carries a (Q)
+    arc, and the ring's change point y where ω(A₀) crosses the segment A₁X₁ is an edge point of two colours, green (W₁) and violet (P₁), whose points at
+    ±60° lie inside the (Q) arcs A₂A₃ and B₀Y₀; so RING-Q with "radius above 2" replaced by any radius below 1.59852 is false
+  uses only: the disk's exact coordinates (FS112-YB2's rebuild, `tools/fs112_yb2_objects.py`) and FS-112's exact validity check of it; the location of y and
+    its ±60° points evaluated to 50 digits from exact expressions, every inequality with margin above 0.08; the two-colour neighbourhood of y, non-Siamese and
+    simple read in floats
+  not claimed: that RING-Q as posed (radius above 2) is false; that the disk extends to a fragment on any disc of radius 2 about A₀ (FS114-Y-PENT: no valid map
+    agrees with the disk near its B_k); that non-Siamese and simple are exact (they are float readings on sampled boundaries)
+  argument: § 3.2 The disk's corner: RING-Q is not local (FS116-N1-QDISK)
+  verdict: derived
+  grade: computed over: the disk's corner A₀ — the point y, its ±60° points and the arcs holding them, exact to 50 digits; the class hypotheses in floats
+  minds: 1
+  model: the disk itself, about A₀
+  prior art: partly: the disk is Gibbs's (`[Polymath16threads]` `[07.49]`, `[Polymath2021]` Fig. 10); that its corners' rings have two-colour change points
+    not found in print — FS-116's gate, "unit distance" & ("circular arcs" | "arcs of unit" | "unit arcs") (1)
+  handoff: none — a statement about one held object; it crosses to Lean only as a control of RING-Q's scope
+
+derivation: RING-TWIST-Q
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, every change point y in a
+    half-open 60° window W of ω(p) with W ∪ σ(W) disjoint from D has both of its germs at y − 60° on (Q) arcs; so if the ring carries no (Q) arc, D meets every
+    half-open arc of ω(p) of 120°
+  uses only: RING-TWIST-C (a qualifying window holds an odd number of colour changes, each carrying the two absent colours only, and in this class they are
+    change points); RING-GERM (i) and (ii); that a (Q) arc lies in D
+  not claimed: that any fragment has a qualifying window; the Siamese or non-simple class (there a colour change may end a seam, where RING-GERM does not apply)
+  argument: § 3.4 What RING-Q needs, and what it does to the plan
+  verdict: derived
+  grade: derived from: RING-TWIST-C, RING-GERM
+  minds: 1
+  model: FS114-Y2-BOWTIE's centre and the strip's midline vertices — rings whose D meets every half-open 120° arc (`data/fs116/n1/ring-survey.out`)
+  prior art: partly: FS114-N6-RING60 with FS114-N7-HUB give it for (Q)-free rings after the bends (change points 60° apart, each in D)
+  handoff: none — a relay-result tying RING-TWIST's parity clause to the (Q) arcs
+
+derivation: RING-Q
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries a (Q) arc,
+    every change point of the ring that lies on no (Q) arc is a vertex of at least four colours
+  argument: § 3.4 What RING-Q needs, and what it does to the plan
+  verdict: gap: a change point y with a germ at y ± 60° on a (Q) arc — RING-GERM forces no tip when v⁻ or u⁺ lies on one and no outer tile when u⁻ or v⁺
+    does, and the disk's corner (FS116-N1-QDISK) has such a change point of two colours on a fragment holding B̄(A₀, 1.5985) and B̄(y, 1), so the step can
+    close only through points of B̄(p, 2) outside both
+
+control: disk-two-colour
+  of: FS116-N1-QDISK — the change point on A₁X₁ and its ±60° points inside the (Q) arcs, exactly; the point rotated 20° about A₀ fails
+  run: python3 ../tools/fs116_n1_ring.py diskexact --line --noexit
+  expect: DISKEXACT OK
+  fault: python3 ../tools/fs116_n1_ring.py diskexact --plant --line --noexit
+
+control: disk-class
+  of: FS116-N1-QDISK — non-Siamese and simple read on the disk and the strip; W₁ recoloured violet makes a Siamese pair
+  run: python3 ../tools/fs116_n1_ring.py hyp
+  expect: disk: least distance between distinct tiles of one colour 1.000000; tile pairs meeting in more than one component: []
+    strip: least distance between distinct tiles of one colour 1.000000; tile pairs meeting in more than one component: []
+  fault: python3 ../tools/fs116_n1_ring.py hyp --plant
+
+control: germ-report
+  of: RING-GERM — at every change point of the held rings, the forced tip and outer tile are present; the tip read from the wrong germs is caught
+  run: python3 ../tools/fs116_n1_ring.py germ
+  expect: strip P0=(0,0)
+      y=   0.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+      y= 180.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+    strip P1=(1/2,0)
+      y=   0.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+      y= 180.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+    disk corner A0
+      y= 209.010  germs off (Q): none  (i) tip forced=False has tip=False  (ii) outer forced=False has outer=False  colours=2  CONSISTENT
+      y= 330.990  germs off (Q): none  (i) tip forced=False has tip=False  (ii) outer forced=False has outer=False  colours=2  CONSISTENT
+    Y2 bowtie centre
+      y=  90.000  germs off (Q): u-v+  (i) tip forced=False has tip=True  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+      y= 270.000  germs off (Q): u-v+  (i) tip forced=False has tip=True  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+  fault: python3 ../tools/fs116_n1_ring.py germ --plantrule
+
+## Stage 3 — SAVED

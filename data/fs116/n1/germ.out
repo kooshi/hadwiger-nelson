@@ -1,0 +1,12 @@
+strip P0=(0,0)
+  y=   0.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+  y= 180.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+strip P1=(1/2,0)
+  y=   0.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+  y= 180.000  germs off (Q): u-v+  (i) tip forced=False has tip=False  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+disk corner A0
+  y= 209.010  germs off (Q): none  (i) tip forced=False has tip=False  (ii) outer forced=False has outer=False  colours=2  CONSISTENT
+  y= 330.990  germs off (Q): none  (i) tip forced=False has tip=False  (ii) outer forced=False has outer=False  colours=2  CONSISTENT
+Y2 bowtie centre
+  y=  90.000  germs off (Q): u-v+  (i) tip forced=False has tip=True  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
+  y= 270.000  germs off (Q): u-v+  (i) tip forced=False has tip=True  (ii) outer forced=True has outer=True  colours=4  CONSISTENT
