@@ -120,6 +120,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | W17 | 01:20 | Ephodos (FS121-D1) | The hand-back was content-free ("FS121-D1 idle; report sent to the coordinator"), the first Ephodos one tonight; its brief was the first to put standing rule 11's last line in "Done means" verbatim. A datum for E16 | D1's hand-back; `data/fs121/briefs/FS121-D1-r2-ends.md` | E16: the lane file (or every brief) states the exact last line |
 | W18 | 01:44 | Keryx (routing) | Three blind verifiers tonight asked reading questions about terms the frozen lists used without defining (SATPIN's "edge", N7-3T's whole vocabulary, C121-LRA-LINE's ν, "cusp-free", "change point" at arcs). Twice the author was past its line, and the answer came from the author's own record's definitions instead of a resume | items 26–29, 47; `plans/FS121-close-inventory.md` items 18, 32 | E17 again: a claim list defines every term its statements use, or quotes where the proposing record does |
 | W19 | 02:03 | Keryx (briefing) | U5 again: FS121-V3's brief fails the gate once on FS121-D3-GRUNDY's own "(S_1, …, S_k)", read as an elision; the quotation is verbatim (in-order check passed). Launched with the failure explained here | gate run on `data/fs121/briefs/FS121-V3-verify.md` | U5 |
+| W20 | 02:18 | Keryx (briefing) | U5 a third time: FS121-V4's brief fails once on C121-C1-GMAP's own "1 < 2 < … < k"; verbatim, launched with this note | gate run on `data/fs121/briefs/FS121-V4-verify.md` | U5 |
 
 ## Outside the milestone — lane items with no milestone home
 
