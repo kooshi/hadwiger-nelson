@@ -1,0 +1,9 @@
+FOUND   **Y-QRING** *(this list; `.claude/skills/grokkings/SKILL.md` G83's killing test)*: a valid fragment on a close ... [data/fs116/claims.md]
+FOUND   **Y-SAT** *(this list)*: a valid fragment on `B̄(p, R)`, saturated on `B̄(p, R − 1)`, about a vertex `p` of at ... [data/fs116/claims.md]
+PRESENT RING-Q fails at small radius ... FS116-N1-QDISK, exact ... holds B̄(A₀, R) for every R < 1.5985 <- [plans/FS116-N1-proof.md]
+PRESENT A fragment by formula holding the disk-corner configuration beyond radius 2 makes RING-Q FALSE outri <- [plans/FS116-N1-proof.md]
+PRESENT the construction side builds at that ring first (plans/FS116-local-exclusion.md § 4.5) <- [plans/FS116-local-exclusion.md]
+PRESENT FS116-Y1-STRIPCEIL rules out the strip itself <- [plans/FS116-Y1-construction.md]
+PRESENT Y-SAT's parenthetical cannot hold as written; read ... a geometry differing from the strip inside th <- [plans/FS116-Y1-construction.md]
+attributions: 5, all present: True
+quotations: 2, all found: True
