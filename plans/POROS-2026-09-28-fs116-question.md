@@ -110,13 +110,13 @@ hours before this job. Those items are read against the R1 findings. The items s
 - `plans/STUB-map-step.md` — read against: R1's F9 (the conflation "seven is the map NO made uniform in the complexity bound") present — surprised: no; present in § The question's first paragraph, as Amendment 1 says; F2's added sentence is present in § Bearing
 
 **Unread at this stage (expectations written 2026-09-29 04:55 UTC, before opening)**
-- `plans/FS114-N7-proof.md` §§ 2.1–2.2 (N7-HUB and its tip) — read against: N7-HUB is stated for any four-colour vertex (any number of tactic edges), non-Siamese and simple, and its argument gives each change point both of `p`'s absent colours plus two of `p`'s own — surprised: unread
-- `plans/FS114-N6-proof.md` or its verifier, N6-RING60 — read against: two minds, one blind; stated at any four-colour vertex whose ring carries no (Q) arc, not only at pinwheels — surprised: unread
-- `plans/FS114-close-inventory.md` items 118–121 (round 7's queue) — read against: every queued item is inside K1 (three or four tactic edges); none aims at a four-colour vertex with 0–2 tactic edges, at degree ≥ 5, or at Siamese maps — surprised: unread
-- `plans/STUB-route-t-count.md` (FS-117) — read against: it claims K1 (round 7's items 1–3) as shared with FS-116, and states that route T needs K1 while FS-116 needs every four-colour vertex — surprised: unread
-- `plans/FS106-derivation.md` FS106-EQ and FS106-STAB, the weak-* step as stated — read against: the Rajchman step is stated for measurable partial colourings on the plane with band-null monochromatic pairs, and applies without change to exact valid fragments on growing discs — surprised: unread
-- `plans/FS111-derivation.md` FS111-M2-INTRAD and FS111-M2-REDUCE-A — read against: REG-A₆'s map is locally finite given REG-J′ and ¬LRA, and no complexity bound is stated or needed — surprised: unread
-- `plans/POROS-2026-09-28-close-reread.md` § Draft re-rank, the FS-116 and FS-121 rows — read against: as filed in `plans/FRONTIER-STUBS.md` ll. 84–85 — surprised: unread
+- `plans/FS114-N7-proof.md` §§ 2.1–2.2 (N7-HUB and its tip) — read against: N7-HUB is stated for any four-colour vertex (any number of tactic edges), non-Siamese and simple, and its argument gives each change point both of `p`'s absent colours plus two of `p`'s own — surprised: no; the table (l. 20) states it "At a four-colour vertex (non-Siamese, simple) whose ring is (Q)-free after the bends", any tactic count, and (c) reads "So `y_k` carries at least four colours: `X`, `X̄`, a tip's, and an outer tile's"; one mind; its § 2.3 says where six is spent — "at N6-RING60 (two absent colours alternate; with a seventh colour the ring can carry three …) and at N7-HUB (b)'s exhaustion"
+- `plans/FS114-N6-proof.md` or its verifier, N6-RING60 — read against: two minds, one blind; stated at any four-colour vertex whose ring carries no (Q) arc, not only at pinwheels — surprised: no; filed inside FS114-N6-NOQ (`plans/FS114-derivation.md` l. 607 on), two minds, NB6 blind, stated for "a four-colour vertex whose ring carries no (Q) arc"
+- `plans/FS114-close-inventory.md` items 118–121 (round 7's queue) — read against: every queued item is inside K1 (three or four tactic edges); none aims at a four-colour vertex with 0–2 tactic edges, at degree ≥ 5, or at Siamese maps — surprised: no; items 118–120 are N7-3T's blind check, the wrap, OC, the (Q)-pinwheel and R-E2 against E2, all inside K1
+- `plans/STUB-route-t-count.md` (FS-117) — read against: it claims K1 (round 7's items 1–3) as shared with FS-116, and states that route T needs K1 while FS-116 needs every four-colour vertex — surprised: no; "its sibling FS-116 … holds K1, which this route needs too" (l. 4) and "The whole NO is FS-116's C114-LOCAL-F" (l. 28); it also says route T "can aim FS-116 even where it cannot finish"
+- `plans/FS106-derivation.md` FS106-EQ and FS106-STAB, the weak-* step as stated — read against: the Rajchman step is stated for measurable partial colourings on the plane with band-null monochromatic pairs, and applies without change to exact valid fragments on growing discs — surprised: yes, mildly; FS106-COMP is stated on the plane with upper density (l. 227), and the disc form is FS106-STAB (l. 235, one mind, QB agreeing on the equivalence) with a band and a free seventh colour; an exact fragment is tight, band-proper at no `ε`, so it enters either by the Rajchman step run locally or by FS106-STAB after an erosion — neither is written anywhere. Hence card `the-yes-needs-no-map`
+- `plans/FS111-derivation.md` FS111-M2-INTRAD and FS111-M2-REDUCE-A — read against: REG-A₆'s map is locally finite given REG-J′ and ¬LRA, and no complexity bound is stated or needed — surprised: yes; M2-INTRAD's interfaces are "locally a chain of segments and circular arcs, finitely many of each radius", with integer radii, and no complexity bound is stated, as expected; but **M2-REDUCE-A is stated "in an honest saturated k-colouring"** — so the map route M's honest branch hands to the NO is honestly saturated. Card 2's joint is a question of regularity class, not of complexity
+- `plans/POROS-2026-09-28-close-reread.md` § Draft re-rank, the FS-116 and FS-121 rows — read against: as filed in `plans/FRONTIER-STUBS.md` ll. 84–85 — surprised: no; both rows filed verbatim (a byte comparison, this stage)
 
 ### 1.5 The hunch ledger, carried forward (R1's ten, as scored there) and registered today
 
@@ -220,7 +220,188 @@ hunch: the-room-is-on-q-rings
 
 ### 1.6 The question, so far
 
-no question: the survey has not been made
-  need: stage 2 — the unread items above read against their expectations, then the cards
+*At stage 1 the honest exit stood: no question yet, because the survey had not been made; what it needed was stage 2. Stage 2 replaces it with the
+cards in § 2.4.*
 
-Invention signal: none yet (stage 1 read for it; see stage 2).
+
+## Stage 1 — SAVED
+
+## Stage 2 — SAVED
+
+*The survey, by provenance. The seven items unread at stage 1 were read against the expectations committed then (6fc4a5ea); their results are filled
+in place in § 1.4. After that, one more item was read, where an anomaly pointed. FS111-M2-INTRAD's model line cites "row 136's strip (VM2-LAD-CTL,
+exact: every edge-side carries its ladder …)", while FS111-VM2-STRIP-MID says the strip is not saturated on its midline. So I read both in
+`plans/FS111-VM2-verification.md` (ll. 40–44, 211). **Resolved, and not a collision.** LAD-CTL checked "16 of 16 vertical edge-sides", and VM2 says "the
+strip is a fragment on which INTRAD is tested only off the midline". The derivation file's model line dropped that scope. A small correction is owed
+(§ 2.5).*
+
+### 2.1 The frame on its five axes (each with the address where it lives)
+
+- **The goal**, in Kooshi's words: *"My goal is to fully solve, and then verify in Lean, HN."* (`CLAUDE.md` l. 74). FS-116 and FS-121 are route M's two
+  halves (`FS111-C-SEVEN-M`: "Q-NO ∧ REG-A₆ ⟹ χ_m⁰(ℝ²) ≥ 7").
+- **The object** (`data/fs114/claims.md` § 0, "Local": a valid fragment on a disc is a six-coloured segment-and-arc map of an open set containing it,
+  with no two interior points of one colour at distance exactly 1). It has **two natural sizes, and the frame names one.** `[SokolovVoronov2025]`
+  Question 2 asks about every locally finite map. Route M's honest branch hands the NO only **honestly saturated** maps: FS111-M2-REDUCE-A derives
+  REG-A_k "in an honest saturated k-colouring". The cover branch has a NO of its own, NO-PAR (`plans/STUB-map-step.md` question 1). So **route M never
+  needs FS-116's NO for an unsaturated map**, and the frame has not used that. Saturation is where the best positive fails: the capped strip, which
+  reaches `φ²/√2`, is "not saturated on its midline", at the edges of its own four-colour vertices (FS111-VM2-STRIP-MID).
+- **The question** (the stub, § The question; row 138). FS-114 asked which configurations die. It asked this of **the count's room**: degree-4
+  vertices with three or four tactic edges, where N2-ENDS's charge is negative. Every kill is there, at a (Q)-free ring or with the (Q) case excepted.
+  **The positives' room is elsewhere.** The held fragments that reach farthest sit at vertices with 0 and 2 tactic edges, whose rings carry (Q) arcs
+  (row 136; `data/fs114/fs114-y6/survey.out`). These are the vertices FS-114 never touched.
+- **The discipline.** The kills are elementary plane geometry of unit circles: straddles, tangencies, cones. The regularity of saturated colourings is
+  contact geometry: every interface is pinned by partners at distance exactly 1 (G84; FS111-M-PINCH). **The two are one object seen twice.** A unit arc
+  of "kind both" (its centre carries both side colours) is the map-side name for M-PINCH's first case, "a unit arc whose centre carries both colours".
+  A (Q) arc is such an arc at a centre of at least four colours. For a stranger, the object is the contact graph of a unit-distance-avoiding partition,
+  points joined to their partners at distance 1. Sirgedas's dual graph (C114-SKELETON, "not derived") is its combinatorial shadow.
+- **The audience.** The answer, through route M; `[SokolovVoronov2025]` Question 2's unit-arc half; `[Polymath2021]` p. 199; and Mixon's thread-7 question
+  (the stub, § Bearing on the answer).
+- **The product.** The stub reads: "Exclude every such fragment (the NO), or build a valid map (the YES)". **The failure of C114-LOCAL-F is not a valid
+  map.** It is a valid fragment at every radius, whose complexity may grow without bound. By the weak-* step that sequence is already a measurable
+  six-colouring of the plane, which is `χ(ℝ²) ≤ 6` with no MR. That is a hunch at 0.9, and card `the-yes-needs-no-map` asks Ephodos to check it. It is
+  the exact-fragment twin of what FS111-W-NEG (iii) runs for route R. If it holds, **the uniform radius is implied by seven, so it is never an
+  overshoot of the answer**, and FS-116 is decisive in both directions without FS-121.
+
+### 2.2 Registrations scored
+
+- `local-f-overshoots` — **open.** Nothing read settles whether the NO for every locally finite map gives a uniform radius. Its sting is gone, though,
+  if card `the-yes-needs-no-map` holds. The uniform radius would then be implied by seven, and it could fail only if `χ(ℝ²) ≤ 6`.
+- `route-m-consumes-unbounded-maps` — **open.** M2-INTRAD's map is locally finite ("finitely many of each radius", locally), with no complexity bound
+  stated, which is consistent with the claim. Nothing derives that the bound cannot be had. It no longer bears on FS-116's form (card 2's resolution,
+  § 2.4).
+- `kills-are-not-band-stable` — **open**, re-addressed with card 1 (§ 2.4).
+- `fragments-at-every-radius-give-six`, `the-room-is-on-q-rings` (registered at stage 1) — **open**; they are cards 2 and 3's hunches.
+
+Registered now, before any answer:
+
+hunch: saturation-pins-the-four-colour-vertex
+  claim: in an honestly saturated valid fragment every edge at a vertex of at least four colours is pinned — each point has a tile of each side colour
+    at distance exactly 1, a unit arc about a centre carrying both colours or a curve between two tangent unit discs (FS111-M-PINCH read at a vertex) —
+    so the capped strip's midline configuration (four straight edges, both side colours free at their midpoints) cannot occur in that class (0.6)
+  basis: derived
+  falsifier: an honestly saturated valid fragment by formula with a four-colour vertex one of whose edges has a side colour with no tile at distance
+    exactly 1 from its points
+  registered: 2026-09-29
+  status: open
+
+hunch: q-rings-force-a-pattern
+  claim: at a four-colour vertex whose ring carries a (Q) arc, the ring's change points off the (Q) arcs are vertices of at least four colours, as N7-HUB
+    has for (Q)-free rings, so the four-colour skeleton propagates through (Q) rings too (0.5)
+  basis: analogy
+  falsifier: a valid fragment by formula with a (Q)-ring four-colour vertex one of whose ring change points has three colours
+  registered: 2026-09-29
+  status: open
+
+### 2.3 What is curious, and the pattern that would make it a matter of course
+
+**C1 — Every kill is where the count has room; every positive is where it has none.** FS-114 aimed six rounds at the configurations N2-ENDS's charge
+makes negative. That was the right aim for route T, whose deficit must be paid there. FS-116's question, though, is about every four-colour vertex,
+and the held fragments that reach past `√3` all sit at surplus vertices (charge `n − 2 = 2` at the strip's midline; 0 or 2 tactic edges) and on (Q)
+rings. The pattern that makes this a matter of course is that the (Q) arc is the positives' device. It is the unit-radius tactic's own arc, centred at
+a vertex that carries both its side colours, so it pins its interface by contact. A (Q)-free ring has no such device: N6-RING60 and N7-HUB force a
+hexagon of four-colour vertices, and the configuration dies by the hexagon's second shell (the bowtie at `r = (√3, 0)`). **FS-116's residue is the (Q)
+rings, and its structural question is the ring** (§ 2.4, card 3; § Structural form in stage 3).
+
+**C2 — The best positive is unsaturated exactly at its centre, and the NO route M consumes is saturated.** FS111-VM2-STRIP-MID puts the strip's
+unsaturation on the midline edges, and those are the four straight edges of the strip's four-colour vertices, the vertices FS114-Y-DIAL's `φ²/√2` is
+measured about. FS111-M2-REDUCE-A hands route M's NO an honestly saturated map. So the saturated class may lose the strip's configuration outright.
+That reading is a hunch (`saturation-pins-the-four-colour-vertex`), not a derivation. Nobody has asked what saturation does at a four-colour vertex. The
+two milestones' records never met: FS-111 read the strip as a control for INTRAD, and FS-114 read it as the dial.
+
+**C3 — The stub's YES is a map; the question's negation is not.** See § 2.1, the product axis. The pattern is F1's again: the stub keeps an equivalence
+that FS-114's own compactness entry (N114-COMPACT) holds only at each `K`. Across complexity, the right tool is the weak-* limit, as FS-111 knew for
+route R (W-NEG (iii)).
+
+**Which result stands without its mechanism.** FS114-Y-DIAL's `φ²/√2` (the strip holds every smaller disc about a midline vertex) stands as a
+measurement of one object. Nothing says why a four-colour vertex with four straight edges reaches that far. C2 suggests the mechanism is its
+unsaturated edges.
+
+**What path has nobody considered.** Posing FS-116's NO in the class route M consumes (C2), and reading the (Q) arc as the contact that FS-111's
+regularity theory is built on (C1).
+
+### 2.4 The cards, and what I decided about R1's cards 1 and 2
+
+question: what-does-saturation-pin
+  evidence: FS111-M2-REDUCE-A derives REG-A_k "in an honest saturated k-colouring" (`plans/FS111-derivation.md`); FS111-M-PINCH, three minds: every
+    two-colour interface point of a saturated colouring lies on "a unit arc whose centre carries both colours" or a `C^{1,1}` curve "between two tangent
+    unit discs" (`LEDGER.md` row 140); FS111-VM2-STRIP-MID: the capped strip is "not saturated on its midline", at the four straight edges of its
+    four-colour vertices (`data/fs114/fs114-y6/survey.out`: `tactic=0`), the vertices about which it holds every disc below `φ²/√2` (FS114-Y-DIAL)
+  expected: that route M consumes FS-116's NO over every valid map, as the stub's bearing says
+  ask: In an honestly saturated valid fragment — the class route M's honest branch must exclude — what does saturation force on the edges at a vertex of at least four colours?
+  if every edge is pinned: the strip's midline configuration is outside the class; FS-116 poses its NO in the saturated class first (route M's need), keeps the all-maps form for Sokolov–Voronov's Question 2, and aims FS-114's straddle kills at the pinned vertices with 0–2 tactic edges
+  if nothing new is pinned: saturation is a scope note for route M only; FS-116 keeps the all-maps class from its opening and starts from card what-do-q-rings-force
+  answered by: derivation — Ephodos, FS-116's proof side at its opening (FS-121's opening to be told the answer, since its honest route produces the class)
+  cost: an hour to one round; M-PINCH, W-NOBEND and W-NOREP are held, and the step is to read them at a vertex of a map
+  hunch: every edge is pinned, and the strip's midline dies (hunch `saturation-pins-the-four-colour-vertex`, 0.6)
+  falsifier: an honestly saturated valid fragment by formula with a four-colour vertex one of whose edges has a side colour with no tile at distance exactly 1 from its points
+  rank: 1
+
+question: the-yes-needs-no-map
+  evidence: FS111-W-NEG (iii), two minds: "A-ALL's failure gives, for every R and δ, holes < δ in U_R, which is χ_m⁰ ≤ 6"; `LEDGER.md` row 131's
+    mechanism, "the circle measure is Rajchman (row 130's weak-* step), so a limit of near-colourings is a colouring after support selection"; FS106-STAB's
+    disc form (`plans/FS106-derivation.md` l. 235); the stub: "Exclude every such fragment (the NO), or build a valid map (the YES)"
+  expected: that C114-LOCAL-F's failure needs a valid map of the plane, as the stub says
+  ask: Does a sequence of valid six-colour fragments on discs of unbounded radius, their complexity unbounded, give a measurable six-colouring of the plane proper at almost every unit pair, by row 131's weak-* step and support selection?
+  if it does: C114-LOCAL-F with R uniform in the complexity is implied by seven, and its failure is χ(ℝ²) ≤ 6 with no MR; FS-116 is decisive both ways without FS-121; the YES side aims at fragments at every radius, complexity free, not at a map; the complexity half of R1's card 2 dissolves
+  if it does not: the failing step is named; the stub's "build a valid map (the YES)" stands, and whether FS-121's map has bounded complexity (R1's card 2 as posed) decides FS-116's form
+  answered by: derivation — Ephodos at FS-116's §IQ, a check before the first round
+  cost: under an hour; a composition of held steps
+  hunch: it does (hunch `fragments-at-every-radius-give-six`, 0.9)
+  falsifier: a step of the composition failing on valid fragments
+  rank: 2
+
+question: what-do-q-rings-force
+  evidence: every held fragment that reaches past `√3` has (Q) arcs on its four-colour vertices' rings (`LEDGER.md` row 136, "every unit arc of kind both
+    and centred at a four-colour vertex"; the strip to `φ²/√2`, the disk to `φ`); every FS-114 exclusion is at a (Q)-free ring or excepts (Q) rings (row
+    138's not-claimed, "K1 (GAP at rings with (Q) arcs …)"; `plans/FS114-C-close.md` § 2.6 item 3); on a (Q)-free ring N6-RING60 (two minds, one blind)
+    and N7-HUB (one mind) put six four-colour vertices at `y + 60°ℤ`, and the bowtie, whose `q1, q2, top, bot` are four of them, dies at `r = (√3, 0)`
+  expected: that the exclusions had reached the vertex types the positives use — they had not
+  ask: At a vertex of at least four colours whose ring carries a (Q) arc, which vertices of at least four colours, and which (Q) arcs, does the ring force at distance 1 — as N7-HUB does for (Q)-free rings?
+  if a forced pattern: the four-colour skeleton propagates through (Q) rings; the strip (a line of midline vertices at spacing 1/2) and the disk (a 5-cycle of corners) are its two held recurrences; the proof side follows the pattern outward to the first straddle
+  if nothing is forced: a (Q) ring can close without placing another four-colour vertex; the construction side builds there first, a fragment by formula about a (Q)-ring vertex beyond `φ²/√2`, and the NO needs another handle there
+  answered by: derivation — Ephodos, FS-116's proof side, with the strip's midline vertices and the disk's corners as controls
+  cost: one derivation round
+  hunch: a forced pattern (hunch `q-rings-force-a-pattern`, 0.5); N7-HUBQ already gives a tip at every change point whose ±60° neighbours are off (Q) arcs
+  falsifier: a valid fragment by formula with a (Q)-ring four-colour vertex one of whose ring change points has three colours
+  rank: 3
+
+**R1's card 1, `do-fs114-kills-survive-a-band`: re-addressed to FS-122's opening (route R), not asked at FS-116.** Even if one kill survived a band, FS-116
+could not be posed on near-colourings from its opening. That posing needs a robust form of FS114-CV-EXISTS (a fat four-colour point in every band-proper
+near-colouring with small holes). CV-EXISTS goes through stuck chains of the terminal modification, a global and exact argument
+(`plans/FS114-derivation.md` l. 26 on), and no one has a robust form. A band-stable local kill is a statement of route R's kind, beside (A) and B-RR, so
+its home is FS-122. Hunch `kills-are-not-band-stable` stays open. **Default if Keryx says nothing:** the card is carried in FS-122's stub at its opening,
+and FS-116 does not ask it.
+
+**R1's card 2, `which-no-does-route-m-consume`: split, and answered in part by reading.** *Its complexity half* dissolves if card `the-yes-needs-no-map`
+holds. The uniform radius is then necessary for seven, and FS-116 poses it whatever FS-121 outputs; FS-121 need produce only a locally finite map, which
+M2-INTRAD's form already gives. *Its class half* is the real joint, and card `what-does-saturation-pin` asks it. The honest route outputs honestly
+saturated maps (M2-REDUCE-A), so route M's honest branch consumes FS-116's NO in that class only. The cover route has a NO of its own, NO-PAR. **Which
+milestone asks it:** FS-116's opening, because the answer changes FS-116's class. FS-121's opening is told the answer, because FS-121 produces the class.
+
+**Is C114-LOCAL-F as posed FS-116's question?** Yes, as the existence form, with three changes. Its uniformity in the complexity is written into the
+statement. Its failure is stated as fragments at every radius, not as a map, conditional on card 2. And its first card is the class question. The
+structural form is the ring (stage 3).
+
+### 2.5 Findings for Keryx (corrections owed; not mine to edit)
+
+- `plans/FS114-derivation.md` l. 239, FS114-N2-ENDS's model line: "the capped strip's midline degree-4 vertices, each with four tactic edges (`n = 0`,
+  charge −2)" → "the capped strip's midline degree-4 vertices, each with four straight edges (`n = 4`, charge 2): a surplus, not the configuration the
+  charge penalises" (`data/fs114/fs114-y6/survey.out`; `plans/FS114-N-proof.md` l. 299); and l. 261, FS114-N3-JOINT's model line, "the strip's midline
+  vertices as deficient vertices" needs the same check against N3's record.
+- `plans/FS111-derivation.md` l. 1019, FS111-M2-INTRAD's model line: "row 136's strip (VM2-LAD-CTL, exact: every edge-side carries its ladder, …)" →
+  "row 136's strip off its midline (VM2-LAD-CTL, exact: 16 of 16 vertical edge-sides carry the ladder …; the midline is unsaturated, VM2-STRIP-MID)".
+- `plans/STUB-local-exclusion.md`'s provisional bearings name G67 and G51, both retired. I drop them in stage 3, since the stub is mine for this job.
+
+Invention signal: none seen. I read for it in the stub; `data/fs114/claims.md` §§ 0–3, 9; `LEDGER.md` rows 131, 133–141;
+`plans/FS114-derivation.md` §§ 1–3; `plans/FS114-C-close.md` §§ 2.4–2.6; `plans/FS114-N7-proof.md` §§ 2.1–2.4, 3.2; FS114-N6-NOQ;
+`plans/FS114-close-inventory.md` items 118–121; `plans/FS111-derivation.md` card 1, W-NEG, M2-INTRAD, M2-REDUCE-A, VM2-STRIP-MID and W-NOREP;
+`plans/FS111-VM2-verification.md` ll. 40–44, 211; `plans/FS106-derivation.md` EQ, COMP and STAB; `plans/STUB-map-step.md`; and
+`plans/STUB-route-t-count.md`. Three near-collisions were examined and classed:
+- N2-ENDS's model line against the survey — a filing slip; two exact readings of the object agree against it.
+- LAD-CTL against STRIP-MID — a dropped scope ("vertical", "off the midline").
+- "where the count gives six room" (row 138) against where the positives reach — consistent. The count's negative charge marks a deficit that must be
+  paid, and the positives sit at surplus vertices.
+
+None is two held truths that cannot both stand.
+
+## Stage 2 — SAVED
