@@ -1,6 +1,6 @@
 JOB CL2 -- DONE   harness≈not read (own≈120k)
 RESULT: definitions file written, 42 verbatim passages with file and lines, plus the entry's `statement:` and `not claimed:` fields (checked equal to the quotation in `data/fs116/claims.md` section 8); no claim graded.
-RECORD: plans/WORKFLOW3-CL2-n7-definitions.md   COMMITS: see git log for "CL2: stage" subjects
+RECORD: plans/WORKFLOW3-CL2-n7-definitions.md   COMMITS: eb60b162
 INVENTORY:
 - result -- `data/workflow3/cl2/n7-definitions.md`, sections N1-N7 + the entry fields -- built by `tools/cl2_extract.py` (anchor extraction; a missing anchor exits 1; plant checked, exit 1)
 - slip -- none
@@ -11,7 +11,7 @@ CHECK: N2 "non-Reuleaux lens": no separate definition; the N3-SEC passage gives 
 CHECK: N2 "60° anti-lens": anti-lens = inner count 0 (N3 line 118); "60°" not defined. The D-frame OC passage shows `t3 = [D_{a+2}, D_{a+3}]`, a cone of 60° (my reading).
 CHECK: N2 "cap"/"caps": no single definition. Copied N4 (line 91, the cap as an arc of `ω(p)`; lines 185-186, the "Reuleaux cap" region `Reul(A,B,C) \ B̄(P,1)`) and N6 (lines 253-255, caps as (Q) arcs; lenses not bordering the caps). These may be two different objects (an arc vs a region); which one the statement means is your call.
 CHECK: N2 "open-cap family OC": defined by the D-frame clause (N7 lines 140-142, ends `θ_4 ∈ [D_{a+4}, D_{a+5}]`), the bowtie frame (N7 lines 195-197: `θ_4 ∈ [180°, 240°]`) and section 3.3 (N7 line 265: `θ_4 ∈ (180°, 240°]`). Three ranges, differing at the ends; not reconciled. "Members" of OC and "open" (why) not defined.
-CHECK: N2 "lune": used in N4, N5, N6 without a separate definition. Not asked by the verifier; the bowtie passages above use "lunes" only by name in the N6 copy? No: none of my passages uses it.
+CHECK: N2 "lune": the word is not defined separately; it occurs once in the definitions file (in the N2 note). Not asked by the verifier.
 CHECK: N3 the 4-tuple: no line says what it counts. N3-SEC's inner counts (anti-lens 0, rotational 1, lens 2) and the patterns `+++-`, `++--` (one lens, two rotational, one anti-lens) are the nearest. By the marking rule the inner counts of the four tiles of `+++-` come out (0,1,1,2) in order t1..t4 and of `++--` (0,1,2,1): the multiset {2,1,1,0}, not the ordered tuple (my arithmetic, not a source line). Y2 line 158 calls `(2, 1, 1, 0)` "the three-tactic patterns"; N3-SEC's `+++-`, `++--` have four signs. Two usages; both addresses in the file/here.
 CHECK: N4 "γ": defined by N3-SEC (iii) as the angle qpq' between a lens's two centres; "γ = 0°" copied only as the fragment "or `γ = 0°` (cone `180°`, one centre)" (N7 line 136), cut out of the sentence "a lens is Reuleaux (...) or γ = 0° (...)", whose full form states which lenses occur.
 CHECK: N4 "the pinwheel": defined by pattern (`++++`, N3-SEC/N4 line 290) and by N5's frame (lines 259-260); Y2's "each tile inner for one edge, angles ≤ 180°" is a third phrasing.
