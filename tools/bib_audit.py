@@ -37,6 +37,10 @@ def _md_files(extra_text=None):
         for n in names:
             if n.endswith(".md"):
                 yield os.path.join(dirpath, n)
+    # The grokkings moved from CLAUDE.md into a skill on 2026-09-28; .claude is skipped above, so the one file is named here.
+    grokkings = os.path.join(ROOT, ".claude", "skills", "grokkings", "SKILL.md")
+    if os.path.exists(grokkings):
+        yield grokkings
 
 
 def scan(extra_text=""):

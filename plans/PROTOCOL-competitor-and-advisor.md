@@ -4,7 +4,7 @@
 "Coxeter" session (`plans/MASCOT-derivation.md` T6–T11, now G70). Purpose: this design is to be reused, first on FS-73's inheritance
 question (`plans/STUB-rigidity-dichotomy.md`), so the briefs and the mechanism are recorded here as a durable template. The
 mathematics of the session is in `plans/MASCOT-DERIVATION.md`, `plans/COXETER-2026-09-08-mascot.md` and
-`plans/POROS-2026-09-08-mascot.md`; the method entry is G51, retired on 2026-09-28 to `plans/GROKKINGS-WORKFLOW.md`; the message exchange (27 messages over 45 minutes,
+`plans/POROS-2026-09-08-mascot.md`; the method entry is G51, retired on 2026-09-28 to `plans/GROKKINGS-RETIRED.md`; the message exchange (27 messages over 45 minutes,
 2026-09-09 04:39–05:24) is in the session transcripts outside the repository and is summarised in §2 below.*
 
 > **Since 2026-09-28 the roles here run under agent files** (`CLAUDE.md` § The pipeline). The owner is **Keryx**, the top-level

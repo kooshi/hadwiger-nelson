@@ -328,6 +328,7 @@ ALLOW: dict[str, str] = {
     "# Engineering standard": "the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs",
     # The load audit (2026-09-28, plans/WORKFLOW-AUDIT-2026-09-28.md §7): CLAUDE.md's paths-forward table cut to the top ten at Kooshi's word.
     "30–69": "the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md",
+    "plans/GROKKINGS-WORKFLOW.md": "the retired grokkings' file, renamed plans/GROKKINGS-RETIRED.md on 2026-09-28 when G47 joined the workflow grokkings (retirements of any kind)",
     "121–126": "FS-100's paths-forward cell 'rows 121–126 at [hand]', cut with ranks 11–29 (Kooshi, 2026-09-28); the rows stand in LEDGER.md, and FS-100's full row in plans/FRONTIER-STUBS.md",
     "# Workflow": "the heading of CLAUDE.md's `@WORKFLOW.md` import, removed when the workflow was split into the identity files (Workflow 3.0, 2026-09-28): WORKFLOW.md is now an index loaded by no one; CLAUDE.md § The pipeline is the shared map",
     "SessionStart": "the name of the startup hook that told the main session to load `keryx`; retired the same day for the output style `.claude/output-styles/keryx.md`, which carries the identity in every request",
@@ -961,7 +962,8 @@ def self_test_files(text: str) -> int:
     for b in blocks:                      # an ordinary prose block holding a number that occurs once in the whole text
         if b.lstrip().startswith(("#", "|", "* **G", "```")) or PROTECTED_TAG in b or "declared purchases" in b or re.search(r"\bG\d+\b", b):
             continue
-        once = [t for t in re.findall(r"(?<![\w.])\d{4,}(?![\w.])", b) if f["num"][t] == 1 and text.count(t) == 1]
+        once = [t for t in re.findall(r"(?<![\w.])\d{4,}(?![\w.])", b) if f["num"][t] == 1 and text.count(t) == 1
+                and not re.search(r"`[^`\n]*" + t + r"[^`\n]*`", b)]   # a number inside a code span is a code token, not a num (2026-09-28)
         if once and len(b) > 200:
             pick, token = b, once[0]
             break
@@ -1008,7 +1010,7 @@ def corpus_files(main: str, ledger: str, instances: str = "", also: tuple = ()) 
     sections moved to (2026-09-28: the retired workflow grokkings, RUNNING.md, and the ranked stubs below the top ten), each only
     if it exists."""
     text = Path(main).read_text(encoding="utf-8")
-    for extra in (ledger, instances, *also):
+    for extra in (*also, ledger, instances):   # the moved files first: a grokking's first definition is read from its home
         if extra and Path(extra).exists():
             text += "\n\n" + Path(extra).read_text(encoding="utf-8")
     return text
@@ -1055,7 +1057,7 @@ def main() -> int:
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
-    ap.add_argument("--also", nargs="*", default=["plans/GROKKINGS-WORKFLOW.md", "RUNNING.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
+    ap.add_argument("--also", nargs="*", default=[".claude/skills/grokkings/SKILL.md", "plans/GROKKINGS-RETIRED.md", "RUNNING.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
     ap.add_argument("--stubs", default="plans/FRONTIER-STUBS.md", help="the ranked stubs, joined to the loss audit only (CLAUDE.md keeps the top ten; --dupes leaves it out)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
@@ -1069,13 +1071,17 @@ def main() -> int:
             print(f"AUDIT COULD NOT RUN: git show {rev}:CLAUDE.md failed: {r.stderr.decode().strip()}", file=sys.stderr)
             return None
         text = r.stdout.decode("utf-8")
+        for extra in a.also:   # the moved files first, as corpus_files reads them
+            r4 = subprocess.run(["git", "show", f"{rev}:{extra}"], capture_output=True)
+            if r4.returncode == 0:   # the file exists at that revision
+                text += "\n\n" + r4.stdout.decode("utf-8")
         r2 = subprocess.run(["git", "show", f"{rev}:{a.ledger}"], capture_output=True)
         if r2.returncode == 0:   # the ledger exists at that revision as its own file
             text += "\n\n" + r2.stdout.decode("utf-8")
         r3 = subprocess.run(["git", "show", f"{rev}:{a.instances}"], capture_output=True)
         if r3.returncode == 0:   # the instances file exists at that revision
             text += "\n\n" + r3.stdout.decode("utf-8")
-        for extra in (*a.also, a.stubs):
+        for extra in (a.stubs,):
             r4 = subprocess.run(["git", "show", f"{rev}:{extra}"], capture_output=True)
             if r4.returncode == 0:   # the file exists at that revision
                 text += "\n\n" + r4.stdout.decode("utf-8")

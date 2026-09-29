@@ -37,7 +37,7 @@ Keryx, the top-level session (`"main"`), launches you with a brief on disk; `CLA
 full, then `plans/STANDING-RULES.md`, which is part of every brief. Your first stage is the readback: check each quotation in the
 brief against its source and log any mismatch as a finding.
 
-**The one-writer files** — `CLAUDE.md`, `LEDGER.md`, `RUNNING.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`, `plans/GROKKINGS-WORKFLOW.md`, `BIBLIOGRAPHY.md`, the
+**The one-writer files** — `CLAUDE.md`, `LEDGER.md`, `RUNNING.md`, `.claude/skills/grokkings/SKILL.md`, `plans/FRONTIER-STUBS.md`, `plans/GROKKING-INSTANCES.md`, `plans/GROKKINGS-RETIRED.md`, `BIBLIOGRAPHY.md`, the
 close inventories, the frozen claim lists, `plans/STANDING-RULES.md` — are Keryx's. You write one only when your brief makes you
 Keryx's pen for it, and then only from the draft the brief names, verbatim. A `[PROTECTED …]` paragraph is never touched.
 

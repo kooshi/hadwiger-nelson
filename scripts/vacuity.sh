@@ -253,7 +253,7 @@ if [[ -n "${NEW}" ]]; then
   rows "${NEW}" | sed 's/^/      /'
   echo
   echo "    UNKNOWN: no unconditional inhabitant is proved for the carrier. Ship one — the rule"
-  echo "             is G30's fifth failure mode (plans/GROKKINGS-WORKFLOW.md): every theorem whose hypothesis is a"
+  echo "             is G30's fifth failure mode (plans/GROKKINGS-RETIRED.md): every theorem whose hypothesis is a"
   echo "             structure ships with a named inhabitant, or a note naming what supplies one."
   kept
   exit 1

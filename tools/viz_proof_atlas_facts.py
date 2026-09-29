@@ -227,7 +227,7 @@ N("N3DENSE3", "N3-DENSE3", "held", "In every six-map with unit arcs, every close
   "vertex with a repeated colour. So the unit-arc half is a question about four-colour vertices: the NO is exactly the exclusion of such maps.",
   B("FS112-N3-DENSE3"), "in every valid map each closed disc of radius 3 contains a vertex of four colours or one with a repeated colour",
   "hand; two minds: N3; NB3, blind; over N3-BASE and DISC1", at=(20, 600), sector="seven",
-  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")],
+  also=[({"file": ".claude/skills/grokkings/SKILL.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")],
   posed=[dict(question="Sokolov–Voronov's Question 2, with unit arcs (\"Is it true that 7 colors are needed …?\")", state="reduced",
               src=L(135), quote="So S–V's Question 2 with unit arcs is reduced, not answered")])
 N("COMPOSE", "the composition", "held", "FS-112's close: excluding the maps N3-DENSE3 describes is the NO for every map, periodic or not, with no "
@@ -294,7 +294,7 @@ N("CVEXISTS", "CV-EXISTS", "held", "Every six-map with unit arcs has a vertex of
   "about one such vertex suffices for the unit-arc NO, Siamese pairs included, with no step about stuck rays.", B("FS114-CV-EXISTS"),
   "every valid map with unit arcs has a vertex of at least four colours, in the map itself",
   "hand; two minds, blind to each other: CV; CVB, by different routes; over FS112-N3-DENSE3, N2-TERM, N4-FIN", at=(14, 570), sector="seven",
-  also=[({"file": "CLAUDE.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")])
+  also=[({"file": ".claude/skills/grokkings/SKILL.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")])
 N("LOCALF", "the local exclusion (NO)", "question", "Exclude every six-map fragment on a disc of explicit radius about a four-colour vertex. With "
   "CV-EXISTS it gives the whole unit-arc NO; the capped strip puts the radius above φ²/√2 ≈ 1.8512 (FS-116, the successor).", L(137),
   "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists",

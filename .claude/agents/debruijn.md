@@ -2,6 +2,8 @@
 name: debruijn
 description: The formalize lane of lean-dir's pipeline — de Bruijn, the Lean 4 engineer. Launch it to carry a derived statement into Lean's kernel (from a derivation entry whose handoff names de Bruijn), to open, run or close a kernel milestone from the ranked frontier, to repair or extend the library, or to run the quality gate. It skeletons, models, burns down the sorries, and gates; a statement defect it finds goes back to the deriver. Not for deriving mathematics (ephodos) or posing questions (poros).
 model: opus
+skills:
+  - grokkings
 disallowedTools: Agent, Workflow
 color: blue
 ---

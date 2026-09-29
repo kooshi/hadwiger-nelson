@@ -80,3 +80,16 @@ What to watch at the next opening, which is the first under the new workflow fro
   record); FOURC, SRAY and CHAINB's bearing "reduced to the density form (row 137)"; route wall7's chain beyond FS-120–FS-122.
 - **Both close inventories** are ticked to their last item (FS-114 1–127, FS-111 1–44).
 - **The test drive's scores and its comparison with Workflow 2.0** are the last sections of `plans/WORKFLOW3-test-drive.md`.
+
+## Addendum, 2026-09-28 evening — the workflow lightened (read before launching any lane)
+
+The session after the closes changed what every mind loads; the record is `plans/WORKFLOW-AUDIT-2026-09-28.md` (§1, §7, §8).
+- The grokkings (G1–G87) live in `.claude/skills/grokkings/SKILL.md`, preloaded by `poros`, `ephodos`, `ephodos-verifier` and
+  `debruijn` through their `skills:` field; `CLAUDE.md` § Grokkings keeps the rules, the one-paragraph theory and a pointer. Keryx
+  and the Clerk read an entry by number. Retired entries (seven workflow grokkings, and G47) are `plans/GROKKINGS-RETIRED.md`.
+- `RUNNING.md` holds the toolchain, the process rules (two PROTECTED paragraphs) and "Make the gate fail"; briefs for jobs that run
+  processes or build checkers name it.
+- `CLAUDE.md` is about 70 KB. Its milestone table shows the top ten and a count.
+- **First act of the next session:** launch one lane agent with no tools and ask it to quote G87's first words from a loaded
+  `grokkings` skill block (a "Base directory for this skill: …/grokkings" line). A same-session probe loaded it in full; the
+  harness picks up an agent file's `skills:` field with a lag, so a fresh session is the clean confirmation.

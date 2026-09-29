@@ -7,7 +7,7 @@ from its source). A source address is a dict:
   {"file": "LEDGER.md", "row": "131"}                          a markdown table line beginning "| 131 |"
   {"file": "CLAUDE.md", "section": "### The aim"}              a heading line, to the next heading of the same or a higher level
   {"file": "CLAUDE.md", "section": "### Paths forward, ranked", "row": "3"}   a table line inside that section
-  {"file": "CLAUDE.md", "grok": "G64"}                         a grokking bullet "* **G64 — …", to the next "* **G"
+  {"file": ".claude/skills/grokkings/SKILL.md", "grok": "G64"}  a grokking bullet "* **G64 — …", to the next "* **G"
   {"file": "Proofs/…/Interval.lean", "decl": "chromaticNumber_plane_interval"}   a `theorem` / `lemma` declaration and its docstring
   {"file": "plans/STUB-reg-scale.md"}                          the whole file
 

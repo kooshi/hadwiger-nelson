@@ -7,7 +7,7 @@ nothing below is filed as a change except § 1. Every number is read from the ad
 
 ## 1. Done: seven workflow grokkings retired
 
-Moved verbatim to `plans/GROKKINGS-WORKFLOW.md` (23,290 bytes), each leaving in `CLAUDE.md` its number, title, original status tag and
+Moved verbatim to `plans/GROKKINGS-RETIRED.md` (23,290 bytes), each leaving in `CLAUDE.md` its number, title, original status tag and
 one line naming where its content is now carried: G30, G46, G49, G50, G51, G67, G72, and the paragraph that opened § Grokkings.
 `CLAUDE.md` went from 295,069 to 274,901 bytes. `tools/claude_md_fact_audit.py` now joins the new file to its corpus (`--retired`);
 the audit passes with 0 failures, and `--dupes` reads 20 repeated runs. One operative clause was added where it had no workflow home:
@@ -96,3 +96,29 @@ re-grokking walk, #3 the process sections, #4 the counts and predictions; #1, on
 loss audit only, `plans/FRONTIER-STUBS.md`; two superseded range labels recorded with their reasons) passes with 0 failures and its
 self-test passes; `--dupes` 21 runs; `scripts/identities.py check` PASS; `tools/bib_audit.py` exit 0; the atlas checker 187 checked,
 0 failed, and its self-test passes; `scripts/gate_report.py` still reads the gate's nine counts and the trust ledger's two.
+
+## 8. The grokkings, loaded only where they are used (2026-09-28)
+
+Kooshi: "1. go ahead. The verifier has its skill loaded, so we can ask it. 2. go ahead and retire it, a small size win. 3. unless the
+findings have since been proven false, they should stay in... and even then, their falseness should be recorded. So no, let's keep all
+that in for now". Item 3 (a bearing audit that would have retired entries by relevance) is dropped.
+
+| item | what changed | where |
+|---|---|---|
+| the probe | an `ephodos-verifier` launched with no tools quoted the `ephodos-verification` skill word for word from its context (checked against the file): a skill named in an agent's `skills:` field is loaded in full at launch. The same probe showed that agents launched in a session see `CLAUDE.md` as it stood when the session began (it listed the grokkings to G86; G87 was added mid-session) | — |
+| the move | the grokking entries G1–G87 moved verbatim to `.claude/skills/grokkings/SKILL.md` (160,346 bytes); `CLAUDE.md` § Grokkings keeps its rules, the theory in one paragraph and a pointer; `poros`, `ephodos`, `ephodos-verifier` and `debruijn` name the skill in their `skills:` field; Keryx and the Clerk read an entry by its number | the skill; `CLAUDE.md` § Grokkings and header; the four agent files; `.claude/output-styles/keryx.md` steps 4 and 7 |
+| G47 | retired verbatim, its own tag saying it is subsumed by row 66; the retired file renamed `plans/GROKKINGS-RETIRED.md` to hold retirements of any kind, with Kooshi's rule that a grokking proven false is demoted in place, never retired | `plans/GROKKINGS-RETIRED.md` |
+| the tools | the fact audit reads the grokkings file right after `CLAUDE.md` (a grokking's first definition is read from its home), records the rename, and its self-test's paragraph picker now skips numbers inside code spans (it had picked the gate's counts line, whose number is a code token, making a partner case unwinnable); the bibliography audit names the grokkings file, since it skips `.claude`; the Proof Atlas cites G83 there | `tools/claude_md_fact_audit.py`, `tools/bib_audit.py`, `tools/viz_proof_atlas_facts.py`, `tools/viz_proof_atlas_common.py` |
+
+`CLAUDE.md`: 229,585 → 70,226 bytes. Checks: the fact audit passes (0 failures) and its self-test passes; a changed grade planted on
+G81 in the grokkings file fired it; a fake citation key planted there fired the bibliography audit, which passes restored; identities
+PASS; the atlas checker 187 checked, 0 failed, self-test passed; the gate report reads its counts.
+
+**The load, confirmed.** Two more probes (`ephodos-verifier`, no tools): the first, launched right after `grokkings` was added to its
+`skills:` field, loaded only `ephodos-verification`; the second, with `ephodos-invention` and a tiny new `probe-marker` skill added
+just before it, loaded `ephodos-verification` and `grokkings` in full (it quoted G87, the second-to-last entry) and neither of the
+two added last. So a 160 KB skill preloads, and the harness picks up an agent file's `skills:` field with a lag — a launch uses the
+field as it stood before the latest edit. The probe's extra skills were removed afterwards.
+
+**Open for Kooshi:** the size budget in `CLAUDE.md`'s header is on "this file itself, not on the files it imports", so as written it no
+longer covers the grokkings, which every lane still loads.

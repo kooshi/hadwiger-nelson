@@ -1,10 +1,16 @@
-# The workflow grokkings — retired from `CLAUDE.md`, recorded and not loaded
+# Retired grokkings — recorded, not loaded
 
-*Moved verbatim from `CLAUDE.md` § Grokkings on 2026-09-28, at Kooshi's word: "retire any workflow grokkings into their own file,
-recorded but not always loaded". Each entry below is a rule about how the project works whose content the lanes' workflows now carry;
-`CLAUDE.md` keeps its number and title, with a line naming where it is carried, so every `GN` cited across `plans/` still resolves.
-Their second and later instances stay in `plans/GROKKING-INSTANCES.md`. The numbers are stable identifiers: never renumber, never
-reuse. Read by address, never loaded; `tools/claude_md_fact_audit.py` joins this file to its corpus.*
+*Grokkings moved verbatim out of the loaded theory, each for a stated reason at Kooshi's word. The grokkings file
+(`.claude/skills/grokkings/SKILL.md`, preloaded into the lane agents) keeps each one's number, title and status tag with a line naming
+where its content is carried, so every `GN` cited across `plans/` still resolves. Their second and later instances stay in
+`plans/GROKKING-INSTANCES.md`. The numbers are stable identifiers: never renumber, never reuse. Read by address, never loaded;
+`tools/claude_md_fact_audit.py` joins this file to its corpus. A grokking proven false is never retired here: it is demoted in place
+with its refutation recorded (Kooshi, 2026-09-28: "unless the findings have since been proven false, they should stay in... and even
+then, their falseness should be recorded").*
+
+**The workflow grokkings** (2026-09-28; Kooshi: "retire any workflow grokkings into their own file, recorded but not always loaded"):
+each is a rule about how the project works whose content the lanes' workflows now carry. **Subsumed entries** (below the workflow
+grokkings): an entry whose content a later result contains.
 
 ## The paragraph that opened § Grokkings
 
@@ -191,3 +197,16 @@ pigeonhole form and G40's absorption each bore on it and none was run until aske
   across derivation milestones, count the results that came through the structural question against those that came from searches or
   extensions of a known tool. If the structural question keeps producing nothing a direct attack would not, the method is ceremony.*
   **The count so far — eighteen of twenty-one** (each derivation close's §IQ record; milestone by milestone in `plans/GROKKING-INSTANCES.md` §G72; the latest, FS-114 and FS-111, both through).
+
+## Subsumed entries
+
+*Kooshi, of G47 (2026-09-28): "go ahead and retire it, a small size win." Its own status tag says it is subsumed by row 66.*
+
+* **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]** Compulsions map forward along
+  homomorphisms; on a Cayley graph a forced pair needs a period of every colouring. The distance law this entry
+  carried (row 55) is the level-one shadow of the fan-gap theorem (row 66), which frees every pair at every distance over
+  such a field, so the residue-allowed distances name nothing. Unchanged: no finite plane at p ≡ 3 (mod 4) has a
+  forced pair at a colour count it admits (row 60), and at 11 its virtual edges are exactly its edges (kernel;
+  measured at 3, 7, 19; prime fields only). *Do: over any field where 11 is usable, expect five-colour `Forces ↔ =` and
+  `Separated ↔ Adj` without asking, and ask for no residue-allowed distance list. Nothing kills it; it kills FS-16's kind
+  of list.*

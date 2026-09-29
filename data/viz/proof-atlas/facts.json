@@ -1065,11 +1065,11 @@
    "also": [
     {
      "src": {
-      "file": "CLAUDE.md",
+      "file": ".claude/skills/grokkings/SKILL.md",
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": "CLAUDE.md G83, line 1437"
+     "address": ".claude/skills/grokkings/SKILL.md G83, line 1031"
     }
    ],
    "posed": [
@@ -1436,11 +1436,11 @@
    "also": [
     {
      "src": {
-      "file": "CLAUDE.md",
+      "file": ".claude/skills/grokkings/SKILL.md",
       "grok": "G83"
      },
      "quote": "With unit arcs, the tight question lives at one four-colour vertex.",
-     "address": "CLAUDE.md G83, line 1437"
+     "address": ".claude/skills/grokkings/SKILL.md G83, line 1031"
     }
    ],
    "status": "hand-2b",

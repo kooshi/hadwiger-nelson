@@ -329,7 +329,8 @@ procedures are their agent files.
    and brief Ephodos's opening job.
 3. **The reframe and the plan** (Ephodos, opening job). §G, §PA and §IQ, then the routes, the stages and the registered predictions,
    then the proposed claim list. A kernel milestone opens instead with de Bruijn's own reframe (`.claude/agents/debruijn.md`).
-4. **Review and freeze** (you, with Kooshi). Score §G's *bears* lines and its silent list (an entry in neither is a plan defect) and §IQ: a structural form
+4. **Review and freeze** (you, with Kooshi). Score §G's *bears* lines and its silent list (an entry in neither is a plan defect; the grokkings are not in your context, so read
+   them from `.claude/skills/grokkings/SKILL.md`) and §IQ: a structural form
    that is the existence form reworded has not done its job. Freeze the claim list. Write the announcement rule and the predictions
    into the inventory before any report arrives. Commit.
 5. **Derive and verify** (Ephodos derivation jobs; `ephodos-verifier` jobs). One verifier per frozen claim list, fenced by path,
@@ -348,7 +349,7 @@ procedures are their agent files.
      - `plans/FRONTIER-STUBS.md` re-ranked from Poros's draft, and a banner on each demoted stub; demote, never delete. Its top ten
        rows are copied into `CLAUDE.md` § Paths forward, with a count of the rest.
      - New instances of an existing rule go to `plans/GROKKING-INSTANCES.md` verbatim, with their source address, and the rule's entry
-       keeps its pointer; a new rule goes to `CLAUDE.md`.
+       keeps its pointer; a new grokking goes to `.claude/skills/grokkings/SKILL.md`, a new rule of any other kind to `CLAUDE.md`.
      - `tools/claude_md_fact_audit.py --base <the previous close>` and `--dupes`.
      - The Proof Atlas rebuilt (`visualizations/proof-atlas/README.md`) and republished to its artifact.
      - Every inventory line ticked "done" or "declined" with its reason, every number re-read from its source.
