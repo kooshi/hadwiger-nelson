@@ -175,3 +175,12 @@ pointers). **The check fired on its plant:** the same script with `(row 33).` re
   repeated runs of ≥ 10 words, 2,017 bytes, both). A first draft added two — "colours in a measurable colouring proper at almost every
   unit pair" (§ Where the problem stands) and "the NO with the map step, the tight limit made a" (row 139) — and both were reworded out.
 
+
+## Stage 4 — SAVED: the report
+
+**Correction to Stage 2's summary (2026-09-28, this job).** It reads "four drop a grade or widen a scope (4, 11, 15 their
+[measured]/[reading] grade; 10 and 19 their scope; 19 also "given MR")": it lists **five** clauses, not four. Two narrower remarks from
+the table are missing from that sentence: clause 14 holds at arity 2 only, and clause 18's "by measure rigidity" holds at `L = 5` only
+(below five it is row 99's slope argument). No verdict changes.
+
+The report is `data/workflow3/reports/TP1.md`, sent to the coordinator by message.

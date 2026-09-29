@@ -1,0 +1,18 @@
+JOB TP1 — DONE   harness≈330k (own≈90k)
+RESULT: The clause check covers 19 clauses. None is false. Clause 16 ("or the first digit at 83 (FS-40)") is stale: FS-40 is closed, six is refused at 83 (row 68), and the first digit now lives only in the window {23, 27, 31, 43, 47, U₆₄} (G56, G59).
+RESULT: Clause 3 (the shape of a 5-forcer) is stale as a universal claim. It describes the witnesses we hold, at [measured] grade (G4). It is superseded by G11, by G55's chain, and by rows 121 and 123, which give five over fields containing neither √11 nor, at ℚ(√47), √3.
+RESULT: Five clauses hold but drop a grade or widen a scope: 4, 11 and 15 drop their [measured] or [reading] grade; 10 widens row 66's scope; 19 drops "totally real", "at six colours" and "given MR". Two narrower points: 14 holds only at arity 2, and 18's measure-rigidity route covers only L = 5. Clauses 2 ("the prime above 2": K has two) and 5 ("past five": G38 says past four) each have a one-word slip.
+RESULT: As a whole the paragraph is stale. It stops at the collapse and says nothing of rows 129–141 or G82–G86, which is the direction the project now follows.
+RESULT: The replacement is drafted as one paragraph of 2,994 bytes. It runs from the 4/5 wall through the residue rule, exact through five, and where that rule runs out, to the collapse, the density cap, the stability question, the map question, the two routes and contact regularity. Every clause is sourced and graded.
+RESULT: Every cited row (18) and grokking (14) resolves. The resolution check reports 0 hits on a planted row 199 and G99. With the draft substituted, CLAUDE.md goes from 68,853 to 70,037 of 80,000 bytes. tools/claude_md_fact_audit.py passes: no token is lost and no pointer dangles, and a planted dangling pointer makes it fail. --dupes adds no repeated run.
+RECORD: plans/WORKFLOW3-TP1-theory-paragraph.md (§ Draft for the front page holds the text to file verbatim)   COMMITS: 655094c4, e1f9ab8b, 8c130c53, and this stage's commit
+INVENTORY:
+- result — the clause-by-clause table, a verdict per clause with sources read by body — plans/WORKFLOW3-TP1-theory-paragraph.md § Stage 2
+- result — the replacement paragraph, 2,994 bytes, with its resolution check and the audit run on a scratch copy — same record, § Draft for the front page and § The resolution check
+- correction owed — two statements conflict. G56 says "a wall-standing field is four-colourable by the residue at 2" (the wall broken being "every prime above 2 splits in F(i)"). The same entry makes U₆₄ a window member: the target of a dyadic prime inert in F(i) of norm 64, with "6 ≤ χ ≤ 8", realised "only by fields of degree ≥ 12". G56's Do line ("or a prime above 2 is inert of norm 64, and the wall is broken") cannot hold under G56's own definition. G35's "(norm 2 or 4)" holds for multiquadratic F only. The exact form is row 123's CLS ("dyadic inert of norm ≤ 32, and dyadic ramified in F(i)/F"). The same scope question applies to CLAUDE.md § Where the problem stands item 1. The draft uses row 123's form — record § Stage 3
+- correction owed — CLAUDE.md § Grokkings (disk, first italic paragraph) says "G1–G83 are stable identifiers"; the entries now run to G87 — record § Stage 3
+- slip — Stage 2's summary said "four" for five clauses; corrected by a dated note, not a silent edit — record § Stage 4
+HELD FOR THE COORDINATOR:
+- Whether to file the draft verbatim. It keeps the one-paragraph form: a split was not needed at this size.
+- The G56/G35 wording above. You write the grokkings file. I filed this as a correction owed, not an invention signal, because row 123 settles it by exact statement; reclassify it if you read it otherwise.
+- The G1–G83 range in CLAUDE.md § Grokkings.
