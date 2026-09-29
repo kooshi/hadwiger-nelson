@@ -1,0 +1,48 @@
+entry lint
+  claim FS121-V2-QT: minds 1
+  claim FS121-V2-QT: prior art known
+  claim FS121-V2-SECTOR: minds 1
+  warn  FS121-V2-verification.md:353 (FS121-V2-SECTOR): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-V2-SECTOR: prior art owed
+  claim FS121-V2-VT-W: governed by FS121-V2-SECTOR (hand, minds 1)
+  claim FS121-V2-VT-W: minds 1
+  warn  FS121-V2-verification.md:385 (FS121-V2-VT-W): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-V2-VT-W: prior art owed
+  claim FS121-V2-EROSION-DIAM: minds 1
+  claim FS121-V2-EROSION-DIAM: prior art known
+  entries: 4  derived: 4  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'DB1-L3' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification DB1-L3: given: the statement verbatim and the list's §§ 0–1 (at 01:31); my brief's note that the …
+  claim verification DB1-L3: committed 2026-09-29, stage 2
+  claim verification DB1-L3: predicted derived (0.85); verdict derived — met
+  warn  FS121-V2-verification.md:429 (verification DB1-L3): divergences 'none — the first derivation is not yet read; stage 3 writes the table' — until the comparison finds something, the disagreement has not started
+  claim verification DB1-L3: counterexamples none — the X-vertex, two sectors on one side of a line, and every angle of the first sector on a half-degree grid; without saturation the bow-tie colouring puts one colour on two sectors, as it must
+  claim verification DB1-L3: minds 1 — blind, the same model: blind to the first derivation's record (not opened before this commit); method: my own, route unknown to me
+  warn  verification 'FS121-D1-VT' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D1-VT: given: the statement verbatim and the list's §§ 0–1; the list's note that EROSION rests on it; …
+  claim verification FS121-D1-VT: committed 2026-09-29, stage 2
+  claim verification FS121-D1-VT: predicted derived (0.55); verdict gap — missed
+  warn  FS121-V2-verification.md:446 (verification FS121-D1-VT): divergences 'none — the first derivation is not yet read; stage 3 writes the table' — until the comparison finds something, the disagreement has not started
+  claim verification FS121-D1-VT: counterexamples none — the zero-angle escape (killed), a self-touching L (killed), the double horn with cusps (outside the hypotheses; not excluded, not built); under reading (B) no object found either way
+  claim verification FS121-D1-VT: minds 1 — blind, the same model: blind to the first derivation's record; method: my own, route unknown to me
+  warn  verification 'FS121-D1-EROSION' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D1-EROSION: given: the statement verbatim, whose not claimed line names FS121-D1-VT as the lever and the …
+  claim verification FS121-D1-EROSION: committed 2026-09-29, stage 2
+  claim verification FS121-D1-EROSION: predicted derived (0.5); verdict derived — met
+  warn  FS121-V2-verification.md:464 (verification FS121-D1-EROSION): divergences 'none — the first derivation is not yet read; stage 3 writes the table' — until the comparison finds something, the disagreement has not started
+  claim verification FS121-D1-EROSION: thin truth: the unsaturated hexagonal seven-colouring at a hexagon corner — for θ ≤ 2π/3 the first disjunct holds in every a.e.-proper colouring by the diameter bound (FS121-V2-EROSION-DIAM), so the hypotheses are idle there
+  claim verification FS121-D1-EROSION: minds 1 — blind, the same model: blind to the first derivation's record; method: the mechanism was named by the statement itself (given), the argument at the crossing mine
+  verifications: 3  predictions met: 2 of 3 (Brier 0.192)  divergences: truth 0, route 0, wording 0  counterexamples: refutation 0, monster 0, thin truth 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs121-v2-quotes: printed '3 of 3 verbatim'; with the fault planted ('' → '--plant') it printed '2 of 3 verbatim' — it fires
+  ok    fs121-v2-sectors: printed 'sectors: reflex W1 killed outright 358; theta1 leaving an arc for a second region 0; theta1 <= 180 whose allowed cusp directions are exactly the two edges 359 of 359'; with the fault planted ('' → '--plant') it printed 'sectors: reflex W1 killed outright 358; ' — it fires
+  ok    fs121-v2-comparison: printed 'comparison: points inside the open unit disc about (0, 1): 0 of 174'; with the fault planted ('' → '--plant') it printed 'comparison: points inside the open unit ' — it fires
+  ok    fs121-v2-sq9: printed 'sq9: vertices of one period with a repeated colour: 0 of 81'; with the fault planted ('' → '--plant') it printed 'sq9: vertices of one period with a repea' — it fires
+  warn  FS121-V2-verification.md:417 (fs121-v2-crossing): of 'FS121-D1-EROSION', which is not an entry in these files
+  ok    fs121-v2-crossing: printed 'crossing: t = cot(theta/2): True; s = cot(theta/2): True; Q = (1/sin(theta/2), 0)'; with the fault planted ('' → '--plant') it printed 'crossing: t = cot(theta/2): False; s = c' — it fires
+  ok    fs121-v2-diameter: printed 'diameter: the diameter bound gives the first disjunct at 120 of 179 integer angles, exactly 1..120'; with the fault planted ('' → '--plant') it printed 'diameter: disagreement at 91 degrees' — it fires
+  controls: 6  fired on their faults: 6
+GATE: PASS (0 failures, 9 warnings)
