@@ -132,3 +132,119 @@ round-7 queue, which the stub had placed first; (2) G21 removes `φ²/√2` as t
 fixes every NO statement to allow Siamese pairs; (4) G83's killing test becomes the construction side's first target and one registered prediction.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: §PA, the prior-art gate (with the recognition it searches in)
+
+### 2.1 The recognition, on the page (`ephodos-recognition`, invoked fresh)
+
+**The stranger** — a discrete geometer who works on Euclidean Ramsey problems and colourings of the plane: *Partition a closed disc `D` of radius `R` into
+open regions, finitely many meeting any unit disc, each bounded by line segments and circular arcs (arcs of radius exactly 1 allowed), and colour the regions
+with six colours so that no two points in the interiors of regions of one colour are at distance exactly 1. Let the centre `p` of `D` be a point where regions
+of at least four colours meet. Is there an `R`, independent of how many regions there are, for which no such coloured partition exists?* Words the reader
+would stop at, and what they were: "valid", "fragment", "Siamese" — definitions, struck into the sentence; "(Q) arc" — a determiner with a home word:
+Thomassen's and `[Polymath2021]` p. 199's **"unit-radius tactic"**, an arc of the unit circle about a vertex that carries both of the arc's side colours.
+
+**The features** (receipt in brackets):
+- six colours — *determines* [at seven R7 inhabits every disc; FS111-M-R7];
+- unit arcs allowed — *determines* [without them every such map dies, row 134, and every held positive uses them, row 136];
+- exact distance 1, not a band — *determines* [with slack, Voronov's Thm 1.1 gives seven; the unit arcs are admissible only because the distance is exact];
+- the centre a four-colour vertex — *splits*: consumed by the reduction only as "every valid map has one" (FS114-CV-EXISTS); the limit argument uses no centre
+  (§IQ.4) — it *accompanies* the YES and *determines* the NO's reach;
+- the complexity — *accompanies* [§IQ.4's limit uses none; the question asks for a radius free of it];
+- Siamese pairs allowed — *determines the method* [counts are blind to them, G86, N2-REFINE]; its effect on the local geometry *unsorted*;
+- the degree of `p` and its number of tactic edges — *unsorted* [route T's count consumes them; no local kill so far has needed the count's
+  distinction, and G79 predicts the determiner is the ring, not the tactic count: D1 owes the receipt];
+- the 60° structure of `ω(p)` — *determines* [points 60° apart on `ω(p)` are at distance 1; every (Q)-free kill consumes it through N3-ODD,
+  N6-RING60 and N7-HUB];
+- boundaries by segments and arcs rather than other curves — *unsorted* [the kills read curvature at second order, YB4-2ND; the saturated class makes
+  them segments and arcs of integer radius by theorem, G85].
+
+**The homes**, each with its name for the object, its theorem, its dictionary and its test:
+- **H1 — map colourings avoiding a distance** (Woodall 1973, Townsend 1981/2005, Thomassen 1999, Sokolov–Voronov 2025). Name: a map-type (Jordan, locally
+  finite) colouring of a disc, arcs of unit curvature allowed, about a vertex of degree ≥ 4 with four colours. Theorems: maps need six (Woodall; Townsend);
+  nice colourings need seven (Thomassen, whose criterion (ii) excludes the unit-radius tactic); seven under Conditions 5 and 6 (S–V). Dictionary: valid map
+  ↔ map-type colouring with arcs of unit curvature allowed; four-colour vertex ↔ S–V's "trichromatic vertices of degree greater than 3" with a fourth colour;
+  tactic edge ↔ the unit-radius tactic. Test: the old proofs fail at exactly one step, Thomassen's rainbow step (FS114-CVB-THOM, three minds). **H1 owns
+  the question (S–V pose it as Question 2) and does not decide it.**
+- **H2 — colourings of the circle avoiding a rotation.** Name: a proper colouring of the circle graph `Cay(S¹, {±60°})`, a union of hexagons. Theorem: a
+  2-colouring of a 6-cycle alternates; with three colours, a colouring lifts to a height (BV-H1; G71). Dictionary: `ω(p)` ↔ the circle; the two colours absent
+  at `p` ↔ the two colours of each hexagon; a (Q) arc ↔ a defect where `p`'s own colours enter (N7-QOPP: opposite tiles). Tests: it predicts N3-ODD and
+  N6-RING60's alternation (yes, both held); it predicts a neighbour — at seven colours three absent colours colour each hexagon with a winding, R7's
+  lattice points (checkable, D1's seven-colour control). **H2 is the ring's home: it names the invariant of the structural form (§IQ.3).**
+- **H3 — Delone sets and local rules** (the local theorem, `[DolbilinSchattschneider1998]`, title seen at zbMATH only, unread). Name: four-colour vertices
+  as a Delone set whose local configurations propagate. N7-HUB places six four-colour vertices on a (Q)-free ring, at `y + 60°ℤ`, so (Q)-free propagation
+  lays four-colour vertices on the unit triangular lattice `p + ℤ[ζ₆]·e(y)`. The one step that must change: the local theorem assumes congruent coronas,
+  and ring types vary. **A candidate home for D2's propagation only; not adopted, unread.**
+- **H4 — Voronov's disc theorem** (six closed sets covering a disc of radius 3 realise distance 1). Killed as a decider: on a valid map the closed classes
+  realise distance 1 on boundaries, harmlessly (FS114-N114-VOR, two minds).
+
+**The recognition sentence** (the query words): *a map-type six-colouring of a disc with unit-radius-tactic arcs, about a four-colour vertex, whose unit circle
+is a proper colouring of the 60°-hexagon graph of the circle.* **No home decides it.** Stated in H1's and H2's words, the stall is the structural form:
+*which arrangements of unit-radius-tactic arcs on the hexagon-coloured unit circle of a four-colour vertex can recur at the four-colour vertices that circle
+places?* That is D1's question, and no theory found holds it.
+
+### 2.2 The stub's prior-art debts
+
+- **Sirgedas, "Graph Coloring by Simulation"** (`~/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt`, 5,325 lines). Read: the lines
+  the stub names (715, 4378, 4409, 4504, 4888 region) and ll. 4290–4790 in full (8–26 Mar 2020), plus a grep for disc, radius, local, quad and four colours.
+  **It holds the local-to-global idea, informally, for non-Siamese tilings, by search.** Sirgedas, 2020-03-17 (l. 4661): "A biggest disc implies no
+  6-color-tiling of the plane exists." His aim (2020-03-09, l. 4504): "My goal for this searcher was to prove that there's no 6-color non-siamese tiling".
+  His searcher's record: "The largest valid central part has 26 tiles and has a radius ~1.678" (2020-03-08, l. 4327); a 1.82 radius disc (l. 594); after a
+  week, "everything has been below radius 1.6" (2020-03-26, l. 4775); Gibbs's disk at 2.124 is the reference (l. 4524). **What this does to novelty:** "a
+  largest six-colourable disc bounds the tiling" is Sirgedas's (non-Siamese, stated, not derived); FS-114's reduction to a disc *about a four-colour vertex*,
+  with Siamese pairs allowed and the radius uniform in the complexity, and any derived exclusion, are not in the thread as read. Unread: ll. 1–285,
+  900–2400, 2415–3400, 3570–3930, 3950–4240, 4790–5325 beyond the grep hits.
+- **The HNT simulator thread `a701Kwnhp_A`** — **held**, not unheld as the stub says (`…/threads/a701Kwnhp_A.txt`, 1,245 lines). Sirgedas and Parts,
+  27 Jan – 23 Feb 2022: a relaxation simulator for tilings built from dual graphs, with a same-colour "tile dist" parameter. Read: the opening post
+  (ll. 20–40), ll. 255–300, the last 30 lines; a grep for proof, theorem, impossible, cannot finds only tool talk. **No statement of an exclusion.**
+- **`[Thomassen1999]`'s page images** — not pursued at this opening; nothing of the plan rests on them (the OCR is held and FS-114 read his steps).
+
+### 2.3 zbMATH, in the recognition's words (`tools/fs116_o1_zb.py`; responses `data/fs116/o1/zb/*.json`, outputs `queries.out`, `queries2.out`)
+
+The tool's self-test (a known positive by title, Woodall 1973, must hit; a planted nonsense query must return 0) **caught two defects of the tool itself**
+before any query was believed: an empty response carried no total and read as `None`, and a non-JSON reply crashed the run. Both fixed; `selftest.out`
+PASS. Queries (`ab:` unless marked) and hits, every hit title read:
+1. `disk & "chromatic number" & ("unit distance" | "distance one" | "distance 1")` — **0**.
+2. `ti:"chromatic number" & (ti:disk | disc | strip | strips | subsets)` — 5: `[Polymath2021]` and `[AxenovichEtAl2014]` (both held), three unrelated.
+3. `("map-type" | "map type" | "Jordan coloring" | "Jordan colouring") & plane` — 3, none relevant (one record's contents withheld by licence).
+4. `"forbidden distance" & (tiling | tilings | tiles | tessellation)` — **0**.
+5. `"unit distance" & ("circular arcs" | "arcs of unit" | "unit arcs")` — 1, Reuleaux polyhedra for Borsuk's problem (unrelated).
+6. `au:"Voronov, Vsevolod"` — 22: `[Voronov2023]`, `[SokolovVoronov2025]` (zbMATH 2026), the infinitesimal layer, 2-spheres, 3-dimensional slices,
+   coverings by smaller diameter — nothing on local exclusions for maps.
+7. `au:"Sokolov, Georgy"` — 7: S–V and his work on lines and set families; nothing further.
+8. `au:"Townsend, S"` — 7: `[Townsend1981]`, `[Townsend2005]` (both held).
+9. `("largest disk" | "largest disc" | "radius of the largest") & colo*` — 2, unrelated.
+10. `"chromatic number of the plane" & (tiling | tilings | tiles | map | maps)` — 7: Soifer's books, Heule, the taxicab plane, S–V; nothing new.
+11. `"local theorem" & (Delone | "regular system")` — 2: `[DolbilinSchattschneider1998]` "The local theorem for tilings" (Zbl 0918.52007; H3's source,
+    title only) and its proceedings volume.
+12. `"unit circle" & "chromatic number" & rotation` — the API returned an error page; **not measured**.
+
+### 2.4 The citation graph (`tools/fs116_o1_cites.py`, Semantic Scholar and OpenAlex compared by identifier; self-test on `[Voronov2023]` PASS)
+
+- **`[SokolovVoronov2025]`** (arXiv:2502.01958, the paper that poses Question 2): Semantic Scholar lists **one** citing work, "Ramsey problems for graphs in
+  Euclidean spaces and Cartesian powers" (2025; title only, unread); **OpenAlex has no record under its arXiv DOI** — so this is one database's count, not two
+  (G49's mechanism: a zero or a one from a single source measures the source). `data/fs116/o1/cites.out`.
+- `[Polymath2021]` (Geombinatorics, no DOI) and `[Thomassen1999]`'s citing works: walked at FS-112's and FS-114's gates (FS-112 read Polymath16 threads 6–9
+  and 16 in full); not re-walked here.
+
+### 2.5 The eight questions, answered
+
+1. **The discipline's vocabulary** — map-type colourings, the unit-radius tactic, circle colourings avoiding a rotation (§2.1): queries 1–5, 9, 10, 12.
+2. **Two disciplines** — H1 (map colourings) and H2/H3 (circle colourings; Delone sets and local rules); G30's ladder puts the wall between combinatorial
+   geometry and crystallography's local rules.
+3. **The question itself** — S–V Question 2 and Mixon's thread-7 question ("What is the radius of the largest disk in $\mathbb{R}^2$ that can be
+   6-colored?"): no answer found in print; Sirgedas's searches (2020) are the only attack on the local form, by computer, below radius 2.2.
+4. **Outside arXiv** — the Google group (both threads), Geombinatorics (`[Polymath2021]`), `[Townsend2005]`: done.
+5. **The poser's citation graph** — S–V's: one citing work (§2.4).
+6. **Citing works in the neighbourhood** — the one citing title is a Ramsey survey; unread, a debt (INVENTORY).
+7. **Two databases** — S2 and OpenAlex disagree (one against none): recorded as one database's count.
+8. **Every poser's author listing, in a reviews database** — Voronov (22), Sokolov (7), Townsend (7) read by title in zbMATH; Mixon and Sirgedas publish the
+   question in forums, not in reviewed venues. Hits are reviewers' records or author summaries as zbMATH gives them; no summary was relied on.
+
+**Novelty, at the grain of the step.** The local-to-global idea is Sirgedas's (2020, non-Siamese, informal); FS-114's four-colour centring with Siamese pairs
+and uniformity is not found; card 2's composition (§IQ.4) is row 131's Rajchman step, in print for one class (`[Bukh2008]` Lemma 12; `[CohenMani2025]`),
+run on exact fragments — *partly* known; the ring's 60° twist as an invariant, and any explicit radius, not found.
+
+**G87 lookout, stage 2:** none seen.
+
+## Stage 2 — SAVED

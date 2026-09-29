@@ -1,0 +1,6 @@
+au:"Sokolov, Georgy"
+au:"Townsend, S"
+(ab:"largest disk" | ab:"largest disc" | ab:"radius of the largest") & ab:colo*
+ab:"chromatic number of the plane" & (ab:tiling | ab:tilings | ab:tiles | ab:map | ab:maps)
+ab:"local theorem" & (ab:Delone | ab:"regular system")
+ab:"unit circle" & ab:"chromatic number" & ab:rotation

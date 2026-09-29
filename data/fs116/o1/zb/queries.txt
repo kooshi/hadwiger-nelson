@@ -1,0 +1,12 @@
+ab:disk & ab:"chromatic number" & (ab:"unit distance" | ab:"distance one" | ab:"distance 1")
+ti:"chromatic number" & (ti:disk | ti:disc | ti:strip | ti:strips | ti:subsets)
+(ab:"map-type" | ab:"map type" | ab:"Jordan coloring" | ab:"Jordan colouring") & ab:plane
+ab:"forbidden distance" & (ab:tiling | ab:tilings | ab:tiles | ab:tessellation)
+ab:"unit distance" & (ab:"circular arcs" | ab:"arcs of unit" | ab:"unit arcs")
+au:"Voronov, Vsevolod"
+au:"Sokolov, Andrei"
+au:"Townsend, S"
+(ab:"largest disk" | ab:"largest disc" | ab:"radius of the largest") & ab:colo*
+ab:"chromatic number of the plane" & (ab:tiling | ab:tilings | ab:tiles | ab:map | ab:maps)
+ab:"local theorem" & (ab:Delone | ab:"regular system")
+ab:"unit circle" & ab:"chromatic number" & ab:rotation

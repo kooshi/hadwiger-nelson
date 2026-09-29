@@ -1,0 +1,27 @@
+[1] ab:disk & ab:"chromatic number" & (ab:"unit distance" | ab:"distance one" | ab:"distance 1")  -> 0
+[2] ti:"chromatic number" & (ti:disk | ti:disc | ti:strip | ti:strips | ti:subsets)  -> 5
+     2021 Polymath, D. H. J. :: On the chromatic number of circular disks and infinite strips in the plane
+     2014 Axenovich, M.; Choi, J.; Lastrina, M. :: On the chromatic number of subsets of the Euclidean plane
+     2009 Shabanov, D. A. :: On the chromatic number of finite systems of subsets
+     2021 Banerjee, Amitayu; Gyenis, Zalán :: Chromatic number of the product of graphs, graph homomorphisms, antichains and cofinal subsets of posets witho
+     1998 Malesińska, Ewa; Piskorz, Steffen; Weißenfels, Gerhard :: On the chromatic number of disk graphs
+[3] (ab:"map-type" | ab:"map type" | ab:"Jordan coloring" | ab:"Jordan colouring") & ab:plane  -> 3
+     2013 Mira, Christian :: Embedding of a Dim1 piecewise continuous and linear Leonov map into a Dim2 invertible map
+     1993 zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. :: zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+     2002 Hirata, Daisuke :: The Landau-Lifshitz flow into the Lobachevsky plane
+[4] ab:"forbidden distance" & (ab:tiling | ab:tilings | ab:tiles | ab:tessellation)  -> 0
+[5] ab:"unit distance" & (ab:"circular arcs" | ab:"arcs of unit" | ab:"unit arcs")  -> 1
+     2025 Lopez-Campos, Gyivan; Oliveros, Déborah; Ramírez Alfonsín, Jorge L. :: Borsuk and Vázsonyi problems through Reuleaux polyhedra
+[6] au:"Voronov, Vsevolod"  -> 22
+     2011 Voronov, V. A.; Druzhinin, E. I. :: Precision programmed scanning of a planet surface by a nonrigid orbital telescope
+     2024 Cherkashin, Danila; Voronov, Vsevolod :: On the chromatic number of 2-dimensional spheres
+     2010 Voronov, V. A.; Druzhinin, E. I. :: Precision program guidance of an nonrigid orbital telescope
+     2017 Rusanov, V. A.; Banshchikov, A. V.; Daneev, A. V. :: A posteriori simulation of dynamic model of the elastic element of satellite-gyrostat
+     2018 Kanel-Belov, A. Ya.; Voronov, V. A.; Cherkashin, D. D. :: On the chromatic number of an infinitesimal plane layer
+     2026 Sokolov, Georgy; Voronov, Vsevolod :: On the chromatic number of the plane for map-type colorings
+     2023 Vsevolod Voronov :: The chromatic number of the plane with an interval of forbidden distances is at least 7
+     2022 Tolmachev, A. D.; Protasov, D. S.; Voronov, V. A. :: Coverings of planar and three-dimensional sets with subsets of smaller diameter
+     2014 Rusanov, V. A.; Lakeev, A. V.; Linke, Y. É. :: On realization of dynamic systems: assessment of fiducial accuracy in the process of adjustment of the realiza
+     2026 Cherkashin, D. D.; Kanel-Belov, A. J.; Strukov, G. A. :: On chromatic numbers of 3-dimensional slices
+     2022 Voronov, V. A.; Neopryatnaya, A. M.; Dergachev, E. A. :: Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres
+     2026 Verdenko, V. R.; Voronov, V. A. :: Enumeration of 2-trees with directed cells

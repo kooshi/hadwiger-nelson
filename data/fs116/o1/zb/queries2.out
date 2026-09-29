@@ -1,0 +1,31 @@
+[7] au:"Sokolov, Georgy"  -> 7
+     2026 Andrey Kupavskii; Georgy Sokolov :: Families without $s$-matchings: the other end
+     2026 Andrey Kupavskii; Georgy Sokolov :: More on the Erdős--Kleitman problem on matchings in set families
+     2025 Andrey Kupavskii; Georgy Sokolov :: A complete solution of the Erdős-Kleitman matching problem for $n\le 3s$
+     2026 Sokolov, Georgy; Voronov, Vsevolod :: On the chromatic number of the plane for map-type colorings
+     2023 Sokolov, Georgy :: Chromatic number of a line with geometric progressions of forbidden distances and the complexity of recognizin
+     2025 Ilya I. Bogdanov; Elizaveta Neustroeva; Georgy Sokolov :: On forest and bipartite cuts in sparse graphs
+     2026 Elizaveta Iarovikova; Fedor Noskov; Georgy Sokolov :: Forbidding just one intersection for short integer sequences
+[8] au:"Townsend, S"  -> 7
+     2018 Picelli, R.; Townsend, S.; Brampton, C. :: Stress-based shape and topology optimization with the level set method
+     2010 Townsend, Sunny E.; Haydon, Daniel T.; Matthews, Louise :: On the generality of stability-complexity relationships in Lotka-Volterra ecosystems
+     2001 Townsend, Shane; Irwin, George W. :: Nonlinear model based predictive control using multiple local models
+     2005 Townsend, S. P. :: Colouring the plane with no monochrome units
+     2011 Lee, C. J.; Townsend, S.; Srinivas, K. :: Optimisation of stents for cerebral aneurysm
+     2001 Sang, Janche; Follen, Gregory; Kim, Chan :: Migrating legacy scientific applications towards CORBA-based client-server architectures
+     1981 Townsend, S. P. :: Every 5-coloured map in the plane contains a monochrome unit
+[9] (ab:"largest disk" | ab:"largest disc" | ab:"radius of the largest") & ab:colo*  -> 2
+     2013 Hinz, Andreas M.; Klavžar, Sandi; Milutinović, Uroš :: The Tower of Hanoi -- myths and maths. With a foreword by Ian Stewart
+     1984 zbMATH Open Web Interface contents unavailable due to conflicting licenses. :: zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+[10] ab:"chromatic number of the plane" & (ab:tiling | ab:tilings | ab:tiles | ab:map | ab:maps)  -> 7
+     2009 Soifer, Alexander :: The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Br
+     2021 Heule, Marijn J. H. :: Odd-distance virtual edges in unit-distance graphs
+     2011 Soifer, Alexander :: The Colorado Mathematical Olympiad and further explorations. From the mountains of Colorado to the peaks of ma
+     2024 Soifer, Alexander :: The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewo
+     2018 Donnelly, John :: The chromatic number of the taxicab plane
+     2026 Sokolov, Georgy; Voronov, Vsevolod :: On the chromatic number of the plane for map-type colorings
+     2022 Dunajski, Maciej :: Geometry. A very short introduction
+[11] ab:"local theorem" & (ab:Delone | ab:"regular system")  -> 2
+     1998 Dolbilin, Nikolai; Schattschneider, Doris :: The local theorem for tilings
+     1998  :: Quasicrystals and discrete geometry. Proceedings of the 1995 fall programme at The Fields Institute, Toronto, 
+[12] ab:"unit circle" & ab:"chromatic number" & ab:rotation  -> ERROR (non-JSON reply)
