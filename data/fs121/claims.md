@@ -1,6 +1,6 @@
 # FS-121 — the proposed claim list (statements only)
 
-*Proposed by the opening job FS121-O1 (Ephodos), 2026-09-29, for Keryx to review and freeze. **Statements only: no proof, no sketch, no route, no
+*Proposed by the opening job FS121-O1 (Ephodos), 2026-09-29. **Frozen by Keryx, 2026-09-29 05:41 UTC**, with two edits for blindness only (no statement changed): § 2's heading, which named the claims a blind verifier takes, and one source note pointing into FS-116's plan, a fenced record; the proposal as written is in git (commit 59b23868). **Statements only: no proof, no sketch, no route, no
 grade.** Every quotation is verbatim, with its source address, and was checked by `python3 tools/fs121_o1_quotes.py
 data/fs121/o1/quotes-claims.tsv` (output `data/fs121/o1/quotes-claims.out`, 16 of 16). Text outside quotation marks is this list's
 own and is marked "(this list)". Give every claim you work one verdict — **TRUE** (with your derivation), **FALSE** (with a counterexample), **GAP at a
@@ -54,11 +54,11 @@ Q-NO) and in C121-SAT6.
   sectors"
 - **FS111-W-LADDER** (`plans/FS111-derivation.md`, verbatim) [derived, one mind]: "a flat edge of a saturated map carries interfaces at every unit translate
   along its normal, with the colour rule β_{k+1} = τ_{k−1}"
-- **FS-116's qualification** (`plans/FS116-local-exclusion.md` § 4.1a, verbatim) [one mind]: "a saturated-class NO answers Question 2 for no map outside the
+- **FS-116's qualification** (FS-116's opening, verbatim) [one mind]: "a saturated-class NO answers Question 2 for no map outside the
   class, and serves route M only with C-SAT-T-HONEST at six (FS111-C-SAT-T-HONEST, GAP, FS-121's)"
 - **The controls** (all held, exact): R7 (`k = 7`), SQ9 and HEX9 (`k = 9`), DISC7 and DISCK7 (`k = 7`, covers), `plans/FS111-derivation.md`.
 
-## 2. The ladder ends (job FS121-D1; the first four for its blind verifier)
+## 2. The ladder ends
 
 - **C121-ENDS** (this list): in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius
   ends, off a null set of normals, at a unit arc J_1 whose centre z carries J_1's outer colour; either z also carries J_1's inner colour — J_1 is of kind
