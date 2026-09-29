@@ -349,3 +349,173 @@ to 1); `F⁻¹(j) ⊆ G_j = {g_j > 0}`, and for a.e. `x ∈ G_j`, `(g_j ∗ σ)(
 **G87 lookout, stage 3:** none seen.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: card `what-does-saturation-pin`, the erratum draft, and the plan proper
+
+### 4.1 Card `what-does-saturation-pin` — what saturation forces on the edges at a four-colour vertex
+
+*Saturated*, in FS-111's words (`plans/FS111-M-regularity.md` § 2.1, derived there as an equivalence): "every essential boundary point is at distance exactly
+1 from the support of each colour of its essential multicolour." For a **fragment** the contacts must lie in its domain, so the class is read on an inner disc:
+a valid fragment on `B̄(p, R)` is **saturated on `B̄(p, R − 1)`** when that holds at every essential boundary point of the inner disc; the restriction of an
+honestly saturated map of the plane to any disc of radius `R` is such a fragment (a valid fragment is a partition, so it is honest).
+
+**The answer: every edge at `p` is pinned — by definition — and pinned in exactly one of two ways, each of which places the edge's side colours on `ω(p)`.**
+The card's falsifier ("an edge … a side colour with no tile at distance exactly 1 from its points") is empty in the class by definition; the content is *where*
+the partners sit.
+
+derivation: FS116-O1-SATPIN
+  statement: let p be a vertex of at least four colours of a valid k-coloured fragment saturated on a disc about p, every tile at p with a cone of
+    positive angle; each edge e at p, with side colours a (clockwise) and b (counter-clockwise) and unit normal ν pointing to b's side, is near p of
+    exactly one of two types — (split) an arc of the unit circle about a point y of ω(p) at which both a and b have support, a unit arc of kind both; or
+    (tangent) a segment or an arc of radius at least 1 along which every x has x + ν(x) in the closure of colour a and x − ν(x) in the closure of colour b,
+    so that p + ν(p) carries a and p − ν(p) carries b, two antipodal points of ω(p) on the normal to e at p; and every colour of p is carried on ω(p)
+  uses only: FS111-M-PINCH and FS111-M-C11 at the interior points of e, where (H1) and (H2) hold (two tiles meet there, each locally connected, e being a
+    segment or an arc of a fragment); that supports are closed; that the split points of e's interior are open (M-C11 (iii)) and closed (a limit y of split
+    centres y_n has |x − y| = 1 and carries both colours, and M-PINCH run with y as both contacts is (split)), so e's interior, being connected, is of one
+    type; that e's tangent direction is continuous up to p; saturation at p itself for the last clause
+  not claimed: anything at a cusp at p; that the split centre y has four colours (FS112-N3-NOBOTH gives four colours or a repeated colour, and
+    FS111-W-NOREP removes the repeat only on cusp-free saturated maps); that any saturated valid six-coloured fragment about a four-colour vertex exists; that
+    the strip's midline configuration is excluded in the class (SAT-STRIP, the claim list); saturation of any held six-colour positive
+  argument: § 4.1a The argument of FS116-O1-SATPIN
+  verdict: derived
+  grade: derived from: FS111-M-PINCH, FS111-M-C11
+  minds: 1
+  model: k = 9 — FS111-W-SQ9, the square nine-colouring of side 1/2 (saturated, FS111-M-PINCH's model at an edge point): at each grid point four colours
+    meet, every edge is of the tangent type, and its partners sit at the two points of ω(p) on the edge's normal; at k = 7 R7's lattice points have cusps
+    and are outside the hypothesis
+  prior art: partly: FS111-M-PINCH is FS-111's (the dichotomy at an edge point); its reading at a vertex of a map not found — FS-111's gate,
+    "chromatic & plane & (measurable | map) & (tight | saturat* | maximal)" (7)
+  handoff: de Bruijn — with FS111-M-PINCH and FS111-M-C11, queued behind the measurable chain: the statement, its cusp exclusion, and the inner-disc
+    reading of saturation for fragments
+
+### 4.1a The argument of FS116-O1-SATPIN
+
+At an interior point `x` of `e` close to `p`, exactly two tiles meet (a fragment is a locally finite map), each meeting a small ball about `x` in one connected
+open set: (H1) and (H2). `x` is an essential boundary point of both side colours, so saturation gives contacts `y_a`, `y_b`, and M-PINCH gives (split) or
+(tangent). The split points are open (M-C11 (iii) fixes both sides as the two sides of `T₁(y)` on a neighbourhood) and closed (if split points `x_n → x` with
+centres `y_n`, a subsequence has `y_n → y` with `|x − y| = 1`, `y` in both closed supports; M-PINCH at `x` with `y_a = y_b = y` excludes (in, in) and
+(out, out), so it is (split)). `e`'s interior near `p` is connected, so it is all (split) — then `e` is an arc of `T₁(y)` for one `y`, and `|p − y| = 1` by
+continuity — or all (tangent). In the tangent case M-PINCH's contacts are antipodal, `y_b = 2x − y_a`, with `B(y_a, 1)` covering `b`'s side near `x`, so
+`y_a = x + ν(x)`; M-C11 makes `e` `C^{1,1}` with `|κ| ≤ 1`, and a segment or circular arc with `|κ| ≤ 1` is a segment or an arc of radius at least 1.
+Letting `x → p` along `e` (its tangent is continuous at `p`), `p + ν(p) ∈ supp S_a` and `p − ν(p) ∈ supp S_b`. The last clause is saturation at `p`, an
+essential boundary point of each of its colours. ∎
+
+**What it does at the vertices the card named.**
+- **The strip's midline configuration** (a degree-4 four-colour vertex with four straight edges at 0°, 90°, 180°, 270°, and four (Q) arcs on its ring,
+  `data/fs114/fs114-y6/survey.out`, row 136): in the saturated class all four edges are of the tangent type (a segment cannot be split), so each axis point of
+  `ω(p)` carries two of `p`'s colours — at 0° the colours of the tiles on the 90° edge's far side and the 270° edge's near side, and so on round — and each
+  partner support contains the half of the tangent line to `ω(p)` there that runs parallel to its edge. The capped strip does not have this (its midline edges
+  are free for both colours, FS111-VM2-STRIP-MID). **Whether any saturated fragment does is SAT-STRIP**, D0's first claim; it is not decided here.
+- **Rings free of (Q) arcs** (N6-RING60): `p`'s colours reach such a ring at its change points (N7-HUB's tips) or on arcs of `Γ` of other kinds; so a tangent
+  edge's partner points `p ± ν(p)` must sit at change points or on such arcs, and a split edge's centre is a point carrying two of `p`'s colours. Stated as
+  SAT-QFREE, D0's second claim.
+- **Tactic edges** (FS114-N2's sense: a whole unit arc about a four-colour vertex `q`, with `q` in its inner tile's closure): in the saturated class these are
+  split edges whose centre lies in the inner tile's closure; a split edge whose inner colour sits at `y` on another tile is the case N4-LENS and N114-RD govern.
+
+**Decision (the card's "if every edge is pinned" branch, taken with one qualification).** FS-116 poses its NO in both classes, and runs the saturated class
+first **beside** the class-free ring work, not before it: (1) route M's honest branch consumes only the saturated NO (FS111-M2-REDUCE-A), and FS-121 produces
+the class; (2) SATPIN gives every four-colour vertex of the class ring placements FS-114 never had, most at the 0–2-tactic vertices FS-114 never touched; (3)
+the class has no held six-colour positive about any four-colour vertex, so its dial is unknown (G21) and the construction side's first saturated object
+measures it. The qualification: a saturated-class NO answers Question 2 for no map outside the class, and serves route M only with C-SAT-T-HONEST at six
+(FS111-C-SAT-T-HONEST, GAP, FS-121's); the all-maps NO stays the milestone's headline target. **Answer sent to "main" for FS-121's opening once committed.**
+
+### 4.2 The erratum draft (for Keryx to file; `plans/FS114-derivation.md` is not mine)
+
+**Checked, and Poros is right on both lines.** The capped strip's midline vertices have four straight edges and no tactic edge at all
+(`data/fs114/fs114-y6/survey.out`: `tactic=0`, four `seg` edges, at all ten midline vertices), so `n = 4` and the charge is `n − 2 = 2`, a surplus;
+FS114-N2's own control says so (`plans/FS114-N-proof.md` l. 299, "the strip — midline vertices `n = 4` (four straight edges)"). The slip conflated *has* four
+tactic edges with *centres* four tactic arcs: each midline vertex is the centre of four arcs of kind both (N2-VCAP; row 136), none of them its own edges. The
+configuration the charge penalises is held on a fragment elsewhere: FS114-Y2-BOWTIE's centre, "a degree-4 vertex `p` of four colours whose **four** edges are
+tactic". N3-JOINT's model line inherits the slip: `plans/FS114-N3-proof.md` § 3.2 names no strip model; the close wrote it.
+
+- **Slot 1:** `plans/FS114-derivation.md` l. 239–240, FS114-N2-ENDS's `model:` field. Replace
+  `model: the capped strip's midline degree-4 vertices, each with four tactic edges (\`n = 0\`, charge −2) — the configuration the charge penalises, held` /
+  `on a fragment` with:
+  ```
+    model: FS114-Y2-BOWTIE's centre `p`, a degree-4 four-colour vertex with four tactic edges (`n = 0`, charge −2) — the configuration the charge
+      penalises, held on a fragment (`B̄(p, 3√3/5)`); the capped strip's midline degree-4 vertices have four straight edges (`n = 4`, charge 2), each the
+      centre of four tactic arcs (N2-VCAP), not their own edges
+  ```
+- **Slot 2:** l. 261, FS114-N3-JOINT's `model:` field. Replace `model: the strip's midline vertices as deficient vertices, their continuation ends as sources
+  (a fragment, not a map)` with:
+  ```
+    model: FS114-Y2-BOWTIE's centre `p` as a deficient vertex (DR's shape, FS114-N3-DR: four tactic edges, `n = 0`), its tactic ends' continuations as
+      N3-PAY's sources (a fragment, not a map); the strip's midline vertices carry `n = 4` (charge 2), so their two ends beyond the first two are free ends
+  ```
+- **A dated erratum line** under FS114-N2-ENDS's "Rests on it:" paragraph, in the file's erratum style: "*Erratum (FS116-O1, 2026-09-29): the model line
+  said the strip's midline vertices have four tactic edges (`n = 0`, charge −2); they have four straight edges (`n = 4`, charge 2) —
+  `data/fs114/fs114-y6/survey.out`, FS114-N's control (`plans/FS114-N-proof.md` l. 299); found by Poros (FS116-P1). The model is now FS114-Y2-BOWTIE's
+  centre; nothing rests on the model line.*" The same line, mutatis mutandis, under FS114-N3-JOINT. **No statement changes** — only model lines — so no
+  ledger row and no dependant is affected (N2-ENDS's statement and K1's definition read the charge, not the model).
+
+### 4.3 The routes
+
+*The object is the ring of a four-colour vertex (§IQ.3); the kill is the straddle (row 138); the NO's shape is G15's — the pigeonhole at `p` is its ring type,
+and each type gets a kill. Every job below is a derivation or an exact check of a fragment by formula; nothing enumerates.*
+
+| phase | what it asks | its claims (`data/fs116/claims.md`) | §G instruction it carries | controls |
+|---|---|---|---|---|
+| **D0 — the saturated class** | card 1 continued: what SATPIN's placements exclude | SAT-STRIP, SAT-QFREE, NO-SAT | G84, G85, G21 (the class's dial unknown) | SQ9 (k = 9), R7 at its non-cusp points, the strip off its midline |
+| **D1 — the ring** | the structural form: ring types, their twist, and the transfer rule; card 3 | RING-TWIST, RING-Q (card `what-do-q-rings-force`), RING-TRANSFER | G71, G13, G79, row 133's W-TAN | the strip's midline ring, the disk's corners, R7 at k = 7, the bowtie |
+| **D2 — the exclusion** | follow a ring's placements outward to a straddle; the radius | C114-LOCAL-F, DISC-F, LOCAL-DENSE | G15, G86, G82 (uniform in the complexity) | the strip at `φ²/√2`, the disk at `φ`, the bowtie at `3√3/5` |
+| **Y — construction** | killing tests by formula, checked exactly | Y-QRING (G83's killing test), Y-SAT (a saturated six-coloured fragment about a four-colour vertex) | G83, G21 | the held positives, rebuilt checkers |
+| **K — FS-114's round 7** | K1's residues, as ring types | FS114-N7-3T and N7-HUB for the blind check; the wrap; OC; the (Q)-pinwheel | G79 (behind D0, D1) | the bowtie, L60-REAL |
+| **V — blind second minds** | every claim on the frozen list | YESLIM, SATPIN, N7-3T, N7-HUB first | the standing independence rules | — |
+
+**Why this order** (the re-grokking's change to the stub's queue): FS-114's round 7 was six escapes of K1, each a counterexample invariant, all at vertices with
+three or four tactic edges; the positives that reach farthest sit at vertices with 0 and 2 (Poros's C1). G79 says derive what every solution carries first:
+D1 is the structural form itself and D0 is the same question in the class route M consumes. K's first item (the blind second mind on N7-3T and N7-HUB) runs
+in V at once, because D1 builds on N7-HUB; K's derivations (the wrap, OC) wait for D1's rule, which may absorb them as ring types.
+
+### 4.4 Stages and jobs
+
+*Budgets are guidance (Kooshi, 2026-09-27); every job saves and commits each stage in its record, so a kill redoes only the unsaved stage; resume by standing
+rule 2 (read the record, continue at the first unsaved stage). No job runs a process over fifteen minutes; no checkpointed run is planned.*
+
+- **Round 1 (after the freeze), three jobs, parallel if staffed** (Kooshi staffs; FS-121 runs beside):
+  - **FS116-N1** (proof side, Ephodos): recognition first (standing workflow); then RING-TWIST at every `k` with its defects named, then RING-Q (card 3) with the
+    strip's midline ring and the disk's corners as controls; then SAT-STRIP and SAT-QFREE if the budget holds. Record `plans/FS116-N1-proof.md`; ~450k.
+    **Stop rule:** three failed attempts on one step → `ephodos-recognition`, then `ephodos-invention` if the homes die on one line.
+  - **FS116-Y1** (construction side, Ephodos): Y-SAT first (saturate the capped strip at its midline, or show by formula why a saturated six-coloured strip
+    cannot hold `φ²/√2`) — it scores P1 from the other side; then Y-QRING (G83's killing test). Exact checkers with plants; the controls' checkers accept
+    first. Record `plans/FS116-Y1-construction.md`; ~400k. **Stop rule:** a candidate that fails the exact check measures the candidate; three failed
+    families → report the families' free parameters against the configuration's.
+  - **FS116-V1** (ephodos-verifier, blind): YESLIM and SATPIN (this job's, one mind each), then FS114-N7-3T with N7-HUB (b) and the `+++ b = a + 1` step —
+    scoring N7's two registrations. Record `plans/FS116-V1-verification.md`; ~350k.
+- **Round 2**, chosen by P1–P3: D2 on the ring rule D1 returns (FS116-N2), with the blind second minds on round 1's derived claims (FS116-V2); K's wrap and
+  OC only if D1 did not absorb them; the construction side on what D1 says a positive must carry.
+- **The close** (FS116-C): the derivation file, the drafts, the sweeps (`.claude/agents/ephodos.md` § The close job).
+
+### 4.5 Registered predictions (each decides what runs next; instruments for G21, scored at the close, never caps)
+
+- **P1 — SAT-STRIP is TRUE** (no valid six-coloured fragment saturated on `B̄(p, 1)` has the strip's midline configuration at `p`): **0.55**. *Decides round 2's
+  class:* TRUE → the saturated class loses its only candidate positive beyond `√3`, and round 2 aims D0's pinned-edge kills at the disk's corners (two tactic
+  edges) and at degree ≥ 5; FALSE → a saturated positive at a 0-tactic vertex exists, the saturated class is no easier there, and round 2 runs D1 → D2 in the
+  all-maps class first.
+- **P2 — no fragment by formula about a (Q)-ring four-colour vertex beyond `φ²/√2` is built in round 1** (G83's killing test not met): **0.8**. *Decides the
+  construction side's round 2:* met → C114-LOCAL-F's lower bound moves, and the proof side reads what that fragment's ring carries before any exclusion.
+- **P3 — RING-Q holds** (at a four-colour vertex whose ring carries a (Q) arc, every change point of the ring off the (Q) arcs is a vertex of at least four
+  colours): **0.45**. *Decides D2's route:* TRUE → D2 follows four-colour vertices along the triangular lattice through (Q) rings to a straddle; FALSE → the
+  (Q) ring closes without placing a four-colour vertex, and D2 needs another handle there (the construction side builds at that ring first).
+- Carried from FS-114, scored by FS116-V1: N7's two registrations (OC dies within `√3`, 0.5; every (Q)-ring survivor has a 60° (Q) arc or a (Q) arc ending 60°
+  from a tactic centre, 0.4). The stub's four provisional expectations are replaced by P1–P3.
+
+### 4.6 Failure clauses
+
+- A local exclusion for one configuration or one ring type is a piece, and names the types that remain; a NO for non-Siamese, simple or saturated fragments
+  only says so in its headline (G21, G86); a saturated-class NO says it serves route M only with C-SAT-T-HONEST at six.
+- Every step states its reading radius and the controls it fails on (the strip at `φ²/√2`, the disk at `φ`, the bowtie at `3√3/5`); a ring-type rule stated at
+  `k = 6` says what it does at `k = 7` (R7) — the vacuity rule, because the six-colour class may be empty.
+- No argument one colour class at a time (row 129); no count as a step of the NO (G86); a derivation that uses the complexity bound says so.
+- YESLIM's converse is never used; a YES is fragments on growing discs, not a map.
+- A YES candidate that fails the exact check measures the candidate; a family that all fail measures its image, its free parameters stated.
+
+### 4.7 Stubs
+
+**None minted.** Every question this opening surfaced is inside FS-116's claim list (LOCAL-DENSE, DISC-F) or FS-121's (C-SAT-T-HONEST); FS-123 to FS-125 are
+unused.
+
+**G87 lookout, stage 4:** none seen. One near-collision classed: the strip "holds every disc below `φ²/√2`" (FS114-Y-DIAL) and "the strip is not saturated"
+(FS111-VM2-STRIP-MID) are both true; they collide only if the dial is read as the saturated class's, which G21 forbids — a scope.
+
+## Stage 4 — SAVED
