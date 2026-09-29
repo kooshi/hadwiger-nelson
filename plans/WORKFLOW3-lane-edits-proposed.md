@@ -122,3 +122,5 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | E15 (new) | a drafting job that proves theorems writes them in a `plans/<job>-derivation.md` of its own, so the census sees them without a copy | W10 |
 | E16 (new) | Ephodos hand-backs carried full reports in prose, three of three tonight; Poros's was content-free | W5, W11 |
 | E17 (new) | a proposed claim list asserted one of its own claims and gave a mind count, which its blind verifier would read | W12 |
+| U5 (new) | the brief gate reads a "…" inside a quoted statement's own text as an elision | W13 |
+| U3 | a fence section's "except" clause is invisible to the gate: every backticked path there is fenced (the gate caught the resulting self-fence, so this is a note on wording, not a defect) | W13 |
