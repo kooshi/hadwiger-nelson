@@ -19,11 +19,11 @@
 | FS116-V3 | ephodos-verifier on the list's § 11 (GERM-R, GERM-S, TOUCH, ECHO, AXIS) | `data/fs116/briefs/FS116-V3-verify.md` | `plans/FS116-V3-verification.md` | yes: fence in its brief |
 | FS116-S1 | Ephodos, SAT-STRIP from both sides (exclude or build Y-SAT) | `data/fs116/briefs/FS116-S1-satstrip.md` | `plans/FS116-S1-proof.md` | no |
 | FS116-Y3 | Ephodos, construction: a Γ-free four-colour vertex (queue item 1) | `data/fs116/briefs/FS116-Y3-hub.md` | `plans/FS116-Y3-construction.md` | no |
+| FS116-N3 | Ephodos, the semi-hub rule (queue item 2) | `data/fs116/briefs/FS116-N3-semihub.md` | `plans/FS116-N3-proof.md` | no |
 | FS121-D4 | Ephodos, C121-REGJ (the structural form) | `data/fs121/briefs/FS121-D4-regj.md` | `plans/FS121-D4-proof.md` | no |
 | FS121-V4 | ephodos-verifier on the list's § 7.2 (the cover route's lemmas) | `data/fs121/briefs/FS121-V4-verify.md` | `plans/FS121-V4-verification.md` | yes: fence in its brief |
-| FS121-V3 | ephodos-verifier on the list's § 6 (V2-SECTOR, D3-GRUNDY, D3-FALLSAT) | `data/fs121/briefs/FS121-V3-verify.md` | `plans/FS121-V3-verification.md` | yes: fence in its brief |
 
-Done tonight, each logged: FS116-N2 (RING-TRANSFER MISSTATED; -C derived), FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
+Done tonight, each logged: FS121-V3, FS116-N2 (RING-TRANSFER MISSTATED; -C derived), FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
 FS121-V2, CL1, CL2.
 
 **Held at two minds tonight (the announcement rule met)**: FS116-O1-YESLIM; FS116-O1-SATPIN (corrected wording); N7-HUB (b), (c);
@@ -41,7 +41,7 @@ Everything else is one mind or GAP — see the inventories.
 
 1. *(launched as FS116-Y3)* **FS-116 construction** (item 68): build a Γ-free four-colour vertex on a disc of radius above 2 (a "hub"), or show by formula none
    exists — RECIP, ANTI, HEX6 have no model at six colours. Template: `data/fs116/briefs/FS116-Y2-construction.md`.
-2. **FS-116 D2's next object** (item 70): a four-colour vertex whose ring carries an arc of Γ at distance 1 from a Γ-free one, with its
+2. *(launched as FS116-N3)* **FS-116 D2's next object** (item 70): a four-colour vertex whose ring carries an arc of Γ at distance 1 from a Γ-free one, with its
    semi-hubs (RING-TRANSFER-Q). Template: `data/fs116/briefs/FS116-N2-transfer.md`.
 3. **FS-116 blind check** (item 69): STAR, RECIP, ANTI, HEX6, HEX3, RING-TRANSFER-C from `plans/FS116-N2-proof.md`, added to the list as
    § 12 by the same script shape as § 11 (`data/fs116/claims.md`); brief template `data/fs116/briefs/FS116-V3-verify.md`.
