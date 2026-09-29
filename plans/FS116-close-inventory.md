@@ -90,6 +90,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 56 | question for another lane | To the construction side: a fragment by formula saturated on `B̄(p, 1)` realising the right-angled cross's axis structure makes SAT-STRIP FALSE; excluding the touch point (with its echo at 2q − p) and the (Q)-fed change point is its missing step. Routed to FS116-Y2 (02:08) for its Y-SAT stage. N1's advice: SAT-STRIP's next proof step is a fresh mind on the stalled form (§ 4.3's end), not a fourth push | N1 § 4.3 | open |
 | 57 | question for another lane | Blind second minds owed on GERM-R, GERM-S, TOUCH, ECHO, AXIS before D2 builds on them (N1 read N6 and N7 sighted) | N1's held items | open |
 | 58 | owner ruling | **FS116-N2 launched** on RING-TRANSFER (02:08), in the slot FS121-D2 freed, ahead of FS121's D4 (which waits on this ring work by item 8's ruling). Alternative weighed: FS121-D4 (REG-J′) now. Why: FS-116 is rank 1, RING-TRANSFER is its structural form's claim and D2's input, and its held inputs are now at two minds. Confidence: high | `data/fs116/briefs/FS116-N2-transfer.md` | open |
+| 59 | owner ruling | **FS116-V3**, blind, on FS116-N1-GERM-R, -GERM-S, -TOUCH, -ECHO, -AXIS (item 57), added to the list as § 11 (02:09, a dated addendum; no existing statement changed) | `data/fs116/briefs/FS116-V3-verify.md` | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
