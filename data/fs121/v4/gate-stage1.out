@@ -1,0 +1,10 @@
+entry lint
+  claim fs121-v4-readback: minds 1
+  claim fs121-v4-readback: prior art known
+  entries: 1  derived: 1  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs121-v4-quotes: printed 'quotations: 5 verbatim: 5'; with the fault planted ('' → '--plant') it printed 'quotations: 5 verbatim: 4' — it fires
+  controls: 1  fired on their faults: 1
+GATE: PASS (0 failures, 0 warnings)
