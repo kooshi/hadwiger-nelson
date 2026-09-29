@@ -103,6 +103,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 69 | question for another lane | Blind second minds owed on STAR, RECIP, ANTI, HEX6, HEX3 and RING-TRANSFER-C before D2 builds on them (they also rest on FS116-N1-TOUCH and -QFREE4, under FS116-V3's check now) | N2's held items | open |
 | 70 | question for another lane | D2's next object (N2's advice): a four-colour vertex whose ring carries an arc of Γ, at distance 1 from a Γ-free one, with its semi-hubs (RING-TRANSFER-Q) | N2's held items | open |
 | 71 | correction owed | N2 noted its brief listed N7-HUB (b), (c) at two minds while `plans/FS114-derivation.md` files FS114-N7-3T at one: both true — FS116-V1 made N7-HUB two minds tonight (item 30) and the filing waits for the close | N2 § 1.1 | open (for the close) |
+| 72 | owner ruling | **FS116-Y3** (02:37): the construction side on item 68 — a valid fragment on a disc of radius above 2 about a four-colour vertex with a Γ-free ring (every change point a hub), by formula, or an obstruction at a named radius. First in the handoff's queue: it decides whether N2's hub lemmas have a model | `data/fs116/briefs/FS116-Y3-hub.md` | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
