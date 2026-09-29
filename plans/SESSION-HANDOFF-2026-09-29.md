@@ -12,21 +12,22 @@
    stays idle; the proposed lane-file edits (`plans/WORKFLOW3-lane-edits-proposed.md`) are **deferred to 2026-09-29 (morning)** — "watch for
    instances or additions throughout this session"; § G of that file is the running list.
 
-## What is running (round 2; updated as jobs finish — the inventories are authoritative)
+## What is running (as of 2026-09-29 07:04 UTC; the inventories are authoritative)
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
 | FS116-N1 (successor) | Ephodos, stage 4: SAT-STRIP, SAT-QFREE | `data/fs116/briefs/FS116-N1-ring.md` amendment 1 | `plans/FS116-N1-proof.md` | no |
-| FS116-Y2 | Ephodos, construction round 2 | `data/fs116/briefs/FS116-Y2-construction.md` | `plans/FS116-Y2-construction.md` | no |
-| FS116-V2 | ephodos-verifier | `data/fs116/briefs/FS116-V2-verify.md` | `plans/FS116-V2-verification.md` | yes: fence in its brief |
+| FS116-Y2 | Ephodos, construction round 2: Y-QRING at the disk corner, then Y-SAT | `data/fs116/briefs/FS116-Y2-construction.md` | `plans/FS116-Y2-construction.md` | no |
 | FS121-D2 | Ephodos, C121-NOLRA | `data/fs121/briefs/FS121-D2-nolra.md` | `plans/FS121-D2-proof.md` | no |
-| FS121-C1 | Ephodos, the cover route (NO-PAR; proposes its claim first) | `data/fs121/briefs/FS121-C1-cover-route.md` | `plans/FS121-C1-proof.md` | no |
-| FS121-V2 | ephodos-verifier | `data/fs121/briefs/FS121-V2-verify.md` | `plans/FS121-V2-verification.md` | yes: fence in its brief |
+| FS121-C1 | Ephodos, the cover route (proposes NO-PAR's statement first; Keryx freezes it as the list's next dated addendum) | `data/fs121/briefs/FS121-C1-cover-route.md` | `plans/FS121-C1-proof.md` | no |
+| FS121-V3 | ephodos-verifier on the list's § 6 (V2-SECTOR, D3-GRUNDY, D3-FALLSAT) | `data/fs121/briefs/FS121-V3-verify.md` | `plans/FS121-V3-verification.md` | yes: fence in its brief |
 
-Done tonight: FS121-D3, FS116-Y1, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), CL1, CL2 — each logged in an inventory.
+Done tonight, each logged: FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
+FS121-V2, CL1, CL2.
 
-Agent ids are in the coordinator's scratch only. A halted job resumes from its record's last SAVED stage (standing rule 2), with a fresh agent
-on the same brief if the old one is gone or past ~500k.
+**Held at two minds tonight (the announcement rule met)**: FS116-O1-YESLIM; FS116-O1-SATPIN (corrected wording); N7-HUB (b), (c);
+RING-GERM, RING-TWIST-C, FS116-N1-TWIST-LIT (reading L); C121-ENDS, -OUT, -PER, -LRA-LINE (reading (a)); DB1-L3; FS121-D1-EROSION (two routes).
+Everything else is one mind or GAP — see the inventories.
 
 ## Rules in force
 
@@ -37,6 +38,8 @@ on the same brief if the old one is gone or past ~500k.
 
 ## Next
 
-When round 1 reports: review by artifact, log, route (a refutation to its deriver; RING-Q's answer to FS-121); P1–P3 of each milestone choose
-round 2 (`plans/FS116-local-exclusion.md` § 4.4–4.5, `plans/FS121-map-step.md` § 4.2–4.4). The morning report to Kooshi covers tonight in his
-house format (`.claude/output-styles/keryx.md` § Reporting to Kooshi), including the lane-edit review.
+- FS-116: when the successor reports on SAT-STRIP (the plan's P1), round 3 is D2 (the exclusion) on RING-GERM's rule (RING-TRANSFER not yet
+  attempted), and a blind mind on round 2's new claims. FS-114's N7-3T entry repair and the bowtie (Q)-arc divergence go to the close (items 32, 39).
+- FS-121: freeze FS121-C1's proposed NO-PAR statements (it will send the path); when D2 reports, P2 decides FS-115's framing; D4 (C121-REGJ) is last.
+- Kooshi's report: tonight in his house format; the lane-edit review (`plans/WORKFLOW3-lane-edits-proposed.md`, § G is tonight's list);
+  the cover-route trigger ruling (`plans/FS121-close-inventory.md` item 35) and the round-1 staffing count (FS-116 item 24) are his to overturn.
