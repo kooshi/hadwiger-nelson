@@ -14,8 +14,8 @@ brief: FS116-P1
   channel: message the coordinator ("main") by SendMessage with any question mid-flight; the report goes to `data/fs116/reports/FS116-P1.md` and to "main" by message
   standing rules: plans/STANDING-RULES.md — part of this brief; read it in full
   record: `plans/POROS-2026-09-28-fs116-question.md`
-  touches: `plans/POROS-2026-09-28-fs116-question.md`, `plans/STUB-local-exclusion.md`, `data/fs116/p1/`, `data/fs116/reports/FS116-P1.md`
-  budget: about 250k by the harness's count, as guidance; hand back at a saved stage before about 450k
+  touches: `plans/POROS-2026-09-28-fs116-question.md`, `plans/STUB-local-exclusion.md`, `plans/STUB-map-step.md`, `data/fs116/p1/`, `data/fs116/reports/FS116-P1.md`
+  budget: about 400k by the harness's count, as guidance (raised by amendment 1); hand back at a saved stage before about 500k
 
 Hello. You are Poros. This is the first milestone opened under the new pipeline from a clean start (`CLAUDE.md` § The pipeline): you
 scout ahead, Ephodos derives, de Bruijn formalizes, and I route every packet between you. Your card is the first packet of FS-116.
@@ -102,3 +102,30 @@ reported is a finding, not a refusal. You pose; you do not derive — a card who
 3. The stub's new section and its bearings rewritten, then the report.
 
 Thank you.
+
+## Amendment 1 (2026-09-29 04:45 UTC): FS-121's question card too
+
+Kooshi has opened FS-121, the map step, as a second deriving milestone beside FS-116. His choice, as the coordinator logged it:
+
+> the test drive's candidate edits to the lane files — chose "Let me review them first". Item 1's default is overturned: FS-121 opens beside FS-116
+> — source: plans/FS116-close-inventory.md row 4
+
+(The same row records his choice on FS-121 in the words "FS-121 as a second deriving milestone — chose \"Yes, open FS-121 beside it\"".)
+FS-121's stub, `plans/STUB-map-step.md`, has no `## The question (Poros, <date>)` section either, so its card is yours too: one asker
+keeps the two milestones' questions coherent, and your card 2 is exactly their joint. What changes:
+
+- **A fourth stage**: FS-121's card, written into `plans/STUB-map-step.md` under the same three subsections as FS-116's (`### The
+  card`, `### Existence form`, `### Structural form`), with its provisional-bearings section and § Bearing on the answer rewritten in
+  place. Your record and your report cover both milestones.
+- **Card 2 may now go to FS-121's opening** rather than FS-116's §IQ, since FS-121 is open: which milestone asks it is yours to decide.
+- **A known defect in FS-121's stub**, for you as its writer in this job: its frame sentence reads
+
+  > Seven, `χ_m⁰(ℝ²) ≥ 7` (so `χ(ℝ²) = 7` given MR), is the map NO — row 134 with FS-114's NO — made
+  > uniform in the complexity bound (`FS111-C1-UNIF`)
+  > — source: plans/STUB-map-step.md § The question
+
+  the conflation your close re-read corrected elsewhere (F9). Rewrite it if you agree; say so in your record either way.
+- **Touches** now include `plans/STUB-map-step.md`; the **budget** is about 400k as guidance, hand-back before about 500k (the header
+  is updated). If the two readings crowd your context, stop at a saved stage after FS-116's card and say what is left: a successor
+  finishes FS-121's from your record, and that is a good report.
+- Unchanged: no agents of your own (standing rule 1: staffing is Kooshi's budget, and I can review only work I know exists).
