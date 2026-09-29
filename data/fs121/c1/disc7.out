@@ -1,0 +1,3 @@
+least squared distance between same-colour centres is 21/4: True
+pairs (least, second) checked: 42; geometry checks failed at 0 orders
+orders with an edge point bound by neither side colour: 5040 of 5040

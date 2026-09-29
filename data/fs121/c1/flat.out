@@ -1,0 +1,3 @@
+parallel of y = x^4 at signed distance t:  Y - t = 8*X**6*t + X**4
+parallel at distance 1 of the parallel at distance t, minus the parallel at distance t + 1: 0
+FLAT CHAIN: ALL HOLD (for every t: Y - t = X^4 + O(X^6), curvature 0, strictly above the line)
