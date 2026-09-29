@@ -392,3 +392,106 @@ The two statements are about different objects (flat accumulation points against
 derive, not two truths that cannot both stand.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the plan proper, and the erratum draft
+
+*Received mid-stage 3, routed by the coordinator: FS116-O1-SATPIN and FS116-O1-YESLIM (`plans/FS116-local-exclusion.md` §§ 3.4–3.5, 4.1–4.1a, one mind
+each, hand), read at their source.*
+- **SATPIN** is consistent with FS121-O1-ENDS: its not-claimed line is ENDS's (Q) clause, "FS112-N3-NOBOTH gives four colours or a repeated colour, and
+  FS111-W-NOREP removes the repeat only on cusp-free saturated maps". Its argument reads M-PINCH at edge interior points and never uses the four-colour
+  count, so D1 applies it at a three-colour (R2) centre.
+- **YESLIM** makes FS-116's failure `χ_m⁰(ℝ²) ≤ 6` on its own. FS-121's failure is already that (a tight six-colouring, FS111-W-NEG). So each half of
+  route M fails into `χ(ℝ²) ≤ 6` with no MR, and each needs the other for seven.
+- **FS-116's qualification** binds this plan: "the saturated-class NO serves route M only together with C-SAT-T-HONEST at six (GAP, FS-121's)". Honest
+  saturation at six is therefore a rung both halves need, and it is FS-121's.
+
+### 4.1 The route, and the alternative weighed
+
+**The choice: the honest route, opening on the ladder ends.** It is Poros's default, with three reasons of this opening's own:
+- The card made the honest class concrete. Curved ladders end at (Q) or (R2) arcs and never outward (FS121-O1-ENDS, OUT).
+- In the periodic case the class FS-116 must exclude has only segments and (Q) arcs (FS121-O1-PER).
+- FS-116 now poses its NO in the saturated class (SATPIN's decision). The honest route's NO therefore has a mind on it, and NO-PAR has none.
+
+**The alternative: the cover route** (NO-PAR with MUA-FIN at six).
+- *Its strength:* saturation is free (Zorn, FS111-M-SATC), which removes the honest route's hardest rung.
+- *Its costs:* it needs a NO for self-parallel boundaries, larger than FS-114's (FS111-M2-DISCK7: at seven, maximal classes can have smooth non-circular
+  boundaries), and MUA-FIN at six (FS-120's rung). Its natural first step is row 134's N4 (curvature monotonicity along the shadow map), which "uses no
+  complexity bound".
+
+**The weighing turns on one fact derived here (one line, hand, one mind):** honest saturation has no colour-generic form that is both true and non-trivial
+at seven. Its existence form holds at seven by R7, which tests nothing (FS111-W-NEG). Its "above `f`" form fails at seven: the tight hexagonal
+seven-colouring is not saturated (FS111-M-DEADLOCK, W-HEXSAT (2)), and its classes cover the plane, so the only partition whose classes contain them a.e. is
+itself. So honest saturation at six is a rung that must be earned **at six, by a global re-choice**.
+
+**Trigger for the cover route.** D3's stop rule fires with honest saturation not reduced to a named step. The cover route then opens as the next slot,
+starting from N4.
+
+### 4.2 The stages (each a derivation job, launched on a frozen claim list; claim ids are `data/fs121/claims.md`'s)
+
+| job | claims | what it does | budget | stop rule | checkpoint / resume | a kill redoes |
+|---|---|---|---|---|---|---|
+| **FS121-D1** (+ blind **FS121-DB1** on C121-ENDS, OUT, PER, LRA-LINE) | C121-ENDS, C121-OUT, C121-PER, C121-LRA-LINE (verification), **C121-R2-FOUR**, C121-CURVED | opens with recognition (`ephodos-recognition`), then **the (R2) end**. At a three-colour (R2) centre `z`: SATPIN's dichotomy at every edge at `z`, whose partners on `ω(z)` must avoid `J_1`'s window (its points carry only `p`, `q`); `p`'s tile inside `J_1`, with no `p` at `z`, and its inner boundary. Either every (R2) centre has four colours, or a three-colour (R2) end is built by formula at some `k ≥ 7` (colourings by formula are in the ban's "in") | ~450k | three failed attempts on one step, or C121-R2-FOUR decided | stage per relay-result in `plans/FS121-D1-proof.md` | the current stage only |
+| **FS121-D2** | **C121-NOLRA** | ¬LRA through FS121-O1-LRA-LINE: a bi-infinite unit-spaced normal line of flat accumulation points. Does row 134's N4 (curvature monotonicity) or a density count on the pencils' ends (each end a point of Σ with at least three colours, C121-ENDS) forbid it? | ~450k | as D1 | `plans/FS121-D2-proof.md` | the current stage |
+| **FS121-D3** | **C121-SAT6** (the stub's C-SAT-T-HONEST at six), C121-FALL | honest saturation at six by a global re-choice. Candidate routes: a variational selection among tight six-colourings (a minimiser at which every free point admits an improving fill), and the idomatic reading (a measurable fall six-colouring above a maximal cover, whose lenses DISC7 shows are the obstruction) | ~450k | as D1; if not reduced to a named step, the cover route's trigger (§ 4.1) | `plans/FS121-D3-proof.md` | the current stage |
+| **FS121-D4** | **C121-REGJ** | REG-J′'s universal form: what every end carries bounds the ends in a bounded set. Uses C121-ENDS (every end is a point of Σ of ≥ 3 colours), SATPIN's partners on `ω(z)`, M-EXTREME's two points of Σ per region | ~450k | as D1 | `plans/FS121-D4-proof.md` | the current stage |
+
+**Order.** D1 first: the card says this milestone opens on the separating link. D2 and D3 then run in either order, or side by side if Keryx staffs a
+second slot; D3 is the rung FS-116's qualification makes shared. D4 comes last: it rests on D1's answer, and on FS-116's `what-do-q-rings-force` if D1
+finds every end on FS-116's rings (the coordinator's ruling on the shared step).
+
+**Every job:** computation only as a control (exact checks of objects given by formula, `tools/fs121_<job>_*.py`, each with a planted fault that
+fires); a "would have searched here" log; every rung stated with its colour count and its seven-colour inhabitant, or said to have none (G21).
+
+### 4.3 Failure clauses (the stub's three bind; one added)
+
+1. A sentence reading a reformulation as progress is a statement defect. REG-J′-C₅ is `χ_m⁰ ≥ 6` restated, and each top rung is the answer restated
+   given its NO.
+2. A rung stated at six only, with no seven-colour inhabitant or a statement of where six is spent, is misfiled. C121-SAT6 is the one rung that is at six
+   by its nature (§ 4.1), and it is stated so.
+3. Every quotation of a rung carries its clauses in full, REG-J′'s "finitely many interface arcs at each point" above all.
+4. *(added)* A claim about (R2) ends, curved pencils or LRA lines, on a class with no held inhabitant, says so in its headline (G21: no held saturated
+   colouring has a curved tangent interface at any `k`).
+
+### 4.4 Predictions (only those whose outcome decides what runs next)
+
+- **P1: every (R2) centre at which no colour has density 0 carries at least four colours (C121-R2-FOUR TRUE), decided within D1 — 0.45.** Decides: if
+  TRUE, every curved ladder ends on FS-116's rings, the two milestones share one object, and D4 waits on FS-116's ring card by the coordinator's ruling.
+  If FALSE (a three-colour (R2) end by formula at `k ≥ 7`), the ring question at three-colour centres is FS-121's own, and D4 runs on it.
+- **P2: ¬LRA derived under REG-J′ within D2 (C121-NOLRA TRUE) — 0.3.** Decides: if TRUE, LRA leaves FS-115's stub and the honest route's remaining rungs are
+  C121-SAT6 and C121-REGJ. If not, the LRA line goes to FS-115 as its question restated (bi-infinite, not a ray).
+- **P3: C121-SAT6 reduced to a named step within D3 — 0.2.** Decides: if not, the cover route opens (§ 4.1's trigger).
+
+### 4.5 The erratum draft (for Keryx to file; `plans/FS111-derivation.md` is not mine)
+
+**Checked; Poros is right.** `plans/FS111-derivation.md` l. 1019, FS111-M2-INTRAD's `model:` line, reads "model: SQ9, HEX9, R7 and row 136's strip (VM2-LAD-CTL,
+exact: every edge-side carries its ladder, every arc of kind both has radius 1)". VM2's record says three things (`plans/FS111-VM2-verification.md` ll. 40–44,
+211):
+- LAD-CTL checked the strip's "16 of 16 vertical edge-sides, 26 of 26 arcs of kind both, radius 1";
+- "the strip is a fragment on which INTRAD is tested only off the midline";
+- R7's arcs are all (split), "so the parallel clause is vacuous at `k = 7` there".
+
+"Every edge-side carries its ladder" is false of the strip's midline edges: VM2-STRIP-MID finds both side colours free at their midpoints, so they have no
+partners and no ladder. **Slot:** `plans/FS111-derivation.md` l. 1019, the `model:` field of FS111-M2-INTRAD. Replace the whole line with:
+```
+  model: SQ9 and HEX9 (VM2-LAD-CTL, exact: 48 of 48 and 76 of 76 edge-sides carry the unit-parallel ladder), R7 (432 of 432 arcs of kind both, radius 1,
+    so the parallel clause is vacuous there) and row 136's strip off its midline (16 of 16 vertical edge-sides carry the ladder, 26 of 26 arcs of kind
+    both have radius 1; its midline is unsaturated, FS111-VM2-STRIP-MID); no control has an arc of radius ≥ 2
+```
+The added clause "no control has an arc of radius ≥ 2" is VM2's own (§ 1.5, "INTRAD's content beyond radius 1 is uninhabited among the objects held").
+It keeps G21's warning in the entry.
+
+### 4.6 Stubs, and items for other lanes
+
+- **No stub minted** (FS-126 to FS-128 unused). Nothing here outgrows the milestone; D1–D4 are its stages.
+- **For FS-115 (Keryx to route):** FS121-O1-LRA-LINE makes LRA a bi-infinite normal line in saturated colourings, and FS121-O1-OUT makes every curved
+  tangent interface a one-sided outward pencil, the stuck ray's shape, forced by saturation alone. FS-115's framing ("a one-sided chain … the stuck ray")
+  should be re-read against both.
+- **For FS-116 and FS-117 (a question, G86):** does honest saturation exclude Siamese pairs (two components of one colour "near", all cross distances
+  `< 1`, FS111-M-HULL2)? If it does, route T's non-Siamese count (FS-117) serves the honest route's NO.
+- **For Poros:** the structural form's last clause counts ends in a bounded set, while ¬LRA counts ladders crossing a bounded set, whose ends lie
+  arbitrarily far away (§ 3.1 item 3).
+
+*Would have searched here:* a saturated colouring (any `k`) with an (R2) arc about a three-colour centre, or with a curved tangent interface — did not.
+D1 is to derive it or build it by formula.
+
+## Stage 4 — SAVED
