@@ -1,0 +1,23 @@
+entry lint
+  warn  FS121-D3-proof.md:154 (FS121-D3-FALLSAT): derived from 'FS111-C-FILL', which is not an entry in these files — its grade cannot be read
+  claim FS121-D3-FALLSAT: minds 1
+  claim FS121-D3-FALLSAT: prior art partly, 2 counted queries
+  warn  FS121-D3-proof.md:191 (FS121-D3-GRUNDY): derived from 'FS111-M-SATC', which is not an entry in these files — its grade cannot be read
+  warn  FS121-D3-proof.md:191 (FS121-D3-GRUNDY): derived from 'FS111-M2-ZERO', which is not an entry in these files — its grade cannot be read
+  claim FS121-D3-GRUNDY: minds 1
+  claim FS121-D3-GRUNDY: prior art partly, 2 counted queries
+  claim FS121-D3-SWAP1D: minds 1
+  claim FS121-D3-SWAP1D: prior art new, 2 counted queries
+  warn  FS121-D3-proof.md:298 (FS121-D3-EQ): derived from 'FS111-V0-RESCALE', which is not an entry in these files — its grade cannot be read
+  claim FS121-D3-EQ: minds 1
+  claim FS121-D3-EQ: prior art partly, 2 counted queries
+  entries: 5  derived: 4  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS121-D3-SWAP1D-SAT: printed 'ALL HOLD'; with the fault planted ('' → '--plant seam') it printed 'FAILED: S' — it fires
+  ok    FS121-D3-SWAP1D-EXCHANGE: printed 'ALL HOLD'; with the fault planted ('' → '--plant skip') it printed 'FAILED: S' — it fires
+  ok    FS121-D3-SWAP1D-GRUNDY: printed 'ALL HOLD'; with the fault planted ('' → '--plant order') it printed 'FAILED: G' — it fires
+  ok    FS121-D3-SWAP1D-NOFALL: printed 'ALL HOLD'; with the fault planted ('' → '--plant even') it printed 'FAILED: I' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 4 warnings)
