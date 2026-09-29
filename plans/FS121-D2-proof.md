@@ -15,11 +15,21 @@ maximal arc of one circle of radius r contained in the closure of the interface 
 
 - FS121-D2-INCURVED — LRA gives tangent-type interface arcs of finite radius ≥ 2 (a colouring with LRA inhabits C121-CURVED's class, cusps
   allowed) — [hand], one mind, elementary — § 1.3.
+- FS121-D2-EXT — a rung (level 1 ≤ k ≤ n − 2, or any outward level) cannot follow its own circle past the normal line of a junction off Σ; cusps
+  allowed — [hand], one mind — § 2.1.
+- FS121-D2-THIN — LRA gives, for every r ≥ 2, infinitely many maximal radius-r interface arcs with windows tending to 0 (each LRA piece a thin pencil)
+  — [derived] from FS121-D2-EXT, one mind — § 2.2.
+- FS121-D2-SYM — ¬LRA wherever the radius-r arcs, for some r ≥ 2, have windows bounded below; in particular for every doubly periodic (cocompactly
+  symmetric) colouring, at every k — [derived] from FS121-D2-THIN, one mind — § 2.3.
+- FS121-D2-PERFIN — a doubly periodic honest saturated REG-J′ colouring carries finitely many radii (C121-PER's periodic clause without "satisfying
+  ¬LRA") — [derived] from FS121-D2-SYM, one mind — § 2.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: would have searched for a saturated colouring with a curved interface whose pieces accumulate (a finder over piecewise-circular
   fronts with prescribed ladders). Did not; the recognition below asks what every LRA configuration must carry first.
+- Stage 2: would have run a finder over thin pencils (curved pencils with windows tending to 0, with band subdivisions). Did not; derived what LRA
+  forces (FS121-D2-THIN) and where it is excluded (FS121-D2-SYM).
 
 ## Fence log (standing rule 8)
 
@@ -152,3 +162,159 @@ derivation: FS121-D2-INCURVED
   handoff: none — a relation between two claims of the list, not a statement a proof consumes
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the rung extension lemma, window transport, and ¬LRA for symmetric colourings
+
+*Setting for every entry of this stage: `f` an honest saturated colouring in D-NF satisfying REG-J′; any `k`; cusps allowed (no entry here uses
+FS111-W-NOREP). Notation: the header's words.*
+
+### 2.1 A rung cannot follow its own circle past a junction (FS121-D2-EXT)
+
+*Setting.* Let `a` be a junction, off Σ, of an interface arc `J`, where `J` passes from a circular piece `γ` (radius `n ≥ 3`, centre `z`) to a piece
+`γ′` that does not lie on `γ`'s circle. Let `L` be the normal line of `J` at `a`; it passes through `z`. Put `ν = (z − a)/n` and `P_k = a + kν`.
+
+*A remark used below.* Under REG-J′ a bounded set meets finitely many interface arcs (FS111-M-REDUCE-I's proof), each closed with its ends in Σ, so
+the closure of the interface set is the union of the interface arcs, and a point of it off Σ lies on an interface arc.
+
+*Argument.* Fix `k` with `1 ≤ k ≤ n − 2`, and suppose an arc `C` of the circle `∂B(z, n − k)`, on `γ′`'s side of `L` with an end at `P_k`, lies in the
+closure of the interface set. Σ is locally finite, so shrinking `C` about `P_k` leaves a sub-arc `C₀` whose points other than `P_k` are interface points
+off Σ; at each of them (H1) and (H2) hold, the interface is locally one `C^{1,1}` curve (FS111-M-C11), and it contains `C₀` near that point, so it is the
+circle there. `C₀` has radius `n − k ≥ 2`, so it is of the (tangent) type at every point (FS111-M-C11 (iii): a (split) point makes the whole local
+interface one unit arc). By FS111-M2-INTRAD step (1), on the side away from `z`, the unit parallel of `C₀` — the arc of `∂B(z, n − k + 1)` over the
+same directions from `z`, with an end at `P_{k−1}` — is an interface at its points off Σ; it has radius at least 3, so (tangent) type again. Shrinking
+about `P_{k−1}` to avoid Σ and repeating `k` times gives an arc `C_k` of `∂B(z, n)` over directions from `z` starting at the direction of `a`: an arc
+with an end at `a`, on `γ′`'s side of `L`, whose points near `a` other than `a` are interface points. But `a ∉ Σ`: FS111-M-PINCH's hypotheses hold at
+`a`, and FS111-M-C11 gives a neighbourhood `N′` of `a` in which the interface set is the single curve `J`, which on `γ′`'s side of `L` is `γ′`. The
+circle `∂B(z, n)` and `γ′` (a circle or a line) are distinct curves through `a` with a common tangent there, so near `a` they meet only at `a` (control
+FS121-D2-EXT-CORE). So the points of `C_k` near `a` are interface points of `N′` off `J`: a contradiction. ∎
+
+*What it says.* In the language of fronts (home 1), beyond a focal point the parallel front turns back in a cusp; the colouring cannot carry a rung
+along its own circle past the junction normal, because the unit parallels of that continuation would put a second interface curve through the
+junction itself, where the colouring has only one. The contradiction sits at level 0, at a point off Σ, so no cusp-freeness is needed (§ 1.2's sort).
+The same argument, with FS111-M2-INTRAD step (1) toward `z`, forbids the outward rungs of `γ` (radii `n + t`, `t ≥ 1`) from following their circles past
+`L` too: their parallels toward `z` reach `∂B(z, n)` near `a` after `t` steps, every intermediate radius being at least `n ≥ 3`.
+
+derivation: FS121-D2-EXT
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, let a be a point of an interface arc, not in Σ, at which the arc passes from a
+    circular piece γ of radius n ≥ 3 and centre z to a piece not on γ's circle, and let L be the normal line at a; then for every integer k with
+    1 ≤ k ≤ n − 2, and for every integer k ≤ −1, no arc of the circle ∂B(z, n − k) that lies on the far side of L from γ and has an end on L lies in
+    the closure of the interface set
+  uses only: FS111-M2-INTRAD step (1) on either side (the unit parallel of a tangent-type arc is an interface off Σ), iterated |k| times, every radius
+    met being at least 2; FS111-M-C11 and its clause (iii) (one C^{1,1} interface curve near a point off Σ; radius at least 2 means the tangent type);
+    REG-J′ (Σ locally finite); that two distinct circles, or a circle and a line, tangent at a point meet only there near it; no colour count; no
+    cusp-freeness
+  not claimed: anything about a continuation past L along another curve (a different circle or a segment); anything when a is a point of Σ; the unit
+    rung, n − k = 1, whose (split) type has no required outward parallel
+  argument: § 2.1 A rung cannot follow its own circle past a junction (FS121-D2-EXT)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held at any k — no held colouring has a junction inside an interface arc (R7's interfaces are single unit arcs, SQ9's and HEX9's
+    single segments); the statement is about the class LRA would inhabit (G21)
+  prior art: new — “(evolute | focal set | caustic) & (parallel curve | unit distance | colo*)” (14), “(piecewise circular | circular arcs | biarc*)
+    & (accumulat* | infinitely many) & (curvature | radii)” (1), none bearing
+  handoff: de Bruijn — queued behind FS111-M-PINCH, FS111-M-C11 and FS111-M2-INTRAD: the statement with its not-claimed line; its geometric core is
+    elementary
+
+control: FS121-D2-EXT-CORE
+  of: FS121-D2-EXT — its last step, exact: a circle of radius n tangent at a to a different circle (radius m, either side) or to a line meets it only
+    at a, for n in 2..12 and m in 1..12; the plant adds the excluded case, a neighbour on γ's own circle
+  run: python3 ../tools/fs121_d2_geom.py ext
+  expect: 0
+  fault: python3 ../tools/fs121_d2_geom.py ext --plant
+
+### 2.2 Window transport, and LRA makes thin arcs at every radius (FS121-D2-THIN)
+
+*Argument.* Let pieces `γ_i` (radius `n_i`, centre `z_i`, window `W_i`, length `L_i = n_i W_i`) accumulate at a point `x₀`. By FS111-M2-INTRAD (iii)
+arcs of each bounded radius are finitely many near `x₀`, so `n_i → ∞`; pass to a subsequence of distinct radii. A bounded set meets finitely many
+interface arcs (REG-J′, FS111-M-REDUCE-I's proof), so infinitely many `γ_i` lie on one interface arc `J` of finite length `Λ`, and `W_i ≤ Λ/n_i → 0`.
+Σ is locally finite, so all but finitely many `γ_i` have both ends at junctions off Σ, and none of those is on a neighbour's circle (the pieces are
+maximal). Fix `r ≥ 2` and take `i` with `n_i ≥ r + 1`. *Window transport:* by FS111-M2-INTRAD step (2), the rung of `γ_i` at level `k = n_i − r` is an arc
+`R_i` of `∂B(z_i, r)` over exactly `γ_i`'s directions from `z_i` (parallel curves share normals: control FS121-D2-TRANSPORT), and it is an interface
+at its points off Σ except along the finitely many normals of `γ_i` that meet Σ in the bounded pencil (each point of Σ other than `z_i` lies on at most
+one normal of `γ_i`), where the chain resumes on either side; so `R_i` lies in the closure of the interface set, and it lies in one radius-r arc `A_i`.
+Both ends of `R_i` lie on the normal lines `L` of `γ_i`'s two junctions, at the points `P_k`; `A_i` beyond an end of `R_i` would be an arc of
+`∂B(z_i, r)` on the far side of that `L` from `γ_i`, with an end on `L`, in the closure of the interface set — excluded by FS121-D2-EXT, since
+`1 ≤ k = n_i − r ≤ n_i − 2`. So `A_i = R_i`: a radius-r arc of window exactly `W_i`. The centres `z_i` are distinct (distinct radii, pieces within
+distance 1 of each other), so the `A_i` are distinct arcs, with windows tending to 0. ∎ With FS121-D2-EXT's outward clause the same holds at every radius
+`r > n_i` (the outward rungs, of window `W_i` too): each LRA piece carries a *thin pencil*, maximal arcs of window `W_i` at every radius `r ≥ 2`,
+bounded by the normal lines of its two junctions, along which every rung ends on its own circle.
+
+derivation: FS121-D2-THIN
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces whose radii tend to infinity accumulate at a point, then
+    for every integer r ≥ 2 the colouring has infinitely many radius-r arcs — maximal arcs of circles of radius r contained in the closure of the
+    interface set — whose angular windows tend to 0
+  uses only: FS111-M2-INTRAD step (2) (the chain toward a centre, interrupted only along normals through Σ) and (iii) (finitely many arcs of each
+    bounded radius near a point); REG-J′ (finitely many interface arcs in a bounded set; Σ locally finite); that parallel curves share normals;
+    FS121-D2-EXT at each piece's two junctions; no colour count; no cusp-freeness
+  not claimed: that the thin arcs lie in a bounded set (the radius-r arc of γ_i lies at distance about n_i − r from the accumulation point); the
+    converse (thin arcs without LRA); anything at r = 1
+  argument: § 2.2 Window transport, and LRA makes thin arcs at every radius (FS121-D2-THIN)
+  verdict: derived
+  grade: derived from: FS121-D2-EXT
+  minds: 1
+  model: none held at any k — no held colouring has LRA (the statement is a necessary condition on the class C121-NOLRA forbids; G21)
+  prior art: new — “(finite local complexity | local complexity) & (curvature | circular arc | colouring | coloring | unit distance)” (5), “(evolute
+    | focal set | caustic) & (parallel curve | unit distance | colo*)” (14), none bearing
+  handoff: none — a necessary condition on an uninhabited class; it crosses to de Bruijn with FS121-D2-SYM
+
+control: FS121-D2-TRANSPORT
+  of: FS121-D2-THIN — window transport, exact: the rung at level k of a piece of radius n (n in 2..9, 1 ≤ k ≤ n − 1) subtends at the centre the
+    angle the piece subtends, on 45 pairs of Pythagorean directions; the plant moves the rung toward a shifted centre
+  run: python3 ../tools/fs121_d2_geom.py transport
+  expect: 0
+  fault: python3 ../tools/fs121_d2_geom.py transport --plant
+
+### 2.3 ¬LRA where arcs of one radius come in finitely many shapes (FS121-D2-SYM, FS121-D2-PERFIN)
+
+*Argument (SYM).* If for some `r ≥ 2` every radius-r arc of `f` has window at least `w₀ > 0`, FS121-D2-THIN excludes LRA. Let a group `G` of isometries
+of the plane, each mapping the partition to itself up to a permutation of the colours, have a compact set `K` with `G·K = ℝ²` (for a doubly periodic
+colouring, a closed fundamental parallelogram). Interfaces, Σ and radius-r arcs are defined by the metric and by densities, so `G` permutes the radius-r
+arcs and preserves their windows. A radius-r arc minus finitely many points consists of points of the interface of radius of curvature `r`; by
+FS111-M2-INTRAD (ii) those form, near any point, finitely many circular arcs, and distinct maximal arcs contain distinct ones; covering `K` by finitely
+many such neighbourhoods, finitely many radius-r arcs meet `K`. Every radius-r arc is a `G`-image of one of them, so the windows take finitely many
+values, all positive: they are bounded below, and ¬LRA holds. ∎
+
+*Argument (PERFIN).* In a doubly periodic `f`, a closed fundamental parallelogram meets finitely many interface arcs (REG-J′). An interface arc with
+infinitely many pieces has, being compact, pieces accumulating at some point, and by FS111-M2-INTRAD (iii) their radii tend to infinity: LRA, which
+FS121-D2-SYM excludes. So each of the finitely many arcs has finitely many pieces, and the interfaces carry finitely many radii of curvature. ∎ This is
+C121-PER's hypothesis: its clause "in particular a doubly periodic one satisfying ¬LRA" holds without "satisfying ¬LRA".
+
+derivation: FS121-D2-SYM
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, if for some integer r ≥ 2 the angular windows of
+    its radius-r arcs are bounded below by a positive constant — in particular if it is invariant under a group of isometries of the plane, each
+    mapping the partition to itself up to a permutation of the colours, with a compact set whose images cover the plane, such as a doubly periodic
+    colouring — then ¬LRA holds
+  uses only: FS121-D2-THIN; FS111-M2-INTRAD (ii) (radius-r arcs finitely many near any point) over a compact set; that interfaces, Σ and windows are
+    invariant under isometries and colour permutations; no colour count; no cusp-freeness
+  not claimed: ¬LRA without such a bound (C121-NOLRA's open step, § 3); that a tight colouring can be taken symmetric; anything from a bound at r = 1
+  argument: § 2.3 ¬LRA where arcs of one radius come in finitely many shapes (FS121-D2-SYM, FS121-D2-PERFIN)
+  verdict: derived
+  grade: derived from: FS121-D2-THIN
+  minds: 1
+  model: k = 7: R7, doubly periodic, whose interfaces are unit arcs, so for every r ≥ 2 there is no radius-r arc and the bound holds vacuously; ¬LRA
+    holds; k = 9: SQ9 and HEX9 alike (segments only)
+  prior art: new — “(finite local complexity | local complexity) & (curvature | circular arc | colouring | coloring | unit distance)” (5), “(chromatic
+    number of the plane | unit distance graph | measurable chromatic) & (curvature | evolute | parallel curve | arc*)” (4), none bearing
+  handoff: de Bruijn — queued behind FS111-M2-INTRAD and the measurable chain (FS-113): the periodic case of ¬LRA, which the honest route's periodic
+    reading (FS121-O1-PER) consumes
+
+derivation: FS121-D2-PERFIN
+  statement: in a doubly periodic honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, the interfaces carry only finitely
+    many radii of curvature
+  uses only: FS121-D2-SYM; REG-J′ (finitely many interface arcs meet a compact set); FS111-M2-INTRAD (iii); compactness of an interface arc
+  not claimed: anything for colourings that are not periodic; that a tight colouring can be taken periodic
+  argument: § 2.3 ¬LRA where arcs of one radius come in finitely many shapes (FS121-D2-SYM, FS121-D2-PERFIN)
+  verdict: derived
+  grade: derived from: FS121-D2-SYM
+  minds: 1
+  model: k = 7: R7 (one radius, 1); k = 9: SQ9 and HEX9 (radius infinite only)
+  prior art: partly: C121-PER (data/fs121/claims.md § 2) states the conclusion "in particular" for "a doubly periodic one satisfying ¬LRA"; the
+    periodic case without ¬LRA not found — “(finite local complexity | local complexity) & (curvature | circular arc | colouring | coloring | unit
+    distance)” (5)
+  handoff: none — it removes a hypothesis from C121-PER's periodic clause; it crosses with FS121-D2-SYM
+
+*Would have searched here:* a finder over thin pencils (a family of curved pencils with windows tending to 0, with their band subdivisions) — did not;
+the stage derived what LRA forces (FS121-D2-THIN) and the class where it is excluded (FS121-D2-SYM).
+
+## Stage 2 — SAVED
