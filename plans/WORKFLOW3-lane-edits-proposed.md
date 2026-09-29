@@ -114,3 +114,7 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | edit | instance or addition | W-row |
 |---|---|---|
 | U3 | the brief gate's path check read a backticked word as a path (FS116-P1's brief) | W2 |
+| E13 | the coordinator's brief dropped a qualifier from the context around a quoted statement (Poros's "can stand") | W4 |
+| E10 | two openings in flight: stub numbers fixed in advance in their briefs | W8 |
+| E14 | a defect in `tools/claude_md_fact_audit.py` found by a derivation job, with no lane named to fix it | W9 |
+| E8 | a four-text drafting job ran to ≈ 357k against 200k; a card job to ≈ 413k, its own count 46 % of the harness's | W7 |
