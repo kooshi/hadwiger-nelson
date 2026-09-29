@@ -9,8 +9,10 @@ Grades are `CLAUDE.md` § Notation's; entries use my identity's grammar and tran
 ## Theorems this phase proved
 
 - **FS116-O1-YESLIM** (card `the-yes-needs-no-map`) — valid fragments on discs of every radius give a measurable six-colouring of the plane proper at
-  almost every unit pair, so `χ_m⁰(ℝ²) ≤ 6` and `χ(ℝ²) ≤ 6` with no MR — [hand], one mind (this job), § Stage 3 §IQ.4. *(Filled at stage 3.)*
-- **FS116-O1-SATPIN** (card `what-does-saturation-pin`) — see § Stage 4 §4.2 for its statement and grade. *(Filled at stage 4.)*
+  almost every unit pair (at every `k`: `χ_m⁰(ℝ²) ≤ k`), so at six `χ(ℝ²) ≤ 6` with no MR — [hand], one mind (this job), § 3.4–3.5.
+- **FS116-O1-SATPIN** (card `what-does-saturation-pin`) — at a cusp-free four-colour vertex of a saturated valid fragment every edge is a split unit arc
+  of kind both about a point of `ω(p)` or a tangent-type segment or arc (radius ≥ 1) whose partners sit at `p ± ν(p)` — [derived] from FS111-M-PINCH and
+  FS111-M-C11 (three minds each), one mind (this job), § 4.1–4.1a.
 
 ## Would-have-searched-here log (standing rule 5)
 
