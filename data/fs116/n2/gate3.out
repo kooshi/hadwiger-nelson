@@ -1,0 +1,44 @@
+entry lint
+  claim FS116-N2-QT: minds 1
+  claim FS116-N2-QT: prior art known
+  warn  FS116-N2-proof.md:260 (FS116-N2-SIXRING): derived from 'FS116-N1-TWIST-D', which is not an entry in these files — its grade cannot be read
+  claim FS116-N2-SIXRING: minds 1
+  claim FS116-N2-SIXRING: prior art partly
+  claim FS116-N2-FIVERING: minds 1
+  claim FS116-N2-FIVERING: prior art partly
+  warn  FS116-N2-proof.md:292 (FS116-N2-STAR): derived from 'RING-GERM', which is not an entry in these files — its grade cannot be read
+  claim FS116-N2-STAR: minds 1
+  claim FS116-N2-STAR: prior art partly
+  claim FS116-N2-RECIP: governed by FS116-N2-STAR (derived from, minds 1)
+  warn  FS116-N2-proof.md:310 (FS116-N2-RECIP): derived from 'FS116-N1-TOUCH', which is not an entry in these files — its grade cannot be read
+  claim FS116-N2-RECIP: minds 1
+  warn  FS116-N2-proof.md:310 (FS116-N2-RECIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-RECIP: prior art owed
+  claim FS116-N2-ANTI: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-N2-ANTI: minds 1
+  warn  FS116-N2-proof.md:328 (FS116-N2-ANTI): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-ANTI: prior art owed
+  claim FS116-N2-HEX6: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim FS116-N2-HEX6: minds 1
+  claim FS116-N2-HEX6: prior art partly
+  claim FS116-N2-HEX3: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim FS116-N2-HEX3: minds 1
+  warn  FS116-N2-proof.md:403 (FS116-N2-HEX3): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-HEX3: prior art owed
+  claim RING-TRANSFER-C: governed by FS116-N2-STAR (derived from, minds 1)
+  claim RING-TRANSFER-C: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim RING-TRANSFER-C: governed by FS116-N2-ANTI (derived from, minds 1)
+  claim RING-TRANSFER-C: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim RING-TRANSFER-C: governed by FS116-N2-SIXRING (derived from, minds 1)
+  claim RING-TRANSFER-C: governed by FS116-N2-FIVERING (hand, minds 1)
+  claim RING-TRANSFER-C: minds 1
+  warn  FS116-N2-proof.md:448 (RING-TRANSFER-C): prior art owed — novelty unmeasured; a standing finding
+  claim RING-TRANSFER-C: prior art owed
+  entries: 10  derived: 9  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs116-n2-quotes: printed 'FOUND 1 of 1'; with the fault planted ('' → '--alter') it printed 'FOUND 0 of 1' — it fires
+  ok    fs116-n2-star: printed 'STAR ALL OK'; with the fault planted ('' → '--plant') it printed 'STAR VIOLATION' — it fires
+  controls: 2  fired on their faults: 2
+GATE: PASS (0 failures, 7 warnings)

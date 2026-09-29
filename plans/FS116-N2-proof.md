@@ -347,3 +347,128 @@ control: fs116-n2-star
   fault: python3 ../tools/fs116_n2_star.py --plant | tail -n 1
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: which types recur, and the verdict
+
+### 3.1 The `Γ`-free type does not recur round its hexagon (FS116-N2-HEX6, FS116-N2-HEX3)
+
+*Setting:* `p` a vertex of at least four colours, non-Siamese and simple, on a closed disc of radius above 2, **its ring carrying no arc of `Γ`**. Let `S`
+be the set of `k` for which the ring of the hub `y_k` carries no arc of `Γ` either ("`y_k` recurs"). In the Kneser language of § 1.2: the missing pairs
+`F_k ⊂ P` live in the link `KG(4, 2)`, three disjoint edges `{B, P ∖ B}`.
+
+**The argument of FS116-N2-HEX6.** (a) `p` has four colours (FS116-N1-QFREE4), hence four tiles and four edges. (b) *The hexagon.* `Γ ∩ ω(p)` is finite;
+off it the ring's colour is one of `X, X̄` and changes under `σ` (N-E1), so it is not constant and a change point `y_0` exists; if `y` is a change point, the
+germ just clockwise of `y + 60°` is at distance 1 from interior points just clockwise of `y` and lacks their colour, so carries the other, and likewise
+counter-clockwise (RING-GERM's Step 1), so `y + 60°` is a change point. So `y_k = r(ψ_0 + 60°k)` are change points, all germs off (Q) arcs: hubs.
+(c) *A recurring hub complements its neighbours.* For `k ∈ S`: `y_k` has four colours (QFREE4 at `y_k`); RECIP applies (no arc of `Γ` on `ω(y_k)`), so `p` is a
+change point of `y_k`'s ring; by (b) on `ω(y_k)` the points `p ∓ 60°` of `ω(y_k)`, which are `y_{k+1}` and `y_{k−1}` (FS116-N2-RECIP), are change points of
+`y_k`'s ring and carry both colours of `F_k`. So `F_k` is a 2-set and `F_{k±1} ⊂ P ∖ F_k`. (d) *No edge, a shared colour* (ANTI's general form): `D_m` is
+`ψ_{m−1} + 90°` and `ψ_{m+2} − 90°`, so if no edge of `p` leaves at `D_m`, the tile holding `D_m` has its colour in `F_{m−1} ∩ F_{m+2}`. (e) If `S`
+held four consecutive `k, …, k + 3`: by (c) `F_k, F_{k+2} = B`, `F_{k+1}, F_{k+3} = B′ = P ∖ B`, `F_{k+4} ⊂ B`, `F_{k−1} ⊂ B′`; then every antipodal pair
+`F_j, F_{j+3}` lies in opposite classes and is disjoint, and by (d) an edge leaves `p` at each of the six `D_m`, against four edges. ∎
+
+**The argument of FS116-N2-HEX3.** Add: every `y_k` has four colours, so every `F_j` is a 2-set and `k ∈ S` gives `F_{k±1} = P ∖ F_k`. An antipodal pair with
+`F_{j+3} = P ∖ F_j` forces edges at `D_{j+1}` and `D_{j+4}` (by (d)); at most two such pairs. If `S ⊇ {k, k + 2}`: `F_{k−1} = F_{k+1} = F_{k+3} = B′`,
+`F_k = F_{k+2} = B`, so the pairs `(k − 1, k + 2)` and `(k, k + 3)` are complementary and **`p`'s four edges leave at `D_k, D_{k+1}, D_{k+3}, D_{k+4}`**
+(cones `60°, 120°, 60°, 120°`); the third pair is then not complementary, which excludes `k + 3`, `k + 4`, `k + 5` from `S` (each would make `F_{k+4} = B`);
+and `D_{k+2}`, `D_{k+5}` lie inside the two `120°` tiles, of different colours both in `F_{k+1} ∩ F_{k+4}`, so `F_{k+4} = B′`. If `S` has no two members
+at distance 2 it is `∅`, `{k}`, `{k, k+1}` or `{k, k+3}`, the last with `F_{k+3} ≠ P ∖ F_k` (else all six alternate). ∎ So **with four colours at every hub,
+`S` is one of `∅, {k}, {k, k+1}, {k, k+3}, {k, k+2}, {k, k+1, k+2}`**, and the last two fix `p`'s star.
+
+*What it says.* A `Γ`-free four-colour vertex cannot be surrounded by vertices of its own type: at least three of its six hubs carry an arc of `Γ` on their
+rings when all hubs have four colours, and in every case some hub of every four consecutive does. The plan's reading ("four-colour vertices lie on the
+unit triangular lattice until a defect intervenes") holds with the defect **inside the first shell**, within radius 2 of `p`. *Where six is spent:* (c)'s
+2-sets and complements in a 4-set (with seven colours `F_k` has three elements and `KG(4, 2)`'s matching becomes `KG(7, 3)`-like room), QFREE4, and
+RING-GERM's Step 1. *Controls:* the strip and the disk carry (Q) arcs on every four-colour ring (FS116-N1 § 2.4): silent; R7's lattice points have no change
+point: silent; the slack hexagonal seven-colouring's vertices have degree 3: outside the class. No held fragment has a `Γ`-free four-colour vertex.
+
+derivation: FS116-N2-HEX6
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries no arc
+    of Γ, the ring's change points include six hubs y_k = r(ψ + 60°k), k in Z/6, and of any four consecutive y_k at least one has a ring carrying an arc
+    of Γ; in particular the six rings are not all free of arcs of Γ
+  uses only: FS116-N1-QFREE4 at p and at each recurring hub; RING-GERM's Step 1 and (iii) (two minds); FS116-N2-RECIP; N-E1 at y_(m−1) and y_(m+2) at a
+    D-direction inside a tile; that p has four edges (non-Siamese, simple, four colours); six colours at (c)
+  not claimed: that any Γ-free four-colour vertex exists in a valid six-coloured fragment; anything for rings free of (Q) arcs but carrying other arcs of Γ
+    (N6-RING60's bends would be needed); anything at k ≥ 7; the placed vertices' rings beyond whether they carry an arc of Γ
+  argument: § 3.1 The `Γ`-free type does not recur round its hexagon (FS116-N2-HEX6, FS116-N2-HEX3)
+  verdict: derived
+  grade: derived from: FS116-N2-RECIP
+  minds: 1
+  model: none held at six colours (no Γ-free four-colour vertex is held: FS116-N1-QFREE4's model line); the hypotheses at p are FS114-N7-HUB's, whose
+    six change points are this hexagon
+  prior art: partly: FS114-N6-RING60 and N7-HUB (the hexagon and its four-colour points); the complement relation in KG(4, 2) and the edge count not found
+    — owed
+  handoff: de Bruijn — with RECIP, STAR and TOUCH; a relay-result for D2 (the first shell of a Γ-free vertex holds a hub whose ring carries an arc of Γ)
+
+derivation: FS116-N2-HEX3
+  statement: in HEX6's setting, if every y_k has four colours and no more, the set S of k whose y_k has a ring free of arcs of Γ is empty, one hub, or of
+    the form {k, k+1}, {k, k+3}, {k, k+2} or {k, k+1, k+2}; with {k, k+3} the missing pairs of y_k and y_(k+3) are not complementary; with {k, k+2} or
+    {k, k+1, k+2} the four edges of p leave at D_k, D_(k+1), D_(k+3), D_(k+4) (D_m = ψ + 30° + 60°m), y_k and y_(k+2) miss one pair and y_(k+1), y_(k+3),
+    y_(k+4), y_(k+5) the complementary pair
+  uses only: FS116-N2-HEX6's steps (c) and (d); that two disjoint 2-subsets of a four-colour set are complementary
+  not claimed: that any S of the list occurs; anything without four colours at every hub (then only HEX6)
+  argument: § 3.1 The `Γ`-free type does not recur round its hexagon (FS116-N2-HEX6, FS116-N2-HEX3)
+  verdict: derived
+  grade: derived from: FS116-N2-HEX6
+  minds: 1
+  model: none held, as HEX6
+  prior art: owed
+  handoff: de Bruijn — with HEX6
+
+### 3.2 Types with (Q) arcs: the recurrence is GAP
+
+The held rings that reach farthest all carry (Q) arcs, and **none of their change points is a hub** (§ 2.4); yet the strip's midline type recurs at both
+of its change points: `P_{±2}` are midline vertices of the strip, four-coloured, whose rings are `P₀`'s up to a colour bijection (the strip is a line of
+congruent vertices at spacing `1/2` with colour sets of period 3; the survey of `P₀` and `P₁`, `data/fs116/n1/ring-survey.out`). What places them is RING-GERM
+(ii) alone — outer tiles, from the germ pair `u⁻, v⁺` off (Q) arcs — and their four colours are the strip's, not the rule's. The disk's corner places no
+four-colour vertex at its change points (FS116-N1-QDISK), and the six-colour flower places none at all (SIXRING). So for types with (Q) arcs a transfer rule
+needs a placing rule at change points with one germ pair on (Q) arcs (a *semi-hub*), which no held lemma supplies, and — FS116-Y2-DCREAD — any exclusion
+of the disk-corner configuration must read about `240°` round `p` from `y`, beyond any rule at `y`.
+
+derivation: RING-TRANSFER-Q
+  statement: for each ring type with a (Q) arc at a vertex of four colours, the ring types of the vertices of at least four colours it places at distance 1
+    are determined by a finite rule, and the types that recur at every vertex they place are named
+  argument: § 3.2 Types with (Q) arcs: the recurrence is GAP
+  verdict: gap: a placing rule at a change point with one pair of its germs at ±60° on (Q) arcs — RING-GERM gives there a tip alone or an outer tile alone,
+    and the strip's midline type recurs through such points (P_(±2)) with its four colours supplied by the strip, not by any lemma
+
+### 3.3 The verdict on RING-TRANSFER
+
+**RING-TRANSFER is MISSTATED**, for two reasons, each a finding about its words and neither shown by a pair of fragments:
+1. **Its input is too small.** "For each ring type": the rule reads `p`'s ring *and its star* (STAR, RECIP, ANTI read which tiles of `p` hold the flanking
+   directions), and the ring type of § 0 records no direction of `p`'s edges — on a (Q)-free ring it names no colour of `p` at all, while each placed vertex
+   misses two of them. The strip shows the star deciding: its edges lie along its change points' flanking directions and its antipodal change points miss
+   different pairs, where a star with those directions inside tiles would force one pair (ANTI).
+2. **Its output is too large.** "The ring types of the vertices it places": each placed vertex's ring has a `240°` arc outside `B̄(p, 1)` whose arcs of `Γ`
+   and (Q) arcs nothing at `p` reads. What is determined is the placed vertex's colours, its missing pair, its ring at `p` and at `p ± 60°`, and its ring's
+   colouring off `D` (120°-periodic). *Not claimed:* that no argument reads the far arc — no two fragments are compared.
+
+**The corrected statement, derived at one mind:**
+
+derivation: RING-TRANSFER-C
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours: a ring of five or six
+    colours has no change point and places no vertex through RING-GERM, the six-colour ring being six 60° (Q) arcs, one per tile of p, each tile in the
+    Reuleaux triangle on its arc; a ring of four colours places its hubs, and at each hub y = r(ψ) the ring of p and the tiles of p holding the directions
+    ψ + 90° and ψ − 90° determine the colours of y as the absent pair of p, the tip colours and the outer colours, and the pair missing at y, which contains
+    the colour of every tile of p holding ψ ± 90° inside its cone; when y has four colours and its ring meets no (Q) arc at the points r(ψ ± 60°) and no arc
+    of Γ at p, p is a change point of y's ring between the two colours missing at y; two antipodal hubs whose flanking directions lie inside tiles of p miss
+    the same pair and exchange tip and outer colour; and a ring free of arcs of Γ has, among any four consecutive of its six hubs, one whose ring carries an
+    arc of Γ
+  uses only: FS116-N2-SIXRING, FS116-N2-FIVERING, FS116-N2-STAR, FS116-N2-RECIP, FS116-N2-ANTI, FS116-N2-HEX6, and through them RING-GERM (two minds),
+    RING-TWIST-C (two minds), FS116-N1-TWIST-D, -QFREE4 and -TOUCH (one mind each)
+  not claimed: that the ring type of p alone determines any of this (the star is an input); anything about the arcs of Γ on the placed vertex's ring outside
+    B̄(p, 1); the recurrence of types with (Q) arcs (RING-TRANSFER-Q, GAP); that the rule is the same at k = 7 (every step spends six: two absent colours)
+  argument: § 3.3 The verdict on RING-TRANSFER
+  verdict: derived
+  grade: derived from: FS116-N2-STAR, FS116-N2-RECIP, FS116-N2-ANTI, FS116-N2-HEX6, FS116-N2-SIXRING, FS116-N2-FIVERING
+  minds: 1
+  model: the strip's P₀ for STAR's partial form (control fs116-n2-star); FS116-Y2-SIXFRAG for the six-colour clause; no held hub for the rest
+  prior art: owed — a search in the Kneser and local-rule vocabularies (§ 1.2) is the report's debt
+  handoff: de Bruijn — deferred with D6's map type, after a blind second mind on STAR, RECIP, ANTI and HEX6
+
+**For D2.** Following a `Γ`-free four-colour vertex outward, the first shell already holds a hub whose ring carries an arc of `Γ` (HEX6), and when every hub
+has four colours at least three do, with `p`'s star pinned to `60°, 120°, 60°, 120°` whenever two alternate hubs recur (HEX3). The next object is therefore
+a four-colour vertex whose ring carries an arc of `Γ` placed at distance 1 from a `Γ`-free one — a (Q) ring or a non-(Q) arc — and its semi-hubs, where
+RING-TRANSFER-Q stalls.
+
+## Stage 3 — SAVED
