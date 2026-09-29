@@ -23,7 +23,11 @@ FS111-M2-INTRAD step (1)); its *preimage* is `I`.*
   mind — § 2.4.
 - FS121-D1-RUNG2 — an (R2) window has 2 sin(ℓ/2) ≤ 1, and 4 sin(ℓ/2) ≤ 1 when cusp-free (ℓ < 29°) — [derived], one mind — § 2.4.
 - FS121-D1-R2CORNER — smooth-straight (R2) ends: q's tile has a bend or colour change within tan(ℓ/2) ≤ 1/√15 of the ends — [derived], one mind — § 2.5.
-- C121-R2-FOUR — GAP at the band structure of the corner (no three-colour (R2) end built or excluded) — § 2.6.
+- C121-R2-FOUR — GAP at the band structure of the corner (no three-colour (R2) end built or excluded) — § 2.6. Its open step sharpened at § 3.4.
+- FS121-D1-PENCILWIN — every curved tangent pencil (cusp-free, single inner arc) has window 4 sin(ℓ/2) ≤ 1 — [derived], one mind — § 3.1.
+- FS121-D1-DOUBLE — two interleaved pencils about z and z + he give a radially saturated three-colour structure beyond C₁, by formula — [hand], one
+  mind — § 3.2.
+- C121-CURVED — GAP at the transverse subdivision (no inhabitant, no obstruction) — § 3.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -31,6 +35,8 @@ FS111-M2-INTRAD step (1)); its *preimage* is `I`.*
   recognition below derives what such a centre must carry first (the erosion corner), and any construction is by formula.
 - Stage 2: would have run a finder for the band structure of the corner (non-concentric interfaces in the disc sector and band 1 over the window, with
   z's colours fixed at q, r, s). Did not; derived FS121-D1-FIRSTORDER, -EROSION and -R2CORNER, and named the band structure as the GAP.
+- Stage 3: would have run a finder for a transverse subdivision of the offset-pencil sub-bands. Did not; built the radial structure by formula
+  (FS121-D1-DOUBLE) and named the transverse subdivision as the GAP.
 
 ## Fence log (standing rule 8)
 
@@ -336,3 +342,89 @@ derivation: C121-R2-FOUR
     interfaces cannot be concentric (FS111-M2-INTRAD); no three-colour (R2) end is built, none is excluded
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C121-CURVED — GAP at the transverse subdivision; the radial structure built by formula
+
+### 3.1 The window of every curved pencil (FS121-D1-PENCILWIN)
+
+*Argument.* Let a tangent-type arc of radius `n ≥ 2` about `z` descend (FS111-M2-INTRAD) to a chain ending at a single unit arc `J₁` over its window.
+The rungs of radius `≥ 2` share one window `W`: each rung's inward parallel over its window is the next rung (INTRAD step (1)) and each rung's outward
+parallel is the previous one's (C121-OUT), so the windows are nested both ways. Rung 2 is tangent and `J₁` is its inward parallel, so FS121-D1-VT (i),
+with `I` = rung 2, puts rung 2's outer colour beyond `J₁`, inside it: rung 2's outer colour equals `J₁`'s inner colour `p` at every normal over `W°`,
+whether `J₁` is (Q) or (R2). An arc ending on rung 2's outer side at an interior point would bound two sectors of `p` there, which FS111-W-NOREP excludes; so
+the `p`-layer beyond rung 2 is path-connected, and FS111-M-HULL2 bounds its diameter, which tends to `4 sin(ℓ/2)`. ∎
+
+derivation: FS121-D1-PENCILWIN
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, a tangent-type interface arc of finite radius n ≥ 2 about z whose
+    chain of unit parallels ends at a single unit arc lies in a pencil whose rungs of radius at least 2 share one window, of angular width ℓ with
+    4 sin(ℓ/2) ≤ 1
+  uses only: FS111-M2-INTRAD step (1) and C121-OUT (the windows nest both ways); FS121-D1-VT (i); FS111-W-NOREP; FS111-M-HULL2; no colour count
+  not claimed: any bound when the chain's inner end is broken by points of Σ into several unit arcs; that such a pencil exists (C121-CURVED)
+  argument: § 3.1 The window of every curved pencil (FS121-D1-PENCILWIN)
+  verdict: derived
+  grade: derived from: FS121-D1-VT
+  minds: 1
+  model: none held at any k — no held colouring has a curved tangent interface (C121-OUT; G21)
+  prior art: partly: the plan's gate (plans/FS121-map-step.md § 2.2) covers the object class; this lemma's own search not run
+  handoff: none — a necessary condition on an uninhabited object; it crosses with C121-OUT if a curved inhabitant or an obstruction lands
+
+### 3.2 The radial structure, by formula: two interleaved pencils (FS121-D1-DOUBLE)
+
+*The object.* Fix `z`, a unit vector `e` and `h ∈ (0, 1)`; put `z′ = z + he`, `C_j = ∂B(z, j)`, `C′_j = ∂B(z′, j)`, and let `K` be the cone of directions
+within `60°` of `e` from `z`. On a ray from `z` in direction `φ`, `c = cos(φ − e)`, `C′_j` sits at radius `ρ′_j = hc + (j² − h²(1 − c²))^{1/2}`, and
+`j < ρ′_j < j + 1` for `j ≥ 1` inside `K`: `ρ′_j ≤ hc + j < j + 1`; and, with `s² = 1 − c²`, `j − (j² − h²s²)^{1/2} = h²s²/(j + (j² − h²s²)^{1/2}) ≤ h²s²/(1 + c) = h²(1 − c) < hc` because `(1 − h²s²)^{1/2} ≥ c` and `c ≥ 1/2`. So in `K`, beyond `C₁`, the circles
+interleave: `C₁ < C′₁ < C₂ < C′₂ < …`. Colour the sub-band between `C_j` and `C′_j` with `A_j` and the one between `C′_j` and `C_{j+1}` with `B_j`, cycling
+three colours `q, r, p` as `A₁ = q`, `B₁ = r`, `A₂ = p`, `B₂ = q`, `A₃ = r`, … (so `A_{j+1} = B_{j−1}`, `B_{j+1} = A_j`, with `B₀ = p`, the colour just
+inside `C₁`).
+*What holds.* (i) Two distinct sub-bands of one colour are separated by a pair of concentric circles at distance exactly 1 — `A_j` lies inside `C′_j` and
+`B_{j+1}` outside `C′_{j+1}`; `B_j` inside `C_{j+1}` and `A_{j+2}` outside `C_{j+2}` — so no pair of their points is at distance 1 off those circles.
+(ii) At each `x ∈ C_j`, `x ± (x − z)/|x − z|` lie on `C_{j±1}` and carry, beyond them, the colours M-PINCH's tangent type asks: the outer colour `A_j` just
+inside `C_{j−1}` (`A_j = B_{j−2}`), the inner colour `B_{j−1}` just outside `C_{j+1}` (`A_{j+1} = B_{j−1}`); at `x ∈ C′_j` the same with `z′` (`B_{j+1} = A_j`).
+Every rung is a tangent-type arc of integer radius about its own centre, and each band's intermediate interface is a rung of the other pencil — the
+non-concentric band interfaces FS111-M2-INTRAD demands (§ 2.6, attempt 3), supplied. ∎
+*What does not hold.* Each sub-band is a strip of width `< 1` and length about `jℓ`, so it holds monochromatic unit pairs within itself once its length
+exceeds 1: it must be cut into tiles of diameter `≤ 1`, and by FS121-D1-VT every cut's end on a rung's far side is transported, along that rung's own
+family of normals, to a vertex two sub-bands inward. The innermost part — the disc about `z` inside `C₁` and the point `z′`, which must carry `q` at `z`,
+`r` at `z′` and keep `p` off `z` — is not given by the formula.
+
+derivation: FS121-D1-DOUBLE
+  statement: for a point z, a unit vector e and h in (0, 1), within the cone of directions at most 60° from e and beyond ∂B(z, 1), the circles ∂B(z, j) and
+    ∂B(z + he, j), j ≥ 1, interleave, and the three-colouring of the sub-bands between them cycling as A₁ = q, B₁ = r, A₂ = p, … has no two points of one
+    colour in distinct sub-bands at distance 1 off the circles, and meets FS111-M-PINCH's tangent partners at every point of every circle along the normals
+    of the circle's own family
+  uses only: the parallel-circle distances (points inside ∂B(c, j) and outside ∂B(c, j + 1) are at distance ≥ 1, with equality only on the circles); the
+    colour rules A_{j+1} = B_{j−1}, B_{j+1} = A_j; elementary estimates for the interleaving
+  not claimed: a colouring of the plane; tiles of diameter ≤ 1 (each sub-band has monochromatic unit pairs within itself once longer than 1); saturation at
+    any transverse cut; anything inside ∂B(z, 1) or outside the cone; that a curved pencil must be completed this way
+  argument: § 3.2 The radial structure, by formula: two interleaved pencils (FS121-D1-DOUBLE)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: h = 1/2, e = (0, 1), z = 0: on the axis the circles sit at 1, 3/2, 2, 5/2, …, SQ9's one-dimensional pattern (spacings 1/2) bent round z
+  prior art: partly: SQ9's pattern along one axis (plans/FS111-W-wild.md § 1.5) is its flat case; the bent, two-centred form is not in the plan's gate
+    (plans/FS121-map-step.md § 2.2); this object's own search not run
+  handoff: none — a partial construction toward C121-CURVED, not a statement a proof consumes
+
+### 3.3 C121-CURVED — the verdict
+
+**GAP.** No inhabitant is built and no obstruction derived. What an inhabitant must carry, at every `k`, cusp-free: aperiodicity (C121-PER); a pencil of
+window `ℓ ≤ 2 arcsin(1/4)` (FS121-D1-PENCILWIN) running to infinity (C121-OUT); non-concentric band interfaces (FS111-M2-INTRAD), which a second, offset
+pencil supplies radially (FS121-D1-DOUBLE); and a transverse subdivision of every sub-band into tiles of diameter `≤ 1` whose vertices are transported rung
+to rung along each family's normals (FS121-D1-VT), ending at an inner structure about `z` and `z′`. **Would have searched here:** a finder for that
+transverse subdivision; did not.
+
+derivation: C121-CURVED
+  statement: for some k ≥ 7 there is an honest saturated colouring in D-NF satisfying REG-J′, with no colour of density 0 at any point, that has a tangent-type interface arc of finite radius.
+  argument: § 3.3 C121-CURVED — the verdict
+  verdict: gap: the transverse subdivision — cutting the sub-bands of a curved pencil (with FS121-D1-DOUBLE's offset pencil as its band interfaces) into
+    tiles of diameter at most 1, every cut's ends transported rung to rung along each family's normals (FS121-D1-VT), and closing the inner disc about the
+    two centres; neither a colouring of the plane by formula nor an obstruction at any k ≥ 7
+
+### 3.4 Correction to stage 2 (2026-09-29, found at stage 3)
+
+§ 2.6's attempt 3 and the C121-R2-FOUR entry's verdict said the corner's band interfaces "cannot be concentric" and are "unconstructed". FS121-D1-DOUBLE
+constructs them radially, by a second pencil about `z′ = z + he`, whose innermost rung `C′₁` is a unit arc about `z′`. So the open step of C121-R2-FOUR is
+sharper than stage 2 stated: not the band interfaces, but the transverse subdivision and the inner disc about `z` and `z′` with `z`'s colours held at three.
+The entry's verdict is amended below it by this paragraph; its stage-2 text stands as written.
+
+## Stage 3 — SAVED
