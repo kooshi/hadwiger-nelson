@@ -1,0 +1,22 @@
+entry lint
+  claim FS121-D2-INCURVED: minds 1
+  claim FS121-D2-INCURVED: prior art new, 2 counted queries
+  claim FS121-D2-EXT: minds 1
+  claim FS121-D2-EXT: prior art new, 2 counted queries
+  claim FS121-D2-THIN: governed by FS121-D2-EXT (hand, minds 1)
+  claim FS121-D2-THIN: minds 1
+  claim FS121-D2-THIN: prior art new, 2 counted queries
+  claim FS121-D2-SYM: governed by FS121-D2-THIN (derived from, minds 1)
+  claim FS121-D2-SYM: minds 1
+  claim FS121-D2-SYM: prior art new, 2 counted queries
+  claim FS121-D2-PERFIN: governed by FS121-D2-SYM (derived from, minds 1)
+  claim FS121-D2-PERFIN: minds 1
+  claim FS121-D2-PERFIN: prior art partly, 1 counted queries
+  entries: 6  derived: 5  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS121-D2-EXT-CORE: printed '0'; with the fault planted ('' → '--plant') it printed '1' — it fires
+  ok    FS121-D2-TRANSPORT: printed '0'; with the fault planted ('' → '--plant') it printed '1620' — it fires
+  controls: 2  fired on their faults: 2
+GATE: PASS (0 failures, 0 warnings)

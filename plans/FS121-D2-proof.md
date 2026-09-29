@@ -23,6 +23,7 @@ maximal arc of one circle of radius r contained in the closure of the interface 
   symmetric) colouring, at every k — [derived] from FS121-D2-THIN, one mind — § 2.3.
 - FS121-D2-PERFIN — a doubly periodic honest saturated REG-J′ colouring carries finitely many radii (C121-PER's periodic clause without "satisfying
   ¬LRA") — [derived] from FS121-D2-SYM, one mind — § 2.3.
+- C121-NOLRA — GAP at thin pencils in colourings without a cocompact symmetry (the periodic case decided by FS121-D2-SYM) — § 3.2.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -30,6 +31,7 @@ maximal arc of one circle of radius r contained in the closure of the interface 
   fronts with prescribed ladders). Did not; the recognition below asks what every LRA configuration must carry first.
 - Stage 2: would have run a finder over thin pencils (curved pencils with windows tending to 0, with band subdivisions). Did not; derived what LRA
   forces (FS121-D2-THIN) and where it is excluded (FS121-D2-SYM).
+- Stage 3: would have run a finder for an aperiodic saturated colouring with thin pencils. Did not; the open step is named for a derivation.
 
 ## Fence log (standing rule 8)
 
@@ -318,3 +320,64 @@ derivation: FS121-D2-PERFIN
 the stage derived what LRA forces (FS121-D2-THIN) and the class where it is excluded (FS121-D2-SYM).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C121-NOLRA — the verdict, and the three attempts on its open step
+
+### 3.1 Where the claim stands
+
+- **Decided on the symmetric class:** at every `k`, an honest saturated REG-J′ colouring invariant under a cocompact group of isometries (each
+  preserving or permuting the colours) — every doubly periodic one — has no LRA (FS121-D2-SYM), and carries finitely many radii (FS121-D2-PERFIN).
+- **Reduced elsewhere:** LRA forces thin pencils — for every `r ≥ 2`, infinitely many maximal radius-r interface arcs whose windows tend to 0, each the
+  rung of an LRA piece bounded by the normal lines of its two junctions (FS121-D2-THIN, FS121-D2-EXT) — and a colouring with LRA inhabits C121-CURVED's
+  class with cusps allowed (FS121-D2-INCURVED). So ¬LRA follows from a positive lower bound, for one `r ≥ 2`, on the windows of radius-r arcs, and also from
+  the universal negation of C121-CURVED's class.
+- **Not used:** C121-LRA-LINE (the bi-infinite line), FS121-O1-OUT beyond FS111-M2-INTRAD step (1), C121-ENDS, FS111-W-NOREP. The results hold with
+  cusps.
+
+### 3.2 The three attempts on the open step
+
+*The step:* a lower bound on the windows of the radius-r arcs of an aperiodic colouring — for this claim, "no sequence of thin pencils".
+
+1. **Tile diameters** (FS111-M-HULL2: a path-connected piece of a class has diameter at most 1). They bound tiles from above only. A thin pencil's arc
+   of radius `R` has length `R·W_i`; it is cut by points of Σ into interface arcs of diameter at most 1, which REG-J′ allows. No lower bound on `W_i`.
+2. **The junction normals** (home 1's column). At a junction between pieces of radii `m < n` on the same side, the larger piece's rungs at levels
+   `m ≤ k < n` reach the normal line at `P_k` with no partner beyond (the smaller piece has focused at `z_m = P_m`). By FS121-D2-EXT none follows its own
+   circle; by the same argument none continues straight or curving away from `J` with radius at least 2 (its unit parallels toward `J` would reach the
+   junction point off Σ as a second curve). Read as a sketch, not entered: each such rung ends at a point of Σ on the normal or curves back toward `J` with the centre of its
+   chain on the normal. Either way the forced points of Σ lie at distance at least `m` from `J`, finitely many in each bounded set: consistent with
+   REG-J′, no contradiction.
+3. **A limit.** Translate the centres of the thin pencils to the origin and pass to a weak-* limit colouring (G82: a limit of colourings is a colouring).
+   The thin pencils collapse to a ray. But saturation, honesty and REG-J′ are not known to pass to such limits, so the collapsed pencil contradicts
+   nothing held.
+
+The plan's two handles were killed at stage 1 (§ 1.2, homes 2 and 3): N4 holds identically along an LRA line (curvature 0 is the shadow map's fixed
+point), and a count of chain ends per bounded set is finite in every LRA configuration. The count, re-aimed modulo congruence, is what decided the
+symmetric class.
+
+derivation: C121-NOLRA
+  statement: in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, ¬LRA holds.
+  argument: § 3.2 The three attempts on the open step
+  verdict: gap: excluding thin pencils in colourings without a cocompact symmetry — LRA at a point gives, for every r ≥ 2, infinitely many maximal
+    radius-r interface arcs with windows tending to 0 (FS121-D2-THIN), and a positive lower bound on those windows for one r ≥ 2 excludes LRA
+    (FS121-D2-SYM, which decides every doubly periodic colouring at every k); no argument here bounds the windows of an aperiodic colouring's radius-r
+    arcs from below; colours: every k; inhabitants: k = 7, R7; k = 9, SQ9 and HEX9 (none has LRA, each doubly periodic); no colouring with LRA held
+
+### 3.3 The prediction, scored; the invention signal; what leaves the lane
+
+- **P2** (`plans/FS121-map-step.md` § 4.4): "¬LRA derived under REG-J′ within D2 (C121-NOLRA TRUE) — 0.3". **Not met**: GAP (Brier `0.09`). What it
+  decides: "If not, the LRA line goes to FS-115 as its question restated (bi-infinite, not a ray)". **What goes to FS-115 is sharper than the line:** thin
+  pencils in aperiodic colourings (FS121-D2-THIN), with the periodic case closed (FS121-D2-SYM). The line (C121-LRA-LINE) is not needed for either.
+- **The invention signal (G87):** read for in every source of this job. None found: G85's "What escapes is radii → ∞" and FS111-M2-INTRAD's "consistent
+  with REG-J′'s local finiteness" are consistent with FS121-D2-SYM (local finiteness per bounded set allows LRA; local finiteness modulo a cocompact
+  symmetry does not). Nothing held says both LRA and its negation.
+- **For C121-PER (the claim list, O1's entry FS121-O1-PER):** its clause "in particular a doubly periodic one satisfying ¬LRA" holds without "satisfying
+  ¬LRA" (FS121-D2-PERFIN). A strengthening, not a defect.
+- **For D1's line (C121-CURVED):** a colouring with LRA inhabits C121-CURVED's class with cusps allowed (FS121-D2-INCURVED), so an obstruction to curved
+  tangent interfaces at every `k` decides C121-NOLRA too; and FS121-D2-EXT holds without cusp-freeness, so it may serve C121-CURVED's transverse question.
+- **Handoff to de Bruijn:** FS121-D2-EXT and FS121-D2-SYM, queued behind FS111-M-PINCH, FS111-M-C11, FS111-M2-INTRAD and the measurable chain (FS-113).
+- **Bibliography row proposed:** `[FukunagaTakahashi2014]` T. Fukunaga, M. Takahashi, *Evolutes of fronts in the Euclidean plane*, J. Singul. 10
+  (2014) (Zbl 1308.53005). Listing only (zbMATH query d01). Role: the vocabulary of home 1 (parallels, evolutes and cusps of fronts). Read: not read.
+
+*Would have searched here:* a finder for an aperiodic saturated colouring with thin pencils — did not; the step is named for a derivation.
+
+## Stage 3 — SAVED
