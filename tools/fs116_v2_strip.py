@@ -17,6 +17,7 @@ direction at a vertex) are chosen in floating point with margins of at least 0.1
 Modes:
   --listing        compare the rebuild with every non-edge vertex sector of the FS-112 listing (the rebuild's own control)
   --summary        RING-GERM at every change point of the ring of P_0, under reading L (the author's) and reading G
+  --D              RING-TWIST-C's set D on the ring of P_0, and its longest D-free arc (a qualifying window needs more than 120 deg)
   --cw             FAULT: read "y + 60 deg" clockwise (the orientation the author ruled out)
   --plant          FAULT for --listing: recolour U_1 from G to P
 Exit 0 on a completed run whatever it finds; exit 2 when the run could not complete (a sample on a boundary, an unstable germ).
@@ -248,9 +249,58 @@ def summary(verbose):
         print(line)
 
 
+def dset():
+    """RING-TWIST-C's D on the ring of P_0: the ring points in the closure of a tile of one of P_0's colours; its D-free arcs."""
+    p0_tiles()
+    bps = sorted(ring_segments())
+    n = len(bps)
+    arcs_in_d, free = [], []
+    pts_in_d = []
+    for i, b in enumerate(bps):
+        y = (math.cos(math.radians(b)), math.sin(math.radians(b)))
+        cols = {at(y[0], y[1], RAD, 0.5 * k + 0.25)[1] for k in range(720)}
+        if cols & P0_COLS:
+            pts_in_d.append(b)
+        nb = bps[(i + 1) % n]
+        length = (nb - b) % 360
+        g = germ(b, +1)
+        if {g[0][1], g[1][1]} & P0_COLS:
+            arcs_in_d.append((b, length))
+        else:
+            free.append((b, length))
+    # D-free open arcs: free germ intervals joined through breakpoints outside D; a breakpoint in D or a germ in D ends a run
+    free_set = set(free)
+    starts = [i for i in range(n) if bps[i] in pts_in_d]
+    if not starts:
+        raise RuntimeError("no breakpoint of the ring lies in D: the run logic assumes one")
+    start = starts[0]
+    runs, cur = [], 0.0
+    for k in range(n):
+        i = (start + k) % n
+        if bps[i] in pts_in_d and cur > 0:
+            runs.append(cur)
+            cur = 0.0
+        seg = (bps[i], (bps[(i + 1) % n] - bps[i]) % 360)
+        if seg in free_set:
+            cur += seg[1]
+        elif cur > 0:
+            runs.append(cur)
+            cur = 0.0
+    if cur > 0:
+        runs.append(cur)
+    longest = max(runs) if runs else 0
+    isolated = [b for b in pts_in_d if not any(abs(((b - a) % 360)) < 1e-6 or abs(((a + l - b) % 360)) < 1e-6
+                                                 for a, l in arcs_in_d)]
+    print(f"D: arcs {len(arcs_in_d)} (total {sum(l for _, l in arcs_in_d):.2f} deg), isolated points {len(isolated)} "
+          f"at {sorted(round(b % 360, 1) % 360 for b in isolated)}; D-free arcs {len(runs)}, longest {longest:.2f} deg; "
+          f"qualifying window: {'possible' if longest > 120 + 1e-9 else 'none'}")
+
+
 def main():
     try:
-        if "--listing" in sys.argv:
+        if "--D" in sys.argv:
+            dset()
+        elif "--listing" in sys.argv:
             listing()
         elif "--summary" in sys.argv:
             summary(verbose="--verbose" in sys.argv)

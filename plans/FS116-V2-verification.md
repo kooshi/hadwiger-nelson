@@ -6,7 +6,7 @@ exact checks: `tools/fs116_v2_*.py`. Blind, the same model as the minds whose wo
 
 ## Theorems this phase proved
 
-*Stage 1: none. Stage 2: § 2.4.*
+*Stage 1: none. Stage 2: § 2.4. Stage 3: § 3.5.*
 
 ## Fence log
 
@@ -233,6 +233,141 @@ tiles meet there: a vertex. ∎(iii)
 - None. The strip check reads one fixed object given by formula (no enumeration of maps or colourings).
 
 
+## Stage 3 — SAVED
+
+Frame, germs and lemmas V2-L0 … V2-L5 as in § 2.1. "Arc of `Γ` on `ω(p)`" is read as an edge of the map lying on `ω(p)` (Q2); "change point"
+by reading L (Q1).
+
+### 3.1 RING-TWIST-C, derived (reading L, Q2's edge reading)
+
+**(D) `D` is closed and lies in the arcs of `Γ` on `ω(p)` and finitely many points.** Finitely many arcs of `Γ` meet the annulus
+`A = {1/2 ≤ |x| ≤ 3/2} ⊂ Ω`, so `int A ∖ Γ` has finitely many components, each inside one tile, and a tile whose closure meets `ω(p)` meets
+`int A`. So `D = ω(p) ∩ ⋃ cl T` over finitely many tiles `T` of `p`'s colours: closed. A point of `ω(p)` off `Γ` lies in one tile `T`, the only
+tile whose closure holds it, and `T`'s colour is absent at `p` (V2-L1): so `D ⊆ Γ ∩ ω(p)`, which is the arcs of `Γ` on `ω(p)` together with the
+finite set `E` of § 2.1. No six-colour count and no Siamese hypothesis are used.
+
+**The window.** Let `W` be half-open, say `W = [θ₀, θ₀ + 60°)` (the case `(θ₀, θ₀ + 60°]` is its mirror image), with `W ∪ σ(W)` disjoint from
+`D`. As `D` is closed and `θ₀ ∉ D`, some `δ > 0` makes the extended window `Ŵ = (θ₀ − δ, θ₀ + 120°)` disjoint from `D` — **the one place
+`D`'s closedness is spent** (it gives the colour just before the closed end of `W`). Write `Ŵ₁ = (θ₀ − δ, θ₀ + 60°)`, so `Ŵ₁` and
+`Ŵ₁ + 60°` lie in `Ŵ`, `W ⊆ Ŵ₁` and `σ(W) ⊆ Ŵ₁ + 60°`. For `φ ∉ E` let `S(φ)` be the colours of the side tiles at `e(φ)` (one tile if off
+`Γ`); these are exactly the tiles whose closure holds `e(φ)`, and for `φ ∈ Ŵ ∖ E` they have absent colours.
+
+**(a) Four colours and no more.** Take `φ ∈ W` with `φ, φ + 60° ∉ E`. `S(φ)` and `S(φ + 60°)` are non-empty sets of absent colours and are
+disjoint (V2-L3). With six colours at `p` there is no absent colour; with five, one, and the two sets would meet. So `p` has four, and two
+absent colours `X, Y`.
+
+**(b) One colour, alternating.** For `φ ∈ Ŵ₁` with `φ, φ + 60° ∉ E`, `S(φ)` and `S(φ + 60°)` are disjoint non-empty subsets of `{X, Y}`, so
+each is a singleton and they differ: write `c(φ)` for the colour, `c(φ + 60°) ≠ c(φ)`. So off the finite set `E ∪ (E ± 60°)` every point of
+`W ∪ σ(W)` (indeed of `Ŵ`) lies in the closures of tiles of the single colour `c(φ) ∈ {X, Y}`, and it differs at `θ` and `θ + 60°`.
+
+**(c) Arcs of `Γ` in the window are seams.** An edge of `Γ` on `ω(p)` meeting `W ∪ σ(W)` (or `Ŵ`) in an arc has, at the points of that arc
+off the finite set, `S(φ) = {c(φ)}`: its inner and outer tiles have one colour; an edge has one tile on each side all along it, so they have
+one colour all along. *Under a reading of "arc of `Γ`" as any circular arc contained in `Γ`, possibly through vertices, the clause is not
+derived for the part of such an arc outside `Ŵ`* (its side colours there are unconstrained); no held fragment has a qualifying window, so I
+have no model either way — a wording point, § 3.2.
+
+**(d) Odd, and bichromatic.** On each component of `Ŵ ∖ E` the side tiles are constant, so `c` is locally constant off a finite set and has
+one-sided limits `c(φ⁻)`, `c(φ⁺)` at every `φ ∈ Ŵ`; a colour change is a point where they differ, and there are finitely many. `c` takes two
+values, so the number of colour changes in `[θ₀, θ₀ + 60°)` — the flips between `c(θ₀⁻)` and `c((θ₀ + 60°)⁻)` — is odd iff these differ, and
+they do: points just below `θ₀` lie in `Ŵ₁`, so `c(φ + 60°) ≠ c(φ)` there. At a colour change `z ∈ W` the two limits are realised by tiles
+whose closures hold `z`, so both absent colours are there; `z ∉ D`, so no colour of `p` is.
+
+**(e) Change points and colour changes.** A change point `y ∈ W` (reading L: ring off `Γ` on both sides near `y`, different colours) has those
+off-`Γ` colours equal to `c(y⁻)` and `c(y⁺)`: a colour change. Conversely `c` is locally constant off `Γ` (a point off `Γ` has a tile
+neighbourhood), so a colour change `z` lies on `Γ`; if the ring were off `Γ` on both sides near `z`, `z` would be a change point; so on at
+least one side the germ at `z` lies on an edge of `Γ` on `ω(p)` with `z` in its closure, and that edge meets `Ŵ` in an arc, so by (c) it has one
+colour on both sides.
+
+**(f) The parity of change points.** If no edge of `Γ` on `ω(p)` with one colour on both sides meets `W`, every colour change in `W` is a change
+point by (e) (its edge would meet `W` at `z`), and every change point is a colour change: the change points in `W` are the colour changes,
+an odd number by (d). In a non-Siamese simple fragment no edge has one colour on both sides: its two sides are two distinct tiles of one
+colour with a common boundary arc — Siamese (V2-L0) — or one tile on both sides of an arc, whose closure then meets itself along it, which
+simplicity forbids (I read "does not meet itself" as excluding that).
+
+**Where each hypothesis is spent.** Six colours: (a) and (d) (two absent colours, so each flip flips). `D ∩ (W ∪ σ(W)) = ∅`: (a), (b) (every
+side colour absent), and — with `D` closed — the colour just outside the closed end of `W` in (d). Siamese pairs and degree: nowhere; the
+class is as wide as stated. Reading L: (e)'s first half and (f). Q2: (c) and (e)'s second half.
+
+### 3.2 Attack on RING-TWIST-C
+
+- **The first clause on the one held model** (`tools/fs116_v2_strip.py --D`; control `strip-D`). On the strip's ring of `P₀`, `D` is the four
+  (Q) arcs (total 62.09°) and the two points `P_{±2}` (whose tiles `U_{±2}`, `D_{±2}` carry `B, O` or `P, M`, colours of `P₀`): closed, in the
+  arcs of `Γ` on `ω(P₀)` and two points, as stated. Its six `D`-free arcs are at most 60° long (exactly 60° four times), so the strip has no
+  qualifying window — the not-claimed line's "the strip's … D-free arcs are at most 60°", confirmed; the disk's "87.83°" is not checked here
+  (the disk is not rebuilt in this job).
+- **The window clauses have no model.** No held fragment has a qualifying window, and whether any fragment does is open (not claimed). Every
+  window clause is a conditional over a class that may be empty; its verdict says it carries a conditional, nothing more.
+- **Where the attack succeeds.**
+  (1) *The parity of change points with a seam in `W`* — not claimed, and it does fail: § 3.3's construction turns any qualifying window into
+  one whose change points are even.
+  (2) *Reading G of "change point"* — (e)'s first half fails: on a seam in `W` across which `c` changes, every point of the seam has
+  different nearest off-`Γ` colours on its two sides, so it is a G-change point and not a colour change (and the count is infinite). (f)
+  survives under G (with no seam in `W`, every point of `Γ ∩ ω(p) ∩ W` is isolated or an end of an edge that meets `W` only at an excluded end,
+  and nearest off-`Γ` colours are the adjacent ones). A G-counterexample needs a qualifying-window fragment, from which § 3.3's slit would then build one, so
+  under G the clause is equivalent to "no qualifying window with room for a seam"; the author's reading is L.
+  (3) *Reading an arc of `Γ` as a circular arc through vertices* — (c) is then not derived beyond `Ŵ` (§ 3.1 (c)).
+  (4) *Drop "and `σ(W)`"* (only `W` disjoint from `D`): (a) and (b) lose V2-L3's partner germ inside the window, and nothing I hold forces four
+  colours or the alternation; no model either way.
+  (5) *`k ≥ 7`* — (a), (b), (d) fail (three absent colours), as the not-claimed line says (R7).
+- **Smallest cases.** A window whose closed end is a colour change: handled by `D`'s closedness (the extension `Ŵ`). A window containing a
+  tangency of an edge with `ω(p)` (as at the strip's `P_{±2}`): an isolated point of `Γ ∩ ω(p)`; a change point iff the colours differ.
+
+### 3.3 FS116-N1-TWIST-LIT, derived (under reading L, and under G)
+
+The class is RING-TWIST's (§ 5: radius above 2, Siamese pairs allowed, any degree; simplicity not required).
+
+**If.** If no fragment of the class has a qualifying window, the parity clause has no instance: it holds vacuously.
+
+**Only if**, by the contrapositive. Let `F` be a fragment of the class with a qualifying window `W`. If the number of change points in `W` is
+not odd, `F` itself violates the clause. Otherwise let `z ∈ W` be a change point (reading L: ring off `Γ` on both sides near `z`, colours
+`c(z⁻) ≠ c(z⁺)`), and `T` the tile holding the ring just clockwise of `z`. Choose `η > 0` so small that the ring arc `J = e([θ_z − η, θ_z])`
+meets `Γ` only at `z`, lies in `T` but for `z`, lies in the extended window `Ŵ`, and — if `z` is not `W`'s closed end — has `θ_z − η` in `W`.
+Let `F′` be `F` with `Γ′ = Γ ∪ J` (a **slit**: an arc of the unit circle about `p`, admitted by the definition of `Γ` in § 0, which asks only
+for a locally finite union of arcs).
+
+- `T ∖ J` is connected (an arc attached to `∂T` at one end does not separate `T`), so the tiles of `F′` are those of `F` with `T` replaced by
+  `T ∖ J`, same colours, same closures. The interior points of each colour are a subset of `F`'s: **`F′` is valid**, on the same disc, with the
+  same `p`, the same colours at `p`, the same Siamese pairs (none new), the same degree at `p`.
+- `D′ = D` (closures and colours unchanged), so `W` is still a qualifying window.
+- Under reading L, `z` is now an end of an arc of `Γ′` on `ω(p)`, so not a change point; `e(θ_z − η)` is the other end, not a change point;
+  nothing else near the ring changes. **`W` holds one change point fewer: an even number.** So `F′` violates the clause.
+
+Under reading G the same slit makes every point of `J` a change point (nearest off-`Γ′` colours `c(z⁻)` and `c(z⁺)` on its two sides): infinitely
+many, not an odd number. So the equivalence holds under both readings. ∎
+
+**What the construction keeps, beyond the statement.** `F′` is non-Siamese whenever `F` is: the "only if" holds inside the non-Siamese part of the
+class too — **it is simplicity, not non-Siamese, that RING-TWIST-C's parity clause needs** (the slit tile meets itself along `J`). With Siamese
+pairs one can instead cut off a sliver of `T` along `J` as a second tile of `T`'s colour (a seam between two tiles); every version I tried
+breaks simplicity somewhere (the sliver's cut meets the neighbour across the edge through `z` in two pieces, or pinches `T` at `z`), so I claim
+nothing for the simple class with Siamese pairs.
+
+### 3.4 Attack on FS116-N1-TWIST-LIT
+
+- **Where it could fail.** Only if the class forbade the modification. The class does not require simplicity (RING-TWIST-C's own "in particular
+  in every non-Siamese simple fragment" presumes non-simple members), and § 0's `Γ` admits a slit. If the class were the non-Siamese simple
+  class, the "only if" would be false whenever that class had a qualifying window (RING-TWIST-C (f) makes the clause true there) — the
+  not-claimed line says as much.
+- **Is it a thin truth?** It is an equivalence between a clause and the emptiness of its own hypothesis — it carries no geometry, and says that
+  RING-TWIST's parity clause, as posed on the wide class, is exactly as strong as "no qualifying window exists", which is open. Its content is
+  the correction it motivates (RING-TWIST-C's "when no such arc meets W"); § 3.3 sharpens it to the non-Siamese class.
+- **Degenerate case.** A qualifying window whose only change point is its closed end `θ₀`: the slit runs clockwise from `θ₀` out of `W` into
+  `Ŵ ∖ W`, still `D`-free; `θ₀` stops being a change point and no new one appears in `W`. Covered.
+
+### 3.5 Theorems this stage proved
+
+- **RING-TWIST-C**, as stated, under reading L and Q2's edge reading — [hand; one derivation here, blind to the round-1 argument]. § 3.1.
+- **FS116-N1-TWIST-LIT**, as stated, under reading L and under reading G — [hand; one derivation here]. § 3.3.
+- **V2-TL-NS**: the "only if" of FS116-N1-TWIST-LIT holds inside the non-Siamese fragments of RING-TWIST's class (the slit keeps non-Siamese) —
+  [hand, one mind]. § 3.3.
+- **V2-STRIP-D**: on the strip's ring of `P₀`, `D` is four (Q) arcs and two points and every `D`-free arc is at most 60° — [computed over: the
+  strip's ring, `tools/fs116_v2_strip.py --D`].
+
+### 3.6 Would have searched here
+
+- A search for a fragment with a qualifying window (a model for RING-TWIST-C's window clauses): out under the ban and not attempted; the
+  clauses are verdicted as the conditionals they are.
+
+
 verification: RING-GERM
   statement: in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the ring, X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise and just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if neither v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of p; (ii) if neither u⁻ nor v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction away from p lies in the cone of a tile of a colour of p that is not a tile of p; (iii) if none of the four lies on a (Q) arc, y is a vertex of at least four colours
   given: the statement and its not-claimed line; the claim list with N7-HUB's one-line sketch (§ 8) and FS114-derivation.md § 3's entries,
@@ -268,27 +403,40 @@ control: strip-ring-germ
 
 verification: RING-TWIST-C
   statement: at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p (Siamese pairs allowed, any degree), the set D of points of ω(p) in the closure of a tile of one of p's colours is closed and lies in the union of the arcs of Γ on ω(p) and finitely many points; and for every half-open 60° window W of ω(p) with W ∪ σ(W) disjoint from D: p has four colours and no more; off a finite set, every point of W ∪ σ(W) lies in the closures of tiles of a single colour, one of the two colours absent at p, and this colour differs at θ and at θ + 60° for θ in W; every arc of Γ on ω(p) meeting W ∪ σ(W) in an arc has one colour on both sides; W holds an odd number of colour changes — points of W at which that colour differs on the two sides — each lying in the closures of tiles of the two absent colours and of no other colour; every change point in W is a colour change, and a colour change in W that is not a change point lies on an arc of Γ on ω(p) with one colour on both sides; so W holds an odd number of change points when no such arc meets W, in particular in every non-Siamese simple fragment
-  given: the statement and its not-claimed line; the claim list with RING-TWIST (§ 5) and FS114-derivation.md § 3's entries, N3-ODD among
-    them (§ 1.3)
-  committed: 2026-09-29 — stage 1 only: the prediction; no verdict yet
+  given: the statement and its not-claimed line; the claim list with RING-TWIST (§ 5) and FS114-derivation.md § 3's entries, N3-ODD's
+    statement among them; one definition sentence of the round-1 record, quoted by the coordinator (§ 1.3); not the round-1 argument
+  committed: 2026-09-29 — the stage-3 commit (subject "FS116-V2: stage 3")
   predicted: derived — 0.80 — likeliest break: an arc of Γ on ω(p) running past W ∪ σ(W) into D; reading G of change point
-  verdict: stalls at: stage 1 — registered, not yet derived; stage 3 derives
-  method: not yet derived
-  attack: § 1.4 Predictions (registered before any written derivation)
-  divergences: none — the comparison opens only after the verdicts are committed
-  counterexamples: none — nothing searched yet
-  minds: 1 — nothing derived yet
+  verdict: derived
+  method: germ calculus on the ring — the 60° rule on germs (V2-L3) over the window extended past its closed end by D's closedness, then a
+    two-colour flip count; the round-1 route is unread until stage 4
+  attack: § 3.2 Attack on RING-TWIST-C
+  divergences: none — the comparison with the round-1 derivation opens at stage 4, after all three verdicts are committed
+  counterexamples: none — the strip's ring of P₀ read exactly for the first clause (D closed, four (Q) arcs and two points; no qualifying
+    window, every D-free arc at most 60°); no held fragment has a qualifying window, so the window clauses were attacked by readings and by
+    removing hypotheses (§ 3.2), not by objects; under reading G (not the author's) the clause "every change point in W is a colour change"
+    fails on any seam in a qualifying window, and under a through-vertex reading of "arc of Γ" the seam clause is not derived beyond the window
+  minds: 2 — blind to: the round-1 argument (fenced until this commit); method: the same model, a route of its own, compared at stage 4
   grade: hand
+
+control: strip-D
+  of: RING-TWIST-C — its first clause on the strip's ring of P₀, and the not-claimed line's "the strip's … D-free arcs are at most 60°"
+  run: python3 ../tools/fs116_v2_strip.py --D
+  expect: D: arcs 4 (total 62.09 deg), isolated points 2 at [0.0, 180.0]; D-free arcs 6, longest 60.00 deg; qualifying window: none
+  fault: python3 ../tools/fs116_v2_strip.py --D --plant
 
 verification: FS116-N1-TWIST-LIT
   statement: RING-TWIST's parity clause as posed — every half-open 60° window W of ω(p) with W ∪ σ(W) disjoint from D holds an odd number of change points — holds on every fragment of RING-TWIST's class if and only if no fragment of that class has a half-open 60° window W with W ∪ σ(W) disjoint from D
-  given: the statement and its not-claimed line; the claim list (§ 1.3)
-  committed: 2026-09-29 — stage 1 only: the prediction; no verdict yet
+  given: the statement and its not-claimed line; the claim list, with RING-TWIST (§ 5) and RING-TWIST-C's not-claimed line ("the parity of
+    change points when a seam meets W … then it can fail"); one definition sentence of the round-1 record (§ 1.3); not the round-1 argument
+  committed: 2026-09-29 — the stage-3 commit (subject "FS116-V2: stage 3")
   predicted: derived — 0.90 — likeliest break: whether a seam laid on the ring keeps the fragment in the class
-  verdict: stalls at: stage 1 — registered, not yet derived; stage 3 derives
-  method: not yet derived
-  attack: § 1.4 Predictions (registered before any written derivation)
-  divergences: none — the comparison opens only after the verdicts are committed
-  counterexamples: none — nothing searched yet
-  minds: 1 — nothing derived yet
+  verdict: derived
+  method: the "if" is vacuous; the "only if" lays a slit — an arc of ω(p) inside one tile, ending at a change point — which removes one change
+    point and keeps the fragment valid, non-Siamese if it was, and its window qualifying; the round-1 route is unread until stage 4
+  attack: § 3.4 Attack on FS116-N1-TWIST-LIT
+  divergences: none — the comparison with the round-1 derivation opens at stage 4, after all three verdicts are committed
+  counterexamples: none — the class was read for what could stop the slit (simplicity is not required, § 0's Γ admits it); under reading G the
+    slit breaks the clause too (infinitely many change points)
+  minds: 2 — blind to: the round-1 argument (fenced until this commit); method: the same model, a route of its own, compared at stage 4
   grade: hand
