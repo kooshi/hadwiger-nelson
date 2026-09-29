@@ -1,0 +1,7 @@
+strip P0=(0,0) y=  0.00: A(y)=MP T=- O=BO VIOLATION
+strip P0=(0,0) y=180.00: A(y)=BO T=- O=MP VIOLATION
+strip P1=(1/2,0) y=  0.00: A(y)=GR T=- O=MP VIOLATION
+strip P1=(1/2,0) y=180.00: A(y)=MP T=- O=GR VIOLATION
+disk corner A0 y=209.01: A(y)=blueorangeredyellow T=- O=- OK
+disk corner A0 y=330.99: A(y)=blueorangeredyellow T=- O=- OK
+STAR VIOLATION

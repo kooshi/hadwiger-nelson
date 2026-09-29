@@ -20,10 +20,25 @@ are `ψ ± 90°` at `p`; the **D-directions** of a hexagon of change points `y_k
 ## Theorems this phase proved
 
 - **FS116-N2-QT** — the brief's quotation is verbatim in `data/fs116/claims.md` — computed over the one blockquote (`tools/fs116_n2_quotes.py`), § 1.1.
+- **FS116-N2-SIXRING** — at a six-colour vertex the ring is six consecutive closed 60° (Q) arcs, one per tile of `p`, each tile inside the Reuleaux
+  triangle on its arc, and every outer colour along the arc of `t_i` is that of `t_{i+2}`, `t_{i+3}` or `t_{i+4}`; no change point — [derived], one mind, § 2.1.
+- **FS116-N2-FIVERING** — at a five-colour vertex the ring has no change point and its (Q) arcs meet every pair `θ, θ + 60°` — [hand], one mind, § 2.1.
+- **FS116-N2-STAR** — the colours at a change point of a four-colour ring split into `p`'s absent pair, tips and outer colours; the missing colours of
+  the placed vertex are read off `p`'s tiles in the flanking directions — [derived], one mind, § 2.2.
+- **FS116-N2-RECIP** — a four-colour hub `y` whose ring meets no (Q) arc at `p ± 60°` and no arc of `Γ` at `p` has `p` as a change point of its own
+  ring — [derived], one mind, § 2.2.
+- **FS116-N2-ANTI** — antipodal hubs with flanking directions inside tiles share their missing pair and swap tip and outer colour — [derived], one mind, § 2.2.
+- **FS116-N2-HEX6** — the `Γ`-free ring type recurs at no four consecutive hubs of its six (in particular not at all six) — [derived], one mind, § 3.1.
+- **FS116-N2-HEX3** — with every hub of four colours, the `Γ`-free type recurs at most at three consecutive hubs, and at two alternate ones only with
+  `p`'s four edges at four named D-directions — [derived], one mind, § 3.1.
+- **RING-TRANSFER** — MISSTATED; the corrected statement RING-TRANSFER-C is [derived], one mind, § 3.3; recurrence of types with (Q) arcs GAP (§ 3.2).
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
+- Stages 2–3: would have searched assignments of missing pairs to the six hubs (and of edges to the D-directions) for the ones that survive; instead the
+  complement relations were derived by hand in the Kneser link `KG(4, 2)` (§ 3.1). Would have searched held and new fragments for a hub; instead read the
+  held rings' change points (`tools/fs116_n2_star.py`), where none is a hub.
 
 ## Fence log (standing rule 8)
 
@@ -36,6 +51,8 @@ are `ψ ± 90°` at `p`; the **D-directions** of a hexagon of change points `y_k
 - Stage 1: none seen as two truths in collision. One scope classed: the plan's § 3.3 ("its **transfer rule** is what a ring of one type forces on the
   four-colour vertices it places") against the recognition below (what is placed is read off `p`'s star, which the ring type does not record) — a
   statement's input too small, not two held truths.
+- Stages 2–3: none seen. Classed: the strip's antipodal change points `P_{±2}` miss different pairs (`{M, P}`, `{B, O}`) while FS116-N2-ANTI makes antipodal
+  hubs share theirs — the strip's flanking directions are edge directions, outside ANTI's hypothesis; a scope, not two truths.
 
 ## Stage 1 — SAVED: the readback, and recognition on the claim
 
@@ -145,3 +162,188 @@ expected **MISSTATED**; stage 2 derives the rule on the corrected input, stage 3
 (`plans/FS116-local-exclusion.md` § 2.3, 12 queries); a search in its own words is owed (INVENTORY).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the ring types, and the rule at a hub
+
+*Class throughout: a non-Siamese valid fragment on a closed disc of radius above 2 about `p` (the rings of the points of `ω(p)` must lie inside it);
+"simple" added where a count of edges is used. Six colours in all unless `k` is named.*
+
+### 2.1 The ring types, by the number of colours at `p` — only a four-colour ring places anything
+
+**The argument of FS116-N2-SIXRING.** Six colours at `p`: none is absent, so no ring point is off `Γ` (FS116-N1-TWIST-D: a ring point off `Γ` carries a
+colour absent at `p`), and the ring is a finite union of closed arcs of `Γ`. The inner side of every ring arc has points in `B(p, 1)`, so its tile is within
+`< 1` of `p`'s tile of the same colour (every colour is at `p`), hence is that tile (non-Siamese): **every inner tile is a tile of `p`**, and `p` has six
+tiles, one per colour. A tile has diameter at most 1, so its contacts with the ring lie in a closed arc of at most `60°` (a chord over more than `60°`
+exceeds 1). Six such sets cover the circle, so each containing arc is exactly `60°`, they overlap only at ends, and each tile's contact set, being closed and
+of full measure in its arc, is the whole closed arc `Z_i = [α_0 + 60°i, α_0 + 60°(i + 1)]`. So the tile `t_i` holds `p`, `z_i`, `z_{i+1}` in its closure
+and lies in `B̄(p, 1) ∩ B̄(z_i, 1) ∩ B̄(z_{i+1}, 1)`, the Reuleaux triangle `Reul(p, z_i, z_{i+1})`, with cone at `p` inside `[α_i − 30°, α_i + 90°]`. Every
+ring arc has both side colours at `p`, which has at least four: every ring arc is a (Q) arc. **Outer colours.** An outer tile `O` of colour `c` along a
+subarc `J` of `Z_i` is not `t_c` (it lies outside `B̄(p, 1)`), so it is far from `t_c`, and `t_c` misses `B(z, 1)` for every `z ∈ J`; `t_c` reaches the two
+ends of `Z_c`, so every point of `J` is at angle at least `60°` from every point of `Z_c`: with `J` a non-degenerate subarc of `Z_i` this excludes `Z_{i−1}`,
+`Z_i`, `Z_{i+1}` and leaves `c ∈ {c(t_{i+2}), c(t_{i+3}), c(t_{i+4})}`. **No change point:** a change point has the ring off `Γ` on both sides. ∎ *Uses:*
+TWIST-D, non-Siamese, diameter; not simplicity, not the colour count beyond "six at `p`".
+
+**The argument of FS116-N2-FIVERING.** Five colours at `p`, absent `X`. Off a finite set, a ring point not on a (Q) arc is off `Γ` in an `X`-tile
+(TWIST-D) or on an arc of `Γ` that is not (Q), one of whose side colours is absent (`p` has at least four colours, so "(Q)" fails only by a side colour), i.e.
+`X`. If `r(θ)` and `r(θ + 60°)` were both such points, `r(θ + 60°)` would carry `X` while N-E1 (off `Γ`) or FS116-N1's L1 (on an arc: a ring arc of `Γ`
+excludes its side colours `60°` away) excludes `X` there. So `Q ∪ σ⁻¹Q` is the whole ring up to a finite set, `Q` the union of the (Q) arcs, and `|Q| ≥ 180°`.
+Off `Γ` the ring is `X` only: no change point. ∎ (This is FS116-N1-QFREE4's step made local; QFREE4 is its case `Q = ∅`.)
+
+So **a ring of five or six colours places no vertex through RING-GERM**: the transfer rule below is a rule for four-colour rings, and the six- and
+five-colour types are left with what they force on their own rings. The six-colour type's shape is general, not the family's: every six-colour vertex of the
+class is a Reuleaux flower, which is FS116-Y2-SIXFRAG's straight flower relaxed to tiles inside the Reuleaux triangles; SIXFRAG's lenses `Q_j`, `Q_{j+1}`
+and gap tile `G_j` are exactly the three admissible outer colours `j + 2`, `j + 3`, `j + 4` along `Z_j` (its § 2.3). **Whether the six-colour type is
+excluded at some radius is not decided here**; SIXRING is the input an exclusion starts from (the coordinator's question; INVENTORY).
+
+### 2.2 The rule at a hub of a four-colour ring
+
+*Setting:* `p` of four colours `P`, absent `A(p) = {X, X̄}`; `y = r(ψ)` a change point of `p`'s ring (the ring off `Γ` on both sides, reading L); `T_y` the
+colours of the tips at `y`, `O_y` those of the outer tiles at `y`; `u = r(ψ + 60°)`, `v = r(ψ − 60°)`.
+
+**The argument of FS116-N2-STAR.** The ring tiles at `y` carry `X` and `X̄`, so `A(p) ⊂ C(y)`, and with six colours every other colour at `y` is in `P`. A
+tile at `y` of a colour of `P` is a tile of `p` (a tip) or not (an outer tile); one tile per colour at `y` (non-Siamese), so `T_y ∩ O_y = ∅` and
+`C(y) = A(p) ⊔ T_y ⊔ O_y`, `A(y) = P ∖ (T_y ∪ O_y)`. A tip lies in `B̄(y, 1)`, so its cone at `p` lies in `[ψ − 90°, ψ + 90°]`; the tile of `p` of an outer
+colour `c` is distinct from the outer `c`-tile at `y`, hence far from it, hence misses `B(y, 1)`: its cone lies in `[ψ + 90°, ψ + 270°]`. A tile of `p`
+whose cone contains `ψ + 90°` or `ψ − 90°` in its interior holds the branch of `ω(y)` leaving `p` in that direction, whose points are at distance 1 from `y`:
+its colour is in `A(y)` (N-E1 at `y`; FS114-N7-TAN (i)). By RING-GERM (two minds), `T_y ≠ ∅` when `v⁻, u⁺` lie on no (Q) arc and `O_y ≠ ∅` when `u⁻, v⁺`
+do; at a hub both, and `y` has four, five or six colours as `|T_y| + |O_y|` is 2, 3 or 4. ∎
+
+**The argument of FS116-N2-RECIP.** `y` a hub of four colours and no more. On `ω(y)` the point `p` sits at angle `ψ + 180°`, and `u`, `v` at `ψ + 120°`,
+`ψ + 240°`: **`p ∓ 60°` on `ω(y)` are the points `u`, `v` of `p`'s ring**, where `ω(y)` crosses `ω(p)` at `60°`, entering `B(p, 1)` toward `p`. Suppose
+`p` lies on no arc of `Γ` on `ω(y)` and the four germs of `ω(y)` at `u` and `v` lie on no (Q) arc of `y`'s ring. `p` is in the closure of a tip, whose colour
+is at `y`, so `p` is a point of `y`'s set `D`; its two germs on `ω(y)` are off `Γ`, in tiles of `p` (the ccw one leaving along `ψ − 90°`, the cw one along
+`ψ + 90°`), of colours in `A(y)`. If they had one colour `Y`, `p` would be FS116-N1-TOUCH's touch point of `y`'s ring, and TOUCH says no tile of the other
+colour `Ȳ` of `A(y)` has `p` in its closure; but `A(y) ⊂ P`. So **`p` is a change point of `y`'s ring**, its two sides coloured by the tiles of `p` holding
+the two branches, which are the two colours of `A(y)`. ∎ *Uses:* STAR, TOUCH (one mind), N-E1, six colours (both at TOUCH and at `A(y) ⊂ P`).
+
+**The argument of FS116-N2-ANTI.** `p` simple as well, so it has exactly four tiles; `y` and `y* = 2p − y` hubs of `p`, and `ψ ± 90°` interior to cones
+of tiles `t⁺ ∋ ψ + 90°`, `t⁻ ∋ ψ − 90°`. If `t⁺ = t⁻`, its cone (an interval) holds one of the closed half-circles `[ψ − 90°, ψ + 90°]`,
+`[ψ + 90°, ψ + 270°]` in its interior, leaving no room for a tip of `y` (cone in the first) or for the tile of `p` of an outer colour of `y` (cone in the
+second), both of which exist at a hub: so `t⁺ ≠ t⁻`. Neither is a tip or an outer colour's tile of `y` or of `y*` (their cones cross the boundary directions),
+and both colours are missing at `y` and at `y*` (the flanking directions of `y*` are the same two). The two other tiles fill the two gaps between `t⁺` and
+`t⁻`, one within `(ψ − 90°, ψ + 90°)` and one within `(ψ + 90°, ψ + 270°)`; by STAR at `y` the first is the only possible tip and the second the only
+possible outer colour's tile, and at `y*` the roles exchange, each non-empty at a hub. ∎ So **`A(y) = A(y*) = {c(t⁺), c(t⁻)}`, `T_y = O_{y*}`,
+`O_y = T_{y*}`, each one colour, and `y`, `y*` have four colours.** Its general form, used in § 3: *if no edge of `p` leaves at a direction `δ`, the tile
+holding `δ` has its colour missing at both points of `ω(p)` at `δ ± 90°` that are change points* (N-E1 at each; FS114-N7-TAN (i)).
+
+### 2.3 What the rule reads, and what it does not
+
+The rule's inputs are `p`'s ring (which change points are hubs: RING-GERM) **and `p`'s star** (which tiles hold the flanking directions: STAR, RECIP, ANTI).
+The ring word as defined in § 0 does not record the star: on a (Q)-free ring its colours are `X, X̄` only, and none of `p`'s four colours appears in it,
+while each hub's missing pair is two of those four. Its output is the hub's colours, its missing pair, whether `p` is a change point of the hub's ring
+and with which colours, and the hub's germs at `p ± 60°` sitting at `u` and `v`. Nothing at `p` is at distance 1 from the interior of the arc of `ω(y)`
+outside `B̄(p, 1)`, 240° long: **its arcs of `Γ`, its (Q) arcs and its touch points are not read**, though its colouring off `D` is, being 120°-periodic
+(RING-TWIST-C's colour is swapped by `σ`). That no argument could read them is not claimed: no two fragments with one ring type at `p` and different far arcs
+are held.
+
+### 2.4 Controls, and `k = 7`
+
+`tools/fs116_n2_star.py` reads every change point (ring off `Γ` both sides) of the held rings through FS116-N1's ring tool (imported, unedited; floats
+reading exact objects) and checks STAR there: `A(p) ⊂ C(y)`, tips and outer colours disjoint, each tip's cone and each outer colour's `p`-tile in its half-plane,
+and the germs of `ω(y)` at `p` in colours missing at `y`. Output (`data/fs116/n2/star.out`): **the strip's `P₀`**: at `0°` (`P₂`) `A(y) = {M, P}`, `T = ∅`,
+`O = {B, O}`; at `180°` (`P₋₂`) `A(y) = {B, O}`, `O = {M, P}`; `P₁` the same up to colours; **the disk's corner** at `209.01°`, `330.99°`: `T = O = ∅` (two
+colours). All consistent; the plant (the two half-planes swapped) reports violations. None of these change points is a hub (their germs at `±60°` touch (Q)
+arcs: FS116-N1-QDISK, the germ report), so they model STAR's partial form only; **no held fragment has a hub**, and RECIP and ANTI have no held model at six
+colours. **ANTI's hypothesis is exactly what the strip lacks:** `P₀`'s edges run along the flanking directions `±90°` of its change points, and their missing
+pairs differ.
+
+| entry | the strip (`P₀`, `P₁`) | the disk (corner `A₀`) | `k = 7` |
+|---|---|---|---|
+| SIXRING | silent: no six-colour vertex | silent | R7's lattice points have six colours of seven, one absent: their rings are three Reuleaux arcs and three arcs off `Γ` (FS116-N1 § 2.4) — "none absent" is where six is spent |
+| FIVERING | silent: four-colour vertices | silent | spent at "the absent colour is `X`": with seven, five at `p` leave two |
+| STAR | partial form met at `P_{±2}` (outer only) | met trivially (`T = O = ∅`) | `C(y) ⊃ A(p)` fails (three absent at `p`, two on the ring): six spent at "every other colour at `y` is in `P`" |
+| RECIP | no hub: silent | no hub: silent | spent at TOUCH and at `A(y) ⊂ P` |
+| ANTI | hypothesis fails (flanking directions on edges; conclusion fails too) | no hub: silent | spent through STAR |
+
+### 2.5 The entries
+
+derivation: FS116-N2-SIXRING
+  statement: in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of six colours, the ring lies in Γ and is six consecutive
+    closed 60° arcs Z_i = [α + 60°i, α + 60°(i + 1)], each the whole set of ring points in the closure of one tile t_i of p; t_i lies in the Reuleaux
+    triangle Reul(p, z_i, z_(i+1)) on its arc, with cone at p in [α + 60°i − 30°, α + 60°i + 90°]; every ring arc is a (Q) arc, and every outer tile along a
+    non-degenerate subarc of Z_i has the colour of t_(i+2), t_(i+3) or t_(i+4); the ring has no change point, so p has no hub
+  uses only: FS116-N1-TWIST-D (a ring point off Γ carries a colour absent at p); non-Siamese (the inner tile of a ring arc is p's tile of its colour, and an
+    outer tile is far from p's tile of its colour); that a tile has diameter at most 1 and a chord over more than 60° exceeds 1
+  not claimed: that any valid fragment has a six-colour vertex beyond radius 3/2; an exclusion of the type at any radius (FS116-Y2-SIXOFF's family stops
+    below √3; the general type is open); anything in the Siamese class (there an inner tile need not be p's)
+  argument: § 2.1 The ring types, by the number of colours at `p` — only a four-colour ring places anything
+  verdict: derived
+  grade: derived from: FS116-N1-TWIST-D
+  minds: 1
+  model: FS116-Y2-SIXFRAG, the straight flower — its sectors are the t_i, and its lenses Q_j, Q_(j+1) and gap tile G_j carry along Z_j exactly the three
+    admissible outer colours j + 2, j + 3, j + 4 (plans/FS116-Y2-construction.md § 2.3, one mind, exact)
+  prior art: partly: FS116-Y2's remark (§ 2.3, one mind) and FS112-NB's C-V56 hold the Reuleaux containment; the outer-colour rule not found — owed
+  handoff: de Bruijn — with TWIST-D, queued behind D6's map type; a relay-result for any exclusion of six-colour vertices
+
+derivation: FS116-N2-FIVERING
+  statement: in a valid fragment on a closed disc of radius above 1 about a vertex p of five colours, Siamese pairs allowed, the ring has no change point,
+    and for every θ outside a finite set r(θ) or r(θ + 60°) lies on a (Q) arc; so the (Q) arcs of the ring have total length at least 180° and p has no hub
+  uses only: FS116-N1-TWIST-D; N-E1; FS116-N1's L1 (a ring arc of Γ excludes its side colours 60° away); that p's four or more colours make a non-(Q) ring
+    arc have an absent side colour
+  not claimed: anything at k ≥ 7; that a five-colour vertex occurs in any fragment
+  argument: § 2.1 The ring types, by the number of colours at `p` — only a four-colour ring places anything
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held with five colours at a vertex; at k = 7 the vertices of R7 carry six of seven, and the step "the absent colour is X" is where six is spent
+  prior art: partly: FS116-N1-QFREE4 is its case with no (Q) arc; this form's search owed
+  handoff: none — a relay-result for the ring-type list; crosses to Lean with TWIST-D
+
+derivation: FS116-N2-STAR
+  statement: in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of four colours P, let y = r(ψ) be a change point of the
+    ring, T_y the colours of the tiles of p at y and O_y those of the other tiles at y of colours of P; then C(y) = A(p) ⊔ T_y ⊔ O_y and A(y) = P ∖ (T_y ∪
+    O_y); every tile of p at y has its cone at p in [ψ − 90°, ψ + 90°], and the tile of p of each colour of O_y in [ψ + 90°, ψ + 270°]; every tile of p whose
+    cone holds ψ + 90° or ψ − 90° in its interior has its colour in A(y); T_y is non-empty when v⁻, u⁺ lie on no (Q) arc and O_y when u⁻, v⁺ do
+  uses only: RING-GERM (i), (ii) (two minds); FS116-N1-TWIST-D; N-E1 at y; non-Siamese (one tile per colour at y; distinct tiles of one colour far apart);
+    that a tile has diameter at most 1; six colours (every colour at y other than X, X̄ is in P)
+  not claimed: anything at k ≥ 7; that T_y or O_y is a single colour (at a hub y has four, five or six colours); anything about the ring of y beyond its
+    branches at p
+  argument: § 2.2 The rule at a hub of a four-colour ring
+  verdict: derived
+  grade: derived from: RING-GERM
+  minds: 1
+  model: the strip's P₀ at its change points P_(±2) (the partial form: O = {B, O} and {M, P}, T = ∅, A(y) = {M, P} and {B, O}); the disk's corner at its
+    two-colour change points (T = O = ∅) — control fs116-n2-star
+  prior art: partly: FS114-N7-HUB (b), (c) and N7-TAN (i) (one mind each) on (Q)-free rings; this split at every change point not found — owed
+  handoff: de Bruijn — with RING-GERM, queued behind D6's map type
+
+derivation: FS116-N2-RECIP
+  statement: in a non-Siamese valid fragment on a closed disc of radius above 2 about a vertex p of four colours P, let y = r(ψ) be a hub of p with four
+    colours and no more; the points of ω(y) at 60° on either side of p are r(ψ + 60°) and r(ψ − 60°); if p lies on no arc of Γ on ω(y) and the four arcs
+    of ω(y) just clockwise and just counter-clockwise of those two points lie on no (Q) arc of y's ring, then p is a change point of y's ring, its two sides
+    lying in the tiles of p that hold the directions ψ − 90° and ψ + 90°, whose colours are the two colours of A(y)
+  uses only: FS116-N2-STAR; FS116-N1-TOUCH (one mind: a point of D off Γ-arcs that is no change point has the other absent colour at none of its tiles);
+    N-E1 at y; six colours (A(y) ⊂ P)
+  not claimed: anything when an edge of p runs along ω(y) (then p lies on an arc of Γ on ω(y), a tactic edge centred at y when its sides are y's colours);
+    that the hub has four colours in general; anything at k ≥ 7
+  argument: § 2.2 The rule at a hub of a four-colour ring
+  verdict: derived
+  grade: derived from: FS116-N2-STAR, FS116-N1-TOUCH
+  minds: 1
+  model: none held (no held fragment has a hub, § 2.4); on (Q)-free rings FS114-N7-HUB's six change points are its instances where their rings meet the
+    hypotheses
+  prior art: owed
+  handoff: de Bruijn — with STAR and TOUCH
+
+derivation: FS116-N2-ANTI
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of four colours, let y = r(ψ) and y* = r(ψ + 180°)
+    be hubs of p, and let ψ + 90° and ψ − 90° lie in the interiors of the cones at p of tiles t⁺ and t⁻; then t⁺ ≠ t⁻, A(y) = A(y*) = {c(t⁺), c(t⁻)},
+    T_y = O_(y*) and O_y = T_(y*), each a single colour, and y and y* have four colours and no more
+  uses only: FS116-N2-STAR at y and at y*; that p has exactly four tiles (non-Siamese and simple); that a cone is an interval
+  not claimed: anything when an edge of p leaves at ψ + 90° or ψ − 90° (the strip: there the two missing pairs differ); anything at k ≥ 7
+  argument: § 2.2 The rule at a hub of a four-colour ring
+  verdict: derived
+  grade: derived from: FS116-N2-STAR
+  minds: 1
+  model: none held with two antipodal hubs; the strip's P₀ meets every hypothesis but the interiority of the flanking directions, and fails the conclusion
+    (A(P₂) = {M, P}, A(P₋₂) = {B, O}) — control fs116-n2-star
+  prior art: owed
+  handoff: de Bruijn — with STAR
+
+control: fs116-n2-star
+  of: FS116-N2-STAR on the held rings' change points (the strip's P₀, P₁, the disk's corner); the two half-planes swapped is caught
+  run: python3 ../tools/fs116_n2_star.py | tail -n 1
+  expect: STAR ALL OK
+  fault: python3 ../tools/fs116_n2_star.py --plant | tail -n 1
+
+## Stage 2 — SAVED
