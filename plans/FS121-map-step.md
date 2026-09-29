@@ -227,3 +227,168 @@ of the plane (this gate, and FS-111's seven queries). Measured at the grain of t
 *Would have searched here:* none. This stage searched literature only.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: §IQ, and the card `do-ladders-end-on-q-rings`
+
+### 3.1 §IQ — the invariant question
+
+1. **The existence form** (verbatim, `plans/STUB-map-step.md` § Existence form): "**Is there a saturated colouring of the plane — with any number of
+   colours — whose singular set is not locally finite, or whose interface radii accumulate?**"
+2. **The structural form** (verbatim, § Structural form): "**In every saturated colouring of the plane, whatever the number of colours, where can the
+   ladder of unit parallels of an interface end — on a unit arc about a point of at least four colours, at a junction, at the singular set, or nowhere
+   — and what does every end carry that bounds how many ends meet a bounded set?**" It is not the existence form reworded: it asks for the invariant at
+   each ladder end, with R7, SQ9 and HEX9 as inhabitants.
+3. **The invariant it forces.** In the home of § 2.1 (parallel families), every curved ladder carries its **focal point**. Its last rung is a unit arc
+   whose centre carries that rung's outer colour, and the end is of one of two types, (Q) or (R2) (FS121-O1-ENDS, § 3.2). Outward, a ladder has no end
+   (FS121-O1-OUT). So *where* a ladder ends is decided here. For *how many ends meet a bounded set* the home has no invariant: **none known, and finding
+   it is the milestone**. **A finding about the form, for Poros:** ¬LRA is not a count of ends in a bounded set. A piece of radius `n` has its end at
+   distance `n`, so accumulating radii `n_i → ∞` are ladders whose ends run off to infinity. With FS121-O1-LRA-LINE (§ 3.3), LRA at one point is LRA
+   along a whole unit-spaced normal line. The last clause of the structural form covers REG-J′'s local finiteness. ¬LRA needs a second clause: how many
+   ladders cross a bounded set.
+4. **Its route.** Derivation. Computation may check a derived claim on the controls (R7, SQ9, HEX9, DISC7) and never answers the structural form. The ban
+   binds (a saturated six-colouring or a radius-2 chain would be `χ_m⁰ ≤ 6`, W-NEG).
+5. **The open instances it would decide.** (a) Whether an (R2) end can have exactly three colours, in some saturated colouring at any `k` (the card's
+   residue). (b) REG-J′'s universal form at `k ≥ 7` (every saturated colouring's Σ locally finite?), and its existence form at six. (c) ¬LRA at every `k`,
+   now as "no bi-infinite line of accumulation points". (d) FS-115's stuck ray in saturated colourings (its pencil is FS121-O1-OUT's outward ladder). (e)
+   The class FS-116's NO must exclude on the honest route, for periodic maps (FS121-O1-PER).
+
+### 3.2 Argument — FS121-O1-ENDS
+
+*Setting* (FS111-M2-INTRAD's): `f` an honest a.e.-proper colouring in D-NF, saturated for every `j ∈ P(x)` at every essential boundary point, whose
+singular set Σ is locally finite with finitely many interface arcs at each of its points (REG-J′). Let `J` be an interface arc on which the radius of
+curvature is a finite integer `n` (M2-INTRAD (i)–(ii)) with centre `z`, and let `J = J_n, J_{n−1}, …, J_1` be its unit parallels toward `z`. Each is an
+interface arc off Σ (M2-INTRAD step (1), toward the centre); M2-INTRAD step (2) says the chain stops only at radius 1, or at Σ on a null set of normals.
+Let `p` and `q` be the inner and outer colours of `J_1`.
+
+*Step 1: `z` carries `q`.* At `x ∈ J_1` M-PINCH gives one of two types. In the (split) type, `y_p = y_q = z`. In the (tangent) type, the contacts are
+`x ± ν`, and the `q`-contact lies across the `p`-side at distance 1, which is `x + ν_p(x) = z`. Either way `z ∈ supp S_q`.
+
+*Step 2: the fork.* **(Q-end)** If `z` also carries `p`, then `J_1` is a unit arc of kind both. Its centre is a vertex with at least four colours or a repeated
+colour (FS112-N3-NOBOTH). The transfer changes one step: "finitely many arcs leave `P`" is REG-J′'s second clause, and each arc has an end tangent because
+it is `C^{1,1}` with `|κ| ≤ 1` up to Σ (M-C11). The argument reads only the sectors at `P` and N112-U1's cones, and horns are included, so cusps are allowed.
+If no colour at `z` has density 0 (H-DEN at `z`), FS111-W-NOREP removes the repeated colour, so `z` has at least four colours and `J_1` is **(Q)**.
+**(R2-end)** If `z` does not carry `p`, the type is (tangent) at every `x ∈ J_1` (split needs `z` to carry both). The `p`-contact `x − ν_p(x)` lies on the
+radius-2 circle about `z`, and by M-PINCH's tangent disc, `p` fills `B(x − ν_p(x), 1)` near `x`… read from the partner's side: `p` near `x − ν_p(x)` lies
+beyond radius 2 (C-HULL's first clause against `P_p`, which lies inside radius 1). So a `p`-region lies along the radius-2 circle over the whole arc,
+and `J_1` is FS-112's **(R2)**: "an arc whose centre carries the outer side colour and not the inner, with an inner-colour tile along the radius-2 circle
+over the whole arc".
+
+*Step 3: the (R2) centre carries at least three colours.* By N112-U1, `q`'s sectors at `z` lie in the closed cone of angle `π − ℓ` facing away from `J_1`
+(`ℓ` the arc's angular length), and `p` is absent. The remaining angle `π + ℓ > π` is covered by other colours. No colour takes a reflex sector at a
+saturated point (FS111-M-HALF: each piece's blow-up lies in a half-plane), so at least two further sectors are needed, of two distinct colours when no
+colour at `z` has density 0 (W-NOREP). So `z ∈ Σ` carries at least three colours. ∎
+
+derivation: FS121-O1-ENDS
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius ends, off a
+    null set of normals, at a unit arc J_1 whose centre z carries J_1's outer colour; either z also carries J_1's inner colour — J_1 is of kind both
+    and z is a vertex with at least four colours or a repeated colour, at least four when no colour at z has density 0, so J_1 is (Q) — or it does not
+    — J_1 is (R2), and z is a point of Σ carrying at least three colours, and at least three distinct colours when no colour at z has density 0
+  uses only: FS111-M2-INTRAD steps (1)–(2) (the chain toward the centre stops at radius 1 or at Σ on a null set of normals); FS111-M-PINCH's two types;
+    C-HULL's first clause; FS112-N3-NOBOTH's sector argument with N112-U1's cones, transferred (REG-J′ supplies finitely many arcs at z, FS111-M-C11
+    their end tangents); FS111-W-NOREP where no colour at z has density 0; FS111-M-HALF; no colour count
+  not claimed: that every curved ladder ends at a (Q) arc (the card's ask; GAP at the (R2) branch, FS121-O1-CARD); that an (R2) end exists in any
+    saturated colouring; that an (R2) centre has at least four colours; anything off REG-J′ or without honest saturation
+  argument: § 3.2 Argument — FS121-O1-ENDS
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7: R7 — every interface is a (split) unit arc, the Q-end, centred at a lattice point carrying six colours (three sector colours, three cusp
+    colours); R7 has cusps, so it models the clause with "a repeated colour" allowed and the (Q) clause through NOBOTH's count alone
+  prior art: new — “(maximal independent | independent dominating) & (unit distance | distance graph) & (plane | measurable | Euclidean)” (0),
+    “(measurable chromatic | chromatic number of the plane) & (map | tiling | regular* | Jordan | boundar*)” (13), none bearing; its links are FS-111's and FS-112's
+  handoff: none — a lemma between open statements; it crosses to de Bruijn with FS111-M2-INTRAD, queued behind the measurable chain (FS-113)
+
+derivation: FS121-O1-CARD
+  statement: in an honestly saturated six-map without cusps, every curved interface's ladder of unit parallels ends at a (Q) arc about a vertex of at
+    least four colours
+  argument: § 3.2 Argument — FS121-O1-ENDS
+  verdict: gap: the (R2) branch — the ladder's last rung is (Q) or (R2) (FS121-O1-ENDS); an (R2) end lies on FS-116's rings when its centre carries at
+    least four colours, and no argument here excludes an (R2) centre of exactly three colours
+
+### 3.3 Argument — FS121-O1-OUT, FS121-O1-PER and FS121-O1-LRA-LINE
+
+*OUT.* Let `J` be a (tangent)-type interface arc of radius `n` (an integer, or `∞` for a segment), inner colour `p` and outer colour `q`. By M-PINCH the
+`p`-contact of `x ∈ J` is `x − ν_p(x)`, one unit **away** from the centre. By M2-INTRAD step (1), read on that side, the parallel `J⁻` at radius `n + 1` lies
+in `supp S_p` and is an interface arc off Σ. Its radius `n + 1 ≥ 2` is not 1, so it is not a unit arc of kind both, and M-C11 (iii) makes it of
+(tangent) type. By induction, every radius `n + k`, `k ≥ 0`, is an interface arc over the same angular window, off Σ. For a segment this is FS111-W-LADDER.
+∎ With FS121-O1-ENDS the curved ladder is a **one-sided pencil**: finite toward its focal point `z`, infinite away from it. This is the configuration
+row 135 calls "a pencil of circles of radius `k + 1`", here forced by saturation, with no move.
+
+*PER.* A (tangent) arc of finite radius forces arcs of every larger integer radius (OUT). So a colouring in whose interfaces only finitely many radii of
+curvature occur has no curved (tangent) interface: every curved interface is a (split) unit arc of kind both, and no (R2) arc occurs. Doubly periodic
+with ¬LRA gives finitely many radii (finitely many interface arcs per fundamental domain under REG-J′, M-REDUCE-I; each a finite chain, M2-INTRAD with
+¬LRA). ∎
+
+*LRA-LINE.* Let the pieces `γ_i` of one interface curve `Γ` have radii `n_i → ∞` and accumulate at `x₀`, with `ν` the normal of `Γ` at `x₀`. Fix `k ∈ ℤ`.
+Only finitely many pieces near `x₀` have radius `≤ |k|` (M2-INTRAD (iii)), so on a one-sided neighbourhood of `x₀` along `Γ` the parallel of `Γ` at signed
+distance `k` meets no focal point. Each piece's parallel is an interface off Σ (step (1), on either side), of radius `n_i ± k → ∞`. So the pieces of
+radius `→ ∞` accumulate at `x₀ + kν` too. ∎ LRA at one point is LRA at every point of a bi-infinite unit-spaced normal chain — row 134's shape ("a
+bi-infinite chain along its normal line"), here with flat accumulation points in place of stuck vertices.
+
+derivation: FS121-O1-OUT
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, the unit parallel away from the centre of every tangent-type interface arc of
+    radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved interface of
+    tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular window
+  uses only: FS111-M-PINCH's tangent contacts; FS111-M2-INTRAD step (1) on the side away from the centre; FS111-M-C11 (iii) (a split point makes the
+    whole local interface one unit arc); no colour count; no complexity bound
+  not claimed: that a saturated colouring with a curved tangent interface exists at any k (none is held); anything at points of Σ met by the family
+  argument: § 3.3 Argument — FS121-O1-OUT, FS121-O1-PER and FS121-O1-LRA-LINE
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 9: SQ9, whose flat edges are tangent-type interfaces of infinite radius and carry the ladder at every unit translate (FS111-W-LADDER, exact
+    in VM2-LAD-CTL: 48 of 48 edge-sides); no held object has a curved tangent interface, so the curved clause has no model (G21)
+  prior art: partly: row 135 found the one-sided pencil consistent in terminal valid maps; that saturation forces it not found (§ 2.2)
+  handoff: none — a lemma between open statements; it crosses with FS111-M2-INTRAD
+
+derivation: FS121-O1-PER
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′ whose interfaces carry only finitely many radii of curvature — in particular a
+    doubly periodic one without large-radius accumulation — every curved interface is a split unit arc of kind both and no (R2) arc occurs; where no
+    colour has density 0 at an arc's centre, every such arc is (Q)
+  uses only: FS121-O1-OUT (a finite tangent radius forces every larger integer radius); FS111-M-REDUCE-I's local finiteness of interface arcs under
+    REG-J′; FS121-O1-ENDS for the (Q) clause
+  not claimed: that a tight colouring can be taken periodic; anything with infinitely many radii; that the cusp-free class is inhabited at any k
+  argument: § 3.3 Argument — FS121-O1-OUT, FS121-O1-PER and FS121-O1-LRA-LINE
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7: R7, doubly periodic with finitely many radii, every curved interface a split unit arc of kind both (VM2-LAD-CTL: 432 of 432 arcs)
+  prior art: partly: row 135 notes that a stuck ray needs arcs of every radius and that doubly periodic maps have none; for saturated colourings not found
+  handoff: none — a lemma between open statements; it narrows FS-116's class on the honest route for periodic maps
+
+derivation: FS121-O1-LRA-LINE
+  statement: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces of radii tending to infinity accumulate at a point x₀ of an
+    interface curve with normal ν there, then pieces of radii tending to infinity accumulate at x₀ + kν for every integer k
+  uses only: FS111-M2-INTRAD step (1) on both sides and its local finiteness per radius (iii); the parallel-curve formula ρ ↦ ρ ± k away from focal
+    points
+  not claimed: that such a line is impossible (¬LRA is open); anything at k where x₀ + kν lies in Σ beyond the accumulation itself
+  argument: § 3.3 Argument — FS121-O1-OUT, FS121-O1-PER and FS121-O1-LRA-LINE
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held at any k — no known saturated colouring has large-radius accumulation (the statement is a reduction of LRA, G21)
+  prior art: new — “parallel curve* & unit distance” (0), “(parallel curve | parallel curves | equidistant*) & (unit distance | colo*)” (21), none bearing
+  handoff: none — a reduction of an open statement
+
+### 3.4 The card's answer, and what it changes
+
+**`do-ladders-end-on-q-rings` — a step fails, and it is link 1 → 2.** M2-INTRAD's "stop at 1" does not deliver M-PINCH's split type. Its own statement (ii)
+ends a chain "at a unit arc of kind both **or at a unit arc centred at a point of Σ**", and the second is FS-112's (R2) (FS121-O1-ENDS). Links 3 and 4 hold
+on the (Q) branch: NOBOTH transfers with one changed step, and W-NOREP holds off cusps, at one mind. So **curved ladders end on FS-116's rings when they
+end at (Q) arcs, and at (R2) arcs whose centre has at least four colours.** They leave FS-116's rings exactly at **(R2) ends about a centre of exactly
+three colours**. That is the separating link, and **FS-121 opens on it.** Two further results the check produced: **ladders have no outer end**
+(FS121-O1-OUT), and **periodic honestly saturated maps have no (R2) arc and no curved tangent interface** (FS121-O1-PER). The second narrows FS-116's
+honest-route class for periodic maps to segments and (Q) arcs. Hunch `curved-ladders-end-on-q-rings` (0.7): **partly met** — met on the (Q) branch, open
+on the (R2) branch.
+
+*For the coordinator's ruling on the shared step:* the (Q) branch is FS-116's card `what-do-q-rings-force`, and FS-121 needs it as a rung, not as an
+opening. FS-121's own first object is the (R2) end. The joint also carries FS121-O1-PER to FS-116: in the periodic honest case every unit arc is (Q).
+
+### 3.5 The invention signal (G87)
+
+Read for, in every source of stages 1–3. **One whiff, classed, not a collision.** G85 (and the stub) read LRA as "FS-115's stuck ray in another form", a
+one-sided ray. FS121-O1-LRA-LINE makes LRA bi-infinite in saturated colourings, and row 134 forbids bi-infinite stuck chains in maps under Condition 5.
+The two statements are about different objects (flat accumulation points against stuck vertices), and nothing held says both. It is a relation to
+derive, not two truths that cannot both stand.
+
+## Stage 3 — SAVED
