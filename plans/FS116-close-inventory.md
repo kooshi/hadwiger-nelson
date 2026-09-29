@@ -1,0 +1,29 @@
+# FS-116 close inventory (opened by Keryx, 2026-09-29 04:39 UTC; Keryx is its only writer until the close)
+
+*Milestone: FS-116, the local exclusion (`plans/STUB-local-exclusion.md`). One line per item with its source; no narration (the audit's
+rule, `plans/WORKFLOW-AUDIT-2026-09-28.md` §4). The first milestone opened under Workflow 3.0 from a clean start, so a second table logs
+the workflow's frictions for Kooshi's comparison of the new workflow with the old (`plans/SESSION-HANDOFF-2026-09-28.md` §2), and a third
+holds the lanes' items that belong to no milestone.*
+
+## The announcement rule and the registered predictions
+
+*Written at the freeze of the claim list (workflow step 4), before any derivation report arrives. Empty until then.*
+
+## Items
+
+| # | kind | item | source | status |
+|---|---|---|---|---|
+| 1 | owner ruling | FS-116 opens next, alone, on Poros's re-rank (rank 1); FS-121 as a second slot is Kooshi's staffing call, default not opened | `plans/SESSION-HANDOFF-2026-09-28.md` §3; `plans/POROS-2026-09-28-close-reread.md` § Draft re-rank | open |
+| 2 | owner ruling | Step 1 first: the stub has no `## The question (Poros, <date>)` section, so Poros (job FS116-P1) writes the card before Ephodos's opening job. Alternative weighed: Ephodos's opening job takes Poros's card 1 from the close re-read (§2.4) as its question directly. Why this won: the lane file makes the card's two forms the input §IQ quotes verbatim, and card 1 was posed as one kill's test, not as the milestone's question. Confidence: high | `.claude/output-styles/keryx.md` § A milestone step 1; `.claude/agents/poros.md` § Your jobs 1 | open |
+
+## Workflow 3.0 — frictions, as they arise
+
+| # | when | lane | what happened | source | candidate edit |
+|---|---|---|---|---|---|
+| W1 | 2026-09-29 04:39 UTC | Keryx | The handoff's first act (a probe agent, launched to quote G87 from a loaded `grokkings` block) folded into the first two jobs' readbacks: each quotes the skill block's base-directory line and G87's first words from context before reading any file. Alternative weighed: a separate probe launch; lost because it costs a launch for the same evidence | this file | none yet |
+
+## Outside the milestone — lane items with no milestone home
+
+| # | kind | item | source | status |
+|---|---|---|---|---|
+| O1 | correction owed | G56's *Do* and G35's "(norm 2 or 4)" scope; `CLAUDE.md` § Where the problem stands item 1's scope; row 139's opening "the map NO made uniform in the complexity bound". Drafted by Ephodos (job TC1), filed by Keryx | `plans/WORKFLOW-AUDIT-2026-09-28.md` §9 | open |
