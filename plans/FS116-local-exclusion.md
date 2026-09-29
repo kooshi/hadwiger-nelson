@@ -248,3 +248,104 @@ run on exact fragments — *partly* known; the ring's 60° twist as an invariant
 **G87 lookout, stage 2:** none seen.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: §IQ, the invariant question (G72), with card `the-yes-needs-no-map` answered
+
+### 3.1 The existence form (Poros's card, `plans/STUB-local-exclusion.md` § Existence form, verbatim)
+
+> **Is there a radius `R` — one `R` for every complexity, Siamese pairs allowed — such that no valid fragment exists on the closed disc of radius `R`
+> about a vertex of at least four colours?**
+
+### 3.2 The structural form (the same stub, § Structural form, verbatim)
+
+> **In every valid fragment with any number `k ≥ 4` of colours, what does the unit circle about each vertex of at least four colours carry — its (Q)
+> arcs, its change points, and the vertices of at least four colours it places at distance 1 — and which of these ring types can recur at every such
+> vertex a ring places?**
+
+It is not the existence form reworded: it asks for a rule every fragment obeys at every four-colour vertex, at every `k`, with R7's lattice points
+(six colours each, `k = 7`) as its inhabitant, and the radius is to be read from the rule. One finding for the claim list: § 0's valid fragment is
+six-coloured, so the `k`-coloured fragment the form quantifies over is defined there "(this list)".
+
+### 3.3 The invariant it forces
+
+**Named, from H2 (§2.1), not decided by any home:** the **ring type** of `p` — the colouring of `ω(p)` read as a proper colouring of the circle graph
+`Cay(S¹, {±60°})`, whose components are unit hexagons. On any arc of `ω(p)` carried, with its 60° translate, by tiles of the colours absent at `p`, the
+colouring is **twisted**: with `k = 6` two colours are absent, and on each hexagon they alternate, `c(θ + 60°) = σ(c(θ))`, `σ` their swap — which is
+N3-ODD (an odd number of change points in every half-open 60° window) and N6-RING60 (change points exactly at `y + 60°ℤ` on a (Q)-free ring). The **defects**
+of the twist are where `p`'s own colours reach the ring: its (Q) arcs (each joining opposite tiles of `p`, N7-QOPP), arcs of `Γ`, and the tips at change
+points (N7-HUB). The type is the cyclic word of twisted arcs and defects, modulo the 60° rotation with `σ`; its **transfer rule** is what a ring of one
+type forces on the four-colour vertices it places at distance 1 (N7-HUB is the rule for the defect-free type: six four-colour vertices at `y + 60°ℤ`, so
+four-colour vertices lie on the unit triangular lattice `p + ℤ[ζ₆]·e(y)` until a defect intervenes, N7-CHAIN). At `k = 7` three colours are absent and
+a hexagon can be coloured with a winding (BV-H1's height, G71): that is where the seventh colour's room is spent, the control the structural form names.
+**The home discipline has no theorem on it: finding the transfer rule for rings with defects is the milestone** (D1).
+
+### 3.4 Its route, and card `the-yes-needs-no-map`: the limit of fragments
+
+**Route: derivation only.** A computation may check a derived claim — an exact check of a fragment given by formula — and never answers the structural
+form; nothing enumerates rings, maps or colourings.
+
+**Card `the-yes-needs-no-map`: TRUE, at one mind (mine), with a sharper statement than posed** — it needs neither the four-colour centre nor unit arcs,
+and it holds at every `k`, which gives it a model at `k = 7`.
+
+derivation: FS116-O1-YESLIM
+  statement: for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment (a map of an open set containing the disc,
+    bounded by segments and circular arcs, k-coloured with no two interior points of one colour at distance exactly 1), then χ_m⁰(ℝ²) ≤ k; at k = 6, then
+    χ(ℝ²) ≤ 6, with no MR
+  uses only: that each fragment's tile boundaries are Lebesgue-null (countably many segments and arcs); that the circle measure σ on S¹ is Rajchman,
+    σ̂(ξ) = J₀(|ξ|) → 0; weak-* compactness of the unit ball of L^∞; the definition of χ_m⁰ (a Lebesgue-measurable colouring whose unit pairs are
+    bichromatic at (Leb ⊗ σ)-almost every pair); for the MR-free clause, χ(ℝ²) ≤ χ_m⁰(ℝ²) (row 130; `[GwynStavrianos2022]` Lemma 2, Theorem 2)
+  not claimed: the converse (a measurable a.e.-proper six-colouring gives no fragment: it need not be a map); that the limit colouring is a map, or
+    saturated, or regular; anything about the fragments' centres, so nothing about C114-LOCAL-F's explicitness; χ(ℝ²) ≤ 6 from fragments on discs of one
+    bounded radius
+  argument: § 3.5 The argument of FS116-O1-YESLIM
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 7 — R7 (de Grey's Reuleaux seven-colouring, FS111-M-R7) restricted to every disc is a valid seven-coloured fragment, and the conclusion
+    χ_m⁰(ℝ²) ≤ 7 holds (row 33's upper bound, measurable); at k = 6 the hypothesis is inhabited only if χ_m⁰(ℝ²) ≤ 6
+  prior art: partly: row 131's weak-* step (`[Bukh2008]` Lemma 12 and `[CohenMani2025]` Lemma 2.4 for one class; its k-class form not found, FS-106's gate)
+    and FS111-W-NEG (iii), its near-colouring twin; run on exact fragments here, not found in print
+  handoff: de Bruijn — queued behind the measurable chain (row 131's weak-* step): the statement at every k, its not-claimed line, and the Rajchman lemma it
+    rests on
+
+### 3.5 The argument of FS116-O1-YESLIM
+
+Let `f_n` be a valid `k`-coloured fragment on `B̄(c_n, n)`; translate so `c_n = 0`. Let `S_j^n` be the union of its open tiles of colour `j`; the
+`S_j^n` are disjoint, and they cover `B(0, n)` up to the tile boundaries, a null set. **No unit pair:** `x, x + w ∈ S_j^n` with `|w| = 1` would be two
+interior points of one colour at distance 1, so `1_{S_j^n}(x)·1_{S_j^n}(x + w) = 0` for all `x ∈ B(0, n − 1)`, `w ∈ S¹`. Pass to a subsequence along which
+`1_{S_j^n} → g_j` weak-* in `L^∞(ℝ²)` for each `j`; then `0 ≤ g_j ≤ 1` and `Σ_j g_j = 1` a.e. (test against `φ ∈ L¹` supported in a fixed ball, inside
+`B(0, n)` for large `n`). **The Rajchman step.** Fix `M` and put `h^n_j = 1_{S_j^n}·1_{B(0,M+1)}`, `h_j = g_j·1_{B(0,M+1)}`; `h^n_j ⇀ h_j` weakly in
+`L²`, all supported in one ball, `‖h^n_j‖₂² ≤ |B(0, M+1)|`. Then `h^n_j ∗ σ → h_j ∗ σ` strongly in `L²`: the Fourier transforms converge pointwise and are
+bounded by `|B(0,M+1)|`, so `∫_{|ξ|≤T} |ĥ^n_j − ĥ_j|²|σ̂|² → 0` by dominated convergence, while `∫_{|ξ|>T} ≤ sup_{|ξ|>T}|J₀(|ξ|)|²·4|B(0,M+1)|`, small
+for large `T`. Hence for `φ ≥ 0` bounded, supported in `B(0, M)`: `∫ φ h^n_j (h^n_j ∗ σ) → ∫ φ h_j (h_j ∗ σ)` (weak against strong), and the left side is
+`0` once `n > M + 1`. So `g_j(x)·(g_j ∗ σ)(x) = 0` for a.e. `x`. **Selection.** `F(x) = min{j : g_j(x) > 0}` is measurable and defined a.e. (the `g_j` sum
+to 1); `F⁻¹(j) ⊆ G_j = {g_j > 0}`, and for a.e. `x ∈ G_j`, `(g_j ∗ σ)(x) = 0` with `g_j ≥ 0` forces `g_j(x + w) = 0` for σ-a.e. `w`, so
+`(Leb ⊗ σ){(x, w) : F(x) = F(x + w) = j} = 0`. `F` is a measurable `k`-colouring proper at almost every unit pair: `χ_m⁰(ℝ²) ≤ k`. At `k = 6`,
+`χ(ℝ²) ≤ χ_m⁰(ℝ²) ≤ 6` with no MR (row 130, link 2). ∎ *Uses:* nothing about the centre, the four-colour vertex, the unit arcs or the complexity.
+
+### 3.6 What it does to the milestone
+
+- **The bearing holds as the stub wrote it, now at one mind derived:** the failure of the existence form (a valid fragment about a four-colour vertex on
+  every disc) is in particular fragments on every disc, so it gives `χ_m⁰(ℝ²) ≤ 6` and `χ(ℝ²) ≤ 6` with no MR. **Contrapositive:** `χ_m⁰(ℝ²) ≥ 7`
+  implies that some radius admits no valid six-coloured fragment on any disc — about any centre, of any complexity. So the uniform radius is **implied
+  by seven** (`χ_m⁰(ℝ²) ≥ 7`, the FS-111 convention), never an overshoot of it; what FS-116 adds is **explicitness**.
+- **Hunch `local-f-overshoots` loses its sting:** C114-LOCAL-F can fail while no valid map exists only if `χ(ℝ²) ≤ 6`.
+- **The YES side aims at fragments on growing discs, complexity free — not at a map.** R1's card 2's complexity half dissolves (Poros's § 2.4 said it
+  would, if this card held).
+- **The sharper form suggests the NO's strongest statement:** "some radius admits no valid six-coloured fragment on any disc" (DISC-F, the claim list):
+  it needs no four-colour centre, and it is implied by seven. C114-LOCAL-F is DISC-F about four-colour vertices; with a local form of FS112-N3-DENSE3
+  (a four-colour or repeated-colour vertex within a bounded distance of every point of a fragment's inner disc) they would be the same question — that local
+  DENSE3 is a claim of its own (the claim list's LOCAL-DENSE).
+
+### 3.7 The open instances it would decide
+
+- C114-LOCAL-F (FS-114's GAP), hence with FS114-CV-EXISTS the unit-arc NO for every valid map: `[SokolovVoronov2025]` Question 2's unit-arc half, almost
+  everywhere, for locally finite segment-and-arc maps; `[Polymath2021]` p. 199's hope; Mixon's thread-7 question's upper side for maps with unit arcs;
+  Sirgedas's 2020 aim ("prove that there's no 6-color non-siamese tiling"), for every valid map, Siamese pairs included.
+- FS114-K1's residues, each a ring type: rings with (Q) arcs (N7-HUBQ, NB6-QSTART), E1's residues and E2's S6, OC, the wrap.
+- With FS-121's map step (and C-SAT-T-HONEST at six), `χ_m⁰(ℝ²) ≥ 7`, hence `χ(ℝ²) = 7` given MR; and in the other direction, a failure is `χ(ℝ²) ≤ 6`
+  with no MR (§3.4).
+
+**G87 lookout, stage 3:** none seen.
+
+## Stage 3 — SAVED
