@@ -336,10 +336,11 @@ verification: FS121-V2-SECTOR
   method: limits of the edge contacts at z sorted by two disc tests (Lemmas C and D of § 2.3), with the lens bound on arcs tangent to one
     direction; the first derivation not seen (it may share the route: the same model)
   attack: § 2.4 The attacks
-  divergences: none — the first derivation stays fenced until these verdicts are committed (stage 3 writes the table)
+  divergences: § 3.2 Divergences on FS121-V2-SECTOR
   counterexamples: none — the bowtie, two sectors across a cusp, a sector and a cusp in a general direction and along its own edge's ray, and
     R7, SQ9, HEX9 at their vertices, each by the lemmas; without saturation a bowtie exists (a proper slack colouring), outside the hypotheses
-  minds: 1 — blind, the same model; derived from the statement alone before the first derivation was read
+  minds: 2 — blind to: the first derivation (plans/FS121-V2-verification.md § 2.3, fenced until this verdict was committed at dea603eb); method: limits
+    of contacts with two disc tests (Lemmas C, D) in place of a per-arc case split with Lemma H; the same model (Opus 5.5), so one prior
   grade: hand
 
 verification: FS121-D3-GRUNDY
@@ -356,10 +357,11 @@ verification: FS121-D3-GRUNDY
   method: exhaustion by a weighted measure (dependent choice) for each maximal class, then an earlier class enlarged by a small ball of a later
     class where the earlier support misses the unit circle; the first derivation not seen
   attack: § 2.4 The attacks
-  divergences: none — the first derivation stays fenced until these verdicts are committed (stage 3 writes the table)
+  divergences: § 3.3 Divergences on FS121-D3-GRUNDY
   counterexamples: none — k ≤ 4 (vacuous), a saturated input (R7), the hexagonal input with and without maximality, an empty class, and the
     discrete skeleton on a triangular-lattice patch (control fs121-v3-grundy-skeleton)
-  minds: 1 — blind, the same model; derived from the statement alone before the first derivation was read
+  minds: 2 — blind to: the first derivation (plans/FS121-D3-proof.md § 2.2, fenced until this verdict was committed at dea603eb); method: exhaustion
+    (dependent choice) and a ball added at a support point, in place of Zorn and φ > 0 a.e. with a limit; the same model (Opus 5.5), so one prior
   grade: hand
 
 verification: FS121-D3-FALLSAT
@@ -374,10 +376,11 @@ verification: FS121-D3-FALLSAT
   method: a small ball added to a class where its support misses the unit circle (Lemma B), contradicting maximality; the first derivation not
     seen
   attack: § 2.4 The attacks
-  divergences: none — the first derivation stays fenced until these verdicts are committed (stage 3 writes the table)
+  divergences: § 3.4 Divergences on FS121-D3-FALLSAT
   counterexamples: none — k ≤ 4 (vacuous), the hexagonal seven-colouring (maximality removed: unsaturated), DISC7 (partition removed), R7 as
     the inhabitant at one mind's grade
-  minds: 1 — blind, the same model; derived from the statement alone before the first derivation was read
+  minds: 2 — blind to: the first derivation (plans/FS121-D3-proof.md § 2.1, fenced until this verdict was committed at dea603eb); method: the same
+    small-ball argument, reached independently; the same model (Opus 5.5), so one prior
   grade: hand
 
 ### 2.6 Controls (exact; each with a planted fault that fires)
@@ -401,3 +404,75 @@ control: fs121-v3-grundy-skeleton
 removes the cusp and 7,260 points go uncovered. `fs121-v3-grundy-skeleton` is the finite analogue of § 2.2 steps 1–4 (maximal independent sets
 in place of MUA sets); its fault removes the maximal extension and 34 violations appear. Neither is evidence for the measure-theoretic steps;
 each shows that the step it mirrors is the one doing the work. Outputs: `data/fs121/v3/controls.out`.
+
+## Stage 3 — SAVED: the comparison with the first derivations, the count, the report
+
+### 3.1 What I read, and when
+
+The verdicts were committed at `dea603eb` (2026-09-29 07:37:51 UTC). Then, and only then (from 07:38 UTC), I opened exactly what the brief's
+§ After your verdicts opens: `plans/FS121-V2-verification.md` § 2.3 (ll. 201–223) and `plans/FS121-D3-proof.md` §§ 2.1–2.2 (ll. 145–210). To find
+the line ranges I listed the two files' headings (`grep -n "^#"`), which printed section titles only. Nothing else in the fence was opened: the
+V2 record's § 2.1 (its Lemmas H and T) and § 2.2 (DB1-L3's derivation), which its § 2.3 cites, stay unread, so the rows below that depend on them
+say so. **No retraction**: reading the first derivations showed no error in mine.
+
+*Quotation check against the entries read* (07:41 UTC, a one-off `python3` comparison restricted to ll. 145–210 of the D3 record, so as to parse
+nothing else of it): the `derivation:` entries FS121-D3-FALLSAT and FS121-D3-GRUNDY there carry, whitespace aside, exactly the statements and
+*not claimed* lines my blocks quote (both match). The V2 record's § 2.3 states FS121-V2-SECTOR in prose with its hypotheses left to the context;
+its entry (in the unopened § 2.10) is what the list quotes. The gate was not run on the two fenced files, whose other sections it would print.
+
+### 3.2 Divergences on FS121-V2-SECTOR
+
+| # | item | this route | the first derivation (V2 § 2.3) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the positive-angle case | Lemma C at an edge of `R_1`: when `R_2` has a direction strictly inside `(β, α + 2π)`, both contacts `z ± ν` of that edge leave `supp S_a`, against Lemma A | "Positive angle: § 2.2" (DB1-L3's derivation, fenced) | route | not comparable here (§ 2.2 unread); both conclude |
+| 2 | where a same-colour cusp can sit | step 1 excludes every direction but the two edge directions | "(i) … `φ ∈ [0, θ₁]` … and `φ ∉ (0, θ₁)`", by § 2.2's argument with Lemma H's zero-angle form | route | agree on the conclusion: the cusp lies along an edge's ray |
+| 3 | excluding the contact on the sector's side, `z + ν` | Lemma C with `u = ν`: `R_1`'s rays meet `D_{z+ν}`, the cusp lies in the lens so meets `E_ν` | cases "tangent type" and "kind both with `a` outside": the comparison puts `W₂` outside `B(y, 1)`, Lemma H makes `W₁` out, against `D(W₁)` | route | the same disc test, stated as a covering (mine) and as "all regions on one side" (theirs); kept both |
+| 4 | excluding the contact on the cusp's own side, `z − ν` | Lemma D: `R_2 ⊆ cl D_{z−ν}`, against the lens (`R_2` strictly above its lower arc, which lies on or above `T₁(z − ν)`) | case "kind both with `a` inside": `W₂` in, Lemma H makes `W₁` in, against `D(W₁)` | route | both valid; two independent contradictions in one case; kept both |
+| 5 | how an arc's type near `z` is fixed | limits of contacts along the arc (Lemma A); the type may vary along the arc | one case per arc (tangent type; kind both, `a` outside; kind both, `a` inside), through Lemma T (fenced) | route | if Lemma T classifies per point, the two agree; if per arc, it needs the type constant near `z` (M2-INTRAD's finiteness near a point of Σ, one mind) — mine does not; noted for the author, not a divergence of truth |
+| 6 | what survives of the *not claimed* line | two zero-angle regions of one colour survive only if collinear (C-cusp) | "Only 'two cusps' … survives" | route | mine reaches further; one mind; offered as a corollary, no disagreement about truth |
+| 7 | the checks | exact covering on 14,641 rational points near `z + ν` (control `fs121-v3-tangent-cusp`) | `fs121-v2-comparison`, the comparison step on rational points of circles of radius `R ≥ 1` | route | different steps checked; both fire on a fault (theirs as reported there, not re-run here) |
+
+### 3.3 Divergences on FS121-D3-GRUNDY
+
+| # | item | this route | the first derivation (D3 § 2.2) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | existence of each maximal class | exhaustion by a weighted measure: dependent choice suffices | Zorn's lemma with FS111-M-SATC (i)'s chain argument | route | kept both; the exhaustion matters to a ZF + DC audit of the measurable chain (FS-104's standing item, Soifer's Open AC Problem 62.14) |
+| 2 | the Grundy property | at `x ∈ supp A_m`, add `A_m ∩ B(x, η)` to `A_i` (Lemma B) | `φ_{A_i} > 0` a.e. on `R_{i−1} ∖ A_i` (FS111-M2-ZERO's relative form), then contacts of approximating points and a limit | route | kept both |
+| 3 | "never raising a point's colour index" | at every point: the families use exact inclusions `S′_m ⊆ A_m ⊆ C_m`, so `g(x) ≤ f(x)` for every `x` | inclusions "(a.e.)": never rising almost everywhere | wording | the statement says "a point's"; the first derivation carries it a.e., which a choice of representatives (a null change) makes pointwise. The author may keep the words and add the representatives, or write "almost every point's" |
+| 4 | an empty class | step 4 shows `A_i` null forces every later class null, so the property is never vacuously broken | not addressed; its `Z`-argument covers it implicitly | route | agree |
+| 5 | the last class | `A_k = C_k`, maximal for free | `A_k = R_{k−1}`, the family's single element | route | agree |
+
+### 3.4 Divergences on FS121-D3-FALLSAT
+
+| # | item | this route | the first derivation (D3 § 2.1) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the contradiction | `B(x, η)` enters `A_j`; `x` is then a density point of `A_j` and the other colours have density 0 at `x`, so `x` is no essential boundary point | `B(x, η/2)` enters `S_j`; `x` is a density point, against `x ∉ S̃_j` (which holds at an essential boundary point with `j ∈ P(x)`) | route | the same argument; the pairwise null overlaps, which mine uses, are not needed in theirs |
+| 2 | the grade's footing | hand, with Lemma B re-derived | derived from FS111-C-FILL (its measure computation) | route | the same estimate |
+| 3 | what the argument carries | the fall property: every point outside `int supp A_j` is `j`-bound (FS111-M-SATC (ii) class by class) | "maximality of each class alone"; FS111-M2-SELCOMP's clause holds without "regular" | route | both see content beyond the sentence; no disagreement |
+
+### 3.5 The count, the predictions, and what this verification could not supply
+
+- **Minds.** Each statement now has two derivations: the first (one mind) and this one (blind, the same model). They are independent in
+  information (commit order: stage 1 `ad211625`, verdicts `dea603eb`, reading after) and differ in route in the places the tables name; they
+  share a prior (Opus 5.5). By the core's count: **two minds on information and route, one on prior**. The *given* included two relayed definition
+  lines of the V2 record (§ Fence log): definitions, no route.
+- **Predictions** (registered at stage 1, before any written derivation, informed): FS121-V2-SECTOR derived at 0.45 — met; FS121-D3-GRUNDY
+  derived at 0.88 — met; FS121-D3-FALLSAT derived at 0.92 — met (Brier 0.108 over three). The likeliest break registered for FS121-V2-SECTOR
+  (the same-colour cusp along the ray of the sector's own edge) was the case that needed a new lemma (Lemma D) in mine and the three-case
+  split in the first derivation; the one registered for GRUNDY (pointwise "never raising") is the wording divergence § 3.3 row 3.
+- **Retractions:** none (this mind).
+- **Counterexamples:** none found against any statement; the nearest failing statements are located in § 2.4.
+- **What this verification cannot supply:** whether the statements are the ones FS-121 needs. In particular FS121-V2-SECTOR rests on the fan
+  reading of REG-J′ (the essential boundary in a small disc about `z` is the finitely many arcs at `z`); REG-J′'s words ("each point of Σ meeting
+  finitely many interface arcs") do not by themselves exclude arcs that pass arbitrarily near `z` without meeting it. The proposing record builds
+  the fan into its definitions; a reader of intent should check that every consumer of FS121-V2-SECTOR reads REG-J′ the same way.
+
+### 3.6 Proposed for the coordinator's files (drafts; I edit none of them)
+
+- *For the list's § 0* (a statement defect, not a truth defect): FS121-V2-SECTOR uses "sector", "region", "angle" and "occupies", which § 0 does
+  not define; the proposing record's definitions (as relayed, § Fence log) would close it.
+- *For the derivation file* (one mind each, [hand]): C-π — "at a point of Σ of an honest saturated colouring in D-NF satisfying REG-J′, every
+  region of positive angle has angle at most π"; C-cusp — "at such a point, two zero-angle regions of one colour have collinear tangent
+  directions". Both from § 2.3's lemmas; neither is on the list.
+- *No `BIBLIOGRAPHY.md` rows*: no external work was read or cited beyond Federer's criterion for sets of zero measure-theoretic boundary
+  (recalled, not read; used only to justify the relayed definition that each region is a.e. one colour).
