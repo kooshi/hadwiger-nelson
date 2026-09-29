@@ -118,3 +118,5 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | E10 | two openings in flight: stub numbers fixed in advance in their briefs | W8 |
 | E14 | a defect in `tools/claude_md_fact_audit.py` found by a derivation job, with no lane named to fix it | W9 |
 | E8 | a four-text drafting job ran to ≈ 357k against 200k; a card job to ≈ 413k, its own count 46 % of the harness's | W7 |
+| E1 | a job record's four theorems had no "Rests on it" prose; the census failed until the coordinator generated it | W10 |
+| E15 (new) | a drafting job that proves theorems writes them in a `plans/<job>-derivation.md` of its own, so the census sees them without a copy | W10 |

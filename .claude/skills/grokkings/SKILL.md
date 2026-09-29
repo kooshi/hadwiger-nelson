@@ -13,10 +13,13 @@ writer.*
 
 * **G1 — The field wall. [kernel]** The Moser twist is a seam-group word (ρσ² = −1), the seam group's
   countable closures are exactly 4-chromatic, and all of K² is 4-chromatic (Theorem B). A 5-forcer's
-  coordinates must break the 2-adic wall — contain an odd square class ≡ 7 (mod 8), such as √5, √7 or √247
-  (G35). The certified witnesses' √5 and √7 are instances, not the criterion. *Do: before any solver on a candidate,
-  read its field's square classes for an odd one ≡ 7 (mod 8) (G35's congruence); none means Theorem B four-colours the
-  object and the null is free — never run it. Nothing kills it; it kills every five-colour design in a wall-standing field.*
+  coordinates must break the 2-adic wall when their field is multiquadratic or of degree at most 11 — for a multiquadratic
+  field, contain an odd square class ≡ 7 (mod 8), such as √5, √7 or √247 (G35); in general they need only avoid a place above 2
+  ramified in F(i) or inert of norm ≤ 32, and given MR a field whose wall stands can hold one (G35's K·E₇). The certified witnesses' √5 and √7 are instances, not the criterion. *Do: before any solver on a candidate
+  over a multiquadratic field, read its square classes for an odd one ≡ 7 (mod 8) (G35's congruence); none means a residue
+  colouring at a prime above 2 (Theorem B's, over K) four-colours the object and the null is free — never run it; over any other
+  field, read its places above 2 (G35's Do). Nothing kills it; it kills every five-colour design in a wall-standing field that is
+  multiquadratic or of degree at most 11.*
 * **G2 — Construction grammar. [measured]** Rings of vertices about a point ⟺ that point was a rotation
   centre of the construction: de Grey's graph has two ring-hearts (its spindle centres), Heule's one. Mirror
   defects are the chirality of a rotated copy. *Do: when you see rings about a point, name it a rotation centre and look
@@ -279,7 +282,12 @@ writer.*
   adjunction deliberately (G37). Nothing kills it (Theorem B); it kills every in-field endgame.*
 * **G35 — The wall is 2-adic. [kernel over subrings; field level gated]** For a real number field F, a
   conjugation-fixed prime 𝔭 of F(i) gives χ(F²) ≤ N(𝔭); one above 2 exists iff −1 is not a square in some
-  completion above 2 (norm 2 or 4). For multiquadratic F the wall stands iff no odd square class is
+  completion above 2 — of norm 2 or 4 when F is multiquadratic, any power of 2 in general. One ramified in F(i)/F gives
+  χ(F²) ≤ 2, and one inert there, over a place of norm Q, gives the target U_Q, four-colourable exactly when Q ≤ 32 (G56, row 123);
+  so a standing wall four-colours F² over a multiquadratic field and below degree 12, and not in general: K·E₇, E₇ the septic
+  subfield of ℚ(ζ₂₉), keeps its wall at two places inert of norm 128, and given MR its plane needs five (`plans/WORKFLOW3-TC1-theory-corrections.md`
+  TC1-STANDING-FOUR, TC1-STANDING-FIVE). *Demotion record: this clause read "(norm 2 or 4)" for every real number field;
+  ℚ(ζ₇)⁺'s prime above 2 has norm 8 (TC1).* For multiquadratic F the wall stands iff no odd square class is
   ≡ 7 (mod 8); a glue point over K with radicand r breaks it iff −r is a square in both 2-adic completions
   of K — a congruence test before any solver (of the classes {1, 2, 5, 7, 10, 14, 35, 70}, exactly 5 and 7
   break). The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U] (GPT Astra's prime inversion, G55; for real quadratic fields `[Fischer1990b]` Thm 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8)); in the kernel in valuation form, `UnitRing.inv_two_mem_unitRing_iff` (row 105). **Reciprocity bounds the wall, but the wall is not the ramification of one algebra** [hand; corrected 2026-09-22 at
@@ -297,7 +305,8 @@ writer.*
   supplying the valuation subring); closing it promotes G35 and G43, and it is the one lemma prime inversion's number-field reading (FS-47) and G55's T7 beyond `K(√7)` still need (M2). *Do: before any solver
   over F, decide the wall by congruence — for a K-glue point, is −r a square in both 2-adic completions; for multiquadratic
   F, is some odd square class ≡ 7 (mod 8); for any F, is 1/2 ∈ ℤ[U], i.e. does every prime above 2 split in F(i) — and
-  expect no odd-degree field to break it. Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at
+  expect no odd-degree field to break it; where it stands, call the null free only once a place above 2 is ramified in F(i) or inert
+  of norm ≤ 32, which is automatic over a multiquadratic field or below degree 12. Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at
   a finite place (which would refute the parity step, not the trichotomy).*
 * **G36 — The residue colouring is the canonical separating colouring. [theorem + measured]** On a K-point
   descent stage it is proper, monochromatic on every distance-2 cheat, and separates the seed's pair — one
@@ -368,8 +377,8 @@ writer.*
   forcing is. Killing test: a unit-distance object without cheats at γ = 0.*
 * **G43 — The residue plane seals fields. [kernel over rings; field level gated as G35; prior art
   `[Moorhouse2010]`]** At a usable prime the residue map is a homomorphism into Γ_q, so
-  χ(F²) ≤ χ(Γ_q) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For F ⊇ K,
-  6-open ⟺ wall broken ∧ 11 inert: K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
+  χ(F²) ≤ χ(Γ_q) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For multiquadratic F ⊇ K,
+  6-open ⟺ wall broken ∧ 11 inert (not for every F ⊇ K: K·E₇ is 6-open with its wall standing, G35): K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
   11-inert but keeps the wall. **De Grey's field IS 6-open, and so is K(√5,√7,√247)** — his coordinates span
   K(√5,√7) (ℚ-span rank **16 of 16** over `tools/degrey_cert.json`; √7 enters by the rotations through
   π/2 ± arcsin(1/8)); Frobenius at 11 is trivial on √5 and nontrivial on √7, so the residue field is 𝔽₁₂₁ and
@@ -522,12 +531,14 @@ writer.*
   decided (ceilings and searches: row 69). **The exclusion.** A prime is usable for a
   field only if the field's radicands are all squares in its residue field, and **every field this project has built in contains
   K**: 3 is a non-square modulo 31, 43, 67, 79 and 11 modulo 23, 47, 59, 71, and at 27 the residue 11 ≡ −1 (mod 3) is a non-square
-  in every 𝔽_q with q ≡ 3 (mod 4); so such a field's usable primes are 11 and then nothing below 83, its local bound is 5 or ≥ 7,
-  and **six is arithmetically excluded for all of them**. A six-chromatic number field, if one exists, contains no √11 and none of
+  in every 𝔽_q with q ≡ 3 (mod 4); so such a field's usable primes are 11 and then nothing below 83; its places above 2 never ramify in F(i) and, when
+  not split, have norm 2, 8, 32, 128, …, never 64 (`plans/WORKFLOW3-TC1-theory-corrections.md` TC1-SQRT3-DYADIC); its local bound is 4
+  (a place above 2 inert of norm ≤ 32), 5 or ≥ 7, and **six is arithmetically excluded for all of them**. A six-chromatic number field, if one exists, contains no √11 and none of
   the known five-forcers; every field with local bound ≥ 6 needs five through MR (row 123, [hand]). **Each member has its field named**
   (`data/fs54/fields.out`, `data/fs54/quadratic-fields.out` — complete enumerations by PARI's `nflist`, FS-54): the smallest field
   whose FIRST usable plane is that member **and whose 2-adic wall is broken**, the second condition being what makes a local bound
-  of 6 worth anything, since a wall-standing field is four-colourable by the residue at 2. **The primes above 2 decide which
+  of 6 worth anything, since a wall-standing field below degree 12 — every field these enumerations reach — is four-colourable
+  by the residue at 2 (TC1-STANDING-FOUR; from degree 12 a place above 2 inert of norm ≥ 64 keeps the wall without four colours). **The primes above 2 decide which
   fields count, and there are only three cases**: a prime of F above 2 that **splits** in F(i) gives no bound; one **ramified** in
   F(i)/F gives **χ(F²) ≤ 2** whatever its norm (conjugation acts trivially on the residue field, so every unit vector reduces to 1
   and a linear map to 𝔽₂ sending 1 to 1 two-colours the plane); one **inert** gives U_Q, Q = N(𝔭), which is **4-colourable at
@@ -565,8 +576,10 @@ writer.*
   χ_f = q²/α, so χ ≥ ⌈q²/α⌉ is a theorem and only the equality **χ = ⌈q²/α⌉** is the reading (true at 3, 7, 11; consistent at 19;
   it replaces the "+1 over the spectral floor" reading, which fails at the Hoffman-tight q = 3). The fractional wall W_f, which
   proves the window empty with no reading at all, and what the conjecture makes of the window: G59. *Do: for any field, list
-  its usable q first — six is possible only if one lies in {23, 27, 31, 43, 47}, or a prime above 2 is inert of norm 64, and
-  the wall is broken; otherwise L is 2, 3, 4, 5 or ≥ 7 before any solver, and over any F ⊇ K it is 5 or ≥ 7. An exception field of row 100 (a stable dyadic place ramified in `F(i)/F`) has `L = 2`: never scope a claim at `L ≥ 3` by that exception (row 123). Killing tests —
+  its usable q and its places above 2 first — six is possible only if a usable q lies in {23, 27, 31, 43, 47} or a place above 2
+  is inert in F(i) of norm 64, and no place above 2 is ramified in F(i) or inert there of norm ≤ 32 (row 123; over a multiquadratic
+  field or below degree 12, that is the broken wall); otherwise L is 2, 3, 4, 5 or ≥ 7 before any solver. Over any F ⊇ K no place
+  above 2 ramifies in F(i) or has norm 64 (TC1-SQRT3-DYADIC), so L is 4, 5 or ≥ 7, and 4 when a place above 2 is inert of norm ≤ 32. An exception field of row 100 (a stable dyadic place ramified in `F(i)/F`) has `L = 2`: never scope a claim at `L ≥ 3` by that exception (row 123). Killing tests —
   of the exclusion: a usable window member for some field containing K (impossible by reciprocity); of the reading: a decided
   plane with χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.*
 * **G57 — The window is triangle-free where it is roomy, and no candidate field holds a Moser spindle. [derived;

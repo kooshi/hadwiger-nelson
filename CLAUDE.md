@@ -44,7 +44,8 @@ loaded), mechanism and readings in a grokking (`.claude/skills/grokkings/SKILL.m
   χ(F²) ≤ χ(Γ_q) (row 52). **L(F)**, F's *local bound*: the least chromatic number among the residue targets its conjugation-fixed
   primes supply. **The conjecture** (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its **bold form** is χ(ℝ²) = 7.
 - **Sealed at k** (*5-sealed*, G43): some residue target of F — a usable plane, or the target at a prime above 2 — is k-colourable, so
-  χ(F²) ≤ k. **6-open**: none is 5-colourable (the wall is broken and every usable plane needs ≥ 6; over K, row 53's criterion). **The (2-adic) wall** stands
+  χ(F²) ≤ k. **6-open**: none is 5-colourable (every usable plane and every target at a prime above 2 needs ≥ 6; over a multiquadratic field, the wall is broken and every usable
+  plane needs ≥ 6; over K, row 53's criterion). **The (2-adic) wall** stands
   or is broken: G35. **The window**, **the wall at six**: G56, G59.
 - **Compulsions at k colours** (row 42): `Forces G k u v` — every proper k-colouring gives u and v one colour (a *forced pair*);
   `Separated G k u v` — every one gives them different colours (a *virtual edge*).
@@ -228,9 +229,10 @@ theorem** (rows 43, 61; G26); the seam-field closures, each exactly 4-chromatic 
 the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de Grey's 1581) ≤ 5.
 
 **What the hunt has established** (the reasons are in § Grokkings):
-1. **The 4/5 wall is 2-adic.** A unit-distance graph forces a fifth colour only if its coordinates break the
-   2-adic wall (G1, G35).
-2. **The field sieve.** For F ⊇ K: 6-open ⟺ the 2-adic wall is broken and 11 is inert. The finite planes refuse five from 59 up and
+1. **The 4/5 wall is 2-adic.** Over a multiquadratic field, or one of degree at most 11, a unit-distance graph forces a fifth colour
+   only if its coordinates break the 2-adic wall (G1, G35); over any real number field, only if each place above 2 splits in F(i)
+   or is inert there of norm 64 or more (row 123), which a field whose wall stands can meet (G35).
+2. **The field sieve.** For multiquadratic F ⊇ K: 6-open ⟺ the 2-adic wall is broken and 11 is inert. The finite planes refuse five from 59 up and
    six at 83 (row 68), and every field the descent ever used is 5-sealed (G43, G44). The wall is broken exactly when 1/2 lies in the
    unit-vector ring, and over K that is sufficient for five, given M56's 8/3 forcer (G55) or, independently, through MR (row 123, [hand]).
 3. **The design target has no instance** (G48, row 66): a pair forced equal at five colours over a 5-sealed field, spindled into a
