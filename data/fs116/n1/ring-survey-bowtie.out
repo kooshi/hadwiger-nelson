@@ -1,0 +1,88 @@
+== strip P0=(0,0): P(p) = ['B', 'M', 'O', 'P']
+  ring word (counter-clockwise):
+       0.000  CHANGE POINT colours ['B', 'G', 'O', 'R']  (4 colours)
+      arc    0.000 +  60.000  off Gamma, colour ['G']
+      60.000  event        colours ['G', 'O', 'P']  (3 colours)
+      arc   60.000 +  15.522  Gamma on the ring, inner|outer ['P', 'O']  kind (Q)
+      75.522  event        colours ['O', 'P', 'R']  (3 colours)
+      arc   75.522 +  28.955  off Gamma, colour ['R']
+     104.478  event        colours ['B', 'M', 'R']  (3 colours)
+      arc  104.478 +  15.522  Gamma on the ring, inner|outer ['B', 'M']  kind (Q)
+     120.000  event        colours ['B', 'G', 'M']  (3 colours)
+      arc  120.000 +  60.000  off Gamma, colour ['G']
+     180.000  CHANGE POINT colours ['G', 'M', 'P', 'R']  (4 colours)
+      arc  180.000 +  60.000  off Gamma, colour ['R']
+     240.000  event        colours ['O', 'P', 'R']  (3 colours)
+      arc  240.000 +  15.522  Gamma on the ring, inner|outer ['O', 'P']  kind (Q)
+     255.522  event        colours ['G', 'O', 'P']  (3 colours)
+      arc  255.522 +  28.955  off Gamma, colour ['G']
+     284.478  event        colours ['B', 'G', 'M']  (3 colours)
+      arc  284.478 +  15.522  Gamma on the ring, inner|outer ['M', 'B']  kind (Q)
+     300.000  event        colours ['B', 'M', 'R']  (3 colours)
+      arc  300.000 +  60.000  off Gamma, colour ['R']
+  D-free maximal arcs (start, length): (0.000, 60.000), (75.522, 28.955), (120.000, 60.000), (180.000, 60.000), (255.522, 28.955), (300.000, 60.000)
+  twist: 0 violations in 2360 sampled pairs
+== strip P1=(1/2,0): P(p) = ['G', 'M', 'P', 'R']
+  ring word (counter-clockwise):
+       0.000  CHANGE POINT colours ['B', 'M', 'O', 'P']  (4 colours)
+      arc    0.000 +  60.000  off Gamma, colour ['B']
+      60.000  event        colours ['B', 'G', 'M']  (3 colours)
+      arc   60.000 +  15.522  Gamma on the ring, inner|outer ['G', 'M']  kind (Q)
+      75.522  event        colours ['G', 'M', 'O']  (3 colours)
+      arc   75.522 +  28.955  off Gamma, colour ['O']
+     104.478  event        colours ['O', 'P', 'R']  (3 colours)
+      arc  104.478 +  15.522  Gamma on the ring, inner|outer ['P', 'R']  kind (Q)
+     120.000  event        colours ['B', 'P', 'R']  (3 colours)
+      arc  120.000 +  60.000  off Gamma, colour ['B']
+     180.000  CHANGE POINT colours ['B', 'G', 'O', 'R']  (4 colours)
+      arc  180.000 +  60.000  off Gamma, colour ['O']
+     240.000  event        colours ['G', 'M', 'O']  (3 colours)
+      arc  240.000 +  15.522  Gamma on the ring, inner|outer ['M', 'G']  kind (Q)
+     255.522  event        colours ['B', 'G', 'M']  (3 colours)
+      arc  255.522 +  28.955  off Gamma, colour ['B']
+     284.478  event        colours ['B', 'P', 'R']  (3 colours)
+      arc  284.478 +  15.522  Gamma on the ring, inner|outer ['R', 'P']  kind (Q)
+     300.000  event        colours ['O', 'P', 'R']  (3 colours)
+      arc  300.000 +  60.000  off Gamma, colour ['O']
+  D-free maximal arcs (start, length): (0.000, 60.000), (75.522, 28.955), (120.000, 60.000), (180.000, 60.000), (255.522, 28.955), (300.000, 60.000)
+  twist: 0 violations in 2360 sampled pairs
+== disk corner A0: P(p) = ['blue', 'orange', 'red', 'yellow']
+  ring word (counter-clockwise):
+      15.827  event        colours ['orange', 'violet', 'yellow']  (3 colours)
+      arc   15.827 +  20.173  Gamma on the ring, inner|outer ['yellow', 'orange']  kind (Q)
+      36.000  event        colours ['green', 'orange', 'yellow']  (3 colours)
+      arc   36.000 +  36.000  off Gamma, colour ['green']
+      72.000  event        colours ['blue', 'green', 'red']  (3 colours)
+      arc   72.000 +  36.000  Gamma on the ring, inner|outer ['blue', 'red']  kind (Q)
+     108.000  event        colours ['blue', 'red', 'violet']  (3 colours)
+      arc  108.000 +  36.000  off Gamma, colour ['violet']
+     144.000  event        colours ['orange', 'violet', 'yellow']  (3 colours)
+      arc  144.000 +  20.173  Gamma on the ring, inner|outer ['orange', 'yellow']  kind (Q)
+     164.173  event        colours ['green', 'orange', 'yellow']  (3 colours)
+      arc  164.173 +  44.837  off Gamma, colour ['green']
+     209.010  CHANGE POINT colours ['green', 'violet']  (2 colours)
+      arc  209.010 +  42.990  off Gamma, colour ['violet']
+     252.000  event        colours ['blue', 'red', 'violet', 'yellow']  (4 colours)
+      arc  252.000 +  36.000  Gamma on the ring, inner|outer ['red', 'blue']  kind (Q)
+     288.000  event        colours ['blue', 'green', 'orange', 'red']  (4 colours)
+      arc  288.000 +  42.990  off Gamma, colour ['green']
+     330.990  CHANGE POINT colours ['green', 'violet']  (2 colours)
+      arc  330.990 +  44.837  off Gamma, colour ['violet']
+  D-free maximal arcs (start, length): (36.000, 36.000), (108.000, 36.000), (164.173, 87.827), (288.000, 87.827)
+  twist: 0 violations in 1756 sampled pairs
+== Y2 bowtie centre: P(p) = [1, 2, 3, 4]
+  ring word (counter-clockwise):
+      30.000  event        colours [1, 3, 4, 5, 6]  (5 colours)
+      arc   30.000 +  60.000  off Gamma, colour [5]
+      90.000  CHANGE POINT colours [2, 4, 5, 6]  (4 colours)
+      arc   90.000 +  60.000  off Gamma, colour [6]
+     150.000  event        colours [1, 3, 4, 5, 6]  (5 colours)
+      arc  150.000 +  60.000  Gamma on the ring, inner|outer [3, 1]  kind (Q)
+     210.000  event        colours [1, 2, 3, 5, 6]  (5 colours)
+      arc  210.000 +  60.000  off Gamma, colour [5]
+     270.000  CHANGE POINT colours [2, 4, 5, 6]  (4 colours)
+      arc  270.000 +  60.000  off Gamma, colour [6]
+     330.000  event        colours [1, 2, 3, 5, 6]  (5 colours)
+      arc  330.000 +  60.000  Gamma on the ring, inner|outer [1, 3]  kind (Q)
+  D-free maximal arcs (start, length): (30.000, 60.000), (90.000, 60.000), (210.000, 60.000), (270.000, 60.000)
+  twist: 0 violations in 1200 sampled pairs

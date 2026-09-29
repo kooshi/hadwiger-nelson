@@ -489,3 +489,31 @@ control: germ-report
   fault: python3 ../tools/fs116_n1_ring.py germ --plantrule
 
 ## Stage 3 — SAVED
+
+## Hand-back at stage 3 — what is left, and the corrections owed
+
+**Budget.** The harness's cumulative count stood near 545k after stage 3 (the brief's hand-back line is about 550k), so stage 4 (SAT-STRIP, SAT-QFREE) is
+**not started**; nothing of it is claimed. A successor starts from:
+- **SAT-STRIP** — § 1.3's first rung: SATPIN puts two of `p`'s colours at each of the four points `p ± ν_i` of `ω(p)`, each pair split along the tangent
+  line there (in the strip's labelling `{M, O}` at `r(90°)`, `{P, B}` at `r(270°)`, `{B, O}` at `r(0°)`, `{P, M}` at `r(180°)`), and N-E1 puts, just below
+  each tangent line, colours absent at `p` only; those four ring points are essential boundary points in `B̄(p, 1)`, so saturation applies to them, while the
+  tangent lines leave `B̄(p, 1)` at once, so the ladder's second rung is not given by saturation, only by validity on `B̄(p, 2)`. The coordinator's inputs
+  (message, 2026-09-29): FS121-D1-VT and FS121-D1-EROSION (`plans/FS121-D1-proof.md` § 2.1, § 2.2; one mind each), stated for cusp-free honest saturated
+  colourings with REG-J′ — **not for fragments**; carrying them to a fragment saturated on `B̄(p, 1)` is a step to derive, not to assume. EROSION at `p` reads
+  `cot(θ/2)`: with four segment edges at right angles, `θ = π/2` and `cot(π/4) = 1`, so either a tile's straight edge from `p` is at most 1 long or both carry a
+  vertex at distance 1 — at the ring, where SATPIN's partner points sit.
+- **SAT-QFREE** — § 1.3: by N-E1 its content is exactly the exclusion of a *touch point* (an isolated point of `Γ ∩ ω(p)` carrying a colour of `p`, across
+  which the ring's colour does not change). RING-GERM does not reach it (it starts from a change point).
+
+**Corrections owed** (for the coordinator to route; no file of another lane edited):
+1. `plans/FS114-derivation.md`, FS114-N7-3T's `model:` line reads "FS114-Y2-BOWTIE's centre, a degree-4 four-colour vertex with four tactic edges whose ring
+   carries no (Q) arc". Its ring carries two (Q) arcs, the Reuleaux caps (FS114-N6 § 4: "Its caps are (Q) arcs (inner `t1`, outer the colour-3 cap tile)";
+   `data/fs116/n1/ring-survey-bowtie.out`: `[150°, 210°]` inner 3 | outer 1 and `[330°, 30°]` inner 1 | outer 3, kind (Q)). Draft replacement:
+   `model: none held with a (Q)-free ring at a degree-4 four-colour vertex with three or more tactic edges (FS114-Y2-BOWTIE's centre has four tactic edges, but its ring carries two (Q) arcs, the Reuleaux caps — FS114-N6 § 4); the exclusion's scope is 1 + ε`.
+   No statement changes; nothing rests on the model line.
+2. `data/fs116/claims.md` § 5, RING-TWIST's not-claimed parenthetical "(with three colours absent the parity fails: R7's lattice points)": R7's lattice points
+   carry six colours (one absent) and have no qualifying window, so the clause is vacuous there, not failing (§ 2.4). A frozen list: for the close's record.
+
+**The rung FS-121 takes** (its inventory item 8): RING-Q-PRIME, from RING-GERM — four-colour vertices at every change point whose `±60°` points avoid (Q)
+arcs, with the pairing rule (tip ⇐ outer germ pair, outer tile ⇐ inner germ pair) where they do not. Not RING-Q, which is GAP.
+
