@@ -347,3 +347,144 @@ two words).
 - **V1-SATPIN** — SATPIN under `a ≠ b` and "at least one", at every vertex of at least two colours in the saturated disc, cusps
   allowed [hand, one mind; the pinch lemma's method] — § 2.3.
 - **V1-L1** — one side of each contact circle at a smooth boundary point of a valid map [hand, one mind] — § 2.3.
+
+## Stage 3 — SAVED: FS114-N7-3T — the frame and N7-HUB derived; the pattern kills not reached (a stall)
+
+### 3.0 What was given for this statement (added to § 1.3)
+
+Brief amendment 1 (2026-09-29 05:59 UTC) and `data/fs116/v1-n7-definitions.md`: definitions only, verbatim from FS-114's records, vetted by
+Keryx — the tactic edge and its sign (`+` inner tile counter-clockwise, `−` clockwise), inner counts (anti-lens 0, rotational 1, lens 2),
+the lens and `γ = ∠qpq′`, the Reuleaux lens ("`γ = 60°`, cone `120°`, reaching its two centres"), `γ = 0°` ("cone `180°`, one centre"),
+the pattern names (`++++` the pinwheel; `+++−`, `++−−` the `(2, 1, 1, 0)` patterns), OC's defining clause in N7's frame
+(`D_m = y + 30° + 60m`; `t2 ⊂ Reul(p, y_{a+1}, y_{a+2})`, `t3 = [D_{a+2}, D_{a+3}]`, `t4 ⊂ Reul(p, y_{a+4}, y_{a+5})`, `t1` a tip at `y_a`),
+non-Siamese and simple, the bends ("every ring `Γ`-arc but the (Q) arcs is removed"), N7's setting ("a vertex of a non-Siamese valid map
+in the simple class carrying exactly four colours (so degree 4)"), the tip, and — added at 01:13 in answer to my scope question — "Up to
+rotation and reflection … the sign patterns are `+++`, `++−`, `+−+`, `−++`". The definitions file also shows, as definitions, facts a
+derivation would have to reach (the D-frame, "Three tactic edges among four are consecutive"): I read them before deriving, so the frame
+below is not blind to its shape, only to its proofs. Also given before: `LEDGER.md` § B's one-line summaries of N3–N7 (§ 1.3).
+
+**Readings worked** (the sources leave them open): "excluded at radius `1 + ε`" = no valid fragment on any open set containing
+`B̄(p, 1)` (for every `ε > 0` none on `B̄(p, 1 + ε)`); "four-colour vertex" = exactly four colours — at degree 4 "at least four" is the
+same. The headline is worked with `+++` inside it (Keryx, 01:13).
+
+### 3.1 The frame (my route) — setting N
+
+`p = 0` a vertex of degree 4 of a valid six-coloured fragment on an open set containing `B̄(p, 1)`, non-Siamese, simple, tiles
+`t1 … t4` of four colours with positive cones, absent colours `A`, `Ā`; the ring `ω(p)` carries no arc of `Γ` (after the bends,
+(Q)-free).
+
+- **F0 (the dichotomy).** For two tiles `W₁, W₂` of one colour (equal allowed), `W₁ × W₂` is connected and validity keeps 1 out of its
+  distance set, an interval: all distances `< 1` or all `> 1`. So every tile has diameter `≤ 1`, and — non-Siamese — two distinct tiles of
+  one colour are far (all distances `> 1`); two tiles of one colour whose closures meet, or which have one pair of points closer than 1,
+  are the same tile.
+- **F1 (the ring's colours).** A ring point off `Γ` inside a tile of `p`'s colour `c` is at distance 1 from `p ∈ cl t_c`; moving along
+  `t_c` near `p` sweeps the distance through 1 inside that tile: invalid. So off `Γ` the ring lies in `A`- and `Ā`-tiles.
+- **F2 (the flip).** `z` and `σz` (60° apart) are at distance 1: off `Γ` their colours differ, `r(σz) = r̄(z)`; the change points form a
+  finite `σ`-invariant set `C`, with an odd number in every half-open 60° window.
+- **F3 (the four regions at a change point `y`).** For `w` near `y` the two ring points at distance 1 from `w` lie near `σy`, `σ⁻¹y`; reading
+  their colours through F2 (with `r = A` just clockwise of `y`, `Ā` just counter-clockwise), `w` may be `A` only if `|w − σy| > 1 > |w − σ⁻¹y|`,
+  `Ā` only if `|w − σy| < 1 < |w − σ⁻¹y|`. So near `y` the region **I** `= B(σy,1) ∩ B(σ⁻¹y,1)` (the inward `60°` cone) and the region
+  **O** outside both discs (the outward `60°` cone) carry only `p`'s colours (six colours in all). Exact to all orders near `y`: the regions
+  are cut by the circles `ω(σy)`, `ω(σ⁻¹y)`, which cross at `y` (and at `p`).
+- **F4 (tips and outward tiles).** A `c`-tile meeting **I** has a point within 1 of `p ∈ cl t_c`, so by F0 it **is** `t_c`: **I** near `y`
+  lies in `p`'s own tiles reaching `y` (tips), and a tile reaching `y` lies in `B̄(p,1) ∩ B̄(y,1)`, cone `⊆ H(ψ_y) = [ψ_y − 90°, ψ_y + 90°]`.
+  A `c′`-tile meeting **O** is not `t_{c′}` (its points beyond the ring are more than 1 from `p`), hence far from it: `t_{c′} ∩ B(y, 1) = ∅`,
+  cone `⊆ H(ψ_y + 180°)`.
+- **F5 (six change points).** Every change point has a tip (F3, F4); a tip reaches only change points pairwise at most 1 apart, all in one
+  closed `60°` arc; with `m` (odd) change points per `60°` window a closed `60°` arc holds at most `m + 1`, and four tiles cover at most
+  `4(m + 1) < 6m` once `m ≥ 3`. So **`m = 1`: exactly six change points `y_k = y + 60°k`**, ring tiles alternating `A`, `Ā` on six `60°` arcs.
+- **F6 (tactic centres are change points; the D-frame).** A tactic edge about `q` has inner tile `x` (a `p`-tile, so `x ⊆ B̄(p,1)` near `q`) and
+  a partner of the outer colour at `q` — not the outer `p`-tile itself, which cannot reach `q` (it would lie in `B̄(q, 1)` by F0's diameter bound, yet near `p` it lies outside `B(q, 1)`), so far from it by F0, hence outside `B(p,1)` near `q`. If `q ∉ C`, the ring is one absent
+  colour on both sides of `q`; the two ring sectors at `q` are separated by `x` inside and the partner outside, so they are two tiles of one
+  colour (a simple tile never touches itself) whose closures meet — close, against non-Siamese. So `q ∈ C`: every tactic centre is a
+  change point and every tactic edge leaves `p` at some `D_m = y + 30° + 60°m`, its inner tile a tip there, its outer tile a `p`-tile
+  outside `B(q, 1)` whose colour is outward at `q`.
+- **F7 (reach).** A `p`-tile reaching two change points reaches two consecutive ones and lies in their Reuleaux triangle with `p`
+  (`Reul(p, y_k, y_{k+1})`, cone `⊆ [D_{k−1}, D_{k+1}]`); a tactic edge is at most `60°` long (two inner points near its ends would be `≥ 1`
+  apart otherwise, against F0's diameter bound).
+
+**N7-HUB, derived** (my route): each change point `y_k` carries `A` and `Ā` (its two ring sides), the colour `c` of a tip (region **I**) and a
+colour `c′` of region **O**; `c ≠ c′`, since the **O**-tile is far from `t_c` while the tip is `t_c` itself, and two `c`-tiles meeting at `y_k`
+are one tile (F0). So `y_k` is a vertex of at least four colours; and the tip lies in `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so a tile of its colour at
+`y_{k±1}` is within 1 of it and by F0 is the tip's own tile — "carried at `y_{k±1}` by no other tile". Every clause of N7-HUB's parenthesis is
+carried. *Uses:* six colours, exactly four at `p`, non-Siamese (F0), the ring free of `Γ`-arcs near `y_k`, `σ^{±1}y_k`. *Not used:* degree 4
+beyond one tile per colour; any tactic edge.
+
+### 3.2 The exclusion — where my derivation stops
+
+The frame reduces the headline to a finite list of cone configurations: four cones at `p`, tactic edges only at the `D_m`, each change point
+reached by a tip facing it (F4, F7), and for each `k` an outward colour at `y_k` whose tile faces `y_{k+3}` and which is a tip at none of
+`y_{k−1}, y_k, y_{k+1}` (by F0: an **O**-tile at `y_k` within 1 of a tip at `y_{k±1}` would be that tip). I checked these colour-level
+conditions by hand, not by program (the list's § 9 forbids enumerating ring types by program), on three members:
+- **OC** (`a = 0`: `t2` reaching `y1, y2`, `t3 = [150°, 210°]` the tip at `y3`, `t4` reaching `y4, y5`, `t1` the tip at `y0`, `θ_4 ∈ [270°, 330°]`)
+  passes every condition (at `k = 4` only through `t2`);
+- **the pinwheel** at spacing `(1, 2, 1, 2)` (edges at `D_0, D_1, D_3, D_4`, tiles `[30°, 90°]` reaching `y1, y2`; `[90°, 210°]` reaching `y3`;
+  `[210°, 270°]` reaching `y4, y5`; `[270°, 30°]` reaching `y0`) passes them all;
+- **`+++`** at `D_0, D_1, D_2` (`t2 = [30°, 90°]` reaching `y1, y2`, `t3 = [90°, 150°]` reaching `y3`, `t4 = [150°, θ_4]` reaching `y4`, `t1`
+  forced to reach `y5` and `y0`, `θ_4 ∈ [270°, 330°]`) passes them all; so does the `γ = 0°` lens (`t = H(ψ_m)` with three `60°` tiles).
+
+So **the colour-level frame kills none of these**; the headline rests on geometric kills at radius `1 + ε` — second-order straddles along the
+tactic arcs and the ring (row 138's mechanism) — which I did not derive for any pattern. One step toward them is carried: in the `γ = 0°`
+lens the two tactic edges are arcs of `ω(y_m)` ending strictly before `y_{m±1}` (the lens cannot reach `y_{m±1}`, its cone not facing them),
+so each ends at a vertex inside the ring where a third tile enters; what that tile can be is where I stop. **Stall: the per-pattern kills
+(`(2, 1, 1, 0)`, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `+++`, `++−`, `−++`) at radius `1 + ε`.**
+
+### 3.3 Attack on N7-3T
+
+- **The model.** The statement is an exclusion, so its model is the excepted family: OC passes the frame (3.2), and FS114-Y2-BOWTIE (held,
+  row 138; a bowtie whose caps are (Q) arcs, so outside the (Q)-free class) is a valid fragment on `B̄(p, 3√3/5)` with four tactic edges —
+  the exclusion is not vacuous in shape, but no object with a (Q)-free ring and three tactic edges is held on either side.
+- **The headline's hypotheses, removed in turn — the attack succeeds here, on the wording.** The headline reads "Three or more tactic edges
+  at a degree-4 vertex with a (Q)-free ring are excluded at radius `1 + ε`": it names neither six colours, nor four colours at `p`, nor
+  non-Siamese, nor simple, nor the bent map. My frame uses **non-Siamese** at F4, F5, F6 and N7-HUB (tips are `p`'s own tiles; tactic centres
+  are change points), **simple** at F6, **four colours** at F1–F3 (two absent colours), **six colours** at F3, and **the ring free of
+  `Γ`-arcs** at F3 — the bends remove every ring arc but the (Q) arcs, and "(Q)-free" then leaves none, so "(Q)-free ring" in the headline is
+  the bent map's ring. A degree-4 vertex of a Siamese map may carry three colours (a repeated colour at `p` is exactly a Siamese pair,
+  F0), and nothing then gives two absent colours or the flip. I have no object refuting the headline without these hypotheses, so this is a
+  **statement defect** (the conveyed exceeds what any derivation I can see carries), not a refutation: the headline should carry N7's
+  setting. Row 138's not-claimed line already says "every exclusion here is non-Siamese and simple"; the entry's headline does not.
+- **The parenthesis is a second claim.** "(with N7-HUB: …)" states a lemma of its own with a sketch inside the statement — a rider. I derived
+  it (3.1); it should be its own entry.
+- **The enumerated list omits `+++`** (Keryx's answer, 01:13: the record names four three-edge patterns, the list three); a wording gap,
+  logged by Keryx. `+++` passes the colour-level frame (3.2), so it needs its own kill.
+- **"each of the six change points"** presupposes six; F5 derives it (with non-Siamese), so the presupposition is carried.
+- **Where the attack did not succeed:** no configuration outside OC was shown to survive at `1 + ε`, and no member of OC was shown to die.
+
+verification: FS114-N7-3T
+  statement: **Three or more tactic edges at a degree-4 vertex with a (Q)-free ring are excluded at radius `1 + ε`**, except the open-cap family **OC**
+    (`+−+`, a Reuleaux lens beside a `60°` anti-lens; with a fourth tactic edge, the Reuleaux bowtie whose lenses do not border the caps): the
+    `(2, 1, 1, 0)` patterns, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `++−`, `−++` die in every member (with N7-HUB: at a four-colour vertex,
+    non-Siamese and simple, whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours: the directions
+    toward `p` there lie in tiles of `p` reaching `y_k`, a tip, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}` by no other
+    tile, and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-tiles face away)
+  given: the statement and its not-claimed line; the definitions of data/fs116/v1-n7-definitions.md (verbatim FS-114 definitions, vetted, which show
+    the D-frame's shape and N7's setting but no argument); Keryx's answer naming +++; LEDGER § B's one-line summaries of N3–N7; nothing of N7's proof
+    record or FS-114's derivation file (fenced, unread)
+  committed: 2026-09-29
+  predicted: gap — 0.60 — likeliest break: the headline carries no non-Siamese and simple while its N7-HUB clause does; the pattern cases
+  verdict: stalls at: the per-pattern kills at radius 1 + ε — the frame (six change points, tactic centres at change points, tips, outward
+    tiles) and N7-HUB are derived, and the colour-level frame kills none of OC, the (1, 2, 1, 2) pinwheel, +++ or the γ = 0° lens
+  method: F0's same-colour dichotomy (connected product, validity, non-Siamese) and the ring's flip under σ, read at a change point as four
+    regions cut by ω(σy) and ω(σ⁻¹y); the first derivation's route unknown to me until the comparison
+  attack: § 3.3 Attack on N7-3T
+  divergences: none — N7's proof record and FS-114's derivation file stay fenced until this verdict is committed; the table is § 4
+  counterexamples: none — searched by hand over the colour-level frame on OC, the (1, 2, 1, 2) pinwheel, +++ and the γ = 0° lens (none refuted,
+    none built); the headline's missing hypotheses are a statement defect with no refuting object (§ 3.3)
+  minds: 1 — this mind alone, blind to N7's proofs, not to the D-frame's shape (given as definitions), the same model as its author (Opus 5.5)
+  grade: hand
+
+### 3.4 Verdict (stage 3)
+
+| statement | verdict | the project's words | grade, minds |
+|---|---|---|---|
+| FS114-N7-3T | stalls at the per-pattern kills | **GAP** at the pattern kills (not re-derived); **N7-HUB TRUE** (derived here, blind to its proof); the frame (six change points, the D-frame, tips) TRUE; **statement defects:** the headline omits non-Siamese, simple, four colours at `p`, six colours and the bent ring, all used; the N7-HUB parenthesis is a rider; `+++` missing from the list | [hand], one mind here |
+
+Expectation scored: gap at 0.60 — met in the project's words (GAP), recorded by the gate as `stalls at`; the registered break (the headline's
+missing non-Siamese and simple) is where the attack succeeded.
+
+## Theorems this phase proved (stage 3)
+
+- **V1-F0** — in a valid fragment two tiles of one colour are close or far; every tile has diameter `≤ 1` [hand, one mind] — § 3.1.
+- **V1-F3** — at a change point of a Γ-free ring of a four-colour vertex, six colours: regions I and O carry only `p`'s colours [hand] — § 3.1.
+- **V1-F5, V1-F6** — non-Siamese, simple: exactly six change points; every tactic centre is a change point [hand, one mind] — § 3.1.
+- **V1-HUB** — N7-HUB [hand, one mind, blind to its proof] — § 3.1.
