@@ -446,10 +446,10 @@ verification: C121-ENDS
     both and z is a vertex with at least four colours or a repeated colour, at least four when no colour at z has density 0, so J_1 is (Q) — or
     it does not — J_1 is (R2), and z is a point of Σ carrying at least three colours, and at least three distinct colours when no colour at z
     has density 0.
-  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held inputs'
-    homes in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD with its proof, W-NOREP with its proof, FS112-U1, FS112-N3-NOBOTH), read before
-    deriving (§ 1.1–1.2); the author's answers on meaning (§ 1.4); no verdict, sketch or route of the first derivation
-  committed: 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held
+    inputs' records in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD, W-NOREP, FS112-U1, FS112-N3-NOBOTH), read in full before deriving
+    (§ 1.1–1.2); the author's answers on meaning (§ 1.4); nothing of the first derivation before the commit 43bb6385
+  committed: 43bb6385 (2026-09-29 06:17 UTC)
   predicted: derived — 0.75 — likeliest break: the clause "at least four when no colour at z has density 0", which needs a no-repeated-colour lemma at a
     point of Σ that W-NOREP gives only for maps without cusps
   verdict: derived
@@ -457,11 +457,11 @@ verification: C121-ENDS
     with cusps allowed (DB1-L3), then the colour counts (DB1-L4, DB1-L5) and the chain by M2-INTRAD step (1) (DB1-L6); the (Q) branch gets four
     distinct colours with no density condition; the first derivation's route is unknown to this mind until the comparison
   attack: § 2.7 Attacks — where each statement stops holding
-  divergences: none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)
+  divergences: § 3.1 Divergences
   counterexamples: thin truth: R7 at a lattice point, which has cusps of density 0 at every kind-both centre and still carries six colours — local to the
     clause "at least four when no colour at z has density 0" (DB1-L4 needs no density condition); thin truth: every (R2) centre under DB1-L5 —
     local to the clause "at least three distinct colours when no colour at z has density 0", which holds without its condition
-  minds: 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  minds: 2 — blind, the same model: blind to: FS121-O1's derivation (plans/FS121-map-step.md § 3.2–3.3) until this record's verdicts were committed at 43bb6385; method: DB1's localised no-repeat lemma (DB1-L3) and cone lemma in place of W-NOREP and FS112-N3-NOBOTH's transfer; the same held inputs (M-PINCH, M2-INTRAD); the (Q) clause's no-repeat step rests on DB1-L3 alone, one mind, since the first derivation's citation of W-NOREP does not carry it (§ 3.1 row 1)
   grade: hand
 
 verification: C121-OUT
@@ -469,54 +469,119 @@ verification: C121-OUT
     radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved
     interface of tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular
     window.
-  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held inputs'
-    homes in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD with its proof, W-NOREP with its proof, FS112-U1, FS112-N3-NOBOTH), read before
-    deriving (§ 1.1–1.2); the author's answers on meaning (§ 1.4); no verdict, sketch or route of the first derivation
-  committed: 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held
+    inputs' records in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD, W-NOREP, FS112-U1, FS112-N3-NOBOTH), read in full before deriving
+    (§ 1.1–1.2); the author's answers on meaning (§ 1.4); nothing of the first derivation before the commit 43bb6385
+  committed: 43bb6385 (2026-09-29 06:17 UTC)
   predicted: derived — 0.85 — likeliest break: points of Σ along the successive outer parallels cutting the angular window
   verdict: derived
   method: the outer parallel read at each of its points off Σ, the radial images of points of Σ included, by M-PINCH's tangent type, I-D1 and (H1),
     (H2) there (DB1-L7); iterated over the window with REG-J′'s local finiteness; the first derivation's route is unknown to this mind until the
     comparison
   attack: § 2.7 Attacks — where each statement stops holding
-  divergences: none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)
+  divergences: § 3.1 Divergences
   counterexamples: thin truth: the first clause without REG-J′ — local to REG-J′, which DB1-L7 does not use; none refuting — the tangent-type hypothesis was
     removed and the statement fails at R7's split arc (control db1-r7-parallel), the class the statement excludes
-  minds: 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  minds: 2 — blind, the same model: blind to: FS121-O1's derivation (plans/FS121-map-step.md § 3.3) until this record's verdicts were committed at 43bb6385; method: the parallel read pointwise off Σ, radial images of points of Σ included, with REG-J′ unused in the first clause; the same held inputs (M-PINCH, M2-INTRAD step (1))
   grade: hand
 
 verification: C121-PER
   statement: in an honest saturated colouring in D-NF satisfying REG-J′ whose interfaces carry only finitely many radii of curvature — in particular a
     doubly periodic one satisfying ¬LRA — every curved interface is a split unit arc of kind both and no (R2) arc occurs; where no colour has
     density 0 at an arc's centre, every such arc is (Q).
-  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held inputs'
-    homes in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD with its proof, W-NOREP with its proof, FS112-U1, FS112-N3-NOBOTH), read before
-    deriving (§ 1.1–1.2); the author's answers on meaning (§ 1.4); no verdict, sketch or route of the first derivation
-  committed: 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held
+    inputs' records in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD, W-NOREP, FS112-U1, FS112-N3-NOBOTH), read in full before deriving
+    (§ 1.1–1.2); the author's answers on meaning (§ 1.4); nothing of the first derivation before the commit 43bb6385
+  committed: 43bb6385 (2026-09-29 06:17 UTC)
   predicted: derived — 0.75 — likeliest break: its (Q) clause (the no-repeat step), and "doubly periodic with ¬LRA gives finitely many radii"
   verdict: derived
   method: from C121-OUT (a curved tangent interface carries infinitely many radii) and M-C11 (iii); (Q) from DB1-L4; the periodic case by compactness
     of a fundamental domain; the first derivation's route is unknown to this mind until the comparison
   attack: § 2.7 Attacks — where each statement stops holding
-  divergences: none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)
+  divergences: § 3.1 Divergences
   counterexamples: thin truth: R7 — local to the clause "where no colour has density 0 at an arc's centre", idle by DB1-L4
-  minds: 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  minds: 2 — blind, the same model: blind to: FS121-O1's derivation (plans/FS121-map-step.md § 3.2–3.3) until this record's verdicts were committed at 43bb6385; method: DB1's localised no-repeat lemma (DB1-L3) and cone lemma in place of W-NOREP and FS112-N3-NOBOTH's transfer; the same held inputs (M-PINCH, M2-INTRAD); the (Q) clause's no-repeat step rests on DB1-L3 alone, one mind, since the first derivation's citation of W-NOREP does not carry it (§ 3.1 row 1)
   grade: hand
 
 verification: C121-LRA-LINE
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces of radii tending to infinity accumulate at a point x₀ of an
     interface curve with normal ν there, then pieces of radii tending to infinity accumulate at x₀ + kν for every integer k.
-  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held inputs'
-    homes in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD with its proof, W-NOREP with its proof, FS112-U1, FS112-N3-NOBOTH), read before
-    deriving (§ 1.1–1.2); the author's answers on meaning (§ 1.4); no verdict, sketch or route of the first derivation
-  committed: 2026-09-29 (this stage's commit, FS121-DB1: stage 2)
+  given: the statement verbatim with its not claimed, Colours and Inhabitant lines; the frozen list's definitions and held inputs; the held
+    inputs' records in FS-111 and FS-112 (M-PINCH, M-C11, M2-INTRAD, W-NOREP, FS112-U1, FS112-N3-NOBOTH), read in full before deriving
+    (§ 1.1–1.2); the author's answers on meaning (§ 1.4); nothing of the first derivation before the commit 43bb6385
+  committed: 43bb6385 (2026-09-29 06:17 UTC)
   predicted: derived — 0.7 — likeliest break: a point x₀ of Σ where the accumulating pieces lie on a curve whose normal is not the ν named (reading (b))
   verdict: derived
   method: the k-fold unit parallels of each accumulating piece, toward or away from its centre (DB1-L6, DB1-L7), with the normals converging along the
     curve; reading (a), the author's; under reading (b) a GAP at "the pieces lie on the curve whose normal is ν"; the first derivation's route
     is unknown to this mind until the comparison
   attack: § 2.7 Attacks — where each statement stops holding
-  divergences: none — the comparison with the first derivation opens only after these verdicts are committed (stage 3)
+  divergences: § 3.1 Divergences
   counterexamples: none — no saturated colouring with LRA is held, so no object tests either reading; reading (b) is a gap, not a refutation
-  minds: 1 — this record's derivation alone, blind to the first derivation; the count with it is stage 3's
+  minds: 2 — blind, the same model: blind to: FS121-O1's derivation (plans/FS121-map-step.md § 3.3) until this record's verdicts were committed at 43bb6385; method: each piece's k-fold parallel in place of the whole curve's; the same held inputs (M-PINCH, M2-INTRAD step (1))
   grade: hand
+
+## Stage 3 — SAVED: the comparison with the first derivation
+
+*Opened at 2026-09-29 06:17 UTC, after this record's verdicts were committed (43bb6385): `plans/FS121-map-step.md` § 3.2–3.4 only (FS121-O1's
+arguments and entries FS121-O1-ENDS, -CARD, -OUT, -PER, -LRA-LINE, and § 3.4's reading of the card). Nothing else in the fence was opened.
+FS121-O1 is also the statements' author, whose answers on meaning are § 1.4.*
+
+### 3.1 Divergences
+
+| # | statement | item | this route (DB1) | the first derivation (FS121-O1 § 3.2–3.3) | class | resolution |
+|---|---|---|---|---|---|---|
+| 1 | C121-ENDS | removing the repeated colour at a kind-both centre (the clause "at least four when no colour at z has density 0, so J_1 is (Q)") | DB1-L3: a local no-repeat lemma at a point of Σ under REG-J′, with cusps allowed; its proof handles the partner at a unit arc's centre on either side of the arc and the partner present only as a cusp (§ 2.3) | cites FS111-W-NOREP "where no colour at z has density 0 (H-DEN at z)" | route | Both reach the clause; the first route's citation does not carry it. W-NOREP is stated for "a saturated map without cusps", i.e. H-DEN at every contact. Its case (ii) uses the density of `γ` at the centre `y` of a unit-arc edge, a point at distance 1 from `z` — which "no colour at z has density 0" does not supply. And its written proof treats only the partner inside the arc: the arc of kind both with the repeated colour outside, and the tangent radius-1 arc curving toward the neighbour, fall in neither of its cases. DB1-L3 supplies the step (one mind). **Correction owed** to FS121-O1-ENDS's and -PER's uses-only lines; neither verdict changes |
+| 2 | C121-ENDS | the density conditions | four distinct colours at every kind-both centre, three at every (R2) centre, **with no density condition** (DB1-L4, DB1-L5); the conditions are idle (thin truth, § 2.7) | the conditions are hypotheses of the clauses; its model line notes R7's cusps and "the (Q) clause through NOBOTH's count alone" | route | Not a disagreement: the first derivation claims the conditioned clauses, and this route derives them and more. The strengthening rests on DB1-L3 at one mind; reported as a thin truth for the author to place |
+| 3 | C121-ENDS | the (R2) centre's distinct colours when no colour at `z` has density 0 | consecutive positive-angle sectors in the open cone differ in colour when there are no cusps, so two distinct colours appear there without any no-repeat lemma; DB1-L3 gives it unconditionally | cites W-NOREP | route | The same conclusion; the first route's citation is out of scope (as row 1) but not needed: adjacency carries it |
+| 4 | C121-ENDS | the chain's exceptional normals | finitely many (each point of Σ other than the centre lies on one ray); at radial images of points of Σ the parallel is still an interface off Σ (closure argument, DB1-L6/L7) | "a null set of normals", from M2-INTRAD step (2) | route | Both carry the statement; this route states the set is finite |
+| 5 | C121-ENDS | the (R2) branch's first clause, "carrying at least three colours" | read as distinct in the question to the author; both readings derived | the author: counts sectors (§ 1.4) | wording | Resolved by the author's answer; the statement holds in both readings |
+| 6 | C121-ENDS | "an inner-colour tile along the radius-2 circle over the whole arc" | the radius-2 parallel is, off Σ, an interface of the inner colour with that colour beyond it (DB1-L7) | "a `p`-region lies along the radius-2 circle over the whole arc", by C-HULL's first clause against `P_p` | wording | Same content; the author's reading of "tile" (possibly several components) is the one both routes derive |
+| 7 | C121-OUT | the hypotheses used | the first clause without REG-J′ (DB1-L7); REG-J′ only for the family over the whole window; the tangent-type hypothesis shown necessary at R7's split arc (exact) | M-PINCH, M2-INTRAD step (1) (whose statement carries REG-J′), M-C11 (iii) | route | Same argument in substance; this route adds the radial images of points of Σ, the REG-J′-free first clause (thin truth) and the attack at R7 |
+| 8 | C121-PER | doubly periodic with ¬LRA gives finitely many radii | by compactness: infinitely many radii give pieces of radii → ∞ whose translates into a fundamental domain accumulate — LRA | finitely many interface arcs per fundamental domain (M-REDUCE-I), each a finite chain under ¬LRA (M2-INTRAD) | route | Two arguments to one truth; both kept |
+| 9 | C121-PER | the (Q) clause | DB1-L4 (unconditional) | through FS121-O1-ENDS's (Q) clause, hence W-NOREP as in row 1 | route | As row 1: correction owed to FS121-O1-PER's uses-only line |
+| 10 | C121-LRA-LINE | the parallel taken | each accumulating piece's `k`-fold parallel, moved off the finitely many points of Σ | the parallel of the whole curve `Γ` at signed distance `k`, away from focal points (finitely many pieces of radius at most the absolute value of `k`, M2-INTRAD (iii)) | route | Equivalent; both kept |
+| 11 | C121-LRA-LINE | which normal `ν` | asked; derived under reading (a), GAP under (b) at a point of Σ | the argument takes the pieces on one curve `Γ` with its normal: reading (a) | wording | Resolved by the author: (a). The statement's words allow (b); fixing them ("… of the interface curve on which they lie, with normal ν there …") is the author's call |
+| 12 | C121-PER | the entry's text against the frozen list | the frozen list: "in particular a doubly periodic one satisfying ¬LRA" | FS121-O1-PER's entry: "in particular a doubly periodic one without large-radius accumulation" | wording | The same meaning under the list's definition of ¬LRA ("no point is an accumulation point of interface pieces whose radii of curvature tend to infinity"). The frozen list's text is the one verified; the other three entries match the list character for character (§ 3.4) |
+
+**Retractions: 0.** Reading the first derivation showed no error in this record. It showed the first route's out-of-scope citation (rows 1, 3
+and 9), which this record's own DB1-L3 had already met, as a registered weak step (§ 1.5), before the comparison. **Divergences of truth: 0.**
+
+### 3.2 What the first derivation's § 3.4 changes here
+
+Nothing in these verdicts. § 3.4 reads the card: curved ladders leave FS-116's rings only at (R2) ends whose centre carries exactly three colours.
+DB1-L5 agrees (three distinct colours at every (R2) centre, with no density condition), and the fourth colour is C121-R2-FOUR's question, not
+one of these four statements.
+
+### 3.3 Corrections owed (for Keryx; I edit no file but this record)
+
+1. **FS121-O1-ENDS and FS121-O1-PER** (`plans/FS121-map-step.md` § 3.2–3.3), uses-only lines. For "FS111-W-NOREP where no colour at z has
+   density 0", read: "DB1-L3 (`plans/FS121-DB1-verification.md` § 2.3), which localises W-NOREP to a point of Σ under REG-J′ with cusps
+   allowed; W-NOREP as filed (saturated maps without cusps) does not reach a centre `z` whose neighbours at distance 1 carry cusps". The
+   verdicts are unchanged.
+2. **FS111-W-NOREP's argument** (`plans/FS111-W-wild.md` § 2.3): its two cases do not cover an edge `r` that is a unit arc whose centre carries
+   the repeated colour on the far side of `r` from the sector (the arc of kind both with that colour outside, or the tangent unit arc curving
+   toward the neighbour), where the "parallel curve" of case (i) collapses to one point. The statement stands: DB1-L3's case K+ covers it
+   (§ 2.3). One mind.
+
+### 3.4 The statements compared (the gate cannot: the entries carry other names)
+
+The first derivation's entries are named FS121-O1-ENDS, -OUT, -PER, -LRA-LINE, not C121-…, so the gate's quotation check does not pair them
+with these blocks. Compared here, whitespace aside, reading only § 3.2–3.3's lines: FS121-O1-ENDS, -OUT and -LRA-LINE carry the frozen list's
+statements character for character; FS121-O1-PER differs in one phrase (row 12), with the same meaning.
+
+### 3.5 The count
+
+| statement | verdict | minds | on what terms |
+|---|---|---|---|
+| C121-ENDS | TRUE | 2 — blind, the same model | the chain, the centre's outer colour and both branches' counts by two routes; the (Q) clause's no-repeat step by DB1-L3 alone (one mind): the first route's W-NOREP does not reach it (§ 3.1 row 1). Thin truth: both density conditions idle (one mind) |
+| C121-OUT | TRUE | 2 — blind, the same model | the same held step (M2-INTRAD (1)) under both; this route adds the tangent-type hypothesis shown necessary (R7, exact) and REG-J′ idle in the first clause |
+| C121-PER | TRUE | 2 — blind, the same model | the periodic step by two different arguments; the (Q) clause as C121-ENDS's (one mind on the no-repeat step). Thin truth: the density condition idle |
+| C121-LRA-LINE | TRUE under reading (a), the author's; GAP under (b) | 2 — blind, the same model | two equivalent routes; reading (b) not derived by either |
+
+Both minds are Opus 5.5 and read the same held inputs (M-PINCH, M-C11, M2-INTRAD, W-NOREP, FS112-N3-NOBOTH) before deriving: independent in
+what each saw of the other, not in prior or in inputs. Agreement on the steps that both take from M2-INTRAD step (1) is weak evidence about
+that step, which neither re-derived from scratch (this record re-derived it in outline, § 2.3 Case T). *Not supplied by this verification:*
+whether these statements are the ones FS-121's route needs. That takes a reader of intent, not a second deriver.
+
+Stage 3 committed: see `git log -- plans/FS121-DB1-verification.md`.
