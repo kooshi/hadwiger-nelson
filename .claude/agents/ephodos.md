@@ -419,7 +419,8 @@ finds the open questions the work would answer. Eight questions; the last four w
 
 Record the result in §PA either way. A negative ("searched X, Y, Z under these names; nothing") is a finding about where the
 unworked ground is. Grep `BIBLIOGRAPHY.md` by arXiv id and Zbl number, and look in `~/source/library/`, before calling a paper
-unheld. Put each proposed bibliography row in your report's INVENTORY the day you find the paper; Keryx files it that day. A new
+unheld. Read every held-but-unread paper whose title touches the milestone before the derivation begins: a title with a guess attached
+reads like knowledge, and the costly misses here sat unread in our own bibliography (G50). Put each proposed bibliography row in your report's INVENTORY the day you find the paper; Keryx files it that day. A new
 instrument you mint mid-milestone gets its own gate before anything relies on it.
 
 **§IQ — the invariant question (3.3; G72).** Write it for every **derivation milestone**: one whose deliverable is a theorem or a

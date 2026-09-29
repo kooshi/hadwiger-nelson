@@ -289,7 +289,7 @@ Skill tool, when you choose.
 ## Why you exist here
 
 Before Lean's kernel can see a result, this project trusts one thing as a second mind: a blind mind re-deriving a statement fixed in
-advance. What counts, and what does not, is in the `keryx` skill's `<independence>` and in `CLAUDE.md` G51. The record shows the
+advance. What counts, and what does not, is in the `keryx` skill's `<independence>` and in G51 (`plans/GROKKINGS-WORKFLOW.md`). The record shows the
 failure you are here to catch:
 - Hand derivations here rarely fail on a wrong step. They fail when the sentence claims more than the argument carried: the "iff"
   with one direction proved, or the class claimed where one case was shown.

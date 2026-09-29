@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fact audit for an edit of CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md: which fact tokens were in the old version and are NOWHERE in the new one.
+"""Fact audit for an edit of CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + plans/GROKKINGS-WORKFLOW.md: which fact tokens were in the old version and are NOWHERE in the new one.
 
 The corpus audited is CLAUDE.md followed by LEDGER.md (the novel-results ledger, extracted from CLAUDE.md § Frontier on
 2026-09-22; at a base revision where LEDGER.md does not exist the ledger is still inside CLAUDE.md and the corpus is that file
@@ -1000,10 +1000,11 @@ def self_test_files(text: str) -> int:
     return bad
 
 
-def corpus_files(main: str, ledger: str, instances: str = "") -> str:
-    """The corpus as the audit reads it from disk: the main file, then the ledger, then the instances file, each only if it exists."""
+def corpus_files(main: str, ledger: str, instances: str = "", retired: str = "") -> str:
+    """The corpus as the audit reads it from disk: the main file, then the ledger, the instances file and the retired workflow
+    grokkings (extracted from CLAUDE.md § Grokkings on 2026-09-28), each only if it exists."""
     text = Path(main).read_text(encoding="utf-8")
-    for extra in (ledger, instances):
+    for extra in (ledger, instances, retired):
         if extra and Path(extra).exists():
             text += "\n\n" + Path(extra).read_text(encoding="utf-8")
     return text
@@ -1050,6 +1051,7 @@ def main() -> int:
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
+    ap.add_argument("--retired", default="plans/GROKKINGS-WORKFLOW.md", help="the retired workflow grokkings joined to the corpus (missing = not joined)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
     ap.add_argument("--self-test", action="store_true")
@@ -1068,10 +1070,13 @@ def main() -> int:
         r3 = subprocess.run(["git", "show", f"{rev}:{a.instances}"], capture_output=True)
         if r3.returncode == 0:   # the instances file exists at that revision
             text += "\n\n" + r3.stdout.decode("utf-8")
+        r4 = subprocess.run(["git", "show", f"{rev}:{a.retired}"], capture_output=True)
+        if r4.returncode == 0:   # the retired workflow grokkings exist at that revision
+            text += "\n\n" + r4.stdout.decode("utf-8")
         return text
 
     if a.dupes:
-        dupes(corpus_files(a.new, a.ledger, a.instances))
+        dupes(corpus_files(a.new, a.ledger, a.instances, a.retired))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
@@ -1081,8 +1086,8 @@ def main() -> int:
             return 2
     if a.self_test:
         return self_test(old)
-    print(f"corpus: {a.new} + {a.ledger} + {a.instances} (each joined if present)")
-    new = corpus_files(a.new, a.ledger, a.instances)
+    print(f"corpus: {a.new} + {a.ledger} + {a.instances} + {a.retired} (each joined if present)")
+    new = corpus_files(a.new, a.ledger, a.instances, a.retired)
     return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
 
 
