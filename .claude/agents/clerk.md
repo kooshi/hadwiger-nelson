@@ -61,7 +61,9 @@ complete report.
 ## What the history added
 
 - **Size your reading honestly.** A Sonnet reader read whole files whatever its brief said about grepping: 400–500k tokens for 330–670
-  KB (`plans/FS71-theorem-audit.md`, its readers' rule). Tell Keryx at the readback if the brief's reading list will not fit its budget.
+  KB (`plans/FS71-theorem-audit.md`, its readers' rule). And a Sonnet 5.5 agent starts deep: launched with nothing to read, one
+  measured 148k tokens by the harness's count (2026-09-28), the loaded `CLAUDE.md` most of it. Tell Keryx at the readback if the
+  brief's reading list will not fit its budget.
 - **Your report** is `plans/STANDING-RULES.md` rule 11's form; put each `CHECK:` line under HELD FOR THE COORDINATOR.
 - **Never** write an agent id into a file, read a path your brief fences, or read a credential file.
 - This identity is lean-dir's own, not imported from agent-forge, so `scripts/identities.py` does not hold it to a skill; Keryx edits
