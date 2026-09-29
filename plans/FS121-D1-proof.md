@@ -13,11 +13,24 @@ FS111-M2-INTRAD step (1)); its *preimage* is `I`.*
 *(filled at each stage; one line per theorem, grade, minds, address)*
 
 - FS121-D1-XCORNER — the inner unit parallels of a convex corner's edges meet at distance 1/sin(θ/2), cot(θ/2) along each — [hand], one mind, elementary — § 1.3.
+- FS121-D1-VT — vertex transport: beyond a partner curve the colour pattern is the preimage's, pointwise; no arc ends on its far side at the image of
+  an interior point of the preimage (cusp-free class) — [hand] over FS111-W-NOREP (one mind), one mind — § 2.1.
+- FS121-D1-EROSION — at a convex corner of angle θ < π with straight tile edges, one edge is at most cot(θ/2) long, or both have a vertex at cot(θ/2) —
+  [derived], one mind — § 2.2.
+- FS121-D1-FIRSTORDER — at a three-colour (R2) centre every SATPIN constraint on ω(z) is implied by M-HALF; the r|s edge points into −Q — [hand], one
+  mind — § 2.3.
+- FS121-D1-R2SMOOTH — a smooth end of an (R2) arc puts q's edge on the away cone's boundary, as the inner parallel of the continuation — [derived], one
+  mind — § 2.4.
+- FS121-D1-RUNG2 — an (R2) window has 2 sin(ℓ/2) ≤ 1, and 4 sin(ℓ/2) ≤ 1 when cusp-free (ℓ < 29°) — [derived], one mind — § 2.4.
+- FS121-D1-R2CORNER — smooth-straight (R2) ends: q's tile has a bend or colour change within tan(ℓ/2) ≤ 1/√15 of the ends — [derived], one mind — § 2.5.
+- C121-R2-FOUR — GAP at the band structure of the corner (no three-colour (R2) end built or excluded) — § 2.6.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: would have searched for a saturated fragment with a three-colour (R2) centre (a finder over tile arrangements about a point). Did not; the
   recognition below derives what such a centre must carry first (the erosion corner), and any construction is by formula.
+- Stage 2: would have run a finder for the band structure of the corner (non-concentric interfaces in the disc sector and band 1 over the window, with
+  z's colours fixed at q, r, s). Did not; derived FS121-D1-FIRSTORDER, -EROSION and -R2CORNER, and named the band structure as the GAP.
 
 ## Fence log (standing rule 8)
 
@@ -132,3 +145,194 @@ control: FS121-D1-XCORNER-EXACT
   fault: python3 ../tools/fs121_d1_erosion.py --plant hexbig 2>&1 | tail -1
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: C121-R2-FOUR — GAP at the band structure of the corner; five lemmas on the way
+
+*Setting for every entry of this stage: `f` an honest saturated colouring in D-NF satisfying REG-J′, **cusp-free** (the header's word); any `k`.
+Notation at an (R2) arc `J₁ ⊂ ω(z)`: window `W = [α₀, α₁]` of width `ℓ`, ends `A_i = z + u(α_i)`, inner colour `p` (not carried at `z`), outer colour `q`
+(carried at `z`); the away cone `C_a = [α₁ + π/2, α₀ + 3π/2]` of width `π − ℓ` holds `q`'s sector `Q` (FS112-U1). Three colours at `z` means `q` and
+two more, `r` and `s`; by FS111-W-NOREP each has one sector: `Q = [φ₁, φ₂]`, then counter-clockwise `S = [φ₂, φ₃]`, `R = [φ₃, φ₁ + 2π]`, with edges
+`e_rq` at `φ₁`, `e_qs` at `φ₂`, `e_sr` at `φ₃`.*
+
+### 2.1 Vertex transport along partner curves (FS121-D1-VT)
+
+*Argument.* Let `I` be a tangent-type interface arc between `a` and `b`, `ν` the unit normal into `b`, and suppose `I` is not a unit arc curving toward
+`b` (its curvature toward `b` is `< 1`: FS111-M-C11 bounds it by 1, FS111-M2-INTRAD makes radii integers, and radius 1 toward `b` is the focal case).
+Then `x ↦ x + ν(x)` is a `C¹` immersion (speed `1 − κ_b > 0`), its image `L` is the unit parallel on `b`'s side, and (i) by FS111-M-PINCH (tangent)
+with M-HULL1, `x + ν(x) ∈ supp S_a` with `a`'s material there lying beyond `L`, on the side away from `I`; by FS111-M2-INTRAD step (1), `L` is an interface
+at its points off `Σ`, with `a` on that far side. (ii) Let `Y` be the image of an interior point `x₀` of `I`. Shrinking about `x₀`, `L` near `Y` is a `C¹`
+curve all of whose points but `Y` are off `Σ` (REG-J′: `Σ` locally finite), with `a` on its far side. By REG-J′ finitely many arcs end at `Y`, each with
+an end tangent (FS111-M-C11); cusp-freeness gives every sector at `Y` positive angle (a sector of angle 0 between tangent arcs is a colour of density 0
+at a point of its support). The two sectors on `L`'s far side adjacent to `L`'s two rays both have colour `a`; an arc ending at `Y` inside the far side
+would make them two sectors of `a` at `Y`, which FS111-W-NOREP excludes (cusp-free gives its H-DEN; REG-J′ gives H2 at arc points near `Y`). ∎ So
+**the colour pattern just beyond a partner curve is its preimage's far-side pattern, carried pointwise along the normals, vertices included** — the
+flat ladder's rule `β_{k+1} = τ_{k−1}` (FS111-W-LADDER) made pointwise and curved.
+
+derivation: FS121-D1-VT
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, let I be a tangent-type interface arc between colours a and b that is
+    not a unit arc curving toward b, and L its unit parallel on b's side, which carries a on its far side; at the image Y on L of any interior point of I,
+    no interface arc ends at Y from the far side of L
+  uses only: FS111-M-PINCH's tangent partners with M-HULL1; FS111-M2-INTRAD step (1) (the parallel is an interface off Σ); REG-J′'s local finiteness
+    and FS111-M-C11's end tangents; FS111-W-NOREP, whose H-DEN and H2 the cusp-free class and REG-J′ supply; no colour count
+  not claimed: anything at the image of an endpoint of I (the far-side colour may change there); anything when I is a unit arc curving toward b (L is
+    a point, the (Q) or (R2) end); anything with cusps (NOREP's hypothesis)
+  argument: § 2.1 Vertex transport along partner curves (FS121-D1-VT)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: k = 9: SQ9 — each edge of side 1/2 is a tangent interface, its partner is the edge of the square one unit along the normal (FS111-W-LADDER,
+    VM2-LAD-CTL 48 of 48), and arcs meet that partner's far side only at its two ends, the images of the edge's ends; HEX9 alike
+  prior art: partly: FS111-W-LADDER's colour rule β_{k+1} = τ_{k−1} (plans/FS111-W-wild.md § 2.4) is the flat case along one normal line; the plan's
+    query “(parallel curve | parallel curves | equidistant*) & (unit distance | colo*)” (21, plans/FS121-map-step.md § 2.2) returned nothing bearing
+  handoff: de Bruijn — queued behind FS111-M-PINCH, FS111-M2-INTRAD and FS111-W-NOREP: the statement with its not-unit-arc clause and the cusp-free class
+
+### 2.2 The erosion corner (FS121-D1-EROSION)
+
+*Argument.* Let a colour `q` have at `z` a sector of angle `θ ∈ (0, π)` whose two edges begin with straight pieces `e₁ = [z, z + L₁u(φ₁)]`,
+`e₂ = [z, z + L₂u(φ₂)]`, `φ₂ = φ₁ + θ`, each the maximal straight segment from `z` along which the boundary of `q`'s tile runs with `q` on the sector's
+side (the colour on the other side may change at vertices of `e_i`). A straight interface is of tangent type (FS111-M-C11 (iii)), not a unit arc, so
+FS121-D1-VT applies to each interface arc of `e_i`, with `b = q`: the partner line `Λ_i = e_i + n_i` (`n_i` the unit normal into the sector) carries,
+beyond it, the non-`q` colour of `e_i` at the preimage point. By FS121-D1-XCORNER, `Λ₁` and `Λ₂` meet at `X`, the image of the point `x_i ∈ e_i` at
+distance `cot(θ/2)` from `z`, and cross there transversally (`θ ∉ πℤ`). Suppose `L₁, L₂ > cot(θ/2)`. Then each `Λ_i` is a straight line through `X`
+whose two rays near `X` are images of points of `e_i` on both sides of `x_i`, hence interface arcs (off `Σ` near `X`). If `x₁` were an interior point of an
+interface arc of `e₁`, FS121-D1-VT would forbid an interface arc ending at `X` from `Λ₁`'s far side — but one of `Λ₂`'s two rays lies there. So `x₁` is a
+vertex of `e₁` (a point of `Σ`), and by the same argument with the indices exchanged, `x₂` is a vertex of `e₂`. ∎ *Check on the controls:* SQ9
+(`θ = π/2`, sides `1/2 ≤ cot(π/4) = 1`) and HEX9 (`θ = 2π/3`, sides `1/(2√3) ≤ cot(π/3)`) meet it, and no two partner segments of their tiles cross at
+interior points; a hexagon of side `3/5` would (control FS121-D1-XCORNER-EXACT, whose plant is exactly that).
+
+derivation: FS121-D1-EROSION
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if a colour's sector at a point z has angle θ in (0, π) and both its
+    edges begin with maximal straight pieces of the colour's tile boundary of lengths L₁ and L₂, then min(L₁, L₂) ≤ cot(θ/2), or each of the two pieces
+    has a point of Σ at distance cot(θ/2) from z
+  uses only: FS121-D1-VT on each interface arc of the two pieces; FS121-D1-XCORNER for the meeting point; FS111-M-C11 (iii) (a straight interface is of
+    tangent type); no colour count
+  not claimed: anything for curved edges (their partner curves cross elsewhere, and FS121-D1-VT still forbids the crossing at images of interior points);
+    anything at θ ≥ π; anything with cusps
+  argument: § 2.2 The erosion corner (FS121-D1-EROSION)
+  verdict: derived
+  grade: derived from: FS121-D1-VT, FS121-D1-XCORNER
+  minds: 1
+  model: k = 9: SQ9 at a grid point (θ = π/2, both pieces of length 1/2 ≤ 1) and HEX9 at a vertex (θ = 2π/3, both of length 1/(2√3) ≤ 1/√3); exact in
+    ../tools/fs121_d1_erosion.py
+  prior art: partly: the erosion of a convex cone by the unit disc is classical (recalled, not read); its reading as a bound on a saturated tile's edges is
+    not in the plan's gate (plans/FS121-map-step.md § 2.2); this lemma's own search not run
+  handoff: de Bruijn — with FS121-D1-VT, queued behind the measurable chain
+
+### 2.3 The first order at a three-colour (R2) centre (FS121-D1-FIRSTORDER)
+
+*Argument.* By FS111-M-HALF, `R` and `S` have width at most `π`: `φ₃ ≤ φ₂ + π` and `φ₃ ≥ φ₁ + π`, so `e_sr` points into `Q + π`, the antipodal cone of
+`q`'s sector. By FS116-O1-SATPIN's argument (which reads FS111-M-PINCH at edge-interior points and never the colour count), each of `z`'s three edges is
+(split), with its centre at one of the two points of `ω(z)` on its normal carrying both side colours, or (tangent), with those two normal points carrying
+the side colours crosswise. The points of `ω(z)` over `W°` carry only `p` and `q` (the relative interior of `J₁`), so the partners or centres that must
+carry `r` or `s` have to avoid `W°`. They do, in every case: `e_sr`'s normal points lie in `(Q + π) ± π/2 ⊆ [α₁ + π, α₀ + 2π] ∪ [α₁, α₀ + π]`, which
+misses `W° = (α₀, α₁)` since `ℓ < π`; `e_rq`'s lie at `φ₁ ± π/2` with `φ₁ ≥ α₁ + π/2`, so `φ₁ + π/2 ∈ [α₁ + π, α₀ + 2π]` and `φ₁ − π/2 ≥ α₁`; `e_qs`'s
+at `φ₂ ± π/2` with `φ₂ ≤ α₀ − π/2`, symmetrically. The POLAR constraints (FS111-M-POLAR) these partners place on `R`, `S`, `Q` are the half-planes on the
+far side of each edge, which a sector of width `≤ π` bounded by that edge already satisfies. ∎ **The plan's first-order aim — "SATPIN's dichotomy at every
+edge at `z`, whose partners on `ω(z)` must avoid `J₁`'s window" (`plans/FS121-map-step.md` § 4.2) — decides nothing: M-HALF implies all of it.**
+
+derivation: FS121-D1-FIRSTORDER
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at a centre z of an (R2) arc carrying three colours q, r, s, the edge
+    between r and s points into the antipodal cone of q's sector, and every partner point and split centre on ω(z) that the three edges at z require lies
+    off the relative interior of the (R2) arc, whatever the edges' types
+  uses only: FS111-M-HALF (widths ≤ π); FS112-U1 (q's sector in the away cone); FS116-O1-SATPIN's argument, without its four-colour hypothesis; that the
+    relative interior of the (R2) arc carries p and q alone; FS111-W-NOREP (one sector per colour); no colour count
+  not claimed: that a three-colour (R2) centre exists; any constraint from points of ω(z) outside the arc, or from farther than distance 1
+  argument: § 2.3 The first order at a three-colour (R2) centre (FS121-D1-FIRSTORDER)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held at any k — no held colouring has an (R2) arc (C121-PER); the statement is about the uninhabited class the claim names (G21)
+  prior art: partly: FS116-O1-SATPIN (plans/FS116-local-exclusion.md § 4.1) is the dichotomy it reads; its three-colour reading not in print (the plan's gate)
+  handoff: none — a no-go for a route (the first-order aim), not a statement any later proof consumes
+
+### 2.4 Smooth ends and the window (FS121-D1-R2SMOOTH, FS121-D1-RUNG2)
+
+*R2SMOOTH.* Let `A₁ ∉ Σ`. Near `A₁` only `p` and `q` occur, (H1) and (H2) hold, and the connected `p | q` interface through `A₁` is of one type (FS116-O1-SATPIN's
+open-and-closed argument: split points are open by M-C11 (iii) and closed by the limit of centres); `J₁` is tangent, so the continuation `C₁` beyond `A₁`
+is tangent, `C^{1,1}` through `A₁` with tangent `u(α₁ + π/2)` there. Its curvature toward `p` is `< 1` near `A₁` (a unit arc toward `p` tangent to `J₁` at
+`A₁` is `ω(z)` itself, and radii are integers, INTRAD), so its `q`-partner `c(x) = x + ν_p(x)` is a `C¹` curve with `c(A₁) = z`, leaving `z` in direction
+`α₁ + π/2`, with `q` beyond it (FS121-D1-VT (i)). So the sector at `z` on `c`'s far side, the directions just past `α₁ + π/2`, is `q`'s; with FS112-U1 and
+NOREP, `Q`'s clockwise edge is `c` and `φ₁ = α₁ + π/2`. ∎
+
+*RUNG2.* The relative interior of `J₁` meets no point of `Σ`, so the `q`-layer just outside `J₁` and the `p`-layer just inside are path-connected subsets
+of `S̃_q`, `S̃_p`, whose diameters tend to `2 sin(ℓ/2)`; FS111-M-HULL2 bounds each by 1. By FS111-M-PINCH the `p`-contacts of `J₁`'s points fill the
+radius-2 arc over `W` with `p` beyond, and by FS121-D1-VT (with `I = J₁`, `a = p`, `b = q`) no arc ends on that arc's far side over `W°`: the `p`-layer beyond
+it is path-connected, of diameter tending to `4 sin(ℓ/2)`. ∎
+
+derivation: FS121-D1-R2SMOOTH
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if an end A₁ = z + u(α₁) of an (R2) arc about z is not a point of Σ,
+    then the edge of q's sector at z on that side has direction α₁ + π/2 — the boundary of the away cone — and is the unit parallel, on the inner side, of
+    the arc's tangent-type continuation beyond A₁
+  uses only: FS116-O1-SATPIN's open-and-closed argument (one type along a connected interface); FS111-M-C11; FS111-M2-INTRAD (integer radii);
+    FS121-D1-VT (i); FS112-U1; FS111-W-NOREP; no colour count
+  not claimed: that the continuation is straight; anything when A₁ is a point of Σ; that an (R2) arc exists
+  argument: § 2.4 Smooth ends and the window (FS121-D1-R2SMOOTH, FS121-D1-RUNG2)
+  verdict: derived
+  grade: derived from: FS121-D1-VT
+  minds: 1
+  model: none held at any k — no held colouring has an (R2) arc (C121-PER; G21)
+  prior art: partly: the plan's gate (plans/FS121-map-step.md § 2.2) covers the object class; this lemma's own search not run
+  handoff: none — a lemma about an uninhabited class, consumed only by FS121-D1-R2CORNER; it crosses with it
+
+derivation: FS121-D1-RUNG2
+  statement: the window ℓ of an (R2) arc in an honest saturated colouring in D-NF satisfying REG-J′ satisfies 2 sin(ℓ/2) ≤ 1; if the colouring is
+    cusp-free, 4 sin(ℓ/2) ≤ 1, so ℓ ≤ 2 arcsin(1/4) < 29°
+  uses only: FS111-M-HULL2 (a path-connected subset of S̃_j has diameter ≤ 1); FS111-M-PINCH's partners at radius 2; FS121-D1-VT for the cusp-free clause;
+    no colour count
+  not claimed: any bound on the windows of (Q) ends (their outer layer's tile structure differs); any lower bound on ℓ
+  argument: § 2.4 Smooth ends and the window (FS121-D1-R2SMOOTH, FS121-D1-RUNG2)
+  verdict: derived
+  grade: derived from: FS121-D1-VT
+  minds: 1
+  model: none held at any k — no held colouring has an (R2) arc (G21); the bound 4 sin(ℓ/2) ≤ 1 is the diameter of the p-tile the (R2) definition names
+  prior art: partly: FS-112's (R2) definition names "an inner-colour tile along the radius-2 circle over the whole arc" (plans/FS112-derivation.md,
+    header); the bound not in the plan's gate; this lemma's own search not run
+  handoff: none — a bound on an uninhabited object, consumed by FS121-D1-R2CORNER
+
+### 2.5 The (R2) corner (FS121-D1-R2CORNER)
+
+*Argument.* With both ends off `Σ`, FS121-D1-R2SMOOTH puts `Q`'s edges at `α₁ + π/2` and `α₀ − π/2`, so `θ = π − ℓ` and `cot(θ/2) = tan(ℓ/2)`, and makes
+the edges the inner parallels `Π₁, Π₀` of the continuations `C₁, C₀`. Where `C_i` is straight near `A_i`, `Π_i` is straight near `z`, and by FS121-D1-VT (i)
+`q` lies beyond `Π_i` at the image of every point of `C_i` whose outer colour is `q`, with no arc ending there on that side: the maximal straight piece of
+`q`'s tile boundary along `Π_i` runs until `C_i` bends or changes its outer colour. FS121-D1-EROSION with `θ = π − ℓ` and FS121-D1-RUNG2 give the bound. ∎
+
+derivation: FS121-D1-R2CORNER
+  statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at an (R2) arc about z with window ℓ whose ends are not points of Σ and
+    whose continuations beyond both ends begin straight, q's sector at z is the whole away cone, and within distance tan(ℓ/2) ≤ 1/√15 of the ends A₀, A₁,
+    measured along the continuations, one continuation bends or changes its outer colour, or each of q's two edges at z has a point of Σ at distance
+    tan(ℓ/2) from z
+  uses only: FS121-D1-R2SMOOTH; FS121-D1-VT (i); FS121-D1-EROSION at θ = π − ℓ; FS121-D1-RUNG2 (tan(arcsin(1/4)) = 1/√15); no colour count, and not the
+    number of colours at z
+  not claimed: that an (R2) arc exists; anything when an end lies in Σ or a continuation begins curved; any fourth colour at z
+  argument: § 2.5 The (R2) corner (FS121-D1-R2CORNER)
+  verdict: derived
+  grade: derived from: FS121-D1-R2SMOOTH, FS121-D1-EROSION, FS121-D1-RUNG2
+  minds: 1
+  model: none held at any k — no held colouring has an (R2) arc (C121-PER; G21)
+  prior art: partly: the plan's gate (plans/FS121-map-step.md § 2.2) covers the object class; this lemma's own search not run
+  handoff: none — a necessary condition on an uninhabited object; it crosses to de Bruijn only with a decision of the (R2) branch
+
+### 2.6 C121-R2-FOUR — the verdict, and the three attempts
+
+*The three attempts on the one step — "a fourth colour at a cusp-free three-colour (R2) centre":*
+1. **At `z`, to first order** (the plan's aim): FS121-D1-FIRSTORDER — every constraint SATPIN places on `ω(z)` is implied by M-HALF. Nothing forces a
+   fourth colour there.
+2. **At the erosion corner** of `q`'s tile (the recognition's home): FS121-D1-EROSION and -R2CORNER — `q`'s tile is small, with a vertex or a bend
+   within `1/√15` of `z` in the smooth-straight case; the bound reads `q`'s tile, not the number of colours at `z`, and gives no fourth colour.
+3. **Along the normals** (the flat ladder bent round the corner): across the straight strips beside `q`'s edges the three-colour pattern
+   `… p | q | r | p | q | r …` with interface spacings `h` and `1 − h` is consistent (it is SQ9's one-dimensional pattern); in the corner, the disc sector
+   over `W` and band 1 over `W`, the `r | p` and `q | r` interfaces at radii `h` and `1 + h` cannot be concentric (FS111-M2-INTRAD: a concentric arc of radius
+   `h < 1` has curvature above 1), so the corner needs non-concentric band interfaces, which every attempt here leaves unconstructed and unexcluded.
+
+**Verdict: GAP**, at the step named in the entry. The claim's hypothesis "at which no colour has density 0" is narrower than FS111-W-NOREP's cusp-free
+class, which the count of *distinct* colours at `z` already uses through C121-ENDS (§ 1.1): a correction owed to the claim's scope, not to its truth.
+
+derivation: C121-R2-FOUR
+  statement: in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, every centre z of an (R2) arc that ends a chain of unit parallels, at which no colour has density 0, carries at least four colours
+  argument: § 2.6 C121-R2-FOUR — the verdict, and the three attempts
+  verdict: gap: excluding a cusp-free three-colour (R2) centre — q in the away cone, two colours r and s filling the facing cone of width π + ℓ with their
+    common edge in the antipodal cone of q's sector (FS121-D1-FIRSTORDER), ℓ ≤ 2 arcsin(1/4) (FS121-D1-RUNG2), and in the smooth-straight case a vertex or
+    bend of q's tile within 1/√15 of z (FS121-D1-R2CORNER); the open step is the band structure of the disc sector and of band 1 over the window, whose
+    interfaces cannot be concentric (FS111-M2-INTRAD); no three-colour (R2) end is built, none is excluded
+
+## Stage 2 — SAVED
