@@ -1,0 +1,18 @@
+# FS121-C1 quotations: source<TAB>verbatim text
+plans/STUB-map-step.md	**At six, the cover route: NO-PAR** — no map whose boundaries lie on unit parallels (outer and far) of their own classes' components carries an a.e.-proper six-colouring.
+plans/FS121-map-step.md	**Trigger for the cover route.** D3's stop rule fires with honest saturation not reduced to a named step. The cover route then opens as the next slot, starting from N4.
+data/fs121/claims.md	every essential boundary point is at distance exactly 1 from the support of each colour of its essential multicolour
+data/fs121/claims.md	an honest (one colour per point) saturated one
+plans/FS111-derivation.md	A **MUA set** is a maximal unit-avoiding set: measurable, with null unit pairs, maximal under inclusion up to null sets.
+plans/FS121-D3-proof.md	every point of the support of A_m is at distance exactly 1 from the support of A_i for every i < m
+plans/FS121-D3-proof.md	every a.e.-proper k-colouring (S_1, …, S_k) of the plane can be modified, keeping it a.e.-proper with k colours and never raising a point's colour index, into a measurable Grundy colouring (A_1, …, A_k)
+plans/FS111-M2-regularity.md	the class boundary near `x` lies on finitely many "far levels" `{D_{K_i} = 1}` (convex arcs, the class inside) and "near levels" `{d_{K_i} = 1}` (outer unit parallels, the class outside)
+plans/FS111-M2-regularity.md	colour `R` by the least such `j`
+plans/FS111-derivation.md	the circumscribed discs of the tight hexagonal seven-colouring (radius 1/2, centred at the hexagon centres, coloured as the hexagons) form a maximal admissible seven-cover with regular classes whose overlaps (lenses) have positive measure
+plans/FS110-derivation.md	every boundary meets every unit circle in finitely many points
+LEDGER.md	no locally finite map of the plane whose boundaries are segments and circular arcs, none of radius 1, carries a six-colouring in which no two interior points of one colour are at distance exactly 1
+plans/FS110-derivation.md	No bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`
+plans/FS110-derivation.md	strictness `λ_k < υ_k` is necessary, the constant `(0, 0)` survives otherwise
+LEDGER.md	the least `k` with a Lebesgue-measurable `k`-colouring proper at almost every unit pair
+plans/FS121-D3-proof.md	the cover route can run on Grundy partitions
+data/fs121/briefs/FS121-C1-cover-route.md	NO-PAR is **not yet on the frozen list**.

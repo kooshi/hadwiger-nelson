@@ -1,0 +1,18 @@
+ok    1 plans/STUB-map-step.md: **At six, the cover route: NO-PAR** — no map whose boundarie
+ok    2 plans/FS121-map-step.md: **Trigger for the cover route.** D3's stop rule fires with h
+ok    3 data/fs121/claims.md: every essential boundary point is at distance exactly 1 from
+ok    4 data/fs121/claims.md: an honest (one colour per point) saturated one
+ok    5 plans/FS111-derivation.md: A **MUA set** is a maximal unit-avoiding set: measurable, wi
+ok    6 plans/FS121-D3-proof.md: every point of the support of A_m is at distance exactly 1 f
+ok    7 plans/FS121-D3-proof.md: every a.e.-proper k-colouring (S_1, …, S_k) of the plane can
+ok    8 plans/FS111-M2-regularity.md: the class boundary near `x` lies on finitely many "far level
+ok    9 plans/FS111-M2-regularity.md: colour `R` by the least such `j`
+ok   10 plans/FS111-derivation.md: the circumscribed discs of the tight hexagonal seven-colouri
+ok   11 plans/FS110-derivation.md: every boundary meets every unit circle in finitely many poin
+ok   12 LEDGER.md: no locally finite map of the plane whose boundaries are segm
+ok   13 plans/FS110-derivation.md: No bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ
+ok   14 plans/FS110-derivation.md: strictness `λ_k < υ_k` is necessary, the constant `(0, 0)` s
+ok   15 LEDGER.md: the least `k` with a Lebesgue-measurable `k`-colouring prope
+ok   16 plans/FS121-D3-proof.md: the cover route can run on Grundy partitions
+ok   17 data/fs121/briefs/FS121-C1-cover-route.md: NO-PAR is **not yet on the frozen list**.
+quotes: 17  found: 17  missing: 0
