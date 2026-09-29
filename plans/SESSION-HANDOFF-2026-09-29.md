@@ -20,10 +20,10 @@
 | FS116-Y2 | Ephodos, construction round 2 | `data/fs116/briefs/FS116-Y2-construction.md` | `plans/FS116-Y2-construction.md` | no |
 | FS116-V2 | ephodos-verifier | `data/fs116/briefs/FS116-V2-verify.md` | `plans/FS116-V2-verification.md` | yes: fence in its brief |
 | FS121-D2 | Ephodos, C121-NOLRA | `data/fs121/briefs/FS121-D2-nolra.md` | `plans/FS121-D2-proof.md` | no |
-| FS121-D3 | Ephodos, C121-SAT6 | `data/fs121/briefs/FS121-D3-sat6.md` | `plans/FS121-D3-proof.md` | no |
+| FS121-C1 | Ephodos, the cover route (NO-PAR; proposes its claim first) | `data/fs121/briefs/FS121-C1-cover-route.md` | `plans/FS121-C1-proof.md` | no |
 | FS121-V2 | ephodos-verifier | `data/fs121/briefs/FS121-V2-verify.md` | `plans/FS121-V2-verification.md` | yes: fence in its brief |
 
-Done tonight: FS116-Y1, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), CL1, CL2 — each logged in an inventory.
+Done tonight: FS121-D3, FS116-Y1, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), CL1, CL2 — each logged in an inventory.
 
 Agent ids are in the coordinator's scratch only. A halted job resumes from its record's last SAVED stage (standing rule 2), with a fresh agent
 on the same brief if the old one is gone or past ~500k.
