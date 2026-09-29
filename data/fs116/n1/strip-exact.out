@@ -1,0 +1,9 @@
+|V1|^2 - 1 = 0
+|A0|^2 - 1 = 0
+|Vm1|^2 - 1 = 0
+|Am1|^2 - 1 = 0
+|P2|^2 - 1 = 0
+|Pm2|^2 - 1 = 0
+P(P0) = ['B', 'M', 'O', 'P']; P(P2) = ['B', 'G', 'O', 'R']; P(P2) meets P(P0) in ['B', 'O']
+ring colours: (0,60) in U1 = G, (-60,0) in D1 = R; absent at P0: ['G', 'R']
+EXACT OK

@@ -1,0 +1,7 @@
+roots t of |A1 + t(X1 - A1) - A0| = 1: [-1.9962804110890267, 0.500931629867806]; in (0, 1): 1
+|y - A0|^2 - 1 = -2.673e-51;  angle of y about A0 = 209.010157 deg
+cross(y - A1, X1 - A1) = 0.000e+00  (0 on the segment);  t = 0.500932, margins 0.5009, 0.4991
+y + 60 strictly inside the arc A2 -> A3 about A0: cross(A2, u) = 0.29254 > 0, cross(u, A3) = 0.32540 > 0
+y - 60 strictly inside the arc B0 -> Y0 about A0: cross(B0, v) = 0.08733 > 0, cross(v, Y0) = 0.26156 > 0
+ring just clockwise of y in [('W1', 'green')]; just counter-clockwise in [('P1', 'violet')]; tiles with a boundary piece within 1e-3 of y: ['P1', 'W1']
+DISKEXACT OK
