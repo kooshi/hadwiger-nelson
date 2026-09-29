@@ -240,6 +240,11 @@ every agent loads and into that role's own file, beneath its verbatim identity. 
 | **derive** | Ephodos | `ephodos` | blazes the trail | the plan (§G, §PA, §IQ); the proposed claim list; derived statements at their grades; the close record with the drafts of the front page |
 | **verify** | Ephodos, as a second mind | `ephodos-verifier` | follows each derivation, fenced | a verdict per claim, committed before it compares; a divergence table |
 | **formalize** | de Bruijn | `debruijn` | paves behind | kernel theorems read back against their statements; a statement defect, back to the deriver |
+| **file** | the Clerk | `clerk` | serves every lane, on Sonnet 5.5 | reports folded, drafts filed verbatim, mechanical audits run, what the record already says found and filed; `CHECK:` lines for anything it would have had to guess |
+
+Launch the Clerk for work that copies, folds, checks or files and decides nothing; its file lists the kinds of job the history holds.
+It is Keryx's pen for a one-writer file only when its brief says so, and then verbatim from a named draft. Never make it a verifier:
+a second mind is a claim about its prior as well as its fences.
 
 Each agent file (`.claude/agents/<name>.md`) is the identity's core skill copied verbatim, with that lane's lean-dir workflow beneath
 it. The verifier also preloads the `ephodos-verification` companion through its `skills:` field. The companions are invoked fresh
@@ -273,7 +278,9 @@ Staffing — head-count, model, budget — is Kooshi's decision.
   accommodate debruijn, coxeter, and poros"*), whose three were a working agent, a competitor and an advisor.
 - **Model.** Every role on Opus 5.5 (Kooshi, 2026-09-22: *"Opus 5.5 should be used for all purposes until further notice"*), a step
   above Opus 5 and Fable 5.1, which held the planner and implementer roles until then; every rule this project recorded about those
-  models' quirks is retired. The agent files say `model: opus`.
+  models' quirks is retired. The agent files say `model: opus`. **The Clerk is the exception, on Sonnet 5.5** (Kooshi, 2026-09-28:
+  *"Sonnet 5.5 is a new model that is relatively cheap, yet understands things almost as well as you (Opus 5.5) do"*); its file says
+  `model: sonnet`. Anything judged stays on Opus.
 - **Replace, do not reuse.** An agent returning with ~500k–600k tokens of context, by the harness's count (agents' own count runs at
   55–70 % of it, FS-89), is replaced from the record, not continued — the one model-quirk rule that holds for every model. (The rule
   of one level was minted, 2026-09-19, the day a planner briefed as "exactly one planner" delegated part of its prior-art gate to a
@@ -344,7 +351,8 @@ procedures are their agent files.
      - The Proof Atlas rebuilt (`visualizations/proof-atlas/README.md`) and republished to its artifact.
      - Every inventory line ticked "done" or "declined" with its reason, every number re-read from its source.
 
-     When the filing is large, brief an agent as the front-page lane to do it, under the same rule: verbatim, no authoring.
+     When the filing is large, brief an agent as the front-page lane to do it, under the same rule: verbatim, no authoring — by
+     default the Clerk.
 8. **Report** to Kooshi:
    - the milestone's name and purpose;
    - what landed, at which grade and with how many minds, and what is not claimed;

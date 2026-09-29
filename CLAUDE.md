@@ -1656,8 +1656,9 @@ alone (Kooshi, 2026-09-28: "split the whole workflow into the separate agent fil
 | **derive**, blazing the trail | Ephodos | `.claude/agents/ephodos.md` |
 | **verify**, a blind second mind | Ephodos | `.claude/agents/ephodos-verifier.md` |
 | **formalize**, paving behind | de Bruijn | `.claude/agents/debruijn.md` |
+| **file**, reading and bookkeeping, on Sonnet 5.5 | the Clerk | `.claude/agents/clerk.md`, a short identity of lean-dir's own |
 
-The identities are the core skills in `.claude/skills/`, imported unchanged from `~/source/agent-forge`; `scripts/identities.py
+The identities (the Clerk's apart) are the core skills in `.claude/skills/`, imported unchanged from `~/source/agent-forge`; `scripts/identities.py
 check` holds each copy to its skill, and the four cores are hidden from the model's skill list so that no mind loads a second
 identity. Every arrow between lanes passes through Keryx, and only Keryx launches agents (§ Delegation — one level deep). Every
 brief carries `plans/STANDING-RULES.md`. `WORKFLOW.md`, loaded by no one, is the index for the old workflow's step numbers.
