@@ -125,3 +125,4 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | U5 (new) | the brief gate reads a "…" inside a quoted statement's own text as an elision | W13 |
 | U3 | a fence section's "except" clause is invisible to the gate: every backticked path there is fenced (the gate caught the resulting self-fence, so this is a note on wording, not a defect) | W13 |
 | E17 | a frozen list quoted an earlier milestone's statement whose terms were defined only in records fenced from its verifier; the verifier had to ask (FS116-V1) | W16 |
+| E17 | five reading questions from three blind verifiers, each about a term the frozen list used without defining; answered from the proposing records' definitions when the authors were past their lines | W18 |
