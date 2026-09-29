@@ -328,6 +328,9 @@ ALLOW: dict[str, str] = {
     "# Engineering standard": "the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs",
     # The load audit (2026-09-28, plans/WORKFLOW-AUDIT-2026-09-28.md §7): CLAUDE.md's paths-forward table cut to the top ten at Kooshi's word.
     "30–69": "the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md",
+    "5th": "the Grokkings heading's 'the 5th colour', renamed 'Hadwiger–Nelson' with the heading (Kooshi, 2026-09-28)",
+    "## Grokkings — the working theory of the 5th colour": "renamed '## Grokkings — the working theory of Hadwiger–Nelson' (Kooshi, 2026-09-28: 'That feels a bit out of date')",
+    "# Grokkings — the working theory of the 5th colour (the entries)": "renamed with CLAUDE.md's heading, '# Grokkings — the working theory of Hadwiger–Nelson (the entries)' (Kooshi, 2026-09-28)",
     "plans/GROKKINGS-WORKFLOW.md": "the retired grokkings' file, renamed plans/GROKKINGS-RETIRED.md on 2026-09-28 when G47 joined the workflow grokkings (retirements of any kind)",
     "121–126": "FS-100's paths-forward cell 'rows 121–126 at [hand]', cut with ranks 11–29 (Kooshi, 2026-09-28); the rows stand in LEDGER.md, and FS-100's full row in plans/FRONTIER-STUBS.md",
     "# Workflow": "the heading of CLAUDE.md's `@WORKFLOW.md` import, removed when the workflow was split into the identity files (Workflow 3.0, 2026-09-28): WORKFLOW.md is now an index loaded by no one; CLAUDE.md § The pipeline is the shared map",
@@ -1057,7 +1060,7 @@ def main() -> int:
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
-    ap.add_argument("--also", nargs="*", default=[".claude/skills/grokkings/SKILL.md", "plans/GROKKINGS-RETIRED.md", "RUNNING.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
+    ap.add_argument("--also", nargs="*", default=[".claude/skills/grokkings/SKILL.md", "plans/GROKKINGS-RETIRED.md", "RUNNING.md", "plans/CLAUDE-MD-HISTORY.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
     ap.add_argument("--stubs", default="plans/FRONTIER-STUBS.md", help="the ranked stubs, joined to the loss audit only (CLAUDE.md keeps the top ten; --dupes leaves it out)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
@@ -1100,7 +1103,16 @@ def main() -> int:
         return self_test(old)
     print(f"corpus: {a.new} + {a.ledger} + {a.instances} + {' + '.join(a.also)} + {a.stubs} (each joined if present)")
     new = corpus_files(a.new, a.ledger, a.instances, (*a.also, a.stubs))
-    return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
+    failed = bool(audit(old, new, moves=a.moves, show_words=a.words))
+    # The size budgets (CLAUDE.md's header; Kooshi, 2026-09-28: "Let's say 80kB for CLAUDE.md, and 200kB for grokkings.")
+    for f, cap in ((a.new, 80_000), (".claude/skills/grokkings/SKILL.md", 200_000)):
+        if Path(f).exists():
+            n = len(Path(f).read_bytes())
+            print(f"size: {f} {n:,} of {cap:,} bytes")
+            if n > cap:
+                print(f"FAIL: {f} is {n:,} bytes, over its {cap:,}-byte budget")
+                failed = True
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

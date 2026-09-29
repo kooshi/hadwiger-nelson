@@ -122,3 +122,15 @@ field as it stood before the latest edit. The probe's extra skills were removed 
 
 **Open for Kooshi:** the size budget in `CLAUDE.md`'s header is on "this file itself, not on the files it imports", so as written it no
 longer covers the grokkings, which every lane still loads.
+
+## 9. Budgets, the heading, and the theory in one paragraph (2026-09-28)
+
+Kooshi: "Let's say 80kB for CLAUDE.md, and 200kB for grokkings. Also, in CLAUDE, we still call grokkings "the working theory of the 5th
+colour". That feels a bit out of date. Make sure that the "theory in one paragraph" is also valid."
+
+- **Budgets:** `CLAUDE.md`'s header now states both (80,000 and 200,000 bytes) with their reasons; the old size-budget paragraph, a
+  history of earlier raises, moved verbatim to `plans/CLAUDE-MD-HISTORY.md`, which the fact audit joins. The audit now prints both
+  sizes and fails when either is over; a planted 82,854-byte copy of `CLAUDE.md` fired it.
+- **The heading:** "Grokkings — the working theory of Hadwiger–Nelson", in `CLAUDE.md` and in the grokkings file.
+- **The theory in one paragraph:** commissioned from the derive lane (job TP1), which checks each clause against its source and
+  drafts the replacement; Keryx files it.

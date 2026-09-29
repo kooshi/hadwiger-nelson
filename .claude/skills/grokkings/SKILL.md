@@ -3,7 +3,7 @@ name: grokkings
 description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G87, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
 ---
 
-# Grokkings — the working theory of the 5th colour (the entries)
+# Grokkings — the working theory of Hadwiger–Nelson (the entries)
 
 *Moved verbatim from `CLAUDE.md` § Grokkings on 2026-09-28, at Kooshi's word, so that only the lanes that reason from the theory load
 it. The section's rules — every entry's status, demotion with its refutation recorded and never deletion, stable identifiers — and the
