@@ -120,3 +120,5 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | E8 | a four-text drafting job ran to ≈ 357k against 200k; a card job to ≈ 413k, its own count 46 % of the harness's | W7 |
 | E1 | a job record's four theorems had no "Rests on it" prose; the census failed until the coordinator generated it | W10 |
 | E15 (new) | a drafting job that proves theorems writes them in a `plans/<job>-derivation.md` of its own, so the census sees them without a copy | W10 |
+| E16 (new) | Ephodos hand-backs carried full reports in prose, three of three tonight; Poros's was content-free | W5, W11 |
+| E17 (new) | a proposed claim list asserted one of its own claims and gave a mind count, which its blind verifier would read | W12 |

@@ -1,11 +1,10 @@
 # FS-116 — the proposed claim list (statements only)
 
-*Proposed by the opening job FS116-O1 (Ephodos), 2026-09-29; **Keryx freezes it** before any derivation job launches. **Statements only: no proof, no
+*Proposed by the opening job FS116-O1 (Ephodos), 2026-09-29. **Frozen by Keryx, 2026-09-29 05:39 UTC**, with six edits for blindness only (no statement changed): a parenthetical in this preamble and one in § 6 that asserted § 3's first claim, § 3's heading, which gave a mind count, and three source notes pointing into fenced records, replaced by "proposed at the opening" or "(this list)". The proposal as written is in git (commit 9b9b2fa6). **Statements only: no proof, no
 sketch, no route, no grade.** Every quotation is verbatim with its source address; text outside quotation marks is this list's own and is marked "(this
 list)". Give every claim you work one verdict — **TRUE** (with your derivation), **FALSE** (with a counterexample), **GAP at a named step**, or **MISSTATED**
 (with the corrected statement) — with your count of minds. FALSE and GAP are results, as valuable as TRUE. **Every statement about a valid six-coloured
-fragment on a large disc is about a possible object**: at six colours the class may be empty (by § 3's YESLIM it is empty on every large disc if
-`χ_m⁰(ℝ²) ≥ 7`), so every structural claim names its behaviour at `k = 7` (R7) or at another `k` with an inhabitant. `data/fs114/claims.md` §§ 0, 6 stay in
+fragment on a large disc is about a possible object**: at six colours the class may be empty, so every structural claim names its behaviour at `k = 7` (R7) or at another `k` with an inhabitant. `data/fs114/claims.md` §§ 0, 6 stay in
 force where this list does not restate them.*
 
 ## 0. Definitions (quoted)
@@ -69,13 +68,13 @@ force where this list does not restate them.*
 - **FS111-VM2-STRIP-MID** (`plans/FS111-derivation.md` round 2): "the strip of `LEDGER.md` row 136 is tight but not saturated on its midline: at the
   midpoint of every edge A_j | B_j both side colours are free (no tile of either colour at distance exactly 1)".
 
-## 3. The opening's two derivations (one mind each; a blind second mind is owed)
+## 3. Two claims from the opening
 
-- **FS116-O1-YESLIM** (`plans/FS116-local-exclusion.md` § 3.4, verbatim): "for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid
+- **FS116-O1-YESLIM** *(proposed at the opening)*: "for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid
   k-coloured fragment (a map of an open set containing the disc, bounded by segments and circular arcs, k-coloured with no two interior points of one colour at
   distance exactly 1), then χ_m⁰(ℝ²) ≤ k; at k = 6, then χ(ℝ²) ≤ 6, with no MR". *Not claimed:* the converse; that the limit colouring is a map, saturated or
   regular; anything about the fragments' centres; anything from fragments on discs of one bounded radius.
-- **FS116-O1-SATPIN** (`plans/FS116-local-exclusion.md` § 4.1, verbatim): "let p be a vertex of at least four colours of a valid k-coloured fragment saturated
+- **FS116-O1-SATPIN** *(proposed at the opening)*: "let p be a vertex of at least four colours of a valid k-coloured fragment saturated
   on a disc about p, every tile at p with a cone of positive angle; each edge e at p, with side colours a (clockwise) and b (counter-clockwise) and unit normal
   ν pointing to b's side, is near p of exactly one of two types — (split) an arc of the unit circle about a point y of ω(p) at which both a and b have support,
   a unit arc of kind both; or (tangent) a segment or an arc of radius at least 1 along which every x has x + ν(x) in the closure of colour a and x − ν(x) in the
@@ -91,7 +90,7 @@ force where this list does not restate them.*
 - **SAT-QFREE** *(this list)*: in a valid fragment saturated on a disc about a vertex `p` of at least four colours, every tile at `p` with a cone of positive
   angle, whose ring carries no (Q) arc, each split centre of FS116-O1-SATPIN and each point `p ± ν(p)` of its tangent type is a change point of the ring or
   lies on an arc of `Γ` on `ω(p)`. *Not claimed:* rings with (Q) arcs; that such a vertex exists in a saturated fragment.
-- **SATPIN-PER** *(this list; FS116-O1-SATPIN composed with FS121-O1-PER, `plans/FS121-map-step.md` § 3.4, one mind as filed there)*: in a valid fragment
+- **SATPIN-PER** *(this list)*: in a valid fragment
   saturated on a disc about a vertex `p` of at least four colours, every tile at `p` with a cone of positive angle, whose interfaces near `p` carry only
   finitely many radii of curvature, every edge at `p` is a segment of the tangent type or a (Q) arc about a point of `ω(p)` at which no colour has density 0.
   *Not claimed:* anything with infinitely many radii; that such a fragment exists at six colours.
@@ -117,8 +116,7 @@ force where this list does not restate them.*
 
 ## 6. D2 — the exclusion
 
-- **C114-LOCAL-F** as § 1, worked as the NO: an explicit `R` and its derivation, or FALSE with fragments on every disc (which by FS116-O1-YESLIM is
-  `χ_m⁰(ℝ²) ≤ 6`), or GAP at a named ring type.
+- **C114-LOCAL-F** as § 1, worked as the NO: an explicit `R` and its derivation, or FALSE with fragments on every disc, or GAP at a named ring type.
 - **DISC-F** *(this list)*: there are an explicit radius `R` and a derivation that no valid fragment exists on any closed disc of radius `R`. *Not claimed:*
   anything about the disc's centre; any `R` at most the radius of `[Polymath2021]` Fig. 10's disk, `√((25 + 9√5)/10) ≈ 2.1246`, which is a valid fragment
   (row 136).
