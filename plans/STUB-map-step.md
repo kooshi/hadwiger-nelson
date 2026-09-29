@@ -8,8 +8,10 @@ derivation and reading. Written for a session with no memory of FS-111: read `CL
 
 ## The question
 
-**The frame (FS-111's card 1, two minds, one blind).** Seven, `χ_m⁰(ℝ²) ≥ 7` (so `χ(ℝ²) = 7` given MR), is the map NO — row 134 with FS-114's NO — made
-uniform in the complexity bound (`FS111-C1-UNIF`); the map NO alone bounds holes at each complexity only (`FS111-C1-PW`). So the map NO reaches seven only
+**The frame (FS-111's card 1, two minds, one blind).** Seven, `χ_m⁰(ℝ²) ≥ 7` (so `χ(ℝ²) = 7` given MR), is the map NO's **hole bound**
+made uniform in the complexity bound (`FS111-C1-UNIF`: `1 − lim µ₆(ε) = inf_K δ₀(K)`); the map NO — row 134 with FS-114's NO — alone bounds holes at each
+complexity only (`FS111-C1-PW`). *(Corrected by Poros, FS116-P1, 2026-09-29: this sentence read "is the map NO … made uniform in the complexity bound",
+which says FS-116's uniform radius is seven — an open question; R1's F9.)* So the map NO reaches seven only
 through a **third statement**, and on route M that statement is the **map step** REG: *if a tight a.e.-proper `k`-colouring of the plane exists, a map
 carries one* — at `k = 5` a map-type colouring (S–V Conditions 2–4; REG-I₅), at `k = 6` a map bounded by segments and circular arcs (REG-A₆). With the held
 "maps need six" (FS106-AE-MAP6, one mind per link) REG-I₅ gives `χ_m⁰(ℝ²) ≥ 6`; with FS-114's NO, REG-A₆ gives seven (`FS111-C-SIX-M`, `FS111-C-SEVEN-M`).
@@ -48,13 +50,89 @@ are genuinely smaller.
    Question 5.1 (one class: *"Does there exist a set A with block structure and δ(A) = m 1 ?"*, arXiv:2407.05071 §5), a calibration — a positive answer
    there decides nothing about six.
 
+## The question (Poros, 2026-09-29)
+
+*Posed by Poros, job FS116-P1, beside FS-116's (`plans/STUB-local-exclusion.md`), so that one asker keeps the two halves of route M coherent. The
+record is `plans/POROS-2026-09-28-fs116-question.md`, stage 4. Ephodos's §IQ quotes the two forms below verbatim.*
+
+### The card
+
+```
+question: do-ladders-end-on-q-rings
+  evidence: FS111-M2-INTRAD (two minds on its core): off Σ, radii "drop by exactly 1 toward the centre and stop at 1"; FS111-M-PINCH (three minds):
+    a saturated interface point lies on "a unit arc whose centre carries both colours" or between two tangent unit discs; FS112-N3-NOBOTH (two
+    minds, one blind): "The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour"; FS111-W-NOREP (one mind):
+    "at a cone vertex of a saturated map without cusps, no colour occupies two sectors"; FS-116's structural form (plans/STUB-local-exclusion.md)
+  expected: that this stub's ladders and FS-116's four-colour vertices were separate objects, as the two stubs treated them
+  ask: In an honestly saturated six-map without cusps, does every curved interface's ladder of unit parallels end at a (Q) arc about a vertex of at
+    least four colours — so that FS-116's rings are where this stub's ladders end?
+  if they do: the two milestones share one object; the honest route's remaining rungs are the straight ladders' ends (FS-120), ¬LRA (FS-115) and
+    Σ's local finiteness, and FS-116's card what-do-q-rings-force is this stub's first structural step too — the two openings run it once
+  if a step fails: the failing link (a cusp, a repeated colour, a ladder stopping above radius 1) names what separates a saturated map's interfaces
+    from FS-116's rings, and this milestone opens on that link
+  answered by: derivation — Ephodos at FS-121's opening, a check of a four-link composition
+  cost: under an hour
+  hunch: they do, off cusps (0.7)
+  falsifier: a cusp-free honestly saturated fragment by formula with a curved interface whose ladder's last rung is a unit arc about a point of
+    at most three colours
+  rank: 1
+```
+
+**The joint with FS-116** (R1's card 2, re-posed; the record's § 2.4). The honest route hands the NO an **honestly saturated** map
+(`FS111-M2-REDUCE-A`: REG-A_k "in an honest saturated k-colouring"). So the honest route needs FS-116's NO only in that class, and FS-116's rank-1 card
+asks what saturation pins at a four-colour vertex. The cover route needs NO-PAR instead, a NO for a class whose boundaries need not be arcs, larger
+than FS-114's (question 1 below; `FS111-M2-DISCK7`). The complexity half of card 2 dissolves if FS-116's card `the-yes-needs-no-map` holds: FS-116's
+radius is then uniform whatever this milestone outputs, and a locally finite map is all it must produce, which M2-INTRAD's form already gives.
+**Recommendation** (Kooshi's or the plan's call):
+- *The choice:* open on the honest route.
+- *The alternative weighed:* the cover route (NO-PAR, with MUA-FIN).
+- *Why:* the honest route's NO is the one FS-116 is posing, and the cover route's NO-PAR is a second, larger NO with no one on it.
+- *Confidence:* 0.65. The fact that would change it: FS-116's rank-1 card finding that saturation pins nothing new at a four-colour vertex, and NO-PAR
+  following from row 134's chain at one named step (question 1's "0.5").
+- *Default:* the honest route first.
+
+### Existence form
+
+**Is there a saturated colouring of the plane — with any number of colours — whose singular set is not locally finite, or whose interface radii
+accumulate?**
+
+At `k ≥ 7` an inhabitant would refute the universal regularity forms (REG-J′, ¬LRA); the controls R7, SQ9 and HEX9 inhabit their negation. At `k = 6`
+an inhabitant would already be `χ_m⁰(ℝ²) ≤ 6` (`FS111-W-NEG`). A NO at every `k`, with honest saturation (question 2 below), gives REG-A₆ by
+`FS111-M2-REDUCE-A`, and with FS-116's NO in the saturated class it gives seven.
+
+### Structural form
+
+**In every saturated colouring of the plane, whatever the number of colours, where can the ladder of unit parallels of an interface end — on a unit
+arc about a point of at least four colours, at a junction, at the singular set, or nowhere — and what does every end carry that bounds how many ends
+meet a bounded set?**
+
+*Why this is the structural form.* REG-J′ (the singular set locally finite, finitely many interface arcs at each point) and ¬LRA (no radius
+accumulation) are both statements about where ladders end and how many ends a bounded set holds. Neither can be answered without an invariant carried
+at every ladder end. Curved ladders descend to radius 1 (`FS111-M2-INTRAD`), and the card asks whether they then end on FS-116's (Q) rings. Straight
+ladders are FS-120's pinch (`FS111-M4-LADDER`, `M4-CUT`). The form is colour-generic, with inhabitants at `k = 7` (R7) and `k = 9` (SQ9, HEX9), so it
+is not vacuous under seven, and at six it names the rung that is not the answer restated.
+
 ## Bearing on the answer
 
-**Decisive at its top, and at its top the answer restated.** At six: the map step with FS-114's NO is `χ_m⁰(ℝ²) = 7`, so `χ(ℝ²) = 7` given MR; its
-failure is a tight six-colouring, `χ_m⁰(ℝ²) ≤ 6`, so `χ(ℝ²) ≤ 6` with no MR (link 2). At five: the map step with AE-MAP6 is `χ_m⁰(ℝ²) ≥ 6`, so
-`χ(ℝ²) ≥ 6` given MR — FS-104's statement by another route; its failure is `χ(ℝ²) = 5` with no MR. Each top rung is equivalent to its conclusion given its
-NO, so this stub's progress is measured by its **smaller rungs**: NO-PAR (a new NO, genuinely smaller than seven: a NO for a class of maps), interface
-maximality, MUA-REG-P, and FS-120's finiteness rung. Rank it by the NO it would add, not by the equivalence. The same equivalence holds of FS-116's NO given this stub's top rung: route M's two halves are each necessary for seven and each equivalent to it given the other (R1, F2).
+*Rewritten by Poros (FS116-P1, 2026-09-29).*
+
+**Decisive at its top, and at its top the answer restated.**
+- *At six:* the map step with FS-116's NO gives `χ_m⁰(ℝ²) = 7`, so `χ(ℝ²) = 7` given MR. On the honest route the NO needed is FS-116's in the honestly
+  saturated class only (`FS111-M2-REDUCE-A`). Its failure is a tight six-colouring, `χ_m⁰(ℝ²) ≤ 6`, so `χ(ℝ²) ≤ 6` with no MR (link 2).
+- *At five:* the map step with AE-MAP6 gives `χ_m⁰(ℝ²) ≥ 6`, so `χ(ℝ²) ≥ 6` given MR — FS-104's statement by another route. Its failure is
+  `χ(ℝ²) = 5` with no MR.
+
+Each top rung is equivalent to its conclusion given its NO (`FS111-C-REG-EQ`). So this stub's progress is measured by its **colour-generic rungs**:
+- the regularity of every saturated colouring (the existence form: a locally finite singular set, no radius accumulation), which is true or false at
+  `k ≥ 7` about real objects;
+- honest saturation;
+- NO-PAR (a new NO for a class of maps, but larger than FS-116's);
+- FS-120's finiteness rung.
+
+Rank it by the rungs it would add, not by the equivalence. The same equivalence holds of FS-116's NO given this stub's top rung: route M's two halves
+are each necessary for seven and each equivalent to it given the other (R1, F2). If FS-116's card `the-yes-needs-no-map` holds, each half's failure is
+`χ(ℝ²) ≤ 6` on its own. **The two halves may share one object:** this stub's curved ladders end, off cusps, on FS-116's (Q) rings. That is § The card
+above, unchecked.
 
 ## Registered expectations (instruments, never caps)
 
@@ -72,9 +150,22 @@ maximality, MUA-REG-P, and FS-120's finiteness rung. Rank it by the NO it would 
 
 ## Provisional bearings (replaced by the re-grokking at the opening)
 
-G84, G85 (drafted at FS-111's close), G82, G83, G22 (the target class contains arcs), G24/G60, G21; rows 130–136 (row 134's N4 step above all). Stubs:
-FS-120 (its finiteness rung), FS-114 (the NO), FS-115 (LRA), FS-104 (the five-colour top rung is its statement given MR), FS-108 (Townsend's (c) under
-AE-MAP6), FS-113/FS-101 (the measurable chain in Lean, which the route-M lemmas queue behind).
+*Rewritten by Poros (FS116-P1, 2026-09-29).*
+- G84, G85 — contact and integer radii: the ladder.
+- G83 — the four-colour vertex, where curved ladders may end on (Q) arcs; § The card.
+- G82 — a limit of near-colourings is a colouring.
+- G22 — the target class contains arcs.
+- G24/G60 — integrality.
+- G21 — every control here is tight at seven or nine, not six (W-NEG); the strip is unsaturated at its midline, so it is no control for saturation.
+- G87 — the invention signal.
+- Rows 130–141: row 134's N4 step; row 140's M-PINCH and M2-INTRAD; row 141's ladder.
+- Stubs:
+  - FS-116 — the NO, in the saturated class for the honest route, whose rank-1 card is this stub's joint;
+  - FS-120 — the straight ladders' ends, the pinch at a junction;
+  - FS-115 — LRA;
+  - FS-104 — the five-colour top rung is its statement given MR;
+  - FS-108 — Townsend's (c) under AE-MAP6;
+  - FS-113/FS-101 — the measurable chain in Lean, which the route-M lemmas queue behind.
 
 *Would have searched here:* a saturated six-colouring or a chain of radius 2 — out (by W-NEG such an object would be `χ_m⁰ ≤ 6`, and search is banned
 to 2026-10-01).

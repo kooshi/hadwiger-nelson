@@ -452,3 +452,63 @@ straddle count along two unit circles", "posed for every tight near-colouring".
 A prior guess, 1 of 4 parts met, consistent with the study's rate for prior hunches.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED
+
+### 4.1 FS-121's card (added by Amendment 1)
+
+*Read for this stage, beyond stage 2's reading: `plans/STUB-map-step.md` again, and FS112-N3-NOBOTH's statement (`data/fs114/claims.md` § 2). The
+card's four links are held statements. Composing them is my construction, offered in the hypothetical mood and addressed to Ephodos to check.*
+
+hunch: curved-ladders-end-on-q-rings
+  claim: in a cusp-free honestly saturated six-map, every curved interface descends its ladder of unit parallels to a unit arc (FS111-M2-INTRAD, "stop
+    at 1") whose centre carries both colours (FS111-M-PINCH), and that centre is a vertex of at least four colours (FS112-N3-NOBOTH, with FS111-W-NOREP
+    removing the repeated colour), so the last rung is a (Q) arc — FS-116's ring (0.7)
+  basis: derived
+  falsifier: a cusp-free honestly saturated fragment by formula with a curved interface whose ladder's last rung is a unit arc about a point of at most
+    three colours
+  registered: 2026-09-29
+  status: open
+
+question: do-ladders-end-on-q-rings
+  evidence: FS111-M2-INTRAD (two minds on its core), radii "drop by exactly 1 toward the centre and stop at 1"; FS111-M-PINCH (three minds), "a unit
+    arc whose centre carries both colours"; FS112-N3-NOBOTH (two minds, one blind), "The centre of a both-kind unit arc is a vertex with at least four
+    colours or a repeated colour"; FS111-W-NOREP (one mind), "at a cone vertex of a saturated map without cusps, no colour occupies two sectors";
+    `plans/STUB-local-exclusion.md` § Structural form
+  expected: that FS-121's ladders and FS-116's four-colour vertices were separate objects, as the two stubs treated them
+  ask: In an honestly saturated six-map without cusps, does every curved interface's ladder of unit parallels end at a (Q) arc about a vertex of at least four colours — so that FS-116's rings are where FS-121's ladders end?
+  if they do: the two milestones share one object; the honest route's remaining rungs are the straight ladders' ends (FS-120), ¬LRA (FS-115) and Σ's local finiteness; FS-116's card what-do-q-rings-force is FS-121's first structural step too, run once for both openings
+  if a step fails: the failing link (a cusp, a repeated colour, a ladder stopping above radius 1) names what separates a saturated map's interfaces from FS-116's rings, and FS-121 opens on that link
+  answered by: derivation — Ephodos at FS-121's opening, a check of a four-link composition
+  cost: under an hour
+  hunch: they do, off cusps (hunch `curved-ladders-end-on-q-rings`, 0.7)
+  falsifier: a cusp-free honestly saturated fragment by formula with a curved interface whose ladder's last rung is a unit arc about a point of at most three colours
+  rank: 4
+
+*Four cards across two milestones. The gate warns above three; three are FS-116's (§ 2.4) and one is FS-121's.*
+
+### 4.2 What I wrote into `plans/STUB-map-step.md`, and what I changed
+
+- **Added** `## The question (Poros, 2026-09-29)`, holding § The card (the card above, as FS-121's rank 1, in a fence); a paragraph on the joint with
+  FS-116 (R1's card 2 re-posed); a four-part recommendation with a default (the honest route first, confidence 0.65); § Existence form; and
+  § Structural form. The forms, quoted here so the record carries them:
+  - *Existence form:* "**Is there a saturated colouring of the plane — with any number of colours — whose singular set is not locally finite, or whose
+    interface radii accumulate?**"
+  - *Structural form:* "**In every saturated colouring of the plane, whatever the number of colours, where can the ladder of unit parallels of an
+    interface end — on a unit arc about a point of at least four colours, at a junction, at the singular set, or nowhere — and what does every end carry
+    that bounds how many ends meet a bounded set?**"
+
+  The existence form is the colour-generic rung. At six its failure is already `χ_m⁰ ≤ 6` (W-NEG), and at `k ≥ 7` it is about real objects, so it is
+  not the answer restated. This is the honesty the stub's own § Honesty asks of its rungs.
+- **Corrected** the frame sentence Amendment 1 flagged (R1's F9): "is the map NO — row 134 with FS-114's NO — made uniform in the complexity bound" →
+  "is the map NO's **hole bound** made uniform in the complexity bound (`FS111-C1-UNIF`: `1 − lim µ₆(ε) = inf_K δ₀(K)`); the map NO — row 134 with FS-114's
+  NO — alone bounds holes at each complexity only". I agree with the flag. The old wording says FS-116's uniform radius is seven, which is open, and
+  which card `the-yes-needs-no-map` shows is at most necessary for seven. The correction is marked in the stub with its reason.
+- **Rewrote in place** § Bearing on the answer, keeping its substance, R1's F2 sentence and the MR clauses. It now adds three things: the honest route
+  needs FS-116's NO only in the saturated class; each half's failure is `χ(ℝ²) ≤ 6` on its own if FS-116's card 2 holds; and the shared-object reading,
+  unchecked. It also rewrote § Provisional bearings in place: added G83 and G87, noted that the strip is no control for saturation, and made FS-116's
+  entry the joint.
+- **Left as FS-111's close wrote them:** the header, § The question's other paragraphs (the honesty note, what FS-111 proved, questions 1–4),
+  § Registered expectations, § Failure clauses, and the would-have-searched line.
+
+## Stage 4 — SAVED
