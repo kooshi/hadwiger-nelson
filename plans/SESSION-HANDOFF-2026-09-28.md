@@ -93,3 +93,5 @@ The session after the closes changed what every mind loads; the record is `plans
 - **First act of the next session:** launch one lane agent with no tools and ask it to quote G87's first words from a loaded
   `grokkings` skill block (a "Base directory for this skill: …/grokkings" line). A same-session probe loaded it in full; the
   harness picks up an agent file's `skills:` field with a lag, so a fresh session is the clean confirmation.
+- **Corrections owed to the theory** (G56, G35, item 1; row 139's opening): `plans/WORKFLOW-AUDIT-2026-09-28.md` §9. A short Ephodos
+  drafting job, or FS-116's opening re-grokking, which reads G56 anyway.

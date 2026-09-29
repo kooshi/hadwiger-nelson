@@ -389,26 +389,32 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of Hadwiger–Nelson
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G83 are stable identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G87 are stable identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 *Every milestone opens with the reframe, in which the deriver walks these entries from inside its question (`.claude/agents/ephodos.md` § The opening job). The paragraph that stated it here, and the workflow grokkings the lanes' workflows now carry, are in `plans/GROKKINGS-RETIRED.md`.*
 
-**The theory in one paragraph.** The 4/5 wall is arithmetic. A unit-distance graph over K is
-4-colourable by a residue colouring at the prime above 2, so a 5-forcer is K-fabric — a small vocabulary of
-seam shells about rotation centres, organized by the half-spindle group — plus a spindle whose radicand
-breaks the 2-adic wall; its forcing is a regional pigeonhole on the fabric composed with kills that must
-leave K, invisible at the pair level. Past five colours the linear arithmetic goes blind and the finite
-residue planes take over: a field is 5-sealed when a usable small prime's plane is 5-colourable, the sealing
-plane carries no pair compulsion of its own, and a spindle over a forced pair removes exactly the prime that
-sealed its fabric. That mechanism now has no instance: the sealing plane at 11 has a fan gap, and a gap at level one frees every
-pair above it (row 66), so over every 5-sealed field the five-colour compulsion structure at arity 2 is trivial —
-forced pairs are single vertices, virtual edges unit edges — and a residue plane forces pairs only where it is
-Hoffman-tight or pulls back from a tight quotient (row 87), which at five colours no sealing plane does (G54; at 2 with four colours the plane is tight and the
-tower forces from level 5, row 67). So a 6-forcer's every compulsion lives in a 6-open field (G48), where the
-residue method is silent; what it can still name is a 5-colourable, 5-tight
-quotient of such a plane (FS-42), or the first digit at 83 (FS-40). Through five the residue reading is exact: χ(F²) = L(F)
-whenever L(F) ≤ 5, over every real number field (row 123, [hand], through MR) — the lower half by measure rigidity for the
-unit-vector group (G80), with no forcer; and where every stable place mixes, the field's number is the plane's (G81).
+**The theory in one paragraph.** The 4/5 wall is arithmetic: over K a residue colouring at a prime of K(i) above 2 four-colours K²
+(Theorem B, row 57; G1, G35). A real number field's residue targets bound its plane, χ(F²) ≤ L(F) (row 52, G64; [hand]), and through
+five the bound is exact: χ(F²) = L(F) whenever L(F) ≤ 5 (row 99 below five; at five given MR, by measure rigidity for the unit-vector
+group, with no witness graph: rows 120, 123, G80; [hand]). So, given MR, F² needs five exactly when F has no usable prime with residue
+field 𝔽₃ or 𝔽₇ and no prime above 2 ramified in F(i) or inert there of norm at most 32 (row 123). Past five the residue method runs
+out: over a field Γ₁₁ seals at five, a five-colour forced pair is one point and a virtual edge a unit edge (row 66), so the spindle's
+design for six has no instance there (G48), and L(F) = 6 needs one of six finite targets — Γ_q at q ∈ {23, 27, 31, 43, 47}, or U₆₄ — to
+be six-chromatic, none decided (G56, G59). Where every stable place of a totally real field mixes at six colours, as at ℚ(√635087), the
+arithmetic is exhausted: given MR, χ(F²) = χ(ℝ²) = χ_m⁰(ℝ²), the least k with a measurable k-colouring proper at almost every unit pair
+(rows 128, 130, G81; [hand]), and χ(ℝ²) ≤ χ_m⁰(ℝ²) needs no MR (row 130). No argument that bounds one colour class at a time gives six:
+row 123's five is ⌈1/α_loc⌉, one densest class's bound, and 1/α_loc ≤ 4.36 (row 129, G60; [hand]). What is left, with no MR, is a
+stability question (row 131, G82; [hand]): χ_m⁰(ℝ²) ≥ 7 iff six classes free of monochromatic pairs at distances in [1 − ε, 1 + ε]
+cannot cover the plane up to holes whose density tends to 0; a refutation is a sequence of periodic grid colourings, wild only in the
+limit, and gives χ(ℝ²) ≤ 6. Colourings with slack, polygonal ones and nice maps need seven almost everywhere, maps six (row 132;
+[hand], printed proofs repaired). At bounded complexity vanishing holes are a tight six-map (row 133); with no unit arcs none exists
+(row 134), and with them every one has a vertex of at least four colours, so the map NO follows from one exclusion about such a vertex
+at an explicit radius uniform in the complexity (row 137, G83), and a tile count reaches only its non-Siamese part (G86; all [hand]).
+Seven, χ_m⁰(ℝ²) ≥ 7, is the NO's hole bound made uniform in the complexity bound (row 139): it follows from the NO once the tight limit is made a map
+(route M, the map step), or from a forced complementary junction pair at every complexity with its cone scale bounded below (route R),
+and each route's third statement is the answer restated. Route M's regularity is contact: a saturated class is carved by unit circles
+about its own points, and off a locally finite singular set its interfaces are segments and arcs of integer radius, that finiteness
+open (rows 140–141, G84, G85; [hand]). No value has moved: χ(ℝ²) ∈ {5, 6, 7} (row 33).
 
 *The entries themselves — G1 to G87, each retired one as a titled pointer — are `.claude/skills/grokkings/SKILL.md`, which Poros,
 Ephodos, the blind checker and de Bruijn load in full at launch through their agent files' `skills:` field. They moved there on

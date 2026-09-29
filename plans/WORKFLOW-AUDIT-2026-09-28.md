@@ -132,5 +132,16 @@ colour". That feels a bit out of date. Make sure that the "theory in one paragra
   history of earlier raises, moved verbatim to `plans/CLAUDE-MD-HISTORY.md`, which the fact audit joins. The audit now prints both
   sizes and fails when either is over; a planted 82,854-byte copy of `CLAUDE.md` fired it.
 - **The heading:** "Grokkings — the working theory of Hadwiger–Nelson", in `CLAUDE.md` and in the grokkings file.
-- **The theory in one paragraph:** commissioned from the derive lane (job TP1), which checks each clause against its source and
-  drafts the replacement; Keryx files it.
+- **The theory in one paragraph:** TP1 (Ephodos; record `plans/WORKFLOW3-TP1-theory-paragraph.md`, commits 655094c4–9fdeb0de)
+  checked 19 clauses: none false; "or the first digit at 83 (FS-40)" stale (row 68; FS-40 closed); the shape of a 5-forcer stale as a
+  universal claim (G4 measured; superseded by G11, G55, rows 121, 123); five clauses dropping a grade or widening a scope; the whole
+  stopping at the collapse. Its replacement (one paragraph, 2,994 bytes, 18 rows and 14 grokkings cited, each resolving) is filed
+  verbatim but for **one ruling of Keryx's**: "is that NO made uniform in the complexity (row 139)" became "is the NO's hole bound made
+  uniform in the complexity bound (row 139)", the wording Poros's re-read put in place of the same conflation in item 31 and the atlas
+  (`plans/POROS-2026-09-28-close-reread.md` F9); the draft had followed row 139's opening sentence, which keeps the old phrase.
+  Keryx's receipt: rows 129 (the 4.36), 134 (no radius-1 arcs) and 139 read against their clauses. `CLAUDE.md` § Grokkings' range now
+  reads G1–G87 (TP1's finding). `--dupes` 23: one deliberate repeat of item 31's wording; the history file is left out of that check.
+- **Corrections owed** (for the derive lane to draft and Keryx to file): (1) G56's *Do* ("or a prime above 2 is inert of norm 64, and
+  the wall is broken") cannot hold under G56's own definition of a broken wall; G35's "(norm 2 or 4)" holds for multiquadratic fields
+  only; the exact form is row 123's; `CLAUDE.md` § Where the problem stands item 1 has the same scope question (TP1 § Stage 3).
+  (2) Row 139's opening sentence keeps "the map NO made uniform in the complexity bound", the wording F9 corrected elsewhere.

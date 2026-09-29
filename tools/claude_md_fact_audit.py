@@ -328,6 +328,7 @@ ALLOW: dict[str, str] = {
     "# Engineering standard": "the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs",
     # The load audit (2026-09-28, plans/WORKFLOW-AUDIT-2026-09-28.md §7): CLAUDE.md's paths-forward table cut to the top ten at Kooshi's word.
     "30–69": "the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md",
+    "G1–G83": "the Grokkings header's range of stable identifiers, extended to G1–G87 when TP1 noticed it stale (2026-09-28; G84–G87 minted at the FS-114/FS-111 closes and on Kooshi's word)",
     "5th": "the Grokkings heading's 'the 5th colour', renamed 'Hadwiger–Nelson' with the heading (Kooshi, 2026-09-28)",
     "## Grokkings — the working theory of the 5th colour": "renamed '## Grokkings — the working theory of Hadwiger–Nelson' (Kooshi, 2026-09-28: 'That feels a bit out of date')",
     "# Grokkings — the working theory of the 5th colour (the entries)": "renamed with CLAUDE.md's heading, '# Grokkings — the working theory of Hadwiger–Nelson (the entries)' (Kooshi, 2026-09-28)",
@@ -1091,7 +1092,8 @@ def main() -> int:
         return text
 
     if a.dupes:
-        dupes(corpus_files(a.new, a.ledger, a.instances, tuple(a.also)))
+        # the history file keeps text the live file was rewritten from, some of it kept on purpose: a record, not a retelling
+        dupes(corpus_files(a.new, a.ledger, a.instances, tuple(f for f in a.also if not f.endswith("CLAUDE-MD-HISTORY.md"))))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
