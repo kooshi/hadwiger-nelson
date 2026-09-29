@@ -82,6 +82,8 @@ bodies of their commits):
 - FS-114's records, for the third statement: every file matching `plans/FS114-*`, and everything under `data/fs114/` except
   `data/fs114/claims.md`; `plans/STUB-route-t-count.md`.
 - The session transcripts (`~/.claude/projects/`, `chats-bak/`), the coordinator's scratch, and any other job's scratch directory.
+- Added by amendment 1: the Clerk's unvetted copy and its job files, `data/workflow3/cl2/`, `plans/WORKFLOW3-CL2-n7-definitions.md`,
+  `data/workflow3/reports/CL2.md`, `data/workflow3/briefs/CL2-n7-definitions.md`, and `tools/cl2_extract.py`.
 
 If a search prints fenced text, stop reading and log the touch at once (standing rule 8).
 
@@ -113,3 +115,19 @@ I will ask its author. If a statement is wrong as posed, MISSTATED with the corr
 4. The divergence table, then the report.
 
 Thank you.
+
+## Amendment 1 (2026-09-29 05:59 UTC): the definitions you asked for, and the author's readings
+
+Your questions of 2026-09-29 are answered in one file you may read: `data/fs116/v1-n7-definitions.md`. It holds the definitions for
+N1–N7, copied verbatim from FS-114's records with their addresses and vetted by me to carry definitions only (its header says what was
+cut and why), the entry's `statement:` and `not claimed:` fields, and the author's readings of SATPIN, as relayed:
+
+> (S1) The reading a ≠ b is meant. An "edge" in the statement is a boundary arc between tiles of two different colours. A boundary arc between two tiles of one colour is not an edge in the statement's sense.
+> — source: data/fs116/v1-n7-definitions.md § The author's readings of FS116-O1-SATPIN (relayed to FS116-V1 by message, 2026-09-29)
+
+> (S2) The reading "one of" is meant: every edge is at least one of the two types. "Exactly one" is not meant to assert that no edge satisfies both descriptions as written.
+> — source: data/fs116/v1-n7-definitions.md § The author's readings of FS116-O1-SATPIN (relayed to FS116-V1 by message, 2026-09-29)
+
+Where the sources leave a term open (a four-colour vertex with exactly or at least four colours; how `ε` is quantified), they do not settle
+it: state which reading you work, or both. The fence gains the Clerk's job files (§ Fences, last bullet). Unchanged: no agents of your own
+(standing rule 1: staffing is Kooshi's budget, and I can review only work I know exists).
