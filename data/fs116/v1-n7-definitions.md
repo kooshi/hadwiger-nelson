@@ -249,3 +249,11 @@
 > (S1) The reading a ≠ b is meant. An "edge" in the statement is a boundary arc between tiles of two different colours. A boundary arc between two tiles of one colour is not an edge in the statement's sense.
 >
 > (S2) The reading "one of" is meant: every edge is at least one of the two types. "Exactly one" is not meant to assert that no edge satisfies both descriptions as written.
+
+## The sign patterns with three tactic edges (added 01:11, for FS116-V1's scope question)
+
+*The naming sentence only, verbatim; the words before it in the source describe the argument and are not copied.*
+
+> Up to rotation and reflection (which reverses the order and the signs) the sign patterns are `+++`, `++−`, `+−+`, `−++`.
+
+*Source: `plans/FS114-N7-proof.md` lines 134–135.*
