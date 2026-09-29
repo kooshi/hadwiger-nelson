@@ -519,3 +519,34 @@ unused.
 (FS111-VM2-STRIP-MID) are both true; they collide only if the dial is read as the saturated class's, which G21 forbids — a scope.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the proposed claim list, FS-121's answer folded in, and the report
+
+### 5.1 FS-121's card answered, and what it does to D0 (the coordinator's ruling, 2026-09-29)
+
+FS121-O1 answered `do-ladders-end-on-q-rings` (one mind, hand; `plans/FS121-map-step.md` § 3.2–3.4, commit 96889732, read at the source for its entries
+FS121-O1-CARD, -OUT and -PER). Keryx ruled that card `what-do-q-rings-force` stays FS-116's, run once here (RING-Q), and FS-121 takes its result as an input.
+Two of its entries bear on D0, as one-mind inputs graded as filed:
+- **FS121-O1-PER** (verbatim): "in an honest saturated colouring in D-NF satisfying REG-J′ whose interfaces carry only finitely many radii of curvature — in
+  particular a doubly periodic one without large-radius accumulation — every curved interface is a split unit arc of kind both and no (R2) arc occurs; where no
+  colour has density 0 at an arc's centre, every such arc is (Q)". Composed with SATPIN: in that subclass every edge at a cusp-free four-colour vertex is a
+  tangent-type segment or a (Q) arc about a point of `ω(p)` — **SATPIN-PER**, added to the claim list's D0.
+- **FS121-O1-OUT** (its statement: the unit parallel away from the centre of every tangent-type interface arc of radius `n` is, off `Σ`, a tangent-type
+  interface arc of radius `n + 1`; "infinite for a segment"): with M2-INTRAD, **every tangent-type segment at `p` is one rung of a ladder of straight
+  interfaces at every integer distance on both sides, off `Σ`**. This is D0's first handle on SAT-STRIP: the strip's four straight edges would lay a unit grid
+  of interfaces about `p`, and the partner colours SATPIN places at the axis points of `ω(p)` must fit it. Instruction to FS116-N1 (and to Y-SAT's builder):
+  start SAT-STRIP from that grid.
+
+### 5.2 The proposed claim list
+
+`data/fs116/claims.md`, for Keryx to freeze: the definitions (valid map and fragment, the `k`-coloured fragment, Siamese, `Γ` and tiles, ring and change point,
+tactic edge, simple, essential multicolour, saturated and saturated on a disc, `χ_m⁰`, the strip's midline configuration, ring type) quoted with addresses or
+marked "(this list)"; the two questions verbatim; five held inputs verbatim; this opening's YESLIM and SATPIN for their blind second mind; D0 (SAT-STRIP,
+SAT-QFREE, SATPIN-PER, NO-SAT), D1 (RING-TWIST, RING-Q with RING-Q′, RING-TRANSFER), D2 (C114-LOCAL-F, DISC-F, LOCAL-DENSE), Y (Y-QRING, Y-SAT), K
+(FS114-N7-3T verbatim for its owed blind check); controls and carried killing tests. Each statement has its *not claimed* line; no grades, no priors, no
+routes. **Note for the freeze:** RING-Q quotes the card's ask and states a sharper claim beside it, marked; P3 is registered on RING-Q, P1 on SAT-STRIP.
+
+**G87 lookout, stage 5:** none seen. FS121-O1's "a step fails, at link 1 → 2" and this plan's D0 do not collide: FS-121's failing link is at (R2) ends with a
+three-colour centre, which FS121-O1-PER removes in the finitely-many-radii subclass and which SATPIN, stated for four-colour `p`, does not reach.
+
+## Stage 5 — SAVED

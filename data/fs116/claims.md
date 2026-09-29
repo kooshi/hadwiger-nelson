@@ -1,0 +1,156 @@
+# FS-116 — the proposed claim list (statements only)
+
+*Proposed by the opening job FS116-O1 (Ephodos), 2026-09-29; **Keryx freezes it** before any derivation job launches. **Statements only: no proof, no
+sketch, no route, no grade.** Every quotation is verbatim with its source address; text outside quotation marks is this list's own and is marked "(this
+list)". Give every claim you work one verdict — **TRUE** (with your derivation), **FALSE** (with a counterexample), **GAP at a named step**, or **MISSTATED**
+(with the corrected statement) — with your count of minds. FALSE and GAP are results, as valuable as TRUE. **Every statement about a valid six-coloured
+fragment on a large disc is about a possible object**: at six colours the class may be empty (by § 3's YESLIM it is empty on every large disc if
+`χ_m⁰(ℝ²) ≥ 7`), so every structural claim names its behaviour at `k = 7` (R7) or at another `k` with an inhabitant. `data/fs114/claims.md` §§ 0, 6 stay in
+force where this list does not restate them.*
+
+## 0. Definitions (quoted)
+
+- **Valid map, unit arc, (Q), (R2), `F(M)`, `R(M)`** (`plans/FS112-derivation.md` header, as quoted in `data/fs114/claims.md` § 0, verbatim): "A map is
+  **valid** when it is a locally finite map of the plane bounded by segments and circular arcs, **arcs of radius 1 allowed** (Condition 5 dropped),
+  carrying a six-colouring in which no two interior points of one colour are at distance exactly 1. A **unit arc** is a boundary arc of radius 1; **(Q)** an
+  arc whose centre carries both side colours and at least four colours; **(R2)** an arc whose centre carries the outer side colour and not the inner, with an
+  inner-colour tile along the radius-2 circle over the whole arc. `M*` is a terminal valid modification (N2-TERM). `F(M)`: the vertices of at least four
+  colours; `R(M)`: the vertices carrying a repeated colour."
+- **Local; valid fragment** (`data/fs114/claims.md` § 0, verbatim): "a statement or a step **reads radius `R`** when its hypotheses and its conclusion concern
+  only the map inside a closed disc of radius `R`. A **valid fragment on a disc** `D` is a map of an open set containing `D`, bounded by segments and circular
+  arcs, six-coloured with no two interior points of one colour at distance exactly 1."
+- **Valid `k`-coloured fragment** *(this list)*: the same with "`k`-coloured" in place of "six-coloured"; "valid fragment" alone means six-coloured.
+- **Siamese** (`[Polymath16threads]` `[10.59]`, de Grey, 2018-09-03, as quoted in `data/fs114/claims.md` § 0, verbatim): "tiles that lie entirely within
+  each other’s annulus of exclusion".
+- **`Γ`, tiles** (`plans/FS110-N-proof.md` § 1.3, verbatim): "`Γ ⊂ ℝ²` a locally finite union of arcs, C¹ with one-sided tangents at their endpoints …;
+  `Γ` is null. **Tiles** are the components of `ℝ² ∖ Γ`: open, connected, each of one colour."
+- **Ring, change point** (`plans/FS114-N3-proof.md` header, verbatim): "at a vertex `p`, the **ring** is `ω(p)`; a **change point** of the ring is a point of
+  `Γ ∩ ω(p)` where the colour of the ring off `Γ` differs on its two sides; `σ` is the rotation by `60°` about `p`."
+- **Tactic edge** (`plans/FS114-N-proof.md` l. 246, FS114-N2's notation, verbatim): "a **tactic edge** is an edge of the map (between vertices of degree ≥ 3)
+  that supplies an (A) repeat — a whole unit arc on `ω(q)`, its inner tile `x` with `q ∈ cl x`, and a tile of the outer tile's colour touching `x` at `q`
+  alone (NB-A1: each edge supplies at most one)".
+- **Simple** (`plans/FS114-N-proof.md` l. 444, verbatim): "every tile an open disc whose closure meets each other tile's closure in a connected set or not at
+  all, and does not meet itself — the plane form of `μ = 0`."
+- **Essential multicolour** (`data/fs111/claims.md` § 0, D-NF, verbatim): "`S_j = f⁻¹(j)`; `S̃_j` the points of density 1 of `S_j`; … **`P(x) = {j : d̄_j(x) >
+  0}`**, the *essential multicolour*."
+- **Saturated** (`plans/FS111-M-regularity.md` § 2.1, verbatim): "every essential boundary point is at distance exactly 1 from the support of each colour of
+  its essential multicolour." **Saturated on a disc** *(this list)*: a valid fragment on `B̄(p, R)` is *saturated on `B̄(p, R − 1)`* when every essential
+  boundary point in `B̄(p, R − 1)` is at distance exactly 1 from the support of each colour of its essential multicolour.
+- **`χ_m⁰(ℝ²)`** (`CLAUDE.md` § The aim, link 1, verbatim): "the fewest colours in a Lebesgue-measurable colouring whose unit pairs are bichromatic almost
+  everywhere".
+- **The capped strip's midline configuration** *(this list; `data/fs114/fs114-y6/survey.out`, `LEDGER.md` row 136)*: a degree-4 vertex of four colours whose
+  four edges are segments and whose ring carries four (Q) arcs.
+- **Ring type** *(this list)*: at a vertex `p` of at least four colours, the cyclic word, read round `ω(p)` modulo `σ`, of its (Q) arcs, its other arcs of
+  `Γ`, its change points, and the arcs between them with their colours.
+
+## 1. The questions (verbatim)
+
+- **C114-LOCAL-F**, the existence form (`plans/STUB-local-exclusion.md` § Existence form, verbatim): "**Is there a radius `R` — one `R` for every complexity,
+  Siamese pairs allowed — such that no valid fragment exists on the closed disc of radius `R` about a vertex of at least four colours?**" *Not claimed:* that
+  any such `R` is at most any given number; by FS114-Y-DIAL any such `R` exceeds `φ²/√2 ≈ 1.8512`.
+- **STRUCT**, the structural form (the same stub, § Structural form, verbatim): "**In every valid fragment with any number `k ≥ 4` of colours, what does the
+  unit circle about each vertex of at least four colours carry — its (Q) arcs, its change points, and the vertices of at least four colours it places at
+  distance 1 — and which of these ring types can recur at every such vertex a ring places?**" *Not claimed:* that the answer at `k = 6` differs from the answer
+  at `k = 7`.
+
+## 2. Held inputs (statements verbatim; used as held, grades in their files)
+
+- **FS114-CV-EXISTS** (`plans/FS114-derivation.md` § 1): "Every valid map has a vertex of at least four colours, in the map itself; the proof passes through
+  `M*`, where with no such vertex every stuck chain would be bi-infinite; it uses neither CV-HD nor FS112-C-ENDS, no ray step and no residue".
+- **FS112-N3-NOBOTH** (`data/fs114/claims.md` § 2): "The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour."
+- **FS114-Y-DIAL** (`plans/FS114-derivation.md` § 4): "The strip with each top (bottom) tile capped by the unit arc about its own valley between its two top
+  corners is a valid fragment, and it holds the closed disc `B̄(P_j, R)` about every midline four-colour vertex for every `R` with `R² < (7 + 3√5)/4 = φ⁴/2`
+  (`R < φ²/√2 ≈ 1.85123`); no valid extension of the strip holds that disc at `R ≥ φ²/√2` (the disc then holds the stop point `Q`) — C114-DIAL met,
+  marginally, above `≈ 1.834`".
+- **FS111-M-PINCH** (`plans/FS111-derivation.md` round 1): "at a saturated point x of an honest a.e.-proper colouring with a neighbourhood N in which only two
+  colours a, b have positive measure and each is a.e. one connected open set of density points (H1, H2): either N is split by one unit circle T₁(y) with a
+  inside and b outside or the reverse, y a contact of both colours, or two open unit discs tangent at x from opposite sides lie a.e. in S_a and in S_b; the
+  case (in, in) is impossible; no positive density of the partner is needed".
+- **FS111-VM2-STRIP-MID** (`plans/FS111-derivation.md` round 2): "the strip of `LEDGER.md` row 136 is tight but not saturated on its midline: at the
+  midpoint of every edge A_j | B_j both side colours are free (no tile of either colour at distance exactly 1)".
+
+## 3. The opening's two derivations (one mind each; a blind second mind is owed)
+
+- **FS116-O1-YESLIM** (`plans/FS116-local-exclusion.md` § 3.4, verbatim): "for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid
+  k-coloured fragment (a map of an open set containing the disc, bounded by segments and circular arcs, k-coloured with no two interior points of one colour at
+  distance exactly 1), then χ_m⁰(ℝ²) ≤ k; at k = 6, then χ(ℝ²) ≤ 6, with no MR". *Not claimed:* the converse; that the limit colouring is a map, saturated or
+  regular; anything about the fragments' centres; anything from fragments on discs of one bounded radius.
+- **FS116-O1-SATPIN** (`plans/FS116-local-exclusion.md` § 4.1, verbatim): "let p be a vertex of at least four colours of a valid k-coloured fragment saturated
+  on a disc about p, every tile at p with a cone of positive angle; each edge e at p, with side colours a (clockwise) and b (counter-clockwise) and unit normal
+  ν pointing to b's side, is near p of exactly one of two types — (split) an arc of the unit circle about a point y of ω(p) at which both a and b have support,
+  a unit arc of kind both; or (tangent) a segment or an arc of radius at least 1 along which every x has x + ν(x) in the closure of colour a and x − ν(x) in the
+  closure of colour b, so that p + ν(p) carries a and p − ν(p) carries b, two antipodal points of ω(p) on the normal to e at p; and every colour of p is
+  carried on ω(p)". *Not claimed:* anything at a cusp at `p`; that the split centre has four colours; that any saturated valid six-coloured fragment about a
+  four-colour vertex exists; SAT-STRIP.
+
+## 4. D0 — the saturated class
+
+- **SAT-STRIP** *(this list)*: no valid fragment on `B̄(p, 2)` saturated on `B̄(p, 1)` has at `p` a degree-4 vertex of four colours whose four edges are
+  segments. *Not claimed:* anything at `k ≥ 7` (at `k = 9` the square nine-colouring of side 1/2 has such vertices, saturated); anything about unsaturated
+  fragments (the capped strip holds such a vertex to `φ²/√2`, FS114-Y-DIAL).
+- **SAT-QFREE** *(this list)*: in a valid fragment saturated on a disc about a vertex `p` of at least four colours, every tile at `p` with a cone of positive
+  angle, whose ring carries no (Q) arc, each split centre of FS116-O1-SATPIN and each point `p ± ν(p)` of its tangent type is a change point of the ring or
+  lies on an arc of `Γ` on `ω(p)`. *Not claimed:* rings with (Q) arcs; that such a vertex exists in a saturated fragment.
+- **SATPIN-PER** *(this list; FS116-O1-SATPIN composed with FS121-O1-PER, `plans/FS121-map-step.md` § 3.4, one mind as filed there)*: in a valid fragment
+  saturated on a disc about a vertex `p` of at least four colours, every tile at `p` with a cone of positive angle, whose interfaces near `p` carry only
+  finitely many radii of curvature, every edge at `p` is a segment of the tangent type or a (Q) arc about a point of `ω(p)` at which no colour has density 0.
+  *Not claimed:* anything with infinitely many radii; that such a fragment exists at six colours.
+- **NO-SAT** *(this list)*: there are an explicit radius `R`, one `R` for every complexity, Siamese pairs allowed, and a derivation that no valid fragment on
+  the closed disc of radius `R` about a vertex of at least four colours is saturated on the closed disc of radius `R − 1` about it. *Not claimed:* C114-LOCAL-F
+  (the all-fragments form); that NO-SAT gives `χ_m⁰(ℝ²) ≥ 7` without FS111-C-SAT-T-HONEST at six and the rest of route M.
+
+## 5. D1 — the ring
+
+- **RING-TWIST** *(this list)*: at a vertex `p` of at least four colours of a valid fragment on a closed disc of radius above 2 about `p` (Siamese pairs
+  allowed, any degree), the set `D` of points of `ω(p)` in the closure of a tile of one of `p`'s colours is contained in the union of the arcs of `Γ` on `ω(p)`
+  and finitely many points; and every half-open 60° window `W` of `ω(p)` with `W ∪ σ(W)` disjoint from `D` holds an odd number of change points. *Not claimed:*
+  anything at `k ≥ 7` (with three colours absent the parity fails: R7's lattice points); that `D` is non-empty.
+- **RING-Q** (card `what-do-q-rings-force`, `plans/POROS-2026-09-28-fs116-question.md` § 2.4, its ask verbatim: "At a vertex of at least four colours whose
+  ring carries a (Q) arc, which vertices of at least four colours, and which (Q) arcs, does the ring force at distance 1 — as N7-HUB does for (Q)-free
+  rings?") *(this list, as a claim)*: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex `p` of at least four colours
+  whose ring carries a (Q) arc, every change point of the ring that lies on no (Q) arc is a vertex of at least four colours; **RING-Q′**, the same for the
+  change points whose points at `±60°` on `ω(p)` also lie on no (Q) arc (N7-HUBQ's form). *Not claimed:* Siamese or non-simple fragments; that the (Q) arcs'
+  own ends are four-colour vertices. *Controls:* the strip's midline rings and the disk's corners (row 136); R7 at `k = 7`.
+- **RING-TRANSFER** *(this list)*: for each ring type at a vertex of at least four colours, the ring types of the vertices of at least four colours it places at
+  distance 1 are determined by a finite rule; state the rule, derive it, and name the ring types that can recur at every vertex they place. *Not claimed:*
+  that the rule is the same at `k = 6` and `k = 7`.
+
+## 6. D2 — the exclusion
+
+- **C114-LOCAL-F** as § 1, worked as the NO: an explicit `R` and its derivation, or FALSE with fragments on every disc (which by FS116-O1-YESLIM is
+  `χ_m⁰(ℝ²) ≤ 6`), or GAP at a named ring type.
+- **DISC-F** *(this list)*: there are an explicit radius `R` and a derivation that no valid fragment exists on any closed disc of radius `R`. *Not claimed:*
+  anything about the disc's centre; any `R` at most the radius of `[Polymath2021]` Fig. 10's disk, `√((25 + 9√5)/10) ≈ 2.1246`, which is a valid fragment
+  (row 136).
+- **LOCAL-DENSE** *(this list)*: there is an explicit `r ≥ 3` such that every valid fragment on a closed disc `B̄(x, r)` has, in `B̄(x, 3)`, a vertex of at
+  least four colours or a vertex with a repeated colour. *Not claimed:* the same with four colours alone (FS-115's density form).
+
+## 7. Y — construction (each checked exactly on an object given by formula)
+
+- **Y-QRING** *(this list; `.claude/skills/grokkings/SKILL.md` G83's killing test)*: a valid fragment on a closed disc of radius above `φ²/√2` about a vertex
+  of at least four colours whose ring carries a (Q) arc — or a derived obstruction at a named radius.
+- **Y-SAT** *(this list)*: a valid fragment on `B̄(p, R)`, saturated on `B̄(p, R − 1)`, about a vertex `p` of at least four colours, for the largest `R`
+  reached (first: the capped strip made saturated at its midline, which decides SAT-STRIP from the other side) — or a derived obstruction at a named radius.
+
+## 8. K — FS-114's owed second mind
+
+- **FS114-N7-3T** (`plans/FS114-derivation.md` § 3, verbatim): "**Three or more tactic edges at a degree-4 vertex with a (Q)-free ring are excluded at radius
+  `1 + ε`**, except the open-cap family **OC** (`+−+`, a Reuleaux lens beside a `60°` anti-lens; with a fourth tactic edge, the Reuleaux bowtie whose lenses
+  do not border the caps): the `(2, 1, 1, 0)` patterns, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `++−`, `−++` die in every member (with N7-HUB: at a
+  four-colour vertex, non-Siamese and simple, whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours:
+  the directions toward `p` there lie in tiles of `p` reaching `y_k`, a tip, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}`
+  by no other tile, and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-tiles face away)". *Not claimed* (the entry's own line,
+  verbatim): "rings with (Q) arcs (N7-HUBQ, the tip with (Q) arcs allowed, needs the change point's ±60° points free of (Q) arcs — the named GAP); OC (its
+  forced structure N7-OCTB and a route to `√3`, not closed); the pinwheel's E1 and E2 in N7's readings R-E1, R-E2 (GAP; whether R-E2 is the construction
+  side's E2 is not settled, `plans/FS114-C-close.md` stage 2 §2.5)".
+
+## 9. Controls, killing tests and shared constraints
+
+- **Controls** *(this list)*: the capped strip (FS114-Y-DIAL, about its midline vertices to `φ²/√2`), the disk (row 136, `B̄(A_0, φ)` attained), FS114-Y2-BOWTIE
+  (`B̄(p, 3√3/5)`), R7 at `k = 7` (FS111-M-R7), and the square nine-colouring of side 1/2 at `k = 9` (FS111-W-SQ9). Every checker accepts them before any
+  refusal is believed; every local route states where it fails on the strip and the disk.
+- **Killing tests carried** (`data/fs114/claims.md` § 6, verbatim): "The argument must fail on the slack hexagonal 7-colouring, and must name the step where
+  "six" is spent (TS's K1 rule)."; "every NO route fails on CAL-STRIP (and, once rebuilt, CAL-DISK) at a named step and says where the plane beyond them is spent
+  (C-BEYOND). A route with no such step is refuted by the strip."
+- **The ban and beyond it** (`data/fs114/claims.md` § 6, verbatim): "No enumeration of maps, colourings, tile graphs or dual graphs, by any program." *(this
+  list)* Nor of ring types.
