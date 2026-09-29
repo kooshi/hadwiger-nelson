@@ -449,10 +449,11 @@ only in your plan would be fenced from the verifiers along with the plan.
 **The opening play is recognition.** Right after your readback and your reading of the plan, and before any derivation, invoke
 `ephodos-recognition` fresh with the Skill tool and run it on each claim your brief assigns you (Kooshi, 2026-09-28: *"recognition
 should be the opening play of any derivation job, right after reading the plan."*). Record what its terminal test yields for each
-claim, or its honest exit, as a stage of its own, saved and committed before the first derivation stage. The plan's §G and §PA
-recognized the milestone's object, in another mind; this stage recognizes each claim, in the mind that will derive it, and the homes
-it lists are your candidate routes. A re-derivation after a refutation or a statement defect is a derivation job too, and opens the
-same way.
+claim, or its honest exit, as a stage of its own, saved and committed before the first derivation stage. Kooshi's reason, the same
+day: "It's the opening move as a chance for insight that the planner missed. The deriver sits on a concentrated picture of a job from
+the planner's perspective. The recognition is a chance to say "oh, no, I see what this *really* is" in case the planner missed it."
+A recognition that differs from the plan's is a finding: record it in the stage and report it to Keryx. A re-derivation after a
+refutation or a statement defect is a derivation job too, and opens the same way.
 
 Then derive in stages, one relay-result per stage, each saved and committed before the next begins (standing rule 2). Your identity's
 `<the_loop>` is the procedure. Here it has three local forms.
