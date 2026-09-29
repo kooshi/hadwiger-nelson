@@ -96,6 +96,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 62 | statement defect | The coordinator's Y2 brief (inherited from N1 § 3.4) said a fragment holding the disk-corner configuration beyond radius 2 "makes RING-Q FALSE outright", dropping RING-Q's class (non-Siamese, simple). Credit to FS116-Y2 | Y2 § 1.2 | done (noted) |
 | 63 | prior-art debt | SIXFRAG, SIXOFF, DCREAD: no search run; `[Polymath16threads]` thread 8 beyond [08.17]–[08.18] unread | Y2 § 2.3–2.4 | open |
 | 64 | owner ruling | **FS116-S1** (02:12): one fresh mind on SAT-STRIP from both sides (exclude, or build Y-SAT by formula), starting at the proof side's stalled form, as both N1 and Y2 advised. Alternative weighed: a proof job and a construction job separately. Why one: the two sides stalled at one configuration, and one mind holding both halves avoids routing between them; it also spares a slot. Confidence: medium-high | `data/fs116/briefs/FS116-S1-satstrip.md` | open |
+| 65 | statement defect | FS116-V3's reading questions (02:22): FS116-N1-ECHO's "saturated at w" is defined nowhere in the proposing record (only used); ruled an ambiguity, V3 reports under both readings (at w only, vacuous off the essential boundary; or w an essential boundary point and saturated there) and names the corrected wording. "At distance exactly 1 from the support" confirmed as the unit circle meeting the support (FS111-M § 2.1) | V3's message; `plans/FS116-N1-proof.md` l. 789 | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
