@@ -19,9 +19,11 @@
 | FS116-N1 | Ephodos, proof side | `data/fs116/briefs/FS116-N1-ring.md` | `plans/FS116-N1-proof.md` | no |
 | FS116-Y1 | Ephodos, construction | `data/fs116/briefs/FS116-Y1-construction.md` | `plans/FS116-Y1-construction.md` | no |
 | FS116-V1 | ephodos-verifier | `data/fs116/briefs/FS116-V1-verify.md` | `plans/FS116-V1-verification.md` | yes: fence in its brief |
-| FS121-D1 | Ephodos | `data/fs121/briefs/FS121-D1-r2-ends.md` | `plans/FS121-D1-proof.md` | no |
+| FS121-D1 | Ephodos | `data/fs121/briefs/FS121-D1-r2-ends.md` | `plans/FS121-D1-proof.md` | DONE (both GAP; `plans/FS121-close-inventory.md` items 20–25) |
+| FS121-D2 | Ephodos, round 2 | `data/fs121/briefs/FS121-D2-nolra.md` | `plans/FS121-D2-proof.md` | no |
+| FS121-D3 | Ephodos, round 2 | `data/fs121/briefs/FS121-D3-sat6.md` | `plans/FS121-D3-proof.md` | no |
 | FS121-DB1 | ephodos-verifier | `data/fs121/briefs/FS121-DB1-verify.md` | `plans/FS121-DB1-verification.md` | yes: fence in its brief |
-| CL1 | Clerk | `data/workflow3/briefs/CL1-bibliography.md` | `plans/WORKFLOW3-CL1-bibliography.md` | no |
+| CL1, CL2 | Clerk | `data/workflow3/briefs/CL1-bibliography.md`, `CL2-n7-definitions.md` | their `plans/WORKFLOW3-CL*.md` | DONE |
 
 Agent ids are in the coordinator's scratch only. A halted job resumes from its record's last SAVED stage (standing rule 2), with a fresh agent
 on the same brief if the old one is gone or past ~500k.
