@@ -1,0 +1,4 @@
+opposite colour pairs at colour 0: [(1, 6), (3, 4), (2, 5)]
+the colour of rank 4 lies between two opposite neighbours under every order: True
+least number of unbound edge types (d, direction) over the orders: 5
+orders with an edge point bound by neither colour: 5040 of 5040; geometry: ALL PASS; plant = None

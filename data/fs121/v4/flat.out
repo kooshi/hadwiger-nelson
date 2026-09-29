@@ -1,0 +1,5 @@
+X_k(t) = -4*k*t**3 + t + O(t^8)
+Y_k(t) = -8*k*t**6 + t**4 + O(t^8)
+Y_k(X) = 8*X**6*k + X**4 + O(X^8)
+curvature of U_k at P_k: 0
+ALL PASS (plant = None)

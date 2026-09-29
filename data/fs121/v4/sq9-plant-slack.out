@@ -1,0 +1,4 @@
+BOUND fails at x = (0, 12/25), colour (0, 0): bound True, on a level False
+BOUND fails at x = (0, 12/25), colour (0, 1): bound True, on a level False
+BOUND fails at x = (0, 0), colour (0, 0): bound True, on a level False
+edge points 164; bound by both colours 164; bound <=> on a level 0 of 328; FAIL (plant = slack)

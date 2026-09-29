@@ -1,0 +1,14 @@
+FAIL geometry: dir 0: x in another closed disc (0, 1)
+FAIL geometry: dir 0: x not in the open neighbour disc
+FAIL geometry: dir 1: x in another closed disc (-1, 1)
+FAIL geometry: dir 1: x not in the open neighbour disc
+FAIL geometry: dir 2: x in another closed disc (-1, 0)
+FAIL geometry: dir 2: x not in the open neighbour disc
+FAIL geometry: dir 3: x not in the open neighbour disc
+FAIL geometry: dir 3: x in another closed disc (0, -1)
+FAIL geometry: dir 4: x not in the open neighbour disc
+FAIL geometry: dir 4: x in another closed disc (1, -1)
+opposite colour pairs at colour 0: [(1, 6), (3, 4), (2, 5)]
+the colour of rank 4 lies between two opposite neighbours under every order: True
+least number of unbound edge types (d, direction) over the orders: 5
+orders with an edge point bound by neither colour: 5040 of 5040; geometry: FAIL; plant = vertex
