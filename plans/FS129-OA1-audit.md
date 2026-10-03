@@ -310,3 +310,121 @@ slack Γ₁₁, the kernel's tables, the residue reduction of row 52) bears on t
 shows at most three colours (two gap colours)? A yes empties FS129-OA1-FALC-11's exception (`t ≡ a`), by the same repaint. Object: `Γ₁₁`,
 121 vertices, degree 12, five colours, one clause emptying two colours from one closed neighbourhood. A second request, conditional on a no:
 the same question on `UD(ℤ/121, 2)` with the two gap colours at `0` and a vertex `t ∈ 11ℤ² ∖ 121ℤ²` coloured outside them.
+
+## Stage 3 — SAVED (J2 and J17, Poros's other two lane-A sites; then J1–J24 in rank order)
+
+*Read for this stage: G71, G73 (stage 2), G53; `plans/FS116-N3-proof.md` § 3.2–3.3 (SEMI-PAR3's residue and RING-TRANSFER-QC);
+`plans/STUB-q-ring.md` cases 1, 3, 5, 6 as the list quotes them; the list's J1–J24 entries.*
+
+### 3.1 J2 — FS-124 case 1, SEMI-PAR3
+
+**Step** (`plans/STUB-q-ring.md` ll. 25–29, as the list quotes it): "1. **SEMI-PAR3** (inventory items 96, 97): "in a non-Siamese simple valid
+fragment on a closed disc of radius above 1 about a vertex p of at least four colours, no change point of the ring is a full parallel semi-hub of
+exactly three colours" — GAP: "the step from the bowtie's four-colour parallel semi-hub to three colours — removing the tile of p toward y from y
+(kind O), or the outer tile (kind T) — is excluded by no cone at p, u, y or v; a proof must read y's own ring, which carries three absent colours
+and no parity". A construction by formula (FS114-Y2-BOWTIE with its tip `t2` removed from `top`) or a reason none exists decides it."
+
+**Kind of input, before scanning:** an invariant of a three-colouring of `ω(y)` in which points 60° apart differ — the list's hunch, kept.
+Against § 2: not a count (G86), not a cell-local certificate on a lattice (G73 is about four colours on lattice graphs; this is three colours on
+a circle, where G71 says a height exists).
+
+**Read against it (lane A):** G71 (three colours are linear: a height and a winding); G73 (the `V₄` of `K₄`'s matchings); row 79's `Θ₃`.
+Lane R's row 132 (the index of density traces, "this height on a curve", G71) is the same object in the plane, held — a cross-era line.
+
+**What lane A delivers — an invariant, derived; it does not close the step.**
+
+derivation: FS129-OA1-RINGWIND
+  statement: let c colour the circle by three colours, defined and locally constant off a finite set Σ of change points, with c(θ) ≠ c(θ + 60°)
+    wherever both are defined; for θ with no point θ + 60°j in Σ let W(θ) = (1/3) Σ_{j=0..5} d(c(θ + 60°j), c(θ + 60°(j+1))), where d(x, y) is +1
+    if y = x + 1 and −1 if y = x − 1 (mod 3); then W takes values in {−2, 0, 2}, has period 60°, and changes across θ₀ only if Σ contains two
+    points θ₀ + 60°j and θ₀ + 60°(j+1) for some j; so its jumps over one period sum to zero, and a hexagon position that is the only one with two
+    change points 60° apart carries no jump
+  uses only: properness at 60°; that a single hexagon vertex changing from colour x to colour y forces both its hexagon neighbours to the third
+    colour z, and z → x → z, z → y → z both contribute 0; that changes at non-adjacent hexagon vertices are read against unchanged neighbours;
+    periodicity of W; that six steps of ±1 summing to 0 mod 3 sum to −6, 0 or 6
+  not claimed: that W is constant (two change points 60° apart can move it by ±2 — the swap of row 132 and G71); anything about the parts of the
+    ring outside the fragment (at radius below 2 about p, part of ω(y) is unread); that SEMI-PAR3 holds or fails
+  argument: § 3.1 J2 — FS-124 case 1, SEMI-PAR3
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the colouring c(θ) = ⌊θ/60°⌋ mod 3 (six 60° arcs coloured 0, 1, 2, 0, 1, 2): Σ = six points, every hexagon position has all six
+    vertices changing at once, W = 2 on both sides of each — the jumps are zero, as the sum rule requires
+  prior art: partly: G71 (Chandgotia's height functions for three-colourings) and row 132's index of density traces, both "fail only at a swap";
+    the ring-hexagon form not searched (owed)
+  handoff: none — a relay-result handed to FS-124's opening and to lane R (FS129-OR1) for J2; it enters no proof here
+
+control: FS129-OA1-RINGWIND-ALL
+  of: FS129-OA1-RINGWIND — every proper three-colouring of the 12-cell discretised ring (first cell fixed) obeys the jump rule
+  run: python3 ../tools/fs129_oa1_ringwind.py | tail -1
+  expect: violations: 0
+  fault: python3 ../tools/fs129_oa1_ringwind.py --fault | tail -1
+
+*Argument.* Off `Σ − 60°ℤ`, `W` is locally constant. At `θ₀` where exactly one hexagon vertex `h` changes, from `x` to `y`, its two hexagon
+neighbours are 60° from it, so they differ from `x` before and from `y` after; being unchanged, each is the third colour `z`, and the two
+steps through `h` contribute `d(z, x) + d(x, z) = 0` before and `d(z, y) + d(y, z) = 0` after. If several vertices change but no two are
+adjacent in the hexagon, the same computation applies to each against unchanged neighbours. So a jump needs two adjacent hexagon vertices
+— two points of `Σ` exactly 60° apart — changing together. `W(θ + 60°) = W(θ)` (the same hexagon), so the jumps met as `θ` runs over one
+period sum to zero. ∎ The 18-cell ring was also checked once (`--m3`: 97,284 proper colourings for 12 and 18 cells together, 0 violations,
+about a minute; not a gate control because of its time).
+
+**How it bears on SEMI-PAR3 (a reduction proposed for lane R, not derived here).** In SEMI-PAR3's configuration (`plans/FS116-N3-proof.md`
+§ 3.2) `y` carries `X`, `X̄` (absent at `p`) and `t_back`'s colour, so `ω(y)` carries only `a`, `a′` and `t_front`'s colour; `ω(p)` carries
+only `X`, `X̄`. With `y = r(ψ)`, the points `u = r(ψ + 60°)` and `v = r(ψ − 60°)` of `ω(p)` lie on `ω(y)` at 60° on either side of `p`, which
+is on `ω(y)` too (`y + e^{i(ψ+120°)} = p + e^{i(ψ+60°)}`). Being on both rings, `u` and `v` are interior to no tile, so the hexagon of `ω(y)`
+through `p` is the one hexagon position with three consecutive candidate change points (`u`, `p`, `v`). **So, on a fragment of radius at least 2
+about `p` (where all of `ω(y)` is coloured), W's jump at `p`'s hexagon is minus the sum of its jumps at every other pair of change points of
+`ω(y)` 60° apart; a configuration whose jump at `(u, p, v)` is non-zero must carry another such pair on `ω(y)`.** The jump at `(u, p, v)` is
+read from the colours of `ω(y)` on both sides of `u`, `p`, `v` — FS116-N3's (Q) arcs at `u⁺`, `v⁻` and `p`'s tiles `t_a`, `t_{a′}` — which is lane
+R's data. At the step's own radius ("above 1") the far part of `ω(y)` is outside the fragment and W is not defined round the whole ring, so the
+reduction needs the radius raised to 2 (C114-LOCAL-F allows any explicit radius). **Verdict on J2: not closed; one input of the kind named,
+delivered** — the list's hunch "three colours have a height" is right in kind, and its plane form is held in lane R (row 132).
+
+### 3.2 J17 — FS-124 cases 3, 5 and 6: crossed reciprocity, the recurrence, FS114-K1's (Q) residues
+
+**Step:** the three quotations of the list's J17 (`plans/STUB-q-ring.md` ll. 34–35, 40–42, 43–45).
+
+**Kind of input, before scanning:** a label conserved along placements (the list's hunch) — more exactly, a statement that the perfect
+matching `{A, B, C}` of the six colours carried by a placement edge is the same at both ends.
+
+**Read against it (lane A):** G73 (`KG(4, 2)` is three disjoint edges — the three perfect matchings of `K₄`'s colours, the `V₄`; from five
+colours `KG(k, 2)` is connected and carries no edge-local height on a presentation with two generator classes); G71 (a three-colouring of a
+graph with unit triangles is forced along them).
+
+**Null — no lane-A result bears beyond the list's own reading.** G73's `KG(4, 2)` fact gives exactly what the list already derives: around one
+four-colour vertex the placed missing pairs alternate between a pair `B` and its complement in `p`'s four colours, so one matching `{A, B, C}` per
+vertex. Whether the matching is conserved from `p` to a placed hub `q` (whose own placed pairs live in `KG(4, 2)` on `A ∪ C`, where `{A, C}` is one
+of three splits) is the recurrence itself, and G73's connectedness of `KG(6, 2)` is the caution: a label free to move in `KG(6, 2)` carries no
+height (G73's no-go at five colours and above), so G71's linearity enters only after conservation is shown. Lane A supplies the vocabulary, not
+the step.
+
+### 3.3 The rest of the judged list, in rank order (each with its kind line, what I read, and the verdict)
+
+| step | kind of input every closing argument reads (my line, before scanning) | lane-A results read | verdict |
+|---|---|---|---|
+| **J1** FS-123 q. 1, the bends on a fragment (`plans/STUB-qfree-ring.md` ll. 29–31) | a modification lemma: FS-112's moves keep validity, non-Siamese, simplicity and `p`'s colours on a fragment | row 78 / G68's Kempe swaps and voltage escape; row 91's HD4 (Kempe swaps of pullbacks are pullbacks) | **null**: lane A's only modification lemmas act on discrete colourings of lattices and field planes (a Kempe component, a single-vertex repaint) and preserve properness, never the geometry of tiles; nothing about a map's arcs |
+| **J3** FS-125, NO-SAT (`plans/STUB-saturated-local.md` ll. 21–22, 48–52) | contact at distance exactly 1 (SATPIN) against a straddle, and how a collision's margin moves with a tilt | the compulsion toolkit (row 42), G13 | **null**: no lane-A result reads contact geometry; G13's coverage is the bookkeeping of saturation (stage 2, J4), not an exclusion |
+| **J5** FS-124 case 4, five- and six-colour vertices (ll. 36–39) | distances between outer tiles at (Q)-arc ends 60° apart | G75's triangle relation `1 + ζ₆² = ζ₆`; G55's unit-vector ring | **null**: the identities lane A holds are exact relations among unit vectors in a field; the step needs inequalities between tiles; V6-HUG (lane R) is the right kind |
+| **J6** FS-124 case 2, the disk's corner (ll. 30–33) | points and distances on `p`'s far side | — | **null**: nothing in lane A reads a configuration's far side |
+| **J7** FS-123 q. 3 / FS-124 case 7, Siamese and non-simple classes | points and distances only, never a count (G86) | — | **null** |
+| **J8** FS-126, a curved tangent interface (`plans/STUB-curved-pencils.md` ll. 14–15) | aperiodic structure (a construction meeting PENCILWIN, DOUBLE, VT) or an obstruction | G62, G78 and FS-76's aperiodic colourings, which the list names at low confidence | **null**: lane A's aperiodic colourings live on field planes and lattices (discrete, residue-built); none has boundary arcs, and none carries a smooth interface |
+| **J9** FS-127, LAT (`plans/STUB-lateral-extent.md` ll. 12–13) | distance-exactly-1 facts at an accumulation point (the sagitta) | — | **null** |
+| **J10** the map step at five (FS111-REG-JP-C5) | regularity of maximal covers by modifications that keep maximality | rows 125, 129 (the one-class cap at five); G54 | **null**: the step is regularity, which no lane-A result reads; the five-colour density facts lane A holds (m₁ ≥ 0.2293 > 1/5) say only that one class at a time cannot refute five |
+| **J11** FS-120, the pinch at a junction (`plans/STUB-pinch-at-junction.md` ll. 28–29) | a modification lemma along the ladder of unit parallels, ending at a junction | — | **null** |
+| **J14** FS-122, B-RR (`plans/STUB-forced-pair.md` ll. 23–24) | a feature's scale bounded below, independent of the holes | row 66's arity floor (a forced pair at five is one vertex over sealed fields) | **null**: route R's "forced pair" is sense (ii) of the list's § 1 — a structure, not a colour equality; row 66 speaks of sense (i) |
+| **J15** route R's pairs and route M's four-colour vertices (Poros's words) | a band-stable form of row 135's rhombus lemma | — | **null** (both sides are lane R; no side picked) |
+| **J16** FS-122, a robust count and the kills under a band (ll. 25–27, l. 68) | a margin bounded below at a feature's scale | G53's counting compulsion; G15 | **null**: a counting compulsion degrades by at most one per hole met, so it is robust under small holes by a union bound — but every finite obstruction is robust that way (a hole-free random placement exists when the hole density is below `1/|G|`), so G53 adds nothing beyond finite graphs, and the step asks for a *local* kill at a radius independent of ε and the complexity, not a finite graph |
+| **J18** FS-123 q. 2, the (R2)-arc ring | as J1, after the bends | — | **null** |
+| **J19** FS-124 case 8, DISC-F and LOCAL-DENSE | compactness, and a vertex of four colours in a bounded disc | de Bruijn–Erdős as used in rows 103, 107 (the kernel's compactness) | **null**: lane A's compactness is for colourings of countable graphs; FS114-N114-COMPACT (lane R) already holds the fragment form |
+| **J20** FS-128, C121-NOPAR-C5 | jets of boundaries along unit parallels | — | **null** |
+| **J21** FS-104 route (a), the density family at `j = 4` | a non-density (integrality) argument, or the value of `m₄(ℝ²)` against `4/5` | row 129 (the one-class principle), G60, FS-56's field blow-up, as the list asks | **null**: a `j`-class form of row 129 would bound field planes by `max(m_j(ℝ²), sup_v r_v^{(j)})`, and at the real place that is `m₄(ℝ²)` itself — the question, not an input. (Half-period translates of Croft's set do not reach `4/5`: three translates on the deep-hole classes are disjoint and give `3 × 0.2293`, but a fourth at the finer lattice's deep holes sits about `0.6` from three tile centres with tile radius about `1/2`; a reading, not checked on Croft's parameters) |
+| **J22** row 134's base, Lemma 4 at cusps | — (a root of lane R) | — | **null** |
+| **J23** Townsend's (c), in full | — (a root of lane R) | — | **null** |
+| **J24** FS-117, K2′, GAP-μ, COVER-3 | counts and covers at cubic vertices | G53 | **null**: the counts there are of tiles meeting a disc; G53's is of colours at a circle's points in a finite base |
+
+**Cross-era lines (results of lane R I saw bear on a step; noted for FS129-OR1, not derived):**
+- J2: row 132's index of density traces is FS129-OA1-RINGWIND's object in the plane; RINGWIND's sum rule is its ring form.
+- J13: row 130's random-motion argument (N-EASY) is what turns a Falconer fan's everywhere-proper conclusion into an almost-everywhere one only
+  if Lemma 3 holds with a positive-measure set of translations; FS103-M § 1.2 records that the 1981 text does not supply it.
+- J4: FS111-W-FILL-FREE and FS111-M-DEADLOCK are the held reasons the fill move (the plane form of `fan_iff_coverage`'s recolouring) cannot
+  bind a top colour.
