@@ -121,6 +121,8 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 87 | statement defect | The Y3 brief's target allowed Siamese pairs (Y-QRING's form) while N2's hub lemmas are non-Siamese and simple; Y3 worked the non-Siamese simple class only | Y3 § 1.1 | done (noted) |
 | 88 | stub to mint or re-aim | The HEX3-star vertex beyond radius 2: build by formula, or exclude — an exclusion removes the Γ-free type from C114-LOCAL-F's case list; a model gives N2's RECIP and HEX6 one | Y3 § 4.3 | open |
 | 89 | owner ruling | **FS116-V4**, blind, on FS116-S1-KAPPA, -RUNG, -QF and FS116-Y3-NBTIP, -TIGHTLENS, -STARFORCE, added to the list as § 12 (10:12); launched with two others running (N3, FS121-V5), within the limit of three | `data/fs116/briefs/FS116-V4-verify.md` | open |
+| 90 | slip | **The coordinator's, E17 again**: the list's § 12 froze FS116-Y3-NBTIP, -TIGHTLENS, -STARFORCE without their setting (FS116-Y3-TIPS's labels; the record's definitions of lens, far vertex, flanking directions, tight, generic star), found by FS116-V4's readback (10:14). Credit to FS116-V4 | V4's message | done |
+| 91 | owner ruling | **FS116-V4 narrowed to FS116-S1-KAPPA, -RUNG, -QF** (brief amendment 1, 10:14); the three Y3 statements withdrawn from it, to get a blind check of their own with their setting frozen beside them (a Clerk extraction of the definitions first, as CL2 did, when a slot frees). Alternative: relay the definitions now from the fenced record. Why not: they are woven into its arguments, and separating them is a careful copying job, not a coordinator's paraphrase. Confidence: high | `data/fs116/briefs/FS116-V4-verify.md` amendment 1 | open |
 
 ## Workflow 3.0 — frictions, as they arise
 

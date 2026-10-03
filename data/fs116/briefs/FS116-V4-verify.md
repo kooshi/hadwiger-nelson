@@ -113,3 +113,13 @@ I will ask its author. If a statement is wrong as posed, MISSTATED with the corr
 4. The divergence table, then the report.
 
 Thank you.
+
+## Amendment 1 (2026-10-03 15:14 UTC): the job narrowed to its first three statements
+
+Your question is right, and the gap is mine: the list's § 12 froze FS116-Y3-NBTIP, -TIGHTLENS and -STARFORCE without the setting they are
+stated in (FS116-Y3-TIPS and its labels, and the record's definitions of a lens, its far vertex, flanking directions, tightness and the
+generic star), and those live only in a record your fence closes, woven into its arguments. Rather than relay pieces of that record, I am
+taking those three statements off this job: **your job is now FS116-S1-KAPPA, FS116-S1-RUNG and FS116-S1-QF only.** The other three will get a
+blind check of their own, with their setting frozen beside them. Record in your report that the three were withdrawn by the coordinator, not
+left undone. Your fence is unchanged, and the hub construction's record stays fenced from you. Unchanged too: no agents of your own (standing
+rule 1: staffing is Kooshi's budget, and I can review only work I know exists).
