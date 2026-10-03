@@ -26,12 +26,19 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
 - **FS116-Y3-HUBCOL** — the hub colours, read off the star: four hubs `{1, 2, X, X̄}` and two `{3, 4, X, X̄}` when the star's edges are interior to their
   ranges — [derived], one mind, § 2.3.
 - **FS116-Y3-TIGHT** — the four ring tiles beside the double tips' tight edges do not reach the far lattice vertices `q_5, q_1, q_2, q_4` — [derived], one mind, § 2.4.
+- **FS116-Y3-NOQ** — at a hub, a tile adjacent to the ring tile on one side does not lie in the unit disc about the far lens vertex on the other — [derived], one mind, § 3.1.
+- **FS116-Y3-LENS** — near the far vertex `q_k` of a lens beside a single tip, only the two non-tip colours of `p` can occur, and a hub colour there is that
+  hub's tile reaching `q_k` — [derived], one mind, § 3.1.
+- **FS116-Y3-TIGHTLENS** — on `B̄(p, √3)` each such lens needs one of its hubs' tips tight at `p`: at least two edges of `p` along flanking directions, five
+  minimal kinds of star, **the generic star excluded at `√3`** — [derived], one mind, § 3.2.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
 - Stage 2: would have enumerated assignments of the six hubs' tips to the four tiles; instead the opposite rule (antipodal tips opposite) was derived, which
   leaves one pattern by hand (§ 2.2).
+- Stage 3: would have searched colourings of the lens neighbourhoods of the `q_k`; instead derived NOQ and LENS, whose four conditions are read by hand and
+  checked as an 81-row truth table of a derived formula (§ 3.2).
 
 ## Fence log (standing rule 8)
 
@@ -45,6 +52,8 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
 - Stage 1: none seen as two truths in collision.
 - Stage 2: none seen. Classed: HEX3's star (`60°, 120°, 60°, 120°`, derived there from two alternate hubs recurring) against TIPS (the same cyclic shape forced
   with no recurrence) — the same object reached from two hypotheses, not two truths.
+- Stage 3: none seen. Classed: TIGHT's statement (`q_5 ∉ cl R_{50}`) against what LENS needs (`R_{50} ⊄ B̄(q_5, 1)`) — TIGHT's own argument proves the
+  stronger form; a statement narrower than its proof, recorded in § 3.1, not two truths.
 
 ## Stage 1 — SAVED: the readback, and recognition on the target
 
@@ -294,3 +303,134 @@ control: fs116-y3-sq9
   fault: python3 ../tools/fs116_y3_hex.py sq9 --plant stripes
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: an obstruction — the generic star dies at `√3`, and every survivor has a tight tip beside each tight lens
+
+*Class and labels as stage 2: non-Siamese simple, six colours, `p` at the origin with a Γ-free ring, hubs `y_k = e(60k)`, tiles `T1` (colour 1, tips `y_0,
+y_1`), `T3` (3, tips `y_2`), `T2` (2, tips `y_3, y_4`), `T4` (4, tips `y_5`), edges `δ_1, …, δ_4` (§ 2.2). `q_k = y_k + y_{k+1} = √3·e(60k + 30°)`; the
+**lens** `L_k` is `B̄(y_k, 1) ∩ B̄(y_{k+1}, 1)` outside `B(p, 1)`, with far vertex `q_k`; `R_{k,k+1}` is the ring tile over the arc from `y_k` to `y_{k+1}`.
+The lenses `L_1, L_2, L_4, L_5` — beside the single tips — are the **tight lenses**: their ring tiles meet a double tip's tight edge (FS116-Y3-TIGHT).
+The **star** is generic when every `δ_i` is interior to its range; a **boundary value** of `δ_i` is an endpoint of its range, and each is an edge of `p` along
+a flanking direction `60k ± 90°` of some hub, with that hub's tip on its side — the tip **tight at `p`** for that hub.*
+
+### 3.1 Two lemmas at a hub
+
+**FS116-Y3-NOQ.** *At a hub `y_k`, a tile adjacent at `y_k` to the ring tile `R_{k−1,k}` (clockwise of `y_k`) does not lie in `B̄(q_k, 1)`; a tile adjacent
+at `y_k` to `R_{k,k+1}` (counter-clockwise) does not lie in `B̄(q_{k−1}, 1)`.* Argument: `R_{k−1,k}` holds the whole open ring arc from `y_{k−1}` to `y_k`
+(off finitely many points, one tile: a crossing with one colour on both sides is a slit or a Siamese pair, both excluded), so `y_{k−1} ∈ cl R_{k−1,k}` and
+`R_{k−1,k} ⊂ B̄(y_{k−1}, 1)` (diameter at most 1). Two tiles adjacent at a vertex share a non-degenerate boundary curve from it; for a tile `O` inside
+`B̄(q_k, 1)` that curve would lie in `B̄(y_{k−1}, 1) ∩ B̄(q_k, 1)`, which is `{y_k}` because `|y_{k−1} − q_k| = 2` with midpoint `y_k`
+(`data/fs116/y3/lens.out`). Likewise on the other side with `|y_{k+1} − q_{k−1}| = 2`. ∎ At a hub the tiles run, counter-clockwise, outer tiles – `R_{k,k+1}`
+– tip – `R_{k−1,k}` (an outer tile has points outside `B̄(p, 1)`, so its cone lies in the outward closed half-plane, which `R_{k,k+1}`, the tip and
+`R_{k−1,k}` leave only at the ring's tangent directions); so **the clockwise-most outer tile lies in no `B̄(q_k, 1)`, the counter-clockwise-most in no
+`B̄(q_{k−1}, 1)`, and a hub with one outer tile has it inside neither.** TIGHT is the same mechanism with the double tip in the role of `O`'s neighbour:
+`R_{12} ⊄ B̄(q_1, 1)` (adjacent at `y_1` to `T1 ⊂ B̄(y_0, 1)`), and likewise `R_{23} ⊄ B̄(q_2, 1)`, `R_{45} ⊄ B̄(q_4, 1)`, `R_{50} ⊄ B̄(q_5, 1)` — what its proof
+shows, stronger than its statement.
+
+**FS116-Y3-LENS.** *Let `L_k` be a tight lens and `x` a point near `q_k` inside `B(y_k, 1) ∩ B(y_{k+1}, 1)`. Every colour at `x` is a colour of `p` other
+than the tips' colours of `y_k` and `y_{k+1}`; and if that colour `c` is a colour of `y_k` (of `y_{k+1}`), then `y_k`'s (`y_{k+1}`'s) `c`-tile has `q_k` in its
+closure.* Argument. The tips straddle `x`: each holds `p`, at distance about `√3`, and points near its hub, at distance below 1. `R_{k,k+1}` straddles `x`: it
+holds ring points near `e(60k + 30°)`, at distance `√3 − 1` from `q_k`, and (NOQ, TIGHT) a point outside `B̄(q_k, 1)`. The other ring colour's tile
+`R_{k−1,k}` straddles `x`: points near `y_k` and near `y_{k−1}`, `|q_k − y_{k−1}| = 2`. A colour `c ∈ C(y_k)`: `y_k`'s `c`-tile has points near `y_k`, within
+`< 1` of `x`, so a `c`-tile at `x` is that tile (non-Siamese), and it reaches `q_k` as `x → q_k`. ∎
+
+### 3.2 The tight-lens conditions, and the generic star (FS116-Y3-TIGHTLENS)
+
+Combine LENS with NOQ at each tight lens. The candidate outer colours (STAR: an outer colour's tile at `p` misses `B(y, 1)`, a cone condition on the `δ`s):
+`O_{y_0} ⊂ {2} ∪ {3 if δ_1 = 90°}`, `O_{y_1} ⊂ {2} ∪ {4 if δ_4 = −30°}`, `O_{y_2} ⊂ {4} ∪ {2 if δ_2 = 210°} ∪ {1 if δ_1 = 30°}`, `O_{y_3} ⊂ {1} ∪ {4 if
+δ_3 = 270°}`, `O_{y_4} ⊂ {1} ∪ {3 if δ_2 = 150°}`, `O_{y_5} ⊂ {3} ∪ {1 if δ_4 = 30°} ∪ {2 if δ_3 = 210°}` (FS116-Y3-HUBCOL's list).
+
+- **`q_1`** (`y_1` tip 1, `y_2` tip 3): the colour near `q_1` in the lens is 2 or 4. *If 2:* when `2 ∈ C(y_1)` its tile reaches `q_1`, so it is not
+  `y_1`'s clockwise-most outer tile and `y_1` has two outer colours, `{2, 4}`; when `2 ∉ C(y_1)`, `O_{y_1} = {4}`; either way `δ_4 = −30°`. *If 4:* when
+  `4 ∈ C(y_2)`, `y_2` has two outer colours; when not, `O_{y_2} ⊂ {1, 2}`; either way `δ_1 = 30°` or `δ_2 = 210°`. **(Q1): `δ_4 = −30° ∨ δ_1 = 30° ∨ δ_2 =
+  210°`.**
+- **`q_2`** (`y_2` tip 3, `y_3` tip 2), colours 1 or 4: 1 forces `δ_3 = 270°` (at `y_3`, as above), 4 forces `δ_1 = 30° ∨ δ_2 = 210°` (at `y_2`).
+  **(Q2): `δ_3 = 270° ∨ δ_1 = 30° ∨ δ_2 = 210°`.**
+- **`q_4`** (`y_4` tip 2, `y_5` tip 4), colours 1 or 3: 1 forces `δ_2 = 150°`, 3 forces `δ_4 = 30° ∨ δ_3 = 210°`. **(Q4).**
+- **`q_5`** (`y_5` tip 4, `y_0` tip 1), colours 2 or 3: 2 forces `δ_1 = 90°`, 3 forces `δ_4 = 30° ∨ δ_3 = 210°`. **(Q5).**
+
+**Read as tightness:** (Q1) says *`T1` is tight at `p` for `y_1` (`δ_4 = −30°`) or `T3` is tight at `p` for `y_2` (`δ_1 = 30°` or `δ_2 = 210°`)* — for
+each tight lens, the tip of one of its two hubs is tight at `p` for that hub. (Q1) and (Q4) share no literal, nor do (Q2) and (Q5), so **at least two edges
+of `p` lie along flanking directions**. The truth table over the `3⁴ = 81` assignments (`tools/fs116_y3_hex.py lens`, a check of the hand reading, not a
+search) has 26 satisfying ones, the generic star not among them, and five minimal sets of boundary values: `{δ_1 = 30°, δ_3 = 210°}`, `{δ_1 = 30°, δ_4 =
+30°}` (`T1` a cusp at `p`), `{δ_2 = 210°, δ_3 = 210°}` (`T2` a cusp), `{δ_2 = 210°, δ_4 = 30°}`, and `{δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30°}` —
+**the last is FS116-N2-HEX3's star**, the only minimal set in which the single tips are not tight.
+
+**Radius.** The argument reads a neighbourhood of each `q_k`, `|q_k| = √3`: it applies to every fragment of the class on `B̄(p, R)` with `R ≥ √3`, whose
+domain is an open set containing that disc. Below `√3` nothing here applies (the neighbourhoods needed depend on the tiles' sizes near the hubs).
+
+### 3.3 Controls, `k ≥ 7`, and what it does to the brief's question
+
+- **Held fragments:** none has a Γ-free four-colour vertex (§ 2.5); the lemmas are silent on the strip, the disk and SIXFRAG. **R7** (`k = 7`): no change
+  point. **SQ9** (`k = 9`): no hexagon of hubs (twelve change points), so no lens; **six is spent at LENS's first clause** — with six colours every colour is
+  a ring colour or a colour of `p`, and with seven a third absent colour would survive near `q_k`, straddled by nothing named here.
+- **The exact facts** the arguments use (`data/fs116/y3/lens.out`): the twelve distances `|y_{k∓1} − q_{k±0}| = 2` with midpoints `y_k`, `|q_k| = √3`, the
+  ring point at `√3 − 1` from `q_k`. Plants: `q_1` misplaced to `√3·e(60°)` (the facts fail at `y_0, q_1`); condition (Q1) dropped (31 satisfying
+  assignments and a different minimal list — the generic star still fails, at (Q4)).
+- **For the brief's target:** a Γ-free four-colour vertex on a disc of radius above 2 must have a tight star of one of the five minimal kinds; **the generic
+  star is excluded already at `√3`**. FS116-N2-ANTI's hypothesis (the flanking directions of two antipodal hubs inside tiles) holds in the generic star and
+  can hold at a tight one only for the pair whose flanks are not edges; RECIP and HEX6 (radius above 2) can have models only among the tight stars.
+
+derivation: FS116-Y3-NOQ
+  statement: in FS116-Y3-TIPS's setting, at a hub y_k, no tile adjacent at y_k to the ring tile over the arc from y_(k−1) to y_k lies in B̄(q_k, 1), and no
+    tile adjacent at y_k to the ring tile over the arc from y_k to y_(k+1) lies in B̄(q_(k−1), 1), where q_k = y_k + y_(k+1); in particular the clockwise-most
+    outer tile at y_k does not have q_k in its closure, the counter-clockwise-most does not have q_(k−1), and an only outer tile has neither
+  uses only: FS116-Y3-SIX (the ring arc between consecutive hubs lies in one tile, off finitely many points); that a tile has diameter at most 1; that tiles
+    adjacent at a vertex share a non-degenerate boundary curve; |y_(k−1) − q_k| = |y_(k+1) − q_(k−1)| = 2 with midpoint y_k; the cyclic order of the tiles at a
+    hub (RING-GERM's cones, and that an outer tile has points outside B̄(p, 1))
+  not claimed: anything at change points of rings carrying arcs of Γ (there a ring tile need not reach the next change point); anything about outer tiles
+    adjacent to neither ring tile
+  argument: § 3.1 Two lemmas at a hub
+  verdict: derived
+  grade: derived from: FS116-Y3-SIX
+  minds: 1
+  model: none at six colours; the lattice facts are control fs116-y3-lens
+  prior art: owed
+  handoff: de Bruijn — with SIX and TIPS; a relay-result for any exclusion of the Γ-free type
+
+derivation: FS116-Y3-LENS
+  statement: in FS116-Y3-TIPS's labelling, for k in {1, 2, 4, 5} and every point x close enough to q_k inside B(y_k, 1) ∩ B(y_(k+1), 1), every colour at x
+    is a colour of p other than the tip colours of y_k and y_(k+1); and if it is a colour of y_k (of y_(k+1)), that hub's tile of that colour has q_k in its
+    closure
+  uses only: FS116-Y3-TIPS; FS116-Y3-TIGHT's argument (the ring tile R_(k,k+1) does not lie in B̄(q_k, 1)); FS116-Y3-NOQ's first clause for the ring tile
+    over the arc before y_k; the straddle principle; non-Siamese (a c-coloured point within 1 of a hub's c-tile belongs to it); |q_k| = √3,
+    |q_k − e(60k + 30°)| = √3 − 1, |q_k − y_(k−1)| = 2
+  not claimed: anything at q_0 or q_3 (beside the double tips, where the ring tile may reach the far vertex); anything at points of the lens away from q_k
+  argument: § 3.1 Two lemmas at a hub
+  verdict: derived
+  grade: derived from: FS116-Y3-TIPS, FS116-Y3-TIGHT, FS116-Y3-NOQ
+  minds: 1
+  model: none at six colours
+  prior art: owed
+  handoff: none — a relay-result for TIGHTLENS
+
+derivation: FS116-Y3-TIGHTLENS
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p satisfy (Q1) δ_4 = −30° or δ_1 = 30° or δ_2 = 210°; (Q2) δ_3 = 270° or δ_1 = 30° or
+    δ_2 = 210°; (Q4) δ_2 = 150° or δ_4 = 30° or δ_3 = 210°; (Q5) δ_1 = 90° or δ_4 = 30° or δ_3 = 210° — for each lens beside a single tip, the tip of one of
+    its two hubs is tight at p for that hub; so at least two edges of p lie along flanking directions of hubs, and no such fragment has a generic star
+  uses only: FS116-Y3-LENS; FS116-Y3-NOQ; FS116-Y3-HUBCOL's list of candidate outer colours; that the domain of a fragment on B̄(p, R), R ≥ √3, contains a
+    neighbourhood of each q_k
+  not claimed: that any star satisfying (Q1)–(Q5) occurs; anything below radius √3 (a generic star there is neither excluded nor built); anything in the
+    Siamese or non-simple class; anything at k ≥ 7 (a third absent colour survives near q_k)
+  argument: § 3.2 The tight-lens conditions, and the generic star (FS116-Y3-TIGHTLENS)
+  verdict: derived
+  grade: derived from: FS116-Y3-LENS, FS116-Y3-NOQ, FS116-Y3-HUBCOL
+  minds: 1
+  model: none at six colours (it is an obstruction); the truth table of its four conditions is control fs116-y3-lens
+  prior art: owed — a search in the words of the literature's six-coloured discs (Gibbs's disk, Sirgedas's searcher, de Grey's 2018 threads) is the debt
+  handoff: de Bruijn — with NOQ, LENS, TIPS and SIX, after a blind second mind; the generic star's exclusion at √3 is a relay-result for D2's case list
+
+control: fs116-y3-lens
+  of: FS116-Y3-TIGHTLENS — the truth table of (Q1)–(Q5) (with NOQ's and LENS's facts on the line above it); with (Q1) dropped the count changes
+  run: python3 ../tools/fs116_y3_hex.py lens | sed -n 2p
+  expect: assignments: 81; satisfying (Q1)(Q2)(Q4)(Q5): 26; the generic star satisfies them: False; fewest boundary values in a satisfying one: 2
+  fault: python3 ../tools/fs116_y3_hex.py lens --plant cond | sed -n 2p
+
+control: fs116-y3-lens-facts
+  of: FS116-Y3-NOQ — the twelve distances 2 with their midpoints at the hubs; q_1 misplaced is caught
+  run: python3 ../tools/fs116_y3_hex.py lens | head -n 1
+  expect: lattice facts: all hold
+  fault: python3 ../tools/fs116_y3_hex.py lens --plant q | head -n 1
+
+## Stage 3 — SAVED

@@ -9,6 +9,9 @@ Points of the unit triangular lattice: p = 0, y_k = e(60k), q_k = sqrt3 e(60k + 
                      (c) at each hub the tangent cone of B(p,1) and of B(other hub of its tip, 1) contains the closed tip cone [60k+150, 60k+210]
                          (doubles) and shares exactly one endpoint with it (the tight side); singles: inside B(p,1)'s cone, no shared endpoint.
                      Last line 'LATTICE OK' or 'LATTICE FAIL: ...'.  --plant q: q_5 replaced by sqrt3 e(300) (a wrong lattice point): (b) fails.
+  lens               NOQ's and LENS's lattice facts, and the conditions (Q1) (Q2) (Q4) (Q5) of stage 3 as a truth table over the 81 assignments
+                     of the star's edges to interior or boundary values (a check of the hand derivation, not a search).  --plant q: q_1 misplaced;
+                     --plant cond: (Q1) dropped (the generic star then satisfies the rest? it must not: (Q4) alone fails it).
   sq9                the square nine-colouring of side 1/2 (colour (i mod 3, j mod 3) on [i/2,(i+1)/2] x [j/2,(j+1)/2]) about the grid vertex 0:
                      its ring meets the grid lines in finitely many points (Gamma-free), and the number of change points, decided exactly at each
                      crossing.  --plant stripes: colour (i mod 3) only.
@@ -122,6 +125,51 @@ def sq9(plant):
     print(f'SQ9 ring about a grid vertex: {len(pts)} points on grid lines; colour changes: {changes}')
 
 
+def lens(plant):
+    """NOQ and LENS: |y_(k-1) - q_k| = |y_(k+1) - q_(k-1)| = 2 with midpoint y_k (every k); |q_k| = sqrt3; the ring point e(60k+30) at distance
+    sqrt3 - 1 < 1 from q_k; and the conditions (Q1), (Q2), (Q4), (Q5) as a truth table over the boundary values of the star's edges."""
+    fails = []
+    for k in range(6):
+        qk, qm = Q[k], Q[(k - 1) % 6]
+        if plant == 'q' and k == 1:
+            qk = sp.simplify(S3 * e(60))
+        for a, b, name in [(Y[(k - 1) % 6], qk, f'y_{(k-1)%6}, q_{k}'), (Y[(k + 1) % 6], qm, f'y_{(k+1)%6}, q_{(k-1)%6}')]:
+            d = dist2(a, b)
+            m = sp.simplify((a + b) / 2 - Y[k])
+            if d != 4 or any(c != 0 for c in m):
+                fails.append(name)
+        if sp.simplify(Q[k].dot(Q[k]) - 3) != 0:
+            fails.append(f'|q_{k}|')
+        r = sp.simplify(sp.sqrt(dist2(e(60 * k + 30), Q[k])) - (S3 - 1))
+        if r != 0:
+            fails.append(f'ring point at q_{k}')
+    print('lattice facts: ' + ('all hold' if not fails else 'FAIL ' + ', '.join(fails)))
+    # boundary values: d1 in {30, 90}, d2 in {150, 210}, d3 in {210, 270}, d4 in {-30, 30}; 'i' = interior
+    vals = {'d1': ['i', 30, 90], 'd2': ['i', 150, 210], 'd3': ['i', 210, 270], 'd4': ['i', -30, 30]}
+    def Q1(d): return d['d4'] == -30 or d['d1'] == 30 or d['d2'] == 210
+    def Q2(d): return d['d3'] == 270 or d['d1'] == 30 or d['d2'] == 210
+    def Q4(d): return d['d2'] == 150 or d['d4'] == 30 or d['d3'] == 210
+    def Q5(d): return d['d1'] == 90 or d['d4'] == 30 or d['d3'] == 210
+    if plant == 'cond':
+        Q1 = lambda d: True   # noqa: E731  (the plant drops condition (Q1))
+    import itertools
+    sat, minimal = [], []
+    for combo in itertools.product(*vals.values()):
+        d = dict(zip(vals.keys(), combo))
+        if all(f(d) for f in (Q1, Q2, Q4, Q5)):
+            sat.append(d)
+    nb = lambda d: sum(v != 'i' for v in d.values())   # noqa: E731
+    for d in sat:
+        b = {k: v for k, v in d.items() if v != 'i'}
+        if not any(set(o.items()) < set(b.items()) for o in [{k: v for k, v in e2.items() if v != 'i'} for e2 in sat]):
+            minimal.append(b)
+    generic = {'d1': 'i', 'd2': 'i', 'd3': 'i', 'd4': 'i'}
+    print(f'assignments: 81; satisfying (Q1)(Q2)(Q4)(Q5): {len(sat)}; the generic star satisfies them: {generic in sat}; '
+          f'fewest boundary values in a satisfying one: {min(nb(d) for d in sat)}')
+    print('minimal satisfying sets of boundary values: ' + '; '.join(', '.join(f'{k}={v}' for k, v in sorted(m.items())) for m in
+          sorted(minimal, key=lambda m: (len(m), sorted(m.items())))))
+
+
 if __name__ == '__main__':
     args = sys.argv[1:]
     plant = args[args.index('--plant') + 1] if '--plant' in args else None
@@ -129,6 +177,8 @@ if __name__ == '__main__':
         lattice(plant)
     elif args and args[0] == 'sq9':
         sq9(plant)
+    elif args and args[0] == 'lens':
+        lens(plant)
     else:
         print(__doc__)
         sys.exit(2)
