@@ -180,3 +180,7 @@ afterwards unless Kooshi says otherwise."* (FS-116 item 74.)
   Also from today, for the same review: **U6** (the brief gate's § address match takes the first heading with the same number-stripped name, W25),
   **U7** (the gate warns on verdict words beyond "prove" and "confirm", W26), **U8** (the derive gate checks "Rests on it:", W27).
 
+- **Search policy after the ban (Kooshi, 2026-10-03 18:30 UTC, FS-116 item O7)**: the ban is not deleted outright; Kooshi is considering "restricting search to a
+  wallclock budget per day and per week", and asked first for a count of where the ban hindered (job CL3, `data/workflow3/briefs/CL3-ban-audit.md`).
+  For the workflow refinement: the budget's shape, who holds it, how a job asks for it, and whether the "would have searched here" log stays.
+
