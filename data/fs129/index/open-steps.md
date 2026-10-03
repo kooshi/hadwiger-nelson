@@ -1,4 +1,4 @@
-<!-- open steps: entries by verdict, then every line naming a stall or a GAP | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- open steps: entries by verdict, then every line naming a stall or a GAP | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Open steps
 

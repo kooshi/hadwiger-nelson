@@ -1,4 +1,4 @@
-<!-- the results whose handoff names de Bruijn (SEED) and everything they rest on, each after what it uses | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- the results whose handoff names de Bruijn (SEED) and everything they rest on, each after what it uses | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Lean order
 
@@ -176,7 +176,7 @@ Seeds: 78 entries whose `handoff:` matches /de ?bruijn/i. Closure: 197 entries (
 | 168 | FS116-Y4-FLANK | SEED | plans/FS116-derivation.md:1684 | R |  | de Bruijn — a short lemma about two arcs inside two unit discs, after a blind second mind |
 | 169 | FS116-Y4-EMPTY | SEED | plans/FS116-derivation.md:1712 | R | FS116-N2-STAR, FS116-RING-GERM, FS116-V6-ANTI, FS116-V6-COUNT, FS116-V6-HUBS, FS116-V6-HUG, FS116-Y3-SIX, FS116-Y3-TIPS, FS116-Y4-FLANK | de Bruijn — by either route, the first with FLANK, SIX, TIPS and RING-GERM, or FS116-V6's (FS116-V6-HUBS, -HUG, -COUNT,… |
 | 170 | FS116-Y4-SYM | upstream | plans/FS116-derivation.md:1625 | R | FS116-Y3-TIPS | none — a bookkeeping lemma for the casework of this record |
-| 171 | FS116-Y4-SPOKE | SEED (handoff begins `none`) | plans/FS116-derivation.md:1645 | R | FS116-RING-GERM, FS116-Y3-NBTIP, FS116-Y3-NOQ, FS116-Y3-STARFORCE, FS116-Y4-SYM | none — a relay-result for the obstruction or the construction of this record; with STARFORCE, after its blind check, a … |
+| 171 | FS116-Y4-SPOKE | SEED (conditional: handoff begins `none`) | plans/FS116-derivation.md:1645 | R | FS116-RING-GERM, FS116-Y3-NBTIP, FS116-Y3-NOQ, FS116-Y3-STARFORCE, FS116-Y4-SYM | none — a relay-result for the obstruction or the construction of this record; with STARFORCE, after its blind check, a … |
 | 172 | FS121-C1-BOUND | SEED | plans/FS121-derivation.md:710 | R |  | de Bruijn — queued behind the measurable chain (FS-113): a short lemma on closed connected sets and one perturbation |
 | 173 | FS121-C1-GMAP | SEED CYCLE | plans/FS121-derivation.md:732 | R | FS121-C1-BOUND, FS121-D3-GRUNDY | de Bruijn — with FS121-D3-GRUNDY, once map colourings and supports are in Lean |
 | 174 | FS121-D3-GRUNDY | SEED CYCLE | plans/FS121-derivation.md:516 | R | FS111-M-SATC, FS111-M2-ZERO, FS121-C1-GMAP | de Bruijn — queued behind the measurable chain; its dependent-choice route matters to a ZF + DC audit (Soifer's Open AC… |
@@ -201,5 +201,5 @@ Seeds: 78 entries whose `handoff:` matches /de ?bruijn/i. Closure: 197 entries (
 | 193 | FS121-V5-RAY | SEED CYCLE | plans/FS121-derivation.md:1109 | R | FS111-M-C11, FS121-V5-LOC | de Bruijn — a self-contained lemma over FS111-M-C11 that both routes to FS121-D2-SYM can rest on (item 79) |
 | 194 | FS121-D2-PERFIN | upstream CYCLE | plans/FS121-derivation.md:679 | R | FS111-M2-INTRAD, FS121-D2-SYM | none — it removes a hypothesis from C121-PER's periodic clause; it crosses with FS121-D2-SYM |
 | 195 | FS121-D2-SYM | SEED CYCLE | plans/FS121-derivation.md:656 | R | FS111-M-C11, FS111-M2-INTRAD, FS121-D2-EXT, FS121-D2-PERFIN, FS121-D2-THIN, FS121-O1-OUT, FS121-V5-RAY | de Bruijn — queued behind FS111-M2-INTRAD and the measurable chain (FS-113); V5's route needs only FS121-V5-RAY beyond … |
-| 196 | TC1-SQRT3-DYADIC | SEED (handoff begins `none`) | plans/TC1-derivation.md:8 | CHECK |  | none — a two-line local lemma that scopes G56's exclusion; it crosses to de Bruijn with that exclusion if it is formali… |
-| 197 | TC1-STANDING-FIVE | SEED (handoff begins `none`) | plans/TC1-derivation.md:60 | CHECK | TC1-SQRT3-DYADIC | none — conditional on MR (row 120, [hand]); it crosses to de Bruijn only with row 123's chain |
+| 196 | TC1-SQRT3-DYADIC | SEED (conditional: handoff begins `none`) | plans/TC1-derivation.md:8 | A |  | none — a two-line local lemma that scopes G56's exclusion; it crosses to de Bruijn with that exclusion if it is formali… |
+| 197 | TC1-STANDING-FIVE | SEED (conditional: handoff begins `none`) | plans/TC1-derivation.md:60 | A | TC1-SQRT3-DYADIC | none — conditional on MR (row 120, [hand]); it crosses to de Bruijn only with row 123's chain |

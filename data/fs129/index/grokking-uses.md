@@ -1,4 +1,4 @@
-<!-- for each grokking, the entries whose text mentions it (the token G<n>), their milestones, the era by majority | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- for each grokking, the entries whose text mentions it (the token G<n>), their milestones, the era by majority | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Grokking uses
 
@@ -24,7 +24,7 @@ A mention is the token `G<n>` anywhere in an entry's text (its block, its argume
 
 ## G76 — Four-colour rigidity over a field is a local theorem and a global extension question; every construction of a "no" that reads finitely much dies, and no character is one. [hand, two derivations for the frame, the local theorem, the no-gos and the measure half (rows 88–92, 111–113); the obstruction a reading, reached twice independently]
 
-- SKILL.md line 1005; entries mentioning it: 3 (A=2, R=0); era by majority: A
+- SKILL.md line 1005; entries mentioning it: 3 (A=3, R=0); era by majority: A
 - milestones (file prefixes): FS103, FS91, R88
 - entries: FS103-LB, FS91-J12-MS, R88-TC
 

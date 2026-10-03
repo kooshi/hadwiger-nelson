@@ -1,4 +1,4 @@
-<!-- every id-shaped token in a `uses only:` line or a Rests-on-it paragraph that resolves to no entry | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- every id-shaped token in a `uses only:` line or a Rests-on-it paragraph that resolves to no entry | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Unresolved references
 
@@ -517,7 +517,7 @@ Resolution rule: exact id, then `<this file's prefix>-<token>`; nothing else. Cl
 - `YB5-CONE180` — in uses only of FS114-Y6-E2RED (plans/FS114-derivation.md:679)
 - `YB5-E2-60` — in uses only of FS114-Y6-E2RED (plans/FS114-derivation.md:679)
 
-## class `bare` (328 references, 147 distinct tokens)
+## class `bare` (331 references, 147 distinct tokens)
 
 - `A10` — in rests on it of FS106-TS-L1 (plans/FS106-derivation.md:139)
 - `A11` — in rests on it of FS106-TS-L1 (plans/FS106-derivation.md:139)
@@ -675,6 +675,7 @@ Resolution rule: exact id, then `<this file's prefix>-<token>`; nothing else. Cl
 - `J07` — in rests on it of FS91-J10-T9 (plans/FS91-derivation.md:418)
 - `J08` — in rests on it of FS91-J01-7 (plans/FS91-derivation.md:97)
 - `J09` — in rests on it of FS91-J09-J1 (plans/FS91-derivation.md:180)
+- `J09` — in grade of FS91-J09-J1 (plans/FS91-derivation.md:180)
 - `J09` — in rests on it of FS91-J09-J4 (plans/FS91-derivation.md:192)
 - `J09v` — in rests on it of FS91-J09-J4 (plans/FS91-derivation.md:192)
 - `J10` — in rests on it of FS91-J10-L1 (plans/FS91-derivation.md:150)
@@ -710,6 +711,7 @@ Resolution rule: exact id, then `<this file's prefix>-<token>`; nothing else. Cl
 - `L3` — in rests on it of FS86-B2-T2 (plans/FS86-derivation.md:143) — suffix candidates: FS121-DB1-L3, FS38-L3, FS66-L3, FS89-D1-L3, FS89-D5-L3, FS91-J02-L3
 - `L4b` — in rests on it of FS70-T2 (plans/FS70-derivation.md:18)
 - `L6` — in rests on it of FS70-T6 (plans/FS70-derivation.md:50) — suffix candidates: FS105-B-L6, FS121-DB1-L6, FS66-L6, FS89-D1-L6
+- `L6` — in grade of FS70-T6 (plans/FS70-derivation.md:50) — suffix candidates: FS105-B-L6, FS121-DB1-L6, FS66-L6, FS89-D1-L6
 - `L6` — in rests on it of FS73-T31 (plans/FS73-derivation.md:293) — suffix candidates: FS105-B-L6, FS121-DB1-L6, FS66-L6, FS89-D1-L6
 - `L60` — in rests on it of FS114-L60-LE (plans/FS114-derivation.md:922) — suffix candidates: FS112-L60
 - `L60` — in rests on it of FS114-L60-WALK (plans/FS114-derivation.md:943) — suffix candidates: FS112-L60
@@ -807,6 +809,7 @@ Resolution rule: exact id, then `<this file's prefix>-<token>`; nothing else. Cl
 - `T35` — in rests on it of M3-J18-AKq (plans/M3-derivation.md:106) — suffix candidates: FS73-T35, FS79-T35
 - `T36` — in rests on it of M3-J18-AKq (plans/M3-derivation.md:106) — suffix candidates: FS73-T36, FS79-T36
 - `T4` — in rests on it of FS89-S0B-T2 (plans/FS89-derivation.md:114) — suffix candidates: ASTRA-2026-09-14-T4, FS100-T4, FS25-T4, FS50-T4, FS53-T4, FS54-T4 …
+- `T4` — in grade of FS91-J09-J1 (plans/FS91-derivation.md:180) — suffix candidates: ASTRA-2026-09-14-T4, FS100-T4, FS25-T4, FS50-T4, FS53-T4, FS54-T4 …
 - `T5` — in rests on it of FS89-S0B-T1 (plans/FS89-derivation.md:109) — suffix candidates: ASTRA-2026-09-14-T5, FS100-T5, FS50-T5, FS54-T5, FS56-T5, FS58-T5 …
 - `T5` — in rests on it of FS89-S0B-T3 (plans/FS89-derivation.md:119) — suffix candidates: ASTRA-2026-09-14-T5, FS100-T5, FS50-T5, FS54-T5, FS56-T5, FS58-T5 …
 - `T6` — in rests on it of FS91-J09-J4-T6 (plans/FS91-derivation.md:270) — suffix candidates: ASTRA-2026-09-14-T6, FS50-T6, FS54-T6, FS56-T6, FS58-T6, FS62-T6 …

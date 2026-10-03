@@ -1,13 +1,13 @@
-<!-- results nothing uses (no outgoing edge in edges.csv) | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- results nothing uses (no outgoing edge in edges.csv) | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Orphans
 
 A result is listed when no `uses only:` line and no other result's Rests-on-it paragraph resolves to a use of it from here; an older-format result's dependents come only from other entries' text, so many older results are here by the format, not by their role.
 
-- ASTRA-2026-09-14-T10 — plans/ASTRA-2026-09-14-derivation.md:55 — old — era CHECK
-- ASTRA-2026-09-14-T3 — plans/ASTRA-2026-09-14-derivation.md:32 — old — era CHECK
-- ASTRA-2026-09-14-T4 — plans/ASTRA-2026-09-14-derivation.md:34 — old — era CHECK
-- ASTRA-2026-09-14-T9 — plans/ASTRA-2026-09-14-derivation.md:51 — old — era CHECK
+- ASTRA-2026-09-14-T10 — plans/ASTRA-2026-09-14-derivation.md:55 — old — era A
+- ASTRA-2026-09-14-T3 — plans/ASTRA-2026-09-14-derivation.md:32 — old — era A
+- ASTRA-2026-09-14-T4 — plans/ASTRA-2026-09-14-derivation.md:34 — old — era A
+- ASTRA-2026-09-14-T9 — plans/ASTRA-2026-09-14-derivation.md:51 — old — era A
 - FS100-167 — plans/FS100-derivation.md:277 — old — era A
 - FS100-B12 — plans/FS100-derivation.md:279 — old — era A
 - FS100-B3 — plans/FS100-derivation.md:281 — old — era A
@@ -552,18 +552,18 @@ A result is listed when no `uses only:` line and no other result's Rests-on-it p
 - M64-T1 — plans/M64-derivation.md:18 — old — era A
 - M64-T2 — plans/M64-derivation.md:53 — old — era A
 - M64-T3 — plans/M64-derivation.md:66 — old — era A
-- MASCOT-T10 — plans/MASCOT-derivation.md:221 — old — era CHECK
-- MASCOT-T4 — plans/MASCOT-derivation.md:77 — old — era CHECK
-- MASCOT-T5 — plans/MASCOT-derivation.md:96 — old — era CHECK
+- MASCOT-T10 — plans/MASCOT-derivation.md:221 — old — era A
+- MASCOT-T4 — plans/MASCOT-derivation.md:77 — old — era A
+- MASCOT-T5 — plans/MASCOT-derivation.md:96 — old — era A
 - Q8-T2 — plans/Q8-derivation.md:57 — old — era A
-- R57-T1 — plans/R57-derivation.md:21 — old — era CHECK
-- R59-T1 — plans/R59-derivation.md:15 — old — era CHECK
-- R59-T2 — plans/R59-derivation.md:48 — old — era CHECK
-- R88-B2-2 — plans/R88-derivation.md:200 — old — era CHECK
-- R88-B2-3 — plans/R88-derivation.md:206 — old — era CHECK
-- R88-J28V-8d — plans/R88-derivation.md:210 — old — era CHECK
-- R88-TA — plans/R88-derivation.md:45 — old — era CHECK
-- R88-TA2 — plans/R88-derivation.md:74 — old — era CHECK
-- R88-TCA — plans/R88-derivation.md:161 — old — era CHECK
-- TC1-STANDING-FIVE — plans/TC1-derivation.md:60 — new — era CHECK
-- TC1-STANDING-FOUR — plans/TC1-derivation.md:42 — new — era CHECK
+- R57-T1 — plans/R57-derivation.md:21 — old — era A
+- R59-T1 — plans/R59-derivation.md:15 — old — era A
+- R59-T2 — plans/R59-derivation.md:48 — old — era A
+- R88-B2-2 — plans/R88-derivation.md:200 — old — era A
+- R88-B2-3 — plans/R88-derivation.md:206 — old — era A
+- R88-J28V-8d — plans/R88-derivation.md:210 — old — era A
+- R88-TA — plans/R88-derivation.md:45 — old — era A
+- R88-TA2 — plans/R88-derivation.md:74 — old — era A
+- R88-TCA — plans/R88-derivation.md:161 — old — era A
+- TC1-STANDING-FIVE — plans/TC1-derivation.md:60 — new — era A
+- TC1-STANDING-FOUR — plans/TC1-derivation.md:42 — new — era A

@@ -44,6 +44,8 @@ import fs71_ledger_b_check as census  # noqa: E402  (imported, never copied; nev
 GROK_PATH = ROOT / ".claude" / "skills" / "grokkings" / "SKILL.md"
 OUT_DIR = ROOT / "data" / "fs129" / "index"
 
+ALSO_RE = re.compile(r"\*Also:\*")
+ANY_MARK = re.compile(r"\*[A-Z][A-Za-z ]*:\*")
 MARK_RE = re.compile(r"\*(Proof|Proof verdict|Rests on it|Prior art|Kernel):\*")
 RESTS_LABEL = re.compile(r"\brests\s+on\s+it\b", re.I)
 RESTS_PHRASE = re.compile(r"\brests\s+on\b", re.I)
@@ -71,8 +73,16 @@ def trunc(s: str, n: int = TRUNC) -> str:
 
 # ------------------------------------------------------------------ era
 
+INV = "plans/FS129-close-inventory.md"
+# the coordinator's rulings (amendment of 2026-10-03 18:00): item 11 puts the era-CHECK prefixes in lane A, item 12 keeps FS-105 in lane R
+RULED = {**{p: ("A", f"{INV} item 11") for p in ("ASTRA-2026-09-14", "MASCOT", "Q8", "R52", "R57", "R59", "R88", "TC1")},
+         "FS105": ("R", f"{INV} item 12")}
+
+
 def era_of(prefix: str, milestone: str) -> tuple[str, str]:
-    """(era, how). A numbered prefix is placed by its number; any other by § B's milestone column; else CHECK."""
+    """(era, how). A prefix the coordinator ruled on takes the ruling; a numbered prefix its number; any other § B's milestone column; else CHECK."""
+    if prefix in RULED:
+        return RULED[prefix]
     m = re.fullmatch(r"M(\d+)[A-Z]?\d*", prefix)
     if m:
         return "A", f"prefix {prefix}"
@@ -112,12 +122,20 @@ def read_derivation_file(text: str, prefix: str, fname: str) -> tuple[list[dict]
             end = marks[j + 1].start() if j + 1 < len(marks) else len(body)
             fields[mk.group(1)] = ws(body[mk.end(): end])
         stmt = ws(body[: marks[0].start()]) if marks else ""
+        if stmt.startswith("*Also:*"):
+            stmt = ""  # the body opens with an *Also:* sentence: the statement is the header's title, as for entries with no body text
+        also = []
+        for am in ALSO_RE.finditer(body):
+            rest = body[am.end():]
+            nm = ANY_MARK.search(rest)
+            clause = ws(rest[: nm.start()] if nm else rest.split("\n\n")[0])
+            also.append({"line": text.count("\n", 0, m.end() + am.start()) + 1, "clause": clause})
         out.append({
             "id": full, "file": f"plans/{fname}", "line": line, "grammar": "old", "title": m.group("title"),
             "statement": stmt, "not_claimed": "", "grade": m.group("grade"), "minds": "", "verdict": fields.get("Proof verdict", ""),
             "uses_raw": "", "rests_text": fields.get("Rests on it", ""), "rests_form": "label" if "Rests on it" in fields else "",
             "handoff": "", "kernel": fields.get("Kernel", ""), "span_text": ws(m.group(0) + body), "prefix": prefix,
-            "no_marker": not marks, "has_uses_field": False,
+            "no_marker": not marks, "has_uses_field": False, "also": also,
         })
     # ---- the new grammar (the gate's blocks)
     stops = [i for i, x in enumerate(lines) if MD_HEAD.match(x) or ((mm := g.HEAD.match(x)) and mm.group(1) == "derivation")]
@@ -151,7 +169,7 @@ def read_derivation_file(text: str, prefix: str, fname: str) -> tuple[list[dict]
             "grade": ws(f.get("grade", "")), "minds": ws(f.get("minds", "")), "verdict": ws(f.get("verdict", "")),
             "uses_raw": ws(f.get("uses only", "")), "rests_text": rests_text, "rests_form": rests_form,
             "handoff": ws(f.get("handoff", "")), "kernel": "", "span_text": ws(span + "\n" + prose), "prefix": prefix,
-            "no_marker": False, "has_uses_field": "uses only" in f,
+            "no_marker": False, "has_uses_field": "uses only" in f, "also": [],
         })
     return out, printed
 
@@ -267,6 +285,48 @@ def descendants(adj: dict[str, set[str]], v: str) -> set[str]:
     return seen
 
 
+def depths(nodes: list[str], comps: list[list[str]], adj: dict[str, set[str]], radj: dict[str, set[str]]) -> dict:
+    """Longest chains on the graph with each cycle condensed to one node. down[v]: edges in the longest chain of dependents starting at v;
+    up[v]: edges in the longest chain v rests on. `next_down[c]` is the successor component on one longest chain (ties: the component whose
+    first member id sorts first), `comp_of` and `comps` let a caller write the chain out."""
+    comp_of = {m: k for k, c in enumerate(comps) for m in c}
+    succ: dict[int, set[int]] = defaultdict(set)
+    pred: dict[int, set[int]] = defaultdict(set)
+    for a in nodes:
+        for b in adj.get(a, ()):
+            if comp_of[a] != comp_of[b]:
+                succ[comp_of[a]].add(comp_of[b])
+                pred[comp_of[b]].add(comp_of[a])
+    # Tarjan emits a component after every component reachable from it: comps is in reverse topological order
+    dd: dict[int, int] = {}
+    nxt: dict[int, int | None] = {}
+    for k in range(len(comps)):
+        best = None
+        for t in sorted(succ[k], key=lambda t: comps[t][0]):
+            if best is None or dd[t] > dd[best]:
+                best = t
+        dd[k] = dd[best] + 1 if best is not None else 0
+        nxt[k] = best
+    du: dict[int, int] = {}
+    for k in reversed(range(len(comps))):
+        du[k] = max((du[t] + 1 for t in pred[k]), default=0)
+    return {"down": {m: dd[comp_of[m]] for m in nodes}, "up": {m: du[comp_of[m]] for m in nodes}, "next_down": nxt, "comp_of": comp_of,
+            "comps": comps}
+
+
+def chain_down(depth: dict, v: str) -> list[str]:
+    """One longest chain of dependents from v, as labels: an id, or `{a|b}` for a condensed cycle."""
+    out = []
+    k = depth["comp_of"][v]
+    first = True
+    while k is not None:
+        c = depth["comps"][k]
+        out.append(v if first and len(c) == 1 else (c[0] if len(c) == 1 else "{" + "|".join(c) + "}"))
+        first = False
+        k = depth["next_down"][k]
+    return out
+
+
 # ------------------------------------------------------------------ the build
 
 def parse_ledger(text: str) -> tuple[dict[int, tuple[int, str]], dict[str, tuple[int, str]]]:
@@ -362,7 +422,7 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
         if r["grammar"] == "old" and r["no_marker"]:
             check.append("older entry has none of *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*, *Kernel:*; statement left empty")
         if r["grammar"] == "old" and not r["statement"] and not r["no_marker"]:
-            check.append("older entry: no text between the header and *Proof:*; statement left empty")
+            check.append("older entry: no statement text between the header and *Proof:* (none, or only an *Also:* sentence); statement left empty")
         vm = re.match(r"[\"“'*_`(]*([A-Za-z][A-Za-z-]*)", r["verdict"])
         r["verdict_class"] = vm.group(1).lower() if vm else ""
         if not r["verdict"]:
@@ -371,10 +431,15 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
             check.append("handoff begins `none` yet names de Bruijn in the field; indexed as a lean-order seed (the field, not the line, decides)")
         u = resolve(r["uses_raw"], r["prefix"], ids, suffix_index) if r["uses_raw"] else {"resolved": [], "unresolved": [], "suffix": []}
         rs = resolve(r["rests_text"], r["prefix"], ids, suffix_index) if r["rests_text"] else {"resolved": [], "unresolved": [], "suffix": []}
+        gr = {"resolved": [], "unresolved": [], "suffix": []}
+        gm = re.match(r"\s*derived from\b", r["grade"], re.I)
+        if gm:
+            gr = resolve(r["grade"][gm.end():], r["prefix"], ids, suffix_index)
+        r["grade_ids"] = [x for x in gr["resolved"] if x != i]
         r["uses_ids"] = [x for x in u["resolved"] if x != i]
         r["rests_ids"] = [x for x in rs["resolved"] if x != i]
         r["self_refs"] = [x for x in (u["resolved"] + rs["resolved"]) if x == i]
-        for src, d in (("uses only", u), ("rests on it", rs)):
+        for src, d in (("uses only", u), ("rests on it", rs), ("grade", gr)):
             for tok, cls in d["unresolved"]:
                 unresolved_all.append({"from": i, "address": f"{r['file']}:{r['line']}", "where": src, "token": tok, "class": cls,
                                        "suffix": next((c for t, c in d["suffix"] if t == tok), [])})
@@ -400,24 +465,26 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
     for i, r in recs_by_id.items():
         for y in r["uses_ids"]:
             esrc[(y, i)].add("uses")
+        for y in r["grade_ids"]:
+            esrc[(y, i)].add("grade")
         for z in r["rests_ids"]:
             esrc[(i, z)].add("rests")
-    edges = sorted((a, b, "both" if len(s) == 2 else next(iter(s))) for (a, b), s in esrc.items())
+    edges = sorted((a, b, "both" if s == {"uses", "rests"} else "+".join(sorted(s))) for (a, b), s in esrc.items())
     adj: dict[str, set[str]] = defaultdict(set)
     radj: dict[str, set[str]] = defaultdict(set)
     for a, b, _ in edges:
         adj[a].add(b)
         radj[b].add(a)
     disagreements: list[dict] = []
-    for a, b, s in edges:
-        if s == "rests":
+    for (a, b), srcs in sorted(esrc.items()):
+        if "rests" in srcs and "uses" not in srcs:  # disagreements concern the two prose directions only; a grade source is not one of them
             X = recs_by_id[b]
             if X["has_uses_field"] and X["uses_raw"].strip() and a not in X["uses_ids"]:
                 disagreements.append({"edge": (a, b), "kind": "rests-only",
                                       "note": f"{a}'s Rests-on-it names {b}; {b}'s `uses only:` exists and omits {a}"
                                               + ("" if X["uses_ids"] else " [and names no id at all]"),
                                       "addresses": [f"{recs_by_id[a]['file']}:{recs_by_id[a]['line']}", f"{X['file']}:{X['line']}"]})
-        elif s == "uses":
+        elif "uses" in srcs and "rests" not in srcs:
             Y = recs_by_id[a]
             if Y["rests_text"].strip() and b not in Y["rests_ids"]:
                 disagreements.append({"edge": (a, b), "kind": "uses-only",
@@ -429,13 +496,15 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
     cycles = [c for c in comps if len(c) > 1]
     for c in cycles:
         defects.append({"kind": "cycle", "members": c, "text": "dependency cycle: " + ", ".join(c)})
+    depth = depths(nodes, comps, adj, radj)
     for i, r in recs_by_id.items():
+        r["depth_down"], r["depth_up"] = depth["down"][i], depth["up"][i]
         d = descendants(adj, i)
         r["n_dependents_direct"] = len(adj.get(i, ()))
         r["n_dependents_transitive"] = len(d)
         r["n_upstream_direct"] = len(radj.get(i, ()))
     return {"records": recs_by_id, "edges": edges, "disagreements": disagreements, "unresolved": unresolved_all, "defects": defects,
-            "cycles": cycles, "comps": comps, "adj": adj, "radj": radj, "groks": groks, "ledger_rows": rows, "census_lines": census_lines,
+            "cycles": cycles, "comps": comps, "depth": depth, "adj": adj, "radj": radj, "groks": groks, "ledger_rows": rows, "census_lines": census_lines,
             "ids": ids}
 
 
@@ -537,6 +606,75 @@ def scan_lines(files: dict[str, str], ledger_text: str, ix: dict) -> dict[str, l
     return out
 
 
+ID_SHAPE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9\u2032'_.-]*$")
+
+
+def defined_ids(text: str) -> list[tuple[int, str, str]]:
+    """(line, raw id, kind) for the entry-shaped headers and ids a file defines, mechanically: a bold entry header anywhere
+    (`**ID — …`, the census's NEAR_RE), and under a heading "Theorems this phase proved" / "The theorems": the first cell of a table row
+    and the leading bold ids of a bullet (`- **T-A (i)** — …`, `- **B2-1, B2-2** — …`). Not a judgement that any of them is a theorem."""
+    out: list[tuple[int, str, str]] = []
+    in_sec = False
+    for n, line in enumerate(text.splitlines(), 1):
+        if MD_HEAD.match(line):
+            in_sec = bool(re.search(r"theorems this phase proved|^#+\s*the theorems", line, re.I))
+            continue
+        m = census.NEAR_RE.match(line)
+        if m:
+            out.append((n, m.group("id"), "bold-header"))
+            continue
+        if not in_sec:
+            continue
+        tm = re.match(r"^\|\s*`?\**([^|`*]+?)\**`?\s*\|", line)
+        if tm:
+            cell = tm.group(1).strip()
+            if cell.lower() not in ("id", "#", "theorem") and not set(cell) <= {"-", ":", " "} and ID_SHAPE.match(cell):
+                out.append((n, cell, "table-row"))
+            continue
+        bm = re.match(r"^\s*[-*]\s+\*\*(.+?)\*\*", line)
+        if bm:
+            for part in bm.group(1).split(","):
+                w = part.strip().split(" ")[0].rstrip(":;.")
+                if w and ID_SHAPE.match(w):
+                    out.append((n, w, "bold-bullet"))
+    return out
+
+
+def no_entry_files(files: dict[str, str], ix: dict) -> list[dict]:
+    """For each derivation file holding no indexed entry: the ids it defines (`defined_ids`), and whether each, or a job-qualified form of it
+    (`J27D-3`, `J27D #3`), appears as a token in the text of any indexed entry. Ids matching nowhere are the finding."""
+    recs = ix["records"]
+    have = {r["file"].split("/")[-1] for r in recs.values()}
+    where: dict[str, list[str]] = defaultdict(list)
+    alltext = []
+    for i in sorted(recs):
+        for t in set(tokens_of(recs[i]["span_text"])):
+            where[t].append(i)
+        alltext.append(recs[i]["span_text"])
+    blob = "\n".join(alltext)
+    out = []
+    for fname in sorted(files):
+        if fname in have:
+            continue
+        stem = fname[: -len("-derivation.md")]
+        job = re.sub(r"^(?:FS\d+|M\d+)-", "", stem) if re.match(r"^(?:FS\d+|M\d+)-", stem) else ""
+        defs = []
+        for n, raw, kind in defined_ids(files[fname]):
+            base = raw.replace("\u2032", "").replace("'", "")
+            forms = [] if base.isdigit() else [base]  # a bare number would match any digit token: only its job-qualified forms count
+            if job and not base.startswith(job + "-"):
+                forms.append(f"{job}-{base}")
+            matched = []
+            for f in forms:
+                if f in where:
+                    matched.append((f, where[f][:3]))
+            if base.isdigit() and job and re.search(rf"\b{re.escape(job)} #{base}\b", blob):
+                matched.append((f"{job} #{base}", []))
+            defs.append({"line": n, "raw": raw, "kind": kind, "forms": forms, "matched": matched})
+        out.append({"file": f"plans/{fname}", "defs": defs})
+    return out
+
+
 def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd: str, commit: str) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     recs = ix["records"]
@@ -545,16 +683,16 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
     fields = ["id", "milestone", "era", "era_how", "file", "line", "grammar", "title", "statement", "not_claimed", "grade", "minds", "verdict",
               "verdict_class", "uses_raw", "uses_ids", "uses_rows", "uses_grokkings", "rests_text", "rests_form", "rests_ids", "handoff", "kernel",
               "ledger_rows", "grokkings", "mentions_grokkings", "ledger_b_line", "n_dependents_direct", "n_dependents_transitive",
-              "n_upstream_direct", "self_refs", "check"]
+              "n_upstream_direct", "depth_down", "depth_up", "grade_ids", "self_refs", "check"]
     with open(out / "theorems.jsonl", "w", encoding="utf-8") as f:
-        f.write(json.dumps({"_header": header("one record per theorem (an entry in a plans/*-derivation.md file); consumers skip this line",
+        f.write(json.dumps({"_header": header("one record per theorem (an entry in a plans/*-derivation.md file); depth_down/depth_up are longest chains in edges (edges.csv) with each dependency cycle condensed to one node; consumers skip this line",
                                               cmd, commit, "")[1:].strip()}, ensure_ascii=False) + "\n")
         for i in sorted(recs):
             f.write(json.dumps({k: recs[i][k] for k in fields}, ensure_ascii=False) + "\n")
     # edges.csv
     with open(out / "edges.csv", "w", encoding="utf-8", newline="") as f:
-        f.write(header("edge from a result to each result that uses it; source = uses (the user's `uses only:`) | rests (the used one's Rests-on-it) | both; "
-                       "consumers skip lines starting #", cmd, commit) + "\n")
+        f.write(header("edge from a result to each result that uses it; source = uses (the user's `uses only:`), rests (the used one's Rests-on-it), grade (a `derived from:` grade names it), "
+                       "both = uses and rests, or a + join when grade is among them; consumers skip lines starting #", cmd, commit) + "\n")
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["from", "to", "source"])
         w.writerows(ix["edges"])
@@ -682,14 +820,17 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
         for k, (i, cyc) in enumerate(lo["sequence"], 1):
             r = recs[i]
             needs = sorted(y for y in ix["radj"].get(i, ()) if y in lo["closure"])
-            role = ("SEED" if i in lo["seeds"] else "upstream") + (" (handoff begins `none`)" if i in lo["seeds"] and re.match(r"none\b", r["handoff"], re.I) else "") + (" CYCLE" if cyc else "")
+            role = ("SEED" if i in lo["seeds"] else "upstream") + (" (conditional: handoff begins `none`)" if i in lo["seeds"] and re.match(r"none\b", r["handoff"], re.I) else "") + (" CYCLE" if cyc else "")
             tail = trunc(r["handoff"] or r["kernel"], 120).replace("|", "\\|")
             f.write(f"| {k} | {i} | {role} | {r['file']}:{r['line']} | {r['era']} | {', '.join(needs)} | {tail} |\n")
     stats["lean_seeds"] = len(lo["seeds"])
     stats["lean_closure"] = len(lo["closure"])
     stats["lean_cycle_members"] = sum(1 for _, c in lo["sequence"] if c)
     # statements-*.md
-    for era in ("A", "R", "CHECK"):
+    stale = out / "statements-CHECK.md"
+    if stale.exists():
+        stale.unlink()  # folded into statements-A.md by the amendment of 2026-10-03 18:00 (era CHECK is ruled lane A)
+    for era in ("A", "R") + (("CHECK",) if any(r["era"] == "CHECK" for r in recs.values()) else ()):
         sel = sorted((i for i in recs if recs[i]["era"] == era), key=lambda i: (recs[i]["file"], recs[i]["line"]))
         with open(out / f"statements-{era}.md", "w", encoding="utf-8") as f:
             f.write(header(f"one line per theorem of era {era}: id, address, statement cut at {TRUNC} characters", cmd, commit, "<!--") + " -->\n\n")
@@ -702,13 +843,13 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
     with open(out / "checks.md", "w", encoding="utf-8") as f:
         f.write(header("every CHECK the script raised: fields it could not read, eras it could not place, defects", cmd, commit, "<!--") + " -->\n\n# CHECK lines\n\n")
         n = 0
-        TO = "older entry: no text between the header and *Proof:*; statement left empty"
+        TO = "older entry: no statement text between the header and *Proof:* (none, or only an *Also:* sentence); statement left empty"
         to_ids = [i for i in sorted(recs) if TO in recs[i]["check"]]
         if to_ids:
             per = defaultdict(int)
             for i in to_ids:
                 per[recs[i]["file"]] += 1
-            f.write(f"CHECK: {len(to_ids)} older-format entries have no text between the header and `*Proof:*`, so `statement` is empty in the index "
+            f.write(f"CHECK: {len(to_ids)} older-format entries have no statement text between the header and `*Proof:*` (none, or only an `*Also:*` sentence), so `statement` is empty in the index "
                     f"(their statement, if any, is the header's title, kept in `title` and shown in statements-*.md); per file: "
                     + ", ".join(f"{k.split('/')[-1][:-14]}={v}" for k, v in sorted(per.items())) + ". Each record's own `check` list carries the line; the ids are in theorems.jsonl.\n")
             n += 1
@@ -725,6 +866,64 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
             if not x.startswith("FAIL"):
                 f.write(f"census note: {x[:300]}\n")
         stats["checks"] = n
+    # roots.md
+    dep = ix["depth"]
+    rk = sorted(recs, key=lambda i: (-recs[i]["depth_down"], -recs[i]["n_dependents_transitive"], i))
+    with open(out / "roots.md", "w", encoding="utf-8") as f:
+        f.write(header("roots: results where a long chain of dependents starts, top 100 by depth_down", cmd, commit, "<!--") + " -->\n\n# Roots\n\n")
+        f.write("`depth_down` is the number of edges in the longest chain of dependents starting at the result, on edges.csv with each dependency cycle condensed to one "
+                "node (a condensed cycle is written `{a|b}`). Ties are broken by transitive dependents, then id. **Older-format edges come from prose "
+                "(an older entry has no `uses only:` field), so every depth is a lower bound.** The chain is one longest chain (ties: the first id in sort order); "
+                "`depth_up` is the longest chain the result itself rests on.\n\n")
+        f.write("| rank | id | depth_down | direct | transitive | depth_up | address | era |\n|---|---|---|---|---|---|---|---|\n")
+        for k, i in enumerate(rk[:100], 1):
+            r = recs[i]
+            f.write(f"| {k} | {i} | {r['depth_down']} | {r['n_dependents_direct']} | {r['n_dependents_transitive']} | {r['depth_up']} | {r['file']}:{r['line']} | {r['era']} |\n")
+        f.write("\n## Chains\n\n")
+        for k, i in enumerate(rk[:100], 1):
+            f.write(f"{k}. {i} ({recs[i]['depth_down']}): " + " → ".join(chain_down(dep, i)) + "\n")
+    stats["max_depth_down"] = recs[rk[0]]["depth_down"] if rk else 0
+    stats["roots_top"] = [(i, recs[i]["depth_down"], recs[i]["n_dependents_direct"]) for i in rk[:5]]
+    stats["depth_down_hist"] = {d: sum(1 for r in recs.values() if r["depth_down"] == d) for d in range(0, (recs[rk[0]]["depth_down"] if rk else 0) + 1)}
+    stats["grade_edges"] = sum(1 for _, _, s in ix["edges"] if "grade" in s)
+    # no-entry files and *Also:* clauses, appended to checks.md
+    ne = no_entry_files(files, ix)
+    stats["no_entry_files"] = len(ne)
+    stats["no_entry_ids"] = sum(len(x["defs"]) for x in ne)
+    stats["no_entry_unmatched"] = sum(1 for x in ne for d in x["defs"] if not d["matched"])
+    alsos = [(i, a) for i in sorted(recs) for a in recs[i]["also"]]
+    stats["also_clauses"] = len(alsos)
+    with open(out / "checks.md", "a", encoding="utf-8") as f:
+        f.write("\n## `*Also:*` clauses in older-format entries (each a claim with no record of its own)\n\n")
+        for i, a in alsos:
+            rr = resolve(a["clause"], recs[i]["prefix"], ix["ids"], defaultdict(list))
+            named = [(t, c) for t, c in rr["unresolved"] if c in ("prefixed", "hyphenated")]
+            f.write(f"CHECK: `*Also:*` at {recs[i]['file']}:{a['line']} (entry {i}) names "
+                    f"{', '.join(t for t, _ in named) if named else 'no unresolved id'}"
+                    f"{'; resolved to entries: ' + ', '.join(rr['resolved']) if rr['resolved'] else ''} — {trunc(a['clause'], 500)}\n")
+        f.write(f"\n## The {len(ne)} derivation files that define no indexed entry: entry-shaped headers and ids they define, and where each appears\n\n")
+        f.write("A defined id is read mechanically (a bold entry header; a table row's first cell or a bold bullet id under a heading "
+                "\"Theorems this phase proved\" / \"The theorems\"); it is looked for, with its job-qualified forms (`J27D-3`, `J27D #3` for a bare number), "
+                "as a token in the text of the indexed entries (aliases such as `(= X23D-TCA)` are tokens there). A prime is dropped for the search. Not a judgement that any of them is a theorem.\n\n")
+        f.write("### Ids that appear in no indexed entry (the finding)\n\n")
+        for x in ne:
+            for d in x["defs"]:
+                if not d["matched"]:
+                    f.write(f"CHECK: {x['file']}:{d['line']} `{d['raw']}` ({d['kind']}) appears in no indexed entry\n")
+        f.write("\n### Ids found only as a bare token with no hyphen (weak: the token may mean something else in the entry that carries it)\n\n")
+        for x in ne:
+            for d in x["defs"]:
+                if d["matched"] and all("-" not in f_ and " #" not in f_ for f_, _ in d["matched"]):
+                    f.write(f"CHECK: {x['file']}:{d['line']} `{d['raw']}` found only as the bare token `{d['matched'][0][0]}` in {', '.join(d['matched'][0][1]) or 'an entry'}\n")
+                    stats["no_entry_weak"] = stats.get("no_entry_weak", 0) + 1
+        f.write("\n### Per file\n\n")
+        for x in ne:
+            nd = len(x["defs"])
+            f.write(f"- {x['file']}: {nd} ids/headers defined, {sum(1 for d in x['defs'] if d['matched'])} found in an indexed entry, {sum(1 for d in x['defs'] if not d['matched'])} not\n")
+            for d in x["defs"]:
+                mt = "; ".join(f"`{f_}` in {', '.join(w) if w else 'the text of an entry'}" for f_, w in d["matched"]) or "NOT FOUND"
+                f.write(f"    - :{d['line']} `{d['raw']}` ({d['kind']}) — {mt}\n")
+        stats["checks"] += len(alsos) + stats["no_entry_unmatched"]
     # counts
     by_era: dict = defaultdict(int)
     by_gr: dict = defaultdict(int)
@@ -754,10 +953,10 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
 # ------------------------------------------------------------------ the self-test
 
 def _new(name: str, statement: str = "every planted integer n satisfies n + 0 = n", uses: str = "that 0 is the additive identity",
-         handoff: str = "none — planted", rests: str = "nothing; it is planted.") -> str:
+         handoff: str = "none — planted", rests: str = "nothing; it is planted.", grade: str = "hand") -> str:
     st = f"  statement: {statement}\n" if statement else ""
     return (f"derivation: {name}\n{st}  uses only: {uses}\n  not claimed: that n · 0 = n\n  argument: § Argument\n  verdict: derived\n"
-            f"  grade: hand\n  minds: 1\n  model: n = 3\n  prior art: known\n  handoff: {handoff}\n\nRests on it: {rests}\n\n")
+            f"  grade: {grade}\n  minds: 1\n  model: n = 3\n  prior art: known\n  handoff: {handoff}\n\nRests on it: {rests}\n\n")
 
 
 _OLD = ("**FS97-T1 — The planted older theorem. [hand; the planter]**\nFor every planted integer n, n + 1 > n. *Proof:* add one. "
@@ -879,6 +1078,49 @@ def self_test() -> int:
     era2 = ix6["records"]["FS104-N0"]["era"] == "R" and ix6["records"]["FS103-N0"]["era"] == "A"
     print(f"self-test: the era boundary (FS103 A, FS104 R): {era2}")
     ok = ok and era2
+    # --- depths: a chain with one offshoot, and a cycle inside a chain
+    chain = _new("FS94-A") + _new("FS94-B", uses="FS94-A") + _new("FS94-C", uses="FS94-B") + _new("FS94-D", uses="FS94-C") + _new("FS94-E", uses="FS94-B")
+    ix7 = run(*_planted({"FS94-derivation.md": "# p\n\n" + chain}, tuple(f"FS94-{x}" for x in "ABCDE")))
+    r7 = ix7["records"]
+    dn = {x: r7[f"FS94-{x}"]["depth_down"] for x in "ABCDE"}
+    up = {x: r7[f"FS94-{x}"]["depth_up"] for x in "ABCDE"}
+    ch = chain_down(ix7["depth"], "FS94-A")
+    d_ok = dn == {"A": 3, "B": 2, "C": 1, "D": 0, "E": 0} and up == {"A": 0, "B": 1, "C": 2, "D": 3, "E": 2} and ch == ["FS94-A", "FS94-B", "FS94-C", "FS94-D"]
+    print(f"self-test: depth on a chain with one offshoot (down {dn}, up {up}, chain {ch}): {d_ok}")
+    ok = ok and d_ok
+    cyc2 = _new("FS94-A") + _new("FS94-B", uses="FS94-A; FS94-C") + _new("FS94-C", uses="FS94-B") + _new("FS94-D", uses="FS94-C")
+    ix8 = run(*_planted({"FS94-derivation.md": "# p\n\n" + cyc2}, tuple(f"FS94-{x}" for x in "ABCD")))
+    r8 = ix8["records"]
+    dn = {x: r8[f"FS94-{x}"]["depth_down"] for x in "ABCD"}
+    up = {x: r8[f"FS94-{x}"]["depth_up"] for x in "ABCD"}
+    ch = chain_down(ix8["depth"], "FS94-A")
+    c_ok = dn == {"A": 2, "B": 1, "C": 1, "D": 0} and up == {"A": 0, "B": 1, "C": 1, "D": 2} and ch == ["FS94-A", "{FS94-B|FS94-C}", "FS94-D"] and kinds(ix8) == {"cycle": 1}
+    print(f"self-test: depth with a cycle inside a chain, condensed (down {dn}, up {up}, chain {ch}): {c_ok}")
+    ok = ok and c_ok
+    # --- a grade edge
+    g9 = _new("FS94-A") + _new("FS94-B", grade="derived from: FS94-A (twice)")
+    ix9 = run(*_planted({"FS94-derivation.md": "# p\n\n" + g9}, ("FS94-A", "FS94-B")))
+    g_ok = ("FS94-A", "FS94-B", "grade") in ix9["edges"] and ix9["records"]["FS94-B"]["grade_ids"] == ["FS94-A"] and ix9["records"]["FS94-A"]["depth_down"] == 1
+    print(f"self-test: a `derived from:` grade makes a grade edge: {g_ok}")
+    ok = ok and g_ok
+    # --- an *Also:* clause, and a body that opens with one
+    also = ("**FS94-T1 — The planted header statement. [hand; X]** *Also:* FS94-PZ (a planted extra claim) [hand]. *Proof:* p. *Proof verdict:* closes. "
+            "*Rests on it:* n. *Prior art:* a. *Kernel:* k.\n\n")
+    ix10 = run(*_planted({"FS94-derivation.md": "# p\n\n" + also}, ("FS94-T1",)))
+    r10 = ix10["records"]["FS94-T1"]
+    a_ok = r10["statement"] == "" and r10["title"] == "The planted header statement" and len(r10["also"]) == 1 and "FS94-PZ" in r10["also"][0]["clause"] and r10["also"][0]["line"] == 3
+    print(f"self-test: a body opening with *Also:* leaves statement empty (title kept) and lists the clause with its line: {a_ok}")
+    ok = ok and a_ok
+    # --- a file with no entry: one id found elsewhere, one not
+    ne_text = "# job\n\n## Theorems this phase proved\n\n| id | statement |\n|---|---|\n| J1-X | a planted theorem |\n| J1-Y | another |\n"
+    f11, l11 = _planted({"FS93-J1-derivation.md": ne_text})
+    f11["FS99-derivation.md"] = f11["FS99-derivation.md"].replace("rests on it", "rests on it").replace("that 0 is the additive identity", "that 0 is the additive identity (= J1-X)", 1)
+    ix11 = run(f11, l11)
+    ne11 = no_entry_files(f11, ix11)
+    got = {d["raw"]: bool(d["matched"]) for x in ne11 for d in x["defs"]}
+    n_ok = len(ne11) == 1 and got == {"J1-X": True, "J1-Y": False}
+    print(f"self-test: a file with no entry lists its ids; the one named in an entry is found, the other is the finding ({got}): {n_ok}")
+    ok = ok and n_ok
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 

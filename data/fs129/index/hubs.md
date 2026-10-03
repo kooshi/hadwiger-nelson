@@ -1,4 +1,4 @@
-<!-- results by count of dependents, top 100 (the rest are in theorems.jsonl) | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+<!-- results by count of dependents, top 100 (the rest are in theorems.jsonl) | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
 
 # Hubs
 
@@ -42,14 +42,14 @@
 | 36 | FS89-S0B-C1 | 1 | 20 | plans/FS89-derivation.md:141 | A |
 | 37 | FS121-V2-SECTOR | 5 | 19 | plans/FS121-derivation.md:450 | R |
 | 38 | FS116-RING-TWIST-C | 4 | 19 | plans/FS116-derivation.md:129 | R |
-| 39 | FS114-L60-LE | 3 | 19 | plans/FS114-derivation.md:922 | R |
-| 40 | FS112-DISC1 | 2 | 19 | plans/FS112-derivation.md:124 | R |
-| 41 | FS112-N2-FLANK-Q | 2 | 19 | plans/FS112-derivation.md:106 | R |
-| 42 | FS116-N1-QFREE4 | 2 | 19 | plans/FS116-derivation.md:490 | R |
-| 43 | FS89-S0B-T1 | 2 | 19 | plans/FS89-derivation.md:109 | A |
-| 44 | FS112-BOWTIE | 1 | 19 | plans/FS112-derivation.md:355 | R |
-| 45 | FS112-ISO | 1 | 19 | plans/FS112-derivation.md:80 | R |
-| 46 | FS111-C-FILL | 2 | 18 | plans/FS111-derivation.md:252 | R |
+| 39 | FS111-C-FILL | 3 | 19 | plans/FS111-derivation.md:252 | R |
+| 40 | FS114-L60-LE | 3 | 19 | plans/FS114-derivation.md:922 | R |
+| 41 | FS112-DISC1 | 2 | 19 | plans/FS112-derivation.md:124 | R |
+| 42 | FS112-N2-FLANK-Q | 2 | 19 | plans/FS112-derivation.md:106 | R |
+| 43 | FS116-N1-QFREE4 | 2 | 19 | plans/FS116-derivation.md:490 | R |
+| 44 | FS89-S0B-T1 | 2 | 19 | plans/FS89-derivation.md:109 | A |
+| 45 | FS112-BOWTIE | 1 | 19 | plans/FS112-derivation.md:355 | R |
+| 46 | FS112-ISO | 1 | 19 | plans/FS112-derivation.md:80 | R |
 | 47 | FS112-N2-BENDS | 2 | 18 | plans/FS112-derivation.md:85 | R |
 | 48 | FS112-N3-FAIL | 2 | 18 | plans/FS112-derivation.md:146 | R |
 | 49 | FS114-BV-HEX | 2 | 18 | plans/FS114-derivation.md:960 | R |
