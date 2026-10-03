@@ -11,6 +11,36 @@ Edits already filed by the evening's audit are not repeated here: re-walking §G
 
 **Earlier: deferred to 2026-09-29** (Kooshi, 2026-09-29 04:52 UTC): "defer these until tomorrow, and watch for instances or additions throughout this session. […] [W]e've only exercised the closing of Workflow 3.0. This session is the full thing (except formalization)."
 
+## Kooshi's ruling for the refinement (2026-10-03 20:08 UTC, verbatim)
+
+*It governs every edit below: an edit it makes moot is dropped at the filing. Keryx's reading of each edit under it is in the session's reply of the
+same time; the decisions it leaves open are listed there.*
+
+> I rescind my earlier ruling that we can't assume outside proofs when writing in Lean.
+> We need to streamline our workflow […], and this is how: eliminate the verifier and the re-reader. Instead, a lean implementation is required to close a milestone.
+> Expensive third party proofs may be assumed, and well documented, for the sake of the milestone.
+> I know the blind derivation and reread have produced useful results, but it's a partial duplication of effort, almost never refutes a proof, […]. […]
+> De Bruijn is just as capable of finding optimizations and generalizations of the proof - and we should ask for that explicitly in its workflow - but we will miss out on possible second paths to the same statement, though I think those were rare anyway...
+> Actually, we found at least one useful second path just last session, so here's one option: We could have the deBruijn planner use the blind input that the verifier would have used in the previous workflow.
+> The pipeline still stands. We may also assume the result of our own hand proof for the sake of beginning the next which depends on it, though if de Bruijn finds a critical issue or generalization, it should immediately be relayed to the agent working on the frontier.
+> Also the de Bruijn agent should be broken into subplanning and implementation agents, with the implementation agent moved to sonnet.
+>
+> So, a single milestone's workflow would look like:
+>  - Poros - Opus - Ask
+>  - Ephodos - Opus - Opening
+>  - Ephodos - Opus - Derive
+>  - de Bruijn - Opus - Plan the kernel module (blind?)
+>  - de Bruijn - Sonnet - Implement the kernel module, with both the plan and the original derivation available.
+>  - Conditional and Closing jobs remain the same. I'd like to streamline the closing, but everything there has its place for now.
+>
+> We can keep the verifier agent definition around in case we need it, but we won't use it as part of the standard workflow.
+>
+> We will of course need to handle the backlog of lean work before we can continue forward with this. We'll handle that in a dedicated session after the cross audit.
+>
+> Ok, now in regards to the edits to the workflow: I'd like to generally relax restrictions and rules, and allow for a bit more flow. The bureaucracy may be costing more tokens than occasional slips do. As long as our final proofs are valid, our path to them is allowed to be a little messy. That said, I do like the general structure that we've built for the repo, so I don't want to get too loose, I just want this in consideration as we look at the suggested edits.
+>
+> Now, with all my requests above in mind, what edits still matter? Where can we streamline our workflow, and maybe thin out the context a bit? Also any context which is loaded every time an agent runs must only reflect the current state of affairs, and cut narration and old instances and dated edit history.
+
 ## A. Ephodos's close job (`.claude/agents/ephodos.md` § The close job)
 
 These shrink the close and remove the questions the filing agent had to ask (twelve, at the last close).
