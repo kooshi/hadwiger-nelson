@@ -41,6 +41,31 @@ same time; the decisions it leaves open are listed there.*
 >
 > Now, with all my requests above in mind, what edits still matter? Where can we streamline our workflow, and maybe thin out the context a bit? Also any context which is loaded every time an agent runs must only reflect the current state of affairs, and cut narration and old instances and dated edit history.
 
+## Kooshi's decisions: Workflow 3.1 (2026-10-03 20:44 UTC, verbatim)
+
+> D1: we'll measure this when we go to publish - if it's just a week or so of agentic work to land everything on just the 3 axioms, then I'd prefer that. But for milestones, we can trust the literature.
+> D2: Yes, the Asker re-ranks, deciding not only the question to ask, but which milestone to ask it as
+> D3: agree
+> D4: Let's name the states - Miletones can be {Not Started, Opened, Derived, Closed} (or similar, the goal is to eliminate "two closes", and name states based on their role.)
+> D5: the ban - it seems that only 5% of findings truly needed search, and the ban saved us from untold hours of stalling on compute time. I think once per day, outside of the milestone loop, one (new) specialized agent should be responsible for curating search tasks which are likely to return a valuable result within a reasonable amount of time, and it is responsible for utilizing all cores effectively, and limiting memory usage through the tool. de Bruijn and Ephodos continue without search.
+> D6: agree
+>
+> On outside theorems - anything which takes less than one hour of agent effort (possibly a week of human effort) to formalize should be folded into the repo rather than imported as an axiom. If you're unsure, lean toward formalizing. A separate de Bruijn planner and implementer can be used for it.
+> For anything which is imported, I agree with your rigor rule. The tradeoff is that the rigor itself will require a moderate effort, so if we can avoid it by formalizing, all the better.
+>
+> I agree with your 14... (actually you listed 13) kept edits, the 1 replacement, and the drops.
+> aaand I agree with the rest as well. You're go for the refactor.
+>
+> We can call this Workflow 3.1.
+
+**The decisions they settle** (Keryx's proposals of the same session, each accepted): D1 — milestones may assume the literature; publication measures
+the cost of the three axioms first. D2 — Poros re-ranks and chooses the milestone. D3 — the Lean planner is blind first (the claim list only), then
+reads the derivation. D4 — milestone states Not started, Opened, Derived, Closed; Closed means the Lean module passed its gate. D5 — a new search
+agent, once a day, outside the milestone loop; no other lane searches. D6 — no one-line `LEDGER.md` § B entries from Workflow 3.1 on; the
+derivation files stay. **Edits kept**: E4, E7, E8, E10, E12, E13, E14, E20, E25, E17 (its definitions half), U3, U5, U6, U9, F. **Replaced**: E16
+(the hand-back carries the short report; no separate message). **Dropped**: E1, E2, E3, E5, E6, E9, E11, E15, E18, E19, E21, E22, E23, E24, E26,
+U1, U2, U4, U7, U8. U3, U5 and U6 are fixes to agent-forge's brief gate, outside this repository.
+
 ## A. Ephodos's close job (`.claude/agents/ephodos.md` § The close job)
 
 These shrink the close and remove the questions the filing agent had to ask (twelve, at the last close).
