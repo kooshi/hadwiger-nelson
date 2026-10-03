@@ -6,7 +6,7 @@
 ## 1. Read first
 
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow`.
-2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–104, the announcement rule at its top, the W-table of
+2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–114, the announcement rule at its top, the W-table of
    workflow frictions, the O-table of lane items outside the milestone) and `plans/FS121-close-inventory.md` (items 1–82). Every ruling is a row.
 3. **Kooshi's instructions in force**, verbatim in the inventories:
    - FS-121 runs beside FS-116; the formalization lane stays idle (FS-116 item 4).
@@ -22,7 +22,7 @@
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
 | FS116-V5 | ephodos-verifier on eight statements, two groups: FS116-Y3-SIX, -TIPS (§ 14), -NBTIP, -TIGHTLENS, -STARFORCE (§ 12); then FS116-N3-SEMI, -PAIR, -CROSS (§ 13). A fresh mind takes the second group if it hands back after the first | `data/fs116/briefs/FS116-V5-verify.md` | `plans/FS116-V5-verification.md` | yes |
-| FS116-V4 | ephodos-verifier, narrowed by amendment 1 to FS116-S1-KAPPA, -RUNG, -QF (the list's § 12, first three) | `data/fs116/briefs/FS116-V4-verify.md` | `plans/FS116-V4-verification.md` | yes |
+| FS116-Y4 | Ephodos: construction side on the HEX3-star vertex beyond radius 2 (item 114); proposes its statements first, for a dated § 15 at its report | `data/fs116/briefs/FS116-Y4-hex3.md` | `plans/FS116-Y4-construction.md` | no |
 | FS121-Z1 | Ephodos: FS-121's close job (numbers fixed: rows ‹R121-a›…, G88–G90, stubs FS-126–FS-128; FS-121 item 82) | `data/fs121/briefs/FS121-Z1-close.md` | `plans/FS121-Z1-close.md` | no |
 
 ## 3. The queue, in order (launch as slots free; at most three running)
@@ -30,8 +30,7 @@
 1. *Done 10:25*: FS116-N3 reported (FS-116 items 92–99); its three statements are frozen as `data/fs116/claims.md` § 13 with its notation paragraph and three notes (item 94); STAR2 and CONE stay one mind (item 95).
 2. *Done*: FS121-V5 reported (FS-121 items 72–81; the announcement rule met for D4-FACE, for D2-SYM with its two caveats, and for D4-GRID with its caveat, item 73); FS121-Z1 launched (item 82). FS-116's close numbers are FS-116 item 105.
 3. *Done 10:37*: FS116-CL1 reported (item 101); the setting frozen as `data/fs116/claims.md` § 14 (item 102); FS116-V5 launched on §§ 12–14's eight (item 104). FS116-V4's second reading question answered from the author's record (item 103).
-4. **Optional, Kooshi's estimate allowed one or two**: an FS-116 exclusion round — the HEX3-star vertex beyond radius 2 (item 88; excluding it
-   removes the Γ-free type from C114-LOCAL-F's case list), or SAT-STRIP's open class G1 (rings with a (Q) arc; item 83).
+4. **Optional rounds**: FS116-V4 reported (items 106–113: KAPPA and RUNG held with a caveat; QF not held, its brief having leaked its verdict — a clean blind second mind on QF is owed, item 108). FS116-Y4 launched as the first optional round (item 114). Left as options: QF's blind second mind; SAT-STRIP's class G1 (item 83); SEMI-PAR3 by formula (item 96).
 5. **FS-116's close job** (it has many entries: consider the derivation file and the drafts as two jobs, proposed edit E8).
 6. **Poros's boundary re-read and re-rank for both closes** (one job, as R1 did for two closes on 2026-09-28).
 7. **The front-page filing for both closes** (the Clerk as Keryx's pen, verbatim, on its own branch; `.claude/output-styles/keryx.md` step 7),
