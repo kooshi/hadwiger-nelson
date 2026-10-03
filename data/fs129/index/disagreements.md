@@ -1,4 +1,4 @@
-<!-- pairs the two directions of the record disagree on | command: python3 tools/fs129_index.py | written at commit 8da8dc9352 (inputs clean) -->
+<!-- pairs the two directions of the record disagree on | command: python3 tools/fs129_index.py | written at commit 60a7fc112c (inputs clean) -->
 
 # Disagreements between `uses only:` and "Rests on it"
 

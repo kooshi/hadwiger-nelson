@@ -55,7 +55,8 @@ PREFIXED = re.compile(r"^(?:FS|M)\d+[A-Z]?\d*[A-Za-z0-9]*-")
 MILESTONE_PTR = re.compile(r"^(?:FS|M)-?\d+[A-Z]?\d*$")
 HYPHEN_UPPER = re.compile(r"^[A-Z][A-Za-z0-9_]*-")
 BARE_SHAPED = re.compile(r"^[A-Z]{1,3}\d+[a-z]?$")
-GROK_HEAD = re.compile(r"^\* \*\*G(\d+) — (.*?)\*\*\s*$")
+GROK_HEAD = re.compile(r"^\* \*\*G(\d+) — ")  # the header's opening only: the bold title may wrap onto the next line, and text may follow its close
+GROK_LINE = re.compile(r"^\* \*\*G\d+ — ")  # the independent count the parse is held to
 GROK_REF = re.compile(r"\bG(\d{1,3})\b")
 ROW_REF = re.compile(r"\brows?\s+(\d{1,3}(?:\s*[–,-]\s*\d{1,3})*)", re.I)
 DEBRUIJN = re.compile(r"de ?bruijn", re.I)
@@ -355,20 +356,26 @@ def parse_ledger(text: str) -> tuple[dict[int, tuple[int, str]], dict[str, tuple
 
 
 def parse_grokkings(text: str) -> dict[int, dict]:
+    """Every `* **G<n> — ` entry: the bold title runs from the dash to the first closing `**`, which may sit on a later line (23 entries wrap
+    their bold title); the entry's text is everything after it up to the next entry or heading. `closed` is False when no `**` closes it."""
     out: dict[int, dict] = {}
     cur = None
-    lines = text.splitlines()
-    for n, line in enumerate(lines, 1):
+    for n, line in enumerate(text.splitlines(), 1):
         m = GROK_HEAD.match(line)
         if m:
             cur = int(m.group(1))
-            out[cur] = {"title": m.group(2), "line": n, "text": []}
+            out[cur] = {"line": n, "raw": [line[m.end():]]}
         elif cur is not None and MD_HEAD.match(line):
             cur = None
         elif cur is not None:
-            out[cur]["text"].append(line)
+            out[cur]["raw"].append(line)
     for g in out.values():
-        g["text"] = "\n".join(g["text"])
+        raw = "\n".join(g.pop("raw"))
+        k = raw.find("**")
+        g["closed"] = k != -1
+        g["title"] = ws(raw[:k]) if k != -1 else ws(raw.split("\n")[0])
+        g["text"] = raw[k + 2:] if k != -1 else raw
+        g["retired"] = bool(re.match(r"\s*(?:\[[^\]]*\]\s*)?Retired\b", g["text"]))
     return out
 
 
@@ -396,6 +403,22 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
     ids = set(recs_by_id)
     rows, brows = parse_ledger(ledger_text)
     groks = parse_grokkings(grok_text)
+    # ---- completeness: each parse is held to an independent count of the lines it should have read (fails the run, loudly)
+    incomplete: list[str] = []
+    n_grok = sum(1 for ln in grok_text.splitlines() if GROK_LINE.match(ln))
+    if len(groks) != n_grok:
+        incomplete.append(f"grokkings parsed {len(groks)} but SKILL.md has {n_grok} `* **G<n> — ` lines")
+    for gn, g in sorted(groks.items()):
+        if not g["closed"]:
+            incomplete.append(f"G{gn} (SKILL.md:{g['line']}) has no closing `**` after its title")
+    sec_a = ledger_text.split("## A.", 1)[1].split("\n## B.", 1)[0] if "## A." in ledger_text else ""
+    n_rows = sum(1 for ln in sec_a.splitlines() if ln.startswith("|") and ln.split("|")[1].strip() not in ("#", "") and not set(ln.split("|")[1].strip()) <= {"-", ":"})
+    if len(rows) != n_rows:
+        incomplete.append(f"ledger rows parsed {len(rows)} but § A has {n_rows} table rows")
+    sec_b = ledger_text.split("\n## B.", 1)[1] if "\n## B." in ledger_text else ""
+    n_b = sum(1 for ln in sec_b.splitlines() if ln.startswith("|") and ln.split("|")[1].strip() not in ("id", "") and not set(ln.split("|")[1].strip()) <= {"-", ":"})
+    if len(recs_by_id) != n_b:
+        incomplete.append(f"theorems indexed {len(recs_by_id)} but § B has {n_b} table rows")
     suffix_index: dict[str, list[str]] = defaultdict(list)
     for i in sorted(ids):
         parts = i.split("-")
@@ -506,7 +529,7 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
         r["n_upstream_direct"] = len(radj.get(i, ()))
     return {"records": recs_by_id, "edges": edges, "disagreements": disagreements, "unresolved": unresolved_all, "defects": defects,
             "cycles": cycles, "comps": comps, "depth": depth, "adj": adj, "radj": radj, "groks": groks, "ledger_rows": rows, "census_lines": census_lines,
-            "ids": ids}
+            "ids": ids, "incomplete": incomplete}
 
 
 # ------------------------------------------------------------------ lean order
@@ -818,10 +841,28 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
                 maj = "CHECK: tie (A=%d, R=%d)" % (era["A"], era["R"])
             else:
                 maj = "A" if era["A"] > era["R"] else "R"
-            f.write(f"## G{n} — {G[n]['title']}\n\n- SKILL.md line {G[n]['line']}; entries mentioning it: {len(ids_n)} (A={era['A']}, R={era['R']}); era by majority: {maj}\n")
+            f.write(f"## G{n} — {G[n]['title']}{' [retired pointer]' if G[n]['retired'] else ''}\n\n- SKILL.md line {G[n]['line']}; entries mentioning it: {len(ids_n)} (A={era['A']}, R={era['R']}); era by majority: {maj}\n")
             ms = sorted({recs[i]["prefix"] for i in ids_n})
             f.write(f"- milestones (file prefixes): {', '.join(ms) if ms else '—'}\n")
             f.write(f"- entries: {', '.join(ids_n) if ids_n else '—'}\n\n")
+    gera = {}
+    for n in G:
+        ids_n = uses.get(n, [])
+        a_ = sum(1 for i in ids_n if recs[i]["era"] == "A")
+        r_ = sum(1 for i in ids_n if recs[i]["era"] == "R")
+        gera[n] = ("none" if not ids_n else "tie" if a_ == r_ else "A" if a_ > r_ else "R", a_, r_)
+    stats["grok_count"] = len(G)
+    stats["grok_retired"] = sorted(n for n in G if G[n]["retired"])
+    stats["grok_era_split"] = {k: sum(1 for v in gera.values() if v[0] == k) for k in ("A", "R", "tie", "none")}
+    stats["grok_top_A"] = [(f"G{n}", gera[n][1]) for n in sorted(G, key=lambda n: (-gera[n][1], n))[:10]]
+    stats["grok_top_R"] = [(f"G{n}", gera[n][2]) for n in sorted(G, key=lambda n: (-gera[n][2], n))[:10]]
+    with open(out / "grokking-uses.md", "a", encoding="utf-8") as f:
+        f.write("## Summary\n\n")
+        f.write(f"Grokkings read: {len(G)} (SKILL.md has {sum(1 for ln in open(GROK_PATH, encoding='utf-8') if GROK_LINE.match(ln)) if GROK_PATH.exists() else '?'} `* **G<n> — ` lines); retired pointers (text begins \"Retired\"): {len(stats['grok_retired'])}.\n\n")
+        f.write(f"Era by majority: A {stats['grok_era_split']['A']}, R {stats['grok_era_split']['R']}, tied {stats['grok_era_split']['tie']}, mentioned by no entry {stats['grok_era_split']['none']}.\n\n")
+        for era, key in (("A", "grok_top_A"), ("R", "grok_top_R")):
+            f.write(f"Ten most-mentioned grokkings by era-{era} entries: " + ", ".join(f"{g} ({c})" for g, c in stats[key]) + "\n\n")
+        f.write("Retired: " + (", ".join(f"G{n}" for n in stats["grok_retired"]) or "none") + "\n")
     stats["grok_unmentioned"] = sum(1 for n in G if not uses.get(n))
     stats["grok_ties"] = sum(1 for n in G if uses.get(n) and sum(1 for i in uses[n] if recs[i]['era'] == 'A') == sum(1 for i in uses[n] if recs[i]['era'] == 'R'))
     # lean-order.md
@@ -1025,7 +1066,8 @@ _OLD = ("**FS97-T1 — The planted older theorem. [hand; the planter]**\nFor eve
 _LEDGER = ("# L\n\n## A. The ledger\n\n| # | Result | Where | When |\n|---|---|---|---|\n"
            "| 1 | planted row citing FS99-N0 and G2 | x | FS-99 |\n| 2 | a row citing nothing | x | FS-99 |\n\n"
            "## B. Theorems\n\n| id | milestone | the theorem | grade | proof | kernel |\n|---|---|---|---|---|---|\n")
-_GROK = "# G\n\n* **G1 — A planted grokking. [reading]**\n  body naming FS99-N1 here.\n* **G2 — Another. [hand]**\n  body.\n"
+_GROK = ("# G\n\n* **G1 — A planted grokking. [reading]** text after the title on the same line,\n  body naming FS99-N1 here.\n"
+         "* **G2 — Another. [hand]** Retired to `x`; carried elsewhere.\n  body.\n")
 
 
 def _planted(extra: dict[str, str] | None = None, ids: tuple[str, ...] = ()) -> tuple[dict[str, str], str]:
@@ -1180,6 +1222,33 @@ def self_test() -> int:
     n_ok = len(ne11) == 1 and got == {"J1-X": True, "J1-Y": False}
     print(f"self-test: a file with no entry lists its ids; the one named in an entry is found, the other is the finding ({got}): {n_ok}")
     ok = ok and n_ok
+    # --- completeness: each parse is held to an independent count
+    g_ok = sorted(ix["groks"]) == [1, 2] and ix["groks"][1]["title"] == "A planted grokking. [reading]" and ix["groks"][2]["retired"] and not ix["groks"][1]["retired"] \
+        and "text after the title" in ix["groks"][1]["text"] and ix["incomplete"] == [] and r["FS99-N1"]["grokkings"] == [1]
+    print(f"self-test: a grokking whose title is followed by text is read (title, text, retired mark), and the clean corpus passes every completeness count: {g_ok}")
+    ok = ok and g_ok
+    def inc(ledger_edit=None, grok=None, drop_b=None):
+        f_, l_ = _planted()
+        if ledger_edit:
+            l_ = ledger_edit(l_)
+        if drop_b:
+            l_ = "\n".join(x for x in l_.splitlines() if not x.startswith(f"| {drop_b} |")) + "\n"
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            return build(f_, l_, grok if grok is not None else _GROK)["incomplete"]
+    c1 = inc(grok=_GROK + "* **G2 — A second entry with a number already taken, so the parse overwrites it** text\n")
+    c1b = inc(grok=_GROK + "* **G3 — A title with no closing bold anywhere after it\n")
+    c2 = inc(ledger_edit=lambda l_: l_.replace("| 2 | a row citing nothing", "| two | a row whose number is not a number"))
+    c3 = inc(drop_b="FS97-T2")
+    c4 = inc(ledger_edit=lambda l_: l_ + "| FS97-T9 | FS-97 | a row with no entry | hand | x | declined |\n")
+    wrap = parse_grokkings("* **G7 — A bold title that wraps\n  onto its next line. [kernel]** text after the close\n  more\n")
+    wrap_ok = wrap[7]["title"] == "A bold title that wraps onto its next line. [kernel]" and wrap[7]["closed"] and "text after the close" in wrap[7]["text"]
+    print(f"self-test: a bold title that wraps onto a second line is read to its closing **: {wrap_ok}")
+    ok = ok and wrap_ok
+    inc_ok = (len(c1) == 1 and "grokkings parsed" in c1[0] and len(c1b) == 1 and "no closing" in c1b[0] and len(c2) == 1 and "ledger rows parsed" in c2[0]
+              and len(c3) == 1 and "theorems indexed" in c3[0] and len(c4) == 1 and "theorems indexed" in c4[0])
+    print(f"self-test: a dropped grokking (a repeated number), an unclosed grokking title, a dropped ledger row, an entry without its § B row and a § B row without its entry each fire one completeness failure: {inc_ok}")
+    ok = ok and inc_ok
     # --- the model flag: each value, a later-phrase flag, and a model line continued over two lines
     mv = (_new("FS92-N", model="k = 3: a planted object") + _new("FS92-B", model="none held of the hypothesis at any k")
           + _new("FS92-S", model="the planted frame; no held object meets it") + _new("FS92-Z", model="none at six colours") + _new("FS92-F", model=None)
@@ -1220,7 +1289,9 @@ def main() -> int:
     hard = [d for d in ix["defects"] if d["kind"] in ("duplicate-id", "census-fail")]
     for d in hard:
         print("FAIL:", d["text"])
-    bad = bool(mismatch or hard)
+    for x in ix["incomplete"]:
+        print("FAIL: incomplete parse —", x)
+    bad = bool(mismatch or hard or ix["incomplete"])
     print("RESULT:", "FAIL" if bad else "PASS (index written; defects and CHECK lines are in checks.md)")
     return 1 if bad else 0
 

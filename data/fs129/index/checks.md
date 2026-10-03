@@ -1,4 +1,4 @@
-<!-- every CHECK the script raised: fields it could not read, eras it could not place, defects | command: python3 tools/fs129_index.py | written at commit 8da8dc9352 (inputs clean) -->
+<!-- every CHECK the script raised: fields it could not read, eras it could not place, defects | command: python3 tools/fs129_index.py | written at commit 60a7fc112c (inputs clean) -->
 
 # CHECK lines
 

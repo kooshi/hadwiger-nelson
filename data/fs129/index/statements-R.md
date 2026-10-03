@@ -1,4 +1,4 @@
-<!-- one line per theorem of era R: id, address, statement cut at 400 characters | command: python3 tools/fs129_index.py | written at commit 8da8dc9352 (inputs clean) -->
+<!-- one line per theorem of era R: id, address, statement cut at 400 characters | command: python3 tools/fs129_index.py | written at commit 60a7fc112c (inputs clean) -->
 
 # Statements, era R (474)
 

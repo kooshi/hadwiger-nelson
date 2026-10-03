@@ -1,4 +1,4 @@
-# edge from a result to each result that uses it; source = uses (the user's `uses only:`), rests (the used one's Rests-on-it), grade (a `derived from:` grade names it), both = uses and rests, or a + join when grade is among them; consumers skip lines starting # | command: python3 tools/fs129_index.py | written at commit 8da8dc9352 (inputs clean)
+# edge from a result to each result that uses it; source = uses (the user's `uses only:`), rests (the used one's Rests-on-it), grade (a `derived from:` grade names it), both = uses and rests, or a + join when grade is among them; consumers skip lines starting # | command: python3 tools/fs129_index.py | written at commit 60a7fc112c (inputs clean)
 from,to,source
 ASTRA-2026-09-14-T1,ASTRA-2026-09-14-T2,rests
 ASTRA-2026-09-14-T2,ASTRA-2026-09-14-T3,rests
