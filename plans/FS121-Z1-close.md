@@ -95,3 +95,163 @@ So FACE, GRID, HOLE, LINE and TINY16 are **new at the grain of the object class*
 Written to `data/fs121/fs121-z1/ticks.md` with their planned destinations; stage 6 confirms each address.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the reconciliation, and the headline
+
+*Read from each record's "Theorems this phase proved" first, then its verdict entries, then each verifier's blocks and divergence tables.
+**Blindness, from the fence logs:** DB1 derived before opening O1's § 3.2–3.4 (verdicts 43bb6385; its one touch was file names by `ls`); V2 before
+opening DB1 § 2.3 and D1 §§ 1.3, 2.1–2.2 (verdicts f537b8c9; after them a heading grep printed every heading of both files); V3 before opening V2 § 2.3
+and D3 §§ 2.1–2.2 (verdicts dea603eb; it was relayed two definition lines of V2's record before its verdicts); V4 before opening C1 §§ 2.1–2.5
+(verdicts 0dde4982); V5 before opening D2 § 2 and D4 §§ 2.1–2.2 (verdicts 4ed402c6 and ab25bbdc; relayed four header definitions of D2's record before
+them). The first derivers (O1, D1, D2, D3, D4, C1) had no verifier's work before their own commits. Every mind is Opus 5.5: one prior throughout.
+"Held" is the announcement rule's (inventory top): frozen statement, two minds, the second blind, its verdict committed first.*
+
+### 2.1 Every claim and lemma, with its verdict and minds
+
+**Round 1 — the opening's four (FS121-O1; FS121-DB1 blind) and the card.**
+
+| frozen name | derivation-file id | verdict | minds | address |
+|---|---|---|---|---|
+| C121-ENDS | FS121-O1-ENDS | TRUE ("at least three colours" counts sectors, the author's reading); **held** | 2 (O1; DB1 blind); its (Q) no-repeat step on FS121-DB1-L3, now 2 (DB1; V2) | plan § 3.2; DB1 § 2.6 |
+| C121-OUT | FS121-O1-OUT | TRUE; tangent type needed (FALSE for split arcs, R7, exact); REG-J′ idle in the first clause; **held** | 2 | plan § 3.3; DB1 § 2.6–2.7 |
+| C121-PER | FS121-O1-PER | TRUE; the density condition idle; **held** | 2 (the periodic step by two arguments) | plan § 3.3; DB1 § 2.6 |
+| C121-LRA-LINE | FS121-O1-LRA-LINE | TRUE under reading (a) (the pieces on one curve, ν its normal), **held**; GAP under (b) | 2 | plan § 3.3; DB1 § 2.6 |
+| (the card) | FS121-O1-CARD | GAP at the (R2) branch | 1 (O1); DB1 § 3.2 consistent, sighted | plan § 3.4 |
+| (a remark) | FS121-O1-ABOVE7 | TRUE: "every tight k-colouring lies below an honest saturated one" is false at seven | 1 | plan § 4.1 |
+| — | FS121-DB1-L1, -L4, -L5, -L6, -L7 | TRUE (L4: a kind-both centre carries ≥ 4 distinct colours; L5: an (R2) centre ≥ 3; no density condition) | 1 each | DB1 §§ 2.2, 2.4, 2.5 |
+| DB1-L3 (list § 5) | FS121-DB1-L3 | TRUE: no colour has two positive-angle sectors at a point of Σ, cusps allowed; **held** | 2 (DB1; V2 blind, a different method) | DB1 § 2.3; V2 § 2.2 |
+
+**Round 1 — the (R2) end (FS121-D1), and round 2's blind check of two of its lemmas (FS121-V2).**
+
+| frozen name | id | verdict | minds | address |
+|---|---|---|---|---|
+| C121-R2-FOUR | FS121-R2-FOUR | GAP: excluding a cusp-free three-colour (R2) centre — at the transverse subdivision and the inner disc about `z`, `z′` (D1 § 3.4's sharpening) | 1 | D1 § 2.6, § 3.4 |
+| C121-CURVED | FS121-CURVED | GAP at the transverse subdivision of a curved pencil's sub-bands | 1 | D1 § 3.3 |
+| FS121-D1-VT (§ 5) | FS121-D1-VT | TRUE where `L` is `C¹` at `Y` (**held** by item 58's ruling: both routes pass the zero-angle step through FS121-V2-SECTOR, itself held); **MISSTATED** at a corner of `L`; filed in the narrower corrected wording | 2 on the narrower statement | D1 § 2.1; V2 §§ 2.5–2.6 |
+| — | FS121-V2-VT-W | TRUE: the wider corrected statement, reading (W) named | 1 (V2) | V2 § 2.10 |
+| FS121-D1-EROSION (§ 5) | FS121-D1-EROSION | TRUE; **held** (my reading of item 58: its one-mind qualifier was the same zero-angle step, now carried at two minds; item 58 does not name it — held for the coordinator); a thin truth for `θ ≤ 2π/3` (FS121-V2-EROSION-DIAM) | 2 (D1; V2 blind) | D1 § 2.2; V2 § 2.8 |
+| — | FS121-D1-XCORNER, -FIRSTORDER, -R2SMOOTH, -RUNG2, -R2CORNER, -PENCILWIN, -DOUBLE | TRUE (DOUBLE by formula) | 1 each | D1 §§ 1.3, 2.3–2.5, 3.1–3.2 |
+| — | FS121-V2-EROSION-DIAM | TRUE: `min(L₁, L₂) ≤ 1/(2 sin(θ/2))` in every a.e.-proper colouring | 1 (V2) | V2 § 2.9 |
+
+**Round 2 — honest saturation (FS121-D3) and ¬LRA (FS121-D2); round 3's blind checks (FS121-V3 on SECTOR, GRUNDY, FALLSAT).**
+
+| frozen name | id | verdict | minds | address |
+|---|---|---|---|---|
+| FS121-V2-SECTOR (§ 6) | FS121-V2-SECTOR | TRUE: a colour with a positive-angle sector at a point of Σ occupies no other region there; **held** | 2 (V2; V3 blind, a different route) | V2 § 2.3; V3 § 2.3 |
+| — | FS121-V3-CPI, FS121-V3-CUSP | TRUE (C-π: a positive-angle region has angle ≤ π; C-cusp: two zero-angle regions of one colour are collinear) | 1 each (C-π is also a step of V2 § 2.2's argument) | V3 § 2.3 |
+| C121-SAT6 | FS121-SAT6 | GAP at the upper colour (TOP₆); the idomatic reading killed as a reduction | 1 | D3 § 3.5 |
+| FS121-D3-GRUNDY (§ 6) | FS121-D3-GRUNDY | TRUE ("never raising" a.e. in D3, every point with exact representatives in V3); **held**; maximal classes need only dependent choice (V3) | 2 (D3; V3 blind) | D3 § 2.2; V3 § 2.2 |
+| FS121-D3-FALLSAT (§ 6) | FS121-D3-FALLSAT | TRUE, and it carries the fall property; **held** | 2 (D3; V3 blind, the same small-ball argument) | D3 § 2.1; V3 § 2.1 |
+| — | FS121-D3-SWAP1D, FS121-D3-EQ | TRUE (SWAP1D exact, four plants fire) | 1 each | D3 §§ 2.3, 3.1 |
+| C121-NOLRA | FS121-NOLRA | GAP at thin pencils in colourings without a cocompact symmetry | 1 | D2 § 3.2 |
+| FS121-D2-SYM (§ 8) | FS121-D2-SYM | TRUE under both readings of ¬LRA; **held** where the accumulating pieces are circular (V5's reading (Lfin)); the segment case (L∞) and the "in particular" (cocompact) clause rest on FS111-M2-INTRAD's per-radius finiteness (one mind) and, for (L∞), on V5's argument alone | 2 (D2; V5 blind, a different route) | D2 § 2.3; V5 §§ 3.2–3.4 |
+| — | FS121-D2-INCURVED, -EXT, -THIN, -PERFIN | TRUE (THIN argues circular pieces only) | 1 each | D2 §§ 1.3, 2.1–2.3 |
+
+**Round 3 — the cover route (FS121-C1; FS121-V4 blind on the § 7.2 lemmas).**
+
+| frozen name | id | verdict | minds | address |
+|---|---|---|---|---|
+| C121-C1-BOUND | FS121-C1-BOUND | TRUE, both halves; "locally finite" idle; **held** | 2 (C1; V4 blind, a different route) | C1 § 2.1; V4 |
+| C121-C1-GMAP | FS121-C1-GMAP | TRUE; (ii)'s "if" half vacuous; **held** | 2 (the same route: one mind on the method axis) | C1 § 2.2; V4 |
+| C121-C1-SAT | FS121-C1-SAT | TRUE, both side colours bound; **held**. Its "What it says" (NOPAR contains the honest route's NO) is C1's commentary, one mind, not verified by V4 | 2 (the same route) | C1 § 2.3; V4 |
+| C121-C1-COVMAP | FS121-C1-COVMAP | TRUE, exact over 5040 orders by two tools written apart; **held** | 2 | C1 § 2.4; V4 |
+| C121-C1-FLAT | FS121-C1-FLAT | TRUE (the frozen parenthetical holds); **held** | 2 (the same witness) | C1 § 2.5; V4 |
+| C121-NOPAR | FS121-NOPAR | GAP at two named steps | 1 | C1 § 2.6 |
+| C121-NOPAR-C5 | FS121-NOPAR-C5 | GAP at the vertex data and at FS110-N4-FIN's strictness | 1 | C1 § 2.6 |
+| — | FS121-V4-SWITCH (with V4-DIAM), FS121-V4-LF, FS121-V4-EDGE (with V4-MID), FS121-V4-HEXMID | TRUE | 1 each | V4 § Derivations |
+
+**Round 4 — the singular set (FS121-D4); FS121-V5 blind on D2-SYM, FACE, GRID.**
+
+| frozen name | id | verdict | minds | address |
+|---|---|---|---|---|
+| C121-REGJ | FS121-REGJ | GAP at LAT (point-like accumulation of same-colour pieces shrinking faster than the square root of their gaps) | 1 | D4 § 3.3 |
+| FS121-D4-FACE (§ 8) | FS121-D4-FACE | TRUE; its margin not sharp (V5-FACE-SHARP); **held** | 2 (D4; V5 blind, a different route) | D4 § 2.1; V5 § 2.1 |
+| FS121-D4-GRID (§ 8) | FS121-D4-GRID | TRUE (`Σ = B_x × B_y` exactly); its not-claimed parenthesis corrected (the uncountable case is FALSE for the breakpoint clause); **held with the caveat** of item 73 (the second mind was given FACE by name) | 2 | D4 § 2.2; V5 § 2.3 |
+| — | FS121-D4-HOLE, -LINE, -TINY16, -FALL | TRUE (LINE and TINY16 exact) | 1 each | D4 §§ 2.3–2.5, 3.2 |
+| — | FS121-V5-RAY, -SYM-UP, -SYM-CPT, -FACE-SHARP, -GRID-CANTOR, -LOC (with V5-OFF, V5-ARC), -PAIR (with V5-DIAM) | TRUE | 1 each | V5 §§ 2.1–2.4, 3.1, 3.5 |
+
+**Counts.** Held under the announcement rule: **18 statements** (ENDS, OUT, PER, LRA-LINE (a), DB1-L3, D1-VT (narrower), D1-EROSION (pending
+the coordinator), V2-SECTOR, D3-GRUNDY, D3-FALLSAT, D2-SYM (circular pieces), the five § 7.2 lemmas, D4-FACE, D4-GRID (with its caveat)). One mind:
+the rest. **No top claim landed**: every claim of §§ 2–4 and 7.1 beyond the four the opening proved is GAP at a named step.
+
+### 2.2 The divergences between each job and its verifier, and how each was settled
+
+| verifier | rows | truth | route | wording | settled |
+|---|---|---|---|---|---|
+| DB1 (on O1) | 12 | 0 | 8 | 4 | O1's W-NOREP citation out of scope (rows 1, 3, 9): DB1-L3 carries the step, `uses only:` corrected; the density conditions idle (row 2); LRA-LINE's ν by the author (row 11); PER's entry wording (row 12) |
+| V2 (on DB1, D1) | 12 | 0 | 11 | 1 | D1-VT's zero-angle step false under (Σ) (row 5), carried by SECTOR; VT's corner (row 6), both readings filed; EROSION's models test only the diameter bound (row 11) |
+| V3 (on V2, D3) | 15 | 0 | 14 | 1 | GRUNDY's "never raising" a.e. against pointwise (wording); V2's Lemma T per arc or per point (row 5): answered in § 2.4 |
+| V4 (on C1) | 19 | 0 | 12 | 7 | BOUND's model line (R7's down colour lies on an outer parallel; 432 is VM2-LAD-CTL's count); FLAT's dropped parenthetical; SAT's commentary not verified |
+| V5 (on D2, D4) | 14 | 0 | 10 | 4 | ¬LRA's segment reading (both worked); THIN circular only; FACE's model line names no inhabitant; GRID's parenthesis false, not GAP |
+
+**No divergence of truth in 72 rows; no third mind was needed.** Every second mind is the same model, so agreement on a hard step is weak evidence
+there; the routes differ in the places the tables name.
+
+### 2.3 Retractions, counted per mind; tool defects; slips
+
+- **Retractions:** O1, 1 (the plan's D4 row cited C121-ENDS, circular; corrected in its stage 5); D1, 1 (stage 2 said the corner's band interfaces were
+  unconstructed; DOUBLE constructs them, § 3.4). Every verifier: 0.
+- **Tool defects:** C1's `tools/fs121_c1_disc7.py`, first version on a wrong lattice (14 of 42 pairs passed), caught and fixed before any commit (a G21
+  instance); D1's erosion tool is a 60-digit numeric check at 60 angle pairs, not a symbolic identity (D1's note). None changes a verdict.
+- **Slips:** O1 and D4 built a tool before reading `RUNNING.md` § Make the gate fail (each read it straight after; tools conform); the coordinator's V4
+  brief said "three statements" for five (item 65); V4's guessed end time, corrected in its record.
+
+### 2.4 Findings settled here
+
+- **Item 36.** The plan's § 4.2 D3 row lists "C121-FALL", which is on no frozen list; D3 worked C121-SAT6 alone. Recorded here; the plan is a side record.
+- **Item 60, answered by reading V2 § 2.1** (a reading, one mind): V2's Lemma T classifies per arc ("if `γ` is of tangent type …; if `γ` is a unit arc
+  of kind both …"). The type is constant along a connected interface arc off Σ: split points are open by FS111-M-C11 (iii), and closed because a limit
+  of split centres is a centre carrying both colours. So V2 § 2.3's case split needs no input from M2-INTRAD's finiteness step; V3's route does not
+  need it either. SECTOR's count is unchanged.
+- **The reading of item 58 for EROSION.** V2 counted EROSION at two minds with one qualifier, the zero-angle step inside VT under reading (Σ), which
+  only SECTOR carried. SECTOR is now held, and EROSION applies VT only on the straight branch through the crossing, where `L` is `C¹`. I file EROSION
+  as held; the ruling did not name it, so it is held for the coordinator.
+- **D1's other cusp-free lemmas** (FIRSTORDER, R2SMOOTH, RUNG2, R2CORNER, PENCILWIN) cite FS111-W-NOREP for "one sector per colour" in the cusp-free
+  class; under reading (Σ) a colour may also hold a zero-angle region there, and the step is then carried by FS121-V2-SECTOR (held). A reading of mine
+  at the close; their verdicts and counts are unchanged (one mind each).
+
+### 2.5 What the milestone's framing now looks like (a finding for Poros and Kooshi)
+
+- **Three of the six open claims are one question.** C121-R2-FOUR, C121-CURVED and C121-NOLRA all stop at the existence of a **curved tangent-type
+  interface** in an aperiodic colouring. An (R2) arc is a tangent-type unit arc, and its outward parallels are tangent-type arcs of radii 2, 3, …
+  (C121-OUT); LRA puts tangent-type arcs of finite radius ≥ 2 in the colouring (FS121-D2-INCURVED). So a NO to curved tangent interfaces (cusps
+  allowed) makes C121-R2-FOUR vacuous and gives C121-NOLRA (FS121-Z1-NOCURVED, this close's composition, one mind). And in every cocompactly symmetric
+  colouring there are none (FS121-V5-SYM-CPT, one mind; with FS121-D2-PERFIN and C121-PER for the doubly periodic case, a second, independent
+  one-mind route; both over M2-INTRAD's per-radius finiteness). That is stub FS-126.
+- **Honest saturation at six is not a rung below the answer.** Given a NO for every honest saturated colouring with at most six colours, C121-SAT6 *is*
+  the answer (FS121-D3-EQ, one mind); TOP₆ implies C121-SAT6 and is not shown to follow from it. On the honest route the colour-generic content is the
+  ladder (held), REG-J′ (C121-REGJ, GAP at LAT) and ¬LRA (GAP, FS-126). The cover route trades TOP₆ for a NO that contains FS-116's (C121-C1-SAT).
+- **The structural form's last clause** ("what does every end carry that bounds how many ends meet a bounded set") is answered at the ends (every end is
+  (Q) or (R2), held) and not at the count: D4 found the bound read through lateral extent, not a count per region (TINY16 makes per-region counts
+  idle), and D2 found ¬LRA is not a count of ends at all (O1 § 3.1 item 3, confirmed). The form named the right objects and the wrong invariant.
+
+### 2.6 The headline, in four parts
+
+1. **What FS-121 settled, at what grade.** *For honest saturated colourings with REG-J′, at every number of colours:* a curved interface's ladder of
+   unit parallels ends inward at a unit arc whose centre carries its outer colour — a (Q) arc, or an (R2) arc about a point of Σ of at least three
+   colours — and never ends outward; with finitely many radii (every doubly periodic colouring) every curved interface is a split (Q) arc; at a point
+   of Σ no colour repeats as a sector, and a colour with a sector occupies nothing else there; and no cocompactly symmetric colouring has large-radius
+   accumulation (all held, two minds, one prior). *For every a.e.-proper colouring:* honesty is free — every one becomes a measurable Grundy colouring
+   bound on its lower colour at every interface — and every measurable idomatic partition is honest saturated (held). *For grid colourings with
+   countable breakpoints:* REG-J′ holds (held, the second mind given the facing lemma). *On the cover route:* the stub's NO-PAR, read on the map a
+   maximal cover yields, is the wrong target (DISC7, exact); on Grundy partitions it is the right one, and it contains the honest route's NO; row 134's
+   N4 step does not transfer to smooth boundaries (all five lemmas held). **Nothing moved a value: χ(ℝ²) ∈ {5, 6, 7}.** Route M's top rung is still
+   the answer restated given its NO; route R is untouched.
+2. **The named steps it stops at** (each one mind): **C121-R2-FOUR** at the transverse subdivision and inner disc of a three-colour (R2) corner;
+   **C121-CURVED** at the transverse subdivision of a curved pencil; **C121-NOLRA** at thin pencils without cocompact symmetry; **C121-SAT6** at the
+   upper colour, TOP₆; **C121-REGJ** at LAT, point-like accumulation; **C121-NOPAR** at FS-116's saturated-class NO (NO-SAT, `data/fs116/claims.md`
+   § 4 — an FS-116 statement, graded at FS-116's close) and at **C121-NOPAR-C5**, the vertex data and N4-FIN's strictness. The first three are one
+   question (§ 2.5).
+3. **The cover route, and its parking.** Its rungs in Grundy form are G-FIN₆ and C121-NOPAR (C121-C1-GMAP, held); it removes TOP₆, but C121-NOPAR
+   contains the honest route's saturated segment-and-arc NO (C121-C1-SAT, held), so it cannot finish before FS-116 and needs a larger NO; its own new
+   part, NOPAR-C5, needs a new idea at N4 (flat horns meet its relations with equality, C121-C1-FLAT). **Parked behind FS-116** by the coordinator
+   (items 51, 63), on C1-SAT (two minds) and on C1's commentary that FS-116's NO-SAT is a sub-statement of NOPAR (one mind, outside V4's five).
+   *For Kooshi, to keep or overturn:* it un-parks when FS-116's NO-SAT lands (then NOPAR's unit-arc part asks only for one-sided binding beyond it) or
+   when someone has a jet argument at N4.
+4. **Confidence, and what would change it.** High that the eighteen held statements hold as stated: five blind verifiers, 72 divergence rows, none of
+   truth — but every mind is one model, so the weakest evidence is on steps both routes took from FS111-M2-INTRAD's parallel step. Medium on the
+   framing of § 2.5: it rests on FS121-D2-INCURVED and FS121-V5-SYM-CPT at one mind each. **The fact that would change it:** a curved tangent-type
+   interface in an honest saturated colouring at some `k ≥ 7`, given by formula with an exact check — it would inhabit C121-CURVED's class, kill the
+   hope that the honest class is segments and (Q) arcs, and send C121-NOLRA and C121-R2-FOUR back to separate questions.
+
+## Stage 2 — SAVED
