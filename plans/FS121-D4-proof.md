@@ -24,6 +24,9 @@ message). Nothing was lost but the record itself, which is written fresh from th
 - FS121-D4-LINE — the line analogue of C121-REGJ is false with two colours — [hand], with an exact check, one mind — § 2.4.
 - FS121-D4-TINY16 — saturated sixteen-colourings with regions of every small diameter — [tools] exact at ε = 1/10, [hand] for every ε, one
   mind — § 2.5.
+- FS121-D4-FALL — C121-REGJ restricts to measurable fall colourings, so a fall colouring with a non-locally-finite Σ (e.g. a Cantor pinch) refutes
+  it — [derived] from FS121-D3-FALLSAT, one mind — § 3.2.
+- C121-REGJ — GAP at LAT (lateral extent at an accumulation) — § 3.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -330,3 +333,82 @@ control: FS121-D4-TINY16-EXACT
   fault: python3 ../tools/fs121_d4_tiny16.py --plant mod3 2>&1 | tail -1
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C121-REGJ — GAP at lateral extent (LAT); the reduction to fall colourings; the verdict
+
+### 3.1 What the lemmas leave
+
+The claim fails only if some bounded set holds infinitely many points of Σ, or a point of Σ met by infinitely many interface arcs. Every shape of
+that failure examined here is an accumulation of pieces: with finitely many colours, infinitely many regions near a point include infinitely many of
+one colour `c`, pairwise "near" (FS111-M-HULL2). A Σ that is wild in measure with no regions about it (a class with empty interior) is not examined.
+Stage 2 decides three shapes of it:
+- **pieces with lateral extent facing across small gaps** — impossible (FS121-D4-FACE), which decides every grid colouring with countable
+  breakpoints (FS121-D4-GRID);
+- **islands in one sea** — impossible unless every shore is singular, and then Σ already holds a continuum (FS121-D4-HOLE);
+- **anything on the line** — possible with two colours (FS121-D4-LINE): the plane's unit circle, through its curvature, is what any proof uses.
+
+What none of them reaches is an accumulation in which, at every point where `c` lacks density 1, no flat side of a `c`-piece faces another `c`-piece
+whose lateral half-width exceeds `√(2g)` across its gap `g`. Pieces that shrink in every direction faster than the square root of their mutual gaps
+do this: `c`-pieces of diameter `r_n` at mutual gaps `g_n ≫ r_n²` accumulating at a point, the sea between them cut into several regions (HOLE
+forbids one). Regions that small are possible at a fixed `k` (FS121-D4-TINY16); their accumulation is neither built nor excluded. Two further
+residues sit beside it, each a not-claimed line of stage 2: a Cantor set of breakpoints where `c` has density 1 at the ends of its pieces (GRID),
+and a curved near side whose contact is the in-contact `x − e` (FACE).
+
+**The named step, LAT** (this record's): *at every accumulation point of Σ or of the interface arcs of an honest saturated colouring in D-NF, some colour has
+two pieces in FS121-D4-FACE's position — a half-box at a point `x` where the colour lacks density 1, and a box of lateral half-width `ρ` straight
+ahead across a gap `g` with `2g < ρ²`.* LAT with FS121-D4-FACE gives C121-REGJ: an accumulation of arcs would put such a pair at a point of `∂_e S_c`
+with no contact. LAT is false on the line (FS121-D4-LINE), true on grids (FS121-D4-GRID), and is where the dimension two has to be spent.
+
+*Three attempts on LAT, each stalled at the same place.* (1) **Pigeonhole on pieces, as on grids.** It needs the pieces to share one row, so that the
+box ahead has the row's height as lateral extent; off a grid, same-colour pieces near the accumulation may sit at lateral offsets of their own size,
+and FACE's lateral margin `√(2g)` is then not met. (2) **Shrink to the accumulation point and blow up.** Below the unit scale the constraints are a
+separability condition (§ 1.2, home 2), which accumulating families satisfy; the obstruction lives at distance 1, where the blow-up sees nothing.
+(3) **Count ends per region** (the plan's handle). FS111-M-EXTREME gives each region two points of Σ, but regions can be as small as wished
+(FS121-D4-TINY16), so a count per region bounds nothing per unit area. All three stop at the same relation: *lateral extent against gap* — the
+one relation no home holds. The provisional drop: LAT goes to a fresh mind with the sorted features of § 1.2 and stage 2's three shapes.
+
+### 3.2 The reduction to fall colourings (FS121-D4-FALL)
+
+FS121-D3-FALLSAT, verbatim: "every partition of the plane, up to a null set, into k measurable sets each maximal among measurable sets with null
+unit pairs (a measurable idomatic partition of the unit-distance graph, the classes of a measurable fall colouring) is an honest saturated a.e.-proper
+k-colouring". So C121-REGJ restricts to every measurable idomatic partition, and **a measurable fall colouring with a non-locally-finite singular set,
+at any number of colours, refutes C121-REGJ**, with saturation free. In particular a regular maximal partition containing an HC-type Cantor pinch
+(FS111-M3-HC, FS111-M4-LADDER: the pinch set `Z` lies in Σ) would refute it: C121-REGJ implies that FS-120's pinch never sits in a fall colouring.
+FS111-M4-HC excludes HC_K from every partition whose ladder is ordinary through three rungs; partitions whose ladder stops being ordinary sooner are
+FS-120's open question.
+
+derivation: FS121-D4-FALL
+  statement: if C121-REGJ holds, then every measurable idomatic partition of the plane into finitely many maximal unit-avoiding sets has a locally
+    finite singular set with finitely many interface arcs at each of its points; so a measurable fall colouring at any k whose singular set is not
+    locally finite — for instance a regular maximal partition containing a Cantor pinch of FS111-M3-HC's type — refutes C121-REGJ
+  uses only: FS121-D3-FALLSAT (one mind)
+  not claimed: that such a fall colouring exists; the converse (a saturated colouring need not be idomatic, FS121-D3-SWAP1D)
+  argument: § 3.2 The reduction to fall colourings (FS121-D4-FALL)
+  verdict: derived
+  grade: derived from: FS121-D3-FALLSAT
+  minds: 1
+  model: k = 7: R7, a regular maximal partition (FS111-VMW-R7-MAX) with Σ the lattice
+  prior art: known — a corollary of FS121-D3-FALLSAT
+  handoff: none — a routing remark: it puts FS-120's pinch on C121-REGJ's path
+
+### 3.3 The verdict
+
+derivation: C121-REGJ
+  statement: in every honest saturated colouring in D-NF, with any number of colours, the singular set Σ is locally finite and each point of Σ meets finitely many interface arcs.
+  argument: § 3.1 What the lemmas leave
+  verdict: gap: LAT — at every accumulation point of Σ or of interface arcs some colour has two pieces in FS121-D4-FACE's position (a half-box at a point
+    where it lacks density 1, a same-colour box of lateral half-width ρ straight ahead across a gap g with 2g < ρ²); LAT with FS121-D4-FACE gives the
+    claim; LAT holds on grid colourings with countable breakpoints (FS121-D4-GRID) and its line analogue fails (FS121-D4-LINE); open where same-colour
+    pieces shrink in every direction faster than the square root of their gaps
+
+*Colours:* every `k`; the GAP is colour-generic (no step reads `k` but the pigeonhole). *Inhabitants:* `k = 7`, R7; `k = 9`, SQ9 and HEX9; `k = 16`,
+TINY16 (this record, exact), each with locally finite Σ. *No counterexample is held at any `k`, and none was searched for.* The claim restricts to
+measurable fall colourings (FS121-D4-FALL), which is where a refutation is cheapest to look for: saturation comes free there.
+
+**For the coordinator.** (1) The recognition differs from the plan's handle (§ 1.2): the bound on ends is the colour count read through lateral
+extent, not a count per region, and per-region counts are idle by TINY16. (2) LAT is the claim's content stated where the dimension is spent; it is
+not the claim renamed — it is false on the line, where the claim's analogue is false too, and true on grids — but its open case (point-like
+accumulation) is most of the claim, and I report it as the GAP, not as progress toward TRUE. (3) FS-120's pinch lies on this claim's path
+(FS121-D4-FALL).
+
+## Stage 3 — SAVED
