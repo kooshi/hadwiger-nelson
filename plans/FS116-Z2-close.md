@@ -163,3 +163,107 @@ exits 1 naming `n7-3t`):
   `data/fs116/fs116-z2/ledger-b-draft.md` (91 lines, superseding part 1's 86) and `ledger-b-fs114.md`.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the sweeps, and every registered prediction scored
+
+### 2.1 §G re-read — which extractions paid, and which entry should have borne
+
+*The plan's §G (`plans/FS116-local-exclusion.md` § 1.2): twelve entries bear, seventy-five silent; ten ledger rows. Read against what the rounds did.*
+
+| entry | the plan's extraction | paid? |
+|---|---|---|
+| G15 | pose the NO as a disjunction over ring types at `p`, a kill per type | **paid** — the close's case list is exactly this shape (`FS116-Z1-close.md` §§ 2.5–2.6); one type killed |
+| G71 | read the ring type as the twist of the ring colouring under the 60° rotation | **paid** — FS116-RING-TWIST-C held; the twist's defects are where every later lemma lives |
+| G79 | D0 and D1 (what every fragment carries) before FS-114's round-7 escapes | **paid** — RING-GERM, SEMI held; EMPTY came from FS116-Y3-TIPS, a structure every member of the class carries; K's queue never ran and was not needed for the Γ-free case |
+| G83 | its killing test the construction side's first target; P2 | **paid** — P2 met; the killing test not met; the reading ("what is left is (Q) rings") is confirmed in part: the Γ-free type is gone |
+| G84 | card `what-does-saturation-pin` is M-PINCH at a vertex | **paid** — FS116-O1-SATPIN held |
+| G82 | card `the-yes-needs-no-map` is the weak-* step on exact fragments | **paid** — FS116-O1-YESLIM held |
+| G13 | state every ring type as a coverage of `ω(p)` | **paid, unnamed** — FS116-V6-TIP's `B(u) ∩ B(v) ⊂ B(p)` (the inward cone at a change point confined to `p`'s colours) is G13's confinement at a centre; no job cited G13 |
+| G21 | headline the class; the vacuity rule (§ 4.6: "the six-colour class may be empty") | **paid late** — every headline carries its class; but the vacuity rule was extracted into the failure clauses and not enforced at the hub lemmas: N2 noted no held model (item 68), Y3 reduced the class to a star without testing its emptiness, Y4 emptied it — nine statements over two rounds on an empty class (item 124). An instance (§ 4 of the drafts) |
+| G86 | every NO allows Siamese pairs | **honoured, not reached** — every exclusion that landed is non-Siamese and simple; the Siamese class is the successors' last rung |
+| G60, G85 | no one-class argument; integer radii in the saturated class | G60 honoured, nothing to test; G85 not used (FS-121 took it) |
+| G87 | the lookout | **paid at the close, not during the rounds** — the bends collision (§ 1.5) was found by part 1 reading two FS-114 passages side by side; no round raised a signal |
+
+**Should have borne and was read silent:** none found on this re-read. One candidate examined: G22 ("No colouring constant on a triangular lattice's
+cells uses six colours") touches FS116-Y3's and FS116-Y4's recognition that a Γ-free four-colour vertex is a unit triangular-lattice patch; its theorem is
+about cell-constant colourings of the whole plane and gives nothing about a fragment, so silent was right. **The rows:** 133 (W-TAN), 135 (NOBOTH), 138
+(the straddle) paid — NOBOTH is N3's step to SEMI's second case, and every kill landed is a straddle; 134's owed Lemma 4 at cusps stays BASE-V's.
+
+### 2.2 §IQ and G79 — counterexamples only
+
+**None to either rule.** Every held result came from the structural form or from Poros's cards run inside it: YESLIM is card `the-yes-needs-no-map`,
+which the plan ran at §IQ.4 as the route's check; EMPTY came from what every member of its class carries (TIPS's tip pattern, and on V6's route the tip
+count), an example invariant, then a straddle — G79's shape; QF from the ring's forcing at the cross's axis points (KAPPA). No breakthrough came from a
+counterexample invariant alone.
+
+### 2.3 §PA — recognitions about what the object is (each promoted, or placed)
+
+1. **The ring is a proper colouring of the 60°-hexagon graph of the circle** (the plan's H2; `FS116-local-exclusion.md` § 2.1), its two absent colours
+   alternating, its defects where `p`'s own colours reach it; held in RING-TWIST-C. → **G91** (drafted).
+2. **A change point off (Q) arcs is a vertex of at least four colours, and a semi-hub is decided by the cone calculus at the unit rhombus `p, u, y, v`**
+   (FS116-N1 § 3, FS116-N3 § 1.2; RING-GERM and SEMI held). → **G91**'s body; SEMI-PAR3 and the closed change point → **FS-124**.
+3. **The transfer at a hub is a homomorphism into the Kneser graph `KG(6, 2)`; around one four-colour vertex the placed missing pairs live in `KG(4, 2)`**
+   (FS116-N2 § 1.2, one mind). → **G91**'s reading; **FS-124**.
+4. **The Γ-free four-colour vertex is a unit triangular-lattice patch** (FS116-Y3 § 1.2, FS116-Y4 § 1.2) — and dies at `1 + ε`: four tiles of diameter at
+   most 1 cannot tip six hubs without a lone double tip whose two flanks straddle (EMPTY, held). → **G91**'s body and its *Do* (structure first, then
+   the straddle among the forced pieces).
+5. **SAT-STRIP is a collision between a rung and a contact** (FS116-S1 § 1.3): the straddle is between a placement and a rung of `p`'s own ladder, inside
+   radius 2. → an instance of **G84** (drafted); **FS-125**'s frame.
+6. **Y-SAT in the strip family is a dial in `R − 1` with a derived ceiling** (`≈ 0.491`, FS116-Y1 § 1.3, STRIPCEIL). → **FS-125**.
+7. **H3, Delone sets and the local theorem** (`[DolbilinSchattschneider1998]`, title only, unread) — a candidate home for D2's propagation, never adopted.
+   → **FS-124**'s §PA (a reading debt).
+8. **The local-to-global idea is Sirgedas's** (2020; non-Siamese, by search) — prior art for the idea, not the statement. → the FS114-CV-EXISTS note
+   (§ 1.6) and row 137's prior-art draft.
+
+### 2.4 The plan's "conjecture" and "not claimed" (grep of `plans/FS116-local-exclusion.md`)
+
+- **"conjecture": no hit.**
+- **l. 118** (row 138's not-claimed, quoted): "four-colour vertices with at most two such edges or of degree ≥ 5; Siamese maps" → **FS-124** (degree ≥ 5:
+  the five- and six-colour vertices; at most two tactic edges: the (Q)-ring cases) and the Siamese rungs of **FS-123** and **FS-124**.
+- **l. 299** (YESLIM): the converse (a measurable a.e.-proper six-colouring gives no fragment) → **declined here**: whether a tight colouring can be made a
+  map is FS-121's map step, now FS-126–FS-128; "that the limit colouring is a map, or saturated, or regular" → the same; "anything about the fragments'
+  centres, so nothing about C114-LOCAL-F's explicitness" → the question itself, carried by FS-123–FS-125; "χ(ℝ²) ≤ 6 from fragments on discs of one bounded
+  radius" → **declined** (false as a route: R7 lives on every disc at seven, and a bounded radius carries nothing about the plane).
+- **l. 378** (SATPIN): "anything at a cusp at `p`" → **FS-125** (SATPIN-PER and the cusp case); "that the split centre `y` has four colours" → **FS-124**
+  (NOBOTH's repeated-colour alternative, removed only on cusp-free saturated maps by FS111-W-NOREP); "that any saturated valid six-coloured fragment about a
+  four-colour vertex exists" → **FS-125** (Y-SAT); "that the strip's midline configuration is excluded in the class" → **FS-125** (SAT-STRIP's G1–G3);
+  "saturation of any held six-colour positive" → **declined** (FS116-Y1-STRIPCEIL: the strip family is saturated at most to `≈ 0.491`).
+- **l. 548**: a sentence about the claim list's form, no claim.
+
+### 2.5 Every registered prediction, scored (Brier on the binary outcome)
+
+**The plan's (§ 4.5), copied at the freeze:**
+
+| prediction | p | outcome | score |
+|---|---|---|---|
+| P1 — SAT-STRIP TRUE | 0.55 | **not decided**: GAP, narrowed to G1–G3; TRUE in the (Q)-free non-Siamese class (FS116-S1-QF, two derivations, not held) | unscored |
+| P2 — no (Q)-ring fragment beyond `φ²/√2` built in round 1 | 0.8 | **met** (Y1; and Y2 built none either) | 0.040 |
+| P3 — RING-Q TRUE | 0.45 | **not decided as posed**: GAP; FALSE below radius ≈ 1.5985 at the disk's corner (FS116-N1-QDISK), its ring-scale form lost | unscored |
+| N7's — OC dies within `√3` | 0.5 | **not decided**: OC was not worked | unscored |
+| N7's — every (Q)-ring survivor has a 60° (Q) arc or one ending 60° from a tactic centre | 0.4 | **not decided**: no survivor was classified | unscored |
+
+*What the decisions did:* P1 was to choose round 2's class; with neither branch decided, the coordinator ran both sides at once (FS116-S1). P3 was to choose
+D2's route; its failure at the disk's corner sent the construction side there first (Y2), as its FALSE branch said.
+
+**The verifiers' own** (each registered before its derivation, each disclosed as informed):
+
+| job | registered | met | Brier |
+|---|---|---|---|
+| FS116-V1 | YESLIM derived 0.90; SATPIN derived 0.50; N7-3T gap 0.60 | 3 of 3 in the project's words (GAP); the gate counts N7-3T's "gap" against "stalls at" as a miss | 0.207 by the gate (0.140 counted met) |
+| FS116-V2 | RING-GERM 0.85, RING-TWIST-C 0.80, TWIST-LIT 0.90, all derived | 3 of 3 | 0.024 |
+| FS116-V3 | GERM-R 0.95, GERM-S 0.90, TOUCH 0.85, AXIS 0.85 derived; ECHO refuted (a monster) 0.75 | 5 of 5 | 0.024 |
+| FS116-V4 | KAPPA 0.70, RUNG 0.75, QF 0.60, all derived | 3 of 3 | 0.104 |
+| FS116-V5 | SIX 0.85, TIPS 0.55, NBTIP 0.6, TIGHTLENS 0.4, STARFORCE 0.3, SEMI 0.45, PAIR 0.8, CROSS 0.35, all derived | 7 of 8 (CROSS: blind GAP) | 0.212 |
+| FS116-V6 | EMPTY refuted 0.6 | 0 of 1 (derived) | 0.360 |
+
+**Pooled:** 23 registrations, 21 met by the gate's count (22 counting V1's N7-3T as met); Brier **0.138** by the gate's count. **The direction of the
+misses:** where the verifiers' probabilities were low, the statements held — STARFORCE at 0.3, TIGHTLENS at 0.4, SEMI at 0.45, and V6's EMPTY "refuted" at
+0.6 — the same direction `CLAUDE.md` § Counter-priors measured (predictions that missed, missed against a theorem landing). The one miss the other way is
+CROSS (0.35 derived, a blind gap closed only after reading).
+
+**The derivers' own** (no probabilities registered; stated expectations, scored as recorded): FS116-N1 expected RING-TWIST's literal clause **MISSTATED**
+(§ 1.3) — met; FS116-N2 expected RING-TRANSFER **MISSTATED** (§ 1.2) — met; FS116-Y1's tool registrations (§ 2.0, § 3.1) as registered, one wording miss;
+FS116-Y2's (§ 2.0) four as registered and one lost toward a stronger result (all six colours straddled at `√3·e(0°)`, so SIXOFF holds Siamese pairs
+allowed). FS116-N3, -S1, -Y3, -Y4 registered none.
+
+## Stage 2 — SAVED
