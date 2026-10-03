@@ -162,3 +162,25 @@ rules hold unchanged — start no agent of your own, for the reason rule 1 gives
    report, and hand back as before. Budget: about 60k more by the harness's count; hand back at a saved stage before about 500k in all.
 
 Do not judge whether a class is empty or whether a statement is hypothetical by design: that is pass 3's work.
+
+## Amendment, 2026-10-04 00:30 UTC — the grokking parser, and counts against the corpus
+
+The coordinator found, while briefing pass 2, that `parse_grokkings` reads 8 of the 91 grokkings: `GROK_HEAD` (`tools/fs129_index.py` line 58)
+requires the bold title to end its line, and 83 entries carry text after it on the same line — `grep -cP '^\* \*\*G\d+ — '
+.claude/skills/grokkings/SKILL.md` prints 91. So `data/fs129/index/grokking-uses.md` and every `mentions_grokkings` cover only G64, G74, G75,
+G76, G80, G83, G87 and G88. Pass 2 is organised by grokking and waits on this. The coordinator's own reviews missed it twice, so the miss is
+shared; the fix below makes the next one loud. Standing rules unchanged — start no agent of your own (rule 1's reason: staffing is
+Kooshi's, and the coordinator reviews only work it knows exists); save the step as a stage.
+
+1. Fix the grokking parse so every `* **G<n> — ` entry is read, title to the closing `**`, whatever follows on the line; retired entries,
+   which keep a titled pointer, are read as entries and marked retired if their text says so.
+2. **A completeness assertion, run on every run, failing it loudly**: the number of grokkings parsed equals the number of `* **G<n> — `
+   lines; the ledger rows parsed equal the rows in `LEDGER.md` § A (148); the theorems equal § B's rows (1,295). Plant a fault for each — a
+   grokking whose title is followed by text, one dropped row — and watch it fire.
+3. Re-run; regenerate `data/fs129/index/grokking-uses.md` with every grokking, its mentioning entries, its milestones and its era by
+   majority. Report the era split (how many A, R, tied, unmentioned) and the ten most-mentioned grokkings per era.
+4. Look once, mechanically, for any other parse that could drop silently the same way — a regex anchored at a line's end over a field that
+   can continue — and list what you find; fix only what is clearly the same defect, and say which.
+
+Update the README and the report; hand back as before. Budget: about 60k more by the harness's count; hand back at a saved stage before
+about 500k in all.

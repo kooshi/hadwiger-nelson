@@ -147,7 +147,7 @@ One line per item with its source; no narration. Each line is ticked done or dec
     25 `no-field` (Keryx's rough 54 / 211 / 27; the Clerk's rule is in its README and its count stands). **Keryx's receipt**: `--self-test` re-run,
     exit 0, PASS; the top entry read against its file — FS121-D4-HOLE (`plans/FS121-derivation.md` line 962, 60 transitive dependents):
     "none held of the hypothesis (R7, SQ9, HEX9, TINY16 have no region with a hole); a no-go for islands whose shore holds a point off Σ".
-    IX1 closed for good (≈263k by the harness).
+    IX1 closed (≈263k by the harness); reopened by item 48.
 36. **For the pass-3 briefs — the sort needs a fourth heading**: a no-go, whose statement is that its hypothesis class is empty, has no model
     by construction (FS121-D4-HOLE above). Pass 3 sorts each `none-known` result as inhabited, empty, hypothetical by design (a step in a proof
     by contradiction), or a no-go — and only "empty" passes vacuity to its dependents. Source: item 35.
@@ -185,3 +185,10 @@ One line per item with its source; no narration. Each line is ticked done or dec
     other cross-era lines (row 132's index as RINGWIND's object; row 130's N-EASY and FALC-RED; W-FILL-FREE and M-DEADLOCK) go to FS129-MR1's brief.
 47. **Lane A's scored registration** (record § 4.2; for FS129-Z1): closed 0 (expected 0), shortened 2 (expected 1.5), nulls 88 % (expected 85 %),
     E9 (J4 yields) missed.
+48. **Tool defect — the index's grokking parser reads 8 of 91 grokkings**, found by Keryx while briefing pass 2. `GROK_HEAD`
+    (`tools/fs129_index.py` line 58) requires the bold title to end its line, and 83 of the 91 entries continue on the same line (`* **G1 — The
+    field wall. [kernel]** The Moser twist …`), so `data/fs129/index/grokking-uses.md` and every record's `mentions_grokkings` cover only G64,
+    G74, G75, G76, G80, G83, G87, G88. The self-test planted a grokking in the one form the regex reads. IX1's report had a hint ("G87 and G88
+    are mentioned by no entry"), and Keryx's two reviews missed it — a coordinator's slip: the receipts checked theorem records, never a
+    count against the corpus. Fix: FS129-IX1 continued, third amendment, with a completeness assertion against the corpus counts (91
+    grokkings, 148 ledger rows). Pass 2 waits for it.
