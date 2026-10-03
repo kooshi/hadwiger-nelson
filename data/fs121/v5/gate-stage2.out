@@ -1,0 +1,42 @@
+entry lint
+  entries: 0  derived: 0  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'FS121-D2-SYM' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D2-SYM: given: the statement with its not-claimed line; the brief in full; the frozen list in full; the …
+  claim verification FS121-D2-SYM: committed 2026-10-03 — stage 1 registers the prediction only
+  claim verification FS121-D2-SYM: predicted derived (0.65); verdict stalls at — missed
+  warn  FS121-V5-verification.md:117 (verification FS121-D2-SYM): divergences "none — the comparison opens only after the verdicts' commit (the brief's § After your verdicts)" — until the comparison finds something, the disagreement has not started
+  claim verification FS121-D2-SYM: counterexamples none — nothing attacked yet; stage 2
+  claim verification FS121-D2-SYM: minds 1 — no derivation yet
+  warn  verification 'FS121-D4-FACE' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D4-FACE: given: the statement with its not-claimed line; the brief in full (its § Why calls two of the …
+  claim verification FS121-D4-FACE: committed 2026-10-03 — the stage-2 commit ("FS121-V5: stage 2"), before any FS-121 record was opened
+  claim verification FS121-D4-FACE: predicted derived (0.88); verdict derived — met
+  warn  FS121-V5-verification.md:136 (verification FS121-D4-FACE): divergences "none — the comparison opens only after this commit; stage 4 replaces this line with its table's address" — until the comparison finds something, the disagreement has not started
+  claim verification FS121-D4-FACE: thin truth: g = 1/10, ρ = 11/25 (2g − g² ≤ ρ² < 2g, outside the hypothesis), with H and B a.e. in S_c — the margin enters only as (1 − g)² + ρ² ≥ 1, in Step 2(a) of § 2.1, so the sharp hypothesis is ρ² ≥ 2g − g²
+  claim verification FS121-D4-FACE: minds 2 — blind to: the first derivation's record, data and route (plans/FS121-D4-proof.md, data/fs121/d4/); method: V5-PAIR and the crossing criterion (§ 2.1); the same model (Opus 5.5)
+  warn  verification 'FS121-D4-GRID' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS121-D4-GRID: given: the statement with its not-claimed line, which names the facing lemma; the brief in full, …
+  claim verification FS121-D4-GRID: committed 2026-10-03 — the stage-2 commit ("FS121-V5: stage 2"), before any FS-121 record was opened
+  claim verification FS121-D4-GRID: predicted derived (0.8); verdict derived — met
+  warn  FS121-V5-verification.md:159 (verification FS121-D4-GRID): divergences "none — the comparison opens only after this commit; stage 4 replaces this line with its table's address" — until the comparison finds something, the disagreement has not started
+  claim verification FS121-D4-GRID: counterexamples none — searched by removing saturation, adjacency, countability and finitely many colours in turn (§ 2.4); the countability example (SQ9 with a null Cantor set of breakpoints) refutes the breakpoint clause only outside the hypotheses, where the not-claimed line already places it (as a GAP: a wording defect, § 2.4)
+  warn  FS121-V5-verification.md:159 (verification FS121-D4-GRID): minds 2, and given: names the lemma — a checking reading counts one
+  claim verification FS121-D4-GRID: minds 2 — blind to: the first derivation's record, data and argument; method: Cantor–Bendixson and a pigeonhole of this mind's own around the given lemma; the same model (Opus 5.5)
+  warn  FS121-V5-verification.md:159 (verification FS121-D4-GRID): derived from 'FS121-D4-FACE', which is not an entry in these files — its grade cannot be read
+  verifications: 3  predictions met: 2 of 3 (Brier 0.159)  divergences: truth 0, route 0, wording 0  counterexamples: refutation 0, monster 0, thin truth 1
+quotes
+  statements named in more than one place: 0
+controls
+  warn  FS121-V5-verification.md:53 (fs121-v5-quotes): of 'FS121-D2-SYM', which is not an entry in these files
+  ok    fs121-v5-quotes: printed 'checks: 17 pass: 17 fail: 0 mode: clean'; with the fault planted ('' → '--fault') it printed 'checks: 17 pass: 0 fail: 17 mode: fault' — it fires
+  warn  FS121-V5-verification.md:246 (v5-face-margin-cex): of 'FS121-D4-FACE', which is not an entry in these files
+  ok    v5-face-margin-cex: printed 'True'; with the fault planted ('' → '--fault') it printed 'False' — it fires
+  warn  FS121-V5-verification.md:252 (v5-face-thin): of 'FS121-D4-FACE', which is not an entry in these files
+  ok    v5-face-thin: printed 'outside the hypothesis (2g >= rho^2): True; sharp condition ((1-g)^2 + rho^2 > 1): True'; with the fault planted ('' → '--fault') it printed 'outside the hypothesis (2g >= rho^2): Tr' — it fires
+  warn  FS121-V5-verification.md:312 (v5-grid-pigeon): of 'FS121-D4-GRID', which is not an entry in these files
+  ok    v5-grid-pigeon: printed 'violations: 0'; with the fault planted ('' → '--fault') it printed 'violations: 872' — it fires
+  warn  FS121-V5-verification.md:318 (v5-grid-nonsat): of 'FS121-D4-GRID', which is not an entry in these files
+  ok    v5-grid-nonsat: printed 'True'; with the fault planted ('' → '--fault') it printed 'False' — it fires
+  controls: 5  fired on their faults: 5
+GATE: PASS (0 failures, 13 warnings)

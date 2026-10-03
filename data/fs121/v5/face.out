@@ -1,0 +1,12 @@
+ok   outside the hypothesis: 2g >= rho^2
+ok   circle about x+e misses B: (1-g)^2 + rho^2 < 1
+ok   H u B has diameter < 1 (no unit pair inside H u B)
+ok   every point of Q has all of B strictly within distance 1
+ok   every point of Q is at distance > 1 from H (Q starts at x = 1, H ends at x = 0, both open)
+ok   Q has diameter < 1
+ok   background squares (side 1/4, colours mod 6): diameter < 1, same-colour gap 5/4 > 1
+ok   x + e = (1, 0) is in cl Q and at distance 1 from x
+True
+False
+outside the hypothesis (2g >= rho^2): True; sharp condition ((1-g)^2 + rho^2 > 1): True
+outside the hypothesis (2g >= rho^2): True; sharp condition ((1-g)^2 + rho^2 > 1): False
