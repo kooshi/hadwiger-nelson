@@ -1,0 +1,11 @@
+ok    1 data/fs121/claims.md: **C121-REGJ** (this list): in every honest saturated colouring in D-NF
+ok    2 data/fs121/claims.md: **A derivation of it may not rest on C121-ENDS, C121-OUT, C121-PER or 
+ok    3 data/fs121/claims.md: ## 4. Honest saturation and the singular set (jobs FS121-D3, FS121-D4)
+ok    4 plans/FS111-M2-regularity.md: the essential boundary points at which M-PINCH's hypotheses (H1), (H2)
+ok    5 data/fs111/claims.md: **REG-J′_k**: a saturated colouring whose singular set Σ is locally fi
+ok    6 plans/FS111-M-regularity.md: every essential boundary point is at distance exactly 1 from the suppo
+ok    7 plans/FS111-derivation.md: an honest (one colour per point) saturated one
+ok    8 plans/FS121-D3-proof.md: every partition of the plane, up to a null set, into k measurable sets
+ok    9 plans/FS111-derivation.md: every component R of an open class of a saturated honest colouring has
+ok   10 plans/FS121-map-step.md: REG-J′'s universal form: what every end carries bounds the ends in a b
+quotes: 10  found: 10  missing: 0
