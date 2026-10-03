@@ -339,3 +339,15 @@ and the hunch at 0.7 was the costliest. The verifiers went 17 of 18, but all the
 measure little. Counter-prior rule 2 applied: none of these numbers shrank an aim; each drove a launch, a stop or a re-route, and each re-route ran.
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: the successor stubs, and the bearing lines
+
+- **FS-126**, `plans/STUB-curved-pencils.md` — curved tangent interfaces in honest saturated colourings (C121-R2-FOUR, -CURVED, -NOLRA as one question;
+  items 24, 49, 74; the plan's not-claimed lines).
+- **FS-127**, `plans/STUB-lateral-extent.md` — the singular set's local finiteness at LAT (C121-REGJ; item 67's card for Poros).
+- **FS-128**, `plans/STUB-top-colour.md` — the six-colour rungs: TOP₆ and the parked cover route's C121-NOPAR-C5 (items 35, 51, 63).
+- **Bearing lines** (dated paragraphs at the end of each § Bearing on the answer): `plans/STUB-map-step.md` (with item 52's correction to its question
+  1), `plans/STUB-stuck-ray.md` (items 9, 46: re-posed as thin pencils, inside FS-126), `plans/STUB-pinch-at-junction.md` (item 67), and
+  `plans/STUB-forced-pair.md` (nothing bears). The lines for `plans/STUB-local-exclusion.md` and `plans/STUB-route-t-count.md` are drafts (D8).
+- **Merged or apart:** R2-FOUR, CURVED and NOLRA merged into FS-126 by FS121-Z1-NOCURVED; REGJ kept apart (its derivation may not use the ladder
+  lemmas, which assume REG-J′); TOP₆ and NOPAR-C5 merged into FS-128 as the two rungs at six by nature.

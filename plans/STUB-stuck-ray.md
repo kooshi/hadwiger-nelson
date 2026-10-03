@@ -57,6 +57,12 @@ only as a locally terminal object a YES could use. **A cross-milestone link for 
 derives that FS-111's route M needs ¬LRA, large-radius accumulation, which is this stub's stuck ray in the measurable setting — so FS-115's bearing may be
 larger than "none alone" through FS-111's route M; FS-111's close states that clause.
 
+**At FS-121's close (2026-10-03, FS121-Z1).** In honest saturated colourings with REG-J′, LRA is not a ray: at one point it is LRA along a
+whole unit-spaced normal line (FS121-O1-LRA-LINE, held), and it forces, for every `r ≥ 2`, infinitely many maximal radius-`r` arcs with windows tending to
+0 — thin pencils (FS121-D2-THIN, one mind). No colouring with a cocompact symmetry, so none doubly periodic, has LRA (FS121-D2-SYM, held). **Re-posed:**
+this stub's measurable question is thin pencils in aperiodic colourings, and it lives inside FS-126 (curved tangent interfaces; FS121-D2-INCURVED: LRA
+inhabits that class), which a NO there decides; the line form is not needed. Its map-colouring questions (b′), (b″), (c) are unchanged.
+
 ## What FS-112 established (addresses in `plans/FS112-derivation.md`)
 
 - **Why chains can end** (FS112-FLANK, FS112-N2-FLANK-Q, FS112-N2-RAY): at a horn bound of exactly `±1`, FS-110's list of flank shadows gains an in-type

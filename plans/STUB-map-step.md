@@ -134,6 +134,15 @@ are each necessary for seven and each equivalent to it given the other (R1, F2).
 `χ(ℝ²) ≤ 6` on its own. **The two halves may share one object:** this stub's curved ladders end, off cusps, on FS-116's (Q) rings. That is § The card
 above, unchecked.
 
+**At FS-121's close (2026-10-03, FS121-Z1; `plans/FS121-Z1-close.md` § 2.6, `plans/FS121-derivation.md`).** Nothing moved a value. Held (two
+minds): every curved ladder ends inward at a (Q) or (R2) arc and never outward; periodic honest classes are segments and split (Q) arcs; honesty is
+free (Grundy colourings); idomatic partitions are saturated; no cocompactly symmetric colouring has LRA; REG-J′ holds on grids with countable
+breakpoints; the five cover-route lemmas. Open (one mind each): C121-R2-FOUR, -CURVED and -NOLRA, which are one question, curved tangent interfaces
+(FS-126); C121-REGJ at LAT (FS-127); C121-SAT6 at TOP₆ and C121-NOPAR-C5 (FS-128). **A correction to question 1 (2026-10-03):** NO-PAR read on the map
+a maximal cover yields is the wrong target (FS121-C1-COVMAP, held: DISC7's merged map is in no `𝒫_7`); read on Grundy partitions it is right, one-sided,
+with G-FIN₆ in place of MUA-FIN (FS121-C1-GMAP), and it contains the honest route's NO (FS121-C1-SAT). Honest saturation at six is the answer given a NO
+for honest saturated colourings (FS121-D3-EQ, one mind).
+
 ## Registered expectations (instruments, never caps)
 
 - NO-PAR decided at one mind within the milestone: **0.1**; reduced to a named step of row 134's chain: **0.5**.

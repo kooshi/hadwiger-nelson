@@ -47,6 +47,11 @@ negative answer — a pinch no local move removes — would say that route M's f
 value by itself. (What it is not: a step toward six or seven on its own. Its honesty rule is FS-111's: state every result colour-generically, and say
 where a colour count would enter — M4 reads that it can enter only at the junction, which is this stub's second question.)
 
+**At FS-121's close (2026-10-03, FS121-Z1).** Every measurable idomatic partition (fall colouring) is honest saturated (FS121-D3-FALLSAT, held), so
+C121-REGJ restricts to fall colourings, and **a fall colouring with a non-locally-finite singular set — a Cantor pinch of FS111-M3-HC's type — refutes
+C121-REGJ** at any `k` (FS121-D4-FALL, one mind). This stub's pinch question now bears on FS-127 (lateral extent): a pinch no move removes would be
+FS-127's counterexample.
+
 ## The room and the prior art
 
 The unit-distance graph's **fall colourings** (Dunbar et al. 2000, Zbl 0962.05020, finite graphs; held under FS-67) and measurable **maximal independent

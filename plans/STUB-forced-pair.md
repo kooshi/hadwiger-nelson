@@ -36,6 +36,9 @@ count** — `[Voronov2023]` Lemma 6.1's count of junction types, made robust —
 each smaller than the answer. Under Condition 5 at bounded complexity no close complementary pair exists in a valid map at all (row 134, NB-5), which is
 why the map line never needed (A); so this route and FS-121's meet nowhere below the answer.
 
+**At FS-121's close (2026-10-03, FS121-Z1).** Nothing of FS-121 bears on this route below the answer. One colour-generic tool is shared and untested
+here: any a.e.-proper colouring becomes a measurable Grundy colouring without raising a point's colour index (FS121-D3-GRUNDY, held).
+
 ## Registered expectations (instruments, never caps)
 
 - B-RR decided at one mind: **0.1**. A robust Lemma 6.1 count on a named class of near-colourings (bounded complexity first): **0.25**.
