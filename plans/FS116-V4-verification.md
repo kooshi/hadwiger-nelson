@@ -22,6 +22,12 @@ before display), the gate script `.claude/skills/ephodos/scripts/derive_gate.py`
 `CLAUDE.md`, `LEDGER.md`, the grokkings, `data/fs114/claims.md` and `plans/FS114-derivation.md` for "TIPS", "HEX3", "STRIPCEIL", "S1-LENS", "NBTIP",
 "STARFORCE", "TIGHTLENS": no hits.
 
+**Stage 4 (after the verdicts' commit 48534b7c, 15:48 UTC).** Opened as the brief allows: `plans/FS116-S1-proof.md` §§ 2.1–2.5 (lines 164–452).
+**One touch, disclosed:** at about 15:49 UTC, `grep -n "^#" plans/FS116-S1-proof.md` printed the file's section titles, including those of
+sections still fenced (its stage 1 readback, recognition, theorems list, would-have-searched log, fence log and G87 lookout). It carried titles
+only, came after every verdict was committed, and nothing of those sections' text was read. Not opened: the hub construction's record
+(Amendment 1), and every other fenced path. No paper was read, so no `BIBLIOGRAPHY.md` row is proposed.
+
 ## "Would have searched here" log
 
 None yet. No program enumerates anything in this job. The checks are exact evaluations of named quantities (stage 2's controls).
@@ -425,6 +431,18 @@ Each attempt is listed cheapest first, with what it showed.
 7. **The § 10 reading of the last clause.** It is a GAP at "no point of the orbit ends an arc of `Γ` on `ω`" (§ 2.2). It holds when the ring
    carries no arc of `Γ`. The coordinator ruled κ's change points, under which the clause is derived.
 
+8. **FS114-Y2-BOWTIE's centre (a consistency question about two held records, not about KAPPA).** FS114-N7-3T's model line
+   (`plans/FS114-derivation.md` § 3) reads: "FS114-Y2-BOWTIE's centre, a degree-4 four-colour vertex with four tactic edges whose ring carries
+   no (Q) arc". FS114-Y4-LUNE's Y4-W (same file, § 3) reads: "In a non-Siamese simple Reuleaux bowtie the tile along `t1`'s outer side at `q1`
+   and the one at `q2` are one tile `W`, of colour 3 (the colour of `t3`)", with "`t1 = Reul(p, q1, q2)`" a tile at `p`.
+   - *My reading, from the statements only:* a width-1 Reuleaux triangle with corners `p, q1, q2` has its side opposite `p` on `ω(p)`. Then that
+     side has side colours `c(t1)` and `c(t3)`, both carried at `p`, which makes it a (Q) arc by § 0's definition.
+   - If so, the bowtie lies outside KAPPA's class, and nothing here is touched.
+   - If instead its ring carries no (Q) arc, as N7-3T's model line says, then that side's germs have `K(g) = ∅`. The bowtie would then
+     contradict K1, and KAPPA with it.
+   Which holds turns on the records' convention for (Q) at a lens's outer side (perhaps "after the bends"), which the open statements do not
+   settle. Reported as an invention signal, with both sides quoted and no side picked.
+
 No counterexample to KAPPA, as ruled, was found.
 
 ## Attack on RUNG
@@ -498,14 +516,15 @@ verification: FS116-S1-KAPPA
     clause's "change points"
   verdict: derived
   method: V4-DICHOTOMY and V4-TWIST (chord lengths on ω) for the first clause, a walk round ω for the parity, and a three-arc diameter
-    contradiction (K6) for the non-Siamese clause; how this differs from the first route is stage 4's to say
+    contradiction (K6) for the non-Siamese clause; it differs from the first route at the twist and at the non-Siamese clause (§ Divergences on
+    KAPPA, rows 1–2)
   attack: § Attack on KAPPA
-  divergences: none — the first derivation is opened only at stage 4, after this commit
+  divergences: § Divergences on KAPPA
   counterexamples: none — searched five colours at p, the (Q) case, k = 9 (FS111-W-SQ9, control v4-sq9anti), closed windows, the Siamese
     case of the last clause, and the two wording readings (§ Attack on KAPPA); each failure found lies outside the hypotheses or is named by
     the not claimed line; under § 10's reading the last clause is a gap, at whether a point of the orbit can end an arc of Γ on ω(p)
   minds: 2 — blind to: the first derivation's argument, route and record (only the proposer's belief, implicit in proposing it, was seen); method:
-    my own route, its difference from the first unknown until stage 4; blind, the same model (Opus 5.5)
+    my own route, different from the first at the steps § Divergences names; blind, the same model (Opus 5.5)
   grade: hand
 
 verification: FS116-S1-RUNG
@@ -521,13 +540,14 @@ verification: FS116-S1-RUNG
   predicted: derived — 0.75 — likeliest break: the Siamese case, several c_IV tiles along y = 1 with w's tile related differently to them
   verdict: derived
   method: the partner of an edge point found by the two half-discs (V4-PARTNER), then V4-MEET along the connected cover of the rung by tile
-    closures, which carries the Siamese case; the formula checked exactly (control v4-ceil); FS116-Y1-STRIPCEIL's own x* not read
+    closures, which carries the Siamese case; the formula checked exactly (control v4-ceil); FS116-Y1-STRIPCEIL's own x* not read; it differs from
+    the first route at the partner step, derived here and imported there from SATPIN (§ Divergences on RUNG, row 1)
   attack: § Attack on RUNG
-  divergences: none — the first derivation is opened only at stage 4, after this commit
+  divergences: § Divergences on RUNG
   counterexamples: thin truth: any segment edge from any point p, saturated along its first ℓ, with no condition on the degree, the colours or
     the other edges — R1 and R2 read only the east edge and its two side tiles (§ Attack on RUNG, item 6)
   minds: 2 — blind to: the first derivation's argument, route and record (only the proposer's belief, implicit in proposing it, was seen); method:
-    my own route, its difference from the first unknown until stage 4; blind, the same model (Opus 5.5)
+    my own route, different from the first at the steps § Divergences names; blind, the same model (Opus 5.5)
   grade: hand
 
 verification: FS116-S1-QF
@@ -540,10 +560,56 @@ verification: FS116-S1-QF
   predicted: derived — 0.60 — likeliest break: the outer colour at the change points beside an axis point, or the final topological step
   verdict: derived
   method: the rungs at an axis point by V4-PARTNER, KAPPA's single orbit, the outer colour at a change point (V4-OUTER), then a Jordan-curve
-    crossing in the crescent B(q_N, 1) ∖ B̄(p, 1); how this differs from the first route is stage 4's to say
+    crossing in the crescent B(q_N, 1) ∖ B̄(p, 1); different mathematics from the first route's lens, interface curve and EXIT, sharing only KAPPA
+    and the partner of an edge point (§ Divergences on QF, row 1)
   attack: § Attack on QF
-  divergences: none — the first derivation is opened only at stage 4, after this commit
+  divergences: § Divergences on QF
   counterexamples: thin truth: fragments saturated only at the points of p's four edges — saturation is used at Q1 alone (§ Attack on QF, item 5)
   minds: 1 — a checking reading on the verdict axis only: blind to the first derivation's argument, route and record, but given its verdict
     ("decided") in the brief; the derivation is my own route; blind otherwise, the same model (Opus 5.5)
   grade: hand
+
+## Stage 4 — SAVED: the comparison (opened 2026-10-03 15:49 UTC, after the verdicts' commit 48534b7c)
+
+*What was opened, and only this: `plans/FS116-S1-proof.md` lines 164–452, its §§ 2.1–2.5, which include the entries filed there. Before
+reading, a `grep -n "^#"` of the file listed its section titles, so the titles of its other sections were seen (stage 1's readback,
+recognition and fence log, its theorems list and its G87 lookout), with nothing of their text. The hub construction's record was not opened:
+Amendment 1 keeps it fenced. Stage 3 does not exist, because its three statements were withdrawn.*
+
+**The statements, compared.** My three verification blocks' `statement:` lines were compared with the first record's entries FS116-S1-KAPPA,
+-RUNG and -QF (its § 2.5, lines 288–293, 348–352 and 418–419), word for word after joining lines. All three match (122, 149 and 35 words).
+The gate was not run on the first record, since it would print text from its fenced sections.
+
+**Retractions: none.** Reading the first derivation showed no error of mine, and no verdict of mine is withdrawn. Every divergence below is
+of route or of wording. None is of truth: the first record derives all three statements, as I do.
+
+## Divergences on KAPPA
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the twist, K(θ⁺) ∩ K((θ + 60°)⁺) = ∅ | three ring points at separations 60° ∓ δ/4 and V4-DICHOTOMY between the two tiles | `ω(w)` for `w` in the far germ crosses `ω(p)` transversally inside `T`, so N-E1 at `w` excludes `X` | route | kept both; the same fact by two mechanisms |
+| 2 | the non-Siamese clause | three consecutive change points `c₁ < c₂ < c₃` within 60°; one tile holds `J₀`, `J₂`, `σJ₁` and has points over 1 apart | two change points `y`, `y′` within 60°; the `Ā`-tiles at `y⁻`, `y′⁺`, `(y + 60°)⁺` are one tile, with closure points near `r(y − δ)` and `r(y + 60° + δ)` | route | kept both; the first is shorter (it needs only `m ≥ 3 ⟹` a second change point within 60°) |
+| 3 | "lies in the closure of tiles of exactly one colour absent at p" | read two ways, A (one colour in all) and B (one of the two absent colours); derived under B | defined by `K(g)`, the set of absent colours among the colours of tiles whose closure holds the whole germ — reading B | wording | fixed by the author's definition, quoted to me before my verdict; a rewording owed to the list, e.g. "lies in the closure of tiles of exactly one of the two colours absent at p" |
+| 4 | the last clause's "the change points" | derived for κ's change points; a GAP under § 10's ring change points, at whether a point of the orbit ends an arc of Γ on ω(p) | "A change point is a `θ` with `κ(θ^−) ≠ κ(θ^+)`" (§ 2.1) — κ's | wording | fixed by the author's definition and the coordinator's ruling; a rewording owed, e.g. "κ's change points are exactly y + 60°ℤ" |
+| 5 | the same controls | SQ9's antipodes (`v4-sq9anti`) and the parity combinatorics (`v4-parity`, `v4-three`) | SQ9's antipodes (`sq9-antipode`) | route | kept both; my two extra controls read K5 and K6's arithmetic |
+
+## Divergences on RUNG
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the partner of an edge point | derived from saturation at the point, by two half-disc arguments (V4-PARTNER) | imported: FS116-O1-SATPIN in FS116-V1's corrected wording (two minds), "a segment edge is not a unit arc, so the east edge is of the tangent type" | route | kept both; my step re-derives SATPIN's tangent clause for segment edges with none of SATPIN's hypotheses on `p` |
+| 2 | the Siamese case | V4-MEET (two tiles sharing a closure point relate alike to a third) along the connected cover graph of the rung | FS116-S1-CLUSTER, the same mechanism stated for a finite family with a connected union of closures | route | kept both; one argument, packaged differently |
+| 3 | the hypotheses used | degree 4, four colours and the other three edges are idle; the main clause holds for any saturated segment edge from any point (thin truth) | reads them through SATPIN, whose statement asks for a vertex of at least four colours with every tile's cone of positive angle | route | kept both; the thin truth is reported for whoever places RUNG at its class |
+| 4 | "a contact of c_IV at r(φ)" | read as `r(φ)` in the closure of a c_IV-tile | "a tile of colour `c_IV` holding `V_{−1} = r(120°)` in its closure" | route | the same reading; no change |
+| 5 | the bound's range | noted that it tends to 0 as `φ → 150°⁻` (attack item 5) | "from 1 at `90°` to 0 at `150°`" | route | agree |
+
+## Divergences on QF
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the kill | the rung tiles at one axis point `q` come from the two opposite edges. The change points within 60° on either side of `q` carry, outward, the opposite quadrants' colours. Non-Siamese makes each the rung tile on the other side of `q`, and the two tiles must cross in the crescent `B(q, 1) ∖ B̄(p, 1)`: Jordan | the interface `γ` between `T_I` and `T_IV` along the east edge through the lens `Λ` (FS116-S1-LENS), kept tangent by FS111-W-NOBEND and SATPIN's open-and-closed step, leaves `Λ` at `x_e`. Its far partners against the contacts `U_3`, `U_5` (CLUSTER), with FS116-S1-EXIT, put a partner on `y_±`, within 1 of `T_IV` or `T_I` | route | kept both: two derivations by different mathematics, sharing only KAPPA and the partner of an edge point |
+| 2 | where saturation is used | only at the points of `p`'s four edges' first segments (Q1); a thin truth | along the whole interface `γ` in `Λ ⊂ B(p, 1)` | route | kept both; QF holds with "saturated on B̄(p, 1)" weakened to "saturated at the points of p's four edges" (my route), which the first route does not give |
+| 3 | inputs from other jobs | none beyond the list's definitions: the partner and the outer colour are derived here (V4-PARTNER, V4-OUTER) | FS116-N1-GERM-S (i), (ii) and FS116-N1-AXIS (a) (two minds, FS116-V3), FS116-O1-SATPIN with FS116-V1's L1, FS111-W-NOBEND | route | kept both; a result with two routes survives an error in GERM-S, AXIS, NOBEND or EXIT |
+| 4 | the axis points | one of `q_N`, `q_E` is free of change points, because they are one orbit | no change point lies on any axis (GERM-S (i) against AXIS (a)) | route | agree; the first is stronger and not needed by my route |
+| 5 | the outer colour at a change point in an open quadrant | the opposite quadrant's colour (V4-OUTER, control `v4-outer`) | LENS: `y_3` (open quadrant II) holds an outward tile of colour `c_IV`, `y_5` (open quadrant III) of `c_I` | route | agree |
+| 6 | where six colours are spent | KAPPA's two absent colours (Q2), and the outward cone at a change point carrying one of `p`'s colours (Q3 (a)–(b)) | "It fails at KAPPA (c), where six is spent" | route | agree on KAPPA (c); my route spends six a second time at Q3 |
