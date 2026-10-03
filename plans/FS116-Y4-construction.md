@@ -33,10 +33,17 @@ possible object: at six colours the class may be empty (the frozen list's preamb
 - **FS116-Y4-QT** — the brief's three quotations are verbatim at their sources, and its eight unquoted attributions present — computed over the brief's two
   blockquotes, its one inline quotation and eight phrases (`tools/fs116_y4_quotes.py`), § 1.1.
 - *(stage 1 proves nothing else: its other products are a recognition and proposed statements, § 1.2–1.3.)*
+- **FS116-Y4-SYM** — the HEX3 class with its labels is invariant under the reflections in the lines at `30°` and `120°` through `p`, the colours permuted by
+  `(3 4)` and by `(1 2)(X X̄)` — [hand], one mind, § 2.1.
+- **FS116-Y4-SPOKE** — the only outer tile of each single-tip hub reaches the lattice point at radius 2 beyond it and ends there on a unit arc about the hub:
+  inside `ω(y_2)` near `2y_2` only colour 4, outside only `3, X, X̄` — [derived], one mind, § 2.2.
+- **FS116-Y4-Q1** — the colours near `q_1` by sector: `{2}` in the lens, `{1, 2}`, `{2, 3}` beside it, `{1, 2, 3, X}` outside; 4 and `X̄` absent — [derived],
+  one mind, § 2.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
+- Stage 2: none — every step is a straddle read by hand at a lattice point; the tool checks the signs at twelve fixed points.
 
 ## Fence log (standing rule 8)
 
@@ -48,6 +55,7 @@ possible object: at six colours the class may be empty (the frozen list's preamb
 ## G87 lookout
 
 - Stage 1: none seen as two truths in collision.
+- Stage 2: none seen.
 
 ## Stage 1 — SAVED: the readback, recognition on the target, and the proposed statements
 
@@ -177,3 +185,138 @@ target (which asks for radius above 2). Reported with the result.
 P4 and P5 are the brief's two outcomes; at most one is derived. P1–P3 are relay-results toward either.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the symmetry, the spokes, and the colours at `q_1`
+
+*Class: the HEX3 class (Notation). Inputs at their grades: FS116-Y3-STARFORCE, -NBTIP, -NOQ, -TIGHT and -TIPS (one mind each, STARFORCE under FS116-V5's
+blind check), RING-GERM (two minds). The plane facts each step uses are checked exactly at named points by `tools/fs116_y4_lattice.py` (a check of the hand
+reading's signs, not a proof).*
+
+### 2.1 The symmetry (FS116-Y4-SYM)
+
+`σ_30` and `σ_120` are isometries fixing `p`, so they carry tiles to tiles, segments and arcs to segments and arcs, and preserve validity, non-Siamese,
+simple, "a vertex of at least four colours" and "a ring carrying no arc of `Γ`"; renaming colours by a bijection preserves all of these. The labels:
+`σ_30` (`θ ↦ 60° − θ`) carries the cones `[−30°, 90°]`, `[90°, 150°]`, `[150°, 270°]`, `[270°, 330°]` of `T1, T3, T2, T4` to `[−30°, 90°]`, `[270°, 330°]`,
+`[150°, 270°]`, `[90°, 150°]` and the hubs `y_0, …, y_5` to `y_1, y_0, y_5, y_4, y_3, y_2`; with `3 ↔ 4` the image has colour 1 on `[−30°, 90°]`, 4 on
+`[270°, 330°]`, 2 on `[150°, 270°]`, 3 on `[90°, 150°]` — the labels of TIPS with the same names — the ring arcs `(60k, 60k + 60°)` go to `(−60k, 60° − 60k)`,
+which have the same colour `X` or `X̄`, and the tips go to tips (`T1` tips `y_0, y_1` ↦ `y_1, y_0`; `T3`'s `y_2` ↦ `y_5`, `T4`'s). `σ_120` (`θ ↦ 240° − θ`)
+carries the four cones to `[150°, 270°]`, `[90°, 150°]`, `[−30°, 90°]`, `[270°, 330°]` and the hubs to `y_4, y_3, y_2, y_1, y_0, y_5`; with `1 ↔ 2` and
+`X ↔ X̄` the labels are again TIPS's (the ring arc `(0°, 60°)` goes to `(180°, 240°)`, coloured `X̄` in `F`, hence `X` in the image). The edges `δ_i` go to
+edges of HEX3's star in both. So the images are in the HEX3 class with the same labels; and since every statement of this record is a consequence of
+membership in the class, each holds of the image, i.e. holds of `F` at `σ⁻¹(z)` = `σ(z)` with the colours exchanged. The table of round 3's forced data
+(26 data: the four cones, six ring colours, six tips, six hubs' outer colours with STARFORCE's orders, four lens colours) is carried datum to datum
+(`tools/fs116_y4_lattice.py sym`, `data/fs116/y4/sym.out`; plant: `σ_30` with `1 ↔ 2`, which carries none correctly to their images). ∎
+
+### 2.2 The spoke at `y_2` (FS116-Y4-SPOKE)
+
+Let `N` be a small neighbourhood of `2y_2`, inside the disc (radius above 2).
+1. **`X̄`, `X` are absent at every `x ∈ N ∩ B(y_2, 1)`.** `R_{12}` (colour `X̄`) holds the ring points `e(θ)`, `θ ∈ (60°, 120°)`, off finitely many; as
+   `θ → 120°`, `|x − e(θ)| → |x − y_2| < 1`, and `|2y_2 − e(90°)|² = 5 − 2√3 > 1`: `R_{12}` straddles `x`. Likewise `R_{23}` (`X`), with `θ → 120°⁺` and
+   `e(150°)`.
+2. **3 is absent there.** `y_2 ∈ cl T3`, so `T3` has interior points within `< 1` of `x`; `p ∈ cl T3` and `|x| ≈ 2`: `T3` straddles `x`.
+3. **1 and 2 are absent at every `x ∈ N`.** `Z_1` holds the points of `L_1` near `q_1` (STARFORCE), whose cone at `q_1` is `[210°, 330°]`; `2y_2 − q_1 =
+   e(180°)`, so for `|x − 2y_2| = s ≪ t ≪ 1`, `|x − q_1 − t·e(β)|² = 1 − 2t·cos(β − 180°) + O(s + t²)`, below 1 at `β = 220°` and above at `β = 320°`:
+   `Z_1` straddles `x`. Likewise `Z_2` (colour 1) at `q_2` (`2y_2 − q_2 = e(60°)`, `L_2`'s cone `[270°, 30°]`, `β = 20°` and `280°`).
+4. **The 4-tile inside is `O_2`.** By 1–3 every point of `N ∩ B(y_2, 1)` off `Γ` is interior to a tile of colour 4. `O_2` is `y_2`'s only outer tile (NBTIP),
+   and its cone at `y_2` contains `(90°, 150°)` (RING-GERM (ii), one tile per colour at `y_2`), so it holds `y_2 + t·e(120°)` for small `t`, within `< 1` of `x`
+   (`(x − y_2)·e(120°) ≈ 1` and `|x − y_2| < 1`). Two 4-tiles at distance `< 1` are one (non-Siamese): the 4-tile at `x` is `O_2`. So `O_2` contains
+   `N ∩ B(y_2, 1)` off `Γ`, `2y_2 ∈ cl O_2`, and (diameter at most 1) `O_2 ⊂ B̄(y_2, 1) ∩ B̄(2y_2, 1)`.
+5. **Outside.** A tile `W` with a point `x ∈ N ∖ B̄(y_2, 1)` in its closure has interior points near `x`, outside `B̄(y_2, 1)`; colours 1, 2 are absent (3.);
+   colour 4 would make `W` within `< 1` of `O_2`'s points near `2y_2`, so `W = O_2 ⊂ B̄(y_2, 1)`, impossible. So `W` has colour 3, `X` or `X̄`, and every point
+   of `ω(y_2) ∩ N` is in the closure of `O_2` and of a tile of another colour: `ω(y_2) ∩ N ⊂ Γ`, inner colour 4. ∎ By SYM (`σ_30`, `3 ↔ 4`) the same at
+   `y_5`: `O_5` (colour 3) reaches `2y_5`, the outer side there has colours in `{4, X, X̄}`.
+
+*What it says.* `O_2` is the edge tile of the lattice edge `{y_2, 2y_2}` (home 2 of § 1.2): the single-tip hubs throw their outer tile out to radius exactly
+2, and `ω(y_2)` carries a (Q)-type arc at `2y_2` (centre `y_2` carries 3 and 4, both side colours when the outer colour is 3). *Where six is spent:* step 4,
+where the five other colours are each excluded by one forced tile; with a seventh colour the 4-tile inside need not exist. *Controls:* the strip, the disk,
+R7 and SQ9 have no Γ-free four-colour vertex with HEX3's star (FS116-Y3 § 2.5, § 3.3): silent.
+
+### 2.3 The colours near `q_1` (FS116-Y4-Q1)
+
+Let `x = q_1 + s·e(χ)`, `s` small.
+- **`X̄`:** `R_{12}` holds `e(90°)`, `|q_1 − e(90°)| = √3 − 1 < 1`, and a point outside `B̄(q_1, 1)`: at `y_1` it shares a non-degenerate boundary curve with
+  `T1` (the cyclic order at a hub, FS116-Y3-NOQ), `T1 ⊂ B̄(y_0, 1)`, and `B̄(y_0, 1) ∩ B̄(q_1, 1) = {y_1}` (`|y_0 − q_1| = 2`, midpoint `y_1`). So `R_{12}`
+  straddles every `x` near `q_1` (TIGHT's argument, in the stronger form its proof gives).
+- **4:** `O_2` holds `y_2 + t·e(120°)` (`q_1 − y_2 = e(60°)`: distance² `≈ 1 + 2s·cos(χ − 60°) − t`, below 1 for `s ≪ t`) and, by SPOKE, the points
+  `2y_2 + t·e(240°)` of `B(y_2, 1)` (`q_1 − 2y_2 = e(0°)`: distance² `≈ 1 + 2s·cos χ + t`, above 1): `O_2` straddles every `x` near `q_1`.
+- **`X`:** `R_{23}`'s ring points `e(120° + δ) = y_2 + δ·e(210°) + O(δ²)` give distance² `1 + 2s·cos(χ − 60°) + √3·δ + O(δ² + sδ)`, below 1 for
+  `cos(χ − 60°) < 0` and `δ ≪ s`; `e(150°)` is at `≈ 1.506`. So `X` is absent for `χ ∈ (150°, 330°)`; by `R_{01}`'s ring points near `y_1` (`q_1 − y_1 =
+  e(120°)`) and `e(30°)`, for `χ ∈ (210°, 390°)`.
+- **3:** `T3` holds `y_2 + t·e(300°)` (its tip cone), distance² `1 + 2s·cos(χ − 60°) + t`, below 1 for `cos(χ − 60°) < 0` and `t ≪ s`; and `p`: absent for
+  `χ ∈ (150°, 330°)`. **1:** `T1` holds `y_1 + t·e(240°)`, distance² `1 + 2s·cos(χ − 120°) + t`; absent for `χ ∈ (210°, 390°)`.
+- **2:** for `χ ∈ (210°, 330°)`, `x ∈ L_1`, in `Z_1` (STARFORCE). ∎
+
+`tools/fs116_y4_lattice.py q1` (`data/fs116/y4/q1.out`) confirms each claimed exclusion at the twelve points `χ = 15° + 30°j` with witnesses checked to lie in
+the regions the argument names, and reports that outside each claimed sector the same witnesses fail at every sample (the sectors are sharp at first order);
+plant: the centre moved to `q_1 + (1/4, 0)`, where 28 claims fail. By SYM the same at `q_5` (`σ_30`, `3 ↔ 4`), `q_2` (`σ_120`, `1 ↔ 2`, `X ↔ X̄`) and `q_4`.
+
+**The sectors at `q_1`**, read off: `(210°, 330°)` (inside `L_1`): `{2}`; `(150°, 210°)`: `{1, 2}`; `(330°, 30°)`: `{2, 3}`; `(30°, 150°)`: `{1, 2, 3, X}`.
+
+derivation: FS116-Y4-SYM
+  statement: let F be a fragment of the HEX3 class on B̄(p, R), R ≥ √3; then σ_30(F), with the colours 3 and 4 exchanged, and σ_120(F), with the colours 1
+    and 2 exchanged and X and X̄ exchanged, are fragments of the HEX3 class on B̄(p, R) with the same labels — σ_30 fixing T1 and T2 and exchanging T3 and
+    T4, σ_120 exchanging T1 and T2 and fixing T3 and T4 — so every statement of this record about F at a point z holds at σ(z) with the colours so exchanged
+  uses only: that σ_30 and σ_120 are isometries fixing p; that a bijection of the colours preserves validity, non-Siamese and simplicity; the cones, hubs, tips
+    and ring colours of FS116-Y3-TIPS's labelling and the edges of HEX3's star, mapped by hand (§ 2.1) and checked as a table (control fs116-y4-sym)
+  not claimed: that any fragment of the class is symmetric; anything about stars other than HEX3's
+  argument: § 2.1 The symmetry (FS116-Y4-SYM)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours (the class may be empty); the table is control fs116-y4-sym
+  prior art: owed — no search run; the symmetry of a configuration under a colour-permuting isometry group is the standard frame of G58's equivariant sweeps
+  handoff: none — a bookkeeping lemma for the casework of this record
+
+derivation: FS116-Y4-SPOKE
+  statement: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, the outer tile O_2 of y_2 (colour 4) has 2y_2 in its closure, lies in
+    B̄(y_2, 1) ∩ B̄(2y_2, 1), and contains every point of some neighbourhood of 2y_2 that lies in B(y_2, 1) and off Γ; every tile with a point of that
+    neighbourhood outside B̄(y_2, 1) in its closure has colour 3, X or X̄; so near 2y_2 the circle ω(y_2) lies in Γ, with inner colour 4; and the same at y_5
+    and 2y_5 with 3 and 4 exchanged
+  uses only: FS116-Y3-STARFORCE (the lens colours near q_1 and q_2; HEX3's star); FS116-Y3-NBTIP (y_2's only outer colour is 4); RING-GERM (ii) (O_2's cone at
+    y_2 holds (90°, 150°)); FS116-Y3-NOQ's argument (R_12 and R_23 hold the open ring arcs); non-Siamese; diameter at most 1; |2y_2 − q_1| = |2y_2 − q_2| = 1,
+    |2y_2 − e(90°)|² = |2y_2 − e(150°)|² = 5 − 2√3; FS116-Y4-SYM for y_5
+  not claimed: that the outer colour at 2y_2 is 3 (X and X̄ are not excluded there when the ring tiles' cones at y_2 do not meet the outer side of the ring);
+    anything below radius 2; anything at the double-tip hubs; anything at k ≥ 7 (a seventh colour survives inside ω(y_2) near 2y_2)
+  argument: § 2.2 The spoke at `y_2` (FS116-Y4-SPOKE)
+  verdict: derived
+  grade: derived from: FS116-Y3-STARFORCE, FS116-Y3-NBTIP, RING-GERM, FS116-Y4-SYM
+  minds: 1
+  model: none at six colours; the plane facts at twelve points round 2y_2 are control fs116-y4-spoke
+  prior art: owed
+  handoff: none — a relay-result for the obstruction or the construction of this record; with STARFORCE, after its blind check, a candidate for de Bruijn
+
+derivation: FS116-Y4-Q1
+  statement: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, for every point x = q_1 + s·e(χ) of some neighbourhood of q_1,
+    colours 4 and X̄ are absent at x; X is absent when χ lies in (150°, 390°); 3 is absent when χ lies in (150°, 330°); 1 is absent when χ lies in
+    (210°, 390°); and the points with χ in (210°, 330°) are in Z_1 (colour 2)
+  uses only: FS116-Y4-SPOKE (O_2's points inside ω(y_2) near 2y_2); FS116-Y3-STARFORCE (Z_1 at L_1 near q_1); FS116-Y3-NOQ (the ring tiles hold their open
+    arcs; the cyclic order at y_1) and FS116-Y3-TIGHT's argument (|y_0 − q_1| = 2 with midpoint y_1); the tips T1 at y_1 and T3 at y_2 with their cones
+    (RING-GERM (i)); straddles at first order
+  not claimed: which of the remaining colours occur; that 3 is absent for χ in (−30°, 150°) (§ 3 reads when it is)
+  argument: § 2.3 The colours near `q_1` (FS116-Y4-Q1)
+  verdict: derived
+  grade: derived from: FS116-Y4-SPOKE, FS116-Y3-STARFORCE
+  minds: 1
+  model: none at six colours; the plane facts at twelve points round q_1 are control fs116-y4-q1
+  prior art: owed
+  handoff: none — a relay-result for § 3
+
+control: fs116-y4-sym
+  of: FS116-Y4-SYM — round 3's 26 forced data carried datum to datum by σ_30 with (3 4) and σ_120 with (1 2)(X X̄); σ_30 with (1 2) fails
+  run: python3 ../tools/fs116_y4_lattice.py sym | tail -n 1
+  expect: SYM: every datum carried
+  fault: python3 ../tools/fs116_y4_lattice.py sym --plant swap | tail -n 1
+
+control: fs116-y4-spoke
+  of: FS116-Y4-SPOKE — every claimed exclusion at twelve points round 2y_2, witnesses in their regions; Z_1's anchor moved off the lattice breaks it
+  run: python3 ../tools/fs116_y4_lattice.py spoke | tail -n 1
+  expect: SPOKE facts at 12 points: all hold
+  fault: python3 ../tools/fs116_y4_lattice.py spoke --plant q1 | tail -n 1
+
+control: fs116-y4-q1
+  of: FS116-Y4-Q1 — every claimed exclusion at twelve points round q_1, witnesses in their regions; the centre moved breaks 28 claims
+  run: python3 ../tools/fs116_y4_lattice.py q1 | tail -n 1
+  expect: Q1 facts at 12 points: all hold
+  fault: python3 ../tools/fs116_y4_lattice.py q1 --plant q1 | tail -n 1
+
+## Stage 2 — SAVED
