@@ -351,3 +351,167 @@ measure little. Counter-prior rule 2 applied: none of these numbers shrank an ai
   `plans/STUB-forced-pair.md` (nothing bears). The lines for `plans/STUB-local-exclusion.md` and `plans/STUB-route-t-count.md` are drafts (D8).
 - **Merged or apart:** R2-FOUR, CURVED and NOLRA merged into FS-126 by FS121-Z1-NOCURVED; REGJ kept apart (its derivation may not use the ladder
   lemmas, which assume REG-J′); TOP₆ and NOPAR-C5 merged into FS-128 as the two rungs at six by nature.
+
+## Stage 6 — SAVED: the drafts (below), then the report
+
+`plans/FS121-derivation.md` gained a "Rests on it:" line under each of 44 entries (computed from which entries cite it; the strict § B check asks for
+one); the gate still passes, 0 failures, 0 warnings (`data/fs121/fs121-z1/gate-stage6.out`). The § B check, run on a scratch copy of `LEDGER.md` with
+the 65 drafted lines appended: **RESULT: PASS, exit 0** (`data/fs121/fs121-z1/ledger-b-check.out`; before the lines it failed on exactly the 109
+FS-121 items, 65 missing rows and 44 missing prose lines).
+
+## Drafts for the front page
+
+### D1. `LEDGER.md`
+
+**Rows** (the coordinator numbers them from 142):
+
+| ‹R121-a› | **The honest class's ladders end inward and never outward. In an honest saturated colouring with REG-J′, at every number of colours, a curved interface's ladder of unit parallels ends inward at a unit arc whose centre carries its outer colour — a (Q) arc, or an (R2) arc about a point of Σ of at least three colours — and outward it never ends: a tangent arc of radius `n` forces tangent arcs of radii `n + 1, n + 2, …` over one window; with finitely many radii, every doubly periodic colouring among them, every curved interface is a split (Q) arc; LRA at a point is LRA along a whole unit-spaced normal line. At a point of Σ no colour holds two sectors, and a colour with a sector holds nothing else there; a tangent edge's partner curve carries its colour pattern pointwise, so tile edges at a convex corner are short. No three-colour (R2) end is built or excluded, and no curved tangent interface is held at any `k`. It moves no value** (FS-121; FS121-O1-ENDS, -OUT, -PER, -LRA-LINE, FS121-DB1-L3, FS121-V2-SECTOR, FS121-D1-VT, -EROSION; C121-R2-FOUR, C121-CURVED GAP). **[hand; eight statements two minds, the second blind (one prior); the rest one mind]** Mechanism: a ladder is a parallel family of rolling-ball curves, and it ends at its focal point. **Not claimed:** that any ladder ends at a (Q) arc only; an (R2) end, or a curved tangent interface, in any colouring. **Prior art:** FS-112's arc kinds and row 135's pencil, for valid maps; saturated colourings not found in print. | `plans/FS121-derivation.md` (round 1); `plans/FS121-map-step.md` § 3; `plans/FS121-DB1-verification.md`; `plans/FS121-D1-proof.md`; `plans/FS121-V2-verification.md`; `plans/FS121-V3-verification.md` | FS-121 (2026-10-03) |
+| ‹R121-b› | **Honesty is free, and the map step's six-colour content is the top colour. Every a.e.-proper `k`-colouring becomes, without raising any point's colour index, a measurable Grundy colouring bound at every interface on every colour present but the largest; every measurable idomatic partition (fall colouring) is honest saturated, and saturation is strictly weaker (a circle model, exact). So honest saturation at six is binding the top colour (TOP₆), and given a NO for honest saturated six-colourings it is the answer restated. On the cover route a Grundy six-colouring that is a map lies in `𝒫_6`, and `𝒫_6 = ∅` (NO-PAR) contains the honest route's saturated segment-and-arc NO; the stub's NO-PAR read on a maximal cover's map is the wrong target (DISC7's merged map, exact over all 5040 orders), and row 134's N4 step does not transfer to smooth boundaries (flat horns, exact). It moves no value** (FS-121; FS121-D3-GRUNDY, -FALLSAT, -SWAP1D, -EQ, FS121-C1-BOUND, -GMAP, -SAT, -COVMAP, -FLAT; C121-SAT6, C121-NOPAR, C121-NOPAR-C5 GAP). **[hand + tools exact; seven statements two minds, the second blind (one prior); the rest one mind]** Mechanism: the finite Grundy argument, made measurable; a map is bound one-sidedly by its lower colours. **Not claimed:** TOP₆; G-FIN₆; NO-PAR; that the cover route avoids FS-116's NO. **Prior art:** Grundy and fall colourings of finite graphs (Dunbar et al. 2000); measurable forms not found in print. | `plans/FS121-derivation.md` (rounds 2–3); `plans/FS121-D3-proof.md`; `plans/FS121-C1-proof.md`; `plans/FS121-V3-verification.md`; `plans/FS121-V4-verification.md`; `tools/fs121_d3_swap1d.py`, `tools/fs121_c1_disc7.py`, `tools/fs121_c1_flat.py` | FS-121 (2026-10-03) |
+| ‹R121-c› | **Symmetric and grid colourings are regular; what is open is aperiodic. No honest saturated REG-J′ colouring invariant under a cocompact group of isometries, so none doubly periodic, has large-radius accumulation, at any `k`; LRA forces thin pencils, maximal radius-`r` arcs with windows tending to 0 at every `r ≥ 2`. A same-colour piece of lateral half-width `ρ` facing a flat side across a gap `g` with `2g < ρ²` leaves the side's point no contact (sharp at `ρ² ≥ 2g − g²`), so every honest saturated grid colouring with countable breakpoints has a locally finite singular set; on the line the analogue is false with two colours, regions can be as small as wished at sixteen colours, and a fall colouring with a Cantor pinch would refute local finiteness. Three open claims — a three-colour (R2) end, a curved tangent interface, LRA — fall together to one: curved tangent interfaces in aperiodic colourings. It moves no value** (FS-121; FS121-D2-SYM, -THIN, -PERFIN, FS121-V5-SYM-CPT, FS121-D4-FACE, -GRID, -LINE, -TINY16, -HOLE, -FALL, FS121-Z1-NOCURVED; C121-NOLRA, C121-REGJ GAP). **[hand + tools exact; three statements two minds, the second blind (one prior), GRID's given FACE by name; the rest one mind]** Mechanism: counting modulo congruence bounds windows; the unit circle's sagitta against a gap. **Not claimed:** ¬LRA or REG-J′ in general; that a tight colouring can be taken periodic. **Prior art:** totally separable packings (`[FejesToth1973]`, listing only); measurable versions not found. | `plans/FS121-derivation.md` (rounds 2, 4; the close's composition); `plans/FS121-D2-proof.md`; `plans/FS121-D4-proof.md`; `plans/FS121-V5-verification.md`; `tools/fs121_d4_tiny16.py`, `tools/fs121_v5_face.py` | FS-121 (2026-10-03) |
+
+**§ B lines** (65, one per entry, generated verbatim from the entries' statements by `tools/fs121_z1_ledger_b.py`): `data/fs121/fs121-z1/ledger-b-draft.md`,
+to append to § B's table as they stand.
+
+### D2. `CLAUDE.md` — FS-121's clauses for the four shared units, and the corrections owed
+
+- *"Last updated" line,* ‹FS-121›: "**FS-121, the map step, closed undecided** (rows ‹R121-a›–‹R121-c›; `plans/FS121-Z1-close.md`): honest saturated
+  ladders end at (Q) or (R2) arcs and never outward, honesty is free, and the open steps are curved tangent interfaces, the singular set at LAT and the
+  top colour at six (FS-126–FS-128)."
+- *Open-milestones line,* ‹FS-121›: "FS-121, the map step (`plans/STUB-map-step.md`), **closed undecided** (rows ‹R121-a›–‹R121-c›); its successors are
+  FS-126, curved pencils, FS-127, lateral extent, and FS-128, the six-colour rungs (the cover route parked behind FS-116)."
+- *§ The aim's programme line,* ‹FS-121›, replacing "**FS-121, the map step**" where it appears among the successors: "**FS-121, the map step — closed**
+  (rows ‹R121-a›–‹R121-c›); its successors **FS-126, curved pencils**, **FS-127, lateral extent**, **FS-128, the six-colour rungs**".
+- *"Where the problem stands" item 31,* ‹FS-121›: "On route M's map step (rows ‹R121-a›–‹R121-c›), at every `k`: honest saturated ladders end inward at
+  (Q) or (R2) arcs and never outward, periodic classes have only segments and (Q) arcs, and honesty is free; what is open is curved tangent interfaces
+  (one question for three claims), the singular set at lateral extent, and the top colour at six, the last the answer restated given a NO."
+- *Correction owed, the theory paragraph* (its sentence "Route M's regularity is contact: …, that finiteness open (rows 140–141, G84, G85; [hand])"):
+  append "; FS-121 located the open part — curved tangent interfaces, lateral extent and the top colour at six (rows ‹R121-a›–‹R121-c›, G88–G90)".
+- *Net bytes:* the four clauses replace about 120 bytes of FS-121 text and add about 1,350; the theory-paragraph clause adds about 170. **Net ≈ +1,400
+  bytes**, under the 2,500 asked.
+
+### D3. Errata (for the coordinator to file)
+
+- **`plans/FS111-derivation.md`, under the entry FS111-W-NOREP (l. 485), a dated paragraph:** "*Correction (2026-10-03, FS-121's close; FS121-DB1 § 3.3
+  item 2, one mind):* the argument's two cases (`plans/FS111-W-wild.md` § 2.3) do not cover an edge that is a unit arc whose centre carries the repeated
+  colour on the far side of the edge from the sector, where case (i)'s parallel collapses to a point. The statement stands through FS121-DB1-L3's case
+  K+ (`plans/FS121-derivation.md` FS121-DB1-L3, two minds), which also localises it to a point of Σ with cusps allowed."
+- **`plans/FS121-map-step.md`** (the plan, a side record): not rewritten; its corrections are carried in `plans/FS121-derivation.md` (ENDS's and PER's
+  `uses only:`) and in this record § 2.4 (item 36).
+
+### D4. Grokkings — G88, G89, G90 (G67's form), and instances
+
+* **G88 — Curved tangent interfaces are the honest class's whole open content at the ends. [derived (held lemmas) + one-mind composition; a reading]**
+  In an honest saturated colouring with REG-J′ a tangent arc of radius `n` forces tangent arcs of every larger radius over its window (FS121-O1-OUT),
+  an (R2) arc is a tangent unit arc, and LRA puts tangent arcs of radius ≥ 2 in the colouring (FS121-D2-INCURVED); so a NO to curved tangent interfaces
+  makes C121-R2-FOUR vacuous, gives ¬LRA, and leaves every curved interface a split (Q) arc (FS121-Z1-NOCURVED); and under a cocompact symmetry there are
+  none (FS121-V5-SYM-CPT). *Reading:* aperiodic honest saturated colourings have no curved tangent interface either. *Do: when a question about saturated
+  interfaces asks where ladders end or whether radii accumulate, ask first whether the colouring can have a curved tangent interface at all, and if it
+  is periodic answer no. Killing test: a curved tangent-type interface in an honest saturated REG-J′ colouring at some `k ≥ 7`, by formula with an exact
+  check.*
+* **G89 — Honesty is free; the six-colour content of saturation is the top colour. [hand, two minds each on GRUNDY and FALLSAT; one mind on EQ]** Every
+  a.e.-proper colouring becomes a measurable Grundy colouring without raising a point's colour index, bound at each interface on every colour but the
+  largest (FS121-D3-GRUNDY); every measurable idomatic partition is saturated, and saturation is strictly weaker (FS121-D3-FALLSAT, -SWAP1D); a Grundy
+  colouring that is a map is bound one-sidedly in its lower colours (FS121-C1-GMAP). So binding the top colour (TOP₆) is all of honest saturation at six,
+  and given a NO for honest saturated colourings it is the answer (FS121-D3-EQ). *Do: when a route needs a saturated or maximal colouring, Grundy-ize
+  first and state what is left as the top colour's binding, a coverage question on its boundary's unit circles (G13); read the cover route's class as
+  Grundy maps, never as a maximal cover's merged map (FS121-C1-COVMAP). Nothing kills GRUNDY and FALLSAT but a defect; killing test of "the content is
+  the top colour": a saturation procedure at six that binds both sides of an interface at once without a global rebuild.*
+* **G90 — Lateral extent against gap: where the plane's curvature enters regularity. [hand, two minds on FACE and GRID; one mind on the rest; a
+  reading]** A same-colour piece of lateral half-width `ρ` facing a flat side across a gap `g` with `ρ² ≥ 2g − g²` leaves the side's point no contact
+  (FS121-D4-FACE, -V5-FACE-SHARP); on the line nothing replaces it and local finiteness fails with two colours (FS121-D4-LINE); regions can be as small
+  as wished at sixteen colours (FS121-D4-TINY16), so no count per region bounds the singular set. *Reading:* an accumulation of the singular set needs
+  same-colour pieces shrinking faster than the square root of their gaps (LAT's open case). *Do: before bounding a singular set by a count per region,
+  ask lateral extent against gap at each accumulation; spend the plane's dimension at distance exactly 1, the sagitta of the unit circle. Killing test:
+  an honest saturated colouring at some `k`, by formula, whose singular set accumulates with pieces shrinking slower than the square root of their gaps
+  (it would refute FACE, a defect), or one with point-like accumulation (it refutes C121-REGJ and confirms the reading's open case is real).*
+
+**A rewrite of G85's last sentence** ("What escapes is radii → ∞, FS-115's stuck ray."): "What escapes is radii → ∞: thin pencils, along a whole
+unit-spaced normal line (FS121-O1-LRA-LINE, FS121-D2-THIN), and none under a cocompact symmetry (FS121-D2-SYM)."
+
+**Instances for `plans/GROKKING-INSTANCES.md`:**
+- *§G67 (a §G miss):* FS-121's §G walked G13 (the fan ladder: "coverage is a k-set property invisible to pair sweeps") as silent; "bound" is a
+  coverage condition on `ω(x)`, and TOP₆ is a coverage question that D3's three attempts never asked (`plans/FS121-map-step.md` § 1.2 silent list;
+  `plans/FS121-Z1-close.md` § 4.1).
+- *§G21 (a control that tests nothing):* FS121-D1-EROSION's models SQ9 and HEX9 lie inside the diameter bound, which gives its first disjunct in every
+  a.e.-proper colouring for `θ ≤ 2π/3`, and its plant (a hexagon of side `3/5`) occurs in no a.e.-proper colouring (`plans/FS121-V2-verification.md`
+  § 3.4 row 11). And `tools/fs121_c1_disc7.py`'s first version passed 14 of 42 pairs on the wrong lattice (`plans/FS121-C1-proof.md` § 2.4).
+
+### D5. `BIBLIOGRAPHY.md` (rows at their true read status)
+
+- **[FukunagaTakahashi2014]** T. Fukunaga, M. Takahashi, *Evolutes of fronts in the Euclidean plane*, J. Singul. 10 (2014) (Zbl 1308.53005).
+  **Listing only** (FS121-D2's zbMATH query d01), not held, not read. Role: home 1's vocabulary (parallels, evolutes and cusps of fronts) for FS-121's
+  ladders. Rests on it: nothing.
+- **[FejesToth1973]** G. Fejes Tóth, L. Fejes Tóth, *On totally separable domains*, Acta Math. Acad. Sci. Hungar. 24 (1973) (Zbl 0259.52008). **Listing
+  only** (FS121-Z1's query z01, 2026-10-03; the record an author's summary or none), not held, not read. Role: the home FS121-D4 recalled for LAT
+  (lateral extent against gap). Rests on it: nothing.
+- *Not identified:* the spectral-minimal-partition work D4 recalled for the singular set (query z04 found a survey volume only): **recalled, not read**;
+  no row until it is identified.
+
+### D6. `data/fs121/claims.md` (the frozen list; notes for the coordinator, no statement edited)
+
+- **§ 0, add** (V3 § 3.6): "*Sector, region, angle, occupies* (FS121-V2's record, its definitions): a disc `B(z, r)` whose only point of Σ is `z`, in which
+  the essential boundary is the finitely many interface arcs at `z`; every region of the fan is an open set a.e. of one colour; a region of positive
+  angle has an open arc of directions, a zero-angle region none and one tangent direction." And: "**REG-J′ is read as a fan** at each point of Σ (no
+  arcs pass arbitrarily near `z` without meeting it); every consumer of FS121-V2-SECTOR reads it so (V3 § 3.5)."
+- **§ 0, ¬LRA:** "whether segments count among the pieces is not fixed; FS121-D2-SYM is held where they are circular arcs and derived by one mind
+  where they are not (item 71)."
+- **§ 7.0, "bound":** "read by its 'i.e.' clause, `T₁(x)` meets `F_j`; 'at distance exactly 1 from `F_j`' as set distance would make no point of `F_j`
+  `j`-bound (V4 § 1.2)."
+- **Corrected wordings** are filed in `plans/FS121-derivation.md` (FS121-O1-ENDS, -LRA-LINE, FS121-D1-VT, FS121-D4-GRID's not-claimed line); the list keeps
+  the frozen text.
+
+### D7. `CLOSED-QUESTIONS.md` — declined; and the closed banner for `plans/STUB-map-step.md`
+
+- *Declined:* nothing FS-121 holds answers a question the literature posed. `[SokolovVoronov2025]` Question 2 and `[CohenMani2025]` Question 5.1 are
+  untouched; FS121-D3-GRUNDY's dependent-choice route bears on a ZF + DC audit (Soifer's Open AC Problem 62.14) and answers nothing there.
+- *Banner* (at the top of `plans/STUB-map-step.md`): "> **Closed undecided 2026-10-03 (FS-121; rows ‹R121-a›–‹R121-c›; `plans/FS121-Z1-close.md`).**
+  Every curved ladder ends inward at a (Q) or (R2) arc and never outward; honesty is free; the cover route is parked behind FS-116 (Kooshi's to
+  overturn). Successors: FS-126 (curved pencils), FS-127 (lateral extent), FS-128 (the six-colour rungs)."
+
+### D8. Bearing lines for the two stubs FS-116's close writes (drafted; no FS-116 verdict, grade or count stated)
+
+- *`plans/STUB-local-exclusion.md`, § Bearing on the answer:* "**At FS-121's close (2026-10-03).** The honest route hands this NO an honest saturated map
+  whose curved ladders end at (Q) or (R2) arcs (FS121-O1-ENDS, held) and, when periodic, whose curved interfaces are split (Q) arcs (FS121-O1-PER, held).
+  The colour-generic lemmas this milestone's jobs were given: FS121-D1-VT, held in its narrower wording and misstated at corners of `L`; FS121-D1-EROSION,
+  held, with content only at `θ ∈ (2π/3, π)`. FS121-C1-SAT (held): C121-NOPAR contains the saturated segment-and-arc NO; that it contains NO-SAT is
+  FS121-C1's commentary, one mind. FS121-D3's recognition (one mind): in a saturated colouring every colour change across an interface is an exchange
+  with a unit neighbour."
+- *`plans/STUB-route-t-count.md`, § Bearing on the answer:* "**At FS-121's close (2026-10-03).** Whether honest saturation excludes Siamese pairs (G86) is
+  unanswered; the honest route's maps are honest saturated (FS111-M2-REDUCE-A), so a yes would let this count serve the honest route's NO."
+
+### D9. The Proof Atlas (`tools/viz_proof_atlas_facts.py`; the coordinator applies after the filing, then runs the checker and the build)
+
+```
+# replace node FS121's text
+N("FS121", "the map step", "step", "Route M's third statement. Closed undecided (rows ‹R121-a›–‹R121-c›): honest saturated ladders end inward at (Q) "
+  "or (R2) arcs and never outward; honesty is free (Grundy); symmetric and grid colourings are regular; open: curved tangent interfaces, lateral extent, "
+  "the top colour at six.")
+# new nodes
+N("FS126", "curved pencils", "step", "Does any honest saturated colouring have a curved tangent-type interface? A NO decides three of FS-121's open "
+  "claims; under a cocompact symmetry there are none (one mind).")
+N("FS127", "lateral extent", "step", "Is the singular set of every honest saturated colouring locally finite? Open at LAT, point-like accumulation; true "
+  "on grids (two minds).")
+N("FS128", "the six-colour rungs", "step", "Binding the top colour of a Grundy six-colouring (TOP₆), and NO-PAR under Condition 5 (the parked cover route).")
+# edges
+E("FS126", "FS121", "rests", STUB("STUB-curved-pencils.md"), "curved tangent interfaces", label="its ends")
+E("FS127", "FS121", "rests", STUB("STUB-lateral-extent.md"), "REG-J′ at LAT", label="its singular set")
+E("FS128", "FS121", "rests", STUB("STUB-top-colour.md"), "TOP₆ and NO-PAR-C5", label="its six-colour rungs")
+E("FS120", "FS127", "rests", STUB("STUB-lateral-extent.md"), "a fall colouring with a Cantor pinch refutes REG-J′", label="a potential refutation")
+# route wall7: add "FS126", "FS127", "FS128" to its links after "FS121"
+```
+
+### D10. For Poros's re-rank (`plans/FRONTIER-STUBS.md`): FS-121's row, replacement text
+
+"FS-121, the map step — **closed undecided 2026-10-03** (rows ‹R121-a›–‹R121-c›). Its successors carry its open steps: FS-126 (curved pencils; a NO
+decides C121-R2-FOUR, C121-CURVED and C121-NOLRA; bearing none alone, a colour-generic rung), FS-127 (lateral extent; REG-J′ at LAT; bearing none alone;
+FS-120's pinch a potential refutation), FS-128 (the six-colour rungs, TOP₆ and NOPAR-C5; at six by nature, next to the answer; the cover route parked
+behind FS-116)." Each new stub's § Bearing on the answer is written for ranking.
+
+### D11. Findings about Workflow 3.0, from this close (for the coordinator's watch)
+
+1. **The budget.** A close of an eleven-job milestone spent about 375k by the harness's count reading before it wrote anything (§ 1.3 F4); the 400k
+   guidance does not fit, and only the 550k line held. A close brief for a milestone this size might give the reading list by section, or split the
+   close into a reconciliation job and a drafting job.
+2. **The strict § B check wants "Rests on it:" prose under every entry**, which the lane file asks for "under each entry" but the gate does not check;
+   the two checks disagree on a derivation file the gate passes. One line in the lane file's § The close job, or a gate warning, would close it.
+3. **Item 58's ruling named VT and not EROSION**, whose qualifier was the same step; a ruling that lifts a qualifier might name every entry that carried it.

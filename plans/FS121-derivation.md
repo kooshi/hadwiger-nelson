@@ -92,6 +92,8 @@ derivation: FS121-O1-LRA-LINE
   prior art: new — “parallel curve* & unit distance” (0), “(parallel curve | parallel curves | equidistant*) & (unit distance | colo*)” (21), none bearing
   handoff: none — a reduction of an open statement (C121-NOLRA), which FS121-D2 did not need
 
+Rests on it: nothing in this file yet; a reduction of an open statement (C121-NOLRA), which FS121-D2 did not need.
+
 Frozen as C121-LRA-LINE (§ 2); corrected wording (reading (a) named) from DB1 § 3.1 row 11. **Held** under (a).
 
 derivation: FS121-O1-CARD
@@ -100,6 +102,8 @@ derivation: FS121-O1-CARD
   argument: FS121-map-step.md § 3.4
   verdict: gap: the (R2) branch — the ladder's last rung is (Q) or (R2) (FS121-O1-ENDS); an (R2) end lies on FS-116's rings when its centre carries at
     least four colours, and nothing excludes an (R2) centre of exactly three (C121-R2-FOUR)
+
+Rests on it: nothing in this file yet.
 
 Poros's card `do-ladders-end-on-q-rings` (`STUB-map-step.md` § The question (Poros, 2026-09-29)); one mind, DB1 § 3.2 consistent (sighted).
 
@@ -117,6 +121,8 @@ derivation: FS121-O1-ABOVE7
   prior art: partly: FS111-M-DEADLOCK (held) is the unsaturated fact; the remark not found
   handoff: none — it fixes C121-SAT6 at six by nature
 
+Rests on it: nothing in this file yet; it fixes C121-SAT6 at six by nature.
+
 ### DB1's lemmas (one mind each unless said)
 
 derivation: FS121-DB1-L1
@@ -131,6 +137,8 @@ derivation: FS121-DB1-L1
   model: k = 7: R7 at a lattice point (tools/fs121_db1_r7cones.py)
   prior art: partly: FS112-U1 (held, for valid maps)
   handoff: none — a local lemma consumed by FS121-DB1-L4, -L5; it crosses with them
+
+Rests on it: FS121-DB1-L4, FS121-DB1-L5.
 
 derivation: FS121-DB1-L3
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, at every point of Σ no colour occupies two sectors of positive angle, whatever
@@ -163,6 +171,8 @@ derivation: FS121-DB1-L4
   prior art: partly: FS112-N3-NOBOTH (held: four colours or a repeated colour, for valid maps)
   handoff: none — it crosses with FS121-DB1-L3
 
+Rests on it: FS121-O1-PER, FS121-DB1-L1.
+
 derivation: FS121-DB1-L5
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, the centre of a tangent-type unit arc that carries the arc's outer colour and
     not its inner lies in Σ, with at least two further positive-angle sectors of pairwise distinct colours besides the outer colour's: three distinct
@@ -177,6 +187,8 @@ derivation: FS121-DB1-L5
   prior art: partly: FS-112's (R2) kind (held, for valid maps); the count in saturated colourings not found
   handoff: none — a bound on an uninhabited object; it crosses with C121-R2-FOUR
 
+Rests on it: nothing in this file yet; a bound on an uninhabited object; it crosses with C121-R2-FOUR.
+
 derivation: FS121-DB1-L6
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius toward its
     centre ends, off finitely many normals, at a unit arc whose centre carries that arc's outer colour
@@ -190,6 +202,8 @@ derivation: FS121-DB1-L6
   prior art: partly: FS111-M2-INTRAD (ii) (held), with "a null set of normals" in place of "finitely many"
   handoff: none — a re-derivation inside C121-ENDS's verification; it crosses with FS111-M2-INTRAD
 
+Rests on it: nothing in this file yet; a re-derivation inside C121-ENDS's verification; it crosses with FS111-M2-INTRAD.
+
 derivation: FS121-DB1-L7
   statement: in an honest saturated colouring in D-NF, the unit parallel away from the centre of a tangent-type interface arc is, at every point off Σ,
     a tangent-type interface of radius one more; REG-J′ is not used
@@ -202,6 +216,8 @@ derivation: FS121-DB1-L7
   model: k = 9: SQ9's flat edges
   prior art: partly: FS111-W-LADDER (held, the flat case)
   handoff: none — it crosses with FS121-O1-OUT
+
+Rests on it: nothing in this file yet; it crosses with FS121-O1-OUT.
 
 ## Round 1 — the (R2) end (FS121-D1); its two lemmas checked blind in round 2 (FS121-V2)
 
@@ -221,6 +237,8 @@ derivation: FS121-D1-XCORNER
   model: θ = π/2: the point (1, 1) from z = 0 with edges along the axes
   prior art: known: elementary geometry of parallel lines
   handoff: none — elementary; it crosses with FS121-D1-EROSION
+
+Rests on it: FS121-D1-EROSION.
 
 derivation: FS121-D1-VT
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, let I be a tangent-type interface arc between colours a and b with no
@@ -265,6 +283,8 @@ derivation: FS121-V2-VT-W
   prior art: partly: FS121-D1-VT is its narrower case
   handoff: none — the wider form of FS121-D1-VT; it crosses with it if the corner case is consumed
 
+Rests on it: nothing in this file yet; the wider form of FS121-D1-VT; it crosses with it if the corner case is consumed.
+
 derivation: FS121-D1-EROSION
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if a colour's sector at a point z has angle θ in (0, π) and both its
     edges begin with maximal straight pieces of the colour's tile boundary of lengths L₁ and L₂, then min(L₁, L₂) ≤ cot(θ/2), or each of the two
@@ -298,6 +318,8 @@ derivation: FS121-V2-EROSION-DIAM
   prior art: known: the diameter bound is FS111-M-HULL2's
   handoff: none — it places FS121-D1-EROSION's content
 
+Rests on it: nothing in this file yet; it places FS121-D1-EROSION's content.
+
 derivation: FS121-D1-FIRSTORDER
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at a centre z of an (R2) arc carrying three colours q, r, s, the edge
     between r and s points into the antipodal cone of q's sector, and every partner point and split centre on ω(z) that the three edges at z require
@@ -312,6 +334,8 @@ derivation: FS121-D1-FIRSTORDER
   model: none held of the hypothesis at any k (no held colouring has an (R2) arc, C121-PER)
   prior art: partly: the edge dichotomy is FS-116's opening's (FS116-O1-SATPIN, `../data/fs116/claims.md` § 3); its three-colour reading not found
   handoff: none — a no-go for a route (the plan's first-order aim), not a statement any later proof consumes
+
+Rests on it: FS121-R2-FOUR.
 
 derivation: FS121-D1-R2SMOOTH
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if an end A₁ = z + u(α₁) of an (R2) arc about z is not a point of Σ,
@@ -328,6 +352,8 @@ derivation: FS121-D1-R2SMOOTH
   prior art: partly: the plan's gate covers the object class (FS121-map-step.md § 2.2); this lemma's own search not run
   handoff: none — consumed only by FS121-D1-R2CORNER
 
+Rests on it: FS121-D1-R2CORNER.
+
 derivation: FS121-D1-RUNG2
   statement: the window ℓ of an (R2) arc in an honest saturated colouring in D-NF satisfying REG-J′ satisfies 2 sin(ℓ/2) ≤ 1; if the colouring is
     cusp-free, 4 sin(ℓ/2) ≤ 1, so ℓ ≤ 2 arcsin(1/4) < 29°
@@ -340,6 +366,8 @@ derivation: FS121-D1-RUNG2
   model: none held of the hypothesis at any k; the bound is the diameter of the p-tile the (R2) definition names
   prior art: partly: FS-112's (R2) definition names the inner-colour tile along the radius-2 circle; the bound not found
   handoff: none — consumed by FS121-D1-R2CORNER
+
+Rests on it: FS121-D1-R2CORNER, FS121-R2-FOUR.
 
 derivation: FS121-D1-R2CORNER
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at an (R2) arc about z with window ℓ whose ends are not points of Σ and
@@ -356,6 +384,8 @@ derivation: FS121-D1-R2CORNER
   prior art: partly: the plan's gate covers the object class; this lemma's own search not run
   handoff: none — a necessary condition on an uninhabited object
 
+Rests on it: FS121-D1-R2SMOOTH, FS121-D1-RUNG2, FS121-R2-FOUR.
+
 derivation: FS121-D1-PENCILWIN
   statement: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, a tangent-type interface arc of finite radius n ≥ 2 about z whose
     chain of unit parallels ends at a single unit arc lies in a pencil whose rungs of radius at least 2 share one window, of angular width ℓ with
@@ -370,6 +400,8 @@ derivation: FS121-D1-PENCILWIN
   model: none held of the hypothesis at any k (no held colouring has a curved tangent interface)
   prior art: partly: the plan's gate covers the object class; this lemma's own search not run
   handoff: none — a necessary condition on an uninhabited object; it crosses with FS121-O1-OUT if a curved inhabitant lands
+
+Rests on it: nothing in this file yet; a necessary condition on an uninhabited object; it crosses with FS121-O1-OUT if a curved inhabitant lands.
 
 derivation: FS121-D1-DOUBLE
   statement: for a point z, a unit vector e and h in (0, 1), within the cone of directions at most 60° from e and beyond ∂B(z, 1), the circles ∂B(z, j)
@@ -387,6 +419,8 @@ derivation: FS121-D1-DOUBLE
   model: h = 1/2, e = (0, 1), z = 0: on the axis the circles sit at 1, 3/2, 2, 5/2, …, SQ9's one-dimensional pattern bent round z
   prior art: partly: SQ9's pattern along one axis is its flat case; the two-centred form not found
   handoff: none — a partial construction toward C121-CURVED
+
+Rests on it: FS121-R2-FOUR, FS121-CURVED.
 
 derivation: FS121-R2-FOUR
   statement: in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, every centre z of an (R2) arc that ends a chain
@@ -444,6 +478,8 @@ derivation: FS121-V3-CPI
   prior art: partly: FS111-M-HALF (held: each piece's blow-up lies in a half-plane at a saturated point); here with saturation used only at arc points
   handoff: none — a corollary inside FS121-V2-SECTOR's verification
 
+Rests on it: nothing in this file yet; a corollary inside FS121-V2-SECTOR's verification.
+
 derivation: FS121-V3-CUSP
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, two zero-angle regions of one colour at a point of Σ have collinear tangent
     directions
@@ -456,6 +492,8 @@ derivation: FS121-V3-CUSP
   model: k = 7: R7 at a lattice point (its three down cusps are of distinct colours, so it meets the statement vacuously)
   prior art: partly: FS121-V2-SECTOR's not-claimed case, sharpened
   handoff: none — a sharpening of an open case
+
+Rests on it: nothing in this file yet; a sharpening of an open case.
 
 derivation: FS121-D3-FALLSAT
   statement: every partition of the plane, up to a null set, into k measurable sets each maximal among measurable sets with null unit pairs (a measurable
@@ -514,6 +552,8 @@ derivation: FS121-D3-SWAP1D
     distance & (partition | coloring | colouring)” (2), none bearing
   handoff: none — a finite exact model separating two notions; formalizable on demand
 
+Rests on it: FS121-SAT6.
+
 control: FS121-D3-SWAP1D
   of: FS121-D3-SWAP1D — the colouring is saturated; with the twist ignored four (point, colour) pairs are unbound
   run: python3 ../tools/fs121_d3_swap1d.py 2>&1 | tail -1
@@ -533,6 +573,8 @@ derivation: FS121-D3-EQ
   model: premises open; at seven its analogue is empty of content, R7 being an honest saturated seven-colouring
   prior art: partly: its shape is FS111-C-REG-EQ's, one rung over; “(saturated | maximal) & unit distance & (partition | coloring | colouring)” (2) none bearing
   handoff: none — a statement of the rung's strength; it enters no proof
+
+Rests on it: FS121-SAT6.
 
 derivation: FS121-SAT6
   statement: every tight a.e.-proper k-colouring can be modified, keeping it a.e.-proper with k colours, into an honest (one colour per point) saturated
@@ -560,6 +602,8 @@ derivation: FS121-D2-INCURVED
     graph | measurable chromatic) & (curvature | evolute | parallel curve | arc*)” (4), none bearing
   handoff: none — a relation between two claims; it crosses with FS121-Z1-NOCURVED
 
+Rests on it: FS121-Z1-NOCURVED.
+
 derivation: FS121-D2-EXT
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, let a be a point of an interface arc, not in Σ, at which the arc passes from a
     circular piece γ of radius n ≥ 3 and centre z to a piece not on γ's circle, and let L be the normal line at a; then for every integer k with
@@ -576,6 +620,8 @@ derivation: FS121-D2-EXT
   prior art: new — “(evolute | focal set | caustic) & (parallel curve | unit distance | colo*)” (14), “(piecewise circular | circular arcs | biarc*) &
     (accumulat* | infinitely many) & (curvature | radii)” (1), none bearing
   handoff: de Bruijn — queued behind FS111-M-PINCH, FS111-M-C11 and FS111-M2-INTRAD; its geometric core is elementary
+
+Rests on it: FS121-D2-THIN, FS121-D2-SYM.
 
 control: FS121-D2-EXT-CORE
   of: FS121-D2-EXT — its last step, exact: tangent circles (or a circle and a line) meet only at the point of tangency; the plant adds γ's own circle
@@ -598,6 +644,8 @@ derivation: FS121-D2-THIN
   prior art: new — “(finite local complexity | local complexity) & (curvature | circular arc | colouring | coloring | unit distance)” (5), “(evolute |
     focal set | caustic) & (parallel curve | unit distance | colo*)” (14), none bearing
   handoff: none — a necessary condition on an uninhabited class; it crosses with FS121-D2-SYM
+
+Rests on it: FS121-D2-SYM, FS121-NOLRA.
 
 control: FS121-D2-TRANSPORT
   of: FS121-D2-THIN — window transport, exact: a rung subtends at the centre the angle its piece subtends; the plant shifts the rung's centre
@@ -640,6 +688,8 @@ derivation: FS121-D2-PERFIN
   model: k = 7: R7 (one radius, 1); k = 9: SQ9 and HEX9 (radius infinite only)
   prior art: partly: C121-PER states the conclusion for doubly periodic colourings satisfying ¬LRA; without ¬LRA not found
   handoff: none — it removes a hypothesis from C121-PER's periodic clause; it crosses with FS121-D2-SYM
+
+Rests on it: nothing in this file yet; it removes a hypothesis from C121-PER's periodic clause; it crosses with FS121-D2-SYM.
 
 derivation: FS121-NOLRA
   statement: in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, ¬LRA holds
@@ -694,6 +744,8 @@ derivation: FS121-C1-GMAP
   prior art: partly: the finite form is classical, recalled, not read; “(Grundy | b-coloring | b-chromatic) & (unit distance | plane | measurable)” (15) none bearing
   handoff: de Bruijn — with FS121-D3-GRUNDY, once map colourings and supports are in Lean
 
+Rests on it: nothing in this file yet; with FS121-D3-GRUNDY, once map colourings and supports are in Lean.
+
 Frozen at § 7.2. **Held.** (ii)'s "if" half is vacuous. It is the map step in Grundy form: given C121-NOPAR, G-FIN₆ is the answer restated.
 
 derivation: FS121-C1-SAT
@@ -731,6 +783,8 @@ derivation: FS121-C1-COVMAP
     "parallel body" | "outer parallel") & (coloring | colouring | chromatic)” (0), none bearing
   handoff: none — a property of a control object; exact and periodic, formalizable on demand
 
+Rests on it: nothing in this file yet; a property of a control object; exact and periodic, formalizable on demand.
+
 control: FS121-C1-COVMAP
   of: FS121-C1-COVMAP — every order leaves an edge point unbound on both sides; read in the cover's classes, none does
   run: python3 ../tools/fs121_c1_disc7.py | tail -1
@@ -754,6 +808,8 @@ derivation: FS121-C1-FLAT
   prior art: partly: FS110-NB4's plant records that the constant sequence (0, 0) survives N4-FIN without strictness; its realisation by smooth horns
     not found — “(map | tiling) & (curved | smooth | "circular arcs") & "chromatic number" & plane” (1)
   handoff: none — a statement about where a route stops; exact, formalizable on demand
+
+Rests on it: FS121-NOPAR-C5.
 
 control: FS121-C1-FLAT
   of: FS121-C1-FLAT — the parallels of y = x⁴ stay flat horns above the line; from a circle-like germ the chain leaves (−1, 1)
@@ -779,6 +835,8 @@ derivation: FS121-NOPAR-C5
   verdict: gap: the transfer of row 134's chain from segment-and-arc edges to edges lying on unit parallels — first at the vertex data (one-sided
     tangents and horn curvatures, which the class does not supply), then at FS110-N4-FIN, whose strictness λ_k < υ_k smooth horns lack (FS121-C1-FLAT)
 
+Rests on it: FS121-NOPAR.
+
 Frozen as C121-NOPAR-C5 (§ 7.1). One mind. The cover route's own new part.
 
 ### V4's lemmas (one mind each)
@@ -797,6 +855,8 @@ derivation: FS121-V4-SWITCH
   prior art: partly: FS111-M-HULL2 (a path-connected piece of a class has diameter ≤ 1) is its form for density sets
   handoff: none — a lemma inside a verification
 
+Rests on it: nothing in this file yet; a lemma inside a verification.
+
 derivation: FS121-V4-LF
   statement: in a locally finite map colouring every bounded set meets finitely many faces
   uses only: plane-graph facts PG1 and SEP (cited unread in V4's record)
@@ -808,6 +868,8 @@ derivation: FS121-V4-LF
   model: k = 9: SQ9
   prior art: partly: standard plane-graph topology, cited unread
   handoff: none — a standard fact, formalized with the plane-graph library if needed
+
+Rests on it: FS121-V4-SWITCH.
 
 derivation: FS121-V4-EDGE
   statement: in DISC7's merged map under a total order of its seven colours, an arc point of the disc of colour c is unbound by both side colours exactly
@@ -824,6 +886,8 @@ derivation: FS121-V4-EDGE
   prior art: partly: FS121-C1-COVMAP is its existence half
   handoff: none — a property of a control object
 
+Rests on it: nothing in this file yet; a property of a control object.
+
 derivation: FS121-V4-HEXMID
   statement: at every edge midpoint of the tight hexagonal seven-colouring neither side colour is bound: the farthest point of its own hexagon is √13/4
     away and the nearest same-colour hexagon of either side is farther than 1
@@ -836,6 +900,8 @@ derivation: FS121-V4-HEXMID
   model: the tight hexagonal seven-colouring
   prior art: partly: FS111-M-DEADLOCK (held) is the same geometry; the list's "in no 𝒫_7", re-derived
   handoff: none — a property of a control object
+
+Rests on it: nothing in this file yet; a property of a control object.
 
 ## Round 4 — the singular set (FS121-D4); FS121-V5 blind on FACE and GRID
 
@@ -898,6 +964,8 @@ derivation: FS121-D4-HOLE
     “(saturated | maximal) & (unit distance | distance graph) & (colouring | coloring | partition) & (boundary | regular*)” (2), none bearing
   handoff: none — a structural no-go between open statements; it crosses with FS111-M-PINCH
 
+Rests on it: nothing in this file yet; a structural no-go between open statements; it crosses with FS111-M-PINCH.
+
 derivation: FS121-D4-LINE
   statement: on the real line with the unit graph x ~ x ± 1, every colouring f(x) = (⌊x⌋ + v(x − ⌊x⌋)) mod 2 with v measurable is proper at every unit
     pair, honest and saturated; with v(t) = ⌊1/dist(t, Z₀)⌋ mod 2, Z₀ = {0} ∪ {1/n}, its singular set contains Z₀ + ℤ and is not locally finite — the
@@ -912,6 +980,8 @@ derivation: FS121-D4-LINE
   prior art: new — “(avoiding distance | without unit distance* | avoiding sets | distance avoiding) & (boundary | regular* | curvature | locally
     finite)” (2), “(saturated | maximal) & (unit distance | distance graph) & (colouring | coloring | partition) & (boundary | regular*)” (2), none bearing
   handoff: none — a calibration that sorts the dimension as a determiner
+
+Rests on it: FS121-REGJ.
 
 derivation: FS121-D4-TINY16
   statement: for every ε in (0, 1/2) the product of two copies of the partition of the line at m, m + ε, m + 1/2 (m ∈ ℤ), gaps coloured by their index
@@ -928,6 +998,8 @@ derivation: FS121-D4-TINY16
   prior art: new — “(saturated | maximal) & (unit distance | distance graph) & (colouring | coloring | partition) & (boundary | regular*)” (2),
     “(unit distance | distance one | forbidden distance) & (singular set | locally finite | free boundary | accumulat*)” (2), none bearing
   handoff: none — a control object, exact and periodic
+
+Rests on it: nothing in this file yet; a control object, exact and periodic.
 
 control: FS121-D4-TINY16
   of: FS121-D4-TINY16 — every same-colour pair proper and every contact present; with the gaps coloured mod 3 properness fails
@@ -948,6 +1020,8 @@ derivation: FS121-D4-FALL
   model: k = 7: R7, a regular maximal partition with Σ the lattice
   prior art: known: a corollary of FS121-D3-FALLSAT
   handoff: none — a routing remark: it puts FS-120's pinch on C121-REGJ's path
+
+Rests on it: nothing in this file yet; a routing remark: it puts FS-120's pinch on C121-REGJ's path.
 
 derivation: FS121-REGJ
   statement: in every honest saturated colouring in D-NF, with any number of colours, the singular set Σ is locally finite and each point of Σ meets
@@ -976,6 +1050,8 @@ derivation: FS121-V5-PAIR
   prior art: partly: the Fubini fact is FS-106's (held, as D4 uses it)
   handoff: none — lemmas inside a verification; they cross with FS121-D4-FACE
 
+Rests on it: FS121-V5-FACE-SHARP.
+
 derivation: FS121-V5-FACE-SHARP
   statement: in FS121-D4-FACE's setting, the first clause holds whenever ρ² ≥ 2g − g², that is (1 − g)² + ρ² ≥ 1, and fails for some colouring whenever
     ρ² < 2g − g²
@@ -989,6 +1065,8 @@ derivation: FS121-V5-FACE-SHARP
   model: g = 1/10, ρ = 11/25 (outside 2g < ρ², inside the sharp condition); the counterexample g = 1/10, ρ = 2/5 below it
   prior art: partly: FS121-D4-FACE is its sufficient half
   handoff: none — it sharpens a held lemma's margin
+
+Rests on it: nothing in this file yet; it sharpens a held lemma's margin.
 
 control: FS121-V5-FACE-CEX
   of: FS121-V5-FACE-SHARP — below the sharp margin the first clause fails, exactly
@@ -1009,6 +1087,8 @@ derivation: FS121-V5-GRID-CANTOR
   prior art: partly: FS121-D4-GRID's not-claimed case, now decided for the breakpoint clause
   handoff: none — a counterexample to a removed hypothesis
 
+Rests on it: nothing in this file yet; a counterexample to a removed hypothesis.
+
 derivation: FS121-V5-LOC
   statement: in an honest saturated colouring in D-NF satisfying REG-J′ with interface set 𝓘: (i) cl 𝓘 ∖ Σ ⊆ 𝓘, and no point of 𝓘 is a density point of
     any class; (ii) each y ∈ cl 𝓘 ∖ Σ has a ball missing Σ in which cl 𝓘 is the graph of a C^{1,1} function over the tangent line at y; (iii) a circular
@@ -1024,6 +1104,8 @@ derivation: FS121-V5-LOC
   prior art: partly: FS111-M-C11 (held) is the local regularity it packages
   handoff: none — local lemmas consumed by FS121-V5-RAY
 
+Rests on it: FS121-V5-RAY, FS121-V5-SYM-UP.
+
 derivation: FS121-V5-RAY
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, let C_n ⊆ cl 𝓘 be arcs of circles of radii R_n → ∞, or segments, no two sharing
     a sub-arc of positive length, with points p_n ∈ C_n, p_n → x₀, from which C_n continues for arclength at least λ > 0 with unit tangent u_n → u; then Σ
@@ -1038,6 +1120,8 @@ derivation: FS121-V5-RAY
   prior art: partly: FS121-D2-EXT does the equivalent work at a junction
   handoff: de Bruijn — a self-contained lemma over FS111-M-C11 that both routes to FS121-D2-SYM can rest on (item 79)
 
+Rests on it: FS121-D2-SYM, FS121-V5-LOC, FS121-V5-SYM-CPT.
+
 derivation: FS121-V5-SYM-UP
   statement: in an honest saturated colouring in D-NF satisfying REG-J′, if the radius-r arcs, for some r ≥ 2, have windows at least θ₀ > 0, then every
     circular piece of finite radius R ≥ r lies in a radius-R arc of window at least θ₀
@@ -1050,6 +1134,8 @@ derivation: FS121-V5-SYM-UP
   model: k = 7: R7, k = 9: SQ9 and HEX9 (vacuous: no arc of radius ≥ 2)
   prior art: partly: FS121-D2-THIN's window transport, run outward
   handoff: none — a strengthening inside a verification
+
+Rests on it: FS121-V5-SYM-CPT.
 
 derivation: FS121-V5-SYM-CPT
   statement: in an honest saturated colouring in D-NF satisfying REG-J′ invariant under a group of isometries of the plane, each mapping the partition to
@@ -1066,6 +1152,8 @@ derivation: FS121-V5-SYM-CPT
   prior art: partly: C121-PER (held) for doubly periodic colourings satisfying ¬LRA; FS121-D2-PERFIN with C121-PER reaches the doubly periodic case by a
     second, independent route
   handoff: none — it removes ¬LRA from C121-PER for every cocompact symmetry; it crosses with FS121-D2-SYM
+
+Rests on it: FS121-CURVED.
 
 ## The close's composition (FS121-Z1)
 

@@ -1,0 +1,155 @@
+entry lint
+  claim FS121-O1-ENDS: minds 2 — blind to: FS121-O1's § 3.2–3.4 until its verdicts were committed (43bb6385); method: DB1 reads the local fan REG-J′ gives and counts colours by properness straddles (DB1-L1, L3–L5), O1 transfers NOBOTH and cites W-NOREP
+  claim FS121-O1-ENDS: prior art new, 2 counted queries
+  claim FS121-O1-OUT: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: the same held step, DB1 adding the radial images of points of Σ and the attack at R7
+  claim FS121-O1-OUT: prior art partly
+  claim FS121-O1-PER: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: the periodic step by two arguments (arcs per fundamental domain; translates of pieces accumulating into LRA)
+  claim FS121-O1-PER: prior art partly
+  claim FS121-O1-LRA-LINE: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: each piece's own k-fold parallel moved off Σ, against the parallel of the whole curve
+  claim FS121-O1-LRA-LINE: prior art new, 2 counted queries
+  claim FS121-O1-ABOVE7: minds 1
+  claim FS121-O1-ABOVE7: prior art partly
+  claim FS121-DB1-L1: minds 1
+  claim FS121-DB1-L1: prior art partly
+  claim FS121-DB1-L3: minds 2 — blind to: each other's records (DB1 § 2.3 opened by V2 only after f537b8c9); method: a straddle with a tangent/unit-arc case split and exact cusp checks (DB1), against the component lemma at contacts inherited as limits along the edges (V2)
+  claim FS121-DB1-L3: prior art partly
+  claim FS121-DB1-L4: governed by FS121-DB1-L1 (hand, minds 1)
+  claim FS121-DB1-L4: governed by FS121-DB1-L3 (hand, minds 2)
+  claim FS121-DB1-L4: minds 1
+  claim FS121-DB1-L4: prior art partly
+  claim FS121-DB1-L5: governed by FS121-DB1-L1 (hand, minds 1)
+  claim FS121-DB1-L5: governed by FS121-DB1-L3 (hand, minds 2)
+  claim FS121-DB1-L5: minds 1
+  claim FS121-DB1-L5: prior art partly
+  claim FS121-DB1-L6: minds 1
+  claim FS121-DB1-L6: prior art partly
+  claim FS121-DB1-L7: minds 1
+  claim FS121-DB1-L7: prior art partly
+  claim FS121-D1-XCORNER: minds 1
+  claim FS121-D1-XCORNER: prior art known
+  claim FS121-D1-VT: minds 2 — blind to: FS121-D1's § 2.1 until V2's verdicts were committed (f537b8c9); method: F2–F3 at points of L then FS121-V2-SECTOR at Y (V2), against FS111-W-NOREP at Y (D1); both pass the zero-angle case through FS121-V2-SECTOR
+  claim FS121-D1-VT: prior art partly, 1 counted queries
+  claim FS121-V2-VT-W: governed by FS121-V2-SECTOR (hand, minds 2)
+  claim FS121-V2-VT-W: minds 1
+  claim FS121-V2-VT-W: prior art partly
+  claim FS121-D1-EROSION: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-EROSION: governed by FS121-D1-XCORNER (hand, minds 1)
+  claim FS121-D1-EROSION: minds 2 — blind to: FS121-D1's §§ 1.3, 2.2 until f537b8c9; method: the same crossing (named in the statement, so given), VT applied through different lemmas, V2's for the straight branch alone
+  claim FS121-D1-EROSION: prior art partly
+  claim FS121-V2-EROSION-DIAM: minds 1
+  claim FS121-V2-EROSION-DIAM: prior art known
+  claim FS121-D1-FIRSTORDER: minds 1
+  claim FS121-D1-FIRSTORDER: prior art partly
+  claim FS121-D1-R2SMOOTH: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-R2SMOOTH: minds 1
+  claim FS121-D1-R2SMOOTH: prior art partly
+  claim FS121-D1-RUNG2: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-RUNG2: minds 1
+  claim FS121-D1-RUNG2: prior art partly
+  claim FS121-D1-R2CORNER: governed by FS121-D1-R2SMOOTH (derived from, minds 1)
+  claim FS121-D1-R2CORNER: governed by FS121-D1-EROSION (derived from, minds 2)
+  claim FS121-D1-R2CORNER: governed by FS121-D1-RUNG2 (derived from, minds 1)
+  claim FS121-D1-R2CORNER: minds 1
+  claim FS121-D1-R2CORNER: prior art partly
+  claim FS121-D1-PENCILWIN: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-PENCILWIN: minds 1
+  claim FS121-D1-PENCILWIN: prior art partly
+  claim FS121-D1-DOUBLE: minds 1
+  claim FS121-D1-DOUBLE: prior art partly
+  claim FS121-V2-SECTOR: minds 2 — blind to: V2 § 2.3 until V3's verdicts were committed (dea603eb; V3 was relayed two definition lines of V2's record, no route); method: limits of the edge contacts sorted by two disc tests, Lemmas C and D (V3), against a per-arc case split with Lemma H (V2)
+  claim FS121-V2-SECTOR: prior art partly
+  claim FS121-V3-CPI: minds 1
+  claim FS121-V3-CPI: prior art partly
+  claim FS121-V3-CUSP: minds 1
+  claim FS121-V3-CUSP: prior art partly
+  claim FS121-D3-FALLSAT: minds 2 — blind to: D3 § 2.1 until dea603eb; method: the same small-ball argument, reached independently (one mind on the method axis)
+  claim FS121-D3-FALLSAT: prior art partly, 1 counted queries
+  claim FS121-D3-GRUNDY: minds 2 — blind to: D3 § 2.2 until dea603eb; method: exhaustion (dependent choice) and a ball added at a support point (V3), against Zorn and a positive-density limit (D3)
+  claim FS121-D3-GRUNDY: prior art partly, 1 counted queries
+  claim FS121-D3-SWAP1D: minds 1
+  claim FS121-D3-SWAP1D: prior art new, 2 counted queries
+  claim FS121-D3-EQ: minds 1
+  claim FS121-D3-EQ: prior art partly, 1 counted queries
+  claim FS121-D2-INCURVED: minds 1
+  claim FS121-D2-INCURVED: prior art new, 2 counted queries
+  claim FS121-D2-EXT: minds 1
+  claim FS121-D2-EXT: prior art new, 2 counted queries
+  claim FS121-D2-THIN: governed by FS121-D2-EXT (hand, minds 1)
+  claim FS121-D2-THIN: minds 1
+  claim FS121-D2-THIN: prior art new, 2 counted queries
+  claim FS121-D2-SYM: governed by FS121-D2-THIN (derived from, minds 1)
+  claim FS121-D2-SYM: minds 2 — blind to: D2 § 2 until V5's verdict was committed (ab25bbdc; V5 was relayed four header definitions of D2's record); method: the window carried back out to the piece's radius by FS121-O1-OUT, then a segment in Σ by FS121-V5-RAY (V5), against window transport stopped at junction normals by FS121-D2-EXT (D2)
+  claim FS121-D2-SYM: prior art new, 2 counted queries
+  claim FS121-D2-PERFIN: governed by FS121-D2-SYM (derived from, minds 2)
+  claim FS121-D2-PERFIN: minds 1
+  claim FS121-D2-PERFIN: prior art partly
+  claim FS121-C1-BOUND: minds 2 — blind to: FS121-C1's record until V4's verdicts were committed (0dde4982); method: a switch point over the local finiteness of faces (V4-SWITCH, V4-LF), against a two-line perturbation (C1)
+  claim FS121-C1-BOUND: prior art partly, 2 counted queries
+  claim FS121-C1-GMAP: governed by FS121-C1-BOUND (hand, minds 2)
+  claim FS121-C1-GMAP: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis), V4 writing out R7's Grundy-boundness
+  claim FS121-C1-GMAP: prior art partly, 1 counted queries
+  claim FS121-C1-SAT: governed by FS121-C1-BOUND (hand, minds 2)
+  claim FS121-C1-SAT: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis)
+  claim FS121-C1-SAT: prior art new, 2 counted queries
+  claim FS121-C1-COVMAP: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the colour of rank 4 by parity (V4-MID) against the colour of rank 2 (C1), two tools written apart (tools/fs121_v4_covmap.py, tools/fs121_c1_disc7.py)
+  claim FS121-C1-COVMAP: prior art new, 2 counted queries
+  claim FS121-C1-FLAT: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same witness (one mind on the method axis), V4 closing the composition as an identity in t with k symbolic, C1 as a series to order 6
+  claim FS121-C1-FLAT: prior art partly, 1 counted queries
+  claim FS121-V4-SWITCH: governed by FS121-V4-LF (hand, minds 1)
+  claim FS121-V4-SWITCH: minds 1
+  claim FS121-V4-SWITCH: prior art partly
+  claim FS121-V4-LF: minds 1
+  claim FS121-V4-LF: prior art partly
+  claim FS121-V4-EDGE: minds 1
+  claim FS121-V4-EDGE: prior art partly
+  claim FS121-V4-HEXMID: minds 1
+  claim FS121-V4-HEXMID: prior art partly
+  claim FS121-D4-FACE: minds 2 — blind to: D4 §§ 2.1–2.2 until V5's verdicts were committed (4ed402c6); method: a Fubini pair lemma and a crossing criterion with the exact corner (V5), against the sagitta bound and a shrinking ε′ (D4)
+  claim FS121-D4-FACE: prior art new, 2 counted queries
+  claim FS121-D4-GRID: governed by FS121-D4-FACE (hand, minds 2)
+  claim FS121-D4-GRID: minds 2 — blind to: D4's argument until 4ed402c6, but given its key lemma, FS121-D4-FACE, by name in the frozen list; method: consecutive thin columns by Cantor–Bendixson and a pigeonhole over k + 1 of them (V5), against isolated breakpoints near the accumulation (D4)
+  claim FS121-D4-GRID: prior art new, 2 counted queries
+  claim FS121-D4-HOLE: minds 1
+  claim FS121-D4-HOLE: prior art new, 2 counted queries
+  claim FS121-D4-LINE: minds 1
+  claim FS121-D4-LINE: prior art new, 2 counted queries
+  claim FS121-D4-TINY16: minds 1
+  claim FS121-D4-TINY16: prior art new, 2 counted queries
+  claim FS121-D4-FALL: governed by FS121-D3-FALLSAT (hand, minds 2)
+  claim FS121-D4-FALL: minds 1
+  claim FS121-D4-FALL: prior art known
+  claim FS121-V5-PAIR: minds 1
+  claim FS121-V5-PAIR: prior art partly
+  claim FS121-V5-FACE-SHARP: minds 1
+  claim FS121-V5-FACE-SHARP: prior art partly
+  claim FS121-V5-GRID-CANTOR: minds 1
+  claim FS121-V5-GRID-CANTOR: prior art partly
+  claim FS121-V5-LOC: minds 1
+  claim FS121-V5-LOC: prior art partly
+  claim FS121-V5-RAY: governed by FS121-V5-LOC (hand, minds 1)
+  claim FS121-V5-RAY: minds 1
+  claim FS121-V5-RAY: prior art partly
+  claim FS121-V5-SYM-UP: governed by FS121-V5-LOC (hand, minds 1)
+  claim FS121-V5-SYM-UP: minds 1
+  claim FS121-V5-SYM-UP: prior art partly
+  claim FS121-V5-SYM-CPT: governed by FS121-V5-SYM-UP (derived from, minds 1)
+  claim FS121-V5-SYM-CPT: governed by FS121-V5-RAY (derived from, minds 1)
+  claim FS121-V5-SYM-CPT: minds 1
+  claim FS121-V5-SYM-CPT: prior art partly
+  claim FS121-Z1-NOCURVED: governed by FS121-O1-OUT (hand, minds 2)
+  claim FS121-Z1-NOCURVED: governed by FS121-D2-INCURVED (hand, minds 1)
+  claim FS121-Z1-NOCURVED: minds 1
+  claim FS121-Z1-NOCURVED: prior art partly
+  entries: 65  derived: 57  stalled, gapped or refuted: 8
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS121-D3-SWAP1D: printed 'ALL HOLD'; with the fault planted ('' → '--plant seam') it printed 'FAILED: S' — it fires
+  ok    FS121-D2-EXT-CORE: printed '0'; with the fault planted ('' → '--plant') it printed '1' — it fires
+  ok    FS121-D2-TRANSPORT: printed '0'; with the fault planted ('' → '--plant') it printed '1620' — it fires
+  ok    FS121-C1-COVMAP: printed 'orders with an edge point bound by neither side colour: 5040 of 5040'; with the fault planted ('' → '--cover') it printed 'orders with an edge point bound by neith' — it fires
+  ok    FS121-C1-FLAT: printed 'FLAT CHAIN: ALL HOLD (for every t: Y - t = X^4 + O(X^6), curvature 0, strictly above the line)'; with the fault planted ('' → '--circle') it printed 'FLAT CHAIN: FAILS (curvature at P_k is 1' — it fires
+  ok    FS121-D4-TINY16: printed 'ALL HOLD'; with the fault planted ('' → '--plant mod3') it printed 'FAILED (2268)' — it fires
+  ok    FS121-V5-FACE-CEX: printed 'True'; with the fault planted ('' → '--fault') it printed 'False' — it fires
+  controls: 7  fired on their faults: 7
+GATE: PASS (0 failures, 0 warnings)
