@@ -34,8 +34,7 @@
    `plans/FS116-Z2-close.md` § Drafts for the front page (the four shared `CLAUDE.md` units in full, FS-121's clauses placed), FS-121's in
    `plans/FS121-Z1-close.md` § Drafts for the front page.
 6. *Running*: R2 (item 149).
-7. **The front-page filing for both closes** (the Clerk as Keryx's pen, verbatim, on its own branch; `.claude/output-styles/keryx.md` step 7),
-   then the report to Kooshi, then the workflow-edit discussion he asked for.
+7. **The front-page filing for both closes** (X2, the Clerk as Keryx's pen, verbatim, in the worktree `/home/kooshi/source/lean-dir-close` on branch `close-2026-10-03`): its brief is drafted in the session scratch as X2-front-page.draft.md (if the scratch is gone, rebuild it from `data/workflow3/briefs/X1-front-page.md`); fill R2's corrections, Kooshi's ruling on the search ban, gate it, launch after R2's review; then fold the branch into `main` as one closing commit, republish the Proof Atlas (artifact 7zzeXoXvTLHzqf4mTQujzx), and report to Kooshi.
 8. **Then, by Kooshi's order (2026-10-03, FS-116 item O6): the workflow refinement** (`plans/WORKFLOW3-lane-edits-proposed.md`, E1–E26, U1–U8), **then FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking.
 
 My estimate given to Kooshi (FS-116 item 74's report): about nine to eleven agents after the six resumed; FS116-V4 and FS121-V5 were two of them.
