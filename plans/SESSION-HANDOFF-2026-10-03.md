@@ -32,7 +32,7 @@
 4b. *Done 11:20*: **FS-121 is closed undecided** (FS-121 items 83–89): its drafts wait in `plans/FS121-Z1-close.md` § Drafts for the front page for the joint filing; EROSION confirmed held (item 84), VT's narrower wording kept (item 85), the cover route's parking is Kooshi's (item 87). **The free slot is held free**: the estimate given to Kooshi (9–11 agents after the resume) has 6 spent and 3–5 left (FS-116's close, Poros's re-rank, the filing, and a blind check of FS116-Y4's statements if it proposes any).
 5. **FS-116's close**: part 1 done (item 132); **FS116-V6 held FS116-Y4-EMPTY** (items 138–139: the Γ-free four-colour vertex is excluded at 1 + ε,
    two minds, the second blind by a route resting on none of round 3's statements); **part 2, FS116-Z2, running** (item 141).
-6. **Poros's boundary re-read and re-rank for both closes** (one job, as R1 did for two closes on 2026-09-28).
+6. **Poros's boundary re-read and re-rank for both closes** (one job, R2): its brief is drafted in the session scratch as R2-poros.draft.md (if the scratch is gone, rebuild it from `data/workflow3/briefs/R1-poros-close-reread.md`); launch when FS116-Z2 has reported and been reviewed: gate it, copy it to `data/workflow3/briefs/R2-poros-close-reread.md`, log it in FS-116's inventory.
 7. **The front-page filing for both closes** (the Clerk as Keryx's pen, verbatim, on its own branch; `.claude/output-styles/keryx.md` step 7),
    then the report to Kooshi, then the workflow-edit discussion he asked for.
 
