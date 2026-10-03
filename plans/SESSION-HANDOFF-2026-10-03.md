@@ -6,7 +6,7 @@
 ## 1. Read first
 
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow`.
-2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–131, the announcement rule at its top, the W-table of
+2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–137, the announcement rule at its top, the W-table of
    workflow frictions, the O-table of lane items outside the milestone) and `plans/FS121-close-inventory.md` (items 1–89). Every ruling is a row.
 3. **Kooshi's instructions in force**, verbatim in the inventories:
    - FS-121 runs beside FS-116; the formalization lane stays idle (FS-116 item 4).
@@ -17,12 +17,11 @@
 4. Agent ids for running jobs are in the session scratch, `agents.txt` (never in a repository file). If the scratch is gone, the
    inventories name each job and its brief; a halted job resumes by message to its agent, or a fresh agent on the same brief.
 
-## 2. Running now (two)
+## 2. Running now (one)
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
 | FS116-V6 | ephodos-verifier on FS116-Y4-EMPTY alone (§ 15; one not-claimed parenthetical withheld for blindness) | `data/fs116/briefs/FS116-V6-verify.md` | `plans/FS116-V6-verification.md` | yes |
-| FS116-Z1 | Ephodos: FS-116's close, part 1 (ticks, reconciliation, derivation file, § B drafts, headline draft), writing only inside V6's fence | `data/fs116/briefs/FS116-Z1-close.md` | `plans/FS116-Z1-close.md` | no |
 
 ## 3. The queue, in order (launch as slots free; at most three running)
 
@@ -31,14 +30,10 @@
 3. *Done 10:37*: FS116-CL1 reported (item 101); the setting frozen as `data/fs116/claims.md` § 14 (item 102); FS116-V5 launched on §§ 12–14's eight (item 104). FS116-V4's second reading question answered from the author's record (item 103).
 4. **Optional rounds**: FS116-V4 reported (items 106–113: KAPPA and RUNG held with a caveat; QF not held, its brief having leaked its verdict — a clean blind second mind on QF is owed, item 108). FS116-Y4 launched as the first optional round (item 114). Left as options: QF's blind second mind; SAT-STRIP's class G1 (item 83); SEMI-PAR3 by formula (item 96).
 4b. *Done 11:20*: **FS-121 is closed undecided** (FS-121 items 83–89): its drafts wait in `plans/FS121-Z1-close.md` § Drafts for the front page for the joint filing; EROSION confirmed held (item 84), VT's narrower wording kept (item 85), the cover route's parking is Kooshi's (item 87). **The free slot is held free**: the estimate given to Kooshi (9–11 agents after the resume) has 6 spent and 3–5 left (FS-116's close, Poros's re-rank, the filing, and a blind check of FS116-Y4's statements if it proposes any).
-5. **FS-116's close is two jobs** (item 131). Part 1, FS116-Z1, is running. **Part 2, FS116-Z2**, launches when Z1 has reported and V6's verdict is committed:
-   the sweeps, scored predictions, stubs FS-123–FS-125 (items 12, 61, 83, 96, 97, 126 and the rest), bearing lines with FS-121's D8, the four shared
-   `CLAUDE.md` units in full with FS-121's ‹FS-121› clauses (`plans/FS121-Z1-close.md` D2), G91 on, ledger rows ‹R116-a›…, the errata to
-   `plans/FS114-derivation.md` (items 10, 39, 71, 110), V6's verdict folded into the derivation file and item 124's vacuity notes. Brief it from
-   `data/fs121/briefs/FS121-Z1-close.md`'s drafting half.
-   Since the last handoff note: FS116-V5 reported (items 117–121: six of eight held, NBTIP and CROSS's last clause one mind and a checking reading,
-   left owed); **FS116-Y4 found the Γ-free four-colour vertex class EMPTY at radius 1 + ε** (item 122, one mind; the coordinator's reading found no
-   gap), frozen alone as § 15 (item 123), FS116-V6 launched on it (item 130).
+5. **FS-116's close is two jobs** (item 131). **Part 1 is done** (item 132: 86 entries, 19 frozen statements held, the reconciliation and the headline's
+   draft in `plans/FS116-Z1-close.md`). **Part 2, FS116-Z2, launches when FS116-V6 reports**: its brief is drafted and waits in the session scratch as
+   FS116-Z2-close.draft.md (if the scratch is gone, rebuild it from `data/fs116/briefs/FS116-Z1-close.md` and part 1's § 1.4 list); fill in V6's result
+   paragraph and the inventory's last item number, gate it, copy it to `data/fs116/briefs/FS116-Z2-close.md`, log it, launch.
 6. **Poros's boundary re-read and re-rank for both closes** (one job, as R1 did for two closes on 2026-09-28).
 7. **The front-page filing for both closes** (the Clerk as Keryx's pen, verbatim, on its own branch; `.claude/output-styles/keryx.md` step 7),
    then the report to Kooshi, then the workflow-edit discussion he asked for.
