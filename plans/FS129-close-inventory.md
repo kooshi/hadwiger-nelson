@@ -211,3 +211,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
     roots), hands back at a saved stage with the rest listed, and FS129-MA2 continues from it. Alternative: split lane A's grokkings across two
     agents now. Why: the cap of three must keep a slot for FS129-MR1 when FS129-OR1 lands; the plan's staffing (two readers split by era) stands
     unchanged. Confidence: medium.
+53. **Launched 2026-10-03 23:42 UTC**: FS129-MA1, pass 2, lane A (`general-purpose`, Opus; `data/fs129/briefs/FS129-MA1-pass2.md`, gated PASS, at
+    `16142efb`). Running: FS129-OR1 and FS129-MA1, two of the cap of three; the third slot is kept for FS129-MR1.
