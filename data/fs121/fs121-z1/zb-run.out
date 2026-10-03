@@ -1,0 +1,22 @@
+control: an:0933.52003 -> 1, nonsense -> 0
+z01_totsep	24	ti:"totally separable" | ab:"totally separable"
+   2015 arXiv:1506.04171 [summary/other] Regular Totally Separable Sphere Packings
+   1987 0564.52006 [review] Totally separable packing and covering with circles
+   2020 1430.52025 [summary/other] Bounds for totally separable translative packings in the plane
+   2016 1348.52013 [review] On contact numbers of totally separable unit sphere packings
+   2018 1397.05139 [summary/other] On contact graphs of totally separable packings in low dimensions
+   1973 0259.52008 [summary/other] On totally separable domains
+   2022 1566.52020 [summary/other] Contacts in totally separable packings in the plane and in high dimensions
+   2019 1421.52019 [summary/other] On contact graphs of totally separable domains
+z02_udsing	2	(ab:"unit distance" | ab:"distance one" | ab:"forbidden distance") & (ab:"singular set" | ab:"locally finite" | ab:"free boundary" | ab:accumulat*)
+   2025 1584.05079 [summary/other] On rotarily transitive graphs
+   2017 1442.68237 [summary/other] The robot routing problem for collecting aggregate stochastic rewards
+z03_fallmeas	0	(ab:"fall colo*" | ab:idomatic) & (ab:measurable | ab:Borel | ab:"unit distance" | ab:plane | ab:Euclidean)
+z04_spm	1	ab:"spectral minimal partition*" & ab:singular
+   2010 1180.47003 [summary/other] Around the research of Vladimir Maz'ya. III. Analysis and applications
+z05_satud	2	(ab:saturated | ab:maximal) & (ab:"unit distance" | ab:"distance graph") & (ab:colouring | ab:coloring | ab:partition) & (ab:boundary | ab:regular*)
+   2011 1213.68043 [summary/other] Combinatorial algorithms. 21st international workshop, IWOCA 2010, London, UK, July 26--28, 2010. Revised sele
+   2013 1271.05002 [summary/other] The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroCom
+z06_avoid	2	(ab:"avoiding distance" | ab:"without unit distance*" | ab:"avoiding sets" | ab:"distance avoiding") & (ab:boundary | ab:regular* | ab:curvature | ab:"locally finite")
+   1996 1541.68407 [summary/other] Efficient computation of rectilinear geodesic Voronoi neighbor in presence of obstacles
+   2017 1506.05004 [review] Right-justified characterization for generating regular pattern avoiding permutations

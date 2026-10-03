@@ -1,0 +1,6 @@
+z01_totsep	ti:"totally separable" | ab:"totally separable"
+z02_udsing	(ab:"unit distance" | ab:"distance one" | ab:"forbidden distance") & (ab:"singular set" | ab:"locally finite" | ab:"free boundary" | ab:accumulat*)
+z03_fallmeas	(ab:"fall colo*" | ab:idomatic) & (ab:measurable | ab:Borel | ab:"unit distance" | ab:plane | ab:Euclidean)
+z04_spm	ab:"spectral minimal partition*" & ab:singular
+z05_satud	(ab:saturated | ab:maximal) & (ab:"unit distance" | ab:"distance graph") & (ab:colouring | ab:coloring | ab:partition) & (ab:boundary | ab:regular*)
+z06_avoid	(ab:"avoiding distance" | ab:"without unit distance*" | ab:"avoiding sets" | ab:"distance avoiding") & (ab:boundary | ab:regular* | ab:curvature | ab:"locally finite")
