@@ -1,4 +1,4 @@
-<!-- the results whose handoff names de Bruijn (SEED) and everything they rest on, each after what it uses | command: python3 tools/fs129_index.py | written at commit ef8f2086b4 (inputs clean) -->
+<!-- the results whose handoff names de Bruijn (SEED) and everything they rest on, each after what it uses | command: python3 tools/fs129_index.py | written at commit 8da8dc9352 (inputs clean) -->
 
 # Lean order
 

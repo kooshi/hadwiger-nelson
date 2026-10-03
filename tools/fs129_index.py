@@ -135,7 +135,7 @@ def read_derivation_file(text: str, prefix: str, fname: str) -> tuple[list[dict]
             "statement": stmt, "not_claimed": "", "grade": m.group("grade"), "minds": "", "verdict": fields.get("Proof verdict", ""),
             "uses_raw": "", "rests_text": fields.get("Rests on it", ""), "rests_form": "label" if "Rests on it" in fields else "",
             "handoff": "", "kernel": fields.get("Kernel", ""), "span_text": ws(m.group(0) + body), "prefix": prefix,
-            "no_marker": not marks, "has_uses_field": False, "also": also,
+            "no_marker": not marks, "has_uses_field": False, "also": also, "model": "", "has_model": False,
         })
     # ---- the new grammar (the gate's blocks)
     stops = [i for i, x in enumerate(lines) if MD_HEAD.match(x) or ((mm := g.HEAD.match(x)) and mm.group(1) == "derivation")]
@@ -169,7 +169,7 @@ def read_derivation_file(text: str, prefix: str, fname: str) -> tuple[list[dict]
             "grade": ws(f.get("grade", "")), "minds": ws(f.get("minds", "")), "verdict": ws(f.get("verdict", "")),
             "uses_raw": ws(f.get("uses only", "")), "rests_text": rests_text, "rests_form": rests_form,
             "handoff": ws(f.get("handoff", "")), "kernel": "", "span_text": ws(span + "\n" + prose), "prefix": prefix,
-            "no_marker": False, "has_uses_field": "uses only" in f, "also": [],
+            "no_marker": False, "has_uses_field": "uses only" in f, "also": [], "model": ws(f.get("model", "")), "has_model": "model" in f,
         })
     return out, printed
 
@@ -446,6 +446,7 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
         r["uses_rows"] = sorted({int(n) for m in ROW_REF.finditer(r["uses_raw"]) for n in re.findall(r"\d+", m.group(1)) if int(n) <= 400})
         r["uses_grokkings"] = sorted({int(n) for n in GROK_REF.findall(r["uses_raw"]) if int(n) in groks})
         r["mentions_grokkings"] = sorted({int(n) for n in GROK_REF.findall(r["span_text"]) if int(n) in groks})
+        r["model_flag"] = model_flag(r["has_model"], r["model"])
         r["check"] = check
     # ---- ledger rows and grokkings citing each id
     cited_rows: dict[str, list[int]] = defaultdict(list)
@@ -606,6 +607,21 @@ def scan_lines(files: dict[str, str], ledger_text: str, ix: dict) -> dict[str, l
     return out
 
 
+NONE_BEGIN = re.compile(r"^\W*none\b", re.I)
+NONE_SAYS = re.compile(r"\bno held object\b|\bnone held\b|\bnone known\b|\bnot held\b", re.I)
+LOOSE_NEG = re.compile(r"\bno\b[^.;]*\b(?:known|held)\b|\bempty\b|\bpremises open\b|\bmay be empty\b|\bnot known\b|\bno model\b", re.I)
+
+
+def model_flag(has_model: bool, model: str) -> str:
+    """`no-field` when the entry has no `model:` line (or an empty one); `none-known` when the text begins with the word "none" or contains
+    "no held object", "none held", "none known" or "not held" (case-insensitive, whole words); else `named`."""
+    if not has_model or not model.strip():
+        return "no-field"
+    if NONE_BEGIN.search(model) or NONE_SAYS.search(model):
+        return "none-known"
+    return "named"
+
+
 ID_SHAPE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9\u2032'_.-]*$")
 
 
@@ -683,7 +699,7 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
     fields = ["id", "milestone", "era", "era_how", "file", "line", "grammar", "title", "statement", "not_claimed", "grade", "minds", "verdict",
               "verdict_class", "uses_raw", "uses_ids", "uses_rows", "uses_grokkings", "rests_text", "rests_form", "rests_ids", "handoff", "kernel",
               "ledger_rows", "grokkings", "mentions_grokkings", "ledger_b_line", "n_dependents_direct", "n_dependents_transitive",
-              "n_upstream_direct", "depth_down", "depth_up", "grade_ids", "self_refs", "check"]
+              "n_upstream_direct", "depth_down", "depth_up", "grade_ids", "model", "model_flag", "self_refs", "check"]
     with open(out / "theorems.jsonl", "w", encoding="utf-8") as f:
         f.write(json.dumps({"_header": header("one record per theorem (an entry in a plans/*-derivation.md file); depth_down/depth_up are longest chains in edges (edges.csv) with each dependency cycle condensed to one node; consumers skip this line",
                                               cmd, commit, "")[1:].strip()}, ensure_ascii=False) + "\n")
@@ -886,6 +902,49 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
     stats["roots_top"] = [(i, recs[i]["depth_down"], recs[i]["n_dependents_direct"]) for i in rk[:5]]
     stats["depth_down_hist"] = {d: sum(1 for r in recs.values() if r["depth_down"] == d) for d in range(0, (recs[rk[0]]["depth_down"] if rk else 0) + 1)}
     stats["grade_edges"] = sum(1 for _, _, s in ix["edges"] if "grade" in s)
+    # vacuity.md
+    nk = sorted((i for i in recs if recs[i]["model_flag"] == "none-known"), key=lambda i: (-recs[i]["n_dependents_transitive"], i))
+    nf = sorted(i for i in recs if recs[i]["model_flag"] == "no-field")
+    named = [i for i in recs if recs[i]["model_flag"] == "named"]
+    begins = [i for i in nk if NONE_BEGIN.search(recs[i]["model"])]
+    says_only = [i for i in nk if not NONE_BEGIN.search(recs[i]["model"])]
+    loose = sorted(i for i in named if LOOSE_NEG.search(recs[i]["model"]))
+    with open(out / "vacuity.md", "w", encoding="utf-8") as f:
+        f.write(header("results whose `model:` line says no held or known object meets the hypotheses, and what rests on each", cmd, commit, "<!--") + " -->\n\n# Vacuity\n\n")
+        f.write("Rule (mechanical, case-insensitive, whole words): `model_flag` is `none-known` when the `model:` text begins with the word \"none\" or contains \"no held object\", "
+                "\"none held\", \"none known\" or \"not held\"; `no-field` when the entry has no `model:` line (every older-format entry, and some block entries); else `named`. "
+                "Whether a class is empty, or a statement hypothetical by design, is not judged here. Dependents are the results that would inherit vacuity (edges.csv, with grade edges).\n\n")
+        f.write(f"Counts: none-known {len(nk)} ({len(begins)} begin with \"none\", {len(says_only)} say it later in the line), named {len(named)}, no-field {len(nf)} "
+                f"({sum(1 for i in nf if recs[i]['grammar'] == 'new')} block-format, {sum(1 for i in nf if recs[i]['grammar'] == 'old')} older-format).\n\n")
+        if says_only:
+            f.write("Flagged `none-known` by a phrase later in the line, not by beginning with \"none\" (the borderline ones): " + ", ".join(says_only) + ".\n\n")
+        if loose:
+            f.write(f"Flagged `named` yet matching a looser pattern (\"no … known/held\", \"empty\", \"premises open\", \"not known\", \"may be empty\"), for a reader to look at ({len(loose)}): " + ", ".join(loose) + ".\n\n")
+        f.write("## The none-known results, by transitive dependents\n\n")
+        for k, i in enumerate(nk, 1):
+            r = recs[i]
+            direct = sorted(ix["adj"].get(i, ()))
+            trans = sorted(descendants(ix["adj"], i))
+            f.write(f"### {k}. {i} — {r['file']}:{r['line']} — transitive {len(trans)}, direct {len(direct)}\n\n- model: {r['model']}\n")
+            f.write(f"- direct dependents ({len(direct)}): {', '.join(direct) if direct else '—'}\n")
+            rest = [x for x in trans if x not in set(direct)]
+            f.write(f"- further transitive dependents ({len(rest)}): {', '.join(rest) if rest else '—'}\n\n")
+        f.write("## The no-field entries, by milestone (file prefix; § B's milestone column in the second column where it is one value)\n\n")
+        byp: dict[str, list[str]] = defaultdict(list)
+        for i in nf:
+            byp[recs[i]["prefix"]].append(i)
+        f.write("| prefix | § B milestone | no-field entries | of which block-format |\n|---|---|---|---|\n")
+        for pfx in sorted(byp):
+            ms = sorted({recs[i]["milestone"] for i in byp[pfx]})
+            f.write(f"| {pfx} | {', '.join(ms)} | {len(byp[pfx])} | {sum(1 for i in byp[pfx] if recs[i]['grammar'] == 'new')} |\n")
+        newnf = [i for i in nf if recs[i]["grammar"] == "new"]
+        f.write(f"\nBlock-format entries with no `model:` line ({len(newnf)}): {', '.join(newnf) if newnf else '—'}.\n")
+    stats["model_flags"] = {"none-known": len(nk), "named": len(named), "no-field": len(nf)}
+    stats["model_none_begin"] = len(begins)
+    stats["model_none_says_only"] = says_only
+    stats["model_flags_block"] = {fl: sum(1 for r in recs.values() if r["grammar"] == "new" and r["model_flag"] == fl) for fl in ("none-known", "named", "no-field")}
+    stats["model_loose_named"] = len(loose)
+    stats["model_top"] = [(i, recs[i]["n_dependents_transitive"]) for i in nk[:5]]
     # no-entry files and *Also:* clauses, appended to checks.md
     ne = no_entry_files(files, ix)
     stats["no_entry_files"] = len(ne)
@@ -953,10 +1012,10 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
 # ------------------------------------------------------------------ the self-test
 
 def _new(name: str, statement: str = "every planted integer n satisfies n + 0 = n", uses: str = "that 0 is the additive identity",
-         handoff: str = "none — planted", rests: str = "nothing; it is planted.", grade: str = "hand") -> str:
+         handoff: str = "none — planted", rests: str = "nothing; it is planted.", grade: str = "hand", model: str | None = "n = 3") -> str:
     st = f"  statement: {statement}\n" if statement else ""
     return (f"derivation: {name}\n{st}  uses only: {uses}\n  not claimed: that n · 0 = n\n  argument: § Argument\n  verdict: derived\n"
-            f"  grade: {grade}\n  minds: 1\n  model: n = 3\n  prior art: known\n  handoff: {handoff}\n\nRests on it: {rests}\n\n")
+            f"  grade: {grade}\n  minds: 1\n" + (f"  model: {model}\n" if model is not None else "") + f"  prior art: known\n  handoff: {handoff}\n\nRests on it: {rests}\n\n")
 
 
 _OLD = ("**FS97-T1 — The planted older theorem. [hand; the planter]**\nFor every planted integer n, n + 1 > n. *Proof:* add one. "
@@ -1121,6 +1180,18 @@ def self_test() -> int:
     n_ok = len(ne11) == 1 and got == {"J1-X": True, "J1-Y": False}
     print(f"self-test: a file with no entry lists its ids; the one named in an entry is found, the other is the finding ({got}): {n_ok}")
     ok = ok and n_ok
+    # --- the model flag: each value, a later-phrase flag, and a model line continued over two lines
+    mv = (_new("FS92-N", model="k = 3: a planted object") + _new("FS92-B", model="none held of the hypothesis at any k")
+          + _new("FS92-S", model="the planted frame; no held object meets it") + _new("FS92-Z", model="none at six colours") + _new("FS92-F", model=None)
+          + _new("FS92-W", model="k = 4: a first line\n    and a second line") + _new("FS92-U", model="  ", uses="that 0 is the additive identity"))
+    ix12 = run(*_planted({"FS92-derivation.md": "# p\n\n" + mv}, tuple(f"FS92-{x}" for x in "NBSFWUZ")))
+    r12 = ix12["records"]
+    got = {x: r12[f"FS92-{x}"]["model_flag"] for x in "NBSFWUZ"}
+    m_ok = got == {"N": "named", "B": "none-known", "S": "none-known", "F": "no-field", "W": "named", "U": "no-field", "Z": "none-known"} \
+        and r12["FS92-W"]["model"] == "k = 4: a first line and a second line" and r12["FS92-F"]["model"] == "" \
+        and r12["FS97-T1"]["model_flag"] == "no-field" and r12["FS97-T1"]["model"] == ""
+    print(f"self-test: model flags named / none-known (begins none; says it later) / no-field (absent line, empty line, older format), and a two-line model joined ({got}): {m_ok}")
+    ok = ok and m_ok
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
