@@ -17,6 +17,13 @@ message). Nothing was lost but the record itself, which is written fresh from th
 *(filled at each stage; one line per theorem, grade, minds, address)*
 
 - FS121-D4-QT — the brief's quotation and the record's seven definitions are verbatim (10 of 10) — [tools], one mind — § 1.1.
+- FS121-D4-FACE — a same-colour box of lateral half-width ρ straight ahead of a flat side, across a gap g < ρ²/2, leaves the side's point no
+  contact: in a saturated colouring the colour has density 1 there — [hand], one mind — § 2.1.
+- FS121-D4-GRID — C121-REGJ holds on every grid colouring with countable breakpoint sets, at every k — [derived] from FACE, one mind — § 2.2.
+- FS121-D4-HOLE — a region with a hole has its hole's whole boundary in Σ — [derived] from FS111-M-PINCH, one mind — § 2.3.
+- FS121-D4-LINE — the line analogue of C121-REGJ is false with two colours — [hand], with an exact check, one mind — § 2.4.
+- FS121-D4-TINY16 — saturated sixteen-colourings with regions of every small diameter — [tools] exact at ε = 1/10, [hand] for every ε, one
+  mind — § 2.5.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -134,3 +141,192 @@ and a pigeonhole; (c) FALSE on the line; (d) regions as small as wished at a fix
 (the same ladder read inward, where the curvature has no room) — so islands accumulating in one sea are excluded unless every shore is singular.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: five lemmas, no REG-J′ — the facing lemma, the grid class, holes, the line, small regions
+
+*Setting for every entry: `f` a measurable colouring of the plane with finitely many colours, a.e.-proper (proper at `Leb ⊗ σ`-almost every edge);
+where a lemma needs more it says so. None uses C121-ENDS, C121-OUT, C121-PER, C121-LRA-LINE or REG-J′. The one fact used throughout is
+FS111-C-HULL's first clause in the form of FS111-M-PINCH's Step 1: if `P` is a piece of colour `c` and `y ∈ supp S_c`, then `P ⊆ B̄(y, 1)` or
+`P ∩ B(y, 1) = ∅`. And the Fubini fact: if an open set `U` with `|S_c ∩ U| > 0` is such that `T₁(w)` meets an open set `H`, a.e. inside `S_c`, in
+an arc of length at least `ℓ > 0` for every `w ∈ U`, then `f` has a positive `Leb ⊗ σ`-measure of edges inside `S_c` (for each direction the edges
+landing in `H ∖ S_c` form a translate of a null set), which a.e.-properness forbids.*
+
+### 2.1 The facing lemma (FS121-D4-FACE)
+
+*Argument.* Coordinates: `x` the origin, `e = (1, 0)`; a point is `(s, t)`. Let `H = {(−s, t) : 0 < s < ε, |t| < ε}` and
+`A′ = {(s, t) : g < s < g + ε′, |t| < ρ}` lie a.e. in `S_c`, with `g > 0` and `2g < ρ²`.
+*Step 1: the only possible `c`-contact of `x` is `e`.* Let `y = u` with `|u| = 1`, `u ≠ e`, and `y ∈ supp S_c`. If `u = −e`, `T₁(y)` holds the
+points `(−(1 − cos φ), sin φ)`, in `H` for small `φ ≠ 0`; if `u ≠ ±e`, `T₁(y)` crosses the axis `s = 0` transversally at `x`, so an arc of it lies in
+`H`. In both cases, by continuity, `T₁(w)` meets `H` in an arc of length bounded below for `w` in a ball about `y`, which has positive `c`-measure:
+the Fubini fact gives a contradiction.
+*Step 2: `e ∉ supp S_c`.* For `w = (1 − a, b)` with `0 < a < ε/2`, `|b| < ε/2`, the point of `T₁(w)` at angle `π` is `(−a, b) ∈ H`, and an open arc
+about it stays in `H`. For `w = (1 + a′, b)` with `0 ≤ a′ < g`, `|b| < r`, the points `(1 + a′ − cos φ, b − sin φ)` of `T₁(w)` have first coordinate
+in `(g, g + ε′)` exactly when `cos φ ∈ (1 + a′ − g − ε′, 1 + a′ − g)`, an open interval inside `(1 − g − ε′, 1)`, on which `|sin φ| < √(2(g + ε′))`; so
+they lie in `A′` once `r + √(2(g + ε′)) < ρ`, which holds for small `r` after shrinking `ε′` (a sub-box of `A′` is still a.e. in `S_c`), because
+`√(2g) < ρ`. So `T₁(w)` meets `H ∪ A′` in an arc of positive length for every `w` in `B(e, r′) ∖ {s = 1}`, `r′ = min(ε/2, r, g)`, and the Fubini fact
+makes `S_c ∩ B(e, r′)` null: `e ∉ supp S_c`. With Step 1, `x` is no `c`-contact point. Finally `c` has upper density at least `1/2` at `x` (from `H`),
+so in a saturated colouring `x ∉ ∂_e S_c` forces `x ∈ S̃_c`. ∎
+
+*What it is, in the home's words.* The first rung of `x`'s ladder is the unit translate `x + e` (Step 1, the opening's tangent partner, here with no
+(H1), (H2)); the unit circles about the points just beyond that rung curve back by `t²/2` at lateral offset `t` and so reach any same-colour box
+lying across the gap `g` at lateral half-width `√(2g)`. Lateral extent is the whole content: on the line the same configuration is harmless
+(§ 2.4).
+
+derivation: FS121-D4-FACE
+  statement: in an a.e.-proper measurable colouring, let x be a point, e a unit vector and e⊥ a unit vector orthogonal to it; if the open half-box
+    {x − s e + t e⊥ : 0 < s < ε, |t| < ε} and the open box {x + s e + t e⊥ : g < s < g + ε′, |t| < ρ} both lie almost everywhere in one class S_c,
+    with ε, ε′ > 0 and 0 < 2g < ρ², then no point of supp S_c is at distance exactly 1 from x; so in a saturated colouring the colour c has
+    density 1 at x
+  uses only: a.e.-properness, through Fubini on Leb ⊗ σ; the unit circle's curvature (its sagitta at lateral offset t is 1 − √(1 − t²) < t² for
+    |t| < 1); saturation only in the last clause, at the one point x
+  not claimed: the same with a curved near side (a tangent unit disc in place of the half-box admits the in-contact x − e); the same without the
+    lateral margin (2g ≥ ρ² is not covered); anything at an x where c has density 1; honesty, D-NF, REG-J′ (none is used)
+  argument: § 2.1 The facing lemma (FS121-D4-FACE)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: SQ9 at the midpoint x of a vertical edge between columns: the half-box lies in the left square; the nearest same-colour square straight
+    ahead begins at gap g = 1 with ρ = 1/4, so 2g ≥ ρ² and the lemma is silent, as it must be (SQ9 is saturated); with that square moved to gap
+    g < 1/32 the hypotheses would hold and the edge point would lose its contact, so no saturated colouring has that configuration
+  prior art: owed
+  handoff: de Bruijn — a short measure-theoretic lemma (Fubini on Leb ⊗ σ, one trigonometric bound); it crosses with the measurable chain (FS-113)
+
+### 2.2 The grid class (FS121-D4-GRID)
+
+*The class* (this record's). A **grid colouring** with `k` colours: closed countable sets `B_x, B_y ⊂ ℝ`; on each open cell `I × J` (`I` a component
+of `ℝ ∖ B_x`, `J` of `ℝ ∖ B_y`) the colour is a.e. constant; two cells sharing an edge of positive length have different colours. SQ9 is one
+(`B_x = B_y = ½ℤ`); so is TINY16 (§ 2.5).
+
+*Argument.* Let `f` be an honest saturated a.e.-proper grid colouring. Suppose `B_x` has an accumulation point `x*`. A countable closed set is
+scattered, so its isolated points are dense in it, and infinitely many isolated points `p` of `B_x` lie within `δ` of `x*`, for every `δ > 0`. Each
+has a gap `G⁻(p)` ending at it and a gap `G⁺(p)` starting at it. Fix a gap `J = (y₀ − λ, y₀ + λ)` of `B_y` and put `ρ = λ/2`, `δ = ρ²/8`. Among the
+infinitely many cells `G⁻(p) × J`, `|p − x*| < δ`, infinitely many have one colour `c` (pigeonhole on `k` colours). Take two, at `p < p′`. Then
+`G⁻(p′) = (q, p′)` with `q ≥ p`, and `q ≠ p`, since `G⁻(p′) = G⁺(p)` would make the cells at `p` adjacent and of one colour; so `g = q − p` lies in
+`(0, 2δ)` and `2g < ρ²`. At `x = (p, y₀)`, `e = (1, 0)`: the half-box lies in `G⁻(p) × J`, the box `{g < s < g + ε′, |t| < ρ}` in `G⁻(p′) × J`, both
+of colour `c`; and the cell `G⁺(p) × J` to the right of `x` has a colour other than `c`, so `c` has density `1/2` at `x`, not 1. FS121-D4-FACE gives
+a contradiction. So `B_x`, and likewise `B_y`, is locally finite. Then off `B_x × B_y` every essential boundary point lies inside one edge, where
+two cells — two colours, each one open rectangle — fill a small ball, so (H1) and (H2) hold, no colour has density 0 at a point of its support, and
+the point is not in Σ. So `Σ ⊆ B_x × B_y`, locally finite, and each of its points meets at most four edges. ∎
+
+derivation: FS121-D4-GRID
+  statement: in every honest saturated a.e.-proper grid colouring with finitely many colours — closed countable sets B_x, B_y ⊂ ℝ, a.e. one
+    colour on each open cell I × J of ℝ ∖ B_x by ℝ ∖ B_y, cells sharing an edge of positive length coloured differently — B_x and B_y are locally
+    finite, so the singular set Σ is locally finite and each point of Σ meets at most four interface arcs
+  uses only: FS121-D4-FACE; the pigeonhole on finitely many colours; isolated points are dense in a countable closed subset of ℝ; the adjacency rule
+    (it supplies both the gap g > 0 and the density 1/2 at x)
+  not claimed: B_x or B_y uncountable (a Cantor set of breakpoints: GAP there — at a gap's end c may have density 1 from the far side, where the facing
+    lemma is silent); grid colourings in which adjacent cells may share a colour; any bound on the number of breakpoints per unit length
+  argument: § 2.2 The grid class (FS121-D4-GRID)
+  verdict: derived
+  grade: derived from: FS121-D4-FACE
+  minds: 1
+  model: k = 9: SQ9 (B_x = B_y = ½ℤ, locally finite); k = 16: TINY16, cells of side 1/10 (§ 2.5, exact)
+  prior art: owed
+  handoff: none — a class result that sorts the determiners; it crosses with FS121-D4-FACE if the class is wanted in Lean
+
+### 2.3 Holes (FS121-D4-HOLE)
+
+*Argument.* Let `f` be honest, saturated, in D-NF; `D` a region of colour `β` (a component of `int S̃_β`); `K` a bounded component of `ℝ² ∖ cl D`.
+By FS111-M-HULL2 a piece has diameter at most 1, so `diam D ≤ 1`; every point of `K` lies in the convex hull of `cl D` (a line separating it from
+`cl D` bounds an unbounded connected set missing `cl D`), so `diam K ≤ 1`. Let `x ∈ ∂K`; then `x ∈ ∂D` (`∂K ⊆ cl D`, and `x ∈ D` would put a ball
+about `x` inside `D`). Suppose `x ∉ Σ`.
+(a) `x ∉ int S̃_β`, else a ball about `x` lies in `int S̃_β`, meets `D`, and so lies in `D`. Hence every ball about `x` has positive non-`β` measure
+(a ball a.e. inside `S_β` consists of density points of `β`), and some colour `j ≠ β` has `x ∈ supp S_j`.
+(b) `β` and `j` have positive upper density at `x`: a colour present at `x` with density 0 makes `x` a cusp, a point of Σ. So `x ∈ ∂_e S_β`, and
+(H1), (H2) hold at `x` with the colours `β` and `j`: a ball `N`, connected open sets `P_β`, `P_j` a.e. equal to `S_β ∩ N`, `S_j ∩ N`.
+(c) `P_β` is an open connected subset of `S̃_β` meeting `D` (in positive measure), so `P_β ⊆ D`. `P_j ∩ D` is open and null, so empty, and
+`P_j ∩ cl D = ∅`: `P_j` lies in one component of `ℝ² ∖ cl D`. `K ∩ N` is open, non-empty, misses `D ⊇ P_β`, so lies a.e. in `P_j`: `P_j ⊆ K`.
+(d) FS111-M-PINCH at `x`. *Tangent:* `B(y_β, 1) ∩ N ⊆ S_j` a.e., so `D ∩ N` misses the open disc and `D ⊄ B̄(y_β, 1)`; by C-HULL's first clause
+`D ∩ B(y_β, 1) = ∅`, hence `cl D ∩ B(y_β, 1) = ∅`. The disc is connected, misses `cl D`, and meets `P_j` (it is a.e. in `S_j` near `x`), so it lies in
+`K`: `diam K ≥ 2`, a contradiction. *Split, `β` inside `T₁(y)`:* `D ∩ N ⊆ B̄(y, 1)`, so `D ⊆ B̄(y, 1)` and `K ⊆ conv(cl D) ⊆ B̄(y, 1)`; but `K ∩ N` is
+a non-empty open set a.e. in `S_j ∩ N = N ∖ B̄(y, 1)`: a contradiction. *Split, `β` outside:* `D ∩ B(y, 1) = ∅` as in the tangent case, and
+`B(y, 1) ∩ N = S_j ∩ N` a.e. meets `P_j ⊆ K`, so `B(y, 1) ⊆ K`: `diam K ≥ 2`, a contradiction. So `x ∈ Σ`. ∎
+`K` is bounded, open and non-empty, so `∂K` contains a non-degenerate continuum (the boundary of the unbounded component of `ℝ² ∖ cl K`): Σ is
+uncountable there.
+
+derivation: FS121-D4-HOLE
+  statement: in an honest saturated colouring in D-NF, if a region D (a component of the interior of the density set of one colour) has a bounded
+    complementary component K of its closure, then every point of ∂K lies in Σ; so Σ contains a non-degenerate continuum, and a colouring whose Σ is
+    locally finite has no region with a hole
+  uses only: FS111-M-PINCH at a point off Σ (both types); FS111-C-HULL's first clause for D at the contact; FS111-M-HULL2 (diam D ≤ 1); that a bounded
+    complementary component lies in the convex hull; the definition of Σ (cusps and (H1), (H2) failures)
+  not claimed: that a region with a hole exists or not in any saturated colouring (none is held); anything about unbounded complementary components;
+    REG-J′ (unused)
+  argument: § 2.3 Holes (FS121-D4-HOLE)
+  verdict: derived
+  grade: derived from: FS111-M-PINCH
+  minds: 1
+  model: none held of the hypothesis — no held saturated colouring (R7, SQ9, HEX9, TINY16) has a region with a hole; the statement is a no-go for
+    islands whose shore holds a point off Σ, the configuration a point accumulation of islands in one sea would need
+  prior art: owed
+  handoff: none — a structural no-go between open statements; it crosses with FS111-M-PINCH
+
+### 2.4 The line (FS121-D4-LINE)
+
+*The analogue* (this record's): on `ℝ` with the unit graph `x ~ x ± 1`, a measurable `f : ℝ → {0, 1}`; `∂_e`, saturation, (H1), (H2) and Σ read with
+intervals in place of balls.
+*Argument.* Let `f(x) = (⌊x⌋ + v(x − ⌊x⌋)) mod 2` for any measurable `v : [0, 1) → {0, 1}`. Then `f(x + 1) = 1 − f(x)` for every `x`: proper at every
+unit pair. So `S_1 = S_0 + 1`, `supp S_1 = supp S_0 + 1`, and both are 2-periodic. If `x ∈ ∂_e S_j`, then `j` has positive upper density at `x` and not
+density 1, so `1 − j` has positive upper density at `x` and `x ∈ supp S_{1−j} = supp S_j + 1`: the point `x − 1 ∈ supp S_j` is at distance exactly 1.
+Every such `f` is honest and saturated, whatever `v`. Take `v(t) = ⌊1/s(t)⌋ mod 2` with `s(t)` the distance from `t` to `Z₀ = {0} ∪ {1/n : n ≥ 1}`
+(`v = 0` on `Z₀`): `v` changes at `1/n ± 1/k` for all large `k`, so each point of `Z₀ + ℤ` meets infinitely many interface points, both colours have
+upper density `1/2` there and each is locally disconnected, (H2) fails, and Σ ⊇ `Z₀ + ℤ`, which accumulates at every integer. ∎ Checked exactly
+(`tools/fs121_d4_tiny16.py`): `f(x + 1) = 1 − f(x)` at 11,760 rational points near the breakpoints, and a colour change of `f` at every one of the
+3,899 points `1/2 − 1/k`, `101 ≤ k < 4000`.
+
+derivation: FS121-D4-LINE
+  statement: on the real line with the unit graph x ~ x ± 1, every colouring f(x) = (⌊x⌋ + v(x − ⌊x⌋)) mod 2 with v measurable is proper at every
+    unit pair, honest and saturated; with v(t) = ⌊1/dist(t, Z₀)⌋ mod 2, Z₀ = {0} ∪ {1/n}, its singular set contains Z₀ + ℤ and is not locally finite
+    — the line analogue of C121-REGJ is false with two colours
+  uses only: f(x + 1) = 1 − f(x); the definitions of ∂_e S_j, saturation and Σ read on intervals
+  not claimed: anything in the plane (the plane's unit circle is a curve, and FS121-D4-FACE is what the line lacks); that the analogue on a circle of
+    length 5/2 (FS121-D3-SWAP1D's setting) behaves alike
+  argument: § 2.4 The line (FS121-D4-LINE)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: v as stated; the exact check of § 2.4
+  prior art: owed
+  handoff: none — a calibration that sorts the dimension as a determiner
+
+control: FS121-D4-LINE-EXACT
+  of: FS121-D4-LINE — the identity f(x + 1) = 1 − f(x) and the colour changes at 1/2 − 1/k hold exactly; without the ⌊x⌋ shift the identity fails
+  run: python3 ../tools/fs121_d4_tiny16.py 2>&1 | tail -1
+  expect: ALL HOLD
+  fault: python3 ../tools/fs121_d4_tiny16.py --plant noshift 2>&1 | tail -1
+
+### 2.5 Small regions (FS121-D4-TINY16)
+
+*The object.* `P_ε`, a partition of the line: breakpoints `m`, `m + ε`, `m + 1/2` (`m ∈ ℤ`), gaps indexed `i ∈ ℤ` in order, three per unit, gap `i`
+coloured `i mod 4`. TINY16 is the product: cell (gap `i`) × (gap `j`) coloured `(i mod 4, j mod 4)`, sixteen colours.
+*Argument.* Translating by 1 adds 3 to a gap's index, so the gap `i + 4` begins exactly 1 to the right of gap `i`'s end, and same-coloured gaps lie in
+one gap or at distance at least 1: same-coloured cells have coordinate differences each `< 1/2` or `≥ 1`, never a distance in `(1/√2, 1)`, so unit
+pairs inside a class are null. A vertical edge at the end `q` of gap `i` has the colour of gap `i` again in the closure of the cell starting at `q + 1`
+(gap `i + 4`), and the colour of gap `i + 1` in the cell ending at `q − 1` (gap `i − 3`); horizontal edges alike; each corner reaches each incident
+colour by one of its four unit translates. So TINY16 is honest, saturated, a.e.-proper, a grid colouring, and its cells (gap `0`) × (gap `0`) have
+diameter `ε√2`, for every `ε ∈ (0, 1/2)`. ∎ Checked exactly at `ε = 1/10` over the window `[−3, 7]²`, which holds every cell within distance 2 of the
+fundamental domain `[0, 4)²`: 2,912 same-colour pairs with `dmin < 2`, none with `dmin < 1 < dmax`; 288 edges and 144 corners, every contact present
+(`data/fs121/d4/tiny16.out`).
+
+derivation: FS121-D4-TINY16
+  statement: for every ε in (0, 1/2) the product of two copies of the partition of the line at m, m + ε, m + 1/2 (m ∈ ℤ), gaps coloured by their index
+    mod 4, is an honest saturated a.e.-proper sixteen-colouring of the plane whose cells include squares of side ε; so a saturated colouring with a
+    fixed number of colours can have regions of every small diameter, and no count of singular points per region bounds Σ per unit area
+  uses only: translation by 1 shifts the gap index by 3, so same-coloured gaps are 4 apart in index and at least 1 apart in position; the contacts at
+    unit translates along the normals
+  not claimed: that sixteen is least for small regions; any accumulation (every grid colouring with countable breakpoints has none, FS121-D4-GRID)
+  argument: § 2.5 Small regions (FS121-D4-TINY16)
+  verdict: derived
+  grade: computed over: ε = 1/10, the window [−3, 7]² of the 4ℤ²-periodic colouring, exact rationals; the hand argument for every ε
+  minds: 1
+  model: TINY16 at ε = 1/10 itself
+  prior art: owed
+  handoff: none — a control object, exact and periodic
+
+control: FS121-D4-TINY16-EXACT
+  of: FS121-D4-TINY16 — every same-colour pair proper and every contact present; with the gaps coloured mod 3 the properness check fails
+  run: python3 ../tools/fs121_d4_tiny16.py 2>&1 | tail -1
+  expect: ALL HOLD
+  fault: python3 ../tools/fs121_d4_tiny16.py --plant mod3 2>&1 | tail -1
+
+## Stage 2 — SAVED

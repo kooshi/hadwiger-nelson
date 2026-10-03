@@ -1,0 +1,29 @@
+entry lint
+  claim FS121-D4-QT: minds 1
+  claim FS121-D4-QT: prior art known
+  claim FS121-D4-FACE: minds 1
+  warn  FS121-D4-proof.md:175 (FS121-D4-FACE): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-D4-FACE: prior art owed
+  claim FS121-D4-GRID: governed by FS121-D4-FACE (hand, minds 1)
+  claim FS121-D4-GRID: minds 1
+  warn  FS121-D4-proof.md:211 (FS121-D4-GRID): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-D4-GRID: prior art owed
+  warn  FS121-D4-proof.md:247 (FS121-D4-HOLE): derived from 'FS111-M-PINCH', which is not an entry in these files — its grade cannot be read
+  claim FS121-D4-HOLE: minds 1
+  warn  FS121-D4-proof.md:247 (FS121-D4-HOLE): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-D4-HOLE: prior art owed
+  claim FS121-D4-LINE: minds 1
+  warn  FS121-D4-proof.md:277 (FS121-D4-LINE): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-D4-LINE: prior art owed
+  claim FS121-D4-TINY16: minds 1
+  warn  FS121-D4-proof.md:311 (FS121-D4-TINY16): prior art owed — novelty unmeasured; a standing finding
+  claim FS121-D4-TINY16: prior art owed
+  entries: 6  derived: 6  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS121-D4-QT-RUN: printed 'quotes: 10 found: 10 missing: 0'; with the fault planted ('' → '--plant'; '' → '2 | head -') it printed 'quotes: 10 found: 9 missing: 1' — it fires
+  ok    FS121-D4-LINE-EXACT: printed 'ALL HOLD'; with the fault planted ('' → '--plant noshift') it printed 'FAILED (11760)' — it fires
+  ok    FS121-D4-TINY16-EXACT: printed 'ALL HOLD'; with the fault planted ('' → '--plant mod3') it printed 'FAILED (2268)' — it fires
+  controls: 3  fired on their faults: 3
+GATE: PASS (0 failures, 6 warnings)
