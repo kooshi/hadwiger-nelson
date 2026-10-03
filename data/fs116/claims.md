@@ -213,3 +213,9 @@ force where this list does not restate them.*
 - **Double tips** are `T1` and `T2` (each tips two hubs) and **single tips** `T3` and `T4` (each tips one): the record's usage, from the third passage. A **lens beside a single tip** is one of `L_1`, `L_2`, `L_4`, `L_5` (the fourth passage). An **outer colour** of a hub is the colour of an outer tile at it (§ 13's `O_y`).
 - Two phrases have no definition in the record, and a verifier states its reading of each: STARFORCE's "the lens points" ("near q_1, q_5 the lens points carry colour 2"), and the order "counter-clockwise 2, 3 at y_0" of two outer tiles about a hub.
 - `X`, `X̄`, the germs and "change point" are as in §§ 0, 10 and 13.
+
+## 15. Added at round 4, the construction side's statement (frozen by Keryx, 2026-10-03 17:03 UTC; the statement verbatim from its proposing record, with its *not claimed* line, one parenthetical of that line withheld for blindness)
+
+*Its setting words are § 0's. (This list:) the proposing record's *not claimed* line ends with a parenthetical after "anything at k ≥ 7" that names a step of its argument; it is withheld here until the close, and the rest of the line is verbatim.*
+
+- **FS116-Y4-EMPTY** *(proposed at round 4)*: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ *Not claimed:* anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs); anything in the Siamese or non-simple class; anything at k ≥ 7
