@@ -264,3 +264,78 @@ fault. `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS121-de
 ("counted by sector"), FS121-O1-LRA-LINE (reading (a) named), FS121-D1-VT (no sub-arc of radius 1 curving toward `b`), FS121-C1-FLAT (the frozen
 parenthetical restored), FS121-D4-GRID (its not-claimed parenthesis); corrected model lines: FS121-C1-BOUND, FS121-D4-FACE; corrected `uses only:` lines:
 FS121-O1-ENDS and -PER (FS121-DB1-L3), FS121-D1-VT (FS121-V2-SECTOR). No frozen statement was edited in `data/fs121/claims.md`.
+
+## Stage 4 — SAVED: the sweeps, and every registration scored
+
+### 4.1 §G re-read — which extractions paid, which entry should have borne
+
+| entry (O1's §G) | extraction | paid? |
+|---|---|---|
+| G85 | read M2-INTRAD's statement (ii) in full: the chain also stops at a unit arc centred at a point of Σ | **paid** — the card's answer (the (R2) branch) came from it |
+| G84 | the tangent case has partners on both sides, so the ladder continues outward | **paid** — FS121-O1-OUT, held |
+| G83 | the card tests where ladders end | **paid** — (Q) or (R2), held |
+| G82 | look first for the printed regular theorem's chain | **paid** — row 134's N4 read on germs: FS121-C1-FLAT, held |
+| G21 | the card's class has no held inhabitant; a construction target first | **paid** — C121-CURVED posed; every one-mind lemma on an uninhabited class says so; and V2 found EROSION's models test nothing beyond the diameter bound |
+| G22, G24/G60 | the regularity rungs are colour-blind; six enters only at the NO | **paid** — every rung stated at every `k`; C121-SAT6 at six by nature |
+| G54 | fall colourings; search "idomatic" | **paid** — FS121-D3-FALLSAT, -SWAP1D, and the cover route's Grundy form |
+| G86 | does honest saturation exclude Siamese pairs? | **not answered** — routed to FS-116/FS-117, still open (drafted for FS-116's close) |
+| G79 | aim at what every ladder end carries | **paid** — the ends' invariant (sectors and colours at the centre) |
+| G87 | read for a collision | none found (§ 4.3) |
+
+**An entry that should have borne and was not used: G13 (the fan ladder; "coverage is a k-set property invisible to pair sweeps").** "Bound" at a
+boundary point — `T₁(x)` meets `F_j` — is a coverage condition on the circle `ω(x)`, and TOP₆ (binding the top colour) is a coverage question about the
+circles of the top colour's boundary points. D3's three attempts (§§ 3.2–3.4) worked by moves and selections and never asked the coverage question
+G13 names. A miss of the kind G67's instances record (a mechanism the title does not show); an instance drafted for `plans/GROKKING-INSTANCES.md`
+(D4). Whether it bears is a reading, one mind: G13 would have it bear.
+
+### 4.2 §IQ and G79
+
+No counterexample to either rule. The held results came from the card's structural question (where ladders end, what every end carries) and from
+the example invariants of the objects held (the ends' sectors, the Grundy order, the window bound modulo congruence). The no-gos (FS121-C1-COVMAP,
+-FLAT, FS121-D4-LINE, FS121-V5-GRID-CANTOR, FS121-D3-SWAP1D) came from counterexample invariants, as G79 says walls do. None is a breakthrough.
+
+### 4.3 §PA — recognitions about what the object is
+
+1. **A saturated colouring's interfaces are parallel families of rolling-ball curves; a ladder ends at its focal point** (O1, home 3). It produced
+   OUT and ENDS. Promoted: the drafted G88 carries its consequence, that curved tangent interfaces are the honest class's whole open content.
+2. **Measurable idomatic partitions (fall colourings) are saturated, and saturation is strictly weaker** (D3, home 4); **the cover route's class is
+   Grundy colourings that are maps** (C1, home 3). Promoted: the drafted G89.
+3. **LAT is a totally-separable-packing relation, lateral extent against gap** (D4, home 2; `[FejesToth1973]` identified, unread). Promoted: the
+   drafted G90.
+4. **LRA is thin pencils, not a ray** (D2): FS-115's framing re-posed (stage 5).
+The invention signal (G87): **none.** Whiffs, each classed: G85's "what escapes is radii → ∞, FS-115's stuck ray" against FS121-O1-LRA-LINE's
+bi-infinite line and FS121-V5-SYM-CPT (nothing escapes under a cocompact symmetry) — refinements of one picture, not two truths; C1's "the cover route
+removes the honest route's hardest rung" against FS121-C1-SAT (its NO contains the honest route's) — both hold.
+
+### 4.4 The plan's "conjecture" and "not claimed" (grep of `plans/FS121-map-step.md`)
+
+"conjecture": 0 hits. "not claimed": 4 (ll. 296, 341, 357, 371).
+- l. 296 (ENDS): every ladder ends at (Q); an (R2) end exists; an (R2) centre has four colours → **FS-126**.
+- l. 341 (OUT): a saturated colouring with a curved tangent interface → **FS-126** (C121-CURVED).
+- l. 357 (PER): infinitely many radii and the cusp-free class → **FS-126**; "that a tight colouring can be taken periodic" → **declined**: a periodic
+  tight six-colouring would be `χ_m⁰(ℝ²) ≤ 6`, so the question is the answer at six, already FS-109's dial and route M's top rung, not a stub of its own.
+- l. 371 (LRA-LINE): ¬LRA → **FS-126**.
+
+### 4.5 Every registered prediction, scored (Brier on the binary outcome)
+
+| registration | p | outcome | Brier | the decision it drove |
+|---|---|---|---|---|
+| P1 — C121-R2-FOUR TRUE within D1 | 0.45 | not met (GAP) | 0.2025 | D4 ran on its own (item 55) |
+| P2 — C121-NOLRA TRUE within D2 | 0.30 | not met (GAP) | 0.0900 | LRA goes to FS-115, re-posed as thin pencils |
+| P3 — C121-SAT6 reduced to a smaller named step within D3 | 0.20 | not met (named, not smaller; item 34) | 0.0400 | the cover route opened |
+| Poros's hunch, curved ladders end on (Q) rings off cusps | 0.70 | partly met (the (Q) branch); not met as asked | 0.4900 | FS-121 opened on the (R2) branch |
+| stub: NO-PAR decided at one mind | 0.10 | not met | 0.0100 | — |
+| stub: NO-PAR reduced to a named step of row 134's chain | 0.50 | met for the Condition-5 part only; not met as a whole | 0.2500 | the parking |
+| stub: interface-maximal six-colourings reduced to a named step | 0.40 | named (TOP₆), not smaller: not met | 0.1600 | — |
+| stub: a top rung landed | 0.02 | not met | 0.0004 | — |
+| DB1's four | 0.70–0.85 | 4 of 4 met | 0.059 | — |
+| V2's three | 0.50–0.85 | 2 of 3 (VT at 0.55 missed: GAP at the corner) | 0.192 | — |
+| V3's three | 0.45–0.92 | 3 of 3 | 0.108 | — |
+| V4's five | 0.80–0.85 | 5 of 5 | 0.026 | — |
+| V5's three | 0.65–0.88 | 3 of 3 | 0.059 | — |
+
+**What the scores say.** The milestone's own registrations (plan and stub) went 0 of 8 as asked; every miss lay in the direction of a theorem landing,
+and the hunch at 0.7 was the costliest. The verifiers went 17 of 18, but all their priors were informed (written after reading the inputs), so they
+measure little. Counter-prior rule 2 applied: none of these numbers shrank an aim; each drove a launch, a stop or a re-route, and each re-route ran.
+
+## Stage 4 — SAVED
