@@ -20,10 +20,18 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
 
 - **FS116-Y3-QT** — the brief's one quotation is verbatim in `data/fs116/claims.md` § 7, and its nine unquoted attributions are present at their sources —
   computed over the brief's blockquote and nine phrases (`tools/fs116_y3_quotes.py`), § 1.1.
+- **FS116-Y3-SIX** — a Γ-free ring of a four-colour vertex (non-Siamese, simple) has exactly six change points, `60°` apart, all hubs — [derived], one mind, § 2.1.
+- **FS116-Y3-TIPS** — the tip pattern is forced: one tip per hub, antipodal tips opposite, two double tips on opposite adjacent pairs and two single
+  tips between them — [derived], one mind, § 2.2.
+- **FS116-Y3-HUBCOL** — the hub colours, read off the star: four hubs `{1, 2, X, X̄}` and two `{3, 4, X, X̄}` when the star's edges are interior to their
+  ranges — [derived], one mind, § 2.3.
+- **FS116-Y3-TIGHT** — the four ring tiles beside the double tips' tight edges do not reach the far lattice vertices `q_5, q_1, q_2, q_4` — [derived], one mind, § 2.4.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
+- Stage 2: would have enumerated assignments of the six hubs' tips to the four tiles; instead the opposite rule (antipodal tips opposite) was derived, which
+  leaves one pattern by hand (§ 2.2).
 
 ## Fence log (standing rule 8)
 
@@ -35,6 +43,8 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
 ## G87 lookout
 
 - Stage 1: none seen as two truths in collision.
+- Stage 2: none seen. Classed: HEX3's star (`60°, 120°, 60°, 120°`, derived there from two alternate hubs recurring) against TIPS (the same cyclic shape forced
+  with no recurrence) — the same object reached from two hypotheses, not two truths.
 
 ## Stage 1 — SAVED: the readback, and recognition on the target
 
@@ -139,3 +149,148 @@ colours on a lattice-circle arrangement. Reported to the coordinator with the re
 my own is run yet: owed (INVENTORY).
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the forced structure at radius `1 + ε` — six hubs, one tip pattern, the hub colours
+
+*Class throughout: a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex `p` of at least four colours whose
+ring is Γ-free. Inputs at their grades: FS116-N1-QFREE4 (one mind), RING-TWIST-C and RING-GERM (two minds), FS116-N2-STAR (one mind).*
+
+### 2.1 Exactly six change points, all hubs (FS116-Y3-SIX)
+
+By QFREE4 `p` has four colours and no more, absent `X, X̄`; non-Siamese and simple, it has four tiles and four edges, the tiles' cones closed intervals
+(possibly degenerate) covering every direction. `Γ ∩ ω(p)` is finite, so off it the ring lies in tiles of `X` or `X̄` (TWIST-D), and `c(θ + 60°)` is the
+colour other than `c(θ)` (RING-TWIST-C's L2): the colour is a step function swapped by `σ`, its colour changes are `σ`-invariant, and each half-open `60°`
+window holds an odd number of them (L4). A colour change has both germs off `Γ` (no arc of `Γ` on the ring), so it is a change point, and its germs at
+`±60°` lie on no (Q) arc: **every change point is a hub**; so there are `6(2j + 1)` change points. Each has a tip (RING-GERM (i)). A tile of `p` lies in
+`B̄(p, 1)` with diameter at most 1, so the ring points in its closure are pairwise at most `60°` apart and lie in one closed `60°` arc, which holds at most
+`2j + 2` of the change points; four tiles reach at most `4(2j + 2)`, and `4(2j + 2) ≥ 6(2j + 1)` forces `j = 0`. ∎ Rotating, the hubs are `y_k = e(60k)`
+(`p` at the origin), and the ring is `X` on `(0°, 60°)`, `(120°, 180°)`, `(240°, 300°)` and `X̄` on the other three arcs (the names `X`, `X̄` chosen so).
+
+### 2.2 The tip pattern is forced (FS116-Y3-TIPS)
+
+**(a) Antipodal tips are not adjacent.** A tip `t` of `y` lies in `B̄(y, 1)`; a tip `t′` of `y′ = −y` in `B̄(y′, 1)`; `|y − y′| = 2`, so the two closed discs
+meet only at `p` (`data/fs116/y3/lattice.out` (a)). Two tiles adjacent at `p` share a non-degenerate boundary curve from `p`, which would lie in both: so
+`t` and `t′` are neither equal nor adjacent — with four tiles in a cycle, **opposite**.
+**(b) One tip each, and the map.** If `y_k` had two tips, every tip of `y_{k+3}` would be opposite to both: impossible. So each hub has exactly one tip
+`τ(y_k)`, and `τ(y_{k+3}) = τ(y_k) + 2` (indices of the four tiles in counter-clockwise order, mod 4). A tile tips at most two hubs, and two only if they
+are adjacent (§ 2.1's `60°` arc), and then lies in their Reuleaux triangle with `p`. Six hubs on four tiles: some adjacent pair shares its tip — rotate it
+to `(y_0, y_1)`, tipped by `t_a`. Then `y_3, y_4` are tipped by `t_{a+2}`; `y_2`'s tip is neither (it would tip three hubs), so it is `t_{a±1}`, and `y_5`'s
+the other. **(c) Which single is which.** `t_a`'s cone at `p` lies in `[−30°, 90°]` (inside `B̄(y_0, 1) ∩ B̄(y_1, 1)`), `t_{a+2}`'s in `[150°, 270°]`; the
+tile between them counter-clockwise has a cone containing `[90°, 150°]`, which no tile inside `B̄(y_5, 1)` (cone in `[210°, 30°]`) has: it tips `y_2`. ∎
+
+So, naming the tiles by role — **`T1`** tips `y_0, y_1` (cone `[δ_4, δ_1] ⊂ [−30°, 90°]`), **`T3`** tips `y_2` (`[δ_1, δ_2] ⊂ [30°, 210°]`), **`T2`** tips `y_3, y_4`
+(`[δ_2, δ_3] ⊂ [150°, 270°]`), **`T4`** tips `y_5` (`[δ_3, δ_4] ⊂ [210°, 30°]`), counter-clockwise, with `δ_1 ∈ [30°, 90°]`, `δ_2 ∈ [150°, 210°]`, `δ_3 ∈
+[210°, 270°]`, `δ_4 ∈ [−30°, 30°]` — and their colours `1, 3, 2, 4`. This is the pattern of HEX3's star when `δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30°`
+(N2 § 3.1: four edges at `D_k, D_{k+1}, D_{k+3}, D_{k+4}`); HEX3 needs it only when two alternate hubs recur, and here it is one member of a forced family.
+
+### 2.3 The hub colours (FS116-Y3-HUBCOL)
+
+By STAR, `C(y) = {X, X̄} ⊔ T_y ⊔ O_y`, `T_y = {c(τ(y))}`, and `O_y` (non-empty: RING-GERM (ii)) holds colours whose tile at `p` misses `B(y, 1)` (cone at
+`p` in `[ψ + 90°, ψ + 270°]`). Reading the cones of § 2.2:
+
+| hub | tip | outer colours possible | four colours when every `δ` is interior to its range |
+|---|---|---|---|
+| `y_0` | 1 | 2; 3 only if `δ_1 = 90°` | `{1, 2, X, X̄}` |
+| `y_1` | 1 | 2; 4 only if `δ_4 = −30°` | `{1, 2, X, X̄}` |
+| `y_2` | 3 | 4; 2 only if `δ_2 = 210°`; 1 only if `δ_1 = 30°` | `{3, 4, X, X̄}` |
+| `y_3` | 2 | 1; 4 only if `δ_3 = 270°` | `{1, 2, X, X̄}` |
+| `y_4` | 2 | 1; 3 only if `δ_2 = 150°` | `{1, 2, X, X̄}` |
+| `y_5` | 4 | 3; 1 only if `δ_4 = 30°`; 2 only if `δ_3 = 210°` | `{3, 4, X, X̄}` |
+
+With every `δ` interior, the flanking directions `60k ± 90°` are interior to tiles and STAR's flank clause confirms the last column (`A(y_0) = A(y_1) = A(y_3) =
+A(y_4) = {3, 4}`, `A(y_2) = A(y_5) = {1, 2}`): in N2's Kneser language the six missing pairs are `B, B, B′, B, B, B′` round the hexagon, `B = {3, 4}` — antipodal
+hubs share theirs and swap tip and outer colour, as ANTI says.
+
+### 2.4 The tight sides (FS116-Y3-TIGHT)
+
+At `y_0` the tip `T1` lies in `B̄(p, 1) ∩ B̄(y_1, 1)`, whose tangent cone at `y_0` is `[90°, 210°]`, and its cone contains the closed tip cone `[150°, 210°]`
+(RING-GERM (i)): so `T1`'s cone ends at `210°`, and the edge it shares there with the ring tile clockwise of `y_0` — call it `R_{50}`, colour `X̄` — lies in
+`B̄(y_1, 1)`. If `cl R_{50}` held `q_5 = √3·e(330°)`, it would lie in `B̄(q_5, 1)`, and the shared edge in `B̄(y_1, 1) ∩ B̄(q_5, 1) = {y_0}` (`|y_1 − q_5| = 2`,
+midpoint `y_0`). So **`q_5 ∉ cl R_{50}`**. Likewise at `y_1` (`T1`'s cone starts at `210°`, inside `B̄(y_0, 1)`): **`q_1 ∉ cl R_{12}`**; at `y_3`, `y_4` with
+`T2`: **`q_2 ∉ cl R_{23}`**, **`q_4 ∉ cl R_{45}`** (`data/fs116/y3/lattice.out` (b), (c): the four distances 2 with their midpoints, and the one shared endpoint
+of each double tip's cone at each of its hubs; the singles share none). The ring tiles `R_{01}`, `R_{34}` over the double tips' arcs are not constrained so.
+
+### 2.5 Controls, and where six is spent
+
+- **The strip and the disk:** their four-colour rings carry (Q) arcs (FS116-N1 § 2.4): outside the class, silent. **FS116-Y2-SIXFRAG:** a six-colour vertex,
+  outside it. **R7 (`k = 7`):** its lattice points carry six of seven colours and three Reuleaux arcs on the ring: outside it.
+- **SQ9 (`k = 9`)** has a Γ-free four-colour vertex at every grid point (its boundaries are segments). Its ring about a grid vertex has **12** change points
+  (`tools/fs116_y3_hex.py sq9`: the twelve crossings with the grid lines, exact; the colours on either side read at 50 digits; plant: the colouring by columns
+  only, 6), not `6(2j + 1)`: **six is spent at RING-TWIST-C's L2** (two absent colours swapped by `σ`), and so is everything after.
+
+derivation: FS116-Y3-SIX
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, the ring has exactly six change points, 60° apart, each a hub, and p has exactly four tiles
+  uses only: FS116-N1-QFREE4 (four colours and no more at p); RING-TWIST-C (the ring's colours swapped by σ, an odd number of colour changes per half-open
+    60° window); RING-GERM (i) (a tip at each change point); that a tile of p has diameter at most 1 and lies in B̄(p, 1); non-Siamese and simple (four tiles)
+  not claimed: anything in the Siamese class (there RING-GERM's tip is GERM-S's tile, not necessarily a tile of p, and the count is not run); anything at
+    k ≥ 7 (SQ9 at k = 9 has twelve); that any such fragment exists
+  argument: § 2.1 Exactly six change points, all hubs (FS116-Y3-SIX)
+  verdict: derived
+  grade: derived from: RING-TWIST-C, RING-GERM, FS116-N1-QFREE4
+  minds: 1
+  model: none at six colours (no Γ-free four-colour vertex is held: N2 § 2.4); SQ9 at k = 9 meets every hypothesis but six colours and has twelve change
+    points — control fs116-y3-sq9
+  prior art: partly: FS116-V1's V1-F5 ("exactly six change points", inventory item 30, not read here); FS114-N6-RING60's hexagon; the tile count not found — owed
+  handoff: de Bruijn — with RING-TWIST-C and RING-GERM, queued behind D6's map type
+
+derivation: FS116-Y3-TIPS
+  statement: in FS116-Y3-SIX's setting, with the hubs y_k = e(60k), each hub has exactly one tip, the tips of antipodal hubs are opposite tiles of p, and up
+    to rotation of the labels the four tiles of p, counter-clockwise, are T1 tipping y_0 and y_1 (cone at p in [−30°, 90°]), T3 tipping y_2 (in [30°, 210°]),
+    T2 tipping y_3 and y_4 (in [150°, 270°]) and T4 tipping y_5 (in [210°, 30°])
+  uses only: FS116-Y3-SIX; RING-GERM (i); that a tip of y lies in B̄(y, 1); that the closed unit discs about antipodal hubs meet only at p; that two tiles
+    adjacent at p share a non-degenerate boundary curve from p
+  not claimed: anything in the Siamese or non-simple class; that the cones fill their ranges (each δ is free in its interval); that any such fragment exists
+  argument: § 2.2 The tip pattern is forced (FS116-Y3-TIPS)
+  verdict: derived
+  grade: derived from: FS116-Y3-SIX, RING-GERM
+  minds: 1
+  model: none at six colours; the lattice facts it uses are control fs116-y3-lattice
+  prior art: partly: FS116-N2-HEX3 names the star with δ = 90°, 150°, 270°, −30° under a recurrence hypothesis; the forcing of the pattern not found — owed
+  handoff: de Bruijn — with SIX; a relay-result for any exclusion of the Γ-free type
+
+derivation: FS116-Y3-HUBCOL
+  statement: in FS116-Y3-TIPS's labelling, each hub's colours are X, X̄, its tip's colour and a non-empty set of outer colours drawn from the list of § 2.3
+    (y_0: 2, and 3 only if δ_1 = 90°; y_1: 2, and 4 only if δ_4 = −30°; y_2: 4, and 2 only if δ_2 = 210°, 1 only if δ_1 = 30°; y_3: 1, and 4 only if
+    δ_3 = 270°; y_4: 1, and 3 only if δ_2 = 150°; y_5: 3, and 1 only if δ_4 = 30°, 2 only if δ_3 = 210°); when every δ is interior to its range, y_0, y_1, y_3, y_4 carry {1, 2, X, X̄} and y_2, y_5
+    carry {3, 4, X, X̄}
+  uses only: FS116-Y3-TIPS; FS116-N2-STAR; RING-GERM (ii)
+  not claimed: that an outer colour the list allows occurs (the boundary values of δ are necessary for the extra outer colours, not sufficient);
+    anything about the hubs' rings beyond their colours
+  argument: § 2.3 The hub colours (FS116-Y3-HUBCOL)
+  verdict: derived
+  grade: derived from: FS116-Y3-TIPS, FS116-N2-STAR
+  minds: 1
+  model: none at six colours
+  prior art: owed
+  handoff: none — a relay-result for § 3 and the families
+
+derivation: FS116-Y3-TIGHT
+  statement: in FS116-Y3-TIPS's labelling, the ring tile clockwise of y_0 does not have q_5 = √3 e(330°) in its closure, the ring tile counter-clockwise
+    of y_1 not q_1, the one counter-clockwise of y_3 not q_2, the one clockwise of y_4 not q_4; at y_0 and y_1 the tip T1's cone has the endpoint 210°, at
+    y_3 and y_4 the tip T2's the endpoint 30°, each along an edge inside the unit disc about the double tip's other hub
+  uses only: FS116-Y3-TIPS; RING-GERM (i); that a tile with a point q in its closure lies in B̄(q, 1); |y_1 − q_5| = |y_0 − q_1| = |y_4 − q_2| = |y_3 − q_4| = 2
+    with midpoints y_0, y_1, y_3, y_4
+  not claimed: anything about the ring tiles over the double tips' arcs (between y_0, y_1 and between y_3, y_4); that the four ring tiles named do not
+    reach beyond their hubs' discs
+  argument: § 2.4 The tight sides (FS116-Y3-TIGHT)
+  verdict: derived
+  grade: derived from: FS116-Y3-TIPS
+  minds: 1
+  model: none at six colours
+  prior art: owed
+  handoff: none — a relay-result for § 3 and the families
+
+control: fs116-y3-lattice
+  of: FS116-Y3-TIPS and FS116-Y3-TIGHT — the lattice distances and the tip cones; q_5 misplaced to √3 e(300°) is caught
+  run: python3 ../tools/fs116_y3_hex.py lattice | tail -n 1
+  expect: LATTICE OK
+  fault: python3 ../tools/fs116_y3_hex.py lattice --plant q | tail -n 1
+
+control: fs116-y3-sq9
+  of: FS116-Y3-SIX — at k = 9 SQ9's Γ-free four-colour vertex has twelve change points; coloured by columns only, six
+  run: python3 ../tools/fs116_y3_hex.py sq9
+  expect: SQ9 ring about a grid vertex: 12 points on grid lines; colour changes: 12
+  fault: python3 ../tools/fs116_y3_hex.py sq9 --plant stripes
+
+## Stage 2 — SAVED

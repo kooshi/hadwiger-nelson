@@ -1,0 +1,14 @@
+(a) |y_0 - y_3|^2 = 4
+(a) |y_1 - y_4|^2 = 4
+(a) |y_2 - y_5|^2 = 4
+(b) |y_1 - q_5|^2 = sqrt(3) + 4; midpoint - y_0 = [-3/4 + sqrt(3)/4, -3/4 + sqrt(3)/4]
+(b) |y_0 - q_1|^2 = 4; midpoint - y_1 = [0, 0]
+(b) |y_4 - q_2|^2 = 4; midpoint - y_3 = [0, 0]
+(b) |y_3 - q_4|^2 = 4; midpoint - y_4 = [0, 0]
+(c) y_0: tip cone [150, 210] in B(p)-cone [90, 270]: True; in B(y_1)-cone [30, 210]: True; endpoints shared with the tip cone: [210]
+(c) y_1: tip cone [210, 270] in B(p)-cone [150, 330]: True; in B(y_0)-cone [210, 30]: True; endpoints shared with the tip cone: [210]
+(c) y_2: tip cone [270, 330] in B(p)-cone [210, 30]: True; endpoints shared: []
+(c) y_3: tip cone [330, 30] in B(p)-cone [270, 90]: True; in B(y_4)-cone [210, 30]: True; endpoints shared with the tip cone: [30]
+(c) y_4: tip cone [30, 90] in B(p)-cone [330, 150]: True; in B(y_3)-cone [30, 210]: True; endpoints shared with the tip cone: [30]
+(c) y_5: tip cone [90, 150] in B(p)-cone [30, 210]: True; endpoints shared: []
+LATTICE FAIL: (b) y_1, q_5
