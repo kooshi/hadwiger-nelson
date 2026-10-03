@@ -34,6 +34,10 @@ Blind, the same model (Opus 5.5) as the minds whose records the second phase ope
 - 2026-10-03 ~15:15 UTC: the coordinator's answer to my question (§ 1.3) quoted four definitions from the header of `plans/FS121-D2-proof.md`
   (ll. 6–9), a fenced record, and said the rest stays fenced. Logged as a disclosed, coordinator-mediated touch: it carried definitions of terms, no
   argument, route or verdict.
+- 2026-10-03 15:41 UTC, after the verdicts' commits (`4ed402c6` for FACE and GRID, `ab25bbdc` for D2-SYM), the brief's second phase: read
+  `plans/FS121-D2-proof.md` ll. 168–321 (its § 2) and `plans/FS121-D4-proof.md` ll. 157–229 (its §§ 2.1–2.2), nothing else. To find those ranges a
+  heading grep printed section titles just outside them (the D4 record's stage-2 heading and its §§ 2.3–2.5 titles, "Holes", "The line", "Small
+  regions") and the line numbers of the files' level-2 headings. Titles only: disclosed here.
 
 ## Stage 1 — SAVED: readback, readings, what was given, registered predictions
 
@@ -136,7 +140,7 @@ verification: FS121-D2-SYM
     trip inward to radius r (M2-INTRAD) and back out over the window (C121-OUT); (L∞) by the chain's alternation; the in-particular clause by
     compactness and M2-INTRAD's per-radius finiteness (§§ 3.1–3.4); the first route unknown to this mind until the comparison
   attack: § 3.6 The attack on FS121-D2-SYM
-  divergences: none — the comparison opens only after this commit; stage 4 replaces this line with its table's address
+  divergences: § 4.1 Divergences on FS121-D2-SYM
   counterexamples: none — searched: the held models R7, SQ9, HEX9 (window clause vacuous), r = 1, a bound only on bounded sets, degenerate
     arcs, segments under (L∞); no held object at any k has an arc of radius ≥ 2 to test the window clause (§ 3.6)
   minds: 2 — blind to: the first derivation's record, data and argument (plans/FS121-D2-proof.md beyond the four definitions the coordinator
@@ -160,7 +164,7 @@ verification: FS121-D4-FACE
   method: a pair lemma by Fubini (V5-PAIR) and a crossing criterion by connectedness; the half-box for every direction but e, the far box for e
     (§ 2.1); the first route unknown to this mind until the comparison
   attack: § 2.2 The attack on FS121-D4-FACE
-  divergences: none — the comparison opens only after this commit; stage 4 replaces this line with its table's address
+  divergences: § 4.2 Divergences on FS121-D4-FACE
   counterexamples: thin truth: g = 1/10, ρ = 11/25 (2g − g² ≤ ρ² < 2g, outside the hypothesis), with H and B a.e. in S_c — the margin enters
     only as (1 − g)² + ρ² ≥ 1, in Step 2(a) of § 2.1, so the sharp hypothesis is ρ² ≥ 2g − g²
   minds: 2 — blind to: the first derivation's record, data and route (plans/FS121-D4-proof.md, data/fs121/d4/); method: V5-PAIR and the crossing
@@ -183,7 +187,7 @@ verification: FS121-D4-GRID
   method: Cantor–Bendixson to consecutive thin columns, a pigeonhole over k + 1 of them, then FS121-D4-FACE at a column edge (§ 2.3); the key
     step was given as a named lemma, so this route shares it with the first by construction; Steps 1, 2 and 4 are this mind's
   attack: § 2.4 The attack on FS121-D4-GRID
-  divergences: none — the comparison opens only after this commit; stage 4 replaces this line with its table's address
+  divergences: § 4.3 Divergences on FS121-D4-GRID
   counterexamples: none — searched by removing saturation, adjacency, countability and finitely many colours in turn (§ 2.4); the countability
     example (SQ9 with a null Cantor set of breakpoints) refutes the breakpoint clause only outside the hypotheses, where the not-claimed line
     already places it (as a GAP: a wording defect, § 2.4)
@@ -440,3 +444,37 @@ translations.)
 - **Where the attack succeeds:** at no counterexample — none found at the statement's scope. It succeeds at the statement's dependence edges: the
   in-particular clause and reading (L∞) are carried only through M2-INTRAD's per-radius finiteness, held at one mind; the main clause under (Lfin) is
   not. And it finds the sentence narrower than its argument (§ 3.5): the carried exceeds the conveyed, at V5-SYM-UP and V5-SYM-CPT.
+
+## Stage 4 — SAVED: the comparison — the divergence tables
+
+*Opened after the verdicts' commits, as the fence log records. The first derivations' entries carry the frozen list's statements and not-claimed lines
+exactly (whitespace aside; checked on the opened ranges). No verdict of this record is withdrawn: **retractions 0**. No divergence of truth.*
+
+### 4.1 Divergences on FS121-D2-SYM
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the mechanism of the main clause | the bound at `r` puts a short LRA piece's inner image into an arc of window `≥ θ₀`; C121-OUT carries that window back out to the piece's own radius, giving long arcs of `cl 𝓘` through the accumulation point, and V5-RAY puts a segment into Σ (§ 3.2) | LRA makes the pieces' radius-`r` rungs exactly as thin as the pieces (window transport), because a rung cannot follow its own circle past a junction normal (FS121-D2-EXT); thin arcs violate the bound | route | kept both: the contradiction sits at the accumulation here and at a junction there; both rest on M2-INTRAD's parallel step and M-C11; this route adds C121-OUT (two minds), that one FS121-D2-EXT (one mind). The two meet: D2-EXT says this route's long arc cannot pass the piece's junctions, a second contradiction in the same situation |
+| 2 | inputs of the main clause under (Lfin) | M2-INTRAD's parallel step, C121-OUT, M-C11 and Σ's local finiteness; not M2-INTRAD's per-radius finiteness | FS121-D2-THIN also cites M2-INTRAD (iii) and REG-J′'s finitely many interface arcs per bounded set (one arc `J` of finite length) | route | kept both; under (Lfin) this route stands on inputs held at two minds or more |
+| 3 | reading (L∞), segments among the pieces | § 3.3: (★) and the chain's alternation reduce segment pieces to circular ones | FS121-D2-THIN argues circular pieces ("radius `n_i`, centre `z_i`", "pass to a subsequence of distinct radii"); an accumulation of segment pieces is not argued | route | no truth divergence: the first argument covers (Lfin); § 3.3 here supplies (L∞), resting on M2-INTRAD's one-mind finiteness — offered to the author |
+| 4 | "radii of curvature tend to infinity" in ¬LRA | worked under both readings | the header does not say whether segments count | wording | for the author to fix (the coordinator's ruling, § 1.3) |
+| 5 | the in-particular clause | finitely many radius-`r` arcs meet `K`, else radius-`r` pieces accumulate against M2-INTRAD's per-radius finiteness | the same, covering `K` by neighbourhoods of M2-INTRAD (ii) | route | the same one-mind input; agree |
+| 6 | what the argument carries | V5-SYM-UP; V5-SYM-CPT: under any cocompact symmetry every curved interface is a unit arc of kind both | FS121-D2-PERFIN: a doubly periodic colouring has finitely many radii, so C121-PER's periodic clause holds without "satisfying ¬LRA" | route | agree on the doubly periodic case; V5-SYM-CPT covers every cocompact group directly, PERFIN reaches the conclusion through C121-PER |
+| 7 | an arc has positive length | read so: one-point arcs would empty the hypothesis | "a maximal arc", not discussed | wording | for the author to confirm |
+
+### 4.2 Divergences on FS121-D4-FACE
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the direction `e` | exact: the far box's corner at lateral distance `ρ` across the gap; crossing iff `(1 − g)² + ρ² > 1` | the sagitta bound `\|sin φ\| < √(2(g + ε′))`, then shrinking `ε′`, which needs `2g < ρ²` | route | kept both; this route reaches the sharp margin `ρ² ≥ 2g − g²` (V5-FACE-SHARP, § 2.2), the other the stated one |
+| 2 | the other directions | the crossing criterion `d_H < 1 < D_H` | transversality of `T₁(y)` at `x` for `u ≠ ±e`, explicit points for `u = −e` | route | kept both |
+| 3 | the margin outside the hypothesis | true for `2g − g² ≤ ρ² ≤ 2g`; false below, by an exact counterexample | "2g ≥ ρ² is not covered" | wording | the statement as written is true; its hypothesis can be weakened to `ρ² ≥ 2g − g²` — offered to the author |
+| 4 | the model | a non-saturated a.e.-proper colouring satisfying every hypothesis, `c` of density `1/2` at `x` (§ 2.2) | SQ9 at an edge midpoint, where `2g ≥ ρ²` and the lemma is silent | route | the first entry's model line names no object satisfying the hypotheses; § 2.2 supplies one — for the author's model line |
+
+### 4.3 Divergences on FS121-D4-GRID
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | reaching FACE's configuration | Cantor–Bendixson: an isolated point of the derived set, consecutive thin columns, a pigeonhole over `k + 1` of them | scatteredness: infinitely many isolated breakpoints near the accumulation point, a pigeonhole on their left cells' colours, adjacency for `g > 0` | route | kept both; the first needs no consecutive structure |
+| 2 | the Σ clause | `Σ = B_x × B_y` exactly, four arcs at each point | `Σ ⊆ B_x × B_y`, at most four edges | route | agree; equality is the sharper form |
+| 3 | uncountable `B_x` (the not-claimed line) | the breakpoint clause is false there: SQ9 with a null Cantor set of redundant breakpoints in one column meets every other hypothesis (§ 2.4); the Σ clause is what stays open | "GAP there" | wording | the parenthesis should read "false for the breakpoint clause; open for the Σ clause" — for the author |
