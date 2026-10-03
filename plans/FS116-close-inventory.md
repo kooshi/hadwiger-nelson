@@ -161,6 +161,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 127 | result | A G83 instance drafted for `plans/GROKKING-INSTANCES.md` (verbatim in Y4's report): the Γ-free four-colour vertex dies at 1 + ε by G83's straddle; round 3's FS116-Y3-TIGHT had stated both flank edges and used each only against a far lens vertex | Y4 § 3.4 | open (for the close) |
 | 128 | prior-art debt | FLANK, EMPTY and SPOKE not searched outside FS-116's records; the mechanism is held in-house (G83, FS114-Y5-PXKILL) | Y4 § 3.4 | open |
 | 129 | question for another lane | Standing rule 5 (the search ban to 2026-10-01) is still in `plans/STANDING-RULES.md` on 2026-10-03; Y4 kept its log and was bound by the list's § 9 anyway. Kooshi's decision, default: delete it at the next filing | Y4 § 1.1 | open (Kooshi) |
+| 130 | owner ruling | **FS116-V6** (12:05), blind, the same model, on FS116-Y4-EMPTY alone (§ 15), with any statement of §§ 2, 8, 10–14 usable as a named input and graded through at the close; fence as FS116-V5's plus Y4's and V5's files; built from V5's brief by script, gate PASS; one clause of the mission ("or a class is worked as though it were inhabited") removed on the cold read as a nudge toward the verdict. Alternative: no blind check, EMPTY filed at one mind. Why not: EMPTY decides a whole case of C114-LOCAL-F, the most consequential statement of the milestone's rounds; the agent is within the estimate. Confidence: high | `data/fs116/briefs/FS116-V6-verify.md` | open |
 
 ## Workflow 3.0 — frictions, as they arise
 
