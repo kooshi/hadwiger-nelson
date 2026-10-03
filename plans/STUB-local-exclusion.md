@@ -1,5 +1,7 @@
 # FS-116 — the local exclusion: is there an explicit radius about a four-colour vertex within which no valid six-map fragment with unit arcs exists? (stub)
 
+> **Closed undecided 2026-10-03 (FS-116; rows 145–148; `plans/FS116-Z1-close.md`, `plans/FS116-Z2-close.md`).** C114-LOCAL-F is GAP at named ring types. Held: the YES needs no map (FS116-O1-YESLIM); a four-colour vertex whose ring carries no arc of the boundary dies at `1 + ε` in the non-Siamese simple class (FS116-Y4-EMPTY); saturation pins every edge at a four-colour vertex (FS116-O1-SATPIN); change points and semi-hubs place four-colour vertices on the ring (FS116-RING-GERM, FS116-N3-SEMI). Successors: FS-123 (the (Q)-free ring), FS-124 (the (Q) ring and the five- and six-colour vertices), FS-125 (the saturated class).
+
 *Minted 2026-09-28 by the close job FS114-C at FS-114's close, on Kooshi's ruling (`plans/FS114-close-inventory.md` item 121: *"Understood. Let's close
 up, then hand off to a completely fresh session with a note to check for keryx and be watchful of the new workflow in comparison to the old."*, read
 by the coordinator, and accepted, as: FS-114 closes undecided and round 7's queue becomes its successor's opening). FS-114's successor; its sibling is

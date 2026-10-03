@@ -938,6 +938,8 @@ verdict the citing paper's own text supports. References that already had an ent
 | **[Alper2020]** O. Alper, *On the singular set of free interface in an optimal partition problem* (Zbl 1442.05019) | **Listing only** (FS-121's opening § 2.2): role, the vocabulary of REG-J′ ("regular partition", "singular set") |
 | **[Howard1999]** R. Howard, *Blaschke's rolling theorem for manifolds with boundary* (Zbl 0958.53024) | **Listing only** (FS-121's opening § 2.2; a review listed): role, a second source for M-C11's rolling step |
 | **[Federer1969]** *Geometric measure theory* (H. Federer; Springer 1969; Zbl 0176.00801) | **Listing only**, not held: §4.5.11's finite-perimeter criterion, cited by FS111-M2-HULLC and M2-SELCOMP as classical — a debt |
+| **[FukunagaTakahashi2014]** T. Fukunaga, M. Takahashi, *Evolutes of fronts in the Euclidean plane*, J. Singul. 10 (2014) (Zbl 1308.53005). | **Listing only** (FS121-D2's zbMATH query d01), not held, not read. Role: home 1's vocabulary (parallels, evolutes and cusps of fronts) for FS-121's ladders. Rests on it: nothing. |
+| **[FejesToth1973]** G. Fejes Tóth, L. Fejes Tóth, *On totally separable domains*, Acta Math. Acad. Sci. Hungar. 24 (1973) (Zbl 0259.52008). | **Listing only** (FS121-Z1's query z01, 2026-10-03; the record an author's summary or none), not held, not read. Role: the home FS121-D4 recalled for LAT (lateral extent against gap). Rests on it: nothing. |
 
 ## G. The Geombinatorics archive walk (2026-09-27)
 

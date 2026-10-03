@@ -64,6 +64,15 @@ FS-114: FS112-L60 ("below 60°") stood on two minds, one blind, and a tool, and 
 
 *FS-111, 2026-09-28: `tools/fs111_m2_disck7.py` checked a hexagon rotated 30° from its record's lattice and passed; at the record's own lattice the bodies leave a tiling vertex uncovered (`plans/FS111-VM2-verification.md` §2.3 D1, §2.6).*
 
+*FS121-Z1, FS-121's close; `plans/FS121-Z1-close.md` D4 (a control that tests nothing):*
+
+FS121-D1-EROSION's models SQ9 and HEX9 lie inside the diameter bound, which gives its first disjunct in every a.e.-proper colouring for `θ ≤ 2π/3`, and its plant (a hexagon of side `3/5`) occurs in no a.e.-proper colouring (`plans/FS121-V2-verification.md` § 3.4 row 11). And `tools/fs121_c1_disc7.py`'s first version passed 14 of 42 pairs on the wrong lattice (`plans/FS121-C1-proof.md` § 2.4).
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-close-inventory.md` items 68, 124; `plans/FS116-local-exclusion.md` § 4.6:*
+
+"FS-116 (2026-10-03): twenty-one entries derived about the Γ-free four-colour vertex over rounds 3 and 4, nine of them frozen and four held at two minds, are true vacuously — FS116-Y4-EMPTY (held) empties the class at `1 + ε`. The plan carried the vacuity rule in its failure clauses ('the six-colour class may be empty'), and FS116-N2 noted that no held fragment has a hub (item 68); no job was asked for an inhabitant or an obstruction before the class's structure, so the structure was worked for two rounds on an empty class. A positive control for a class is an inhabitant, or the class is a candidate for emptiness."
+
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -351,6 +360,11 @@ A fresh instance of this file's own rule: the probe's design confirmed that a si
 
 *FS-111: G54 was walked "silent" by its title at the opening, while its body names fall colourings — the object of rounds 2–4, which M2 found by its own gate. §G ran once, before the object changed from tight colourings to maximal covers; nothing re-read the corpus from inside the new object (`plans/FS111-C-close.md` §4.1).*
 
+*FS121-Z1, FS-121's close; `plans/FS121-Z1-close.md` D4 (a §G miss):*
+
+FS-121's §G walked G13 (the fan ladder: "coverage is a k-set property invisible to pair sweeps") as silent; "bound" is a coverage condition on `ω(x)`, and TOP₆ is a coverage question that D3's three attempts never asked (`plans/FS121-map-step.md` § 1.2 silent list; `plans/FS121-Z1-close.md` § 4.1).
+
+
 ## G72 — The invariant question
 
 *M8, from G72, after “…thirteen** (each derivation close's §IQ record):”:*
@@ -429,6 +443,36 @@ FS-114: the headline (every valid map carries a four-colour vertex) and the coun
 *FS111-C, FS-111's close (`plans/FS111-C-close.md` §D4):*
 
 *FS-111: the headline from example invariants (the contact structure; R7), the walls from counterexample invariants (HC_K, M3-IRREG, M4-CUT, DECO-B, W-NEG) (`plans/FS111-C-close.md` §4.2).*
+
+## G82 — The measurable question is a stability question
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-local-exclusion.md` § 3.4:*
+
+FS116-O1-YESLIM (held, 2026-10-03) — run on exact valid fragments, the weak-* step needs no map, no centre and no complexity bound: fragments on discs of every radius give `χ_m⁰(ℝ²) ≤ k`; so the uniform radius of a local NO is implied by seven, never an overshoot of it.
+
+## G83 — With unit arcs, the tight question lives at one four-colour vertex
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, inventory item 127, verbatim from `data/fs116/reports/FS116-Y4.md` l. 17, `plans/FS116-Y4-construction.md` § 3.4:*
+
+"FS116-Y4 (2026-10-03): the Γ-free four-colour vertex dies at 1 + ε by G83's straddle — the double tip's two flank tiles, of one colour, forced along ω(y_0) and ω(y_1) within 1; round 3's FS116-Y3-TIGHT had stated both edges and used each only against a far lens vertex, so the class was worked for a round as possible"
+
+## G84 — Contact is the regularity mechanism
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-S1-proof.md` § 1.3, verbatim:*
+
+"SAT-STRIP is a collision between a rung and a contact: the east edge's tangent partner carries `c_IV` along `y = 1` from `q_N` out to `(L_E, 1)`, while the ring forces a tile of `c_IV` against `ω(p)` from outside somewhere in quadrant II; one connected family of `c_IV` tiles cannot be within distance below 1 of that tile at `q_N` and above 1 at `(L_E, 1)`." — FS116-S1, the saturated cross killed at `R = 2` in its class (FS116-S1-QF; two derivations, not held).
+
+## G87 — The invention signal
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-Z1-close.md` § 2.4 F2, `plans/FS116-Z2-close.md` § 1.5:*
+
+**its killing test fired once.** The bends collision stood on record before and during FS-116 — `plans/FS114-NB6-verification.md` § 1b.0 and `plans/FS114-NB5-verification.md` § 1b.3 on one side, FS114-N5-GRING's *uses only* line, `plans/FS116-Y4-construction.md` § 3.3 and FS116-Y4-EMPTY's *not claimed* line on the other — and no round reported it; part 1 of the close found it reading two passages side by side. The minds were on the lookout and wrote "none seen" (the plan, every record's G87 line). One firing is not a verdict on the rule; it says the lookout reads collisions inside one record, not between a record and an older one.
+
+## `CLAUDE.md` § Counter-priors
+
+*FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-Z2-close.md` § 2.5:*
+
+FS-116's verifiers registered 23 predictions (Brier 0.138 by the gate's count); where their probabilities were lowest the statements held — FS116-Y3-STARFORCE at 0.3, -TIGHTLENS at 0.4, FS116-N3-SEMI at 0.45, and FS116-V6's "refuted" at 0.6 against FS116-Y4-EMPTY, which held: the miss in the direction the section measured.
 
 ## `CLAUDE.md` § Delegation — one level deep
 

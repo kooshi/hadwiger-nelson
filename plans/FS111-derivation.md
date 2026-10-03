@@ -496,6 +496,8 @@ derivation: FS111-W-NOREP
 
 Rests on it: FS111-W-HULLREG-MAPS; the exclusion of M's stub (d) among maps without cusps.
 
+*Correction (2026-10-03, FS-121's close; FS121-DB1 § 3.3 item 2, one mind):* the argument's two cases (`plans/FS111-W-wild.md` § 2.3) do not cover an edge that is a unit arc whose centre carries the repeated colour on the far side of the edge from the sector, where case (i)'s parallel collapses to a point. The statement stands through FS121-DB1-L3's case K+ (`plans/FS121-derivation.md` FS121-DB1-L3, two minds), which also localises it to a point of Σ with cusps allowed.
+
 derivation: FS111-W-HULLREG-MAPS
   statement: on every saturated map without cusps, each point with two colours locally has a neighbourhood in which the interface is the graph of a
     C^{1,1} function with |κ| ≤ 1, semiconcave and semiconvex

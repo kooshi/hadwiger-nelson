@@ -92,6 +92,8 @@ Question 3 is the first step of the whole NO's Siamese half (G86: a Siamese kill
 about a four-colour vertex with a (Q)-free ring carrying (R2) arcs, past `1 + ε`, would be the first object of its kind and a construction target in
 its own right. Nothing here moves a value alone.
 
+**At R2's re-rank (2026-10-03).** Question 1's reach is every ring, not only (Q)-free ones: side 1's sentence (`plans/FS114-NB6-verification.md` ll. 106–108) names no ring type, so a yes also deletes from FS-124's case list every change point that ends a non-(Q) arc of `Γ`. In route M's saturated class the same (R2) arcs go another way, by FS-126's NO: FS121-Z1-NOCURVED (one mind) gives "no (R2) arc occurs" from it. NB6 ll. 109–111 record two readings of "(Q)"; this stub uses FS-112's (an arc whose centre carries both side colours) throughout (`plans/POROS-2026-10-03-close-reread.md` §§ 2.3 C1, C3).
+
 ## Owed second minds (before anything final rests on them)
 
 FS116-Y4-FLANK (one mind; question 2 runs on it, while EMPTY's held count does not need it); FS114-N7-3T's per-pattern kills and FS114-N7-HUB on rings with
@@ -130,3 +132,20 @@ The plan (the reframe first); a derivation file in the Ephodos grammar; any obje
 
 G83 (the straddle; its reading's residue), G91 (drafted at FS-116's close: the ring rule), G87 (the bends collision), G86, G21, G79, G15; rows 133–138 and
 FS-116's; stubs FS-124, FS-125, FS-117, FS-122 (R1's card: EMPTY's margin is second order in the flank edges' lengths).
+
+## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
+
+question: does-a-fragment-bend-keep-the-class
+  evidence: `plans/FS114-NB6-verification.md` ll. 104–108 states both sides one line apart as compatible facts about two domains, and side 1 names no
+    ring type ("every ring arc but the (Q) arcs is removed"); the (R2) definition's radius-2 witness lies outside `B̄(p, 1 + ε)` (`data/fs116/claims.md`
+    § 0); FS116-Y4-EMPTY (held) "reads radius 1" (`plans/FS116-V6-verification.md` § 2.2); FS-124's change points may end non-(Q) arcs (RING-GERM's
+    hypothesis; FS116-S1-KAPPA)
+  expected: that the bends question was the (Q)-free half's alone, as `plans/STUB-qfree-ring.md` question 1 poses it
+  ask: Does bending a valid fragment on a neighbourhood of `B̄(p, 1 + ε)` by FS-112's moves keep it valid, non-Siamese, simple and four-coloured at `p` — so that every ring in C114-LOCAL-F's class is its (Q) arcs plus finitely many points?
+  if it does: FS116-Y4-EMPTY closes every (Q)-free ring at `1 + ε` (N7-3T's, N7-HUB's, N6-RING60's classes are empty there, OC with them); FS-124's case list loses every change point that ends a non-(Q) arc; FS-123's question 2 is moot and its question 3 (Siamese) is next
+  if it does not: the class condition the bend breaks is named, and the (R2)-arc rings are FS-123's main case, where card 2's ranking applies; FS-124 keeps (R2) arcs on (Q) rings as a case of its own
+  answered by: derivation — Ephodos, FS-123's opening, as its first question, with FS112-N2-RED's moves (W-MERGE, whole-arc bends) and N2-AWAY read on a fragment
+  cost: one derivation, under a round
+  hunch: it does (`bends-keep-the-class`, 0.6); the record has never held an inhabitant of the (Q)-free class (`qfree-class-is-empty`, 0.65)
+  falsifier: a non-Siamese simple valid fragment about a four-colour vertex whose fragment bend creates a Siamese pair or a non-simple tile, or changes `p`'s colours
+  rank: 1

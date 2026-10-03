@@ -1,0 +1,767 @@
+entry lint
+  claim FS121-O1-ENDS: minds 2 — blind to: FS121-O1's § 3.2–3.4 until its verdicts were committed (43bb6385); method: DB1 reads the local fan REG-J′ gives and counts colours by properness straddles (DB1-L1, L3–L5), O1 transfers NOBOTH and cites W-NOREP
+  claim FS121-O1-ENDS: prior art new, 2 counted queries
+  claim FS121-O1-OUT: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: the same held step, DB1 adding the radial images of points of Σ and the attack at R7
+  claim FS121-O1-OUT: prior art partly
+  claim FS121-O1-PER: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: the periodic step by two arguments (arcs per fundamental domain; translates of pieces accumulating into LRA)
+  claim FS121-O1-PER: prior art partly
+  claim FS121-O1-LRA-LINE: minds 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: each piece's own k-fold parallel moved off Σ, against the parallel of the whole curve
+  claim FS121-O1-LRA-LINE: prior art new, 2 counted queries
+  claim FS121-O1-ABOVE7: minds 1
+  claim FS121-O1-ABOVE7: prior art partly
+  claim FS121-DB1-L1: minds 1
+  claim FS121-DB1-L1: prior art partly
+  claim FS121-DB1-L3: minds 2 — blind to: each other's records (DB1 § 2.3 opened by V2 only after f537b8c9); method: a straddle with a tangent/unit-arc case split and exact cusp checks (DB1), against the component lemma at contacts inherited as limits along the edges (V2)
+  claim FS121-DB1-L3: prior art partly
+  claim FS121-DB1-L4: governed by FS121-DB1-L1 (hand, minds 1)
+  claim FS121-DB1-L4: governed by FS121-DB1-L3 (hand, minds 2)
+  claim FS121-DB1-L4: minds 1
+  claim FS121-DB1-L4: prior art partly
+  claim FS121-DB1-L5: governed by FS121-DB1-L1 (hand, minds 1)
+  claim FS121-DB1-L5: governed by FS121-DB1-L3 (hand, minds 2)
+  claim FS121-DB1-L5: minds 1
+  claim FS121-DB1-L5: prior art partly
+  claim FS121-DB1-L6: minds 1
+  claim FS121-DB1-L6: prior art partly
+  claim FS121-DB1-L7: minds 1
+  claim FS121-DB1-L7: prior art partly
+  claim FS121-D1-XCORNER: minds 1
+  claim FS121-D1-XCORNER: prior art known
+  claim FS121-D1-VT: minds 2 — blind to: FS121-D1's § 2.1 until V2's verdicts were committed (f537b8c9); method: F2–F3 at points of L then FS121-V2-SECTOR at Y (V2), against FS111-W-NOREP at Y (D1); both pass the zero-angle case through FS121-V2-SECTOR
+  claim FS121-D1-VT: prior art partly, 1 counted queries
+  claim FS121-V2-VT-W: governed by FS121-V2-SECTOR (hand, minds 2)
+  claim FS121-V2-VT-W: minds 1
+  claim FS121-V2-VT-W: prior art partly
+  claim FS121-D1-EROSION: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-EROSION: governed by FS121-D1-XCORNER (hand, minds 1)
+  claim FS121-D1-EROSION: minds 2 — blind to: FS121-D1's §§ 1.3, 2.2 until f537b8c9; method: the same crossing (named in the statement, so given), VT applied through different lemmas, V2's for the straight branch alone
+  claim FS121-D1-EROSION: prior art partly
+  claim FS121-V2-EROSION-DIAM: minds 1
+  claim FS121-V2-EROSION-DIAM: prior art known
+  claim FS121-D1-FIRSTORDER: minds 1
+  claim FS121-D1-FIRSTORDER: prior art partly
+  claim FS121-D1-R2SMOOTH: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-R2SMOOTH: minds 1
+  claim FS121-D1-R2SMOOTH: prior art partly
+  claim FS121-D1-RUNG2: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-RUNG2: minds 1
+  claim FS121-D1-RUNG2: prior art partly
+  claim FS121-D1-R2CORNER: governed by FS121-D1-R2SMOOTH (derived from, minds 1)
+  claim FS121-D1-R2CORNER: governed by FS121-D1-EROSION (derived from, minds 2)
+  claim FS121-D1-R2CORNER: governed by FS121-D1-RUNG2 (derived from, minds 1)
+  claim FS121-D1-R2CORNER: minds 1
+  claim FS121-D1-R2CORNER: prior art partly
+  claim FS121-D1-PENCILWIN: governed by FS121-D1-VT (hand, minds 2)
+  claim FS121-D1-PENCILWIN: minds 1
+  claim FS121-D1-PENCILWIN: prior art partly
+  claim FS121-D1-DOUBLE: minds 1
+  claim FS121-D1-DOUBLE: prior art partly
+  claim FS121-V2-SECTOR: minds 2 — blind to: V2 § 2.3 until V3's verdicts were committed (dea603eb; V3 was relayed two definition lines of V2's record, no route); method: limits of the edge contacts sorted by two disc tests, Lemmas C and D (V3), against a per-arc case split with Lemma H (V2)
+  claim FS121-V2-SECTOR: prior art partly
+  claim FS121-V3-CPI: minds 1
+  claim FS121-V3-CPI: prior art partly
+  claim FS121-V3-CUSP: minds 1
+  claim FS121-V3-CUSP: prior art partly
+  claim FS121-D3-FALLSAT: minds 2 — blind to: D3 § 2.1 until dea603eb; method: the same small-ball argument, reached independently (one mind on the method axis)
+  claim FS121-D3-FALLSAT: prior art partly, 1 counted queries
+  claim FS121-D3-GRUNDY: minds 2 — blind to: D3 § 2.2 until dea603eb; method: exhaustion (dependent choice) and a ball added at a support point (V3), against Zorn and a positive-density limit (D3)
+  claim FS121-D3-GRUNDY: prior art partly, 1 counted queries
+  claim FS121-D3-SWAP1D: minds 1
+  claim FS121-D3-SWAP1D: prior art new, 2 counted queries
+  claim FS121-D3-EQ: minds 1
+  claim FS121-D3-EQ: prior art partly, 1 counted queries
+  claim FS121-D2-INCURVED: minds 1
+  claim FS121-D2-INCURVED: prior art new, 2 counted queries
+  claim FS121-D2-EXT: minds 1
+  claim FS121-D2-EXT: prior art new, 2 counted queries
+  claim FS121-D2-THIN: governed by FS121-D2-EXT (hand, minds 1)
+  claim FS121-D2-THIN: minds 1
+  claim FS121-D2-THIN: prior art new, 2 counted queries
+  claim FS121-D2-SYM: governed by FS121-D2-THIN (derived from, minds 1)
+  claim FS121-D2-SYM: minds 2 — blind to: D2 § 2 until V5's verdict was committed (ab25bbdc; V5 was relayed four header definitions of D2's record); method: the window carried back out to the piece's radius by FS121-O1-OUT, then a segment in Σ by FS121-V5-RAY (V5), against window transport stopped at junction normals by FS121-D2-EXT (D2)
+  claim FS121-D2-SYM: prior art new, 2 counted queries
+  claim FS121-D2-PERFIN: governed by FS121-D2-SYM (derived from, minds 2)
+  claim FS121-D2-PERFIN: minds 1
+  claim FS121-D2-PERFIN: prior art partly
+  claim FS121-C1-BOUND: minds 2 — blind to: FS121-C1's record until V4's verdicts were committed (0dde4982); method: a switch point over the local finiteness of faces (V4-SWITCH, V4-LF), against a two-line perturbation (C1)
+  claim FS121-C1-BOUND: prior art partly, 2 counted queries
+  claim FS121-C1-GMAP: governed by FS121-C1-BOUND (hand, minds 2)
+  claim FS121-C1-GMAP: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis), V4 writing out R7's Grundy-boundness
+  claim FS121-C1-GMAP: prior art partly, 1 counted queries
+  claim FS121-C1-SAT: governed by FS121-C1-BOUND (hand, minds 2)
+  claim FS121-C1-SAT: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis)
+  claim FS121-C1-SAT: prior art new, 2 counted queries
+  claim FS121-C1-COVMAP: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the colour of rank 4 by parity (V4-MID) against the colour of rank 2 (C1), two tools written apart (tools/fs121_v4_covmap.py, tools/fs121_c1_disc7.py)
+  claim FS121-C1-COVMAP: prior art new, 2 counted queries
+  claim FS121-C1-FLAT: minds 2 — blind to: FS121-C1's record until 0dde4982; method: the same witness (one mind on the method axis), V4 closing the composition as an identity in t with k symbolic, C1 as a series to order 6
+  claim FS121-C1-FLAT: prior art partly, 1 counted queries
+  claim FS121-V4-SWITCH: governed by FS121-V4-LF (hand, minds 1)
+  claim FS121-V4-SWITCH: minds 1
+  claim FS121-V4-SWITCH: prior art partly
+  claim FS121-V4-LF: minds 1
+  claim FS121-V4-LF: prior art partly
+  claim FS121-V4-EDGE: minds 1
+  claim FS121-V4-EDGE: prior art partly
+  claim FS121-V4-HEXMID: minds 1
+  claim FS121-V4-HEXMID: prior art partly
+  claim FS121-D4-FACE: minds 2 — blind to: D4 §§ 2.1–2.2 until V5's verdicts were committed (4ed402c6); method: a Fubini pair lemma and a crossing criterion with the exact corner (V5), against the sagitta bound and a shrinking ε′ (D4)
+  claim FS121-D4-FACE: prior art new, 2 counted queries
+  claim FS121-D4-GRID: governed by FS121-D4-FACE (hand, minds 2)
+  claim FS121-D4-GRID: minds 2 — blind to: D4's argument until 4ed402c6, but given its key lemma, FS121-D4-FACE, by name in the frozen list; method: consecutive thin columns by Cantor–Bendixson and a pigeonhole over k + 1 of them (V5), against isolated breakpoints near the accumulation (D4)
+  claim FS121-D4-GRID: prior art new, 2 counted queries
+  claim FS121-D4-HOLE: minds 1
+  claim FS121-D4-HOLE: prior art new, 2 counted queries
+  claim FS121-D4-LINE: minds 1
+  claim FS121-D4-LINE: prior art new, 2 counted queries
+  claim FS121-D4-TINY16: minds 1
+  claim FS121-D4-TINY16: prior art new, 2 counted queries
+  claim FS121-D4-FALL: governed by FS121-D3-FALLSAT (hand, minds 2)
+  claim FS121-D4-FALL: minds 1
+  claim FS121-D4-FALL: prior art known
+  claim FS121-V5-PAIR: minds 1
+  claim FS121-V5-PAIR: prior art partly
+  claim FS121-V5-FACE-SHARP: minds 1
+  claim FS121-V5-FACE-SHARP: prior art partly
+  claim FS121-V5-GRID-CANTOR: minds 1
+  claim FS121-V5-GRID-CANTOR: prior art partly
+  claim FS121-V5-LOC: minds 1
+  claim FS121-V5-LOC: prior art partly
+  claim FS121-V5-RAY: governed by FS121-V5-LOC (hand, minds 1)
+  claim FS121-V5-RAY: minds 1
+  claim FS121-V5-RAY: prior art partly
+  claim FS121-V5-SYM-UP: governed by FS121-V5-LOC (hand, minds 1)
+  claim FS121-V5-SYM-UP: minds 1
+  claim FS121-V5-SYM-UP: prior art partly
+  claim FS121-V5-SYM-CPT: governed by FS121-V5-SYM-UP (derived from, minds 1)
+  claim FS121-V5-SYM-CPT: governed by FS121-V5-RAY (derived from, minds 1)
+  claim FS121-V5-SYM-CPT: minds 1
+  claim FS121-V5-SYM-CPT: prior art partly
+  claim FS121-Z1-NOCURVED: governed by FS121-O1-OUT (hand, minds 2)
+  claim FS121-Z1-NOCURVED: governed by FS121-D2-INCURVED (hand, minds 1)
+  claim FS121-Z1-NOCURVED: minds 1
+  claim FS121-Z1-NOCURVED: prior art partly
+  claim FS116-O1-YESLIM: minds 2 — blind to: the first derivation until V1's verdicts were committed (3daaa05c); method: the Rajchman step by a compact operator and the rounding by a least index (V1 § 4.1 rows 1–2), against dominated convergence and the support rounding; the same model (Opus 5.5), one prior
+  claim FS116-O1-YESLIM: prior art partly
+  claim FS116-O1-SATPIN: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS116-O1-SATPIN: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS116-O1-SATPIN: minds 2 — blind to: the first derivation until 3daaa05c, not to FS111-M-PINCH's case split, which both routes use (item 31's ruling); method: V1's L1–L4, a connected-product interval per contact, the last clause through the edges, against saturation at p (V1 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-O1-SATPIN: prior art partly, 1 counted queries
+  claim FS116-V1-FRAME: minds 1
+  claim FS116-V1-FRAME: prior art partly
+  claim FS116-N1-TWIST-D: minds 1
+  claim FS116-N1-TWIST-D: prior art partly
+  claim FS116-RING-TWIST-C: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-RING-TWIST-C: minds 2 — blind to: N1's argument until V2's verdicts (81bfc5cb); method: the same route in substance (V2 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-RING-TWIST-C: prior art partly
+  claim FS116-N1-TWIST-LIT: minds 2 — blind to: N1's argument until 81bfc5cb; method: the same slit (V2 § 4.3); the same model (Opus 5.5), one prior
+  claim FS116-N1-TWIST-LIT: prior art partly
+  claim FS116-RING-GERM: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-RING-GERM: minds 2 — blind to: N1's argument until 81bfc5cb, given N7-HUB's one-line sketch in the list's § 8 (item 49's caveat); method: colour exclusion at the tiles in the cones (V2) against tile identification (N1), V2 § 4.1 row 1; the same model (Opus 5.5), one prior
+  claim FS116-RING-GERM: prior art partly
+  claim FS116-RING-Q-PRIME: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-RING-Q-PRIME: minds 1
+  claim FS116-RING-Q-PRIME: prior art partly
+  claim FS116-N1-QDISK: minds 1
+  claim FS116-N1-QDISK: prior art partly
+  claim FS116-RING-TWIST-Q: governed by FS116-RING-TWIST-C (derived from, minds 2)
+  claim FS116-RING-TWIST-Q: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-RING-TWIST-Q: minds 1
+  claim FS116-RING-TWIST-Q: prior art partly
+  claim FS116-Y1-F15: minds 1
+  claim FS116-Y1-F15: prior art new, 2 counted queries
+  claim FS116-Y1-STRIPCEIL: minds 1
+  claim FS116-Y1-STRIPCEIL: prior art new, 2 counted queries
+  claim FS116-Y1-NOTCH: minds 1
+  claim FS116-Y1-NOTCH: prior art new, 2 counted queries
+  claim FS116-Y2-DCREAD: minds 1
+  claim FS116-Y2-DCREAD: prior art partly
+  claim FS116-Y2-SIXFRAG: minds 1
+  claim FS116-Y2-SIXFRAG: prior art partly
+  claim FS116-Y2-SIXOFF: minds 1
+  claim FS116-Y2-SIXOFF: prior art partly
+  claim FS116-N1-GERM-R: minds 2 — blind to: N1's record until V3's verdicts (7245b6eb); method: a straddle on T′ × T in two regimes against the monotone ring point (V3 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-N1-GERM-R: prior art partly
+  claim FS116-V3-GERM-R-EDGE: minds 1
+  claim FS116-V3-GERM-R-EDGE: prior art partly
+  claim FS116-N1-GERM-S: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-GERM-S: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-GERM-S: minds 2 — blind to: N1's record until 7245b6eb, given N7-HUB's sketch in § 8 (V3's own caveat: a reader who counts it as given may count one); method: N-E2 against the interval argument, one fact under two names; the same model (Opus 5.5), one prior
+  claim FS116-N1-GERM-S: prior art partly
+  claim FS116-RING-Q-PRIME-S: governed by FS116-N1-GERM-S (derived from, minds 2)
+  claim FS116-RING-Q-PRIME-S: minds 1
+  claim FS116-RING-Q-PRIME-S: prior art partly
+  claim FS116-N1-QFREE4: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-QFREE4: minds 1
+  claim FS116-N1-QFREE4: prior art partly
+  claim FS116-N1-TOUCH: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-TOUCH: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-TOUCH: minds 2 — blind to: N1's record until 7245b6eb; method: the same three steps (a second mind on the information axis only, V3 § 4.2); the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:507 (FS116-N1-TOUCH): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N1-TOUCH: prior art owed
+  claim FS116-N1-ECHO: minds 2 — on the corrected statement (reading B); blind to: N1's record until 7245b6eb; method: FS116-V3-ECHO-ONLY by a straddle against N1's derivative argument; the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:528 (FS116-N1-ECHO): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N1-ECHO: prior art owed
+  claim FS116-V3-ECHO-ONLY: minds 1
+  claim FS116-V3-ECHO-ONLY: prior art partly
+  claim FS116-N1-AXIS: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-AXIS: minds 2 — blind to: N1's record until 7245b6eb; method: N-E2 for (a) and saturation's definition for (b), so V3's (b) does not rest on SATPIN (V3 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-N1-AXIS: prior art partly
+  claim FS116-N1-F15TOUCH: minds 1
+  claim FS116-N1-F15TOUCH: prior art partly
+  claim FS116-N2-SIXRING: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N2-SIXRING: minds 1
+  claim FS116-N2-SIXRING: prior art partly
+  claim FS116-N2-FIVERING: minds 1
+  claim FS116-N2-FIVERING: prior art partly
+  claim FS116-N2-STAR: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-N2-STAR: minds 1
+  claim FS116-N2-STAR: prior art partly
+  claim FS116-N2-RECIP: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-N2-RECIP: governed by FS116-N1-TOUCH (derived from, minds 2)
+  claim FS116-N2-RECIP: minds 1
+  warn  FS116-derivation.md:694 (FS116-N2-RECIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-RECIP: prior art owed
+  claim FS116-N2-ANTI: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-N2-ANTI: minds 1
+  warn  FS116-derivation.md:714 (FS116-N2-ANTI): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-ANTI: prior art owed
+  claim FS116-N2-HEX6: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim FS116-N2-HEX6: minds 1
+  claim FS116-N2-HEX6: prior art partly
+  claim FS116-N2-HEX3: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim FS116-N2-HEX3: minds 1
+  warn  FS116-derivation.md:752 (FS116-N2-HEX3): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-HEX3: prior art owed
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-ANTI (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-SIXRING (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-FIVERING (hand, minds 1)
+  claim FS116-RING-TRANSFER-C: minds 1
+  warn  FS116-derivation.md:769 (FS116-RING-TRANSFER-C): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-RING-TRANSFER-C: prior art owed
+  claim FS116-S1-KAPPA: minds 2 — blind to: S1's record until V4's verdicts (48534b7c), told by its brief that a decided result rests on it (items 107, 108); method: three ring points and FS116-V4-DICHOTOMY against N-E1 at w (V4, Divergences on KAPPA row 1); the same model (Opus 5.5), one prior
+  claim FS116-S1-KAPPA: prior art partly
+  claim FS116-S1-PAIR: governed by FS116-S1-KAPPA (hand, minds 2)
+  claim FS116-S1-PAIR: minds 1
+  warn  FS116-derivation.md:818 (FS116-S1-PAIR): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-PAIR: prior art owed
+  claim FS116-S1-CLUSTER: minds 1
+  warn  FS116-derivation.md:836 (FS116-S1-CLUSTER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-CLUSTER: prior art owed
+  claim FS116-S1-RUNG: governed by FS116-O1-SATPIN (derived from, minds 2)
+  claim FS116-S1-RUNG: governed by FS116-S1-CLUSTER (hand, minds 1)
+  claim FS116-S1-RUNG: minds 2 — blind to: S1's record until 48534b7c, with item 108's caveat; method: FS116-V4-PARTNER (saturation at the edge point) against SATPIN's tangent clause, FS116-V4-MEET against CLUSTER; the same model (Opus 5.5), one prior
+  claim FS116-S1-RUNG: prior art partly
+  claim FS116-S1-LENS: governed by FS116-S1-KAPPA (hand, minds 2)
+  claim FS116-S1-LENS: governed by FS116-S1-PAIR (derived from, minds 1)
+  claim FS116-S1-LENS: governed by FS116-N1-GERM-S (derived from, minds 2)
+  claim FS116-S1-LENS: governed by FS116-N1-AXIS (derived from, minds 2)
+  claim FS116-S1-LENS: minds 1
+  warn  FS116-derivation.md:882 (FS116-S1-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-LENS: prior art owed
+  claim FS116-S1-EXIT: minds 1
+  warn  FS116-derivation.md:904 (FS116-S1-EXIT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-EXIT: prior art owed
+  claim FS116-S1-QF: governed by FS116-S1-LENS (derived from, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-EXIT (hand, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-CLUSTER (hand, minds 1)
+  claim FS116-S1-QF: governed by FS116-O1-SATPIN (derived from, minds 2)
+  claim FS116-S1-QF: minds 1 — and a second derivation by a different route (FS116-V4 § 2.4: the rung tiles cross in the crescent B(q, 1) ∖ B̄(p, 1), by Jordan), whose brief told it the first's verdict (item 107), so it is not counted as a blind second mind (items 108, 115); a blind second mind is owed
+  warn  FS116-derivation.md:931 (FS116-S1-QF): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-QF: prior art owed
+  claim FS116-V4-CHORD: minds 1
+  claim FS116-V4-CHORD: prior art known
+  claim FS116-V4-DICHOTOMY: minds 1
+  warn  FS116-derivation.md:970 (FS116-V4-DICHOTOMY): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-DICHOTOMY: prior art owed
+  claim FS116-V4-MEET: minds 1
+  warn  FS116-derivation.md:986 (FS116-V4-MEET): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-MEET: prior art owed
+  claim FS116-V4-TWIST: minds 1
+  warn  FS116-derivation.md:1001 (FS116-V4-TWIST): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-TWIST: prior art owed
+  claim FS116-V4-PARTNER: minds 1
+  warn  FS116-derivation.md:1018 (FS116-V4-PARTNER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-PARTNER: prior art owed
+  claim FS116-V4-OUTER: minds 1
+  warn  FS116-derivation.md:1035 (FS116-V4-OUTER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-OUTER: prior art owed
+  claim FS116-Y3-SIX: governed by FS116-RING-TWIST-C (derived from, minds 2)
+  claim FS116-Y3-SIX: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y3-SIX: governed by FS116-N1-QFREE4 (derived from, minds 1)
+  claim FS116-Y3-SIX: minds 2 — blind to: Y3's record until V5's verdicts (320a3b53); method: FS116-V5-RING (non-Siamese against a tile's 60° reach; no simplicity) against Y3's tip count; the same model (Opus 5.5), one prior
+  claim FS116-Y3-SIX: prior art partly
+  claim FS116-Y3-TIPS: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y3-TIPS: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y3-TIPS: minds 2 — blind to: Y3's record until 320a3b53; method: the same argument (V5 § 4.1); the same model (Opus 5.5), one prior
+  claim FS116-Y3-TIPS: prior art partly
+  claim FS116-Y3-HUBCOL: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-HUBCOL: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-Y3-HUBCOL: minds 1
+  warn  FS116-derivation.md:1114 (FS116-Y3-HUBCOL): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-HUBCOL: prior art owed
+  claim FS116-Y3-TIGHT: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-TIGHT: minds 1
+  warn  FS116-derivation.md:1132 (FS116-Y3-TIGHT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-TIGHT: prior art owed
+  claim FS116-Y3-NOQ: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y3-NOQ: minds 1
+  warn  FS116-derivation.md:1150 (FS116-Y3-NOQ): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-NOQ: prior art owed
+  claim FS116-Y3-LENS: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-LENS: governed by FS116-Y3-TIGHT (derived from, minds 1)
+  claim FS116-Y3-LENS: governed by FS116-Y3-NOQ (derived from, minds 1)
+  claim FS116-Y3-LENS: minds 1
+  warn  FS116-derivation.md:1170 (FS116-Y3-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-LENS: prior art owed
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-LENS (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-NOQ (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-HUBCOL (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: minds 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS (the lens corner at the far vertex) against Y3's NOQ and TIGHT straddles; the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:1189 (FS116-Y3-TIGHTLENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-TIGHTLENS: prior art owed
+  claim FS116-Y3-NBTIP: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-NBTIP: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-Y3-NBTIP: minds 1 — and a checking reading by FS116-V5 (blind to Y3's record until 320a3b53, but its route and conclusion were N7-HUB's outline in the list's § 8)
+  warn  FS116-derivation.md:1212 (FS116-Y3-NBTIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-NBTIP: prior art owed
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-TIGHTLENS (derived from, minds 2)
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-NBTIP (derived from, minds 1)
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-HUBCOL (derived from, minds 1)
+  claim FS116-Y3-STARFORCE: minds 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS with its images under the reflection at 30° and the half-turn, against Y3 § 3.2 rerun with NBTIP; the same model (Opus 5.5), one prior
+  claim FS116-Y3-STARFORCE: prior art partly
+  claim FS116-V5-NE1: minds 1
+  claim FS116-V5-NE1: prior art known
+  claim FS116-V5-RING: minds 1
+  claim FS116-V5-RING: prior art partly
+  claim FS116-V5-GERM: minds 1
+  claim FS116-V5-GERM: prior art partly
+  claim FS116-V5-OUT: minds 1
+  claim FS116-V5-OUT: prior art partly
+  claim FS116-V5-TIPSET: minds 1
+  claim FS116-V5-TIPSET: prior art partly
+  claim FS116-V5-LENS: minds 1
+  warn  FS116-derivation.md:1349 (FS116-V5-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V5-LENS: prior art owed
+  claim FS116-N3-CONE: minds 1
+  claim FS116-N3-CONE: prior art partly
+  claim FS116-N3-PAIR: minds 2 — blind to: N3's record until 3647075d; method: the same route; the same model (Opus 5.5), one prior
+  claim FS116-N3-PAIR: prior art partly
+  claim FS116-N3-STAR2: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-N3-STAR2: minds 1
+  claim FS116-N3-STAR2: prior art partly
+  claim FS116-N3-SEMI: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-N3-SEMI: minds 2 — blind to: N3's record until V5's verdicts (3647075d); method: FS116-V5-U1 for the centre's four colours and FS116-V5-DICHO for crossed-or-parallel, against FS112-N3-NOBOTH and FS114-N7-QOPP (V5 § 4.1); the same model (Opus 5.5), one prior
+  claim FS116-N3-SEMI: prior art partly
+  claim FS116-N3-CROSS: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-CROSS: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-CROSS: minds 2 — on every clause but the last; blind to: N3's record until 3647075d; method: FS116-V5-U1's cones at p (V5 § 3.4); the same model (Opus 5.5), one prior; the last clause 1 and a checking reading (V5's blind verdict was GAP there, its stall closed after reading by N3's step through FS114-N7-QOPP at y, re-derived by V5-U1)
+  claim FS116-N3-CROSS: prior art partly
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-SEMI (derived from, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-CROSS (derived from, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-RING-TRANSFER-QC: minds 1
+  claim FS116-RING-TRANSFER-QC: prior art partly
+  claim FS116-V5-QCOL: minds 1
+  claim FS116-V5-QCOL: prior art partly
+  claim FS116-V5-U1: minds 1
+  claim FS116-V5-U1: prior art known
+  claim FS116-V5-OUT2: minds 1
+  claim FS116-V5-OUT2: prior art partly
+  claim FS116-V5-DICHO: minds 1
+  claim FS116-V5-DICHO: prior art partly
+  claim FS116-V5-CROSS-S: governed by FS116-V5-U1 (hand, minds 1)
+  claim FS116-V5-CROSS-S: governed by FS116-V5-QCOL (hand, minds 1)
+  claim FS116-V5-CROSS-S: governed by FS116-V5-OUT2 (hand, minds 1)
+  claim FS116-V5-CROSS-S: minds 1
+  claim FS116-V5-CROSS-S: prior art partly
+  claim FS116-Y4-SYM: minds 1
+  warn  FS116-derivation.md:1625 (FS116-Y4-SYM): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-SYM: prior art owed
+  claim FS116-Y4-SPOKE: governed by FS116-Y3-STARFORCE (derived from, minds 2)
+  claim FS116-Y4-SPOKE: governed by FS116-Y3-NBTIP (derived from, minds 1)
+  claim FS116-Y4-SPOKE: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y4-SPOKE: governed by FS116-Y4-SYM (hand, minds 1)
+  claim FS116-Y4-SPOKE: minds 1
+  warn  FS116-derivation.md:1645 (FS116-Y4-SPOKE): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-SPOKE: prior art owed
+  claim FS116-Y4-Q1: governed by FS116-Y4-SPOKE (derived from, minds 1)
+  claim FS116-Y4-Q1: governed by FS116-Y3-STARFORCE (derived from, minds 2)
+  claim FS116-Y4-Q1: minds 1
+  warn  FS116-derivation.md:1666 (FS116-Y4-Q1): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-Q1: prior art owed
+  claim FS116-Y4-FLANK: minds 1
+  claim FS116-Y4-FLANK: prior art partly
+  claim FS116-Y4-EMPTY: governed by FS116-Y4-FLANK (hand, minds 1)
+  claim FS116-Y4-EMPTY: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y4-EMPTY: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y4-EMPTY: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y4-EMPTY: minds 2 — blind to: FS116-Y4's record until its verdict's commit (2429e200), though given the frozen list with round 3's construction-side statements and their setting (§ 14), route-shaped and unused; method: a different route at the count (FS116-V6-COUNT and -ANTI in place of FS116-Y3-TIPS) and at the flank step (FS116-V6-HUG's exact identity in place of FS116-Y4-FLANK's curvature bound); the same model (Opus 5.5), one prior
+  claim FS116-Y4-EMPTY: prior art partly
+  claim FS116-Y4-OBST: governed by FS116-Y4-EMPTY (derived from, minds 2)
+  claim FS116-Y4-OBST: minds 1
+  claim FS116-Y4-OBST: prior art partly
+  claim FS116-V6-HUBS: minds 1
+  claim FS116-V6-HUBS: prior art partly
+  claim FS116-V6-HUG: minds 1
+  claim FS116-V6-HUG: prior art partly
+  claim FS116-V6-COUNT: minds 1
+  warn  FS116-derivation.md:1815 (FS116-V6-COUNT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V6-COUNT: prior art owed
+  claim FS116-V6-ANTI: minds 1
+  warn  FS116-derivation.md:1832 (FS116-V6-ANTI): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V6-ANTI: prior art owed
+  claim FS116-V6-ADJ: minds 1
+  warn  FS116-derivation.md:1847 (FS116-V6-ADJ): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V6-ADJ: prior art owed
+  claim FS114-CV-EXISTS: minds 2 — blind to: each other (FS114-CV blind to the FS112-C assembly; FS114-CVB blind to FS114-CV's record until its stage 1 was committed); method: CV through CV-HD and the closure of C-ENDS's residue; CVB with no four-colour vertex every stuck chain of `M*` is bi-infinite, which N4-FIN forbids — neither CV-HD nor C-ENDS
+  claim FS114-CV-EXISTS: prior art new, 4 counted queries
+  claim FS114-CV-HD: minds 2 — blind to: each other's records at stage 1 (CVB sighted on Y3-END-NEEDS's levels, an FS-112 input); method: CV one chain through the flank shadows; CVB two branches, the `G_N` branch's merge made explicit
+  claim FS114-CV-HD: prior art new, 2 counted queries
+  claim FS114-CVB-THOM: minds 3 — blind to: each other's records (NB and CVB blind; FS114-N's stage 1 against, on the pinch clause); method: NB by treating holes as 1-separators with finite interiors; CVB by filling holes and reading boundary walks; the colour-free repair two minds, both blind
+  claim FS114-CVB-THOM: prior art partly, 1 counted queries
+  claim FS114-N114-RD: minds 2 — blind to: NB derived its NB-RD before opening FS114-N's record; method: NB reads the radius `1 + 1/√3` about the tile's centre; the corrected RAINBOW trichotomy (YB, blind to both: "Siamese, or the unit-radius tactic …, or both meet `cl x` only in finite sets at mutual distance exactly 1") is the same statement read on contact sets
+  claim FS114-N114-RD: prior art partly
+  claim FS114-Y-EDGE: minds 4 — blind to: FS114-N and FS114-Y blind to each other; NB and YB blind to their sides' records; method: four derivations of one short argument; FS114-Y5-RAINBOW its non-Siamese form, re-derived blind by YB4
+  claim FS114-Y-EDGE: prior art partly
+  claim FS114-N114-EULER: minds 2 — blind to: NB derived NB-EULER before opening FS114-N's record; method: NB checked it exactly on 17 torus maps by formula (`tools/fs114_nb_count.py`), N on five (`tools/fs114_n_count.py`)
+  claim FS114-N114-EULER: prior art partly, 2 counted queries
+  claim FS114-N2-FIVE: minds 2 — blind to: NB derived NB-ABSENT and NB-COUNT before opening FS114-N's record; FS114-N2 re-derived them sighted; method: NB's excess count per absent colour, N2's slot accounting
+  claim FS114-N2-FIVE: prior art partly
+  claim FS114-N114-ROOM: minds 2 — blind to: NB derived NB-COUNT before opening FS114-N's record; method: NB by the quadratic `Σ_v [2d² + (2 − 3k)d + 6k − 6] ≤ 0`
+  claim FS114-N114-ROOM: prior art partly
+  claim FS114-N114-CUBIC: minds 2 — blind to: NB derived NB-CUBIC before opening FS114-N's record; method: NB by Euler and edge-rainbow alone
+  claim FS114-N114-CUBIC: prior art partly
+  claim FS114-NB-DUAL: minds 2 — blind to: NB and YB each blind to its side's record; method: NB by vertex degrees; YB by emitted arcs, `2n + 2p₅ + 6p₆` distinct unit arcs of kind both, the opposite tile never the emitting neighbour (YB §1c item 9)
+  claim FS114-NB-DUAL: prior art partly
+  claim FS114-N2-ENDS: minds 1
+  claim FS114-N2-ENDS: prior art new, 2 counted queries
+  claim FS114-N3-JOINT: minds 1
+  claim FS114-N3-JOINT: prior art partly
+  claim FS114-N2-AVG: minds 2 — blind to: NB6 derived NB6-FOLNER blind to FS114-N2's record ("for a valid map of bounded complexity whose tiles are open discs, pinch points allowed, route T's aperiodic averaging step closes by Euler's formula on large discs"); method: NB6 by boundary `O(R)` and a local surplus `≥ cR²`; the five-colour corollary is N2's alone, one mind
+  claim FS114-N2-AVG: prior art partly
+  claim FS114-N114-COMPACT: minds 2 — blind to: NB derived its verdict before opening FS114-N's record; method: NB over all `K` at once, reading the fixed-`K` defect
+  claim FS114-N114-COMPACT: prior art partly
+  claim FS114-N114-VOR: minds 2 — blind to: NB derived NB-VOR before opening FS114-N's record; method: NB in three cases on the closed disc (N's wording missed a close-pair case: NB, accepted by N2)
+  claim FS114-N114-VOR: prior art known
+  claim FS114-Y-REDBLOCK1: minds 2 — blind to: YB derived it before opening FS114-Y's record; method: YB by one red tile per neighbourhood; N2-PENT one mind
+  claim FS114-Y-REDBLOCK1: prior art partly
+  claim FS114-N2-LEMMAS: minds 1
+  claim FS114-N2-LEMMAS: prior art partly
+  claim FS114-N2-ENC3: minds 1
+  claim FS114-N2-ENC3: prior art partly
+  claim FS114-Y-ROUTES: minds 2 — blind to: YB derived it before opening FS114-Y's record; method: YB's own checker at its own points, then the side's 18 reproduced exactly
+  claim FS114-Y-ROUTES: prior art partly
+  claim FS114-N3-LOCAL: minds 1 — N3-FACE's substance is FS114-Y4-UPDOWN, derived blind on the other side and re-derived blind by YB3; the others have no blind second mind (no verifier ran on FS114-N3, inventory item 57)
+  claim FS114-N3-LOCAL: prior art new, 2 counted queries
+  claim FS114-N3-DR: minds 1 — DR's shape was built blind on the other side (FS114-Y2-BOWTIE) and N3-DR1 re-derived blind by NB5 in N5's setting
+  claim FS114-N3-DR: prior art new, 2 counted queries
+  claim FS114-Y2-BOWTIE: minds 2 — blind to: YB2 built its own 20-tile D2-symmetric fragment before opening FS114-Y2's record; method: YB2's checker over towers of square roots and FS114-YB's, two checkers on an independent object
+  claim FS114-Y2-BOWTIE: prior art new, 2 counted queries
+  claim FS114-N4-D: minds 2 — blind to: NB4 derived N4-D and the reduction of N4-G before opening FS114-N4's record, and checked N4-G's kill step sighted (inventory item 83); method: NB4's N4-D ends at `R* = q1 + top` (no colour for the tile outside `ω(q1)` there), a different last step from N4's diameter `|P90 − P90′| = √3`
+  claim FS114-N4-D: prior art new, 2 counted queries
+  claim FS114-N4-LEMMAS: minds 2 — blind to: NB4 derived N4-OWN, N4-LENS, N4-FIVE and N4-TOP before opening FS114-N4's record; method: NB4-OWN by E1 at the corner, using only the four edge circles and degree 4 at `p`; N4-ARC and N4-A4NB one mind
+  claim FS114-N4-LEMMAS: prior art new, 2 counted queries
+  claim FS114-N5-GRING: minds 2 — blind to: NB5 derived N5-UP, -DEG, -R0, -ΓRING, -BEND, -KAPPA, -XBAR, -SIGHT, -BENDG, -W, -DR1 before opening FS114-N5's record; method: NB5-R0 by a different route (`C ∋ q2` makes `z4` start at `≤ 0°`); **the last step, NB5-RVKILL, is one mind**, and FS114-Y4-RSTOPALL excludes (R-V) independently, blind to both
+  claim FS114-N5-GRING: prior art new, 2 counted queries
+  claim FS114-Y4-LUNE: minds 2 — blind to: YB3 derived all four before opening FS114-Y4's record; method: different routes at LUNE's frontier and at W's colour steps; LUNE holds without "simple" (YB3); SIDES checked exactly at named points (`tools/fs114_y4_sides.py`)
+  claim FS114-Y4-LUNE: prior art new, 2 counted queries
+  claim FS114-Y4-RSTOPALL: minds 3 — blind to: YB3 derived it before opening FS114-Y4's record; the proof side (FS114-N4, FS114-N5, FS114-NB5) derived the same conclusion blind to the construction side; method: YB3 by its own LUNE and DIAG routes; the proof side by sector orders, a lens N4-LENS empties and a diameter (N4-D, N4-G), the up-tile (N5-DEG, N5-R0) and NB5-RVKILL's tangency at `top`, whose last step is one mind
+  claim FS114-Y4-RSTOPALL: prior art new, 2 counted queries
+  claim FS114-Y3-RSTOP: minds 2 — blind to: YB2 derived RSTOP, R and D2 before opening FS114-Y3's record; method: YB2 made the germ condition explicit (the stop is the cone `(−60°, 60°)` at `r`) and checked five exact points; Y3's tool 11 of 11 at a named ring point (`tools/fs114_y3_rstop.py`)
+  claim FS114-Y3-RSTOP: prior art new, 2 counted queries
+  claim FS114-N6-NOQ: minds 2 — blind to: NB6 derived NOQ, RING60, KAPPA, CENT, PIN, P60′, ADJ, QOUT, QE1, PIN180 before opening FS114-N6's record; method: NB6-NOQ by RING60, N3-FLANK and its own pinwheel lemma NB6-P60 (the kill the cone `(240°, 300°)` at `q_j`), needing no PIN180
+  claim FS114-N6-NOQ: prior art new, 2 counted queries
+  claim FS114-Y5-PINALL: minds 2 — blind to: YB4 derived the twelve statements before opening FS114-Y5's record; method: YB4-2ND finds PXKILL's contradiction only at second order, from the arcs' curvature; its exact `ℚ(√3)` checker 53 of 53 as registered; the side's checks 31 of 31 and 11 of 11
+  claim FS114-Y5-PINALL: prior art new, 2 counted queries
+  claim FS114-Y6-E1CAP: minds 2 — blind to: YB5 derived E1FORM, E1Q3, E1OMEGA, E1CAP, E1K1 before opening FS114-Y6's record; method: YB5-CAP2, a Jordan-curve route to the whole arc; the side's checks 10 of 10 at named values (`tools/fs114_y6_e1.py`)
+  claim FS114-Y6-E1CAP: prior art new, 2 counted queries
+  claim FS114-Y6-E2RED: minds 1 — the chain from E2 to S1–S6 is two minds (FS114-Y6; YB5 blind), the cut from S1–S6 to S6 is YB5's alone
+  claim FS114-Y6-E2RED: prior art new, 2 counted queries
+  claim FS114-Y6-HALF: minds 2 — blind to: YB5 derived the corrected form before opening FS114-Y6's record; method: YB5 found the two boundary subcases FS114-Y6's statement missed
+  claim FS114-Y6-HALF: prior art new, 2 counted queries
+  claim FS114-N7-3T: minds 1 — filed at one mind as the brief rules (inventory item 118); a blind check of N7-HUB (b) and the `+++ b = a + 1` step is the successor's first job
+  claim FS114-N7-3T: prior art new, 2 counted queries
+  claim FS114-N7-HUB: minds 2 — blind to: N7's record and this file until its verdict's commit (FS116-V1, 894db2d9), though given FS114-N7-3T's statement with this claim inside it and the vetted definitions (`../data/fs116/v1-n7-definitions.md`: the D-frame's shape, N7's setting, the bends on a fragment leaving only (Q) ring arcs), so the second mind is on the ring carrying no arc of Γ near the hubs, and on rings with (R2) arcs the count is one; method: FS116-V1's same-colour dichotomy and the ring's flip at `σ^{±1}y` against N7's CL and ring cones for the tip, the dichotomy against N3-FACE for the outward tile; the same model (Opus 5.5), one prior
+  claim FS114-N7-HUB: prior art new, 2 counted queries
+  claim FS114-N7-QOPP: minds 1
+  claim FS114-N7-QOPP: prior art new, 2 counted queries
+  claim FS114-Y-DIAL: minds 2 — blind to: YB rebuilt the capped strip and checked it with its own exact checker before opening FS114-Y's record; method: YB's checker over towers of square roots, the rebuild identical tile for tile; the plant fires at exactly the six capped self-pairs
+  claim FS114-Y-DIAL: prior art partly
+  claim FS114-Y-PENT: minds 2 — blind to: YB derived PENT and DISKRIGID before opening FS114-Y's record; method: YB by its own exact straddle table (325 pairs) and a different deduction order for DISKRIGID; the owner's instance dropped DISKRIGID's chain clause (a slip, inventory item 39), which YB restored
+  claim FS114-Y-PENT: prior art partly
+  claim FS114-Y-STRIPK6: minds 2 — blind to: YB derived both before opening FS114-Y's record; method: different routes (YB's straddle table and its own deduction)
+  claim FS114-Y-STRIPK6: prior art partly
+  claim FS114-Y-PAIRSHARE: minds 2 — blind to: YB derived both before opening FS114-Y's record; method: YB over COR3 by its own case split
+  claim FS114-Y-PAIRSHARE: prior art partly
+  claim FS114-Y2-GAPS: minds 2 — blind to: YB2 derived it before opening FS114-Y2's record; method: YB2 over FS112-U1 directly
+  claim FS114-Y2-GAPS: prior art new, 2 counted queries
+  claim FS114-L60-LE: minds 2 — blind to: nothing of the other's frame for the bound (FS114-L60 was briefed with FS114-N4's record open; N4 found it first) — blind to: the FS112-N and FS112-NB proofs' conclusions at the boundary, which both break at 60° by different steps (L60-PROOFS); method: N4 by the Reuleaux cap tile; L60 by the lens and the corner cones, with a fragment; the inner clause and the ends one mind
+  claim FS114-L60-LE: prior art new, 2 counted queries
+  claim FS114-L60-WALK: minds 1
+  claim FS114-L60-WALK: prior art new, 2 counted queries
+  claim FS114-BV-HEX: minds 1 — BASE-V, blind to FS-110's and FS-112's walks of these steps; BV-HEX is CB D5 item 5 in substance (FS-110), with H in place of Condition 5, by a different route
+  claim FS114-BV-HEX: prior art partly
+  claim FS111-C1-UNIF: minds 2 — blind to: FS111-P's stages 2 and 5 until V0's verdicts were committed (08c4d8f3); method: V0 rasterised by pixelation with closed cells, P by a density threshold (stage 3b's correction)
+  claim FS111-C1-UNIF: prior art partly
+  claim FS111-V0-CLEAN: minds 1 — FS111-V0
+  claim FS111-V0-CLEAN: prior art partly
+  claim FS111-V0-CLOSE: minds 1 — FS111-V0
+  warn  FS111-derivation.md:53 (FS111-V0-CLOSE): prior art owed — novelty unmeasured; a standing finding
+  claim FS111-V0-CLOSE: prior art owed
+  claim FS111-C1-PW: governed by FS111-V0-CLEAN (hand, minds 1)
+  claim FS111-C1-PW: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: V0 made the cleaning step explicit (V0-CLEAN)
+  claim FS111-C1-PW: prior art new, 2 counted queries
+  claim FS111-V0-WIGGLE: minds 1 — FS111-V0
+  claim FS111-V0-WIGGLE: prior art new, 2 counted queries
+  claim FS111-V0-WIG7: minds 1 — FS111-V0
+  claim FS111-V0-WIG7: prior art new, 2 counted queries
+  claim FS111-V0-FLIT: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-V0-FLIT: minds 1 — FS111-V0
+  claim FS111-V0-FLIT: prior art new, 2 counted queries
+  claim FS111-C1-FALS: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-C1-FALS: governed by FS111-V0-WIG7 (hand, minds 1)
+  claim FS111-C1-FALS: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: P argued at the level of the notions, V0 by the two objects
+  claim FS111-C1-FALS: prior art new, 2 counted queries
+  claim FS111-V0-BRIDGE: governed by FS111-C1-PW (derived from, minds 2)
+  claim FS111-V0-BRIDGE: minds 1 — FS111-V0
+  claim FS111-V0-BRIDGE: prior art new, 2 counted queries
+  claim FS111-C1-GAP: governed by FS111-C1-UNIF (hand, minds 2)
+  claim FS111-C1-GAP: governed by FS111-C1-PW (derived from, minds 2)
+  claim FS111-C1-GAP: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-C1-GAP: governed by FS111-V0-WIG7 (hand, minds 1)
+  claim FS111-C1-GAP: minds 1 — FS111-V0 (the corrected statement; the gap's location is two minds, P and V0 blind)
+  claim FS111-C1-GAP: prior art new, 2 counted queries
+  claim FS111-V0-RESCALE: minds 1 — FS111-V0
+  claim FS111-V0-RESCALE: prior art new, 2 counted queries
+  claim FS111-C-SEVEN-M: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-C-SEVEN-M: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: V0 supplied the rescaling step P had cited to a definition
+  claim FS111-C-SEVEN-M: prior art new, 2 counted queries
+  claim FS111-C-SIX-M: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-C-SIX-M: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: as FS111-C-SEVEN-M
+  claim FS111-C-SIX-M: prior art new, 2 counted queries
+  claim FS111-C-REG-EQ: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-C-REG-EQ: governed by FS111-C-SIX-M (derived from, minds 2)
+  claim FS111-C-REG-EQ: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same vacuity, reached independently
+  claim FS111-C-REG-EQ: prior art new, 2 counted queries
+  claim FS111-C1-ROUTES: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-C1-ROUTES: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: V0 re-read (R) through the pixelation of FS111-C1-UNIF
+  claim FS111-C1-ROUTES: prior art new, 2 counted queries
+  claim FS111-C-FILL: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same measure estimate (a third reading, FS111-M § 1.4, sighted of V0)
+  claim FS111-C-FILL: prior art partly
+  claim FS111-C-HULL: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same interval argument; M re-derived it sighted (M-HULL1)
+  claim FS111-C-HULL: prior art partly
+  claim FS111-V0-ID1: minds 1 — FS111-V0 (FS-103's D1 is a second derivation of the tight case; whether V0 saw it first is not recorded, so it is not counted)
+  claim FS111-V0-ID1: prior art partly
+  claim FS111-M-SATC: minds 1 — FS111-M (FS111-M2-COV re-reads it, sighted)
+  claim FS111-M-SATC: prior art new, 2 counted queries
+  claim FS111-M-SLACKFREE: minds 1 — FS111-M
+  claim FS111-M-SLACKFREE: prior art new, 2 counted queries
+  claim FS111-M-R7: minds 2 — blind to: FS111-M's record until VMW's verdicts were committed (3ea1d5ab); method: M by two distance engines agreeing (its own and the frozen FS112-Y engine), VMW by hand proofs and its own exact certificates
+  claim FS111-M-R7: prior art partly, 1 counted queries
+  claim FS111-VMW-R7-MAX: minds 1 — FS111-VMW (an exact grid of 144 points, 0 exceptions, as a check)
+  claim FS111-VMW-R7-MAX: prior art partly
+  claim FS111-VMW-R7-PPLUS: minds 1 — FS111-VMW
+  claim FS111-VMW-R7-PPLUS: prior art new, 2 counted queries
+  claim FS111-M-R7-FORCE: minds 1 — FS111-M
+  claim FS111-M-R7-FORCE: prior art new, 2 counted queries
+  claim FS111-M-DEADLOCK: minds 1 — FS111-M (agreeing with W's HEXSAT (2), HEX7-RIGID and FILL-FREE and with VMW's calibration: three instruments)
+  claim FS111-M-DEADLOCK: prior art new, 2 counted queries
+  claim FS111-M-PINCH: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-PINCH: minds 3 — blind to: each other's records (M and W, competitors; VMW before 3ea1d5ab); method: M by M-HULL1 at density points (no partner density); W with H-DEN applying C-HULL at the partner itself; VMW with one-sidedness (H2′) — its stage-1 GAP at cusp partners withdrawn on reading M's Step 1
+  claim FS111-M-PINCH: prior art partly, 1 counted queries
+  claim FS111-M-C11: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M-C11: minds 3 — blind to: each other's records, as FS111-M-PINCH; method: M from PINCH; W as W-C11 with H-DEN; VMW as VMW-HULL
+  claim FS111-M-C11: prior art partly, 1 counted queries
+  claim FS111-W-NOBEND: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-NOBEND: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W as corollaries of W-C11, VMW from the common form
+  claim FS111-W-NOBEND: prior art partly
+  claim FS111-W-NOREP: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-NOREP: minds 1 — FS111-W (read sighted by VMW, who scoped it to maps)
+  claim FS111-W-NOREP: prior art new, 2 counted queries
+  claim FS111-W-HULLREG-MAPS: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-HULLREG-MAPS: governed by FS111-W-NOBEND (derived from, minds 2)
+  claim FS111-W-HULLREG-MAPS: governed by FS111-W-NOREP (derived from, minds 1)
+  claim FS111-W-HULLREG-MAPS: minds 1 — FS111-W (VMW agrees on the class, D9)
+  claim FS111-W-HULLREG-MAPS: prior art partly
+  claim FS111-M-EXTREME: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M-EXTREME: minds 1 — FS111-M (read and checked sighted by VMW, D4)
+  claim FS111-M-EXTREME: prior art new, 2 counted queries
+  claim FS111-M-COVER-SC: governed by FS111-M-SATC (hand, minds 1)
+  claim FS111-M-COVER-SC: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-COVER-SC: minds 1 — FS111-M (FS111-M2-HULLC extends it, sighted; VM2 blind on HULLC)
+  claim FS111-M-COVER-SC: prior art partly
+  claim FS111-M-HALF: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-HALF: minds 1 — FS111-M
+  claim FS111-M-HALF: prior art new, 2 counted queries
+  claim FS111-M-POLAR: governed by FS111-M-HALF (derived from, minds 1)
+  claim FS111-M-POLAR: minds 1 — FS111-M
+  claim FS111-M-POLAR: prior art new, 2 counted queries
+  claim FS111-M-HULL2: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-HULL2: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW's component form in VMW-BLOCK-EQ ("linked or apart")
+  claim FS111-M-HULL2: prior art partly
+  claim FS111-M-BLOCK-EQ: governed by FS111-M-HULL2 (derived from, minds 2)
+  claim FS111-M-BLOCK-EQ: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW's route adds that tight block structure coincides with Cohen–Mani's
+  claim FS111-M-BLOCK-EQ: prior art partly
+  claim FS111-M-REDUCE-I: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M-REDUCE-I: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-M-REDUCE-I: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW derived the chain from the brief's paraphrase and located its one missing step at the clause M's statement contains
+  claim FS111-M-REDUCE-I: prior art new, 2 counted queries
+  claim FS111-W-NEG: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-W-NEG: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W periodises the inscribed square, VMW cites row 131's disc form
+  claim FS111-W-NEG: prior art new, 2 counted queries
+  claim FS111-W-SQ9: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W's checker ../tools/fs111_w_check.py, VMW's own certificates
+  claim FS111-W-SQ9: prior art new, 2 counted queries
+  claim FS111-W-HEX9: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W's checker, VMW's certificates
+  claim FS111-W-HEX9: prior art new, 2 counted queries
+  claim FS111-W-KB-DIR: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-W-KB-DIR: minds 1 — FS111-W
+  claim FS111-W-KB-DIR: prior art new, 2 counted queries
+  claim FS111-W-LADDER: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-W-LADDER: minds 1 — FS111-W (FS111-M4-LADDER is the same mechanism for curved layers, derived sighted)
+  claim FS111-W-LADDER: prior art new, 2 counted queries
+  claim FS111-W-HEXSAT: governed by FS111-W-LADDER (derived from, minds 1)
+  claim FS111-W-HEXSAT: governed by FS111-W-HEX9 (computed over, minds 2)
+  claim FS111-W-HEXSAT: minds 1 — FS111-W
+  claim FS111-W-HEXSAT: prior art new, 2 counted queries
+  claim FS111-W-FILL-FREE: governed by FS111-C-FILL (hand, minds 2)
+  claim FS111-W-FILL-FREE: minds 1 — FS111-W
+  claim FS111-W-FILL-FREE: prior art new, 2 counted queries
+  claim FS111-W-HEX7-RIGID: minds 1 — FS111-W (its free-colour map sampled exactly, ../tools/fs111_w_hex7_free.py)
+  claim FS111-W-HEX7-RIGID: prior art new, 2 counted queries
+  claim FS111-W-DECO-B: minds 2 — blind to: W's record until VMW's verdicts were committed; method: two objects (VMW's squares at offsets 8/100–9/100, dmin √3/2 + 16/100), three engines agreeing on W's
+  claim FS111-W-DECO-B: prior art new, 2 counted queries
+  claim FS111-W-HX-PAIRS: minds 1 — FS111-W
+  claim FS111-W-HX-PAIRS: prior art new, 2 counted queries
+  claim FS111-W-SEA-PACK: minds 1 — FS111-W
+  claim FS111-W-SEA-PACK: prior art new, 2 counted queries
+  claim FS111-M2-COV: minds 1 — FS111-M2
+  claim FS111-M2-COV: prior art new, 2 counted queries
+  claim FS111-M2-ZERO: minds 1 — FS111-M2
+  claim FS111-M2-ZERO: prior art partly, 2 counted queries
+  claim FS111-M2-INT: governed by FS111-V0-ID1 (hand, minds 1)
+  claim FS111-M2-INT: minds 2 — blind to: M2's record until VM2's verdicts were committed (00fd646f); method: VM2-INT by the r³ measure of unit pairs between full discs
+  claim FS111-M2-INT: prior art new, 2 counted queries
+  claim FS111-M2-FIX: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-FIX: governed by FS111-M2-ZERO (hand, minds 1)
+  claim FS111-M2-FIX: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 from VM2-INT and maximality (VM2 § 2.2)
+  claim FS111-M2-FIX: prior art new, 2 counted queries
+  claim FS111-M2-DISC7: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2 by hand and a 2,173-point exact grid, VM2 by exact bounds at every point (VM2-DISC7-EXACT)
+  claim FS111-M2-DISC7: prior art partly, 1 counted queries
+  claim FS111-M2-HULLC: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M2-HULLC: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M2-HULLC: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-HULLC (exterior radius 1 per component; M2 used 1/2 for the perimeter argument); VM2 restored the dropped hypothesis of (iv)
+  claim FS111-M2-HULLC: prior art partly, 1 counted queries
+  claim FS111-M2-EXTREME-C: governed by FS111-M2-DISC7 (computed over, minds 2)
+  claim FS111-M2-EXTREME-C: minds 1 — FS111-M2 (the object checked exactly by VM2)
+  claim FS111-M2-EXTREME-C: prior art new, 2 counted queries
+  claim FS111-M2-SELCOMP: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-SELCOMP: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-SEL by the same contact argument, reached independently
+  claim FS111-M2-SELCOMP: prior art new, 2 counted queries
+  claim FS111-M2-NOSEL: governed by FS111-M2-SELCOMP (derived from, minds 2)
+  claim FS111-M2-NOSEL: governed by FS111-M2-DISC7 (computed over, minds 2)
+  claim FS111-M2-NOSEL: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 by exact bounds (and for DISCK7 too)
+  claim FS111-M2-NOSEL: prior art new, 2 counted queries
+  claim FS111-M2-REDUCE-C: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-REDUCE-C: governed by FS111-V0-CLOSE (hand, minds 1)
+  claim FS111-M2-REDUCE-C: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-M2-REDUCE-C: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-FACE, step by step, adding the island fill and the merged points
+  claim FS111-M2-REDUCE-C: prior art new, 2 counted queries
+  claim FS111-VM2-EQ5: governed by FS111-M2-REDUCE-C (derived from, minds 2)
+  claim FS111-VM2-EQ5: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2 states it (§ 2.3, § 3.2), VM2 derives it as (O1)
+  claim FS111-VM2-EQ5: prior art new, 2 counted queries
+  claim FS111-M2-INTRAD: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M2-INTRAD: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: (i)–(ii) by two routes; (iii) completed by VM2 alone (VM2-FIN′, one mind), M2's convexity outline having a gap on E_n ∖ E_{n,p}
+  claim FS111-M2-INTRAD: prior art new, 2 counted queries
+  claim FS111-M2-REDUCE-A: governed by FS111-M2-INTRAD (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: governed by FS111-M-REDUCE-I (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 noticed the C-SAT-T conjunct is implied by REG-J′'s saturated hypothesis and dropped it
+  claim FS111-M2-REDUCE-A: prior art new, 2 counted queries
+  claim FS111-M2-DISCK7: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2's hand argument and body checks, VM2's exact rebuild in the corrected orientation
+  claim FS111-M2-DISCK7: prior art partly, 1 counted queries
+  claim FS111-M2-KERSHNER: minds 1 — FS111-M2
+  claim FS111-M2-KERSHNER: prior art partly
+  claim FS111-VM2-STRIP-MID: minds 1 — FS111-VM2
+  claim FS111-VM2-STRIP-MID: prior art partly
+  claim FS111-M3-VAC: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M3-VAC: minds 1 — FS111-M3
+  claim FS111-M3-VAC: prior art new, 2 counted queries
+  claim FS111-M3-HC: minds 1 — FS111-M3 (../tools/fs111_m3_honey.py: six checks, five plants firing)
+  claim FS111-M3-HC: prior art new, 2 counted queries
+  claim FS111-M3-FIN-U: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-FIN-U: minds 1 — FS111-M3
+  claim FS111-M3-FIN-U: prior art new, 2 counted queries
+  claim FS111-M3-D3: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-D3: minds 1 — FS111-M3
+  claim FS111-M3-D3: prior art new, 2 counted queries
+  claim FS111-M3-MOVE: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-MOVE: minds 1 — FS111-M3 (exact checks by ../tools/fs111_m3_honey.py)
+  claim FS111-M3-MOVE: prior art new, 2 counted queries
+  claim FS111-M3-COVER: governed by FS111-M3-MOVE (derived from, minds 1)
+  claim FS111-M3-COVER: governed by FS111-M2-COV (hand, minds 1)
+  claim FS111-M3-COVER: minds 1 — FS111-M3
+  claim FS111-M3-COVER: prior art new, 2 counted queries
+  claim FS111-M3-CASCADE: governed by FS111-M2-ZERO (hand, minds 1)
+  claim FS111-M3-CASCADE: governed by FS111-M2-COV (hand, minds 1)
+  claim FS111-M3-CASCADE: minds 1 — FS111-M3
+  claim FS111-M3-CASCADE: prior art new, 2 counted queries
+  claim FS111-M3-IRREG: minds 1 — FS111-M3
+  claim FS111-M3-IRREG: prior art new, 2 counted queries
+  claim FS111-M3-FIXCONV: governed by FS111-M3-IRREG (hand, minds 1)
+  claim FS111-M3-FIXCONV: minds 1 — FS111-M3
+  claim FS111-M3-FIXCONV: prior art new, 2 counted queries
+  claim FS111-M3-BAND: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M3-BAND: minds 1 — FS111-M3
+  claim FS111-M3-BAND: prior art new, 2 counted queries
+  claim FS111-M4-LADDER: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M4-LADDER: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M4-LADDER: governed by FS111-M2-SELCOMP (derived from, minds 2)
+  claim FS111-M4-LADDER: minds 1 — FS111-M4
+  claim FS111-M4-LADDER: prior art new, 2 counted queries
+  claim FS111-M4-CUT: governed by FS111-M4-LADDER (derived from, minds 1)
+  claim FS111-M4-CUT: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M4-CUT: minds 1 — FS111-M4
+  claim FS111-M4-CUT: prior art partly, 2 counted queries
+  claim FS111-M4-HC: minds 1 — FS111-M4 (../tools/fs111_m4_rungs.py: four checks, four plants)
+  claim FS111-M4-HC: prior art new, 2 counted queries
+  claim FS111-M4-MOVE: governed by FS111-M4-LADDER (derived from, minds 1)
+  claim FS111-M4-MOVE: governed by FS111-M4-CUT (derived from, minds 1)
+  claim FS111-M4-MOVE: minds 1 — FS111-M4
+  claim FS111-M4-MOVE: prior art new, 2 counted queries
+  entries: 288  derived: 263  stalled, gapped or refuted: 25
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS121-D3-SWAP1D: printed 'ALL HOLD'; with the fault planted ('' → '--plant seam') it printed 'FAILED: S' — it fires
+  ok    FS121-D2-EXT-CORE: printed '0'; with the fault planted ('' → '--plant') it printed '1' — it fires
+  ok    FS121-D2-TRANSPORT: printed '0'; with the fault planted ('' → '--plant') it printed '1620' — it fires
+  ok    FS121-C1-COVMAP: printed 'orders with an edge point bound by neither side colour: 5040 of 5040'; with the fault planted ('' → '--cover') it printed 'orders with an edge point bound by neith' — it fires
+  ok    FS121-C1-FLAT: printed 'FLAT CHAIN: ALL HOLD (for every t: Y - t = X^4 + O(X^6), curvature 0, strictly above the line)'; with the fault planted ('' → '--circle') it printed 'FLAT CHAIN: FAILS (curvature at P_k is 1' — it fires
+  ok    FS121-D4-TINY16: printed 'ALL HOLD'; with the fault planted ('' → '--plant mod3') it printed 'FAILED (2268)' — it fires
+  ok    FS121-V5-FACE-CEX: printed 'True'; with the fault planted ('' → '--fault') it printed 'False' — it fires
+  ok    disk-two-colour: printed 'DISKEXACT OK'; with the fault planted ('' → 'plant --') it printed 'DISKEXACT FAIL' — it fires
+  ok    fs116-y1-f15: printed '=> F(1/5): ALL HOLD'; with the fault planted ('' → '--plant lift') it printed '=> F(1/5) plant lift: FAILS' — it fires
+  ok    fs116-y2-sixfrag: printed '=> FRAGMENT: VALID, NON-SIAMESE, SIX COLOURS AT p'; with the fault planted ('' → '--plant grow') it printed '=> FRAGMENT: FAILS' — it fires
+  ok    v3-echo-a: printed 'ECHO-A: hypotheses hold and 2w - p lies in the closure of no X-tile'; with the fault planted ('' → '--plant') it printed 'ECHO-A: no verdict (the colouring is not' — it fires
+  ok    axis-touch-f15: printed 'AXIS-TOUCH F(1/5): ALL AS DERIVED'; with the fault planted ('' → '--plant') it printed 'AXIS-TOUCH F(1/5): NOT AS DERIVED' — it fires
+  ok    rung-ceil: printed 'RUNG-CEIL: |V-(x*,1)|=1 True; 1/5 inside True; 1/2 outside True; x*=0.49098477'; with the fault planted ('' → '--plant') it printed 'RUNG-CEIL: |V-(x*,1)|=1 False; 1/5 insid' — it fires
+  ok    exit-identities: printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-form True; Q=y_a True; |y_a-y_5|=1 True; dQ-form True; lower d<0 at 3675/3675; upper d>0 at 3675/3675'; with the fault planted ('' → '--plant') it printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-f' — it fires
+  ok    fs116-y3-star: printed 'satisfying assignments: 1'; with the fault planted ('' → '--plant nbtip') it printed 'satisfying assignments: 26' — it fires
+  ok    fs116-n3-semi: printed 'SEMI ALL OK'; with the fault planted ('' → '--plant') it printed 'SEMI VIOLATIONS 16' — it fires
+  ok    fs116-y4-flank: printed "FLANK: 12 of 12 edge pairs below 1; EMPTY's contradiction holds"; with the fault planted ('' → '--plant straight') it printed 'FLANK: 0 of 12 edge pairs below 1; EMPTY' — it fires
+  ok    fs116-y4-flank-seven: printed 'double-tip positions whose two flank ring arcs share a colour: 6 of 6'; with the fault planted ('' → '--plant three') it printed 'double-tip positions whose two flank rin' — it fires
+  ok    v6-hug: printed 'identity holds; below 1: 3600 of 3600'; with the fault planted ('inward' → 'outward') it printed 'identity fails; below 1: 0 of 3600' — it fires
+  ok    v6-sq9: printed 'period 3: 9 colours; least same-colour squared gap 4 half-units^2 (valid and non-Siamese: True); colours at p: 4; Gamma on the ring: 12 points; ring colours: 5; ring colours of p: 0'; with the fault planted ('3' → '2') it printed 'period 2: 4 colours; least same-colour s' — it fires
+  ok    FS111-C-HULL-SO-EXACT: printed '0'; with the fault planted ('' → '--plant vertex') it printed '1' — it fires
+  ok    FS111-M-R7-EXACT: printed '0'; with the fault planted ('' → '--plant down_mod2') it printed '1' — it fires
+  ok    FS111-W-DECO-B-EXACT: printed '=> ALL HOLD'; with the fault planted ('' → '--plant bigsq') it printed "fails ['P'] -> FIRES FOR ITS OWN REASON" — it fires
+  ok    FS111-M2-DISC7-EXACT: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--plant lat4') it printed 'ALL FAIL (plant = lat4)' — it fires
+  ok    FS111-M2-DISCK7-ORIENT: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--object disck7-m2') it printed 'ALL FAIL (object = disck7-m2, plant = No' — it fires
+  controls: 25  fired on their faults: 25
+GATE: PASS (0 failures, 30 warnings)

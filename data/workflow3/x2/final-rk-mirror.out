@@ -1,0 +1,5 @@
+FAIL: CLAUDE.md's single-row rank labels are not 1..29, one each, in order: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+FAIL: CLAUDE.md's group row is labelled '11–73'; FRONTIER-STUBS runs to 73, so it should read '30–73'
+FAIL: CLAUDE.md's group row differs from FRONTIER-STUBS ranks 30–73 (missing ['FS-17', 'FS-55', 'FS-78', 'FS-42', 'FS-43', 'FS-45', 'FS-39', 'FS-75', 'FS-90', 'FS-98', 'FS-76', 'FS-95', 'FS-87', 'FS-92', 'FS-68', 'FS-47', 'FS-60', 'FS-46', 'FS-48', 'FS-72', 'FS-77', 'FS-88', 'FS-93', 'FS-94', 'FS-99', 'FS-41', 'FS-51', 'FS-52', 'FS-20', 'FS-2', 'FS-13', 'FS-12', 'FS-19', 'FS-37', 'FS-27', 'FS-23', 'FS-22', 'FS-30', 'FS-35', 'FS-8', 'FS-29', 'FS-9', 'FS-10', 'FS-5'], extra [], order same)
+checked 73 ranked stubs; CLAUDE.md single rows 10, group row 11–73
+RESULT: FAIL (3)

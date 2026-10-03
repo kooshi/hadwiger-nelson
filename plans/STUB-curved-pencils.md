@@ -44,6 +44,8 @@ the reading that honest classes are segments and (Q) arcs, and returns C121-NOLR
 arc about a ring point carrying both side colours, or a tangent segment or arc of radius at least 1 (FS116-O1-SATPIN, held). A NO here would leave, in an
 honest saturated REG-J′ colouring, only segments as tangent edges at such a vertex — the cross of FS116-S1-QF's class (FS-125).
 
+**At R2's re-rank (2026-10-03).** The class has no held inhabitant, and FS-116 worked an empty class for two rounds (`plans/FS116-Z2-close.md` D3, the G21 instance): ask first for an inhabitant by formula at some `k ≥ 7`, or an obstruction, with FS121-D1's lemmas as the constraints it must meet. A NO here also removes the (R2) arcs FS-123's question 2 is about, in the class route M consumes (FS121-Z1-NOCURVED: "no (R2) arc occurs"; `plans/POROS-2026-10-03-close-reread.md` §§ 2.3 C3, 2.5 card 3).
+
 ## Owed second minds (before anything final rests on them)
 
 FS121-Z1-NOCURVED; FS121-D2-INCURVED, -EXT, -THIN, -PERFIN; FS121-V5-RAY, -SYM-UP, -SYM-CPT, -LOC; FS121-D1-PENCILWIN, -DOUBLE; FS111-M2-INTRAD's
@@ -68,3 +70,20 @@ offset partner if one is built.
 
 G84, G85 (contact, integer radii; G85's "what escapes" refined by FS-121), the drafted G88; G21 (no held inhabitant); G62 (two interleaved pencils are
 a bilayer); G79. Rows 140–141 and FS-121's. Stubs: FS-115 (re-posed as thin pencils), FS-116, FS-127, FS-128.
+
+## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
+
+question: is-the-curved-tangent-class-inhabited
+  evidence: `plans/STUB-curved-pencils.md` § The question: "No held colouring does: R7 has only split unit arcs; SQ9 and HEX9 only segments"; FS121-Z1
+    § 2.6 item 4 names "a curved tangent-type interface in an honest saturated colouring at some `k ≥ 7`, given by formula" as the fact that would change
+    its confidence; three open claims (C121-R2-FOUR, -CURVED, -NOLRA) and FS121-D1's lemmas sit on this class; FS-116 worked an empty class for two
+    rounds (Z2 D3, G21 instance)
+  expected: that FS-126 opens on its open step (the transverse subdivision), as its stub's structural form and D1's suggestion order it
+  ask: At some `k ≥ 7`, is there an honest saturated REG-J′ colouring of the plane with a curved tangent-type interface, given by formula — or an obstruction at every `k`?
+  if one is built: the honest route cannot take its map step colour-blind; C121-NOLRA and C121-R2-FOUR become separate questions; route M's honest branch is six-specific at REG-A₆ and FS-128 carries it; FS-126's lemmas describe a real class
+  if an obstruction: FS-126's NO at every `k`, cusps allowed, gives by FS121-Z1-NOCURVED no (R2) arc in route M's maps and ¬LRA; the honest branch's open rungs are REG-J′ (FS-127) and TOP₆ (FS-128), and C3's joint deletes (R2) arcs from FS-125's case list
+  answered by: derivation — Ephodos, FS-126's opening, construction side first, with FS121-D1's lemmas (PENCILWIN, DOUBLE, VT) as the constraints an inhabitant must meet
+  cost: one round
+  hunch: an inhabitant exists at large `k` (`curved-tangent-inhabited-above-six`, 0.4)
+  falsifier: a derivation that at every `k` honest saturated REG-J′ colourings have only segments and split unit arcs
+  rank: 3

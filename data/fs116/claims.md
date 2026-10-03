@@ -221,3 +221,18 @@ force where this list does not restate them.*
 - **FS116-Y4-EMPTY** *(proposed at round 4)*: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ *Not claimed:* anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs); anything in the Siamese or non-simple class; anything at k ≥ 7
 
 *§ 15, restored by Keryx, 2026-10-03 18:21 UTC, no blind job remaining: the withheld parenthetical of FS116-Y4-EMPTY's *not claimed* line, verbatim from its proposing record, follows "anything at k ≥ 7": "(with three absent colours the flank tiles need not share a colour)".*
+
+## Notes at the close (2026-10-03; filed by X2 from `plans/FS116-Z2-close.md` D5; no statement above is edited)
+
+- **Corrected wordings live in `plans/FS116-derivation.md`**, each beside its frozen address: FS116-O1-SATPIN (§ 3: "edge" a boundary arc between tiles of
+  two colours; "at least one of two types"), RING-GERM and RING-TWIST-C (§ 10: "the ring off Γ on both sides"; "edge"), FS116-N1-ECHO (§ 11: reading B),
+  FS116-S1-KAPPA (§ 12: "of exactly one of the two colours absent at p"; κ's change points), FS116-Y3-STARFORCE (§ 12: the readings R-LENSPT and R-ORDER
+  written out).
+- **§ 15:** the parenthetical withheld for blindness ("(with three absent colours the flank tiles need not share a colour)") is filed whole in the derivation
+  file; no blind job remains, so a dated note in § 15 may now give it.
+- **§§ 12, 14, 15:** FS116-Y4-EMPTY is held, so § 12's last three and § 14's statements are true vacuously; FS116-V6's wording note: "radius above 1" and
+  "radius 1" name one class (an open set containing `B̄(p, 1)` contains a larger closed disc).
+- **§ 5:** RING-TWIST's not-claimed parenthetical is vacuous at R7's lattice points, not failing (item 38); RING-Q's qualifier "that lies on no (Q) arc" is
+  empty under § 0's change point (item 38); RING-TRANSFER is MISSTATED (FS116-N2 § 3.3).
+- **§ 0, for a successor's list:** "ring type" records no edge direction of `p`; define it as the pair (ring word, star) (item 67).
+- **§ 8:** FS114-N7-3T's setting, `+++` and N7-HUB are corrected in `plans/FS114-derivation.md` by FS116-Z2's dated erratum.

@@ -49,3 +49,18 @@ FS121-D3-EQ, -SWAP1D; FS121-NOPAR and -NOPAR-C5's GAP locations; C1's containmen
 
 G89 (drafted: honesty is free, binding the top colour is the content), G13 (binding is coverage; FS-121's §G miss), G82, G24/G60. Stubs: FS-116,
 FS-126, FS-127; FS-104 (`χ_CP(ℝ²)` at six).
+
+## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
+
+question: is-top-six-a-coverage-question
+  evidence: `plans/FS121-Z1-close.md` § 4.1: G13 "should have borne and was not used"; "TOP₆ (binding the top colour) is a coverage question about the
+    circles of the top colour's boundary points. D3's three attempts (§§ 3.2–3.4) worked by moves and selections and never asked the coverage question G13
+    names"; `plans/FS116-Z2-close.md` § 2.1: G13 "paid, unnamed" in FS116-V6-TIP; FS121-O1-ABOVE7 (one mind): at `k = 7` the tight hexagonal colouring
+    lies below no honest saturated one, so binding the top colour must spend six
+  expected: that TOP₆'s three stalls (variational, idomatic, re-maximising) had exhausted its routes
+  ask: In a Grundy six-colouring, is the top colour's binding at a boundary point the failure of a coverage — that point's unit circle covered by the five lower colours — so that G13's fan ladder at level five decides TOP₆?
+  if it is: FS-128 opens on coverage at the top colour's boundary circles, with the kernel's `fan_iff_coverage` as the finite model, and TOP₆ gets a named step smaller than C121-SAT6
+  if it is not: the step where coverage cannot spend six is named; TOP₆ stays the answer restated given NO-SAT, and FS-128's cover-route rung (NOPAR-C5) is its only smaller question
+  answered by: derivation — Ephodos, FS-128's opening, reading FS121-D3 §§ 3.2–3.4 against G13
+  cost: under a round
+  rank: 4

@@ -1,5 +1,7 @@
 # FS-121 — the map step: can a tight colouring of the plane be replaced by a map — at five colours by any map, at six by one bounded by segments and circular arcs? (stub)
 
+> **Closed undecided 2026-10-03 (FS-121; rows 142–144; `plans/FS121-Z1-close.md`).** Every curved ladder ends inward at a (Q) or (R2) arc and never outward; honesty is free; the cover route is parked behind FS-125's NO-SAT (Kooshi's to overturn). Successors: FS-126 (curved pencils), FS-127 (lateral extent), FS-128 (the six-colour rungs).
+
 *Minted 2026-09-28 by the close job FS111-C at FS-111's close, merging the planner's draft `data/fs111/fs111-p/STUB-DRAFT-map-step.md` with what rounds 1–4
 found (`plans/FS111-close-inventory.md` items 5, 17, 27, 28; `plans/FS111-C-close.md` § Stage 5). FS-111's successor on route M's top rung; its siblings
 are FS-120 (the pinch at a junction, the colour-generic rung this one needs) and FS-122 (the forced pair, route R). **Solver column: in-ban** —

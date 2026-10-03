@@ -37,7 +37,7 @@ GSTUB = STUB("STUB-global-step.md")
 RSTUB = STUB("STUB-stuck-ray.md")
 NIGHT = STUB("POROS-2026-09-27-night-aim.md")
 NOT_THE_NO = (L(135), "Not claimed: the NO")
-BASEV = ({"file": "CLAUDE.md", "section": "### Paths forward, ranked"}, "with BASE-V beside them (row 134's base re-derived but for Lemma 4 at cusps)")
+BASEV = ({"file": "CLAUDE.md", "section": "### Paths forward, ranked"}, "BASE-V stands beside them (row 134's base re-derived but for Lemma 4 at cusps)")
 
 NODES, EDGES = [], []
 
@@ -296,9 +296,34 @@ N("CVEXISTS", "CV-EXISTS", "held", "Every six-map with unit arcs has a vertex of
   "hand; two minds, blind to each other: CV; CVB, by different routes; over FS112-N3-DENSE3, N2-TERM, N4-FIN", at=(14, 570), sector="seven",
   also=[({"file": ".claude/skills/grokkings/SKILL.md", "grok": "G83"}, "With unit arcs, the tight question lives at one four-colour vertex.")])
 N("LOCALF", "the local exclusion (NO)", "question", "Exclude every six-map fragment on a disc of explicit radius about a four-colour vertex. With "
-  "CV-EXISTS it gives the whole unit-arc NO; the capped strip puts the radius above φ²/√2 ≈ 1.8512 (FS-116, the successor).", L(137),
+  "CV-EXISTS it gives the whole unit-arc NO; the capped strip puts the radius above φ²/√2 ≈ 1.8512. FS-116 closed undecided: one ring type removed, "
+  "the rest is FS-123–FS-125.", L(137),
   "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists",
   (L(137), "the NO; an explicit radius (C114-LOCAL-F, FS-116)"), at=(26, 465), sector="seven", tier=1)
+N("GFREE", "the Γ-free vertex dies at 1 + ε", "nogo", "A four-colour vertex whose unit circle carries no boundary arc has no valid six-coloured "
+  "fragment, non-Siamese and simple, on any disc of radius above 1: two routes, the second blind.", B("FS116-Y4-EMPTY"),
+  "no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no",
+  "derived; held, two minds (the second blind)", at=(51, 495), sector="seven")
+N("RINGRULE", "change points place four-colour vertices", "held", "On the unit circle of a four-colour vertex, every change point off (Q) arcs, and "
+  "every semi-hub but one, places another vertex of at least four colours: they propagate until a (Q) arc intervenes.", B("FS116-RING-GERM"),
+  "in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the ring",
+  "derived; held, two minds (the second blind)", at=(4, 518), sector="seven")
+N("YESLIM", "the YES needs no map", "held", "Valid six-coloured fragments on discs of every radius give χ(ℝ²) ≤ 6 with no MR: the local exclusion "
+  "decides both ways.", B("FS116-O1-YESLIM"),
+  "for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment",
+  "hand; held, two minds (the second blind)", at=(110, 430), sector="six-up")
+N("FS123", "the (Q)-free ring", "step", "Does a four-colour vertex whose ring carries no (Q) arc survive past 1 + ε? First: do a fragment's bends keep "
+  "it in the class the Γ-free exclusion reads?", STUB("STUB-qfree-ring.md"),
+  "the (Q)-free ring: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class?",
+  (STUB("STUB-qfree-ring.md"), "A rung of route M's first half, smaller than the answer; possibly cheap."), at=(31, 377), sector="seven")
+N("FS124", "the (Q) ring", "step", "The rest of the case list: rings with (Q) arcs (SEMI-PAR3, the disk's corner, crossed reciprocity) and vertices of "
+  "five or six colours.", STUB("STUB-q-ring.md"),
+  "the (Q) ring: does every vertex of at least four colours whose ring carries (Q) arcs, and every vertex of five or six colours, die within an explicit radius?",
+  (STUB("STUB-q-ring.md"), "The main remaining case set of the six-map NO with unit arcs."), at=(16, 429), sector="seven")
+N("FS125", "the saturated local exclusion", "step", "The same exclusion in the class route M's honest branch hands it: saturated fragments.",
+  STUB("STUB-saturated-local.md"),
+  "the saturated local exclusion: is there an explicit radius about a four-colour vertex within which no saturated valid six-coloured fragment exists?",
+  (STUB("STUB-saturated-local.md"), "Route M's first half in the class route M needs, smaller than the answer alone."), at=(44, 394), sector="seven")
 N("BOWSQ3", "the bowtie dies at √3", "nogo", "Two width-1 Reuleaux triangles corner to corner at a four-colour vertex fit a disc of radius "
   "3√3/5 exactly and no disc of radius √3: two independent derivations.", B("FS114-Y4-RSTOPALL"),
   "no non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of `B̄(p, 1)` and of `r = q1 + q2`",
@@ -318,6 +343,12 @@ N("CAPSTRIP", "the capped strip", "positive", "The strip with each top tile capp
   "tools, exact; two minds: Y; YB, blind", at=(123, 465), sector="six-up")
 E("N3DENSE3", "CVEXISTS", "rests", B("FS114-CV-EXISTS"), "over FS112-N3-DENSE3, N2-TERM, N4-FIN")
 E("CVEXISTS", "LOCALF", "rests", L(137), "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists")
+E("GFREE", "LOCALF", "context", B("FS116-Y4-EMPTY"), "has a ring carrying no", label="a ring type removed")
+E("RINGRULE", "LOCALF", "context", B("FS116-RING-GERM"), "let y be a change point of the ring", label="the placing rule")
+E("YESLIM", "UB6", "rests", B("FS116-O1-YESLIM"), "some closed disc of radius R carries a valid k-coloured fragment", label="fragments on every disc")
+E("FS123", "LOCALF", "rests", STUB("STUB-qfree-ring.md"), "the (Q)-free ring", label="its (Q)-free half")
+E("FS124", "LOCALF", "rests", STUB("STUB-q-ring.md"), "the (Q) ring", label="its (Q) half")
+E("FS125", "FS128", "context", STUB("STUB-saturated-local.md"), "the saturated local exclusion", label="route M's class")
 E("LOCALF", "UANO", "rests", L(137), "So one local statement suffices for S–V's Question 2 with unit arcs")
 E("BOWSQ3", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
 E("PINW", "LOCALF", "context", L(138), "Where the count gives six room, the configurations die locally", label="a piece")
@@ -329,8 +360,7 @@ N("MEET", "the doors are two routes", "reading-link", "Card 1, answered at two m
   (B("FS111-C1-UNIF"), "hand; two minds: P; V0, blind"), at=(41, 230),
   sector="seven", tier=1, also=[(L(133), "So stability at six has two routes, each needing a third statement")])
 # ---- FS-111's successors (D9): the map step (FS-121), the pinch at a junction (FS-120), the forced pair (FS-122)
-N("FS121", "the map step", "step", "Route M's third statement: a tight colouring replaced by a map (five colours) or a segment-and-arc map (six). "
-  "At its top it is the answer restated; its smaller rungs are NO-PAR and interface-maximal six-colourings.", STUB("STUB-map-step.md"),
+N("FS121", "the map step", "step", "Route M's third statement. Closed undecided (rows 142–144): honest saturated ladders end inward at (Q) or (R2) arcs and never outward; honesty is free (Grundy); symmetric and grid colourings are regular; open: curved tangent interfaces, lateral extent, the top colour at six.", STUB("STUB-map-step.md"),
   "the map step: can a tight colouring of the plane be replaced by a map", (STUB("STUB-map-step.md"),
   "Decisive at its top, and at its top the answer restated."), at=(57, 270), sector="seven", tier=1)
 N("FS120", "the pinch at a junction", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
@@ -341,6 +371,15 @@ N("FS122", "the forced pair", "step", "Route R's third statement: a close comple
   "equivalent to seven (FS111-W-NEG), so its smaller statements are B-RR and a robust junction count.", STUB("STUB-forced-pair.md"),
   "the forced pair at every complexity (route R's third statement)", (STUB("STUB-forced-pair.md"), "Decisive, and the answer restated:"),
   at=(29, 275), sector="seven")
+N("FS126", "curved pencils", "step", "Does any honest saturated colouring have a curved tangent-type interface? A NO decides three of FS-121's open claims; under a cocompact symmetry there are none (one mind).",
+  STUB("STUB-curved-pencils.md"),
+  "can an honest saturated colouring of the plane, with any number of colours, have a curved tangent-type interface?", (STUB("STUB-curved-pencils.md"), "None alone; a colour-generic rung of route M's honest branch, smaller than the answer."), at=(58, 368), sector="seven")
+N("FS127", "lateral extent", "step", "Is the singular set of every honest saturated colouring locally finite? Open at LAT, point-like accumulation; true on grids (two minds).",
+  STUB("STUB-lateral-extent.md"),
+  "is the singular set of every honest saturated colouring of the plane locally finite?", (STUB("STUB-lateral-extent.md"), "None alone; a colour-generic rung."), at=(52, 418), sector="seven")
+N("FS128", "the six-colour rungs", "step", "Binding the top colour of a Grundy six-colouring (TOP₆), and NO-PAR under Condition 5 (the parked cover route).",
+  STUB("STUB-top-colour.md"),
+  "can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5?", (STUB("STUB-top-colour.md"), "At six, and next to the answer."), at=(61, 167), sector="seven")
 
 # ================================================================ toward six from below (right)
 N("FS104", "χ_CP(ℝ²) ≥ 6", "question", "Is the stationary (equivalently the measurable) chromatic number at least six? Two-sided: a "
@@ -356,9 +395,9 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
               "at [hand]", state="answered", src=LGC, quote="row 129 answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
-  "shape a six certificate must take (FS-80).", FSR(11), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
+  "shape a six certificate must take (FS-80).", FSR(14), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
   (STUB("STUB-window-frequency-certificate.md"), "FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)"),
-  at=(80, 320), sector="six-low", words=(FSR(11), "soft as to success"))
+  at=(80, 320), sector="six-low", words=(FSR(14), "soft as to success"))
 N("R125", "ℚ(√167) at six = plane + PL", "held", "Given MR, six colours at ℚ(√167) is exactly χ_CP(ℝ²) ≥ 6 together with product "
   "locality at 23 and 43 — a reduction, not a bound.", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)",
   "B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V)", at=(92, 390), sector="six-low")
@@ -367,9 +406,9 @@ N("PL", "PL∃(23, 43)", "question", "Product locality at the places 23 and 43: 
   "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6", (L(125), "Not claimed: anything about six."),
   at=(106, 390), sector="six-low")
 N("FS59", "χ(ℚ(√167)²) ≥ 6", "conclusion", "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the "
-  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", FSR(16),
+  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", FSR(20),
   "six at ℚ(√167) is rung D plus PL_∃(23, 43)",
-  (FSR(16), "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)"),
+  (FSR(20), "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)"),
   at=(100, 300), sector="six-low")
 N("R119", "χ(ℚ(√167)²) ≥ 4, kernel", "held", "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of "
   "the widest gap.", L(119), "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
@@ -424,11 +463,11 @@ N("PARTS", "Parts's six-tiling", "positive", "The best printed six-tiling leaves
 
 # ================================================================ toward exactly five (lower left)
 N("FS44", "a CP five-colouring", "question", "The shape of a stationary five-colouring of the plane — row 131 at five colours: "
-  "lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).", PF(10),
-  "the shape of a CP five-colouring of the plane, row 131 at k = 5 (lim µ₅(ε) = 1)",
+  "lim µ₅(ε) = 1. Decisive if it lands: χ(ℝ²) = 5 with no MR (FS-44).", FSR(13),
+  "the shape of a CP five-colouring of the plane — FS-104's mirror",
   (STUB("STUB-fifth-colour-structure.md"), "FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open "
    "field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)"), at=(216, 245), sector="five", tier=1,
-  words=(PF(10), "soft as to truth (the bold form predicts no)"))
+  words=(FSR(13), "the conjecture's bold form predicts no (G48)"))
 
 # ================================================================ edges (premise → conclusion)
 for b, a in (("LB7", "A7"), ("UB7", "A7"), ("LB6", "A6"), ("UB6", "A6"), ("LB5", "A5"), ("UB5", "A5")):
@@ -461,6 +500,10 @@ E("LEANWALL", "R131", "formalizes", STUB("STUB-regularity-wall.md"), "the collap
 E("R131", "RR", "rests", L(133), "χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form)")
 E("RR", "M7", "rests", L(133), "given the quantified cone lemma, χ_m⁰(ℝ²) ≥ 7 (row 131's C-Q-STAB, disc form) follows from (A)")
 E("TSMNO", "FS121", "rests", STUB("STUB-map-step.md"), "The frame (FS-111's card 1, two minds, one blind).", label="route M")
+E("FS126", "FS121", "rests", STUB("STUB-curved-pencils.md"), "have a curved tangent-type interface", label="its ends")
+E("FS127", "FS121", "rests", STUB("STUB-lateral-extent.md"), "is the singular set of every honest saturated colouring of the plane locally finite", label="its singular set")
+E("FS128", "FS121", "rests", STUB("STUB-top-colour.md"), "can the top colour of a Grundy six-colouring be bound", label="its six-colour rungs")
+E("FS120", "FS127", "rests", STUB("STUB-lateral-extent.md"), "A measurable fall colouring with a non-locally-finite Σ refutes the claim", label="a potential refutation")
 E("FS120", "FS121", "rests", STUB("STUB-map-step.md"), "FS-120's rung", label="its finiteness rung")
 E("FS121", "M7", "rests", {"file": "plans/FS111-derivation.md"}, "given Q-NO, REG-A₆ ⟺ χ_m⁰(ℝ²) ≥ 7", label="the answer restated")
 E("RR", "FS122", "rests", STUB("STUB-forced-pair.md"), "FS-107's reduction", label="route R")
@@ -492,17 +535,17 @@ E("Y3END", "SRAY", "partial", RSTUB, "That covers every end of a chain of two or
 E("HORNEND", "SRAY", "partial", RSTUB, "a horn bound ±1 on both horns of a stuck vertex of a terminal map occurs only at a one-vertex chain "
   "bounded by unit arcs on both sides", label="a lemma toward it")
 E("BOWTIE", "Y3END", "context", B("FS112-Y3-END-NEEDS"), "FALSE as stated (BOWTIE)", label="refutes it as first stated")
-E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "6"}, "its fragments (the pencil, BOWTIE) are local positives a YES could use",
+E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "18"}, "its fragments (the pencil, BOWTIE) stay local positives a YES could use",
   label="a local fragment, not a map")
 # toward six from below
 E("FS104", "LB6", "rests", PF(3), "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)", label="its YES, given MR")
 E("FS104", "FS44", "context", PF(3), "a NO (a CP five-colouring) gives χ(ℝ²) = 5 with no MR", label="its NO is this")
-E("FS80", "FS104", "rests", FSR(11), "a certificate gives χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130), hence χ(ℝ²) ≥ 6 given MR (row 128)")
+E("FS80", "FS104", "rests", FSR(14), "a certificate gives χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130), hence χ(ℝ²) ≥ 6 given MR (row 128)")
 E("R129", "LB6", "blocks", L(129), "1/α_loc ≤ 4.36: that route never gives six", label="one class at a time never gives six")
 E("R125", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("FS104", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("PL", "FS59", "rests", L(125), "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6")
-E("FS59", "LB6", "rests", FSR(16), "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6")
+E("FS59", "LB6", "rests", FSR(20), "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6")
 E("SUB", "LB6", "rests", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
   "The plane over any real subfield needs at most as many colours as the plane.", faint=True, bus=True)
 E("R119", "FS59", "context", L(119), "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six "
@@ -535,7 +578,7 @@ E("R134", "TSMYES", "blocks", L(134), "no locally finite map of the plane whose 
 E("R132", "TSMYES", "blocks", L(132), "polygonal colourings need seven, and so do locally finite tilings by convex polygons",
   label="a YES cannot be regular", bus=True, faint=True)
 # toward exactly five
-E("FS44", "UB5", "rests", PF(10), "decisive if it lands: χ(ℝ²) = 5 with no MR (link 2)")
+E("FS44", "UB5", "rests", FSR(13), "a CP five-colouring of the plane gives χ(ℝ²) = 5 with no MR (link 2; row 130)")
 E("MAPS6", "FS44", "blocks", L(132), "maps need six modulo Townsend's simplification (c)", label="a five cannot be a map")
 E("R132", "FS44", "blocks", AIM, "Regular colourings need seven, verified and almost everywhere", label="a five cannot be regular",
   bus=True, faint=True)
@@ -551,8 +594,8 @@ ROUTES = [
          about="χ(ℚ(√47)²) = 5 gives χ(ℝ²) ≥ 5 with no witness object (rows 120–121). A second proof of a held bound — it moves no value, "
                "and its publication waits on MR in Lean."),
     dict(id="wall7", name="The regularity wall, toward seven", answer=7, half="lower",
-         links=["EL", "MR", "R128", "R130", "R131", "RR", "WEQK", "MEET", "R132", "R134", "N3BASE", "N3DENSE3", "COMPOSE", "GSTEP",
-                "FS111", "FS121", "FS120", "FS122", "SEVEN", "UB7"],
+         links=["EL", "MR", "R128", "R130", "R131", "RR", "WEQK", "MEET", "R132", "R134", "N3BASE", "N3DENSE3", "COMPOSE", "GSTEP", "GFREE", "FS123", "FS124", "FS125",
+                "FS111", "FS121", "FS126", "FS127", "FS128", "FS120", "FS122", "SEVEN", "UB7"],
          reaches=["LB7", "UB7"],
          about="Given MR the plane's number is its measurable number (rows 128, 130); that is seven iff vanishing holes cannot save a colour "
                "(row 131). R's reduction splits it into door (A), no tight six-map, and door (B), the cone scale (FS-111). Door (A) is closed "
@@ -640,7 +683,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-09-28", job="X1", as_of="FS-114's and FS-111's closes",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-03", job="X2", as_of="FS-116's and FS-121's closes",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)

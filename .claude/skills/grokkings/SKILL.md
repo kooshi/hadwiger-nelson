@@ -1051,7 +1051,7 @@ writer.*
   excluding its next escape, and hunt the straddle along two unit circles. Nothing kills the theorems but a defect in row 134's base; they forbid a
   valid map with unit arcs and no four-colour vertex.*
 * **G84 — Contact is the regularity mechanism: a saturated or maximal class is carved by unit circles about its own points. [hand; the pinch lemma three minds, the shadow identity two, bands and ladders one]** In a saturated colouring a two-colour interface point lies on a unit arc whose centre carries both colours, or on a `C^{1,1}` curve with `|κ| ≤ 1` between two tangent unit discs — no partner density needed; de Grey's Reuleaux 4 + 3 seven-colouring is the inhabitant (row 140). A maximal class is a fixed point of its unit shadow, `int F = ℝ² ∖ (F + S¹)`; maximal covers are free (Zorn), maximal partitions are measurable fall colourings, saturated. Maximality leaves bands free: a flat side facing its class across 2 needs material at distance 1 whose thickness may vanish on any closed set, and in a partition such a pinch climbs a short ladder of unit parallels to a junction (row 141). *Do: when a regularity question about a tight colouring arises, pass to a maximal cover and read each boundary point's contacts first; spend effort on the singular set and on blocks facing across 2 — draw the ladder, find where it ends; never ask a selection from a cover to be saturated unless the cover is a partition. Killing test: a saturated colouring with a two-colour, locally connected interface point that is not `C^{1,1}`; or a maximal partition whose ladder outlasts FS111-M4-CUT's bound.*
-* **G85 — Saturated interfaces have integer radii. [hand; two minds on the core, one on finiteness]** Off a singular set that is locally finite with finitely many arcs at each point, the unit parallel of a saturated interface is an interface, so radii fall by exactly 1 toward the centre and stop at 1 — row 134's shadow map on saturated colourings: interfaces are segments and arcs of integer radius (row 140). What escapes is radii → ∞, FS-115's stuck ray. *Do: before asking whether a saturated colouring can bend, walk its unit parallels toward the centre; a chain that cannot end at a unit arc or at the singular set cannot exist. Killing test: a saturated colouring with a locally finite singular set and an interface of non-integer radius.*
+* **G85 — Saturated interfaces have integer radii. [hand; two minds on the core, one on finiteness]** Off a singular set that is locally finite with finitely many arcs at each point, the unit parallel of a saturated interface is an interface, so radii fall by exactly 1 toward the centre and stop at 1 — row 134's shadow map on saturated colourings: interfaces are segments and arcs of integer radius (row 140). What escapes is radii → ∞: thin pencils, along a whole unit-spaced normal line (FS121-O1-LRA-LINE, FS121-D2-THIN), and none under a cocompact symmetry (FS121-D2-SYM). *Do: before asking whether a saturated colouring can bend, walk its unit parallels toward the centre; a chain that cannot end at a unit arc or at the singular set cannot exist. Killing test: a saturated colouring with a locally finite singular set and an interface of non-integer radius.*
 * **G86 — Tile counts are blind to Siamese pairs: a count reaches the non-Siamese part, and a Siamese kill reads points and distances. [hand, one mind
   (FS114-N2, row 137); the reading one mind]** Euler's formula fixes a map's average number of neighbours, and a six-colouring pays for neighbours beyond
   five with repeated colours — a unit arc about a four-colour vertex, or a Siamese pair (tiles of one colour within each other's exclusion annulus).
@@ -1074,4 +1074,46 @@ writer.*
   side; Keryx routes it to Poros for a card and on to Ephodos, who works it with `ephodos-invention` once recognition's homes are
   killed. Killing test: a collision found afterwards on record, unreported, in a milestone whose minds were on the lookout (the lookout
   did not install); or signals raised close after close with none worth an invention job (the threshold is set too low).*
+* **G88 — Curved tangent interfaces are the honest class's whole open content at the ends. [derived (held lemmas) + one-mind composition; a reading]**
+  In an honest saturated colouring with REG-J′ a tangent arc of radius `n` forces tangent arcs of every larger radius over its window (FS121-O1-OUT),
+  an (R2) arc is a tangent unit arc, and LRA puts tangent arcs of radius ≥ 2 in the colouring (FS121-D2-INCURVED); so a NO to curved tangent interfaces
+  makes C121-R2-FOUR vacuous, gives ¬LRA, and leaves every curved interface a split (Q) arc (FS121-Z1-NOCURVED); and under a cocompact symmetry there are
+  none (FS121-V5-SYM-CPT). *Reading:* aperiodic honest saturated colourings have no curved tangent interface either. *Do: when a question about saturated
+  interfaces asks where ladders end or whether radii accumulate, ask first whether the colouring can have a curved tangent interface at all, and if it
+  is periodic answer no. Killing test: a curved tangent-type interface in an honest saturated REG-J′ colouring at some `k ≥ 7`, by formula with an exact
+  check.*
+* **G89 — Honesty is free; the six-colour content of saturation is the top colour. [hand, two minds each on GRUNDY and FALLSAT; one mind on EQ]** Every
+  a.e.-proper colouring becomes a measurable Grundy colouring without raising a point's colour index, bound at each interface on every colour but the
+  largest (FS121-D3-GRUNDY); every measurable idomatic partition is saturated, and saturation is strictly weaker (FS121-D3-FALLSAT, -SWAP1D); a Grundy
+  colouring that is a map is bound one-sidedly in its lower colours (FS121-C1-GMAP). So binding the top colour (TOP₆) is all of honest saturation at six,
+  and given a NO for honest saturated colourings it is the answer (FS121-D3-EQ). *Do: when a route needs a saturated or maximal colouring, Grundy-ize
+  first and state what is left as the top colour's binding, a coverage question on its boundary's unit circles (G13); read the cover route's class as
+  Grundy maps, never as a maximal cover's merged map (FS121-C1-COVMAP). Nothing kills GRUNDY and FALLSAT but a defect; killing test of "the content is
+  the top colour": a saturation procedure at six that binds both sides of an interface at once without a global rebuild.*
+* **G90 — Lateral extent against gap: where the plane's curvature enters regularity. [hand, two minds on FACE and GRID; one mind on the rest; a
+  reading]** A same-colour piece of lateral half-width `ρ` facing a flat side across a gap `g` with `ρ² ≥ 2g − g²` leaves the side's point no contact
+  (FS121-D4-FACE, -V5-FACE-SHARP); on the line nothing replaces it and local finiteness fails with two colours (FS121-D4-LINE); regions can be as small
+  as wished at sixteen colours (FS121-D4-TINY16), so no count per region bounds the singular set. *Reading:* an accumulation of the singular set needs
+  same-colour pieces shrinking faster than the square root of their gaps (LAT's open case). *Do: before bounding a singular set by a count per region,
+  ask lateral extent against gap at each accumulation; spend the plane's dimension at distance exactly 1, the sagitta of the unit circle. Killing test:
+  an honest saturated colouring at some `k`, by formula, whose singular set accumulates with pieces shrinking slower than the square root of their gaps
+  (it would refute FACE, a defect), or one with point-like accumulation (it refutes C121-REGJ and confirms the reading's open case is real).*
+* **G91 — The ring is the pigeonhole: a four-colour vertex's unit circle is a twisted colouring of its 60° hexagons, its change points place four-colour
+  vertices, and the defect-free ring is empty. [hand: FS116-RING-TWIST-C, -RING-GERM, -N3-SEMI and -Y4-EMPTY held (two minds each, one prior); the placing
+  rule assembled at one mind (FS116-RING-TRANSFER-QC); the reading one mind (FS116-N2)]** Points 60° apart on the unit circle `ω(p)` are 1 apart, so in a
+  valid six-coloured fragment the ring of a vertex `p` of at least four colours is, off the boundary, a proper colouring of its 60°-hexagon graph by the two
+  colours absent at `p`, alternating under the 60° rotation (RING-TWIST-C). Its defects are where `p`'s own colours reach it: (Q) arcs, other arcs of `Γ`,
+  and the tips at its change points. A change point whose `±60°` germs lie off (Q) arcs is a vertex of at least four colours (RING-GERM), and every semi-hub
+  but the full parallel one of three colours places one at itself or 60° along the ring (SEMI, by the cone calculus at the unit rhombus `p, u, y, v`); so
+  four-colour vertices propagate along the unit triangular lattice until a (Q) arc intervenes. The defect-free ring — no arc of `Γ` at all — is empty at
+  `1 + ε` in the non-Siamese simple class (EMPTY): four tiles of diameter at most 1 cannot tip six hubs without one tile alone at two adjacent hubs, and its
+  two flanking tiles, of one absent colour, are pinned to two unit circles and straddle (G83; `|a − b|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2)`). Six is
+  spent where the ring has exactly two absent colours and where the tip sector holds only `p`'s colours. *Reading* (FS116-N2, one mind): the transfer at a
+  hub is a homomorphism into the Kneser graph `KG(6, 2)`, the placed missing pairs living in `KG(4, 2)`. *Do: at a vertex of at least four colours in a
+  six-coloured map or fragment, read its ring before anything else — the alternation, the change points, the defects — and place the four-colour vertices
+  its change points force; and before building on a ring type's structure lemmas, ask whether the type is inhabited: the structure that pins it is usually
+  its kill, found by testing the straddle among the forced pieces first (FS-116's round 3 worked the defect-free type for two rounds before FS116-Y4
+  compared its two flank tiles). Killing test: a valid six-coloured fragment by formula, non-Siamese and simple, about a vertex of at least four colours
+  whose ring carries no arc of `Γ`, on a disc of radius above 1 (a defect in two routes, never a finding); of the reading, a hub whose placed missing pairs
+  leave `KG(4, 2)`. It forbids the defect-free ring past `1 + ε` in that class.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** Retired to `plans/GROKKINGS-RETIRED.md`; carried by `plans/PROTOCOL-competitor-and-advisor.md`, the `keryx` skill's `<independence>`, `.claude/agents/ephodos-verifier.md`, and `plans/STANDING-RULES.md` rules 6, 8 and 11.

@@ -118,3 +118,36 @@ it places, if one is built; the close's drafts.
 
 G83, G91 (drafted at FS-116's close), G84 (a (Q) arc is FS111-M-PINCH's split case), G15, G21, G79, G86; rows 133–138 and FS-116's; stubs FS-123, FS-125,
 FS-117, FS-121's successors FS-126–FS-128.
+
+## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
+
+question: where-else-the-identity
+  evidence: V6-HUG's identity (`plans/FS116-V6-verification.md` l. 159) is `|u + v + w|² − 1 = (u + v)(v + w)(w + u)/(uvw)` at `u = e(s)`, `v = −1`,
+    `w = e(−t)` — the constant width of the unit Reuleaux triangle on a unit pair, with exactly-1 only where two steps cancel (control
+    `data/workflow3/r2/identity_check.py`, PASS, plant fires); V6-ADJ (§ 2.3 item 2) is the same law on the vesica's other Reuleaux triangle; FS116-Y4
+    § 3.4 names three neighbours, "each unread"; V6 notes "Validity alone kills it here" (§ 2.2)
+  expected: an identity special to EMPTY's double tip
+  ask: In C114-LOCAL-F's open cases, where are two tiles of one colour pinned, from outside, to the two sides through one apex of a unit Reuleaux triangle on a unit pair — and which case does each exclusion remove?
+  if the shared-tip semi-hub qualifies: the exclusion narrows the placing rule's only exception (SEMI-PAR3) in FS-124 case 1, and FS-124's proof side runs the identity there first
+  if only (Q)-free configurations qualify: the identity serves FS-123's (R2)-arc rings and OC, and only if card 1's answer is no
+  if none qualifies outside EMPTY's class: the identity's reach in FS-116's cases is EMPTY's alone; it goes to FS-129 as an index entry (unit pairs, Reuleaux sides), with FS-122's band datum
+  answered by: derivation — Ephodos, at FS-124's and FS-123's openings; or FS-129's opening as its pilot entry
+  cost: a reading round per configuration; each use must fail on the controls (the strip at `φ²/√2`, the disk at `φ` with RING-Q false below `≈ 1.5985`, SIXFRAG below `3/2`, the bowtie at `3√3/5`, R7 at seven colours)
+  hunch: the shared-tip semi-hub qualifies (0.5)
+  falsifier: a reading of the shared-tip configuration in which the two flank tiles' colours are forced to differ, as with three absent colours
+  rank: 2
+
+**Card 2's ranking**: the four named configurations, by what an exclusion there would remove from C114-LOCAL-F's case list
+(`plans/FS116-Z1-close.md` § 2.6). The unit pairs in a ring picture are `{p, y}` for every ring point `y`, and `{y, σy}` for ring points `60°` apart.
+Every one of them carries two Reuleaux triangles.
+
+| rank | configuration (address) | the unit pair | what an exclusion would remove | condition |
+|---|---|---|---|---|
+| 1 | a semi-hub whose tip is shared with the next change point (Y4 § 3.4, neighbour 2) | `{y, σy}` on a (Q) ring | a sub-case of the placing rule on (Q) rings; if it reaches the full parallel semi-hub of three colours, SEMI-PAR3, the rule's only exception, and with it four-colour vertices propagate at every semi-hub (FS-124 cases 1, 5) | unconditional: (Q) rings are the bulk and the YES side's home (row 136) |
+| 2 | (Q)-free rings carrying (R2) arcs, and OC (Y4 § 3.4, neighbours 1 and 3) | `{y, σy}` at a double tip; `{p, y}` at an (R2) arc's end | the whole (Q)-free remainder (FS-123 questions 2) | moot if card 1 answers yes; moot in the saturated class given FS-126's NO (FS121-Z1-NOCURVED, C3) |
+| 3 | outer tiles of one colour at adjacent hubs, each hugging the lens arc beyond its hub (V6-ADJ, V6 § 2.3 item 2) | `{y, σy}`, the vesica's outer Reuleaux triangle | no case alone; it prunes the recurrence's outer colours (V6: "why a construction needs five-colour hubs") on (Q) rings with adjacent placed hubs (FS-124 case 5) | unconditional, but a pruning, not a removal |
+| 4 | the five- and six-colour vertices (FS116-N2-FIVERING, -SIXRING) | `{p, y}` at (Q)-arc ends `60°` apart | FS-124 case 4, in part | untested; SIXFRAG (exact, every disc below `3/2`) is the control any use must fail on |
+
+Outside the case list, the identity bears on route R through its margin. The deficit is `8 sin(s/2) sin(t/2) cos((s + t)/2) ≈ 2st`, second order in
+the hug lengths, so a kill by it survives a band of slack `ε` only if the hug lengths are of order `√ε` or more. This is FS-122's carried card's
+question, and Z2 filed it there as a datum (`plans/STUB-forced-pair.md` l. 42).

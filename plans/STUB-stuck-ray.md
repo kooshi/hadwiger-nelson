@@ -1,5 +1,11 @@
 # FS-115 — the stuck ray: can a one-sided chain of stuck vertices live in a six-map with unit arcs, are finite chains bounded, and does the one-vertex bowtie end live in one? (stub)
 
+> **Demoted 2026-10-03, rank 6 → 18 (R2, the re-rank after FS-116's and FS-121's closes; `plans/POROS-2026-10-03-close-reread.md` § Draft re-rank).**
+> Its rank rested on one live bearing, ¬LRA, a rung of FS-121's map step. FS-121's close re-posed that question as thin pencils in aperiodic
+> colourings and moved it inside FS-126 ("it lives inside FS-126 … the line form is not needed", this stub's FS-121 bearing line). What remains —
+> (b′), (b″) and (c) — bears only on GS-4's density form, which the NO does not need (FS114-CV-EXISTS, row 137). Not closed: its fragments (the
+> pencil, BOWTIE) stay local positives a YES could use.
+
 > **Re-aimed 2026-09-28 (R1), rank 4 → 6.** FS114-CV-EXISTS removed the ray step from the NO; this stub's live bearing is as a rung of FS-121, through ¬LRA, if FS111-C's one-mind reading that LRA is this ray holds.
 
 *Minted 2026-09-27 by the close planner FS112-C at FS-112's close, on Kooshi's ruling (`plans/FS112-close-inventory.md` item 59: *"point two

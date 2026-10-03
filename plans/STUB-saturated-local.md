@@ -61,6 +61,8 @@ cover route's NO-PAR, and FS-128 un-parks the cover route when NO-SAT lands. The
 Question 2. A family of saturated fragments on discs of every radius gives `χ(ℝ²) ≤ 6` with no MR, as any family of valid fragments does (FS116-O1-YESLIM,
 held). Each SAT-STRIP place alone is a piece.
 
+**At R2's re-rank (2026-10-03).** Given FS-126's NO (cusps allowed), no (R2) arc occurs in an honest saturated REG-J′ colouring (FS121-Z1-NOCURVED, one mind), so NO-SAT's rings would carry (Q) arcs only; FS116-Y4-EMPTY (held) removes the Γ-free type. The saturated case list is then the (Q) rings and the five- and six-colour vertices (`plans/POROS-2026-10-03-close-reread.md` § 2.3 C3).
+
 ## Owed second minds (before anything final rests on them)
 
 FS116-S1-QF (blind; question 0); FS116-S1-PAIR, -CLUSTER, -LENS, -EXIT (one mind each); FS116-V4's lemmas (CHORD, DICHOTOMY, MEET, TWIST, PARTNER, OUTER;
