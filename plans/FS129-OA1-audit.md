@@ -7,7 +7,19 @@
 
 ## Theorems this phase proved
 
-None yet (filled at the last stage).
+Five compositions, each `derived`, grade `hand`, one mind, prior art owed or partly (none searched this job); handoff as each entry says.
+
+- **FS129-OA1-NOLIN5** — over a field with a prime of residue field 𝔽₁₁, no finite unit-distance graph carries a non-trivial linear identity on
+  the simplex embedding valid for every proper five-colouring (G75's annihilator input). [hand, derived from row 66] — § 2.2
+- **FS129-OA1-FALC-RED** — a Falconer fan at `k` colours (doubled apex, width 2) with tip at irrational-angle distance `r > 1/2` gives
+  `χ_m(ℝ²) ≥ k + 1`; the unit rhombus at `k = 4` is Falconer's Theorem 2. [hand, from `[Falconer1981]` Lemmas 1–4 as FS103-M quotes them] — § 2.3
+- **FS129-OA1-FALC-11** — over a field with a prime `𝔭` of residue field 𝔽₁₁, every Falconer fan at five colours has its tip ≡ its apex
+  (mod `𝔭`). [hand, with the exact orbit fact over the kernel's two Γ₁₁ tables, control FS129-OA1-FALC-11-W] — § 2.3
+- **FS129-OA1-NOPERLAW** — in a stationary CP colouring of ℝ² proper a.s. on unit pairs, the pairs forced in law form a discrete subgroup,
+  `{0}` under rotation invariance. [hand] — § 2.3
+- **FS129-OA1-RINGWIND** — the hexagonal winding of a three-coloured, 60°-proper ring jumps only at two change points 60° apart, and its jumps
+  over a period sum to zero. [hand, control FS129-OA1-RINGWIND-ALL] — § 3.1
+- (a null with its reason, not an entry) Falconer's Theorem 1 gives at most `χ_m(ℝ²) ≥ 5`, since `M/D ≤ |V|/α ≤ 1/0.2293 < 5` — § 2.3
 
 ## Stage 1 — SAVED (readback, registered expectations)
 
@@ -428,3 +440,38 @@ the step.
   if Lemma 3 holds with a positive-measure set of translations; FS103-M § 1.2 records that the 1981 text does not supply it.
 - J4: FS111-W-FILL-FREE and FS111-M-DEADLOCK are the held reasons the fill move (the plane form of `fan_iff_coverage`'s recolouring) cannot
   bind a top colour.
+
+## Stage 4 — SAVED (the mechanical half, how far I got; the tally against the registration)
+
+### 4.1 The mechanical half (`data/fs129/index/open-steps.md` §§ 2–4)
+
+**How far I got.** § 2 (12 "stalls at" lines): read in full. § 3 (372 GAP lines): every lane-A line read by its first 230 characters, grouped
+by milestone (FS-38 to FS-103, `M`, `R88`, `ASTRA`, the eight unnumbered files), and FS-100's 92 lines filtered for the words a lane-A
+composition here could touch (six, forced, fan, linear, identity, window, Falconer, null-set); lane-R lines not read one by one — Poros's § 4
+places all thirty of § 1's entries under J1–J24, and the remaining lane-R GAP lines are steps about maps, arcs and fragments, which no lane-A
+result reads (stage 3's table gives the reason step by step). § 4 (418 lowercase "gap" lines): sampled at its head and counted (below).
+
+**What the reading found.**
+1. **No lane-A open step is closed by a lane-A result I could find**, and none of the five compositions above closes an arithmetic-era GAP: the
+   GAPs there (row 88's T-B1/T-B2, FS67's DB-1 and DD-2, FS84-SI's "⟸", M3's D1-43 and D2's GAP-1/GAP-2, FS91's (g3)) live at four colours or
+   in window formats, and FS129-OA1-NOLIN5 and -FALC-11 speak only of five colours over fields with a residue-𝔽₁₁ prime.
+2. **A link the demand list does not name: FS129-OA1-FALC-RED's missing almost-everywhere step is the null-set step.** Falconer's mechanism
+   lives on the points of `E`, which carry two colours; FS103-M-D (`plans/FS103-derivation.md` l. 116) reduces `χ_m⁰ = χ_m` to colouring `E`
+   from lists of size at least two, and M3's D2 GAP-1 (`plans/M3-derivation.md` l. 321) is the same step. So a Falconer fan at five colours
+   gives `χ(ℝ²) ≥ 6` given MR through either of two held-open steps: an almost-everywhere Lemma 3 (a positive-measure set of translations), or
+   the null-set step (FS-104 item (1), folded into FS-107). Recorded for pass 2 (mechanisms) and for FS-104's re-aim.
+3. **The homonym inflates § 4.** At least 158 of § 4's 418 lines use "gap" in the fan-gap sense (gapped, gap-free, gap colour, fan gap, shared
+   gap) — a property of a colouring, not an open step — including 99 of FS-38's and FS-67's 119. A note for the index's README (FS129-Z1).
+4. **Stale "not held" notes on `[Falconer1981]`**: `plans/STUB-cp-plane-six.md` ll. 55 and 87 ("**not held**", "Falconer not held"), the list's
+   J13 line, and `plans/FS100-X21D-derivation.md` l. 287 ("not held, second-hand"); `BIBLIOGRAPHY.md` l. 169 has it held and read in full since
+   2026-09-26. The stub lines are owed a correction (FS129-Z1); a derivation file keeps its dated words.
+
+### 4.2 The tally against my registration (§ 1.3; scored at FS129-Z1, not here)
+
+Steps reached: all 24 of the judged list. Closed: 0 (E1 expected 0). Shortened or reduced by a lane-A composition: 2 — J12 (format (i)
+closed on fields with a residue-𝔽₁₁ prime, FS129-OA1-NOLIN5) and J13 (route (b) reduced to a Falconer fan at five colours and confined by
+FS129-OA1-FALC-11; its literal reading emptied by -NOPERLAW) (E2 expected 1.5). An input of the named kind delivered without closing: 1 —
+J2 (FS129-OA1-RINGWIND). Nulls: 21 of 24 = 88 % (E3 expected about 85 %). Compositions outside the list's questions: FS129-OA1-FALC-RED
+as a general statement, and the null-set link of § 4.1 item 2 (E7 expected 1). E5 (Poros's A5): J12 and J13 are shortened from row 66 and
+the kernel's Γ₁₁ tables, which FS-104's stub does not cite — whether a shortening of FS-104's routes counts as "a regularity-era step" is
+Keryx's call at the score (FS-104 is lane R by number; its routes (b), (c) are listed as J12, J13). E9: J4 yielded no shortening (P = 0.3 on it).
