@@ -257,3 +257,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
     first as the plan says.
 64. **Lane R's scored registration** (`plans/FS129-OR1-audit.md` § Registered expectations, scored; for FS129-Z1): closes and compositions priced
     low (1½ closes and 8 compositions against expected 0 and 3); J15 predicted to stand at 0.40, did not; J10 predicted to bear at 0.35, did.
+65. **Launched 2026-10-03 23:46 UTC**: FS129-MR1, pass 2, lane R (`general-purpose`, Opus; `data/fs129/briefs/FS129-MR1-pass2.md`, gated PASS, at
+    `a951d15f`). Running: FS129-MA1 and FS129-MR1, two of the cap of three.
