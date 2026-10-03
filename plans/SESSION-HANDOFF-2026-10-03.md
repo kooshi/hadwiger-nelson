@@ -17,11 +17,12 @@
 4. Agent ids for running jobs are in the session scratch, `agents.txt` (never in a repository file). If the scratch is gone, the
    inventories name each job and its brief; a halted job resumes by message to its agent, or a fresh agent on the same brief.
 
-## 2. Running now (one)
+## 2. Running now (two)
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
 | R2 | Poros: boundary re-read of both closes and the draft re-rank (with the bends signal, Kooshi's V6-HUG question, FS-129's fixed place) | `data/workflow3/briefs/R2-poros-close-reread.md` | `plans/POROS-2026-10-03-close-reread.md` | no |
+| CL3 | the Clerk: count every "would have searched here" log line since 2026-09-24, sorted replaced / left open / none / unclear, for Kooshi's decision on the ban (FS-116 item O7) | `data/workflow3/briefs/CL3-ban-audit.md` | `plans/WORKFLOW3-CL3-ban-audit.md` | no |
 
 ## 3. The queue, in order (launch as slots free; at most three running)
 
@@ -41,7 +42,7 @@ My estimate given to Kooshi (FS-116 item 74's report): about nine to eleven agen
 
 ## 4. Decisions open for Kooshi
 
-- **The search ban expired 2026-10-01.** Standing rule 5 says delete it unless he extends it. The interim report's default: delete it at the
+- **The search ban expired 2026-10-01; Kooshi asked first for a count of where it hindered (FS-116 item O7, job CL3) and is considering a wallclock budget per day and per week in its place. Do not delete it at the filing.** Earlier note: Standing rule 5 says delete it unless he extends it. The interim report's default: delete it at the
   next filing; FS-116's own frozen list § 9 still forbids enumerating maps, colourings, tile graphs or ring types (FS-116 item 86).
 - **The cover route parked** (FS-121 items 51, 63) and **the trigger ruling** (item 35): his to overturn; the parking's stated reason is partly one mind.
 - **The workflow-edit review**, after FS-116's close.
