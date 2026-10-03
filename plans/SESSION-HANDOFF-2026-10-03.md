@@ -61,7 +61,7 @@ My estimate given to Kooshi (FS-116 item 74's report): about nine to eleven agen
   never proof text; an undefined term is ruled an ambiguity, reported under both readings.
 - **Before freezing statements, include every term and setting they use** (the slip of FS-116 items 27 and 90).
 - **Brief tooling**: build blind briefs from the previous verifier brief by script, with quotations filled by a helper that quotes a claim
-  bullet whole (rebuild it in scratch if gone: it reads "{{Q:file|heading|id}}" placeholders). Known gate false positives: a "…" inside a quoted
+  bullet whole (saved as `data/workflow3/brief_quote.py`: `python3 data/workflow3/brief_quote.py <template> <brief>` fills "{{Q:file|heading|id}}" placeholders). Known gate false positives: a "…" inside a quoted
   statement (U5), and output paths not yet written (U3). Every backticked path in a fence section is fenced: list open paths elsewhere.
 - **Commit subjects neutral**; times from `date` inside the writing command.
 
