@@ -213,3 +213,47 @@ One line per item with its source; no narration. Each line is ticked done or dec
     unchanged. Confidence: medium.
 53. **Launched 2026-10-03 23:42 UTC**: FS129-MA1, pass 2, lane A (`general-purpose`, Opus; `data/fs129/briefs/FS129-MA1-pass2.md`, gated PASS, at
     `16142efb`). Running: FS129-OR1 and FS129-MA1, two of the cap of three; the third slot is kept for FS129-MR1.
+54. **FS129-OR1 reported DONE** (`data/fs129/reports/FS129-OR1.md`; commits `a62e3252`, `6c2b4de7`, `60a7fc11`, `99ad3261`, `4b1870fd`, all present;
+    ≈448k by the harness, not continued). **J1 closed, answer yes** (FS-123 question 1): bending a fragment keeps FS116-Y4-EMPTY's class and leaves
+    only (Q) arcs on the ring, provided the bends run on a whole-tile restriction of radius ≤ √3 (a round restriction, as the side-1 recipe has
+    it, can cut a tile into a Siamese pair). So **FS129-OR1-QFREE** (derived, one mind): "no non-Siamese simple valid six-coloured fragment on a
+    closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc". J19 half closed (LOCALDENSE at r = 3,
+    possibly vacuous; DISCF-NS); J2, J3, J7, J10, J15, J17, J23 shortened or reduced; J18 moot; 14 nulls with near misses. Eight entries, all
+    derived, one mind, prior art owed: FS129-OR1-WHOLE, -BENDFRAG, -QFREE-CLASS, -QFREE, -BEND3, -TOP5, -LOCALDENSE, -DISCF-NS. **Keryx's
+    receipt**: derive gate re-run, exit 0, PASS (2 controls fire, 19 warnings); QFREE's statement read against FS116-Y4-EMPTY's
+    (`plans/FS116-derivation.md` line 1713) — identical but "no arc of Γ" → "no (Q) arc", as its `uses only:` says; its `model:` names an
+    inhabitant (FS114-Y2-BOWTIE); WHOLE's identity `|x − e|² = (|x|² + |x − 2e|²)/2 − 1` for `|e| = 1` checked exactly by sympy.
+55. **Where a second reader should attack J1** (OR1's HELD, verbatim): "J1's composition rests on FS112-N2-BENDS being read on a fragment (it
+    depends only on the tiles present) and on simplicity surviving horn lenses at cusp ends." For FS129-SR1 (pass 3, lane R) as a checking
+    reading, and for the Lean backlog. Kooshi decides whether a blind second mind runs (item 56).
+56. **Held for Kooshi — J1's close is one mind and moves the ranking's top**: it answers the top-ranked stub's (FS-123's) first question, empties
+    the construction target "(R2) ring, (Q)-free, past 1 + ε" in the non-Siamese simple class, and makes FS-123's Siamese question its main
+    one. Default (Workflow 3.1): no blind verifier; pass 3 attacks item 55's two steps; the re-rank files it as "derived, one mind"; the Lean
+    backlog formalizes it early. Alternative: a blind `ephodos-verifier` on QFREE-CLASS and BENDFRAG, on Kooshi's word only.
+57. **Poros's A4 may be met** (item 23: P = 0.2 that the audit changes item 31's open list): `CLAUDE.md` item 31 lists "(Q)-free rings with (R2)
+    arcs" as open, and QFREE closes that case in the non-Siamese simple class at one mind. FS129-Z1 scores.
+58. **The invention signal J15 does not stand** (OR1, § Stage 4): side 1's reason is a Condition-5 theorem (row 134), its conclusion stated
+    without that restriction; with unit arcs routes R and M meet at the pinned corner (FS112-STOP, FS112-Y3-R3, FS112-N3-COR3). **Statement
+    defect**: `plans/STUB-forced-pair.md` line 37 ("so this route and FS-121's meet nowhere below the answer") holds under Condition 5 only. For
+    FS129-Z1 (bearing lines) and FS129-P1 (`plans/FRONTIER-STUBS.md` rank 5 says the same). Keryx's own reading on 2026-10-03 (to Kooshi,
+    one mind, not sent to any reader) was the same.
+59. **Corrections owed, from OR1** (for FS129-Z1 unless named): the side-1 remarks (`plans/FS114-NB5-verification.md` § 1b.3,
+    `plans/FS114-NB6-verification.md` § 1b.0, `plans/FS114-N7-proof.md` lines 88–89) say "restrict first" to a round neighbourhood — true only
+    for the whole-tile restriction; `plans/FS116-local-exclusion.md` § 3.6 (C114-LOCAL-F and DISC-F one question given LOCAL-DENSE) — true in the
+    non-Siamese simple class only; `data/fs129/demand-judged.md` J10 "no open stub carries it" — half true: MUA-FIN is FS-120's, REG-J′₅ FS-127's,
+    and only MUA-REG-P and the five-colour top-colour clause lack a carrier (for FS129-P1, with item 26).
+60. **Stubs to re-aim, from OR1** (for FS129-Z1 and FS129-P1): FS-123 (question 1 answered yes, 2 moot, 3 — Siamese — now its main question);
+    FS-125 (case 2 and case 1's G3 closed in the non-Siamese simple class); FS-115 bears on DISC-F in the Siamese class, against the demand
+    list's § 5 "no bearing"; FS-124 may assume below √3 about p that p's ring carries only (Q) arcs plus finitely many points (BENDFRAG), and no
+    further.
+61. **Generalization** (OR1): the bends need only that one side colour of each ring arc is absent at the centre; BEND3 is that form at
+    three-colour vertices; WHOLE holds for any number of colours. For FS129-MR1 and FS129-SR1.
+62. **Leads for pass 2, lane R** (OR1's questions for another lane): FS110-A3-HOLE and FS110-N2-SWAP fail exactly where the unit circle carries
+    an arc of Γ, which BEND3 and BENDFRAG remove below √3 — reading radius unchecked; FS-112's stuck ray (N2-RAY) and FS-121's tangent pencils
+    (O1-OUT) one object; FS111-M4-CUT and FS121-D4-FACE one sagitta (the last two pairs also pass 3's). To FS129-MR1's brief. RINGWIND as
+    FS110-Y3-GP's and FS110-N2-RING's mechanism relayed to FS129-MA1 by message, 2026-10-03.
+63. **The mechanical half read only partly** (OR1): § 2 in full; § 3 for FS106, FS106-TS, FS106-TQ, FS107, FS110 (about 66 of 372 lines); § 4
+    counted by file. Lane A read its own part (item 38). The unread rest goes to the pass-3 briefs, scoped to `data/fs129/index/lean-order.md`
+    first as the plan says.
+64. **Lane R's scored registration** (`plans/FS129-OR1-audit.md` § Registered expectations, scored; for FS129-Z1): closes and compositions priced
+    low (1½ closes and 8 compositions against expected 0 and 3); J15 predicted to stand at 0.40, did not; J10 predicted to bear at 0.35, did.
