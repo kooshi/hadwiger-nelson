@@ -11,6 +11,8 @@ Brief: `data/fs116/briefs/FS116-V5-verify.md`, with `plans/STANDING-RULES.md`. S
 - Stage 2: V5-RING, V5-GERM, V5-OUT, V5-TIPSET — hand, one mind each, prior art partly in FS-114's held statements — §§ 2.1; V5-LENS (each lens beside a
   single tip forces its double-tip hub's tip tight at `p`, so at radius √3 the star is `(90°, 150°, 270°, −30°)`) — hand, one mind, novelty owed — § 2.5;
   FS116-Y3-SIX, -TIPS, -NBTIP, -TIGHTLENS, -STARFORCE: TRUE, hand, § 2.8 (SIX and TIGHTLENS thin truths; NBTIP's first two clauses a checking reading).
+- Stage 3: V5-QCOL, V5-U1 (known: FS112-U1), V5-OUT2, V5-DICHO (the crossed-or-parallel dichotomy, every degree) — hand, one mind each — § 3.1;
+  FS116-N3-SEMI and -PAIR: TRUE, hand (PAIR a thin truth); FS116-N3-CROSS: GAP at its last clause, every other clause TRUE — § 3.6.
 
 ## "Would have searched here" log
 
@@ -18,6 +20,7 @@ Brief: `data/fs116/briefs/FS116-V5-verify.md`, with `plans/STANDING-RULES.md`. S
 exact computation at named points.)*
 
 - Stage 2: none — no move of this stage would have been a search; the controls are exact identities at named values.
+- Stage 3: none.
 
 ## Fence log
 
@@ -482,3 +485,246 @@ control: out-expansion
   run: python3 ../tools/fs116_v5_geom.py out 2
   expect: out exact
   fault: python3 ../tools/fs116_v5_geom.py out 3
+
+## Stage 3 — SAVED
+
+*The second group: SEMI, PAIR, CROSS. Rings may now carry (Q) arcs. Setting: a non-Siamese simple valid six-coloured fragment on a closed
+disc of radius above 1 about a vertex `p` of at least four colours, `y = r(0)` a change point (reading L), `X` the ring colour just
+counter-clockwise of `y`, `X̄` just clockwise, `R`, `R′` their tiles at `y`, `u = r(60°)`, `v = r(−60°)`, germs as § 13. Readings (R-QARC),
+(R-CHG) of § 1.1 hold throughout.*
+
+### 3.1 Lemmas for rings with (Q) arcs
+
+derivation: V5-QCOL
+  statement: in this setting p has exactly four colours and X, X̄ are the two absent; a germ that lies on no (Q) arc "carries" an absent colour — the ring colour there if the germ is off Γ, else an absent side colour of the arc of Γ on ω(p) it lies on — namely X at u⁻ and v⁻ and X̄ at u⁺ and v⁺, and the hub's partner point (u or v) lies in the closure of a tile of that colour; a germ on a (Q) arc lies on an arc of ω(p) whose inner tile is p's tile of the inner colour and whose outer tile is not a tile of p; the two germs of one pair never lie on one (Q) arc, and a (Q) arc holding u⁺ (v⁻) and not u⁻ (v⁺) ends at u (v)
+  uses only: V5-NE1; non-Siamese; reading L at y; a circular arc of Γ containing a sub-arc of ω(p) lies on ω(p)
+  not claimed: that a germ off (Q) lies off Γ; anything at k ≥ 7
+  argument: § V5-QCOL's argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held — no fragment of the class is known
+  prior art: partly: RING-GERM's first clause (data/fs116/claims.md § 10) and FS116-N1-GERM-R's exclusions (§ 11)
+  handoff: none — a relay-result for SEMI, PAIR, CROSS
+
+#### V5-QCOL's argument
+
+`X ≠ X̄` (reading L), both absent at `p` (V5-NE1), so at most four colours are carried, and at least four by hypothesis. A germ, say
+`v⁻ = r(−60° − ε)`, is at distance 1 from `r(−ε)`, an interior point of colour `X̄`; if `v⁻` is off `Γ` its colour is absent and not `X̄`, so
+`X`; if it lies on an arc of `Γ` (on `ω(p)`), `ω(r(−ε))` crosses that arc transversally, so neither side tile has colour `X̄`, and if the arc is not
+(Q) one side colour is absent at `p` — so `X`. The same pairing (`u⁻` with `r(−ε)`, `u⁺` and `v⁺` with `r(ε)`) gives the others, and the side tile
+borders the germ up to `v`, so `v` is in its closure. The inner tile of an arc of `ω(p)` has points inside `B(p, 1)`, within distance below 1 of
+`p`'s tile of its colour, so is that tile (non-Siamese); the outer tile lies outside `B̄(p, 1)` and is not a tile of `p` (V5-NE1). One (Q) arc
+holding `v⁻` and `u⁺` would contain `y` (excluded by reading L) or span more than 120°, so its inner tile would have closure points more than 1
+apart (V5-NE1); the same for `u⁻`, `v⁺`. A (Q) arc holding `u⁺` but not `u⁻` starts at `u`.
+
+derivation: V5-U1
+  statement: let A be an arc of Γ on ω(z), of angular extent [θ₁, θ₂] about z, θ₂ − θ₁ = ℓ > 0, with inner side colour c and outer side colour c′; a tile of colour c with z in its closure has its cone at z in the closed cone [θ₂ − 90°, θ₁ + 90°] facing A; one of colour c′ has it in the closed cone [θ₂ + 90°, θ₁ + 270°] facing away; the two open side cones (θ₁ − 90°, θ₂ − 90°) and (θ₁ + 90°, θ₂ + 90°) hold neither colour; so if z carries both c and c′ (A is both-kind), the side cones hold two further colours and, in a non-Siamese simple fragment, z has at least four colours
+  uses only: validity; first order of |z + (1 ∓ η) e(θ) − z − s e(δ)| = 1 ∓ η − s cos(δ − θ) + O(s² + η²)
+  not claimed: anything when ℓ = 0; anything about tiles at z of other colours
+  argument: § V5-U1's argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the disk's corners (data/fs116/claims.md § 9's controls: four-colour vertices carrying (Q)-type unit arcs), as stated by FS114-N7-QOPP's model line
+  prior art: known — FS112-U1 (plans/FS112-derivation.md, line 42), re-derived
+  handoff: none — a relay-result
+
+#### V5-U1's argument
+
+Points `z + (1 − η)e(θ)`, `θ ∈ (θ₁, θ₂)`, `η` small, are in the inner tile; a point `z + s e(δ)` of a `c`-tile at `z` is at distance
+`1 − η − s cos(δ − θ) + O(·)` from it, which equals 1 for some small `s, η` exactly when `cos(δ − θ) < 0` for some `θ` in the arc; so the `c`-cone
+lies where `cos(δ − θ) ≥ 0` on the whole arc. For `c′` the outer points give `1 + η − s cos(δ − θ)`, so its cone lies where `cos(δ − θ) ≤ 0`. In
+a side cone `cos(δ − θ)` changes sign along the arc. The two side cones are separated by the facing and away cones, each of which holds a
+sector of `c` (resp. `c′`); a sector meeting both side cones would contain one of those sectors; so (one sector per tile, one tile per colour)
+two more colours.
+
+derivation: V5-OUT2
+  statement: in V5-QCOL's setting (or V5-RING's), if an outer tile of colour c has a ring point r(θ) in its closure, then p's tile of colour c has its cone at p in [θ + 90°, θ + 270°]
+  uses only: an outer tile is open and disjoint from B(p, 1) (non-Siamese), hence lies in |w| > 1; |w − s e(δ)| = 1 has a small root s > 0 when w·e(δ) > 0 and |w| > 1 is close to 1
+  not claimed: anything about the boundary directions of that cone
+  argument: § V5-OUT2's argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held — no fragment of the class is known
+  prior art: partly: V5-OUT (this record), which assumed a direction of the outer tile with positive cosine; this form needs none
+  handoff: none — a relay-result for CROSS
+
+#### V5-OUT2's argument
+
+An outer tile `O` of colour `c ∈ P` has no point in `B(p, 1)` (such a point would be within distance below 1 of `p`'s `c`-tile); `O` is open, so
+`O ⊂ {|w| > 1}`. If `p`'s `c`-tile holds `s e(δ)` for small `s` with `cos(δ − θ) > 0`, take `w ∈ O` near `r(θ)`: `|w − s e(δ)|² − 1 =
+s² − 2s (w·e(δ)) + |w|² − 1` vanishes at `s = w·e(δ) − √((w·e(δ))² − |w|² + 1) ≈ (|w|² − 1)/(2 cos(δ − θ))`, small and positive — two
+interior points of colour `c` at distance exactly 1.
+
+derivation: V5-DICHO
+  statement: in V5-QCOL's setting, if both germs of one pair at y lie on (Q) arcs A₁, A₂ with colour pairs Π₁, Π₂, then Π₁ = Π₂ (and then the inner colour of each is the outer colour of the other) or Π₁ ∩ Π₂ = ∅
+  uses only: V5-QCOL, V5-U1 at p, V5-NE1; simple (one sector per tile at p) and the four tiles of p
+  not claimed: that either case occurs
+  argument: § V5-DICHO's argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none held — no fragment of the class is known
+  prior art: partly: FS114-N7-QOPP (data/fs116/claims.md § 13's note: "(Q) arc … joins opposite tiles"), stated for degree 4, not read as an argument
+  handoff: none — § 13's note asks that the dichotomy be checked, not given; here it is derived for every degree
+
+#### V5-DICHO's argument
+
+Tip pair (the outer pair is the mirror image): `A₁ = [60°, 60° + ℓ₁] ∋ u⁺`, `A₂ = [−60° − ℓ₂, −60°] ∋ v⁻` (V5-QCOL: each ends at its hub's
+partner), `ℓ_i ≤ 60°` (V5-NE1 on the inner tile). V5-U1 at `p`: inner colour of `A₁` in `[−30° + ℓ₁, 150°]`, outer in `[150° + ℓ₁, 330°]`, side
+cones `(−30°, −30° + ℓ₁)`, `(150°, 150° + ℓ₁)`; inner of `A₂` in `[210°, 390° − ℓ₂]`, outer in `[30°, 210° − ℓ₂]`, side cones `(30° − ℓ₂, 30°)`,
+`(210° − ℓ₂, 210°)`. *Equal inner colours:* `p`'s tile of that colour borders both germs, points more than 1 apart: excluded. *Exactly one shared
+colour, the outer:* its tile lies in `[150° + ℓ₁, 210° − ℓ₂]`; the side cones `(150°, 150° + ℓ₁)` and `(210° − ℓ₂, 210°)` hold neither shared
+colour nor their own arc's inner colour, and the other arc's inner colour does not reach them, so both lie in the fourth tile, on both sides of
+the shared tile — two sectors. *Exactly one shared, inner of one = outer of the other:* the same count puts the fourth tile in two side cones
+on either side of the shared colour's tile. The outer pair is identical with `A₁ = [60° − ℓ₁, 60°]`, `A₂ = [−60°, −60° + ℓ₂]` (cases written in my
+working; each ends in two sectors or in the diameter). So the pairs are equal, with opposite orientation, or disjoint.
+
+### 3.2 SEMI — derivation
+
+At `y`, `X` and `X̄` are carried (`R`, `R′`). V5-GERM's first-order computation needs no Γ-freeness: for `z = y + t e(β)` off `Γ`, the upper
+point of `ω(z) ∩ ω(p)` is on `u⁺` for `β ∈ (30°, 210°)`, on `u⁻` for `(210°, 390°)`; the lower on `v⁺` for `(−30°, 150°)`, on `v⁻` for
+`(150°, 330°)`; and `z` avoids each colour carried there (V5-QCOL: a germ off (Q) its carried colour; a (Q) germ its two side colours, in `P`).
+Inside `B(p, 1)` a colour of `P` is `p`'s tile; outside, an outer tile, in `|w| > 1`.
+
+**Kind O** (`u⁻`, `v⁺` off (Q), carrying `X`, `X̄`). `(−30°, 30°)` sees both, so lies in outer tiles: `y` has at least three colours. Let it have
+exactly three, `X, X̄, o`, tiles `R, R′, O`; then no tip (a tip's colour is never an outer colour at `y`), `O`'s sector lies in `[−90°, 90°]`, and
+the inner half is `R ∪ R′`: `(90°, 150°)` sees `v⁺`, so is `R`; `(210°, 270°)` sees `u⁻`, so is `R′`.
+- `v⁻` off (Q) (it carries `X`): `(150°, 210°)` is `R′`; the edge `R | R′` leaves `y` along `150°`, the tangent of `ω(v)`. `v` carries `X` and `X̄`
+  (V5-QCOL), so no point of `R` or `R′` is at distance 1 from `v`; an edge (segment or circular arc) tangent to `ω(v)` at `y` and distinct from it
+  leaves `ω(v)` strictly inside one of the two adjacent sectors near `y`; so the edge is an arc of `ω(v)`, both side colours carried at `v`, and
+  `v` has at least four colours (V5-U1). Alternative (b).
+- `u⁺` off (Q): the mirror, the edge along `210°` an arc of `ω(u)`. (b).
+- both on (Q) (full), colour pairs `Π_u` (at `u⁺`), `Π_v` (at `v⁻`). `(30°, 90°)` sees `u⁺` and `v⁺`: `R`, or `O` if `o ∉ Π_u`; `(270°, 330°)`:
+  `R′`, or `O` if `o ∉ Π_v`. If `o ∈ Π_u`, the edge `O | R` lies along `30°`, the tangent of `ω(u)`, and `u` carries `X` (`u⁻`) and `o` (the side
+  tiles of the (Q) arc reach `u`): an arc of `ω(u)`, (b). If `o ∈ Π_v`: the edge `R′ | O` along `330°`, an arc of `ω(v)`, (b). Otherwise
+  `o ∉ Π_u ∪ Π_v`, so by V5-DICHO `Π_u = Π_v = {c₁, c₂}`, `A_u` inner `c₁`, `A_v` inner `c₂`: `y` is full parallel. V5-U1 puts `T_{c₁}` in
+  `[30°, 150°]`, `T_{c₂}` in `[210°, 330°]`; the side cones `(150°, 150° + ℓ_u)`, `(210° − ℓ_v, 210°)` and `(−30°, −30° + ℓ_u)`, `(30° − ℓ_v, 30°)`
+  hold neither, so the two other tiles fill the two gaps, one each, the one round `180°` holding `180°` in its interior. V5-OUT2 (`O` outer at
+  `y`): `T_o ⊂ [90°, 270°]`, so `T_o` is that tile. Alternative (c), kind O.
+
+**Kind T** (`v⁻`, `u⁺` off (Q)). `(150°, 210°)` lies in tips; with exactly three colours `X, X̄, τ`, tiles `R, R′, T`, no outer tile, the outer
+half is `R ∪ R′`: `(30°, 90°)` sees `u⁺` (`R`), `(270°, 330°)` sees `v⁻` (`R′`). `v⁺` off (Q): `(−30°, 30°)` is `R`, the edge `R′ | R` along
+`330°` an arc of `ω(v)`, (b). `u⁻` off (Q): mirror, along `30°`, `ω(u)`, (b). Both on (Q), pairs `Π_{u⁻}`, `Π_{v⁺}`: `(90°, 150°)` is `R` or `T`
+(the latter only if `τ ∉ Π_{v⁺}`), `(210°, 270°)` is `R′` or `T` (only if `τ ∉ Π_{u⁻}`); `τ ∈ Π_{v⁺}` gives the edge `R | T` along `150°`, an arc
+of `ω(v)` (`v` carries `X` and `τ`), (b); `τ ∈ Π_{u⁻}` the edge `T | R′` along `210°`, `ω(u)`, (b); otherwise V5-DICHO makes `y` full parallel,
+the gap tiles hold `0°` and `180°`, and `T ⊂ B(y, 1)` has its cone at `p` in `[−90°, 90°]`: `τ` is the colour of the tile holding `0° = ψ` in its
+interior. (c), kind T.
+
+So every semi-hub is (a), (b) or (c). **TRUE.**
+
+### 3.3 PAIR — derivation
+
+By V5-QCOL the two germs lie on distinct (Q) arcs of `ω(p)`, whose inner tiles are `p`'s tiles of their inner colours. Equal inner colours would
+put one tile of `p` along both germs, which are more than 1 apart (angular separation near 120° for the outer pair, above 120° for the tip pair),
+against V5-NE1. With one colour pair, the inner colours then differ and each is the other's outer. **TRUE.** "Simple" and the four colours'
+count beyond V5-QCOL are not used: a thin truth (simple idle).
+
+### 3.4 CROSS — derivation, and where it stops
+
+CROSS's names: `A_u ∋ u⁺` inner `a`, outer `a′`; `A_v ∋ v⁻` inner `b`, outer `b′`; `{a, a′} ∩ {b, b′} = ∅`, so `P = {a, a′, b, b′}`; `u⁻`, `v⁺`
+off (Q).
+1. *Cones at `p`* (V5-U1, V5-QCOL): `T_a ⊂ [−30° + ℓ_u, 150°]`, `T_{a′} ⊂ [150° + ℓ_u, 330°]`, `T_b ⊂ [210°, 390° − ℓ_v]`, `T_{b′} ⊂ [30°, 210° − ℓ_v]`;
+   each side cone holds neither colour of its arc and only one of the other two fits it: `(−30°, −30° + ℓ_u) ⊂ T_b`, `(150°, 150° + ℓ_u) ⊂ T_{b′}`,
+   `(30° − ℓ_v, 30°) ⊂ T_a`, `(210° − ℓ_v, 210°) ⊂ T_{a′}` (so also `ℓ_u + ℓ_v ≤ 60°`).
+2. *No tile of `p` has `y` in its closure* — stronger than CROSS's first clause, which therefore holds vacuously. A tip lies in `B(y, 1)`, so its
+   cone at `p` lies in `[−90°, 90°]`: not `T_{b′}`, not `T_{a′}` (their side cones at `160°`-ish, `200°`-ish); `T_a`'s closure holds points of `A_u`
+   beyond `u`, more than 1 from `y`; likewise `T_b`.
+3. *Outer colours in `{a′, b′}`.* V5-OUT2 at `y = r(0°)`: an outer `c`-tile at `y` needs `T_c ⊂ [90°, 270°]`; `T_a ∋ (30° − ℓ_v, 30°)` and
+   `T_b ∋ (330°, 330° + ℓ_u)` fail.
+4. *Four colours.* With no tip, `y`'s colours are `X, X̄` and its outer colours: four means exactly `a′, b′`; the missing pair is `{a, b}`. The
+   hypothesis "every tile at `y` a cone of positive angle" is not used.
+5. *`p` on `y`'s ring.* `ω(y)` passes through `p` with tangent `90°/270°`, curving toward `y`. Its points are at distance 1 from `y`, which
+   carries `X, X̄, a′, b′`, so they lie in no tile of those colours. Just clockwise of `p` on `ω(y)` (directions `→ 90°⁻`) the only tiles of `p`
+   allowed are `T_a` and `T_{b′}` (by step 1), and `T_{b′}` is excluded; just counter-clockwise (`→ 270°⁺`), `T_b` or `T_{a′}`, and `T_{a′}` is
+   excluded. So unless an edge of `p` runs along `ω(y)` at `p`, `y`'s ring is `a` just clockwise and `b` just counter-clockwise of `p`, both off
+   `Γ`: `p` is a change point of `y`'s ring.
+6. *`p`'s germs on `y`'s ring.* `p = y + e(180°)`, so `y`'s `u` and `v` for `p` are `y + e(240°) = v` and `y + e(120°) = u`; the tip pair
+   `{u_y⁺, v_y⁻}` is the two germs outside `B(p, 1)` (at `v` along `330°`, at `u` along `30°`), the outer pair `{u_y⁻, v_y⁺}` the two inside.
+   - *Tip pair on (Q).* At `v`, outside `B(p, 1)`, every tile has colour `X`, `X̄` or a colour of `P` on an outer tile at `v`, and V5-OUT2 at
+     `v = r(−60°)` excludes `a` (`T_a ∋ (30° − ℓ_v, 30°) ⊄ [30°, 210°]`) and `b` (`T_b ∋ (330°, 330° + ℓ_u)`): every tile there has a colour of
+     `y`. So `ω(y)` leaving `v` along `330°` meets no tile's interior: it is an edge of `Γ`, an arc of `ω(y)` whose two side colours are carried at
+     `y`, which has four colours — a (Q) arc of `y`'s ring holds `u_y⁺`. The mirror at `u` puts `v_y⁻` on one too.
+   - *Outer pair: the GAP.* `p` is a semi-hub of kind O of `y`'s ring iff `u_y⁻` and `v_y⁺` lie on no (Q) arc. At `v`, inside `B(p, 1)`, the tiles
+     have colours `a, b, X, X̄` (`T_{a′}`, `T_{b′}` do not reach `v`: their side cones lie outside the half-plane `[−150°, 30°]` facing `v`), so
+     `u_y⁻` lies on a (Q) arc only if `ω(y)` there is an edge with `X̄` inside `B(y, 1)` and `X` outside — and the first-order exclusions at `v`
+     allow exactly that split (`X̄` only in directions `(−30°, 150°)` at `v`, `X` only in `(150°, 330°)`). What I can show: such an `X`-tile at `v`
+     forces the edge `R | R′` at `y` to `150°` (else points of `R` near `y` and of that tile near `v` are at distance exactly 1), and the mirror at
+     `u` forces it to `210°`, so **at most one** of `u_y⁻`, `v_y⁺` lies on a (Q) arc. I do not exclude one. With one, `p` is a closed change point of
+     `y`'s ring, not a semi-hub.
+
+**Verdict: GAP at "p is a semi-hub of kind O of the ring of y"** — every other clause derived (the first two vacuously or strictly stronger,
+the positive-cone and radius-2 hypotheses unused in what I derived); the missing step is to exclude an arc of `ω(y)` through `v` (or `u`)
+inside `B(p, 1)` with `X̄` on `y`'s side and `X` beyond.
+
+### 3.5 Attacks (second group)
+
+#### Attack on FS116-N3-SEMI
+
+- *Degenerate cases.* A semi-hub with two colours: impossible (kind O has an outer colour, kind T a tip colour). An edge at `y` tangent to
+  `ω(u)` or `ω(v)` but not on it: excluded wherever both its side colours are carried at the centre (the separation step); that is exactly when
+  (b) fires. A (Q) arc longer than 60°: excluded by V5-NE1 on its inner tile.
+- *Each hypothesis removed.* **Non-Siamese:** used throughout (one tile per colour at `y`; inner tiles are `p`'s). **Simple:** used in V5-DICHO
+  (one sector per tile at `p`) and for the sector order at `y`. **Six colours:** at `k ≥ 7` a third absent colour can sit in the inner or outer
+  half at `y` and alternative (b)'s edge is not forced.
+- *Where the attack succeeds.* The nearest false statement: "a semi-hub of exactly three colours is full parallel" — (b) also occurs in the
+  semi-hub's own derivation (every non-full case lands in (b)), so (c) cannot be dropped and (b) cannot either. And the colour in (c) is not the
+  tile at `y` in kind O but `p`'s tile *opposite* `y`: a reader who took "the colour of the tile of `p` whose cone holds `ψ + 180°`" for the
+  tip's colour would be wrong.
+
+#### Attack on FS116-N3-PAIR
+
+- *Each hypothesis removed.* **Non-Siamese** is the whole step "the inner tile is `p`'s tile": with Siamese pairs two inner tiles of one colour
+  can be distinct and the statement is not derived (I build no counterexample). **Simple:** idle — a thin truth.
+- *Where the attack succeeds.* The same statement for two (Q) arcs at germs of *different* pairs (e.g. `u⁻` and `u⁺`): not claimed, and not
+  derived by this route (the germs are adjacent and the diameter step is silent).
+
+#### Attack on FS116-N3-CROSS
+
+- *Where the attack succeeds.* At the last clause (§ 3.4 step 6): an `X̄ | X` arc of `ω(y)` through `v` inside `B(p, 1)` is not excluded, and
+  with it `p` is closed in `y`'s ring. This is a GAP in my derivation, not a counterexample: I built no fragment.
+- *Thin parts.* The first clause holds vacuously (no tile of `p` reaches `y`); the hypotheses "every tile at `y` a cone of positive angle" and
+  "radius above 2" are unused in every clause I derived.
+
+### 3.6 The verdicts (second group)
+
+verification: FS116-N3-SEMI
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a semi-hub of the ring of p; then y is a vertex of at least four colours, or y is a vertex of exactly three colours one of whose edges at y is an arc of the unit circle about r(ψ + 60°) or about r(ψ − 60°) whose two side colours are both carried at that centre, which is then a vertex of at least four colours, or y is a full parallel semi-hub of exactly three colours — the two absent at p and the colour of the tile of p whose cone holds ψ + 180° (kind O) or ψ (kind T) in its interior. *Not claimed:* that a semi-hub has four colours; that the third alternative occurs, or that it is excluded; anything at a closed change point (the disk's corner); Siamese or non-simple fragments; anything at `k ≥ 7`.
+  given: the statement with its not-claimed line; § 13's setting words (its Notation paragraph) and notes; the rest of data/fs116/claims.md (§ 2's FS112-N3-NOBOTH, "The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour"; § 10's RING-GERM; § 11's GERM-R and GERM-S; § 13's note quoting FS114-N7-QOPP); data/fs114/claims.md; plans/FS114-derivation.md § 3's entry statements; plans/FS112-derivation.md's header and its U1 and NOBOTH entries (statements and their addresses); CLAUDE.md and the grokkings; that other minds worked the statement — no FS-116 record and no route of this statement; my own stage-2 results
+  committed: 2026-10-03
+  predicted: derived — 0.45 — likeliest break: the centre in (b) having four colours, or the colour named in (c)
+  verdict: derived
+  method: a case split by kind and by which germs of the other pair lie on (Q) arcs; the edges at y forced to the tangents of ω(u), ω(v) by first-order germ exclusions, the centre's four colours by V5-U1, and (c)'s colour by V5-DICHO's gaps and V5-OUT2; the first derivation's method not known until stage 4
+  attack: § Attack on FS116-N3-SEMI
+  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  counterexamples: none — degenerate semi-hubs (two colours, tangent non-arc edges, long (Q) arcs) and the single-shared-colour pairs, by hand in § Attack on FS116-N3-SEMI and V5-DICHO
+  minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  grade: hand
+
+verification: FS116-N3-PAIR
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, if both germs of one pair at a change point of the ring lie on (Q) arcs and the two arcs have the same pair of colours, then the inner colour of each is the outer colour of the other. *Not claimed:* anything about two (Q) arcs not at one pair's germs.
+  given: the statement with its not-claimed line; § 13's setting words (its Notation paragraph) and notes; the rest of data/fs116/claims.md (§ 2's FS112-N3-NOBOTH, "The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour"; § 10's RING-GERM; § 11's GERM-R and GERM-S; § 13's note quoting FS114-N7-QOPP); data/fs114/claims.md; plans/FS114-derivation.md § 3's entry statements; plans/FS112-derivation.md's header and its U1 and NOBOTH entries (statements and their addresses); CLAUDE.md and the grokkings; that other minds worked the statement — no FS-116 record and no route of this statement; my own stage-2 results
+  committed: 2026-10-03
+  predicted: derived — 0.8 — likeliest break: the inner tile of a (Q) arc not being p's own tile
+  verdict: derived
+  method: the inner tiles are p's (non-Siamese), and one tile of p along both germs would have closure points more than 1 apart (V5-NE1); the first derivation's method not known until stage 4
+  attack: § Attack on FS116-N3-PAIR
+  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  counterexamples: thin truth: PAIR with "simple" deleted — the derivation never uses simplicity
+  minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  grade: hand
+
+verification: FS116-N3-CROSS
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours, let y = r(ψ) be a crossed full semi-hub of kind O of the ring of p, u⁺ on a (Q) arc of inner colour a and outer colour a′ and v⁻ on one of inner colour b and outer colour b′; then every tile of p at y has a cone at y of zero angle, and the outer colours at y lie in {a′, b′}; if y has four colours and every tile at y a cone of positive angle at y, its outer colours are a′ and b′ and its missing pair is {a, b}, and, unless an edge of p runs along ω(y) at p, p is a change point of the ring of y, that ring being b just counter-clockwise of p and a just clockwise, and p is a semi-hub of kind O of the ring of y. *Not claimed:* that y has four colours; that p is a crossed semi-hub of y's ring; anything about y's ring away from p; anything at `k ≥ 7`.
+  given: the statement with its not-claimed line; § 13's setting words (its Notation paragraph) and notes; the rest of data/fs116/claims.md (§ 2's FS112-N3-NOBOTH, "The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour"; § 10's RING-GERM; § 11's GERM-R and GERM-S; § 13's note quoting FS114-N7-QOPP); data/fs114/claims.md; plans/FS114-derivation.md § 3's entry statements; plans/FS112-derivation.md's header and its U1 and NOBOTH entries (statements and their addresses); CLAUDE.md and the grokkings; that other minds worked the statement — no FS-116 record and no route of this statement; my own stage-2 results
+  committed: 2026-10-03
+  predicted: derived — 0.35 — likeliest break: the clause on tiles of p at y, or the description of y's ring at p
+  verdict: gap: p is a semi-hub of kind O of the ring of y — an arc of ω(y) through v (or u) inside B(p, 1) with X̄ on y's side and X beyond, which would put a (Q) arc on the outer pair, is not excluded (at most one of the two is); every other clause derived
+  method: V5-U1's cones at p put every side cone in a named tile, so no tile of p reaches y and V5-OUT2 removes a, b from y's outer colours; y's ring at p read through the four tiles' ranges; the first derivation's method not known until stage 4
+  attack: § Attack on FS116-N3-CROSS
+  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  counterexamples: thin truth: CROSS's first clause — no tile of p has y in its closure at all, so it holds vacuously; thin truth: the hypotheses "every tile at y a cone of positive angle" and "radius above 2" — unused in every clause derived
+  minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5) — for the clauses derived; the last clause has no second mind here
+  grade: hand
