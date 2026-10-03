@@ -1,37 +1,39 @@
-# Session handoff — 2026-10-03: FS-116 and FS-121 closed; next, the workflow refinement
+# Session handoff — 2026-10-03: Workflow 3.1 adopted; next, a fresh session for FS-129
 
-*Rewritten 2026-10-03 19:14 UTC by Keryx after both closes were filed (closing commit aa5a8e6e). Current state only; the history of the day is in git and in
-the two close inventories. A successor arriving with nothing reads this first.*
+*Rewritten 2026-10-03 21:00 UTC by Keryx after the workflow refinement. Current state only; the day's history is in git, in the two close
+inventories and in `plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
 
 ## 1. Read first
 
-1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow`.
-2. **No milestone is open and no agent is running.** FS-116 (the local exclusion) and FS-121 (the map step) are closed undecided; their
-   inventories (`plans/FS116-close-inventory.md`, items 1–156 with the W-table W1–W31 and the O-table O1–O8; `plans/FS121-close-inventory.md`,
-   items 1–89) are ticked in full. The front page, `plans/FRONTIER-STUBS.md` (R2's re-rank) and the Proof Atlas (artifact
-   https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx, version 5) are current.
-3. **Kooshi's order for what comes next** (2026-10-03; FS-116 items O6, O7, verbatim there):
-   1. **The workflow refinement**, with Kooshi: `plans/WORKFLOW3-lane-edits-proposed.md` (E1–E26, U1–U9, the search-policy entry and the evidence from the closes, at its end; the frictions behind them are FS-116's W-table, W1–W31).
-   2. **FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking.
-   3. Then the top of the ranking; R2's default is **FS-123, the (Q)-free ring** (`plans/STUB-qfree-ring.md`), whose first question is R2's card 1
-      on the bends.
-4. **At most three agents at a time** (Kooshi, 2026-10-03; FS-116 item 74).
+1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, this session's
+   output style predates the refinement: restart the session before launching anything (the output style loads only at session start).
+2. **Start FS-129 in a fresh session.** Agents receive the parent session's loaded `CLAUDE.md`, not the file on disk, and this session
+   loaded the Workflow 3.0 text; a fresh session loads 3.1's.
+3. **No milestone is open and no agent is running.** FS-116 and FS-121 are closed undecided (rows 142–148); their inventories are ticked in
+   full; the front page, `plans/FRONTIER-STUBS.md` and the Proof Atlas (artifact https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx) are current.
+4. **Kooshi's order** (2026-10-03):
+   1. **FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking; its method and
+      staffing are its opening's to propose and Kooshi's to approve.
+   2. **The Lean backlog**, in a session of its own: the hand results of the milestones closed before Workflow 3.1 (about 75 derivation
+      entries name de Bruijn: FS-111 16, FS-114 3, FS-116 41, FS-121 15; earlier milestones' hand results besides).
+   3. Then Poros's ranking, whose top is FS-123, the (Q)-free ring.
+5. **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included.
 
-## 2. Decisions open for Kooshi (each with its default; FS-116 item 153, FS-121 item 87, FS-116 item O7)
+## 2. Workflow 3.1, in one paragraph
 
-- **The search ban.** Not deleted. Kooshi asked for a count first (CL3: of 981 logged search moves since 2026-09-24, 511 replaced by a result, 358
-  wanted no search, 103 left open — 45 with nothing in their place — 9 unclear; FS-116 item O8, `data/workflow3/cl3/counts.md`), and is considering a
-  wallclock budget per day and per week. Decided in the workflow refinement. Until then standing rule 5 and `CLAUDE.md` § Toolchain's ban paragraph stand.
-- **The milestone after FS-129**: default FS-123 (R2, 0.7).
-- **The cover route's parking**: default kept, now behind FS-125's NO-SAT.
+Kooshi's ruling and decisions, verbatim: `plans/WORKFLOW3-lane-edits-proposed.md`, its first two sections. No blind verifier and no
+boundary re-read in the standard loop: the kernel is the second check, and a milestone moves Not started → Opened → Derived (Ephodos's
+record job filed) → Closed (its Lean module passes the gate). Poros ranks and chooses the next milestone. de Bruijn is split: a planner
+(Opus; blind on the claim list first, then reads the derivation; reports generalizations and statement defects at once, which Keryx
+relays to the frontier job) and an implementer (Sonnet; never changes a statement). Milestones may assume the literature in Lean
+(formalize anything under about an hour of agent work; imports carry four items, `LEAN.md` § Assumptions). Search runs once a day, by
+the Searcher, from `plans/SEARCH-QUEUE.md`; no other lane searches. No one-line `LEDGER.md` § B entries from 3.1 on. The text cut from the
+loaded files is `plans/HISTORY-WORKFLOW-3.0.md`; the arithmetic-era items of "Where the problem stands" are
+`plans/WHERE-THE-PROBLEM-STANDS.md`.
 
-## 3. Practices in force (each logged; most are proposed edits)
+## 3. Open items
 
-- The announcement rule (both inventories' tops): held = a frozen statement, two minds, the second blind, its verdicts committed before it compares.
-- Frozen lists grow only by dated addenda; a decisive statement is frozen without its route's lemmas, and a route-naming phrase may be withheld for
-  blindness and restored by a dated note when no blind job remains (FS-116 items 123, 147).
-- A blind verifier's reading question: answered from the author's record when it has a defining sentence (quoted verbatim), else ruled an ambiguity.
-- Brief tooling: `data/workflow3/brief_quote.py` fills "{{Q:file|heading|id}}" placeholders; known gate defects U3 (unwritten output paths), U5 ("…"
-  inside a statement), U6 (a § address's number-stripped match: address "§ 14" alone), U7 (verdict words beyond "prove"/"confirm" pass);
-  `data/rerank-2026-09-27/rk_mirror_check.py` is stale (W31).
-- Commit subjects neutral while any blind job runs; times from `date` inside the writing command; agent ids only in the session scratch.
+- **Upstream brief-gate fixes** (U3, U5, U6 in the edits file) belong to `~/source/agent-forge`, not filed; until then, a brief failing on one
+  of them notes it and launches.
+- **The census** `tools/fs71_ledger_b_check.py --strict` checks derivation files against `LEDGER.md` § B, which stops at FS-116 and FS-121; it
+  is no longer run at a filing, and a 3.1 derivation file will fail it by design.

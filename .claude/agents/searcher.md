@@ -1,6 +1,6 @@
 ---
 name: searcher
-description: The Searcher — lean-dir's one lane that runs searches, once a day, outside the milestone loop. Launch it with the day's search requests (`plans/SEARCH-QUEUE.md`): it chooses the searches likely to return a valuable result in reasonable time, runs them on every core under the memory tool, keeps each certificate for checking, and reports results and nulls. Not for deriving (ephodos), formalizing (debruijn), or ranking milestones (poros); no other lane searches.
+description: "The Searcher — lean-dir's one lane that runs searches, once a day, outside the milestone loop. Launch it with the day's search requests (`plans/SEARCH-QUEUE.md`): it chooses the searches likely to return a valuable result in reasonable time, runs them on every core under the memory tool, keeps each certificate for checking, and reports results and nulls. Not for deriving (ephodos), formalizing (debruijn), or ranking milestones (poros); no other lane searches."
 model: opus
 disallowedTools: Agent, Workflow
 color: purple

@@ -1,6 +1,6 @@
 ---
 name: clerk
-description: The Clerk — lean-dir's hand for reading, bookkeeping and filing, on Sonnet 5.5. Launch it for work that copies, folds, checks or files and decides nothing: folding job reports into a queue, a close inventory or a ready list; filing a lane's drafts verbatim into the front files when Keryx makes it the pen; one exact edit gated by an audit; field and format fixes so a checker passes; mechanical audits (keys resolve, addresses exist, exit statuses read); a reading sweep that finds and files what the record already says. Not for deriving, verifying, grading, ranking, compressing, or reading a paper for its mathematics — those are the Opus lanes (ephodos, ephodos-verifier, poros, debruijn).
+description: "The Clerk — lean-dir's hand for reading, bookkeeping and filing, on Sonnet 5.5. Launch it for work that copies, folds, checks or files and decides nothing: folding job reports into a queue, a close inventory or a ready list; filing a lane's drafts verbatim into the front files when Keryx makes it the pen; one exact edit gated by an audit; field and format fixes so a checker passes; mechanical audits (keys resolve, addresses exist, exit statuses read); a reading sweep that finds and files what the record already says. Not for deriving, verifying, grading, ranking, compressing, or reading a paper for its mathematics — those are the Opus lanes (ephodos, ephodos-verifier, poros, debruijn)."
 model: sonnet
 disallowedTools: Agent, Workflow
 color: green

@@ -1,6 +1,6 @@
 ---
 name: debruijn
-description: The formalize lane's planner — de Bruijn, the Lean 4 engineer, on Opus. Launch it to plan a milestone's kernel module from its claim list (blind to the derivation until its plan is committed, then open): the statements read back against Mathlib, the skeleton with sorry at every leaf, a plan per leaf, outside theorems formalized or imported, and optimizations and generalizations reported at once. Also to open a kernel milestone (FS-101, FS-113, the backlog). The implementer (debruijn-implementer) builds what it plans. Not for deriving mathematics (ephodos) or posing questions (poros).
+description: "The formalize lane's planner — de Bruijn, the Lean 4 engineer, on Opus. Launch it to plan a milestone's kernel module from its claim list (blind to the derivation until its plan is committed, then open): the statements read back against Mathlib, the skeleton with sorry at every leaf, a plan per leaf, outside theorems formalized or imported, and optimizations and generalizations reported at once. Also to open a kernel milestone (FS-101, FS-113, the backlog). The implementer (debruijn-implementer) builds what it plans. Not for deriving mathematics (ephodos) or posing questions (poros)."
 model: opus
 disallowedTools: Agent, Workflow
 color: blue
