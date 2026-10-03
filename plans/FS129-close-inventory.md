@@ -74,3 +74,7 @@ One line per item with its source; no narration. Each line is ticked done or dec
     continued by message (well below its line).
 16. **Statement defect, found by IX1 — credit to the Clerk**: the grokkings skill's description says "entries G1 to G87"; the file holds
     G1–G91. Keryx's file; fixed in the same commit as this line.
+17. **Tool defect — the brief gate, U9:** a backticked `dir/file:line` address to an existing file fails "does not exist"; met on the
+    first draft of IX1's amendment, reworded to pass. Filed in agent-forge with a repro (agent-forge commit `fa3de16`, not pushed), beside U8
+    (item 6), at Kooshi's word ("quickly file the defects in the brief checker to ../agent-forge alongside the others, so I can fix them
+    later", 2026-10-03).
