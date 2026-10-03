@@ -1,0 +1,15 @@
+  rho_a=1.0 rho_b=1.0 phi~ 1: |a-b|^2-1 = -0.000609; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=1.0 rho_b=1.0 phi~10: |a-b|^2-1 = -0.059846; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=1.0 rho_b=1.0 phi~30: |a-b|^2-1 = -0.464102; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=1.0 rho_b=0.5 phi~ 1: |a-b|^2-1 = -0.000381; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=1.0 rho_b=0.5 phi~10: |a-b|^2-1 = -0.037519; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=1.0 rho_b=0.5 phi~30: |a-b|^2-1 = -0.299038; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=1.0 phi~ 1: |a-b|^2-1 = -0.000381; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=1.0 phi~10: |a-b|^2-1 = -0.037519; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=1.0 phi~30: |a-b|^2-1 = -0.299038; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=0.5 phi~ 1: |a-b|^2-1 = -0.000305; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=0.5 phi~10: |a-b|^2-1 = -0.030154; a in B(y_1,1): True; b in B(y_0,1): True
+  rho_a=0.5 rho_b=0.5 phi~30: |a-b|^2-1 = -0.250000; a in B(y_1,1): True; b in B(y_0,1): True
+  ring points r(-0.5 deg), r(60.5 deg) more than 1 apart: True
+  double-tip positions whose two flank ring arcs share a colour: 6 of 6
+FLANK: 12 of 12 edge pairs below 1; EMPTY's contradiction holds

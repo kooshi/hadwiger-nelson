@@ -38,12 +38,18 @@ possible object: at six colours the class may be empty (the frozen list's preamb
 - **FS116-Y4-SPOKE** — the only outer tile of each single-tip hub reaches the lattice point at radius 2 beyond it and ends there on a unit arc about the hub:
   inside `ω(y_2)` near `2y_2` only colour 4, outside only `3, X, X̄` — [derived], one mind, § 2.2.
 - **FS116-Y4-Q1** — the colours near `q_1` by sector: `{2}` in the lens, `{1, 2}`, `{2, 3}` beside it, `{1, 2, 3, X}` outside; 4 and `X̄` absent — [derived],
-  one mind, § 2.3.
+  one mind, § 2.3. *(Vacuous since stage 3: the class is empty.)*
+- **FS116-Y4-FLANK** — a tile holding two ring points `60°` apart with full tip cones at both has its two flank edges leave along one direction, each
+  inside the other point's unit disc, so the tiles beyond them come within distance below 1 — [hand], one mind, § 3.1.
+- **FS116-Y4-EMPTY** — **no non-Siamese simple valid six-coloured fragment on a disc of radius above 1 about a four-colour vertex has a Γ-free ring**: the
+  double tip's two flank tiles share a colour and come within 1 — [derived], one mind, § 3.2.
+- **FS116-Y4-OBST** — the brief's answer: no fragment of the HEX3 class on any disc of radius above 1; FS116-Y4-FRAG is FALSE — [derived], one mind, § 3.3.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - Stage 1: none (reading and recognition).
 - Stage 2: none — every step is a straddle read by hand at a lattice point; the tool checks the signs at twelve fixed points.
+- Stage 3: would have searched colourings of the second shell (and, after 2026-10-01, asked a solver); instead compared two of round 3's derived edges, which ended the question.
 
 ## Fence log (standing rule 8)
 
@@ -56,6 +62,8 @@ possible object: at six colours the class may be empty (the frozen list's preamb
 
 - Stage 1: none seen as two truths in collision.
 - Stage 2: none seen.
+- Stage 3: none seen as two truths in collision. Classed: round 3's chain (SIX … STARFORCE) and N2's HEX6/HEX3 against EMPTY — not a collision: those are true
+  of an empty class; the defect was a consequence left undrawn (FS116-Y3-TIGHT's two edges never compared), a G83 *Do* missed, not two truths.
 
 ## Stage 1 — SAVED: the readback, recognition on the target, and the proposed statements
 
@@ -320,3 +328,147 @@ control: fs116-y4-q1
   fault: python3 ../tools/fs116_y4_lattice.py q1 --plant q1 | tail -n 1
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the Γ-free class is empty (FS116-Y4-FLANK, FS116-Y4-EMPTY)
+
+*Found while setting up the second shell's casework: round 3's own lemma FS116-Y3-TIGHT puts both flank edges of a double tip along `210°`, one inside
+each hub's unit disc, and both flank tiles have colour `X̄`. Drawn out, that is a contradiction at radius `1 + ε`. The mechanism is G83's ("two tiles of one
+colour forced along two unit circles to come within 1") and FS114-Y5-PXKILL's.*
+
+### 3.0 Proposed before their derivation (setting words: the Notation)
+
+- **P6, FS116-Y4-FLANK**: let t be a tile of a valid fragment, Siamese pairs allowed, on a closed disc of radius above 1 about a point p, and let y = r(ψ)
+  and y′ = r(ψ + 60°) be points of ω(p) in the closure of t such that the cone of t at y contains the open cone (ψ + 150°, ψ + 210°) and its cone at y′
+  contains (ψ + 210°, ψ + 270°); then t's cone at y ends at ψ + 210° and its cone at y′ begins at ψ + 210°, and if a is the tile bordering t at y along t's
+  edge leaving y in the direction ψ + 210°, and b the tile bordering t at y′ along t's edge leaving y′ in the direction ψ + 210°, some point of the closure
+  of a and some point of the closure of b are at distance below 1 *Not claimed:* anything about the colours of a and b; that a ≠ b
+- **P7, FS116-Y4-EMPTY**: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has
+  a ring carrying no arc of Γ *Not claimed:* anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the
+  bends, with (R2) arcs); anything in the Siamese or non-simple class; anything at k ≥ 7 (with three absent colours the flank tiles need not share a colour)
+
+### 3.1 The flank lemma (FS116-Y4-FLANK)
+
+`t` has diameter at most 1 (its interior is connected and no two of its points are exactly 1 apart), so `t ⊂ B̄(y′, 1)`, whose tangent cone at `y` is
+`[ψ + 30°, ψ + 210°]` (`y′ − y = e(ψ + 120°)`). The cone of `t` at `y` lies in it and contains `(ψ + 150°, ψ + 210°)`: it ends at `ψ + 210°`, along an
+edge `e_a` of `Γ` leaving `y` in that direction, tangent there to `ω(y′)`, with `e_a ⊂ cl t ⊂ B̄(y′, 1)`. Likewise `t ⊂ B̄(y, 1)`, whose tangent cone at
+`y′` is `[ψ + 210°, ψ + 30°]`; the cone of `t` at `y′` begins at `ψ + 210°`, along an edge `e_b ⊂ B̄(y, 1)` tangent to `ω(y)`. Near `y` and `y′` these edges
+are segments or circular arcs, so `e_a(s) = y + s·e(ψ + 210°) + (κ_a s²/2)·e(ψ + 120°) + o(s²)` and `e_b(s) = y′ + s·e(ψ + 210°) + (κ_b s²/2)·e(ψ + 300°) +
+o(s²)`; staying in the discs, `|e_a(s) − y′|² = 1 + (1 − κ_a)s² + o(s²) ≤ 1`, forces `κ_a ≥ 1`, and likewise `κ_b ≥ 1` (a tangent segment leaves the
+disc). Then `e_b(s) − e_a(s) = (1 − (κ_a + κ_b)s²/2)·e(ψ + 120°) + o(s²)`, of length `1 − (κ_a + κ_b)s²/2 + o(s²) < 1` for small `s > 0`. The two edges
+lie in `cl a` and `cl b` (near a vertex the sector beyond an edge is one tile). ∎ In the least-curved case, both edges arcs of radius 1, the points at
+turning angle `φ` are exactly `2cos φ − 1` apart.
+
+### 3.2 The class is empty (FS116-Y4-EMPTY)
+
+Let `F` be such a fragment. By FS116-Y3-SIX the ring has exactly six change points `y_k = r(ψ_0 + 60°k)`, each a hub, and `p` has four tiles and four
+colours, absent `X, X̄`; off `Γ` the ring's colour `c(θ)` is `X` or `X̄` and `c(θ + 60°) ≠ c(θ)` (RING-TWIST-C, as SIX uses it). By FS116-Y3-TIPS each hub
+has exactly one tip and some tile `t` of `p` tips two adjacent hubs, `y_k` and `y_{k+1}` (six hubs, four tiles, a tile tipping at most two, and two only if
+adjacent). By RING-GERM (i) `t`'s cone at `y_k` contains `(ψ_k + 150°, ψ_k + 210°)` and at `y_{k+1}` contains `(ψ_k + 210°, ψ_k + 270°)`; FLANK gives tiles
+`a` at `y_k` and `b` at `y_{k+1}` whose closures come within distance below 1.
+- **`a` is the tile holding the ring just clockwise of `y_k`.** `a`'s cone at `y_k` begins at `ψ_k + 210°`, an inward direction, so `a` meets `B(p, 1)`: it
+  is neither an outer tile (an outer tile is at distance at least 1 from `p`'s tile of its colour, which holds `p`) nor a tile of `p` (a tile of `p` at
+  `y_k` is a tip, and `t` is the only one). So its colour is `X` or `X̄` (FS116-N2-STAR: `C(y_k) = A(p) ⊔ T ⊔ O`), and one tile of each colour is at `y_k`.
+  The tile of colour `c(ψ_k + δ)` holds the ring points just counter-clockwise of `y_k`, so its cone contains `ψ_k + 90°`; a cone (an interval) holding
+  `ψ_k + 90°` and `ψ_k + 210°` contains the tip's cone `(ψ_k + 150°, ψ_k + 210°)` or the outer cone `(ψ_k − 30°, ψ_k + 30°)` (RING-GERM (ii)), both other
+  tiles'. So `a` has colour `c(ψ_k − δ)` and holds `r(ψ_k − δ)` for small `δ > 0`. Likewise `b` has colour `c(ψ_k + 60° + δ)` and holds `r(ψ_k + 60° + δ)`.
+- **One colour.** `c(ψ_k + 60° + δ) ≠ c(ψ_k + δ)` (the alternation) and `c(ψ_k − δ) ≠ c(ψ_k + δ)` (`y_k` a change point); with two colours,
+  `c(ψ_k + 60° + δ) = c(ψ_k − δ)`.
+- **Two tiles.** `|r(ψ_k − δ) − r(ψ_k + 60° + δ)| = 2 sin(30° + δ) > 1`, more than a tile's diameter: `a ≠ b`.
+
+So `a` and `b` are distinct tiles of one colour within distance below 1 of each other, against non-Siamese. (Without non-Siamese they still straddle: their
+interiors hold points below 1 apart near the edges and points above 1 apart near the ring, so two interior points of one colour are exactly 1 apart.) ∎
+
+*Where six is spent:* at the alternation — two colours absent at `p` (QFREE4, through SIX). With seven colours a ring may cycle three absent colours, and the
+flank tiles of a double tip then differ (control fs116-y4-flank's plant `three`). *Controls of the list:* the strip and the disk carry (Q) arcs on their
+four-colour rings; FS116-Y2-SIXFRAG is a six-colour vertex; R7's lattice points carry six of seven colours; SQ9 at `k = 9` has a Γ-free four-colour vertex
+but no tip (its tiles of `p` do not reach `ω(p)`): every one is outside the class, as it must be for an empty class.
+
+### 3.3 What it does to the brief's target and to the held results
+
+- **P5, FS116-Y4-OBST — derived, at every radius above 1**: no fragment of the HEX3 class exists on any closed disc of radius above 1 about `p` (the HEX3
+  class is a subclass of EMPTY's). The brief's "named radius at most 2" is met with room: `R_0` may be any number above 1.
+- **P4, FS116-Y4-FRAG — FALSE**: by EMPTY no fragment of the HEX3 class exists at any radius above 1, so none above 2.
+- **The target was posed for an empty class** — the finding the brief asked to hear about. Round 3's stalled form ("a … fragment … whose star is HEX3's …
+  or the point inside radius 2 where every such fragment loses all six colours") has its answer below radius 2 for the reason that there is no such
+  fragment at all: no point loses its colours; the configuration dies on `ω(p)`'s neighbourhood.
+- **Vacuous, not wrong.** Every statement whose hypotheses include a Γ-free four-colour vertex in the non-Siamese simple class holds vacuously:
+  FS116-Y3-SIX, -TIPS, -HUBCOL, -TIGHT, -NOQ, -LENS, -TIGHTLENS, -NBTIP, -STARFORCE (frozen, § 12 and § 14), FS116-N2-HEX6 and -HEX3, the last clause of
+  RING-TRANSFER-C, and this record's FS116-Y4-SYM, -SPOKE and -Q1 (stage 2). Their arguments stay valid as arguments; what they describe has no member.
+  FS116-N2-RECIP is not of this kind (its `p` need not be Γ-free).
+- **For C114-LOCAL-F's case list:** the Γ-free ring type is removed at radius `1 + ε`. The (Q)-free rings that carry (R2) arcs after the bends
+  (FS114-N6-RING60's class, where N7-HUB and N7-3T live) are not reached: there a change point of `κ` may end an (R2) arc, RING-GERM's tip is not given, and
+  the double tip's existence is not shown. Whether FLANK closes them is the next question (§ 3.4).
+
+### 3.4 Look-back
+
+- **Could it have been foreseen?** Yes: FS116-Y3-TIGHT (round 3, § 2.4) states both edges — "`T1`'s cone ends at `210°`, and the edge it shares there with
+  … `R_{50}`, colour `X̄` — lies in `B̄(y_1, 1)`" and "Likewise at `y_1` (`T1`'s cone starts at `210°`, inside `B̄(y_0, 1)`)" with `R_{12}` of colour `X̄` —
+  and used each only against a far lens vertex. The two were never compared: the consequence left undrawn. G83's *Do* ("hunt the straddle along two unit
+  circles") names the move.
+- **Does it deform into its neighbours?** FLANK reads no colour and no Γ-freeness: it applies to any tile holding two ring points `60°` apart with full tip
+  cones at both. Its neighbours: a (Q)-free ring with (R2) arcs (§ 3.3); a semi-hub (FS116-N3-SEMI) whose tip is shared with the next change point; and
+  FS114-N7's open-cap family OC. Each is a case where a double tip's flank tiles may share a colour; each is unread here.
+- **Is it new?** The mechanism is held (G83; FS114-Y5-PXKILL; FS114-N7-3T's straddles at `√3` and `1 + ε`). Its application to the Γ-free ring is not in
+  FS-116's records; no outside search run — owed.
+
+derivation: FS116-Y4-FLANK
+  statement: let t be a tile of a valid fragment, Siamese pairs allowed, on a closed disc of radius above 1 about a point p, and let y = r(ψ) and y′ =
+    r(ψ + 60°) be points of ω(p) in the closure of t such that the cone of t at y contains the open cone (ψ + 150°, ψ + 210°) and its cone at y′ contains
+    (ψ + 210°, ψ + 270°); then t's cone at y ends at ψ + 210° and its cone at y′ begins at ψ + 210°, and if a is the tile bordering t at y along t's edge
+    leaving y in the direction ψ + 210°, and b the tile bordering t at y′ along t's edge leaving y′ in the direction ψ + 210°, some point of the closure of a
+    and some point of the closure of b are at distance below 1
+  uses only: that a tile has diameter at most 1, so t ⊂ B̄(y, 1) ∩ B̄(y′, 1); that near a vertex an edge of Γ is a segment or a circular arc (a second-order
+    expansion); |y − y′| = 1 with y′ − y = e(ψ + 120°)
+  not claimed: anything about the colours of a and b; that a ≠ b; that the cones contain the open cones (an input, here from RING-GERM (i))
+  argument: § 3.1 The flank lemma (FS116-Y4-FLANK)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the Reuleaux triangle Reul(p, y_0, y_1) as t, its two arcs through p as the edges: points at turning angle φ are 2cos φ − 1 apart (control
+    fs116-y4-flank)
+  prior art: partly: FS114-Y5-PXKILL (two tiles of one colour bordering a third along unit arcs, within √(1 − 2tt′) < 1) and G83's straddle are the same
+    mechanism; this form not searched — owed
+  handoff: de Bruijn — a short lemma about two arcs inside two unit discs, after a blind second mind
+
+derivation: FS116-Y4-EMPTY
+  statement: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying
+    no arc of Γ
+  uses only: FS116-Y3-SIX (six change points y_k, hubs, the ring alternating X and X̄, four tiles at p); FS116-Y3-TIPS (one tip per hub; a tile tipping two
+    adjacent hubs); RING-GERM (i) and (ii) (the tip cone and the outer cone at a hub); FS116-N2-STAR (C(y) = A(p) ⊔ T ⊔ O); FS116-Y4-FLANK; non-Siamese
+  not claimed: anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs); anything
+    in the Siamese or non-simple class; anything at k ≥ 7 (with three absent colours the flank tiles need not share a colour)
+  argument: § 3.2 The class is empty (FS116-Y4-EMPTY)
+  verdict: derived
+  grade: derived from: FS116-Y4-FLANK, FS116-Y3-SIX, FS116-Y3-TIPS, RING-GERM
+  minds: 1
+  model: none can exist (the statement is a non-existence); its geometric step is control fs116-y4-flank, whose plant three shows where six is spent
+  prior art: partly: the mechanism is G83's and FS114-Y5-PXKILL's; that the Γ-free four-colour vertex dies at 1 + ε is not in FS-116's records (round 3
+    and FS116-N2 worked it as possible); no outside search — owed
+  handoff: de Bruijn — with SIX, TIPS and RING-GERM, after a blind second mind; for D2, the Γ-free ring type removed from C114-LOCAL-F's case list at 1 + ε
+
+derivation: FS116-Y4-OBST
+  statement: for every R > 1, no fragment of the HEX3 class exists on the closed disc of radius R about p
+  uses only: FS116-Y4-EMPTY (the HEX3 class is a subclass of its class)
+  not claimed: anything outside the non-Siamese simple Γ-free class
+  argument: § 3.3 What it does to the brief's target and to the held results
+  verdict: derived
+  grade: derived from: FS116-Y4-EMPTY
+  minds: 1
+  model: none can exist
+  prior art: partly: as FS116-Y4-EMPTY
+  handoff: none — the brief's answer; it rides on EMPTY's handoff
+
+control: fs116-y4-flank
+  of: FS116-Y4-FLANK and -EMPTY — 12 edge pairs (radii 1 and 1/2, turning angles 1°, 10°, 30°) below 1, the ring points above 1, flank colours agreeing at 6
+    of 6 positions; the tangent segments (curvature 0) never go below 1
+  run: python3 ../tools/fs116_y4_lattice.py flank | tail -n 1
+  expect: FLANK: 12 of 12 edge pairs below 1; EMPTY's contradiction holds
+  fault: python3 ../tools/fs116_y4_lattice.py flank --plant straight | tail -n 1
+
+control: fs116-y4-flank-seven
+  of: FS116-Y4-EMPTY — where six is spent: a ring cycling three colours (a seventh colour) makes the flank colours differ at every position
+  run: python3 ../tools/fs116_y4_lattice.py flank | sed -n 14p
+  expect: double-tip positions whose two flank ring arcs share a colour: 6 of 6
+  fault: python3 ../tools/fs116_y4_lattice.py flank --plant three | sed -n 14p
+
+## Stage 3 — SAVED

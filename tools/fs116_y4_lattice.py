@@ -11,6 +11,12 @@ rational unit vector ((1-m^2)/(1+m^2), 2m/(1+m^2)), so every witness point is ex
                          to lie in the region the argument puts them in.  Plant: Z_1's anchor q_1 moved to q_1 + (0, 1/4).
   q1    [--plant q1]     at 12 points x = q_1 + s u(chi): each exclusion FS116-Y4-Q1 claims, in its sector, with witnesses; and, outside each sector,
                          whether the same witnesses fail (reported, not asserted).  Plant: the centre q_1 moved to q_1 + (1/4, 0).
+  flank [--plant straight|away|three]   FS116-Y4-FLANK and -EMPTY: the flank edges of a tile tipping y_0 and y_1 leave both hubs along 210 degrees,
+                         inside B(y_1,1) and B(y_0,1) respectively; for arcs of radius 1 and 1/2 (every pairing) and parameters near 1, 10, 30 degrees,
+                         the two edges' points come within distance below 1; the ring points just outside the double tip's arc are more than 1
+                         apart; and in a ring alternating two colours the two flank colours agree at every double-tip position.  Plants: straight
+                         (the tangent segments, curvature 0: distance exactly 1, never below), away (arcs bending outward), three (a ring cycling
+                         three colours, as with a seventh colour: the flank colours differ).
 """
 from __future__ import annotations
 import math
@@ -239,6 +245,44 @@ def run_q1():
     return 0
 
 
+# =========================================================================== FLANK
+def run_flank():
+    """edge at y_0: tangent to direction 210, bending toward y_1 (centre y_0 + rho e(120)); edge at y_1: tangent to 210, bending toward y_0
+    (centre y_1 + rho e(300)).  A point at turning angle phi on each: c + rho e(300 - phi) and c + rho e(120 + phi)."""
+    def edge(z, toward_deg, rho, phi_deg, sign):
+        if PLANT == "straight":
+            return add(z, sc(T(Fr(round(math.radians(phi_deg) * 10**6), 10**6)), E30(7)))       # z + t e(210)
+        bend = toward_deg if PLANT != "away" else (toward_deg + 180) % 360
+        c = add(z, sc(rho, E30(bend // 30)))
+        return add(c, sc(rho, ru((bend + 180) % 360 + sign * phi_deg)))
+    rows, below = [], 0
+    for ra in (ONE, H):
+        for rb in (ONE, H):
+            for ph in (1, 10, 30):
+                a = edge(y[0], 120, ra, ph, -1 if PLANT != "away" else +1)   # from y_0 along 210: e(300 - phi) about y_0 + rho e(120)
+                b = edge(y[1], 300, rb, ph, +1 if PLANT != "away" else -1)   # from y_1 along 210: e(120 + phi) about y_1 + rho e(300)
+                # each point must lie in the disc it is claimed in (the edge of a tile in B(y_1,1) resp. B(y_0,1)), unless planted
+                ina = (n2(sub(a, y[1])) - 1).sign() <= 0
+                inb = (n2(sub(b, y[0])) - 1).sign() <= 0
+                d2 = n2(sub(a, b)) - 1
+                below += d2.sign() < 0
+                rows.append(f"rho_a={float(ra):.1f} rho_b={float(rb):.1f} phi~{ph:>2}: |a-b|^2-1 = {float(d2):+.6f}; a in B(y_1,1): {ina}; b in B(y_0,1): {inb}")
+    for r in rows:
+        print("  " + r)
+    # the ring points just outside the double tip's arc: r(-delta) and r(60 + delta)
+    rp = cmul(y[0], ru(-0.5))
+    rq = cmul(y[1], ru(0.5))
+    far = (n2(sub(rp, rq)) - 1).sign() > 0
+    # colours: a ring alternating two colours (or, planted, cycling three); flanks of the double tip over arc k are arcs k-1 and k+1
+    cols = ["X", "Xb"] * 3 if PLANT != "three" else ["X", "Xb", "Z"] * 2
+    agree = sum(cols[(k - 1) % 6] == cols[(k + 1) % 6] for k in range(6))
+    print(f"  ring points r(-0.5 deg), r(60.5 deg) more than 1 apart: {far}")
+    print(f"  double-tip positions whose two flank ring arcs share a colour: {agree} of 6")
+    ok = below == len(rows) and far and agree == 6
+    print(f"FLANK: {below} of {len(rows)} edge pairs below 1; " + ("EMPTY's contradiction holds" if ok else "EMPTY's contradiction FAILS"))
+    return 0
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "sym"
-    sys.exit({"sym": run_sym, "spoke": run_spoke, "q1": run_q1}[cmd]())
+    sys.exit({"sym": run_sym, "spoke": run_spoke, "q1": run_q1, "flank": run_flank}[cmd]())
