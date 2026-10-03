@@ -6,12 +6,14 @@ design, one planted defect per failure):
 
   quotation  a blockquote — consecutive lines starting with ">" — whose last line is "> — source: <path>" (the word
              "source" in any case). After the path, "§ <heading>" or "row <id>" is an address: the quoted text must
-             occur verbatim inside that heading's section (up to the next heading of its level; a heading matches when
-             its text, as written or with leading numbers aside, starts with the anchor and the anchor ends a word) or
-             inside the table row whose first cell is <id>.
+             occur verbatim inside that heading's section (up to the next heading of its level) or inside the table
+             row whose first cell is <id>. A heading matches when its text starts with the anchor and the anchor ends a
+             word: first as written, and only if no heading matches so, with leading numbers set aside on both sides —
+             never a heading whose number differs from a number the anchor gives.
              Anything else after the path is kept for the reader and ignored. Runs of whitespace and blockquote markers
-             are ignored. An elision is written "…" or "[…]", and the pieces between elisions must occur in order —
-             except in the statements section, where a statement is quoted whole. Every blockquote in a brief is a
+             are ignored. A quotation found verbatim, every "…" in it included, passes: a "…" the source has at that
+             point is its text. Otherwise "…" and "[…]" are elisions, and the pieces between them must occur in order —
+             except in the statements section, where a statement carries no elision. Every blockquote in a brief is a
              quotation: one with no source line fails, and so do a source that does not resolve, is a directory, or is
              a path the brief's own fence closes (a blind mind must be able to read back what it was sent).
   brief      a line "brief: <id>" at column 0, then indented "field: value" lines, a value continuing on further
@@ -26,27 +28,40 @@ design, one planted defect per failure):
                fences:          "§ <heading>", or "none — <reason>" — never none for a role that names blind, a verifier,
                                 a second mind or derivation, a competitor, or independence
                channel:         how the recipient reaches you mid-flight, and where its report goes
-               standing rules:  a file that exists (its first backticked token, else its first word) with a paragraph
-                                that names spawning agents, forbids it, and gives a reason — a word such as because,
+               standing rules:  a file that exists (the first path the field names, in the order written) with a paragraph
+                                that forbids starting agents — a negation at most three words before a word for it
+                                (spawn, subagent, fork, delegate, the Agent tool, agents of your own, start another
+                                agent), or that word called forbidden — and gives a reason: a word such as because,
                                 reason, why, since, so that, or a clause after a colon or a dash
                record:          the recipient's record; it must be one of the touches, or under one, or match one
                touches:         the paths the recipient may write
                budget:          the size, as guidance, and the hand-back line
              Every "§ <heading>" must name a heading in the brief with text under it. A fence section must name at
-             least one path. Every path the brief names outside its quotations must exist, except those the recipient
-             will create (record, touches, channel) and those in the fence section. A backticked token counts as a
-             path when it has a file extension, ends in "/", starts with "~/", or its first segment exists.
+             least one path. Every path the brief names outside its quotations must exist, except those in the fence
+             section and those the recipient will create: the record, the touches, the channel's paths, and anything
+             under a touches directory or matching a touches pattern. A backticked token counts as a path when it ends
+             in "/", starts with "~/", has a file extension, or its first directory exists. In a bare name, with no
+             "/", the extension counts only when it is a common file type (.md, .py, .lean, .json, …) or the name
+             could not be a Lean name (it has a "-" or starts with a digit), so `Finset.card` and `Real.log` are names,
+             not missing files. A token whose only "/" leads it, such as a command like `/loop`, names no directory.
 
 What the gate proves, and only this: each quotation is verbatim in its source, at its address when it names one; a
-statement is quoted whole; no quotation's source is fenced; the fields are present; the sections they name exist and are
-not empty; the backticked paths outside quotations exist; a role that names a second mind has a fence section that names
-paths; the standing rules have a paragraph that names, forbids, and gives a reason. It warns, and does not fail, when a
-fence names no git history, no shared scratch, or no session transcripts — the three channels a harness most often
-leaves open — and when a fenced brief says "prove" or "confirm", which can hand the recipient the verdict.
+statement carries no elision; no quotation's source is fenced; the fields are present; the sections they name exist and
+are not empty; the backticked paths outside quotations exist or are the recipient's to write; a role that names a second
+mind has a fence section that names paths; the standing rules have a paragraph that forbids starting agents and gives a
+reason. It warns, and does not fail, when a fence names no git history, no shared scratch, or no session transcripts —
+the three channels a harness most often leaves open — and when a fenced brief, outside its quotations and its fence, says
+"prove" or "confirm" or reports an outcome: decided, settled, established, proved, confirmed, verified, refuted,
+succeeded, landed, showed, reduced to, is true or false, or produced, found or gave a result. Each can hand the recipient
+the verdict.
 
-What it cannot see: a paraphrase in prose beside the quotation; a path written without backticks; a channel that names no
-real way to reach you; a verdict given in other words; whether the quotation is the statement that should have been sent;
-whether the why is the real one; whether the fence names every channel the recipient can reach.
+What it cannot see: a paraphrase in prose beside the quotation; a statement cut short with no elision mark; a path
+written without backticks; a bare file name whose extension it does not list and that could be a Lean name (`run.log`);
+a path under the touches that the brief means as an input; a channel that names no real way
+to reach you; a verdict given as a grade ("held"), a present tense ("holds"), a confidence, or in words not listed above;
+a negation that does not govern the spawning word beside it ("do not hesitate to spawn"); whether the quotation is the
+statement that should have been sent; whether the why is the real one; whether the fence names every channel the
+recipient can reach.
 
 Subcommands: quotes | brief | all          (all = brief, then quotes, on every file)
 Paths resolve from --root (default: the current directory), then from the brief's own directory.
@@ -66,12 +81,25 @@ SOURCE = re.compile(r"^\s*(?:—|--)\s*source:\s*`?([^`\s]+)`?(.*)$", re.I)
 ELISION = re.compile(r"\s*(?:\[…\]|\[\.\.\.\]|…)\s*")
 TICKED = re.compile(r"`([^`\s]+)`")
 EXT = re.compile(r"\.[A-Za-z][A-Za-z0-9]{0,5}$")
+# The extensions that make a bare name (no "/") a file. None ends a Lean name in Lean's or Mathlib's code, so `Basic.lean`
+# is a file and `Finset.card` is not; log, out, sum, step, set, diff, zip, go, c, h, lock and patch are left out because
+# they do (`Real.log`, `Fact.out`, `Finset.sum`, `Array.zip`).
+FILE_EXT = set("""md txt rst org tex bib pdf html htm css xml svg png jpg jpeg gif webp py ipynb lean sh bash zsh js mjs ts
+                  tsx jsx rs java kt cc cpp hpp cs rb pl lua ml jl swift json jsonl yaml yml toml ini cfg conf csv tsv
+                  parquet npy npz pkl h5 sqlite db sql tar gz tgz bz2 xz docx xlsx pptx odt scad stl dxf cir gp dat drat
+                  inp msh sta tjp err tmpl""".split())
+LEAN_NAME = re.compile(r"^[^\W\d][\w'.]*$")
 SECOND_MIND = re.compile(r"\bblind\b|verif|second (?:mind|derivation)|competitor|independen", re.I)
-SPAWN = re.compile(r"spawn|subagent|child agent|children|fork|delegat|agents? of (?:your|its) own|starts? another agent",
-                   re.I)
-FORBID = re.compile(r"\b(?:no|not|never|don't|do not|may not|must not|cannot|forbid\w*)\b", re.I)
+SPAWN = (r"(?:spawn\w*|sub-?agents?|child agents?|children|forks?|forking|delegat\w*|agents? of (?:your|its) own|"
+         r"the agent tool|(?:start|launch|run|creat)\w* (?:another|an?|any|other|more) (?:sub)?agents?|other agents)")
+FORBIDS_SPAWN = re.compile(r"\b(?:no|not|never|nor|don't|do not|may not|must not|cannot|can't)\b"
+                           r"(?:[\s,*]+[\w'’-]+){0,3}?[\s,*]+" + SPAWN + r"|" + SPAWN +
+                           r"[^.;:!?]{0,40}?\b(?:forbidden|prohibited|not allowed|not permitted|banned)\b", re.I)
 REASON = re.compile(r"\bbecause\b|\breason\b|\bwhy\b|\bso that\b|\bsince\b|:\s+\S|\s—\s", re.I)
-VERDICT_WORDS = re.compile(r"\b(?:prove|confirm)\b(?!\s+or\s+(?:refute|disprove))", re.I)
+VERDICT_WORDS = re.compile(r"(?<!\bor )\b(?:prove|confirm|proved|proven|confirmed|decided|settled|established|showed|"
+                           r"verified|refuted|disproved|succeeded|landed|reduced to|"
+                           r"(?:is|are|was|were|turned out|came out) (?:true|false))\b(?!\s+or\b)"
+                           r"|\b(?:produced|found|yielded|obtained|gave)\b[^.;:]{0,60}?\bresults?\b", re.I)
 CHANNELS = [("git history", re.compile(r"git log|git show|commit (?:subject|bod|histor)|git histor", re.I)),
             ("shared scratch", re.compile(r"scratch", re.I)),
             ("session transcripts", re.compile(r"transcript", re.I))]
@@ -101,15 +129,31 @@ def resolve(p, base, root):
 
 
 def is_path(tok, base, root):
-    """A backticked token is a path when it has an extension, ends in "/", starts with "~/", or its first segment exists."""
+    """A backticked token is a path when it ends in "/", starts with "~/", has an extension, or its first directory
+    exists. A bare name's extension counts only when it is a file type in FILE_EXT or the name could not be a Lean name
+    (it has a "-" or starts with a digit): `Finset.card` is a name, `fs116-v4.out` a file. "/loop" has no directory."""
     if any(c in tok for c in "<>") or tok.startswith("http"):
         return False
     if tok.startswith("~/") or tok.endswith("/"):
         return True
     if "/" in tok or "." in tok:
-        if EXT.search(tok.rstrip("*")) and not re.match(r"^[\d./]+$", tok):
+        ext = EXT.search(tok.rstrip("*"))
+        if ext and not re.match(r"^[\d./]+$", tok) and (
+                "/" in tok or ext.group(0)[1:] in FILE_EXT or not LEAN_NAME.match(tok.rstrip("*"))):
             return True
-    return "/" in tok and resolve(tok.split("/")[0], base, root) is not None
+    lead = "/" if tok.startswith("/") else ""
+    segs = tok[len(lead):].split("/")
+    return len(segs) > 1 and segs[0] != "" and resolve(lead + segs[0], base, root) is not None
+
+
+def covered(path, patterns):
+    """path is one of patterns, lies under one (a directory, written with or without its "/"), or matches one (a glob)."""
+    p = re.sub(r"^(?:\./)+", "", path)
+    for q in patterns:
+        q = re.sub(r"^(?:\./)+", "", q)
+        if p == q or p.startswith(q.rstrip("/") + "/") or fnmatch.fnmatch(p, q):
+            return True
+    return False
 
 
 def quotations(text):
@@ -141,6 +185,25 @@ def starts(h, a):
 
 def heading_name(h):
     return re.sub(r"^[\d.]+\s+", "", h.strip()).strip().lower()
+
+
+def heading_number(h):
+    m = re.match(r"^([\d.]*\d)\.?(?:\s|$)", h.strip())
+    return m.group(1) if m else None
+
+
+def addressed(src_text, raw_anchor):
+    """The (start, end) of the section a "§ <anchor>" names, or None. A heading that starts with the anchor as written
+    wins; only if none does, the anchor and the headings are compared with their numbers set aside, and a heading whose
+    number differs from the anchor's is never taken: "§ 14. Added at round 4" is not "## 12. Added at round 4"."""
+    secs = sections(src_text)
+    exact = [(a, b) for _, _, a, b, raw in secs if starts(raw, raw_anchor)]
+    if exact:
+        return exact[0]
+    anchor, num = heading_name(raw_anchor), heading_number(raw_anchor)
+    named = [(a, b) for nm, _, a, b, raw in secs
+             if anchor and starts(nm, anchor) and not (num and heading_number(raw) not in (None, num))]
+    return named[0] if named else None
 
 
 def sections(text):
@@ -200,24 +263,17 @@ def check_quotes(f, text, root, whole_region=None):
             fail(f, f"line {line}: source {path} is a directory, not a file")
             continue
         n += 1
-        pieces = [p for p in ELISION.split(norm(body)) if p]
-        if whole_region and whole_region[0] <= off < whole_region[1] and len(pieces) > 1:
-            fail(f, f"line {line}: a statement is quoted whole — no elision inside the statements section")
-            continue
         src_text = open(real, encoding="utf-8", errors="replace").read()
         hay_all = norm(src_text)
         scope, where = hay_all, None
         sec = re.search(r"§\s*([^;,()]+)", rest)
         row = re.search(r"\brow\s+([A-Za-z0-9_.-]+)", rest)
         if sec:
-            raw_anchor = sec.group(1).strip().lower()
-            anchor = heading_name(raw_anchor)
-            hit = [(a, b) for nm, _, a, b, raw in sections(src_text)
-                   if starts(raw, raw_anchor) or (anchor and starts(nm, anchor))]
+            hit = addressed(src_text, sec.group(1).strip().lower())
             if not hit:
                 fail(f, f"line {line}: source {path} has no heading § {sec.group(1).strip()}")
                 continue
-            scope, where = norm(src_text[hit[0][0]:hit[0][1]]), f"§ {sec.group(1).strip()}"
+            scope, where = norm(src_text[hit[0]:hit[1]]), f"§ {sec.group(1).strip()}"
         elif row:
             rid = row.group(1)
             rows = [l for l in src_text.split("\n")
@@ -226,6 +282,16 @@ def check_quotes(f, text, root, whole_region=None):
                 fail(f, f"line {line}: source {path} has no table row {rid}")
                 continue
             scope, where = norm(rows[0]), f"row {rid}"
+        q = norm(body)
+        if q in scope:
+            continue
+        if where and q in hay_all:
+            fail(f, f"line {line}: in {path}, but not under {where} — the address is a claim too")
+            continue
+        if whole_region and whole_region[0] <= off < whole_region[1] and ELISION.search(q):
+            fail(f, f"line {line}: a statement is quoted whole — no elision inside the statements section")
+            continue
+        pieces = [p for p in ELISION.split(q) if p]
         missing, pos = find_in_order(pieces, scope)
         if missing is None:
             continue
@@ -267,17 +333,9 @@ def header(text):
     return None, {}, (0, 0)
 
 
-def tokens(v):
-    return [t.strip("`") for t in re.split(r"[,\s]+", v) if t.strip("`")]
-
-
-def fenced(path, fence_paths):
-    p = path.lstrip("./")
-    for fp in fence_paths:
-        q = fp.lstrip("./")
-        if p == q or (q.endswith("/") and p.startswith(q)) or fnmatch.fnmatch(p, q):
-            return True
-    return False
+def paths_in(v):
+    """The paths a field names: its backticked tokens, or, when it has none, its words."""
+    return TICKED.findall(v) or [t for t in re.split(r"[,\s]+", v) if t]
 
 
 def check_brief(f, text, root):
@@ -320,47 +378,51 @@ def check_brief(f, text, root):
             for name, rx in CHANNELS:
                 if not rx.search(fb):
                     warn(f, f"brief {bid}: the fence does not mention {name}")
-        said = [w for k in ("mission", "statements", "acceptance") for w in VERDICT_WORDS.findall(body_of.get(k, ""))]
-        if said:
-            warn(f, f"brief {bid}: a fenced brief says \"{said[0]}\" — a brief that says prove or confirm has given the verdict")
     for line, _, src, _, _ in quotations(text):
-        if src and fence_paths and fenced(SOURCE.match(src).group(1), fence_paths):
+        if src and fence_paths and covered(SOURCE.match(src).group(1), fence_paths):
             fail(f, f"line {line}: quotes {SOURCE.match(src).group(1)}, which the fence closes — the recipient cannot "
                     f"read back what it was sent; put the statements in a file outside every fence")
     sr = fields.get("standing rules", "")
     if sr:
-        t = TICKED.search(sr)
-        name = t.group(1) if t else sr.split()[0]
+        words = [w.strip("`").rstrip(",;:.") for w in sr.split()]
+        name = next((w for w in words if w and (is_path(w, base, root) or resolve(w, base, root))), words[0])
         p = resolve(name, base, root)
         if not p or os.path.isdir(p):
             fail(f, f"brief {bid}: standing rules: {name} does not exist")
         else:
             paras = re.split(r"\n\s*\n", open(p, encoding="utf-8", errors="replace").read())
-            if not any(SPAWN.search(x) and FORBID.search(x) and REASON.search(x) for x in paras):
+            if not any(FORBIDS_SPAWN.search(x) and REASON.search(x) for x in paras):
                 fail(f, f"brief {bid}: standing rules: no paragraph names spawning agents, forbids it, and gives a reason")
-    rec = tokens(fields.get("record", ""))
-    if rec:
-        tt = tokens(fields.get("touches", ""))
-        if not any(rec[0] == t or (t.endswith("/") and rec[0].startswith(t)) or fnmatch.fnmatch(rec[0], t) for t in tt):
-            fail(f, f"brief {bid}: record: {rec[0]} is not among touches:, so the recipient may not write its own record")
-    new = set(t for k in NEW_PATH_FIELDS for t in tokens(fields.get(k, "")))
+    rec = paths_in(fields.get("record", ""))
+    if rec and not covered(rec[0], paths_in(fields.get("touches", ""))):
+        fail(f, f"brief {bid}: record: {rec[0]} is not among touches:, so the recipient may not write its own record")
+    new = [t for k in NEW_PATH_FIELDS for t in paths_in(fields.get(k, ""))]
     cut = [(h0, h1)] + [(a, b) for _, _, _, a, b in quotations(text)]
     if "fences" in region:
         cut.append(region["fences"])
     cut.sort()
-    scan, pos = [], 0
+    prose, pos = [], 0
     for a, b in cut:
         if a > pos:
-            scan.append(text[pos:a])
+            prose.append((pos, text[pos:a]))
         pos = max(pos, b)
-    scan.append(text[pos:])
+    prose.append((pos, text[pos:]))
     missing = set()
-    for p in TICKED.findall("".join(scan)):
-        if "*" in p or p in new or p in missing or not is_path(p, base, root):
-            continue
-        if not resolve(p, base, root):
-            missing.add(p)
-            fail(f, f"brief {bid}: names {p}, which does not exist — a brief's paths are claims too")
+    for _, chunk in prose:
+        for p in TICKED.findall(chunk):
+            if "*" in p or p in missing or covered(p, new) or not is_path(p, base, root):
+                continue
+            if not resolve(p, base, root):
+                missing.add(p)
+                fail(f, f"brief {bid}: names {p}, which does not exist — a brief's paths are claims too")
+    if fb is not None:
+        said = {}
+        for at, chunk in prose:
+            for m in VERDICT_WORDS.finditer(chunk):
+                said.setdefault(text.count("\n", 0, at + m.start()) + 1, " ".join(m.group(0).split()))
+        for ln, w in sorted(said.items()):
+            warn(f, f"brief {bid}: line {ln}: a fenced brief says \"{w}\" — an outcome, in any words, hands the recipient "
+                    f"the verdict")
     return bid, region.get("statements")
 
 

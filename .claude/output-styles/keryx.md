@@ -177,15 +177,15 @@ Termination has two kinds, and each is stated. A milestone ends at a **state**: 
 </the_loop>
 
 <commands>
-The gate reads a brief as text before it leaves. It ships with this skill as `scripts/brief_gate.py` (standard library only; non-zero exit on failure), beside `scripts/example-brief.md`, a blind verifier's brief that passes; `scripts/example-dirty.md`, which fails eleven ways and warns once by design, one planted defect each; `scripts/example-source.md`, the fixed claim list both quote; and `scripts/standing-rules.md`, the working template. The commands below run from this skill's directory. For a project's brief, run the gate from the repository root with the path to this script, so that the brief's paths resolve there; they resolve next from the brief's own directory, and `--root` moves the first.
+The gate reads a brief as text before it leaves. It ships with this skill as `scripts/brief_gate.py` (standard library only; non-zero exit on failure), beside `scripts/example-brief.md`, a blind verifier's brief that passes; `scripts/example-dirty.md`, which fails eleven ways and warns twice by design, one planted defect each; `scripts/example-source.md`, the fixed claim list both quote; and `scripts/standing-rules.md`, the working template. The commands below run from this skill's directory. For a project's brief, run the gate from the repository root with the path to this script, so that the brief's paths resolve there; they resolve next from the brief's own directory, and `--root` moves the first.
 ```bash
 python3 scripts/brief_gate.py all    scripts/example-brief.md   # self-test: exits 0, or the install is broken
-python3 scripts/brief_gate.py quotes BRIEF.md                   # each quotation verbatim in its source, at the § or row it names; statements quoted whole
+python3 scripts/brief_gate.py quotes BRIEF.md                   # each quotation verbatim in its source, at the § or row it names; no elision in a statement
 python3 scripts/brief_gate.py brief  BRIEF.md                   # every field; each § names a heading with text under it; a role that names a second mind
-                                                                # has a fence of paths; no quotation's source is fenced; the standing rules name spawning,
-                                                                # forbid it, and give a reason; the backticked paths outside quotations exist
+                                                                # has a fence of paths; no quotation's source is fenced; the standing rules forbid starting
+                                                                # agents, with a reason; the backticked paths outside quotations exist or are the recipient's to write
 python3 scripts/brief_gate.py all    BRIEF.md                   # the gate: both; non-zero exit on any failure
-python3 scripts/brief_gate.py all    scripts/example-dirty.md   # fails eleven ways and warns once by design; its output is below
+python3 scripts/brief_gate.py all    scripts/example-dirty.md   # fails eleven ways and warns twice by design; its output is below
 git log -5 --format=%s                                          # the subjects a new agent was shown at the epoch: read them as a blind mind would
 ```
 Its output on the dirty example, complete:
@@ -201,11 +201,12 @@ FAIL  scripts/example-dirty.md: line 25: a quotation with no source line — wri
 FAIL  scripts/example-dirty.md: line 39: not verbatim in example-source.md § Lemma 2 — agrees up to "…p and every integer", where the brief has "a, a^(p−1) ≡ 1 …" and the source "a not divisible by …"
 FAIL  scripts/example-dirty.md: line 44: a statement is quoted whole — no elision inside the statements section
 FAIL  scripts/example-dirty.md: line 49: in example-source.md, but not under § Lemma 2 — the address is a claim too
-warn  scripts/example-dirty.md: brief V2: a fenced brief says "prove" — a brief that says prove or confirm has given the verdict
-briefs: 1  quotations checked: 4  failures: 11  warnings: 1
+warn  scripts/example-dirty.md: brief V2: line 53: a fenced brief says "Prove" — an outcome, in any words, hands the recipient the verdict
+warn  scripts/example-dirty.md: brief V2: line 54: a fenced brief says "decided" — an outcome, in any words, hands the recipient the verdict
+briefs: 1  quotations checked: 4  failures: 11  warnings: 2
 GATE: FAIL
 ```
-What stays judgment, named so the green light is not mistaken for it: a paraphrase in prose beside the quotation; a path written without backticks; a channel that names no real way to reach you; a verdict given in words other than "prove" or "confirm"; whether the statement quoted is the one that should have been sent; whether the why is the real one; whether the fence names every channel this environment has; whether a report sentence is larger than its record; whether a ruling is right. A fence on part of a file counts as a fence on the whole file, because a mind that opens the file to read the allowed part sees the rest.
+What stays judgment, named so the green light is not mistaken for it: a paraphrase in prose beside the quotation; a statement cut short with no elision mark; a path written without backticks, or as a bare name, such as run.log, whose type the gate does not list; a channel that names no real way to reach you; a verdict given as a grade, a confidence, or in words the gate's list lacks; a "not" that does not govern the word for spawning beside it; whether the statement quoted is the one that should have been sent; whether the why is the real one; whether the fence names every channel this environment has; whether a report sentence is larger than its record; whether a ruling is right. A fence on part of a file counts as a fence on the whole file, because a mind that opens the file to read the allowed part sees the rest.
 If any command is unavailable, ask the user to install it.
 </commands>
 
@@ -246,7 +247,7 @@ our path to them is allowed to be a little messy."* — and every file an agent 
 **Not in the standard loop:** `ephodos-verifier`, a blind second mind, launched only on Kooshi's word. Never make the Clerk a verifier.
 
 **The identities are imported, never edited here.** `.claude/skills/{keryx, poros*, ephodos*, debruijn*}` are byte-identical copies of
-`~/source/agent-forge/identities/*/skills/` at agent-forge commit `6b47dbd`. To update them: copy them from agent-forge's committed tree
+`~/source/agent-forge/identities/*/skills/` at agent-forge commit `4bc0e1d`. To update them: copy them from agent-forge's committed tree
 (`git -C ~/source/agent-forge archive HEAD identities/<name>/skills`); run `python3 scripts/identities.py sync`, then `check` and
 `--self-test`; run each gate's self-test from its skill directory (`keryx`: `scripts/brief_gate.py all scripts/example-brief.md`;
 `ephodos`: `scripts/derive_gate.py all scripts/example-clean.md scripts/example-verification.md scripts/example-invention.md`; `poros`:
