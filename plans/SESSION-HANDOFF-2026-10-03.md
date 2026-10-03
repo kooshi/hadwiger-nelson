@@ -7,7 +7,7 @@
 
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow`.
 2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–104, the announcement rule at its top, the W-table of
-   workflow frictions, the O-table of lane items outside the milestone) and `plans/FS121-close-inventory.md` (items 1–70). Every ruling is a row.
+   workflow frictions, the O-table of lane items outside the milestone) and `plans/FS121-close-inventory.md` (items 1–82). Every ruling is a row.
 3. **Kooshi's instructions in force**, verbatim in the inventories:
    - FS-121 runs beside FS-116; the formalization lane stays idle (FS-116 item 4).
    - **At most three agents at a time, verifiers included** (2026-10-03; FS-116 item 74). Launch nothing until fewer than three run.
@@ -23,14 +23,12 @@
 |---|---|---|---|---|
 | FS116-V5 | ephodos-verifier on eight statements, two groups: FS116-Y3-SIX, -TIPS (§ 14), -NBTIP, -TIGHTLENS, -STARFORCE (§ 12); then FS116-N3-SEMI, -PAIR, -CROSS (§ 13). A fresh mind takes the second group if it hands back after the first | `data/fs116/briefs/FS116-V5-verify.md` | `plans/FS116-V5-verification.md` | yes |
 | FS116-V4 | ephodos-verifier, narrowed by amendment 1 to FS116-S1-KAPPA, -RUNG, -QF (the list's § 12, first three) | `data/fs116/briefs/FS116-V4-verify.md` | `plans/FS116-V4-verification.md` | yes |
-| FS121-V5 | ephodos-verifier on FS121-D2-SYM, -D4-FACE, -D4-GRID (the list's § 8) | `data/fs121/briefs/FS121-V5-verify.md` | `plans/FS121-V5-verification.md` | yes |
+| FS121-Z1 | Ephodos: FS-121's close job (numbers fixed: rows ‹R121-a›…, G88–G90, stubs FS-126–FS-128; FS-121 item 82) | `data/fs121/briefs/FS121-Z1-close.md` | `plans/FS121-Z1-close.md` | no |
 
 ## 3. The queue, in order (launch as slots free; at most three running)
 
 1. *Done 10:25*: FS116-N3 reported (FS-116 items 92–99); its three statements are frozen as `data/fs116/claims.md` § 13 with its notation paragraph and three notes (item 94); STAR2 and CONE stay one mind (item 95).
-2. **When FS121-V5 reports**: FS-121's planned rounds are done (FS-121 item 69). Launch **FS-121's close job** (its brief is drafted and gated in the session scratch as FS121-Z1-close.draft.md; if the scratch is gone, rebuild it from `data/fs111/briefs/C111-close.md`; fill in the inventory's last item number and V5's items, gate it, copy it to `data/fs121/briefs/FS121-Z1-close.md`) (Ephodos, `.claude/agents/ephodos.md`
-   § The close job). Fix its numbers in advance with FS-116's close in mind: FS-121 may use stub numbers FS-126–FS-128; FS-116 has FS-123–FS-125;
-   ledger rows from 142 and grokkings from G88 are to be split between the two closes in their briefs (proposed edit E10's shape).
+2. *Done*: FS121-V5 reported (FS-121 items 72–81; the announcement rule met for D4-FACE, for D2-SYM with its two caveats, and for D4-GRID with its caveat, item 73); FS121-Z1 launched (item 82). FS-116's close numbers are FS-116 item 105.
 3. *Done 10:37*: FS116-CL1 reported (item 101); the setting frozen as `data/fs116/claims.md` § 14 (item 102); FS116-V5 launched on §§ 12–14's eight (item 104). FS116-V4's second reading question answered from the author's record (item 103).
 4. **Optional, Kooshi's estimate allowed one or two**: an FS-116 exclusion round — the HEX3-star vertex beyond radius 2 (item 88; excluding it
    removes the Γ-free type from C114-LOCAL-F's case list), or SAT-STRIP's open class G1 (rings with a (Q) arc; item 83).
