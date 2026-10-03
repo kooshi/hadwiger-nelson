@@ -11,6 +11,12 @@ Blind, the same model (Opus 5.5) as the minds whose records the second phase ope
   tools exact (`tools/fs121_v5_face.py cex`); one mind] — § 2.2.
 - **FS121-D4-GRID — TRUE** [derived from FS121-D4-FACE; two minds, blind to the argument, given the lemma; the same model]; and `Σ = B_x × B_y` with
   exactly four interface arcs at each point — § 2.3.
+- **FS121-D2-SYM — TRUE**, under both readings of ¬LRA [derived from FS111-M2-INTRAD, C121-OUT, FS111-M-C11; two minds, blind, the same model;
+  the in-particular clause and reading (L∞) rest on M2-INTRAD's per-radius finiteness, one mind] — §§ 3.2–3.4; with **V5-OFF** [hand], **V5-LOC**,
+  **V5-ARC** and **V5-RAY** [derived from FS111-M-C11], one mind each — § 3.1.
+- **V5-SYM-UP** — a window bound at one radius `r ≥ 2` holds with the same constant at every radius `R ≥ r` [derived, one mind] — § 3.5.
+- **V5-SYM-CPT** — under a cocompact symmetry every curved interface is a unit arc of kind both: no tangent-type curved interface, no (R2) arc,
+  without assuming ¬LRA [derived, one mind; rests on M2-INTRAD's per-radius finiteness] — § 3.5.
 - **V5-GRID-CANTOR** — for uncountable `B_x` the breakpoint clause is false (SQ9 with a null Cantor set of breakpoints) [hand, one mind] — § 2.4.
 
 ## Would-have-searched-here log (standing rule 5)
@@ -123,15 +129,20 @@ verification: FS121-D2-SYM
     taken symmetric; anything from a bound at r = 1
   given: the statement with its not-claimed line; the brief in full; the frozen list in full; the author's four definitions (§ 1.3); everything
     else seen is listed in § 1.4
-  committed: 2026-10-03 — stage 1 registers the prediction only
+  committed: 2026-10-03 — the stage-3 commit ("FS121-V5: stage 3"), before any FS-121 record was opened
   predicted: derived — 0.65 — likeliest break: the in-particular clause, which needs arcs of one radius to be locally finitely many (one mind)
-  verdict: stalls at: not yet derived — stage 1 registers the prediction; stage 2 writes this mind's verdict here
-  method: not yet — stage 2
-  attack: § 1.5 Registered predictions
-  divergences: none — the comparison opens only after the verdicts' commit (the brief's § After your verdicts)
-  counterexamples: none — nothing attacked yet; stage 2
-  minds: 1 — no derivation yet
-  grade: hand
+  verdict: derived
+  method: V5-RAY (long nearly straight arcs of cl 𝓘 accumulating at a point put a segment into Σ, by M-C11's graph form), reached by a round
+    trip inward to radius r (M2-INTRAD) and back out over the window (C121-OUT); (L∞) by the chain's alternation; the in-particular clause by
+    compactness and M2-INTRAD's per-radius finiteness (§§ 3.1–3.4); the first route unknown to this mind until the comparison
+  attack: § 3.6 The attack on FS121-D2-SYM
+  divergences: none — the comparison opens only after this commit; stage 4 replaces this line with its table's address
+  counterexamples: none — searched: the held models R7, SQ9, HEX9 (window clause vacuous), r = 1, a bound only on bounded sets, degenerate
+    arcs, segments under (L∞); no held object at any k has an arc of radius ≥ 2 to test the window clause (§ 3.6)
+  minds: 2 — blind to: the first derivation's record, data and argument (plans/FS121-D2-proof.md beyond the four definitions the coordinator
+    quoted); method: V5-RAY and the inward–outward round trip (§§ 3.1–3.2); the same model (Opus 5.5); the in-particular clause and reading (L∞)
+    rest on M2-INTRAD's per-radius finiteness, one mind
+  grade: derived from: FS111-M2-INTRAD, C121-OUT, FS111-M-C11
 
 verification: FS121-D4-FACE
   statement:
@@ -320,3 +331,112 @@ control: v5-grid-nonsat
   run: cd .. && python3 tools/fs121_v5_grid.py nonsat
   expect: True
   fault: cd .. && python3 tools/fs121_v5_grid.py nonsat --fault
+
+## Stage 3 — SAVED: FS121-D2-SYM — derivation, attack, verdict
+
+*Written from the statement, the definitions' sources, the held inputs and the author's four definitions (§ 1.3) only. No FS-121 record opened.*
+
+### 3.1 Setting and lemmas
+
+*Setting.* An honest saturated colouring in D-NF with `k` colours, satisfying REG-J′ (Σ locally finite, so closed; finitely many interface arcs at
+each point of Σ). `𝓘 = ⋃_j ∂_e S_j`, the interface set. A **piece**, a **radius-r arc** and its **window**: the author's definitions (§ 1.3); an arc
+has positive length (with a degenerate one-point "arc" counted, every circle of radius `r` touching an interface curve from outside would give window
+0, and the hypothesis would hold only for colourings with no interface — the reading is forced). **LRA at `x₀`**: pairwise distinct pieces `A_n`
+with `dist(x₀, A_n) → 0` and radii `R_n → ∞` — reading **(Lfin)** circular pieces of finite radii; reading **(L∞)** segments (radius `∞`) allowed too.
+
+**V5-OFF** [hand]. *`cl 𝓘 ∖ Σ ⊆ 𝓘`, and no point of `𝓘` is a density point of any class.* — (ii) At `y ∈ ∂_e S_a`, `d̄_a(y) > 0`, so no other
+class has density 1, and `y ∉ S̃_a` by definition. (i) Let `y = lim y_m ∉ Σ`, `y_m ∈ ∂_e S_a` (one colour, after a subsequence). As `y_m ∉ S̃_a`,
+some `b ≠ a` has `d̄_b(y_m) > 0` (finitely many colours; again one `b` after a subsequence). So `y_m ∈ supp S_a ∩ supp S_b`, and `y` too. If
+`y ∉ 𝓘`, every colour has `d̄_j(y) = 0` or density 1 at `y`, and at most one has density 1; so `a` or `b` has density 0 at `y` with `y` in its
+support — a cusp, in Σ. ∎
+
+**V5-LOC** [derived from FS111-M-C11]. *Each `y ∈ cl 𝓘 ∖ Σ` has a ball `B*` missing Σ in which `cl 𝓘 ∩ B* = 𝓘 ∩ B*` is the graph `Γ` of a `C^{1,1}`
+function over the tangent line at `y`, `|φ(s)| ≤ s²/2`.* — `y ∈ 𝓘` (V5-OFF) and `y ∉ Σ`, so (H1), (H2) hold at `y` with a ball `N` and colours
+`a, b`. Every essential boundary point in `N` meets M-PINCH's hypotheses with this `N` (saturation everywhere; `d̄_a, d̄_b > 0` there puts it in
+`cl P_a ∩ cl P_b`), so M-C11 makes `∂_e S_a ∩ N′` a `C^{1,1}` curve, a Lipschitz graph over its tangent at `y` with that parabolic bound
+(`plans/FS111-M-regularity.md` § 3.2 (ii)); in `N` only `a, b` have positive measure, so `𝓘 ∩ N = ∂_e S_a ∩ N`. Shrink to `B* ⊆ N′` missing the closed
+Σ; V5-OFF gives `cl 𝓘 ∩ B* = 𝓘 ∩ B*`. ∎ **V5-ARC** (corollary). *If an arc `A` of a circle or line, of positive length, lies in `cl 𝓘`, every point
+of `A` off Σ and not an end of `A` is an interior point of a piece lying on `A`'s circle (or line); of tangent type if the radius is not 1* (a
+split-type point makes the local interface one unit arc, M-C11). — `A ∩ B*` contains a sub-arc through the point inside the simple arc `Γ`, so
+`Γ = A` near it.
+
+**V5-RAY** [derived from FS111-M-C11, through V5-LOC]. *Let `C_n ⊆ cl 𝓘` be arcs of circles of radii `R_n → ∞`, or segments, no two sharing a
+sub-arc of positive length, with points `p_n ∈ C_n`, `p_n → x₀`, from which `C_n` continues for arclength `≥ λ > 0` with unit tangent `u_n → u`. Then
+Σ contains the open segment `(x₀, x₀ + λu)`; so Σ is not locally finite.* — Parametrise the continuation by arclength: `|c_n(s) − p_n − s u_n| ≤
+s²/R_n`, so `c_n(s) → x₀ + su` uniformly on `[0, λ]`. Let `x₁ = x₀ + tu`, `0 < t < λ`, and suppose `x₁ ∉ Σ`; `x₁ ∈ cl 𝓘` as a limit of `c_n(t)`. Take
+`B* = B(x₁, ρ*)` from V5-LOC with `ρ* < min(t, λ − t)/2`, `ρ* ≤ 1/2`. For large `n` the sub-arc `c_n([t − 0.6ρ*, t + 0.6ρ*])` lies in `B*`, passes
+within `ρ*/4` of `x₁`, and has both ends outside `B(x₁, ρ*/2)`. It lies in `Γ`, a graph over the tangent line; the projection is a homeomorphism on
+`Γ`, so the sub-arc's projection is monotone between its ends, which lie beyond `±0.45ρ*`, and passes within `ρ*/4` of 0 — so the ends lie on
+opposite sides and the sub-arc contains `Γ` over `[−0.45ρ*, 0.45ρ*]`. Two large `n ≠ m` then share that sub-arc: a contradiction. So `x₁ ∈ Σ`. ∎
+
+### 3.2 The main clause under (Lfin)
+
+Let `θ₀ > 0` bound below the windows of all radius-`r` arcs, `r ≥ 2`, and suppose LRA at `x₀` by circular pieces `A_n`, `R_n` strictly increasing and
+`> r` (a subsequence), `q_n ∈ A_n`, `q_n → x₀`, `z_n` the centre and `ω_n` the window of `A_n`.
+1. **Inward to radius `r`.** `A_n` is of tangent type (`R_n ≥ 2`; V5-ARC). FS111-M2-INTRAD: the unit parallel of a tangent-type interface arc is again an
+   interface arc — off Σ its points are interface points (`plans/FS111-M2-regularity.md` § 4.1 step (1)). So the arc of the circle `(z_n, R_n − 1)` over
+   `cl ω_n` lies in `cl 𝓘` (Σ meets it in finitely many points), and by V5-ARC its points off a finite set are interior points of tangent-type pieces of
+   radius `R_n − 1`. Iterating `R_n − r` times (every radius on the way is `≥ r + 1 ≥ 3`): the arc of the circle `(z_n, r)` over `cl ω_n` lies in `cl 𝓘`.
+2. **The window.** That arc lies in one radius-`r` arc `P_n`, of window `W_n ⊇ cl ω_n`, `|W_n| ≥ θ₀` — the only use of the hypothesis.
+3. **Outward over the window.** Off a finite set, the points of `P_n` are interior points of tangent-type pieces of radius `r` (V5-ARC, `r ≥ 2`).
+   C121-OUT: the unit parallel away from the centre of each is, off Σ, a tangent-type interface arc of radius `r + 1`. So the arc of `(z_n, r + 1)` over
+   `W_n` lies in `cl 𝓘`; iterating, `C_n` := the arc of `(z_n, R_n)` over `W_n` lies in `cl 𝓘`. It contains `A_n` (one circle, `W_n ⊇ ω_n`), so `q_n ∈ C_n`.
+4. **The ray.** `W_n` is an interval of angles of length `≥ θ₀` containing `q_n`'s angle, so `C_n` continues from `q_n` on one side for arclength
+   `≥ R_nθ₀/2 ≥ 1` (large `n`). The `C_n` have distinct radii, so no two share a sub-arc. V5-RAY with `λ = 1` and `u_n → u` (a subsequence): Σ contains a
+   segment, against REG-J′. ∎
+
+*Uses only:* M2-INTRAD's parallel step (two minds on its core), C121-OUT (two minds), M-C11 (three), Σ's cusp clause, the window bound at one `r ≥ 2`,
+and REG-J′'s first clause (in V5-RAY). **Not M2-INTRAD's per-radius finiteness.** `r ≥ 2` is used in steps 1 and 3: at `r = 1` the radius-1 arc may
+be of split type, and C121-OUT's outward step is for tangent-type arcs — the route breaks exactly where the not-claimed line puts `r = 1`.
+
+### 3.3 Reading (L∞): segments among the pieces
+
+(★) *No point is an accumulation point of circular pieces*: of radii `→ ∞` by § 3.2; of bounded radii by M2-INTRAD's per-radius finiteness ("arcs of
+any bounded radius are locally finitely many", § 4.1 (iii); **one mind**, VM2-FIN′). So LRA under (L∞) has all but finitely many `A_n` segments.
+(a) *Lengths bounded below along a subsequence:* V5-RAY (two distinct maximal pieces sharing a sub-arc of positive length would lie on one interface
+curve there, V5-LOC, and be one piece). (b) *Lengths `→ 0`:* take `η` with `B(x₀, η) ∩ Σ ⊆ {x₀}`; for large `n`, `A_n ⊆ B(x₀, η)` has an end `e_n ≠ x₀`,
+off Σ, where the interface is one `C^{1,1}` curve `Γ` (V5-LOC). Two segment pieces meeting off Σ on a `C¹` curve are collinear and one piece, so
+segment pieces of `Γ` near `e_n` are separated by circular ones, finitely many by (★): `Γ` is a finite chain near `e_n`, and the piece `B_n` next to
+`A_n` at `e_n` is circular. A circular piece is next to at most two pieces, so infinitely many `B_n` are distinct, with `dist(x₀, B_n) ≤ |x₀ − e_n| → 0`:
+against (★). ∎ **So under (L∞) the statement holds too, resting in addition on M2-INTRAD's one-mind finiteness step.**
+
+### 3.4 The in-particular clause (a cocompact symmetry gives the bound, at every `r ≥ 2`)
+
+Let a group `G` of isometries map the partition to itself up to colour permutations, and `K` be compact with `⋃_{g∈G} gK = ℝ²`. Densities, supports,
+`∂_e`, Σ and `cl 𝓘` are `G`-invariant; `g` maps radius-`r` arcs to radius-`r` arcs with equal windows. *Only finitely many radius-`r` arcs meet `K`:*
+otherwise take `q_m ∈ K` on distinct ones `P_m`, `q_m → q`; Σ is finite near `q`, so each `P_m` carries a radius-`r` piece `Q_m` (V5-ARC) with
+`dist(q, Q_m) → 0`, and distinct maximal arcs carry distinct pieces — infinitely many radius-`r` pieces accumulate at `q`, against M2-INTRAD's
+per-radius finiteness (**one mind**). Every radius-`r` arc `P` meets some `gK`, so `g⁻¹P` meets `K` and has `P`'s window: the minimum over the finitely
+many arcs meeting `K` bounds all windows below (vacuously if there are none). With § 3.2: **¬LRA**. ∎ (The doubly periodic case is `G` a lattice of
+translations.)
+
+### 3.5 What the argument carries beyond the sentence
+
+- **V5-SYM-UP** [derived, one mind]. *Under the hypothesis at `r` with constant `θ₀`, every circular piece of finite radius `R ≥ r` lies in a radius-`R`
+  arc of window `≥ θ₀`, so on an arc of `cl 𝓘` of length `≥ Rθ₀`: the bound at one radius propagates, with its constant, to every larger radius.* —
+  § 3.2 steps 1–3 with `A` any such piece.
+- **V5-SYM-CPT** [derived, one mind; rests on M2-INTRAD's per-radius finiteness]. *Under a cocompact symmetry as in § 3.4, no piece is a tangent-type
+  arc of finite radius: every curved interface is a unit arc of split type, of kind both.* — A tangent-type piece of radius `R₀` (any `R₀ ≥ 1`) has, by
+  C121-OUT, tangent-type concentric pieces of every radius `R ≥ R₀`; for `R ≥ max(2, R₀)` each lies on a radius-`R` arc of window `≥ θ₀` (§ 3.4 and
+  V5-SYM-UP); a group element moves it to meet `K` at `q_R`, from which it continues `≥ Rθ₀/2`; with `q_R → q ∈ K`, V5-RAY makes Σ non-locally-finite.
+  What remains curved is of split type, a unit arc of kind both (`plans/FS111-M-regularity.md` § 3.1). This is C121-PER's conclusion for doubly periodic
+  colourings (two minds, held) **without its hypothesis ¬LRA** — a consistency check against a held statement, met; and R7, SQ9, HEX9 meet it.
+  So the in-particular clause's sentence ("¬LRA") is weaker than what its argument carries, and for cocompact colourings the window hypothesis is,
+  a posteriori, vacuous (no radius-`r` arcs, `r ≥ 2`).
+
+### 3.6 The attack on FS121-D2-SYM
+
+- **Vacuity and models.** R7 (`k = 7`), SQ9 and HEX9 (`k = 9`), all doubly periodic, satisfy every hypothesis — the window clause vacuously, having no
+  arc of radius `≥ 2` — and ¬LRA. No held object at any `k` has an arc of radius `≥ 2` (C121-OUT's inhabitant note), so no object tests the window clause;
+  by V5-SYM-CPT no cocompact one can.
+- *REG-J′ removed:* V5-RAY's contradiction is with Σ's local finiteness; without it the route stops there. *The bound removed:* C121-NOLRA's open step;
+  the route needs it at step 2 only. *A bound only on bounded sets:* not enough for this route — the centres `z_n` run off to infinity, and the windows
+  constrained are theirs.
+- ***r = 1*:** the route breaks at steps 1 and 3, where the radius-1 arc may be split-type (C121-ENDS's inner end) and C121-OUT does not apply; neither a
+  counterexample nor a proof was found. Confirms the not-claimed line.
+- *Degenerate arcs:* if one-point arcs counted, the hypothesis would hold only for interface-free colourings (§ 3.1); the author's "maximal arc" is read
+  as an arc of positive length — a wording point for the author (§ 4's table).
+- *The converse* (¬LRA ⇒ a bound): not derived, untestable on held objects (none has the arcs).
+- **Where the attack succeeds:** at no counterexample — none found at the statement's scope. It succeeds at the statement's dependence edges: the
+  in-particular clause and reading (L∞) are carried only through M2-INTRAD's per-radius finiteness, held at one mind; the main clause under (Lfin) is
+  not. And it finds the sentence narrower than its argument (§ 3.5): the carried exceeds the conveyed, at V5-SYM-UP and V5-SYM-CPT.
