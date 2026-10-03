@@ -1061,7 +1061,7 @@ def main() -> int:
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
-    ap.add_argument("--also", nargs="*", default=[".claude/skills/grokkings/SKILL.md", "plans/GROKKINGS-RETIRED.md", "RUNNING.md", "plans/CLAUDE-MD-HISTORY.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
+    ap.add_argument("--also", nargs="*", default=[".claude/skills/grokkings/SKILL.md", "plans/GROKKINGS-RETIRED.md", "RUNNING.md", "plans/CLAUDE-MD-HISTORY.md", "LEAN.md", "plans/WHERE-THE-PROBLEM-STANDS.md", "plans/HISTORY-WORKFLOW-3.0.md"], help="files CLAUDE.md sections moved to, joined to the corpus (missing = not joined)")
     ap.add_argument("--stubs", default="plans/FRONTIER-STUBS.md", help="the ranked stubs, joined to the loss audit only (CLAUDE.md keeps the top ten; --dupes leaves it out)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
@@ -1093,7 +1093,7 @@ def main() -> int:
 
     if a.dupes:
         # the history file keeps text the live file was rewritten from, some of it kept on purpose: a record, not a retelling
-        dupes(corpus_files(a.new, a.ledger, a.instances, tuple(f for f in a.also if not f.endswith("CLAUDE-MD-HISTORY.md"))))
+        dupes(corpus_files(a.new, a.ledger, a.instances, tuple(f for f in a.also if not f.endswith(("CLAUDE-MD-HISTORY.md", "HISTORY-WORKFLOW-3.0.md")))))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")

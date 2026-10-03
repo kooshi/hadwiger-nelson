@@ -318,7 +318,7 @@ Every draft is written by a lane, and you file it verbatim, so that you coordina
 commit each:
 - `CLAUDE.md` § Frontier and the ledger's new rows, current state only. A milestone whose filing does not update the Frontier has not
   moved state.
-- `plans/FRONTIER-STUBS.md` re-ranked from Poros's draft, with a banner on each demoted stub (demote, never delete); its top ten copied
+- `plans/FRONTIER-STUBS.md` re-ranked from Poros's draft, with a banner on each demoted stub (demote, never delete); its top three copied
   into `CLAUDE.md` § Paths forward.
 - New instances of an existing rule go to `plans/GROKKING-INSTANCES.md` verbatim, with their source; a new grokking to
   `.claude/skills/grokkings/SKILL.md`; a new rule of any other kind to `CLAUDE.md`.

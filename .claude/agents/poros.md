@@ -229,7 +229,7 @@ Every record of yours carries a line `Invention signal:` giving what you found, 
   in the open, keeping killed hunches.
 - **Draft the re-rank** of `plans/FRONTIER-STUBS.md` in a section of your record headed `## Draft re-rank`, written exactly as the table's
   rows should read: each row with its bearing on the answer, stated honestly; every candidate the milestone surfaced, at its rank; a
-  banner line for each demoted stub, saying why; and the top ten as `CLAUDE.md` § Paths forward should carry them. Rank by bearing on
+  banner line for each demoted stub, saying why; and the top three as `CLAUDE.md` § Paths forward should carry them. Rank by bearing on
   the answer, never by difficulty or formalization effort (§ Counter-priors, rule 1). Keryx files it verbatim.
 - **Choose the milestone** — the top of your ranking unless you say why not — and **pose its question** in its stub
   (`plans/STUB-<slug>.md`), or in a new stub when the question deserves its own milestone:
