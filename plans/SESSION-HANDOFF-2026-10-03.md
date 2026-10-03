@@ -33,7 +33,10 @@ loaded files is `plans/HISTORY-WORKFLOW-3.0.md`; the arithmetic-era items of "Wh
 
 ## 3. Open items
 
-- **Upstream brief-gate fixes** (U3, U5, U6 in the edits file) belong to `~/source/agent-forge`, not filed; until then, a brief failing on one
-  of them notes it and launches.
+- **The brief gate's defects** are filed in `~/source/agent-forge` (commit 95816ff, not pushed): `forge/STATUS.md` under Keryx, with
+  `identities/keryx/record/evidence/defects-2026-10-03/repro.sh` (four false failures, U3a, U3b, U5, U6; two false passes, U7, U4). Until they
+  are fixed and re-imported, a brief failing on one notes it and launches.
+- **The Searcher's identity** is a stub in agent-forge (`identities/_unnamed-searcher/README.md`), at Kooshi's word: probably not needed;
+  fleshed out only if the lane shows it needs more craft.
 - **The census** `tools/fs71_ledger_b_check.py --strict` checks derivation files against `LEDGER.md` § B, which stops at FS-116 and FS-121; it
   is no longer run at a filing, and a 3.1 derivation file will fail it by design.
