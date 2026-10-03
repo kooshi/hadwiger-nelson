@@ -155,3 +155,33 @@ One line per item with its source; no narration. Each line is ticked done or dec
     line, the first naming an object for part of its scope) and the 16 `named` entries that match a looser negative pattern go to pass 3 as a
     second list, sorted the same way. Alternative: widen the rule. Why: a wider rule moves judgement into a regex; pass 3 reads each anyway.
     Confidence: high. Source: IX1's report; `data/fs129/index/vacuity.md`.
+38. **FS129-OA1 reported DONE** (`data/fs129/reports/FS129-OA1.md`; commits `9e2ffde5`, `69f99f02`, `cefcd69c`, `525dea12`, `a0f68791`, all
+    present; ≈313k by the harness, not continued into pass 2). Of 24 steps: J12 and J13 shortened, J2 given an invariant without closing, 21
+    null (J4 among them), each null with its reason (record §§ 3.2–3.3). Five entries, each derived, hand, one mind: FS129-OA1-NOLIN5,
+    -FALC-RED, -FALC-11, -NOPERLAW, -RINGWIND (record § Theorems this phase proved). **Keryx's receipt**: the record's derive gate re-run,
+    exit 0, PASS (3 controls fire on their faults, 4 warnings); NOLIN5's argument re-derived by Keryx from row 66's Slack (Γ₁₁, 5) — for each
+    vertex v of H, the colouring of Γ₁₁ that gaps ρ(v), pulled back, repainted at v alone (v's neighbours map to neighbours of ρ(v), which
+    avoid the gap colour), gives two colourings differing only at v, so c_v = 0 by the simplex labelling's injectivity — holds; a checking
+    reading, not a second mind. `BIBLIOGRAPHY.md` line 169 and line 626 confirm `[Falconer1981]` held and read in full.
+39. **Decision 4 has a hit, at one mind**: arithmetic-era results bear on a regularity-era step — row 66's slack residue plane at 11 (Γ₁₁) and the
+    kernel's two colouring tables for it shorten FS-104's route (c) (NOLIN5: G75's annihilator format closed on fields with a residue-𝔽₁₁ prime)
+    and routes (0)/(b) (FALC-RED, FALC-11, NOPERLAW). **On Poros's A5** (item 23; OA1 held the question for Keryx): by A5's own words a
+    regularity-era step is "FS-104 on", and `plans/STUB-cp-plane-six.md` cites neither row 66 nor Γ₁₁ (Keryx's grep), so J12 and J13 meet A5's
+    letter if FS129-Z1 scores them as shortenings under A2's definition; Z1 scores. Keryx's priors (top of this file) called this hit unlikely.
+40. **Search requests queued** (`plans/SEARCH-QUEUE.md` rows 1–3): Γ₁₁ with two gap colours at a vertex (row 1); UD(ℤ/121, 2), conditional (row 2);
+    a Falconer fan at five colours over K(√7) or a window field (row 3) — **held for Kooshi**: a finite-witness search toward six, which `CLAUDE.md`
+    § Publication rules out, and lane R's to word first.
+41. **Held for pass 2 — confirm `[Falconer1981]` Lemmas 3 and 4 from the paper** before anything builds on FALC-RED: OA1 used them as
+    `plans/FS103-M-derivation.md` § 1.2 quotes them and did not re-read the PDF (its HELD). FS129-MA1's first stage. Source: OA1's report.
+42. **Correction owed — the Falconer status**: `plans/STUB-cp-plane-six.md` lines 55 and 87 (and the demand list's J13) say `[Falconer1981]` is
+    "not held"; it is held and read in full (item 38). With item 28, for FS129-Z1. Source: `plans/FS129-OA1-audit.md` § 2.3.
+43. **Correction owed — Poros's FS-128 card**: it says the top colour's circle is "covered by the five lower colours"; exact only where max P(x) is
+    the sixth colour, otherwise the five other colours, higher ones included. For FS129-P1 (Poros, the re-rank). Source: `plans/FS129-OA1-audit.md`
+    § 2.1.
+44. **Tool defect — `data/fs129/index/open-steps.md` § 4**: at least 158 of its 418 lowercase "gap" lines use the word in row 66's fan-gap sense,
+    not as an open step. Relayed to FS129-OR1 by message, 2026-10-03; named in the pass-2 briefs. Source: `plans/FS129-OA1-audit.md` § 4.1 item 3.
+45. **Prior-art debts**: NOLIN5, FALC-11, NOPERLAW and RINGWIND owed, FALC-RED partly; for FS129-Z1 (the record job's prior-art gate).
+46. **Relayed to FS129-OR1** (by message, 2026-10-03): RINGWIND and OA1's question on the winding jump at (u, p, v) for J2; item 44. OA1's
+    other cross-era lines (row 132's index as RINGWIND's object; row 130's N-EASY and FALC-RED; W-FILL-FREE and M-DEADLOCK) go to FS129-MR1's brief.
+47. **Lane A's scored registration** (record § 4.2; for FS129-Z1): closed 0 (expected 0), shortened 2 (expected 1.5), nulls 88 % (expected 85 %),
+    E9 (J4 yields) missed.
