@@ -1,0 +1,52 @@
+entry lint
+  claim fs121-v4-readback: minds 1
+  claim fs121-v4-readback: prior art known
+  entries: 1  derived: 1  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'C121-C1-BOUND' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-C1-BOUND: given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, …
+  claim verification C121-C1-BOUND: committed 2026-09-29, commit 0dde4982
+  claim verification C121-C1-BOUND: predicted derived (0.85); verdict derived — met
+  claim verification C121-C1-BOUND: counterexamples none — attacked with properness removed (SQ9 shrunk to side 12/25: bound, on no level) and with `x ∈ F_i` removed (the centre of an SQ9 square of another colour: bound, on no level); both remove a hypothesis, so neither refutes; local finiteness removed: not decided by this mind — decided at stage 3 by reading the entry's argument, which does not use it (given, not brought)
+  claim verification C121-C1-BOUND: minds 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: a different route (switch point over V4-LF against the entry's perturbation); the same model (Opus 5.5)
+  warn  verification 'C121-C1-GMAP' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-C1-GMAP: given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, …
+  claim verification C121-C1-GMAP: committed 2026-09-29, commit 0dde4982
+  claim verification C121-C1-GMAP: predicted derived (0.85); verdict derived — met
+  claim verification C121-C1-GMAP: counterexamples none — attacked with the Grundy clause removed (the tight hexagonal seven-colouring: in no 𝒫_7) and with relabelling allowed; (ii)'s if half is vacuous (a finding about content, not a counterexample)
+  claim verification C121-C1-GMAP: minds 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same route as the entry, so one mind on that axis; the same model (Opus 5.5)
+  warn  verification 'C121-C1-SAT' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-C1-SAT: given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, …
+  claim verification C121-C1-SAT: committed 2026-09-29, commit 0dde4982
+  claim verification C121-C1-SAT: predicted derived (0.8); verdict derived — met
+  claim verification C121-C1-SAT: counterexamples none — attacked with saturation removed (the tight hexagonal seven-colouring: in no 𝒫_7) and at density-zero edge points (closed by the closedness of the bound set); exact on SQ9, 164 of 164 edge points bound by both colours
+  claim verification C121-C1-SAT: minds 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same route as the entry, so one mind on that axis; the same model (Opus 5.5)
+  warn  verification 'C121-C1-COVMAP' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-C1-COVMAP: given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, …
+  claim verification C121-C1-COVMAP: committed 2026-09-29, commit 0dde4982
+  claim verification C121-C1-COVMAP: predicted derived (0.85); verdict derived — met
+  claim verification C121-C1-COVMAP: counterexamples none — all 5040 orders checked exactly, each with an unbound edge point (at least 5 unbound edge types each); DISC7's own classes (every point bound) confirm the not claimed line
+  claim verification C121-C1-COVMAP: minds 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: a different choice of colour (rank 4 by parity against rank 2) over the same mechanism, and an independently written exact tool on a congruent copy of the object; the same model (Opus 5.5)
+  warn  verification 'C121-C1-FLAT' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification C121-C1-FLAT: given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, …
+  claim verification C121-C1-FLAT: committed 2026-09-29, commit 0dde4982
+  claim verification C121-C1-FLAT: predicted derived (0.85); verdict derived — met
+  claim verification C121-C1-FLAT: counterexamples none — the neighbours fail as expected: strict curvature order (FS110-N4-FIN) and circular-arc germs (then `U_k = L_k`); the witness has no common window for all `k` (not claimed)
+  claim verification C121-C1-FLAT: minds 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same witness, chosen by both (one mind on that axis; the composition closed exactly here, through `X⁶` there); the same model (Opus 5.5)
+  verifications: 5  predictions met: 5 of 5 (Brier 0.026)  divergences: truth 0, route 12, wording 7  counterexamples: refutation 0, monster 0, thin truth 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs121-v4-quotes: printed 'quotations: 5 verbatim: 5'; with the fault planted ('' → '--plant') it printed 'quotations: 5 verbatim: 4' — it fires
+  warn  FS121-V4-verification.md:503 (fs121-v4-covmap): of 'C121-C1-COVMAP', which is not an entry in these files
+  ok    fs121-v4-covmap: printed 'orders with an edge point bound by neither colour: 5040 of 5040; geometry: ALL PASS; plant = None'; with the fault planted ('' → '--plant cover') it printed 'orders with an edge point bound by neith' — it fires
+  warn  FS121-V4-verification.md:509 (fs121-v4-covmap-geometry): of 'C121-C1-COVMAP', which is not an entry in these files
+  ok    fs121-v4-covmap-geometry: printed 'orders with an edge point bound by neither colour: 5040 of 5040; geometry: ALL PASS; plant = None'; with the fault planted ('' → '--plant vertex') it printed 'orders with an edge point bound by neith' — it fires
+  warn  FS121-V4-verification.md:515 (fs121-v4-flat): of 'C121-C1-FLAT', which is not an entry in these files
+  ok    fs121-v4-flat: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--plant cubic') it printed 'FAIL (plant = cubic)' — it fires
+  warn  FS121-V4-verification.md:521 (fs121-v4-flat-curvature): of 'C121-C1-FLAT', which is not an entry in these files
+  ok    fs121-v4-flat-curvature: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--plant parabola') it printed 'FAIL (plant = parabola)' — it fires
+  warn  FS121-V4-verification.md:527 (fs121-v4-sq9): of 'C121-C1-BOUND', which is not an entry in these files
+  ok    fs121-v4-sq9: printed 'edge points 164; bound by both colours 164; bound <=> on a level 328 of 328; ALL PASS (plant = None)'; with the fault planted ('' → '--plant slack') it printed 'edge points 164; bound by both colours 1' — it fires
+  controls: 6  fired on their faults: 6
+GATE: PASS (0 failures, 10 warnings)

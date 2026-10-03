@@ -12,7 +12,8 @@ and control in this record resolves from `plans/`.*
 - Stage 1 proves nothing: it is the readback and the registered expectations.
 - **C121-C1-BOUND** — TRUE as stated (both halves; the "if" half unconditional). [hand, over PG1, PG2, SEP cited unread; two minds, blind, the same
   model — the count as filed at stage 2] § Derivation of C121-C1-BOUND
-- **V4-LF** — in a locally finite map colouring every bounded set meets finitely many faces. [hand over PG1 and SEP, one mind] same section
+- **V4-LF** — in a locally finite map colouring every bounded set meets finitely many faces. [hand over PG1 and SEP, one mind] same section; after stage 3, not
+  needed for BOUND (the entry's perturbation argument uses no local finiteness), kept as a lemma about plane graphs
 - **V4-SWITCH** — in a locally finite map colouring, for every `x ∈ F_i` and every component `K` of `F_i`, `d_K(x) ≥ 1` or `D_K(x) ≤ 1`.
   [hand, one mind] same section
 - **V4-DIAM** — every component of `F_i` in a locally finite map colouring has diameter at most 1. [hand, one mind] same section
@@ -38,7 +39,15 @@ and control in this record resolves from `plans/`.*
 
 ## Fence log (standing rule 8)
 
-- No fenced path read, opened or printed by a search, through stage 2's commit. The brief's § Fences says "until your verdicts on all three statements are committed"; the
+- No fenced path read, opened or printed by a search, through stage 2's commit (0dde4982, 2026-09-29 07:41 UTC).
+- 2026-09-29 07:42 UTC, after that commit, as the brief's § After your verdicts allows: `grep -n '^#' plans/FS121-C1-proof.md` printed the record's
+  headings, then I read §§ 2.1–2.5 (lines 134–302) and nothing else. The headings of the still-fenced remainder were printed with them: "1.1 Readback
+  of the brief", "1.2 Recognition (`ephodos-recognition`, invoked fresh at this stage)", "1.3 The proposed statements", "Stage 2 — SAVED: the lemmas,
+  and the verdicts on C121-NOPAR and C121-NOPAR-C5", "2.6 The verdicts", "2.7 The invention signal (G87)". Headings only: they carry no verdict, and
+  my five verdicts were committed before they were seen. I did not read §§ 1.x, 2.6, 2.7.
+- The job stopped at 07:42 UTC on 2026-09-29 (an account halt) and resumed on 2026-10-03 at 14:36 UTC at the coordinator's message; before
+  resuming I checked that `plans/FS121-C1-proof.md` has no commit after 2026-09-29 02:16 (`git log --format` on the path, subjects only), so §§ 2.1–2.5
+  are the text I read. The brief's § Fences says "until your verdicts on all three statements are committed"; the
   brief carries five statements and its § After your verdicts says "all five": I read the fence as closed until all five verdicts are committed (the
   stricter reading). A slip in the brief, reported to the coordinator.
 
@@ -156,7 +165,7 @@ Each prediction is scored at stage 2 against the committed verdict (the gate pri
 
 ## Stage 2 — SAVED: the five derivations, the attacks, and the verdicts
 
-*Written 07:38–08:20 UTC, before any fenced path was opened. Each derivation is this mind's own, from the statement and the definitions of
+*Written 07:29–07:41 UTC (corrected at stage 3: the first text of this line gave a guessed end time, 03:20; the commit is 02:41), before any fenced path was opened. Each derivation is this mind's own, from the statement and the definitions of
 § 1.2. Notation: a locally finite map colouring `M` has graph `Γ`, faces (components of `ℝ² ∖ Γ`), `S_j` the union of the faces of colour `j`,
 `F_j = cl S_j`; `j`-bound means `T₁(x) ∩ F_j ≠ ∅` (§ 1.2). "Level" means the outer unit parallel `{d_K = 1}` or the far level `{D_K = 1}` of a
 component `K`.*
@@ -391,18 +400,21 @@ verification: C121-C1-BOUND
     far level of a connected component of `F_i`.
   given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, held inputs, the other statements); the brief's
     framing, quoted in § 1.3; the held control objects' entries; nothing from the cover route's author
-  committed: 2026-09-29
+  committed: 2026-09-29, commit 0dde4982
   predicted: derived — 0.85 — likeliest break: the only-if half, at a component reaching both inside and outside the unit circle; faces must be locally
     finite for the argument
   verdict: derived
   method: a switch-point argument — a component straddling `T₁(q)` for a generic `q ∈ S_i` near `x` must touch it at a point where `T₁(q)` runs
     inside an edge, which a generic `q` avoids (V4-SWITCH), over the local finiteness of faces (V4-LF, proved here from PG1 and SEP); the first
-    derivation's method is read at stage 3
+    derivation argues by perturbation (a point of an open face near `x` and a point of `F_i` on its unit circle, moved together onto a face pair at
+    distance 1), with no local finiteness
   attack: § Attack on C121-C1-BOUND
-  divergences: none — the first derivation opens at stage 3, after this commit
+  divergences: § Divergences on C121-C1-BOUND
   counterexamples: none — attacked with properness removed (SQ9 shrunk to side 12/25: bound, on no level) and with `x ∈ F_i` removed (the centre of
-    an SQ9 square of another colour: bound, on no level); both remove a hypothesis, so neither refutes; local finiteness removed: not decided
-  minds: 2 — blind to: the cover route's proof record and data until this commit; method: not known until stage 3; the same model (Opus 5.5)
+    an SQ9 square of another colour: bound, on no level); both remove a hypothesis, so neither refutes; local finiteness removed: not decided by this
+    mind — decided at stage 3 by reading the entry's argument, which does not use it (given, not brought)
+  minds: 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: a different route (switch point over V4-LF against the
+    entry's perturbation); the same model (Opus 5.5)
   grade: hand
 
 verification: C121-C1-GMAP
@@ -411,18 +423,19 @@ verification: C121-C1-GMAP
     if `χ_m⁰(ℝ²) ≥ 7`.
   given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, held inputs, the other statements); the brief's
     framing, quoted in § 1.3; the held control objects' entries; nothing from the cover route's author
-  committed: 2026-09-29
+  committed: 2026-09-29, commit 0dde4982
   predicted: derived — 0.85 — likeliest break: (i) inherits BOUND's only-if half; (ii) may be vacuous in one direction, or a six-colouring may be
     read as using six non-null classes
   verdict: derived
   method: (i) the support of a union of open faces is its closure, the Grundy clause makes every separating edge point bound by the smaller colour,
-    and BOUND's only-if half places it on a level; (ii) by contradiction through (i), the if half by vacuity; the first derivation's method is read at
-    stage 3
+    and BOUND's only-if half places it on a level; (ii) by contradiction through (i), the if half by vacuity; the first derivation runs the same
+    route
   attack: § Attack on C121-C1-GMAP
-  divergences: none — the first derivation opens at stage 3, after this commit
+  divergences: § Divergences on C121-C1-GMAP
   counterexamples: none — attacked with the Grundy clause removed (the tight hexagonal seven-colouring: in no 𝒫_7) and with relabelling allowed;
     (ii)'s if half is vacuous (a finding about content, not a counterexample)
-  minds: 2 — blind to: the cover route's proof record and data until this commit; method: not known until stage 3; the same model (Opus 5.5)
+  minds: 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same route as the entry, so one mind on that axis;
+    the same model (Opus 5.5)
   grade: hand
 
 verification: C121-C1-SAT
@@ -431,18 +444,19 @@ verification: C121-C1-SAT
     saturated six-colouring is a.e. equal to a locally finite map colouring whose edges are finite chains of segments and circular arcs.
   given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, held inputs, the other statements); the brief's
     framing, quoted in § 1.3; the held control objects' entries; nothing from the cover route's author
-  committed: 2026-09-29
+  committed: 2026-09-29, commit 0dde4982
   predicted: derived — 0.80 — likeliest break: edge points where one side has density 0, where saturation is silent; every order needs both colours
     bound
   verdict: derived
   method: saturation at the interior points of the smooth pieces binds both side colours, the bound set is closed so the binding reaches every edge
-    point, and BOUND's only-if half places each on a level of both colours; the so clause by null-set invariance of saturation; the first derivation's
-    method is read at stage 3
+    point, and BOUND's only-if half places each on a level of both colours; the so clause by null-set invariance of saturation; the first derivation
+    runs the same route
   attack: § Attack on C121-C1-SAT
-  divergences: none — the first derivation opens at stage 3, after this commit
+  divergences: § Divergences on C121-C1-SAT
   counterexamples: none — attacked with saturation removed (the tight hexagonal seven-colouring: in no 𝒫_7) and at density-zero edge points (closed
     by the closedness of the bound set); exact on SQ9, 164 of 164 edge points bound by both colours
-  minds: 2 — blind to: the cover route's proof record and data until this commit; method: not known until stage 3; the same model (Opus 5.5)
+  minds: 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same route as the entry, so one mind on that axis;
+    the same model (Opus 5.5)
   grade: hand
 
 verification: C121-C1-COVMAP
@@ -450,17 +464,18 @@ verification: C121-C1-COVMAP
     containing them) has an edge point that is bound by neither of the two colours the edge separates; so it lies in `𝒫_7` under no order.
   given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, held inputs, the other statements); the brief's
     framing, quoted in § 1.3; the held control objects' entries, DISC7's formula (FS111-M2 § 1.6); nothing from the cover route's author
-  committed: 2026-09-29
+  committed: 2026-09-29, commit 0dde4982
   predicted: derived — 0.85 — likeliest break: an order under which no colour lies between the colours of two opposite neighbours
   verdict: derived
   method: an arc point of `∂D_d` inside `D_c` is bound by `d` only through its antipode, which lies in the lens with the opposite neighbour `c′`, so it
     is unbound exactly when `c′ < d < c`; the colour of rank 4 always has such a pair by parity (V4-MID); exact control over all 5040 orders in
-    `ℚ(√3)`; the first derivation's method is read at stage 3
+    `ℚ(√3)`; the first derivation takes the colour of rank 2 (its least-coloured neighbour's opposite is above it), the same mechanism
   attack: § Attack on C121-C1-COVMAP
-  divergences: none — the first derivation opens at stage 3, after this commit
+  divergences: § Divergences on C121-C1-COVMAP
   counterexamples: none — all 5040 orders checked exactly, each with an unbound edge point (at least 5 unbound edge types each); DISC7's own classes
     (every point bound) confirm the not claimed line
-  minds: 2 — blind to: the cover route's proof record and data until this commit; method: not known until stage 3; the same model (Opus 5.5)
+  minds: 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: a different choice of colour (rank 4 by parity against
+    rank 2) over the same mechanism, and an independently written exact tool on a congruent copy of the object; the same model (Opus 5.5)
   grade: hand
 
 verification: C121-C1-FLAT
@@ -471,17 +486,18 @@ verification: C121-C1-FLAT
     every `k`, and `λ_k = υ_k = 0`.)
   given: the statement with its not claimed line; the frozen claim list's §§ 0–7 (definitions, held inputs, the other statements); the brief's
     framing, quoted in § 1.3; FS110-N4-SHADOW and FS110-N4-FIN as held; nothing from the cover route's author
-  committed: 2026-09-29
+  committed: 2026-09-29, commit 0dde4982
   predicted: derived — 0.85 — likeliest break: whether the parallels stay smooth graph germs with curvature exactly 0 at every level at once, with the
     order kept on both sides
   verdict: derived
   method: an explicit witness — `L_k` the lines through `P_k`, `U_k` the parallels at distance `k` of the quartic `(t, t⁴)`; parallel curves share
-    normals, so each relation is an identity in the parameter; symbolic control with `k` free; the first derivation's method is read at stage 3
+    normals, so each relation is an identity in the parameter; symbolic control with `k` free; the first derivation chose the same witness
   attack: § Attack on C121-C1-FLAT
-  divergences: none — the first derivation opens at stage 3, after this commit
+  divergences: § Divergences on C121-C1-FLAT
   counterexamples: none — the neighbours fail as expected: strict curvature order (FS110-N4-FIN) and circular-arc germs (then `U_k = L_k`); the
     witness has no common window for all `k` (not claimed)
-  minds: 2 — blind to: the cover route's proof record and data until this commit; method: not known until stage 3; the same model (Opus 5.5)
+  minds: 2 — blind to: the cover route's proof record and data until commit 0dde4982; method: the same witness, chosen by both (one mind on that
+    axis; the composition closed exactly here, through `X⁶` there); the same model (Opus 5.5)
   grade: hand
 
 control: fs121-v4-covmap
@@ -520,3 +536,68 @@ All five registered at stage 1 as *derived*, at 0.85, 0.85, 0.80, 0.85, 0.85; al
 BOUND's only-if half needed the local finiteness of faces, which holds (V4-LF); SAT's density-zero points are reached by closedness; COVMAP's
 orders cannot all avoid a straddle (parity); FLAT's germs are smooth graphs at every level. A calibration note against myself: five of five met at
 0.80–0.85 is what an informed prediction looks like (§ 1.3 says routes had come to mind); it is weak evidence of calibration.
+
+## Stage 3 — SAVED: the comparison with the cover route's proof record (§§ 2.1–2.5)
+
+*Opened 2026-09-29 07:42 UTC, after the verdicts' commit 0dde4982; written 2026-10-03 from 14:36 UTC, after the stop the fence log records. The
+first derivation is `plans/FS121-C1-proof.md` §§ 2.1–2.5 (FS121-C1, one mind, the same model). Every row below is classed; no row is of truth: the two
+minds agree that all five statements are true as stated.*
+
+#### Divergences on C121-C1-BOUND
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the "only if" half | a switch point: for a generic `q ∈ S_i` near `x`, a component straddling `T₁(q)` touches it at a point where `T₁(q)` runs inside an edge (V4-SWITCH), over the local finiteness of faces (V4-LF, from PG1 and SEP) and PG2 | perturbation: `z` in an open face near `x`, `p ∈ C ∩ T₁(z)`; `p_n ∈ S_i → p` and `z_n = p_n + (z − p_n)/‖z − p_n‖ → z` give a face pair at distance exactly 1 | route | both stand; the entry's is two lines and uses no local finiteness. This route missed the perturbation — a point of `cl S_i` at distance 1 from a point of the open set `S_i` moves with it onto a pair of face points at distance 1 — and so built machinery the statement does not need |
+| 2 | local finiteness | used (V4-LF, PG2); my attack: "removed: not decided" | "no local finiteness beyond `F_i = cl S_i`" | route | the entry's argument decides my open item: the "only if" half holds in any colouring whose classes are open sets with no unit pairs, so the statement's "locally finite" is idle for it. Found by reading — given, not brought; not counted as this mind's finding |
+| 3 | the model line | R7 at `x = (1, √3 − 1)`: for the up colour, the far level of the up tile itself (constant width 1, its vertex `(1, √3)` at distance 1); for the down colour, the **outer unit parallel** of the same-colour down tile whose cusp is `(1, √3)` — that tile lies in `y ≥ √3`, so `d = 1` at the cusp alone and `D ≥ ‖x − (1/2, 3√3/2)‖ > 1` | "it is bound by both and lies on the far level of the component holding the centre", citing "FS111-VMW-R7-PPLUS's 432 of 432 arcs of kind both" | wording | true of the up colour only; for the down colour the level is the outer unit parallel. The count 432 of 432 is FS111-VM2-LAD-CTL's (`plans/FS111-VM2-verification.md`), not FS111-VMW-R7-PPLUS's (one named point and 69 samples). Reported to the author; the statement and its verdict are untouched |
+| 4 | the statement's text | the frozen list's, with its backticks | the same words without backticks | wording | formatting only; a joint gate run would compare the two strings (not run here: it would print the still-fenced § 2.6) |
+
+#### Divergences on C121-C1-GMAP
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | (i) | `supp` of a union of open faces is its closure; the Grundy clause binds every separating edge point by the smaller colour; BOUND's "only if" | the same three steps | route | the same route: no evidence on the method axis, and the `minds:` line says so |
+| 2 | (ii), "six-colouring" | both readings worked: at most six colours, or six non-null classes (split one class by a line) | "if an a.e.-proper measurable six-colouring exists", the first reading implicitly | wording | (ii) holds under both; nothing to change |
+| 3 | (i)'s inhabitant R7 | Grundy-bound in every order because no colour has density 1 at a point of another colour's support, so FS111-VMW-R7-MAX's "x ∉ S̃_j" clause covers every point of every support | "every class a MUA set (FS111-VMW-R7-MAX), so it is Grundy-bound in every order" | route | agree; this route writes out the step from "x ∉ S̃_j" to "every point of `supp A_m`" that the entry leaves implicit |
+
+#### Divergences on C121-C1-SAT
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the argument | densities 1/2 at interior points of the smooth pieces, saturation binds both colours, the bound set is closed, BOUND's "only if" | the same, the bound set closed as "a closed set plus a compact one" | route | the same route: one mind on the method axis |
+| 2 | the entry's "What it says" | not derived here | "C121-NOPAR implies the honest route's NO … The cover route's NO is not an alternative to the honest route's: it contains it", over FS111-M2-REDUCE-A | wording | outside the five statements and not verified by this record; flagged so that no reader counts it as checked by two minds |
+| 3 | the edge hypothesis | enters only through a dense set of edge points with both side densities positive | its *not claimed* adds "anything for edges that are not finite chains" | wording | consistent; no change |
+
+#### Divergences on C121-C1-COVMAP
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | which colour carries the unbound edge | the colour of rank 4: three colours below it and three above, and its three opposite pairs partition the six, so one pair straddles it (V4-MID, parity) | the colour `c` of rank 2: its least-coloured neighbour `ℓ` has an opposite neighbour `d ∉ {ℓ, c}`, so `ℓ < c < d` | route | both valid, over one mechanism (the antipode lies in the lens of a lower colour); the entry's is constructive and shorter; this route adds that every order has at least 5 unbound edge types |
+| 2 | coordinates | FS111-M2 § 1.6's: `c(m, n) = m(√3/2, 0) + n(√3/4, 3/4)`, colour `(m + 3n) mod 7` | `m u + n w`, `u = (3/4, √3/4)`, `w = (0, √3/2)`, colour `(m − 2n) mod 7` | wording | the same object up to a rotation and a relabelling: both are lattices of spacing `√3/2` at 60°; the entry's colour kernel holds `(2, 1)` and `(3, −2)`, both of norm `√21/2` at 60°; opposite pairs are `c ± 1, c ± 2, c ± 3` in both; the quantifier over every order makes the labels immaterial. The claim list names FS111-M2's DISC7; the entry's tool runs on a congruent copy, which carries every claim over |
+| 3 | the exact controls | `tools/fs121_v4_covmap.py`: geometry over `max(‖m‖, ‖n‖) ≤ 8`, 5040 of 5040; plants: the cover's classes (0 of 5040) and a hexagon vertex (geometry fails) | `tools/fs121_c1_disc7.py`: 42 (least, second) pairs, 5040 of 5040; plant `--cover`, 0 of 5040 | route | two tools written apart, by the same model, agree on every count they share |
+
+#### Divergences on C121-C1-FLAT
+
+| # | item | this route | the entry | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the witness | `L_k` the lines through `P_k`; `U_k` the parallels at distance `k` of `(t, t⁴)` | the same family | route | the same first choice by both minds: no evidence on the method axis, and the `minds:` line says so |
+| 2 | the parallel relation | exact: `q_k′ = (1 − kκ)p′`, so the curves share normals and `q_{k−1} + ν = q_k` is an identity in `t`, symbolic in `k` | "parallels compose along shared normal lines, checked through `X⁶`" | route | both stand; this route closes the composition as an identity, the entry checks it as a series to order 6 with the same reason in words |
+| 3 | smoothness | each `U_k` is a real-analytic graph near `P_k` (inverse function theorem on `X_k(t)`) | not discussed | route | the germ definition asks for `C^∞`; supplied here |
+| 4 | the statement line | the frozen statement with its parenthetical "(So the relations … `λ_k = υ_k = 0`.)" | the entry's `statement:` line ends at "the unit parallel toward P_k of U_{k−1}", the parenthetical dropped (its content is in the prose, "N4-FIN's flank relations hold with equality") | wording | the parenthetical holds (all curvatures 0, `f(0) = f̃(0) = 0`); the entry's recorded statement is narrower than the frozen one by a consequence; the author restores it so the statement is quoted verbatim |
+| 5 | windows | for this witness no common window serves every `k` (the offset at distance `k` has a cusp where `kκ(t) = 1`) | not discussed | route | an addition, not a disagreement; the germ statement asks for no common window |
+| 6 | the plants | a cubic germ (order fails on one side), a parabola (curvature 2) | a circle-like germ `y = x²/20`, whose chain leaves `(−1, 1)` at `k = 9` (N4-FIN's mechanism) | route | different faults, each firing for its own reason |
+
+### The count, audited
+
+- **Information.** Before commit 0dde4982 this mind saw the claim list, the brief, the held entries named in § 1.1, and nothing of FS121-C1's record
+  or data (fence log). The predictions were informed by my own unwritten route sketches (§ 1.3), not by anything given.
+- **Prior and method.** Both minds are Opus 5.5. On the method axis: BOUND — different routes; COVMAP — a different choice over one mechanism, and
+  separately written tools; GMAP, SAT, FLAT — the same route or the same witness, so one mind on that axis.
+- **The criterion, fixed first.** The statements were frozen before either derivation reached me; the predictions were committed at stage 1 (3fe35d6c)
+  before any derivation was written.
+- **The statement, attacked.** Each attack located where it succeeds (properness and `x ∈ F_i` for BOUND; the Grundy clause for GMAP; saturation for
+  SAT; the extreme ranks for COVMAP; strict curvature order and circular arcs for FLAT).
+- **Retractions: 0.** No verdict withdrawn; one open item of my attack (BOUND without local finiteness) closed by reading the entry, recorded as given.
+- **What the verification could not supply.** Whether these are the statements the cover route needs is a question for a reader of intent; in
+  particular, whether C121-C1-COVMAP's merged map (with no clean-up step) is the map the cover route would in fact produce is the author's framing,
+  not checked here.
