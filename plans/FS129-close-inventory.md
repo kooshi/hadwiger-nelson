@@ -143,3 +143,15 @@ One line per item with its source; no narration. Each line is ticked done or dec
     (one mechanical column; one pass-3 duty). Not relayed to the running readers.
 34. **Item 33 approved by Kooshi** (2026-10-03, verbatim: "sounds good, thankyou"). The index column is added now, by FS129-IX1 continued below
     its line (amendment of 2026-10-03, its brief); the sort goes into the pass-3 briefs (FS129-SA1, FS129-SR1).
+35. **FS129-IX1's vacuity column reported DONE** (commit `98ebf5f1`; `data/fs129/index/vacuity.md`). Block entries: 55 `none-known`, 212 `named`,
+    25 `no-field` (Keryx's rough 54 / 211 / 27; the Clerk's rule is in its README and its count stands). **Keryx's receipt**: `--self-test` re-run,
+    exit 0, PASS; the top entry read against its file — FS121-D4-HOLE (`plans/FS121-derivation.md` line 962, 60 transitive dependents):
+    "none held of the hypothesis (R7, SQ9, HEX9, TINY16 have no region with a hole); a no-go for islands whose shore holds a point off Σ".
+    IX1 closed for good (≈263k by the harness).
+36. **For the pass-3 briefs — the sort needs a fourth heading**: a no-go, whose statement is that its hypothesis class is empty, has no model
+    by construction (FS121-D4-HOLE above). Pass 3 sorts each `none-known` result as inhabited, empty, hypothetical by design (a step in a proof
+    by contradiction), or a no-go — and only "empty" passes vacuity to its dependents. Source: item 35.
+37. **Ruling — the flag rule stands as the Clerk wrote it**; its two borderline cases (FS116-N1-QFREE4, FS121-O1-OUT: a phrase later in the
+    line, the first naming an object for part of its scope) and the 16 `named` entries that match a looser negative pattern go to pass 3 as a
+    second list, sorted the same way. Alternative: widen the rule. Why: a wider rule moves judgement into a regex; pass 3 reads each anyway.
+    Confidence: high. Source: IX1's report; `data/fs129/index/vacuity.md`.
