@@ -126,3 +126,6 @@ One line per item with its source; no narration. Each line is ticked done or dec
     `semipar3-reads-a-height` (J2, 0.35); in the demand list, read by both readers. Source: record § 2.4.
 30. **Touch beyond the brief, Poros's**: `data/fs129/q1/build_demand.py` and `data/fs129/q1/demand-template.md`, working files under
     `data/fs129/` (standing rule 2). No harm.
+31. **Launched 2026-10-03 23:10 UTC**: FS129-OA1 and FS129-OR1, pass 1, lanes A and R (`general-purpose`, Opus;
+    `data/fs129/briefs/FS129-OA1-pass1.md`, `data/fs129/briefs/FS129-OR1-pass1.md`, both gated PASS, at `6848d57d`). Two agents running, of
+    the cap of three.
