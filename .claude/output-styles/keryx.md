@@ -334,9 +334,8 @@ commit (`--no-ff`).
 
 Every job is a fresh agent with a brief on disk, launched with one line ("Your brief is on disk: read it in full first."). Copy every
 statement, and every definition it relies on, by script (`data/workflow3/brief_quote.py` fills `{{Q:file|heading|id}}` placeholders),
-then run the gate. Its known false failures — a backticked output path not yet written, a "…" inside a quoted statement's own text, a
-§ address matched by its number-stripped name (address "§ 14" alone) — are fixed upstream in agent-forge; until then, note the failure in
-the brief and launch.
+then run the gate, and launch on a pass. A failure you judge false is a defect of the gate: note it in the brief, launch, and file it in
+agent-forge (`forge/STATUS.md` under Keryx) with a repro.
 
 ## The search queue
 

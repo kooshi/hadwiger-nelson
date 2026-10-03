@@ -67,7 +67,8 @@ reads the derivation. D4 — milestone states Not started, Opened, Derived, Clos
 agent, once a day, outside the milestone loop; no other lane searches. D6 — no one-line `LEDGER.md` § B entries from Workflow 3.1 on; the
 derivation files stay. **Edits kept**: E4, E7, E8, E10, E12, E13, E14, E20, E25, E17 (its definitions half), U3, U5, U6, U9, F. **Replaced**: E16
 (the hand-back carries the short report; no separate message). **Dropped**: E1, E2, E3, E5, E6, E9, E11, E15, E18, E19, E21, E22, E23, E24, E26,
-U1, U2, U4, U7, U8. U3, U5 and U6 are fixes to agent-forge's brief gate, outside this repository.
+U1, U2, U4, U7, U8. U3, U5 and U6 are fixes to agent-forge's brief gate, outside this repository. **Fixed there 2026-10-03**, with U4 and
+U7 besides (agent-forge `4bc0e1d`; imported here at `f556d80b`).
 
 ## A. Ephodos's close job (`.claude/agents/ephodos.md` § The close job)
 
@@ -153,6 +154,8 @@ entries of `tools/viz_proof_atlas_facts.py` for this milestone's results. Then r
 > job builds the tool as its own control.
 
 ## E. Upstream, for agent-forge (not lean-dir's files; the identities are imported unchanged)
+
+*U3–U7, the brief gate's: fixed in agent-forge `4bc0e1d` (2026-10-03), imported at `f556d80b`. U1, U2 and U8 stand there, outside Workflow 3.1.*
 
 | # | tool | defect | from |
 |---|---|---|---|

@@ -1,6 +1,6 @@
 # Session handoff — 2026-10-03: Workflow 3.1 adopted; next, a fresh session for FS-129
 
-*Rewritten 2026-10-03 21:00 UTC by Keryx after the workflow refinement. Current state only; the day's history is in git, in the two close
+*Rewritten 2026-10-03 22:17 UTC by Keryx after the brief gate's fix. Current state only; the day's history is in git, in the two close
 inventories and in `plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
 
 ## 1. Read first
@@ -33,9 +33,9 @@ loaded files is `plans/HISTORY-WORKFLOW-3.0.md`; the arithmetic-era items of "Wh
 
 ## 3. Open items
 
-- **The brief gate's defects** are filed in `~/source/agent-forge` (commit 95816ff, not pushed): `forge/STATUS.md` under Keryx, with
-  `identities/keryx/record/evidence/defects-2026-10-03/repro.sh` (four false failures, U3a, U3b, U5, U6; two false passes, U7, U4). Until they
-  are fixed and re-imported, a brief failing on one notes it and launches.
+- **The brief gate is fixed** (agent-forge `4bc0e1d`, imported here at `f556d80b`): the six defects filed today, and two found while
+  fixing them. A brief launches on a pass; a failure judged false is noted in the brief and filed in agent-forge with a repro.
+- **agent-forge is ten commits ahead of its origin** (the filings and the fix among them); pushing it is Kooshi's call.
 - **The Searcher's identity** is a stub in agent-forge (`identities/_unnamed-searcher/README.md`), at Kooshi's word: probably not needed;
   fleshed out only if the lane shows it needs more craft.
 - **The census** `tools/fs71_ledger_b_check.py --strict` checks derivation files against `LEDGER.md` § B, which stops at FS-116 and FS-121; it
