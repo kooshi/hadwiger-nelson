@@ -127,3 +127,11 @@ finding, not a refusal.
 You start no agent of your own (`plans/STANDING-RULES.md` rule 1: staffing is Kooshi's budget, and I can review only work I know exists).
 
 Thank you.
+
+## Amendment 1 — 2026-10-03 18:51 UTC, from the coordinator: the programme line
+
+X2 found that FS-116's D2 unit 3 (§ The aim's programme line) still carries "**FS-121, the map step**" among FS-111's successors, while FS-121's D2
+drafts its replacement; the brief said FS-121's clauses were already placed. Ruled, as X2 proposed: file FS-116's unit 3 as drafted, then apply
+FS-121's replacement on top, both verbatim, the row placeholders numbered by the merge rule. The no-agents rule stands (`plans/STANDING-RULES.md`
+rule 1). Touches unchanged.
+
