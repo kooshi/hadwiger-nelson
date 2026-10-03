@@ -143,3 +143,22 @@ exists. Save each step as a stage, as before.
 Re-run, re-check the self-test (add a plant for the depth computation on a chain with one offshoot, and one for a cycle inside a chain),
 update `data/fs129/index/README.md` and the report, and hand back as before. Budget for the amendment: about 150k more by the harness's
 count; hand back at a saved stage before about 500k in all.
+
+## Amendment, 2026-10-03 23:45 UTC — a vacuity column
+
+Kooshi approved a vacuity sort for the audit's third pass (`plans/FS129-close-inventory.md` items 32–34): a result whose hypotheses no known
+object meets may hold only vacuously, and every result resting on it inherits that. The index supplies the mechanical half; the standing
+rules hold unchanged — start no agent of your own, for the reason rule 1 gives — and you save the step as a stage, as before.
+
+1. Add to each record of `data/fs129/index/theorems.jsonl` the field `model`, the `model:` line verbatim (continuation lines joined), and
+   `model_flag`: `named` where it names an object, `none-known` where it says no held or known object meets the hypotheses (it begins
+   "none", or says "no held object", "none held", "none known", "not held"; list the exact rule you use in the README), `no-field` where the
+   entry has no `model:` line (every older-format entry, and some block entries). The coordinator's own rough count, by a ten-line script, was
+   54 `none-known`, 211 `named` and 27 `no-field` among the 292 block entries; yours is the count of record, and a difference is worth one line.
+2. Write `data/fs129/index/vacuity.md`: every `none-known` result, sorted by transitive dependents, each with its address, its `model:` text,
+   and its dependents, direct and transitive, by id — the results that would inherit vacuity if its class turns out to be empty. A short
+   section after it counts the `no-field` entries by milestone.
+3. Add a self-test plant for each flag value, and one for a `model:` line that continues over two lines. Re-run, update the README and the
+   report, and hand back as before. Budget: about 60k more by the harness's count; hand back at a saved stage before about 500k in all.
+
+Do not judge whether a class is empty or whether a statement is hypothetical by design: that is pass 3's work.

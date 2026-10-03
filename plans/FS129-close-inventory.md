@@ -141,3 +141,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
     needs a witness or a declaration per statement, and the sort supplies that input; FS-116's double tip was worked two rounds before its
     class was found empty (items 3, 9; `plans/FS116-close-inventory.md` items 122, 124, 127). Confidence: medium on yield, high on cost
     (one mechanical column; one pass-3 duty). Not relayed to the running readers.
+34. **Item 33 approved by Kooshi** (2026-10-03, verbatim: "sounds good, thankyou"). The index column is added now, by FS129-IX1 continued below
+    its line (amendment of 2026-10-03, its brief); the sort goes into the pass-3 briefs (FS129-SA1, FS129-SR1).
