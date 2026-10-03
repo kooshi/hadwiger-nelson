@@ -129,3 +129,15 @@ One line per item with its source; no narration. Each line is ticked done or dec
 31. **Launched 2026-10-03 23:10 UTC**: FS129-OA1 and FS129-OR1, pass 1, lanes A and R (`general-purpose`, Opus;
     `data/fs129/briefs/FS129-OA1-pass1.md`, `data/fs129/briefs/FS129-OR1-pass1.md`, both gated PASS, at `6848d57d`). Two agents running, of
     the cap of three.
+32. **Kooshi's reading** (2026-10-03, verbatim): "Oh... oh I see. Sounds like the vacuity issue we encountered in a lean implementation a while
+    back... and thus gated... will be back to bite us with the hand proofs. Well, hopefully putting them in lean will help check them
+    mechanically. This is another reason for workflow 3.1 and the lean backlog."
+33. **Held for Kooshi — a vacuity sort, proposed by Keryx; default: added.** Of the 292 block-format entries, 54 have a `model:` line saying no
+    held object meets their hypotheses (211 name one; 27 have no `model:` line; Keryx's count by script, 2026-10-03). The older 1,003 entries
+    have no `model:` field at all. Proposal: the index gains a column (the `model:` text, and "none known" flagged), and pass 3 sorts each
+    flagged result as inhabited (an object found), empty (the result holds vacuously, and every result resting on it is marked through the
+    dependency graph), or a statement about a hypothetical object by design (a step in a proof by contradiction, such as properties of a
+    tight six-map, whose emptiness is the goal). Alternative: leave vacuity to the Lean backlog's gate. Why: the Lean gate's vacuity check
+    needs a witness or a declaration per statement, and the sort supplies that input; FS-116's double tip was worked two rounds before its
+    class was found empty (items 3, 9; `plans/FS116-close-inventory.md` items 122, 124, 127). Confidence: medium on yield, high on cost
+    (one mechanical column; one pass-3 duty). Not relayed to the running readers.
