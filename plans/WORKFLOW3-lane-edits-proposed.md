@@ -173,3 +173,10 @@ verifier report's `minds:` lines.)
 cost little; resuming each by message kept its context, and each continued from its record. Proposed for `.claude/output-styles/keryx.md`
 § Staffing: *"After a halt, resume each job by message, naming its last committed stage and its uncommitted files; at most three agents
 afterwards unless Kooshi says otherwise."* (FS-116 item 74.)
+
+- **E26 (2026-10-03, from FS116-Z1, FS-116 item 137): the verifier lane writes its own lemmas as `derivation:` blocks.** V1–V3 wrote theirs as prose,
+  V4 and V5 as blocks; the close then judged, lemma by lemma, what each prose lemma claimed and at what grade. One line in
+  `.claude/agents/ephodos-verifier.md` ("a lemma of your own route that you state for later use is a `derivation:` block in your record") saves it.
+  Also from today, for the same review: **U6** (the brief gate's § address match takes the first heading with the same number-stripped name, W25),
+  **U7** (the gate warns on verdict words beyond "prove" and "confirm", W26), **U8** (the derive gate checks "Rests on it:", W27).
+
