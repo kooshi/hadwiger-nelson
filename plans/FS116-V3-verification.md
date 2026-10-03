@@ -19,6 +19,7 @@ frozen by Keryx 2026-09-29 07:09 UTC. Record written 2026-09-29 from 07:10 UTC.*
 - **V3-ECHO-A** — FS116-N1-ECHO read with saturation at `w` vacuous off the essential boundary: FALSE, the hexagonal seven-colouring —
   [hand] (validity) + [tools] at named points (`tools/fs116_v3_echo.py`), § 3.3.
 - **V3-AXIS** — FS116-N1-AXIS as stated: TRUE; (a) and (d) need no saturation — [hand], § 3.5.
+- Stage 4 proves nothing new: it is the comparison.
 - **V3-AXIS-STRIP** — at the strip's midline vertex (unsaturated) AXIS (a), (c), (d) hold and (b) fails; at SQ9 (`k = 9`) (a)–(c) hold and
   (d) fails — [tools] at named points (`tools/fs116_v3_axis.py`, floats with margins), § 3.6.
 
@@ -33,6 +34,9 @@ frozen by Keryx 2026-09-29 07:09 UTC. Record written 2026-09-29 from 07:10 UTC.*
 
 ## Fence log (standing rule 8)
 
+- Stage 4, 2026-09-29 07:40–07:42 UTC and 2026-10-03 from 14:36 UTC, after all five verdicts were committed (`7245b6eb`, 2026-09-29 07:40:22): opened
+  `plans/FS116-N1-proof.md` § 4 only (lines 536–870), as the brief releases, locating it by a `grep` for § 4's headings; on resuming, `git log` (subjects
+  only) on that file to confirm it unchanged since the reading. Nothing else in the fence was read; the session transcripts and `chats-bak/` were not opened.
 - Stage 3 (07:33 UTC on): no fenced path opened; reads were `LEDGER.md` rows 135–136 (by `grep`) and `plans/FS112-Y-construction.md` § 1.3 (open).
 - Stage 2 (07:26–07:32 UTC; corrected from `git log`): no fenced path opened; reads were `plans/FS111-M-regularity.md` § 2.4–2.6 (R7, open).
 - 2026-09-29 07:10–07:24 UTC: no fenced path opened. Searches this stage were `grep` for headings inside open files
@@ -440,6 +444,106 @@ The turned points `q_E`, `q_W`, `q_S`: the hypotheses are invariant under the qu
 
 ## Stage 3 — SAVED
 
+## Stage 4 — SAVED: the comparison with the first derivation
+
+All five verdicts were committed by 2026-09-29 07:40:22 UTC (commit `7245b6eb`; GERM-R and GERM-S at `7166bf6f`, 02:32:35). Only then, at 07:40 UTC,
+I opened the one section the brief releases: `plans/FS116-N1-proof.md` § 4 ("Stage 4 — SAVED: SAT-STRIP and SAT-QFREE", lines 536–870, § 4.0–4.5
+with the entries). I read nothing else of that record and nothing else in the fence. *Resumption:* the job was stopped at 07:42 UTC on 2026-09-29 by
+an account halt, with this stage drafted in RAM and unsaved; it resumed on 2026-10-03 at 14:36 UTC (Keryx's message), the record clean at
+stage 3 (`git log`: `7245b6eb` its last commit). The draft was lost with the session's scratch and is rewritten here from the same reading. The record
+read is unchanged since: its last commit is `c2f91724`, 2026-09-29 02:06, before my reading.
+
+### 4.1 What the first derivation holds, in one paragraph
+
+GERM-R by N-E1 at the germ point, after showing that the ring point at distance exactly 1 from `y + h` slides monotonically into the germ
+(`uses only: N-E1; that the ring point at distance 1 … moves monotonically`); GERM-S by RING-GERM's § 3.1 with its non-Siamese steps replaced
+by "the distances between two tiles form an interval avoiding 1"; TOUCH by the `σ`-images of the ring germs, N-E1 and GERM-R's four sets; ECHO
+by N-E1 on the ring germs near `ω(w)` ("the support of `X` meets `ω(w)` at most at `p` … and at `2w − p`"), then "saturation at `w` for `X` asks
+a point of that support at distance exactly 1 from `w`"; AXIS (a) by N-E1 on the dip of `ω(z)` below `p` through the four tiles, (b) by
+FS116-O1-SATPIN in V1's corrected wording (two minds), (c) and (d) by GERM-R. Each entry is filed at one mind. Its models: F(1/5)
+(FS116-Y1-F15, saturated on `B̄(P₀, 1/5)`) for GERM-R, TOUCH and AXIS; SQ9 fails AXIS (d); the capped strip fails AXIS (b).
+
+### 4.2 Divergences
+
+#### Divergences on GERM-R
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the step | a straddle on `T′ × T`, the germ parameter `t` against the approach distance in two regimes (§ 2.2) | the ring point at distance 1 from `y + h` slides monotonically into the germ; N-E1 at that point | route | kept both: two routes to one lemma, the same model |
+| 2 | the ends of the intervals | shown necessary: four one-colour tile pairs by formula realise the boundary directions with no unit pair (§ 2.3 item 3, V3-GERM-R-EDGE) | disclaimed in *not claimed*, not tested | route | kept: the *not claimed* line is the statement's edge, not caution — a finding for the entry, no change to the statement |
+| 3 | radius | exactly 1 suffices (thin truth) | "above 1" | wording | reported; no consequence |
+
+#### Divergences on GERM-S
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | Step 1, each germ's absent colour | N-E1 at the germ's points against the ring germ 60° away | TWIST-D, N-E1, six colours (RING-GERM's Step 1) | route | kept both |
+| 2 | (i), (ii) | N-E2's two alternatives, Siamese and outer | the interval argument (two tiles' distances form an interval avoiding 1) | route | one fact under two names (N-E2 is proved by the interval argument); kept |
+| 3 | "not a tile of `p`" in (ii) | a tile of `p` is Siamese with itself, so lies in `B̄(p, 1)` | "a tile of `p` lies in `B̄(p, 1)`: diameter at most 1" | route | the same fact; kept |
+
+#### Divergences on TOUCH
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the argument | the ring germs, then each `±60°` germ against the ring germ 60° away by N-E1, then GERM-R's four sets | the same three steps (`σ`-images, N-E1, GERM-R) | route | one method twice: a second mind on the information axis only, not on method |
+| 2 | "`w` in the closure of a tile of one of `p`'s colours" | idle: used only to place `w` on `Γ`, and every conclusion holds when `w` lies inside an `X`-tile (thin truth, § 3.2 item 1) | used, through TWIST-D, to place `w` on `Γ` | route | both correct; the hypothesis marks the case of interest; reported for placement |
+
+#### Divergences on ECHO
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | "saturated at `w`" | two readings: (A) the § 0 property at `w`, vacuous off the essential boundary — FALSE, the hexagonal seven-colouring with `w` inside an `X`-hexagon; (B) `w` an essential boundary point, saturated there — TRUE | read without comment as supplying a contact at `w`, i.e. reading (B) | wording | the statement as written admits (A), under which it is false; both minds derive (B). Keryx ruled it an ambiguity of the statement (2026-09-29). Correction owed: name (B) — § 3.3's corrected wording. As written: MISSTATED |
+| 2 | the lemma under it | V3-ECHO-ONLY by a straddle against the ring tile on the side fixed by the sign of `η·sin(θ − ψ)` | the ring germs' distance to a point near `ω(w)` crosses 1 (a derivative `−sin(γ − ψ) ≠ 0`), then N-E1 | route | kept both: both reach "the support of `X` meets `ω(w)` at most at `p` and `2w − p`" |
+
+#### Divergences on AXIS
+
+| # | item | this route | the first derivation | class | resolution |
+|---|---|---|---|---|---|
+| 1 | (a) | N-E2 against the quadrant tiles, each of which has points near the `x`-axis more than 1 from `q_N` | N-E1 on the dip of `ω(z)` below `p` through the four tiles | route | kept both |
+| 2 | (b) | from saturation's definition at the edge points `(s, 0)`: straddles against `T_IV`'s half-disc and N-E2 place the `c_IV`-contact at `(s, 1)` | FS116-O1-SATPIN in V1's corrected wording (two minds) | route | kept: this route does not rest on SATPIN, so (b) now has a derivation independent of it |
+| 3 | (d), the ring germs at `q_N` | their tiles approach `q_N` along `0°` and `180°`, the boundary of the inward half; GERM-R's sets `(240°, 420°)` and `(120°, 300°)` hold both | "every tile approaching `q_N` from the inward half has colour `X`, the ring germs at `q_N` among them" | route | both correct: the ring germs lie in the inward half's closure, not in it, and GERM-R's intervals (relative `(30°, 210°) ∋ 90°`, `(150°, 330°) ∋ 270°`) close the step the sentence leaves implicit |
+| 4 | the saturation hypothesis | (a) and (d) use none (thin truth; the unsaturated strip satisfies both) | (a) uses N-E1 only and (d) uses (a) and GERM-R — also none, not remarked | wording | reported for placement: (a) and (d) hold for every valid fragment with the right-angled cross; saturation is spent at (b) alone, and at (c) through (b) |
+
+**Convergences reached blind** (no divergence; recorded because they were not seen before the verdicts): SQ9 fails AXIS (d) with the same
+colours (`(1, 0)` on both inner germs; `(0, 1)`, `(2, 1)` below `q_N`); the strip fails AXIS (b) at `q_N`; ECHO's support lemma (at most `p` and
+`2w − p`) is the same statement by two routes.
+
+**Retractions: none.** Nothing in § 4 showed an error of mine. One thing I learned there that I did not have: **F(1/5)** (FS116-Y1-F15, one mind,
+[tools] exact), a six-coloured fragment saturated on `B̄(P₀, 1/5)` about a right-angled cross — so AXIS's hypothesis class is inhabited at six
+colours (I had models only outside it: the strip, unsaturated; SQ9, `k = 9`). I have not checked it.
+
+### 4.3 The count
+
+On each of the four axes (`ephodos-verification` § the count):
+1. **Information.** Before its verdicts this mind saw the statements, the frozen list (with RING-GERM's statement and N7-HUB's one-sentence
+   sketch inside FS114-N7-3T's), the held inputs of § 1.1, and Keryx's ruling on ECHO's two terms; not the first derivation (opened 02:40, after
+   the verdicts' commits). No fence was touched.
+2. **Prior and method.** The same model (Opus 5.5) as the first mind. Routes differ at GERM-R (straddle against monotone unit point), GERM-S
+   (N-E2 against the interval argument — one fact under two names), AXIS (a) and (b) (N-E2 against N-E1; saturation's definition against
+   SATPIN), ECHO's lemma; TOUCH is one method twice.
+3. **The criterion, fixed first.** Statements quoted verbatim (5 of 5); predictions registered at stage 1, after a mental working of the arguments
+   during the readback (so informed), scored: 5 of 5 met (Brier 0.024) — a hit rate that measures little, as § 1.5 said.
+4. **The statement, attacked.** GERM-R's ends (realised: the *not claimed* line is needed); TOUCH's idle hypothesis; ECHO's term (a monster,
+   FALSE under (A)); AXIS's saturation (spent only at (b); the strip fails (b) without it) and six colours (SQ9 fails (d)).
+
+So: **GERM-R, GERM-S, AXIS — two minds, blind, the same model, different routes**; **TOUCH — two minds, blind, the same model, the same route**;
+**ECHO — MISSTATED as written** (this mind: refuted under (A), a monster), **its corrected form (B) two minds, blind, the same model**. GERM-S's
+count carries § 2.5's condition: a reader who counts N7-HUB's related sketch as given may count one.
+
+### 4.4 Drafts for files I do not write (standing rule 7; for Keryx to copy as they stand)
+
+- **For FS-116's claim list, a statement defect (ECHO):** replace "if the fragment is saturated at w and X is in w's essential multicolour" by
+  "if w is an essential boundary point at which the fragment is saturated (each colour of P(w) has a point of its support at distance exactly 1
+  from w) and X is in w's essential multicolour". Sharper, with V3-ECHO-ONLY: "ω(w) ∩ supp S_X ⊆ {2w − p} always; saturation at w for X makes it
+  {2w − p}".
+- **For FS116-N1-GERM-R's entry,** a model line to add: "the ends are sharp: four one-colour tile pairs by formula realise the boundary directions
+  ψ + 150°, ψ + 330° at v⁻ and ψ + 150°, ψ − 30° at v⁺ (FS116-V3 § 2.3, tools/fs116_v3_boundary.py)".
+- **For FS116-N1-AXIS's entry,** a *uses only* note: "(a) and (d) use no saturation (FS116-V3 § 3.6: the strip satisfies both)".
+- **For FS116-N1-TOUCH's entry,** a *uses only* note: "w ∈ D is used only to place w on Γ; the conclusions hold at every point of ω(p) off the arcs
+  of Γ on ω(p), not a change point, with its four germs off (Q) arcs".
+
+## Stage 4 — SAVED
+
 ## The verification blocks and controls
 
 verification: FS116-N1-GERM-R
@@ -451,17 +555,18 @@ verification: FS116-N1-GERM-R
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 2 (commit "FS116-V3: stage 2")
+  committed: 2026-09-29, commit 7166bf6f (stage 2)
   predicted: derived — 0.95 — likeliest break: a tile reaching y only along a boundary direction, or a cusp at y (both outside the claim as posed)
   verdict: derived
   method: a straddle (N-E0 on the connected set T′ × T) at first order in the germ parameter and the approach distance; the first derivation's route
     is not known to me (fenced)
   attack: § 2.3 Attack on GERM-R
-  divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
+  divergences: § Divergences on GERM-R
   counterexamples: thin truth: a valid k-coloured fragment on B̄(p, 1) — § 2.2's step reads only neighbourhoods of ω(p), so radius exactly 1 suffices
     (no consequence); the boundary-direction models of § 2.3 confirm the not claimed line and are not counterexamples
-  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
-    statement alone by the route of § 2; the same model (Opus 5.5) — blind, the same model
+  minds: 2 — blind to: the first derivation's record (plans/FS116-N1-proof.md § 4, opened 2026-09-29 07:40 UTC, after the verdicts' commits); method:
+    a straddle on T′ × T in two regimes, against the first's monotone unit point and N-E1 — different routes; the same model (Opus 5.5) — blind, the
+    same model
   grade: hand
 
 verification: FS116-N1-GERM-S
@@ -477,17 +582,18 @@ verification: FS116-N1-GERM-S
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 2 (commit "FS116-V3: stage 2")
+  committed: 2026-09-29, commit 7166bf6f (stage 2)
   predicted: derived — 0.90 — likeliest break: a germ at y ± 60° on a non-(Q) arc whose absent side colour is not the one the exclusion needs
   verdict: derived
   method: each germ's absent colour by N-E1 against the ring germ 60° away, then GERM-R's exclusions and N-E2's two alternatives; the first
     derivation's route is not known to me (fenced)
   attack: § 2.5 Attack on GERM-S
-  divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
+  divergences: § Divergences on GERM-S
   counterexamples: thin truth: a valid fragment on B̄(p, 1) — the steps read only neighbourhoods of ω(p), so radius exactly 1 suffices (no
     consequence)
-  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
-    statement alone by the route of § 2; the same model (Opus 5.5) — blind, the same model
+  minds: 2 — blind to: the first derivation's record (plans/FS116-N1-proof.md § 4, opened 2026-09-29 07:40 UTC, after the verdicts' commits); method:
+    N-E2's two alternatives, against the first's interval argument — one fact under two names; given N7-HUB's related sketch (§ 2.5); the same model
+    (Opus 5.5) — blind, the same model
   grade: hand
 
 verification: FS116-N1-TOUCH
@@ -500,17 +606,18 @@ verification: FS116-N1-TOUCH
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
+  committed: 2026-09-29, commit 7245b6eb (stage 3)
   predicted: derived — 0.85 — likeliest break: an idle hypothesis (a thin truth, not a break), or w an end of a Γ-arc on ω(p)
   verdict: derived
   method: the ring germs at w by N-E1 and 'not a change point', each ±60° germ's colour by N-E1 against the X ring germ 60° away, then GERM-R's four
     exclusions, whose union is every direction; the first derivation's route is not known to me (fenced)
   attack: § 3.2 Attack on TOUCH
-  divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
+  divergences: § Divergences on TOUCH
   counterexamples: thin truth: a point of ω(p) inside an X ring tile, on no arc of Γ on ω(p), its four germs off (Q) arcs — the hypothesis 'w in the
     closure of a tile of one of p's colours' is idle (§ 3.1 Step 1 uses it only to place w on Γ)
-  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
-    statement alone by the route of § 3.1; the same model (Opus 5.5) — blind, the same model
+  minds: 2 — blind to: the first derivation's record (plans/FS116-N1-proof.md § 4, opened 2026-09-29 07:40 UTC, after the verdicts' commits); method:
+    the same route as the first (σ-images, N-E1, GERM-R's four sets): independent on information only; the same model (Opus 5.5) — blind, the same
+    model
   grade: hand
 
 verification: FS116-N1-ECHO
@@ -521,19 +628,21 @@ verification: FS116-N1-ECHO
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
+  committed: 2026-09-29, commit 7245b6eb (stage 3)
   predicted: refuted — 0.75 — likeliest break: a monster at "saturated at w" (reading A, w inside an X-tile); under reading B I expect it true
   verdict: refuted: monster at the term 'saturated at w' — under reading (A) FALSE by the hexagonal seven-colouring (w inside an X-hexagon, no
     essential boundary point); under reading (B) TRUE; MISSTATED, corrected statement § 3.3
   method: V3-ECHO-ONLY (every point of ω(w) in the closure of an X-tile is 2w − p, by a straddle against the ring tile on the side fixed by the sign
     of η·sin(θ − ψ)), then saturation's contact; the first derivation's route is not known to me (fenced)
   attack: § 3.4 Attack on ECHO
-  divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
+  divergences: § Divergences on ECHO
   counterexamples: monster: the hexagonal seven-colouring of circumradius 0.45, p a hexagon centre, w = r(20°) inside a colour-1 hexagon, 2w − p
     inside a colour-5 hexagon (tools/fs116_v3_echo.py) — the term 'saturated at w', which checks nothing at a point that is no essential boundary
     point (reading A); under reading B the hypothesis excludes it and the statement holds
-  minds: 1 — this mind's verdict on the statement as written (refuted, a monster) and on its reading (B) (derived); blind to the first derivation
-    (fenced); the count against it is stage 4's
+  minds: 2 — on the corrected statement (reading B); blind to: the first derivation's record (plans/FS116-N1-proof.md § 4, opened 2026-09-29 07:40
+    UTC, after the verdicts' commits); method: V3-ECHO-ONLY by a straddle, against the first's crossing derivative and N-E1 — different routes to one
+    lemma; the same model (Opus 5.5) — blind, the same model; on the statement as written, this mind refutes it (a monster) and the first derives it:
+    a wording divergence (§ 4.2)
   grade: hand
 
 verification: FS116-N1-AXIS
@@ -548,18 +657,19 @@ verification: FS116-N1-AXIS
   given: the statement verbatim, the whole frozen claim list (with RING-GERM's statement and N7-HUB's one-sentence sketch in FS114-N7-3T's),
     FS114-derivation § 3's entry statements, N-E0–N-E2 and M-PINCH with their proofs, the brief's one-line description of the five; no verdict, no
     proposing record, no sketch of these statements' proofs (§ 1.4)
-  committed: 2026-09-29, stage 3 (commit "FS116-V3: stage 3")
+  committed: 2026-09-29, commit 7245b6eb (stage 3)
   predicted: derived — 0.85 — likeliest break: (b)'s "above the line y = 1", or (d) when the germ at r(30°) lies on Γ with both absent colours
   verdict: derived
   method: (a) by N-E2 against the quadrant tiles; (b) saturation's contact at the edge points (s, 0), placed at (s, 1) by straddles and N-E2; (c) by
     N-E2 fixing a (Q) arc's side colours as c_I | c_III, then GERM-R against (b); (d) by GERM-R at q_N and the direction 270°; the first derivation's
     route is not known to me (fenced)
   attack: § 3.6 Attack on AXIS
-  divergences: none — the first derivation is fenced until all five verdicts are committed (stage 4)
+  divergences: § Divergences on AXIS
   counterexamples: thin truth: the strip's midline vertex P_1 = (1/2, 0) (row 136, as rebuilt in plans/FS112-Y-construction.md § 1.3), unsaturated (tools/fs116_v3_axis.py) — (a) and (d) hold there and
     their steps in § 3.5 use no saturation; (b) fails there, so saturation is spent in (b)
-  minds: 2 — blind to: the first derivation's record, route and verdict (fenced until all five verdicts are committed); method: derived from the
-    statement alone by the route of § 3.5; the same model (Opus 5.5) — blind, the same model
+  minds: 2 — blind to: the first derivation's record (plans/FS116-N1-proof.md § 4, opened 2026-09-29 07:40 UTC, after the verdicts' commits); method:
+    (a) by N-E2 and (b) from saturation's definition, against the first's N-E1 dip and FS116-O1-SATPIN — different routes; the same model (Opus 5.5) —
+    blind, the same model
   grade: hand
 
 control: v3-quotes
