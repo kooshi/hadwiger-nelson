@@ -13,9 +13,13 @@ tactic edge, simple and saturated, § 13 the germs, hubs and semi-hubs, and § 1
 corrected wording, the frozen one's address given beside it, and the frozen list is not edited. Arguments are addresses in the job records,
 resolved from `plans/`.*
 
-***Vacuity.** FS116-Y4-EMPTY (one mind; FS116-V6, blind, running) says the non-Siamese simple six-coloured class with a ring carrying no arc of Γ is
-empty. If it is held, every entry below marked "vac." is true vacuously — its class has no member — at the count its own verifier gave; its argument
-stays valid as an argument. **Nothing here moves a value**: χ(ℝ²) ∈ {5, 6, 7}, and every statement about a valid six-coloured fragment on a large
+*Updated by the close's part 2, FS116-Z2 (Ephodos, Opus 5.5), 2026-10-03, by `../tools/fs116_z2_fold.py`: FS116-V6's verdict folded into
+FS116-Y4-EMPTY, every vacuity note made definite, FS116-V6's five lemmas filed at one mind, and the case list's Γ-free case held.*
+
+***Vacuity.** FS116-Y4-EMPTY is **held** (inventory item 139: two minds, the second, FS116-V6, blind, its verdict committed before it compared, by a
+route resting on none of round 3's statements): the non-Siamese simple six-coloured class with a ring carrying no arc of Γ is empty. Every entry below
+marked "**True vacuously**" has its class inside that one (items 124, 135), so it is true with no member, at the count its own verifier gave; its
+argument stays valid as an argument. **Nothing here moves a value**: χ(ℝ²) ∈ {5, 6, 7}, and every statement about a valid six-coloured fragment on a large
 disc is about a possible object.*
 
 *Prior art: FS-116's gate (`FS116-local-exclusion.md` § 2.3, 12 zbMATH queries, `../data/fs116/o1/zb/`) and the queries each record names. Where
@@ -85,7 +89,7 @@ derivation: FS116-V1-FRAME
     tiles of the two absent colours, swapped by the rotation σ; the four regions at a change point cut by ω(σy) and ω(σ⁻¹y)) and F4 (the inward region
     lies in tiles of p reaching y); non-Siamese at F4–F6, simple at F6, six colours at F3
   not claimed: anything with Siamese pairs or non-simple tiles; anything at k ≥ 7; that any such vertex exists (FS116-Y4-EMPTY excludes the class at
-    six colours, one mind)
+    six colours, held)
   argument: FS116-V1-verification.md § 3.1 The frame (my route) — setting N
   verdict: derived
   grade: hand
@@ -94,9 +98,10 @@ derivation: FS116-V1-FRAME
     3.2), which are patterns, not fragments
   prior art: partly: FS114-N6-RING60 (six change points after the bends) and FS114-N7-TAC (tactic centres at change points), one mind each; F5 is a
     second route to the count over non-Siamese (V1 § 4.3 row 4)
-  handoff: none — in its class FS116-Y4-EMPTY, if held, leaves it vacuous; it carries N7-HUB's second mind to FS-114's filing (part 2)
+  handoff: none — FS116-Y4-EMPTY (held) leaves it vacuous; it carried N7-HUB's second mind to FS-114's filing (FS114-N7-HUB, FS116-Z2's
+    erratum)
 
-vac. — its class lies inside FS116-Y4-EMPTY's. V1's second route to the six change points and the tactic centres (F5, F6), derived blind beside N7-HUB (b), (c), which now stand at two minds in FS-114's filing (part 2). Rests on it: nothing in this file.
+**True vacuously** — its class lies inside FS116-Y4-EMPTY's (item 135). V1's second route to the six change points and the tactic centres (F5, F6), derived blind beside N7-HUB (b), (c), which stand at two minds in FS-114's filing (`FS114-derivation.md` FS114-N7-HUB, FS116-Z2's erratum). Rests on it: nothing in this file.
 
 ## Round 1 — the ring (FS116-N1; FS116-V2 blind on three)
 
@@ -742,7 +747,7 @@ derivation: FS116-N2-HEX6
   handoff: de Bruijn — with RECIP, STAR and TOUCH; a relay-result for D2 (the first shell of a Γ-free vertex holds a hub whose ring carries an arc of
     Γ)
 
-vac. — its class is FS116-Y4-EMPTY's (item 124). No blind check ran. Rests on it: FS116-N2-HEX3; FS116-RING-TRANSFER-C.
+**True vacuously** — its class is FS116-Y4-EMPTY's (items 124, 139). No blind check ran. Rests on it: FS116-N2-HEX3; FS116-RING-TRANSFER-C.
 
 derivation: FS116-N2-HEX3
   statement: in HEX6's setting, if every y_k has four colours and no more, the set S of k whose y_k has a ring free of arcs of Γ is empty, one hub, or
@@ -759,7 +764,7 @@ derivation: FS116-N2-HEX3
   prior art: owed
   handoff: de Bruijn — with HEX6
 
-vac. — as HEX6. Rests on it: nothing in this file.
+**True vacuously** — as HEX6. Rests on it: nothing in this file.
 
 derivation: FS116-RING-TRANSFER-C
   statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours: a ring of five or
@@ -783,7 +788,7 @@ derivation: FS116-RING-TRANSFER-C
   prior art: owed — a search in the Kneser and local-rule vocabularies (§ 1.2) is the report's debt
   handoff: de Bruijn — deferred with D6's map type, after a blind second mind on STAR, RECIP, ANTI and HEX6
 
-RING-TRANSFER (§ 5) is **MISSTATED** (its input too small: the rule reads `p`'s star; its output too large: each placed ring's 240° arc outside `B̄(p, 1)` is unread; N2 § 3.3); this is its corrected form, one mind, its last clause ("a ring free of arcs of Γ has …") vac. by FS116-Y4-EMPTY (item 124). Rests on it: nothing in this file.
+RING-TRANSFER (§ 5) is **MISSTATED** (its input too small: the rule reads `p`'s star; its output too large: each placed ring's 240° arc outside `B̄(p, 1)` is unread; N2 § 3.3); this is its corrected form, one mind, its last clause ("a ring free of arcs of Γ has …") true vacuously by FS116-Y4-EMPTY, held (items 124, 139). Rests on it: nothing in this file.
 
 ## Round 3 — SAT-STRIP from both sides (FS116-S1; FS116-V4 blind on three)
 
@@ -1085,7 +1090,7 @@ derivation: FS116-Y3-SIX
     found — owed
   handoff: de Bruijn — with RING-TWIST-C and RING-GERM, queued behind D6's map type
 
-vac. — Frozen at § 14. TRUE; "simple" idle on V5's route (a thin truth); **held** (item 118). Rests on it: FS116-Y3-TIPS; FS116-Y3-NOQ; FS116-Y4-EMPTY.
+**True vacuously** — Frozen at § 14. TRUE; "simple" idle on V5's route (a thin truth); **held** (item 118). Rests on it: FS116-Y3-TIPS; FS116-Y3-NOQ; FS116-Y4-EMPTY.
 
 derivation: FS116-Y3-TIPS
   statement: in FS116-Y3-SIX's setting, with the hubs y_k = e(60k), each hub has exactly one tip, the tips of antipodal hubs are opposite tiles of p,
@@ -1104,7 +1109,7 @@ derivation: FS116-Y3-TIPS
     owed
   handoff: de Bruijn — with SIX; a relay-result for any exclusion of the Γ-free type
 
-vac. — Frozen at § 14. TRUE; **held** (item 118). Rests on it: FS116-Y3-HUBCOL; FS116-Y3-TIGHT; FS116-Y3-LENS; FS116-Y3-NBTIP; FS116-V5-LENS; FS116-Y4-SYM; FS116-Y4-EMPTY.
+**True vacuously** — Frozen at § 14. TRUE; **held** (item 118). Rests on it: FS116-Y3-HUBCOL; FS116-Y3-TIGHT; FS116-Y3-LENS; FS116-Y3-NBTIP; FS116-V5-LENS; FS116-Y4-SYM; FS116-Y4-EMPTY.
 
 derivation: FS116-Y3-HUBCOL
   statement: in FS116-Y3-TIPS's labelling, each hub's colours are X, X̄, its tip's colour and a non-empty set of outer colours drawn from the list of
@@ -1122,7 +1127,7 @@ derivation: FS116-Y3-HUBCOL
   prior art: owed
   handoff: none — a relay-result for § 3 and the families
 
-vac. — One mind. Rests on it: FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE.
+**True vacuously** — One mind. Rests on it: FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE.
 
 derivation: FS116-Y3-TIGHT
   statement: in FS116-Y3-TIPS's labelling, the ring tile clockwise of y_0 does not have q_5 = √3 e(330°) in its closure, the ring tile
@@ -1140,7 +1145,7 @@ derivation: FS116-Y3-TIGHT
   prior art: owed
   handoff: none — a relay-result for § 3 and the families
 
-vac. — One mind. Y4's look-back: it stated both flank edges and used each only against a far lens vertex (item 127). Rests on it: FS116-Y3-LENS; FS116-Y4-Q1.
+**True vacuously** — One mind. Y4's look-back: it stated both flank edges and used each only against a far lens vertex (item 127). Rests on it: FS116-Y3-LENS; FS116-Y4-Q1.
 
 derivation: FS116-Y3-NOQ
   statement: in FS116-Y3-TIPS's setting, at a hub y_k, no tile adjacent at y_k to the ring tile over the arc from y_(k−1) to y_k lies in B̄(q_k, 1),
@@ -1160,7 +1165,7 @@ derivation: FS116-Y3-NOQ
   prior art: owed
   handoff: de Bruijn — with SIX and TIPS; a relay-result for any exclusion of the Γ-free type
 
-vac. — One mind. Rests on it: FS116-Y3-LENS; FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE; FS116-Y4-SPOKE; FS116-Y4-Q1.
+**True vacuously** — One mind. Rests on it: FS116-Y3-LENS; FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE; FS116-Y4-SPOKE; FS116-Y4-Q1.
 
 derivation: FS116-Y3-LENS
   statement: in FS116-Y3-TIPS's labelling, for k in {1, 2, 4, 5} and every point x close enough to q_k inside B(y_k, 1) ∩ B(y_(k+1), 1), every colour
@@ -1179,7 +1184,7 @@ derivation: FS116-Y3-LENS
   prior art: owed
   handoff: none — a relay-result for TIGHTLENS
 
-vac. — One mind. Rests on it: FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE.
+**True vacuously** — One mind. Rests on it: FS116-Y3-TIGHTLENS; FS116-Y3-STARFORCE.
 
 derivation: FS116-Y3-TIGHTLENS
   statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours
@@ -1202,7 +1207,7 @@ derivation: FS116-Y3-TIGHTLENS
   handoff: de Bruijn — with NOQ, LENS, TIPS and SIX, after a blind second mind; the generic star's exclusion at √3 is a relay-result for D2's case
     list
 
-vac. — Frozen at § 12. TRUE; a thin truth: each of (Q1)–(Q5) holds by its first disjunct alone, so the statement is weaker than its hypotheses give (both minds; item 120); **held** (item 118). Rests on it: FS116-Y3-STARFORCE.
+**True vacuously** — Frozen at § 12. TRUE; a thin truth: each of (Q1)–(Q5) holds by its first disjunct alone, so the statement is weaker than its hypotheses give (both minds; item 120); **held** (item 118). Rests on it: FS116-Y3-STARFORCE.
 
 derivation: FS116-Y3-NBTIP
   statement: in FS116-Y3-TIPS's setting, the tip of each hub meets the open unit disc about each of the two neighbouring hubs; so no hub has a
@@ -1221,7 +1226,7 @@ derivation: FS116-Y3-NBTIP
   prior art: owed
   handoff: none — a relay-result for STARFORCE
 
-vac. — Frozen at § 12. TRUE; one mind and a checking reading (item 118); its blind second mind is owed. Rests on it: FS116-Y3-STARFORCE; FS116-Y4-SPOKE.
+**True vacuously** — Frozen at § 12. TRUE; one mind and a checking reading (item 118); its blind second mind is owed. Rests on it: FS116-Y3-STARFORCE; FS116-Y4-SPOKE.
 
 derivation: FS116-Y3-STARFORCE
   statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours
@@ -1240,7 +1245,7 @@ derivation: FS116-Y3-STARFORCE
   prior art: partly: FS116-N2-HEX3 (one mind) derives this star from two alternate hubs recurring; its forcing by radius √3 not found — owed
   handoff: de Bruijn — with NOQ, LENS, NBTIP, TIPS and SIX, after a blind second mind; a relay-result for D2: the Γ-free type's case list is one star
 
-vac. — Frozen at § 12. TRUE under the two readings both minds used (item 120), written here: **"near q_k the lens points carry colour c"** — every point of the lens `L_k` close enough to its far vertex `q_k` lies in a tile of colour `c` or on Γ (V5's R-LENSPT); **"counter-clockwise 2, 3 at y_0"** — turning counter-clockwise about `y_0` through its outer tiles, from the ring tile on the clockwise side of `y_0` toward the one on the counter-clockwise side, the tile of colour 2 comes first and of colour 3 second (V5's R-ORDER); under the reverse order the order clause is FALSE at all four hubs. **Held** (item 118). Rests on it: FS116-Y4-SPOKE; FS116-Y4-Q1.
+**True vacuously** — Frozen at § 12. TRUE under the two readings both minds used (item 120), written here: **"near q_k the lens points carry colour c"** — every point of the lens `L_k` close enough to its far vertex `q_k` lies in a tile of colour `c` or on Γ (V5's R-LENSPT); **"counter-clockwise 2, 3 at y_0"** — turning counter-clockwise about `y_0` through its outer tiles, from the ring tile on the clockwise side of `y_0` toward the one on the counter-clockwise side, the tile of colour 2 comes first and of colour 3 second (V5's R-ORDER); under the reverse order the order clause is FALSE at all four hubs. **Held** (item 118). Rests on it: FS116-Y4-SPOKE; FS116-Y4-Q1.
 
 control: fs116-y3-star
   of: FS116-Y3-STARFORCE — with the neighbour-tip rule, one assignment of the four edges survives the lens rule; without it, 26
@@ -1362,7 +1367,7 @@ derivation: FS116-V5-LENS
   handoff: Keryx — V5-LENS proves more than FS116-Y3-TIGHTLENS states (each lens forces its first disjunct); the divergence table at stage 4 compares
     routes
 
-vac. — V5's lemma, one mind: at radius √3 each lens beside a single tip forces its double-tip hub's tip tight at `p`, giving HEX3's star directly. Rests on it: nothing in this file; FS116-V5's second derivations of FS116-Y3-SIX, -TIPS, -NBTIP, -TIGHTLENS and -STARFORCE.
+**True vacuously** — V5's lemma, one mind: at radius √3 each lens beside a single tip forces its double-tip hub's tip tight at `p`, giving HEX3's star directly. Rests on it: nothing in this file; FS116-V5's second derivations of FS116-Y3-SIX, -TIPS, -NBTIP, -TIGHTLENS and -STARFORCE.
 
 ## Round 4 — the semi-hub rule (FS116-N3; FS116-V5 blind on three)
 
@@ -1615,7 +1620,7 @@ derivation: FS116-RING-TRANSFER-Q
 
 GAP, N2's "a placing rule at semi-hubs" (FS116-N2-proof.md § 3.2) narrowed by N3 to three places. Rests on it: nothing in this file.
 
-## Round 4 — the Γ-free type is empty (FS116-Y4; FS116-V6 blind, running)
+## Round 4 — the Γ-free type is empty (FS116-Y4; FS116-V6 blind on EMPTY)
 
 derivation: FS116-Y4-SYM
   statement: let F be a fragment of the HEX3 class on B̄(p, R), R ≥ √3; then σ_30(F), with the colours 3 and 4 exchanged, and σ_120(F), with the
@@ -1635,7 +1640,7 @@ derivation: FS116-Y4-SYM
     sweeps
   handoff: none — a bookkeeping lemma for the casework of this record
 
-vac. — One mind; a bookkeeping lemma. Rests on it: FS116-Y4-SPOKE.
+**True vacuously** — One mind; a bookkeeping lemma. Rests on it: FS116-Y4-SPOKE.
 
 derivation: FS116-Y4-SPOKE
   statement: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, the outer tile O_2 of y_2 (colour 4) has 2y_2 in its closure,
@@ -1656,7 +1661,7 @@ derivation: FS116-Y4-SPOKE
   handoff: none — a relay-result for the obstruction or the construction of this record; with STARFORCE, after its blind check, a candidate for de
     Bruijn
 
-vac. — One mind. Rests on it: FS116-Y4-Q1.
+**True vacuously** — One mind. Rests on it: FS116-Y4-Q1.
 
 derivation: FS116-Y4-Q1
   statement: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, for every point x = q_1 + s·e(χ) of some neighbourhood of
@@ -1674,7 +1679,7 @@ derivation: FS116-Y4-Q1
   prior art: owed
   handoff: none — a relay-result for § 3
 
-vac. — One mind. Rests on it: nothing in this file.
+**True vacuously** — One mind. Rests on it: nothing in this file.
 
 derivation: FS116-Y4-FLANK
   statement: let t be a tile of a valid fragment, Siamese pairs allowed, on a closed disc of radius above 1 about a point p, and let y = r(ψ) and y′ =
@@ -1715,14 +1720,23 @@ derivation: FS116-Y4-EMPTY
   argument: FS116-Y4-construction.md § 3.2 The class is empty (FS116-Y4-EMPTY)
   verdict: derived
   grade: derived from: FS116-Y4-FLANK, FS116-Y3-SIX, FS116-Y3-TIPS, FS116-RING-GERM
-  minds: 1 — a blind second mind running (FS116-V6, the list's § 15)
+  minds: 2 — blind to: FS116-Y4's record until its verdict's commit (2429e200), though given the frozen list with round 3's construction-side
+    statements and their setting (§ 14), route-shaped and unused; method: a different route at the count (FS116-V6-COUNT and -ANTI in place of
+    FS116-Y3-TIPS) and at the flank step (FS116-V6-HUG's exact identity in place of FS116-Y4-FLANK's curvature bound); the same model (Opus 5.5),
+    one prior
   model: none can exist (the statement is a non-existence); its geometric step is control fs116-y4-flank, whose plant three shows where six is spent
   prior art: partly: the mechanism is G83's and FS114-Y5-PXKILL's; that the Γ-free four-colour vertex dies at 1 + ε is not in FS-116's records (round
     3 and FS116-N2 worked it as possible); no outside search — owed
-  handoff: de Bruijn — with SIX, TIPS and RING-GERM, after a blind second mind; for D2, the Γ-free ring type removed from C114-LOCAL-F's case list at
-    1 + ε
+  handoff: de Bruijn — by either route, the first with FLANK, SIX, TIPS and RING-GERM, or FS116-V6's (FS116-V6-HUBS, -HUG, -COUNT, -ANTI, hand, using
+    no statement of the frozen list), the shorter; for D2, the Γ-free ring type removed from C114-LOCAL-F's case list at 1 + ε
 
-Frozen at § 15 with the parenthetical of its not-claimed line withheld for blindness; the line is filed whole here. **One mind; FS116-V6 runs blind on it** — part 2 folds V6's verdict in here and in every "vac." note. It removes the Γ-free ring type from C114-LOCAL-F's case list at radius `1 + ε` in the non-Siamese simple class; round 3 and FS116-N2 had worked that class as possible (a G21 instance, item 124). Rests on it: FS116-Y4-OBST; the vacuity of every entry marked vac.; FS116-C114-LOCAL-F's Γ-free case.
+Frozen at § 15 with the parenthetical of its not-claimed line withheld for blindness; the line is filed whole here. **Held** (item 139): FS116-V6, blind, the same model, committed TRUE (2429e200) before it opened FS116-Y4's record, by its own route — six hubs by a
+tip count (FS116-V6-HUBS), the hugging identity (FS116-V6-HUG), an incidence count forcing two antipodal doubly tipped hubs (FS116-V6-COUNT) and
+antipodal tippers sharing no edge at `p` (FS116-V6-ANTI) — resting on neither FS116-Y3-SIX nor -TIPS; divergences truth 0, route 7, wording 1; no
+retraction (`FS116-V6-verification.md` § 3.2). Caveats stated with it (item 139): one model; § 14's statements, about this class, were in V6's view
+though unused. Six colours are spent twice on V6's route (two absent colours; the tip sector holding only colours of `p`) and once on Y4's (the
+alternation). V6's wording note: "radius above 1" and "radius 1" name one class, since an open set containing `B̄(p, 1)` contains a larger closed disc
+(V6 § 3.2 row 7). It removes the Γ-free ring type from C114-LOCAL-F's case list at radius `1 + ε` in the non-Siamese simple class; round 3 and FS116-N2 had worked that class as possible (a G21 instance, item 124). Rests on it: FS116-Y4-OBST; the vacuity of every entry marked True vacuously; FS116-C114-LOCAL-F's Γ-free case.
 
 control: fs116-y4-flank-seven
   of: FS116-Y4-EMPTY — where six is spent: a ring cycling three colours (a seventh colour) makes the flank colours differ at every position
@@ -1744,6 +1758,114 @@ derivation: FS116-Y4-OBST
 
 The brief's target answered at every radius above 1; FS116-Y4-FRAG (a fragment of the HEX3 class above radius 2) is FALSE by it. Rests on it: nothing in this file.
 
+### FS116-V6's lemmas — the second route to FS116-Y4-EMPTY (one mind each; inventory item 140)
+
+*Stated in V6's setting, FS116-Y4-EMPTY's class (`FS116-V6-verification.md` § 2.2, its readings R-RAD, R-SIAM, R-ARC, R-TILE at § 1.2); each statement is
+V6's sentence verbatim after the setting clause, from § 2.2's bold statements or its "Theorems this phase proved" list. V6's preliminaries — V6-DIAM,
+V6-E1, V6-DICH (two tiles of one colour have interior distances all below or all above 1), V6-RING, V6-WIN, V6-GERM (FS116-N1-GERM-R by V6's route) and
+V6-TIP (every change point has a tip) — are steps of § 2.2, not filed apart; V6-GERM is held as GERM-R and is not filed twice.*
+
+derivation: FS116-V6-HUBS
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, m = 1: the change points are y_k = r(ψ₀ + 60°k), six of them; a tile of p tips at most two, and two only if consecutive
+  uses only: V6-DIAM (a tile has diameter at most 1, so its tipped change points lie in one closed 60° arc); V6-RING (six colours, at least four at p:
+    exactly two absent colours, the ring alternating them under the 60° rotation); V6-WIN (an odd number m of change points in each half-open 60°
+    window); V6-TIP (every change point has a tip, by B(u) ∩ B(v) ⊂ B(p), non-Siamese and six colours); four tiles at p, so 4(m + 1) ≥ 6m
+  not claimed: anything in the Siamese class; anything at k ≥ 7 (SQ9 at k = 9 meets every other hypothesis with twelve points of Γ on its ring, control
+    v6-sq9); that any such fragment exists
+  argument: FS116-V6-verification.md § 2.2 The derivation — the class is empty
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours (FS116-Y4-EMPTY, held: the class is empty); SQ9 at k = 9 for the hypotheses but the colour count (control v6-sq9)
+  prior art: partly: FS116-Y3-SIX (held) and FS116-V1-FRAME's F5 state the count, FS114-N6-RING60 the hexagon; no outside search — owed
+  handoff: none — a step of FS116-V6's route to FS116-Y4-EMPTY; it travels with EMPTY's handoff
+
+**True vacuously** — V6's lemma, one mind; the third route to FS116-Y3-SIX's first clause (after Y3's tip count and FS116-V5-RING's reach), "simple" idle by V6's own uses-only line (§ 2.2: simplicity enters at V6-COUNT's last step only). Rests on it: FS116-V6-HUG; FS116-V6-COUNT; FS116-V6-ANTI; FS116-V6's route to FS116-Y4-EMPTY.
+
+derivation: FS116-V6-HUG
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, with its change points y_k = e(60°k) (FS116-V6-HUBS), no tile T of p tips both y_0 and y_1 while being the only tip at each
+  uses only: V6-GERM (near a change point the X-tiles lie in B̄(u) ∖ B(v) and the X̄-tiles in B̄(v) ∖ B(u)); V6-TIP (the tip sector holds only
+    colours of p, six colours); V6-DICH (non-Siamese: a point lies in the closure of at most one tile of each colour; two distinct tiles of one colour
+    have interior distances all below or all above 1); V6-DIAM; the identity |a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2) for a(s) =
+    y_0 + e(120° + s), b(t) = y_1 + e(300° − t), 0 < s, t ≤ 60° (control v6-hug)
+  not claimed: anything about a tile tipping two adjacent hubs with a second tip at either; anything in the Siamese class (non-Siamese gives the
+    uniqueness of the tip and of the two X̄-tiles; V6: "Validity alone kills it here; non-Siamese was used only for the uniqueness of R⁻, R⁺ and of the
+    tip"); anything at k ≥ 7
+  converse: one-way — "the only" is the hypothesis "the only tip at each hub", not a characterization; nothing two-way is stated
+  argument: FS116-V6-verification.md § 2.2 The derivation — the class is empty
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours; V6's stage-1 candidate (a star with two five-colour hubs, § 2.3 item 1) fails exactly here, its two X̄ ring tiles
+    √3 − 1 apart at s = t = 30°
+  prior art: partly: FS116-Y4-FLANK (its second-order, colour-free form) and FS114-Y5-PXKILL — G83's straddle along two unit circles; this identity not
+    searched — owed
+  handoff: de Bruijn — the pinning of the two edges to ω(y_1) and ω(y_0) and the trigonometric identity, a short kernel target, with EMPTY
+
+**True vacuously** — V6's lemma, one mind: FS116-Y4-FLANK's content in the case EMPTY uses, by a second route (V6 § 3.2 row 3; at curvature 1 and turning angle `φ` both give `(2cos φ − 1)²`). The identity was checked symbolically by its control and numerically by the coordinator at 20,000 random `(s, t)` (item 138). Rests on it: FS116-V6-COUNT; FS116-V6's route to FS116-Y4-EMPTY.
+
+control: v6-hug
+  of: FS116-V6-HUG — the identity, and the two hugging arcs inward from y_0 and y_1 within 1 on the grid s, t in 1..60 degrees
+  run: python3 ../tools/fs116_v6_hug.py inward
+  expect: identity holds; below 1: 3600 of 3600
+  fault: python3 ../tools/fs116_v6_hug.py outward
+
+derivation: FS116-V6-COUNT
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, with V6-HUG, the tips force two antipodal doubly-tipped hubs and four double tiles: M = 4, s = 2, each hub of S has exactly
+    two tips, and every tip at a hub of S is a double tile; the two hubs of S are antipodal, y_k and y_(k+3), each tipped by two of the four tiles
+  uses only: FS116-V6-HUBS (six hubs; a tile tips at most two, consecutive); FS116-V6-HUG (each double tile has a hub with two or more tips); V6-TIP
+    (every hub has a tip); four tiles at p; counting incidences, Σ_h t_h ≤ M + 4; the edges of the hexagon y_0 … y_5
+  not claimed: the contradiction (FS116-V6-ANTI and simplicity finish it); anything in the Siamese class; anything at k ≥ 7
+  argument: FS116-V6-verification.md § 2.2 The derivation — the class is empty
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours
+  prior art: owed — no search run
+  handoff: none — a step of FS116-V6's route; with EMPTY
+
+**True vacuously** — V6's lemma, one mind; it replaces FS116-Y3-TIPS's "exactly one tip per hub" on V6's route (V6 § 3.2 row 2). Rests on it: FS116-V6's route to FS116-Y4-EMPTY.
+
+derivation: FS116-V6-ANTI
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, with its change points y_k (FS116-V6-HUBS), a tile tipping y_k and a tile tipping y_(k+3) share no edge at p
+  uses only: V6-DIAM (a tile tipping y lies in B̄(y)); B̄(y_k) ∩ B̄(y_(k+3)) = {p}
+  not claimed: that the four tiles at p form a cycle of shared edges (that is simplicity, V6-COUNT's last step); anything at k ≥ 7
+  argument: FS116-V6-verification.md § 2.2 The derivation — the class is empty
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours
+  prior art: owed — no search run
+  handoff: none — a step of FS116-V6's route; with EMPTY
+
+**True vacuously** — V6's lemma, one mind; it uses only that a tile has diameter at most 1. Rests on it: FS116-V6's route to FS116-Y4-EMPTY (V6-COUNT's last step).
+
+derivation: FS116-V6-ADJ
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, outer tiles of one colour at adjacent hubs cannot both hug the lens arcs beyond their hubs (ω(y_1) beyond y_0, ω(y_0) beyond
+    y_1)
+  uses only: V6-DICH; the identity of FS116-V6-HUG with both arcs run outward, a = y_1 + e(−60° + s), b = y_0 + e(120° − t)
+  not claimed: anything FS116-Y4-EMPTY needs (it is not used there); anything at k ≥ 7
+  argument: FS116-V6-verification.md § 2.3 The attack
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six colours; V6's stage-1 candidate needed five-colour hubs because of it (§ 2.3 item 2)
+  prior art: owed — no search run
+  handoff: none — not needed by EMPTY
+
+**True vacuously** — V6's lemma, one mind, not needed by EMPTY; V6: "It is why a single outer colour per hub is impossible on the forced colours of `y_2`, `y_5` (§ 12's NBTIP) and why a construction needs five-colour hubs — which V6-HUG then kills from the inside." Its outward identity was re-checked numerically on the 60 × 60 grid by this close (a checking reading, not a mind: `FS116-Z2-close.md` § 1.4). Rests on it: nothing in this file.
+
+control: v6-sq9
+  of: FS116-V6-HUBS — the k = 9 control: SQ9 meets every hypothesis but six colours, its ring carries no arc of Γ, and five colours
+  run: python3 ../tools/fs116_v6_sq9.py 3
+  expect: period 3: 9 colours; least same-colour squared gap 4 half-units^2 (valid and non-Siamese: True); colours at p: 4; Gamma on the ring: 12 points; ring colours: 5; ring colours of p: 0
+  fault: python3 ../tools/fs116_v6_sq9.py 2
+
 ## The close's case list (FS116-Z1)
 
 derivation: FS116-C114-LOCAL-F
@@ -1753,7 +1875,9 @@ derivation: FS116-C114-LOCAL-F
   verdict: gap: the ring types left without an exclusion — a (Q)-free ring carrying (R2) arcs after the bends, a full parallel semi-hub of three
     colours (FS116-SEMI-PAR3), a closed change point (FS116-RING-Q's gap; any exclusion on B̄(p, 2) reads the far side of p, FS116-Y2-DCREAD), five-
     and six-colour vertices beyond FS116-Y2-SIXOFF's family, and the Siamese and non-simple classes; the Γ-free type is excluded at radius 1 + ε
-    (FS116-Y4-EMPTY, one mind) and the saturated right-angled straight cross in the (Q)-free non-Siamese class at R = 2 (FS116-S1-QF)
+    (FS116-Y4-EMPTY, held) and the saturated right-angled straight cross in the (Q)-free non-Siamese class at R = 2 (FS116-S1-QF)
 
-Frozen at § 1 and § 6. The milestone's question, filed as GAP at its named cases; the stub's existence form was never worked as a whole, its structural form carried the rounds (`FS116-Z1-close.md` § 2.5). Rests on it: nothing in this file; the successor stubs (FS-123–FS-125).
+Frozen at § 1 and § 6. The milestone's question, filed as GAP at its named cases; the stub's existence form was never worked as a whole, its structural form carried the rounds (`FS116-Z1-close.md` § 2.5). Whether FS-112's bends, run on a fragment, leave a (Q)-free ring with (R2) arcs at all
+— if not, the Γ-free case is the whole (Q)-free case — is the invention signal of inventory item 136, carried to FS-123 unsettled (`FS116-Z2-close.md`
+§ 1.5). Rests on it: nothing in this file; the successor stubs (FS-123–FS-125).
 
