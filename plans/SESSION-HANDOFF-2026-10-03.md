@@ -11,7 +11,7 @@ the two close inventories. A successor arriving with nothing reads this first.*
    items 1–89) are ticked in full. The front page, `plans/FRONTIER-STUBS.md` (R2's re-rank) and the Proof Atlas (artifact
    https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx, version 5) are current.
 3. **Kooshi's order for what comes next** (2026-10-03; FS-116 items O6, O7, verbatim there):
-   1. **The workflow refinement**, with Kooshi: `plans/WORKFLOW3-lane-edits-proposed.md` (E1–E26, U1–U8, and the search-policy entry at its end).
+   1. **The workflow refinement**, with Kooshi: `plans/WORKFLOW3-lane-edits-proposed.md` (E1–E26, U1–U9, the search-policy entry and the evidence from the closes, at its end; the frictions behind them are FS-116's W-table, W1–W31).
    2. **FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking.
    3. Then the top of the ranking; R2's default is **FS-123, the (Q)-free ring** (`plans/STUB-qfree-ring.md`), whose first question is R2's card 1
       on the bends.

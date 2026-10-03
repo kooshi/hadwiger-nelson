@@ -184,3 +184,15 @@ afterwards unless Kooshi says otherwise."* (FS-116 item 74.)
   wallclock budget per day and per week", and asked first for a count of where the ban hindered (job CL3, `data/workflow3/briefs/CL3-ban-audit.md`).
   For the workflow refinement: the budget's shape, who holds it, how a job asks for it, and whether the "would have searched here" log stays.
 
+- **Also from the closes of 2026-10-03, for the same review** (FS-116 W-table W27–W31):
+  - **E8, evidence**: the split close worked — part 2 read about 150k and redid nothing (W30). Its one cost: part 2's brief restated part 1's
+    list of owed errata instead of quoting it, and drifted (FS-116 item 146). Proposal: a part-2 brief quotes part 1's list by address.
+  - **E16, evidence**: the hand-back as one content-free line held for four of the day's jobs and failed for four (W27–W29), all of them Ephodos's
+    or the Clerk's, each with the exact line in its brief. Proposal: the lane files, not only the briefs, say the hand-back is that line alone.
+  - **E17, evidence**: freezing the decisive statement without its route's lemmas, and withholding a route-naming phrase until no blind job
+    remains, gave a blind route resting on none of the first's lemmas (FS-116 items 123, 138, 147; W29).
+  - **U9**: `data/rerank-2026-09-27/rk_mirror_check.py` still expects the 30-row paths table `CLAUDE.md` dropped on 2026-09-28, so it fails on
+    every run (W31). Update it to the top-ten table, or retire it.
+  - **The verifier lane writes its own lemmas as blocks** (E26, already above), and **the reading-question practice** (E19) refined: quote the
+    author's defining sentence when the record has one; ask the author only when it does not (W24).
+
