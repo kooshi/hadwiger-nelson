@@ -1,0 +1,44 @@
+entry lint
+  warn  FS116-S1-proof.md:143 (FS116-S1-QT): computed over "the brief's three quotations and seven attributions" states no set — a computed statement quantifies over exactly the set computed
+  claim FS116-S1-QT: minds 1
+  claim FS116-S1-QT: prior art known
+  claim FS116-S1-KAPPA: minds 1
+  claim FS116-S1-KAPPA: prior art partly
+  claim FS116-S1-PAIR: governed by FS116-S1-KAPPA (hand, minds 1)
+  claim FS116-S1-PAIR: minds 1
+  warn  FS116-S1-proof.md:315 (FS116-S1-PAIR): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-PAIR: prior art owed
+  claim FS116-S1-CLUSTER: minds 1
+  warn  FS116-S1-proof.md:331 (FS116-S1-CLUSTER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-CLUSTER: prior art owed
+  warn  FS116-S1-proof.md:347 (FS116-S1-RUNG): derived from 'FS116-O1-SATPIN', which is not an entry in these files — its grade cannot be read
+  claim FS116-S1-RUNG: governed by FS116-S1-CLUSTER (hand, minds 1)
+  claim FS116-S1-RUNG: minds 1
+  claim FS116-S1-RUNG: prior art partly
+  claim FS116-S1-LENS: governed by FS116-S1-KAPPA (hand, minds 1)
+  claim FS116-S1-LENS: governed by FS116-S1-PAIR (derived from, minds 1)
+  warn  FS116-S1-proof.md:372 (FS116-S1-LENS): derived from 'FS116-N1-GERM-S', which is not an entry in these files — its grade cannot be read
+  warn  FS116-S1-proof.md:372 (FS116-S1-LENS): derived from 'FS116-N1-AXIS', which is not an entry in these files — its grade cannot be read
+  claim FS116-S1-LENS: minds 1
+  warn  FS116-S1-proof.md:372 (FS116-S1-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-LENS: prior art owed
+  claim FS116-S1-EXIT: minds 1
+  warn  FS116-S1-proof.md:392 (FS116-S1-EXIT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-EXIT: prior art owed
+  claim FS116-S1-QF: governed by FS116-S1-LENS (derived from, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-EXIT (hand, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-CLUSTER (hand, minds 1)
+  warn  FS116-S1-proof.md:417 (FS116-S1-QF): derived from 'FS116-O1-SATPIN', which is not an entry in these files — its grade cannot be read
+  claim FS116-S1-QF: minds 1
+  warn  FS116-S1-proof.md:417 (FS116-S1-QF): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-QF: prior art owed
+  entries: 10  derived: 8  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs116-s1-quotes: printed 'block quotations 2 found True; inline 1 found True; attributions 7 present True'; with the fault planted ('' → '--plant') it printed 'block quotations 2 found False; inline 1' — it fires
+  ok    sq9-antipode: printed 'SQ9 k=9: r(45)=(1, 1) r(225)=(1, 1) same True; r(105)=(2, 1) differs from r(45) True'; with the fault planted ('' → '--plant') it printed 'SQ9 k=9: r(45)=(1, 1) r(225)=(2, 1) same' — it fires
+  ok    rung-ceil: printed 'RUNG-CEIL: |V-(x*,1)|=1 True; 1/5 inside True; 1/2 outside True; x*=0.49098477'; with the fault planted ('' → '--plant') it printed 'RUNG-CEIL: |V-(x*,1)|=1 False; 1/5 insid' — it fires
+  ok    exit-identities: printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-form True; Q=y_a True; |y_a-y_5|=1 True; dQ-form True; lower d<0 at 3675/3675; upper d>0 at 3675/3675'; with the fault planted ('' → '--plant') it printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-f' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 10 warnings)
