@@ -1,0 +1,4 @@
+ranked rows: 73 (source 69); FS numbers once each: True
+removed to the closed list: [116, 121]; new: [123, 124, 125, 126, 127, 128]
+moves: FS-123 new→1, FS-124 new→2, FS-125 new→4, FS-122 4→5, FS-128 new→6, FS-126 new→7, FS-127 new→8, FS-120 5→9, FS-117 7→10, FS-109 8→11, FS-108 9→12, FS-44 10→13, FS-80 11→14, FS-113 12→15, FS-101 13→16, FS-62 14→17, FS-115 6→18, FS-67 15→19, FS-59 16→20, FS-96 17→21, FS-64 18→22, FS-63 19→23, FS-49 20→24, FS-102 21→25 …
+CLAUDE.md table: 3933 -> 4451 bytes, net +518

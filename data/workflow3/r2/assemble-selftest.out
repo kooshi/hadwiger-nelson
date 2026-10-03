@@ -1,0 +1,5 @@
+self-test: plant 'dup' refused (duplicate FS-80 in the source table)
+self-test: plant 'lost' refused (the source table has 68 rows, not R2's 69: re-read it before filing)
+self-test: plant 'amend' refused (FS-44: amendment text found 0 times: a sentence that is not in FS-44's)
+self-test: plant 'pipe' refused (| 1 | **FS-123 the (Q)-free | ring** — `plans/STUB-qfree-rin: 8 cells,)
+SELF-TEST PASS
