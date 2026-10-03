@@ -13,6 +13,10 @@ the request and the context; the inventory is `plans/FS129-close-inventory.md`.*
 
 > 1. yes, we don't want O(N^2) here. 2. Yes, keep to the cap, and also use general purpose agents instructed to read the deriver's identity, rather than the agent files which carry the 150k token grokkings. They'll have enough on their plates without needing all that context, and they can read them if needed. 3. yes, excellent idea. 4. definitely. Please set up the plan file and handoff, and I'll restart a new session after restarting the handoff so it'll pick up the latest changes.
 
+**On roots** (2026-10-03 22:56 UTC, verbatim, mid-turn after the index landed):
+
+> Also a note for the whole plan that not only are "hubs" important, but deep "roots", where a long chain of theorems starts, even if it has only one offshoot
+
 The four questions, in Keryx's words (condensed from its message of that turn; Keryx's text, not Kooshi's):
 1. **Order of the passes**: open steps first, then mechanisms, then merges and strengthening — rather than the supply-side reading the
    request's wording suggests (each theorem asking "where else do I apply?"), which is thorough but mostly housekeeping. Never pairwise:
@@ -50,7 +54,10 @@ negative control (`RUNNING.md` § Make the gate fail, and watch it fail), writes
   line verbatim; grade; minds; verdict; `uses only:` ids; "Rests on it" ids (and the paragraph's text where it names no id); `handoff:`;
   the ledger rows and grokkings that cite it;
 - `edges.csv`, the dependency graph (an edge from a result to each result that uses it), from both directions of the record;
-- `orphans.md` (results nothing uses), `hubs.md` (results by count of dependents, direct and transitive);
+- `orphans.md` (results nothing uses), `hubs.md` (results by count of dependents, direct and transitive), and `roots.md` (results by the
+  length of the longest chain of dependents that starts at them, with the chain written out, however few direct dependents they have —
+  Kooshi's note on roots, § 1). Every pass weighs a deep root as it weighs a hub: a strengthening or a failure at a root travels the whole
+  chain;
 - `open-steps.md`, the mechanical half of the demand list: every entry whose verdict is `gap`, `stalls` or `refuted`, every "stalls at"
   and every GAP named in a derivation file or a ledger row, each with its address;
 - `grokking-uses.md`: for each grokking, the theorems and milestones that cite it, and the era by majority;

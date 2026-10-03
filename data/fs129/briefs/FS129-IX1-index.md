@@ -110,3 +110,36 @@ judgement: <which, where>" is a complete answer.
 
 Check the two quotations above against their sources, and restate in your record, in your own words, what `data/fs129/index/edges.csv` and
 `data/fs129/index/lean-order.md` must contain. A mismatch is a finding about this brief.
+
+## Amendment, 2026-10-03 23:00 UTC — the roots, and the corrections from the coordinator's review
+
+Thank you for the index, and for the `CHECK:` list: it is exactly the honest-gap report the brief asked for, and the grokkings
+description you caught (G1 to G87 against G1–G91) is now fixed. The coordinator re-ran your self-test (PASS) and read five records against
+their files; four match, one does not (item 3 below). This amendment continues your job in the same files; the standing rules hold
+unchanged — in particular rule 1: start no agent of your own, because staffing is Kooshi's and the coordinator reviews only work it knows
+exists. Save each step as a stage, as before.
+
+1. **Roots.** Kooshi, on reading the plan:
+
+> Also a note for the whole plan that not only are "hubs" important, but deep "roots", where a long chain of theorems starts, even if it has only one offshoot
+> — source: plans/FS129-cross-application-audit.md § 1. Kooshi's words
+
+   Add to each record of `data/fs129/index/theorems.jsonl` the length of the longest chain of dependents that starts at it (`depth_down`)
+   and of the longest chain it rests on (`depth_up`), on the graph with each cycle condensed to one node (say so in the header). Write
+   `data/fs129/index/roots.md`: the top 100 by `depth_down`, each with its direct-dependent count and its longest chain written out id by id,
+   ties broken by transitive dependents. State in its header that older-format edges come from prose, so every depth is a lower bound.
+2. **Grade edges.** Your proposal is accepted: add the edge source `grade` for the ids a `derived from:` grade names.
+3. **FS100-TCA** (`plans/FS100-derivation.md`, line 289): its `statement` holds the entry's `*Also:*` sentence, and its own statement is only in
+   `title`. Where an older entry's body opens with `*Also:*`, take the statement from the header, as for the 497 with an empty statement.
+   And list in `data/fs129/index/checks.md` every `*Also:*` clause in any older entry, with its address and the ids it names (X25B-PZ and
+   X25B-LP here): each is a claim with no record of its own.
+4. **Eras.** The 51 era-CHECK theorems are lane A (`plans/FS129-close-inventory.md` item 11); FS-105 stays lane R (item 12). Set `era_how` to
+   the item, and fold `data/fs129/index/statements-CHECK.md` into `data/fs129/index/statements-A.md`.
+5. **The 22 files with no entry** (your CHECK 8): for each, list mechanically the entry-shaped headers and ids it defines, and for each id
+   whether it, or an alias of it (`= X23D-TCA` style), appears in any indexed entry. Ids that appear nowhere are the finding; list them in
+   `data/fs129/index/checks.md` with their addresses. Do not judge whether they are theorems.
+6. The 78 seeds stand, the three `none`-led ones flagged as conditional, as you did (item 13).
+
+Re-run, re-check the self-test (add a plant for the depth computation on a chain with one offshoot, and one for a cycle inside a chain),
+update `data/fs129/index/README.md` and the report, and hand back as before. Budget for the amendment: about 150k more by the harness's
+count; hand back at a saved stage before about 500k in all.

@@ -1,6 +1,6 @@
 ---
 name: grokkings
-description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G87, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
+description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G91, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
 ---
 
 # Grokkings — the working theory of Hadwiger–Nelson (the entries)
