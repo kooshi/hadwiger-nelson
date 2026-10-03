@@ -31,6 +31,12 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
   hub's tile reaching `q_k` — [derived], one mind, § 3.1.
 - **FS116-Y3-TIGHTLENS** — on `B̄(p, √3)` each such lens needs one of its hubs' tips tight at `p`: at least two edges of `p` along flanking directions, five
   minimal kinds of star, **the generic star excluded at `√3`** — [derived], one mind, § 3.2.
+- **FS116-Y3-NBTIP** — a hub's tip enters the unit disc about each neighbouring hub, so a neighbour's tip colour is never an outer colour; `y_2`'s only outer
+  colour is 4, `y_5`'s is 3 — [derived], one mind, § 4.1 (sharpens HUBCOL, which stays true as written).
+- **FS116-Y3-STARFORCE** — on `B̄(p, √3)` the star is exactly FS116-N2-HEX3's, and every double-tip hub carries the extra outer colour, alone or second in
+  a named order — [derived], one mind, § 4.2 (sharpens TIGHTLENS: of its five minimal kinds only HEX3's is realised).
+- **The brief's target** (a fragment beyond radius 2, or an obstruction at a named radius): **not landed** — reduced to HEX3's star with forced outer
+  colours (§ 4.3, the stalled form).
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -39,6 +45,8 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
   leaves one pattern by hand (§ 2.2).
 - Stage 3: would have searched colourings of the lens neighbourhoods of the `q_k`; instead derived NOQ and LENS, whose four conditions are read by hand and
   checked as an 81-row truth table of a derived formula (§ 3.2).
+- Stage 4: would have searched colourings of the outer wedges about HEX3's star toward radius 2 (and, after 2026-10-01, a solver could have been asked);
+  instead read one branch at `2y_0` by hand and stopped, writing the stalled form (§ 4.3).
 
 ## Fence log (standing rule 8)
 
@@ -54,6 +62,9 @@ that is not a tile of `p`. *New:* a ring is **Γ-free** when no arc of `Γ` lies
   with no recurrence) — the same object reached from two hypotheses, not two truths.
 - Stage 3: none seen. Classed: TIGHT's statement (`q_5 ∉ cl R_{50}`) against what LENS needs (`R_{50} ⊄ B̄(q_5, 1)`) — TIGHT's own argument proves the
   stronger form; a statement narrower than its proof, recorded in § 3.1, not two truths.
+- Stage 4: none seen. Classed: TIGHTLENS's five minimal kinds against STARFORCE's one — my own stage-3 list of outer colours was loose (HUBCOL's options at
+  `y_2`, `y_5` never occur); a looseness corrected by dated paragraphs under § 2.3 and § 3.2, not two truths. FS116-N2-HEX3 and STARFORCE reach one star from
+  different hypotheses: agreement, not collision.
 
 ## Stage 1 — SAVED: the readback, and recognition on the target
 
@@ -210,6 +221,10 @@ With every `δ` interior, the flanking directions `60k ± 90°` are interior to 
 A(y_4) = {3, 4}`, `A(y_2) = A(y_5) = {1, 2}`): in N2's Kneser language the six missing pairs are `B, B, B′, B, B, B′` round the hexagon, `B = {3, 4}` — antipodal
 hubs share theirs and swap tip and outer colour, as ANTI says.
 
+*Sharpened at stage 4 (2026-10-03): the extra options at `y_2` (2, 1) and at `y_5` (1, 2) never occur — the tip of a neighbouring hub always enters the
+hub's unit disc (FS116-Y3-NBTIP), so `y_2`'s only outer colour is 4 and `y_5`'s is 3. The statement above stays true as written (its list is of possible
+outer colours with necessary conditions); it was loose, and § 4 replaces it where it is used.*
+
 ### 2.4 The tight sides (FS116-Y3-TIGHT)
 
 At `y_0` the tip `T1` lies in `B̄(p, 1) ∩ B̄(y_1, 1)`, whose tangent cone at `y_0` is `[90°, 210°]`, and its cone contains the closed tip cone `[150°, 210°]`
@@ -356,6 +371,9 @@ search) has 26 satisfying ones, the generic star not among them, and five minima
 30°}` (`T1` a cusp at `p`), `{δ_2 = 210°, δ_3 = 210°}` (`T2` a cusp), `{δ_2 = 210°, δ_4 = 30°}`, and `{δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30°}` —
 **the last is FS116-N2-HEX3's star**, the only minimal set in which the single tips are not tight.
 
+*Sharpened at stage 4 (2026-10-03): the four minimal sets in which a single tip is tight are not realised — each uses an outer colour at `y_2` or `y_5`
+that FS116-Y3-NBTIP rules out — and the star is HEX3's (FS116-Y3-STARFORCE). The truth table above is of (Q1)–(Q5) as written, which stay true.*
+
 **Radius.** The argument reads a neighbourhood of each `q_k`, `|q_k| = √3`: it applies to every fragment of the class on `B̄(p, R)` with `R ≥ √3`, whose
 domain is an open set containing that disc. Below `√3` nothing here applies (the neighbourhoods needed depend on the tiles' sizes near the hubs).
 
@@ -434,3 +452,96 @@ control: fs116-y3-lens-facts
   fault: python3 ../tools/fs116_y3_hex.py lens --plant q | head -n 1
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the star is forced — HEX3's star, and the extra outer colour at every double-tip hub
+
+*Class and labels as stages 2–3.*
+
+### 4.1 A neighbour's tip enters the hub's disc (FS116-Y3-NBTIP)
+
+The tip `t` of a hub `y_j` has, at `y_j`, every direction of the open cone of `60°` about the direction to `p` in its cone (RING-GERM (i), one tip per hub):
+it has points `z_n → y_j` whose directions from `y_j` tend to `ψ_j + 180°`. For a neighbouring hub `y_{j±1}`, `y_{j±1} − y_j = e(ψ_j ± 120°)`, at `60°` from
+that direction, so `|z_n − y_{j±1}|² = 1 − 2|z_n − y_j|·cos 60° + o(|z_n − y_j|) < 1` for large `n`: **`t` meets `B(y_{j±1}, 1)`** (`tools/fs116_y3_hex.py
+nbtip`: the whole open cone lies inside both neighbours' open half-planes, at every hub; widened to `180°` it leaves them). By STAR an outer colour's tile at
+`p` misses `B(y, 1)`, so **a neighbour's tip colour is never an outer colour** (it is the hub's own tip or missing there). For the single-tip hubs this
+empties the extra options of HUBCOL: `y_2`'s neighbours are tipped by `T1` and `T2`, so **`O_{y_2} = {4}`**; `y_5`'s by `T2` and `T1`, so **`O_{y_5} = {3}`**
+(each non-empty by RING-GERM (ii)). At the double-tip hubs the rule removes nothing (`y_0`'s neighbours are tipped by `T4` and by `T1`, its own tip).
+
+### 4.2 The star (FS116-Y3-STARFORCE)
+
+Re-run § 3.2 with these outer sets. At `q_1` the colour near `q_1` in the lens is 2 or 4; 4 would be `y_2`'s only outer tile reaching `q_1`, which NOQ
+forbids; so it is 2, and (§ 3.2) `δ_4 = −30°`. At `q_2`, 4 is forbidden the same way, 1 remains, and `δ_3 = 270°`. At `q_4` and `q_5`, `y_5`'s only outer tile
+(3) is forbidden, so the colours are 1 and 2, and `δ_2 = 150°`, `δ_1 = 90°`. **So in a fragment of the class on `B̄(p, √3)` the star is exactly FS116-N2-HEX3's:
+`p`'s edges leave along the flanking directions `90°, 150°, 270°, 330°`, `T1` and `T2` fill the full `120°` corners of their Reuleaux triangles at `p`, `T3`
+and `T4` have `60°` cones.** Moreover, at each double-tip hub the colour the lens rule needs is present: near `q_1` the colour 2 is `y_1`'s 2-tile or a
+2-tile touching no hub; in the first case `y_1`'s 2-tile is not its clockwise-most outer tile (NOQ), so `y_1` has two outer tiles, 4 then 2
+counter-clockwise; in the second `O_{y_1} = {4}`. Either way **4 is an outer colour of `y_1`**. Likewise **3 at `y_0`** (two outer tiles 2 then 3, or 3
+alone), **4 at `y_3`** (1 then 4, or 4 alone), **3 at `y_4`** (3 then 1, or 3 alone). The truth table over the 81 assignments with the neighbour-tip rule
+(`tools/fs116_y3_hex.py star`) has exactly one satisfying assignment, HEX3's, with the candidate outer colours just listed; dropped, the rule leaves 26 — the
+count of § 3.2, so the program's lens rule and the hand conditions (Q1)–(Q5) agree.
+
+**What it says.** FS116-N2-HEX3 found this star as the price of two alternate hubs recurring; here it is forced by radius `√3` alone, with no recurrence. In
+it the flanking directions of `y_2` and `y_5` (`30°`, `210°`) lie inside `T1` and `T2`, so FS116-N2-ANTI's hypothesis holds for that pair, and its
+conclusion is consistent with HUBCOL (`A(y_2) = A(y_5) = {1, 2}`, tip and outer colour swapped); for the pairs `(y_0, y_3)` and `(y_1, y_4)` the flanks
+are edges, outside ANTI. Every Γ-free four-colour vertex on a disc of radius above 2 — the brief's target — has this star and these outer colours.
+
+### 4.3 What was not reached (the stall), and the families
+
+- **The construction.** The one family the derivation leaves is HEX3's star with the outer structure of § 4.2. I wrote no object by formula in it: the
+  forced pieces now run from `p` to the `q_k` (radius `√3`), and beyond them to the points `2y_k` and the outer wedges between the petals, which a
+  fragment on a disc of radius above 2 must also cover, only one level of the local analysis was read (at `2y_0`, by hand during this stage and not written out, with choices
+  made at `q_0` and `q_5`): it closed there without contradiction, as a vertex of colours 1, 3 and 4 with the tile beside the mirror at `q_0` of colour 6. That
+  reading is one mind on one branch and is not filed as a result.
+- **The families tried, against the configuration's demands.** Generic star (four free edge directions): dead at `√3` (§ 3.2). Single tips tight at `p`
+  (the four other minimal sets of § 3.2): dead at `√3` (§ 4.2). HEX3's star: free parameters — the shapes of the tiles beyond the forced cones, the choice
+  at each double-tip hub between one and two outer tiles, and the colour of the tile at `q_0` beyond the mirror; demand — a valid fragment to radius above 2.
+  Undecided.
+- **The stalled form, for a fresh mind:** *a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 2 about a four-colour vertex
+  `p` whose star is HEX3's — tiles `T1` (cone `[−30°, 90°]`), `T3` (`[90°, 150°]`), `T2` (`[150°, 270°]`), `T4` (`[270°, 330°]`), hubs `e(60k)` with outer
+  colours as § 4.2 says — or the point inside radius 2 where every such fragment loses all six colours.* RECIP and HEX6 can have models only here.
+- **Below `√3`** the generic star is neither built nor excluded; a model there would model STAR and ANTI at every antipodal pair (radius above 1 is all
+  they need). Not attempted.
+
+derivation: FS116-Y3-NBTIP
+  statement: in FS116-Y3-TIPS's setting, the tip of each hub meets the open unit disc about each of the two neighbouring hubs; so no hub has a neighbour's
+    tip colour as an outer colour, and the only outer colour of y_2 is 4 and of y_5 is 3
+  uses only: RING-GERM (i) and FS116-Y3-TIPS (one tip per hub, whose cone holds the open 60° cone about the direction to p); FS116-N2-STAR (an outer colour's
+    tile at p misses B(y, 1)); RING-GERM (ii) (an outer colour exists); that the direction from y_j to a neighbour is at 60° from the direction to p
+  not claimed: anything about outer tiles of other colours; anything outside the Γ-free class (there consecutive change points need not be 60° apart)
+  argument: § 4.1 A neighbour's tip enters the hub's disc (FS116-Y3-NBTIP)
+  verdict: derived
+  grade: derived from: FS116-Y3-TIPS, FS116-N2-STAR
+  minds: 1
+  model: none at six colours; the angle fact is control fs116-y3-nbtip
+  prior art: owed
+  handoff: none — a relay-result for STARFORCE
+
+derivation: FS116-Y3-STARFORCE
+  statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring
+    carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p are δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30° (FS116-N2-HEX3's star); 3 is an outer
+    colour of y_0 and of y_4, and 4 of y_1 and of y_3; each of these four hubs has that outer colour alone or two outer tiles, counter-clockwise 2, 3 at
+    y_0; 4, 2 at y_1; 1, 4 at y_3; 3, 1 at y_4; and near q_1, q_5 the lens points carry colour 2, near q_2, q_4 colour 1
+  uses only: FS116-Y3-TIGHTLENS's argument (FS116-Y3-LENS with FS116-Y3-NOQ at the four lenses beside the single tips); FS116-Y3-NBTIP; FS116-Y3-HUBCOL's
+    cone conditions for the outer colours of the double-tip hubs
+  not claimed: that any such fragment exists, at any radius; anything below radius √3; anything in the Siamese or non-simple class; anything at k ≥ 7
+  argument: § 4.2 The star (FS116-Y3-STARFORCE)
+  verdict: derived
+  grade: derived from: FS116-Y3-TIGHTLENS, FS116-Y3-NBTIP, FS116-Y3-HUBCOL
+  minds: 1
+  model: none at six colours; the truth table is control fs116-y3-star
+  prior art: partly: FS116-N2-HEX3 (one mind) derives this star from two alternate hubs recurring; its forcing by radius √3 not found — owed
+  handoff: de Bruijn — with NOQ, LENS, NBTIP, TIPS and SIX, after a blind second mind; a relay-result for D2: the Γ-free type's case list is one star
+
+control: fs116-y3-star
+  of: FS116-Y3-STARFORCE — with the neighbour-tip rule, one assignment of the four edges survives the lens rule; without it, 26
+  run: python3 ../tools/fs116_y3_hex.py star | head -n 1
+  expect: satisfying assignments: 1
+  fault: python3 ../tools/fs116_y3_hex.py star --plant nbtip | head -n 1
+
+control: fs116-y3-nbtip
+  of: FS116-Y3-NBTIP — the open 60° cone about the direction to p lies inside both neighbours' open half-planes at every hub; a 180° cone does not
+  run: python3 ../tools/fs116_y3_hex.py nbtip
+  expect: NBTIP angle fact (cone half-width 30): holds at every hub
+  fault: python3 ../tools/fs116_y3_hex.py nbtip --plant wide
+
+## Stage 4 — SAVED

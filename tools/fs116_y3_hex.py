@@ -12,6 +12,10 @@ Points of the unit triangular lattice: p = 0, y_k = e(60k), q_k = sqrt3 e(60k + 
   lens               NOQ's and LENS's lattice facts, and the conditions (Q1) (Q2) (Q4) (Q5) of stage 3 as a truth table over the 81 assignments
                      of the star's edges to interior or boundary values (a check of the hand derivation, not a search).  --plant q: q_1 misplaced;
                      --plant cond: (Q1) dropped (the generic star then satisfies the rest? it must not: (Q4) alone fails it).
+  star               STARFORCE: the candidate outer colours with the neighbour-tip rule, and the lens rule at the four tight lenses, over the 81
+                     assignments of the star's edges (a check of the hand derivation).  --plant nbtip: the neighbour-tip rule dropped.
+  nbtip              NBTIP's angle fact: the open cone of 60 degrees about the direction from y_k to p lies inside the open half-plane of directions
+                     into B(y_(k+1), 1) and into B(y_(k-1), 1), at every hub.  --plant wide: the cone widened to 180 degrees (it then leaves both).
   sq9                the square nine-colouring of side 1/2 (colour (i mod 3, j mod 3) on [i/2,(i+1)/2] x [j/2,(j+1)/2]) about the grid vertex 0:
                      its ring meets the grid lines in finitely many points (Gamma-free), and the number of change points, decided exactly at each
                      crossing.  --plant stripes: colour (i mod 3) only.
@@ -170,6 +174,60 @@ def lens(plant):
           sorted(minimal, key=lambda m: (len(m), sorted(m.items())))))
 
 
+def star(plant):
+    """STARFORCE (stage 4): candidate outer colours from the cone conditions and the neighbour-tip rule (NBTIP: the tip of y_(k±1) meets B(y_k, 1),
+    so its colour is no outer colour of y_k); then at each tight lens the colour near q_k must be some c in P minus the two tips such that, at each of
+    the two hubs, c is not a candidate or the hub has at least two candidates (LENS + NOQ).  Prints the satisfying assignments of the four edges.
+    --plant nbtip: the neighbour-tip rule dropped."""
+    import itertools
+    tip = {0: 1, 1: 1, 2: 3, 3: 2, 4: 2, 5: 4}
+    vals = {'d1': ['i', 30, 90], 'd2': ['i', 150, 210], 'd3': ['i', 210, 270], 'd4': ['i', -30, 30]}
+
+    def cand(d):
+        c = {0: {2} | ({3} if d['d1'] == 90 else set()),
+             1: {2} | ({4} if d['d4'] == -30 else set()),
+             2: {4} | ({2} if d['d2'] == 210 else set()) | ({1} if d['d1'] == 30 else set()),
+             3: {1} | ({4} if d['d3'] == 270 else set()),
+             4: {1} | ({3} if d['d2'] == 150 else set()),
+             5: {3} | ({1} if d['d4'] == 30 else set()) | ({2} if d['d3'] == 210 else set())}
+        if plant != 'nbtip':
+            for k in range(6):
+                c[k] -= {tip[(k - 1) % 6], tip[(k + 1) % 6]} - {tip[k]}
+        return c
+
+    def lens_ok(d, k):
+        c = cand(d)
+        a, b = k, (k + 1) % 6
+        for col in {1, 2, 3, 4} - {tip[a], tip[b]}:
+            if all(col not in c[h] or len(c[h]) >= 2 for h in (a, b)):
+                return True
+        return False
+
+    sat = []
+    for combo in itertools.product(*vals.values()):
+        d = dict(zip(vals.keys(), combo))
+        c = cand(d)
+        if all(c[k] for k in range(6)) and all(lens_ok(d, k) for k in (1, 2, 4, 5)):
+            sat.append(d)
+    print(f'satisfying assignments: {len(sat)}')
+    for d in sat[:6]:
+        print('  ' + ', '.join(f'{k}={v}' for k, v in d.items()) + '   candidate outer colours: ' +
+              ', '.join(f'y_{k}:{sorted(v)}' for k, v in cand(d).items()))
+
+
+def nbtip(plant):
+    w = 90 if plant == 'wide' else 30
+    ok = True
+    for k in range(6):
+        to_p = (60 * k + 180) % 360
+        for j in ((k + 1) % 6, (k - 1) % 6):
+            c = ang(Y[j] - Y[k])                      # direction from y_k to its neighbour
+            # the open cone (to_p - w, to_p + w) lies in the open half-plane (c - 90, c + 90) iff |to_p - c| + w <= 90
+            off = abs(((to_p - c + 180) % 360) - 180)
+            ok = ok and (off + w <= 90)
+    print(f'NBTIP angle fact (cone half-width {w}): {"holds at every hub" if ok else "FAILS"}')
+
+
 if __name__ == '__main__':
     args = sys.argv[1:]
     plant = args[args.index('--plant') + 1] if '--plant' in args else None
@@ -179,6 +237,10 @@ if __name__ == '__main__':
         sq9(plant)
     elif args and args[0] == 'lens':
         lens(plant)
+    elif args and args[0] == 'star':
+        star(plant)
+    elif args and args[0] == 'nbtip':
+        nbtip(plant)
     else:
         print(__doc__)
         sys.exit(2)
