@@ -368,7 +368,7 @@ def build(files: dict[str, str], ledger_text: str, grok_text: str) -> dict:
         if not r["verdict"]:
             check.append("no verdict field")
         if r["handoff"] and DEBRUIJN.search(r["handoff"]) and re.match(r"none\b", r["handoff"], re.I):
-            check.append("handoff begins `none` yet names de Bruijn later in the field; indexed as a lean-order seed (the 77 of the plan's grep count first lines only)")
+            check.append("handoff begins `none` yet names de Bruijn in the field; indexed as a lean-order seed (the field, not the line, decides)")
         u = resolve(r["uses_raw"], r["prefix"], ids, suffix_index) if r["uses_raw"] else {"resolved": [], "unresolved": [], "suffix": []}
         rs = resolve(r["rests_text"], r["prefix"], ids, suffix_index) if r["rests_text"] else {"resolved": [], "unresolved": [], "suffix": []}
         r["uses_ids"] = [x for x in u["resolved"] if x != i]
@@ -702,8 +702,20 @@ def write_all(ix: dict, files: dict[str, str], ledger_text: str, out: Path, cmd:
     with open(out / "checks.md", "w", encoding="utf-8") as f:
         f.write(header("every CHECK the script raised: fields it could not read, eras it could not place, defects", cmd, commit, "<!--") + " -->\n\n# CHECK lines\n\n")
         n = 0
+        TO = "older entry: no text between the header and *Proof:*; statement left empty"
+        to_ids = [i for i in sorted(recs) if TO in recs[i]["check"]]
+        if to_ids:
+            per = defaultdict(int)
+            for i in to_ids:
+                per[recs[i]["file"]] += 1
+            f.write(f"CHECK: {len(to_ids)} older-format entries have no text between the header and `*Proof:*`, so `statement` is empty in the index "
+                    f"(their statement, if any, is the header's title, kept in `title` and shown in statements-*.md); per file: "
+                    + ", ".join(f"{k.split('/')[-1][:-14]}={v}" for k, v in sorted(per.items())) + ". Each record's own `check` list carries the line; the ids are in theorems.jsonl.\n")
+            n += 1
         for i in sorted(recs):
             for c in recs[i]["check"]:
+                if c == TO:
+                    continue
                 f.write(f"CHECK: {i} ({recs[i]['file']}:{recs[i]['line']}): {c}\n")
                 n += 1
         for d in ix["defects"]:

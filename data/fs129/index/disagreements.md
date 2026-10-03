@@ -1,0 +1,267 @@
+<!-- pairs the two directions of the record disagree on | command: python3 tools/fs129_index.py | written at commit 21bf0b1d90 (inputs clean) -->
+
+# Disagreements between `uses only:` and "Rests on it"
+
+## A's Rests-on-it names B; B's `uses only:` exists and omits A (104)
+
+- FS111-C-FILL's Rests-on-it names FS111-M-SATC; FS111-M-SATC's `uses only:` exists and omits FS111-C-FILL [and names no id at all] — plans/FS111-derivation.md:252; plans/FS111-derivation.md:316
+- FS111-C-HULL's Rests-on-it names FS111-M2-FIX; FS111-M2-FIX's `uses only:` exists and omits FS111-C-HULL — plans/FS111-derivation.md:267; plans/FS111-derivation.md:864
+- FS111-C-HULL-SO's Rests-on-it names FS111-C-HULL; FS111-C-HULL's `uses only:` exists and omits FS111-C-HULL-SO — plans/FS111-derivation.md:282; plans/FS111-derivation.md:267
+- FS111-C-REG-EQ's Rests-on-it names FS111-VM2-EQ5; FS111-VM2-EQ5's `uses only:` exists and omits FS111-C-REG-EQ — plans/FS111-derivation.md:221; plans/FS111-derivation.md:990
+- FS111-C-SIX-M's Rests-on-it names FS111-M2-REDUCE-C; FS111-M2-REDUCE-C's `uses only:` exists and omits FS111-C-SIX-M — plans/FS111-derivation.md:207; plans/FS111-derivation.md:973
+- FS111-C1-PW's Rests-on-it names FS111-C1-UNIF; FS111-C1-UNIF's `uses only:` exists and omits FS111-C1-PW — plans/FS111-derivation.md:67; plans/FS111-derivation.md:18
+- FS111-C1-UNIF's Rests-on-it names FS111-C1-PW; FS111-C1-PW's `uses only:` exists and omits FS111-C1-UNIF — plans/FS111-derivation.md:18; plans/FS111-derivation.md:67
+- FS111-M-COVER-SC's Rests-on-it names FS111-M2-HULLC; FS111-M2-HULLC's `uses only:` exists and omits FS111-M-COVER-SC — plans/FS111-derivation.md:534; plans/FS111-derivation.md:907
+- FS111-M-PINCH's Rests-on-it names FS111-M2-HULLC; FS111-M2-HULLC's `uses only:` exists and omits FS111-M-PINCH — plans/FS111-derivation.md:435; plans/FS111-derivation.md:907
+- FS111-M-R7's Rests-on-it names FS111-M2-REDUCE-C; FS111-M2-REDUCE-C's `uses only:` exists and omits FS111-M-R7 — plans/FS111-derivation.md:347; plans/FS111-derivation.md:973
+- FS111-M-R7's Rests-on-it names FS111-VMW-R7-MAX; FS111-VMW-R7-MAX's `uses only:` exists and omits FS111-M-R7 — plans/FS111-derivation.md:347; plans/FS111-derivation.md:373
+- FS111-M-SATC's Rests-on-it names FS111-M2-COV; FS111-M2-COV's `uses only:` exists and omits FS111-M-SATC [and names no id at all] — plans/FS111-derivation.md:316; plans/FS111-derivation.md:816
+- FS111-M-SATC's Rests-on-it names FS111-M2-REDUCE-C; FS111-M2-REDUCE-C's `uses only:` exists and omits FS111-M-SATC — plans/FS111-derivation.md:316; plans/FS111-derivation.md:973
+- FS111-M2-COV's Rests-on-it names FS111-M2-REDUCE-C; FS111-M2-REDUCE-C's `uses only:` exists and omits FS111-M2-COV — plans/FS111-derivation.md:816; plans/FS111-derivation.md:973
+- FS111-M2-DISC7's Rests-on-it names FS111-M2-HULLC; FS111-M2-HULLC's `uses only:` exists and omits FS111-M2-DISC7 — plans/FS111-derivation.md:881; plans/FS111-derivation.md:907
+- FS111-M2-DISC7's Rests-on-it names FS111-M2-NOSEL; FS111-M2-NOSEL's `uses only:` exists and omits FS111-M2-DISC7 — plans/FS111-derivation.md:881; plans/FS111-derivation.md:959
+- FS111-M2-DISCK7-AS-PLACED's Rests-on-it names FS111-M2-DISCK7; FS111-M2-DISCK7's `uses only:` exists and omits FS111-M2-DISCK7-AS-PLACED [and names no id at all] — plans/FS111-derivation.md:1072; plans/FS111-derivation.md:1045
+- FS111-M2-EXTREME-C's Rests-on-it names FS111-M-EXTREME; FS111-M-EXTREME's `uses only:` exists and omits FS111-M2-EXTREME-C — plans/FS111-derivation.md:927; plans/FS111-derivation.md:518
+- FS111-M2-FIX's Rests-on-it names FS111-M3-HC; FS111-M3-HC's `uses only:` exists and omits FS111-M2-FIX — plans/FS111-derivation.md:864; plans/FS111-derivation.md:1129
+- FS111-M2-HULLC's Rests-on-it names FS111-M4-LADDER; FS111-M4-LADDER's `uses only:` exists and omits FS111-M2-HULLC — plans/FS111-derivation.md:907; plans/FS111-derivation.md:1271
+- FS111-M2-ZERO's Rests-on-it names FS111-M2-SELCOMP; FS111-M2-SELCOMP's `uses only:` exists and omits FS111-M2-ZERO — plans/FS111-derivation.md:833; plans/FS111-derivation.md:941
+- FS111-M3-CASCADE's Rests-on-it names FS111-M4-MOVE; FS111-M4-MOVE's `uses only:` exists and omits FS111-M3-CASCADE — plans/FS111-derivation.md:1210; plans/FS111-derivation.md:1321
+- FS111-M3-FIXCONV's Rests-on-it names FS111-M2-FIX; FS111-M2-FIX's `uses only:` exists and omits FS111-M3-FIXCONV — plans/FS111-derivation.md:1241; plans/FS111-derivation.md:864
+- FS111-M3-HC's Rests-on-it names FS111-M3-IRREG; FS111-M3-IRREG's `uses only:` exists and omits FS111-M3-HC [and names no id at all] — plans/FS111-derivation.md:1129; plans/FS111-derivation.md:1225
+- FS111-M3-HC's Rests-on-it names FS111-M4-HC; FS111-M4-HC's `uses only:` exists and omits FS111-M3-HC — plans/FS111-derivation.md:1129; plans/FS111-derivation.md:1305
+- FS111-M3-MOVE's Rests-on-it names FS111-M4-MOVE; FS111-M4-MOVE's `uses only:` exists and omits FS111-M3-MOVE — plans/FS111-derivation.md:1178; plans/FS111-derivation.md:1321
+- FS111-M3-VAC's Rests-on-it names FS111-M3-FIN-U; FS111-M3-FIN-U's `uses only:` exists and omits FS111-M3-VAC — plans/FS111-derivation.md:1115; plans/FS111-derivation.md:1147
+- FS111-M4-LADDER's Rests-on-it names FS111-M4-CUT; FS111-M4-CUT's `uses only:` exists and omits FS111-M4-LADDER — plans/FS111-derivation.md:1271; plans/FS111-derivation.md:1288
+- FS111-V0-BRIDGE's Rests-on-it names FS111-C1-GAP; FS111-C1-GAP's `uses only:` exists and omits FS111-V0-BRIDGE — plans/FS111-derivation.md:142; plans/FS111-derivation.md:157
+- FS111-V0-FLIT's Rests-on-it names FS111-C1-FALS; FS111-C1-FALS's `uses only:` exists and omits FS111-V0-FLIT — plans/FS111-derivation.md:111; plans/FS111-derivation.md:127
+- FS111-V0-FLIT's Rests-on-it names FS111-V0-BRIDGE; FS111-V0-BRIDGE's `uses only:` exists and omits FS111-V0-FLIT — plans/FS111-derivation.md:111; plans/FS111-derivation.md:142
+- FS111-V0-ID1's Rests-on-it names FS111-M-PINCH; FS111-M-PINCH's `uses only:` exists and omits FS111-V0-ID1 — plans/FS111-derivation.md:296; plans/FS111-derivation.md:435
+- FS111-V0-RESCALE's Rests-on-it names FS111-C-REG-EQ; FS111-C-REG-EQ's `uses only:` exists and omits FS111-V0-RESCALE — plans/FS111-derivation.md:175; plans/FS111-derivation.md:221
+- FS111-V0-WIG7's Rests-on-it names FS111-M-DEADLOCK; FS111-M-DEADLOCK's `uses only:` exists and omits FS111-V0-WIG7 [and names no id at all] — plans/FS111-derivation.md:96; plans/FS111-derivation.md:420
+- FS111-W-KB-DIR's Rests-on-it names FS111-W-NOREP; FS111-W-NOREP's `uses only:` exists and omits FS111-W-KB-DIR — plans/FS111-derivation.md:677; plans/FS111-derivation.md:485
+- FS111-W-LADDER's Rests-on-it names FS111-M4-LADDER; FS111-M4-LADDER's `uses only:` exists and omits FS111-W-LADDER — plans/FS111-derivation.md:691; plans/FS111-derivation.md:1271
+- FS111-W-SQ9's Rests-on-it names FS111-M2-INTRAD; FS111-M2-INTRAD's `uses only:` exists and omits FS111-W-SQ9 — plans/FS111-derivation.md:648; plans/FS111-derivation.md:1007
+- FS111-W-SQ9's Rests-on-it names FS111-M4-LADDER; FS111-M4-LADDER's `uses only:` exists and omits FS111-W-SQ9 — plans/FS111-derivation.md:648; plans/FS111-derivation.md:1271
+- FS114-CV-EXISTS's Rests-on-it names FS114-L60-WALK; FS114-L60-WALK's `uses only:` exists and omits FS114-CV-EXISTS — plans/FS114-derivation.md:26; plans/FS114-derivation.md:943
+- FS114-CVB-THOM's Rests-on-it names FS114-N114-RD; FS114-N114-RD's `uses only:` exists and omits FS114-CVB-THOM [and names no id at all] — plans/FS114-derivation.md:83; plans/FS114-derivation.md:108
+- FS114-K1's Rests-on-it names FS114-N7-HUB; FS114-N7-HUB's `uses only:` exists and omits FS114-K1 — plans/FS114-derivation.md:804; plans/FS114-derivation.md:762
+- FS114-L60-WALK's Rests-on-it names FS114-CV-EXISTS; FS114-CV-EXISTS's `uses only:` exists and omits FS114-L60-WALK — plans/FS114-derivation.md:943; plans/FS114-derivation.md:26
+- FS114-N114-RD's Rests-on-it names FS114-N114-EULER; FS114-N114-EULER's `uses only:` exists and omits FS114-N114-RD [and names no id at all] — plans/FS114-derivation.md:108; plans/FS114-derivation.md:148
+- FS114-N114-ROOM's Rests-on-it names FS114-N2-ENDS; FS114-N2-ENDS's `uses only:` exists and omits FS114-N114-ROOM — plans/FS114-derivation.md:187; plans/FS114-derivation.md:235
+- FS114-N2-LEMMAS's Rests-on-it names FS114-N2-AVG; FS114-N2-AVG's `uses only:` exists and omits FS114-N2-LEMMAS — plans/FS114-derivation.md:351; plans/FS114-derivation.md:279
+- FS114-N3-DR's Rests-on-it names FS114-N3-JOINT; FS114-N3-JOINT's `uses only:` exists and omits FS114-N3-DR — plans/FS114-derivation.md:443; plans/FS114-derivation.md:258
+- FS114-N3-DR's Rests-on-it names FS114-N5-GRING; FS114-N5-GRING's `uses only:` exists and omits FS114-N3-DR — plans/FS114-derivation.md:443; plans/FS114-derivation.md:531
+- FS114-N3-DR's Rests-on-it names FS114-Y4-RSTOPALL; FS114-Y4-RSTOPALL's `uses only:` exists and omits FS114-N3-DR — plans/FS114-derivation.md:443; plans/FS114-derivation.md:577
+- FS114-N3-LOCAL's Rests-on-it names FS114-N5-GRING; FS114-N5-GRING's `uses only:` exists and omits FS114-N3-LOCAL — plans/FS114-derivation.md:419; plans/FS114-derivation.md:531
+- FS114-N4-LEMMAS's Rests-on-it names FS114-N5-GRING; FS114-N5-GRING's `uses only:` exists and omits FS114-N4-LEMMAS — plans/FS114-derivation.md:503; plans/FS114-derivation.md:531
+- FS114-N5-GRING's Rests-on-it names FS114-Y4-RSTOPALL; FS114-Y4-RSTOPALL's `uses only:` exists and omits FS114-N5-GRING — plans/FS114-derivation.md:531; plans/FS114-derivation.md:577
+- FS114-N6-NOQ's Rests-on-it names FS114-Y5-PINALL; FS114-Y5-PINALL's `uses only:` exists and omits FS114-N6-NOQ [and names no id at all] — plans/FS114-derivation.md:619; plans/FS114-derivation.md:640
+- FS114-N7-3T's Rests-on-it names FS114-N7-HUB; FS114-N7-HUB's `uses only:` exists and omits FS114-N7-3T — plans/FS114-derivation.md:717; plans/FS114-derivation.md:762
+- FS114-N7-HUB's Rests-on-it names FS114-N7-3T; FS114-N7-3T's `uses only:` exists and omits FS114-N7-HUB — plans/FS114-derivation.md:762; plans/FS114-derivation.md:717
+- FS114-N7-HUB's Rests-on-it names FS116-N2-HEX6; FS116-N2-HEX6's `uses only:` exists and omits FS114-N7-HUB — plans/FS114-derivation.md:762; plans/FS116-derivation.md:731
+- FS114-ROUTE-T's Rests-on-it names FS114-N2-LEMMAS; FS114-N2-LEMMAS's `uses only:` exists and omits FS114-ROUTE-T — plans/FS114-derivation.md:408; plans/FS114-derivation.md:351
+- FS114-Y-EDGE's Rests-on-it names FS114-Y5-PINALL; FS114-Y5-PINALL's `uses only:` exists and omits FS114-Y-EDGE [and names no id at all] — plans/FS114-derivation.md:130; plans/FS114-derivation.md:640
+- FS114-Y3-RSTOP's Rests-on-it names FS114-N4-D; FS114-N4-D's `uses only:` exists and omits FS114-Y3-RSTOP — plans/FS114-derivation.md:601; plans/FS114-derivation.md:480
+- FS114-Y3-RSTOP's Rests-on-it names FS114-Y4-RSTOPALL; FS114-Y4-RSTOPALL's `uses only:` exists and omits FS114-Y3-RSTOP — plans/FS114-derivation.md:601; plans/FS114-derivation.md:577
+- FS114-Y4-RSTOPALL's Rests-on-it names FS114-N4-D; FS114-N4-D's `uses only:` exists and omits FS114-Y4-RSTOPALL — plans/FS114-derivation.md:577; plans/FS114-derivation.md:480
+- FS114-Y4-RSTOPALL's Rests-on-it names FS114-Y3-RSTOP; FS114-Y3-RSTOP's `uses only:` exists and omits FS114-Y4-RSTOPALL — plans/FS114-derivation.md:577; plans/FS114-derivation.md:601
+- FS114-Y4-RSTOPALL's Rests-on-it names FS114-Y6-HALF; FS114-Y6-HALF's `uses only:` exists and omits FS114-Y4-RSTOPALL — plans/FS114-derivation.md:577; plans/FS114-derivation.md:698
+- FS114-Y5-PINALL's Rests-on-it names FS114-N6-NOQ; FS114-N6-NOQ's `uses only:` exists and omits FS114-Y5-PINALL — plans/FS114-derivation.md:640; plans/FS114-derivation.md:619
+- FS114-Y6-HALF's Rests-on-it names FS114-N7-3T; FS114-N7-3T's `uses only:` exists and omits FS114-Y6-HALF — plans/FS114-derivation.md:698; plans/FS114-derivation.md:717
+- FS116-V4-CHORD's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-CHORD [and names no id at all] — plans/FS116-derivation.md:954; plans/FS116-derivation.md:795
+- FS116-V4-DICHOTOMY's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-DICHOTOMY [and names no id at all] — plans/FS116-derivation.md:970; plans/FS116-derivation.md:795
+- FS116-V4-MEET's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-MEET [and names no id at all] — plans/FS116-derivation.md:986; plans/FS116-derivation.md:795
+- FS116-V4-OUTER's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-OUTER [and names no id at all] — plans/FS116-derivation.md:1035; plans/FS116-derivation.md:795
+- FS116-V4-PARTNER's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-PARTNER [and names no id at all] — plans/FS116-derivation.md:1018; plans/FS116-derivation.md:795
+- FS116-V4-TWIST's Rests-on-it names FS116-S1-KAPPA; FS116-S1-KAPPA's `uses only:` exists and omits FS116-V4-TWIST [and names no id at all] — plans/FS116-derivation.md:1001; plans/FS116-derivation.md:795
+- FS116-V5-DICHO's Rests-on-it names FS116-N3-SEMI; FS116-N3-SEMI's `uses only:` exists and omits FS116-V5-DICHO — plans/FS116-derivation.md:1570; plans/FS116-derivation.md:1436
+- FS116-V5-GERM's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-GERM — plans/FS116-derivation.md:1294; plans/FS116-derivation.md:1074
+- FS116-V5-LENS's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-LENS — plans/FS116-derivation.md:1349; plans/FS116-derivation.md:1074
+- FS116-V5-NE1's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-NE1 — plans/FS116-derivation.md:1256; plans/FS116-derivation.md:1074
+- FS116-V5-OUT's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-OUT — plans/FS116-derivation.md:1314; plans/FS116-derivation.md:1074
+- FS116-V5-OUT2's Rests-on-it names FS116-N3-SEMI; FS116-N3-SEMI's `uses only:` exists and omits FS116-V5-OUT2 — plans/FS116-derivation.md:1554; plans/FS116-derivation.md:1436
+- FS116-V5-QCOL's Rests-on-it names FS116-N3-SEMI; FS116-N3-SEMI's `uses only:` exists and omits FS116-V5-QCOL — plans/FS116-derivation.md:1518; plans/FS116-derivation.md:1436
+- FS116-V5-RING's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-RING — plans/FS116-derivation.md:1273; plans/FS116-derivation.md:1074
+- FS116-V5-TIPSET's Rests-on-it names FS116-Y3-SIX; FS116-Y3-SIX's `uses only:` exists and omits FS116-V5-TIPSET — plans/FS116-derivation.md:1332; plans/FS116-derivation.md:1074
+- FS116-V5-U1's Rests-on-it names FS116-N3-SEMI; FS116-N3-SEMI's `uses only:` exists and omits FS116-V5-U1 — plans/FS116-derivation.md:1536; plans/FS116-derivation.md:1436
+- FS116-V6-ANTI's Rests-on-it names FS116-V6-COUNT; FS116-V6-COUNT's `uses only:` exists and omits FS116-V6-ANTI — plans/FS116-derivation.md:1832; plans/FS116-derivation.md:1815
+- FS116-V6-ANTI's Rests-on-it names FS116-Y4-EMPTY; FS116-Y4-EMPTY's `uses only:` exists and omits FS116-V6-ANTI — plans/FS116-derivation.md:1832; plans/FS116-derivation.md:1712
+- FS116-V6-COUNT's Rests-on-it names FS116-Y4-EMPTY; FS116-Y4-EMPTY's `uses only:` exists and omits FS116-V6-COUNT — plans/FS116-derivation.md:1815; plans/FS116-derivation.md:1712
+- FS116-V6-HUBS's Rests-on-it names FS116-V6-ANTI; FS116-V6-ANTI's `uses only:` exists and omits FS116-V6-HUBS [and names no id at all] — plans/FS116-derivation.md:1768; plans/FS116-derivation.md:1832
+- FS116-V6-HUBS's Rests-on-it names FS116-V6-HUG; FS116-V6-HUG's `uses only:` exists and omits FS116-V6-HUBS [and names no id at all] — plans/FS116-derivation.md:1768; plans/FS116-derivation.md:1786
+- FS116-V6-HUBS's Rests-on-it names FS116-Y4-EMPTY; FS116-Y4-EMPTY's `uses only:` exists and omits FS116-V6-HUBS — plans/FS116-derivation.md:1768; plans/FS116-derivation.md:1712
+- FS116-V6-HUG's Rests-on-it names FS116-Y4-EMPTY; FS116-Y4-EMPTY's `uses only:` exists and omits FS116-V6-HUG — plans/FS116-derivation.md:1786; plans/FS116-derivation.md:1712
+- FS121-C1-GMAP's Rests-on-it names FS121-D3-GRUNDY; FS121-D3-GRUNDY's `uses only:` exists and omits FS121-C1-GMAP — plans/FS121-derivation.md:732; plans/FS121-derivation.md:516
+- FS121-CURVED's Rests-on-it names FS121-Z1-NOCURVED; FS121-Z1-NOCURVED's `uses only:` exists and omits FS121-CURVED — plans/FS121-derivation.md:438; plans/FS121-derivation.md:1167
+- FS121-D1-PENCILWIN's Rests-on-it names FS121-O1-OUT; FS121-O1-OUT's `uses only:` exists and omits FS121-D1-PENCILWIN — plans/FS121-derivation.md:389; plans/FS121-derivation.md:44
+- FS121-D1-R2CORNER's Rests-on-it names FS121-D1-R2SMOOTH; FS121-D1-R2SMOOTH's `uses only:` exists and omits FS121-D1-R2CORNER — plans/FS121-derivation.md:372; plans/FS121-derivation.md:340
+- FS121-D1-R2CORNER's Rests-on-it names FS121-D1-RUNG2; FS121-D1-RUNG2's `uses only:` exists and omits FS121-D1-R2CORNER — plans/FS121-derivation.md:372; plans/FS121-derivation.md:357
+- FS121-D2-EXT's Rests-on-it names FS121-D2-SYM; FS121-D2-SYM's `uses only:` exists and omits FS121-D2-EXT — plans/FS121-derivation.md:607; plans/FS121-derivation.md:656
+- FS121-D2-PERFIN's Rests-on-it names FS121-D2-SYM; FS121-D2-SYM's `uses only:` exists and omits FS121-D2-PERFIN — plans/FS121-derivation.md:679; plans/FS121-derivation.md:656
+- FS121-D3-GRUNDY's Rests-on-it names FS121-C1-GMAP; FS121-C1-GMAP's `uses only:` exists and omits FS121-D3-GRUNDY — plans/FS121-derivation.md:516; plans/FS121-derivation.md:732
+- FS121-D4-HOLE's Rests-on-it names FS111-M-PINCH; FS111-M-PINCH's `uses only:` exists and omits FS121-D4-HOLE — plans/FS121-derivation.md:951; plans/FS111-derivation.md:435
+- FS121-DB1-L3's Rests-on-it names FS121-V2-SECTOR; FS121-V2-SECTOR's `uses only:` exists and omits FS121-DB1-L3 — plans/FS121-derivation.md:143; plans/FS121-derivation.md:450
+- FS121-DB1-L4's Rests-on-it names FS121-DB1-L1; FS121-DB1-L1's `uses only:` exists and omits FS121-DB1-L4 — plans/FS121-derivation.md:161; plans/FS121-derivation.md:128
+- FS121-DB1-L6's Rests-on-it names FS111-M2-INTRAD; FS111-M2-INTRAD's `uses only:` exists and omits FS121-DB1-L6 — plans/FS121-derivation.md:192; plans/FS111-derivation.md:1007
+- FS121-DB1-L7's Rests-on-it names FS121-O1-OUT; FS121-O1-OUT's `uses only:` exists and omits FS121-DB1-L7 — plans/FS121-derivation.md:207; plans/FS121-derivation.md:44
+- FS121-V2-EROSION-DIAM's Rests-on-it names FS121-D1-EROSION; FS121-D1-EROSION's `uses only:` exists and omits FS121-V2-EROSION-DIAM — plans/FS121-derivation.md:308; plans/FS121-derivation.md:288
+- FS121-V2-VT-W's Rests-on-it names FS121-D1-VT; FS121-D1-VT's `uses only:` exists and omits FS121-V2-VT-W — plans/FS121-derivation.md:267; plans/FS121-derivation.md:243
+- FS121-V3-CPI's Rests-on-it names FS121-V2-SECTOR; FS121-V2-SECTOR's `uses only:` exists and omits FS121-V3-CPI — plans/FS121-derivation.md:469; plans/FS121-derivation.md:450
+- FS121-V5-RAY's Rests-on-it names FS121-V5-LOC; FS121-V5-LOC's `uses only:` exists and omits FS121-V5-RAY — plans/FS121-derivation.md:1109; plans/FS121-derivation.md:1092
+
+## B's `uses only:` names A; A's Rests-on-it paragraph exists and omits B (153)
+
+- FS111-C-SIX-M's `uses only:` names FS106-AE-MAP6; FS106-AE-MAP6's Rests-on-it paragraph exists and omits FS111-C-SIX-M [and names no id at all] — plans/FS111-derivation.md:207; plans/FS106-derivation.md:121
+- FS111-M-REDUCE-I's `uses only:` names FS106-AE-MAP6; FS106-AE-MAP6's Rests-on-it paragraph exists and omits FS111-M-REDUCE-I [and names no id at all] — plans/FS111-derivation.md:610; plans/FS106-derivation.md:121
+- FS111-M2-REDUCE-C's `uses only:` names FS106-AE-MAP6; FS106-AE-MAP6's Rests-on-it paragraph exists and omits FS111-M2-REDUCE-C [and names no id at all] — plans/FS111-derivation.md:973; plans/FS106-derivation.md:121
+- FS111-C1-UNIF's `uses only:` names FS106-SUP; FS106-SUP's Rests-on-it paragraph exists and omits FS111-C1-UNIF — plans/FS111-derivation.md:18; plans/FS106-derivation.md:205
+- FS111-C1-GAP's `uses only:` names FS107-R-CP; FS107-R-CP's Rests-on-it paragraph exists and omits FS111-C1-GAP — plans/FS111-derivation.md:157; plans/FS107-derivation.md:32
+- FS111-C1-ROUTES's `uses only:` names FS107-R-CP; FS107-R-CP's Rests-on-it paragraph exists and omits FS111-C1-ROUTES — plans/FS111-derivation.md:236; plans/FS107-derivation.md:32
+- FS111-C1-GAP's `uses only:` names FS107-RR; FS107-RR's Rests-on-it paragraph exists and omits FS111-C1-GAP [and names no id at all] — plans/FS111-derivation.md:157; plans/FS107-derivation.md:46
+- FS111-C1-ROUTES's `uses only:` names FS107-RR; FS107-RR's Rests-on-it paragraph exists and omits FS111-C1-ROUTES [and names no id at all] — plans/FS111-derivation.md:236; plans/FS107-derivation.md:46
+- FS121-D3-FALLSAT's `uses only:` names FS111-C-FILL; FS111-C-FILL's Rests-on-it paragraph exists and omits FS121-D3-FALLSAT — plans/FS121-derivation.md:498; plans/FS111-derivation.md:252
+- FS111-M-COVER-SC's `uses only:` names FS111-C-HULL; FS111-C-HULL's Rests-on-it paragraph exists and omits FS111-M-COVER-SC — plans/FS111-derivation.md:534; plans/FS111-derivation.md:267
+- FS111-M-HALF's `uses only:` names FS111-C-HULL; FS111-C-HULL's Rests-on-it paragraph exists and omits FS111-M-HALF — plans/FS111-derivation.md:549; plans/FS111-derivation.md:267
+- FS111-M2-HULLC's `uses only:` names FS111-C-HULL; FS111-C-HULL's Rests-on-it paragraph exists and omits FS111-M2-HULLC — plans/FS111-derivation.md:907; plans/FS111-derivation.md:267
+- FS111-M2-REDUCE-A's `uses only:` names FS111-C-SEVEN-M; FS111-C-SEVEN-M's Rests-on-it paragraph exists and omits FS111-M2-REDUCE-A — plans/FS111-derivation.md:1029; plans/FS111-derivation.md:193
+- FS111-C-REG-EQ's `uses only:` names FS111-C-SIX-M; FS111-C-SIX-M's Rests-on-it paragraph exists and omits FS111-C-REG-EQ — plans/FS111-derivation.md:221; plans/FS111-derivation.md:207
+- FS111-C1-GAP's `uses only:` names FS111-C1-PW; FS111-C1-PW's Rests-on-it paragraph exists and omits FS111-C1-GAP — plans/FS111-derivation.md:157; plans/FS111-derivation.md:67
+- FS111-V0-BRIDGE's `uses only:` names FS111-C1-PW; FS111-C1-PW's Rests-on-it paragraph exists and omits FS111-V0-BRIDGE — plans/FS111-derivation.md:142; plans/FS111-derivation.md:67
+- FS111-C1-GAP's `uses only:` names FS111-C1-UNIF; FS111-C1-UNIF's Rests-on-it paragraph exists and omits FS111-C1-GAP — plans/FS111-derivation.md:157; plans/FS111-derivation.md:18
+- FS111-M-REDUCE-I's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS111-M-REDUCE-I — plans/FS111-derivation.md:610; plans/FS111-derivation.md:455
+- FS111-M4-HC's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS111-M4-HC — plans/FS111-derivation.md:1305; plans/FS111-derivation.md:455
+- FS111-M4-LADDER's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS111-M4-LADDER — plans/FS111-derivation.md:1271; plans/FS111-derivation.md:455
+- FS111-W-NOREP's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS111-W-NOREP — plans/FS111-derivation.md:485; plans/FS111-derivation.md:455
+- FS116-O1-SATPIN's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS116-O1-SATPIN — plans/FS116-derivation.md:54; plans/FS111-derivation.md:455
+- FS121-D1-EROSION's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D1-EROSION — plans/FS121-derivation.md:288; plans/FS111-derivation.md:455
+- FS121-D1-R2SMOOTH's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D1-R2SMOOTH — plans/FS121-derivation.md:340; plans/FS111-derivation.md:455
+- FS121-D1-VT's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D1-VT — plans/FS121-derivation.md:243; plans/FS111-derivation.md:455
+- FS121-D2-EXT's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D2-EXT — plans/FS121-derivation.md:607; plans/FS111-derivation.md:455
+- FS121-D2-INCURVED's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D2-INCURVED — plans/FS121-derivation.md:591; plans/FS111-derivation.md:455
+- FS121-D2-SYM's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-D2-SYM — plans/FS121-derivation.md:656; plans/FS111-derivation.md:455
+- FS121-DB1-L3's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-DB1-L3 — plans/FS121-derivation.md:143; plans/FS111-derivation.md:455
+- FS121-DB1-L7's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-DB1-L7 — plans/FS121-derivation.md:207; plans/FS111-derivation.md:455
+- FS121-O1-OUT's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-O1-OUT — plans/FS121-derivation.md:44; plans/FS111-derivation.md:455
+- FS121-O1-PER's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-O1-PER — plans/FS121-derivation.md:62; plans/FS111-derivation.md:455
+- FS121-V2-SECTOR's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-V2-SECTOR — plans/FS121-derivation.md:450; plans/FS111-derivation.md:455
+- FS121-V2-VT-W's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-V2-VT-W — plans/FS121-derivation.md:267; plans/FS111-derivation.md:455
+- FS121-V5-LOC's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-V5-LOC — plans/FS121-derivation.md:1092; plans/FS111-derivation.md:455
+- FS121-V5-RAY's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-V5-RAY — plans/FS121-derivation.md:1109; plans/FS111-derivation.md:455
+- FS121-Z1-NOCURVED's `uses only:` names FS111-M-C11; FS111-M-C11's Rests-on-it paragraph exists and omits FS121-Z1-NOCURVED — plans/FS121-derivation.md:1167; plans/FS111-derivation.md:455
+- FS121-O1-ABOVE7's `uses only:` names FS111-M-DEADLOCK; FS111-M-DEADLOCK's Rests-on-it paragraph exists and omits FS121-O1-ABOVE7 [and names no id at all] — plans/FS121-derivation.md:110; plans/FS111-derivation.md:420
+- FS121-D1-FIRSTORDER's `uses only:` names FS111-M-HALF; FS111-M-HALF's Rests-on-it paragraph exists and omits FS121-D1-FIRSTORDER — plans/FS121-derivation.md:323; plans/FS111-derivation.md:549
+- FS121-DB1-L5's `uses only:` names FS111-M-HALF; FS111-M-HALF's Rests-on-it paragraph exists and omits FS121-DB1-L5 — plans/FS121-derivation.md:176; plans/FS111-derivation.md:549
+- FS121-O1-ENDS's `uses only:` names FS111-M-HALF; FS111-M-HALF's Rests-on-it paragraph exists and omits FS121-O1-ENDS — plans/FS121-derivation.md:20; plans/FS111-derivation.md:549
+- FS121-D1-PENCILWIN's `uses only:` names FS111-M-HULL2; FS111-M-HULL2's Rests-on-it paragraph exists and omits FS121-D1-PENCILWIN — plans/FS121-derivation.md:389; plans/FS111-derivation.md:579
+- FS121-D1-RUNG2's `uses only:` names FS111-M-HULL2; FS111-M-HULL2's Rests-on-it paragraph exists and omits FS121-D1-RUNG2 — plans/FS121-derivation.md:357; plans/FS111-derivation.md:579
+- FS121-D4-HOLE's `uses only:` names FS111-M-HULL2; FS111-M-HULL2's Rests-on-it paragraph exists and omits FS121-D4-HOLE — plans/FS121-derivation.md:951; plans/FS111-derivation.md:579
+- FS121-V2-EROSION-DIAM's `uses only:` names FS111-M-HULL2; FS111-M-HULL2's Rests-on-it paragraph exists and omits FS121-V2-EROSION-DIAM — plans/FS121-derivation.md:308; plans/FS111-derivation.md:579
+- FS111-W-KB-DIR's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS111-W-KB-DIR — plans/FS111-derivation.md:677; plans/FS111-derivation.md:435
+- FS111-W-LADDER's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS111-W-LADDER — plans/FS111-derivation.md:691; plans/FS111-derivation.md:435
+- FS116-O1-SATPIN's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS116-O1-SATPIN — plans/FS116-derivation.md:54; plans/FS111-derivation.md:435
+- FS121-D1-RUNG2's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-D1-RUNG2 — plans/FS121-derivation.md:357; plans/FS111-derivation.md:435
+- FS121-D1-VT's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-D1-VT — plans/FS121-derivation.md:243; plans/FS111-derivation.md:435
+- FS121-D4-HOLE's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-D4-HOLE — plans/FS121-derivation.md:951; plans/FS111-derivation.md:435
+- FS121-DB1-L3's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-DB1-L3 — plans/FS121-derivation.md:143; plans/FS111-derivation.md:435
+- FS121-DB1-L6's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-DB1-L6 — plans/FS121-derivation.md:192; plans/FS111-derivation.md:435
+- FS121-DB1-L7's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-DB1-L7 — plans/FS121-derivation.md:207; plans/FS111-derivation.md:435
+- FS121-O1-ENDS's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-O1-ENDS — plans/FS121-derivation.md:20; plans/FS111-derivation.md:435
+- FS121-O1-OUT's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-O1-OUT — plans/FS121-derivation.md:44; plans/FS111-derivation.md:435
+- FS121-V2-SECTOR's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-V2-SECTOR — plans/FS121-derivation.md:450; plans/FS111-derivation.md:435
+- FS121-V2-VT-W's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-V2-VT-W — plans/FS121-derivation.md:267; plans/FS111-derivation.md:435
+- FS121-V5-LOC's `uses only:` names FS111-M-PINCH; FS111-M-PINCH's Rests-on-it paragraph exists and omits FS121-V5-LOC — plans/FS121-derivation.md:1092; plans/FS111-derivation.md:435
+- FS121-O1-PER's `uses only:` names FS111-M-REDUCE-I; FS111-M-REDUCE-I's Rests-on-it paragraph exists and omits FS121-O1-PER — plans/FS121-derivation.md:62; plans/FS111-derivation.md:610
+- FS111-M-COVER-SC's `uses only:` names FS111-M-SATC; FS111-M-SATC's Rests-on-it paragraph exists and omits FS111-M-COVER-SC — plans/FS111-derivation.md:534; plans/FS111-derivation.md:316
+- FS111-VMW-R7-MAX's `uses only:` names FS111-M-SATC; FS111-M-SATC's Rests-on-it paragraph exists and omits FS111-VMW-R7-MAX — plans/FS111-derivation.md:373; plans/FS111-derivation.md:316
+- FS121-D3-GRUNDY's `uses only:` names FS111-M-SATC; FS111-M-SATC's Rests-on-it paragraph exists and omits FS121-D3-GRUNDY — plans/FS121-derivation.md:516; plans/FS111-derivation.md:316
+- FS111-M3-CASCADE's `uses only:` names FS111-M2-COV; FS111-M2-COV's Rests-on-it paragraph exists and omits FS111-M3-CASCADE — plans/FS111-derivation.md:1210; plans/FS111-derivation.md:816
+- FS111-M3-COVER's `uses only:` names FS111-M2-COV; FS111-M2-COV's Rests-on-it paragraph exists and omits FS111-M3-COVER — plans/FS111-derivation.md:1194; plans/FS111-derivation.md:816
+- FS121-C1-COVMAP's `uses only:` names FS111-M2-DISC7; FS111-M2-DISC7's Rests-on-it paragraph exists and omits FS121-C1-COVMAP — plans/FS121-derivation.md:770; plans/FS111-derivation.md:881
+- FS111-M3-BAND's `uses only:` names FS111-M2-FIX; FS111-M2-FIX's Rests-on-it paragraph exists and omits FS111-M3-BAND — plans/FS111-derivation.md:1255; plans/FS111-derivation.md:864
+- FS111-M3-VAC's `uses only:` names FS111-M2-FIX; FS111-M2-FIX's Rests-on-it paragraph exists and omits FS111-M3-VAC — plans/FS111-derivation.md:1115; plans/FS111-derivation.md:864
+- FS111-M2-SELCOMP's `uses only:` names FS111-M2-INT; FS111-M2-INT's Rests-on-it paragraph exists and omits FS111-M2-SELCOMP — plans/FS111-derivation.md:941; plans/FS111-derivation.md:850
+- FS121-D1-PENCILWIN's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D1-PENCILWIN — plans/FS121-derivation.md:389; plans/FS111-derivation.md:1007
+- FS121-D1-R2SMOOTH's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D1-R2SMOOTH — plans/FS121-derivation.md:340; plans/FS111-derivation.md:1007
+- FS121-D1-VT's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D1-VT — plans/FS121-derivation.md:243; plans/FS111-derivation.md:1007
+- FS121-D2-EXT's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D2-EXT — plans/FS121-derivation.md:607; plans/FS111-derivation.md:1007
+- FS121-D2-PERFIN's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D2-PERFIN — plans/FS121-derivation.md:679; plans/FS111-derivation.md:1007
+- FS121-D2-SYM's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D2-SYM — plans/FS121-derivation.md:656; plans/FS111-derivation.md:1007
+- FS121-D2-THIN's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-D2-THIN — plans/FS121-derivation.md:632; plans/FS111-derivation.md:1007
+- FS121-DB1-L6's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-DB1-L6 — plans/FS121-derivation.md:192; plans/FS111-derivation.md:1007
+- FS121-DB1-L7's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-DB1-L7 — plans/FS121-derivation.md:207; plans/FS111-derivation.md:1007
+- FS121-O1-ENDS's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-O1-ENDS — plans/FS121-derivation.md:20; plans/FS111-derivation.md:1007
+- FS121-O1-LRA-LINE's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-O1-LRA-LINE — plans/FS121-derivation.md:82; plans/FS111-derivation.md:1007
+- FS121-O1-OUT's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-O1-OUT — plans/FS121-derivation.md:44; plans/FS111-derivation.md:1007
+- FS121-V2-VT-W's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-V2-VT-W — plans/FS121-derivation.md:267; plans/FS111-derivation.md:1007
+- FS121-V5-SYM-CPT's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-V5-SYM-CPT — plans/FS121-derivation.md:1140; plans/FS111-derivation.md:1007
+- FS121-V5-SYM-UP's `uses only:` names FS111-M2-INTRAD; FS111-M2-INTRAD's Rests-on-it paragraph exists and omits FS121-V5-SYM-UP — plans/FS121-derivation.md:1125; plans/FS111-derivation.md:1007
+- FS121-C1-COVMAP's `uses only:` names FS111-M2-REDUCE-C; FS111-M2-REDUCE-C's Rests-on-it paragraph exists and omits FS121-C1-COVMAP — plans/FS121-derivation.md:770; plans/FS111-derivation.md:973
+- FS111-M2-FIX's `uses only:` names FS111-M2-ZERO; FS111-M2-ZERO's Rests-on-it paragraph exists and omits FS111-M2-FIX — plans/FS111-derivation.md:864; plans/FS111-derivation.md:833
+- FS111-M3-CASCADE's `uses only:` names FS111-M2-ZERO; FS111-M2-ZERO's Rests-on-it paragraph exists and omits FS111-M3-CASCADE — plans/FS111-derivation.md:1210; plans/FS111-derivation.md:833
+- FS121-D3-GRUNDY's `uses only:` names FS111-M2-ZERO; FS111-M2-ZERO's Rests-on-it paragraph exists and omits FS121-D3-GRUNDY — plans/FS121-derivation.md:516; plans/FS111-derivation.md:833
+- FS111-M-REDUCE-I's `uses only:` names FS111-V0-CLEAN; FS111-V0-CLEAN's Rests-on-it paragraph exists and omits FS111-M-REDUCE-I — plans/FS111-derivation.md:610; plans/FS111-derivation.md:37
+- FS111-M-REDUCE-I's `uses only:` names FS111-V0-RESCALE; FS111-V0-RESCALE's Rests-on-it paragraph exists and omits FS111-M-REDUCE-I — plans/FS111-derivation.md:610; plans/FS111-derivation.md:175
+- FS121-D3-EQ's `uses only:` names FS111-V0-RESCALE; FS111-V0-RESCALE's Rests-on-it paragraph exists and omits FS121-D3-EQ — plans/FS121-derivation.md:563; plans/FS111-derivation.md:175
+- FS121-O1-ABOVE7's `uses only:` names FS111-W-HEXSAT; FS111-W-HEXSAT's Rests-on-it paragraph exists and omits FS121-O1-ABOVE7 [and names no id at all] — plans/FS121-derivation.md:110; plans/FS111-derivation.md:705
+- FS111-M-REDUCE-I's `uses only:` names FS111-W-NOBEND; FS111-W-NOBEND's Rests-on-it paragraph exists and omits FS111-M-REDUCE-I — plans/FS111-derivation.md:610; plans/FS111-derivation.md:471
+- FS116-S1-QF's `uses only:` names FS111-W-NOBEND; FS111-W-NOBEND's Rests-on-it paragraph exists and omits FS116-S1-QF — plans/FS116-derivation.md:931; plans/FS111-derivation.md:471
+- FS121-O1-ENDS's `uses only:` names FS111-W-NOREP; FS111-W-NOREP's Rests-on-it paragraph exists and omits FS121-O1-ENDS — plans/FS121-derivation.md:20; plans/FS111-derivation.md:485
+- FS114-N4-LEMMAS's `uses only:` names FS112-A4SIX; FS112-A4SIX's Rests-on-it paragraph exists and omits FS114-N4-LEMMAS — plans/FS114-derivation.md:503; plans/FS112-derivation.md:61
+- FS114-CV-EXISTS's `uses only:` names FS112-C-ENDS; FS112-C-ENDS's Rests-on-it paragraph exists and omits FS114-CV-EXISTS — plans/FS114-derivation.md:26; plans/FS112-derivation.md:197
+- FS114-Y-PAIRSHARE's `uses only:` names FS112-C-PARTNERS; FS112-C-PARTNERS's Rests-on-it paragraph exists and omits FS114-Y-PAIRSHARE [and names no id at all] — plans/FS114-derivation.md:884; plans/FS112-derivation.md:221
+- FS116-Y2-DCREAD's `uses only:` names FS112-CAL-DISK; FS112-CAL-DISK's Rests-on-it paragraph exists and omits FS116-Y2-DCREAD — plans/FS116-derivation.md:345; plans/FS112-derivation.md:281
+- FS114-Y-DIAL's `uses only:` names FS112-CAL-STRIP; FS112-CAL-STRIP's Rests-on-it paragraph exists and omits FS114-Y-DIAL [and names no id at all] — plans/FS114-derivation.md:824; plans/FS112-derivation.md:252
+- FS114-Y-DIAL's `uses only:` names FS112-EDGE; FS112-EDGE's Rests-on-it paragraph exists and omits FS114-Y-DIAL — plans/FS114-derivation.md:824; plans/FS112-derivation.md:264
+- FS114-Y-ROUTES's `uses only:` names FS112-MOVE; FS112-MOVE's Rests-on-it paragraph exists and omits FS114-Y-ROUTES — plans/FS114-derivation.md:391; plans/FS112-derivation.md:311
+- FS114-CV-EXISTS's `uses only:` names FS112-N2-TERM; FS112-N2-TERM's Rests-on-it paragraph exists and omits FS114-CV-EXISTS — plans/FS114-derivation.md:26; plans/FS112-derivation.md:115
+- FS114-Y-PAIRSHARE's `uses only:` names FS112-N3-COR3; FS112-N3-COR3's Rests-on-it paragraph exists and omits FS114-Y-PAIRSHARE — plans/FS114-derivation.md:884; plans/FS112-derivation.md:156
+- FS114-Y-PENT's `uses only:` names FS112-N3-COR3; FS112-N3-COR3's Rests-on-it paragraph exists and omits FS114-Y-PENT — plans/FS114-derivation.md:844; plans/FS112-derivation.md:156
+- FS114-Y-STRIPK6's `uses only:` names FS112-N3-COR3; FS112-N3-COR3's Rests-on-it paragraph exists and omits FS114-Y-STRIPK6 — plans/FS114-derivation.md:866; plans/FS112-derivation.md:156
+- FS114-CV-EXISTS's `uses only:` names FS112-N3-DENSE3; FS112-N3-DENSE3's Rests-on-it paragraph exists and omits FS114-CV-EXISTS — plans/FS114-derivation.md:26; plans/FS112-derivation.md:176
+- FS114-N114-COMPACT's `uses only:` names FS112-N3-DENSE3; FS112-N3-DENSE3's Rests-on-it paragraph exists and omits FS114-N114-COMPACT — plans/FS114-derivation.md:300; plans/FS112-derivation.md:176
+- FS116-N3-CONE's `uses only:` names FS112-N3-NOBOTH; FS112-N3-NOBOTH's Rests-on-it paragraph exists and omits FS116-N3-CONE — plans/FS116-derivation.md:1374; plans/FS112-derivation.md:142
+- FS116-RING-TRANSFER-QC's `uses only:` names FS112-N3-NOBOTH; FS112-N3-NOBOTH's Rests-on-it paragraph exists and omits FS116-RING-TRANSFER-QC — plans/FS116-derivation.md:1492; plans/FS112-derivation.md:142
+- FS121-O1-ENDS's `uses only:` names FS112-N3-NOBOTH; FS112-N3-NOBOTH's Rests-on-it paragraph exists and omits FS121-O1-ENDS — plans/FS121-derivation.md:20; plans/FS112-derivation.md:142
+- FS114-N4-LEMMAS's `uses only:` names FS112-NB4P; FS112-NB4P's Rests-on-it paragraph exists and omits FS114-N4-LEMMAS — plans/FS114-derivation.md:503; plans/FS112-derivation.md:53
+- FS114-N4-LEMMAS's `uses only:` names FS112-SIX; FS112-SIX's Rests-on-it paragraph exists and omits FS114-N4-LEMMAS — plans/FS114-derivation.md:503; plans/FS112-derivation.md:48
+- FS114-CV-HD's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-CV-HD [and names no id at all] — plans/FS114-derivation.md:57; plans/FS112-derivation.md:42
+- FS114-N3-LOCAL's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-N3-LOCAL [and names no id at all] — plans/FS114-derivation.md:419; plans/FS112-derivation.md:42
+- FS114-N4-LEMMAS's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-N4-LEMMAS [and names no id at all] — plans/FS114-derivation.md:503; plans/FS112-derivation.md:42
+- FS114-N6-NOQ's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-N6-NOQ [and names no id at all] — plans/FS114-derivation.md:619; plans/FS112-derivation.md:42
+- FS114-N7-QOPP's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-N7-QOPP [and names no id at all] — plans/FS114-derivation.md:787; plans/FS112-derivation.md:42
+- FS114-Y2-GAPS's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-Y2-GAPS [and names no id at all] — plans/FS114-derivation.md:903; plans/FS112-derivation.md:42
+- FS114-Y3-RSTOP's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-Y3-RSTOP [and names no id at all] — plans/FS114-derivation.md:601; plans/FS112-derivation.md:42
+- FS114-Y4-LUNE's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-Y4-LUNE [and names no id at all] — plans/FS114-derivation.md:554; plans/FS112-derivation.md:42
+- FS114-Y4-RSTOPALL's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS114-Y4-RSTOPALL [and names no id at all] — plans/FS114-derivation.md:577; plans/FS112-derivation.md:42
+- FS116-N3-CONE's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS116-N3-CONE [and names no id at all] — plans/FS116-derivation.md:1374; plans/FS112-derivation.md:42
+- FS121-D1-FIRSTORDER's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS121-D1-FIRSTORDER [and names no id at all] — plans/FS121-derivation.md:323; plans/FS112-derivation.md:42
+- FS121-D1-R2SMOOTH's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS121-D1-R2SMOOTH [and names no id at all] — plans/FS121-derivation.md:340; plans/FS112-derivation.md:42
+- FS121-DB1-L1's `uses only:` names FS112-U1; FS112-U1's Rests-on-it paragraph exists and omits FS121-DB1-L1 [and names no id at all] — plans/FS121-derivation.md:128; plans/FS112-derivation.md:42
+- FS114-CV-EXISTS's `uses only:` names FS114-CV-HD; FS114-CV-HD's Rests-on-it paragraph exists and omits FS114-CV-EXISTS — plans/FS114-derivation.md:26; plans/FS114-derivation.md:57
+- FS114-NB-DUAL's `uses only:` names FS114-N114-RD; FS114-N114-RD's Rests-on-it paragraph exists and omits FS114-NB-DUAL — plans/FS114-derivation.md:217; plans/FS114-derivation.md:108
+- FS114-N2-AVG's `uses only:` names FS114-N2-ENDS; FS114-N2-ENDS's Rests-on-it paragraph exists and omits FS114-N2-AVG — plans/FS114-derivation.md:279; plans/FS114-derivation.md:235
+- FS114-N2-LEMMAS's `uses only:` names FS114-N2-ENDS; FS114-N2-ENDS's Rests-on-it paragraph exists and omits FS114-N2-LEMMAS — plans/FS114-derivation.md:351; plans/FS114-derivation.md:235
+- FS114-N114-ROOM's `uses only:` names FS114-N2-FIVE; FS114-N2-FIVE's Rests-on-it paragraph exists and omits FS114-N114-ROOM — plans/FS114-derivation.md:187; plans/FS114-derivation.md:166
+- FS114-N2-ENDS's `uses only:` names FS114-N2-FIVE; FS114-N2-FIVE's Rests-on-it paragraph exists and omits FS114-N2-ENDS — plans/FS114-derivation.md:235; plans/FS114-derivation.md:166
+- FS114-N3-DR's `uses only:` names FS114-N3-LOCAL; FS114-N3-LOCAL's Rests-on-it paragraph exists and omits FS114-N3-DR — plans/FS114-derivation.md:443; plans/FS114-derivation.md:419
+- FS114-N4-LEMMAS's `uses only:` names FS114-N3-LOCAL; FS114-N3-LOCAL's Rests-on-it paragraph exists and omits FS114-N4-LEMMAS — plans/FS114-derivation.md:503; plans/FS114-derivation.md:419
+- FS114-N6-NOQ's `uses only:` names FS114-N5-GRING; FS114-N5-GRING's Rests-on-it paragraph exists and omits FS114-N6-NOQ — plans/FS114-derivation.md:619; plans/FS114-derivation.md:531
+- FS114-N7-HUB's `uses only:` names FS114-N6-NOQ; FS114-N6-NOQ's Rests-on-it paragraph exists and omits FS114-N7-HUB — plans/FS114-derivation.md:762; plans/FS114-derivation.md:619
+- FS114-N7-QOPP's `uses only:` names FS114-N6-NOQ; FS114-N6-NOQ's Rests-on-it paragraph exists and omits FS114-N7-QOPP — plans/FS114-derivation.md:787; plans/FS114-derivation.md:619
+- FS116-N3-CROSS's `uses only:` names FS114-N7-QOPP; FS114-N7-QOPP's Rests-on-it paragraph exists and omits FS116-N3-CROSS — plans/FS116-derivation.md:1469; plans/FS114-derivation.md:787
+- FS116-N3-STAR2's `uses only:` names FS114-N7-QOPP; FS114-N7-QOPP's Rests-on-it paragraph exists and omits FS116-N3-STAR2 — plans/FS116-derivation.md:1414; plans/FS114-derivation.md:787
+- FS116-RING-TRANSFER-QC's `uses only:` names FS114-N7-QOPP; FS114-N7-QOPP's Rests-on-it paragraph exists and omits FS116-RING-TRANSFER-QC — plans/FS116-derivation.md:1492; plans/FS114-derivation.md:787
+- FS114-N2-LEMMAS's `uses only:` names FS114-Y-EDGE; FS114-Y-EDGE's Rests-on-it paragraph exists and omits FS114-N2-LEMMAS — plans/FS114-derivation.md:351; plans/FS114-derivation.md:130
+- FS114-NB-DUAL's `uses only:` names FS114-Y-EDGE; FS114-Y-EDGE's Rests-on-it paragraph exists and omits FS114-NB-DUAL — plans/FS114-derivation.md:217; plans/FS114-derivation.md:130
+- FS116-V6-ADJ's `uses only:` names FS116-V6-HUG; FS116-V6-HUG's Rests-on-it paragraph exists and omits FS116-V6-ADJ — plans/FS116-derivation.md:1847; plans/FS116-derivation.md:1786
+- FS116-Y1-STRIPCEIL's `uses only:` names FS121-D1-VT; FS121-D1-VT's Rests-on-it paragraph exists and omits FS116-Y1-STRIPCEIL — plans/FS116-derivation.md:303; plans/FS121-derivation.md:243
+- FS121-D1-PENCILWIN's `uses only:` names FS121-D1-VT; FS121-D1-VT's Rests-on-it paragraph exists and omits FS121-D1-PENCILWIN — plans/FS121-derivation.md:389; plans/FS121-derivation.md:243
+- FS121-D1-R2CORNER's `uses only:` names FS121-D1-VT; FS121-D1-VT's Rests-on-it paragraph exists and omits FS121-D1-R2CORNER — plans/FS121-derivation.md:372; plans/FS121-derivation.md:243
+- FS121-D1-R2SMOOTH's `uses only:` names FS121-D1-VT; FS121-D1-VT's Rests-on-it paragraph exists and omits FS121-D1-R2SMOOTH — plans/FS121-derivation.md:340; plans/FS121-derivation.md:243
+- FS121-D1-RUNG2's `uses only:` names FS121-D1-VT; FS121-D1-VT's Rests-on-it paragraph exists and omits FS121-D1-RUNG2 — plans/FS121-derivation.md:357; plans/FS121-derivation.md:243
+- FS121-DB1-L5's `uses only:` names FS121-DB1-L3; FS121-DB1-L3's Rests-on-it paragraph exists and omits FS121-DB1-L5 — plans/FS121-derivation.md:176; plans/FS121-derivation.md:143
+- FS121-V5-SYM-UP's `uses only:` names FS121-O1-OUT; FS121-O1-OUT's Rests-on-it paragraph exists and omits FS121-V5-SYM-UP — plans/FS121-derivation.md:1125; plans/FS121-derivation.md:44
+- FS121-D1-FIRSTORDER's `uses only:` names FS121-V2-SECTOR; FS121-V2-SECTOR's Rests-on-it paragraph exists and omits FS121-D1-FIRSTORDER — plans/FS121-derivation.md:323; plans/FS121-derivation.md:450
+- FS121-D1-PENCILWIN's `uses only:` names FS121-V2-SECTOR; FS121-V2-SECTOR's Rests-on-it paragraph exists and omits FS121-D1-PENCILWIN — plans/FS121-derivation.md:389; plans/FS121-derivation.md:450
+- FS121-D1-R2SMOOTH's `uses only:` names FS121-V2-SECTOR; FS121-V2-SECTOR's Rests-on-it paragraph exists and omits FS121-D1-R2SMOOTH — plans/FS121-derivation.md:340; plans/FS121-derivation.md:450
+

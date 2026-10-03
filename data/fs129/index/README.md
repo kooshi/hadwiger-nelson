@@ -52,3 +52,46 @@ The plan's § 2 commands, run 2026-10-03 on commit `c791976a6c`'s tree:
 `python3 tools/fs129_index.py --self-test` plants, in memory, beside a clean corpus of two new-grammar and two older-grammar entries: an entry with no statement, a `uses only:` id that resolves to nothing, a dependency cycle, an id defined in two files, a header the census rejects, a disagreement, an unplaceable era, the era boundary FS103/FS104, and a cycle among handed-off results. Each plant fires once and for its own reason; the clean corpus is indexed field by field (each field compared with its expected value) with no defect and no unresolved token; exit 0, `RESULT: PASS`.
 
 The test's own sensitivity: six mutants of the script (duplicate-id detection off, cycle detection off two ways, no-statement off, unresolved listing off, census-failure capture off) each made `--self-test` print `False` for the matching plant and exit 1; the mutant files lived in the session scratch directory, not in the repository. The first run of the self-test also caught one flaw in my own plant (an era plant that the planted ledger's milestone column placed after all), fixed in the test, not in the script.
+
+## Stage 2 — SAVED (the run: `data/fs129/index/` written by one run of `python3 tools/fs129_index.py`; exit 0)
+
+The run's own consistency checks, all read from its output files (not from the script's belief): the script's id set equals the census's id set (1,295 = 1,295; a mismatch exits 1 and none occurred); every `edges.csv` endpoint is an entry id; no edge is listed twice; every `uses_ids` / `rests_ids` entry in `theorems.jsonl` has its edge with the right source; `lean-order.md` lists every seed and puts every dependency before its user, with no violation outside a flagged cycle, and no upstream result outside its closure (checked by a second script reading the written files). The files and what each is are in § Files below.
+
+### The counts the run produced
+
+| count | value |
+|---|---|
+| theorems indexed | 1295 |
+| per era (A / R / CHECK) | 770 / 474 / 51 |
+| per grammar (older / block) | 1003 / 292 |
+| block-format verdicts | derived 267, gap 20, refuted 3, stalls 2 (the plan's 267 derived, 20 gap, 3 refuted, 2 stalls) |
+| older-format verdict classes (first word, lower-cased) | closes 719, true 172, the 43, a 10, one 9, not 7, agree 5, gap 5, accept 4, kernel-checked 4, as 3, (empty) 2, false 2, holds 2, kernel 2, no 2, all 1, both 1, certified 1, corrected 1, first 1, l 1, solver 1, step 1, ts 1, v 1, valid 1, x 1 |
+| edges (rows of edges.csv) | 1328: rests 931, uses 153, both 244 |
+| entries with a resolved `uses only:` id / a Rests-on-it paragraph / a resolved Rests-on-it id | 190 / 1295 / 725 |
+| Rests-on-it paragraphs naming no resolvable id (text kept in `rests_text`) | 570 |
+| entries naming themselves in their own uses/rests text (self-reference dropped) | 11 |
+| disagreements | 257: 104 where A's Rests-on-it names B but B's `uses only:` omits A, 153 where B's `uses only:` names A but A's Rests-on-it paragraph omits B; 39 of them where the omitting side names no id at all |
+| unresolved references | 1127: prefixed 57, hyphenated 450, bare 328, milestone pointers 292; 197 of them have a suffix candidate listed |
+| orphans (nothing uses them) | 563 (93 block-format, 470 older) |
+| dependency cycles | 45 components, 110 members (`cycles.md`) |
+| open steps | 30 entries with verdict class gap/stalls/refuted; lines naming a stall: 12; capital GAP: 372; gap in another case: 418 |
+| lean-order | 78 seeds, 197 results in the closure (the length of the list), 43 of them members of a flagged cycle |
+| grokkings no entry mentions / with an era tie | 2 / 1 |
+| ledger rows citing a theorem id (entries with none cited) | 134 entries are cited by at least one row; 1161 are not |
+| CHECK lines raised (`checks.md`) | 100 |
+
+### Files
+
+| file | what it is |
+|---|---|
+| `theorems.jsonl` | one record per theorem (1,295), first line a `_header` object |
+| `edges.csv` | `from,to,source`; an edge from a result to each result that uses it; first line begins `#` |
+| `disagreements.md` | pairs the `uses only:` and "Rests on it" directions disagree on |
+| `unresolved.md` | id-shaped references that resolve to no entry, with addresses and suffix candidates |
+| `orphans.md`, `hubs.md` | results nothing uses; results by dependents (top 100) |
+| `open-steps.md` | verdict gap/stalls/refuted entries; every "stalls at" and GAP line, with address |
+| `grokking-uses.md` | per grokking: mentioning entries, milestones, era by majority |
+| `lean-order.md` | the results handed to de Bruijn and everything they rest on, dependencies first |
+| `statements-A.md`, `statements-R.md`, `statements-CHECK.md` | one line per theorem, statement cut at 400 characters |
+| `cycles.md`, `checks.md` | extra: dependency cycles; every CHECK the script raised |
+
