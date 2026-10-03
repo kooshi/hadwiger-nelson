@@ -78,3 +78,15 @@ One line per item with its source; no narration. Each line is ticked done or dec
     first draft of IX1's amendment, reworded to pass. Filed in agent-forge with a repro (agent-forge commit `fa3de16`, not pushed), beside U8
     (item 6), at Kooshi's word ("quickly file the defects in the brief checker to ../agent-forge alongside the others, so I can fix them
     later", 2026-10-03).
+18. **FS129-IX1's amendment reported DONE** (commit `02a4a553`; report `data/fs129/reports/FS129-IX1.md`). **Keryx's receipt**: the commit's
+    18 files are all under `data/fs129/` or `tools/fs129_index.py`; `--self-test` re-run, exit 0, PASS; `data/fs129/index/roots.md` read — the
+    longest chain of dependents has 13 edges, from FS111-V0-ID1 or FS111-C-HULL-SO to FS121-Z1-NOCURVED. Eras now A 821, R 474, CHECK 0.
+    FS100-TCA corrected. IX1 closed; its context (≈210k by its count) is not reused.
+19. **Finding for the readers — the roots ranking is one-sided**: all 100 of `roots.md` are lane R (FS-111 to FS-121), because older-format
+    entries carry no `uses only:` and their edges come from prose (IX1's CHECK). An arithmetic-era root of a long chain may be missing. Every
+    reader's brief says so; lane A finds its roots by reading. Source: `data/fs129/index/roots.md` header; IX1's report.
+20. **For the readers — two `*Also:*` claims with no record**: X25B-PZ and X25B-LP (`plans/FS100-derivation.md` line 289); and 68 ids defined in
+    the no-entry files appear in no indexed entry, three files wholly (FS100-X28D, FS84-S1, FS84-SI-D). Lane A's pass 3 (merges) owns them.
+    Source: `data/fs129/index/checks.md`.
+21. **Slip, IX1's, self-reported**: stage 4 committed with `git commit -a` against standing rule 6; the commit holds only its own files
+    (checked, item 18). No harm; logged because the rule exists for a shared tree.
