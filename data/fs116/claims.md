@@ -219,3 +219,5 @@ force where this list does not restate them.*
 *Its setting words are § 0's. (This list:) the proposing record's *not claimed* line ends with a parenthetical after "anything at k ≥ 7" that names a step of its argument; it is withheld here until the close, and the rest of the line is verbatim.*
 
 - **FS116-Y4-EMPTY** *(proposed at round 4)*: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ *Not claimed:* anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs); anything in the Siamese or non-simple class; anything at k ≥ 7
+
+*§ 15, restored by Keryx, 2026-10-03 18:21 UTC, no blind job remaining: the withheld parenthetical of FS116-Y4-EMPTY's *not claimed* line, verbatim from its proposing record, follows "anything at k ≥ 7": "(with three absent colours the flank tiles need not share a colour)".*
