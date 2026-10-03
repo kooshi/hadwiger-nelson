@@ -11,6 +11,9 @@ Edits already filed by the evening's audit are not repeated here: re-walking §G
 
 **Earlier: deferred to 2026-09-29** (Kooshi, 2026-09-29 04:52 UTC): "defer these until tomorrow, and watch for instances or additions throughout this session. […] [W]e've only exercised the closing of Workflow 3.0. This session is the full thing (except formalization)."
 
+**Filed as Workflow 3.1** (2026-10-03, branch `workflow-3.1` merged to `main`): every decision below is in the lane files, `CLAUDE.md`,
+`LEAN.md` and `plans/STANDING-RULES.md`; the sections after the two verbatim ones are the record of what was proposed.
+
 ## Kooshi's ruling for the refinement (2026-10-03 20:08 UTC, verbatim)
 
 *It governs every edit below: an edit it makes moot is dropped at the filing. Keryx's reading of each edit under it is in the session's reply of the

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that CLAUDE.md § Paths forward mirrors plans/FRONTIER-STUBS.md's ranked table: the same stub at every rank 1-29, in order, one row per
+"""RETIRED (Workflow 3.1, 2026-10-03; it exits 2). Check that CLAUDE.md § Paths forward mirrors plans/FRONTIER-STUBS.md's ranked table: the same stub at every rank 1-29, in order, one row per
 rank, and a group row labelled 30-N listing ranks 30..N in rank order. Exit 0 on PASS, 1 on FAIL (each culprit named).
 
     python3 data/rerank-2026-09-27/rk_mirror_check.py                     # the working tree
@@ -9,6 +9,11 @@ rank, and a group row labelled 30-N listing ranks 30..N in rank order. Exit 0 on
 import re
 import subprocess
 import sys
+
+if __name__ == "__main__":
+    print("RETIRED (Workflow 3.1, 2026-10-03): CLAUDE.md § Paths forward now carries the top three of plans/FRONTIER-STUBS.md "
+          "and a group row; this check expects ranks 1-29 and is no longer run at a filing.")
+    sys.exit(2)
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]

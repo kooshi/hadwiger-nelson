@@ -199,6 +199,9 @@ intermediate theorems that the rows above compress into prose. Each milestone's 
 (statement, grade, proof's address, what rests on it, kernel status); this table is the index. Minted 2026-09-22 (Kooshi); backfilled for M17–FS-66 by
 the theorem audit (FS-71, row 77) the same day — 254 entries in 53 files, `tools/fs71_ledger_b_check.py --strict` keeps the two in step.*
 
+*From Workflow 3.1 (Kooshi, 2026-10-03) no line per theorem is added here: a milestone's `plans/FSnn-derivation.md` is its theorem record, and this
+index ends with FS-116 and FS-121.*
+
 | id | milestone | the theorem, in one line | grade | proof | kernel |
 |---|---|---|---|---|---|
 | M18-T1 | M18 | the roots of unity of `ℚ(√3,√5,√7,√11)(i)` are exactly `⟨ζ₁₂⟩` (`(ℤ/n)^×` elementary abelian iff `n ∣ 24`, and `√2` is absent), so a regular unit `n`-gon has vertices in that plane iff `n ∣ 12` — no unit pentagon, 3 the only odd order | hand (re-derived by the owner) | `plans/M18-derivation.md` T1; `plans/M18-the-120-degree-class.md` §0(d) | declined |
