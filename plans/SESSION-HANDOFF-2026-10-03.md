@@ -6,7 +6,7 @@
 ## 1. Read first
 
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow`.
-2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–149, the announcement rule at its top, the W-table of
+2. **The state is the two inventories**: `plans/FS116-close-inventory.md` (items 1–154, the announcement rule at its top, the W-table of
    workflow frictions, the O-table of lane items outside the milestone) and `plans/FS121-close-inventory.md` (items 1–89). Every ruling is a row.
 3. **Kooshi's instructions in force**, verbatim in the inventories:
    - FS-121 runs beside FS-116; the formalization lane stays idle (FS-116 item 4).
@@ -17,12 +17,11 @@
 4. Agent ids for running jobs are in the session scratch, `agents.txt` (never in a repository file). If the scratch is gone, the
    inventories name each job and its brief; a halted job resumes by message to its agent, or a fresh agent on the same brief.
 
-## 2. Running now (two)
+## 2. Running now (one)
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
-| R2 | Poros: boundary re-read of both closes and the draft re-rank (with the bends signal, Kooshi's V6-HUG question, FS-129's fixed place) | `data/workflow3/briefs/R2-poros-close-reread.md` | `plans/POROS-2026-10-03-close-reread.md` | no |
-| CL3 | the Clerk: count every "would have searched here" log line since 2026-09-24, sorted replaced / left open / none / unclear, for Kooshi's decision on the ban (FS-116 item O7) | `data/workflow3/briefs/CL3-ban-audit.md` | `plans/WORKFLOW3-CL3-ban-audit.md` | no |
+| X2 | the Clerk as Keryx's pen: the front-page filing of both closes, verbatim, in the worktree `/home/kooshi/source/lean-dir-close`, branch `close-2026-10-03` | `data/workflow3/briefs/X2-front-page.md` | `plans/WORKFLOW3-X2-front-page.md` | no |
 
 ## 3. The queue, in order (launch as slots free; at most three running)
 
