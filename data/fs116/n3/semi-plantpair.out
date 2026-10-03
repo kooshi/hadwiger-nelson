@@ -1,0 +1,51 @@
+== strip P0=(0,0): P(p) = ['B', 'M', 'O', 'P']; star: P[0.03,90.02], B[90.02,180.03], O[180.03,270.02], M[270.02,0.03]
+  y=   0.000  u-:off u+:O|P v-:M|B v+:off  kind=O full crossed  C(y)=['B', 'G', 'O', 'R'] tips=[] outer=['B', 'O'] A(y)=['M', 'P']
+     SEMI: four colours
+     CROSS: a=O a'=P b=M b'=B (l=15.522, m=15.522); no tip True; outer in {a',b'} False; four colours => O={a',b'}, A={a,b} False; star order b,a,b',a' False; edges e1..e4 = 180.03,90.02,0.03,270.02 in windows False
+     RECIP: p is a change point of y's ring: True; y's ring just ccw of p ['M'], just cw ['P'] (predicted [M], [O]); p is of kind O full crossed for y — VIOLATION
+  y= 180.000  u-:off u+:P|O v-:B|M v+:off  kind=O full crossed  C(y)=['G', 'M', 'P', 'R'] tips=[] outer=['M', 'P'] A(y)=['B', 'O']
+     SEMI: four colours
+     CROSS: a=P a'=O b=B b'=M (l=15.522, m=15.522); no tip True; outer in {a',b'} False; four colours => O={a',b'}, A={a,b} False; star order b,a,b',a' False; edges e1..e4 = 180.02,90.02,0.02,270.02 in windows False
+== strip P1=(1/2,0): P(p) = ['G', 'M', 'P', 'R']; star: G[0.03,90.02], P[90.02,180.03], M[180.03,270.02], R[270.02,0.03]
+  y=   0.000  u-:off u+:M|G v-:R|P v+:off  kind=O full crossed  C(y)=['B', 'M', 'O', 'P'] tips=[] outer=['M', 'P'] A(y)=['G', 'R']
+     SEMI: four colours
+     CROSS: a=M a'=G b=R b'=P (l=15.522, m=15.522); no tip True; outer in {a',b'} False; four colours => O={a',b'}, A={a,b} False; star order b,a,b',a' False; edges e1..e4 = 180.03,90.02,0.03,270.02 in windows False
+     RECIP: p is a change point of y's ring: True; y's ring just ccw of p ['R'], just cw ['G'] (predicted [R], [M]); p is of kind O full crossed for y — VIOLATION
+  y= 180.000  u-:off u+:G|M v-:P|R v+:off  kind=O full crossed  C(y)=['B', 'G', 'O', 'R'] tips=[] outer=['G', 'R'] A(y)=['M', 'P']
+     SEMI: four colours
+     CROSS: a=G a'=M b=P b'=R (l=15.522, m=15.522); no tip True; outer in {a',b'} False; four colours => O={a',b'}, A={a,b} False; star order b,a,b',a' False; edges e1..e4 = 180.02,90.02,0.02,270.02 in windows False
+== Y2 bowtie centre: P(p) = [1, 2, 3, 4]; star: 2[60.03,120.02], 3[120.02,240.03], 4[240.03,300.02], 1[300.02,60.03]
+  y=  90.000  u-:off u+:1|3 v-:1|3 v+:off  kind=O full parallel  C(y)=[2, 4, 5, 6] tips=[2] outer=[4] A(y)=[1, 3]
+     SEMI: four colours
+     PAIR: inner colours 1, 1 — EQUAL (violation)
+     STAR2 (parallel): t_a in [30,150] and t_a' in [210,330]: False; front tile [2], back tile [4]; tips within front, outer within back or {a,a'}: True
+  y= 270.000  u-:off u+:3|1 v-:3|1 v+:off  kind=O full parallel  C(y)=[2, 4, 5, 6] tips=[4] outer=[2] A(y)=[1, 3]
+     SEMI: four colours
+     PAIR: inner colours 3, 3 — EQUAL (violation)
+     STAR2 (parallel): t_a in [30,150] and t_a' in [210,330]: False; front tile [4], back tile [2]; tips within front, outer within back or {a,a'}: True
+== disk corner A0: P(p) = ['blue', 'orange', 'red', 'yellow']; star: blue[54.02,126.02], orange[126.02,198.03], red[198.03,342.02], yellow[342.02,54.02]
+  y= 209.010  u-:blue|red u+:blue|red v-:orange|yellow v+:orange|yellow  kind=closed  C(y)=['green', 'violet'] tips=[] outer=[] A(y)=['blue', 'orange', 'red', 'yellow']
+  y= 330.990  u-:orange|yellow u+:orange|yellow v-:red|blue v+:red|blue  kind=closed  C(y)=['green', 'violet'] tips=[] outer=[] A(y)=['blue', 'orange', 'red', 'yellow']
+  VIOLATION: strip P0=(0,0) y=0.00: CROSS outer
+  VIOLATION: strip P0=(0,0) y=0.00: CROSS four
+  VIOLATION: strip P0=(0,0) y=0.00: CROSS order
+  VIOLATION: strip P0=(0,0) y=0.00: CROSS windows
+  VIOLATION: strip P0=(0,0): RECIP
+  VIOLATION: strip P0=(0,0) y=180.00: CROSS outer
+  VIOLATION: strip P0=(0,0) y=180.00: CROSS four
+  VIOLATION: strip P0=(0,0) y=180.00: CROSS order
+  VIOLATION: strip P0=(0,0) y=180.00: CROSS windows
+  VIOLATION: strip P1=(1/2,0) y=0.00: CROSS outer
+  VIOLATION: strip P1=(1/2,0) y=0.00: CROSS four
+  VIOLATION: strip P1=(1/2,0) y=0.00: CROSS order
+  VIOLATION: strip P1=(1/2,0) y=0.00: CROSS windows
+  VIOLATION: strip P1=(1/2,0): RECIP
+  VIOLATION: strip P1=(1/2,0) y=180.00: CROSS outer
+  VIOLATION: strip P1=(1/2,0) y=180.00: CROSS four
+  VIOLATION: strip P1=(1/2,0) y=180.00: CROSS order
+  VIOLATION: strip P1=(1/2,0) y=180.00: CROSS windows
+  VIOLATION: Y2 bowtie centre y=90.00: PAIR
+  VIOLATION: Y2 bowtie centre y=90.00: STAR2 parallel
+  VIOLATION: Y2 bowtie centre y=270.00: PAIR
+  VIOLATION: Y2 bowtie centre y=270.00: STAR2 parallel
+SEMI VIOLATIONS 22

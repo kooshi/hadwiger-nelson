@@ -27,11 +27,17 @@ FS114-N7-QOPP each (Q) arc's colours are those of two opposite tiles of `p`, so 
 ## Theorems this phase proved
 
 - **FS116-N3-QT** — the brief's quotation is verbatim in `data/fs116/claims.md` — computed over the one blockquote (`tools/fs116_n3_quotes.py`), § 1.1.
+- **FS116-N3-CONE** — at a change point, a germ off (Q) arcs puts `R` or `R′` inside or outside the unit disc about `u` or `v`, a germ on a (Q) arc bars its two colours from a half-circle at `y`, and an edge between a tile inside and one outside `B̄(w, 1)` is an arc of `ω(w)` — [hand], one mind, over RING-GERM, GERM-R and NOBOTH, § 2.1.
+- **FS116-N3-PAIR** — two (Q) arcs at one germ pair with one colour pair have their inner colours swapped — [hand], one mind, § 2.2.
+- **FS116-N3-STAR2** — a full semi-hub of kind O pins `p`'s star: crossed, `ℓ + m ≤ 60°` and four edge windows; parallel, the arcs' tiles above and below `y` — [derived], one mind, § 2.3.
+- **FS116-N3-SEMI** — a semi-hub is a vertex of at least four colours, or a three-colour vertex with an edge along `ω(y ± 60°)` of kind both (so `y ± 60°` has four colours), or a parallel full semi-hub of three named colours — [derived], one mind, § 2.4.
 
 ## Would-have-searched-here log (standing rule 5)
 
 - The ban's end date (2026-10-01) has passed and `CLAUDE.md` § Toolchain has not been rewritten; the list's § 9 forbids enumerating ring types "by any
   program" in any case, so the log is kept. Stage 1: none (reading and recognition).
+- Stage 2: would have searched germ data (which germ on which arc, which colours) at a change point for the configurations with three colours at `y`;
+  instead derived them by cases from the cone lemmas (§ 2.4), and read only the held fragments' change points exactly as they are (`tools/fs116_n3_semi.py`).
 
 ## Fence log (standing rule 8)
 
@@ -175,3 +181,206 @@ Each is stated in this record's setting words (§ Notation); "lies on a (Q) arc"
   `k ≥ 7`.
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: the cone lemmas at the rhombus, PAIR, the pinned stars, and SEMI
+
+*Class throughout (**setting S**): a non-Siamese simple valid fragment (six colours) on a closed disc of radius above 1 about a vertex `p` of at least four
+colours, `y = r(ψ)` a change point of its ring; so `p` has four colours and no more and `A(p) = {X, X̄}` (RING-GERM). `ψ = 0°`; directions at `y` and at
+`p` are angles from `e(0°)`. FS114-N7-QOPP's windows, used below, for a (Q) arc `[α, β]` of the ring (`0 < β − α ≤ 60°`, the inner tile holding the whole
+arc): the inner tile is a tile of `p` with cone in `[β − 90°, α + 90°]`; the tile of `p` of the outer colour has cone in `[β + 90°, α + 270°]`; the two are
+opposite at `p`; the tile of `p` counter-clockwise after the inner one holds `[α + 90°, β + 90°]` in its cone, and the one after the outer colour's tile holds
+`[α + 270°, β + 270°]`. (Each line is N-E1 or non-Siamese at a unit pair `(p, r(θ))`, `θ ∈ [α, β]`: a tile of `p` holding `r(θ)` lies in `B̄(r(θ), 1)`; the
+tile of `p` of the outer colour is not the outer tile, which leaves `B̄(p, 1)`, so it misses `B(r(θ), 1)`; the windows are disjoint with gaps of length
+`β − α > 0`, so the two tiles are not adjacent, and each gap lies in the cone of the one tile between them on that side.)*
+
+### 2.1 The cone lemmas at the unit rhombus `p, u, y, v` (FS116-N3-CONE)
+
+**(a) Germs off (Q) arcs** (RING-GERM's Steps 1–2, two minds, with the disc statements read off them). `u⁻` off (Q): `u ∈ cl R`, so `R ⊂ B̄(u, 1)` and
+`R`'s cone at `y` lies in `[30°, 210°]`. `v⁻` off (Q): an `X`-tile `R_v ≠ R` holds `v` (one holding `y` and `v` together would hold points of `R` near `y`
+and of `v⁻`, more than 1 apart), so `R ∩ B(v, 1) = ∅` (non-Siamese) and `R`'s cone lies in `[−30°, 150°]`. `v⁺` off (Q): `v ∈ cl R′`, `R′ ⊂ B̄(v, 1)`, cone in
+`[150°, 330°]`. `u⁺` off (Q): an `X̄`-tile `R′_u ≠ R′` holds `u`, `R′ ∩ B(u, 1) = ∅`, cone in `[−150°, 30°]`.
+
+**(b) A germ on a (Q) arc bars its two colours.** A germ on a (Q) arc lies in the closure of the arc's inner and outer tiles, so FS116-N1-GERM-R (one mind:
+for `z = y + h` along `β`, the point of `ω(z)` near `u` falls in `u⁺` when `|z − u| < 1`, i.e. `β ∈ (30°, 210°)`, and N-E1 forbids a tile of a colour that
+closes on `u⁺` there) bars both colours at `y`: `u⁺`'s from `(30°, 210°)`, `v⁻`'s from `(150°, 330°)`, `u⁻`'s from `(−150°, 30°)`, `v⁺`'s from `(−30°, 150°)`.
+
+**(c) Two tiles across a unit circle.** If tiles `T₁`, `T₂` consecutive at `y` have `T₁ ⊂ B̄(w, 1)` and `T₂ ∩ B(w, 1) = ∅`, the edge between them at `y` lies in
+`cl T₁ ∩ cl T₂ ⊂ ω(w)`: an arc of `ω(w)`. If both colours are carried at `w`, the arc is of kind both at `w` (`data/fs112/claims.md` § 0: in-contact and
+out-contact), and FS112-N3-NOBOTH (two minds; its proof, `plans/FS112-N-proof.md` l. 731 with FS112-U1, reads only the cones at the centre) makes `w` a vertex
+of at least four colours or a repeated colour — four colours, the class being non-Siamese.
+
+**(d) STAR's windows** (FS116-N2-STAR, one mind): `C(y) = A(p) ⊔ T_y ⊔ O_y` and `A(y) = P ∖ (T_y ∪ O_y)`; a tip's cone at `p` lies in `[−90°, 90°]` and at
+`y` in `[90°, 270°]` (it lies in `B̄(p, 1)`); an outer tile's cone at `y` lies in `[−90°, 90°]` and the tile of `p` of its colour in `[90°, 180° + 90°]` (the two
+are far apart, so the outer tile misses `B(p, 1)` and `p`'s tile misses `B(y, 1)`).
+
+### 2.2 The argument of FS116-N3-PAIR
+
+The inner tile of a (Q) arc is a tile of `p` (its points near the arc lie in `B(p, 1)`, within `< 1` of `p`'s tile of that colour) and holds the whole arc in its
+closure. The two germs of one pair sit at `u` and at `v` (the tip pair `v⁻, u⁺`; the outer pair `u⁻, v⁺`), and an arc on a germ at `u` (at `v`) holds `u` (`v`)
+in its closure. If the two arcs had the same inner colour, the one tile of `p` of that colour would hold `u` and `v`, `|u − v| = √3 > 1`. So the inner colours
+differ, and when the colour pairs are equal each arc's inner colour is the other's outer colour. ∎ *Uses:* non-Siamese, diameter. *Model:* FS114-Y2-BOWTIE's
+centre at `top`: `u⁺` on the arc `3 | 1`, `v⁻` on `1 | 3` (`data/fs116/n3/semi.out`).
+
+### 2.3 The pinned stars of a full semi-hub (FS116-N3-STAR2)
+
+Put `A = [60°, 60° + ℓ]` and `B = [−60° − m, −60°]` for the (Q) arcs at `u⁺` and `v⁻` of a full semi-hub of kind O (`u⁻`, `v⁺` off (Q), so `A` starts at `u` and
+`B` ends at `v`), `0 < ℓ, m ≤ 60°`; `a`, `a′` the inner and outer colours of `A`; `t_c` the tile of `p` of colour `c`.
+- **Crossed** (`B` has colours `b` inner, `b′` outer, `{b, b′} ∩ {a, a′} = ∅`). The windows give `t_a ⊂ [ℓ − 30°, 150°]`, `t_{a′} ⊂ [150° + ℓ, 330°]`,
+  `t_b ⊂ [−150°, 30° − m]`, `t_{b′} ⊂ [30°, 210° − m]`, and the tile after `t_a` holds `[150°, 150° + ℓ]` — not `t_b`, whose window misses `150°` — so the order is
+  **`t_b, t_a, t_{b′}, t_{a′}`** counter-clockwise; then `t_a` holds `[30° − m, 30°]`, `t_{a′}` holds `[210° − m, 210°]`, `t_b` holds `[330°, 330° + ℓ]`, and the
+  edges are `e₁ = t_b|t_a ∈ [ℓ − 30°, 30° − m]`, `e₂ = t_a|t_{b′} ∈ [30°, 150°]`, `e₃ = t_{b′}|t_{a′} ∈ [150° + ℓ, 210° − m]`, `e₄ = t_{a′}|t_b ∈ [210°, 330°]`;
+  in particular **`ℓ + m ≤ 60°`**.
+- **Parallel** (by PAIR, `B` has inner `a′` and outer `a`). The windows give `t_a ⊂ [ℓ − 30°, 150°] ∩ [30°, 210° − m] = [30°, 150°]` and
+  `t_{a′} ⊂ [150° + ℓ, 330°] ∩ [210°, 390° − m] = [210°, 330°]`; the tile after `t_a` (call it `t_back`) holds `[150°, 150° + ℓ]` and `[210° − m, 210°]`, so its cone
+  contains `[150°, 210°]`; the tile after `t_{a′}` (`t_front`) holds `[330°, 330° + ℓ]` and `[30° − m, 30°]`, so its cone contains `[−30°, 30°]`.
+- **Kind T, parallel** (`A⁻ = [60° − ℓ, 60°]` at `u⁻` with inner `a`, `B⁺ = [−60°, −60° + m]` at `v⁺` with inner `a′`): `t_a ⊂ [30° + m, 150° − ℓ]`,
+  `t_{a′} ⊂ [210° + m, 330° − ℓ]`, `t_back` contains `[150° − ℓ, 210° + m]` and `t_front` contains `[−30° − ℓ, 30° + m]`.
+
+The strip's `P₀` (crossed, `ℓ = m = 15.52°`) has its edges at `0°, 90°, 180°, 270°`, inside the four windows; the bowtie's centre (parallel, `ℓ = m = 60°`)
+meets its windows with equality (`t3 = [120°, 240°]` against `[ψ + 30°, ψ + 150°]` at `ψ = 90°`) — control `fs116-n3-semi`.
+
+### 2.4 The argument of FS116-N3-SEMI
+
+Suppose `y` has three colours and no more; non-Siamese and simple, it has three tiles, one cone each, and consecutive tiles at `y` share an edge (near a vertex of
+a locally finite segment-and-arc map the tiles are the sectors between consecutive edges). `R`'s cone contains `90°` (the ring germ counter-clockwise of `y`
+approaches along `90°`) and `R′`'s contains `270°`.
+
+**Kind O** (`u⁻`, `v⁺` off (Q): `R ⊂ B̄(u, 1)`, cone in `[30°, 210°]`; `R′ ⊂ B̄(v, 1)`, cone in `[150°, 330°]`). RING-GERM (ii) fills `(−30°, 30°)` with outer
+tiles; three colours leave one, `C`, of colour `c`, and no tip (a tip would carry `c` and be a second tile of colour `c`). Counter-clockwise the tiles are
+`C = [γ₁, γ₂]`, `R = [γ₂, ρ]`, `R′ = [ρ, γ₁ + 360°]`.
+- (O1) `v⁻` off (Q): `R ⊂ [−30°, 150°]` gives `ρ ≤ 150°`, `R′` gives `ρ ≥ 150°`: the edge `R | R′` leaves `y` at `150°`, and with `R ∩ B(v, 1) = ∅`, `R′ ⊂ B̄(v, 1)`
+  it is an arc of `ω(v)` (c); `v` carries `X` (`R_v`) and `X̄` (`R′`): of kind both, and `v` has four colours.
+- (O2) `u⁺` off (Q): `ρ = 210°`, the edge `R | R′` an arc of `ω(u)` (`R ⊂ B̄(u, 1)`, `R′ ∩ B(u, 1) = ∅`), `u` carrying `X` and `X̄`: `u` has four colours.
+- (O3) full, `A` at `u⁺` with colours `{a, a′}`, `B` at `v⁻` with `{b, b′}`. If `c ∈ {a, a′}`, (b) bars `c` from `(30°, 210°)`, so `γ₂ ≤ 30°`, and `R` gives `γ₂ ≥ 30°`:
+  the edge `C | R` leaves at `30°`. `C ∩ B(u, 1) = ∅`, because `c` is carried at `u` by a side tile `T_c` of `A` other than `C`: the inner one is a tile of `p` and `C`
+  is not; the outer one, `O_A`, has `150°` in its cone at `u` (it lies beside `A`, which leaves `u` along `150°`), while `C ∋ y` would put `O_A ⊂ B̄(y, 1)` and its
+  cone at `u` in `[−150°, 30°]`. So the edge is an arc of `ω(u)` (c), with `X` and `c` both at `u`: `u` has four colours. If `c ∈ {b, b′}`: `γ₁ = −30°`, the edge
+  `R′ | C` an arc of `ω(v)`, `v` four colours. Otherwise `c` lies in neither pair, so the pairs are not disjoint — the semi-hub is parallel — and `c` is a colour of
+  `t_front` or `t_back` (§ 2.3); the tile of `p` of an outer colour has its cone in `[90°, 270°]` (d), which `t_front`'s `[−30°, 30°]` is not: **`c` is the colour
+  of `t_back`, whose cone holds `180°` in its interior** — the third alternative.
+
+**Kind T** (`v⁻`, `u⁺` off (Q): `R ∩ B(v, 1) = ∅`, cone in `[−30°, 150°]`; `R′ ∩ B(u, 1) = ∅`, cone in `[210°, 390°]`). RING-GERM (i) fills `(150°, 210°)` with tips;
+three colours leave one tip `τ` of colour `t` and no outer tile; counter-clockwise `R = [δ, ρ₁]`, `τ = [ρ₁, ρ₂]`, `R′ = [ρ₂, δ + 360°]`, `δ ∈ [−30°, 30°]`.
+- (T1) `u⁻` off (Q): `R ⊂ [30°, 210°]` gives `δ = 30°`; the edge `R′ | R` is an arc of `ω(u)` (`R ⊂ B̄(u, 1)`, `R′ ∩ B(u, 1) = ∅`), `u` carrying `X` and `X̄`.
+- (T2) `v⁺` off (Q): `δ = −30°`; the edge an arc of `ω(v)`, `v` carrying `X` and `X̄`.
+- (T3) full, `A⁻` at `u⁻` with `{a, a′}`, `B⁺` at `v⁺` with `{b, b′}`. If `t ∈ {a, a′}`, (b) bars `t` from `(−150°, 30°)`, so `ρ₂ = 210°`. The tile of `A⁻`'s colour `t`
+  at `u` is `τ` when `t` is the inner colour (inner tiles are tiles of `p`, one per colour); were `t` the outer colour, `τ` would be another `t`-tile than the outer
+  tile at `u`, so `τ ∩ B(u, 1) = ∅` and its cone at `y` would lie in `[−150°, 30°]`, against `τ ⊇ (150°, 210°)`. So `τ ⊂ B̄(u, 1)`, `R′ ∩ B(u, 1) = ∅`, and the edge
+  `τ | R′` at `210°` is an arc of `ω(u)` with `t` and `X̄` both at `u`. If `t ∈ {b, b′}`: `ρ₁ = 150°`, the edge `R | τ` an arc of `ω(v)`. Otherwise the semi-hub is
+  parallel and `t` is the colour of `t_front` or `t_back`; a tip's tile has its cone at `p` in `[−90°, 90°]` (d), which `t_back`'s `[150° − ℓ, 210° + m]` is not:
+  **`t` is the colour of `t_front`, whose cone holds `0° = ψ` in its interior**. ∎
+
+*Uses:* RING-GERM (two minds) for (a) and the forced tips and outer tiles; FS116-N1-GERM-R (one mind) for (b); FS116-N2-STAR (one mind) for (d);
+FS114-N7-QOPP (one mind) for § 2.3; FS112-N3-NOBOTH (two minds); PAIR; non-Siamese and simple (one tile per colour, one cone per tile). Six colours are spent
+at RING-GERM's Step 1 and at `C(y) = A(p) ⊔ T_y ⊔ O_y`. *Reads:* `B̄(p, 1 + ε)`.
+
+### 2.5 The entries
+
+derivation: FS116-N3-CONE
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, at a change point
+    y = r(ψ) of the ring: u⁻ off (Q) arcs gives R ⊂ B̄(r(ψ + 60°), 1); v⁻ off them gives R ∩ B(r(ψ − 60°), 1) = ∅; v⁺ off them gives R′ ⊂ B̄(r(ψ − 60°), 1);
+    u⁺ off them gives R′ ∩ B(r(ψ + 60°), 1) = ∅; a germ on a (Q) arc bars both colours of that arc from an open half-circle of directions at y — (ψ + 30°,
+    ψ + 210°) for u⁺, (ψ + 150°, ψ + 330°) for v⁻, (ψ − 150°, ψ + 30°) for u⁻, (ψ − 30°, ψ + 150°) for v⁺; and an edge at y between a tile inside B̄(w, 1) and a
+    tile outside B(w, 1) is an arc of ω(w), whose centre w, if it carries both side colours, is a vertex of at least four colours
+  uses only: RING-GERM's Steps 1 and 2 (two minds); FS116-N1-GERM-R (one mind); FS112-N3-NOBOTH with FS112-U1 (two minds each), local at the centre;
+    non-Siamese (distinct tiles of one colour at distance at least 1; no repeated colour at a point); that a tile has diameter at most 1
+  not claimed: anything about a germ on a non-(Q) arc of Γ beyond RING-GERM's Step 1; the Siamese or non-simple class; anything at k ≥ 7
+  argument: § 2.1 The cone lemmas at the unit rhombus `p, u, y, v` (FS116-N3-CONE)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the strip's P₀ at its change point P₂: R = U₁ holds u = V₁ (u⁻ off), R′ = D₁ holds v = V′₁ (v⁺ off), and B (inner of the arc at v⁻) is held at
+    P₂ only by U₂, along [0°, 90°] ⊂ [ψ − 30°, ψ + 150°] — `data/fs116/n3/semi.out`
+  prior art: partly: RING-GERM, FS116-N1-GERM-R and FS112-U1 hold each clause; FS114-N7-OCTB uses the edge clause at the bowtie's top ("the edge R_0 | W at
+    top is an arc of ω(q1)"); their assembly at the rhombus not found — FS-116's gate (`plans/FS116-local-exclusion.md` § 2.3, 12 queries)
+  handoff: de Bruijn — with RING-GERM and NOBOTH, queued behind D6's map type: the six half-planes at y and the edge clause
+
+derivation: FS116-N3-PAIR
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, if both germs of one pair at
+    a change point of the ring lie on (Q) arcs and the two arcs have the same pair of colours, then the inner colour of each is the outer colour of the other
+  uses only: that the inner tile of a (Q) arc is the tile of p of its colour and holds the arc; that a germ's arc holds the germ's ring point (u or v) in its
+    closure; |u − v| = √3; non-Siamese; diameter at most 1
+  not claimed: anything about two (Q) arcs that are not at the germs of one pair; that a full parallel semi-hub occurs at six colours beyond FS114-Y2-BOWTIE
+  argument: § 2.2 The argument of FS116-N3-PAIR
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: FS114-Y2-BOWTIE's centre at top and at bot: the arcs at u⁺ and v⁻ are 3 | 1 and 1 | 3 (control fs116-n3-pair)
+  prior art: partly: FS114-N7-QOPP's inner-tile clause; this pairing not found — FS-116's gate (12 queries)
+  handoff: de Bruijn — with FS114-N7-QOPP, queued behind D6's map type
+
+derivation: FS116-N3-STAR2
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a full
+    semi-hub of kind O with (Q) arcs A = [ψ + 60°, ψ + 60° + ℓ] of inner colour a and outer a′ and B = [ψ − 60° − m, ψ − 60°]; if B's colours b (inner) and b′
+    (outer) are disjoint from a, a′, then ℓ + m ≤ 60° and the tiles of p are, counter-clockwise, t_b, t_a, t_b′, t_a′ with edges t_b|t_a in [ψ + ℓ − 30°,
+    ψ + 30° − m], t_a|t_b′ in [ψ + 30°, ψ + 150°], t_b′|t_a′ in [ψ + 150° + ℓ, ψ + 210° − m] and t_a′|t_b in [ψ + 210°, ψ + 330°]; if B's colours are a′ (inner)
+    and a (outer), then t_a ⊂ [ψ + 30°, ψ + 150°], t_a′ ⊂ [ψ + 210°, ψ + 330°], and the other two tiles' cones contain [ψ − 30°, ψ + 30°] and [ψ + 150°, ψ + 210°]
+  uses only: FS114-N7-QOPP's windows (one mind; re-derived in the stage's preamble from N-E1 and non-Siamese at the unit pairs (p, r(θ))); FS116-N3-PAIR;
+    that p has four tiles in cyclic order (non-Siamese, simple, four colours); that A starts at u and B ends at v (u⁻, v⁺ off (Q) arcs); 0 < ℓ, m ≤ 60°
+  not claimed: the windows of a crossed semi-hub of kind T (computed in § 2.3's spirit but not entered); that any star in the windows is realised
+  argument: § 2.3 The pinned stars of a full semi-hub (FS116-N3-STAR2)
+  verdict: derived
+  grade: derived from: FS116-N3-PAIR
+  minds: 1
+  model: the strip's P₀ (crossed: edges at 0°, 90°, 180°, 270°, ℓ = m = 15.52°) and FS114-Y2-BOWTIE's centre (parallel: t3 = [120°, 240°], t1 = [300°, 60°]
+    at ψ = 90°, the windows met with equality) — control fs116-n3-semi
+  prior art: partly: FS114-N7-QOPP and N7-FLANK's windows; the two stars not found — FS-116's gate (12 queries)
+  handoff: de Bruijn — with FS114-N7-QOPP
+
+derivation: FS116-N3-SEMI
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a semi-hub
+    of the ring of p; then y is a vertex of at least four colours, or y is a vertex of exactly three colours one of whose edges at y is an arc of the unit
+    circle about r(ψ + 60°) or about r(ψ − 60°) whose two side colours are both carried at that centre, which is then a vertex of at least four colours, or y
+    is a full parallel semi-hub of exactly three colours — the two absent at p and the colour of the tile of p whose cone holds ψ + 180° (kind O) or ψ (kind T)
+    in its interior
+  uses only: FS116-N3-CONE; FS116-N3-STAR2 and its kind-T parallel line (§ 2.3); FS116-N3-PAIR; RING-GERM (i), (ii) (two minds); FS116-N2-STAR's windows
+    (one mind); non-Siamese and simple (three colours give three tiles, consecutive tiles share an edge); six colours, at RING-GERM's Step 1 and in C(y) =
+    A(p) ⊔ T_y ⊔ O_y
+  not claimed: that a semi-hub has four colours; that the third alternative occurs, or that it is excluded; anything at a closed change point (the disk's
+    corner, FS116-N1-QDISK); Siamese or non-simple fragments; anything at k ≥ 7
+  argument: § 2.4 The argument of FS116-N3-SEMI
+  verdict: derived
+  grade: derived from: FS116-N3-CONE, FS116-N3-STAR2, FS116-N3-PAIR
+  minds: 1
+  model: the strip's P₀ at P₂ and P₋₂ and P₁ at its two change points (crossed full semi-hubs of kind O, four colours) and FS114-Y2-BOWTIE's centre at top
+    and bot (parallel full semi-hubs of kind O, four colours) — the first alternative, `data/fs116/n3/semi.out`; no held fragment has a three-colour semi-hub
+  prior art: partly: the alternatives' ingredients are FS-112's (NOBOTH) and FS-116's (RING-GERM); a placing rule at change points with a germ pair on (Q)
+    arcs not found — FS-116's gate (12 queries); a search in the map-colouring vocabulary is owed
+  handoff: de Bruijn — with RING-GERM, NOBOTH and STAR, after a blind second mind; a relay-result for D2 (every semi-hub but the parallel three-colour one
+    places a vertex of at least four colours on ω(p))
+
+control: fs116-n3-semi
+  of: FS116-N3-SEMI — with FS116-N3-STAR2 and FS116-N3-CROSS, on the held change points (the strip's P₀, P₁; the bowtie's centre; the disk's corner, closed and silent); every (Q)
+    arc read with inner and outer swapped is caught
+  run: python3 ../tools/fs116_n3_semi.py | tail -n 1
+  expect: SEMI ALL OK
+  fault: python3 ../tools/fs116_n3_semi.py --plant | tail -n 1
+
+control: fs116-n3-pair
+  of: FS116-N3-PAIR on the bowtie's parallel full semi-hubs; the arcs at u read with inner and outer swapped (so the two inner colours agree) is caught
+  run: python3 ../tools/fs116_n3_semi.py | grep -c 'inner colours [0-9], [0-9] — differ' || true
+  expect: 2
+  fault: python3 ../tools/fs116_n3_semi.py --plantpair | grep -c 'inner colours [0-9], [0-9] — differ' || true
+
+### 2.6 Controls, and `k = 7`
+
+`tools/fs116_n3_semi.py` (floats reading the exact objects, through FS116-N1's ring tool, imported unedited; a ray parity read along two rays, after a
+first reading showed a phantom sliver of colour 1 at `187.07°` about the bowtie's centre, where the tool's single ray passes through `p` — the tool's own
+defect, fixed before any line was believed) classifies every change point of the held rings and checks the predictions (`data/fs116/n3/semi.out`, last line
+`SEMI ALL OK`): **the strip's `P₀` and `P₁`**: all four change points crossed full semi-hubs of kind O, four colours, tips none, outer colours `{a′, b′}`,
+missing pair `{a, b}`, star in STAR2's crossed windows; **the bowtie's centre**: both change points parallel full semi-hubs of kind O, inner colours swapped
+(PAIR), four colours (tip `t_front`, outer `t_back`), star in the parallel windows; **the disk's corner**: both change points closed (no pair off (Q) arcs),
+SEMI silent. Plants: every (Q) arc read inner↔outer (`--plant`) gives 16 violations (CROSS's outer colours, missing pair and windows, RECIP); the arcs at `u`
+only (`--plantpair`) makes the bowtie's inner colours agree (PAIR fires twice).
+
+| entry | the strip (`P₀`, `P₁`) | the disk (corner `A₀`) | `k = 7` |
+|---|---|---|---|
+| CONE | met at every change point (the arcs' colours barred where (b) says) | closed change points: (a) silent, (b) met (every germ on a (Q) arc) | (a) spends six at RING-GERM's Step 1 (a germ off (Q) arcs carries `X` or `X̄` only when two colours are absent); (b), (c) hold at every `k` (N-E1, NOBOTH) |
+| PAIR | silent (crossed) | silent (no pair) | holds at every `k` (diameter only) |
+| STAR2 | crossed windows met (edges at the windows' interiors) | silent | holds at every `k` with four colours at `p` (QOPP is N-E1) |
+| SEMI | first alternative (four colours) | silent: closed change points — the gap SEMI leaves to RING-Q | spent at RING-GERM's Step 1 and at `C(y) = A(p) ⊔ T_y ⊔ O_y`; R7's lattice points have no change point: vacuous |
+
+**G87 lookout, stage 2:** none seen. Classed: the bowtie's (Q) arcs are `60°` long and its star meets STAR2's parallel windows with equality — consistent
+(the windows' bounds are attained exactly when `ℓ = m = 60°`), not a collision.
+
+## Stage 2 — SAVED
