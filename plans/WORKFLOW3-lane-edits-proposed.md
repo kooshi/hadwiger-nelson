@@ -7,7 +7,9 @@ Edits already filed by the evening's audit are not repeated here: re-walking §G
 (F11) are in the files (`plans/WORKFLOW-AUDIT-2026-09-28.md` § 7), and the front-page lane's default identity is now the Clerk
 (`.claude/output-styles/keryx.md` step 7). Kooshi picks; Keryx files the picked ones in one commit.*
 
-**Deferred to 2026-09-29** (Kooshi, 2026-09-29 04:52 UTC): "defer these until tomorrow, and watch for instances or additions throughout this session. […] [W]e've only exercised the closing of Workflow 3.0. This session is the full thing (except formalization)."
+**Deferred again, to after FS-116's close** (Kooshi, 2026-10-03 14:52 UTC): "Re: the workflow suggestions, we'll discuss them after this milestone closes. If any suggestions are only in your context, record them so we can discuss them then."
+
+**Earlier: deferred to 2026-09-29** (Kooshi, 2026-09-29 04:52 UTC): "defer these until tomorrow, and watch for instances or additions throughout this session. […] [W]e've only exercised the closing of Workflow 3.0. This session is the full thing (except formalization)."
 
 ## A. Ephodos's close job (`.claude/agents/ephodos.md` § The close job)
 
@@ -127,3 +129,47 @@ its W-row in `plans/FS116-close-inventory.md`, which is the time-ordered log.*
 | E17 | a frozen list quoted an earlier milestone's statement whose terms were defined only in records fenced from its verifier; the verifier had to ask (FS116-V1) | W16 |
 | E17 | five reading questions from three blind verifiers, each about a term the frozen list used without defining; answered from the proposing records' definitions when the authors were past their lines | W18 |
 | E18 (new) | the session scratch directory is shared: jobs wrote files into it, and it was cleared during the halt | W21 |
+
+## H. Suggestions that lived only in the coordinator's context, recorded at Kooshi's request (2026-10-03 14:52 UTC)
+
+*Each was a practice or an observation the coordinator acted on during FS-116 and FS-121 without writing it down as a proposal. Each names
+the inventory rows that show it; nothing here is filed in a lane file.*
+
+**E19 — how Keryx answers a blind verifier's reading question.** Five times, a blind verifier asked which reading of a term was meant while
+the term's author was past its context line. Keryx answered from the author's own record, quoting **definitions only**, never a proof's
+text, and treated anything the record left undefined as an ambiguity, so the verifier reported both readings. Proposed for
+`.claude/output-styles/keryx.md` (near `<independence>`'s lean-dir notes): *"A verifier's reading question goes to the statement's author while
+the author is below its line. Otherwise Keryx answers from the author's record, quoting only its definitions, with their addresses; a term the
+record does not define is ruled an ambiguity, and the verifier reports its verdict under each reading."* (FS-116 items 26, 47, 65; FS-121 items
+18, 32, 38, 56; W18.)
+
+**E20 — a statement must not carry a proof sketch.** FS114-N7-3T's filed statement embeds N7-HUB's argument in a parenthesis. Quoted
+into FS-116's frozen list, that sketch reached two blind verifiers, who had to disclose it, and Keryx had to rule on the mind count twice.
+Proposed for `.claude/agents/ephodos.md` (the entry grammar's use): *"A `statement:` field states one claim and no argument; a second claim
+inside it is a separate entry, and a sketch belongs in `argument:`."* Upstream, the `derive_gate.py` lint could warn on a statement containing
+"so", "since" or a colon-introduced reason. (FS-116 items 32, 49, 76; FS116-V1 § 3.3.)
+
+**E21 — briefs built from templates carry stale counts.** Two verifier briefs built from earlier ones kept "all three statements" in their
+fence sections for five statements. Proposed: Keryx's briefs never state a count in prose, or the brief gate warns when a number word before
+"statements" differs from the number of quotations in the statements section (an agent-forge item). (FS-116 item 78; FS-121 item 65.)
+
+**E22 — dated addenda to a frozen claim list.** New claims arising mid-milestone (a corrected statement, a lemma others will build on, a
+route's NO stated by its own job) were added as dated sections, frozen at their own time, with every earlier statement left unchanged.
+Proposed for `.claude/output-styles/keryx.md` § `<rulings>`'s lean-dir note: *"A frozen list grows only by dated addenda; a frozen statement is
+never edited — its correction is filed at the close from the verifier's wording."* (FS-116 §§ 10–11, items 42, 59, 76; FS-121 §§ 5–8.)
+
+**E23 — the Clerk folds reports into the inventories.** The coordinator wrote every inventory line itself; over two milestones this was
+the largest single use of its context, which is the project's review budget. The Clerk's file already lists "folding job reports into … a
+close inventory" as its kind of job. Proposed: Keryx reviews each report's artifacts (commits, gate, one checked step), writes its rulings,
+and has the Clerk fold the report's items into the inventory verbatim. (Keryx's own context use, FS-116 and FS-121; `.claude/agents/clerk.md`.)
+
+**E24 — a different model for some blind verifiers.** Every blind verifier tonight was the same model as the deriver, so each two-mind
+count is independent in what each mind saw and in route, not in prior (FS121-V3's own words: "2 minds on information and route, 1 prior").
+The Keryx identity says to offer the principal a different model with its cost; the coordinator did not. Proposed for discussion: for a
+headline claim, one blind verifier on a different model (Sonnet 5.5, or another family), with the cost stated. (FS-121 item 57; every
+verifier report's `minds:` lines.)
+
+**E25 — resuming After a halt.** All six running jobs died at once on the account's halt (2026-09-29 02:42). Saved stages
+cost little; resuming each by message kept its context, and each continued from its record. Proposed for `.claude/output-styles/keryx.md`
+§ Staffing: *"After a halt, resume each job by message, naming its last committed stage and its uncommitted files; at most three agents
+afterwards unless Kooshi says otherwise."* (FS-116 item 74.)

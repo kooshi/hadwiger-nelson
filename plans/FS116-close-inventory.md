@@ -110,6 +110,7 @@ The opening jobs register their own predictions in their plans; Keryx copies the
 | 76 | owner ruling | **The announcement rule is met** for GERM-R, GERM-S (with item 49's caveat stated: the list carries N7-HUB's sketch), TOUCH, AXIS, and ECHO **in its reading (B) only**, the corrected wording to be filed at the close. The frozen § 11 is not edited (frozen statements never change); the close's derivation file carries V3's wording. Alternative: route the wording to its author now. Why not: the author is done, and the close files corrected statements anyway (as for SATPIN). Confidence: high | V3's held item | done |
 | 77 | correction owed | Entry drafts from V3 § 4.4: GERM-R (the ends are sharp), TOUCH (an idle hypothesis), AXIS ((a), (d) use no saturation), ECHO (reading (B) named) | V3 § 4.4 | open (for the close) |
 | 78 | slip | **The coordinator's**: FS116-V3's brief, built from FS116-V2's, said "all three statements" in its fence section for five; V3 read it as five. Credit to FS116-V3 | V3 § 1.2 | done |
+| 79 | owner ruling | **Kooshi, 2026-10-03 14:52 UTC**: "Re: the workflow suggestions, we'll discuss them after this milestone closes. If any suggestions are only in your context, record them so we can discuss them then." Recorded: `plans/WORKFLOW3-lane-edits-proposed.md` § H (E19–E25, the suggestions that lived only in the coordinator's context), beside § G's logged instances; the review is held to after FS-116's close | this session | done |
 
 ## Workflow 3.0 — frictions, as they arise
 
