@@ -1,0 +1,34 @@
+entry lint
+  claim FS116-N3-QT: minds 1
+  claim FS116-N3-QT: prior art known
+  claim FS116-N3-CONE: minds 1
+  claim FS116-N3-CONE: prior art partly
+  claim FS116-N3-PAIR: minds 1
+  claim FS116-N3-PAIR: prior art partly
+  claim FS116-N3-STAR2: governed by FS116-N3-PAIR (hand, minds 1)
+  claim FS116-N3-STAR2: minds 1
+  claim FS116-N3-STAR2: prior art partly
+  claim FS116-N3-SEMI: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-PAIR (hand, minds 1)
+  claim FS116-N3-SEMI: minds 1
+  claim FS116-N3-SEMI: prior art partly
+  claim RING-TRANSFER-QC: governed by FS116-N3-SEMI (derived from, minds 1)
+  claim RING-TRANSFER-QC: governed by FS116-N3-CROSS (derived from, minds 1)
+  claim RING-TRANSFER-QC: governed by FS116-N3-PAIR (hand, minds 1)
+  claim RING-TRANSFER-QC: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim RING-TRANSFER-QC: minds 1
+  claim RING-TRANSFER-QC: prior art partly
+  claim FS116-N3-CROSS: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-CROSS: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-CROSS: minds 1
+  claim FS116-N3-CROSS: prior art partly
+  entries: 9  derived: 7  stalled, gapped or refuted: 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    fs116-n3-quotes: printed 'FOUND 1 of 1'; with the fault planted ('' → '--alter') it printed 'FOUND 0 of 1' — it fires
+  ok    fs116-n3-semi: printed 'SEMI ALL OK'; with the fault planted ('' → '--plant') it printed 'SEMI VIOLATIONS 16' — it fires
+  ok    fs116-n3-pair: printed '2'; with the fault planted ('' → '--plantpair') it printed '0' — it fires
+  controls: 3  fired on their faults: 3
+GATE: PASS (0 failures, 0 warnings)

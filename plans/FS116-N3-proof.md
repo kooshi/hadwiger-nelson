@@ -31,6 +31,9 @@ FS114-N7-QOPP each (Q) arc's colours are those of two opposite tiles of `p`, so 
 - **FS116-N3-PAIR** — two (Q) arcs at one germ pair with one colour pair have their inner colours swapped — [hand], one mind, § 2.2.
 - **FS116-N3-STAR2** — a full semi-hub of kind O pins `p`'s star: crossed, `ℓ + m ≤ 60°` and four edge windows; parallel, the arcs' tiles above and below `y` — [derived], one mind, § 2.3.
 - **FS116-N3-SEMI** — a semi-hub is a vertex of at least four colours, or a three-colour vertex with an edge along `ω(y ± 60°)` of kind both (so `y ± 60°` has four colours), or a parallel full semi-hub of three named colours — [derived], one mind, § 2.4.
+- **FS116-N3-CROSS** — at a crossed full semi-hub of kind O (the strip's type) tips have zero angle and the outer colours are the (Q) arcs' outer colours; with four colours the missing pair is the inner colours, and `p` is a change point and a semi-hub of kind O of `y`'s ring — [derived], one mind, § 3.1.
+- **RING-TRANSFER-QC** — the semi-hub rule assembled (round 3's corrected form at semi-hubs) — [derived], one mind, § 3.3.
+- **RING-TRANSFER-Q** — GAP at three named places (SEMI-PAR3; closed change points; crossed reciprocity) — § 3.3. **SEMI-PAR3** — GAP — § 3.2.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -38,6 +41,8 @@ FS114-N7-QOPP each (Q) arc's colours are those of two opposite tiles of `p`, so 
   program" in any case, so the log is kept. Stage 1: none (reading and recognition).
 - Stage 2: would have searched germ data (which germ on which arc, which colours) at a change point for the configurations with three colours at `y`;
   instead derived them by cases from the cone lemmas (§ 2.4), and read only the held fragments' change points exactly as they are (`tools/fs116_n3_semi.py`).
+- Stage 3: would have searched for a parallel full semi-hub of three colours (the bowtie with its tip removed); instead stated its forced shape
+  (§ 3.2) and left the construction to the construction side.
 
 ## Fence log (standing rule 8)
 
@@ -384,3 +389,137 @@ only (`--plantpair`) makes the bowtie's inner colours agree (PAIR fires twice).
 (the windows' bounds are attained exactly when `ℓ = m = 60°`), not a collision.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the strip's type (CROSS), the residue, and the verdict
+
+*Setting S as stage 2, the disc now of radius above 2 about `p` wherever `y`'s own ring is read (it must lie in a closed disc of radius above 1 about `y`).*
+
+### 3.1 The argument of FS116-N3-CROSS
+
+`y = r(0°)` a crossed full semi-hub of kind O: `A = [60°, 60° + ℓ]` at `u⁺` (inner `a`, outer `a′`), `B = [−60° − m, −60°]` at `v⁻` (inner `b`, outer `b′`); `p`'s
+star is STAR2's crossed one, `t_b, t_a, t_{b′}, t_{a′}` with edges `e₁ … e₄` in their windows.
+
+1. **No tip of positive angle.** A tip's tile has its cone at `p` in `[−90°, 90°]` (CONE (d)); `t_{b′}` holds `[150°, 150° + ℓ]` and `t_{a′}` holds `[210° − m, 210°]`,
+   so neither is a tip. `t_a` holds `u` (it is `A`'s inner tile and `A` starts at `u`), so `t_a ⊂ B̄(u, 1)` and its cone at `y` lies in `[30°, 210°]`; CONE (b) bars `a`
+   from `(30°, 210°)`, and a tip's cone at `y` lies in `[90°, 270°]`: what is left is the single direction `210°`. `t_b` holds `v`, so its cone at `y` lies in `[150°, 330°]`,
+   `b` is barred from `(150°, 330°)`, and what is left is `150°`. Every tip has a cone of zero angle.
+2. **Outer colours.** The tile of `p` of an outer colour has its cone in `[90°, 270°]` (CONE (d)); `t_a` holds `[30° − m, 30°]` and `t_b` holds `[330°, 330° + ℓ]`, so
+   neither colour is outer: `O_y ⊆ {a′, b′}`.
+3. **Four colours.** With every cone at `y` of positive angle, `T_y = ∅` (1); `C(y) = {X, X̄} ⊔ O_y` has four colours only if `O_y = {a′, b′}`, and then
+   `A(y) = P ∖ O_y = {a, b}` (CONE (d)).
+4. **`p` is a change point of `y`'s ring.** `t_{b′}` and `t_{a′}` are now outer colours' tiles of `p`, so their cones lie in `[90°, 270°]`: `e₂ ≥ 90°` and `e₄ ≤ 270°`, while
+   `e₁ ≤ 30° − m < 90°`. The circle `ω(y)` leaves `p` along `90°` and `270°`, bending toward `y`, i.e. into directions just below `90°` and just above `270°`: inside
+   `t_a` and `t_b` — unless `e₂ = 90°` (or `e₄ = 270°`) with that edge bending at least as fast as `ω(y)`; bending faster would put `ω(y)`'s branch inside `t_{b′}`
+   (`t_{a′}`), whose colour is at `y` (N-E1), so the exception is an edge of `p` along `ω(y)`, excluded by hypothesis. So `p`'s two germs on `ω(y)` lie off `Γ`, in `t_b`
+   (counter-clockwise of `p` about `y`, the branch along `270°`) and `t_a` (clockwise): two colours, `b` and `a`, the two missing at `y`. `p` is a change point.
+5. **`p` is a semi-hub of kind O of `y`'s ring.** On `ω(y)` the points at `60°` from `p` are `v` (`p + 60°` about `y`) and `u` (`p − 60°`); `y`'s outer pair at `p` is the
+   germ of `ω(y)` leaving `v` along `150°` and the one leaving `u` along `210°`, both into `B(p, 1)`; its tip pair the germs leaving `u` along `30°` and `v` along `330°`.
+   *The outer pair lies on no (Q) arc of `y`'s ring:* such an arc's two side tiles have points in `B(p, 1)` near `v` (near `u`) and colours of `y`. A tile of a colour
+   of `P` with points in `B(p, 1)` is a tile of `p`; the tiles of `p` of `y`'s colours `a′`, `b′` do not reach `v` (it would need `t_{a′}` or `t_{b′}` inside
+   `[210°, 390°]` at `p`, against `[210° − m, 210°]` and `[150°, 150° + ℓ]`) nor `u` (inside `[−30°, 150°]`, against the same). So the sides are `X` and `X̄` (no seam: a
+   non-Siamese simple fragment has none), and FS114-N7-QOPP at `y` makes a (Q) arc of `y`'s ring join opposite tiles of `y`, while `R` and `R′` are adjacent there (the
+   directions `(90°, 270°)` at `y` lie in `R ∪ R′`, no tip having positive angle). *The tip pair does not:* by RING-GERM (i) at `y`'s change point `p`, both germs off
+   (Q) arcs would give a tile of `y` whose closure holds `p`; but `R`, `R′` carry colours absent at `p`, and the outer tiles of `a′`, `b′` at `y` are not the tiles of
+   `p` of those colours, so neither holds `p` (non-Siamese). So `p` is a semi-hub of kind O of `y`'s ring. ∎
+
+*Uses:* STAR2 (crossed), CONE (b), (d), RING-GERM (i) at `y` (two minds), FS114-N7-QOPP at `y` (one mind), N-E1, non-Siamese and simple. *Reads:*
+`B̄(p, 1 + ε) ∪ B̄(y, 1 + ε)`.
+
+**What it does.** Read with `y`'s ring as input, CROSS is the strip's mechanism: the type "both change points crossed full semi-hubs of kind O, four colours"
+places at each change point a four-colour vertex for which `p` is again a semi-hub of kind O, its missing pair the two inner colours. Whether `p` is a *crossed*
+full semi-hub of `y` is not derived: it needs `y`'s germs leaving `u` along `30°` and `v` along `330°` to lie on the arcs `R | O_A` and `R′ | O_B` of `ω(y)` (as on the
+strip: `data/fs116/n3/semi.out`, "p is of kind O full crossed for y"), and the order of the two outer tiles at `y` is not pinned by the cones (with them swapped,
+the edges `C_{a′} | R` and `R′ | C_{b′}` would run along `ω(u)` and `ω(v)`).
+
+### 3.2 The residue: a parallel full semi-hub of three colours (SEMI-PAR3)
+
+SEMI's third alternative is the one configuration the cone calculus leaves. Its forced shape, kind O (the bowtie's kind): the (Q) arcs at `u⁺` and `v⁻` join the
+tiles of `p` above and below `y` (`t_a ⊂ [30°, 150°]`, `t_{a′} ⊂ [210°, 330°]`), with their inner colours swapped; `y` carries `X`, `X̄` and the colour of `t_back`
+(the tile of `p` away from `y`), its outer tile `C` holding `(−30°, 30°)`; the tile `t_front` of `p` toward `y` (its cone contains `[−30°, 30°]`) does not reach `y`; `R`
+and `R′` meet along an edge leaving `y` into `B(p, 1)` at a direction in `[150°, 210°]`; and `y` has three colours absent — `a`, `a′` and `t_front`'s — on the whole of
+`ω(y)` off `Γ`, so no parity constrains `y`'s ring (the room `k = 7` has at a four-colour vertex). Kind T: the tile toward `y` reaches it as its only tip, no outer tile,
+and `R | R′` leaves `y` outward at a direction in `[−30°, 30°]`. **The bowtie realises the four-colour branch of this configuration** (tip `t_front = t2`, outer
+colour `t_back`'s, 4), so the step from it to three colours is removing the tip; nothing derived here excludes that.
+
+derivation: SEMI-PAR3
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, no change point of the ring
+    is a full parallel semi-hub of exactly three colours
+  argument: § 3.2 The residue: a parallel full semi-hub of three colours (SEMI-PAR3)
+  verdict: gap: the step from the bowtie's four-colour parallel semi-hub to three colours — removing the tile of p toward y from y (kind O), or the outer tile
+    (kind T) — is excluded by no cone at p, u, y or v; a proof must read y's own ring, which carries three absent colours and no parity
+
+### 3.3 The verdict on RING-TRANSFER-Q
+
+**RING-TRANSFER-Q is GAP** — at three named places, each now smaller than round 3's "a placing rule at semi-hubs":
+1. **the parallel full semi-hub of three colours** (SEMI-PAR3), the one semi-hub at which no vertex of at least four colours is placed on `ω(p)`;
+2. **closed change points** (both germ pairs touching (Q) arcs) — RING-Q's gap, the disk's corner (FS116-N1-QDISK: two colours), outside any semi-hub rule;
+3. **recurrence beyond kind O**: a crossed four-colour semi-hub reciprocates as a semi-hub of kind O (CROSS), and as a crossed one on the strip, but whether it must
+   is the order of `y`'s outer tiles, not pinned here; and, as at hubs (FS116-N2 § 2.3), nothing at `p` reads the 240° of `y`'s ring outside `B̄(p, 1)`.
+
+Everywhere else the rule is derived, in round 3's corrected form (input: `p`'s ring with its (Q) arcs' colours and `p`'s star; output: what is placed, its colours,
+its missing pair and its ring at `p`):
+
+derivation: RING-TRANSFER-QC
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of four colours: at a semi-hub y = r(ψ) of p's ring a
+    vertex of at least four colours lies at y, at r(ψ + 60°) or at r(ψ − 60°), unless y is a full parallel semi-hub of three colours, which are then the two
+    absent at p and the colour of the tile of p holding ψ + 180° (kind O) or ψ (kind T) in its cone's interior; when the (Q) arcs at a semi-hub's other pair join
+    the same two opposite tiles of p their inner colours are swapped; at a full semi-hub of kind O the four edges of p lie in FS116-N3-STAR2's windows; and at a crossed full semi-hub of kind O whose
+    (Q) arcs have inner colours a, b and outer a′, b′, every tip has a cone of zero angle and the outer colours lie in {a′, b′}, and if y has four colours with
+    cones of positive angle its missing pair is {a, b} and p — unless an edge of p runs along ω(y) — is a change point of y's ring, b counter-clockwise and a
+    clockwise of it, and a semi-hub of kind O of that ring
+  uses only: FS116-N3-CONE, FS116-N3-PAIR, FS116-N3-STAR2, FS116-N3-SEMI, FS116-N3-CROSS, and through them RING-GERM and FS112-N3-NOBOTH (two minds each),
+    FS116-N1-GERM-R, FS116-N2-STAR and FS114-N7-QOPP (one mind each)
+  not claimed: anything at a closed change point; that the parallel three-colour semi-hub is excluded or occurs (SEMI-PAR3, GAP); that p is a crossed
+    semi-hub of y's ring; anything about y's ring outside B̄(p, 1); that the rule is the same at k = 7 (RING-GERM's Step 1 and C(y) = A(p) ⊔ T_y ⊔ O_y spend six)
+  argument: § 3.3 The verdict on RING-TRANSFER-Q
+  verdict: derived
+  grade: derived from: FS116-N3-SEMI, FS116-N3-CROSS, FS116-N3-PAIR, FS116-N3-STAR2
+  minds: 1
+  model: the strip's P₀ and P₁ (four crossed full semi-hubs of kind O, four colours, missing pairs the inner colours, each reciprocated as a crossed semi-hub of
+    kind O) and FS114-Y2-BOWTIE's centre (two parallel ones, four colours) — control fs116-n3-semi
+  prior art: partly: FS116-N2's RING-TRANSFER-C at hubs; at semi-hubs not found — FS-116's gate (12 queries); a search in the map-colouring vocabulary is owed
+  handoff: de Bruijn — deferred with D6's map type, after a blind second mind on SEMI, PAIR, STAR2 and CROSS
+
+derivation: RING-TRANSFER-Q
+  statement: for each ring type with a (Q) arc at a vertex of four colours, the ring types of the vertices of at least four colours it places at distance 1
+    are determined by a finite rule, and the types that recur at every vertex they place are named
+  argument: § 3.3 The verdict on RING-TRANSFER-Q
+  verdict: gap: three places — a full parallel semi-hub of three colours (SEMI-PAR3), a closed change point (RING-Q's gap at the disk's corner), and whether a
+    crossed semi-hub's placed vertex has p as a crossed semi-hub (the order of its outer tiles); the rule is derived elsewhere as RING-TRANSFER-QC, its input the
+    ring with its (Q) arcs' colours and p's star, as round 3 corrected
+
+derivation: FS116-N3-CROSS
+  statement: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours, let y = r(ψ) be a crossed
+    full semi-hub of kind O of the ring of p, u⁺ on a (Q) arc of inner colour a and outer colour a′ and v⁻ on one of inner colour b and outer colour b′; then
+    every tile of p at y has a cone at y of zero angle, and the outer colours at y lie in {a′, b′}; if y has four colours and every tile at y a cone of positive
+    angle at y, its outer colours are a′ and b′ and its missing pair is {a, b}, and, unless an edge of p runs along ω(y) at p, p is a change point of the ring of
+    y, that ring being b just counter-clockwise of p and a just clockwise, and p is a semi-hub of kind O of the ring of y
+  uses only: FS116-N3-STAR2 (crossed); FS116-N3-CONE (b), (d); RING-GERM (i) at y (two minds); FS114-N7-QOPP at y (one mind); N-E1; non-Siamese and simple
+  not claimed: that y has four colours; that p is a crossed semi-hub of y's ring; anything about y's ring away from p; anything at k ≥ 7
+  argument: § 3.1 The argument of FS116-N3-CROSS
+  verdict: derived
+  grade: derived from: FS116-N3-STAR2, FS116-N3-CONE
+  minds: 1
+  model: the strip's P₀ at P₂ (a = P, a′ = O, b = M, b′ = B; O_y = {B, O}, A(y) = {M, P}; P₂'s ring is M just counter-clockwise of P₀ and P just clockwise, and P₀
+    is a crossed full semi-hub of kind O of it) and P₁ at P₃ — control fs116-n3-semi
+  prior art: partly: FS116-N2-RECIP is its hub form (through FS116-N1-TOUCH); at a semi-hub not found — FS-116's gate (12 queries)
+  handoff: de Bruijn — with STAR2 and RING-GERM
+
+### 3.4 What it does to D2, and `k = 7`
+
+Following four-colour vertices outward from `p` along its ring now goes through every hub (RING-GERM (iii)) and every semi-hub but SEMI-PAR3's (SEMI), the
+vertex landing at `y` or at `y ± 60°`; it stops at closed change points (the disk's corner) and at SEMI-PAR3. On the strip's type it reciprocates (CROSS), and on
+the strip itself it runs the midline. N2's advice for D2 ("a four-colour vertex whose ring carries an arc of `Γ`, at distance 1 from a `Γ`-free one, with its
+semi-hubs") now has its rule at semi-hubs; **D2's next objects are SEMI-PAR3 and the closed change point**, the two places the rule is silent, and the
+construction side's matching target is a parallel full semi-hub of three colours (the bowtie with its tip at `top` removed), by formula, or a reason it cannot exist.
+
+| entry | the strip (`P₀`, `P₁`) | the disk (corner `A₀`) | `k = 7` |
+|---|---|---|---|
+| CROSS | met at all four change points, reciprocity included (`P₀` is a crossed semi-hub of kind O of `P₂`'s ring, `P₁` of `P₃`'s) | silent: closed change points | spends six at "`C(y) = {X, X̄} ⊔ O_y`" and at RING-GERM at `y`; R7: no change point |
+| SEMI-PAR3 | silent (crossed) | silent | three absent colours at a four-colour `p` — the configuration's own room |
+| RING-TRANSFER-QC | the model | silent (closed) | not claimed: every step spends six |
+
+**G87 lookout, stage 3:** none seen as two truths in collision. Classed: CROSS's reciprocity holds as "crossed" on the strip while the cones leave the outer tiles'
+order at `y` free — a statement not yet decided, not two truths.
+
+## Stage 3 — SAVED
