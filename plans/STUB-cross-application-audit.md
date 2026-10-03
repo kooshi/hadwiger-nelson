@@ -49,7 +49,7 @@ whose open steps it closes; then do three things with what is found:
 
 ## Scale, and what is the opening's to decide
 
-About 1,300 theorems make about 850,000 ordered pairs, so a pairwise reading is not the method; an index is (by mechanism, by object, by
+About 1,300 theorems make about 850,000 unordered pairs, so a pairwise reading is not the method; an index is (by mechanism, by object, by
 hypothesis shape). The method, the staffing (head-count and model are Kooshi's: a crunch under `plans/PROTOCOL-crunch.md` is one shape), the
 stages, the registered expectations and the failure clauses are the opening's. Any derivation it produces meets the same standard as every other:
 two minds, the second blind, before it is announced as held.

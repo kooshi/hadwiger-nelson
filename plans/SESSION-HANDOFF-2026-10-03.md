@@ -35,6 +35,7 @@
 6. **Poros's boundary re-read and re-rank for both closes** (one job, R2): its brief is drafted in the session scratch as R2-poros.draft.md (if the scratch is gone, rebuild it from `data/workflow3/briefs/R1-poros-close-reread.md`); launch when FS116-Z2 has reported and been reviewed: gate it, copy it to `data/workflow3/briefs/R2-poros-close-reread.md`, log it in FS-116's inventory.
 7. **The front-page filing for both closes** (the Clerk as Keryx's pen, verbatim, on its own branch; `.claude/output-styles/keryx.md` step 7),
    then the report to Kooshi, then the workflow-edit discussion he asked for.
+8. **Then, by Kooshi's order (2026-10-03, FS-116 item O6): the workflow refinement** (`plans/WORKFLOW3-lane-edits-proposed.md`, E1–E26, U1–U8), **then FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking.
 
 My estimate given to Kooshi (FS-116 item 74's report): about nine to eleven agents after the six resumed; FS116-V4 and FS121-V5 were two of them.
 
