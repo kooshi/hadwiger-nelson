@@ -192,3 +192,22 @@ One line per item with its source; no narration. Each line is ticked done or dec
     are mentioned by no entry"), and Keryx's two reviews missed it — a coordinator's slip: the receipts checked theorem records, never a
     count against the corpus. Fix: FS129-IX1 continued, third amendment, with a completeness assertion against the corpus counts (91
     grokkings, 148 ledger rows). Pass 2 waits for it.
+49. **FS129-IX1's parser fix reported DONE** (commit `c2d322fc`): 91 of 91 grokkings read; a completeness assertion on every run (grokkings
+    91 = 91, ledger rows 148 = 148, theorems 1,295 = 1,295), each with a planted fault that fires. **Credit to the Clerk**: Keryx's diagnosis
+    (text after the title) would have reached 68 of 91; 23 entries wrap their bold title onto a second line, and the new assertion caught
+    it on the first real run. **Keryx's receipt**: `--self-test` re-run, exit 0, PASS; `data/fs129/index/grokking-uses.md` holds 91 sections.
+    Era by majority of mentions: A 54, R 5 (G2, G3, G83, G84, G85), tied 4 (G4, G58, G71, G80), mentioned by no entry 28. IX1 closed (≈286k).
+50. **Declined — the census's `ROW_RE`** (`tools/fs71_ledger_b_check.py` line 58) would drop a § B row without a trailing `|`; Keryx's count of
+    such rows today: 0. Why declined: the census is no longer run at a filing (the handoff, § 3), § B takes no rows from Workflow 3.1 on,
+    and the index's own § B count fires if a row's entry goes missing. Reopen if the census is run again.
+51. **Ruling — which lane owns each grokking for pass 2**: majority of mentions where there is one; ties and unmentioned entries by the
+    grokking's own era — G1–G80 lane A, G81–G91 lane R — so lane R owns G2, G3, G81–G86, G88–G91 (12) and lane A the other live entries up
+    to G80 (70). Retired entries (G30, G46, G47, G49, G50, G51, G67, G72) are read as cautions, never applied as mechanisms; G87 (a method,
+    the invention signal) is no lane's mechanism. Alternative: majority only, which leaves lane R five grokkings and the regularity era's own
+    entries (G81–G91, almost never cited by number) unowned. Why: an entry the regularity era rarely cites by number is still its
+    mechanism. Confidence: high.
+52. **Ruling — lane A's pass 2 runs as successive agents, not two at once**: FS129-MA1 takes lane A's 70 mechanisms in order of reach (pass 1's
+    leads first — row 66's slack residue plane and fan gap, Hoffman tightness, the Falconer fan, the ring winding — then by mentions, hubs and
+    roots), hands back at a saved stage with the rest listed, and FS129-MA2 continues from it. Alternative: split lane A's grokkings across two
+    agents now. Why: the cap of three must keep a slot for FS129-MR1 when FS129-OR1 lands; the plan's staffing (two readers split by era) stands
+    unchanged. Confidence: medium.
