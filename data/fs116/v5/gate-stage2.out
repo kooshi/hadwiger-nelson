@@ -1,0 +1,61 @@
+entry lint
+  claim V5-NE1: minds 1
+  claim V5-NE1: prior art known
+  claim V5-RING: minds 1
+  claim V5-RING: prior art partly
+  claim V5-GERM: minds 1
+  claim V5-GERM: prior art partly
+  claim V5-OUT: minds 1
+  claim V5-OUT: prior art partly
+  claim V5-TIPSET: minds 1
+  claim V5-TIPSET: prior art partly
+  claim V5-LENS: minds 1
+  warn  FS116-V5-verification.md:268 (V5-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim V5-LENS: prior art owed
+  entries: 6  derived: 6  stalled, gapped or refuted: 0
+verification lint
+  warn  verification 'FS116-Y3-SIX' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS116-Y3-SIX: given: the statement with its not-claimed line; § 14's setting words and notes (which restate …
+  claim verification FS116-Y3-SIX: committed 2026-10-03
+  claim verification FS116-Y3-SIX: predicted derived (0.85); verdict derived — met
+  warn  FS116-V5-verification.md:396 (verification FS116-Y3-SIX): divergences "none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's" — until the comparison finds something, the disagreement has not started
+  claim verification FS116-Y3-SIX: thin truth: SIX with "simple" deleted — V5-RING never uses simplicity, so the hypothesis is idle
+  claim verification FS116-Y3-SIX: minds 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  warn  verification 'FS116-Y3-TIPS' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS116-Y3-TIPS: given: the statement with its not-claimed line; § 14's setting words and notes (which restate …
+  claim verification FS116-Y3-TIPS: committed 2026-10-03
+  claim verification FS116-Y3-TIPS: predicted derived (0.55); verdict derived — met
+  warn  FS116-V5-verification.md:409 (verification FS116-Y3-TIPS): divergences "none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's" — until the comparison finds something, the disagreement has not started
+  claim verification FS116-Y3-TIPS: counterexamples none — cusp tiles at p, two tips sharing an edge to their hub, and the four labellings up to rotation, searched by hand in § Attack on FS116-Y3-TIPS
+  claim verification FS116-Y3-TIPS: minds 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  warn  verification 'FS116-Y3-NBTIP' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS116-Y3-NBTIP: given: the statement with its not-claimed line; § 14's setting words and notes (which restate …
+  claim verification FS116-Y3-NBTIP: committed 2026-10-03
+  claim verification FS116-Y3-NBTIP: predicted derived (0.6); verdict derived — met
+  warn  FS116-V5-verification.md:422 (verification FS116-Y3-NBTIP): divergences "none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's" — until the comparison finds something, the disagreement has not started
+  claim verification FS116-Y3-NBTIP: counterexamples none — cusp tips at the hub and the double tips' far neighbours, by hand in § Attack on FS116-Y3-NBTIP
+  claim verification FS116-Y3-NBTIP: minds 1 — a checking reading on the first two clauses (their route and conclusion were in N7-HUB's outline, given); the third clause's derivation is mine, but follows from the first two in one line; blind to the proposing record, the same model (Opus 5.5)
+  warn  verification 'FS116-Y3-TIGHTLENS' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS116-Y3-TIGHTLENS: given: the statement with its not-claimed line; § 14's setting words and notes (which restate …
+  claim verification FS116-Y3-TIGHTLENS: committed 2026-10-03
+  claim verification FS116-Y3-TIGHTLENS: predicted derived (0.4); verdict derived — met
+  warn  FS116-V5-verification.md:435 (verification FS116-Y3-TIGHTLENS): divergences "none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's" — until the comparison finds something, the disagreement has not started
+  claim verification FS116-Y3-TIGHTLENS: thin truth: (Q1)–(Q5) — each holds by its first disjunct alone (V5-LENS (e)); the second and third disjuncts never hold in the class
+  claim verification FS116-Y3-TIGHTLENS: minds 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  warn  verification 'FS116-Y3-STARFORCE' quotes an entry not in these files — its statement was not compared; pass the entry's file too
+  claim verification FS116-Y3-STARFORCE: given: the statement with its not-claimed line; § 14's setting words and notes (which restate …
+  claim verification FS116-Y3-STARFORCE: committed 2026-10-03
+  claim verification FS116-Y3-STARFORCE: predicted derived (0.3); verdict derived — met
+  warn  FS116-V5-verification.md:448 (verification FS116-Y3-STARFORCE): divergences "none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's" — until the comparison finds something, the disagreement has not started
+  claim verification FS116-Y3-STARFORCE: counterexamples none — the alternative stars solving (Q1)–(Q5), the two orders at each hub and both cases at y_1 (4 alone; 4 then 2), by hand in § Attack on FS116-Y3-STARFORCE
+  claim verification FS116-Y3-STARFORCE: minds 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
+  verifications: 5  predictions met: 5 of 5 (Brier 0.247)  divergences: truth 0, route 0, wording 0  counterexamples: refutation 0, monster 0, thin truth 2
+quotes
+  statements named in more than one place: 0
+controls
+  ok    hub-distances: printed 'exact 10/10'; with the fault planted ('60' → '61') it printed 'exact 2/10 FAIL |y0-y1|^2=2 - 2*sin(29*p' — it fires
+  ok    germ-first-order: printed 'germ first-order exact'; with the fault planted ('30' → '31') it printed 'germ first-order FAIL residues 2*sqrt(3)' — it fires
+  ok    astar-arc: printed 'astar exact'; with the fault planted ('5' → '4') it printed 'astar FAIL f=0 g0=1 g3=1 vals={230: -2*s' — it fires
+  ok    out-expansion: printed 'out exact'; with the fault planted ('2' → '3') it printed 'out FAIL -cos(gam - psi) cos(del - psi) ' — it fires
+  controls: 4  fired on their faults: 4
+GATE: PASS (0 failures, 11 warnings)
