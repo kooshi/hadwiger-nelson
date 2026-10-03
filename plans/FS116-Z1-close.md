@@ -8,7 +8,9 @@ and the FS-114 errata. I touch only this record, `plans/FS116-derivation.md`, `d
 
 ## Theorems this phase proved
 
-*Filled at stage 3.*
+**None of this close's own.** The derivation file files the milestone's theorems; the four entries written here by hand (FS116-V1-FRAME,
+FS116-V3-GERM-R-EDGE, FS116-V3-ECHO-ONLY, FS116-V5-CROSS-S) are V1's, V3's and V5's results, stated from their records at one mind each, and
+FS116-C114-LOCAL-F is a GAP entry recording the case list (§ 2.6). No statement was derived anew.
 
 ## Would-have-searched-here log (standing rule 5)
 
@@ -164,11 +166,10 @@ V1-L1 (one side of each contact circle) is folded into SATPIN's second route; V1
 **Claims of the frozen list no job worked:** SATPIN-PER (§ 4), NO-SAT (§ 4), DISC-F (§ 6), LOCAL-DENSE (§ 6) — no D2 job ran; C114-LOCAL-F itself is
 filed as GAP at the named ring types (FS116-C114-LOCAL-F, § 2.6's case list). STRUCT (§ 1) is answered in part: §§ 2.1 and 2.6.
 
-**Counts.** Held under the announcement rule: **25 statements** — YESLIM, SATPIN (corrected), RING-TWIST-C, TWIST-LIT, RING-GERM, GERM-R, GERM-S, TOUCH,
-ECHO (reading B), AXIS, KAPPA (corrected), RUNG, SEMI, PAIR, CROSS (all but its last clause), SIX, TIPS, TIGHTLENS, STARFORCE; and outside the frozen
-list's grammar, nothing else. That is 19 frozen statements held; with the caveats of items 49, 76, 108 stated where they bind. Not held at two
-derivations: QF (told the verdict). One mind and a checking reading: NBTIP, CROSS's last clause. One mind: everything else, EMPTY among them while V6
-runs. *(Correction to the count's first word, written before the list was counted: 19, not 25.)* **No top claim landed**: C114-LOCAL-F, NO-SAT, DISC-F,
+**Counts.** Held under the announcement rule: **19 frozen statements** — YESLIM, SATPIN (corrected), RING-TWIST-C, TWIST-LIT, RING-GERM, GERM-R,
+GERM-S, TOUCH, ECHO (reading B), AXIS, KAPPA (corrected), RUNG, SEMI, PAIR, CROSS (all but its last clause), SIX, TIPS, TIGHTLENS, STARFORCE — with the
+caveats of items 49, 76 and 108 stated where they bind. Not held at two derivations: QF (the second told the verdict). One mind and a checking
+reading: NBTIP, CROSS's last clause. One mind: everything else, EMPTY among them while V6 runs. **No top claim landed**: C114-LOCAL-F, NO-SAT, DISC-F,
 LOCAL-DENSE, RING-Q, SAT-STRIP, SAT-QFREE, RING-TRANSFER-Q, Y-SAT and Y-QRING are GAP, stalled, not landed or not worked.
 
 ### 2.2 The divergences between each job and its verifier, and how each was settled
@@ -234,3 +235,29 @@ N7's two carried registrations (item 25): OC dies within √3 (0.5) — OC was n
 tactic centre (0.4) — no survivor was classified. Neither is decided; part 2 scores them so.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: `plans/FS116-derivation.md`
+
+*Assembled by `tools/fs116_z1_derivation.py` from the records' own `derivation:` blocks (field by field), with every change the close makes written in
+`tools/fs116_z1_notes.py`: qualified ids (a frozen name without the prefix filed as `FS116-<name>`, the verifiers' lemmas as `FS116-V4-…`, `FS116-V5-…`),
+record-prefixed argument addresses, the minds lines read from the verification blocks and § 4 counts (`MINDS`), the corrected statements as named
+substitutions on the frozen text, each applied only if the frozen text is found (`SUBS`: SATPIN, RING-GERM, RING-TWIST-C, ECHO, KAPPA), four field
+corrections the verifiers drafted (`FIELD`: TWIST-LIT's grade and uses-only, RING-GERM's uses-only, GERM-R's model, AXIS's and TOUCH's uses-only,
+NBTIP's one-way converse), a prose paragraph under every entry (`NOTE`), and "Rests on it:" generated from every other entry's `uses only:` and `grade:`
+lines, with the consumers outside the file added by hand (`EXTRA`).*
+
+- **86 entries** (79 derived, 7 GAP or stalled: FS116-RING-Q, -SAT-QFREE, -SAT-STRIP, -Y-SAT, -SEMI-PAR3, -RING-TRANSFER-Q, -C114-LOCAL-F), in ten
+  sections by round; **11 controls** copied from the records (the [tools] objects, ECHO's reading-(A) counterexample, RUNG's ceiling, EXIT's identities,
+  STARFORCE's truth table, SEMI on the held change points, FLANK and EMPTY's six-colour step), each firing on its fault.
+- **Left out, with the reason:** the quotation readbacks `FS116-*-QT` (not mathematics); N1's first SAT-STRIP block and N2's RING-TRANSFER-Q block (each
+  superseded by its narrower successor, whose note gives the first address); V1-L1, V1-YESLIM, V1-SATPIN and V3-ECHO-B (they are the verifications);
+  V2-RG-THIN, V2-TL-NS, V2-RG-G, V2-RG-STRIP, V2-STRIP-D, V3-ECHO-A and V3-AXIS-STRIP, each folded into the note of the entry it bears on (one-mind
+  findings and readings of held objects, stated there with their names).
+- **The gate:** `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS116-derivation.md` — **PASS, 0 failures, 28 warnings**
+  (`data/fs116/fs116-z1/gate-stage3.out`): 26 "prior art owed" (the records' own, carried), and SATPIN's grade citing FS111-M-PINCH and FS111-M-C11,
+  which are held entries of `plans/FS111-derivation.md`, not of this file.
+- **A check by hand on the substitutions:** each corrected statement read beside its verifier's drafted wording (V1 § 2.3's last paragraph; V2 § 4.1 row 4,
+  § 4.2 row 3; V3 § 4.4; V4, Divergences on KAPPA rows 3–4) — each change is the verifier's words or the minimal insertion its row asks for. RING-GERM's
+  "(the ring off Γ on both sides of y)" is my wording of V2's instruction ("change point should be quoted with the ring off Γ on both sides").
+
+## Stage 3 — SAVED

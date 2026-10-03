@@ -1,0 +1,284 @@
+entry lint
+  claim FS116-O1-YESLIM: minds 2 — blind to: the first derivation until V1's verdicts were committed (3daaa05c); method: the Rajchman step by a compact operator and the rounding by a least index (V1 § 4.1 rows 1–2), against dominated convergence and the support rounding; the same model (Opus 5.5), one prior
+  claim FS116-O1-YESLIM: prior art partly
+  warn  FS116-derivation.md:50 (FS116-O1-SATPIN): derived from 'FS111-M-PINCH', which is not an entry in these files — its grade cannot be read
+  warn  FS116-derivation.md:50 (FS116-O1-SATPIN): derived from 'FS111-M-C11', which is not an entry in these files — its grade cannot be read
+  claim FS116-O1-SATPIN: minds 2 — blind to: the first derivation until 3daaa05c, not to FS111-M-PINCH's case split, which both routes use (item 31's ruling); method: V1's L1–L4, a connected-product interval per contact, the last clause through the edges, against saturation at p (V1 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-O1-SATPIN: prior art partly, 1 counted queries
+  claim FS116-V1-FRAME: minds 1
+  claim FS116-V1-FRAME: prior art partly
+  claim FS116-N1-TWIST-D: minds 1
+  claim FS116-N1-TWIST-D: prior art partly
+  claim FS116-RING-TWIST-C: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-RING-TWIST-C: minds 2 — blind to: N1's argument until V2's verdicts (81bfc5cb); method: the same route in substance (V2 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-RING-TWIST-C: prior art partly
+  claim FS116-N1-TWIST-LIT: minds 2 — blind to: N1's argument until 81bfc5cb; method: the same slit (V2 § 4.3); the same model (Opus 5.5), one prior
+  claim FS116-N1-TWIST-LIT: prior art partly
+  claim FS116-RING-GERM: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-RING-GERM: minds 2 — blind to: N1's argument until 81bfc5cb, given N7-HUB's one-line sketch in the list's § 8 (item 49's caveat); method: colour exclusion at the tiles in the cones (V2) against tile identification (N1), V2 § 4.1 row 1; the same model (Opus 5.5), one prior
+  claim FS116-RING-GERM: prior art partly
+  claim FS116-RING-Q-PRIME: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-RING-Q-PRIME: minds 1
+  claim FS116-RING-Q-PRIME: prior art partly
+  claim FS116-N1-QDISK: minds 1
+  claim FS116-N1-QDISK: prior art partly
+  claim FS116-RING-TWIST-Q: governed by FS116-RING-TWIST-C (derived from, minds 2)
+  claim FS116-RING-TWIST-Q: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-RING-TWIST-Q: minds 1
+  claim FS116-RING-TWIST-Q: prior art partly
+  claim FS116-Y1-F15: minds 1
+  claim FS116-Y1-F15: prior art new, 2 counted queries
+  claim FS116-Y1-STRIPCEIL: minds 1
+  claim FS116-Y1-STRIPCEIL: prior art new, 2 counted queries
+  claim FS116-Y1-NOTCH: minds 1
+  claim FS116-Y1-NOTCH: prior art new, 2 counted queries
+  claim FS116-Y2-DCREAD: minds 1
+  claim FS116-Y2-DCREAD: prior art partly
+  claim FS116-Y2-SIXFRAG: minds 1
+  claim FS116-Y2-SIXFRAG: prior art partly
+  claim FS116-Y2-SIXOFF: minds 1
+  claim FS116-Y2-SIXOFF: prior art partly
+  claim FS116-N1-GERM-R: minds 2 — blind to: N1's record until V3's verdicts (7245b6eb); method: a straddle on T′ × T in two regimes against the monotone ring point (V3 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-N1-GERM-R: prior art partly
+  claim FS116-V3-GERM-R-EDGE: minds 1
+  claim FS116-V3-GERM-R-EDGE: prior art partly
+  claim FS116-N1-GERM-S: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-GERM-S: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-GERM-S: minds 2 — blind to: N1's record until 7245b6eb, given N7-HUB's sketch in § 8 (V3's own caveat: a reader who counts it as given may count one); method: N-E2 against the interval argument, one fact under two names; the same model (Opus 5.5), one prior
+  claim FS116-N1-GERM-S: prior art partly
+  claim FS116-RING-Q-PRIME-S: governed by FS116-N1-GERM-S (derived from, minds 2)
+  claim FS116-RING-Q-PRIME-S: minds 1
+  claim FS116-RING-Q-PRIME-S: prior art partly
+  claim FS116-N1-QFREE4: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-QFREE4: minds 1
+  claim FS116-N1-QFREE4: prior art partly
+  claim FS116-N1-TOUCH: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-TOUCH: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N1-TOUCH: minds 2 — blind to: N1's record until 7245b6eb; method: the same three steps (a second mind on the information axis only, V3 § 4.2); the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:502 (FS116-N1-TOUCH): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N1-TOUCH: prior art owed
+  claim FS116-N1-ECHO: minds 2 — on the corrected statement (reading B); blind to: N1's record until 7245b6eb; method: FS116-V3-ECHO-ONLY by a straddle against N1's derivative argument; the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:523 (FS116-N1-ECHO): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N1-ECHO: prior art owed
+  claim FS116-V3-ECHO-ONLY: minds 1
+  claim FS116-V3-ECHO-ONLY: prior art partly
+  claim FS116-N1-AXIS: governed by FS116-N1-GERM-R (hand, minds 2)
+  claim FS116-N1-AXIS: minds 2 — blind to: N1's record until 7245b6eb; method: N-E2 for (a) and saturation's definition for (b), so V3's (b) does not rest on SATPIN (V3 § 4.2); the same model (Opus 5.5), one prior
+  claim FS116-N1-AXIS: prior art partly
+  claim FS116-N1-F15TOUCH: minds 1
+  claim FS116-N1-F15TOUCH: prior art partly
+  claim FS116-N2-SIXRING: governed by FS116-N1-TWIST-D (hand, minds 1)
+  claim FS116-N2-SIXRING: minds 1
+  claim FS116-N2-SIXRING: prior art partly
+  claim FS116-N2-FIVERING: minds 1
+  claim FS116-N2-FIVERING: prior art partly
+  claim FS116-N2-STAR: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-N2-STAR: minds 1
+  claim FS116-N2-STAR: prior art partly
+  claim FS116-N2-RECIP: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-N2-RECIP: governed by FS116-N1-TOUCH (derived from, minds 2)
+  claim FS116-N2-RECIP: minds 1
+  warn  FS116-derivation.md:689 (FS116-N2-RECIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-RECIP: prior art owed
+  claim FS116-N2-ANTI: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-N2-ANTI: minds 1
+  warn  FS116-derivation.md:709 (FS116-N2-ANTI): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-ANTI: prior art owed
+  claim FS116-N2-HEX6: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim FS116-N2-HEX6: minds 1
+  claim FS116-N2-HEX6: prior art partly
+  claim FS116-N2-HEX3: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim FS116-N2-HEX3: minds 1
+  warn  FS116-derivation.md:747 (FS116-N2-HEX3): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-N2-HEX3: prior art owed
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-RECIP (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-ANTI (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-HEX6 (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-SIXRING (derived from, minds 1)
+  claim FS116-RING-TRANSFER-C: governed by FS116-N2-FIVERING (hand, minds 1)
+  claim FS116-RING-TRANSFER-C: minds 1
+  warn  FS116-derivation.md:764 (FS116-RING-TRANSFER-C): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-RING-TRANSFER-C: prior art owed
+  claim FS116-S1-KAPPA: minds 2 — blind to: S1's record until V4's verdicts (48534b7c), told by its brief that a decided result rests on it (items 107, 108); method: three ring points and FS116-V4-DICHOTOMY against N-E1 at w (V4, Divergences on KAPPA row 1); the same model (Opus 5.5), one prior
+  claim FS116-S1-KAPPA: prior art partly
+  claim FS116-S1-PAIR: governed by FS116-S1-KAPPA (hand, minds 2)
+  claim FS116-S1-PAIR: minds 1
+  warn  FS116-derivation.md:813 (FS116-S1-PAIR): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-PAIR: prior art owed
+  claim FS116-S1-CLUSTER: minds 1
+  warn  FS116-derivation.md:831 (FS116-S1-CLUSTER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-CLUSTER: prior art owed
+  claim FS116-S1-RUNG: governed by FS116-O1-SATPIN (derived from, minds 2)
+  claim FS116-S1-RUNG: governed by FS116-S1-CLUSTER (hand, minds 1)
+  claim FS116-S1-RUNG: minds 2 — blind to: S1's record until 48534b7c, with item 108's caveat; method: FS116-V4-PARTNER (saturation at the edge point) against SATPIN's tangent clause, FS116-V4-MEET against CLUSTER; the same model (Opus 5.5), one prior
+  claim FS116-S1-RUNG: prior art partly
+  claim FS116-S1-LENS: governed by FS116-S1-KAPPA (hand, minds 2)
+  claim FS116-S1-LENS: governed by FS116-S1-PAIR (derived from, minds 1)
+  claim FS116-S1-LENS: governed by FS116-N1-GERM-S (derived from, minds 2)
+  claim FS116-S1-LENS: governed by FS116-N1-AXIS (derived from, minds 2)
+  claim FS116-S1-LENS: minds 1
+  warn  FS116-derivation.md:877 (FS116-S1-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-LENS: prior art owed
+  claim FS116-S1-EXIT: minds 1
+  warn  FS116-derivation.md:899 (FS116-S1-EXIT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-EXIT: prior art owed
+  claim FS116-S1-QF: governed by FS116-S1-LENS (derived from, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-EXIT (hand, minds 1)
+  claim FS116-S1-QF: governed by FS116-S1-CLUSTER (hand, minds 1)
+  claim FS116-S1-QF: governed by FS116-O1-SATPIN (derived from, minds 2)
+  claim FS116-S1-QF: minds 1 — and a second derivation by a different route (FS116-V4 § 2.4: the rung tiles cross in the crescent B(q, 1) ∖ B̄(p, 1), by Jordan), whose brief told it the first's verdict (item 107), so it is not counted as a blind second mind (items 108, 115); a blind second mind is owed
+  warn  FS116-derivation.md:926 (FS116-S1-QF): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-S1-QF: prior art owed
+  claim FS116-V4-CHORD: minds 1
+  claim FS116-V4-CHORD: prior art known
+  claim FS116-V4-DICHOTOMY: minds 1
+  warn  FS116-derivation.md:965 (FS116-V4-DICHOTOMY): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-DICHOTOMY: prior art owed
+  claim FS116-V4-MEET: minds 1
+  warn  FS116-derivation.md:981 (FS116-V4-MEET): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-MEET: prior art owed
+  claim FS116-V4-TWIST: minds 1
+  warn  FS116-derivation.md:996 (FS116-V4-TWIST): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-TWIST: prior art owed
+  claim FS116-V4-PARTNER: minds 1
+  warn  FS116-derivation.md:1013 (FS116-V4-PARTNER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-PARTNER: prior art owed
+  claim FS116-V4-OUTER: minds 1
+  warn  FS116-derivation.md:1030 (FS116-V4-OUTER): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V4-OUTER: prior art owed
+  claim FS116-Y3-SIX: governed by FS116-RING-TWIST-C (derived from, minds 2)
+  claim FS116-Y3-SIX: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y3-SIX: governed by FS116-N1-QFREE4 (derived from, minds 1)
+  claim FS116-Y3-SIX: minds 2 — blind to: Y3's record until V5's verdicts (320a3b53); method: FS116-V5-RING (non-Siamese against a tile's 60° reach; no simplicity) against Y3's tip count; the same model (Opus 5.5), one prior
+  claim FS116-Y3-SIX: prior art partly
+  claim FS116-Y3-TIPS: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y3-TIPS: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y3-TIPS: minds 2 — blind to: Y3's record until 320a3b53; method: the same argument (V5 § 4.1); the same model (Opus 5.5), one prior
+  claim FS116-Y3-TIPS: prior art partly
+  claim FS116-Y3-HUBCOL: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-HUBCOL: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-Y3-HUBCOL: minds 1
+  warn  FS116-derivation.md:1109 (FS116-Y3-HUBCOL): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-HUBCOL: prior art owed
+  claim FS116-Y3-TIGHT: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-TIGHT: minds 1
+  warn  FS116-derivation.md:1127 (FS116-Y3-TIGHT): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-TIGHT: prior art owed
+  claim FS116-Y3-NOQ: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y3-NOQ: minds 1
+  warn  FS116-derivation.md:1145 (FS116-Y3-NOQ): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-NOQ: prior art owed
+  claim FS116-Y3-LENS: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-LENS: governed by FS116-Y3-TIGHT (derived from, minds 1)
+  claim FS116-Y3-LENS: governed by FS116-Y3-NOQ (derived from, minds 1)
+  claim FS116-Y3-LENS: minds 1
+  warn  FS116-derivation.md:1165 (FS116-Y3-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-LENS: prior art owed
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-LENS (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-NOQ (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: governed by FS116-Y3-HUBCOL (derived from, minds 1)
+  claim FS116-Y3-TIGHTLENS: minds 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS (the lens corner at the far vertex) against Y3's NOQ and TIGHT straddles; the same model (Opus 5.5), one prior
+  warn  FS116-derivation.md:1184 (FS116-Y3-TIGHTLENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-TIGHTLENS: prior art owed
+  claim FS116-Y3-NBTIP: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y3-NBTIP: governed by FS116-N2-STAR (derived from, minds 1)
+  claim FS116-Y3-NBTIP: minds 1 — and a checking reading by FS116-V5 (blind to Y3's record until 320a3b53, but its route and conclusion were N7-HUB's outline in the list's § 8)
+  warn  FS116-derivation.md:1207 (FS116-Y3-NBTIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y3-NBTIP: prior art owed
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-TIGHTLENS (derived from, minds 2)
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-NBTIP (derived from, minds 1)
+  claim FS116-Y3-STARFORCE: governed by FS116-Y3-HUBCOL (derived from, minds 1)
+  claim FS116-Y3-STARFORCE: minds 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS with its images under the reflection at 30° and the half-turn, against Y3 § 3.2 rerun with NBTIP; the same model (Opus 5.5), one prior
+  claim FS116-Y3-STARFORCE: prior art partly
+  claim FS116-V5-NE1: minds 1
+  claim FS116-V5-NE1: prior art known
+  claim FS116-V5-RING: minds 1
+  claim FS116-V5-RING: prior art partly
+  claim FS116-V5-GERM: minds 1
+  claim FS116-V5-GERM: prior art partly
+  claim FS116-V5-OUT: minds 1
+  claim FS116-V5-OUT: prior art partly
+  claim FS116-V5-TIPSET: minds 1
+  claim FS116-V5-TIPSET: prior art partly
+  claim FS116-V5-LENS: minds 1
+  warn  FS116-derivation.md:1344 (FS116-V5-LENS): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-V5-LENS: prior art owed
+  claim FS116-N3-CONE: minds 1
+  claim FS116-N3-CONE: prior art partly
+  claim FS116-N3-PAIR: minds 2 — blind to: N3's record until 3647075d; method: the same route; the same model (Opus 5.5), one prior
+  claim FS116-N3-PAIR: prior art partly
+  claim FS116-N3-STAR2: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-N3-STAR2: minds 1
+  claim FS116-N3-STAR2: prior art partly
+  claim FS116-N3-SEMI: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-SEMI: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-N3-SEMI: minds 2 — blind to: N3's record until V5's verdicts (3647075d); method: FS116-V5-U1 for the centre's four colours and FS116-V5-DICHO for crossed-or-parallel, against FS112-N3-NOBOTH and FS114-N7-QOPP (V5 § 4.1); the same model (Opus 5.5), one prior
+  claim FS116-N3-SEMI: prior art partly
+  claim FS116-N3-CROSS: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-N3-CROSS: governed by FS116-N3-CONE (hand, minds 1)
+  claim FS116-N3-CROSS: minds 2 — on every clause but the last; blind to: N3's record until 3647075d; method: FS116-V5-U1's cones at p (V5 § 3.4); the same model (Opus 5.5), one prior; the last clause 1 and a checking reading (V5's blind verdict was GAP there, its stall closed after reading by N3's step through FS114-N7-QOPP at y, re-derived by V5-U1)
+  claim FS116-N3-CROSS: prior art partly
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-SEMI (derived from, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-CROSS (derived from, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-PAIR (hand, minds 2)
+  claim FS116-RING-TRANSFER-QC: governed by FS116-N3-STAR2 (derived from, minds 1)
+  claim FS116-RING-TRANSFER-QC: minds 1
+  claim FS116-RING-TRANSFER-QC: prior art partly
+  claim FS116-V5-QCOL: minds 1
+  claim FS116-V5-QCOL: prior art partly
+  claim FS116-V5-U1: minds 1
+  claim FS116-V5-U1: prior art known
+  claim FS116-V5-OUT2: minds 1
+  claim FS116-V5-OUT2: prior art partly
+  claim FS116-V5-DICHO: minds 1
+  claim FS116-V5-DICHO: prior art partly
+  claim FS116-V5-CROSS-S: governed by FS116-V5-U1 (hand, minds 1)
+  claim FS116-V5-CROSS-S: governed by FS116-V5-QCOL (hand, minds 1)
+  claim FS116-V5-CROSS-S: governed by FS116-V5-OUT2 (hand, minds 1)
+  claim FS116-V5-CROSS-S: minds 1
+  claim FS116-V5-CROSS-S: prior art partly
+  claim FS116-Y4-SYM: minds 1
+  warn  FS116-derivation.md:1620 (FS116-Y4-SYM): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-SYM: prior art owed
+  claim FS116-Y4-SPOKE: governed by FS116-Y3-STARFORCE (derived from, minds 2)
+  claim FS116-Y4-SPOKE: governed by FS116-Y3-NBTIP (derived from, minds 1)
+  claim FS116-Y4-SPOKE: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y4-SPOKE: governed by FS116-Y4-SYM (hand, minds 1)
+  claim FS116-Y4-SPOKE: minds 1
+  warn  FS116-derivation.md:1640 (FS116-Y4-SPOKE): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-SPOKE: prior art owed
+  claim FS116-Y4-Q1: governed by FS116-Y4-SPOKE (derived from, minds 1)
+  claim FS116-Y4-Q1: governed by FS116-Y3-STARFORCE (derived from, minds 2)
+  claim FS116-Y4-Q1: minds 1
+  warn  FS116-derivation.md:1661 (FS116-Y4-Q1): prior art owed — novelty unmeasured; a standing finding
+  claim FS116-Y4-Q1: prior art owed
+  claim FS116-Y4-FLANK: minds 1
+  claim FS116-Y4-FLANK: prior art partly
+  claim FS116-Y4-EMPTY: governed by FS116-Y4-FLANK (hand, minds 1)
+  claim FS116-Y4-EMPTY: governed by FS116-Y3-SIX (derived from, minds 2)
+  claim FS116-Y4-EMPTY: governed by FS116-Y3-TIPS (derived from, minds 2)
+  claim FS116-Y4-EMPTY: governed by FS116-RING-GERM (derived from, minds 2)
+  claim FS116-Y4-EMPTY: minds 1 — a blind second mind running (FS116-V6, the list's § 15)
+  claim FS116-Y4-EMPTY: prior art partly
+  claim FS116-Y4-OBST: governed by FS116-Y4-EMPTY (derived from, minds 1)
+  claim FS116-Y4-OBST: minds 1
+  claim FS116-Y4-OBST: prior art partly
+  entries: 86  derived: 79  stalled, gapped or refuted: 7
+quotes
+  statements named in more than one place: 0
+controls
+  ok    disk-two-colour: printed 'DISKEXACT OK'; with the fault planted ('' → 'plant --') it printed 'DISKEXACT FAIL' — it fires
+  ok    fs116-y1-f15: printed '=> F(1/5): ALL HOLD'; with the fault planted ('' → '--plant lift') it printed '=> F(1/5) plant lift: FAILS' — it fires
+  ok    fs116-y2-sixfrag: printed '=> FRAGMENT: VALID, NON-SIAMESE, SIX COLOURS AT p'; with the fault planted ('' → '--plant grow') it printed '=> FRAGMENT: FAILS' — it fires
+  ok    v3-echo-a: printed 'ECHO-A: hypotheses hold and 2w - p lies in the closure of no X-tile'; with the fault planted ('' → '--plant') it printed 'ECHO-A: no verdict (the colouring is not' — it fires
+  ok    axis-touch-f15: printed 'AXIS-TOUCH F(1/5): ALL AS DERIVED'; with the fault planted ('' → '--plant') it printed 'AXIS-TOUCH F(1/5): NOT AS DERIVED' — it fires
+  ok    rung-ceil: printed 'RUNG-CEIL: |V-(x*,1)|=1 True; 1/5 inside True; 1/2 outside True; x*=0.49098477'; with the fault planted ('' → '--plant') it printed 'RUNG-CEIL: |V-(x*,1)|=1 False; 1/5 insid' — it fires
+  ok    exit-identities: printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-form True; Q=y_a True; |y_a-y_5|=1 True; dQ-form True; lower d<0 at 3675/3675; upper d>0 at 3675/3675'; with the fault planted ('' → '--plant') it printed 'EXIT: P=y_b True; |y_b-y_3|=1 True; dP-f' — it fires
+  ok    fs116-y3-star: printed 'satisfying assignments: 1'; with the fault planted ('' → '--plant nbtip') it printed 'satisfying assignments: 26' — it fires
+  ok    fs116-n3-semi: printed 'SEMI ALL OK'; with the fault planted ('' → '--plant') it printed 'SEMI VIOLATIONS 16' — it fires
+  ok    fs116-y4-flank: printed "FLANK: 12 of 12 edge pairs below 1; EMPTY's contradiction holds"; with the fault planted ('' → '--plant straight') it printed 'FLANK: 0 of 12 edge pairs below 1; EMPTY' — it fires
+  ok    fs116-y4-flank-seven: printed 'double-tip positions whose two flank ring arcs share a colour: 6 of 6'; with the fault planted ('' → '--plant three') it printed 'double-tip positions whose two flank rin' — it fires
+  controls: 11  fired on their faults: 11
+GATE: PASS (0 failures, 28 warnings)
