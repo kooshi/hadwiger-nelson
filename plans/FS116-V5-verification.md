@@ -404,7 +404,7 @@ verification: FS116-Y3-SIX
   verdict: derived
   method: V5-RING: window parity from the alternation c(θ + 60°) ≠ c(θ), three changes in a window killed by merging ring arcs into one tile (non-Siamese) against the 60° reach of a tile; the first derivation's method not known until stage 4
   attack: § Attack on FS116-Y3-SIX
-  divergences: none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's
+  divergences: § Divergences on FS116-Y3-SIX
   counterexamples: thin truth: SIX with "simple" deleted — V5-RING never uses simplicity, so the hypothesis is idle
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -417,7 +417,7 @@ verification: FS116-Y3-TIPS
   verdict: derived
   method: a hub's two tips both non-consecutive at p with the antipodal hub's tip, against a 4-cycle (V5-TIPSET, § 2.3); the pattern by enumerating the tip map; the first derivation's method not known until stage 4
   attack: § Attack on FS116-Y3-TIPS
-  divergences: none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's
+  divergences: § Divergences on FS116-Y3-TIPS
   counterexamples: none — cusp tiles at p, two tips sharing an edge to their hub, and the four labellings up to rotation, searched by hand in § Attack on FS116-Y3-TIPS
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -430,7 +430,7 @@ verification: FS116-Y3-NBTIP
   verdict: derived
   method: the tip covers the open inner cone (V5-GERM), which points into both neighbours' open discs; non-Siamese then removes the colour; the first derivation's method not known until stage 4
   attack: § Attack on FS116-Y3-NBTIP
-  divergences: none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's
+  divergences: § Divergences on FS116-Y3-NBTIP
   counterexamples: none — cusp tips at the hub and the double tips' far neighbours, by hand in § Attack on FS116-Y3-NBTIP
   minds: 1 — a checking reading on the first two clauses (their route and conclusion were in N7-HUB's outline, given); the third clause's derivation is mine, but follows from the first two in one line; blind to the proposing record, the same model (Opus 5.5)
   grade: hand
@@ -443,7 +443,7 @@ verification: FS116-Y3-TIGHTLENS
   verdict: derived
   method: V5-LENS: the corner of each lens at its far vertex can carry only the double tip's opposite colour, which forces an outer tile of the single tip's colour at the double-tip hub, and V5-OUT pins the edge; the first derivation's method not known until stage 4
   attack: § Attack on FS116-Y3-TIGHTLENS
-  divergences: none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's
+  divergences: § Divergences on FS116-Y3-TIGHTLENS
   counterexamples: thin truth: (Q1)–(Q5) — each holds by its first disjunct alone (V5-LENS (e)); the second and third disjuncts never hold in the class
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -456,7 +456,7 @@ verification: FS116-Y3-STARFORCE
   verdict: derived
   method: V5-LENS and its images under the reflection at 30° and the half-turn; under readings (R-LENSPT) and (R-ORDER) of § 2.0; the first derivation's method not known until stage 4
   attack: § Attack on FS116-Y3-STARFORCE
-  divergences: none — the first derivation stays fenced until this group's verdicts and the second group's are committed; the table is stage 4's
+  divergences: § Divergences on FS116-Y3-STARFORCE
   counterexamples: none — the alternative stars solving (Q1)–(Q5), the two orders at each hub and both cases at y_1 (4 alone; 4 then 2), by hand in § Attack on FS116-Y3-STARFORCE
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -698,7 +698,7 @@ verification: FS116-N3-SEMI
   verdict: derived
   method: a case split by kind and by which germs of the other pair lie on (Q) arcs; the edges at y forced to the tangents of ω(u), ω(v) by first-order germ exclusions, the centre's four colours by V5-U1, and (c)'s colour by V5-DICHO's gaps and V5-OUT2; the first derivation's method not known until stage 4
   attack: § Attack on FS116-N3-SEMI
-  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  divergences: § Divergences on FS116-N3-SEMI
   counterexamples: none — degenerate semi-hubs (two colours, tangent non-arc edges, long (Q) arcs) and the single-shared-colour pairs, by hand in § Attack on FS116-N3-SEMI and V5-DICHO
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -711,7 +711,7 @@ verification: FS116-N3-PAIR
   verdict: derived
   method: the inner tiles are p's (non-Siamese), and one tile of p along both germs would have closure points more than 1 apart (V5-NE1); the first derivation's method not known until stage 4
   attack: § Attack on FS116-N3-PAIR
-  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  divergences: § Divergences on FS116-N3-PAIR
   counterexamples: thin truth: PAIR with "simple" deleted — the derivation never uses simplicity
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5)
   grade: hand
@@ -724,7 +724,83 @@ verification: FS116-N3-CROSS
   verdict: gap: p is a semi-hub of kind O of the ring of y — an arc of ω(y) through v (or u) inside B(p, 1) with X̄ on y's side and X beyond, which would put a (Q) arc on the outer pair, is not excluded (at most one of the two is); every other clause derived
   method: V5-U1's cones at p put every side cone in a named tile, so no tile of p reaches y and V5-OUT2 removes a, b from y's outer colours; y's ring at p read through the four tiles' ranges; the first derivation's method not known until stage 4
   attack: § Attack on FS116-N3-CROSS
-  divergences: none — the first derivation stays fenced until this commit; the table is stage 4's
+  divergences: § Divergences on FS116-N3-CROSS
   counterexamples: thin truth: CROSS's first clause — no tile of p has y in its closure at all, so it holds vacuously; thin truth: the hypotheses "every tile at y a cone of positive angle" and "radius above 2" — unused in every clause derived
   minds: 2 — blind to: the proposing record's argument, every FS-116 record and every other mind's verdict (fenced until stage 4); method: not known until stage 4; blind, the same model (Opus 5.5) — for the clauses derived; the last clause has no second mind here
   grade: hand
+
+## Stage 4 — SAVED
+
+*Opened after the verdicts' commits (stage 2: 320a3b53; stage 3: 3647075d), at 2026-10-03 16:58 UTC: `plans/FS116-Y3-construction.md` §§ 2–4 and
+`plans/FS116-N3-proof.md` §§ 2–3 (§ 1.2 not read). Nothing else in the fence was opened.*
+
+### 4.1 Divergence tables
+
+#### Divergences on FS116-Y3-SIX
+
+| # | item | this route | the first derivation (Y3 § 2.1) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the count | ring arcs of one colour within 60° are one tile (non-Siamese), against a tile's 60° reach (V5-RING) | each change point has a tip; a tile of `p` reaches one closed 60° arc, so `4(2j + 2) ≥ 6(2j + 1)` | route | kept both; mine uses no simplicity and no tip, so "simple" is idle in SIX (thin truth), while theirs spends it |
+| 2 | four colours at `p` | re-derived (V5-RING step 3) | FS116-N1-QFREE4, one mind | route | kept both |
+
+#### Divergences on FS116-Y3-TIPS
+
+| # | item | this route | the first derivation (Y3 § 2.2) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | one tip per hub | the antipodal hub's tip is non-adjacent to both | the same | route | the same argument; no independent second route |
+| 2 | which single tip is `T3` | the cone ranges forbid the order `T1, T4, T2, T3` | the tile after `T1` holds `[90°, 150°]`, which no tip of `y_5` has | route | kept both |
+
+#### Divergences on FS116-Y3-NBTIP
+
+| # | item | this route | the first derivation (Y3 § 4.1) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the argument | the open inner cone points into both neighbours' discs | the same | route | identical, and its idea was given me (N7-HUB's outline): one mind, a checking reading |
+
+#### Divergences on FS116-Y3-TIGHTLENS
+
+| # | item | this route | the first derivation (Y3 §§ 3.1–3.2) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | excluding `X̄` at `q_k` | an interior point of `R_{1,2}` on `ω(q_1)` near `y_1` (the arc `A*`) | `R_{k,k+1}` straddles distance 1 from points near `q_k` (NOQ, TIGHT) | route | kept both |
+| 2 | excluding the single tip's outer colour at `q_k` | NBTIP first, then the adjacency of `O_2` with `R_{2,3}` (= their NOQ) | at stage 3 without NBTIP, leaving the disjunct "`δ_1 = 30° ∨ δ_2 = 210°`"; removed at stage 4 | route | same content once their stage 4 is read: both minds hold that each lens forces its first disjunct; (Q1)–(Q5) as frozen are weaker (thin truth) |
+
+#### Divergences on FS116-Y3-STARFORCE
+
+| # | item | this route | the first derivation (Y3 § 4.2) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the star | V5-LENS and its images under the reflection at 30° and the half-turn | re-runs § 3.2 with NBTIP at each `q_k`; a truth table over 81 assignments as a check | route | kept both |
+| 2 | "counter-clockwise 2, 3 at `y_0`" | reading (R-ORDER): from the clockwise ring tile, 2 first | "two outer tiles, 4 then 2 counter-clockwise" at `y_1` | wording | the readings agree; the phrase stays undefined in the list (§ 14's note) and wants its sense written |
+| 3 | "the lens points" | (R-LENSPT): points of `L_k` near `q_k` | "the colour near `q_1` in the lens" | wording | the readings agree |
+
+#### Divergences on FS116-N3-SEMI
+
+| # | item | this route | the first derivation (N3 § 2.4) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the edge at `y` on `ω(u)` or `ω(v)` | tangent there, and both side colours carried at the centre, so `ω` enters neither sector | CONE (c): one tile inside `B̄(w, 1)`, the other missing `B(w, 1)` | route | kept both |
+| 2 | the centre's four colours | V5-U1 (side cones) | FS112-N3-NOBOTH | route | kept both |
+| 3 | crossed or parallel | V5-DICHO (side cones at `p`, every case) | FS114-N7-QOPP at `p` (one mind; `p` has degree 4 in this class, so its scope holds) | route | kept both; the § 13 note's check is done twice, differently |
+
+#### Divergences on FS116-N3-PAIR
+
+| # | item | this route | the first derivation (N3 § 2.2) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the argument | inner tiles are `p`'s; one tile along both germs breaks the diameter | the same (the distance from `u` to `v` is √3) | route | identical routes |
+
+#### Divergences on FS116-N3-CROSS
+
+| # | item | this route | the first derivation (N3 § 3.1) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | tiles of `p` at `y` | none at all: `T_a`, `T_b` hold points of their (Q) arcs beyond `u`, `v`, more than 1 from `y` | `T_a`, `T_b` left at the single directions `210°`, `150°` (cusps not excluded) | route | both prove the clause; mine shows it vacuous and the positive-angle hypothesis idle (thin truth). Their step 1 is not wrong — it stops short |
+| 2 | the tip pair of `p` in `y`'s ring | both germs on (Q) arcs (V5-OUT2 at `v`, `u`): `p` is a *full* semi-hub of `y` | at least one on (Q) (RING-GERM (i) at `p`) | route | kept both; mine is stronger (full) — crossed or parallel stays undecided in both |
+| 3 | the outer pair of `p` in `y`'s ring | **my stall** (§ 3.4 step 6): an arc of `ω(y)` through `v` with sides `X̄` and `X` not excluded | FS114-N7-QOPP at `y`: a (Q) arc of `y`'s ring joins opposite tiles of `y`, and `R`, `R′` are adjacent | route | not a disagreement of truth: their step closes my stall. Re-derived after reading by V5-U1 at `y`: an arc of `ω(y)` near `v` with sides `X̄`, `X` puts `R` in a cone that misses its own directions `(90°, 150°)` (either orientation) — a checking reading, the idea given. The clause stands at one mind plus a checking reading |
+
+### 4.2 The count, the scores, the retractions
+
+- **Truth divergences: none.** Every one of the eight statements is TRUE on both sides once the first derivations are read; CROSS's last clause
+  was my stall, closed by their step (a checking reading on my side).
+- **Retractions: none** (zero for this mind). Predictions: 8 registered, 7 met; the miss is CROSS (predicted derived at 0.35, blind verdict a gap);
+  Brier 0.212 (the gate's count). My registered breaks failed everywhere but at CROSS, where the stall sat at the clause I named second.
+- **Minds.** SIX, TIPS, TIGHTLENS, STARFORCE, SEMI, PAIR: two (blind, the same model); TIPS and PAIR by the same route as the first derivation,
+  SIX, TIGHTLENS, SEMI by different routes at named steps. NBTIP: one, plus a checking reading (its route was given in N7-HUB's outline). CROSS: two
+  on every clause but the last, which stands at one plus a checking reading.
+- **What this verification could not supply**: whether the statements are the ones meant (a reader of intent); and whether any fragment of the
+  first group's class exists at radius √3 — both sides now force HEX3's star and the outer colours, and neither builds or excludes the object.
