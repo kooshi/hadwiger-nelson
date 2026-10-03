@@ -1,22 +1,29 @@
-# Session handoff — 2026-10-03: Workflow 3.1 adopted; next, a fresh session for FS-129
+# Session handoff — 2026-10-03: FS-129, the cross-application audit, is Opened; its first jobs launch from a fresh session
 
-*Rewritten 2026-10-03 22:17 UTC by Keryx after the brief gate's fix. Current state only; the day's history is in git, in the two close
-inventories and in `plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
+*Rewritten 2026-10-03 22:38 UTC by Keryx. Current state only; the day's history is in git, in the close inventories and in
+`plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
 
 ## 1. Read first
 
-1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, this session's
-   output style predates the refinement: restart the session before launching anything (the output style loads only at session start).
-2. **Start FS-129 in a fresh session.** Agents receive the parent session's loaded `CLAUDE.md`, not the file on disk, and this session
-   loaded the Workflow 3.0 text; a fresh session loads 3.1's.
-3. **No milestone is open and no agent is running.** FS-116 and FS-121 are closed undecided (rows 142–148); their inventories are ticked in
-   full; the front page, `plans/FRONTIER-STUBS.md` and the Proof Atlas (artifact https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx) are current.
-4. **Kooshi's order** (2026-10-03):
-   1. **FS-129, the cross-application audit** (`plans/STUB-cross-application-audit.md`), a special case outside the ranking; its method and
-      staffing are its opening's to propose and Kooshi's to approve.
-   2. **The Lean backlog**, in a session of its own: the hand results of the milestones closed before Workflow 3.1 (about 75 derivation
-      entries name de Bruijn: FS-111 16, FS-114 3, FS-116 41, FS-121 15; earlier milestones' hand results besides).
-   3. Then Poros's ranking, whose top is FS-123, the (Q)-free ring.
+1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, the
+   session's output style predates the refinement: ask Kooshi to restart it before launching anything. **`/clear` is not enough** — it
+   reloads `CLAUDE.md` but not the output style (`plans/FS129-close-inventory.md` item 2).
+2. **FS-129, the cross-application audit, is Opened, and no agent is running.** Read, in order: its plan
+   (`plans/FS129-cross-application-audit.md`, which holds Kooshi's four decisions verbatim in § 1), its inventory
+   (`plans/FS129-close-inventory.md`), and its stub (`plans/STUB-cross-application-audit.md`).
+3. **What to do next**, in order:
+   1. Invoke `peer-delegation`; write the briefs for **FS129-IX1, the index** (the `clerk` agent, Sonnet) and **FS129-Q1, the question
+      card** (the `poros` agent, Opus) at `data/fs129/briefs/`, from the plan's § 3, § 4 and § 6; gate each
+      (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`); launch both at once.
+   2. When IX1 hands back, check five of its index records by hand against their derivation files and log which in the inventory.
+   3. Launch the two pass-1 readers, **FS129-OA1** (arithmetic era) and **FS129-OR1** (regularity-wall era), as `general-purpose` agents with
+      `model: "opus"`. Their briefs tell them to read the deriver's identity as a file (`.claude/skills/ephodos/SKILL.md`, then
+      `.claude/agents/ephodos.md` from `# Ephodos in lean-dir — the workflow` on), never to load the grokkings in full (Kooshi's decision 2).
+      A `general-purpose` agent carries the Agent tool, so the no-spawn rule (`plans/STANDING-RULES.md` rule 1) is the brief's to state.
+   4. Each era lane then runs pass 2 and pass 3, then the record job, then the Lean backlog's input and the re-rank (plan § 3, § 6).
+4. **Kooshi's order** (2026-10-03): FS-129; then **the Lean backlog**, in a session of its own, from the input FS-129 prepares
+   (`plans/LEAN-BACKLOG.md`: the 77 results handed to de Bruijn and what they rest on, in dependency order, with FS-129's merges applied,
+   and FS-129's own compositions); then Poros's ranking, whose top is FS-123, the (Q)-free ring.
 5. **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included.
 
 ## 2. Workflow 3.1, in one paragraph

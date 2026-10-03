@@ -252,9 +252,10 @@ theorem record, and no line per theorem goes to § B.
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: the top three here, the rest there. Poros ranks, choosing the next
 milestone; Kooshi may override.*
 
-**Open milestones.** None is open. **Next, in Kooshi's order** (2026-10-03): **FS-129, the cross-application audit**
-(`plans/STUB-cross-application-audit.md`; a special case, unranked); then **the Lean backlog**, in a session of its own — the hand
-results of the milestones closed before Workflow 3.1, formalized before the pipeline continues; then the top of the ranking. **M63**
+**Open milestones.** **FS-129, the cross-application audit**, is Opened (`plans/FS129-cross-application-audit.md`; a special case,
+unranked); its first jobs, the index and Poros's question card, have not launched. **Next, in Kooshi's order** (2026-10-03): **the Lean
+backlog**, in a session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions, from the
+input FS-129 prepares (`plans/LEAN-BACKLOG.md`) — formalized before the pipeline continues; then the top of the ranking. **M63**
 stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it.
 
 **Ranked stubs** (the top three; each bearing stated against the answer):

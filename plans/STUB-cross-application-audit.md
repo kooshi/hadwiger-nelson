@@ -1,4 +1,4 @@
-# FS-129 — the cross-application audit: where does each novel result this project holds apply to the others? (stub)
+# FS-129 — the cross-application audit: where does each novel result this project holds apply to the others? (stub; Opened 2026-10-03)
 
 *Filed 2026-10-03 17:56 UTC by Keryx, the coordinator, at Kooshi's word, as a **special case**: it is not ranked among the stubs. It runs after the joint filing of
 FS-116's and FS-121's closes and after the workflow refinement that follows them, in that order. Its question section, bearings and bearing on the
@@ -47,12 +47,15 @@ whose open steps it closes; then do three things with what is found:
 - **The consolidation run of 2026-09-27** (`plans/CONSOLIDATION-2026-09-27.md`): the last whole-corpus pass.
 - **G49**: in-house vocabulary hid prior art; the same vocabulary can hide a result from its own neighbours, one milestone to the next.
 
-## Scale, and what is the opening's to decide
+## Method and staffing: decided (Kooshi, 2026-10-03)
 
-About 1,300 theorems make about 850,000 unordered pairs, so a pairwise reading is not the method; an index is (by mechanism, by object, by
-hypothesis shape). The method, the staffing (head-count and model are Kooshi's: a crunch under `plans/PROTOCOL-crunch.md` is one shape), the
-stages, the registered expectations and the failure clauses are the opening's. Any derivation it produces meets the same standard as every other:
-held once its Lean module passes the gate (Workflow 3.1); until then, derived, one mind.
+**Opened.** The method, the passes and the staffing are Kooshi's decisions, recorded with his words in `plans/FS129-cross-application-audit.md`
+(the plan) § 1: never pairwise (about 1,300 theorems make about 850,000 pairs) but one index, the dependency map, then three passes in
+order — open steps, mechanisms, merges and strengthening — split into two era lanes that each read the whole corpus against their own held
+results, so the arithmetic era is asked whether it bears on the measurable question; within the cap of three agents, the readers
+`general-purpose` agents that read the deriver's identity rather than the agent file that preloads the grokkings; and the audit prepares
+the Lean backlog's input. The registered expectations and the failure clauses are the plan's § 7 and the jobs'. Any derivation it produces
+meets the same standard as every other: held once its Lean module passes the gate (Workflow 3.1); until then, derived, one mind.
 
 ## Bearing on the answer
 
