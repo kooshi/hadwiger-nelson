@@ -32,6 +32,8 @@ Everything else is one mind or GAP — see the inventories.
 
 ## Rules in force
 
+- **At most three agents at a time, verifiers included** (Kooshi, 2026-10-03; `plans/FS116-close-inventory.md` item 74). Six jobs stopped on the halt at 2026-09-29 02:42 and were resumed by message on 2026-10-03; launch nothing new until fewer than three run.
+
 - Commit subjects stay neutral while the two verifiers run.
 - The announcement rule (both inventories, top): held = frozen list + two minds, the second blind with its verdict committed first.
 - Claim lists frozen: `data/fs116/claims.md`, `data/fs121/claims.md` (blindness edits only, recorded in their headers).
