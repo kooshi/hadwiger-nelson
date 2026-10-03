@@ -26,6 +26,7 @@ TARGETS = [  # (the file a mind loads, the skill whose body is its identity)
     (".claude/agents/ephodos.md", "ephodos"),
     (".claude/agents/ephodos-verifier.md", "ephodos"),
     (".claude/agents/debruijn.md", "debruijn"),
+    (".claude/agents/debruijn-implementer.md", "debruijn"),
 ]
 MARKER = re.compile(r"^# .+ in lean-dir — the workflow$", re.M)
 
