@@ -95,3 +95,8 @@ Derived-decisive if FS-103's F1 holds (it is rung D); success per milestone very
 *Would have searched here:* nothing for (0)–(c); (d) is a finite LP and waits for 2026-10-01.
 
 *At FS-111's close:* the regularity route at five — a maximal five-cover with regular classes and a locally finite boundary graph gives `χ_m⁰(ℝ²) ≥ 6` through AE-MAP6 (FS111-M2-REDUCE-C, two minds) — is equivalent to this stub's YES given AE-MAP6 (FS111-VM2-EQ5): a reformulation, carried in FS-121.
+
+*At FS-116's close (2026-10-03, FS116-Z2):* FS116-O1-YESLIM (held, two minds): for every `k`, valid `k`-coloured fragments — segment-and-arc maps on
+discs, no two interior points of one colour at distance 1 — on discs of every radius give `χ_m⁰(ℝ²) ≤ k`, with no map in the limit. So this stub's NO side
+(a CP five-colouring) can be supplied by valid five-coloured fragments on growing discs, and its YES (`χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6`, row 130) forbids them: some
+radius carries no valid five-coloured fragment on any disc.

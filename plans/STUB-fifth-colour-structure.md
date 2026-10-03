@@ -98,6 +98,10 @@ Medium-high as a frame — it is the only candidate for the algebra the 5 → 6 
 theorem — and low as work until D1 or D2 produces a statement; until then it is a reading room with one measurement (phase A) that
 is cheap. It subsumes FS-2 (Kempe classes) for the field that matters.
 
+*At FS-116's close (2026-10-03, FS116-Z2):* FS116-O1-YESLIM (held) at `k = 5`: valid five-coloured fragments on discs of every radius give
+`χ_m⁰(ℝ²) ≤ 5`, hence `χ(ℝ²) = 5` with no MR — so a construction for this stub's YES need be neither a map of the plane nor periodic, only fragments on
+growing discs.
+
 ## 8. Addresses
 
 `tools/additive.py` (M56's dial and `kempe`), `tools/rigidity.py`, `tools/arena_sweep.py`, the H2 interface encoder;

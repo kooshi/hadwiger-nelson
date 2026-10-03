@@ -40,6 +40,10 @@ FS121-D1-proof.md §§ 3.2–3.3 and none of D1's attempts.
 it moves no value. A YES by formula at `k ≥ 7` refutes nothing at six (W-NEG), but it inhabits classes that every lemma of FS121-D1 is about, kills
 the reading that honest classes are segments and (Q) arcs, and returns C121-NOLRA and C121-R2-FOUR to separate questions.
 
+**At FS-116's close (2026-10-03, FS116-Z2).** The same split-or-tangent dichotomy, read at a vertex of a saturated fragment: every edge at a four-colour vertex is a unit
+arc about a ring point carrying both side colours, or a tangent segment or arc of radius at least 1 (FS116-O1-SATPIN, held). A NO here would leave, in an
+honest saturated REG-J′ colouring, only segments as tangent edges at such a vertex — the cross of FS116-S1-QF's class (FS-125).
+
 ## Owed second minds (before anything final rests on them)
 
 FS121-Z1-NOCURVED; FS121-D2-INCURVED, -EXT, -THIN, -PERFIN; FS121-V5-RAY, -SYM-UP, -SYM-CPT, -LOC; FS121-D1-PENCILWIN, -DOUBLE; FS111-M2-INTRAD's

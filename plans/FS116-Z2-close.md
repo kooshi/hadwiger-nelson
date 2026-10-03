@@ -267,3 +267,66 @@ FS116-Y2's (§ 2.0) four as registered and one lost toward a stronger result (al
 allowed). FS116-N3, -S1, -Y3, -Y4 registered none.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the successor stubs, and the bearing lines
+
+### 3.1 The stubs (each under the stub rule: plain language, what FS-116 held, the questions in order, bearing, owed minds, construction targets, prior-art debts, provisional expectations, failure clauses, deliverables, bearings)
+
+- **FS-123, `plans/STUB-qfree-ring.md` — the (Q)-free ring.** Opens with the invention signal on the bends (§ 1.5, both sides verbatim, no side picked):
+  does a fragment bent on a neighbourhood of `B̄(p, 1 + ε)` stay in FS116-Y4-EMPTY's class? If yes, EMPTY closes every (Q)-free ring at `1 + ε` in the
+  non-Siamese simple class. Then the (R2)-arc ring directly (item 126, quoted), OC, the semi-hub sharing its tip; then EMPTY's Siamese and non-simple forms.
+- **FS-124, `plans/STUB-q-ring.md` — the (Q) ring and the five- and six-colour vertices.** SEMI-PAR3, the disk's corner, crossed reciprocity, the five- and
+  six-colour vertices, the recurrence (N2's Kneser reading), FS114-K1's (Q) residues, the Siamese rungs last, and DISC-F and LOCAL-DENSE (never worked).
+- **FS-125, `plans/STUB-saturated-local.md` — the saturated local exclusion.** FS-116's D0: QF's blind second mind first, SAT-STRIP's G3, G1, G2, SAT-QFREE's
+  touch point, SATPIN-PER, NO-SAT, Y-SAT; consumed by route M's honest branch with FS-128's TOP₆.
+
+**Merged or apart.** Apart, three ways, by what each case needs first and who consumes it: FS-123 has a cheap first question that may close its whole
+case; FS-124 is the bulk of C114-LOCAL-F and the YES side's home (every held positive past `√3` has (Q) arcs, row 136); FS-125 is a different class with a
+different consumer (route M's honest branch and FS-128). The Siamese and non-simple forms ride as the last rung of FS-123 and FS-124 rather than a stub of
+their own, since each needs the non-Siamese case's argument first (G86). DISC-F and LOCAL-DENSE ride in FS-124, the case set they would unify. No number
+is unused: FS-123, FS-124, FS-125.
+
+### 3.2 Every stub-to-mint item and owed second mind, placed or declined
+
+| item (inventory) | placed |
+|---|---|
+| 126 (FLANK's mechanism on (R2)-arc rings, the shared-tip semi-hub, OC) | FS-123, question 2 |
+| 136 (the invention signal on the bends) | FS-123, question 1, both sides verbatim |
+| 40 (the disk-corner configuration beyond radius 2) | FS-124, case 2 |
+| 53 (a qualifying window has no model) | FS-124, § Definitions and tools owed |
+| 56, 83 (SAT-STRIP's stalled form; Y-SAT's target G1, G2; the proof side's G1) | FS-125, questions 1 and 4 |
+| 61 (the six-colour vertex as a ring type) | FS-124, case 4 |
+| 63, 99 (prior-art debts: thread 8; the map-colouring vocabulary) | FS-124, § Prior-art debts |
+| 67 (ring type as the pair (ring word, star)) | FS-124, § Definitions and tools owed |
+| 69 (blind minds on STAR, RECIP, ANTI, HEX6, HEX3, RING-TRANSFER-C) | FS-124's owed list (STAR, RECIP, ANTI, RING-TRANSFER-C's non-vacuous clauses); **declined** for HEX6, HEX3: true vacuously |
+| 96, 97 (SEMI-PAR3 by formula; the proof side's next objects) | FS-124, cases 1 and 2 |
+| 98 (the one-ray `locate`) | FS-124, § Definitions and tools owed |
+| 108, 115 (QF's blind second mind, left owed by Kooshi) | FS-125, question 0 |
+| 113 (V4's lemmas unsearched) | FS-125, § Prior-art debts |
+| 118 (NBTIP's and CROSS's last clause's blind minds) | CROSS's last clause: FS-124's owed list; **NBTIP declined**: it is true vacuously (FS116-Y4-EMPTY, held), so a blind check would derive a statement about an empty class |
+| 128 (FLANK, EMPTY, SPOKE unsearched) | FS-123, § Prior-art debts |
+| FS116-Y4-FLANK (one mind), FS114-N7-3T's kills and FS114-N7-HUB on (R2) rings (one mind), FS116-V6's lemmas, FS114-N3-LOCAL's lemmas | FS-123's owed list |
+| FS114-K1's (Q) residues (the wrap, the (Q)-pinwheel, E1, E2's S6, the Reuleaux `(2, 1, 1, 0)`) | FS-124, case 6; OC to FS-123 |
+| S1's PAIR, CLUSTER, LENS, EXIT; V4's lemmas; Y1's STRIPCEIL, NOTCH | FS-125's owed list |
+| SATPIN-PER, NO-SAT (§ 4, never worked) | FS-125, question 3 |
+| DISC-F, LOCAL-DENSE (§ 6, never worked) | FS-124, case 8 |
+| Row 134's base, Lemma 4 at cusps (BASE-V) | named in all three owed lists; stays BASE-V's |
+
+### 3.3 The bearing lines (`tools/fs116_z2_bearings.py`: each insertion before an anchor found exactly once; a stub already carrying FS-116's line is refused; its plant, an altered anchor, exits 1)
+
+| stub | what bears |
+|---|---|
+| `plans/STUB-local-exclusion.md` (FS-116) | FS-121's D8 line, verbatim, then FS-116's: not landed; EMPTY, YESLIM, SATPIN held; the placing rule; the three successors. And a dated note in § Prior-art debts (item 19: `a701Kwnhp_A` held; Sirgedas's sentence filed) |
+| `plans/STUB-route-t-count.md` (FS-117) | FS-121's D8 line, verbatim, then FS-116's: EMPTY on K1's (Q)-free case, the bends question; "no step a count". G91 added to its provisional bearings |
+| `plans/STUB-top-colour.md` (FS-128) | NO-SAT not landed, the parking stands; SATPIN and QF; FS-125 |
+| `plans/STUB-forced-pair.md` (FS-122) | a datum for R1's carried card: EMPTY's margin, V6-HUG's identity, is second order in the flank lengths (a reading, one mind) |
+| `plans/STUB-cp-plane-six.md` (FS-104) | YESLIM at `k = 5`: a CP five-colouring can be supplied by five-coloured fragments on growing discs |
+| `plans/STUB-fifth-colour-structure.md` (FS-44) | the same, at five: a construction need be neither a map nor periodic |
+| `plans/STUB-hole-dial.md` (FS-109) | YESLIM: W's side readable on exact fragments by their largest radius |
+| `plans/STUB-pinch-at-junction.md` (FS-120) | RUNG: a saturated edge's first rung; the cross is a pinch read at a four-colour junction, on a fragment |
+| `plans/STUB-curved-pencils.md` (FS-126) | SATPIN's split-or-tangent dichotomy at a vertex |
+
+**Nothing bears** on FS-115 (the stuck ray: the NO needs no ray, row 137, and FS-116 used none), FS-127 (lateral extent), FS-129 (the audit: FS-116's rows join
+at their filing, as its stub says).
+
+## Stage 3 — SAVED

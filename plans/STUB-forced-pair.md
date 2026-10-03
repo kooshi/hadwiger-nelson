@@ -39,6 +39,12 @@ why the map line never needed (A); so this route and FS-121's meet nowhere below
 **At FS-121's close (2026-10-03, FS121-Z1).** Nothing of FS-121 bears on this route below the answer. One colour-generic tool is shared and untested
 here: any a.e.-proper colouring becomes a measurable Grundy colouring without raising a point's colour index (FS121-D3-GRUNDY, held).
 
+**At FS-116's close (2026-10-03, FS116-Z2).** A datum for the carried card `do-fs114-kills-survive-a-band`, not its answer (the card asks FS114-Y4-RSTOPALL): FS-116's held
+kill, FS116-Y4-EMPTY, closes on FS116-V6-HUG's identity `|a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2)`, a deficit of order `st` in the angular
+lengths `s, t` along which the two flank tiles hug the unit circles from the hubs, which nothing in its class bounds below — the second-order shape the
+card's hunch names (a reading, FS116-Z2, one mind; untested at a band). FS116-O1-YESLIM (held) puts the YES side on fragments on growing discs, so a robust
+NO needs its margin bounded below independently of the complexity.
+
 ## Registered expectations (instruments, never caps)
 
 - B-RR decided at one mind: **0.1**. A robust Lemma 6.1 count on a named class of near-colourings (bounded complexity first): **0.25**.

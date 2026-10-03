@@ -135,6 +135,17 @@ way it goes, without FS-121.
 A local exclusion for one configuration only (as FS-114 filed) is a piece, not the answer. A NO for non-Siamese maps only is FS-117's, not this
 stub's.
 
+**At FS-121's close (2026-10-03).** The honest route hands this NO an honest saturated map whose curved ladders end at (Q) or (R2) arcs (FS121-O1-ENDS, held) and, when periodic, whose curved interfaces are split (Q) arcs (FS121-O1-PER, held). The colour-generic lemmas this milestone's jobs were given: FS121-D1-VT, held in its narrower wording and misstated at corners of `L`; FS121-D1-EROSION, held, with content only at `θ ∈ (2π/3, π)`. FS121-C1-SAT (held): C121-NOPAR contains the saturated segment-and-arc NO; that it contains NO-SAT is FS121-C1's commentary, one mind. FS121-D3's recognition (one mind): in a saturated colouring every colour change across an interface is an exchange with a unit neighbour.
+
+**At FS-116's close (2026-10-03, FS116-Z2).** **Not landed:** C114-LOCAL-F is GAP at named ring types (`plans/FS116-derivation.md` FS116-C114-LOCAL-F; the case list is
+`plans/FS116-Z1-close.md` § 2.6). Held under the announcement rule: the **Γ-free four-colour vertex is excluded at radius `1 + ε`** in the non-Siamese simple
+class (FS116-Y4-EMPTY, two minds, the second blind); **the YES needs no map** (FS116-O1-YESLIM: valid `k`-coloured fragments on discs of every radius give
+`χ_m⁰(ℝ²) ≤ k`, at six `χ(ℝ²) ≤ 6` with no MR), so this question is decisive in both directions without FS-121, as card `the-yes-needs-no-map` said; and
+**saturation pins every edge at a four-colour vertex** as split or tangent (FS116-O1-SATPIN). Every change point of a ring off (Q) arcs, and every
+semi-hub but the full parallel one of three colours, places a vertex of at least four colours on the ring (FS116-RING-GERM, FS116-N3-SEMI, held). The
+rest of the question is FS-123 (`plans/STUB-qfree-ring.md`: the (Q)-free ring, opening with whether a fragment's bends keep it in EMPTY's class),
+FS-124 (`plans/STUB-q-ring.md`: the (Q) rings and the five- and six-colour vertices) and FS-125 (`plans/STUB-saturated-local.md`: the saturated class).
+
 ## What FS-114 established (addresses in `plans/FS114-derivation.md`)
 
 - **The reduction** (§1): FS114-CV-EXISTS (every valid map has a four-colour vertex; two minds, blind to each other, over FS112-N3-DENSE3 and row 134's
@@ -202,6 +213,11 @@ the Reuleaux `(2, 1, 1, 0)` past `√3` on rings with (Q) arcs (FS114-Y6-HALF, c
 Sirgedas's thread "Graph Coloring by Simulation" (`~/source/library/hadwiger-nelson-problem-group/threads/J_Tw1_hUxQI.txt`, about 4,300 lines unread;
 "siamese" at lines 715, 4378, 4409, 4504, 4888) and the HNT simulator thread `a701Kwnhp_A` (unheld) — read before any claim of novelty for a local
 exclusion; `[Thomassen1999]`'s page images (held as OCR only).
+
+*At FS-116's close (FS116-Z2, 2026-10-03; inventory item 19):* the HNT simulator thread `a701Kwnhp_A` is held, not unheld
+(`~/source/library/hadwiger-nelson-problem-group/threads/a701Kwnhp_A.txt`): a simulator thread with no exclusion statement
+(`plans/FS116-local-exclusion.md` § 2.2). Sirgedas's "A biggest disc implies no 6-color-tiling of the plane exists." (`J_Tw1_hUxQI.txt` l. 4661) is filed as
+prior art for the local-to-global idea (FS-116's note under FS114-CV-EXISTS); the rest of the thread stays unread beyond ll. 4290–4790 and the grep hits.
 
 ## Registered expectations (instruments for G21, scored at the close; never caps)
 

@@ -27,6 +27,11 @@ strictness, which smooth horns lack (FS121-C1-FLAT, held).
 a procedure that spends six. NOPAR-C5 is a new NO for a class of maps, smaller than the answer, decided at six by nature; it un-parks the cover route
 when FS-116's NO-SAT lands or a jet argument at N4 appears. Kooshi may overturn the parking.
 
+**At FS-116's close (2026-10-03, FS116-Z2).** FS-116 did not land NO-SAT, so the parking stands. What it holds in the saturated class: every edge at a four-colour vertex
+of a saturated fragment is split (a unit arc about a ring point carrying both side colours) or tangent (FS116-O1-SATPIN, held); the straight right-angled
+cross whose ring carries no (Q) arc dies at `R = 2` in the non-Siamese class (FS116-S1-QF — two derivations, the second told the verdict, not held; a blind
+second mind owed). NO-SAT is FS-125's (`plans/STUB-saturated-local.md`).
+
 ## Owed second minds
 
 FS121-D3-EQ, -SWAP1D; FS121-NOPAR and -NOPAR-C5's GAP locations; C1's containment commentary.

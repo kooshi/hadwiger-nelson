@@ -52,6 +52,11 @@ C121-REGJ restricts to fall colourings, and **a fall colouring with a non-locall
 C121-REGJ** at any `k` (FS121-D4-FALL, one mind). This stub's pinch question now bears on FS-127 (lateral extent): a pinch no move removes would be
 FS-127's counterexample.
 
+**At FS-116's close (2026-10-03, FS116-Z2).** FS116-S1-RUNG (held, Siamese pairs allowed): a saturated straight edge's first rung tile reaches no farther than 1 from
+the rung's points (FS116-Y1-STRIPCEIL is its case at `r(120°)`); at a four-colour vertex the rung collides with the ring's contact inside radius 2
+(FS116-S1's recognition; FS116-S1-QF). A rung is a ladder's first step, so the saturated cross is this stub's pinch read at a junction of four colours, on a
+fragment rather than a measurable fall colouring; FS-125 carries it.
+
 ## The room and the prior art
 
 The unit-distance graph's **fall colourings** (Dunbar et al. 2000, Zbl 0962.05020, finite graphs; held under FS-67) and measurable **maximal independent

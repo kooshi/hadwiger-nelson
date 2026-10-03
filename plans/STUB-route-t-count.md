@@ -6,7 +6,7 @@ reading, exact identities on torus maps given by formula; no enumeration of maps
 FS-114: read `CLAUDE.md` § The aim and § Counter-priors, `LEDGER.md` rows 135 and 137–138, `plans/FS114-derivation.md` §2 in full, and
 `plans/FS114-N-proof.md` § Continuation — FS114-N2 and `plans/FS114-N3-proof.md` §3.2 and stage 4.*
 
-**Provisional bearings:** G86 (a tile count reaches the non-Siamese part only), G15 (count × local kill), G68 (the torus first), G83, G72, G30 (the planar-map
+**Provisional bearings:** G86 (a tile count reaches the non-Siamese part only), G15 (count × local kill), G68 (the torus first), G83, G91 (drafted at FS-116's close: the ring rule; the Γ-free type empty), G72, G30 (the planar-map
 discipline: discharging, combinatorial curvature), G49 and G50 (Sirgedas's program is in print only as group posts); rows 135, 137–138; stubs FS-116, FS-111.
 
 ## The question, in plain language
@@ -28,6 +28,13 @@ reaches at best the non-Siamese part — de Grey's target (`[16.317]`: "to prove
 strengthen `[Thomassen1999]` (nice colourings need seven) by dropping scalability, for segment-and-arc maps. The whole NO is FS-116's C114-LOCAL-F. A
 torus YES (a doubly periodic valid map, non-Siamese) would be FS-116's YES as well. Its instruments — the exact charge, the absent-colour capacities — also
 say which configurations FS-116 must exclude, so it can aim FS-116 even where it cannot finish.
+
+**At FS-121's close (2026-10-03).** Whether honest saturation excludes Siamese pairs (G86) is unanswered; the honest route's maps are honest saturated (FS111-M2-REDUCE-A), so a yes would let this count serve the honest route's NO.
+
+**At FS-116's close (2026-10-03, FS116-Z2).** K1's (Q)-free case: FS116-Y4-EMPTY (held) excludes at radius `1 + ε`, in the non-Siamese simple class, every vertex of at
+least four colours whose ring carries no arc of `Γ`; whether FS114-N7-3T's whole class — and so K1′'s deficient configurations on (Q)-free rings — is empty
+turns on whether a fragment's bends keep it in that class, FS-123's first question (`plans/STUB-qfree-ring.md`). FS116-V1-FRAME (one mind, true vacuously)
+re-derives "every tactic centre is a change point" there. No FS-116 step was a count: every kill landed is a straddle.
 
 ## What is open, named
 
