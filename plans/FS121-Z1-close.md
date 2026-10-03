@@ -255,3 +255,12 @@ there; the routes differ in the places the tables name.
    hope that the honest class is segments and (Q) arcs, and send C121-NOLRA and C121-R2-FOUR back to separate questions.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: `plans/FS121-derivation.md`
+
+65 entries (57 derived, 8 GAP: FS121-O1-CARD, -R2-FOUR, -CURVED, -SAT6, -NOLRA, -NOPAR, -NOPAR-C5, -REGJ), 7 controls, each firing on its planted
+fault. `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS121-derivation.md` from the repository root: **GATE: PASS (0 failures,
+0 warnings)**, exit 0; output `data/fs121/fs121-z1/gate-stage3.out`. Corrected wordings filed (each with the frozen address in its prose): FS121-O1-ENDS
+("counted by sector"), FS121-O1-LRA-LINE (reading (a) named), FS121-D1-VT (no sub-arc of radius 1 curving toward `b`), FS121-C1-FLAT (the frozen
+parenthetical restored), FS121-D4-GRID (its not-claimed parenthesis); corrected model lines: FS121-C1-BOUND, FS121-D4-FACE; corrected `uses only:` lines:
+FS121-O1-ENDS and -PER (FS121-DB1-L3), FS121-D1-VT (FS121-V2-SECTOR). No frozen statement was edited in `data/fs121/claims.md`.
