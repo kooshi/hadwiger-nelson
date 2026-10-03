@@ -1,0 +1,6 @@
+general factorization: 20000 random triples, worst residual 1.60e+01
+V6-HUG form on a 61x61 grid (s, t in [0, 180]): worst residual 4.44e-15
+V6-ADJ form on the same grid: worst residual 3.55e-15
+Y4-FLANK least-curved case, phi in 0..60: worst residual 3.89e-16
+interior grid points (1..179 deg) where |a-b| = 1: 179, all with s + t = 180: True
+RESULT: FAIL
