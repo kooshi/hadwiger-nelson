@@ -16,11 +16,11 @@
 
 | job | kind | brief | record | blind? |
 |---|---|---|---|---|
-| FS116-Y3 | Ephodos, construction: a Γ-free four-colour vertex | `data/fs116/briefs/FS116-Y3-hub.md` | `plans/FS116-Y3-construction.md` | no |
+| FS116-V4 | ephodos-verifier on the list's § 12 (S1-KAPPA, -RUNG, -QF; Y3-NBTIP, -TIGHTLENS, -STARFORCE) | `data/fs116/briefs/FS116-V4-verify.md` | `plans/FS116-V4-verification.md` | yes: fence in its brief |
 | FS116-N3 | Ephodos, the semi-hub rule (freeze its § 1.3 statements at its report) | `data/fs116/briefs/FS116-N3-semihub.md` | `plans/FS116-N3-proof.md` | no |
 | FS121-V5 | ephodos-verifier on the list's § 8 (D2-SYM, D4-FACE, D4-GRID) | `data/fs121/briefs/FS121-V5-verify.md` | `plans/FS121-V5-verification.md` | yes: fence in its brief |
 
-Done since 2026-09-29, each logged: FS116-S1, FS116-V3, FS121-V4, FS121-D4, FS121-V3, FS116-N2 (RING-TRANSFER MISSTATED; -C derived), FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
+Done since 2026-09-29, each logged: FS116-Y3, FS116-S1, FS116-V3, FS121-V4, FS121-D4, FS121-V3, FS116-N2 (RING-TRANSFER MISSTATED; -C derived), FS121-C1 (cover route parked behind FS-116, `plans/FS121-close-inventory.md` item 51), FS116-Y2, FS116-N1 (all stages), FS121-D2, FS116-P1, TC1, FS116-O1, FS121-O1, FS116-V1, FS121-D1, FS121-DB1, FS116-N1 (stages 1–3), FS116-Y1, FS116-V2, FS121-D3,
 FS121-V2, CL1, CL2.
 
 **Held at two minds tonight (the announcement rule met)**: FS116-O1-YESLIM; FS116-O1-SATPIN (corrected wording); N7-HUB (b), (c);
