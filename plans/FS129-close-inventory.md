@@ -93,3 +93,36 @@ One line per item with its source; no narration. Each line is ticked done or dec
     Source: `data/fs129/index/checks.md`.
 21. **Slip, IX1's, self-reported**: stage 4 committed with `git commit -a` against standing rule 6; the commit holds only its own files
     (checked, item 18). No harm; logged because the rule exists for a shared tree.
+22. **FS129-Q1 reported DONE** (`data/fs129/reports/FS129-Q1.md`; commits `44c577d5`, `f69ac133`, `72b2ae79`, all present; harness ≈398k, not
+    reused). The card `what-kind-of-input-closes-each-step` and its existence and structural forms are in `plans/STUB-cross-application-audit.md`
+    § The question (Poros, 2026-10-03); the bearing rewritten; `data/fs129/demand-judged.md` ranks 24 steps (J1–J24), with § 1 the homonyms, § 2
+    the no-gos that exclude kinds, § 4 the index's 30 open-step entries placed. **Keryx's receipt**: every one of the 20 addressed step
+    quotations checked by script against its source lines — 20 verbatim (one differs only by the source's `> ` blockquote marker, J3); the
+    invention signal's four quotations (`plans/STUB-forced-pair.md` lines 35–37; `LEDGER.md` rows 135, 136) found verbatim.
+23. **Registered expectations, Poros** (copied from `plans/POROS-2026-10-03-fs129-card.md` § 1.2; scored at FS129-Z1): A1 closes, expected 1,
+    P(≥ 1) = 0.45; A2 shortenings, expected 5, P(≥ 3) = 0.6; A3 share null in both lanes, expected 0.7; **A4** the audit changes item 31's open
+    list or the top three, P = 0.2; **A5** lane A closes or shortens a regularity-era step from a result its stub does not cite, P = 0.35;
+    A6 pass 2 yields more than pass 1, P = 0.6; A7 another FS116-Y4-type miss, P = 0.6. Its list expectations D1–D4 scored at stage 2: one of
+    four met, Brier 0.283 (record § 2.1). A4 and A5 decide what runs next: a lane-A null at pass 1 is A5's evidence, and lane A's pass 2 still
+    runs (decision 4 asks for the null as a finding).
+24. **Ruling — item 8 settled**: the readers take `data/fs129/demand-judged.md` first (it places all 30 of the index's § 1 entries), then
+    `data/fs129/index/open-steps.md` §§ 2–4 (the 12 "stalls at" lines, 372 GAP lines, 418 gap lines) in their stubs' rank order; no merge job.
+    Alternative: a Clerk merge. Why: § 1 is absorbed; §§ 2–4 are prose lines a merge would have to judge. Confidence: medium; changes if a reader
+    finds a step there that bears on the answer and the list missed. Poros recommended the same (its report).
+25. **Ruling — Poros's three corrections adopted into the pass-1 briefs** (record § 2.5): each step opens with one line naming the kind of input
+    its closing argument must read, checked against the list's § 2, before statements are scanned; the homonym list (§ 1) is required reading;
+    lane A works its four sites first — J4, J12–J13, J2, J17 — then the rest in rank order. Alternative: put them to Kooshi before launching.
+    Why: none changes the passes, their order, the era split or the staffing, which are his decisions; they are how a brief aims a reader.
+    Reported to Kooshi as settled, overridable. Confidence: high.
+26. **Ruling — the map step at five (Poros's card 3; J10)**: Poros's default stands — it stays on the demand list for lane R, and FS129-P1 drafts
+    its carrier (FS-104's route list or a new stub) at the re-rank. Alternative: Keryx files a stub now. Why: which stub carries a route is a
+    ranking call, Poros's lane. Confidence: high.
+27. **Invention signal (Poros's card 2, addressed to Ephodos; J15)**: route R's "meet nowhere below the answer" (`plans/STUB-forced-pair.md`
+    lines 35–37; `plans/FRONTIER-STUBS.md` rank 5) against rows 133, 135, 136 (close complementary pairs and four-colour vertices). Routed to
+    FS129-OR1 as part of J15, both sides quoted, no side picked. Source: `plans/POROS-2026-10-03-fs129-card.md` § 2.4.
+28. **Correction owed — `plans/STUB-cp-plane-six.md` line 53** calls the collapse "FS-103's F1 (a candidate, not held)"; rows 128 and 130 hold it
+    at [hand], given MR. For FS129-Z1, which writes open stubs' bearing lines at the record job. Source: Poros's report.
+29. **Hunches for lane R's FS-124 cases** (Poros's questions for another lane): `skeleton-carries-a-syntheme` (J17, 0.5) and
+    `semipar3-reads-a-height` (J2, 0.35); in the demand list, read by both readers. Source: record § 2.4.
+30. **Touch beyond the brief, Poros's**: `data/fs129/q1/build_demand.py` and `data/fs129/q1/demand-template.md`, working files under
+    `data/fs129/` (standing rule 2). No harm.
