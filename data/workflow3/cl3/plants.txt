@@ -1,0 +1,31 @@
+$ python3 tools/cl3_extract.py selftest 
+units found 6 expected 6
+SELFTEST PASS
+exit=0
+$ python3 tools/cl3_extract.py selftest --plant
+units found 5 expected 6
+SELFTEST FAIL
+exit=1
+$ python3 tools/cl3_classify.py selftest 
+SELFTEST PASS
+exit=0
+$ python3 tools/cl3_classify.py selftest --plant
+MISMATCH - none. N R
+MISMATCH - Stage 1: none (reading). N R
+SELFTEST FAIL
+exit=1
+$ python3 tools/cl3_candidates.py selftest 
+found [('X-ID1', 'plans/X-derivation.md', 'HEX3')]
+SELFTEST PASS
+exit=0
+$ python3 tools/cl3_candidates.py selftest --plant
+found []
+SELFTEST FAIL
+exit=1
+$ python3 tools/cl3_rulings.py selftest 
+rows 15 bad 0
+exit=0
+$ python3 tools/cl3_rulings.py selftest --plant
+FAIL plans/FS116-close-inventory.md NOSUCH found 0
+rows 15 bad 1
+exit=1

@@ -1,0 +1,179 @@
+data/consolidation-2026-09-26/briefs/P1-crunch-protocol.md	excluded: brief or non-md
+data/consolidation-2026-09-26/f1/cand/de8bb61c.txt	no section
+data/consolidation-2026-09-26/f1/commits.txt	no section
+data/consolidation-2026-09-26/f1/sizes.tsv	excluded: brief or non-md
+data/consolidation-2026-09-27/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J01-band-to-nine-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J02-three-colours-stage0.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J03-M1-reframe.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J03a-SWm-blind-reading.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J07-M1-character-local-global.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J08-M1-six-at-exposed-fields.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J09-three-colours-blind.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J09v-M1-no-mixing-blind.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J10-M1-character-blind-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J11-M1-six-blind-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J12-M1-one-prime.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J13-M1-one-prime-blind-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J14-M2-chain-kernel.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J15-M2-route-c-kernel.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J17-M2-bridge-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J17K2-M2-lemma-NP-kernel.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J18-M3-rank-one-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J19-M3-rank-one-second-mind-SKELETON.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J19-M3-rank-one-second-mind.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J20-M3-rank-one-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J21-M3-windows-five-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J22-M3-windows-five-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J23a-M1-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J23c-M3-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J27D-FS67-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J28D-row88-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J28V-row88-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J29-FS84-post-ban-reframe.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J29-S1-FS84-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J29-S4-FS84-colouring-side.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J30-wiring-audit.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J35-row88-prior-art-gate.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J36-poros-infinitely-many-primes.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J37-39-poros-wanted-posters.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J40-FS67-prior-art-gate.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J41-row88-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J42-FS67-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J45-SI-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J46-SI-blind-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J48-FS100-stage1-blind-check.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J50-poros-next-two-milestones.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J51-FS100-three-field-lemma-planner.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J51D-FS100-kronecker-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J51V-FS100-kronecker-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J52-FS75-kernel-167-planner.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J52K-FS75-kernel-167.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J53-FS100-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/J54-FS75-close.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/PLN-crunch-planner-brief.md	excluded: brief or non-md
+data/crunch-2026-09-25/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/crunch-2026-09-25/reports/J35.md	no section
+data/crunch-2026-09-26-x2x3/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X01D-einsiedler-fish-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X01V-einsiedler-fish-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X02D-pe-lim-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X02V-pe-lim-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X03D-fourier-flip-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X05V-sp-cor-flip-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X09C-close-math.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X11K-lean-47-dependencies.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X11K2-lean-47-gate-and-upper-bound.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X11K3-lean-gate-general.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X12B-ef-plus-blind-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X13R-ed2-z-reading-check.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X21D-167-and-family-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X21V-167-and-family-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X22D-type-B-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X22V-type-B-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X23D-spcor-every-field-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X23V-spcor-every-field-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X25B-tca-class-blind-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X26B-cls-every-field-blind-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X27D-tr-rot-derivation.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X27V-tr-rot-verifier.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X28D-complex-place-scope.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/briefs/X31C-tr-rot-fold.md	excluded: brief or non-md
+data/crunch-2026-09-26-x2x3/reports/X29C.md	no section
+data/fs103/briefs/B103-fractional-blind-check.md	excluded: brief or non-md
+data/fs103/briefs/C103-close-math.md	excluded: brief or non-md
+data/fs103/briefs/F103-fractional-shadow.md	excluded: brief or non-md
+data/fs103/briefs/N103-measurable-blind-check.md	excluded: brief or non-md
+data/fs103/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs103/briefs/V1-collapse-verifier.md	excluded: brief or non-md
+data/fs103/briefs/V2-collapse-verifier.md	excluded: brief or non-md
+data/fs105/briefs/B105-blind-efp.md	excluded: brief or non-md
+data/fs105/briefs/C105-close-math.md	excluded: brief or non-md
+data/fs105/briefs/R105-reader.md	excluded: brief or non-md
+data/fs105/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs105/briefs/W105-walker.md	excluded: brief or non-md
+data/fs106/briefs/C106-close-math.md	excluded: brief or non-md
+data/fs106/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs107/briefs/C107-close-math.md	excluded: brief or non-md
+data/fs107/briefs/SHARED-107-competition.md	excluded: brief or non-md
+data/fs107/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs110/briefs/C110-close-math.md	excluded: brief or non-md
+data/fs110/briefs/N110-proof.md	excluded: brief or non-md
+data/fs110/briefs/NB110-verify-proof.md	excluded: brief or non-md
+data/fs110/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs110/briefs/Y110-construction.md	excluded: brief or non-md
+data/fs110/briefs/YB110-verify-construction.md	excluded: brief or non-md
+data/fs111/briefs/M-111-regularity.md	excluded: brief or non-md
+data/fs111/briefs/M2-111-regularity-round2.md	excluded: brief or non-md
+data/fs111/briefs/M3-111-finiteness.md	excluded: brief or non-md
+data/fs111/briefs/M4-111-cascade.md	excluded: brief or non-md
+data/fs111/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs111/briefs/V0-111-card1-verify.md	excluded: brief or non-md
+data/fs111/briefs/VM2-111-verify.md	excluded: brief or non-md
+data/fs111/briefs/VMW-111-verify.md	excluded: brief or non-md
+data/fs111/briefs/W-111-wild.md	excluded: brief or non-md
+data/fs112/briefs/C112-close-math.md	excluded: brief or non-md
+data/fs112/briefs/N112-proof.md	excluded: brief or non-md
+data/fs112/briefs/NB112-verify-proof.md	excluded: brief or non-md
+data/fs112/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs112/briefs/Y112-construction.md	excluded: brief or non-md
+data/fs114/briefs/CV114-composition.md	excluded: brief or non-md
+data/fs114/briefs/CVB114-verify.md	excluded: brief or non-md
+data/fs114/briefs/L60-114-audit.md	excluded: brief or non-md
+data/fs114/briefs/N114-proof.md	excluded: brief or non-md
+data/fs114/briefs/N2-114-proof-continuation.md	excluded: brief or non-md
+data/fs114/briefs/N3-114-proof-round2.md	excluded: brief or non-md
+data/fs114/briefs/NB114-verify-proof.md	excluded: brief or non-md
+data/fs114/briefs/STANDING-RULES.md	excluded: brief or non-md
+data/fs114/briefs/Y114-construction.md	excluded: brief or non-md
+data/fs114/briefs/YB114-verify-construction.md	excluded: brief or non-md
+data/fs114/reports/FS114-Y6.md	no section
+data/fs116/reports/FS116-S1.md	no section
+data/fs116/reports/FS116-Y4.md	no section
+data/fs121/reports/FS121-D4.md	no section
+data/fs85/briefs/A-planner-brief.md	excluded: brief or non-md
+data/fs85/briefs/A-poros-plan-brief.md	excluded: brief or non-md
+data/fs85/briefs/C-advisor-brief.md	excluded: brief or non-md
+data/fs85/briefs/C-competitor-brief-coxeter.md	excluded: brief or non-md
+data/fs85/briefs/C-competitor-brief-debruijn.md	excluded: brief or non-md
+data/fs85/briefs/R3-five-part-brief.md	excluded: brief or non-md
+data/fs85/briefs/R3-input-audit-brief.md	excluded: brief or non-md
+data/fs85/briefs/V-verifier-brief.md	excluded: brief or non-md
+data/fs85/briefs/V2-verifier-brief.md	excluded: brief or non-md
+data/fs86/briefs/A-planner-brief.md	excluded: brief or non-md
+data/fs86/briefs/A-poros-plan-brief.md	excluded: brief or non-md
+data/fs86/briefs/B1-verifier-brief.md	excluded: brief or non-md
+data/fs86/briefs/B2-profile-brief.md	excluded: brief or non-md
+data/fs86/briefs/C-advisor-brief.md	excluded: brief or non-md
+data/fs86/briefs/C-competitor-brief-coxeter.md	excluded: brief or non-md
+data/fs86/briefs/C-competitor-brief-debruijn.md	excluded: brief or non-md
+data/fs86/briefs/V-C-brief.md	excluded: brief or non-md
+data/fs86/briefs/V-D-brief.md	excluded: brief or non-md
+data/fs86/briefs/V-W-brief.md	excluded: brief or non-md
+data/fs86/briefs/V-X-brief.md	excluded: brief or non-md
+data/fs86/comp-debruijn/SUCCESSOR-PREAMBLE.md	no section
+data/fs86r88/j41/stage1.json	excluded: brief or non-md
+data/fs89/briefs/S0A-gluing-verifier-brief.md	excluded: brief or non-md
+data/fs89/briefs/S0B-band-set-brief.md	excluded: brief or non-md
+data/fs89/briefs/S1-V-verifier-brief.md	excluded: brief or non-md
+data/fs89/briefs/S1-VB-verifier-brief.md	excluded: brief or non-md
+data/fs89/briefs/S1-planner-brief.md	excluded: brief or non-md
+data/night-2026-09-27/brief-BASE-V.md	no section
+data/rescued-2026-09-25/fs85-close/edit_compress5.py	excluded: brief or non-md
+data/rescued-2026-09-25/fs85-close/edit_frontier.py	excluded: brief or non-md
+data/workflow3/briefs/CL3-ban-audit.md	excluded: brief or non-md
+data/workflow3/cl3/lines_pre.tsv	excluded: brief or non-md
+data/workflow3/cl3/other_mentions.tsv	excluded: brief or non-md
+data/workflow3/cl3/raw_units.tsv	excluded: brief or non-md
+plans/CRUNCH-2026-09-26-x2x3-queue.md	no section
+plans/FS116-close-inventory.md	no section
+plans/FS75-close-inventory.md	no section
+plans/FS85-close-inventory.md	no section
+plans/FS86-close-inventory.md	no section
+plans/FS86-row88-close-inventory.md	no section
+plans/FS89-close-inventory.md	no section
+plans/POROS-2026-09-27-night-aim.md	no section
+plans/SESSION-HANDOFF-2026-10-03.md	no section
+plans/WORKFLOW-AUDIT-2026-09-28.md	no section
+plans/WORKFLOW3-lane-edits-proposed.md	no section

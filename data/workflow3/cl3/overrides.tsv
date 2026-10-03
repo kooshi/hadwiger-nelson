@@ -1,0 +1,33 @@
+file	line	text_startswith	class	reason
+plans/FS100-X27V-verification.md	60	*Correction	drop	not a log line (a timestamp correction)
+plans/FS103-F-fractional-shadow.md	26	- (running	drop	placeholder
+plans/FS105-harden-mr.md	287	**Proposed	drop	absorbed non-log text
+plans/FS86-row88-rigidity.md	768	**Also	drop	absorbed non-log text
+plans/FS111-M3-finiteness.md	376	- K's	drop	fragment; the manual unit carries the whole parenthesis
+plans/FS100-three-field-lemma.md	841	- | J51D	R	instead cell names a built object: "FS100-CP plus a hand-built `W` (FS100-X1)"
+plans/FS105-B-derivation.md	286	- | search	R	instead cell: "one `z ∈ 𝔔 ∖ σ𝔔` read off the ideal's basis"
+plans/FS107-stability.md	733	- A, A2	N	"none"
+plans/FS112-NB2-verification.md	33	- | enumerate	R	instead cell: "solved FIN's equality case"
+plans/FS112-NB2-verification.md	35	- | sample	R	instead cell: "a second-order comparison of cap height and contact rise"
+plans/FS112-YB2-verification.md	21	- Stage 5	N	"not a search for an object"
+plans/FS114-CVB-verification.md	24	- No other	N	"No other search considered"
+plans/FS114-N-proof.md	53	- | scan	R	instead cell: "the Følner accounting in words"
+plans/FS114-N4-proof.md	38	- | scan	R	instead cell: "the dichotomy N4-FIVE by N-E0"
+plans/FS116-V6-verification.md	230	- Would	R	"so V6-COUNT is a hand count"
+plans/FS91-S1D-one-prime.md	380	- **Stage 5	N	"None: statements only"
+plans/FS91-S1V-character.md	210	- | 4	R	instead cell: "re-ran the existing checker"
+plans/FS91-S1V-no-mixing.md	236	- | 2	R	instead cell: "routed S1 through (RB), which needs no target's chromatic number"
+plans/FS91-S1V-no-mixing.md	237	- | 3	R	instead cell: "read `N₃` and the dyadic splitting from gp and applied J4-C"
+plans/FS91-character-local-global.md	571	- **§PA	N	"not a witness search"
+plans/M2-S1D-bridge.md	110	- *Stage 1	N	"none"
+plans/M2-kernel-lane.md	275	- | X2	R	instead cell: "the gadget algebra by `decide +kernel`"
+plans/M3-S1D-windows-five.md	108	"- | W6	N	"a prior-art gate, not a witness search"
+plans/M3-S1V-windows-five.md	83	- 23	R	"re-ran the frozen FS-66 checker on the existing certificate"
+plans/PA-ambrus2023-audit.md	38	- Would	N	"not needed (none failed)"
+plans/POROS-2026-09-24-fs85-plan.md	196	- Reading	N	"not a search"
+plans/POROS-2026-09-25-wanted-poster-47.md	426	- The tally	N	"not a search"
+plans/CRUNCH-2026-09-26-x2x3-INDEX.md	244	- Would	N	"empty"
+plans/FS107-VW-verification.md	224	- A better	N	"I searched nothing."
+plans/POROS-2026-10-03-close-reread.md	14	Rule 5	N	"Stage 1: none."
+plans/FS85-C-deBruijn.md	432	6. **A breach	U	a search was run (a breach, logged); no class word settles it
+plans/FS86-row88-rigidity.md	762	**Twelve	drop	an aggregate of other lines
