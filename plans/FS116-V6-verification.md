@@ -242,18 +242,20 @@ verification: FS116-Y4-EMPTY
   statement: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ
   given: the statement; the whole frozen list data/fs116/claims.md, including the construction side's round-3 statements
     FS116-Y3-SIX, -TIPS, -NBTIP, -TIGHTLENS, -STARFORCE and their setting words (§ 14) — route-shaped, given; data/fs114/claims.md;
-    plans/FS114-derivation.md header and § 3 statements; CLAUDE.md; the grokkings. No argument, sketch or verdict of the first mind.
-    The prediction was written after some minutes of my own reasoning (§ 1.3)
-  committed: 2026-10-03 — the stage-2 commit of this record; the prediction at 5ddd2c1d
+    plans/FS114-derivation.md header and § 3 statements; CLAUDE.md; the grokkings. Of the first mind's own record: nothing before
+    commit 2429e200. The prediction was written after some minutes of my own reasoning (§ 1.3)
+  committed: 2429e200 (2026-10-03, stage 2); the prediction at 5ddd2c1d
   predicted: refuted — 0.6 — likeliest break: a hub with two outer tiles (five colours) at radius just above 1
   verdict: derived
   method: tip counting at the six hubs — V6-HUBS, the hugging identity V6-HUG, the antipodal tangency V6-ANTI and the count V6-COUNT; the
     first mind's route unknown to me (its record fenced); its side's round-3 labels (§ 14) were given but not used
   attack: § 2.3
-  divergences: none — the comparison opens at stage 3, after this commit
+  divergences: § 3.2 The divergence table
   counterexamples: none — searched: the five-colour-hub star built in § 2.3 item 1 (dies at V6-HUG), m ≥ 3 change points, cusps at p,
     multiple tips; SQ9 at k = 9 meets every other hypothesis and fails the conclusion, as the not claimed line already says (anything at k ≥ 7)
-  minds: 1 — blind, the same model (Opus 5.5): blind to the first mind's argument and verdict; given its side's round-3 statements
+  minds: 2 — blind to: the first mind's record (its § 3 opened only after 2429e200), but given its side's round-3 statements (§ 14),
+    route-shaped, not used as inputs; method: the same model (Opus 5.5), a different route on the count (V6-COUNT, V6-ANTI in place of
+    FS116-Y3-TIPS) and on the flank step (edges pinned to the unit circles by V6-GERM, an exact identity, in place of FLANK's curvature bound)
   grade: hand
 
 control: v6-hug
@@ -269,3 +271,93 @@ control: v6-sq9
   fault: python3 ../tools/fs116_v6_sq9.py 2
 
 ## Stage 2 — SAVED
+
+## Stage 3 — the comparison and the report
+
+*Opened at 17:40 UTC 2026-10-03, after the verdict's commit `2429e200`: `plans/FS116-Y4-construction.md` § 3 (its stage 3, lines 332–474) and
+nothing else of the fence. At this stage four fields of the `verification:` block above were updated — `given:` reworded (no content change),
+`committed:` set to the commit, `divergences:` pointed here, `minds:` counted after the comparison; its `predicted:` and `verdict:` lines are as
+committed.*
+
+### 3.1 What the first derivation does
+
+FS116-Y4-EMPTY there is `derived from: FS116-Y4-FLANK, FS116-Y3-SIX, FS116-Y3-TIPS, RING-GERM` (with FS116-N2-STAR). SIX gives six hubs and four
+tiles; **TIPS gives one tip per hub**, hence (six hubs, four tiles) a tile tipping two adjacent hubs alone at each; RING-GERM (i) gives it full
+tip cones at both; FLANK — a curvature lemma for any tile holding two ring points 60° apart with full tip cones, Siamese pairs allowed, colours
+unread — puts the two flank tiles' closures within `< 1`; a cone-interval argument with N2-STAR makes each flank tile the ring tile on the far
+side of its hub, of one colour by the alternation; distinct, so non-Siamese (or validity) fails. Six is spent at the alternation. Verdict:
+derived, one mind.
+
+### 3.2 The divergence table
+
+| # | item | this route (V6) | the first derivation (Y4) | class | resolution |
+|---|---|---|---|---|---|
+| 1 | the verdict | derived (TRUE) | derived (TRUE) | route | agree; no divergence of truth |
+| 2 | why a lone double tip exists | V6-COUNT: multiple tips allowed; incidence count plus V6-HUG force two antipodal doubly tipped hubs, then V6-ANTI (tippers of antipodal hubs share no edge at `p`) | FS116-Y3-TIPS: exactly one tip per hub, so some tile tips two adjacent hubs alone | route | keep both; **V6's route does not rest on FS116-Y3-TIPS's "exactly one tip" clause** nor on Y3-SIX, so EMPTY now has a derivation independent of round 3's labels |
+| 3 | the flank distance | V6-HUG: the flank edges are pinned to `ω(y_1)` and `ω(y_0)` exactly (V6-GERM confines the `X̄` tile outside `B(y_1)` near `y_0`), then the exact identity `−8 sin(s/2) sin(t/2) cos((s+t)/2)` | FLANK: the flank edges stay in the closed discs, so curvature `≥ 1`; a second-order expansion gives `1 − (κ_a + κ_b)s²/2` | route | keep both; FLANK is the more general (no colour, Siamese allowed); at `κ_a = κ_b = 1`, `s = t = φ` the two agree exactly (`(2cos φ − 1)²` both) |
+| 4 | the flank tiles' colour | V6-GERM: `X` excluded inside `B(y_5)`; a colour of `p` would make a second tip; so `X̄` | interval argument: a cone holding the ring direction and `210°` would swallow the tip or outer cone (N2-STAR) | route | keep both |
+| 5 | six colours, where spent | twice: V6-RING (two absent colours) and V6-TIP / V6-HUG (the tip sector holds only colours of `p`) | once: the alternation (through SIX), "with three absent colours the flank tiles need not share a colour" | route | both correct; V6's second place is where the counting needs six even if the ring alternated |
+| 6 | SQ9 at `k = 9` | fails first at V6-RING: its ring carries five colours (`v6-sq9`) | "has a Γ-free four-colour vertex but no tip (its tiles of `p` do not reach `ω(p)`)" | route | both true of SQ9 (its tiles of `p` lie within `√2/2` of `p`); each names the first step of its own route to fail |
+| 7 | radius | the argument reads `B̄(p, 1)` and a neighbourhood; "radius above 1" and "radius 1" name one class | "at every radius above 1", "`R_0` may be any number above 1" | wording | the same content; the author may write "radius 1" or keep "above 1" — nothing claimed changes |
+| 8 | consequences | § 2.4: § 12/§ 14's Y3 statements vacuous; N7-HUB, N6-RING60 vacuous on the Γ-free part only | § 3.3: the same list and more (HUBCOL, TIGHT, NOQ, LENS, N2-HEX6/-HEX3, RING-TRANSFER-C's last clause, Y4-SYM/-SPOKE/-Q1); the (R2) part not reached | route | agree; Y4's list is the fuller one |
+
+**Quotation across files.** `derive_gate.py quotes` on this record and `plans/FS116-Y4-construction.md` (17:42 UTC): one statement named in both,
+verbatim — PASS.
+
+**Retractions:** none (0 by this mind). Reading § 3 showed me no error of my own; the one miss is my stage-1 prediction (refuted, 0.6), a
+prediction and not a verdict.
+
+**Truth divergences:** none, so no third mind is called for.
+
+**What this verification could not supply.** A reader of intent: both minds derived the statement as written; whether the Γ-free class was the
+case the list meant to close is the author's and Keryx's call. And independence on the prior: the same model on both sides.
+
+### 3.3 The count, audited (the procedure's four parts)
+
+1. **Information.** Before `2429e200` I saw the statement, the frozen list (including round 3's construction-side statements and their labels,
+   § 14 — route-shaped), `data/fs114/claims.md`, FS114's derivation file § 3, `CLAUDE.md`, the grokkings; no part of the first mind's record.
+   The fence touch of stage 1 (file names only) carried nothing.
+2. **Prior and method.** The same model. The routes differ at the count (V6-COUNT/V6-ANTI against TIPS) and at the flank step (pinned arcs and
+   an exact identity against a curvature bound); they agree in the mechanism (G83's straddle).
+3. **Criterion fixed first.** The statement quoted verbatim and checked by script at stage 1; the prediction registered at `5ddd2c1d`, before any
+   derivation was written — after some minutes of thought, disclosed there.
+4. **The statement attacked.** § 2.3: the registered likeliest break built and killed; each hypothesis removed; the attack succeeds only at the
+   colour count (`k = 9`), which the *not claimed* line already names.
+
+**Count: two minds** — blind to the argument, the same model, a different route at two steps. The `given:` line's caveat stands: round 3's
+labels were in view.
+
+### 3.4 The report (as sent)
+
+```
+JOB FS116-V6 — DONE   harness≈<filled at send> (own≈<filled at send>)
+RESULT: FS116-Y4-EMPTY — TRUE (derived, hand). Blind second mind, the same model (Opus 5.5); count two minds. My route does not use FS116-Y3-TIPS or -SIX: V6-COUNT + V6-ANTI + V6-HUG. Prediction (refuted 0.6) missed.
+RECORD: plans/FS116-V6-verification.md   COMMITS: 5ddd2c1d, 2429e200, <stage 3>
+INVENTORY: (see § 3.5)
+HELD FOR THE COORDINATOR: (see § 3.5)
+```
+
+### 3.5 Inventory for the coordinator
+
+- result — FS116-Y4-EMPTY TRUE by a second, blind route (same model); two minds — § 2.2, § 3.2 row 1.
+- result — the class dies without FS116-Y3-TIPS's "exactly one tip per hub" and without Y3-SIX: V6-HUBS (six change points, `m = 1`, by a
+  tip count), V6-ANTI and V6-COUNT replace them; EMPTY's grade need not rest on round 3's statements — § 2.2, § 3.2 row 2.
+- result — V6-HUG, FLANK's content in the case EMPTY uses, by a second route (germ-pinned unit arcs, exact identity; control `v6-hug`) — § 3.2 row 3.
+- result — V6-ADJ: same-coloured outer tiles at adjacent hubs cannot both hug the lens arcs beyond their hubs (not needed by EMPTY) — § 2.3 item 2.
+- prediction scored — predicted refuted 0.6 (a five-colour hub at radius just above 1); verdict derived; missed (Brier 0.36) — § 1.4, § 2.3 item 1.
+- retraction — none (0 by this mind).
+- fence touch — stage 1: an `ls plans/ | grep verification` printed the names `plans/FS121-*-verification.md`; names only, nothing read — § 1.3.
+- statement defect — none; a wording note: "radius above 1" and "radius 1" name one class (an open set containing `B̄(p, 1)` contains a larger
+  closed disc) — § 3.2 row 7.
+- question for another lane — §§ 12 and 14's FS116-Y3-SIX, -TIPS, -NBTIP, -TIGHTLENS, -STARFORCE (and the first mind's fuller list) are vacuous if
+  EMPTY holds; how the close grades vacuous statements is Keryx's — § 2.4, § 3.2 row 8.
+- tool defect — my own two tools each had a defect caught on first run, before any result was read from them (an absolute value in `fs116_v6_hug.py`'s
+  rounding guard; a sampling margin in `fs116_v6_sq9.py`); fixed before stage 2's gate — `tools/fs116_v6_hug.py`, `tools/fs116_v6_sq9.py`.
+- prior-art debt — none run by this job; the first mind's "no outside search — owed" stands.
+- invention signal — none seen.
+
+### Theorems this phase proved (stage 3)
+
+- None new at stage 3; stage 2's list stands.
+
+## Stage 3 — SAVED
