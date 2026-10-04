@@ -1534,3 +1534,42 @@ reason by the close.*
      the carriers, the gate and the landing. Launched in I2l's slot: 1 (I4h) + 1 (IC1) + 1 (KB) + 1 (I2m) = 4. **Second instance of item 206's gate defect**: my
      script's global rename turned the quoted source heading "(FS131-I2l)" into "(FS131-I2m)", a heading that does not exist, and the gate passed it; caught by
      reading the draft, fixed before launch. The gate's § check is evidently by prefix or looser; the agent-forge repro is owed (item 206).
+216. **FS131-KB handed back at stage 5, harness ≈ 462k** (report `data/fs131/reports/FS131-KB.md` on `fs131-w5b`; branch at `49ed9cc4`, checked): **the base
+     planned as 19 `sorry` leaves** in `Plane/ValidMap/BaseWalk` (the bundled context `BaseCtx`; the pseudo-colouring facts A0–A4 with the bridge to wave 3's
+     `CircleColouring`; the circle-only reduction and `select`; the planar core C1–C5; the refuters D1–D6; the count E1), and `row134BaseUA` with its four
+     consumers moved, names and statements unchanged, into `Plane/ValidMap/BaseDense`. Keryx's receipts: build log `build/gate/build/20261004T193142Z-1794581.log`
+     (w5b) "Build completed successfully (5366 jobs)", 0 warnings other than `sorry`; `sorry` lines by count BaseWalk 19, BaseDense 5, Dense 5. Its findings as in
+     item 213 (GAP-ELEVEN isolated as the one leaf `BaseCtx.exists_eleventh`; `l3_base` sharing `linkage_band` with `bv_l3`; `NoInertNear` unchanged), plus:
+     **`cor3` needs `B̄(x, 1)` covered at both vertices**, which the base cannot supply at `x ∈ ω(p)`, `p ∈ B̄(u, 1)` (its |c′| ≤ 2 leaf) — `cor3`'s argument reads
+     only small discs, so a local variant or a weaker hypothesis is owed. Slips (KB's): the as-given build ran after the skeleton was written; the obligation
+     pass and the `#check`s not run (budget). **Tool defect**: `RUNNING.md` § Building points to ".claude/agents/debruijn.md § Building Lean", which does not
+     exist — the text is `LEAN.md` § Building. **Stub to mint**: a shared planar-infrastructure job (the finite boundary graph of an `ArcMap` in a compact disc,
+     with its handshake lemma; Mathlib has no Jordan curve theorem at the pin), serving the base's C3 `retArcs_nested`, C4 `exists_endpoint` and
+     `cvb_thom_reduced`'s boundary walks.
+217. **FS131-IC1 handed back at stage 3, harness ≈ 442k** (report `data/fs131/reports/FS131-IC1.md` on `fs131-w4c`; branch at `7bb8837b`, checked): `Contact` 10 → 6.
+     **[kernel] on the branch, standard three**: FS110-N3-DEG with unit arcs (`ArcMap.woodallCone`, curvatures in [−1, 1]) and as filed (`woodallCone_strict`,
+     Condition 5), FS110-N3-CONF (iii) / N3-CLEAR (`clear_of_subset_interior_allowedCone`), 35 children (among them `woodall_contacts`); FS110-N4-SHAVE's
+     criterion `shaveAvailable_of_not_doublyShadowed` proved over `flank_shadows` (open). Keryx's receipts: build log `build/gate/build/20261004T193115Z-1790239.log`
+     (w4c) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `Contact` 6 `sorry` lines by count; `data/fs131/ic/axioms-stage3.txt`
+     prints the three on the standard three and `shaveAvailable_of_not_doublyShadowed` with `sorryAx`. **Corrections owed** (route notes, no statement change):
+     wave 4's plan § 13.1 engine 3 ("the moves never delete an arc") is wrong for `exists_rayMerge` and `exists_merge` — each needs a cut at `v` (arcs through
+     `v` replaced by at most three pieces), so both cost more than "M–H"; `exists_shave` does not assume `g ≠ c` or `h ≠ c`, so the case `g = c`, `σ < κ₂` needs
+     the same cut — no statement change, since wave 5 applies SHAVE wherever `ShaveAvailable` holds. `stuck_structure` (ii) needs N4-FLANK's mechanism (doubly
+     shadowed ⟹ out-type `h`-tile at N, out-type `g`-tile at S′) as a child, from which `flank_shadows` follows; most of that leaf's work is contacts near N or S′.
+     New tool `tools/fs131_ic_addrecords.py` (negative control watched). Imports: `Contact` now imports `Plane/SVMap`; `BaseSteps` may import `Contact` (no
+     cycle). **Shared lemma** `ringArcsWithin_of_Γ_subset` (engine 2) is written nowhere yet; Contact's moves and I4h's bends both need it. Slip (Keryx's): IC1's
+     brief's first line was I4h's title (carried over by my script); IC1 worked from the header and body.
+218. **Rulings on KB's and IC1's held items** (four parts each, compressed where the alternative is plain).
+     (a) **GAP-ELEVEN → an Ephodos derivation job, FS131-E4, now, in KB's slot**; no statement change to `Row134BaseUA` before its verdict. Alternative weighed:
+     repair (b) or (c) by ruling now. Why: (b) changes rows (radius 4) and (c) changes the base's statement — both need the deriver's reading of whether the
+     enclosure case can occur and of what rows 134, 135, 137 as filed rest on. Confidence: high.
+     (b) **`cor3`'s local variant**: the base's implementer adds it as a new lemma (`cor3_local`, reading small discs only); `cor3` keeps its statement. Alternative:
+     weaken `cor3`'s hypothesis (a wave-5 statement change). Why: a child is always allowed and changes no row. Confidence: high.
+     (c) **The planar-infrastructure job**: accepted, queued after wave 5's implementer (it serves only the base's C3–C4 and `cvb_thom_reduced`, both priced late).
+     Confidence: medium. (d) **KB's owed obligation pass and `#check`s** go to the base's implementer as its first stage, not a separate planner (the skeleton
+     is small). Confidence: medium. (e) **`fs131-w5b` merges into `fs131-w5`** as the first step of wave 5's implementer. (f) **IC1's slot → FS131-IC2** (Contact's
+     6). (g) **`ringArcsWithin_of_Γ_subset`**: one name, in `Plane/ValidMap/Basic`; whichever of I4h and IC2 needs it first writes it under exactly that name;
+     the merge deletes an identical copy (`tools/fs131_qa1_dupes.py`) or keeps one and adapts. I4h told by message.
+219. **Brief FS131-IC2, wave 4's second `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC2-contact.md`, derived by script from IC1's, title line fixed,
+     gated PASS): `Contact`'s 6 on `fs131-w4c`, no merge or gate of its own. Launched in IC1's slot. Note: IC1 prices each of the 6 at about a session, so
+     `Contact` (not `BaseSteps`/`UnitArc`) is now wave 4's long pole.
