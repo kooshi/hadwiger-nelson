@@ -48,3 +48,48 @@ the singletons of `Q` are a closed cover by sets meeting no two sides, and no po
 launched 07:26 (log `data/fs131/leb/build-stage1.log`); at this stage's commit it is still waiting for the slot (ledger 80 of 90 GiB,
 two other trees building). Its result is recorded in Stage 2. Because `scripts/build_order.py` builds every file under `Proofs/`, that
 build includes the skeleton modules of Stage 3 (already elaborated with `lake env lean`, sorry warnings only).
+
+## Stage 2 — SAVED: the source read
+
+### 2.1 Hurewicz–Wallman, *Dimension Theory* (Princeton University Press, revised edition 1948; first edition 1941)
+
+Obtained from the Internet Archive's Digital Library of India scan, item `in.ernet.dli.2015.84609` (the 184-page PDF and its OCR text,
+fetched 2026-10-04 into the session's scratch directory; not committed — **for the library**: `~/source/library/pdf/hurewicz-wallman-1948-dimension-theory.pdf`
+from `https://archive.org/download/in.ernet.dli.2015.84609/2015.84609.Dimension-Theory.pdf`). The scan is the 1948 printing; the
+wave-4 docstring's "(1941)" names the first edition, whose Thm IV 2 is recalled, not read, here.
+
+| part | pages | read | what it holds |
+|---|---|---|---|
+| Ch. IV § 1, A)–C) | 37–40 | read (OCR, with the scan's page heads) | a mod-2 degree `n(φ, T)` counted over a triangulation of `Sₙ` (a parity count of simplexes covering a point), hence no retraction of the ball onto its sphere, hence **Brouwer's fixed-point theorem** (C) |
+| Ch. IV § 1, D) | 40–41 | read | **the partition theorem**: if `Bᵢ` is closed and separates the opposite faces `Cᵢ, Cᵢ'` of `Iₙ` (`i = 1..n`), then `B₁ ⋯ Bₙ ≠ ∅`; proof by Brouwer applied to `x ↦ x + (±d(x, Bᵢ))ᵢ` |
+| Ch. IV § 2 (Thm IV 1) | 41–42 | read | `dim Iₙ = n`, `dim Eₙ = n`, from D) |
+| Ch. IV § 3, **Thm IV 2** | 42–44 | **read in full** | statement: *"Suppose an n-dimensional cube is the sum of a finite number of closed sets, none of which contains points of two opposite faces. Then at least n + 1 of these closed sets have a common point."* (p. 42). Auxiliary A) (p. 42–43: extending a separator of `AC, AC'` in a closed `A` to a separator of `C, C'` in `X`, by complete normality) and B) (p. 43: a decreasing chain `K₁ ⊃ ⋯ ⊃ Kₙ` of successive separators is nonempty, from A) and D)). **The proof** (pp. 43–44): *"Denote by L₁ the sum of the sets in the given decomposition of Iₙ which meet C₁, L₂ the sum of the remaining sets which meet C₂, L₃ the sets not in L₁ + L₂ which meet C₃, …, and L_{n+1} the sum of the sets which meet no Cᵢ"*; then `Kᵢ = L₁ ⋯ Lᵢ (L_{i+1} + ⋯ + L_{n+1})` satisfy B), so `L₁ ⋯ L_{n+1} ≠ ∅`, *"the theorem itself then follow[ing] from the fact that each of the original closed sets of the given decomposition is contained in only one Lᵢ"* |
+| Ch. I § 3 (history), Ch. V | — | not read | the remark (p. 44) points to Ch. V for the covering-dimension reading |
+
+The OCR text was checked against the page heads it carries (`40`, `§ 2 ] … 41`, `42`, `§3] LEBESGUE'S COVERING THEOREM 43`, `44`); the
+quoted sentences are the OCR's with its spacing repaired.
+
+### 2.2 A modern source: Vander Woude, Dixon, Pavan, Radcliffe, Vinodchandran, arXiv:2306.12593 (2023)
+
+*Neighborhood Variants of the KKM Lemma, Lebesgue Covering Theorem, and Sperner's Lemma on the Cube* (fetched 2026-10-04; **for the
+library**: `~/source/library/pdf/arXiv-2306.12593-vanderwoude-neighborhood-kkm-lebesgue.pdf`).
+
+| part | read | what it holds |
+|---|---|---|
+| § 1 intro, § 1.1 (Defs 1.1, 1.4, 1.5; Thms 1.2, 1.6, 1.7; Cors 1.8–1.9 with proofs) | read | Thm 1.6 is Lebesgue's covering theorem for `[0,1]ᵈ` (*"Given a Lebesgue cover of [0,1]ᵈ, there exists a point p ∈ [0,1]ᵈ belonging to at least d + 1 sets in the cover"*), citing Lebesgue 1911 and H–W Thm IV 2; Thm 1.7 the cubical KKM lemma; the three are *"naturally equivalent"* |
+| § 1.2 (Def 1.10, Thm 1.12, Rems 1.11–1.14) | read | cubical Sperner lemmas (Kuhn 1960, Wolsey 1977, De Loera–Peterson–Su 2002), with `2ᵈ` or `d + 1` colours |
+| App. A.1 (Lemmas A.1–A.4) | read | careful proofs of the equivalences: A.2 (KKM-Lebesgue ⟹ Lebesgue) labels a point by the least index of a set containing it, the labelling used here |
+| §§ 2–4, A.2, B (the neighborhood variant, Brunn–Minkowski) | not read | not used |
+
+### 2.3 What the route takes from each
+
+The grouping (step 1 of the module's route) is Hurewicz–Wallman's own, for `n = 2`: `L₀` = sets meeting the left side, `L₁` = other
+sets meeting the bottom, `L₂` = the rest; "each of the original closed sets … is contained in only one Lᵢ" gives three distinct
+indices. Where H–W then use B) and D) (separators, complete normality, Brouwer), this module proves the three-set statement directly
+by a Sperner parity count on a triangulated grid and the Lebesgue number lemma — the combinatorial route the modern source names
+(Sperner ⟺ KKM ⟺ Lebesgue), with A.2's least-index labelling. H–W's own Brouwer proof (§ 1 A) is itself a mod-2 count over a
+triangulation, so the parity idea is the same at bottom.
+
+### 2.4 The build as given (Stage 1's pending item)
+
+(Recorded in Stage 3 when it lands.)
