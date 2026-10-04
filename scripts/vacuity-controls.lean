@@ -95,4 +95,65 @@ theorem planted_arrow_false (_c : Plane.AeColouring 1) (x : ℂ) (h : x = x + 1)
 theorem planted_unknown_ne (_c : Plane.AeColouring 3) (x y : ℂ) (h : x = y + 1) : x ≠ y :=
   fun hxy => by subst hxy; simpa using congrArg (fun z => z - x) h
 
+/-- CONTROL 21 — wave 3's `IsRingArc` (FS131-I3h): a closed refutation at a concrete map (`halfPlane2`'s ring carries
+no arc of `Γ`). The evidence for CONTROL 22. -/
+theorem planted_not_ringArc : ¬ Plane.halfPlane2.IsRingArc 0 0 1 0 0 := Plane.halfPlane2_not_isRingArc 0 1 0 0
+
+/-- CONTROL 22 — the statement it must kill. `VACUOUS`. -/
+theorem planted_vacuous_ringArc (_h : Plane.halfPlane2.IsRingArc 0 0 1 0 0) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 23 — `IsRingArc` at a variable map: `GENERIC`. -/
+theorem planted_generic_ringArc {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (θ₁ θ₂ : ℝ) (c c' : Fin k)
+    (_h : F.IsRingArc p θ₁ θ₂ c c') : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 24 — `IsRingArc` at a concrete instance nothing decides (`sixFrag`'s ring over `(30°, 60°)` has side colours
+`0` and `3`, so this one is false, but no theorem says so). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_ringArc (_h : Plane.sixFrag.IsRingArc 0 (Real.pi / 6) (Real.pi / 3) 2 4) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 33 — wave 3's `IsQArc`: a closed refutation (no ring arc on `halfPlane2`'s ring, so no (Q) arc). -/
+theorem planted_not_qArc : ¬ Plane.halfPlane2.IsQArc 0 0 1 := fun ⟨c, c', h, _⟩ =>
+  Plane.halfPlane2_not_isRingArc 0 1 c c' h
+
+/-- CONTROL 34 — the statement it must kill. `VACUOUS`. -/
+theorem planted_vacuous_qArc (_h : Plane.halfPlane2.IsQArc 0 0 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 35 — `IsQArc` at a variable map: `GENERIC`. -/
+theorem planted_generic_qArc {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (θ₁ θ₂ : ℝ) (_h : F.IsQArc p θ₁ θ₂) :
+    (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 36 — `IsQArc` at a concrete instance nothing decides (true, as it happens, but proved nowhere
+unconditionally). `UNKNOWN`. -/
+theorem planted_unknown_qArc (_h : Plane.sixFrag.IsQArc 0 (Real.pi / 6) (Real.pi / 3)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 25 — wave 3's `IsChangePoint`: a closed refutation (`r(90°) = i` is off `halfPlane2`'s `Γ`). -/
+theorem planted_not_changePoint : ¬ Plane.halfPlane2.IsChangePoint 0 (Real.pi / 2) 0 1 := by
+  rintro ⟨hΓ, -⟩
+  have := Plane.halfPlane2_im_eq_zero_of_mem_Γ hΓ
+  simp [Plane.ringPt, Plane.e_eq] at this
+
+/-- CONTROL 26 — the statement it must kill. `VACUOUS`. -/
+theorem planted_vacuous_changePoint (_h : Plane.halfPlane2.IsChangePoint 0 (Real.pi / 2) 0 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 27 — `IsChangePoint` at a variable map: `GENERIC`. -/
+theorem planted_generic_changePoint {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (ψ : ℝ) (X X' : Fin k)
+    (_h : F.IsChangePoint p ψ X X') : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 28 — `IsChangePoint` at a concrete instance nothing decides. `UNKNOWN`. -/
+theorem planted_unknown_changePoint (_h : Plane.sixFrag.IsChangePoint 0 (Real.pi / 4) 0 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 29 — wave 3's `IsHub`: a closed refutation (no change point at `r(90°)`). -/
+theorem planted_not_hub : ¬ Plane.halfPlane2.IsHub 0 (Real.pi / 2) := by
+  rintro ⟨⟨X, X', hΓ, -⟩, -⟩
+  have := Plane.halfPlane2_im_eq_zero_of_mem_Γ hΓ
+  simp [Plane.ringPt, Plane.e_eq] at this
+
+/-- CONTROL 30 — the statement it must kill. `VACUOUS`. -/
+theorem planted_vacuous_hub (_h : Plane.halfPlane2.IsHub 0 (Real.pi / 2)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 31 — `IsHub` at a variable map: `GENERIC`. -/
+theorem planted_generic_hub {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (ψ : ℝ) (_h : F.IsHub p ψ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 32 — `IsHub` at a concrete instance nothing decides. `UNKNOWN`. -/
+theorem planted_unknown_hub (_h : Plane.sixFrag.IsHub 0 (Real.pi / 4)) : (1 : ℕ) = 1 := rfl
+
 end HadwigerNelson
