@@ -242,3 +242,172 @@ Sent at stage 1 (two messages): F1 (step 5's equality case), F2 (step 7's termin
 skeleton modules and waves 3–4's; every warning `declaration uses 'sorry'`; the one other line is the up-to-date probe's expected "target is
 out-of-date"; `Woodall/Basic` builds with no warning), 8 m 19 s, exit 0 (`build/gate/build/20261004T095859Z-2589972.log`; driver log
 `data/fs131/w/build-stage3.log`).
+
+## Stage 4 — SAVED: the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), the plan per leaf, the handoff
+
+### 4.1 What the pass found: four engines from which the contradiction leaves derive
+
+Every contradiction in the chain is one local obligation — **a change point `b` inside an open two-coloured set `W` whose unit circle meets `W`** —
+and the global claims differ only in how they find `b`. The engines (the implementer adds them to `Plane/Woodall/Collar` with these statements,
+each a child of the leaves named; signatures fixed here, names free):
+
+- **Engine A, the contradiction** (child of `woodall_step4`, `townsend_lemma`, `step5_eq_of_condition5`, `step8`):
+  ```lean
+  theorem false_of_changePt_landing {A B W : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
+      (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) (hW : IsOpen W) (hWAB : W ⊆ closure (A ∪ B)) {u : ℂ} {ρ θ σ : ℝ} (hρ : 0 < ρ) (hρ2 : ρ < 2)
+      (hσ : σ = 1 ∨ σ = -1) (hbW : u + (ρ : ℂ) * e θ ∈ W) (hbA : u + (ρ : ℂ) * e θ ∈ closure A) (hbB : u + (ρ : ℂ) * e θ ∈ closure B)
+      {s : Rim} (hland : CollarAt W u s (θ + σ * Real.arccos (ρ / 2))) : False
+  ```
+  Proof: `lemmaL` gives `Disjoint (sphere b 1) W`; `sphere_meets_of_collarAt` gives a point of it. Two lines.
+- **Engine B, change points in every band** (child of the same):
+  ```lean
+  theorem exists_changePt_band {A B : Set ℂ} (hA hB hAu hBu) {u : ℂ} {s : Rim} {θ₁ θ₂ h : ℝ} (hlen : π / 3 < θ₂ - θ₁) (hh : 0 < h)
+      (hh1 : h ≤ 1) (hC : collar u s θ₁ θ₂ h ⊆ closure (A ∪ B)) :
+      ∃ ρ θ, θ ∈ Ioo θ₁ θ₂ ∧ u + (ρ : ℂ) * e θ ∈ collar u s θ₁ θ₂ h ∧ u + (ρ : ℂ) * e θ ∈ closure A ∧ u + (ρ : ℂ) * e θ ∈ closure B
+  ```
+  applied to thinner collars (`collar_subset_collar`) it gives change points at radius as close to `1` as wanted. Proof: `exists_unit_pair_collar`,
+  `isOpen_collar`, `isPreconnected_annSector`, `exists_changePt`; the radius and angle read from the image (`annSector`'s membership).
+- **Engine C, the closed-arc form** (strengthening of `woodall_step4`, Polya's more general statement; child of `woodall_step4` and of
+  `step5_eq_of_condition5`):
+  ```lean
+  theorem false_of_collars_closed {A B : Set ℂ} (hA hB hAu hBu) {u : ℂ} {θ₁ θ₂ : ℝ} (hlen : 2 * π / 3 ≤ θ₂ - θ₁)
+      (hcov : ∀ θ ∈ Icc θ₁ θ₂, ∃ s, CollarAt (closure (A ∪ B)) u s θ)
+      (hseed : ∃ (s : Rim) (φ₁ φ₂ : ℝ), θ₁ ≤ φ₁ ∧ φ₂ ≤ θ₂ ∧ π / 3 < φ₂ - φ₁ ∧ ∀ φ ∈ Icc φ₁ φ₂, CollarAt (closure (A ∪ B)) u s φ) : False
+  ```
+  Proof: Lebesgue's number for the cover of `[θ₁, θ₂]` by the collars' angular windows (`lebesgue_number_lemma_of_metric`, `isCompact_Icc`) gives
+  `η > 0` such that every angle within `η` of `[θ₁, θ₂]` carries a collar; continuity of `arccos` at `1/2` (`Real.continuous_arccos`; `arccos (1/2)
+  = π/3` by `Real.arccos_cos` with `Real.cos_pi_div_three`) gives a band `|ρ − 1| < t` with `|arccos (ρ/2) − π/3| < η`; Engine B gives a change
+  point `θ ∈ [φ₁, φ₂] ⊆ [θ₁, θ₂]` in that band; since `θ₂ − θ₁ ≥ 2π/3`, `θ ≤ θ₂ − π/3` or `θ ≥ θ₁ + π/3`, so `θ + α` or `θ − α` lies within `η` of
+  `[θ₁, θ₂]`; Engine A. **`woodall_step4` is its corollary** (a closed sub-arc of length `≥ 2π/3`, the seed the same side).
+- **Engine D, the bad radii are finite** (child of `townsend_lemma`):
+  ```lean
+  theorem finite_bad_radii {K : Set ℝ} (hK : K.Finite) :
+      {ρ : ℝ | 0 < ρ ∧ ρ < 2 ∧ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ, 2 * Real.arccos (ρ / 2) = κ - κ' + 2 * π * m}.Finite
+  ```
+  Proof: `2 arccos(ρ/2) ∈ (0, 2π)` (`Real.arccos_pos`, `Real.arccos_le_pi` — strict inside), so for each of the finitely many `κ − κ'` only
+  finitely many `m`; `arccos` is injective on `[−1, 1]` (`Real.arccos_injOn`), so finitely many `ρ`. Then `townsend_lemma`: the seed's uniform
+  collar (`exists_collar_of_collarAt`), a band avoiding the finitely many bad radii (`t` below every `|ρ_bad − 1|`), Engine B's change point `b`,
+  one of its landings off `K + 2πℤ` (else `ρ` is bad), `hcollar` there, Engine A with `W` the union of the two collars.
+
+The **second-order lemma** (child of `step5_eq_of_condition5` and `step6`, statement fixed by the implementer from this description, recorded
+back): at a point `v` of an arc map whose picture has an edge in direction `β` between sectors of colours `X ≠ Y`, at the angle `ψ₀ = β ± π/2` (the
+normal on the side of the edge's concavity, or either for a segment), **unless the edge is, near `v`, an arc of the unit circle `ω(v + e(ψ₀))`**, a
+collar (inner or outer) about `ψ₀` lies in `shadow (region X) ∩ shadow (region Y)`: compare the edge (a segment: curvature `0`; a circle of radius
+`r` tangent to `β` at `v`: curvature `±1/r`) with `ω(v + e(ψ₀))` (curvature `1`) — if the edge bends less toward `v + e(ψ₀)`, inner points about
+`ψ₀` have circles crossing it (into both sectors), if more, outer points do (wave 4's `tanHeight` frame: `TanAbove`, `TanBelow`, `curvDown` are the
+vocabulary; FS110's curvature map is the same computation). Price **M+**.
+
+### 4.2 Measures
+
+No leaf recurses. Two finite searches, each by an extremal choice rather than recursion: `aeMap6_merged`'s horn chain (a zero-angle sector whose
+next sector has positive angle exists when any zero-angle sector exists, since the angles sum to `2π`: take it directly, no induction), and
+`exists_woodallMerged`'s merges at one vertex (each merge removes at least one sector: the number of sectors at the vertex is the measure; Woodall's
+"Let us suppose that we have carried out all the extensions of the above form that are possible").
+
+### 4.3 Smells read
+
+None in the statements. One deliberate shape, recorded: `aeMap6_merged` concludes `False` rather than `WoodallNormal` (§ 3.1, vacuity). The
+prove/test/assume partition: **prove** every leaf but `step5_eq` and `step7`; **assume** nothing new (`lebesgue_covering_square`, FS131-LEB's,
+through `ts_t`); **test** — the adversary `not_woodall_step4_two_thirds` pins the strictness, the foundation's spec examples pin the definitions.
+
+### 4.4 Mathlib names confirmed with `#check` at the pin (`v4.32.0`, scratch file, 2026-10-04)
+
+`Complex.polarCoord` (an `OpenPartialHomeomorph ℂ (ℝ × ℝ)`), `Complex.polarCoord_symm_apply`, `Complex.polarCoord_target` (`= Ioi 0 ×ˢ Ioo (-π) π`),
+`OpenPartialHomeomorph.isOpen_image_symm_of_subset_target`, `Complex.continuousAt_arg` (on `slitPlane`), `Complex.norm_mul_exp_arg_mul_I`,
+`Real.cos_arccos`, `Real.arccos_le_pi`, `Real.arccos_pos`, `Real.continuous_arccos`, `Real.sin_arcsin`, `IsPreconnected.image`, `IsPreconnected.prod`,
+`isPreconnected_Ioo`, `isPreconnected_closed_iff`, `IsPreconnected.subset_left_of_subset_union`, `IsCompact.elim_finite_subcover`, `isCompact_Icc`,
+`lebesgue_number_lemma_of_metric`, `IsCompact.tendsto_subseq`, `Fintype.card_le_of_injective`, `Finite.card_range_le`, `Set.ncard_le_card`,
+`Dense.inter_open_nonempty`, `Set.Finite.image`. **Not found**: `Real.arccos_one_half` (use `Real.arccos_cos` with `Real.cos_pi_div_three`),
+`Set.ncard_range_le` (use `Finite.card_range_le`). Library vocabulary used: `lemmaL`, `ArcMap.ts_t` (`Plane/SVMap`), `shadow`, `ArcMap.Condition5`
+(`Plane/ValidMap/Basic`), `coneAt`, `angleIcc`, `ArcMap.coneAt_region_eq_biUnion`, `ArcMap.finite_tiles_near`, `ArcMap.dense_interiorPts`,
+`IsTile.isPreconnected` (waves 3–4).
+
+### 4.5 The plan per leaf (E easy, M moderate, H hard; prices for an agent, to be re-priced from the first two leaves)
+
+**`Plane/Woodall/Collar`**
+
+| leaf | route | children / names | price |
+|---|---|---|---|
+| `isOpen_annSector` | rotate and translate (`z ↦ u + e c * z`, a homeomorphism) a window `(c − 1, c + 1)` of the angles into `(−π, π)` and take the image of `Ioo r₁ r₂ ×ˢ (window)` under `polarCoord.symm` (`isOpen_image_symm_of_subset_target`; `r₁ ≥ 0` keeps the radii in `Ioi 0`); cover `(θ₁, θ₂)` by such windows | `Complex.polarCoord_symm_apply` (it is `r (cos θ + sin θ i) = r e θ`, `e_eq`) | M |
+| `isPreconnected_annSector` | `(isPreconnected_Ioo.prod isPreconnected_Ioo).image _ (by fun_prop)` | `continuous_e` | E |
+| `isOpen_collar` | cases on `s`; `isOpen_annSector` with `1 − h ≥ 0` or `1 ≥ 0` | — | E |
+| `collar_subset_collar` | cases on `s`; `image_subset` with `prod_mono` of `Ioo_subset_Ioo` | — | E |
+| `exists_collar_of_collarAt` | finite subcover of `Icc θ₁ θ₂` by the windows `Ioo (θ − h_θ) (θ + h_θ)` (`IsCompact.elim_finite_subcover`); `h` the minimum (positive, finitely many); a point of `collar u s θ₁ θ₂ h` lies in the window of some `θ_i` and in its thinner band | `collar_subset_collar` | M− |
+| `exists_unit_pair_collar` | inner: `ρ ∈ (max (1 − h) (1/(2 sin((θ₂−θ₁)/2))) , 1)` — wait: choose `ρ` close to `1` with `α = 2 arcsin(1/(2ρ)) < θ₂ − θ₁` (continuity of `arcsin` at `1/2`), points `u + ρ e(θ₁ + ε)` and `u + ρ e(θ₁ + ε + α)`, distance `2ρ sin(α/2) = 1` (`Real.sin_arcsin`; the chord identity `‖e a − e b‖ = 2 |sin((a−b)/2)|`, wave 1's `Plane/Chord`); outer: any `ρ ∈ (1, 1 + h)`, `α < π/3` | `Plane/Chord`'s `ringPt_sub_ringPt` | M− |
+| `exists_changePt` | (i) if `W ∩ B = ∅` then `A` is dense in `W` (`W` open, `W ⊆ closure A`), and sweeping gives a unit pair in `A`: `U = A ∩ W ∩ ball x δ` is open non-empty, `shadow U` is open (`⋃ θ, U + e θ`) and contains `y + (a − x)` for `a ∈ U`, within `δ` of `y ∈ W`, so it meets `A` (`Dense.inter_open_nonempty`): contradiction with `hAu`; symmetric for `B`; (ii) `isPreconnected_closed_iff` with the closed sets `closure A`, `closure B` covering `W` (`closure_union`) | `shadow` openness (a child) | M |
+| `sphere_meets_of_collarAt` | the point `p = u + e(θ + σα)`, `α = arccos(ρ/2)`, lies on `ω(b)` (`‖e(θ+σα) − ρ e θ‖² = 1 + ρ² − 2ρ cos α = 1`, `Real.cos_arccos`); along `ω(b)`, `t ↦ ‖b + e(φ₀ + t) − u‖²` has non-zero derivative at `t = 0` (`u, b, p` not collinear for `0 < ρ < 2`), so points of `ω(b)` near `p` lie at radius in `(1 − h, 1)` and in `(1, 1 + h)`; their angle is near `θ + σα` (`Complex.continuousAt_arg` after rotating by `e(−(θ + σα))`); so one lies in the collar | an `IntermediateValue`/derivative-sign child, or an explicit second-order expansion | M |
+| `woodall_step4` | Engine C's corollary (§ 4.1) | Engines A–C | M− |
+| `not_woodall_step4_two_thirds` | `u = 0`, `s = inner`, `(θ₁, θ₂) = (0, 2π/3)`, `R₀ = collar 0 inner 0 (2π/3) (1/100)`, `A = R₀ ∩ ball 1 1`, `B = R₀ \ closedBall 1 1`. Open: yes. **No unit pair in `B`**: a point of `B` has `ρ < 1` and `ρ > 2 cos θ` hence `θ > π/3`, so two points have angles within `π/3` and `d² ≤ ρ₁² + ρ₂² − ρ₁ρ₂ < 1`. **No unit pair in `A`** (all pairs `< 1`, no case split): for `0 ≤ θ₁ ≤ θ₂` with `ρ₂ < 2 cos θ₂`, `cos(θ₂ − θ₁) ≥ cos θ₂`, so `d² ≤ ρ₁² + ρ₂² − 2ρ₁ρ₂ cos θ₂ < ρ₁² + ρ₂²(1 − ρ₁) < ρ₁² + 1 − ρ₁ ≤ 1` [planner's check, one mind; V3 stage 1 verified the counterexample]. `R₀ ⊆ closure (A ∪ B)`: points of `R₀` on `ω(1)` are limits of points of `R₀ ∩ ball 1 1` (`R₀` open). Collars about each `θ ∈ (0, 2π/3)` inside `R₀` (`collar_subset_collar`) | the polar form of points of `R₀` | M |
+| `townsend_lemma` | Engine D's route (§ 4.1) | Engines A, B, D; `exists_collar_of_collarAt` | M |
+| `collarAt_shadow_outer` | from `hβ` a point `w ∈ R`, `w ≠ u`, `‖w − u‖ = r₀ ≤ c/2` with `cos(arg(w−u) − ψ) > c := cos(β − ψ)/2`; for `z = u + ρ' e ψ'`, `1 < ρ' < 1 + h`, `\|ψ' − ψ\| < h`, `h` small: `‖w − z‖² = r₀² + ρ'² − 2r₀ρ' cos(·) < 1`, so `w ∈ ball z 1`; points of `R` within `ρ' − 1` of `u` (`u ∈ closure R`, `mem_closure_of_mem_coneAt`) lie outside `closedBall z 1`; a preconnected set meeting `ball z 1` and `(closedBall z 1)ᶜ` meets `sphere z 1` (`IsPreconnected.subset_left_of_subset_union` on the two disjoint open sets) | the "preconnected meets the sphere" child | M |
+| `collarAt_shadow_inner` | the same with `ρ' < 1`: `u ∈ ball z 1`, and `w` (cos `< 0`) outside `closedBall z 1` for `h` small | as above | M |
+| `ArcMap.col_not_mem_of_mem_shadow` | `hzT (F.col z) h` gives `y ∈ region (F.col z)` at distance `1`; `hF` | — | E |
+| `ArcMap.subset_closure_of_subset_shadow` | `F.dom = univ ⊆ closure interiorPts` (`dense_interiorPts`); every interior point of `W` has its colour outside `T` | `col_not_mem_of_mem_shadow` | E |
+
+**`Plane/Woodall/Steps`**
+
+| leaf | route | children / names | price |
+|---|---|---|---|
+| `exists_sectorsAt` | finitely many arcs meet a ball about `v` (`locallyFinite`); shrink it to the arcs through `v`; each leaves `v` in one or two tangent directions and stays within angle `O(r)` of them at distance `r` (segments exactly; circles by curvature); sort the tangent directions; truncated sectors strictly between consecutive directions miss `Γ`, are preconnected, so lie in one tile (`IsTile`) and one colour; between two arcs tangent at `v` the horn is one tile; the cone equation from `coneAt_region_eq_biUnion` (wave 3); merge adjacent equal colours | wave 3's `finite_tiles_near`, `germ_dichotomy`, `coneAt_region_eq_biUnion`, `exists_mem_coneAt_region`; `Arc.isCompact_carrier` | **H** (the largest foundation leaf; a child per bullet) |
+| `SectorsAt.coloursAt_eq` | `j ∈ coloursAt v ⟺ v ∈ closure (region j) ⟺ coneAt (region j) v ≠ ∅` (⟸ `mem_closure_of_mem_coneAt`; ⟹ compactness of the circle of directions, or `v ∈ region j` and then every direction) `⟺ j ∈ range c` (the cone equation; `angleIcc a b ≠ ∅` for `a ≤ b`) | — | M− |
+| `exists_woodallMerged` | Woodall's step 3 as a simultaneous local modification: at each point `P` with a repeated colour on a sector of positive angle, (i) the **clearness lemma**: a run of sectors of total angle `< π` between two sectors `X`, `Y` of colour `c` has, within some `ε`, no point at distance `1` from a point of colour `c` (every unit circle through such a point not through `P` crosses `X` or `Y`; region-only, the circles through `P` handled by perturbing within the open run), and the clear sets of distinct vertices are clear of each other; (ii) Woodall's cone (two horns of one colour in the cusps outside two unit discs tangent at `P`) is filled; (iii) radii `ε(P)` small enough that the discs are disjoint and locally finite; (iv) the new map: arcs of `F` outside the discs, the circles of radius `ε(P)`, the colour changed on the runs; valid, plane, locally finite; Condition 5 kept (the new arcs have radius `< 1`); (v) `WoodallMerged` for it at old vertices (each repeated pair now has both runs of angle `≥ π`, hence both sectors of angle `0`) and at the new vertices on the small circles (three distinct colours, angles near `π, π/2, π/2`) | `SectorsAt` of the new map at every point (via `exists_sectorsAt`) | **H+** — plausibly a separate implementer's job by itself |
+| `step5_lt` | the inner arc opposite sector `i` (directions `β₁ = d i.castSucc`, `β₂ = d i.succ`): for `ψ` in a compact sub-arc `J` of `I = (β₂ − 3π/2, β₁ − π/2)` of length `≥ 2π/3` (possible: `\|I\| = π − φ > 2π/3`), each of the three colours has a tile at `v` with a cone direction `β` in the open half `(ψ + π/2, ψ + 3π/2)` (`β₁ − δ` for the previous sector, `β₂ + δ` for the next, a direction of sector `i`; a horn's own direction) — `collarAt_shadow_inner` on those tiles, the minimum of the three collars, `subset_closure_of_subset_shadow` (two colours left, `k ≤ 5`), `woodall_step4` with `s = inner` | a child `SectorsAt.neighbour_dirs` (the previous sector ends at `β₁`, the next starts at `β₂`, through the `Fin` wrap and the `2π` shift) | M |
+| `step5_eq_of_condition5` | as `step5_lt` on the open arc of length exactly `2π/3`, plus at each end `ψ₁`, `ψ₂` the second-order lemma (§ 4.1; Condition 5: no edge is a unit arc) for a collar about the end; Engine C with `[ψ₁, ψ₂]` and the inner seed over a closed sub-arc of length `> π/3` | second-order lemma; Engine C | M+ |
+| `step5_eq` | **open** — § 1.6 Q1 (FS131-E1). Leave `sorry`; the implementer does not attempt it | — | — |
+| `aeMap6_merged` | at a picture with `n ≥ 3` (`hM`): if some sector has angle `0`, one whose next sector has positive angle exists (the angles sum to `2π`); its neighbours' colours differ (the next one's colour is not repeated, by `hM`), so `step5_lt` kills it; hence no zero-angle sector, so no repeated colour (`hM`), so `c` injective; then every sector's neighbours have distinct colours, and `step5_lt`, `step5_eq` give every angle `> π/3`: `WoodallNormal` (a private child, `VACUITY DECLARED`, § 3.1); `aeMap6_normal` | `step5_lt`, `step5_eq`, `aeMap6_normal` | M |
+| `aeMap6_merged_of_condition5` | the same with `step5_eq_of_condition5` | — | E (after `aeMap6_merged`) |
+| `step6` | the three colours' cones are the three closed sectors; the first-order presence sets (inner collar about `ψ` when every sector meets the open half opposite `ψ`; outer when every sector meets the open half about `ψ`) cover every angle except the at most six normals to the three edges (two adjacent sectors are separated only by their common edge's line); `K` = those normals; `hcollar` from `collarAt_shadow_inner`/`_outer` on tiles and `subset_closure_of_subset_shadow`; the seed: some angle `φ < 2π/3` gives a one-sided arc of length `π − φ > π/3` (first order, a closed sub-arc); if all three angles are `2π/3`, a switching normal that is not a cut (at most three edges are unit arcs centred on `ω(v)`, so at least three of the six normals are not) carries a collar by the second-order lemma, extending the adjacent one-sided arc past `π/3`; `townsend_lemma` | second-order lemma; `collarAt_shadow_*`; `townsend_lemma` | **H−** |
+| `step7` | **open** — § 1.6 Q2 (FS131-E1). Leave `sorry` | — | — |
+| `step8` | `φ_b` the smallest angle (`π/3 < φ_b ≤ 2π/5`), the inner arc opposite `b` of length `π − φ_b ≥ 3π/5` coloured by the two colours `D, E` outside `{A, B, C}` (`step5_lt`'s set-up); Engine B gives change points in every thinner band; Engine A forbids a landing in the arc, so their angles lie in the window `[ψ₂ − π/3 − o(1), ψ₁ + π/3 + o(1)]`; a limit point `Q ∈ ω(v)` (`IsCompact.tendsto_subseq`) lies in `closure (region D) ∩ closure (region E)`; outside `ω(v)` near `Q` only `B` (each of `a, c, d, e` has a tile with a cone direction in the open half about the window's angles, by `φ_x > π/3` and `φ_b ≤ 2π/5` — the angle arithmetic of § 1.6's Q2 paragraph; `collarAt_shadow_outer`); interior points there exist (density) and carry `B`; so `coloursAt Q = {B, D, E}`; the picture at `Q` (`exists_sectorsAt`), normal (`hN`): `n = 3` (`coloursAt_eq`, injective); `step6` at `Q` | Engines A, B; `IsCompact.tendsto_subseq`; `step6` | **H−** |
+| `exists_three_le_sectors` | `ts_t hF hP v (ε := 1)` gives `x` with `3 ≤ (coloursAt x).ncard`; `exists_sectorsAt hP x`; `coloursAt_eq` and `Finite.card_range_le` give `3 ≤ n` | `ArcMap.ts_t` (over `lebesgue_covering_square`, FS131-LEB) | M− |
+| `aeMap6_normal` | `exists_three_le_sectors`; `hN` gives `c` injective, so `n ≤ k ≤ 5` (`Fintype.card_le_of_injective`); `interval_cases n`: `step6` (with `hN`'s angles), `step7`, `step8` | — | M− |
+| `aeMap6` | `exists_woodallMerged`, then `aeMap6_merged` on the new map | — | E |
+| `aeMap6_of_condition5` | the same, `aeMap6_merged_of_condition5` (Condition 5 kept by `exists_woodallMerged`) | — | E |
+| `woodall_thm6` | `F.Valid` from `hproper` and `hdiv`; `ArcMap.aeMap6` | — | E |
+
+### 4.6 Re-pricing
+
+21 leaves in Collar (all priced E–M; Engines A–D add four children), 20 in Steps of which 2 are open (`step5_eq`, `step7`) and 1 is out of the
+implementer's range in one context (`exists_woodallMerged`, H+). The held route under Condition 5 depends on `exists_sectorsAt` (H),
+`exists_woodallMerged` (H+), `step6` and `step8` (H−) and the second-order lemma (M+); everything else is moderate. A plan's table prices high
+(`LEAN.md` § The kernel's cost model): re-price from the first two leaves of each module.
+
+### 4.7 The handoff to the chain's implementer (the form of `plans/FS131-w4-kernel-plan.md` § 14)
+
+**Where it is.** Branch `fs131-ww` (this stage's commit on top of `630018e5`), worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-ww`
+(`.lake/packages` a symlink to the main tree's, `.lake/build` its own copy — never replace it with a symlink). The branch sits on wave 4's full
+skeleton `f620977c`. Three modules: `Plane/Woodall/Basic` (sorry-free), `Plane/Woodall/Collar` (15 `sorry` leaves), `Plane/Woodall/Steps` (20,
+two of them open). The build is green with only `sorry` warnings (`build/gate/build/20261004T095859Z-2589972.log`). `Proofs.lean`, `ARCHITECTURE.md`
+and `scripts/Axioms.lean` are updated; `tools/fs131_w_decls.py --check` lists and checks the 38 records.
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`; never `lake build`. For iteration, `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false`, against scratch oleans for
+the new modules (mirror `.lake/build/lib/lean/Proofs` with `cp -rs`, write each new module's olean there with `lean -o`, the scratch first on
+`LEAN_PATH`) — never as evidence.
+
+**Dependencies not yet landed.** Waves 3 and 4 (`Plane/LocalStructure`, `Plane/SVMap`'s `lemmaL`, `ts_t`, …) are skeletons on their branches:
+this chain cites their statements as committed at `f620977c`; merge their branches in when they land, or earlier to use their proofs while
+iterating, resolving the append-only lines of `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`. `lebesgue_covering_square` is FS131-LEB's.
+
+**The order**: the Collar foundation leaves (`isPreconnected_annSector`, `isOpen_collar`, `collar_subset_collar`, then `isOpen_annSector`,
+`exists_collar_of_collarAt`) — the first two re-price the module; then `exists_unit_pair_collar`, `exists_changePt`, `sphere_meets_of_collarAt`; the
+engines A, B, C, D (§ 4.1); `woodall_step4`, `townsend_lemma`, the adversary; the shadow lemmas. Then Steps: `coloursAt_eq`, `exists_sectorsAt`,
+`step5_lt`, `aeMap6_normal`, `aeMap6_merged`, `exists_three_le_sectors`, the corollaries; then the second-order lemma, `step6`, `step8`,
+`step5_eq_of_condition5`; `exists_woodallMerged` last (re-price it first; ask Keryx for a separate job if it outgrows the context).
+
+**What the implementer may and may not change.** It may add children anywhere (the engines of § 4.1 with their signatures, the second-order lemma
+with its statement recorded back, `SectorsAt.neighbour_dirs`, the private "merged ⇒ normal" with `VACUITY DECLARED`), supporting lemmas in the
+foundation modules (statements of other waves unchanged), and imports (updating `ARCHITECTURE.md` and `scripts/Axioms.lean`, then
+`tools/fs131_w_decls.py --check`). It may not change any statement of § 3.1's table or any definition of `Plane/Woodall/Basic`; `step5_eq` and
+`step7` stay `sorry` until FS131-E1 reports (their statements may change then, through the planner). A statement that cannot be proved as written
+comes back through Keryx with the stuck goal or the counterexample.
+
+**Vacuity and inhabitants** (§ 3.1): every theorem over valid five-coloured maps of the plane concludes `False` (skipped by the scan); the others
+are inhabited by `const_sectorsAt` and the brick map (`sevenBrickMap`, `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`). No new carrier for
+`scripts/Vacuity.lean`: `SectorsAt` and `WoodallNormal`/`WoodallMerged` appear only as hypotheses of refutations or with inhabitants beside them.
+
+**How the chain lands.** It cannot land on `main` with `step5_eq` and `step7` open (nothing with a `sorry` reaches `main`). Two ways, Keryx's call
+when the rest is green: (a) wait for FS131-E1; (b) land the held part — `Woodall/Basic`, `Woodall/Collar` and the Steps leaves other than
+`step5_eq`, `step7`, `aeMap6`, `aeMap6_of_condition5`, `aeMap6_merged*`, `aeMap6_normal`, `woodall_thm6` — with the open statements taken as named
+hypotheses of the three theorems (our own unproved results enter as hypotheses, `LEAN.md` § Assumptions), i.e. `aeMap6` restated over
+`(h5eq : …) (h7 : …)`; that is a statement change and goes through the planner.
