@@ -6,7 +6,7 @@ in this milestone (inventory ruling 1): the derivation's records were read from 
 
 ## Theorems this phase proved
 
-None so far (a planning job). Hand checks recorded below are a planner's checks, graded where they appear.
+None (a planning job). The hand checks recorded below (§ 1.6's two configurations, § 4.5's bound for Townsend's counterexample) are a planner's checks, [hand, one mind], not theorems of this phase.
 
 ## Stage 1 — SAVED: the readback
 
@@ -333,7 +333,7 @@ through `ts_t`); **test** — the adversary `not_woodall_step4_two_thirds` pins 
 | `isOpen_collar` | cases on `s`; `isOpen_annSector` with `1 − h ≥ 0` or `1 ≥ 0` | — | E |
 | `collar_subset_collar` | cases on `s`; `image_subset` with `prod_mono` of `Ioo_subset_Ioo` | — | E |
 | `exists_collar_of_collarAt` | finite subcover of `Icc θ₁ θ₂` by the windows `Ioo (θ − h_θ) (θ + h_θ)` (`IsCompact.elim_finite_subcover`); `h` the minimum (positive, finitely many); a point of `collar u s θ₁ θ₂ h` lies in the window of some `θ_i` and in its thinner band | `collar_subset_collar` | M− |
-| `exists_unit_pair_collar` | inner: `ρ ∈ (max (1 − h) (1/(2 sin((θ₂−θ₁)/2))) , 1)` — wait: choose `ρ` close to `1` with `α = 2 arcsin(1/(2ρ)) < θ₂ − θ₁` (continuity of `arcsin` at `1/2`), points `u + ρ e(θ₁ + ε)` and `u + ρ e(θ₁ + ε + α)`, distance `2ρ sin(α/2) = 1` (`Real.sin_arcsin`; the chord identity `‖e a − e b‖ = 2 |sin((a−b)/2)|`, wave 1's `Plane/Chord`); outer: any `ρ ∈ (1, 1 + h)`, `α < π/3` | `Plane/Chord`'s `ringPt_sub_ringPt` | M− |
+| `exists_unit_pair_collar` | inner: choose `ρ ∈ (1 − h, 1)` close to `1` with `α = 2 arcsin(1/(2ρ)) < θ₂ − θ₁` (continuity of `arcsin` at `1/2`), points `u + ρ e(θ₁ + ε)` and `u + ρ e(θ₁ + ε + α)`, distance `2ρ sin(α/2) = 1` (`Real.sin_arcsin`; the chord identity `‖e a − e b‖ = 2 |sin((a−b)/2)|`, wave 1's `Plane/Chord`); outer: any `ρ ∈ (1, 1 + h)`, `α < π/3` | `Plane/Chord`'s `ringPt_sub_ringPt` | M− |
 | `exists_changePt` | (i) if `W ∩ B = ∅` then `A` is dense in `W` (`W` open, `W ⊆ closure A`), and sweeping gives a unit pair in `A`: `U = A ∩ W ∩ ball x δ` is open non-empty, `shadow U` is open (`⋃ θ, U + e θ`) and contains `y + (a − x)` for `a ∈ U`, within `δ` of `y ∈ W`, so it meets `A` (`Dense.inter_open_nonempty`): contradiction with `hAu`; symmetric for `B`; (ii) `isPreconnected_closed_iff` with the closed sets `closure A`, `closure B` covering `W` (`closure_union`) | `shadow` openness (a child) | M |
 | `sphere_meets_of_collarAt` | the point `p = u + e(θ + σα)`, `α = arccos(ρ/2)`, lies on `ω(b)` (`‖e(θ+σα) − ρ e θ‖² = 1 + ρ² − 2ρ cos α = 1`, `Real.cos_arccos`); along `ω(b)`, `t ↦ ‖b + e(φ₀ + t) − u‖²` has non-zero derivative at `t = 0` (`u, b, p` not collinear for `0 < ρ < 2`), so points of `ω(b)` near `p` lie at radius in `(1 − h, 1)` and in `(1, 1 + h)`; their angle is near `θ + σα` (`Complex.continuousAt_arg` after rotating by `e(−(θ + σα))`); so one lies in the collar | an `IntermediateValue`/derivative-sign child, or an explicit second-order expansion | M |
 | `woodall_step4` | Engine C's corollary (§ 4.1) | Engines A–C | M− |
@@ -367,7 +367,7 @@ through `ts_t`); **test** — the adversary `not_woodall_step4_two_thirds` pins 
 
 ### 4.6 Re-pricing
 
-21 leaves in Collar (all priced E–M; Engines A–D add four children), 20 in Steps of which 2 are open (`step5_eq`, `step7`) and 1 is out of the
+15 leaves in Collar (all priced E–M; Engines A–D add four children), 16 in Steps of which 2 are open (`step5_eq`, `step7`) and 1 is out of the
 implementer's range in one context (`exists_woodallMerged`, H+). The held route under Condition 5 depends on `exists_sectorsAt` (H),
 `exists_woodallMerged` (H+), `step6` and `step8` (H−) and the second-order lemma (M+); everything else is moderate. A plan's table prices high
 (`LEAN.md` § The kernel's cost model): re-price from the first two leaves of each module.
@@ -376,7 +376,7 @@ implementer's range in one context (`exists_woodallMerged`, H+). The held route 
 
 **Where it is.** Branch `fs131-ww` (this stage's commit on top of `630018e5`), worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-ww`
 (`.lake/packages` a symlink to the main tree's, `.lake/build` its own copy — never replace it with a symlink). The branch sits on wave 4's full
-skeleton `f620977c`. Three modules: `Plane/Woodall/Basic` (sorry-free), `Plane/Woodall/Collar` (15 `sorry` leaves), `Plane/Woodall/Steps` (20,
+skeleton `f620977c`. Three modules: `Plane/Woodall/Basic` (sorry-free), `Plane/Woodall/Collar` (15 `sorry` leaves), `Plane/Woodall/Steps` (16,
 two of them open). The build is green with only `sorry` warnings (`build/gate/build/20261004T095859Z-2589972.log`). `Proofs.lean`, `ARCHITECTURE.md`
 and `scripts/Axioms.lean` are updated; `tools/fs131_w_decls.py --check` lists and checks the 38 records.
 
@@ -411,3 +411,19 @@ when the rest is green: (a) wait for FS131-E1; (b) land the held part — `Wooda
 `step5_eq`, `step7`, `aeMap6`, `aeMap6_of_condition5`, `aeMap6_merged*`, `aeMap6_normal`, `woodall_thm6` — with the open statements taken as named
 hypotheses of the three theorems (our own unproved results enter as hypotheses, `LEAN.md` § Assumptions), i.e. `aeMap6` restated over
 `(h5eq : …) (h7 : …)`; that is a statement change and goes through the planner.
+
+## Stage 5 — SAVED: drafts for the files Keryx writes, and the report
+
+**Drafts** (standing rule 7; each names its slot):
+- `CLAUDE.md` § The aim, link 4, after "Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing the other (`[Townsend1981]`
+  prints no proof)": add "— the repair has two steps open, found at its formalization (FS131-W): Woodall's step 5 at angle exactly `π/3` when both
+  edges are unit arcs, and step 7's terminal point when it carries two colours (FS131-E1)".
+- `LEDGER.md` row 132, the clause on maps needing six: the same two open steps, with `plans/FS131-W-kernel-plan.md` § 1.6 as the address.
+- `BIBLIOGRAPHY.md` `[Woodall1973]`, reading status: "§ 3 re-read in full from the page images (FS131-W, 2026-10-04): every constant of steps 2–8
+  read from the image; step 5 reads `φ ≤ ⅓π`, `π − φ ≥ ⅔π` (the text layer drops the signs, and FS106-V3's 'strict inequalities' rests on it)".
+- `BIBLIOGRAPHY.md` `[Townsend1979ms]`: "re-read in full, text layer (FS131-W, 2026-10-04)".
+- `plans/FS106-derivation.md` FS106-WO's proof line (the derivation's errata, Keryx's or FS131-E1's to file): "Step 5's inequalities are `≤`/`≥` on
+  the page image, not strict (FS131-W § 1.4 F1); step 7's 'e must terminate … by meeting a vertex' fails when the terminal point carries two colours
+  (F2)".
+
+The report is `data/fs131/reports/FS131-W.md`; its text is the job's hand-back.
