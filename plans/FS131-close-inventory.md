@@ -1963,3 +1963,30 @@ reason by the close.*
      the row's "types only shrink" is about existing vertices, and inside the disc that is `v` alone; the sibling moves already state it so; the rim is the next
      clause. Confidence: high. At the final merge of `fs131-w4m` into `fs131-w4`, `exists_merge`'s statement hunk lies above its `sorry` and IC5's insertion two
      lines below it (item 266), so they stay disjoint.
+270. **WAVE 2 LANDED on `main`, held in the kernel** (FS131-I2n, done, harness ≈ 330k; report `fs131-w2`'s `data/fs131/reports/FS131-I2n.md`; `origin/main`
+     fast-forwarded to `6f20e12f`). The last leaves: `hc_sausage_cover` (FS111-M3 § 2.4 B1), `hc_exclusion` (B2), `hc_ae_phi_pos`, `hc_free_pos` (FS111-M3-IRREG
+     (1), by a Lebesgue density point of `Z` and Fubini in an edge frame), `hc_free_subset_nowhereDense` (IRREG (2)); with them `hc_isRegularMUA`, `hc_irreg`,
+     `not_forall_isRegularMUA` (MUA-REG-U is false) and `not_forall_fix_converse` have no `sorry` beneath. Wave 2's 28 rows have 64 declarations
+     (`data/fs131/i2n/row-axioms2.txt`, read by `tools/fs131_i2n_row_axioms.py`, self-test fires on both planted faults): all on the standard three except
+     `falconer_reduction` and `le_chiM_of_falconerFan` (FS129-SA1-FALC-RED), which also rest on `falconer_lemma2_nonempty` (`[Falconer1981]` Lemma 2 (i), p. 185),
+     the one declared import. **Receipt (Keryx)**: local `main` fast-forwarded to `6f20e12f`; `sorry` lines in `Proofs/` by count: 0; in `fs131-w2`,
+     `build/gate/build/20261004T225532Z-3162433.log` "All targets up-to-date (5732 jobs)", 0 warnings; `data/fs131/i2n/axioms-gate3.log` "axioms: OK — 2512 clean,
+     11 axiom-free, 4 imported, 5 declared purchase(s)" (full log `build/gate/axioms/20261004T225322Z-3123760.log`, gated commit `40f4b4ef`, the later merge
+     `54d408c6` plans-only); vacuity `=== TOTALS === sites=516 vacuous=0 stale=0 declared=3 witnessed=23 generic=488 unknown=2` with `declarations=9376
+     refutations-skipped=64`; both self-tests exit 0 (axioms 23 of 23 after item 260's fix — red log `…/axioms-self-test/20261004T221030Z-2808168.log`, green
+     `…T222158Z-2896287.log`, green after the merge `…T224905Z-3098517.log`; vacuity 38 of 38). Carriers (FS131-T1's procedure): IN `Plane.CPColouring`,
+     `Plane.SemiconcaveWith`; OUT the rest, each with its reason in `scripts/Vacuity.lean`; controls 33–38 new. Credit: wave 2's implementers, I2a–I2n, and
+     I2n for the landing and the self-test diagnosis (item 259).
+271. **Wave 2's filing and its held items.** **Filed now** (this commit, from I2n's drafts 1–4, record "Drafts for the front page (FS131-I2n)"): `CLAUDE.md`
+     § Trust ledger (2512 clean, 4 imported, 2,532 records), § The gate (`declarations=9376 refutations-skipped=64 sites=516`, `… witnessed=23 generic=488 …`),
+     `scripts/vacuity-baseline.txt`'s header, `LEAN.md` § The gate ("thirty-eight controls"), `GATE_CHANGES` (1856 → 2512). **Receipts, read before the
+     commit**: `gate_report.py axioms` — Trust ledger "match (clean, purchases and imported compared)"; `gate_report.py vacuity` — baseline header and § The gate
+     "match (9 of 9 compared)"; fact audit `--base a02b88f7` — 16 losses, every one the superseded counts and the superseded sentence's attribution
+     (`localSectors`, `FS131-I3i`, `FS131-T3's`; in git at `a02b88f7` and in items 157, 171), nothing else; `--dupes` unchanged. **Held for the milestone's
+     filing**: draft 5 (the Frontier's "What the kernel holds" clause for wave 2), draft 6 (the 28 `LEDGER.md` rows to regrade, listed there), draft 7 (the Proof
+     Atlas grades). **Accepted** (I2n's held items): the six `expect` lines added to `scripts/vacuity.sh` outside its touches (T1's procedure step 3 requires them);
+     `Row130M1` and `Voronov11` left out of the vacuity scan on purpose (tracking them adds UNKNOWN sites nobody can discharge; their truth rests on the planner's
+     read-back); merge `54d408c6`'s default message. **Tool defect owed**: `scripts/vacuity.sh`'s banner still says "twenty planted defects" for 38. **For wave 4's
+     landing**: `HadwigerNelson.Plane.framePt` is declared in wave 2's `Plane/Slack` l. 2800 and in wave 4's `Plane/ValidMap/Basic` l. 44 — wave 4 renames
+     (`data/fs131/i2n/dupes.log`). The second of waves 2 and 4 to land merges the first's vacuity carriers (handoff § 4). Wave 2's worktree `fs131-w2` joins the
+     removal list after its cited gate logs are rescued.

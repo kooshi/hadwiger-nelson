@@ -171,7 +171,7 @@ the characteristic failure here:
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
   only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
-  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants twenty controls
+  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants thirty-eight controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`, `vacuity.sh` and `lean4checker.sh`
