@@ -758,6 +758,606 @@ theorem exists_germ_subset_ringArc {p : ℂ} {θ θ₀ θ₁ : ℝ} (hlt : θ₀
     simp only [ringPt]
     rw [e_add, e_add, heθ]
 
+/-- The cone of a finite union is the union of the cones. -/
+theorem coneAt_biUnion_finite {ι : Type*} {s : Set ι} (hs : s.Finite) (T : ι → Set ℂ) {y : ℂ} {β : ℝ}
+    (h : β ∈ coneAt (⋃ i ∈ s, T i) y) : ∃ i ∈ s, β ∈ coneAt (T i) y := by
+  by_contra hcon
+  push Not at hcon
+  have ev : ∀ᶠ ε in 𝓝[>] (0 : ℝ), ∀ i ∈ s, ∀ z ∈ T i,
+      ¬ (z ≠ y ∧ dist z y < ε ∧ ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ < ε) := by
+    refine (eventually_all_finite hs).mpr fun i hi => ?_
+    have := hcon i hi
+    simp only [coneAt, mem_setOf_eq, not_forall, not_exists, not_and] at this
+    obtain ⟨ε₀, hε₀, hz⟩ := this
+    filter_upwards [Ioo_mem_nhdsGT hε₀] with ε hε z hz' ⟨h1, h2, h3⟩
+    exact hz z hz' h1 (h2.trans hε.2) (h3.trans hε.2)
+  have ev0 : ∀ᶠ ε in 𝓝[>] (0 : ℝ), 0 < ε := self_mem_nhdsWithin
+  obtain ⟨ε, hε0, hε⟩ := (ev0.and ev).exists
+  obtain ⟨z, hz, hz1, hz2, hz3⟩ := h ε hε0
+  obtain ⟨i, hi, hzi⟩ := mem_iUnion₂.mp hz
+  exact hε i hi z hzi ⟨hz1, hz2, hz3⟩
+
+
+/-- The cone at `y` is local: it sees only a ball about `y`. -/
+theorem coneAt_inter_ball {S : Set ℂ} {y : ℂ} {r : ℝ} (hr : 0 < r) {β : ℝ} (h : β ∈ coneAt S y) :
+    β ∈ coneAt (S ∩ ball y r) y := by
+  intro ε hε
+  obtain ⟨z, hz, hne, hd, hdir⟩ := h (min ε r) (lt_min hε hr)
+  exact ⟨z, ⟨hz, by rw [mem_ball]; exact hd.trans_le (min_le_right _ _)⟩, hne, hd.trans_le (min_le_left _ _),
+    hdir.trans_le (min_le_left _ _)⟩
+
+/-! ## Curves through a point, and a farthest-point lemma beside them -/
+
+/-- The full curve through `x` with data `(κ, b)`: `κ = 0` the line through `x` normal to `b`, `κ = 1` the circle through
+`x` centred at `x + b`. -/
+def curveAt (x : ℂ) (κ : ℝ) (b : ℂ) : Set ℂ :=
+  {z | κ * Complex.normSq (z - x) = 2 * ((z - x) * (starRingEnd ℂ) b).re}
+
+/-- A point scaled away from `x` along the ray through `w` stays off the curve, if `w` lies outside it (or off the line). -/
+theorem mem_curveAt_scale {x : ℂ} {κ : ℝ} {b w : ℂ}
+    (hout : (κ = 0 ∧ ((w - x) * (starRingEnd ℂ) b).re ≠ 0) ∨ (κ = 1 ∧ 2 * ((w - x) * (starRingEnd ℂ) b).re < Complex.normSq (w - x)))
+    {t : ℝ} (ht : 1 ≤ t) : x + (t : ℂ) * (w - x) ∉ curveAt x κ b := by
+  intro h
+  simp only [curveAt, mem_setOf_eq, add_sub_cancel_left] at h
+  have e1 : Complex.normSq ((t : ℂ) * (w - x)) = t ^ 2 * Complex.normSq (w - x) := by
+    rw [map_mul, Complex.normSq_ofReal]; ring
+  have e2 : (((t : ℂ) * (w - x)) * (starRingEnd ℂ) b).re = t * ((w - x) * (starRingEnd ℂ) b).re := by
+    rw [mul_assoc, Complex.re_ofReal_mul]
+  rw [e1, e2] at h
+  rcases hout with ⟨rfl, hne⟩ | ⟨rfl, hlt⟩
+  · apply hne; nlinarith
+  · have hN : 0 ≤ Complex.normSq (w - x) := Complex.normSq_nonneg _
+    have ht0 : 0 < t := by linarith
+    have h2 : t * Complex.normSq (w - x) = 2 * ((w - x) * (starRingEnd ℂ) b).re := by
+      apply mul_left_cancel₀ ht0.ne'; nlinarith
+    nlinarith
+
+
+/-- The outward case of `exists_farther`: from a point outside the circle (or off the line) go radially away from `x`. -/
+theorem farther_out {x z : ℂ} {κ : ℝ} {b w : ℂ}
+    (hout : (κ = 0 ∧ ((w - x) * (starRingEnd ℂ) b).re ≠ 0) ∨ (κ = 1 ∧ 2 * ((w - x) * (starRingEnd ℂ) b).re < Complex.normSq (w - x)))
+    {δ : ℝ} (hδ0 : 0 < δ) (hδ : δ ≤ ‖z - x‖) (hw : dist w z < δ / 3) :
+    ∃ w' : ℂ, ‖z - x‖ < ‖w' - x‖ ∧ segment ℝ w w' ⊆ ball z δ ∧ Disjoint (segment ℝ w w') (curveAt x κ b) := by
+  set m := w - x with hm
+  have hdz : |‖m‖ - ‖z - x‖| ≤ dist w z := by
+    calc |‖m‖ - ‖z - x‖| ≤ ‖w - x - (z - x)‖ := abs_norm_sub_norm_le _ _
+      _ = dist w z := by rw [dist_eq_norm]; congr 1; ring
+  have hmpos : 0 < ‖m‖ := by
+    have := (abs_le.mp hdz).2
+    have := (abs_le.mp hdz).1
+    linarith
+  set T : ℝ := 1 + (δ / 2) / ‖m‖ with hT
+  have hT1 : 1 ≤ T := by rw [hT]; have : 0 ≤ (δ / 2) / ‖m‖ := by positivity
+                         linarith
+  have hTm : (T - 1) * ‖m‖ = δ / 2 := by rw [hT]; field_simp; ring
+  refine ⟨x + (T : ℂ) * m, ?_, ?_, ?_⟩
+  · rw [add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by linarith)]
+    have : T * ‖m‖ = ‖m‖ + δ / 2 := by nlinarith
+    rw [this]
+    have := (abs_le.mp hdz).1
+    linarith
+  · intro y hy
+    obtain ⟨a, c, ha, hc, hac, rfl⟩ := hy
+    have hy : a • w + c • (x + (T : ℂ) * m) = x + ((a + c * T : ℝ) : ℂ) * m := by
+      have : a = 1 - c := by linarith
+      subst this
+      simp only [Complex.real_smul, hm]; push_cast; ring
+    rw [hy, mem_ball, dist_eq_norm]
+    have h1 : x + ((a + c * T : ℝ) : ℂ) * m - z = (w - z) + ((c * (T - 1) : ℝ) : ℂ) * m := by
+      have : a + c * T = 1 + c * (T - 1) := by
+        have : a = 1 - c := by linarith
+        subst this; ring
+      rw [this, hm]; push_cast; ring
+    rw [h1]
+    refine lt_of_le_of_lt (norm_add_le _ _) ?_
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by nlinarith), ← dist_eq_norm]
+    have hc1 : c ≤ 1 := by linarith
+    have : c * (T - 1) * ‖m‖ ≤ δ / 2 := by
+      calc c * (T - 1) * ‖m‖ = c * ((T - 1) * ‖m‖) := by ring
+        _ ≤ 1 * ((T - 1) * ‖m‖) := by gcongr
+        _ = δ / 2 := by rw [hTm]; ring
+    linarith
+  · rw [Set.disjoint_left]
+    intro y hy
+    obtain ⟨a, c, ha, hc, hac, rfl⟩ := hy
+    have hy : a • w + c • (x + (T : ℂ) * m) = x + ((a + c * T : ℝ) : ℂ) * (w - x) := by
+      have : a = 1 - c := by linarith
+      subst this
+      simp only [Complex.real_smul, hm]; push_cast; ring
+    rw [hy]
+    exact mem_curveAt_scale hout (by nlinarith)
+
+
+/-- The two coordinate identities of the inward step of `farther_in`. -/
+theorem circle_step_real (p1 p2 b1 b2 s β ε : ℝ) (hE1 : p1 ^ 2 + p2 ^ 2 = 2 * (p1 * b1 + p2 * b2))
+    (hE2 : p1 ^ 2 + p2 ^ 2 = s ^ 2) (hE3 : b1 ^ 2 + b2 ^ 2 = β ^ 2) :
+    (p1 - b1 + ε * ((β - s) * p1 + s * b1)) ^ 2 + (p2 - b2 + ε * ((β - s) * p2 + s * b2)) ^ 2 =
+        β ^ 2 - ε * s * β * (2 * β - s) + ε ^ 2 * (((β - s) * p1 + s * b1) ^ 2 + ((β - s) * p2 + s * b2) ^ 2) ∧
+    (p1 + ε * ((β - s) * p1 + s * b1)) ^ 2 + (p2 + ε * ((β - s) * p2 + s * b2)) ^ 2 =
+        s ^ 2 + 2 * ε * s ^ 2 * (β - s / 2) + ε ^ 2 * (((β - s) * p1 + s * b1) ^ 2 + ((β - s) * p2 + s * b2) ^ 2) := by
+  constructor
+  · linear_combination (1 + ε * (β - 2 * s)) * hE1 + ε * β * hE2 + (1 - 2 * ε * s) * hE3
+  · linear_combination (1 + 2 * ε * (β - s / 2)) * hE2 - ε * s * hE1
+
+
+/-- The inward case of `exists_farther`: from a point inside the circle step into the disc along `(β − s) p + s b`, a direction that enters the disc and leaves the circle about `x`. -/
+theorem farther_in {x z b w : ℂ} (hb : b ≠ 0) (hz : z ∈ curveAt x 1 b) (hd : 0 < ‖z - x‖)
+    (hbig : ‖z - x‖ < 2 * ‖b‖) {δ : ℝ} (hδ0 : 0 < δ) (hw : dist w z < δ)
+    (hin : Complex.normSq (w - x) < 2 * ((w - x) * (starRingEnd ℂ) b).re) :
+    ∃ w' : ℂ, ‖z - x‖ < ‖w' - x‖ ∧ segment ℝ w w' ⊆ ball z δ ∧ Disjoint (segment ℝ w w') (curveAt x 1 b) := by
+  set p := z - x with hp
+  set s := ‖p‖ with hs
+  set β := ‖b‖ with hβ
+  have hβ0 : 0 < β := norm_pos_iff.mpr hb
+  have hs0 : 0 < s := hd
+  have hz' : Complex.normSq p = 2 * (p * (starRingEnd ℂ) b).re := by simpa [curveAt, hp] using hz
+  set ξ : ℂ := ((β - s : ℝ) : ℂ) * p + (s : ℂ) * b with hξ
+  have hξn : ‖ξ‖ ≤ 2 * β * s := by
+    refine (norm_add_le _ _).trans ?_
+    rw [norm_mul, norm_mul, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs,
+      abs_of_pos hs0, ← hs, ← hβ]
+    have : |β - s| ≤ β := by rw [abs_le]; constructor <;> linarith
+    nlinarith
+  set M : ℝ := 2 * β * s with hM
+  have hM0 : 0 < M := by positivity
+  set ε : ℝ := min (δ / (2 * M)) (s * β * (2 * β - s) / (2 * M ^ 2)) with hε
+  have hε0 : 0 < ε := lt_min (by positivity) (div_pos (by have : 0 < 2 * β - s := by linarith
+                                                          positivity) (by positivity))
+  have hε1 : ε * M ≤ δ / 2 := by
+    have := min_le_left (δ / (2 * M)) (s * β * (2 * β - s) / (2 * M ^ 2))
+    calc ε * M ≤ δ / (2 * M) * M := by gcongr
+      _ = δ / 2 := by field_simp
+  have hε2 : ε * M ^ 2 ≤ s * β * (2 * β - s) / 2 := by
+    have := min_le_right (δ / (2 * M)) (s * β * (2 * β - s) / (2 * M ^ 2))
+    calc ε * M ^ 2 ≤ s * β * (2 * β - s) / (2 * M ^ 2) * M ^ 2 := by gcongr
+      _ = s * β * (2 * β - s) / 2 := by field_simp
+  set w' : ℂ := z + (ε : ℂ) * ξ with hw'
+  have hξ1 : ((β - s) * p.re + s * b.re) = ξ.re := by simp [hξ]
+  have hξ2 : ((β - s) * p.im + s * b.im) = ξ.im := by simp [hξ]
+  have hE1 : p.re ^ 2 + p.im ^ 2 = 2 * (p.re * b.re + p.im * b.im) := by
+    have := hz'
+    simp only [Complex.normSq_apply, Complex.mul_re, Complex.conj_re, Complex.conj_im] at this
+    nlinarith
+  have hE2 : p.re ^ 2 + p.im ^ 2 = s ^ 2 := by
+    rw [hs, Complex.sq_norm, Complex.normSq_apply]; ring
+  have hE3 : b.re ^ 2 + b.im ^ 2 = β ^ 2 := by
+    rw [hβ, Complex.sq_norm, Complex.normSq_apply]; ring
+  obtain ⟨k1, k2⟩ := circle_step_real p.re p.im b.re b.im s β ε hE1 hE2 hE3
+  rw [hξ1, hξ2] at k1 k2
+  have hξsq : ξ.re ^ 2 + ξ.im ^ 2 ≤ M ^ 2 := by
+    have := Complex.sq_norm ξ
+    rw [Complex.normSq_apply] at this
+    nlinarith [norm_nonneg ξ]
+  have hdist : dist w' z = ε * ‖ξ‖ := by
+    rw [hw', dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hε0]
+  have hw'z : dist w' z < δ := by
+    rw [hdist]
+    have : ε * ‖ξ‖ ≤ ε * M := by gcongr
+    linarith
+  -- w' lies in the open disc
+  have hw'in : dist w' (x + b) < β := by
+    rw [dist_eq_norm]
+    have h1 : w' - (x + b) = (p - b) + (ε : ℂ) * ξ := by rw [hw', hp]; ring
+    rw [h1]
+    refine lt_of_pow_lt_pow_left₀ 2 hβ0.le ?_
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+    simp only [Complex.add_re, Complex.sub_re, Complex.add_im, Complex.sub_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, add_zero]
+    have a1 : ε ^ 2 * (ξ.re ^ 2 + ξ.im ^ 2) ≤ ε * (s * β * (2 * β - s) / 2) := by
+      calc ε ^ 2 * (ξ.re ^ 2 + ξ.im ^ 2) ≤ ε ^ 2 * M ^ 2 := by gcongr
+        _ = ε * (ε * M ^ 2) := by ring
+        _ ≤ ε * (s * β * (2 * β - s) / 2) := by gcongr
+    have a2 : 0 < ε * (s * β * (2 * β - s)) := by
+      have : 0 < 2 * β - s := by linarith
+      positivity
+    linarith [k1, a1, a2]
+  have hwin : dist w (x + b) < β := by
+    rw [dist_eq_norm]
+    refine lt_of_pow_lt_pow_left₀ 2 hβ0.le ?_
+    rw [← Complex.normSq_eq_norm_sq, show w - (x + b) = (w - x) - b by ring, Complex.normSq_sub]
+    have : Complex.normSq b = β ^ 2 := by rw [hβ, Complex.normSq_eq_norm_sq]
+    rw [this]; linarith
+  refine ⟨w', ?_, ?_, ?_⟩
+  · refine lt_of_pow_lt_pow_left₀ 2 (norm_nonneg _) ?_
+    have h1 : w' - x = p + (ε : ℂ) * ξ := by rw [hw', hp]; ring
+    have h3 : ‖w' - x‖ ^ 2 = (p.re + ε * ξ.re) ^ 2 + (p.im + ε * ξ.im) ^ 2 := by
+      rw [h1, Complex.sq_norm, Complex.normSq_apply]
+      simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+        Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, add_zero]
+      ring
+    have h4 : ‖z - x‖ ^ 2 = s ^ 2 := rfl
+    rw [h3, h4, k2]
+    have : 0 < 2 * ε * s ^ 2 * (β - s / 2) := by
+      have : 0 < β - s / 2 := by linarith
+      positivity
+    have := mul_nonneg (sq_nonneg ε) (add_nonneg (sq_nonneg ξ.re) (sq_nonneg ξ.im))
+    linarith
+  · have hconv : Convex ℝ (ball (x + b) β ∩ ball z δ) := (convex_ball _ _).inter (convex_ball _ _)
+    intro y hy
+    exact (hconv.segment_subset ⟨hwin, by rwa [mem_ball]⟩ ⟨hw'in, by rwa [mem_ball]⟩ hy).2
+  · have hconv : Convex ℝ (ball (x + b) β ∩ ball z δ) := (convex_ball _ _).inter (convex_ball _ _)
+    rw [Set.disjoint_left]
+    intro y hy hyc
+    have hyD := hconv.segment_subset ⟨hwin, by rwa [mem_ball]⟩ ⟨hw'in, by rwa [mem_ball]⟩ hy
+    have h1 := hyD.1
+    rw [mem_ball, dist_eq_norm] at h1
+    simp only [curveAt, mem_setOf_eq, one_mul] at hyc
+    have h2 : Complex.normSq (y - x - b) = Complex.normSq (y - x) + Complex.normSq b - 2 * ((y - x) * (starRingEnd ℂ) b).re := Complex.normSq_sub _ _
+    have h3 : Complex.normSq b = β ^ 2 := by rw [hβ, Complex.normSq_eq_norm_sq]
+    have h4 : Complex.normSq (y - x - b) < β ^ 2 := by
+      rw [Complex.normSq_eq_norm_sq, show y - x - b = y - (x + b) by ring]
+      exact pow_lt_pow_left₀ h1 (norm_nonneg _) two_ne_zero
+    linarith
+
+
+/-- **Farther points beside a curve** (the farthest-point lemma's local step): near a point `z ≠ x` of a curve through `x`
+(a line, or a circle of diameter above `‖z − x‖`), every point `w` off the curve is joined, by a segment off the curve and
+inside `B(z, δ)`, to a point strictly farther from `x` than `z`. -/
+theorem exists_farther {x z : ℂ} {κ : ℝ} (hκ : κ = 0 ∨ κ = 1) {b : ℂ} (hb : b ≠ 0)
+    (hz : z ∈ curveAt x κ b) (hd : 0 < ‖z - x‖) (hbig : κ = 1 → ‖z - x‖ < 2 * ‖b‖)
+    {δ : ℝ} (hδ0 : 0 < δ) (hδ : δ ≤ ‖z - x‖) {w : ℂ} (hw : dist w z < δ / 3) (hwc : w ∉ curveAt x κ b) :
+    ∃ w' : ℂ, ‖z - x‖ < ‖w' - x‖ ∧ segment ℝ w w' ⊆ ball z δ ∧ Disjoint (segment ℝ w w') (curveAt x κ b) := by
+  rcases hκ with rfl | rfl
+  · refine farther_out (Or.inl ⟨rfl, ?_⟩) hδ0 hδ hw
+    intro h; apply hwc; simp only [curveAt, mem_setOf_eq, zero_mul]; linarith
+  · rcases lt_or_gt_of_ne (show Complex.normSq (w - x) ≠ 2 * ((w - x) * (starRingEnd ℂ) b).re by
+        intro h; apply hwc; simpa [curveAt] using h) with h | h
+    · exact farther_in hb hz hd (hbig rfl) hδ0 (by linarith) h
+    · exact farther_out (Or.inr ⟨rfl, h⟩) hδ0 hδ hw
+
+
+/-- `Re (m · conj b)` in coordinates. -/
+theorem re_mul_conj_eq (m b : ℂ) : (m * (starRingEnd ℂ) b).re = m.re * b.re + m.im * b.im := by
+  simp [Complex.mul_re]
+
+/-- A nonzero complex number has nonzero squared coordinates sum. -/
+theorem sq_re_im_ne {b : ℂ} (hb : b ≠ 0) : b.re ^ 2 + b.im ^ 2 ≠ 0 := by
+  have := Complex.normSq_pos.mpr hb
+  rw [Complex.normSq_apply] at this
+  nlinarith
+
+/-- A complex number with zero coordinates is `0`. -/
+theorem eq_of_re_im {m : ℂ} (h1 : m.re = 0) (h2 : m.im = 0) : m = 0 := Complex.ext (by simpa using h1) (by simpa using h2)
+
+/-- A vector `m` perpendicular to `d` on the circle `|m|² = 2 m·b` is `0` or has `|m|²|d|² = 4 (d × b)²`. -/
+theorem perp_circle (m1 m2 d1 d2 b1 b2 : ℝ) (hd : d1 ^ 2 + d2 ^ 2 ≠ 0) (h1 : m1 * d1 + m2 * d2 = 0)
+    (h2 : m1 ^ 2 + m2 ^ 2 = 2 * (m1 * b1 + m2 * b2)) :
+    (m1 = 0 ∧ m2 = 0) ∨ (m1 ^ 2 + m2 ^ 2) * (d1 ^ 2 + d2 ^ 2) = 4 * (d1 * b2 - d2 * b1) ^ 2 := by
+  set q := m1 * d2 - m2 * d1 with hq
+  set c := d1 * b2 - d2 * b1 with hc
+  have e1 : q ^ 2 = (m1 ^ 2 + m2 ^ 2) * (d1 ^ 2 + d2 ^ 2) := by
+    have : (m1 ^ 2 + m2 ^ 2) * (d1 ^ 2 + d2 ^ 2) = (m1 * d1 + m2 * d2) ^ 2 + q ^ 2 := by rw [hq]; ring
+    rw [this, h1]; ring
+  have e2 : (m1 * b1 + m2 * b2) * (d1 ^ 2 + d2 ^ 2) = -q * c := by
+    have : (m1 * b1 + m2 * b2) * (d1 ^ 2 + d2 ^ 2) = (m1 * d1 + m2 * d2) * (b1 * d1 + b2 * d2) - q * c := by
+      rw [hq, hc]; ring
+    rw [this, h1]; ring
+  have e3 : q * (q + 2 * c) = 0 := by
+    have : (m1 ^ 2 + m2 ^ 2) * (d1 ^ 2 + d2 ^ 2) = 2 * (m1 * b1 + m2 * b2) * (d1 ^ 2 + d2 ^ 2) := by rw [h2]
+    nlinarith
+  rcases mul_eq_zero.mp e3 with h | h
+  · left
+    have hN : (m1 ^ 2 + m2 ^ 2) * (d1 ^ 2 + d2 ^ 2) = 0 := by rw [← e1, h]; ring
+    have hN' : m1 ^ 2 + m2 ^ 2 = 0 := by
+      rcases mul_eq_zero.mp hN with h' | h'
+      · exact h'
+      · exact absurd h' hd
+    constructor <;> nlinarith [sq_nonneg m1, sq_nonneg m2]
+  · right
+    rw [← e1]
+    have : q = -2 * c := by linarith
+    rw [this]; ring
+
+/-- Two distinct full curves through `x` meet near `x` only at `x`. -/
+theorem curve_inter {x : ℂ} {κ κ' : ℝ} (hκ : κ = 0 ∨ κ = 1) (hκ' : κ' = 0 ∨ κ' = 1) {b b' : ℂ} (hb : b ≠ 0)
+    (hb' : b' ≠ 0)
+    (hsame : ¬ (κ = κ' ∧ (κ = 1 → b = b') ∧ (κ = 0 → (b * (starRingEnd ℂ) b').im = 0))) :
+    ∃ ε > 0, ∀ z : ℂ, ‖z - x‖ < ε → z ∈ curveAt x κ b → z ∈ curveAt x κ' b' → z = x := by
+  have hnb : b.re ^ 2 + b.im ^ 2 ≠ 0 := sq_re_im_ne hb
+  have hnb' : b'.re ^ 2 + b'.im ^ 2 ≠ 0 := sq_re_im_ne hb'
+  -- the shared shape: a direction `d ≠ 0` with `m ⊥ d`, and the circle `N = 2 m·e`
+  have key : ∀ (d e : ℂ), d.re ^ 2 + d.im ^ 2 ≠ 0 →
+      ∃ ε > 0, ∀ z : ℂ, ‖z - x‖ < ε → (z - x).re * d.re + (z - x).im * d.im = 0 →
+        (z - x).re ^ 2 + (z - x).im ^ 2 = 2 * ((z - x).re * e.re + (z - x).im * e.im) → z = x := by
+    intro d e hd
+    by_cases hc : d.re * e.im - d.im * e.re = 0
+    · refine ⟨1, one_pos, fun z _ h1 h2 => ?_⟩
+      rcases perp_circle _ _ _ _ _ _ hd h1 h2 with ⟨h3, h4⟩ | h
+      · exact sub_eq_zero.mp (eq_of_re_im h3 h4)
+      · rw [hc] at h
+        have hN : ((z - x).re ^ 2 + (z - x).im ^ 2) * (d.re ^ 2 + d.im ^ 2) = 0 := by rw [h]; ring
+        have hN' : (z - x).re ^ 2 + (z - x).im ^ 2 = 0 := by
+          rcases mul_eq_zero.mp hN with h' | h'
+          · exact h'
+          · exact absurd h' hd
+        exact sub_eq_zero.mp (eq_of_re_im (by nlinarith [sq_nonneg (z - x).re, sq_nonneg (z - x).im]) (by nlinarith [sq_nonneg (z - x).re, sq_nonneg (z - x).im]))
+    · have hdpos : 0 < d.re ^ 2 + d.im ^ 2 := lt_of_le_of_ne (by positivity) (Ne.symm hd)
+      refine ⟨2 * |d.re * e.im - d.im * e.re| / Real.sqrt (d.re ^ 2 + d.im ^ 2), by positivity, fun z hz h1 h2 => ?_⟩
+      rcases perp_circle _ _ _ _ _ _ hd h1 h2 with ⟨h3, h4⟩ | h
+      · exact sub_eq_zero.mp (eq_of_re_im h3 h4)
+      · exfalso
+        have hn : ‖z - x‖ ^ 2 = (z - x).re ^ 2 + (z - x).im ^ 2 := by rw [Complex.sq_norm, Complex.normSq_apply]; ring
+        have hs : Real.sqrt (d.re ^ 2 + d.im ^ 2) ^ 2 = d.re ^ 2 + d.im ^ 2 := Real.sq_sqrt hdpos.le
+        have hspos : 0 < Real.sqrt (d.re ^ 2 + d.im ^ 2) := Real.sqrt_pos.mpr hdpos
+        have h5 : ‖z - x‖ * Real.sqrt (d.re ^ 2 + d.im ^ 2) < 2 * |d.re * e.im - d.im * e.re| := by
+          rwa [lt_div_iff₀ hspos] at hz
+        have h6 : (‖z - x‖ * Real.sqrt (d.re ^ 2 + d.im ^ 2)) ^ 2 = 4 * |d.re * e.im - d.im * e.re| ^ 2 := by
+          rw [mul_pow, hn, hs, h, sq_abs]
+        have h7 : 0 ≤ ‖z - x‖ * Real.sqrt (d.re ^ 2 + d.im ^ 2) := by positivity
+        have h8 : 0 ≤ 2 * |d.re * e.im - d.im * e.re| := by positivity
+        nlinarith
+  simp only [curveAt, mem_setOf_eq, re_mul_conj_eq, Complex.normSq_apply]
+  rcases hκ with rfl | rfl <;> rcases hκ' with rfl | rfl
+  · -- two lines
+    have hdet : b.im * b'.re - b.re * b'.im ≠ 0 := by
+      intro h; apply hsame; refine ⟨rfl, fun h' => absurd h' (by norm_num), fun _ => ?_⟩
+      simpa [Complex.mul_im] using (by linarith : b.re * -b'.im + b.im * b'.re = 0)
+    refine ⟨1, one_pos, fun z _ h1 h2 => ?_⟩
+    have e1 : (z - x).re * b.re + (z - x).im * b.im = 0 := by linarith
+    have e2 : (z - x).re * b'.re + (z - x).im * b'.im = 0 := by linarith
+    have m1 : (z - x).re = 0 := by
+      have : (z - x).re * (b.im * b'.re - b.re * b'.im) = 0 := by linear_combination (-b'.im) * e1 + b.im * e2
+      rcases mul_eq_zero.mp this with h | h
+      · exact h
+      · exact absurd h hdet
+    have m2 : (z - x).im = 0 := by
+      have : (z - x).im * (b.im * b'.re - b.re * b'.im) = 0 := by linear_combination b'.re * e1 - b.re * e2
+      rcases mul_eq_zero.mp this with h | h
+      · exact h
+      · exact absurd h hdet
+    exact sub_eq_zero.mp (eq_of_re_im m1 m2)
+  · -- κ = 0, κ' = 1
+    obtain ⟨ε, hε, hk⟩ := key b b' hnb
+    refine ⟨ε, hε, fun z hz h1 h2 => hk z hz (by linarith) (by linarith)⟩
+  · -- κ = 1, κ' = 0
+    obtain ⟨ε, hε, hk⟩ := key b' b hnb'
+    refine ⟨ε, hε, fun z hz h1 h2 => hk z hz (by linarith) (by linarith)⟩
+  · -- two circles
+    have hne : b - b' ≠ 0 := by
+      intro h; apply hsame; exact ⟨rfl, fun _ => sub_eq_zero.mp h, fun h' => absurd h' (by norm_num)⟩
+    obtain ⟨ε, hε, hk⟩ := key (b - b') b (sq_re_im_ne hne)
+    refine ⟨ε, hε, fun z hz h1 h2 => hk z hz ?_ (by linarith)⟩
+    show (z - x).re * (b.re - b'.re) + (z - x).im * (b.im - b'.im) = 0
+    linear_combination (1 / 2) * h2 - (1 / 2) * h1
+
+
+/-- Curves with the same data (a circle with its centre; parallel lines) coincide. -/
+theorem curveAt_eq_of_same {x : ℂ} {κ κ' : ℝ} (hκ : κ = 0 ∨ κ = 1) {b b' : ℂ} (hb : b ≠ 0) (hb' : b' ≠ 0)
+    (hsame : κ = κ' ∧ (κ = 1 → b = b') ∧ (κ = 0 → (b * (starRingEnd ℂ) b').im = 0)) :
+    curveAt x κ b = curveAt x κ' b' := by
+  obtain ⟨rfl, h1, h0⟩ := hsame
+  by_cases hk : κ = 1
+  · rw [h1 hk]
+  · by_cases hk0 : κ = 0
+    · have hdet := h0 hk0
+      simp only [Complex.mul_im, Complex.conj_re, Complex.conj_im] at hdet
+      have hnb := sq_re_im_ne hb
+      have hnb' := sq_re_im_ne hb'
+      ext z
+      simp only [curveAt, mem_setOf_eq, re_mul_conj_eq, hk0, zero_mul]
+      constructor
+      · intro h
+        have h' : (z - x).re * b.re + (z - x).im * b.im = 0 := by linarith
+        have : ((z - x).re * b'.re + (z - x).im * b'.im) * (b.re ^ 2 + b.im ^ 2) = 0 := by
+          linear_combination (b.re * b'.re + b.im * b'.im) * h' + ((z - x).re * b.im - (z - x).im * b.re) * hdet
+        rcases mul_eq_zero.mp this with h2 | h2
+        · linarith
+        · exact absurd h2 hnb
+      · intro h
+        have h' : (z - x).re * b'.re + (z - x).im * b'.im = 0 := by linarith
+        have : ((z - x).re * b.re + (z - x).im * b.im) * (b'.re ^ 2 + b'.im ^ 2) = 0 := by
+          linear_combination (b.re * b'.re + b.im * b'.im) * h' - ((z - x).re * b'.im - (z - x).im * b'.re) * hdet
+        rcases mul_eq_zero.mp this with h2 | h2
+        · linarith
+        · exact absurd h2 hnb'
+    · exfalso
+      rcases hκ with h | h
+      · exact hk0 h
+      · exact hk h
+
+
+/-- The data `(κ, b)` of the full curve carrying an arc through `x`: the line through `x` along a segment, the circle through
+`x` about the centre of a circular arc. -/
+noncomputable def Arc.curveData (x : ℂ) : Arc → ℝ × ℂ
+  | .seg u v => (0, I * (v - u))
+  | .circ c _ _ _ => (1, c - x)
+
+/-- The full curve through `x` carrying an arc. -/
+def Arc.curve (x : ℂ) (a : Arc) : Set ℂ := curveAt x (a.curveData x).1 (a.curveData x).2
+
+/-- The `κ` of an arc's curve data is `0` or `1`. -/
+theorem Arc.curveData_kappa (x : ℂ) (a : Arc) : (a.curveData x).1 = 0 ∨ (a.curveData x).1 = 1 := by
+  cases a <;> simp [Arc.curveData]
+
+/-- The vector of an arc's curve data is nonzero for a nondegenerate arc through `x`. -/
+theorem Arc.curveData_ne {x : ℂ} {a : Arc} (ha : a.Nondegenerate) (hx : x ∈ a.carrier) : (a.curveData x).2 ≠ 0 := by
+  cases a with
+  | seg u v =>
+    simp only [Arc.curveData]
+    exact mul_ne_zero Complex.I_ne_zero (sub_ne_zero.mpr (Ne.symm ha))
+  | circ c ρ θ₀ θ₁ =>
+    simp only [Arc.curveData]
+    obtain ⟨θ, -, rfl⟩ := hx
+    intro h
+    have : ρ * e θ = 0 := by
+      have h' : c - (c + ρ * e θ) = 0 := h
+      linear_combination -h'
+    rw [mul_eq_zero] at this
+    rcases this with h2 | h2
+    · exact ha.1.ne' (by exact_mod_cast h2)
+    · simpa using congrArg norm h2
+
+/-- An arc through `x` lies on its full curve through `x`. -/
+theorem Arc.carrier_subset_curve {x : ℂ} {a : Arc} (hx : x ∈ a.carrier) : a.carrier ⊆ a.curve x := by
+  cases a with
+  | seg u v =>
+    intro z hz
+    obtain ⟨a1, b1, -, -, hab1, rfl⟩ := hx
+    obtain ⟨a2, b2, -, -, hab2, rfl⟩ := hz
+    have hd : (a2 • u + b2 • v) - (a1 • u + b1 • v) = ((b2 - b1 : ℝ) : ℂ) * (v - u) := by
+      have e1 : a1 = 1 - b1 := by linarith
+      have e2 : a2 = 1 - b2 := by linarith
+      subst e1 e2
+      simp only [Complex.real_smul]; push_cast; ring
+    simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq, hd, zero_mul]
+    rw [map_mul, Complex.conj_I]
+    have : ((b2 - b1 : ℝ) : ℂ) * (v - u) * (-I * (starRingEnd ℂ) (v - u)) =
+        -(((b2 - b1 : ℝ) : ℂ) * I) * ((v - u) * (starRingEnd ℂ) (v - u)) := by ring
+    rw [this, Complex.mul_conj]
+    simp
+  | circ c ρ θ₀ θ₁ =>
+    intro z hz
+    obtain ⟨θ', -, rfl⟩ := hx
+    obtain ⟨θ, -, rfl⟩ := hz
+    simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq, one_mul, re_mul_conj_eq, Complex.normSq_apply]
+    have hn : ‖ρ * e θ‖ = ‖ρ * e θ'‖ := by simp [norm_e]
+    have h2 := Complex.sq_norm (ρ * e θ)
+    have h3 := Complex.sq_norm (ρ * e θ')
+    rw [Complex.normSq_apply] at h2 h3
+    rw [hn] at h2
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im]
+    nlinarith
+
+
+/-- An open nonempty set has a point off any curve. -/
+theorem exists_notMem_curveAt {x : ℂ} {κ : ℝ} (hκ : κ = 0 ∨ κ = 1) {b : ℂ} (hb : b ≠ 0) {O : Set ℂ}
+    (hO : IsOpen O) (hne : O.Nonempty) : ∃ w ∈ O, w ∉ curveAt x κ b := by
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨z, hz⟩ := hne
+  have hzc := hcon z hz
+  rcases hκ with rfl | rfl
+  · obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hO z hz
+    have hb0 : 0 < ‖b‖ := norm_pos_iff.mpr hb
+    set η : ℝ := ε / (2 * ‖b‖) with hη
+    have hη0 : 0 < η := by positivity
+    have hmem : z + (η : ℂ) * b ∈ ball z ε := by
+      rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hη0, hη]
+      field_simp; linarith
+    have := hcon _ (hball hmem)
+    simp only [curveAt, mem_setOf_eq, zero_mul] at this hzc
+    have e1 : (z + (η : ℂ) * b - x) = (z - x) + (η : ℂ) * b := by ring
+    rw [e1, add_mul, Complex.add_re, mul_assoc, Complex.mul_conj, Complex.re_ofReal_mul] at this
+    have h2 : ((z - x) * (starRingEnd ℂ) b).re = 0 := by linarith
+    rw [h2] at this
+    simp at this
+    rcases this with h | h
+    · exact hη0.ne' h
+    · exact hb (Complex.normSq_eq_zero.mp (by simpa using h))
+  · have hsph : curveAt x 1 b = sphere (x + b) ‖b‖ := by
+      ext y
+      simp only [curveAt, mem_setOf_eq, one_mul, mem_sphere_iff_norm]
+      have h1 : Complex.normSq (y - x - b) = Complex.normSq (y - x) + Complex.normSq b - 2 * ((y - x) * (starRingEnd ℂ) b).re := Complex.normSq_sub _ _
+      have h2 : ‖y - (x + b)‖ ^ 2 = Complex.normSq (y - x - b) := by
+        rw [Complex.sq_norm]; congr 1; ring
+      have h3 : ‖b‖ ^ 2 = Complex.normSq b := Complex.sq_norm b
+      constructor
+      · intro h
+        have : ‖y - (x + b)‖ ^ 2 = ‖b‖ ^ 2 := by rw [h2, h3, h1]; linarith
+        exact (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp this
+      · intro h
+        have : ‖y - (x + b)‖ ^ 2 = ‖b‖ ^ 2 := by rw [h]
+        rw [h2, h3, h1] at this; linarith
+    have hsub : O ⊆ interior (sphere (x + b) ‖b‖) := by
+      rw [← hsph]; exact hO.subset_interior_iff.mpr hcon
+    rw [interior_sphere'] at hsub
+    exact hsub hz
+
+/-- The points `m` of a circle about `0` with fixed inner product against `b ≠ 0` are finitely many (at most two). -/
+theorem finite_perp_circle (b : ℂ) (hb : b ≠ 0) (c K : ℝ) :
+    {m : ℂ | m.re * b.re + m.im * b.im = c ∧ m.re ^ 2 + m.im ^ 2 = K}.Finite := by
+  have hB := sq_re_im_ne hb
+  set B := b.re ^ 2 + b.im ^ 2 with hBdef
+  have hroot : {v : ℝ | v ^ 2 = c ^ 2 * 0 + (K * B - c ^ 2)}.Finite := by
+    by_cases h : ∃ v₀ : ℝ, v₀ ^ 2 = c ^ 2 * 0 + (K * B - c ^ 2)
+    · obtain ⟨v₀, hv₀⟩ := h
+      refine (Set.toFinite ({v₀, -v₀} : Set ℝ)).subset fun v hv => ?_
+      simp only [mem_setOf_eq] at hv
+      rcases sq_eq_sq_iff_eq_or_eq_neg.mp (hv.trans hv₀.symm) with h | h
+      · exact Or.inl h
+      · exact Or.inr (by simpa using h)
+    · push Not at h
+      exact (Set.finite_empty).subset fun v hv => absurd hv (h v)
+  refine (hroot.image fun v : ℝ => (⟨(c * b.re + v * b.im) / B, (c * b.im - v * b.re) / B⟩ : ℂ)).subset ?_
+  intro m ⟨h1, h2⟩
+  refine ⟨m.re * b.im - m.im * b.re, ?_, ?_⟩
+  · simp only [mem_setOf_eq]
+    have : (m.re * b.im - m.im * b.re) ^ 2 + c ^ 2 = K * B := by
+      rw [← h1, ← h2, hBdef]; ring
+    linarith
+  · apply Complex.ext
+    · simp only
+      field_simp
+      rw [← h1]; ring
+    · simp only
+      field_simp
+      rw [← h1]; ring
+
+/-- A curve through `x` meets a circle about `x` in finitely many points. -/
+theorem finite_curve_inter_sphere {x : ℂ} {κ : ℝ} {b : ℂ} (hb : b ≠ 0) (ρ : ℝ) :
+    (curveAt x κ b ∩ sphere x ρ).Finite := by
+  have := (finite_perp_circle b hb (κ * ρ ^ 2 / 2) (ρ ^ 2)).image (fun m : ℂ => x + m)
+  refine this.subset ?_
+  intro z ⟨hz1, hz2⟩
+  refine ⟨z - x, ⟨?_, ?_⟩, by ring⟩
+  · simp only [curveAt, mem_setOf_eq, re_mul_conj_eq, Complex.normSq_apply] at hz1
+    have hn : ‖z - x‖ = ρ := by rwa [mem_sphere_iff_norm] at hz2
+    have : (z - x).re * (z - x).re + (z - x).im * (z - x).im = ρ ^ 2 := by
+      have h3 : ‖z - x‖ ^ 2 = ρ ^ 2 := by rw [hn]
+      rw [Complex.sq_norm, Complex.normSq_apply] at h3; exact h3
+    rw [this] at hz1
+    linarith
+  · have hn : ‖z - x‖ = ρ := by rwa [mem_sphere_iff_norm] at hz2
+    have h3 : ‖z - x‖ ^ 2 = ρ ^ 2 := by rw [hn]
+    rw [Complex.sq_norm, Complex.normSq_apply] at h3
+    nlinarith
+
+/-- A function on an interval that is locally constant off a finite set takes finitely many values off it. -/
+theorem finite_image_of_locConst {β : Type*} (g : ℝ → β) {Θ : Set ℝ} (hΘ : Θ.Finite) :
+    ∀ {a b : ℝ}, (∀ t ∈ Ioo a b, t ∉ Θ → ∀ᶠ s in 𝓝 t, g s = g t) → (g '' (Ioo a b \ Θ)).Finite := by
+  induction Θ, hΘ using Set.Finite.induction_on with
+  | empty =>
+    intro a b hloc
+    rw [sdiff_empty]
+    have hc : ∀ s ∈ Ioo a b, ∀ t ∈ Ioo a b, g s = g t := by
+      intro s hs t ht
+      let f : Ioo a b → β := fun u => g u
+      have hf : IsLocallyConstant f := by
+        rw [IsLocallyConstant.iff_eventually_eq]
+        intro u
+        have := hloc u u.2 (by simp)
+        exact (continuous_subtype_val.continuousAt.eventually this)
+      haveI : PreconnectedSpace (Ioo a b) := Subtype.preconnectedSpace isPreconnected_Ioo
+      exact hf.apply_eq_of_preconnectedSpace ⟨s, hs⟩ ⟨t, ht⟩
+    by_cases hne : (Ioo a b).Nonempty
+    · obtain ⟨t₀, ht₀⟩ := hne
+      exact (Set.finite_singleton (g t₀)).subset (by
+        rintro _ ⟨t, ht, rfl⟩
+        exact hc t ht t₀ ht₀)
+    · rw [Set.not_nonempty_iff_eq_empty.mp hne]; simp
+  | insert hθ hfin ih =>
+    rename_i θ₀ Θ'
+    intro a b hloc
+    by_cases hmem : θ₀ ∈ Ioo a b
+    · have h1 := ih (a := a) (b := θ₀) (fun t ht htn => hloc t ⟨ht.1, ht.2.trans hmem.2⟩
+        (by rintro (h | h); exacts [ht.2.ne h, htn h]))
+      have h2 := ih (a := θ₀) (b := b) (fun t ht htn => hloc t ⟨hmem.1.trans ht.1, ht.2⟩
+        (by rintro (h | h); exacts [ht.1.ne' h, htn h]))
+      refine (h1.union h2).subset ?_
+      rintro _ ⟨t, ⟨ht, htn⟩, rfl⟩
+      have : t ≠ θ₀ := fun h => htn (Or.inl h)
+      have htn' : t ∉ Θ' := fun h => htn (Or.inr h)
+      rcases lt_or_gt_of_ne this with h | h
+      · exact Or.inl ⟨t, ⟨⟨ht.1, h⟩, htn'⟩, rfl⟩
+      · exact Or.inr ⟨t, ⟨⟨h, ht.2⟩, htn'⟩, rfl⟩
+    · refine (ih (a := a) (b := b) fun t ht htn => hloc t ht ?_).subset ?_
+      · rintro (h | h)
+        · exact hmem (h ▸ ht)
+        · exact htn h
+      · rintro _ ⟨t, ⟨ht, htn⟩, rfl⟩
+        refine ⟨t, ⟨ht, fun h => htn (Or.inr h)⟩, rfl⟩
+
+
 namespace ArcMap
 
 variable {k : ℕ} (F : ArcMap k)
@@ -1008,26 +1608,411 @@ theorem mem_closure_tile {x : ℂ} (hx : x ∈ F.dom) : ∃ T, F.IsTile T ∧ x 
     (mapsTo_image (fun s : ℝ => x + (s : ℂ) * w) (Ioo 0 ε))
   simpa using h0x
 
+/-- Near a point of the domain, a ball in the domain meets only finitely many arcs. -/
+theorem exists_ball_finite {y : ℂ} (hy : y ∈ F.dom) :
+    ∃ ε > 0, ball y ε ⊆ F.dom ∧ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty}.Finite := by
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite y hy
+  obtain ⟨ε, hε, hsub⟩ := Metric.mem_nhds_iff.mp (inter_mem ht (F.isOpen_dom.mem_nhds hy))
+  refine ⟨ε, hε, fun z hz => (hsub hz).2, hfin.subset ?_⟩
+  rintro a ⟨ha, z, hza, hz⟩
+  exact ⟨ha, z, hza, (hsub hz).1⟩
+
 /-! ## Finitely many tiles near a point -/
 
+section FiniteTiles
+
+
+/-- `ρ₀` is a **good radius** about `x`: the ball lies in the domain, only finitely many arcs meet it, all pass through `x`,
+every circle among them has diameter above `ρ₀`, and distinct full curves through `x` of two of them meet inside the ball
+only at `x`. -/
+structure GoodAt (x : ℂ) (ρ₀ : ℝ) : Prop where
+  /-- The radius is positive. -/
+  pos : 0 < ρ₀
+  /-- The ball lies in the domain. -/
+  subdom : ball x ρ₀ ⊆ F.dom
+  /-- Finitely many arcs meet the ball. -/
+  fin : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty}.Finite
+  /-- Every arc meeting the ball passes through `x`. -/
+  through : ∀ a ∈ F.arcs, (a.carrier ∩ ball x ρ₀).Nonempty → x ∈ a.carrier
+  /-- Every circle among them has diameter above `ρ₀`. -/
+  big : ∀ a ∈ F.arcs, (a.carrier ∩ ball x ρ₀).Nonempty → (a.curveData x).1 = 1 → ρ₀ < 2 * ‖(a.curveData x).2‖
+  /-- Two of them with different full curves meet in the ball only at `x`. -/
+  uniq : ∀ a ∈ F.arcs, ∀ a' ∈ F.arcs, (a.carrier ∩ ball x ρ₀).Nonempty → (a'.carrier ∩ ball x ρ₀).Nonempty →
+    ∀ z ∈ ball x ρ₀, z ≠ x → z ∈ a.curve x → z ∈ a'.curve x → a.curve x = a'.curve x
+
+/-- Every point of the domain has a good radius. -/
+theorem exists_goodAt {x : ℂ} (hx : x ∈ F.dom) : ∃ ρ₀, F.GoodAt x ρ₀ := by
+  obtain ⟨ε₁, hε₁, hdom, hfin⟩ := F.exists_ball_finite hx
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ε₁).Nonempty} with h𝒜
+  have ev0 : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), 0 < ρ := self_mem_nhdsWithin
+  have ev1 : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), ρ ≤ ε₁ := by
+    filter_upwards [Ioo_mem_nhdsGT hε₁] with ρ hρ; exact hρ.2.le
+  have ev2 : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), ∀ a ∈ 𝒜, x ∈ a.carrier ∨ a.carrier ∩ ball x ρ = ∅ :=
+    (eventually_all_finite hfin).mpr fun a ha => by
+      by_cases hxa : x ∈ a.carrier
+      · exact Filter.Eventually.of_forall fun _ => Or.inl hxa
+      · obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp a.isClosed_carrier.isOpen_compl x hxa
+        filter_upwards [Ioo_mem_nhdsGT hr] with ρ hρ
+        right
+        exact eq_empty_of_forall_notMem fun z ⟨hza, hz⟩ => hball (ball_subset_ball hρ.2.le hz) hza
+  have ev3 : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), ∀ a ∈ 𝒜, x ∈ a.carrier → (a.curveData x).1 = 1 →
+      ρ < 2 * ‖(a.curveData x).2‖ :=
+    (eventually_all_finite hfin).mpr fun a ha => by
+      by_cases hxa : x ∈ a.carrier
+      · by_cases h1 : (a.curveData x).1 = 1
+        · have hb := Arc.curveData_ne (F.nondegenerate a ha.1) hxa
+          have hpos : 0 < 2 * ‖(a.curveData x).2‖ := by positivity
+          filter_upwards [Ioo_mem_nhdsGT hpos] with ρ hρ _ _
+          exact hρ.2
+        · exact Filter.Eventually.of_forall fun _ _ h1' => absurd h1' h1
+      · exact Filter.Eventually.of_forall fun _ h => absurd h hxa
+  have ev4 : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), ∀ a ∈ 𝒜, ∀ a' ∈ 𝒜, x ∈ a.carrier → x ∈ a'.carrier →
+      ∀ z ∈ ball x ρ, z ≠ x → z ∈ a.curve x → z ∈ a'.curve x → a.curve x = a'.curve x := by
+    refine (eventually_all_finite hfin).mpr fun a ha => (eventually_all_finite hfin).mpr fun a' ha' => ?_
+    by_cases hxa : x ∈ a.carrier
+    · by_cases hxa' : x ∈ a'.carrier
+      · have hb := Arc.curveData_ne (F.nondegenerate a ha.1) hxa
+        have hb' := Arc.curveData_ne (F.nondegenerate a' ha'.1) hxa'
+        by_cases hsame : ((a.curveData x).1 = (a'.curveData x).1 ∧
+            ((a.curveData x).1 = 1 → (a.curveData x).2 = (a'.curveData x).2) ∧
+            ((a.curveData x).1 = 0 → ((a.curveData x).2 * (starRingEnd ℂ) (a'.curveData x).2).im = 0))
+        · exact Filter.Eventually.of_forall fun _ _ _ _ _ _ _ _ =>
+            curveAt_eq_of_same (Arc.curveData_kappa x a) hb hb' hsame
+        · obtain ⟨ε, hε, hk⟩ := curve_inter (x := x) (Arc.curveData_kappa x a) (Arc.curveData_kappa x a') hb hb' hsame
+          filter_upwards [Ioo_mem_nhdsGT hε] with ρ hρ _ _ z hz hzx hz1 hz2
+          exact absurd (hk z (by rw [← dist_eq_norm]; exact lt_trans hz hρ.2) hz1 hz2) hzx
+      · exact Filter.Eventually.of_forall fun _ _ h => absurd h hxa'
+    · exact Filter.Eventually.of_forall fun _ h => absurd h hxa
+  obtain ⟨ρ, hρ0, hρ1, hρ2, hρ3, hρ4⟩ := (ev0.and (ev1.and (ev2.and (ev3.and ev4)))).exists
+  have hsub : ∀ a ∈ F.arcs, (a.carrier ∩ ball x ρ).Nonempty → a ∈ 𝒜 := fun a ha ⟨z, hza, hz⟩ =>
+    ⟨ha, z, hza, ball_subset_ball hρ1 hz⟩
+  have hthrough : ∀ a ∈ F.arcs, (a.carrier ∩ ball x ρ).Nonempty → x ∈ a.carrier := by
+    intro a ha hne
+    rcases hρ2 a (hsub a ha hne) with h | h
+    · exact h
+    · exact absurd h (Set.nonempty_iff_ne_empty.mp hne)
+  refine ⟨ρ, ⟨hρ0, (ball_subset_ball hρ1).trans hdom, hfin.subset fun a ⟨ha, hne⟩ => hsub a ha hne, hthrough, ?_, ?_⟩⟩
+  · intro a ha hne h1
+    exact hρ3 a (hsub a ha hne) (hthrough a ha hne) h1
+  · intro a ha a' ha' hne hne' z hz hzx hz1 hz2
+    exact hρ4 a (hsub a ha hne) a' (hsub a' ha' hne') (hthrough a ha hne) (hthrough a' ha' hne') z hz hzx hz1 hz2
+
+
+variable {F}
+
+/-- A preconnected set of interior points meeting a tile lies in it. -/
+theorem IsTile.subset_of_preconnected {T : Set ℂ} (hT : F.IsTile T) {s : Set ℂ} (hs : IsPreconnected s)
+    (hsI : s ⊆ F.interiorPts) {t : ℂ} (ht : t ∈ s) (htT : t ∈ T) : s ⊆ T := by
+  obtain ⟨y, hy, rfl⟩ := hT
+  rw [connectedComponentIn_eq htT]
+  exact hs.subset_connectedComponentIn ht hsI
+
+/-- Near a point `z ≠ x` of an arc, inside a good ball, every arc point lies on the full curve of that arc. -/
+theorem GoodAt.exists_local_curve {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {z : ℂ} (hz : z ∈ ball x ρ₀) (hzx : z ≠ x)
+    {a : Arc} (ha : a ∈ F.arcs) (hza : z ∈ a.carrier) :
+    ∃ δ > 0, ball z δ ⊆ ball x ρ₀ ∧ ∀ y ∈ ball z δ, ∀ a' ∈ F.arcs, y ∈ a'.carrier → y ∈ a.curve x := by
+  have hxa : x ∈ a.carrier := hG.through a ha ⟨z, hza, hz⟩
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty} with h𝒜
+  have ev1 : ∀ᶠ δ in 𝓝[>] (0 : ℝ), ∀ a' ∈ 𝒜, z ∈ a'.carrier ∨ a'.carrier ∩ ball z δ = ∅ :=
+    (eventually_all_finite hG.fin).mpr fun a' _ => by
+      by_cases hza' : z ∈ a'.carrier
+      · exact Filter.Eventually.of_forall fun _ => Or.inl hza'
+      · obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp a'.isClosed_carrier.isOpen_compl z hza'
+        filter_upwards [Ioo_mem_nhdsGT hr] with δ hδ
+        right
+        exact eq_empty_of_forall_notMem fun y ⟨hya, hy⟩ => hball (ball_subset_ball hδ.2.le hy) hya
+  obtain ⟨r0, hr0, hr0sub⟩ := Metric.isOpen_iff.mp isOpen_ball z hz
+  have ev2 : ∀ᶠ δ in 𝓝[>] (0 : ℝ), δ ≤ r0 := by
+    filter_upwards [Ioo_mem_nhdsGT hr0] with δ hδ; exact hδ.2.le
+  have ev0 : ∀ᶠ δ in 𝓝[>] (0 : ℝ), 0 < δ := self_mem_nhdsWithin
+  obtain ⟨δ, hδ0, hδ1, hδ2⟩ := (ev0.and (ev2.and ev1)).exists
+  have hbs : ball z δ ⊆ ball x ρ₀ := (ball_subset_ball hδ1).trans hr0sub
+  refine ⟨δ, hδ0, hbs, fun y hy a' ha' hya' => ?_⟩
+  have ha'𝒜 : a' ∈ 𝒜 := ⟨ha', y, hya', hbs hy⟩
+  have hza' : z ∈ a'.carrier := by
+    rcases hδ2 a' ha'𝒜 with h | h
+    · exact h
+    · exact absurd h (Set.nonempty_iff_ne_empty.mp ⟨y, hya', hy⟩)
+  have heq : a.curve x = a'.curve x :=
+    hG.uniq a ha a' ha' ⟨z, hza, hz⟩ ⟨z, hza', hz⟩ z hz hzx (Arc.carrier_subset_curve hxa hza)
+      (Arc.carrier_subset_curve (hG.through a' ha' ⟨y, hya', hbs hy⟩) hza')
+  rw [heq]
+  exact Arc.carrier_subset_curve (hG.through a' ha' ⟨y, hya', hbs hy⟩) hya'
+
+/-- **No tile lies inside a good ball**: a tile inside `B(x, ρ)`, `ρ < ρ₀`, would have a farthest point `z` of its closure
+from `x`; off `Γ` the tile continues beyond `z`, and on `Γ` it lies beside the one curve through `z`, which it cannot
+cross, yet which leads outward. -/
+theorem GoodAt.not_tile_subset_ball {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {T : Set ℂ} (hT : F.IsTile T) {ρ : ℝ}
+    (hρ : ρ < ρ₀) (hsub : T ⊆ ball x ρ) : False := by
+  obtain ⟨y0, hy0⟩ := hT.nonempty
+  have hcl : closure T ⊆ closedBall x ρ := closure_minimal (hsub.trans ball_subset_closedBall) isClosed_closedBall
+  have hK : IsCompact (closure T) := (isCompact_closedBall x ρ).of_isClosed_subset isClosed_closure hcl
+  obtain ⟨z, hzK, hzmax⟩ := hK.exists_isMaxOn ⟨y0, subset_closure hy0⟩
+    (continuous_norm.comp (continuous_id.sub continuous_const) : Continuous fun y : ℂ => ‖y - x‖).continuousOn
+  have hmax : ∀ y ∈ closure T, ‖y - x‖ ≤ ‖z - x‖ := fun y hy => isMaxOn_iff.mp hzmax y hy
+  have hzρ : ‖z - x‖ ≤ ρ := by
+    have := hcl hzK; rwa [mem_closedBall, dist_eq_norm] at this
+  set d := ‖z - x‖ with hd
+  have hd0 : 0 < d := by
+    by_contra hneg
+    have hd' : d = 0 := le_antisymm (not_lt.mp hneg) (norm_nonneg _)
+    have hyx : y0 = x := by
+      have := hmax y0 (subset_closure hy0)
+      rw [hd'] at this
+      exact sub_eq_zero.mp (norm_le_zero_iff.mp this)
+    obtain ⟨ε, hε, hballT⟩ := Metric.isOpen_iff.mp hT.isOpen y0 hy0
+    have hmem : y0 + ((ε / 2 : ℝ) : ℂ) ∈ ball y0 ε := by
+      rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+      linarith
+    have := hmax _ (subset_closure (hballT hmem))
+    rw [hd', hyx, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)] at this
+    have : (0 : ℝ) < ε / 2 := by positivity
+    linarith
+  have hzball : z ∈ ball x ρ₀ := by
+    rw [mem_ball, dist_eq_norm]; linarith
+  have hzx : z ≠ x := fun h => by rw [h, sub_self, norm_zero] at hd; exact hd0.ne' hd
+  by_cases hzI : z ∈ F.interiorPts
+  · obtain ⟨ε, hε, hballI⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts z hzI
+    obtain ⟨t, htT, hzt⟩ := Metric.mem_closure_iff.mp hzK ε hε
+    have hballT : ball z ε ⊆ T :=
+      hT.subset_of_preconnected (convex_ball z ε).isPreconnected hballI (by rwa [mem_ball, dist_comm]) htT
+    have hτ0 : 0 ≤ ε / (2 * d) := by positivity
+    set τ : ℝ := 1 + ε / (2 * d) with hτ
+    have hτ1 : 0 ≤ τ := by rw [hτ]; linarith
+    have hτ2 : 0 ≤ τ - 1 := by rw [hτ]; linarith
+    have hτd : (τ - 1) * d = ε / 2 := by rw [hτ]; field_simp; ring
+    have hmem : x + (τ : ℂ) * (z - x) ∈ ball z ε := by
+      have : x + (τ : ℂ) * (z - x) - z = ((τ - 1 : ℝ) : ℂ) * (z - x) := by push_cast; ring
+      rw [mem_ball, dist_eq_norm, this, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hτ2, ← hd, hτd]
+      linarith
+    have h1 := hmax _ (subset_closure (hballT hmem))
+    rw [add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hτ1, ← hd] at h1
+    have h2 : τ * d = d + ε / 2 := by nlinarith
+    linarith
+  · have hzdom : z ∈ F.dom := hG.subdom hzball
+    have hzΓ : z ∈ ⋃ a ∈ F.arcs, a.carrier := by
+      by_contra hn; exact hzI ⟨hzdom, hn⟩
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hzΓ
+    have hxa : x ∈ a.carrier := hG.through a ha ⟨z, hza, hzball⟩
+    obtain ⟨δ₁, hδ₁, hδ₁ball, hδ₁curve⟩ := hG.exists_local_curve hzball hzx ha hza
+    set δ := min δ₁ d with hδ
+    have hδ0 : 0 < δ := lt_min hδ₁ hd0
+    have hδd : δ ≤ d := min_le_right _ _
+    have hδδ₁ : δ ≤ δ₁ := min_le_left _ _
+    have hb := Arc.curveData_ne (F.nondegenerate a ha) hxa
+    have hzc : z ∈ a.curve x := Arc.carrier_subset_curve hxa hza
+    obtain ⟨t, htT, hzt⟩ := Metric.mem_closure_iff.mp hzK (δ / 3) (by positivity)
+    have hOo : IsOpen (T ∩ ball z (δ / 3)) := hT.isOpen.inter isOpen_ball
+    obtain ⟨w, ⟨hwT, hwz⟩, hwc⟩ := exists_notMem_curveAt (Arc.curveData_kappa x a) hb hOo ⟨t, htT, by rwa [mem_ball, dist_comm]⟩
+    obtain ⟨w', hw'far, hseg, hdisj⟩ := exists_farther (Arc.curveData_kappa x a) hb hzc hd0
+      (fun h1 => lt_of_le_of_lt hzρ (hρ.trans_le (hG.big a ha ⟨z, hza, hzball⟩ h1).le))
+      hδ0 hδd (by rwa [mem_ball] at hwz) hwc
+    have hsegI : segment ℝ w w' ⊆ F.interiorPts := by
+      intro y hy
+      have hyb := hseg hy
+      refine ⟨hG.subdom (hδ₁ball (ball_subset_ball hδδ₁ hyb)), fun hyΓ => ?_⟩
+      obtain ⟨a', ha', hya'⟩ := mem_iUnion₂.mp hyΓ
+      exact Set.disjoint_left.mp hdisj hy (hδ₁curve y (ball_subset_ball hδδ₁ hyb) a' ha' hya')
+    have hsegT : segment ℝ w w' ⊆ T :=
+      hT.subset_of_preconnected (convex_segment w w').isPreconnected hsegI (left_mem_segment ℝ w w') hwT
+    have := hmax _ (subset_closure (hsegT (right_mem_segment ℝ w w')))
+    linarith
+
+
+/-- The point of the circle `S(x, ρ)` at angle `θ`. -/
+noncomputable def spherePt (x : ℂ) (ρ θ : ℝ) : ℂ := x + (ρ : ℂ) * e θ
+
+/-- `θ ↦ spherePt x ρ θ` is continuous. -/
+theorem continuous_spherePt (x : ℂ) (ρ : ℝ) : Continuous (spherePt x ρ) := by
+  unfold spherePt e; fun_prop
+
+/-- `spherePt x ρ θ` is at distance `ρ` from `x`. -/
+theorem norm_spherePt_sub (x : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) (θ : ℝ) : ‖spherePt x ρ θ - x‖ = ρ := by
+  simp [spherePt, norm_e, abs_of_nonneg hρ]
+
+/-- `spherePt x ρ θ` lies on `S(x, ρ)`. -/
+theorem spherePt_mem_sphere (x : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) (θ : ℝ) : spherePt x ρ θ ∈ sphere x ρ := by
+  rw [mem_sphere_iff_norm]; exact norm_spherePt_sub x hρ θ
+
+/-- `spherePt x ρ` is injective on an interval of length `2π`. -/
+theorem injOn_spherePt (x : ℂ) {ρ : ℝ} (hρ : 0 < ρ) (a : ℝ) : InjOn (spherePt x ρ) (Ioo a (a + 2 * π)) := by
+  intro θ hθ θ' hθ' h
+  have h1 : (ρ : ℂ) * e θ = (ρ : ℂ) * e θ' := by simpa [spherePt] using h
+  have h2 : e θ = e θ' := mul_left_cancel₀ (by exact_mod_cast hρ.ne') h1
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp h2
+  have hπ := Real.pi_pos
+  have h3 : (n : ℝ) < 1 := by
+    by_contra hc; push Not at hc
+    nlinarith [hθ.1, hθ.2, hθ'.1, hθ'.2]
+  have h4 : (-1 : ℝ) < n := by
+    by_contra hc; push Not at hc
+    nlinarith [hθ.1, hθ.2, hθ'.1, hθ'.2]
+  have : n = 0 := by
+    have h5 : n < 1 := by exact_mod_cast h3
+    have h6 : -1 < n := by exact_mod_cast h4
+    omega
+  rw [this] at hn; simpa using hn
+
+/-- **Finitely many tiles meet a small circle**: off the finitely many points of `Γ` on it, the circle's points fall into
+finitely many arcs, each inside one tile. -/
+theorem GoodAt.finite_tiles_sphere {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {ρ : ℝ} (hρ0 : 0 < ρ) (hρ : ρ < ρ₀) :
+    {T | F.IsTile T ∧ (T ∩ sphere x ρ).Nonempty}.Finite := by
+  have hπ := Real.pi_pos
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty} with h𝒜
+  set S : Set ℂ := ⋃ a ∈ 𝒜, (a.curve x ∩ sphere x ρ) with hS
+  have hSfin : S.Finite := hG.fin.biUnion fun a ha =>
+    finite_curve_inter_sphere (Arc.curveData_ne (F.nondegenerate a ha.1) (hG.through a ha.1 ha.2)) ρ
+  have hsph : ∀ θ, spherePt x ρ θ ∈ ball x ρ₀ := fun θ => by
+    rw [mem_ball, dist_eq_norm, norm_spherePt_sub x hρ0.le]; exact hρ
+  have hbad : ∀ θ, spherePt x ρ θ ∉ F.interiorPts → spherePt x ρ θ ∈ S := by
+    intro θ hθ
+    have hd : spherePt x ρ θ ∈ F.dom := hG.subdom (hsph θ)
+    have hΓ : spherePt x ρ θ ∈ ⋃ a ∈ F.arcs, a.carrier := by
+      by_contra hn; exact hθ ⟨hd, hn⟩
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hΓ
+    have hne : (a.carrier ∩ ball x ρ₀).Nonempty := ⟨_, hza, hsph θ⟩
+    exact mem_iUnion₂.mpr ⟨a, ⟨ha, hne⟩, Arc.carrier_subset_curve (hG.through a ha hne) hza,
+      spherePt_mem_sphere x hρ0.le θ⟩
+  set g : ℝ → Set ℂ := fun θ => connectedComponentIn F.interiorPts (spherePt x ρ θ) with hg
+  have hΘ : ∀ a : ℝ, {θ ∈ Ioo a (a + 2 * π) | spherePt x ρ θ ∈ S}.Finite := fun a =>
+    Set.Finite.of_injOn (f := spherePt x ρ) (t := S) (fun θ hθ => hθ.2) ((injOn_spherePt x hρ0 a).mono fun θ hθ => hθ.1) hSfin
+  have hmain : ∀ a : ℝ, (g '' (Ioo a (a + 2 * π) \ {θ ∈ Ioo a (a + 2 * π) | spherePt x ρ θ ∈ S})).Finite := by
+    intro a
+    refine finite_image_of_locConst g (hΘ a) fun t ht htn => ?_
+    have hI : spherePt x ρ t ∈ F.interiorPts := by
+      by_contra h; exact htn ⟨ht, hbad t h⟩
+    obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts _ hI
+    have hcont := (continuous_spherePt x ρ).continuousAt (x := t)
+    filter_upwards [hcont.eventually (Metric.ball_mem_nhds _ hε)] with s hs
+    simp only [hg]
+    have hsub : ball (spherePt x ρ t) ε ⊆ connectedComponentIn F.interiorPts (spherePt x ρ t) :=
+      (convex_ball _ _).isPreconnected.subset_connectedComponentIn (mem_ball_self hε) hball
+    exact (connectedComponentIn_eq (hsub hs)).symm
+  refine ((hmain (-π)).union (hmain 0)).subset ?_
+  rintro T ⟨hT, p, hpT, hps⟩
+  -- the angle of `p`
+  have hp1 : ‖p - x‖ = ρ := by rwa [mem_sphere_iff_norm] at hps
+  set u : ℂ := (p - x) / (ρ : ℂ) with hu
+  have hun : ‖u‖ = 1 := by
+    rw [hu, norm_div, hp1, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hρ0, div_self hρ0.ne']
+  set θ₀ := Complex.arg u with hθ₀
+  have hpe : p = spherePt x ρ θ₀ := by
+    have h1 : e θ₀ = u := by
+      have := Complex.norm_mul_exp_arg_mul_I u
+      rw [hun, Complex.ofReal_one, one_mul] at this
+      exact this
+    have hne : (ρ : ℂ) ≠ 0 := by exact_mod_cast hρ0.ne'
+    have h2 : (ρ : ℂ) * ((p - x) / (ρ : ℂ)) = p - x := by field_simp
+    rw [spherePt, h1, hu, h2]; ring
+  have hint : ∃ a ∈ ({-π, 0} : Set ℝ), θ₀ ∈ Ioo a (a + 2 * π) := by
+    rcases lt_or_eq_of_le (Complex.arg_le_pi u) with h | h
+    · exact ⟨-π, by simp, by constructor <;> linarith [Complex.neg_pi_lt_arg u]⟩
+    · exact ⟨0, by simp, by constructor <;> linarith⟩
+  obtain ⟨a, haS, ha⟩ := hint
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hT.isOpen p hpT
+  have hcont : Tendsto (spherePt x ρ) (𝓝 θ₀) (𝓝 p) := by
+    rw [hpe]; exact (continuous_spherePt x ρ).continuousAt
+  obtain ⟨η, hη, hηball⟩ := Metric.mem_nhds_iff.mp (hcont.eventually (Metric.ball_mem_nhds p hε))
+  have hlt : max a (θ₀ - η) < min (a + 2 * π) (θ₀ + η) := by
+    refine max_lt (lt_min (by linarith) (by linarith [ha.1])) (lt_min (by linarith [ha.2]) (by linarith))
+  obtain ⟨θ, hθU, hθΘ⟩ := ((Set.Ioo_infinite hlt).sdiff (hΘ a)).nonempty
+  have hθI : θ ∈ Ioo a (a + 2 * π) := ⟨(le_max_left _ _).trans_lt hθU.1, hθU.2.trans_le (min_le_left _ _)⟩
+  have hθη : θ ∈ ball θ₀ η := by
+    rw [mem_ball, Real.dist_eq, abs_lt]
+    constructor
+    · linarith [(le_max_right _ _).trans_lt hθU.1]
+    · linarith [hθU.2.trans_le (min_le_right _ _)]
+  have hqT : spherePt x ρ θ ∈ T := hball (hηball hθη)
+  have hTg : T = g θ := by
+    obtain ⟨y, hy, rfl⟩ := hT
+    exact connectedComponentIn_eq hqT
+  have hΘ' : θ ∉ {θ ∈ Ioo a (a + 2 * π) | spherePt x ρ θ ∈ S} := hθΘ
+  have hmem : T ∈ g '' (Ioo a (a + 2 * π) \ {θ ∈ Ioo a (a + 2 * π) | spherePt x ρ θ ∈ S}) :=
+    ⟨θ, ⟨hθI, hΘ'⟩, hTg.symm⟩
+  simp only [mem_insert_iff, mem_singleton_iff] at haS
+  rcases haS with rfl | rfl
+  · exact Or.inl hmem
+  · exact Or.inr hmem
+
+
+/-- The tiles of colour `c` meeting a small ball cover the colour class inside it. -/
+theorem region_inter_ball_subset {x : ℂ} {r : ℝ} (c : Fin k) :
+    F.region c ∩ ball x r ⊆ ⋃ T ∈ {T | F.TileOf c T ∧ (T ∩ ball x r).Nonempty}, T := by
+  rintro y ⟨hy, hyb⟩
+  have hyI : y ∈ F.interiorPts := hy.1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts y) := ⟨y, hyI, rfl⟩
+  have hmem : y ∈ connectedComponentIn F.interiorPts y := mem_connectedComponentIn hyI
+  have hcol : F.col y = c := hy.2
+  refine mem_iUnion₂.mpr ⟨_, ⟨?_, y, hmem, hyb⟩, hmem⟩
+  have := hT.tileOf hmem
+  rwa [hcol] at this
+
+
+end FiniteTiles
+
 /-- **Finitely many tiles meet a small disc about any point of the domain**: near `x` only the arcs through `x` remain,
-each with at most two branches at `x`; for small `r` the branches are disjoint off `x` and cut `B(x, r)` into at most as
-many curvilinear sectors as there are branches, each connected. -/
+every pair of their full curves meets only at `x`, and every tile meeting `B(x, r)` meets a fixed small circle about `x`
+(a tile inside the ball would have a farthest point, `GoodAt.not_tile_subset_ball`); only finitely many tiles meet that
+circle (`GoodAt.finite_tiles_sphere`). -/
 theorem finite_tiles_near {x : ℂ} (hx : x ∈ F.dom) :
     ∃ r > 0, {T | F.IsTile T ∧ (T ∩ ball x r).Nonempty}.Finite := by
-  sorry
+  obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hx
+  have hρ0 := hG.pos
+  refine ⟨ρ₀ / 2, by positivity, (hG.finite_tiles_sphere (ρ := 3 * ρ₀ / 4) (by positivity) (by linarith)).subset ?_⟩
+  rintro T ⟨hT, p, hpT, hp⟩
+  refine ⟨hT, ?_⟩
+  have hpρ : p ∈ ball x (3 * ρ₀ / 4) := ball_subset_ball (by linarith) hp
+  have hnot : ¬ T ⊆ ball x (3 * ρ₀ / 4) := fun h => hG.not_tile_subset_ball hT (by linarith) h
+  obtain ⟨q, hqT, hq⟩ := Set.not_subset.mp hnot
+  by_contra hne
+  have hno : ∀ y ∈ T, y ∉ sphere x (3 * ρ₀ / 4) := fun y hy hys => hne ⟨y, hy, hys⟩
+  obtain ⟨y, hy, hy1, hy2⟩ := hT.isPreconnected (ball x (3 * ρ₀ / 4)) (closedBall x (3 * ρ₀ / 4))ᶜ isOpen_ball
+    isClosed_closedBall.isOpen_compl (fun y hy => by
+      by_cases h1 : y ∈ ball x (3 * ρ₀ / 4)
+      · exact Or.inl h1
+      · right
+        intro h2
+        exact hno y hy (le_antisymm (mem_closedBall.mp h2) (not_lt.mp h1)))
+    ⟨p, hpT, hpρ⟩ ⟨q, hqT, fun h2 => hno q hqT (le_antisymm (mem_closedBall.mp h2) (not_lt.mp hq))⟩
+  exact hy2 (ball_subset_closedBall hy1)
 
 /-- The colours at a point of the domain are the colours of the tiles whose closure holds it (the rows' `P_cl`, read
 tile by tile). -/
 theorem mem_coloursAt_iff_exists_tileOf {x : ℂ} (hx : x ∈ F.dom) {c : Fin k} :
     c ∈ F.coloursAt x ↔ ∃ T, F.TileOf c T ∧ x ∈ closure T := by
-  sorry
+  constructor
+  · intro hc
+    obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near hx
+    have hfin' : {T | F.TileOf c T ∧ (T ∩ ball x r).Nonempty}.Finite :=
+      hfin.subset fun T ⟨hT, hne⟩ => ⟨hT.1, hne⟩
+    have hx1 : x ∈ closure (F.region c ∩ ball x r) := by
+      rw [mem_closure_iff_nhds]
+      intro t ht
+      obtain ⟨y, hy1, hy2⟩ := mem_closure_iff_nhds.mp hc (t ∩ ball x r) (inter_mem ht (ball_mem_nhds x hr))
+      exact ⟨y, hy1.1, hy2, hy1.2⟩
+    have hx2 := closure_mono (F.region_inter_ball_subset (x := x) (r := r) c) hx1
+    rw [hfin'.closure_biUnion] at hx2
+    obtain ⟨T, hT, hxT⟩ := mem_iUnion₂.mp hx2
+    exact ⟨T, hT.1, hxT⟩
+  · rintro ⟨T, hT, hxT⟩
+    exact mem_coloursAt_of_tileOf hT hxT
 
 /-- At a point of the domain, the cone of a colour class is the union of the cones of its tiles whose closure holds the
 point: "the cone of a tile of colour `c`" and "the cone of the class of `c`" agree. -/
 theorem coneAt_region_eq_biUnion {x : ℂ} (hx : x ∈ F.dom) (c : Fin k) :
     coneAt (F.region c) x = ⋃ T ∈ {T | F.TileOf c T ∧ x ∈ closure T}, coneAt T x := by
-  sorry
+  apply Set.Subset.antisymm
+  · intro β hβ
+    obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near hx
+    have hfin' : {T | F.TileOf c T ∧ (T ∩ ball x r).Nonempty}.Finite :=
+      hfin.subset fun T ⟨hT, hne⟩ => ⟨hT.1, hne⟩
+    have h1 := coneAt_inter_ball hr hβ
+    have h2 := coneAt_mono (F.region_inter_ball_subset (x := x) (r := r) c) x h1
+    obtain ⟨T, hT, hβT⟩ := coneAt_biUnion_finite hfin' (fun T => T) h2
+    exact mem_iUnion₂.mpr ⟨T, ⟨hT.1, mem_closure_of_mem_coneAt hβT⟩, hβT⟩
+  · intro β hβ
+    obtain ⟨T, hT, hβT⟩ := mem_iUnion₂.mp hβ
+    exact coneAt_mono hT.1.subset_region x hβT
 
 /-- At a point of the domain every direction lies in the cone of some colour (pigeonhole over the finitely many colours,
 on interior points near the ray). -/
@@ -1129,15 +2114,6 @@ theorem exists_mem_coneAt_region {x : ℂ} (hx : x ∈ F.dom) (β : ℝ) : ∃ c
         nlinarith
 
 /-! ## The germ dichotomy -/
-
-/-- Near a point of the domain, a ball in the domain meets only finitely many arcs. -/
-theorem exists_ball_finite {y : ℂ} (hy : y ∈ F.dom) :
-    ∃ ε > 0, ball y ε ⊆ F.dom ∧ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty}.Finite := by
-  obtain ⟨t, ht, hfin⟩ := F.locallyFinite y hy
-  obtain ⟨ε, hε, hsub⟩ := Metric.mem_nhds_iff.mp (inter_mem ht (F.isOpen_dom.mem_nhds hy))
-  refine ⟨ε, hε, fun z hz => (hsub hz).2, hfin.subset ?_⟩
-  rintro a ⟨ha, z, hza, hz⟩
-  exact ⟨ha, z, hza, (hsub hz).1⟩
 
 /-- Inside a ball meeting finitely many arcs, the points of the unit circle on the arcs that are not arcs of it are
 finitely many. -/
