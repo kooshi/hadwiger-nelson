@@ -437,7 +437,13 @@ theorem r7_unitPair_mem_sphere {x y : ℂ} (hxy : dist x y = 1) (hc : r7Col x = 
 /-- A measurable set whose unit pairs all start in a null set has null unit pairs (`unitPairSet A ⊆ N ×ˢ univ`). -/
 theorem unitPairsNull_of_unitPair_mem {A N : Set ℂ} (hN : volume N = 0)
     (h : ∀ x ∈ A, ∀ y ∈ A, dist x y = 1 → x ∈ N) : UnitPairsNull A := by
-  sorry
+  have hsub : unitPairSet A ⊆ N ×ˢ univ := by
+    rintro ⟨x, θ⟩ ⟨hx, hy⟩
+    refine ⟨h x hx _ hy ?_, mem_univ _⟩
+    rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+  unfold UnitPairsNull
+  refine measure_mono_null hsub ?_
+  rw [Measure.prod_prod, hN, zero_mul]
 
 /-- The unit circles about the lattice points are null together (`MeasureTheory.Measure.addHaar_sphere`, countable union). -/
 theorem volume_iUnion_sphere_tri : volume (⋃ (m : ℤ) (n : ℤ), sphere (tri m n) 1) = 0 := by
@@ -850,13 +856,56 @@ theorem measurableSet_disc7 (a : Fin 7) : MeasurableSet (disc7 a) := by
 /-- Same-colour centres are at least `√21/2` apart (`triQ ≥ 7` on the index-7 sublattice `{m + 3n ≡ 0 (mod 7)}`). -/
 theorem disc7Col_eq_dist_ge {m n m' n' : ℤ} (hc : disc7Col m n = disc7Col m' n') (hne : (m, n) ≠ (m', n')) :
     √21 / 2 ≤ dist (disc7Centre m n) (disc7Centre m' n') := by
-  sorry
+  set a : ℤ := m - m'
+  set b : ℤ := n - n'
+  have hab : a ≠ 0 ∨ b ≠ 0 := by
+    by_contra h; push Not at h; exact hne (Prod.ext (by omega) (by omega))
+  have hmod : (a + 3 * b) % 7 = 0 := by
+    have h := congrArg Fin.val hc
+    simp only [disc7Col] at h
+    omega
+  obtain ⟨t, ht⟩ : ∃ t, a + 3 * b = 7 * t := ⟨(a + 3 * b) / 7, by omega⟩
+  have hQ : a * a + a * b + b * b = 7 * (7 * t * t - 5 * t * b + b * b) := by
+    have : a = 7 * t - 3 * b := by omega
+    rw [this]; ring
+  have hpos : 0 < a * a + a * b + b * b := by
+    rcases hab with h | h
+    · nlinarith [sq_nonneg (2 * a + b), sq_nonneg b, mul_self_pos.2 h]
+    · nlinarith [sq_nonneg (2 * a + b), sq_nonneg b, mul_self_pos.2 h]
+  have h7 : 7 ≤ a * a + a * b + b * b := by omega
+  have h7r : (7 : ℝ) ≤ triQ a b := by
+    unfold triQ; exact_mod_cast (show (7 : ℤ) ≤ a ^ 2 + a * b + b ^ 2 by nlinarith)
+  have hd : disc7Centre m n - disc7Centre m' n' = ((√3 / 2 : ℝ) : ℂ) * (((a : ℝ) : ℂ) + ((b : ℝ) : ℂ) * e (π / 3)) := by
+    simp only [disc7Centre, tri, a, b]; push_cast; ring
+  have hn2 : dist (disc7Centre m n) (disc7Centre m' n') ^ 2 = 3 / 4 * triQ a b := by
+    rw [dist_eq_norm, hd, norm_mul, mul_pow, Complex.norm_real, Real.norm_eq_abs, sq_abs, Complex.sq_norm,
+      normSq_add_mul, div_pow, Real.sq_sqrt (by norm_num)]
+    ring
+  rw [div_le_iff₀ (by norm_num : (0 : ℝ) < 2)]
+  have h21 : √21 ^ 2 = (21 : ℝ) := Real.sq_sqrt (by norm_num)
+  nlinarith [dist_nonneg (x := disc7Centre m n) (y := disc7Centre m' n'), Real.sqrt_nonneg 21,
+    sq_nonneg (dist (disc7Centre m n) (disc7Centre m' n') * 2 - √21)]
 
 /-- **DISC7's classes have null unit pairs**: inside one disc of radius `1/2` only antipodal boundary pairs are at distance `1`,
 and two discs of one colour are more than `√21/2 − 1 > 1` apart; so every unit pair starts on a boundary circle. -/
 theorem disc7_unitPair_mem_sphere {a : Fin 7} {x y : ℂ} (hx : x ∈ disc7 a) (hy : y ∈ disc7 a) (hxy : dist x y = 1) :
     ∃ m n : ℤ, dist x (disc7Centre m n) = 1 / 2 := by
-  sorry
+  simp only [disc7, mem_iUnion, mem_closedBall] at hx hy
+  obtain ⟨m, n, hc, hx⟩ := hx
+  obtain ⟨m', n', hc', hy⟩ := hy
+  by_cases h : (m, n) = (m', n')
+  · obtain ⟨rfl, rfl⟩ := Prod.mk.inj h
+    refine ⟨m, n, le_antisymm hx ?_⟩
+    have := dist_triangle x (disc7Centre m n) y
+    rw [dist_comm (disc7Centre m n) y] at this
+    linarith
+  · have hge := disc7Col_eq_dist_ge (hc.trans hc'.symm) h
+    have h21 : (2 : ℝ) < √21 / 2 := by
+      rw [lt_div_iff₀ (by norm_num), Real.lt_sqrt (by norm_num)]; norm_num
+    have := dist_triangle (disc7Centre m n) x (disc7Centre m' n')
+    have := dist_triangle x y (disc7Centre m' n')
+    rw [dist_comm] at hx
+    linarith
 
 /-- The discs cover the plane (the centre lattice's covering radius is `1/2`). -/
 theorem disc7_cover (z : ℂ) : ∃ m n : ℤ, dist z (disc7Centre m n) ≤ 1 / 2 := by
@@ -873,16 +922,92 @@ theorem disc7_cover (z : ℂ) : ∃ m n : ℤ, dist z (disc7Centre m n) ≤ 1 / 
 
 /-- Every point is within `√7/2` of a centre of each colour (the colour lattice's covering radius). -/
 theorem disc7_colour_near (a : Fin 7) (z : ℂ) : ∃ m n : ℤ, disc7Col m n = a ∧ dist z (disc7Centre m n) ≤ √7 / 2 := by
-  sorry
+  set μ : ℂ := tri 1 2 with hμ
+  have hω : e (π / 3) ^ 2 = e (π / 3) - 1 := by
+    rw [e_pi_div_three]
+    apply Complex.ext <;> simp [sq] <;> ring_nf
+    norm_num [Real.sq_sqrt]
+  have hμn : normSq μ = 7 := by
+    rw [hμ, tri, show ((1 : ℤ) : ℂ) = ((1 : ℝ) : ℂ) by simp, show ((2 : ℤ) : ℂ) = ((2 : ℝ) : ℂ) by simp,
+      normSq_add_mul]
+    unfold triQ; norm_num
+  have hμ0 : μ ≠ 0 := by intro h; rw [h, map_zero] at hμn; norm_num at hμn
+  set c : ℂ := ((√3 / 2 : ℝ) : ℂ) * μ with hc
+  have hc0 : c ≠ 0 := mul_ne_zero (by norm_num) hμ0
+  obtain ⟨p, q, hpq⟩ := tri_cover ((z - disc7Centre a.val 0) / c)
+  refine ⟨a.val + p - 2 * q, 2 * p + 3 * q, ?_, ?_⟩
+  · apply Fin.ext
+    simp only [disc7Col]
+    omega
+  · have hcen : disc7Centre (a.val + p - 2 * q) (2 * p + 3 * q) = disc7Centre a.val 0 + c * tri p q := by
+      simp only [disc7Centre, hc, hμ, tri]
+      push_cast
+      linear_combination (-((√3 : ℝ) : ℂ) * (q : ℂ)) * hω
+    have e1 : z - disc7Centre (a.val + p - 2 * q) (2 * p + 3 * q) = c * ((z - disc7Centre a.val 0) / c - tri p q) := by
+      rw [hcen]; field_simp; ring
+    rw [dist_eq_norm, e1, norm_mul]
+    have hcn : ‖c‖ ^ 2 = 21 / 4 := by
+      rw [hc, norm_mul, mul_pow, Complex.sq_norm μ, hμn, Complex.norm_real, Real.norm_eq_abs, sq_abs, div_pow,
+        Real.sq_sqrt (by norm_num)]
+      norm_num
+    have hn : ‖(z - disc7Centre a.val 0) / c - tri p q‖ ^ 2 ≤ 1 / 3 := by rw [Complex.sq_norm]; exact hpq
+    have h7 : √7 ^ 2 = (7 : ℝ) := Real.sq_sqrt (by norm_num)
+    have hprod : (‖c‖ * ‖(z - disc7Centre a.val 0) / c - tri p q‖) ^ 2 ≤ (√7 / 2) ^ 2 := by
+      rw [mul_pow, hcn, div_pow, h7]; nlinarith
+    exact (pow_le_pow_iff_left₀ (by positivity) (by positivity) (by norm_num)).1 hprod
 
 /-- The unit circle about `p` crosses a closed disc of radius `1/2` at distance in `(1/2, 3/2)` in an arc of positive length. -/
 theorem phi_closedBall_pos {p c : ℂ} (h1 : 1 / 2 < dist p c) (h2 : dist p c < 3 / 2) :
     0 < phi (closedBall c (1 / 2)) p := by
-  sorry
+  set d : ℂ := c - p with hd
+  set α : ℝ := Complex.arg d
+  have hdn : ‖d‖ = dist p c := by rw [hd, dist_comm, dist_eq_norm]
+  have hα : dist (p + e α) c < 1 / 2 := by
+    have h := eq_norm_mul_e_arg d
+    have : p + e α - c = e α * (1 - (‖d‖ : ℂ)) := by
+      have hc' : c = p + d := by rw [hd]; ring
+      rw [hc', show p + e α - (p + d) = e α - d by ring]
+      conv_lhs => rw [h]
+      ring
+    rw [dist_eq_norm, this, norm_mul, norm_e, one_mul, show (1 : ℂ) - (‖d‖ : ℂ) = ((1 - ‖d‖ : ℝ) : ℂ) by push_cast; ring,
+      Complex.norm_real, Real.norm_eq_abs, hdn, abs_lt]
+    constructor <;> linarith
+  have hopen : IsOpen {θ : ℝ | dist (p + e θ) c < 1 / 2} :=
+    isOpen_lt ((continuous_const.add continuous_e).dist continuous_const) continuous_const
+  obtain ⟨ε₀, hε₀, hball⟩ := Metric.isOpen_iff.1 hopen α hα
+  set ε := min ε₀ Real.pi
+  have hε : 0 < ε := lt_min hε₀ Real.pi_pos
+  have hS : MeasurableSet {θ : ℝ | p + e θ ∈ closedBall c (1 / 2)} :=
+    (isClosed_closedBall.preimage (continuous_const.add continuous_e)).measurableSet
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | p + e θ ∈ closedBall c (1 / 2)} ↔
+      θ ∈ {θ : ℝ | p + e θ ∈ closedBall c (1 / 2)} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  have hsub : Ioo (α - ε) (α + ε) ⊆ {θ : ℝ | p + e θ ∈ closedBall c (1 / 2)} := by
+    intro θ hθ
+    have : θ ∈ ball α ε₀ := by
+      rw [Real.ball_eq_Ioo]; exact ⟨by linarith [hθ.1, min_le_left ε₀ Real.pi], by linarith [hθ.2, min_le_left ε₀ Real.pi]⟩
+    exact mem_closedBall.2 (hball this).le
+  have := arcLength_ge_of_Ioo hS hper (min_le_right _ _) hsub
+  exact lt_of_lt_of_le (ENNReal.ofReal_pos.2 (by linarith)) this
 
 /-- DISC7's classes are MUA sets (null unit pairs; `φ > 0` off the class, since `√7/2 < 3/2`). -/
 theorem disc7_isMUA (a : Fin 7) : IsMUA (disc7 a) := by
-  sorry
+  have hN : volume (⋃ (m : ℤ) (n : ℤ), sphere (disc7Centre m n) (1 / 2)) = 0 :=
+    measure_iUnion_null fun m => measure_iUnion_null fun n => Measure.addHaar_sphere volume _ _
+  have hnull : UnitPairsNull (disc7 a) := unitPairsNull_of_unitPair_mem hN fun x hx y hy hxy => by
+    obtain ⟨m, n, h⟩ := disc7_unitPair_mem_sphere hx hy hxy
+    exact mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_sphere.2 h⟩⟩
+  refine (isMUA_iff_ae_phi_pos (measurableSet_disc7 a) hnull).2 ?_
+  refine ae_restrict_of_forall_mem (measurableSet_disc7 a).compl fun p hp => ?_
+  obtain ⟨m, n, hc, hd⟩ := disc7_colour_near a p
+  have h7 : √7 / 2 < 3 / 2 := by
+    rw [div_lt_div_iff_of_pos_right (by norm_num), Real.sqrt_lt' (by norm_num)]; norm_num
+  have h1 : 1 / 2 < dist p (disc7Centre m n) := by
+    by_contra h
+    exact hp (mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨hc, mem_closedBall.2 (not_lt.1 h)⟩⟩⟩)
+  refine lt_of_lt_of_le (phi_closedBall_pos h1 (lt_of_le_of_lt hd h7)) ?_
+  refine measure_mono fun θ hθ => ?_
+  exact mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨hc, hθ⟩⟩⟩
 
 /-- A union of closed discs of radius `1/2` about a discrete lattice coset is its own support. -/
 theorem essSupport_disc7 (a : Fin 7) : essSupport (disc7 a) = disc7 a := by
