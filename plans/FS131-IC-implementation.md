@@ -528,3 +528,47 @@ Price: about two sessions; (iv)'s two-sector clause is most of it, (ii)'s degree
 `d4f946ae`, in a new module `Plane/ValidMap/Moves` upstream of `Contact`, proved as `…_aux` lemmas under their exact statements; `Contact.lean`'s three move leaves stay
 `sorry` here and become one-line citations at the merge, on Keryx's word. This job left them untouched, as the ruling asks. The remaining work on this branch is `stuck_structure`
 (Stage 12's route); where it needs a move's conclusion it uses the move's statement as it stands in `Contact` — the route above needs none.
+
+## Stage 13 — SAVED (FS131-IC5 stage 1): the readback, the as-given build, and a statement defect sent
+
+Implementer: de Bruijn on Opus 5.5 (job FS131-IC5), resuming this record at its last SAVED stage (Stage 12, commit `67c9f5a3`, with the ruling note of
+`addcfbf3` after it; `git log -- plans/FS131-IC-implementation.md` agrees). Brief `data/fs131/briefs/FS131-IC5-contact.md` (on `main`).
+
+**The brief's quotations against their sources** (standing rule 3; the brief says four, it quotes five):
+1. "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the"
+   — `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2, line 887: **matches as a truncation** (this tree's copy identical, `diff` empty).
+2. "**`stuck_structure`, the route** (my reading for the successor; none changes a statement):" — this record, Stage 12, line 500: **matches**.
+3. "1. `stuck_horns` gives `H₊` (along `α`, `κ₁ < κ₂`), `H₋` (along `α + π`, `κ₃ < κ₄`), `HasSectors v c 2`, out-type `c` at `N` and `S′`. Flanks by" — this record,
+   Stage 12, line 501: **matches as a truncation**.
+4. "236. **Ruling: `Contact` splits once more, when a slot frees** — the three moves (`exists_shave`, `exists_rayMerge`, `exists_merge`) to a parallel implementer in a"
+   — `plans/FS131-close-inventory.md` on `main`, line 1692: **matches as a truncation**.
+5. "194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4
+   implementer" — `plans/FS131-close-inventory.md` on `main`, line 1358: **matches as a truncation**.
+A slip in the brief (not a quotation): "check the four quotations" — there are five; all match.
+
+**What I may change** (plan § 14.2, the brief's `touches`): add children anywhere in `Contact`, in a new module of my own (`Plane/ValidMap/ContactAux`, imported
+by `Contact`) and in the foundation `Plane/ValidMap/Basic` (additions only, statements unchanged); engine 2 only as the exact hunk of `fs131-w4`'s `3f7ea033`;
+`Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (my own block, headed "FS131-IC5"), this record, `tools/fs131_ic_*.py`, `data/fs131/ic/`,
+`data/fs131/reports/FS131-IC5.md`. **What I may not change**: any statement of plan §§ 3.2, 7.2 (`stuck_structure`'s hypotheses and conclusion; Condition 5 and the
+three-colour hypothesis stay named hypotheses), any definition of `Basic`, the read-back conventions; `UnitArc`, `BaseSteps`, `SVMap`, `StuckChain` (FS131-I4i's,
+on `fs131-w4`); the three moves (FS131-IM1's, item 236), which stay `sorry` here; no new `axiom`, no `native_decide`; no merge into `fs131-w4`, no wave-4 gate, no
+push to `main`. A leaf that cannot be proved as written goes to Keryx at once, and I go on with the rest.
+
+**The worktree as given** (`addcfbf3`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`; admitted after a wait
+for two other trees' builds): "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0
+(`build/gate/build/20261004T214853Z-2680583.log`; driver log `data/fs131/ic/build-ic5-readback.log`) — IC4's stage-11 oleans are current. 28 distinct `declaration
+uses sorry` warnings replayed: `Contact` 4 (`exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17, `BaseSteps` 7; no error.
+
+**A statement defect, sent to Keryx at once (this stage).** `stuck_structure`'s sides clause, `∀ᶠ ρ in 𝓝[>] 0, ∀ z ∈ F.interiorPts ∩ ball v ρ, (0 < frameY v α z →
+F.col z = g ∨ F.col z = c) ∧ (frameY v α z < 0 → F.col z = h ∨ F.col z = c)`, is point-level, read through `frameY`; the derivation's (ii) ("one `g`-sector filling
+the side `(z − v)·n > 0`", `plans/FS110-N-proof.md` § 2.4) is direction-level. Nothing in the hypotheses fixes the curvatures' signs. With `κ₂ < 0` the upper
+flank band of `H₊` (`IsFlankAbove v α κ₂ g`, given by `IsHorn.exists_flankAbove`) holds the branch points `branchPt v α m s`, `κ₂ < m < min(κ', 0)` — interior points
+of colour `g`, arbitrarily near `v`, at `frameY = m s²/2 < 0` — while the conclusion asks `g ≠ h`, `g ≠ c`. Likewise `κ₁ > 0` (lower flank `h` at `frameY > 0`), and
+for `H₋` in its frame `κ₃ > 0` or `κ₄ < 0`; swapping `α ↔ α + π` does not help. So the clause holds exactly when `κ₁ ≤ 0 ≤ κ₂` and `κ₃ ≤ 0 ≤ κ₄`, which no
+hypothesis forces (N4-SHADOW's `σ_g = f̃(υ)`, `σ_h = f(μ)` range over `(−1, 1)`; N4-FIN's chain is global). **No explicit counterexample constructed**: it would be any
+stuck fragment satisfying the hypotheses with `κ₂ < 0`, and no model of `stuck_structure`'s hypotheses exists in the library (the bowtie has unit arcs). The same
+clause is in wave 5's `stuck_structure_ua` (`fs131-w5`, `fs131-w5b`, `Plane/ValidMap/Terminal.lean` line 57). No wave-4 consumer reads it (`stuck_step`,
+`stuck_flip`, `stuck_neighbour` discard it). Repairs offered (the planner's choice): (a) the flank form wave 5 already states beside it, `IsFlankAbove v α κ₂ g ∧
+IsFlankBelow v α κ₁ h ∧ IsFlankAbove v (α + π) κ₄ h ∧ IsFlankBelow v (α + π) κ₃ g`; (b) point-level outside a parabola, `(‖z − v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧
+(frameY v α z < -(‖z − v‖ ^ 2 / 2) → F.col z = h)`, true for curvatures in `[−1, 1]`; (c) drop the clause. **Meanwhile**: every other clause as a sorry-free child, the
+sides clause left as `stuck_structure`'s only `sorry` until the ruling, and (a), (b) proved as lemmas so either becomes a citation.
