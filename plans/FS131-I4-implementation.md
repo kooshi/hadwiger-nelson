@@ -717,6 +717,37 @@ Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with 
 **Re-pricing**: the three leaves (planned M–H each) cost about 60k tokens together. Every failure was `nlinarith` heartbeats in a large context, cured by a
 real-variable core lemma per inequality and explicit `mul_le_mul` steps.
 
+## Stage 21 — SAVED (FS131-I4h): `n2_env_away` (so N2-ENV is sorry-free); 19 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`n2_env_away` proved**, with `ψ = min(1/2, r/4)`, on the whole arc (not a symmetric sub-arc: an away point beyond `φ + Δ` but inside the arc's directions is
+covered only near `R₂`, so the reduction the toward bend uses loses there). In the frame of `φ`, the disc and the condition at `θ = φ` give `x ≥ 1 + s/2`, so
+`|p − P|² ≥ 2 + s`; `p = P + ρ e(φ + t)` with `|t| < 90°` (`eq_polar_of_frameX_pos`, through `arctan(y/x)`). **In the arc's directions** (`−a ≤ t ≤ b`) the
+condition at `φ + t` gives `ρ ≥ 2`, so `p` is within `ρ − 2 ≤ s < r` of `P + 2e(φ + t) ∈ R₂(ᾱ)`. **Beyond `θ₂`** (`t > b`), in the end's frame: `Y sin b ≤ s`
+(`n2_env_away_height`), so `Y ≤ 2ψ`, `X ≥ 1`, and the end condition `(X − 1)² + Y² ≥ 1` gives `X ≥ 2 − Y²`, so `p` is within `√12 ψ < r` of `P + 2e θ₂`
+(`n2_env_away_core`, `n2_env_away_end`). Beyond `θ₁`, the mirror (`Y ↦ −Y`).
+
+**Axioms** (`data/fs131/i4/axioms-i4h-21.lean` → `axioms-i4h-21.txt`, against this stage's build's oleans, not a gate log): the leaf and its four children, the standard
+three. **Records**: `tools/fs131_i4_addrecords.py` — 410 names, 4 added, 0 missing. **No statement changed** (one `sorry` removed; `h12` referenced by
+`have _ := h12`). Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T193948Z-1860590.log`;
+driver log `data/fs131/i4/build-i4h-stage21.log`): 29 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 12), no other warning.
+
+**What is left (19 in this job's files; `Contact`'s are the parallel implementer's, FS131-IC1/IC2 on `fs131-w4c`), in the order I would take it.**
+- *Engine 2*, `ringArcsWithin_of_Γ_subset`, **in `Plane/ValidMap/Basic` under exactly that name** (inventory item 218 (g), the coordinator's note to this job): the
+  bends and `Contact`'s three moves both need it; whichever implementer reaches it first writes it, and `tools/fs131_qa1_dupes.py` deletes an identical copy at the
+  merge. This job did not reach it.
+- *Engine 6* (`IsRingArc.side_dist_le_one`) and `l60_le`, `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners`. This stage's Reuleaux lemmas are general
+  (`dist_le_one_of_mem_reul`, `dist_lt_one_of_mem_reul`, the vertex bound `norm_sub_le_one_of_cone`) and the lens estimate `lens_dot_ge` (`B̄(A, 1) ∩ B̄(B, 1)` against
+  directions between the ends) is the trigonometric half of L60-EQ's `L ∩ ω(P) = ᾱ` child.
+- *The bends* (`bend_toward`, `bend_away`, `bend_away_whole` over it): N2-ENV is now sorry-free (all four, with explicit profiles: toward `ψ = min(1, r/9)`,
+  away `ψ = min(1/2, r/4)`, near `(1 − cos(ℓ/2))/π`, near-away `min(1, c r²)/3`); left are engines 1–3 and the clearness.
+- `noBoth` (the sector chart: two sectors of `d` at `P` separated by the `c`- and `c′`-directions); `flankQ_upper`/`flankQ_lower` (engine 5; Contact's
+  `woodallCone` is now proved on `fs131-w4c`); engine 7 and `a4six`; `nb4p` (re-read FS110-NB-4 first).
+- `BaseSteps`' `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti` (N3's proofs; read the derivation per leaf), and `n3_end` last, after
+  `fs131-w4c` merges (it needs `woodallCone` and `exists_merge`).
+- **Technique**, measured on all five leaves of this job: `nlinarith` in a declaration with a large context runs out of heartbeats even when the certificate is
+  small, and a whole declaration has one heartbeat budget. State each inequality as a real-variable lemma with only its hypotheses (here `reul_bound_real`,
+  `n2_env_near_core`, `toward_dir45`, `n2_env_away_core`), and use `mul_le_mul…` and `pow_le_pow_iff_left₀` for the steps `nlinarith` would search for.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -800,3 +831,19 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.mem_carrier_circ_full`, `ArcMap.mem_l60_arc0/1/2`, `ArcMap.cos_arg_sub`, `ArcMap.abs_le_pi_div_three_of_cos`, `ArcMap.two_pi_div_three_le_abs_of_cos`,
   `ArcMap.sq_norm_sub_eq`, `ArcMap.e_pi_div_three_re_im`.
 
+## Theorems this phase proved (FS131-I4h's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4h-19/20/21.txt`, not a gate log)
+
+- FS114-L60-LE, L60-REAL: `HadwigerNelson.Plane.ArcMap.l60_real` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2: same statement (`l60Frag` valid;
+  `r([0, 60°])` of `ω(0)` an arc of `Γ` with constant sides, inner `0`, outer `1`; a thickening of the closed arc in the domain). Inhabits `IsRingArc` at `ℓ = 60°`.
+- FS112-N2-BENDS, N2-ENV toward: `ArcMap.n2_env_toward` — the standard three. Same statement (for `0 < ℓ ≤ 60°`, `r > 0`, some profile `ψ > 0` with the uncovered
+  part of `B̄(P + (1 − s)e φ, 1)` inside `B(P, r)` for `0 < s ≤ ψ Δ(φ)`).
+- FS112-N2-BENDS, N2-ENV away: `ArcMap.n2_env_away` — the standard three. Same statement (the uncovered part of `B̄(P + (1 + s)e φ, 1)` within `r` of `R₂(ᾱ)`).
+- FS112-N2-BENDS, N2-ENV near (toward): `ArcMap.n2_env_near` — the standard three. Same statement (the lens of the ends within `< 1` of every toward lens point).
+- FS112-N2-BENDS, N2-ENV near (away): `ArcMap.n2_env_near_away` — the standard three. Same statement (the lens off `B(P, r)` within `< 1` of every away lens point).
+- Children (no row), the standard three: the Reuleaux triangle `ArcMap.dist_le_one_of_mem_reul`, `ArcMap.dist_lt_one_of_mem_reul`, `ArcMap.norm_sub_le_one_of_cone`,
+  `ArcMap.reul_bound_real`, `ArcMap.eq_cramer`, `ArcMap.sq_norm_eq_re_im`; L60-REAL's `ArcMap.l60Frag_valid`, `ArcMap.l60Frag_isRingArc`,
+  `ArcMap.norm_e_pi_div_three_sub_one`, `ArcMap.l60_interior_lens`, `ArcMap.l60_cap_mem_ball`, `ArcMap.l60_interior_cases`, `ArcMap.l60_openLens_subset_dom`,
+  `ArcMap.l60_closure_subset_region`, `ArcMap.ringArc_l60_subset_dom`; N2-ENV's `ArcMap.sin_add_sin_sub_sin_ge`, `ArcMap.sin_mul_e_add_sin_mul_e`, `ArcMap.lens_dot_ge`,
+  `ArcMap.sq_norm_sub_ofReal_mul_e`, `ArcMap.n2_env_near_core`, `ArcMap.n2_env_near_away_core`, `ArcMap.n2_env_data`, `ArcMap.toward_dir45`,
+  `ArcMap.n2_env_toward_beside`, `ArcMap.n2_env_toward_core`, `ArcMap.frame_polar_add`, `ArcMap.exists_dir_of_within`, `ArcMap.n2_env_away_height`,
+  `ArcMap.n2_env_away_core`, `ArcMap.n2_env_away_end`, `ArcMap.eq_polar_of_frameX_pos`.

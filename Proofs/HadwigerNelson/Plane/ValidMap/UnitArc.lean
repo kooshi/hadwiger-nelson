@@ -1571,12 +1571,277 @@ theorem n2_env_toward (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hℓ 
   rw [← hnorm] at hbound
   exact lt_of_pow_lt_pow_left₀ 2 hr.le hbound
 
+/-- N2-ENV away beyond an end, the height bound: in the end's frame, a point of the disc about `(1 + s)e(−b)` outside `B(1, 1)` with
+`0 < X ≤ 2 + s` has `Y sin b ≤ s`. -/
+theorem n2_env_away_height {X Y s b : ℝ} (hs : 0 < s) (hX : 0 < X) (hX2 : X ≤ 2 + s)
+    (hdisc : (X - (1 + s) * Real.cos b) ^ 2 + (Y + (1 + s) * Real.sin b) ^ 2 ≤ 1) (hunc : 2 * X ≤ X ^ 2 + Y ^ 2) :
+    Y * Real.sin b ≤ s := by
+  have hcos1 : Real.cos b ≤ 1 := Real.cos_le_one b
+  have hcs := Real.cos_sq_add_sin_sq b
+  have e : (X - (1 + s) * Real.cos b) ^ 2 + (Y + (1 + s) * Real.sin b) ^ 2 =
+      X ^ 2 + Y ^ 2 - 2 * (1 + s) * (X * Real.cos b - Y * Real.sin b) + (1 + s) ^ 2 := by
+    linear_combination (1 + s) ^ 2 * hcs
+  rw [e] at hdisc
+  have h1 : (1 + s) * (Y * Real.sin b) ≤ X * ((1 + s) * Real.cos b - 1) - s - s ^ 2 / 2 := by
+    have : 2 * X - 2 * (1 + s) * (X * Real.cos b - Y * Real.sin b) + (1 + s) ^ 2 ≤ 1 := by linarith
+    linarith
+  have h2 : X * ((1 + s) * Real.cos b - 1) ≤ X * s := by
+    apply mul_le_mul_of_nonneg_left _ hX.le
+    have : s * Real.cos b ≤ s := by nlinarith
+    linarith
+  have h3 : X * s ≤ (2 + s) * s := mul_le_mul_of_nonneg_right hX2 hs.le
+  have h4 : (1 + s) * (Y * Real.sin b) ≤ (1 + s) * s := by nlinarith
+  exact le_of_mul_le_mul_left h4 (by linarith)
+
+/-- N2-ENV away, the real core beyond an end (in the end's frame, `Y > 0`): a point of the disc about `(1 + s)e(−b)` outside
+`B(1, 1)`, with `X² + Y² ≥ 2 + s`, lies within `√12 ψ` of the radius-2 end `(2, 0)` when `s ≤ ψ b`, `ψ ≤ 1/2`. -/
+theorem n2_env_away_core {X Y s b ψ : ℝ} (hb : 0 < b) (hb3 : b ≤ π / 3) (hs : 0 < s) (hsψ : s ≤ ψ * b) (hψ2 : ψ ≤ 1 / 2)
+    (hX : 0 < X) (hY : 0 < Y)
+    (hdisc : (X - (1 + s) * Real.cos b) ^ 2 + (Y + (1 + s) * Real.sin b) ^ 2 ≤ 1)
+    (hunc : 2 * X ≤ X ^ 2 + Y ^ 2) (hfar : 2 + s ≤ X ^ 2 + Y ^ 2) (hnear : X ^ 2 + Y ^ 2 ≤ (2 + s) ^ 2) :
+    (X - 2) ^ 2 + Y ^ 2 ≤ 12 * ψ ^ 2 := by
+  have hπ := Real.pi_pos
+  have hπ4 := Real.pi_le_four
+  have hsin : 2 / π * b ≤ Real.sin b := Real.mul_le_sin hb.le (by linarith)
+  have hψ0 : 0 ≤ ψ := by
+    by_contra h; push Not at h
+    have : ψ * b < 0 := mul_neg_of_neg_of_pos h hb
+    linarith
+  have hb1 : b ≤ 2 := by linarith
+  have hs2 : s ≤ 2 * ψ := by
+    have := mul_le_mul_of_nonneg_left hb1 hψ0
+    linarith
+  have hs1 : s ≤ 1 := by linarith
+  have hX2 : X ≤ 2 + s := by
+    have : X ^ 2 ≤ (2 + s) ^ 2 := by linarith [sq_nonneg Y]
+    exact (pow_le_pow_iff_left₀ hX.le (by linarith) two_ne_zero).mp this
+  have hYs := n2_env_away_height hs hX hX2 hdisc hunc
+  have hY2 : Y ≤ 2 * ψ := by
+    have h1 : Y * (2 / π * b) ≤ s := le_trans (mul_le_mul_of_nonneg_left hsin hY.le) hYs
+    have h2 : Y * (b / 2) ≤ Y * (2 / π * b) := by
+      apply mul_le_mul_of_nonneg_left _ hY.le
+      have : (1 : ℝ) / 2 ≤ 2 / π := by rw [le_div_iff₀ hπ]; linarith
+      have := mul_le_mul_of_nonneg_left this hb.le
+      linarith
+    have h3 : Y * (b / 2) ≤ (2 * ψ) * (b / 2) := by
+      have : (2 * ψ) * (b / 2) = ψ * b := by ring
+      linarith
+    exact le_of_mul_le_mul_right h3 (by positivity)
+  have hY1 : Y ≤ 1 := by linarith
+  have hYY : Y ^ 2 ≤ Y := by
+    have := mul_le_mul_of_nonneg_left hY1 hY.le
+    nlinarith
+  have hX1 : 1 ≤ X := by
+    have h1 : Y ^ 2 ≤ 1 := by linarith
+    have : (1 : ℝ) ^ 2 ≤ X ^ 2 := by linarith
+    exact (pow_le_pow_iff_left₀ zero_le_one hX.le two_ne_zero).mp this
+  have hXlo : 2 - Y ^ 2 ≤ X := by
+    have h1 : 1 - Y ^ 2 ≤ (X - 1) ^ 2 := by linarith
+    have h2 : 0 ≤ 1 - Y ^ 2 := by linarith
+    have h3 : (1 - Y ^ 2) ^ 2 ≤ 1 - Y ^ 2 := by
+      have : 1 - Y ^ 2 ≤ 1 := by linarith [sq_nonneg Y]
+      have := mul_le_mul_of_nonneg_left this h2
+      linarith
+    have h4 : (1 - Y ^ 2) ^ 2 ≤ (X - 1) ^ 2 := le_trans h3 h1
+    have := (pow_le_pow_iff_left₀ h2 (by linarith) two_ne_zero).mp h4
+    linarith
+  have hd : (X - 2) ^ 2 ≤ Y ^ 2 + s ^ 2 := by
+    rcases le_total X 2 with h | h
+    · have h5 : (2 - X) ^ 2 ≤ (Y ^ 2) ^ 2 := pow_le_pow_left₀ (by linarith) (by linarith) 2
+      have h6 : (Y ^ 2) ^ 2 ≤ Y ^ 2 := by
+        have h7 : Y ^ 2 ≤ 1 := by linarith
+        have := mul_le_mul_of_nonneg_left h7 (sq_nonneg Y)
+        linarith
+      have : (X - 2) ^ 2 = (2 - X) ^ 2 := by ring
+      linarith [sq_nonneg s]
+    · have : (X - 2) ^ 2 ≤ s ^ 2 := pow_le_pow_left₀ (by linarith) (by linarith) 2
+      linarith [sq_nonneg Y]
+  have hYψ : Y ^ 2 ≤ (2 * ψ) ^ 2 := pow_le_pow_left₀ hY.le hY2 2
+  have hsψ' : s ^ 2 ≤ (2 * ψ) ^ 2 := pow_le_pow_left₀ hs.le hs2 2
+  have : (2 * ψ) ^ 2 = 4 * ψ ^ 2 := by ring
+  linarith
+
+/-- A point with positive frame abscissa is in polar form about the frame's origin at an angle within `90°` of the frame's axis. -/
+theorem eq_polar_of_frameX_pos (P p : ℂ) (φ : ℝ) (hx : 0 < frameX P φ p) :
+    ∃ t ∈ Ioo (-(π / 2)) (π / 2), p = P + (‖p - P‖ : ℂ) * e (φ + t) := by
+  set x := frameX P φ p with hxd
+  set y := frameY P φ p with hyd
+  have hw : (p - P) * starRingEnd ℂ (e φ) = (x : ℂ) + (y : ℂ) * I := by
+    apply Complex.ext <;> simp [hxd, hyd, frameX, frameY]
+  have hpP : p - P = ((x : ℂ) + (y : ℂ) * I) * e φ := by
+    rw [← hw, mul_assoc, mul_comm (starRingEnd ℂ (e φ)), conj_e_mul_e, mul_one]
+  have hn : ‖p - P‖ = √(x ^ 2 + y ^ 2) := by
+    rw [hxd, hyd, frame_normSq P φ p, Real.sqrt_sq (norm_nonneg _)]
+  refine ⟨Real.arctan (y / x), ⟨Real.neg_pi_div_two_lt_arctan _, Real.arctan_lt_pi_div_two _⟩, ?_⟩
+  have hs : 0 < √(1 + (y / x) ^ 2) := Real.sqrt_pos.2 (by positivity)
+  have hq : √(x ^ 2 + y ^ 2) = x * √(1 + (y / x) ^ 2) := by
+    rw [show x ^ 2 + y ^ 2 = x ^ 2 * (1 + (y / x) ^ 2) by field_simp, Real.sqrt_mul (sq_nonneg x), Real.sqrt_sq hx.le]
+  have hc : √(x ^ 2 + y ^ 2) * Real.cos (Real.arctan (y / x)) = x := by
+    rw [Real.cos_arctan, hq]; field_simp
+  have hsn : √(x ^ 2 + y ^ 2) * Real.sin (Real.arctan (y / x)) = y := by
+    rw [Real.sin_arctan, hq]; field_simp
+  rw [hn, e_add]
+  have : (x : ℂ) + (y : ℂ) * I = (√(x ^ 2 + y ^ 2) : ℂ) * e (Real.arctan (y / x)) := by
+    apply Complex.ext <;> simp only [Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.mul_re,
+      Complex.mul_im, Complex.I_re, Complex.I_im, re_e, im_e] <;> linarith
+  calc p = P + (p - P) := by ring
+    _ = _ := by rw [hpP, this]; ring
+
+/-- N2-ENV away beyond an end, as a distance: the core's frame coordinates `(X, Y)` of `p` at the end put `p` within `r` of the
+radius-2 end `q` when `ψ ≤ r/4`. -/
+theorem n2_env_away_end {p q : ℂ} {X Y s b ψ r : ℝ} (hb : 0 < b) (hb3 : b ≤ π / 3) (hs : 0 < s) (hsψ : s ≤ ψ * b)
+    (hψ2 : ψ ≤ 1 / 2) (hψ0 : 0 < ψ) (hψr : ψ ≤ r / 4) (hr : 0 < r) (hX : 0 < X) (hY : 0 < Y)
+    (hdisc : (X - (1 + s) * Real.cos b) ^ 2 + (Y + (1 + s) * Real.sin b) ^ 2 ≤ 1)
+    (hunc : 2 * X ≤ X ^ 2 + Y ^ 2) (hfar : 2 + s ≤ X ^ 2 + Y ^ 2) (hnear : X ^ 2 + Y ^ 2 ≤ (2 + s) ^ 2)
+    (hdd : dist p q ^ 2 = (X - 2) ^ 2 + Y ^ 2) : dist p q < r := by
+  have hcore := n2_env_away_core hb hb3 hs hsψ hψ2 hX hY hdisc hunc hfar hnear
+  have h1 : ψ ^ 2 ≤ (r / 4) ^ 2 := pow_le_pow_left₀ hψ0.le hψr 2
+  have : dist p q ^ 2 < r ^ 2 := by
+    rw [hdd]
+    have : (r / 4) ^ 2 = r ^ 2 / 16 := by ring
+    have h2 : 0 < r ^ 2 := by positivity
+    linarith
+  exact lt_of_pow_lt_pow_left₀ 2 hr.le this
+
 /-- **FS112-N2-BENDS**, N2-ENV away: the same for an away lens point `z = P + (1 + s) e(φ)`, the uncovered part lying within `r` of
 the radius-2 arc `R₂(ᾱ)`. -/
 theorem n2_env_away (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hℓ : θ₂ - θ₁ ≤ π / 3) {r : ℝ} (hr : 0 < r) :
     ∃ ψ > 0, ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
       closedBall (P + (1 + s) * e φ) 1 \ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1 ⊆ thickening r (radiusTwoArc P θ₁ θ₂) := by
-  sorry
+  have _ := h12
+  have hπ := Real.pi_pos
+  have hπ4 := Real.pi_le_four
+  refine ⟨min (1 / 2) (r / 4), by positivity, fun φ hφ s hs hsψ p hp => ?_⟩
+  obtain ⟨hp1, hp2⟩ := hp
+  simp only [mem_iUnion, not_exists] at hp2
+  have ha0 : 0 < φ - θ₁ := by linarith [hφ.1]
+  have hb0 : 0 < θ₂ - φ := by linarith [hφ.2]
+  set ψ := min (1 / 2) (r / 4) with hψd
+  have hψ0 : 0 < ψ := by positivity
+  have hψ2 : ψ ≤ 1 / 2 := min_le_left _ _
+  have hψr : ψ ≤ r / 4 := min_le_right _ _
+  have hsa : s ≤ ψ * (φ - θ₁) := hsψ.trans (mul_le_mul_of_nonneg_left (min_le_left _ _) hψ0.le)
+  have hsb : s ≤ ψ * (θ₂ - φ) := hsψ.trans (mul_le_mul_of_nonneg_left (min_le_right _ _) hψ0.le)
+  have hsr : s < r := by
+    have h1 : ψ * (φ - θ₁) ≤ r / 4 * (π / 3) := mul_le_mul hψr (by linarith) ha0.le (by positivity)
+    have h2 := mul_le_mul_of_nonneg_left hπ4 hr.le
+    linarith
+  -- the point's distance from the centre: `2 + s ≤ |p − P|² ≤ (2 + s)²`
+  have hz : dist p (P + (1 + s) * e φ) ≤ 1 := mem_closedBall.mp hp1
+  have hnear : ‖p - P‖ ≤ 2 + s := by
+    have h1 : ‖(P + (1 + s) * e φ) - P‖ = 1 + s := by
+      rw [add_sub_cancel_left, norm_mul, norm_e, mul_one]
+      rw [show (1 : ℂ) + s = ((1 + s : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+    have := dist_triangle p (P + (1 + s) * e φ) P
+    rw [dist_eq_norm p P, dist_eq_norm (P + (1 + s) * e φ) P] at this
+    linarith
+  have hdisc0 : ∀ α t : ℝ, φ = α + t →
+      (frameX P α p - (1 + s) * Real.cos t) ^ 2 + (frameY P α p - (1 + s) * Real.sin t) ^ 2 ≤ 1 := by
+    intro α t hα
+    have h := sq_dist_frame P α p (P + ((1 + s : ℝ) : ℂ) * e (α + t))
+    rw [(frame_polar_add P α (1 + s) t).1, (frame_polar_add P α (1 + s) t).2, ← hα] at h
+    push_cast at h
+    rw [← h]; nlinarith [dist_nonneg (x := p) (y := P + (1 + s) * e φ)]
+  have hunc0 : ∀ α t : ℝ, α + t ∈ Icc θ₁ θ₂ → 2 * (frameX P α p * Real.cos t + frameY P α p * Real.sin t) ≤
+      frameX P α p ^ 2 + frameY P α p ^ 2 := by
+    intro α t hmem
+    have h1 := hp2 (α + t) hmem
+    rw [mem_ball, not_lt] at h1
+    have h := sq_dist_frame P α p (P + ((1 : ℝ) : ℂ) * e (α + t))
+    rw [(frame_polar_add P α 1 t).1, (frame_polar_add P α 1 t).2, Complex.ofReal_one, one_mul] at h
+    have h3 : 1 ≤ dist p (ringPt P (α + t)) ^ 2 := by nlinarith
+    rw [ringPt, h] at h3
+    nlinarith [Real.cos_sq_add_sin_sq t]
+  have hnorm : ∀ α, frameX P α p ^ 2 + frameY P α p ^ 2 = ‖p - P‖ ^ 2 := fun α => frame_normSq P α p
+  -- in the frame of `φ`: `x ≥ 1 + s/2`, so `|p − P|² ≥ 2 + s`
+  have hx : 1 + s / 2 ≤ frameX P φ p := by
+    have h1 := hdisc0 φ 0 (by ring)
+    have h2 := hunc0 φ 0 (by rw [add_zero]; exact ⟨hφ.1.le, hφ.2.le⟩)
+    rw [Real.cos_zero, Real.sin_zero] at h1 h2
+    have h1' : frameX P φ p ^ 2 + frameY P φ p ^ 2 ≤ 2 * (1 + s) * frameX P φ p - 2 * s - s ^ 2 := by
+      have e : (frameX P φ p - (1 + s) * 1) ^ 2 + (frameY P φ p - (1 + s) * 0) ^ 2 =
+          frameX P φ p ^ 2 + frameY P φ p ^ 2 - 2 * (1 + s) * frameX P φ p + (1 + s) ^ 2 := by ring
+      rw [e] at h1; linarith
+    have h4 : 0 ≤ s * (2 * frameX P φ p - 2 - s) := by linarith
+    have := (mul_nonneg_iff_of_pos_left hs).mp h4
+    linarith
+  have hfar : 2 + s ≤ ‖p - P‖ ^ 2 := by
+    have h2 := hunc0 φ 0 (by rw [add_zero]; exact ⟨hφ.1.le, hφ.2.le⟩)
+    rw [Real.cos_zero, Real.sin_zero, hnorm] at h2
+    linarith
+  have hnear2 : ‖p - P‖ ^ 2 ≤ (2 + s) ^ 2 := pow_le_pow_left₀ (norm_nonneg _) hnear 2
+  -- the frames at the ends against the frame at `φ`
+  obtain ⟨t, ht, hpt⟩ := eq_polar_of_frameX_pos P p φ (by linarith)
+  set ρ := ‖p - P‖ with hρ
+  have hρnn : 0 ≤ ρ := norm_nonneg _
+  have hρ0 : 0 < ρ := by
+    rcases eq_or_lt_of_le hρnn with h | h
+    · rw [← h] at hfar; nlinarith
+    · exact h
+  have hY2 : frameY P θ₂ p = ρ * Real.sin (t - (θ₂ - φ)) := by
+    have := (frame_polar_add P θ₂ ρ (t - (θ₂ - φ))).2
+    rwa [show θ₂ + (t - (θ₂ - φ)) = φ + t by ring, ← hpt] at this
+  have hX2 : frameX P θ₂ p = ρ * Real.cos (t - (θ₂ - φ)) := by
+    have := (frame_polar_add P θ₂ ρ (t - (θ₂ - φ))).1
+    rwa [show θ₂ + (t - (θ₂ - φ)) = φ + t by ring, ← hpt] at this
+  have hY1 : frameY P θ₁ p = ρ * Real.sin (t + (φ - θ₁)) := by
+    have := (frame_polar_add P θ₁ ρ (t + (φ - θ₁))).2
+    rwa [show θ₁ + (t + (φ - θ₁)) = φ + t by ring, ← hpt] at this
+  have hX1 : frameX P θ₁ p = ρ * Real.cos (t + (φ - θ₁)) := by
+    have := (frame_polar_add P θ₁ ρ (t + (φ - θ₁))).1
+    rwa [show θ₁ + (t + (φ - θ₁)) = φ + t by ring, ← hpt] at this
+  rw [Metric.mem_thickening_iff]
+  by_cases hb : θ₂ - φ < t
+  · -- beyond `θ₂`: within `√12 ψ` of `P + 2 e θ₂`
+    refine ⟨P + 2 * e θ₂, ⟨θ₂, ⟨h12.le, le_refl _⟩, rfl⟩, ?_⟩
+    have hYp : 0 < frameY P θ₂ p := by
+      rw [hY2]; exact mul_pos hρ0 (Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith [ht.2]))
+    have hXp : 0 < frameX P θ₂ p := by
+      rw [hX2]; exact mul_pos hρ0 (Real.cos_pos_of_mem_Ioo ⟨by linarith [ht.1], by linarith [ht.2]⟩)
+    have hd := hdisc0 θ₂ (-(θ₂ - φ)) (by ring)
+    rw [Real.cos_neg, Real.sin_neg, show frameY P θ₂ p - (1 + s) * -Real.sin (θ₂ - φ) =
+      frameY P θ₂ p + (1 + s) * Real.sin (θ₂ - φ) by ring] at hd
+    have hu := hunc0 θ₂ 0 (by rw [add_zero]; exact ⟨h12.le, le_refl _⟩)
+    rw [Real.cos_zero, Real.sin_zero, mul_one, mul_zero, add_zero] at hu
+    have hdd := sq_dist_frame P θ₂ p (P + ((2 : ℝ) : ℂ) * e (θ₂ + 0))
+    rw [(frame_polar_add P θ₂ 2 0).1, (frame_polar_add P θ₂ 2 0).2, Real.cos_zero, Real.sin_zero, add_zero, mul_one,
+      mul_zero, sub_zero] at hdd
+    push_cast at hdd
+    exact n2_env_away_end hb0 (by linarith) hs hsb hψ2 hψ0 hψr hr hXp hYp hd hu (by rw [hnorm]; exact hfar)
+      (by rw [hnorm]; exact hnear2) hdd
+  by_cases ha : t < -(φ - θ₁)
+  · -- beyond `θ₁`: within `√12 ψ` of `P + 2 e θ₁`
+    refine ⟨P + 2 * e θ₁, ⟨θ₁, ⟨le_refl _, h12.le⟩, rfl⟩, ?_⟩
+    have hYp : 0 < -frameY P θ₁ p := by
+      rw [hY1, ← mul_neg, ← Real.sin_neg]
+      exact mul_pos hρ0 (Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith [ht.1]))
+    have hXp : 0 < frameX P θ₁ p := by
+      rw [hX1]; exact mul_pos hρ0 (Real.cos_pos_of_mem_Ioo ⟨by linarith [ht.1], by linarith [ht.2]⟩)
+    have hd := hdisc0 θ₁ (φ - θ₁) (by ring)
+    rw [show (frameY P θ₁ p - (1 + s) * Real.sin (φ - θ₁)) ^ 2 = (-frameY P θ₁ p + (1 + s) * Real.sin (φ - θ₁)) ^ 2 by
+      ring] at hd
+    have hu := hunc0 θ₁ 0 (by rw [add_zero]; exact ⟨le_refl _, h12.le⟩)
+    rw [Real.cos_zero, Real.sin_zero, mul_one, mul_zero, add_zero, ← neg_sq (frameY P θ₁ p)] at hu
+    have hdd := sq_dist_frame P θ₁ p (P + ((2 : ℝ) : ℂ) * e (θ₁ + 0))
+    rw [(frame_polar_add P θ₁ 2 0).1, (frame_polar_add P θ₁ 2 0).2, Real.cos_zero, Real.sin_zero, add_zero, mul_one,
+      mul_zero, sub_zero, ← neg_sq (frameY P θ₁ p)] at hdd
+    push_cast at hdd
+    exact n2_env_away_end ha0 (by linarith) hs hsa hψ2 hψ0 hψr hr hXp hYp hd hu (by rw [neg_sq, hnorm]; exact hfar)
+      (by rw [neg_sq, hnorm]; exact hnear2) hdd
+  · -- within the arc's directions: `2 ≤ ρ ≤ 2 + s`, within `s` of `P + 2 e(φ + t)`
+    push Not at hb ha
+    have hmem : φ + t ∈ Icc θ₁ θ₂ := ⟨by linarith, by linarith⟩
+    refine ⟨P + 2 * e (φ + t), ⟨φ + t, hmem, rfl⟩, ?_⟩
+    have hu := hp2 (φ + t) hmem
+    rw [mem_ball, not_lt, ringPt, hpt, dist_eq_norm, show P + (ρ : ℂ) * e (φ + t) - (P + e (φ + t)) =
+      ((ρ - 1 : ℝ) : ℂ) * e (φ + t) by push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs] at hu
+    have hρ2 : 2 ≤ ρ := by
+      rcases le_total 0 (ρ - 1) with h | h
+      · rw [abs_of_nonneg h] at hu; linarith
+      · rw [abs_of_nonpos h] at hu; linarith
+    rw [hpt, dist_eq_norm, show P + (ρ : ℂ) * e (φ + t) - (P + 2 * e (φ + t)) = ((ρ - 2 : ℝ) : ℂ) * e (φ + t) by
+      push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by linarith)]
+    linarith
 
 /-- **FS112-N2-BENDS**, N2-ENV's near clause, toward: for a small enough profile, every point of the lens `B̄(A, 1) ∩ B̄(B, 1)` of the
 arc's ends is within `< 1` of every toward lens point. -/
