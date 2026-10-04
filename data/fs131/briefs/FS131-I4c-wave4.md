@@ -81,3 +81,11 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 14.1's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1).
+
+## Amendment 2026-10-04 (Keryx) — `localSectors` landed; four items from the impossible-assumption audit
+
+`localSectors` is on `main` (`0131aa59`; `plans/FS131-close-inventory.md` item 171): merge `main` before the sector-reading leaves. From FS131-QA2 (item 172),
+before the gate, with no statement changed: an inhabitant of `IsCubicTrichromatic` and a non-degenerate one of `MIn` (`sevenBrickMap` at a brick corner — the
+audit's record `plans/FS131-QA2-audit.md` § 2.2, `tools/fs131_qa2_brick.py`); a proved horn (the `bowtie_*` leaves early, or a two-colour cusp fragment as an
+`IsHorn` model); `halfDisc.Simple`; `stuck_chain`'s docstring declaring that no model is expected, naming `n4_fin`. You still start no agents of your own
+(standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

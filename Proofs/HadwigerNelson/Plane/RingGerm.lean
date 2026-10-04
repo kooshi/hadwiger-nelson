@@ -2378,18 +2378,129 @@ theorem four_of_bothKind (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ₁ θ�
   rwa [Set.ncard_coe_finset, hcard] at this
 
 /-- **FS116-V5-U1**, the row's four-colour clause: in a non-Siamese simple map, a point `z` of the domain carrying both side
-colours of an arc of `Γ` on `ω(z)` carries at least four colours, provided no tile with `z` in its closure has a cone reduced to
-one direction (`hnc`: no cusp at `z`; inventory item 112). -/
+colours of an arc of `Γ` on `ω(z)` carries at least four colours — cusps at `z` included (FS131-E2-U1-CUSP; inventory item 139:
+the hypothesis `hnc` item 112 added is dropped, the statement restored to commit `05cb0a3e`'s). Its proof is
+`plans/FS131-E2-derivation.md` § 2.4: two side directions off the tiles' end directions lie in the open intervals of tiles
+`D`, `E` (`Simple.coneAt_eq_angleIcc_sep`); were `D = E`, its open interval would hold the facing or the away cone, and the
+`c`- or `c'`-tile would point into it. -/
 theorem four_of_bothKind_simple (hF : F.Valid) (hN : F.NonSiamese) (hS : F.Simple) {z : ℂ} (hz : z ∈ F.dom)
     {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') (hc : c ∈ F.coloursAt z)
-    (hc' : c' ∈ F.coloursAt z) (hnc : ∀ T, F.IsTile T → z ∈ closure T → ∀ β, coneAt T z ≠ angleIcc β β) :
-    4 ≤ (F.coloursAt z).ncard := by
-  refine four_of_bothKind hF hz hA hc hc' (fun d T T' hT hT' hzT hzT' => ?_)
-    (fun T hT hzT => ?_)
-  · exact hN.eq_of_unitNear hT hT' (unitNear_of_mem_closure hF hT hT' hzT hzT' (by simp))
-  · obtain ⟨β₁, β₂, h1, h2, h3⟩ := hS.coneAt_eq_angleIcc hT hz hzT
-    refine ⟨β₁, β₂, lt_of_le_of_ne h1 fun h => hnc T hT hzT β₁ ?_, h2, h3⟩
-    rw [h3, h]
+    (hc' : c' ∈ F.coloursAt z) : 4 ≤ (F.coloursAt z).ncard := by
+  have hπ := Real.pi_pos
+  have h12 : θ₁ < θ₂ := hA.1
+  have hone : ∀ d T T', F.TileOf d T → F.TileOf d T' → z ∈ closure T → z ∈ closure T' → T = T' :=
+    fun d T T' hT hT' hzT hzT' => hN.eq_of_unitNear hT hT' (unitNear_of_mem_closure hF hT hT' hzT hzT' (by simp))
+  -- the tiles at `z`, finitely many, each with a separated interval
+  set 𝒯 := {T | F.IsTile T ∧ z ∈ closure T} with h𝒯
+  have h𝒯fin : 𝒯.Finite := by
+    obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near hz
+    refine hfin.subset fun T hT => ⟨hT.1, ?_⟩
+    obtain ⟨w, hwT, hwd⟩ := Metric.mem_closure_iff.mp hT.2 r hr
+    exact ⟨w, hwT, by rw [mem_ball, dist_comm]; exact hwd⟩
+  have hsep : ∀ T ∈ 𝒯, ∃ p : ℝ × ℝ, p.1 ≤ p.2 ∧ p.2 ≤ p.1 + 2 * π ∧ coneAt T z = angleIcc p.1 p.2 ∧
+      ∀ T', F.IsTile T' → T' ≠ T → z ∈ closure T' → Disjoint (coneAt T' z) (angleIoo p.1 p.2) := by
+    intro T hT
+    obtain ⟨β₁, β₂, h1, h2, h3, h4⟩ := hS.coneAt_eq_angleIcc_sep hT.1 hz hT.2
+    exact ⟨(β₁, β₂), h1, h2, h3, h4⟩
+  choose! P hP using hsep
+  -- the end directions of those intervals are countably many; generic directions avoid them
+  set E : Set ℝ := ⋃ T ∈ 𝒯, ⋃ m : ℤ, ({(P T).1 + 2 * π * m, (P T).2 + 2 * π * m} : Set ℝ) with hE
+  have hEc : E.Countable :=
+    h𝒯fin.countable.biUnion fun T _ => countable_iUnion fun m => (Set.toFinite _).countable
+  have hgen : ∀ a b : ℝ, a < b → ∃ σ ∈ Ioo a b, σ ∉ E := by
+    intro a b hab
+    by_contra hcon
+    push Not at hcon
+    have h0 := (hEc.mono hcon).measure_zero MeasureTheory.volume
+    simp [Real.volume_Ioo] at h0
+    linarith
+  have hopen : ∀ T ∈ 𝒯, ∀ σ ∈ coneAt T z, σ ∉ E → σ ∈ angleIoo (P T).1 (P T).2 := by
+    intro T hT σ hσ hσE
+    rw [(hP T hT).2.2.1] at hσ
+    obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hσ
+    refine mem_iUnion.mpr ⟨m, lt_of_le_of_ne hm1 ?_, lt_of_le_of_ne hm2 ?_⟩
+    · intro h; exact hσE (mem_iUnion₂.mpr ⟨T, hT, mem_iUnion.mpr ⟨m, Or.inl h.symm⟩⟩)
+    · intro h; exact hσE (mem_iUnion₂.mpr ⟨T, hT, mem_iUnion.mpr ⟨m, Or.inr h⟩⟩)
+  -- a tile of each side colour, with a direction of its cone
+  have htile : ∀ d ∈ F.coloursAt z, ∃ T, F.TileOf d T ∧ z ∈ closure T ∧ ∃ δ, δ ∈ coneAt T z := by
+    intro d hd
+    obtain ⟨T, hT, hzT⟩ := (F.mem_coloursAt_iff_exists_tileOf hz).mp hd
+    by_cases hzT' : z ∈ T
+    · exact ⟨T, hT, hzT, 0, mem_coneAt_of_mem_isOpen hT.1.isOpen hzT' 0⟩
+    · refine ⟨T, hT, hzT, coneAt_nonempty fun ε hε => ?_⟩
+      obtain ⟨w, hwT, hwd⟩ := Metric.mem_closure_iff.mp hzT ε hε
+      exact ⟨w, hwT, fun h => hzT' (h ▸ hwT), by rw [dist_comm]; exact hwd⟩
+  obtain ⟨C, hC, hzC, δ, hδ⟩ := htile c hc
+  obtain ⟨C', hC', hzC', δ', hδ'⟩ := htile c' hc'
+  have hδF := ringArc_cone_inner hF hA (coneAt_mono hC.subset_region z hδ)
+  have hδW := ringArc_cone_outer hF hA (coneAt_mono hC'.subset_region z hδ')
+  obtain ⟨j, hj1, hj2⟩ := mem_iUnion.mp hδF
+  obtain ⟨j', hj'1, hj'2⟩ := mem_iUnion.mp hδW
+  have hℓ : θ₂ - θ₁ ≤ π := by linarith
+  have hcc' : c ≠ c' := by
+    rintro rfl
+    have := ringArc_cone_outer hF hA (coneAt_mono hC.subset_region z hδ)
+    obtain ⟨i, hi1, hi2⟩ := mem_iUnion.mp this
+    exact disj_lifts h12 j i ⟨hj1, hj2⟩ ⟨hi1, hi2⟩
+  -- the side directions and their colours
+  obtain ⟨σ, hσ, hσE⟩ := hgen (θ₁ - π / 2) (θ₂ - π / 2) (by linarith)
+  obtain ⟨σ', hσ', hσ'E⟩ := hgen (θ₁ + π / 2) (θ₂ + π / 2) (by linarith)
+  obtain ⟨d, hdc, hdc', hd⟩ := F.ringArc_sideCone_other hF hz hA (Or.inl (Ioo_subset_angleIoo _ _ hσ))
+  obtain ⟨d', hd'c, hd'c', hd'⟩ := F.ringArc_sideCone_other hF hz hA (Or.inr (Ioo_subset_angleIoo _ _ hσ'))
+  have hdz : d ∈ F.coloursAt z := mem_closure_of_mem_coneAt hd
+  have hd'z : d' ∈ F.coloursAt z := mem_closure_of_mem_coneAt hd'
+  have hdd' : d ≠ d' := by
+    rintro rfl
+    rw [F.coneAt_region_eq_biUnion hz] at hd hd'
+    obtain ⟨D, ⟨hD, hzD⟩, hσD⟩ := mem_iUnion₂.mp hd
+    obtain ⟨D', ⟨hD', hzD'⟩, hσ'D'⟩ := mem_iUnion₂.mp hd'
+    obtain rfl : D = D' := hone d D D' hD hD' hzD hzD'
+    have hD𝒯 : D ∈ 𝒯 := ⟨hD.1, hzD⟩
+    obtain ⟨hab, hab2, -, hdisj⟩ := hP D hD𝒯
+    obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp (hopen D hD𝒯 σ hσD hσE)
+    obtain ⟨m', hm'1, hm'2⟩ := mem_iUnion.mp (hopen D hD𝒯 σ' hσ'D' hσ'E)
+    have h2π : (0 : ℝ) ≤ 2 * π := by positivity
+    have hk1 : m ≤ m' := by
+      by_contra hcon
+      have hc1 : m' + 1 ≤ m := by omega
+      have hc2 : ((m' : ℝ) + 1) ≤ m := by exact_mod_cast hc1
+      have := mul_le_mul_of_nonneg_left hc2 h2π
+      linarith [hσ.1, hσ.2, hσ'.1, hσ'.2]
+    have hk2 : m' ≤ m + 1 := by
+      by_contra hcon
+      have hc1 : m + 2 ≤ m' := by omega
+      have hc2 : ((m : ℝ) + 2) ≤ m' := by exact_mod_cast hc1
+      have := mul_le_mul_of_nonneg_left hc2 h2π
+      linarith [hσ.1, hσ.2, hσ'.1, hσ'.2]
+    have hcases : m' = m ∨ m' = m + 1 := by omega
+    rcases hcases with h | h <;> subst m'
+    · -- the facing cone lies in `D`'s open interval, and so does the `c`-tile's direction
+      have hCD : C ≠ D := by
+        rintro rfl
+        obtain ⟨p, hp⟩ := hC.1.nonempty
+        exact hdc ((hD.2 hp).symm.trans (hC.2 hp) |> fun h => by simpa using h)
+      refine Set.disjoint_left.mp (hdisj C hC.1 hCD hzC) hδ (mem_iUnion.mpr ⟨m + j, ?_, ?_⟩)
+      · push_cast; linarith [hσ.2]
+      · push_cast; linarith [hσ'.1]
+    · -- the away cone lies in `D`'s open interval, one turn back, and so does the `c'`-tile's direction
+      have hC'D : C' ≠ D := by
+        rintro rfl
+        obtain ⟨p, hp⟩ := hC'.1.nonempty
+        exact hdc' ((hD.2 hp).symm.trans (hC'.2 hp) |> fun h => by simpa using h)
+      refine Set.disjoint_left.mp (hdisj C' hC'.1 hC'D hzC') hδ' (mem_iUnion.mpr ⟨m + j' + 1, ?_, ?_⟩)
+      · push_cast at hm'1 ⊢; linarith [hσ'.2]
+      · push_cast; linarith [hσ.1]
+  classical
+  have hcard : ({c, c', d, d'} : Finset (Fin k)).card = 4 := by
+    rw [Finset.card_insert_of_notMem, Finset.card_insert_of_notMem, Finset.card_pair hdd']
+    · simp [Ne.symm hdc', Ne.symm hd'c']
+    · simp [hcc', Ne.symm hdc, Ne.symm hd'c]
+  have hsub : (↑({c, c', d, d'} : Finset (Fin k)) : Set (Fin k)) ⊆ F.coloursAt z := by
+    intro x hx
+    simp only [Finset.coe_insert, Finset.coe_singleton, mem_insert_iff, mem_singleton_iff] at hx
+    rcases hx with rfl | rfl | rfl | rfl <;> assumption
+  have := Set.ncard_le_ncard hsub (Set.toFinite _)
+  rwa [Set.ncard_coe_finset, hcard] at this
 
 /-! ## FS116-Y4-FLANK (any valid map; the covering hypothesis is idle) -/
 

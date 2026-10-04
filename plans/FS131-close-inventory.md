@@ -1158,3 +1158,71 @@ reason by the close.*
      (item 151); the non-sector leaves; then, once `localSectors` is on `main` (Keryx messages it), the bridge to wave 4's `IsSector`/`hornSet` (item 136) and the
      sector-reading leaves; the two plan gaps (item 143); `AeProperRegions` as a vacuity carrier and TS-T's carried form (items 144, 142) before the gate.
      Launched in W3's slot: 1 (I3i) + 1 (I2h) + 1 (I4c) = 3, plus QA2. Woodall's implementer (FS131-IWc) next.
+169. **FS131-I2h handed back at stage 15, harness ≈ 492k** (report on its branch; `fs131-w2` at `e8237b4b`, checked): 38 lines closed (91 → 53: Slack 39 → 19,
+     CoverExamples 44 → 34, Dyadic 4 → 0, YesLimit 4 → 0), 12 children added. **[kernel], standard three**: FS129-SA1-SQRT3-LOCAL (`sqrt3_local`) and TC1-SQRT3-DYADIC
+     (`sqrt3_dyadic`) under item 134's `hi` (the Kummer–Dedekind engine `dyadicConclusion_of_minpoly` through `normalizedFactors`; the minimal polynomial reduces to
+     `X² + X + 1`, separable, one or two factors, one exactly when `f` is odd); **FS111-M2-DISC7 sorry-free** (`disc7_upperDensity`: density `(π/4)/(21√3/8)`);
+     `muZero_eq_one_of_fragments`; `upperDensity_of_periodic`, `upperDensity_periodize` through a new `upperDensity_of_tiling` (any lattice-periodic set).
+     Proved from open children: FS111-V0-RESCALE (`exists_tight`), SUPK's three limits, `chiM0_le_chiCP`; `chiM0_le_of_fragments` waits only on
+     `chiM0_le_iff_muZero_eq_one`. **Merged `main` early** (`28f26bc1`) to use wave 3's `ArcMap.isOpen_region`, `Arc.volume_carrier` rather than duplicate them;
+     collisions resolved on wave 2's side (`dist_rot` → `dist_add_e_mul`, `eq_norm_mul_e_arg` → `self_eq_norm_mul_e_arg`); the IMPORTED move done by T3's
+     procedure (one `declareImport` for `falconer_lemma2_nonempty`, the four records under it; not yet checked by `axioms.sh`). Keryx's receipts: latest build log
+     "Build completed successfully (5722 jobs)", no warning but `sorry`; 53 `sorry` lines by count; `data/fs131/i2/i2h-axioms.txt` prints `sqrt3_dyadic` on the
+     standard three. **Ruling**: the early merge accepted — alternative, at the landing as the brief said; why: it avoided duplicating two landed facts under new
+     names (item 142's point); confidence high. Owed before wave 2's gate (carried to the next brief): QA1's docstrings, FALC-HOSTS (iv)'s docstring, wave 2's
+     vacuity carriers (`CPColouring`, `AeCover`, maximal covers, partial colourings). Re-pricing: Opus at about 25–30k on leaves K2c priced 40k at the Sonnet
+     rate. Cheapest next leaves named in its stage 15.
+170. **Brief FS131-IWc, Woodall's localized step 3** (`debruijn-implementer`, Opus; `data/fs131/briefs/FS131-IWc-woodall-merge.md`, gated PASS): `Plane/Woodall/Merge`'s 18
+     leaves and `Basic`'s five inhabitant leaves in § 15.3's order (the composition `exists_woodallMerged` first among the hard ones), `NiceAt.normal` made private
+     first (item 167 (b)); the gate waits for wave 4. Launched in I2h's slot: 1 (I3i) + 1 (I4c) + 1 (IWc) = 3, plus QA2. Wave 2's next Opus implementer (I2i)
+     queued for the next slot.
+171. **FS131-I3i done; `localSectors` LANDED on `main`** (report `data/fs131/reports/FS131-I3i.md`; record on `fs131-w3b`; `origin/main` fast-forwarded to `0131aa59`, whose Lean
+     source and gate scripts equal the gated commit `746a7b80`): **held in the kernel, standard three** — `localSectors` (every domain point has a sector chart;
+     item 136's form), `IsSectorChart.exists_tile_inter_ball` (E2's ONESECT, from the landed `IsJordanDomain.local_connected`, no Jordan curve theorem),
+     `Simple.coneAt_eq_angleIcc_sep` (E2 § 2.7 verbatim), and **`four_of_bothKind_simple` without `hnc`** (FS116-V5-U1's four-colour clause for simple maps, cusps
+     included — item 139's strengthening, so item 112's repair is now superseded on `main` by the full statement). Gate on `746a7b80` with T3's gate: build 0
+     warnings; axioms OK, 1,872 records — 1856 clean (1794 + 62, all within the standard three), 11 axiom-free, 0 imported, 5 purchases; both self-tests green;
+     vacuity OK (`declarations=8500`, `sites=460`, `generic=434`, reconciled: +102 declared, +13 generated, +1 site); architecture PASS; three negative controls
+     watched red. Exported for wave 4: `isSectorChart_of`, `dir_lt_nextDir`, the angular partition lemmas, `coneAt_sector`, `sector_nonempty`,
+     `sector_subset_interiorPts`, `IsTile.eq_of_mem`, `curveGerm` and its two lemmas, `halfDisc_sectorChart`. Carriers `BranchGerms`, `Sorted`, `Mono`,
+     `IsSectorChart` OUT with reasons (register `IsSectorChart` when a theorem takes it at a concrete instance). Tool observation: `scripts/build.sh` exits 0 and
+     prints "OK" with warnings — the zero-warnings item is the warning count. Slip (I3i's, caught): a helper name collision with `SixFragment`, renamed before
+     any build. **Filed** (this commit): `CLAUDE.md` § Trust ledger (1856 clean, 1,872 records), § The gate (`declarations=8500 refutations-skipped=57 sites=460`,
+     `… generic=434 …`), `scripts/vacuity-baseline.txt` header, `GATE_CHANGES` (1794 → 1856). Keryx's receipts, read before this commit: `gate_report.py` —
+     baseline and § The gate "match (9 of 9 compared)", Trust ledger "match (clean, purchases and imported compared)"; fact audit losses only the superseded
+     counts. The Frontier clauses (I3h's for wave 3, I3i's) are held for the milestone's filing, with the rows' regrading.
+172. **FS131-QA2 done** (report `data/fs131/reports/FS131-QA2.md`; record `plans/FS131-QA2-audit.md`; commits `a16446fd` … `bf15a62d`, and `d1777466`, a merge of
+     `origin/main` it made in the main tree so its push could pass after `localSectors` landed): **106 assumed definitions read across `main` and the four
+     branches, the 24 refutation-shaped theorems first — none unsatisfiable on real objects, none of item 158's class**; 77 with a proved non-degenerate instance,
+     15 with an instance still `sorry`, 5 with only degenerate ones, 7 with none named (hand instances in its § 3.1). **One weakness recurs five times** — a
+     hypothesis modelled only where the theorem's other hypotheses fail (item 158's hole): QA2-1 Woodall's normal forms modelled only on a disc of radius 1/3,
+     never on a plane map; QA2-2 `IsCubicTrichromatic` uninhabited, `MIn`'s only model degenerate; QA2-3 `Simple` modelled only by a one-tile disc; QA2-4 no horn
+     proved (every `bowtie_*` clause `sorry`); QA2-5 the stuck vertex under Condition 5 has no model, and with `n4_fin` none is expected — to be declared. **The
+     model that settles QA2-1 and QA2-2 exists**: `sevenBrickMap` at a brick corner is a T-junction (angles `π/2, π/2, π`, three colours), its far upper-cell
+     corner at distance exactly 1 (3–4–5) — [hand], over `tools/fs131_qa2_brick.py` with two faults watched. Wave 4's 29 skeleton rows read: 15 same, 8 stronger, 6
+     weaker — all six already ruled; no new defect. **Rulings**: (a) QA2-1's plane-map model is **wanted before Woodall's landing** (the exact check item 158
+     lacked) — carried by the Woodall implementer after `fs131-ww` merges wave 4's `sevenBrickMap`; (b) QA2-2, QA2-4 and QA2-3 to FS131-I4c (running) by message;
+     QA2-5's declaration to I4c, its "are models expected" question to wave 4's planner at the landing; (c) the minor ones as their consumers are proved; (d)
+     `LEAN.md` § The gate's inhabitant rule extended verbatim from its § 5.3 (this commit): the inhabitant satisfies every hypothesis the theorem does not refute,
+     at once, at a parameter the refutation leaves alive. Keryx's receipt: the brick claim's distance — a 3–4–5 diagonal is exactly 1 in units where the
+     cell's sides are 3/5 and 4/5 — and the tool's existence and planted faults per its record. Credit QA2.
+173. **Item 172's brick receipt completed after it was written** (Keryx's order slip: the line was logged before the check ran): `sevenBrick := cosetBrick 3 (4/5)
+     (3/5) (2/5)` (`Instances/Seven.lean` line 75 on `fs131-w4`), so a cell's diagonal is `√((4/5)² + (3/5)²) = 1`; `tools/fs131_qa2_brick.py` prints "brick check:
+     OK (0 failures; shear 2/5)". The QA2 items went to FS131-I4c by message and by amendment to its brief; QA2-1 to FS131-IWc's brief by amendment (a landing item).
+174. **Brief FS131-I2i, wave 2's ninth implementer** (Opus; `data/fs131/briefs/FS131-I2i-wave2.md`, gated PASS): the 53 lines, the owed items (docstrings, FALC-HOSTS (iv),
+     wave 2's vacuity carriers with clause-exercising inhabitants), the gate (warnings counted, not the exit status — item 171's observation) and the landing.
+     Launched in I3i's slot: 1 (I4c) + 1 (IWc) + 1 (I2i) = 3.
+175. **FS131-I4c handed back at stage 6, harness ≈ 418k** (report on its branch; `fs131-w4` at `2e42278a`, checked): `main` merged (`52fe62fd`); **[kernel], standard
+     three**: `lebesgue_covering_square` discharged by LEB's theorem in one line (docstring citing the 1948 printing), **FS106-L (`lemmaL`)** — item 143's first gap
+     closed with no two-dimensional covering step (one point, `exists_double_unit_circle`, by the intermediate value theorem) — and **FS106-TS-T clause (i)**
+     (`AeProperRegions.exists_three_le_multicolour`), so `ArcMap.ts_t` is sorry-free; `ts_t_trichromatic` and `ts_t_degree_three` wait on `exists_hasDegree_of_mem_dom`
+     (the bridge to `localSectors`). 54 → 51 (Contact 10, UnitArc 20, BaseSteps 20, SVMap 1). Keryx's receipts: build log
+     `build/gate/build/20261004T152838Z-359462.log` (w4) "Build completed successfully (5356 jobs)"; 51 `sorry` by count; `data/fs131/i4/axioms-i4c-stage6.txt` prints
+     `lemmaL` and `exists_three_le_multicolour` on the standard three. Correction owed to wave 4's plan (§ 13.5 and I4b's note): `lemmaL` needs no covering
+     step. Slip (I4c's): two more names collide with `fs131-ww`'s `Collar` (`isOpen_shadow`, `dot_add_left`, identical statements; besides `abs_dot_le`) — the
+     later branch deletes its copy (item 142). Not started (context): the bridge, `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1 (item 143's
+     second gap), `AeProperRegions` as a carrier. Re-pricing on Opus: a planned-M leaf with its route fixed ≈ 200–230 lines, 15–25k tokens; most of the session
+     went to reading context. **Next**: FS131-I4d (Opus) from its ordered list.
+176. **Brief FS131-I4d, wave 4's fourth implementer** (Opus; `data/fs131/briefs/FS131-I4d-wave4.md`, gated PASS): merge `main`, the bridge and
+     `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1, the rest, the carrier, the gate and the landing. Launched in I4c's slot: 1 (I2i) + 1 (IWc) +
+     1 (I4d) = 3.
