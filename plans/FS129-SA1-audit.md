@@ -166,8 +166,9 @@ derivation: FS129-SA1-NOAFF-K
     four: the indicator vectors of G's proper four-colourings span an affine space of dimension 21 of 21 (control FS129-SA1-NOAFF4); at
     k = 5 the same graph into Γ₁₁, 28 of 28 (FS129-MA1-NOAFF5-DIM); K₄ at four colours receives no gapped target, satisfies
     Σ_v f(C(v)) = 0, and has dimension 9 of 12 (the control's fault)
-  prior art: partly: `[BrewsterEtAl2020]` (a gapped vertex is a non-frozen vertex, row 66's prior-art line); the termwise affine-hull form not
-    searched — owed to FS129-Z1's prior-art gate
+  prior art: partly: FS84-S1e (`plans/FS84-S1-derivation.md` § 4.2, 2026-09-25, an unindexed in-house entry found at stage 4: k = 4, scalar
+    coefficients on the tetrahedral embedding, a lattice graph with one gapped four-colouring, by translation and the single-vertex repaint);
+    `[BrewsterEtAl2020]` (a gapped vertex is a non-frozen vertex, row 66's prior-art line); the literature not searched — owed to FS129-Z1
   handoff: de Bruijn — formalize in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5 and MA2's k = 4 note: a lemma beside
     `Slack.forces_iff_of_hom` (`FanGap.lean`), for `f : G →g P`, `φ : V →₀ (Fin k → ℝ)` and a `FanGap C (f u) γ`, concluding `φ u` constant;
     the slack corollary by `Slack`; `Slack.forces_iff_of_hom`'s forward direction is its two-vertex case
@@ -495,3 +496,93 @@ Records that disagree, reconciled: **FS89-CL2** against row 95 (row 95's reading
 S0A-10, which the front page's correction did not name); **ASTRA-T10**'s sentence against its own parenthetical and proof (the universal reading
 supported), with its scope empty over residue-𝔽₁₁ fields as its own prose knows. No held result is newly false: both falsities are of wording,
 and in each the argument carries a true statement that nothing downstream contradicts.
+
+## Stage 4 — SAVED (items (c) and (d): the claims with no record, and the lane-A "Rests on it: nothing" edges)
+
+*Read for this stage: `data/fs129/index/checks.md` §§ `*Also:*` and "The 22 derivation files"; the defining line of each of the 68 ids (script,
+`data/fs129/index/checks.md` addresses); `plans/FS100-derivation.md` FS100-TCA (line 289), -EFZ (174), -Q47 (204), -FLK (244), -T1 (116), and the
+index's FS100/FS86/FS103/FS106/FS67 titles searched by content; `plans/FS100-X25B-derivation.md` §§ Fence log, Theorems, Proposed edits;
+`plans/FS84-S1-derivation.md` § 4.2; `plans/FS106-TQ-derivation.md`'s theorem list; `plans/FS129-SR1-audit.md` § 4.1 (the coordinator's relay).*
+
+### 4.1 The two `*Also:*` claims (X25B-PZ, X25B-LP; `plans/FS100-derivation.md` line 289)
+
+| claim | as X25B states it (`plans/FS100-X25B-derivation.md` lines 171, 184) | sort | reason |
+|---|---|---|---|
+| **X25B-PZ** | "the stationary ratio of a categorical product of two LCA Cayley graphs is at most the larger factor's (Zhang 2012 §2's argument, measure form). [hand; one mind; the finite case is `[Zhang2012]` Thm 1.8's ratio half]" | **a theorem the record has lost** | no entry carries it, and it is load-bearing: FS103-F-FRAC's grade names "X25B-L1/PZ/T or C14.1–C14.3" (`plans/FS103-derivation.md` line 72) and FS100-TCA's second derivation uses it. Its alternative inputs FS86-Cx-C14's steps C14.1–C14.3 are held, so the consumers do not depend on PZ alone. Prior art: `[Zhang2012]` Thm 1.8 for finite graphs; the measure form for LCA Cayley graphs not searched |
+| **X25B-LP** | "the new-level bound `|λ| ≤ 2p^{k−1}` at a stable place of a real quadratic field ramified over `ℚ_p` (Lemma P's content in that case) … [hand; one mind; Lemma P's own proof unread]" | **a duplicate**, of FS86-LP's ramified case | FS86-LP ("on every odd stable residue tower, unramified or ramified, a character new at level `m` has `|λ| ≤ 2p^{m−1}`") already has two derivations (Poros (plan) at the ramified 59; B1 blind, every odd tower); X25B-LP and FS84-S1a-P are its third and fourth. No grade moves |
+
+### 4.2 The 68 ids defined in the no-entry files and found in no indexed entry (item 20)
+
+**The index's "found in no indexed entry" is mostly a resolution defect**: 16 of the 68 are filed under the same id with the milestone prefix
+(`FS100-X28D-P` for `X28D-P`, `FS89-D0-T1` for `D0-T1`), which the token search did not try — so **FS100-X28D is not "wholly" lost**: all seven
+of its ids are FS100-X28D-* entries (`LEDGER.md` § B rows FS100-X28D-P … -CUBE). Of the other 52, read one by one:
+
+| id | sort | home, or why |
+|---|---|---|
+| X27D-EQ, -E, -ATT, -FL, -SIERP; X28D-P, -S, -CP1, -CP2, -CP3, -ODD, -CUBE; TS-L1; TC-tab; D0-T1; D5-L2 (16) | duplicate, same id with a prefix | FS100-X27D-*, FS100-X28D-*, FS106-TS-L1, R88-TC-tab, FS89-D0-T1, FS89-D5-L2 |
+| J51D-KS3 | duplicate | FS100-KS3 ("KS-3 is false over every real number field") |
+| X03D-FL-1a | duplicate | FS100-FLK ("(= X03D-FL-K, FL-1a; X05V-4)" — the alias is written without the job prefix) |
+| X03D-ED1-R | duplicate | FS100-ED1's second clause (ED-1 ill-posed where `U_N` is infinite, i.e. with a complex place) |
+| X12B-R | not ours / duplicate | Tate duality for `S`-integers (its own grade: "standard"); the form FS105-B-M1 states |
+| X12B-N | not a theorem | a classical count of rational points on the unit circle, checked by a tool |
+| X02D-F | not ours | "torsion-free rank `n` ⟹ `|A/mA| ≤ mⁿ`" — its own grade: "hand (textbook)" |
+| X21D-A2 | duplicate | FS100-FAM ("`= 5` wherever `L(ℚ(√d)) = 5`") |
+| X22D-EF | duplicate | X12B-EF, carried by FS100-EFP (alias) |
+| **X22D-FLK2** | **duplicate with a lost strengthening** | a second derivation of FS100-FLK, plus "holds for translation-invariant `μ` over `𝒜_E` and at every `k` (same ratio)" — FS100-FLK states rotation-invariant colourings at four colours only. A hypothesis weakening the record lost (one mind, `plans/FS100-X22D-derivation.md` Stage 4 § 4.1); for FS129-Z1, not re-derived here |
+| X25B-P | a step (lost) | "Zhang's Prop. 1.7 for stationary random a.e.-independent sets in an LCA Cayley graph" — X25B-PZ's first step |
+| **X25B-L1** | **a theorem the record has lost** | "a profinite factor's stationary ratio in a product is at most the supremum over its finite levels" — named as an input by FS103-F-FRAC (line 72), with no entry |
+| X25B-W | not ours | weak approximation for the unit circle (its own grade: "standard"); FS91-J07-5's (W) |
+| **X25B-T1** | **duplicate, and a grade the record lags** | a blind second derivation of FS100-T1 (X25B's fence log: blind to the proofs, not the outline). `LEDGER.md` row 117 counts it ("X25B, blind"); FS100-T1's own grade line (`plans/FS100-derivation.md` line 116) says "one mind (J51)" and omits it — a disagreement; the argument supports row 117. Draft for FS129-Z1: FS100-T1's grade gains "X25B-T1, blind to the proofs (not the outline; owner's ruling as for X25B-T)" |
+| X26B-CLS | duplicate | FS100-CLS |
+| X26B-L2 | a step | the all-levels reading of FS100-CLS (FS100-CLS and -DLP carry X26B-L1, -L3) |
+| X26B-ARCH | duplicate | FS100-TCA's archimedean step ("the archimedean step at `n` real places is C14.3's induction") |
+| X27D-FLit | duplicate | FS100-X27D-FL's first clause ("As worded … it is TRUE with a trivi[al witness]") |
+| J27D "7" | not ours | `[GodsilEtAl…]`'s "GRR2017 Thm 4.9, quoted" — an external theorem |
+| J27D "9" | a step | FS67-DC2 is "= J27D #10 with #9's steps" |
+| S1a | subsumed | FS100-T1 / row 117: every stable place of ℚ(√47, i) has all-levels ratio `< 1/4`, so `ρ_per < 1/4`; S1a's binding place 31 and margin `2.745·10⁻⁶` are data, not a theorem the class form lacks |
+| S1a-P | duplicate | FS86-LP (S1a-P's own grade: "second derivation after FS86-LP") |
+| S1a-J | duplicate | FS91-J07-5 (CLG-c's joint image, every real number field; S1a-J's grade: "same route as J07's CLG-c") |
+| S1c | subsumed | FS89-CL4 (`Θ₄(R_{ℚ(√47)}) = ∅`, every band character, not only the ten survivors) |
+| **S1b, S1b-47, S1d-K** | **theorems the record has lost** (small) | S1b: the invariant-measure equivalences and `ι_G = 1/χ_{f,0} = 1/ρ`; S1b-47: `ρ_per(ℚ(√47)) = max_𝔓 r_𝔓 ∈ [28/121, h*(31)]`, and `ι(ℚ(√47)) < 1/4` iff a finite `H` has `α(H) < |H|/4`; S1d-K: the window graph is `K_{2,3}`-free. None is cited by a later entry; for FS129-Z1's derivation file at their grades (hand, one derivation) |
+| **S1e** | **a theorem the record has lost — and the prior in-house form of NOAFF-K at four colours** | "(ii) If some proper four-colouring of `Γ` has a gap …, then **no non-trivial such identity exists on `Γ`**" (`plans/FS84-S1-derivation.md` § 4.2, 2026-09-25). Pass 2 re-derived it as FS129-MA1-NOAFF5 at five colours and MA2's k = 4 note without citing it; it merges into FS129-SA1-NOAFF-K (stage 2's prior-art line now names it). A citation miss, not a step worked twice |
+| J45-RU | duplicate | FS100-EFZ's first clause ("(= … J45's R-U, J46-7)") |
+| J45-SP-Cor | subsumed | FS100-SPC / FS100-K0b (SP-Cor over the whole class, every degree), which contain ℚ(√47) |
+| J45-G2 | not a theorem | a tools fact (C9's colouring on Γ₇ has 14 gapped vertices) — FS129-MA2-G7GAP's content |
+| J45-SI-1, -SI-2, -SI-3 | partly duplicate | FS103-F-SI ("J45's SI per class") carries their content for independent sets per class |
+| **J45-N1, -N2, -SI-4, -SI-5, -SI-J, -SI-C, -SP-oi, -SP-if** | **theorems the record has lost — load-bearing** | FS100-Q47's grade (`χ(ℚ(√47)²) = 5`) names "SP-Cor three minds … over N1, N2, R-U, A⁺ each two blind minds (J45; J46-1, J46-7, J46-5)", and FS103-F-*'s (line 72) "J45-N1/N2, R-U, SP-oi"; A⁺ is SI-4 with N2 (FS100-K0). So row 121's lower half — the answer to Moorhouse's question — rests on eight J45 statements with no indexed entry, and the index's upstream of FS100-Q47 and FS103-F-* is missing them. For FS129-Z1: file them as entries (at J45's grades, with J46's second derivations named) so the Lean backlog's input for row 121 is complete |
+| FS105-B-L0 | a step | Lemma 0 inside FS105-B-L5 ("(Lemma 0)" in its statement) |
+| TQ-CORE | duplicate | FS103-M's D1 ("FS103-M's D1 re-derived sighted") |
+| TQ-REM-ii | duplicate | FS106-REM's second clause ("for a CP colouring P(0 is not kept at scale ε) → 0") |
+| TQ-P, TQ-T | steps | FS106-EQ's proof (TQ § 3.1: periodisation; Prop. 2.1 for partial colourings) |
+| TQ-SUP, TQ-COMP-i, TQ-COMP-ii, TQ-EQ, TQ-SYN | duplicates | FS106-SUP, FS106-COMP (and SUP's "attained"), FS106-COMP's second clause, FS106-EQ (at k = 6; EQ holds at every k), FS106-SYN |
+| **HOLE-t** | **a theorem the record has lost** (lane R's) | "holes whose points are all within `t < ε/2` of the coloured set fill, at a loss of `2t` in the band" (C-Q-HOLEa) — no FS106 entry states it; for FS129-SR1 / Z1 to place |
+
+**Tally (registered SA1-E6: 5 lost):** of the 68, **42 duplicates or subsumed** (16 by prefix, 26 by content), **6 steps** of held entries,
+**6 not ours or not theorems**, and **14 theorems the record has lost** — X25B-L1, FS84-S1b, -S1b-47, -S1d-K, -S1e, J45-N1, -N2, -SI-4, -SI-5,
+-SI-J, -SI-C, -SP-oi, -SP-if, and lane R's HOLE-t; with X25B-PZ (§ 4.1), **15 lost in item (c)**, plus one lost strengthening carried by a
+duplicate (X22D-FLK2). Ten of the fifteen are load-bearing (cited by a later entry's grade: X25B-PZ, X25B-L1, and the eight J45 statements under
+row 121). Most are FS-84's and FS-100's crunch records, whose theorem lists were never filed as entries.
+
+### 4.3 The lane-A "Rests on it: nothing" edges (item (d); the coordinator's relay: SR1's list of nine is the lane-A set)
+
+My script found the same nine (index records whose "Rests on it" text begins "nothing" or "none" and still carries ids, era A). Sorted with SR1's
+heads (**real**, **route**, **false**, **reversed**); each edge `from → to` reads "`to` uses `from`":
+
+| from | to | class | reading |
+|---|---|---|---|
+| FS56-T6 | FS56-T2 | **reversed** | T6's own text: "by FS56-T2, no field containing `G29` can have …" — T6 uses T2 |
+| FS79-T31 | FS79-T40 | false | "nothing now (route (ii) at `L21cc6506` is dead by T40)": a refutation pointer; T40 is "derived (T38, T39, FS73-T36)" |
+| FS79-T41 | FS79-T38 | false | "nothing beyond T38": the partial census adds nothing beyond T38's certificate; T38 is a cert standing alone |
+| FS85-A3 | FS85-dB2 | false | "nothing (P-rank1 was refuted by dB2)": a refutation pointer |
+| FS91-J01-3 | FS91-J01-2 | false | "a second route to FS91-J01-2's conclusion inside a band" — a parallel route J01-2's grade does not count (its second route for case 1 is J03a-4) |
+| FS91-J03a-6 | FS91-J01-7 | false | "FS91-J01-7 reads VB4's `T_N + A` directly" — the sentence denies the use |
+| M3-J21-NG3 | M3-J21-MX | false | "sharpens M3-J21-MX's reach at split places": NG3 shows MX's mixing hypothesis fails at a split place — a scope boundary, not an input |
+| MASCOT-T3 | MASCOT-T4 | false | "the session's own next step was the sieve, MASCOT-T4, not a further use of uniqueness" |
+| Q8-T1 | M51-T1 | false | "a smaller alternative certificate target to M51-T1's full 3,695-point union" |
+
+**Tally:** real 0, route 0, false 8, reversed 1. **What they do to the index**: none sits in a lane-A cycle (`data/fs129/index/cycles.md`); one makes a
+root that is not there — `data/fs129/index/roots.md` rank 45, "FS91-J01-3 (7): FS91-J01-3 → FS91-J01-2 → …", exists only through the false edge
+J01-3 → J01-2. **Others of the same kind outside the nine**: the two correcting entries of § 3.1 (`FS91-J03a-9,FS89-CL2` and `FS91-J07-14,FS89-CL2`)
+name CL2 as the thing corrected, not as a user — false, with "Rests on it" text that does not begin "nothing", so neither matcher caught them; and
+four lane-A records whose "Rests on it" holds "none" or "nothing" mid-sentence (FS50-T2, FS66-L6, FS91-J08-5, MASCOT-T1) carry **real** edges — the
+word is part of the content ("nothing it emits is believed", "none at 7 three-colourable", "carries none at all", "none at 2 or 4").
