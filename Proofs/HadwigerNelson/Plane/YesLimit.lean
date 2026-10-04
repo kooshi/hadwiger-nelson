@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Slack
 import Proofs.HadwigerNelson.Plane.ArcMap
+import Proofs.HadwigerNelson.Plane.LocalStructure
 import Proofs.HadwigerNelson.UnitDistance
 import Mathlib.Combinatorics.SimpleGraph.Finsubgraph
 
@@ -115,24 +116,94 @@ theorem chromaticNumber_plane_le_chiM0 : (unitDistance ℂ).chromaticNumber ≤ 
 are locally finite and closed inside the domain, and the colour is locally constant there). -/
 theorem ArcMap.measurableSet_region_inter {k : ℕ} (F : ArcMap k) {p : ℂ} {R : ℝ} (h : F.Covers p R) (j : Fin k) :
     MeasurableSet (F.region j ∩ ball p R) := by
-  sorry
+  have _ := h
+  exact (F.isOpen_region j).measurableSet.inter measurableSet_ball
 
 /-- The arcs meeting the covered disc are finitely many (local finiteness on a compact set), each null, so the regions fill
 the disc up to a null set. -/
 theorem ArcMap.volume_ball_diff_region {k : ℕ} (F : ArcMap k) {p : ℂ} {R : ℝ} (h : F.Covers p R) :
     volume (ball p R \ ⋃ j, F.region j) = 0 := by
-  sorry
+  refine measure_null_of_locally_null _ fun x hx => ?_
+  have hxd : x ∈ F.dom := h (ball_subset_closedBall hx.1)
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite x hxd
+  refine ⟨(ball p R \ ⋃ j, F.region j) ∩ t, inter_mem_nhdsWithin _ ht, ?_⟩
+  refine measure_mono_null (t := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}, a.carrier) ?_
+    ((measure_biUnion_null_iff hfin.countable).mpr fun a _ => a.volume_carrier)
+  rintro y ⟨⟨hyb, hyr⟩, hyt⟩
+  have hyd : y ∈ F.dom := h (ball_subset_closedBall hyb)
+  have hyΓ : y ∈ ⋃ a ∈ F.arcs, a.carrier := by
+    by_contra hn
+    exact hyr (mem_iUnion.2 ⟨F.col y, ⟨hyd, hn⟩, rfl⟩)
+  obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hyΓ
+  exact mem_iUnion₂.2 ⟨a, ⟨ha, y, hya, hyt⟩, hya⟩
 
 /-- A valid map's regions have no unit pair (`BandFree` at `ε = 0`). -/
 theorem ArcMap.bandFree_region {k : ℕ} (F : ArcMap k) (hv : F.Valid) (j : Fin k) : BandFree (F.region j) 0 := by
-  sorry
+  intro x hx y hy
+  rcases lt_trichotomy (dist x y) 1 with h | h | h
+  · left; linarith
+  · exact absurd ((show F.col x = j from hx.2).trans (show F.col y = j from hy.2).symm) (hv x hx.1 y hy.1 h)
+  · right; linarith
 
 /-- **Fragments at every radius fill `µ_k⁰`**: the regions on the window inscribed in the disc, periodized at side `ℓ + 2`
 (`periodize`, `bandFree_periodize` at `ε = 0`, `unitPairsNull_of_bandFree`, `upperDensity_periodize`), cover density
 `ℓ²/(ℓ + 2)² → 1`. -/
 theorem muZero_eq_one_of_fragments {k : ℕ} (h : ∀ R > (0 : ℝ), ∃ (F : ArcMap k) (p : ℂ), F.Covers p R ∧ F.Valid) :
     muZero k = 1 := by
-  sorry
+  refine le_antisymm (muZero_le_one k) ?_
+  have key : ∀ ℓ : ℝ, 0 < ℓ → ENNReal.ofReal (ℓ ^ 2 / (ℓ + 2) ^ 2) ≤ muZero k := by
+    intro ℓ hℓ
+    obtain ⟨F, p, hcov, hv⟩ := h ℓ hℓ
+    set z : ℂ := p - ((ℓ / 2 : ℝ) : ℂ) * (1 + I) with hz
+    have hwin : squareWin z ℓ ⊆ ball p ℓ := by
+      intro w ⟨h1, h2, h3, h4⟩
+      simp only [hz, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, Complex.I_re,
+        Complex.I_im] at h1 h2 h3 h4
+      rw [mem_ball, dist_eq_norm]
+      have hsq : ‖w - p‖ ^ 2 < ℓ ^ 2 := by
+        rw [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im]
+        nlinarith
+      exact lt_of_pow_lt_pow_left₀ 2 hℓ.le hsq
+    set T : Fin k → Set ℂ := fun j => F.region j ∩ squareWin z ℓ with hT
+    have hTm : ∀ j, MeasurableSet (T j) := fun j => (F.isOpen_region j).measurableSet.inter (measurableSet_squareWin z ℓ)
+    have hTw : ∀ j, T j ⊆ squareWin z ℓ := fun j => inter_subset_right
+    have hTd : Pairwise (Function.onFun Disjoint T) := by
+      intro j j' hjj'
+      refine Set.disjoint_left.2 fun x hx hx' => hjj' ?_
+      exact (show F.col x = j from hx.1.2).symm.trans (show F.col x = j' from hx'.1.2)
+    set C : Fin k → Set ℂ := fun j => periodize (T j) (ℓ + 2) with hC
+    have hCp : IsPartialColouring C :=
+      ⟨fun j => measurableSet_periodize (hTm j) _, fun j j' hjj' => disjoint_periodize (hTw j) (hTw j') (hTd hjj')⟩
+    have hCn : ∀ j, UnitPairsNull (C j) := fun j =>
+      unitPairsNull_of_bandFree le_rfl (bandFree_periodize (hTw j) (by norm_num)
+        fun x hx y hy => F.bandFree_region hv j x hx.1 y hy.1)
+    have hUm : MeasurableSet (⋃ j, T j) := MeasurableSet.iUnion hTm
+    have hvol : volume (⋃ j, T j) = ENNReal.ofReal (ℓ ^ 2) := by
+      have hR : MeasurableSet (⋃ j, F.region j) := MeasurableSet.iUnion fun j => (F.isOpen_region j).measurableSet
+      have e : (⋃ j, T j) = squareWin z ℓ ∩ ⋃ j, F.region j := by
+        rw [hT, ← iUnion_inter, inter_comm]
+      have hnull : volume (squareWin z ℓ \ ⋃ j, F.region j) = 0 :=
+        measure_mono_null (sdiff_subset_sdiff_left hwin) (F.volume_ball_diff_region hcov)
+      rw [e, ← volume_squareWin z hℓ.le, ← measure_inter_add_sdiff (squareWin z ℓ) hR, hnull, add_zero]
+    have hd : upperDensity (⋃ j, C j) = ENNReal.ofReal (ℓ ^ 2 / (ℓ + 2) ^ 2) := by
+      rw [hC, iUnion_periodize, upperDensity_periodize hUm hℓ (iUnion_subset hTw), hvol,
+        ENNReal.ofReal_div_of_pos (by positivity)]
+    rw [← hd]
+    exact le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) => upperDensity (⋃ j, C j))
+      C ⟨hCp, hCn⟩
+  have hlim : Tendsto (fun ℓ : ℝ => ENNReal.ofReal (ℓ ^ 2 / (ℓ + 2) ^ 2)) atTop (𝓝 1) := by
+    rw [← ENNReal.ofReal_one]
+    refine ENNReal.tendsto_ofReal ?_
+    have h1 : Tendsto (fun ℓ : ℝ => (1 - 2 / (ℓ + 2)) ^ 2) atTop (𝓝 1) := by
+      have : Tendsto (fun ℓ : ℝ => 2 / (ℓ + 2)) atTop (𝓝 0) :=
+        tendsto_const_nhds.div_atTop (tendsto_atTop_add_const_right _ 2 tendsto_id)
+      simpa using ((tendsto_const_nhds (x := (1 : ℝ))).sub this).pow 2
+    refine h1.congr' ?_
+    filter_upwards [eventually_gt_atTop 0] with ℓ hℓ
+    field_simp
+    ring
+  exact le_of_tendsto hlim (Eventually.mono (eventually_gt_atTop (0 : ℝ)) key)
 
 /-- **FS116-O1-YESLIM**, first clause, at every `k` (the row's `k ≥ 1` is idle: an `ArcMap 0` colours nothing): if every
 radius `R > 0` has a closed disc carrying a valid `k`-coloured fragment, then `χ_m⁰(ℝ²) ≤ k`. -/
