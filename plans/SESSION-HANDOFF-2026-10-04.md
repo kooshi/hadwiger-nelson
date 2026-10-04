@@ -13,36 +13,31 @@
    `tools/fs131_k1_dispositions.py`), ten waves (§ 7.1), the gate design (§ 7.5: nothing with a `sorry` on `main`; a branch and worktree per wave; land by
    fast-forward at a green gate), the named outside-backlog hypotheses (§ 7.4; more in inventory item 22).
 
-## 2. State (updated 2026-10-04, after the day's search)
+## 2. State (updated 2026-10-04 mid-morning; the inventory, items 1–96, is the full record)
 
-| wave | rows | state | where |
-|---|---|---|---|
-| foundation | — | on `main`, gate green | `Proofs/HadwigerNelson/Plane/{Basic,UnitPairs,AeColouring,ArcMap}` |
-| 1 | 14 | **landed** on `main` (`d59ffcdf`), announcement rule met (inventory item 29) | — |
-| 2 | 28 | 28 of 71 leaves proved (I2, I2b); **FS131-I2c running** | `.claude/worktrees/fs131-w2`, branch `fs131-w2` |
-| 3 | 20 + 6 merged | 55 of 96 leaves proved (I3); **FS131-I3b running** | `.claude/worktrees/fs131-w3`, branch `fs131-w3` |
-| 4 | 29 − C-DOUBLE (to wave 5, item 69) − Woodall's three (item 54) | foundation + 9 rows (K4), FS106-L and TS-T (K4b stage 2, `f2a09351`); **FS131-K4b running** | `.claude/worktrees/fs131-w4`, branch `fs131-w4` |
-| W (Woodall) | FS106-WO, -TW, -AE-MAP6 | queued: planner branches from `fs131-w4` at `f2a09351` (item 54; apply FS106-L only inside the open set, item 67) | — |
-| LEB | Lebesgue's covering theorem for the square | queued: own planner and implementer (item 66); a source to read and a bibliography row owed | — |
-| 5–10 | 12 (+ C-DOUBLE, Y3-END-NEEDS), 35, 20, 22, 11, 14 | not started | plan § 7.2–7.3 |
+| job | state | where |
+|---|---|---|
+| foundation, wave 1 | **landed** on `main` (`d59ffcdf`; item 29) | — |
+| wave 2 (28 rows) | 37 of 71 leaves proved (I2–I2d); re-planned by K2c (all 34 left have routes; children stated for 16); `falconer_lemma2_nonempty` an axiom (item 93) | `.claude/worktrees/fs131-w2` |
+| wave 3 (20 + 6) | 80 of 96 proved (I3–I3c); **FS131-I3d running** on the last 16 | `.claude/worktrees/fs131-w3` |
+| wave 4 | fully planned (K4–K4c; 86 leaves; handoff § 14, wave-5 notes § 14.5) | `.claude/worktrees/fs131-w4` at `f620977c` |
+| Woodall's chain (FS131-W) | **running** (stage 3 done: skeleton; open leaves `step5_eq`, `step7`) | `.claude/worktrees/fs131-ww` |
+| maps-six GAPs (FS131-E1, Ephodos) | **running**; claim list `data/fs131/claims-E1.md` (items 88, 90, 91) | `plans/FS131-E1-derivation.md` |
+| Lebesgue (FS131-LEB) | queued (item 66) | — |
+| waves 5–10 | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79) | plan § 7 |
 
-Tooling landed: FS131-T1, FS131-T2. The day's search (2026-10-04) is done and filed (item 60). Statement defects so far, all ruled: items 18–19, 34, 37,
-39 (derivations or merges); 48, 57, 61, 63 (skeleton slips); 56 (a gap, density-set reading).
+**The bearing found so far**: two GAPs in the repaired "maps need six" (items 88, 91): step 7 open in every class, step 5's equality case with unit arcs;
+route M's "χ_m⁰ ≥ 6 at five" waits on them. Corrections to `LEDGER.md` row 132 and `CLAUDE.md` § The aim item 4 are owed, **pending E1** — not filed.
 
-## 3. Running (cap: three agents, Kooshi 2026-10-03)
+## 3. Running (cap three)
 
-FS131-I2c (wave 2, Sonnet), FS131-I3b (wave 3, Sonnet), FS131-K4b (wave 4 planner, Opus). Each continues a record on its branch; agent ids are in this
-session's scratch. If the session restarts, resume each from its record's last SAVED stage with a fresh agent on the same brief.
+FS131-I3d (wave 3, Sonnet), FS131-W (Woodall planner, Opus), FS131-E1 (Ephodos). Agent ids in this session's scratch only.
 
-## 4. Next
+## 4. Next, in order, as slots free
 
-- As slots free, in order: FS131-W (Woodall's chain, planner), FS131-LEB (Lebesgue, planner), then successor implementers as needed; then wave 5's planner
-  (with C-DOUBLE and Y3-END-NEEDS, item 69; `Row134Base` named, its stub owed, item 17 (b)).
-- When an implementer lands a wave: read its gate logs, check the axioms digest, read one statement back, file the counts, log the receipt; the second of
-  waves 2 and 3 to land merges the first's vacuity carriers.
-- The Ephodos question on "simple" (item 17 (a)) before wave 7; stubs for FS-103's M1 and `Row134Base` in Lean (item 22).
-- At Derived/Closed: the record job drafts the errata the inventory lists; the Proof Atlas's two stale notes (item 4); FS-129 closes when its compositions pass.
-- Poros owes the G21 bearing line of `plans/STUB-bicycle-windings.md` (item 60) at its next re-rank.
+FS131-I2e (wave 2 implementer on the 16 leaves with children; K2c's handoff § 13), FS131-K2d (wave 2 planner for the other 18; own worktree if run beside I2e,
+item 94), FS131-I4 (wave 4's first implementer, § 14), FS131-LEB. Then wave 5's planner (read wave 4's § 14.5 first). On E1's report: file its verdicts and the
+row 132 / § The aim corrections; tell W. On any landing: read the worktree's gate logs, axioms digest, one read-back; file the counts.
 
 ## 5. Rulings in force
 

@@ -545,3 +545,9 @@ reason by the close.*
 95. **Brief FS131-E1, the maps-six GAPs** (`ephodos`, Opus; `data/fs131/briefs/FS131-E1-maps-six-gaps.md`, gated PASS); claim list `data/fs131/claims-E1.md`
     (W's § 1.6, copied verbatim by script). Points the deriver at `[Townsend2005]` (held, read in full 2026-09-27) as the published proof to read first.
     Launched in the slot K2c freed (item 90). Source: this commit.
+96. **FS131-W stage 3** (`fs131-ww` at `630018e5`): Woodall's chain stated over `ArcMap` — `Plane/Woodall/Basic` (collars, `ArcMap.SectorsAt`, Woodall's normal forms;
+    sorry-free), `Plane/Woodall/Collar` (`townsend_lemma` = FS106-TW, `woodall_step4` = FS106-WO clause 2, the ⅔π adversary), `Plane/Woodall/Steps` (`ArcMap.aeMap6` =
+    FS106-AE-MAP6, `aeMap6_of_condition5`, `woodall_thm6` = FS106-WO clause 1); open leaves `step5_eq` (Q1) and `step7` (Q2), the Condition-5 form `step7` only;
+    build 444/444, only `sorry` warnings. Generalization G-TW: Townsend's lemma region-only, with one-sided collars whose side may vary with the angle (the seed
+    one-sided, as every use has). **Vacuity rule for wave 9**: `aeMap6` says no valid five-coloured arc map exists, so any statement over such maps not concluding
+    `False` is vacuous — compositions over "a valid five-coloured arc map" must be refutations (W folded the normal-form step into `aeMap6_merged`).
