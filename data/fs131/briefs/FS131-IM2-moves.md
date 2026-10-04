@@ -101,3 +101,13 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; on exit 75 wait ten minutes and
 retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence; mirror oleans in a scratch directory of your
 own. The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+
+## Amendment, 2026-10-04 — `exists_merge`'s colour clause (inventory items 268–269)
+
+A definitions audit found `exists_merge`'s clause `(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)` unsatisfiable (item 268). The ruling, whose first line is:
+
+> 269. **Ruling on item 268: `exists_merge` and `exists_merge_aux` take `F'.coloursAt v ⊆ F.coloursAt v` in place of the off-rim clause.** Choice: IM2 replaces the
+> — source: plans/FS131-close-inventory.md
+
+Your touches gain, in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4m/Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean`, `exists_merge`'s statement and docstring, for this change only. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

@@ -1946,3 +1946,20 @@ reason by the close.*
      `fs131-w4c` into `fs131-w4` at the end. Why: the `Contact` lane is finished apart from the moves, `n3_end` waits only on this merge, and one branch carrying
      everything but the moves leaves a single merge for the end. Confidence: medium-high — what would change it: a conflict beyond those two files (then I4l stops
      and messages me). IC5's slot → I4l: 1 (I2n) + 1 (IM2) + 1 (QA3) + 1 (I4l) = 4.
+268. **Statement defect — `exists_merge` (FS110-W-MERGE) is unsatisfiable as stated** (FS131-QA3, by message, 2026-10-04; record `plans/FS131-QA3-audit.md`
+     stage 2). Its clause `(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)` covers the open disc `B(v, ρ)`, including the gap MERGE recolours, where points
+     change colour by design: at an interior point the clause forces `F'` to keep `F`'s colour, so `F'`'s `c`-region near `v` stays inside the closures of `F`'s
+     `n + 1` sectors and `F'.HasSectors v c n` fails. QA3's concrete model: `dom = ball 0 2`, an X of two segments at 0 with quadrants I, III coloured 0 and II, IV
+     coloured 1, 2, a grid of side 1/4 elsewhere, each cell its own colour — valid, covers `B̄(0, 1)`, `HasSectors 0 0 2`, `allowedCone 0 0 = univ`. Source: the
+     row (`plans/FS110-N-proof.md` l. 528) says "types only shrink", and inside the disc the only existing vertex is `v`. **Receipt (Keryx)**: `fs131-w4c`'s
+     `Contact.lean` l. 4097 carries the clause; `exists_shave` (l. 4071) and `exists_rayMerge` (l. 4084) carry `F'.coloursAt v ⊆ F.coloursAt v` instead; the row
+     reads as quoted. Nothing proved reads the clause (QA3, by grep). Also from QA3: `exists_merge`'s `D_c` and rim clauses hold; wave 5's definitions show no new
+     defect so far (stage 2). Credit: QA3 found it before IM2 spent a session on an unprovable leaf.
+269. **Ruling on item 268: `exists_merge` and `exists_merge_aux` take `F'.coloursAt v ⊆ F.coloursAt v` in place of the off-rim clause.** Choice: IM2 replaces the
+     clause in both copies on `fs131-w4m` (`Contact`'s `exists_merge`, `Moves`' `exists_merge_aux`), rewrites `exists_merge`'s docstring phrase "no point off the
+     disc's rim gains a colour" to say `v` gains no colour, and re-runs `tools/fs131_im_statements.py` (empty diff); IM2's touches extend to those lines of
+     `Contact`. FS131-I4l's `n3_end` uses only the new form (the old clause implies it at `x = v`, so a proof from the new form survives either way). Alternative
+     weighed: off the closed disc only (`∀ x ∉ closedBall v ρ`), which `AgreesOff` already gives and which drops the vertex clause the sibling moves carry. Why:
+     the row's "types only shrink" is about existing vertices, and inside the disc that is `v` alone; the sibling moves already state it so; the rim is the next
+     clause. Confidence: high. At the final merge of `fs131-w4m` into `fs131-w4`, `exists_merge`'s statement hunk lies above its `sorry` and IC5's insertion two
+     lines below it (item 266), so they stay disjoint.
