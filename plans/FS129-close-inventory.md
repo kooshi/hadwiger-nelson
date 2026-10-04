@@ -259,3 +259,27 @@ One line per item with its source; no narration. Each line is ticked done or dec
     low (1½ closes and 8 compositions against expected 0 and 3); J15 predicted to stand at 0.40, did not; J10 predicted to bear at 0.35, did.
 65. **Launched 2026-10-03 23:46 UTC**: FS129-MR1, pass 2, lane R (`general-purpose`, Opus; `data/fs129/briefs/FS129-MR1-pass2.md`, gated PASS, at
     `a951d15f`). Running: FS129-MA1 and FS129-MR1, two of the cap of three.
+66. **FS129-MA1 reported STAGE 5 SAVED, as planned** (`data/fs129/reports/FS129-MA1.md`; commits `1572ddb5`, `3ce9119a`, `ff124f65`, `9cd3e570`,
+    `1be0b883`, `ca9c191f`, all present; ≈327k by the harness, not continued): 23 of lane A's 70 mechanisms audited, 47 left in order
+    (`plans/FS129-MA1-audit.md` § 5.4). Three entries, each derived, hand, one mind: FS129-MA1-NOAFF5 (NOLIN5 widened — vector coefficients;
+    targets Γ₁₁, Γ₁₉ and any four-colourable target), -FALC-T (FALC-11's argument for any target), -FALC-19. No miss of the FS116-Y4 kind; none
+    of the 17 unmentioned lane-A grokkings bears anywhere unapplied. **Keryx's receipt**: derive gate re-run, exit 0, PASS (3 controls fire);
+    § 2.1's table of `[Falconer1981]` Lemmas 1–4, transcribed from pp. 185–187, read.
+67. **`[Falconer1981]` checked against the paper** (item 41 done): Lemmas 2, 3, the null-set sentence and Theorems 1–2 verbatim as
+    `plans/FS103-M-derivation.md` § 1.2 quotes them; Lemma 1 chooses the rigid motion, so the point of E the apex lands on cannot be fixed first.
+    **Correction owed** to FS129-OA1-FALC-RED: its statement stands; its argument and `uses only:` line are reordered as Falconer's own p. 188
+    (`plans/FS129-MA1-audit.md` § 2.2). For FS129-Z1. No grade moves.
+68. **Merges for pass 3, lane A** (MA1's generalizations): FS129-OA1-NOLIN5 is a case of FS129-MA1-NOAFF5; FS129-OA1-FALC-11 and FS129-MA1-FALC-19
+    are instances of FS129-MA1-FALC-T; M60-T2 and M61-T5 are subsumed by row 66; FS86-Cx-C11 is NOAFF5's four-colour face. Source: record § 3.1.
+69. **Correction owed — ASTRA-2026-09-14-T10's statement** ("for any real F ⊇ K") lacks the clause its own prose knows: its hypothesis is empty
+    over every F ⊇ K with a residue-𝔽₁₁ prime (row 66). For pass 3 (and the vacuity sort, item 36). Source: record § 3.1 item 3.
+70. **Ownership finding, MA1** (record § 5.2): G71 is two mechanisms — the lattice height (lane A) and the height on a curve (lane R in practice);
+    G13 is two (the coverage iff, era-free; the fan-ladder reading, lane A); G54's last paragraph is separate (gap-free pullbacks in products);
+    row 66 is one mechanism under four grokkings (G13's slack face, G26, G31, G48). Relayed to FS129-MR1 by message (G71's curve height, and the
+    FS106-BIKE lead: G71's ring winding not tried on its GAP, the route it served closed by row 133). Folded into FS129-MA2's brief.
+71. **Search requests**: row 3 annotated with FALC-T's three filters (still held for Kooshi); row 4 queued (Γ₁₉ with two gap colours at a vertex,
+    low priority). `plans/SEARCH-QUEUE.md`.
+72. **Prior-art debts**: NOAFF5, FALC-T, FALC-19 owed; for FS129-Z1.
+73. **MA1's registration, provisionally scored** (record § 5.3; FS129-Z1 scores): reached 23 of an expected 22; 3 compositions of an expected 4;
+    0 misses of the Y4 kind; 0 of the 17 unmentioned grokkings bearing unapplied, against an expected 0.2; MA1-E5 (a material Falconer
+    difference, P = 0.15) not met.
