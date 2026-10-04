@@ -436,6 +436,32 @@ axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 2 module(
   `nb4p`.
 - *Contact* (10) and the base's steps (BaseSteps' seven) as Stage 8 lists them.
 
+## Stage 12 — SAVED (FS131-I4f): readback, the as-given build
+
+*FS131-I4f (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4f-wave4.md` on `main`) continues this record from `9a8de899`.*
+
+**The brief's quotations against their sources** (standing rule 3). The brief says "four quotations"; it carries five, all checked: (1) "**It may**: add
+children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md`
+§ 14.2 (line 887): **matches as a truncation**. (2) "**What is left (45), in the order I would take it.**" — this record, Stage 11 (line 422): **matches**. (3) "- *The
+bowtie* (BaseSteps, 9): `bowtieCol_locallyConstant` first — every bowtie theorem reads `sorryAx` through it. Route: for each of the 11 tiles, its colour" — Stage 11
+(line 423): **matches as a truncation**. (4) item 177, "177. **FS131-I4d mid-job, on `ArcMap.lock`** … `IsRingArc`'s" — `plans/FS131-close-inventory.md` on `main`
+(line 1229): **matches as a truncation**. (5) item 185, "185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** … silence the linter" — same file (line 1300):
+**matches as a truncation**. The only mismatch is the count ("four" for five), a finding about the brief's prose, not about any quotation.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9): add children anywhere in the wave's modules (the seven engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors` (the bridge module); wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144).
+**What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 stays in its ruled local form, item 177; `l60_eq_third`'s binder `_hF` is
+accepted, item 185); any definition of `Plane/ValidMap/Basic`; the fragments' definitions (`bowtie*`, `l60*`, `isoY`, `isoFrag`, `sevenBrick*`) but for a coordinate
+slip found against the source tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause stays in its carried form (item 142); no new `axiom`, no
+`native_decide`. A leaf that cannot be proved as written goes to Keryx at once with the declaration, the reason and the counterexample or the missing hypothesis.
+No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`9a8de899`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`), queued about 10 minutes
+for the slot: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T170918Z-955682.log`;
+driver log `data/fs131/i4/build-i4f-readback.log`). 45 `declaration uses sorry` warnings — BaseSteps 16, Contact 10, UnitArc 19 — and no other warning.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
