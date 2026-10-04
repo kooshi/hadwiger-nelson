@@ -197,6 +197,125 @@ example : sixCol ((1 / 2 : ℂ) * e (7 * π / 6)) = 3 := by
 
 /-! ## The row: FS116-Y2-SIXFRAG -/
 
+/-! ## The sectors near `0`: interior points and their colours -/
+
+/-- `‖e a + e b‖² = 2 + 2 cos(a − b)`. -/
+theorem norm_e_add_e_sq (a b : ℝ) : ‖e a + e b‖ ^ 2 = 2 + 2 * Real.cos (a - b) := by
+  rw [Complex.sq_norm, Complex.normSq_apply]
+  simp only [e_eq, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
+    Complex.ofReal_im, Complex.I_re, Complex.I_im]
+  rw [Real.cos_sub]
+  nlinarith [Real.sin_sq_add_cos_sq a, Real.sin_sq_add_cos_sq b]
+
+/-- Points of the two lens-side families (angle difference at least `60°` and at most `120°` in absolute value) are at
+distance at least `1` from `0`: `‖e a + e b‖² = 2 + 2 cos(a − b) ≥ 1` once `|a − b| ≤ 120°`. -/
+theorem one_le_norm_e_add_e {a b : ℝ} (h2 : |b - a| ≤ 2 * π / 3) : 1 ≤ ‖e a + e b‖ := by
+  have hπ := Real.pi_pos
+  have hc : Real.cos (2 * π / 3) = -1 / 2 := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]; norm_num
+  have h3 : Real.cos (2 * π / 3) ≤ Real.cos (|b - a|) :=
+    Real.cos_le_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) h2
+  rw [Real.cos_abs, show b - a = -(a - b) by ring, Real.cos_neg] at h3
+  have := norm_e_add_e_sq a b
+  nlinarith [norm_nonneg (e a + e b)]
+
+/-- A point of the open sector `(60°j, 60°(j+1))` of the open unit disc is an interior point of `sixFrag`. -/
+theorem sixFrag_mem_interiorPts {t φ : ℝ} {j : ℤ} (ht : 0 < t) (ht1 : t < 1) (hφ1 : j * (π / 3) < φ)
+    (hφ2 : φ < (j + 1) * (π / 3)) : (t : ℂ) * e φ ∈ sixFrag.interiorPts := by
+  have hπ := Real.pi_pos
+  have hn : ‖(t : ℂ) * e φ‖ = t := by
+    rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht.le]
+  refine ⟨by show _ ∈ ball (0 : ℂ) (3 / 2); rw [mem_ball_zero_iff, hn]; linarith, ?_⟩
+  intro hmem
+  obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hmem
+  rcases ha with ((ha | ha) | ha) | ha
+  · obtain ⟨k, rfl⟩ := ha
+    obtain ⟨u, v, hu, hv, huv, hz⟩ := hza
+    -- the point lies on the ray at angle `60°k`: its sine against the ray vanishes
+    have h1 : (t : ℂ) * e (φ - k * (π / 3)) = (v : ℂ) := by
+      have : (t : ℂ) * e φ = v * e (k * (π / 3)) := by
+        rw [← hz]; simp
+      rw [show φ = (φ - k * (π / 3)) + k * (π / 3) by ring, e_add] at this
+      have hne : e (k * (π / 3)) ≠ 0 := fun h => by
+        have := norm_e (k * (π / 3)); rw [h] at this; simp at this
+      exact mul_right_cancel₀ hne (by rw [← this]; ring)
+    have h2 : t * Real.sin (φ - k * (π / 3)) = 0 := by
+      have := congrArg Complex.im h1
+      simp only [e_eq, Complex.mul_im, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.I_re, Complex.I_im] at this
+      linarith
+    have h3 : Real.sin (φ - k * (π / 3)) = 0 := by
+      rcases mul_eq_zero.mp h2 with h | h
+      · exact absurd h ht.ne'
+      · exact h
+    obtain ⟨n, hn'⟩ := Real.sin_eq_zero_iff.mp h3
+    have l1 : ((j : ℝ) - k) < 3 * n := by
+      have : ((j : ℝ) - k) * (π / 3) < (3 * n) * (π / 3) := by nlinarith
+      exact lt_of_mul_lt_mul_right this (by positivity)
+    have l2 : (3 * n : ℝ) < j + 1 - k := by
+      have : (3 * n : ℝ) * (π / 3) < (j + 1 - k) * (π / 3) := by nlinarith
+      exact lt_of_mul_lt_mul_right this (by positivity)
+    have l1' : j - (k : ℤ) < 3 * n := by exact_mod_cast l1
+    have l2' : 3 * n < j + 1 - (k : ℤ) := by exact_mod_cast l2
+    omega
+  · rw [mem_singleton_iff] at ha
+    subst ha
+    obtain ⟨θ, -, hθ⟩ := hza
+    have : ‖(t : ℂ) * e φ‖ = 1 := by rw [← hθ]; simp
+    linarith
+  · obtain ⟨k, rfl⟩ := ha
+    obtain ⟨θ, hθ, hz⟩ := hza
+    have hc : 1 ≤ ‖(t : ℂ) * e φ‖ := by
+      rw [← hz]
+      have : ((e (k * (π / 3) - π / 6) + 1 * e θ : ℂ)) = e (k * (π / 3) - π / 6) + e θ := by simp
+      show 1 ≤ ‖e (k * (π / 3) - π / 6) + 1 * e θ‖
+      rw [one_mul]
+      apply one_le_norm_e_add_e
+      rw [abs_of_nonneg (by linarith [hθ.1])]; linarith [hθ.2]
+    linarith
+  · obtain ⟨k, rfl⟩ := ha
+    obtain ⟨θ, hθ, hz⟩ := hza
+    have hc : 1 ≤ ‖(t : ℂ) * e φ‖ := by
+      rw [← hz]
+      show 1 ≤ ‖e (k * (π / 3) + π / 6) + 1 * e θ‖
+      rw [one_mul]
+      apply one_le_norm_e_add_e
+      rw [abs_of_nonpos (by linarith [hθ.2])]; linarith [hθ.1]
+    linarith
+
+/-- The colour of a point of the open sector `(60°j, 60°(j+1))` of the open unit disc, `−3 ≤ j ≤ 2`, is `j`. -/
+theorem sixCol_sector {t φ : ℝ} {j : ℤ} (ht : 0 < t) (ht1 : t < 1) (hj1 : -3 ≤ j) (hj2 : j ≤ 2)
+    (hφ1 : j * (π / 3) < φ) (hφ2 : φ < (j + 1) * (π / 3)) : sixCol ((t : ℂ) * e φ) = ((j : ℤ) : ZMod 6) := by
+  have hπ := Real.pi_pos
+  have hn : ‖(t : ℂ) * e φ‖ = t := by
+    rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht.le]
+  have harg : Complex.arg ((t : ℂ) * e φ) = φ := by
+    refine arg_polar ht ⟨?_, ?_⟩
+    · have : (-3 : ℝ) ≤ j := by exact_mod_cast hj1
+      nlinarith
+    · have : (j : ℝ) ≤ 2 := by exact_mod_cast hj2
+      nlinarith
+  have hfl : ⌊φ / (π / 3)⌋ = j := by
+    rw [Int.floor_eq_iff, le_div_iff₀ (by positivity), div_lt_iff₀ (by positivity)]
+    exact ⟨hφ1.le, hφ2⟩
+  simp only [sixCol, hn, ht1, if_true, sixSector, harg, hfl]
+
+/-- Each colour `c` is carried at `0`: the open sector of colour `c` approaches `0`. -/
+theorem zero_mem_closure_region {j : ℤ} (hj1 : -3 ≤ j) (hj2 : j ≤ 2) :
+    (0 : ℂ) ∈ closure (sixFrag.region ((j : ℤ) : ZMod 6)) := by
+  have hπ := Real.pi_pos
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  set t := min (1 / 2) (ε / 2) with ht
+  have ht0 : 0 < t := lt_min (by norm_num) (by linarith)
+  have ht1 : t < 1 := lt_of_le_of_lt (min_le_left _ _) (by norm_num)
+  have h1 : (j : ℝ) * (π / 3) < j * (π / 3) + π / 6 := by linarith
+  have h2 : (j : ℝ) * (π / 3) + π / 6 < (j + 1) * (π / 3) := by linarith
+  refine ⟨(t : ℂ) * e (j * (π / 3) + π / 6), ⟨sixFrag_mem_interiorPts ht0 ht1 h1 h2, ?_⟩, ?_⟩
+  · exact sixCol_sector ht0 ht1 hj1 hj2 h1 h2
+  · rw [dist_zero_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht0.le]
+    linarith [min_le_right (1 / 2 : ℝ) (ε / 2)]
+
 /-- **FS116-Y2-SIXFRAG**, validity: no two interior points of one colour are at distance exactly `1`. Colour `0` (and every
 other, by the rotation by `60°`) is carried by `S_0`, `Q_4`, `G_2`: three diameters below `1`, three cross distances above
 `1`, exact in `ℚ(√3, √7)` (the cut points of the lenses have cosine `3/4`). -/
@@ -214,7 +333,12 @@ theorem sixFrag_covers {R : ℝ} (hR : R < 3 / 2) : sixFrag.Covers 0 R :=
 
 /-- **FS116-Y2-SIXFRAG**, the vertex: all six colours are carried at `0`. -/
 theorem sixFrag_coloursAt_zero : sixFrag.coloursAt 0 = univ := by
-  sorry
+  refine eq_univ_of_forall fun c => ?_
+  have hc : ∀ c : Fin 6, ∃ j ∈ Finset.Icc (-3 : ℤ) 2, ((j : ℤ) : ZMod 6) = c := by decide
+  obtain ⟨j, hj, hjc⟩ := hc c
+  rw [Finset.mem_Icc] at hj
+  rw [← hjc]
+  exact zero_mem_closure_region hj.1 hj.2
 
 /-- **FS116-Y2-SIXFRAG**, the ring lies in `Γ`. -/
 theorem sixFrag_sphere_subset_Γ : sphere (0 : ℂ) 1 ⊆ sixFrag.Γ := by
@@ -239,7 +363,9 @@ theorem sixFrag_sphere_subset_Γ : sphere (0 : ℂ) 1 ⊆ sixFrag.Γ := by
 /-- **FS116-Y2-SIXFRAG**, every arc of `Γ` on `ω(0)` (with constant sides) is a (Q) arc. -/
 theorem sixFrag_isQArc {θ₁ θ₂ : ℝ} {c c' : Fin 6} (h : sixFrag.IsRingArc 0 θ₁ θ₂ c c') :
     sixFrag.IsQArc 0 θ₁ θ₂ := by
-  sorry
+  refine ⟨c, c', h, by rw [sixFrag_coloursAt_zero]; exact mem_univ _, by rw [sixFrag_coloursAt_zero]; exact mem_univ _, ?_⟩
+  rw [sixFrag_coloursAt_zero, Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin]
+  norm_num
 
 /-- The last clause is not vacuous: `r([0°, 30°])` is an arc of `Γ` on `ω(0)`, inner colour `0` (the sector `S_0`), outer
 colour `2` (the lens `Q_0`). -/
