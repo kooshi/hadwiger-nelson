@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.Chord
 import Proofs.HadwigerNelson.Plane.SixFragment
+import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
 # The ring of a point: twist, the closed set `D`, germs and cones, change points, (Q)-free and five- and six-colour rings,
@@ -41,13 +42,283 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-! ## The crossing lemma and ring comparisons (children of engine 1) -/
+
+/-- **The crossing lemma** (engine 1 at a closure point): in a valid map, a point `a` of the closure of the class of `c` and
+a preconnected `S` inside that closure cannot hold both a point nearer than `1` to `a` and a point farther than `1`. -/
+theorem Valid.false_of_crossing (hF : F.Valid) {c : Fin k} {a : ℂ} (ha : a ∈ closure (F.region c)) {S : Set ℂ}
+    (hS : IsPreconnected S) (hSc : S ⊆ closure (F.region c)) {u v : ℂ} (hu : u ∈ S) (hv : v ∈ S)
+    (hau : dist a u < 1) (hav : 1 < dist a v) : False := by
+  set m := min (1 - dist a u) (dist a v - 1) with hm
+  have hm0 : 0 < m := lt_min (by linarith) (by linarith)
+  obtain ⟨z, hz, hza⟩ := Metric.mem_closure_iff.mp ha m hm0
+  have hzu : dist z u < 1 := by
+    have h1 : dist a z < 1 - dist a u := lt_of_lt_of_le hza (min_le_left _ _)
+    have := dist_triangle z a u
+    rw [dist_comm z a] at this
+    linarith
+  have hzv : 1 < dist z v := by
+    have h1 : dist a z < dist a v - 1 := lt_of_lt_of_le hza (min_le_right _ _)
+    have := dist_triangle a z v
+    linarith
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz hS hSc with h | h
+  · exact absurd (h v hv) (not_lt.mpr hzv.le)
+  · exact absurd (h u hu) (not_lt.mpr hzu.le)
+
+/-- A germ is preconnected (the image of an interval). -/
+theorem isPreconnected_germ (p : ℂ) (θ : ℝ) (s : Side) (δ : ℝ) : IsPreconnected (germ p θ s δ) := by
+  have hc : Continuous fun t : ℝ => ringPt p (θ + s.sign * t) := by unfold ringPt e; fun_prop
+  exact isPreconnected_Ioo.image _ hc.continuousOn
+
+/-- Two ring points `π/3 + d` apart (`|d| ≤ 1`): nearer than `1` for `d < 0`, farther for `d > 0`. -/
+theorem dist_ringPt_shift_cmp (p : ℂ) (α d : ℝ) (hd : |d| ≤ 1) :
+    (d < 0 → dist (ringPt p α) (ringPt p (α + π / 3 + d)) < 1) ∧
+    (0 < d → 1 < dist (ringPt p α) (ringPt p (α + π / 3 + d))) := by
+  have hπ := Real.pi_gt_three
+  have hd1 := abs_le.mp hd
+  have habs : |α - (α + π / 3 + d)| = π / 3 + d := by
+    rw [show α - (α + π / 3 + d) = -(π / 3 + d) by ring, abs_neg, abs_of_pos (by linarith)]
+  have hle : |α - (α + π / 3 + d)| ≤ π := by rw [habs]; linarith
+  have h := dist_ringPt_ringPt_cmp_one p hle
+  rw [habs] at h
+  exact ⟨fun hneg => h.2.1.mpr (by linarith), fun hpos => h.2.2.mpr (by linarith)⟩
+
+/-- The expansion of the square of a sum in coordinates. -/
+theorem norm_add_sq_eq (d h : ℂ) : ‖d + h‖ ^ 2 = ‖d‖ ^ 2 + 2 * (d * (starRingEnd ℂ) h).re + ‖h‖ ^ 2 := by
+  simp only [Complex.sq_norm, Complex.normSq_apply, Complex.add_re, Complex.add_im, Complex.mul_re,
+    Complex.conj_re, Complex.conj_im]
+  ring
+
+/-- The first-order step of a cone argument: a point `y + h` with unit direction `u` within `ε` of `e β`, `‖d‖ = 1`:
+`‖d + h‖² − 1 = ‖h‖ (2 Re(d ū) + ‖h‖)` and `|Re(d ū) − Re(d conj(e β))| ≤ ε`. -/
+theorem cone_expand {d h : ℂ} (hd : ‖d‖ = 1) (hh : h ≠ 0) {β ε : ℝ}
+    (hu : ‖h / (‖h‖ : ℂ) - e β‖ < ε) :
+    ‖d + h‖ ^ 2 - 1 = ‖h‖ * (2 * (d * (starRingEnd ℂ) (h / (‖h‖ : ℂ))).re + ‖h‖) ∧
+      |(d * (starRingEnd ℂ) (h / (‖h‖ : ℂ))).re - (d * (starRingEnd ℂ) (e β)).re| ≤ ε := by
+  have hn : (‖h‖ : ℂ) ≠ 0 := by exact_mod_cast norm_ne_zero_iff.mpr hh
+  have hhu : h = (‖h‖ : ℂ) * (h / (‖h‖ : ℂ)) := by field_simp
+  constructor
+  · rw [norm_add_sq_eq, hd]
+    conv_lhs => rw [hhu]
+    simp only [map_mul, Complex.conj_ofReal, one_pow]
+    have : (d * ((‖h‖ : ℂ) * (starRingEnd ℂ) (h / (‖h‖ : ℂ)))).re
+        = ‖h‖ * (d * (starRingEnd ℂ) (h / (‖h‖ : ℂ))).re := by
+      rw [show d * ((‖h‖ : ℂ) * (starRingEnd ℂ) (h / (‖h‖ : ℂ))) =
+        (‖h‖ : ℂ) * (d * (starRingEnd ℂ) (h / (‖h‖ : ℂ))) by ring, Complex.re_ofReal_mul]
+    rw [this]
+    simp only [norm_mul, Complex.norm_real, norm_norm]
+    have : ‖h / (‖h‖ : ℂ)‖ = 1 := by
+      rw [norm_div, Complex.norm_real, norm_norm, div_self (norm_ne_zero_iff.mpr hh)]
+    rw [this]
+    ring
+  · rw [← Complex.sub_re, ← mul_sub, ← map_sub]
+    calc |(d * (starRingEnd ℂ) (h / (‖h‖ : ℂ) - e β)).re| ≤ ‖d * (starRingEnd ℂ) (h / (‖h‖ : ℂ) - e β)‖ :=
+          Complex.abs_re_le_norm _
+      _ = ‖h / (‖h‖ : ℂ) - e β‖ := by rw [norm_mul, hd, one_mul, Complex.norm_conj]
+      _ ≤ ε := hu.le
+
+/-- The distance between two ring points on one side of `r(φ₀)` and `r(φ₀)` itself is at most the angle. -/
+theorem dist_ringPt_germ_le (p : ℂ) (φ₀ : ℝ) (s : Side) {t : ℝ} (ht : 0 ≤ t) :
+    dist (ringPt p φ₀) (ringPt p (φ₀ + s.sign * t)) ≤ t := by
+  have h := norm_e_sub_e_le φ₀ (φ₀ + s.sign * t)
+  have hs : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+  rw [dist_eq_norm]
+  simp only [ringPt, add_sub_add_left_eq_sub]
+  calc _ ≤ |φ₀ - (φ₀ + s.sign * t)| := h
+    _ = t := by rw [show φ₀ - (φ₀ + s.sign * t) = -(s.sign * t) by ring, abs_neg, abs_mul, hs, one_mul,
+      abs_of_nonneg ht]
+
+/-- **The germ half-plane lemma, far case** (child of GERM-R): if the germ of `ω(p)` on side `s` of `w₀ = r(φ₀)` lies in
+the closure of the class of `c`, `y` is at distance `1` from `w₀` and farther than `1` from the germ's points, then the
+class approaches `y` only along directions `β` with `Re((y − w₀) conj e β) ≥ 0`. -/
+theorem Valid.cone_re_nonneg_of_germ (hF : F.Valid) {p : ℂ} {φ₀ : ℝ} {s : Side} {c : Fin k}
+    (h : GermIn p φ₀ s (closure (F.region c))) {y : ℂ} (hy : ‖y - ringPt p φ₀‖ = 1)
+    (hfar : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, 1 < dist y (ringPt p (φ₀ + s.sign * t))) :
+    ∀ β ∈ coneAt (F.region c) y, 0 ≤ ((y - ringPt p φ₀) * (starRingEnd ℂ) (e β)).re := by
+  intro β hβ
+  by_contra hneg
+  push Not at hneg
+  obtain ⟨δ, hδ, hsub⟩ := h
+  obtain ⟨δ₀, hδ₀, hfar⟩ := hfar
+  set δ' := min δ δ₀ with hδ'
+  have hδ'0 : 0 < δ' := lt_min hδ hδ₀
+  have hS : germ p φ₀ s δ' ⊆ closure (F.region c) := (germ_mono (min_le_left _ _)).trans hsub
+  have ht₀ : δ' / 2 ∈ Ioo 0 δ' := ⟨by linarith, by linarith⟩
+  set w₀ := ringPt p φ₀
+  set w₁ := ringPt p (φ₀ + s.sign * (δ' / 2)) with hw₁
+  have hm : 1 < dist y w₁ := hfar _ ⟨ht₀.1, lt_of_lt_of_le ht₀.2 (min_le_right _ _)⟩
+  set κ := -((y - w₀) * (starRingEnd ℂ) (e β)).re with hκ
+  have hκ0 : 0 < κ := by rw [hκ]; linarith
+  set ε := min (dist y w₁ - 1) (κ / 2) with hε
+  have hε0 : 0 < ε := lt_min (by linarith) (by linarith)
+  obtain ⟨z, hz, hzy, hzd, hzu⟩ := hβ ε hε0
+  have hh : z - y ≠ 0 := sub_ne_zero.mpr hzy
+  have hhn : ‖z - y‖ < ε := by rwa [← dist_eq_norm]
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz (isPreconnected_germ p φ₀ s δ') hS with hlt | hgt
+  · exfalso
+    have h1 := hlt w₁ ⟨δ' / 2, ht₀, rfl⟩
+    have h2 := dist_triangle y z w₁
+    have h3 : dist y z < ε := by rw [dist_comm]; exact hzd
+    have : ε ≤ dist y w₁ - 1 := min_le_left _ _
+    linarith
+  · have hz0 : 1 ≤ dist z w₀ := by
+      by_contra hlt
+      push Not at hlt
+      set η := 1 - dist z w₀ with hη
+      have hη0 : 0 < η := by rw [hη]; linarith
+      set t := min (η / 2) (δ' / 2) with ht
+      have ht0 : 0 < t := lt_min (by linarith) (by linarith)
+      have htδ : t ∈ Ioo 0 δ' := ⟨ht0, lt_of_le_of_lt (min_le_right _ _) (by linarith)⟩
+      have h1 := hgt _ ⟨t, htδ, rfl⟩
+      have h2 := dist_triangle z w₀ (ringPt p (φ₀ + s.sign * t))
+      have h3 := dist_ringPt_germ_le p φ₀ s ht0.le
+      have : t ≤ η / 2 := min_le_left _ _
+      linarith
+    have hd : ‖y - w₀‖ = 1 := hy
+    have hexp := cone_expand (d := y - w₀) (h := z - y) hd hh hzu
+    have hsum : y - w₀ + (z - y) = z - w₀ := by ring
+    rw [hsum] at hexp
+    obtain ⟨hA, hB⟩ := hexp
+    have hz1 : 1 ≤ ‖z - w₀‖ ^ 2 := by
+      rw [← dist_eq_norm]; nlinarith
+    have hpos : 0 < ‖z - y‖ := norm_pos_iff.mpr hh
+    have h0 : 0 ≤ 2 * ((y - w₀) * (starRingEnd ℂ) ((z - y) / (‖z - y‖ : ℂ))).re + ‖z - y‖ := by
+      by_contra hn; push Not at hn
+      have := mul_neg_of_pos_of_neg hpos hn
+      linarith
+    have hε' : ε ≤ κ / 2 := min_le_right _ _
+    have hB' := (abs_le.mp hB).2
+    linarith
+
+/-- **The germ half-plane lemma, near case** (child of GERM-R): as above with the germ's points nearer than `1` to `y`;
+then `Re((y − w₀) conj e β) ≤ 0` along every direction `β` of the cone. -/
+theorem Valid.cone_re_nonpos_of_germ (hF : F.Valid) {p : ℂ} {φ₀ : ℝ} {s : Side} {c : Fin k}
+    (h : GermIn p φ₀ s (closure (F.region c))) {y : ℂ} (hy : ‖y - ringPt p φ₀‖ = 1)
+    (hnear : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, dist y (ringPt p (φ₀ + s.sign * t)) < 1) :
+    ∀ β ∈ coneAt (F.region c) y, ((y - ringPt p φ₀) * (starRingEnd ℂ) (e β)).re ≤ 0 := by
+  intro β hβ
+  by_contra hneg
+  push Not at hneg
+  obtain ⟨δ, hδ, hsub⟩ := h
+  obtain ⟨δ₀, hδ₀, hnear⟩ := hnear
+  set δ' := min δ δ₀ with hδ'
+  have hδ'0 : 0 < δ' := lt_min hδ hδ₀
+  have hS : germ p φ₀ s δ' ⊆ closure (F.region c) := (germ_mono (min_le_left _ _)).trans hsub
+  have ht₀ : δ' / 2 ∈ Ioo 0 δ' := ⟨by linarith, by linarith⟩
+  set w₀ := ringPt p φ₀
+  set w₁ := ringPt p (φ₀ + s.sign * (δ' / 2)) with hw₁
+  have hm : dist y w₁ < 1 := hnear _ ⟨ht₀.1, lt_of_lt_of_le ht₀.2 (min_le_right _ _)⟩
+  set κ := ((y - w₀) * (starRingEnd ℂ) (e β)).re with hκ
+  have hκ0 : 0 < κ := hneg
+  set ε := min (1 - dist y w₁) (κ / 2) with hε
+  have hε0 : 0 < ε := lt_min (by linarith) (by linarith)
+  obtain ⟨z, hz, hzy, hzd, hzu⟩ := hβ ε hε0
+  have hh : z - y ≠ 0 := sub_ne_zero.mpr hzy
+  have hhn : ‖z - y‖ < ε := by rwa [← dist_eq_norm]
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz (isPreconnected_germ p φ₀ s δ') hS with hlt | hgt
+  · have hz0 : dist z w₀ ≤ 1 := by
+      by_contra hgt'
+      push Not at hgt'
+      set η := dist z w₀ - 1 with hη
+      have hη0 : 0 < η := by rw [hη]; linarith
+      set t := min (η / 2) (δ' / 2) with ht
+      have ht0 : 0 < t := lt_min (by linarith) (by linarith)
+      have htδ : t ∈ Ioo 0 δ' := ⟨ht0, lt_of_le_of_lt (min_le_right _ _) (by linarith)⟩
+      have h1 := hlt _ ⟨t, htδ, rfl⟩
+      have h2 := dist_triangle z (ringPt p (φ₀ + s.sign * t)) w₀
+      have h3 := dist_ringPt_germ_le p φ₀ s ht0.le
+      rw [dist_comm (ringPt p (φ₀ + s.sign * t)) w₀] at h2
+      have : t ≤ η / 2 := min_le_left _ _
+      linarith
+    have hd : ‖y - w₀‖ = 1 := hy
+    have hexp := cone_expand (d := y - w₀) (h := z - y) hd hh hzu
+    have hsum : y - w₀ + (z - y) = z - w₀ := by ring
+    rw [hsum] at hexp
+    obtain ⟨hA, hB⟩ := hexp
+    have hz1 : ‖z - w₀‖ ^ 2 ≤ 1 := by
+      rw [← dist_eq_norm]
+      have := dist_nonneg (x := z) (y := w₀)
+      nlinarith
+    have hpos : 0 < ‖z - y‖ := norm_pos_iff.mpr hh
+    have h0 : 2 * ((y - w₀) * (starRingEnd ℂ) ((z - y) / (‖z - y‖ : ℂ))).re + ‖z - y‖ ≤ 0 := by
+      by_contra hn; push Not at hn
+      have := mul_pos hpos hn
+      linarith
+    have hε' : ε ≤ κ / 2 := min_le_right _ _
+    have hB' := (abs_le.mp hB).1
+    linarith
+  · exfalso
+    have h1 := hgt w₁ ⟨δ' / 2, ht₀, rfl⟩
+    have h2 := dist_triangle z y w₁
+    have : ε ≤ 1 - dist y w₁ := min_le_left _ _
+    linarith
+
+/-- `e π = −1`. -/
+theorem e_pi : e π = -1 := by
+  rw [e_eq]; simp
+
+/-- `Re(e a · conj(e b)) = cos(a − b)`. -/
+theorem re_e_mul_conj_e (a b : ℝ) : (e a * (starRingEnd ℂ) (e b)).re = Real.cos (a - b) := by
+  rw [e_eq, e_eq, Real.cos_sub]
+  simp [Complex.mul_re, -Complex.ofReal_cos, -Complex.ofReal_sin]
+
+/-- The chord from `r(ψ − π/3)` to `r(ψ)` is `e(ψ + π/3)`. -/
+theorem ringPt_sub_ringPt_minus_third (p : ℂ) (ψ : ℝ) :
+    ringPt p ψ - ringPt p (ψ - π / 3) = e (ψ + π / 3) := by
+  rw [ringPt_sub_ringPt p (ψ - π / 3) ψ]
+  have h1 : (ψ - (ψ - π / 3)) / 2 = π / 6 := by ring
+  have h2 : (ψ - π / 3 + ψ) / 2 + π / 2 = ψ + π / 3 := by ring
+  rw [h1, h2, Real.sin_pi_div_six]
+  push_cast; ring
+
+/-- The chord from `r(ψ + π/3)` to `r(ψ)` is `e(ψ − π/3)`. -/
+theorem ringPt_sub_ringPt_plus_third (p : ℂ) (ψ : ℝ) :
+    ringPt p ψ - ringPt p (ψ + π / 3) = e (ψ - π / 3) := by
+  have h := ringPt_sub_ringPt_minus_third p (ψ + π / 3)
+  rw [add_sub_cancel_right] at h
+  have h2 : e (ψ + π / 3 + π / 3) = - e (ψ - π / 3) := by
+    have : ψ + π / 3 + π / 3 = (ψ - π / 3) + π := by ring
+    rw [this, e_add, e_pi]; ring
+  rw [h2] at h
+  linear_combination -h
+
 /-! ## FS116-V4-TWIST -/
 
 /-- **FS116-V4-TWIST**, first clause (class form; the covering hypothesis is idle): no colour class has in its closure both
 a germ `g` of `ω(p)` and its rotation `σg` by `60°` about `p` (σ⁻¹`g` is the same statement at `θ − π/3`). -/
 theorem not_germIn_closure_rotate (hF : F.Valid) (p : ℂ) (θ : ℝ) (s : Side) (c : Fin k) :
     ¬ (GermIn p θ s (closure (F.region c)) ∧ GermIn p (θ + π / 3) s (closure (F.region c))) := by
-  sorry
+  rintro ⟨⟨δ₁, hδ₁, h₁⟩, ⟨δ₂, hδ₂, h₂⟩⟩
+  set δ := min (min δ₁ δ₂) 1 with hδ
+  have hδ0 : 0 < δ := lt_min (lt_min hδ₁ hδ₂) one_pos
+  have hδ1 : δ ≤ 1 := min_le_right _ _
+  have hg₁ : germ p θ s δ ⊆ closure (F.region c) := (germ_mono ((min_le_left _ _).trans (min_le_left _ _))).trans h₁
+  have hg₂ : germ p (θ + π / 3) s δ ⊆ closure (F.region c) :=
+    (germ_mono ((min_le_left _ _).trans (min_le_right _ _))).trans h₂
+  -- the pivot point and two points of the rotated germ on either side of its distance-one point
+  have key : ∀ t₀ t₁ t₂ : ℝ, t₀ ∈ Ioo 0 δ → t₁ ∈ Ioo 0 δ → t₂ ∈ Ioo 0 δ → s.sign * (t₁ - t₀) < 0 →
+      0 < s.sign * (t₂ - t₀) → False := by
+    intro t₀ t₁ t₂ h0 h1 h2 hneg hpos
+    have hs1 : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+    have hb : ∀ t ∈ Ioo 0 δ, |s.sign * (t - t₀)| ≤ 1 := by
+      intro t ht
+      rw [abs_mul, hs1, one_mul, abs_le]
+      constructor <;> linarith [ht.1, ht.2, h0.1, h0.2]
+    have hring : ∀ t, θ + π / 3 + s.sign * t = (θ + s.sign * t₀) + π / 3 + s.sign * (t - t₀) := by
+      intro t; ring
+    refine hF.false_of_crossing (a := ringPt p (θ + s.sign * t₀)) (hg₁ ⟨t₀, h0, rfl⟩)
+      (isPreconnected_germ p (θ + π / 3) s δ) hg₂ (u := ringPt p ((θ + π / 3) + s.sign * t₁))
+      (v := ringPt p ((θ + π / 3) + s.sign * t₂)) ⟨t₁, h1, rfl⟩ ⟨t₂, h2, rfl⟩ ?_ ?_
+    · have := (dist_ringPt_shift_cmp p (θ + s.sign * t₀) _ (hb t₁ h1)).1 hneg
+      rwa [← hring] at this
+    · have := (dist_ringPt_shift_cmp p (θ + s.sign * t₀) _ (hb t₂ h2)).2 hpos
+      rwa [← hring] at this
+  have m1 : δ / 2 ∈ Ioo 0 δ := ⟨by linarith, by linarith⟩
+  have m2 : δ / 4 ∈ Ioo 0 δ := ⟨by linarith, by linarith⟩
+  have m3 : 3 * δ / 4 ∈ Ioo 0 δ := ⟨by linarith, by linarith⟩
+  cases s
+  · exact key (δ / 2) (3 * δ / 4) (δ / 4) m1 m3 m2 (by simp [Side.sign]; linarith) (by simp [Side.sign]; linarith)
+  · exact key (δ / 2) (δ / 4) (3 * δ / 4) m1 m2 m3 (by simp [Side.sign]; linarith) (by simp [Side.sign]; linarith)
 
 /-- **FS116-V4-TWIST**, second clause ("when `p` is a vertex" is idle): a point of `ω(p)` inside a tile of colour `c` has `c`
 absent at `p`. -/
@@ -101,25 +372,83 @@ approaches `y = r(ψ)` along no direction `β` with `β − ψ ∈ (150°, 330°
 theorem germR_vMinus (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
     (h : GermIn p (ψ - π / 3) .cw (closure (F.region c))) :
     ∀ β ∈ Ioo (ψ + 5 * π / 6) (ψ + 11 * π / 6), β ∉ coneAt (F.region c) (ringPt p ψ) := by
-  sorry
+  intro β hβ hcone
+  have hd := ringPt_sub_ringPt_minus_third p ψ
+  have hy : ‖ringPt p ψ - ringPt p (ψ - π / 3)‖ = 1 := by rw [hd, norm_e]
+  have hfar : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, 1 < dist (ringPt p ψ) (ringPt p (ψ - π / 3 + Side.sign .cw * t)) := by
+    refine ⟨1, one_pos, fun t ht => ?_⟩
+    have := (dist_ringPt_shift_cmp p (ψ - π / 3 + Side.sign .cw * t) t
+      (by rw [abs_of_pos ht.1]; exact ht.2.le)).2 ht.1
+    rw [dist_comm]
+    convert this using 3
+    simp [Side.sign]; ring
+  have := hF.cone_re_nonneg_of_germ h hy hfar β hcone
+  rw [hd, re_e_mul_conj_e] at this
+  have hcos : Real.cos (ψ + π / 3 - β) < 0 := by
+    rw [← Real.cos_neg, neg_sub]
+    exact Real.cos_neg_of_pi_div_two_lt_of_lt (by linarith [hβ.1]) (by linarith [hβ.2])
+  linarith
 
 /-- **FS116-N1-GERM-R**, `v⁺`: the germ just counter-clockwise of `r(ψ − 60°)`; the interval `(−30°, 150°)`. -/
 theorem germR_vPlus (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
     (h : GermIn p (ψ - π / 3) .ccw (closure (F.region c))) :
     ∀ β ∈ Ioo (ψ - π / 6) (ψ + 5 * π / 6), β ∉ coneAt (F.region c) (ringPt p ψ) := by
-  sorry
+  intro β hβ hcone
+  have hd := ringPt_sub_ringPt_minus_third p ψ
+  have hy : ‖ringPt p ψ - ringPt p (ψ - π / 3)‖ = 1 := by rw [hd, norm_e]
+  have hnear : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, dist (ringPt p ψ) (ringPt p (ψ - π / 3 + Side.sign .ccw * t)) < 1 := by
+    refine ⟨1, one_pos, fun t ht => ?_⟩
+    have := (dist_ringPt_shift_cmp p (ψ - π / 3 + Side.sign .ccw * t) (-t)
+      (by rw [abs_neg, abs_of_pos ht.1]; exact ht.2.le)).1 (by linarith [ht.1])
+    rw [dist_comm]
+    convert this using 3
+    simp [Side.sign]; ring
+  have := hF.cone_re_nonpos_of_germ h hy hnear β hcone
+  rw [hd, re_e_mul_conj_e] at this
+  have hcos : 0 < Real.cos (ψ + π / 3 - β) := by
+    rw [← Real.cos_neg, neg_sub]
+    exact Real.cos_pos_of_mem_Ioo ⟨by linarith [hβ.1, Real.pi_pos], by linarith [hβ.2, Real.pi_pos]⟩
+  linarith
 
 /-- **FS116-N1-GERM-R**, `u⁻`: the germ just clockwise of `r(ψ + 60°)`; the interval `(−150°, 30°)`. -/
 theorem germR_uMinus (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
     (h : GermIn p (ψ + π / 3) .cw (closure (F.region c))) :
     ∀ β ∈ Ioo (ψ - 5 * π / 6) (ψ + π / 6), β ∉ coneAt (F.region c) (ringPt p ψ) := by
-  sorry
+  intro β hβ hcone
+  have hd := ringPt_sub_ringPt_plus_third p ψ
+  have hy : ‖ringPt p ψ - ringPt p (ψ + π / 3)‖ = 1 := by rw [hd, norm_e]
+  have hnear : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, dist (ringPt p ψ) (ringPt p (ψ + π / 3 + Side.sign .cw * t)) < 1 := by
+    refine ⟨1, one_pos, fun t ht => ?_⟩
+    have := (dist_ringPt_shift_cmp p ψ (-t)
+      (by rw [abs_neg, abs_of_pos ht.1]; exact ht.2.le)).1 (by linarith [ht.1])
+    convert this using 3
+    simp [Side.sign]
+  have := hF.cone_re_nonpos_of_germ h hy hnear β hcone
+  rw [hd, re_e_mul_conj_e] at this
+  have hcos : 0 < Real.cos (ψ - π / 3 - β) := by
+    rw [← Real.cos_neg, neg_sub]
+    exact Real.cos_pos_of_mem_Ioo ⟨by linarith [hβ.1, Real.pi_pos], by linarith [hβ.2, Real.pi_pos]⟩
+  linarith
 
 /-- **FS116-N1-GERM-R**, `u⁺`: the germ just counter-clockwise of `r(ψ + 60°)`; the interval `(30°, 210°)`. -/
 theorem germR_uPlus (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
     (h : GermIn p (ψ + π / 3) .ccw (closure (F.region c))) :
     ∀ β ∈ Ioo (ψ + π / 6) (ψ + 7 * π / 6), β ∉ coneAt (F.region c) (ringPt p ψ) := by
-  sorry
+  intro β hβ hcone
+  have hd := ringPt_sub_ringPt_plus_third p ψ
+  have hy : ‖ringPt p ψ - ringPt p (ψ + π / 3)‖ = 1 := by rw [hd, norm_e]
+  have hfar : ∃ δ₀ > 0, ∀ t ∈ Ioo 0 δ₀, 1 < dist (ringPt p ψ) (ringPt p (ψ + π / 3 + Side.sign .ccw * t)) := by
+    refine ⟨1, one_pos, fun t ht => ?_⟩
+    have := (dist_ringPt_shift_cmp p ψ t
+      (by rw [abs_of_pos ht.1]; exact ht.2.le)).2 ht.1
+    convert this using 3
+    simp [Side.sign]
+  have := hF.cone_re_nonneg_of_germ h hy hfar β hcone
+  rw [hd, re_e_mul_conj_e] at this
+  have hcos : Real.cos (ψ - π / 3 - β) < 0 := by
+    rw [← Real.cos_neg, neg_sub]
+    exact Real.cos_neg_of_pi_div_two_lt_of_lt (by linarith [hβ.1]) (by linarith [hβ.2])
+  linarith
 
 /-! ## FS116-N1-GERM-S (at every `k` with at most two colours absent at `p`; the row is `k = 6`) -/
 
