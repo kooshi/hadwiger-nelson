@@ -497,28 +497,6 @@ theorem germS_absent (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ 
   rw [Set.ncard_pair hy.2.1]
   omega
 
-/-- **FS116-N1-GERM-S** (i): if neither `v⁻` nor `u⁺` lies on a (Q) arc, every direction at `y` in the open `60°` cone about
-the direction to `p` lies in the cone of a colour `c` of `p` every tile of `p` of which colour lies in `B̄(y, 1)`. -/
-theorem germS_inward (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
-    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
-    (hv : ¬ F.GermOnQ p (ψ - π / 3) .cw) (hu : ¬ F.GermOnQ p (ψ + π / 3) .ccw) :
-    ∀ β ∈ Ioo (ψ + 5 * π / 6) (ψ + 7 * π / 6), ∃ c ∈ F.coloursAt p,
-      β ∈ coneAt (F.region c) (ringPt p ψ) ∧
-        ∀ A, F.TileOf c A → p ∈ closure A → A ⊆ closedBall (ringPt p ψ) 1 := by
-  sorry
-
-/-- **FS116-N1-GERM-S** (ii): if neither `u⁻` nor `v⁺` lies on a (Q) arc, every direction at `y` in the open `60°` cone about
-the direction away from `p` lies in the cone of a tile, not a tile of `p`, of a colour `c` of `p` every tile of `p` of which
-colour misses `B(y, 1)`. "A tile, not a tile of `p`" is the part of the class outside `B̄(p, 1)`, which no tile of `p` meets
-(`IsTile.subset_ball`); in this window of directions the two readings have the same cone. -/
-theorem germS_outward (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
-    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
-    (hu : ¬ F.GermOnQ p (ψ + π / 3) .cw) (hv : ¬ F.GermOnQ p (ψ - π / 3) .ccw) :
-    ∀ β ∈ Ioo (ψ - π / 6) (ψ + π / 6), ∃ c ∈ F.coloursAt p,
-      β ∈ coneAt (F.region c \ closedBall p 1) (ringPt p ψ) ∧
-        ∀ A, F.TileOf c A → p ∈ closure A → Disjoint A (ball (ringPt p ψ) 1) := by
-  sorry
-
 /-- **FS116-N1-GERM-S** (iii): if none of the four germs at `ψ ± 60°` lies on a (Q) arc, `y` is a vertex of at least four
 colours. -/
 theorem germS_four (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
@@ -1669,6 +1647,221 @@ theorem re_mul_conj_e_bound {h : ℂ} (hh : h ≠ 0) {β θ ε : ℝ} (hu : ‖h
       ≤ ‖(h / (‖h‖ : ℂ) - e β) * (starRingEnd ℂ) (e θ)‖ := Complex.abs_re_le_norm _
     _ = ‖h / (‖h‖ : ℂ) - e β‖ := by rw [norm_mul, Complex.norm_conj, norm_e, mul_one]
     _ ≤ ε := hu.le
+
+/-- **At a change point, the four germs at `ψ ± 60°` carry the two absent colours, by the rotation and the dichotomy**:
+`v⁻` and `u⁻` carry `X`, `v⁺` and `u⁺` carry `X'` (given none lies on a (Q) arc). -/
+theorem changePoint_germs (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
+    (hcompl : (F.coloursAt p)ᶜ = {X, X'}) :
+    (¬ F.GermOnQ p (ψ - π / 3) .cw → GermIn p (ψ - π / 3) .cw (closure (F.region X))) ∧
+    (¬ F.GermOnQ p (ψ + π / 3) .ccw → GermIn p (ψ + π / 3) .ccw (closure (F.region X'))) := by
+  have hXX' := hy.2.1
+  have hX : GermIn p ψ .ccw (closure (F.region X)) := hy.2.2.1.mono subset_closure
+  have hX' : GermIn p ψ .cw (closure (F.region X')) := hy.2.2.2.mono subset_closure
+  constructor
+  · intro hv
+    have hno : ¬ GermIn p (ψ - π / 3) .cw (closure (F.region X')) := by
+      intro hg
+      exact F.not_germIn_closure_rotate hF p (ψ - π / 3) .cw X' ⟨hg, by rwa [show ψ - π / 3 + π / 3 = ψ by ring]⟩
+    have hc' : (F.coloursAt p)ᶜ = {X', X} := by rw [hcompl, pair_comm]
+    exact (germ_absent_class hF hp h4 (Ne.symm hXX') hc' .cw hv hno).1
+  · intro hu
+    have hno : ¬ GermIn p (ψ + π / 3) .ccw (closure (F.region X)) := fun hg =>
+      F.not_germIn_closure_rotate hF p ψ .ccw X ⟨hX, hg⟩
+    exact (germ_absent_class hF hp h4 hXX' hcompl .ccw hu hno).1
+
+
+
+/-- **Tiles of `p` of a colour that approaches `y = r(ψ)` from the side of `p` lie in `B̄(y, 1)`**: if the class of `c`
+approaches `y` along `β` with `cos(β − ψ) < 0`, every tile of colour `c` with `p` in its closure lies in `B̄(y, 1)`. -/
+theorem tile_subset_closedBall_of_cone (hF : F.Valid) {p : ℂ} {ψ β : ℝ} {c : Fin k}
+    (hcos : Real.cos (β - ψ) < 0) (hβ : β ∈ coneAt (F.region c) (ringPt p ψ)) {A : Set ℂ} (hA : F.TileOf c A)
+    (hpA : p ∈ closure A) : A ⊆ closedBall (ringPt p ψ) 1 := by
+  set y := ringPt p ψ with hy
+  set c₀ : ℝ := -Real.cos (β - ψ) with hc₀
+  have hc₀0 : 0 < c₀ := by rw [hc₀]; linarith
+  intro a ha
+  -- for every `ε`, a point `z` of the class within `ε` of `y`, strictly inside `B(p, 1)`, with every point of `A` within `1` of it
+  have key : ∀ ε > 0, dist y a < 1 + ε := by
+    intro ε₀ hε₀
+    set ε := min (min ε₀ (c₀ / 2)) 1 with hε
+    have hε0 : 0 < ε := lt_min (lt_min hε₀ (half_pos hc₀0)) one_pos
+    have hεc : ε ≤ c₀ / 2 := (min_le_left _ _).trans (min_le_right _ _)
+    have hεε : ε ≤ ε₀ := (min_le_left _ _).trans (min_le_left _ _)
+    obtain ⟨z, hzR, hzy, hzd, hzu⟩ := hβ ε hε0
+    have hzn : 0 < ‖z - y‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzy)
+    have hbound := re_mul_conj_e_bound (θ := ψ) (sub_ne_zero.mpr hzy) hzu
+    have hr : ‖z - y‖ < ε := by rwa [dist_eq_norm] at hzd
+    have hzp : ‖z - p‖ ^ 2 < 1 := by
+      have h1 : z - p = (z - y) + e ψ := by rw [hy]; simp only [ringPt]; ring
+      have h2 : ‖z - p‖ ^ 2 = ‖z - y‖ ^ 2 + 2 * ((z - y) * (starRingEnd ℂ) (e ψ)).re + 1 := by
+        rw [h1, sq_norm_eq, sq_norm_eq]
+        simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.conj_re, Complex.conj_im, re_e,
+          im_e]
+        have := Real.sin_sq_add_cos_sq ψ
+        nlinarith
+      have h3 := (abs_le.mp hbound).2
+      nlinarith [mul_pos hzn hc₀0]
+    have hzp1 : ‖z - p‖ < 1 := by
+      refine lt_of_pow_lt_pow_left₀ 2 zero_le_one (by simpa using hzp)
+    -- a point of `A` near `p`
+    obtain ⟨a₀, ha₀, ha₀d⟩ := Metric.mem_closure_iff.mp hpA (1 - ‖z - p‖) (by linarith)
+    have hdz : dist z a₀ < 1 := by
+      have h7 := dist_triangle z p a₀
+      have e1 : dist z p = ‖z - p‖ := dist_eq_norm _ _
+      linarith
+    have hAcl : A ⊆ closure (F.region c) := hA.subset_region.trans subset_closure
+    have := hF.dist_lt_or_gt_of_isPreconnected hzR hA.1.isPreconnected hAcl
+    have hall : ∀ s ∈ A, dist z s < 1 := by
+      rcases this with h | h
+      · exact h
+      · exact absurd (h a₀ ha₀) (not_lt.mpr hdz.le)
+    have h5 := hall a ha
+    have h6 := dist_triangle y z a
+    rw [dist_comm y z] at h6
+    linarith
+  rw [mem_closedBall, dist_comm]
+  refine le_of_forall_pos_le_add fun ε hε => ?_
+  have := key ε hε
+  linarith
+
+
+/-- **FS116-N1-GERM-S** (i): if neither `v⁻` nor `u⁺` lies on a (Q) arc, every direction at `y` in the open `60°` cone about
+the direction to `p` lies in the cone of a colour `c` of `p` every tile of `p` of which colour lies in `B̄(y, 1)`. -/
+theorem germS_inward (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
+    (hv : ¬ F.GermOnQ p (ψ - π / 3) .cw) (hu : ¬ F.GermOnQ p (ψ + π / 3) .ccw) :
+    ∀ β ∈ Ioo (ψ + 5 * π / 6) (ψ + 7 * π / 6), ∃ c ∈ F.coloursAt p,
+      β ∈ coneAt (F.region c) (ringPt p ψ) ∧
+        ∀ A, F.TileOf c A → p ∈ closure A → A ⊆ closedBall (ringPt p ψ) 1 := by
+  have hπ := Real.pi_pos
+  have hdom : ringPt p ψ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  obtain ⟨-, hcompl⟩ := germS_absent hF hp h4 hk hy
+  obtain ⟨hvX, huX'⟩ := changePoint_germs hF hp h4 hy hcompl
+  have hX := hvX hv
+  have hX' := huX' hu
+  intro β hβ
+  obtain ⟨c, hc⟩ := F.exists_mem_coneAt_region hdom β
+  have hcp : c ∈ F.coloursAt p := by
+    by_contra hnc
+    have hmem : c ∈ (F.coloursAt p)ᶜ := hnc
+    rw [hcompl] at hmem
+    rcases hmem with rfl | rfl
+    · exact germR_vMinus hF hX β ⟨hβ.1, by linarith [hβ.2]⟩ hc
+    · exact germR_uPlus hF hX' β ⟨by linarith [hβ.1], hβ.2⟩ hc
+  have hcos : Real.cos (β - ψ) < 0 :=
+    Real.cos_neg_of_pi_div_two_lt_of_lt (by linarith [hβ.1]) (by linarith [hβ.2])
+  exact ⟨c, hcp, hc, fun A hA hpA => tile_subset_closedBall_of_cone hF hcos hc hA hpA⟩
+
+
+/-- **Away from `p`: the cone of a class along `β` with `cos(β − ψ) > 0` is the cone of its part outside `B̄(p, 1)`, and the
+tiles of `p` of that colour miss `B(y, 1)`.** -/
+theorem outward_of_cone (hF : F.Valid) {p : ℂ} {ψ β : ℝ} {c : Fin k}
+    (hcos : 0 < Real.cos (β - ψ)) (hβ : β ∈ coneAt (F.region c) (ringPt p ψ)) :
+    β ∈ coneAt (F.region c \ closedBall p 1) (ringPt p ψ) ∧
+      ∀ A, F.TileOf c A → p ∈ closure A → Disjoint A (ball (ringPt p ψ) 1) := by
+  set y := ringPt p ψ with hy
+  set c₁ : ℝ := Real.cos (β - ψ) with hc₁
+  -- a point of the class near `y` along `β` lies strictly outside `B̄(p, 1)`
+  have hout : ∀ ε > 0, ∃ z ∈ F.region c, z ≠ y ∧ dist z y < ε ∧ ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ < ε ∧ 1 < ‖z - p‖ := by
+    intro ε₀ hε₀
+    set ε := min ε₀ (c₁ / 2) with hε
+    have hε0 : 0 < ε := lt_min hε₀ (half_pos hcos)
+    have hεc : ε ≤ c₁ / 2 := min_le_right _ _
+    have hεε : ε ≤ ε₀ := min_le_left _ _
+    obtain ⟨z, hzR, hzy, hzd, hzu⟩ := hβ ε hε0
+    have hzn : 0 < ‖z - y‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzy)
+    have hbound := re_mul_conj_e_bound (θ := ψ) (sub_ne_zero.mpr hzy) hzu
+    have hr : ‖z - y‖ < ε := by rwa [dist_eq_norm] at hzd
+    have h1 : z - p = (z - y) + e ψ := by rw [hy]; simp only [ringPt]; ring
+    have h2 : ‖z - p‖ ^ 2 = ‖z - y‖ ^ 2 + 2 * ((z - y) * (starRingEnd ℂ) (e ψ)).re + 1 := by
+      rw [h1, sq_norm_eq, sq_norm_eq]
+      simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.conj_re, Complex.conj_im, re_e, im_e]
+      have := Real.sin_sq_add_cos_sq ψ
+      nlinarith
+    have h3 := (abs_le.mp hbound).1
+    have hzp : 1 < ‖z - p‖ ^ 2 := by nlinarith [mul_pos hzn hcos, mul_pos hzn hzn]
+    refine ⟨z, hzR, hzy, lt_of_lt_of_le hzd hεε, lt_of_lt_of_le hzu hεε, ?_⟩
+    by_contra hle
+    push Not at hle
+    nlinarith [norm_nonneg (z - p)]
+  refine ⟨fun ε hε => ?_, fun A hA hpA => ?_⟩
+  · obtain ⟨z, hzR, hzy, hzd, hzu, hzp⟩ := hout ε hε
+    exact ⟨z, ⟨hzR, by rw [mem_closedBall, dist_eq_norm]; linarith⟩, hzy, hzd, hzu⟩
+  · rw [Set.disjoint_left]
+    intro a ha hay
+    rw [mem_ball] at hay
+    obtain ⟨z, hzR, hzy, hzd, -, hzp⟩ := hout (1 - dist a y) (by linarith)
+    -- `p` is in the closure of `A`: a point of `A` near `p` is more than `1` from `z`
+    obtain ⟨a₀, ha₀, ha₀d⟩ := Metric.mem_closure_iff.mp hpA (‖z - p‖ - 1) (by linarith)
+    have hdz : 1 < dist z a₀ := by
+      have h7 := dist_triangle z p a₀
+      have e1 : dist z p = ‖z - p‖ := dist_eq_norm _ _
+      have h8 := dist_triangle p z a₀
+      have h9 := dist_triangle z a₀ p
+      have e2 : dist z p = dist p z := dist_comm _ _
+      rw [dist_comm a₀ p] at h9
+      linarith
+    have hAcl : A ⊆ closure (F.region c) := hA.subset_region.trans subset_closure
+    have hall : ∀ s ∈ A, 1 < dist z s := by
+      rcases hF.dist_lt_or_gt_of_isPreconnected hzR hA.1.isPreconnected hAcl with h | h
+      · exact absurd (h a₀ ha₀) (not_lt.mpr hdz.le)
+      · exact h
+    have h5 := hall a ha
+    have h6 := dist_triangle z y a
+    rw [dist_comm y a] at h6
+    linarith
+
+
+/-- The other two of the four germs at a change point: `u⁻` carries `X` and `v⁺` carries `X'`. -/
+theorem changePoint_germs_out (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X') (hcompl : (F.coloursAt p)ᶜ = {X, X'}) :
+    (¬ F.GermOnQ p (ψ + π / 3) .cw → GermIn p (ψ + π / 3) .cw (closure (F.region X))) ∧
+    (¬ F.GermOnQ p (ψ - π / 3) .ccw → GermIn p (ψ - π / 3) .ccw (closure (F.region X'))) := by
+  have hXX' := hy.2.1
+  have hX : GermIn p ψ .ccw (closure (F.region X)) := hy.2.2.1.mono subset_closure
+  have hX' : GermIn p ψ .cw (closure (F.region X')) := hy.2.2.2.mono subset_closure
+  constructor
+  · intro hu
+    have hno : ¬ GermIn p (ψ + π / 3) .cw (closure (F.region X')) := fun hg =>
+      F.not_germIn_closure_rotate hF p ψ .cw X' ⟨hX', hg⟩
+    have hc' : (F.coloursAt p)ᶜ = {X', X} := by rw [hcompl, pair_comm]
+    exact (germ_absent_class hF hp h4 (Ne.symm hXX') hc' .cw hu hno).1
+  · intro hv
+    have hno : ¬ GermIn p (ψ - π / 3) .ccw (closure (F.region X)) := by
+      intro hg
+      exact F.not_germIn_closure_rotate hF p (ψ - π / 3) .ccw X ⟨hg, by rwa [show ψ - π / 3 + π / 3 = ψ by ring]⟩
+    exact (germ_absent_class hF hp h4 hXX' hcompl .ccw hv hno).1
+
+/-- **FS116-N1-GERM-S** (ii): if neither `u⁻` nor `v⁺` lies on a (Q) arc, every direction at `y` in the open `60°` cone about
+the direction away from `p` lies in the cone of a tile, not a tile of `p`, of a colour `c` of `p` every tile of `p` of which
+colour misses `B(y, 1)`. "A tile, not a tile of `p`" is the part of the class outside `B̄(p, 1)`, which no tile of `p` meets
+(`IsTile.subset_ball`); in this window of directions the two readings have the same cone. -/
+theorem germS_outward (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
+    (hu : ¬ F.GermOnQ p (ψ + π / 3) .cw) (hv : ¬ F.GermOnQ p (ψ - π / 3) .ccw) :
+    ∀ β ∈ Ioo (ψ - π / 6) (ψ + π / 6), ∃ c ∈ F.coloursAt p,
+      β ∈ coneAt (F.region c \ closedBall p 1) (ringPt p ψ) ∧
+        ∀ A, F.TileOf c A → p ∈ closure A → Disjoint A (ball (ringPt p ψ) 1) := by
+  have hπ := Real.pi_pos
+  have hdom : ringPt p ψ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  obtain ⟨-, hcompl⟩ := germS_absent hF hp h4 hk hy
+  obtain ⟨huX, hvX'⟩ := changePoint_germs_out hF hp h4 hy hcompl
+  have hX := huX hu
+  have hX' := hvX' hv
+  intro β hβ
+  obtain ⟨c, hc⟩ := F.exists_mem_coneAt_region hdom β
+  have hcp : c ∈ F.coloursAt p := by
+    by_contra hnc
+    have hmem : c ∈ (F.coloursAt p)ᶜ := hnc
+    rw [hcompl] at hmem
+    rcases hmem with rfl | rfl
+    · exact germR_uMinus hF hX β ⟨by linarith [hβ.1], hβ.2⟩ hc
+    · exact germR_vPlus hF hX' β ⟨hβ.1, by linarith [hβ.2]⟩ hc
+  have hcos : 0 < Real.cos (β - ψ) :=
+    Real.cos_pos_of_mem_Ioo ⟨by linarith [hβ.1], by linarith [hβ.2]⟩
+  obtain ⟨h1, h2⟩ := outward_of_cone hF hcos hc
+  exact ⟨c, hcp, h1, h2⟩
 
 /-- **The radial lemma, inner side** (child of FS116-V5-U1): if the radial segment `z + t e θ`, `t ∈ (1 − η₀, 1)`, lies in
 the closure of the class of `c`, the class approaches `z` only along directions `β` with `cos(β − θ) ≥ 0`. -/
