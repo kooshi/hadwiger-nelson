@@ -2093,3 +2093,29 @@ reason by the close.*
      Stage 36 route, `n3_end` after checking the `hQR` question first (message me if NB3-END item 1 needs the dichotomy, since then a hypothesis is missing).
      Alternative weighed: a parallel MERGE implementer now (item 279) — not yet possible, since its branch must be cut after IM3's `Surgery` split; it takes the
      next slot that frees after that commit. Confidence: medium-high. In flight: 1 (I5c) + 1 (KP) + 1 (IM3) + 1 (I4m) = 4.
+282. **FS131-KP done** (harness ≈ 430k; record `fs131-w5p`'s `plans/FS131-planar-kernel-plan.md`; report `data/fs131/reports/FS131-KP.md`; commits `397a89de` …
+     `d0868ff5`). **`IsHoleOf` repaired** as ruled (item 277); `exists_holed_valid_fragment` re-proved, statement unchanged, the inhabitant; adversaries
+     `not_isHoleOf_chain` (I5b's chain) and `isHoleOf_cluster` (item 242's cluster) stated with `sorry`; "no hole ⟺ `mapGraph − T` connected", the pinch proof
+     reading local finiteness at one point only (item 277's caveat does not arise). **The route**: unicoherence of ℂ is provable here from Mathlib's lifting
+     theorem for coverings over a simply connected space (`IsCoveringMap.existsUnique_continuousMap_lifts`, `Circle.isCoveringMap_exp`, `SimplyConnectedSpace ℂ`,
+     confirmed with `#check`), so **nothing is imported**; E4's home theorem (the frontier of a complementary component of a continuum is connected) follows and
+     is planned; the two `cvb_*` pinch/hole leaves need no Jordan-type theorem; `exists_eleventh` and `exists_unenclosed_or_bad` need unicoherence and a last-exit
+     lemma; `retArcs_nested` a crossing lemma (hard); `exists_endpoint` and `cvb_thom_reduced`'s rings a handshake on a finite boundary graph; `cvb_thom_reduced`
+     splits into graph theory over `Thomassen.PlanarLike` plus `filledGraph_planarLike`. **The skeleton**: two new modules, `Plane/PlaneTopology` (8 `sorry`) and
+     `Plane/ValidMap/MapTopology` (15); four of the seven leaves are now proofs over named children (`cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`,
+     `exists_eleventh`), three carry annotated `sorry` steps. **Price**: six to nine implementer sessions (plan § 4.2). **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261004T234604Z-3574873.log` ends "Build completed successfully (5395 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     `PlaneTopology` 8, `MapTopology` 15. **Correction, fixed by the obligation pass**: `exists_far_end` as first written was false when `r(θ)` itself carries three
+     colours; restated (a skeleton statement of this job). **Generalizations**: `exists_rim_vertex` needs no bad-point hypothesis; the frontier lemma holds for any
+     component of the complement of any closed preconnected set, no compactness. **Question**: `endpoint_of_far_end`'s exit case needs FS110-CD Lemma E/R and
+     FS110-CE R1–R4 — does a two-colour exit return within 60° of `r(θ)`, as `IsRetArc`'s bound requires? **Stub candidates**: F-RING, T-GRAPH and the crossing
+     lemma may each deserve a job once measured. **Draft for `LEAN.md` § Searching — Lean** (plan § 5.4): held until wave 5 lands, since it names a module not on
+     `main`. Slips (KP's): the as-given build did not run separately; the first skeleton build failed on untyped binders, fixed. Credit: KP, for finding that
+     the plane topology needs no import.
+283. **Ruling: KP's slot → the planar implementer FS131-IP1 on `fs131-w5p`; the parallel MERGE implementer takes the next slot.** Choice: IP1 works plan § 5.1's
+     order (the plane-topology foundation and unicoherence first, measured; then `MapTopology` § A and the two `cvb_*` pinch/hole leaves with the adversaries; then
+     §§ B–C), re-prices after the first two leaves, and reads FS110-CD Lemma E/R and FS110-CE R1–R4 before `endpoint_of_far_end` (messaging me if the 60° bound
+     fails, since then `IsRetArc`'s statement is in question). Alternative weighed: the parallel MERGE implementer now (item 279; IM3's split is committed at
+     `934bc81c`, so it is possible). Why: the planar chain (six to nine sessions) is the longest path to wave 5's landing and through it to waves 6–9, while a
+     parallel MERGE saves about two sessions on wave 4, whose landing waits on I4m's six leaves as well. Confidence: medium — what would change it: IP1's first
+     measurements putting the planar chain well under wave 4's remaining length. In flight: 1 (I5c) + 1 (IM3) + 1 (I4m) + 1 (IP1) = 4.
