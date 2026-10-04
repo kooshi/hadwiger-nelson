@@ -438,10 +438,11 @@ theorem step6 (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {d : F
 
 /-- **Steps 3 and 5 give the normal form** (FS131-E3's `NiceAt.normal`): at a point of three or more colours, a `NiceAt` picture has no horn (a horn
 sits between distinct colours and dies by `step5_lt`), so its colours are distinct (`NiceAt`'s second clause), and every angle is at least `π/3`
-(`step5_lt`, strict step 5 only). VACUITY DECLARED: its hypotheses — a valid map of the plane with at most five colours — are unsatisfiable by
-`aeMap6`, the refutation this lemma is a step of; it is stated for the chain's `aeMap6_merged`, never as a structure lemma, and its argument is
-exercised on `threeSectorDisc` (`threeSectorDisc_niceAt`, `threeSectorDisc_woodallNormal`). -/
-theorem NiceAt.normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} (h : F.NiceAt v)
+(`step5_lt`, strict step 5 only). **Private** (inventory item 167 (b)): its hypotheses — a valid map of the plane with at most five colours — are
+unsatisfiable by `aeMap6`, the refutation this lemma is a step of, and a public statement over that class must conclude `False` (W's § 3.1 rule); the
+vacuity scan does not track `ArcMap` binders, so a `VACUITY DECLARED` marker here would go unchecked. It is a step of `aeMap6_merged` only, never a
+structure lemma, and its argument is exercised on `threeSectorDisc` (`threeSectorDisc_niceAt`, `threeSectorDisc_woodallNormal`). -/
+private theorem NiceAt.normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} (h : F.NiceAt v)
     (h3 : 3 ≤ (F.coloursAt v).ncard) :
     ∃ n d c, F.SectorsAt v n d c ∧ Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc := by
   obtain ⟨n, d, c, hS, h2, h3'⟩ := h

@@ -2498,7 +2498,7 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.collarAt_closure_of_forall_shadow
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_opposite
 
-/-! ## FS-131 Woodall's chain (job FS131-W3) — the ∃-forms' inhabitants (two and three colours), the phantom adversary, NiceAt.normal (FS131-E3 § 4.1; sorry at four inhabitant leaves until the chain's implementer lands them) -/
+/-! ## FS-131 Woodall's chain (job FS131-W3) — the ∃-forms' inhabitants (two and three colours), the phantom adversary (FS131-E3 § 4.1; NiceAt.normal private, inventory item 167 (b); sorry at four inhabitant leaves until the chain's implementer lands them) -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.threeCol_locallyConstant
 #print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_valid
@@ -2512,7 +2512,6 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_forall_normal
 #print axioms HadwigerNelson.Plane.halfDisc_sectorsAt
 #print axioms HadwigerNelson.Plane.halfDisc_niceAt
-#print axioms HadwigerNelson.Plane.ArcMap.NiceAt.normal
 
 /-! ## FS-131 Woodall's merge (job FS131-W3) — step 3 localized: E3-W, recolouring, the merge at a wedge, locality, the local data, E3-NICE, E3-BALL (sorry until the chain's implementer lands them) -/
 

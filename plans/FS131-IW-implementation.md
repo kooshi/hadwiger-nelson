@@ -212,3 +212,28 @@ contradiction chain. That is the deriver's question, not mine.
 
 **Where I stop.** At about 430k by the harness's count, under the brief's line of about 500k. `exists_sectorsAt` (H, 600–800 lines) would not fit, so
 it is left with the route above. The gate and the landing still wait for waves 3–4 and FS131-LEB.
+
+## Stage 7 — SAVED (FS131-IWc): the readback; `NiceAt.normal` private
+
+*Brief `data/fs131/briefs/FS131-IWc-woodall-merge.md` (on `main`, with Keryx's amendment of 2026-10-04: a plane-map model of the normal forms once wave 4's
+`sevenBrickMap` is merged); the third implementer on this chain, de Bruijn on Opus 5.5; branch `fs131-ww` at `8488ad82`.*
+
+**The brief's two quotations** match their sources verbatim: "167. **FS131-W3 done, harness ≈ 442k** (report on its branch; `fs131-ww` at `8488ad82`,
+checked): E3's drafts in the chain, statements verbatim, each elaborating on the" is `plans/FS131-close-inventory.md` (main) line 1141 (`grep -nF`, one hit;
+the item read whole, with its rulings (a)–(d)); "- `Woodall/Merge`: new; 18 `sorry` leaves; `recolour` and four small lemmas proved;" is
+`plans/FS131-W-kernel-plan.md` § 15.3 (this branch, `grep -cF` → 1; § 15.3 read whole, and §§ 11–16). No mismatch.
+
+**The build as given** (`8488ad82`, before any edit): OK — all 1748 modules already up to date, nothing built, 7 modules with warnings (wave 4's five
+skeleton modules, `Woodall/Basic`, `Woodall/Merge`, each Woodall warning `declaration uses 'sorry'`), 2 s, exit 0 (`build/gate/build/20261004T152755Z-356556.log`;
+driver log `data/fs131/iwc/build0.log`). Sorry leaves: `Merge` 18, `Basic` 5 (T1–T5), `Steps`, `Collar`, `NoFourFive` 0.
+
+**What I may change**: children anywhere (in `Basic`, `Merge` and `Steps` children only), supporting lemmas in the foundation modules (statements of other
+waves unchanged), imports, `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`, `tools/fs131_iw_*.py`, `data/fs131/iw/`, `data/fs131/iwc/`, this record,
+my report; and, by ruling 167 (b), `NiceAt.normal`'s visibility. **What I may not**: any statement or definition of `Woodall/Basic` or `Woodall/Merge`, any
+chain theorem of `Woodall/Steps`, any new `axiom`, any `native_decide`; nothing with a `sorry` reaches `main`; the gate and the landing wait for wave 4.
+
+**Ruling 167 (b) applied**: `NiceAt.normal` is now `private theorem`, its docstring saying why (a public statement over valid five-coloured plane maps must
+conclude `False`; the vacuity scan does not track `ArcMap` binders, so a `VACUITY DECLARED` marker there would go unchecked). Its record is removed from
+`scripts/Axioms.lean` (a private name cannot be printed from another module; `aeMap6_merged`, its one reader, keeps its record) and its `ARCHITECTURE.md`
+mention re-worded. `tools/fs131_w3_decls.py --check`: 154 theorems, 154 records, 0 missing, 0 stale (its pattern reads `theorem` at line start, so a private
+theorem is not a theorem it counts). `Steps` elaborates (iteration, `data/fs131/iwc/run.sh`, never evidence).
