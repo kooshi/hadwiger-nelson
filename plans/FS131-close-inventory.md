@@ -1496,3 +1496,7 @@ reason by the close.*
 211. **Kooshi grants a fourth Opus slot for the rest of the backlog** (2026-10-04, at item 205's question): *"I'll accept a fourth for the rest of the backlog.
      We have a little headroom."* Staffing for FS-131 is now four Opus-agent slots (a Sonnet agent counts half). The fourth goes to the base's planner
      FS131-KB now (item 210); wave 5's implementer is next in the queue.
+212. **Brief FS131-KB, the base's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-KB-base.md`, gated PASS): confirm no by-statement use of
+     `[SokolovVoronov2025]` (FS110-CB, -CD, -CE, -CC, BASE-V), settle `NoInertNear`'s scope (item 199 (b)) and Lemma 3 with contact arcs (item 207), lay out
+     `row134BaseUA`'s proof as a skeleton, plan per leaf, obligation pass, handoff. Worktree `fs131-w5b` from `fs131-w5` at `764cc558` (`.lake/build` copied from
+     `fs131-w5`); merges into `fs131-w5` on Keryx's word. Launched in the fourth slot (item 211): 1 (I2l) + 1 (I4h) + 1 (IC1) + 1 (KB) = 4.
