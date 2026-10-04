@@ -1493,3 +1493,6 @@ reason by the close.*
      wave 5's implementer.
 210. **Item 205 updated**: `Contact` took K5b's slot (item 209), so the fourth slot, if Kooshi grants it, would run the base's planner FS131-KB (or wave 5's
      implementer) now instead. Default and recommendation unchanged.
+211. **Kooshi grants a fourth Opus slot for the rest of the backlog** (2026-10-04, at item 205's question): *"I'll accept a fourth for the rest of the backlog.
+     We have a little headroom."* Staffing for FS-131 is now four Opus-agent slots (a Sonnet agent counts half). The fourth goes to the base's planner
+     FS131-KB now (item 210); wave 5's implementer is next in the queue.
