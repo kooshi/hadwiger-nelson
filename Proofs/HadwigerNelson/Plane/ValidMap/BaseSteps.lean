@@ -959,10 +959,12 @@ theorem half_colour_or_bothKind (hF : F.Valid) {x y : ℂ} (hxy : dist x y = 1) 
 
 /-! ## FS112-N3-PAIRS -/
 
-/-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` and a unit pair `x ∈ ω(u₁)`,
-`y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (no transversality hypothesis; `u₁ = u₂` allowed). Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
+/-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` at distance below `3` and a unit pair
+`x ∈ ω(u₁)`, `y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (`u₁ = u₂` allowed). The hypothesis `h3 : dist u₁ u₂ < 3`
+(inventory item 258) excludes exactly the isolated unit pair — `u₁, x, y, u₂` collinear at spacing `1`, where N3-I's perturbation has no
+nearby pair to move to (FS131-I4k, item 257); beyond `3` there is no unit pair. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem pair_i (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
-    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
+    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (h3 : dist u₁ u₂ < 3) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
     (hax : F.pseudoColours u₁ x = {a}) (hay : F.pseudoColours u₂ y = {a}) : False := by
   sorry
 

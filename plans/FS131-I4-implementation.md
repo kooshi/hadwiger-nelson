@@ -1072,6 +1072,38 @@ children, all `[propext, Classical.choice, Quot.sound]`. Build: "build: OK — 4
 (`build/gate/build/20261004T215858Z-2731754.log`; driver log `data/fs131/i4/build-i4k-stage31.log`): 17 distinct `declaration uses sorry` (BaseSteps 2,
 Contact 10, UnitArc 5), no other warning. Cost: about 60k tokens for the three leaves and the refactor, two iteration passes.
 
+## Stage 32 — SAVED (FS131-I4k): `pair_i` gains `h3 : dist u₁ u₂ < 3` (ruling 258); 7 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**The statement change, as ruled** (inventory item 258; the brief's amendment of 2026-10-04): `pair_i` takes `(h3 : dist u₁ u₂ < 3)` after `hc₂`, and its
+docstring names it in place of "no transversality hypothesis". `tools/fs131_i4_stmts.py ff32b839 … --allow pair_i`: 157 statements, 1 changed (`pair_i`,
+allowed), exit 0. The axioms record is by name and unchanged. Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T221211Z-2818124.log`; driver log `data/fs131/i4/build-i4k-stage32.log`): 17 distinct `declaration uses sorry` (BaseSteps 2,
+Contact 10, UnitArc 5), no other warning.
+
+**The coordinator's inference (item 258), checked on paper (one mind, not formalized)**: the critical points of `|x′ − y′|` on `ω(u₁) × ω(u₂)` are the four
+configurations with `x′`, `y′` on the line through `u₁`, `u₂`, of values `d − 2, d, d, d + 2` (`d = |u₁ − u₂|`, `d > 0`; for `d = 0` the level set `|x′ − y′| = 1`
+is a smooth curve). The value `1` is critical only at `d = 3` (the minimum: an isolated pair, the GAP) and at `d = 1` (two saddles: the level set is two crossing
+curves, still not isolated). So for `d < 3` every unit pair has unit pairs `(x′, y′) → (x, y)`, `(x′, y′) ≠ (x, y)`. Tangency at `x′` (`|y′ − u₁| = 2`) needs
+`y′ ∈ ω(u₂) ∩ sphere(u₁, 2)`, at most two points; the strip fails at no more than three points of `ω(u₁)` (each fail point `q` has a germ of `u₁` with `e β = iκ(u₁ − q)`,
+`exists_branch_on_circle_of_not_stripHolds` and `germ_eq_of_two_on_circle`, so `q` is fixed by the germ). Confirmed: the perturbation covers tangent pairs.
+
+**What is left (7 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `n3_end`).**
+- **`pair_i`** (with `h3`), the route: (1) `y ≠ u₁` (`a ∈ c(y)`, `a ∉ c(u₁)`) and `x ≠ u₂`. (2) **The strip case**: if `StripHolds u₁ x` on a side `σ` that `ω(y)`
+  enters near `x` (transversal: `exists_side_germs_of_transversal` gives both sides; tangent from outside: only `σ` = outside), every interior point there has
+  colour `a` (the strip, `exists_ball_col_mem_coloursAt`, `c′(x) = {a}`), so a ball `O` about a point `m` of `ω(y)` on side `σ` lies in `closure (region a)` (interior
+  points are dense: grep wave 3 for its density lemma), and `Valid.dist_ne_one_of_isOpen_subset_closure` with `y ∈ closure (region a)`, `dist y m = 1` is the
+  contradiction. (3) **Otherwise perturb**: `c′ ≡ {a}` on `ω(u₁)` near `x` (`coloursAt x′ ⊆ coloursAt x` near `x`, from `exists_ball_col_mem_coloursAt`;
+  `c′(x′) ≠ ∅` by `noBoth` as in `pair_P'`) and on `ω(u₂)` near `y`; choose a unit pair `(x′, y′)` near `(x, y)` (the paragraph above; the intermediate value
+  theorem along `ω(u₂)` against `ω(x′)`, using `exists_side_germs_of_transversal` at `y` when `|x − u₂| ≠ 2`, or along `ω(u₁)` against `ω(y′)` otherwise) with `x′`
+  not a fail point and `|y′ − u₁| ≠ 2`, then (2). Price: about one session.
+- **`n3_end`** after `fs131-w4c` merges (`woodallCone`, `exists_merge`), as I4g and Stage 28 said.
+- **`flankQ_*`, the bends, `nb4p`**: as Stage 28 left them. `flankQ_*` can now use `IsSectorChart.exists_isRingArc_of_along`'s pattern (an arc of `Γ` along a
+  chart germ tangent to a unit circle) at `v` with `q = N` or `S′`, if the horn's bounding arc is a germ of `v`'s chart; the (R2) shadow reading (ruling 244 (c))
+  is not yet run — run Stage 28's step (iii) first and message the coordinator at once if it fails.
+
+**Re-pricing** (this session, about 130k tokens of work after the readback): four leaves and a statement repair; the shared vertex children (the chart, the vote,
+the arc along a germ, the crossing at a vertex) made `fail_colours`, `anti` and `pair_ii` cost about 20k each once `fail_leavingCentre` had paid for them.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
