@@ -255,3 +255,10 @@ reason by the close.*
     with no arc of Γ and a map `Fin k → ZMod 3` injective on the colours absent at p; a shorter route for FS116-Y4-FLANK's edge clause (radius below 1 gives a
     point inside the other unit disc; both radii 1 is TWOCIRC at equal turns). Re-pricing: OR1-WHOLE's covering clause needs only "every point of the domain
     lies in the closure of a tile", not `finite_tiles_near`; the local-structure work concentrates in one hard statement, the sector structure at a point.
+41. **FS131-K3b done** (report on its branch, `.claude/worktrees/fs131-w3/data/fs131/reports/FS131-K3b.md`; `fs131-w3` at `05cb0a3e`): wave 3 stated in full —
+    20 rows and the 6 merged into them, plus ruling 27's local-structure lemmas; 96 `sorry` declarations; leaf plans, an obligation-modeling pass (three
+    engines; eight hard leaves) and the implementer's handoff (§ 7). Predictions scored (K3's § 1.4): expectation 1 (a row whose truth turns on the ring
+    vocabulary's reading, p = 0.5) not met; expectation 2 (covering hypotheses idle, counts generalizable, p = 0.8) met. Its question — wave 3's vacuity
+    carriers — goes to the implementer under T1's procedure.
+42. **Brief FS131-I3, wave 3's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3-wave3.md`), gated PASS: the vacuity step last,
+    after FS131-T2's commit is on `main` (both edit `scripts/Vacuity.lean`). Source: this commit.
